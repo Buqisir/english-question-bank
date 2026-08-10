@@ -1,0 +1,4510 @@
+{
+  "schemaVersion": "wanwei-vocabulary-audio-repair-candidates-v1",
+  "batchId": "wanwei-audio-repair-v1",
+  "voice": "eqb-british-teacher-v1",
+  "format": "audio-24khz-48kbitrate-mono-mp3",
+  "formalAssetsChanged": false,
+  "method": {
+    "promptShape": "approved example context + isolated target + protective cue",
+    "candidateLabels": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "seeds": {
+      "A": 1103,
+      "B": 2207,
+      "C": 3301,
+      "D": 4409
+    },
+    "temperature": 0.65,
+    "topK": 30,
+    "topP": 0.9,
+    "repetitionPenalty": 1.4,
+    "leadingZeroSeconds": 0.3,
+    "trailingZeroSeconds": 0.5
+  },
+  "entries": [
+    {
+      "entryId": "wanwei-core-0002-about",
+      "sourceOrder": 2,
+      "headword": "about",
+      "original": {
+        "path": "wanwei-core-0002-about.mp3",
+        "bytes": 3744,
+        "sha256": "3cba36f65b95d6a3cee90f57fb34d176d6b5c746d1930134e2e3c3922ddac8a2"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0002-about--A.mp3",
+          "bytes": 9216,
+          "sha256": "ea01fa63fd027b0b4da5c9694d19ab50d198e9cdf6a6775b4151cdb731b3531e",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.48,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.455994,
+          "rms": 0.058064
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0002-about--B.mp3",
+          "bytes": 9072,
+          "sha256": "05d60364154f69bfb6c7a524ad93f0c1f16a435423cb42c46a94815e76e468e5",
+          "durationSeconds": 1.512,
+          "activeDurationSeconds": 0.46,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.454834,
+          "rms": 0.063308
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0002-about--C.mp3",
+          "bytes": 9216,
+          "sha256": "f7735c6a551987dbe7b90ab705958067a1187dd65d5fdb15f2d97e6b893383bf",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.48,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.435944,
+          "rms": 0.051798
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0002-about--D.mp3",
+          "bytes": 9216,
+          "sha256": "04a81b8d101549fc1a699d3704e5e9d77ad0f221046bb3bcb07939a9fc574cbf",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.48,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.604279,
+          "rms": 0.070957
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0010-against",
+      "sourceOrder": 10,
+      "headword": "against",
+      "original": {
+        "path": "wanwei-core-0010-against.mp3",
+        "bytes": 3888,
+        "sha256": "3248927fae0b6f230508a95f78df37c03396290df462b01f99ca90a91acbe9d7"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0010-against--A.mp3",
+          "bytes": 9072,
+          "sha256": "fd6f169d2bf96f89c7695eee55e498720712007032932f8b7bd3f08b6ed5ecaf",
+          "durationSeconds": 1.512,
+          "activeDurationSeconds": 0.46,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.420502,
+          "rms": 0.038445
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0010-against--B.mp3",
+          "bytes": 9072,
+          "sha256": "70d357774329ecbcc8b639cb925f8e2014fcd2f21474cc624a553592736884a8",
+          "durationSeconds": 1.512,
+          "activeDurationSeconds": 0.48,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.592,
+          "peak": 0.588287,
+          "rms": 0.061476
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0010-against--C.mp3",
+          "bytes": 9648,
+          "sha256": "bc9e7e47f1b0e271ba48ddaaa3615e01b3715a67f1a34dff832fcf4bdf881f93",
+          "durationSeconds": 1.608,
+          "activeDurationSeconds": 0.58,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.588,
+          "peak": 0.413208,
+          "rms": 0.041283
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0010-against--D.mp3",
+          "bytes": 9504,
+          "sha256": "19800c19b285205e75636fbb6ad921fad9b032752984a8762e13f451e5c9013a",
+          "durationSeconds": 1.584,
+          "activeDurationSeconds": 0.6,
+          "leadingSilenceSeconds": 0.38,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.292938,
+          "rms": 0.032743
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0019-appear",
+      "sourceOrder": 19,
+      "headword": "appear",
+      "original": {
+        "path": "wanwei-core-0019-appear.mp3",
+        "bytes": 5328,
+        "sha256": "53b2c7b183735824af9c0a27f29e46c13e4d1a18d1a445f3dfbc26fdb52cf581"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0019-appear--A.mp3",
+          "bytes": 8496,
+          "sha256": "fde0e09e478cd9a1dd85c8fd8a36a41b564eee1f925e935f57e60e597549af66",
+          "durationSeconds": 1.416,
+          "activeDurationSeconds": 0.42,
+          "leadingSilenceSeconds": 0.38,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.163696,
+          "rms": 0.023812
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0019-appear--B.mp3",
+          "bytes": 9936,
+          "sha256": "6e45f9c5f3db959e4e7ad28f6290ccc8a6551264e30ed0146c21a4e24e0d84ec",
+          "durationSeconds": 1.656,
+          "activeDurationSeconds": 0.6,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.391205,
+          "rms": 0.059596
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0019-appear--C.mp3",
+          "bytes": 8064,
+          "sha256": "aadc087833a4b500cbe568dd595c67ba9081c0dde1de094b132877cd5d9ee436",
+          "durationSeconds": 1.344,
+          "activeDurationSeconds": 0.36,
+          "leadingSilenceSeconds": 0.38,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.189636,
+          "rms": 0.022832
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0019-appear--D.mp3",
+          "bytes": 9792,
+          "sha256": "de138a65c6d01395066ee1a1281ef21e4b6fb65b55421b214a8099928253ca0b",
+          "durationSeconds": 1.632,
+          "activeDurationSeconds": 0.58,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.394043,
+          "rms": 0.055059
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0020-around",
+      "sourceOrder": 20,
+      "headword": "around",
+      "original": {
+        "path": "wanwei-core-0020-around.mp3",
+        "bytes": 4032,
+        "sha256": "f213b29dbde43d935920b11887f1ca9f0c0b5f2f056fe965da00ae75e7c4c8bc"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0020-around--A.mp3",
+          "bytes": 9072,
+          "sha256": "52f402626498bdd358607f9810b66c4ff47f7b50cf36c0dcc3b334ce7e49df5c",
+          "durationSeconds": 1.512,
+          "activeDurationSeconds": 0.46,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.489777,
+          "rms": 0.06324
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0020-around--B.mp3",
+          "bytes": 9360,
+          "sha256": "2544f4824b3ad36798bcb000c7a87a811d164114b2572af4a00c85a7934c0963",
+          "durationSeconds": 1.56,
+          "activeDurationSeconds": 0.52,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.6,
+          "peak": 0.405548,
+          "rms": 0.053878
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0020-around--C.mp3",
+          "bytes": 11808,
+          "sha256": "4fc90a16cfddac2c9b3f0c0ce6b75e1a88c107c07c4bcac494464cce7684da32",
+          "durationSeconds": 1.968,
+          "activeDurationSeconds": 0.92,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.518768,
+          "rms": 0.079708
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0020-around--D.mp3",
+          "bytes": 9648,
+          "sha256": "69fd131881bf37b24faa9144494571bafc265481d119f2f75a2439ab6fb02790",
+          "durationSeconds": 1.608,
+          "activeDurationSeconds": 0.58,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.588,
+          "peak": 0.619995,
+          "rms": 0.088065
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0032-because",
+      "sourceOrder": 32,
+      "headword": "because",
+      "original": {
+        "path": "wanwei-core-0032-because.mp3",
+        "bytes": 4176,
+        "sha256": "9bec9f744bcb3428018ba47e183c0707e20dfc59ed64ff51f2402a33f01ad2b7"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0032-because--A.mp3",
+          "bytes": 10224,
+          "sha256": "f8a12fc20e99e3d2f98dc7e569d29eb8c57bb688c66357bdac6facf27fdd21ec",
+          "durationSeconds": 1.704,
+          "activeDurationSeconds": 0.66,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.383545,
+          "rms": 0.053491
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0032-because--B.mp3",
+          "bytes": 9936,
+          "sha256": "381dce58507144642e9387fc1f068ca3814f9b83eef8094132540e35a8036377",
+          "durationSeconds": 1.656,
+          "activeDurationSeconds": 0.6,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.372253,
+          "rms": 0.054884
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0032-because--C.mp3",
+          "bytes": 10080,
+          "sha256": "9c81142a95b71501266cdb537fe6565c56009f306e7108e78fba87b2b07f3d93",
+          "durationSeconds": 1.68,
+          "activeDurationSeconds": 0.64,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.6,
+          "peak": 0.358734,
+          "rms": 0.04716
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0032-because--D.mp3",
+          "bytes": 10224,
+          "sha256": "2c71405b59496a2c7892056d32a37a047690432359a2dfb1b2dc7df36e2f2e21",
+          "durationSeconds": 1.704,
+          "activeDurationSeconds": 0.64,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.624,
+          "peak": 0.394073,
+          "rms": 0.058536
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0033-become",
+      "sourceOrder": 33,
+      "headword": "become",
+      "original": {
+        "path": "wanwei-core-0033-become.mp3",
+        "bytes": 5184,
+        "sha256": "eea36bafa892706c82d922e925ed5eda616b2554f41bd18f8e5f9c50be34239b"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0033-become--A.mp3",
+          "bytes": 9648,
+          "sha256": "9601fe80bb47ae33788ae0e27ae1e2b6fa82cd389d238fd0114a22f04c6c97c2",
+          "durationSeconds": 1.608,
+          "activeDurationSeconds": 0.56,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.327759,
+          "rms": 0.044001
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0033-become--B.mp3",
+          "bytes": 9216,
+          "sha256": "b34291753af3cf253573dd17b596eb2651a5ebe1b6d433629b107ba4ef08966f",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.5,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.596,
+          "peak": 0.301971,
+          "rms": 0.046316
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0033-become--C.mp3",
+          "bytes": 9504,
+          "sha256": "6df86381c42820095b93e9d835f587300e8c2a4e7134d2112a6d2fb87bbcbdf3",
+          "durationSeconds": 1.584,
+          "activeDurationSeconds": 0.52,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.624,
+          "peak": 0.352997,
+          "rms": 0.044511
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0033-become--D.mp3",
+          "bytes": 9216,
+          "sha256": "041690e57fed1bc7cd291804e55fe13d367d209099135b1a66e4405f45c3ad1e",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.5,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.596,
+          "peak": 0.29599,
+          "rms": 0.043391
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0038-between",
+      "sourceOrder": 38,
+      "headword": "between",
+      "original": {
+        "path": "wanwei-core-0038-between.mp3",
+        "bytes": 4176,
+        "sha256": "0781d5e6425a4cd6d9a1f989ed85834d3ae1281fe2fea2d95f928299f2c1375a"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0038-between--A.mp3",
+          "bytes": 10656,
+          "sha256": "f36f79b3003befb37948e808a18910a1c5371750d39f171c03fd6d445b017fd5",
+          "durationSeconds": 1.776,
+          "activeDurationSeconds": 0.78,
+          "leadingSilenceSeconds": 0.38,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.275665,
+          "rms": 0.050438
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0038-between--B.mp3",
+          "bytes": 10800,
+          "sha256": "e3dc395023bb02684cfc6ed86cc7b37a7e12dabd45caf3ad4c91d303cc88d40e",
+          "durationSeconds": 1.8,
+          "activeDurationSeconds": 0.82,
+          "leadingSilenceSeconds": 0.38,
+          "trailingSilenceSeconds": 0.6,
+          "peak": 0.289185,
+          "rms": 0.048931
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0038-between--C.mp3",
+          "bytes": 9216,
+          "sha256": "452a2a6c25678779240b72c712a2552733f0b240a9119f395e9ff481e105c063",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.5,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.596,
+          "peak": 0.442291,
+          "rms": 0.056907
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0038-between--D.mp3",
+          "bytes": 9504,
+          "sha256": "896d69a69b8aa64912af47f628a961afb8c16f58a0c9e2fe18d2569ece744ca0",
+          "durationSeconds": 1.584,
+          "activeDurationSeconds": 0.52,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.624,
+          "peak": 0.381104,
+          "rms": 0.063011
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0044-break",
+      "sourceOrder": 44,
+      "headword": "break",
+      "original": {
+        "path": "wanwei-core-0044-break.mp3",
+        "bytes": 3600,
+        "sha256": "0a346fa6bbc09aac9592d8d38684bd5173a944c3fe71ec0e7c21b6339435e6e5"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0044-break--A.mp3",
+          "bytes": 8640,
+          "sha256": "7fff23a8183e7c62a3b1f9b1876560ba2b758e03bd9d999b2481610225a3097b",
+          "durationSeconds": 1.44,
+          "activeDurationSeconds": 0.38,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.532196,
+          "rms": 0.064707
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0044-break--B.mp3",
+          "bytes": 8352,
+          "sha256": "b05537ec30e49b900b9c424ec872b20dfa34b2ddf6c89ae828d8662d87ed1a23",
+          "durationSeconds": 1.392,
+          "activeDurationSeconds": 0.34,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.518646,
+          "rms": 0.06002
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0044-break--C.mp3",
+          "bytes": 8928,
+          "sha256": "ec74ad1627ca00dfe6bed5676cfb99652d3414c6a2f48b9dd53770e71453f0e8",
+          "durationSeconds": 1.488,
+          "activeDurationSeconds": 0.44,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.506989,
+          "rms": 0.060347
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0044-break--D.mp3",
+          "bytes": 8496,
+          "sha256": "241bbba802ea1633386b9adc0800a5aec048d71ca1fbbba6c28fd0cc8aebc60d",
+          "durationSeconds": 1.416,
+          "activeDurationSeconds": 0.36,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.559692,
+          "rms": 0.056688
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0076-connect",
+      "sourceOrder": 76,
+      "headword": "connect",
+      "original": {
+        "path": "wanwei-core-0076-connect.mp3",
+        "bytes": 5040,
+        "sha256": "5cf05e1f41a11fd93ab68609bcf0949c35767e923738d1f403ab6bcbae8b077d"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0076-connect--A.mp3",
+          "bytes": 9216,
+          "sha256": "629df678a6088ef664738ed31d060f7c12ab0fc08d92c1a888873b62c47ebaec",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.5,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.596,
+          "peak": 0.511017,
+          "rms": 0.071942
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0076-connect--B.mp3",
+          "bytes": 9072,
+          "sha256": "b880dcaa3a87d60b9a018d2ebb89d2a02cc274b859bb6fe5c4aa4fcb64fc1fa4",
+          "durationSeconds": 1.512,
+          "activeDurationSeconds": 0.48,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.592,
+          "peak": 0.422272,
+          "rms": 0.046555
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0076-connect--C.mp3",
+          "bytes": 9072,
+          "sha256": "d9f41a719ebda6439b3db4b5dea9aa245cb32c52af2d22d46437b620c01e994b",
+          "durationSeconds": 1.512,
+          "activeDurationSeconds": 0.46,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.290527,
+          "rms": 0.036204
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0076-connect--D.mp3",
+          "bytes": 8928,
+          "sha256": "7dc13fd82abfae1095e0de29e01c17ca2be3eff4d9a1bedd3c6e6a45b652968a",
+          "durationSeconds": 1.488,
+          "activeDurationSeconds": 0.44,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.418732,
+          "rms": 0.045775
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0085-create",
+      "sourceOrder": 85,
+      "headword": "create",
+      "original": {
+        "path": "wanwei-core-0085-create.mp3",
+        "bytes": 4608,
+        "sha256": "00e852d3232eeae11d2072ab12b771e79010f2b829cdc735845ac71134041997"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0085-create--A.mp3",
+          "bytes": 9360,
+          "sha256": "f764b13496edf1c53d95bcd7ac7bb4fd1761b18b128b5c990a498676649cafeb",
+          "durationSeconds": 1.56,
+          "activeDurationSeconds": 0.5,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.382904,
+          "rms": 0.046082
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0085-create--B.mp3",
+          "bytes": 9072,
+          "sha256": "c6235615796c6f2b333bfe511021301cc619dfac6cf27171ae44b1a959c38a86",
+          "durationSeconds": 1.512,
+          "activeDurationSeconds": 0.46,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.42041,
+          "rms": 0.050655
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0085-create--C.mp3",
+          "bytes": 9216,
+          "sha256": "045dc49b90431b9820b0dba8c4a80745090ade6892be7d94268f11dbd3476af6",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.48,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.43457,
+          "rms": 0.051361
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0085-create--D.mp3",
+          "bytes": 9216,
+          "sha256": "bc9249cac858740c710c78ae081be2ad5c8ee7595b26bbdba0a97843eef796e2",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.48,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.479218,
+          "rms": 0.065191
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0095-develop",
+      "sourceOrder": 95,
+      "headword": "develop",
+      "original": {
+        "path": "wanwei-core-0095-develop.mp3",
+        "bytes": 4032,
+        "sha256": "8b6c14be1d99730f757b648d24901dfb0e96b0e1ba4d67a04c9ee2d96263d1b7"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0095-develop--A.mp3",
+          "bytes": 9216,
+          "sha256": "b8db15ad7fc456db8529706afe6590e472ca292baac3a96c0d97b3a174cc5d44",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.48,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.443939,
+          "rms": 0.054228
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0095-develop--B.mp3",
+          "bytes": 9216,
+          "sha256": "a9290bf6a156eb622b7e31e6ec0cf353844434134464f3df8e8c3aaf1934255b",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.48,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.486267,
+          "rms": 0.052742
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0095-develop--C.mp3",
+          "bytes": 9648,
+          "sha256": "28ad5c0ade33edd44fc7c1ac2c53415f354db3568717022a4505bd14cdf2cefd",
+          "durationSeconds": 1.608,
+          "activeDurationSeconds": 0.54,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.628,
+          "peak": 0.568665,
+          "rms": 0.070614
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0095-develop--D.mp3",
+          "bytes": 9648,
+          "sha256": "0b4fad0edbdec1cc3eb6cf305c30729a7d09df16d08677ce5f68dbf48e3f329c",
+          "durationSeconds": 1.608,
+          "activeDurationSeconds": 0.56,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.476868,
+          "rms": 0.062169
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0107-drink",
+      "sourceOrder": 107,
+      "headword": "drink",
+      "original": {
+        "path": "wanwei-core-0107-drink.mp3",
+        "bytes": 3744,
+        "sha256": "addfe6c7d4ad461c92f79d5f67c30e97c00316baaba3155e4c0f28f6d63b73a5"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0107-drink--A.mp3",
+          "bytes": 8928,
+          "sha256": "82516e67dc7c938c1483acea6daf76acb56c5b98bab0a0d7bcd73c15f02bbb5c",
+          "durationSeconds": 1.488,
+          "activeDurationSeconds": 0.44,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.409088,
+          "rms": 0.042982
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0107-drink--B.mp3",
+          "bytes": 8640,
+          "sha256": "2f1fb9aea97b6bd609e693ae282c41dafe0e21422b034a5fcc76c8370d5a9df2",
+          "durationSeconds": 1.44,
+          "activeDurationSeconds": 0.4,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.6,
+          "peak": 0.422485,
+          "rms": 0.045378
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0107-drink--C.mp3",
+          "bytes": 8784,
+          "sha256": "0de9ce0206348f6a2470bf9d2879448de6fd89bebadd0a5cbe4506bc5ee63022",
+          "durationSeconds": 1.464,
+          "activeDurationSeconds": 0.4,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.624,
+          "peak": 0.465942,
+          "rms": 0.053407
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0107-drink--D.mp3",
+          "bytes": 8208,
+          "sha256": "b722b320eebbbaf3b11cbbe03ae0f1992dfbfcea258c46421412c116d683ebf6",
+          "durationSeconds": 1.368,
+          "activeDurationSeconds": 0.32,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.355133,
+          "rms": 0.034153
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0126-except",
+      "sourceOrder": 126,
+      "headword": "except",
+      "original": {
+        "path": "wanwei-core-0126-except.mp3",
+        "bytes": 4032,
+        "sha256": "d9b1b1b10a9dcc437776216a5dc72a18e265a47e472ad31de76272b298a6b5b1"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0126-except--A.mp3",
+          "bytes": 9792,
+          "sha256": "e946d437d790cf419b99950f0d2bf4323fe09750c8e85ef4f6214b8655513590",
+          "durationSeconds": 1.632,
+          "activeDurationSeconds": 0.6,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.592,
+          "peak": 0.48877,
+          "rms": 0.048639
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0126-except--B.mp3",
+          "bytes": 9936,
+          "sha256": "d007577a4dd9aaf3e4565fc667f5e062e57a5c8acb52426ae162f28da9cc10a9",
+          "durationSeconds": 1.656,
+          "activeDurationSeconds": 0.6,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.3508,
+          "rms": 0.035589
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0126-except--C.mp3",
+          "bytes": 9360,
+          "sha256": "dd6a5fe706c96079a652867f85035e27a2d1ac0f33d26ac9782b853b0df3cd6f",
+          "durationSeconds": 1.56,
+          "activeDurationSeconds": 0.52,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.6,
+          "peak": 0.313812,
+          "rms": 0.030478
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0126-except--D.mp3",
+          "bytes": 9504,
+          "sha256": "4fcd3c0cbe7edfe878cb58445cf362e6d0ddb4b2c344090777dc3bd2c164f9bf",
+          "durationSeconds": 1.584,
+          "activeDurationSeconds": 0.52,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.624,
+          "peak": 0.539307,
+          "rms": 0.050109
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0129-experience",
+      "sourceOrder": 129,
+      "headword": "experience",
+      "original": {
+        "path": "wanwei-core-0129-experience.mp3",
+        "bytes": 6768,
+        "sha256": "dcfd8ea273b4259e8839f989f7ad3f26f2421ab07f11adfca2bfd8afa61e6853"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0129-experience--A.mp3",
+          "bytes": 11520,
+          "sha256": "815728143c06a44ea8245ae6363b078e558ef8a90bb96f4924d83f08254e2933",
+          "durationSeconds": 1.92,
+          "activeDurationSeconds": 0.88,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.6,
+          "peak": 0.466827,
+          "rms": 0.071016
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0129-experience--B.mp3",
+          "bytes": 11808,
+          "sha256": "3f4729eb27fa1132f9ec4c82dc385e1724b287dd5c5f096159cd52aa1e423c2a",
+          "durationSeconds": 1.968,
+          "activeDurationSeconds": 0.92,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.37854,
+          "rms": 0.048134
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0129-experience--C.mp3",
+          "bytes": 11376,
+          "sha256": "39947a356725be15590d9dfb6f3094b701c445155b1e70e0e8c6e4479bbc4310",
+          "durationSeconds": 1.896,
+          "activeDurationSeconds": 0.84,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.564789,
+          "rms": 0.087684
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0129-experience--D.mp3",
+          "bytes": 7632,
+          "sha256": "37107cf272c4926909591fe60befd58409a5945986f3c74c5528143cc23a2b69",
+          "durationSeconds": 1.272,
+          "activeDurationSeconds": 0.28,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.552,
+          "peak": 0.260834,
+          "rms": 0.021369
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0130-explain",
+      "sourceOrder": 130,
+      "headword": "explain",
+      "original": {
+        "path": "wanwei-core-0130-explain.mp3",
+        "bytes": 6192,
+        "sha256": "0a15f2ae27cb8b1086e777b54eb81bcf3be9226cc427a58bbeab299af466a154"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0130-explain--A.mp3",
+          "bytes": 8928,
+          "sha256": "6b4bd70be1205ed311121e335e8d7b8b1738487e8b865b8f53a82dbde80c5e6b",
+          "durationSeconds": 1.488,
+          "activeDurationSeconds": 0.44,
+          "leadingSilenceSeconds": 0.42,
+          "trailingSilenceSeconds": 0.628,
+          "peak": 0.336853,
+          "rms": 0.054485
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0130-explain--B.mp3",
+          "bytes": 10512,
+          "sha256": "d16dcf4f645d128c1e8d1c72996786295926ba993b59aab1d25f606c8b61412e",
+          "durationSeconds": 1.752,
+          "activeDurationSeconds": 0.7,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.492737,
+          "rms": 0.058786
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0130-explain--C.mp3",
+          "bytes": 10368,
+          "sha256": "e7f8bf96603630957e301fb48c347fed8a58166b5aa24713d9de3d433e636840",
+          "durationSeconds": 1.728,
+          "activeDurationSeconds": 0.68,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.393951,
+          "rms": 0.062929
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0130-explain--D.mp3",
+          "bytes": 10224,
+          "sha256": "fcc4b56a73333ad16e143feeb8f8d3f93c06f47f343e3abc9852852004d7aabc",
+          "durationSeconds": 1.704,
+          "activeDurationSeconds": 0.64,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.624,
+          "peak": 0.426788,
+          "rms": 0.04824
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0132-face",
+      "sourceOrder": 132,
+      "headword": "face",
+      "original": {
+        "path": "wanwei-core-0132-face.mp3",
+        "bytes": 3168,
+        "sha256": "fcfd758169f1808208ccb51a399af4d41e2c955cf64806420b5e2fa186c16054"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0132-face--A.mp3",
+          "bytes": 10080,
+          "sha256": "5106cd4b65e7b9a96b6e3993fe792bbff68273e385cd6a90fae5d3fc3fb684fe",
+          "durationSeconds": 1.68,
+          "activeDurationSeconds": 0.62,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.515747,
+          "rms": 0.046268
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0132-face--B.mp3",
+          "bytes": 9504,
+          "sha256": "fb7ff1f458d256bb2e4aa381df688de50bfaa949d6cc8d53caff87b1a43344c9",
+          "durationSeconds": 1.584,
+          "activeDurationSeconds": 0.52,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.624,
+          "peak": 0.451141,
+          "rms": 0.039212
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0132-face--C.mp3",
+          "bytes": 9504,
+          "sha256": "d30e312679d868044b167d01c27b54710a0fbedbb2019eb4b34b1f905ccad276",
+          "durationSeconds": 1.584,
+          "activeDurationSeconds": 0.54,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.450836,
+          "rms": 0.041731
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0132-face--D.mp3",
+          "bytes": 7776,
+          "sha256": "6b317d0e921215d145a8a2c60069f8338a99fa5d59c759c54ec1a206599f4870",
+          "durationSeconds": 1.296,
+          "activeDurationSeconds": 0.28,
+          "leadingSilenceSeconds": 0.46,
+          "trailingSilenceSeconds": 0.556,
+          "peak": 0.471313,
+          "rms": 0.045806
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0191-hot",
+      "sourceOrder": 191,
+      "headword": "hot",
+      "original": {
+        "path": "wanwei-core-0191-hot.mp3",
+        "bytes": 3888,
+        "sha256": "268dc2b6e9df5aff82d8a16fca27113b703bdd326794a7cd110fcccba35003f5"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0191-hot--A.mp3",
+          "bytes": 8496,
+          "sha256": "32aaea68a2a67e0c4503f32360645e98a75bfd74f0a06c0980be475b9db04068",
+          "durationSeconds": 1.416,
+          "activeDurationSeconds": 0.38,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.596,
+          "peak": 0.410858,
+          "rms": 0.042954
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0191-hot--B.mp3",
+          "bytes": 8208,
+          "sha256": "626a2fd91d652237e01f80017a58165bf37a7c946f8517c62b6ad6342e47d412",
+          "durationSeconds": 1.368,
+          "activeDurationSeconds": 0.32,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.535858,
+          "rms": 0.049113
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0191-hot--C.mp3",
+          "bytes": 8640,
+          "sha256": "80383e624f6b40ef455d8ba639ba28a19e0a3a40c8e4b9e15c514c3f82de1235",
+          "durationSeconds": 1.44,
+          "activeDurationSeconds": 0.4,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.6,
+          "peak": 0.465576,
+          "rms": 0.04465
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0191-hot--D.mp3",
+          "bytes": 8640,
+          "sha256": "15b271036ca5524ce445992e6114e97fa26c568704b6baae858299f45705c2fe",
+          "durationSeconds": 1.44,
+          "activeDurationSeconds": 0.38,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.492432,
+          "rms": 0.049854
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0197-if",
+      "sourceOrder": 197,
+      "headword": "if",
+      "original": {
+        "path": "wanwei-core-0197-if.mp3",
+        "bytes": 2592,
+        "sha256": "197a440d3039636f724c9fa4de46e7ca70f1def7cce0eef41f7794163255f5c0"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0197-if--A.mp3",
+          "bytes": 8208,
+          "sha256": "36dd4d6d9e51db380393e8cac0bd6d12024fad4962a60c1bd47bbe58315c795b",
+          "durationSeconds": 1.368,
+          "activeDurationSeconds": 0.32,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.427948,
+          "rms": 0.042299
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0197-if--B.mp3",
+          "bytes": 8496,
+          "sha256": "05c07568cfe983ab9004e58fdf8d32d12705724e2769f197537eb209c872e59e",
+          "durationSeconds": 1.416,
+          "activeDurationSeconds": 0.36,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.39209,
+          "rms": 0.034111
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0197-if--C.mp3",
+          "bytes": 8496,
+          "sha256": "fba4687e2c9dc23d58405d3fec054ca5db116dc4700bec3a10ff2c0ecd4bd2d2",
+          "durationSeconds": 1.416,
+          "activeDurationSeconds": 0.36,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.50946,
+          "rms": 0.061566
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0197-if--D.mp3",
+          "bytes": 8352,
+          "sha256": "da69312900b9c328227180bd368e5731a7466cbcef49e086b862d4c62e56eee8",
+          "durationSeconds": 1.392,
+          "activeDurationSeconds": 0.36,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.592,
+          "peak": 0.470398,
+          "rms": 0.058066
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0199-important",
+      "sourceOrder": 199,
+      "headword": "important",
+      "original": {
+        "path": "wanwei-core-0199-important.mp3",
+        "bytes": 5040,
+        "sha256": "2b43efbc84045a3ca5b405b110a0bf7f5391bc92429d2079b5d14647f54fbb4e"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0199-important--A.mp3",
+          "bytes": 10368,
+          "sha256": "1c8126cc6afb3635e729c6a2f841d36b611143925d890b55a18f960a37356f6a",
+          "durationSeconds": 1.728,
+          "activeDurationSeconds": 0.66,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.628,
+          "peak": 0.520142,
+          "rms": 0.069799
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0199-important--B.mp3",
+          "bytes": 10656,
+          "sha256": "ea0ed1c51b26f815ad5e17a309497b164e18d0f21fc89b160688afde6d117f08",
+          "durationSeconds": 1.776,
+          "activeDurationSeconds": 0.72,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.436493,
+          "rms": 0.068377
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0199-important--C.mp3",
+          "bytes": 10656,
+          "sha256": "583c1c81b51994b82affdc6e3d4904012b7f17246bbd21cdc66c11da25f4568a",
+          "durationSeconds": 1.776,
+          "activeDurationSeconds": 0.72,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.537994,
+          "rms": 0.071058
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0199-important--D.mp3",
+          "bytes": 9936,
+          "sha256": "835b30fd37d9db16d66740f500deee02f804dc96175b8ff2c033ce911c1f525d",
+          "durationSeconds": 1.656,
+          "activeDurationSeconds": 0.62,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.596,
+          "peak": 0.535492,
+          "rms": 0.065769
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0204-increase",
+      "sourceOrder": 204,
+      "headword": "increase",
+      "original": {
+        "path": "wanwei-core-0204-increase.mp3",
+        "bytes": 5472,
+        "sha256": "7a6c2aabc573586d1992740fd11a4067cc0f8c12e962a2d7c8f4a945d5f30dea"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0204-increase--A.mp3",
+          "bytes": 10368,
+          "sha256": "900fb2b8e00b98fe92f4956bd29f3d9ef2f07ce1e64badbcb9a521e0f7f13edc",
+          "durationSeconds": 1.728,
+          "activeDurationSeconds": 0.68,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.478577,
+          "rms": 0.053913
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0204-increase--B.mp3",
+          "bytes": 10080,
+          "sha256": "9b666f964d139f64148fae5d2bf14e6596002286018e1b639ee16daeb16723d1",
+          "durationSeconds": 1.68,
+          "activeDurationSeconds": 0.62,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.460968,
+          "rms": 0.068129
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0204-increase--C.mp3",
+          "bytes": 10080,
+          "sha256": "eda20970f94846f2c98e5a6c34cb8b3ed8b9a57ccd968454bc8e25528cbc4a1c",
+          "durationSeconds": 1.68,
+          "activeDurationSeconds": 0.64,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.6,
+          "peak": 0.382751,
+          "rms": 0.052883
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0204-increase--D.mp3",
+          "bytes": 10080,
+          "sha256": "55ca87f99379790b67ea7d28b520b1dc36d436715cb5dd4af2e5b4ba80fba7c0",
+          "durationSeconds": 1.68,
+          "activeDurationSeconds": 0.62,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.368469,
+          "rms": 0.049895
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0206-instead",
+      "sourceOrder": 206,
+      "headword": "instead",
+      "original": {
+        "path": "wanwei-core-0206-instead.mp3",
+        "bytes": 5472,
+        "sha256": "ddea71058cb75778f5bd1461974e0fb72dc36d4df3dac4627d7e869abef9ecfd"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0206-instead--A.mp3",
+          "bytes": 9360,
+          "sha256": "1d626998ef5c994701dabb9a09adc22f16a3990a0eee99e3f22a561b397995e5",
+          "durationSeconds": 1.56,
+          "activeDurationSeconds": 0.5,
+          "leadingSilenceSeconds": 0.46,
+          "trailingSilenceSeconds": 0.6,
+          "peak": 0.292694,
+          "rms": 0.041943
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0206-instead--B.mp3",
+          "bytes": 9360,
+          "sha256": "b22a49d34462fb6e1fabc7062656a056fbfdb39b6dbab0333d47d882af232de4",
+          "durationSeconds": 1.56,
+          "activeDurationSeconds": 0.5,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.335724,
+          "rms": 0.053672
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0206-instead--C.mp3",
+          "bytes": 9792,
+          "sha256": "858ef9320eaef80fccb583c08bd036ceb0d3d06af4d14a073d07e91499c3b15b",
+          "durationSeconds": 1.632,
+          "activeDurationSeconds": 0.58,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.368591,
+          "rms": 0.058162
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0206-instead--D.mp3",
+          "bytes": 9504,
+          "sha256": "dcc1413cfc0f908b82cb2944e72d8b86c885a66888c9c5b42df2e375bc62087b",
+          "durationSeconds": 1.584,
+          "activeDurationSeconds": 0.52,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.624,
+          "peak": 0.319824,
+          "rms": 0.046715
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0216-just",
+      "sourceOrder": 216,
+      "headword": "just",
+      "original": {
+        "path": "wanwei-core-0216-just.mp3",
+        "bytes": 3744,
+        "sha256": "dabb9760f4b62dcf4caa391ca07b3afd5b0b586028b7817fb156a13776b44a39"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0216-just--A.mp3",
+          "bytes": 9648,
+          "sha256": "4a092d6db65eb6aa965304d7a4816bcb75cc7258395e71c70e07fb028417784f",
+          "durationSeconds": 1.608,
+          "activeDurationSeconds": 0.56,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.602875,
+          "rms": 0.065361
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0216-just--B.mp3",
+          "bytes": 8784,
+          "sha256": "10114b3e9c983985912e8e393cd1c253ee5eb14e832a3d3145487a53a04b3228",
+          "durationSeconds": 1.464,
+          "activeDurationSeconds": 0.42,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.393982,
+          "rms": 0.040571
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0216-just--C.mp3",
+          "bytes": 8784,
+          "sha256": "072213646a2e2cdd9049544b84ebb97c7b786cdd4c371a613fe5240985357165",
+          "durationSeconds": 1.464,
+          "activeDurationSeconds": 0.42,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.489777,
+          "rms": 0.0416
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0216-just--D.mp3",
+          "bytes": 8784,
+          "sha256": "c3dcd9b77c0474f0e0138cb57b0af8f14efb5144281a510ba8f0a70c931736c0",
+          "durationSeconds": 1.464,
+          "activeDurationSeconds": 0.4,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.624,
+          "peak": 0.515533,
+          "rms": 0.047553
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0236-like",
+      "sourceOrder": 236,
+      "headword": "like",
+      "original": {
+        "path": "wanwei-core-0236-like.mp3",
+        "bytes": 3168,
+        "sha256": "22dadfccc081235e68560594b7352db6e76895e78d08e8d26a797a20ec29e7a0"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0236-like--A.mp3",
+          "bytes": 7920,
+          "sha256": "aaa3b978b4168403689b17551daff60e431f6d24060b9ce0c9cb2888495e693a",
+          "durationSeconds": 1.32,
+          "activeDurationSeconds": 0.26,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.44928,
+          "rms": 0.044579
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0236-like--B.mp3",
+          "bytes": 8784,
+          "sha256": "a9b19b55bc4368dd2b7b409eee265e7ff5b1046aca6baf828ed79672d1312168",
+          "durationSeconds": 1.464,
+          "activeDurationSeconds": 0.4,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.624,
+          "peak": 0.611359,
+          "rms": 0.059973
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0236-like--C.mp3",
+          "bytes": 8496,
+          "sha256": "fff3391b11101b2f47bf831811c928bf60122238cc7ccd49284b4672dfab29dc",
+          "durationSeconds": 1.416,
+          "activeDurationSeconds": 0.36,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.577484,
+          "rms": 0.062579
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0236-like--D.mp3",
+          "bytes": 10800,
+          "sha256": "31616d4eae5edf900df6820bbb245ff685b1ad8c8563585bd262b9ced0c37232",
+          "durationSeconds": 1.8,
+          "activeDurationSeconds": 0.74,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.578339,
+          "rms": 0.091484
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0238-little",
+      "sourceOrder": 238,
+      "headword": "little",
+      "original": {
+        "path": "wanwei-core-0238-little.mp3",
+        "bytes": 4032,
+        "sha256": "904baa35e5e803448fb7963a08602d3447827d26bf91cb3c88c3361d8013bace"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0238-little--A.mp3",
+          "bytes": 8352,
+          "sha256": "f458cffded16058fbcf35c1d41a96c5f06a85395c2b013fd0c9125aec99381ef",
+          "durationSeconds": 1.392,
+          "activeDurationSeconds": 0.36,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.592,
+          "peak": 0.486176,
+          "rms": 0.049568
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0238-little--B.mp3",
+          "bytes": 9216,
+          "sha256": "00cafa93b54dccbb93605747930fb4eae91645e33565aa910b973390358fc345",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.52,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.576,
+          "peak": 0.546143,
+          "rms": 0.080922
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0238-little--C.mp3",
+          "bytes": 8640,
+          "sha256": "28c75492b455df4d9a70794f994736dc571b6f755b3bf209cf97c809c1e26bd3",
+          "durationSeconds": 1.44,
+          "activeDurationSeconds": 0.4,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.6,
+          "peak": 0.44162,
+          "rms": 0.050613
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0238-little--D.mp3",
+          "bytes": 8784,
+          "sha256": "496678930805131c2e1a3d34151bca144dd088274ea3197ecdfe8a481e41c4d7",
+          "durationSeconds": 1.464,
+          "activeDurationSeconds": 0.42,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.434937,
+          "rms": 0.049092
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0241-long",
+      "sourceOrder": 241,
+      "headword": "long",
+      "original": {
+        "path": "wanwei-core-0241-long.mp3",
+        "bytes": 4608,
+        "sha256": "e64b8b2441421585bc1dd2ca34301f902a4c35bfe0f57596cb3fe5ee6f7c753f"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0241-long--A.mp3",
+          "bytes": 9648,
+          "sha256": "ea0b2ea36455daea1cb20e90fca256c5f86cf3f8361948d0c3f6e157d5362251",
+          "durationSeconds": 1.608,
+          "activeDurationSeconds": 0.56,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.561615,
+          "rms": 0.091127
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0241-long--B.mp3",
+          "bytes": 11088,
+          "sha256": "44d41b3bc13569e3d2302622f257e4a98e07b6a949fa8c8cb6a620a8d94d5d55",
+          "durationSeconds": 1.848,
+          "activeDurationSeconds": 0.8,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.519379,
+          "rms": 0.085928
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0241-long--C.mp3",
+          "bytes": 11520,
+          "sha256": "e8b6aa6d940be8cdac115949ebffd96eccb184daf4b7df3856b34c30c8a35068",
+          "durationSeconds": 1.92,
+          "activeDurationSeconds": 0.88,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.6,
+          "peak": 0.5065,
+          "rms": 0.075189
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0241-long--D.mp3",
+          "bytes": 9216,
+          "sha256": "428ea4fd0d7901af91ed3a60a8972e4aa3f43e9a5000c51bed057a4db9d33a4e",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.5,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.596,
+          "peak": 0.471283,
+          "rms": 0.075274
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0247-make",
+      "sourceOrder": 247,
+      "headword": "make",
+      "original": {
+        "path": "wanwei-core-0247-make.mp3",
+        "bytes": 3024,
+        "sha256": "ce8e7f15bb8ce9eb5d1e2fe9366e481f8cf91b473907af57942579e06880afd8"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0247-make--A.mp3",
+          "bytes": 8784,
+          "sha256": "9b569832f199abcc8f0d74729e6b2c512acf5dfc562969ad0f0c9447680c914a",
+          "durationSeconds": 1.464,
+          "activeDurationSeconds": 0.42,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.370667,
+          "rms": 0.046577
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0247-make--B.mp3",
+          "bytes": 8640,
+          "sha256": "40b86019eed86d654eda235f461127183ab6dab4e75239915c5a4d58c3e4304d",
+          "durationSeconds": 1.44,
+          "activeDurationSeconds": 0.38,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.384399,
+          "rms": 0.040998
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0247-make--C.mp3",
+          "bytes": 8640,
+          "sha256": "2f073683be49547efb1b1c8d54c6b547c544f0b56b2cde92faf6899511164aa9",
+          "durationSeconds": 1.44,
+          "activeDurationSeconds": 0.4,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.6,
+          "peak": 0.441284,
+          "rms": 0.046783
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0247-make--D.mp3",
+          "bytes": 8496,
+          "sha256": "7705b413805fe3166256f63fc980910368b2c1b9fa544b02cd0593427dba35e5",
+          "durationSeconds": 1.416,
+          "activeDurationSeconds": 0.36,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.297455,
+          "rms": 0.033712
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0268-neither",
+      "sourceOrder": 268,
+      "headword": "neither",
+      "original": {
+        "path": "wanwei-core-0268-neither.mp3",
+        "bytes": 5472,
+        "sha256": "cf12956aea405e56a41fcd345c94ada101fe5fab34731598d465bf0261b67a05"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0268-neither--A.mp3",
+          "bytes": 9072,
+          "sha256": "736d8e4b0c1cbe06f44d992409fd8d3fd7ba815dcb80bbaa3cadb4adefb52306",
+          "durationSeconds": 1.512,
+          "activeDurationSeconds": 0.48,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.592,
+          "peak": 0.42926,
+          "rms": 0.051692
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0268-neither--B.mp3",
+          "bytes": 9072,
+          "sha256": "16afd4bfcd9044c025323269e54c25c0116e33c1a627de293e1f0869776b6f2a",
+          "durationSeconds": 1.512,
+          "activeDurationSeconds": 0.46,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.501068,
+          "rms": 0.077541
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0268-neither--C.mp3",
+          "bytes": 9936,
+          "sha256": "e069e7fb4a1c1ffe36e873c0acc5740f64d9a865da28a06b5f8189d1a5f44561",
+          "durationSeconds": 1.656,
+          "activeDurationSeconds": 0.6,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.566986,
+          "rms": 0.106695
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0268-neither--D.mp3",
+          "bytes": 9216,
+          "sha256": "a67232b16bba8c45ff88b90977aaf04534ba65769211310585f2d5d76706a140",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.5,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.596,
+          "peak": 0.534973,
+          "rms": 0.068373
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0322-prefer",
+      "sourceOrder": 322,
+      "headword": "prefer",
+      "original": {
+        "path": "wanwei-core-0322-prefer.mp3",
+        "bytes": 5040,
+        "sha256": "47a332c7c17fe84072cf9c79e538d87831eaffe4e379f0e01e71574326f111de"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0322-prefer--A.mp3",
+          "bytes": 9216,
+          "sha256": "c8b85077f7239ea3b1c94a06f1aa8f8707d7d01940061d3b3c630870eca93407",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.5,
+          "leadingSilenceSeconds": 0.42,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.470184,
+          "rms": 0.056435
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0322-prefer--B.mp3",
+          "bytes": 9072,
+          "sha256": "32cb77b61e5116ddbc440fb43803975a12b9b8bab7f161eaf9d22b6081928927",
+          "durationSeconds": 1.512,
+          "activeDurationSeconds": 0.46,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.380432,
+          "rms": 0.037748
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0322-prefer--C.mp3",
+          "bytes": 9648,
+          "sha256": "5b80800f4d24eecfcd9035c241c4c8bb58e99b7ee685bd374e75083c961f5a7c",
+          "durationSeconds": 1.608,
+          "activeDurationSeconds": 0.56,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.491089,
+          "rms": 0.060858
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0322-prefer--D.mp3",
+          "bytes": 10368,
+          "sha256": "4abf8def71cfe83b226ef891b023e842605e2e18f3cd1fd903d39ab5530084db",
+          "durationSeconds": 1.728,
+          "activeDurationSeconds": 0.7,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.588,
+          "peak": 0.410797,
+          "rms": 0.063223
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0351-remember",
+      "sourceOrder": 351,
+      "headword": "remember",
+      "original": {
+        "path": "wanwei-core-0351-remember.mp3",
+        "bytes": 5472,
+        "sha256": "ebc2664929dc8478853baf0cd0d0e30b343a13c8c5b082f154549a673b8f9f79"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0351-remember--A.mp3",
+          "bytes": 9792,
+          "sha256": "c43ccaddcf4eca82cc43148c9de2a0726b58f52fbb85025a12dda4424af8c94e",
+          "durationSeconds": 1.632,
+          "activeDurationSeconds": 0.58,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.618164,
+          "rms": 0.100182
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0351-remember--B.mp3",
+          "bytes": 10368,
+          "sha256": "8b6cc83b1d0413e26718a7392ea7a34236e10b55f2f0126636126f871da09f01",
+          "durationSeconds": 1.728,
+          "activeDurationSeconds": 0.68,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.481873,
+          "rms": 0.078078
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0351-remember--C.mp3",
+          "bytes": 10080,
+          "sha256": "f31c268f932297118ff68f97efb4da62b906c183c66cbe7b03b7a3f2d28079da",
+          "durationSeconds": 1.68,
+          "activeDurationSeconds": 0.66,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.58,
+          "peak": 0.694092,
+          "rms": 0.112098
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0351-remember--D.mp3",
+          "bytes": 8928,
+          "sha256": "cb492c7db003e5135862d1ce4b20ccf282231133e171aa799cc59002bd6ecf66",
+          "durationSeconds": 1.488,
+          "activeDurationSeconds": 0.42,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.628,
+          "peak": 0.376465,
+          "rms": 0.059413
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0357-right",
+      "sourceOrder": 357,
+      "headword": "right",
+      "original": {
+        "path": "wanwei-core-0357-right.mp3",
+        "bytes": 4464,
+        "sha256": "c2990a5400d7cf8781b3ea71e5c1d0d85cd08317f03bda6ba3efdd600e43da5d"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0357-right--A.mp3",
+          "bytes": 8640,
+          "sha256": "3aaf88ea50b3a866213a6a233b9b7dca5e765c433d6eba4341b5a1816d21d3ba",
+          "durationSeconds": 1.44,
+          "activeDurationSeconds": 0.38,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.52771,
+          "rms": 0.05653
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0357-right--B.mp3",
+          "bytes": 8928,
+          "sha256": "f8daf7ff4adf1756e3993e998f1c980a4825ceb596d8821c48589f4ade11e26a",
+          "durationSeconds": 1.488,
+          "activeDurationSeconds": 0.42,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.628,
+          "peak": 0.585144,
+          "rms": 0.05111
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0357-right--C.mp3",
+          "bytes": 7920,
+          "sha256": "e630d71ebee453394bafde3cdd54af1ca780f1ec230c561758ee5a59516021bb",
+          "durationSeconds": 1.32,
+          "activeDurationSeconds": 0.3,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.58,
+          "peak": 0.504303,
+          "rms": 0.070812
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0357-right--D.mp3",
+          "bytes": 8496,
+          "sha256": "d295441359d564a28ab96397b5cb51eab257cc5f81afed87935c38988ba4859b",
+          "durationSeconds": 1.416,
+          "activeDurationSeconds": 0.36,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.420624,
+          "rms": 0.044252
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0373-serious",
+      "sourceOrder": 373,
+      "headword": "serious",
+      "original": {
+        "path": "wanwei-core-0373-serious.mp3",
+        "bytes": 5616,
+        "sha256": "aa6f6b14571ee917207eb4b2223244fbb5806ec57afae8fe812d964e4b079353"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0373-serious--A.mp3",
+          "bytes": 10800,
+          "sha256": "466605eb67cf5095640a370563eba6a13775cbf2f87b04ac8a27291baa880f07",
+          "durationSeconds": 1.8,
+          "activeDurationSeconds": 0.74,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.551605,
+          "rms": 0.057374
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0373-serious--B.mp3",
+          "bytes": 10080,
+          "sha256": "378f11dd8ea59390eb37b133c739ccc8d2291526a1d61e914def06dd94cca753",
+          "durationSeconds": 1.68,
+          "activeDurationSeconds": 0.62,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.460724,
+          "rms": 0.048174
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0373-serious--C.mp3",
+          "bytes": 9792,
+          "sha256": "04245c83292cf146fd9515082a2d7663e8b7b1aaef13512821086fcd1dbf86e4",
+          "durationSeconds": 1.632,
+          "activeDurationSeconds": 0.58,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.502533,
+          "rms": 0.05464
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0373-serious--D.mp3",
+          "bytes": 10080,
+          "sha256": "2684fcc5f40a1f57a4141ffce8d9d5795c3e3abb67c9cff682ff3d33bc3c5bd1",
+          "durationSeconds": 1.68,
+          "activeDurationSeconds": 0.62,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.417694,
+          "rms": 0.051344
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0380-simple",
+      "sourceOrder": 380,
+      "headword": "simple",
+      "original": {
+        "path": "wanwei-core-0380-simple.mp3",
+        "bytes": 5328,
+        "sha256": "23c7bd32d3bcdbe9c4a1a25b6021367f88d0f6525b8557bbea33ab003c2a7834"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0380-simple--A.mp3",
+          "bytes": 10080,
+          "sha256": "841218a40be3949a87a4642cdacd31cf34ba44b91061704ee273d5416d11bd82",
+          "durationSeconds": 1.68,
+          "activeDurationSeconds": 0.62,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.550537,
+          "rms": 0.057108
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0380-simple--B.mp3",
+          "bytes": 9936,
+          "sha256": "0ae5b872dde572c42570ffe12b301f8c338a181a1b173a3cc0cee517f5c0cf84",
+          "durationSeconds": 1.656,
+          "activeDurationSeconds": 0.6,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.591949,
+          "rms": 0.063393
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0380-simple--C.mp3",
+          "bytes": 9504,
+          "sha256": "a72ea0783de3d902abb512014bcd979de7e17fbe4c3434548e3b899fd05570af",
+          "durationSeconds": 1.584,
+          "activeDurationSeconds": 0.58,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.564,
+          "peak": 0.500946,
+          "rms": 0.069045
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0380-simple--D.mp3",
+          "bytes": 11664,
+          "sha256": "078c3415a70bbfa0087f4966cef40ce8dcf89bccd4524202da6167284baeefe1",
+          "durationSeconds": 1.944,
+          "activeDurationSeconds": 0.92,
+          "leadingSilenceSeconds": 0.42,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.334808,
+          "rms": 0.061737
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0430-think",
+      "sourceOrder": 430,
+      "headword": "think",
+      "original": {
+        "path": "wanwei-core-0430-think.mp3",
+        "bytes": 3600,
+        "sha256": "b6278cfaeff27d451942556819326b6adf851f4c0121c4461a253ac191c53756"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0430-think--A.mp3",
+          "bytes": 8784,
+          "sha256": "aa0b12a3f7624c82b53244ea83ffc2b9c887fd63615422c57fbbc5a003d8617d",
+          "durationSeconds": 1.464,
+          "activeDurationSeconds": 0.42,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.431305,
+          "rms": 0.035637
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0430-think--B.mp3",
+          "bytes": 8640,
+          "sha256": "73dc86f33e16e7255d317d82f6be80c58937cf6885485ef58536002f29a09650",
+          "durationSeconds": 1.44,
+          "activeDurationSeconds": 0.38,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.442902,
+          "rms": 0.038608
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0430-think--C.mp3",
+          "bytes": 8928,
+          "sha256": "92418f39ff0e5c90790379d2f3acc20dde59685876b32c0f8373a79197780b20",
+          "durationSeconds": 1.488,
+          "activeDurationSeconds": 0.44,
+          "leadingSilenceSeconds": 0.46,
+          "trailingSilenceSeconds": 0.588,
+          "peak": 0.454834,
+          "rms": 0.042498
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0430-think--D.mp3",
+          "bytes": 9072,
+          "sha256": "5ddad8d13d8877828f755c56798f042af7a6c2fe1d408c26547d0e88da7b98e5",
+          "durationSeconds": 1.512,
+          "activeDurationSeconds": 0.46,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.520264,
+          "rms": 0.043202
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0433-throw",
+      "sourceOrder": 433,
+      "headword": "throw",
+      "original": {
+        "path": "wanwei-core-0433-throw.mp3",
+        "bytes": 4608,
+        "sha256": "c4f259dc23ca34bcac32deaabdf1737caf72991893a67a231f875d89759ef3c5"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0433-throw--A.mp3",
+          "bytes": 9504,
+          "sha256": "e263c4e7660aeee67a8e3122563be4ec718b540aef77ca90bf59de61b524bdec",
+          "durationSeconds": 1.584,
+          "activeDurationSeconds": 0.54,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.479584,
+          "rms": 0.064248
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0433-throw--B.mp3",
+          "bytes": 9648,
+          "sha256": "d62973122af523709fd5d2554ec7dd4e7dfa1d599d40124fe56690b412f21510",
+          "durationSeconds": 1.608,
+          "activeDurationSeconds": 0.56,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.568054,
+          "rms": 0.068804
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0433-throw--C.mp3",
+          "bytes": 8784,
+          "sha256": "d91cbc2d200f92ad0682e33f4fe8f33e4423ccfb336fac9873ab45c7c5d16548",
+          "durationSeconds": 1.464,
+          "activeDurationSeconds": 0.42,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.551727,
+          "rms": 0.057473
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0433-throw--D.mp3",
+          "bytes": 9504,
+          "sha256": "45d6f189f3f26b2d982ad1aee178ed92e5dc5c35e01520b60db6b6b95e023e09",
+          "durationSeconds": 1.584,
+          "activeDurationSeconds": 0.52,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.624,
+          "peak": 0.490509,
+          "rms": 0.049423
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0455-wake",
+      "sourceOrder": 455,
+      "headword": "wake",
+      "original": {
+        "path": "wanwei-core-0455-wake.mp3",
+        "bytes": 3600,
+        "sha256": "7bd7a05523405b018922cff6e7d57cebc5217b64b6d2fe0ffe7ab3f55057968c"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0455-wake--A.mp3",
+          "bytes": 8496,
+          "sha256": "d0d390bbf13ff8e98ca30e93d9292696b24b65cf3e19081450a7596eff9d845a",
+          "durationSeconds": 1.416,
+          "activeDurationSeconds": 0.36,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.54718,
+          "rms": 0.053262
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0455-wake--B.mp3",
+          "bytes": 8640,
+          "sha256": "b43d7278154c8ec99264d9555cf64162cff721171f27f045ed4083b185fc1121",
+          "durationSeconds": 1.44,
+          "activeDurationSeconds": 0.38,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.559998,
+          "rms": 0.051319
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0455-wake--C.mp3",
+          "bytes": 8928,
+          "sha256": "49ae615d508d48e68e5c26235fc6afc02adf8d3f9f984b9dd106023523656b57",
+          "durationSeconds": 1.488,
+          "activeDurationSeconds": 0.44,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.552582,
+          "rms": 0.053894
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0455-wake--D.mp3",
+          "bytes": 8496,
+          "sha256": "010669a8deea530f65692f345780f4fcb2909d2afb7c4c64b669f53734060cc0",
+          "durationSeconds": 1.416,
+          "activeDurationSeconds": 0.36,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.538055,
+          "rms": 0.060632
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0462-weak",
+      "sourceOrder": 462,
+      "headword": "weak",
+      "original": {
+        "path": "wanwei-core-0462-weak.mp3",
+        "bytes": 3600,
+        "sha256": "75a749b5405bba109dc1ca898b0d16c36b3f10e2f25e5a7ccf0dbe3886b0d529"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-core-0462-weak--A.mp3",
+          "bytes": 9072,
+          "sha256": "fd27380c03c6f866a7977b0960163dcce1c4f0309d6e56490af2490ca039176f",
+          "durationSeconds": 1.512,
+          "activeDurationSeconds": 0.46,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.34317,
+          "rms": 0.045285
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-core-0462-weak--B.mp3",
+          "bytes": 9360,
+          "sha256": "37182a4c7609b3d093390ffa82eaec972b28380e2946f7c3b565a9b4496163ba",
+          "durationSeconds": 1.56,
+          "activeDurationSeconds": 0.5,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.357697,
+          "rms": 0.041193
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-core-0462-weak--C.mp3",
+          "bytes": 7776,
+          "sha256": "071176d1360cb288ae2ba83b6c171d3621906bcf2b137e7bf661859ca44cc2eb",
+          "durationSeconds": 1.296,
+          "activeDurationSeconds": 0.3,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.556,
+          "peak": 0.40683,
+          "rms": 0.057462
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-core-0462-weak--D.mp3",
+          "bytes": 9216,
+          "sha256": "788c87456029cdf0f2245f629f6452285e772ef0581566de182cb6ac47ee2e3d",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.48,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.483307,
+          "rms": 0.054005
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-basic-0483-according--to-",
+      "sourceOrder": 483,
+      "headword": "according (to)",
+      "original": {
+        "path": "wanwei-basic-0483-according--to-.mp3",
+        "bytes": 14688,
+        "sha256": "5acaa21069f3224786d600c9f7c864f36bb90d2943fdedcfdd0041f78dc9ffff"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-basic-0483-according--to---A.mp3",
+          "bytes": 10800,
+          "sha256": "59b6296373e5a8697eb5e7ae76c8e17022a4bf49a536c86a72e62610a047c725",
+          "durationSeconds": 1.8,
+          "activeDurationSeconds": 0.76,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.6,
+          "peak": 0.518768,
+          "rms": 0.071061
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-basic-0483-according--to---B.mp3",
+          "bytes": 13536,
+          "sha256": "bf0c7e9c0a423bb674d268c668ab6bb4574b98d3e04f6bab87bf9c8125f370eb",
+          "durationSeconds": 2.256,
+          "activeDurationSeconds": 1.24,
+          "leadingSilenceSeconds": 0.4,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.447968,
+          "rms": 0.07286
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-basic-0483-according--to---C.mp3",
+          "bytes": 8784,
+          "sha256": "d257e17defdeac509a0d609825cd69e5e4383c870296e6be37e73a11c6c01d30",
+          "durationSeconds": 1.464,
+          "activeDurationSeconds": 0.42,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.488251,
+          "rms": 0.066296
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-basic-0483-according--to---D.mp3",
+          "bytes": 15120,
+          "sha256": "1cba1fe8ab02a5cd26d7d6f87cd11472809b2941bc0209f921440cbbd07b3aba",
+          "durationSeconds": 2.52,
+          "activeDurationSeconds": 1.46,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.432129,
+          "rms": 0.082028
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-basic-0576-building",
+      "sourceOrder": 576,
+      "headword": "building",
+      "original": {
+        "path": "wanwei-basic-0576-building.mp3",
+        "bytes": 4608,
+        "sha256": "1096d4149c88402e2b8690e1aa0f5cb81c6cd9d50a5649ebcdf432e91db40d8a"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-basic-0576-building--A.mp3",
+          "bytes": 9360,
+          "sha256": "74ea2e3f684300fb2d4eb2ab545581e8304bad5ddf745ce907e3a86048259877",
+          "durationSeconds": 1.56,
+          "activeDurationSeconds": 0.5,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.512634,
+          "rms": 0.061056
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-basic-0576-building--B.mp3",
+          "bytes": 12816,
+          "sha256": "f60a371e271dbbc37a4455f462b88fbe372cc0d1f377b5ab3876567cc9045803",
+          "durationSeconds": 2.136,
+          "activeDurationSeconds": 1.16,
+          "leadingSilenceSeconds": 0.38,
+          "trailingSilenceSeconds": 0.596,
+          "peak": 0.388611,
+          "rms": 0.059363
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-basic-0576-building--C.mp3",
+          "bytes": 12240,
+          "sha256": "f996c9c6b05023fdb697347e32d523196add1f5afd6163c463d66580acbf59b8",
+          "durationSeconds": 2.04,
+          "activeDurationSeconds": 1.02,
+          "leadingSilenceSeconds": 0.4,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.406921,
+          "rms": 0.062613
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-basic-0576-building--D.mp3",
+          "bytes": 9936,
+          "sha256": "44a52d9b9a21f349f03a2a963c2dfda7c73d07a6267f872b539a5d41204fea2e",
+          "durationSeconds": 1.656,
+          "activeDurationSeconds": 0.62,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.596,
+          "peak": 0.636353,
+          "rms": 0.079465
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-basic-0581-but",
+      "sourceOrder": 581,
+      "headword": "but",
+      "original": {
+        "path": "wanwei-basic-0581-but.mp3",
+        "bytes": 2592,
+        "sha256": "a2b60646572dd9ddee1557be74e899975682922519c67605a9acde2b037cda8d"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-basic-0581-but--A.mp3",
+          "bytes": 9216,
+          "sha256": "2bbce209c1b8d5e1277f2c84c9aef139e2e43bf20c00c46097105e86ff071ef1",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.48,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.419647,
+          "rms": 0.042604
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-basic-0581-but--B.mp3",
+          "bytes": 8064,
+          "sha256": "9af7a2f2f55a060220ca366c8c8f936e7f7d964da7905bea0efca748a92e7396",
+          "durationSeconds": 1.344,
+          "activeDurationSeconds": 0.3,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.412292,
+          "rms": 0.056002
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-basic-0581-but--C.mp3",
+          "bytes": 11376,
+          "sha256": "c8fdb578a24714cdc01246f5c1ac7a48336db7c600bdf0d95f36231d6c9fd502",
+          "durationSeconds": 1.896,
+          "activeDurationSeconds": 0.88,
+          "leadingSilenceSeconds": 0.4,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.481903,
+          "rms": 0.063975
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-basic-0581-but--D.mp3",
+          "bytes": 8784,
+          "sha256": "572db9b39373a2851def6091ba61bcaa927adef16502c89859d6b789916fbeb3",
+          "durationSeconds": 1.464,
+          "activeDurationSeconds": 0.42,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.395111,
+          "rms": 0.042866
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-basic-0599-certain",
+      "sourceOrder": 599,
+      "headword": "certain",
+      "original": {
+        "path": "wanwei-basic-0599-certain.mp3",
+        "bytes": 4608,
+        "sha256": "86c3e22594434e336f05156414058f568e485ccd20c6c6b92dd65bbec71fcd14"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-basic-0599-certain--A.mp3",
+          "bytes": 9504,
+          "sha256": "3dc264d922fadf039ca9be0a23afaa231042e9b4190d9c890d6580387982793f",
+          "durationSeconds": 1.584,
+          "activeDurationSeconds": 0.54,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.583038,
+          "rms": 0.055418
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-basic-0599-certain--B.mp3",
+          "bytes": 9216,
+          "sha256": "f5fae51a22d07b4a04d24c9261be34a8135e0d3e6fbcccb174e34f1285db6536",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.48,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.513977,
+          "rms": 0.050349
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-basic-0599-certain--C.mp3",
+          "bytes": 10224,
+          "sha256": "caa531e412699afafa19da62721c9a44ee2c0682f6cbd3d2af5a58947d3cb16c",
+          "durationSeconds": 1.704,
+          "activeDurationSeconds": 0.64,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.624,
+          "peak": 0.588593,
+          "rms": 0.060486
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-basic-0599-certain--D.mp3",
+          "bytes": 9504,
+          "sha256": "daa31c9b87c07ee38e1c8e9c4b8c87d332ff2254f6035a59ae14f550f81f12b9",
+          "durationSeconds": 1.584,
+          "activeDurationSeconds": 0.54,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.435974,
+          "rms": 0.044142
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-basic-0609-chore",
+      "sourceOrder": 609,
+      "headword": "chore",
+      "original": {
+        "path": "wanwei-basic-0609-chore.mp3",
+        "bytes": 4752,
+        "sha256": "d2d9448df73dd675d74ff9ed03eaacc17899832506e608edbc31bb9ff3ada771"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-basic-0609-chore--A.mp3",
+          "bytes": 8496,
+          "sha256": "61c7fd1a11fd10c1b86cd498aafc1bb9e6e00d47936c360fe4403ad4cf42023f",
+          "durationSeconds": 1.416,
+          "activeDurationSeconds": 0.36,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.496338,
+          "rms": 0.052942
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-basic-0609-chore--B.mp3",
+          "bytes": 9072,
+          "sha256": "d9f5f21129b9e5655ca8a6467c50ab3cf6488d8f5ae645aaed82c05489204c2b",
+          "durationSeconds": 1.512,
+          "activeDurationSeconds": 0.46,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.423981,
+          "rms": 0.061365
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-basic-0609-chore--C.mp3",
+          "bytes": 8928,
+          "sha256": "6a0401a68b738eb0197733f09d0ff048f3d9e33dc6380991803fbe91dee9e844",
+          "durationSeconds": 1.488,
+          "activeDurationSeconds": 0.46,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.588,
+          "peak": 0.425354,
+          "rms": 0.062939
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-basic-0609-chore--D.mp3",
+          "bytes": 10080,
+          "sha256": "24fb62428ded101f2c374d4f79af77523bb9052803cdf96d12005281d9c4dc2f",
+          "durationSeconds": 1.68,
+          "activeDurationSeconds": 0.68,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.56,
+          "peak": 0.531311,
+          "rms": 0.080684
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-basic-0678-during",
+      "sourceOrder": 678,
+      "headword": "during",
+      "original": {
+        "path": "wanwei-basic-0678-during.mp3",
+        "bytes": 3168,
+        "sha256": "646fb34095b802eccc4d405b6dda512ebc739e83ed1351e5004a90b984be4f22"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-basic-0678-during--A.mp3",
+          "bytes": 8640,
+          "sha256": "12b10435ea3cb56233e6ea11d855efaa5d81163f8750ab916e1a0369146e2194",
+          "durationSeconds": 1.44,
+          "activeDurationSeconds": 0.38,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.297974,
+          "rms": 0.039103
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-basic-0678-during--B.mp3",
+          "bytes": 9360,
+          "sha256": "7232d8dc7f8c96f963c39c3e7d335eede26cd6d165b5b7a26bc82ca5d320d3af",
+          "durationSeconds": 1.56,
+          "activeDurationSeconds": 0.5,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.475861,
+          "rms": 0.067744
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-basic-0678-during--C.mp3",
+          "bytes": 9360,
+          "sha256": "398262469952008c38a519a398bc2a528eef8c57f2a8b7b9a706adecd9c45778",
+          "durationSeconds": 1.56,
+          "activeDurationSeconds": 0.5,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.431061,
+          "rms": 0.063313
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-basic-0678-during--D.mp3",
+          "bytes": 8928,
+          "sha256": "b893fa89b55c0872349c1039b12c4e4e0b258bb0a9badfb05405ef8eb9bef7ab",
+          "durationSeconds": 1.488,
+          "activeDurationSeconds": 0.44,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.406342,
+          "rms": 0.053141
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-basic-0682-earth",
+      "sourceOrder": 682,
+      "headword": "earth",
+      "original": {
+        "path": "wanwei-basic-0682-earth.mp3",
+        "bytes": 3600,
+        "sha256": "5ed20937dc33ca34b0fe90e483004a8659108cda6c4c743f5ad7a4136760b22e"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-basic-0682-earth--A.mp3",
+          "bytes": 8496,
+          "sha256": "7cea492228e2dfb31c7c4be2509adb28a6b855f546792c382487cd3554e146da",
+          "durationSeconds": 1.416,
+          "activeDurationSeconds": 0.4,
+          "leadingSilenceSeconds": 0.4,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.22995,
+          "rms": 0.022286
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-basic-0682-earth--B.mp3",
+          "bytes": 8784,
+          "sha256": "8d099b75c8f8a2e279136cb309e8d89cbd7ebcc4aa9bdfd461814c79e92c403c",
+          "durationSeconds": 1.464,
+          "activeDurationSeconds": 0.4,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.624,
+          "peak": 0.508179,
+          "rms": 0.053629
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-basic-0682-earth--C.mp3",
+          "bytes": 8928,
+          "sha256": "828795be00e388ecf5f20fdfeab0f8e37bf73f80a198fe3ef15b66038e9b4f50",
+          "durationSeconds": 1.488,
+          "activeDurationSeconds": 0.44,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.483032,
+          "rms": 0.054874
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-basic-0682-earth--D.mp3",
+          "bytes": 8496,
+          "sha256": "e04df9463d18679954bfee315a5579e27936eb5a6d1aa870dabe792305d34c31",
+          "durationSeconds": 1.416,
+          "activeDurationSeconds": 0.36,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.437897,
+          "rms": 0.050087
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-basic-0691-environment",
+      "sourceOrder": 691,
+      "headword": "environment",
+      "original": {
+        "path": "wanwei-basic-0691-environment.mp3",
+        "bytes": 5472,
+        "sha256": "aefb715e450b6f0fba5c8c529136e18246df20283a628e9c170f2fd458e74361"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-basic-0691-environment--A.mp3",
+          "bytes": 10080,
+          "sha256": "8513675e445b72994aa02c6a5ea81cfbe8ac19a0eda91e8695f21514561843ff",
+          "durationSeconds": 1.68,
+          "activeDurationSeconds": 0.64,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.6,
+          "peak": 0.610626,
+          "rms": 0.105073
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-basic-0691-environment--B.mp3",
+          "bytes": 10512,
+          "sha256": "8e40a1acefa4a1c1868cf5c5b4dbfba6dbd98b235c89b958d5b3dc0271fe6726",
+          "durationSeconds": 1.752,
+          "activeDurationSeconds": 0.72,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.592,
+          "peak": 0.539642,
+          "rms": 0.087569
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-basic-0691-environment--C.mp3",
+          "bytes": 10800,
+          "sha256": "efb3512c080f8eb902933c2e4208e0aded0692e121f7699ce18d29b64822eab5",
+          "durationSeconds": 1.8,
+          "activeDurationSeconds": 0.74,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.564423,
+          "rms": 0.081665
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-basic-0691-environment--D.mp3",
+          "bytes": 10368,
+          "sha256": "989913a23a731b713a66456228943b4b91696ff21f39de2719c5ef31ca09152c",
+          "durationSeconds": 1.728,
+          "activeDurationSeconds": 0.74,
+          "leadingSilenceSeconds": 0.38,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.297516,
+          "rms": 0.055967
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-basic-0727-folk",
+      "sourceOrder": 727,
+      "headword": "folk",
+      "original": {
+        "path": "wanwei-basic-0727-folk.mp3",
+        "bytes": 3600,
+        "sha256": "03e301f283fdae467eab0f436bf34ab83ec262b362ce3a2c0ff3ba0f266e8d2e"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-basic-0727-folk--A.mp3",
+          "bytes": 8640,
+          "sha256": "3c60b3b8764c02ccbb7494e48729cbce958e8507124bf0c4767b1b208c7d0be1",
+          "durationSeconds": 1.44,
+          "activeDurationSeconds": 0.38,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.603943,
+          "rms": 0.056397
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-basic-0727-folk--B.mp3",
+          "bytes": 8352,
+          "sha256": "c0824b0abea3834112e0500991fb84f29128265463c504cc9c4625ba0c061aa7",
+          "durationSeconds": 1.392,
+          "activeDurationSeconds": 0.38,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.572,
+          "peak": 0.530457,
+          "rms": 0.05307
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-basic-0727-folk--C.mp3",
+          "bytes": 9216,
+          "sha256": "08a2732083895ca6d316f6c035f70ce522969b72681ad2654525729fa696c9e1",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.48,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.472443,
+          "rms": 0.057415
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-basic-0727-folk--D.mp3",
+          "bytes": 8208,
+          "sha256": "0d64dafd19c9f7ce50575c5d0e4e6016d17a78c4c756a5b3bffe20f3120f6b5d",
+          "durationSeconds": 1.368,
+          "activeDurationSeconds": 0.34,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.588,
+          "peak": 0.611572,
+          "rms": 0.062792
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-basic-0788-honour--ame-honor-",
+      "sourceOrder": 788,
+      "headword": "honour (AmE honor)",
+      "original": {
+        "path": "wanwei-basic-0788-honour--ame-honor-.mp3",
+        "bytes": 10368,
+        "sha256": "3af5d7fbaf29035c2dacf7c20f98b337e186e9a7f17c7af82b2e50363d965797"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-basic-0788-honour--ame-honor---A.mp3",
+          "bytes": 8640,
+          "sha256": "1d3977f58b4b8a48f289721236ed021eda3f9a521fb866170ad296b461a4e80a",
+          "durationSeconds": 1.44,
+          "activeDurationSeconds": 0.38,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.388733,
+          "rms": 0.054192
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-basic-0788-honour--ame-honor---B.mp3",
+          "bytes": 9360,
+          "sha256": "e2f214a4b38ed054d1013353061ee2babf85670ceb367d4604b19d2c0501a72c",
+          "durationSeconds": 1.56,
+          "activeDurationSeconds": 0.52,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.6,
+          "peak": 0.410004,
+          "rms": 0.066058
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-basic-0788-honour--ame-honor---C.mp3",
+          "bytes": 8928,
+          "sha256": "2082e2c61ac37efef4695b7f10133870c418edbae08f551ab61ae5f7bad9dfb9",
+          "durationSeconds": 1.488,
+          "activeDurationSeconds": 0.44,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.449524,
+          "rms": 0.062042
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-basic-0788-honour--ame-honor---D.mp3",
+          "bytes": 9216,
+          "sha256": "d2b0e761a9a432fbacd04a7999c62e222523ee5211b337ece30389675486d84d",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.48,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.433533,
+          "rms": 0.06522
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-basic-0827-lazy",
+      "sourceOrder": 827,
+      "headword": "lazy",
+      "original": {
+        "path": "wanwei-basic-0827-lazy.mp3",
+        "bytes": 5904,
+        "sha256": "6615c552795d2dc1b1757c812539719ceff254c603ad5f8390d0ecc1b1523af3"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-basic-0827-lazy--A.mp3",
+          "bytes": 9648,
+          "sha256": "251544e852afd43904b935f35d532969544d5c214bdee491e8b8ed0cee292089",
+          "durationSeconds": 1.608,
+          "activeDurationSeconds": 0.54,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.628,
+          "peak": 0.572388,
+          "rms": 0.073157
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-basic-0827-lazy--B.mp3",
+          "bytes": 13680,
+          "sha256": "9f8687dea156baa7f29966a124b61292750fabde56c61b1a700565858a2907b4",
+          "durationSeconds": 2.28,
+          "activeDurationSeconds": 1.24,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.6,
+          "peak": 0.616943,
+          "rms": 0.081271
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-basic-0827-lazy--C.mp3",
+          "bytes": 9648,
+          "sha256": "391b7834dc8fb382e12f187ac8a461f0958d855f407a78dbb861ea79bb0edf0e",
+          "durationSeconds": 1.608,
+          "activeDurationSeconds": 0.56,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.545441,
+          "rms": 0.068956
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-basic-0827-lazy--D.mp3",
+          "bytes": 8640,
+          "sha256": "f3162ddb4d0a6db525f6e297e46c6e4cdd6c259c5a2fb59808f8f4428c18e9ab",
+          "durationSeconds": 1.44,
+          "activeDurationSeconds": 0.38,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.536133,
+          "rms": 0.058498
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-basic-0839-local",
+      "sourceOrder": 839,
+      "headword": "local",
+      "original": {
+        "path": "wanwei-basic-0839-local.mp3",
+        "bytes": 5472,
+        "sha256": "bc442c5dd3f5886339d60346806468f6735bec58de6c6516adaa8543ef9ed315"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-basic-0839-local--A.mp3",
+          "bytes": 9072,
+          "sha256": "8ff971861bea70a8889d87889bb145a570563974a6c90c62bac0355bd47d1d3b",
+          "durationSeconds": 1.512,
+          "activeDurationSeconds": 0.46,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.270477,
+          "rms": 0.035721
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-basic-0839-local--B.mp3",
+          "bytes": 8928,
+          "sha256": "083dcf960468c700befee622deb2f2882a903aae5e86150f8e7a7bc917d4e6f4",
+          "durationSeconds": 1.488,
+          "activeDurationSeconds": 0.44,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.471527,
+          "rms": 0.051867
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-basic-0839-local--C.mp3",
+          "bytes": 8928,
+          "sha256": "5ac68022159770a00e0cd57728c71de711da91fc1e1cf462ecd622bd736fc415",
+          "durationSeconds": 1.488,
+          "activeDurationSeconds": 0.44,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.575012,
+          "rms": 0.056121
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-basic-0839-local--D.mp3",
+          "bytes": 9216,
+          "sha256": "1c3f9389231c4c41cd5e95600d65d98e09277c3b2f3a4f3b9fdde61cfa2ad960",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.48,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.489258,
+          "rms": 0.063663
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-basic-0893-nearly",
+      "sourceOrder": 893,
+      "headword": "nearly",
+      "original": {
+        "path": "wanwei-basic-0893-nearly.mp3",
+        "bytes": 5760,
+        "sha256": "4c8529b198f40b45a325a4e5741cc8e4306bf06c147e69170fa17fd47ded40c8"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-basic-0893-nearly--A.mp3",
+          "bytes": 11952,
+          "sha256": "03efa81d19e521f0f298ba332b2949310090ae9b37caa1e52a991439967ba863",
+          "durationSeconds": 1.992,
+          "activeDurationSeconds": 1.0,
+          "leadingSilenceSeconds": 0.38,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.362518,
+          "rms": 0.061595
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-basic-0893-nearly--B.mp3",
+          "bytes": 11664,
+          "sha256": "a3fcf7c0e01882224d9e29042b583a5317fcbf24c5b1ffa6f3587b3e132873f4",
+          "durationSeconds": 1.944,
+          "activeDurationSeconds": 0.92,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.584,
+          "peak": 0.466553,
+          "rms": 0.094001
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-basic-0893-nearly--C.mp3",
+          "bytes": 9216,
+          "sha256": "6d1f1cae6d90567b8cc2f6edea52fa17a95a111c1f84fcb5ca6d4ff94ba99b76",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.48,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.497803,
+          "rms": 0.076781
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-basic-0893-nearly--D.mp3",
+          "bytes": 10080,
+          "sha256": "fe2e121aba61df39ffeab11132a377c26b585d532fa8663ae882d4a9eebb8ea1",
+          "durationSeconds": 1.68,
+          "activeDurationSeconds": 0.62,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.610077,
+          "rms": 0.108032
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-basic-0954-policeman---policewoman--pl--policemen---policewomen-",
+      "sourceOrder": 954,
+      "headword": "policeman / policewoman (pl. policemen / policewomen)",
+      "original": {
+        "path": "wanwei-basic-0954-policeman---policewoman--pl--policemen---policewomen-.mp3",
+        "bytes": 24192,
+        "sha256": "b5d1c7752f5ebe85340e8a2809b92bbe59fdb457a8037d5ad1a62c2f398c1073"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-basic-0954-policeman---policewoman--pl--policemen---policewomen---A.mp3",
+          "bytes": 14112,
+          "sha256": "e558bc16e43aead49c5e066cc2ca239c01bd9df0121a4225d6cc048ac508184e",
+          "durationSeconds": 2.352,
+          "activeDurationSeconds": 1.3,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.516357,
+          "rms": 0.077173
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-basic-0954-policeman---policewoman--pl--policemen---policewomen---B.mp3",
+          "bytes": 10800,
+          "sha256": "bd385b1002855f367af69df2b936a6297aaa2baf476e73b9a2b5ac90adfc2955",
+          "durationSeconds": 1.8,
+          "activeDurationSeconds": 0.74,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.424347,
+          "rms": 0.067399
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-basic-0954-policeman---policewoman--pl--policemen---policewomen---C.mp3",
+          "bytes": 10512,
+          "sha256": "e2ad198d0eb44a195f1ec134c7e10a8a69d46407b79b3697784faf876df4a27e",
+          "durationSeconds": 1.752,
+          "activeDurationSeconds": 0.7,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.455933,
+          "rms": 0.074631
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-basic-0954-policeman---policewoman--pl--policemen---policewomen---D.mp3",
+          "bytes": 9936,
+          "sha256": "8616ad051839a6573d4b81bb30e91728959b773d7bc901a15c257f88ea179079",
+          "durationSeconds": 1.656,
+          "activeDurationSeconds": 0.62,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.596,
+          "peak": 0.286835,
+          "rms": 0.040532
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-basic-1051-shut",
+      "sourceOrder": 1051,
+      "headword": "shut",
+      "original": {
+        "path": "wanwei-basic-1051-shut.mp3",
+        "bytes": 4608,
+        "sha256": "429202151b2fec7b530ee64d2b6e00dfcb7a547e972d7306e958ec23a548a78b"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-basic-1051-shut--A.mp3",
+          "bytes": 8640,
+          "sha256": "d1ab7c68e60b92ec20805c60ef9eb916b7e4c97dd12307e5eb6b34a70f4f6ee0",
+          "durationSeconds": 1.44,
+          "activeDurationSeconds": 0.38,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.445618,
+          "rms": 0.035951
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-basic-1051-shut--B.mp3",
+          "bytes": 8784,
+          "sha256": "6a39704a3ec2ea996cd46fae82ed481d47a76add37f74056b1fe0ccb29ca7659",
+          "durationSeconds": 1.464,
+          "activeDurationSeconds": 0.4,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.624,
+          "peak": 0.461365,
+          "rms": 0.040826
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-basic-1051-shut--C.mp3",
+          "bytes": 8928,
+          "sha256": "8c1d09e653ef9950b6cf23a745ca00014110509c52ec5b055d03598901323f9c",
+          "durationSeconds": 1.488,
+          "activeDurationSeconds": 0.44,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.352448,
+          "rms": 0.026778
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-basic-1051-shut--D.mp3",
+          "bytes": 9072,
+          "sha256": "dd340adfc5bdd68f445c1fd0ec5691c739a7758a9c23c157f1c232ea438f0698",
+          "durationSeconds": 1.512,
+          "activeDurationSeconds": 0.46,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.476929,
+          "rms": 0.041694
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-basic-1062-ski",
+      "sourceOrder": 1062,
+      "headword": "ski",
+      "original": {
+        "path": "wanwei-basic-1062-ski.mp3",
+        "bytes": 5040,
+        "sha256": "a1433c377072935edf5b01132a567d7e657090e096dc393f7005cd724260a317"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-basic-1062-ski--A.mp3",
+          "bytes": 9360,
+          "sha256": "e8d8eca7ea2f508276e2d33580f55dc140dcd15f27e421222230bcad3d6ef412",
+          "durationSeconds": 1.56,
+          "activeDurationSeconds": 0.52,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.6,
+          "peak": 0.336578,
+          "rms": 0.067188
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-basic-1062-ski--B.mp3",
+          "bytes": 8928,
+          "sha256": "b59b689f7a5d7d3c714721b9d4f6e1aa46b7a197362b09728a3979c1ccf1cf6a",
+          "durationSeconds": 1.488,
+          "activeDurationSeconds": 0.48,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.568,
+          "peak": 0.342834,
+          "rms": 0.055405
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-basic-1062-ski--C.mp3",
+          "bytes": 9360,
+          "sha256": "6b7afc83131e3624b81dc842ab2cf7ee3ef3a120ea6a818bb559007805a3b9c8",
+          "durationSeconds": 1.56,
+          "activeDurationSeconds": 0.56,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.56,
+          "peak": 0.265198,
+          "rms": 0.046977
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-basic-1062-ski--D.mp3",
+          "bytes": 12096,
+          "sha256": "5b14549e2bc5ce1dfca5c0279b5ed2aa9f559fb9d400ba814f4f67cb45eb5f04",
+          "durationSeconds": 2.016,
+          "activeDurationSeconds": 1.0,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.576,
+          "peak": 0.485718,
+          "rms": 0.067795
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-basic-1107-symbol",
+      "sourceOrder": 1107,
+      "headword": "symbol",
+      "original": {
+        "path": "wanwei-basic-1107-symbol.mp3",
+        "bytes": 5472,
+        "sha256": "14d998c7d1af1c6a9a20ecad08d0a0cf8f94a06196dcaeab351349e043c5b56a"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-basic-1107-symbol--A.mp3",
+          "bytes": 9504,
+          "sha256": "df5be72d0357092790c72a0aa10f81ccdcc7d7f8aa8d270630a7b1b9d7fc727a",
+          "durationSeconds": 1.584,
+          "activeDurationSeconds": 0.54,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.376923,
+          "rms": 0.049549
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-basic-1107-symbol--B.mp3",
+          "bytes": 9648,
+          "sha256": "bafd4045192872ea5ee6982af37500e98f3d193577936d80caa5a553cdd9f072",
+          "durationSeconds": 1.608,
+          "activeDurationSeconds": 0.56,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.597961,
+          "rms": 0.082309
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-basic-1107-symbol--C.mp3",
+          "bytes": 9360,
+          "sha256": "5ee60dacb2125107863c575345d2a711ff2b27923af6e53f1a8015f3a0914572",
+          "durationSeconds": 1.56,
+          "activeDurationSeconds": 0.52,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.6,
+          "peak": 0.577484,
+          "rms": 0.071549
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-basic-1107-symbol--D.mp3",
+          "bytes": 9504,
+          "sha256": "5b8a2dbd34e2c749698d016276534d85746ef9c00804b05acab54205719a520b",
+          "durationSeconds": 1.584,
+          "activeDurationSeconds": 0.54,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.415741,
+          "rms": 0.054083
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-basic-1121-that",
+      "sourceOrder": 1121,
+      "headword": "that",
+      "original": {
+        "path": "wanwei-basic-1121-that.mp3",
+        "bytes": 2880,
+        "sha256": "02c0eed2ab4b6852825d8f1d09ded4b5918cb54ffc86c5833c4cfba402805d81"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-basic-1121-that--A.mp3",
+          "bytes": 8784,
+          "sha256": "12dc26315097bc7d6b35f1990e92bb41aeeae2eab1b15bf57979d47c4242ff70",
+          "durationSeconds": 1.464,
+          "activeDurationSeconds": 0.4,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.624,
+          "peak": 0.458069,
+          "rms": 0.046819
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-basic-1121-that--B.mp3",
+          "bytes": 8496,
+          "sha256": "e797ae0f102bc8634dad8f86e9154796561297abf075e00b9c2e9f4d9378f232",
+          "durationSeconds": 1.416,
+          "activeDurationSeconds": 0.36,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.251038,
+          "rms": 0.028307
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-basic-1121-that--C.mp3",
+          "bytes": 8784,
+          "sha256": "f6ef2dc0f30f4887c7c22e5350cb1c6f171f0201ab52709dd00d5b5ba14e5610",
+          "durationSeconds": 1.464,
+          "activeDurationSeconds": 0.4,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.624,
+          "peak": 0.55719,
+          "rms": 0.056533
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-basic-1121-that--D.mp3",
+          "bytes": 8928,
+          "sha256": "c88e9d078b8186fd5dcd0add04bfab3a17cf9c31c17058aab1ed488c80ab823e",
+          "durationSeconds": 1.488,
+          "activeDurationSeconds": 0.42,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.628,
+          "peak": 0.47052,
+          "rms": 0.051107
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-basic-1122-the",
+      "sourceOrder": 1122,
+      "headword": "the",
+      "original": {
+        "path": "wanwei-basic-1122-the.mp3",
+        "bytes": 4896,
+        "sha256": "71c53f39e74d3ae53b23c8591c21a7d70fd63dbcd1ac4a9dee4e7cd12daec6b6"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-basic-1122-the--A.mp3",
+          "bytes": 9792,
+          "sha256": "48ca25a65797dddaaf6ce29ffaac854b18131a5328bd265dc9746fd1433a6b5e",
+          "durationSeconds": 1.632,
+          "activeDurationSeconds": 0.64,
+          "leadingSilenceSeconds": 0.38,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.306122,
+          "rms": 0.043545
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-basic-1122-the--B.mp3",
+          "bytes": 8208,
+          "sha256": "a719fd7fc9e1c6aa666d93af1315877baa0106e07516f023f7fc98186d5a3d28",
+          "durationSeconds": 1.368,
+          "activeDurationSeconds": 0.32,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.400818,
+          "rms": 0.045299
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-basic-1122-the--C.mp3",
+          "bytes": 9504,
+          "sha256": "f969fcdaa81cbd6ce45de8c5faa5eb1db1ff5acff8e99d140b0bbfc8be0ae8e8",
+          "durationSeconds": 1.584,
+          "activeDurationSeconds": 0.6,
+          "leadingSilenceSeconds": 0.38,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.411835,
+          "rms": 0.045292
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-basic-1122-the--D.mp3",
+          "bytes": 9792,
+          "sha256": "603261532ee61564b3be80f543a1aa6b6c7098b2f8e61923165c87381749e99e",
+          "durationSeconds": 1.632,
+          "activeDurationSeconds": 0.64,
+          "leadingSilenceSeconds": 0.38,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.290344,
+          "rms": 0.039651
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-basic-1181-video",
+      "sourceOrder": 1181,
+      "headword": "video",
+      "original": {
+        "path": "wanwei-basic-1181-video.mp3",
+        "bytes": 5328,
+        "sha256": "cc35dd15d217f19a7d8a36b06c86bad945aa5ed352bca8f55dafb5b6d53e9265"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-basic-1181-video--A.mp3",
+          "bytes": 11520,
+          "sha256": "f0d33c5155c7b606e54c4c326fb98a7723b1e96337c9f20f04d6d74e42906ddd",
+          "durationSeconds": 1.92,
+          "activeDurationSeconds": 0.86,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.528687,
+          "rms": 0.067882
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-basic-1181-video--B.mp3",
+          "bytes": 8352,
+          "sha256": "1bb6970f58c47df567be8da420e9748719b272c71fecc336df2a53c407a84eb1",
+          "durationSeconds": 1.392,
+          "activeDurationSeconds": 0.34,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.439606,
+          "rms": 0.065599
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-basic-1181-video--C.mp3",
+          "bytes": 14256,
+          "sha256": "d2fe3fa9f2570e69bf065c0006ce560b940ddaa8599c763788804e8e7aca1ffd",
+          "durationSeconds": 2.376,
+          "activeDurationSeconds": 1.4,
+          "leadingSilenceSeconds": 0.38,
+          "trailingSilenceSeconds": 0.596,
+          "peak": 0.434723,
+          "rms": 0.078446
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-basic-1181-video--D.mp3",
+          "bytes": 14544,
+          "sha256": "60f204c408de9c6d0df9d1216666d82fb3fd99f8993d45837ea7f55bab3f7134",
+          "durationSeconds": 2.424,
+          "activeDurationSeconds": 1.42,
+          "leadingSilenceSeconds": 0.38,
+          "trailingSilenceSeconds": 0.624,
+          "peak": 0.472656,
+          "rms": 0.066756
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-basic-1194-week",
+      "sourceOrder": 1194,
+      "headword": "week",
+      "original": {
+        "path": "wanwei-basic-1194-week.mp3",
+        "bytes": 3600,
+        "sha256": "9d6b329082fcc02fd901188c9d684e4c3f02805a1ab7daca1601f53fa4f7741f"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-basic-1194-week--A.mp3",
+          "bytes": 9216,
+          "sha256": "ef01061a04e301b2a29b1c08e0637e13300c7040f856f6f06ace80bb5d884aac",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.5,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.596,
+          "peak": 0.338989,
+          "rms": 0.052105
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-basic-1194-week--B.mp3",
+          "bytes": 8640,
+          "sha256": "caaae6c79cc93e5ea6c0efb65a68352cc4ff5b34838f49708b691322315dde1a",
+          "durationSeconds": 1.44,
+          "activeDurationSeconds": 0.38,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.39325,
+          "rms": 0.057412
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-basic-1194-week--C.mp3",
+          "bytes": 8496,
+          "sha256": "e2c72659c030490b97f2d03a45e61af55b190dae6dc29b40d3ba31527e903fa1",
+          "durationSeconds": 1.416,
+          "activeDurationSeconds": 0.36,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.370239,
+          "rms": 0.042362
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-basic-1194-week--D.mp3",
+          "bytes": 8640,
+          "sha256": "ff113c0b08ba0ce21d0cd5c1f56d2b0ad5e9f68c5b05498d482dc2263a6f1efb",
+          "durationSeconds": 1.44,
+          "activeDurationSeconds": 0.4,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.6,
+          "peak": 0.394226,
+          "rms": 0.062102
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-basic-1206-which",
+      "sourceOrder": 1206,
+      "headword": "which",
+      "original": {
+        "path": "wanwei-basic-1206-which.mp3",
+        "bytes": 2592,
+        "sha256": "2237a8a6bbe171dc9f53bc0490e27f074f0912e67f6d2a1c8ebb9c345f7974f3"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-basic-1206-which--A.mp3",
+          "bytes": 9072,
+          "sha256": "43786b60440cba55b86e999e1ab150a5b645742b963ed72f71f0b90a5805d145",
+          "durationSeconds": 1.512,
+          "activeDurationSeconds": 0.46,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.519196,
+          "rms": 0.049904
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-basic-1206-which--B.mp3",
+          "bytes": 9216,
+          "sha256": "f3a93ba134dd2fdec44bfa01ff608e39122489f8a51caa4911db087228f5de66",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.48,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.553223,
+          "rms": 0.048779
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-basic-1206-which--C.mp3",
+          "bytes": 9360,
+          "sha256": "2a1961396a21dd933137d718b3065f45e8d1f7f9f4b87a230c2559d04ceaa101",
+          "durationSeconds": 1.56,
+          "activeDurationSeconds": 0.5,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.476624,
+          "rms": 0.04383
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-basic-1206-which--D.mp3",
+          "bytes": 8352,
+          "sha256": "b0500dffb2af3ad1edb704db4dd47ea66dc442a2b34fa1c5732e98ee8bea4989",
+          "durationSeconds": 1.392,
+          "activeDurationSeconds": 0.34,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.490997,
+          "rms": 0.045056
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-basic-1211-whose",
+      "sourceOrder": 1211,
+      "headword": "whose",
+      "original": {
+        "path": "wanwei-basic-1211-whose.mp3",
+        "bytes": 3024,
+        "sha256": "55cfbb5d03c4caab64509542188257c13244cd607ec34c4a60535c4814bee653"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-basic-1211-whose--A.mp3",
+          "bytes": 9360,
+          "sha256": "cecf1e9f3b5120ece324799fafd4a4b9775dc56e875230dfe13cfd9d047a3144",
+          "durationSeconds": 1.56,
+          "activeDurationSeconds": 0.52,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.6,
+          "peak": 0.339203,
+          "rms": 0.038516
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-basic-1211-whose--B.mp3",
+          "bytes": 9504,
+          "sha256": "a5ca17320f84aa125b0215cbe76f4c78ef350a82baa27cbf7b25e2f2cdb51201",
+          "durationSeconds": 1.584,
+          "activeDurationSeconds": 0.54,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.281677,
+          "rms": 0.037427
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-basic-1211-whose--C.mp3",
+          "bytes": 9216,
+          "sha256": "c15bffe49fa3fdd1c6c4fb5dd1fbeeb17e4c36e401c3a833b4bfc284dbfb5c62",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.5,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.596,
+          "peak": 0.337769,
+          "rms": 0.044484
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-basic-1211-whose--D.mp3",
+          "bytes": 9504,
+          "sha256": "6d9b0e68ae68ef48a68d8d46aa995c8d626a522df81687d9ceb02d7eaa0fb5c3",
+          "durationSeconds": 1.584,
+          "activeDurationSeconds": 0.52,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.624,
+          "peak": 0.433014,
+          "rms": 0.055311
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-recognition-1246-adult",
+      "sourceOrder": 1246,
+      "headword": "adult",
+      "original": {
+        "path": "wanwei-recognition-1246-adult.mp3",
+        "bytes": 4176,
+        "sha256": "63ac081d8f32dd3207a60fdc57a5831dcf05d6ccb59c0ed167c4f64ebd48dc27"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-recognition-1246-adult--A.mp3",
+          "bytes": 9360,
+          "sha256": "37b62cdb835567449923564647eb4c5fc342e6aa32ac0362f0aa18042aa51bf3",
+          "durationSeconds": 1.56,
+          "activeDurationSeconds": 0.54,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.58,
+          "peak": 0.521088,
+          "rms": 0.060322
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-recognition-1246-adult--B.mp3",
+          "bytes": 9936,
+          "sha256": "a92e345861b0a3f4f669a2f118bb5bc910ae740c7551eb4dbf29a0facc1329b3",
+          "durationSeconds": 1.656,
+          "activeDurationSeconds": 0.62,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.596,
+          "peak": 0.486938,
+          "rms": 0.067042
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-recognition-1246-adult--C.mp3",
+          "bytes": 9504,
+          "sha256": "f3750906c7369772ad8e6fe273af3892eb1116488f585610647e056a5af3615e",
+          "durationSeconds": 1.584,
+          "activeDurationSeconds": 0.54,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.54425,
+          "rms": 0.075764
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-recognition-1246-adult--D.mp3",
+          "bytes": 10224,
+          "sha256": "cce833b8a858249eb335e389b8191bdab2e06782b75ec3bbb0836a3c48d82aaa",
+          "durationSeconds": 1.704,
+          "activeDurationSeconds": 0.64,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.624,
+          "peak": 0.496918,
+          "rms": 0.075476
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-recognition-1341-dining",
+      "sourceOrder": 1341,
+      "headword": "dining",
+      "original": {
+        "path": "wanwei-recognition-1341-dining.mp3",
+        "bytes": 4320,
+        "sha256": "162cbf4b922a5a09fa024b1beee1dc2a32f8655a8de215f145f601cb84433d48"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-recognition-1341-dining--A.mp3",
+          "bytes": 10224,
+          "sha256": "f01f6cb94a0c9a139d7e3b3fd377955a94997d5126ce93586c73f517c43e3b77",
+          "durationSeconds": 1.704,
+          "activeDurationSeconds": 0.66,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.537018,
+          "rms": 0.073561
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-recognition-1341-dining--B.mp3",
+          "bytes": 9360,
+          "sha256": "742946b9f0dd92fad80b0e4d0985832869705828715d65ea1f9d4aa00c202ad3",
+          "durationSeconds": 1.56,
+          "activeDurationSeconds": 0.52,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.6,
+          "peak": 0.612061,
+          "rms": 0.073346
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-recognition-1341-dining--C.mp3",
+          "bytes": 9648,
+          "sha256": "0571a9071d610145a398487f09492d0f2b44f8628646d986730dabf566515f63",
+          "durationSeconds": 1.608,
+          "activeDurationSeconds": 0.56,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.574371,
+          "rms": 0.077679
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-recognition-1341-dining--D.mp3",
+          "bytes": 9936,
+          "sha256": "cfa8ab4a98e9c9da7cc7e6863fa5cdbe8a1ec4c4ebf5e761ccb2c788ce966706",
+          "durationSeconds": 1.656,
+          "activeDurationSeconds": 0.62,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.596,
+          "peak": 0.482025,
+          "rms": 0.060056
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-recognition-1348-double",
+      "sourceOrder": 1348,
+      "headword": "double",
+      "original": {
+        "path": "wanwei-recognition-1348-double.mp3",
+        "bytes": 4752,
+        "sha256": "e4904abeef4ddfa94f715f7ce000336d496bb7497da55f014fe069a426fa90f8"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-recognition-1348-double--A.mp3",
+          "bytes": 9216,
+          "sha256": "c23b3e3310608cfac519e13cb6f46c82decc109e161cb9472c87e1a65ca40d78",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.48,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.56308,
+          "rms": 0.060033
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-recognition-1348-double--B.mp3",
+          "bytes": 8784,
+          "sha256": "2e38f605974e628dfd21030a7f15e240270275fe4e702210c98cbdc5c4ecb91b",
+          "durationSeconds": 1.464,
+          "activeDurationSeconds": 0.42,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.478699,
+          "rms": 0.051546
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-recognition-1348-double--C.mp3",
+          "bytes": 8496,
+          "sha256": "af771228c37a65159d8da160cdad2a1f27e4e52f60497fd5099085954769358e",
+          "durationSeconds": 1.416,
+          "activeDurationSeconds": 0.36,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.467621,
+          "rms": 0.049305
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-recognition-1348-double--D.mp3",
+          "bytes": 8496,
+          "sha256": "4d9268f5d80e47ca20efe0f7ee0900964f3bd45dc4d4e3dd8150639cce96936c",
+          "durationSeconds": 1.416,
+          "activeDurationSeconds": 0.38,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.596,
+          "peak": 0.441467,
+          "rms": 0.044605
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-recognition-1361-era",
+      "sourceOrder": 1361,
+      "headword": "era",
+      "original": {
+        "path": "wanwei-recognition-1361-era.mp3",
+        "bytes": 4464,
+        "sha256": "b2a0f36f8e9e9d3bb87a737533f1c25768c2a8e4909086511886587c718fc3a8"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-recognition-1361-era--A.mp3",
+          "bytes": 9072,
+          "sha256": "a822aa9581171d7007e4bd8e5067c151eac56c7f572d40d3f16664c0f5c4ae76",
+          "durationSeconds": 1.512,
+          "activeDurationSeconds": 0.52,
+          "leadingSilenceSeconds": 0.38,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.348206,
+          "rms": 0.037629
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-recognition-1361-era--B.mp3",
+          "bytes": 8784,
+          "sha256": "359b7b939e18bbb374dd7d2a3c9e62f13548eecbd69bed635e5b9d00ce30c19b",
+          "durationSeconds": 1.464,
+          "activeDurationSeconds": 0.46,
+          "leadingSilenceSeconds": 0.38,
+          "trailingSilenceSeconds": 0.624,
+          "peak": 0.28479,
+          "rms": 0.035376
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-recognition-1361-era--C.mp3",
+          "bytes": 8784,
+          "sha256": "1e10e35689e75326310c2a9fe667953456b9fc82f6aa8bede0d20f6837a84b8a",
+          "durationSeconds": 1.464,
+          "activeDurationSeconds": 0.42,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.547546,
+          "rms": 0.071339
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-recognition-1361-era--D.mp3",
+          "bytes": 8928,
+          "sha256": "31ef181363a1d7820a2887784ccc2ad3cd9d907b7ea9262b07ff1eae9a288cb4",
+          "durationSeconds": 1.488,
+          "activeDurationSeconds": 0.48,
+          "leadingSilenceSeconds": 0.38,
+          "trailingSilenceSeconds": 0.628,
+          "peak": 0.346405,
+          "rms": 0.045839
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-recognition-1388-giraffe",
+      "sourceOrder": 1388,
+      "headword": "giraffe",
+      "original": {
+        "path": "wanwei-recognition-1388-giraffe.mp3",
+        "bytes": 4032,
+        "sha256": "898de924e2d0ddb9a5c2d93028f0d8471350b0cf468d9d76f24dbce3096e46ee"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-recognition-1388-giraffe--A.mp3",
+          "bytes": 10368,
+          "sha256": "e6f4e05ceffdf523ce39c2383e7dad7050fda8843711278eecb0220a8aa3edd3",
+          "durationSeconds": 1.728,
+          "activeDurationSeconds": 0.68,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.541992,
+          "rms": 0.073782
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-recognition-1388-giraffe--B.mp3",
+          "bytes": 9792,
+          "sha256": "ea9b7ac003fff32e34ee475335f1563902cc120e91251979244e18d281532fea",
+          "durationSeconds": 1.632,
+          "activeDurationSeconds": 0.58,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.451202,
+          "rms": 0.059779
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-recognition-1388-giraffe--C.mp3",
+          "bytes": 9072,
+          "sha256": "7a2df4a7a439fb1e11ecf46640829c27931cb6bb02728322ea3ed28d3859f3b7",
+          "durationSeconds": 1.512,
+          "activeDurationSeconds": 0.46,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.363464,
+          "rms": 0.045129
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-recognition-1388-giraffe--D.mp3",
+          "bytes": 9504,
+          "sha256": "d719bfc82e2c0002176baca1f46f575f7684e6a81503c7e953c2700ff7efba74",
+          "durationSeconds": 1.584,
+          "activeDurationSeconds": 0.54,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.488037,
+          "rms": 0.059543
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-recognition-1393-grape",
+      "sourceOrder": 1393,
+      "headword": "grape",
+      "original": {
+        "path": "wanwei-recognition-1393-grape.mp3",
+        "bytes": 3168,
+        "sha256": "0ab3e71703c953e2d44d35e2c7d7eadbdff60e19b9968d29f5c0e51d96fec904"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-recognition-1393-grape--A.mp3",
+          "bytes": 8784,
+          "sha256": "a30d0b9604260c1cbe145f6b06ddd367edc15ff5264209a94cbdd1db2099ba2d",
+          "durationSeconds": 1.464,
+          "activeDurationSeconds": 0.4,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.624,
+          "peak": 0.438599,
+          "rms": 0.044347
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-recognition-1393-grape--B.mp3",
+          "bytes": 8496,
+          "sha256": "c2e616c8e1c84f0936663a9c5a4ced420a833376925e785692cc9e28729e6d43",
+          "durationSeconds": 1.416,
+          "activeDurationSeconds": 0.36,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.441925,
+          "rms": 0.042667
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-recognition-1393-grape--C.mp3",
+          "bytes": 8496,
+          "sha256": "84ad69ff367976ee2ebf6354c5351f356e4fe5ea03946457f0d3139eaabbd452",
+          "durationSeconds": 1.416,
+          "activeDurationSeconds": 0.36,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.58316,
+          "rms": 0.056206
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-recognition-1393-grape--D.mp3",
+          "bytes": 9504,
+          "sha256": "8fcf12e3e09fe3dd38eb8c3145e29479ec0bce6c2ba88e2aead6aaa40c3c380c",
+          "durationSeconds": 1.584,
+          "activeDurationSeconds": 0.52,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.624,
+          "peak": 0.570282,
+          "rms": 0.067335
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-recognition-1458-mrs--ame-mrs---",
+      "sourceOrder": 1458,
+      "headword": "Mrs (AmE Mrs. )",
+      "original": {
+        "path": "wanwei-recognition-1458-mrs--ame-mrs---.mp3",
+        "bytes": 5760,
+        "sha256": "fd136f44dc732e38d075646a30df37305be7751d0de8f6e296698b40cc639fa1"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-recognition-1458-mrs--ame-mrs-----A.mp3",
+          "bytes": 10800,
+          "sha256": "ace8f1920ceb610a4dab3a17619cb3d06046b42bdd0a1ffef243fc818d7def41",
+          "durationSeconds": 1.8,
+          "activeDurationSeconds": 0.8,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.56,
+          "peak": 0.527557,
+          "rms": 0.077377
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-recognition-1458-mrs--ame-mrs-----B.mp3",
+          "bytes": 9360,
+          "sha256": "f48bbd48f76515b91a2a285a2e27a4341b3d04fd0d1d90af8326733a30f72d96",
+          "durationSeconds": 1.56,
+          "activeDurationSeconds": 0.52,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.6,
+          "peak": 0.539429,
+          "rms": 0.0713
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-recognition-1458-mrs--ame-mrs-----C.mp3",
+          "bytes": 8928,
+          "sha256": "0e5ac01da06da12a1c7884f9e45fcc09d5d3bf783ffbd6e6e87892591c2822a7",
+          "durationSeconds": 1.488,
+          "activeDurationSeconds": 0.44,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.640869,
+          "rms": 0.078042
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-recognition-1458-mrs--ame-mrs-----D.mp3",
+          "bytes": 13968,
+          "sha256": "88b56e9d7f2de3eae4561877c87fe4f07e160895ad85986aff272e0bbb931e97",
+          "durationSeconds": 2.328,
+          "activeDurationSeconds": 1.3,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.588,
+          "peak": 0.500702,
+          "rms": 0.067461
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-recognition-1459-ms--ame-ms---",
+      "sourceOrder": 1459,
+      "headword": "Ms (AmE Ms. )",
+      "original": {
+        "path": "wanwei-recognition-1459-ms--ame-ms---.mp3",
+        "bytes": 8352,
+        "sha256": "79effe1b0749ef2a60da4e502f9729ff73832dd4719f0a9f7f9459d8d5c3373c"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-recognition-1459-ms--ame-ms-----A.mp3",
+          "bytes": 9072,
+          "sha256": "a8e495c36e912d30c52119884a8908058777dce6c64f3520d3ea5559d772460e",
+          "durationSeconds": 1.512,
+          "activeDurationSeconds": 0.46,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.455688,
+          "rms": 0.061286
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-recognition-1459-ms--ame-ms-----B.mp3",
+          "bytes": 9360,
+          "sha256": "820e8862fbb60718b28e60aa53f92125c739d2d4dbe6f6d102492779a2a20d35",
+          "durationSeconds": 1.56,
+          "activeDurationSeconds": 0.5,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.439789,
+          "rms": 0.065794
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-recognition-1459-ms--ame-ms-----C.mp3",
+          "bytes": 8352,
+          "sha256": "483f1220212612c9fe801cfaacd3331515025a56081105db52b8393747cc0582",
+          "durationSeconds": 1.392,
+          "activeDurationSeconds": 0.4,
+          "leadingSilenceSeconds": 0.38,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.396667,
+          "rms": 0.046512
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-recognition-1459-ms--ame-ms-----D.mp3",
+          "bytes": 8208,
+          "sha256": "c0ee1c4727d1bae905c1e9dd607c5a1bcc1b1159d726de3c4b24aba4bc16accf",
+          "durationSeconds": 1.368,
+          "activeDurationSeconds": 0.38,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.548,
+          "peak": 0.497864,
+          "rms": 0.072941
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-recognition-1460-mutton",
+      "sourceOrder": 1460,
+      "headword": "mutton",
+      "original": {
+        "path": "wanwei-recognition-1460-mutton.mp3",
+        "bytes": 4608,
+        "sha256": "1310c4a1fdf44a0558b57d5a1495bc00ed09d7d170bbc0cf02dc77c63547e321"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-recognition-1460-mutton--A.mp3",
+          "bytes": 9360,
+          "sha256": "f8e2ab1421ae846a2ec31f496b479791757bde4603b06ca25fd24b1d68e39948",
+          "durationSeconds": 1.56,
+          "activeDurationSeconds": 0.5,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.48465,
+          "rms": 0.056326
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-recognition-1460-mutton--B.mp3",
+          "bytes": 9072,
+          "sha256": "74fa5917d158242ec498877c88cda037dbf3650a69e298c9d4fad2eb1cd478b2",
+          "durationSeconds": 1.512,
+          "activeDurationSeconds": 0.46,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.5383,
+          "rms": 0.064807
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-recognition-1460-mutton--C.mp3",
+          "bytes": 8784,
+          "sha256": "284dd69a367fddf50eea03f02e22d9515c1fc8989452efbffbc1245d87a8bab8",
+          "durationSeconds": 1.464,
+          "activeDurationSeconds": 0.42,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.625397,
+          "rms": 0.064916
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-recognition-1460-mutton--D.mp3",
+          "bytes": 10944,
+          "sha256": "8e8d791cc0d40e7b475fa239d6744f0ac01bdd15350da0c827af4555f11b17d5",
+          "durationSeconds": 1.824,
+          "activeDurationSeconds": 0.78,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.51178,
+          "rms": 0.081539
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-recognition-1487-per-cent--ame-percent-",
+      "sourceOrder": 1487,
+      "headword": "per cent (AmE percent)",
+      "original": {
+        "path": "wanwei-recognition-1487-per-cent--ame-percent-.mp3",
+        "bytes": 9792,
+        "sha256": "710789f881edee65f2f6e2db7dc998f3110022186ab8c5aed96a5573a06f2c0b"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-recognition-1487-per-cent--ame-percent---A.mp3",
+          "bytes": 9504,
+          "sha256": "19910475adf7be29aed139cd5cf64180d5b45b1a8d0eb33d96a1c8746ada6693",
+          "durationSeconds": 1.584,
+          "activeDurationSeconds": 0.54,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.516296,
+          "rms": 0.052802
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-recognition-1487-per-cent--ame-percent---B.mp3",
+          "bytes": 9216,
+          "sha256": "1a8fb2ad6abeffe61442f454b1e0b539362c18797a3c89cff51efa3d226e2a64",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.52,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.576,
+          "peak": 0.360413,
+          "rms": 0.039594
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-recognition-1487-per-cent--ame-percent---C.mp3",
+          "bytes": 8928,
+          "sha256": "774df9c71bd9d575125161e8ddd4ffd0e53995aaa9cf596993851ee4d44cb0ab",
+          "durationSeconds": 1.488,
+          "activeDurationSeconds": 0.48,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.568,
+          "peak": 0.424805,
+          "rms": 0.045908
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-recognition-1487-per-cent--ame-percent---D.mp3",
+          "bytes": 15120,
+          "sha256": "15d1e3e2c6442c6e403768bfc8acb7ddf0ef09fd43aaadbcb3c13337b5838889",
+          "durationSeconds": 2.52,
+          "activeDurationSeconds": 1.52,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.56,
+          "peak": 0.385345,
+          "rms": 0.046195
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-recognition-1582-violin",
+      "sourceOrder": 1582,
+      "headword": "violin",
+      "original": {
+        "path": "wanwei-recognition-1582-violin.mp3",
+        "bytes": 6192,
+        "sha256": "3e2115aedf061be5a3b11a0f0c6f0c2daa5c53460b39b5133db06562bdfb8cdd"
+      },
+      "candidates": [
+        {
+          "label": "A",
+          "seed": 1103,
+          "path": "wanwei-recognition-1582-violin--A.mp3",
+          "bytes": 10224,
+          "sha256": "ef893053bbbafbf9af4095997a8c93317568fb488995e7ac674ebe768a62aa0b",
+          "durationSeconds": 1.704,
+          "activeDurationSeconds": 0.66,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.63678,
+          "rms": 0.075668
+        },
+        {
+          "label": "B",
+          "seed": 2207,
+          "path": "wanwei-recognition-1582-violin--B.mp3",
+          "bytes": 9504,
+          "sha256": "9968aac999011db5e13c6c5e88f8e8c0b0b031ff8f5d11bf652dbb76faf2169f",
+          "durationSeconds": 1.584,
+          "activeDurationSeconds": 0.54,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.604,
+          "peak": 0.644928,
+          "rms": 0.077632
+        },
+        {
+          "label": "C",
+          "seed": 3301,
+          "path": "wanwei-recognition-1582-violin--C.mp3",
+          "bytes": 10512,
+          "sha256": "1f3b91d97d3dd2d7c1f36e8569a993b303d41c0dc62cfc25bdfca35014706916",
+          "durationSeconds": 1.752,
+          "activeDurationSeconds": 0.7,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.581604,
+          "rms": 0.082985
+        },
+        {
+          "label": "D",
+          "seed": 4409,
+          "path": "wanwei-recognition-1582-violin--D.mp3",
+          "bytes": 10368,
+          "sha256": "e9d8c25d2a60cbead24f641140cc2ccfdd25d60c0084ff3e50dbf88728079648",
+          "durationSeconds": 1.728,
+          "activeDurationSeconds": 0.68,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.64563,
+          "rms": 0.089318
+        }
+      ]
+    }
+  ]
+}

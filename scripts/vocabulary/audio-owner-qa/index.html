@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>万唯一轮语音人工质检</title>
+    <link rel="stylesheet" href="/shared-tokens.css" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <!--
+      THESIS: One word and one judgment at a time; no dashboard wall.
+      OWN-WORLD: Existing neutral tool surfaces, ink text, and restrained green actions.
+      STORY: The owner hears the frozen original, marks it, and moves on without losing progress.
+      FIRST VIEWPORT: Progress above one large word card; pass/problem are the primary actions.
+      FORM: Focused keyboard-operated inspection instrument inside the established EQBank world.
+      FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+    -->
+    <main class="qa-shell">
+      <header class="qa-header">
+        <div>
+          <h1>语音人工质检</h1>
+          <p class="subtitle">只判断正式原版。第一遍先把有问题的词挑出来。</p>
+        </div>
+        <div class="save-status" id="save-status" aria-live="polite">正在读取进度</div>
+      </header>
+
+      <section class="progress-panel" aria-label="质检进度">
+        <div class="progress-copy">
+          <span><strong id="reviewed-count">0</strong> / 1600 已听</span>
+          <span id="day-progress">Day 1 · 0 / 0</span>
+        </div>
+        <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progress-fill"></div></div>
+        <div class="progress-stats">
+          <span>通过 <strong id="pass-count">0</strong></span>
+          <span>有问题 <strong id="problem-count">0</strong></span>
+          <span>待听 <strong id="pending-count">1600</strong></span>
+        </div>
+      </section>
+
+      <section class="word-card" aria-labelledby="word-heading">
+        <div class="word-meta">
+          <span id="word-order">第 1 词</span>
+          <span id="word-day">核心词 · Day 1</span>
+          <span class="decision-mark" id="decision-mark">待判断</span>
+        </div>
+
+        <div class="word-content">
+          <div>
+            <div class="word-heading" id="word-heading" role="heading" aria-level="2">—</div>
+            <p class="phonetic" id="word-phonetic">—</p>
+          </div>
+          <div class="meaning">
+            <span id="word-part-of-speech">—</span>
+            <strong id="word-sense">—</strong>
+          </div>
+        </div>
+
+        <p class="audio-error" id="audio-error" role="alert" hidden>这条音频没有成功载入，请重播；仍失败就标为有问题。</p>
+        <audio id="word-audio" preload="auto"></audio>
+
+        <div class="primary-controls">
+          <button class="control-button pass" id="pass-button" type="button"><span>通过</span><kbd>↑</kbd></button>
+          <button class="control-button problem" id="problem-button" type="button"><span>有问题</span><kbd>↓</kbd></button>
+        </div>
+
+        <div class="secondary-controls">
+          <button id="undo-button" type="button"><span>撤销上一项</span><kbd>←</kbd></button>
+          <button id="replay-button" type="button"><span>重播当前词</span><kbd>→</kbd></button>
+          <button id="play-button" type="button"><span>播放 / 暂停</span><kbd>空格</kbd></button>
+        </div>
+      </section>
+
+      <footer class="qa-footer">
+        <p>↑ 通过后自动进入下一词；↓ 只做标记，暂不处理重生成。</p>
+        <div class="footer-actions">
+          <form id="jump-form" class="jump-form">
+            <label for="jump-order">跳到</label>
+            <input id="jump-order" type="number" min="1" max="1600" inputmode="numeric" />
+            <button type="submit">前往</button>
+          </form>
+          <button id="export-button" type="button">导出当前结果</button>
+        </div>
+      </footer>
+    </main>
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

@@ -1,0 +1,331 @@
+# 万唯一轮 1600 词闭环 Goal 执行规范
+
+- **状态**：Owner decisions locked; ready for Goal execution
+- **规划基线**：`codex/paper-canonical-unification-20260725@80379bff9754cc57c355dfcb41438974464e631d`
+- **Goal 终点**：完整闭环达到 `QA Ready`，不 commit、不部署
+- **范围权威**：Owner 当前要求与仓库 `AGENTS.md` 高于本文件；本文件高于历史交接和校准期临时范围
+
+## 1. 目标与范围
+
+打通完整教师工作流：
+
+> 万唯 1600 词入库 → 教师按源书顺序过词 → 收集任意 1–60 个生词 → 冻结 Vocabulary Set → 打印两栏三行单词纸 → 第一页二维码 → 学生扫码听写 → 教师重印、复制或撤销分享。
+
+完整词库以源书为权威：
+
+- Part I 核心掌握词：477
+- Part II 基础识记词：764
+- Part III 认识拓展词：359
+
+以上是原书封面采用的“词数”口径。实际逐 Day 编号、并按产品约定把
+`a/an`、`actor/actress` 等组合保留为一张卡后，1600 个可操作词条的阶段分布是
+**476 / 766 / 358**。数据同时保存 `advertisedWordCounts` 与 `entryCounts`，不得为
+凑封面数字篡改词条所属页或拆开组合词。
+- 总计：1600
+
+源文件：
+
+- `/Users/huangxuewei/Desktop/AI与工具/技术问答/万唯系列中考词汇一轮梳理.pdf`
+- `/Users/huangxuewei/Downloads/会林-课标生词-8月1日.pdf`
+- 参考播放器：`https://app.smartschool.chat/xingypbfqypbfq?id=53740`
+
+`/tmp/eqb-vocabulary-qr-player-handoff-2026-08-07.md` 继续提供参考页观察和 30 词现状，但其中“本轮只做 30 词图片”的旧范围已被本规范取代。当前 30 词仍是必须保留的黄金样本和端到端 Canary。
+
+明确不做：
+
+- 不扩展题库、Canonical Paper、PaperSurface 或其他产品域。
+- 不做微信小程序、学生账号、输入拼写评分、二维码管理后台或整组 MP3 导出。
+- 不在网站运行 AI、OCR、选图或 TTS；内容生产全部在离线管线完成。
+- 不把系统限制为固定 15 词；15 只是首次默认收词目标。
+- 不重新设计已经验收的 ↑认识、↓收生词、←撤销、→看提示流程。
+
+## 2. 已锁定的 Owner 决策
+
+### 2.1 例句
+
+- 例句由离线模型生成，独立模型复核，再经过确定性规则检查。
+- 必须命中当前 `teachingSense`，自然、简短、适合初中生理解。
+- 疑难项由 Goal 内持续返工直到通过，不逐条打断 Owner。
+- Owner 只在最终 QA 按 Day 抽验，抽验不是全量生产的中途审批。
+- 例句与译文进入提示卡和打印卡；首版扫码播放器首屏不展示例句，也不朗读例句。
+
+### 2.2 读音与音节
+
+- 只做音节拆分，不做音素拆分。
+- `syllables` 保存为有序数组；页面紧凑并排显示，整词 IPA 单独保留。
+- `a / an` 等多形式条目使用 `forms`，不伪造音节。
+- 音节片段重新拼接后必须与规范化 headword 一致。
+
+### 2.3 正式语音
+
+- 扫码播放器提供美音、英音两套固定资产；默认美音，教师和学生可切换，不在运行时合成。
+- 美音继续使用已完成质检的历史内部版本 `eqb-british-teacher-v1`；这个内部 ID 不再改名，产品界面只显示“美音”。
+- 英音固定为 `eqb-british-cori-high-v1`：Qwen3-TTS Base 使用冻结的 Piper Cori High 官方样音作为合成参考，不对应任何真人。
+- 本机运行时固定为 `mlx-audio==0.4.7`；VoiceDesign 6bit revision 为 `ffc6545dc9cb086950aa46c6cd3db490e6ece3e1`，Base 6bit revision 为 `34ff5318365b59cba9c03ff729f2eee0814caf72`。
+- 冻结证据至少保存：声音设计描述、参考文本、参考 WAV、上述版本与 revision、生成参数、参考 WAV SHA-256、Owner 听感批准和每份正式资产 SHA-256。
+- 输出固定为 24 kHz、48 kbit/s、单声道 MP3，使用正常语速和音高。
+- 每个词预生成一个版本化音频文件；运行时不得调用 TTS 或 `speechSynthesis`。
+- 正式管线完全离线运行，不读取云密钥、不调用第三方 TTS 接口，也不得使用真人、学生、未成年人或名人参考音频。
+- 批量生成前必须先通过孤立词黄金集：超短词、同形异音词、英式元音词、复数变体和缩写均检查起音、尾音、重音、英式元音与目标词义读音。少数歧义词允许使用版本化文本覆写，但不得在网页运行时猜测读音。
+- 每套口音均要求 1600 份正式 MP3。英音由 Owner 逐词听完，并以 `1525 原版 + 69 + 4 + 2 修复版` 完成四层选择闭环；试听参考句不能代替单词资产。
+
+### 2.4 图片
+
+- 每个 Vocabulary Entry 永久绑定一个独立 Koboyo SVG。
+- 不允许 1600 词共享少量通用图，不允许运行时重新选图。
+- 抽象词使用容易理解的具体场景表达教学常见义，不以装饰符号替代语义。
+- 全站禁止 Emoji。
+- 资产保存在 `app/public/vocabulary-assets/wanwei-round-one-v1/`，由集中 manifest 管理路径、版本、中文 alt 和教学场景说明。
+- 当前 30 词已经确认的图片字节与映射应保留并迁入完整版本。
+
+## 3. 数据与领域合同
+
+### 3.1 共享数据
+
+`question-bank.sqlite` 保存所有用户共同消费的版本化 Vocabulary Program、Group、Entry、教学内容与资产引用。
+
+稳定 Entry ID 根据 Program、阶段和源书位置生成，不假设 headword 全书唯一。每个 `VocabularyEntry` 至少包含：
+
+```ts
+type VocabularyEntry = {
+  id: string
+  headword: string
+  phonetic: string
+  partOfSpeech: string
+  sourceMeanings: string[]
+  teachingSense: string
+  syllables: string[]
+  pronunciationMode: 'syllables' | 'forms'
+  example: {
+    english: string
+    chinese: string
+    highlight: string
+    reviewStatus: 'approved'
+  }
+  visual: {
+    key: string
+    version: string
+    path: string
+    alt: string
+  }
+  audio: {
+    key: string
+    version: string
+    path: string
+    voice: 'eqb-british-teacher-v1'
+  }
+  source: {
+    title: string
+    edition: string
+    stage: 'core' | 'basic' | 'recognition'
+    day: number
+    sourceOrder: number
+    printedPage: number
+    verification: 'page-checked'
+  }
+}
+```
+
+OCR 只用于发现文字；词形、音标、词性、释义、阶段、顺序和来源页必须回到扫描页核对。无法确认的条目不得用猜测补齐。
+
+### 3.2 用户数据
+
+`user-data.sqlite` 保存：
+
+- 教师管理的学生档案；学生不创建账号，也不进入教师后台
+- 每用户、每学生、每 Program 的主进度和上次目标数
+- Vocabulary Review Run 与 Review Decision
+- Vocabulary Set 与 Vocabulary Set Entry Snapshot
+- Vocabulary Share
+
+教师首次进入时自动获得“默认学生”。本功能上线前已经存在的进度、Run、Set
+和 Share 必须原样迁入该默认档案；迁移不得丢失冻结顺序或使旧二维码失效。
+教师可以新建和切换学生，同一教师下不同学生的进度、Run 和 Set 必须严格隔离。
+首版不提供永久删除学生档案，避免误删长期学习记录。
+
+`VocabularySet` 是冻结、有序的结果。Set Entry 必须保存生成时的 headword、IPA、1–3 组来源核心义、教学常见义、音节、例句、图片版本和音频版本快照，后续词库更新不得让旧单词纸或二维码内容漂移。旧快照没有 `sourceMeanings` 时回退到 `teachingSense`，不能因此失效。
+
+`shareId` 使用加密安全的 URL-safe 随机值，不包含用户或 Set 的顺序信息；长期有效，直到教师撤销。
+撤销后的旧 `shareId` 永不复活；同一 Set 再次分享时生成新的随机 ID。
+
+## 4. 服务接口与权限
+
+认证接口提供：
+
+- 获取和创建当前教师的学生档案。
+- 获取 Program 与主进度。
+- 创建、恢复和更新 Review Run。
+- 达到目标后冻结 Vocabulary Set。
+- 获取最近 Sets 和 Set 详情。
+- 修改 Set 名称；该名称同时用于最近生词组、单词纸标题和下载文件名。
+- 创建、复制或撤销 Set 分享。
+
+公开接口固定为：
+
+```text
+GET /api/public/vocabulary/listen/:shareId
+```
+
+它只返回播放器需要的冻结词条、顺序、图片和音频信息，不返回教师身份、学生姓名、学生 ID、内部用户 ID、Review Run 或其他 Sets。
+
+公开页面固定为：
+
+```text
+/vocabulary/listen/:shareId
+```
+
+该路由在 `AuthGate` 之前分流；其他页面继续使用现有认证边界。未知分享与已撤销分享使用克制的公开失效状态，不泄露所属用户。
+
+## 5. 教师过词与生词集
+
+- 教师先选择当前学生；切换后只读取该学生的主进度、未结束 Run 和最近 Sets。
+- 教师可在同一页紧凑地新建学生档案；创建后自动切换到该学生的全新进度。
+- 每次 Review Run 和直接输入生成的 Set 都必须绑定当前学生，不能只依赖浏览器本地状态判断归属。
+- 每轮开始输入目标生词数 `1–60`；首次默认 15，以后默认上一次选择。
+- 每个学生只有一条 Program 主进度；开始页不再提供阶段、Week 或 Day 跳转，默认从服务器记录的未结束 Run 或主游标继续。
+- 过词页左栏只读展示当前 Week、阶段和 Day 位置，不承担跳转。教师可“暂停并返回”，再次进入时必须恢复同一 Run、游标、判断和已收生词。
+- 新词出现时自动播放一次；空格重播，Enter 表示认识，Shift 表示不认识，Delete / Backspace 撤销，右方向键查看提示。按住按键不得连续跳词，输入框聚焦时快捷键不得触发。
+- 开始过词处提供克制的“美音 / 英音”选择，并在当前浏览器记住上次选择；自动播放、手动重播、提示卡音标和音节拆分必须跟随该选择。
+- 每次判断后把进度持久化到服务器；本地缓存不能成为唯一权威。
+- 达到目标时不自动生成，教师点击后才冻结 Vocabulary Set。
+- 同一“过生词”入口允许教师粘贴已有单词，直接生成 `1–60` 词的固定 Vocabulary Set；输入界面以中文逗号分隔为主。
+- 直接输入只做当前 1600 词库的确定性匹配：按首次有效输入保留顺序，按 Entry 去重，明确列出未收录项，不用模糊匹配猜测错词。
+- 直接输入生成的 Set 不创建 Review Run 或 Review Decision，不改变主过词进度，并与过词生成的 Set 共用打印、二维码、公开听写、重印和撤销分享流程。
+- 最近生词集直接展示其中词目，支持打开、改名、下载 PDF、复制公开链接和撤销分享。
+- 30 词校准样本是 Canary，但所有合同从第一天支持完整 Program 和 1–60 词 Set；Canary 通过后 Goal 自动继续全量工作，不等待新的 Owner 决策。
+
+## 6. 打印单词纸
+
+- 固定 A4、两栏三行，每页六张卡，按从左到右、从上到下排列。
+- 最后一页不足六词时保留空位，不拉伸或重新分配。
+- 单词字号采用已确认的较大一级版本。
+- 每张卡包含正式图片、单词、紧凑音节、整词 IPA、词性、1–3 组来源核心义、例句和译文；例句仍对应 `teachingSense`。
+- 图片使用 `object-fit: contain`，不裁切、不变形，不以低分辨率截图替代 SVG。
+- 第一页右下角预留 22 mm 二维码区域，不覆盖卡片；后续页不重复二维码。
+- QR 在本地生成并直接编码稳定公开 URL，不调用远程二维码服务。
+- Screen 提示卡、打印和播放器消费同一份 Entry/Set 资产版本，不分别重建词义和顺序。
+
+## 7. 公开扫码播放器
+
+参考页只提供“当前词卡 → 播放控制 → 完整词表”的行为骨架。本站保持纸张感、黑灰文字和单一克制强调色，不复制紫色通用卡片外观。
+
+首屏当前词卡包含正式图片、headword、紧凑音节、整词 IPA、词性和 `teachingSense`。
+
+播放器固定行为：
+
+- 第一次用户点击后才播放。
+- 重复次数支持 1、2、3，默认 2。
+- 同词两次发音间隔 0.8 秒，不同词之间间隔 2 秒。
+- 支持上一词、播放/暂停、下一词、音量、整组进度、当前序号和完整词表。
+- 播放中手动切词立即取消旧音频和所有计时，从新词继续播放。
+- 暂停或未播放时切词只改变选中词，不擅自发声。
+- 暂停立即取消当前播放和全部等待任务，不允许后台继续推进。
+- 播完末词停留在末词，显示“本组听完 / 从头播放”。
+- 当前卡、进度和列表高亮始终同步，并把当前行带入可视区。
+- 音频失败时暂停并显示重试，不静默跳词。
+- 使用一个复用的 `<audio>` 和显式状态机。
+- 所有操作使用真实 `button`、`range`、可见焦点和准确中文 `aria-label`。
+
+手机端使用正常页面滚动；完整词表不设置固定高度嵌套滚动。主控制离开视口后显示紧凑粘性播放栏，但不得产生两套播放状态。
+
+## 8. 离线生产与资产审计
+
+离线管线必须可恢复、可重复、可审计：
+
+- OCR/import 生成带来源页的候选数据和差异报告。
+- 音节和例句分别保存候选、复核结果与最终批准值。
+- Koboyo 选图保存 `visualKey`、查询意图、SVG 文件、版本与中文语义。
+- Qwen Base 音频按 Entry ID 输出，复用同一冻结参考音，支持断点续跑、缺失重试和最终 manifest。
+- 所有生成器只写明确的版本目录，不覆盖上一版本。
+
+自动审计必须证明：
+
+- 原书标称词数 477 / 764 / 359 与实际词条数 476 / 766 / 358 均被记录；词条总数为 1600
+- 1600 个 Entry 均有来源位置
+- 1600 个唯一视觉绑定
+- 1600 条非空准确中文 alt
+- 1600 条通过审核的例句与译文
+- 1600 个 `eqb-british-teacher-v1` MP3
+- manifest 无孤儿、重复路径或缺失文件
+
+## 9. Goal 实施顺序
+
+1. **保护基线**：记录 branch、HEAD、dirty files，验证现有 30 词页面和打印现状。
+2. **30 词闭环竖切**：接通数据库、Review Run、冻结 Set、分享、QR、公开播放器和正式数据合同。
+3. **完整源书入库**：OCR 后逐页核对，保留标称 477 / 764 / 359，并达到实际词条 476 / 766 / 358 / 1600。
+4. **全量教学内容**：完成 teachingSense、音节、例句、译文及自动复核。
+5. **全量正式图片**：用 Koboyo MCP 完成 1600 个唯一 SVG 和 manifest。
+6. **全量正式音频**：先用已锁定 `eqb-british-teacher-v1` 通过孤立词黄金集，再由本地 Qwen Base 管线生成 1600 个 MP3。
+7. **完整教师体验**：接入每学生单一主进度、暂停恢复、1–60 目标、最近 Sets、改名、下载和撤销。
+8. **打印和 H5 完整化**：覆盖 1、15、60 词 Set、分页、二维码、移动播放器和失效状态。
+9. **验证与修复**：完成自动测试、真实浏览器、打印 PDF、视觉审查和独立 Standards/Spec review。
+10. **QA Ready**：准备准确 URL、数据、登录与首屏，不 commit、不部署。
+
+每一步都必须产生可使用、可验证的结果；不得建造只有最后一步才可运行的大型半成品。
+
+## 10. 验证与完成证据
+
+自动验证覆盖：
+
+- Program 数量、阶段、Day、顺序和来源页。
+- Review Run 暂停恢复、同学生单一主进度与直接输入 Set 不推进主游标。
+- 旧数据迁入默认学生；学生创建、切换、进度、Run 与 Set 相互隔离。
+- 目标值边界 1、15、60。
+- Set 顺序与内容冻结。
+- 用户隔离、学生隔离、分享不可猜、撤销和公开数据最小化。
+- 播放器暂停竞态、跳词、重复、末词完成和错误重试。
+- 打印每页六词、row-major、末页空位和 QR 仅首页。
+- SVG、alt、例句、MP3 与 manifest 全量完整性。
+
+真实检查覆盖：
+
+- 当前 30 词提示卡。
+- 桌面创建/切换学生、独立过词、完成状态和最近 Sets。
+- 390 px 手机端过词与扫码播放器。
+- 1、15、60 词播放器。
+- A4 打印预览与实际 PDF。
+- PDF 每页栅格检查裁切、变形、模糊、溢出、二维码尺寸和异常空白。
+- 微信 iOS、微信 Android 和系统浏览器；无法取得真机时必须报告 `SKIP`，不得写成 `PASS`。
+
+视觉质量：
+
+- 用 Impeccable 审查层级、纸张感、响应式、打印和无障碍。
+- 用 Emil 准则审查播放状态、反馈、粘性控件和动效。
+- 保持专业、温暖、克制方向；不使用 Emoji、糖果色、玻璃拟态或营销式界面。
+
+最终命令：
+
+```bash
+pnpm -C app build
+node scripts/verify-motion-tokens.mjs
+# 相关聚焦行为与数据测试
+git diff --check
+pnpm -C app verify:all
+```
+
+- 当前工作树明确不运行 `pnpm -C app verify:changed`。
+- 因涉及认证旁路、用户隔离、持久化和公开接口，最终候选运行一次完整 `verify:all`。
+- 最终进行一次独立 Standards/Spec review。
+- `SKIP`、凭据缺失、真机缺失和外部限制必须逐字报告。
+
+## 11. 完成条件与 Owner Gate
+
+只有下列条件全部有当前证据时，Goal 才可完成：
+
+- 1600 条词准确入库并通过来源审计。
+- 1600 个独立 SVG、例句、音节和正式 `eqb-british-teacher-v1` MP3 完整。
+- 教师可以过词、冻结 1–60 词 Set、重印、分享和撤销。
+- 打印 PDF 和公开扫码播放器消费同一冻结 Set。
+- 桌面、移动、打印和公开页面完成真实检查。
+- 规定命令与独立审查完成，结果如实记录。
+- Owner QA 已准备到可直接体验的状态。
+
+Goal 停在：
+
+```text
+QA Ready: yes
+Commit: not created
+Production deploy: not performed
+```
+
+Owner 最终只保留两个授权动作：是否 commit，以及是否部署生产。二者都不属于本 Goal 的自动权限。

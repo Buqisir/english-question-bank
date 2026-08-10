@@ -33,6 +33,9 @@ import { createPaperSurfaceAnalysisAvailability } from './search/paperSurfaceAva
 import { createTeachingFacetIndex, createTeachingFacetRoutes } from './search/teachingFacets.mjs'
 import { createSimilarQuestionsStore, createSimilarQuestionsRoutes } from './search/similarQuestions.mjs'
 import { createTopicLabelBackfillRoutes } from './topic-labels/topicLabelBackfillRoutes.mjs'
+import { createVocabularyRoutes } from './vocabulary/vocabularyRoutes.mjs'
+import { renderVocabularySetPdf } from './vocabulary/vocabularyPdfRenderer.mjs'
+import { ensureSharedVocabularyShape, ensureUserVocabularyShape } from './vocabulary/vocabularyStore.mjs'
 import { parseJsonFromString, getDeepSeekMessageText, collectDeepSeekMessageTexts, parseLooseVerifyResult, extractVerifyResultFromPayload, extractReadingParsePayloadFromPayload, extractFirstJson, safeTruncate } from './ai-providers/jsonExtraction.mjs'
 import { createCompletionRunner } from './ai-providers/completionRunner.mjs'
 import { createDailyLimitCounter, resolveDailyLimit } from './ai-providers/dailyLimitCounter.mjs'
@@ -53,6 +56,7 @@ const userSpaceFilesDir = process.env.QUESTION_BANK_USER_SPACE_ROOT || path.join
 const promptsDir = path.join(__dirname, 'prompts')
 const verifyAuditLogPath = path.join(rootDir, 'server', 'logs', 'verify-audit.log')
 const port = Number(process.env.QUESTION_BANK_API_PORT || 8787)
+const vocabularyAppOrigin = process.env.QUESTION_BANK_PUBLIC_ORIGIN || 'https://eqbank.cc'
 const paperSurfaceAnalysisAvailability = createPaperSurfaceAnalysisAvailability({ paperAssetsDir })
 const teachingFacetIndex = createTeachingFacetIndex({ paperAssetsDir })
 const similarQuestionsStore = createSimilarQuestionsStore({ getTeachingFacetIndex, paperAssetsDir })
@@ -76,6 +80,7 @@ const serverContext = {
   readJsonBody,
   loadCanonicalConsumption,
   sendPdf: exportImplementation.sendPdf,
+  renderVocabularySetPdf: (input) => renderVocabularySetPdf({ ...input, origin: vocabularyAppOrigin }),
   sendJson,
   bindTopicLabelsToQuestionGroup,
   createPaperSet,
@@ -538,6 +543,7 @@ const serverRoutes = [
   ...createTeachingFacetRoutes(),
   ...createSimilarQuestionsRoutes(),
   ...createTopicLabelBackfillRoutes(),
+  ...createVocabularyRoutes(),
   // D1 (grammar-facets-v2): I16·C verb-profile sidecar + its backfill route
   // retired — tense/voice/agreementSensitive now live on the grammar-fill-
   // analysis-v2 blank entry itself (server/search/teachingFacets.mjs).
@@ -782,6 +788,7 @@ export function ensureUserDatabaseShape(db) {
   `)
   ensureMySpaceDatabaseShape(db)
   ensureAuthDatabaseShape(db)
+  ensureUserVocabularyShape(db)
 
   const userVersionRow = db.prepare('PRAGMA user_version').get()
   const userVersion = Number(userVersionRow?.user_version || 0)
@@ -910,6 +917,7 @@ function ensureDatabaseShape() {
   const db = new DatabaseSync(dbPath, { readOnly: false })
   try {
     db.exec('PRAGMA foreign_keys = ON')
+    ensureSharedVocabularyShape(db)
     db.exec(`
       CREATE TABLE IF NOT EXISTS reading_parse_results (
         id TEXT PRIMARY KEY,
@@ -3926,6 +3934,7 @@ const AUTH_PUBLIC_ROUTES = [
   { method: 'POST', pattern: /^\/api\/auth\/login$/ },
   { method: 'GET', pattern: /^\/api\/auth\/me$/ },
   { method: 'GET', pattern: /^\/api\/health$/ },
+  { method: 'GET', pattern: /^\/api\/public\/vocabulary\/listen\/[^/]+$/ },
 ]
 
 function isAuthPublicRoute(method, pathname) {

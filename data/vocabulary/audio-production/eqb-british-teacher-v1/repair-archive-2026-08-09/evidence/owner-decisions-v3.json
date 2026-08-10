@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "wanwei-vocabulary-audio-repair-owner-decisions-v3",
+  "decidedAt": "2026-08-09",
+  "selected": [
+    {
+      "entryId": "wanwei-basic-0483-according--to-",
+      "headword": "according (to)",
+      "candidate": "I"
+    },
+    {
+      "entryId": "wanwei-basic-0609-chore",
+      "headword": "chore",
+      "candidate": "L"
+    },
+    {
+      "entryId": "wanwei-basic-1181-video",
+      "headword": "video",
+      "candidate": "L"
+    }
+  ],
+  "unresolved": [
+    "wanwei-core-0085-create",
+    "wanwei-core-0204-increase"
+  ]
+}

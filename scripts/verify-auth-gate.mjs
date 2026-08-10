@@ -25,10 +25,17 @@
 //       after disabling, without needing to log out first).
 import { spawn } from 'node:child_process'
 import { mkdtempSync, rmSync } from 'node:fs'
+import { createServer } from 'node:net'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { DatabaseSync } from 'node:sqlite'
+import {
+  ensureSharedVocabularyShape,
+  ensureUserVocabularyShape,
+  listVocabularyStudents,
+  replaceVocabularyProgram,
+} from '../server/vocabulary/vocabularyStore.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
@@ -49,7 +56,21 @@ function assert(name, condition, details = '') {
 const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-verify-auth-gate-'))
 const dbPath = path.join(tempRoot, 'question-bank.sqlite')
 const userDataDbPath = path.join(tempRoot, 'user-data.sqlite')
-const apiPort = 9891
+
+async function freePort() {
+  const server = createServer()
+  await new Promise((resolve, reject) => {
+    server.once('error', reject)
+    server.listen(0, '127.0.0.1', resolve)
+  })
+  const address = server.address()
+  const port = typeof address === 'object' && address ? address.port : 0
+  await new Promise((resolve, reject) => server.close((error) => error ? reject(error) : resolve()))
+  if (!port) throw new Error('Unable to reserve an auth-gate verification port')
+  return port
+}
+
+const apiPort = await freePort()
 
 const env = {
   ...process.env,
@@ -61,7 +82,76 @@ const env = {
 function seedMinimalBankDatabase() {
   const db = new DatabaseSync(dbPath)
   db.exec('CREATE TABLE IF NOT EXISTS question_groups (id TEXT PRIMARY KEY)')
+  ensureSharedVocabularyShape(db)
+  replaceVocabularyProgram(db, {
+    id: 'wanwei-round-one-v1',
+    version: 'auth-fixture-v1',
+    title: '中考词汇一轮',
+    subtitle: '认证链路测试',
+    sourceTitle: '万唯系列中考词汇一轮梳理',
+    sourceEdition: '第8版',
+    totalPlannedEntries: 1,
+    groups: [{
+      id: 'auth-fixture-day-1',
+      stage: 'core',
+      week: 1,
+      group: 1,
+      sourceLabel: 'Day 1',
+      startOrder: 1,
+      endOrder: 1,
+    }],
+    entries: [{
+      id: 'auth-fixture-about',
+      groupId: 'auth-fixture-day-1',
+      headword: 'about',
+      phonetic: '/əˈbaʊt/',
+      partOfSpeech: 'prep.',
+      sourceMeanings: ['关于'],
+      teachingSense: '关于',
+      pronunciationMode: 'syllables',
+      syllables: ['a', 'bout'],
+      example: { english: 'We talked about school.', chinese: '我们谈到了学校。', highlight: 'about', reviewStatus: 'approved' },
+      visual: { key: 'auth-visual-about', version: 'koboyo-v1', path: '/about.svg', alt: '两个人谈论学校' },
+      audio: { key: 'auth-audio-about', version: 'eqb-british-teacher-v1', path: '/about.mp3', voice: 'eqb-british-teacher-v1' },
+      source: { stage: 'core', day: 1, sourceOrder: 1, printedPage: 1, verification: 'page-checked' },
+    }],
+  })
   db.close()
+
+  const userDb = new DatabaseSync(userDataDbPath)
+  ensureUserVocabularyShape(userDb)
+  const [publicFixtureStudent] = listVocabularyStudents(userDb, 'public-fixture-owner')
+  const timestamp = '2026-08-07T00:00:00.000Z'
+  userDb.prepare(`
+    INSERT INTO vocabulary_review_runs (
+      id, user_id, student_id, program_id, mode, target_unfamiliar_count, cursor, status,
+      temporary_stage, temporary_day, created_at, updated_at
+    ) VALUES (?, ?, ?, ?, 'main', 1, 1, 'frozen', NULL, NULL, ?, ?)
+  `).run('public-fixture-run', 'public-fixture-owner', publicFixtureStudent.id, 'wanwei-round-one-v1', timestamp, timestamp)
+  userDb.prepare(`
+    INSERT INTO vocabulary_sets (id, user_id, student_id, program_id, review_run_id, title, entry_count, created_at)
+    VALUES (?, ?, ?, ?, ?, ?, 1, ?)
+  `).run('public-fixture-set', 'public-fixture-owner', publicFixtureStudent.id, 'wanwei-round-one-v1', 'public-fixture-run', '公开听写测试', timestamp)
+  userDb.prepare(`
+    INSERT INTO vocabulary_set_entries (set_id, entry_id, order_index, snapshot_json)
+    VALUES (?, ?, 0, ?)
+  `).run('public-fixture-set', 'fixture-word', JSON.stringify({
+    id: 'fixture-word',
+    headword: 'word',
+    phonetic: '/wɜːd/',
+    partOfSpeech: 'n.',
+    teachingSense: '单词',
+    pronunciationMode: 'syllables',
+    syllables: ['word'],
+    example: { english: 'A word.', chinese: '一个单词。', highlight: 'word' },
+    visual: { key: 'visual-word', version: 'koboyo-v1', path: '/word.svg', alt: '一个单词卡片' },
+    audio: { key: 'audio-word', version: 'eqb-british-teacher-v1', path: '/word.mp3', voice: 'eqb-british-teacher-v1' },
+  }))
+  userDb.prepare(`
+    INSERT INTO vocabulary_shares (id, set_id, user_id, share_id, status, created_at, revoked_at)
+    VALUES (?, ?, ?, ?, 'active', ?, NULL)
+  `).run('public-fixture-share-row', 'public-fixture-set', 'public-fixture-owner', 'public-fixture-share', timestamp)
+  userDb.close()
 }
 
 const children = []
@@ -187,6 +277,74 @@ async function main() {
       `got status=${forcedHealth.status}`,
     )
 
+    const publicVocabulary = await req('/api/public/vocabulary/listen/public-fixture-share')
+    assert(
+      '(c) forced mode: public vocabulary share remains reachable without a cookie',
+      publicVocabulary.status === 200 &&
+        publicVocabulary.json?.vocabularySet?.entries?.[0]?.headword === 'word' &&
+        !Object.hasOwn(publicVocabulary.json?.vocabularySet?.entries?.[0] ?? {}, 'example'),
+      `got status=${publicVocabulary.status} body=${JSON.stringify(publicVocabulary.json)}`,
+    )
+
+    const privateVocabulary = await req('/api/vocabulary/sets')
+    assert(
+      '(c) forced mode: authenticated vocabulary routes remain protected without a cookie',
+      privateVocabulary.status === 401 && privateVocabulary.json?.error === 'not_authenticated',
+      `got status=${privateVocabulary.status} body=${JSON.stringify(privateVocabulary.json)}`,
+    )
+
+    const createPrivateVocabulary = await req('/api/vocabulary/sets', { method: 'POST' })
+    assert(
+      '(c) forced mode: direct vocabulary-set creation remains protected without a cookie',
+      createPrivateVocabulary.status === 401 && createPrivateVocabulary.json?.error === 'not_authenticated',
+      `got status=${createPrivateVocabulary.status} body=${JSON.stringify(createPrivateVocabulary.json)}`,
+    )
+
+    const privateVocabularyPdf = await req('/api/vocabulary/sets/public-fixture-set/pdf?accent=british', { method: 'POST' })
+    assert(
+      '(c) forced mode: vocabulary PDF download remains protected without a cookie',
+      privateVocabularyPdf.status === 401 && privateVocabularyPdf.json?.error === 'not_authenticated',
+      `got status=${privateVocabularyPdf.status} body=${JSON.stringify(privateVocabularyPdf.json)}`,
+    )
+
+    const privateVocabularyRename = await req('/api/vocabulary/sets/public-fixture-set', {
+      method: 'PATCH',
+      body: { title: '越权改名' },
+    })
+    assert(
+      '(c) forced mode: vocabulary-set rename remains protected without a cookie',
+      privateVocabularyRename.status === 401 && privateVocabularyRename.json?.error === 'not_authenticated',
+      `got status=${privateVocabularyRename.status} body=${JSON.stringify(privateVocabularyRename.json)}`,
+    )
+
+    const privateStudents = await req('/api/vocabulary/students')
+    assert(
+      '(c) forced mode: student profiles remain protected without a cookie',
+      privateStudents.status === 401 && privateStudents.json?.error === 'not_authenticated',
+      `got status=${privateStudents.status} body=${JSON.stringify(privateStudents.json)}`,
+    )
+
+    const createPrivateStudent = await req('/api/vocabulary/students', { method: 'POST', body: { displayName: '小林' } })
+    assert(
+      '(c) forced mode: student-profile creation remains protected without a cookie',
+      createPrivateStudent.status === 401 && createPrivateStudent.json?.error === 'not_authenticated',
+      `got status=${createPrivateStudent.status} body=${JSON.stringify(createPrivateStudent.json)}`,
+    )
+
+    const privateCurrentRun = await req('/api/vocabulary/review-runs/current?studentId=missing&programId=wanwei-round-one-v1')
+    assert(
+      '(c) forced mode: current student Review Run remains protected without a cookie',
+      privateCurrentRun.status === 401 && privateCurrentRun.json?.error === 'not_authenticated',
+      `got status=${privateCurrentRun.status} body=${JSON.stringify(privateCurrentRun.json)}`,
+    )
+
+    const wrongMethodPublicVocabulary = await req('/api/public/vocabulary/listen/public-fixture-share', { method: 'POST' })
+    assert(
+      '(c) forced mode: only GET is public for vocabulary shares',
+      wrongMethodPublicVocabulary.status === 401 && wrongMethodPublicVocabulary.json?.error === 'not_authenticated',
+      `got status=${wrongMethodPublicVocabulary.status} body=${JSON.stringify(wrongMethodPublicVocabulary.json)}`,
+    )
+
     const forcedPaperAssets = await req('/paper-assets/does-not-exist.json')
     assert(
       '(c) forced mode: GET /paper-assets/* is 401 with no cookie (static special-case is gated)',
@@ -240,6 +398,139 @@ async function main() {
         meWithCookie.json?.user?.username === 'verify-owner' &&
         meWithCookie.json?.user?.role === 'owner',
       `got status=${meWithCookie.status} body=${JSON.stringify(meWithCookie.json)}`,
+    )
+
+    const defaultStudents = await req('/api/vocabulary/students', { cookie })
+    const defaultStudentId = defaultStudents.json?.students?.[0]?.id
+    assert(
+      '(c) authenticated teacher receives a default student profile',
+      defaultStudents.status === 200 &&
+        defaultStudents.json?.students?.length === 1 &&
+        defaultStudents.json?.students?.[0]?.displayName === '默认学生' &&
+        Boolean(defaultStudentId),
+      `got status=${defaultStudents.status} body=${JSON.stringify(defaultStudents.json)}`,
+    )
+
+    const createdStudent = await req('/api/vocabulary/students', {
+      method: 'POST',
+      cookie,
+      body: { displayName: '小林' },
+    })
+    const studentId = createdStudent.json?.student?.id
+    assert(
+      '(c) authenticated teacher creates a student profile through the real HTTP route',
+      createdStudent.status === 201 && createdStudent.json?.student?.displayName === '小林' && Boolean(studentId),
+      `got status=${createdStudent.status} body=${JSON.stringify(createdStudent.json)}`,
+    )
+
+    const duplicateStudent = await req('/api/vocabulary/students', {
+      method: 'POST',
+      cookie,
+      body: { displayName: ' 小林 ' },
+    })
+    assert(
+      '(c) duplicate student names fail closed',
+      duplicateStudent.status === 409 && duplicateStudent.json?.error === 'vocabulary_student_name_exists',
+      `got status=${duplicateStudent.status} body=${JSON.stringify(duplicateStudent.json)}`,
+    )
+
+    const createdReviewRun = await req('/api/vocabulary/review-runs', {
+      method: 'POST',
+      cookie,
+      body: {
+        studentId,
+        programId: 'wanwei-round-one-v1',
+        targetUnfamiliarCount: 15,
+        mode: 'main',
+      },
+    })
+    const recoveredReviewRun = await req(`/api/vocabulary/review-runs/current?studentId=${encodeURIComponent(studentId)}&programId=wanwei-round-one-v1`, { cookie })
+    const duplicateReviewRun = await req('/api/vocabulary/review-runs', {
+      method: 'POST',
+      cookie,
+      body: {
+        studentId,
+        programId: 'wanwei-round-one-v1',
+        targetUnfamiliarCount: 20,
+        mode: 'main',
+      },
+    })
+    assert(
+      '(c) active student Review Run is server-authoritative and idempotent across browsers',
+      createdReviewRun.status === 201 &&
+        recoveredReviewRun.status === 200 &&
+        duplicateReviewRun.status === 201 &&
+        createdReviewRun.json?.reviewRun?.id === recoveredReviewRun.json?.reviewRun?.id &&
+        createdReviewRun.json?.reviewRun?.id === duplicateReviewRun.json?.reviewRun?.id,
+      `created=${JSON.stringify(createdReviewRun.json)} recovered=${JSON.stringify(recoveredReviewRun.json)} duplicate=${JSON.stringify(duplicateReviewRun.json)}`,
+    )
+
+    const discardedReviewRun = await req(`/api/vocabulary/review-runs/${encodeURIComponent(createdReviewRun.json?.reviewRun?.id)}`, {
+      method: 'DELETE',
+      cookie,
+    })
+    const currentAfterDiscard = await req(`/api/vocabulary/review-runs/current?studentId=${encodeURIComponent(studentId)}&programId=wanwei-round-one-v1`, { cookie })
+    assert(
+      '(c) teacher can explicitly discard an unfinished Run before starting the next scope',
+      discardedReviewRun.status === 200 && discardedReviewRun.json?.ok === true &&
+        currentAfterDiscard.status === 200 && currentAfterDiscard.json?.reviewRun === null,
+      `discard=${JSON.stringify(discardedReviewRun.json)} current=${JSON.stringify(currentAfterDiscard.json)}`,
+    )
+
+    const createdVocabularySet = await req('/api/vocabulary/sets', {
+      method: 'POST',
+      cookie,
+      body: {
+        studentId,
+        programId: 'wanwei-round-one-v1',
+        entryIds: ['auth-fixture-about'],
+      },
+    })
+    assert(
+      '(c) authenticated direct vocabulary-set creation persists through the real HTTP route',
+      createdVocabularySet.status === 201 &&
+        createdVocabularySet.json?.vocabularySet?.entryCount === 1 &&
+        createdVocabularySet.json?.vocabularySet?.entries?.[0]?.headword === 'about' &&
+        createdVocabularySet.json?.vocabularySet?.reviewRunId === null,
+      `got status=${createdVocabularySet.status} body=${JSON.stringify(createdVocabularySet.json)}`,
+    )
+
+    const renamedVocabularySet = await req(`/api/vocabulary/sets/${createdVocabularySet.json?.vocabularySet?.id}`, {
+      method: 'PATCH',
+      cookie,
+      body: { title: '小林第1周生词' },
+    })
+    assert(
+      '(c) authenticated teacher can persist a custom vocabulary-set and PDF title',
+      renamedVocabularySet.status === 200 && renamedVocabularySet.json?.vocabularySet?.title === '小林第1周生词',
+      `got status=${renamedVocabularySet.status} body=${JSON.stringify(renamedVocabularySet.json)}`,
+    )
+
+    const studentSets = await req(`/api/vocabulary/sets?studentId=${encodeURIComponent(studentId)}`, { cookie })
+    const defaultStudentSets = await req(`/api/vocabulary/sets?studentId=${encodeURIComponent(defaultStudentId)}`, { cookie })
+    assert(
+      '(c) vocabulary Sets are isolated by student profile',
+      studentSets.status === 200 && studentSets.json?.vocabularySets?.length === 1 &&
+        studentSets.json?.vocabularySets?.[0]?.studentId === studentId &&
+        defaultStudentSets.status === 200 && defaultStudentSets.json?.vocabularySets?.length === 0,
+      `student=${JSON.stringify(studentSets.json)} default=${JSON.stringify(defaultStudentSets.json)}`,
+    )
+
+    const studentProgress = await req(`/api/vocabulary/progress/wanwei-round-one-v1?studentId=${encodeURIComponent(studentId)}`, { cookie })
+    assert(
+      '(c) new student progress starts independently at zero',
+      studentProgress.status === 200 && studentProgress.json?.progress?.studentId === studentId && studentProgress.json?.progress?.cursor === 0,
+      `got status=${studentProgress.status} body=${JSON.stringify(studentProgress.json)}`,
+    )
+
+    const reopenedVocabularySet = await req(`/api/vocabulary/sets/${createdVocabularySet.json?.vocabularySet?.id}`, { cookie })
+    assert(
+      '(c) authenticated direct vocabulary Set reopens from SQLite with frozen order and no fabricated Review Run',
+      reopenedVocabularySet.status === 200 &&
+        reopenedVocabularySet.json?.vocabularySet?.entries?.[0]?.id === 'auth-fixture-about' &&
+        reopenedVocabularySet.json?.vocabularySet?.title === '小林第1周生词' &&
+        reopenedVocabularySet.json?.vocabularySet?.reviewRunId === null,
+      `got status=${reopenedVocabularySet.status} body=${JSON.stringify(reopenedVocabularySet.json)}`,
     )
 
     // (d) logout invalidates the cookie.

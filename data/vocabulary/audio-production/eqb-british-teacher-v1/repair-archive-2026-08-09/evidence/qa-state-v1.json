@@ -1,0 +1,780 @@
+{
+  "schemaVersion": 1,
+  "batchId": "wanwei-audio-repair-v1",
+  "cursor": 69,
+  "decisions": {
+    "wanwei-core-0002-about": {
+      "status": "selected",
+      "candidate": "A",
+      "note": "",
+      "decidedAt": "2026-08-09T06:05:40.619Z"
+    },
+    "wanwei-core-0010-against": {
+      "status": "selected",
+      "candidate": "D",
+      "note": "",
+      "decidedAt": "2026-08-09T06:05:54.938Z"
+    },
+    "wanwei-core-0019-appear": {
+      "status": "selected",
+      "candidate": "D",
+      "note": "",
+      "decidedAt": "2026-08-09T06:08:07.876Z"
+    },
+    "wanwei-core-0020-around": {
+      "status": "unresolved",
+      "candidate": null,
+      "note": "",
+      "decidedAt": "2026-08-09T06:08:28.703Z"
+    },
+    "wanwei-core-0032-because": {
+      "status": "selected",
+      "candidate": "C",
+      "note": "",
+      "decidedAt": "2026-08-09T06:08:44.110Z"
+    },
+    "wanwei-core-0033-become": {
+      "status": "selected",
+      "candidate": "B",
+      "note": "",
+      "decidedAt": "2026-08-09T06:08:54.361Z"
+    },
+    "wanwei-core-0038-between": {
+      "status": "unresolved",
+      "candidate": null,
+      "note": "",
+      "decidedAt": "2026-08-09T06:09:05.027Z"
+    },
+    "wanwei-core-0044-break": {
+      "status": "selected",
+      "candidate": "D",
+      "note": "",
+      "decidedAt": "2026-08-09T06:09:13.810Z"
+    },
+    "wanwei-core-0076-connect": {
+      "status": "selected",
+      "candidate": "A",
+      "note": "",
+      "decidedAt": "2026-08-09T06:09:24.794Z"
+    },
+    "wanwei-core-0085-create": {
+      "status": "unresolved",
+      "candidate": null,
+      "note": "",
+      "decidedAt": "2026-08-09T06:09:34.760Z"
+    },
+    "wanwei-core-0095-develop": {
+      "status": "selected",
+      "candidate": "C",
+      "note": "",
+      "decidedAt": "2026-08-09T06:09:48.177Z"
+    },
+    "wanwei-core-0107-drink": {
+      "status": "selected",
+      "candidate": "A",
+      "note": "",
+      "decidedAt": "2026-08-09T06:10:01.610Z"
+    },
+    "wanwei-core-0126-except": {
+      "status": "selected",
+      "candidate": "B",
+      "note": "",
+      "decidedAt": "2026-08-09T06:10:15.861Z"
+    },
+    "wanwei-core-0129-experience": {
+      "status": "selected",
+      "candidate": "B",
+      "note": "",
+      "decidedAt": "2026-08-09T06:10:28.749Z"
+    },
+    "wanwei-core-0130-explain": {
+      "status": "selected",
+      "candidate": "B",
+      "note": "",
+      "decidedAt": "2026-08-09T06:10:48.019Z"
+    },
+    "wanwei-core-0132-face": {
+      "status": "selected",
+      "candidate": "A",
+      "note": "",
+      "decidedAt": "2026-08-09T06:10:59.167Z"
+    },
+    "wanwei-core-0191-hot": {
+      "status": "selected",
+      "candidate": "A",
+      "note": "",
+      "decidedAt": "2026-08-09T06:11:09.819Z"
+    },
+    "wanwei-core-0197-if": {
+      "status": "selected",
+      "candidate": "A",
+      "note": "",
+      "decidedAt": "2026-08-09T06:11:20.535Z"
+    },
+    "wanwei-core-0199-important": {
+      "status": "selected",
+      "candidate": "C",
+      "note": "",
+      "decidedAt": "2026-08-09T06:11:46.566Z"
+    },
+    "wanwei-core-0204-increase": {
+      "status": "unresolved",
+      "candidate": null,
+      "note": "",
+      "decidedAt": "2026-08-09T06:11:58.234Z"
+    },
+    "wanwei-core-0206-instead": {
+      "status": "selected",
+      "candidate": "D",
+      "note": "",
+      "decidedAt": "2026-08-09T06:12:17.231Z"
+    },
+    "wanwei-core-0216-just": {
+      "status": "selected",
+      "candidate": "B",
+      "note": "",
+      "decidedAt": "2026-08-09T06:12:28.350Z"
+    },
+    "wanwei-core-0236-like": {
+      "status": "selected",
+      "candidate": "C",
+      "note": "",
+      "decidedAt": "2026-08-09T06:12:44.283Z"
+    },
+    "wanwei-core-0238-little": {
+      "status": "selected",
+      "candidate": "D",
+      "note": "",
+      "decidedAt": "2026-08-09T06:13:02.917Z"
+    },
+    "wanwei-core-0241-long": {
+      "status": "selected",
+      "candidate": "A",
+      "note": "",
+      "decidedAt": "2026-08-09T06:13:17.986Z"
+    },
+    "wanwei-core-0247-make": {
+      "status": "selected",
+      "candidate": "C",
+      "note": "",
+      "decidedAt": "2026-08-09T06:13:27.569Z"
+    },
+    "wanwei-core-0268-neither": {
+      "status": "selected",
+      "candidate": "D",
+      "note": "",
+      "decidedAt": "2026-08-09T06:13:38.814Z"
+    },
+    "wanwei-core-0322-prefer": {
+      "status": "selected",
+      "candidate": "A",
+      "note": "",
+      "decidedAt": "2026-08-09T06:13:59.294Z"
+    },
+    "wanwei-core-0351-remember": {
+      "status": "selected",
+      "candidate": "A",
+      "note": "",
+      "decidedAt": "2026-08-09T06:14:11.650Z"
+    },
+    "wanwei-core-0357-right": {
+      "status": "selected",
+      "candidate": "B",
+      "note": "",
+      "decidedAt": "2026-08-09T06:14:19.546Z"
+    },
+    "wanwei-core-0373-serious": {
+      "status": "selected",
+      "candidate": "B",
+      "note": "",
+      "decidedAt": "2026-08-09T06:14:30.749Z"
+    },
+    "wanwei-core-0380-simple": {
+      "status": "selected",
+      "candidate": "A",
+      "note": "",
+      "decidedAt": "2026-08-09T06:14:48.277Z"
+    },
+    "wanwei-core-0430-think": {
+      "status": "selected",
+      "candidate": "A",
+      "note": "",
+      "decidedAt": "2026-08-09T06:14:57.981Z"
+    },
+    "wanwei-core-0433-throw": {
+      "status": "selected",
+      "candidate": "A",
+      "note": "",
+      "decidedAt": "2026-08-09T06:15:08.116Z"
+    },
+    "wanwei-core-0455-wake": {
+      "status": "selected",
+      "candidate": "A",
+      "note": "",
+      "decidedAt": "2026-08-09T06:15:17.377Z"
+    },
+    "wanwei-core-0462-weak": {
+      "status": "selected",
+      "candidate": "A",
+      "note": "",
+      "decidedAt": "2026-08-09T06:15:23.121Z"
+    },
+    "wanwei-basic-0483-according--to-": {
+      "status": "unresolved",
+      "candidate": null,
+      "note": "",
+      "decidedAt": "2026-08-09T06:15:34.616Z"
+    },
+    "wanwei-basic-0576-building": {
+      "status": "selected",
+      "candidate": "D",
+      "note": "",
+      "decidedAt": "2026-08-09T06:15:51.317Z"
+    },
+    "wanwei-basic-0581-but": {
+      "status": "selected",
+      "candidate": "D",
+      "note": "",
+      "decidedAt": "2026-08-09T06:16:02.293Z"
+    },
+    "wanwei-basic-0599-certain": {
+      "status": "selected",
+      "candidate": "A",
+      "note": "",
+      "decidedAt": "2026-08-09T06:16:14.215Z"
+    },
+    "wanwei-basic-0609-chore": {
+      "status": "unresolved",
+      "candidate": null,
+      "note": "",
+      "decidedAt": "2026-08-09T06:19:58.926Z"
+    },
+    "wanwei-basic-0678-during": {
+      "status": "unresolved",
+      "candidate": null,
+      "note": "",
+      "decidedAt": "2026-08-09T06:20:08.392Z"
+    },
+    "wanwei-basic-0682-earth": {
+      "status": "selected",
+      "candidate": "C",
+      "note": "",
+      "decidedAt": "2026-08-09T06:20:16.959Z"
+    },
+    "wanwei-basic-0691-environment": {
+      "status": "selected",
+      "candidate": "C",
+      "note": "",
+      "decidedAt": "2026-08-09T06:20:26.493Z"
+    },
+    "wanwei-basic-0727-folk": {
+      "status": "selected",
+      "candidate": "B",
+      "note": "",
+      "decidedAt": "2026-08-09T06:20:37.626Z"
+    },
+    "wanwei-basic-0788-honour--ame-honor-": {
+      "status": "selected",
+      "candidate": "B",
+      "note": "",
+      "decidedAt": "2026-08-09T06:20:47.342Z"
+    },
+    "wanwei-basic-0827-lazy": {
+      "status": "selected",
+      "candidate": "A",
+      "note": "",
+      "decidedAt": "2026-08-09T06:20:55.931Z"
+    },
+    "wanwei-basic-0839-local": {
+      "status": "selected",
+      "candidate": "B",
+      "note": "",
+      "decidedAt": "2026-08-09T06:21:06.166Z"
+    },
+    "wanwei-basic-0893-nearly": {
+      "status": "selected",
+      "candidate": "D",
+      "note": "",
+      "decidedAt": "2026-08-09T06:21:27.318Z"
+    },
+    "wanwei-basic-0954-policeman---policewoman--pl--policemen---policewomen-": {
+      "status": "unresolved",
+      "candidate": null,
+      "note": "",
+      "decidedAt": "2026-08-09T06:21:40.103Z"
+    },
+    "wanwei-basic-1051-shut": {
+      "status": "selected",
+      "candidate": "B",
+      "note": "",
+      "decidedAt": "2026-08-09T06:21:52.733Z"
+    },
+    "wanwei-basic-1062-ski": {
+      "status": "unresolved",
+      "candidate": null,
+      "note": "",
+      "decidedAt": "2026-08-09T06:22:15.283Z"
+    },
+    "wanwei-basic-1107-symbol": {
+      "status": "selected",
+      "candidate": "C",
+      "note": "",
+      "decidedAt": "2026-08-09T06:22:28.414Z"
+    },
+    "wanwei-basic-1121-that": {
+      "status": "selected",
+      "candidate": "C",
+      "note": "",
+      "decidedAt": "2026-08-09T06:22:40.250Z"
+    },
+    "wanwei-basic-1122-the": {
+      "status": "selected",
+      "candidate": "B",
+      "note": "",
+      "decidedAt": "2026-08-09T06:22:48.232Z"
+    },
+    "wanwei-basic-1181-video": {
+      "status": "unresolved",
+      "candidate": null,
+      "note": "",
+      "decidedAt": "2026-08-09T06:22:57.133Z"
+    },
+    "wanwei-basic-1194-week": {
+      "status": "selected",
+      "candidate": "D",
+      "note": "",
+      "decidedAt": "2026-08-09T06:23:07.165Z"
+    },
+    "wanwei-basic-1206-which": {
+      "status": "selected",
+      "candidate": "C",
+      "note": "",
+      "decidedAt": "2026-08-09T06:23:17.216Z"
+    },
+    "wanwei-basic-1211-whose": {
+      "status": "selected",
+      "candidate": "C",
+      "note": "",
+      "decidedAt": "2026-08-09T06:23:28.587Z"
+    },
+    "wanwei-recognition-1246-adult": {
+      "status": "selected",
+      "candidate": "A",
+      "note": "",
+      "decidedAt": "2026-08-09T06:23:51.667Z"
+    },
+    "wanwei-recognition-1341-dining": {
+      "status": "selected",
+      "candidate": "B",
+      "note": "",
+      "decidedAt": "2026-08-09T06:24:01.547Z"
+    },
+    "wanwei-recognition-1348-double": {
+      "status": "selected",
+      "candidate": "B",
+      "note": "",
+      "decidedAt": "2026-08-09T06:24:11.064Z"
+    },
+    "wanwei-recognition-1361-era": {
+      "status": "selected",
+      "candidate": "C",
+      "note": "",
+      "decidedAt": "2026-08-09T06:24:38.949Z"
+    },
+    "wanwei-recognition-1388-giraffe": {
+      "status": "selected",
+      "candidate": "C",
+      "note": "",
+      "decidedAt": "2026-08-09T06:24:48.916Z"
+    },
+    "wanwei-recognition-1393-grape": {
+      "status": "selected",
+      "candidate": "C",
+      "note": "",
+      "decidedAt": "2026-08-09T06:24:59.467Z"
+    },
+    "wanwei-recognition-1458-mrs--ame-mrs---": {
+      "status": "selected",
+      "candidate": "B",
+      "note": "",
+      "decidedAt": "2026-08-09T06:25:19.081Z"
+    },
+    "wanwei-recognition-1459-ms--ame-ms---": {
+      "status": "selected",
+      "candidate": "B",
+      "note": "",
+      "decidedAt": "2026-08-09T06:25:34.980Z"
+    },
+    "wanwei-recognition-1460-mutton": {
+      "status": "selected",
+      "candidate": "B",
+      "note": "",
+      "decidedAt": "2026-08-09T06:25:47.066Z"
+    },
+    "wanwei-recognition-1487-per-cent--ame-percent-": {
+      "status": "unresolved",
+      "candidate": null,
+      "note": "",
+      "decidedAt": "2026-08-09T06:25:57.042Z"
+    },
+    "wanwei-recognition-1582-violin": {
+      "status": "selected",
+      "candidate": "C",
+      "note": "",
+      "decidedAt": "2026-08-09T06:26:07.415Z"
+    }
+  },
+  "history": [
+    {
+      "entryId": "wanwei-core-0002-about",
+      "previousDecision": null,
+      "previousCursor": 0
+    },
+    {
+      "entryId": "wanwei-core-0010-against",
+      "previousDecision": null,
+      "previousCursor": 1
+    },
+    {
+      "entryId": "wanwei-core-0019-appear",
+      "previousDecision": null,
+      "previousCursor": 2
+    },
+    {
+      "entryId": "wanwei-core-0020-around",
+      "previousDecision": null,
+      "previousCursor": 3
+    },
+    {
+      "entryId": "wanwei-core-0032-because",
+      "previousDecision": null,
+      "previousCursor": 4
+    },
+    {
+      "entryId": "wanwei-core-0033-become",
+      "previousDecision": null,
+      "previousCursor": 5
+    },
+    {
+      "entryId": "wanwei-core-0038-between",
+      "previousDecision": null,
+      "previousCursor": 6
+    },
+    {
+      "entryId": "wanwei-core-0044-break",
+      "previousDecision": null,
+      "previousCursor": 7
+    },
+    {
+      "entryId": "wanwei-core-0076-connect",
+      "previousDecision": null,
+      "previousCursor": 8
+    },
+    {
+      "entryId": "wanwei-core-0085-create",
+      "previousDecision": null,
+      "previousCursor": 9
+    },
+    {
+      "entryId": "wanwei-core-0095-develop",
+      "previousDecision": null,
+      "previousCursor": 10
+    },
+    {
+      "entryId": "wanwei-core-0107-drink",
+      "previousDecision": null,
+      "previousCursor": 11
+    },
+    {
+      "entryId": "wanwei-core-0126-except",
+      "previousDecision": null,
+      "previousCursor": 12
+    },
+    {
+      "entryId": "wanwei-core-0129-experience",
+      "previousDecision": null,
+      "previousCursor": 13
+    },
+    {
+      "entryId": "wanwei-core-0130-explain",
+      "previousDecision": null,
+      "previousCursor": 14
+    },
+    {
+      "entryId": "wanwei-core-0132-face",
+      "previousDecision": null,
+      "previousCursor": 15
+    },
+    {
+      "entryId": "wanwei-core-0191-hot",
+      "previousDecision": null,
+      "previousCursor": 16
+    },
+    {
+      "entryId": "wanwei-core-0197-if",
+      "previousDecision": null,
+      "previousCursor": 17
+    },
+    {
+      "entryId": "wanwei-core-0199-important",
+      "previousDecision": null,
+      "previousCursor": 18
+    },
+    {
+      "entryId": "wanwei-core-0204-increase",
+      "previousDecision": null,
+      "previousCursor": 19
+    },
+    {
+      "entryId": "wanwei-core-0206-instead",
+      "previousDecision": null,
+      "previousCursor": 20
+    },
+    {
+      "entryId": "wanwei-core-0216-just",
+      "previousDecision": null,
+      "previousCursor": 21
+    },
+    {
+      "entryId": "wanwei-core-0236-like",
+      "previousDecision": null,
+      "previousCursor": 22
+    },
+    {
+      "entryId": "wanwei-core-0238-little",
+      "previousDecision": null,
+      "previousCursor": 23
+    },
+    {
+      "entryId": "wanwei-core-0241-long",
+      "previousDecision": null,
+      "previousCursor": 24
+    },
+    {
+      "entryId": "wanwei-core-0247-make",
+      "previousDecision": null,
+      "previousCursor": 25
+    },
+    {
+      "entryId": "wanwei-core-0268-neither",
+      "previousDecision": null,
+      "previousCursor": 26
+    },
+    {
+      "entryId": "wanwei-core-0322-prefer",
+      "previousDecision": null,
+      "previousCursor": 27
+    },
+    {
+      "entryId": "wanwei-core-0351-remember",
+      "previousDecision": null,
+      "previousCursor": 28
+    },
+    {
+      "entryId": "wanwei-core-0357-right",
+      "previousDecision": null,
+      "previousCursor": 29
+    },
+    {
+      "entryId": "wanwei-core-0373-serious",
+      "previousDecision": null,
+      "previousCursor": 30
+    },
+    {
+      "entryId": "wanwei-core-0380-simple",
+      "previousDecision": null,
+      "previousCursor": 31
+    },
+    {
+      "entryId": "wanwei-core-0430-think",
+      "previousDecision": null,
+      "previousCursor": 32
+    },
+    {
+      "entryId": "wanwei-core-0433-throw",
+      "previousDecision": null,
+      "previousCursor": 33
+    },
+    {
+      "entryId": "wanwei-core-0455-wake",
+      "previousDecision": null,
+      "previousCursor": 34
+    },
+    {
+      "entryId": "wanwei-core-0462-weak",
+      "previousDecision": null,
+      "previousCursor": 35
+    },
+    {
+      "entryId": "wanwei-basic-0483-according--to-",
+      "previousDecision": null,
+      "previousCursor": 36
+    },
+    {
+      "entryId": "wanwei-basic-0576-building",
+      "previousDecision": null,
+      "previousCursor": 37
+    },
+    {
+      "entryId": "wanwei-basic-0581-but",
+      "previousDecision": null,
+      "previousCursor": 38
+    },
+    {
+      "entryId": "wanwei-basic-0599-certain",
+      "previousDecision": null,
+      "previousCursor": 39
+    },
+    {
+      "entryId": "wanwei-basic-0609-chore",
+      "previousDecision": null,
+      "previousCursor": 40
+    },
+    {
+      "entryId": "wanwei-basic-0678-during",
+      "previousDecision": null,
+      "previousCursor": 41
+    },
+    {
+      "entryId": "wanwei-basic-0682-earth",
+      "previousDecision": null,
+      "previousCursor": 42
+    },
+    {
+      "entryId": "wanwei-basic-0691-environment",
+      "previousDecision": null,
+      "previousCursor": 43
+    },
+    {
+      "entryId": "wanwei-basic-0727-folk",
+      "previousDecision": null,
+      "previousCursor": 44
+    },
+    {
+      "entryId": "wanwei-basic-0788-honour--ame-honor-",
+      "previousDecision": null,
+      "previousCursor": 45
+    },
+    {
+      "entryId": "wanwei-basic-0827-lazy",
+      "previousDecision": null,
+      "previousCursor": 46
+    },
+    {
+      "entryId": "wanwei-basic-0839-local",
+      "previousDecision": null,
+      "previousCursor": 47
+    },
+    {
+      "entryId": "wanwei-basic-0893-nearly",
+      "previousDecision": null,
+      "previousCursor": 48
+    },
+    {
+      "entryId": "wanwei-basic-0954-policeman---policewoman--pl--policemen---policewomen-",
+      "previousDecision": null,
+      "previousCursor": 49
+    },
+    {
+      "entryId": "wanwei-basic-1051-shut",
+      "previousDecision": null,
+      "previousCursor": 50
+    },
+    {
+      "entryId": "wanwei-basic-1062-ski",
+      "previousDecision": null,
+      "previousCursor": 51
+    },
+    {
+      "entryId": "wanwei-basic-1107-symbol",
+      "previousDecision": null,
+      "previousCursor": 52
+    },
+    {
+      "entryId": "wanwei-basic-1121-that",
+      "previousDecision": null,
+      "previousCursor": 53
+    },
+    {
+      "entryId": "wanwei-basic-1122-the",
+      "previousDecision": null,
+      "previousCursor": 54
+    },
+    {
+      "entryId": "wanwei-basic-1181-video",
+      "previousDecision": null,
+      "previousCursor": 55
+    },
+    {
+      "entryId": "wanwei-basic-1194-week",
+      "previousDecision": null,
+      "previousCursor": 56
+    },
+    {
+      "entryId": "wanwei-basic-1206-which",
+      "previousDecision": null,
+      "previousCursor": 57
+    },
+    {
+      "entryId": "wanwei-basic-1211-whose",
+      "previousDecision": null,
+      "previousCursor": 58
+    },
+    {
+      "entryId": "wanwei-recognition-1246-adult",
+      "previousDecision": null,
+      "previousCursor": 59
+    },
+    {
+      "entryId": "wanwei-recognition-1341-dining",
+      "previousDecision": null,
+      "previousCursor": 60
+    },
+    {
+      "entryId": "wanwei-recognition-1348-double",
+      "previousDecision": null,
+      "previousCursor": 61
+    },
+    {
+      "entryId": "wanwei-recognition-1361-era",
+      "previousDecision": null,
+      "previousCursor": 62
+    },
+    {
+      "entryId": "wanwei-recognition-1388-giraffe",
+      "previousDecision": null,
+      "previousCursor": 63
+    },
+    {
+      "entryId": "wanwei-recognition-1393-grape",
+      "previousDecision": null,
+      "previousCursor": 64
+    },
+    {
+      "entryId": "wanwei-recognition-1458-mrs--ame-mrs---",
+      "previousDecision": null,
+      "previousCursor": 65
+    },
+    {
+      "entryId": "wanwei-recognition-1459-ms--ame-ms---",
+      "previousDecision": null,
+      "previousCursor": 66
+    },
+    {
+      "entryId": "wanwei-recognition-1460-mutton",
+      "previousDecision": null,
+      "previousCursor": 67
+    },
+    {
+      "entryId": "wanwei-recognition-1487-per-cent--ame-percent-",
+      "previousDecision": null,
+      "previousCursor": 68
+    },
+    {
+      "entryId": "wanwei-recognition-1582-violin",
+      "previousDecision": null,
+      "previousCursor": 69
+    }
+  ],
+  "updatedAt": "2026-08-09T06:26:07.415Z"
+}

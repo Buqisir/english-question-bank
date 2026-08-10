@@ -171,6 +171,42 @@ blank". Persisted in a per-paper verb-profile sidecar, never in the frozen analy
 _Avoid_: conflating Voice with Tense; treating 主谓一致 as a tense sub-value (it is its
 own light axis); using "考点" loosely when one of these specific axes is meant.
 
+**Vocabulary Program** (词汇课程):
+A versioned, ordered teaching sequence that arranges vocabulary by stage, week, group, and source order. It preserves the curriculum route independently of any one teacher's review progress.
+_Avoid_: word list, review run, vocabulary set
+
+**Vocabulary Group** (词汇组):
+One contiguous unit inside a Vocabulary Program, identified by its stage, week, and group number and containing ordered Vocabulary Entries.
+_Avoid_: review batch, export set, day when the product does not require calendar use
+
+**Vocabulary Entry** (词条):
+One curriculum-positioned English headword in a Vocabulary Group, carrying its source-backed spelling, pronunciation, candidate meanings, and source position. The same headword may be a different entry in another Vocabulary Program.
+_Avoid_: word when the stored curriculum object is meant; teaching sense; review decision
+
+**Teaching Sense** (教学释义):
+The compact, teacher-approved meaning or meanings shown for a Vocabulary Entry on review cards and exports. It is selected from source-backed candidates and never changes the entry's original source meanings.
+_Avoid_: dictionary dump, AI-selected final meaning, source meaning
+
+**Vocabulary Review Run** (过词轮次):
+A resumable traversal of a Vocabulary Program in source order, with a collection target and a current cursor. It owns Review Decisions but does not alter the program.
+_Avoid_: vocabulary group, vocabulary set, quiz
+
+**Review Decision** (过词判断):
+One teacher-recorded `known` or `unfamiliar` outcome for a Vocabulary Entry inside a Vocabulary Review Run. Returning to a word may replace that run's decision without changing the entry.
+_Avoid_: score, mastery level, permanent student record
+
+**Vocabulary Set** (生词集):
+The frozen, ordered unfamiliar entries collected from one Vocabulary Review Run for export and playback. Later edits to the program or another run do not silently change an existing set.
+_Avoid_: review run, vocabulary group, live filter result
+
+**Vocabulary Set Entry Snapshot** (生词集词条快照):
+The immutable, ordered copy of one Vocabulary Entry's teacher-facing learning content and bound asset versions inside a Vocabulary Set. It keeps a printed sheet and shared listening page stable even when the source Vocabulary Program is revised later.
+_Avoid_: live vocabulary entry, cache, review decision
+
+**Vocabulary Share** (生词集分享):
+A revocable public capability that exposes exactly one frozen Vocabulary Set for read-only listening through an unguessable identifier. It does not expose the owning teacher, Review Run, progress, or any other Vocabulary Set.
+_Avoid_: user account, live review link, public vocabulary program
+
 ## Relationships
 
 - A trusted adapter derives one **Import Candidate** and its deterministic issues from one **Source Capture**; callers do not author the candidate's semantics.
@@ -201,6 +237,12 @@ own light axis); using "考点" loosely when one of these specific axes is meant
 - A **Paper Set** contains many **Paper Items**.
 - A **Paper Item** points to one **Question Group** or one **Question**.
 - A **Paper Set** can produce a **Student Version** and a **Teacher Version** export.
+- A **Vocabulary Program** contains ordered **Vocabulary Groups**; each Vocabulary Group contains ordered **Vocabulary Entries**.
+- A **Vocabulary Entry** retains source candidate meanings and may expose one teacher-approved **Teaching Sense** without overwriting those candidates.
+- A **Vocabulary Review Run** traverses one Vocabulary Program and records at most one current **Review Decision** per Vocabulary Entry.
+- Completing a Vocabulary Review Run's collection target may freeze its unfamiliar entries into one ordered **Vocabulary Set**.
+- A **Vocabulary Set** owns ordered **Vocabulary Set Entry Snapshots** rather than a live filter over its source Vocabulary Program.
+- A **Vocabulary Share** grants read-only public access to exactly one Vocabulary Set and may be revoked without deleting that Set.
 
 ## Example Dialogue
 
@@ -219,3 +261,5 @@ own light axis); using "考点" loosely when one of these specific axes is meant
 - "材料" can mean **Passage** or **Import File**. Use **Passage** for reviewed content and **Import File** for archived originals.
 - "题集" can mean a temporary selection, a **Draft Paper**, or a **Paper Set**. Use **Draft Paper** for the C8 group-composition workbench and **Paper Set** for older broader saved collections.
 - "空" can mean a **Cloze Blank**, a 七选五 blank, or a 语法填空 blank. Use **Cloze Blank** for 完形填空; qualify the others by family.
+- "组" can mean a source-backed **Vocabulary Group** or a temporary review batch. Use Vocabulary Group for the durable curriculum unit and Vocabulary Review Run for the teacher's live traversal.
+- "生词" can mean one unfamiliar Review Decision or an exported entry. Use **Review Decision** while reviewing and **Vocabulary Set** after the selected entries are frozen for export.

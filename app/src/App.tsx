@@ -27,6 +27,7 @@ import { PaperBrowsePage } from './features/paper-browse/PaperBrowsePage'
 import { DraftPaperWorkbench } from './features/draft-paper/DraftPaperWorkbench'
 import { MySpacePage } from './features/my-space/MySpacePage'
 import { AdminWorkbench } from './features/admin/AdminWorkbench'
+import { VocabularyReviewPage } from './features/vocabulary-review/VocabularyReviewPage'
 import { AppTopbar, type AppTopbarNav } from './components/AppTopbar'
 import { addGroupToCurrentDraftPaper as addGroupToCurrentDraftPaperRequest } from './services/draftPapers'
 import { useCurrentUser, useIsOwnerView } from './auth/AuthGate.tsx'
@@ -79,6 +80,10 @@ function App() {
   const [mySpaceRouteActive, setMySpaceRouteActive] = useState(() => {
     if (typeof window === 'undefined') return false
     return new URLSearchParams(window.location.search).get('view') === 'my-space'
+  })
+  const [vocabularyReviewRouteActive, setVocabularyReviewRouteActive] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return new URLSearchParams(window.location.search).get('view') === 'vocabulary-review'
   })
   // home-blank — `?view=browse`: the home list surface's browse mode. Unlike
   // its sibling routes above this does NOT swap out a top-level component —
@@ -479,6 +484,7 @@ function App() {
       window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
     }
     setMySpaceRouteActive(false)
+    setVocabularyReviewRouteActive(false)
     setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, lecture: false, similar: false })
     setDraftPaperRoute({
       active: true,
@@ -546,6 +552,7 @@ function App() {
       window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
     }
     setMySpaceRouteActive(false)
+    setVocabularyReviewRouteActive(false)
     setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
     setPaperBrowseRoute({ active: true, paperId, focusGroupId: focusGroupId || null, questionId, lecture, similar })
   }, [])
@@ -620,6 +627,7 @@ function App() {
       const view = params.get('view')
       setAdminRouteActive(isOwnerView && view === 'admin')
       setMySpaceRouteActive(view === 'my-space')
+      setVocabularyReviewRouteActive(view === 'vocabulary-review')
       setBrowseRouteActive(view === 'browse')
       setDraftPaperRoute({
         active: view === 'draft-paper',
@@ -700,7 +708,35 @@ function App() {
     }
     setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
     setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, lecture: false, similar: false })
+    setVocabularyReviewRouteActive(false)
     setMySpaceRouteActive(true)
+  }, [])
+
+  const openVocabularyReview = useCallback(() => {
+    if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
+      const url = new URL(window.location.href)
+      url.searchParams.set('view', 'vocabulary-review')
+      for (const param of ['draftPaperId', 'paperId', 'focusGroupId', 'groupId', 'questionId', 'lecture', 'similar']) {
+        url.searchParams.delete(param)
+      }
+      window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
+    }
+    setAdminRouteActive(false)
+    setMySpaceRouteActive(false)
+    setBrowseRouteActive(false)
+    setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
+    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, lecture: false, similar: false })
+    setVocabularyReviewRouteActive(true)
+  }, [])
+
+  const vocabularyReviewOnBackToWorkbench = useCallback(() => {
+    if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
+      const url = new URL(window.location.href)
+      url.searchParams.delete('view')
+      const nextSearch = url.searchParams.toString()
+      window.history.replaceState(window.history.state, '', `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`)
+    }
+    setVocabularyReviewRouteActive(false)
   }, [])
 
   const mySpaceOnBackToWorkbench = useCallback(() => {
@@ -755,6 +791,7 @@ function App() {
   const shellNav: AppTopbarNav = {
     user: currentUser,
     onLogout: handleLogout,
+    onOpenVocabularyReview: openVocabularyReview,
     onOpenMySpace: openMySpace,
   }
 
@@ -768,6 +805,15 @@ function App() {
         onDraftChanged={() => void refreshQuestionGroups()}
         shellNav={shellNav}
         questionGroupById={questionGroupById}
+      />
+    )
+  }
+
+  if (vocabularyReviewRouteActive) {
+    return (
+      <VocabularyReviewPage
+        onBackToWorkbench={vocabularyReviewOnBackToWorkbench}
+        shellNav={{ ...shellNav, onOpenVocabularyReview: undefined }}
       />
     )
   }
@@ -807,6 +853,7 @@ function App() {
         variant="home"
         user={currentUser}
         onLogout={handleLogout}
+        onOpenVocabularyReview={openVocabularyReview}
         onOpenMySpace={openMySpace}
         showAdmin={isOwnerView}
         adminActive={adminRouteActive}

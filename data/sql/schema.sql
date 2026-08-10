@@ -268,6 +268,64 @@ CREATE TABLE IF NOT EXISTS export_jobs (
   updated_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
+CREATE TABLE IF NOT EXISTS vocabulary_programs (
+  id TEXT PRIMARY KEY,
+  version TEXT NOT NULL,
+  title TEXT NOT NULL,
+  subtitle TEXT NOT NULL DEFAULT '',
+  source_title TEXT NOT NULL,
+  source_edition TEXT NOT NULL DEFAULT '',
+  total_planned_entries INTEGER NOT NULL,
+  created_at TEXT NOT NULL DEFAULT (datetime('now')),
+  updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE TABLE IF NOT EXISTS vocabulary_groups (
+  id TEXT PRIMARY KEY,
+  program_id TEXT NOT NULL REFERENCES vocabulary_programs(id) ON DELETE CASCADE,
+  stage TEXT NOT NULL CHECK (stage IN ('core', 'basic', 'recognition')),
+  week INTEGER NOT NULL,
+  group_number INTEGER NOT NULL,
+  source_label TEXT NOT NULL,
+  start_order INTEGER NOT NULL,
+  end_order INTEGER NOT NULL,
+  UNIQUE(program_id, stage, group_number)
+);
+
+CREATE TABLE IF NOT EXISTS vocabulary_entries (
+  id TEXT PRIMARY KEY,
+  program_id TEXT NOT NULL REFERENCES vocabulary_programs(id) ON DELETE CASCADE,
+  group_id TEXT NOT NULL REFERENCES vocabulary_groups(id) ON DELETE CASCADE,
+  headword TEXT NOT NULL,
+  phonetic TEXT NOT NULL,
+  part_of_speech TEXT NOT NULL,
+  source_meanings_json TEXT NOT NULL,
+  teaching_sense TEXT NOT NULL,
+  exam_frequency INTEGER NOT NULL DEFAULT 0,
+  pronunciation_mode TEXT NOT NULL CHECK (pronunciation_mode IN ('syllables', 'forms')),
+  syllables_json TEXT NOT NULL,
+  example_english TEXT NOT NULL,
+  example_chinese TEXT NOT NULL,
+  example_highlight TEXT NOT NULL,
+  example_review_status TEXT NOT NULL CHECK (example_review_status = 'approved'),
+  visual_key TEXT NOT NULL,
+  visual_version TEXT NOT NULL,
+  visual_path TEXT NOT NULL,
+  visual_alt TEXT NOT NULL,
+  audio_key TEXT NOT NULL,
+  audio_version TEXT NOT NULL,
+  audio_path TEXT NOT NULL,
+  audio_voice TEXT NOT NULL CHECK (audio_voice IN ('en-GB-SoniaNeural', 'eqb-british-teacher-v1')),
+  source_stage TEXT NOT NULL CHECK (source_stage IN ('core', 'basic', 'recognition')),
+  source_day INTEGER NOT NULL,
+  source_order INTEGER NOT NULL,
+  printed_page INTEGER NOT NULL,
+  source_verification TEXT NOT NULL CHECK (source_verification IN ('page-checked', 'index-and-heading-reviewed')),
+  created_at TEXT NOT NULL DEFAULT (datetime('now')),
+  updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+  UNIQUE(program_id, source_order)
+);
+
 CREATE INDEX IF NOT EXISTS idx_sources_year_region ON sources(year, region);
 CREATE INDEX IF NOT EXISTS idx_passages_source ON passages(source_id);
 CREATE INDEX IF NOT EXISTS idx_question_groups_passage ON question_groups(passage_id);
@@ -279,6 +337,10 @@ CREATE INDEX IF NOT EXISTS idx_import_file_texts_import ON import_file_texts(imp
 CREATE INDEX IF NOT EXISTS idx_import_batch_items_batch ON import_batch_items(batch_id, status);
 CREATE INDEX IF NOT EXISTS idx_paper_asset_versions_paper ON paper_asset_versions(paper_id, asset_version);
 CREATE INDEX IF NOT EXISTS idx_paper_import_runs_paper ON paper_import_runs(paper_id, asset_version);
+CREATE INDEX IF NOT EXISTS idx_vocabulary_groups_program_order ON vocabulary_groups(program_id, start_order);
+CREATE INDEX IF NOT EXISTS idx_vocabulary_entries_program_order ON vocabulary_entries(program_id, source_order);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_vocabulary_entries_program_visual ON vocabulary_entries(program_id, visual_key);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_vocabulary_entries_program_audio ON vocabulary_entries(program_id, audio_key);
 
 DROP VIEW IF EXISTS v_question_group_cards;
 

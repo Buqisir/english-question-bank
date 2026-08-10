@@ -1,0 +1,360 @@
+{
+  "schemaVersion": "wanwei-vocabulary-audio-repair-listen-v3",
+  "prototype": true,
+  "entryCount": 5,
+  "assetCount": 25,
+  "formalAssetsChanged": false,
+  "entries": [
+    {
+      "entryId": "wanwei-core-0085-create",
+      "sourceOrder": 85,
+      "headword": "create",
+      "phonetic": "/kriˈeɪt/",
+      "teachingSense": "创造",
+      "check": "第二音节重读 /kriˈeɪt/",
+      "original": {
+        "path": "originals/wanwei-core-0085-create.mp3",
+        "sha256": "00e852d3232eeae11d2072ab12b771e79010f2b829cdc735845ac71134041997"
+      },
+      "candidates": [
+        {
+          "label": "I",
+          "seed": 9911,
+          "path": "candidates/wanwei-core-0085-create--I.mp3",
+          "bytes": 9216,
+          "sha256": "9e6277a45456619aee953559e2a9fd07a76912036dfcc49ea7d0a71f139b68dc",
+          "prompt": "Artists create new work.\n\ncreate.\n\nDone.",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.48,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.513672,
+          "rms": 0.071184
+        },
+        {
+          "label": "J",
+          "seed": 11003,
+          "path": "candidates/wanwei-core-0085-create--J.mp3",
+          "bytes": 8928,
+          "sha256": "ffc3178444e8096d6e7f45676ebdb481264ae97d0ad73b165fec890de876122b",
+          "prompt": "Artists create new work.\n\ncreate.\n\nDone.",
+          "durationSeconds": 1.488,
+          "activeDurationSeconds": 0.44,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.377899,
+          "rms": 0.050139
+        },
+        {
+          "label": "K",
+          "seed": 12007,
+          "path": "candidates/wanwei-core-0085-create--K.mp3",
+          "bytes": 9216,
+          "sha256": "c922559b7810094f0cfaf83c8e08ace33626e250223c23b66115728fcf6f908d",
+          "prompt": "Artists create new work.\n\ncreate.\n\nDone.",
+          "durationSeconds": 1.536,
+          "activeDurationSeconds": 0.48,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.539795,
+          "rms": 0.067895
+        },
+        {
+          "label": "L",
+          "seed": 13001,
+          "path": "candidates/wanwei-core-0085-create--L.mp3",
+          "bytes": 9360,
+          "sha256": "4c094ce550a8e7e82d46687030d78cac74d170bf0e8ff36c54aab570768c77fc",
+          "prompt": "Artists create new work.\n\ncreate.\n\nDone.",
+          "durationSeconds": 1.56,
+          "activeDurationSeconds": 0.52,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.6,
+          "peak": 0.532837,
+          "rms": 0.0736
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-core-0204-increase",
+      "sourceOrder": 204,
+      "headword": "increase",
+      "phonetic": "/ˌɪnˈkriːs/",
+      "teachingSense": "增加；增长",
+      "check": "动词第二音节重读 /ɪnˈkriːs/",
+      "original": {
+        "path": "originals/wanwei-core-0204-increase.mp3",
+        "sha256": "7a6c2aabc573586d1992740fd11a4067cc0f8c12e962a2d7c8f4a945d5f30dea"
+      },
+      "candidates": [
+        {
+          "label": "I",
+          "seed": 9911,
+          "path": "candidates/wanwei-core-0204-increase--I.mp3",
+          "bytes": 10080,
+          "sha256": "9d57f27fdfb173cdf013c1f05d125a89a04f9af103cb5dfa00e76de8a4ee5240",
+          "prompt": "Prices increase every year.\n\nincrease.\n\nDone.",
+          "durationSeconds": 1.68,
+          "activeDurationSeconds": 0.62,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.443604,
+          "rms": 0.062545
+        },
+        {
+          "label": "J",
+          "seed": 11003,
+          "path": "candidates/wanwei-core-0204-increase--J.mp3",
+          "bytes": 10368,
+          "sha256": "5b28444b3c70bfa6b148a8cd0f64dd58d80b2dd8490b99e0843217f037adfa4b",
+          "prompt": "Prices increase every year.\n\nincrease.\n\nDone.",
+          "durationSeconds": 1.728,
+          "activeDurationSeconds": 0.66,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.628,
+          "peak": 0.457489,
+          "rms": 0.061317
+        },
+        {
+          "label": "K",
+          "seed": 12007,
+          "path": "candidates/wanwei-core-0204-increase--K.mp3",
+          "bytes": 10368,
+          "sha256": "a98f5eab3abd3bf27a9c676c4a597ced059fe55e395bac572abfa24771a0641e",
+          "prompt": "Prices increase every year.\n\nincrease.\n\nDone.",
+          "durationSeconds": 1.728,
+          "activeDurationSeconds": 0.68,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.515839,
+          "rms": 0.070899
+        },
+        {
+          "label": "L",
+          "seed": 13001,
+          "path": "candidates/wanwei-core-0204-increase--L.mp3",
+          "bytes": 9936,
+          "sha256": "ed6e59707ed2bdfd89f5dbd993bd381646ccabd40b793288d8d9fcb30b1bdbf4",
+          "prompt": "Prices increase every year.\n\nincrease.\n\nDone.",
+          "durationSeconds": 1.656,
+          "activeDurationSeconds": 0.62,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.596,
+          "peak": 0.480896,
+          "rms": 0.06784
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-basic-0483-according--to-",
+      "sourceOrder": 483,
+      "headword": "according (to)",
+      "phonetic": "/əˈkɔːrdɪŋ/",
+      "teachingSense": "根据",
+      "check": "完整短语 according to，不拆字母或音节",
+      "original": {
+        "path": "originals/wanwei-basic-0483-according--to-.mp3",
+        "sha256": "5acaa21069f3224786d600c9f7c864f36bb90d2943fdedcfdd0041f78dc9ffff"
+      },
+      "candidates": [
+        {
+          "label": "I",
+          "seed": 9911,
+          "path": "candidates/wanwei-basic-0483-according--to---I.mp3",
+          "bytes": 11088,
+          "sha256": "6dbe04de28194138fd8886062b12e030c78357a9ef6c8f03fcd8a81b897c2bd6",
+          "prompt": "According to the map, turn left.\n\naccording to.\n\nDone.",
+          "durationSeconds": 1.848,
+          "activeDurationSeconds": 0.8,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.45047,
+          "rms": 0.053376
+        },
+        {
+          "label": "J",
+          "seed": 11003,
+          "path": "candidates/wanwei-basic-0483-according--to---J.mp3",
+          "bytes": 11088,
+          "sha256": "44581af4da64197b6d1a36ee78b905fdd191cae1fc1884f80157e2a6b829935c",
+          "prompt": "According to the guide, this is correct.\n\naccording to.\n\nFinished.",
+          "durationSeconds": 1.848,
+          "activeDurationSeconds": 0.8,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.484253,
+          "rms": 0.059099
+        },
+        {
+          "label": "K",
+          "seed": 12007,
+          "path": "candidates/wanwei-basic-0483-according--to---K.mp3",
+          "bytes": 11088,
+          "sha256": "cb7451fc01944caedb3a26a10de9c1749bcf935c127e6ccea685057cd6ee2b98",
+          "prompt": "According to the guide, this is correct.\n\naccording to.\n\nFinished.",
+          "durationSeconds": 1.848,
+          "activeDurationSeconds": 0.8,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.608,
+          "peak": 0.523346,
+          "rms": 0.067535
+        },
+        {
+          "label": "L",
+          "seed": 13001,
+          "path": "candidates/wanwei-basic-0483-according--to---L.mp3",
+          "bytes": 11376,
+          "sha256": "ad80e7972840f74885c2fd9f83967c5a21602570374965cd431cd2c87b87829e",
+          "prompt": "According to the map, turn left.\n\naccording to.\n\nDone.",
+          "durationSeconds": 1.896,
+          "activeDurationSeconds": 0.84,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.365967,
+          "rms": 0.056133
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-basic-0609-chore",
+      "sourceOrder": 609,
+      "headword": "chore",
+      "phonetic": "/tʃɔːr/",
+      "teachingSense": "家务活",
+      "check": "开头 /tʃ/，不能念成 core 的 /k/",
+      "original": {
+        "path": "originals/wanwei-basic-0609-chore.mp3",
+        "sha256": "d2d9448df73dd675d74ff9ed03eaacc17899832506e608edbc31bb9ff3ada771"
+      },
+      "candidates": [
+        {
+          "label": "I",
+          "seed": 9911,
+          "path": "candidates/wanwei-basic-0609-chore--I.mp3",
+          "bytes": 9072,
+          "sha256": "200c52d83bc49f66d5e514db57292b6d81e91f75a4d38f698ebdab85fe011593",
+          "prompt": "A daily chore takes time.\n\nchore.\n\nFinished.",
+          "durationSeconds": 1.512,
+          "activeDurationSeconds": 0.46,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.612,
+          "peak": 0.36438,
+          "rms": 0.049226
+        },
+        {
+          "label": "J",
+          "seed": 11003,
+          "path": "candidates/wanwei-basic-0609-chore--J.mp3",
+          "bytes": 8640,
+          "sha256": "8d5668044d427f6971628688eb9000ee5e108ecf1fb0d9a62c2bba1bf7e7e419",
+          "prompt": "A daily chore takes time.\n\nchore.\n\nFinished.",
+          "durationSeconds": 1.44,
+          "activeDurationSeconds": 0.4,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.6,
+          "peak": 0.466522,
+          "rms": 0.054003
+        },
+        {
+          "label": "K",
+          "seed": 12007,
+          "path": "candidates/wanwei-basic-0609-chore--K.mp3",
+          "bytes": 10080,
+          "sha256": "eeff5ced6965e268d3236b4d48c8afb952f5d6860c6f7700640faf18d1aa165a",
+          "prompt": "Washing dishes is a household chore.\n\nchore.\n\nDone.",
+          "durationSeconds": 1.68,
+          "activeDurationSeconds": 0.62,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.562531,
+          "rms": 0.066701
+        },
+        {
+          "label": "L",
+          "seed": 13001,
+          "path": "candidates/wanwei-basic-0609-chore--L.mp3",
+          "bytes": 8640,
+          "sha256": "0ea6537df637ce70b57f16c05c8c2f98139470f74fee0ddcefaddcc1fb507506",
+          "prompt": "Washing dishes is a household chore.\n\nchore.\n\nDone.",
+          "durationSeconds": 1.44,
+          "activeDurationSeconds": 0.46,
+          "leadingSilenceSeconds": 0.38,
+          "trailingSilenceSeconds": 0.6,
+          "peak": 0.233948,
+          "rms": 0.031225
+        }
+      ]
+    },
+    {
+      "entryId": "wanwei-basic-1181-video",
+      "sourceOrder": 1181,
+      "headword": "video",
+      "phonetic": "/ˈvɪdioʊ/",
+      "teachingSense": "视频",
+      "check": "必须是单词 video，不得截到提示语",
+      "original": {
+        "path": "originals/wanwei-basic-1181-video.mp3",
+        "sha256": "cc35dd15d217f19a7d8a36b06c86bad945aa5ed352bca8f55dafb5b6d53e9265"
+      },
+      "candidates": [
+        {
+          "label": "I",
+          "seed": 9911,
+          "path": "candidates/wanwei-basic-1181-video--I.mp3",
+          "bytes": 10080,
+          "sha256": "88bc5d07d8985d2dbc8a18c0354f574a6b65a374ee1f6b192df057b5356814b2",
+          "prompt": "Play the video again.\n\nvideo.\n\nFinished.",
+          "durationSeconds": 1.68,
+          "activeDurationSeconds": 0.62,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.665527,
+          "rms": 0.093946
+        },
+        {
+          "label": "J",
+          "seed": 11003,
+          "path": "candidates/wanwei-basic-1181-video--J.mp3",
+          "bytes": 9936,
+          "sha256": "bc8d985dcec6e1f2deaaff03480e89a62947f1d50f6ee431ff657f0702853f05",
+          "prompt": "Play the video again.\n\nvideo.\n\nFinished.",
+          "durationSeconds": 1.656,
+          "activeDurationSeconds": 0.6,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.616,
+          "peak": 0.607666,
+          "rms": 0.077702
+        },
+        {
+          "label": "K",
+          "seed": 12007,
+          "path": "candidates/wanwei-basic-1181-video--K.mp3",
+          "bytes": 11376,
+          "sha256": "ba918e0c4a04f3cafc0023f86fc0f107b136ded5e2a28412c99881767ae208a3",
+          "prompt": "Play the video again.\n\nvideo.\n\nFinished.",
+          "durationSeconds": 1.896,
+          "activeDurationSeconds": 0.92,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.536,
+          "peak": 0.590851,
+          "rms": 0.08599
+        },
+        {
+          "label": "L",
+          "seed": 13001,
+          "path": "candidates/wanwei-basic-1181-video--L.mp3",
+          "bytes": 10080,
+          "sha256": "66e7938ea3d6cbf4150fa014321e7cc8a7b9530e722c3c845e1854176f254acb",
+          "prompt": "Play the video again.\n\nvideo.\n\nFinished.",
+          "durationSeconds": 1.68,
+          "activeDurationSeconds": 0.62,
+          "leadingSilenceSeconds": 0.44,
+          "trailingSilenceSeconds": 0.62,
+          "peak": 0.429321,
+          "rms": 0.060993
+        }
+      ]
+    }
+  ],
+  "digest": "f66c8267d1da1b743bfd539d7159ce16087c56bfd63442d81ee96b8268c0279c"
+}

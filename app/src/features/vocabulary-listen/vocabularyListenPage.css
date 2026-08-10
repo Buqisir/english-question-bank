@@ -1,0 +1,579 @@
+.vocabulary-listen-page {
+  min-height: 100vh;
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.vocabulary-listen-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0 max(20px, calc((100vw - 1040px) / 2));
+  border-bottom: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.vocabulary-listen-header a {
+  color: var(--ink-strong);
+  font-size: 16px;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+
+.vocabulary-listen-header span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.vocabulary-listen-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
+  grid-template-areas:
+    "card controls"
+    "list list";
+  gap: 16px;
+  width: min(1040px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 28px 0 72px;
+}
+
+.vocabulary-listen-card,
+.vocabulary-listen-controls,
+.vocabulary-listen-list {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.vocabulary-listen-card {
+  grid-area: card;
+  min-height: 440px;
+  overflow: hidden;
+}
+
+.vocabulary-listen-position {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.vocabulary-listen-position strong {
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.vocabulary-listen-card-body {
+  display: grid;
+  grid-template-columns: minmax(230px, 0.9fr) minmax(280px, 1.1fr);
+  min-height: 383px;
+}
+
+.vocabulary-listen-card figure {
+  display: grid;
+  place-items: center;
+  margin: 0;
+  padding: 36px;
+  background: #eaf1ed;
+}
+
+.vocabulary-listen-card figure img {
+  display: block;
+  width: min(230px, 78%);
+  height: min(230px, 78%);
+  object-fit: contain;
+}
+
+.vocabulary-listen-word {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 38px;
+}
+
+.vocabulary-listen-word h1 {
+  margin: 0;
+  color: var(--ink-strong);
+  font-family: 'Times New Roman', Times, SimSun, 'Songti SC', STSong, serif;
+  font-size: clamp(
+    calc(var(--eqb-font-size-xl) + var(--eqb-font-size-lg)),
+    6vw,
+    calc(var(--eqb-font-size-xl) + var(--eqb-font-size-md) + var(--eqb-font-size-md) + var(--eqb-font-size-md))
+  );
+  font-weight: 650;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  overflow-wrap: anywhere;
+}
+
+.vocabulary-listen-syllables {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px;
+  margin-top: 24px;
+  color: var(--ink);
+  font-family: 'Times New Roman', Times, SimSun, 'Songti SC', STSong, serif;
+}
+
+.vocabulary-listen-syllables span {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.vocabulary-listen-syllables strong {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.vocabulary-listen-syllables i {
+  color: var(--accent);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.vocabulary-listen-phonetic {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-family: 'Times New Roman', Times, SimSun, 'Songti SC', STSong, serif;
+  font-size: 16px;
+}
+
+.vocabulary-listen-sense {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 28px 0 0;
+}
+
+.vocabulary-listen-sense i {
+  color: var(--muted);
+  font-family: 'Times New Roman', Times, SimSun, 'Songti SC', STSong, serif;
+  font-size: 14px;
+}
+
+.vocabulary-listen-sense strong {
+  color: var(--ink-strong);
+  font-size: 28px;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.vocabulary-listen-controls {
+  grid-area: controls;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-height: 440px;
+  padding: 28px 24px 24px;
+}
+
+.vocabulary-listen-progress {
+  width: 100%;
+  height: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--surface-strong);
+}
+
+.vocabulary-listen-progress span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--accent);
+  transform-origin: left center;
+  transition: transform var(--motion-base) var(--ease-out);
+}
+
+.vocabulary-listen-control-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 64px;
+}
+
+.vocabulary-listen-control-row button,
+.vocabulary-listen-sticky button {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--panel);
+  color: var(--ink);
+}
+
+.vocabulary-listen-control-row .vocabulary-listen-primary-control {
+  width: 64px;
+  height: 64px;
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.vocabulary-listen-control-row button:disabled,
+.vocabulary-listen-sticky button:disabled {
+  opacity: 0.38;
+}
+
+.vocabulary-listen-controls > p {
+  min-height: 22px;
+  margin: 20px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.vocabulary-listen-controls > p.is-error {
+  color: var(--coral-text);
+}
+
+.vocabulary-listen-settings {
+  display: grid;
+  gap: 22px;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+
+.vocabulary-listen-settings fieldset {
+  display: flex;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.vocabulary-listen-settings legend {
+  width: 100%;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.vocabulary-listen-settings fieldset button {
+  flex: 1;
+  min-height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.vocabulary-listen-settings fieldset button.is-selected {
+  border-color: var(--accent);
+  background: #eaf1ed;
+  color: #1e4a3a;
+}
+
+.vocabulary-listen-settings label {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+}
+
+.vocabulary-listen-settings input[type='range'] {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.vocabulary-listen-list {
+  grid-area: list;
+  padding: 22px;
+}
+
+.vocabulary-listen-list > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.vocabulary-listen-list h2 {
+  margin: 0;
+  color: var(--ink-strong);
+  font-size: 28px;
+  font-weight: 650;
+}
+
+.vocabulary-listen-list > div span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.vocabulary-listen-list ol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vocabulary-listen-list li {
+  border-bottom: 1px solid var(--line);
+}
+
+.vocabulary-listen-list li button {
+  display: grid;
+  grid-template-columns: 32px minmax(90px, 0.55fr) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 58px;
+  padding: 8px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+}
+
+.vocabulary-listen-list li button > span {
+  color: var(--muted);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.vocabulary-listen-list li button strong {
+  color: var(--ink-strong);
+  font-family: 'Times New Roman', Times, SimSun, 'Songti SC', STSong, serif;
+  font-size: 16px;
+  font-weight: 650;
+}
+
+.vocabulary-listen-list li button small {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.vocabulary-listen-list li button.is-current {
+  background: #eaf1ed;
+  color: #1e4a3a;
+}
+
+.vocabulary-listen-list li button.is-current > span,
+.vocabulary-listen-list li button.is-current small {
+  color: #1e4a3a;
+}
+
+.vocabulary-listen-sticky {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  left: 12px;
+  z-index: 20;
+  display: none;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 8px;
+  min-height: 64px;
+  padding: 8px 10px 8px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: var(--eqb-shadow-floating);
+  transform: translateY(calc(100% + 24px));
+  visibility: hidden;
+  transition: transform var(--motion-base) var(--ease-out), visibility var(--motion-base);
+}
+
+.vocabulary-listen-sticky > div {
+  display: grid;
+  gap: 2px;
+}
+
+.vocabulary-listen-sticky strong {
+  color: var(--ink-strong);
+  font-family: 'Times New Roman', Times, SimSun, 'Songti SC', STSong, serif;
+  font-size: 16px;
+}
+
+.vocabulary-listen-sticky span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.vocabulary-listen-message {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 24px;
+  background: var(--surface);
+  color: var(--ink);
+  text-align: center;
+}
+
+.vocabulary-listen-message > div {
+  width: min(420px, 100%);
+  padding: 40px 28px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.vocabulary-listen-message svg {
+  color: var(--accent);
+}
+
+.vocabulary-listen-message h1 {
+  margin: 20px 0 8px;
+  color: var(--ink-strong);
+  font-size: 28px;
+}
+
+.vocabulary-listen-message p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.vocabulary-listen-message button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 22px;
+  padding: 9px 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--ink);
+  font-weight: 650;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .vocabulary-listen-control-row button:hover:not(:disabled),
+  .vocabulary-listen-settings button:hover,
+  .vocabulary-listen-list li button:hover,
+  .vocabulary-listen-message button:hover {
+    border-color: var(--line-strong);
+    background: var(--surface-strong);
+  }
+
+  .vocabulary-listen-control-row .vocabulary-listen-primary-control:hover {
+    border-color: var(--eqb-color-primary-text);
+    background: var(--eqb-color-primary-text);
+  }
+}
+
+.vocabulary-listen-page button:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.vocabulary-listen-page button:focus-visible,
+.vocabulary-listen-page a:focus-visible,
+.vocabulary-listen-page input:focus-visible {
+  outline: 3px solid var(--accent-glow);
+  outline-offset: 2px;
+}
+
+@media (max-width: 760px) {
+  .vocabulary-listen-header {
+    padding: 0 16px;
+  }
+
+  .vocabulary-listen-shell {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "card"
+      "controls"
+      "list";
+    width: min(100% - 28px, 560px);
+    padding-top: 14px;
+  }
+
+  .vocabulary-listen-card {
+    min-height: 0;
+  }
+
+  .vocabulary-listen-card-body {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .vocabulary-listen-card figure {
+    min-height: 220px;
+    padding: 24px;
+  }
+
+  .vocabulary-listen-card figure img {
+    width: min(170px, 62%);
+    height: 170px;
+  }
+
+  .vocabulary-listen-word {
+    padding: 28px 24px 32px;
+    text-align: center;
+  }
+
+  .vocabulary-listen-word h1 {
+    font-size: clamp(
+      calc(var(--eqb-font-size-xl) + var(--eqb-font-size-lg)),
+      15vw,
+      calc(var(--eqb-font-size-md) + var(--eqb-font-size-md) + var(--eqb-font-size-md) + var(--eqb-font-size-md))
+    );
+  }
+
+  .vocabulary-listen-syllables,
+  .vocabulary-listen-sense {
+    justify-content: center;
+  }
+
+  .vocabulary-listen-controls {
+    min-height: 380px;
+  }
+
+  .vocabulary-listen-control-row {
+    margin-top: 50px;
+  }
+
+  .vocabulary-listen-list {
+    padding: 18px 14px;
+  }
+
+  .vocabulary-listen-list ol {
+    grid-template-columns: 1fr;
+  }
+
+  .vocabulary-listen-list li button {
+    grid-template-columns: 28px minmax(86px, 0.6fr) minmax(0, 1fr) auto;
+  }
+
+  .vocabulary-listen-sticky {
+    display: grid;
+  }
+
+  .vocabulary-listen-sticky.is-visible {
+    transform: translateY(0);
+    visibility: visible;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vocabulary-listen-progress span,
+  .vocabulary-listen-sticky {
+    transition: none;
+  }
+}

@@ -17,6 +17,7 @@
   --eqb-color-warning-soft: rgba(245, 158, 11, 0.08);
   --eqb-color-success: #059669;
   --eqb-color-success-soft: rgba(16, 185, 129, 0.08);
+  --eqb-shadow-floating: 0 8px 24px rgba(0, 0, 0, 0.12);
 
   --eqb-font-size-xs: 12px;
   --eqb-font-size-sm: 14px;

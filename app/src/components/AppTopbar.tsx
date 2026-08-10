@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
-import { Archive, ArrowLeft, LogOut, Pencil, Tag } from 'lucide-react'
+import { Archive, ArrowLeft, BookMarked, LogOut, Pencil, Tag } from 'lucide-react'
 
 /* ui-shell-unify CR MF-1 disposition: the topbar deliberately does NOT
    carry page workspace tools. Tool-heavy pages (draft workbench) keep
@@ -13,6 +13,7 @@ import { Archive, ArrowLeft, LogOut, Pencil, Tag } from 'lucide-react'
 export type AppTopbarNav = {
   user: { username: string } | null
   onLogout: () => void
+  onOpenVocabularyReview?: () => void
   onOpenMySpace?: () => void
   showAdmin?: boolean
   adminActive?: boolean
@@ -149,6 +150,12 @@ export function AppTopbar(props: AppTopbarProps): ReactNode {
             <span className="topbar-actions-page">{props.actionsSlot}</span>
             <span aria-hidden="true" className="topbar-actions-divider" />
           </>
+        )}
+        {props.onOpenVocabularyReview && (
+          <button className="ghost-button" type="button" onClick={props.onOpenVocabularyReview}>
+            <BookMarked size={16} />
+            过生词
+          </button>
         )}
         {props.onOpenMySpace && (
           <button className="ghost-button" type="button" onClick={props.onOpenMySpace}>

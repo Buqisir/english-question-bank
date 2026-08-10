@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "batchId": "wanwei-audio-repair-v2",
+  "cursor": 10,
+  "decisions": {
+    "wanwei-core-0020-around": {
+      "status": "selected",
+      "candidate": "H",
+      "note": "",
+      "decidedAt": "2026-08-09T07:00:13.776Z"
+    },
+    "wanwei-core-0038-between": {
+      "status": "selected",
+      "candidate": "H",
+      "note": "",
+      "decidedAt": "2026-08-09T07:00:21.759Z"
+    },
+    "wanwei-core-0085-create": {
+      "status": "unresolved",
+      "candidate": null,
+      "note": "",
+      "decidedAt": "2026-08-09T07:02:58.359Z"
+    },
+    "wanwei-core-0204-increase": {
+      "status": "unresolved",
+      "candidate": null,
+      "note": "",
+      "decidedAt": "2026-08-09T07:03:06.875Z"
+    },
+    "wanwei-basic-0483-according--to-": {
+      "status": "unresolved",
+      "candidate": null,
+      "note": "",
+      "decidedAt": "2026-08-09T07:03:14.959Z"
+    },
+    "wanwei-basic-0609-chore": {
+      "status": "unresolved",
+      "candidate": null,
+      "note": "",
+      "decidedAt": "2026-08-09T07:03:26.192Z"
+    },
+    "wanwei-basic-0678-during": {
+      "status": "selected",
+      "candidate": "E",
+      "note": "",
+      "decidedAt": "2026-08-09T07:03:38.842Z"
+    },
+    "wanwei-basic-0954-policeman---policewoman--pl--policemen---policewomen-": {
+      "status": "selected",
+      "candidate": "F",
+      "note": "",
+      "decidedAt": "2026-08-09T07:03:50.524Z"
+    },
+    "wanwei-basic-1062-ski": {
+      "status": "selected",
+      "candidate": "E",
+      "note": "",
+      "decidedAt": "2026-08-09T07:03:55.692Z"
+    },
+    "wanwei-basic-1181-video": {
+      "status": "unresolved",
+      "candidate": null,
+      "note": "",
+      "decidedAt": "2026-08-09T07:04:01.975Z"
+    },
+    "wanwei-recognition-1487-per-cent--ame-percent-": {
+      "status": "selected",
+      "candidate": "F",
+      "note": "",
+      "decidedAt": "2026-08-09T07:04:14.842Z"
+    }
+  },
+  "history": [
+    {
+      "entryId": "wanwei-core-0038-between",
+      "previousDecision": null,
+      "previousCursor": 1
+    },
+    {
+      "entryId": "wanwei-core-0085-create",
+      "previousDecision": null,
+      "previousCursor": 2
+    },
+    {
+      "entryId": "wanwei-core-0204-increase",
+      "previousDecision": null,
+      "previousCursor": 3
+    },
+    {
+      "entryId": "wanwei-basic-0483-according--to-",
+      "previousDecision": null,
+      "previousCursor": 4
+    },
+    {
+      "entryId": "wanwei-basic-0609-chore",
+      "previousDecision": null,
+      "previousCursor": 5
+    },
+    {
+      "entryId": "wanwei-basic-0678-during",
+      "previousDecision": null,
+      "previousCursor": 6
+    },
+    {
+      "entryId": "wanwei-basic-0954-policeman---policewoman--pl--policemen---policewomen-",
+      "previousDecision": null,
+      "previousCursor": 7
+    },
+    {
+      "entryId": "wanwei-basic-1062-ski",
+      "previousDecision": null,
+      "previousCursor": 8
+    },
+    {
+      "entryId": "wanwei-basic-1181-video",
+      "previousDecision": null,
+      "previousCursor": 9
+    },
+    {
+      "entryId": "wanwei-recognition-1487-per-cent--ame-percent-",
+      "previousDecision": null,
+      "previousCursor": 10
+    },
+    {
+      "entryId": "wanwei-recognition-1487-per-cent--ame-percent-",
+      "previousDecision": {
+        "status": "selected",
+        "candidate": "F",
+        "note": "",
+        "decidedAt": "2026-08-09T07:04:09.825Z"
+      },
+      "previousCursor": 10
+    }
+  ],
+  "updatedAt": "2026-08-09T07:04:14.843Z"
+}

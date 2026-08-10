@@ -1,0 +1,5940 @@
+{
+  "schemaVersion": "wanwei-heading-page-evidence-v1",
+  "resolvedCount": 874,
+  "ambiguousCount": 62,
+  "resolved": [
+    {
+      "oracleOrder": 2,
+      "label": "ability",
+      "printedPage": 190,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 3,
+      "label": "able",
+      "printedPage": 190,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 4,
+      "label": "about",
+      "printedPage": 1,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 6,
+      "label": "abroad",
+      "printedPage": 190,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 7,
+      "label": "absent",
+      "printedPage": 190,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 8,
+      "label": "accept",
+      "printedPage": 2,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 9,
+      "label": "accident",
+      "printedPage": 190,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 10,
+      "label": "according (to)",
+      "printedPage": 190,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 11,
+      "label": "account",
+      "printedPage": 223,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 12,
+      "label": "ache",
+      "printedPage": 223,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 14,
+      "label": "across",
+      "printedPage": 2,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 15,
+      "label": "act",
+      "printedPage": 190,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 18,
+      "label": "activity",
+      "printedPage": 190,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 20,
+      "label": "actually",
+      "printedPage": 190,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 24,
+      "label": "admire",
+      "printedPage": 190,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 25,
+      "label": "adult",
+      "printedPage": 223,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 27,
+      "label": "advice",
+      "printedPage": 4,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 29,
+      "label": "afford",
+      "printedPage": 4,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 30,
+      "label": "afraid",
+      "printedPage": 4,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 31,
+      "label": "after",
+      "printedPage": 191,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 33,
+      "label": "again",
+      "printedPage": 191,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 34,
+      "label": "against",
+      "printedPage": 5,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 35,
+      "label": "age",
+      "printedPage": 191,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 36,
+      "label": "ago",
+      "printedPage": 191,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 37,
+      "label": "agree",
+      "printedPage": 5,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 38,
+      "label": "ahead",
+      "printedPage": 191,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 40,
+      "label": "aid",
+      "printedPage": 191,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 41,
+      "label": "aim",
+      "printedPage": 223,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 42,
+      "label": "air’",
+      "printedPage": 223,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 43,
+      "label": "airport",
+      "printedPage": 223,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 44,
+      "label": "alarm",
+      "printedPage": 223,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 45,
+      "label": "alive",
+      "printedPage": 191,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 46,
+      "label": "all",
+      "printedPage": 23,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 47,
+      "label": "allow",
+      "printedPage": 6,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 49,
+      "label": "alone",
+      "printedPage": 6,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 50,
+      "label": "along",
+      "printedPage": 7,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 63,
+      "label": "another",
+      "printedPage": 7,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 65,
+      "label": "ant",
+      "printedPage": 223,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 68,
+      "label": "anything",
+      "printedPage": 191,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 69,
+      "label": "anyway",
+      "printedPage": 223,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 71,
+      "label": "apartment",
+      "printedPage": 223,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 72,
+      "label": "app (=application)",
+      "printedPage": 223,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 73,
+      "label": "appear",
+      "printedPage": 9,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 74,
+      "label": "apple",
+      "printedPage": 191,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 75,
+      "label": "area",
+      "printedPage": 146,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 76,
+      "label": "argue",
+      "printedPage": 191,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 77,
+      "label": "arm",
+      "printedPage": 193,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 79,
+      "label": "around",
+      "printedPage": 9,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 80,
+      "label": "arrive",
+      "printedPage": 10,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 82,
+      "label": "article",
+      "printedPage": 223,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 83,
+      "label": "artist",
+      "printedPage": 192,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 85,
+      "label": "ask",
+      "printedPage": 11,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 87,
+      "label": "astronaut",
+      "printedPage": 192,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 89,
+      "label": "athlete",
+      "printedPage": 223,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 91,
+      "label": "attend",
+      "printedPage": 11,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 92,
+      "label": "attention",
+      "printedPage": 11,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 94,
+      "label": "autumn",
+      "printedPage": 192,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 96,
+      "label": "avoid",
+      "printedPage": 12,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 97,
+      "label": "awake",
+      "printedPage": 192,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 98,
+      "label": "award",
+      "printedPage": 192,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 100,
+      "label": "away",
+      "printedPage": 12,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 101,
+      "label": "awful",
+      "printedPage": 192,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 102,
+      "label": "baby",
+      "printedPage": 192,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 103,
+      "label": "back “",
+      "printedPage": 13,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 104,
+      "label": "background",
+      "printedPage": 223,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 105,
+      "label": "bad",
+      "printedPage": 222,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 107,
+      "label": "bag",
+      "printedPage": 192,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 108,
+      "label": "balance",
+      "printedPage": 192,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 109,
+      "label": "ball “",
+      "printedPage": 223,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 111,
+      "label": "bamboo",
+      "printedPage": 224,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 112,
+      "label": "banana “",
+      "printedPage": 224,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 113,
+      "label": "band",
+      "printedPage": 224,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 114,
+      "label": "bank",
+      "printedPage": 192,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 116,
+      "label": "basic",
+      "printedPage": 192,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 117,
+      "label": "basket",
+      "printedPage": 192,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 118,
+      "label": "basketball",
+      "printedPage": 224,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 124,
+      "label": "bean",
+      "printedPage": 224,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 125,
+      "label": "bear",
+      "printedPage": 224,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 128,
+      "label": "because",
+      "printedPage": 15,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 129,
+      "label": "become",
+      "printedPage": 15,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 130,
+      "label": "bed",
+      "printedPage": 192,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 133,
+      "label": "beef",
+      "printedPage": 192,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 141,
+      "label": "below",
+      "printedPage": 224,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 142,
+      "label": "belt",
+      "printedPage": 224,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 145,
+      "label": "best",
+      "printedPage": 17,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 146,
+      "label": "better",
+      "printedPage": 193,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 147,
+      "label": "between",
+      "printedPage": 17,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 148,
+      "label": "big",
+      "printedPage": 193,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 149,
+      "label": "bike (=bicycle)",
+      "printedPage": 193,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 150,
+      "label": "bill",
+      "printedPage": 224,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 151,
+      "label": "bin",
+      "printedPage": 224,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 152,
+      "label": "biology",
+      "printedPage": 224,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 153,
+      "label": "bird",
+      "printedPage": 193,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 154,
+      "label": "birth",
+      "printedPage": 193,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 155,
+      "label": "birthday",
+      "printedPage": 193,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 156,
+      "label": "biscuit",
+      "printedPage": 224,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 158,
+      "label": "black “",
+      "printedPage": 224,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 159,
+      "label": "blackboard",
+      "printedPage": 193,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 160,
+      "label": "bleed",
+      "printedPage": 224,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 161,
+      "label": "blind",
+      "printedPage": 193,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 162,
+      "label": "block",
+      "printedPage": 224,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 163,
+      "label": "blood",
+      "printedPage": 193,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 166,
+      "label": "blue",
+      "printedPage": 193,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 167,
+      "label": "board",
+      "printedPage": 193,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 168,
+      "label": "boat",
+      "printedPage": 193,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 171,
+      "label": "book",
+      "printedPage": 193,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 172,
+      "label": "boring",
+      "printedPage": 17,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 174,
+      "label": "borrow",
+      "printedPage": 18,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 177,
+      "label": "bottle",
+      "printedPage": 193,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 184,
+      "label": "bread “",
+      "printedPage": 193,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 185,
+      "label": "break",
+      "printedPage": 18,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 186,
+      "label": "breakfast",
+      "printedPage": 193,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 189,
+      "label": "bright",
+      "printedPage": 19,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 190,
+      "label": "bring",
+      "printedPage": 20,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 192,
+      "label": "brown",
+      "printedPage": 224,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 193,
+      "label": "brush",
+      "printedPage": 193,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 195,
+      "label": "build",
+      "printedPage": 22,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 196,
+      "label": "building",
+      "printedPage": 193,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 197,
+      "label": "bully",
+      "printedPage": 194,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 199,
+      "label": "bus",
+      "printedPage": 194,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 200,
+      "label": "business",
+      "printedPage": 194,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 201,
+      "label": "busy",
+      "printedPage": 22,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 204,
+      "label": "butterfly",
+      "printedPage": 224,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 206,
+      "label": "by",
+      "printedPage": 173,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 207,
+      "label": "cabbage",
+      "printedPage": 224,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 208,
+      "label": "cake“",
+      "printedPage": 194,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 209,
+      "label": "calendar",
+      "printedPage": 224,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 211,
+      "label": "calm",
+      "printedPage": 194,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 212,
+      "label": "camera",
+      "printedPage": 194,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 213,
+      "label": "camp",
+      "printedPage": 194,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 214,
+      "label": "can",
+      "printedPage": 194,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 216,
+      "label": "cancer",
+      "printedPage": 224,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 218,
+      "label": "candy",
+      "printedPage": 224,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 221,
+      "label": "car",
+      "printedPage": 194,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 222,
+      "label": "card",
+      "printedPage": 194,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 224,
+      "label": "careful",
+      "printedPage": 24,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 225,
+      "label": "careless",
+      "printedPage": 194,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 227,
+      "label": "carry",
+      "printedPage": 24,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 228,
+      "label": "cartoon",
+      "printedPage": 194,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 232,
+      "label": "catch",
+      "printedPage": 25,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 234,
+      "label": "celebrate",
+      "printedPage": 25,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 235,
+      "label": "cent",
+      "printedPage": 230,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 236,
+      "label": "central",
+      "printedPage": 224,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 241,
+      "label": "chalk",
+      "printedPage": 224,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 244,
+      "label": "chance",
+      "printedPage": 26,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 245,
+      "label": "change",
+      "printedPage": 26,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 250,
+      "label": "cheap",
+      "printedPage": 27,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 252,
+      "label": "check",
+      "printedPage": 27,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 253,
+      "label": "cheer",
+      "printedPage": 27,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 276,
+      "label": "clean",
+      "printedPage": 28,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 277,
+      "label": "clear",
+      "printedPage": 28,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 283,
+      "label": "close",
+      "printedPage": 29,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 294,
+      "label": "collect",
+      "printedPage": 30,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 296,
+      "label": "colour (AmE color)",
+      "printedPage": 196,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 297,
+      "label": "come",
+      "printedPage": 30,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 298,
+      "label": "comfortable",
+      "printedPage": 30,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 299,
+      "label": "common",
+      "printedPage": 31,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 300,
+      "label": "communicate",
+      "printedPage": 31,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 301,
+      "label": "community",
+      "printedPage": 196,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 303,
+      "label": "compare",
+      "printedPage": 31,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 304,
+      "label": "compete",
+      "printedPage": 31,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 305,
+      "label": "complete",
+      "printedPage": 32,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 307,
+      "label": "concert",
+      "printedPage": 196,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 308,
+      "label": "condition",
+      "printedPage": 196,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 309,
+      "label": "confidence",
+      "printedPage": 196,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 311,
+      "label": "connect",
+      "printedPage": 32,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 312,
+      "label": "consider",
+      "printedPage": 32,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 313,
+      "label": "continue",
+      "printedPage": 32,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 314,
+      "label": "control",
+      "printedPage": 33,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 315,
+      "label": "convenient",
+      "printedPage": 33,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 316,
+      "label": "conversation",
+      "printedPage": 196,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 317,
+      "label": "cook",
+      "printedPage": 196,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 319,
+      "label": "cool",
+      "printedPage": 196,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 321,
+      "label": "copy",
+      "printedPage": 196,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 324,
+      "label": "correct",
+      "printedPage": 33,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 336,
+      "label": "cover",
+      "printedPage": 34,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 339,
+      "label": "create",
+      "printedPage": 35,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 345,
+      "label": "culture",
+      "printedPage": 35,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 346,
+      "label": "cup“",
+      "printedPage": 197,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 347,
+      "label": "curious",
+      "printedPage": 197,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 348,
+      "label": "customer",
+      "printedPage": 197,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 349,
+      "label": "cut",
+      "printedPage": 35,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 350,
+      "label": "cute",
+      "printedPage": 197,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 351,
+      "label": "daily",
+      "printedPage": 197,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 352,
+      "label": "dance",
+      "printedPage": 197,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 353,
+      "label": "danger",
+      "printedPage": 36,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 354,
+      "label": "dangerous",
+      "printedPage": 36,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 355,
+      "label": "dark",
+      "printedPage": 197,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 357,
+      "label": "daughter",
+      "printedPage": 197,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 358,
+      "label": "day",
+      "printedPage": 36,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 359,
+      "label": "dead",
+      "printedPage": 197,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 360,
+      "label": "deaf",
+      "printedPage": 226,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 363,
+      "label": "death",
+      "printedPage": 197,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 365,
+      "label": "deep",
+      "printedPage": 37,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 366,
+      "label": "degree",
+      "printedPage": 197,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 368,
+      "label": "dentist",
+      "printedPage": 226,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 369,
+      "label": "depend",
+      "printedPage": 37,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 370,
+      "label": "describe",
+      "printedPage": 197,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 372,
+      "label": "design",
+      "printedPage": 197,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 373,
+      "label": "desk",
+      "printedPage": 226,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 374,
+      "label": "develop",
+      "printedPage": 38,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 375,
+      "label": "dialogue (AmE dialog)",
+      "printedPage": 226,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 377,
+      "label": "dictionary",
+      "printedPage": 226,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 379,
+      "label": "diet",
+      "printedPage": 226,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 381,
+      "label": "different",
+      "printedPage": 39,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 382,
+      "label": "difficult",
+      "printedPage": 40,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 383,
+      "label": "dig",
+      "printedPage": 197,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 384,
+      "label": "digital",
+      "printedPage": 226,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 385,
+      "label": "dining",
+      "printedPage": 226,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 386,
+      "label": "dinner",
+      "printedPage": 197,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 388,
+      "label": "director",
+      "printedPage": 226,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 389,
+      "label": "dirty",
+      "printedPage": 197,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 390,
+      "label": "disappoint",
+      "printedPage": 198,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 391,
+      "label": "disaster",
+      "printedPage": 226,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 392,
+      "label": "discover",
+      "printedPage": 40,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 393,
+      "label": "discuss",
+      "printedPage": 40,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 394,
+      "label": "disease",
+      "printedPage": 226,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 395,
+      "label": "dish",
+      "printedPage": 198,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 398,
+      "label": "doctor",
+      "printedPage": 198,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 399,
+      "label": "dog",
+      "printedPage": 198,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 400,
+      "label": "doll",
+      "printedPage": 226,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 401,
+      "label": "dollar",
+      "printedPage": 226,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 402,
+      "label": "donate",
+      "printedPage": 226,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 404,
+      "label": "double",
+      "printedPage": 226,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 405,
+      "label": "doubt",
+      "printedPage": 41,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 406,
+      "label": "down “",
+      "printedPage": 41,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 408,
+      "label": "dragon",
+      "printedPage": 198,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 410,
+      "label": "draw",
+      "printedPage": 44,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 411,
+      "label": "dream",
+      "printedPage": 44,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 412,
+      "label": "dress",
+      "printedPage": 198,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 413,
+      "label": "drink",
+      "printedPage": 44,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 414,
+      "label": "drive",
+      "printedPage": 44,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 416,
+      "label": "drop",
+      "printedPage": 44,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 418,
+      "label": "duck",
+      "printedPage": 226,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 420,
+      "label": "during",
+      "printedPage": 198,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 425,
+      "label": "early“",
+      "printedPage": 45,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 426,
+      "label": "earth",
+      "printedPage": 198,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 427,
+      "label": "earthquake",
+      "printedPage": 226,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 429,
+      "label": "easy",
+      "printedPage": 45,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 431,
+      "label": "education",
+      "printedPage": 46,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 433,
+      "label": "effort",
+      "printedPage": 46,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 434,
+      "label": "egg",
+      "printedPage": 226,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 435,
+      "label": "either",
+      "printedPage": 46,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 438,
+      "label": "electronic",
+      "printedPage": 226,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 444,
+      "label": "empty",
+      "printedPage": 46,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 445,
+      "label": "encourage",
+      "printedPage": 47,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 446,
+      "label": "end",
+      "printedPage": 47,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 448,
+      "label": "energetic",
+      "printedPage": 226,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 452,
+      "label": "enjoy",
+      "printedPage": 48,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 453,
+      "label": "enough",
+      "printedPage": 48,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 454,
+      "label": "enter",
+      "printedPage": 48,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 457,
+      "label": "eraser",
+      "printedPage": 226,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 459,
+      "label": "even",
+      "printedPage": 49,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 461,
+      "label": "event",
+      "printedPage": 226,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 468,
+      "label": "exactly",
+      "printedPage": 49,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 470,
+      "label": "example",
+      "printedPage": 49,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 473,
+      "label": "excited",
+      "printedPage": 50,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 476,
+      "label": "exercise",
+      "printedPage": 200,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 477,
+      "label": "expect",
+      "printedPage": 50,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 479,
+      "label": "experience",
+      "printedPage": 52,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 481,
+      "label": "explain",
+      "printedPage": 52,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 482,
+      "label": "explore",
+      "printedPage": 200,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 483,
+      "label": "express",
+      "printedPage": 52,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 486,
+      "label": "fact",
+      "printedPage": 53,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 487,
+      "label": "factory",
+      "printedPage": 200,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 488,
+      "label": "fail",
+      "printedPage": 53,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 489,
+      "label": "fair",
+      "printedPage": 200,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 490,
+      "label": "fall",
+      "printedPage": 53,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 491,
+      "label": "false",
+      "printedPage": 226,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 492,
+      "label": "familiar",
+      "printedPage": 200,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 496,
+      "label": "fantastic",
+      "printedPage": 200,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 498,
+      "label": "farm",
+      "printedPage": 200,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 502,
+      "label": "fat",
+      "printedPage": 200,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 505,
+      "label": "fear",
+      "printedPage": 55,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 512,
+      "label": "field",
+      "printedPage": 201,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 513,
+      "label": "fight",
+      "printedPage": 56,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 516,
+      "label": "final",
+      "printedPage": 57,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 517,
+      "label": "find",
+      "printedPage": 57,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 521,
+      "label": "fire",
+      "printedPage": 201,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 526,
+      "label": "fix",
+      "printedPage": 58,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 531,
+      "label": "flower",
+      "printedPage": 201,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 532,
+      "label": "flu",
+      "printedPage": 82,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 533,
+      "label": "fly",
+      "printedPage": 58,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 534,
+      "label": "focus",
+      "printedPage": 201,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 536,
+      "label": "folk",
+      "printedPage": 201,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 538,
+      "label": "food",
+      "printedPage": 201,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 540,
+      "label": "foot (pl. feet)",
+      "printedPage": 201,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 541,
+      "label": "football",
+      "printedPage": 201,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 544,
+      "label": "foreign",
+      "printedPage": 201,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 547,
+      "label": "forget",
+      "printedPage": 59,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 551,
+      "label": "found",
+      "printedPage": 224,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 555,
+      "label": "fresh",
+      "printedPage": 60,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 557,
+      "label": "friend",
+      "printedPage": 60,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 560,
+      "label": "from",
+      "printedPage": 61,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 561,
+      "label": "front",
+      "printedPage": 61,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 563,
+      "label": "full",
+      "printedPage": 61,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 564,
+      "label": "fun",
+      "printedPage": 62,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 565,
+      "label": "funny",
+      "printedPage": 202,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 566,
+      "label": "future",
+      "printedPage": 202,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 567,
+      "label": "game",
+      "printedPage": 202,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 568,
+      "label": "garden “",
+      "printedPage": 62,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 570,
+      "label": "gate",
+      "printedPage": 202,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 571,
+      "label": "general",
+      "printedPage": 202,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 575,
+      "label": "gift",
+      "printedPage": 64,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 576,
+      "label": "giraffe",
+      "printedPage": 227,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 577,
+      "label": "girl",
+      "printedPage": 202,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 578,
+      "label": "give“",
+      "printedPage": 64,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 580,
+      "label": "glass “",
+      "printedPage": 202,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 581,
+      "label": "glove",
+      "printedPage": 202,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 584,
+      "label": "goal",
+      "printedPage": 202,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 586,
+      "label": "gold",
+      "printedPage": 202,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 588,
+      "label": "goodbye (bye)",
+      "printedPage": 227,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 589,
+      "label": "government",
+      "printedPage": 202,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 590,
+      "label": "grade",
+      "printedPage": 202,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 591,
+      "label": "graduate",
+      "printedPage": 202,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 592,
+      "label": "grammar",
+      "printedPage": 227,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 597,
+      "label": "great",
+      "printedPage": 66,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 598,
+      "label": "green",
+      "printedPage": 202,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 603,
+      "label": "grow",
+      "printedPage": 67,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 605,
+      "label": "guess",
+      "printedPage": 202,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 606,
+      "label": "guest",
+      "printedPage": 202,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 607,
+      "label": "guide",
+      "printedPage": 202,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 609,
+      "label": "gun",
+      "printedPage": 227,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 610,
+      "label": "gym (=gymnasium)",
+      "printedPage": 227,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 611,
+      "label": "habit",
+      "printedPage": 67,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 613,
+      "label": "half",
+      "printedPage": 202,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 616,
+      "label": "hand",
+      "printedPage": 68,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 618,
+      "label": "hang",
+      "printedPage": 68,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 620,
+      "label": "happy",
+      "printedPage": 69,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 622,
+      "label": "hardly",
+      "printedPage": 70,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 624,
+      "label": "hat",
+      "printedPage": 227,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 629,
+      "label": "health",
+      "printedPage": 71,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 630,
+      "label": "healthy",
+      "printedPage": 71,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 631,
+      "label": "hear",
+      "printedPage": 71,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 633,
+      "label": "heat",
+      "printedPage": 140,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 634,
+      "label": "heavy",
+      "printedPage": 73,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 638,
+      "label": "helpful",
+      "printedPage": 74,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 640,
+      "label": "her",
+      "printedPage": 192,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 642,
+      "label": "hero",
+      "printedPage": 74,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 645,
+      "label": "hi",
+      "printedPage": 74,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 646,
+      "label": "hide",
+      "printedPage": 74,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 647,
+      "label": "high",
+      "printedPage": 74,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 652,
+      "label": "his",
+      "printedPage": 75,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 653,
+      "label": "history",
+      "printedPage": 75,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 656,
+      "label": "hold",
+      "printedPage": 75,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 659,
+      "label": "home",
+      "printedPage": 75,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 661,
+      "label": "homework",
+      "printedPage": 155,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 662,
+      "label": "honest",
+      "printedPage": 76,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 663,
+      "label": "honey",
+      "printedPage": 228,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 664,
+      "label": "honour (AmE honor)",
+      "printedPage": 203,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 665,
+      "label": "hope",
+      "printedPage": 77,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 666,
+      "label": "horse “",
+      "printedPage": 228,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 668,
+      "label": "host / hostess",
+      "printedPage": 228,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 669,
+      "label": "hot",
+      "printedPage": 77,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 670,
+      "label": "hotel",
+      "printedPage": 228,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 671,
+      "label": "hour “",
+      "printedPage": 77,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 672,
+      "label": "house",
+      "printedPage": 203,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 673,
+      "label": "housework",
+      "printedPage": 203,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 674,
+      "label": "how",
+      "printedPage": 78,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 675,
+      "label": "however",
+      "printedPage": 203,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 677,
+      "label": "huge",
+      "printedPage": 228,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 678,
+      "label": "human",
+      "printedPage": 228,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 680,
+      "label": "hungry",
+      "printedPage": 78,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 681,
+      "label": "hunt",
+      "printedPage": 228,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 682,
+      "label": "hurry “",
+      "printedPage": 204,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 683,
+      "label": "hurt",
+      "printedPage": 78,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 684,
+      "label": "husband",
+      "printedPage": 204,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 686,
+      "label": "ice",
+      "printedPage": 228,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 691,
+      "label": "illness",
+      "printedPage": 204,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 692,
+      "label": "imagine",
+      "printedPage": 79,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 693,
+      "label": "important",
+      "printedPage": 79,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 694,
+      "label": "impossible",
+      "printedPage": 80,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 695,
+      "label": "improve",
+      "printedPage": 80,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 697,
+      "label": "include",
+      "printedPage": 81,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 699,
+      "label": "industry",
+      "printedPage": 228,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 700,
+      "label": "influence",
+      "printedPage": 82,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 701,
+      "label": "information",
+      "printedPage": 204,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 702,
+      "label": "insect",
+      "printedPage": 228,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 703,
+      "label": "inside",
+      "printedPage": 204,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 704,
+      "label": "instead",
+      "printedPage": 82,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 705,
+      "label": "instruction",
+      "printedPage": 204,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 706,
+      "label": "instrument",
+      "printedPage": 204,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 707,
+      "label": "interest",
+      "printedPage": 82,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 709,
+      "label": "international",
+      "printedPage": 228,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 710,
+      "label": "Internet",
+      "printedPage": 228,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 711,
+      "label": "interview",
+      "printedPage": 228,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 713,
+      "label": "introduce",
+      "printedPage": 83,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 715,
+      "label": "invite",
+      "printedPage": 84,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 716,
+      "label": "island",
+      "printedPage": 228,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 719,
+      "label": "itself",
+      "printedPage": 204,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 720,
+      "label": "jacket",
+      "printedPage": 204,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 721,
+      "label": "jeans",
+      "printedPage": 228,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 722,
+      "label": "job",
+      "printedPage": 84,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 724,
+      "label": "join",
+      "printedPage": 86,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 725,
+      "label": "joke",
+      "printedPage": 204,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 727,
+      "label": "joy",
+      "printedPage": 204,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 728,
+      "label": "judge",
+      "printedPage": 228,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 730,
+      "label": "jump",
+      "printedPage": 86,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 731,
+      "label": "junior",
+      "printedPage": 228,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 732,
+      "label": "just",
+      "printedPage": 87,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 733,
+      "label": "keep",
+      "printedPage": 87,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 734,
+      "label": "key",
+      "printedPage": 204,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 735,
+      "label": "keyboard",
+      "printedPage": 228,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 736,
+      "label": "kick",
+      "printedPage": 228,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 739,
+      "label": "kilo (=kilogram)",
+      "printedPage": 228,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 741,
+      "label": "kind",
+      "printedPage": 88,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 743,
+      "label": "kiss",
+      "printedPage": 204,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 744,
+      "label": "kitchen",
+      "printedPage": 204,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 746,
+      "label": "knee",
+      "printedPage": 228,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 747,
+      "label": "knife (pil. knives)",
+      "printedPage": 204,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 749,
+      "label": "know “",
+      "printedPage": 88,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 750,
+      "label": "knowledge",
+      "printedPage": 205,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 755,
+      "label": "lamp",
+      "printedPage": 228,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 756,
+      "label": "land",
+      "printedPage": 89,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 758,
+      "label": "language",
+      "printedPage": 205,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 759,
+      "label": "lantern",
+      "printedPage": 228,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 760,
+      "label": "laptop",
+      "printedPage": 228,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 761,
+      "label": "large",
+      "printedPage": 89,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 763,
+      "label": "late",
+      "printedPage": 90,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 765,
+      "label": "laugh",
+      "printedPage": 91,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 766,
+      "label": "law",
+      "printedPage": 205,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 767,
+      "label": "lawyer",
+      "printedPage": 228,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 768,
+      "label": "lay",
+      "printedPage": 205,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 769,
+      "label": "lazy",
+      "printedPage": 205,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 770,
+      "label": "lead",
+      "printedPage": 91,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 771,
+      "label": "leaf (pl. leaves)",
+      "printedPage": 92,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 773,
+      "label": "least",
+      "printedPage": 92,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 774,
+      "label": "leave",
+      "printedPage": 92,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 776,
+      "label": "leg",
+      "printedPage": 205,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 779,
+      "label": "less",
+      "printedPage": 93,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 781,
+      "label": "let",
+      "printedPage": 205,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 784,
+      "label": "library",
+      "printedPage": 205,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 786,
+      "label": "life (pl. lives)",
+      "printedPage": 95,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 790,
+      "label": "like “",
+      "printedPage": 95,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 791,
+      "label": "likely",
+      "printedPage": 228,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 793,
+      "label": "lion",
+      "printedPage": 228,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 794,
+      "label": "list",
+      "printedPage": 205,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 795,
+      "label": "listen",
+      "printedPage": 96,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 799,
+      "label": "live “",
+      "printedPage": 96,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 801,
+      "label": "local",
+      "printedPage": 205,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 802,
+      "label": "lock",
+      "printedPage": 205,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 803,
+      "label": "lonely",
+      "printedPage": 98,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 804,
+      "label": "long“",
+      "printedPage": 98,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 805,
+      "label": "look",
+      "printedPage": 98,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 808,
+      "label": "lost",
+      "printedPage": 224,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 809,
+      "label": "lot“",
+      "printedPage": 206,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 810,
+      "label": "loud",
+      "printedPage": 100,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 811,
+      "label": "love",
+      "printedPage": 101,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 813,
+      "label": "low",
+      "printedPage": 206,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 816,
+      "label": "machine",
+      "printedPage": 206,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 817,
+      "label": "mad",
+      "printedPage": 206,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 820,
+      "label": "magic",
+      "printedPage": 206,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 822,
+      "label": "make “",
+      "printedPage": 101,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 824,
+      "label": "man (pl. men)",
+      "printedPage": 206,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 825,
+      "label": "manage",
+      "printedPage": 102,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 826,
+      "label": "manner",
+      "printedPage": 206,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 828,
+      "label": "map",
+      "printedPage": 206,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 829,
+      "label": "mark",
+      "printedPage": 206,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 831,
+      "label": "marry",
+      "printedPage": 206,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 833,
+      "label": "match",
+      "printedPage": 103,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 836,
+      "label": "matter",
+      "printedPage": 206,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 841,
+      "label": "mean",
+      "printedPage": 103,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 842,
+      "label": "meaning",
+      "printedPage": 103,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 848,
+      "label": "meet",
+      "printedPage": 104,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 851,
+      "label": "mention",
+      "printedPage": 206,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 853,
+      "label": "mess",
+      "printedPage": 206,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 863,
+      "label": "minute",
+      "printedPage": 106,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 867,
+      "label": "mistake",
+      "printedPage": 107,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 877,
+      "label": "more",
+      "printedPage": 107,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 884,
+      "label": "move",
+      "printedPage": 108,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 894,
+      "label": "my",
+      "printedPage": 228,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 896,
+      "label": "name",
+      "printedPage": 109,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 899,
+      "label": "nature",
+      "printedPage": 110,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 900,
+      "label": "near",
+      "printedPage": 110,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 902,
+      "label": "necessary",
+      "printedPage": 110,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 904,
+      "label": "need",
+      "printedPage": 111,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 907,
+      "label": "neither",
+      "printedPage": 111,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 908,
+      "label": "nervous",
+      "printedPage": 111,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 910,
+      "label": "new",
+      "printedPage": 208,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 911,
+      "label": "news",
+      "printedPage": 208,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 913,
+      "label": "next",
+      "printedPage": 208,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 914,
+      "label": "nice",
+      "printedPage": 208,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 915,
+      "label": "night",
+      "printedPage": 208,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 917,
+      "label": "nobody",
+      "printedPage": 208,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 918,
+      "label": "nod",
+      "printedPage": 208,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 919,
+      "label": "noise",
+      "printedPage": 112,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 920,
+      "label": "none",
+      "printedPage": 208,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 921,
+      "label": "noodle",
+      "printedPage": 208,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 923,
+      "label": "nor",
+      "printedPage": 208,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 924,
+      "label": "normal",
+      "printedPage": 208,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 925,
+      "label": "north",
+      "printedPage": 208,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 926,
+      "label": "nose",
+      "printedPage": 208,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 927,
+      "label": "not",
+      "printedPage": 112,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 928,
+      "label": "note",
+      "printedPage": 112,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 930,
+      "label": "nothing",
+      "printedPage": 113,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 931,
+      "label": "notice",
+      "printedPage": 113,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 934,
+      "label": "number",
+      "printedPage": 114,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 937,
+      "label": "ocean",
+      "printedPage": 208,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 939,
+      "label": "of",
+      "printedPage": 114,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 940,
+      "label": "off",
+      "printedPage": 114,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 941,
+      "label": "offer",
+      "printedPage": 115,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 943,
+      "label": "officer",
+      "printedPage": 208,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 953,
+      "label": "only",
+      "printedPage": 116,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 954,
+      "label": "open",
+      "printedPage": 117,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 956,
+      "label": "operate",
+      "printedPage": 208,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 957,
+      "label": "opinion",
+      "printedPage": 117,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 958,
+      "label": "opposite",
+      "printedPage": 208,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 960,
+      "label": "orange",
+      "printedPage": 209,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 961,
+      "label": "order",
+      "printedPage": 117,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 963,
+      "label": "other",
+      "printedPage": 118,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 964,
+      "label": "our“",
+      "printedPage": 209,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 965,
+      "label": "ours",
+      "printedPage": 209,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 966,
+      "label": "ourselves",
+      "printedPage": 209,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 967,
+      "label": "out",
+      "printedPage": 118,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 968,
+      "label": "outside",
+      "printedPage": 209,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 969,
+      "label": "oven",
+      "printedPage": 230,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 971,
+      "label": "own",
+      "printedPage": 119,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 972,
+      "label": "pack",
+      "printedPage": 209,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 973,
+      "label": "packet",
+      "printedPage": 230,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 974,
+      "label": "page",
+      "printedPage": 209,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 975,
+      "label": "pain",
+      "printedPage": 119,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 976,
+      "label": "paint",
+      "printedPage": 119,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 977,
+      "label": "pair",
+      "printedPage": 209,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 978,
+      "label": "palace",
+      "printedPage": 230,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 979,
+      "label": "pale",
+      "printedPage": 230,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 980,
+      "label": "pancake",
+      "printedPage": 230,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 981,
+      "label": "panda",
+      "printedPage": 209,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 982,
+      "label": "paper",
+      "printedPage": 209,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 983,
+      "label": "paragraph",
+      "printedPage": 230,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 984,
+      "label": "pardon",
+      "printedPage": 230,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 985,
+      "label": "parent",
+      "printedPage": 209,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 986,
+      "label": "park “",
+      "printedPage": 209,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 987,
+      "label": "part",
+      "printedPage": 120,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 988,
+      "label": "partner",
+      "printedPage": 230,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 989,
+      "label": "party “",
+      "printedPage": 232,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 990,
+      "label": "pass",
+      "printedPage": 121,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 991,
+      "label": "passage",
+      "printedPage": 230,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 992,
+      "label": "passenger",
+      "printedPage": 230,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 993,
+      "label": "passport",
+      "printedPage": 230,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 995,
+      "label": "patient",
+      "printedPage": 121,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 996,
+      "label": "pay",
+      "printedPage": 122,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 998,
+      "label": "peace",
+      "printedPage": 122,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 999,
+      "label": "pear",
+      "printedPage": 230,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1001,
+      "label": "pencil",
+      "printedPage": 209,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1002,
+      "label": "penguin",
+      "printedPage": 230,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1003,
+      "label": "people",
+      "printedPage": 209,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1004,
+      "label": "pepper",
+      "printedPage": 230,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1005,
+      "label": "per cent (AmE percent)",
+      "printedPage": 230,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1006,
+      "label": "perfect",
+      "printedPage": 122,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1010,
+      "label": "person",
+      "printedPage": 122,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1011,
+      "label": "personal",
+      "printedPage": 209,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1012,
+      "label": "pet",
+      "printedPage": 209,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1013,
+      "label": "phone",
+      "printedPage": 210,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1014,
+      "label": "photo (=photograph)",
+      "printedPage": 123,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1015,
+      "label": "physics",
+      "printedPage": 230,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1016,
+      "label": "piano",
+      "printedPage": 210,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1017,
+      "label": "pick",
+      "printedPage": 123,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1020,
+      "label": "pie",
+      "printedPage": 230,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1021,
+      "label": "piece",
+      "printedPage": 123,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1022,
+      "label": "pig",
+      "printedPage": 230,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1023,
+      "label": "pill",
+      "printedPage": 230,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1025,
+      "label": "ping-pong",
+      "printedPage": 230,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1026,
+      "label": "pink",
+      "printedPage": 210,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1028,
+      "label": "pity",
+      "printedPage": 124,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1029,
+      "label": "pizza",
+      "printedPage": 210,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1030,
+      "label": "place “",
+      "printedPage": 126,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1031,
+      "label": "plan",
+      "printedPage": 126,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1032,
+      "label": "plane",
+      "printedPage": 210,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1033,
+      "label": "planet",
+      "printedPage": 210,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1034,
+      "label": "plant",
+      "printedPage": 126,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1035,
+      "label": "plastic",
+      "printedPage": 210,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1038,
+      "label": "playground “",
+      "printedPage": 210,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1039,
+      "label": "please",
+      "printedPage": 127,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1040,
+      "label": "pleasure",
+      "printedPage": 128,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1041,
+      "label": "plenty",
+      "printedPage": 210,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1043,
+      "label": "pocket",
+      "printedPage": 230,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1047,
+      "label": "police",
+      "printedPage": 210,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1049,
+      "label": "polite",
+      "printedPage": 128,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1052,
+      "label": "poor",
+      "printedPage": 129,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1053,
+      "label": "popular",
+      "printedPage": 129,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1054,
+      "label": "population",
+      "printedPage": 230,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1056,
+      "label": "porridge",
+      "printedPage": 230,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1058,
+      "label": "positive",
+      "printedPage": 230,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1059,
+      "label": "possible",
+      "printedPage": 130,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1063,
+      "label": "pot",
+      "printedPage": 124,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1064,
+      "label": "potato",
+      "printedPage": 210,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1068,
+      "label": "practice",
+      "printedPage": 130,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1069,
+      "label": "praise",
+      "printedPage": 131,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1070,
+      "label": "prefer",
+      "printedPage": 131,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1071,
+      "label": "prepare",
+      "printedPage": 131,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1072,
+      "label": "present",
+      "printedPage": 131,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1078,
+      "label": "pride",
+      "printedPage": 132,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1085,
+      "label": "problem",
+      "printedPage": 132,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1091,
+      "label": "promise",
+      "printedPage": 133,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1094,
+      "label": "protect",
+      "printedPage": 134,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1095,
+      "label": "proud",
+      "printedPage": 134,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1097,
+      "label": "provide",
+      "printedPage": 135,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1098,
+      "label": "public",
+      "printedPage": 135,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1100,
+      "label": "pull",
+      "printedPage": 135,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1101,
+      "label": "punish",
+      "printedPage": 135,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1104,
+      "label": "push",
+      "printedPage": 135,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1110,
+      "label": "quick",
+      "printedPage": 136,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1111,
+      "label": "quiet",
+      "printedPage": 137,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1119,
+      "label": "raise",
+      "printedPage": 137,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1120,
+      "label": "rapid",
+      "printedPage": 138,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1122,
+      "label": "reach",
+      "printedPage": 138,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1123,
+      "label": "read“",
+      "printedPage": 138,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1125,
+      "label": "real",
+      "printedPage": 139,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1126,
+      "label": "realise (AmE realize)",
+      "printedPage": 139,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1133,
+      "label": "record",
+      "printedPage": 212,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1135,
+      "label": "red",
+      "printedPage": 212,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1136,
+      "label": "reduce",
+      "printedPage": 212,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1137,
+      "label": "refuse",
+      "printedPage": 140,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1138,
+      "label": "regret",
+      "printedPage": 140,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1139,
+      "label": "relationship",
+      "printedPage": 212,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1141,
+      "label": "relax",
+      "printedPage": 140,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1142,
+      "label": "remain",
+      "printedPage": 212,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1145,
+      "label": "repair",
+      "printedPage": 141,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1146,
+      "label": "repeat",
+      "printedPage": 212,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1147,
+      "label": "reply",
+      "printedPage": 212,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1148,
+      "label": "report",
+      "printedPage": 141,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1149,
+      "label": "require",
+      "printedPage": 212,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1150,
+      "label": "research",
+      "printedPage": 212,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1151,
+      "label": "respect",
+      "printedPage": 212,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1152,
+      "label": "responsible",
+      "printedPage": 212,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1154,
+      "label": "restaurant",
+      "printedPage": 212,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1156,
+      "label": "return",
+      "printedPage": 142,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1157,
+      "label": "review",
+      "printedPage": 142,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1160,
+      "label": "ride",
+      "printedPage": 142,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1161,
+      "label": "right",
+      "printedPage": 143,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1163,
+      "label": "rise",
+      "printedPage": 213,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1164,
+      "label": "risk",
+      "printedPage": 213,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1165,
+      "label": "river",
+      "printedPage": 213,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1166,
+      "label": "road",
+      "printedPage": 213,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1167,
+      "label": "robot “",
+      "printedPage": 213,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1168,
+      "label": "rock",
+      "printedPage": 213,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1171,
+      "label": "room",
+      "printedPage": 213,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1172,
+      "label": "rope",
+      "printedPage": 213,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1174,
+      "label": "round",
+      "printedPage": 213,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1176,
+      "label": "rubbish",
+      "printedPage": 213,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1177,
+      "label": "rule",
+      "printedPage": 143,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1181,
+      "label": "sad",
+      "printedPage": 145,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1182,
+      "label": "safe",
+      "printedPage": 145,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1185,
+      "label": "sale",
+      "printedPage": 213,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1187,
+      "label": "same",
+      "printedPage": 146,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1190,
+      "label": "satisfy",
+      "printedPage": 146,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1191,
+      "label": "save",
+      "printedPage": 146,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1192,
+      "label": "say",
+      "printedPage": 146,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1193,
+      "label": "scare",
+      "printedPage": 147,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1197,
+      "label": "science",
+      "printedPage": 214,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1198,
+      "label": "scientist",
+      "printedPage": 214,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1199,
+      "label": "scissors",
+      "printedPage": 214,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1200,
+      "label": "score",
+      "printedPage": 214,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1202,
+      "label": "sea",
+      "printedPage": 214,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1203,
+      "label": "search",
+      "printedPage": 147,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1204,
+      "label": "season",
+      "printedPage": 147,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1205,
+      "label": "seat",
+      "printedPage": 214,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1208,
+      "label": "seem",
+      "printedPage": 214,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1209,
+      "label": "seldom",
+      "printedPage": 214,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1210,
+      "label": "sell“",
+      "printedPage": 149,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1211,
+      "label": "send",
+      "printedPage": 149,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1212,
+      "label": "sense",
+      "printedPage": 214,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1213,
+      "label": "sentence",
+      "printedPage": 214,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1214,
+      "label": "separate",
+      "printedPage": 214,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1215,
+      "label": "serious",
+      "printedPage": 149,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1216,
+      "label": "serve",
+      "printedPage": 150,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1224,
+      "label": "share",
+      "printedPage": 151,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1226,
+      "label": "she “",
+      "printedPage": 56,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1227,
+      "label": "sheep (pl. sheep)",
+      "printedPage": 214,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1231,
+      "label": "shirt",
+      "printedPage": 214,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1233,
+      "label": "shoe",
+      "printedPage": 215,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1235,
+      "label": "shop",
+      "printedPage": 215,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1236,
+      "label": "short",
+      "printedPage": 215,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1238,
+      "label": "should",
+      "printedPage": 215,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1240,
+      "label": "shout",
+      "printedPage": 215,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1241,
+      "label": "show",
+      "printedPage": 151,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1242,
+      "label": "shower",
+      "printedPage": 215,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1243,
+      "label": "shut",
+      "printedPage": 215,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1244,
+      "label": "shy",
+      "printedPage": 215,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1245,
+      "label": "sick",
+      "printedPage": 215,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1247,
+      "label": "sign",
+      "printedPage": 215,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1248,
+      "label": "silent",
+      "printedPage": 152,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1249,
+      "label": "silk",
+      "printedPage": 215,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1250,
+      "label": "silly",
+      "printedPage": 215,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1254,
+      "label": "since",
+      "printedPage": 152,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1260,
+      "label": "situation",
+      "printedPage": 215,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1264,
+      "label": "skill",
+      "printedPage": 153,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1269,
+      "label": "slow",
+      "printedPage": 154,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1270,
+      "label": "small",
+      "printedPage": 215,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1271,
+      "label": "smart",
+      "printedPage": 154,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1272,
+      "label": "smell",
+      "printedPage": 154,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1275,
+      "label": "smooth",
+      "printedPage": 154,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1280,
+      "label": "social",
+      "printedPage": 215,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1281,
+      "label": "socialism",
+      "printedPage": 232,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1282,
+      "label": "society",
+      "printedPage": 232,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1283,
+      "label": "sock “",
+      "printedPage": 215,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1284,
+      "label": "sofa",
+      "printedPage": 232,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1285,
+      "label": "soft",
+      "printedPage": 156,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1286,
+      "label": "soil",
+      "printedPage": 232,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1287,
+      "label": "soldier",
+      "printedPage": 232,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1288,
+      "label": "solve",
+      "printedPage": 156,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1289,
+      "label": "some",
+      "printedPage": 216,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1290,
+      "label": "somebody / someone",
+      "printedPage": 216,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1291,
+      "label": "something",
+      "printedPage": 216,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1292,
+      "label": "sometimes",
+      "printedPage": 216,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1293,
+      "label": "somewhere",
+      "printedPage": 232,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1294,
+      "label": "son",
+      "printedPage": 216,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1295,
+      "label": "song",
+      "printedPage": 216,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1297,
+      "label": "sore",
+      "printedPage": 232,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1298,
+      "label": "sorry “",
+      "printedPage": 216,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1299,
+      "label": "sound",
+      "printedPage": 156,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1300,
+      "label": "soup",
+      "printedPage": 216,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1301,
+      "label": "south",
+      "printedPage": 216,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1302,
+      "label": "space",
+      "printedPage": 157,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1304,
+      "label": "speak",
+      "printedPage": 157,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1305,
+      "label": "special",
+      "printedPage": 157,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1306,
+      "label": "speech",
+      "printedPage": 216,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1307,
+      "label": "speed",
+      "printedPage": 216,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1309,
+      "label": "spend",
+      "printedPage": 158,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1310,
+      "label": "spirit",
+      "printedPage": 158,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1312,
+      "label": "sport",
+      "printedPage": 158,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1313,
+      "label": "spread",
+      "printedPage": 158,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1315,
+      "label": "square",
+      "printedPage": 232,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1316,
+      "label": "stage",
+      "printedPage": 232,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1317,
+      "label": "stamp",
+      "printedPage": 216,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1321,
+      "label": "start",
+      "printedPage": 160,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1322,
+      "label": "state",
+      "printedPage": 216,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1323,
+      "label": "station",
+      "printedPage": 232,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1324,
+      "label": "stay",
+      "printedPage": 160,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1325,
+      "label": "steal",
+      "printedPage": 161,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1326,
+      "label": "step",
+      "printedPage": 161,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1327,
+      "label": "stick",
+      "printedPage": 161,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1328,
+      "label": "still",
+      "printedPage": 217,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1329,
+      "label": "stomach",
+      "printedPage": 232,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1330,
+      "label": "stone",
+      "printedPage": 217,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1331,
+      "label": "stop",
+      "printedPage": 161,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1332,
+      "label": "store",
+      "printedPage": 217,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1333,
+      "label": "storm",
+      "printedPage": 232,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1334,
+      "label": "story",
+      "printedPage": 217,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1335,
+      "label": "straight",
+      "printedPage": 232,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1336,
+      "label": "strange",
+      "printedPage": 162,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1337,
+      "label": "strawberry",
+      "printedPage": 217,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1338,
+      "label": "street",
+      "printedPage": 217,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1339,
+      "label": "stress",
+      "printedPage": 217,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1340,
+      "label": "strict",
+      "printedPage": 162,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1341,
+      "label": "strong",
+      "printedPage": 162,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1342,
+      "label": "student",
+      "printedPage": 217,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1343,
+      "label": "study",
+      "printedPage": 162,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1344,
+      "label": "style",
+      "printedPage": 232,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1345,
+      "label": "subject",
+      "printedPage": 162,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1346,
+      "label": "succeed",
+      "printedPage": 163,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1347,
+      "label": "success",
+      "printedPage": 163,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1349,
+      "label": "sudden",
+      "printedPage": 165,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1350,
+      "label": "suffer",
+      "printedPage": 232,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1351,
+      "label": "sugar",
+      "printedPage": 217,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1352,
+      "label": "suggest",
+      "printedPage": 165,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1353,
+      "label": "suit",
+      "printedPage": 217,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1354,
+      "label": "summer",
+      "printedPage": 217,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1357,
+      "label": "supermarket",
+      "printedPage": 217,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1358,
+      "label": "support",
+      "printedPage": 166,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1360,
+      "label": "sure",
+      "printedPage": 166,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1362,
+      "label": "surprise",
+      "printedPage": 166,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1364,
+      "label": "survive",
+      "printedPage": 232,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1365,
+      "label": "sweater",
+      "printedPage": 232,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1368,
+      "label": "swim",
+      "printedPage": 167,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1370,
+      "label": "table",
+      "printedPage": 217,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1371,
+      "label": "tail",
+      "printedPage": 232,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1372,
+      "label": "take",
+      "printedPage": 167,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1373,
+      "label": "talent",
+      "printedPage": 217,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1374,
+      "label": "talk",
+      "printedPage": 168,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1377,
+      "label": "tape",
+      "printedPage": 232,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1379,
+      "label": "taste",
+      "printedPage": 168,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1381,
+      "label": "tea",
+      "printedPage": 232,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1382,
+      "label": "teach",
+      "printedPage": 168,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1384,
+      "label": "team",
+      "printedPage": 218,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1385,
+      "label": "teamwork",
+      "printedPage": 218,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1386,
+      "label": "technology",
+      "printedPage": 218,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1387,
+      "label": "teenage",
+      "printedPage": 232,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1388,
+      "label": "tell",
+      "printedPage": 169,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1389,
+      "label": "temperature",
+      "printedPage": 218,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1390,
+      "label": "tennis",
+      "printedPage": 218,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1391,
+      "label": "tent",
+      "printedPage": 232,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1392,
+      "label": "term",
+      "printedPage": 218,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1393,
+      "label": "terrible",
+      "printedPage": 218,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1394,
+      "label": "test",
+      "printedPage": 218,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1396,
+      "label": "than",
+      "printedPage": 170,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1397,
+      "label": "thank",
+      "printedPage": 170,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1398,
+      "label": "that",
+      "printedPage": 218,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1400,
+      "label": "theatre (AmE theater)",
+      "printedPage": 218,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1401,
+      "label": "their",
+      "printedPage": 218,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1402,
+      "label": "theirs",
+      "printedPage": 218,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1403,
+      "label": "them",
+      "printedPage": 218,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1404,
+      "label": "themselves",
+      "printedPage": 218,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1406,
+      "label": "there “",
+      "printedPage": 218,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1407,
+      "label": "therefore",
+      "printedPage": 232,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1408,
+      "label": "these",
+      "printedPage": 218,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1409,
+      "label": "they",
+      "printedPage": 218,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1410,
+      "label": "thick",
+      "printedPage": 218,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1412,
+      "label": "thing",
+      "printedPage": 218,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1413,
+      "label": "think",
+      "printedPage": 170,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1414,
+      "label": "thirsty",
+      "printedPage": 218,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1417,
+      "label": "though",
+      "printedPage": 171,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1420,
+      "label": "through",
+      "printedPage": 171,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1421,
+      "label": "throw",
+      "printedPage": 171,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1422,
+      "label": "thunder",
+      "printedPage": 232,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1423,
+      "label": "ticket",
+      "printedPage": 218,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1427,
+      "label": "time",
+      "printedPage": 172,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1429,
+      "label": "tired",
+      "printedPage": 172,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1437,
+      "label": "ton",
+      "printedPage": 56,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1444,
+      "label": "touch",
+      "printedPage": 173,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1452,
+      "label": "tradition",
+      "printedPage": 173,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1454,
+      "label": "train",
+      "printedPage": 173,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1457,
+      "label": "travel",
+      "printedPage": 174,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1459,
+      "label": "treat",
+      "printedPage": 175,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1462,
+      "label": "trouble",
+      "printedPage": 175,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1464,
+      "label": "truck",
+      "printedPage": 219,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1465,
+      "label": "true",
+      "printedPage": 176,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1466,
+      "label": "trust",
+      "printedPage": 176,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1468,
+      "label": "try",
+      "printedPage": 176,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1470,
+      "label": "turn",
+      "printedPage": 176,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1471,
+      "label": "TV (=television)",
+      "printedPage": 220,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1472,
+      "label": "ugly",
+      "printedPage": 220,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1473,
+      "label": "umbrella",
+      "printedPage": 220,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1474,
+      "label": "uncle “",
+      "printedPage": 220,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1475,
+      "label": "under",
+      "printedPage": 220,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1476,
+      "label": "underground",
+      "printedPage": 220,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1477,
+      "label": "understand",
+      "printedPage": 177,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1482,
+      "label": "unless",
+      "printedPage": 220,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1483,
+      "label": "until (till)",
+      "printedPage": 220,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1484,
+      "label": "up",
+      "printedPage": 177,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1487,
+      "label": "use",
+      "printedPage": 178,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1488,
+      "label": "usual",
+      "printedPage": 178,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1489,
+      "label": "vacation",
+      "printedPage": 220,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1490,
+      "label": "value",
+      "printedPage": 178,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1491,
+      "label": "vegetable",
+      "printedPage": 220,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1492,
+      "label": "very “",
+      "printedPage": 220,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1493,
+      "label": "victory",
+      "printedPage": 220,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1494,
+      "label": "video",
+      "printedPage": 220,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1496,
+      "label": "village",
+      "printedPage": 220,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1499,
+      "label": "visit",
+      "printedPage": 179,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1500,
+      "label": "voice",
+      "printedPage": 180,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1503,
+      "label": "volunteer",
+      "printedPage": 220,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1506,
+      "label": "wake",
+      "printedPage": 180,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1507,
+      "label": "walk",
+      "printedPage": 181,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1510,
+      "label": "want",
+      "printedPage": 181,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1512,
+      "label": "warm",
+      "printedPage": 181,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1514,
+      "label": "wash",
+      "printedPage": 181,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1516,
+      "label": "watch",
+      "printedPage": 182,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1518,
+      "label": "watermelon",
+      "printedPage": 220,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1522,
+      "label": "weak",
+      "printedPage": 182,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1524,
+      "label": "wear",
+      "printedPage": 183,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1533,
+      "label": "well",
+      "printedPage": 183,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1552,
+      "label": "wide",
+      "printedPage": 184,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1562,
+      "label": "winter “",
+      "printedPage": 222,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1563,
+      "label": "wise",
+      "printedPage": 185,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1564,
+      "label": "wish",
+      "printedPage": 222,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1565,
+      "label": "with",
+      "printedPage": 186,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1567,
+      "label": "without",
+      "printedPage": 222,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1569,
+      "label": "woman (pl. women)",
+      "printedPage": 222,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1570,
+      "label": "wonder",
+      "printedPage": 186,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1571,
+      "label": "wonderful",
+      "printedPage": 186,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1572,
+      "label": "wood",
+      "printedPage": 222,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1574,
+      "label": "work “",
+      "printedPage": 187,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1575,
+      "label": "worker",
+      "printedPage": 222,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1576,
+      "label": "world",
+      "printedPage": 222,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1577,
+      "label": "worry",
+      "printedPage": 187,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1578,
+      "label": "worse",
+      "printedPage": 222,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1579,
+      "label": "worst",
+      "printedPage": 222,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1581,
+      "label": "would",
+      "printedPage": 222,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1582,
+      "label": "wound",
+      "printedPage": 222,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1586,
+      "label": "yard",
+      "printedPage": 222,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1589,
+      "label": "yes",
+      "printedPage": 222,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1593,
+      "label": "you",
+      "printedPage": 222,
+      "evidence": "numbered-heading-with-pronunciation"
+    },
+    {
+      "oracleOrder": 1594,
+      "label": "young",
+      "printedPage": 188,
+      "evidence": "numbered-heading-with-pronunciation"
+    }
+  ],
+  "ambiguous": [
+    {
+      "oracleOrder": 1,
+      "label": "a / an",
+      "candidatePages": {
+        "1": 3,
+        "2": 1,
+        "4": 2,
+        "5": 1,
+        "6": 1,
+        "7": 1,
+        "9": 2,
+        "12": 2,
+        "15": 1,
+        "24": 1,
+        "30": 1,
+        "32": 1,
+        "34": 1,
+        "36": 2,
+        "38": 1,
+        "45": 1,
+        "46": 2,
+        "49": 1,
+        "54": 1,
+        "82": 1,
+        "86": 1,
+        "91": 1,
+        "94": 1,
+        "108": 1,
+        "110": 1,
+        "111": 2,
+        "112": 1,
+        "115": 1,
+        "117": 1,
+        "124": 1,
+        "128": 2,
+        "135": 1,
+        "139": 1,
+        "145": 1,
+        "146": 1,
+        "157": 1,
+        "170": 2,
+        "177": 1,
+        "187": 1,
+        "191": 1,
+        "192": 3,
+        "193": 1,
+        "194": 1,
+        "196": 1,
+        "198": 1,
+        "202": 1,
+        "208": 2,
+        "209": 3,
+        "212": 1,
+        "213": 1,
+        "214": 2,
+        "215": 2,
+        "220": 2,
+        "223": 4,
+        "224": 2,
+        "226": 1,
+        "228": 1,
+        "230": 2,
+        "232": 2
+      }
+    },
+    {
+      "oracleOrder": 21,
+      "label": "ad (=advertisement)",
+      "candidatePages": {
+        "9": 1,
+        "40": 1,
+        "54": 1,
+        "69": 1,
+        "70": 1,
+        "91": 1,
+        "93": 1,
+        "197": 1,
+        "200": 1,
+        "215": 1,
+        "217": 1,
+        "223": 1,
+        "228": 1
+      }
+    },
+    {
+      "oracleOrder": 39,
+      "label": "AI (= artificial intelligence)",
+      "candidatePages": {
+        "191": 1,
+        "200": 1,
+        "223": 1
+      }
+    },
+    {
+      "oracleOrder": 56,
+      "label": "a.m.",
+      "candidatePages": {
+        "192": 1,
+        "218": 1,
+        "220": 1
+      }
+    },
+    {
+      "oracleOrder": 60,
+      "label": "and",
+      "candidatePages": {
+        "191": 1,
+        "224": 1
+      }
+    },
+    {
+      "oracleOrder": 81,
+      "label": "art",
+      "candidatePages": {
+        "1": 1,
+        "192": 1,
+        "218": 1,
+        "232": 1
+      }
+    },
+    {
+      "oracleOrder": 84,
+      "label": "as",
+      "candidatePages": {
+        "4": 1,
+        "10": 1,
+        "36": 1,
+        "40": 1,
+        "152": 1,
+        "201": 1,
+        "220": 1
+      }
+    },
+    {
+      "oracleOrder": 88,
+      "label": "at",
+      "candidatePages": {
+        "2": 1,
+        "40": 1,
+        "122": 1,
+        "157": 1,
+        "212": 1
+      }
+    },
+    {
+      "oracleOrder": 119,
+      "label": "bat",
+      "candidatePages": {
+        "194": 1,
+        "224": 1,
+        "227": 1
+      }
+    },
+    {
+      "oracleOrder": 122,
+      "label": "be (am, is, are)",
+      "candidatePages": {
+        "4": 1,
+        "18": 1,
+        "47": 1,
+        "62": 1,
+        "79": 1,
+        "122": 1,
+        "140": 1,
+        "145": 1,
+        "197": 1,
+        "204": 1,
+        "205": 1,
+        "214": 1
+      }
+    },
+    {
+      "oracleOrder": 132,
+      "label": "bee",
+      "candidatePages": {
+        "111": 1,
+        "146": 1,
+        "224": 1
+      }
+    },
+    {
+      "oracleOrder": 157,
+      "label": "bit",
+      "candidatePages": {
+        "224": 1,
+        "228": 1
+      }
+    },
+    {
+      "oracleOrder": 180,
+      "label": "box “",
+      "candidatePages": {
+        "193": 1,
+        "224": 2
+      }
+    },
+    {
+      "oracleOrder": 362,
+      "label": "dear",
+      "candidatePages": {
+        "218": 1,
+        "226": 1
+      }
+    },
+    {
+      "oracleOrder": 397,
+      "label": "do",
+      "candidatePages": {
+        "7": 1,
+        "40": 1,
+        "155": 1,
+        "177": 1,
+        "186": 1,
+        "197": 1,
+        "198": 1
+      }
+    },
+    {
+      "oracleOrder": 495,
+      "label": "fan",
+      "candidatePages": {
+        "62": 1,
+        "79": 1,
+        "147": 1,
+        "200": 1
+      }
+    },
+    {
+      "oracleOrder": 497,
+      "label": "far",
+      "candidatePages": {
+        "5": 1,
+        "54": 1,
+        "57": 1,
+        "146": 1,
+        "200": 1,
+        "215": 1
+      }
+    },
+    {
+      "oracleOrder": 509,
+      "label": "festival",
+      "candidatePages": {
+        "201": 1,
+        "226": 1
+      }
+    },
+    {
+      "oracleOrder": 511,
+      "label": "few",
+      "candidatePages": {
+        "56": 1,
+        "155": 1
+      }
+    },
+    {
+      "oracleOrder": 525,
+      "label": "fit",
+      "candidatePages": {
+        "57": 1,
+        "204": 1
+      }
+    },
+    {
+      "oracleOrder": 542,
+      "label": "for",
+      "candidatePages": {
+        "59": 1,
+        "115": 1,
+        "215": 1
+      }
+    },
+    {
+      "oracleOrder": 552,
+      "label": "fox",
+      "candidatePages": {
+        "4": 1,
+        "59": 1
+      }
+    },
+    {
+      "oracleOrder": 553,
+      "label": "free",
+      "candidatePages": {
+        "60": 1,
+        "68": 1
+      }
+    },
+    {
+      "oracleOrder": 574,
+      "label": "get",
+      "candidatePages": {
+        "59": 1,
+        "64": 1
+      }
+    },
+    {
+      "oracleOrder": 587,
+      "label": "good",
+      "candidatePages": {
+        "66": 1,
+        "193": 1
+      }
+    },
+    {
+      "oracleOrder": 621,
+      "label": "hard",
+      "candidatePages": {
+        "69": 1,
+        "74": 1
+      }
+    },
+    {
+      "oracleOrder": 626,
+      "label": "have (hes)",
+      "candidatePages": {
+        "70": 1,
+        "155": 1
+      }
+    },
+    {
+      "oracleOrder": 627,
+      "label": "he“",
+      "candidatePages": {
+        "68": 1,
+        "146": 2,
+        "173": 1,
+        "187": 1,
+        "193": 1,
+        "197": 1,
+        "206": 1,
+        "214": 1
+      }
+    },
+    {
+      "oracleOrder": 637,
+      "label": "help",
+      "candidatePages": {
+        "73": 1,
+        "74": 1
+      }
+    },
+    {
+      "oracleOrder": 641,
+      "label": "here",
+      "candidatePages": {
+        "32": 1,
+        "48": 1
+      }
+    },
+    {
+      "oracleOrder": 685,
+      "label": "I",
+      "candidatePages": {
+        "18": 1,
+        "22": 1,
+        "32": 1,
+        "34": 1,
+        "45": 2,
+        "52": 1,
+        "71": 1,
+        "73": 1,
+        "75": 1,
+        "78": 1,
+        "96": 1,
+        "102": 1,
+        "107": 1,
+        "110": 1,
+        "124": 1,
+        "131": 1,
+        "155": 1,
+        "157": 1,
+        "191": 1,
+        "201": 1,
+        "212": 2,
+        "216": 1,
+        "217": 1,
+        "218": 2,
+        "222": 1,
+        "224": 1,
+        "228": 1
+      }
+    },
+    {
+      "oracleOrder": 688,
+      "label": "idea“",
+      "candidatePages": {
+        "79": 1,
+        "224": 1
+      }
+    },
+    {
+      "oracleOrder": 696,
+      "label": "in’",
+      "candidatePages": {
+        "47": 1,
+        "48": 1,
+        "81": 1,
+        "82": 3,
+        "204": 1,
+        "230": 1
+      }
+    },
+    {
+      "oracleOrder": 712,
+      "label": "into",
+      "candidatePages": {
+        "83": 1,
+        "228": 2
+      }
+    },
+    {
+      "oracleOrder": 717,
+      "label": "it",
+      "candidatePages": {
+        "77": 1,
+        "194": 1,
+        "202": 1,
+        "204": 2
+      }
+    },
+    {
+      "oracleOrder": 718,
+      "label": "its",
+      "candidatePages": {
+        "201": 1,
+        "204": 1
+      }
+    },
+    {
+      "oracleOrder": 778,
+      "label": "lend",
+      "candidatePages": {
+        "89": 1,
+        "205": 1
+      }
+    },
+    {
+      "oracleOrder": 798,
+      "label": "little",
+      "candidatePages": {
+        "92": 1,
+        "96": 1,
+        "155": 1
+      }
+    },
+    {
+      "oracleOrder": 827,
+      "label": "many",
+      "candidatePages": {
+        "102": 1,
+        "107": 1,
+        "108": 1,
+        "155": 1
+      }
+    },
+    {
+      "oracleOrder": 839,
+      "label": "me",
+      "candidatePages": {
+        "24": 1,
+        "152": 1,
+        "209": 1
+      }
+    },
+    {
+      "oracleOrder": 873,
+      "label": "money",
+      "candidatePages": {
+        "107": 1,
+        "230": 1
+      }
+    },
+    {
+      "oracleOrder": 886,
+      "label": "Mr (AmE Mr. )",
+      "candidatePages": {
+        "107": 1,
+        "111": 1
+      }
+    },
+    {
+      "oracleOrder": 889,
+      "label": "much “",
+      "candidatePages": {
+        "107": 1,
+        "108": 2,
+        "155": 1
+      }
+    },
+    {
+      "oracleOrder": 916,
+      "label": "no",
+      "candidatePages": {
+        "114": 1,
+        "208": 1
+      }
+    },
+    {
+      "oracleOrder": 949,
+      "label": "on",
+      "candidatePages": {
+        "27": 1,
+        "31": 1,
+        "34": 1,
+        "44": 1,
+        "57": 1,
+        "62": 1,
+        "68": 1,
+        "94": 1,
+        "101": 1,
+        "115": 1,
+        "122": 1,
+        "126": 1,
+        "128": 1,
+        "135": 1,
+        "137": 1,
+        "141": 1,
+        "142": 1,
+        "150": 1,
+        "159": 1,
+        "160": 1,
+        "168": 1,
+        "170": 1,
+        "176": 1,
+        "179": 1,
+        "182": 1,
+        "187": 1,
+        "212": 1,
+        "216": 1,
+        "220": 2,
+        "223": 1,
+        "228": 1
+      }
+    },
+    {
+      "oracleOrder": 959,
+      "label": "or",
+      "candidatePages": {
+        "62": 1,
+        "117": 1
+      }
+    },
+    {
+      "oracleOrder": 1037,
+      "label": "play",
+      "candidatePages": {
+        "127": 1,
+        "230": 1
+      }
+    },
+    {
+      "oracleOrder": 1042,
+      "label": "p.m.",
+      "candidatePages": {
+        "117": 1,
+        "230": 1
+      }
+    },
+    {
+      "oracleOrder": 1046,
+      "label": "point",
+      "candidatePages": {
+        "128": 1,
+        "198": 1
+      }
+    },
+    {
+      "oracleOrder": 1105,
+      "label": "put",
+      "candidatePages": {
+        "136": 1,
+        "194": 1
+      }
+    },
+    {
+      "oracleOrder": 1207,
+      "label": "see",
+      "candidatePages": {
+        "148": 1,
+        "212": 1
+      }
+    },
+    {
+      "oracleOrder": 1218,
+      "label": "set",
+      "candidatePages": {
+        "150": 1,
+        "232": 1
+      }
+    },
+    {
+      "oracleOrder": 1279,
+      "label": "so",
+      "candidatePages": {
+        "15": 1,
+        "80": 1,
+        "111": 1,
+        "130": 1,
+        "155": 1,
+        "166": 1,
+        "232": 1
+      }
+    },
+    {
+      "oracleOrder": 1318,
+      "label": "stand “",
+      "candidatePages": {
+        "159": 1,
+        "177": 1
+      }
+    },
+    {
+      "oracleOrder": 1375,
+      "label": "tall",
+      "candidatePages": {
+        "6": 1,
+        "217": 1
+      }
+    },
+    {
+      "oracleOrder": 1399,
+      "label": "the",
+      "candidatePages": {
+        "56": 1,
+        "193": 1,
+        "218": 1,
+        "226": 1
+      }
+    },
+    {
+      "oracleOrder": 1418,
+      "label": "thought",
+      "candidatePages": {
+        "218": 1,
+        "224": 1
+      }
+    },
+    {
+      "oracleOrder": 1430,
+      "label": "to",
+      "candidatePages": {
+        "48": 1,
+        "141": 1,
+        "155": 1,
+        "173": 1,
+        "190": 1,
+        "194": 1,
+        "201": 1
+      }
+    },
+    {
+      "oracleOrder": 1511,
+      "label": "war",
+      "candidatePages": {
+        "187": 2,
+        "220": 1
+      }
+    },
+    {
+      "oracleOrder": 1520,
+      "label": "way",
+      "candidatePages": {
+        "182": 1,
+        "230": 1
+      }
+    },
+    {
+      "oracleOrder": 1521,
+      "label": "we",
+      "candidatePages": {
+        "22": 1,
+        "180": 1,
+        "209": 2,
+        "214": 1,
+        "220": 1,
+        "224": 1
+      }
+    },
+    {
+      "oracleOrder": 1573,
+      "label": "word",
+      "candidatePages": {
+        "192": 1,
+        "222": 1
+      }
+    }
+  ]
+}
