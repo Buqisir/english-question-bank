@@ -28,6 +28,7 @@ import { DraftPaperWorkbench } from './features/draft-paper/DraftPaperWorkbench'
 import { MySpacePage } from './features/my-space/MySpacePage'
 import { AdminWorkbench } from './features/admin/AdminWorkbench'
 import { VocabularyReviewPage } from './features/vocabulary-review/VocabularyReviewPage'
+import { VocabularyPracticePage } from './features/vocabulary-practice/VocabularyPracticePage'
 import { AppTopbar, type AppTopbarNav } from './components/AppTopbar'
 import { addGroupToCurrentDraftPaper as addGroupToCurrentDraftPaperRequest } from './services/draftPapers'
 import { useCurrentUser, useIsOwnerView } from './auth/AuthGate.tsx'
@@ -84,6 +85,19 @@ function App() {
   const [vocabularyReviewRouteActive, setVocabularyReviewRouteActive] = useState(() => {
     if (typeof window === 'undefined') return false
     return new URLSearchParams(window.location.search).get('view') === 'vocabulary-review'
+  })
+  const [vocabularyReviewSetId, setVocabularyReviewSetId] = useState(() => {
+    if (typeof window === 'undefined') return null as string | null
+    const params = new URLSearchParams(window.location.search)
+    return params.get('view') === 'vocabulary-review' ? params.get('setId') : null
+  })
+  const [vocabularyPracticeRoute, setVocabularyPracticeRoute] = useState(() => {
+    if (typeof window === 'undefined') return { active: false, setId: null as string | null }
+    const params = new URLSearchParams(window.location.search)
+    return {
+      active: params.get('view') === 'vocabulary-practice',
+      setId: params.get('setId'),
+    }
   })
   // home-blank — `?view=browse`: the home list surface's browse mode. Unlike
   // its sibling routes above this does NOT swap out a top-level component —
@@ -485,6 +499,7 @@ function App() {
     }
     setMySpaceRouteActive(false)
     setVocabularyReviewRouteActive(false)
+    setVocabularyPracticeRoute({ active: false, setId: null })
     setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, lecture: false, similar: false })
     setDraftPaperRoute({
       active: true,
@@ -553,6 +568,7 @@ function App() {
     }
     setMySpaceRouteActive(false)
     setVocabularyReviewRouteActive(false)
+    setVocabularyPracticeRoute({ active: false, setId: null })
     setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
     setPaperBrowseRoute({ active: true, paperId, focusGroupId: focusGroupId || null, questionId, lecture, similar })
   }, [])
@@ -628,6 +644,11 @@ function App() {
       setAdminRouteActive(isOwnerView && view === 'admin')
       setMySpaceRouteActive(view === 'my-space')
       setVocabularyReviewRouteActive(view === 'vocabulary-review')
+      setVocabularyReviewSetId(view === 'vocabulary-review' ? params.get('setId') : null)
+      setVocabularyPracticeRoute({
+        active: view === 'vocabulary-practice',
+        setId: params.get('setId'),
+      })
       setBrowseRouteActive(view === 'browse')
       setDraftPaperRoute({
         active: view === 'draft-paper',
@@ -709,6 +730,7 @@ function App() {
     setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
     setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, lecture: false, similar: false })
     setVocabularyReviewRouteActive(false)
+    setVocabularyPracticeRoute({ active: false, setId: null })
     setMySpaceRouteActive(true)
   }, [])
 
@@ -719,6 +741,8 @@ function App() {
       for (const param of ['draftPaperId', 'paperId', 'focusGroupId', 'groupId', 'questionId', 'lecture', 'similar']) {
         url.searchParams.delete(param)
       }
+      url.searchParams.delete('setId')
+      url.searchParams.delete('mode')
       window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
     }
     setAdminRouteActive(false)
@@ -726,6 +750,51 @@ function App() {
     setBrowseRouteActive(false)
     setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
     setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, lecture: false, similar: false })
+    setVocabularyPracticeRoute({ active: false, setId: null })
+    setVocabularyReviewSetId(null)
+    setVocabularyReviewRouteActive(true)
+  }, [])
+
+  const openVocabularyPractice = useCallback((setId: string) => {
+    if (typeof window !== 'undefined' && window.history) {
+      const currentUrl = new URL(window.location.href)
+      currentUrl.searchParams.set('view', 'vocabulary-review')
+      currentUrl.searchParams.set('setId', setId)
+      currentUrl.searchParams.delete('mode')
+      window.history.replaceState(window.history.state, '', `${currentUrl.pathname}?${currentUrl.searchParams.toString()}${currentUrl.hash || ''}`)
+
+      const practiceUrl = new URL(currentUrl.href)
+      practiceUrl.searchParams.set('view', 'vocabulary-practice')
+      practiceUrl.searchParams.set('mode', 'match')
+      window.history.pushState(
+        { ...(window.history.state ?? {}), vocabularyPracticeSetId: setId },
+        '',
+        `${practiceUrl.pathname}?${practiceUrl.searchParams.toString()}${practiceUrl.hash || ''}`,
+      )
+    }
+    setVocabularyReviewSetId(setId)
+    setVocabularyReviewRouteActive(false)
+    setVocabularyPracticeRoute({ active: true, setId })
+  }, [])
+
+  const vocabularyPracticeOnBackToSet = useCallback((setId: string) => {
+    if (
+      typeof window !== 'undefined'
+      && window.history
+      && window.history.state?.vocabularyPracticeSetId === setId
+    ) {
+      window.history.back()
+      return
+    }
+    if (typeof window !== 'undefined' && window.history?.replaceState) {
+      const url = new URL(window.location.href)
+      url.searchParams.set('view', 'vocabulary-review')
+      url.searchParams.set('setId', setId)
+      url.searchParams.delete('mode')
+      window.history.replaceState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
+    }
+    setVocabularyPracticeRoute({ active: false, setId: null })
+    setVocabularyReviewSetId(setId)
     setVocabularyReviewRouteActive(true)
   }, [])
 
@@ -733,9 +802,12 @@ function App() {
     if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
       const url = new URL(window.location.href)
       url.searchParams.delete('view')
+      url.searchParams.delete('setId')
+      url.searchParams.delete('mode')
       const nextSearch = url.searchParams.toString()
       window.history.replaceState(window.history.state, '', `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`)
     }
+    setVocabularyReviewSetId(null)
     setVocabularyReviewRouteActive(false)
   }, [])
 
@@ -813,6 +885,20 @@ function App() {
     return (
       <VocabularyReviewPage
         onBackToWorkbench={vocabularyReviewOnBackToWorkbench}
+        onOpenVocabularyPractice={openVocabularyPractice}
+        onVocabularySetRouteChange={setVocabularyReviewSetId}
+        requestedSetId={vocabularyReviewSetId}
+        shellNav={{ ...shellNav, onOpenVocabularyReview: undefined }}
+      />
+    )
+  }
+
+  if (vocabularyPracticeRoute.active) {
+    return (
+      <VocabularyPracticePage
+        key={vocabularyPracticeRoute.setId ?? 'missing-set'}
+        setId={vocabularyPracticeRoute.setId ?? ''}
+        onBackToSet={() => vocabularyPracticeOnBackToSet(vocabularyPracticeRoute.setId ?? '')}
         shellNav={{ ...shellNav, onOpenVocabularyReview: undefined }}
       />
     )

@@ -88,7 +88,7 @@ async function waitForHttp(url, timeoutMs = 25_000) {
 
 function entry(index) {
   const number = index + 1
-  const isLongestFixture = number === 60
+  const isLongestFixture = number === 8 || number === 60
   const fixtureHeadword = ['about', 'advice', 'accept'][index] ?? `word${number}`
   const americanParts = isLongestFixture
     ? [
@@ -103,7 +103,11 @@ function entry(index) {
     : [{ spelling: 'word', phonetic: '/wɜːd/' }, { spelling: String(number), phonetic: `/${number}/` }]
   return {
     id: `fixture-${String(number).padStart(4, '0')}`,
-    headword: isLongestFixture ? 'policeman / policewoman (pl. policemen / policewomen)' : fixtureHeadword,
+    headword: number === 8
+      ? 'according to / in front of / as soon as possible'
+      : isLongestFixture
+        ? 'policeman / policewoman (pl. policemen / policewomen)'
+        : fixtureHeadword,
     phonetic: `/wɜːd ${number}/`,
     phonetics: {
       american: `/wɜːd ${number}/`,
@@ -597,6 +601,124 @@ async function verifyStudentProfiles(page) {
   assert.equal(layout.scrollWidth, layout.viewportWidth)
   await page.screenshot({ path: path.join(evidenceRoot, 'student-profiles-mobile.png'), fullPage: true })
   pass('教师可创建并切换学生，进度与最近生词组独立，桌面和 390px 均无溢出')
+}
+
+async function verifyMatchingGame(page) {
+  await page.addInitScript(() => {
+    window.localStorage.setItem('eqb-vocabulary-review-accent-wanwei-round-one-v1', 'british')
+    window.__matchAudioLog = []
+    HTMLMediaElement.prototype.play = function play() {
+      window.__matchAudioLog.push({ type: 'play', src: this.getAttribute('src') })
+      return Promise.resolve()
+    }
+    HTMLMediaElement.prototype.pause = function pause() {
+      window.__matchAudioLog.push({ type: 'pause', src: this.getAttribute('src') })
+    }
+    HTMLMediaElement.prototype.load = function load() {}
+  })
+  await page.goto(`${origin}/?view=vocabulary-review`, { waitUntil: 'networkidle' })
+  await page.getByRole('button', { name: /固定生词组 15 词/ }).click()
+  await page.getByRole('heading', { name: '固定生词组 15 词' }).waitFor()
+  await page.getByRole('button', { name: '趣味练习' }).click()
+  await page.getByRole('heading', { name: '翻牌消消乐' }).waitFor()
+  assert.match(page.url(), /view=vocabulary-practice.*setId=set-15.*mode=match/)
+  assert.equal(await page.locator('.vocabulary-match-card').count(), 16)
+  assert.equal(await page.locator('.vocabulary-match-board').evaluate((node) => getComputedStyle(node).gridTemplateColumns.split(' ').length), 4)
+  assert.equal(await page.locator('audio').count(), 1)
+  assert.equal(await page.getByText('沿用英音', { exact: true }).count(), 1)
+
+  await page.goBack({ waitUntil: 'networkidle' })
+  await page.getByRole('heading', { name: '固定生词组 15 词' }).waitFor()
+  assert.match(page.url(), /view=vocabulary-review.*setId=set-15/)
+  await page.goForward({ waitUntil: 'networkidle' })
+  await page.getByRole('heading', { name: '翻牌消消乐' }).waitFor()
+  assert.equal(await page.locator('.vocabulary-match-card').count(), 16)
+  pass('趣味练习使用可恢复认证路由，浏览器后退与前进回到准确生词组')
+
+  const card = (entryNumber, kind) => page.locator(`[data-card-id="fixture-${String(entryNumber).padStart(4, '0')}:${kind}"]`)
+  const stableCardBefore = await card(4, 'word').boundingBox()
+  await card(1, 'word').click()
+  assert.equal(await page.locator('.vocabulary-match-card.is-revealed').count(), 1)
+  let audioLog = await page.evaluate(() => window.__matchAudioLog)
+  assert.equal(audioLog.filter((item) => item.type === 'play').at(-1).src, '/vocabulary-assets/wanwei-round-one-v1/audio/eqb-british-cori-high-v1/fixture-0001.mp3')
+
+  await card(2, 'meaning').click()
+  assert.equal(await page.locator('.vocabulary-match-card.is-revealed').count(), 2)
+  await page.waitForTimeout(420)
+  assert.equal(await page.locator('.vocabulary-match-card.is-revealed').count(), 2)
+  assert.equal((await page.evaluate(() => window.__matchAudioLog)).filter((item) => item.type === 'play').length, 1)
+
+  await card(3, 'word').click()
+  assert.equal(await page.locator('.vocabulary-match-card.is-revealed').count(), 1)
+  assert.equal(await card(3, 'word').getAttribute('data-card-status'), 'revealed')
+  audioLog = await page.evaluate(() => window.__matchAudioLog)
+  assert.equal(audioLog.filter((item) => item.type === 'play').at(-1).src, '/vocabulary-assets/wanwei-round-one-v1/audio/eqb-british-cori-high-v1/fixture-0003.mp3')
+  assert.equal(audioLog.at(-2).type, 'pause')
+
+  await card(3, 'meaning').click()
+  assert.equal(await page.locator('.vocabulary-match-card.is-confirming-match').count(), 2)
+  assert.equal(await page.locator('.vocabulary-match-confirmation').count(), 2)
+  assert.equal(await page.locator('.vocabulary-practice-live').innerText(), 'accept 对应“第 3 个教学义”。')
+  await page.waitForTimeout(520)
+  assert.equal(await page.locator('.vocabulary-match-card.is-revealed').count(), 2)
+  assert.equal(await page.locator('.vocabulary-match-card.is-confirming-match').count(), 2)
+  assert.equal(await page.locator('.vocabulary-match-card.is-matched').count(), 0)
+  await page.waitForFunction(() => document.querySelectorAll('.vocabulary-match-card.is-matched').length === 2)
+  assert.equal(await page.locator('.vocabulary-match-card.is-confirming-match').count(), 0)
+  assert.equal(await page.locator('.vocabulary-match-card').count(), 16)
+  const stableCardAfter = await card(4, 'word').boundingBox()
+  assert.deepEqual(stableCardAfter, stableCardBefore)
+  pass('错配不会自动盖回；第三张推进新组合，中文不发音且新英文会停止旧音频')
+
+  let expectedMatchedCards = 2
+  for (const entryNumber of [1, 2, 4, 5, 6, 7, 8]) {
+    await card(entryNumber, 'word').click()
+    await card(entryNumber, 'meaning').click()
+    expectedMatchedCards += 2
+    await page.waitForFunction(
+      (count) => document.querySelectorAll('.vocabulary-match-card.is-matched').length === count,
+      expectedMatchedCards,
+    )
+  }
+  await page.getByRole('heading', { name: '本轮完成' }).waitFor()
+  assert.equal(await page.getByText('已配对 8 / 8', { exact: true }).count(), 1)
+  await page.getByRole('button', { name: /下一轮/ }).click()
+  assert.equal(await page.locator('.vocabulary-match-card').count(), 14)
+  assert.equal(await page.getByText('第 2 / 2 轮', { exact: true }).count(), 1)
+
+  await page.reload({ waitUntil: 'networkidle' })
+  await page.getByRole('heading', { name: '翻牌消消乐' }).waitFor()
+  assert.equal(await page.locator('.vocabulary-match-card').count(), 16)
+  assert.equal(await page.getByText('第 1 / 2 轮', { exact: true }).count(), 1)
+  pass('15 词按 8+7 分轮，完成后进入下一轮，刷新从第一轮重新开始')
+
+  await page.screenshot({ path: path.join(evidenceRoot, 'matching-game-desktop.png'), fullPage: true })
+  await page.setViewportSize({ width: 390, height: 844 })
+  assert.equal(await page.locator('.vocabulary-match-board').evaluate((node) => getComputedStyle(node).gridTemplateColumns.split(' ').length), 3)
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), 390)
+  const longWordCard = card(8, 'word')
+  await longWordCard.press('Enter')
+  assert.equal(await longWordCard.getAttribute('data-card-status'), 'revealed')
+  await page.waitForTimeout(240)
+  const longWordGeometry = await longWordCard.evaluate((node) => {
+    const face = node.querySelector('.vocabulary-match-card-face')
+    const label = face.querySelector('strong')
+    return {
+      cardOverflow: node.scrollWidth > node.clientWidth + 1 || node.scrollHeight > node.clientHeight + 1,
+      faceOverflow: face.scrollWidth > face.clientWidth + 1 || face.scrollHeight > face.clientHeight + 1,
+      labelOverflow: label.scrollWidth > label.clientWidth + 1 || label.scrollHeight > label.clientHeight + 1,
+    }
+  })
+  assert.deepEqual(longWordGeometry, { cardOverflow: false, faceOverflow: false, labelOverflow: false })
+  await page.screenshot({ path: path.join(evidenceRoot, 'matching-game-mobile-390x844.png'), fullPage: true })
+  await page.getByRole('button', { name: '返回生词组' }).first().click()
+  await page.getByRole('heading', { name: '固定生词组 15 词' }).waitFor()
+  assert.match(page.url(), /view=vocabulary-review.*setId=set-15/)
+  await page.getByRole('button', { name: '返回', exact: true }).click()
+  assert.doesNotMatch(page.url(), /setId=/)
+  await page.reload({ waitUntil: 'networkidle' })
+  await page.getByRole('heading', { name: '这轮准备收多少个生词？' }).waitFor()
+  pass('390px 使用三列自然滚动、键盘可翻牌，返回按钮准确回到原生词组')
 }
 
 async function verifyPrint(page, count, expectedPages, expectedLastPageCount, accent = 'american') {
@@ -1169,6 +1291,11 @@ async function main() {
     await installApiFixtures(studentProfilesPage)
     await verifyStudentProfiles(studentProfilesPage)
     await studentProfilesPage.close()
+
+    const matchingGamePage = await browser.newPage({ viewport: { width: 1440, height: 1000 } })
+    await installApiFixtures(matchingGamePage)
+    await verifyMatchingGame(matchingGamePage)
+    await matchingGamePage.close()
 
     const unifiedProgressPage = await browser.newPage({ viewport: { width: 1440, height: 1000 } })
     await installApiFixtures(unifiedProgressPage, { continuityScope: 'main' })
