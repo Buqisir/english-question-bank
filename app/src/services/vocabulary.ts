@@ -1,4 +1,5 @@
 import type {
+  PublicVocabularyDictationSet,
   PublicVocabularySet,
   VocabularyAudioAsset,
   VocabularyPhonetics,
@@ -295,9 +296,10 @@ function decodeHeaderValue(value: string | null): string {
 export async function downloadVocabularySetPdf(
   setId: string,
   accent: 'american' | 'british',
+  kind: 'cards' | 'dictation' | 'answer' = 'cards',
 ): Promise<void> {
   const response = await fetch(
-    `/api/vocabulary/sets/${encodeURIComponent(setId)}/pdf?accent=${encodeURIComponent(accent)}`,
+    `/api/vocabulary/sets/${encodeURIComponent(setId)}/pdf?accent=${encodeURIComponent(accent)}&kind=${encodeURIComponent(kind)}`,
     { method: 'POST' },
   )
   if (!response.ok) {
@@ -311,6 +313,30 @@ export async function downloadVocabularySetPdf(
   const blob = await response.blob()
   const fileName = decodeHeaderValue(response.headers.get('x-file-name')) || '生词记忆纸.pdf'
   downloadBlob(blob, fileName)
+}
+
+export async function getPublicVocabularyDictationSet(
+  shareId: string,
+  signal?: AbortSignal,
+): Promise<PublicVocabularyDictationSet> {
+  const response = await fetch(`/api/public/vocabulary/dictation/${encodeURIComponent(shareId)}`, {
+    headers: { Accept: 'application/json' },
+    signal,
+  })
+  const body = await readJson(response)
+  if (!response.ok) {
+    const fallback = response.status === 410
+      ? '这份听写练习已停止分享。'
+      : response.status === 404
+        ? '没有找到这份听写练习。'
+        : '听写练习暂时无法打开，请稍后重试。'
+    throw new VocabularyApiError(
+      typeof body.message === 'string' ? body.message : fallback,
+      response.status,
+      typeof body.error === 'string' ? body.error : undefined,
+    )
+  }
+  return body.vocabularySet as PublicVocabularyDictationSet
 }
 
 export async function getPublicVocabularySet(

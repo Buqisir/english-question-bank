@@ -286,6 +286,17 @@ async function main() {
       `got status=${publicVocabulary.status} body=${JSON.stringify(publicVocabulary.json)}`,
     )
 
+    const publicVocabularyDictation = await req('/api/public/vocabulary/dictation/public-fixture-share')
+    assert(
+      '(c) forced mode: public vocabulary dictation remains reachable without a cookie and exposes only answer fields',
+      publicVocabularyDictation.status === 200 &&
+        publicVocabularyDictation.json?.vocabularySet?.entries?.[0]?.answer === 'word' &&
+        publicVocabularyDictation.json?.vocabularySet?.entries?.[0]?.sourceMeanings?.[0] === '单词' &&
+        !Object.hasOwn(publicVocabularyDictation.json?.vocabularySet?.entries?.[0] ?? {}, 'visual') &&
+        !Object.hasOwn(publicVocabularyDictation.json?.vocabularySet?.entries?.[0] ?? {}, 'example'),
+      `got status=${publicVocabularyDictation.status} body=${JSON.stringify(publicVocabularyDictation.json)}`,
+    )
+
     const privateVocabulary = await req('/api/vocabulary/sets')
     assert(
       '(c) forced mode: authenticated vocabulary routes remain protected without a cookie',
@@ -343,6 +354,13 @@ async function main() {
       '(c) forced mode: only GET is public for vocabulary shares',
       wrongMethodPublicVocabulary.status === 401 && wrongMethodPublicVocabulary.json?.error === 'not_authenticated',
       `got status=${wrongMethodPublicVocabulary.status} body=${JSON.stringify(wrongMethodPublicVocabulary.json)}`,
+    )
+
+    const wrongMethodPublicVocabularyDictation = await req('/api/public/vocabulary/dictation/public-fixture-share', { method: 'POST' })
+    assert(
+      '(c) forced mode: only GET is public for vocabulary dictation shares',
+      wrongMethodPublicVocabularyDictation.status === 401 && wrongMethodPublicVocabularyDictation.json?.error === 'not_authenticated',
+      `got status=${wrongMethodPublicVocabularyDictation.status} body=${JSON.stringify(wrongMethodPublicVocabularyDictation.json)}`,
     )
 
     const forcedPaperAssets = await req('/paper-assets/does-not-exist.json')

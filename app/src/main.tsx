@@ -4,6 +4,8 @@ import './index.css'
 import App from './App.tsx'
 import { AuthGate } from './auth/AuthGate.tsx'
 import { VocabularyListenPage } from './features/vocabulary-listen/VocabularyListenPage.tsx'
+import { VocabularyDictationPage } from './features/vocabulary-dictation/VocabularyDictationPage.tsx'
+import type { VocabularyAudioAccent } from './features/vocabulary-listen/vocabularyAudioVariants.ts'
 
 /**
  * reading-analysis-retire (2026-07-16): boot-time self-heal for the two
@@ -69,9 +71,27 @@ function getPublicVocabularyShareId(): string | null {
 
 const publicVocabularyShareId = getPublicVocabularyShareId()
 
+function getPublicVocabularyDictationRequest(): { shareId: string; accent: VocabularyAudioAccent } | null {
+  if (typeof window === 'undefined') return null
+  const match = window.location.pathname.match(/^\/vocabulary\/dictation\/([^/]+)\/?$/)
+  if (!match) return null
+  try {
+    return {
+      shareId: decodeURIComponent(match[1]),
+      accent: new URLSearchParams(window.location.search).get('accent') === 'british' ? 'british' : 'american',
+    }
+  } catch {
+    return { shareId: '', accent: 'american' }
+  }
+}
+
+const publicVocabularyDictationRequest = getPublicVocabularyDictationRequest()
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    {publicVocabularyShareId !== null ? (
+    {publicVocabularyDictationRequest ? (
+      <VocabularyDictationPage {...publicVocabularyDictationRequest} />
+    ) : publicVocabularyShareId !== null ? (
       <VocabularyListenPage shareId={publicVocabularyShareId} />
     ) : (
       <AuthGate>

@@ -14,6 +14,7 @@ import {
   ensureUserVocabularyShape,
   freezeVocabularySet,
   getCurrentVocabularyReviewRun,
+  getPublicVocabularyDictationShare,
   getPublicVocabularyShare,
   getVocabularyProgress,
   getVocabularyProgram,
@@ -481,11 +482,44 @@ assert.equal('reviewRunId' in publicSet.set, false)
 assert.equal('example' in publicSet.set.entries[0], false)
 assert.equal('sourceMeanings' in publicSet.set.entries[0], false)
 assert.equal('futureInternalField' in publicSet.set.entries[0], false)
+const publicDictationSet = getPublicVocabularyDictationShare(userDb, share.shareId)
+assert.equal(publicDictationSet.status, 'active')
+assert.equal(publicDictationSet.set.entries.length, 2)
+assert.equal(publicDictationSet.set.entries[0].answer, originalSnapshot.headword)
+assert.deepEqual(publicDictationSet.set.entries[0].sourceMeanings, originalSnapshot.sourceMeanings)
+assert.equal('headword' in publicDictationSet.set.entries[0], false)
+assert.equal('example' in publicDictationSet.set.entries[0], false)
+assert.equal('visual' in publicDictationSet.set.entries[0], false)
+assert.equal('futureInternalField' in publicDictationSet.set.entries[0], false)
+userDb.prepare('UPDATE vocabulary_set_entries SET snapshot_json = ? WHERE set_id = ? AND order_index = ?')
+  .run(JSON.stringify({
+    ...originalSnapshot,
+    headword: 'knife (pl. knives)',
+    pronunciationMode: 'forms',
+    syllables: [
+      { spelling: 'knife', phonetic: '/naɪf/' },
+      { spelling: 'knives', phonetic: '/naɪvz/' },
+    ],
+    pronunciationParts: {
+      american: [
+        { spelling: 'knife', phonetic: '/naɪf/' },
+        { spelling: 'knives', phonetic: '/naɪvz/' },
+      ],
+      british: [
+        { spelling: 'knife', phonetic: '/naɪf/' },
+        { spelling: 'knives', phonetic: '/naɪvz/' },
+      ],
+    },
+  }), vocabularySet.id, snapshotRow.order_index)
+assert.equal(getPublicVocabularyDictationShare(userDb, share.shareId).set.entries[0].answer, 'knife')
+userDb.prepare('UPDATE vocabulary_set_entries SET snapshot_json = ? WHERE set_id = ? AND order_index = ?')
+  .run(JSON.stringify({ ...originalSnapshot, futureInternalField: 'must-not-leak' }), vocabularySet.id, snapshotRow.order_index)
 userDb.prepare('UPDATE vocabulary_set_entries SET snapshot_json = ? WHERE set_id = ? AND order_index = ?')
   .run('{broken', vocabularySet.id, snapshotRow.order_index)
 assert.throws(() => getVocabularySet(userDb, 'teacher-a', vocabularySet.id), /冻结快照已损坏/)
 assert.throws(() => shareVocabularySet(userDb, 'teacher-a', vocabularySet.id), /冻结快照已损坏/)
 assert.throws(() => getPublicVocabularyShare(userDb, share.shareId), /冻结快照已损坏/)
+assert.throws(() => getPublicVocabularyDictationShare(userDb, share.shareId), /冻结快照已损坏/)
 userDb.prepare('UPDATE vocabulary_set_entries SET snapshot_json = ? WHERE set_id = ? AND order_index = ?')
   .run(JSON.stringify(originalSnapshot), vocabularySet.id, snapshotRow.order_index)
 
@@ -502,10 +536,12 @@ userDb.prepare(`
 
 revokeVocabularyShare(userDb, 'teacher-a', vocabularySet.id)
 assert.equal(getPublicVocabularyShare(userDb, share.shareId).status, 'revoked')
+assert.equal(getPublicVocabularyDictationShare(userDb, share.shareId).status, 'revoked')
 const reshared = shareVocabularySet(userDb, 'teacher-a', vocabularySet.id)
 assert.notEqual(reshared.shareId, share.shareId)
 assert.equal(getPublicVocabularyShare(userDb, share.shareId).status, 'not_found')
 assert.equal(getPublicVocabularyShare(userDb, reshared.shareId).status, 'active')
+assert.equal(getPublicVocabularyDictationShare(userDb, reshared.shareId).status, 'active')
 
 let continuousDayRun = createVocabularyReviewRun(dbs, 'teacher-a', {
   studentId: studentB.id,
