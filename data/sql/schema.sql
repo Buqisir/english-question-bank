@@ -308,6 +308,7 @@ CREATE TABLE IF NOT EXISTS vocabulary_entries (
   example_chinese TEXT NOT NULL,
   example_highlight TEXT NOT NULL,
   example_review_status TEXT NOT NULL CHECK (example_review_status = 'approved'),
+  example_candidates_json TEXT NOT NULL DEFAULT '[]',
   visual_key TEXT NOT NULL,
   visual_version TEXT NOT NULL,
   visual_path TEXT NOT NULL,

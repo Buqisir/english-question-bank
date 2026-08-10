@@ -1,10 +1,13 @@
 #!/usr/bin/env node
 import assert from 'node:assert/strict'
+import { mkdtempSync, rmSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
-import { ensureSharedVocabularyShape, ensureUserVocabularyShape } from '../server/vocabulary/vocabularyStore.mjs'
+import { ensureSharedVocabularyShape, ensureUserVocabularyShape, getVocabularyProgram } from '../server/vocabulary/vocabularyStore.mjs'
 
-function legacyDatabase({ allowInvalid = false, verification = 'page-checked' } = {}) {
-  const db = new DatabaseSync(':memory:')
+function legacyDatabase({ allowInvalid = false, verification = 'page-checked', dbPath = ':memory:' } = {}) {
+  const db = new DatabaseSync(dbPath)
   db.exec('PRAGMA foreign_keys = ON')
   db.exec(`
     CREATE TABLE vocabulary_programs (
@@ -90,11 +93,29 @@ function legacyDatabase({ allowInvalid = false, verification = 'page-checked' } 
   return db
 }
 
+const readOnlyRoot = mkdtempSync(path.join(tmpdir(), 'eqb-vocabulary-read-only-'))
+const readOnlyPath = path.join(readOnlyRoot, 'legacy.sqlite')
+legacyDatabase({ dbPath: readOnlyPath }).close()
+const readOnlyLegacy = new DatabaseSync(readOnlyPath, { readOnly: true })
+assert.equal(getVocabularyProgram(readOnlyLegacy, 'legacy-program').entries[0].example.english, 'A word.')
+readOnlyLegacy.close()
+rmSync(readOnlyRoot, { recursive: true, force: true })
+console.log('PASS read-only vocabulary program query does not attempt a schema migration')
+
 const migrated = legacyDatabase()
 ensureSharedVocabularyShape(migrated)
 const migratedRow = migrated.prepare('SELECT * FROM vocabulary_entries WHERE id = ?').get('legacy-entry')
 assert.equal(migratedRow.headword, 'word')
 assert.equal(migratedRow.exam_frequency, 0)
+assert.deepEqual(JSON.parse(migratedRow.example_candidates_json), [{
+  candidateId: 'a',
+  version: 'legacy-single-v1',
+  teachingSense: '单词',
+  english: 'A word.',
+  chinese: '一个单词。',
+  highlight: 'word',
+  reviewStatus: 'approved',
+}])
 assert.match(migrated.prepare("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'vocabulary_entries'").get().sql, /index-and-heading-reviewed/u)
 assert.match(migrated.prepare("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'vocabulary_entries'").get().sql, /eqb-british-teacher-v1/u)
 assert.deepEqual(
@@ -106,6 +127,21 @@ assert.equal(migrated.prepare('PRAGMA foreign_keys').get().foreign_keys, 1)
 assert.equal(migrated.prepare("SELECT COUNT(*) AS count FROM sqlite_master WHERE type = 'table' AND name = 'vocabulary_entries_legacy_contract'").get().count, 0)
 migrated.close()
 console.log('PASS legacy vocabulary schema migrates atomically with row, indexes, and foreign keys preserved')
+
+const staged = legacyDatabase()
+staged.exec("ALTER TABLE vocabulary_entries ADD COLUMN example_candidates_json TEXT NOT NULL DEFAULT '[]'")
+const stagedCandidates = [{
+  candidateId: 'a', version: 'wanwei-examples-v1', teachingSense: '单词', english: 'A word.', chinese: '一个单词。', highlight: 'word', reviewStatus: 'approved',
+}, {
+  candidateId: 'b', version: 'wanwei-examples-v1', teachingSense: '单词', english: 'Write this word.', chinese: '写下这个单词。', highlight: 'word', reviewStatus: 'approved',
+}, {
+  candidateId: 'c', version: 'wanwei-examples-v1', teachingSense: '单词', english: 'The word is short.', chinese: '这个单词很短。', highlight: 'word', reviewStatus: 'approved',
+}]
+staged.prepare('UPDATE vocabulary_entries SET example_candidates_json = ?').run(JSON.stringify(stagedCandidates))
+ensureSharedVocabularyShape(staged)
+assert.deepEqual(JSON.parse(staged.prepare('SELECT example_candidates_json FROM vocabulary_entries').get().example_candidates_json), stagedCandidates)
+staged.close()
+console.log('PASS staged vocabulary contract migration preserves existing three-example candidates')
 
 const failing = legacyDatabase({ allowInvalid: true, verification: 'invalid' })
 assert.throws(() => ensureSharedVocabularyShape(failing), /CHECK constraint failed/u)

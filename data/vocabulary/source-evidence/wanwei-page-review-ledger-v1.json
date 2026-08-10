@@ -19,7 +19,7 @@
     },
     "reviewedLearningContent": {
       "path": "data/vocabulary/wanwei-learning-content-v1.json",
-      "sha256": "1a22507ed92a9148ea8ce3ce444d0564c48e507391a12eb552ddcb266c23d4f4",
+      "sha256": "c40592cff2a9f8f9c90529e92425368d8b8a5242fd17dd8a184dcba2bf7e4fb0",
       "sourceOrders": "31-1600"
     }
   },
