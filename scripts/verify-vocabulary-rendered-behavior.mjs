@@ -400,6 +400,7 @@ async function verifyScopePreviewAndReviewKeys(page) {
   })
   await page.goto(`${origin}/?view=vocabulary-review`, { waitUntil: 'networkidle' })
 
+  await page.getByLabel('目标生词数').waitFor()
   assert.equal(await page.getByLabel('从哪里开始').count(), 0)
   assert.equal(await page.locator('.vocabulary-scope-preview').count(), 0)
   assert.equal(await page.getByLabel('目标生词数').count(), 1)
