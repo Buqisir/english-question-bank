@@ -1,5 +1,7 @@
 export type VocabularyAudioAccent = 'american' | 'british'
 
+export const VOCABULARY_AUDIO_ACCENT_STORAGE_KEY = 'eqb-vocabulary-review-accent-wanwei-round-one-v1'
+
 type VocabularyAudioEntry = {
   id: string
   audio?: {
@@ -15,6 +17,16 @@ export type BritishVocabularyAudioReadiness = {
 
 const BRITISH_AUDIO_VERSION = 'eqb-british-cori-high-v1'
 const BRITISH_AUDIO_ROOT = `/vocabulary-assets/wanwei-round-one-v1/audio/${BRITISH_AUDIO_VERSION}`
+
+export function readVocabularyAudioAccent(): VocabularyAudioAccent {
+  if (typeof window === 'undefined') return 'american'
+  return window.localStorage.getItem(VOCABULARY_AUDIO_ACCENT_STORAGE_KEY) === 'british' ? 'british' : 'american'
+}
+
+export function saveVocabularyAudioAccent(accent: VocabularyAudioAccent): void {
+  if (typeof window === 'undefined') return
+  window.localStorage.setItem(VOCABULARY_AUDIO_ACCENT_STORAGE_KEY, accent)
+}
 
 export async function getBritishVocabularyAudioReadiness(signal?: AbortSignal): Promise<BritishVocabularyAudioReadiness | null> {
   try {

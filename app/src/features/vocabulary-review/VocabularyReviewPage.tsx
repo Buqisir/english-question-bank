@@ -5,6 +5,7 @@ import {
   Copy,
   Download,
   Eye,
+  Grid2X2,
   RotateCcw,
   Volume2,
 } from 'lucide-react'
@@ -50,13 +51,14 @@ import { calibrationVocabularyProgram } from './calibrationVocabularyProgram'
 import { vocabularyVisualManifest } from './vocabularyVisualManifest'
 import {
   getVocabularyAudioPath,
+  readVocabularyAudioAccent,
+  saveVocabularyAudioAccent,
   type VocabularyAudioAccent,
 } from '../vocabulary-listen/vocabularyAudioVariants'
 import './vocabularyReviewPage.css'
 
 const RUN_STORAGE_KEY = 'eqb-vocabulary-review-run-wanwei-round-one-v1'
 const ACTIVE_STUDENT_STORAGE_KEY = 'eqb-vocabulary-active-student-wanwei-round-one-v1'
-const REVIEW_ACCENT_STORAGE_KEY = 'eqb-vocabulary-review-accent-wanwei-round-one-v1'
 const PAUSED_RUN_STORAGE_KEY = 'eqb-vocabulary-review-paused-wanwei-round-one-v1'
 const TARGET_UNFAMILIAR_COUNT = 15
 const CARD_PRINT_ENTRIES_PER_PAGE = 6
@@ -65,6 +67,9 @@ const PUBLIC_LISTEN_ORIGIN = 'https://eqbank.cc'
 
 type VocabularyReviewPageProps = {
   onBackToWorkbench: () => void
+  onOpenVocabularyPractice: (setId: string) => void
+  onVocabularySetRouteChange: (setId: string | null) => void
+  requestedSetId?: string | null
   shellNav: AppTopbarNav
 }
 
@@ -92,16 +97,22 @@ function readVocabularyPrintRequest(): VocabularyPrintRequest | null {
   }
 }
 
+function replaceVocabularySetUrl(setId: string | null) {
+  if (typeof window === 'undefined' || typeof window.history?.replaceState !== 'function') return
+  const url = new URL(window.location.href)
+  if (url.searchParams.get('view') !== 'vocabulary-review') return
+  if (setId) url.searchParams.set('setId', setId)
+  else url.searchParams.delete('setId')
+  const nextSearch = url.searchParams.toString()
+  window.history.replaceState(window.history.state, '', `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`)
+}
+
 function runStorageKey(studentId: string) {
   return `${RUN_STORAGE_KEY}:${studentId}`
 }
 
 function pausedRunStorageKey(studentId: string) {
   return `${PAUSED_RUN_STORAGE_KEY}:${studentId}`
-}
-
-function readReviewAccent(): VocabularyAccent {
-  return window.localStorage.getItem(REVIEW_ACCENT_STORAGE_KEY) === 'british' ? 'british' : 'american'
 }
 
 function VocabularyVisual({ entry, compact = false }: { entry: VocabularyEntry; compact?: boolean }) {
@@ -327,7 +338,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   const [runStatus, setRunStatus] = useState<VocabularyReviewRunDto['status']>('active')
   const [mainProgressCursor, setMainProgressCursor] = useState(0)
   const [targetInput, setTargetInput] = useState(TARGET_UNFAMILIAR_COUNT)
-  const [reviewAccent, setReviewAccent] = useState<VocabularyAccent>(readReviewAccent)
+  const [reviewAccent, setReviewAccent] = useState<VocabularyAccent>(readVocabularyAudioAccent)
   const [runState, setRunState] = useState<'loading' | 'setup' | 'active' | 'error'>('loading')
   const [students, setStudents] = useState<VocabularyStudentDto[]>([])
   const [activeStudentId, setActiveStudentId] = useState<string | null>(null)
@@ -354,6 +365,11 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   const reviewAudioRef = useRef<HTMLAudioElement | null>(null)
   const downloadMenuRef = useRef<HTMLDivElement | null>(null)
   const shiftKeyCandidateRef = useRef(false)
+
+  function syncVocabularySetRoute(setId: string | null) {
+    replaceVocabularySetUrl(setId)
+    if (setId === null) props.onVocabularySetRouteChange(null)
+  }
 
   const completion = runStatus === 'target_reached'
     ? 'target-reached'
@@ -514,6 +530,21 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
         setRecentSets(nextSets)
         setTargetInput(progress.lastTarget)
         setMainProgressCursor(progress.cursor)
+        if (props.requestedSetId) {
+          const requestedSet = nextSets.find((set) => set.id === props.requestedSetId)
+            ?? await getVocabularySet(props.requestedSetId)
+          if (cancelled) return
+          if (requestedSet.studentId !== studentId) {
+            const requestedStudent = students.find((student) => student.id === requestedSet.studentId)
+            if (!requestedStudent) throw new Error('这个生词组不属于当前教师的学生档案。')
+            setActiveStudentId(requestedStudent.id)
+            return
+          }
+          setVocabularySet(requestedSet)
+          setShareId(requestedSet.share?.status === 'active' ? requestedSet.share.shareId : null)
+          setRunState('setup')
+          return
+        }
         const savedRunId = window.localStorage.getItem(runStorageKey(studentId))
           ?? (isDefaultStudent ? window.localStorage.getItem(RUN_STORAGE_KEY) : null)
         const currentRun = await getCurrentVocabularyReviewRun(studentId)
@@ -550,7 +581,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
 
     void loadStudentVocabulary()
     return () => { cancelled = true }
-  }, [activeStudentId, applyRun, students])
+  }, [activeStudentId, applyRun, props.requestedSetId, students])
 
   useEffect(() => () => {
     if (copyTimerRef.current !== null) window.clearTimeout(copyTimerRef.current)
@@ -707,6 +738,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   }
 
   function closeVocabularySet() {
+    syncVocabularySetRoute(null)
     setVocabularySet(null)
     setShareId(null)
     setRequestError('')
@@ -728,6 +760,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
     setRequestError('')
     try {
       const nextSet = await freezeVocabularyReviewRun(runId)
+      syncVocabularySetRoute(nextSet.id)
       setVocabularySet(nextSet)
       setRecentSets((current) => [nextSet, ...current.filter((item) => item.id !== nextSet.id)])
       setShareId(nextSet.share?.status === 'active' ? nextSet.share.shareId : null)
@@ -754,6 +787,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
         activeStudentId,
         directInputResult.matchedEntries.map((entry) => entry.id),
       )
+      syncVocabularySetRoute(nextSet.id)
       setVocabularySet(nextSet)
       setRecentSets((current) => [nextSet, ...current.filter((item) => item.id !== nextSet.id)])
       setShareId(null)
@@ -826,6 +860,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   }
 
   function openVocabularySet(nextSet: VocabularySetDto) {
+    syncVocabularySetRoute(nextSet.id)
     setVocabularySet(nextSet)
     setSetTitleInput(nextSet.title)
     setShareId(nextSet.share?.status === 'active' ? nextSet.share.shareId : null)
@@ -913,7 +948,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
 
   function chooseReviewAccent(accent: VocabularyAccent) {
     setReviewAccent(accent)
-    window.localStorage.setItem(REVIEW_ACCENT_STORAGE_KEY, accent)
+    saveVocabularyAudioAccent(accent)
   }
 
   const currentGlobalOrder = currentEntry?.source.globalOrder ?? program.entries.length
@@ -1103,6 +1138,9 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
               <button className="ghost-button" type="button" onClick={() => void copyVocabularySet()}>
                 {copyStatus === 'copied' ? <Check size={16} /> : <Copy size={16} />}
                 {copyStatus === 'copied' ? '已复制' : '复制清单'}
+              </button>
+              <button className="ghost-button" type="button" onClick={() => props.onOpenVocabularyPractice(vocabularySet.id)}>
+                <Grid2X2 size={16} />趣味练习
               </button>
               <button className="ghost-button" type="button" onClick={closeVocabularySet}>返回</button>
             </div>
@@ -1345,6 +1383,11 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                   </button> : downloadControl}
                   {vocabularySet && !shareId && <button className="ghost-button" type="button" onClick={() => void createShare()} disabled={requestBusy}>生成扫码听写</button>}
                   {shareId && <button className="ghost-button" type="button" onClick={() => void copyShareLink()}><Copy size={16} />{shareCopyStatus === 'copied' ? '链接已复制' : '复制听写链接'}</button>}
+                  {vocabularySet && (
+                    <button className="ghost-button" type="button" onClick={() => props.onOpenVocabularyPractice(vocabularySet.id)}>
+                      <Grid2X2 size={16} />趣味练习
+                    </button>
+                  )}
                   <button className="ghost-button" type="button" onClick={() => void copyVocabularySet()} disabled={!unfamiliarEntries.length}>
                     {copyStatus === 'copied' ? <Check size={16} /> : <Copy size={16} />}
                     {copyStatus === 'copied' ? '已复制' : copyStatus === 'error' ? '复制失败' : '复制清单'}
