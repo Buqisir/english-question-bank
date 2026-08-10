@@ -25,6 +25,7 @@ import {
   replaceVocabularyProgram,
   renameVocabularySet,
   revokeVocabularyShare,
+  selectVocabularyExampleCandidate,
   shareVocabularySet,
   undoVocabularyReviewDecision,
 } from '../server/vocabulary/vocabularyStore.mjs'
@@ -45,6 +46,10 @@ const britishAudioManifest = britishAudioManifestBytes ? JSON.parse(britishAudio
 const britishAudioReceipt = JSON.parse(readFileSync(new URL('../data/vocabulary/wanwei-british-cori-audio-receipt-v1.json', import.meta.url)))
 const britishVoiceProfile = JSON.parse(readFileSync(new URL('../data/vocabulary/eqb-british-cori-high-v1.json', import.meta.url)))
 const visualManifest = JSON.parse(readFileSync(new URL('../data/vocabulary/wanwei-visual-manifest-v1.json', import.meta.url)))
+const exampleCandidates = JSON.parse(readFileSync(new URL('../data/vocabulary/wanwei-example-candidates-v1.json', import.meta.url)))
+const exampleCandidateAOverridesUrl = new URL('../data/vocabulary/wanwei-example-a-overrides-v1.json', import.meta.url)
+const exampleCandidateAOverrideBytes = readFileSync(exampleCandidateAOverridesUrl)
+const exampleCandidateAOverrides = JSON.parse(exampleCandidateAOverrideBytes)
 const countIpaToken = (value, token) => String(value).split(token).length - 1
 assert.equal(officialOracle.count, 1600)
 assert.equal(officialOracle.entries.length, 1600)
@@ -260,6 +265,55 @@ for (const [index, entry] of visualManifest.entries.entries()) {
   assert.doesNotMatch(svg, /<image\b[^>]*(?:href|xlink:href)="https?:/iu)
 }
 
+assert.equal(exampleCandidates.schemaVersion, 'wanwei-example-candidates-v1')
+assert.equal(exampleCandidates.programId, 'wanwei-round-one-v1')
+assert.equal(exampleCandidates.version, 'wanwei-examples-v1')
+assert.equal(exampleCandidates.approvedCandidateAOverrides.count, 1)
+assert.equal(
+  exampleCandidates.approvedCandidateAOverrides.sha256,
+  createHash('sha256').update(exampleCandidateAOverrideBytes).digest('hex'),
+)
+assert.equal(exampleCandidateAOverrides.entries.length, 1)
+assert.equal(exampleCandidateAOverrides.entries[0].entryId, 'wanwei-core-0123-even')
+assert.equal(exampleCandidateAOverrides.entries[0].ownerApprovedAt, '2026-08-10')
+assert.equal(exampleCandidates.sourceBatches.length, 3)
+assert.equal(exampleCandidates.entries.length, 1600)
+assert.equal(new Set(exampleCandidates.entries.map((entry) => entry.entryId)).size, 1600)
+const approvedExampleEnglish = new Set()
+for (const [index, entry] of exampleCandidates.entries.entries()) {
+  const source = sourceMap.entries[index]
+  const content = index < 30
+    ? null
+    : learningContent.entries[index - 30]
+  assert.equal(entry.entryId, source.id)
+  assert.equal(entry.sourceOrder, index + 1)
+  assert.equal(entry.headword, source.headword)
+  assert.equal(entry.candidates.length, 3)
+  assert.deepEqual(entry.candidates.map((candidate) => candidate.candidateId), ['a', 'b', 'c'])
+  for (const candidate of entry.candidates) {
+    assert.equal(candidate.version, 'wanwei-examples-v1')
+    assert.equal(candidate.teachingSense, entry.teachingSense)
+    assert.equal(candidate.reviewStatus, 'approved')
+    assert.ok(candidate.english.includes(candidate.highlight))
+    const normalizedEnglish = candidate.english.trim().toLocaleLowerCase('en-US')
+    assert.equal(approvedExampleEnglish.has(normalizedEnglish), false, `Duplicate example: ${candidate.english}`)
+    approvedExampleEnglish.add(normalizedEnglish)
+  }
+  if (content) {
+    assert.equal(entry.teachingSense, content.teachingSense)
+    assert.deepEqual(
+      {
+        english: entry.candidates[0].english,
+        chinese: entry.candidates[0].chinese,
+        highlight: entry.candidates[0].highlight,
+        reviewStatus: entry.candidates[0].reviewStatus,
+      },
+      content.example,
+    )
+  }
+}
+assert.equal(approvedExampleEnglish.size, 4800)
+
 const root = mkdtempSync(path.join(tmpdir(), 'eqb-vocabulary-closed-loop-'))
 const bankDb = new DatabaseSync(path.join(root, 'question-bank.sqlite'))
 const userDb = new DatabaseSync(path.join(root, 'user-data.sqlite'))
@@ -284,6 +338,23 @@ const entries = ['catch', 'celebrate', 'courage'].map((headword, index) => ({
     highlight: headword,
     reviewStatus: 'approved',
   },
+  exampleCandidates: ['a', 'b', 'c'].map((candidateId) => ({
+    candidateId,
+    version: 'wanwei-examples-v1',
+    teachingSense: `${headword} 教学释义`,
+    english: candidateId === 'a'
+      ? `We use ${headword} in class.`
+      : candidateId === 'b'
+        ? `Our teacher explains ${headword} clearly.`
+        : `This page shows ${headword} in a new scene.`,
+    chinese: candidateId === 'a'
+      ? `我们在课堂上使用 ${headword}。`
+      : candidateId === 'b'
+        ? `老师清楚地讲解 ${headword}。`
+        : `这一页在新场景中展示 ${headword}。`,
+    highlight: headword,
+    reviewStatus: 'approved',
+  })),
   visual: {
     key: `visual-${headword}`,
     version: 'koboyo-v1',
@@ -304,6 +375,14 @@ const entries = ['catch', 'celebrate', 'courage'].map((headword, index) => ({
     verification: 'page-checked',
   },
 }))
+
+const stableSelectionEntry = entries[0]
+const stableSelection = selectVocabularyExampleCandidate(stableSelectionEntry, 'fixed-set-id')
+assert.equal(stableSelection.exampleSelection.candidateId, 'c')
+assert.deepEqual(selectVocabularyExampleCandidate(stableSelectionEntry, 'fixed-set-id'), stableSelection)
+assert.deepEqual(new Set(
+  Array.from({ length: 120 }, (_, index) => selectVocabularyExampleCandidate(stableSelectionEntry, `set-${index}`).exampleSelection.candidateId),
+), new Set(['a', 'b', 'c']))
 
 replaceVocabularyProgram(bankDb, {
   id: 'wanwei-round-one-v1',
@@ -339,6 +418,8 @@ replaceVocabularyProgram(bankDb, {
 const storedProgram = getVocabularyProgram(bankDb, 'wanwei-round-one-v1')
 assert.equal(storedProgram.entries[0].source.title, storedProgram.sourceTitle)
 assert.equal(storedProgram.entries[0].source.edition, storedProgram.sourceEdition)
+assert.equal('exampleCandidates' in storedProgram.entries[0], false)
+assert.equal(getVocabularyProgram(bankDb, 'wanwei-round-one-v1', { includeExampleCandidates: true }).entries[0].exampleCandidates.length, 3)
 
 const dbs = { bankDb, userDb }
 const [defaultStudentA] = listVocabularyStudents(userDb, 'teacher-a')
@@ -399,6 +480,9 @@ assert.equal(vocabularySet.entryCount, 2)
 assert.equal(vocabularySet.studentId, studentA.id)
 assert.deepEqual(vocabularySet.entries.map((entry) => entry.id), [entries[0].id, entries[1].id])
 assert.deepEqual(vocabularySet.entries[0].sourceMeanings, entries[0].sourceMeanings)
+assert.match(vocabularySet.entries[0].exampleSelection.candidateId, /^[abc]$/u)
+assert.equal(vocabularySet.entries[0].exampleSelection.version, 'wanwei-examples-v1')
+assert.deepEqual(getVocabularySet(userDb, 'teacher-a', vocabularySet.id).entries[0].example, vocabularySet.entries[0].example)
 assert.equal(getCurrentVocabularyReviewRun(userDb, 'teacher-a', studentA.id, 'wanwei-round-one-v1'), null)
 
 const disposableRun = createVocabularyReviewRun(dbs, 'teacher-a', {
@@ -433,6 +517,7 @@ assert.equal(directSet.title, '输入词表 · 2词')
 assert.equal(directSet.reviewRunId, null)
 assert.equal(directSet.studentId, studentA.id)
 assert.deepEqual(directSet.entries.map((entry) => entry.id), [entries[2].id, entries[0].id])
+assert.match(directSet.entries[0].exampleSelection.candidateId, /^[abc]$/u)
 const renamedDirectSet = renameVocabularySet(userDb, 'teacher-a', directSet.id, { title: '小林第1周生词' })
 assert.equal(renamedDirectSet.title, '小林第1周生词')
 assert.equal(getVocabularySet(userDb, 'teacher-a', directSet.id).title, '小林第1周生词')
@@ -457,6 +542,7 @@ assert.deepEqual(listVocabularySets(userDb, 'teacher-a', studentB.id), [])
 
 bankDb.prepare("UPDATE vocabulary_entries SET teaching_sense = '后来修改的释义' WHERE id = ?").run(entries[0].id)
 assert.equal(getVocabularySet(userDb, 'teacher-a', vocabularySet.id).entries[0].teachingSense, entries[0].teachingSense)
+bankDb.prepare('UPDATE vocabulary_entries SET teaching_sense = ? WHERE id = ?').run(entries[0].teachingSense, entries[0].id)
 assert.throws(() => getVocabularySet(userDb, 'teacher-b', vocabularySet.id), /生词集不存在/)
 assert.equal(getVocabularySetForReviewRun(userDb, 'teacher-a', run.id).id, vocabularySet.id)
 assert.throws(() => getVocabularySetForReviewRun(userDb, 'teacher-b', run.id), /已冻结的生词组不存在/)
@@ -480,6 +566,7 @@ assert.equal('userId' in publicSet.set, false)
 assert.equal('studentId' in publicSet.set, false)
 assert.equal('reviewRunId' in publicSet.set, false)
 assert.equal('example' in publicSet.set.entries[0], false)
+assert.equal('exampleSelection' in publicSet.set.entries[0], false)
 assert.equal('sourceMeanings' in publicSet.set.entries[0], false)
 assert.equal('futureInternalField' in publicSet.set.entries[0], false)
 const publicDictationSet = getPublicVocabularyDictationShare(userDb, share.shareId)

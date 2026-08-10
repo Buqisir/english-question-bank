@@ -2620,9 +2620,9 @@
         }
       ],
       "example": {
-        "english": "Even my little sister can answer this question.",
-        "chinese": "甚至我的小妹妹都能回答这个问题。",
-        "highlight": "Even",
+        "english": "She even made the cake herself.",
+        "chinese": "她甚至亲手做了这个蛋糕。",
+        "highlight": "even",
         "reviewStatus": "approved"
       }
     },

@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "wanwei-example-a-overrides-v1",
+  "programId": "wanwei-round-one-v1",
+  "entries": [
+    {
+      "entryId": "wanwei-core-0123-even",
+      "sourceOrder": 123,
+      "reason": "避免把年幼者作为低能力参照的贬低式比较",
+      "ownerApprovedAt": "2026-08-10",
+      "original": {
+        "english": "Even my little sister can answer this question.",
+        "chinese": "甚至我的小妹妹都能回答这个问题。",
+        "highlight": "Even",
+        "reviewStatus": "approved"
+      },
+      "replacement": {
+        "english": "She even made the cake herself.",
+        "chinese": "她甚至亲手做了这个蛋糕。",
+        "highlight": "even",
+        "reviewStatus": "approved"
+      }
+    }
+  ]
+}

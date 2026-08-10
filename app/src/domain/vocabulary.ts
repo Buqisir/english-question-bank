@@ -38,11 +38,15 @@ export type VocabularySetEntry = {
     highlight: string
     reviewStatus?: 'approved'
   }
+  exampleSelection?: {
+    candidateId: string
+    version: string
+  }
   visual: VocabularyVisualAsset
   audio: VocabularyAudioAsset
 }
 
-export type PublicVocabularyEntry = Omit<VocabularySetEntry, 'example' | 'sourceMeanings'>
+export type PublicVocabularyEntry = Omit<VocabularySetEntry, 'example' | 'sourceMeanings' | 'exampleSelection'>
 
 export type PublicVocabularySet = {
   title: string

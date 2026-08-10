@@ -24,7 +24,7 @@ function parseArgs(argv) {
     result[key.slice(2)] = value
     index += 1
   }
-  for (const required of ['learning', 'visual', 'audio']) {
+  for (const required of ['learning', 'visual', 'audio', 'examples']) {
     if (!result[required]) throw new Error(`Missing --${required}`)
   }
   return result
@@ -68,6 +68,7 @@ const sourceLedger = JSON.parse(readFileSync(path.join(rootDir, 'data/vocabulary
 const learning = JSON.parse(readFileSync(path.resolve(args.learning), 'utf8'))
 const visual = JSON.parse(readFileSync(path.resolve(args.visual), 'utf8'))
 const audio = JSON.parse(readFileSync(path.resolve(args.audio), 'utf8'))
+const examples = JSON.parse(readFileSync(path.resolve(args.examples), 'utf8'))
 const calibration = await loadCalibrationProgram()
 
 exactly(sourceMap.entries, 1600, 'source map')
@@ -81,6 +82,7 @@ for (const binding of Object.values(sourceLedger.contentBindings)) {
 exactly(learning.entries, 1570, 'reviewed learning content')
 exactly(visual.entries, 1600, 'visual manifest')
 exactly(audio.entries, 1600, 'audio manifest')
+exactly(examples.entries, 1600, 'example candidates')
 if (learning.entries.some((entry) => entry.example?.reviewStatus !== 'approved')) {
   throw new Error('Every generated example must be independently approved')
 }
@@ -92,7 +94,8 @@ const learningByOrder = new Map(learning.entries.map((entry) => [entry.sourceOrd
 const calibrationByOrder = new Map(calibration.entries.map((entry) => [entry.source.globalOrder, entry]))
 const visualById = new Map(visual.entries.map((entry) => [entry.entryId, entry]))
 const audioById = new Map(audio.entries.map((entry) => [entry.entryId, entry]))
-if (learningByOrder.size !== 1570 || calibrationByOrder.size !== 30 || visualById.size !== 1600 || audioById.size !== 1600) {
+const examplesById = new Map(examples.entries.map((entry) => [entry.entryId, entry]))
+if (learningByOrder.size !== 1570 || calibrationByOrder.size !== 30 || visualById.size !== 1600 || audioById.size !== 1600 || examplesById.size !== 1600) {
   throw new Error('Duplicate sourceOrder or asset entryId detected')
 }
 
@@ -115,7 +118,27 @@ const entries = sourceMap.entries.map((source) => {
   }
   const visualEntry = visualById.get(source.id)
   const audioEntry = audioById.get(source.id)
-  if (!visualEntry || !audioEntry) throw new Error(`Missing asset for ${source.id}`)
+  const exampleEntry = examplesById.get(source.id)
+  if (!visualEntry || !audioEntry || !exampleEntry) throw new Error(`Missing asset for ${source.id}`)
+  const candidates = exactly(exampleEntry.candidates, 3, `example candidates for ${source.id}`)
+  if (exampleEntry.sourceOrder !== source.sourceOrder || exampleEntry.headword !== source.headword) {
+    throw new Error(`Example candidate identity mismatch at sourceOrder ${source.sourceOrder}`)
+  }
+  if (candidates.map((candidate) => candidate.candidateId).join(',') !== 'a,b,c') {
+    throw new Error(`Example candidates must be ordered a,b,c for ${source.id}`)
+  }
+  for (const candidate of candidates) {
+    if (candidate.version !== 'wanwei-examples-v1' || candidate.reviewStatus !== 'approved') {
+      throw new Error(`Example candidate is not approved at ${source.id}/${candidate.candidateId}`)
+    }
+    if (candidate.teachingSense !== content.teachingSense || !candidate.english.includes(candidate.highlight)) {
+      throw new Error(`Example candidate teaching sense or highlight mismatch at ${source.id}/${candidate.candidateId}`)
+    }
+  }
+  const candidateA = candidates[0]
+  if (candidateA.english !== content.example.english || candidateA.chinese !== content.example.chinese || candidateA.highlight !== content.example.highlight) {
+    throw new Error(`Example candidate A changed the approved sentence at ${source.id}`)
+  }
   const group = groupsByNumber.get(source.day)
   return {
     id: source.id,
@@ -129,6 +152,7 @@ const entries = sourceMap.entries.map((source) => {
     pronunciationMode: content.pronunciationMode,
     syllables: content.syllables,
     example: content.example,
+    exampleCandidates: candidates,
     visual: {
       key: visualEntry.visualKey,
       version: visualEntry.version,
@@ -153,7 +177,7 @@ const entries = sourceMap.entries.map((source) => {
 
 const program = {
   id: sourceMap.programId,
-  version: '2026-08-07-v1',
+  version: '2026-08-10-examples-v1',
   title: '中考词汇一轮',
   subtitle: '万唯一轮完整1600词',
   sourceTitle: sourceMap.sourceTitle,

@@ -1,10 +1,11 @@
-import { randomBytes, randomUUID } from 'node:crypto'
+import { createHash, randomBytes, randomUUID } from 'node:crypto'
 import { applyAmericanVocabularyPhonetics } from './americanPhonetics.mjs'
 
 const ACTIVE_RUN_STATUSES = new Set(['active', 'target_reached', 'program_exhausted'])
 const FORMAL_AUDIO_VOICE = 'eqb-british-teacher-v1'
 const DEFAULT_STUDENT_ID_PREFIX = 'vocabulary-student-default:'
 const DEFAULT_STUDENT_NAME = '默认学生'
+const EXAMPLE_CANDIDATE_VERSION = 'wanwei-examples-v1'
 
 export class VocabularyStoreError extends Error {
   constructor(message, status = 400, code = 'invalid_vocabulary_request') {
@@ -25,6 +26,56 @@ function parseJson(raw, fallback) {
   } catch {
     return fallback
   }
+}
+
+function legacyExampleCandidate(example, teachingSense) {
+  return {
+    candidateId: 'a',
+    version: 'legacy-single-v1',
+    teachingSense,
+    english: example.english,
+    chinese: example.chinese,
+    highlight: example.highlight,
+    reviewStatus: 'approved',
+  }
+}
+
+function normalizeExampleCandidates(rawCandidates, fallbackExample, teachingSense) {
+  const candidates = Array.isArray(rawCandidates) && rawCandidates.length
+    ? rawCandidates
+    : [legacyExampleCandidate(fallbackExample, teachingSense)]
+  const seenIds = new Set()
+  const normalizedCandidates = candidates.map((candidate, index) => {
+    if (!candidate || typeof candidate !== 'object' || Array.isArray(candidate)) {
+      throw new VocabularyStoreError(`exampleCandidates[${index}]格式无效。`)
+    }
+    const candidateId = requireNonEmpty(candidate.candidateId, `exampleCandidates[${index}].candidateId`)
+    if (seenIds.has(candidateId)) throw new VocabularyStoreError(`例句候选ID重复：${candidateId}`)
+    seenIds.add(candidateId)
+    const normalized = {
+      candidateId,
+      version: requireNonEmpty(candidate.version, `exampleCandidates[${index}].version`),
+      teachingSense: requireNonEmpty(candidate.teachingSense, `exampleCandidates[${index}].teachingSense`),
+      english: requireNonEmpty(candidate.english, `exampleCandidates[${index}].english`),
+      chinese: requireNonEmpty(candidate.chinese, `exampleCandidates[${index}].chinese`),
+      highlight: requireNonEmpty(candidate.highlight, `exampleCandidates[${index}].highlight`),
+      reviewStatus: candidate.reviewStatus,
+    }
+    if (normalized.version === 'legacy-single-v1') normalized.teachingSense = teachingSense
+    if (normalized.teachingSense !== teachingSense) {
+      throw new VocabularyStoreError(`例句候选 ${candidateId} 与教学核心义不一致。`)
+    }
+    if (normalized.reviewStatus !== 'approved') {
+      throw new VocabularyStoreError(`例句候选 ${candidateId} 尚未审核通过。`)
+    }
+    if (!normalized.english.includes(normalized.highlight)) {
+      throw new VocabularyStoreError(`例句候选 ${candidateId} 的高亮文本未出现在英文句子中。`)
+    }
+    return normalized
+  })
+  const versions = new Set(normalizedCandidates.map((candidate) => candidate.version))
+  if (versions.size !== 1) throw new VocabularyStoreError('同一词条的例句候选版本必须一致。')
+  return normalizedCandidates
 }
 
 function requireNonEmpty(value, label) {
@@ -173,6 +224,12 @@ function projectFrozenVocabularyEntry(snapshot) {
   const sourceMeanings = Array.isArray(snapshot.sourceMeanings)
     ? [...new Set(snapshot.sourceMeanings.map((meaning) => String(meaning ?? '').trim()).filter(Boolean))].slice(0, 3)
     : []
+  const exampleSelection = snapshot.exampleSelection == null
+    ? undefined
+    : {
+        candidateId: text(snapshot.exampleSelection?.candidateId),
+        version: text(snapshot.exampleSelection?.version),
+      }
   return {
     ...entry,
     sourceMeanings: sourceMeanings.length ? sourceMeanings : [entry.teachingSense],
@@ -182,6 +239,7 @@ function projectFrozenVocabularyEntry(snapshot) {
       highlight: text(example.highlight),
       reviewStatus: 'approved',
     },
+    ...(exampleSelection ? { exampleSelection } : {}),
   }
 }
 
@@ -235,6 +293,7 @@ export function ensureSharedVocabularyShape(db) {
       example_chinese TEXT NOT NULL,
       example_highlight TEXT NOT NULL,
       example_review_status TEXT NOT NULL CHECK (example_review_status = 'approved'),
+      example_candidates_json TEXT NOT NULL DEFAULT '[]',
       visual_key TEXT NOT NULL,
       visual_version TEXT NOT NULL,
       visual_path TEXT NOT NULL,
@@ -263,6 +322,7 @@ export function ensureSharedVocabularyShape(db) {
     db.prepare('PRAGMA table_info(vocabulary_entries)').all().map((column) => column.name),
   )
   const missingExamFrequency = !vocabularyEntryColumns.has('exam_frequency')
+  const hasExampleCandidates = vocabularyEntryColumns.has('example_candidates_json')
   const vocabularyEntriesSql = String(db.prepare("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'vocabulary_entries'").get()?.sql ?? '')
   const requiresEntryContractMigration = !vocabularyEntriesSql.includes('index-and-heading-reviewed')
     || !vocabularyEntriesSql.includes(FORMAL_AUDIO_VOICE)
@@ -273,6 +333,7 @@ export function ensureSharedVocabularyShape(db) {
       if (missingExamFrequency) {
         db.exec('ALTER TABLE vocabulary_entries ADD COLUMN exam_frequency INTEGER NOT NULL DEFAULT 0')
       }
+      const legacyExampleCandidatesSelect = hasExampleCandidates ? 'example_candidates_json' : "'[]'"
       db.exec(`
         ALTER TABLE vocabulary_entries RENAME TO vocabulary_entries_legacy_contract;
         CREATE TABLE vocabulary_entries (
@@ -291,6 +352,7 @@ export function ensureSharedVocabularyShape(db) {
         example_chinese TEXT NOT NULL,
         example_highlight TEXT NOT NULL,
         example_review_status TEXT NOT NULL CHECK (example_review_status = 'approved'),
+        example_candidates_json TEXT NOT NULL DEFAULT '[]',
         visual_key TEXT NOT NULL,
         visual_version TEXT NOT NULL,
         visual_path TEXT NOT NULL,
@@ -311,14 +373,14 @@ export function ensureSharedVocabularyShape(db) {
       INSERT INTO vocabulary_entries (
         id, program_id, group_id, headword, phonetic, part_of_speech, source_meanings_json,
         teaching_sense, exam_frequency, pronunciation_mode, syllables_json, example_english,
-        example_chinese, example_highlight, example_review_status, visual_key, visual_version,
+        example_chinese, example_highlight, example_review_status, example_candidates_json, visual_key, visual_version,
         visual_path, visual_alt, audio_key, audio_version, audio_path, audio_voice, source_stage,
         source_day, source_order, printed_page, source_verification, created_at, updated_at
       )
       SELECT
         id, program_id, group_id, headword, phonetic, part_of_speech, source_meanings_json,
         teaching_sense, exam_frequency, pronunciation_mode, syllables_json, example_english,
-        example_chinese, example_highlight, example_review_status, visual_key, visual_version,
+        example_chinese, example_highlight, example_review_status, ${legacyExampleCandidatesSelect}, visual_key, visual_version,
         visual_path, visual_alt, audio_key, audio_version, audio_path, audio_voice, source_stage,
         source_day, source_order, printed_page, source_verification, created_at, updated_at
       FROM vocabulary_entries_legacy_contract;
@@ -340,6 +402,25 @@ export function ensureSharedVocabularyShape(db) {
     }
   } else if (missingExamFrequency) {
     db.exec('ALTER TABLE vocabulary_entries ADD COLUMN exam_frequency INTEGER NOT NULL DEFAULT 0')
+  }
+  const migratedEntryColumns = new Set(
+    db.prepare('PRAGMA table_info(vocabulary_entries)').all().map((column) => column.name),
+  )
+  if (!migratedEntryColumns.has('example_candidates_json')) {
+    db.exec("ALTER TABLE vocabulary_entries ADD COLUMN example_candidates_json TEXT NOT NULL DEFAULT '[]'")
+  }
+  const legacyExampleRows = db.prepare(`
+    SELECT id, teaching_sense, example_english, example_chinese, example_highlight
+    FROM vocabulary_entries
+    WHERE example_candidates_json = '[]'
+  `).all()
+  const backfillCandidates = db.prepare('UPDATE vocabulary_entries SET example_candidates_json = ? WHERE id = ?')
+  for (const row of legacyExampleRows) {
+    backfillCandidates.run(JSON.stringify([legacyExampleCandidate({
+      english: row.example_english,
+      chinese: row.example_chinese,
+      highlight: row.example_highlight,
+    }, row.teaching_sense)]), row.id)
   }
 }
 
@@ -739,6 +820,13 @@ function normalizeProgramEntry(entry, program) {
   const audio = entry.audio ?? {}
   const syllables = entry.syllables ?? pronunciation.parts?.map((part) => part.spelling) ?? []
   const pronunciationMode = entry.pronunciationMode ?? pronunciation.mode
+  const teachingSense = requireNonEmpty(entry.teachingSense, 'teachingSense')
+  const fallbackExample = {
+    english: requireNonEmpty(example.english, 'example.english'),
+    chinese: requireNonEmpty(example.chinese, 'example.chinese'),
+    highlight: requireNonEmpty(example.highlight, 'example.highlight'),
+  }
+  const exampleCandidates = normalizeExampleCandidates(entry.exampleCandidates, fallbackExample, teachingSense)
   if (!Array.isArray(syllables) || syllables.length === 0) {
     throw new VocabularyStoreError(`${entry.id || entry.headword} 缺少音节或词形拆分。`)
   }
@@ -750,14 +838,15 @@ function normalizeProgramEntry(entry, program) {
     phonetic: requireNonEmpty(entry.phonetic, 'phonetic'),
     partOfSpeech: requireNonEmpty(entry.partOfSpeech, 'partOfSpeech'),
     sourceMeanings: Array.isArray(entry.sourceMeanings) ? entry.sourceMeanings : [],
-    teachingSense: requireNonEmpty(entry.teachingSense, 'teachingSense'),
+    teachingSense,
     examFrequency: Number.isInteger(Number(entry.examFrequency)) ? Number(entry.examFrequency) : 0,
     pronunciationMode: requireNonEmpty(pronunciationMode, 'pronunciationMode'),
     syllables,
-    exampleEnglish: requireNonEmpty(example.english, 'example.english'),
-    exampleChinese: requireNonEmpty(example.chinese, 'example.chinese'),
-    exampleHighlight: requireNonEmpty(example.highlight, 'example.highlight'),
+    exampleEnglish: fallbackExample.english,
+    exampleChinese: fallbackExample.chinese,
+    exampleHighlight: fallbackExample.highlight,
     exampleReviewStatus: example.reviewStatus ?? 'approved',
+    exampleCandidates,
     visualKey: requireNonEmpty(visual.key ?? entry.visualKey, 'visual.key'),
     visualVersion: requireNonEmpty(visual.version, 'visual.version'),
     visualPath: requireNonEmpty(visual.path ?? visual.src, 'visual.path'),
@@ -824,17 +913,17 @@ export function replaceVocabularyProgram(db, input) {
       INSERT INTO vocabulary_entries (
         id, program_id, group_id, headword, phonetic, part_of_speech,
         source_meanings_json, teaching_sense, exam_frequency, pronunciation_mode, syllables_json,
-        example_english, example_chinese, example_highlight, example_review_status,
+        example_english, example_chinese, example_highlight, example_review_status, example_candidates_json,
         visual_key, visual_version, visual_path, visual_alt,
         audio_key, audio_version, audio_path, audio_voice,
         source_stage, source_day, source_order, printed_page, source_verification, updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `)
     for (const entry of entries) {
       insertEntry.run(
         entry.id, entry.programId, entry.groupId, entry.headword, entry.phonetic, entry.partOfSpeech,
         JSON.stringify(entry.sourceMeanings), entry.teachingSense, entry.examFrequency, entry.pronunciationMode, JSON.stringify(entry.syllables),
-        entry.exampleEnglish, entry.exampleChinese, entry.exampleHighlight, entry.exampleReviewStatus,
+        entry.exampleEnglish, entry.exampleChinese, entry.exampleHighlight, entry.exampleReviewStatus, JSON.stringify(entry.exampleCandidates),
         entry.visualKey, entry.visualVersion, entry.visualPath, entry.visualAlt,
         entry.audioKey, entry.audioVersion, entry.audioPath, entry.audioVoice,
         entry.sourceStage, entry.sourceDay, entry.sourceOrder, entry.printedPage, entry.sourceVerification, nowIso(),
@@ -848,7 +937,7 @@ export function replaceVocabularyProgram(db, input) {
   return { programId: program.id, groupCount: groups.length, entryCount: entries.length }
 }
 
-function rowToEntry(row, sourceTitle, sourceEdition) {
+function rowToEntry(row, sourceTitle, sourceEdition, includeExampleCandidates = false) {
   const projected = applyAmericanVocabularyPhonetics({
     id: row.id,
     headword: row.headword,
@@ -887,17 +976,24 @@ function rowToEntry(row, sourceTitle, sourceEdition) {
       verification: row.source_verification,
     },
   })
-  return {
+  const entry = {
     ...projected,
     phonetics: {
       american: projected.phonetic,
       british: row.phonetic,
     },
   }
+  if (includeExampleCandidates) {
+    entry.exampleCandidates = normalizeExampleCandidates(
+      parseJson(row.example_candidates_json, []),
+      projected.example,
+      projected.teachingSense,
+    )
+  }
+  return entry
 }
 
-export function getVocabularyProgram(db, programId) {
-  ensureSharedVocabularyShape(db)
+export function getVocabularyProgram(db, programId, { includeExampleCandidates = false } = {}) {
   const row = db.prepare('SELECT * FROM vocabulary_programs WHERE id = ?').get(programId)
   if (!row) return null
   const groups = db.prepare(`
@@ -914,7 +1010,7 @@ export function getVocabularyProgram(db, programId) {
   }))
   const entries = db.prepare('SELECT * FROM vocabulary_entries WHERE program_id = ? ORDER BY source_order')
     .all(programId)
-    .map((entry) => rowToEntry(entry, row.source_title, row.source_edition))
+    .map((entry) => rowToEntry(entry, row.source_title, row.source_edition, includeExampleCandidates))
   return {
     id: row.id,
     version: row.version,
@@ -1216,7 +1312,29 @@ export function undoVocabularyReviewDecision({ userDb, bankDb }, userId, runId) 
   return serializeRun(userDb, getOwnedRun(userDb, userId, run.id))
 }
 
-function snapshotEntry(entry) {
+export function selectVocabularyExampleCandidate(entry, setId) {
+  const candidates = normalizeExampleCandidates(entry.exampleCandidates, entry.example, entry.teachingSense)
+  const selectionVersion = candidates[0]?.version ?? EXAMPLE_CANDIDATE_VERSION
+  const digestHex = createHash('sha256')
+    .update(`${selectionVersion}\0${setId}\0${entry.id}`)
+    .digest('hex')
+  const selected = candidates[Number(BigInt(`0x${digestHex}`) % BigInt(candidates.length))]
+  return {
+    example: {
+      english: selected.english,
+      chinese: selected.chinese,
+      highlight: selected.highlight,
+      reviewStatus: 'approved',
+    },
+    exampleSelection: {
+      candidateId: selected.candidateId,
+      version: selected.version,
+    },
+  }
+}
+
+function snapshotEntry(entry, setId) {
+  const selectedExample = selectVocabularyExampleCandidate(entry, setId)
   return {
     id: entry.id,
     headword: entry.headword,
@@ -1228,7 +1346,8 @@ function snapshotEntry(entry) {
     pronunciationMode: entry.pronunciationMode,
     syllables: entry.syllables,
     pronunciationParts: entry.pronunciationParts,
-    example: entry.example,
+    example: selectedExample.example,
+    exampleSelection: selectedExample.exampleSelection,
     visual: entry.visual,
     audio: entry.audio,
   }
@@ -1277,15 +1396,15 @@ export function freezeVocabularySet({ userDb, bankDb }, userId, runId, input = {
     WHERE run_id = ? AND verdict = 'unfamiliar' ORDER BY decision_index
   `).all(run.id)
   if (!decisions.length) throw new VocabularyStoreError('本轮没有可生成的生词。', 409, 'empty_vocabulary_set')
-  const program = getVocabularyProgram(bankDb, run.program_id)
+  const program = getVocabularyProgram(bankDb, run.program_id, { includeExampleCandidates: true })
   if (!program) throw new VocabularyStoreError('词汇课程不存在。', 404, 'program_not_found')
   const entriesById = new Map(program.entries.map((entry) => [entry.id, entry]))
+  const id = `vocabulary-set-${randomUUID()}`
   const snapshots = decisions.map(({ entry_id: entryId }) => {
     const entry = entriesById.get(entryId)
     if (!entry) throw new VocabularyStoreError('生词集引用了不存在的词条。', 409, 'vocabulary_entry_drift')
-    return snapshotEntry(entry)
+    return snapshotEntry(entry, id)
   })
-  const id = `vocabulary-set-${randomUUID()}`
   const timestamp = nowIso()
   const title = input?.title == null || String(input.title).trim() === ''
     ? `${program.title} · ${snapshots.length}词`
@@ -1328,18 +1447,18 @@ export function createVocabularySetFromEntries({ userDb, bankDb }, userId, input
   }
   normalizeTarget(entryIds.length)
 
-  const program = getVocabularyProgram(bankDb, programId)
+  const program = getVocabularyProgram(bankDb, programId, { includeExampleCandidates: true })
   if (!program) throw new VocabularyStoreError('词汇课程不存在。', 404, 'program_not_found')
   const entriesById = new Map(program.entries.map((entry) => [entry.id, entry]))
+  const setId = `vocabulary-set-${randomUUID()}`
   const snapshots = entryIds.map((entryId) => {
     const entry = entriesById.get(entryId)
     if (!entry) {
       throw new VocabularyStoreError('输入中包含不属于当前1600词库的词条。', 400, 'vocabulary_entry_not_found')
     }
-    return snapshotEntry(entry)
+    return snapshotEntry(entry, setId)
   })
 
-  const setId = `vocabulary-set-${randomUUID()}`
   const timestamp = nowIso()
   const title = input?.title == null || String(input.title).trim() === ''
     ? `输入词表 · ${snapshots.length}词`
