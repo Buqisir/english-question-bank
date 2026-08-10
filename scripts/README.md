@@ -60,7 +60,7 @@ must be confirmed green (AGENTS.md RM gate).
 | `vocabulary/generate-qwen-audio-repair.py` | Generates four cue-protected Qwen repair candidates per failed word under `.scratch/`; formal MP3 assets remain unchanged | no |
 | `vocabulary/serve-audio-repair-qa.mjs` | Serves the isolated 70-word original/A-D comparison QA and saves second-pass progress separately from first-pass QA | no |
 | `verify-vocabulary-migration.mjs` | Replays the legacy vocabulary-entry constraint migration and proves successful row/index/FK preservation plus full rollback and FK restoration on a rejected legacy row | yes |
-| `verify-vocabulary-rendered-behavior.mjs` | Uses real Chromium to verify one-audio playback timing/cancellation/retry/end behavior and 1/15/60-word 2x3 A4 print pagination with a first-page-only QR | yes |
+| `verify-vocabulary-rendered-behavior.mjs` | Uses real Chromium to verify one-audio playback timing/cancellation/retry/end behavior, 1/15/60-word 2x3 vocabulary papers, 15-row dictation/answer PDFs, download filenames, and the hidden-answer auto-dictation flow | yes |
 | `verify-architecture-housekeeping.mjs` | Prevents missing entrypoints, undocumented verifier registration, stale workflow ownership, and six risk-route regressions | yes |
 | `verify-motion-tokens.mjs` | motion-pass gate: `app/src/**/*.css` (excluding PaperSurface.css contract file) has no `ease-in`, no `transition: all`, and no bare hand-written transition/animation durations outside `token-exempt`-tagged loading or signature moments | yes |
 | `verify-lecture-panel-css.mjs` | lecture-css-restore gate: 讲评五解析面板 (pi-ps-analysis/cloze/gf/seven/writing) 活 TSX 用到的每个类必须有 CSS 定义或在 hook-only 白名单（含白名单防陈旧 + paperBrowsePage.css @import 加载链断言）——retire 刀样式陪葬事故的可执行形态 | yes |

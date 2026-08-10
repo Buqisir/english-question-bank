@@ -150,6 +150,16 @@ function entry(index) {
 
 const programEntries = Array.from({ length: 60 }, (_, index) => entry(index))
 const publicEntries = programEntries.map(({ example: _example, source: _source, sourceMeanings: _sourceMeanings, examFrequency: _examFrequency, ...item }) => item)
+const publicDictationEntries = programEntries.map((item) => ({
+  id: item.id,
+  answer: item.pronunciationMode === 'forms'
+    ? item.pronunciationParts.american[0].spelling
+    : item.headword,
+  partOfSpeech: item.partOfSpeech,
+  sourceMeanings: item.sourceMeanings,
+  teachingSense: item.teachingSense,
+  audio: item.audio,
+}))
 const defaultStudent = {
   id: 'student-default',
   displayName: '默认学生',
@@ -335,11 +345,20 @@ async function installApiFixtures(page, {
     } else if (/^\/api\/vocabulary\/sets\/set-(1|15|60)\/pdf$/.test(pathname)) {
       const count = Number(pathname.match(/set-(\d+)/)?.[1])
       const accent = url.searchParams.get('accent')
+      const kind = url.searchParams.get('kind') ?? 'cards'
       assert.ok(['american', 'british'].includes(accent))
+      assert.ok(['cards', 'dictation', 'answer'].includes(kind))
+      const rawTitle = renamedTitles.get(count) ?? `固定生词组 ${count} 词`
+      const exportTitle = rawTitle.replace(new RegExp(`[·\\s-]*${count}\\s*词$`, 'u'), '').trim() || rawTitle
+      const fileName = kind === 'dictation'
+        ? `${exportTitle}-听写纸-${count}词-${accent === 'american' ? '美式' : '英式'}.pdf`
+        : kind === 'answer'
+          ? `${exportTitle}-教师答案-${count}词.pdf`
+          : `${rawTitle}${renamedTitles.has(count) ? `-${count}词` : ''}-${accent === 'american' ? '美式' : '英式'}.pdf`
       await route.fulfill({
         status: 200,
         contentType: 'application/pdf',
-        headers: { 'x-file-name': encodeURIComponent(`${renamedTitles.get(count) ?? `固定生词组 ${count} 词`}${renamedTitles.has(count) ? `-${count}词` : ''}-${accent === 'american' ? '美式' : '英式'}.pdf`) },
+        headers: { 'x-file-name': encodeURIComponent(fileName) },
         body: Buffer.from('%PDF-1.4\n%%EOF\n'),
       })
     } else if (/^\/api\/vocabulary\/sets\/set-(1|15|60)$/.test(pathname)) {
@@ -365,6 +384,22 @@ async function installApiFixtures(page, {
       } })
     } else if (pathname === '/api/question-groups') {
       await route.fulfill({ json: { questionGroups: [] } })
+    } else if (pathname.startsWith('/api/public/vocabulary/dictation/')) {
+      const shareId = pathname.split('/').at(-1)
+      if (shareId === 'revoked') {
+        await route.fulfill({ status: 410, json: { message: '这份听写练习已停止分享。' } })
+      } else if (shareId === 'missing') {
+        await route.fulfill({ status: 404, json: { message: '没有找到这份听写练习。' } })
+      } else {
+        const count = Number(shareId?.replace('share-', ''))
+        assert.ok([1, 15, 60].includes(count), `Unexpected public dictation fixture share: ${shareId}`)
+        await route.fulfill({ json: { vocabularySet: {
+          title: `固定生词组 ${count} 词`,
+          entryCount: count,
+          entries: publicDictationEntries.slice(0, count),
+          createdAt: '2026-08-07T12:00:00.000Z',
+        } } })
+      }
     } else if (pathname.startsWith('/api/public/vocabulary/listen/')) {
       const shareId = pathname.split('/').at(-1)
       if (shareId === 'revoked') {
@@ -493,7 +528,15 @@ async function verifyDirectSetCreation(page) {
   await page.getByRole('button', { name: '生成固定词组' }).click()
   await page.getByRole('heading', { name: '输入词表 · 2词' }).waitFor()
   assert.equal(await page.getByRole('button', { name: '生成扫码听写' }).count(), 1)
-  assert.equal(await page.getByRole('button', { name: '下载单词纸' }).isDisabled(), true)
+  assert.equal(await page.getByRole('button', { name: '下载', exact: true }).isEnabled(), true)
+  await page.getByRole('button', { name: '下载', exact: true }).click()
+  assert.equal(await page.getByRole('button', { name: /^听写纸/ }).count(), 1)
+  assert.equal(await page.getByRole('button', { name: /^教师答案/ }).count(), 1)
+  await page.screenshot({ path: path.join(evidenceRoot, 'download-menu-desktop.png'), fullPage: true })
+  await page.getByRole('button', { name: /^听写纸/ }).click()
+  await page.getByText('这份文件需要扫码播放录音', { exact: true }).waitFor()
+  assert.match(await page.locator('.vocabulary-share-download-confirmation').innerText(), /匿名公开听写链接.*随时撤销/s)
+  await page.getByRole('button', { name: '取消', exact: true }).click()
   assert.deepEqual(
     await page.locator('.vocabulary-print-entry .vocabulary-print-word-heading h2').allTextContents(),
     ['about', 'advice'],
@@ -560,10 +603,11 @@ async function verifyPrint(page, count, expectedPages, expectedLastPageCount, ac
   await page.getByRole('heading', { name: `固定生词组 ${count} 词` }).waitFor()
   const expectedTitle = count === 1 ? '会林第1周生词' : `固定生词组 ${count} 词`
   if (count === 1) await page.getByLabel('单词纸名称').fill(expectedTitle)
-  await page.getByLabel('单词纸音标').selectOption(accent)
-  assert.equal(await page.getByRole('button', { name: '下载单词纸' }).isEnabled(), true)
+  await page.getByLabel('下载读音').selectOption(accent)
+  assert.equal(await page.getByRole('button', { name: '下载', exact: true }).isEnabled(), true)
   const downloadPromise = page.waitForEvent('download')
-  await page.getByRole('button', { name: '下载单词纸' }).click()
+  await page.getByRole('button', { name: '下载', exact: true }).click()
+  await page.getByRole('button', { name: /^单词纸/ }).click()
   const download = await downloadPromise
   assert.equal(download.suggestedFilename(), `${expectedTitle}${count === 1 ? `-${count}词` : ''}-${accent === 'american' ? '美式' : '英式'}.pdf`)
   const downloadedPath = path.join(tempRoot, `downloaded-vocabulary-${count}.pdf`)
@@ -730,6 +774,131 @@ async function verifyEmbeddedPrintMode(page) {
   assert.equal(await page.locator('.vocabulary-print-qr').count(), 1)
   assert.equal(await page.getByText('英式整词与分节一致', { exact: false }).count(), 3)
   pass('服务端导出模式按固定 Set 与英美音标参数加载同一份 2×3 单词纸 DOM')
+}
+
+async function verifyDictationDownloads(page) {
+  await page.goto(`${origin}/?view=vocabulary-review`, { waitUntil: 'networkidle' })
+  await page.getByRole('button', { name: /固定生词组 15 词/ }).click()
+  await page.getByRole('heading', { name: '固定生词组 15 词' }).waitFor()
+  await page.getByLabel('下载读音').selectOption('british')
+
+  let downloadPromise = page.waitForEvent('download')
+  await page.getByRole('button', { name: '下载', exact: true }).click()
+  await page.getByRole('button', { name: /^听写纸/ }).click()
+  let download = await downloadPromise
+  assert.equal(download.suggestedFilename(), '固定生词组-听写纸-15词-英式.pdf')
+
+  downloadPromise = page.waitForEvent('download')
+  await page.getByRole('button', { name: '下载', exact: true }).click()
+  await page.getByRole('button', { name: /^教师答案/ }).click()
+  download = await downloadPromise
+  assert.equal(download.suggestedFilename(), '固定生词组-教师答案-15词.pdf')
+  pass('下载菜单可分别导出听写纸与教师答案，文件名包含名称、用途、题数和听写音色')
+}
+
+async function verifyDictationPrint(page, count, expectedPages, accent = 'american') {
+  for (const kind of ['dictation', 'answer']) {
+    await page.emulateMedia({ media: 'screen' })
+    await page.goto(`${origin}/?view=vocabulary-review&vocabularyPrintSetId=set-${count}&printAccent=${accent}&vocabularyPrintMode=${kind}`, { waitUntil: 'networkidle' })
+    await page.locator('[data-vocabulary-print-state="ready"]').waitFor()
+    await page.emulateMedia({ media: 'print' })
+
+    const pages = page.locator('.vocabulary-print-page')
+    const rows = page.locator('.vocabulary-dictation-print-row')
+    assert.equal(await pages.count(), expectedPages)
+    assert.equal(await rows.count(), count)
+    assert.deepEqual(await rows.locator('span').allTextContents(), Array.from({ length: count }, (_, index) => String(index + 1)))
+    assert.equal(await page.getByText('英文单词', { exact: true }).count(), expectedPages)
+    assert.equal(await page.getByText('词性', { exact: true }).count(), expectedPages)
+    assert.equal(await page.getByText('中文意思', { exact: true }).count(), expectedPages)
+    assert.equal(await page.locator('.vocabulary-print-sheet').getByText('美式', { exact: true }).count(), 0)
+    assert.equal(await page.locator('.vocabulary-print-sheet').getByText('英式', { exact: true }).count(), 0)
+
+    const tableTracks = await page.locator('.vocabulary-dictation-print-table').evaluateAll((tables) => tables.map((table) => ({
+      rows: getComputedStyle(table).gridTemplateRows.split(' ').length,
+      overflow: table.scrollHeight > table.clientHeight + 1 || table.scrollWidth > table.clientWidth + 1,
+    })))
+    assert.equal(tableTracks.every((table) => table.rows === 16 && !table.overflow), true)
+
+    if (kind === 'dictation') {
+      assert.equal(await rows.locator('strong').allTextContents().then((values) => values.every((value) => !value.trim())), true)
+      assert.equal(await rows.locator('i').allTextContents().then((values) => values.every((value) => !value.trim())), true)
+      assert.equal(await rows.locator('p').allTextContents().then((values) => values.every((value) => !value.trim())), true)
+      assert.equal(await page.locator('.vocabulary-print-qr').count(), 1)
+      assert.equal(await pages.first().locator('.vocabulary-print-qr').count(), 1)
+      const qrTitle = await page.locator('.vocabulary-print-qr svg title').textContent()
+      assert.equal(qrTitle, '扫码自动听写')
+    } else {
+      assert.equal(await page.locator('.vocabulary-print-qr').count(), 0)
+      assert.deepEqual(await rows.locator('strong').allTextContents(), publicDictationEntries.slice(0, count).map((entry) => entry.answer))
+      assert.deepEqual(await rows.locator('i').allTextContents(), publicDictationEntries.slice(0, count).map((entry) => entry.partOfSpeech))
+      assert.deepEqual(await rows.locator('p').allTextContents(), publicDictationEntries.slice(0, count).map((entry) => entry.sourceMeanings.join('；')))
+    }
+
+    const pdfPath = path.join(tempRoot, `${kind}-${count}-${accent}.pdf`)
+    await page.pdf({ path: pdfPath, preferCSSPageSize: true, printBackground: true })
+    const info = spawnSync('pdfinfo', [pdfPath], { encoding: 'utf8' })
+    assert.equal(info.status, 0, info.stderr)
+    assert.match(info.stdout, new RegExp(`Pages:\\s+${expectedPages}\\b`))
+    assert.match(info.stdout, /Page size:\s+59[45]\.\d+ x 841\.\d+ pts \(A4\)/)
+    if (count === 15) copyFileSync(pdfPath, path.join(evidenceRoot, `${kind}-paper-current-15-${accent}.pdf`))
+  }
+  pass(`${count} 词听写纸与教师答案均为 A4 单栏、每页最多 15 题；学生留空、教师全义、二维码仅在听写纸首页`)
+}
+
+async function verifyDictationPlayer(page) {
+  await page.addInitScript(() => {
+    window.__dictationAudioLog = []
+    HTMLMediaElement.prototype.play = function play() {
+      window.__dictationAudioLog.push({ type: 'play', src: this.getAttribute('src'), at: performance.now() })
+      return Promise.resolve()
+    }
+    HTMLMediaElement.prototype.pause = function pause() {
+      window.__dictationAudioLog.push({ type: 'pause', src: this.getAttribute('src'), at: performance.now() })
+    }
+    HTMLMediaElement.prototype.load = function load() {}
+  })
+  await page.goto(`${origin}/vocabulary/dictation/share-1?accent=british`, { waitUntil: 'networkidle' })
+  await page.getByRole('heading', { name: '固定生词组 1 词' }).waitFor()
+  assert.equal(await page.locator('audio').count(), 1)
+  assert.equal(await page.getByText('about', { exact: true }).count(), 0)
+  assert.equal(await page.getByRole('button', { name: '2遍' }).getAttribute('aria-pressed'), 'true')
+  assert.equal(await page.getByRole('button', { name: '5秒' }).getAttribute('aria-pressed'), 'true')
+  assert.equal(await page.getByRole('slider', { name: '播放音量' }).count(), 1)
+  await page.screenshot({ path: path.join(evidenceRoot, 'dictation-player-mobile-390x844.png'), fullPage: true })
+
+  await page.getByRole('button', { name: '开始听写' }).click()
+  await page.getByText('3 秒后开始', { exact: true }).waitFor()
+  await page.waitForFunction(() => window.__dictationAudioLog.some((item) => item.type === 'play'), undefined, { timeout: 4_500 })
+  const audio = page.locator('audio')
+  let plays = await page.evaluate(() => window.__dictationAudioLog.filter((item) => item.type === 'play'))
+  assert.equal(plays.at(-1).src, '/vocabulary-assets/wanwei-round-one-v1/audio/eqb-british-cori-high-v1/fixture-0001.mp3')
+  const firstEndAt = await audio.evaluate((node) => {
+    const at = performance.now()
+    node.dispatchEvent(new Event('ended'))
+    return at
+  })
+  await page.waitForTimeout(650)
+  assert.equal(await page.evaluate(() => window.__dictationAudioLog.filter((item) => item.type === 'play').length), 1)
+  await page.waitForFunction(() => window.__dictationAudioLog.filter((item) => item.type === 'play').length === 2, undefined, { timeout: 1_500 })
+  plays = await page.evaluate(() => window.__dictationAudioLog.filter((item) => item.type === 'play'))
+  assert.ok(plays.at(-1).at - firstEndAt >= 780)
+  assert.ok(plays.at(-1).at - firstEndAt <= 1_100)
+  await audio.evaluate((node) => node.dispatchEvent(new Event('ended')))
+  await page.waitForTimeout(4_700)
+  assert.equal(await page.getByRole('heading', { name: '本组听写完成' }).count(), 0)
+  await page.getByRole('heading', { name: '本组听写完成' }).waitFor({ timeout: 1_000 })
+
+  await page.getByRole('button', { name: '查看答案' }).click()
+  assert.equal(await page.getByText('about', { exact: true }).count(), 0)
+  await page.getByRole('button', { name: '确认查看' }).click()
+  assert.equal(await page.getByText('about', { exact: true }).count(), 1)
+  assert.equal(await page.getByText('上升；升起；提高；起床；变得更加成功（或重要、强大等）；升起；增加；提高', { exact: true }).count(), 1)
+
+  await page.getByRole('button', { name: '3遍' }).click()
+  await page.getByLabel('自定义词间书写时间，3到15秒').fill('7')
+  assert.deepEqual(await page.evaluate(() => JSON.parse(window.localStorage.getItem('eqb-vocabulary-dictation-settings-v1'))), { repeatCount: 3, gapSeconds: 7 })
+  pass('扫码页隐藏答案，3秒倒计时后按锁定英音播放，0.8秒重复、5秒书写，末题等待完成后才允许确认看答案')
 }
 
 async function verifyPlayer(page) {
@@ -927,6 +1096,18 @@ async function main() {
     await verifyEmbeddedPrintMode(embeddedPrintPage)
     await embeddedPrintPage.close()
 
+    const dictationDownloadPage = await browser.newPage({ viewport: { width: 1440, height: 1000 } })
+    await installApiFixtures(dictationDownloadPage)
+    await verifyDictationDownloads(dictationDownloadPage)
+    await dictationDownloadPage.close()
+
+    const dictationPrintPage = await browser.newPage({ viewport: { width: 1440, height: 1000 } })
+    await installApiFixtures(dictationPrintPage)
+    for (const [count, pages, accent] of [[1, 1, 'british'], [15, 1, 'american'], [60, 4, 'british']]) {
+      await verifyDictationPrint(dictationPrintPage, count, pages, accent)
+    }
+    await dictationPrintPage.close()
+
     const directSetPage = await browser.newPage({ viewport: { width: 1440, height: 1000 } })
     await installApiFixtures(directSetPage)
     await verifyDirectSetCreation(directSetPage)
@@ -952,6 +1133,11 @@ async function main() {
     await verifyPlayer(playerPage)
     await playerPage.close()
 
+    const dictationPlayerPage = await browser.newPage({ viewport: { width: 390, height: 844 } })
+    await installApiFixtures(dictationPlayerPage)
+    await verifyDictationPlayer(dictationPlayerPage)
+    await dictationPlayerPage.close()
+
     const oneWordPlayer = await browser.newPage({ viewport: { width: 390, height: 844 } })
     await installApiFixtures(oneWordPlayer)
     await verifyPlayerSize(oneWordPlayer, 1)
@@ -973,7 +1159,11 @@ async function main() {
     await revokedPage.getByRole('heading', { name: '这份听写单已停止分享' }).waitFor()
     await revokedPage.goto(`${origin}/vocabulary/listen/missing`, { waitUntil: 'networkidle' })
     await revokedPage.getByRole('heading', { name: '没有找到这份听写单' }).waitFor()
-    pass('撤销与不存在的公开链接显示克制失效页')
+    await revokedPage.goto(`${origin}/vocabulary/dictation/revoked?accent=american`, { waitUntil: 'networkidle' })
+    await revokedPage.getByRole('heading', { name: '这份听写练习已停止分享' }).waitFor()
+    await revokedPage.goto(`${origin}/vocabulary/dictation/missing?accent=american`, { waitUntil: 'networkidle' })
+    await revokedPage.getByRole('heading', { name: '没有找到这份听写练习' }).waitFor()
+    pass('撤销与不存在的公开播放、自动听写链接均显示克制失效页')
     await revokedPage.close()
 
     const programFailurePage = await browser.newPage()
@@ -996,7 +1186,7 @@ async function main() {
     await installApiFixtures(frozenResumePage, { resumeFrozen: true })
     await frozenResumePage.goto(`${origin}/?view=vocabulary-review`, { waitUntil: 'networkidle' })
     await frozenResumePage.getByRole('heading', { name: '固定生词组 15 词' }).waitFor()
-    assert.equal(await frozenResumePage.getByRole('button', { name: '下载单词纸' }).isEnabled(), true)
+    assert.equal(await frozenResumePage.getByRole('button', { name: '下载', exact: true }).isEnabled(), true)
     assert.equal(await frozenResumePage.getByRole('button', { name: '复制听写链接' }).count(), 1)
     assert.equal(await frozenResumePage.getByRole('button', { name: '生成固定生词组' }).count(), 0)
     assert.equal(await frozenResumePage.evaluate(() => window.localStorage.getItem('eqb-vocabulary-review-run-wanwei-round-one-v1')), null)

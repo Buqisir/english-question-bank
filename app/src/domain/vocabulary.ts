@@ -51,6 +51,20 @@ export type PublicVocabularySet = {
   createdAt: string
 }
 
+export type PublicVocabularyDictationEntry = Pick<
+  VocabularySetEntry,
+  'id' | 'partOfSpeech' | 'sourceMeanings' | 'teachingSense' | 'audio'
+> & {
+  answer: string
+}
+
+export type PublicVocabularyDictationSet = {
+  title: string
+  entryCount: number
+  entries: PublicVocabularyDictationEntry[]
+  createdAt: string
+}
+
 export type VocabularyVisualKey = string
 
 export type VocabularyProgramGroup = {

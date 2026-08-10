@@ -136,6 +136,28 @@ function projectPublicVocabularyEntry(snapshot) {
   return projectVocabularySnapshot(snapshot, invalid)
 }
 
+function projectPublicVocabularyDictationEntry(snapshot) {
+  const entry = projectPublicVocabularyEntry(snapshot)
+  const sourceMeanings = Array.isArray(snapshot.sourceMeanings)
+    ? [...new Set(snapshot.sourceMeanings.map((meaning) => String(meaning ?? '').trim()).filter(Boolean))].slice(0, 3)
+    : []
+  const firstPronunciationPart = entry.pronunciationParts?.american?.[0] ?? entry.syllables[0]
+  const answer = entry.pronunciationMode === 'forms'
+    ? String(typeof firstPronunciationPart === 'string' ? firstPronunciationPart : firstPronunciationPart?.spelling ?? '').trim()
+    : entry.headword
+  if (!answer) {
+    throw new VocabularyStoreError('这份听写单的冻结快照已损坏。', 500, 'vocabulary_share_snapshot_invalid')
+  }
+  return {
+    id: entry.id,
+    answer,
+    partOfSpeech: entry.partOfSpeech,
+    sourceMeanings: sourceMeanings.length ? sourceMeanings : [entry.teachingSense],
+    teachingSense: entry.teachingSense,
+    audio: entry.audio,
+  }
+}
+
 function projectFrozenVocabularyEntry(snapshot) {
   const invalid = () => {
     throw new VocabularyStoreError('这份生词集的冻结快照已损坏。', 500, 'vocabulary_set_snapshot_invalid')
@@ -1419,6 +1441,33 @@ export function getPublicVocabularyShare(userDb, shareId) {
     SELECT snapshot_json FROM vocabulary_set_entries WHERE set_id = ? ORDER BY order_index
   `).all(set.id)
     .map((row) => projectPublicVocabularyEntry(parseJson(row.snapshot_json, null)))
+  if (entries.length !== set.entry_count) {
+    throw new VocabularyStoreError('这份听写单的冻结快照不完整。', 500, 'vocabulary_share_snapshot_invalid')
+  }
+  return {
+    status: 'active',
+    set: {
+      title: set.title,
+      entryCount: set.entry_count,
+      entries,
+      createdAt: set.created_at,
+    },
+  }
+}
+
+export function getPublicVocabularyDictationShare(userDb, shareId) {
+  ensureUserVocabularyShape(userDb)
+  const share = userDb.prepare(`
+    SELECT set_id, status FROM vocabulary_shares WHERE share_id = ?
+  `).get(shareId)
+  if (!share) return { status: 'not_found' }
+  if (share.status !== 'active') return { status: 'revoked' }
+  const set = userDb.prepare('SELECT id, title, entry_count, created_at FROM vocabulary_sets WHERE id = ?').get(share.set_id)
+  if (!set) return { status: 'not_found' }
+  const entries = userDb.prepare(`
+    SELECT snapshot_json FROM vocabulary_set_entries WHERE set_id = ? ORDER BY order_index
+  `).all(set.id)
+    .map((row) => projectPublicVocabularyDictationEntry(parseJson(row.snapshot_json, null)))
   if (entries.length !== set.entry_count) {
     throw new VocabularyStoreError('这份听写单的冻结快照不完整。', 500, 'vocabulary_share_snapshot_invalid')
   }

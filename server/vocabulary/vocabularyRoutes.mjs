@@ -7,6 +7,7 @@ import {
   decideVocabularyReviewEntry,
   discardVocabularyReviewRun,
   freezeVocabularySet,
+  getPublicVocabularyDictationShare,
   getCurrentVocabularyReviewRun,
   getPublicVocabularyShare,
   getVocabularyProgram,
@@ -82,7 +83,7 @@ function sendVocabularyPdf(response, body, fileName) {
   response.end(body)
 }
 
-function vocabularyPdfFileName(title, entryCount, accent) {
+function vocabularyPdfFileName(title, entryCount, accent, kind = 'cards') {
   const safeTitle = String(title ?? '')
     .replace(/[\\/:*?"<>|]/gu, ' ')
     .replace(/[\p{Cc}\p{Cf}]/gu, '')
@@ -90,6 +91,13 @@ function vocabularyPdfFileName(title, entryCount, accent) {
     .trim()
     .slice(0, 60) || '生词记忆纸'
   const countSuffix = new RegExp(`${entryCount}\\s*词$`, 'u').test(safeTitle) ? '' : `-${entryCount}词`
+  const exportTitle = safeTitle
+    .replace(new RegExp(`[·\\s-]*${entryCount}\\s*词$`, 'u'), '')
+    .trim() || '生词组'
+  if (kind === 'answer') return `${exportTitle}-教师答案-${entryCount}词.pdf`
+  if (kind === 'dictation') {
+    return `${exportTitle}-听写纸-${entryCount}词-${accent === 'american' ? '美式' : '英式'}.pdf`
+  }
   return `${safeTitle}${countSuffix}-${accent === 'american' ? '美式' : '英式'}.pdf`
 }
 
@@ -271,15 +279,21 @@ export function createVocabularyRoutes() {
 
     defineRoute('POST', /^\/api\/vocabulary\/sets\/([^/]+)\/pdf$/, async ({ request, response, match, context }) => {
       const userId = context.resolveDataUserId(context)
-      const accent = new URL(request.url ?? '/', 'http://localhost').searchParams.get('accent')
+      const searchParams = new URL(request.url ?? '/', 'http://localhost').searchParams
+      const accent = searchParams.get('accent')
+      const kind = searchParams.get('kind') ?? 'cards'
       if (accent !== 'american' && accent !== 'british') {
         context.sendJson(response, 400, { error: 'invalid_vocabulary_accent', message: '单词纸音标必须选择英式或美式。' })
+        return
+      }
+      if (!['cards', 'dictation', 'answer'].includes(kind)) {
+        context.sendJson(response, 400, { error: 'invalid_vocabulary_pdf_kind', message: '下载类型无效。' })
         return
       }
       try {
         const vocabularySet = withUserDb(context, true, (db) =>
           getVocabularySet(db, userId, decodePathPart(match[1])))
-        if (vocabularySet.share?.status !== 'active') {
+        if (kind !== 'answer' && vocabularySet.share?.status !== 'active') {
           throw new VocabularyStoreError(
             '请先生成扫码听写，再下载带二维码的单词纸。',
             409,
@@ -290,12 +304,13 @@ export function createVocabularyRoutes() {
           cookie: request.headers.cookie ?? '',
           setId: vocabularySet.id,
           accent,
-          expectedPageCount: Math.ceil(vocabularySet.entryCount / 6),
+          kind,
+          expectedPageCount: Math.ceil(vocabularySet.entryCount / (kind === 'cards' ? 6 : 15)),
         })
         sendVocabularyPdf(
           response,
           result.pdfBytes,
-          vocabularyPdfFileName(vocabularySet.title, vocabularySet.entryCount, accent),
+          vocabularyPdfFileName(vocabularySet.title, vocabularySet.entryCount, accent, kind),
         )
       } catch (error) {
         sendVocabularyError(response, context, error)
@@ -324,6 +339,19 @@ export function createVocabularyRoutes() {
 
     defineRoute('GET', /^\/api\/public\/vocabulary\/listen\/([^/]+)$/, ({ response, match, context }) => {
       const result = withUserDb(context, true, (db) => getPublicVocabularyShare(db, decodePathPart(match[1])))
+      if (result.status === 'not_found') {
+        context.sendJson(response, 404, { error: 'vocabulary_share_not_found' })
+        return
+      }
+      if (result.status === 'revoked') {
+        context.sendJson(response, 410, { error: 'vocabulary_share_revoked' })
+        return
+      }
+      context.sendJson(response, 200, { vocabularySet: result.set })
+    }),
+
+    defineRoute('GET', /^\/api\/public\/vocabulary\/dictation\/([^/]+)$/, ({ response, match, context }) => {
+      const result = withUserDb(context, true, (db) => getPublicVocabularyDictationShare(db, decodePathPart(match[1])))
       if (result.status === 'not_found') {
         context.sendJson(response, 404, { error: 'vocabulary_share_not_found' })
         return

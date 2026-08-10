@@ -1,0 +1,574 @@
+.vocabulary-dictation-page {
+  min-height: 100vh;
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.vocabulary-dictation-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0 max(20px, calc((100vw - 760px) / 2));
+  border-bottom: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.vocabulary-dictation-header a {
+  color: var(--ink-strong);
+  font-size: 16px;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+
+.vocabulary-dictation-header span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.vocabulary-dictation-shell {
+  display: grid;
+  gap: 16px;
+  width: min(760px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 28px 0 72px;
+}
+
+.vocabulary-dictation-stage,
+.vocabulary-dictation-controls,
+.vocabulary-dictation-complete,
+.vocabulary-dictation-answer-confirm,
+.vocabulary-dictation-answers,
+.vocabulary-dictation-resume {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.vocabulary-dictation-stage {
+  min-height: 410px;
+  padding: 22px 28px 28px;
+}
+
+.vocabulary-dictation-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font-size: var(--text-xs);
+}
+
+.vocabulary-dictation-title-row h1 {
+  margin: 0;
+  color: inherit;
+  font: inherit;
+}
+
+.vocabulary-dictation-title-row strong {
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.vocabulary-dictation-question {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  min-height: 210px;
+  padding-top: 56px;
+  color: var(--ink-strong);
+}
+
+.vocabulary-dictation-question > p {
+  margin: 0 10px;
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.vocabulary-dictation-question > strong {
+  font-size: calc(var(--eqb-font-size-xl) + var(--eqb-font-size-xl) + var(--eqb-font-size-xl));
+  font-weight: 650;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  font-variant-numeric: tabular-nums;
+}
+
+.vocabulary-dictation-question > span {
+  display: inline-flex;
+  align-items: end;
+  gap: 4px;
+  width: 32px;
+  height: 24px;
+  margin-left: 20px;
+}
+
+.vocabulary-dictation-question > span i {
+  width: 4px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--line-strong);
+}
+
+.vocabulary-dictation-question > span.is-playing i {
+  background: var(--accent);
+  animation: vocabulary-dictation-meter calc(var(--motion-slow) * 4) ease-in-out infinite alternate;
+}
+
+.vocabulary-dictation-question > span.is-playing i:nth-child(2) {
+  animation-delay: calc(var(--motion-slow) * -1.5);
+}
+
+.vocabulary-dictation-question > span.is-playing i:nth-child(3) {
+  animation-delay: calc(var(--motion-slow) * -3);
+}
+
+@keyframes vocabulary-dictation-meter {
+  to { height: 22px; }
+}
+
+.vocabulary-dictation-status {
+  min-height: 24px;
+  margin: 0;
+  color: var(--ink-strong);
+  font-size: 16px;
+  font-weight: 650;
+  text-align: center;
+}
+
+.vocabulary-dictation-status.is-error {
+  color: var(--coral-text);
+}
+
+.vocabulary-dictation-instruction {
+  margin: 8px 0 28px;
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+}
+
+.vocabulary-dictation-progress {
+  height: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--surface-strong);
+}
+
+.vocabulary-dictation-progress span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  transform-origin: left center;
+  transition: transform var(--motion-base) var(--ease-out);
+}
+
+.vocabulary-dictation-controls {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 28px;
+  padding: 24px 28px;
+}
+
+.vocabulary-dictation-transport {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.vocabulary-dictation-transport button {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--panel);
+  color: var(--ink);
+}
+
+.vocabulary-dictation-transport .primary-control {
+  width: 64px;
+  height: 64px;
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.vocabulary-dictation-transport button:disabled {
+  opacity: 0.38;
+}
+
+.vocabulary-dictation-replay {
+  width: max-content;
+  margin: -4px auto 0;
+  padding: 7px 12px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  color: var(--ink-muted);
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: inherit;
+  font-size: var(--text-sm);
+  cursor: pointer;
+}
+
+.vocabulary-dictation-replay:disabled {
+  opacity: 0.38;
+  cursor: default;
+}
+
+.vocabulary-dictation-settings {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 18px 16px;
+}
+
+.vocabulary-dictation-settings fieldset {
+  display: flex;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.vocabulary-dictation-settings legend {
+  width: 100%;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.vocabulary-dictation-settings fieldset button,
+.vocabulary-dictation-settings fieldset label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.vocabulary-dictation-settings fieldset button.is-selected,
+.vocabulary-dictation-settings fieldset label.is-selected {
+  border-color: var(--accent);
+  background: #eaf1ed;
+  color: #1e4a3a;
+}
+
+.vocabulary-dictation-settings fieldset label {
+  gap: 4px;
+  padding: 0 6px;
+}
+
+.vocabulary-dictation-settings fieldset label input {
+  width: 28px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: center;
+  -moz-appearance: textfield;
+}
+
+.vocabulary-dictation-settings fieldset label input::-webkit-inner-spin-button,
+.vocabulary-dictation-settings fieldset label input::-webkit-outer-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+
+.vocabulary-dictation-volume {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+}
+
+.vocabulary-dictation-volume input {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.vocabulary-dictation-complete,
+.vocabulary-dictation-answer-confirm {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18px;
+  padding: 22px 24px;
+}
+
+.vocabulary-dictation-complete > svg {
+  color: var(--accent);
+}
+
+.vocabulary-dictation-complete h2,
+.vocabulary-dictation-answer-confirm h2,
+.vocabulary-dictation-answers h2,
+.vocabulary-dictation-resume h1 {
+  margin: 0;
+  color: var(--ink-strong);
+  font-size: 28px;
+  font-weight: 650;
+}
+
+.vocabulary-dictation-complete p,
+.vocabulary-dictation-answer-confirm p,
+.vocabulary-dictation-resume p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.vocabulary-dictation-complete > div:last-child,
+.vocabulary-dictation-answer-confirm > div:last-child,
+.vocabulary-dictation-resume > div {
+  display: flex;
+  gap: 8px;
+}
+
+.vocabulary-dictation-complete button,
+.vocabulary-dictation-answer-confirm button,
+.vocabulary-dictation-resume button,
+.vocabulary-dictation-message button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 40px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.vocabulary-dictation-page button.primary,
+.vocabulary-dictation-resume button.primary {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.vocabulary-dictation-answers {
+  padding: 22px 24px 28px;
+}
+
+.vocabulary-dictation-answers > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.vocabulary-dictation-answers > div span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.vocabulary-dictation-answers ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vocabulary-dictation-answers li {
+  display: grid;
+  grid-template-columns: 34px minmax(120px, 0.65fr) minmax(80px, 0.35fr) minmax(0, 1fr);
+  align-items: baseline;
+  gap: 12px;
+  min-height: 58px;
+  padding: 10px 6px;
+  border-bottom: 1px solid var(--line);
+}
+
+.vocabulary-dictation-answers li > span,
+.vocabulary-dictation-answers li > i {
+  color: var(--muted);
+  font-size: 12px;
+  font-style: normal;
+}
+
+.vocabulary-dictation-answers li strong {
+  color: var(--ink-strong);
+  font-family: 'Times New Roman', Times, SimSun, 'Songti SC', STSong, serif;
+  font-size: 16px;
+}
+
+.vocabulary-dictation-answers li p {
+  margin: 0;
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.vocabulary-dictation-resume,
+.vocabulary-dictation-message {
+  display: grid;
+  place-items: center;
+  min-height: min(520px, calc(100vh - 120px));
+  padding: 36px 24px;
+  text-align: center;
+}
+
+.vocabulary-dictation-resume > svg,
+.vocabulary-dictation-message svg {
+  color: var(--accent);
+}
+
+.vocabulary-dictation-resume h1,
+.vocabulary-dictation-message h1 {
+  margin-top: 18px;
+}
+
+.vocabulary-dictation-resume > div {
+  margin-top: 24px;
+}
+
+.vocabulary-dictation-message {
+  min-height: 100vh;
+  background: var(--surface);
+}
+
+.vocabulary-dictation-message > div {
+  width: min(420px, 100%);
+}
+
+.vocabulary-dictation-message h1 {
+  margin-bottom: 8px;
+  color: var(--ink-strong);
+  font-size: 28px;
+}
+
+.vocabulary-dictation-message p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.vocabulary-dictation-message button {
+  margin-top: 22px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .vocabulary-dictation-page button:hover:not(:disabled),
+  .vocabulary-dictation-message button:hover {
+    border-color: var(--line-strong);
+    background: var(--surface-strong);
+  }
+
+  .vocabulary-dictation-page button.primary:hover,
+  .vocabulary-dictation-transport .primary-control:hover {
+    border-color: var(--eqb-color-primary-text);
+    background: var(--eqb-color-primary-text);
+  }
+}
+
+.vocabulary-dictation-page button:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.vocabulary-dictation-page button:focus-visible,
+.vocabulary-dictation-page a:focus-visible,
+.vocabulary-dictation-page input:focus-visible {
+  outline: 3px solid var(--accent-glow);
+  outline-offset: 2px;
+}
+
+@media (max-width: 620px) {
+  .vocabulary-dictation-header {
+    padding: 0 16px;
+  }
+
+  .vocabulary-dictation-shell {
+    width: min(100% - 28px, 520px);
+    padding-top: 14px;
+  }
+
+  .vocabulary-dictation-stage {
+    min-height: 360px;
+    padding: 18px 18px 22px;
+  }
+
+  .vocabulary-dictation-question {
+    min-height: 185px;
+    padding-top: 48px;
+  }
+
+  .vocabulary-dictation-question > strong {
+    font-size: calc(var(--eqb-font-size-xl) + var(--eqb-font-size-xl) + var(--eqb-font-size-md));
+  }
+
+  .vocabulary-dictation-controls {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 22px 18px;
+  }
+
+  .vocabulary-dictation-settings {
+    grid-template-columns: 1fr;
+  }
+
+  .vocabulary-dictation-volume {
+    grid-column: auto;
+  }
+
+  .vocabulary-dictation-complete,
+  .vocabulary-dictation-answer-confirm {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+
+  .vocabulary-dictation-complete > div:last-child,
+  .vocabulary-dictation-answer-confirm > div:last-child {
+    width: 100%;
+  }
+
+  .vocabulary-dictation-complete button,
+  .vocabulary-dictation-answer-confirm button {
+    flex: 1;
+  }
+
+  .vocabulary-dictation-answers {
+    padding: 20px 16px;
+  }
+
+  .vocabulary-dictation-answers li {
+    grid-template-columns: 28px minmax(0, 1fr) auto;
+    gap: 6px 10px;
+  }
+
+  .vocabulary-dictation-answers li p {
+    grid-column: 2 / -1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vocabulary-dictation-page *,
+  .vocabulary-dictation-page *::before,
+  .vocabulary-dictation-page *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

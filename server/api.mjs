@@ -3935,6 +3935,7 @@ const AUTH_PUBLIC_ROUTES = [
   { method: 'GET', pattern: /^\/api\/auth\/me$/ },
   { method: 'GET', pattern: /^\/api\/health$/ },
   { method: 'GET', pattern: /^\/api\/public\/vocabulary\/listen\/[^/]+$/ },
+  { method: 'GET', pattern: /^\/api\/public\/vocabulary\/dictation\/[^/]+$/ },
 ]
 
 function isAuthPublicRoute(method, pathname) {

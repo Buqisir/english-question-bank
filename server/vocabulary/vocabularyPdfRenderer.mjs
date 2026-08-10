@@ -7,12 +7,14 @@ export async function renderVocabularySetPdf({
   cookie = '',
   setId,
   accent,
+  kind = 'cards',
   expectedPageCount,
 }) {
   const url = new URL('/', origin)
   url.searchParams.set('view', 'vocabulary-review')
   url.searchParams.set('vocabularyPrintSetId', setId)
   url.searchParams.set('printAccent', accent)
+  url.searchParams.set('vocabularyPrintMode', kind)
 
   return withChromiumPage(async (page) => {
     if (cookie) await page.setExtraHTTPHeaders({ cookie })
@@ -50,10 +52,11 @@ export async function renderVocabularySetPdf({
     if (inspection.pageCount !== expectedPageCount) {
       throw new Error(`单词纸页数不一致：预期 ${expectedPageCount} 页，实际 ${inspection.pageCount} 页。`)
     }
-    if (inspection.brokenImageCount > 0 || inspection.imageCount === 0) {
+    if (kind === 'cards' && (inspection.brokenImageCount > 0 || inspection.imageCount === 0)) {
       throw new Error(`单词纸图片加载失败：${inspection.brokenImageCount}/${inspection.imageCount}。`)
     }
-    if (inspection.qrCount !== 1) {
+    const expectedQrCount = kind === 'answer' ? 0 : 1
+    if (inspection.qrCount !== expectedQrCount) {
       throw new Error(`单词纸二维码数量不正确：${inspection.qrCount}。`)
     }
 
