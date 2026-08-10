@@ -174,17 +174,21 @@ const alternateStudent = {
   createdAt: '2026-08-08T12:00:00.000Z',
   updatedAt: '2026-08-08T12:00:00.000Z',
 }
-const sets = [1, 15, 60].map((count) => ({
-  id: `set-${count}`,
-  studentId: defaultStudent.id,
-  programId: 'wanwei-round-one-v1',
-  reviewRunId: `run-${count}`,
-  title: `固定生词组 ${count} 词`,
-  entryCount: count,
-  entries: programEntries.slice(0, count),
-  createdAt: '2026-08-07T12:00:00.000Z',
-  share: { shareId: `share-${count}`, status: 'active' },
-}))
+function createFixtureSet(count) {
+  return {
+    id: `set-${count}`,
+    studentId: defaultStudent.id,
+    programId: 'wanwei-round-one-v1',
+    reviewRunId: `run-${count}`,
+    title: `固定生词组 ${count} 词`,
+    entryCount: count,
+    entries: programEntries.slice(0, count),
+    createdAt: '2026-08-07T12:00:00.000Z',
+    share: { shareId: `share-${count}`, status: 'active' },
+  }
+}
+const sets = [1, 15, 60].map(createFixtureSet)
+const fixtureSets = [...sets, createFixtureSet(16)]
 
 const program = {
   id: 'wanwei-round-one-v1',
@@ -336,13 +340,13 @@ async function installApiFixtures(page, {
         createdAt: '2026-08-09T12:00:00.000Z',
         share: null,
       } } })
-    } else if (/^\/api\/vocabulary\/sets\/set-(1|15|60)$/.test(pathname) && route.request().method() === 'PATCH') {
+    } else if (/^\/api\/vocabulary\/sets\/set-(1|15|16|60)$/.test(pathname) && route.request().method() === 'PATCH') {
       const count = Number(pathname.match(/set-(\d+)/)?.[1])
       const input = JSON.parse(route.request().postData() || '{}')
       renamedTitles.set(count, input.title)
-      const original = sets.find((item) => item.entryCount === count)
+      const original = fixtureSets.find((item) => item.entryCount === count)
       await route.fulfill({ json: { vocabularySet: { ...original, title: input.title } } })
-    } else if (/^\/api\/vocabulary\/sets\/set-(1|15|60)\/pdf$/.test(pathname)) {
+    } else if (/^\/api\/vocabulary\/sets\/set-(1|15|16|60)\/pdf$/.test(pathname)) {
       const count = Number(pathname.match(/set-(\d+)/)?.[1])
       const accent = url.searchParams.get('accent')
       const kind = url.searchParams.get('kind') ?? 'cards'
@@ -361,9 +365,9 @@ async function installApiFixtures(page, {
         headers: { 'x-file-name': encodeURIComponent(fileName) },
         body: Buffer.from('%PDF-1.4\n%%EOF\n'),
       })
-    } else if (/^\/api\/vocabulary\/sets\/set-(1|15|60)$/.test(pathname)) {
+    } else if (/^\/api\/vocabulary\/sets\/set-(1|15|16|60)$/.test(pathname)) {
       const count = Number(pathname.match(/set-(\d+)/)?.[1])
-      await route.fulfill({ json: { vocabularySet: sets.find((item) => item.entryCount === count) } })
+      await route.fulfill({ json: { vocabularySet: fixtureSets.find((item) => item.entryCount === count) } })
     } else if (pathname === '/api/vocabulary/sets') {
       const studentId = url.searchParams.get('studentId')
       await route.fulfill({ json: { vocabularySets: studentId === defaultStudent.id ? sets : [] } })
@@ -807,31 +811,67 @@ async function verifyDictationPrint(page, count, expectedPages, accent = 'americ
     const rows = page.locator('.vocabulary-dictation-print-row')
     assert.equal(await pages.count(), expectedPages)
     assert.equal(await rows.count(), count)
-    assert.deepEqual(await rows.locator('span').allTextContents(), Array.from({ length: count }, (_, index) => String(index + 1)))
-    assert.equal(await page.getByText('英文单词', { exact: true }).count(), expectedPages)
-    assert.equal(await page.getByText('词性', { exact: true }).count(), expectedPages)
-    assert.equal(await page.getByText('中文意思', { exact: true }).count(), expectedPages)
+    assert.deepEqual(await rows.locator('.vocabulary-dictation-number').allTextContents(), Array.from({ length: count }, (_, index) => String(index + 1)))
+    assert.equal(await page.getByText('英文单词', { exact: true }).count(), expectedPages * 2)
+    assert.equal(await page.getByText('词性', { exact: true }).count(), expectedPages * 2)
+    assert.equal(await page.getByText('中文意思', { exact: true }).count(), expectedPages * 2)
     assert.equal(await page.locator('.vocabulary-print-sheet').getByText('美式', { exact: true }).count(), 0)
     assert.equal(await page.locator('.vocabulary-print-sheet').getByText('英式', { exact: true }).count(), 0)
 
     const tableTracks = await page.locator('.vocabulary-dictation-print-table').evaluateAll((tables) => tables.map((table) => ({
-      rows: getComputedStyle(table).gridTemplateRows.split(' ').length,
+      columns: getComputedStyle(table).gridTemplateColumns.split(' ').length,
       overflow: table.scrollHeight > table.clientHeight + 1 || table.scrollWidth > table.clientWidth + 1,
     })))
-    assert.equal(tableTracks.every((table) => table.rows === 16 && !table.overflow), true)
+    assert.equal(tableTracks.every((table) => table.columns === 2 && !table.overflow), true)
+    const columnCounts = await pages.evaluateAll((pageElements) => pageElements.map((pageElement) => (
+      [...pageElement.querySelectorAll('.vocabulary-dictation-print-column')].map((column) => (
+        column.querySelectorAll('.vocabulary-dictation-print-row').length
+      ))
+    )))
+    assert.equal(columnCounts.every((counts) => counts.length === 2 && Math.abs(counts[0] - counts[1]) <= 1), true)
+    if (count === 16) assert.deepEqual(columnCounts, [[8, 8]])
+    const metaLineWidths = await page.locator('.vocabulary-dictation-print-meta').evaluateAll((metas) => metas.map((meta) => (
+      [...meta.querySelectorAll('i')].map((line) => line.getBoundingClientRect().width)
+    )))
+    const mm = 96 / 25.4
+    assert.equal(metaLineWidths.every((widths) => (
+      widths.length === 3
+      && Math.abs(widths[0] - 42 * mm) <= 1
+      && Math.abs(widths[1] - 32 * mm) <= 1
+      && Math.abs(widths[2] - 18 * mm) <= 1
+    )), true)
 
     if (kind === 'dictation') {
-      assert.equal(await rows.locator('strong').allTextContents().then((values) => values.every((value) => !value.trim())), true)
-      assert.equal(await rows.locator('i').allTextContents().then((values) => values.every((value) => !value.trim())), true)
+      assert.equal(await rows.locator('strong').count(), 0)
+      assert.equal(await rows.locator('.vocabulary-dictation-writing-guide').count(), count)
+      assert.equal(await rows.locator('.vocabulary-dictation-part-of-speech').allTextContents().then((values) => values.every((value) => !value.trim())), true)
       assert.equal(await rows.locator('p').allTextContents().then((values) => values.every((value) => !value.trim())), true)
+      const guideGeometry = await rows.locator('.vocabulary-dictation-writing-guide').evaluateAll((guides) => guides.map((guide) => {
+        const rect = guide.getBoundingClientRect()
+        const lineRects = [...guide.querySelectorAll('i')].map((line) => line.getBoundingClientRect())
+        return {
+          width: rect.width,
+          height: rect.height,
+          lineCount: lineRects.length,
+          lineGaps: lineRects.slice(1).map((line, index) => line.top - lineRects[index].top),
+        }
+      }))
+      assert.equal(guideGeometry.every((guide) => (
+        guide.width >= 42.8 * mm
+        && guide.width <= 43.2 * mm
+        && guide.height >= 12.8 * mm
+        && guide.height <= 13.2 * mm
+        && guide.lineCount === 4
+        && guide.lineGaps.every((gap) => gap >= 2.8 * mm && gap <= 3.2 * mm)
+      )), true)
       assert.equal(await page.locator('.vocabulary-print-qr').count(), 1)
       assert.equal(await pages.first().locator('.vocabulary-print-qr').count(), 1)
       const qrTitle = await page.locator('.vocabulary-print-qr svg title').textContent()
       assert.equal(qrTitle, '扫码自动听写')
     } else {
       assert.equal(await page.locator('.vocabulary-print-qr').count(), 0)
-      assert.deepEqual(await rows.locator('strong').allTextContents(), publicDictationEntries.slice(0, count).map((entry) => entry.answer))
-      assert.deepEqual(await rows.locator('i').allTextContents(), publicDictationEntries.slice(0, count).map((entry) => entry.partOfSpeech))
+      assert.deepEqual(await rows.locator('.vocabulary-dictation-word-cell strong').allTextContents(), publicDictationEntries.slice(0, count).map((entry) => entry.answer))
+      assert.deepEqual(await rows.locator('.vocabulary-dictation-part-of-speech').allTextContents(), publicDictationEntries.slice(0, count).map((entry) => entry.partOfSpeech))
       assert.deepEqual(await rows.locator('p').allTextContents(), publicDictationEntries.slice(0, count).map((entry) => entry.sourceMeanings.join('；')))
     }
 
@@ -841,9 +881,11 @@ async function verifyDictationPrint(page, count, expectedPages, accent = 'americ
     assert.equal(info.status, 0, info.stderr)
     assert.match(info.stdout, new RegExp(`Pages:\\s+${expectedPages}\\b`))
     assert.match(info.stdout, /Page size:\s+59[45]\.\d+ x 841\.\d+ pts \(A4\)/)
-    if (count === 15) copyFileSync(pdfPath, path.join(evidenceRoot, `${kind}-paper-current-15-${accent}.pdf`))
+    if (count === 15 || count === 16) {
+      copyFileSync(pdfPath, path.join(evidenceRoot, `${kind}-paper-current-${count}-${accent}.pdf`))
+    }
   }
-  pass(`${count} 词听写纸与教师答案均为 A4 单栏、每页最多 15 题；学生留空、教师全义、二维码仅在听写纸首页`)
+  pass(`${count} 词听写纸与教师答案均为 A4 双栏、每页最多 16 题；学生四线三格为固定毫米尺寸、教师全义、二维码仅在听写纸首页`)
 }
 
 async function verifyDictationPlayer(page) {
@@ -1109,7 +1151,7 @@ async function main() {
 
     const dictationPrintPage = await browser.newPage({ viewport: { width: 1440, height: 1000 } })
     await installApiFixtures(dictationPrintPage)
-    for (const [count, pages, accent] of [[1, 1, 'british'], [15, 1, 'american'], [60, 4, 'british']]) {
+    for (const [count, pages, accent] of [[1, 1, 'british'], [15, 1, 'american'], [16, 1, 'american'], [60, 4, 'british']]) {
       await verifyDictationPrint(dictationPrintPage, count, pages, accent)
     }
     await dictationPrintPage.close()
