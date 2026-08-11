@@ -58,6 +58,8 @@ import {
   saveVocabularyAudioAccent,
   type VocabularyAudioAccent,
 } from '../vocabulary-listen/vocabularyAudioVariants'
+import { VocabularyWordSearchPrint } from '../vocabulary-practice/VocabularyWordSearchPrint'
+import { buildVocabularyWordSearchPages } from '../vocabulary-practice/vocabularyWordSearch'
 import './vocabularyReviewPage.css'
 
 const RUN_STORAGE_KEY = 'eqb-vocabulary-review-run-wanwei-round-one-v1'
@@ -66,6 +68,7 @@ const PAUSED_RUN_STORAGE_KEY = 'eqb-vocabulary-review-paused-wanwei-round-one-v1
 const TARGET_UNFAMILIAR_COUNT = 15
 const CARD_PRINT_ENTRIES_PER_PAGE = 6
 const DICTATION_PRINT_ENTRIES_PER_PAGE = 16
+const WORD_SEARCH_PRINT_ENTRIES_PER_PAGE = 16
 const PUBLIC_LISTEN_ORIGIN = 'https://eqbank.cc'
 
 type VocabularyReviewPageProps = {
@@ -77,7 +80,7 @@ type VocabularyReviewPageProps = {
 }
 
 type VocabularyAccent = VocabularyAudioAccent
-type VocabularyPrintKind = 'cards' | 'dictation' | 'answer'
+type VocabularyPrintKind = 'cards' | 'dictation' | 'answer' | 'word-search'
 
 type VocabularyPrintRequest = {
   setId: string
@@ -96,8 +99,14 @@ function readVocabularyPrintRequest(): VocabularyPrintRequest | null {
       ? 'dictation'
       : params.get('vocabularyPrintMode') === 'answer'
         ? 'answer'
-        : 'cards',
+        : params.get('vocabularyPrintMode') === 'word-search'
+          ? 'word-search'
+          : 'cards',
   }
+}
+
+function vocabularyPrintRequiresShare(kind: VocabularyPrintKind): kind is 'cards' | 'dictation' {
+  return kind === 'cards' || kind === 'dictation'
 }
 
 function replaceVocabularySetUrl(setId: string | null) {
@@ -360,7 +369,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   const [printLoadState, setPrintLoadState] = useState<'idle' | 'loading' | 'ready' | 'error'>(printRequest ? 'loading' : 'idle')
   const [pdfDownloadBusy, setPdfDownloadBusy] = useState(false)
   const [downloadMenuOpen, setDownloadMenuOpen] = useState(false)
-  const [pendingShareDownload, setPendingShareDownload] = useState<Exclude<VocabularyPrintKind, 'answer'> | null>(null)
+  const [pendingShareDownload, setPendingShareDownload] = useState<'cards' | 'dictation' | null>(null)
   const [directVocabularyInput, setDirectVocabularyInput] = useState('')
   const [setTitleInput, setSetTitleInput] = useState('')
   const [progressExplorerOpen, setProgressExplorerOpen] = useState(false)
@@ -399,11 +408,19 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   const printPages = useMemo(
     () => paginateVocabularyEntries(
       printEntries,
-      printRequest?.kind === 'dictation' || printRequest?.kind === 'answer'
+      printRequest?.kind === 'word-search'
+        ? WORD_SEARCH_PRINT_ENTRIES_PER_PAGE
+        : printRequest?.kind === 'dictation' || printRequest?.kind === 'answer'
         ? DICTATION_PRINT_ENTRIES_PER_PAGE
         : CARD_PRINT_ENTRIES_PER_PAGE,
     ),
     [printEntries, printRequest?.kind],
+  )
+  const wordSearchPages = useMemo(
+    () => printRequest?.kind === 'word-search' && printRequest.setId && printEntries.length
+      ? buildVocabularyWordSearchPages(printRequest.setId, printEntries, program.entries)
+      : [],
+    [printEntries, printRequest, program.entries],
   )
   const directInputResult = useMemo(
     () => filterVocabularyInput(directVocabularyInput, program.entries),
@@ -489,7 +506,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
       setRunState('setup')
       getVocabularySet(printRequest.setId)
         .then((nextSet) => {
-          if (printRequest.kind !== 'answer' && nextSet.share?.status !== 'active') {
+          if (vocabularyPrintRequiresShare(printRequest.kind) && nextSet.share?.status !== 'active') {
             throw new Error('请先生成扫码听写，再下载带二维码的单词纸。')
           }
           setVocabularySet(nextSet)
@@ -967,7 +984,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
 
   async function downloadVocabularySheet(kind: VocabularyPrintKind = 'cards', options: { shareConfirmed?: boolean } = {}) {
     if (!vocabularySet || pdfDownloadBusy) return
-    if (kind !== 'answer' && !shareId && !options.shareConfirmed) {
+    if (vocabularyPrintRequiresShare(kind) && !shareId && !options.shareConfirmed) {
       setDownloadMenuOpen(false)
       setPendingShareDownload(kind)
       return
@@ -985,7 +1002,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
         setVocabularySet(setForDownload)
         setRecentSets((current) => current.map((item) => item.id === setForDownload.id ? setForDownload : item))
       }
-      if (kind !== 'answer' && !shareId) await activateShare(setForDownload)
+      if (vocabularyPrintRequiresShare(kind) && !shareId) await activateShare(setForDownload)
       await downloadVocabularySetPdf(setForDownload.id, printAccent, kind)
     } catch (error) {
       setRequestError(error instanceof Error ? error.message : '文件下载失败，请重试。')
@@ -1074,6 +1091,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
           <button type="button" onClick={() => void downloadVocabularySheet('cards')}>单词纸<span>带图片、音节和例句</span></button>
           <button type="button" onClick={() => void downloadVocabularySheet('dictation')}>听写纸<span>16题一页，扫码自动听写</span></button>
           <button type="button" onClick={() => void downloadVocabularySheet('answer')}>教师答案<span>与听写纸逐题对应</span></button>
+          <button type="button" onClick={() => void downloadVocabularySheet('word-search')}>圈词与拼写<span>找词、辨形并抄写，内附答案</span></button>
         </div>
       )}
     </div>
@@ -1093,7 +1111,9 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   const embeddedPrintState = printRequest
     ? printLoadState === 'error' || programLoadState === 'error'
       ? 'error'
-      : printLoadState === 'ready' && programLoadState === 'ready' && printPages.length > 0
+      : printLoadState === 'ready'
+        && programLoadState === 'ready'
+        && (printRequest.kind === 'word-search' ? wordSearchPages.length > 0 : printPages.length > 0)
         ? 'ready'
         : 'loading'
     : undefined
@@ -1564,7 +1584,13 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
       </main>
 
       <section className={`vocabulary-print-sheet is-${printRequest?.kind ?? 'cards'}`} aria-hidden="true">
-        {printPages.map((pageEntries, pageIndex) => (
+        {printRequest?.kind === 'word-search' ? (
+          <VocabularyWordSearchPrint
+            title={vocabularySet?.title ?? '生词圈词练习'}
+            entryCount={printEntries.length}
+            pages={wordSearchPages}
+          />
+        ) : printPages.map((pageEntries, pageIndex) => (
           printRequest?.kind === 'dictation' || printRequest?.kind === 'answer' ? (
             <div className="vocabulary-print-page vocabulary-dictation-print-page" key={`print-page-${pageIndex + 1}`}>
               <header className="vocabulary-dictation-print-header">

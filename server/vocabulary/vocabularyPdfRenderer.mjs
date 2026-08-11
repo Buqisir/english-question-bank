@@ -55,7 +55,7 @@ export async function renderVocabularySetPdf({
     if (kind === 'cards' && (inspection.brokenImageCount > 0 || inspection.imageCount === 0)) {
       throw new Error(`单词纸图片加载失败：${inspection.brokenImageCount}/${inspection.imageCount}。`)
     }
-    const expectedQrCount = kind === 'answer' ? 0 : 1
+    const expectedQrCount = kind === 'cards' || kind === 'dictation' ? 1 : 0
     if (inspection.qrCount !== expectedQrCount) {
       throw new Error(`单词纸二维码数量不正确：${inspection.qrCount}。`)
     }
