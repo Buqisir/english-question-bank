@@ -613,35 +613,35 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   }, [vocabularySet?.id])
 
   useEffect(() => {
-    if (runState !== 'active' || completion !== 'active' || !currentEntry) return
+    if (runState !== 'active' || progressExplorerOpen || completion !== 'active' || !currentEntry) return
     playEntry(currentEntry, false)
-  }, [completion, currentEntry, playEntry, runState])
+  }, [completion, currentEntry, playEntry, progressExplorerOpen, runState])
 
   const decide = useCallback((verdict: VocabularyReviewVerdict) => {
     const entry = program.entries[reviewState.cursor]
-    if (programLoadState !== 'ready' || runState !== 'active' || !runId || !entry || requestBusy || completion !== 'active') return
+    if (programLoadState !== 'ready' || runState !== 'active' || progressExplorerOpen || !runId || !entry || requestBusy || completion !== 'active') return
     setRequestBusy(true)
     setStudentFormError('')
     decideVocabularyReviewRun(runId, entry.id, verdict)
       .then(applyRun)
       .catch((error: unknown) => setRequestError(error instanceof Error ? error.message : '判断未保存，请重试。'))
       .finally(() => setRequestBusy(false))
-  }, [applyRun, completion, program.entries, programLoadState, requestBusy, reviewState.cursor, runId, runState])
+  }, [applyRun, completion, program.entries, programLoadState, progressExplorerOpen, requestBusy, reviewState.cursor, runId, runState])
 
   const reveal = useCallback(() => {
-    if (programLoadState !== 'ready' || runState !== 'active') return
+    if (programLoadState !== 'ready' || runState !== 'active' || progressExplorerOpen) return
     setReviewState((current) => revealVocabularyEntry(current))
-  }, [programLoadState, runState])
+  }, [programLoadState, progressExplorerOpen, runState])
 
   const undo = useCallback(() => {
-    if (programLoadState !== 'ready' || runState !== 'active' || !runId || requestBusy || !reviewState.decisionOrder.length) return
+    if (programLoadState !== 'ready' || runState !== 'active' || progressExplorerOpen || !runId || requestBusy || !reviewState.decisionOrder.length) return
     setRequestBusy(true)
     setRequestError('')
     undoVocabularyReviewRun(runId)
       .then(applyRun)
       .catch((error: unknown) => setRequestError(error instanceof Error ? error.message : '撤销未保存，请重试。'))
       .finally(() => setRequestBusy(false))
-  }, [applyRun, programLoadState, requestBusy, reviewState.decisionOrder.length, runId, runState])
+  }, [applyRun, programLoadState, progressExplorerOpen, requestBusy, reviewState.decisionOrder.length, runId, runState])
 
   useEffect(() => {
     const isTypingTarget = (target: EventTarget | null) => {
@@ -650,7 +650,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
     }
 
     function onKeyDown(event: KeyboardEvent) {
-      if (runState !== 'active') {
+      if (runState !== 'active' || progressExplorerOpen) {
         shiftKeyCandidateRef.current = false
         return
       }
@@ -685,7 +685,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
     }
 
     function onKeyUp(event: KeyboardEvent) {
-      if (event.key !== 'Shift' || runState !== 'active') return
+      if (event.key !== 'Shift' || runState !== 'active' || progressExplorerOpen) return
       const shouldDecide = shiftKeyCandidateRef.current
         && !isTypingTarget(event.target)
         && !event.metaKey
@@ -709,7 +709,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
       window.removeEventListener('keyup', onKeyUp)
       window.removeEventListener('blur', onWindowBlur)
     }
-  }, [currentEntry, decide, playEntry, reveal, runState, undo])
+  }, [currentEntry, decide, playEntry, progressExplorerOpen, reveal, runState, undo])
 
   async function startReview() {
     if (programLoadState !== 'ready' || !activeStudentId) return
@@ -731,6 +731,8 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   function toggleProgressExplorer() {
     setProgressExplorerOpen((open) => {
       if (open) return false
+      reviewAudioRef.current?.pause()
+      reviewAudioRef.current = null
       const nextEntry = program.entries[mainProgressCursor] ?? program.entries[program.entries.length - 1]
       setProgressExplorerWeek(nextEntry?.source.week ?? 1)
       setProgressSelectionId(null)
@@ -1169,7 +1171,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                   max={program.entries.length}
                   value={processedCount}
                 />
-                {!printRequest && runState !== 'active' && (
+                {!printRequest && (
                   <button
                     className="vocabulary-progress-toggle"
                     type="button"
@@ -1214,6 +1216,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
               busy={requestBusy}
               statusMessage={progressUpdateMessage}
               errorMessage={progressUpdateError}
+              closeLabel={runState === 'active' ? '返回过词' : '返回开始设置'}
               currentPositionRef={progressCurrentRef}
               onWeekChange={(week) => {
                 setProgressExplorerWeek(week)

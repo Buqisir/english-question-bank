@@ -11,6 +11,7 @@ type VocabularyProgressExplorerProps = {
   busy: boolean
   statusMessage: string
   errorMessage: string
+  closeLabel: string
   currentPositionRef: RefObject<HTMLDivElement | null>
   onWeekChange: (week: number) => void
   onEntrySelect: (entryId: string) => void
@@ -33,6 +34,7 @@ export function VocabularyProgressExplorer({
   busy,
   statusMessage,
   errorMessage,
+  closeLabel,
   currentPositionRef,
   onWeekChange,
   onEntrySelect,
@@ -56,7 +58,7 @@ export function VocabularyProgressExplorer({
           <p>按 Week 和 Day 找到实体书上的位置。确认后，下一轮从所选单词开始。</p>
         </div>
         <button className="ghost-button" type="button" onClick={onClose}>
-          <ChevronUp size={16} aria-hidden="true" />返回开始设置
+          <ChevronUp size={16} aria-hidden="true" />{closeLabel}
         </button>
       </div>
 
