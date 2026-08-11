@@ -709,8 +709,8 @@ async function verifyMatchingGame(page) {
   await page.getByRole('button', { name: '趣味练习' }).click()
   await page.getByRole('heading', { name: '翻牌消消乐' }).waitFor()
   assert.match(page.url(), /view=vocabulary-practice.*setId=set-15.*mode=match/)
-  assert.equal(await page.locator('.vocabulary-match-card').count(), 16)
-  assert.equal(await page.locator('.vocabulary-match-board').evaluate((node) => getComputedStyle(node).gridTemplateColumns.split(' ').length), 4)
+  assert.equal(await page.locator('.vocabulary-match-card').count(), 20)
+  assert.equal(await page.locator('.vocabulary-match-board').evaluate((node) => getComputedStyle(node).gridTemplateColumns.split(' ').length), 5)
   assert.equal(await page.locator('audio').count(), 1)
   assert.equal(await page.getByText('沿用英音', { exact: true }).count(), 1)
 
@@ -724,7 +724,7 @@ async function verifyMatchingGame(page) {
   assert.match(page.url(), /view=vocabulary-review.*setId=set-15/)
   await page.goForward({ waitUntil: 'networkidle' })
   await page.getByRole('heading', { name: '翻牌消消乐' }).waitFor()
-  assert.equal(await page.locator('.vocabulary-match-card').count(), 16)
+  assert.equal(await page.locator('.vocabulary-match-card').count(), 20)
   pass('趣味练习使用可恢复认证路由，浏览器后退与前进回到准确生词组')
 
   const card = (entryNumber, kind) => page.locator(`[data-card-id="fixture-${String(entryNumber).padStart(4, '0')}:${kind}"]`)
@@ -767,13 +767,13 @@ async function verifyMatchingGame(page) {
   assert.equal(await page.locator('.vocabulary-match-card.is-matched').count(), 0)
   await page.waitForFunction(() => document.querySelectorAll('.vocabulary-match-card.is-matched').length === 2)
   assert.equal(await page.locator('.vocabulary-match-card.is-confirming-match').count(), 0)
-  assert.equal(await page.locator('.vocabulary-match-card').count(), 16)
+  assert.equal(await page.locator('.vocabulary-match-card').count(), 20)
   const stableCardAfter = await cardPositionInBoard(card(4, 'word'))
   assert.deepEqual(stableCardAfter, stableCardBefore)
   pass('错配不会自动盖回；第三张推进新组合，中文不发音且新英文会停止旧音频')
 
   let expectedMatchedCards = 2
-  for (const entryNumber of [1, 2, 4, 5, 6, 7, 8]) {
+  for (const entryNumber of [1, 2, 4, 5, 6, 7, 8, 9, 10]) {
     await card(entryNumber, 'word').click()
     await card(entryNumber, 'meaning').click()
     expectedMatchedCards += 2
@@ -783,16 +783,16 @@ async function verifyMatchingGame(page) {
     )
   }
   await page.getByRole('heading', { name: '本轮完成' }).waitFor()
-  assert.equal(await page.getByText('已配对 8 / 8', { exact: true }).count(), 1)
+  assert.equal(await page.getByText('已配对 10 / 10', { exact: true }).count(), 1)
   await page.getByRole('button', { name: /下一轮/ }).click()
-  assert.equal(await page.locator('.vocabulary-match-card').count(), 14)
+  assert.equal(await page.locator('.vocabulary-match-card').count(), 10)
   assert.equal(await page.getByText('第 2 / 2 轮', { exact: true }).count(), 1)
 
   await page.reload({ waitUntil: 'networkidle' })
   await page.getByRole('heading', { name: '翻牌消消乐' }).waitFor()
-  assert.equal(await page.locator('.vocabulary-match-card').count(), 16)
+  assert.equal(await page.locator('.vocabulary-match-card').count(), 20)
   assert.equal(await page.getByText('第 1 / 2 轮', { exact: true }).count(), 1)
-  pass('15 词按 8+7 分轮，完成后进入下一轮，刷新从第一轮重新开始')
+  pass('15 词按 10+5 分轮，完成后进入下一轮，刷新从第一轮重新开始')
 
   await page.screenshot({ path: path.join(evidenceRoot, 'matching-game-desktop.png'), fullPage: true })
   await page.setViewportSize({ width: 390, height: 844 })
@@ -1134,7 +1134,7 @@ async function verifyWordSearchPrint(page, count, expectedPuzzlePages) {
   const directOnlyCount = await page.locator('.vocabulary-word-search-direct-only').count()
   assert.equal(gridCount + directOnlyCount, expectedPuzzlePages * 2)
   assert.equal(directOnlyCount % 2, 0)
-  assert.equal(await page.locator('.vocabulary-word-search-grid > span').count(), gridCount * 256)
+  assert.equal(await page.locator('.vocabulary-word-search-grid > span').count(), gridCount * 144)
   assert.equal(await studentPages.locator('.vocabulary-word-search-grid svg').count(), 0)
   const directWriteCount = await answerPages.locator('.vocabulary-word-search-clues small').filter({ hasText: '直接写' }).count()
   assert.equal(await studentPages.locator('.vocabulary-word-search-clues small').filter({ hasText: '直接写' }).count(), directWriteCount)
@@ -1166,7 +1166,7 @@ async function verifyWordSearchPrint(page, count, expectedPuzzlePages) {
       clueOverflow: clues.scrollWidth > clues.clientWidth + 1 || clues.scrollHeight > clues.clientHeight + 1,
     }
   }))
-  assert.equal(layout.every((item) => !item.hasGrid || (Math.abs(item.gridWidthMm - 136) < 0.3 && Math.abs(item.gridHeightMm - 136) < 0.3)), true)
+  assert.equal(layout.every((item) => !item.hasGrid || (Math.abs(item.gridWidthMm - 132) < 0.3 && Math.abs(item.gridHeightMm - 132) < 0.3)), true)
   assert.equal(layout.every((item) => item.clueColumns === 2 && !item.overflow && !item.gridOverflow && !item.clueOverflow), true)
 
   const pageColumns = await allPages.evaluateAll((nodes) => nodes.map((node) => (
@@ -1194,7 +1194,7 @@ async function verifyWordSearchPrint(page, count, expectedPuzzlePages) {
       copyFileSync(pagePath, path.join(evidenceRoot, `word-search-paper-current-16-page-${index + 1}.png`))
     })
   }
-  pass(`${count} 词圈词与拼写纸按16词分页，学生页与教师答案均为A4，双栏提示、16×16词阵、答案标记和干扰词说明无溢出`)
+  pass(`${count} 词圈词与拼写纸按10词分页，学生页与教师答案均为A4，双栏提示、12×12词阵、答案标记和干扰词说明无溢出`)
 }
 
 async function verifyDirectOnlyWordSearchPrint(page) {
@@ -1487,7 +1487,7 @@ async function main() {
 
     const wordSearchPrintPage = await browser.newPage({ viewport: { width: 1440, height: 1000 } })
     await installApiFixtures(wordSearchPrintPage)
-    for (const [count, pages] of [[1, 1], [15, 1], [16, 1], [60, 4]]) {
+    for (const [count, pages] of [[1, 1], [15, 2], [16, 2], [60, 6]]) {
       await verifyWordSearchPrint(wordSearchPrintPage, count, pages)
     }
     await verifyDirectOnlyWordSearchPrint(wordSearchPrintPage)

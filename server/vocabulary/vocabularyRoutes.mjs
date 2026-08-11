@@ -323,7 +323,7 @@ export function createVocabularyRoutes() {
           accent,
           kind,
           expectedPageCount: kind === 'word-search'
-            ? Math.ceil(vocabularySet.entryCount / 16) * 2
+            ? Math.ceil(vocabularySet.entryCount / 10) * 2
             : Math.ceil(vocabularySet.entryCount / (kind === 'cards' ? 6 : 15)),
         })
         sendVocabularyPdf(

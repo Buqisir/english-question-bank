@@ -69,10 +69,10 @@ type PlacementCandidate = {
   tieBreaker: number
 }
 
-const WORDS_PER_PAGE = 16
-const GRID_SIZE = 16
-const CORRECT_DECOYS_PER_PAGE = 3
-const MISSPELLING_DECOYS_PER_PAGE = 2
+const WORDS_PER_PAGE = 10
+const GRID_SIZE = 12
+const CORRECT_DECOYS_PER_PAGE = 2
+const MISSPELLING_DECOYS_PER_PAGE = 1
 
 const DIRECTIONS: DirectionVector[] = [
   { direction: 'right', rowStep: 0, columnStep: 1 },
@@ -448,6 +448,7 @@ function selectMisspellingDecoys(targets: VocabularyWordSearchEntry[], seed: str
     if (!isPlainLowercaseWord(answer) || answer.length < 5) return []
     const incorrect = REVIEWED_MISSPELLINGS[answer]
     if (!incorrect) return []
+    if (getVocabularyWordSearchGridWord(incorrect).length > GRID_SIZE) return []
     if (targetWords.some((targetWord) => targetWord !== answer && (
       targetWord.includes(incorrect) || incorrect.includes(targetWord)
     ))) return []
@@ -512,7 +513,7 @@ function buildPage(
   const targetDrafts = targets.map((entry) => {
     const answer = getVocabularyWordSearchAnswer(entry.headword)
     const gridWord = getVocabularyWordSearchGridWord(answer)
-    if (!gridWord || gridWord.length > GRID_SIZE) throw new Error(`word_search_target_invalid:${entry.id}`)
+    if (!gridWord) throw new Error(`word_search_target_invalid:${entry.id}`)
     return {
       id: `target:${entry.id}`,
       entryId: entry.id,
@@ -522,7 +523,7 @@ function buildPage(
     }
   })
   const searchableEntryIds = new Set(targetDrafts.flatMap((target) => {
-    if (target.gridWord.length < 3) return []
+    if (target.gridWord.length < 3 || target.gridWord.length > GRID_SIZE) return []
     const sameWordCount = targetDrafts.filter((other) => other.gridWord === target.gridWord).length
     const containedByAnotherTarget = targetDrafts.some((other) => (
       other.id !== target.id
@@ -545,27 +546,40 @@ function buildPage(
   }
   const correctDecoys = selectCorrectDecoys(excludedEntries, pool, seed)
   const misspellingDecoys = selectMisspellingDecoys(targets, seed)
-  for (let solutionAttempt = 0; solutionAttempt < 64; solutionAttempt += 1) {
-    const solutionSeed = `${seed}:solution:${solutionAttempt}`
-    const { grid: baseGrid, placements } = placePendingWords(
-      [...targetWords, ...correctDecoys, ...misspellingDecoys],
-      solutionSeed,
-    )
-    let grid: string[][]
-    try {
-      grid = fillGridSafely(baseGrid, solutionSeed)
-    } catch {
-      continue
-    }
-    if (!hasUniqueTargetOccurrences(grid, placements)) continue
-    return {
-      pageIndex,
-      size: GRID_SIZE,
-      grid,
-      clues: buildClues(targets, pageIndex, searchableEntryIds),
-      placements,
-      correctDecoys: correctDecoys.map((word) => word.answer),
-      misspellingDecoys: misspellingDecoys.map((word) => ({ incorrect: word.answer, correct: word.correction ?? '' })),
+  const decoyPlans = [
+    { correct: correctDecoys, misspelling: misspellingDecoys },
+    { correct: correctDecoys, misspelling: [] },
+    { correct: correctDecoys.slice(0, 1), misspelling: [] },
+    { correct: [], misspelling: [] },
+  ]
+  for (let planIndex = 0; planIndex < decoyPlans.length; planIndex += 1) {
+    const plan = decoyPlans[planIndex]
+    for (let solutionAttempt = 0; solutionAttempt < 64; solutionAttempt += 1) {
+      const solutionSeed = `${seed}:plan:${planIndex}:solution:${solutionAttempt}`
+      let baseGrid: Array<Array<string | null>>
+      let placements: VocabularyWordSearchPlacement[]
+      let grid: string[][]
+      try {
+        const placed = placePendingWords(
+          [...targetWords, ...plan.correct, ...plan.misspelling],
+          solutionSeed,
+        )
+        baseGrid = placed.grid
+        placements = placed.placements
+        grid = fillGridSafely(baseGrid, solutionSeed)
+      } catch {
+        continue
+      }
+      if (!hasUniqueTargetOccurrences(grid, placements)) continue
+      return {
+        pageIndex,
+        size: GRID_SIZE,
+        grid,
+        clues: buildClues(targets, pageIndex, searchableEntryIds),
+        placements,
+        correctDecoys: plan.correct.map((word) => word.answer),
+        misspellingDecoys: plan.misspelling.map((word) => ({ incorrect: word.answer, correct: word.correction ?? '' })),
+      }
     }
   }
   throw new Error('word_search_unique_solution_failed')
