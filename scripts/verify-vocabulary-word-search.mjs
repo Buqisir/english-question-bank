@@ -6,7 +6,6 @@ import { createRequire } from 'node:module'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
-import { DatabaseSync } from 'node:sqlite'
 
 const rootDir = path.resolve(import.meta.dirname, '..')
 const sourcePath = path.join(rootDir, 'app/src/features/vocabulary-practice/vocabularyWordSearch.ts')
@@ -204,15 +203,44 @@ try {
   assert.equal(longWordPage.placements.some((placement) => placement.entryId === 'entry-302'), false)
   pass('超过12格的极少数长词自动改为直接写，不阻断整页生成')
 
-  const bankDb = new DatabaseSync(path.join(rootDir, 'data/question-bank.sqlite'), { readOnly: true })
-  const realEntries = bankDb.prepare(`
-    SELECT id, headword, teaching_sense AS teachingSense,
-           part_of_speech AS partOfSpeech, pronunciation_mode AS pronunciationMode
-    FROM vocabulary_entries
-    WHERE program_id = 'wanwei-round-one-v1'
-    ORDER BY source_order
-  `).all()
-  bankDb.close()
+  const sourceMap = JSON.parse(readFileSync(
+    path.join(rootDir, 'data/vocabulary/wanwei-round-one-source-map-v1.json'),
+    'utf8',
+  ))
+  const sourceLedger = JSON.parse(readFileSync(
+    path.join(rootDir, 'data/vocabulary/source-evidence/wanwei-page-review-ledger-v1.json'),
+    'utf8',
+  ))
+  const exampleCandidates = JSON.parse(readFileSync(
+    path.join(rootDir, 'data/vocabulary/wanwei-example-candidates-v1.json'),
+    'utf8',
+  ))
+  assert.equal(sourceMap.entries.length, 1600)
+  assert.equal(sourceLedger.entries.length, 1600)
+  assert.equal(exampleCandidates.entries.length, 1600)
+  const ledgerById = new Map(sourceLedger.entries.map((entry) => [entry.entryId, entry]))
+  const examplesById = new Map(exampleCandidates.entries.map((entry) => [entry.entryId, entry]))
+  assert.equal(ledgerById.size, 1600)
+  assert.equal(examplesById.size, 1600)
+  const realEntries = sourceMap.entries.map((source, index) => {
+    const ledger = ledgerById.get(source.id)
+    const examples = examplesById.get(source.id)
+    assert.equal(source.sourceOrder, index + 1)
+    assert.equal(ledger?.sourceOrder, source.sourceOrder)
+    assert.equal(ledger?.headword, source.headword)
+    assert.equal(ledger?.verdict, 'approved')
+    assert.equal(examples?.sourceOrder, source.sourceOrder)
+    assert.equal(examples?.headword, source.headword)
+    assert.equal(examples?.candidates?.[0]?.teachingSense, examples?.teachingSense)
+    assert.equal(typeof ledger?.observedPartOfSpeech, 'string')
+    assert.equal(typeof examples?.teachingSense, 'string')
+    return {
+      id: source.id,
+      headword: source.headword,
+      teachingSense: examples.teachingSense,
+      partOfSpeech: ledger.observedPartOfSpeech,
+    }
+  })
   assert.equal(realEntries.length, 1600)
   let realPageCount = 0
   for (let index = 0; index < realEntries.length; index += 10) {
