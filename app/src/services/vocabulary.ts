@@ -316,7 +316,7 @@ function decodeHeaderValue(value: string | null): string {
 export async function downloadVocabularySetPdf(
   setId: string,
   accent: 'american' | 'british',
-  kind: 'cards' | 'dictation' | 'answer' = 'cards',
+  kind: 'cards' | 'dictation' | 'answer' | 'word-search' = 'cards',
 ): Promise<void> {
   const response = await fetch(
     `/api/vocabulary/sets/${encodeURIComponent(setId)}/pdf?accent=${encodeURIComponent(accent)}&kind=${encodeURIComponent(kind)}`,

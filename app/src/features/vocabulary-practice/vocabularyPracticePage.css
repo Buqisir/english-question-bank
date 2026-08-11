@@ -93,6 +93,79 @@
   gap: 5px;
 }
 
+.vocabulary-practice-modes {
+  display: inline-grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0 0 14px;
+}
+
+.vocabulary-practice-modes > span,
+.vocabulary-practice-modes > button {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 1px 8px;
+  min-width: 190px;
+  min-height: 48px;
+  box-sizing: border-box;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+}
+
+.vocabulary-practice-modes > span {
+  border-color: color-mix(in srgb, var(--accent) 38%, var(--line));
+  background: color-mix(in srgb, var(--accent) 6%, var(--panel));
+}
+
+.vocabulary-practice-modes > button {
+  cursor: pointer;
+  transition: background var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover);
+}
+
+.vocabulary-practice-modes > button:hover:not(:disabled) {
+  border-color: var(--line-strong);
+  background: var(--surface-strong);
+}
+
+.vocabulary-practice-modes > button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.vocabulary-practice-modes > button:disabled {
+  color: var(--faint);
+  cursor: wait;
+}
+
+.vocabulary-practice-modes svg {
+  grid-row: 1 / span 2;
+  color: var(--accent);
+}
+
+.vocabulary-practice-modes strong {
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.25;
+}
+
+.vocabulary-practice-modes small {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.vocabulary-practice-paper-error {
+  margin: -4px 0 14px;
+  color: var(--danger);
+  font-size: 14px;
+}
+
 .vocabulary-practice-board-section {
   padding: 24px;
   border: 1px solid var(--line);
@@ -342,6 +415,17 @@
     flex-direction: column;
     gap: 16px;
     margin: 22px 0 16px;
+  }
+
+  .vocabulary-practice-modes {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .vocabulary-practice-modes > span,
+  .vocabulary-practice-modes > button {
+    min-width: 0;
   }
 
   .vocabulary-practice-round {

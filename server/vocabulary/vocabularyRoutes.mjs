@@ -99,6 +99,7 @@ function vocabularyPdfFileName(title, entryCount, accent, kind = 'cards') {
   if (kind === 'dictation') {
     return `${exportTitle}-听写纸-${entryCount}词-${accent === 'american' ? '美式' : '英式'}.pdf`
   }
+  if (kind === 'word-search') return `${exportTitle}-圈词与拼写-${entryCount}词.pdf`
   return `${safeTitle}${countSuffix}-${accent === 'american' ? '美式' : '英式'}.pdf`
 }
 
@@ -302,14 +303,14 @@ export function createVocabularyRoutes() {
         context.sendJson(response, 400, { error: 'invalid_vocabulary_accent', message: '单词纸音标必须选择英式或美式。' })
         return
       }
-      if (!['cards', 'dictation', 'answer'].includes(kind)) {
+      if (!['cards', 'dictation', 'answer', 'word-search'].includes(kind)) {
         context.sendJson(response, 400, { error: 'invalid_vocabulary_pdf_kind', message: '下载类型无效。' })
         return
       }
       try {
         const vocabularySet = withUserDb(context, true, (db) =>
           getVocabularySet(db, userId, decodePathPart(match[1])))
-        if (kind !== 'answer' && vocabularySet.share?.status !== 'active') {
+        if ((kind === 'cards' || kind === 'dictation') && vocabularySet.share?.status !== 'active') {
           throw new VocabularyStoreError(
             '请先生成扫码听写，再下载带二维码的单词纸。',
             409,
@@ -321,7 +322,9 @@ export function createVocabularyRoutes() {
           setId: vocabularySet.id,
           accent,
           kind,
-          expectedPageCount: Math.ceil(vocabularySet.entryCount / (kind === 'cards' ? 6 : 15)),
+          expectedPageCount: kind === 'word-search'
+            ? Math.ceil(vocabularySet.entryCount / 16) * 2
+            : Math.ceil(vocabularySet.entryCount / (kind === 'cards' ? 6 : 15)),
         })
         sendVocabularyPdf(
           response,
