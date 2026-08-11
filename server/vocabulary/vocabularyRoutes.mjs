@@ -19,6 +19,7 @@ import {
   listVocabularySets,
   renameVocabularySet,
   revokeVocabularyShare,
+  setVocabularyProgressStart,
   shareVocabularySet,
   undoVocabularyReviewDecision,
 } from './vocabularyStore.mjs'
@@ -141,6 +142,21 @@ export function createVocabularyRoutes() {
         const studentId = readQueryPart(request, 'studentId')
         const progress = withUserDb(context, true, (db) => getVocabularyProgress(db, userId, studentId, programId))
         context.sendJson(response, 200, { progress })
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      }
+    }),
+
+    defineRoute('PATCH', /^\/api\/vocabulary\/progress\/([^/]+)$/, async ({ request, response, match, context }) => {
+      const userId = context.resolveDataUserId(context)
+      const programId = decodePathPart(match[1])
+      const input = await context.readJsonBody(request, { maxBytes: 10_000 })
+      try {
+        const result = withVocabularyDbs(context, (dbs) => setVocabularyProgressStart(dbs, userId, {
+          ...input,
+          programId,
+        }))
+        context.sendJson(response, 200, result)
       } catch (error) {
         sendVocabularyError(response, context, error)
       }

@@ -224,6 +224,8 @@ async function installApiFixtures(page, {
   const fixtureStudents = [defaultStudent, alternateStudent]
   let continuityRun = null
   const renamedTitles = new Map()
+  const progressCursors = new Map([[defaultStudent.id, 12], [alternateStudent.id, 0]])
+  const progressRelocations = []
   await page.route('**/vocabulary-assets/wanwei-round-one-v1/audio/eqb-british-cori-high-v1/**', (route) => {
     const pathname = new URL(route.request().url()).pathname
     if (pathname.endsWith('/ready.json')) {
@@ -263,11 +265,33 @@ async function installApiFixtures(page, {
       await route.fulfill(programFails
         ? { status: 503, json: { message: '完整词库暂时不可用。' } }
         : { json: { program } })
+    } else if (pathname === '/api/vocabulary/progress/wanwei-round-one-v1' && route.request().method() === 'PATCH') {
+      const input = JSON.parse(route.request().postData() || '{}')
+      const selectedEntry = programEntries.find((item) => item.id === input.entryId)
+      assert.ok(selectedEntry)
+      progressRelocations.push(input)
+      progressCursors.set(input.studentId, selectedEntry.source.sourceOrder - 1)
+      const discardedRunId = input.replaceActiveRun && continuityRun ? continuityRun.id : null
+      if (discardedRunId) continuityRun = null
+      await route.fulfill({ json: {
+        progress: {
+          studentId: input.studentId,
+          programId: 'wanwei-round-one-v1',
+          cursor: selectedEntry.source.sourceOrder - 1,
+          lastTarget: input.studentId === alternateStudent.id ? 20 : 15,
+        },
+        startEntry: {
+          id: selectedEntry.id,
+          headword: selectedEntry.headword,
+          sourceOrder: selectedEntry.source.sourceOrder,
+        },
+        discardedRunId,
+      } })
     } else if (pathname === '/api/vocabulary/progress/wanwei-round-one-v1') {
       const studentId = url.searchParams.get('studentId')
       await route.fulfill({ json: { progress: {
         studentId,
-        cursor: studentId === defaultStudent.id ? 12 : 0,
+        cursor: progressCursors.get(studentId) ?? 0,
         lastTarget: studentId === alternateStudent.id ? 20 : 15,
       } } })
     } else if (pathname === '/api/vocabulary/review-runs/current') {
@@ -428,9 +452,10 @@ async function installApiFixtures(page, {
       await route.fulfill({ json: {} })
     }
   })
+  return { progressRelocations }
 }
 
-async function verifyScopePreviewAndReviewKeys(page) {
+async function verifyScopePreviewAndReviewKeys(page, fixtures) {
   await page.addInitScript(() => {
     window.__reviewAudioLog = []
     HTMLMediaElement.prototype.play = function play() {
@@ -446,10 +471,27 @@ async function verifyScopePreviewAndReviewKeys(page) {
   await page.getByLabel('目标生词数').waitFor()
   assert.equal(await page.getByLabel('从哪里开始').count(), 0)
   assert.equal(await page.locator('.vocabulary-scope-preview').count(), 0)
+  assert.equal(await page.getByRole('button', { name: '查看 / 调整进度' }).count(), 1)
   assert.equal(await page.getByLabel('目标生词数').count(), 1)
   assert.match(await page.locator('.vocabulary-recent-sets li').filter({ hasText: '固定生词组 15 词' }).innerText(), /about、advice、accept/)
+  await page.getByRole('button', { name: '查看 / 调整进度' }).click()
+  await page.getByRole('heading', { name: '选择下一词' }).waitFor()
+  assert.equal(await page.getByText('当前位置：word13（第 13 词）', { exact: true }).count(), 1)
+  await page.getByRole('button', { name: '第 2 周' }).click()
+  await page.getByRole('button', { name: '第 31 词 word31' }).click()
+  assert.equal(await page.getByText('下一次将从 word31（第 31 词）开始', { exact: true }).count(), 1)
+  await page.getByRole('button', { name: '确认从这里开始' }).click()
+  assert.deepEqual(fixtures.progressRelocations.at(-1), {
+    studentId: defaultStudent.id,
+    entryId: programEntries[30].id,
+    replaceActiveRun: false,
+  })
+  await page.getByText('当前位置：word31（第 31 词）', { exact: true }).waitFor()
+  await page.waitForFunction(() => document.activeElement?.classList.contains('vocabulary-progress-current'))
   await page.screenshot({ path: path.join(evidenceRoot, 'review-unified-progress-desktop.png'), fullPage: true })
-  pass('开始页只保留一个主进度入口，最近生词组直接显示实际词目')
+  pass('开始页可按 Week / Day 查看主进度，并二次确认从指定单词开始')
+
+  await page.getByRole('button', { name: '收起进度' }).click()
 
   assert.equal(await page.getByRole('button', { name: '美音' }).getAttribute('aria-pressed'), 'true')
   await page.getByRole('button', { name: '英音' }).click()
@@ -459,7 +501,9 @@ async function verifyScopePreviewAndReviewKeys(page) {
   pass('开始过词处可选美音或英音，并在刷新后记住上次选择')
 
   await page.setViewportSize({ width: 390, height: 844 })
-  const mobileLayout = await page.locator('.vocabulary-run-setup').evaluate((node) => ({
+  await page.getByRole('button', { name: '查看 / 调整进度' }).click()
+  await page.getByRole('heading', { name: '选择下一词' }).waitFor()
+  const mobileLayout = await page.locator('.vocabulary-progress-explorer').evaluate((node) => ({
     left: node.getBoundingClientRect().left,
     right: node.getBoundingClientRect().right,
     viewportWidth: window.innerWidth,
@@ -468,8 +512,11 @@ async function verifyScopePreviewAndReviewKeys(page) {
   assert.ok(mobileLayout.left >= 0)
   assert.ok(mobileLayout.right <= mobileLayout.viewportWidth)
   assert.equal(mobileLayout.scrollWidth, mobileLayout.viewportWidth)
+  await page.getByRole('button', { name: '第 32 词 word32' }).click()
+  await page.getByRole('button', { name: '确认从这里开始' }).waitFor({ state: 'visible' })
   await page.screenshot({ path: path.join(evidenceRoot, 'review-unified-progress-mobile-390x844.png'), fullPage: true })
-  pass('390px 下统一进度入口与小型音色选择自然换行且无横向溢出')
+  pass('390px 下 Week / Day 单词进度浏览自然换行，选词后确认操作立即可见')
+  await page.getByRole('button', { name: '收起进度' }).click()
   await page.setViewportSize({ width: 1440, height: 1000 })
 
   await page.evaluate(() => { window.__reviewAudioLog.length = 0 })
@@ -483,6 +530,15 @@ async function verifyScopePreviewAndReviewKeys(page) {
   await page.getByRole('button', { name: '继续过词' }).waitFor()
   assert.equal(await page.getByLabel('目标生词数').isDisabled(), true)
   assert.equal(await page.evaluate(() => window.localStorage.getItem('eqb-vocabulary-review-paused-wanwei-round-one-v1:student-default')), 'run-continuity')
+  await page.getByRole('button', { name: '查看 / 调整进度' }).click()
+  await page.getByRole('button', { name: '第 2 周' }).click()
+  await page.getByRole('button', { name: '第 31 词 word31' }).click()
+  assert.equal(await page.getByRole('button', { name: '放弃当前轮并从这里开始' }).count(), 1)
+  assert.match(await page.locator('.vocabulary-progress-selection').innerText(), /已生成的生词组不受影响/)
+  await page.keyboard.press('Enter')
+  await page.keyboard.press('Shift')
+  await page.keyboard.press('Delete')
+  await page.getByRole('button', { name: '收起进度' }).click()
   await page.reload({ waitUntil: 'networkidle' })
   await page.getByRole('button', { name: '继续过词' }).waitFor()
   await page.getByRole('button', { name: '继续过词' }).click()
@@ -574,18 +630,18 @@ async function verifyStudentProfiles(page) {
   const switcher = page.getByLabel('切换当前学生')
   await switcher.waitFor()
   assert.equal(await switcher.inputValue(), defaultStudent.id)
-  await page.getByText('默认学生 · 已过 12 / 60', { exact: true }).waitFor()
+  await page.getByText('默认学生 · 下一词 13 / 60', { exact: true }).waitFor()
   assert.equal(await page.locator('.vocabulary-recent-sets li').count(), 3)
 
   await switcher.selectOption(alternateStudent.id)
-  await page.getByText('小林 · 已过 0 / 60', { exact: true }).waitFor()
+  await page.getByText('小林 · 下一词 1 / 60', { exact: true }).waitFor()
   assert.equal(await page.getByLabel('目标生词数').inputValue(), '20')
   assert.equal(await page.locator('.vocabulary-recent-sets li').count(), 0)
 
   await page.getByRole('button', { name: '新建学生' }).click()
   await page.getByLabel('学生姓名').fill('小周')
   await page.getByRole('button', { name: '保存' }).click()
-  await page.getByText('小周 · 已过 0 / 60', { exact: true }).waitFor()
+  await page.getByText('小周 · 下一词 1 / 60', { exact: true }).waitFor()
   assert.equal(await switcher.locator('option').allTextContents().then((items) => items.includes('小周')), true)
   assert.equal(await page.locator('.vocabulary-recent-sets li').count(), 0)
   await page.screenshot({ path: path.join(evidenceRoot, 'student-profiles-desktop.png'), fullPage: true })
@@ -1299,8 +1355,8 @@ async function main() {
     await matchingGamePage.close()
 
     const unifiedProgressPage = await browser.newPage({ viewport: { width: 1440, height: 1000 } })
-    await installApiFixtures(unifiedProgressPage, { continuityScope: 'main' })
-    await verifyScopePreviewAndReviewKeys(unifiedProgressPage)
+    const unifiedProgressFixtures = await installApiFixtures(unifiedProgressPage, { continuityScope: 'main' })
+    await verifyScopePreviewAndReviewKeys(unifiedProgressPage, unifiedProgressFixtures)
     await unifiedProgressPage.close()
 
     const playerPage = await browser.newPage({ viewport: { width: 390, height: 844 } })

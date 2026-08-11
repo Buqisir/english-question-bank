@@ -27,6 +27,7 @@ import {
   revokeVocabularyShare,
   selectVocabularyExampleCandidate,
   shareVocabularySet,
+  setVocabularyProgressStart,
   undoVocabularyReviewDecision,
 } from '../server/vocabulary/vocabularyStore.mjs'
 
@@ -428,9 +429,45 @@ assert.equal(defaultStudentA.displayName, '默认学生')
 assert.equal(defaultStudentB.displayName, '默认学生')
 const studentA = createVocabularyStudent(userDb, 'teacher-a', { displayName: '小林' })
 const studentB = createVocabularyStudent(userDb, 'teacher-a', { displayName: '小周' })
-assert.deepEqual(listVocabularyStudents(userDb, 'teacher-a').map((student) => student.displayName).sort(), ['小周', '小林', '默认学生'].sort())
+const migratedStudent = createVocabularyStudent(userDb, 'teacher-a', { displayName: '小陈' })
+assert.deepEqual(listVocabularyStudents(userDb, 'teacher-a').map((student) => student.displayName).sort(), ['小陈', '小周', '小林', '默认学生'].sort())
 assert.throws(() => createVocabularyStudent(userDb, 'teacher-a', { displayName: ' 小林 ' }), /同名学生/)
 assert.throws(() => createVocabularyStudent(userDb, 'teacher-a', { displayName: '小林🙂' }), /Emoji/)
+const migratedProgress = setVocabularyProgressStart(dbs, 'teacher-a', {
+  studentId: migratedStudent.id,
+  programId: 'wanwei-round-one-v1',
+  entryId: entries[2].id,
+})
+assert.equal(migratedProgress.progress.cursor, 2)
+assert.equal(migratedProgress.startEntry.id, entries[2].id)
+assert.equal(migratedProgress.discardedRunId, null)
+let migratedRun = createVocabularyReviewRun(dbs, 'teacher-a', {
+  studentId: migratedStudent.id,
+  programId: 'wanwei-round-one-v1',
+  targetUnfamiliarCount: 2,
+  mode: 'main',
+})
+assert.equal(migratedRun.cursor, 2)
+assert.throws(() => setVocabularyProgressStart(dbs, 'teacher-a', {
+  studentId: migratedStudent.id,
+  programId: 'wanwei-round-one-v1',
+  entryId: entries[0].id,
+}), /未结束的过词轮次/)
+const rewoundProgress = setVocabularyProgressStart(dbs, 'teacher-a', {
+  studentId: migratedStudent.id,
+  programId: 'wanwei-round-one-v1',
+  entryId: entries[0].id,
+  replaceActiveRun: true,
+})
+assert.equal(rewoundProgress.progress.cursor, 0)
+assert.equal(rewoundProgress.discardedRunId, migratedRun.id)
+assert.equal(getCurrentVocabularyReviewRun(userDb, 'teacher-a', migratedStudent.id, 'wanwei-round-one-v1'), null)
+assert.equal(userDb.prepare('SELECT COUNT(*) AS count FROM vocabulary_review_runs WHERE id = ?').get(migratedRun.id).count, 0)
+assert.throws(() => setVocabularyProgressStart(dbs, 'teacher-b', {
+  studentId: migratedStudent.id,
+  programId: 'wanwei-round-one-v1',
+  entryId: entries[0].id,
+}), /学生档案不存在/)
 assert.throws(() => createVocabularyReviewRun(dbs, 'teacher-b', {
   studentId: studentA.id,
   programId: 'wanwei-round-one-v1',
@@ -627,6 +664,23 @@ assert.equal(getPublicVocabularyDictationShare(userDb, share.shareId).status, 'r
 const reshared = shareVocabularySet(userDb, 'teacher-a', vocabularySet.id)
 assert.notEqual(reshared.shareId, share.shareId)
 assert.equal(getPublicVocabularyShare(userDb, share.shareId).status, 'not_found')
+assert.equal(getPublicVocabularyShare(userDb, reshared.shareId).status, 'active')
+assert.equal(getPublicVocabularyDictationShare(userDb, reshared.shareId).status, 'active')
+
+const relocationRunWithFrozenShare = createVocabularyReviewRun(dbs, 'teacher-a', {
+  studentId: studentA.id,
+  programId: 'wanwei-round-one-v1',
+  targetUnfamiliarCount: 2,
+  mode: 'main',
+})
+const relocationWithFrozenShare = setVocabularyProgressStart(dbs, 'teacher-a', {
+  studentId: studentA.id,
+  programId: 'wanwei-round-one-v1',
+  entryId: entries[2].id,
+  replaceActiveRun: true,
+})
+assert.equal(relocationWithFrozenShare.discardedRunId, relocationRunWithFrozenShare.id)
+assert.equal(getVocabularySet(userDb, 'teacher-a', vocabularySet.id).id, vocabularySet.id)
 assert.equal(getPublicVocabularyShare(userDb, reshared.shareId).status, 'active')
 assert.equal(getPublicVocabularyDictationShare(userDb, reshared.shareId).status, 'active')
 
