@@ -349,6 +349,16 @@ async function main() {
       `got status=${privateCurrentRun.status} body=${JSON.stringify(privateCurrentRun.json)}`,
     )
 
+    const privateProgressRelocation = await req('/api/vocabulary/progress/wanwei-round-one-v1', {
+      method: 'PATCH',
+      body: { studentId: 'missing', entryId: 'auth-fixture-about', replaceActiveRun: true },
+    })
+    assert(
+      '(c) forced mode: student progress relocation remains protected without a cookie',
+      privateProgressRelocation.status === 401 && privateProgressRelocation.json?.error === 'not_authenticated',
+      `got status=${privateProgressRelocation.status} body=${JSON.stringify(privateProgressRelocation.json)}`,
+    )
+
     const wrongMethodPublicVocabulary = await req('/api/public/vocabulary/listen/public-fixture-share', { method: 'POST' })
     assert(
       '(c) forced mode: only GET is public for vocabulary shares',
@@ -493,6 +503,37 @@ async function main() {
       discardedReviewRun.status === 200 && discardedReviewRun.json?.ok === true &&
         currentAfterDiscard.status === 200 && currentAfterDiscard.json?.reviewRun === null,
       `discard=${JSON.stringify(discardedReviewRun.json)} current=${JSON.stringify(currentAfterDiscard.json)}`,
+    )
+
+    const relocationRun = await req('/api/vocabulary/review-runs', {
+      method: 'POST',
+      cookie,
+      body: {
+        studentId,
+        programId: 'wanwei-round-one-v1',
+        targetUnfamiliarCount: 15,
+        mode: 'main',
+      },
+    })
+    const blockedRelocation = await req('/api/vocabulary/progress/wanwei-round-one-v1', {
+      method: 'PATCH',
+      cookie,
+      body: { studentId, entryId: 'auth-fixture-about', replaceActiveRun: false },
+    })
+    const confirmedRelocation = await req('/api/vocabulary/progress/wanwei-round-one-v1', {
+      method: 'PATCH',
+      cookie,
+      body: { studentId, entryId: 'auth-fixture-about', replaceActiveRun: true },
+    })
+    const currentAfterRelocation = await req(`/api/vocabulary/review-runs/current?studentId=${encodeURIComponent(studentId)}&programId=wanwei-round-one-v1`, { cookie })
+    assert(
+      '(c) progress relocation requires explicit Run replacement and leaves no competing active Run',
+      relocationRun.status === 201 &&
+        blockedRelocation.status === 409 && blockedRelocation.json?.error === 'vocabulary_progress_has_active_run' &&
+        confirmedRelocation.status === 200 && confirmedRelocation.json?.progress?.cursor === 0 &&
+        confirmedRelocation.json?.discardedRunId === relocationRun.json?.reviewRun?.id &&
+        currentAfterRelocation.status === 200 && currentAfterRelocation.json?.reviewRun === null,
+      `run=${JSON.stringify(relocationRun.json)} blocked=${JSON.stringify(blockedRelocation.json)} confirmed=${JSON.stringify(confirmedRelocation.json)} current=${JSON.stringify(currentAfterRelocation.json)}`,
     )
 
     const createdVocabularySet = await req('/api/vocabulary/sets', {

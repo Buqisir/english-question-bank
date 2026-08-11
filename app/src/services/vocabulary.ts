@@ -154,6 +154,26 @@ export async function getVocabularyProgress(studentId: string): Promise<{ cursor
   return body.progress as { cursor: number; lastTarget: number }
 }
 
+export async function setVocabularyProgressStart(
+  studentId: string,
+  entryId: string,
+  replaceActiveRun: boolean,
+): Promise<{
+  progress: { cursor: number; lastTarget: number }
+  startEntry: { id: string; headword: string; sourceOrder: number }
+  discardedRunId: string | null
+}> {
+  const body = await requestJson('/api/vocabulary/progress/wanwei-round-one-v1', {
+    method: 'PATCH',
+    body: JSON.stringify({ studentId, entryId, replaceActiveRun }),
+  })
+  return body as {
+    progress: { cursor: number; lastTarget: number }
+    startEntry: { id: string; headword: string; sourceOrder: number }
+    discardedRunId: string | null
+  }
+}
+
 export async function createVocabularyReviewRun(
   studentId: string,
   targetUnfamiliarCount: number,

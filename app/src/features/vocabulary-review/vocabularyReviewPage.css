@@ -175,6 +175,246 @@
   background: var(--accent);
 }
 
+.vocabulary-progress-toggle {
+  justify-self: end;
+  padding: 2px 0;
+  border: 0;
+  background: transparent;
+  color: #1e4a3a;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.vocabulary-progress-toggle:focus-visible,
+.vocabulary-progress-explorer button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.vocabulary-progress-explorer {
+  min-height: min(680px, calc(100vh - 180px));
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.vocabulary-progress-explorer-heading,
+.vocabulary-progress-current,
+.vocabulary-progress-day-heading,
+.vocabulary-progress-selection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.vocabulary-progress-explorer-heading h2 {
+  margin: 0;
+  color: var(--ink-strong);
+  font-size: 28px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.vocabulary-progress-explorer-heading p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.vocabulary-progress-current {
+  justify-content: flex-start;
+  margin-top: 20px;
+  padding: 14px 16px;
+  border-radius: 6px;
+  background: var(--surface);
+}
+
+.vocabulary-progress-current > span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.vocabulary-progress-current strong {
+  color: var(--ink-strong);
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.vocabulary-progress-weeks {
+  display: flex;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 2px 2px 8px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.vocabulary-progress-weeks button {
+  min-height: 38px;
+  flex: 0 0 auto;
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--muted);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.vocabulary-progress-weeks button.is-selected {
+  border-color: var(--accent);
+  background: #eaf1ed;
+  color: #1e4a3a;
+}
+
+.vocabulary-progress-days {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 28px;
+  margin-top: 12px;
+}
+
+.vocabulary-progress-day {
+  min-width: 0;
+  padding: 20px 0 24px;
+  border-top: 1px solid var(--line);
+}
+
+.vocabulary-progress-day-heading h3 {
+  display: inline;
+  margin: 0;
+  color: var(--ink-strong);
+  font-size: 16px;
+  font-weight: 650;
+}
+
+.vocabulary-progress-day-heading span,
+.vocabulary-progress-day-heading small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.vocabulary-progress-day-heading span {
+  margin-left: 8px;
+}
+
+.vocabulary-progress-words {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.vocabulary-progress-word {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+}
+
+.vocabulary-progress-word strong {
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.vocabulary-progress-word-order {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.vocabulary-progress-word-state {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.vocabulary-progress-word.is-processed {
+  background: var(--surface);
+  color: var(--muted);
+}
+
+.vocabulary-progress-word.is-current {
+  border-color: var(--line-strong);
+  background: #f4f8f6;
+}
+
+.vocabulary-progress-word.is-selected {
+  border-color: var(--accent);
+  background: #eaf1ed;
+  color: #1e4a3a;
+}
+
+.vocabulary-progress-word.is-selected .vocabulary-progress-word-order,
+.vocabulary-progress-word.is-current .vocabulary-progress-word-order {
+  border-color: var(--accent);
+  color: #1e4a3a;
+}
+
+.vocabulary-progress-selection {
+  position: sticky;
+  top: 12px;
+  z-index: 3;
+  margin-bottom: 8px;
+  padding: 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: 0 12px 28px rgb(31 45 38 / 10%);
+}
+
+.vocabulary-progress-selection > div {
+  display: grid;
+  gap: 4px;
+}
+
+.vocabulary-progress-selection strong {
+  color: var(--ink-strong);
+  font-size: 14px;
+}
+
+.vocabulary-progress-selection span,
+.vocabulary-progress-selection small,
+.vocabulary-progress-status {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.vocabulary-progress-selection small {
+  color: var(--coral-text);
+}
+
+.vocabulary-progress-status {
+  margin: 14px 0 0;
+  color: #1e4a3a;
+  font-weight: 600;
+}
+
 .vocabulary-review-layout {
   display: grid;
   grid-template-areas: "course stage collection";
@@ -1255,6 +1495,40 @@
     text-align: left;
   }
 
+  .vocabulary-progress-toggle {
+    justify-self: start;
+  }
+
+  .vocabulary-progress-explorer {
+    min-height: auto;
+    padding: 16px;
+  }
+
+  .vocabulary-progress-explorer-heading,
+  .vocabulary-progress-selection {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .vocabulary-progress-explorer-heading .ghost-button,
+  .vocabulary-progress-selection .primary-button {
+    width: 100%;
+  }
+
+  .vocabulary-progress-current {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .vocabulary-progress-days {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .vocabulary-progress-selection {
+    top: 8px;
+  }
+
   .vocabulary-review-layout {
     grid-template-areas:
       "stage"
@@ -1359,6 +1633,10 @@
 }
 
 @media (max-width: 420px) {
+  .vocabulary-progress-words {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .vocabulary-stage-meta {
     align-items: flex-start;
     flex-direction: column;

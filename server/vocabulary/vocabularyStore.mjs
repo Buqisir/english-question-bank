@@ -1126,6 +1126,83 @@ export function getVocabularyProgress(userDb, userId, studentId, programId) {
     : { studentId, programId, cursor: 0, lastTarget: 15, updatedAt: null }
 }
 
+export function setVocabularyProgressStart({ userDb, bankDb }, userId, input = {}) {
+  ensureUserVocabularyShape(userDb)
+  const studentId = requireNonEmpty(input.studentId, '学生档案')
+  requireOwnedVocabularyStudent(userDb, userId, studentId)
+  const programId = requireNonEmpty(input.programId, 'programId')
+  const entryId = requireNonEmpty(input.entryId, 'entryId')
+  const program = bankDb.prepare('SELECT id, total_planned_entries FROM vocabulary_programs WHERE id = ?').get(programId)
+  if (!program) throw new VocabularyStoreError('词汇课程不存在。', 404, 'program_not_found')
+  const startEntry = bankDb.prepare(`
+    SELECT id, headword, source_order FROM vocabulary_entries
+    WHERE id = ? AND program_id = ?
+  `).get(entryId, programId)
+  if (!startEntry) {
+    throw new VocabularyStoreError('起点单词不属于当前词汇课程。', 404, 'vocabulary_progress_entry_not_found')
+  }
+  if (!Number.isInteger(startEntry.source_order) || startEntry.source_order < 1 || startEntry.source_order > program.total_planned_entries) {
+    throw new VocabularyStoreError('起点单词的课程位置无效。', 409, 'vocabulary_progress_entry_invalid')
+  }
+
+  const timestamp = nowIso()
+  let discardedRunId = null
+  let lastTarget = 15
+  userDb.exec('BEGIN IMMEDIATE')
+  try {
+    const currentRun = userDb.prepare(`
+      SELECT id FROM vocabulary_review_runs
+      WHERE user_id = ? AND student_id = ? AND program_id = ? AND status <> 'frozen'
+      ORDER BY updated_at DESC, id DESC
+      LIMIT 1
+    `).get(userId, studentId, programId)
+    if (currentRun && input.replaceActiveRun !== true) {
+      throw new VocabularyStoreError(
+        '这位学生还有未结束的过词轮次。确认放弃本轮后再调整起点。',
+        409,
+        'vocabulary_progress_has_active_run',
+      )
+    }
+    const existingProgress = userDb.prepare(`
+      SELECT last_target FROM vocabulary_review_progress
+      WHERE user_id = ? AND student_id = ? AND program_id = ?
+    `).get(userId, studentId, programId)
+    lastTarget = existingProgress?.last_target ?? 15
+    if (currentRun) {
+      discardedRunId = currentRun.id
+      userDb.prepare('DELETE FROM vocabulary_review_runs WHERE id = ? AND user_id = ?').run(currentRun.id, userId)
+    }
+    const cursor = startEntry.source_order - 1
+    userDb.prepare(`
+      INSERT INTO vocabulary_review_progress (user_id, student_id, program_id, cursor, last_target, updated_at)
+      VALUES (?, ?, ?, ?, ?, ?)
+      ON CONFLICT(user_id, student_id, program_id) DO UPDATE SET
+        cursor = excluded.cursor,
+        updated_at = excluded.updated_at
+    `).run(userId, studentId, programId, cursor, lastTarget, timestamp)
+    userDb.exec('COMMIT')
+  } catch (error) {
+    userDb.exec('ROLLBACK')
+    throw error
+  }
+
+  return {
+    progress: {
+      studentId,
+      programId,
+      cursor: startEntry.source_order - 1,
+      lastTarget,
+      updatedAt: timestamp,
+    },
+    startEntry: {
+      id: startEntry.id,
+      headword: startEntry.headword,
+      sourceOrder: startEntry.source_order,
+    },
+    discardedRunId,
+  }
+}
+
 export function createVocabularyReviewRun({ userDb, bankDb }, userId, input) {
   ensureUserVocabularyShape(userDb)
   ensureSharedVocabularyShape(bankDb)
