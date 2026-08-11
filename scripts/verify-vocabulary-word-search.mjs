@@ -68,13 +68,13 @@ try {
   }))
   assert.deepEqual(
     [1, 15, 16, 60].map((count) => wordSearch.buildVocabularyWordSearchPages('set-pages', entries.slice(0, count), pool).length),
-    [1, 1, 1, 4],
+    [1, 2, 2, 6],
   )
   assert.deepEqual(
     wordSearch.buildVocabularyWordSearchPages('set-pages', entries, pool).map((page) => page.clues.length),
-    [16, 16, 16, 12],
+    [10, 10, 10, 10, 10, 10],
   )
-  pass('1、15、16、60词按原顺序分成每页最多16词')
+  pass('1、15、16、60词按原顺序分成每页最多10词')
 
   const targets = [
     fixture(1, { headword: 'receive', teachingSense: '收到', partOfSpeech: 'v.' }),
@@ -86,7 +86,7 @@ try {
     fixture(7, { headword: 'choose', teachingSense: '选择', partOfSpeech: 'v.' }),
     fixture(8, { headword: 'he', teachingSense: '他', partOfSpeech: 'pron.' }),
     fixture(9, { headword: 'him', teachingSense: '他', partOfSpeech: 'pron.' }),
-    ...Array.from({ length: 7 }, (_, index) => fixture(index + 10, { headword: `practice${String.fromCharCode(97 + index)}` })),
+    fixture(10, { headword: 'practicea' }),
   ]
   const decoyPool = Array.from({ length: 20 }, (_, index) => fixture(index + 201, {
     headword: `decoy${String.fromCharCode(97 + index)}`,
@@ -98,15 +98,15 @@ try {
   assert.deepEqual(first, second)
   assert.notDeepEqual(first.grid, otherSet.grid)
   assert.deepEqual(first.clues.map((clue) => clue.entryId), targets.map((entry) => entry.id))
-  assert.deepEqual(first.clues.map((clue) => clue.number), Array.from({ length: 16 }, (_, index) => index + 1))
+  assert.deepEqual(first.clues.map((clue) => clue.number), Array.from({ length: 10 }, (_, index) => index + 1))
   pass('同一生词组重复下载布局稳定，新生词组重新排阵且提示保持原顺序')
 
-  assert.equal(first.grid.length, 16)
-  assert.equal(first.grid.every((row) => row.length === 16), true)
+  assert.equal(first.grid.length, 12)
+  assert.equal(first.grid.every((row) => row.length === 12), true)
   assert.equal(first.placements.every((placement) => placementLetters(first, placement) === placement.gridWord), true)
   assert.equal(first.placements.every((placement) => ['right', 'down', 'down-right', 'up-right'].includes(placement.direction)), true)
   assert.equal(wordSearch.findUnsafeVocabularyWordSearchWords(first.grid).length, 0)
-  pass('16×16词阵只使用正向横竖斜方向，所有放置可回读且随机填充通过儿童安全门')
+  pass('12×12词阵只使用正向横竖斜方向，所有放置可回读且随机填充通过儿童安全门')
 
   const targetPlacements = first.placements.filter((placement) => placement.kind === 'target')
   assert.equal(targetPlacements.length, first.clues.filter((clue) => clue.searchable).length)
@@ -119,17 +119,18 @@ try {
   assert.equal(first.grid.flat().every((letter) => /^[a-z]$/u.test(letter) || ['B', 'C'].includes(letter)), true)
   pass('字母阵以小写为主，专有名词和缩写保留原大小写，词组连续藏入；一两字母短词改为直接写')
 
-  assert.equal(first.correctDecoys.length, 3)
+  assert.equal(first.correctDecoys.length, 2)
   assert.equal(first.correctDecoys.every((word) => !targets.some((entry) => entry.headword === word)), true)
-  assert.deepEqual(first.misspellingDecoys, [
-    { incorrect: 'sucess', correct: 'success' },
-    { incorrect: 'recieve', correct: 'receive' },
-  ])
-  assert.equal(first.placements.filter((placement) => placement.kind === 'correct-decoy').length, 3)
-  assert.equal(first.placements.filter((placement) => placement.kind === 'misspelling-decoy').length, 2)
-  pass('每16个目标词稳定加入3个无关正确词和最多2个已审核相近错词')
+  assert.equal(first.misspellingDecoys.length, 1)
+  assert.equal([
+    JSON.stringify({ incorrect: 'sucess', correct: 'success' }),
+    JSON.stringify({ incorrect: 'recieve', correct: 'receive' }),
+  ].includes(JSON.stringify(first.misspellingDecoys[0])), true)
+  assert.equal(first.placements.filter((placement) => placement.kind === 'correct-decoy').length, 2)
+  assert.equal(first.placements.filter((placement) => placement.kind === 'misspelling-decoy').length, 1)
+  pass('每10个目标词稳定加入2个无关正确词和最多1个已审核相近错词')
 
-  const twoPageTargets = [...targets, fixture(17, {
+  const twoPageTargets = [...targets, fixture(11, {
     headword: 'outsider',
     teachingSense: '另一页目标词',
   })]
@@ -159,7 +160,7 @@ try {
   assert.equal([...occupied.values()].some((count) => count > 1), true)
   pass('目标词与干扰词可在显示字符完全相同时交叉共用格子')
 
-  const unsafeGrid = Array.from({ length: 16 }, () => Array(16).fill('a'))
+  const unsafeGrid = Array.from({ length: 12 }, () => Array(12).fill('a'))
   unsafeGrid[3].splice(4, 4, ...'shit')
   assert.deepEqual(wordSearch.findUnsafeVocabularyWordSearchWords(unsafeGrid), ['shit'])
   unsafeGrid[3].splice(4, 4, ...'aaaa')
@@ -172,7 +173,7 @@ try {
   assert.deepEqual(wordSearch.findUnsafeVocabularyWordSearchWords(unsafeGrid), ['dyke', 'fag', 'spic'])
   pass('安全检查能识别横竖斜及反向形成的不适合儿童词串')
 
-  const reverseOccurrenceGrid = Array.from({ length: 16 }, () => Array(16).fill('x'))
+  const reverseOccurrenceGrid = Array.from({ length: 12 }, () => Array(12).fill('x'))
   reverseOccurrenceGrid[1].splice(1, 3, ...'few')
   reverseOccurrenceGrid[3].splice(1, 3, ...'wef')
   assert.equal(wordSearch.findVocabularyWordSearchOccurrences(reverseOccurrenceGrid, 'few').length, 2)
@@ -190,6 +191,19 @@ try {
   assert.deepEqual(directOnlyPage.misspellingDecoys, [])
   pass('整页只有直接写词时不生成只有干扰项的空词阵')
 
+  const longWordPage = wordSearch.buildVocabularyWordSearchPages(
+    'long-word-set',
+    [
+      fixture(302, { headword: 'characteristic', teachingSense: '特征' }),
+      fixture(303, { headword: 'receive', teachingSense: '收到' }),
+    ],
+    decoyPool,
+  )[0]
+  assert.equal(longWordPage.clues[0].searchable, false)
+  assert.match(longWordPage.clues[0].hint, /直接写/)
+  assert.equal(longWordPage.placements.some((placement) => placement.entryId === 'entry-302'), false)
+  pass('超过12格的极少数长词自动改为直接写，不阻断整页生成')
+
   const bankDb = new DatabaseSync(path.join(rootDir, 'data/question-bank.sqlite'), { readOnly: true })
   const realEntries = bankDb.prepare(`
     SELECT id, headword, teaching_sense AS teachingSense,
@@ -201,10 +215,10 @@ try {
   bankDb.close()
   assert.equal(realEntries.length, 1600)
   let realPageCount = 0
-  for (let index = 0; index < realEntries.length; index += 16) {
+  for (let index = 0; index < realEntries.length; index += 10) {
     const realPages = wordSearch.buildVocabularyWordSearchPages(
-      `real-set-${index / 16 + 1}`,
-      realEntries.slice(index, index + 16),
+      `real-set-${index / 10 + 1}`,
+      realEntries.slice(index, index + 10),
       realEntries,
     )
     assert.equal(realPages.length, 1)
@@ -220,11 +234,11 @@ try {
       wordSearch.findUnsafeVocabularyWordSearchWordsCreatedByFill(realPages[0].grid, realPages[0].placements),
       [],
     )
-    assert.equal(realPages[0].grid.length, 16)
+    assert.equal(realPages[0].grid.length, 12)
     realPageCount += 1
   }
-  assert.equal(realPageCount, 100)
-  pass('真实万唯1600词逐批生成100页，全部目标可放置、可回读并通过安全填充')
+  assert.equal(realPageCount, 160)
+  pass('真实万唯1600词逐批生成160页，全部目标可放置或明确直接写，并通过安全填充')
 
   console.log(`Vocabulary word-search verification passed (${passed} checks).`)
 } finally {

@@ -93,15 +93,16 @@
 
   .vocabulary-word-search-clues li {
     display: grid;
-    grid-template-columns: 6mm minmax(25mm, 0.72fr) minmax(31mm, 1fr);
+    grid-template-columns: 6mm 24mm 38mm;
     align-items: center;
-    gap: 1.5mm;
+    justify-content: center;
+    gap: 1.2mm;
     min-width: 0;
   }
 
   .vocabulary-word-search-clues li > span {
     color: #6a6a64;
-    font-size: 7.4pt;
+    font-size: 8.2pt;
     font-variant-numeric: tabular-nums;
     text-align: center;
   }
@@ -109,11 +110,12 @@
   .vocabulary-word-search-clues p {
     display: flex;
     align-items: baseline;
+    flex-wrap: wrap;
     min-width: 0;
-    gap: 1mm;
+    gap: 0.8mm;
     color: #1e1e1c;
-    font-size: 8.2pt;
-    line-height: 1.15;
+    font-size: 9.5pt;
+    line-height: 1.18;
   }
 
   .vocabulary-word-search-clues p strong {
@@ -122,7 +124,7 @@
 
   .vocabulary-word-search-clues p small {
     color: #6a6a64;
-    font-size: 6.4pt;
+    font-size: 7pt;
     white-space: nowrap;
   }
 
@@ -173,12 +175,12 @@
   .vocabulary-word-search-grid {
     position: relative;
     display: grid;
-    grid-template-columns: repeat(16, 1fr);
-    grid-template-rows: repeat(16, 1fr);
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
     align-self: center;
     justify-self: center;
-    width: 136mm;
-    height: 136mm;
+    width: 132mm;
+    height: 132mm;
     margin-top: 4mm;
     overflow: hidden;
     border: 0.3mm solid #c6c6c0;
@@ -193,7 +195,7 @@
     place-items: center;
     min-width: 0;
     color: #1e1e1c;
-    font-size: 12.5pt;
+    font-size: 14pt;
     font-weight: 520;
     line-height: 1;
   }

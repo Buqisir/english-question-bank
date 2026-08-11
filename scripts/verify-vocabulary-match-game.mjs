@@ -43,10 +43,11 @@ try {
   const sixty = Array.from({ length: 60 }, (_, index) => fixture(index + 1))
   assert.deepEqual(game.splitVocabularyMatchRounds([fixture(1)]).map((round) => round.length), [1])
   assert.deepEqual(game.splitVocabularyMatchRounds(sixty.slice(0, 8)).map((round) => round.length), [8])
-  assert.deepEqual(game.splitVocabularyMatchRounds(sixty.slice(0, 15)).map((round) => round.length), [8, 7])
-  assert.deepEqual(game.splitVocabularyMatchRounds(sixty).map((round) => round.length), [8, 8, 8, 8, 8, 8, 8, 4])
+  assert.deepEqual(game.splitVocabularyMatchRounds(sixty.slice(0, 10)).map((round) => round.length), [10])
+  assert.deepEqual(game.splitVocabularyMatchRounds(sixty.slice(0, 15)).map((round) => round.length), [10, 5])
+  assert.deepEqual(game.splitVocabularyMatchRounds(sixty).map((round) => round.length), [10, 10, 10, 10, 10, 10])
   assert.deepEqual(game.splitVocabularyMatchRounds(sixty).flat().map((entry) => entry.id), sixty.map((entry) => entry.id))
-  pass('1、8、15、60 词按原顺序分成最多 8 词的轮次')
+  pass('1、8、10、15、60 词按原顺序分成最多 10 词的轮次')
 
   const identityShuffle = (cards) => cards
   let state = game.createVocabularyMatchGame([fixture(1), fixture(2)], identityShuffle)

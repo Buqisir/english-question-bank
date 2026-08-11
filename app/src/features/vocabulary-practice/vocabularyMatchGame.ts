@@ -35,7 +35,7 @@ export type VocabularyMatchSelection = {
 
 export type VocabularyMatchShuffle = (cards: VocabularyMatchCard[]) => VocabularyMatchCard[]
 
-const DEFAULT_ROUND_SIZE = 8
+const DEFAULT_ROUND_SIZE = 10
 
 function normalizedMeaning(value: string) {
   return value.trim().replace(/\s+/gu, ' ')
