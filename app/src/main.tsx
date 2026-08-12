@@ -1,10 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.tsx'
-import { AuthGate } from './auth/AuthGate.tsx'
-import { VocabularyListenPage } from './features/vocabulary-listen/VocabularyListenPage.tsx'
-import { VocabularyDictationPage } from './features/vocabulary-dictation/VocabularyDictationPage.tsx'
 import type { VocabularyAudioAccent } from './features/vocabulary-listen/vocabularyAudioVariants.ts'
 
 /**
@@ -87,16 +83,66 @@ function getPublicVocabularyDictationRequest(): { shareId: string; accent: Vocab
 
 const publicVocabularyDictationRequest = getPublicVocabularyDictationRequest()
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    {publicVocabularyDictationRequest ? (
-      <VocabularyDictationPage {...publicVocabularyDictationRequest} />
-    ) : publicVocabularyShareId !== null ? (
-      <VocabularyListenPage shareId={publicVocabularyShareId} />
-    ) : (
+const root = createRoot(document.getElementById('root')!)
+
+function PublicVocabularyBootShell({ mode }: { mode: 'dictation' | 'listen' }) {
+  return (
+    <main className="public-vocabulary-boot" aria-live="polite">
+      <div>
+        <span aria-hidden="true">EQ</span>
+        <h1>{mode === 'dictation' ? '正在准备听写' : '正在准备词汇练习'}</h1>
+        <p>正在载入本次练习，请稍候。</p>
+      </div>
+    </main>
+  )
+}
+
+function BootstrapError() {
+  return (
+    <main className="public-vocabulary-boot" role="alert">
+      <div>
+        <span aria-hidden="true">EQ</span>
+        <h1>页面暂时无法打开</h1>
+        <p>请检查网络后重新打开链接。</p>
+      </div>
+    </main>
+  )
+}
+
+async function bootstrap() {
+  if (publicVocabularyDictationRequest) {
+    root.render(<PublicVocabularyBootShell mode="dictation" />)
+    const { VocabularyDictationPage } = await import('./features/vocabulary-dictation/VocabularyDictationPage.tsx')
+    root.render(
+      <StrictMode>
+        <VocabularyDictationPage {...publicVocabularyDictationRequest} />
+      </StrictMode>,
+    )
+    return
+  }
+
+  if (publicVocabularyShareId !== null) {
+    root.render(<PublicVocabularyBootShell mode="listen" />)
+    const { VocabularyListenPage } = await import('./features/vocabulary-listen/VocabularyListenPage.tsx')
+    root.render(
+      <StrictMode>
+        <VocabularyListenPage shareId={publicVocabularyShareId} />
+      </StrictMode>,
+    )
+    return
+  }
+
+  const [{ default: App }, { AuthGate }] = await Promise.all([
+    import('./App.tsx'),
+    import('./auth/AuthGate.tsx'),
+  ])
+  root.render(
+    <StrictMode>
       <AuthGate>
         <App />
       </AuthGate>
-    )}
-  </StrictMode>,
-)
+    </StrictMode>,
+  )
+}
+
+void bootstrap().catch(() => root.render(<BootstrapError />))

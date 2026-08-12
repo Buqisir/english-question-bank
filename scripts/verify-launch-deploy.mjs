@@ -33,12 +33,17 @@ const ROOT = repoRootFrom(import.meta.url)
 const { assert, section, summary } = createVerifier('launch-deploy verify (Slice 1+2+3+4)')
 
 const ABSOLUTE_ORIGIN = 'http://127.0.0.1:8787'
+const MAX_PUBLIC_BOOTSTRAP_BYTES = 450_000
 
 // Assert on CODE, not comments: the httpClient top-comment legitimately
 // narrates the retired API_ORIGIN / 127.0.0.1:8787 history, so strip comments
 // before token checks.
 function stripComments(src) {
   return src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, '')
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 
 // ── Slice 1: production same-origin addressing ──────────────────────────────
@@ -76,6 +81,51 @@ if (existsSync(distAssets)) {
   console.log('  · app/dist absent — skipping shipped-bundle grep (built in CI preflight)')
 }
 
+// Public vocabulary URLs are scanned from paper on mobile devices. Keep
+// their bootstrap isolated from the authenticated workbench: a static
+// App/AuthGate import collapses every route back into one multi-MB entry
+// chunk and leaves cold Android WebViews blank while unrelated modules load.
+section('Slice 1 — public vocabulary bootstrap isolation')
+
+const mainEntry = readText(ROOT, 'app/src/main.tsx')
+for (const staticModule of [
+  './App.tsx',
+  './auth/AuthGate.tsx',
+  './features/vocabulary-listen/VocabularyListenPage.tsx',
+  './features/vocabulary-dictation/VocabularyDictationPage.tsx',
+]) {
+  assert(
+    !new RegExp(`^import\\s+(?!type\\b)[^\\n]+from\\s+['"]${escapeRegExp(staticModule)}['"]`, 'm').test(mainEntry),
+    `main.tsx does not statically import ${staticModule}`,
+  )
+  assert(
+    mainEntry.includes(`import('${staticModule}')`),
+    `main.tsx dynamically imports ${staticModule}`,
+  )
+}
+
+const distIndexPath = resolve(ROOT, 'app/dist/index.html')
+if (existsSync(distIndexPath) && existsSync(distAssets)) {
+  const distIndex = readFileSync(distIndexPath, 'utf8')
+  const entryMatch = distIndex.match(/<script[^>]+src="\/(assets\/index-[^"]+\.js)"/)
+  const entryAssetPath = entryMatch ? resolve(ROOT, 'app/dist', entryMatch[1]) : null
+  assert(Boolean(entryAssetPath && existsSync(entryAssetPath)), 'production build exposes one hashed index bootstrap')
+  if (entryAssetPath && existsSync(entryAssetPath)) {
+    const entryBytes = statSync(entryAssetPath).size
+    assert(
+      entryBytes <= MAX_PUBLIC_BOOTSTRAP_BYTES,
+      `public bootstrap stays under ${MAX_PUBLIC_BOOTSTRAP_BYTES} raw bytes (found ${entryBytes})`,
+    )
+  }
+  const dictationChunks = readdirSync(distAssets).filter((name) => /^VocabularyDictationPage-.*\.js$/.test(name))
+  assert(
+    dictationChunks.length === 1,
+    `production build emits one lazy VocabularyDictationPage chunk (found ${dictationChunks.length})`,
+  )
+} else {
+  console.log('  · app/dist absent — skipping public bootstrap artifact checks (built in CI preflight)')
+}
+
 // ── Slice 2: Caddy reverse-proxy + SPA fallback topology ─────────────────────
 section('Slice 2 — deploy/Caddyfile topology')
 
@@ -87,6 +137,10 @@ const reverseProxyCount = (caddyfile.match(/reverse_proxy 127\.0\.0\.1:8787/g) |
 assert(reverseProxyCount === 3, `Caddyfile has exactly 3 reverse_proxy → 127.0.0.1:8787 (found ${reverseProxyCount})`)
 assert(caddyfile.includes('try_files {path} /index.html'), 'Caddyfile SPA fallback: try_files {path} /index.html')
 assert(caddyfile.includes('file_server'), 'Caddyfile serves static via file_server')
+assert(
+  /handle \/assets\/\* \{[\s\S]*?header Cache-Control "public, max-age=31536000, immutable"[\s\S]*?file_server[\s\S]*?\}/.test(caddyfile),
+  'hashed /assets/* files carry a one-year immutable browser cache contract',
+)
 // SW-3: reverse_proxy handles must precede the SPA fallback, or try_files swallows /api.
 assert(
   caddyfile.lastIndexOf('reverse_proxy 127.0.0.1:8787') < caddyfile.indexOf('try_files'),
