@@ -1,0 +1,17 @@
+{
+  "docxPath": "/Users/huangxuewei/Projects/english-question-bank/scripts/import-pipeline/papers/paper-pilot-2025-zj-jan/source.docx",
+  "paperId": "paper-pilot-2025-zj-jan",
+  "provenance": {
+    "sourceType": "真题",
+    "region": "浙江",
+    "paperName": "2025年1月浙江卷",
+    "year": 2025,
+    "defaultTags": [
+      "真题",
+      "2025",
+      "浙江卷",
+      "1月",
+      "import-agentization-pilot"
+    ]
+  }
+}

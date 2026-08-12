@@ -93,20 +93,32 @@ The fixed response text explicitly provided by the source for an application Wri
 _Avoid_: application format when the source provides no fixed text; inferred greeting; model-answer scaffold
 
 **Writing Analysis**:
-The reviewed, display-facing 讲评 for a Writing Task — the writing counterpart of the per-Question Analysis, attached at the writing group / Writing Task level (no Question reference, per ADR-0007). It is display content (read on the paper surface), not a search dimension. Its composition depends on the Writing Task's task type: an application Writing Analysis carries a **Model Answer** plus its **Highlight Expressions**; a continuation Writing Analysis additionally carries a **Continuation Design**. Scoring guidance, common-pitfall notes, and grouped vocabulary banks are out of scope.
-_Avoid_: 写作解析 / writing explanation when the stored reviewed object is meant; do not call it a Tag or a derived search dimension
+The reviewed, display-facing 讲评 for a Writing Task — the writing counterpart of the per-Question Analysis, attached at the writing group / Writing Task level (no Question reference, per ADR-0007). It is display content (read on the paper surface), not a search dimension. The on-disk envelope remains `writing-analysis-v1` (no v2 file). An **application** Writing Analysis carries a **Model Answer**, a **Review Card**, and an optional **Official Model Answer** when the source supplies one; new application work does not require **Highlight Expressions** (historical arrays are kept). New **continuation** work uses **Narrative Continuation Analysis** plus a **Model Answer**; persisted `main` assets may still carry legacy **Continuation Design**. Scoring guidance, common-pitfall notes, and grouped vocabulary banks are out of scope.
+_Avoid_: 写作解析 / writing explanation when the stored reviewed object is meant; do not call it a Tag or a derived search dimension; do not call the expanded application fields "writing-analysis-v2"
 
-**Model Answer** (范文):
-The single universal, attainable-excellent sample response carried by a Writing Analysis — written so a solid (~90-level) student could realistically reproduce it (high-frequency vocabulary, reliable structures, on the word-count target) yet still scores well. Not a native-speaker showcase, and not a set of tiered samples — one Model Answer per Writing Task.
-_Avoid_: 范文 used loosely for any sample; sample essay when the curated, attainable one is meant
+**Model Answer** (范文 / AI 参考范文):
+The single universal, attainable-excellent sample response carried by a Writing Analysis as `modelAnswer` — written so a solid (~90-level) student could realistically reproduce it (high-frequency vocabulary, reliable structures, on the word-count target) yet still scores well. Not a native-speaker showcase, not a set of tiered samples, and not the source 下水文.
+_Avoid_: 范文 used loosely for any sample; sample essay when the curated, attainable one is meant; official / source model essay
+
+**Official Model Answer** (官方范文):
+The source-supplied 下水文 / 评分参考范文 stored on an application Writing Analysis as `officialModelAnswer`. Optional: omit when the source has none; never invent or AI-rewrite it; never attach it to continuation.
+_Avoid_: treating Model Answer as the official essay; filling this field by solving the prompt
+
+**Review Card** (审题卡):
+The application-only structured 审题 fields on a Writing Analysis (`form`, `topic`, `reader`, `person`, `tense`, `type`, two `points`, `readerWho`, `readerCares`, `readerWants`, `value`). Required for a complete application lecture; forbidden on continuation. Generation also follows `docs/product/application-writing-doctrine-v1.md` §3.3 交际对象推演 (relationship, prior contribution, core communicative act, relationship risk, minimal relationship moves, order); that pass is a generation decision and does not add ReviewCard schema fields.
+_Avoid_: using it as continuation plot design; treating it as a Tag; adding relationship-move fields onto ReviewCard
 
 **Highlight Expression** (亮点表达 / 高分句块):
-A reusable, high-scoring sentence chunk lifted from the Model Answer and surfaced on its own so a weaker student can borrow the "good" parts directly. A Writing Analysis carries a few (≈3–5) per Model Answer.
-_Avoid_: phrase, sentence when the curated, score-bearing chunk is meant
+A reusable, high-scoring sentence chunk lifted from the Model Answer. Continuation Writing Analysis on current `main` still requires 3–5; new application Writing Analysis does not produce them (legacy application arrays may still exist). New narrative continuation work does not treat highlights as the analysis authority.
+_Avoid_: phrase, sentence when the curated, score-bearing chunk is meant; requiring highlights on new application work
 
 **Continuation Design** (情节设计思路):
-The reviewed design rationale carried only by a continuation Writing Analysis — the theme the continuation must serve, plus, for each given paragraph opening sentence, how that paragraph picks it up and develops or resolves the story toward that theme. It teaches the *how* of continuation writing (plot direction and connection back to the source material), which a Model Answer alone cannot show. It is display 讲评, not a search dimension, and has no application counterpart.
-_Avoid_: outline, plot summary when the curated teaching rationale is meant; do not call it a Tag or a derived dimension
+The legacy shallow display field on historical continuation Writing Analyses: one theme plus one free-text note for each paragraph starter. It remains a current asset fact on `main` but is not the analysis authority for new continuation work.
+_Avoid_: using it as the new continuation analysis contract; treating its theme or paragraph notes as independently evidenced constraints
+
+**Narrative Continuation Analysis** (记叙型读后续写解析):
+The reviewed, source-grounded interpretation of one narrative continuation Writing Task (`continuationAnalysis` / `continuation-analysis-v1`): story understanding, hard/soft/open continuation constraints, causal character development, source-aligned language guidance, and one two-paragraph response blueprint. Product authority: `docs/product/continuation-writing-analysis-contract-v1.md` (currently in worktree `wt-continuation-analysis-research-20260809`, not yet on `main`). It supports later Model Answer generation but is neither an answer key nor a score prediction. Expository or argumentative continuation is out of V1 and must stop.
+_Avoid_: Continuation Design; universal story template; automatic scoring rubric
 
 **Tag**:
 A teacher-confirmed label used for search, filtering, teaching intent, topic, discourse feature, question type, or difficulty support.
@@ -147,6 +159,22 @@ _Avoid_: answer version when it could mean only an answer key
 **Import File**:
 A locally archived DOCX, PDF, image, or other source file brought into the workbench for later review or parsing.
 _Avoid_: source file when it would confuse provenance with Source
+
+**导题后台** (Import Ops Console):
+The owner-only local web surface for watching NCK1 import progress and running the human pre-ship QA stop. It is separate from the consumer website runtime and is not a revival of website import UI; agents produce folder artifacts, and this console reads them. Content ship to production is not a console button: after QA, the owner must explicitly tell an agent to run the existing content-push script.
+_Avoid_: 管理后台 when a generic admin/ops surface is meant; Import Console as the sole English product name (Chinese name is canonical); treating QA-pass as automatic production push
+
+**AI Answer Transcription Check**:
+An agent-only pass that compares transcribed / split `answerKey` (and analysis correct-option labels) against the source answer markings. It never invents answers by solving items and never replaces the human pre-ship QA stop.
+_Avoid_: human answer-grid review; AI 解题; treating Analysis as the answer authority
+
+**Agent Contract**:
+The single entry document any local coding agent reads to import one NCK1 paper (`docs/import/agent-contract.md`). It names start inputs, folder probes, hard gates, retry limits, and stop/help signals. Mechanical how-to stays in the runbook/README; this contract is the agent↔导题后台 interface.
+_Avoid_: treating the runbook as the only entry; a website import API
+
+**Import Signal**:
+A small JSON receipt under `scripts/import-pipeline/papers/<paperId>/signals/` that the 导题后台 reads in addition to product artifacts. Named files: `ai-answer-check.json` (transcription check passed), `blocked.json` (hard stop with a reason code), `help-needed.json` (owner decision required, not routine pre-ship QA), `qa-accepted.json` (owner said pre-ship QA passed), `shipped.json` (local ship receipt). Local publish success is still `app/public/paper-assets/<paperId>/latest`, not process exit codes.
+_Avoid_: a parallel status database; treating `--publish` exit 0 as published
 
 **Teaching Axis** (教学轴):
 A structured, enumerable search dimension bound to ONE question type — capturing what
@@ -228,7 +256,7 @@ _Avoid_: user account, live review link, public vocabulary program
 - A **Question** can have zero or more **Options**.
 - A cloze **Question Group** contains many **Cloze Blanks**; each **Cloze Blank** maps one to one to one **Question**.
 - An **Analysis** attaches per **Question** / **Cloze Blank**, or to a **Writing Task**; it is never the answer authority.
-- A **Writing Analysis** attaches to a **Writing Task** at group level, with no **Question** reference; it carries one **Model Answer** and its **Highlight Expressions**.
+- A **Writing Analysis** attaches to a **Writing Task** at group level, with no **Question** reference. Application carries a **Model Answer**, **Review Card**, and optional **Official Model Answer**. New continuation carries **Narrative Continuation Analysis** plus a **Model Answer**.
 - A **Tag** can attach to a **Passage**, **Question Group**, or **Question**.
 - An **AI Tag Suggestion** targets one **Passage**, **Question Group**, or **Question** and becomes a **Tag** only after teacher confirmation.
 - A **Draft Paper** contains many **Draft Paper Items**.

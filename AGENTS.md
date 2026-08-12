@@ -69,7 +69,7 @@ test state.
   `docs/product/exam-paper-format-standards.md`.
 - The backend import pipeline produces canonical paper data; the website
   consumes it. Do not restore website import UI. Paper import starts at
-  `docs/import/agent-runbook.md` and follows
+  `docs/import/agent-contract.md` and follows
   `docs/product/nck1-paper-standard.md`.
 - Open Design is for prototypes; production UI belongs under `app/`.
 

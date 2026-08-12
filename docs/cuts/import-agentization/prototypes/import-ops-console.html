@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>导题后台 · 状态原型（抛弃式）</title>
+<style>
+  :root {
+    --bg: #F6F6F4; --surface: #fff; --surface2: #EDEDEA;
+    --ink: #1E1E1C; --muted: #6A6A64; --line: #D8D8D2; --line-soft: #E8E8E4;
+    --teal: #2C6E56; --teal-deep: #1E4A3A; --teal-50: #EAF1ED; --teal-100: #CFE4DA;
+    --danger: #B42318; --danger-bg: #FDECEC; --warn: #8A5A12; --warn-bg: #F8EEDC;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 14px/1.55 -apple-system, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 28px 20px 80px; }
+  .proto-flag {
+    display: inline-block; font-size: 11px; letter-spacing: .04em; font-weight: 700;
+    color: var(--warn); background: var(--warn-bg); border-radius: 999px; padding: 3px 10px;
+  }
+  h1 { font-size: 22px; margin: 10px 0 6px; }
+  .lede { color: var(--muted); max-width: 46em; margin: 0 0 22px; }
+  .grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 16px; align-items: start; }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--surface); border: 1px solid var(--line-soft); border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .card h2 { font-size: 13px; margin: 0 0 12px; letter-spacing: .04em; color: var(--muted); font-weight: 700; }
+  .home-row {
+    display: flex; justify-content: space-between; gap: 12px; align-items: baseline;
+    padding: 10px 0; border-bottom: 1px solid var(--line-soft); cursor: pointer;
+  }
+  .home-row:last-child { border-bottom: 0; }
+  .home-row:hover .pid { color: var(--teal-deep); }
+  .pid { font-weight: 700; }
+  .meta { font-size: 12.5px; color: var(--muted); }
+  .pill {
+    font-size: 11.5px; font-weight: 700; border-radius: 999px; padding: 2px 8px;
+    background: var(--surface2); color: var(--muted); white-space: nowrap;
+  }
+  .pill.qa { background: var(--teal-50); color: var(--teal-deep); }
+  .pill.fail { background: var(--danger-bg); color: var(--danger); }
+  .pill.ship { background: #E8F0EA; color: #215C3A; }
+  .pill.ready { background: #EEF2FF; color: #3730A3; }
+  .empty { color: var(--muted); font-size: 13px; padding: 8px 0; }
+  .detail h3 { margin: 0 0 4px; font-size: 18px; }
+  .probes { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; margin: 12px 0; font-size: 13px; }
+  .ok { color: var(--teal-deep); }
+  .no { color: var(--muted); }
+  .qa-box, .ship-box {
+    background: var(--surface2); border-radius: 10px; padding: 12px 14px; margin-top: 12px;
+  }
+  .qa-box h4, .ship-box h4 { margin: 0 0 8px; font-size: 13px; }
+  .links { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+  .ghost {
+    border: 1px solid var(--line); background: #fff; border-radius: 8px;
+    padding: 7px 11px; font-size: 12.5px; color: var(--ink); text-decoration: none;
+  }
+  .say {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12.5px; background: #fff; border: 1px dashed var(--line);
+    border-radius: 8px; padding: 8px 10px; margin: 8px 0 0;
+  }
+  .flash {
+    min-height: 1.4em; font-size: 13px; color: var(--teal-deep); margin: 8px 0 0;
+  }
+  .flash.bad { color: var(--danger); }
+  .btns { display: flex; flex-wrap: wrap; gap: 8px; }
+  button {
+    font: 600 12.5px/1 -apple-system, "PingFang SC", sans-serif;
+    border-radius: 8px; padding: 9px 12px; cursor: pointer;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  button.primary { background: var(--teal); border-color: var(--teal); color: #fff; }
+  button:disabled { opacity: .4; cursor: default; }
+  .tabs { display: flex; gap: 6px; flex-wrap: wrap; margin: 0 0 10px; }
+  .tabs button[aria-selected="true"] { background: var(--teal-50); border-color: var(--teal-100); color: var(--teal-deep); }
+  .walk p { margin: 0 0 10px; color: var(--muted); font-size: 13px; }
+  .state-panel dt { color: var(--muted); font-size: 11.5px; }
+  .state-panel dd { margin: 0 0 8px; font-weight: 650; }
+  .state-panel { display: grid; grid-template-columns: 120px 1fr; gap: 2px 10px; font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="proto-flag">PROTOTYPE · 抛弃式 · 不是生产代码</span>
+  <h1>导题后台感觉对不对？</h1>
+  <p class="lede">
+    这张票要敲的是：一卷从「源已就位」到「生产可见」，你在导题后台里到底看见什么、点什么。
+    没有人工对答案，也没有上线按钮。上线 = 你对 agent 再说一次「上线」。
+    左边是后台首页/详情；右边是当前状态和可点的走查。
+  </p>
+
+  <div class="grid">
+    <div>
+      <section class="card" id="home"></section>
+      <section class="card" id="detail" style="margin-top:16px"></section>
+    </div>
+    <div>
+      <section class="card">
+        <h2>当前状态</h2>
+        <dl class="state-panel" id="statePanel"></dl>
+        <p class="flash" id="flash"></p>
+      </section>
+      <section class="card" style="margin-top:16px">
+        <h2>自由点</h2>
+        <div class="btns" id="freePlay"></div>
+      </section>
+      <section class="card" style="margin-top:16px">
+        <h2>走查</h2>
+        <div class="tabs" id="tabs"></div>
+        <div class="walk" id="walk"></div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script>
+/** Pure status model — no DOM. Lift candidate for later console. */
+const ImportOps = (() => {
+  const LABELS = {
+    queued: '排队',
+    importing: '导入中',
+    awaiting_qa: '待 QA',
+    ready_to_ship: '可上线',
+    shipped: '已上线',
+    failed: '失败',
+  }
+
+  function blankPaper(id, name) {
+    return {
+      paperId: id,
+      paperName: name,
+      source: true,
+      config: false,
+      groups: false,
+      analyses: false,
+      writing: false,
+      aiCheck: false,
+      latest: false,
+      gatesGreen: false,
+      qaAccepted: false,
+      blocked: null,
+      shipped: false,
+    }
+  }
+
+  function statusOf(p) {
+    if (p.shipped) return 'shipped'
+    if (p.blocked) return 'failed'
+    if (p.qaAccepted && p.latest && p.aiCheck && p.gatesGreen) return 'ready_to_ship'
+    if (p.latest && p.aiCheck && p.gatesGreen) return 'awaiting_qa'
+    if (p.config) return 'importing'
+    if (p.source) return 'queued'
+    return 'queued'
+  }
+
+  function can(p, action) {
+    const s = statusOf(p)
+    switch (action) {
+      case 'agentStart': return s === 'queued' || (s === 'failed' && p.blocked?.code !== 'ship_failed')
+      case 'agentFinishLocal': return s === 'importing'
+      case 'agentBlockCanonical': return s === 'importing'
+      case 'ownerQaPass': return s === 'awaiting_qa'
+      case 'ownerSayShip': return s === 'ready_to_ship'
+      case 'agentShipOk': return s === 'ready_to_ship' && p._shipArmed
+      case 'agentShipFail': return s === 'ready_to_ship' && p._shipArmed
+      case 'ownerSayRetryShip': return s === 'failed' && p.blocked?.code === 'ship_failed'
+      default: return false
+    }
+  }
+
+  function apply(p, action) {
+    const next = { ...p, _lastIllegal: null }
+    if (!can(p, action)) {
+      next._lastIllegal = illegalMessage(p, action)
+      return next
+    }
+    switch (action) {
+      case 'agentStart':
+        return { ...next, config: true, blocked: null, shipped: false, qaAccepted: false, _shipArmed: false }
+      case 'agentFinishLocal':
+        return {
+          ...next,
+          groups: true, analyses: true, writing: true, aiCheck: true,
+          latest: true, gatesGreen: true, blocked: null,
+        }
+      case 'agentBlockCanonical':
+        return {
+          ...next,
+          groups: true, analyses: true, writing: true, aiCheck: true,
+          latest: false, gatesGreen: false,
+          blocked: { code: 'canonical_unavailable', note: '格式①还没有可用 canonical 物化路径，禁止 --publish' },
+        }
+      case 'ownerQaPass':
+        return { ...next, qaAccepted: true }
+      case 'ownerSayShip':
+        return { ...next, _shipArmed: true }
+      case 'agentShipOk':
+        return { ...next, shipped: true, blocked: null, _shipArmed: false }
+      case 'agentShipFail':
+        return {
+          ...next,
+          _shipArmed: false,
+          blocked: { code: 'ship_failed', note: 'push 中途失败；生产 eqb 可能仍停着，先拉起再重试' },
+        }
+      case 'ownerSayRetryShip':
+        return { ...next, blocked: null, shipped: false, qaAccepted: true, latest: true, aiCheck: true, gatesGreen: true, _shipArmed: false }
+      default:
+        return next
+    }
+  }
+
+  function illegalMessage(p, action) {
+    const s = statusOf(p)
+    if (action === 'ownerSayShip' && s === 'awaiting_qa') return '还没 QA，不能上线。'
+    if (action === 'agentShipOk' && !p._shipArmed) return '你还没说「上线」，agent 不能自己 push。'
+    if (action === 'ownerQaPass' && s !== 'awaiting_qa') return '现在不是待 QA。'
+    if (action === 'agentFinishLocal' && s === 'failed') return '已 blocked，不能假装本地 publish 成功。'
+    return '这一步现在不合法。'
+  }
+
+  function homeLists(papers) {
+    const rows = papers.map((p) => ({ ...p, status: statusOf(p) }))
+    return {
+      awaitingQa: rows.filter((p) => p.status === 'awaiting_qa'),
+      failed: rows.filter((p) => p.status === 'failed'),
+      recent: rows.slice().reverse(),
+    }
+  }
+
+  return { LABELS, blankPaper, statusOf, can, apply, homeLists }
+})()
+
+const ACTIONS = [
+  { id: 'agentStart', label: 'Agent：开始导这卷' },
+  { id: 'agentFinishLocal', label: 'Agent：本地导完（待 QA）' },
+  { id: 'agentBlockCanonical', label: 'Agent：卡在 canonical（格式①）' },
+  { id: 'ownerQaPass', label: '你：QA 通过' },
+  { id: 'ownerSayShip', label: '你对 Agent 说：上线' },
+  { id: 'agentShipOk', label: 'Agent：push 成功' },
+  { id: 'agentShipFail', label: 'Agent：push 失败' },
+  { id: 'ownerSayRetryShip', label: '你对 Agent 说：重试上线' },
+]
+
+const SCENARIOS = [
+  {
+    id: 'happy',
+    title: '顺路',
+    blurb: '源已就位 → agent 导完本地 → 你看 Screen/Print → 再说「上线」→ 生产可见。看：后台没有上线按钮。',
+    steps: ['agentStart', 'agentFinishLocal', 'ownerQaPass', 'ownerSayShip', 'agentShipOk'],
+  },
+  {
+    id: 'canonical',
+    title: '格式①卡死',
+    blurb: '像试点那样：分析都齐了，但还不能 --publish。应进失败，而不是待 QA。',
+    steps: ['agentStart', 'agentBlockCanonical'],
+  },
+  {
+    id: 'illegal-ship',
+    title: '没 QA 就想上线',
+    blurb: '导完后直接说「上线」应被拒绝。QA 通过后 agent 也不能在你开口前自己 push。',
+    steps: ['agentStart', 'agentFinishLocal', 'ownerSayShip', 'ownerQaPass', 'agentShipOk'],
+  },
+  {
+    id: 'ship-fail',
+    title: 'push 中断再重试',
+    blurb: '你已授权上线，脚本中途挂了。后台变失败；重试仍要你再说一次。',
+    steps: ['agentStart', 'agentFinishLocal', 'ownerQaPass', 'ownerSayShip', 'agentShipFail', 'ownerSayRetryShip', 'ownerSayShip', 'agentShipOk'],
+  },
+]
+
+const NAMES = {
+  'paper-pilot-2025-zj-jan': '2025 浙江 1 月（试点临时 id）',
+  'paper-2026-ii': '2026 新课标 II',
+}
+
+let papers = [
+  ImportOps.blankPaper('paper-pilot-2025-zj-jan', NAMES['paper-pilot-2025-zj-jan']),
+  ImportOps.blankPaper('paper-2026-ii', NAMES['paper-2026-ii']),
+]
+let selectedId = papers[0].paperId
+let lastChange = '打开原型。点走查或自由按钮。'
+let lastBad = false
+let scenarioId = 'happy'
+let stepIndex = 0
+
+function selected() {
+  return papers.find((p) => p.paperId === selectedId)
+}
+
+function dispatch(action) {
+  papers = papers.map((p) => {
+    if (p.paperId !== selectedId) return p
+    const next = ImportOps.apply(p, action)
+    lastBad = Boolean(next._lastIllegal)
+    lastChange = next._lastIllegal || `${NAMES[p.paperId] || p.paperId} → ${ImportOps.LABELS[ImportOps.statusOf(next)]}`
+    return next
+  })
+  render()
+}
+
+function resetAll() {
+  papers = [
+    ImportOps.blankPaper('paper-pilot-2025-zj-jan', NAMES['paper-pilot-2025-zj-jan']),
+    ImportOps.blankPaper('paper-2026-ii', NAMES['paper-2026-ii']),
+  ]
+  selectedId = papers[0].paperId
+  lastChange = '已重置。'
+  lastBad = false
+  stepIndex = 0
+  render()
+}
+
+function pillClass(status) {
+  if (status === 'awaiting_qa') return 'qa'
+  if (status === 'failed') return 'fail'
+  if (status === 'shipped') return 'ship'
+  if (status === 'ready_to_ship') return 'ready'
+  return ''
+}
+
+function renderHome() {
+  const lists = ImportOps.homeLists(papers)
+  const row = (p) => `
+    <div class="home-row" data-id="${p.paperId}">
+      <div>
+        <div class="pid">${p.paperName}</div>
+        <div class="meta">${p.paperId}</div>
+      </div>
+      <span class="pill ${pillClass(p.status)}">${ImportOps.LABELS[p.status]}</span>
+    </div>`
+  document.getElementById('home').innerHTML = `
+    <h2>首页 · 待办优先</h2>
+    <div class="meta" style="margin-bottom:8px">待 QA</div>
+    ${lists.awaitingQa.length ? lists.awaitingQa.map(row).join('') : '<div class="empty">没有等你看的卷</div>'}
+    <div class="meta" style="margin:12px 0 8px">失败</div>
+    ${lists.failed.length ? lists.failed.map(row).join('') : '<div class="empty">没有失败卷</div>'}
+    <div class="meta" style="margin:12px 0 8px">最近导入</div>
+    ${lists.recent.map(row).join('')}
+  `
+  document.querySelectorAll('#home .home-row').forEach((el) => {
+    el.onclick = () => { selectedId = el.dataset.id; lastChange = `打开 ${selectedId}`; lastBad = false; render() }
+  })
+}
+
+function probe(label, on) {
+  return `<div class="${on ? 'ok' : 'no'}">${on ? '●' : '○'} ${label}</div>`
+}
+
+function renderDetail() {
+  const p = selected()
+  const s = ImportOps.statusOf(p)
+  const qaReady = s === 'awaiting_qa' || s === 'ready_to_ship' || s === 'shipped'
+  document.getElementById('detail').innerHTML = `
+    <div class="detail">
+      <h3>${p.paperName}</h3>
+      <div class="meta">${p.paperId} · <span class="pill ${pillClass(s)}">${ImportOps.LABELS[s]}</span></div>
+      <div class="probes">
+        ${probe('源已就位', p.source)}
+        ${probe('config.json', p.config)}
+        ${probe('切卷 + 7 组分析', p.groups && p.analyses)}
+        ${probe('写作分析', p.writing)}
+        ${probe('AI 答案复核', p.aiCheck)}
+        ${probe('本地 latest', p.latest)}
+        ${probe('门禁绿灯', p.gatesGreen)}
+        ${probe('你已 QA', p.qaAccepted)}
+      </div>
+      ${p.blocked ? `<div class="qa-box"><h4>失败原因</h4><div>${p.blocked.code}</div><div class="meta">${p.blocked.note}</div></div>` : ''}
+      <div class="qa-box">
+        <h4>上线前 QA</h4>
+        <p class="meta" style="margin:0 0 8px">看 Screen 预览和 Print；门禁一行绿灯。不对答案表。分析不设必过抽检。</p>
+        <div class="links">
+          <span class="ghost">Screen 预览</span>
+          <span class="ghost">Student Print</span>
+          <span class="ghost">Teacher Print</span>
+          <span class="ghost">${p.gatesGreen ? '门禁全绿' : '门禁未绿'}</span>
+        </div>
+        ${s === 'awaiting_qa' ? '<p class="meta" style="margin:8px 0 0">你在这一页点「QA 通过」（走查右侧），不是上线。</p>' : ''}
+      </div>
+      <div class="ship-box">
+        <h4>上线</h4>
+        <p class="meta" style="margin:0">这里没有按钮。可上线之后，对 agent 说下面这句。</p>
+        <div class="say">上线 ${p.paperId}</div>
+        ${p._shipArmed && s === 'ready_to_ship' ? '<p class="meta" style="margin:8px 0 0">已授权。Agent 正在（或即将）跑 pull-run-push.mjs push · 整库替换。</p>' : ''}
+        ${s === 'shipped' ? '<p class="ok" style="margin:8px 0 0">已上线（本机 ship 收据）。</p>' : ''}
+      </div>
+    </div>
+  `
+}
+
+function renderState() {
+  const p = selected()
+  const s = ImportOps.statusOf(p)
+  document.getElementById('statePanel').innerHTML = `
+    <dt>打开的卷</dt><dd>${p.paperId}</dd>
+    <dt>状态</dt><dd>${ImportOps.LABELS[s]}</dd>
+    <dt>你已开口上线</dt><dd>${p._shipArmed ? '是' : '否'}</dd>
+    <dt>blocked</dt><dd>${p.blocked ? p.blocked.code : '无'}</dd>
+  `
+  const flash = document.getElementById('flash')
+  flash.textContent = lastChange
+  flash.className = 'flash' + (lastBad ? ' bad' : '')
+}
+
+function renderFree() {
+  const p = selected()
+  document.getElementById('freePlay').innerHTML = ACTIONS.map((a) => {
+    const ok = ImportOps.can(p, a.id)
+    return `<button ${ok ? '' : 'disabled'} data-act="${a.id}">${a.label}</button>`
+  }).join('') + '<button data-act="reset">重置全部</button>'
+  document.querySelectorAll('#freePlay button').forEach((btn) => {
+    btn.onclick = () => {
+      if (btn.dataset.act === 'reset') resetAll()
+      else dispatch(btn.dataset.act)
+    }
+  })
+}
+
+function renderWalk() {
+  document.getElementById('tabs').innerHTML = SCENARIOS.map((sc) =>
+    `<button aria-selected="${sc.id === scenarioId}" data-sc="${sc.id}">${sc.title}</button>`
+  ).join('')
+  document.querySelectorAll('#tabs button').forEach((btn) => {
+    btn.onclick = () => {
+      scenarioId = btn.dataset.sc
+      resetAll()
+      lastChange = `开始走查：${SCENARIOS.find((s) => s.id === scenarioId).title}`
+      render()
+    }
+  })
+  const sc = SCENARIOS.find((s) => s.id === scenarioId)
+  const next = sc.steps[stepIndex]
+  const nextLabel = next ? ACTIONS.find((a) => a.id === next).label : '走查结束'
+  document.getElementById('walk').innerHTML = `
+    <p>${sc.blurb}</p>
+    <p>第 ${Math.min(stepIndex + 1, sc.steps.length)} / ${sc.steps.length} 步</p>
+    <div class="btns">
+      <button class="primary" id="walkNext" ${next ? '' : 'disabled'}>${nextLabel}</button>
+    </div>
+  `
+  const walkNext = document.getElementById('walkNext')
+  if (walkNext && next) {
+    walkNext.onclick = () => {
+      dispatch(next)
+      stepIndex += 1
+      render()
+    }
+  }
+}
+
+function render() {
+  renderHome()
+  renderDetail()
+  renderState()
+  renderFree()
+  renderWalk()
+}
+
+render()
+</script>
+</body>
+</html>

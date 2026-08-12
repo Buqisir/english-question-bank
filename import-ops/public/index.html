@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>导题后台</title>
+<style>
+  :root {
+    --bg: #F6F6F4; --surface: #fff; --surface2: #EDEDEA;
+    --ink: #1E1E1C; --muted: #6A6A64; --line: #D8D8D2; --line-soft: #E8E8E4;
+    --teal: #2C6E56; --teal-deep: #1E4A3A; --teal-50: #EAF1ED; --teal-100: #CFE4DA;
+    --danger: #B42318; --danger-bg: #FDECEC; --warn: #8A5A12; --warn-bg: #F8EEDC;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 14px/1.55 -apple-system, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 28px 20px 80px; }
+  .flag {
+    display: inline-block; font-size: 11px; letter-spacing: .04em; font-weight: 700;
+    color: var(--teal-deep); background: var(--teal-50); border-radius: 999px; padding: 3px 10px;
+  }
+  h1 { font-size: 22px; margin: 10px 0 6px; }
+  .lede { color: var(--muted); max-width: 46em; margin: 0 0 22px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--line-soft); border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .card h2 { font-size: 13px; margin: 0 0 12px; letter-spacing: .04em; color: var(--muted); font-weight: 700; }
+  .home-row {
+    display: flex; justify-content: space-between; gap: 12px; align-items: baseline;
+    width: 100%; padding: 10px 0; border: 0; border-bottom: 1px solid var(--line-soft);
+    background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer;
+  }
+  .home-row:last-child { border-bottom: 0; }
+  .home-row:hover .pid { color: var(--teal-deep); }
+  .pid { font-weight: 700; }
+  .meta { font-size: 12.5px; color: var(--muted); }
+  .pill {
+    font-size: 11.5px; font-weight: 700; border-radius: 999px; padding: 2px 8px;
+    background: var(--surface2); color: var(--muted); white-space: nowrap;
+  }
+  .pill.qa { background: var(--teal-50); color: var(--teal-deep); }
+  .pill.fail { background: var(--danger-bg); color: var(--danger); }
+  .pill.ship { background: #E8F0EA; color: #215C3A; }
+  .pill.ready { background: #EEF2FF; color: #3730A3; }
+  .empty { color: var(--muted); font-size: 13px; padding: 8px 0; }
+  .detail h3 { margin: 0 0 4px; font-size: 18px; }
+  .probes { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; margin: 12px 0; font-size: 13px; }
+  .ok { color: var(--teal-deep); }
+  .no { color: var(--muted); }
+  .qa-box, .ship-box {
+    background: var(--surface2); border-radius: 10px; padding: 12px 14px; margin-top: 12px;
+  }
+  .qa-box h4, .ship-box h4 { margin: 0 0 8px; font-size: 13px; }
+  .links { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+  .ghost {
+    border: 1px solid var(--line); background: #fff; border-radius: 8px;
+    padding: 7px 11px; font-size: 12.5px; color: var(--ink); text-decoration: none;
+  }
+  .ghost[aria-disabled="true"] { opacity: .4; pointer-events: none; }
+  .say {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12.5px; background: #fff; border: 1px dashed var(--line);
+    border-radius: 8px; padding: 8px 10px; margin: 8px 0 0;
+  }
+  .err { color: var(--danger); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="flag">本机只读 · 无生产按钮</span>
+  <h1>导题后台</h1>
+  <p class="lede">只读文件夹看进度。待 QA 时打开 Screen / Print。上线要对 agent 另说一句，这里没有按钮。</p>
+  <section class="card" id="home"></section>
+  <section class="card" id="detail" style="margin-top:16px"></section>
+</div>
+<script>
+const LABELS = {
+  queued: '排队', importing: '导入中', awaiting_qa: '待 QA',
+  ready_to_ship: '可上线', shipped: '已上线', failed: '失败',
+}
+let selectedId = null
+let homeData = null
+let detailData = null
+
+function pillClass(status) {
+  if (status === 'awaiting_qa') return 'qa'
+  if (status === 'failed') return 'fail'
+  if (status === 'shipped') return 'ship'
+  if (status === 'ready_to_ship') return 'ready'
+  return ''
+}
+
+function probe(label, on) {
+  return `<div class="${on ? 'ok' : 'no'}">${on ? '●' : '○'} ${label}</div>`
+}
+
+function row(p) {
+  return `
+    <button type="button" class="home-row" data-id="${p.paperId}">
+      <div>
+        <div class="pid">${p.paperName}</div>
+        <div class="meta">${p.paperId}</div>
+      </div>
+      <span class="pill ${pillClass(p.status)}">${p.statusLabel || LABELS[p.status]}</span>
+    </button>`
+}
+
+function renderHome() {
+  const lists = homeData?.lists || { awaitingQa: [], failed: [], recent: [] }
+  document.getElementById('home').innerHTML = `
+    <h2>首页 · 待办优先</h2>
+    <div class="meta" style="margin-bottom:8px">待 QA</div>
+    ${lists.awaitingQa.length ? lists.awaitingQa.map(row).join('') : '<div class="empty">没有等你看的卷</div>'}
+    <div class="meta" style="margin:12px 0 8px">失败</div>
+    ${lists.failed.length ? lists.failed.map(row).join('') : '<div class="empty">没有失败卷</div>'}
+    <div class="meta" style="margin:12px 0 8px">最近导入</div>
+    ${lists.recent.length ? lists.recent.map(row).join('') : '<div class="empty">没有进行中的导入</div>'}
+  `
+  document.querySelectorAll('#home .home-row').forEach((el) => {
+    el.onclick = () => { selectedId = el.dataset.id; loadDetail() }
+  })
+}
+
+function ghost(label, href) {
+  if (!href) return `<span class="ghost" aria-disabled="true">${label}</span>`
+  return `<a class="ghost" href="${href}" target="_blank" rel="noreferrer">${label}</a>`
+}
+
+function renderDetail() {
+  const el = document.getElementById('detail')
+  if (!selectedId) {
+    el.innerHTML = '<h2>详情</h2><div class="empty">点左边一卷看探针和 QA 入口。</div>'
+    return
+  }
+  if (!detailData) {
+    el.innerHTML = '<h2>详情</h2><div class="empty">读取中…</div>'
+    return
+  }
+  const p = detailData.paper
+  const qa = detailData.qa
+  const s = p.status
+  el.innerHTML = `
+    <div class="detail">
+      <h3>${p.paperName}</h3>
+      <div class="meta">${p.paperId} · <span class="pill ${pillClass(s)}">${p.statusLabel}</span></div>
+      <div class="probes">
+        ${probe('源已就位', p.source)}
+        ${probe('config.json', p.config)}
+        ${probe('切卷 + 7 组分析', p.groups && p.analyses)}
+        ${probe('AI 答案复核', p.aiCheck)}
+        ${probe('本地 latest', p.latest)}
+        ${probe('门禁绿灯', p.gatesGreen)}
+        ${probe('你已 QA', p.qaAccepted)}
+        ${probe('已上线收据', p.shipped)}
+      </div>
+      ${p.helpNeeded ? `<div class="qa-box"><h4>要人裁决</h4><div>${p.helpNeeded.question || ''}</div></div>` : ''}
+      ${p.blocked ? `<div class="qa-box"><h4>失败原因</h4><div class="err">${p.blocked.code || ''}</div><div class="meta">${p.blocked.note || ''}</div></div>` : ''}
+      <div class="qa-box">
+        <h4>上线前 QA</h4>
+        <p class="meta" style="margin:0 0 8px">看 Screen 预览和 Print；门禁一行绿灯。不对答案表。分析不设必过抽检。</p>
+        <div class="links">
+          ${ghost('Screen 预览', qa.screen)}
+          ${ghost('Student Print', qa.studentPrint)}
+          ${ghost('Teacher Print', qa.teacherPrint)}
+          <span class="ghost" aria-disabled="true">${p.gatesGreen ? '门禁全绿' : '门禁未绿'}</span>
+        </div>
+        <p class="meta" style="margin:8px 0 0">${qa.note || ''}</p>
+      </div>
+      <div class="ship-box">
+        <h4>上线</h4>
+        <p class="meta" style="margin:0">这里没有按钮。可上线之后，对 agent 说下面这句。</p>
+        <div class="say">${detailData.shipSay}</div>
+      </div>
+    </div>
+  `
+}
+
+async function loadHome() {
+  const res = await fetch('/api/papers')
+  homeData = await res.json()
+  if (!selectedId && homeData.papers[0]) selectedId = homeData.papers[0].paperId
+  renderHome()
+}
+
+async function loadDetail() {
+  if (!selectedId) { renderDetail(); return }
+  const res = await fetch('/api/papers/' + encodeURIComponent(selectedId))
+  if (!res.ok) { detailData = null; renderDetail(); return }
+  detailData = await res.json()
+  renderDetail()
+}
+
+async function tick() {
+  try {
+    await loadHome()
+    await loadDetail()
+  } catch (err) {
+    document.getElementById('home').innerHTML = `<h2>导题后台</h2><p class="err">${err.message}</p>`
+  }
+}
+
+tick()
+setInterval(tick, 4000)
+</script>
+</body>
+</html>

@@ -1,5 +1,9 @@
 # Agent Import Runbook (NCK1 pipeline)
 
+**Agent entry:** `docs/import/agent-contract.md` is the unique start document
+for any local coding agent. This runbook is the mechanical how-to that
+contract chains to. Do not start from this file alone.
+
 Self-contained execution contract for importing one Gaokao English paper into
 the local question bank, from raw source files to publish + backfill +
 ledger + verify. An agent following this document needs no other history of

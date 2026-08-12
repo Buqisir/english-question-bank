@@ -6,10 +6,9 @@ Claude-driven、确定性切卷 + AI 解析 + 原子发布的离线工具。**�
 
 ## Agent 执行入口
 
-任何 agent 要导一套新卷,先读 `docs/import/agent-runbook.md`(自足的执行契约,
-含解析扇出派发模板)——本 README 只是它引用的机械工序参考,不重复讲工序。
-数据契约(结构/题号/分值/答案红线/听力与图文原料条款)权威见
-`docs/product/nck1-paper-standard.md`。
+任何 agent 要导一套新卷,先读 `docs/import/agent-contract.md`（唯一进场）。
+机械 how-to 见 `docs/import/agent-runbook.md`；本 README 只是它引用的工序
+参考,不重复讲工序。数据契约权威见 `docs/product/nck1-paper-standard.md`。
 
 ## 已导入(13 套,paperId `paper-<year>-{i,ii}`)
 

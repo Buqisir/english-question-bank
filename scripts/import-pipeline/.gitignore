@@ -3,6 +3,8 @@ papers/*/groups.json
 papers/*/full.txt
 papers/*/analyze-*
 papers/*/analysis-*
+# Import-ops receipts (agent ↔ 导题后台); not product artifacts.
+papers/*/signals/
 # Source DOCX is off-repo material, never tracked.
 papers/*/source.docx
 papers/*/*.docx
