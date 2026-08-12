@@ -117,7 +117,7 @@ The legacy shallow display field on historical continuation Writing Analyses: on
 _Avoid_: using it as the new continuation analysis contract; treating its theme or paragraph notes as independently evidenced constraints
 
 **Narrative Continuation Analysis** (记叙型读后续写解析):
-The reviewed, source-grounded interpretation of one narrative continuation Writing Task (`continuationAnalysis` / `continuation-analysis-v1`): story understanding, hard/soft/open continuation constraints, causal character development, source-aligned language guidance, and one two-paragraph response blueprint. Product authority: `docs/product/continuation-writing-analysis-contract-v1.md` (currently in worktree `wt-continuation-analysis-research-20260809`, not yet on `main`). It supports later Model Answer generation but is neither an answer key nor a score prediction. Expository or argumentative continuation is out of V1 and must stop.
+The reviewed, source-grounded interpretation of one narrative continuation Writing Task (`continuationAnalysis` / `continuation-analysis-v1`): story understanding, hard/soft/open continuation constraints, causal character development, source-aligned language guidance, and one two-paragraph response blueprint. Product authority: `docs/product/continuation-writing-analysis-contract-v1.md`. It supports later Model Answer generation but is neither an answer key nor a score prediction. Expository or argumentative continuation is out of V1 and must stop.
 _Avoid_: Continuation Design; universal story template; automatic scoring rubric
 
 **Tag**:
@@ -257,6 +257,7 @@ _Avoid_: user account, live review link, public vocabulary program
 - A cloze **Question Group** contains many **Cloze Blanks**; each **Cloze Blank** maps one to one to one **Question**.
 - An **Analysis** attaches per **Question** / **Cloze Blank**, or to a **Writing Task**; it is never the answer authority.
 - A **Writing Analysis** attaches to a **Writing Task** at group level, with no **Question** reference. Application carries a **Model Answer**, **Review Card**, and optional **Official Model Answer**. New continuation carries **Narrative Continuation Analysis** plus a **Model Answer**.
+- A **Narrative Continuation Analysis** derives only from one complete narrative continuation **Writing Task** and preserves source constraints separately from open author choices.
 - A **Tag** can attach to a **Passage**, **Question Group**, or **Question**.
 - An **AI Tag Suggestion** targets one **Passage**, **Question Group**, or **Question** and becomes a **Tag** only after teacher confirmation.
 - A **Draft Paper** contains many **Draft Paper Items**.

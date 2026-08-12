@@ -1,0 +1,452 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "continuation-analysis-v1.schema.json",
+  "title": "Narrative Continuation Analysis V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "storyUnderstanding",
+    "continuationContract",
+    "narrativeDevelopment",
+    "languageAlignment",
+    "paragraphBlueprint"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "continuation-analysis-v1" },
+    "storyUnderstanding": { "$ref": "#/$defs/storyUnderstanding" },
+    "continuationContract": { "$ref": "#/$defs/continuationContract" },
+    "narrativeDevelopment": { "$ref": "#/$defs/narrativeDevelopment" },
+    "languageAlignment": { "$ref": "#/$defs/languageAlignment" },
+    "paragraphBlueprint": { "$ref": "#/$defs/paragraphBlueprint" }
+  },
+  "$defs": {
+    "nonBlankString": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[\\s\\S]*\\S[\\s\\S]*$"
+    },
+    "stringArray": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/nonBlankString" }
+    },
+    "nonEmptyStringArray": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/nonBlankString" }
+    },
+    "evidenceRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "excerpt"],
+      "properties": {
+        "source": {
+          "enum": [
+            "instruction",
+            "material",
+            "paragraph1Starter",
+            "paragraph2Starter"
+          ]
+        },
+        "excerpt": { "$ref": "#/$defs/nonBlankString" }
+      }
+    },
+    "evidenceArray": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/evidenceRef" }
+    },
+    "groundedStatement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["statement", "evidence"],
+      "properties": {
+        "statement": { "$ref": "#/$defs/nonBlankString" },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/evidenceRef" }
+        }
+      }
+    },
+    "groundedStatementArray": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/groundedStatement" }
+    },
+    "nonEmptyGroundedStatementArray": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/groundedStatement" }
+    },
+    "continuationConstraint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "statement", "evidence"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "statement": { "$ref": "#/$defs/nonBlankString" },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/evidenceRef" }
+        }
+      }
+    },
+    "constraintArray": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/continuationConstraint" }
+    },
+    "storyUnderstanding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "centralSituation",
+        "sourceEndState",
+        "narrativePerspective",
+        "timeAndPlaceFrame",
+        "characters",
+        "relationships",
+        "causalChain",
+        "unresolvedProblem",
+        "usableClues",
+        "meaningDirection",
+        "sourceStyle"
+      ],
+      "properties": {
+        "centralSituation": { "$ref": "#/$defs/groundedStatement" },
+        "sourceEndState": { "$ref": "#/$defs/groundedStatement" },
+        "narrativePerspective": { "$ref": "#/$defs/groundedStatement" },
+        "timeAndPlaceFrame": { "$ref": "#/$defs/groundedStatement" },
+        "characters": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "role", "establishedTraits", "motivations", "currentState"],
+            "properties": {
+              "name": { "$ref": "#/$defs/nonBlankString" },
+              "role": { "$ref": "#/$defs/nonBlankString" },
+              "establishedTraits": { "$ref": "#/$defs/groundedStatementArray" },
+              "motivations": { "$ref": "#/$defs/groundedStatementArray" },
+              "currentState": { "$ref": "#/$defs/groundedStatement" }
+            }
+          }
+        },
+        "relationships": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["participants", "currentRelation"],
+            "properties": {
+              "participants": { "$ref": "#/$defs/stringPair" },
+              "currentRelation": { "$ref": "#/$defs/groundedStatement" }
+            }
+          }
+        },
+        "causalChain": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["cause", "effect"],
+            "properties": {
+              "cause": { "$ref": "#/$defs/groundedStatement" },
+              "effect": { "$ref": "#/$defs/groundedStatement" }
+            }
+          }
+        },
+        "unresolvedProblem": { "$ref": "#/$defs/groundedStatement" },
+        "usableClues": { "$ref": "#/$defs/groundedStatementArray" },
+        "meaningDirection": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["statement", "confidence", "evidence"],
+          "properties": {
+            "statement": { "$ref": "#/$defs/nonBlankString" },
+            "confidence": { "enum": ["explicit", "stronglyInferred", "open"] },
+            "evidence": { "$ref": "#/$defs/evidenceArray" }
+          }
+        },
+        "sourceStyle": { "$ref": "#/$defs/groundedStatement" }
+      }
+    },
+    "paragraphContract1": {
+      "$ref": "#/$defs/paragraphContractBase"
+    },
+    "paragraphContract2": {
+      "$ref": "#/$defs/paragraphContractBase"
+    },
+    "paragraphContractBase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "paragraphIndex",
+        "entryState",
+        "starterFunction",
+        "requiredMoves",
+        "requiredExitState",
+        "supportedOptions"
+      ],
+      "properties": {
+        "paragraphIndex": { "enum": [1, 2] },
+        "entryState": { "$ref": "#/$defs/groundedStatement" },
+        "starterFunction": { "$ref": "#/$defs/groundedStatement" },
+        "requiredMoves": { "$ref": "#/$defs/constraintArray" },
+        "requiredExitState": { "$ref": "#/$defs/constraintArray" },
+        "supportedOptions": { "$ref": "#/$defs/groundedStatementArray" }
+      }
+    },
+    "continuationContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "hardConstraints",
+        "softAffordances",
+        "openChoices",
+        "forbiddenContradictions",
+        "paragraphs",
+        "closureRequirements"
+      ],
+      "properties": {
+        "hardConstraints": { "$ref": "#/$defs/constraintArray" },
+        "softAffordances": { "$ref": "#/$defs/groundedStatementArray" },
+        "openChoices": { "$ref": "#/$defs/stringArray" },
+        "forbiddenContradictions": { "$ref": "#/$defs/constraintArray" },
+        "paragraphs": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "allOf": [
+                { "$ref": "#/$defs/paragraphContract1" },
+                { "properties": { "paragraphIndex": { "const": 1 } } }
+              ]
+            },
+            {
+              "allOf": [
+                { "$ref": "#/$defs/paragraphContract2" },
+                { "properties": { "paragraphIndex": { "const": 2 } } }
+              ]
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2,
+          "items": false
+        },
+        "closureRequirements": { "$ref": "#/$defs/constraintArray" }
+      }
+    },
+    "narrativeDevelopment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "coreTension",
+        "drivingMotivations",
+        "requiredTurningPoints",
+        "eventChain",
+        "emotionLogic",
+        "relationshipMovement",
+        "interactionMoves",
+        "cluePayoffs",
+        "endingState"
+      ],
+      "properties": {
+        "coreTension": { "$ref": "#/$defs/groundedStatement" },
+        "drivingMotivations": { "$ref": "#/$defs/nonEmptyGroundedStatementArray" },
+        "requiredTurningPoints": { "$ref": "#/$defs/nonEmptyGroundedStatementArray" },
+        "eventChain": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["cause", "event", "immediateEffect", "evidence"],
+            "properties": {
+              "cause": { "$ref": "#/$defs/nonBlankString" },
+              "event": { "$ref": "#/$defs/nonBlankString" },
+              "immediateEffect": { "$ref": "#/$defs/nonBlankString" },
+              "evidence": { "$ref": "#/$defs/evidenceArray" }
+            }
+          }
+        },
+        "emotionLogic": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["trigger", "internalResponse", "visibleAction"],
+            "properties": {
+              "trigger": { "$ref": "#/$defs/nonBlankString" },
+              "internalResponse": { "$ref": "#/$defs/nonBlankString" },
+              "visibleAction": { "$ref": "#/$defs/nonBlankString" }
+            }
+          }
+        },
+        "relationshipMovement": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["participants", "from", "to", "cause"],
+            "properties": {
+              "participants": { "$ref": "#/$defs/stringPair" },
+              "from": { "$ref": "#/$defs/nonBlankString" },
+              "to": { "$ref": "#/$defs/nonBlankString" },
+              "cause": { "$ref": "#/$defs/nonBlankString" }
+            }
+          }
+        },
+        "interactionMoves": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["speaker", "listener", "purpose", "relationshipNeed", "expectedEffect", "evidence"],
+            "properties": {
+              "speaker": { "$ref": "#/$defs/nonBlankString" },
+              "listener": { "$ref": "#/$defs/nonBlankString" },
+              "purpose": { "$ref": "#/$defs/nonBlankString" },
+              "relationshipNeed": { "$ref": "#/$defs/nonBlankString" },
+              "expectedEffect": { "$ref": "#/$defs/nonBlankString" },
+              "evidence": { "$ref": "#/$defs/evidenceArray" }
+            }
+          }
+        },
+        "cluePayoffs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["clue", "payoff"],
+            "properties": {
+              "clue": { "$ref": "#/$defs/evidenceRef" },
+              "payoff": { "$ref": "#/$defs/nonBlankString" }
+            }
+          }
+        },
+        "endingState": { "$ref": "#/$defs/nonBlankString" }
+      }
+    },
+    "languageAlignment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "personAndPerspective",
+        "baseTense",
+        "licensedTenseShifts",
+        "narrativeDistanceAndRegister",
+        "sourceStyleContinuity",
+        "cohesionPlan",
+        "dialoguePolicy",
+        "descriptionPriorities",
+        "functionLedLanguage",
+        "languageRisks"
+      ],
+      "properties": {
+        "personAndPerspective": { "$ref": "#/$defs/nonBlankString" },
+        "baseTense": { "$ref": "#/$defs/nonBlankString" },
+        "licensedTenseShifts": { "$ref": "#/$defs/stringArray" },
+        "narrativeDistanceAndRegister": { "$ref": "#/$defs/nonBlankString" },
+        "sourceStyleContinuity": { "$ref": "#/$defs/nonBlankString" },
+        "cohesionPlan": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["relation", "use"],
+            "properties": {
+              "relation": { "enum": ["sequence", "cause", "contrast", "reference", "echo"] },
+              "use": { "$ref": "#/$defs/nonBlankString" }
+            }
+          }
+        },
+        "dialoguePolicy": { "$ref": "#/$defs/nonBlankString" },
+        "descriptionPriorities": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "functionLedLanguage": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "languageRisks": { "$ref": "#/$defs/nonEmptyStringArray" }
+      }
+    },
+    "paragraphBlueprintItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "paragraphIndex",
+        "narrativeFunction",
+        "eventMoves",
+        "characterActionsAndReactions",
+        "evidenceToReuse",
+        "stateChange",
+        "bridgeToNext"
+      ],
+      "properties": {
+        "paragraphIndex": { "enum": [1, 2] },
+        "narrativeFunction": { "$ref": "#/$defs/nonBlankString" },
+        "eventMoves": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "characterActionsAndReactions": { "$ref": "#/$defs/nonEmptyStringArray" },
+        "evidenceToReuse": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/evidenceRef" }
+        },
+        "stateChange": { "$ref": "#/$defs/nonBlankString" },
+        "bridgeToNext": { "$ref": "#/$defs/nonBlankString" }
+      }
+    },
+    "paragraphBlueprint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "selectedRoute",
+        "routeRationale",
+        "paragraphs",
+        "finalEffect",
+        "validAlternativeRoutes",
+        "qualityRisks"
+      ],
+      "properties": {
+        "selectedRoute": { "$ref": "#/$defs/nonBlankString" },
+        "routeRationale": { "$ref": "#/$defs/nonEmptyGroundedStatementArray" },
+        "paragraphs": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "allOf": [
+                { "$ref": "#/$defs/paragraphBlueprintItem" },
+                { "properties": { "paragraphIndex": { "const": 1 } } }
+              ]
+            },
+            {
+              "allOf": [
+                { "$ref": "#/$defs/paragraphBlueprintItem" },
+                { "properties": { "paragraphIndex": { "const": 2 } } }
+              ]
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2,
+          "items": false
+        },
+        "finalEffect": { "$ref": "#/$defs/nonBlankString" },
+        "validAlternativeRoutes": { "$ref": "#/$defs/stringArray" },
+        "qualityRisks": { "$ref": "#/$defs/nonEmptyStringArray" }
+      }
+    },
+    "stringPair": {
+      "type": "array",
+      "prefixItems": [
+        { "$ref": "#/$defs/nonBlankString" },
+        { "$ref": "#/$defs/nonBlankString" }
+      ],
+      "minItems": 2,
+      "maxItems": 2,
+      "items": false
+    }
+  }
+}

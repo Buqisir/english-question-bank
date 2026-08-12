@@ -104,6 +104,8 @@ const registry = {
   'scripts/verify-i3-cloze-ai-import.mjs',
   'scripts/verify-i4-grammar-fill-ai-import.mjs',
   'scripts/verify-i5-writing-ai-import.mjs',
+  'scripts/verify-application-model-answer-prompt.mjs',
+  'scripts/verify-continuation-analysis-v1.mjs',
   'scripts/verify-i6-writing-render.mjs',
   'scripts/verify-i7-application-given.mjs',
   'scripts/verify-i8-cloze-analysis.mjs',
