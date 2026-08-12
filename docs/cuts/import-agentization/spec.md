@@ -8,7 +8,7 @@ Date: 2026-08-12
 ## Problem
 
 导一套 NCK1 真题今天仍要一个人盯完整条 runbook。owner 要的是：任意本机
-coding agent（以后主要跑 Grok）按一份标准契约独立导完一卷；自己只在导题
+coding agent 按一份标准契约独立导完一卷；自己只在导题
 后台做上线前 QA，再说一次「上线」，内容才到 eqbank.cc 消费端。
 
 ## User outcome

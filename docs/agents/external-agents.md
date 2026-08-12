@@ -1,9 +1,8 @@
 # External-agent rules (DORMANT / archived)
 
-> **Status: out of use.** The project currently runs as **小川 only** (one
-> Claude wearing all hats) with no external high-reasoning agent. These rules
-> are archived here, out of `AGENTS.md`'s standing instruction budget, so they
-> stop costing every session that will never use them.
+> **Status: out of use.** These rules are archived here, out of
+> `AGENTS.md`'s standing instruction budget, so they stop costing every
+> session that will never use them.
 >
 > **Re-activate** (move the relevant parts back into `AGENTS.md`, or point
 > `AGENTS.md` here) only if an external agent is reintroduced.

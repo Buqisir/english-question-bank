@@ -5,7 +5,7 @@ Status: closed
 ## Destination
 
 一份 accepted `docs/cuts/import-agentization/spec.md`：定下「导题 Agent 化」
-的完整形态——任意本地 coding agent 会话（owner 以后主要跑 Grok）都能按
+的完整形态——任意本地 coding agent 会话都能按
 标准契约独立导一卷 NCK1 试卷、产物落到约定文件夹；一个 owner-only 的本地
 **导题后台**只负责看进度和上线前 QA；owner 口头「上线」后 agent 用现有
 整库 push 把内容送到生产消费端。spec 被 owner 接受即到达目的地；后台与契约
@@ -16,9 +16,9 @@ Status: closed
 - Owner 已定方向（本图 charting 轮拷问锁定，2026-08-12）：
   - 范围先收口现有 NCK1 整卷管线（`docs/import/agent-runbook.md`），新源
     格式进雾区。
-  - **AI 分析用 agent 会话跑，不用 API**：owner 本机跑 Grok（coding agent）
+  - **AI 分析用 agent 会话跑，不用 API**：owner 本机 coding agent
     进本仓库干活，导完题产物落对应文件夹即算导题完成；不做后台直连 LLM
-    API 的方案，也不调研 Grok API 计费。
+    API 的方案，也不调研 API 计费。
   - 管理后台 = 本地 Web 管理站，与消费端网站代码/运行时分离；不是网站
     导入 UI 的复活——「后端产管线、网站只消费」边界不变。
   - 人工确认（票 05，2026-08-12）：不要人工对答案——答案随解析字段做全，
@@ -31,8 +31,6 @@ Status: closed
   - 量级：追热度的话一两百套/年——排除「每卷占一个人全程注意力」的现状。
 - 现状事实：仓库目前没有任何管理后台/admin 面，后台从零起；部署侧已有
   `scripts/deploy.sh` / `pull-run-push.mjs` / `deploy-remote.sh` 等脚本。
-- Research 子代理一律派 Cursor 的 Grok（`cursor-grok-4.5-medium`）或
-  Composer（`composer-2.5-fast`），owner 明令不派 Fable 5。
 - 每张票执行时参考 `$grilling` 与 `$domain-modeling`；原型票用 `$prototype`；
   涉及产品/视觉决定先读 `docs/steering/README.md` 相关条目；动生产需 owner
   明确授权，先读 `docs/cuts/launch-deploy/go-live-record.md`。

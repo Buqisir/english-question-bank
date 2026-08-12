@@ -349,14 +349,11 @@ is pure deterministic validation, safe to run repeatedly.
 **Done when:** console prints `[DONE] All shape gates passed.` and the BUILD
 REPORT's per-group answer strings match what you read from `answers.pdf`.
 
-## 4. AI analysis fan-out (Opus, one sub-agent per group)
+## 4. AI analysis fan-out (one sub-agent per group)
 
 Not ad hoc — this is the fixed dispatch template (per plan C1). Spawn **one
 subagent per analyzable group** (7 total: `reading-a`, `reading-b`,
-`reading-c`, `reading-d`, `seven`, `cloze`, `grammar`), each **pinned to
-Opus** (judgment-heavy: trap typing / skill tagging / facet classification
-needs the stronger model; the mechanical steps above are Sonnet-appropriate
-but this step is not).
+`reading-c`, `reading-d`, `seven`, `cloze`, `grammar`).
 
 Per-agent prompt must include, verbatim:
 

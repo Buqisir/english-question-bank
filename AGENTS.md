@@ -94,6 +94,6 @@ their established vocabulary, and flag conflicts before editing.
 - Commit messages are one line: scope plus one clear sentence.
 
 Focused supporting guidance lives in `docs/agents/testing-cadence.md`,
-`docs/agents/review-levels.md`, `docs/agents/model-routing.md`, and
+`docs/agents/review-levels.md`, and
 `docs/agents/owner-qa-handoff-template.md`. Nested `AGENTS.md` or `CLAUDE.md`
 files may add only directory-local deltas.

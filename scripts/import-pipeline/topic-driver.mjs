@@ -1,5 +1,5 @@
 /**
- * topic-driver.mjs — Claude-driven topic-label backfill for 12 新课标 真题 (108 groups).
+ * topic-driver.mjs — topic-label backfill for 12 新课标 真题 (108 groups).
  *
  * Modes:
  *   node topic-driver.mjs list
@@ -14,10 +14,10 @@
  *
  *   node topic-driver.mjs build <groupId>
  *     Print JSON.stringify(buildTopicLabelMessages(detail), null, 2).
- *     This is the prompt the operator feeds to Claude.
+ *     This is the prompt the operator feeds to the analysis session.
  *
  *   node topic-driver.mjs persist <groupId> <rawLabelsJsonPath>
- *     Read raw Claude label JSON from file, normalizeTopicLabelPayload, bindTopicLabelsToQuestionGroup.
+ *     Read raw label JSON from file, normalizeTopicLabelPayload, bindTopicLabelsToQuestionGroup.
  *     IMPORTANT: stop the API before running persist (SQLite write lock).
  *
  * Usage notes:
