@@ -6,7 +6,7 @@
 
 - 数据契约（只读，禁止改）：`docs/product/nck1-paper-standard.md`
 - 格式②（PDF 试题卷 + 独立答案 PDF）逐步 how-to：`docs/import/agent-runbook.md`
-- 格式①（DOCX 答案版）切卷 / 校验 / 打包工序：`scripts/import-pipeline/README.md` stages 1–5，以及 runbook 里与格式无关的门禁（`validate-one`、dry-run、`verify-publish-gate`、`verify-nck1`、`--publish` 纪律）
+- 格式①（DOCX 答案版）切卷 / 校验 / 打包工序：`scripts/import-pipeline/README.md` stages 1–5，以及 runbook 里与格式无关的门禁（`validate-one`、dry-run、`verify-publish-gate`、`verify-nck1`、`--publish` 纪律）。canonical 物化用 `scripts/import-pipeline/build-trusted-docx-canonical-request.mjs`，不要套用格式② PDF producer。
 
 导题后台只读本契约的文件夹探针，不另建状态库。消费端网站不导题。
 
@@ -71,7 +71,7 @@
 { "shippedAt": "<ISO-8601>", "command": "node scripts/pull-run-push.mjs push" }
 ```
 
-已知 `blocked.json` 原因码：`canonical_unavailable`（格式①在 canonical 物化修好前）、`gate_failed`（同一门禁自动修 2 次仍红）、`continuation_non_narrative`、`ship_failed`（上线失败；本切片不跑上线）。
+已知 `blocked.json` 原因码：`canonical_unavailable`（格式① producer / compile 仍 fail-closed 时）、`gate_failed`（同一门禁自动修 2 次仍红）、`continuation_non_narrative`、`ship_failed`（上线失败；本切片不跑上线）。
 
 ## 六态
 
@@ -98,12 +98,14 @@
 2. 7× `node scripts/import-pipeline/validate-one.mjs papers/<id>/config.json <key>`，key 同上。无子代理时**同一会话串行**写 7 组。禁止把别的 `paperId` 的分析 remap 当本卷交付。
 3. **AI Answer Transcription Check**（必跑，替代人对答案）：对照源标记抄写，并与解析正确项一致。禁止 AI 解题当答案（标准 §3）。通过后写 `signals/ai-answer-check.json`。
 4. 写作分析（新卷必交，见下节）。
-5. **仅格式②**：按 runbook 做 canonical 物化（`build-canonical-request.mjs` + `canonicalRequestPath`）。不要手写 Canonical Paper。
+5. **仅格式②**：按 runbook 做 canonical 物化（`build-canonical-request.mjs` + `canonicalRequestPath`）。不要手写 Canonical Paper。格式①本步跳过。
 6. Dry-run：`node scripts/import-pipeline/02-publish.mjs papers/<id>/config.json`（**禁止** `--publish`）。
 7. `node scripts/import-pipeline/verify-publish-gate.mjs <paperId>` → `"ok": true`。
 8. `node scripts/import-pipeline/verify-nck1-standard.mjs <paperId>` PRE-PUBLISH → All green。
-9. **格式① 到此必须停。禁止 `--publish`。** 即使 dry-run / publish-gate 绿，缺 canonical 时 `--publish` 仍可能 exit 0。写 `signals/blocked.json`，`code` = `canonical_unavailable`。缺口实现票：`docs/cuts/import-agentization/tickets/01-format-1-canonical-materialization.md`。**不得发明临时映射。**
-10. **仅格式②** 且 6–8 全绿：按 runbook 停本地 API → `--publish` → 重启 API → `attach-paper-assets-extras` → POST `verify-nck1` → ledger。本地成功 **只** 以 `app/public/paper-assets/<id>/latest/` 为准。
+9. **格式①** 且 6–8 全绿：跑 trusted-DOCX producer，把 `config.canonicalRequestPath` 指到写出的 `canonical-import-request.json`：
+   `node scripts/import-pipeline/build-trusted-docx-canonical-request.mjs <docxPath> --output-dir papers/<id>/canonical-evidence --expected-paper-id <paperId> --write`
+   派生身份必须与开局 `paperId` 一致（全国一卷 `paper-YYYY-i`；浙江 1 月答案版 `paper-zj-YYYY-jan`）。不要手写 Canonical Paper，不要套用格式② PDF envelope。producer / compile 仍失败 → 写 `signals/blocked.json`，`code` = `canonical_unavailable`，停。**不得发明临时映射。**
+10. 6–8 全绿且 `canonicalRequestPath` 可被 `loadCanonicalImportRequest` 加载：按 runbook 停本地 API → `--publish` → 重启 API →（格式②）`attach-paper-assets-extras` → POST `verify-nck1` → ledger。缺该 request 时不得把该卷当成已 publish。本地成功 **只** 以 `app/public/paper-assets/<id>/latest/` 为准。
 11. 本地 publish 成功后 **停**。不替人点 QA，不自动 push，不跑 `scripts/pull-run-push.mjs`。
 
 ## 停点

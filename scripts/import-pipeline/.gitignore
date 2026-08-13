@@ -8,6 +8,8 @@ papers/*/signals/
 # Source DOCX is off-repo material, never tracked.
 papers/*/source.docx
 papers/*/*.docx
+# Regenerable format ① canonical evidence (producer output).
+papers/*/canonical-evidence/
 # Backfill scratch (per-group label JSON from the Workflow fan-out) + logs.
 labels-out/
 *.log

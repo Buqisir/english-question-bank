@@ -502,10 +502,33 @@ function writingObservations(group, family, sourceByteRange, observe) {
   return []
 }
 
-function deriveNck1Identity(rawText) {
-  const title = /^\s*(\d{4})年全国高考一卷英语真题/m.exec(rawText)
-  if (!title) throw new Error('DOCX source lacks a supported NCK1 paper identity')
-  return { paperId: `paper-${title[1]}-i`, profileId: 'nck1' }
+export const NCK1_NATIONAL_VOLUME_I_TITLE =
+  /^\s*(\d{4})年全国高考一卷英语真题/m
+export const NCK1_ZHEJIANG_JANUARY_OFFICIAL_TITLE =
+  /^\s*浙江省(\d{4})年1月普通高等学校招生全国统一考试英语试卷/m
+export const NCK1_ZHEJIANG_JANUARY_ANSWER_TITLE =
+  /^\s*(\d{4})年浙江卷高考真题英语试卷[（(]1月[）)]/m
+
+/**
+ * Fail-closed NCK1 identity from immutable DOCX extracted text.
+ * National Volume I keeps the historical paper-YYYY-i id. Zhejiang January
+ * 答案版 titles that owner already treated as NCK1-semantic derive
+ * paper-zj-YYYY-jan. Unknown titles throw.
+ */
+export function deriveNck1Identity(rawText) {
+  const nationalVolumeI = NCK1_NATIONAL_VOLUME_I_TITLE.exec(rawText)
+  if (nationalVolumeI) {
+    return { paperId: `paper-${nationalVolumeI[1]}-i`, profileId: 'nck1' }
+  }
+  const zhejiangOfficial = NCK1_ZHEJIANG_JANUARY_OFFICIAL_TITLE.exec(rawText)
+  if (zhejiangOfficial) {
+    return { paperId: `paper-zj-${zhejiangOfficial[1]}-jan`, profileId: 'nck1' }
+  }
+  const zhejiangAnswer = NCK1_ZHEJIANG_JANUARY_ANSWER_TITLE.exec(rawText)
+  if (zhejiangAnswer) {
+    return { paperId: `paper-zj-${zhejiangAnswer[1]}-jan`, profileId: 'nck1' }
+  }
+  throw new Error('DOCX source lacks a supported NCK1 paper identity')
 }
 
 /**

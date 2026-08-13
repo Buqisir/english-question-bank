@@ -1,6 +1,6 @@
 # 01 — 格式① DOCX 答案版的 canonical 物化 / 身份规则
 
-Status: ready
+Status: done
 Blocked by: none（spec 执行切片第 4 片；第 1 片只建票，不在本票实现）
 Spec: `docs/cuts/import-agentization/spec.md`
 Contract: `docs/import/agent-contract.md`
@@ -27,11 +27,18 @@ Contract: `docs/import/agent-contract.md`
 
 ## Acceptance criteria
 
-- [ ] 格式①在硬门禁（split → 7× validate-one → AI Answer Transcription Check → dry-run → publish-gate → verify-nck1 PRE）绿之后，可以合法 `--publish`，并出现 `app/public/paper-assets/<id>/latest/`。
-- [ ] 身份规则覆盖契约允许的格式① NCK1 卷（含标题不是「YYYY年全国高考一卷英语真题」但 owner 已认定新课标语义的答案版），失败仍 fail-closed。
-- [ ] 物化走现有 canonical 证据 / publisher 缝，不手写 Canonical Paper，不绕 `canonicalRequestPath`。
-- [ ] 契约删除「格式①禁止 `--publish`」停点；`canonical_unavailable` 不再是格式①的默认终点。
-- [ ] 不改 `docs/product/nck1-paper-standard.md` 白名单；不把写作新合同从 `wt-continuation-analysis-research-20260809` 合入 `main`；不改消费端 `app/`。
+- [x] 格式①在硬门禁（split → 7× validate-one → AI Answer Transcription Check → dry-run → publish-gate → verify-nck1 PRE）绿之后，可以合法 `--publish`，并出现 `app/public/paper-assets/<id>/latest/`。
+- [x] 身份规则覆盖契约允许的格式① NCK1 卷（含标题不是「YYYY年全国高考一卷英语真题」但 owner 已认定新课标语义的答案版），失败仍 fail-closed。
+- [x] 物化走现有 canonical 证据 / publisher 缝，不手写 Canonical Paper，不绕 `canonicalRequestPath`。
+- [x] 契约删除「格式①禁止 `--publish`」停点；`canonical_unavailable` 不再是格式①的默认终点。
+- [x] 不改 `docs/product/nck1-paper-standard.md` 白名单；不把写作新合同从 `wt-continuation-analysis-research-20260809` 合入 `main`；不改消费端 `app/`。
+
+## Proved (slice 4)
+
+- Identity: national 一卷 `paper-YYYY-i`; Zhejiang official / answer-title `paper-zj-YYYY-jan`; unknown titles throw.
+- Producer: `scripts/import-pipeline/build-trusted-docx-canonical-request.mjs` writes a request `loadCanonicalImportRequest` can load; byte-reproducible without `--write`.
+- Isolated `latest/` via Teacher-Confirmed trusted-DOCX admission (`publishCanonicalPaperPublication` temp sqlite/assets). Publisher admits that loaded request (DOCX source asset) and does not treat a missing request as published.
+- Not proved here: a full `02-publish.mjs --publish` of a live format ① paper (needs current-gate groups/analyses). Historical `paper-2025-i` latest fails the current grammar normalization gate before package binding.
 
 ## Out of scope
 

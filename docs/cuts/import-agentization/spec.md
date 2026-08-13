@@ -44,9 +44,10 @@ coding agent 按一份标准契约独立导完一卷；自己只在导题
 - 同一 `paperId` 同时只一个 writer。多卷并行本 spec 不做产品化。
 - 无子代理时允许同一会话串行写 7 组客观题分析。禁止把别的 `paperId` 分析
   remap 当本卷交付。
-- 格式①在 canonical producer / 身份规则修好之前 **禁止 `--publish`**。停在
-  dry-run + publish-gate 绿，写 `signals/blocked.json`（如
-  `canonical_unavailable`）。不得发明临时映射。
+- 格式①在 dry-run / publish-gate / `verify-nck1` PRE 绿之后，跑 trusted-DOCX
+  producer（`scripts/import-pipeline/build-trusted-docx-canonical-request.mjs`）
+  再 `--publish`。producer / compile 仍失败才写 `signals/blocked.json`
+  （`canonical_unavailable`）。不得发明临时映射。
 - 硬门禁：按格式跑 `01-split` 或 `pdf-extract` → 7× `validate-one` →
   AI Answer Transcription Check →（格式②）canonical 物化 → dry-run →
   `verify-publish-gate` → publish 前 `verify-nck1` → `--publish` → post

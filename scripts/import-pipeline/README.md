@@ -26,7 +26,19 @@
 2. **`01-split.mjs <config>`** — 确定性切卷(`lib.mjs`):两种试卷格式(简化「一二三」答案版 + 官方「第X部分/第X节」);滤分值标注 `(N分)`;空标记 `__NN__`;标准重排 21–35/36–40/41–55/56–65。产 `papers/<id>/groups.json` + 每组 `analyze-<key>-combined.txt`(shape-gate 走 shipped `build*AnalysisMessages`)。
 3. **解析扇出 = ad-hoc Workflow**(不在本目录;每次现写):一组一 agent,喂 `analyze-<key>-combined.txt`,产 `analysis-<key>.json`,用 `validate-one.mjs` 自校验 + 重试。
 4. **`validate-one.mjs <config> <key>`** — 单组校验(注入 shipped `analyze*ImportCandidate`)。
-5. **`02-publish.mjs <config> [--publish]`** — 校验全组 → 打包(shipped `buildPaperImportAiPackageFiles`)→ **产包后改写 import-meta 出处**(sourceType/region/paperName/year/tags)→ `--publish` 走 shipped `publishPaperImportPackage` 入库。**未改任何契约代码**。
+5. **`02-publish.mjs <config> [--publish]`** — 校验全组 → 打包(shipped `buildPaperImportAiPackageFiles`)→ **产包后改写 import-meta 出处**(sourceType/region/paperName/year/tags)→ `--publish` 走 shipped `publishPaperImportPackage` 入库。**未改任何契约代码**。`--publish` 前格式①须先跑 trusted-DOCX producer（见下），并把 `config.canonicalRequestPath` 指到产物。隔离根可用 `QUESTION_BANK_DB` / `QUESTION_BANK_PAPER_ASSET_ROOT`；默认仍是本机库与 `app/public/paper-assets/`。
+
+格式① canonical 物化（dry-run / publish-gate / `verify-nck1` PRE 之后、`--publish` 之前）：
+
+```bash
+node scripts/import-pipeline/build-trusted-docx-canonical-request.mjs \
+  <docxPath> \
+  --output-dir scripts/import-pipeline/papers/<paperId>/canonical-evidence \
+  --expected-paper-id <paperId> \
+  --write
+```
+
+不要手写 Canonical Paper，不要套用格式② PDF envelope。同一命令去掉 `--write` 可证明 byte-reproducible。派生身份必须与开局 `paperId` 一致。
 
 ### 格式②:PDF 试题卷 + 独立答案 PDF(2026 起)
 

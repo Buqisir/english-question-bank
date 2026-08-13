@@ -207,7 +207,12 @@ paper's source files match one before starting:
 
 1. **DOCX 答案版** (2020-2025 precedent, 12 papers already imported this way)
    — see `scripts/import-pipeline/README.md` stages 1-5. This runbook does
-   NOT re-document that path.
+   NOT re-document that path. After dry-run / publish-gate / `verify-nck1`
+   PRE, format ① materializes `canonicalRequestPath` with
+   `node scripts/import-pipeline/build-trusted-docx-canonical-request.mjs`
+   (not the PDF producer below). Do not run the `compileCanonicalPaper`
+   preflight on that request; it is Teacher-Confirmed trusted DOCX, not the
+   current PDF authority envelope.
 2. **PDF 试题卷 + 独立答案 PDF** (2026 起, this runbook's path) — the format
    below. Source files live at
    `scripts/import-pipeline/papers/<paperId>/source/{paper.pdf,answers.pdf}`.

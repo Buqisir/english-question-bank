@@ -27,6 +27,10 @@ import {
   selectCanonicalPublicationCurrent,
 } from '../paper-canonical/publication.mjs'
 import {
+  isTrustedDocxCanonicalImportRequest,
+  trustedDocxPublicationSourceAsset,
+} from '../paper-canonical/trustedDocxCanonicalRequest.mjs'
+import {
   canonicalizeVisibleEnglishTypography,
 } from '../../shared/paper-canonical/visibleTypography.mjs'
 
@@ -808,26 +812,54 @@ function validateCanonicalImportPackageBinding({
   packageData,
   paperAssetBytes,
   answerKeyBytes,
+  canonicalRequest,
 }) {
   const captureDocuments = admission.compilation.artifacts.sourceCapture.documents
-  for (const [inputKey, bytes] of [
-    ['paper_asset', paperAssetBytes],
-    ['official_answers', answerKeyBytes],
-  ]) {
-    const digest = Buffer.isBuffer(bytes) ? bytesSha256(bytes) : null
+  if (isTrustedDocxCanonicalImportRequest(canonicalRequest)) {
+    const packageSource = packageData.sourceDocx?.buffer
+    const packageDigest = Buffer.isBuffer(packageSource)
+      || packageSource instanceof Uint8Array
+      ? bytesSha256(packageSource)
+      : null
+    const requestSource = trustedDocxPublicationSourceAsset(canonicalRequest)
+    const requestDigest = requestSource ? bytesSha256(requestSource) : null
     if (
-      !digest
+      !packageDigest
+      || !requestDigest
+      || packageDigest !== requestDigest
       || !captureDocuments.some(
         (document) =>
-          document.inputKey === inputKey && document.sha256 === digest,
+          document.inputKey === 'source_docx' && document.sha256 === packageDigest,
       )
     ) {
       return {
         disposition: 'unsupported',
         diagnostics: [{
           code: 'CANONICAL_IMPORT_SOURCE_PACKAGE_UNBOUND',
-          message: `Canonical Source Capture does not bind the exact ${inputKey} import file`,
+          message: 'Canonical Source Capture does not bind the exact source_docx import file',
         }],
+      }
+    }
+  } else {
+    for (const [inputKey, bytes] of [
+      ['paper_asset', paperAssetBytes],
+      ['official_answers', answerKeyBytes],
+    ]) {
+      const digest = Buffer.isBuffer(bytes) ? bytesSha256(bytes) : null
+      if (
+        !digest
+        || !captureDocuments.some(
+          (document) =>
+            document.inputKey === inputKey && document.sha256 === digest,
+        )
+      ) {
+        return {
+          disposition: 'unsupported',
+          diagnostics: [{
+            code: 'CANONICAL_IMPORT_SOURCE_PACKAGE_UNBOUND',
+            message: `Canonical Source Capture does not bind the exact ${inputKey} import file`,
+          }],
+        }
       }
     }
   }
@@ -971,10 +1003,11 @@ function admitBoundCanonicalPackage({
   sourceAssetBytes,
   answerKeyBytes,
 }) {
+  const trustedDocxSource = trustedDocxPublicationSourceAsset(canonicalRequest)
   const admission = admitCanonicalPaperImport({
     request: canonicalRequest,
     sourceAssetVersion: version,
-    sourceAsset: sourceAssetBytes,
+    sourceAsset: trustedDocxSource ?? sourceAssetBytes,
   })
   if (!admission.ok) return { failure: canonicalAdmissionFailure(admission) }
   if (admission.sealed.manifest.paperId !== paperId) {
@@ -993,6 +1026,7 @@ function admitBoundCanonicalPackage({
     packageData,
     paperAssetBytes: sourceAssetBytes,
     answerKeyBytes,
+    canonicalRequest,
   })
   if (bindingFailure) {
     return { failure: canonicalAdmissionFailure(bindingFailure) }

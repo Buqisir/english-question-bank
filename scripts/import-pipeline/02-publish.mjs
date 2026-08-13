@@ -269,8 +269,10 @@ if (doPublish) {
   const { DatabaseSync } = await import('node:sqlite')
   const { publishPaperImportPackage } = await import('../../server/paper-import/publisher.mjs')
 
-  const dbPath = path.join(projectRoot, 'data/question-bank.sqlite')
-  const paperAssetsDir = path.join(projectRoot, 'app/public/paper-assets')
+  const dbPath = process.env.QUESTION_BANK_DB
+    || path.join(projectRoot, 'data/question-bank.sqlite')
+  const paperAssetsDir = process.env.QUESTION_BANK_PAPER_ASSET_ROOT
+    || path.join(projectRoot, 'app/public/paper-assets')
 
   const db = new DatabaseSync(dbPath, { readOnly: false })
   try {

@@ -3,6 +3,10 @@ import { readFile } from 'node:fs/promises'
 import { canonicalAuthorityRef, resolveCanonicalAuthority, trustedDocxCandidateAuthorityRef } from '../shared/paper-canonical/authority.mjs'
 import * as compilerModule from '../shared/paper-canonical/compiler.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
+import {
+  deriveNck1Identity,
+  extractDocxDocumentText,
+} from '../server/paper-canonical/docxSourceAdapter.mjs'
 import * as trustedDocxImport from '../server/paper-canonical/trustedDocxCanonicalImport.mjs'
 import { makeReadyCanonicalFixture } from '../test-fixtures/paper-canonical/foundationFixture.mjs'
 
@@ -87,6 +91,36 @@ function candidateWithReboundDigest(candidate) {
   const { candidateDigest: _candidateDigest, sourceBytes: _sourceBytes, ...body } = candidate
   return { ...candidate, candidateDigest: digestJson(body) }
 }
+
+assert.deepEqual(
+  deriveNck1Identity(extractDocxDocumentText(docxBytes)),
+  { paperId: 'paper-2025-i', profileId: 'nck1' },
+  'national Volume I DOCX must keep paper-YYYY-i',
+)
+assert.deepEqual(
+  deriveNck1Identity('2024年全国高考一卷英语真题\n'),
+  { paperId: 'paper-2024-i', profileId: 'nck1' },
+)
+assert.deepEqual(
+  deriveNck1Identity('浙江省2025年1月普通高等学校招生全国统一考试英语试卷\n'),
+  { paperId: 'paper-zj-2025-jan', profileId: 'nck1' },
+)
+assert.deepEqual(
+  deriveNck1Identity('2025年浙江卷高考真题英语试卷（1月）\n'),
+  { paperId: 'paper-zj-2025-jan', profileId: 'nck1' },
+)
+assert.deepEqual(
+  deriveNck1Identity('2026年浙江卷高考真题英语试卷(1月)\n'),
+  { paperId: 'paper-zj-2026-jan', profileId: 'nck1' },
+)
+assert.throws(
+  () => deriveNck1Identity('2025年浙江卷高考真题英语试卷\n'),
+  /DOCX source lacks a supported NCK1 paper identity/,
+)
+assert.throws(
+  () => deriveNck1Identity('Some unrelated mock paper title\n'),
+  /DOCX source lacks a supported NCK1 paper identity/,
+)
 
 const first = importCanonicalCandidate(docxBytes, { originalName: '2025-nck1-answer-source.docx' })
 const second = importCanonicalCandidate(docxBytes, { originalName: '2025-nck1-answer-source.docx' })

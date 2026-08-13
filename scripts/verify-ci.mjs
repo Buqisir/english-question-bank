@@ -38,6 +38,7 @@ const registry = {
   'scripts/verify-paper-canonical-import-recovery.mjs',
   'scripts/verify-paper-canonical-import-pilot-fixes.mjs',
   'scripts/verify-paper-canonical-docx-source-adapter.mjs',
+  'scripts/verify-paper-canonical-trusted-docx-request.mjs',
   'scripts/verify-paper-canonical-legacy-source-capture-adapter.mjs',
   'scripts/verify-paper-canonical-legacy-opaque-application.mjs',
   'scripts/verify-paper-canonical-legacy-opaque-continuation.mjs',
