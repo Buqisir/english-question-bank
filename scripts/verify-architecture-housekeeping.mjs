@@ -187,6 +187,8 @@ for (const [changedFile, expectedRisk, expectedPack] of [
   ['server/api.mjs', 'unknown-fallback', 'all'],
   ['data/sql/schema.sql', 'auth-persistence-migration', 'security'],
   ['.github/workflows/verify.yml', 'unknown-fallback', 'all'],
+  ['import-ops/server.mjs', 'ordinary-local-feature', 'feature'],
+  ['scripts/import-pipeline/ship-checklist.mjs', 'ordinary-local-feature', 'feature'],
 ]) {
   const plan = routeFor(changedFile)
   if (!plan) continue
@@ -206,6 +208,18 @@ if (mixedHighRiskPlan) {
     'mixed security and Paper changes fall back to all',
     mixedHighRiskPlan.risk === 'mixed-high-risk-fallback' && mixedHighRiskPlan.pack === 'all',
     JSON.stringify(mixedHighRiskPlan),
+  )
+}
+
+const importOpsWithDocs = routeFor(
+  'CONTEXT.md',
+  'import-ops/server.mjs',
+)
+if (importOpsWithDocs) {
+  assert(
+    'import-ops plus markdown stays on the feature pack',
+    importOpsWithDocs.risk === 'ordinary-local-feature' && importOpsWithDocs.pack === 'feature',
+    JSON.stringify(importOpsWithDocs),
   )
 }
 

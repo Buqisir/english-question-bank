@@ -290,8 +290,8 @@ function main(argv = process.argv.slice(2)) {
   process.exit(1)
 }
 
-const invokedAsCli =
-  process.argv[1]
-  && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)
-
-if (invokedAsCli) main()
+const cliSubs = new Set(['check', 'record-shipped', 'record-failed', '--help', '-h'])
+const entryBase = process.argv[1] ? path.basename(process.argv[1]) : ''
+if (cliSubs.has(process.argv[2]) || (entryBase === 'ship-checklist.mjs' && !process.argv[2])) {
+  main()
+}

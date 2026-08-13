@@ -64,6 +64,7 @@ const registry = {
   'scripts/verify-paper-normalization-grammar-fill-surface.mjs',
   'scripts/verify-paper-normalization-import-gate.mjs',
   'scripts/import-pipeline/verify-source-doc-types.mjs',
+  'scripts/verify-import-ops.mjs',
   'scripts/verify-docx-source-media-input.mjs',
   'scripts/verify-canonical-paper-group-surface-adapter-declaration-parity.mjs',
   'scripts/verify-paper-surface-mjs-declaration-parity.mjs',
@@ -250,19 +251,27 @@ function changedPlan(files) {
     return { risk: 'known-shape-paper-data', pack: 'paper-data' }
   }
 
-  const domains = new Set(files.map((file) => {
-    if (file === 'server/api.mjs') return 'unknown'
-    if (touchesAny([file], securityPatterns)) return 'security'
-    if (touchesAny([file], paperPatterns)) return 'paper'
-    if (touchesAny([file], paperDataPatterns)) return 'paper-data'
-    if (touchesAny([file], uiMicroPatterns)) return 'ui'
+  const domains = new Set(files.flatMap((file) => {
+    if (file.endsWith('.md')) return []
+    if (file === 'server/api.mjs') return ['unknown']
+    if (file.startsWith('import-ops/')) return ['feature']
+    if (file.startsWith('scripts/import-pipeline/')) {
+      return [/\/verify-/.test(file) ? 'paper' : 'feature']
+    }
+    if (touchesAny([file], securityPatterns)) return ['security']
+    if (touchesAny([file], paperPatterns)) return ['paper']
+    if (touchesAny([file], paperDataPatterns)) return ['paper-data']
+    if (touchesAny([file], uiMicroPatterns)) return ['ui']
     if ([
       'app/src/',
       'server/',
       'shared/',
-    ].some((prefix) => file.startsWith(prefix))) return 'feature'
-    return 'unknown'
+    ].some((prefix) => file.startsWith(prefix))) return ['feature']
+    return ['unknown']
   }))
+  if (domains.size === 0) {
+    return { risk: 'no-changes', pack: 'ui', scripts: [] }
+  }
 
   if (domains.has('unknown')) {
     return { risk: 'unknown-fallback', pack: 'all' }
