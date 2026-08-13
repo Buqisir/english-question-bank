@@ -227,8 +227,14 @@
   text-align: center;
 }
 
-.pi-writing-answer-supplement {
-  margin-top: 1.25rem;
+.pi-writing-answer-box--application.pi-writing-answer-box--lecture-open,
+.pi-writing-answer-box--letter.pi-writing-answer-box--lecture-open {
+  height: auto;
+}
+
+.pi-writing-answer-box--lecture-open .pi-writing-answer-supplement {
+  margin-top: 0.75rem;
+  min-width: 0;
 }
 
 .retained-writing-answer {

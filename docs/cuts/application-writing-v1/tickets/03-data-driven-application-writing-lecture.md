@@ -32,6 +32,7 @@ Fixed point: Ticket 01 的完成 commit
 - 关闭讲评或 panel ownership 切换时立即恢复普通答题框。
 - 保留 2022-i/2024-i 的现有视觉、整框讲评入口、`讲评` handle 与深链行为。
 - 不把“所有 application 答题框都变成新点击入口”作为本票隐含需求；非 retained group 通过现有 `讲评` handle 或显式 lecture intent 进入讲评。
+  （owner 2026-08-13 已 superseded：以后新卷只要 application payload 完整，答题框本身就是讲评入口；本票当时的白名单限制不再约束新卷。）
 
 ## Forbidden
 

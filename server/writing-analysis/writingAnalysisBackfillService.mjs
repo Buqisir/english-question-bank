@@ -8,7 +8,9 @@
  *
  * persistWritingAnalysisGroup projection branches by taskType:
  *   application supports optional officialModelAnswer/reviewCard/highlights;
- *   continuation keeps {taskType, modelAnswer, continuationDesign, highlightExpressions}.
+ *   new continuation keeps {taskType, modelAnswer, continuationAnalysis};
+ *   historical continuation keeps {taskType, modelAnswer, continuationDesign,
+ *   highlightExpressions}.
  * MF-2 (I19): vocab gate uses tracked paper-asset.json (materialText+starters) as allowlist;
  *   FAIL-HARD if guokao-vocab-checker skill is absent.
  * SW-2 (I19): continuation soft-warning floor is 120 (application keeps 60).
@@ -16,12 +18,43 @@
 
 import { existsSync, mkdirSync, readFileSync, readdirSync, renameSync, rmSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { randomUUID } from 'node:crypto'
 import { execFileSync } from 'node:child_process'
+import Ajv from 'ajv/dist/2020.js'
 import { resolvePaperAssetReadPaths } from '../paper-import/storage.mjs'
 
 const WRITING_ANALYSIS_FILENAME = 'writing-analysis-v1.json'
 const WRITING_ANALYSIS_SCHEMA_VERSION = 'writing-analysis-v1'
+const CONTINUATION_ANALYSIS_SCHEMA_PATH = path.join(
+  path.dirname(fileURLToPath(import.meta.url)),
+  '../../schemas/paper-import/continuation-analysis-v1.schema.json',
+)
+const continuationAnalysisSchema = JSON.parse(readFileSync(CONTINUATION_ANALYSIS_SCHEMA_PATH, 'utf8'))
+const validateContinuationAnalysisSchema = new Ajv({ allErrors: true, strict: false })
+  .compile(continuationAnalysisSchema)
+
+function formatContinuationAnalysisSchemaErrors(errors = []) {
+  return errors
+    .map((error) => {
+      const location = error.instancePath || '/'
+      const extra = error.params?.additionalProperty
+        ? ` (${error.params.additionalProperty})`
+        : ''
+      return `${location}: ${error.message || 'invalid'}${extra}`
+    })
+    .join('; ')
+}
+
+function hasNarrativeContinuationAnalysis(candidate) {
+  return Boolean(
+    candidate
+    && typeof candidate === 'object'
+    && candidate.continuationAnalysis
+    && typeof candidate.continuationAnalysis === 'object'
+    && !Array.isArray(candidate.continuationAnalysis),
+  )
+}
 
 // Path to guokao-vocab-checker skill check.py
 const VOCAB_CHECKER_SCRIPT = path.join(
@@ -263,9 +296,13 @@ if suspect:
  *   - highlightExpressions optional for new candidates
  *   - when present, highlightExpressions keeps the existing 3–5 item checks
  *
- * Continuation checks (I19 MF-1):
+ * Continuation checks:
+ *   New narrative continuation (continuationAnalysis / continuation-analysis-v1):
  *   - taskType === 'continuation'
  *   - modelAnswer non-empty
+ *   - continuationAnalysis matches continuation-analysis-v1 schema
+ *   - continuationDesign / highlightExpressions / reviewCard forbidden
+ *   Historical continuation:
  *   - continuationDesign.theme non-empty
  *   - continuationDesign.paragraphs exactly 2, each non-empty
  *   - highlightExpressions 3–5
@@ -299,39 +336,62 @@ export function validateWritingAnalysisCandidate(candidate) {
     if (candidate.reviewCard !== undefined) {
       throw new Error('reviewCard is only valid for application writing.')
     }
-    const cd = candidate.continuationDesign
-    if (!cd || typeof cd !== 'object') {
-      throw new Error('continuationDesign is missing or not an object.')
-    }
-    if (!cd.theme || typeof cd.theme !== 'string' || !cd.theme.trim()) {
-      throw new Error('continuationDesign.theme is empty or missing.')
-    }
-    if (!Array.isArray(cd.paragraphs)) {
-      throw new Error('continuationDesign.paragraphs must be an array.')
-    }
-    if (cd.paragraphs.length !== 2) {
-      throw new Error(
-        `continuationDesign.paragraphs must have exactly 2 items, got ${cd.paragraphs.length}.`
-      )
-    }
-    for (let i = 0; i < 2; i++) {
-      if (!cd.paragraphs[i] || typeof cd.paragraphs[i] !== 'string' || !cd.paragraphs[i].trim()) {
-        throw new Error(`continuationDesign.paragraphs[${i}] is empty or missing.`)
+    if (hasNarrativeContinuationAnalysis(candidate)) {
+      if (candidate.continuationDesign !== undefined) {
+        throw new Error('continuationDesign is only valid on historical continuation writing.')
+      }
+      if (candidate.highlightExpressions !== undefined) {
+        throw new Error('highlightExpressions is only valid on historical continuation writing.')
+      }
+      if (!validateContinuationAnalysisSchema(candidate.continuationAnalysis)) {
+        throw new Error(
+          `continuationAnalysis schema invalid: ${formatContinuationAnalysisSchemaErrors(
+            validateContinuationAnalysisSchema.errors,
+          )}`,
+        )
+      }
+    } else {
+      const cd = candidate.continuationDesign
+      if (!cd || typeof cd !== 'object') {
+        throw new Error('continuationDesign is missing or not an object.')
+      }
+      if (!cd.theme || typeof cd.theme !== 'string' || !cd.theme.trim()) {
+        throw new Error('continuationDesign.theme is empty or missing.')
+      }
+      if (!Array.isArray(cd.paragraphs)) {
+        throw new Error('continuationDesign.paragraphs must be an array.')
+      }
+      if (cd.paragraphs.length !== 2) {
+        throw new Error(
+          `continuationDesign.paragraphs must have exactly 2 items, got ${cd.paragraphs.length}.`,
+        )
+      }
+      for (let i = 0; i < 2; i++) {
+        if (!cd.paragraphs[i] || typeof cd.paragraphs[i] !== 'string' || !cd.paragraphs[i].trim()) {
+          throw new Error(`continuationDesign.paragraphs[${i}] is empty or missing.`)
+        }
       }
     }
   } else {
     if (candidate.continuationDesign !== undefined) {
       throw new Error('continuationDesign is only valid for continuation writing.')
     }
+    if (candidate.continuationAnalysis !== undefined) {
+      throw new Error('continuationAnalysis is only valid for continuation writing.')
+    }
     if (candidate.reviewCard !== undefined && !isCompleteReviewCard(candidate.reviewCard)) {
       throw new Error('reviewCard is malformed.')
     }
   }
 
-  // Hard: continuation requires highlights; application validates legacy
-  // highlights only when they are present.
+  // Hard: historical continuation requires highlights; application validates
+  // legacy highlights only when they are present. New continuationAnalysis
+  // papers must not carry highlightExpressions.
   const highlightExpressions = candidate.highlightExpressions
-  if (candidate.taskType === 'continuation' || highlightExpressions !== undefined) {
+  if (
+    (candidate.taskType === 'continuation' && !hasNarrativeContinuationAnalysis(candidate))
+    || (candidate.taskType !== 'continuation' && highlightExpressions !== undefined)
+  ) {
     if (!Array.isArray(highlightExpressions)) {
       throw new Error('highlightExpressions must be an array.')
     }
@@ -434,7 +494,9 @@ export function isCompleteReviewCard(value) {
  * Projection branches by taskType:
  *   - application: {taskType, modelAnswer, officialModelAnswer?, reviewCard?,
  *     highlightExpressions?}
- *   - continuation: {taskType, modelAnswer, continuationDesign, highlightExpressions}
+ *   - new continuation: {taskType, modelAnswer, continuationAnalysis}
+ *   - historical continuation: {taskType, modelAnswer, continuationDesign,
+ *     highlightExpressions}
  *
  * Envelope merge preserves existing application groups when a continuation
  * group is written for the same paper (different groupId keys, no collision).
@@ -481,17 +543,25 @@ export function persistWritingAnalysisGroup({ paperAssetsDir }, work, analysis) 
   // MF-1: Build stored shape — projection branches by taskType
   let writingEntry
   if (analysis.taskType === 'continuation') {
-    writingEntry = {
-      taskType: analysis.taskType,
-      modelAnswer: analysis.modelAnswer,
-      continuationDesign: {
-        theme: analysis.continuationDesign.theme,
-        paragraphs: [
-          analysis.continuationDesign.paragraphs[0],
-          analysis.continuationDesign.paragraphs[1],
-        ],
-      },
-      highlightExpressions: analysis.highlightExpressions.map(({ text, note }) => ({ text, note })),
+    if (hasNarrativeContinuationAnalysis(analysis)) {
+      writingEntry = {
+        taskType: analysis.taskType,
+        modelAnswer: analysis.modelAnswer,
+        continuationAnalysis: structuredClone(analysis.continuationAnalysis),
+      }
+    } else {
+      writingEntry = {
+        taskType: analysis.taskType,
+        modelAnswer: analysis.modelAnswer,
+        continuationDesign: {
+          theme: analysis.continuationDesign.theme,
+          paragraphs: [
+            analysis.continuationDesign.paragraphs[0],
+            analysis.continuationDesign.paragraphs[1],
+          ],
+        },
+        highlightExpressions: analysis.highlightExpressions.map(({ text, note }) => ({ text, note })),
+      }
     }
   } else {
     // application: new candidates may omit highlights. When updating an

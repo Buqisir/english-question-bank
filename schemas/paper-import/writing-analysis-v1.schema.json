@@ -90,27 +90,57 @@
                     "items": { "type": "string", "minLength": 1 }
                   }
                 }
+              },
+              "continuationAnalysis": {
+                "type": "object",
+                "additionalProperties": true,
+                "required": [
+                  "schemaVersion",
+                  "storyUnderstanding",
+                  "continuationContract",
+                  "narrativeDevelopment",
+                  "languageAlignment",
+                  "paragraphBlueprint"
+                ],
+                "properties": {
+                  "schemaVersion": { "const": "continuation-analysis-v1" }
+                }
               }
             },
             "oneOf": [
               {
                 "properties": { "taskType": { "const": "application" } },
                 "required": ["taskType"],
-                "not": { "required": ["continuationDesign"] }
+                "not": {
+                  "anyOf": [
+                    { "required": ["continuationDesign"] },
+                    { "required": ["continuationAnalysis"] }
+                  ]
+                }
               },
               {
                 "properties": { "taskType": { "const": "continuation" } },
-                "required": [
-                  "taskType",
-                  "continuationDesign",
-                  "highlightExpressions"
-                ],
                 "not": {
                   "anyOf": [
                     { "required": ["reviewCard"] },
                     { "required": ["officialModelAnswer"] }
                   ]
-                }
+                },
+                "oneOf": [
+                  {
+                    "required": ["continuationAnalysis"],
+                    "not": {
+                      "anyOf": [
+                        { "required": ["continuationDesign"] },
+                        { "required": ["highlightExpressions"] }
+                      ]
+                    }
+                  },
+                  {
+                    "required": ["continuationDesign", "highlightExpressions"],
+                    "not": { "required": ["continuationAnalysis"] }
+                  }
+                ]
               }
             ]
           }

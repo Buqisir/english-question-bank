@@ -136,9 +136,10 @@
  *         exactly (`onFocusIntent={... : () => {}}`, `lectureFocus={... :
  *         null}` — the no-op/null branch of the ternary), so PaperSurface
  *         stays read-only/silent whenever the handle is collapsed.
- *     28. The cloze/grammar-fill/writing lecture-analysis fetch effect is
- *         gated on `lectureOpen` (`if (!lectureOpen) return`) — 挑题态 全程
- *         零新增请求 is a source-level invariant, not just a runtime one.
+ *     28. Cloze / grammar-fill lecture-analysis fetch stays gated on
+ *         `lectureOpen` (`if (!lectureOpen) return`). Writing analysis is
+ *         prefetched so a complete application payload can open lecture
+ *         from the answer box.
  *     29. `selectLectureQuestion` seeds `evidenceId`/`optionLabel` from the
  *         active group's analysis model (cloze → first non-option-side
  *         evidence row, grammarFill → first evidence row, reading →
@@ -1137,9 +1138,16 @@ assert(
   'missing analysis adapter imports or the paperIntelligence.css import',
 )
 assert(
-  'lecture-analysis fetch effect is gated on lectureOpen (zero new requests in 挑题态)',
+  'cloze/grammar-fill lecture-analysis fetch stays gated on lectureOpen',
   /if\s*\(!lectureOpen\)\s*return/.test(pageSrc),
   'missing the lectureOpen early-return guard on the lazy analysis fetch effect',
+)
+assert(
+  'writing analysis is prefetched so a complete application payload can open lecture from the answer box',
+  /writing-analysis-v1\.json/.test(pageSrc)
+    && /hasCompleteApplicationLecturePayload/.test(pageSrc)
+    && /onAnswerBoxActivate/.test(pageSrc),
+  'missing writing-analysis prefetch or complete-payload answer-box lecture trigger',
 )
 assert(
   'selectLectureQuestion seeds cloze/grammarFill/reading evidence, mirroring the harness request-lecture-focus branch',
@@ -1635,11 +1643,11 @@ assert(
   'missing the URL-sync effect, or it does not skip the first mount commit',
 )
 assert(
-  '刀 3 小尾巴 ①: the scrollspy clear-effect only clears when activeAnchor is a real group id (asset.content.groups[activeAnchor]) AND is not suppressed during programmatic scroll',
-  /isProgrammaticScrollRef\.current\)\s*return/.test(pageSrc) &&
-    /!activeAnchor\s*\|\|\s*!asset\?\.content\.groups\[activeAnchor\]\)\s*return/.test(pageSrc) &&
-    /suppressScrollspyClear/.test(pageSrc),
-  'missing the real-group guard, the suppression-ref check, or suppressScrollspyClear is not wired into the programmatic scroll call sites',
+  'lecture panel follows an explicit left-side click, not scrollspy',
+  /lectureSelection\?\.groupId \?\? null/.test(pageSrc)
+    && !/shouldClearLectureSelectionForActiveGroup/.test(pageSrc)
+    && !/滚动离开当前选中题所在的题组时清空/.test(pageSrc),
+  'right rail still follows scrollspy or still clears the click selection on scroll',
 )
 assert(
   'suppressScrollspyClear is called before every programmatic scrollIntoView (rail click / deep-link focus / evidence scroll) so the clear-effect race cannot wipe a just-made selection mid-settle',
@@ -1654,9 +1662,11 @@ assert(
   'missing the debounced setActiveAnchor commit in the scrollspy observer',
 )
 assert(
-  '刀 3 小尾巴 ③: the narrow-drawer empty-state copy is actionable copy, not "滚动到题组查看速览" (fails to read in the drawer-over-content context)',
-  !/滚动到题组查看速览/.test(pageSrc) && /滚动卷面或点选题目后，这里显示讲评/.test(pageSrc),
-  'empty-state copy was not updated',
+  'lecture empty-state asks for a left-side click, not scroll-follow',
+  !/滚动到题组查看速览/.test(pageSrc)
+    && !/滚动卷面或点选题目后/.test(pageSrc)
+    && /点左边的题目后，这里显示讲评/.test(pageSrc),
+  'empty-state copy still describes scroll-follow',
 )
 assert(
   '刀 3 追刀 (owner QA): selecting a sevenChoices question auto-expands its accordion chain — selectLectureQuestion seeds openSevenChoiceQuestionIds (append-only, manual toggles untouched)',

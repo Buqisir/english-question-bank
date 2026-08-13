@@ -7,10 +7,11 @@
  *   - 范文 / Model Answer block: full model answer with line breaks preserved.
  *   - 亮点表达 / 高分句块 list: each highlight as a card with text + note.
  *
- * continuation (I19):
+ * continuation (I19, historical assets only):
  *   - 范文 / Model Answer block: two paragraphs with line breaks preserved.
  *   - 情节设计思路 / Continuation Design: theme one line + 第1段/第2段 design notes.
  *   - 亮点表达 / 高分句块 list: each highlight as a card with text + note.
+ * New narrative continuation lecture uses ContinuationAnalysisPanel.
  *
  * Visual shell mirrors the existing analysis panels (GrammarFillAnalysisPanel,
  * ClozeAnalysisPanel) — same pi-ps-* outer containers, same section-title
@@ -22,7 +23,7 @@
 import type { ReactNode } from 'react'
 import type {
   ApplicationWritingAnalysis,
-  ContinuationWritingAnalysis,
+  ContinuationWritingAnalysisLegacy,
   HighlightExpression,
 } from '../../domain/paperAsset.ts'
 
@@ -31,7 +32,7 @@ type LegacyApplicationWritingAnalysis = ApplicationWritingAnalysis & {
 }
 
 export type WritingAnalysisPanelProps = {
-  analysis: LegacyApplicationWritingAnalysis | ContinuationWritingAnalysis
+  analysis: LegacyApplicationWritingAnalysis | ContinuationWritingAnalysisLegacy
 }
 
 export function WritingAnalysisPanel({ analysis }: WritingAnalysisPanelProps): ReactNode {
@@ -67,7 +68,7 @@ export function WritingAnalysisPanel({ analysis }: WritingAnalysisPanelProps): R
         </div>
 
         {/* 亮点表达 */}
-        {analysis.highlightExpressions.length > 0 && (
+        {(analysis.highlightExpressions?.length ?? 0) > 0 && (
           <div className="pi-writing-section">
             <h4 className="pi-writing-section-title">亮点表达 / 高分句块</h4>
             <ul className="pi-writing-highlights">
@@ -100,7 +101,7 @@ export function WritingAnalysisPanel({ analysis }: WritingAnalysisPanelProps): R
       </div>
 
       {/* 亮点表达 */}
-      {analysis.highlightExpressions.length > 0 && (
+      {(analysis.highlightExpressions?.length ?? 0) > 0 && (
         <div className="pi-writing-section">
           <h4 className="pi-writing-section-title">亮点表达 / 高分句块</h4>
           <ul className="pi-writing-highlights">

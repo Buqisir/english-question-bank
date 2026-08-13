@@ -1,5 +1,7 @@
 import path from 'node:path'
 
+import { normalizeGrammarFillText } from './normalizeGrammarFillText.mjs'
+
 const READING_LABELS = ['A', 'B', 'C', 'D']
 
 // 试卷格式 profile：完形(cloze)题数为主键 —— 15=新课标；20=老卷(浙江/全国),再按阅读篇数分流。
@@ -240,25 +242,6 @@ export function mergePaperImportAiAnalyses(parseResult, analysesByGroupId) {
   }
 
   return normalizeAnalysisForOfficialAnswers(merged, parseResult)
-}
-
-function normalizeGrammarFillText(text) {
-  // Normalize blank numbers: two spaces before and after the number.
-  return String(text || '')
-    // Standardize "56." or "(56)" to bare number.
-    .replace(/\b(\d{2})[.．、](?=\s)/g, '$1')
-    // Add two spaces around blank numbers 56-65.
-    .replace(/(^|\s)(5[6-9]|6[0-5])(\s|$)/g, '$1  $2  $3')
-    // Collapse multiple spaces.
-    .replace(/[ ]{3,}/g, '  ')
-    // Ensure space after English punctuation.
-    .replace(/([.,;:!?])([A-Za-z])/g, '$1 $2')
-    // Normalize prompt parentheses spacing: "56(wear)" → "56 (wear)".
-    .replace(/(\d{2})[(（]/g, '$1 (')
-    .replace(/[)）](?=\S)/g, ') ')
-    // Clean trailing Chinese from answers.
-    .replace(/[一-鿿]+$/, '')
-    .trim()
 }
 
 export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId, sevenChoicesGroup, sevenChoicesAnalysis, clozeGroup, clozeAnalysis, grammarFillGroup, grammarFillAnalysis, applicationGroup, continuationGroup, sourceDocx }) {

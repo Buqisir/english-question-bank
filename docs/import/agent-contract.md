@@ -4,19 +4,20 @@
 
 机械步骤不要在本文件展开，按格式链到：
 
-- 数据契约（只读，禁止改）：`docs/product/nck1-paper-standard.md`
+- 数据契约：`docs/product/nck1-paper-standard.md`（导题过程中不改；owner 拍板修订后以新文本为准）
 - 格式②（PDF 试题卷 + 独立答案 PDF）逐步 how-to：`docs/import/agent-runbook.md`
-- 格式①（DOCX 答案版）切卷 / 校验 / 打包工序：`scripts/import-pipeline/README.md` stages 1–5，以及 runbook 里与格式无关的门禁（`validate-one`、dry-run、`verify-publish-gate`、`verify-nck1`、`--publish` 纪律）。canonical 物化用 `scripts/import-pipeline/build-trusted-docx-canonical-request.mjs`，不要套用格式② PDF producer。
+- 格式①（DOCX 答案版）切卷 / 校验 / 打包工序：`scripts/import-pipeline/README.md` stages 1–5，以及 runbook 里与格式无关的门禁（`validate-one`、dry-run、`verify-publish-gate`、`verify-nck1`、`--publish` 纪律）。canonical 物化用 `scripts/import-pipeline/build-trusted-docx-canonical-request.mjs`，不要套用格式② PDF envelope。
+- 格式③（试题 DOCX + 答案解析 DOCX）：映射见标准附录 A。切卷用 `scripts/import-pipeline/03-split-docx-pair.mjs`。canonical 物化用 `scripts/import-pipeline/build-docx-pair-canonical-request.mjs`（开局 `paperId` 必填，不走格式①标题派生，不套用格式② PDF envelope）。
 
 导题后台只读本契约的文件夹探针，不另建状态库。消费端网站不导题。
 
 ## 开局（owner 只给这三样）
 
-1. 源文件**绝对路径**（已在本机磁盘；找卷不在范围）
-2. `paperId`（如 `paper-2026-ii`）
-3. 格式：**①** DOCX 答案版，或 **②** PDF 试题卷 + 独立答案 PDF
+1. 源文件**绝对路径**（已在本机磁盘；找卷不在范围）。格式③给两份：试题 DOCX + 答案解析 DOCX。
+2. `paperId`（真题如 `paper-2026-ii`；模拟卷如 `paper-mock-gd-2026-m1`）
+3. 格式：**①** DOCX 答案版，**②** PDF 试题卷 + 独立答案 PDF，或 **③** 试题 DOCX + 答案解析 DOCX
 
-不匹配 `nck1-paper-standard.md` §2 白名单 → **停**。不要发明第三种格式。
+不匹配 `nck1-paper-standard.md` §2 白名单 → **停**。不要发明第四种格式。
 
 ## 单 writer
 
@@ -30,6 +31,7 @@
 | --- | --- | --- |
 | 离开 `queued` | `config.json` | 已开局 |
 | 切卷 / 分析中 | `groups.json` + 7× `analyze-<key>-combined.txt` / `analysis-<key>.json` | key = `reading-a` `reading-b` `reading-c` `reading-d` `seven` `cloze` `grammar` |
+| 写作分析稿 | `analysis-application.json` + `analysis-continuation.json` | 新卷必交;格式③ `--publish` 硬前置 |
 | 答案复核过 | `signals/ai-answer-check.json` | AI Answer Transcription Check 已过 |
 | 本地已 publish | `app/public/paper-assets/<paperId>/latest/`（目录存在） | **唯一**本地 publish 成功信号 |
 | 卡死 | `signals/blocked.json` | 硬停；见原因码 |
@@ -71,7 +73,7 @@
 { "shippedAt": "<ISO-8601>", "command": "node scripts/pull-run-push.mjs push" }
 ```
 
-已知 `blocked.json` 原因码：`canonical_unavailable`（格式① producer / compile 仍 fail-closed 时）、`gate_failed`（同一门禁自动修 2 次仍红）、`continuation_non_narrative`、`ship_failed`（整库 push 失败）。
+已知 `blocked.json` 原因码：`canonical_unavailable`（格式① / 格式③ producer / compile 仍 fail-closed 时）、`gate_failed`（同一门禁自动修 2 次仍红）、`continuation_non_narrative`、`ship_failed`（整库 push 失败）。
 
 ## 六态
 
@@ -92,19 +94,25 @@
 
 ## 硬门禁
 
-按格式跑，**不改** `nck1-paper-standard.md`，不绕闸。同一门禁最多自动修 **2** 次，仍红 → 写 `signals/blocked.json`（`gate_failed`）并停。
+按格式跑。导题过程中**不改** `nck1-paper-standard.md` 来过闸（标准修订须 owner 另拍板后落档）。不绕闸。同一门禁最多自动修 **2** 次，仍红 → 写 `signals/blocked.json`（`gate_failed`）并停。
 
-1. 切卷：格式① `node scripts/import-pipeline/01-split.mjs papers/<id>/config.json`；格式② `node scripts/import-pipeline/pdf-extract.mjs <paperId>`（先按 runbook 填 `CONTENT`）。
+1. 切卷：格式① `node scripts/import-pipeline/01-split.mjs papers/<id>/config.json`；格式② `node scripts/import-pipeline/pdf-extract.mjs <paperId>`（先按 runbook 填 `CONTENT`）；格式③ `node scripts/import-pipeline/03-split-docx-pair.mjs papers/<id>/config.json`（试题 DOCX + 答案解析 DOCX，从解析抄 `answerKey`）。
 2. 7× `node scripts/import-pipeline/validate-one.mjs papers/<id>/config.json <key>`，key 同上。无子代理时**同一会话串行**写 7 组。禁止把别的 `paperId` 的分析 remap 当本卷交付。
 3. **AI Answer Transcription Check**（必跑，替代人对答案）：对照源标记抄写，并与解析正确项一致。禁止 AI 解题当答案（标准 §3）。通过后写 `signals/ai-answer-check.json`。
-4. 写作分析（新卷必交，见下节）。
-5. **仅格式②**：按 runbook 做 canonical 物化（`build-canonical-request.mjs` + `canonicalRequestPath`）。不要手写 Canonical Paper。格式①本步跳过。
+4. 写作分析（新卷必交，见下节）。格式③缺这两份稿不得 `--publish`。
+   `--publish` 成功后必须把它们写入 `latest/analyses/writing-analysis-v1.json`,
+   不得只留在 `papers/` 或下一卷再丢。应用文卷面 chrome(注意块 + 框内给定
+   标题、题干不粘词数)随格式③ producer 落地,见标准 §6 / 附录 A。
+5. **仅格式②**：按 runbook 做 canonical 物化（`build-canonical-request.mjs` + `canonicalRequestPath`）。不要手写 Canonical Paper。格式① / 格式③本步跳过。
 6. Dry-run：`node scripts/import-pipeline/02-publish.mjs papers/<id>/config.json`（**禁止** `--publish`）。
 7. `node scripts/import-pipeline/verify-publish-gate.mjs <paperId>` → `"ok": true`。
 8. `node scripts/import-pipeline/verify-nck1-standard.mjs <paperId>` PRE-PUBLISH → All green。
 9. **格式①** 且 6–8 全绿：跑 trusted-DOCX producer，把 `config.canonicalRequestPath` 指到写出的 `canonical-import-request.json`：
    `node scripts/import-pipeline/build-trusted-docx-canonical-request.mjs <docxPath> --output-dir papers/<id>/canonical-evidence --expected-paper-id <paperId> --write`
    派生身份必须与开局 `paperId` 一致（全国一卷 `paper-YYYY-i`；浙江 1 月答案版 `paper-zj-YYYY-jan`）。不要手写 Canonical Paper，不要套用格式② PDF envelope。producer / compile 仍失败 → 写 `signals/blocked.json`，`code` = `canonical_unavailable`，停。**不得发明临时映射。**
+   **格式③** 且 6–8 全绿：跑 DOCX-pair producer（开局 `paperId` 必填；不得占用 `paper-YYYY-i` / `paper-zj-YYYY-jan`）：
+   `node scripts/import-pipeline/build-docx-pair-canonical-request.mjs <试题.docx> <答案解析.docx> --output-dir papers/<id>/canonical-evidence --expected-paper-id <paperId> --write`
+   身份以开局 `paperId` 为准，不按标题派生。不要手写 Canonical Paper，不要套用格式① trusted-DOCX 或格式② PDF envelope。producer / compile 仍失败 → 写 `signals/blocked.json`，`code` = `canonical_unavailable`，停。
 10. 6–8 全绿且 `canonicalRequestPath` 可被 `loadCanonicalImportRequest` 加载：按 runbook 停本地 API → `--publish` → 重启 API →（格式②）`attach-paper-assets-extras` → POST `verify-nck1` → ledger。缺该 request 时不得把该卷当成已 publish。本地成功 **只** 以 `app/public/paper-assets/<id>/latest/` 为准。
 11. 本地 publish 成功后 **停**。不替人点 QA，不自动 push，不跑 `scripts/pull-run-push.mjs`。
 
@@ -164,9 +172,9 @@ QA 之后 owner 必须另说「上线」（当前口头，不是历史聊天里�
 
 ## 写作分析（新卷必交）
 
-权威在本仓库。持久化到消费端资产 / UI / 旧卷迁移仍是后续工作；新卷必须按下面交稿，不要发明替代合同。
+权威在本仓库。新卷必须按下面交稿，不要发明替代合同，也不要只改当前这一套。消费端讲评已能展示应用文 ReviewCard 与续写 `continuationAnalysis`；旧卷迁移仍是后续工作。
 
-- **应用文**：先读 `docs/product/application-writing-doctrine-v1.md` 与 `prompts/application-writing-model-answer-v3.md`（agent 入口：`prompts/application-writing-agent-entrypoint.md`）。落盘 `modelAnswer` + 完整 ReviewCard（11 项：`form` `topic` `reader` `person` `tense` `type` 两个 `points` `readerWho` `readerCares` `readerWants` `value`）+ 源有则 `officialModelAnswer`。交际对象推演是生成决策，不新增 ReviewCard 字段。新卷不要求亮点。
+- **应用文**：先读 `docs/product/application-writing-doctrine-v1.md` 与 `prompts/application-writing-model-answer-v3.md`（agent 入口：`prompts/application-writing-agent-entrypoint.md`）。落盘 `modelAnswer` + 完整 ReviewCard（11 项：`form` `topic` `reader` `person` `tense` `type` 两个 `points` `readerWho` `readerCares` `readerWants` `value`）+ 源有则 `officialModelAnswer`。交际对象推演是生成决策，不新增 ReviewCard 字段。新卷不要求亮点。完整 payload 时点击答题框打开讲评：框内按顺序叠放「AI 参考范文」与可选「官方范文」，右栏只 ReviewCard。不新增 tab，不按 2022-i / 2024-i 白名单决定入口。
 - **读后续写**：先读 `docs/product/continuation-writing-analysis-contract-v1.md` 与 `prompts/continuation-analysis-v1.md`。落盘 `continuationAnalysis` / `continuation-analysis-v1` 五段（`storyUnderstanding`、`continuationContract`、`narrativeDevelopment`、`languageAlignment`、`paragraphBlueprint`）+ `modelAnswer`。形状闸：`node scripts/verify-continuation-analysis-v1.mjs` 所锁的 schema（`schemas/paper-import/continuation-analysis-v1.schema.json`）。只覆盖记叙型；说明 / 议论型停，写 `signals/blocked.json`（`continuation_non_narrative`）或 `help-needed.json`。旧 `continuationDesign` 只认历史资产。
 
 ## 导题后台
@@ -175,4 +183,4 @@ QA 之后 owner 必须另说「上线」（当前口头，不是历史聊天里�
 
 ## 禁止
 
-网站消费端改动；恢复网站导入 UI；后台直连 LLM API；单卷增量传输；改 nck1 标准；格式①临时 canonical 映射；清单未允许时跑 `pull-run-push`；未获当前 owner 口头「上线」/「重试上线」动生产。
+网站消费端改动；恢复网站导入 UI；后台直连 LLM API；单卷增量传输；导题时为过闸改 nck1 标准；格式①临时 canonical 映射；清单未允许时跑 `pull-run-push`；未获当前 owner 口头「上线」/「重试上线」动生产。

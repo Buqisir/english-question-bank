@@ -1,0 +1,1412 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-gd-2026-m1",
+  "sourceAssetVersion": 2,
+  "targetGroups": [
+    "group-mock-gd-2026-m1-reading-a",
+    "group-mock-gd-2026-m1-reading-b",
+    "group-mock-gd-2026-m1-reading-c",
+    "group-mock-gd-2026-m1-reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai",
+    "model": "cursor-grok-4.6",
+    "reviewedBy": "format3-import-agent",
+    "reviewedAt": "2026-08-13T00:00:00Z"
+  },
+  "groups": {
+    "group-mock-gd-2026-m1-reading-a": {
+      "overview": "应用文。介绍斯图尔特岛 Ruggedy Range 观鸟公路短途游的行程特点、价格、成团人数、出发时间及适合人群。",
+      "discourseStructure": {
+        "summary": "先总述行程卖点与向导服务，再分项列出地点、价格、附加接送、成团规则、时长、出发时间、起止点与年龄限制。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-a-1",
+            "summary": "标题：崎岖山脉观鸟公路之旅。",
+            "function": "点明产品名称"
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-a-2",
+            "summary": "面向寻求岛上本土鸟类的游客，向导会介绍所见鸟类与岛屿；不必本身是观鸟者。",
+            "function": "总述行程对象与向导信息服务"
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-a-3",
+            "summary": "乘小巴减少爬山，沿途多次短走，有拍照机会，司机会答疑。",
+            "function": "说明交通方式与沿途体验"
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-a-4",
+            "summary": "途经 Oban、半月湾等地，位于斯图尔特岛。",
+            "function": "列出地点"
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-a-5",
+            "summary": "小标题：价格与信息。",
+            "function": "引出价目"
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-a-6",
+            "summary": "成人每人 120 新西兰元。",
+            "function": "成人价"
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-a-7",
+            "summary": "儿童每人 75 新西兰元。",
+            "function": "儿童价"
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-a-8",
+            "summary": "费用含观鸟行程与行政成本。",
+            "function": "说明包含项目"
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-a-9",
+            "summary": "往返预订办公室的接送另收费。",
+            "function": "说明额外交通费"
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-a-10",
+            "summary": "成团人数 4 至 8 人。",
+            "function": "常规成团规模"
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-a-11",
+            "summary": "2 或 3 人可成团，但每人另加 25 元。",
+            "function": "不足最低人数时的加价规则"
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-a-12",
+            "summary": "时长 2 小时。",
+            "function": "行程时长"
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-a-13",
+            "summary": "视档期或可提供更长行程。",
+            "function": "补充时长弹性"
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-a-14",
+            "summary": "出发时刻为上午 9 点、下午 1 点或 3 点半。",
+            "function": "列出出发时刻"
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-a-15",
+            "summary": "出发时间可按行程与档期灵活调整。",
+            "function": "说明时间可协商"
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-a-16",
+            "summary": "起止点为预订办公室。",
+            "function": "起止地点"
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-a-17",
+            "summary": "需有合理体能。",
+            "function": "体能要求"
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-a-18",
+            "summary": "不适合 10 岁以下儿童。",
+            "function": "最低年龄限制"
+          }
+        ]
+      }
+    },
+    "group-mock-gd-2026-m1-reading-b": {
+      "overview": "记叙文。作者写第二本书时陷入拖延，经日记反思发现害怕被评判，后以五分钟微行动重启写作，并重新理解停滞。",
+      "discourseStructure": {
+        "summary": "先对比第一本的顺畅与第二本的卡壳，再写重复准备却无进展，接着揭开恐惧，再写微小行动重启，最后把停滞理解为勇气之前的静默。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-b-1",
+            "summary": "第一本书写得顺，第二本对着闪烁光标无法下笔。",
+            "function": "提出写作障碍"
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-b-2",
+            "summary": "重复布置工作区、留出时间、重读旧稿，忙碌却没有真正动笔。",
+            "function": "描写虚假进展"
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-b-3",
+            "summary": "日记写出真相：害怕第二本不如第一本、害怕被评判。",
+            "function": "揭示拖延背后的恐惧"
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-b-4",
+            "summary": "设定五分钟计时，先写一句半句，积少成多写成全书。",
+            "function": "写出重启办法"
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-b-5",
+            "summary": "拖延不是单纯耽误，而是尝试与害怕之间的对话；曾经的浪费其实是勇气前的静默。",
+            "function": "收束主旨"
+          }
+        ]
+      }
+    },
+    "group-mock-gd-2026-m1-reading-c": {
+      "overview": "议论文。从职业运动员的睡眠与追踪习惯写到普通人使用可穿戴设备，指出高级设备能揭示习惯与健康的关联，也警告数字焦虑，最后建议倾听身体信号。",
+      "discourseStructure": {
+        "summary": "首段写追踪习惯走入普通人生活；次段对比基础设备与能揭示行为模式的高级设备；第三段引出对完美主义与焦虑的担忧；末段呼吁关注身体更温和的信号。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-c-1",
+            "summary": "C 罗把睡眠当工具；追踪习惯已从专业运动进入普通人生活。",
+            "function": "提出现象"
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-c-2",
+            "summary": "普通设备给心率等数据；高级设备显示熬夜饮食等如何影响恢复，揭示行为模式。",
+            "function": "对比两类设备"
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-c-3",
+            "summary": "McGregor 警告“像运动员一样训练”会把生活变成围着数字转，带来完美主义与焦虑。",
+            "function": "提出担忧"
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-c-4",
+            "summary": "Walston 提醒手表可能让人忘记身体信号，健康生活仍要加入愉快习惯而非只追设备目标。",
+            "function": "给出建议"
+          }
+        ]
+      }
+    },
+    "group-mock-gd-2026-m1-reading-d": {
+      "overview": "说明文。介绍俄亥俄州立大学用香菇等真菌制作有机忆阻器，说明其记忆原理、菌丝网络的集体智能，以及可再生、可塑形的环境优势。",
+      "discourseStructure": {
+        "summary": "开篇提出土壤里长出计算机的设想；第二段解释忆阻器如何保持电阻记忆；第三段用菌丝实验说明集体智能；第四段讲环境与可塑优势；末段引 LaRocco 说明门槛很低。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-d-1",
+            "summary": "实验室发现香菇、双孢蘑菇可做计算存储元件。",
+            "function": "提出研究对象"
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-d-2",
+            "summary": "忆阻器能保持过去电状态的信息，断电后电阻仍在，可当微型记忆单元。",
+            "function": "解释 retain 与记忆原理"
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-d-3",
+            "summary": "菌丝能传电信号；多蘑菇连在一起稳定性恢复，类似脑细胞协同。",
+            "function": "用实验类比集体智能"
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-d-4",
+            "summary": "蘑菇可再生、可降解、易种植，菌丝可塑成可穿戴与传感器结构。",
+            "function": "说明环境与适应优势"
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-reading-d-5",
+            "summary": "探索有机计算所需的可以只是一堆自然废料和自制电路，现有资源即可实现。",
+            "function": "强调低门槛"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-mock-gd-2026-m1-021": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查观鸟公路游提供什么服务，需在开篇对向导介绍的表述中定位。",
+      "stemTranslationZh": "观鸟公路游提供什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "免费交通。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Free transportation.",
+            "explanation": "文中小巴是行程交通方式，往返预订办公室的接送还另收费，并未承诺免费交通。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "有信息量的导览。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-gd-2026-m1-reading-a-2",
+              "quote": "our knowledgeable guides will provide information on-the birds seen and about the island",
+              "anchor": "knowledgeable guides will provide information"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "专业摄影服务。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "We will stop often to take several easy short walks of 5 to 15 minutes with some excellent photo opportunities.",
+            "sourceEntity": "photo opportunities",
+            "optionText": "Expert photo service.",
+            "optionEntity": "Expert photo service",
+            "explanation": "原文只有拍照机会，并未提供专业摄影服务，对象被换成服务项目。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-gd-2026-m1-reading-a-3",
+              "quote": "We will stop often to take several easy short walks of 5 to 15 minutes with some excellent photo opportunities.",
+              "anchor": "photo opportunities"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "量身定制的旅行路线。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Departure times can be flexible to fit in with your schedule and our availability.",
+            "sourceHighlight": "Departure times can be flexible",
+            "optionText": "Tailored travel routes.",
+            "optionHighlight": "Tailored travel routes",
+            "explanation": "原文只说出发时间可灵活，并未提供定制路线，把时间弹性夸大成路线定制。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-gd-2026-m1-reading-a-15",
+              "quote": "Departure times can be flexible to fit in with your schedule and our availability.",
+              "anchor": "Departure times can be flexible"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Informative guiding.",
+          "sourceRole": "correctOption",
+          "targetText": "our knowledgeable guides will provide information on-the birds seen and about the island",
+          "targetParagraphId": "para-mock-gd-2026-m1-reading-a-2",
+          "relationType": "paraphrase",
+          "note": "Informative guiding 对应 knowledgeable guides will provide information。"
+        }
+      ]
+    },
+    "q-mock-gd-2026-m1-022": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查一对夫妇带一名青少年若要单独成团应付多少钱，需把成人价、儿童价与 2–3 人加价相加。",
+      "stemTranslationZh": "一对夫妇带一名青少年孩子若要组成一个旅行团应付多少钱？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "315 元。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Tours can operate fop 2 or 3 persons with NZ$25.00 per person extra charge.",
+            "sourceHighlight": "NZ$25.00 per person extra charge",
+            "optionText": "$315.",
+            "optionHighlight": "$315",
+            "explanation": "315 只是两人成人价加一名儿童价，未计入 3 人低于最低成团人数时每人加收的 25 元。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-gd-2026-m1-reading-a-11",
+              "quote": "Tours can operate fop 2 or 3 persons with NZ$25.00 per person extra charge.",
+              "anchor": "NZ$25.00 per person extra charge"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "340 元。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "$340.",
+            "explanation": "340 既不是票价合计 315，也不是 315 加三人加价 75 后的 390，文中没有这一价位。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "365 元。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "$365.",
+            "explanation": "365 不是按成人价、儿童价与每人加收 25 元算出的任何一步结果。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "390 元。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-gd-2026-m1-reading-a-6",
+              "quote": "Adult: NZ $120.00 per person",
+              "anchor": "NZ $120.00 per person"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-mock-gd-2026-m1-reading-a-7",
+              "quote": "Child: NZ $75.00 per person",
+              "anchor": "NZ $75.00 per person"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-mock-gd-2026-m1-reading-a-11",
+              "quote": "Tours can operate fop 2 or 3 persons with NZ$25.00 per person extra charge.",
+              "anchor": "2 or 3 persons with NZ$25.00 per person extra charge"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "$390.",
+          "sourceRole": "correctOption",
+          "targetText": "Tours can operate fop 2 or 3 persons with NZ$25.00 per person extra charge.",
+          "targetParagraphId": "para-mock-gd-2026-m1-reading-a-11",
+          "relationType": "calculation",
+          "note": "120×2+75=315，三人低于 4 人最低成团人数，再加 25×3=75，合计 390。"
+        }
+      ]
+    },
+    "q-mock-gd-2026-m1-023": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查游客必须满足的条件，需在文末年龄限制处定位。",
+      "stemTranslationZh": "游客需要满足下列哪一项？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "达到最低年龄。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-gd-2026-m1-reading-a-18",
+              "quote": "Not suitable for children below the age of 10.",
+              "anchor": "below the age of 10"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "有观鸟经验。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "You don’t need to be a birdwatcher to do this tour, as our knowledgeable guides will provide information on-the birds seen and about the island.",
+            "sourceHighlight": "You don’t need to be a birdwatcher",
+            "optionText": "Experience in birdwatching.",
+            "optionHighlight": "Experience in birdwatching",
+            "explanation": "原文明确说不必是观鸟者，选项却把经验当成必要条件，黑白颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-gd-2026-m1-reading-a-2",
+              "quote": "You don’t need to be a birdwatcher to do this tour, as our knowledgeable guides will provide information on-the birds seen and about the island.",
+              "anchor": "You don’t need to be a birdwatcher"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "在固定时间之前到达。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Departure times can be flexible to fit in with your schedule and our availability.",
+            "sourceHighlight": "Departure times can be flexible",
+            "optionText": "Arriving before a fixed time.",
+            "optionHighlight": "fixed time",
+            "explanation": "原文出发时间可灵活调整，选项却要求赶在固定时间前到达。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-gd-2026-m1-reading-a-15",
+              "quote": "Departure times can be flexible to fit in with your schedule and our availability.",
+              "anchor": "can be flexible"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "必须四人一组预订。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Group size: 4 to 8 persons",
+            "sourceHighlight": "4 to 8 persons",
+            "optionText": "Reservation in groups of four.",
+            "optionHighlight": "groups of four",
+            "explanation": "4 至 8 人是常规成团区间，2 或 3 人加价也可成团，并非必须四人一组。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-gd-2026-m1-reading-a-10",
+              "quote": "Group size: 4 to 8 persons",
+              "anchor": "4 to 8 persons"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Reaching the minimum age.",
+          "sourceRole": "correctOption",
+          "targetText": "Not suitable for children below the age of 10.",
+          "targetParagraphId": "para-mock-gd-2026-m1-reading-a-18",
+          "relationType": "paraphrase",
+          "note": "达到最低年龄对应 10 岁以下儿童不适合参加。"
+        }
+      ]
+    },
+    "q-mock-gd-2026-m1-024": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查作者为何重复同样的例行准备，需在第二段“忙碌而作品仍静止”处定位。",
+      "stemTranslationZh": "作者为什么一直重复同样的例行做法？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "为了寻找创作灵感。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To look for creative inspiration.",
+            "explanation": "第二段只写布置工作区、留出时间、重读旧稿，没有说这些动作是为了找灵感。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "为了克服拖延。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Still, the familiar motions kept me occupied while the work itself remained still.",
+            "sourceHighlight": "the work itself remained still",
+            "optionText": "To overcome her procrastination.",
+            "optionHighlight": "overcome her procrastination",
+            "explanation": "这些动作让她忙碌，作品却仍静止，并没有克服拖延。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-gd-2026-m1-reading-b-2",
+              "quote": "Still, the familiar motions kept me occupied while the work itself remained still.",
+              "anchor": "work itself remained still"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "为了获得虚假的进展感。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-gd-2026-m1-reading-b-2",
+              "quote": "Still, the familiar motions kept me occupied while the work itself remained still.",
+              "anchor": "kept me occupied while the work itself remained still"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为了改进写作技巧。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To. improve her writing technique.",
+            "explanation": "原文未把重复准备与改进技巧联系起来。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "To gain a false sense of progress.",
+          "sourceRole": "correctOption",
+          "targetText": "the familiar motions kept me occupied while the work itself remained still",
+          "targetParagraphId": "para-mock-gd-2026-m1-reading-b-2",
+          "relationType": "paraphrase",
+          "note": "虚假进展感对应 occupied 但 work remained still。"
+        }
+      ]
+    },
+    "q-mock-gd-2026-m1-025": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查真正阻止作者动笔的原因，需在第三段对评判的恐惧处定位。",
+      "stemTranslationZh": "真正阻止作者写作的是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "缺少新想法。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Lack of new ideas.",
+            "explanation": "作者写不出是因为害怕评判，不是没有想法。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "追求完美。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Pursuit of perfection.",
+            "explanation": "原文点明的是 fear of judgment，并非追求完美。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "渴望社会名声。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Desire for social fame.",
+            "explanation": "文中没有把拖延归因于求名。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "担心不被认可。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-gd-2026-m1-reading-b-3",
+              "quote": "Beneath the delay, I found fear—not of the work, but of judgment.",
+              "anchor": "fear—not of the work, but of judgment"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Concern over disapproval.",
+          "sourceRole": "correctOption",
+          "targetText": "I found fear—not of the work, but of judgment.",
+          "targetParagraphId": "para-mock-gd-2026-m1-reading-b-3",
+          "relationType": "paraphrase",
+          "note": "担心不被认可对应 fear of judgment。"
+        }
+      ]
+    },
+    "q-mock-gd-2026-m1-026": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查作者如何重新开始写作，需在第四段五分钟计时、积少成多处定位。",
+      "stemTranslationZh": "作者是怎样重新开始写作的？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "一次只走一步。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-gd-2026-m1-reading-b-4",
+              "quote": "I set a timer for five minutes and wrote whatever came.",
+              "anchor": "timer for five minutes"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-mock-gd-2026-m1-reading-b-4",
+              "quote": "Piece by piece, those small beginnings grew into the book I had been afraid to start",
+              "anchor": "Piece by piece, those small beginnings"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "把注意力放在小细节上。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "A sentence, half an idea, a small whisper of a scene.",
+            "optionText": "By focusing on small details.",
+            "matchType": "wordFamily",
+            "relationNote": "原文 small 指每次只写一点点起步，不是去抠写作细节。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-gd-2026-m1-reading-b-4",
+              "quote": "A sentence, half an idea, a small whisper of a scene.",
+              "anchor": "a small whisper of a scene"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "反思最终结果。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "By reflecting on the outcome.",
+            "explanation": "重启靠的是限时开写，不是先想结局。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "遵循灵活的时间表。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "By following a flexible schedule.",
+            "explanation": "作者用的是五分钟计时，不是灵活日程。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "By taking one step at a time.",
+          "sourceRole": "correctOption",
+          "targetText": "Piece by piece, those small beginnings grew into the book I had been afraid to start",
+          "targetParagraphId": "para-mock-gd-2026-m1-reading-b-4",
+          "relationType": "paraphrase",
+          "note": "一步一步对应 piece by piece 的微小开端。"
+        }
+      ]
+    },
+    "q-mock-gd-2026-m1-027": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查末段要传达的信息，需把曾经的浪费时间理解为勇气之前的静默。",
+      "stemTranslationZh": "作者在最后一段似乎要传达什么信息？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "勇气有助于对抗恐惧。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "the stillness before courage—the quiet reward of writing",
+            "optionText": "Courage helps fight against fear.",
+            "matchType": "exact",
+            "relationNote": "末段出现 courage，重点却是 stillness 本身可以是创造的一部分，不是用勇气去打恐惧。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-gd-2026-m1-reading-b-5",
+              "quote": "What I once called wasted time was, in truth, the stillness before courage—the quiet reward of writing.",
+              "anchor": "the stillness before courage"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "静默可以是创造力的一部分。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-gd-2026-m1-reading-b-5",
+              "quote": "What I once called wasted time was, in truth, the stillness before courage—the quiet reward of writing.",
+              "anchor": "the stillness before courage—the quiet reward of writing"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "拖延是浪费时间。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "What I once called wasted time was, in truth, the stillness before courage—the quiet reward of writing.",
+            "sourceHighlight": "What I once called wasted time",
+            "optionText": "Procrastination is a waste of time.",
+            "optionHighlight": "waste of time",
+            "explanation": "作者否定了“浪费时间”这一旧看法，选项却仍把拖延说成浪费。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-gd-2026-m1-reading-b-5",
+              "quote": "What I once called wasted time was, in truth, the stillness before courage—the quiet reward of writing.",
+              "anchor": "once called wasted time"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "写作者应避免休息。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Writers should avoid taking breaks.",
+            "explanation": "末段肯定静默的价值，并未要求避免休息。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Stillness can be part of creativity.",
+          "sourceRole": "correctOption",
+          "targetText": "the stillness before courage—the quiet reward of writing",
+          "targetParagraphId": "para-mock-gd-2026-m1-reading-b-5",
+          "relationType": "paraphrase",
+          "note": "静默可以是创造力的一部分，对应 stillness before courage 与 quiet reward。"
+        }
+      ]
+    },
+    "q-mock-gd-2026-m1-028": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查第一段关于健身追踪能得知什么，需定位它已进入普通人生活。",
+      "stemTranslationZh": "关于健身追踪，我们能从第一段得知什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它控制运动训练安排。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It controls sports training routines.",
+            "explanation": "首段只说纪律化作息塑造表现，并未说追踪设备控制训练安排。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它被用来治疗睡眠障碍。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "sleep is the most important tool that I have",
+            "optionText": "It is adopted to treat sleep disorders.",
+            "matchType": "exact",
+            "relationNote": "原文 sleep 是 C 罗的恢复工具，不是用追踪去治疗睡眠障碍。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-gd-2026-m1-reading-c-1",
+              "quote": "reminding himself that “sleep is the most important tool that I have,”",
+              "anchor": "sleep is the most important tool"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它在普通人中很常见。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-gd-2026-m1-reading-c-1",
+              "quote": "becoming part of the lives of ordinary people who want a clearer sense of their health condition",
+              "anchor": "part of the lives of ordinary people"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它保证顶尖运动表现。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "a disciplined routine shapes his performance",
+            "sourceHighlight": "shapes his performance",
+            "optionText": "It guarantees top athletic performance.",
+            "optionHighlight": "guarantees",
+            "explanation": "原文是作息塑造表现，并未保证顶尖成绩。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-gd-2026-m1-reading-c-1",
+              "quote": "and that a disciplined routine shapes his performance.",
+              "anchor": "shapes his performance"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It is common among ordinary people.",
+          "sourceRole": "correctOption",
+          "targetText": "becoming part of the lives of ordinary people who want a clearer sense of their health condition",
+          "targetParagraphId": "para-mock-gd-2026-m1-reading-c-1",
+          "relationType": "paraphrase",
+          "note": "在普通人中常见对应 becoming part of the lives of ordinary people。"
+        }
+      ]
+    },
+    "q-mock-gd-2026-m1-029": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查高级可穿戴设备与其他产品的差别，需在第二段“揭示行为模式”处定位。",
+      "stemTranslationZh": "高级可穿戴设备与其他产品有何不同？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们专门为夜间进食而设计。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "They show how habits like late-night eating or drinking directly influence recovery and readiness for the next day.",
+            "sourceHighlight": "habits like late-night eating or drinking",
+            "optionText": "They are designed specifically for night eating.",
+            "optionHighlight": "specifically for night eating",
+            "explanation": "熬夜进食只是所展示的习惯之一，并非设备的专门设计用途。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-gd-2026-m1-reading-c-2",
+              "quote": "They show how habits like late-night eating or drinking directly influence recovery and readiness for the next day.",
+              "anchor": "habits like late-night eating"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们提供彼此独立的数据点。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "Rather than offering separate data points, these devices track how small changes build up over time, revealing behavioral patterns that shape overall health trends.",
+            "sourceHighlight": "Rather than offering separate data points",
+            "optionText": "They offer separate and independent data points.",
+            "optionHighlight": "separate and independent data points",
+            "explanation": "原文用 rather than 否定独立数据点，选项却把它说成特点。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-gd-2026-m1-reading-c-2",
+              "quote": "Rather than offering separate data points, these devices track how small changes build up over time, revealing behavioral patterns that shape overall health trends.",
+              "anchor": "Rather than offering separate data points"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们揭示习惯与健康之间的联系。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-gd-2026-m1-reading-c-2",
+              "quote": "revealing behavioral patterns that shape overall health trends",
+              "anchor": "revealing behavioral patterns"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们提供丰富而扎实的生理信息。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Many wearables on the market provide reliable heart-rate tracking and basic physiological (生理的) data, sufficient for general everyday monitoring.",
+            "sourceEntity": "Many wearables",
+            "optionText": "They provide rich and solid physiological information.",
+            "optionEntity": "advanced models",
+            "explanation": "基础生理数据是市面普通设备的特点，不是高级型号的区分点。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-gd-2026-m1-reading-c-2",
+              "quote": "Many wearables on the market provide reliable heart-rate tracking and basic physiological (生理的) data, sufficient for general everyday monitoring.",
+              "anchor": "basic physiological (生理的) data"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "They reveal connections between habits and health.",
+          "sourceRole": "correctOption",
+          "targetText": "revealing behavioral patterns that shape overall health trends",
+          "targetParagraphId": "para-mock-gd-2026-m1-reading-c-2",
+          "relationType": "paraphrase",
+          "note": "习惯与健康的联系对应 revealing behavioral patterns that shape overall health trends。"
+        }
+      ]
+    },
+    "q-mock-gd-2026-m1-030": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查 McGregor 对使用可穿戴设备的担忧，需在完美主义与焦虑、围着数字转处定位。",
+      "stemTranslationZh": "关于使用可穿戴设备，Jess McGregor 担心什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "日常乐趣减少。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Reduced enjoyment in daily routines.",
+            "explanation": "McGregor 强调的是完美主义与焦虑，不是乐趣减少；乐趣出现在末段 Walston 的建议里。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "缺少及时的专业指导。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Lack of timely professional guidance.",
+            "explanation": "原文没有谈专业指导是否及时。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "训练过猛造成身体受伤。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Physical injuries from training too hard.",
+            "explanation": "担忧指向心理压力，不是身体受伤。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "追逐数字带来的精神压力。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-gd-2026-m1-reading-c-3",
+              "quote": "the expectation to “train like an athlete” can push ordinary people toward perfectionism and anxiety",
+              "anchor": "perfectionism and anxiety"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Mental pressure from chasing numbers.",
+          "sourceRole": "correctOption",
+          "targetText": "can push ordinary people toward perfectionism and anxiety",
+          "targetParagraphId": "para-mock-gd-2026-m1-reading-c-3",
+          "relationType": "paraphrase",
+          "note": "追逐数字的精神压力对应 perfectionism and anxiety 以及 lives center around numbers。"
+        }
+      ]
+    },
+    "q-mock-gd-2026-m1-031": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查 Walston 建议人们做什么，需在倾听身体信号、而非只追设备目标处定位。",
+      "stemTranslationZh": "Zachary Walston 医生建议人们做什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "倾听身体信号。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-gd-2026-m1-reading-c-4",
+              "quote": "the watch on our wrist can make us forget the body’s gentler signals",
+              "anchor": "the body’s gentler signals"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "从数据预测身体反应。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "rather than simply chasing device targets",
+            "sourceHighlight": "rather than simply chasing device targets",
+            "optionText": "Predict body responses from data.",
+            "optionHighlight": "from data",
+            "explanation": "Walston 反对只追设备目标，选项却仍把数据预测当建议。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-gd-2026-m1-reading-c-4",
+              "quote": "rather than simply chasing device targets",
+              "anchor": "rather than simply chasing device targets"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "抛弃健身追踪设备。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "rather than simply chasing device targets",
+            "sourceHighlight": "chasing device targets",
+            "optionText": "Abandon fitness tracking devices.",
+            "optionHighlight": "Abandon",
+            "explanation": "建议是不要只追目标，不是扔掉设备。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-gd-2026-m1-reading-c-4",
+              "quote": "rather than simply chasing device targets",
+              "anchor": "chasing device targets"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "为日常锻炼设定明确目标。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "rather than simply chasing device targets",
+            "sourceHighlight": "chasing device targets",
+            "optionText": "Set clear targets for daily exercise.",
+            "optionHighlight": "Set clear targets",
+            "explanation": "原文反对只追设备目标，选项却把设目标当成建议。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-gd-2026-m1-reading-c-4",
+              "quote": "rather than simply chasing device targets",
+              "anchor": "chasing device targets"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Listen to your physical signals.",
+          "sourceRole": "correctOption",
+          "targetText": "the watch on our wrist can make us forget the body’s gentler signals",
+          "targetParagraphId": "para-mock-gd-2026-m1-reading-c-4",
+          "relationType": "paraphrase",
+          "note": "倾听身体信号对应不要忘记 the body’s gentler signals。"
+        }
+      ]
+    },
+    "q-mock-gd-2026-m1-032": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查第二段划线词 retain 的含义，需结合断电后电阻仍保持来推断。",
+      "stemTranslationZh": "第二段划线词 retain 是什么意思？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "追踪。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Track.",
+            "explanation": "下文强调断电后电阻水平仍然保持，不是追踪电流。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "储存。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-gd-2026-m1-reading-d-2",
+              "quote": "Even after the power is switched off, the resistance level remains, thus allowing memristors to function like tiny memory units inside a computer.",
+              "anchor": "the resistance level remains"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "收集。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Gather.",
+            "explanation": "retain 在此指保持已有电阻状态，不是收集信息。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "分析。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Analyze.",
+            "explanation": "原文没有把忆阻器说成分析装置。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Store.",
+          "sourceRole": "correctOption",
+          "targetText": "the resistance level remains, thus allowing memristors to function like tiny memory units inside a computer",
+          "targetParagraphId": "para-mock-gd-2026-m1-reading-d-2",
+          "relationType": "paraphrase",
+          "note": "Store 对应 remains 以及 tiny memory units。"
+        }
+      ]
+    },
+    "q-mock-gd-2026-m1-033": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查第三段提及脑细胞是为了说明什么，需定位 collective intelligence 的类比。",
+      "stemTranslationZh": "作者在第三段提到脑细胞是想说明什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "蘑菇结构复杂。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The complex structure of mushrooms.",
+            "explanation": "脑细胞类比指向协同工作，不是结构复杂。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "菌丝电响应迅速。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "the mushrooms switched between electrical states up to 5,850 times per second with about 90% accuracy",
+            "sourceEntity": "5,850 times per second",
+            "optionText": "The rapid electrical response of mycelium.",
+            "optionEntity": "brain cells",
+            "explanation": "切换频率是实验结果，不是拿脑细胞来说明速度快。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-gd-2026-m1-reading-d-3",
+              "quote": "the mushrooms switched between electrical states up to 5,850 times per second with about 90% accuracy",
+              "anchor": "5,850 times per second"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "菌丝网络具有协作性质。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-gd-2026-m1-reading-d-3",
+              "quote": "stability returned when several mushrooms were linked together—suggesting a kind of collective intelligence, similar to how brain cells function together",
+              "anchor": "collective intelligence, similar to how brain cells function together"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "蘑菇器件性能不稳定。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Although their performance dropped under higher electrical frequencies, stability returned when several mushrooms were linked together",
+            "sourceHighlight": "stability returned",
+            "optionText": "The unstable performance of mushroom devices.",
+            "optionHighlight": "unstable performance",
+            "explanation": "高频下表现下降后，连接多个蘑菇稳定性又回来了，脑细胞类比的是协同而非不稳定。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-gd-2026-m1-reading-d-3",
+              "quote": "Although their performance dropped under higher electrical frequencies, stability returned when several mushrooms were linked together—suggesting a kind of collective intelligence, similar to how brain cells function together",
+              "anchor": "stability returned when several mushrooms were linked together"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The cooperative nature of mycelium networks.",
+          "sourceRole": "correctOption",
+          "targetText": "a kind of collective intelligence, similar to how brain cells function together",
+          "targetParagraphId": "para-mock-gd-2026-m1-reading-d-3",
+          "relationType": "paraphrase",
+          "note": "协作性质对应 collective intelligence 与 brain cells function together。"
+        }
+      ]
+    },
+    "q-mock-gd-2026-m1-034": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查第四段蘑菇忆阻器的优势，需定位可再生、可降解、可塑形。",
+      "stemTranslationZh": "根据第四段，基于蘑菇的忆阻器有什么优势？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们稀有而特殊。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Traditional memristors rely on scarce minerals and require high energy consumption.",
+            "sourceHighlight": "scarce minerals",
+            "optionText": "They are rare and special.",
+            "optionHighlight": "rare",
+            "explanation": "稀缺矿物是传统忆阻器的问题，蘑菇反而是可再生、易种植。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-gd-2026-m1-reading-d-4",
+              "quote": "Traditional memristors rely on scarce minerals and require high energy consumption.",
+              "anchor": "scarce minerals"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们聪明而强大。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They are smart and powerful.",
+            "explanation": "第四段讲环境与可塑，没有 smart and powerful。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们有创意且高产。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They are creative and productive.",
+            "explanation": "原文没有用创意或高产来概括蘑菇忆阻器。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们可持续且适应性强。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-gd-2026-m1-reading-d-4",
+              "quote": "Mushrooms, however, are renewable biodegradable, and easy to grow.",
+              "anchor": "renewable biodegradable, and easy to grow"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-mock-gd-2026-m1-reading-d-4",
+              "quote": "Their mycelium can also be shaped into custom structures, making them suitable for wearable electronics smart sensors, and other emerging technologies.",
+              "anchor": "shaped into custom structures"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "They are sustainable and adaptable.",
+          "sourceRole": "correctOption",
+          "targetText": "Mushrooms, however, are renewable biodegradable, and easy to grow.",
+          "targetParagraphId": "para-mock-gd-2026-m1-reading-d-4",
+          "relationType": "paraphrase",
+          "note": "sustainable 对应 renewable biodegradable；adaptable 对应 shaped into custom structures。"
+        }
+      ]
+    },
+    "q-mock-gd-2026-m1-035": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查从 LaRocco 的话能推断什么，需抓住现有资源即可实现。",
+      "stemTranslationZh": "从 John LaRocco 的话可以推断有机计算怎样？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它的进入门槛很低。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-gd-2026-m1-reading-d-5",
+              "quote": "All of it is achievable with the resources we already have.",
+              "anchor": "achievable with the resources we already have"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它将推动森林研究。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "the computers on our desks may very well have taker root—quite literally—in the forest",
+            "optionText": "It will advance forest research.",
+            "matchType": "exact",
+            "relationNote": "forest 是比喻计算机扎根土壤，不是推进森林研究。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-gd-2026-m1-reading-d-5",
+              "quote": "the computers on our desks may very well have taker root—quite literally—in the forest",
+              "anchor": "in the forest"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它有助于减少农业废料。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Everything needed to explore organic computing could be as small as a pile of” natural waste and some homemade electronics—or as large as a culturing factory",
+            "sourceHighlight": "a pile of” natural waste",
+            "optionText": "It helps reduce agricultural waste.",
+            "optionHighlight": "reduce agricultural waste",
+            "explanation": "自然废料是可用原料的下限，并未说有机计算能减少农业废料。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-gd-2026-m1-reading-d-5",
+              "quote": "Everything needed to explore organic computing could be as small as a pile of” natural waste and some homemade electronics—or as large as a culturing factory",
+              "anchor": "a pile of” natural waste"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它将在工厂创造更多就业。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It will create more jobs in factories.",
+            "explanation": "culturing factory 只是规模上限的比喻，没有谈就业。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It has a low barrier to entry.",
+          "sourceRole": "correctOption",
+          "targetText": "All of it is achievable with the resources we already have.",
+          "targetParagraphId": "para-mock-gd-2026-m1-reading-d-5",
+          "relationType": "paraphrase",
+          "note": "低门槛对应现有资源即可实现。"
+        }
+      ]
+    }
+  }
+}

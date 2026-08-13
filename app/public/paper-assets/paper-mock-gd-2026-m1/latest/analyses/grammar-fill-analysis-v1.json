@@ -1,0 +1,260 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-mock-gd-2026-m1",
+  "sourceAssetVersion": 2,
+  "targetGroups": [
+    "group-mock-gd-2026-m1-grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed",
+    "model": "cursor-grok-4.6",
+    "reviewedBy": "format3-import-agent",
+    "reviewedAt": "2026-08-13T00:00:00Z",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-mock-gd-2026-m1-grammar-fill": {
+      "overview": "记叙文。英国摄影师 Jord Hammond 自 2015 年起把重庆当作第二故乡，用行走与镜头理解城市，并把摄影变成向世界讲述中国日常的方式。"
+    }
+  },
+  "blanks": {
+    "q-mock-gd-2026-m1-056": {
+      "blankId": "blank-mock-gd-2026-m1-056",
+      "blankNo": 56,
+      "blankType": "given",
+      "hint": "regard",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "has regarded",
+      "role": null,
+      "path": null,
+      "reason": "Since then 把时间从 2015 拉到现在，谓语用现在完成时 has regarded。",
+      "evidence": [
+        {
+          "type": "time-marker",
+          "signalText": "Since then, he",
+          "signalSide": "passage",
+          "relation": "Since then 要求完成时。"
+        },
+        {
+          "type": "subject",
+          "signalText": "Jord Hammond is a British photographer",
+          "signalSide": "passage",
+          "relation": "主语 he 为第三人称单数，助动词用 has。"
+        }
+      ],
+      "teachingNote": "见到 Since then 先判完成时，再配 has + 过去分词。"
+    },
+    "q-mock-gd-2026-m1-057": {
+      "blankId": "blank-mock-gd-2026-m1-057",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "reveal",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "revealing",
+      "role": "adverbial",
+      "path": "fast",
+      "reason": "captures 已是谓语，空处作伴随状语，用现在分词 revealing。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "he captures",
+          "signalSide": "passage",
+          "relation": "句中已有谓语 captures，reveal 不能再作谓语。"
+        },
+        {
+          "type": "modified-word",
+          "signalText": "a China that is raw, up-close and deeply human",
+          "signalSide": "passage",
+          "relation": "分词揭示拍摄结果。"
+        }
+      ],
+      "teachingNote": "逗号后动词空，句中已有谓语时走非谓语，主动用 -ing。"
+    },
+    "q-mock-gd-2026-m1-058": {
+      "blankId": "blank-mock-gd-2026-m1-058",
+      "blankNo": 58,
+      "blankType": "given",
+      "hint": "complete",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
+      "answer": "completely",
+      "role": null,
+      "path": null,
+      "reason": "修饰形容词 different，complete 应变副词 completely。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "different scale",
+          "signalSide": "passage",
+          "relation": "空后 different 为形容词，前用副词。"
+        }
+      ],
+      "teachingNote": "a ____ different + 名词，空填副词。"
+    },
+    "q-mock-gd-2026-m1-059": {
+      "blankId": "blank-mock-gd-2026-m1-059",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "understand",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "To understand",
+      "role": "adverbial",
+      "path": "slow",
+      "reason": "句首表目的，he started 已是谓语，用不定式 To understand。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "the city, he started going on long walks",
+          "signalSide": "passage",
+          "relation": "逗号后出现完整主谓，句首动词作目的状语。"
+        }
+      ],
+      "teachingNote": "句首动词 + 逗号 + 主谓，优先 to-do 表目的。"
+    },
+    "q-mock-gd-2026-m1-060": {
+      "blankId": "blank-mock-gd-2026-m1-060",
+      "blankNo": 60,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.noun-clause",
+      "answer": "What",
+      "role": null,
+      "path": null,
+      "reason": "空后 started as... soon became 缺主语，What 引导主语从句。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "started as a way to feel more comfortable soon became a daily habit",
+          "signalSide": "passage",
+          "relation": "两个谓语需要一个主语从句来充当主语。"
+        }
+      ],
+      "teachingNote": "____ started as ... became 是主语从句，填 What。"
+    },
+    "q-mock-gd-2026-m1-061": {
+      "blankId": "blank-mock-gd-2026-m1-061",
+      "blankNo": 61,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.coordinating",
+      "answer": "and",
+      "role": null,
+      "path": null,
+      "reason": "explore、make sense of、connect 三个不定式并列，中间用 and。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "a way to explore, make sense of the surroundings,",
+          "signalSide": "passage",
+          "relation": "to 后已有两个动词短语，再接 connect，需并列连词。"
+        },
+        {
+          "type": "parallel",
+          "signalText": "connect with people and stories",
+          "signalSide": "passage",
+          "relation": "第三项与前两项并列。"
+        }
+      ],
+      "teachingNote": "三个动词短语并列时，最后一项前填 and。"
+    },
+    "q-mock-gd-2026-m1-062": {
+      "blankId": "blank-mock-gd-2026-m1-062",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "remark",
+      "facetKey": "grammar-fill.given.conversion.verb-to-adjective",
+      "answer": "remarkable",
+      "role": null,
+      "path": null,
+      "reason": "were 后缺表语形容词，remark 转为 remarkable。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "the visual contrasts were",
+          "signalSide": "passage",
+          "relation": "系动词 were 后接形容词。"
+        }
+      ],
+      "teachingNote": "were ____. 给动词提示时做分词/形容词转换，这里是 -able。"
+    },
+    "q-mock-gd-2026-m1-063": {
+      "blankId": "blank-mock-gd-2026-m1-063",
+      "blankNo": 63,
+      "blankType": "given",
+      "hint": "appreciate",
+      "facetKey": "grammar-fill.given.conversion.verb-to-noun",
+      "answer": "appreciation",
+      "role": null,
+      "path": null,
+      "reason": "deepened his 后需名词，appreciate 转为 appreciation。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "deepened his",
+          "signalSide": "passage",
+          "relation": "his 后接名词。"
+        },
+        {
+          "type": "of-phrase",
+          "signalText": "for China’s cultural and geographic diversity",
+          "signalSide": "passage",
+          "relation": "appreciation for 为常见名词搭配。"
+        }
+      ],
+      "teachingNote": "his ____ for... 给动词时转名词。"
+    },
+    "q-mock-gd-2026-m1-064": {
+      "blankId": "blank-mock-gd-2026-m1-064",
+      "blankNo": 64,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.pronoun",
+      "answer": "it",
+      "role": null,
+      "path": null,
+      "reason": "破折号后缺主语，回指 photography，用 it。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "photography could be more than a personal hobby",
+          "signalSide": "passage",
+          "relation": "it 回指 photography。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "could be a form of storytelling",
+          "signalSide": "passage",
+          "relation": "空后是谓语，空处填主语代词。"
+        }
+      ],
+      "teachingNote": "hobby— ____ could be 回指 photography，填 it。"
+    },
+    "q-mock-gd-2026-m1-065": {
+      "blankId": "blank-mock-gd-2026-m1-065",
+      "blankNo": 65,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "to",
+      "role": null,
+      "path": null,
+      "reason": "show ... to people 表示向世界各地的人展示中国日常生活。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "show daily life of Chinese",
+          "signalSide": "passage",
+          "relation": "show sth to sb 缺介词 to。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "people around the world",
+          "signalSide": "passage",
+          "relation": "对象是世界各地的人。"
+        }
+      ],
+      "teachingNote": "show A ____ B 表示展示给谁，填 to。"
+    }
+  }
+}

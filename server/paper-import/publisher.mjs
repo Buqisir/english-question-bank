@@ -31,6 +31,10 @@ import {
   trustedDocxPublicationSourceAsset,
 } from '../paper-canonical/trustedDocxCanonicalRequest.mjs'
 import {
+  docxPairPublicationSourceAsset,
+  isDocxPairCanonicalImportRequest,
+} from '../paper-canonical/docxPairCanonicalRequest.mjs'
+import {
   canonicalizeVisibleEnglishTypography,
 } from '../../shared/paper-canonical/visibleTypography.mjs'
 
@@ -778,14 +782,38 @@ function semanticMismatchForGroup({
     }
     if (usesReviewedStructuredSource) return null
     const blocks = canonicalGroup.content.blocks
-    if (
-      family === 'application-writing'
-      && inlineText(blocks.flatMap((block) => block.inlines || []))
-        !== canonicalizeVisibleEnglishTypography(
-          `${task.instruction}（词数${task.wordCountTarget}左右。）`,
+    if (family === 'application-writing') {
+      if (groupInputKeys.has('question_docx')) {
+        const prompt = inlineText(
+          blocks.find((block) => block.nodeId?.endsWith(':prompt'))?.inlines,
         )
-    ) {
-      return 'application-writing prompt'
+        const notice = inlineText(
+          blocks.find((block) => block.nodeId?.endsWith(':notice'))?.inlines,
+        )
+        const givenTitle = inlineText(
+          blocks.find((block) => block.nodeId?.endsWith(':given:title'))?.inlines,
+        )
+        const expectedGiven = typeof task.applicationGiven === 'string'
+          ? canonicalizeVisibleEnglishTypography(task.applicationGiven)
+          : ''
+        if (
+          prompt !== canonicalizeVisibleEnglishTypography(task.instruction)
+          || !notice.startsWith('注意')
+          || !notice.includes(String(task.wordCountTarget))
+          || givenTitle !== expectedGiven
+        ) {
+          return 'application-writing prompt'
+        }
+        return null
+      }
+      if (
+        inlineText(blocks.flatMap((block) => block.inlines || []))
+          !== canonicalizeVisibleEnglishTypography(
+            `${task.instruction}（词数${task.wordCountTarget}左右。）`,
+          )
+      ) {
+        return 'application-writing prompt'
+      }
     }
     if (
       family === 'continuation-writing'
@@ -837,6 +865,31 @@ function validateCanonicalImportPackageBinding({
         diagnostics: [{
           code: 'CANONICAL_IMPORT_SOURCE_PACKAGE_UNBOUND',
           message: 'Canonical Source Capture does not bind the exact source_docx import file',
+        }],
+      }
+    }
+  } else if (isDocxPairCanonicalImportRequest(canonicalRequest)) {
+    const packageSource = packageData.sourceDocx?.buffer
+    const packageDigest = Buffer.isBuffer(packageSource)
+      || packageSource instanceof Uint8Array
+      ? bytesSha256(packageSource)
+      : null
+    const requestSource = docxPairPublicationSourceAsset(canonicalRequest)
+    const requestDigest = requestSource ? bytesSha256(requestSource) : null
+    if (
+      !packageDigest
+      || !requestDigest
+      || packageDigest !== requestDigest
+      || !captureDocuments.some(
+        (document) =>
+          document.inputKey === 'question_docx' && document.sha256 === packageDigest,
+      )
+    ) {
+      return {
+        disposition: 'unsupported',
+        diagnostics: [{
+          code: 'CANONICAL_IMPORT_SOURCE_PACKAGE_UNBOUND',
+          message: 'Canonical Source Capture does not bind the exact question_docx import file',
         }],
       }
     }
@@ -1004,10 +1057,11 @@ function admitBoundCanonicalPackage({
   answerKeyBytes,
 }) {
   const trustedDocxSource = trustedDocxPublicationSourceAsset(canonicalRequest)
+  const docxPairSource = docxPairPublicationSourceAsset(canonicalRequest)
   const admission = admitCanonicalPaperImport({
     request: canonicalRequest,
     sourceAssetVersion: version,
-    sourceAsset: trustedDocxSource ?? sourceAssetBytes,
+    sourceAsset: trustedDocxSource ?? docxPairSource ?? sourceAssetBytes,
   })
   if (!admission.ok) return { failure: canonicalAdmissionFailure(admission) }
   if (admission.sealed.manifest.paperId !== paperId) {

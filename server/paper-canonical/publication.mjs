@@ -26,6 +26,11 @@ import {
   isTrustedDocxCanonicalImportRequest,
 } from './trustedDocxCanonicalRequest.mjs'
 import {
+  admitLiveConfirmedDocxPairImport,
+  isDocxPairCanonicalImportRequest,
+  isLiveConfirmedDocxPairAdmission,
+} from './docxPairCanonicalRequest.mjs'
+import {
   consumerContractRefs,
   resolveConsumerContract,
 } from '../../shared/paper-canonical/consumers.mjs'
@@ -377,6 +382,7 @@ export function sealCanonicalPublication({
   sourceAsset,
   registeredConfirmationProof = null,
   trustedDocxConfirmationProof = null,
+  docxPairConfirmationProof = null,
 }) {
   if (compilation?.disposition !== 'ready') throw publicationError('CANONICAL_PUBLICATION_BLOCKED', 'Only a complete ready compilation may be published')
   if (!(sourceAsset instanceof Uint8Array) || !Number.isInteger(sourceAssetVersion) || sourceAssetVersion < 1) throw publicationError('CANONICAL_PUBLICATION_INPUT_INVALID', 'Publication needs immutable source asset bytes and a positive version')
@@ -396,7 +402,12 @@ export function sealCanonicalPublication({
       compilation,
       sourceAsset,
     })
-  ) throw publicationError('CANONICAL_PUBLICATION_AUTHORITY_RETIRED', 'Only the current canonical authority, one exact registered confirmed chain, or one live Teacher-Confirmed trusted DOCX request may create a new publication')
+    && !isLiveConfirmedDocxPairAdmission({
+      proof: docxPairConfirmationProof,
+      compilation,
+      sourceAsset,
+    })
+  ) throw publicationError('CANONICAL_PUBLICATION_AUTHORITY_RETIRED', 'Only the current canonical authority, one exact registered confirmed chain, one live Teacher-Confirmed trusted DOCX request, or one live Teacher-Confirmed DOCX pair request may create a new publication')
   const artifactPaths = artifactPathsFor(closure.authorityRef)
   assertPaperId(canonicalPaper?.paperPlan?.paperId)
   validateSourceCaptureIntegrity(sourceCapture)
@@ -1060,6 +1071,7 @@ export function admitCanonicalPaperImport({
   let effectiveSourceAsset = sourceAsset
   let registeredConfirmationProof = null
   let trustedDocxConfirmationProof = null
+  let docxPairConfirmationProof = null
   try {
     if (registeredConfirmation !== undefined) {
       if (request !== undefined || sourceAsset !== undefined) {
@@ -1074,6 +1086,22 @@ export function admitCanonicalPaperImport({
       compilation = registered.compilation
       effectiveSourceAsset = registered.sourceAsset
       registeredConfirmationProof = registered.proof
+    } else if (isDocxPairCanonicalImportRequest(request)) {
+      const admitted = admitLiveConfirmedDocxPairImport(request)
+      compilation = admitted.compilation
+      effectiveSourceAsset = admitted.sourceAsset
+      docxPairConfirmationProof = admitted.proof
+      if (sourceAsset !== undefined) {
+        const supplied = sourceAsset instanceof Uint8Array
+          ? sourceAsset
+          : null
+        if (!supplied || sha256(supplied) !== sha256(admitted.sourceAsset)) {
+          throw publicationError(
+            'CANONICAL_PUBLICATION_SOURCE_UNBOUND',
+            'DOCX pair admission source asset must be the exact request question_docx bytes',
+          )
+        }
+      }
     } else if (isTrustedDocxCanonicalImportRequest(request)) {
       const admitted = admitLiveConfirmedTrustedDocxImport(request)
       compilation = admitted.compilation
@@ -1106,6 +1134,7 @@ export function admitCanonicalPaperImport({
       sourceAsset: effectiveSourceAsset,
       registeredConfirmationProof,
       trustedDocxConfirmationProof,
+      docxPairConfirmationProof,
     })
     const ref = {
       paperId: sealed.manifest.paperId,

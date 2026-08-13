@@ -13,7 +13,7 @@ coding agent 按一份标准契约独立导完一卷；自己只在导题
 
 ## User outcome
 
-源文件已在磁盘上时，owner 丢给 agent 三样东西（路径、`paperId`、格式①或②），
+源文件已在磁盘上时，owner 丢给 agent 三样东西（路径、`paperId`、格式①/②/③），
 走开。回来时导题后台能看见进度；待 QA 时看 Screen / Print / 门禁绿灯；说
 「上线」后 agent 跑现有整库 push。不对答案表，不在网站上导题，不接 LLM API。
 
@@ -28,8 +28,10 @@ coding agent 按一份标准契约独立导完一卷；自己只在导题
 
 ### 范围
 
-- 先收口现有 NCK1 整卷管线。新源格式（地方卷旧刀、模拟卷、单题组、扫描件）
-  不在本 spec。
+- 先收口现有 NCK1 整卷管线。新源格式（地方卷旧刀、单题组、扫描件）
+  不在本 spec。模拟卷「试题 DOCX + 答案解析 DOCX」已于 2026-08-13 由
+  owner 拍板纳入白名单（格式③），见 `docs/product/nck1-paper-standard.md`
+  附录 A；本 spec 原执行切片不含该刀。
 - 分析用本机 agent 会话，不用后台直连 LLM API。
 - 网站只消费。导题后台不是网站导入 UI 的复活。
 - 找卷不在范围内：从「源已在本机磁盘」起。
@@ -40,7 +42,7 @@ coding agent 按一份标准契约独立导完一卷；自己只在导题
 
 - 唯一进场文档：`docs/import/agent-contract.md`（实现时写）。机械步骤链到
   `docs/import/agent-runbook.md` 与 `scripts/import-pipeline/README.md`。
-- 开局信息：源绝对路径 + `paperId` + 格式①（DOCX 答案版）或②（PDF + 答案 PDF）。
+- 开局信息：源绝对路径 + `paperId` + 格式①（DOCX 答案版）、②（PDF + 答案 PDF）或③（试题 DOCX + 答案解析 DOCX）。
 - 同一 `paperId` 同时只一个 writer。多卷并行本 spec 不做产品化。
 - 无子代理时允许同一会话串行写 7 组客观题分析。禁止把别的 `paperId` 分析
   remap 当本卷交付。
@@ -85,8 +87,9 @@ coding agent 按一份标准契约独立导完一卷；自己只在导题
 
 ### 写作分析（新卷必交）
 
-权威稿目前在工作树 `wt-continuation-analysis-research-20260809`，尚未合入
-`main`。导题跟新合同；持久化 / UI / 旧资产迁移是后续实现。
+权威在 `docs/import/agent-contract.md` 与两份写作合同。新卷必须交稿并在
+`--publish` 后写入 `writing-analysis-v1.json`；消费端已展示应用文
+ReviewCard / 双范文与续写 V1。旧资产迁移仍是后续工作。
 
 - **应用文**：`docs/product/application-writing-doctrine-v1.md` + Prompt V3。
   落盘 `modelAnswer` + 完整 ReviewCard（11 项）+ 源有则 `officialModelAnswer`。

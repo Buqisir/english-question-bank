@@ -8,9 +8,11 @@
  *
  *   PRE-PUBLISH  (default; app/public/paper-assets/<paperId> does not exist
  *                yet) — checks the staging materials only: groups.json shape/
- *                counts/question-number ranges, listening/ + figures/ raw
- *                material completeness. This is what a DEV can get "全绿" on
- *                before running 02-publish.mjs --publish.
+ *                counts/question-number ranges, and listening/ + figures/ when
+ *                the source actually has those sections (PDF-pair always;
+ *                DOCX only if full.txt has a listening heading or a figures
+ *                manifest is present). Missing listening/figures on a
+ *                reading-first DOCX is a skip, not a fail.
  *   POST-PUBLISH (app/public/paper-assets/<paperId>/latest exists) — adds the
  *                checks that listening/ and figures/ actually landed in the
  *                live paper-asset tree (via attach-paper-assets-extras.mjs).
@@ -42,6 +44,16 @@ import { existsSync, readFileSync, statSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { spawnSync } from 'node:child_process'
+import {
+  assertApplicationChromeFromGroups,
+  assertNck1ApplicationChrome,
+  assertPublishedWritingAnalysisEnvelope,
+  isFormat3Config,
+  loadStagedWritingAnalysis,
+  projectStagedWritingAnalysis,
+  requiresLockedWritingAnalysis,
+} from './lib-nck1-new-paper-locks.mjs'
+import { validateWritingAnalysisCandidate } from '../../server/writing-analysis/writingAnalysisBackfillService.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '../..')
@@ -172,7 +184,24 @@ check('D1 objective answers 21-65: exactly one non-empty answerKey each', () => 
   return `45/45 present (21-65)`
 })
 
+function skip(name, detail) {
+  results.push({ name, ok: true, detail })
+}
+
+const isPdfPair = existsSync(path.join(stagingDir, 'source', 'paper.pdf'))
+const fullTxtPath = path.join(stagingDir, 'full.txt')
+const fullText = existsSync(fullTxtPath) ? readFileSync(fullTxtPath, 'utf8') : ''
+const listeningInSource = isPdfPair
+  || /第一部分\s*听力/.test(fullText)
+  || /听力\s*[（(]共两节/.test(fullText)
+const figuresRequired = isPdfPair || existsSync(path.join(figuresDir, 'manifest.json'))
+
 // ---- E. 听力原料非空 ----
+if (!listeningInSource) {
+  skip('E1 listening/questions.json: 20 stems+options (5 + 15)', 'skipped (source has no listening section)')
+  skip('E2 listening/answers.json: 20 answers (1-20)', 'skipped (source has no listening section)')
+  skip('E3 listening/transcript.json: 10 texts + timing/rate table', 'skipped (source has no listening section)')
+} else {
 check('E1 listening/questions.json: 20 stems+options (5 + 15)', () => {
   const p = path.join(listeningDir, 'questions.json')
   if (!existsSync(p)) fail('listening/questions.json missing')
@@ -202,8 +231,13 @@ check('E3 listening/transcript.json: 10 texts + timing/rate table', () => {
     if (!row.durationSeconds || !row.wordCount || !row.wordsPerMinute) fail(`timing row for ${row.text} missing duration/wordCount/wpm`)
   }
 })
+}
 
 // ---- F. figures 齐全 (dual-store bridge, §8) ----
+if (!figuresRequired) {
+  skip('F1 figures/manifest.json: every entry has an existing non-empty file + valid groupId + placeholder present in materialText', 'skipped (source has no figures)')
+  skip('F1b MF-4: every placeholderMarker is paragraph-initial and appears in exactly one paragraph (figure-render cut)', 'skipped (source has no figures)')
+} else {
 check('F1 figures/manifest.json: every entry has an existing non-empty file + valid groupId + placeholder present in materialText', () => {
   const manifestPath = path.join(figuresDir, 'manifest.json')
   if (!existsSync(manifestPath)) fail('figures/manifest.json missing')
@@ -270,18 +304,80 @@ check('F1b MF-4: every placeholderMarker is paragraph-initial and appears in exa
   }
   return `${checked} marker(s) paragraph-initial + single-paragraph OK`
 })
+}
 
 // ---- G. Post-publish progressive check ----
 const published = existsSync(liveLatestDir)
-if (published) {
+if (published && (listeningInSource || figuresRequired)) {
   check('G1 [post-publish] live paper-assets/<paperId>/latest/listening + figures present (attach-paper-assets-extras.mjs ran)', () => {
     const liveListening = path.join(liveLatestDir, 'listening')
     const liveFigures = path.join(liveLatestDir, 'figures')
-    if (!existsSync(liveListening)) fail(`${liveListening} missing — run attach-paper-assets-extras.mjs ${paperId}`)
-    if (!existsSync(liveFigures)) fail(`${liveFigures} missing — run attach-paper-assets-extras.mjs ${paperId}`)
+    if (listeningInSource && !existsSync(liveListening)) fail(`${liveListening} missing — run attach-paper-assets-extras.mjs ${paperId}`)
+    if (figuresRequired && !existsSync(liveFigures)) fail(`${liveFigures} missing — run attach-paper-assets-extras.mjs ${paperId}`)
+  })
+} else if (published) {
+  skip('G1 [post-publish] live paper-assets check', 'skipped (source has no listening/figures extras)')
+} else {
+  skip('G1 [post-publish] live paper-assets check', 'skipped (not published yet — this is expected pre-publish)')
+}
+
+const configPath = path.join(stagingDir, 'config.json')
+const config = existsSync(configPath) ? JSON.parse(readFileSync(configPath, 'utf8')) : {}
+const lockWriting = requiresLockedWritingAnalysis(config, stagingDir)
+
+if (isFormat3Config(config)) {
+  check('H1 application chrome: given title present, prompt does not glue 词数', () => {
+    assertApplicationChromeFromGroups(application)
+    return String(application.applicationGiven).trim()
   })
 } else {
-  results.push({ name: 'G1 [post-publish] live paper-assets check', ok: true, detail: 'skipped (not published yet — this is expected pre-publish)' })
+  skip('H1 application chrome (groups.json)', 'skipped (not format ③)')
+}
+
+if (lockWriting) {
+  check('H2 staged writing analyses use application V3 + continuation V1', () => {
+    const applicationRaw = loadStagedWritingAnalysis(stagingDir, 'application')
+    const continuationRaw = loadStagedWritingAnalysis(stagingDir, 'continuation')
+    validateWritingAnalysisCandidate(projectStagedWritingAnalysis(applicationRaw))
+    validateWritingAnalysisCandidate(projectStagedWritingAnalysis(continuationRaw))
+    return `${application.groupId} + ${continuation.groupId}`
+  })
+} else {
+  skip('H2 staged writing analyses', 'skipped (historical paper without staged writing analysis)')
+}
+
+if (published && isFormat3Config(config)) {
+  check('H3 [post-publish] canonical application chrome: notice + given title, no glued word-count', () => {
+    const groupsPathLive = path.join(liveLatestDir, 'canonical', 'canonical-question-groups-v1.json')
+    if (!existsSync(groupsPathLive)) fail(`${groupsPathLive} missing`)
+    const liveGroups = JSON.parse(readFileSync(groupsPathLive, 'utf8'))
+    const applicationGroup = (liveGroups.groups || []).find(
+      (group) => group.variant?.family === 'application-writing',
+    )
+    assertNck1ApplicationChrome(applicationGroup)
+  })
+} else {
+  skip(
+    'H3 [post-publish] canonical application chrome',
+    published ? 'skipped (not format ③)' : 'skipped (not published yet — this is expected pre-publish)',
+  )
+}
+
+if (published && lockWriting) {
+  check('H4 [post-publish] writing-analysis-v1.json has complete application V3 + continuation V1', () => {
+    const writingPath = path.join(liveLatestDir, 'analyses', 'writing-analysis-v1.json')
+    if (!existsSync(writingPath)) fail(`${writingPath} missing — 02-publish must persist writing analysis`)
+    assertPublishedWritingAnalysisEnvelope(JSON.parse(readFileSync(writingPath, 'utf8')), {
+      paperId,
+      applicationGroupId: application.groupId,
+      continuationGroupId: continuation.groupId,
+    })
+  })
+} else {
+  skip(
+    'H4 [post-publish] writing-analysis-v1.json',
+    published ? 'skipped (historical paper without staged writing analysis)' : 'skipped (not published yet — this is expected pre-publish)',
+  )
 }
 
 // ---- Report ----

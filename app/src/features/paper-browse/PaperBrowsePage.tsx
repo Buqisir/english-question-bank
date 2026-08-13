@@ -147,9 +147,10 @@ import { PaperAssetAnalysisPanel } from '../paper-intelligence/PaperAssetAnalysi
 import { ClozeAnalysisPanel } from '../paper-intelligence/ClozeAnalysisPanel'
 import { GrammarFillAnalysisPanel } from '../paper-intelligence/GrammarFillAnalysisPanel'
 import { WritingAnalysisPanel } from '../paper-intelligence/WritingAnalysisPanel'
+import { ContinuationAnalysisPanel } from './ContinuationAnalysisPanel'
 import {
   getRetainedWritingLecture,
-  isRetainedWritingPilotGroup,
+  hasCompleteApplicationLecturePayload,
   RetainedReviewCard,
 } from './RetainedWritingLecture.tsx'
 // 刀 2 修复轮 ③: 阅读跨栏证据动线 —— import-only 复用解析页 harness 同款
@@ -165,6 +166,7 @@ import type {
   PaperContentGroup,
   WritingAnalysis,
 } from '../../domain/paperAsset.ts'
+import { isNarrativeContinuationWritingAnalysis } from '../../domain/paperAsset.ts'
 import type { QuestionGroupCard } from '../../domain/questionBank'
 import type { LectureFocus, PaperSurfaceFocusIntent } from '../../../../shared/papersurface/types'
 import { fetchSimilarPassages, fetchSimilarQuestions } from '../../services/similarQuestions.ts'
@@ -172,10 +174,7 @@ import {
   SimilarQuestionsRailView,
   type SimilarRailRequestState,
 } from './SimilarQuestionsRailView'
-import {
-  applyPaperSurfaceFocusIntent,
-  shouldClearLectureSelectionForActiveGroup,
-} from './paperBrowseFocusIntent'
+import { applyPaperSurfaceFocusIntent } from './paperBrowseFocusIntent'
 import './paperBrowsePage.css'
 
 type GroupModel =
@@ -242,6 +241,7 @@ function isRenderableWritingAnalysis(value: unknown): value is WritingAnalysis {
       || Array.isArray(analysis.highlightExpressions)
     )
   }
+  if (isNarrativeContinuationWritingAnalysis(analysis)) return true
   if (!Array.isArray(analysis.highlightExpressions)) return false
   const continuationDesign = analysis.continuationDesign
   if (!continuationDesign || typeof continuationDesign !== 'object') {
@@ -313,19 +313,19 @@ function canonicalWritingNavigationChrome({
   })
 }
 
-// 讲评态下的显式点题选择——哪个题组的哪道题当前在讲评栏里，以及种下的
-// 证据/选项高亮。清空(null)时讲评栏跟随 scrollspy 显示当前题组的组级概览。
+// 讲评态下的显式点选——右边只显示这次点击对应的解析。questionId 为空是
+// 写作组整框点选。null 选择表示右边还没有解析，不跟随滚动。
 type LectureSelection = {
   groupId: string
-  questionId: string
+  questionId: string | null
   evidenceId: string | null
   optionLabel: string | null
 }
 
 // similar-rail (E2/E6): a snapshot of the seed that a fetch was made for,
 // captured at CTA-click time — kept separate from the live `lectureSelection`
-// so the result view (and its retry button) survives the "scroll away clears
-// lectureSelection" effect (:771-775) untouched.
+// so the result view (and its retry button) stay put until the user returns
+// or clicks another question.
 //
 // `mode` (E6): cloze/sevenChoices now seed POST /api/similar-passages by
 // `groupId` (篇章相似); reading/grammarFill still seed POST
@@ -670,15 +670,14 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   >({})
   const [lectureAnalysisFetched, setLectureAnalysisFetched] = useState(false)
   const [lectureAnalysisLoading, setLectureAnalysisLoading] = useState(false)
-  // 刀 2: 讲评态下的显式点题选择；null = 跟随 scrollspy 显示组级概览。
+  // 讲评态下的显式点选；null = 右边不显示解析，等待左边点击。
   const [lectureSelection, setLectureSelection] = useState<LectureSelection | null>(null)
   const [readingEvidenceAnchorReadyId, setReadingEvidenceAnchorReadyId] =
     useState<string | null>(null)
   const [openSevenChoiceQuestionIds, setOpenSevenChoiceQuestionIds] = useState<string[]>([])
   // similar-rail (E2): 讲评栏 body 的视图态 — 'analysis'(解析)/'similar'
   // (配相似结果列表)。只在 selectLectureQuestion 换题或用户点「返回解析」
-  // 时回落到 'analysis'——滚动离开选中题清空 lectureSelection 的那条 effect
-  // (:771-775) 不触碰这个态，结果列表保持到用户主动返回/换题。
+  // 时回落到 'analysis'。滚动不改这个态。
   const [similarView, setSimilarView] = useState<'analysis' | 'similar'>('analysis')
   const [similarSeed, setSimilarSeed] = useState<SimilarSeedSnapshot | null>(null)
   const [similarRequest, setSimilarRequest] = useState<SimilarRailRequestState>({ status: 'loading' })
@@ -701,9 +700,8 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   // 条 effect 落地）才能构造种子，时序天然晚一拍。
   const similarDeepLinkAppliedRef = useRef(false)
   const lectureHandleRef = useRef<HTMLButtonElement | null>(null)
-  // 刀 3 小尾巴 ①: 程序化滚动（rail 点击/深链/证据滚动）沉降期标记——期间
-  // activeAnchor 的 clear effect 抑制清除，避免深链/rail 点击刚选中的题
-  // 被沉降过程中途经的中间锚点误清（cr.md 244-252 根因）。
+  // 程序化滚动（rail 点击/深链/证据滚动）沉降期标记——钢琴键高亮仍跟
+  // scrollspy，这段窗口避免中间锚点把 activeAnchor 闪乱。
   const isProgrammaticScrollRef = useRef(false)
   const programmaticScrollTimeoutRef = useRef<number | null>(null)
   // 刀 3: 讲评开合/点题选择的 URL replaceState 同步跳过 mount 的第一次
@@ -725,10 +723,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     }
   }, [])
 
-  // 刀 3 小尾巴 ①: 标记程序化滚动即将发生，抑制 scrollspy 的 clear effect
-  // 一段沉降窗口（覆盖 smooth 滚动动画时长；深链的 auto 滚动虽然瞬时，仍给
-  // 同款窗口——IntersectionObserver 的 entries 回调本身是异步的，即使跳转
-  // 本身不animate,首次 observer 回调也可能落在同一个窗口内到达）。
+  // 标记程序化滚动即将发生，给钢琴键 scrollspy 一段沉降窗口。
   function suppressScrollspyClear(durationMs = 700): void {
     isProgrammaticScrollRef.current = true
     if (programmaticScrollTimeoutRef.current != null) {
@@ -787,7 +782,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         url.searchParams.set('lecture', '1')
         if (lectureSelection) {
           url.searchParams.set('focusGroupId', lectureSelection.groupId)
-          url.searchParams.set('questionId', lectureSelection.questionId)
+          if (lectureSelection.questionId) {
+            url.searchParams.set('questionId', lectureSelection.questionId)
+          } else {
+            url.searchParams.delete('questionId')
+          }
         } else {
           url.searchParams.delete('questionId')
         }
@@ -1148,6 +1147,51 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       cancelled = true
     }
   }, [paperId])
+
+  // Writing analysis is prefetched so a complete application payload can open
+  // lecture from the answer box before lecture mode is on. Cloze / grammar-fill
+  // stay lecture-gated.
+  useEffect(() => {
+    if (!asset || !assetBase) return
+    const writingGroupIds = Object.entries(asset.content.groups)
+      .filter(([, group]) => group.groupType === 'writing')
+      .map(([groupId]) => groupId)
+    if (writingGroupIds.length === 0) return
+    let cancelled = false
+
+    void (async () => {
+      try {
+        const res = await fetch(`${assetBase}/analyses/writing-analysis-v1.json`)
+        const raw = res.ok ? ((await res.json()) as WritingAnalysisFilePayload) : null
+        if (cancelled) return
+        setLectureAnalysisByGroupId((previous) => {
+          const next = { ...previous }
+          for (const groupId of writingGroupIds) {
+            if (next[groupId]) continue
+            const writing = raw?.groups?.[groupId]?.writing
+            next[groupId] = isRenderableWritingAnalysis(writing)
+              ? { kind: 'writing', analysis: writing }
+              : { kind: 'unavailable' }
+          }
+          return next
+        })
+      } catch {
+        if (cancelled) return
+        setLectureAnalysisByGroupId((previous) => {
+          const next = { ...previous }
+          for (const groupId of writingGroupIds) {
+            if (next[groupId]) continue
+            next[groupId] = { kind: 'unavailable' }
+          }
+          return next
+        })
+      }
+    })()
+
+    return (): void => {
+      cancelled = true
+    }
+  }, [asset, assetBase])
 
   // 刀 2: 讲评态首次打开时按需补拉本卷缺的 cloze/grammar-fill/writing 解析
   // （一次性；reading/sevenChoices 已在挑题态无条件拉取，不重复）。挑题态
@@ -1561,40 +1605,6 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     }
   }, [asset, loading])
 
-  // 刀 2: 无点选时右栏跟随 scrollspy 显示组级概览；点题后进题级
-  // （见 selectLectureQuestion）。滚动离开当前选中题所在的题组时清空显式
-  // 选择，讲评栏回落到新滚到题组的组级概览 —— 不让上一题的选中态跨组残留。
-  // 刀 3 小尾巴 ①: 只在 activeAnchor 变成"另一个真实题组 id"时才清
-  // （part/section 锚没有对应题组，不清）；程序化滚动沉降期内（rail 点击/
-  // 深链/证据滚动，见 suppressScrollspyClear）抑制清除——避免深链/点击刚
-  // 选中的题被沉降过程中途经的中间锚点误清（cr.md 244-252 根因）。
-  useEffect(() => {
-    if (isProgrammaticScrollRef.current) return
-    if (!activeAnchor || !asset?.content.groups[activeAnchor]) return
-    setLectureSelection((prev) => {
-      if (!prev) return prev
-      const scroller = scrollerRef.current
-      const selectedGroup = scroller?.querySelector<HTMLElement>(
-        `[data-paper-browse-anchor="${cssAttr(prev.groupId)}"]`,
-      )
-      const selectedRect = selectedGroup?.getBoundingClientRect()
-      const scrollerRect = scroller?.getBoundingClientRect()
-      const selectedGroupVisible = Boolean(
-        selectedRect
-        && scrollerRect
-        && selectedRect.bottom > scrollerRect.top
-        && selectedRect.top < scrollerRect.bottom,
-      )
-      return shouldClearLectureSelectionForActiveGroup({
-        activeGroupId: activeAnchor,
-        selectedGroupId: prev.groupId,
-        selectedGroupVisible,
-      })
-        ? null
-        : prev
-    })
-  }, [activeAnchor, asset])
-
   // 刀 2 修复轮 ①: 阅读 parity — 点题/点证据后把命中的原文证据句滚入视野，
   // 镜像 PaperIntelligencePaperSurfaceHarness.tsx 的 "Auto-scroll active
   // evidence into the PaperSurface scroller" effect（activeEvidenceId 变化
@@ -1724,18 +1734,15 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       .map((boundary) => boundary * PIANO_RAIL_WHITE_KEY_HEIGHT - 1)
   }, [railParts])
 
-  // 刀 2: 讲评栏的目标题组 —— 显式点题选中的题组优先，否则退回 scrollspy
-  // 当前锚点(仅当锚点本身就是一个题组 id 时)。
+  // 讲评栏只认左边的显式点选，不跟随 scrollspy。
   const panelGroupId = useMemo(() => {
-    if (lectureSelection) return lectureSelection.groupId
-    if (activeAnchor && asset?.content.groups[activeAnchor]) return activeAnchor
-    return null
-  }, [lectureSelection, activeAnchor, asset])
+    return lectureSelection?.groupId ?? null
+  }, [lectureSelection])
 
   // 刀 2: 当前显式选中题的 lectureFocus —— 只喂给 panelGroupId 对应那组的
   // PaperSurface 挂载，其余题组永远拿 null（讲评开着也不跨组高亮）。
   const lectureFocusForSelection: LectureFocus | null = useMemo(() => {
-    if (!lectureSelection) return null
+    if (!lectureSelection?.questionId) return null
     return lectureSelection.evidenceId
       ? {
           kind: 'question',
@@ -1782,7 +1789,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       quote: null,
     } as const
     if (!lectureOpen) return empty
-    if (!lectureSelection) return empty
+    if (!lectureSelection?.questionId) return empty
     if (panelGroupId !== lectureSelection.groupId) return empty
     if (panelGroupModel?.kind !== 'reading') return empty
     const evidenceId = lectureSelection.evidenceId
@@ -1949,16 +1956,17 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     setLectureSelection({ groupId, questionId, evidenceId: null, optionLabel: null })
   }
 
+  function selectLectureGroup(groupId: string): void {
+    setSimilarView('analysis')
+    setLectureSelection({
+      groupId,
+      questionId: null,
+      evidenceId: null,
+      optionLabel: null,
+    })
+  }
+
   function toggleLecturePanel(): void {
-    if (!lectureOpen && !lectureSelection) {
-      const defaultGroupId = panelGroupId ?? railParts[0]?.groups[0]?.anchor ?? null
-      const defaultQuestionId = defaultGroupId
-        ? asset?.content.groups[defaultGroupId]?.questionIds[0]
-        : null
-      if (defaultGroupId && defaultQuestionId) {
-        selectLectureQuestion(defaultGroupId, defaultQuestionId)
-      }
-    }
     setLectureOpen((open) => !open)
   }
 
@@ -2199,22 +2207,27 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     if (entry.kind === 'writing') {
       const answerBoxOpensLecture = (
         !lectureOpen
-        && sourceTaskType === 'application'
-        && isRetainedWritingPilotGroup(groupId)
+        && hasCompleteApplicationLecturePayload({
+          sourceTaskType,
+          analysis: writingLectureEntry?.kind === 'writing'
+            ? writingLectureEntry.analysis
+            : undefined,
+        })
       )
       return (
         <WritingPaperPage
           pageModel={entry.model.pageModel}
           retainedModelAnswer={retainedLecture?.modelAnswer}
           retainedOfficialModelAnswer={retainedLecture?.officialModelAnswer}
-          onAnswerBoxActivate={answerBoxOpensLecture
-            ? () => {
-                setLectureSelection(null)
-                setSimilarView('analysis')
-                setActiveAnchor(groupId)
-                setLectureOpen(true)
-              }
-            : undefined}
+          onAnswerBoxActivate={
+            lectureOpen || answerBoxOpensLecture
+              ? () => {
+                  selectLectureGroup(groupId)
+                  setActiveAnchor(groupId)
+                  setLectureOpen(true)
+                }
+              : undefined
+          }
           grammarFillPredecessorGroupId={
             groupId === followingGrammarFillGroupId
               ? canonicalGrammarFillGroupIds[
@@ -2755,15 +2768,12 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             setOpenSevenChoiceQuestionIds((prev) =>
               prev.includes(questionId) ? prev.filter((id) => id !== questionId) : [...prev, questionId],
             )
-            setLectureSelection(null)
           }}
           onShowAll={() => {
             setOpenSevenChoiceQuestionIds(chains.map((chain) => chain.questionId))
-            setLectureSelection(null)
           }}
           onHideAll={() => {
             setOpenSevenChoiceQuestionIds([])
-            setLectureSelection(null)
           }}
         />
       )
@@ -2843,6 +2853,9 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         if (sourceTaskType === 'application' || lectureEntry.analysis.taskType === 'application') {
           return <p className="paper-browse-lecture-empty">解析未发布</p>
         }
+        if (isNarrativeContinuationWritingAnalysis(lectureEntry.analysis)) {
+          return <ContinuationAnalysisPanel analysis={lectureEntry.analysis} />
+        }
         return <WritingAnalysisPanel analysis={lectureEntry.analysis} />
       }
       return (
@@ -2853,15 +2866,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     return <p className="paper-browse-lecture-empty">解析未发布</p>
   }
 
-  // 讲评栏内容 — 头部沿用刀 1 的组级速览，跟随 scrollspy/点题共同决定的
-  // panelGroupId；activeAnchor 落在 part/section 标题上（没有对应题组）时
-  // 走空态，实现从简（刀 1 契约允许）。
+  // 讲评栏内容只跟左边的显式点选；没有点选时走空态。
   function renderLecturePanel(): ReactNode {
     if (!asset) return null
-    // similar-rail (E2): once a fetch has been made, the result view is
-    // rendered independent of panelGroupId/scrollspy — persists across
-    // scroll-away (which only clears lectureSelection, not similarView) until
-    // the user explicitly returns or selects a new question (selectLectureQuestion).
+    // similar-rail (E2): once a fetch has been made, the result view stays
+    // until the user returns or clicks another question.
     if (similarView === 'similar' && similarSeed) {
       return (
         <SimilarQuestionsRailView
@@ -2886,10 +2895,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     const groupId = panelGroupId
     const group = groupId ? asset.content.groups[groupId] : undefined
     if (!groupId || !group) {
-      // 刀 3 小尾巴 ③: 刀 1 的旧空态文案在窄屏抽屉语境下失真——抽屉盖在
-      // 卷面上，不是并排布局，"滚动"这个动作在那个视觉框架里读不通。改成
-      // 宽窄屏通用的可操作指引；宽屏下依然是"滚动卷面"这个动作，语义没变。
-      return <p className="paper-browse-lecture-empty">滚动卷面或点选题目后，这里显示讲评</p>
+      return <p className="paper-browse-lecture-empty">点左边的题目后，这里显示讲评</p>
     }
     const range = buildGroupRangeLabel(asset, group)
     const answerRow = buildAnswerRowText(asset, group)
@@ -2903,7 +2909,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         ),
       })?.section?.text ?? null
     }
-    const hasActiveQuestion = Boolean(lectureSelection && lectureSelection.groupId === groupId)
+    const hasActiveQuestion = Boolean(
+      lectureSelection
+      && lectureSelection.groupId === groupId
+      && lectureSelection.questionId,
+    )
     const activeQuestionId = hasActiveQuestion ? lectureSelection?.questionId ?? null : null
     const activeEvidenceId = hasActiveQuestion ? lectureSelection?.evidenceId ?? null : null
     const activeOptionLabel = hasActiveQuestion ? lectureSelection?.optionLabel ?? null : null

@@ -310,9 +310,8 @@ function buildEvidence(
       const evidenceId = `${questionId}-evidence-${i + 1}`
       const ranges = findAllTextRanges(textMap, item.signalText)
       if (ranges.length === 0) {
-        throw new Error(
-          `[CLOZE_EVIDENCE_UNRESOLVED] ${evidenceId} has no range in canonical visible text.`,
-        )
+        // One unresolved passage highlight must not hide the rest of the cloze lecture.
+        continue
       }
       for (const range of ranges) {
         assertResolvedEvidenceRange(textMap, range, evidenceId)

@@ -32,7 +32,9 @@ cloze + grammar_cloze + writing×2),听力原料另存(§4)。
   仅在留痕里保存。
 - **格式白名单制**:只导已被工序验证过的源格式。当前白名单:
   1. 新课标答案版 DOCX(2020–2025 十二套已验证的两种变体);
-  2. 新课标 PDF 试题卷 + 独立答案 PDF(2026 起,刀②接入)。
+  2. 新课标 PDF 试题卷 + 独立答案 PDF(2026 起,刀②接入);
+  3. 试题 DOCX + 答案解析 DOCX(NCK1 结构模拟卷;2026-08-13 owner
+     拍板,映射见附录 A)。
   甲卷 / 乙卷 / 浙江卷等旧格式:为收存量真题按需接入,**一个格式
   一把刀**,接入时把该格式 → 本标准的映射规则写进本文件附录,
   并补对应 verify 锁。白名单之外的格式不得盲导。
@@ -56,9 +58,11 @@ cloze + grammar_cloze + writing×2),听力原料另存(§4)。
 ## 4. 听力条款(owner 2026-07-08 拍板:原料先存,题组后建)
 
 - 听力**入库但不建题组、不跑解析、不上网站**任何消费面。
-- 导入时必须把听力四件套完整切出,存入该卷 paper-assets 目录下的
-  `listening/` 原料区:题干、选项、答案(1–20)、录音稿
-  (含分段时长 / 语速表,若源提供)。一个字不丢。
+- 源卷**含**听力部分时,必须把听力四件套完整切出,存入该卷
+  paper-assets 目录下的 `listening/` 原料区:题干、选项、答案(1–20)、
+  录音稿(含分段时长 / 语速表,若源提供)。一个字不丢。
+- 源卷**无**听力部分(试题从阅读起、正文无「第一部分 听力」)时,
+  不建 `listening/` 原料,不得编造听力题。本项 gate 跳过。
 - 音频文件暂不在范围内;将来有音频时归入同一原料区。
 - 原料 → 正式听力题组的转正,由专门的「听力入库」刀负责
   (碰 schema 与网站消费面,需过 PA)。在那之前,任何消费面
@@ -67,7 +71,10 @@ cloze + grammar_cloze + writing×2),听力原料另存(§4)。
 ## 5. 命名与出处
 
 - paperId 沿用现约定:`paper-<year>-<卷别>`(新课标 I = `-i`,
-  II = `-ii`;旧格式接入时随刀定后缀)。
+  II = `-ii`;旧格式接入时随刀定后缀)。模拟卷(格式③)由 owner
+  开局给 id,建议 `paper-mock-<地区>-<年>-<场次>`(如广东 2026 一模
+  `paper-mock-gd-2026-m1`)。不得占用 `paper-YYYY-i` /
+  `paper-zj-YYYY-jan`。
 - 出处如实:真题 `real_exam`,模拟卷用相应 sourceType 与
   provenance 标注出卷方。**洗成标准模子不改变出处属性**——
   模拟卷洗完仍是模拟卷,不得伪装真题。
@@ -77,8 +84,26 @@ cloze + grammar_cloze + writing×2),听力原料另存(§4)。
 发布闸必须能校验:9 题组齐全、题号段正确、每题分值符合 §1、
 客观题答案数量齐(§3)、七选五 optionBank 恰好 A–G 七句非空候选句
 (可作答卷面硬前提,owner 拍板 2026-07-16,validator blocking 已
-落地)、听力原料区存在且非空(§4)、含图表篇的 figures 原料齐全
-(§8)。现有 publish gate 覆盖不到的项,刀②补 verify 锁,不得靠人眼。
+落地)、源含听力时听力原料区存在且非空(§4)、含图或须截表的篇
+figures 原料齐全(§8)。源无听力则跳过听力项;源无图且表已拍平为
+纯文本、无独立截图则跳过 figures 项,不得编造占位。现有 publish
+gate 覆盖不到的项,按格式补 verify 锁,不得靠人眼。
+
+新卷(格式③必检;其他格式一旦交出写作分析稿同样必检)还须:
+
+- **应用文卷面 chrome**:题干不把「（词数N左右。）」粘在提示末尾;
+  独立「注意」块写词数与答题卡格式;源给的标题/称呼进答题框
+  (`givenSkeleton.presence = provided`)。格式①历史卷给定语可
+  `omitted`,不得用本条去改已入库真题。排版细节见
+  `exam-paper-format-standards.md` §8。
+- **九题组讲评齐**:阅读 / 七选五 / 完形 / 语法随发布包落地;写作两节
+  必须写入 `analyses/writing-analysis-v1.json`(应用文 V3:`modelAnswer`
+  + 完整 ReviewCard + 源有则 `officialModelAnswer`;续写 V1:
+  `continuationAnalysis` 五段 + `modelAnswer`)。缺一组或整组只能显示
+  「解析未发布」则整卷打回。旧 `continuationDesign` 只认历史资产。
+- **应用文讲评入口**:完整 payload 时点击答题框打开讲评;框内叠放
+  「AI 参考范文」与可选「官方范文」,右栏只 ReviewCard。不新增 tab,
+  不用白名单题组。
 
 ## 7. 变更管理
 
@@ -109,10 +134,36 @@ agent 不得以"源卷长得不一样"为由自行放宽。与本标准冲突的
   `exam-paper-format-standards.md`;网站详情页要求语义完整、
   图表在场、阅读友好,不要求仿真卷版式。
 
-## 附录 A:旧格式映射(占位)
+## 附录 A:格式③ 试题 DOCX + 答案解析 DOCX(2026-08-13 owner 拍板)
 
-甲卷 / 乙卷 / 浙江卷接入时,每格式一节:结构差异、题号映射表、
-缺失槽位处理、多余题型(如短文改错)处置。当前为空。
+适用:各地模拟卷,卷面已是 NCK1 九题组(阅读 A–D / 七选五 / 完形 /
+语法填空 / 应用文 / 读后续写)。源为两份 DOCX:`*试卷.docx` +
+`*答案解析.docx`。同套 PDF 只作副本,不另开刀。旧 `.doc` 不在本条。
+
+映射:
+
+- **题号**:源已用 21–65 则不重排;否则按 §2 重排并留痕。
+- **答案**:从答案解析抄客观题键,对齐标准题号。禁止把解析里的
+  AI 解题当入库答案;源给的参考范文作 `officialModelAnswer` 保留。
+- **听力**:试题从「第二部分 阅读」起、无听力部分 → 不建
+  `listening/`,不编造(§4)。
+- **图**:源无内嵌图、表已在正文以文字出现 → 不建 `figures/`,
+  不编造(§8)。
+- **身份**:以开局 `paperId` 为准,不按真题标题派生
+  `paper-YYYY-i` / `paper-zj-YYYY-jan`。
+- **出处**:`sourceType` 为模拟,provenance 标明出卷方;不得标成真题。
+- **canonical**:本格式不走格式①标题派生 producer。用
+  `scripts/import-pipeline/build-docx-pair-canonical-request.mjs`，开局
+  `paperId` 必填；不得占用 `paper-YYYY-i` / `paper-zj-YYYY-jan`。
+- **应用文 chrome**:pair producer 必须拆出 prompt / notice / given
+  title 三块;题干禁止粘词数。`verify-nck1-standard.mjs` 与
+  `verify-paper-canonical-docx-pair-request.mjs` 锁本条。
+- **写作分析**:`papers/<id>/analysis-application.json` 与
+  `analysis-continuation.json` 为 `--publish` 硬前置;`02-publish`
+  在入库后写入 `writing-analysis-v1.json`。不得只改一卷、下一卷再丢。
+
+甲卷 / 乙卷 / 浙江卷旧真题刀仍按「一个格式一把刀」另节补,本附录
+不覆盖那些源。
 
 ## 刀②回填:开放项定案(2026-07-08,首导 paper-2026-i 落地)
 

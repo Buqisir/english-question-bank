@@ -5,15 +5,6 @@ import type {
   WritingAnalysis,
 } from '../../domain/paperAsset.ts'
 
-const RETAINED_PILOT_GROUP_IDS = new Set([
-  'group-2022-i-writing-application',
-  'group-2024-i-writing-application',
-])
-
-export function isRetainedWritingPilotGroup(groupId: string): boolean {
-  return RETAINED_PILOT_GROUP_IDS.has(groupId)
-}
-
 const REVIEW_CARD_SCALAR_FIELDS = [
   'form', 'topic', 'reader', 'person', 'tense', 'type',
   'readerWho', 'readerCares', 'readerWants', 'value',
@@ -47,6 +38,22 @@ export function isCompleteReviewCard(value: unknown): value is ReviewCard {
   )
 }
 
+export function hasCompleteApplicationLecturePayload({
+  sourceTaskType,
+  analysis,
+}: {
+  sourceTaskType: string | undefined
+  analysis: WritingAnalysis | undefined
+}): analysis is ApplicationWritingAnalysis {
+  return (
+    sourceTaskType === 'application'
+    && analysis?.taskType === 'application'
+    && typeof analysis.modelAnswer === 'string'
+    && analysis.modelAnswer.trim().length > 0
+    && isCompleteReviewCard(analysis.reviewCard)
+  )
+}
+
 export function getRetainedWritingLecture({
   lectureOpen,
   panelGroupId,
@@ -63,11 +70,7 @@ export function getRetainedWritingLecture({
   if (
     !lectureOpen
     || panelGroupId !== groupId
-    || sourceTaskType !== 'application'
-    || analysis?.taskType !== 'application'
-    || typeof analysis.modelAnswer !== 'string'
-    || analysis.modelAnswer.trim().length === 0
-    || !isCompleteReviewCard(analysis.reviewCard)
+    || !hasCompleteApplicationLecturePayload({ sourceTaskType, analysis })
   ) return null
   return analysis
 }

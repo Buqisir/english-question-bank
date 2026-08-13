@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 
@@ -83,6 +84,17 @@ try {
     }), completeApplication)
   })
 
+  check('a complete application payload is the answer-box lecture trigger, not a groupId whitelist', () => {
+    assert.equal(retained.hasCompleteApplicationLecturePayload({
+      sourceTaskType: 'application',
+      analysis: completeApplication,
+    }), true)
+    assert.equal(retained.hasCompleteApplicationLecturePayload({
+      sourceTaskType: 'application',
+      analysis: { ...completeApplication, modelAnswer: '' },
+    }), false)
+  })
+
   check('the retained 2022-i group keeps the same complete-payload availability', () => {
     assert.equal(retained.getRetainedWritingLecture({
       lectureOpen: true,
@@ -157,11 +169,25 @@ try {
       retainedOfficialModelAnswer: officialModelAnswer,
     }),
   )
-  check('the left answer box carries both model answers without a separate panel', () => {
-    assert.ok(writingPageHtml.includes('AI 参考范文'))
-    assert.ok(writingPageHtml.includes('官方范文'))
-    assert.ok(writingPageHtml.includes('retained-writing-answer'))
+  check('the left answer box grows around both model answers inside the box', () => {
+    assert.match(writingPageHtml, /pi-writing-answer-box--lecture-open/)
+    assert.match(
+      writingPageHtml,
+      /pi-writing-answer-box--lecture-open[\s\S]*data-writing-answer-supplement[\s\S]*AI 参考范文[\s\S]*官方范文/,
+    )
+    assert.doesNotMatch(writingPageHtml, /<\/div>\s*<aside class="pi-writing-answer-supplement"/)
     assert.doesNotMatch(writingPageHtml, /pi-writing-highlights|HIDDEN-HIGHLIGHT-EXPRESSION/)
+  })
+
+  const writingCss = readFileSync(
+    path.join(repoRoot, 'app/src/features/paper-intelligence/writingPaperPage.css'),
+    'utf8',
+  )
+  check('lecture-open drops the exam-box fixed height so the frame can grow', () => {
+    assert.match(
+      writingCss,
+      /\.pi-writing-answer-box--application\.pi-writing-answer-box--lecture-open[\s\S]*?height:\s*auto/,
+    )
   })
 
   const cardHtml = renderToStaticMarkup(

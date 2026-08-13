@@ -1,0 +1,20 @@
+{
+  "format": "3",
+  "docxPath": "paper.docx",
+  "paperPath": "paper.docx",
+  "answersPath": "answers.docx",
+  "canonicalRequestPath": "./canonical-evidence/canonical-import-request.json",
+  "paperId": "paper-mock-gd-2026-m1",
+  "provenance": {
+    "sourceType": "模拟题",
+    "region": "广东",
+    "paperName": "2026年3月广东高三一模",
+    "year": 2026,
+    "defaultTags": [
+      "模拟",
+      "2026",
+      "广东",
+      "一模"
+    ]
+  }
+}

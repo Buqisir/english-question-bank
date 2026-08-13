@@ -672,18 +672,22 @@ export function captureDocxSourceMedia({
     }))
     .filter(({ xml }) => documentHasShapes(xml))
   const shapes = shapeParts.flatMap(({ entryName, xml }) => extractShapeDescriptors(entryName, xml))
+  const associations = paperAsset?.sources?.docx?.shapeAssociations
+  const furnitureOnly = shapes.length > 0
+    && shapes.every((shape) => shape.sourcePart !== 'word/document.xml')
+    && (!Array.isArray(associations) || associations.length === 0)
 
   let shapeCapture = null
-  if (shapes.length > 0) {
-    const associations = resolveShapeAssociations(paperAsset, shapes)
+  if (shapes.length > 0 && !furnitureOnly) {
+    const boundAssociations = resolveShapeAssociations(paperAsset, shapes)
     const pdf = convertShapesToPdf(buffer)
     if (!Buffer.isBuffer(pdf) || pdf.subarray(0, 4).toString('utf8') !== '%PDF') {
       throw new Error('DOCX shape capture must return PDF bytes')
     }
-    const figures = cropShapesFromPdf(pdf, associations)
+    const figures = cropShapesFromPdf(pdf, boundAssociations)
     if (
       !Array.isArray(figures)
-      || figures.length !== associations.length
+      || figures.length !== boundAssociations.length
       || figures.some((figure) => (
         !Buffer.isBuffer(figure.buffer)
         || figure.sha256 !== sha256(figure.buffer)

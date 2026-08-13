@@ -1,0 +1,335 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-mock-gd-2026-m1",
+  "sourceAssetVersion": 2,
+  "targetGroups": [
+    "group-mock-gd-2026-m1-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "cursor-grok-4.6",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "format3-import-agent",
+    "reviewedAt": "2026-08-13T00:00:00Z",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-mock-gd-2026-m1-seven-choices": {
+      "overview": "说明文。解释拒绝敏感性：日常小事会被读成针对自己，回避又可能真的招来拒绝；随后给出挑战第一反应、坦诚表达需求、温暖回应他人三条习惯。",
+      "discourseStructure": {
+        "summary": "开篇用未回信息等场景引出拒绝敏感；第二段定义并写自我保护造成距离；后三段以祈使小标题给出调节办法。",
+        "units": [
+          {
+            "unitId": "unit-mock-gd-2026-m1-seven-intro",
+            "heading": null,
+            "paragraphIds": [
+              "para-mock-gd-2026-m1-seven-title"
+            ],
+            "summary": "用朋友不回消息、路人没注意到你引出：对拒绝敏感的人会把小事看得很重。"
+          },
+          {
+            "unitId": "unit-mock-gd-2026-m1-seven-define",
+            "heading": null,
+            "paragraphIds": [
+              "para-mock-gd-2026-m1-seven-p1"
+            ],
+            "summary": "定义拒绝敏感，写过度解读与回避，并指出距离感可能造成他们害怕的拒绝。"
+          },
+          {
+            "unitId": "unit-mock-gd-2026-m1-seven-challenge",
+            "heading": "Challenge your first reaction.",
+            "paragraphIds": [
+              "para-mock-gd-2026-m1-seven-p2"
+            ],
+            "summary": "建议暂停最坏解释，写下中性可能。"
+          },
+          {
+            "unitId": "unit-mock-gd-2026-m1-seven-express",
+            "heading": "Express your needs openly.",
+            "paragraphIds": [
+              "para-mock-gd-2026-m1-seven-p3"
+            ],
+            "summary": "指出隐藏感受的问题，建议清楚友善地表达。"
+          },
+          {
+            "unitId": "unit-mock-gd-2026-m1-seven-respond",
+            "heading": "Respond warmly when others show care",
+            "paragraphIds": [
+              "para-mock-gd-2026-m1-seven-p4"
+            ],
+            "summary": "别人伸出手时用微笑、短回等小动作欢迎连接。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-mock-gd-2026-m1-036": {
+      "blankId": "blank-mock-gd-2026-m1-036",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "sensitive to rejection",
+        "small moments feel heavy",
+        "expecting others to reject you",
+        "They don’t like me"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-mock-gd-2026-m1-seven-title",
+        "headingAnchor": null,
+        "beforeQuote": "for those who are sensitive to rejection, these small moments feel heavy.",
+        "afterQuote": "Rejection sensitivity means often expecting others to reject you"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "assume something is wrong with them",
+          "signalSide": "option",
+          "targetText": "these small moments feel heavy",
+          "relation": "选项立刻觉得自己有问题，承接空前小事很沉重的感受。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "expecting others to reject you",
+          "signalSide": "context-after",
+          "targetText": "assume something is wrong with them",
+          "relation": "空后定义拒绝敏感，与选项的自我否定解读同场。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "F 把“小事很沉重”具体化为立刻认为自己有问题，并接到下段对拒绝敏感的定义。",
+        "matchedClues": [
+          {
+            "contextSide": "small moments feel heavy",
+            "optionSide": "immediately assume something is wrong with them",
+            "relation": "沉重感受落到自我否定的即时解读上。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "D 说他们总在找办法缓解焦虑，空位需要的是对小事的即时解读，不是缓解策略。"
+        }
+      ],
+      "teachingNote": "段末空看空后是否开始下定义：F 的自我否定正好接到 Rejection sensitivity means。"
+    },
+    "q-mock-gd-2026-m1-037": {
+      "blankId": "blank-mock-gd-2026-m1-037",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "avoiding eye contact",
+        "keeping quiet",
+        "pulling away",
+        "creating the very rejection"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-mock-gd-2026-m1-seven-p1",
+        "headingAnchor": null,
+        "beforeQuote": "they try to protect themselves by avoiding eye contact keeping quiet, or pulling away.",
+        "afterQuote": "sometimes creating the very rejection they were afraid of."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "this distance",
+          "signalSide": "option",
+          "targetText": "pulling away",
+          "relation": "this distance 回指回避、沉默、拉开距离。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "seem cold or unfriendly",
+          "signalSide": "option",
+          "targetText": "creating the very rejection they were afraid of",
+          "relation": "显得冷漠不友好，解释回避如何招来他们害怕的拒绝。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "E 用 this distance 承接回避行为，并说明这种距离让人显得冷漠，从而造成真拒绝。",
+        "matchedClues": [
+          {
+            "contextSide": "pulling away",
+            "optionSide": "this distance can make them seem cold or unfriendly",
+            "relation": "拉开距离就是 this distance。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A 是追求更强联结，与正在写的自我保护、拉开距离方向相反。"
+        }
+      ],
+      "teachingNote": "空后破折号解释结果时，优先选能回指回避行为并说明负面印象的句子。"
+    },
+    "q-mock-gd-2026-m1-038": {
+      "blankId": "blank-mock-gd-2026-m1-038",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "What else could this mean",
+        "two neutral possibilities",
+        "the negative one"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-mock-gd-2026-m1-seven-p2",
+        "headingAnchor": "Challenge your first reaction.",
+        "beforeQuote": "When your mind jumps to the worst explanation pause and ask: What else could this mean?",
+        "afterQuote": "Try writing down at least two neutral (中性的) possibilities before accepting the negative one."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "busy, stressed, or simply distracted",
+          "signalSide": "option",
+          "targetText": "two neutral (中性的) possibilities",
+          "relation": "忙、有压力、分心是中性可能的实例。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "What else could this mean?",
+          "signalSide": "context-before",
+          "targetText": "the other person is busy, stressed, or simply distracted",
+          "relation": "空前追问还能是什么意思，选项给出另一种解释。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "G 提供中性替代解释，回答 What else could this mean，并接到写下两种中性可能。",
+        "matchedClues": [
+          {
+            "contextSide": "What else could this mean?",
+            "optionSide": "Perhaps the other person is busy, stressed, or simply distracted",
+            "relation": "Perhaps 引出另一种可能，正是中性解释。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "F 是立刻觉得自己有问题，属于最坏解释，与本段要挑战的第一反应同向。"
+        }
+      ],
+      "teachingNote": "问句 What else 后面通常跟替代解释，G 的 Perhaps 最贴。"
+    },
+    "q-mock-gd-2026-m1-039": {
+      "blankId": "blank-mock-gd-2026-m1-039",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "hide their feelings",
+        "without being told",
+        "speaking clearly and kindly"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-mock-gd-2026-m1-seven-p3",
+        "headingAnchor": "Express your needs openly.",
+        "beforeQuote": "People with rejection sensitivity often hide their feelings, hoping others will understand without being told.",
+        "afterQuote": "Try speaking clearly and kindly:"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "But silence easily causes confusion",
+          "signalSide": "option",
+          "targetText": "hide their feelings",
+          "relation": "But 转折：隐藏感受带来的沉默会造成困惑。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "silence",
+          "signalSide": "option",
+          "targetText": "understand without being told",
+          "relation": "不说出口就是沉默，与希望别人自己懂相对。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "B 用 But 指出沉默造成困惑，从而引出后面清楚说出来的建议。",
+        "matchedClues": [
+          {
+            "contextSide": "hide their feelings",
+            "optionSide": "silence easily causes confusion",
+            "relation": "隐藏感受即沉默，其代价是困惑。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C 是温暖回应别人关心，属于下一段小标题，不是本段“表达需求”的转折。"
+        }
+      ],
+      "teachingNote": "隐藏感受与坦诚表达之间需要转折句，优先看 But。"
+    },
+    "q-mock-gd-2026-m1-040": {
+      "blankId": "blank-mock-gd-2026-m1-040",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "reaches out to you",
+        "small sign of openness",
+        "welcome connection"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-mock-gd-2026-m1-seven-p4",
+        "headingAnchor": null,
+        "beforeQuote": "Honest communication builds trust and reduces unnecessary worry.",
+        "afterQuote": "If someone reaches out to you, offer a small sign of openness"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Respond warmly when others show care",
+          "signalSide": "option",
+          "targetText": "If someone reaches out to you, offer a small sign of openness",
+          "relation": "别人伸出手时温暖回应，概括本段建议。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "welcome connection",
+          "signalSide": "context-after",
+          "targetText": "Respond warmly when others show care",
+          "relation": "欢迎连接与温暖回应同属主动接纳关心。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "C 是祈使小标题，概括“别人关心时给予开放信号”。",
+        "matchedClues": [
+          {
+            "contextSide": "offer a small sign of openness",
+            "optionSide": "Respond warmly when others show care",
+            "relation": "小标题与段内建议句式一致。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A 追求更强联结偏结果口号，不如 C 直接对应 reaches out / show care。"
+        }
+      ],
+      "teachingNote": "段首空且后文是 If someone reaches out，优先选同形的祈使小标题。"
+    }
+  }
+}

@@ -37,4 +37,4 @@ Owner 2026-08-12 接受。
 6. **单 writer**：同一 `paperId` 同时只一个 agent 写。
 7. **写作**：
    - 应用文跟工作树最新准则（同树 `wt-continuation-analysis-research-20260809`）：`docs/product/application-writing-doctrine-v1.md` + 生产 Prompt V3。落盘仍是 `modelAnswer` + 完整 `reviewCard`（11 项）+ 源有则 `officialModelAnswer`；**交际对象推演**（关系 / 对方已有行为 / 核心交际动作 / 关系风险 / 最小充分关系动作 / 顺序）是生成决策，**不新增 ReviewCard 字段**（准则 §3.3）。新卷不要求亮点。
-   - 读后续写跟新 `continuationAnalysis` V1 五段 + `modelAnswer`；旧 `continuationDesign` 只认历史卷；说明/议论型停。持久化/UI 后续实现。
+   - 读后续写跟新 `continuationAnalysis` V1 五段 + `modelAnswer`；旧 `continuationDesign` 只认历史卷；说明/议论型停。新卷 `--publish` 必须写入 `writing-analysis-v1.json`；消费端已展示。

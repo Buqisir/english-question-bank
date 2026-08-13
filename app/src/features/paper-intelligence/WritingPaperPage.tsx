@@ -292,10 +292,11 @@ export function WritingPaperPage({
             )
           case 'passage':
             return <div key={index} className="pi-writing-passage">{children}</div>
-          case 'answerBox':
+          case 'answerBox': {
+            const lectureOpenInBox = retainedModelAnswer !== undefined
             return (
-              <Fragment key={index}>
                 <div
+                  key={index}
                   className={[
                     'pi-writing-answer-box',
                     block.answerRegionRef === 'writing.application-box'
@@ -306,6 +307,7 @@ export function WritingPaperPage({
                       : '',
                     block.givenBottom.length > 0 ? 'pi-writing-answer-box--letter' : '',
                     onAnswerBoxActivate ? 'pi-writing-answer-box--lecture-trigger' : '',
+                    lectureOpenInBox ? 'pi-writing-answer-box--lecture-open' : '',
                   ].filter(Boolean).join(' ')}
                   aria-label={onAnswerBoxActivate ? `${block.label}，点击打开讲评` : block.label}
                   data-canonical-application-semantic-signature={block.semanticSignature}
@@ -389,6 +391,17 @@ export function WritingPaperPage({
                       )
                     })}
                   </div>
+                  {lectureOpenInBox && (
+                    <div
+                      className="pi-writing-answer-supplement"
+                      data-writing-answer-supplement=""
+                    >
+                      <RetainedModelAnswer
+                        modelAnswer={retainedModelAnswer}
+                        officialModelAnswer={retainedOfficialModelAnswer}
+                      />
+                    </div>
+                  )}
                   {block.givenBottom.length > 0 && (
                     <div className="pi-writing-answer-bottom">
                       {block.givenBottom.map((part, lineIndex) => (
@@ -414,19 +427,8 @@ export function WritingPaperPage({
                     </div>
                   )}
                 </div>
-                {retainedModelAnswer !== undefined && (
-                  <aside
-                    className="pi-writing-answer-supplement"
-                    data-writing-answer-supplement=""
-                  >
-                    <RetainedModelAnswer
-                      modelAnswer={retainedModelAnswer}
-                      officialModelAnswer={retainedOfficialModelAnswer}
-                    />
-                  </aside>
-                )}
-              </Fragment>
             )
+          }
           default:
             return null
         }

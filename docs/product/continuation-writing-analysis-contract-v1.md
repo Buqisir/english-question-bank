@@ -1,6 +1,8 @@
 # 记叙型读后续写标准解析字段 V1
 
-Status: implemented analysis-only contract; narrative only; not persisted or displayed
+Status: implemented; narrative only. New papers persist `continuationAnalysis` +
+`modelAnswer` into `writing-analysis-v1` and display the five parts in lecture.
+Historical assets may still carry `continuationDesign` / `highlightExpressions`.
 
 ## 1. V1 决定
 
@@ -423,8 +425,7 @@ V1 不包含：
 以下事项留到后续单独讨论：
 
 - 旧 `continuationDesign` 的删除、迁移与历史资产处理；
-- JSON Schema、运行时校验和持久化版本；
-- Agent 导题 Prompt 和范文生成 Prompt；
-- 范文独立内容复核与词汇检查；
-- 教师端展示方式；
 - 说明型、议论型及核心功能为解释的混合型 V2。
+
+教师端讲评已按五段字段 + `modelAnswer` 展示新卷；旧卷仍读历史
+`continuationDesign`。JSON Schema / 运行时校验 / Prompt 已在本仓库落地。

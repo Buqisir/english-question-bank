@@ -88,8 +88,8 @@ Status: closed
 - 收件箱去重与格式白名单细则：`queued` 已定，实现时补。
 - 机械步骤的自动化收编：写入 agent-contract 实现票。
 - 分析质量抽检：不设上线前必过解析抽检；从零解析质量另议。
-- 续写/应用文新合同合入 `main` 与持久化：权威在工作树
-  `wt-continuation-analysis-research-20260809`。
+- 续写/应用文新合同：权威在 `docs/import/agent-contract.md`；新卷
+  `--publish` 写入 `writing-analysis-v1.json`。
 
 ## Out of scope
 

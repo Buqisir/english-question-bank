@@ -1,14 +1,24 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict'
-import { readFileSync } from 'node:fs'
+import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { tmpdir } from 'node:os'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 import {
   analyzeNarrativeContinuationImportCandidate,
   buildNarrativeContinuationAnalysisMessages,
   validateNarrativeContinuationAnalysis,
 } from '../server/paper-import-ai/analyzeNarrativeContinuation.mjs'
+import {
+  persistWritingAnalysisGroup,
+  validateWritingAnalysisCandidate,
+} from '../server/writing-analysis/writingAnalysisBackfillService.mjs'
+import {
+  persistStagedWritingAnalyses,
+  projectStagedWritingAnalysis,
+  requiresLockedWritingAnalysis,
+} from './import-pipeline/lib-nck1-new-paper-locks.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
@@ -363,5 +373,161 @@ check('provider shell returns the validated field without a parallel result shap
   assert.deepEqual(providerResult.analysis, candidate)
   assert.equal(providerResult.provider, 'fixture')
 })
+
+const { default: Ajv2020 } = await import(
+  pathToFileURL(path.join(rootDir, 'server/node_modules/ajv/dist/2020.js')).href
+)
+
+const writingAnalysisSchema = JSON.parse(readFileSync(
+  path.join(rootDir, 'schemas/paper-import/writing-analysis-v1.schema.json'),
+  'utf8',
+))
+const validateWritingAnalysisEnvelope = new Ajv2020({ strict: false }).compile(writingAnalysisSchema)
+const writingEnvelope = (writing) => ({
+  schemaVersion: 'writing-analysis-v1',
+  paperId: 'paper-continuation-fixture',
+  groups: {
+    'group-fixture-continuation': { writing },
+  },
+})
+const v1Writing = {
+  taskType: 'continuation',
+  modelAnswer: 'As the twins looked around them in disappointment, their father appeared. They cooked again together. The twins carried the breakfast upstairs and woke their mother up. Care showed in the shared work.',
+  continuationAnalysis: candidate,
+}
+const legacyWriting = {
+  taskType: 'continuation',
+  modelAnswer: v1Writing.modelAnswer,
+  continuationDesign: { theme: 'care through shared repair', paragraphs: ['repair breakfast', 'wake mother'] },
+  highlightExpressions: [
+    { text: 'their father appeared', note: '承接段首句' },
+    { text: 'cooked again together', note: '共同行动' },
+    { text: 'Care showed in the shared work', note: '收束' },
+  ],
+}
+
+check('writing-analysis envelope accepts continuationAnalysis without legacy fields', () => {
+  assert.equal(validateWritingAnalysisEnvelope(writingEnvelope(v1Writing)), true)
+})
+
+check('writing-analysis envelope still accepts historical continuationDesign', () => {
+  assert.equal(validateWritingAnalysisEnvelope(writingEnvelope(legacyWriting)), true)
+})
+
+check('writing-analysis envelope rejects mixing continuationAnalysis with continuationDesign', () => {
+  assert.equal(validateWritingAnalysisEnvelope(writingEnvelope({
+    ...v1Writing,
+    continuationDesign: legacyWriting.continuationDesign,
+  })), false)
+})
+
+check('runtime persist stores continuationAnalysis and drops legacy fields', () => {
+  validateWritingAnalysisCandidate(v1Writing)
+  const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-continuation-analysis-'))
+  try {
+    const paperId = 'paper-continuation-fixture'
+    const groupId = 'group-fixture-continuation'
+    mkdirSync(path.join(tempRoot, paperId, 'latest'), { recursive: true })
+    writeFileSync(
+      path.join(tempRoot, paperId, 'latest', 'paper-asset.json'),
+      `${JSON.stringify({ paper: { paperId }, content: {} }, null, 2)}\n`,
+    )
+    persistWritingAnalysisGroup(
+      { paperAssetsDir: tempRoot },
+      { paperId, groupId },
+      v1Writing,
+    )
+    const stored = JSON.parse(readFileSync(
+      path.join(tempRoot, paperId, 'latest', 'analyses', 'writing-analysis-v1.json'),
+      'utf8',
+    )).groups[groupId].writing
+    assert.deepEqual(Object.keys(stored).sort(), [
+      'continuationAnalysis',
+      'modelAnswer',
+      'taskType',
+    ])
+    assert.equal(stored.continuationAnalysis.schemaVersion, 'continuation-analysis-v1')
+    assert.equal(stored.continuationDesign, undefined)
+    assert.equal(stored.highlightExpressions, undefined)
+  } finally {
+    rmSync(tempRoot, { recursive: true, force: true })
+  }
+})
+
+check('new-paper lock requires format ③ or staged writing files', () => {
+  const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-writing-lock-'))
+  try {
+    assert.equal(requiresLockedWritingAnalysis({ format: '3' }, tempRoot), true)
+    assert.equal(requiresLockedWritingAnalysis({ format: '1' }, tempRoot), false)
+    writeFileSync(path.join(tempRoot, 'analysis-application.json'), '{}')
+    assert.equal(requiresLockedWritingAnalysis({ format: '1' }, tempRoot), true)
+  } finally {
+    rmSync(tempRoot, { recursive: true, force: true })
+  }
+})
+
+check('new-paper persist writes both writing groups from staged drafts', () => {
+  const applicationRaw = {
+    taskType: 'application',
+    modelAnswer: 'Dear fellow students,\n\nWe can keep the club open to beginners and still train well.\n\nThe Student Council',
+    officialModelAnswer: 'Dear fellow students,\n\nPlease welcome new members.\n\nThe Student Council',
+    reviewCard: {
+      form: '倡议书',
+      topic: '校园社团招新',
+      reader: '全校同学',
+      person: '第一人称复数',
+      tense: '一般现在时',
+      type: '倡议类',
+      points: ['说明门槛的问题', '提出两条可实行的建议'],
+      readerWho: '同学和社团成员',
+      readerCares: '建议是否具体可行',
+      readerWants: '知道从哪里开始行动',
+      value: '让招新既保质量又保参与面',
+    },
+  }
+  const continuationRaw = projectStagedWritingAnalysis(v1Writing)
+  const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-writing-publish-'))
+  try {
+    const paperId = 'paper-lock-fixture'
+    mkdirSync(path.join(tempRoot, paperId, 'latest'), { recursive: true })
+    writeFileSync(
+      path.join(tempRoot, paperId, 'latest', 'paper-asset.json'),
+      `${JSON.stringify({ paper: { paperId }, content: {} }, null, 2)}\n`,
+    )
+    persistStagedWritingAnalyses({
+      paperAssetsDir: tempRoot,
+      paperId,
+      applicationGroupId: 'group-lock-application',
+      continuationGroupId: 'group-lock-continuation',
+      applicationRaw,
+      continuationRaw,
+    })
+    const stored = JSON.parse(readFileSync(
+      path.join(tempRoot, paperId, 'latest', 'analyses', 'writing-analysis-v1.json'),
+      'utf8',
+    ))
+    assert.equal(stored.groups['group-lock-application'].writing.taskType, 'application')
+    assert.equal(stored.groups['group-lock-application'].writing.reviewCard.form, '倡议书')
+    assert.equal(stored.groups['group-lock-continuation'].writing.taskType, 'continuation')
+    assert.equal(
+      stored.groups['group-lock-continuation'].writing.continuationAnalysis.schemaVersion,
+      'continuation-analysis-v1',
+    )
+    assert.equal(stored.groups['group-lock-continuation'].writing.continuationDesign, undefined)
+  } finally {
+    rmSync(tempRoot, { recursive: true, force: true })
+  }
+})
+
+rejects(
+  'new-paper continuation draft cannot keep historical continuationDesign',
+  () => projectStagedWritingAnalysis({
+    taskType: 'continuation',
+    modelAnswer: v1Writing.modelAnswer,
+    continuationDesign: legacyWriting.continuationDesign,
+    highlightExpressions: legacyWriting.highlightExpressions,
+  }),
+  /continuationAnalysis/,
+)
 
 console.log(`\nverify-continuation-analysis-v1: ${passed} passed, 0 failed`)

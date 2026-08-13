@@ -1,6 +1,8 @@
 # Regenerable intermediate artifacts — under papers/ only config.json is tracked.
 papers/*/groups.json
 papers/*/full.txt
+papers/*/answers.txt
+papers/*/writing-official.json
 papers/*/analyze-*
 papers/*/analysis-*
 # Import-ops receipts (agent ↔ 导题后台); not product artifacts.
@@ -8,7 +10,7 @@ papers/*/signals/
 # Source DOCX is off-repo material, never tracked.
 papers/*/source.docx
 papers/*/*.docx
-# Regenerable format ① canonical evidence (producer output).
+# Regenerable format ① / ③ canonical evidence (producer output).
 papers/*/canonical-evidence/
 # Backfill scratch (per-group label JSON from the Workflow fan-out) + logs.
 labels-out/

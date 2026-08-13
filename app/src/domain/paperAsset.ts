@@ -5,6 +5,14 @@
  * Import unit = whole paper. PaperSurface target = full English exam standard layout.
  */
 
+import type { ContinuationAnalysisV1 } from './continuationAnalysis.ts'
+
+export type { ContinuationAnalysisV1 } from './continuationAnalysis.ts'
+export {
+  isNarrativeContinuationAnalysis,
+  isNarrativeContinuationWritingAnalysis,
+} from './continuationAnalysis.ts'
+
 // ─── Top-Level ──────────────────────────────────────────────────────────────────
 
 export type PaperAssetV1 = {
@@ -267,7 +275,17 @@ export type ReviewCard = {
   value: string
 }
 
-export type ContinuationWritingAnalysis = {
+export type ContinuationWritingAnalysis =
+  | ContinuationWritingAnalysisV1
+  | ContinuationWritingAnalysisLegacy
+
+export type ContinuationWritingAnalysisV1 = {
+  taskType: 'continuation'
+  modelAnswer: string
+  continuationAnalysis: ContinuationAnalysisV1
+}
+
+export type ContinuationWritingAnalysisLegacy = {
   taskType: 'continuation'
   modelAnswer: string
   continuationDesign: ContinuationDesign

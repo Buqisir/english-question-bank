@@ -1,0 +1,800 @@
+{
+  "schemaVersion": "writing-analysis-v1",
+  "paperId": "paper-mock-gd-2026-m1",
+  "groups": {
+    "group-mock-gd-2026-m1-writing-application": {
+      "writing": {
+        "taskType": "application",
+        "modelAnswer": "Should the Badminton Club Set Entry Requirements?\nGood morning, everyone.\nI love badminton, but I joined from zero last year. A high skill bar may keep training neat, yet it also shuts the door on beginners who need a club most. A school club should grow both skill and community, not only a small circle of already strong players.\nI suggest two paths. Keep a competitive group with a clear test, and open a weekly beginners class led by senior members. After six weeks of basic training, those who meet the standard may join the official team. This protects training quality and still welcomes fresh blood.\nThank you for listening!",
+        "officialModelAnswer": "Should the Badminton Club Set Entry Requirements?\nGood morning, everyone. \nCampus clubs are always warm places where we share our passions and make like-minded friends. When it comes to the strict entry rules for new members, I’m worried they will greatly shrink the club’s scale and make it lose valuable fresh blood, which is harmful to its long-term development. \nThe club should lower entry barriers to welcome more enthusiasts. By launching “senior leads junior” pairing programs and regular basic training camps, beginners can gradually improve their skills. This not only helps new members grow quickly but also expands the club’s campus influence. \nThank you for listening!",
+        "reviewCard": {
+          "form": "一分钟课堂演讲稿，保留给定标题与问候结束语",
+          "topic": "羽毛球社团招新是否应设技术门槛",
+          "reader": "英语课在场同学与老师",
+          "person": "第一人称 I",
+          "tense": "一般现在时为主，建议用 should 与 can",
+          "type": "观点与建议混合：先表态再给办法",
+          "points": [
+            "陈述对设技术门槛的看法",
+            "提出可执行的招新建议"
+          ],
+          "readerWho": "在场师生，关心自己还能否加入社团",
+          "readerCares": "门槛是否公平，训练质量会否下降",
+          "readerWants": "听清立场和一条可落地的招新办法",
+          "value": "校园社团应兼顾竞技水平与参与面"
+        }
+      }
+    },
+    "group-mock-gd-2026-m1-writing-continuation": {
+      "writing": {
+        "taskType": "continuation",
+        "modelAnswer": "Noah’s aching hands seemed to agree with his brother’s words. For a moment, he stood frozen, torn between exhaustion and responsibility. Walking away meant warmth and rest, yet Mrs. Williams’ trusting smile appeared in his mind, reminding him of the confidence she had placed in them. He held the shovel tightly, bent down, and continued clearing the snow. Lucas watched him quietly and soon joined him without hesitation. Side by side, they worked through the bitter cold. In the fading light, the driveway slowly took shape under their steady effort. \nAs they cleared the final shovel of snow, Mrs. Williams’ car returned. She looked at the perfectly shoveled driveway with pleasant surprise and expressed genuine appreciation, saying that she had known they would keep their promise. A quiet warmth spread inside the boys. On the way home, Noah touched the twenty-dollar bill in his pocket. Their dream of the red bicycle felt a little closer, yet he realized that what they earned that day was far more valuable than money. The lesson about honesty would stay with them long after the snow melted.",
+        "continuationAnalysis": {
+          "schemaVersion": "continuation-analysis-v1",
+          "storyUnderstanding": {
+            "centralSituation": {
+              "statement": "Two brothers shovel snow to earn money toward a red bicycle they cannot yet afford.",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "the red bicycle"
+                }
+              ]
+            },
+            "sourceEndState": {
+              "statement": "Lucas wants to leave the job unfinished because he thinks she will not know.",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "She’ll never know we didn’t finish"
+                }
+              ]
+            },
+            "narrativePerspective": {
+              "statement": "The story is told in third person, following Lucas and Noah together.",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "Lucas and Noah pressed their noses"
+                }
+              ]
+            },
+            "timeAndPlaceFrame": {
+              "statement": "A winter afternoon on Maple Street, on a long driveway still only halfway done.",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "they headed to Maple Street"
+                }
+              ]
+            },
+            "characters": [
+              {
+                "name": "Noah",
+                "role": "protagonist who must decide whether to keep the promise",
+                "establishedTraits": [
+                  {
+                    "statement": "He takes the lead in asking for the Maple Street job.",
+                    "evidence": [
+                      {
+                        "source": "material",
+                        "excerpt": "Noah knocked on the door"
+                      }
+                    ]
+                  }
+                ],
+                "motivations": [
+                  {
+                    "statement": "He wants to earn money for the bicycle through hard work.",
+                    "evidence": [
+                      {
+                        "source": "material",
+                        "excerpt": "turn the snowfall into savings through hard work"
+                      }
+                    ]
+                  }
+                ],
+                "currentState": {
+                  "statement": "Noah is exhausted and tempted to quit when the first starter begins.",
+                  "evidence": [
+                    {
+                      "source": "paragraph1Starter",
+                      "excerpt": "Noah’s aching hands seemed to agree with his brother’s words."
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "Lucas",
+                "role": "brother who urges quitting halfway",
+                "establishedTraits": [
+                  {
+                    "statement": "He throws down his shovel in frustration.",
+                    "evidence": [
+                      {
+                        "source": "material",
+                        "excerpt": "Lucas threw down his shovel"
+                      }
+                    ]
+                  }
+                ],
+                "motivations": [
+                  {
+                    "statement": "He wants to stop because the work feels endless and unpaid beyond the bill already in hand.",
+                    "evidence": [
+                      {
+                        "source": "material",
+                        "excerpt": "the long driveway seemed endless"
+                      }
+                    ]
+                  }
+                ],
+                "currentState": {
+                  "statement": "Lucas wants to leave the job unfinished because he thinks she will not know.",
+                  "evidence": [
+                    {
+                      "source": "material",
+                      "excerpt": "She’ll never know we didn’t finish"
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "Mrs. Williams",
+                "role": "customer who prepaid and trusted them",
+                "establishedTraits": [
+                  {
+                    "statement": "She is in a hurry but encouraging.",
+                    "evidence": [
+                      {
+                        "source": "material",
+                        "excerpt": "looking like she was in a hurry"
+                      }
+                    ]
+                  }
+                ],
+                "motivations": [
+                  {
+                    "statement": "She needs the driveway cleared while she is out.",
+                    "evidence": [
+                      {
+                        "source": "material",
+                        "excerpt": "I have to rush out"
+                      }
+                    ]
+                  }
+                ],
+                "currentState": {
+                  "statement": "Mrs. Williams paid in advance and left the work in their capable hands.",
+                  "evidence": [
+                    {
+                      "source": "material",
+                      "excerpt": "I’ll leave it in your capable hands"
+                    }
+                  ]
+                }
+              }
+            ],
+            "relationships": [
+              {
+                "participants": [
+                  "Noah",
+                  "Lucas"
+                ],
+                "currentRelation": {
+                  "statement": "They work as brothers toward the same bicycle, but split over whether to finish.",
+                  "evidence": [
+                    {
+                      "source": "material",
+                      "excerpt": "the brothers saw an opportunity"
+                    }
+                  ]
+                }
+              },
+              {
+                "participants": [
+                  "Noah",
+                  "Mrs. Williams"
+                ],
+                "currentRelation": {
+                  "statement": "She has trusted them with prepaid work.",
+                  "evidence": [
+                    {
+                      "source": "material",
+                      "excerpt": "I’ll leave it in your capable hands"
+                    }
+                  ]
+                }
+              }
+            ],
+            "causalChain": [
+              {
+                "cause": {
+                  "statement": "They earned little in their own neighborhood.",
+                  "evidence": [
+                    {
+                      "source": "material",
+                      "excerpt": "earned just seven dollars"
+                    }
+                  ]
+                },
+                "effect": {
+                  "statement": "They go to Maple Street for deeper driveways and better pay.",
+                  "evidence": [
+                    {
+                      "source": "material",
+                      "excerpt": "they headed to Maple Street"
+                    }
+                  ]
+                }
+              },
+              {
+                "cause": {
+                  "statement": "Mrs. Williams paid in advance and left the work in their capable hands.",
+                  "evidence": [
+                    {
+                      "source": "material",
+                      "excerpt": "I’ll leave it in your capable hands"
+                    }
+                  ]
+                },
+                "effect": {
+                  "statement": "They start eagerly, then grow numb and exhausted as the driveway seems endless.",
+                  "evidence": [
+                    {
+                      "source": "material",
+                      "excerpt": "the long driveway seemed endless"
+                    }
+                  ]
+                }
+              },
+              {
+                "cause": {
+                  "statement": "Cold and fatigue overwhelm Lucas.",
+                  "evidence": [
+                    {
+                      "source": "material",
+                      "excerpt": "Their hands grew numb"
+                    }
+                  ]
+                },
+                "effect": {
+                  "statement": "Lucas wants to leave the job unfinished because he thinks she will not know.",
+                  "evidence": [
+                    {
+                      "source": "material",
+                      "excerpt": "She’ll never know we didn’t finish"
+                    }
+                  ]
+                }
+              }
+            ],
+            "unresolvedProblem": {
+              "statement": "The driveway is only halfway done, the money is already in hand, and finishing depends on Noah refusing to cheat.",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "Halfway through"
+                }
+              ]
+            },
+            "usableClues": [
+              {
+                "statement": "Mrs. Williams paid in advance and left the work in their capable hands.",
+                "evidence": [
+                  {
+                    "source": "material",
+                    "excerpt": "I’ll leave it in your capable hands"
+                  }
+                ]
+              },
+              {
+                "statement": "They still want the bicycle they have saved toward for months.",
+                "evidence": [
+                  {
+                    "source": "material",
+                    "excerpt": "saved every spare coin"
+                  }
+                ]
+              },
+              {
+                "statement": "Mrs. Williams smiled encouragingly when she left.",
+                "evidence": [
+                  {
+                    "source": "material",
+                    "excerpt": "an encouraging smile"
+                  }
+                ]
+              }
+            ],
+            "meaningDirection": {
+              "statement": "Keeping a prepaid promise matters more than the money already in their pocket.",
+              "confidence": "stronglyInferred",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "I’ll leave it in your capable hands"
+                }
+              ]
+            },
+            "sourceStyle": {
+              "statement": "Plain third-person narration with concrete actions, cold-weather detail, and short dialogue.",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "They grabbed their shovels"
+                }
+              ]
+            }
+          },
+          "continuationContract": {
+            "hardConstraints": [
+              {
+                "id": "hc-noah-tempted",
+                "statement": "Noah is exhausted and tempted to quit when the first starter begins.",
+                "evidence": [
+                  {
+                    "source": "paragraph1Starter",
+                    "excerpt": "Noah’s aching hands seemed to agree with his brother’s words."
+                  }
+                ]
+              },
+              {
+                "id": "hc-driveway-finished",
+                "statement": "Paragraph one must end with the driveway fully cleared.",
+                "evidence": [
+                  {
+                    "source": "paragraph2Starter",
+                    "excerpt": "As they cleared the final shovel of snow, Mrs. Williams’ car returned."
+                  }
+                ]
+              },
+              {
+                "id": "hc-mrs-returns",
+                "statement": "Paragraph two begins when Mrs. Williams comes back and sees the finished work.",
+                "evidence": [
+                  {
+                    "source": "paragraph2Starter",
+                    "excerpt": "Mrs. Williams’ car returned"
+                  }
+                ]
+              }
+            ],
+            "softAffordances": [
+              {
+                "statement": "Noah can remember her trusting smile and choose to finish.",
+                "evidence": [
+                  {
+                    "source": "material",
+                    "excerpt": "an encouraging smile"
+                  }
+                ]
+              },
+              {
+                "statement": "Lucas can rejoin after watching Noah continue.",
+                "evidence": [
+                  {
+                    "source": "paragraph1Starter",
+                    "excerpt": "agree with his brother’s words"
+                  }
+                ]
+              }
+            ],
+            "openChoices": [
+              "Whether Lucas returns to work after a pause or only after Noah speaks.",
+              "How Mrs. Williams shows she knows they kept the promise."
+            ],
+            "forbiddenContradictions": [
+              {
+                "id": "fc-no-unfinished-driveway",
+                "statement": "Paragraph one cannot leave the driveway unfinished.",
+                "evidence": [
+                  {
+                    "source": "paragraph2Starter",
+                    "excerpt": "cleared the final shovel of snow"
+                  }
+                ]
+              },
+              {
+                "id": "fc-no-steal-leave",
+                "statement": "They cannot take the twenty dollars and walk away unfinished.",
+                "evidence": [
+                  {
+                    "source": "material",
+                    "excerpt": "She’ll never know we didn’t finish"
+                  }
+                ]
+              }
+            ],
+            "paragraphs": [
+              {
+                "paragraphIndex": 1,
+                "entryState": {
+                  "statement": "Noah is exhausted and tempted to quit when the first starter begins.",
+                  "evidence": [
+                    {
+                      "source": "paragraph1Starter",
+                      "excerpt": "Noah’s aching hands seemed to agree with his brother’s words."
+                    }
+                  ]
+                },
+                "starterFunction": {
+                  "statement": "The first starter holds Noah at the point of quitting.",
+                  "evidence": [
+                    {
+                      "source": "paragraph1Starter",
+                      "excerpt": "Noah’s aching hands seemed to agree with his brother’s words."
+                    }
+                  ]
+                },
+                "requiredMoves": [
+                  {
+                    "id": "p1-keep-working",
+                    "statement": "Noah must choose to keep shoveling instead of leaving.",
+                    "evidence": [
+                      {
+                        "source": "paragraph2Starter",
+                        "excerpt": "cleared the final shovel of snow"
+                      }
+                    ]
+                  }
+                ],
+                "requiredExitState": [
+                  {
+                    "id": "p1-driveway-done",
+                    "statement": "Paragraph one must end with the driveway fully cleared.",
+                    "evidence": [
+                      {
+                        "source": "paragraph2Starter",
+                        "excerpt": "As they cleared the final shovel of snow, Mrs. Williams’ car returned."
+                      }
+                    ]
+                  }
+                ],
+                "supportedOptions": [
+                  {
+                    "statement": "Lucas may follow Noah’s example and pick up his shovel again.",
+                    "evidence": [
+                      {
+                        "source": "material",
+                        "excerpt": "Lucas threw down his shovel"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "paragraphIndex": 2,
+                "entryState": {
+                  "statement": "Paragraph two begins when Mrs. Williams comes back and sees the finished work.",
+                  "evidence": [
+                    {
+                      "source": "paragraph2Starter",
+                      "excerpt": "Mrs. Williams’ car returned"
+                    }
+                  ]
+                },
+                "starterFunction": {
+                  "statement": "The second starter brings the customer back to witness the finished driveway.",
+                  "evidence": [
+                    {
+                      "source": "paragraph2Starter",
+                      "excerpt": "Mrs. Williams’ car returned"
+                    }
+                  ]
+                },
+                "requiredMoves": [
+                  {
+                    "id": "p2-witness",
+                    "statement": "Mrs. Williams must see the finished work and respond.",
+                    "evidence": [
+                      {
+                        "source": "paragraph2Starter",
+                        "excerpt": "Mrs. Williams’ car returned"
+                      }
+                    ]
+                  }
+                ],
+                "requiredExitState": [
+                  {
+                    "id": "p2-promise-kept",
+                    "statement": "The boys’ choice to finish must reach a clear moral or relational result.",
+                    "evidence": [
+                      {
+                        "source": "material",
+                        "excerpt": "I’ll leave it in your capable hands"
+                      }
+                    ]
+                  }
+                ],
+                "supportedOptions": [
+                  {
+                    "statement": "The bicycle dream can be mentioned without becoming a new plot.",
+                    "evidence": [
+                      {
+                        "source": "material",
+                        "excerpt": "the red bicycle"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "closureRequirements": [
+              {
+                "id": "closure-honesty",
+                "statement": "The ending must show that keeping the prepaid promise is worth more than walking away with the bill.",
+                "evidence": [
+                  {
+                    "source": "material",
+                    "excerpt": "twenty-dollar bill"
+                  }
+                ]
+              }
+            ]
+          },
+          "narrativeDevelopment": {
+            "coreTension": {
+              "statement": "Earned money already in hand collides with an unfinished job and a brother’s urge to quit.",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "She’ll never know we didn’t finish"
+                }
+              ]
+            },
+            "drivingMotivations": [
+              {
+                "statement": "They want the bicycle, but Noah also has to answer the trust placed in them.",
+                "evidence": [
+                  {
+                    "source": "material",
+                    "excerpt": "I’ll leave it in your capable hands"
+                  }
+                ]
+              }
+            ],
+            "requiredTurningPoints": [
+              {
+                "statement": "Noah is exhausted and tempted to quit when the first starter begins.",
+                "evidence": [
+                  {
+                    "source": "paragraph1Starter",
+                    "excerpt": "Noah’s aching hands seemed to agree with his brother’s words."
+                  }
+                ]
+              },
+              {
+                "statement": "Paragraph one must end with the driveway fully cleared.",
+                "evidence": [
+                  {
+                    "source": "paragraph2Starter",
+                    "excerpt": "As they cleared the final shovel of snow, Mrs. Williams’ car returned."
+                  }
+                ]
+              },
+              {
+                "statement": "Paragraph two begins when Mrs. Williams comes back and sees the finished work.",
+                "evidence": [
+                  {
+                    "source": "paragraph2Starter",
+                    "excerpt": "Mrs. Williams’ car returned"
+                  }
+                ]
+              }
+            ],
+            "eventChain": [
+              {
+                "cause": "Noah remembers the trust and refuses to leave.",
+                "event": "He keeps shoveling; Lucas joins him; they finish the driveway.",
+                "immediateEffect": "The job is complete before Mrs. Williams returns.",
+                "evidence": [
+                  {
+                    "source": "paragraph2Starter",
+                    "excerpt": "cleared the final shovel of snow"
+                  }
+                ]
+              },
+              {
+                "cause": "The driveway is finished.",
+                "event": "Mrs. Williams returns and recognizes that they kept their promise.",
+                "immediateEffect": "The boys feel the worth of honesty beyond the cash.",
+                "evidence": [
+                  {
+                    "source": "paragraph2Starter",
+                    "excerpt": "Mrs. Williams’ car returned"
+                  }
+                ]
+              }
+            ],
+            "emotionLogic": [
+              {
+                "trigger": "Lucas tells him to leave because she will never know.",
+                "internalResponse": "Noah feels his aching hands agree, then remembers her trust.",
+                "visibleAction": "He grips the shovel and continues; Lucas follows."
+              }
+            ],
+            "relationshipMovement": [
+              {
+                "participants": [
+                  "Noah",
+                  "Lucas"
+                ],
+                "from": "split between quitting and finishing",
+                "to": "side by side completing the work",
+                "cause": "Noah’s decision to keep the promise"
+              },
+              {
+                "participants": [
+                  "Noah",
+                  "Mrs. Williams"
+                ],
+                "from": "prepaid trust not yet fulfilled",
+                "to": "trust honored and seen",
+                "cause": "the finished driveway when she returns"
+              }
+            ],
+            "interactionMoves": [
+              {
+                "speaker": "Noah",
+                "listener": "Lucas",
+                "purpose": "refuse to cheat the prepaid job",
+                "relationshipNeed": "keep brotherhood without lecturing",
+                "expectedEffect": "Lucas returns to work",
+                "evidence": [
+                  {
+                    "source": "paragraph1Starter",
+                    "excerpt": "agree with his brother’s words"
+                  }
+                ]
+              }
+            ],
+            "cluePayoffs": [
+              {
+                "clue": {
+                  "source": "material",
+                  "excerpt": "I’ll leave it in your capable hands"
+                },
+                "payoff": "They prove capable by finishing after she is gone."
+              },
+              {
+                "clue": {
+                  "source": "material",
+                  "excerpt": "the red bicycle"
+                },
+                "payoff": "The bicycle remains a hope, but honesty becomes the clearer gain."
+              }
+            ],
+            "endingState": "The driveway is done, Mrs. Williams knows they kept their word, and the brothers value the promise over easy money."
+          },
+          "languageAlignment": {
+            "personAndPerspective": "Keep third-person narration close to Noah, with Lucas visible beside him.",
+            "baseTense": "Use simple past for the main event line.",
+            "licensedTenseShifts": [],
+            "narrativeDistanceAndRegister": "Warm realistic winter-work story, concrete and unsentimental.",
+            "sourceStyleContinuity": "Continue with action, cold-body detail, and short spoken lines rather than speeches.",
+            "cohesionPlan": [
+              {
+                "relation": "cause",
+                "use": "Let remembered trust cause Noah to keep shoveling."
+              },
+              {
+                "relation": "sequence",
+                "use": "Finish the driveway before Mrs. Williams’ car returns."
+              },
+              {
+                "relation": "echo",
+                "use": "Return to the twenty-dollar bill and the bicycle without a new plot."
+              }
+            ],
+            "dialoguePolicy": "Keep dialogue sparse; a brief line from Mrs. Williams on return is enough.",
+            "descriptionPriorities": [
+              "numb hands and the remaining snow",
+              "the finished driveway in fading light"
+            ],
+            "functionLedLanguage": [
+              "verbs of shoveling and joining",
+              "brief warmth when the promise is seen"
+            ],
+            "languageRisks": [
+              "preaching honesty in slogans",
+              "leaving the driveway unfinished at the first paragraph break"
+            ]
+          },
+          "paragraphBlueprint": {
+            "selectedRoute": "Noah keeps working, Lucas joins, they finish; Mrs. Williams praises the kept promise.",
+            "routeRationale": [
+              {
+                "statement": "Noah is exhausted and tempted to quit when the first starter begins.",
+                "evidence": [
+                  {
+                    "source": "paragraph1Starter",
+                    "excerpt": "Noah’s aching hands seemed to agree with his brother’s words."
+                  }
+                ]
+              },
+              {
+                "statement": "Paragraph one must end with the driveway fully cleared.",
+                "evidence": [
+                  {
+                    "source": "paragraph2Starter",
+                    "excerpt": "As they cleared the final shovel of snow, Mrs. Williams’ car returned."
+                  }
+                ]
+              },
+              {
+                "statement": "Paragraph two begins when Mrs. Williams comes back and sees the finished work.",
+                "evidence": [
+                  {
+                    "source": "paragraph2Starter",
+                    "excerpt": "Mrs. Williams’ car returned"
+                  }
+                ]
+              }
+            ],
+            "paragraphs": [
+              {
+                "paragraphIndex": 1,
+                "narrativeFunction": "Turn the urge to quit into finished work before she returns.",
+                "eventMoves": [
+                  "Noah remembers her trust and stays.",
+                  "Lucas watches and joins.",
+                  "They clear the last of the snow."
+                ],
+                "characterActionsAndReactions": [
+                  "Noah fights exhaustion with responsibility.",
+                  "Lucas follows without a long argument."
+                ],
+                "evidenceToReuse": [
+                  {
+                    "source": "paragraph1Starter",
+                    "excerpt": "Noah’s aching hands seemed to agree with his brother’s words."
+                  },
+                  {
+                    "source": "material",
+                    "excerpt": "I’ll leave it in your capable hands"
+                  }
+                ],
+                "stateChange": "tempted to quit → driveway finished together",
+                "bridgeToNext": "End as the last shovel of snow is cleared."
+              },
+              {
+                "paragraphIndex": 2,
+                "narrativeFunction": "Let the customer witness the kept promise and close the moral gain.",
+                "eventMoves": [
+                  "Mrs. Williams returns.",
+                  "She sees the clean driveway and thanks them.",
+                  "The boys feel honesty outweigh the cash."
+                ],
+                "characterActionsAndReactions": [
+                  "Mrs. Williams shows she knew they would finish.",
+                  "Noah touches the bill and values the lesson more than the bicycle money."
+                ],
+                "evidenceToReuse": [
+                  {
+                    "source": "paragraph2Starter",
+                    "excerpt": "Mrs. Williams’ car returned"
+                  },
+                  {
+                    "source": "material",
+                    "excerpt": "twenty-dollar bill"
+                  }
+                ],
+                "stateChange": "unseen labor → trust honored in public",
+                "bridgeToNext": "Close the story; do not start a new errand."
+              }
+            ],
+            "finalEffect": "The prepaid trust is fulfilled through visible work, and the ending grows from the bicycle wish without replacing it with a lecture.",
+            "validAlternativeRoutes": [
+              "Noah speaks one short line to Lucas before Lucas silently returns to work."
+            ],
+            "qualityRisks": [
+              "Having Mrs. Williams return before the driveway is finished",
+              "Inventing a new accident or a gifted bicycle"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -23,6 +23,12 @@ import { analyzeSevenChoicesImportCandidate } from '../../server/paper-import-ai
 import { analyzeClozeImportCandidate } from '../../server/paper-import-ai/analyzeCloze.mjs'
 import { analyzeGrammarFillImportCandidate } from '../../server/paper-import-ai/analyzeGrammarFill.mjs'
 import { loadCanonicalImportRequest } from '../../server/paper-canonical/importRequest.mjs'
+import {
+  persistStagedWritingAnalyses,
+  projectStagedWritingAnalysis,
+  requiresLockedWritingAnalysis,
+} from './lib-nck1-new-paper-locks.mjs'
+import { validateWritingAnalysisCandidate } from '../../server/writing-analysis/writingAnalysisBackfillService.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const projectRoot = path.resolve(__dirname, '../..')
@@ -92,6 +98,18 @@ const sevenAnalysis = tryLoadAnalysis('seven', seven.groupId)
 const clozeAnalysis = tryLoadAnalysis('cloze', cloze.groupId)
 const grammarAnalysis = tryLoadAnalysis('grammar', grammar.groupId)
 
+const lockWritingAnalysis = Boolean(
+  application
+  && continuation
+  && requiresLockedWritingAnalysis(config, outDir),
+)
+const applicationAnalysis = lockWritingAnalysis
+  ? tryLoadAnalysis('application', application.groupId)
+  : null
+const continuationAnalysis = lockWritingAnalysis
+  ? tryLoadAnalysis('continuation', continuation.groupId)
+  : null
+
 if (analysisMissing.length > 0) {
   console.log(`\nMissing analyses (${analysisMissing.length}): ${analysisMissing.join(', ')}`)
   console.log('Proceeding with dry-run for present analyses only.')
@@ -156,6 +174,17 @@ if (grammarAnalysis) {
   } catch (err) {
     console.log(`   [FAIL] grammar: ${err.message}`)
     validationErrors.push(`grammar: ${err.message}`)
+  }
+}
+
+if (lockWritingAnalysis && applicationAnalysis && continuationAnalysis) {
+  try {
+    validateWritingAnalysisCandidate(projectStagedWritingAnalysis(applicationAnalysis))
+    validateWritingAnalysisCandidate(projectStagedWritingAnalysis(continuationAnalysis))
+    console.log('   [OK] application + continuation writing analysis (new-paper lock)')
+  } catch (err) {
+    console.log(`   [FAIL] writing analysis: ${err.message}`)
+    validationErrors.push(`writing: ${err.message}`)
   }
 }
 
@@ -300,6 +329,25 @@ if (doPublish) {
         console.error(`   [${diagnostic.code}] ${diagnostic.message}`)
       }
       process.exitCode = 1
+    }
+    if (
+      lockWritingAnalysis
+      && (result.status === 'published' || result.status === 'idempotent')
+    ) {
+      try {
+        persistStagedWritingAnalyses({
+          paperAssetsDir,
+          paperId,
+          applicationGroupId: application.groupId,
+          continuationGroupId: continuation.groupId,
+          applicationRaw: applicationAnalysis,
+          continuationRaw: continuationAnalysis,
+        })
+        console.log('   writing-analysis-v1.json persisted (new-paper lock)')
+      } catch (error) {
+        console.error(`\nCannot persist writing analysis: ${error.message}`)
+        process.exitCode = 1
+      }
     }
   } finally {
     db.close()

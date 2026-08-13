@@ -1,11 +1,20 @@
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { canonicalizeVisibleEnglishTypography } from '../../shared/paper-canonical/visibleTypography.mjs'
+import { normalizeGrammarFillText } from '../paper-import-ai/normalizeGrammarFillText.mjs'
 import { buildGroups } from '../../scripts/import-pipeline/lib.mjs'
+import { buildDocxPairGroups, stripBidi } from '../../scripts/import-pipeline/lib-docx-pair.mjs'
 import { inflateRawSync } from 'node:zlib'
 
 export const DOCX_SOURCE_ENVELOPE_MEDIA_TYPE =
   'application/vnd.eqb.docx-source-envelope+json'
 export const DOCX_MEDIA_TYPE =
   'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+export const DOCX_PAIR_IDENTITY_MEDIA_TYPE =
+  'application/vnd.eqb.docx-pair-identity+json'
+export const DOCX_PAIR_IDENTITY_SCHEMA_VERSION = 'docx-pair-identity-v1'
+
+const RESERVED_NCK1_EXAM_PAPER_ID =
+  /^paper-(?:\d{4}-i|zj-\d{4}-jan)$/
 
 const EOCD_SIGNATURE = 0x06054b50
 const CENTRAL_FILE_SIGNATURE = 0x02014b50
@@ -171,12 +180,12 @@ function markerNumber(question) {
   return String(question.questionNo || question.stem || '')
 }
 
-function paragraphBlocks(rawGroup, blankIds = []) {
+function paragraphBlocks(rawGroup, blankIds = [], { wrappedSevenBlanks = false } = {}) {
   const blankIdByMarker = new Map((rawGroup.questions || []).map((question, index) => [
     markerNumber(question),
     blankIds[index],
   ]))
-  const markerPattern = rawGroup.groupType === 'sevenChoices'
+  const markerPattern = rawGroup.groupType === 'sevenChoices' && !wrappedSevenBlanks
     ? new RegExp(
         `(?<!\\d)(${(rawGroup.questions || []).map(markerNumber).join('|')})(?!\\d)`,
         'g',
@@ -255,13 +264,23 @@ function choiceOwnership(rawGroup, family) {
   return { ownership: 'none' }
 }
 
-function wordCountTarget(rawText, label) {
-  const match = new RegExp(`${label}词数应为\\s*(\\d+)\\s*个左右`).exec(rawText)
+function wordCountTarget(rawText, label, { allowOmittedGe = false } = {}) {
+  const match = new RegExp(
+    `${label}词数应为\\s*(\\d+)\\s*${allowOmittedGe ? '(?:个)?' : '个'}左右`,
+  ).exec(rawText)
   if (!match) throw new Error(`DOCX source lacks ${label} word-count instruction`)
   return Number(match[1])
 }
 
-function deriveVariant(rawGroup, family, blankIds, rawText) {
+function applicationGivenTitle(given) {
+  return typeof given === 'string' && given.trim() ? given.trim() : ''
+}
+
+function nck1ApplicationNoticeText(target) {
+  return `注意：（1）写作词数应为${target}个左右；（2）请按如下格式在答题卡的相应位置作答。`
+}
+
+function deriveVariant(rawGroup, family, blankIds, rawText, wordCountOptions = {}) {
   const ownership = choiceOwnership(rawGroup, family)
   if (family === 'reading') {
     return {
@@ -302,35 +321,61 @@ function deriveVariant(rawGroup, family, blankIds, rawText) {
   }
   if (family === 'application-writing') {
     const groupId = rawGroup.groupId
-    const blockId = `paragraph:${groupId}:prompt`
-    const inlineNodeIds = [`text:${groupId}:prompt`]
-    const contentRef = { blockId, inlineNodeIds }
+    const promptBlockId = `paragraph:${groupId}:prompt`
+    const noticeBlockId = `paragraph:${groupId}:notice`
+    const promptRef = {
+      blockId: promptBlockId,
+      inlineNodeIds: [`text:${groupId}:prompt`],
+    }
+    const givenTitle = wordCountOptions.applicationNck1Chrome
+      ? applicationGivenTitle(rawGroup.applicationGiven)
+      : ''
+    const rulingRef = wordCountOptions.applicationNck1Chrome
+      ? {
+          blockId: noticeBlockId,
+          inlineNodeIds: [`text:${groupId}:notice`],
+        }
+      : promptRef
     return {
       family,
-      writingTaskId: `writing-task:${groupId}`,
-      promptBlockRefs: [blockId],
+      writingTaskId: wordCountOptions.applicationWritingTaskId
+        || `writing-task:${groupId}`,
+      promptBlockRefs: wordCountOptions.applicationNck1Chrome
+        ? [promptBlockId, noticeBlockId]
+        : [promptBlockId],
       situation: {
-        writerRole: contentRef,
-        audienceOrDestination: contentRef,
-        deliverable: contentRef,
-        communicativePurpose: contentRef,
+        writerRole: promptRef,
+        audienceOrDestination: promptRef,
+        deliverable: promptRef,
+        communicativePurpose: promptRef,
       },
       contentRequirements: [{
         requirementId: `requirement:${groupId}:1`,
-        contentRef,
+        contentRef: promptRef,
       }],
       wordCountRuling: {
         kind: 'approximate_target',
-        target: wordCountTarget(rawText, '写作'),
+        target: wordCountTarget(rawText, '写作', wordCountOptions),
         countScope: 'student_authored_only',
-        sourceRef: contentRef,
+        sourceRef: rulingRef,
         authorityObservationRef: `observation:${groupId}:word-count`,
       },
-      givenSkeleton: {
-        presence: 'none',
-        answerRegionAbsenceAssertionRef:
-          `observation:${groupId}:answer-region-empty`,
-      },
+      givenSkeleton: givenTitle
+        ? {
+            presence: 'provided',
+            parts: [{
+              givenPartId: `given-part:${groupId}:title`,
+              role: 'title',
+              placement: 'answer_region_top',
+              blockRef: `paragraph:${groupId}:given:title`,
+              authorityAssertionRef: `observation:${groupId}:given:title`,
+            }],
+          }
+        : {
+            presence: 'none',
+            answerRegionAbsenceAssertionRef:
+              `observation:${groupId}:answer-region-empty`,
+          },
       choiceOwnership: ownership,
       response: {
         kind: 'group_level_written_response',
@@ -350,11 +395,12 @@ function deriveVariant(rawGroup, family, blankIds, rawText) {
     }
     return {
       family,
-      writingTaskId: `writing-task:${groupId}`,
+      writingTaskId: wordCountOptions.continuationWritingTaskId
+        || `writing-task:${groupId}`,
       materialBlockRefs: [materialBlockId],
       wordCountRuling: {
         kind: 'approximate_target',
-        target: wordCountTarget(rawText, '续写'),
+        target: wordCountTarget(rawText, '续写', wordCountOptions),
         countScope: 'student_authored_only',
         sourceRef: {
           blockId: materialBlockId,
@@ -381,22 +427,45 @@ function deriveVariant(rawGroup, family, blankIds, rawText) {
   return { family, choiceOwnership: ownership }
 }
 
-function deriveContent(rawGroup, family, blankIds) {
+function deriveContent(rawGroup, family, blankIds, contentOptions = {}) {
   if (family === 'application-writing') {
     const groupId = rawGroup.groupId
-    return {
-      blocks: [{
+    const prompt = rawGroup.paragraphs.map((paragraph) => paragraph.text).join('\n')
+    const suffix = !contentOptions.applicationNck1Chrome
+      && Number.isInteger(contentOptions.applicationWordCountTarget)
+      ? `（词数${contentOptions.applicationWordCountTarget}左右。）`
+      : ''
+    const blocks = [{
+      kind: 'paragraph',
+      nodeId: `paragraph:${groupId}:prompt`,
+      inlines: contentText(`text:${groupId}:prompt`, `${prompt}${suffix}`),
+    }]
+    if (contentOptions.applicationNck1Chrome) {
+      if (!Number.isInteger(contentOptions.applicationWordCountTarget)) {
+        throw new Error('DOCX pair application writing requires a word-count target')
+      }
+      blocks.push({
         kind: 'paragraph',
-        nodeId: `paragraph:${groupId}:prompt`,
+        nodeId: `paragraph:${groupId}:notice`,
         inlines: contentText(
-          `text:${groupId}:prompt`,
-          rawGroup.paragraphs.map((paragraph) => paragraph.text).join('\n'),
+          `text:${groupId}:notice`,
+          nck1ApplicationNoticeText(contentOptions.applicationWordCountTarget),
         ),
-      }],
+      })
+      const givenTitle = applicationGivenTitle(rawGroup.applicationGiven)
+      if (givenTitle) {
+        blocks.push({
+          kind: 'paragraph',
+          nodeId: `paragraph:${groupId}:given:title`,
+          inlines: contentText(`text:${groupId}:given:title`, givenTitle),
+        })
+      }
     }
+    return { blocks }
   }
   if (family === 'continuation-writing') {
     const groupId = rawGroup.groupId
+    const joiner = contentOptions.continuationMaterialJoin || '\n'
     return {
       blocks: [
         {
@@ -404,7 +473,7 @@ function deriveContent(rawGroup, family, blankIds) {
           nodeId: `paragraph:${groupId}:material`,
           inlines: contentText(
             `text:${groupId}:material`,
-            rawGroup.paragraphs.map((paragraph) => paragraph.text).join('\n'),
+            rawGroup.paragraphs.map((paragraph) => paragraph.text).join(joiner),
           ),
         },
         ...(rawGroup.continuationStarters || []).map((starter, index) => ({
@@ -418,14 +487,21 @@ function deriveContent(rawGroup, family, blankIds) {
       ],
     }
   }
-  return { blocks: paragraphBlocks(rawGroup, blankIds) }
+  return { blocks: paragraphBlocks(rawGroup, blankIds, contentOptions) }
 }
 
-function sourceObservation({ observationId, kind, value, sourceByteRange, adapterVersion }) {
+function sourceObservation({
+  observationId,
+  kind,
+  value,
+  sourceByteRange,
+  adapterVersion,
+  documentInputKey = 'source_docx',
+}) {
   return {
     observationId,
     kind,
-    documentInputKey: 'source_docx',
+    documentInputKey,
     value,
     span: { ...sourceByteRange },
     extraction: { adapterId: 'docx-source-envelope', version: adapterVersion },
@@ -435,13 +511,27 @@ function sourceObservation({ observationId, kind, value, sourceByteRange, adapte
 function writingObservations(group, family, sourceByteRange, observe) {
   const groupId = group.groupId
   if (family === 'application-writing') {
+    const givenParts = group.variant.givenSkeleton?.presence === 'provided'
+      ? group.variant.givenSkeleton.parts.map((part) => observe({
+          observationId: part.authorityAssertionRef,
+          kind: 'application_given_part',
+          value: {
+            groupId,
+            givenPartId: part.givenPartId,
+            role: part.role,
+            placement: part.placement,
+            blockRef: part.blockRef,
+          },
+          sourceByteRange,
+        }))
+      : [observe({
+          observationId: `observation:${groupId}:answer-region-empty`,
+          kind: 'application_answer_region_absence',
+          value: { groupId, answerRegionRef: 'writing.application-box' },
+          sourceByteRange,
+        })]
     return [
-      observe({
-        observationId: `observation:${groupId}:answer-region-empty`,
-        kind: 'application_answer_region_absence',
-        value: { groupId, answerRegionRef: 'writing.application-box' },
-        sourceByteRange,
-      }),
+      ...givenParts,
       observe({
         observationId: `observation:${groupId}:word-count`,
         kind: 'application_word_count_ruling',
@@ -609,6 +699,248 @@ export function deriveDocxCanonicalSource(docxBytes, { adapterVersion = '2' } = 
         }
       : {},
     inactiveSourceClosures: [],
+  }
+}
+
+export function isReservedNck1ExamPaperId(paperId) {
+  return typeof paperId === 'string' && RESERVED_NCK1_EXAM_PAPER_ID.test(paperId)
+}
+
+/**
+ * Immutable DOCX XML extract keeps paragraph tabs and CR. Format ③ structure
+ * decisions need the same line-oriented text the pair splitter already uses.
+ */
+export function normalizeDocxPairExtractedText(rawText) {
+  return stripBidi(rawText)
+    .replace(/\r\n?/g, '\n')
+    .replace(/^[ \t]+/gm, '')
+    .replace(/[ \t]+$/gm, '')
+}
+
+function canonicalizeDocxPairText(value) {
+  return canonicalizeVisibleEnglishTypography(String(value || ''))
+}
+
+function canonicalizeDocxPairParsed(parsed) {
+  const question = (item) => ({
+    ...item,
+    stem: item.stem == null ? item.stem : canonicalizeDocxPairText(item.stem),
+    answerKey: item.answerKey == null
+      ? item.answerKey
+      : canonicalizeDocxPairText(item.answerKey),
+    options: item.options
+      ? Object.fromEntries(
+          Object.entries(item.options).map(([label, text]) => [
+            label,
+            canonicalizeDocxPairText(text),
+          ]),
+        )
+      : item.options,
+  })
+  const paragraphs = (items) => (items || []).map((paragraph) => ({
+    ...paragraph,
+    text: canonicalizeDocxPairText(paragraph.text),
+  }))
+  return {
+    ...parsed,
+    readingGroups: parsed.readingGroups.map((group) => ({
+      ...group,
+      paragraphs: paragraphs(group.paragraphs),
+      questions: group.questions.map(question),
+    })),
+    seven: {
+      ...parsed.seven,
+      paragraphs: paragraphs(parsed.seven.paragraphs),
+      optionBank: (parsed.seven.optionBank || []).map((option) => ({
+        ...option,
+        text: canonicalizeDocxPairText(option.text),
+      })),
+      questions: parsed.seven.questions.map(question),
+    },
+    cloze: {
+      ...parsed.cloze,
+      paragraphs: paragraphs(parsed.cloze.paragraphs),
+      questions: parsed.cloze.questions.map(question),
+    },
+    grammar: {
+      ...parsed.grammar,
+      paragraphs: (parsed.grammar.paragraphs || []).map((paragraph) => ({
+        ...paragraph,
+        text: canonicalizeDocxPairText(normalizeGrammarFillText(paragraph.text)),
+      })),
+      questions: parsed.grammar.questions.map(question),
+    },
+    application: {
+      ...parsed.application,
+      paragraphs: paragraphs(parsed.application.paragraphs),
+      applicationGiven: typeof parsed.application.applicationGiven === 'string'
+        ? canonicalizeDocxPairText(parsed.application.applicationGiven)
+        : parsed.application.applicationGiven,
+    },
+    continuation: {
+      ...parsed.continuation,
+      paragraphs: paragraphs(parsed.continuation.paragraphs),
+      continuationStarters: (parsed.continuation.continuationStarters || [])
+        .map(canonicalizeDocxPairText),
+    },
+  }
+}
+
+function requireOwnerAssertedPairPaperId(paperId) {
+  if (typeof paperId !== 'string' || paperId.length === 0) {
+    throw new Error('DOCX pair source requires the owner-asserted paperId')
+  }
+  if (isReservedNck1ExamPaperId(paperId)) {
+    throw new Error(
+      `DOCX pair source must not occupy reserved NCK1 exam id ${paperId}`,
+    )
+  }
+  return paperId
+}
+
+/**
+ * Derive compiler source from 试题 DOCX + 答案解析 DOCX. Identity is the
+ * owner-asserted paperId; titles are never mapped to paper-YYYY-i or
+ * paper-zj-YYYY-jan.
+ */
+export function deriveDocxPairCanonicalSource(
+  questionBytes,
+  answersBytes,
+  { adapterVersion = '2', paperId } = {},
+) {
+  if (!['2'].includes(adapterVersion)) {
+    throw new Error(`DOCX pair adapter version ${adapterVersion} is unsupported`)
+  }
+  if (!(questionBytes instanceof Uint8Array) || questionBytes.byteLength === 0) {
+    throw new TypeError('DOCX pair derivation requires immutable question DOCX bytes')
+  }
+  if (!(answersBytes instanceof Uint8Array) || answersBytes.byteLength === 0) {
+    throw new TypeError('DOCX pair derivation requires immutable answer DOCX bytes')
+  }
+  const identity = {
+    paperId: requireOwnerAssertedPairPaperId(paperId),
+    profileId: 'nck1',
+  }
+  const { documentXml } = readDocxPackage(questionBytes)
+  const rawText = normalizeDocxPairExtractedText(extractDocxDocumentText(questionBytes))
+  const answersText = normalizeDocxPairExtractedText(extractDocxDocumentText(answersBytes))
+  const parsed = canonicalizeDocxPairParsed(
+    buildDocxPairGroups(rawText, answersText, identity.paperId),
+  )
+  const sourceByteRange = documentXml.compressedRange
+  const observations = []
+  const observe = (args) => sourceObservation({
+    ...args,
+    adapterVersion,
+    documentInputKey: 'question_docx',
+  })
+  const examCode = String(identity.paperId)
+    .replace(/^paper-/, '')
+    .replace(/[^a-z0-9]+/gi, '-')
+    .replace(/^-+|-+$/g, '')
+    .toLowerCase()
+  const wordCountOptions = {
+    allowOmittedGe: true,
+    applicationNck1Chrome: true,
+    applicationWritingTaskId: `wt-${examCode}-application`,
+    continuationWritingTaskId: `wt-${examCode}-continuation`,
+  }
+  const applicationWordCountTarget = wordCountTarget(rawText, '写作', wordCountOptions)
+  const contentOptions = {
+    wrappedSevenBlanks: true,
+    applicationNck1Chrome: true,
+    applicationWordCountTarget,
+    continuationMaterialJoin: '\n\n',
+  }
+  const groups = [...rawGroupsBySlot(parsed)].map(([slotId, rawGroup]) => {
+    const family = familyBySlot.get(slotId)
+    if (!family) throw new Error(`DOCX pair source slot ${slotId} is unsupported`)
+    const blankIds = [...(rawGroup.blankIds || [])]
+    const group = {
+      groupId: rawGroup.groupId,
+      slotId,
+      family,
+      questionIds: rawGroup.questions.map((question) => question.id),
+      blankIds,
+      sourceSpanId: `source-span:observation:${slotId}`,
+      content: deriveContent(rawGroup, family, blankIds, contentOptions),
+      media: [],
+      variant: deriveVariant(rawGroup, family, blankIds, rawText, wordCountOptions),
+      sourceSpanRefsByTarget: family === 'grammar-fill'
+        ? Object.fromEntries(blankIds.map((blankId) => [
+            `prompt_provision:${blankId}`,
+            [`source-span:observation:grammar-fill-prompt:${blankId}`],
+          ]))
+        : {},
+    }
+    observations.push(observe({
+      observationId: `observation:${slotId}`,
+      kind: 'docx_section',
+      value: slotId,
+      sourceByteRange,
+    }))
+    if (family === 'grammar-fill') {
+      observations.push(...blankIds.map((blankId) => observe({
+        observationId: `observation:grammar-fill-prompt:${blankId}`,
+        kind: 'grammar_fill_prompt_provision',
+        value: { blankId, provision: 'source_proven_none' },
+        sourceByteRange,
+      })))
+    }
+    observations.push(...writingObservations(group, family, sourceByteRange, observe))
+    return group
+  })
+  const groupByQuestionId = new Map(groups.flatMap((group) =>
+    group.questionIds.map((questionId) => [questionId, group])))
+  return {
+    ...identity,
+    sourceAssetVersion: 1,
+    profileInstructionSourceDigest: sha256(questionBytes),
+    observations,
+    assertions: objectiveQuestions(parsed).map((question) => ({
+      assertionId: `answer:${question.id}`,
+      questionId: question.id,
+      answer: question.answerKey,
+      authority: 'official',
+      sourceSpanId: groupByQuestionId.get(question.id).sourceSpanId,
+    })),
+    groups,
+    transformations: [],
+    inactiveSlots: {
+      'listening.short-dialogue': 'not_supplied',
+      'listening.long-form': 'not_supplied',
+    },
+    inactiveSourceClosures: [],
+  }
+}
+
+export function inspectDocxPairEnvelopeSource(questionBytes, answersBytes, {
+  adapterVersion = '2',
+  paperId,
+  assertedSource,
+} = {}) {
+  const { documentXml } = readDocxPackage(questionBytes)
+  const derivedSource = deriveDocxPairCanonicalSource(questionBytes, answersBytes, {
+    adapterVersion,
+    paperId,
+  })
+  const inactiveClosureMatches = [
+    'listening.short-dialogue',
+    'listening.long-form',
+  ].every((slotId) => derivedSource.inactiveSlots[slotId] === 'not_supplied')
+  const completeSourceMatches = assertedSource === undefined
+    || digestJson(assertedSource) === digestJson(derivedSource)
+  return {
+    ok: completeSourceMatches && inactiveClosureMatches,
+    verifiedSource: completeSourceMatches ? derivedSource : null,
+    sourceByteRange: documentXml.compressedRange,
+    rawTextDigest: sha256(
+      new TextEncoder().encode(
+        normalizeDocxPairExtractedText(extractDocxDocumentText(questionBytes)),
+      ),
+    ),
+    completeSourceMatches,
+    inactiveClosureMatches,
   }
 }
 

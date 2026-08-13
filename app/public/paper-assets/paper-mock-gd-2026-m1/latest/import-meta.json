@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-mock-gd-2026-m1",
+  "sourceFileName": "paper.docx",
+  "sourceFileSha256": "abdc30458a07bf59590484b651a28da707bfb426744d0ecf6be14f811c519955",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-08-13T07:58:47.915Z",
+  "paper": {
+    "year": 2026,
+    "region": "广东",
+    "paperName": "2026年3月广东高三一模",
+    "examCode": "mock-gd-2026-m1",
+    "subject": "English",
+    "sourceType": "模拟题",
+    "defaultTags": [
+      "模拟",
+      "2026",
+      "广东",
+      "一模"
+    ]
+  },
+  "groups": {
+    "group-mock-gd-2026-m1-reading-a": {
+      "groupId": "group-mock-gd-2026-m1-reading-a",
+      "difficulty": "中",
+      "summary": "应用文。介绍斯图尔特岛 Ruggedy Range 观鸟公路短途游的行程特点、价格、成团人数、出发时间及适合人群。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-mock-gd-2026-m1-reading-b": {
+      "groupId": "group-mock-gd-2026-m1-reading-b",
+      "difficulty": "中",
+      "summary": "记叙文。作者写第二本书时陷入拖延，经日记反思发现害怕被评判，后以五分钟微行动重启写作，并重新理解停滞。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-mock-gd-2026-m1-reading-c": {
+      "groupId": "group-mock-gd-2026-m1-reading-c",
+      "difficulty": "中",
+      "summary": "议论文。从职业运动员的睡眠与追踪习惯写到普通人使用可穿戴设备，指出高级设备能揭示习惯与健康的关联，也警告数字焦虑，最后建议倾听身体信号。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-mock-gd-2026-m1-reading-d": {
+      "groupId": "group-mock-gd-2026-m1-reading-d",
+      "difficulty": "中",
+      "summary": "说明文。介绍俄亥俄州立大学用香菇等真菌制作有机忆阻器，说明其记忆原理、菌丝网络的集体智能，以及可再生、可塑形的环境优势。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-mock-gd-2026-m1-seven-choices": {
+      "groupId": "group-mock-gd-2026-m1-seven-choices",
+      "difficulty": "中",
+      "summary": "说明文。解释拒绝敏感性：日常小事会被读成针对自己，回避又可能真的招来拒绝；随后给出挑战第一反应、坦诚表达需求、温暖回应他人三条习惯。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-mock-gd-2026-m1-cloze": {
+      "groupId": "group-mock-gd-2026-m1-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-mock-gd-2026-m1-grammar-fill": {
+      "groupId": "group-mock-gd-2026-m1-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    },
+    "group-mock-gd-2026-m1-writing-application": {
+      "groupId": "group-mock-gd-2026-m1-writing-application",
+      "difficulty": "中",
+      "summary": "应用文写作",
+      "tags": [
+        "应用文写作"
+      ],
+      "displayTitleOverride": "应用文写作"
+    },
+    "group-mock-gd-2026-m1-writing-continuation": {
+      "groupId": "group-mock-gd-2026-m1-writing-continuation",
+      "difficulty": "中",
+      "summary": "读后续写",
+      "tags": [
+        "读后续写"
+      ],
+      "displayTitleOverride": "读后续写"
+    }
+  }
+}

@@ -93,7 +93,7 @@ The fixed response text explicitly provided by the source for an application Wri
 _Avoid_: application format when the source provides no fixed text; inferred greeting; model-answer scaffold
 
 **Writing Analysis**:
-The reviewed, display-facing 讲评 for a Writing Task — the writing counterpart of the per-Question Analysis, attached at the writing group / Writing Task level (no Question reference, per ADR-0007). It is display content (read on the paper surface), not a search dimension. The on-disk envelope remains `writing-analysis-v1` (no v2 file). An **application** Writing Analysis carries a **Model Answer**, a **Review Card**, and an optional **Official Model Answer** when the source supplies one; new application work does not require **Highlight Expressions** (historical arrays are kept). New **continuation** work uses **Narrative Continuation Analysis** plus a **Model Answer**; persisted `main` assets may still carry legacy **Continuation Design**. Scoring guidance, common-pitfall notes, and grouped vocabulary banks are out of scope.
+The reviewed, display-facing 讲评 for a Writing Task — the writing counterpart of the per-Question Analysis, attached at the writing group / Writing Task level (no Question reference, per ADR-0007). It is display content (read on the paper surface), not a search dimension. The on-disk envelope remains `writing-analysis-v1` (no v2 file). An **application** Writing Analysis carries a **Model Answer**, a **Review Card**, and an optional **Official Model Answer** when the source supplies one; new application work does not require **Highlight Expressions** (historical arrays are kept). New **continuation** work uses **Narrative Continuation Analysis** plus a **Model Answer**; persisted `main` assets may still carry legacy **Continuation Design**. New NCK1 papers persist this envelope during `--publish`; historical papers remain backfillable. Scoring guidance, common-pitfall notes, and grouped vocabulary banks are out of scope.
 _Avoid_: 写作解析 / writing explanation when the stored reviewed object is meant; do not call it a Tag or a derived search dimension; do not call the expanded application fields "writing-analysis-v2"
 
 **Model Answer** (范文 / AI 参考范文):
@@ -109,7 +109,7 @@ The application-only structured 审题 fields on a Writing Analysis (`form`, `to
 _Avoid_: using it as continuation plot design; treating it as a Tag; adding relationship-move fields onto ReviewCard
 
 **Highlight Expression** (亮点表达 / 高分句块):
-A reusable, high-scoring sentence chunk lifted from the Model Answer. Continuation Writing Analysis on current `main` still requires 3–5; new application Writing Analysis does not produce them (legacy application arrays may still exist). New narrative continuation work does not treat highlights as the analysis authority.
+A reusable, high-scoring sentence chunk lifted from the Model Answer. Historical continuation Writing Analysis still carries 3–5; new application and new narrative continuation work do not persist them (legacy application arrays may still exist). New narrative continuation work uses **Narrative Continuation Analysis**, not highlights.
 _Avoid_: phrase, sentence when the curated, score-bearing chunk is meant; requiring highlights on new application work
 
 **Continuation Design** (情节设计思路):

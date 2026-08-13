@@ -9,6 +9,11 @@
 任何 agent 要导一套新卷,先读 `docs/import/agent-contract.md`（唯一进场）。
 机械 how-to 见 `docs/import/agent-runbook.md`；本 README 只是它引用的工序
 参考,不重复讲工序。数据契约权威见 `docs/product/nck1-paper-standard.md`。
+格式③（试题 DOCX + 答案解析 DOCX）映射见该标准附录 A。切卷：
+`node scripts/import-pipeline/03-split-docx-pair.mjs papers/<id>/config.json`。
+canonical 物化：
+`node scripts/import-pipeline/build-docx-pair-canonical-request.mjs <试题.docx> <答案解析.docx> --output-dir papers/<id>/canonical-evidence --expected-paper-id <paperId> --write`。
+身份以开局 `paperId` 为准，不按标题派生。
 
 ## 已导入(13 套,paperId `paper-<year>-{i,ii}`)
 
@@ -26,7 +31,7 @@
 2. **`01-split.mjs <config>`** — 确定性切卷(`lib.mjs`):两种试卷格式(简化「一二三」答案版 + 官方「第X部分/第X节」);滤分值标注 `(N分)`;空标记 `__NN__`;标准重排 21–35/36–40/41–55/56–65。产 `papers/<id>/groups.json` + 每组 `analyze-<key>-combined.txt`(shape-gate 走 shipped `build*AnalysisMessages`)。
 3. **解析扇出 = ad-hoc Workflow**(不在本目录;每次现写):一组一 agent,喂 `analyze-<key>-combined.txt`,产 `analysis-<key>.json`,用 `validate-one.mjs` 自校验 + 重试。
 4. **`validate-one.mjs <config> <key>`** — 单组校验(注入 shipped `analyze*ImportCandidate`)。
-5. **`02-publish.mjs <config> [--publish]`** — 校验全组 → 打包(shipped `buildPaperImportAiPackageFiles`)→ **产包后改写 import-meta 出处**(sourceType/region/paperName/year/tags)→ `--publish` 走 shipped `publishPaperImportPackage` 入库。**未改任何契约代码**。`--publish` 前格式①须先跑 trusted-DOCX producer（见下），并把 `config.canonicalRequestPath` 指到产物。隔离根可用 `QUESTION_BANK_DB` / `QUESTION_BANK_PAPER_ASSET_ROOT`；默认仍是本机库与 `app/public/paper-assets/`。
+5. **`02-publish.mjs <config> [--publish]`** — 校验全组 → 打包(shipped `buildPaperImportAiPackageFiles`)→ **产包后改写 import-meta 出处**(sourceType/region/paperName/year/tags)→ `--publish` 走 shipped `publishPaperImportPackage` 入库。格式③（以及任何已交出 `analysis-application.json` / `analysis-continuation.json` 的卷）在入库后把写作分析写入 `latest/analyses/writing-analysis-v1.json`；缺稿不得 `--publish`。`--publish` 前格式①须先跑 trusted-DOCX producer（见下），并把 `config.canonicalRequestPath` 指到产物。隔离根可用 `QUESTION_BANK_DB` / `QUESTION_BANK_PAPER_ASSET_ROOT`；默认仍是本机库与 `app/public/paper-assets/`。
 
 格式① canonical 物化（dry-run / publish-gate / `verify-nck1` PRE 之后、`--publish` 之前）：
 
@@ -39,6 +44,19 @@ node scripts/import-pipeline/build-trusted-docx-canonical-request.mjs \
 ```
 
 不要手写 Canonical Paper，不要套用格式② PDF envelope。同一命令去掉 `--write` 可证明 byte-reproducible。派生身份必须与开局 `paperId` 一致。
+
+格式③ canonical 物化（dry-run / publish-gate / `verify-nck1` PRE 之后、`--publish` 之前）：
+
+```bash
+node scripts/import-pipeline/build-docx-pair-canonical-request.mjs \
+  <试题.docx> \
+  <答案解析.docx> \
+  --output-dir scripts/import-pipeline/papers/<paperId>/canonical-evidence \
+  --expected-paper-id <paperId> \
+  --write
+```
+
+不要手写 Canonical Paper，不要套用格式①标题派生或格式② PDF envelope。开局 `paperId` 必填，且不得占用 `paper-YYYY-i` / `paper-zj-YYYY-jan`。
 
 ### 格式②:PDF 试题卷 + 独立答案 PDF(2026 起)
 

@@ -1,0 +1,670 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-mock-gd-2026-m1",
+  "sourceAssetVersion": 2,
+  "targetGroups": [
+    "group-mock-gd-2026-m1-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "cursor-grok-4.6",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "format3-import-agent",
+    "reviewedAt": "2026-08-13T00:00:00Z",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-mock-gd-2026-m1-cloze": {
+      "overview": "记叙文。作者毕业季一心只想进本国汽车巨头，遭拒后怨天尤人；听完控制源讲座后内省补短，最终拿到更好的职位。",
+      "affectiveArc": "从自信到受挫抱怨，再转为内省负责，最后靠准备与自我认知拿回主动权。"
+    }
+  },
+  "blanks": {
+    "q-mock-gd-2026-m1-041": {
+      "blankId": "blank-mock-gd-2026-m1-041",
+      "blankNo": 41,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "空后 to join an automaker giant 是他当时唯一的目标，dream 与后文 dreamed of 同场。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "option",
+          "meaning": "选择"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "appointment",
+          "meaning": "预约/任命"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "assignment",
+          "meaning": "任务"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to join an automaker giant",
+          "signalSide": "context-after",
+          "targetText": "one dream: to join",
+          "relation": "不定式说明这一空是他当时的志向。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "originally dreamed of",
+          "signalSide": "context-after",
+          "relation": "后文 dreamed of 回指此处的 dream。"
+        }
+      ],
+      "teachingNote": "one + 空 + 不定式表志向时，优先看 dream。"
+    },
+    "q-mock-gd-2026-m1-042": {
+      "blankId": "blank-mock-gd-2026-m1-042",
+      "blankNo": 42,
+      "pos": "verb",
+      "signatureFacet": "cloze.signature.verb.action-sequence",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "他把全部精力倒进这一家公司，说明其他机会被他摒弃，dismissed。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "compared",
+          "meaning": "比较"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "seized",
+          "meaning": "抓住"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "lacked",
+          "meaning": "缺乏"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "other opportunities",
+          "signalSide": "stem",
+          "targetText": "dismissed other opportunities",
+          "relation": "空的宾语是其他机会，与后文只攻一家形成对照。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "poured all my energy into this company",
+          "signalSide": "context-after",
+          "relation": "全部精力只给这一家，前句必是放弃其他机会。"
+        }
+      ],
+      "teachingNote": "与 poured all energy into this company 对读，前空只能是摒弃其他机会。"
+    },
+    "q-mock-gd-2026-m1-043": {
+      "blankId": "blank-mock-gd-2026-m1-043",
+      "blankNo": 43,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "过了笔试，对面试表现感到自信，才能与后文结果打击形成落差。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "anxious",
+          "meaning": "焦虑的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "concerned",
+          "meaning": "担忧的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "curious",
+          "meaning": "好奇的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "felt",
+          "signalSide": "context-before",
+          "targetText": "felt confident about",
+          "relation": "felt ... about my interview 需要表示心态的形容词。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "the results hit.",
+          "signalSide": "context-after",
+          "relation": "结果打击很大，说明此前是自信而非焦虑。"
+        }
+      ],
+      "teachingNote": "先扬后抑：过笔试后的心态应与 hit hard 相反。"
+    },
+    "q-mock-gd-2026-m1-044": {
+      "blankId": "blank-mock-gd-2026-m1-044",
+      "blankNo": 44,
+      "pos": "verb",
+      "signatureFacet": "cloze.signature.verb.action-sequence",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "结果沉重打击，求职语境下是未被录取，rejected。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "ignored",
+          "meaning": "被忽视"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "evaluated",
+          "meaning": "被评估"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "promoted",
+          "meaning": "被提拔"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I was",
+          "signalSide": "stem",
+          "targetText": "I was rejected",
+          "relation": "被动结构点明面试结果。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "the results hit.",
+          "signalSide": "context-before",
+          "relation": "沉重打击对应被拒。"
+        }
+      ],
+      "teachingNote": "hit hard 后的被动结果，求职文就是 rejected。"
+    },
+    "q-mock-gd-2026-m1-045": {
+      "blankId": "blank-mock-gd-2026-m1-045",
+      "blankNo": 45,
+      "pos": "verb",
+      "signatureFacet": "cloze.signature.verb.action-sequence",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "宾语是面试官、运气、别人而不是自己，只能是 blamed。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "forgave",
+          "meaning": "原谅"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "analyzed",
+          "meaning": "分析"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "challenged",
+          "meaning": "挑战"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the interviewers, my luck, everyone else but myself",
+          "signalSide": "context-after",
+          "targetText": "blamed the interviewers",
+          "relation": "责难对象全是外部，唯独不是自己。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "shifted responsibility outward",
+          "signalSide": "context-after",
+          "relation": "后文外归因回指此处的 blamed。"
+        }
+      ],
+      "teachingNote": "everyone else but myself 是责备类动词的典型宾语。"
+    },
+    "q-mock-gd-2026-m1-046": {
+      "blankId": "blank-mock-gd-2026-m1-046",
+      "blankNo": 46,
+      "pos": "verb",
+      "signatureFacet": "cloze.signature.verb.action-sequence",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "参加讲座后观念转向内省，Everything changed。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "happened",
+          "meaning": "发生"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "worked",
+          "meaning": "起作用"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "failed",
+          "meaning": "失败"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "when I attended a seminar",
+          "signalSide": "context-after",
+          "targetText": "Everything changed when",
+          "relation": "when 引导转折事件，空填 changed。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "pushed me to look inward",
+          "signalSide": "context-after",
+          "relation": "向内看标志着局面改变。"
+        }
+      ],
+      "teachingNote": "Everything ... when 讲座，情节转折优先 changed。"
+    },
+    "q-mock-gd-2026-m1-047": {
+      "blankId": "blank-mock-gd-2026-m1-047",
+      "blankNo": 47,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "控制源定义是你要为自己遇到的事负责，responsible for。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "ready",
+          "meaning": "准备好的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "grateful",
+          "meaning": "感激的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "qualified",
+          "meaning": "合格的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "for whatever happens to you",
+          "signalSide": "context-after",
+          "targetText": "responsible for whatever happens",
+          "relation": "be responsible for 是控制源定义的核心搭配。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "shifted responsibility outward",
+          "signalSide": "context-after",
+          "relation": "后文 responsibility 回指本空 responsible。"
+        }
+      ],
+      "teachingNote": "are ____ for whatever happens 锁定 responsible。"
+    },
+    "q-mock-gd-2026-m1-048": {
+      "blankId": "blank-mock-gd-2026-m1-048",
+      "blankNo": 48,
+      "pos": "verb",
+      "signatureFacet": "cloze.signature.verb.action-sequence",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "This struck me deeply，观点深深触动他并促使内省。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "terrified",
+          "meaning": "使害怕"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "moved",
+          "meaning": "使感动"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "confused",
+          "meaning": "使困惑"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "me deeply",
+          "signalSide": "context-after",
+          "targetText": "struck me deeply",
+          "relation": "deeply 常与 struck 搭配表深受触动。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "pushed me to look inward",
+          "signalSide": "context-after",
+          "relation": "触动之后才向内看。"
+        }
+      ],
+      "teachingNote": "____ me deeply and pushed me 优先 struck。"
+    },
+    "q-mock-gd-2026-m1-049": {
+      "blankId": "blank-mock-gd-2026-m1-049",
+      "blankNo": 49,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "诚实回顾后面的冒号给出知识漏洞和沟通弱点，这是真相 truth。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "hope",
+          "meaning": "希望"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "consequence",
+          "meaning": "后果"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "excuse",
+          "meaning": "借口"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I saw the",
+          "signalSide": "stem",
+          "targetText": "I saw the truth",
+          "relation": "saw the 后接被看清的事物。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "I had knowledge gaps and communication weaknesses",
+          "signalSide": "context-after",
+          "relation": "冒号后的短板即所看见的真相。"
+        }
+      ],
+      "teachingNote": "saw the ____: 具体缺陷，空填 truth。"
+    },
+    "q-mock-gd-2026-m1-050": {
+      "blankId": "blank-mock-gd-2026-m1-050",
+      "blankNo": 50,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "看清弱点后着手改进 them，worked on 表示致力于解决。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "looked for",
+          "meaning": "寻找"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "hid from",
+          "meaning": "躲避"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "lived with",
+          "meaning": "忍受"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "So I",
+          "signalSide": "stem",
+          "targetText": "So I worked on them",
+          "relation": "So 承接短板，下一步是处理这些问题。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "with better",
+          "signalSide": "context-after",
+          "relation": "下一场面试准备更好，说明他已对弱点下过功夫。"
+        }
+      ],
+      "teachingNote": "弱点已看见，So I ____ them 只能是改进，不是寻找或躲避。"
+    },
+    "q-mock-gd-2026-m1-051": {
+      "blankId": "blank-mock-gd-2026-m1-051",
+      "blankNo": 51,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "下一场面试表现更好，是因为更好的准备 preparation 和自我认知。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "payment",
+          "meaning": "付款"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "reason",
+          "meaning": "原因"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "relation",
+          "meaning": "关系"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "with better",
+          "signalSide": "stem",
+          "targetText": "with better preparation",
+          "relation": "better 修饰准备一类名词。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "real self-awareness",
+          "signalSide": "context-after",
+          "relation": "准备与自我认知并列，共同解释表现更好。"
+        }
+      ],
+      "teachingNote": "with better ____ and self-awareness 锁定 preparation。"
+    },
+    "q-mock-gd-2026-m1-052": {
+      "blankId": "blank-mock-gd-2026-m1-052",
+      "blankNo": 52,
+      "pos": "verb",
+      "signatureFacet": "cloze.signature.verb.action-sequence",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "表现更好之后获得职位，secured a position。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "regained",
+          "meaning": "重新获得"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "discovered",
+          "meaning": "发现"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "occupied",
+          "meaning": "占据"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a position in a company",
+          "signalSide": "context-after",
+          "targetText": "secured a position",
+          "relation": "secure a position 是求职成功的常用搭配。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "I performed far better and",
+          "signalSide": "context-before",
+          "relation": "表现更好与拿到职位是结果链。"
+        }
+      ],
+      "teachingNote": "performed far better and ____ a position 选 secured。"
+    },
+    "q-mock-gd-2026-m1-053": {
+      "blankId": "blank-mock-gd-2026-m1-053",
+      "blankNo": 53,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "失败苛刻却是比成功更有力量的老师，powerful 与 harsh but 对照。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "patient",
+          "meaning": "耐心的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "creative",
+          "meaning": "有创造力的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "devoted",
+          "meaning": "投入的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a harsh (苛刻的) but far more",
+          "signalSide": "context-before",
+          "targetText": "harsh but far more powerful teacher",
+          "relation": "but far more 后接与苛刻对照的正面评价。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "teacher than success",
+          "signalSide": "context-after",
+          "relation": "老师的力度用 powerful 最贴。"
+        }
+      ],
+      "teachingNote": "harsh but far more ____ teacher 选 powerful。"
+    },
+    "q-mock-gd-2026-m1-054": {
+      "blankId": "blank-mock-gd-2026-m1-054",
+      "blankNo": 54,
+      "pos": "verb",
+      "signatureFacet": "cloze.signature.verb.action-sequence",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "stop blaming the world 与 start owning your failures 对举。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "delay",
+          "meaning": "推迟"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "regret",
+          "meaning": "后悔"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "mind",
+          "meaning": "介意"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "blaming, the world",
+          "signalSide": "context-after",
+          "targetText": "stop blaming the world",
+          "relation": "空后直接跟 blaming。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "start owning your failures",
+          "signalSide": "context-after",
+          "relation": "stop ... and start ... 是成对结构。"
+        }
+      ],
+      "teachingNote": "when you ____ blaming ... and start owning 锁定 stop。"
+    },
+    "q-mock-gd-2026-m1-055": {
+      "blankId": "blank-mock-gd-2026-m1-055",
+      "blankNo": 55,
+      "pos": "verb",
+      "signatureFacet": "cloze.signature.verb.action-sequence",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "停止抱怨并承担失败后，重新拿回塑造更好自我的力量，reclaim the power。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "prove",
+          "meaning": "证明"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "need",
+          "meaning": "需要"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "understand",
+          "meaning": "理解"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the power to build a better version of yourself",
+          "signalSide": "context-after",
+          "targetText": "reclaim the power",
+          "relation": "the power 是空的宾语。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "start owning your failures, you",
+          "signalSide": "context-before",
+          "relation": "承担责任之后的结果是取回力量。"
+        }
+      ],
+      "teachingNote": "you ____ the power to build 选 reclaim。"
+    }
+  }
+}

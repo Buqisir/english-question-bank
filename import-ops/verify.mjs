@@ -116,6 +116,33 @@ const leftover = probePaper({ repoRoot: root, paperId: 'paper-leftover-config' }
 assert.equal(queued.status, 'queued')
 assert.equal(importing.status, 'importing')
 assert.equal(importing.analyses, true)
+assert.equal(importing.writingReady, true, 'historical papers do not require staged writing analysis')
+
+const format3Dir = paperDir(root, 'paper-format3-writing')
+writeFileSync(
+  path.join(format3Dir, 'config.json'),
+  JSON.stringify({ paperId: 'paper-format3-writing', format: '3', provenance: { paperName: '格式③写作锁' } }),
+)
+writeFileSync(path.join(format3Dir, 'groups.json'), '{}')
+const format3Missing = probePaper({ repoRoot: root, paperId: 'paper-format3-writing' })
+assert.equal(format3Missing.format3, true)
+assert.equal(format3Missing.writingReady, false, 'format ③ without writing drafts is not ready')
+for (const key of ['application', 'continuation']) {
+  writeFileSync(path.join(format3Dir, `analysis-${key}.json`), '{}')
+}
+const format3Staged = probePaper({ repoRoot: root, paperId: 'paper-format3-writing' })
+assert.equal(format3Staged.writingAnalyses, true)
+assert.equal(format3Staged.writingReady, true, 'format ③ with both writing drafts is ready before publish')
+writeLatest(root, 'paper-format3-writing')
+const format3PublishedMissing = probePaper({ repoRoot: root, paperId: 'paper-format3-writing' })
+assert.equal(format3PublishedMissing.writingReady, false, 'format ③ latest without writing-analysis-v1 is not ready')
+mkdirSync(path.join(root, 'app/public/paper-assets/paper-format3-writing/latest/analyses'), { recursive: true })
+writeFileSync(
+  path.join(root, 'app/public/paper-assets/paper-format3-writing/latest/analyses/writing-analysis-v1.json'),
+  '{}',
+)
+const format3Published = probePaper({ repoRoot: root, paperId: 'paper-format3-writing' })
+assert.equal(format3Published.writingReady, true)
 assert.equal(blocked.status, 'failed')
 assert.equal(blocked.latest, false, '格式①无 latest 不得进 awaiting_qa')
 assert.equal(blocked.blocked.code, 'canonical_unavailable')

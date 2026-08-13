@@ -202,15 +202,21 @@ try {
   const unresolvedAnalysis = structuredClone(analysis)
   unresolvedAnalysis.blanks['q-2026-i-041'].evidence[0].signalText =
     'definitely-not-in-the-canonical-visible-text'
-  assert.throws(
-    () =>
-      buildClozeAnalysisSurfaceModel({
-        asset,
-        analysis: unresolvedAnalysis,
-        groupId,
-      }),
-    /CLOZE_EVIDENCE_UNRESOLVED.*q-2026-i-041-evidence-1/,
+  const unresolvedModel = buildClozeAnalysisSurfaceModel({
+    asset,
+    analysis: unresolvedAnalysis,
+    groupId,
+  })
+  assert.equal(unresolvedModel.normalization.status, 'ready')
+  assert.equal(
+    unresolvedModel.surfaceData.evidence.some((item) => item.id === 'q-2026-i-041-evidence-1'),
+    false,
   )
+  assert.equal(
+    unresolvedModel.surfaceData.evidence.some((item) => item.id === 'q-2026-i-047-evidence-1'),
+    true,
+  )
+  assert.ok(unresolvedModel.analysisByQuestionId['q-2026-i-041'])
 
   const missingBlankAnchorAnalysis = structuredClone(analysis)
   missingBlankAnchorAnalysis.blanks['q-2026-i-041'].blankId = 'blank-does-not-exist'

@@ -42,9 +42,12 @@ Consequences:
   frozen-vs-derived.** Display 解析 (per-Question reading/cloze/grammar/seven **and** Writing
   Analysis) live as files in paper-assets; searchable dimensions (topic/verb/difficulty) live in the
   DB store. This is the rule for the next "where does this 解析-like thing go?" question.
-- **Writing Analysis is the first file-stored 解析 that is NOT publish-gated.** Base 解析 are gated;
-  writing is additive/optional. The panel shows it only when the file is present (consistent with
-  the "show only when complete" spirit, applied per writing group).
+- **Writing Analysis stays out of the six-family package validator** so the 12 already-published
+  papers can still republish without a writing file in the import package. **New papers are
+  different (owner 2026-08-13):** format ③, and any paper that stages
+  `analysis-application.json` / `analysis-continuation.json`, must persist
+  `writing-analysis-v1.json` as part of `--publish` completeness. Historical papers remain
+  backfillable. The panel still shows a writing group only when that group's payload is complete.
 - **Contract slot is additive**: `GroupAnalysis.writing?: WritingAnalysis`; existing reading
   GroupAnalysis (`overview` / `discourseStructure`) and all per-Question analysis are untouched.
 - **Reversible at derived-data cost only**: if Writing Analysis ever became searchable, moving it

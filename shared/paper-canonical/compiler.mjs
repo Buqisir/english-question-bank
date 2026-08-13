@@ -19,9 +19,14 @@ import {
 import { appendListeningInactiveClosures } from './listeningInactive.mjs'
 import {
   DOCX_MEDIA_TYPE,
+  DOCX_PAIR_IDENTITY_MEDIA_TYPE,
+  DOCX_PAIR_IDENTITY_SCHEMA_VERSION,
   DOCX_SOURCE_ENVELOPE_MEDIA_TYPE,
   deriveDocxCanonicalSource,
+  deriveDocxPairCanonicalSource,
   inspectDocxEnvelopeSource,
+  inspectDocxPairEnvelopeSource,
+  isReservedNck1ExamPaperId,
 } from '../../server/paper-canonical/docxSourceAdapter.mjs'
 import {
   TICKET_26_LEGACY_CAPTURE_MEDIA_TYPE,
@@ -40,6 +45,7 @@ import { validateSevenChoicesContract } from './sevenChoices.mjs'
 import { cloneJson, digestJson, exactKeys, isRecordValue, sha256, stableStringify, withoutKey } from './stable.mjs'
 
 const trustedDocxCandidateCompile = Symbol('trustedDocxCandidateCompile')
+const docxPairCandidateCompile = Symbol('docxPairCandidateCompile')
 const trustedLegacyCaptureCandidateCompile = Symbol('trustedLegacyCaptureCandidateCompile')
 import { canonicalizeVisibleEnglishTypography } from './visibleTypography.mjs'
 import { replayCanonicalVisibleTypography } from './visibleTypographyReplay.mjs'
@@ -1843,6 +1849,90 @@ function parseDocxSourceEnvelope(documents, diagnostics) {
       diagnostics.push(diagnostic('DOCX_SOURCE_DIGEST_MISMATCH', 'incomplete_source', '$.evidence.documents', 'DOCX source envelope no longer binds the supplied immutable DOCX bytes'))
       return null
     }
+    const pairIdentityDocuments = documents.filter(
+      (document) => document.inputKey === 'docx_pair_identity',
+    )
+    const pairAnswerDocuments = documents.filter(
+      (document) => document.inputKey === 'official_answer_docx',
+    )
+    const isDocxPair = source.inputKey === 'question_docx'
+    if (isDocxPair) {
+      if (legacyEnvelope) {
+        diagnostics.push(diagnostic('DOCX_SOURCE_ENVELOPE_INVALID', 'incomplete_source', '$.evidence.documents', 'DOCX pair evidence cannot use the legacy single-source envelope'))
+        return null
+      }
+      if (pairIdentityDocuments.length !== 1 || pairAnswerDocuments.length !== 1) {
+        diagnostics.push(diagnostic('DOCX_PAIR_EVIDENCE_INCOMPLETE', 'incomplete_source', '$.evidence.documents', 'DOCX pair evidence requires one question DOCX, one answer DOCX, and one owner paper identity'))
+        return null
+      }
+      if (!['question_source', 'source_provenance'].every((role) => source.roles.includes(role))) {
+        diagnostics.push(diagnostic('DOCX_SOURCE_ROLE_INCOMPLETE', 'incomplete_source', '$.evidence.documents', 'DOCX pair question source must carry question and provenance roles'))
+        return null
+      }
+      const answers = pairAnswerDocuments[0]
+      if (
+        answers.mediaType !== DOCX_MEDIA_TYPE
+        || !answers.roles.includes('official_answer_source')
+      ) {
+        diagnostics.push(diagnostic('DOCX_SOURCE_ROLE_INCOMPLETE', 'incomplete_source', '$.evidence.documents', 'DOCX pair answer source must carry the official-answer role'))
+        return null
+      }
+      const identityDocument = pairIdentityDocuments[0]
+      let identity
+      try {
+        identity = JSON.parse(new TextDecoder().decode(identityDocument.bytes))
+      } catch (error) {
+        diagnostics.push(diagnostic('DOCX_PAIR_IDENTITY_INVALID', 'incomplete_source', '$.evidence.documents', `DOCX pair identity is unreadable: ${error.message}`))
+        return null
+      }
+      if (
+        identityDocument.mediaType !== DOCX_PAIR_IDENTITY_MEDIA_TYPE
+        || !exactKeys(identity, ['schemaVersion', 'paperId', 'profileId'])
+        || identity.schemaVersion !== DOCX_PAIR_IDENTITY_SCHEMA_VERSION
+        || identity.profileId !== 'nck1'
+        || typeof identity.paperId !== 'string'
+        || identity.paperId.length === 0
+      ) {
+        diagnostics.push(diagnostic('DOCX_PAIR_IDENTITY_INVALID', 'incomplete_source', '$.evidence.documents', 'DOCX pair identity must bind schemaVersion, owner paperId, and nck1'))
+        return null
+      }
+      if (isReservedNck1ExamPaperId(identity.paperId)) {
+        diagnostics.push(diagnostic('DOCX_PAIR_PAPER_ID_RESERVED', 'unsupported', '$.evidence.documents', `DOCX pair identity must not occupy reserved NCK1 exam id ${identity.paperId}`))
+        return null
+      }
+      let inspection
+      try {
+        inspection = inspectDocxPairEnvelopeSource(source.bytes, answers.bytes, {
+          adapterVersion: '2',
+          paperId: identity.paperId,
+        })
+      } catch (error) {
+        diagnostics.push(diagnostic(
+          'DOCX_SOURCE_DOCUMENT_INVALID',
+          'incomplete_source',
+          '$.evidence.documents',
+          `DOCX pair bytes cannot be opened by the registered adapter: ${error.message}`,
+        ))
+        return null
+      }
+      if (!inspection.ok) {
+        diagnostics.push(diagnostic(
+          'DOCX_SOURCE_DERIVATION_INVALID',
+          'incomplete_source',
+          '$.docxSourceEnvelope.sourceDocument',
+          'The DOCX pair adapter did not derive a complete source state',
+        ))
+        return null
+      }
+      return {
+        value: inspection.verifiedSource,
+        adapter: 'docx-source-envelope',
+        envelope,
+        sourceDocumentId: source.documentId,
+        sourceDocumentDigest: source.sha256,
+        inspection,
+      }
+    }
     if (![
       'question_source',
       'official_answer_source',
@@ -3037,6 +3127,9 @@ export function compileCanonicalPaper(
   const acceptsTrustedDocxCandidate = request?.[trustedDocxCandidateCompile] === true
     && closure.authorityRef.manifestDigest
       === trustedDocxCandidateAuthorityRef.manifestDigest
+  const acceptsDocxPairCandidate = request?.[docxPairCandidateCompile] === true
+    && closure.authorityRef.manifestDigest
+      === trustedDocxCandidateAuthorityRef.manifestDigest
   const acceptsTrustedLegacyCaptureCandidate = request?.[trustedLegacyCaptureCandidateCompile] === true
     && Boolean(trustedLegacyCaptureCandidateAuthorityFor(
       closure.authorityRef,
@@ -3045,6 +3138,7 @@ export function compileCanonicalPaper(
   if (
     closure.authorityRef.manifestDigest !== canonicalAuthorityRef.manifestDigest
     && !acceptsTrustedDocxCandidate
+    && !acceptsDocxPairCandidate
     && !acceptsTrustedLegacyCaptureCandidate
   ) {
     diagnostics.push(diagnostic('AUTHORITY_RETIRED', 'unsupported', '$.authority', 'Only the current canonical authority may compile new papers'))
@@ -3149,6 +3243,14 @@ function compileTrustedDocxCandidate(request) {
   })
 }
 
+function compileDocxPairCandidate(request) {
+  return compileCanonicalPaper({
+    ...request,
+    authority: trustedDocxCandidateAuthorityRef,
+    [docxPairCandidateCompile]: true,
+  })
+}
+
 function compileTrustedLegacyCaptureCandidate(
   request,
   authority = trustedLegacyCaptureCandidateAuthorityRef,
@@ -3176,6 +3278,7 @@ function compileTrustedLegacyCaptureCandidate(
 }
 
 const trustedDocxCandidateSchemaVersion = 'trusted-docx-import-candidate-v1'
+const docxPairCandidateSchemaVersion = 'docx-pair-import-candidate-v1'
 const trustedLegacyCaptureCandidateSchemaVersion = 'trusted-ticket-26-legacy-import-candidate-v1'
 const confirmationSchemaVersion = 'teacher-confirmation-v1'
 const trustedDocxTextEncoder = new TextEncoder()
@@ -3280,6 +3383,212 @@ function trustedDocxCandidateFromBytes(sourceBytes, operatorChoices) {
       sourceBytes: immutableBytes,
     },
   }
+}
+
+function normalizeDocxPairOperatorChoices(value) {
+  if (
+    !exactKeys(value, ['questionOriginalName', 'answersOriginalName', 'paperId'])
+    || typeof value.questionOriginalName !== 'string'
+    || value.questionOriginalName.length === 0
+    || typeof value.answersOriginalName !== 'string'
+    || value.answersOriginalName.length === 0
+    || typeof value.paperId !== 'string'
+    || value.paperId.length === 0
+  ) {
+    return null
+  }
+  if (isReservedNck1ExamPaperId(value.paperId)) return null
+  return {
+    questionOriginalName: value.questionOriginalName,
+    answersOriginalName: value.answersOriginalName,
+    paperId: value.paperId,
+  }
+}
+
+function docxPairSourceDigest(questionBytes, answersBytes) {
+  return digestJson({
+    question: sha256(questionBytes),
+    officialAnswers: sha256(answersBytes),
+  })
+}
+
+function docxPairCandidateBody({
+  questionBytes,
+  answersBytes,
+  sourceDigest,
+  operatorChoices,
+  interpretation,
+  issues,
+}) {
+  return {
+    schemaVersion: docxPairCandidateSchemaVersion,
+    authority: trustedDocxCandidateAuthorityRef,
+    source: {
+      mediaType: DOCX_MEDIA_TYPE,
+      sha256: sourceDigest,
+      byteLength: questionBytes.byteLength + answersBytes.byteLength,
+      originalName: operatorChoices.questionOriginalName,
+      question: {
+        mediaType: DOCX_MEDIA_TYPE,
+        sha256: sha256(questionBytes),
+        byteLength: questionBytes.byteLength,
+        originalName: operatorChoices.questionOriginalName,
+      },
+      officialAnswers: {
+        mediaType: DOCX_MEDIA_TYPE,
+        sha256: sha256(answersBytes),
+        byteLength: answersBytes.byteLength,
+        originalName: operatorChoices.answersOriginalName,
+      },
+    },
+    operatorChoices,
+    interpretation,
+    issues,
+  }
+}
+
+function isDocxPairCandidateShape(candidate) {
+  return exactKeys(candidate, [
+    'schemaVersion',
+    'authority',
+    'source',
+    'operatorChoices',
+    'interpretation',
+    'issues',
+    'candidateDigest',
+    'questionBytes',
+    'answersBytes',
+  ])
+    && candidate.schemaVersion === docxPairCandidateSchemaVersion
+    && candidate.questionBytes instanceof Uint8Array
+    && candidate.answersBytes instanceof Uint8Array
+}
+
+function docxPairCandidateFromBytes(questionBytes, answersBytes, operatorChoices) {
+  const immutableQuestion = new Uint8Array(questionBytes)
+  const immutableAnswers = new Uint8Array(answersBytes)
+  const sourceDigest = docxPairSourceDigest(immutableQuestion, immutableAnswers)
+  let interpretation
+  let issues = []
+  try {
+    interpretation = deriveDocxPairCanonicalSource(
+      immutableQuestion,
+      immutableAnswers,
+      { paperId: operatorChoices.paperId },
+    )
+  } catch {
+    issues = [trustedDocxIssue('DOCX_SOURCE_DOCUMENT_INVALID', 'The immutable DOCX pair cannot be derived by the pair adapter')]
+  }
+  const body = docxPairCandidateBody({
+    questionBytes: immutableQuestion,
+    answersBytes: immutableAnswers,
+    sourceDigest,
+    operatorChoices,
+    interpretation: interpretation || null,
+    issues,
+  })
+  return {
+    candidate: {
+      ...body,
+      candidateDigest: digestJson(body),
+      questionBytes: immutableQuestion,
+      answersBytes: immutableAnswers,
+    },
+  }
+}
+
+function buildDocxPairCompilerRequest(
+  questionBytes,
+  answersBytes,
+  operatorChoices,
+) {
+  const questionDocument = {
+    inputKey: 'question_docx',
+    mediaType: DOCX_MEDIA_TYPE,
+    sha256: sha256(questionBytes),
+    byteLength: questionBytes.byteLength,
+  }
+  const identity = {
+    schemaVersion: DOCX_PAIR_IDENTITY_SCHEMA_VERSION,
+    paperId: operatorChoices.paperId,
+    profileId: 'nck1',
+  }
+  return {
+    evidence: {
+      documents: [
+        {
+          inputKey: questionDocument.inputKey,
+          roles: ['question_source', 'source_provenance'],
+          bytes: new Uint8Array(questionBytes),
+          declared: {
+            mediaType: DOCX_MEDIA_TYPE,
+            originalName: operatorChoices.questionOriginalName,
+          },
+        },
+        {
+          inputKey: 'official_answer_docx',
+          roles: ['official_answer_source'],
+          bytes: new Uint8Array(answersBytes),
+          declared: {
+            mediaType: DOCX_MEDIA_TYPE,
+            originalName: operatorChoices.answersOriginalName,
+          },
+        },
+        {
+          inputKey: 'docx_pair_identity',
+          roles: ['operator_assertions'],
+          bytes: trustedDocxTextEncoder.encode(JSON.stringify(identity)),
+          declared: {
+            mediaType: DOCX_PAIR_IDENTITY_MEDIA_TYPE,
+            originalName: 'docx-pair-identity.json',
+          },
+        },
+        {
+          inputKey: 'docx_source_envelope',
+          roles: ['operator_assertions'],
+          bytes: trustedDocxTextEncoder.encode(JSON.stringify({
+            schemaVersion: 'docx-source-envelope-v2',
+            sourceDocument: questionDocument,
+          })),
+          declared: {
+            mediaType: DOCX_SOURCE_ENVELOPE_MEDIA_TYPE,
+            originalName: 'docx-source-envelope.json',
+          },
+        },
+      ],
+    },
+  }
+}
+
+export function importDocxPairCanonicalCandidate(
+  questionBytes,
+  answersBytes,
+  operatorChoices,
+) {
+  if (
+    !(questionBytes instanceof Uint8Array)
+    || questionBytes.byteLength === 0
+    || !(answersBytes instanceof Uint8Array)
+    || answersBytes.byteLength === 0
+  ) {
+    return {
+      candidate: null,
+      issues: [trustedDocxIssue('SOURCE_BYTES_REQUIRED', 'DOCX pair import requires immutable question and answer DOCX bytes')],
+    }
+  }
+  const normalizedChoices = normalizeDocxPairOperatorChoices(operatorChoices)
+  if (!normalizedChoices) {
+    return {
+      candidate: null,
+      issues: [trustedDocxIssue('CALLER_SEMANTICS_REJECTED', 'DOCX pair operator choices may contain only original names and the owner-asserted paperId')],
+    }
+  }
+  const result = docxPairCandidateFromBytes(
+    questionBytes,
+    answersBytes,
+    normalizedChoices,
+  )
+  return { candidate: result.candidate, issues: result.candidate.issues }
 }
 
 function trustedLegacyCaptureCandidateBody({
@@ -3429,7 +3738,13 @@ export function importPaper2026IOwnerQaContentSuccessorCandidate(sourceCaptureBy
 }
 
 function suppliedTrustedCandidateBody(candidate) {
-  const { candidateDigest: _candidateDigest, sourceBytes: _sourceBytes, ...body } = candidate
+  const {
+    candidateDigest: _candidateDigest,
+    sourceBytes: _sourceBytes,
+    questionBytes: _questionBytes,
+    answersBytes: _answersBytes,
+    ...body
+  } = candidate
   return body
 }
 
@@ -3440,6 +3755,20 @@ function candidateRoute(candidate, historicalReplayCapability = null) {
       compile: (rerun) => compileTrustedDocxCandidate(buildTrustedDocxCompilerRequest(
         rerun.candidate.sourceBytes,
         rerun.candidate.operatorChoices.originalName,
+      )),
+    }
+  }
+  if (isDocxPairCandidateShape(candidate)) {
+    return {
+      rerun: () => docxPairCandidateFromBytes(
+        candidate.questionBytes,
+        candidate.answersBytes,
+        candidate.operatorChoices,
+      ),
+      compile: (rerun) => compileDocxPairCandidate(buildDocxPairCompilerRequest(
+        rerun.candidate.questionBytes,
+        rerun.candidate.answersBytes,
+        rerun.candidate.operatorChoices,
       )),
     }
   }

@@ -204,7 +204,7 @@ DOCX-converted PDF.
 
 ## 0. Format whitelist check (before anything else)
 
-`nck1-paper-standard.md` §2 only allows two source formats. Confirm the
+`nck1-paper-standard.md` §2 allows three source formats. Confirm the
 paper's source files match one before starting:
 
 1. **DOCX 答案版** (2020-2025 precedent, 12 papers already imported this way)
@@ -223,8 +223,12 @@ paper's source files match one before starting:
    scoring rubric + 下水文 (model essay, if the source provides one), and
    (for national-format papers) the listening transcript + timing/rate
    table.
+3. **试题 DOCX + 答案解析 DOCX** (NCK1 结构模拟卷, 附录 A) — 切卷
+   `03-split-docx-pair.mjs`；canonical 物化
+   `build-docx-pair-canonical-request.mjs`（开局 `paperId` 必填，不按标题
+   派生）。本 runbook 不重写该刀。
 
-If the source doesn't match either format: **stop**. Do not invent a new
+If the source doesn't match a whitelist format: **stop**. Do not invent a new
 format ad hoc — a new format needs its own owner-approved mapping in
 `nck1-paper-standard.md` 附录 A first (§7).
 
@@ -397,6 +401,11 @@ Per-agent prompt must include, verbatim:
    ways) — tell the agent it's a literal source quirk, not to "fix" it.
 
 Have each agent report PASS/FAIL + attempt count back to you.
+
+写作两节不在这 7 个客观题 key 里，但**新卷必交**，见
+`docs/import/agent-contract.md`「写作分析」。格式③在 `--publish` 前必须已有
+`analysis-application.json` 与 `analysis-continuation.json`；发布成功后由
+`02-publish` 写入 `writing-analysis-v1.json`。不要只改当前这一套。
 
 **Done when:** all 7 agents report PASS. Independently re-run the validate
 command yourself for every key (trust but verify — an agent's self-report is

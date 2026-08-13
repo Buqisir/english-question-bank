@@ -1,0 +1,1143 @@
+{
+  "schemaVersion": "paper-normalized-groups-v1",
+  "paperId": "paper-mock-gd-2026-m1",
+  "sourceAssetVersion": 2,
+  "normalizerVersion": "canonical-paper-group-v1",
+  "groups": {
+    "group-mock-gd-2026-m1-cloze": {
+      "sourceFingerprint": "bfdb9d119f720add4425a59534126d3b7580de6edbab243fa95672f0a1be236b",
+      "semanticDigest": "029c2fd46c5bfcafb3c2706befe6f6ec1e0c789a97211b3c653c7030bdff71eb",
+      "canonicalGroup": {
+        "schemaVersion": "canonical-paper-group-v1",
+        "groupId": "group-mock-gd-2026-m1-cloze",
+        "groupType": "cloze",
+        "title": "完形填空",
+        "paragraphs": [
+          {
+            "paragraphId": "para-mock-gd-2026-m1-cloze-title",
+            "nodes": [
+              {
+                "type": "text",
+                "text": "I majored in Mechanical Engineering in college and what I experienced during the job-hunting season in my final year changed my life completely. At that time, I only had one ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[0].text",
+                  "start": 0,
+                  "end": 174
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-gd-2026-m1-041",
+                "blankId": "blank-mock-gd-2026-m1-041",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[0].text",
+                  "start": 174,
+                  "end": 180
+                }
+              },
+              {
+                "type": "text",
+                "text": ": to join an automaker giant in my country. I ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[0].text",
+                  "start": 180,
+                  "end": 226
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-gd-2026-m1-042",
+                "blankId": "blank-mock-gd-2026-m1-042",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[0].text",
+                  "start": 226,
+                  "end": 232
+                }
+              },
+              {
+                "type": "text",
+                "text": " other opportunities and poured all my energy into this company. I cleared the written test and felt ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[0].text",
+                  "start": 232,
+                  "end": 333
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-gd-2026-m1-043",
+                "blankId": "blank-mock-gd-2026-m1-043",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[0].text",
+                  "start": 333,
+                  "end": 339
+                }
+              },
+              {
+                "type": "text",
+                "text": " about my interview, performance, but the results hit. me hard—I was ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[0].text",
+                  "start": 339,
+                  "end": 408
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-gd-2026-m1-044",
+                "blankId": "blank-mock-gd-2026-m1-044",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[0].text",
+                  "start": 408,
+                  "end": 414
+                }
+              },
+              {
+                "type": "text",
+                "text": ".",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[0].text",
+                  "start": 414,
+                  "end": 415
+                }
+              }
+            ],
+            "sourceSpan": {
+              "sourcePath": "group.passage.paragraphs[0].text",
+              "start": 0,
+              "end": 415
+            }
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-cloze-p1",
+            "nodes": [
+              {
+                "type": "text",
+                "text": "For days, I couldn’t pull myself together, and I ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 0,
+                  "end": 49
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-gd-2026-m1-045",
+                "blankId": "blank-mock-gd-2026-m1-045",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 49,
+                  "end": 55
+                }
+              },
+              {
+                "type": "text",
+                "text": " the interviewers, my luck, everyone else but myself. Everything ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 55,
+                  "end": 120
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-gd-2026-m1-046",
+                "blankId": "blank-mock-gd-2026-m1-046",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 120,
+                  "end": 126
+                }
+              },
+              {
+                "type": "text",
+                "text": " when I attended a seminar on the locus of control (控制源) —the idea that you are ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 126,
+                  "end": 206
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-gd-2026-m1-047",
+                "blankId": "blank-mock-gd-2026-m1-047",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 206,
+                  "end": 212
+                }
+              },
+              {
+                "type": "text",
+                "text": " for whatever happens to you, whether good or bad. This ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 212,
+                  "end": 268
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-gd-2026-m1-048",
+                "blankId": "blank-mock-gd-2026-m1-048",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 268,
+                  "end": 274
+                }
+              },
+              {
+                "type": "text",
+                "text": " me deeply and pushed me to look inward.",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 274,
+                  "end": 314
+                }
+              }
+            ],
+            "sourceSpan": {
+              "sourcePath": "group.passage.paragraphs[1].text",
+              "start": 0,
+              "end": 314
+            }
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-cloze-p2",
+            "nodes": [
+              {
+                "type": "text",
+                "text": "I realized I had always shifted responsibility outward—My parents’ fault, my school’s issue—never mine. When I reviewed my interview honestly, I saw the ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[2].text",
+                  "start": 0,
+                  "end": 153
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-gd-2026-m1-049",
+                "blankId": "blank-mock-gd-2026-m1-049",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[2].text",
+                  "start": 153,
+                  "end": 159
+                }
+              },
+              {
+                "type": "text",
+                "text": ": I had knowledge gaps and communication weaknesses. So I ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[2].text",
+                  "start": 159,
+                  "end": 217
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-gd-2026-m1-050",
+                "blankId": "blank-mock-gd-2026-m1-050",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[2].text",
+                  "start": 217,
+                  "end": 223
+                }
+              },
+              {
+                "type": "text",
+                "text": " them. In the next interview, with better ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[2].text",
+                  "start": 223,
+                  "end": 265
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-gd-2026-m1-051",
+                "blankId": "blank-mock-gd-2026-m1-051",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[2].text",
+                  "start": 265,
+                  "end": 271
+                }
+              },
+              {
+                "type": "text",
+                "text": " and real self-awareness, I performed far better and ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[2].text",
+                  "start": 271,
+                  "end": 324
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-gd-2026-m1-052",
+                "blankId": "blank-mock-gd-2026-m1-052",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[2].text",
+                  "start": 324,
+                  "end": 330
+                }
+              },
+              {
+                "type": "text",
+                "text": " a position in a company even better than the one I had originally dreamed of.",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[2].text",
+                  "start": 330,
+                  "end": 408
+                }
+              }
+            ],
+            "sourceSpan": {
+              "sourcePath": "group.passage.paragraphs[2].text",
+              "start": 0,
+              "end": 408
+            }
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-cloze-p3",
+            "nodes": [
+              {
+                "type": "text",
+                "text": "They say failure is a harsh (苛刻的) but far more ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[3].text",
+                  "start": 0,
+                  "end": 47
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-gd-2026-m1-053",
+                "blankId": "blank-mock-gd-2026-m1-053",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[3].text",
+                  "start": 47,
+                  "end": 53
+                }
+              },
+              {
+                "type": "text",
+                "text": " teacher than success. That season, I graduated not just as an engineer, but as a student of life, learning that when you ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[3].text",
+                  "start": 53,
+                  "end": 175
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-gd-2026-m1-054",
+                "blankId": "blank-mock-gd-2026-m1-054",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[3].text",
+                  "start": 175,
+                  "end": 181
+                }
+              },
+              {
+                "type": "text",
+                "text": " blaming, the world and start owning your failures, you ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[3].text",
+                  "start": 181,
+                  "end": 237
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-gd-2026-m1-055",
+                "blankId": "blank-mock-gd-2026-m1-055",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[3].text",
+                  "start": 237,
+                  "end": 243
+                }
+              },
+              {
+                "type": "text",
+                "text": " the power to build a better version of yourself.",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[3].text",
+                  "start": 243,
+                  "end": 292
+                }
+              }
+            ],
+            "sourceSpan": {
+              "sourcePath": "group.passage.paragraphs[3].text",
+              "start": 0,
+              "end": 292
+            }
+          }
+        ],
+        "questions": [
+          {
+            "questionId": "q-mock-gd-2026-m1-041",
+            "questionNo": 41,
+            "groupId": "group-mock-gd-2026-m1-cloze",
+            "blankId": "blank-mock-gd-2026-m1-041",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "option"
+              },
+              {
+                "label": "B",
+                "text": "appointment"
+              },
+              {
+                "label": "C",
+                "text": "assignment"
+              },
+              {
+                "label": "D",
+                "text": "dream"
+              }
+            ]
+          },
+          {
+            "questionId": "q-mock-gd-2026-m1-042",
+            "questionNo": 42,
+            "groupId": "group-mock-gd-2026-m1-cloze",
+            "blankId": "blank-mock-gd-2026-m1-042",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "dismissed"
+              },
+              {
+                "label": "B",
+                "text": "compared"
+              },
+              {
+                "label": "C",
+                "text": "seized"
+              },
+              {
+                "label": "D",
+                "text": "lacked"
+              }
+            ]
+          },
+          {
+            "questionId": "q-mock-gd-2026-m1-043",
+            "questionNo": 43,
+            "groupId": "group-mock-gd-2026-m1-cloze",
+            "blankId": "blank-mock-gd-2026-m1-043",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "anxious"
+              },
+              {
+                "label": "B",
+                "text": "concerned"
+              },
+              {
+                "label": "C",
+                "text": "confident"
+              },
+              {
+                "label": "D",
+                "text": "curious"
+              }
+            ]
+          },
+          {
+            "questionId": "q-mock-gd-2026-m1-044",
+            "questionNo": 44,
+            "groupId": "group-mock-gd-2026-m1-cloze",
+            "blankId": "blank-mock-gd-2026-m1-044",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "ignored"
+              },
+              {
+                "label": "B",
+                "text": "rejected"
+              },
+              {
+                "label": "C",
+                "text": "evaluated"
+              },
+              {
+                "label": "D",
+                "text": "promoted"
+              }
+            ]
+          },
+          {
+            "questionId": "q-mock-gd-2026-m1-045",
+            "questionNo": 45,
+            "groupId": "group-mock-gd-2026-m1-cloze",
+            "blankId": "blank-mock-gd-2026-m1-045",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "blamed"
+              },
+              {
+                "label": "B",
+                "text": "forgave"
+              },
+              {
+                "label": "C",
+                "text": "analyzed"
+              },
+              {
+                "label": "D",
+                "text": "challenged"
+              }
+            ]
+          },
+          {
+            "questionId": "q-mock-gd-2026-m1-046",
+            "questionNo": 46,
+            "groupId": "group-mock-gd-2026-m1-cloze",
+            "blankId": "blank-mock-gd-2026-m1-046",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "happened"
+              },
+              {
+                "label": "B",
+                "text": "worked"
+              },
+              {
+                "label": "C",
+                "text": "changed"
+              },
+              {
+                "label": "D",
+                "text": "failed"
+              }
+            ]
+          },
+          {
+            "questionId": "q-mock-gd-2026-m1-047",
+            "questionNo": 47,
+            "groupId": "group-mock-gd-2026-m1-cloze",
+            "blankId": "blank-mock-gd-2026-m1-047",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "ready"
+              },
+              {
+                "label": "B",
+                "text": "grateful"
+              },
+              {
+                "label": "C",
+                "text": "responsible"
+              },
+              {
+                "label": "D",
+                "text": "qualified"
+              }
+            ]
+          },
+          {
+            "questionId": "q-mock-gd-2026-m1-048",
+            "questionNo": 48,
+            "groupId": "group-mock-gd-2026-m1-cloze",
+            "blankId": "blank-mock-gd-2026-m1-048",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "terrified"
+              },
+              {
+                "label": "B",
+                "text": "moved"
+              },
+              {
+                "label": "C",
+                "text": "confused"
+              },
+              {
+                "label": "D",
+                "text": "struck"
+              }
+            ]
+          },
+          {
+            "questionId": "q-mock-gd-2026-m1-049",
+            "questionNo": 49,
+            "groupId": "group-mock-gd-2026-m1-cloze",
+            "blankId": "blank-mock-gd-2026-m1-049",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "truth"
+              },
+              {
+                "label": "B",
+                "text": "hope"
+              },
+              {
+                "label": "C",
+                "text": "consequence"
+              },
+              {
+                "label": "D",
+                "text": "excuse"
+              }
+            ]
+          },
+          {
+            "questionId": "q-mock-gd-2026-m1-050",
+            "questionNo": 50,
+            "groupId": "group-mock-gd-2026-m1-cloze",
+            "blankId": "blank-mock-gd-2026-m1-050",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "looked for"
+              },
+              {
+                "label": "B",
+                "text": "worked on"
+              },
+              {
+                "label": "C",
+                "text": "hid from"
+              },
+              {
+                "label": "D",
+                "text": "lived with"
+              }
+            ]
+          },
+          {
+            "questionId": "q-mock-gd-2026-m1-051",
+            "questionNo": 51,
+            "groupId": "group-mock-gd-2026-m1-cloze",
+            "blankId": "blank-mock-gd-2026-m1-051",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "payment"
+              },
+              {
+                "label": "B",
+                "text": "preparation"
+              },
+              {
+                "label": "C",
+                "text": "reason"
+              },
+              {
+                "label": "D",
+                "text": "relation"
+              }
+            ]
+          },
+          {
+            "questionId": "q-mock-gd-2026-m1-052",
+            "questionNo": 52,
+            "groupId": "group-mock-gd-2026-m1-cloze",
+            "blankId": "blank-mock-gd-2026-m1-052",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "regained"
+              },
+              {
+                "label": "B",
+                "text": "discovered"
+              },
+              {
+                "label": "C",
+                "text": "occupied"
+              },
+              {
+                "label": "D",
+                "text": "secured"
+              }
+            ]
+          },
+          {
+            "questionId": "q-mock-gd-2026-m1-053",
+            "questionNo": 53,
+            "groupId": "group-mock-gd-2026-m1-cloze",
+            "blankId": "blank-mock-gd-2026-m1-053",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "powerful"
+              },
+              {
+                "label": "B",
+                "text": "patient"
+              },
+              {
+                "label": "C",
+                "text": "creative"
+              },
+              {
+                "label": "D",
+                "text": "devoted"
+              }
+            ]
+          },
+          {
+            "questionId": "q-mock-gd-2026-m1-054",
+            "questionNo": 54,
+            "groupId": "group-mock-gd-2026-m1-cloze",
+            "blankId": "blank-mock-gd-2026-m1-054",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "delay"
+              },
+              {
+                "label": "B",
+                "text": "regret"
+              },
+              {
+                "label": "C",
+                "text": "stop"
+              },
+              {
+                "label": "D",
+                "text": "mind"
+              }
+            ]
+          },
+          {
+            "questionId": "q-mock-gd-2026-m1-055",
+            "questionNo": 55,
+            "groupId": "group-mock-gd-2026-m1-cloze",
+            "blankId": "blank-mock-gd-2026-m1-055",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "prove"
+              },
+              {
+                "label": "B",
+                "text": "reclaim"
+              },
+              {
+                "label": "C",
+                "text": "need"
+              },
+              {
+                "label": "D",
+                "text": "understand"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "group-mock-gd-2026-m1-grammar-fill": {
+      "sourceFingerprint": "a54f5d361cf6beba27f869a63c5f99cb25bf12d5b6af5ca442b53a8c3c8674e1",
+      "semanticDigest": "581a57445dba26cb4766f003a225a1acd333e74f1dd2e36df1da0bcf8273bef3",
+      "canonicalGroup": {
+        "schemaVersion": "canonical-paper-group-v1",
+        "groupId": "group-mock-gd-2026-m1-grammar-fill",
+        "groupType": "grammarFill",
+        "title": "语法填空",
+        "paragraphs": [
+          {
+            "paragraphId": "para-mock-gd-2026-m1-grammar-fill-title",
+            "nodes": [
+              {
+                "type": "text",
+                "text": "Jord Hammond is a British photographer who first came to live in Chongqing in 2015. Since then, he ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[0].text",
+                  "start": 0,
+                  "end": 99
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-gd-2026-m1-056",
+                "blankId": "blank-mock-gd-2026-m1-056",
+                "hint": "regard",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[0].text",
+                  "start": 99,
+                  "end": 114
+                }
+              },
+              {
+                "type": "text",
+                "text": " the city as his second home. With cameras and curiosity, he captures (拍摄) the country’s landscapes and people, ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[0].text",
+                  "start": 114,
+                  "end": 226
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-gd-2026-m1-057",
+                "blankId": "blank-mock-gd-2026-m1-057",
+                "hint": "reveal",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[0].text",
+                  "start": 226,
+                  "end": 241
+                }
+              },
+              {
+                "type": "text",
+                "text": " a China that is raw, up-close and deeply human.",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[0].text",
+                  "start": 241,
+                  "end": 289
+                }
+              }
+            ],
+            "sourceSpan": {
+              "sourcePath": "group.passage.paragraphs[0].text",
+              "start": 0,
+              "end": 289
+            }
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-grammar-fill-p1",
+            "nodes": [
+              {
+                "type": "text",
+                "text": "Before moving to Chongqing, the biggest city Hammond had ever experienced was London. To him, Chongqing was London on a ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 0,
+                  "end": 120
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-gd-2026-m1-058",
+                "blankId": "blank-mock-gd-2026-m1-058",
+                "hint": "complete",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 120,
+                  "end": 137
+                }
+              },
+              {
+                "type": "text",
+                "text": " different scale—more intense, more layered and more alive. ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 137,
+                  "end": 197
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-gd-2026-m1-059",
+                "blankId": "blank-mock-gd-2026-m1-059",
+                "hint": "understand",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 197,
+                  "end": 216
+                }
+              },
+              {
+                "type": "text",
+                "text": " the city, he started going on long walks with his camera. ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 216,
+                  "end": 275
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-gd-2026-m1-060",
+                "blankId": "blank-mock-gd-2026-m1-060",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 275,
+                  "end": 281
+                }
+              },
+              {
+                "type": "text",
+                "text": " started as a way to feel more comfortable soon became a daily habit, and eventually, a passion. Photography gave him a way to explore, make sense of the surroundings, ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 281,
+                  "end": 449
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-gd-2026-m1-061",
+                "blankId": "blank-mock-gd-2026-m1-061",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 449,
+                  "end": 455
+                }
+              },
+              {
+                "type": "text",
+                "text": " connect with people and stories.",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 455,
+                  "end": 488
+                }
+              }
+            ],
+            "sourceSpan": {
+              "sourcePath": "group.passage.paragraphs[1].text",
+              "start": 0,
+              "end": 488
+            }
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-grammar-fill-p2",
+            "nodes": [
+              {
+                "type": "text",
+                "text": "Chongqing’s rich and colorful urban life inspired him. From the riverbanks to the skyscrapers, the visual contrasts were ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[2].text",
+                  "start": 0,
+                  "end": 121
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-gd-2026-m1-062",
+                "blankId": "blank-mock-gd-2026-m1-062",
+                "hint": "remark",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[2].text",
+                  "start": 121,
+                  "end": 136
+                }
+              },
+              {
+                "type": "text",
+                "text": " . Beyond the city, traveling to places like Yunnan and Guizhou provinces deepened his ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[2].text",
+                  "start": 136,
+                  "end": 223
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-gd-2026-m1-063",
+                "blankId": "blank-mock-gd-2026-m1-063",
+                "hint": "appreciate",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[2].text",
+                  "start": 223,
+                  "end": 242
+                }
+              },
+              {
+                "type": "text",
+                "text": " for China’s cultural and geographic diversity. Those experiences helped him realize that photography could be more than a personal hobby— ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[2].text",
+                  "start": 242,
+                  "end": 381
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-gd-2026-m1-064",
+                "blankId": "blank-mock-gd-2026-m1-064",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[2].text",
+                  "start": 381,
+                  "end": 387
+                }
+              },
+              {
+                "type": "text",
+                "text": " could be a form of storytelling.",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[2].text",
+                  "start": 387,
+                  "end": 420
+                }
+              }
+            ],
+            "sourceSpan": {
+              "sourcePath": "group.passage.paragraphs[2].text",
+              "start": 0,
+              "end": 420
+            }
+          },
+          {
+            "paragraphId": "para-mock-gd-2026-m1-grammar-fill-p3",
+            "nodes": [
+              {
+                "type": "text",
+                "text": "Through his work and stories on social media, Hammond tries to show daily life of Chinese ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[3].text",
+                  "start": 0,
+                  "end": 90
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-gd-2026-m1-065",
+                "blankId": "blank-mock-gd-2026-m1-065",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[3].text",
+                  "start": 90,
+                  "end": 96
+                }
+              },
+              {
+                "type": "text",
+                "text": " people around the world. He hopes to present the real China by showing these real stories and encourage foreigners to see the real China for themselves.",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[3].text",
+                  "start": 96,
+                  "end": 249
+                }
+              }
+            ],
+            "sourceSpan": {
+              "sourcePath": "group.passage.paragraphs[3].text",
+              "start": 0,
+              "end": 249
+            }
+          }
+        ],
+        "questions": [
+          {
+            "questionId": "q-mock-gd-2026-m1-056",
+            "questionNo": 56,
+            "groupId": "group-mock-gd-2026-m1-grammar-fill",
+            "blankId": "blank-mock-gd-2026-m1-056",
+            "stem": null,
+            "options": []
+          },
+          {
+            "questionId": "q-mock-gd-2026-m1-057",
+            "questionNo": 57,
+            "groupId": "group-mock-gd-2026-m1-grammar-fill",
+            "blankId": "blank-mock-gd-2026-m1-057",
+            "stem": null,
+            "options": []
+          },
+          {
+            "questionId": "q-mock-gd-2026-m1-058",
+            "questionNo": 58,
+            "groupId": "group-mock-gd-2026-m1-grammar-fill",
+            "blankId": "blank-mock-gd-2026-m1-058",
+            "stem": null,
+            "options": []
+          },
+          {
+            "questionId": "q-mock-gd-2026-m1-059",
+            "questionNo": 59,
+            "groupId": "group-mock-gd-2026-m1-grammar-fill",
+            "blankId": "blank-mock-gd-2026-m1-059",
+            "stem": null,
+            "options": []
+          },
+          {
+            "questionId": "q-mock-gd-2026-m1-060",
+            "questionNo": 60,
+            "groupId": "group-mock-gd-2026-m1-grammar-fill",
+            "blankId": "blank-mock-gd-2026-m1-060",
+            "stem": null,
+            "options": []
+          },
+          {
+            "questionId": "q-mock-gd-2026-m1-061",
+            "questionNo": 61,
+            "groupId": "group-mock-gd-2026-m1-grammar-fill",
+            "blankId": "blank-mock-gd-2026-m1-061",
+            "stem": null,
+            "options": []
+          },
+          {
+            "questionId": "q-mock-gd-2026-m1-062",
+            "questionNo": 62,
+            "groupId": "group-mock-gd-2026-m1-grammar-fill",
+            "blankId": "blank-mock-gd-2026-m1-062",
+            "stem": null,
+            "options": []
+          },
+          {
+            "questionId": "q-mock-gd-2026-m1-063",
+            "questionNo": 63,
+            "groupId": "group-mock-gd-2026-m1-grammar-fill",
+            "blankId": "blank-mock-gd-2026-m1-063",
+            "stem": null,
+            "options": []
+          },
+          {
+            "questionId": "q-mock-gd-2026-m1-064",
+            "questionNo": 64,
+            "groupId": "group-mock-gd-2026-m1-grammar-fill",
+            "blankId": "blank-mock-gd-2026-m1-064",
+            "stem": null,
+            "options": []
+          },
+          {
+            "questionId": "q-mock-gd-2026-m1-065",
+            "questionNo": 65,
+            "groupId": "group-mock-gd-2026-m1-grammar-fill",
+            "blankId": "blank-mock-gd-2026-m1-065",
+            "stem": null,
+            "options": []
+          }
+        ]
+      }
+    }
+  }
+}

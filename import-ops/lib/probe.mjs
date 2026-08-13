@@ -20,6 +20,8 @@ export const ANALYSIS_KEYS = [
   'grammar',
 ]
 
+export const WRITING_ANALYSIS_KEYS = ['application', 'continuation']
+
 export function isOpsVisible(probes) {
   const hasSignal =
     Boolean(probes.blocked) ||
@@ -76,6 +78,12 @@ function analysisCounts(paperDir) {
   return { analyze, analysis }
 }
 
+function writingAnalysisCount(paperDir) {
+  return WRITING_ANALYSIS_KEYS.filter((key) => (
+    existsSync(path.join(paperDir, `analysis-${key}.json`))
+  )).length
+}
+
 export function probePaper({ repoRoot, paperId }) {
   const paperDir = path.join(repoRoot, 'scripts/import-pipeline/papers', paperId)
   const signalsDir = path.join(paperDir, 'signals')
@@ -87,6 +95,9 @@ export function probePaper({ repoRoot, paperId }) {
   const qaAccepted = readJsonIfPresent(path.join(signalsDir, 'qa-accepted.json'))
   const shipped = readJsonIfPresent(path.join(signalsDir, 'shipped.json'))
   const counts = analysisCounts(paperDir)
+  const writingCount = writingAnalysisCount(paperDir)
+  const format3 = Boolean(config) && !config._invalid && String(config.format) === '3'
+  const writingPublished = existsSync(path.join(latestDir, 'analyses', 'writing-analysis-v1.json'))
   const probes = {
     paperId,
     paperName:
@@ -98,6 +109,15 @@ export function probePaper({ repoRoot, paperId }) {
     analyzeCount: counts.analyze,
     analysisCount: counts.analysis,
     analyses: counts.analyze === ANALYSIS_KEYS.length && counts.analysis === ANALYSIS_KEYS.length,
+    format3,
+    writingAnalysisCount: writingCount,
+    writingAnalyses: writingCount === WRITING_ANALYSIS_KEYS.length,
+    writingPublished,
+    writingReady: format3
+      ? ((existsSync(latestDir) && statSync(latestDir).isDirectory())
+        ? writingPublished
+        : writingCount === WRITING_ANALYSIS_KEYS.length)
+      : true,
     aiCheck: Boolean(aiCheck) && aiCheck.ok === true,
     latest: existsSync(latestDir) && statSync(latestDir).isDirectory(),
     qaAccepted: Boolean(qaAccepted) && !qaAccepted._invalid,
