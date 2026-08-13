@@ -171,8 +171,11 @@ function renderDetail() {
       </div>
       <div class="ship-box">
         <h4>上线</h4>
-        <p class="meta" style="margin:0">这里没有按钮。可上线之后，对 agent 说下面这句。</p>
-        <div class="say">${detailData.shipSay}</div>
+        <p class="meta" style="margin:0">这里没有按钮。</p>
+        ${s === 'ready_to_ship' && detailData.shipSay ? `<p class="meta" style="margin:8px 0 0">可上线之后，对 agent 说下面这句。</p><div class="say">${detailData.shipSay}</div>` : ''}
+        ${s === 'failed' && p.blocked && p.blocked.code === 'ship_failed' && detailData.shipSay ? `<p class="meta" style="margin:8px 0 0">生产服务可能仍停着；先拉起。重试仍要另说「重试上线」。</p><div class="say">${detailData.shipSay}</div>` : ''}
+        ${s === 'shipped' ? '<p class="meta" style="margin:8px 0 0">已上线（本机 ship 收据）。</p>' : ''}
+        ${s !== 'ready_to_ship' && s !== 'shipped' && !(p.blocked && p.blocked.code === 'ship_failed') ? '<p class="meta" style="margin:8px 0 0">未到可上线，不要对 agent 说上线。</p>' : ''}
       </div>
     </div>
   `

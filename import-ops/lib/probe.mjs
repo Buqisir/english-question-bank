@@ -149,6 +149,19 @@ export function homeLists(papers) {
   }
 }
 
+export function shipPrompt(paper) {
+  if (paper.status === 'ready_to_ship') {
+    return { kind: 'ship', say: `上线 ${paper.paperId}` }
+  }
+  if (paper.status === 'failed' && paper.blocked?.code === 'ship_failed') {
+    return { kind: 'retry', say: `重试上线 ${paper.paperId}` }
+  }
+  if (paper.status === 'shipped') {
+    return { kind: 'done', say: null }
+  }
+  return { kind: 'not_ready', say: null }
+}
+
 export function qaLinks(paper, appOrigin) {
   const origin = appOrigin.replace(/\/$/, '')
   const screen = `${origin}/?view=paper-browse&paperId=${encodeURIComponent(paper.paperId)}`

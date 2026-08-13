@@ -72,6 +72,18 @@ node scripts/import-pipeline/build-trusted-docx-canonical-request.mjs \
 - **新格式先 `01-split` 便宜预检**(无 AI)再扇出解析,别盲批量产垃圾。
 - **DB / 中间数据 gitignored**:`papers/<id>/` 只跟踪 `config.json`;`groups.json`/`full.txt`/`analyze-*`/`analysis-*`/`labels-out/` 是可再生产物,见本目录 `.gitignore`。
 
+## 上线（内容，非代码）
+
+本地 `--publish` 之后不要自动 push。可执行清单（本身不跑 push）：
+
+```bash
+node scripts/import-pipeline/ship-checklist.mjs check <paperId> --owner-said-ship
+```
+
+仅当打印「允许」、且 owner **当前**口头「上线」时，才跑整库
+`node scripts/pull-run-push.mjs push`。不是单卷增量，不是 `deploy.sh`。
+导题后台无按钮。详见 `docs/import/agent-contract.md` 上线。
+
 ## 待办(productionization 续)
 
 - `lib.mjs` 格式启发式(2020 双试卷、`Paragragh` 拼写、grammar Format-2 阈值、continuation starter 四策略)未通用 —— 导新格式时硬化 + 补 verify 锁。

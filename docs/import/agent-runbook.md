@@ -19,7 +19,9 @@ this repo's import work — only this file and the docs/scripts it points to:
 
 Local-only. Never touches production (`.env.qa`, the production server, or
 `scripts/pull-run-push.mjs`). Everything below runs against the local SQLite
-DB (`data/question-bank.sqlite`) and local dev server.
+DB (`data/question-bank.sqlite`) and local dev server. Content ship is not
+this runbook — see `docs/import/agent-contract.md` 「上线」 and
+`scripts/import-pipeline/ship-checklist.mjs`.
 
 ## Canonical-required backend boundary
 

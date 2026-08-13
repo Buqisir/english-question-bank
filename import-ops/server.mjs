@@ -7,7 +7,7 @@ import { createServer } from 'node:http'
 import { readFileSync, existsSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { homeLists, listOpsPapers, probePaper, qaLinks } from './lib/probe.mjs'
+import { homeLists, listOpsPapers, probePaper, qaLinks, shipPrompt } from './lib/probe.mjs'
 
 const here = path.dirname(fileURLToPath(import.meta.url))
 const repoRoot = path.resolve(process.env.EQB_ROOT || path.join(here, '..'))
@@ -69,10 +69,12 @@ const server = createServer((request, response) => {
       return
     }
     const paper = probePaper({ repoRoot, paperId })
+    const prompt = shipPrompt(paper)
     sendJson(response, 200, {
       paper,
       qa: qaLinks(paper, appOrigin),
-      shipSay: `上线 ${paper.paperId}`,
+      shipSay: prompt.say,
+      shipKind: prompt.kind,
     })
     return
   }

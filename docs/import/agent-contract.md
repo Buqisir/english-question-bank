@@ -35,7 +35,7 @@
 | 卡死 | `signals/blocked.json` | 硬停；见原因码 |
 | 要人裁决（非例行 QA） | `signals/help-needed.json` | 例如非记叙型续写、格式不在白名单 |
 | 上线前 QA 已过 | `signals/qa-accepted.json` | 仅在 owner 说过 QA 通过之后写 |
-| 已上线 | `signals/shipped.json` | 本机 ship 收据；上线清单见后续切片，本契约只定文件名 |
+| 已上线 | `signals/shipped.json` | 本机 ship 收据；见「上线」清单 |
 
 `signals/` 下是小 JSON 收据，不要把答案表或全文写进去。
 
@@ -71,7 +71,7 @@
 { "shippedAt": "<ISO-8601>", "command": "node scripts/pull-run-push.mjs push" }
 ```
 
-已知 `blocked.json` 原因码：`canonical_unavailable`（格式① producer / compile 仍 fail-closed 时）、`gate_failed`（同一门禁自动修 2 次仍红）、`continuation_non_narrative`、`ship_failed`（上线失败；本切片不跑上线）。
+已知 `blocked.json` 原因码：`canonical_unavailable`（格式① producer / compile 仍 fail-closed 时）、`gate_failed`（同一门禁自动修 2 次仍红）、`continuation_non_narrative`、`ship_failed`（整库 push 失败）。
 
 ## 六态
 
@@ -112,7 +112,55 @@
 
 - **不对答案（人）。** 答案随解析字段做全；托底是 AI Answer Transcription Check。
 - **上线前 QA（人）必留。** Owner 在导题后台看 Screen / Student Print / Teacher Print 和门禁一行。不设 7 组解析必过抽检。Owner 说 QA 通过之后才写 `signals/qa-accepted.json`。
-- **上线。** 本切片不做。未 `ready_to_ship` 不得 push。导题后台无生产按钮。owner 必须另说「上线」；命令是整库 `node scripts/pull-run-push.mjs push`，不是单卷增量，也不是 `deploy.sh`。动生产前读 `docs/cuts/launch-deploy/go-live-record.md`，且必须有**当前**口头授权。
+- **上线。** 本地 publish 后停。未 `ready_to_ship` 不得 push。导题后台无生产按钮。owner 必须**当前**另说「上线」之后，才按下一节清单执行。
+
+## 上线
+
+可执行清单（本身**不**跑 push、不连生产）：
+
+```bash
+node scripts/import-pipeline/ship-checklist.mjs check <paperId> --owner-said-ship
+```
+
+仅当该命令打印「允许」时，agent 才可以跑整库：
+
+```bash
+node scripts/pull-run-push.mjs push
+```
+
+不是单卷增量，不是 `deploy.sh`。导题后台只展示口令，不跑这条命令。
+
+### 硬前置
+
+该卷必须是 `ready_to_ship`：`app/public/paper-assets/<id>/latest/` + `signals/ai-answer-check.json` + `signals/qa-accepted.json`，且没有挡住的 `blocked.json`。ledger 只提示不挡。未 `ready_to_ship` → 清单拒绝，**不得** push。
+
+重试：仅当 `blocked.json` 的 `code` 为 `ship_failed`，上列三件仍在，且 owner **当前**口头说「重试上线」：
+
+```bash
+node scripts/import-pipeline/ship-checklist.mjs check <paperId> --owner-said-retry-ship
+```
+
+口令「上线」不能当重试。生产服务可能停在 stopped，先拉起再谈重试。
+
+### 授权
+
+QA 之后 owner 必须另说「上线」（当前口头，不是历史聊天里的旧句）。导题后台可上线时只展示口令，例如 `上线 paper-<id>`；`ship_failed` 时展示 `重试上线 paper-<id>`。没有当前口头授权就不要跑 push。
+
+`--owner-said-ship` / `--owner-said-retry-ship` 只表示 agent 已听到**这一次**口头授权。不得在 owner 没说时自行加上。
+
+### 跑前必须摊开（对 owner 复述；清单也会打印）
+
+1. 目标机：生产 eqbank.cc（`EQB_REMOTE`；远端仓库默认 `/opt/eqb/english-question-bank`）。先读 `docs/cuts/launch-deploy/go-live-record.md`。
+2. 整份 `data/question-bank.sqlite` 替换；`app/public/paper-assets/` 加性同步。
+3. 本机其他未上线改动会一并上去。
+4. SQLite 远端会留下 `.bak.<stamp>`；推错人工用 bak 退。
+5. assets 无自动回滚；推错人工覆盖或删远端目录。
+6. 中途失败时生产服务可能停在 stopped。
+
+### 收据
+
+- 成功：`node scripts/import-pipeline/ship-checklist.mjs record-shipped <paperId>` → `signals/shipped.json`
+- 失败：`node scripts/import-pipeline/ship-checklist.mjs record-failed <paperId>` → `signals/blocked.json`，`code` = `ship_failed`
 
 ## 写作分析（新卷必交）
 
@@ -123,8 +171,8 @@
 
 ## 导题后台
 
-本机只读面，与消费端 `app/` 分离：`import-ops/`（`node import-ops/server.mjs`，默认 `http://127.0.0.1:8790`）。无对答案 UI，无生产按钮，不跑 pull-run-push。
+本机只读面，与消费端 `app/` 分离：`import-ops/`（`node import-ops/server.mjs`，默认 `http://127.0.0.1:8790`）。无对答案 UI，无生产按钮，不跑 pull-run-push。可上线后只展示口令（`上线 paper-<id>`）；`ship_failed` 时展示 `重试上线 paper-<id>`。
 
 ## 禁止
 
-网站消费端改动；恢复网站导入 UI；后台直连 LLM API；单卷增量传输；改 nck1 标准；格式①临时 canonical 映射；未获当前 owner 授权动生产。
+网站消费端改动；恢复网站导入 UI；后台直连 LLM API；单卷增量传输；改 nck1 标准；格式①临时 canonical 映射；清单未允许时跑 `pull-run-push`；未获当前 owner 口头「上线」/「重试上线」动生产。

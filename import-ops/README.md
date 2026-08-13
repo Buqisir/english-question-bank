@@ -6,6 +6,9 @@ Print 入口。
 
 - 不进消费端 `app/` 运行时。
 - 无对答案 UI，无生产按钮，不跑 `pull-run-push.mjs`，不碰生产。
+- 可上线后只展示口令（例如 `上线 paper-<id>`）；`ship_failed` 时展示
+  `重试上线 paper-<id>`。Agent 上线清单在
+  `scripts/import-pipeline/ship-checklist.mjs`。
 - Agent 进场文档：`docs/import/agent-contract.md`。
 
 ```bash

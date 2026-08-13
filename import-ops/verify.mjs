@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import assert from 'node:assert/strict'
 import { mkdirSync, mkdtempSync, writeFileSync, readFileSync } from 'node:fs'
+import { spawnSync } from 'node:child_process'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -11,8 +12,15 @@ import {
   listOpsPapers,
   probePaper,
   qaLinks,
+  shipPrompt,
   statusOf,
 } from './lib/probe.mjs'
+import {
+  SHIP_COMMAND,
+  evaluateShip,
+  writeShipFailedReceipt,
+  writeShippedReceipt,
+} from '../scripts/import-pipeline/ship-checklist.mjs'
 
 const here = path.dirname(fileURLToPath(import.meta.url))
 const html = readFileSync(path.join(here, 'public/index.html'), 'utf8')
@@ -78,6 +86,16 @@ writeConfig(shippedDir, 'paper-shipped', '已上线卷')
 writeFileSync(path.join(shippedDir, 'signals/shipped.json'), JSON.stringify({ command: 'push' }))
 writeLatest(root, 'paper-shipped')
 
+const shipFailedDir = paperDir(root, 'paper-ship-failed')
+writeConfig(shipFailedDir, 'paper-ship-failed', '上线失败卷')
+writeFileSync(path.join(shipFailedDir, 'signals/ai-answer-check.json'), JSON.stringify({ ok: true }))
+writeFileSync(path.join(shipFailedDir, 'signals/qa-accepted.json'), JSON.stringify({ by: 'owner' }))
+writeFileSync(
+  path.join(shipFailedDir, 'signals/blocked.json'),
+  JSON.stringify({ code: 'ship_failed', note: 'push 中途失败' }),
+)
+writeLatest(root, 'paper-ship-failed')
+
 const legacyDir = paperDir(root, 'paper-legacy')
 writeConfig(legacyDir, 'paper-legacy', '库内旧卷')
 writeLatest(root, 'paper-legacy')
@@ -91,6 +109,7 @@ const blocked = probePaper({ repoRoot: root, paperId: 'paper-format1-blocked' })
 const awaiting = probePaper({ repoRoot: root, paperId: 'paper-awaiting-qa' })
 const ready = probePaper({ repoRoot: root, paperId: 'paper-ready' })
 const shipped = probePaper({ repoRoot: root, paperId: 'paper-shipped' })
+const shipFailed = probePaper({ repoRoot: root, paperId: 'paper-ship-failed' })
 const legacy = probePaper({ repoRoot: root, paperId: 'paper-legacy' })
 const leftover = probePaper({ repoRoot: root, paperId: 'paper-leftover-config' })
 
@@ -103,17 +122,23 @@ assert.equal(blocked.blocked.code, 'canonical_unavailable')
 assert.equal(awaiting.status, 'awaiting_qa')
 assert.equal(ready.status, 'ready_to_ship')
 assert.equal(shipped.status, 'shipped')
+assert.equal(shipFailed.status, 'failed')
+assert.equal(shipFailed.blocked.code, 'ship_failed')
 assert.equal(legacy.status, 'importing')
 assert.equal(isOpsVisible(legacy), false, '库内无 signals 的旧卷不进导题后台')
 assert.equal(isOpsVisible(leftover), false, '仅有 config、无源/切卷/信号的旧目录不进后台')
 assert.equal(isOpsVisible(queued), true)
 assert.equal(isOpsVisible(blocked), true)
+assert.equal(isOpsVisible(shipFailed), true)
 
 const lists = homeLists(
-  [queued, importing, blocked, awaiting, ready, shipped].filter(isOpsVisible),
+  [queued, importing, blocked, awaiting, ready, shipped, shipFailed].filter(isOpsVisible),
 )
 assert.deepEqual(lists.awaitingQa.map((p) => p.paperId), ['paper-awaiting-qa'])
-assert.deepEqual(lists.failed.map((p) => p.paperId), ['paper-format1-blocked'])
+assert.deepEqual(lists.failed.map((p) => p.paperId).sort(), [
+  'paper-format1-blocked',
+  'paper-ship-failed',
+])
 
 const qa = qaLinks(awaiting, 'http://127.0.0.1:5173')
 assert.match(qa.screen, /view=paper-browse/)
@@ -127,9 +152,17 @@ assert.equal(html.includes('Screen 预览'), true)
 assert.equal(html.includes('Student Print'), true)
 assert.equal(html.includes('Teacher Print'), true)
 assert.equal(html.includes('不对答案表'), true)
+assert.equal(html.includes('重试上线'), true)
+assert.equal(html.includes('未到可上线'), true)
 assert.equal(/push<\/button>/.test(html), false)
 assert.equal(serverSrc.includes("request.method !== 'GET'"), true)
 assert.equal(statusOf({ shipped: true, blocked: { code: 'x' } }), 'shipped')
+
+const contract = readFileSync(path.join(here, '../docs/import/agent-contract.md'), 'utf8')
+assert.equal(contract.includes('上线清单见后续切片'), false)
+assert.equal(contract.includes('本切片不做'), false)
+assert.equal(contract.includes('ship-checklist.mjs'), true)
+assert.equal(contract.includes('--owner-said-ship'), true)
 
 assert.deepEqual(listOpsPapers(root).map((p) => p.paperId).sort(), [
   'paper-awaiting-qa',
@@ -137,7 +170,112 @@ assert.deepEqual(listOpsPapers(root).map((p) => p.paperId).sort(), [
   'paper-importing',
   'paper-queued',
   'paper-ready',
+  'paper-ship-failed',
   'paper-shipped',
 ])
 
-console.log('PASS import-ops six-state probes, visibility, QA links, read-only UI')
+assert.deepEqual(shipPrompt(ready), { kind: 'ship', say: '上线 paper-ready' })
+assert.deepEqual(shipPrompt(shipFailed), { kind: 'retry', say: '重试上线 paper-ship-failed' })
+assert.equal(shipPrompt(awaiting).say, null)
+assert.equal(shipPrompt(shipped).say, null)
+
+const checklistSrc = readFileSync(
+  path.join(here, '../scripts/import-pipeline/ship-checklist.mjs'),
+  'utf8',
+)
+assert.equal(checklistSrc.includes('spawnSync'), false)
+assert.equal(checklistSrc.includes('execFile'), false)
+assert.equal(checklistSrc.includes('child_process'), false)
+assert.equal(checklistSrc.includes(SHIP_COMMAND), true)
+assert.match(checklistSrc, /本清单不执行 push/)
+
+const refusedNotReady = evaluateShip({
+  repoRoot: root,
+  paperId: 'paper-awaiting-qa',
+  ownerSaid: 'ship',
+})
+assert.equal(refusedNotReady.ok, false)
+assert.equal(refusedNotReady.code, 'not_ready_to_ship')
+assert.match(refusedNotReady.message, /拒绝 push/)
+
+const refusedNoVerbal = evaluateShip({
+  repoRoot: root,
+  paperId: 'paper-ready',
+  ownerSaid: null,
+})
+assert.equal(refusedNoVerbal.ok, false)
+assert.equal(refusedNoVerbal.code, 'requires_verbal_ship')
+
+const allowed = evaluateShip({
+  repoRoot: root,
+  paperId: 'paper-ready',
+  ownerSaid: 'ship',
+})
+assert.equal(allowed.ok, true)
+assert.equal(allowed.command, SHIP_COMMAND)
+assert.match(allowed.disclosure, /question-bank\.sqlite/)
+assert.match(allowed.disclosure, /bak\.<stamp>/)
+assert.match(allowed.disclosure, /无自动回滚/)
+assert.match(allowed.disclosure, /本机其他未上线改动会一并上去/)
+assert.match(allowed.disclosure, /go-live-record/)
+assert.match(allowed.disclosure, /不是 deploy\.sh/)
+assert.match(allowed.message, /不执行 push/)
+
+const refusedWrongRetryToken = evaluateShip({
+  repoRoot: root,
+  paperId: 'paper-ship-failed',
+  ownerSaid: 'ship',
+})
+assert.equal(refusedWrongRetryToken.ok, false)
+assert.equal(refusedWrongRetryToken.code, 'retry_requires_verbal')
+
+const retryAllowed = evaluateShip({
+  repoRoot: root,
+  paperId: 'paper-ship-failed',
+  ownerSaid: 'retry-ship',
+})
+assert.equal(retryAllowed.ok, true)
+
+const checklistPath = path.join(here, '../scripts/import-pipeline/ship-checklist.mjs')
+const cliRefuse = spawnSync(
+  process.execPath,
+  [checklistPath, 'check', 'paper-awaiting-qa', '--owner-said-ship'],
+  { env: { ...process.env, EQB_ROOT: root }, encoding: 'utf8' },
+)
+assert.notEqual(cliRefuse.status, 0)
+assert.match(`${cliRefuse.stdout}${cliRefuse.stderr}`, /not_ready_to_ship|不是 ready_to_ship/)
+assert.doesNotMatch(`${cliRefuse.stdout}${cliRefuse.stderr}`, /push complete/)
+
+const cliAllow = spawnSync(
+  process.execPath,
+  [checklistPath, 'check', 'paper-ready', '--owner-said-ship'],
+  { env: { ...process.env, EQB_ROOT: root }, encoding: 'utf8' },
+)
+assert.equal(cliAllow.status, 0)
+assert.match(cliAllow.stdout, /允许/)
+assert.match(cliAllow.stdout, /本清单不执行/)
+assert.equal(cliAllow.stdout.includes('spawn'), false)
+
+const recordTarget = 'paper-ready'
+const failedWrite = writeShipFailedReceipt({
+  repoRoot: root,
+  paperId: recordTarget,
+  note: 'fixture ship_failed',
+})
+assert.equal(failedWrite.ok, true)
+const afterFail = probePaper({ repoRoot: root, paperId: recordTarget })
+assert.equal(afterFail.status, 'failed')
+assert.equal(afterFail.blocked.code, 'ship_failed')
+
+const shippedWrite = writeShippedReceipt({ repoRoot: root, paperId: recordTarget })
+assert.equal(shippedWrite.ok, true)
+assert.equal(probePaper({ repoRoot: root, paperId: recordTarget }).status, 'shipped')
+
+const refuseFailedReceipt = writeShipFailedReceipt({
+  repoRoot: root,
+  paperId: 'paper-awaiting-qa',
+})
+assert.equal(refuseFailedReceipt.ok, false)
+assert.equal(refuseFailedReceipt.code, 'not_ready_to_ship')
+
+console.log('PASS import-ops six-state probes, visibility, QA links, read-only UI, ship checklist refuse')
