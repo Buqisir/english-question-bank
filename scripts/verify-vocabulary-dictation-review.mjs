@@ -353,6 +353,22 @@ assert.equal([...workbenchSource.matchAll(/consumeNumberInputs\(/gu)].length, 3,
 assert.match(workbenchSource, /wrongNumbers: '',\s+testedNumbers: '',/u, '应用题号后必须清空旧表达式，避免覆盖后续逐题调整')
 assert.match(workbenchSource, /window\.addEventListener\('popstate', flushPendingDraft\)/u, '浏览器返回前必须触发草稿保存')
 assert.match(workbenchSource, /async function leaveWorkbench\(next: \(\) => void\)/u, '工作区导航必须等待脏草稿保存')
+const createdTaskResultStart = workbenchSource.indexOf('{createdTasks.length > 0 && (')
+const setWorkspaceStart = workbenchSource.indexOf("{tab === 'sets' && (")
+assert.ok(
+  createdTaskResultStart > 0 && createdTaskResultStart < setWorkspaceStart,
+  '二维码任务生成结果必须在当前工作区原地可见，不能只藏在生词组页',
+)
+assert.match(
+  workbenchSource,
+  /task\.share\.shareId[\s\S]{0,700}<QRCodeSVG value=\{publicHref\}/u,
+  '错词二维码任务生成后必须直接显示可扫码二维码',
+)
+assert.match(
+  workbenchSource,
+  /downloadVocabularyDictationTaskPdf\(task\.id, 'dictation'\)[\s\S]{0,160}带二维码听写纸/u,
+  '错词二维码任务生成后必须原地提供带二维码听写纸',
+)
 
 bankDb.close()
 userDb.close()

@@ -537,6 +537,42 @@
   font-size: 12px;
 }
 
+.dictation-created-results {
+  margin-bottom: 24px;
+  overflow: hidden;
+  border: 1px solid #c6c6c0;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: var(--eqb-shadow-card);
+}
+
+.dictation-created-results > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 16px;
+  background: #f6f6f4;
+}
+
+.dictation-created-results > header > div {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.dictation-created-results > header span {
+  color: #6a6a64;
+  font-size: 12px;
+}
+
+.dictation-created-results > header > button {
+  min-width: 32px;
+  min-height: 32px;
+  border: 0;
+  background: transparent;
+}
+
 .dictation-created-links {
   display: grid;
   gap: 1px;
@@ -546,11 +582,41 @@
 
 .dictation-created-links > div {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: 8px;
-  padding: 10px 16px;
+  gap: 14px;
+  padding: 14px 16px;
   background: #fff;
+}
+
+.dictation-created-qr-slot {
+  display: grid;
+  width: 104px;
+  height: 104px;
+  place-items: center;
+  border: 1px solid #e8e8e4;
+  border-radius: 6px;
+  background: #fff;
+  color: #1e4a3a;
+}
+
+.dictation-created-links > div > span {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+}
+
+.dictation-created-links > div > span small {
+  color: #6a6a64;
+  font-size: 12px;
+}
+
+.dictation-created-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .dictation-created-links a {
@@ -1187,6 +1253,19 @@
   .dictation-task-list article,
   .dictation-record-list article {
     grid-template-columns: 1fr;
+  }
+
+  .dictation-created-results > header > div {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .dictation-created-qr-slot {
+    width: 100%;
+  }
+
+  .dictation-created-actions {
+    justify-content: flex-start;
   }
 
   .dictation-task-list article > div:last-child,

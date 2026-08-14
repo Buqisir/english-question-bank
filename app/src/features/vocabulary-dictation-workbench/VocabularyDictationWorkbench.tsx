@@ -20,6 +20,7 @@ import {
   Undo2,
   X,
 } from 'lucide-react'
+import { QRCodeSVG } from 'qrcode.react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import type { VocabularySetEntry } from '../../domain/vocabulary'
@@ -832,6 +833,38 @@ export function VocabularyDictationWorkbench({
           </div>
         )}
 
+        {createdTasks.length > 0 && (
+          <section className="dictation-created-results" aria-label="已生成的听写任务">
+            <header>
+              <div><strong>二维码听写已生成</strong><span>现在可以直接扫码，或下载首页带二维码的听写纸。</span></div>
+              <button type="button" aria-label="收起已生成的听写任务" onClick={() => setCreatedTasks([])}><X size={16} /></button>
+            </header>
+            <div className="dictation-created-links">
+              {createdTasks.map((task) => {
+                const publicHref = task.share?.status === 'active'
+                  ? `${window.location.origin}/vocabulary/dictation/${task.share.shareId}`
+                  : null
+                return (
+                  <div key={task.id}>
+                    <div className="dictation-created-qr-slot">
+                      {publicHref ? (
+                        <QRCodeSVG value={publicHref} size={88} level="M" marginSize={0} title={`${task.title} 扫码听写`} />
+                      ) : <QrCode size={28} aria-hidden="true" />}
+                    </div>
+                    <span><strong>{task.title}</strong><small>{task.entryCount} 词 · {task.accent === 'american' ? '美音' : '英音'}</small></span>
+                    <div className="dictation-created-actions">
+                      {publicHref && <a href={publicHref} target="_blank" rel="noreferrer"><Link2 size={14} />打开听写</a>}
+                      <button type="button" onClick={() => void downloadVocabularyDictationTaskPdf(task.id, 'dictation')}><Download size={14} />{publicHref ? '带二维码听写纸' : '听写纸'}</button>
+                      <button type="button" onClick={() => void downloadVocabularyDictationTaskPdf(task.id, 'answer')}><FileCheck2 size={14} />教师答案</button>
+                      <button type="button" onClick={() => openGrader(task)}><ClipboardCheck size={14} />开始批改</button>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </section>
+        )}
+
         {tab === 'sets' && (
           <section className="dictation-sets-workspace">
             <div className="dictation-library-tools">
@@ -906,17 +939,6 @@ export function VocabularyDictationWorkbench({
                     setSelectedReviewIds(selectedPending.map((state) => state.id)); setTab('pending')
                   }}><ListChecks size={16} />导出所选组待复听写词</button>
                 </div>
-                {createdTasks.length > 0 && (
-                  <div className="dictation-created-links">
-                    {createdTasks.map((task) => (
-                      <div key={task.id}>
-                        <span><strong>{task.title}</strong> · {task.entryCount} 词 · {task.accent === 'american' ? '美音' : '英音'}</span>
-                        {task.share?.status === 'active' && <a href={`${window.location.origin}/vocabulary/dictation/${task.share.shareId}`} target="_blank" rel="noreferrer"><Link2 size={14} />打开听写</a>}
-                        <button type="button" onClick={() => openGrader(task)}>开始批改</button>
-                      </div>
-                    ))}
-                  </div>
-                )}
               </aside>
             )}
           </section>
