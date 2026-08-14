@@ -61,6 +61,7 @@ imports/*
 exports/*
 !exports/.gitkeep
 app/public/paper-assets/*/versions/
+app/public/paper-assets/*/latest/canonical-paper-publication-ref-v1.json
 reports/*
 !reports/difficulty-calibration-v1.md
 !reports/full-bcd-difficulty-calibration-v1.md
