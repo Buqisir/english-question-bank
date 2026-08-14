@@ -175,10 +175,9 @@ export type StudentVocabularyReviewStateDto = VocabularySetEntry & {
 export type VocabularyPrintJobDto = {
   vocabularySet: VocabularySetDto
   sections: Array<{ startIndex: number; title: string }>
-  correctionByEntryId: Record<string, { lastWrongSpelling: string }>
   shareKind: 'dictation' | null
   accent: 'american' | 'british'
-  kind: 'cards' | 'dictation' | 'answer' | 'word-search' | 'correction'
+  kind: 'cards' | 'dictation' | 'answer' | 'word-search'
 }
 
 export class VocabularyApiError extends Error {
@@ -573,7 +572,7 @@ export async function downloadCombinedVocabularyPdf(input: {
   entryIds?: string[]
   mode?: 'dedupe' | 'grouped'
   accent: 'american' | 'british'
-  kind: 'cards' | 'dictation' | 'answer' | 'word-search' | 'correction'
+  kind: 'cards' | 'dictation' | 'answer' | 'word-search'
 }): Promise<void> {
   const response = await fetch('/api/vocabulary/combined-pdf', {
     method: 'POST',

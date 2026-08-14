@@ -49,7 +49,6 @@ import {
   VocabularyApiError,
   type VocabularyReviewRunDto,
   type VocabularySetDto,
-  type VocabularyPrintJobDto,
   type VocabularyStudentDto,
 } from '../../services/vocabulary'
 import { calibrationVocabularyProgram } from './calibrationVocabularyProgram'
@@ -84,8 +83,8 @@ type VocabularyReviewPageProps = {
 }
 
 type VocabularyAccent = VocabularyAudioAccent
-type VocabularyPrintKind = 'cards' | 'dictation' | 'answer' | 'word-search' | 'correction'
-type VocabularySetPrintKind = Exclude<VocabularyPrintKind, 'correction'>
+type VocabularyPrintKind = 'cards' | 'dictation' | 'answer' | 'word-search'
+type VocabularySetPrintKind = VocabularyPrintKind
 
 type VocabularyPrintRequest = {
   setId: string | null
@@ -109,8 +108,6 @@ function readVocabularyPrintRequest(): VocabularyPrintRequest | null {
         ? 'answer'
         : params.get('vocabularyPrintMode') === 'word-search'
           ? 'word-search'
-          : params.get('vocabularyPrintMode') === 'correction'
-            ? 'correction'
           : 'cards',
   }
 }
@@ -391,7 +388,6 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   const [printAccent, setPrintAccent] = useState<VocabularyAccent>(printRequest?.accent ?? 'american')
   const [printLoadState, setPrintLoadState] = useState<'idle' | 'loading' | 'ready' | 'error'>(printRequest ? 'loading' : 'idle')
   const [printSections, setPrintSections] = useState<Array<{ startIndex: number; title: string }>>([])
-  const [printCorrectionByEntryId, setPrintCorrectionByEntryId] = useState<VocabularyPrintJobDto['correctionByEntryId']>({})
   const [printShareKind, setPrintShareKind] = useState<'set' | 'dictation' | null>(null)
   const [pdfDownloadBusy, setPdfDownloadBusy] = useState(false)
   const [downloadMenuOpen, setDownloadMenuOpen] = useState(false)
@@ -436,8 +432,6 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
       printEntries,
       printRequest?.kind === 'word-search'
         ? WORD_SEARCH_PRINT_ENTRIES_PER_PAGE
-        : printRequest?.kind === 'correction'
-          ? 8
         : printRequest?.kind === 'dictation' || printRequest?.kind === 'answer'
         ? DICTATION_PRINT_ENTRIES_PER_PAGE
         : CARD_PRINT_ENTRIES_PER_PAGE,
@@ -549,7 +543,6 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
             setVocabularySet(printJob.vocabularySet)
             setShareId(printJob.vocabularySet.share?.status === 'active' ? printJob.vocabularySet.share.shareId : null)
             setPrintSections(printJob.sections)
-            setPrintCorrectionByEntryId(printJob.correctionByEntryId)
             setPrintShareKind(printJob.shareKind)
             setPrintAccent(printJob.accent)
           })
@@ -1646,34 +1639,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
             pages={wordSearchPages}
           />
         ) : printPages.map(({ entries: pageEntries, title: pageTitle, startIndex: pageStartIndex }, pageIndex) => (
-          printRequest?.kind === 'correction' ? (
-            <div className="vocabulary-print-page vocabulary-correction-print-page" key={`correction-page-${pageIndex + 1}`}>
-              <header className="vocabulary-correction-print-header">
-                <div>
-                  <h1>{pageTitle || vocabularySet?.title || '错词订正纸'}</h1>
-                  <p>错词订正纸 · 看清错误，再正确书写三遍</p>
-                </div>
-                <span>姓名：____________ · 日期：____________</span>
-              </header>
-              <div className="vocabulary-correction-print-list">
-                {pageEntries.map((entry, entryIndex) => (
-                  <article key={`${entry.id}-${entryIndex}`}>
-                    <span className="vocabulary-correction-number">{pageStartIndex + entryIndex + 1}</span>
-                    <div className="vocabulary-correction-reference">
-                      <div><strong>{entry.headword}</strong><span>{entry.phonetics?.[printAccent] ?? entry.phonetic}</span></div>
-                      <p><b>{entry.partOfSpeech}</b>{formatCoreMeanings(entry)}</p>
-                      <small>上次写成：{printCorrectionByEntryId[entry.id]?.lastWrongSpelling || '未记录'}</small>
-                    </div>
-                    <div className="vocabulary-correction-writing"><i /><i /><i /></div>
-                  </article>
-                ))}
-              </div>
-              <footer className="vocabulary-dictation-print-footer">
-                <span><strong>{vocabularySet?.title ?? program.title}</strong> · 订正纸 · {printEntries.length}词</span>
-                <span>第 {pageIndex + 1} / {printPages.length} 页</span>
-              </footer>
-            </div>
-          ) : printRequest?.kind === 'dictation' || printRequest?.kind === 'answer' ? (
+          printRequest?.kind === 'dictation' || printRequest?.kind === 'answer' ? (
             <div className="vocabulary-print-page vocabulary-dictation-print-page" key={`print-page-${pageIndex + 1}`}>
               <header className="vocabulary-dictation-print-header">
                 <div>

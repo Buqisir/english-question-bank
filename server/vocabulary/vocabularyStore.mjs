@@ -2751,7 +2751,6 @@ export function buildCombinedVocabularyPrintPayload(userDb, userId, input = {}) 
 
   const entries = []
   const sections = []
-  const correctionByEntryId = {}
   if (sourceSetIds.length) {
     const seen = new Set()
     for (const setId of sourceSetIds) {
@@ -2786,7 +2785,7 @@ export function buildCombinedVocabularyPrintPayload(userDb, userId, input = {}) 
         recentWrongRate: _recentWrongRate,
         wrongDateCount: _wrongDateCount,
         lastWrongDate: _lastWrongDate,
-        lastWrongSpelling,
+        lastWrongSpelling: _lastWrongSpelling,
         latestResult: _latestResult,
         status: _status,
         pinned: _pinned,
@@ -2795,7 +2794,6 @@ export function buildCombinedVocabularyPrintPayload(userDb, userId, input = {}) 
         ...entry
       } = state
       entries.push(entry)
-      correctionByEntryId[entryId] = { lastWrongSpelling }
     }
     sections.push({ startIndex: 0, title })
   }
@@ -2813,7 +2811,6 @@ export function buildCombinedVocabularyPrintPayload(userDb, userId, input = {}) 
       createdAt: nowIso(),
     },
     sections: mode === 'dedupe' ? [{ startIndex: 0, title }] : sections,
-    correctionByEntryId,
     shareKind: null,
   }
 }
@@ -2834,7 +2831,6 @@ export function buildVocabularyDictationTaskPrintPayload(userDb, userId, taskId)
       createdAt: task.createdAt,
     },
     sections: [{ startIndex: 0, title: task.title }],
-    correctionByEntryId: {},
     shareKind: 'dictation',
     accent: task.accent,
   }

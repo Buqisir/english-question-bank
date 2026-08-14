@@ -357,18 +357,57 @@ const createdTaskResultStart = workbenchSource.indexOf('{createdTasks.length > 0
 const setWorkspaceStart = workbenchSource.indexOf("{tab === 'sets' && (")
 assert.ok(
   createdTaskResultStart > 0 && createdTaskResultStart < setWorkspaceStart,
-  '二维码任务生成结果必须在当前工作区原地可见，不能只藏在生词组页',
+  '复听写任务生成结果必须在当前工作区原地可见，不能只藏在生词组页',
+)
+assert.doesNotMatch(workbenchSource, /QRCodeSVG|qrcode\.react/u, '工作台不得显示屏幕二维码')
+assert.match(
+  workbenchSource,
+  /downloadTaskMaterial\(task\.id, 'cards'\)[\s\S]{0,180}单词卡（含二维码）/u,
+  '已生成任务必须提供右下角带二维码的单词卡',
 )
 assert.match(
   workbenchSource,
-  /task\.share\.shareId[\s\S]{0,700}<QRCodeSVG value=\{publicHref\}/u,
-  '错词二维码任务生成后必须直接显示可扫码二维码',
+  /downloadTaskMaterial\(task\.id, 'dictation'\)[\s\S]{0,180}复听写纸（含二维码）/u,
+  '已生成任务必须提供右上角带二维码的复听写纸',
 )
-assert.match(
-  workbenchSource,
-  /downloadVocabularyDictationTaskPdf\(task\.id, 'dictation'\)[\s\S]{0,160}带二维码听写纸/u,
-  '错词二维码任务生成后必须原地提供带二维码听写纸',
+assert.match(workbenchSource, /下载资料[\s\S]{0,900}单词卡（含二维码）[\s\S]{0,900}复听写纸（含二维码）[\s\S]{0,900}教师答案/u, '三个下载项必须收进一个下载资料菜单')
+assert.match(workbenchSource, /已选 \{selectedReviewStates\.length\} 词[\s\S]{0,600}生成复听写任务[\s\S]{0,600}复制清单[\s\S]{0,600}取消/u, '错词选择栏只保留生成任务、复制和取消')
+assert.doesNotMatch(workbenchSource, /记忆卡|订正纸|带二维码听写纸|二维码任务/u, '工作台不得保留旧术语或重复入口')
+const createReviewTaskSource = workbenchSource.slice(
+  workbenchSource.indexOf('async function createTaskFromReviewEntries'),
+  workbenchSource.indexOf('async function copyEntries'),
 )
+assert.match(createReviewTaskSource, /setSelectedReviewIds\(\[\]\)/u, '生成复听写任务后必须清空旧选择')
+assert.match(createReviewTaskSource, /setSuggestion\(\[\]\)/u, '生成复听写任务后必须收起旧建议')
+const createSetTaskSource = workbenchSource.slice(
+  workbenchSource.indexOf('async function createTasks'),
+  workbenchSource.indexOf('function updateTaskShare'),
+)
+assert.match(createSetTaskSource, /setSelectedSets\(\[\]\)/u, '生成合并听写后也必须收起旧生词组选择面板')
+
+const vocabularyServiceSource = readFileSync(path.join(import.meta.dirname, '../app/src/services/vocabulary.ts'), 'utf8')
+const vocabularyRoutesSource = readFileSync(path.join(import.meta.dirname, '../server/vocabulary/vocabularyRoutes.mjs'), 'utf8')
+const vocabularyStoreSource = readFileSync(path.join(import.meta.dirname, '../server/vocabulary/vocabularyStore.mjs'), 'utf8')
+const vocabularyReviewSource = readFileSync(path.join(import.meta.dirname, '../app/src/features/vocabulary-review/VocabularyReviewPage.tsx'), 'utf8')
+const vocabularyReviewCss = readFileSync(path.join(import.meta.dirname, '../app/src/features/vocabulary-review/vocabularyReviewPage.css'), 'utf8')
+const extensionSpec = readFileSync(path.join(import.meta.dirname, '../docs/cuts/wanwei-vocabulary-closed-loop/dictation-review-extension.md'), 'utf8')
+const devScriptSource = readFileSync(path.join(import.meta.dirname, 'dev.sh'), 'utf8')
+assert.match(devScriptSource, /APP_PORT="\$\{PORT:-5173\}"/u, '本地开发必须冻结前端端口供打印渲染复用')
+assert.match(devScriptSource, /PUBLIC_ORIGIN="\$\{QUESTION_BANK_PUBLIC_ORIGIN:-http:\/\/127\.0\.0\.1:\$\{APP_PORT\}\}"/u, '本地打印渲染必须默认指向同一个前端服务')
+assert.match(devScriptSource, /QUESTION_BANK_PUBLIC_ORIGIN="\$PUBLIC_ORIGIN"\s+node/u, 'API 子进程必须收到本地打印页面地址')
+assert.match(vocabularyReviewSource, /printRequest\.kind === 'dictation' && pageIndex === 0 && shareId[\s\S]{0,500}vocabulary-dictation-print-qr/u, '复听写纸二维码必须只在首页右上区域')
+assert.match(vocabularyReviewSource, /pageIndex === 0 && shareId[\s\S]{0,800}printShareKind === 'dictation'[\s\S]{0,300}\/vocabulary\/dictation\/\$\{shareId\}/u, '任务单词卡必须在首页页脚使用同一公开听写链接')
+assert.match(vocabularyRoutesSource, /hasQr = payload\.vocabularySet\.share\?\.status === 'active' && \['cards', 'dictation'\]\.includes\(kind\)[\s\S]{0,400}expectedQrCount: hasQr \? 1 : 0/u, '任务单词卡和复听写纸各一个二维码，教师答案不得带二维码')
+for (const [label, source] of [
+  ['客户端打印 DTO', vocabularyServiceSource],
+  ['服务端打印路由', vocabularyRoutesSource],
+  ['服务端打印投影', vocabularyStoreSource],
+  ['打印页面', vocabularyReviewSource],
+  ['打印样式', vocabularyReviewCss],
+  ['扩展规范', extensionSpec],
+]) {
+  assert.doesNotMatch(source, /correctionByEntryId|vocabulary-correction-|订正纸|'correction'/u, `${label}必须完整移除订正纸能力`)
+}
 
 bankDb.close()
 userDb.close()

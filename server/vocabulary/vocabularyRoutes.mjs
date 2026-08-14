@@ -126,14 +126,12 @@ function vocabularyPdfFileName(title, entryCount, accent, kind = 'cards') {
     return `${exportTitle}-听写纸-${entryCount}词-${accent === 'american' ? '美式' : '英式'}.pdf`
   }
   if (kind === 'word-search') return `${exportTitle}-圈词与拼写-${entryCount}词.pdf`
-  if (kind === 'correction') return `${exportTitle}-订正纸-${entryCount}词.pdf`
   return `${safeTitle}${countSuffix}-${accent === 'american' ? '美式' : '英式'}.pdf`
 }
 
 function expectedVocabularyPrintPages(entryCount, kind) {
   if (kind === 'word-search') return Math.ceil(entryCount / 10) * 2
   if (kind === 'cards') return Math.ceil(entryCount / 6)
-  if (kind === 'correction') return Math.ceil(entryCount / 8)
   return Math.ceil(entryCount / 15)
 }
 
@@ -321,7 +319,7 @@ export function createVocabularyRoutes() {
         context.sendJson(response, 400, { error: 'invalid_vocabulary_accent', message: '合并打印必须选择英式或美式。' })
         return
       }
-      if (!['cards', 'dictation', 'answer', 'word-search', 'correction'].includes(kind)) {
+      if (!['cards', 'dictation', 'answer', 'word-search'].includes(kind)) {
         context.sendJson(response, 400, { error: 'invalid_vocabulary_pdf_kind', message: '下载类型无效。' })
         return
       }

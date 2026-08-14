@@ -1,6 +1,7 @@
 import {
   BookOpenCheck,
   Check,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
   ClipboardCheck,
@@ -20,7 +21,6 @@ import {
   Undo2,
   X,
 } from 'lucide-react'
-import { QRCodeSVG } from 'qrcode.react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import type { VocabularySetEntry } from '../../domain/vocabulary'
@@ -56,7 +56,7 @@ const ACTIVE_STUDENT_STORAGE_KEY = 'eqb-vocabulary-active-student-wanwei-round-o
 const SUGGESTION_TARGET_STORAGE_KEY = 'eqb-vocabulary-review-suggestion-target-v1'
 type WorkspaceTab = 'sets' | 'records' | 'pending' | 'stubborn'
 type Accent = 'american' | 'british'
-type PrintKind = 'cards' | 'dictation' | 'answer' | 'word-search' | 'correction'
+type PrintKind = 'cards' | 'dictation' | 'answer' | 'word-search'
 
 type GraderState = {
   task: VocabularyDictationTaskDto
@@ -210,6 +210,7 @@ export function VocabularyDictationWorkbench({
   const [libraryRefreshVersion, setLibraryRefreshVersion] = useState(0)
   const graderRef = useRef<GraderState | null>(null)
   const graderDialogRef = useRef<HTMLElement | null>(null)
+  const createdTasksRef = useRef<HTMLElement | null>(null)
   const studentDataVersionRef = useRef(0)
   const activeStudentIdRef = useRef('')
 
@@ -235,6 +236,15 @@ export function VocabularyDictationWorkbench({
   useEffect(() => {
     if (graderTaskId) window.requestAnimationFrame(() => graderDialogRef.current?.focus())
   }, [graderTaskId])
+
+  useEffect(() => {
+    if (!createdTasks.length) return
+    window.requestAnimationFrame(() => {
+      const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+      createdTasksRef.current?.scrollIntoView({ behavior, block: 'nearest' })
+      createdTasksRef.current?.focus({ preventScroll: true })
+    })
+  }, [createdTasks.length])
 
   const refreshStudentData = useCallback(async (studentId: string) => {
     const requestedVersion = studentDataVersionRef.current + 1
@@ -481,7 +491,7 @@ export function VocabularyDictationWorkbench({
       }
       setCreatedTasks(nextTasks)
       setTasks((current) => [...nextTasks, ...current])
-      setMessage(share ? `已生成 ${nextTasks.length} 份二维码听写。` : `已建立 ${nextTasks.length} 份纸笔听写任务。`)
+      setSelectedSets([])
       if (openFirst) openGrader(nextTasks[0])
     } catch (nextError) {
       setError(nextError instanceof Error ? nextError.message : '听写任务生成失败。')
@@ -703,6 +713,8 @@ export function VocabularyDictationWorkbench({
   async function createTaskFromReviewEntries(entries: StudentVocabularyReviewStateDto[]) {
     if (!activeStudent || !entries.length) return
     setBusy(true)
+    setError('')
+    setMessage('')
     try {
       const chunks = splitEvery(entries, 60)
       const nextTasks: VocabularyDictationTaskDto[] = []
@@ -719,7 +731,8 @@ export function VocabularyDictationWorkbench({
       }
       setCreatedTasks(nextTasks)
       setTasks((current) => [...nextTasks, ...current])
-      setMessage(`已生成 ${nextTasks.length} 份复听写二维码。`)
+      setSelectedReviewIds([])
+      setSuggestion([])
     } catch (nextError) {
       setError(nextError instanceof Error ? nextError.message : '复听写任务生成失败。')
     } finally {
@@ -756,20 +769,14 @@ export function VocabularyDictationWorkbench({
     }
   }
 
-  async function printReviewEntries(kind: PrintKind, entries = selectedReviewStates) {
-    if (!activeStudent || !entries.length) return
+  async function downloadTaskMaterial(taskId: string, kind: 'cards' | 'dictation' | 'answer') {
     setBusy(true)
+    setError('')
+    setMessage('')
     try {
-      await downloadCombinedVocabularyPdf({
-        studentId: activeStudent.id,
-        title: `${activeStudent.displayName} · 错词复习 · ${today()}`,
-        entryIds: entries.map((entry) => entry.id),
-        mode: 'dedupe',
-        accent,
-        kind,
-      })
+      await downloadVocabularyDictationTaskPdf(taskId, kind)
     } catch (nextError) {
-      setError(nextError instanceof Error ? nextError.message : '错词打印失败。')
+      setError(nextError instanceof Error ? nextError.message : '听写资料下载失败，请重试。')
     } finally {
       setBusy(false)
     }
@@ -834,9 +841,12 @@ export function VocabularyDictationWorkbench({
         )}
 
         {createdTasks.length > 0 && (
-          <section className="dictation-created-results" aria-label="已生成的听写任务">
+          <section ref={createdTasksRef} className="dictation-created-results" aria-label="刚刚生成的听写任务" tabIndex={-1}>
             <header>
-              <div><strong>二维码听写已生成</strong><span>现在可以直接扫码，或下载首页带二维码的听写纸。</span></div>
+              <div>
+                <strong>{createdTasks.length > 1 ? `已生成 ${createdTasks.length} 份复听写任务` : '复听写任务已生成'}</strong>
+                <span>{createdTasks.every((task) => task.share?.status === 'active') ? '二维码只放在下载资料里，三份资料共用同一听写任务。' : '任务词序已冻结，可以下载资料或开始批改。'}</span>
+              </div>
               <button type="button" aria-label="收起已生成的听写任务" onClick={() => setCreatedTasks([])}><X size={16} /></button>
             </header>
             <div className="dictation-created-links">
@@ -846,17 +856,18 @@ export function VocabularyDictationWorkbench({
                   : null
                 return (
                   <div key={task.id}>
-                    <div className="dictation-created-qr-slot">
-                      {publicHref ? (
-                        <QRCodeSVG value={publicHref} size={88} level="M" marginSize={0} title={`${task.title} 扫码听写`} />
-                      ) : <QrCode size={28} aria-hidden="true" />}
-                    </div>
                     <span><strong>{task.title}</strong><small>{task.entryCount} 词 · {task.accent === 'american' ? '美音' : '英音'}</small></span>
                     <div className="dictation-created-actions">
                       {publicHref && <a href={publicHref} target="_blank" rel="noreferrer"><Link2 size={14} />打开听写</a>}
-                      <button type="button" onClick={() => void downloadVocabularyDictationTaskPdf(task.id, 'dictation')}><Download size={14} />{publicHref ? '带二维码听写纸' : '听写纸'}</button>
-                      <button type="button" onClick={() => void downloadVocabularyDictationTaskPdf(task.id, 'answer')}><FileCheck2 size={14} />教师答案</button>
                       <button type="button" onClick={() => openGrader(task)}><ClipboardCheck size={14} />开始批改</button>
+                      <details className="dictation-download-menu">
+                        <summary><Download size={14} />下载资料<ChevronDown size={14} aria-hidden="true" /></summary>
+                        <div>
+                          <button type="button" disabled={busy} onClick={(event) => { event.currentTarget.closest('details')?.removeAttribute('open'); void downloadTaskMaterial(task.id, 'cards') }}><BookOpenCheck size={14} />{publicHref ? '单词卡（含二维码）' : '单词卡'}</button>
+                          <button type="button" disabled={busy} onClick={(event) => { event.currentTarget.closest('details')?.removeAttribute('open'); void downloadTaskMaterial(task.id, 'dictation') }}><Download size={14} />{publicHref ? '复听写纸（含二维码）' : '复听写纸'}</button>
+                          <button type="button" disabled={busy} onClick={(event) => { event.currentTarget.closest('details')?.removeAttribute('open'); void downloadTaskMaterial(task.id, 'answer') }}><FileCheck2 size={14} />教师答案</button>
+                        </div>
+                      </details>
                     </div>
                   </div>
                 )
@@ -925,7 +936,7 @@ export function VocabularyDictationWorkbench({
                     <div>
                       <label><input type="radio" name="print-mode" checked={printMode === 'dedupe'} onChange={() => setPrintMode('dedupe')} />合并去重</label>
                       <label><input type="radio" name="print-mode" checked={printMode === 'grouped'} onChange={() => setPrintMode('grouped')} />按组装订</label>
-                      <button type="button" onClick={() => void printSelectedSets('cards')}>记忆卡</button>
+                      <button type="button" onClick={() => void printSelectedSets('cards')}>单词卡</button>
                       <button type="button" onClick={() => void printSelectedSets('dictation')}>无二维码听写纸</button>
                       <button type="button" onClick={() => void printSelectedSets('answer')}>教师答案</button>
                       <button type="button" onClick={() => void printSelectedSets('word-search')}>找单词练习</button>
@@ -947,19 +958,30 @@ export function VocabularyDictationWorkbench({
         {tab === 'records' && (
           <section className="dictation-records-workspace">
             <div className="dictation-task-queue">
-              <header><div><h2>可批改的听写任务</h2><p>同一个二维码任务可以记录多次真实听写。</p></div></header>
-              {tasks.length ? <div className="dictation-task-list">{tasks.map((task) => (
-                <article key={task.id}>
-                  <div><strong>{task.title}</strong><span>{task.entryCount} 词 · {task.accent === 'american' ? '美音' : '英音'} · {task.share?.status === 'active' ? '二维码有效' : '未公开'}</span></div>
-                  <div>
-                    <button type="button" onClick={() => openGrader(task)}>新批改</button>
-                    <button type="button" onClick={() => void downloadVocabularyDictationTaskPdf(task.id, 'dictation')}><Download size={15} />听写纸</button>
-                    <button type="button" onClick={() => void downloadVocabularyDictationTaskPdf(task.id, 'answer')}><FileCheck2 size={15} />答案</button>
-                    {task.share?.status === 'active' && <a href={`${window.location.origin}/vocabulary/dictation/${task.share.shareId}`} target="_blank" rel="noreferrer"><Link2 size={14} />打开听写</a>}
-                    <button type="button" onClick={() => void toggleTaskShare(task)} disabled={busy}>{task.share?.status === 'active' ? '撤销二维码' : <><QrCode size={15} />生成二维码</>}</button>
-                  </div>
-                </article>
-              ))}</div> : <div className="dictation-empty-state"><ClipboardCheck size={28} /><h2>还没有听写任务</h2><p>先到“生词组”勾选并创建二维码或纸笔听写。</p></div>}
+              <header><div><h2>可批改的听写任务</h2><p>同一份公开听写可以记录多次真实听写。</p></div></header>
+              {tasks.length ? <div className="dictation-task-list">{tasks.map((task) => {
+                const publicHref = task.share?.status === 'active'
+                  ? `${window.location.origin}/vocabulary/dictation/${task.share.shareId}`
+                  : null
+                return (
+                  <article key={task.id}>
+                    <div><strong>{task.title}</strong><span>{task.entryCount} 词 · {task.accent === 'american' ? '美音' : '英音'} · {publicHref ? '二维码有效' : '未公开'}</span></div>
+                    <div>
+                      <button type="button" onClick={() => openGrader(task)}>新批改</button>
+                      {publicHref && <a href={publicHref} target="_blank" rel="noreferrer"><Link2 size={14} />打开听写</a>}
+                      <details className="dictation-download-menu">
+                        <summary><Download size={14} />下载资料<ChevronDown size={14} aria-hidden="true" /></summary>
+                        <div>
+                          <button type="button" disabled={busy} onClick={(event) => { event.currentTarget.closest('details')?.removeAttribute('open'); void downloadTaskMaterial(task.id, 'cards') }}><BookOpenCheck size={14} />{publicHref ? '单词卡（含二维码）' : '单词卡'}</button>
+                          <button type="button" disabled={busy} onClick={(event) => { event.currentTarget.closest('details')?.removeAttribute('open'); void downloadTaskMaterial(task.id, 'dictation') }}><Download size={14} />{publicHref ? '复听写纸（含二维码）' : '复听写纸'}</button>
+                          <button type="button" disabled={busy} onClick={(event) => { event.currentTarget.closest('details')?.removeAttribute('open'); void downloadTaskMaterial(task.id, 'answer') }}><FileCheck2 size={14} />教师答案</button>
+                        </div>
+                      </details>
+                      <button type="button" onClick={() => void toggleTaskShare(task)} disabled={busy}>{publicHref ? '撤销二维码' : <><QrCode size={15} />生成二维码</>}</button>
+                    </div>
+                  </article>
+                )
+              })}</div> : <div className="dictation-empty-state"><ClipboardCheck size={28} /><h2>还没有听写任务</h2><p>先到“生词组”勾选并创建二维码或纸笔听写。</p></div>}
             </div>
 
             <div className="dictation-record-list">
@@ -993,18 +1015,14 @@ export function VocabularyDictationWorkbench({
               <aside className="dictation-suggestion-panel">
                 <div><strong>建议复听写 {suggestion.length} 词</strong><span>每个词都有入选理由，确认后才会生成任务。</span></div>
                 <ol>{suggestion.map((entry) => <li key={entry.id}><span>{entry.headword}</span><small>{entry.reason}</small></li>)}</ol>
-                <div><button type="button" onClick={() => void createTaskFromReviewEntries(suggestion)}><QrCode size={15} />确认并生成二维码</button><button type="button" onClick={() => setSuggestion([])}>收起</button></div>
+                <div><button type="button" onClick={() => void createTaskFromReviewEntries(suggestion)}><Sparkles size={15} />生成复听写任务</button><button type="button" onClick={() => setSuggestion([])}>收起</button></div>
               </aside>
             )}
 
             {selectedReviewStates.length > 0 && (
               <div className="dictation-review-actions">
                 <span>已选 {selectedReviewStates.length} 词</span>
-                <button type="button" onClick={() => void printReviewEntries('cards')}>记忆卡</button>
-                <button type="button" onClick={() => void printReviewEntries('correction')}>订正纸</button>
-                <button type="button" onClick={() => void printReviewEntries('dictation')}>复听写纸</button>
-                <button type="button" onClick={() => void printReviewEntries('answer')}>教师答案</button>
-                <button type="button" onClick={() => void createTaskFromReviewEntries(selectedReviewStates)}><QrCode size={15} />二维码任务</button>
+                <button type="button" onClick={() => void createTaskFromReviewEntries(selectedReviewStates)} disabled={busy}><Sparkles size={15} />生成复听写任务</button>
                 <button type="button" onClick={() => void copyEntries(selectedReviewStates)}><Copy size={15} />复制清单</button>
                 <button type="button" onClick={() => setSelectedReviewIds([])}>取消</button>
               </div>
