@@ -101,7 +101,8 @@ export function VocabularyDictationPage({
   const entries = set?.entries ?? []
   const currentEntry = entries[currentIndex] ?? null
   const progress = entries.length ? ((currentIndex + 1) / entries.length) * 100 : 0
-  const sessionKey = `${SESSION_STORAGE_KEY}:${shareId}:${accent}`
+  const effectiveAccent = set?.accent ?? accent
+  const sessionKey = `${SESSION_STORAGE_KEY}:${shareId}:${effectiveAccent}`
 
   const saveSession = useCallback((index: number, completed = false) => {
     window.localStorage.setItem(sessionKey, JSON.stringify({ index, completed }))
@@ -145,7 +146,8 @@ export function VocabularyDictationPage({
         let savedIndex = 0
         let completed = false
         try {
-          const saved = JSON.parse(window.localStorage.getItem(sessionKey) ?? '{}') as { index?: number; completed?: boolean }
+          const nextSessionKey = `${SESSION_STORAGE_KEY}:${shareId}:${nextSet.accent ?? accent}`
+          const saved = JSON.parse(window.localStorage.getItem(nextSessionKey) ?? '{}') as { index?: number; completed?: boolean }
           savedIndex = Math.max(0, Math.min(nextSet.entries.length - 1, Number(saved.index) || 0))
           completed = saved.completed === true
         } catch {}
@@ -164,7 +166,7 @@ export function VocabularyDictationPage({
         else setLoadState('error')
       })
     return () => controller.abort()
-  }, [sessionKey, shareId])
+  }, [accent, shareId])
 
   useEffect(load, [load])
 
@@ -264,7 +266,7 @@ export function VocabularyDictationPage({
     activeAudioResolveRef.current = finish
     audio.addEventListener('ended', onEnded, { once: true })
     audio.addEventListener('error', onError, { once: true })
-    audio.src = getVocabularyAudioPath(entry, accent)
+    audio.src = getVocabularyAudioPath(entry, effectiveAccent)
     audio.currentTime = 0
     audio.volume = volume
     void audio.play().catch(() => {
@@ -274,7 +276,7 @@ export function VocabularyDictationPage({
       releaseWakeLock()
       finish(false)
     })
-  }), [accent, entries, releaseWakeLock, volume])
+  }), [effectiveAccent, entries, releaseWakeLock, volume])
 
   const runFrom = useCallback(async (startIndex: number, withCountdown: boolean) => {
     cancelPending()

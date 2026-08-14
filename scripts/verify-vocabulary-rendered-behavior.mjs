@@ -1058,7 +1058,8 @@ async function verifyDictationPrint(page, count, expectedPages, accent = 'americ
       ))
     )))
     assert.equal(columnCounts.every((counts) => counts.length === 2 && Math.abs(counts[0] - counts[1]) <= 1), true)
-    if (count === 16) assert.deepEqual(columnCounts, [[8, 8]])
+    if (count === 15) assert.deepEqual(columnCounts, [[8, 7]])
+    if (count === 16) assert.deepEqual(columnCounts, [[8, 7], [1, 0]])
     const metaLineWidths = await page.locator('.vocabulary-dictation-print-meta').evaluateAll((metas) => metas.map((meta) => (
       [...meta.querySelectorAll('i')].map((line) => line.getBoundingClientRect().width)
     )))
@@ -1114,7 +1115,7 @@ async function verifyDictationPrint(page, count, expectedPages, accent = 'americ
       copyFileSync(pdfPath, path.join(evidenceRoot, `${kind}-paper-current-${count}-${accent}.pdf`))
     }
   }
-  pass(`${count} 词听写纸与教师答案均为 A4 双栏、每页最多 16 题；学生四线三格为固定毫米尺寸、教师全义、二维码仅在听写纸首页`)
+  pass(`${count} 词听写纸与教师答案均为 A4 双栏、每页最多 15 题；学生四线三格为固定毫米尺寸、教师全义、二维码仅在听写纸首页`)
 }
 
 async function verifyWordSearchPrint(page, count, expectedPuzzlePages) {
@@ -1480,7 +1481,7 @@ async function main() {
 
     const dictationPrintPage = await browser.newPage({ viewport: { width: 1440, height: 1000 } })
     await installApiFixtures(dictationPrintPage)
-    for (const [count, pages, accent] of [[1, 1, 'british'], [15, 1, 'american'], [16, 1, 'american'], [60, 4, 'british']]) {
+    for (const [count, pages, accent] of [[1, 1, 'british'], [15, 1, 'american'], [16, 2, 'american'], [60, 4, 'british']]) {
       await verifyDictationPrint(dictationPrintPage, count, pages, accent)
     }
     await dictationPrintPage.close()

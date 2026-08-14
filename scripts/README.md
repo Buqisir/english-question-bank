@@ -53,6 +53,7 @@ must be confirmed green (AGENTS.md RM gate).
 | --- | --- | --- |
 | `verify-ci.mjs` | Selects changed/Paper/all packs deterministically and reports PASS/SKIP/FAIL without hiding later failures | yes |
 | `verify-vocabulary-closed-loop.mjs` | Validates the 1600-entry Wanwei source/content/unique Koboyo visual, formal American and Owner-approved Cori British audio contracts, plus isolated progress, frozen-set, share/revoke, and temporary-scope persistence | yes |
+| `verify-vocabulary-dictation-review.mjs` | Verifies frozen multi-set dictation tasks, global share isolation, teacher-confirmed result editing/voiding, pending/stubborn/improved derivation, manual flags, suggestions, library search/statistics, and user/student isolation | yes |
 | `vocabulary/build-wanwei-american-phonetics.mjs` | Rebuilds the pinned 1600-entry learner-facing General American IPA overlay without rewriting source-book evidence | no |
 | `vocabulary/build-wanwei-audio-golden-set.mjs` | Builds the fixed 56-word isolated-pronunciation gate from reviewed Wanwei content | no |
 | `vocabulary/generate-qwen-audio.py` | Generates resumable local Qwen3-TTS Base MP3 assets from the approved synthetic British teacher reference, with model/reference hash checks and a manifest receipt | no |

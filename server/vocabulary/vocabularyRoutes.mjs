@@ -1,27 +1,49 @@
 import { defineRoute } from '../router/index.mjs'
 import {
+  createVocabularyPrintJob,
+  deleteVocabularyPrintJob,
+  readVocabularyPrintJob,
+} from './vocabularyPrintJobs.mjs'
+import {
   VocabularyStoreError,
+  buildCombinedVocabularyPrintPayload,
+  buildVocabularyDictationTaskPrintPayload,
+  createVocabularyDictationRecord,
+  createVocabularyDictationTask,
   createVocabularyStudent,
   createVocabularyReviewRun,
   createVocabularySetFromEntries,
   decideVocabularyReviewEntry,
   discardVocabularyReviewRun,
   freezeVocabularySet,
-  getPublicVocabularyDictationShare,
+  getPublicVocabularyDictationResource,
   getCurrentVocabularyReviewRun,
   getPublicVocabularyShare,
+  getStudentVocabularyReviewStates,
+  getSuggestedVocabularyReview,
+  getVocabularyDictationRecord,
+  getVocabularyDictationTask,
   getVocabularyProgram,
   getVocabularyProgress,
   getVocabularyReviewRun,
   getVocabularySet,
   getVocabularySetForReviewRun,
+  listVocabularyDictationRecords,
+  listVocabularyDictationTasks,
+  listVocabularySetLibrary,
   listVocabularyStudents,
   listVocabularySets,
   renameVocabularySet,
+  restoreVocabularyDictationRecord,
+  revokeVocabularyDictationTaskShare,
   revokeVocabularyShare,
   setVocabularyProgressStart,
+  shareVocabularyDictationTask,
   shareVocabularySet,
   undoVocabularyReviewDecision,
+  updateStudentVocabularyWordFlag,
+  updateVocabularyDictationRecord,
+  voidVocabularyDictationRecord,
 } from './vocabularyStore.mjs'
 
 function decodePathPart(raw) {
@@ -36,6 +58,10 @@ function readQueryPart(request, name) {
   const value = new URL(request.url ?? '/', 'http://localhost').searchParams.get(name)
   if (!value) throw new VocabularyStoreError(`${name}不能为空。`)
   return value
+}
+
+function readQuery(request) {
+  return new URL(request.url ?? '/', 'http://localhost').searchParams
 }
 
 function sendVocabularyError(response, context, error) {
@@ -100,7 +126,15 @@ function vocabularyPdfFileName(title, entryCount, accent, kind = 'cards') {
     return `${exportTitle}-听写纸-${entryCount}词-${accent === 'american' ? '美式' : '英式'}.pdf`
   }
   if (kind === 'word-search') return `${exportTitle}-圈词与拼写-${entryCount}词.pdf`
+  if (kind === 'correction') return `${exportTitle}-订正纸-${entryCount}词.pdf`
   return `${safeTitle}${countSuffix}-${accent === 'american' ? '美式' : '英式'}.pdf`
+}
+
+function expectedVocabularyPrintPages(entryCount, kind) {
+  if (kind === 'word-search') return Math.ceil(entryCount / 10) * 2
+  if (kind === 'cards') return Math.ceil(entryCount / 6)
+  if (kind === 'correction') return Math.ceil(entryCount / 8)
+  return Math.ceil(entryCount / 15)
 }
 
 export function createVocabularyRoutes() {
@@ -249,6 +283,296 @@ export function createVocabularyRoutes() {
       }
     }),
 
+    defineRoute('GET', /^\/api\/vocabulary\/set-library$/, ({ request, response, context }) => {
+      const userId = context.resolveDataUserId(context)
+      const query = readQuery(request)
+      try {
+        const library = withUserDb(context, false, (db) => listVocabularySetLibrary(db, userId, {
+          studentId: query.get('studentId'),
+          programId: query.get('programId') ?? 'wanwei-round-one-v1',
+          page: query.get('page'),
+          pageSize: query.get('pageSize'),
+          query: query.get('query'),
+          from: query.get('from'),
+          to: query.get('to'),
+        }))
+        context.sendJson(response, 200, { library })
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      }
+    }),
+
+    defineRoute('GET', /^\/api\/vocabulary\/print-jobs\/([^/]+)$/, ({ response, match, context }) => {
+      const userId = context.resolveDataUserId(context)
+      const printJob = readVocabularyPrintJob(userId, decodePathPart(match[1]))
+      if (!printJob) {
+        context.sendJson(response, 404, { error: 'vocabulary_print_job_not_found', message: '打印请求已过期，请重新生成。' })
+        return
+      }
+      context.sendJson(response, 200, { printJob })
+    }),
+
+    defineRoute('POST', /^\/api\/vocabulary\/combined-pdf$/, async ({ request, response, context }) => {
+      const userId = context.resolveDataUserId(context)
+      const input = await context.readJsonBody(request, { maxBytes: 100_000 })
+      const accent = input.accent
+      const kind = input.kind
+      if (accent !== 'american' && accent !== 'british') {
+        context.sendJson(response, 400, { error: 'invalid_vocabulary_accent', message: '合并打印必须选择英式或美式。' })
+        return
+      }
+      if (!['cards', 'dictation', 'answer', 'word-search', 'correction'].includes(kind)) {
+        context.sendJson(response, 400, { error: 'invalid_vocabulary_pdf_kind', message: '下载类型无效。' })
+        return
+      }
+      let printJobId = null
+      try {
+        const payload = withUserDb(context, false, (db) => buildCombinedVocabularyPrintPayload(db, userId, input))
+        printJobId = createVocabularyPrintJob(userId, { ...payload, accent, kind })
+        const result = await context.renderVocabularySetPdf({
+          cookie: request.headers.cookie ?? '',
+          printJobId,
+          accent,
+          kind,
+          expectedPageCount: input.mode === 'grouped'
+            ? undefined
+            : expectedVocabularyPrintPages(payload.vocabularySet.entryCount, kind),
+          expectedQrCount: 0,
+        })
+        sendVocabularyPdf(
+          response,
+          result.pdfBytes,
+          vocabularyPdfFileName(payload.vocabularySet.title, payload.vocabularySet.entryCount, accent, kind),
+        )
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      } finally {
+        if (printJobId) deleteVocabularyPrintJob(printJobId)
+      }
+    }),
+
+    defineRoute('GET', /^\/api\/vocabulary\/dictation-tasks$/, ({ request, response, context }) => {
+      const userId = context.resolveDataUserId(context)
+      const query = readQuery(request)
+      try {
+        const tasks = withUserDb(context, false, (db) => listVocabularyDictationTasks(
+          db,
+          userId,
+          readQueryPart(request, 'studentId'),
+          { limit: query.get('limit') },
+        ))
+        context.sendJson(response, 200, { tasks })
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      }
+    }),
+
+    defineRoute('POST', /^\/api\/vocabulary\/dictation-tasks$/, async ({ request, response, context }) => {
+      const userId = context.resolveDataUserId(context)
+      const input = await context.readJsonBody(request, { maxBytes: 80_000 })
+      try {
+        const task = withVocabularyDbs(context, (dbs) => createVocabularyDictationTask(dbs, userId, input))
+        context.sendJson(response, 201, { task })
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      }
+    }),
+
+    defineRoute('GET', /^\/api\/vocabulary\/dictation-tasks\/([^/]+)$/, ({ response, match, context }) => {
+      const userId = context.resolveDataUserId(context)
+      try {
+        const task = withUserDb(context, false, (db) => getVocabularyDictationTask(db, userId, decodePathPart(match[1])))
+        context.sendJson(response, 200, { task })
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      }
+    }),
+
+    defineRoute('POST', /^\/api\/vocabulary\/dictation-tasks\/([^/]+)\/pdf$/, async ({ request, response, match, context }) => {
+      const userId = context.resolveDataUserId(context)
+      const kind = readQuery(request).get('kind') ?? 'dictation'
+      if (!['cards', 'dictation', 'answer', 'word-search'].includes(kind)) {
+        context.sendJson(response, 400, { error: 'invalid_vocabulary_pdf_kind', message: '下载类型无效。' })
+        return
+      }
+      let printJobId = null
+      try {
+        const payload = withUserDb(context, false, (db) => buildVocabularyDictationTaskPrintPayload(
+          db,
+          userId,
+          decodePathPart(match[1]),
+        ))
+        printJobId = createVocabularyPrintJob(userId, { ...payload, kind })
+        const hasQr = payload.vocabularySet.share?.status === 'active' && ['cards', 'dictation'].includes(kind)
+        const result = await context.renderVocabularySetPdf({
+          cookie: request.headers.cookie ?? '',
+          printJobId,
+          accent: payload.accent,
+          kind,
+          expectedPageCount: expectedVocabularyPrintPages(payload.vocabularySet.entryCount, kind),
+          expectedQrCount: hasQr ? 1 : 0,
+        })
+        sendVocabularyPdf(
+          response,
+          result.pdfBytes,
+          vocabularyPdfFileName(payload.vocabularySet.title, payload.vocabularySet.entryCount, payload.accent, kind),
+        )
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      } finally {
+        if (printJobId) deleteVocabularyPrintJob(printJobId)
+      }
+    }),
+
+    defineRoute('POST', /^\/api\/vocabulary\/dictation-tasks\/([^/]+)\/share$/, ({ response, match, context }) => {
+      const userId = context.resolveDataUserId(context)
+      try {
+        const share = withUserDb(context, false, (db) => shareVocabularyDictationTask(db, userId, decodePathPart(match[1])))
+        context.sendJson(response, 200, { share })
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      }
+    }),
+
+    defineRoute('DELETE', /^\/api\/vocabulary\/dictation-tasks\/([^/]+)\/share$/, ({ response, match, context }) => {
+      const userId = context.resolveDataUserId(context)
+      try {
+        const share = withUserDb(context, false, (db) => revokeVocabularyDictationTaskShare(db, userId, decodePathPart(match[1])))
+        context.sendJson(response, 200, { share })
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      }
+    }),
+
+    defineRoute('POST', /^\/api\/vocabulary\/dictation-tasks\/([^/]+)\/records$/, async ({ request, response, match, context }) => {
+      const userId = context.resolveDataUserId(context)
+      const input = await context.readJsonBody(request, { maxBytes: 100_000 })
+      try {
+        const record = withUserDb(context, false, (db) => createVocabularyDictationRecord(
+          db,
+          userId,
+          decodePathPart(match[1]),
+          input,
+        ))
+        context.sendJson(response, 201, { record })
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      }
+    }),
+
+    defineRoute('GET', /^\/api\/vocabulary\/dictation-records$/, ({ request, response, context }) => {
+      const userId = context.resolveDataUserId(context)
+      const query = readQuery(request)
+      try {
+        const records = withUserDb(context, false, (db) => listVocabularyDictationRecords(
+          db,
+          userId,
+          readQueryPart(request, 'studentId'),
+          { limit: query.get('limit') },
+        ))
+        context.sendJson(response, 200, { records })
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      }
+    }),
+
+    defineRoute('GET', /^\/api\/vocabulary\/dictation-records\/([^/]+)$/, ({ response, match, context }) => {
+      const userId = context.resolveDataUserId(context)
+      try {
+        const record = withUserDb(context, false, (db) => getVocabularyDictationRecord(db, userId, decodePathPart(match[1])))
+        context.sendJson(response, 200, { record })
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      }
+    }),
+
+    defineRoute('PATCH', /^\/api\/vocabulary\/dictation-records\/([^/]+)$/, async ({ request, response, match, context }) => {
+      const userId = context.resolveDataUserId(context)
+      const input = await context.readJsonBody(request, { maxBytes: 100_000 })
+      try {
+        const record = withUserDb(context, false, (db) => updateVocabularyDictationRecord(
+          db,
+          userId,
+          decodePathPart(match[1]),
+          input,
+        ))
+        context.sendJson(response, 200, { record })
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      }
+    }),
+
+    defineRoute('POST', /^\/api\/vocabulary\/dictation-records\/([^/]+)\/void$/, ({ response, match, context }) => {
+      const userId = context.resolveDataUserId(context)
+      try {
+        const record = withUserDb(context, false, (db) => voidVocabularyDictationRecord(db, userId, decodePathPart(match[1])))
+        context.sendJson(response, 200, { record })
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      }
+    }),
+
+    defineRoute('POST', /^\/api\/vocabulary\/dictation-records\/([^/]+)\/restore$/, ({ response, match, context }) => {
+      const userId = context.resolveDataUserId(context)
+      try {
+        const record = withUserDb(context, false, (db) => restoreVocabularyDictationRecord(db, userId, decodePathPart(match[1])))
+        context.sendJson(response, 200, { record })
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      }
+    }),
+
+    defineRoute('GET', /^\/api\/vocabulary\/review-states$/, ({ request, response, context }) => {
+      const userId = context.resolveDataUserId(context)
+      const query = readQuery(request)
+      try {
+        const states = withUserDb(context, false, (db) => getStudentVocabularyReviewStates(
+          db,
+          userId,
+          readQueryPart(request, 'studentId'),
+          query.get('programId') ?? 'wanwei-round-one-v1',
+        ))
+        context.sendJson(response, 200, { states })
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      }
+    }),
+
+    defineRoute('GET', /^\/api\/vocabulary\/review-suggestion$/, ({ request, response, context }) => {
+      const userId = context.resolveDataUserId(context)
+      const query = readQuery(request)
+      try {
+        const entries = withUserDb(context, false, (db) => getSuggestedVocabularyReview(
+          db,
+          userId,
+          readQueryPart(request, 'studentId'),
+          query.get('programId') ?? 'wanwei-round-one-v1',
+          query.get('target'),
+        ))
+        context.sendJson(response, 200, { entries })
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      }
+    }),
+
+    defineRoute('PATCH', /^\/api\/vocabulary\/review-states\/([^/]+)\/flag$/, async ({ request, response, match, context }) => {
+      const userId = context.resolveDataUserId(context)
+      const input = await context.readJsonBody(request, { maxBytes: 10_000 })
+      try {
+        const flag = withUserDb(context, false, (db) => updateStudentVocabularyWordFlag(
+          db,
+          userId,
+          input.studentId,
+          input.programId ?? 'wanwei-round-one-v1',
+          decodePathPart(match[1]),
+          input,
+        ))
+        context.sendJson(response, 200, { flag })
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      }
+    }),
+
     defineRoute('GET', /^\/api\/vocabulary\/sets$/, ({ request, response, context }) => {
       const userId = context.resolveDataUserId(context)
       try {
@@ -370,7 +694,7 @@ export function createVocabularyRoutes() {
     }),
 
     defineRoute('GET', /^\/api\/public\/vocabulary\/dictation\/([^/]+)$/, ({ response, match, context }) => {
-      const result = withUserDb(context, true, (db) => getPublicVocabularyDictationShare(db, decodePathPart(match[1])))
+      const result = withUserDb(context, true, (db) => getPublicVocabularyDictationResource(db, decodePathPart(match[1])))
       if (result.status === 'not_found') {
         context.sendJson(response, 404, { error: 'vocabulary_share_not_found' })
         return

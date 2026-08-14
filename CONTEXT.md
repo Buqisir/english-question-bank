@@ -235,6 +235,18 @@ _Avoid_: live vocabulary entry, cache, review decision
 A revocable public capability that exposes exactly one frozen Vocabulary Set for read-only listening through an unguessable identifier. It does not expose the owning teacher, Review Run, progress, or any other Vocabulary Set.
 _Avoid_: user account, live review link, public vocabulary program
 
+**Vocabulary Dictation Task** (听写任务):
+A frozen, ordered snapshot of 1–60 Vocabulary Entries for one student's real dictation. It may combine multiple Vocabulary Sets, retains every source-set relationship, freezes one playback accent, and may have its own revocable public share. It is reusable across multiple Dictation Records and never mutates its source Vocabulary Sets.
+_Avoid_: vocabulary set, mutable review queue, dictation result
+
+**Vocabulary Dictation Record** (听写记录):
+One teacher-confirmed attempt against one Vocabulary Dictation Task, dated and recorded as draft, completed, or void. Each task entry is `correct`, `wrong`, or `untested`; only completed, non-void, tested results affect review state.
+_Avoid_: student-side automatic score, review decision, deleting history
+
+**Student Vocabulary Review State** (学生词条复习状态):
+The current per-student, per-program projection derived from effective Vocabulary Dictation Records: pending retest, stubborn error, or improved. Teacher `pinned` and `paused` flags adjust recommendation and visibility without rewriting history.
+_Avoid_: field on Vocabulary Set, permanent mastery label, manually edited score
+
 ## Relationships
 
 - A trusted adapter derives one **Import Candidate** and its deterministic issues from one **Source Capture**; callers do not author the candidate's semantics.
@@ -272,6 +284,8 @@ _Avoid_: user account, live review link, public vocabulary program
 - Completing a Vocabulary Review Run's collection target may freeze its unfamiliar entries into one ordered **Vocabulary Set**.
 - A **Vocabulary Set** owns ordered **Vocabulary Set Entry Snapshots** rather than a live filter over its source Vocabulary Program.
 - A **Vocabulary Share** grants read-only public access to exactly one Vocabulary Set and may be revoked without deleting that Set.
+- A **Vocabulary Dictation Task** freezes entries from one or more Vocabulary Sets (or a teacher-confirmed review selection) without modifying those Sets; one task may own many **Vocabulary Dictation Records**.
+- **Student Vocabulary Review State** is derived only from completed, non-void, tested results plus orthogonal teacher flags; it is never written back into a Vocabulary Set snapshot.
 
 ## Example Dialogue
 

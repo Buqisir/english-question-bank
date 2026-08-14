@@ -64,6 +64,7 @@ export type PublicVocabularyDictationEntry = Pick<
 
 export type PublicVocabularyDictationSet = {
   title: string
+  accent?: 'american' | 'british'
   entryCount: number
   entries: PublicVocabularyDictationEntry[]
   createdAt: string
