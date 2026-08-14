@@ -169,9 +169,16 @@ function loadAcceptedSourceInventory(repoRoot) {
       for (const relativePath of relativePaths) {
         const sourcePath = path.join(paperRoot, relativePath)
         const bytes = readFileSync(sourcePath)
+        const targetRelativePath = /^versions[/\\]v\d+[/\\]paper-asset\.json$/u.test(relativePath)
+          ? path.join(
+              path.dirname(relativePath),
+              'canonical',
+              'source-asset.bin',
+            )
+          : relativePath
         assets.push({
           paperId,
-          relativePath,
+          relativePath: targetRelativePath,
           sourcePath,
           sha256: sha256Bytes(bytes),
           byteLength: bytes.byteLength,

@@ -3,6 +3,8 @@ import { createHash } from 'node:crypto'
 import {
   copyFileSync,
   cpSync,
+  existsSync,
+  mkdirSync,
   mkdtempSync,
   readFileSync,
   rmSync,
@@ -36,6 +38,16 @@ try {
     'paper-asset.json',
   )
   const sentinelDigest = sha256(sentinelPath)
+  const existingVersionAssetPath = path.join(
+    targetAssetsRoot,
+    'paper-2026-i',
+    'versions',
+    'v1',
+    'paper-asset.json',
+  )
+  mkdirSync(path.dirname(existingVersionAssetPath), { recursive: true })
+  copyFileSync(sentinelPath, existingVersionAssetPath)
+  const existingVersionAssetDigest = sha256(existingVersionAssetPath)
 
   const dbBefore = new DatabaseSync(targetDbPath, { readOnly: true })
   const bankCountsBefore = dbBefore.prepare(`
@@ -117,6 +129,22 @@ try {
     { rows: 36, currentRows: 33, papers: 33 },
   )
   assert.equal(sha256(sentinelPath), sentinelDigest, 'existing latest paper asset must stay byte-identical')
+  assert.equal(
+    sha256(existingVersionAssetPath),
+    existingVersionAssetDigest,
+    'existing versioned paper asset must stay byte-identical',
+  )
+  assert.ok(
+    existsSync(path.join(
+      targetAssetsRoot,
+      'paper-2026-i',
+      'versions',
+      'v1',
+      'canonical',
+      'source-asset.bin',
+    )),
+    'Canonical source bytes use the dedicated source-asset path instead of overwriting the imported version asset',
+  )
 
   console.log('PASS: production Canonical publication backfill restores 33/33 Screen and Print/PDF consumption without changing bank content')
 } finally {
