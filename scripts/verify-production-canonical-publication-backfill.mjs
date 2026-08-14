@@ -25,8 +25,63 @@ function sha256(filePath) {
   return createHash('sha256').update(readFileSync(filePath)).digest('hex')
 }
 
+function createProductionShapedBankFixture() {
+  const db = new DatabaseSync(targetDbPath)
+  try {
+    db.exec(`
+      CREATE TABLE sources (
+        id TEXT PRIMARY KEY,
+        source_type TEXT NOT NULL,
+        year INTEGER,
+        region TEXT NOT NULL DEFAULT '',
+        paper_name TEXT NOT NULL DEFAULT ''
+      );
+      CREATE TABLE passages (
+        id TEXT PRIMARY KEY,
+        source_id TEXT NOT NULL,
+        discourse_type TEXT,
+        word_count INTEGER
+      );
+      CREATE TABLE question_groups (
+        id TEXT PRIMARY KEY,
+        passage_id TEXT NOT NULL,
+        group_type TEXT NOT NULL,
+        title TEXT NOT NULL DEFAULT '',
+        display_order INTEGER NOT NULL DEFAULT 0
+      );
+      CREATE TABLE questions (
+        id TEXT PRIMARY KEY,
+        group_id TEXT NOT NULL
+      );
+
+      INSERT INTO sources (
+        id, source_type, year, region, paper_name
+      ) VALUES (
+        'source-sentinel', 'fixture', 2026, 'CI', 'Backfill sentinel'
+      );
+      INSERT INTO passages (
+        id, source_id, discourse_type, word_count
+      ) VALUES (
+        'passage-sentinel', 'source-sentinel', 'narrative', 1
+      );
+      INSERT INTO question_groups (
+        id, passage_id, group_type, title, display_order
+      ) VALUES (
+        'group-sentinel', 'passage-sentinel', 'reading', 'Sentinel', 1
+      );
+      INSERT INTO questions (
+        id, group_id
+      ) VALUES (
+        'question-sentinel', 'group-sentinel'
+      );
+    `)
+  } finally {
+    db.close()
+  }
+}
+
 try {
-  copyFileSync(path.join(repoRoot, 'data/question-bank.sqlite'), targetDbPath)
+  createProductionShapedBankFixture()
   cpSync(path.join(repoRoot, 'app/public/paper-assets'), targetAssetsRoot, {
     recursive: true,
   })
