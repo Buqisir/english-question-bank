@@ -663,7 +663,7 @@ assert.equal(getPublicVocabularyShare(userDb, share.shareId).status, 'revoked')
 assert.equal(getPublicVocabularyDictationShare(userDb, share.shareId).status, 'revoked')
 const reshared = shareVocabularySet(userDb, 'teacher-a', vocabularySet.id)
 assert.notEqual(reshared.shareId, share.shareId)
-assert.equal(getPublicVocabularyShare(userDb, share.shareId).status, 'not_found')
+assert.equal(getPublicVocabularyShare(userDb, share.shareId).status, 'revoked')
 assert.equal(getPublicVocabularyShare(userDb, reshared.shareId).status, 'active')
 assert.equal(getPublicVocabularyDictationShare(userDb, reshared.shareId).status, 'active')
 
