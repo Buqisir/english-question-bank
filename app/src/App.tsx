@@ -29,6 +29,7 @@ import { MySpacePage } from './features/my-space/MySpacePage'
 import { AdminWorkbench } from './features/admin/AdminWorkbench'
 import { VocabularyReviewPage } from './features/vocabulary-review/VocabularyReviewPage'
 import { VocabularyPracticePage } from './features/vocabulary-practice/VocabularyPracticePage'
+import { VocabularyDictationWorkbench } from './features/vocabulary-dictation-workbench/VocabularyDictationWorkbench'
 import { AppTopbar, type AppTopbarNav } from './components/AppTopbar'
 import { addGroupToCurrentDraftPaper as addGroupToCurrentDraftPaperRequest } from './services/draftPapers'
 import { useCurrentUser, useIsOwnerView } from './auth/AuthGate.tsx'
@@ -85,6 +86,10 @@ function App() {
   const [vocabularyReviewRouteActive, setVocabularyReviewRouteActive] = useState(() => {
     if (typeof window === 'undefined') return false
     return new URLSearchParams(window.location.search).get('view') === 'vocabulary-review'
+  })
+  const [vocabularyDictationRouteActive, setVocabularyDictationRouteActive] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return new URLSearchParams(window.location.search).get('view') === 'vocabulary-dictation-workbench'
   })
   const [vocabularyReviewSetId, setVocabularyReviewSetId] = useState(() => {
     if (typeof window === 'undefined') return null as string | null
@@ -644,6 +649,7 @@ function App() {
       setAdminRouteActive(isOwnerView && view === 'admin')
       setMySpaceRouteActive(view === 'my-space')
       setVocabularyReviewRouteActive(view === 'vocabulary-review')
+      setVocabularyDictationRouteActive(view === 'vocabulary-dictation-workbench')
       setVocabularyReviewSetId(view === 'vocabulary-review' ? params.get('setId') : null)
       setVocabularyPracticeRoute({
         active: view === 'vocabulary-practice',
@@ -730,6 +736,7 @@ function App() {
     setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
     setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, lecture: false, similar: false })
     setVocabularyReviewRouteActive(false)
+    setVocabularyDictationRouteActive(false)
     setVocabularyPracticeRoute({ active: false, setId: null })
     setMySpaceRouteActive(true)
   }, [])
@@ -751,7 +758,37 @@ function App() {
     setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
     setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, lecture: false, similar: false })
     setVocabularyPracticeRoute({ active: false, setId: null })
+    setVocabularyDictationRouteActive(false)
     setVocabularyReviewSetId(null)
+    setVocabularyReviewRouteActive(true)
+  }, [])
+
+  const openVocabularyDictationWorkbench = useCallback(() => {
+    if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
+      const url = new URL(window.location.href)
+      url.searchParams.set('view', 'vocabulary-dictation-workbench')
+      for (const param of ['setId', 'mode', 'draftPaperId', 'paperId', 'focusGroupId', 'groupId', 'questionId', 'lecture', 'similar']) {
+        url.searchParams.delete(param)
+      }
+      window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
+    }
+    setAdminRouteActive(false)
+    setMySpaceRouteActive(false)
+    setBrowseRouteActive(false)
+    setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
+    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, lecture: false, similar: false })
+    setVocabularyPracticeRoute({ active: false, setId: null })
+    setVocabularyReviewRouteActive(false)
+    setVocabularyDictationRouteActive(true)
+  }, [])
+
+  const vocabularyDictationOnBackToReview = useCallback(() => {
+    if (typeof window !== 'undefined' && window.history?.replaceState) {
+      const url = new URL(window.location.href)
+      url.searchParams.set('view', 'vocabulary-review')
+      window.history.replaceState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
+    }
+    setVocabularyDictationRouteActive(false)
     setVocabularyReviewRouteActive(true)
   }, [])
 
@@ -886,9 +923,19 @@ function App() {
       <VocabularyReviewPage
         onBackToWorkbench={vocabularyReviewOnBackToWorkbench}
         onOpenVocabularyPractice={openVocabularyPractice}
+        onOpenVocabularyDictationWorkbench={openVocabularyDictationWorkbench}
         onVocabularySetRouteChange={setVocabularyReviewSetId}
         requestedSetId={vocabularyReviewSetId}
         shellNav={{ ...shellNav, onOpenVocabularyReview: undefined }}
+      />
+    )
+  }
+
+  if (vocabularyDictationRouteActive) {
+    return (
+      <VocabularyDictationWorkbench
+        onBackToVocabulary={vocabularyDictationOnBackToReview}
+        shellNav={{ ...shellNav, onOpenVocabularyReview: vocabularyDictationOnBackToReview }}
       />
     )
   }

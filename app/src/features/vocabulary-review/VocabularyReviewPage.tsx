@@ -2,6 +2,7 @@ import {
   ArrowLeft,
   BookMarked,
   Check,
+  ClipboardCheck,
   Copy,
   Download,
   Eye,
@@ -34,6 +35,7 @@ import {
   freezeVocabularyReviewRun,
   getVocabularyProgram as fetchVocabularyProgram,
   getVocabularyProgress,
+  getVocabularyPrintJob,
   getCurrentVocabularyReviewRun,
   getVocabularySet,
   getVocabularyReviewRun,
@@ -47,6 +49,7 @@ import {
   VocabularyApiError,
   type VocabularyReviewRunDto,
   type VocabularySetDto,
+  type VocabularyPrintJobDto,
   type VocabularyStudentDto,
 } from '../../services/vocabulary'
 import { calibrationVocabularyProgram } from './calibrationVocabularyProgram'
@@ -67,23 +70,26 @@ const ACTIVE_STUDENT_STORAGE_KEY = 'eqb-vocabulary-active-student-wanwei-round-o
 const PAUSED_RUN_STORAGE_KEY = 'eqb-vocabulary-review-paused-wanwei-round-one-v1'
 const TARGET_UNFAMILIAR_COUNT = 15
 const CARD_PRINT_ENTRIES_PER_PAGE = 6
-const DICTATION_PRINT_ENTRIES_PER_PAGE = 16
+const DICTATION_PRINT_ENTRIES_PER_PAGE = 15
 const WORD_SEARCH_PRINT_ENTRIES_PER_PAGE = 16
 const PUBLIC_LISTEN_ORIGIN = 'https://eqbank.cc'
 
 type VocabularyReviewPageProps = {
   onBackToWorkbench: () => void
   onOpenVocabularyPractice: (setId: string) => void
+  onOpenVocabularyDictationWorkbench: () => void
   onVocabularySetRouteChange: (setId: string | null) => void
   requestedSetId?: string | null
   shellNav: AppTopbarNav
 }
 
 type VocabularyAccent = VocabularyAudioAccent
-type VocabularyPrintKind = 'cards' | 'dictation' | 'answer' | 'word-search'
+type VocabularyPrintKind = 'cards' | 'dictation' | 'answer' | 'word-search' | 'correction'
+type VocabularySetPrintKind = Exclude<VocabularyPrintKind, 'correction'>
 
 type VocabularyPrintRequest = {
-  setId: string
+  setId: string | null
+  printJobId: string | null
   accent: VocabularyAccent
   kind: VocabularyPrintKind
 }
@@ -91,9 +97,11 @@ type VocabularyPrintRequest = {
 function readVocabularyPrintRequest(): VocabularyPrintRequest | null {
   const params = new URLSearchParams(window.location.search)
   const setId = params.get('vocabularyPrintSetId')?.trim()
-  if (!setId) return null
+  const printJobId = params.get('vocabularyPrintJobId')?.trim()
+  if (!setId && !printJobId) return null
   return {
-    setId,
+    setId: setId || null,
+    printJobId: printJobId || null,
     accent: params.get('printAccent') === 'british' ? 'british' : 'american',
     kind: params.get('vocabularyPrintMode') === 'dictation'
       ? 'dictation'
@@ -101,6 +109,8 @@ function readVocabularyPrintRequest(): VocabularyPrintRequest | null {
         ? 'answer'
         : params.get('vocabularyPrintMode') === 'word-search'
           ? 'word-search'
+          : params.get('vocabularyPrintMode') === 'correction'
+            ? 'correction'
           : 'cards',
   }
 }
@@ -270,11 +280,24 @@ function VocabularyExample({
   )
 }
 
-function paginateVocabularyEntries(entries: VocabularyEntry[], entriesPerPage: number): VocabularyEntry[][] {
-  const pages: VocabularyEntry[][] = []
-  for (let index = 0; index < entries.length; index += entriesPerPage) {
-    pages.push(entries.slice(index, index + entriesPerPage))
-  }
+function paginateVocabularyEntries(
+  entries: VocabularyEntry[],
+  entriesPerPage: number,
+  sections: Array<{ startIndex: number; title: string }> = [],
+): Array<{ entries: VocabularyEntry[]; title: string; startIndex: number }> {
+  const normalizedSections = sections.length ? sections : [{ startIndex: 0, title: '' }]
+  const pages: Array<{ entries: VocabularyEntry[]; title: string; startIndex: number }> = []
+  normalizedSections.forEach((section, sectionIndex) => {
+    const endIndex = normalizedSections[sectionIndex + 1]?.startIndex ?? entries.length
+    const sectionEntries = entries.slice(section.startIndex, endIndex)
+    for (let index = 0; index < sectionEntries.length; index += entriesPerPage) {
+      pages.push({
+        entries: sectionEntries.slice(index, index + entriesPerPage),
+        title: section.title,
+        startIndex: section.startIndex + index,
+      })
+    }
+  })
   return pages
 }
 
@@ -367,6 +390,9 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   const [shareCopyStatus, setShareCopyStatus] = useState<'idle' | 'copied' | 'error'>('idle')
   const [printAccent, setPrintAccent] = useState<VocabularyAccent>(printRequest?.accent ?? 'american')
   const [printLoadState, setPrintLoadState] = useState<'idle' | 'loading' | 'ready' | 'error'>(printRequest ? 'loading' : 'idle')
+  const [printSections, setPrintSections] = useState<Array<{ startIndex: number; title: string }>>([])
+  const [printCorrectionByEntryId, setPrintCorrectionByEntryId] = useState<VocabularyPrintJobDto['correctionByEntryId']>({})
+  const [printShareKind, setPrintShareKind] = useState<'set' | 'dictation' | null>(null)
   const [pdfDownloadBusy, setPdfDownloadBusy] = useState(false)
   const [downloadMenuOpen, setDownloadMenuOpen] = useState(false)
   const [pendingShareDownload, setPendingShareDownload] = useState<'cards' | 'dictation' | null>(null)
@@ -410,17 +436,31 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
       printEntries,
       printRequest?.kind === 'word-search'
         ? WORD_SEARCH_PRINT_ENTRIES_PER_PAGE
+        : printRequest?.kind === 'correction'
+          ? 8
         : printRequest?.kind === 'dictation' || printRequest?.kind === 'answer'
         ? DICTATION_PRINT_ENTRIES_PER_PAGE
         : CARD_PRINT_ENTRIES_PER_PAGE,
+      printSections,
     ),
-    [printEntries, printRequest?.kind],
+    [printEntries, printRequest?.kind, printSections],
   )
   const wordSearchPages = useMemo(
-    () => printRequest?.kind === 'word-search' && printRequest.setId && printEntries.length
-      ? buildVocabularyWordSearchPages(printRequest.setId, printEntries, program.entries)
-      : [],
-    [printEntries, printRequest, program.entries],
+    () => {
+      if (printRequest?.kind !== 'word-search' || !printEntries.length) return []
+      const seed = printRequest.setId ?? printRequest.printJobId ?? 'vocabulary-print'
+      if (!printSections.length) return buildVocabularyWordSearchPages(seed, printEntries, program.entries)
+      const pages = printSections.flatMap((section, sectionIndex) => {
+        const endIndex = printSections[sectionIndex + 1]?.startIndex ?? printEntries.length
+        return buildVocabularyWordSearchPages(
+          `${seed}:${sectionIndex}`,
+          printEntries.slice(section.startIndex, endIndex),
+          program.entries,
+        )
+      })
+      return pages.map((page, pageIndex) => ({ ...page, pageIndex }))
+    },
+    [printEntries, printRequest, printSections, program.entries],
   )
   const directInputResult = useMemo(
     () => filterVocabularyInput(directVocabularyInput, program.entries),
@@ -504,15 +544,25 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
     if (printRequest) {
       setStudentsState('ready')
       setRunState('setup')
-      getVocabularySet(printRequest.setId)
-        .then((nextSet) => {
-          if (vocabularyPrintRequiresShare(printRequest.kind) && nextSet.share?.status !== 'active') {
-            throw new Error('请先生成扫码听写，再下载带二维码的单词纸。')
-          }
-          setVocabularySet(nextSet)
-          setShareId(nextSet.share?.status === 'active' ? nextSet.share.shareId : null)
-          setPrintLoadState('ready')
-        })
+      const loadPrint = printRequest.printJobId
+        ? getVocabularyPrintJob(printRequest.printJobId).then((printJob) => {
+            setVocabularySet(printJob.vocabularySet)
+            setShareId(printJob.vocabularySet.share?.status === 'active' ? printJob.vocabularySet.share.shareId : null)
+            setPrintSections(printJob.sections)
+            setPrintCorrectionByEntryId(printJob.correctionByEntryId)
+            setPrintShareKind(printJob.shareKind)
+            setPrintAccent(printJob.accent)
+          })
+        : getVocabularySet(printRequest.setId!).then((nextSet) => {
+            if (vocabularyPrintRequiresShare(printRequest.kind) && nextSet.share?.status !== 'active') {
+              throw new Error('请先生成扫码听写，再下载带二维码的单词纸。')
+            }
+            setVocabularySet(nextSet)
+            setShareId(nextSet.share?.status === 'active' ? nextSet.share.shareId : null)
+            setPrintShareKind('set')
+          })
+      loadPrint
+        .then(() => setPrintLoadState('ready'))
         .catch((error: unknown) => {
           setPrintLoadState('error')
           setRequestError(error instanceof Error ? error.message : '单词纸内容加载失败。')
@@ -982,7 +1032,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
     shareCopyTimerRef.current = window.setTimeout(() => setShareCopyStatus('idle'), 1800)
   }
 
-  async function downloadVocabularySheet(kind: VocabularyPrintKind = 'cards', options: { shareConfirmed?: boolean } = {}) {
+  async function downloadVocabularySheet(kind: VocabularySetPrintKind = 'cards', options: { shareConfirmed?: boolean } = {}) {
     if (!vocabularySet || pdfDownloadBusy) return
     if (vocabularyPrintRequiresShare(kind) && !shareId && !options.shareConfirmed) {
       setDownloadMenuOpen(false)
@@ -1089,7 +1139,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
       {downloadMenuOpen && (
         <div id="vocabulary-download-options" role="group" aria-label="选择下载内容">
           <button type="button" onClick={() => void downloadVocabularySheet('cards')}>单词纸<span>带图片、音节和例句</span></button>
-          <button type="button" onClick={() => void downloadVocabularySheet('dictation')}>听写纸<span>16题一页，扫码自动听写</span></button>
+          <button type="button" onClick={() => void downloadVocabularySheet('dictation')}>听写纸<span>15题一页，扫码自动听写</span></button>
           <button type="button" onClick={() => void downloadVocabularySheet('answer')}>教师答案<span>与听写纸逐题对应</span></button>
           <button type="button" onClick={() => void downloadVocabularySheet('word-search')}>圈词与拼写<span>找词、辨形并抄写，内附答案</span></button>
         </div>
@@ -1137,6 +1187,11 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
           </div>
           {programLoadState === 'ready' && studentsState === 'ready' && activeStudent && (
             <div className="vocabulary-heading-actions">
+              {!printRequest && (
+                <button className="ghost-button" type="button" onClick={props.onOpenVocabularyDictationWorkbench}>
+                  <ClipboardCheck size={16} />听写与复习
+                </button>
+              )}
               <div className="vocabulary-student-switcher">
                 <label>
                   <span>当前学生</span>
@@ -1590,12 +1645,39 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
             entryCount={printEntries.length}
             pages={wordSearchPages}
           />
-        ) : printPages.map((pageEntries, pageIndex) => (
-          printRequest?.kind === 'dictation' || printRequest?.kind === 'answer' ? (
+        ) : printPages.map(({ entries: pageEntries, title: pageTitle, startIndex: pageStartIndex }, pageIndex) => (
+          printRequest?.kind === 'correction' ? (
+            <div className="vocabulary-print-page vocabulary-correction-print-page" key={`correction-page-${pageIndex + 1}`}>
+              <header className="vocabulary-correction-print-header">
+                <div>
+                  <h1>{pageTitle || vocabularySet?.title || '错词订正纸'}</h1>
+                  <p>错词订正纸 · 看清错误，再正确书写三遍</p>
+                </div>
+                <span>姓名：____________ · 日期：____________</span>
+              </header>
+              <div className="vocabulary-correction-print-list">
+                {pageEntries.map((entry, entryIndex) => (
+                  <article key={`${entry.id}-${entryIndex}`}>
+                    <span className="vocabulary-correction-number">{pageStartIndex + entryIndex + 1}</span>
+                    <div className="vocabulary-correction-reference">
+                      <div><strong>{entry.headword}</strong><span>{entry.phonetics?.[printAccent] ?? entry.phonetic}</span></div>
+                      <p><b>{entry.partOfSpeech}</b>{formatCoreMeanings(entry)}</p>
+                      <small>上次写成：{printCorrectionByEntryId[entry.id]?.lastWrongSpelling || '未记录'}</small>
+                    </div>
+                    <div className="vocabulary-correction-writing"><i /><i /><i /></div>
+                  </article>
+                ))}
+              </div>
+              <footer className="vocabulary-dictation-print-footer">
+                <span><strong>{vocabularySet?.title ?? program.title}</strong> · 订正纸 · {printEntries.length}词</span>
+                <span>第 {pageIndex + 1} / {printPages.length} 页</span>
+              </footer>
+            </div>
+          ) : printRequest?.kind === 'dictation' || printRequest?.kind === 'answer' ? (
             <div className="vocabulary-print-page vocabulary-dictation-print-page" key={`print-page-${pageIndex + 1}`}>
               <header className="vocabulary-dictation-print-header">
                 <div>
-                  <h1>{vocabularySet?.title ?? '生词听写纸'}</h1>
+                  <h1>{pageTitle || vocabularySet?.title || '生词听写纸'}</h1>
                   <p>{printRequest.kind === 'answer' ? '教师答案' : '听写纸'}</p>
                 </div>
                 {printRequest.kind === 'dictation' && pageIndex === 0 && shareId && (
@@ -1625,9 +1707,9 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                     </div>
                     {columnEntries.map((entry, entryIndex) => {
                       const columnOffset = columnIndex === 0 ? 0 : columns[0].length
-                      const number = pageIndex * DICTATION_PRINT_ENTRIES_PER_PAGE + columnOffset + entryIndex + 1
+                      const number = pageStartIndex + columnOffset + entryIndex + 1
                       return (
-                        <div className="vocabulary-dictation-print-row" role="row" key={entry.id}>
+                        <div className="vocabulary-dictation-print-row" role="row" key={`${entry.id}-${entryIndex}`}>
                           <span className="vocabulary-dictation-number" role="cell">{number}</span>
                           <div className="vocabulary-dictation-word-cell" role="cell">
                             {printRequest.kind === 'answer' ? (
@@ -1657,7 +1739,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
             <div className="vocabulary-print-page" key={`print-page-${pageIndex + 1}`}>
               <header className="vocabulary-print-header">
                 <div>
-                  <h1>{vocabularySet?.title ?? '生词记忆纸'}</h1>
+                  <h1>{pageTitle || vocabularySet?.title || '生词记忆纸'}</h1>
                   <p>看图 · 分音节 · 放进句子里</p>
                 </div>
                 <div className="vocabulary-print-key" aria-label="拆分说明">
@@ -1666,8 +1748,8 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                 </div>
               </header>
               <div className="vocabulary-print-grid">
-                {pageEntries.map((entry) => (
-                  <article className={`vocabulary-print-entry${entry.headword.length > 32 ? ' has-long-headword' : ''}`} key={entry.id}>
+                {pageEntries.map((entry, entryIndex) => (
+                  <article className={`vocabulary-print-entry${entry.headword.length > 32 ? ' has-long-headword' : ''}`} key={`${entry.id}-${entryIndex}`}>
                     <VocabularyVisual entry={entry} compact />
                     <div className="vocabulary-print-word">
                       <div className="vocabulary-print-word-heading"><h2>{entry.headword}</h2></div>
@@ -1684,8 +1766,16 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                 <span>第 {pageIndex + 1} / {printPages.length} 页</span>
                 {pageIndex === 0 && shareId && (
                   <aside className="vocabulary-print-qr" aria-label="扫码听写二维码">
-                    <QRCodeSVG value={`${PUBLIC_LISTEN_ORIGIN}/vocabulary/listen/${shareId}`} size={72} level="M" marginSize={0} title="扫码听写" />
-                    <span>扫码听写</span>
+                    <QRCodeSVG
+                      value={printShareKind === 'dictation'
+                        ? `${PUBLIC_LISTEN_ORIGIN}/vocabulary/dictation/${shareId}?accent=${printAccent}`
+                        : `${PUBLIC_LISTEN_ORIGIN}/vocabulary/listen/${shareId}`}
+                      size={72}
+                      level="M"
+                      marginSize={0}
+                      title="扫码听写"
+                    />
+                    <span>{printShareKind === 'dictation' ? '扫码自动听写' : '扫码听写'}</span>
                   </aside>
                 )}
               </footer>

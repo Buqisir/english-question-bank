@@ -150,6 +150,7 @@ const registry = {
   'scripts/verify-generated-docx-output-deleted.mjs',
   'scripts/verify-detail-redesign.mjs',
   'scripts/verify-vocabulary-closed-loop.mjs',
+  'scripts/verify-vocabulary-dictation-review.mjs',
   'scripts/verify-vocabulary-migration.mjs',
   'scripts/verify-vocabulary-match-game.mjs',
   'scripts/verify-vocabulary-word-search.mjs',
@@ -228,6 +229,7 @@ function changedPlan(files) {
     'shared/papersurface/',
     'server/paper-canonical/',
     'server/print-renderer.mjs',
+    'server/vocabulary/vocabularyPdfRenderer.mjs',
     'server/draft-paper/',
     'app/src/shared-ui/papersurface/',
     'app/src/features/draft-paper/DraftPaperWorkbench.css',
@@ -243,6 +245,9 @@ function changedPlan(files) {
     'server/auth/',
     'server/user-data/',
     'server/ai-daily-limit.mjs',
+    'server/vocabulary/vocabularyStore.mjs',
+    'server/vocabulary/vocabularyRoutes.mjs',
+    'server/vocabulary/vocabularyPrintJobs.mjs',
   ]
   if (files.every((file) => touchesAny([file], paperDataPatterns))) {
     return { risk: 'known-shape-paper-data', pack: 'paper-data' }

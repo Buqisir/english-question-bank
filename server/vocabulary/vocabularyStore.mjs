@@ -6,6 +6,7 @@ const FORMAL_AUDIO_VOICE = 'eqb-british-teacher-v1'
 const DEFAULT_STUDENT_ID_PREFIX = 'vocabulary-student-default:'
 const DEFAULT_STUDENT_NAME = '默认学生'
 const EXAMPLE_CANDIDATE_VERSION = 'wanwei-examples-v1'
+const DICTATION_REVIEW_PROGRAM_ID = 'wanwei-round-one-v1'
 
 export class VocabularyStoreError extends Error {
   constructor(message, status = 400, code = 'invalid_vocabulary_request') {
@@ -107,6 +108,37 @@ function normalizeVocabularySetTitle(value) {
     throw new VocabularyStoreError('生词组名称不能包含控制字符或 Emoji。')
   }
   return title
+}
+
+function normalizeDictationTitle(value, fallback = '综合听写') {
+  const title = String(value ?? fallback).trim().replace(/\s+/gu, ' ')
+  const length = Array.from(title).length
+  if (!title) throw new VocabularyStoreError('听写名称不能为空。')
+  if (length > 60) throw new VocabularyStoreError('听写名称最多 60 个字。')
+  if (/[\p{Cc}\p{Cf}\p{Extended_Pictographic}]/u.test(title)) {
+    throw new VocabularyStoreError('听写名称不能包含控制字符或 Emoji。')
+  }
+  return title
+}
+
+function normalizeDictationDate(value) {
+  const date = String(value ?? nowIso().slice(0, 10)).trim()
+  const parsed = new Date(`${date}T00:00:00.000Z`)
+  if (!/^\d{4}-\d{2}-\d{2}$/u.test(date)
+    || Number.isNaN(parsed.getTime())
+    || parsed.toISOString().slice(0, 10) !== date) {
+    throw new VocabularyStoreError('听写日期必须是有效的 YYYY-MM-DD。')
+  }
+  return date
+}
+
+function normalizeOptionalText(value, label, maxLength) {
+  const text = String(value ?? '').trim().replace(/\s+/gu, ' ')
+  if (Array.from(text).length > maxLength) throw new VocabularyStoreError(`${label}最多 ${maxLength} 个字。`)
+  if (/[\p{Cc}\p{Cf}\p{Extended_Pictographic}]/u.test(text)) {
+    throw new VocabularyStoreError(`${label}不能包含控制字符或 Emoji。`)
+  }
+  return text
 }
 
 function defaultStudentId(userId) {
@@ -424,6 +456,137 @@ export function ensureSharedVocabularyShape(db) {
   }
 }
 
+function ensureVocabularyDictationShape(db) {
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS vocabulary_dictation_tasks (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL,
+      student_id TEXT NOT NULL,
+      program_id TEXT NOT NULL,
+      title TEXT NOT NULL,
+      accent TEXT NOT NULL CHECK (accent IN ('american', 'british')),
+      entry_count INTEGER NOT NULL CHECK (entry_count BETWEEN 1 AND 60),
+      created_at TEXT NOT NULL,
+      FOREIGN KEY(user_id, student_id) REFERENCES vocabulary_students(user_id, id) ON DELETE CASCADE
+    );
+    CREATE INDEX IF NOT EXISTS idx_vocabulary_dictation_tasks_student
+      ON vocabulary_dictation_tasks(user_id, student_id, created_at DESC, id DESC);
+    CREATE TABLE IF NOT EXISTS vocabulary_dictation_task_sources (
+      task_id TEXT NOT NULL REFERENCES vocabulary_dictation_tasks(id) ON DELETE CASCADE,
+      set_id TEXT NOT NULL REFERENCES vocabulary_sets(id) ON DELETE RESTRICT,
+      order_index INTEGER NOT NULL,
+      PRIMARY KEY(task_id, set_id),
+      UNIQUE(task_id, order_index)
+    );
+    CREATE TABLE IF NOT EXISTS vocabulary_dictation_task_entries (
+      task_id TEXT NOT NULL REFERENCES vocabulary_dictation_tasks(id) ON DELETE CASCADE,
+      entry_id TEXT NOT NULL,
+      order_index INTEGER NOT NULL,
+      snapshot_json TEXT NOT NULL,
+      PRIMARY KEY(task_id, entry_id),
+      UNIQUE(task_id, order_index)
+    );
+    CREATE TABLE IF NOT EXISTS vocabulary_dictation_task_entry_sources (
+      task_id TEXT NOT NULL,
+      entry_id TEXT NOT NULL,
+      set_id TEXT NOT NULL REFERENCES vocabulary_sets(id) ON DELETE RESTRICT,
+      PRIMARY KEY(task_id, entry_id, set_id),
+      FOREIGN KEY(task_id, entry_id)
+        REFERENCES vocabulary_dictation_task_entries(task_id, entry_id) ON DELETE CASCADE
+    );
+    CREATE TABLE IF NOT EXISTS vocabulary_dictation_task_shares (
+      id TEXT PRIMARY KEY,
+      task_id TEXT NOT NULL UNIQUE REFERENCES vocabulary_dictation_tasks(id) ON DELETE CASCADE,
+      user_id TEXT NOT NULL,
+      share_id TEXT NOT NULL UNIQUE,
+      status TEXT NOT NULL CHECK (status IN ('active', 'revoked')),
+      created_at TEXT NOT NULL,
+      revoked_at TEXT
+    );
+    CREATE INDEX IF NOT EXISTS idx_vocabulary_dictation_task_shares_public
+      ON vocabulary_dictation_task_shares(share_id, status);
+    CREATE TABLE IF NOT EXISTS vocabulary_dictation_task_share_history (
+      id TEXT PRIMARY KEY,
+      task_id TEXT NOT NULL REFERENCES vocabulary_dictation_tasks(id) ON DELETE CASCADE,
+      user_id TEXT NOT NULL,
+      share_id TEXT NOT NULL UNIQUE,
+      status TEXT NOT NULL CHECK (status IN ('active', 'revoked')),
+      created_at TEXT NOT NULL,
+      revoked_at TEXT
+    );
+    CREATE INDEX IF NOT EXISTS idx_vocabulary_dictation_task_share_history_public
+      ON vocabulary_dictation_task_share_history(share_id, status);
+    CREATE TABLE IF NOT EXISTS vocabulary_dictation_records (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL,
+      student_id TEXT NOT NULL,
+      task_id TEXT NOT NULL REFERENCES vocabulary_dictation_tasks(id) ON DELETE RESTRICT,
+      mode TEXT NOT NULL CHECK (mode IN ('all', 'partial')),
+      status TEXT NOT NULL CHECK (status IN ('draft', 'completed', 'void')),
+      dictation_date TEXT NOT NULL,
+      note TEXT NOT NULL DEFAULT '',
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL,
+      completed_at TEXT,
+      voided_at TEXT,
+      FOREIGN KEY(user_id, student_id) REFERENCES vocabulary_students(user_id, id) ON DELETE CASCADE
+    );
+    CREATE INDEX IF NOT EXISTS idx_vocabulary_dictation_records_student
+      ON vocabulary_dictation_records(user_id, student_id, dictation_date DESC, updated_at DESC, id DESC);
+    CREATE TABLE IF NOT EXISTS vocabulary_dictation_record_results (
+      record_id TEXT NOT NULL REFERENCES vocabulary_dictation_records(id) ON DELETE CASCADE,
+      entry_id TEXT NOT NULL,
+      order_index INTEGER NOT NULL,
+      result TEXT NOT NULL CHECK (result IN ('correct', 'wrong', 'untested')),
+      wrong_spelling TEXT NOT NULL DEFAULT '',
+      PRIMARY KEY(record_id, entry_id),
+      UNIQUE(record_id, order_index)
+    );
+    CREATE TABLE IF NOT EXISTS vocabulary_student_word_flags (
+      user_id TEXT NOT NULL,
+      student_id TEXT NOT NULL,
+      program_id TEXT NOT NULL,
+      entry_id TEXT NOT NULL,
+      pinned INTEGER NOT NULL DEFAULT 0 CHECK (pinned IN (0, 1)),
+      paused INTEGER NOT NULL DEFAULT 0 CHECK (paused IN (0, 1)),
+      updated_at TEXT NOT NULL,
+      PRIMARY KEY(user_id, student_id, program_id, entry_id),
+      FOREIGN KEY(user_id, student_id) REFERENCES vocabulary_students(user_id, id) ON DELETE CASCADE
+    );
+  `)
+}
+
+function ensureVocabularyShareHistoryShape(db) {
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS vocabulary_share_history (
+      id TEXT PRIMARY KEY,
+      set_id TEXT NOT NULL REFERENCES vocabulary_sets(id) ON DELETE CASCADE,
+      user_id TEXT NOT NULL,
+      share_id TEXT NOT NULL UNIQUE,
+      status TEXT NOT NULL CHECK (status IN ('active', 'revoked')),
+      created_at TEXT NOT NULL,
+      revoked_at TEXT
+    );
+    CREATE INDEX IF NOT EXISTS idx_vocabulary_share_history_public
+      ON vocabulary_share_history(share_id, status);
+  `)
+  const missingHistory = db.prepare(`
+    SELECT 1 FROM vocabulary_shares AS shares
+    WHERE NOT EXISTS (
+      SELECT 1 FROM vocabulary_share_history AS history WHERE history.share_id = shares.share_id
+    )
+    LIMIT 1
+  `).get()
+  if (missingHistory) {
+    db.exec(`
+      INSERT OR IGNORE INTO vocabulary_share_history
+        (id, set_id, user_id, share_id, status, created_at, revoked_at)
+      SELECT 'vocabulary-share-history:' || share_id, set_id, user_id, share_id, status, created_at, revoked_at
+      FROM vocabulary_shares;
+    `)
+  }
+}
+
 export function ensureUserVocabularyShape(db) {
   const currentShapeSql = `
     CREATE TABLE IF NOT EXISTS vocabulary_students (
@@ -520,6 +683,8 @@ export function ensureUserVocabularyShape(db) {
         ON vocabulary_review_runs(user_id, student_id, program_id)
         WHERE status <> 'frozen';
     `)
+    ensureVocabularyShareHistoryShape(db)
+    ensureVocabularyDictationShape(db)
     return
   }
 
@@ -720,6 +885,8 @@ export function ensureUserVocabularyShape(db) {
     } finally {
       db.exec('PRAGMA foreign_keys = ON')
     }
+    ensureVocabularyShareHistoryShape(db)
+    ensureVocabularyDictationShape(db)
     return
   }
 
@@ -810,6 +977,8 @@ export function ensureUserVocabularyShape(db) {
       db.exec('PRAGMA foreign_keys = ON')
     }
   }
+  ensureVocabularyShareHistoryShape(db)
+  ensureVocabularyDictationShape(db)
 }
 
 function normalizeProgramEntry(entry, program) {
@@ -1592,35 +1761,106 @@ export function getVocabularySetForReviewRun(userDb, userId, reviewRunId) {
   return readVocabularySetRows(userDb, userId, row.id)
 }
 
+function recordVocabularySetShareHistory(userDb, {
+  setId,
+  userId,
+  shareId,
+  status,
+  createdAt,
+  revokedAt = null,
+}) {
+  userDb.prepare(`
+    INSERT INTO vocabulary_share_history
+      (id, set_id, user_id, share_id, status, created_at, revoked_at)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
+    ON CONFLICT(share_id) DO UPDATE SET
+      status = excluded.status, revoked_at = excluded.revoked_at
+  `).run(
+    `vocabulary-share-history-${randomUUID()}`,
+    setId,
+    userId,
+    shareId,
+    status,
+    createdAt,
+    revokedAt,
+  )
+}
+
 export function shareVocabularySet(userDb, userId, setId) {
   ensureUserVocabularyShape(userDb)
   readVocabularySetRows(userDb, userId, setId)
-  const existing = userDb.prepare('SELECT share_id, status FROM vocabulary_shares WHERE set_id = ? AND user_id = ?').get(setId, userId)
+  const existing = userDb.prepare(`
+    SELECT share_id, status, created_at, revoked_at
+    FROM vocabulary_shares WHERE set_id = ? AND user_id = ?
+  `).get(setId, userId)
   const timestamp = nowIso()
   if (existing) {
     if (existing.status === 'revoked') {
-      const shareId = randomBytes(24).toString('base64url')
+      recordVocabularySetShareHistory(userDb, {
+        setId,
+        userId,
+        shareId: existing.share_id,
+        status: 'revoked',
+        createdAt: existing.created_at,
+        revokedAt: existing.revoked_at ?? timestamp,
+      })
+      const shareId = createUniqueVocabularyShareId(userDb)
       userDb.prepare("UPDATE vocabulary_shares SET share_id = ?, status = 'active', created_at = ?, revoked_at = NULL WHERE set_id = ? AND user_id = ?")
         .run(shareId, timestamp, setId, userId)
+      recordVocabularySetShareHistory(userDb, {
+        setId,
+        userId,
+        shareId,
+        status: 'active',
+        createdAt: timestamp,
+      })
       return { shareId, status: 'active' }
     }
+    recordVocabularySetShareHistory(userDb, {
+      setId,
+      userId,
+      shareId: existing.share_id,
+      status: 'active',
+      createdAt: existing.created_at,
+    })
     return { shareId: existing.share_id, status: 'active' }
   }
-  const shareId = randomBytes(24).toString('base64url')
+  const shareId = createUniqueVocabularyShareId(userDb)
   userDb.prepare(`
     INSERT INTO vocabulary_shares (id, set_id, user_id, share_id, status, created_at)
     VALUES (?, ?, ?, ?, 'active', ?)
   `).run(`vocabulary-share-${randomUUID()}`, setId, userId, shareId, timestamp)
+  recordVocabularySetShareHistory(userDb, {
+    setId,
+    userId,
+    shareId,
+    status: 'active',
+    createdAt: timestamp,
+  })
   return { shareId, status: 'active' }
 }
 
 export function revokeVocabularyShare(userDb, userId, setId) {
   ensureUserVocabularyShape(userDb)
   readVocabularySetRows(userDb, userId, setId)
+  const share = userDb.prepare(`
+    SELECT share_id, created_at FROM vocabulary_shares
+    WHERE set_id = ? AND user_id = ?
+  `).get(setId, userId)
+  if (!share) throw new VocabularyStoreError('这个生词集还没有公开分享。', 404, 'vocabulary_share_not_found')
+  const timestamp = nowIso()
   const result = userDb.prepare(`
     UPDATE vocabulary_shares SET status = 'revoked', revoked_at = ? WHERE set_id = ? AND user_id = ?
-  `).run(nowIso(), setId, userId)
+  `).run(timestamp, setId, userId)
   if (result.changes === 0) throw new VocabularyStoreError('这个生词集还没有公开分享。', 404, 'vocabulary_share_not_found')
+  recordVocabularySetShareHistory(userDb, {
+    setId,
+    userId,
+    shareId: share.share_id,
+    status: 'revoked',
+    createdAt: share.created_at,
+    revokedAt: timestamp,
+  })
   return { status: 'revoked' }
 }
 
@@ -1629,7 +1869,10 @@ export function getPublicVocabularyShare(userDb, shareId) {
   const share = userDb.prepare(`
     SELECT set_id, status FROM vocabulary_shares WHERE share_id = ?
   `).get(shareId)
-  if (!share) return { status: 'not_found' }
+  if (!share) {
+    const historical = userDb.prepare('SELECT 1 FROM vocabulary_share_history WHERE share_id = ?').get(shareId)
+    return { status: historical ? 'revoked' : 'not_found' }
+  }
   if (share.status !== 'active') return { status: 'revoked' }
   const set = userDb.prepare('SELECT id, title, entry_count, created_at FROM vocabulary_sets WHERE id = ?').get(share.set_id)
   if (!set) return { status: 'not_found' }
@@ -1656,7 +1899,10 @@ export function getPublicVocabularyDictationShare(userDb, shareId) {
   const share = userDb.prepare(`
     SELECT set_id, status FROM vocabulary_shares WHERE share_id = ?
   `).get(shareId)
-  if (!share) return { status: 'not_found' }
+  if (!share) {
+    const historical = userDb.prepare('SELECT 1 FROM vocabulary_share_history WHERE share_id = ?').get(shareId)
+    return { status: historical ? 'revoked' : 'not_found' }
+  }
   if (share.status !== 'active') return { status: 'revoked' }
   const set = userDb.prepare('SELECT id, title, entry_count, created_at FROM vocabulary_sets WHERE id = ?').get(share.set_id)
   if (!set) return { status: 'not_found' }
@@ -1675,5 +1921,921 @@ export function getPublicVocabularyDictationShare(userDb, shareId) {
       entries,
       createdAt: set.created_at,
     },
+  }
+}
+
+function readOwnedVocabularySetSnapshotRows(userDb, userId, setId) {
+  const set = userDb.prepare(`
+    SELECT * FROM vocabulary_sets WHERE id = ? AND user_id = ?
+  `).get(setId, userId)
+  if (!set) throw new VocabularyStoreError('生词组不存在。', 404, 'vocabulary_set_not_found')
+  const rows = userDb.prepare(`
+    SELECT entry_id, order_index, snapshot_json
+    FROM vocabulary_set_entries WHERE set_id = ? ORDER BY order_index
+  `).all(set.id)
+  if (rows.length !== set.entry_count) {
+    throw new VocabularyStoreError('这份生词组的冻结快照不完整。', 500, 'vocabulary_set_snapshot_invalid')
+  }
+  return {
+    set,
+    entries: rows.map((row, index) => {
+      const snapshot = parseJson(row.snapshot_json, null)
+      const entry = projectFrozenVocabularyEntry(snapshot)
+      if (row.order_index !== index || entry.id !== row.entry_id) {
+        throw new VocabularyStoreError('这份生词组的冻结快照已损坏。', 500, 'vocabulary_set_snapshot_invalid')
+      }
+      return { entryId: row.entry_id, orderIndex: row.order_index, snapshot, entry }
+    }),
+  }
+}
+
+function getOwnedDictationTaskRow(userDb, userId, taskId) {
+  const task = userDb.prepare(`
+    SELECT * FROM vocabulary_dictation_tasks WHERE id = ? AND user_id = ?
+  `).get(taskId, userId)
+  if (!task) throw new VocabularyStoreError('听写任务不存在。', 404, 'vocabulary_dictation_task_not_found')
+  return task
+}
+
+function readDictationTaskRows(userDb, userId, taskId) {
+  const task = getOwnedDictationTaskRow(userDb, userId, taskId)
+  const rows = userDb.prepare(`
+    SELECT entry_id, order_index, snapshot_json
+    FROM vocabulary_dictation_task_entries WHERE task_id = ? ORDER BY order_index
+  `).all(task.id)
+  if (rows.length !== task.entry_count) {
+    throw new VocabularyStoreError('听写任务的冻结快照不完整。', 500, 'vocabulary_dictation_task_snapshot_invalid')
+  }
+  const entries = rows.map((row, index) => {
+    const snapshot = parseJson(row.snapshot_json, null)
+    let entry
+    try {
+      entry = projectFrozenVocabularyEntry(snapshot)
+    } catch {
+      throw new VocabularyStoreError('听写任务的冻结快照已损坏。', 500, 'vocabulary_dictation_task_snapshot_invalid')
+    }
+    if (row.order_index !== index || entry.id !== row.entry_id) {
+      throw new VocabularyStoreError('听写任务的冻结快照已损坏。', 500, 'vocabulary_dictation_task_snapshot_invalid')
+    }
+    return { entryId: row.entry_id, orderIndex: row.order_index, snapshot, entry }
+  })
+  const sources = userDb.prepare(`
+    SELECT source.order_index, source.set_id, sets.title, sets.entry_count, sets.created_at
+    FROM vocabulary_dictation_task_sources AS source
+    JOIN vocabulary_sets AS sets ON sets.id = source.set_id
+    WHERE source.task_id = ? ORDER BY source.order_index
+  `).all(task.id).map((source) => ({
+    setId: source.set_id,
+    title: source.title,
+    entryCount: source.entry_count,
+    createdAt: source.created_at,
+  }))
+  const entrySources = userDb.prepare(`
+    SELECT entry_sources.entry_id, entry_sources.set_id
+    FROM vocabulary_dictation_task_entry_sources AS entry_sources
+    JOIN vocabulary_dictation_task_sources AS task_sources
+      ON task_sources.task_id = entry_sources.task_id AND task_sources.set_id = entry_sources.set_id
+    WHERE entry_sources.task_id = ?
+    ORDER BY task_sources.order_index
+  `).all(task.id)
+  const sourceIdsByEntry = new Map()
+  for (const source of entrySources) {
+    const ids = sourceIdsByEntry.get(source.entry_id) ?? []
+    ids.push(source.set_id)
+    sourceIdsByEntry.set(source.entry_id, ids)
+  }
+  const share = userDb.prepare(`
+    SELECT share_id, status, created_at, revoked_at
+    FROM vocabulary_dictation_task_shares WHERE task_id = ?
+  `).get(task.id)
+  return {
+    id: task.id,
+    studentId: task.student_id,
+    programId: task.program_id,
+    title: task.title,
+    accent: task.accent,
+    entryCount: task.entry_count,
+    entries: entries.map(({ entry, entryId }) => ({
+      ...entry,
+      sourceSetIds: sourceIdsByEntry.get(entryId) ?? [],
+    })),
+    sourceSets: sources,
+    share: share ? {
+      shareId: share.share_id,
+      status: share.status,
+      createdAt: share.created_at,
+      revokedAt: share.revoked_at,
+    } : null,
+    createdAt: task.created_at,
+  }
+}
+
+function uniqueNonEmptyIds(value, label) {
+  if (!Array.isArray(value)) throw new VocabularyStoreError(`${label}必须是列表。`)
+  const seen = new Set()
+  const ids = []
+  for (const raw of value) {
+    const id = requireNonEmpty(raw, label)
+    if (seen.has(id)) continue
+    seen.add(id)
+    ids.push(id)
+  }
+  return ids
+}
+
+export function createVocabularyDictationTask({ userDb, bankDb }, userId, input = {}) {
+  ensureUserVocabularyShape(userDb)
+  const studentId = requireNonEmpty(input.studentId, '学生档案')
+  requireOwnedVocabularyStudent(userDb, userId, studentId)
+  const programId = requireNonEmpty(input.programId, '词汇课程')
+  if (programId !== DICTATION_REVIEW_PROGRAM_ID) {
+    throw new VocabularyStoreError('听写与复习首版只支持万唯1600词。', 409, 'vocabulary_dictation_program_not_supported')
+  }
+  const accent = input.accent === 'british' ? 'british' : input.accent === 'american' ? 'american' : null
+  if (!accent) throw new VocabularyStoreError('听写任务必须选择美音或英音。')
+  const sourceSetIds = input.sourceSetIds == null ? [] : uniqueNonEmptyIds(input.sourceSetIds, '生词组 ID')
+  const explicitEntryIds = input.entryIds == null ? null : uniqueNonEmptyIds(input.entryIds, '词条 ID')
+  const taskId = `vocabulary-dictation-task-${randomUUID()}`
+  const snapshotsByEntry = new Map()
+  const sourceIdsByEntry = new Map()
+  const sourceSets = sourceSetIds.map((setId) => {
+    const source = readOwnedVocabularySetSnapshotRows(userDb, userId, setId)
+    if (source.set.student_id !== studentId) {
+      throw new VocabularyStoreError('所选生词组不属于当前学生。', 409, 'vocabulary_dictation_student_mismatch')
+    }
+    if (source.set.program_id !== programId) {
+      throw new VocabularyStoreError('所选生词组不属于当前词汇课程。', 409, 'vocabulary_dictation_program_mismatch')
+    }
+    for (const item of source.entries) {
+      if (!snapshotsByEntry.has(item.entryId)) snapshotsByEntry.set(item.entryId, item.snapshot)
+      const ids = sourceIdsByEntry.get(item.entryId) ?? []
+      ids.push(setId)
+      sourceIdsByEntry.set(item.entryId, ids)
+    }
+    return source
+  })
+
+  let orderedEntryIds = explicitEntryIds
+  if (!orderedEntryIds) {
+    orderedEntryIds = []
+    const seen = new Set()
+    for (const source of sourceSets) {
+      for (const item of source.entries) {
+        if (seen.has(item.entryId)) continue
+        seen.add(item.entryId)
+        orderedEntryIds.push(item.entryId)
+      }
+    }
+  }
+  if (!sourceSets.length) {
+    const program = getVocabularyProgram(bankDb, programId, { includeExampleCandidates: true })
+    if (!program) throw new VocabularyStoreError('词汇课程不存在。', 404, 'program_not_found')
+    const entriesById = new Map(program.entries.map((entry) => [entry.id, entry]))
+    for (const entryId of orderedEntryIds) {
+      const entry = entriesById.get(entryId)
+      if (!entry) throw new VocabularyStoreError('听写任务包含词库中不存在的词条。', 404, 'vocabulary_entry_not_found')
+      snapshotsByEntry.set(entryId, snapshotEntry(entry, taskId))
+    }
+  } else {
+    for (const entryId of orderedEntryIds) {
+      if (!snapshotsByEntry.has(entryId)) {
+        throw new VocabularyStoreError('听写任务只能使用所选生词组中的词。', 409, 'vocabulary_dictation_entry_outside_sources')
+      }
+    }
+  }
+  if (orderedEntryIds.length < 1 || orderedEntryIds.length > 60) {
+    throw new VocabularyStoreError('每份二维码听写必须包含 1–60 个去重后的词。')
+  }
+  const title = normalizeDictationTitle(input.title)
+  const timestamp = nowIso()
+  userDb.exec('BEGIN')
+  try {
+    userDb.prepare(`
+      INSERT INTO vocabulary_dictation_tasks
+        (id, user_id, student_id, program_id, title, accent, entry_count, created_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    `).run(taskId, userId, studentId, programId, title, accent, orderedEntryIds.length, timestamp)
+    const insertSource = userDb.prepare(`
+      INSERT INTO vocabulary_dictation_task_sources (task_id, set_id, order_index) VALUES (?, ?, ?)
+    `)
+    sourceSetIds.forEach((setId, index) => insertSource.run(taskId, setId, index))
+    const insertEntry = userDb.prepare(`
+      INSERT INTO vocabulary_dictation_task_entries (task_id, entry_id, order_index, snapshot_json)
+      VALUES (?, ?, ?, ?)
+    `)
+    const insertEntrySource = userDb.prepare(`
+      INSERT INTO vocabulary_dictation_task_entry_sources (task_id, entry_id, set_id)
+      VALUES (?, ?, ?)
+    `)
+    orderedEntryIds.forEach((entryId, index) => {
+      insertEntry.run(taskId, entryId, index, JSON.stringify(snapshotsByEntry.get(entryId)))
+      for (const setId of sourceIdsByEntry.get(entryId) ?? []) insertEntrySource.run(taskId, entryId, setId)
+    })
+    userDb.exec('COMMIT')
+  } catch (error) {
+    userDb.exec('ROLLBACK')
+    throw error
+  }
+  return readDictationTaskRows(userDb, userId, taskId)
+}
+
+export function listVocabularyDictationTasks(userDb, userId, studentId, { limit = null } = {}) {
+  ensureUserVocabularyShape(userDb)
+  requireOwnedVocabularyStudent(userDb, userId, studentId)
+  const safeLimit = limit == null ? null : Math.max(1, Math.min(5_000, Number(limit) || 50))
+  const rows = safeLimit == null ? userDb.prepare(`
+    SELECT id FROM vocabulary_dictation_tasks
+    WHERE user_id = ? AND student_id = ?
+    ORDER BY created_at DESC, id DESC
+  `).all(userId, studentId) : userDb.prepare(`
+    SELECT id FROM vocabulary_dictation_tasks
+    WHERE user_id = ? AND student_id = ?
+    ORDER BY created_at DESC, id DESC LIMIT ?
+  `).all(userId, studentId, safeLimit)
+  return rows.map((row) => readDictationTaskRows(userDb, userId, row.id))
+}
+
+export function getVocabularyDictationTask(userDb, userId, taskId) {
+  ensureUserVocabularyShape(userDb)
+  return readDictationTaskRows(userDb, userId, taskId)
+}
+
+function createUniqueVocabularyShareId(userDb) {
+  for (let attempt = 0; attempt < 10; attempt += 1) {
+    const shareId = randomBytes(24).toString('base64url')
+    const exists = userDb.prepare(`
+      SELECT 1 FROM vocabulary_shares WHERE share_id = ?
+      UNION ALL
+      SELECT 1 FROM vocabulary_share_history WHERE share_id = ?
+      UNION ALL
+      SELECT 1 FROM vocabulary_dictation_task_shares WHERE share_id = ?
+      UNION ALL
+      SELECT 1 FROM vocabulary_dictation_task_share_history WHERE share_id = ?
+      LIMIT 1
+    `).get(shareId, shareId, shareId, shareId)
+    if (!exists) return shareId
+  }
+  throw new VocabularyStoreError('暂时无法生成听写链接，请重试。', 500, 'vocabulary_share_generation_failed')
+}
+
+export function shareVocabularyDictationTask(userDb, userId, taskId) {
+  ensureUserVocabularyShape(userDb)
+  getOwnedDictationTaskRow(userDb, userId, taskId)
+  const existing = userDb.prepare(`
+    SELECT share_id, status, created_at, revoked_at FROM vocabulary_dictation_task_shares
+    WHERE task_id = ? AND user_id = ?
+  `).get(taskId, userId)
+  const timestamp = nowIso()
+  const recordHistory = (shareId, status, createdAt, revokedAt = null) => userDb.prepare(`
+    INSERT INTO vocabulary_dictation_task_share_history
+      (id, task_id, user_id, share_id, status, created_at, revoked_at)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
+    ON CONFLICT(share_id) DO UPDATE SET
+      status = excluded.status, revoked_at = excluded.revoked_at
+  `).run(
+    `vocabulary-dictation-share-history-${randomUUID()}`,
+    taskId,
+    userId,
+    shareId,
+    status,
+    createdAt,
+    revokedAt,
+  )
+  if (existing?.status === 'active') {
+    recordHistory(existing.share_id, 'active', existing.created_at, null)
+    return { shareId: existing.share_id, status: 'active' }
+  }
+  const shareId = createUniqueVocabularyShareId(userDb)
+  if (existing) {
+    recordHistory(existing.share_id, 'revoked', existing.created_at, existing.revoked_at ?? timestamp)
+    userDb.prepare(`
+      UPDATE vocabulary_dictation_task_shares
+      SET share_id = ?, status = 'active', created_at = ?, revoked_at = NULL
+      WHERE task_id = ? AND user_id = ?
+    `).run(shareId, timestamp, taskId, userId)
+  } else {
+    userDb.prepare(`
+      INSERT INTO vocabulary_dictation_task_shares
+        (id, task_id, user_id, share_id, status, created_at)
+      VALUES (?, ?, ?, ?, 'active', ?)
+    `).run(`vocabulary-dictation-share-${randomUUID()}`, taskId, userId, shareId, timestamp)
+  }
+  recordHistory(shareId, 'active', timestamp, null)
+  return { shareId, status: 'active' }
+}
+
+export function revokeVocabularyDictationTaskShare(userDb, userId, taskId) {
+  ensureUserVocabularyShape(userDb)
+  getOwnedDictationTaskRow(userDb, userId, taskId)
+  const share = userDb.prepare(`
+    SELECT share_id, created_at FROM vocabulary_dictation_task_shares
+    WHERE task_id = ? AND user_id = ?
+  `).get(taskId, userId)
+  if (!share) throw new VocabularyStoreError('这份听写还没有公开分享。', 404, 'vocabulary_share_not_found')
+  const timestamp = nowIso()
+  const result = userDb.prepare(`
+    UPDATE vocabulary_dictation_task_shares
+    SET status = 'revoked', revoked_at = ? WHERE task_id = ? AND user_id = ?
+  `).run(timestamp, taskId, userId)
+  userDb.prepare(`
+    INSERT INTO vocabulary_dictation_task_share_history
+      (id, task_id, user_id, share_id, status, created_at, revoked_at)
+    VALUES (?, ?, ?, ?, 'revoked', ?, ?)
+    ON CONFLICT(share_id) DO UPDATE SET status = 'revoked', revoked_at = excluded.revoked_at
+  `).run(
+    `vocabulary-dictation-share-history-${randomUUID()}`,
+    taskId,
+    userId,
+    share.share_id,
+    share.created_at,
+    timestamp,
+  )
+  if (!result.changes) throw new VocabularyStoreError('这份听写还没有公开分享。', 404, 'vocabulary_share_not_found')
+  return { status: 'revoked' }
+}
+
+export function getPublicVocabularyDictationResource(userDb, shareId) {
+  ensureUserVocabularyShape(userDb)
+  const share = userDb.prepare(`
+    SELECT task_id, status FROM vocabulary_dictation_task_shares WHERE share_id = ?
+  `).get(shareId)
+  if (!share) {
+    const historical = userDb.prepare(`
+      SELECT status FROM vocabulary_dictation_task_share_history WHERE share_id = ?
+    `).get(shareId)
+    if (historical) return { status: 'revoked' }
+    return getPublicVocabularyDictationShare(userDb, shareId)
+  }
+  if (share.status !== 'active') return { status: 'revoked' }
+  const task = userDb.prepare(`
+    SELECT id, title, accent, entry_count, created_at
+    FROM vocabulary_dictation_tasks WHERE id = ?
+  `).get(share.task_id)
+  if (!task) return { status: 'not_found' }
+  const entries = userDb.prepare(`
+    SELECT snapshot_json FROM vocabulary_dictation_task_entries
+    WHERE task_id = ? ORDER BY order_index
+  `).all(task.id).map((row) => projectPublicVocabularyDictationEntry(parseJson(row.snapshot_json, null)))
+  if (entries.length !== task.entry_count) {
+    throw new VocabularyStoreError('这份听写任务的冻结快照不完整。', 500, 'vocabulary_share_snapshot_invalid')
+  }
+  return {
+    status: 'active',
+    set: {
+      title: task.title,
+      accent: task.accent,
+      entryCount: task.entry_count,
+      entries,
+      createdAt: task.created_at,
+    },
+  }
+}
+
+function normalizeDictationResults(taskRows, rawResults, mode, existingResults = null) {
+  const provided = Array.isArray(rawResults) ? rawResults : null
+  const providedByEntry = new Map()
+  if (provided) {
+    for (const raw of provided) {
+      const entryId = requireNonEmpty(raw?.entryId, '听写结果词条')
+      if (providedByEntry.has(entryId)) throw new VocabularyStoreError('听写结果不能包含重复词条。')
+      const result = raw?.result
+      if (!['correct', 'wrong', 'untested'].includes(result)) throw new VocabularyStoreError('听写结果状态无效。')
+      providedByEntry.set(entryId, {
+        result,
+        wrongSpelling: result === 'wrong'
+          ? normalizeOptionalText(raw?.wrongSpelling, '错误拼写', 80)
+          : '',
+      })
+    }
+  }
+  const existingByEntry = new Map((existingResults ?? []).map((result) => [result.entry_id, {
+    result: result.result,
+    wrongSpelling: result.wrong_spelling,
+  }]))
+  const allowed = new Set(taskRows.map((row) => row.entryId))
+  for (const entryId of providedByEntry.keys()) {
+    if (!allowed.has(entryId)) throw new VocabularyStoreError('听写结果包含任务以外的词。')
+  }
+  return taskRows.map((row) => {
+    const chosen = providedByEntry.get(row.entryId)
+      ?? existingByEntry.get(row.entryId)
+      ?? { result: mode === 'all' ? 'correct' : 'untested', wrongSpelling: '' }
+    return {
+      entryId: row.entryId,
+      orderIndex: row.orderIndex,
+      result: chosen.result,
+      wrongSpelling: chosen.result === 'wrong' ? chosen.wrongSpelling : '',
+    }
+  })
+}
+
+function serializeDictationRecord(userDb, userId, recordId) {
+  const record = userDb.prepare(`
+    SELECT * FROM vocabulary_dictation_records WHERE id = ? AND user_id = ?
+  `).get(recordId, userId)
+  if (!record) throw new VocabularyStoreError('听写记录不存在。', 404, 'vocabulary_dictation_record_not_found')
+  const task = readDictationTaskRows(userDb, userId, record.task_id)
+  const results = userDb.prepare(`
+    SELECT entry_id, order_index, result, wrong_spelling
+    FROM vocabulary_dictation_record_results WHERE record_id = ? ORDER BY order_index
+  `).all(record.id)
+  const resultByEntry = new Map(results.map((result) => [result.entry_id, result]))
+  return {
+    id: record.id,
+    studentId: record.student_id,
+    taskId: record.task_id,
+    taskTitle: task.title,
+    mode: record.mode,
+    status: record.status,
+    dictationDate: record.dictation_date,
+    note: record.note,
+    entries: task.entries.map((entry, orderIndex) => {
+      const result = resultByEntry.get(entry.id)
+      if (!result || result.order_index !== orderIndex) {
+        throw new VocabularyStoreError('听写记录结果不完整。', 500, 'vocabulary_dictation_record_invalid')
+      }
+      return {
+        ...entry,
+        result: result.result,
+        wrongSpelling: result.wrong_spelling,
+      }
+    }),
+    createdAt: record.created_at,
+    updatedAt: record.updated_at,
+    completedAt: record.completed_at,
+    voidedAt: record.voided_at,
+  }
+}
+
+function writeDictationRecordResults(userDb, recordId, results) {
+  userDb.prepare('DELETE FROM vocabulary_dictation_record_results WHERE record_id = ?').run(recordId)
+  const insert = userDb.prepare(`
+    INSERT INTO vocabulary_dictation_record_results
+      (record_id, entry_id, order_index, result, wrong_spelling)
+    VALUES (?, ?, ?, ?, ?)
+  `)
+  for (const result of results) {
+    insert.run(recordId, result.entryId, result.orderIndex, result.result, result.wrongSpelling)
+  }
+}
+
+export function createVocabularyDictationRecord(userDb, userId, taskId, input = {}) {
+  ensureUserVocabularyShape(userDb)
+  const task = getOwnedDictationTaskRow(userDb, userId, taskId)
+  requireOwnedVocabularyStudent(userDb, userId, task.student_id)
+  const mode = input.mode === 'partial' ? 'partial' : 'all'
+  const status = input.status === 'completed' ? 'completed' : 'draft'
+  const rows = readDictationTaskRows(userDb, userId, taskId).entries.map((entry, orderIndex) => ({
+    entryId: entry.id,
+    orderIndex,
+  }))
+  const results = normalizeDictationResults(rows, input.results, mode)
+  if (status === 'completed' && !results.some((result) => result.result !== 'untested')) {
+    throw new VocabularyStoreError('至少要有一个实际听写过的词才能完成批改。')
+  }
+  const id = `vocabulary-dictation-record-${randomUUID()}`
+  const timestamp = nowIso()
+  const note = normalizeOptionalText(input.note, '教师备注', 300)
+  userDb.exec('BEGIN')
+  try {
+    userDb.prepare(`
+      INSERT INTO vocabulary_dictation_records
+        (id, user_id, student_id, task_id, mode, status, dictation_date, note,
+         created_at, updated_at, completed_at, voided_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL)
+    `).run(
+      id, userId, task.student_id, task.id, mode, status, normalizeDictationDate(input.dictationDate), note,
+      timestamp, timestamp, status === 'completed' ? timestamp : null,
+    )
+    writeDictationRecordResults(userDb, id, results)
+    userDb.exec('COMMIT')
+  } catch (error) {
+    userDb.exec('ROLLBACK')
+    throw error
+  }
+  return serializeDictationRecord(userDb, userId, id)
+}
+
+export function updateVocabularyDictationRecord(userDb, userId, recordId, input = {}) {
+  ensureUserVocabularyShape(userDb)
+  const record = userDb.prepare(`
+    SELECT * FROM vocabulary_dictation_records WHERE id = ? AND user_id = ?
+  `).get(recordId, userId)
+  if (!record) throw new VocabularyStoreError('听写记录不存在。', 404, 'vocabulary_dictation_record_not_found')
+  if (record.status === 'void') throw new VocabularyStoreError('已作废的听写记录需要先恢复。', 409, 'vocabulary_dictation_record_void')
+  const taskRows = readDictationTaskRows(userDb, userId, record.task_id).entries.map((entry, orderIndex) => ({
+    entryId: entry.id,
+    orderIndex,
+  }))
+  const existing = userDb.prepare(`
+    SELECT entry_id, result, wrong_spelling FROM vocabulary_dictation_record_results WHERE record_id = ?
+  `).all(record.id)
+  const mode = input.mode === 'partial' ? 'partial' : input.mode === 'all' ? 'all' : record.mode
+  const status = input.status === 'completed' ? 'completed' : input.status === 'draft' ? 'draft' : record.status
+  const results = normalizeDictationResults(taskRows, input.results, mode, existing)
+  if (status === 'completed' && !results.some((result) => result.result !== 'untested')) {
+    throw new VocabularyStoreError('至少要有一个实际听写过的词才能完成批改。')
+  }
+  const timestamp = nowIso()
+  userDb.exec('BEGIN')
+  try {
+    userDb.prepare(`
+      UPDATE vocabulary_dictation_records
+      SET mode = ?, status = ?, dictation_date = ?, note = ?, updated_at = ?,
+          completed_at = CASE WHEN ? = 'completed' THEN COALESCE(completed_at, ?) ELSE NULL END
+      WHERE id = ? AND user_id = ?
+    `).run(
+      mode,
+      status,
+      input.dictationDate == null ? record.dictation_date : normalizeDictationDate(input.dictationDate),
+      input.note == null ? record.note : normalizeOptionalText(input.note, '教师备注', 300),
+      timestamp,
+      status,
+      timestamp,
+      record.id,
+      userId,
+    )
+    writeDictationRecordResults(userDb, record.id, results)
+    userDb.exec('COMMIT')
+  } catch (error) {
+    userDb.exec('ROLLBACK')
+    throw error
+  }
+  return serializeDictationRecord(userDb, userId, record.id)
+}
+
+export function voidVocabularyDictationRecord(userDb, userId, recordId) {
+  ensureUserVocabularyShape(userDb)
+  const record = userDb.prepare(`
+    SELECT status FROM vocabulary_dictation_records WHERE id = ? AND user_id = ?
+  `).get(recordId, userId)
+  if (!record) throw new VocabularyStoreError('听写记录不存在。', 404, 'vocabulary_dictation_record_not_found')
+  if (record.status !== 'void') {
+    userDb.prepare(`
+      UPDATE vocabulary_dictation_records SET status = 'void', voided_at = ?, updated_at = ?
+      WHERE id = ? AND user_id = ?
+    `).run(nowIso(), nowIso(), recordId, userId)
+  }
+  return serializeDictationRecord(userDb, userId, recordId)
+}
+
+export function restoreVocabularyDictationRecord(userDb, userId, recordId) {
+  ensureUserVocabularyShape(userDb)
+  const record = userDb.prepare(`
+    SELECT status, completed_at FROM vocabulary_dictation_records WHERE id = ? AND user_id = ?
+  `).get(recordId, userId)
+  if (!record) throw new VocabularyStoreError('听写记录不存在。', 404, 'vocabulary_dictation_record_not_found')
+  if (record.status === 'void') {
+    userDb.prepare(`
+      UPDATE vocabulary_dictation_records
+      SET status = ?, voided_at = NULL, updated_at = ? WHERE id = ? AND user_id = ?
+    `).run(record.completed_at ? 'completed' : 'draft', nowIso(), recordId, userId)
+  }
+  return serializeDictationRecord(userDb, userId, recordId)
+}
+
+export function listVocabularyDictationRecords(userDb, userId, studentId, { limit = null } = {}) {
+  ensureUserVocabularyShape(userDb)
+  requireOwnedVocabularyStudent(userDb, userId, studentId)
+  const safeLimit = limit == null ? null : Math.max(1, Math.min(5_000, Number(limit) || 100))
+  const rows = safeLimit == null ? userDb.prepare(`
+    SELECT id FROM vocabulary_dictation_records
+    WHERE user_id = ? AND student_id = ?
+    ORDER BY dictation_date DESC, updated_at DESC, id DESC
+  `).all(userId, studentId) : userDb.prepare(`
+    SELECT id FROM vocabulary_dictation_records
+    WHERE user_id = ? AND student_id = ?
+    ORDER BY dictation_date DESC, updated_at DESC, id DESC LIMIT ?
+  `).all(userId, studentId, safeLimit)
+  return rows.map((row) => serializeDictationRecord(userDb, userId, row.id))
+}
+
+export function getVocabularyDictationRecord(userDb, userId, recordId) {
+  ensureUserVocabularyShape(userDb)
+  return serializeDictationRecord(userDb, userId, recordId)
+}
+
+function compareVocabularyReviewStates(left, right) {
+  return right.currentConsecutiveWrong - left.currentConsecutiveWrong
+    || right.recentWrongRate - left.recentWrongRate
+    || right.totalWrong - left.totalWrong
+    || String(right.lastWrongDate ?? '').localeCompare(String(left.lastWrongDate ?? ''))
+    || left.headword.localeCompare(right.headword, 'en')
+}
+
+export function getStudentVocabularyReviewStates(userDb, userId, studentId, programId) {
+  ensureUserVocabularyShape(userDb)
+  requireOwnedVocabularyStudent(userDb, userId, studentId)
+  const rows = userDb.prepare(`
+    SELECT records.id AS record_id, records.dictation_date, records.completed_at,
+      results.entry_id, results.result, results.wrong_spelling,
+      entries.snapshot_json, tasks.id AS task_id
+    FROM vocabulary_dictation_records AS records
+    JOIN vocabulary_dictation_record_results AS results ON results.record_id = records.id
+    JOIN vocabulary_dictation_tasks AS tasks ON tasks.id = records.task_id
+    JOIN vocabulary_dictation_task_entries AS entries
+      ON entries.task_id = tasks.id AND entries.entry_id = results.entry_id
+    WHERE records.user_id = ? AND records.student_id = ? AND tasks.program_id = ?
+      AND records.status = 'completed' AND results.result <> 'untested'
+    ORDER BY results.entry_id, records.dictation_date, records.completed_at, records.id
+  `).all(userId, studentId, programId)
+  const flags = new Map(userDb.prepare(`
+    SELECT entry_id, pinned, paused FROM vocabulary_student_word_flags
+    WHERE user_id = ? AND student_id = ? AND program_id = ?
+  `).all(userId, studentId, programId).map((row) => [row.entry_id, row]))
+  const sourceIdsByEntry = new Map()
+  for (const row of userDb.prepare(`
+    SELECT DISTINCT sources.entry_id, sources.set_id
+    FROM vocabulary_dictation_task_entry_sources AS sources
+    JOIN vocabulary_dictation_tasks AS tasks ON tasks.id = sources.task_id
+    WHERE tasks.user_id = ? AND tasks.student_id = ? AND tasks.program_id = ?
+    ORDER BY sources.set_id
+  `).all(userId, studentId, programId)) {
+    const ids = sourceIdsByEntry.get(row.entry_id) ?? []
+    ids.push(row.set_id)
+    sourceIdsByEntry.set(row.entry_id, ids)
+  }
+  const histories = new Map()
+  for (const row of rows) {
+    const history = histories.get(row.entry_id) ?? []
+    history.push(row)
+    histories.set(row.entry_id, history)
+  }
+  const states = []
+  for (const [entryId, history] of histories) {
+    const latest = history.at(-1)
+    const snapshot = projectFrozenVocabularyEntry(parseJson(latest.snapshot_json, null))
+    const wrongRows = history.filter((row) => row.result === 'wrong')
+    if (!wrongRows.length) continue
+    let currentConsecutiveCorrect = 0
+    let currentConsecutiveWrong = 0
+    for (let index = history.length - 1; index >= 0; index -= 1) {
+      if (history[index].result !== 'correct') break
+      currentConsecutiveCorrect += 1
+    }
+    for (let index = history.length - 1; index >= 0; index -= 1) {
+      if (history[index].result !== 'wrong') break
+      currentConsecutiveWrong += 1
+    }
+    const recent = history.slice(-5)
+    const recentWrong = recent.filter((row) => row.result === 'wrong').length
+    const pending = currentConsecutiveCorrect < 2
+    const wrongDates = new Set(wrongRows.map((row) => row.dictation_date))
+    const flag = flags.get(entryId)
+    states.push({
+      ...snapshot,
+      attempts: history.length,
+      totalWrong: wrongRows.length,
+      currentConsecutiveWrong,
+      currentConsecutiveCorrect,
+      recentAttempts: recent.length,
+      recentWrong,
+      recentWrongRate: recent.length ? recentWrong / recent.length : 0,
+      wrongDateCount: wrongDates.size,
+      lastWrongDate: wrongRows.at(-1)?.dictation_date ?? null,
+      lastWrongSpelling: [...wrongRows].reverse().find((row) => row.wrong_spelling)?.wrong_spelling ?? '',
+      latestResult: latest.result,
+      status: pending && wrongDates.size >= 2 ? 'stubborn' : pending ? 'pending' : 'improved',
+      pinned: flag?.pinned === 1,
+      paused: flag?.paused === 1,
+      sourceSetIds: sourceIdsByEntry.get(entryId) ?? [],
+    })
+  }
+  return states.sort(compareVocabularyReviewStates)
+}
+
+export function updateStudentVocabularyWordFlag(userDb, userId, studentId, programId, entryId, input = {}) {
+  ensureUserVocabularyShape(userDb)
+  requireOwnedVocabularyStudent(userDb, userId, studentId)
+  const pinned = input.pinned === true ? 1 : 0
+  const paused = input.paused === true ? 1 : 0
+  if (!pinned && !paused) {
+    userDb.prepare(`
+      DELETE FROM vocabulary_student_word_flags
+      WHERE user_id = ? AND student_id = ? AND program_id = ? AND entry_id = ?
+    `).run(userId, studentId, programId, entryId)
+  } else {
+    userDb.prepare(`
+      INSERT INTO vocabulary_student_word_flags
+        (user_id, student_id, program_id, entry_id, pinned, paused, updated_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?)
+      ON CONFLICT(user_id, student_id, program_id, entry_id) DO UPDATE SET
+        pinned = excluded.pinned, paused = excluded.paused, updated_at = excluded.updated_at
+    `).run(userId, studentId, programId, entryId, pinned, paused, nowIso())
+  }
+  return { studentId, programId, entryId, pinned: Boolean(pinned), paused: Boolean(paused) }
+}
+
+export function getSuggestedVocabularyReview(userDb, userId, studentId, programId, target = 20) {
+  const safeTarget = normalizeTarget(target, 20)
+  const states = getStudentVocabularyReviewStates(userDb, userId, studentId, programId)
+  const activePending = states.filter((state) => state.status !== 'improved' && !state.paused)
+  const pinned = activePending.filter((state) => state.pinned)
+  const ordinary = activePending.filter((state) => !state.pinned)
+  const chosen = [...pinned, ...ordinary].slice(0, safeTarget)
+  const chosenIds = new Set(chosen.map((state) => state.id))
+  const improvedLimit = Math.floor(safeTarget * 0.2)
+  if (chosen.length < safeTarget && improvedLimit > 0) {
+    const improvedCandidates = states.filter((state) => state.status === 'improved' && !state.paused && !chosenIds.has(state.id))
+    const improved = [
+      ...improvedCandidates.filter((state) => state.pinned),
+      ...improvedCandidates.filter((state) => !state.pinned),
+    ]
+      .slice(0, Math.min(improvedLimit, safeTarget - chosen.length))
+    chosen.push(...improved)
+  }
+  return chosen.map((state) => ({
+    ...state,
+    reason: state.pinned
+      ? '老师重点关注'
+      : state.status === 'stubborn'
+        ? `至少 ${state.wrongDateCount} 天写错`
+        : state.status === 'pending'
+          ? '最近写错，尚未连续两次通过'
+          : '已改善，安排抽查',
+  }))
+}
+
+function vocabularySetDictationSummary(userDb, userId, studentId, programId, setId, reviewStates) {
+  const recordCount = userDb.prepare(`
+    SELECT COUNT(DISTINCT records.id) AS count
+    FROM vocabulary_dictation_records AS records
+    JOIN vocabulary_dictation_task_sources AS sources ON sources.task_id = records.task_id
+    WHERE records.user_id = ? AND records.student_id = ?
+      AND records.status = 'completed' AND sources.set_id = ?
+  `).get(userId, studentId, setId).count
+  const latestRecord = userDb.prepare(`
+    SELECT records.id, records.dictation_date
+    FROM vocabulary_dictation_records AS records
+    JOIN vocabulary_dictation_task_sources AS sources ON sources.task_id = records.task_id
+    WHERE records.user_id = ? AND records.student_id = ?
+      AND records.status = 'completed' AND sources.set_id = ?
+    ORDER BY records.dictation_date DESC, records.completed_at DESC, records.id DESC LIMIT 1
+  `).get(userId, studentId, setId)
+  const latestWrongCount = latestRecord ? userDb.prepare(`
+    SELECT COUNT(*) AS count
+    FROM vocabulary_dictation_record_results AS results
+    JOIN vocabulary_dictation_task_entry_sources AS sources
+      ON sources.task_id = (SELECT task_id FROM vocabulary_dictation_records WHERE id = results.record_id)
+      AND sources.entry_id = results.entry_id
+    WHERE results.record_id = ? AND sources.set_id = ? AND results.result = 'wrong'
+  `).get(latestRecord.id, setId).count : 0
+  const pendingCount = reviewStates.filter((state) =>
+    state.status !== 'improved' && !state.paused && state.sourceSetIds.includes(setId)).length
+  return {
+    recordCount,
+    latestWrongCount,
+    latestDate: latestRecord?.dictation_date ?? null,
+    pendingCount,
+  }
+}
+
+export function listVocabularySetLibrary(userDb, userId, input = {}) {
+  ensureUserVocabularyShape(userDb)
+  const studentId = requireNonEmpty(input.studentId, '学生档案')
+  requireOwnedVocabularyStudent(userDb, userId, studentId)
+  const programId = requireNonEmpty(input.programId ?? 'wanwei-round-one-v1', '词汇课程')
+  const page = Math.max(1, Number(input.page) || 1)
+  const pageSize = Math.max(1, Math.min(50, Number(input.pageSize) || 20))
+  const query = String(input.query ?? '').trim()
+  const from = input.from ? normalizeDictationDate(input.from) : null
+  const to = input.to ? normalizeDictationDate(input.to) : null
+  const conditions = ['sets.user_id = ?', 'sets.student_id = ?', 'sets.program_id = ?']
+  const values = [userId, studentId, programId]
+  if (query) {
+    conditions.push(`(sets.title LIKE ? ESCAPE '\\' OR EXISTS (
+      SELECT 1 FROM vocabulary_set_entries AS search_entries
+      WHERE search_entries.set_id = sets.id AND search_entries.snapshot_json LIKE ? ESCAPE '\\'
+    ))`)
+    const escaped = query.replace(/[\\%_]/gu, '\\$&')
+    values.push(`%${escaped}%`, `%${escaped}%`)
+  }
+  if (from) {
+    conditions.push('substr(sets.created_at, 1, 10) >= ?')
+    values.push(from)
+  }
+  if (to) {
+    conditions.push('substr(sets.created_at, 1, 10) <= ?')
+    values.push(to)
+  }
+  const where = conditions.join(' AND ')
+  const total = userDb.prepare(`SELECT COUNT(*) AS count FROM vocabulary_sets AS sets WHERE ${where}`).get(...values).count
+  const ids = userDb.prepare(`
+    SELECT sets.id FROM vocabulary_sets AS sets WHERE ${where}
+    ORDER BY sets.created_at DESC, sets.id DESC LIMIT ? OFFSET ?
+  `).all(...values, pageSize, (page - 1) * pageSize)
+  const reviewStates = getStudentVocabularyReviewStates(userDb, userId, studentId, programId)
+  return {
+    items: ids.map((row) => ({
+      ...readVocabularySetRows(userDb, userId, row.id),
+      dictationSummary: vocabularySetDictationSummary(userDb, userId, studentId, programId, row.id, reviewStates),
+    })),
+    page,
+    pageSize,
+    total,
+    hasMore: page * pageSize < total,
+  }
+}
+
+export function buildCombinedVocabularyPrintPayload(userDb, userId, input = {}) {
+  ensureUserVocabularyShape(userDb)
+  const studentId = requireNonEmpty(input.studentId, '学生档案')
+  requireOwnedVocabularyStudent(userDb, userId, studentId)
+  const programId = requireNonEmpty(input.programId ?? 'wanwei-round-one-v1', '词汇课程')
+  const title = normalizeDictationTitle(input.title, '生词合集')
+  const mode = input.mode === 'grouped' ? 'grouped' : 'dedupe'
+  const sourceSetIds = input.sourceSetIds == null ? [] : uniqueNonEmptyIds(input.sourceSetIds, '生词组 ID')
+  const entryIds = input.entryIds == null ? [] : uniqueNonEmptyIds(input.entryIds, '词条 ID')
+  if (!sourceSetIds.length && !entryIds.length) throw new VocabularyStoreError('打印内容不能为空。')
+  if (sourceSetIds.length && entryIds.length) throw new VocabularyStoreError('打印来源不能同时使用生词组和错词清单。')
+
+  const entries = []
+  const sections = []
+  const correctionByEntryId = {}
+  if (sourceSetIds.length) {
+    const seen = new Set()
+    for (const setId of sourceSetIds) {
+      const source = readOwnedVocabularySetSnapshotRows(userDb, userId, setId)
+      if (source.set.student_id !== studentId) {
+        throw new VocabularyStoreError('所选生词组不属于当前学生。', 409, 'vocabulary_print_student_mismatch')
+      }
+      if (source.set.program_id !== programId) {
+        throw new VocabularyStoreError('所选生词组不属于当前词汇课程。', 409, 'vocabulary_print_program_mismatch')
+      }
+      const sectionStart = entries.length
+      for (const item of source.entries) {
+        if (mode === 'dedupe' && seen.has(item.entryId)) continue
+        seen.add(item.entryId)
+        entries.push(item.entry)
+      }
+      if (entries.length > sectionStart) sections.push({ startIndex: sectionStart, title: source.set.title })
+    }
+  } else {
+    const states = getStudentVocabularyReviewStates(userDb, userId, studentId, programId)
+    const stateById = new Map(states.map((state) => [state.id, state]))
+    for (const entryId of entryIds) {
+      const state = stateById.get(entryId)
+      if (!state) throw new VocabularyStoreError('错词清单包含当前学生没有听写历史的词。', 409, 'vocabulary_print_review_state_missing')
+      const {
+        attempts: _attempts,
+        totalWrong: _totalWrong,
+        currentConsecutiveWrong: _currentConsecutiveWrong,
+        currentConsecutiveCorrect: _currentConsecutiveCorrect,
+        recentAttempts: _recentAttempts,
+        recentWrong: _recentWrong,
+        recentWrongRate: _recentWrongRate,
+        wrongDateCount: _wrongDateCount,
+        lastWrongDate: _lastWrongDate,
+        lastWrongSpelling,
+        latestResult: _latestResult,
+        status: _status,
+        pinned: _pinned,
+        paused: _paused,
+        sourceSetIds: _sourceSetIds,
+        ...entry
+      } = state
+      entries.push(entry)
+      correctionByEntryId[entryId] = { lastWrongSpelling }
+    }
+    sections.push({ startIndex: 0, title })
+  }
+  if (!entries.length) throw new VocabularyStoreError('打印内容不能为空。')
+  return {
+    vocabularySet: {
+      id: `vocabulary-print-${randomUUID()}`,
+      studentId,
+      programId,
+      reviewRunId: null,
+      title,
+      entryCount: entries.length,
+      entries,
+      share: null,
+      createdAt: nowIso(),
+    },
+    sections: mode === 'dedupe' ? [{ startIndex: 0, title }] : sections,
+    correctionByEntryId,
+    shareKind: null,
+  }
+}
+
+export function buildVocabularyDictationTaskPrintPayload(userDb, userId, taskId) {
+  ensureUserVocabularyShape(userDb)
+  const task = readDictationTaskRows(userDb, userId, taskId)
+  return {
+    vocabularySet: {
+      id: task.id,
+      studentId: task.studentId,
+      programId: task.programId,
+      reviewRunId: null,
+      title: task.title,
+      entryCount: task.entryCount,
+      entries: task.entries.map(({ sourceSetIds: _sourceSetIds, ...entry }) => entry),
+      share: task.share,
+      createdAt: task.createdAt,
+    },
+    sections: [{ startIndex: 0, title: task.title }],
+    correctionByEntryId: {},
+    shareKind: 'dictation',
+    accent: task.accent,
   }
 }

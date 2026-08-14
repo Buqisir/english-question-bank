@@ -91,6 +91,96 @@ export type VocabularyStudentDto = {
   updatedAt: string
 }
 
+export type VocabularySetLibraryItemDto = VocabularySetDto & {
+  dictationSummary: {
+    recordCount: number
+    latestWrongCount: number
+    latestDate: string | null
+    pendingCount: number
+  }
+}
+
+export type VocabularySetLibraryDto = {
+  items: VocabularySetLibraryItemDto[]
+  page: number
+  pageSize: number
+  total: number
+  hasMore: boolean
+}
+
+export type VocabularyDictationTaskDto = {
+  id: string
+  studentId: string
+  programId: string
+  title: string
+  accent: 'american' | 'british'
+  entryCount: number
+  entries: Array<VocabularySetEntry & { sourceSetIds: string[] }>
+  sourceSets: Array<{
+    setId: string
+    title: string
+    entryCount: number
+    createdAt: string
+  }>
+  share: null | {
+    shareId: string
+    status: 'active' | 'revoked'
+    createdAt: string
+    revokedAt: string | null
+  }
+  createdAt: string
+}
+
+export type VocabularyDictationResult = 'correct' | 'wrong' | 'untested'
+
+export type VocabularyDictationRecordDto = {
+  id: string
+  studentId: string
+  taskId: string
+  taskTitle: string
+  mode: 'all' | 'partial'
+  status: 'draft' | 'completed' | 'void'
+  dictationDate: string
+  note: string
+  entries: Array<VocabularySetEntry & {
+    sourceSetIds: string[]
+    result: VocabularyDictationResult
+    wrongSpelling: string
+  }>
+  createdAt: string
+  updatedAt: string
+  completedAt: string | null
+  voidedAt: string | null
+}
+
+export type StudentVocabularyReviewStateDto = VocabularySetEntry & {
+  attempts: number
+  totalWrong: number
+  currentConsecutiveWrong: number
+  currentConsecutiveCorrect: number
+  recentAttempts: number
+  recentWrong: number
+  recentWrongRate: number
+  wrongDateCount: number
+  lastWrongDate: string | null
+  lastWrongSpelling: string
+  latestResult: 'correct' | 'wrong'
+  status: 'pending' | 'stubborn' | 'improved'
+  pinned: boolean
+  paused: boolean
+  sourceSetIds: string[]
+  reason?: string
+}
+
+export type VocabularyPrintJobDto = {
+  vocabularySet: VocabularySetDto
+  sections: Array<{ startIndex: number; title: string }>
+  correctionByEntryId: Record<string, { lastWrongSpelling: string }>
+  shareKind: 'dictation' | null
+  accent: 'american' | 'british'
+  kind: 'cards' | 'dictation' | 'answer' | 'word-search' | 'correction'
+}
+
 export class VocabularyApiError extends Error {
   status: number
   code: string
@@ -256,9 +346,150 @@ export async function listVocabularySets(studentId: string): Promise<VocabularyS
   return body.vocabularySets as VocabularySetDto[]
 }
 
+export async function getVocabularySetLibrary(input: {
+  studentId: string
+  page?: number
+  pageSize?: number
+  query?: string
+  from?: string
+  to?: string
+}): Promise<VocabularySetLibraryDto> {
+  const query = new URLSearchParams({
+    studentId: input.studentId,
+    programId: 'wanwei-round-one-v1',
+    page: String(input.page ?? 1),
+    pageSize: String(input.pageSize ?? 20),
+  })
+  if (input.query?.trim()) query.set('query', input.query.trim())
+  if (input.from) query.set('from', input.from)
+  if (input.to) query.set('to', input.to)
+  const body = await requestJson(`/api/vocabulary/set-library?${query.toString()}`)
+  return body.library as VocabularySetLibraryDto
+}
+
+export async function createVocabularyDictationTask(input: {
+  studentId: string
+  sourceSetIds?: string[]
+  entryIds?: string[]
+  title: string
+  accent: 'american' | 'british'
+}): Promise<VocabularyDictationTaskDto> {
+  const body = await requestJson('/api/vocabulary/dictation-tasks', {
+    method: 'POST',
+    body: JSON.stringify({ ...input, programId: 'wanwei-round-one-v1' }),
+  })
+  return body.task as VocabularyDictationTaskDto
+}
+
+export async function listVocabularyDictationTasks(studentId: string): Promise<VocabularyDictationTaskDto[]> {
+  const query = new URLSearchParams({ studentId })
+  const body = await requestJson(`/api/vocabulary/dictation-tasks?${query.toString()}`)
+  return body.tasks as VocabularyDictationTaskDto[]
+}
+
+export async function getVocabularyDictationTask(taskId: string): Promise<VocabularyDictationTaskDto> {
+  const body = await requestJson(`/api/vocabulary/dictation-tasks/${encodeURIComponent(taskId)}`)
+  return body.task as VocabularyDictationTaskDto
+}
+
+export async function shareVocabularyDictationTask(taskId: string): Promise<{ shareId: string; status: 'active' }> {
+  const body = await requestJson(`/api/vocabulary/dictation-tasks/${encodeURIComponent(taskId)}/share`, { method: 'POST' })
+  return body.share as { shareId: string; status: 'active' }
+}
+
+export async function revokeVocabularyDictationTaskShare(taskId: string): Promise<{ status: 'revoked' }> {
+  const body = await requestJson(`/api/vocabulary/dictation-tasks/${encodeURIComponent(taskId)}/share`, { method: 'DELETE' })
+  return body.share as { status: 'revoked' }
+}
+
+export async function createVocabularyDictationRecord(
+  taskId: string,
+  input: {
+    mode: 'all' | 'partial'
+    status: 'draft' | 'completed'
+    dictationDate: string
+    note?: string
+    results?: Array<{ entryId: string; result: VocabularyDictationResult; wrongSpelling?: string }>
+  },
+): Promise<VocabularyDictationRecordDto> {
+  const body = await requestJson(`/api/vocabulary/dictation-tasks/${encodeURIComponent(taskId)}/records`, {
+    method: 'POST',
+    body: JSON.stringify(input),
+  })
+  return body.record as VocabularyDictationRecordDto
+}
+
+export async function listVocabularyDictationRecords(studentId: string): Promise<VocabularyDictationRecordDto[]> {
+  const body = await requestJson(`/api/vocabulary/dictation-records?studentId=${encodeURIComponent(studentId)}`)
+  return body.records as VocabularyDictationRecordDto[]
+}
+
+export async function updateVocabularyDictationRecord(
+  recordId: string,
+  input: Partial<{
+    mode: 'all' | 'partial'
+    status: 'draft' | 'completed'
+    dictationDate: string
+    note: string
+    results: Array<{ entryId: string; result: VocabularyDictationResult; wrongSpelling?: string }>
+  }>,
+): Promise<VocabularyDictationRecordDto> {
+  const body = await requestJson(`/api/vocabulary/dictation-records/${encodeURIComponent(recordId)}`, {
+    method: 'PATCH',
+    body: JSON.stringify(input),
+  })
+  return body.record as VocabularyDictationRecordDto
+}
+
+export async function voidVocabularyDictationRecord(recordId: string): Promise<VocabularyDictationRecordDto> {
+  const body = await requestJson(`/api/vocabulary/dictation-records/${encodeURIComponent(recordId)}/void`, { method: 'POST' })
+  return body.record as VocabularyDictationRecordDto
+}
+
+export async function restoreVocabularyDictationRecord(recordId: string): Promise<VocabularyDictationRecordDto> {
+  const body = await requestJson(`/api/vocabulary/dictation-records/${encodeURIComponent(recordId)}/restore`, { method: 'POST' })
+  return body.record as VocabularyDictationRecordDto
+}
+
+export async function getStudentVocabularyReviewStates(studentId: string): Promise<StudentVocabularyReviewStateDto[]> {
+  const query = new URLSearchParams({ studentId, programId: 'wanwei-round-one-v1' })
+  const body = await requestJson(`/api/vocabulary/review-states?${query.toString()}`)
+  return body.states as StudentVocabularyReviewStateDto[]
+}
+
+export async function getSuggestedVocabularyReview(studentId: string, target: number): Promise<StudentVocabularyReviewStateDto[]> {
+  const query = new URLSearchParams({
+    studentId,
+    programId: 'wanwei-round-one-v1',
+    target: String(target),
+  })
+  const body = await requestJson(`/api/vocabulary/review-suggestion?${query.toString()}`)
+  return body.entries as StudentVocabularyReviewStateDto[]
+}
+
+export async function updateStudentVocabularyWordFlag(
+  studentId: string,
+  entryId: string,
+  input: { pinned: boolean; paused: boolean },
+): Promise<void> {
+  await requestJson(`/api/vocabulary/review-states/${encodeURIComponent(entryId)}/flag`, {
+    method: 'PATCH',
+    body: JSON.stringify({
+      studentId,
+      programId: 'wanwei-round-one-v1',
+      ...input,
+    }),
+  })
+}
+
 export async function getVocabularySet(setId: string): Promise<VocabularySetDto> {
   const body = await requestJson(`/api/vocabulary/sets/${encodeURIComponent(setId)}`)
   return body.vocabularySet as VocabularySetDto
+}
+
+export async function getVocabularyPrintJob(printJobId: string): Promise<VocabularyPrintJobDto> {
+  const body = await requestJson(`/api/vocabulary/print-jobs/${encodeURIComponent(printJobId)}`)
+  return body.printJob as VocabularyPrintJobDto
 }
 
 export async function createVocabularySetFromEntries(
@@ -332,6 +563,54 @@ export async function downloadVocabularySetPdf(
   }
   const blob = await response.blob()
   const fileName = decodeHeaderValue(response.headers.get('x-file-name')) || '生词记忆纸.pdf'
+  downloadBlob(blob, fileName)
+}
+
+export async function downloadCombinedVocabularyPdf(input: {
+  studentId: string
+  title: string
+  sourceSetIds?: string[]
+  entryIds?: string[]
+  mode?: 'dedupe' | 'grouped'
+  accent: 'american' | 'british'
+  kind: 'cards' | 'dictation' | 'answer' | 'word-search' | 'correction'
+}): Promise<void> {
+  const response = await fetch('/api/vocabulary/combined-pdf', {
+    method: 'POST',
+    headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ ...input, programId: 'wanwei-round-one-v1' }),
+  })
+  if (!response.ok) {
+    const body = await readJson(response)
+    throw new VocabularyApiError(
+      typeof body.message === 'string' ? body.message : '合并打印暂时无法生成，请重试。',
+      response.status,
+      typeof body.error === 'string' ? body.error : undefined,
+    )
+  }
+  const blob = await response.blob()
+  const fileName = decodeHeaderValue(response.headers.get('x-file-name')) || '生词合集.pdf'
+  downloadBlob(blob, fileName)
+}
+
+export async function downloadVocabularyDictationTaskPdf(
+  taskId: string,
+  kind: 'cards' | 'dictation' | 'answer' | 'word-search',
+): Promise<void> {
+  const response = await fetch(
+    `/api/vocabulary/dictation-tasks/${encodeURIComponent(taskId)}/pdf?kind=${encodeURIComponent(kind)}`,
+    { method: 'POST' },
+  )
+  if (!response.ok) {
+    const body = await readJson(response)
+    throw new VocabularyApiError(
+      typeof body.message === 'string' ? body.message : '听写任务打印暂时无法生成，请重试。',
+      response.status,
+      typeof body.error === 'string' ? body.error : undefined,
+    )
+  }
+  const blob = await response.blob()
+  const fileName = decodeHeaderValue(response.headers.get('x-file-name')) || '综合听写.pdf'
   downloadBlob(blob, fileName)
 }
 
