@@ -36,6 +36,7 @@ const registry = {
   'scripts/verify-paper-canonical-import-admission.mjs',
   'scripts/verify-paper-canonical-registered-confirmation-admission.mjs',
   'scripts/verify-paper-canonical-import-recovery.mjs',
+  'scripts/verify-production-canonical-publication-backfill.mjs',
   'scripts/verify-paper-canonical-import-pilot-fixes.mjs',
   'scripts/verify-paper-canonical-docx-source-adapter.mjs',
   'scripts/verify-paper-canonical-trusted-docx-request.mjs',

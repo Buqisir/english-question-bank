@@ -188,6 +188,14 @@ assert(
   deployRemoteSh.includes('runuser -u eqb -- node scripts/smoke-production-chromium.mjs'),
   'deploy-remote.sh runs the production Chromium smoke as the eqb service user',
 )
+const canonicalReadinessIndex = deployRemoteSh.indexOf(
+  'node scripts/backfill-production-canonical-publications.mjs --runtime-only',
+)
+const remoteRestartIndex = deployRemoteSh.indexOf('systemctl restart eqb')
+assert(
+  canonicalReadinessIndex >= 0 && canonicalReadinessIndex < remoteRestartIndex,
+  'deploy-remote.sh fails closed on Canonical publication readiness before service restart',
+)
 assert(
   chromiumSmoke.includes("from '../server/draft-paper/chromiumPool.mjs'") &&
     chromiumSmoke.includes('page.pdf(') &&
