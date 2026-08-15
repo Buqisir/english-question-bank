@@ -1,4 +1,5 @@
 import { defineRoute } from '../router/index.mjs'
+import archiver from 'archiver'
 import {
   createVocabularyPrintJob,
   deleteVocabularyPrintJob,
@@ -14,6 +15,7 @@ import {
   createVocabularyStudent,
   createVocabularyReviewRun,
   createVocabularySetFromEntries,
+  createVocabularySetErrorTasks,
   decideVocabularyReviewEntry,
   discardVocabularyReviewRun,
   freezeVocabularySet,
@@ -117,6 +119,14 @@ function sendVocabularyPdf(response, body, fileName) {
     'x-file-name': encodeURIComponent(fileName),
   })
   response.end(body)
+}
+
+function sendVocabularyZipHeaders(response, fileName) {
+  response.writeHead(200, {
+    'content-disposition': `attachment; filename="vocabulary-review-materials.zip"; filename*=UTF-8''${encodeURIComponent(fileName)}`,
+    'content-type': 'application/zip',
+    'x-file-name': encodeURIComponent(fileName),
+  })
 }
 
 function vocabularyPdfFileName(title, entryCount, accent, kind = 'cards') {
@@ -385,6 +395,17 @@ export function createVocabularyRoutes() {
       }
     }),
 
+    defineRoute('POST', /^\/api\/vocabulary\/dictation-tasks\/from-set-errors$/, async ({ request, response, context }) => {
+      const userId = context.resolveDataUserId(context)
+      const input = await context.readJsonBody(request, { maxBytes: 40_000 })
+      try {
+        const tasks = withVocabularyDbs(context, (dbs) => createVocabularySetErrorTasks(dbs, userId, input))
+        context.sendJson(response, 201, { tasks })
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      }
+    }),
+
     defineRoute('GET', /^\/api\/vocabulary\/meaning-recall-records$/, ({ request, response, context }) => {
       const userId = context.resolveDataUserId(context)
       const query = readQuery(request)
@@ -542,7 +563,9 @@ export function createVocabularyRoutes() {
           printJobId,
           accent: payload.accent,
           kind,
-          expectedPageCount: expectedVocabularyPrintPages(payload.vocabularySet.entryCount, kind),
+          expectedPageCount: payload.materialLayout === 'grouped'
+            ? undefined
+            : expectedVocabularyPrintPages(payload.vocabularySet.entryCount, kind),
           expectedQrCount: hasQr ? 1 : 0,
         })
         sendVocabularyPdf(
@@ -554,6 +577,101 @@ export function createVocabularyRoutes() {
         sendVocabularyError(response, context, error)
       } finally {
         if (printJobId) deleteVocabularyPrintJob(printJobId)
+      }
+    }),
+
+    defineRoute('POST', /^\/api\/vocabulary\/dictation-task-materials\.zip$/, async ({ request, response, context }) => {
+      const userId = context.resolveDataUserId(context)
+      const input = await context.readJsonBody(request, { maxBytes: 40_000 })
+      const taskIds = Array.isArray(input.taskIds)
+        ? [...new Set(input.taskIds.map((value) => String(value ?? '').trim()).filter(Boolean))]
+        : []
+      const kinds = Array.isArray(input.kinds)
+        ? [...new Set(input.kinds.map((value) => String(value ?? '').trim()).filter(Boolean))]
+        : []
+      if (!taskIds.length || taskIds.length > 30) {
+        context.sendJson(response, 400, { error: 'invalid_vocabulary_bundle_tasks', message: '资料包必须包含1–30份听写任务。' })
+        return
+      }
+      if (!kinds.length || kinds.some((kind) => !['cards', 'dictation', 'answer'].includes(kind))) {
+        context.sendJson(response, 400, { error: 'invalid_vocabulary_bundle_kinds', message: '资料包类型无效。' })
+        return
+      }
+      let activePrintJobId = null
+      try {
+        const payloads = withUserDb(context, false, (db) => taskIds.map((taskId) => (
+          buildVocabularyDictationTaskPrintPayload(db, userId, taskId)
+        )))
+        const studentIds = new Set(payloads.map((payload) => payload.vocabularySet.studentId))
+        if (studentIds.size !== 1) {
+          throw new VocabularyStoreError('资料包中的听写任务必须属于同一名学生。', 409, 'vocabulary_bundle_student_mismatch')
+        }
+        const firstTitle = payloads[0].vocabularySet.title.replace(/（\d+\/\d+）$/u, '').trim()
+        const zipFileName = `${firstTitle || '错词复听写'}-资料.zip`
+        sendVocabularyZipHeaders(response, zipFileName)
+        const archive = archiver('zip', { zlib: { level: 9 } })
+        let archiveError = null
+        let clientDisconnected = false
+        archive.once('error', (error) => {
+          archiveError = error
+        })
+        response.once('close', () => {
+          if (response.writableEnded) return
+          clientDisconnected = true
+          archive.abort()
+        })
+        archive.on('warning', (warning) => {
+          if (warning.code !== 'ENOENT') archive.emit('error', warning)
+        })
+        archive.pipe(response)
+        renderMaterials:
+        for (const payload of payloads) {
+          for (const kind of kinds) {
+            if (clientDisconnected) break renderMaterials
+            if (archiveError) throw archiveError
+            activePrintJobId = createVocabularyPrintJob(userId, {
+              ...payload,
+              kind,
+              shareKind: kind === 'cards' ? 'listen' : kind === 'dictation' ? 'dictation' : null,
+            })
+            try {
+              const hasQr = payload.vocabularySet.share?.status === 'active' && ['cards', 'dictation'].includes(kind)
+              const result = await context.renderVocabularySetPdf({
+                cookie: request.headers.cookie ?? '',
+                printJobId: activePrintJobId,
+                accent: payload.accent,
+                kind,
+                expectedPageCount: payload.materialLayout === 'grouped'
+                  ? undefined
+                  : expectedVocabularyPrintPages(payload.vocabularySet.entryCount, kind),
+                expectedQrCount: hasQr ? 1 : 0,
+              })
+              if (clientDisconnected) break renderMaterials
+              if (archiveError) throw archiveError
+              archive.append(Buffer.from(result.pdfBytes), {
+                name: vocabularyPdfFileName(
+                  payload.vocabularySet.title,
+                  payload.vocabularySet.entryCount,
+                  payload.accent,
+                  kind,
+                ),
+              })
+            } finally {
+              deleteVocabularyPrintJob(activePrintJobId)
+              activePrintJobId = null
+            }
+          }
+        }
+        if (clientDisconnected) return
+        if (archiveError) throw archiveError
+        await archive.finalize()
+      } catch (error) {
+        if (activePrintJobId) deleteVocabularyPrintJob(activePrintJobId)
+        if (response.headersSent) {
+          response.destroy(error instanceof Error ? error : new Error('错词资料包生成失败。'))
+        } else {
+          sendVocabularyError(response, context, error)
+        }
       }
     }),
 

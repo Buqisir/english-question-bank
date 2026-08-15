@@ -120,6 +120,7 @@ export type VocabularyDictationTaskDto = {
   taskDate: string
   title: string
   accent: 'american' | 'british'
+  materialLayout: 'merged' | 'grouped'
   entryCount: number
   entries: Array<VocabularySetEntry & { sourceSetIds: string[] }>
   sourceSets: Array<{
@@ -439,6 +440,7 @@ export async function createVocabularyDictationTask(input: {
   taskDate?: string
   title: string
   accent: 'american' | 'british'
+  materialLayout?: 'merged' | 'grouped'
   meaningRecallRecordId?: string
   share?: boolean
 }): Promise<VocabularyDictationTaskDto> {
@@ -447,6 +449,20 @@ export async function createVocabularyDictationTask(input: {
     body: JSON.stringify({ ...input, programId: 'wanwei-round-one-v1' }),
   })
   return body.task as VocabularyDictationTaskDto
+}
+
+export async function createVocabularySetErrorTasks(input: {
+  studentId: string
+  sourceSetIds: string[]
+  taskDate: string
+  accent: 'american' | 'british'
+  materialLayout: 'merged' | 'grouped'
+}): Promise<VocabularyDictationTaskDto[]> {
+  const body = await requestJson('/api/vocabulary/dictation-tasks/from-set-errors', {
+    method: 'POST',
+    body: JSON.stringify({ ...input, programId: 'wanwei-round-one-v1' }),
+  })
+  return body.tasks as VocabularyDictationTaskDto[]
 }
 
 export async function createVocabularyMeaningRecallRecord(input: {
@@ -756,6 +772,28 @@ export async function downloadVocabularyDictationTaskPdf(
   }
   const blob = await response.blob()
   const fileName = decodeHeaderValue(response.headers.get('x-file-name')) || '综合听写.pdf'
+  downloadBlob(blob, fileName)
+}
+
+export async function downloadVocabularyDictationTaskMaterialsZip(
+  taskIds: string[],
+  kinds: Array<'cards' | 'dictation' | 'answer'>,
+): Promise<void> {
+  const response = await fetch('/api/vocabulary/dictation-task-materials.zip', {
+    method: 'POST',
+    headers: { Accept: 'application/zip', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ taskIds, kinds }),
+  })
+  if (!response.ok) {
+    const body = await readJson(response)
+    throw new VocabularyApiError(
+      typeof body.message === 'string' ? body.message : '错词资料包暂时无法生成，请重试。',
+      response.status,
+      typeof body.error === 'string' ? body.error : undefined,
+    )
+  }
+  const blob = await response.blob()
+  const fileName = decodeHeaderValue(response.headers.get('x-file-name')) || '错词复听写-资料.zip'
   downloadBlob(blob, fileName)
 }
 

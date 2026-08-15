@@ -6,6 +6,7 @@ import { DatabaseSync } from 'node:sqlite'
 import {
   createVocabularyDictationRecord,
   createVocabularyDictationTask,
+  createVocabularySetErrorTasks,
   createVocabularySetFromEntries,
   createVocabularyStudent,
   ensureSharedVocabularyShape,
@@ -108,6 +109,11 @@ assert.equal(
   legacyTaskDb.prepare('SELECT task_date FROM vocabulary_dictation_tasks WHERE id = ?').get('legacy-local-date-task').task_date,
   '2026-08-13',
   '旧任务标题已有本地日期时必须优先保留，不能被 UTC 创建日推迟一天',
+)
+assert.equal(
+  legacyTaskDb.prepare('SELECT material_layout FROM vocabulary_dictation_tasks WHERE id = ?').get('legacy-task').material_layout,
+  'merged',
+  '旧听写任务升级后必须默认使用合并版式',
 )
 legacyTaskDb.close()
 const bankDb = new DatabaseSync(path.join(root, 'question-bank.sqlite'))
@@ -499,6 +505,38 @@ assert.equal(listVocabularySetLibrary(userDb, 'teacher-a', {
   programId: 'wanwei-round-one-v1',
 }).total, 1)
 
+updateStudentVocabularyWordFlag(userDb, 'teacher-a', student.id, 'wanwei-round-one-v1', targetEntryId, {
+  pinned: false,
+  paused: false,
+})
+createVocabularyDictationRecord(userDb, 'teacher-a', firstTask.id, {
+  mode: 'all',
+  status: 'completed',
+  dictationDate: '2026-08-20',
+  results: firstTask.entries.map((entry) => ({ entryId: entry.id, result: 'wrong' })),
+})
+createVocabularyDictationRecord(userDb, 'teacher-a', secondTask.id, {
+  mode: 'all',
+  status: 'completed',
+  dictationDate: '2026-08-20',
+  results: secondTask.entries.map((entry) => ({ entryId: entry.id, result: 'wrong' })),
+})
+const splitErrorTasks = createVocabularySetErrorTasks(dbs, 'teacher-a', {
+  studentId: student.id,
+  programId: 'wanwei-round-one-v1',
+  sourceSetIds: [setA.id, setB.id],
+  taskDate: '2026-08-20',
+  accent: 'american',
+  materialLayout: 'merged',
+})
+assert.deepEqual(splitErrorTasks.map((nextTask) => nextTask.entryCount), [60, 1], '61个当前错词必须拆成60词和1词两份')
+assert.equal(splitErrorTasks.every((nextTask) => nextTask.share?.status === 'active'), true, '每个错词分片都必须原子生成二维码')
+assert.deepEqual(
+  splitErrorTasks.flatMap((nextTask) => nextTask.entries.map((entry) => entry.id)),
+  entries.map((entry) => entry.id),
+  '错词分片必须保持所选组顺序、组内顺序和全局去重',
+)
+
 assert.throws(() => createVocabularyDictationTask(dbs, 'teacher-a', {
   studentId: otherStudent.id,
   programId: 'wanwei-round-one-v1',
@@ -531,7 +569,14 @@ assert.match(
 )
 assert.match(workbenchSource, /下载资料[\s\S]{0,900}单词卡（含二维码）[\s\S]{0,900}复听写纸（含二维码）[\s\S]{0,900}教师答案/u, '三个下载项必须收进一个下载资料菜单')
 assert.match(workbenchSource, /已选 \{selectedReviewWords\.length\} 词[\s\S]{0,600}生成错词听写[\s\S]{0,600}复制清单[\s\S]{0,600}取消/u, '错词选择栏只保留生成听写、复制和取消')
-assert.doesNotMatch(workbenchSource, /记忆卡|订正纸|带二维码听写纸|二维码任务/u, '工作台不得保留旧术语或重复入口')
+assert.doesNotMatch(workbenchSource, /订正纸|带二维码听写纸|二维码任务/u, '工作台不得保留旧术语或重复入口')
+assert.match(workbenchSource, /错词资料（\{selectedGroupReviewWords\.length\}词）/u, '词组多选工具必须直接显示当前错词数量')
+assert.match(workbenchSource, /合并去重[\s\S]{0,500}按组装订[\s\S]{0,500}记忆卡[\s\S]{0,500}复听写纸[\s\S]{0,500}教师答案[\s\S]{0,500}下载全套/u, '错词资料必须提供两种版式和四个精简下载动作')
+assert.match(workbenchSource, /暂无错词/u, '所选词组无当前错词时必须显示明确禁用态')
+assert.doesNotMatch(workbenchSource, /查看组内错词/u, '词组错词资料不得再要求老师跳转错词页')
+assert.match(workbenchSource, /createVocabularySetErrorTasks\([\s\S]{0,500}materialLayout: errorMaterialLayout/u, '错词资料必须由服务端重新计算并冻结版式')
+assert.match(workbenchSource, /nextTasks\.length === 1 && kinds\.length === 1[\s\S]{0,300}downloadVocabularyDictationTaskMaterialsZip/u, '单份单类型下载PDF，其余资料必须合并为ZIP')
+assert.match(workbenchSource, /复听写任务已经生成，但资料下载失败/u, 'PDF失败时必须保留任务并引导老师重试')
 const tabNavigationSource = workbenchSource.slice(
   workbenchSource.indexOf('<nav className="dictation-workbench-tabs"'),
   workbenchSource.indexOf('{(message || error)'),
@@ -584,6 +629,14 @@ assert.match(vocabularyReviewSource, /printRequest\.kind === 'dictation' && page
 assert.match(vocabularyReviewSource, /printShareKind === 'dictation'[\s\S]{0,300}\/vocabulary\/dictation\/\$\{shareId\}[\s\S]{0,180}\/vocabulary\/listen\/\$\{shareId\}/u, '任务单词卡必须进入带图片的公开听音页，复听写纸继续进入自动听写页')
 assert.match(vocabularyReviewSource, /扫码听音频/u, '单词卡右下角必须统一使用“扫码听音频”语义')
 assert.match(vocabularyRoutesSource, /hasQr = payload\.vocabularySet\.share\?\.status === 'active' && \['cards', 'dictation'\]\.includes\(kind\)[\s\S]{0,400}expectedQrCount: hasQr \? 1 : 0/u, '任务单词卡和复听写纸各一个二维码，教师答案不得带二维码')
+assert.match(vocabularyServiceSource, /createVocabularySetErrorTasks[\s\S]{0,500}\/api\/vocabulary\/dictation-tasks\/from-set-errors/u, '客户端必须使用专用错词冻结接口')
+assert.match(vocabularyServiceSource, /downloadVocabularyDictationTaskMaterialsZip[\s\S]{0,500}dictation-task-materials\.zip/u, '客户端必须提供认证ZIP资料下载')
+assert.match(vocabularyRoutesSource, /dictation-tasks\\\/from-set-errors/u, '服务端必须提供按生词组创建当前错词任务的认证接口')
+assert.match(vocabularyRoutesSource, /dictation-task-materials\\\.zip[\s\S]{0,1800}studentIds\.size !== 1/u, 'ZIP接口必须拒绝跨学生任务组合')
+assert.match(vocabularyStoreSource, /material_layout TEXT NOT NULL DEFAULT 'merged'/u, '旧任务必须幂等升级为合并版式')
+assert.match(vocabularyStoreSource, /invalid_vocabulary_material_layout/u, '显式非法资料版式必须被服务端拒绝')
+assert.match(vocabularyRoutesSource, /clientDisconnected[\s\S]{0,500}archive\.abort\(\)[\s\S]{0,1500}break renderMaterials/u, '客户端取消 ZIP 后必须中止归档并停止后续 PDF 渲染')
+assert.match(vocabularyStoreSource, /createVocabularySetErrorTasks[\s\S]{0,3000}getStudentVocabularyMeaningStates[\s\S]{0,300}getStudentVocabularyReviewStates/u, '服务端必须统一计算认词和听写的当前错词')
 for (const [label, source] of [
   ['客户端打印 DTO', vocabularyServiceSource],
   ['服务端打印路由', vocabularyRoutesSource],
