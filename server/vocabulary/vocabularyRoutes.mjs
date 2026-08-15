@@ -10,6 +10,7 @@ import {
   buildVocabularyDictationTaskPrintPayload,
   createVocabularyDictationRecord,
   createVocabularyDictationTask,
+  createVocabularyMeaningRecallRecord,
   createVocabularyStudent,
   createVocabularyReviewRun,
   createVocabularySetFromEntries,
@@ -17,12 +18,16 @@ import {
   discardVocabularyReviewRun,
   freezeVocabularySet,
   getPublicVocabularyDictationResource,
+  getPublicVocabularyListenResource,
   getCurrentVocabularyReviewRun,
   getPublicVocabularyShare,
   getStudentVocabularyReviewStates,
+  getStudentVocabularyMeaningStates,
   getSuggestedVocabularyReview,
+  getSuggestedVocabularyMeaningRecall,
   getVocabularyDictationRecord,
   getVocabularyDictationTask,
+  getVocabularyMeaningRecallRecord,
   getVocabularyProgram,
   getVocabularyProgress,
   getVocabularyReviewRun,
@@ -30,11 +35,13 @@ import {
   getVocabularySetForReviewRun,
   listVocabularyDictationRecords,
   listVocabularyDictationTasks,
+  listVocabularyMeaningRecallRecords,
   listVocabularySetLibrary,
   listVocabularyStudents,
   listVocabularySets,
   renameVocabularySet,
   restoreVocabularyDictationRecord,
+  restoreVocabularyMeaningRecallRecord,
   revokeVocabularyDictationTaskShare,
   revokeVocabularyShare,
   setVocabularyProgressStart,
@@ -43,7 +50,9 @@ import {
   undoVocabularyReviewDecision,
   updateStudentVocabularyWordFlag,
   updateVocabularyDictationRecord,
+  updateVocabularyMeaningRecallRecord,
   voidVocabularyDictationRecord,
+  voidVocabularyMeaningRecallRecord,
 } from './vocabularyStore.mjs'
 
 function decodePathPart(raw) {
@@ -376,6 +385,128 @@ export function createVocabularyRoutes() {
       }
     }),
 
+    defineRoute('GET', /^\/api\/vocabulary\/meaning-recall-records$/, ({ request, response, context }) => {
+      const userId = context.resolveDataUserId(context)
+      const query = readQuery(request)
+      try {
+        const records = withUserDb(context, false, (db) => listVocabularyMeaningRecallRecords(
+          db,
+          userId,
+          readQueryPart(request, 'studentId'),
+          { limit: query.get('limit') },
+        ))
+        context.sendJson(response, 200, { records })
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      }
+    }),
+
+    defineRoute('POST', /^\/api\/vocabulary\/meaning-recall-records$/, async ({ request, response, context }) => {
+      const userId = context.resolveDataUserId(context)
+      const input = await context.readJsonBody(request, { maxBytes: 100_000 })
+      try {
+        const record = withUserDb(context, false, (userDb) => createVocabularyMeaningRecallRecord(
+          { userDb },
+          userId,
+          input,
+        ))
+        context.sendJson(response, 201, { record })
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      }
+    }),
+
+    defineRoute('GET', /^\/api\/vocabulary\/meaning-recall-records\/([^/]+)$/, ({ response, match, context }) => {
+      const userId = context.resolveDataUserId(context)
+      try {
+        const record = withUserDb(context, false, (db) => getVocabularyMeaningRecallRecord(
+          db,
+          userId,
+          decodePathPart(match[1]),
+        ))
+        context.sendJson(response, 200, { record })
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      }
+    }),
+
+    defineRoute('PATCH', /^\/api\/vocabulary\/meaning-recall-records\/([^/]+)$/, async ({ request, response, match, context }) => {
+      const userId = context.resolveDataUserId(context)
+      const input = await context.readJsonBody(request, { maxBytes: 100_000 })
+      try {
+        const record = withUserDb(context, false, (db) => updateVocabularyMeaningRecallRecord(
+          db,
+          userId,
+          decodePathPart(match[1]),
+          input,
+        ))
+        context.sendJson(response, 200, { record })
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      }
+    }),
+
+    defineRoute('POST', /^\/api\/vocabulary\/meaning-recall-records\/([^/]+)\/void$/, ({ response, match, context }) => {
+      const userId = context.resolveDataUserId(context)
+      try {
+        const record = withUserDb(context, false, (db) => voidVocabularyMeaningRecallRecord(
+          db,
+          userId,
+          decodePathPart(match[1]),
+        ))
+        context.sendJson(response, 200, { record })
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      }
+    }),
+
+    defineRoute('POST', /^\/api\/vocabulary\/meaning-recall-records\/([^/]+)\/restore$/, ({ response, match, context }) => {
+      const userId = context.resolveDataUserId(context)
+      try {
+        const record = withUserDb(context, false, (db) => restoreVocabularyMeaningRecallRecord(
+          db,
+          userId,
+          decodePathPart(match[1]),
+        ))
+        context.sendJson(response, 200, { record })
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      }
+    }),
+
+    defineRoute('GET', /^\/api\/vocabulary\/meaning-review-states$/, ({ request, response, context }) => {
+      const userId = context.resolveDataUserId(context)
+      const query = readQuery(request)
+      try {
+        const states = withUserDb(context, false, (db) => getStudentVocabularyMeaningStates(
+          db,
+          userId,
+          readQueryPart(request, 'studentId'),
+          query.get('programId') ?? 'wanwei-round-one-v1',
+        ))
+        context.sendJson(response, 200, { states })
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      }
+    }),
+
+    defineRoute('GET', /^\/api\/vocabulary\/meaning-review-suggestion$/, ({ request, response, context }) => {
+      const userId = context.resolveDataUserId(context)
+      const query = readQuery(request)
+      try {
+        const entries = withUserDb(context, false, (db) => getSuggestedVocabularyMeaningRecall(
+          db,
+          userId,
+          readQueryPart(request, 'studentId'),
+          query.get('programId') ?? 'wanwei-round-one-v1',
+          query.get('target'),
+        ))
+        context.sendJson(response, 200, { entries })
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      }
+    }),
+
     defineRoute('GET', /^\/api\/vocabulary\/dictation-tasks\/([^/]+)$/, ({ response, match, context }) => {
       const userId = context.resolveDataUserId(context)
       try {
@@ -400,7 +531,11 @@ export function createVocabularyRoutes() {
           userId,
           decodePathPart(match[1]),
         ))
-        printJobId = createVocabularyPrintJob(userId, { ...payload, kind })
+        printJobId = createVocabularyPrintJob(userId, {
+          ...payload,
+          kind,
+          shareKind: kind === 'cards' ? 'listen' : kind === 'dictation' ? 'dictation' : null,
+        })
         const hasQr = payload.vocabularySet.share?.status === 'active' && ['cards', 'dictation'].includes(kind)
         const result = await context.renderVocabularySetPdf({
           cookie: request.headers.cookie ?? '',
@@ -634,7 +769,7 @@ export function createVocabularyRoutes() {
           getVocabularySet(db, userId, decodePathPart(match[1])))
         if ((kind === 'cards' || kind === 'dictation') && vocabularySet.share?.status !== 'active') {
           throw new VocabularyStoreError(
-            '请先生成扫码听写，再下载带二维码的单词纸。',
+            '请先生成二维码，再下载带二维码的单词资料。',
             409,
             'vocabulary_share_required',
           )
@@ -679,7 +814,7 @@ export function createVocabularyRoutes() {
     }),
 
     defineRoute('GET', /^\/api\/public\/vocabulary\/listen\/([^/]+)$/, ({ response, match, context }) => {
-      const result = withUserDb(context, true, (db) => getPublicVocabularyShare(db, decodePathPart(match[1])))
+      const result = withUserDb(context, true, (db) => getPublicVocabularyListenResource(db, decodePathPart(match[1])))
       if (result.status === 'not_found') {
         context.sendJson(response, 404, { error: 'vocabulary_share_not_found' })
         return

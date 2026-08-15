@@ -50,6 +50,7 @@ export type PublicVocabularyEntry = Omit<VocabularySetEntry, 'example' | 'source
 
 export type PublicVocabularySet = {
   title: string
+  accent?: 'american' | 'british'
   entryCount: number
   entries: PublicVocabularyEntry[]
   createdAt: string

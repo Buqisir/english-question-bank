@@ -763,13 +763,15 @@ function App() {
     setVocabularyReviewRouteActive(true)
   }, [])
 
-  const openVocabularyDictationWorkbench = useCallback(() => {
+  const openVocabularyDictationWorkbench = useCallback((meaningRecallSetId?: string) => {
     if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
       const url = new URL(window.location.href)
       url.searchParams.set('view', 'vocabulary-dictation-workbench')
       for (const param of ['setId', 'mode', 'draftPaperId', 'paperId', 'focusGroupId', 'groupId', 'questionId', 'lecture', 'similar']) {
         url.searchParams.delete(param)
       }
+      if (meaningRecallSetId) url.searchParams.set('meaningRecallSetId', meaningRecallSetId)
+      else url.searchParams.delete('meaningRecallSetId')
       window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
     }
     setAdminRouteActive(false)
@@ -935,6 +937,7 @@ function App() {
     return (
       <VocabularyDictationWorkbench
         onBackToVocabulary={vocabularyDictationOnBackToReview}
+        requestedSetId={typeof window === 'undefined' ? null : new URLSearchParams(window.location.search).get('meaningRecallSetId')}
         shellNav={{ ...shellNav, onOpenVocabularyReview: vocabularyDictationOnBackToReview }}
       />
     )

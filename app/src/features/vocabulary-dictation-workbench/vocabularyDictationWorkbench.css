@@ -1166,6 +1166,388 @@
   padding: 8px 16px;
 }
 
+.dictation-tasks-workspace,
+.dictation-history-list {
+  width: 100%;
+}
+
+.dictation-review-channel {
+  display: inline-flex;
+  border: 1px solid #d8d8d2;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.dictation-review-channel button {
+  min-height: 36px;
+  border: 0;
+  border-right: 1px solid #d8d8d2;
+  background: #fff;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.dictation-review-channel button:last-child {
+  border-right: 0;
+}
+
+.dictation-review-channel button.is-selected {
+  background: #eaf1ed;
+  color: #1e4a3a;
+}
+
+.dictation-suggestion-control-row {
+  justify-content: flex-end;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e8e8e4;
+}
+
+.meaning-recall-home,
+.meaning-recall-result,
+.meaning-recall-stage {
+  border: 1px solid #d8d8d2;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
+}
+
+.meaning-recall-heading,
+.meaning-recall-result > header,
+.meaning-recall-stage > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px;
+  border-bottom: 1px solid #e8e8e4;
+}
+
+.meaning-recall-heading h2,
+.meaning-recall-result > header h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.meaning-recall-heading p,
+.meaning-recall-result > header p {
+  margin: 4px 0 0;
+  color: #6a6a64;
+  font-size: 14px;
+}
+
+.meaning-recall-home button,
+.meaning-recall-result button,
+.meaning-recall-stage button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 36px;
+  border: 1px solid #d8d8d2;
+  border-radius: 6px;
+  background: #fff;
+  padding: 6px 12px;
+  color: #1e1e1c;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.meaning-recall-home button:hover:not(:disabled),
+.meaning-recall-result button:hover:not(:disabled),
+.meaning-recall-stage button:hover:not(:disabled) {
+  border-color: #a5cdbd;
+  background: #eaf1ed;
+  color: #1e4a3a;
+}
+
+.meaning-recall-home button.is-primary,
+.meaning-recall-result button.is-primary,
+.meaning-recall-stage button.is-primary,
+.meaning-recall-stage button.is-correct {
+  border-color: #2c6e56;
+  background: #2c6e56;
+  color: #fff;
+}
+
+.meaning-recall-home button:focus-visible,
+.meaning-recall-result button:focus-visible,
+.meaning-recall-stage button:focus-visible,
+.meaning-recall-home input:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(44, 110, 86, 0.2);
+}
+
+.meaning-recall-start-row {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) auto auto auto;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 16px;
+}
+
+.meaning-recall-start-row > div,
+.meaning-recall-suggestion > div,
+.meaning-recall-stage > header > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.meaning-recall-start-row span,
+.meaning-recall-suggestion span,
+.meaning-recall-stage > header span {
+  color: #6a6a64;
+  font-size: 12px;
+}
+
+.meaning-recall-start-row label,
+.meaning-recall-suggestion label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #6a6a64;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.meaning-recall-start-row input,
+.meaning-recall-suggestion input {
+  width: 64px;
+  border: 1px solid #d8d8d2;
+  border-radius: 6px;
+  background: #fff;
+  padding: 8px;
+  color: #1e1e1c;
+}
+
+.meaning-recall-start-row fieldset,
+.meaning-recall-result-list fieldset {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.meaning-recall-start-row legend,
+.meaning-recall-result-list legend {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.meaning-recall-start-row fieldset button,
+.meaning-recall-result-list fieldset button {
+  border-radius: 0;
+  border-right: 0;
+}
+
+.meaning-recall-start-row fieldset button:first-of-type,
+.meaning-recall-result-list fieldset button:first-of-type {
+  border-radius: 6px 0 0 6px;
+}
+
+.meaning-recall-start-row fieldset button:last-of-type,
+.meaning-recall-result-list fieldset button:last-of-type {
+  border-right: 1px solid #d8d8d2;
+  border-radius: 0 6px 6px 0;
+}
+
+.meaning-recall-start-row fieldset button.is-selected,
+.meaning-recall-result-list fieldset button.is-selected {
+  background: #eaf1ed;
+  color: #1e4a3a;
+}
+
+.meaning-recall-result-list fieldset button.is-wrong,
+.meaning-recall-stage button.is-wrong {
+  border-color: var(--eqb-color-danger);
+  background: var(--eqb-color-danger-soft);
+  color: var(--eqb-color-danger);
+}
+
+.meaning-recall-suggestion {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border-top: 1px solid #e8e8e4;
+  background: #f6f6f4;
+}
+
+.meaning-recall-suggestion-result {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  padding: 16px;
+  border-top: 1px solid #e8e8e4;
+}
+
+.meaning-recall-suggestion-result ol {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px 16px;
+  margin: 0;
+  padding-left: 24px;
+}
+
+.meaning-recall-suggestion-result li {
+  padding-left: 2px;
+  font-size: 14px;
+}
+
+.meaning-recall-suggestion-result li span {
+  display: block;
+  color: #6a6a64;
+  font-size: 12px;
+}
+
+.meaning-recall-suggestion-result > div,
+.meaning-recall-result-actions {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.meaning-recall-error {
+  margin: 0;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--eqb-color-danger);
+  background: var(--eqb-color-danger-soft);
+  color: var(--eqb-color-danger);
+  font-size: 14px;
+}
+
+.meaning-recall-stage {
+  min-height: 560px;
+}
+
+.meaning-recall-word {
+  display: grid;
+  min-height: 400px;
+  place-items: center;
+  align-content: center;
+  gap: 20px;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.meaning-recall-word h2 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.meaning-recall-word > p {
+  margin: 0;
+  color: #6a6a64;
+  font-size: 16px;
+}
+
+.meaning-recall-reveal {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+}
+
+.meaning-recall-reveal > span {
+  color: #6a6a64;
+  font-size: 16px;
+}
+
+.meaning-recall-reveal > strong {
+  max-width: 680px;
+  color: #1e4a3a;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.meaning-recall-stage > footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
+  border-top: 1px solid #e8e8e4;
+}
+
+.meaning-recall-stage kbd {
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 4px;
+  padding: 1px 5px;
+  background: rgba(255, 255, 255, 0.12);
+  font: 500 12px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.meaning-recall-stage button:not(.is-primary):not(.is-correct):not(.is-wrong) kbd {
+  border-color: #c6c6c0;
+  background: #f6f6f4;
+}
+
+.meaning-recall-result-summary {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  padding: 20px 16px 8px;
+}
+
+.meaning-recall-result-summary strong {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.meaning-recall-result-summary strong:nth-child(2) {
+  color: var(--eqb-color-danger);
+}
+
+.meaning-recall-result-summary span {
+  color: #6a6a64;
+  font-size: 14px;
+}
+
+.meaning-recall-result-actions {
+  padding: 8px 16px 20px;
+  border-bottom: 1px solid #e8e8e4;
+}
+
+.meaning-recall-result-list article {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e8e8e4;
+}
+
+.meaning-recall-result-list article:last-child {
+  border-bottom: 0;
+}
+
+.meaning-recall-result-list article > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.meaning-recall-result-list article span {
+  overflow: hidden;
+  color: #6a6a64;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 @media (max-width: 900px) {
   .dictation-workbench-shell {
     width: min(100% - 32px, 760px);
@@ -1178,6 +1560,20 @@
 
   .dictation-combine-settings,
   .dictation-records-workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .meaning-recall-start-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .meaning-recall-start-row > div,
+  .meaning-recall-suggestion > div {
+    grid-column: 1 / -1;
+  }
+
+  .meaning-recall-suggestion-result,
+  .meaning-recall-suggestion-result ol {
     grid-template-columns: 1fr;
   }
 
@@ -1340,8 +1736,68 @@
     flex-direction: column;
   }
 
+  .dictation-review-channel {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .dictation-review-channel button {
+    flex: 1 0 max-content;
+  }
+
   .dictation-suggestion-control {
     width: 100%;
+  }
+
+  .meaning-recall-heading,
+  .meaning-recall-result > header,
+  .meaning-recall-stage > header,
+  .meaning-recall-stage > footer,
+  .meaning-recall-result-summary {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .meaning-recall-start-row,
+  .meaning-recall-suggestion,
+  .meaning-recall-suggestion-result {
+    grid-template-columns: 1fr;
+  }
+
+  .meaning-recall-start-row > *,
+  .meaning-recall-suggestion > *,
+  .meaning-recall-suggestion-result > * {
+    width: 100%;
+  }
+
+  .meaning-recall-start-row fieldset,
+  .meaning-recall-suggestion-result > div,
+  .meaning-recall-result-actions {
+    flex-wrap: wrap;
+  }
+
+  .meaning-recall-start-row fieldset button,
+  .meaning-recall-suggestion-result button,
+  .meaning-recall-result-actions button,
+  .meaning-recall-stage > footer button {
+    flex: 1;
+  }
+
+  .meaning-recall-word {
+    min-height: 340px;
+    padding: 36px 16px;
+  }
+
+  .meaning-recall-word h2 {
+    font-size: 28px;
+  }
+
+  .meaning-recall-reveal > strong {
+    font-size: 28px;
+  }
+
+  .meaning-recall-result-list article {
+    grid-template-columns: 1fr;
   }
 
   .dictation-review-row {

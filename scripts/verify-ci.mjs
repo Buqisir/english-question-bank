@@ -155,6 +155,7 @@ const registry = {
   'scripts/verify-detail-redesign.mjs',
   'scripts/verify-vocabulary-closed-loop.mjs',
   'scripts/verify-vocabulary-dictation-review.mjs',
+  'scripts/verify-vocabulary-meaning-recall.mjs',
   'scripts/verify-vocabulary-migration.mjs',
   'scripts/verify-vocabulary-match-game.mjs',
   'scripts/verify-vocabulary-word-search.mjs',

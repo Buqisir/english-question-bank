@@ -7,6 +7,7 @@ import {
   ClipboardCheck,
   Copy,
   Download,
+  Eye,
   FileCheck2,
   Flag,
   Link2,
@@ -29,32 +30,40 @@ import {
   createVocabularyDictationTask,
   downloadCombinedVocabularyPdf,
   downloadVocabularyDictationTaskPdf,
+  getStudentVocabularyMeaningStates,
   getStudentVocabularyReviewStates,
   getSuggestedVocabularyReview,
   getVocabularyDictationTask,
+  getVocabularySet,
   getVocabularySetLibrary,
   listVocabularyDictationRecords,
   listVocabularyDictationTasks,
+  listVocabularyMeaningRecallRecords,
   listVocabularyStudents,
   revokeVocabularyDictationTaskShare,
   restoreVocabularyDictationRecord,
+  restoreVocabularyMeaningRecallRecord,
   shareVocabularyDictationTask,
   updateStudentVocabularyWordFlag,
   updateVocabularyDictationRecord,
   voidVocabularyDictationRecord,
+  voidVocabularyMeaningRecallRecord,
+  type StudentVocabularyMeaningStateDto,
   type StudentVocabularyReviewStateDto,
   type VocabularyDictationRecordDto,
   type VocabularyDictationResult,
   type VocabularyDictationTaskDto,
+  type VocabularyMeaningRecallRecordDto,
   type VocabularySetLibraryDto,
   type VocabularySetLibraryItemDto,
   type VocabularyStudentDto,
 } from '../../services/vocabulary'
+import { VocabularyMeaningRecallPanel } from './VocabularyMeaningRecallPanel'
 import './vocabularyDictationWorkbench.css'
 
 const ACTIVE_STUDENT_STORAGE_KEY = 'eqb-vocabulary-active-student-wanwei-round-one-v1'
 const SUGGESTION_TARGET_STORAGE_KEY = 'eqb-vocabulary-review-suggestion-target-v1'
-type WorkspaceTab = 'sets' | 'records' | 'pending' | 'stubborn'
+type WorkspaceTab = 'sets' | 'meaning' | 'tasks' | 'review' | 'history'
 type Accent = 'american' | 'british'
 type PrintKind = 'cards' | 'dictation' | 'answer' | 'word-search'
 
@@ -155,6 +164,13 @@ function countRecordResults(record: VocabularyDictationRecordDto) {
   }, { correct: 0, wrong: 0, untested: 0 })
 }
 
+function countMeaningRecordResults(record: VocabularyMeaningRecallRecordDto) {
+  return record.entries.reduce((counts, entry) => {
+    counts[entry.result] += 1
+    return counts
+  }, { correct: 0, wrong: 0, untested: 0 })
+}
+
 function initialResults(
   task: VocabularyDictationTaskDto,
   record: VocabularyDictationRecordDto | null,
@@ -171,9 +187,11 @@ function initialResults(
 
 export function VocabularyDictationWorkbench({
   onBackToVocabulary,
+  requestedSetId,
   shellNav,
 }: {
   onBackToVocabulary: () => void
+  requestedSetId?: string | null
   shellNav: AppTopbarNav
 }) {
   const [students, setStudents] = useState<VocabularyStudentDto[]>([])
@@ -183,9 +201,13 @@ export function VocabularyDictationWorkbench({
   const [library, setLibrary] = useState<VocabularySetLibraryDto>({ items: [], page: 1, pageSize: 20, total: 0, hasMore: false })
   const [tasks, setTasks] = useState<VocabularyDictationTaskDto[]>([])
   const [records, setRecords] = useState<VocabularyDictationRecordDto[]>([])
+  const [meaningRecords, setMeaningRecords] = useState<VocabularyMeaningRecallRecordDto[]>([])
+  const [meaningStates, setMeaningStates] = useState<StudentVocabularyMeaningStateDto[]>([])
+  const [meaningSessionActive, setMeaningSessionActive] = useState(false)
   const [reviewStates, setReviewStates] = useState<StudentVocabularyReviewStateDto[]>([])
   const [selectedSets, setSelectedSets] = useState<VocabularySetLibraryItemDto[]>([])
   const [selectedReviewIds, setSelectedReviewIds] = useState<string[]>([])
+  const [selectedMeaningIds, setSelectedMeaningIds] = useState<string[]>([])
   const [searchInput, setSearchInput] = useState('')
   const [query, setQuery] = useState('')
   const [fromDate, setFromDate] = useState('')
@@ -207,12 +229,38 @@ export function VocabularyDictationWorkbench({
   })
   const [suggestion, setSuggestion] = useState<StudentVocabularyReviewStateDto[]>([])
   const [showPausedReview, setShowPausedReview] = useState(false)
+  const [reviewMode, setReviewMode] = useState<'meaning' | 'pending' | 'stubborn'>('meaning')
+  const [requestedMeaningRecordId, setRequestedMeaningRecordId] = useState<string | null>(null)
   const [libraryRefreshVersion, setLibraryRefreshVersion] = useState(0)
   const graderRef = useRef<GraderState | null>(null)
   const graderDialogRef = useRef<HTMLElement | null>(null)
   const createdTasksRef = useRef<HTMLElement | null>(null)
   const studentDataVersionRef = useRef(0)
   const activeStudentIdRef = useRef('')
+  const meaningSaveBarrierRef = useRef<(() => Promise<boolean>) | null>(null)
+
+  const registerMeaningSaveBarrier = useCallback((barrier: (() => Promise<boolean>) | null) => {
+    meaningSaveBarrierRef.current = barrier
+  }, [])
+
+  async function flushMeaningSaves() {
+    const barrier = meaningSaveBarrierRef.current
+    if (!barrier) return true
+    try {
+      const saved = await barrier()
+      if (!saved) setError('词义抽查尚未保存成功，请重试后再离开。')
+      return saved
+    } catch (nextError) {
+      setError(nextError instanceof Error ? nextError.message : '词义抽查尚未保存成功，请重试后再离开。')
+      return false
+    }
+  }
+
+  async function switchWorkbenchTab(nextTab: WorkspaceTab) {
+    if (nextTab === tab) return
+    if (!await flushMeaningSaves()) return
+    setTab(nextTab)
+  }
 
   const activeStudent = students.find((student) => student.id === activeStudentId) ?? null
   const graderTaskId = grader?.task.id ?? null
@@ -220,14 +268,20 @@ export function VocabularyDictationWorkbench({
   const rawSelectedCount = selectedSets.reduce((sum, set) => sum + set.entryCount, 0)
   const pendingStates = reviewStates.filter((state) => state.status !== 'improved' && !state.paused)
   const stubbornStates = reviewStates.filter((state) => state.status === 'stubborn' && !state.paused)
+  const pendingMeaningStates = meaningStates.filter((state) => state.status !== 'improved' && !state.paused)
   const pausedReviewStates = reviewStates.filter((state) => state.paused && (
-    tab === 'stubborn' ? state.status === 'stubborn' : state.status !== 'improved'
+    reviewMode === 'stubborn' ? state.status === 'stubborn' : state.status !== 'improved'
   ))
   const visibleReviewStates = [
-    ...(tab === 'stubborn' ? stubbornStates : pendingStates),
+    ...(reviewMode === 'stubborn' ? stubbornStates : pendingStates),
     ...(showPausedReview ? pausedReviewStates : []),
   ]
   const selectedReviewStates = reviewStates.filter((state) => !state.paused && selectedReviewIds.includes(state.id))
+  const selectedMeaningStates = meaningStates.filter((state) => !state.paused && selectedMeaningIds.includes(state.id))
+  const detectionHistory = useMemo(() => [
+    ...meaningRecords.map((record) => ({ kind: 'meaning' as const, date: record.recallDate, updatedAt: record.updatedAt, record })),
+    ...records.map((record) => ({ kind: 'dictation' as const, date: record.dictationDate, updatedAt: record.updatedAt, record })),
+  ].sort((left, right) => right.date.localeCompare(left.date) || right.updatedAt.localeCompare(left.updatedAt)), [meaningRecords, records])
 
   useEffect(() => {
     graderRef.current = grader
@@ -249,15 +303,19 @@ export function VocabularyDictationWorkbench({
   const refreshStudentData = useCallback(async (studentId: string) => {
     const requestedVersion = studentDataVersionRef.current + 1
     studentDataVersionRef.current = requestedVersion
-    const [nextTasks, nextRecords, nextStates] = await Promise.all([
+    const [nextTasks, nextRecords, nextStates, nextMeaningRecords, nextMeaningStates] = await Promise.all([
       listVocabularyDictationTasks(studentId),
       listVocabularyDictationRecords(studentId),
       getStudentVocabularyReviewStates(studentId),
+      listVocabularyMeaningRecallRecords(studentId),
+      getStudentVocabularyMeaningStates(studentId),
     ])
     if (requestedVersion !== studentDataVersionRef.current || studentId !== activeStudentIdRef.current) return
     setTasks(nextTasks)
     setRecords(nextRecords)
     setReviewStates(nextStates)
+    setMeaningRecords(nextMeaningRecords)
+    setMeaningStates(nextMeaningStates)
     setLibraryRefreshVersion((current) => current + 1)
   }, [])
 
@@ -306,6 +364,37 @@ export function VocabularyDictationWorkbench({
     })
     return () => { cancelled = true }
   }, [activeStudentId, fromDate, library.page, library.pageSize, libraryRefreshVersion, query, toDate])
+
+  useEffect(() => {
+    if (!requestedSetId || !activeStudentId) return
+    let cancelled = false
+    getVocabularySet(requestedSetId).then(async (set) => {
+      if (cancelled) return
+      if (set.studentId !== activeStudentId) {
+        await changeStudent(set.studentId)
+        return
+      }
+      if (cancelled) return
+      const libraryItem: VocabularySetLibraryItemDto = {
+        ...set,
+        dictationSummary: {
+          recordCount: 0,
+          latestWrongCount: 0,
+          latestDate: null,
+          pendingCount: 0,
+          meaningRecall: { latestDate: null, pendingCount: 0, repeatedCount: 0 },
+        },
+      }
+      setSelectedSets([libraryItem])
+      setTab('meaning')
+      const url = new URL(window.location.href)
+      url.searchParams.delete('meaningRecallSetId')
+      window.history.replaceState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
+    }).catch((nextError: unknown) => {
+      if (!cancelled) setError(nextError instanceof Error ? nextError.message : '生词组加载失败。')
+    })
+    return () => { cancelled = true }
+  }, [activeStudentId, requestedSetId])
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -437,6 +526,7 @@ export function VocabularyDictationWorkbench({
   }
 
   async function changeStudent(studentId: string) {
+    if (!await flushMeaningSaves()) return
     const currentGrader = graderRef.current
     if (currentGrader?.saving) return
     if (currentGrader?.dirty) {
@@ -448,11 +538,15 @@ export function VocabularyDictationWorkbench({
     setActiveStudentId(studentId)
     setSelectedSets([])
     setSelectedReviewIds([])
+    setSelectedMeaningIds([])
     setCreatedTasks([])
     setGrader(null)
     setTasks([])
     setRecords([])
     setReviewStates([])
+    setMeaningRecords([])
+    setMeaningStates([])
+    setRequestedMeaningRecordId(null)
     setSuggestion([])
     setShowPausedReview(false)
     setLibrary((current) => ({ ...current, items: [], page: 1, total: 0, hasMore: false }))
@@ -642,6 +736,7 @@ export function VocabularyDictationWorkbench({
   }
 
   async function leaveWorkbench(next: () => void) {
+    if (!await flushMeaningSaves()) return
     const current = graderRef.current
     if (current?.saving) return
     if (current?.dirty) {
@@ -677,7 +772,21 @@ export function VocabularyDictationWorkbench({
     }
   }
 
-  async function toggleFlag(state: StudentVocabularyReviewStateDto, kind: 'pinned' | 'paused') {
+  async function toggleMeaningRecordVoid(record: VocabularyMeaningRecallRecordDto) {
+    setBusy(true)
+    setError('')
+    try {
+      if (record.status === 'void') await restoreVocabularyMeaningRecallRecord(record.id)
+      else await voidVocabularyMeaningRecallRecord(record.id)
+      if (activeStudentId) await refreshStudentData(activeStudentId)
+    } catch (nextError) {
+      setError(nextError instanceof Error ? nextError.message : '词义抽查记录状态修改失败。')
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  async function toggleFlag(state: { id: string; pinned: boolean; paused: boolean }, kind: 'pinned' | 'paused') {
     setBusy(true)
     try {
       await updateStudentVocabularyWordFlag(activeStudentId, state.id, {
@@ -686,6 +795,7 @@ export function VocabularyDictationWorkbench({
       })
       if (kind === 'paused' && !state.paused) {
         setSelectedReviewIds((current) => current.filter((id) => id !== state.id))
+        setSelectedMeaningIds((current) => current.filter((id) => id !== state.id))
       }
       setSuggestion([])
       await refreshStudentData(activeStudentId)
@@ -735,6 +845,31 @@ export function VocabularyDictationWorkbench({
       setSuggestion([])
     } catch (nextError) {
       setError(nextError instanceof Error ? nextError.message : '复听写任务生成失败。')
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  async function createTaskFromMeaningEntries(entries: StudentVocabularyMeaningStateDto[]) {
+    if (!activeStudentId || !entries.length) return
+    setBusy(true)
+    setError('')
+    try {
+      const task = await createVocabularyDictationTask({
+        studentId: activeStudentId,
+        sourceSetIds: [...new Set(entries.flatMap((entry) => entry.sourceSetIds))],
+        entryIds: entries.slice(0, 60).map((entry) => entry.id),
+        title: `${today()} 认义复习`,
+        accent,
+      })
+      const taskShare = await shareVocabularyDictationTask(task.id)
+      const sharedTask = { ...task, share: { ...taskShare, createdAt: new Date().toISOString(), revokedAt: null } }
+      setCreatedTasks([sharedTask])
+      setTasks((current) => [sharedTask, ...current])
+      setSelectedMeaningIds([])
+      setTab('tasks')
+    } catch (nextError) {
+      setError(nextError instanceof Error ? nextError.message : '认义复习任务生成失败。')
     } finally {
       setBusy(false)
     }
@@ -793,7 +928,7 @@ export function VocabularyDictationWorkbench({
     <div className="dictation-workbench">
       <AppTopbar
         variant="sub"
-        pageTitle="听写与复习"
+        pageTitle="单词复习"
         {...shellNav}
         onBack={() => { void leaveWorkbench(onBackToVocabulary) }}
         onLogout={() => { void leaveWorkbench(shellNav.onLogout) }}
@@ -807,29 +942,32 @@ export function VocabularyDictationWorkbench({
       <main className="dictation-workbench-shell">
         <header className="dictation-workbench-heading">
           <div>
-            <h1>听写与复习</h1>
-            <p>冻结生词组保持不变；听写结果、待复听写和顽固错词只属于当前学生。</p>
+            <h1>单词复习</h1>
+            <p>从冻结生词组开始词义抽查或完整听写；所有结果只属于当前学生。</p>
           </div>
           <label className="dictation-student-picker">
             <span>当前学生</span>
-            <select value={activeStudentId} disabled={busy || Boolean(grader)} onChange={(event) => void changeStudent(event.target.value)}>
+            <select value={activeStudentId} disabled={busy || Boolean(grader) || meaningSessionActive} onChange={(event) => void changeStudent(event.target.value)}>
               {students.map((student) => <option key={student.id} value={student.id}>{student.displayName}</option>)}
             </select>
           </label>
         </header>
 
-        <nav className="dictation-workbench-tabs" aria-label="听写与复习分区">
-          <button type="button" className={tab === 'sets' ? 'is-active' : ''} onClick={() => setTab('sets')}>
+        <nav className="dictation-workbench-tabs" aria-label="单词复习分区">
+          <button type="button" className={tab === 'sets' ? 'is-active' : ''} onClick={() => { void switchWorkbenchTab('sets') }}>
             生词组 <span>{library.total}</span>
           </button>
-          <button type="button" className={tab === 'records' ? 'is-active' : ''} onClick={() => setTab('records')}>
-            听写记录 <span>{records.length}</span>
+          <button type="button" className={tab === 'meaning' ? 'is-active' : ''} onClick={() => { void switchWorkbenchTab('meaning') }}>
+            词义抽查 <span>{meaningRecords.filter((record) => record.status === 'draft').length}</span>
           </button>
-          <button type="button" className={tab === 'pending' ? 'is-active' : ''} onClick={() => setTab('pending')}>
-            待复听写 <span>{pendingStates.length}</span>
+          <button type="button" className={tab === 'tasks' ? 'is-active' : ''} onClick={() => { void switchWorkbenchTab('tasks') }}>
+            听写任务 <span>{tasks.length}</span>
           </button>
-          <button type="button" className={tab === 'stubborn' ? 'is-active' : ''} onClick={() => setTab('stubborn')}>
-            顽固错词 <span>{stubbornStates.length}</span>
+          <button type="button" className={tab === 'review' ? 'is-active' : ''} onClick={() => { void switchWorkbenchTab('review') }}>
+            待复习 <span>{pendingMeaningStates.length + pendingStates.length}</span>
+          </button>
+          <button type="button" className={tab === 'history' ? 'is-active' : ''} onClick={() => { void switchWorkbenchTab('history') }}>
+            检测记录 <span>{meaningRecords.length + records.length}</span>
           </button>
         </nav>
 
@@ -900,9 +1038,9 @@ export function VocabularyDictationWorkbench({
                       <small>{set.entryCount} 词 · {set.entries.slice(0, 5).map((entry) => entry.headword).join('、')}{set.entryCount > 5 ? '…' : ''}</small>
                     </span>
                     <span className="dictation-set-stats">
-                      {set.dictationSummary.recordCount
-                        ? <><strong>最近错 {set.dictationSummary.latestWrongCount} 词</strong><small>累计 {set.dictationSummary.recordCount} 次 · 待复听写 {set.dictationSummary.pendingCount}</small></>
-                        : <><strong>尚未听写</strong><small>{displayDate(set.createdAt)}</small></>}
+                      <strong>待认义 {set.dictationSummary.meaningRecall.pendingCount} · 待复听写 {set.dictationSummary.pendingCount}</strong>
+                      <small>词义最近 {displayDate(set.dictationSummary.meaningRecall.latestDate)} · 反复忘记 {set.dictationSummary.meaningRecall.repeatedCount}</small>
+                      <small>{set.dictationSummary.recordCount ? `听写 ${set.dictationSummary.recordCount} 次 · 最近错 ${set.dictationSummary.latestWrongCount} 词` : '尚未完成听写'}</small>
                     </span>
                   </label>
                 )
@@ -931,6 +1069,7 @@ export function VocabularyDictationWorkbench({
                   <label className="dictation-check-setting"><input type="checkbox" checked={shuffleBeforeFreeze} onChange={(event) => setShuffleBeforeFreeze(event.target.checked)} /><Shuffle size={15} />冻结前打乱</label>
                 </div>
                 <div className="dictation-selection-actions">
+                  <button type="button" onClick={() => setTab('meaning')}><Eye size={16} />看词说义</button>
                   <details>
                     <summary><Printer size={16} />合并打印</summary>
                     <div>
@@ -947,7 +1086,7 @@ export function VocabularyDictationWorkbench({
                   <button type="button" onClick={() => {
                     const selectedIds = new Set(selectedSets.map((set) => set.id))
                     const selectedPending = pendingStates.filter((state) => state.sourceSetIds.some((id) => selectedIds.has(id)))
-                    setSelectedReviewIds(selectedPending.map((state) => state.id)); setTab('pending')
+                    setSelectedReviewIds(selectedPending.map((state) => state.id)); setReviewMode('pending'); setTab('review')
                   }}><ListChecks size={16} />导出所选组待复听写词</button>
                 </div>
               </aside>
@@ -955,8 +1094,29 @@ export function VocabularyDictationWorkbench({
           </section>
         )}
 
-        {tab === 'records' && (
-          <section className="dictation-records-workspace">
+        {tab === 'meaning' && activeStudentId && (
+          <VocabularyMeaningRecallPanel
+            studentId={activeStudentId}
+            selectedSets={selectedSets}
+            records={meaningRecords}
+            states={meaningStates}
+            accent={accent}
+            requestedRecordId={requestedMeaningRecordId}
+            onRequestedRecordHandled={() => setRequestedMeaningRecordId(null)}
+            onNeedSets={() => setTab('sets')}
+            onChanged={() => refreshStudentData(activeStudentId)}
+            onCreatedTask={(task) => {
+              setCreatedTasks([task])
+              setTasks((current) => [task, ...current.filter((item) => item.id !== task.id)])
+              void switchWorkbenchTab('tasks')
+            }}
+            onSessionActiveChange={setMeaningSessionActive}
+            onSaveBarrierChange={registerMeaningSaveBarrier}
+          />
+        )}
+
+        {tab === 'tasks' && (
+          <section className="dictation-tasks-workspace">
             <div className="dictation-task-queue">
               <header><div><h2>可批改的听写任务</h2><p>同一份公开听写可以记录多次真实听写。</p></div></header>
               {tasks.length ? <div className="dictation-task-list">{tasks.map((task) => {
@@ -984,32 +1144,83 @@ export function VocabularyDictationWorkbench({
               })}</div> : <div className="dictation-empty-state"><ClipboardCheck size={28} /><h2>还没有听写任务</h2><p>先到“生词组”勾选并创建二维码或纸笔听写。</p></div>}
             </div>
 
-            <div className="dictation-record-list">
-              <header><div><h2>听写记录</h2><p>完成、草稿和作废记录都会保留。</p></div></header>
-              {records.length ? records.map((record) => {
-                const counts = countRecordResults(record)
-                return (
-                  <article className={record.status === 'void' ? 'is-void' : ''} key={record.id}>
-                    <div><strong>{record.taskTitle}</strong><span>{displayDate(record.dictationDate)} · {record.mode === 'all' ? '整组' : '抽听'} · {record.status === 'completed' ? '已完成' : record.status === 'draft' ? '草稿' : '已作废'}</span></div>
-                    <div className="dictation-record-counts"><span>错 {counts.wrong}</span><span>对 {counts.correct}</span>{counts.untested > 0 && <span>未考 {counts.untested}</span>}</div>
-                    <div><button type="button" onClick={() => void editRecord(record)} disabled={record.status === 'void'}>查看 / 编辑</button><button type="button" onClick={() => void toggleRecordVoid(record)} disabled={busy}>{record.status === 'void' ? <><Undo2 size={14} />恢复</> : '作废'}</button></div>
-                  </article>
-                )
-              }) : <div className="dictation-empty-state"><FileCheck2 size={28} /><h2>还没有批改记录</h2><p>创建任务后，老师可以只点错词完成批改。</p></div>}
-            </div>
           </section>
         )}
 
-        {(tab === 'pending' || tab === 'stubborn') && (
+        {tab === 'history' && (
+          <section className="dictation-record-list dictation-history-list">
+            <header><div><h2>检测记录</h2><p>词义抽查与完整听写按日期排在一起；草稿和作废记录也会保留。</p></div></header>
+            {detectionHistory.length ? detectionHistory.map((item) => {
+              if (item.kind === 'meaning') {
+                const record = item.record
+                const counts = countMeaningRecordResults(record)
+                return (
+                  <article className={record.status === 'void' ? 'is-void' : ''} key={`meaning-${record.id}`}>
+                    <div><strong>{record.title}</strong><span>{displayDate(item.date)} · 词义抽查 · {record.status === 'completed' ? '已完成' : record.status === 'draft' ? '草稿' : '已作废'}</span></div>
+                    <div className="dictation-record-counts"><span>错 {counts.wrong}</span><span>对 {counts.correct}</span>{counts.untested > 0 && <span>未测 {counts.untested}</span>}</div>
+                    <div>
+                      <button type="button" disabled={record.status === 'void'} onClick={() => { setRequestedMeaningRecordId(record.id); setTab('meaning') }}>{record.status === 'draft' ? '继续抽查' : '查看 / 编辑'}</button>
+                      <button type="button" onClick={() => void toggleMeaningRecordVoid(record)} disabled={busy}>{record.status === 'void' ? <><Undo2 size={14} />恢复</> : '作废'}</button>
+                    </div>
+                  </article>
+                )
+              }
+              const record = item.record
+              const counts = countRecordResults(record)
+              return (
+                <article className={record.status === 'void' ? 'is-void' : ''} key={`dictation-${record.id}`}>
+                  <div><strong>{record.taskTitle}</strong><span>{displayDate(item.date)} · {record.mode === 'all' ? '完整听写' : '抽听'} · {record.status === 'completed' ? '已完成' : record.status === 'draft' ? '草稿' : '已作废'}</span></div>
+                  <div className="dictation-record-counts"><span>错 {counts.wrong}</span><span>对 {counts.correct}</span>{counts.untested > 0 && <span>未测 {counts.untested}</span>}</div>
+                  <div>
+                    <button type="button" onClick={() => void editRecord(record)} disabled={record.status === 'void'}>查看 / 编辑</button>
+                    <button type="button" onClick={() => void toggleRecordVoid(record)} disabled={busy}>{record.status === 'void' ? <><Undo2 size={14} />恢复</> : '作废'}</button>
+                  </div>
+                </article>
+              )
+            }) : <div className="dictation-empty-state"><FileCheck2 size={28} /><h2>还没有检测记录</h2><p>完成一次词义抽查或听写批改后，就会出现在这里。</p></div>}
+          </section>
+        )}
+
+        {tab === 'review' && (
           <section className="dictation-review-workspace">
             <header className="dictation-review-heading">
-              <div><h2>{tab === 'stubborn' ? '顽固错词排行' : '待复听写'}</h2><p>{tab === 'stubborn' ? '至少两个不同日期写错且尚未连续两次通过。' : '写错一次即进入；连续两次有效听写正确后转为已改善。'}</p></div>
-              <div className="dictation-suggestion-control">
+              <div><h2>待复习</h2><p>认义和拼写分开展示，但老师仍然只需判断对或错。</p></div>
+              <div className="dictation-review-channel" role="group" aria-label="待复习类型">
+                <button type="button" className={reviewMode === 'meaning' ? 'is-selected' : ''} onClick={() => setReviewMode('meaning')}>待认义 {pendingMeaningStates.length}</button>
+                <button type="button" className={reviewMode === 'pending' ? 'is-selected' : ''} onClick={() => setReviewMode('pending')}>待复听写 {pendingStates.length}</button>
+                <button type="button" className={reviewMode === 'stubborn' ? 'is-selected' : ''} onClick={() => setReviewMode('stubborn')}>顽固错词 {stubbornStates.length}</button>
+              </div>
+            </header>
+
+            {reviewMode === 'meaning' && (
+              <>
+                {selectedMeaningStates.length > 0 && <div className="dictation-review-actions">
+                  <span>已选 {selectedMeaningStates.length} 词</span>
+                  <button type="button" onClick={() => void createTaskFromMeaningEntries(selectedMeaningStates)} disabled={busy}><Sparkles size={15} />生成复习任务</button>
+                  <button type="button" onClick={() => void copyEntries(selectedMeaningStates)}><Copy size={15} />复制清单</button>
+                  <button type="button" onClick={() => setSelectedMeaningIds([])}>取消</button>
+                </div>}
+                {pendingMeaningStates.length ? <div className="dictation-review-table" role="table" aria-label="待认义词">
+                  <div className="dictation-review-table-head" role="row"><span>选择</span><span>单词</span><span>遗忘轨迹</span><span>当前状态</span><span>人工调整</span></div>
+                  {pendingMeaningStates.map((state, index) => (
+                    <div className="dictation-review-row" role="row" key={state.id}>
+                      <label><input type="checkbox" checked={selectedMeaningIds.includes(state.id)} onChange={() => setSelectedMeaningIds((current) => current.includes(state.id) ? current.filter((id) => id !== state.id) : [...current, state.id])} /><span>{state.status === 'repeated' ? index + 1 : ''}</span></label>
+                      <div><strong>{state.headword}</strong><small>{state.partOfSpeech} {formatMeaning(state)}</small></div>
+                      <div><strong>累计忘记 {state.totalWrong} 次</strong><small>{state.currentWrongDateCount} 个日期 · 最近 {displayDate(state.lastForgottenDate)}</small></div>
+                      <div><strong>{state.status === 'repeated' ? '反复忘记' : '待认义'}</strong><small>{state.currentCorrectDateCount ? `已连续 ${state.currentCorrectDateCount} 个日期答对` : '还需跨日两次答对'}</small></div>
+                      <div><button type="button" className={state.pinned ? 'is-active' : ''} aria-pressed={state.pinned} onClick={() => void toggleFlag(state, 'pinned')}><Pin size={14} />重点</button><button type="button" onClick={() => void toggleFlag(state, 'paused')}><PauseCircle size={14} />暂停</button></div>
+                    </div>
+                  ))}
+                </div> : <div className="dictation-empty-state"><Check size={28} /><h2>当前没有待认义词</h2><p>完成一次词义抽查后，这里会按跨日规则自动更新。</p></div>}
+              </>
+            )}
+
+            {reviewMode !== 'meaning' && <>
+              <div className="dictation-suggestion-control dictation-suggestion-control-row">
                 {pausedReviewStates.length > 0 && <button type="button" aria-pressed={showPausedReview} onClick={() => setShowPausedReview((current) => !current)}>{showPausedReview ? '隐藏' : '显示'}已暂停（{pausedReviewStates.length}）</button>}
                 <label>下次建议 <input type="number" min="1" max="60" value={suggestionTarget} onChange={(event) => setSuggestionTarget(Math.max(1, Math.min(60, Number(event.target.value) || 1)))} /> 词</label>
                 <button type="button" onClick={() => void loadSuggestion()} disabled={busy}><Sparkles size={15} />生成建议</button>
               </div>
-            </header>
 
             {suggestion.length > 0 && (
               <aside className="dictation-suggestion-panel">
@@ -1029,11 +1240,11 @@ export function VocabularyDictationWorkbench({
             )}
 
             {visibleReviewStates.length ? (
-              <div className="dictation-review-table" role="table" aria-label={tab === 'stubborn' ? '顽固错词排行' : '待复听写词'}>
+              <div className="dictation-review-table" role="table" aria-label={reviewMode === 'stubborn' ? '顽固错词排行' : '待复听写词'}>
                 <div className="dictation-review-table-head" role="row"><span>选择</span><span>单词</span><span>错误轨迹</span><span>当前状态</span><span>人工调整</span></div>
                 {visibleReviewStates.map((state, index) => (
                   <div className={state.paused ? 'dictation-review-row is-paused' : 'dictation-review-row'} role="row" key={state.id}>
-                    <label><input type="checkbox" checked={selectedReviewIds.includes(state.id)} onChange={() => setSelectedReviewIds((current) => current.includes(state.id) ? current.filter((id) => id !== state.id) : [...current, state.id])} /><span>{tab === 'stubborn' ? index + 1 : ''}</span></label>
+                    <label><input type="checkbox" checked={selectedReviewIds.includes(state.id)} onChange={() => setSelectedReviewIds((current) => current.includes(state.id) ? current.filter((id) => id !== state.id) : [...current, state.id])} /><span>{reviewMode === 'stubborn' ? index + 1 : ''}</span></label>
                     <div><strong>{state.headword}</strong><small>{state.partOfSpeech} {formatMeaning(state)}</small></div>
                     <div><strong>累计错 {state.totalWrong} 次</strong><small>近 {state.recentAttempts} 次错误率 {Math.round(state.recentWrongRate * 100)}% · 最近 {displayDate(state.lastWrongDate)}</small>{state.lastWrongSpelling && <small>上次写成：{state.lastWrongSpelling}</small>}</div>
                     <div><strong>{state.status === 'stubborn' ? '顽固' : state.status === 'pending' ? `还需连续通过 ${2 - state.currentConsecutiveCorrect} 次` : '已改善'}</strong><small>{state.wrongDateCount} 个日期写错{state.paused ? ' · 已暂停' : ''}</small></div>
@@ -1041,7 +1252,8 @@ export function VocabularyDictationWorkbench({
                   </div>
                 ))}
               </div>
-            ) : <div className="dictation-empty-state"><Check size={28} /><h2>{tab === 'stubborn' ? '暂时没有顽固错词' : '当前没有待复听写词'}</h2><p>完成一次教师确认的听写后，这里会按规则自动更新。</p></div>}
+            ) : <div className="dictation-empty-state"><Check size={28} /><h2>{reviewMode === 'stubborn' ? '暂时没有顽固错词' : '当前没有待复听写词'}</h2><p>完成一次教师确认的听写后，这里会按规则自动更新。</p></div>}
+            </>}
           </section>
         )}
       </main>

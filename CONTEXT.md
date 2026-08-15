@@ -243,6 +243,14 @@ _Avoid_: vocabulary set, mutable review queue, dictation result
 One teacher-confirmed attempt against one Vocabulary Dictation Task, dated and recorded as draft, completed, or void. Each task entry is `correct`, `wrong`, or `untested`; only completed, non-void, tested results affect review state.
 _Avoid_: student-side automatic score, review decision, deleting history
 
+**Vocabulary Meaning Recall Record** (词义抽查记录):
+One frozen, ordered teacher-led check in which a student sees an English word form and says its Chinese meaning. It preserves source Vocabulary Sets and entry snapshots, records only `correct`, `wrong`, or `untested`, and has draft, completed, and void states. It never advances a Vocabulary Review Run or rewrites a Vocabulary Set.
+_Avoid_: review run, dictation record, speech-recognition score, weighted mastery score
+
+**Student Vocabulary Meaning State** (学生词义复习状态):
+The per-student, per-program projection derived from explicit wrong results in completed Meaning Recall Records plus correct evidence from either completed meaning recall or completed dictation. It may be pending, repeatedly forgotten, or recovered; dictation wrong never invents a meaning error.
+_Avoid_: field on Vocabulary Set, spelling state, composite mastery score
+
 **Student Vocabulary Review State** (学生词条复习状态):
 The current per-student, per-program projection derived from effective Vocabulary Dictation Records: pending retest, stubborn error, or improved. Teacher `pinned` and `paused` flags adjust recommendation and visibility without rewriting history.
 _Avoid_: field on Vocabulary Set, permanent mastery label, manually edited score
@@ -286,6 +294,8 @@ _Avoid_: field on Vocabulary Set, permanent mastery label, manually edited score
 - A **Vocabulary Share** grants read-only public access to exactly one Vocabulary Set and may be revoked without deleting that Set.
 - A **Vocabulary Dictation Task** freezes entries from one or more Vocabulary Sets (or a teacher-confirmed review selection) without modifying those Sets; one task may own many **Vocabulary Dictation Records**.
 - **Student Vocabulary Review State** is derived only from completed, non-void, tested results plus orthogonal teacher flags; it is never written back into a Vocabulary Set snapshot.
+- A **Vocabulary Meaning Recall Record** freezes one teacher-led word-form-to-meaning check without changing its source Vocabulary Sets or the first-pass Vocabulary Review Run.
+- **Student Vocabulary Meaning State** uses explicit meaning errors plus cross-day correct evidence; a linked Vocabulary Dictation Task remains frozen even if its source recall record is later edited or voided.
 
 ## Example Dialogue
 
