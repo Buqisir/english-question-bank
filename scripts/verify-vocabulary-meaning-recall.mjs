@@ -301,6 +301,16 @@ assert.equal(listVocabularyMeaningRecallRecords(userDb, 'teacher-a', student.id)
 const panelSource = readFileSync(new URL('../app/src/features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx', import.meta.url), 'utf8')
 assert.match(panelSource, /savePendingRef\.current/u, '词义保存队列必须暴露同步的待保存标记')
 assert.match(panelSource, /addEventListener\('beforeunload', warnBeforeUnload\)/u, '浏览器刷新或关页时必须阻止丢失待保存的词义结果')
+const resultActionsSource = panelSource.slice(
+  panelSource.indexOf('<div className="meaning-recall-result-actions">'),
+  panelSource.indexOf('<div className="meaning-recall-result-list">'),
+)
+assert.match(resultActionsSource, /生成错词听写/u, '认词结果只保留本轮错词听写入口')
+assert.doesNotMatch(resultActionsSource, /立即巩固|当前待认义|整组生成/u, '抽查结果不得再展示其他任务范围')
+assert.match(panelSource, /share: true/u, '本轮错词复听写必须原子创建任务和公开二维码')
+assert.doesNotMatch(panelSource, /shareVocabularyDictationTask/u, '本轮错词复听写不得拆成任务创建与分享两次请求')
+assert.match(panelSource, /title: `\$\{activeRecord\?\.recallDate \?\? today\(\)\} 错词听写`/u, '本轮错词听写标题必须和认词日期一致')
+assert.match(panelSource, /<h2>看词说义<\/h2>[\s\S]{0,180}给学生看英文，让他说中文；老师判对错。/u, '认词首页必须使用老师一眼能懂的说明')
 
 bankDb.close()
 userDb.close()

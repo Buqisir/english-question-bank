@@ -117,6 +117,7 @@ export type VocabularyDictationTaskDto = {
   id: string
   studentId: string
   programId: string
+  taskDate: string
   title: string
   accent: 'american' | 'british'
   entryCount: number
@@ -433,10 +434,13 @@ export async function getVocabularySetLibrary(input: {
 export async function createVocabularyDictationTask(input: {
   studentId: string
   sourceSetIds?: string[]
+  sourceTaskIds?: string[]
   entryIds?: string[]
+  taskDate?: string
   title: string
   accent: 'american' | 'british'
   meaningRecallRecordId?: string
+  share?: boolean
 }): Promise<VocabularyDictationTaskDto> {
   const body = await requestJson('/api/vocabulary/dictation-tasks', {
     method: 'POST',

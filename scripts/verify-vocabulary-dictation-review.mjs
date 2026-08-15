@@ -77,6 +77,39 @@ function makeEntry(index) {
 }
 
 const root = mkdtempSync(path.join(tmpdir(), 'eqb-vocabulary-dictation-review-'))
+const legacyTaskDb = new DatabaseSync(path.join(root, 'legacy-user-data.sqlite'))
+legacyTaskDb.exec(`
+  CREATE TABLE vocabulary_dictation_tasks (
+    id TEXT PRIMARY KEY,
+    user_id TEXT NOT NULL,
+    student_id TEXT NOT NULL,
+    program_id TEXT NOT NULL,
+    title TEXT NOT NULL,
+    accent TEXT NOT NULL CHECK (accent IN ('american', 'british')),
+    entry_count INTEGER NOT NULL CHECK (entry_count BETWEEN 1 AND 60),
+    created_at TEXT NOT NULL
+  );
+  INSERT INTO vocabulary_dictation_tasks
+    (id, user_id, student_id, program_id, title, accent, entry_count, created_at)
+  VALUES
+    ('legacy-task', 'teacher-a', 'student-a', 'wanwei-round-one-v1', '旧任务', 'american', 1,
+      '2026-08-12T23:50:00.000Z'),
+    ('legacy-local-date-task', 'teacher-a', 'student-a', 'wanwei-round-one-v1',
+      '2026-08-13 综合听写', 'american', 1, '2026-08-14T06:50:00.000Z');
+`)
+ensureUserVocabularyShape(legacyTaskDb)
+ensureUserVocabularyShape(legacyTaskDb)
+assert.equal(
+  legacyTaskDb.prepare('SELECT task_date FROM vocabulary_dictation_tasks WHERE id = ?').get('legacy-task').task_date,
+  '2026-08-12',
+  '旧听写任务升级后必须从原创建日回填任务日期，且升级可重复执行',
+)
+assert.equal(
+  legacyTaskDb.prepare('SELECT task_date FROM vocabulary_dictation_tasks WHERE id = ?').get('legacy-local-date-task').task_date,
+  '2026-08-13',
+  '旧任务标题已有本地日期时必须优先保留，不能被 UTC 创建日推迟一天',
+)
+legacyTaskDb.close()
 const bankDb = new DatabaseSync(path.join(root, 'question-bank.sqlite'))
 const userDb = new DatabaseSync(path.join(root, 'user-data.sqlite'))
 bankDb.exec('PRAGMA foreign_keys = ON')
@@ -121,7 +154,7 @@ const setB = createVocabularySetFromEntries(dbs, 'teacher-a', {
   title: '第二组',
   entryIds: entries.slice(30).map((entry) => entry.id),
 })
-createVocabularySetFromEntries(dbs, 'teacher-a', {
+const otherSet = createVocabularySetFromEntries(dbs, 'teacher-a', {
   studentId: otherStudent.id,
   programId: 'wanwei-round-one-v1',
   title: '另一名学生的组',
@@ -174,6 +207,7 @@ const firstTask = createVocabularyDictationTask(dbs, 'teacher-a', {
   programId: 'wanwei-round-one-v1',
   sourceSetIds: [setA.id, setB.id],
   entryIds: mergedOrder,
+  taskDate: '2026-08-13',
   title: '综合听写 1',
   accent: 'american',
 })
@@ -186,9 +220,119 @@ const secondTask = createVocabularyDictationTask(dbs, 'teacher-a', {
   accent: 'british',
 })
 assert.equal(firstTask.entryCount, 60)
+assert.equal(firstTask.taskDate, '2026-08-13')
+assert.ok(
+  userDb.prepare('PRAGMA table_info(vocabulary_dictation_tasks)').all().some((column) => column.name === 'task_date'),
+  '听写任务必须持久化独立任务日期，不能从创建时间反推',
+)
 assert.deepEqual(firstTask.entries.map((entry) => entry.id), mergedOrder)
 assert.deepEqual(firstTask.entries[30].sourceSetIds, [setA.id, setB.id])
 assert.equal(secondTask.entryCount, 1)
+const atomicSharedTask = createVocabularyDictationTask(dbs, 'teacher-a', {
+  studentId: student.id,
+  programId: 'wanwei-round-one-v1',
+  sourceSetIds: [setB.id],
+  entryIds: [entries[60].id],
+  taskDate: '2026-08-13',
+  title: '原子二维码任务',
+  accent: 'british',
+  share: true,
+})
+assert.equal(atomicSharedTask.share?.status, 'active', '要求二维码的任务必须在创建响应中直接带有效分享')
+assert.equal(getPublicVocabularyDictationResource(userDb, atomicSharedTask.share.shareId).status, 'active')
+const taskCountBeforeShareFailure = userDb.prepare('SELECT COUNT(*) AS count FROM vocabulary_dictation_tasks').get().count
+userDb.exec(`
+  CREATE TRIGGER verify_atomic_task_share_failure
+  BEFORE INSERT ON vocabulary_dictation_task_shares
+  BEGIN
+    SELECT RAISE(ABORT, 'forced atomic task share failure');
+  END;
+`)
+assert.throws(() => createVocabularyDictationTask(dbs, 'teacher-a', {
+  studentId: student.id,
+  programId: 'wanwei-round-one-v1',
+  sourceSetIds: [setB.id],
+  entryIds: [entries[60].id],
+  taskDate: '2026-08-13',
+  title: '不得留下的孤儿任务',
+  accent: 'british',
+  share: true,
+}), /forced atomic task share failure/)
+userDb.exec('DROP TRIGGER verify_atomic_task_share_failure')
+assert.equal(
+  userDb.prepare('SELECT COUNT(*) AS count FROM vocabulary_dictation_tasks').get().count,
+  taskCountBeforeShareFailure,
+  '二维码创建失败时必须回滚整份任务，不能留下无二维码孤儿',
+)
+const sourceFreeTask = createVocabularyDictationTask(dbs, 'teacher-a', {
+  studentId: student.id,
+  programId: 'wanwei-round-one-v1',
+  entryIds: [entries[60].id],
+  taskDate: '2026-08-13',
+  title: '无生词组来源任务',
+  accent: 'british',
+})
+bankDb.prepare("UPDATE vocabulary_entries SET teaching_sense = '来源任务创建后修改的词义' WHERE id = ?").run(entries[60].id)
+const combinedFromTaskSnapshot = createVocabularyDictationTask(dbs, 'teacher-a', {
+  studentId: student.id,
+  programId: 'wanwei-round-one-v1',
+  sourceTaskIds: [sourceFreeTask.id],
+  entryIds: [entries[60].id],
+  taskDate: '2026-08-13',
+  title: '从任务快照合并',
+  accent: 'british',
+  share: true,
+})
+assert.equal(combinedFromTaskSnapshot.sourceSets.length, 0)
+assert.equal(combinedFromTaskSnapshot.entries[0].teachingSense, entries[60].teachingSense)
+assert.equal(combinedFromTaskSnapshot.share?.status, 'active')
+assert.throws(() => createVocabularyDictationTask(dbs, 'teacher-a', {
+  studentId: student.id,
+  programId: 'wanwei-round-one-v1',
+  sourceTaskIds: [sourceFreeTask.id],
+  entryIds: [entries[59].id],
+  taskDate: '2026-08-13',
+  title: '越过来源任务词条',
+  accent: 'british',
+}), /只能使用所选听写任务中的词/)
+assert.throws(() => createVocabularyDictationTask(dbs, 'teacher-a', {
+  studentId: student.id,
+  programId: 'wanwei-round-one-v1',
+  sourceTaskIds: [sourceFreeTask.id],
+  sourceSetIds: [setA.id],
+  entryIds: [entries[0].id],
+  taskDate: '2026-08-13',
+  title: '组合来源也不得越过任务快照',
+  accent: 'british',
+}), /只能使用所选听写任务中的词/)
+const otherStudentTask = createVocabularyDictationTask(dbs, 'teacher-a', {
+  studentId: otherStudent.id,
+  programId: 'wanwei-round-one-v1',
+  sourceSetIds: [otherSet.id],
+  entryIds: [entries[0].id],
+  taskDate: '2026-08-13',
+  title: '其他学生的任务',
+  accent: 'british',
+})
+assert.throws(() => createVocabularyDictationTask(dbs, 'teacher-a', {
+  studentId: student.id,
+  programId: 'wanwei-round-one-v1',
+  sourceTaskIds: [otherStudentTask.id],
+  entryIds: [entries[0].id],
+  taskDate: '2026-08-13',
+  title: '越权合并其他学生任务',
+  accent: 'british',
+}), /不属于当前学生/)
+bankDb.prepare('UPDATE vocabulary_entries SET teaching_sense = ? WHERE id = ?').run(entries[60].teachingSense, entries[60].id)
+assert.throws(() => createVocabularyDictationTask(dbs, 'teacher-a', {
+  studentId: student.id,
+  programId: 'wanwei-round-one-v1',
+  sourceSetIds: [setB.id],
+  entryIds: [entries[60].id],
+  taskDate: '2026-02-30',
+  title: '非法任务日期',
+  accent: 'british',
+}), /听写日期必须是有效的 YYYY-MM-DD/)
 
 bankDb.prepare("UPDATE vocabulary_entries SET teaching_sense = '后来修改的词义' WHERE id = ?").run(entries[0].id)
 assert.equal(firstTask.entries[0].teachingSense, entries[0].teachingSense)
@@ -386,8 +530,34 @@ assert.match(
   '已生成任务必须提供右上角带二维码的复听写纸',
 )
 assert.match(workbenchSource, /下载资料[\s\S]{0,900}单词卡（含二维码）[\s\S]{0,900}复听写纸（含二维码）[\s\S]{0,900}教师答案/u, '三个下载项必须收进一个下载资料菜单')
-assert.match(workbenchSource, /已选 \{selectedReviewStates\.length\} 词[\s\S]{0,600}生成复听写任务[\s\S]{0,600}复制清单[\s\S]{0,600}取消/u, '错词选择栏只保留生成任务、复制和取消')
+assert.match(workbenchSource, /已选 \{selectedReviewWords\.length\} 词[\s\S]{0,600}生成错词听写[\s\S]{0,600}复制清单[\s\S]{0,600}取消/u, '错词选择栏只保留生成听写、复制和取消')
 assert.doesNotMatch(workbenchSource, /记忆卡|订正纸|带二维码听写纸|二维码任务/u, '工作台不得保留旧术语或重复入口')
+const tabNavigationSource = workbenchSource.slice(
+  workbenchSource.indexOf('<nav className="dictation-workbench-tabs"'),
+  workbenchSource.indexOf('{(message || error)'),
+)
+assert.match(tabNavigationSource, /词组[\s\S]{0,500}认词[\s\S]{0,500}听写[\s\S]{0,500}错词[\s\S]{0,500}记录/u, '工作区导航必须使用精简的教师语言')
+assert.doesNotMatch(tabNavigationSource, /生词组|词义抽查|听写任务|待复习|检测记录/u, '工作区导航不得暴露系统术语')
+assert.match(workbenchSource, /mergeReviewWords\(meaningStates, reviewStates\)/u, '认词和听写错词必须合并为一个展示池')
+assert.match(workbenchSource, /全部 \{reviewWords[\s\S]{0,900}认词 \{pendingMeaningStates[\s\S]{0,900}听写 \{pendingStates[\s\S]{0,900}常错 \{reviewWords/u, '错词页只保留四个自然语言筛选')
+assert.match(workbenchSource, /groupTasksByDate\(selectedTasks\)/u, '多选任务必须按任务日期分别处理')
+assert.match(workbenchSource, /const dateKey = task\.taskDate/u, '任务日期分组必须使用冻结的任务日期，不能从创建时间反推')
+assert.match(workbenchSource, /taskDate: group\.dateKey/u, '按日期合并生成的复听写必须保留所选任务日期')
+assert.match(workbenchSource, /splitEvery\(dedupeTaskEntries\(group\.tasks\), 60\)/u, '单日任务必须合并去重并按 60 词拆分')
+const dateExportSource = workbenchSource.slice(
+  workbenchSource.indexOf('async function exportSelectedTasksByDate'),
+  workbenchSource.indexOf('function updateTaskShare'),
+)
+assert.match(dateExportSource, /share: true/u, '按日期导出必须原子创建任务和二维码')
+assert.doesNotMatch(dateExportSource, /shareVocabularyDictationTask/u, '按日期导出不得拆成任务创建与分享两次请求')
+assert.match(dateExportSource, /sourceTaskIds: group\.tasks\.map/u, '按日期导出必须直接复用所选任务的冻结快照，不能依赖来源生词组')
+assert.doesNotMatch(dateExportSource, /缺少来源生词组/u, '没有来源生词组的合法冻结任务也必须可合并导出')
+assert.match(dateExportSource, /downloadVocabularyDictationTaskPdf\(task\.id, 'dictation'\)/u, '按日期导出必须下载复听写纸')
+assert.match(workbenchSource, /全选当天[\s\S]{0,6000}自动带二维码[\s\S]{0,1200}合并导出听写纸/u, '听写列表必须提供日期全选和明确的二维码导出说明')
+assert.match(workbenchSource, /aria-pressed=\{accent === 'american'\}[\s\S]{0,300}aria-pressed=\{accent === 'british'\}/u, '导出口音必须向辅助技术暴露选中状态')
+const workbenchCss = readFileSync(path.join(import.meta.dirname, '../app/src/features/vocabulary-dictation-workbench/vocabularyDictationWorkbench.css'), 'utf8')
+assert.match(workbenchCss, /dictation-task-selection-panel button:focus-visible[\s\S]{0,160}outline: 2px solid #2c6e56/u, '新增任务操作必须有可见的墨绿键盘焦点')
+assert.match(workbenchCss, /Overrides the shared button radius/u, '分段按钮覆盖共享圆角时必须显式说明 cascade 原因')
 const createReviewTaskSource = workbenchSource.slice(
   workbenchSource.indexOf('async function createTaskFromReviewEntries'),
   workbenchSource.indexOf('async function copyEntries'),

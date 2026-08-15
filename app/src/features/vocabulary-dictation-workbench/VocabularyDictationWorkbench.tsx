@@ -66,6 +66,19 @@ const SUGGESTION_TARGET_STORAGE_KEY = 'eqb-vocabulary-review-suggestion-target-v
 type WorkspaceTab = 'sets' | 'meaning' | 'tasks' | 'review' | 'history'
 type Accent = 'american' | 'british'
 type PrintKind = 'cards' | 'dictation' | 'answer' | 'word-search'
+type ReviewFilter = 'all' | 'meaning' | 'dictation' | 'frequent'
+type DictationTaskDateGroup = {
+  dateKey: string
+  tasks: VocabularyDictationTaskDto[]
+}
+type ReviewWord = VocabularySetEntry & {
+  sourceSetIds: string[]
+  meaningState: StudentVocabularyMeaningStateDto | null
+  dictationState: StudentVocabularyReviewStateDto | null
+  pinned: boolean
+  paused: boolean
+  frequent: boolean
+}
 
 type GraderState = {
   task: VocabularyDictationTaskDto
@@ -94,6 +107,83 @@ function displayDate(value: string | null) {
   if (!value) return '—'
   const [year, month, day] = value.slice(0, 10).split('-')
   return `${year}.${month}.${day}`
+}
+
+function taskDateHeading(dateKey: string) {
+  const [year, month, day] = dateKey.split('-').map(Number)
+  if (!year || !month || !day) return dateKey
+  return `${year}年${month}月${day}日`
+}
+
+function taskRowTitle(task: VocabularyDictationTaskDto) {
+  const datePrefix = `${task.taskDate} `
+  return task.title.startsWith(datePrefix) ? task.title.slice(datePrefix.length) : task.title
+}
+
+function groupTasksByDate(tasks: VocabularyDictationTaskDto[]): DictationTaskDateGroup[] {
+  const groups = new Map<string, VocabularyDictationTaskDto[]>()
+  for (const task of tasks) {
+    const dateKey = task.taskDate
+    groups.set(dateKey, [...(groups.get(dateKey) ?? []), task])
+  }
+  return [...groups]
+    .map(([dateKey, dateTasks]) => ({ dateKey, tasks: dateTasks }))
+    .sort((left, right) => right.dateKey.localeCompare(left.dateKey))
+}
+
+function dedupeTaskEntries(tasks: VocabularyDictationTaskDto[]) {
+  const seen = new Set<string>()
+  return tasks.flatMap((task) => task.entries).filter((entry) => {
+    if (seen.has(entry.id)) return false
+    seen.add(entry.id)
+    return true
+  })
+}
+
+function mergeReviewWords(
+  meaningStates: StudentVocabularyMeaningStateDto[],
+  dictationStates: StudentVocabularyReviewStateDto[],
+): ReviewWord[] {
+  const merged = new Map<string, {
+    meaningState: StudentVocabularyMeaningStateDto | null
+    dictationState: StudentVocabularyReviewStateDto | null
+    firstIndex: number
+  }>()
+
+  meaningStates.forEach((state, index) => {
+    merged.set(state.id, { meaningState: state, dictationState: null, firstIndex: index })
+  })
+  dictationStates.forEach((state, index) => {
+    const current = merged.get(state.id)
+    merged.set(state.id, current
+      ? { ...current, dictationState: state, firstIndex: Math.min(current.firstIndex, index) }
+      : { meaningState: null, dictationState: state, firstIndex: index })
+  })
+
+  return [...merged.values()].flatMap(({ meaningState, dictationState, firstIndex }) => {
+    const meaningPending = Boolean(meaningState && meaningState.status !== 'improved')
+    const dictationPending = Boolean(dictationState && dictationState.status !== 'improved')
+    if (!meaningPending && !dictationPending) return []
+    const base = dictationState ?? meaningState!
+    return [{
+      ...base,
+      sourceSetIds: [...new Set([
+        ...(meaningState?.sourceSetIds ?? []),
+        ...(dictationState?.sourceSetIds ?? []),
+      ])],
+      meaningState: meaningPending ? meaningState : null,
+      dictationState: dictationPending ? dictationState : null,
+      pinned: Boolean(meaningState?.pinned || dictationState?.pinned),
+      paused: Boolean(meaningState?.paused || dictationState?.paused),
+      frequent: meaningState?.status === 'repeated' || dictationState?.status === 'stubborn',
+      firstIndex,
+    }]
+  }).sort((left, right) => (
+    Number(right.pinned) - Number(left.pinned)
+    || Number(Boolean(right.meaningState && right.dictationState)) - Number(Boolean(left.meaningState && left.dictationState))
+    || Number(right.frequent) - Number(left.frequent)
+    || left.firstIndex - right.firstIndex
+  )).map(({ firstIndex: _firstIndex, ...word }) => word)
 }
 
 function defaultCollectionTitle(studentName: string) {
@@ -206,8 +296,8 @@ export function VocabularyDictationWorkbench({
   const [meaningSessionActive, setMeaningSessionActive] = useState(false)
   const [reviewStates, setReviewStates] = useState<StudentVocabularyReviewStateDto[]>([])
   const [selectedSets, setSelectedSets] = useState<VocabularySetLibraryItemDto[]>([])
+  const [selectedTaskIds, setSelectedTaskIds] = useState<string[]>([])
   const [selectedReviewIds, setSelectedReviewIds] = useState<string[]>([])
-  const [selectedMeaningIds, setSelectedMeaningIds] = useState<string[]>([])
   const [searchInput, setSearchInput] = useState('')
   const [query, setQuery] = useState('')
   const [fromDate, setFromDate] = useState('')
@@ -229,11 +319,12 @@ export function VocabularyDictationWorkbench({
   })
   const [suggestion, setSuggestion] = useState<StudentVocabularyReviewStateDto[]>([])
   const [showPausedReview, setShowPausedReview] = useState(false)
-  const [reviewMode, setReviewMode] = useState<'meaning' | 'pending' | 'stubborn'>('meaning')
+  const [reviewMode, setReviewMode] = useState<ReviewFilter>('all')
   const [requestedMeaningRecordId, setRequestedMeaningRecordId] = useState<string | null>(null)
   const [libraryRefreshVersion, setLibraryRefreshVersion] = useState(0)
   const graderRef = useRef<GraderState | null>(null)
   const graderDialogRef = useRef<HTMLElement | null>(null)
+  const graderFirstControlRef = useRef<HTMLButtonElement | null>(null)
   const createdTasksRef = useRef<HTMLElement | null>(null)
   const studentDataVersionRef = useRef(0)
   const activeStudentIdRef = useRef('')
@@ -248,10 +339,10 @@ export function VocabularyDictationWorkbench({
     if (!barrier) return true
     try {
       const saved = await barrier()
-      if (!saved) setError('词义抽查尚未保存成功，请重试后再离开。')
+      if (!saved) setError('认词结果尚未保存，请重试后再离开。')
       return saved
     } catch (nextError) {
-      setError(nextError instanceof Error ? nextError.message : '词义抽查尚未保存成功，请重试后再离开。')
+      setError(nextError instanceof Error ? nextError.message : '认词结果尚未保存，请重试后再离开。')
       return false
     }
   }
@@ -266,18 +357,25 @@ export function VocabularyDictationWorkbench({
   const graderTaskId = grader?.task.id ?? null
   const uniqueSelectedEntries = useMemo(() => dedupeEntries(selectedSets), [selectedSets])
   const rawSelectedCount = selectedSets.reduce((sum, set) => sum + set.entryCount, 0)
+  const taskDateGroups = useMemo(() => groupTasksByDate(tasks), [tasks])
+  const selectedTaskIdSet = useMemo(() => new Set(selectedTaskIds), [selectedTaskIds])
+  const selectedTasks = useMemo(() => tasks.filter((task) => selectedTaskIdSet.has(task.id)), [selectedTaskIdSet, tasks])
+  const selectedTaskRawCount = selectedTasks.reduce((sum, task) => sum + task.entryCount, 0)
+  const selectedTaskUniqueCount = useMemo(() => dedupeTaskEntries(selectedTasks).length, [selectedTasks])
   const pendingStates = reviewStates.filter((state) => state.status !== 'improved' && !state.paused)
-  const stubbornStates = reviewStates.filter((state) => state.status === 'stubborn' && !state.paused)
   const pendingMeaningStates = meaningStates.filter((state) => state.status !== 'improved' && !state.paused)
-  const pausedReviewStates = reviewStates.filter((state) => state.paused && (
-    reviewMode === 'stubborn' ? state.status === 'stubborn' : state.status !== 'improved'
+  const selectedSetIdSet = new Set(selectedSets.map((set) => set.id))
+  const selectedGroupPendingStates = pendingStates.filter((state) => state.sourceSetIds.some((id) => selectedSetIdSet.has(id)))
+  const reviewWords = useMemo(() => mergeReviewWords(meaningStates, reviewStates), [meaningStates, reviewStates])
+  const filteredReviewWords = reviewWords.filter((word) => (
+    reviewMode === 'all'
+    || (reviewMode === 'meaning' && word.meaningState)
+    || (reviewMode === 'dictation' && word.dictationState)
+    || (reviewMode === 'frequent' && word.frequent)
   ))
-  const visibleReviewStates = [
-    ...(reviewMode === 'stubborn' ? stubbornStates : pendingStates),
-    ...(showPausedReview ? pausedReviewStates : []),
-  ]
-  const selectedReviewStates = reviewStates.filter((state) => !state.paused && selectedReviewIds.includes(state.id))
-  const selectedMeaningStates = meaningStates.filter((state) => !state.paused && selectedMeaningIds.includes(state.id))
+  const pausedReviewCount = filteredReviewWords.filter((word) => word.paused).length
+  const visibleReviewWords = filteredReviewWords.filter((word) => !word.paused || showPausedReview)
+  const selectedReviewWords = reviewWords.filter((word) => !word.paused && selectedReviewIds.includes(word.id))
   const detectionHistory = useMemo(() => [
     ...meaningRecords.map((record) => ({ kind: 'meaning' as const, date: record.recallDate, updatedAt: record.updatedAt, record })),
     ...records.map((record) => ({ kind: 'dictation' as const, date: record.dictationDate, updatedAt: record.updatedAt, record })),
@@ -288,7 +386,12 @@ export function VocabularyDictationWorkbench({
   }, [grader])
 
   useEffect(() => {
-    if (graderTaskId) window.requestAnimationFrame(() => graderDialogRef.current?.focus())
+    const availableIds = new Set(tasks.map((task) => task.id))
+    setSelectedTaskIds((current) => current.filter((id) => availableIds.has(id)))
+  }, [tasks])
+
+  useEffect(() => {
+    if (graderTaskId) window.requestAnimationFrame(() => graderFirstControlRef.current?.focus())
   }, [graderTaskId])
 
   useEffect(() => {
@@ -360,7 +463,7 @@ export function VocabularyDictationWorkbench({
     }).then((nextLibrary) => {
       if (!cancelled) setLibrary(nextLibrary)
     }).catch((nextError: unknown) => {
-      if (!cancelled) setError(nextError instanceof Error ? nextError.message : '生词组加载失败。')
+      if (!cancelled) setError(nextError instanceof Error ? nextError.message : '词组加载失败。')
     })
     return () => { cancelled = true }
   }, [activeStudentId, fromDate, library.page, library.pageSize, libraryRefreshVersion, query, toDate])
@@ -391,7 +494,7 @@ export function VocabularyDictationWorkbench({
       url.searchParams.delete('meaningRecallSetId')
       window.history.replaceState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
     }).catch((nextError: unknown) => {
-      if (!cancelled) setError(nextError instanceof Error ? nextError.message : '生词组加载失败。')
+      if (!cancelled) setError(nextError instanceof Error ? nextError.message : '词组加载失败。')
     })
     return () => { cancelled = true }
   }, [activeStudentId, requestedSetId])
@@ -537,8 +640,8 @@ export function VocabularyDictationWorkbench({
     activeStudentIdRef.current = studentId
     setActiveStudentId(studentId)
     setSelectedSets([])
+    setSelectedTaskIds([])
     setSelectedReviewIds([])
-    setSelectedMeaningIds([])
     setCreatedTasks([])
     setGrader(null)
     setTasks([])
@@ -573,22 +676,84 @@ export function VocabularyDictationWorkbench({
           studentId: activeStudent.id,
           sourceSetIds: chunkSourceSetIds,
           entryIds: chunk.map((entry) => entry.id),
+          taskDate: today(),
           title,
           accent,
+          share,
         })
-        if (share) {
-          const taskShare = await shareVocabularyDictationTask(task.id)
-          nextTasks.push({ ...task, share: { ...taskShare, createdAt: new Date().toISOString(), revokedAt: null } })
-        } else {
-          nextTasks.push(task)
-        }
+        nextTasks.push(task)
       }
       setCreatedTasks(nextTasks)
       setTasks((current) => [...nextTasks, ...current])
       setSelectedSets([])
       if (openFirst) openGrader(nextTasks[0])
     } catch (nextError) {
-      setError(nextError instanceof Error ? nextError.message : '听写任务生成失败。')
+      setError(nextError instanceof Error ? nextError.message : '听写生成失败。')
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  function toggleTaskSelection(taskId: string) {
+    setSelectedTaskIds((current) => current.includes(taskId)
+      ? current.filter((id) => id !== taskId)
+      : [...current, taskId])
+  }
+
+  function toggleTaskDateSelection(group: DictationTaskDateGroup) {
+    const groupIds = group.tasks.map((task) => task.id)
+    const allSelected = groupIds.every((id) => selectedTaskIdSet.has(id))
+    setSelectedTaskIds((current) => {
+      const next = new Set(current)
+      if (allSelected) groupIds.forEach((id) => next.delete(id))
+      else groupIds.forEach((id) => next.add(id))
+      return [...next]
+    })
+  }
+
+  async function exportSelectedTasksByDate() {
+    if (!activeStudentId || !selectedTasks.length) return
+    const selectedDateGroups = groupTasksByDate(selectedTasks)
+    const nextTasks: VocabularyDictationTaskDto[] = []
+    let synced = false
+    const syncCreatedTasks = () => {
+      if (synced || !nextTasks.length) return
+      synced = true
+      const nextIds = new Set(nextTasks.map((task) => task.id))
+      setCreatedTasks(nextTasks)
+      setTasks((current) => [...nextTasks, ...current.filter((task) => !nextIds.has(task.id))])
+      setSelectedTaskIds([])
+    }
+
+    setBusy(true)
+    setError('')
+    setMessage('')
+    try {
+      for (const group of selectedDateGroups) {
+        const chunks = splitEvery(dedupeTaskEntries(group.tasks), 60)
+        for (const [index, chunk] of chunks.entries()) {
+          const baseTitle = `${group.dateKey} 合并听写`
+          const task = await createVocabularyDictationTask({
+            studentId: activeStudentId,
+            sourceTaskIds: group.tasks.map((sourceTask) => sourceTask.id),
+            entryIds: chunk.map((entry) => entry.id),
+            taskDate: group.dateKey,
+            title: chunks.length > 1 ? `${baseTitle}（${index + 1}/${chunks.length}）` : baseTitle,
+            accent,
+            share: true,
+          })
+          nextTasks.push(task)
+        }
+      }
+
+      syncCreatedTasks()
+      for (const task of nextTasks) await downloadVocabularyDictationTaskPdf(task.id, 'dictation')
+      setMessage(`已按 ${selectedDateGroups.length} 个日期合并导出 ${nextTasks.length} 份听写纸（含二维码）`)
+    } catch (nextError) {
+      syncCreatedTasks()
+      setError(nextTasks.length
+        ? `已生成 ${nextTasks.length} 份听写，但资料没有全部下载。可在“刚刚生成”中重试。`
+        : nextError instanceof Error ? nextError.message : '按日期合并导出失败，请重试。')
     } finally {
       setBusy(false)
     }
@@ -753,7 +918,7 @@ export function VocabularyDictationWorkbench({
       if (!tasks.some((item) => item.id === task.id)) setTasks((current) => [...current, task])
       openGrader(task, record)
     } catch (nextError) {
-      setError(nextError instanceof Error ? nextError.message : '听写任务加载失败。')
+      setError(nextError instanceof Error ? nextError.message : '听写加载失败。')
     } finally {
       setBusy(false)
     }
@@ -780,7 +945,7 @@ export function VocabularyDictationWorkbench({
       else await voidVocabularyMeaningRecallRecord(record.id)
       if (activeStudentId) await refreshStudentData(activeStudentId)
     } catch (nextError) {
-      setError(nextError instanceof Error ? nextError.message : '词义抽查记录状态修改失败。')
+      setError(nextError instanceof Error ? nextError.message : '认词记录状态修改失败。')
     } finally {
       setBusy(false)
     }
@@ -795,7 +960,6 @@ export function VocabularyDictationWorkbench({
       })
       if (kind === 'paused' && !state.paused) {
         setSelectedReviewIds((current) => current.filter((id) => id !== state.id))
-        setSelectedMeaningIds((current) => current.filter((id) => id !== state.id))
       }
       setSuggestion([])
       await refreshStudentData(activeStudentId)
@@ -820,7 +984,7 @@ export function VocabularyDictationWorkbench({
     }
   }
 
-  async function createTaskFromReviewEntries(entries: StudentVocabularyReviewStateDto[]) {
+  async function createTaskFromReviewEntries(entries: Array<VocabularySetEntry & { sourceSetIds: string[] }>) {
     if (!activeStudent || !entries.length) return
     setBusy(true)
     setError('')
@@ -833,43 +997,19 @@ export function VocabularyDictationWorkbench({
           studentId: activeStudent.id,
           sourceSetIds: [...new Set(chunk.flatMap((entry) => entry.sourceSetIds))],
           entryIds: chunk.map((entry) => entry.id),
+          taskDate: today(),
           title: chunks.length > 1 ? `${defaultTaskTitle()}（${index + 1}/${chunks.length}）` : defaultTaskTitle(),
           accent,
+          share: true,
         })
-        const taskShare = await shareVocabularyDictationTask(task.id)
-        nextTasks.push({ ...task, share: { ...taskShare, createdAt: new Date().toISOString(), revokedAt: null } })
+        nextTasks.push(task)
       }
       setCreatedTasks(nextTasks)
       setTasks((current) => [...nextTasks, ...current])
       setSelectedReviewIds([])
       setSuggestion([])
     } catch (nextError) {
-      setError(nextError instanceof Error ? nextError.message : '复听写任务生成失败。')
-    } finally {
-      setBusy(false)
-    }
-  }
-
-  async function createTaskFromMeaningEntries(entries: StudentVocabularyMeaningStateDto[]) {
-    if (!activeStudentId || !entries.length) return
-    setBusy(true)
-    setError('')
-    try {
-      const task = await createVocabularyDictationTask({
-        studentId: activeStudentId,
-        sourceSetIds: [...new Set(entries.flatMap((entry) => entry.sourceSetIds))],
-        entryIds: entries.slice(0, 60).map((entry) => entry.id),
-        title: `${today()} 认义复习`,
-        accent,
-      })
-      const taskShare = await shareVocabularyDictationTask(task.id)
-      const sharedTask = { ...task, share: { ...taskShare, createdAt: new Date().toISOString(), revokedAt: null } }
-      setCreatedTasks([sharedTask])
-      setTasks((current) => [sharedTask, ...current])
-      setSelectedMeaningIds([])
-      setTab('tasks')
-    } catch (nextError) {
-      setError(nextError instanceof Error ? nextError.message : '认义复习任务生成失败。')
+      setError(nextError instanceof Error ? nextError.message : '错词听写生成失败。')
     } finally {
       setBusy(false)
     }
@@ -940,36 +1080,32 @@ export function VocabularyDictationWorkbench({
           : undefined}
       />
       <main className="dictation-workbench-shell">
-        <header className="dictation-workbench-heading">
-          <div>
-            <h1>单词复习</h1>
-            <p>从冻结生词组开始词义抽查或完整听写；所有结果只属于当前学生。</p>
-          </div>
+        <h1 className="dictation-visually-hidden">单词复习</h1>
+        <div className="dictation-workbench-navigation">
+          <nav className="dictation-workbench-tabs" aria-label="单词复习分区">
+            <button type="button" className={tab === 'sets' ? 'is-active' : ''} onClick={() => { void switchWorkbenchTab('sets') }}>
+              词组
+            </button>
+            <button type="button" className={tab === 'meaning' ? 'is-active' : ''} onClick={() => { void switchWorkbenchTab('meaning') }}>
+              认词
+            </button>
+            <button type="button" className={tab === 'tasks' ? 'is-active' : ''} onClick={() => { void switchWorkbenchTab('tasks') }}>
+              听写
+            </button>
+            <button type="button" className={tab === 'review' ? 'is-active' : ''} onClick={() => { void switchWorkbenchTab('review') }}>
+              错词
+            </button>
+            <button type="button" className={tab === 'history' ? 'is-active' : ''} onClick={() => { void switchWorkbenchTab('history') }}>
+              记录
+            </button>
+          </nav>
           <label className="dictation-student-picker">
             <span>当前学生</span>
             <select value={activeStudentId} disabled={busy || Boolean(grader) || meaningSessionActive} onChange={(event) => void changeStudent(event.target.value)}>
               {students.map((student) => <option key={student.id} value={student.id}>{student.displayName}</option>)}
             </select>
           </label>
-        </header>
-
-        <nav className="dictation-workbench-tabs" aria-label="单词复习分区">
-          <button type="button" className={tab === 'sets' ? 'is-active' : ''} onClick={() => { void switchWorkbenchTab('sets') }}>
-            生词组 <span>{library.total}</span>
-          </button>
-          <button type="button" className={tab === 'meaning' ? 'is-active' : ''} onClick={() => { void switchWorkbenchTab('meaning') }}>
-            词义抽查 <span>{meaningRecords.filter((record) => record.status === 'draft').length}</span>
-          </button>
-          <button type="button" className={tab === 'tasks' ? 'is-active' : ''} onClick={() => { void switchWorkbenchTab('tasks') }}>
-            听写任务 <span>{tasks.length}</span>
-          </button>
-          <button type="button" className={tab === 'review' ? 'is-active' : ''} onClick={() => { void switchWorkbenchTab('review') }}>
-            待复习 <span>{pendingMeaningStates.length + pendingStates.length}</span>
-          </button>
-          <button type="button" className={tab === 'history' ? 'is-active' : ''} onClick={() => { void switchWorkbenchTab('history') }}>
-            检测记录 <span>{meaningRecords.length + records.length}</span>
-          </button>
-        </nav>
+        </div>
 
         {(message || error) && (
           <div className={error ? 'dictation-notice is-error' : 'dictation-notice'} role={error ? 'alert' : 'status'}>
@@ -979,13 +1115,13 @@ export function VocabularyDictationWorkbench({
         )}
 
         {createdTasks.length > 0 && (
-          <section ref={createdTasksRef} className="dictation-created-results" aria-label="刚刚生成的听写任务" tabIndex={-1}>
+          <section ref={createdTasksRef} className="dictation-created-results" aria-label="刚刚生成的听写" tabIndex={-1}>
             <header>
               <div>
-                <strong>{createdTasks.length > 1 ? `已生成 ${createdTasks.length} 份复听写任务` : '复听写任务已生成'}</strong>
-                <span>{createdTasks.every((task) => task.share?.status === 'active') ? '二维码只放在下载资料里，三份资料共用同一听写任务。' : '任务词序已冻结，可以下载资料或开始批改。'}</span>
+                <strong>{createdTasks.length > 1 ? `已生成 ${createdTasks.length} 份错词听写` : '错词听写已生成'}</strong>
+                <span>{createdTasks.every((task) => task.share?.status === 'active') ? '单词卡扫码听音频，听写纸扫码自动听写。' : '词序已固定，可以下载或批改。'}</span>
               </div>
-              <button type="button" aria-label="收起已生成的听写任务" onClick={() => setCreatedTasks([])}><X size={16} /></button>
+              <button type="button" aria-label="收起已生成的听写" onClick={() => setCreatedTasks([])}><X size={16} /></button>
             </header>
             <div className="dictation-created-links">
               {createdTasks.map((task) => {
@@ -997,7 +1133,7 @@ export function VocabularyDictationWorkbench({
                     <span><strong>{task.title}</strong><small>{task.entryCount} 词 · {task.accent === 'american' ? '美音' : '英音'}</small></span>
                     <div className="dictation-created-actions">
                       {publicHref && <a href={publicHref} target="_blank" rel="noreferrer"><Link2 size={14} />打开听写</a>}
-                      <button type="button" onClick={() => openGrader(task)}><ClipboardCheck size={14} />开始批改</button>
+                      <button type="button" onClick={() => openGrader(task)}><ClipboardCheck size={14} />批改</button>
                       <details className="dictation-download-menu">
                         <summary><Download size={14} />下载资料<ChevronDown size={14} aria-hidden="true" /></summary>
                         <div>
@@ -1019,16 +1155,27 @@ export function VocabularyDictationWorkbench({
             <div className="dictation-library-tools">
               <label className="dictation-search-field">
                 <Search size={16} aria-hidden="true" />
-                <input aria-label="搜索生词组" value={searchInput} placeholder="搜索标题或单词" onChange={(event) => setSearchInput(event.target.value)} />
+                <input aria-label="搜索词组" value={searchInput} placeholder="搜索标题或单词" onChange={(event) => setSearchInput(event.target.value)} />
               </label>
               <label>从 <input type="date" value={fromDate} onChange={(event) => { setLibrary((current) => ({ ...current, page: 1 })); setFromDate(event.target.value) }} /></label>
               <label>到 <input type="date" value={toDate} onChange={(event) => { setLibrary((current) => ({ ...current, page: 1 })); setToDate(event.target.value) }} /></label>
               {(query || fromDate || toDate) && <button type="button" onClick={() => { setSearchInput(''); setQuery(''); setFromDate(''); setToDate('') }}>清除筛选</button>}
             </div>
 
-            <div className="dictation-set-list" aria-label="完整生词组库">
+            <div className="dictation-set-list" aria-label="词组列表">
               {library.items.length ? library.items.map((set) => {
                 const selectedIndex = selectedSets.findIndex((item) => item.id === set.id)
+                const hasMeaningHistory = Boolean(set.dictationSummary.meaningRecall.latestDate)
+                const hasDictationHistory = set.dictationSummary.recordCount > 0
+                const pendingParts = [
+                  set.dictationSummary.meaningRecall.pendingCount > 0 ? `认词错 ${set.dictationSummary.meaningRecall.pendingCount}` : '',
+                  set.dictationSummary.pendingCount > 0 ? `听写错 ${set.dictationSummary.pendingCount}` : '',
+                  set.dictationSummary.meaningRecall.repeatedCount > 0 ? `常忘 ${set.dictationSummary.meaningRecall.repeatedCount}` : '',
+                ].filter(Boolean)
+                const historyParts = [
+                  hasMeaningHistory ? `认词 ${displayDate(set.dictationSummary.meaningRecall.latestDate)}` : '',
+                  hasDictationHistory ? `听写 ${set.dictationSummary.recordCount} 次 · 最近错 ${set.dictationSummary.latestWrongCount} 词` : '',
+                ].filter(Boolean)
                 return (
                   <label className={selectedIndex >= 0 ? 'dictation-set-row is-selected' : 'dictation-set-row'} key={set.id}>
                     <input type="checkbox" checked={selectedIndex >= 0} onChange={() => toggleSet(set)} />
@@ -1038,13 +1185,12 @@ export function VocabularyDictationWorkbench({
                       <small>{set.entryCount} 词 · {set.entries.slice(0, 5).map((entry) => entry.headword).join('、')}{set.entryCount > 5 ? '…' : ''}</small>
                     </span>
                     <span className="dictation-set-stats">
-                      <strong>待认义 {set.dictationSummary.meaningRecall.pendingCount} · 待复听写 {set.dictationSummary.pendingCount}</strong>
-                      <small>词义最近 {displayDate(set.dictationSummary.meaningRecall.latestDate)} · 反复忘记 {set.dictationSummary.meaningRecall.repeatedCount}</small>
-                      <small>{set.dictationSummary.recordCount ? `听写 ${set.dictationSummary.recordCount} 次 · 最近错 ${set.dictationSummary.latestWrongCount} 词` : '尚未完成听写'}</small>
+                      <strong>{pendingParts.length ? pendingParts.join(' · ') : hasMeaningHistory || hasDictationHistory ? '目前无错词' : '还没检测'}</strong>
+                      {historyParts.length > 0 && <small>{historyParts.join(' · ')}</small>}
                     </span>
                   </label>
                 )
-              }) : <div className="dictation-empty-state"><BookOpenCheck size={28} /><h2>没有符合条件的生词组</h2><p>换一个搜索词或日期范围。</p></div>}
+              }) : <div className="dictation-empty-state"><BookOpenCheck size={28} /><h2>没有符合条件的词组</h2><p>换一个搜索词或日期范围。</p></div>}
             </div>
 
             {library.total > library.pageSize && (
@@ -1056,22 +1202,25 @@ export function VocabularyDictationWorkbench({
             )}
 
             {selectedSets.length > 0 && (
-              <aside className="dictation-selection-panel" aria-label="已选生词组合并工具">
+              <aside className="dictation-selection-panel" aria-label="已选词组工具">
                 <div className="dictation-selection-summary">
-                  <div><strong>已选 {selectedSets.length} 组</strong><span>原始 {rawSelectedCount} 词 · 合并去重 {uniqueSelectedEntries.length} 词</span></div>
-                  <button type="button" onClick={() => setSelectedSets([])}>取消全选</button>
+                  <div><strong>已选 {selectedSets.length} 组</strong><span>{rawSelectedCount === uniqueSelectedEntries.length ? `${uniqueSelectedEntries.length} 词` : `原始 ${rawSelectedCount} 词 · 合并去重 ${uniqueSelectedEntries.length} 词`}</span></div>
+                  <button type="button" onClick={() => setSelectedSets([])}>清空</button>
                 </div>
                 {rawSelectedCount > 120 && <p className="dictation-volume-warning">这次合集超过 120 词，打印会自动分页；二维码听写仍按 60 词拆分。</p>}
-                <div className="dictation-combine-settings">
-                  <label><span>打印标题</span><input value={collectionTitle} maxLength={60} onChange={(event) => setCollectionTitle(event.target.value)} /></label>
-                  <label><span>听写标题</span><input value={taskTitle} maxLength={60} onChange={(event) => setTaskTitle(event.target.value)} /></label>
-                  <fieldset><legend>口音</legend><button type="button" className={accent === 'american' ? 'is-selected' : ''} onClick={() => setAccent('american')}>美音</button><button type="button" className={accent === 'british' ? 'is-selected' : ''} onClick={() => setAccent('british')}>英音</button></fieldset>
-                  <label className="dictation-check-setting"><input type="checkbox" checked={shuffleBeforeFreeze} onChange={(event) => setShuffleBeforeFreeze(event.target.checked)} /><Shuffle size={15} />冻结前打乱</label>
-                </div>
+                <details className="dictation-selection-settings">
+                  <summary>设置</summary>
+                  <div className="dictation-combine-settings">
+                    <label><span>打印标题</span><input value={collectionTitle} maxLength={60} onChange={(event) => setCollectionTitle(event.target.value)} /></label>
+                    <label><span>听写标题</span><input value={taskTitle} maxLength={60} onChange={(event) => setTaskTitle(event.target.value)} /></label>
+                    <fieldset><legend>口音</legend><button type="button" className={accent === 'american' ? 'is-selected' : ''} onClick={() => setAccent('american')}>美音</button><button type="button" className={accent === 'british' ? 'is-selected' : ''} onClick={() => setAccent('british')}>英音</button></fieldset>
+                    <label className="dictation-check-setting"><input type="checkbox" checked={shuffleBeforeFreeze} onChange={(event) => setShuffleBeforeFreeze(event.target.checked)} /><Shuffle size={15} />打乱词序</label>
+                  </div>
+                </details>
                 <div className="dictation-selection-actions">
-                  <button type="button" onClick={() => setTab('meaning')}><Eye size={16} />看词说义</button>
+                  <button type="button" onClick={() => setTab('meaning')}><Eye size={16} />开始认词</button>
                   <details>
-                    <summary><Printer size={16} />合并打印</summary>
+                    <summary><Printer size={16} />打印资料</summary>
                     <div>
                       <label><input type="radio" name="print-mode" checked={printMode === 'dedupe'} onChange={() => setPrintMode('dedupe')} />合并去重</label>
                       <label><input type="radio" name="print-mode" checked={printMode === 'grouped'} onChange={() => setPrintMode('grouped')} />按组装订</label>
@@ -1081,13 +1230,11 @@ export function VocabularyDictationWorkbench({
                       <button type="button" onClick={() => void printSelectedSets('word-search')}>找单词练习</button>
                     </div>
                   </details>
-                  <button type="button" onClick={() => void createTasks({ share: true, openFirst: false })} disabled={busy}><QrCode size={16} />生成合并二维码听写</button>
-                  <button type="button" onClick={() => void createTasks({ share: false, openFirst: true })} disabled={busy}><ClipboardCheck size={16} />补录纸笔听写</button>
-                  <button type="button" onClick={() => {
-                    const selectedIds = new Set(selectedSets.map((set) => set.id))
-                    const selectedPending = pendingStates.filter((state) => state.sourceSetIds.some((id) => selectedIds.has(id)))
-                    setSelectedReviewIds(selectedPending.map((state) => state.id)); setReviewMode('pending'); setTab('review')
-                  }}><ListChecks size={16} />导出所选组待复听写词</button>
+                  <button type="button" onClick={() => void createTasks({ share: true, openFirst: false })} disabled={busy}><QrCode size={16} />生成扫码听写</button>
+                  <button type="button" onClick={() => void createTasks({ share: false, openFirst: true })} disabled={busy}><ClipboardCheck size={16} />记录纸笔听写</button>
+                  {selectedGroupPendingStates.length > 0 && <button type="button" onClick={() => {
+                    setSelectedReviewIds(selectedGroupPendingStates.map((state) => state.id)); setReviewMode('dictation'); setTab('review')
+                  }}><ListChecks size={16} />查看组内错词</button>}
                 </div>
               </aside>
             )}
@@ -1099,7 +1246,6 @@ export function VocabularyDictationWorkbench({
             studentId={activeStudentId}
             selectedSets={selectedSets}
             records={meaningRecords}
-            states={meaningStates}
             accent={accent}
             requestedRecordId={requestedMeaningRecordId}
             onRequestedRecordHandled={() => setRequestedMeaningRecordId(null)}
@@ -1118,48 +1264,70 @@ export function VocabularyDictationWorkbench({
         {tab === 'tasks' && (
           <section className="dictation-tasks-workspace">
             <div className="dictation-task-queue">
-              <header><div><h2>可批改的听写任务</h2><p>同一份公开听写可以记录多次真实听写。</p></div></header>
-              {tasks.length ? <div className="dictation-task-list">{tasks.map((task) => {
-                const publicHref = task.share?.status === 'active'
-                  ? `${window.location.origin}/vocabulary/dictation/${task.share.shareId}`
-                  : null
+              {tasks.length ? <div className="dictation-task-date-list">{taskDateGroups.map((group) => {
+                const selectedCount = group.tasks.filter((task) => selectedTaskIdSet.has(task.id)).length
+                const allSelected = selectedCount === group.tasks.length
                 return (
-                  <article key={task.id}>
-                    <div><strong>{task.title}</strong><span>{task.entryCount} 词 · {task.accent === 'american' ? '美音' : '英音'} · {publicHref ? '二维码有效' : '未公开'}</span></div>
-                    <div>
-                      <button type="button" onClick={() => openGrader(task)}>新批改</button>
-                      {publicHref && <a href={publicHref} target="_blank" rel="noreferrer"><Link2 size={14} />打开听写</a>}
-                      <details className="dictation-download-menu">
-                        <summary><Download size={14} />下载资料<ChevronDown size={14} aria-hidden="true" /></summary>
-                        <div>
-                          <button type="button" disabled={busy} onClick={(event) => { event.currentTarget.closest('details')?.removeAttribute('open'); void downloadTaskMaterial(task.id, 'cards') }}><BookOpenCheck size={14} />{publicHref ? '单词卡（含二维码）' : '单词卡'}</button>
-                          <button type="button" disabled={busy} onClick={(event) => { event.currentTarget.closest('details')?.removeAttribute('open'); void downloadTaskMaterial(task.id, 'dictation') }}><Download size={14} />{publicHref ? '复听写纸（含二维码）' : '复听写纸'}</button>
-                          <button type="button" disabled={busy} onClick={(event) => { event.currentTarget.closest('details')?.removeAttribute('open'); void downloadTaskMaterial(task.id, 'answer') }}><FileCheck2 size={14} />教师答案</button>
-                        </div>
-                      </details>
-                      <button type="button" onClick={() => void toggleTaskShare(task)} disabled={busy}>{publicHref ? '撤销二维码' : <><QrCode size={15} />生成二维码</>}</button>
-                    </div>
-                  </article>
+                  <section className="dictation-task-date-group" key={group.dateKey} aria-labelledby={`dictation-task-date-${group.dateKey}`}>
+                    <header className="dictation-task-date-heading">
+                      <div><strong id={`dictation-task-date-${group.dateKey}`}>{taskDateHeading(group.dateKey)}</strong><span>{group.tasks.length} 份听写 · {group.tasks.reduce((sum, task) => sum + task.entryCount, 0)} 个原始词{selectedCount ? ` · 已选 ${selectedCount} 份` : ''}</span></div>
+                      <button type="button" onClick={() => toggleTaskDateSelection(group)}>{allSelected ? '取消当天' : '全选当天'}</button>
+                    </header>
+                    <div className="dictation-task-list">{group.tasks.map((task) => {
+                      const publicHref = task.share?.status === 'active'
+                        ? `${window.location.origin}/vocabulary/dictation/${task.share.shareId}`
+                        : null
+                      return (
+                        <article className={selectedTaskIdSet.has(task.id) ? 'is-selected' : ''} key={task.id}>
+                          <label className="dictation-task-select"><input type="checkbox" checked={selectedTaskIdSet.has(task.id)} onChange={() => toggleTaskSelection(task.id)} /><span>选择“{task.title}”</span></label>
+                          <div><strong title={task.title}>{taskRowTitle(task)}</strong><span>{task.entryCount} 词 · {task.accent === 'american' ? '美音' : '英音'} · {publicHref ? '可扫码' : '无二维码'}</span></div>
+                          <div>
+                            <button type="button" onClick={() => openGrader(task)}>批改</button>
+                            {publicHref && <a href={publicHref} target="_blank" rel="noreferrer"><Link2 size={14} />打开听写</a>}
+                            <details className="dictation-download-menu">
+                              <summary><Download size={14} />下载资料<ChevronDown size={14} aria-hidden="true" /></summary>
+                              <div>
+                                <button type="button" disabled={busy} onClick={(event) => { event.currentTarget.closest('details')?.removeAttribute('open'); void downloadTaskMaterial(task.id, 'cards') }}><BookOpenCheck size={14} />{publicHref ? '单词卡（含二维码）' : '单词卡'}</button>
+                                <button type="button" disabled={busy} onClick={(event) => { event.currentTarget.closest('details')?.removeAttribute('open'); void downloadTaskMaterial(task.id, 'dictation') }}><Download size={14} />{publicHref ? '复听写纸（含二维码）' : '复听写纸'}</button>
+                                <button type="button" disabled={busy} onClick={(event) => { event.currentTarget.closest('details')?.removeAttribute('open'); void downloadTaskMaterial(task.id, 'answer') }}><FileCheck2 size={14} />教师答案</button>
+                                <button type="button" disabled={busy} onClick={(event) => { event.currentTarget.closest('details')?.removeAttribute('open'); void toggleTaskShare(task) }}>{publicHref ? '撤销二维码' : <><QrCode size={14} />生成二维码</>}</button>
+                              </div>
+                            </details>
+                          </div>
+                        </article>
+                      )
+                    })}</div>
+                  </section>
                 )
-              })}</div> : <div className="dictation-empty-state"><ClipboardCheck size={28} /><h2>还没有听写任务</h2><p>先到“生词组”勾选并创建二维码或纸笔听写。</p></div>}
+              })}</div> : <div className="dictation-empty-state"><ClipboardCheck size={28} /><h2>还没有听写</h2><p>先到“词组”选择单词。</p></div>}
             </div>
 
+            {selectedTasks.length > 0 && (
+              <aside className="dictation-task-selection-panel" aria-label="已选听写导出工具">
+                <div>
+                  <strong>已选 {selectedTasks.length} 份听写</strong>
+                  <span>{selectedTaskRawCount === selectedTaskUniqueCount ? `${selectedTaskUniqueCount} 词` : `原始 ${selectedTaskRawCount} 词 · 去重 ${selectedTaskUniqueCount} 词`} · 自动带二维码</span>
+                </div>
+                <fieldset><legend>口音</legend><button type="button" aria-pressed={accent === 'american'} className={accent === 'american' ? 'is-selected' : ''} onClick={() => setAccent('american')}>美音</button><button type="button" aria-pressed={accent === 'british'} className={accent === 'british' ? 'is-selected' : ''} onClick={() => setAccent('british')}>英音</button></fieldset>
+                <button type="button" className="is-primary" disabled={busy} onClick={() => void exportSelectedTasksByDate()}><QrCode size={16} />合并导出听写纸</button>
+                <button type="button" onClick={() => setSelectedTaskIds([])}>取消选择</button>
+              </aside>
+            )}
           </section>
         )}
 
         {tab === 'history' && (
           <section className="dictation-record-list dictation-history-list">
-            <header><div><h2>检测记录</h2><p>词义抽查与完整听写按日期排在一起；草稿和作废记录也会保留。</p></div></header>
             {detectionHistory.length ? detectionHistory.map((item) => {
               if (item.kind === 'meaning') {
                 const record = item.record
                 const counts = countMeaningRecordResults(record)
                 return (
                   <article className={record.status === 'void' ? 'is-void' : ''} key={`meaning-${record.id}`}>
-                    <div><strong>{record.title}</strong><span>{displayDate(item.date)} · 词义抽查 · {record.status === 'completed' ? '已完成' : record.status === 'draft' ? '草稿' : '已作废'}</span></div>
+                    <div><strong>{record.title}</strong><span>{displayDate(item.date)} · 认词 · {record.status === 'completed' ? '已完成' : record.status === 'draft' ? '草稿' : '已作废'}</span></div>
                     <div className="dictation-record-counts"><span>错 {counts.wrong}</span><span>对 {counts.correct}</span>{counts.untested > 0 && <span>未测 {counts.untested}</span>}</div>
                     <div>
-                      <button type="button" disabled={record.status === 'void'} onClick={() => { setRequestedMeaningRecordId(record.id); setTab('meaning') }}>{record.status === 'draft' ? '继续抽查' : '查看 / 编辑'}</button>
+                      <button type="button" disabled={record.status === 'void'} onClick={() => { setRequestedMeaningRecordId(record.id); setTab('meaning') }}>{record.status === 'draft' ? '继续' : '查看'}</button>
                       <button type="button" onClick={() => void toggleMeaningRecordVoid(record)} disabled={busy}>{record.status === 'void' ? <><Undo2 size={14} />恢复</> : '作废'}</button>
                     </div>
                   </article>
@@ -1172,109 +1340,100 @@ export function VocabularyDictationWorkbench({
                   <div><strong>{record.taskTitle}</strong><span>{displayDate(item.date)} · {record.mode === 'all' ? '完整听写' : '抽听'} · {record.status === 'completed' ? '已完成' : record.status === 'draft' ? '草稿' : '已作废'}</span></div>
                   <div className="dictation-record-counts"><span>错 {counts.wrong}</span><span>对 {counts.correct}</span>{counts.untested > 0 && <span>未测 {counts.untested}</span>}</div>
                   <div>
-                    <button type="button" onClick={() => void editRecord(record)} disabled={record.status === 'void'}>查看 / 编辑</button>
+                    <button type="button" onClick={() => void editRecord(record)} disabled={record.status === 'void'}>查看</button>
                     <button type="button" onClick={() => void toggleRecordVoid(record)} disabled={busy}>{record.status === 'void' ? <><Undo2 size={14} />恢复</> : '作废'}</button>
                   </div>
                 </article>
               )
-            }) : <div className="dictation-empty-state"><FileCheck2 size={28} /><h2>还没有检测记录</h2><p>完成一次词义抽查或听写批改后，就会出现在这里。</p></div>}
+            }) : <div className="dictation-empty-state"><FileCheck2 size={28} /><h2>还没有记录</h2><p>完成认词或听写后会自动保留。</p></div>}
           </section>
         )}
 
         {tab === 'review' && (
           <section className="dictation-review-workspace">
             <header className="dictation-review-heading">
-              <div><h2>待复习</h2><p>认义和拼写分开展示，但老师仍然只需判断对或错。</p></div>
-              <div className="dictation-review-channel" role="group" aria-label="待复习类型">
-                <button type="button" className={reviewMode === 'meaning' ? 'is-selected' : ''} onClick={() => setReviewMode('meaning')}>待认义 {pendingMeaningStates.length}</button>
-                <button type="button" className={reviewMode === 'pending' ? 'is-selected' : ''} onClick={() => setReviewMode('pending')}>待复听写 {pendingStates.length}</button>
-                <button type="button" className={reviewMode === 'stubborn' ? 'is-selected' : ''} onClick={() => setReviewMode('stubborn')}>顽固错词 {stubbornStates.length}</button>
+              <div className="dictation-review-channel" role="group" aria-label="错词筛选">
+                <button type="button" className={reviewMode === 'all' ? 'is-selected' : ''} onClick={() => { setReviewMode('all'); setSelectedReviewIds([]) }}>全部 {reviewWords.filter((word) => !word.paused).length}</button>
+                <button type="button" className={reviewMode === 'meaning' ? 'is-selected' : ''} onClick={() => { setReviewMode('meaning'); setSelectedReviewIds([]) }}>认词 {pendingMeaningStates.length}</button>
+                <button type="button" className={reviewMode === 'dictation' ? 'is-selected' : ''} onClick={() => { setReviewMode('dictation'); setSelectedReviewIds([]) }}>听写 {pendingStates.length}</button>
+                <button type="button" className={reviewMode === 'frequent' ? 'is-selected' : ''} onClick={() => { setReviewMode('frequent'); setSelectedReviewIds([]) }}>常错 {reviewWords.filter((word) => word.frequent && !word.paused).length}</button>
               </div>
             </header>
 
-            {reviewMode === 'meaning' && (
-              <>
-                {selectedMeaningStates.length > 0 && <div className="dictation-review-actions">
-                  <span>已选 {selectedMeaningStates.length} 词</span>
-                  <button type="button" onClick={() => void createTaskFromMeaningEntries(selectedMeaningStates)} disabled={busy}><Sparkles size={15} />生成复习任务</button>
-                  <button type="button" onClick={() => void copyEntries(selectedMeaningStates)}><Copy size={15} />复制清单</button>
-                  <button type="button" onClick={() => setSelectedMeaningIds([])}>取消</button>
-                </div>}
-                {pendingMeaningStates.length ? <div className="dictation-review-table" role="table" aria-label="待认义词">
-                  <div className="dictation-review-table-head" role="row"><span>选择</span><span>单词</span><span>遗忘轨迹</span><span>当前状态</span><span>人工调整</span></div>
-                  {pendingMeaningStates.map((state, index) => (
-                    <div className="dictation-review-row" role="row" key={state.id}>
-                      <label><input type="checkbox" checked={selectedMeaningIds.includes(state.id)} onChange={() => setSelectedMeaningIds((current) => current.includes(state.id) ? current.filter((id) => id !== state.id) : [...current, state.id])} /><span>{state.status === 'repeated' ? index + 1 : ''}</span></label>
-                      <div><strong>{state.headword}</strong><small>{state.partOfSpeech} {formatMeaning(state)}</small></div>
-                      <div><strong>累计忘记 {state.totalWrong} 次</strong><small>{state.currentWrongDateCount} 个日期 · 最近 {displayDate(state.lastForgottenDate)}</small></div>
-                      <div><strong>{state.status === 'repeated' ? '反复忘记' : '待认义'}</strong><small>{state.currentCorrectDateCount ? `已连续 ${state.currentCorrectDateCount} 个日期答对` : '还需跨日两次答对'}</small></div>
-                      <div><button type="button" className={state.pinned ? 'is-active' : ''} aria-pressed={state.pinned} onClick={() => void toggleFlag(state, 'pinned')}><Pin size={14} />重点</button><button type="button" onClick={() => void toggleFlag(state, 'paused')}><PauseCircle size={14} />暂停</button></div>
-                    </div>
-                  ))}
-                </div> : <div className="dictation-empty-state"><Check size={28} /><h2>当前没有待认义词</h2><p>完成一次词义抽查后，这里会按跨日规则自动更新。</p></div>}
-              </>
-            )}
-
-            {reviewMode !== 'meaning' && <>
-              <div className="dictation-suggestion-control dictation-suggestion-control-row">
-                {pausedReviewStates.length > 0 && <button type="button" aria-pressed={showPausedReview} onClick={() => setShowPausedReview((current) => !current)}>{showPausedReview ? '隐藏' : '显示'}已暂停（{pausedReviewStates.length}）</button>}
-                <label>下次建议 <input type="number" min="1" max="60" value={suggestionTarget} onChange={(event) => setSuggestionTarget(Math.max(1, Math.min(60, Number(event.target.value) || 1)))} /> 词</label>
-                <button type="button" onClick={() => void loadSuggestion()} disabled={busy}><Sparkles size={15} />生成建议</button>
-              </div>
+            <div className="dictation-suggestion-control dictation-suggestion-control-row">
+              {pausedReviewCount > 0 && <button type="button" aria-pressed={showPausedReview} onClick={() => setShowPausedReview((current) => !current)}>{showPausedReview ? '隐藏' : '显示'}已暂停（{pausedReviewCount}）</button>}
+              <label>推荐下一轮 <input type="number" min="1" max="60" value={suggestionTarget} onChange={(event) => setSuggestionTarget(Math.max(1, Math.min(60, Number(event.target.value) || 1)))} /> 词</label>
+              <button type="button" onClick={() => void loadSuggestion()} disabled={busy}><Sparkles size={15} />选出单词</button>
+            </div>
 
             {suggestion.length > 0 && (
               <aside className="dictation-suggestion-panel">
-                <div><strong>建议复听写 {suggestion.length} 词</strong><span>每个词都有入选理由，确认后才会生成任务。</span></div>
+                <div><strong>推荐 {suggestion.length} 词</strong><span>确认名单后生成错词听写。</span></div>
                 <ol>{suggestion.map((entry) => <li key={entry.id}><span>{entry.headword}</span><small>{entry.reason}</small></li>)}</ol>
-                <div><button type="button" onClick={() => void createTaskFromReviewEntries(suggestion)}><Sparkles size={15} />生成复听写任务</button><button type="button" onClick={() => setSuggestion([])}>收起</button></div>
+                <div><button type="button" onClick={() => void createTaskFromReviewEntries(suggestion)}><Sparkles size={15} />生成错词听写</button><button type="button" onClick={() => setSuggestion([])}>收起</button></div>
               </aside>
             )}
 
-            {selectedReviewStates.length > 0 && (
+            {selectedReviewWords.length > 0 && (
               <div className="dictation-review-actions">
-                <span>已选 {selectedReviewStates.length} 词</span>
-                <button type="button" onClick={() => void createTaskFromReviewEntries(selectedReviewStates)} disabled={busy}><Sparkles size={15} />生成复听写任务</button>
-                <button type="button" onClick={() => void copyEntries(selectedReviewStates)}><Copy size={15} />复制清单</button>
+                <span>已选 {selectedReviewWords.length} 词</span>
+                <button type="button" onClick={() => void createTaskFromReviewEntries(selectedReviewWords)} disabled={busy}><Sparkles size={15} />生成错词听写</button>
+                <button type="button" onClick={() => void copyEntries(selectedReviewWords)}><Copy size={15} />复制清单</button>
                 <button type="button" onClick={() => setSelectedReviewIds([])}>取消</button>
               </div>
             )}
 
-            {visibleReviewStates.length ? (
-              <div className="dictation-review-table" role="table" aria-label={reviewMode === 'stubborn' ? '顽固错词排行' : '待复听写词'}>
-                <div className="dictation-review-table-head" role="row"><span>选择</span><span>单词</span><span>错误轨迹</span><span>当前状态</span><span>人工调整</span></div>
-                {visibleReviewStates.map((state, index) => (
-                  <div className={state.paused ? 'dictation-review-row is-paused' : 'dictation-review-row'} role="row" key={state.id}>
-                    <label><input type="checkbox" checked={selectedReviewIds.includes(state.id)} onChange={() => setSelectedReviewIds((current) => current.includes(state.id) ? current.filter((id) => id !== state.id) : [...current, state.id])} /><span>{reviewMode === 'stubborn' ? index + 1 : ''}</span></label>
-                    <div><strong>{state.headword}</strong><small>{state.partOfSpeech} {formatMeaning(state)}</small></div>
-                    <div><strong>累计错 {state.totalWrong} 次</strong><small>近 {state.recentAttempts} 次错误率 {Math.round(state.recentWrongRate * 100)}% · 最近 {displayDate(state.lastWrongDate)}</small>{state.lastWrongSpelling && <small>上次写成：{state.lastWrongSpelling}</small>}</div>
-                    <div><strong>{state.status === 'stubborn' ? '顽固' : state.status === 'pending' ? `还需连续通过 ${2 - state.currentConsecutiveCorrect} 次` : '已改善'}</strong><small>{state.wrongDateCount} 个日期写错{state.paused ? ' · 已暂停' : ''}</small></div>
-                    <div><button type="button" className={state.pinned ? 'is-active' : ''} aria-pressed={state.pinned} onClick={() => void toggleFlag(state, 'pinned')}><Pin size={14} />重点</button><button type="button" className={state.paused ? 'is-active' : ''} aria-pressed={state.paused} onClick={() => void toggleFlag(state, 'paused')}><PauseCircle size={14} />暂停</button></div>
-                  </div>
-                ))}
+            {visibleReviewWords.length ? (
+              <div className="dictation-review-table" role="table" aria-label="错词列表">
+                <div className="dictation-review-table-head" role="row"><span>选择</span><span>单词</span><span>错误来源</span><span>当前情况</span><span>操作</span></div>
+                {visibleReviewWords.map((word, index) => {
+                  const recentDate = [word.meaningState?.lastForgottenDate, word.dictationState?.lastWrongDate]
+                    .filter((value): value is string => Boolean(value))
+                    .sort()
+                    .reverse()[0] ?? null
+                  return (
+                    <div className={word.paused ? 'dictation-review-row is-paused' : 'dictation-review-row'} role="row" key={word.id}>
+                      <label><input type="checkbox" checked={selectedReviewIds.includes(word.id)} disabled={word.paused} onChange={() => setSelectedReviewIds((current) => current.includes(word.id) ? current.filter((id) => id !== word.id) : [...current, word.id])} /><span>{reviewMode === 'frequent' ? index + 1 : ''}</span></label>
+                      <div><strong>{word.headword}</strong><small>{word.partOfSpeech} {formatMeaning(word)}</small></div>
+                      <div className="dictation-review-evidence">
+                        <span>{word.meaningState && <b>认词</b>}{word.dictationState && <b>听写</b>}</span>
+                        <small>{[
+                          word.meaningState ? `认词错 ${word.meaningState.totalWrong} 次` : '',
+                          word.dictationState ? `听写错 ${word.dictationState.totalWrong} 次` : '',
+                        ].filter(Boolean).join(' · ')} · 最近 {displayDate(recentDate)}</small>
+                        {word.dictationState?.lastWrongSpelling && <small>上次写成：{word.dictationState.lastWrongSpelling}</small>}
+                      </div>
+                      <div><strong>{word.frequent ? '常错' : '待复习'}</strong><small>{[
+                        word.meaningState ? `认词还需 ${Math.max(0, 2 - word.meaningState.currentCorrectDateCount)} 天` : '',
+                        word.dictationState ? `听写还需 ${Math.max(0, 2 - word.dictationState.currentConsecutiveCorrect)} 次` : '',
+                      ].filter(Boolean).join(' · ')}{word.paused ? ' · 已暂停' : ''}</small></div>
+                      <div><button type="button" className={word.pinned ? 'is-active' : ''} aria-pressed={word.pinned} onClick={() => void toggleFlag(word, 'pinned')}><Pin size={14} />重点</button><button type="button" className={word.paused ? 'is-active' : ''} aria-pressed={word.paused} onClick={() => void toggleFlag(word, 'paused')}><PauseCircle size={14} />暂停</button></div>
+                    </div>
+                  )
+                })}
               </div>
-            ) : <div className="dictation-empty-state"><Check size={28} /><h2>{reviewMode === 'stubborn' ? '暂时没有顽固错词' : '当前没有待复听写词'}</h2><p>完成一次教师确认的听写后，这里会按规则自动更新。</p></div>}
-            </>}
+            ) : <div className="dictation-empty-state"><Check size={28} /><h2>{reviewMode === 'all' ? '现在没有错词' : reviewMode === 'meaning' ? '现在没有认词错词' : reviewMode === 'dictation' ? '现在没有听写错词' : '现在没有常错词'}</h2><p>出错后会自动出现在这里。</p></div>}
           </section>
         )}
       </main>
 
       {grader && (
         <div className="dictation-grader-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) void closeGraderAndSave() }}>
-          <section ref={graderDialogRef} className="dictation-grader" role="dialog" aria-modal="true" aria-labelledby="dictation-grader-title" tabIndex={-1}>
+          <section ref={graderDialogRef} className="dictation-grader" role="dialog" aria-modal="true" aria-labelledby="dictation-grader-title">
             <header>
-              <div><h2 id="dictation-grader-title">{grader.task.title}</h2><p>{grader.task.entryCount} 词 · {grader.record?.status === 'completed' ? '编辑已完成记录' : grader.record ? '草稿自动保存' : '新批改'}</p></div>
+              <div><h2 id="dictation-grader-title">{grader.task.title}</h2><p>{grader.task.entryCount} 词 · {grader.record?.status === 'completed' ? '编辑已完成记录' : grader.record ? '草稿自动保存' : '本次批改'}</p></div>
               <button type="button" aria-label="保存并关闭批改" onClick={() => void closeGraderAndSave()} disabled={grader.saving}><X /></button>
             </header>
             <div className="dictation-grader-settings">
-              <fieldset><legend>听写方式</legend><button type="button" className={grader.mode === 'all' ? 'is-selected' : ''} onClick={() => changeGraderMode('all')}>整组听写</button><button type="button" className={grader.mode === 'partial' ? 'is-selected' : ''} onClick={() => changeGraderMode('partial')}>抽听</button></fieldset>
+              <fieldset><legend>听写方式</legend><button ref={graderFirstControlRef} type="button" className={grader.mode === 'all' ? 'is-selected' : ''} onClick={() => changeGraderMode('all')}>整组听写</button><button type="button" className={grader.mode === 'partial' ? 'is-selected' : ''} onClick={() => changeGraderMode('partial')}>抽听</button></fieldset>
               <label><span>听写日期</span><input type="date" value={grader.dictationDate} onChange={(event) => updateGrader((current) => markDirty(current, { dictationDate: event.target.value }))} /></label>
               <span className="dictation-save-status">{grader.saving ? '正在保存…' : grader.dirty ? '等待自动保存' : grader.record ? '已保存' : '尚未修改'}</span>
             </div>
             <div className="dictation-number-entry">
               {grader.mode === 'partial' && <label><span>实际抽听题号</span><input value={grader.testedNumbers} placeholder="1-10, 15, 18" onChange={(event) => updateGrader((current) => ({ ...current, testedNumbers: event.target.value }))} /></label>}
               <label><span>错词题号</span><input value={grader.wrongNumbers} placeholder="2, 5, 8-10" onChange={(event) => updateGrader((current) => ({ ...current, wrongNumbers: event.target.value }))} /></label>
-              <button type="button" onClick={applyNumberInputs}>应用题号</button>
-              <small>题号应用后会清空，可继续点击题号调整；方向键移动，空格标错，Cmd/Ctrl+Enter 完成</small>
+              <button type="button" onClick={applyNumberInputs}>标记错词</button>
+              <small>输入题号或直接点题号。空格标错 · 方向键移动 · Cmd/Ctrl+Enter 完成</small>
             </div>
             {graderError && <p className="dictation-grader-error" role="alert">{graderError}</p>}
             <div className="dictation-grader-grid">
@@ -1292,7 +1451,7 @@ export function VocabularyDictationWorkbench({
             <label className="dictation-grader-note"><span>教师备注（选填）</span><textarea rows={2} value={grader.note} onChange={(event) => updateGrader((current) => markDirty(current, { note: event.target.value }))} /></label>
             <footer>
               <div><Flag size={15} /><span>错 {Object.values(grader.results).filter((result) => result.result === 'wrong').length}</span><span>对 {Object.values(grader.results).filter((result) => result.result === 'correct').length}</span><span>未考 {Object.values(grader.results).filter((result) => result.result === 'untested').length}</span></div>
-              <div><button type="button" onClick={() => void closeGraderAndSave()} disabled={grader.saving}>保存并稍后继续</button><button type="button" className="is-primary" onClick={() => void completeGrading()} disabled={grader.saving}><FileCheck2 size={16} />{grader.record?.status === 'completed' ? '保存修改' : '完成批改'}</button></div>
+              <div><button type="button" onClick={() => void closeGraderAndSave()} disabled={grader.saving}>稍后继续</button><button type="button" className="is-primary" onClick={() => void completeGrading()} disabled={grader.saving}><FileCheck2 size={16} />{grader.record?.status === 'completed' ? '保存修改' : '完成批改'}</button></div>
             </footer>
           </section>
         </div>
