@@ -28,7 +28,9 @@ import type { VocabularySetEntry } from '../../domain/vocabulary'
 import {
   createVocabularyDictationRecord,
   createVocabularyDictationTask,
+  createVocabularySetErrorTasks,
   downloadCombinedVocabularyPdf,
+  downloadVocabularyDictationTaskMaterialsZip,
   downloadVocabularyDictationTaskPdf,
   getStudentVocabularyMeaningStates,
   getStudentVocabularyReviewStates,
@@ -303,6 +305,7 @@ export function VocabularyDictationWorkbench({
   const [fromDate, setFromDate] = useState('')
   const [toDate, setToDate] = useState('')
   const [printMode, setPrintMode] = useState<'dedupe' | 'grouped'>('dedupe')
+  const [errorMaterialLayout, setErrorMaterialLayout] = useState<'merged' | 'grouped'>('merged')
   const [accent, setAccent] = useState<Accent>('american')
   const [shuffleBeforeFreeze, setShuffleBeforeFreeze] = useState(false)
   const [collectionTitle, setCollectionTitle] = useState('')
@@ -365,8 +368,10 @@ export function VocabularyDictationWorkbench({
   const pendingStates = reviewStates.filter((state) => state.status !== 'improved' && !state.paused)
   const pendingMeaningStates = meaningStates.filter((state) => state.status !== 'improved' && !state.paused)
   const selectedSetIdSet = new Set(selectedSets.map((set) => set.id))
-  const selectedGroupPendingStates = pendingStates.filter((state) => state.sourceSetIds.some((id) => selectedSetIdSet.has(id)))
   const reviewWords = useMemo(() => mergeReviewWords(meaningStates, reviewStates), [meaningStates, reviewStates])
+  const selectedGroupReviewWords = reviewWords.filter((word) => (
+    !word.paused && word.sourceSetIds.some((id) => selectedSetIdSet.has(id))
+  ))
   const filteredReviewWords = reviewWords.filter((word) => (
     reviewMode === 'all'
     || (reviewMode === 'meaning' && word.meaningState)
@@ -1057,6 +1062,39 @@ export function VocabularyDictationWorkbench({
     }
   }
 
+  async function createAndDownloadSetErrorMaterials(kinds: Array<'cards' | 'dictation' | 'answer'>) {
+    if (!activeStudent || !selectedSets.length || !selectedGroupReviewWords.length) return
+    setBusy(true)
+    setError('')
+    setMessage('')
+    let nextTasks: VocabularyDictationTaskDto[] = []
+    try {
+      nextTasks = await createVocabularySetErrorTasks({
+        studentId: activeStudent.id,
+        sourceSetIds: selectedSets.map((set) => set.id),
+        taskDate: today(),
+        accent,
+        materialLayout: errorMaterialLayout,
+      })
+      setCreatedTasks(nextTasks)
+      setTasks((current) => [...nextTasks, ...current])
+      try {
+        if (nextTasks.length === 1 && kinds.length === 1) {
+          await downloadVocabularyDictationTaskPdf(nextTasks[0].id, kinds[0])
+        } else {
+          await downloadVocabularyDictationTaskMaterialsZip(nextTasks.map((task) => task.id), kinds)
+        }
+        setMessage(`已生成 ${nextTasks.length} 份错词复听写并开始下载。`)
+      } catch (downloadError) {
+        setError(`复听写任务已经生成，但资料下载失败。请到“听写”中重试：${downloadError instanceof Error ? downloadError.message : '下载失败。'}`)
+      }
+    } catch (nextError) {
+      setError(nextError instanceof Error ? nextError.message : '错词资料暂时无法生成，请重试。')
+    } finally {
+      setBusy(false)
+    }
+  }
+
   if (loadState === 'loading') {
     return <main className="dictation-workbench-message">正在读取学生与听写记录…</main>
   }
@@ -1117,11 +1155,14 @@ export function VocabularyDictationWorkbench({
         {createdTasks.length > 0 && (
           <section ref={createdTasksRef} className="dictation-created-results" aria-label="刚刚生成的听写" tabIndex={-1}>
             <header>
-              <div>
+              <div className="dictation-created-summary">
                 <strong>{createdTasks.length > 1 ? `已生成 ${createdTasks.length} 份错词听写` : '错词听写已生成'}</strong>
                 <span>{createdTasks.every((task) => task.share?.status === 'active') ? '单词卡扫码听音频，听写纸扫码自动听写。' : '词序已固定，可以下载或批改。'}</span>
               </div>
-              <button type="button" aria-label="收起已生成的听写" onClick={() => setCreatedTasks([])}><X size={16} /></button>
+              <div className="dictation-created-header-actions">
+                <button type="button" onClick={() => { void switchWorkbenchTab('tasks') }}>去听写查看</button>
+                <button type="button" aria-label="收起已生成的听写" onClick={() => setCreatedTasks([])}><X size={16} /></button>
+              </div>
             </header>
             <div className="dictation-created-links">
               {createdTasks.map((task) => {
@@ -1232,9 +1273,19 @@ export function VocabularyDictationWorkbench({
                   </details>
                   <button type="button" onClick={() => void createTasks({ share: true, openFirst: false })} disabled={busy}><QrCode size={16} />生成扫码听写</button>
                   <button type="button" onClick={() => void createTasks({ share: false, openFirst: true })} disabled={busy}><ClipboardCheck size={16} />记录纸笔听写</button>
-                  {selectedGroupPendingStates.length > 0 && <button type="button" onClick={() => {
-                    setSelectedReviewIds(selectedGroupPendingStates.map((state) => state.id)); setReviewMode('dictation'); setTab('review')
-                  }}><ListChecks size={16} />查看组内错词</button>}
+                  {selectedGroupReviewWords.length > 0 ? (
+                    <details className="dictation-error-materials-menu">
+                      <summary><ListChecks size={16} />错词资料（{selectedGroupReviewWords.length}词）</summary>
+                      <div>
+                        <label><input type="radio" name="error-material-layout" checked={errorMaterialLayout === 'merged'} onChange={() => setErrorMaterialLayout('merged')} />合并去重</label>
+                        <label><input type="radio" name="error-material-layout" checked={errorMaterialLayout === 'grouped'} onChange={() => setErrorMaterialLayout('grouped')} />按组装订</label>
+                        <button type="button" disabled={busy} onClick={() => void createAndDownloadSetErrorMaterials(['cards'])}><BookOpenCheck size={14} />记忆卡</button>
+                        <button type="button" disabled={busy} onClick={() => void createAndDownloadSetErrorMaterials(['dictation'])}><Download size={14} />复听写纸</button>
+                        <button type="button" disabled={busy} onClick={() => void createAndDownloadSetErrorMaterials(['answer'])}><FileCheck2 size={14} />教师答案</button>
+                        <button type="button" disabled={busy} onClick={() => void createAndDownloadSetErrorMaterials(['cards', 'dictation', 'answer'])}><Download size={14} />下载全套</button>
+                      </div>
+                    </details>
+                  ) : <button type="button" disabled><ListChecks size={16} />暂无错词</button>}
                 </div>
               </aside>
             )}

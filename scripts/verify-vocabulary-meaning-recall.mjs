@@ -4,9 +4,11 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 import {
+  buildVocabularyDictationTaskPrintPayload,
   createVocabularyDictationRecord,
   createVocabularyDictationTask,
   createVocabularyMeaningRecallRecord,
+  createVocabularySetErrorTasks,
   createVocabularySetFromEntries,
   createVocabularyStudent,
   ensureSharedVocabularyShape,
@@ -297,6 +299,81 @@ assert.equal(suggestion[0].id, entries[1].id, '重点关注应提升推荐顺序
 assert.equal(suggestion.some((entry) => entry.id === entries[0].id), false, '暂停词不得进入推荐')
 assert.equal(suggestion.length, 5)
 assert.equal(listVocabularyMeaningRecallRecords(userDb, 'teacher-a', student.id).length, 5)
+
+createVocabularyMeaningRecallRecord(dbs, 'teacher-a', {
+  studentId: student.id,
+  programId: 'wanwei-round-one-v1',
+  sourceSetIds: [setA.id, setB.id],
+  entryIds: [entries[4].id],
+  orderMode: 'source',
+  recallDate: '2026-08-15',
+  status: 'completed',
+  results: [{ entryId: entries[4].id, result: 'wrong' }],
+})
+const errorTasks = createVocabularySetErrorTasks(dbs, 'teacher-a', {
+  studentId: student.id,
+  programId: 'wanwei-round-one-v1',
+  sourceSetIds: [setB.id, setA.id],
+  taskDate: '2026-08-15',
+  accent: 'british',
+  materialLayout: 'grouped',
+})
+assert.equal(errorTasks.length, 1)
+assert.equal(errorTasks[0].materialLayout, 'grouped')
+assert.throws(
+  () => createVocabularySetErrorTasks(dbs, 'teacher-a', {
+    studentId: student.id,
+    programId: 'wanwei-round-one-v1',
+    sourceSetIds: [setA.id, setB.id],
+    accent: 'american',
+    materialLayout: 'groupd',
+  }),
+  (error) => error?.code === 'invalid_vocabulary_material_layout',
+  '显式提供的非法资料版式必须被拒绝，不能静默冻结为 merged',
+)
+assert.equal(errorTasks[0].share?.status, 'active')
+assert.deepEqual(
+  errorTasks[0].entries.map((entry) => entry.id),
+  [entries[4].id, entries[1].id, entries[2].id],
+  '认词错和听写错必须按所选组顺序、组内顺序合并并全局去重',
+)
+assert.deepEqual(
+  buildVocabularyDictationTaskPrintPayload(userDb, 'teacher-a', errorTasks[0].id).sections.map((section) => section.title),
+  ['第二组', '第一组'],
+  '按组装订必须把重复词归入最先选择的组，并为后续组建立新章节',
+)
+assert.ok(
+  userDb.prepare('PRAGMA table_info(vocabulary_dictation_tasks)').all().some((column) => column.name === 'material_layout'),
+  '听写任务必须持久化资料版式',
+)
+assert.throws(() => createVocabularySetErrorTasks(dbs, 'teacher-a', {
+  studentId: otherStudent.id,
+  programId: 'wanwei-round-one-v1',
+  sourceSetIds: [otherSet.id],
+  taskDate: '2026-08-15',
+  accent: 'american',
+}), /暂无需要复习的错词/)
+const taskCountBeforeBatchFailure = userDb.prepare('SELECT COUNT(*) AS count FROM vocabulary_dictation_tasks').get().count
+userDb.exec(`
+  CREATE TRIGGER verify_set_error_batch_share_failure
+  BEFORE INSERT ON vocabulary_dictation_task_shares
+  BEGIN
+    SELECT RAISE(ABORT, 'forced set error batch failure');
+  END;
+`)
+assert.throws(() => createVocabularySetErrorTasks(dbs, 'teacher-a', {
+  studentId: student.id,
+  programId: 'wanwei-round-one-v1',
+  sourceSetIds: [setA.id],
+  taskDate: '2026-08-15',
+  accent: 'american',
+}), /forced set error batch failure/)
+userDb.exec('DROP TRIGGER verify_set_error_batch_share_failure')
+assert.equal(
+  userDb.prepare('SELECT COUNT(*) AS count FROM vocabulary_dictation_tasks').get().count,
+  taskCountBeforeBatchFailure,
+  '错词任务任一分享失败时必须回滚整批任务',
+)
 
 const panelSource = readFileSync(new URL('../app/src/features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx', import.meta.url), 'utf8')
 assert.match(panelSource, /savePendingRef\.current/u, '词义保存队列必须暴露同步的待保存标记')
