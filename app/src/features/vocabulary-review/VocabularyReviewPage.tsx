@@ -76,7 +76,7 @@ const PUBLIC_LISTEN_ORIGIN = 'https://eqbank.cc'
 type VocabularyReviewPageProps = {
   onBackToWorkbench: () => void
   onOpenVocabularyPractice: (setId: string) => void
-  onOpenVocabularyDictationWorkbench: () => void
+  onOpenVocabularyDictationWorkbench: (meaningRecallSetId?: string) => void
   onVocabularySetRouteChange: (setId: string | null) => void
   requestedSetId?: string | null
   shellNav: AppTopbarNav
@@ -388,7 +388,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   const [printAccent, setPrintAccent] = useState<VocabularyAccent>(printRequest?.accent ?? 'american')
   const [printLoadState, setPrintLoadState] = useState<'idle' | 'loading' | 'ready' | 'error'>(printRequest ? 'loading' : 'idle')
   const [printSections, setPrintSections] = useState<Array<{ startIndex: number; title: string }>>([])
-  const [printShareKind, setPrintShareKind] = useState<'set' | 'dictation' | null>(null)
+  const [printShareKind, setPrintShareKind] = useState<'listen' | 'dictation' | null>(null)
   const [pdfDownloadBusy, setPdfDownloadBusy] = useState(false)
   const [downloadMenuOpen, setDownloadMenuOpen] = useState(false)
   const [pendingShareDownload, setPendingShareDownload] = useState<'cards' | 'dictation' | null>(null)
@@ -548,11 +548,11 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
           })
         : getVocabularySet(printRequest.setId!).then((nextSet) => {
             if (vocabularyPrintRequiresShare(printRequest.kind) && nextSet.share?.status !== 'active') {
-              throw new Error('请先生成扫码听写，再下载带二维码的单词纸。')
+              throw new Error('请先生成公开二维码，再下载带二维码的单词卡或听写纸。')
             }
             setVocabularySet(nextSet)
             setShareId(nextSet.share?.status === 'active' ? nextSet.share.shareId : null)
-            setPrintShareKind('set')
+            setPrintShareKind(printRequest.kind === 'dictation' ? 'dictation' : 'listen')
           })
       loadPrint
         .then(() => setPrintLoadState('ready'))
@@ -1142,8 +1142,8 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   const shareDownloadConfirmation = pendingShareDownload ? (
     <div className="vocabulary-share-download-confirmation" aria-live="polite">
       <div>
-        <strong>这份文件需要扫码播放录音</strong>
-        <span>继续后会同时生成一个匿名公开听写链接；只有拿到二维码的人可以打开，你也可以随时撤销。</span>
+        <strong>这份文件需要公开二维码</strong>
+        <span>继续后会生成同一个匿名分享：单词卡扫码听音频，听写纸扫码自动听写；只有拿到二维码的人可以打开，你也可以随时撤销。</span>
       </div>
       <div>
         <button type="button" className="ghost-button" onClick={() => setPendingShareDownload(null)}>取消</button>
@@ -1181,8 +1181,8 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
           {programLoadState === 'ready' && studentsState === 'ready' && activeStudent && (
             <div className="vocabulary-heading-actions">
               {!printRequest && (
-                <button className="ghost-button" type="button" onClick={props.onOpenVocabularyDictationWorkbench}>
-                  <ClipboardCheck size={16} />听写与复习
+                <button className="ghost-button" type="button" onClick={() => props.onOpenVocabularyDictationWorkbench()}>
+                  <ClipboardCheck size={16} />单词复习
                 </button>
               )}
               <div className="vocabulary-student-switcher">
@@ -1305,19 +1305,19 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
           <section className="vocabulary-run-setup vocabulary-set-reopen" aria-labelledby="vocabulary-set-reopen-title">
             <BookMarked size={34} strokeWidth={1.5} aria-hidden="true" />
             <h2 id="vocabulary-set-reopen-title">{vocabularySet.title}</h2>
-            <p>这是一份内容固定的生词组，共 {vocabularySet.entryCount} 词。可以下载、重新分享或撤销原听写链接。</p>
+            <p>这是一份内容固定的生词组，共 {vocabularySet.entryCount} 词。可以下载、重新分享或撤销原二维码链接。</p>
             {vocabularySetTitleControl}
             <div className="vocabulary-completion-actions">
               {printAccentControl}
               {downloadControl}
               {!shareId ? (
-                <button className="ghost-button" type="button" onClick={() => void createShare()} disabled={requestBusy}>生成扫码听写</button>
+                <button className="ghost-button" type="button" onClick={() => void createShare()} disabled={requestBusy}>生成公开二维码</button>
               ) : (
                 <button className="ghost-button" type="button" onClick={() => void revokeShare()} disabled={requestBusy}>撤销公开分享</button>
               )}
               {shareId && (
                 <button className="ghost-button" type="button" onClick={() => void copyShareLink()}>
-                  <Copy size={16} />{shareCopyStatus === 'copied' ? '链接已复制' : shareCopyStatus === 'error' ? '复制失败' : '复制听写链接'}
+                  <Copy size={16} />{shareCopyStatus === 'copied' ? '链接已复制' : shareCopyStatus === 'error' ? '复制失败' : '复制公开链接'}
                 </button>
               )}
               <button className="ghost-button" type="button" onClick={() => void copyVocabularySet()}>
@@ -1327,10 +1327,13 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
               <button className="ghost-button" type="button" onClick={() => props.onOpenVocabularyPractice(vocabularySet.id)}>
                 <Grid2X2 size={16} />趣味练习
               </button>
+              <button className="ghost-button" type="button" onClick={() => props.onOpenVocabularyDictationWorkbench(vocabularySet.id)}>
+                <ClipboardCheck size={16} />看词说义
+              </button>
               <button className="ghost-button" type="button" onClick={closeVocabularySet}>返回</button>
             </div>
             {shareDownloadConfirmation}
-            {shareId && <p className="vocabulary-share-ready">当前扫码听写链接有效，下载的单词纸会在第一页右下角显示二维码。</p>}
+            {shareId && <p className="vocabulary-share-ready">当前公开二维码有效：单词卡扫码听音频，听写纸扫码自动听写。</p>}
             {requestError && <p className="vocabulary-request-error" role="alert">{requestError}</p>}
           </section>
         ) : runState === 'setup' || runState === 'error' ? (
@@ -1566,8 +1569,8 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                     <BookMarked size={16} />
                     生成固定生词组
                   </button> : downloadControl}
-                  {vocabularySet && !shareId && <button className="ghost-button" type="button" onClick={() => void createShare()} disabled={requestBusy}>生成扫码听写</button>}
-                  {shareId && <button className="ghost-button" type="button" onClick={() => void copyShareLink()}><Copy size={16} />{shareCopyStatus === 'copied' ? '链接已复制' : '复制听写链接'}</button>}
+                  {vocabularySet && !shareId && <button className="ghost-button" type="button" onClick={() => void createShare()} disabled={requestBusy}>生成公开二维码</button>}
+                  {shareId && <button className="ghost-button" type="button" onClick={() => void copyShareLink()}><Copy size={16} />{shareCopyStatus === 'copied' ? '链接已复制' : '复制公开链接'}</button>}
                   {vocabularySet && (
                     <button className="ghost-button" type="button" onClick={() => props.onOpenVocabularyPractice(vocabularySet.id)}>
                       <Grid2X2 size={16} />趣味练习
@@ -1583,7 +1586,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                   </button>
                 </div>
                 {shareDownloadConfirmation}
-                {shareId && <p className="vocabulary-share-ready">扫码听写链接已固定，可随时下载单词纸。</p>}
+                {shareId && <p className="vocabulary-share-ready">公开二维码已固定：单词卡扫码听音频，听写纸扫码自动听写。</p>}
                 {requestError && <p className="vocabulary-request-error" role="alert">{requestError}</p>}
               </div>
             )}
@@ -1731,7 +1734,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                 <span><strong>{vocabularySet?.title ?? program.title}</strong> · 固定生词组 · 本轮{printEntries.length}词</span>
                 <span>第 {pageIndex + 1} / {printPages.length} 页</span>
                 {pageIndex === 0 && shareId && (
-                  <aside className="vocabulary-print-qr" aria-label="扫码听写二维码">
+                  <aside className="vocabulary-print-qr" aria-label={printShareKind === 'dictation' ? '扫码自动听写二维码' : '扫码听音频二维码'}>
                     <QRCodeSVG
                       value={printShareKind === 'dictation'
                         ? `${PUBLIC_LISTEN_ORIGIN}/vocabulary/dictation/${shareId}?accent=${printAccent}`
@@ -1739,9 +1742,9 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                       size={72}
                       level="M"
                       marginSize={0}
-                      title="扫码听写"
+                      title={printShareKind === 'dictation' ? '扫码自动听写' : '扫码听音频'}
                     />
-                    <span>{printShareKind === 'dictation' ? '扫码自动听写' : '扫码听写'}</span>
+                    <span>{printShareKind === 'dictation' ? '扫码自动听写' : '扫码听音频'}</span>
                   </aside>
                 )}
               </footer>

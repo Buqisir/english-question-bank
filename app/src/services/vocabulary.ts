@@ -97,6 +97,11 @@ export type VocabularySetLibraryItemDto = VocabularySetDto & {
     latestWrongCount: number
     latestDate: string | null
     pendingCount: number
+    meaningRecall: {
+      latestDate: string | null
+      pendingCount: number
+      repeatedCount: number
+    }
   }
 }
 
@@ -128,6 +133,11 @@ export type VocabularyDictationTaskDto = {
     createdAt: string
     revokedAt: string | null
   }
+  meaningRecallSource: null | {
+    recordId: string
+    title: string
+    recallDate: string
+  }
   createdAt: string
 }
 
@@ -153,6 +163,60 @@ export type VocabularyDictationRecordDto = {
   voidedAt: string | null
 }
 
+export type VocabularyMeaningRecallRecordDto = {
+  id: string
+  studentId: string
+  programId: string
+  title: string
+  orderMode: 'random' | 'source'
+  status: 'draft' | 'completed' | 'void'
+  recallDate: string
+  entryCount: number
+  entries: Array<VocabularySetEntry & {
+    sourceSetIds: string[]
+    result: VocabularyDictationResult
+  }>
+  sourceSets: VocabularyDictationTaskDto['sourceSets']
+  dictationTasks: Array<{
+    taskId: string
+    title: string
+    createdAt: string
+  }>
+  createdAt: string
+  updatedAt: string
+  completedAt: string | null
+  voidedAt: string | null
+}
+
+export type StudentVocabularyMeaningStateDto = VocabularySetEntry & {
+  status: 'pending' | 'repeated' | 'improved'
+  attempts: number
+  meaningAttempts: number
+  totalWrong: number
+  currentWrongDateCount: number
+  currentCorrectDateCount: number
+  lastForgottenDate: string | null
+  lastCheckedDate: string | null
+  latestEvidenceDate: string
+  latestResult: 'correct' | 'wrong'
+  latestSource: 'meaning_recall' | 'dictation'
+  pinned: boolean
+  paused: boolean
+  sourceSetIds: string[]
+}
+
+export type VocabularyMeaningSuggestionDto = VocabularySetEntry & {
+  sourceSetIds: string[]
+  meaningStatus: 'pending' | 'repeated' | 'improved' | 'remembered' | 'unchecked'
+  dictationStatus: 'pending' | 'stubborn' | 'improved' | 'none'
+  doublePending: boolean
+  lastCheckedDate: string | null
+  lastForgottenDate: string | null
+  pinned: boolean
+  paused: boolean
+  reason: string
+}
+
 export type StudentVocabularyReviewStateDto = VocabularySetEntry & {
   attempts: number
   totalWrong: number
@@ -175,7 +239,7 @@ export type StudentVocabularyReviewStateDto = VocabularySetEntry & {
 export type VocabularyPrintJobDto = {
   vocabularySet: VocabularySetDto
   sections: Array<{ startIndex: number; title: string }>
-  shareKind: 'dictation' | null
+  shareKind: 'listen' | 'dictation' | null
   accent: 'american' | 'british'
   kind: 'cards' | 'dictation' | 'answer' | 'word-search'
 }
@@ -372,12 +436,90 @@ export async function createVocabularyDictationTask(input: {
   entryIds?: string[]
   title: string
   accent: 'american' | 'british'
+  meaningRecallRecordId?: string
 }): Promise<VocabularyDictationTaskDto> {
   const body = await requestJson('/api/vocabulary/dictation-tasks', {
     method: 'POST',
     body: JSON.stringify({ ...input, programId: 'wanwei-round-one-v1' }),
   })
   return body.task as VocabularyDictationTaskDto
+}
+
+export async function createVocabularyMeaningRecallRecord(input: {
+  studentId: string
+  sourceSetIds: string[]
+  entryIds?: string[]
+  title?: string
+  orderMode?: 'random' | 'source'
+  recallDate?: string
+  status?: 'draft' | 'completed'
+  results?: Array<{ entryId: string; result: VocabularyDictationResult }>
+}): Promise<VocabularyMeaningRecallRecordDto> {
+  const body = await requestJson('/api/vocabulary/meaning-recall-records', {
+    method: 'POST',
+    body: JSON.stringify({ ...input, programId: 'wanwei-round-one-v1' }),
+  })
+  return body.record as VocabularyMeaningRecallRecordDto
+}
+
+export async function listVocabularyMeaningRecallRecords(studentId: string): Promise<VocabularyMeaningRecallRecordDto[]> {
+  const query = new URLSearchParams({ studentId })
+  const body = await requestJson(`/api/vocabulary/meaning-recall-records?${query.toString()}`)
+  return body.records as VocabularyMeaningRecallRecordDto[]
+}
+
+export async function getVocabularyMeaningRecallRecord(recordId: string): Promise<VocabularyMeaningRecallRecordDto> {
+  const body = await requestJson(`/api/vocabulary/meaning-recall-records/${encodeURIComponent(recordId)}`)
+  return body.record as VocabularyMeaningRecallRecordDto
+}
+
+export async function updateVocabularyMeaningRecallRecord(
+  recordId: string,
+  input: Partial<{
+    title: string
+    status: 'draft' | 'completed'
+    recallDate: string
+    results: Array<{ entryId: string; result: VocabularyDictationResult }>
+  }>,
+): Promise<VocabularyMeaningRecallRecordDto> {
+  const body = await requestJson(`/api/vocabulary/meaning-recall-records/${encodeURIComponent(recordId)}`, {
+    method: 'PATCH',
+    body: JSON.stringify(input),
+  })
+  return body.record as VocabularyMeaningRecallRecordDto
+}
+
+export async function voidVocabularyMeaningRecallRecord(recordId: string): Promise<VocabularyMeaningRecallRecordDto> {
+  const body = await requestJson(`/api/vocabulary/meaning-recall-records/${encodeURIComponent(recordId)}/void`, {
+    method: 'POST',
+  })
+  return body.record as VocabularyMeaningRecallRecordDto
+}
+
+export async function restoreVocabularyMeaningRecallRecord(recordId: string): Promise<VocabularyMeaningRecallRecordDto> {
+  const body = await requestJson(`/api/vocabulary/meaning-recall-records/${encodeURIComponent(recordId)}/restore`, {
+    method: 'POST',
+  })
+  return body.record as VocabularyMeaningRecallRecordDto
+}
+
+export async function getStudentVocabularyMeaningStates(studentId: string): Promise<StudentVocabularyMeaningStateDto[]> {
+  const query = new URLSearchParams({ studentId, programId: 'wanwei-round-one-v1' })
+  const body = await requestJson(`/api/vocabulary/meaning-review-states?${query.toString()}`)
+  return body.states as StudentVocabularyMeaningStateDto[]
+}
+
+export async function getSuggestedVocabularyMeaningRecall(
+  studentId: string,
+  target: number,
+): Promise<VocabularyMeaningSuggestionDto[]> {
+  const query = new URLSearchParams({
+    studentId,
+    programId: 'wanwei-round-one-v1',
+    target: String(target),
+  })
+  const body = await requestJson(`/api/vocabulary/meaning-review-suggestion?${query.toString()}`)
+  return body.entries as VocabularyMeaningSuggestionDto[]
 }
 
 export async function listVocabularyDictationTasks(studentId: string): Promise<VocabularyDictationTaskDto[]> {

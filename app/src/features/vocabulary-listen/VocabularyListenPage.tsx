@@ -39,12 +39,12 @@ function SyllableGuide({ entry, accent }: { entry: PublicVocabularyEntry; accent
 
 function LoadState({ kind, onRetry }: { kind: 'loading' | 'missing' | 'revoked' | 'error'; onRetry: () => void }) {
   const content = kind === 'loading'
-    ? { title: '正在打开听写单', detail: '词卡和音频信息正在载入。' }
+    ? { title: '正在打开听音词卡', detail: '图片、词卡和音频信息正在载入。' }
     : kind === 'revoked'
-      ? { title: '这份听写单已停止分享', detail: '请向老师索取新的听写链接。' }
+      ? { title: '这份听音词卡已停止分享', detail: '请向老师索取新的听音链接。' }
       : kind === 'missing'
-        ? { title: '没有找到这份听写单', detail: '链接可能不完整，请重新扫描纸上的二维码。' }
-        : { title: '听写单暂时无法打开', detail: '请检查网络后再试一次。' }
+        ? { title: '没有找到这份听音词卡', detail: '链接可能不完整，请重新扫描纸上的二维码。' }
+        : { title: '听音词卡暂时无法打开', detail: '请检查网络后再试一次。' }
 
   return (
     <main className="vocabulary-listen-message" aria-live="polite">
@@ -113,7 +113,7 @@ export function VocabularyListenPage({ shareId }: { shareId: string }) {
         currentIndexRef.current = 0
         resumeIndexRef.current = 0
         resumeRepeatRef.current = 0
-        setAccent('american')
+        setAccent(nextSet.accent ?? 'american')
         setBritishAudioReady(false)
         setStatus('idle')
         setLoadState('ready')
@@ -299,6 +299,7 @@ export function VocabularyListenPage({ shareId }: { shareId: string }) {
   }, [currentEntry, currentIndex, runFrom])
 
   const selectAccent = useCallback((nextAccent: VocabularyAudioAccent) => {
+    if (set?.accent) return
     if (nextAccent === accent || nextAccent === 'british' && !britishAudioReady) return
     cancelPending()
     resumeIndexRef.current = currentIndexRef.current
@@ -307,7 +308,7 @@ export function VocabularyListenPage({ shareId }: { shareId: string }) {
     setPlayedRepeat(0)
     setStatus('idle')
     setAccent(nextAccent)
-  }, [accent, britishAudioReady, cancelPending])
+  }, [accent, britishAudioReady, cancelPending, set?.accent])
 
   const statusText = useMemo(() => {
     if (status === 'ended') return '本组听完'
@@ -328,7 +329,7 @@ export function VocabularyListenPage({ shareId }: { shareId: string }) {
       {audioElement}
       <header className="vocabulary-listen-header">
         <a href="/" aria-label="返回英语题库首页">EQBank</a>
-        <span>扫码听写</span>
+        <span>扫码听音频</span>
       </header>
 
       <main className="vocabulary-listen-shell">
@@ -353,11 +354,11 @@ export function VocabularyListenPage({ shareId }: { shareId: string }) {
           </div>
         </section>
 
-        <section className="vocabulary-listen-controls" aria-label="听写播放控制">
+        <section className="vocabulary-listen-controls" aria-label="听音播放控制">
           <div
             className="vocabulary-listen-progress"
             role="progressbar"
-            aria-label="听写进度"
+            aria-label="听音进度"
             aria-valuemin={1}
             aria-valuemax={entries.length}
             aria-valuenow={currentIndex + 1}
@@ -378,7 +379,9 @@ export function VocabularyListenPage({ shareId }: { shareId: string }) {
           </div>
           <p className={status === 'error' ? 'is-error' : undefined}>{statusText}</p>
           <div className="vocabulary-listen-settings">
-            {britishAudioReady && (
+            {set.accent ? (
+              <p>发音：{set.accent === 'british' ? '英音' : '美音'}</p>
+            ) : britishAudioReady && (
               <fieldset>
                 <legend>发音</legend>
                 <button type="button" className={accent === 'american' ? 'is-selected' : undefined} onClick={() => selectAccent('american')} aria-pressed={accent === 'american'}>美音</button>

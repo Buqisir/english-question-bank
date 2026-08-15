@@ -10,6 +10,7 @@ import {
   createVocabularyStudent,
   ensureSharedVocabularyShape,
   ensureUserVocabularyShape,
+  getPublicVocabularyListenResource,
   getPublicVocabularyShare,
   getPublicVocabularyDictationResource,
   getStudentVocabularyReviewStates,
@@ -144,6 +145,7 @@ assert.equal(getPublicVocabularyShare(userDb, firstSetShare.shareId).status, 're
 assert.equal(getPublicVocabularyDictationResource(userDb, firstSetShare.shareId).status, 'revoked')
 const readOnlyUserDb = new DatabaseSync(path.join(root, 'user-data.sqlite'), { readOnly: true })
 assert.equal(getPublicVocabularyShare(readOnlyUserDb, renewedSetShare.shareId).status, 'active')
+assert.equal(getPublicVocabularyListenResource(readOnlyUserDb, renewedSetShare.shareId).status, 'active')
 assert.equal(getPublicVocabularyDictationResource(readOnlyUserDb, firstSetShare.shareId).status, 'revoked')
 readOnlyUserDb.close()
 assert.equal(
@@ -193,6 +195,7 @@ assert.equal(firstTask.entries[0].teachingSense, entries[0].teachingSense)
 
 const share = shareVocabularyDictationTask(userDb, 'teacher-a', firstTask.id)
 const publicTask = getPublicVocabularyDictationResource(userDb, share.shareId)
+const publicListenTask = getPublicVocabularyListenResource(userDb, share.shareId)
 assert.equal(publicTask.status, 'active')
 assert.equal(publicTask.set.accent, 'american')
 assert.equal(publicTask.set.entries.length, 60)
@@ -200,12 +203,24 @@ assert.equal(publicTask.set.entries[0].answer, entries[0].headword)
 for (const key of ['studentId', 'userId', 'sourceSets', 'record', 'wrongSpelling']) {
   assert.equal(key in publicTask.set, false, `public task leaked ${key}`)
 }
+assert.equal(publicListenTask.status, 'active')
+assert.equal(publicListenTask.set.accent, 'american')
+assert.equal(publicListenTask.set.entries.length, 60)
+assert.equal(publicListenTask.set.entries[0].teachingSense, entries[0].teachingSense)
+assert.equal(publicListenTask.set.entries[0].visual.path, entries[0].visual.path)
+assert.equal(publicListenTask.set.entries[0].audio.path, entries[0].audio.path)
+for (const key of ['studentId', 'userId', 'sourceSets', 'record', 'wrongSpelling']) {
+  assert.equal(key in publicListenTask.set, false, `public listening task leaked ${key}`)
+}
 assert.throws(() => shareVocabularyDictationTask(userDb, 'teacher-b', firstTask.id), /听写任务不存在/)
 revokeVocabularyDictationTaskShare(userDb, 'teacher-a', firstTask.id)
 assert.equal(getPublicVocabularyDictationResource(userDb, share.shareId).status, 'revoked')
+assert.equal(getPublicVocabularyListenResource(userDb, share.shareId).status, 'revoked')
 const renewedShare = shareVocabularyDictationTask(userDb, 'teacher-a', firstTask.id)
 assert.notEqual(renewedShare.shareId, share.shareId)
 assert.equal(getPublicVocabularyDictationResource(userDb, share.shareId).status, 'revoked')
+assert.equal(getPublicVocabularyListenResource(userDb, share.shareId).status, 'revoked')
+assert.equal(getPublicVocabularyListenResource(userDb, 'missing-share-id').status, 'not_found')
 assert.equal(
   userDb.prepare('SELECT COUNT(*) AS count FROM vocabulary_dictation_task_share_history WHERE task_id = ?').get(firstTask.id).count,
   2,
@@ -396,7 +411,8 @@ assert.match(devScriptSource, /APP_PORT="\$\{PORT:-5173\}"/u, '本地开发必�
 assert.match(devScriptSource, /PUBLIC_ORIGIN="\$\{QUESTION_BANK_PUBLIC_ORIGIN:-http:\/\/127\.0\.0\.1:\$\{APP_PORT\}\}"/u, '本地打印渲染必须默认指向同一个前端服务')
 assert.match(devScriptSource, /QUESTION_BANK_PUBLIC_ORIGIN="\$PUBLIC_ORIGIN"\s+node/u, 'API 子进程必须收到本地打印页面地址')
 assert.match(vocabularyReviewSource, /printRequest\.kind === 'dictation' && pageIndex === 0 && shareId[\s\S]{0,500}vocabulary-dictation-print-qr/u, '复听写纸二维码必须只在首页右上区域')
-assert.match(vocabularyReviewSource, /pageIndex === 0 && shareId[\s\S]{0,800}printShareKind === 'dictation'[\s\S]{0,300}\/vocabulary\/dictation\/\$\{shareId\}/u, '任务单词卡必须在首页页脚使用同一公开听写链接')
+assert.match(vocabularyReviewSource, /printShareKind === 'dictation'[\s\S]{0,300}\/vocabulary\/dictation\/\$\{shareId\}[\s\S]{0,180}\/vocabulary\/listen\/\$\{shareId\}/u, '任务单词卡必须进入带图片的公开听音页，复听写纸继续进入自动听写页')
+assert.match(vocabularyReviewSource, /扫码听音频/u, '单词卡右下角必须统一使用“扫码听音频”语义')
 assert.match(vocabularyRoutesSource, /hasQr = payload\.vocabularySet\.share\?\.status === 'active' && \['cards', 'dictation'\]\.includes\(kind\)[\s\S]{0,400}expectedQrCount: hasQr \? 1 : 0/u, '任务单词卡和复听写纸各一个二维码，教师答案不得带二维码')
 for (const [label, source] of [
   ['客户端打印 DTO', vocabularyServiceSource],
