@@ -383,6 +383,11 @@ const resultActionsSource = panelSource.slice(
   panelSource.indexOf('<div className="meaning-recall-result-list">'),
 )
 assert.match(resultActionsSource, /生成错词听写/u, '认词结果只保留本轮错词听写入口')
+assert.match(
+  resultActionsSource,
+  /<legend>听写发音<\/legend>[\s\S]{0,500}>美音<\/button>[\s\S]{0,500}>英音<\/button>/u,
+  '认词结果生成错词听写前必须能选择美音或英音',
+)
 assert.doesNotMatch(resultActionsSource, /立即巩固|当前待认义|整组生成/u, '抽查结果不得再展示其他任务范围')
 assert.match(panelSource, /share: true/u, '本轮错词复听写必须原子创建任务和公开二维码')
 assert.doesNotMatch(panelSource, /shareVocabularyDictationTask/u, '本轮错词复听写不得拆成任务创建与分享两次请求')

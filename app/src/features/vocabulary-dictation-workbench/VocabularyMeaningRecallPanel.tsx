@@ -32,6 +32,7 @@ type MeaningRecallPanelProps = {
   selectedSets: VocabularySetLibraryItemDto[]
   records: VocabularyMeaningRecallRecordDto[]
   accent: 'american' | 'british'
+  onAccentChange: (accent: 'american' | 'british') => void
   requestedRecordId: string | null
   onRequestedRecordHandled: () => void
   onNeedSets: () => void
@@ -77,6 +78,7 @@ export function VocabularyMeaningRecallPanel({
   selectedSets,
   records,
   accent,
+  onAccentChange,
   requestedRecordId,
   onRequestedRecordHandled,
   onNeedSets,
@@ -444,8 +446,13 @@ export function VocabularyMeaningRecallPanel({
           <strong>会 {counts.correct}</strong><strong>不会 {counts.wrong}</strong><span>未测 {counts.untested}</span>
         </div>
         <div className="meaning-recall-result-actions">
+          <fieldset>
+            <legend>听写发音</legend>
+            <button type="button" aria-pressed={accent === 'american'} className={accent === 'american' ? 'is-selected' : ''} onClick={() => onAccentChange('american')}>美音</button>
+            <button type="button" aria-pressed={accent === 'british'} className={accent === 'british' ? 'is-selected' : ''} onClick={() => onAccentChange('british')}>英音</button>
+          </fieldset>
           <button type="button" className="is-primary" onClick={() => void generateTask(forgotten)} disabled={!forgotten.length || busy}><QrCode size={16} />生成错词听写</button>
-          <span>含扫码自动听写。</span>
+          <span>二维码会按所选口音自动听写。</span>
         </div>
         <div className="meaning-recall-result-list">
           {activeRecord.entries.map((entry) => (

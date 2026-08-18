@@ -1298,6 +1298,7 @@ export function VocabularyDictationWorkbench({
             selectedSets={selectedSets}
             records={meaningRecords}
             accent={accent}
+            onAccentChange={setAccent}
             requestedRecordId={requestedMeaningRecordId}
             onRequestedRecordHandled={() => setRequestedMeaningRecordId(null)}
             onNeedSets={() => setTab('sets')}

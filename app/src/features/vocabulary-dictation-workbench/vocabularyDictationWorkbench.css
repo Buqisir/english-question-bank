@@ -1727,6 +1727,43 @@
   border-bottom: 1px solid #e8e8e4;
 }
 
+.meaning-recall-result-actions fieldset {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.meaning-recall-result-actions legend {
+  float: left;
+  align-self: center;
+  margin-right: 8px;
+  color: #6a6a64;
+  font-size: 12px;
+}
+
+.meaning-recall-result-actions fieldset button {
+  min-width: 58px;
+  border-radius: 0;
+  border-right: 0;
+}
+
+.meaning-recall-result-actions fieldset button:first-of-type {
+  border-radius: 6px 0 0 6px;
+}
+
+.meaning-recall-result-actions fieldset button:last-of-type {
+  border-right: 1px solid #d8d8d2;
+  border-radius: 0 6px 6px 0;
+}
+
+.meaning-recall-result-actions fieldset button.is-selected {
+  border-color: #a5cdbd;
+  background: #eaf1ed;
+  color: #1e4a3a;
+}
+
 .meaning-recall-result-actions > span {
   align-self: center;
   color: #6a6a64;
@@ -2033,6 +2070,10 @@
   .meaning-recall-result-actions button,
   .meaning-recall-stage > footer button {
     flex: 1;
+  }
+
+  .meaning-recall-result-actions fieldset button {
+    flex: 0 0 auto;
   }
 
   .meaning-recall-word {
