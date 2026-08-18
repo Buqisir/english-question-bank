@@ -20,6 +20,7 @@ import {
   getVocabularyProgram,
   getVocabularySet,
   getVocabularySetForReviewRun,
+  listVocabularyPrograms,
   listVocabularyStudents,
   listVocabularySets,
   replaceVocabularyProgram,
@@ -422,11 +423,140 @@ assert.equal(storedProgram.entries[0].source.edition, storedProgram.sourceEditio
 assert.equal('exampleCandidates' in storedProgram.entries[0], false)
 assert.equal(getVocabularyProgram(bankDb, 'wanwei-round-one-v1', { includeExampleCandidates: true }).entries[0].exampleCandidates.length, 3)
 
+const gaokaoEntry = {
+  ...entries[0],
+  id: 'gaokao-high-0001-the',
+  groupId: 'gaokao-high-day-1',
+  headword: 'the',
+  teachingSense: 'the 教学释义；表类别',
+  teachingSenses: ['the 教学释义', '表类别'],
+  phonetic: '/ðə/',
+  phonetics: { american: '/ðə/', british: '/ðə/' },
+  pronunciationParts: {
+    american: [{ spelling: 'the', phonetic: '/ðə/' }],
+    british: [{ spelling: 'the', phonetic: '/ðə/' }],
+  },
+  exampleCandidates: entries[0].exampleCandidates.map((candidate) => ({
+    ...candidate,
+    teachingSense: candidate.candidateId === 'c' ? '表类别' : 'the 教学释义',
+  })),
+  visual: {
+    ...entries[0].visual,
+    key: 'gaokao-visual-the',
+    binding: {
+      mode: 'sentence-scene',
+      sentenceId: 'candidate-a',
+      sentenceTextSha256: createHash('sha256').update(entries[0].exampleCandidates[0].english).digest('hex'),
+      displayContract: 'image_and_exact_sentence_with_target_highlight',
+    },
+  },
+  audio: {
+    key: 'gaokao-audio-the-us',
+    version: 'gaokao-american-v1',
+    path: '/vocabulary-assets/gaokao-frequency-v1/audio/american/the.mp3',
+    voice: 'gaokao-american-test',
+  },
+  audioVariants: {
+    american: {
+      key: 'gaokao-audio-the-us',
+      version: 'gaokao-american-v1',
+      path: '/vocabulary-assets/gaokao-frequency-v1/audio/american/the.mp3',
+      voice: 'gaokao-american-test',
+    },
+    british: {
+      key: 'gaokao-audio-the-uk',
+      version: 'gaokao-british-v1',
+      path: '/vocabulary-assets/gaokao-frequency-v1/audio/british/the.mp3',
+      voice: 'gaokao-british-test',
+    },
+  },
+  source: {
+    ...entries[0].source,
+    stage: 'high_frequency',
+    day: 1,
+    sourceOrder: 1,
+    metadata: {
+      frequencyStage: 'high_frequency',
+      frequencyRank: 1,
+      sourceGroup: 1,
+      curriculumTag: 'initial',
+    },
+  },
+}
+replaceVocabularyProgram(bankDb, {
+  id: 'gaokao-curriculum-3000-frequency-v1',
+  version: '2026-08-11-golden-v1',
+  title: '高中课标3000词',
+  subtitle: '频序版 · 61个学习日',
+  sourceTitle: '3000课标词汇·频序版·60天过关',
+  sourceEdition: '2025年6月修订频序版',
+  totalPlannedEntries: 3000,
+  structure: {
+    dayCount: 61,
+    daysPerWeek: 5,
+    stages: [
+      { key: 'high_frequency', label: '高频词汇', entryCount: 1080, dayStart: 1, dayEnd: 18 },
+      { key: 'mid_frequency', label: '中频词汇', entryCount: 920, dayStart: 19, dayEnd: 41 },
+      { key: 'low_frequency', label: '低频词汇', entryCount: 1000, dayStart: 42, dayEnd: 61 },
+    ],
+  },
+  availability: 'hidden',
+  groups: [{
+    id: 'gaokao-high-day-1',
+    stage: 'high_frequency',
+    week: 1,
+    group: 1,
+    sourceLabel: 'Day 1 · No. 1–2',
+    startOrder: 1,
+    endOrder: 60,
+  }],
+  entries: [gaokaoEntry],
+})
+
+assert.deepEqual(listVocabularyPrograms(bankDb).map((program) => program.id), ['wanwei-round-one-v1'])
+assert.deepEqual(listVocabularyPrograms(bankDb, { includeHidden: true }).map((program) => ({
+  id: program.id,
+  availability: program.availability,
+  totalPlannedEntries: program.totalPlannedEntries,
+})), [{
+  id: 'wanwei-round-one-v1',
+  availability: 'available',
+  totalPlannedEntries: 1600,
+}, {
+  id: 'gaokao-curriculum-3000-frequency-v1',
+  availability: 'hidden',
+  totalPlannedEntries: 3000,
+}])
+const storedGaokaoProgram = getVocabularyProgram(bankDb, 'gaokao-curriculum-3000-frequency-v1')
+assert.equal(storedGaokaoProgram.structure.dayCount, 61)
+assert.equal(storedGaokaoProgram.groups[0].stage, 'high_frequency')
+assert.equal(storedGaokaoProgram.entries[0].source.stage, 'high_frequency')
+assert.deepEqual(storedGaokaoProgram.entries[0].teachingSenses, ['the 教学释义', '表类别'])
+assert.deepEqual(storedGaokaoProgram.entries[0].phonetics, gaokaoEntry.phonetics)
+assert.deepEqual(storedGaokaoProgram.entries[0].pronunciationParts, gaokaoEntry.pronunciationParts)
+assert.deepEqual(storedGaokaoProgram.entries[0].source.metadata, gaokaoEntry.source.metadata)
+assert.deepEqual(storedGaokaoProgram.entries[0].audioVariants, gaokaoEntry.audioVariants)
+assert.deepEqual(storedGaokaoProgram.entries[0].visual.binding, gaokaoEntry.visual.binding)
+
 const dbs = { bankDb, userDb }
 const [defaultStudentA] = listVocabularyStudents(userDb, 'teacher-a')
 const [defaultStudentB] = listVocabularyStudents(userDb, 'teacher-b')
 assert.equal(defaultStudentA.displayName, '默认学生')
 assert.equal(defaultStudentB.displayName, '默认学生')
+const [readOnlyBankStudent] = listVocabularyStudents(userDb, 'teacher-readonly-bank')
+const readOnlyBankDb = new DatabaseSync(path.join(root, 'question-bank.sqlite'), { readOnly: true })
+try {
+  const readOnlyBankRun = createVocabularyReviewRun({ bankDb: readOnlyBankDb, userDb }, 'teacher-readonly-bank', {
+    studentId: readOnlyBankStudent.id,
+    programId: 'wanwei-round-one-v1',
+    targetUnfamiliarCount: 1,
+    mode: 'main',
+  })
+  assert.equal(readOnlyBankRun.programId, 'wanwei-round-one-v1')
+  discardVocabularyReviewRun(userDb, 'teacher-readonly-bank', readOnlyBankRun.id)
+} finally {
+  readOnlyBankDb.close()
+}
 const studentA = createVocabularyStudent(userDb, 'teacher-a', { displayName: '小林' })
 const studentB = createVocabularyStudent(userDb, 'teacher-a', { displayName: '小周' })
 const migratedStudent = createVocabularyStudent(userDb, 'teacher-a', { displayName: '小陈' })
@@ -550,6 +680,51 @@ const directSet = createVocabularySetFromEntries(dbs, 'teacher-a', {
   programId: 'wanwei-round-one-v1',
   entryIds: [entries[2].id, entries[0].id, entries[2].id],
 })
+const gaokaoDirectSet = createVocabularySetFromEntries(dbs, 'teacher-a', {
+  studentId: studentA.id,
+  programId: 'gaokao-curriculum-3000-frequency-v1',
+  entryIds: [gaokaoEntry.id],
+})
+assert.deepEqual(gaokaoDirectSet.entries[0].teachingSenses, ['the 教学释义', '表类别'])
+assert.deepEqual(gaokaoDirectSet.entries[0].audioVariants, gaokaoEntry.audioVariants)
+assert.deepEqual(gaokaoDirectSet.entries[0].visual.binding, gaokaoEntry.visual.binding)
+const gaokaoShare = shareVocabularySet(userDb, 'teacher-a', gaokaoDirectSet.id)
+assert.deepEqual(getPublicVocabularyShare(userDb, gaokaoShare.shareId).set.entries[0].audioVariants, gaokaoEntry.audioVariants)
+assert.deepEqual(getPublicVocabularyShare(userDb, gaokaoShare.shareId).set.entries[0].visual.binding, gaokaoEntry.visual.binding)
+assert.deepEqual(getPublicVocabularyDictationShare(userDb, gaokaoShare.shareId).set.entries[0].audioVariants, gaokaoEntry.audioVariants)
+revokeVocabularyShare(userDb, 'teacher-a', gaokaoDirectSet.id)
+const gaokaoTemporaryRun = createVocabularyReviewRun(dbs, 'teacher-a', {
+  studentId: studentA.id,
+  programId: 'gaokao-curriculum-3000-frequency-v1',
+  targetUnfamiliarCount: 1,
+  mode: 'temporary',
+  temporaryStage: 'high_frequency',
+})
+assert.equal(gaokaoTemporaryRun.temporaryStage, 'high_frequency')
+discardVocabularyReviewRun(userDb, 'teacher-a', gaokaoTemporaryRun.id)
+assert.throws(() => createVocabularyReviewRun(dbs, 'teacher-a', {
+  studentId: studentA.id,
+  programId: 'gaokao-curriculum-3000-frequency-v1',
+  targetUnfamiliarCount: 1,
+  mode: 'temporary',
+  temporaryStage: 'core',
+}), /阶段无效/)
+const studentBWanweiRun = createVocabularyReviewRun(dbs, 'teacher-a', {
+  studentId: studentB.id,
+  programId: 'wanwei-round-one-v1',
+  targetUnfamiliarCount: 1,
+  mode: 'main',
+})
+const studentBGaokaoRun = createVocabularyReviewRun(dbs, 'teacher-a', {
+  studentId: studentB.id,
+  programId: 'gaokao-curriculum-3000-frequency-v1',
+  targetUnfamiliarCount: 1,
+  mode: 'main',
+})
+assert.equal(getCurrentVocabularyReviewRun(userDb, 'teacher-a', studentB.id, 'wanwei-round-one-v1').id, studentBWanweiRun.id)
+assert.equal(getCurrentVocabularyReviewRun(userDb, 'teacher-a', studentB.id, 'gaokao-curriculum-3000-frequency-v1').id, studentBGaokaoRun.id)
+discardVocabularyReviewRun(userDb, 'teacher-a', studentBWanweiRun.id)
+discardVocabularyReviewRun(userDb, 'teacher-a', studentBGaokaoRun.id)
 assert.equal(directSet.title, '输入词表 · 2词')
 assert.equal(directSet.reviewRunId, null)
 assert.equal(directSet.studentId, studentA.id)
@@ -574,8 +749,15 @@ assert.throws(() => createVocabularySetFromEntries(dbs, 'teacher-a', {
   programId: 'wanwei-round-one-v1',
   entryIds: [],
 }), /1–60/)
-assert.deepEqual(listVocabularySets(userDb, 'teacher-a', studentA.id).map((set) => set.id).sort(), [directSet.id, vocabularySet.id].sort())
-assert.deepEqual(listVocabularySets(userDb, 'teacher-a', studentB.id), [])
+assert.deepEqual(
+  listVocabularySets(userDb, 'teacher-a', studentA.id, 'wanwei-round-one-v1').map((set) => set.id).sort(),
+  [directSet.id, vocabularySet.id].sort(),
+)
+assert.deepEqual(
+  listVocabularySets(userDb, 'teacher-a', studentA.id, 'gaokao-curriculum-3000-frequency-v1').map((set) => set.id),
+  [gaokaoDirectSet.id],
+)
+assert.deepEqual(listVocabularySets(userDb, 'teacher-a', studentB.id, 'wanwei-round-one-v1'), [])
 
 bankDb.prepare("UPDATE vocabulary_entries SET teaching_sense = '后来修改的释义' WHERE id = ?").run(entries[0].id)
 assert.equal(getVocabularySet(userDb, 'teacher-a', vocabularySet.id).entries[0].teachingSense, entries[0].teachingSense)

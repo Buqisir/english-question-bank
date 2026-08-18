@@ -66,6 +66,27 @@
   font-weight: 600;
 }
 
+.vocabulary-program-switcher {
+  display: grid;
+  gap: 5px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.vocabulary-program-switcher select {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 38px;
+  padding: 7px 30px 7px 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--ink-strong);
+  font: inherit;
+  font-size: 14px;
+}
+
 .vocabulary-student-switcher select,
 .vocabulary-student-create input {
   box-sizing: border-box;
@@ -131,6 +152,7 @@
 }
 
 .vocabulary-student-switcher select:focus-visible,
+.vocabulary-program-switcher select:focus-visible,
 .vocabulary-student-add-button:focus-visible,
 .vocabulary-student-create input:focus-visible,
 .vocabulary-student-create button:focus-visible {

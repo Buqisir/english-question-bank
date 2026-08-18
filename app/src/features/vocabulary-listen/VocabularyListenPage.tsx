@@ -339,9 +339,11 @@ export function VocabularyListenPage({ shareId }: { shareId: string }) {
             <strong>{currentIndex + 1} / {entries.length}</strong>
           </div>
           <div className="vocabulary-listen-card-body">
-            <figure>
-              <img src={currentEntry.visual.path} alt={currentEntry.visual.alt} />
-            </figure>
+            {currentEntry.visual.binding?.mode !== 'sentence-scene' && (
+              <figure>
+                <img src={currentEntry.visual.path} alt={currentEntry.visual.alt} />
+              </figure>
+            )}
             <div className="vocabulary-listen-word">
               <h1>{currentEntry.headword}</h1>
               <SyllableGuide entry={currentEntry} accent={accent} />

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "gaokao-frequency-content-overrides-v1",
+  "entries": [
+    {
+      "sourceOrder": 832,
+      "sourceText": "a.m., am /ˌeɪ ˈem/ abbr. 上午",
+      "reviewNote": "The companion DOCX truncates the final character; the complete row was transcribed from PDF page 15."
+    },
+    {
+      "sourceOrder": 1053,
+      "sourceText": "café, cafe /ˈkæfeɪ/ n. 咖啡馆；小餐馆",
+      "reviewNote": "The companion DOCX separates the accent glyph; the complete row was transcribed from PDF page 19."
+    },
+    {
+      "sourceOrder": 1101,
+      "sourceText": "firm /fɜːm/ adj. 结实的；n. 公司",
+      "reviewNote": "The companion DOCX truncates the final character; the complete row was transcribed from PDF page 20."
+    },
+    {
+      "sourceOrder": 1698,
+      "sourceText": "zoo /zuː/ n. 动物园",
+      "reviewNote": "The companion DOCX spells the headword with zeroes; the complete row was transcribed from PDF page 31."
+    },
+    {
+      "sourceOrder": 2342,
+      "sourceText": "B.C. /ˌbiː ˈsiː/ abbr. 公元前",
+      "reviewNote": "The companion DOCX truncates the final character; the complete row was transcribed from PDF page 43."
+    },
+    {
+      "sourceOrder": 2363,
+      "sourceText": "civilization, civilisation /ˌsɪvəlaɪˈzeɪʃn/ n. 文明",
+      "reviewNote": "The companion DOCX places the meaning in a following text box; the complete row was transcribed from PDF page 43."
+    }
+  ]
+}

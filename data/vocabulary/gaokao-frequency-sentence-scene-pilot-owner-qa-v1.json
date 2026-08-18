@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "version": "sentence-scene-pilot-owner-qa-v1",
+  "pilotVersion": "sentence-scene-pilot-v1",
+  "decidedAt": "2026-08-11",
+  "decision": "all_pass",
+  "reviewUnit": "image_plus_exact_sentence_plus_highlight",
+  "reviewedCount": 8,
+  "passedCount": 8,
+  "integrationAuthorized": false,
+  "note": "Owner confirmed that all eight sentence-scene pilot bindings passed QA.",
+  "entries": [
+    {
+      "entryId": "gaokao-frequency-0209-however",
+      "headword": "however",
+      "verdict": "pass"
+    },
+    {
+      "entryId": "gaokao-frequency-0828-although",
+      "headword": "although",
+      "verdict": "pass"
+    },
+    {
+      "entryId": "gaokao-frequency-0970-throughout",
+      "headword": "throughout",
+      "verdict": "pass"
+    },
+    {
+      "entryId": "gaokao-frequency-1164-unless",
+      "headword": "unless",
+      "verdict": "pass"
+    },
+    {
+      "entryId": "gaokao-frequency-1502-despite",
+      "headword": "despite",
+      "verdict": "pass"
+    },
+    {
+      "entryId": "gaokao-frequency-1538-indeed",
+      "headword": "indeed",
+      "verdict": "pass"
+    },
+    {
+      "entryId": "gaokao-frequency-1694-somehow",
+      "headword": "somehow",
+      "verdict": "pass"
+    },
+    {
+      "entryId": "gaokao-frequency-2646-nevertheless",
+      "headword": "nevertheless",
+      "verdict": "pass"
+    }
+  ]
+}

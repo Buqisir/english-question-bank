@@ -40,6 +40,7 @@ import {
   getVocabularySet,
   getVocabularyReviewRun,
   listVocabularyStudents,
+  listVocabularyPrograms,
   listVocabularySets,
   renameVocabularySet,
   revokeVocabularySetShare,
@@ -48,6 +49,7 @@ import {
   undoVocabularyReviewRun,
   VocabularyApiError,
   type VocabularyReviewRunDto,
+  type VocabularyProgramSummaryDto,
   type VocabularySetDto,
   type VocabularyStudentDto,
 } from '../../services/vocabulary'
@@ -64,9 +66,11 @@ import { VocabularyWordSearchPrint } from '../vocabulary-practice/VocabularyWord
 import { buildVocabularyWordSearchPages } from '../vocabulary-practice/vocabularyWordSearch'
 import './vocabularyReviewPage.css'
 
-const RUN_STORAGE_KEY = 'eqb-vocabulary-review-run-wanwei-round-one-v1'
-const ACTIVE_STUDENT_STORAGE_KEY = 'eqb-vocabulary-active-student-wanwei-round-one-v1'
-const PAUSED_RUN_STORAGE_KEY = 'eqb-vocabulary-review-paused-wanwei-round-one-v1'
+const DEFAULT_PROGRAM_ID = 'wanwei-round-one-v1'
+const LAST_PROGRAM_STORAGE_KEY = 'eqb-vocabulary-review-last-program'
+const LEGACY_RUN_STORAGE_KEY = 'eqb-vocabulary-review-run-wanwei-round-one-v1'
+const LEGACY_ACTIVE_STUDENT_STORAGE_KEY = 'eqb-vocabulary-active-student-wanwei-round-one-v1'
+const LEGACY_PAUSED_RUN_STORAGE_KEY = 'eqb-vocabulary-review-paused-wanwei-round-one-v1'
 const TARGET_UNFAMILIAR_COUNT = 15
 const CARD_PRINT_ENTRIES_PER_PAGE = 6
 const DICTATION_PRINT_ENTRIES_PER_PAGE = 15
@@ -126,12 +130,41 @@ function replaceVocabularySetUrl(setId: string | null) {
   window.history.replaceState(window.history.state, '', `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`)
 }
 
-function runStorageKey(studentId: string) {
-  return `${RUN_STORAGE_KEY}:${studentId}`
+function programStorageKey(kind: 'run' | 'student' | 'paused', programId: string) {
+  if (programId === DEFAULT_PROGRAM_ID) {
+    if (kind === 'run') return LEGACY_RUN_STORAGE_KEY
+    if (kind === 'student') return LEGACY_ACTIVE_STUDENT_STORAGE_KEY
+    return LEGACY_PAUSED_RUN_STORAGE_KEY
+  }
+  return `eqb-vocabulary-review-${kind}:${programId}`
 }
 
-function pausedRunStorageKey(studentId: string) {
-  return `${PAUSED_RUN_STORAGE_KEY}:${studentId}`
+function runStorageKey(programId: string, studentId: string) {
+  return `${programStorageKey('run', programId)}:${studentId}`
+}
+
+function pausedRunStorageKey(programId: string, studentId: string) {
+  return `${programStorageKey('paused', programId)}:${studentId}`
+}
+
+function activeStudentStorageKey(programId: string) {
+  return programStorageKey('student', programId)
+}
+
+function readRequestedProgramId() {
+  if (typeof window === 'undefined') return DEFAULT_PROGRAM_ID
+  return new URLSearchParams(window.location.search).get('programId')?.trim()
+    || window.localStorage.getItem(LAST_PROGRAM_STORAGE_KEY)
+    || DEFAULT_PROGRAM_ID
+}
+
+function replaceVocabularyProgramUrl(programId: string) {
+  if (typeof window === 'undefined' || typeof window.history?.replaceState !== 'function') return
+  const url = new URL(window.location.href)
+  if (url.searchParams.get('view') !== 'vocabulary-review') return
+  url.searchParams.set('programId', programId)
+  const nextSearch = url.searchParams.toString()
+  window.history.replaceState(window.history.state, '', `${url.pathname}?${nextSearch}${url.hash || ''}`)
 }
 
 function VocabularyVisual({ entry, compact = false }: { entry: VocabularyEntry; compact?: boolean }) {
@@ -139,6 +172,9 @@ function VocabularyVisual({ entry, compact = false }: { entry: VocabularyEntry; 
   const visual = entry.visual
     ? { src: entry.visual.path, alt: entry.visual.alt, caption: entry.teachingSense, width: undefined, height: undefined }
     : manifestVisual
+  const binding = entry.visual?.binding
+  const sentenceId = entry.learning.example.candidateId ? `candidate-${entry.learning.example.candidateId}` : null
+  if (binding?.mode === 'sentence-scene' && binding.sentenceId !== sentenceId) return null
   return (
     <figure className={compact ? 'vocabulary-visual vocabulary-visual-compact' : 'vocabulary-visual'}>
       <img
@@ -163,6 +199,7 @@ function adaptVocabularyProgram(program: Awaited<ReturnType<typeof fetchVocabula
     sourceEdition: program.sourceEdition,
     totalPlannedEntries: program.totalPlannedEntries,
     calibrationSize: program.entries.length,
+    structure: program.structure,
     groups: program.groups.map((group) => ({
       id: group.id,
       stage: group.stage,
@@ -183,11 +220,13 @@ function adaptVocabularyProgram(program: Awaited<ReturnType<typeof fetchVocabula
         partOfSpeech: entry.partOfSpeech,
         sourceMeanings: entry.sourceMeanings,
         teachingSense: entry.teachingSense,
+        teachingSenses: entry.teachingSenses,
         examFrequency: entry.examFrequency,
         primaryStageReview: false,
         visualKey: entry.visual.key as VocabularyEntry['visualKey'],
         visual: entry.visual,
         audio: entry.audio,
+        audioVariants: entry.audioVariants,
         learning: {
           pronunciationGuide: {
             mode: entry.pronunciationMode,
@@ -209,10 +248,19 @@ function adaptVocabularyProgram(program: Awaited<ReturnType<typeof fetchVocabula
           globalOrder: entry.source.sourceOrder,
           printedPage: entry.source.printedPage,
           verification: entry.source.verification,
+          metadata: entry.source.metadata,
         },
       }
     }),
   }
+}
+
+function vocabularyStageLabel(program: VocabularyProgram, stage: string): string {
+  const configured = program.structure?.stages?.find((candidate) => candidate.key === stage)
+  if (configured) return configured.label
+  if (stage === 'core') return '核心掌握词'
+  if (stage === 'basic') return '基础识记词'
+  return stage === 'recognition' ? '认识拓展词' : stage
 }
 
 function VocabularyPronunciationGuide({
@@ -316,12 +364,27 @@ function formatVocabularyList(entries: VocabularyEntry[]): string {
 }
 
 function getCoreMeanings(entry: VocabularyEntry): string[] {
-  const meanings = [...new Set(entry.sourceMeanings.map((meaning) => meaning.trim()).filter(Boolean))].slice(0, 3)
+  const preferred = entry.teachingSenses?.length ? entry.teachingSenses : entry.sourceMeanings
+  const meanings = [...new Set(preferred.map((meaning) => meaning.trim()).filter(Boolean))].slice(0, 3)
   return meanings.length ? meanings : [entry.teachingSense]
 }
 
 function formatCoreMeanings(entry: VocabularyEntry): string {
   return getCoreMeanings(entry).join('；')
+}
+
+function frequencyStageLabel(stage: string | undefined): string {
+  if (stage === 'high_frequency') return '高频词'
+  if (stage === 'mid_frequency') return '中频词'
+  if (stage === 'low_frequency') return '低频词'
+  return ''
+}
+
+function curriculumTagLabel(tag: NonNullable<VocabularyEntry['source']['metadata']>['curriculumTag']): string {
+  if (tag === 'initial') return '初中已学'
+  if (tag === 'required') return '高中必修'
+  if (tag === 'elective') return '高中选择性必修'
+  return ''
 }
 
 function adaptVocabularySetEntry(entry: VocabularySetEntry): VocabularyEntry {
@@ -333,9 +396,11 @@ function adaptVocabularySetEntry(entry: VocabularySetEntry): VocabularyEntry {
     partOfSpeech: entry.partOfSpeech,
     sourceMeanings: entry.sourceMeanings?.length ? entry.sourceMeanings : [entry.teachingSense],
     teachingSense: entry.teachingSense,
+    teachingSenses: entry.teachingSenses,
     visualKey: entry.visual.key,
     visual: entry.visual,
     audio: entry.audio,
+    audioVariants: entry.audioVariants,
     learning: {
       pronunciationGuide: {
         mode: entry.pronunciationMode,
@@ -364,13 +429,15 @@ function adaptVocabularySetEntry(entry: VocabularySetEntry): VocabularyEntry {
 export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   const [printRequest] = useState<VocabularyPrintRequest | null>(readVocabularyPrintRequest)
   const [program, setProgram] = useState<VocabularyProgram>(calibrationVocabularyProgram)
+  const [programs, setPrograms] = useState<VocabularyProgramSummaryDto[]>([])
+  const [activeProgramId, setActiveProgramId] = useState(readRequestedProgramId)
   const [programLoadState, setProgramLoadState] = useState<'loading' | 'ready' | 'error'>('loading')
   const [reviewState, setReviewState] = useState(() => createVocabularyReviewState(TARGET_UNFAMILIAR_COUNT))
   const [runId, setRunId] = useState<string | null>(null)
   const [runStatus, setRunStatus] = useState<VocabularyReviewRunDto['status']>('active')
   const [mainProgressCursor, setMainProgressCursor] = useState(0)
   const [targetInput, setTargetInput] = useState(TARGET_UNFAMILIAR_COUNT)
-  const [reviewAccent, setReviewAccent] = useState<VocabularyAccent>(readVocabularyAudioAccent)
+  const [reviewAccent, setReviewAccent] = useState<VocabularyAccent>(() => readVocabularyAudioAccent(activeProgramId))
   const [runState, setRunState] = useState<'loading' | 'setup' | 'active' | 'error'>('loading')
   const [students, setStudents] = useState<VocabularyStudentDto[]>([])
   const [activeStudentId, setActiveStudentId] = useState<string | null>(null)
@@ -467,6 +534,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   const hasUnfinishedRun = Boolean(runId && runStatus !== 'frozen')
   const progressRequiresRunReplacement = hasUnfinishedRun || progressReplaceRequired
   const currentStage = currentEntry?.source.stage ?? 'core'
+  const currentStageLabel = vocabularyStageLabel(program, currentStage)
   const currentWeek = currentEntry?.source.week ?? 1
   const visibleGroups = useMemo(
     () => program.groups.filter((group) =>
@@ -513,17 +581,42 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
       revealed: false,
     })
     if (run.mode === 'main') setMainProgressCursor(run.cursor)
-    window.localStorage.setItem(runStorageKey(activeStudentId), run.id)
+    window.localStorage.setItem(runStorageKey(activeProgramId, activeStudentId), run.id)
     if (options.activate === false) {
       setRunState('setup')
     } else {
-      window.localStorage.removeItem(pausedRunStorageKey(activeStudentId))
+      window.localStorage.removeItem(pausedRunStorageKey(activeProgramId, activeStudentId))
       setRunState('active')
     }
-  }, [activeStudentId])
+  }, [activeProgramId, activeStudentId])
 
   useEffect(() => {
-    fetchVocabularyProgram()
+    if (printRequest) return
+    listVocabularyPrograms()
+      .then((nextPrograms) => {
+        if (!nextPrograms.length) throw new Error('当前没有可用的词汇课程。')
+        const requestedId = readRequestedProgramId()
+        const nextProgramId = nextPrograms.some((item) => item.id === requestedId)
+          ? requestedId
+          : nextPrograms[0].id
+        setPrograms(nextPrograms)
+        setActiveProgramId(nextProgramId)
+      })
+      .catch((error: unknown) => {
+        setProgramLoadState('error')
+        setRequestError(error instanceof Error ? error.message : '词汇课程列表加载失败。')
+      })
+  }, [printRequest])
+
+  useEffect(() => {
+    if (!printRequest && !programs.some((item) => item.id === activeProgramId)) return
+    setProgramLoadState('loading')
+    if (!printRequest) {
+      const savedAccent = readVocabularyAudioAccent(activeProgramId)
+      setReviewAccent(savedAccent)
+      setPrintAccent(savedAccent)
+    }
+    fetchVocabularyProgram(activeProgramId)
       .then((nextProgram) => {
         setProgram(adaptVocabularyProgram(nextProgram))
         setProgramLoadState('ready')
@@ -532,7 +625,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
         setProgramLoadState('error')
         setRequestError(error instanceof Error ? error.message : '完整词库加载失败。')
       })
-  }, [])
+  }, [activeProgramId, printRequest, programs])
 
   useEffect(() => {
     if (printRequest) {
@@ -540,6 +633,9 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
       setRunState('setup')
       const loadPrint = printRequest.printJobId
         ? getVocabularyPrintJob(printRequest.printJobId).then((printJob) => {
+            if (printJob.vocabularySet.programId !== activeProgramId) {
+              setActiveProgramId(printJob.vocabularySet.programId)
+            }
             setVocabularySet(printJob.vocabularySet)
             setShareId(printJob.vocabularySet.share?.status === 'active' ? printJob.vocabularySet.share.shareId : null)
             setPrintSections(printJob.sections)
@@ -550,6 +646,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
             if (vocabularyPrintRequiresShare(printRequest.kind) && nextSet.share?.status !== 'active') {
               throw new Error('请先生成公开二维码，再下载带二维码的单词卡或听写纸。')
             }
+            if (nextSet.programId !== activeProgramId) setActiveProgramId(nextSet.programId)
             setVocabularySet(nextSet)
             setShareId(nextSet.share?.status === 'active' ? nextSet.share.shareId : null)
             setPrintShareKind(printRequest.kind === 'dictation' ? 'dictation' : 'listen')
@@ -564,7 +661,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
     }
     listVocabularyStudents()
       .then((nextStudents) => {
-        const preferredId = window.localStorage.getItem(ACTIVE_STUDENT_STORAGE_KEY)
+        const preferredId = window.localStorage.getItem(activeStudentStorageKey(activeProgramId))
         const nextActive = nextStudents.find((student) => student.id === preferredId) ?? nextStudents[0]
         setStudents(nextStudents)
         setActiveStudentId(nextActive?.id ?? null)
@@ -575,14 +672,14 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
         setRunState('error')
         setRequestError(error instanceof Error ? error.message : '学生档案加载失败。')
       })
-  }, [printRequest])
+  }, [activeProgramId, printRequest])
 
   useEffect(() => {
     if (!activeStudentId) return
     const studentId = activeStudentId
     const isDefaultStudent = students.find((student) => student.id === studentId)?.isDefault === true
     let cancelled = false
-    window.localStorage.setItem(ACTIVE_STUDENT_STORAGE_KEY, studentId)
+    window.localStorage.setItem(activeStudentStorageKey(activeProgramId), studentId)
     setRunState('loading')
     setRunId(null)
     setRunStatus('active')
@@ -601,8 +698,8 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
     async function loadStudentVocabulary() {
       try {
         const [nextSets, progress] = await Promise.all([
-          listVocabularySets(studentId),
-          getVocabularyProgress(studentId),
+          listVocabularySets(activeProgramId, studentId),
+          getVocabularyProgress(activeProgramId, studentId),
         ])
         if (cancelled) return
         setRecentSets(nextSets)
@@ -618,17 +715,23 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
             setActiveStudentId(requestedStudent.id)
             return
           }
+          if (requestedSet.programId !== activeProgramId) {
+            setActiveProgramId(requestedSet.programId)
+            return
+          }
           setVocabularySet(requestedSet)
           setShareId(requestedSet.share?.status === 'active' ? requestedSet.share.shareId : null)
           setRunState('setup')
           return
         }
-        const savedRunId = window.localStorage.getItem(runStorageKey(studentId))
-          ?? (isDefaultStudent ? window.localStorage.getItem(RUN_STORAGE_KEY) : null)
-        const currentRun = await getCurrentVocabularyReviewRun(studentId)
+        const savedRunId = window.localStorage.getItem(runStorageKey(activeProgramId, studentId))
+          ?? (activeProgramId === DEFAULT_PROGRAM_ID && isDefaultStudent
+            ? window.localStorage.getItem(LEGACY_RUN_STORAGE_KEY)
+            : null)
+        const currentRun = await getCurrentVocabularyReviewRun(activeProgramId, studentId)
         if (cancelled) return
         if (currentRun) {
-          const pausedRunId = window.localStorage.getItem(pausedRunStorageKey(studentId))
+          const pausedRunId = window.localStorage.getItem(pausedRunStorageKey(activeProgramId, studentId))
           applyRun(currentRun, { activate: pausedRunId !== currentRun.id })
           return
         }
@@ -639,14 +742,18 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
             if (run.studentId !== studentId) throw new Error('保存的过词轮次不属于当前学生。')
             if (run.status !== 'frozen') throw new Error('本地轮次已不是服务端当前轮次。')
             if (!frozenSet) throw new Error('已冻结的生词组没有找到，请稍后重试。')
-            if (isDefaultStudent) window.localStorage.removeItem(RUN_STORAGE_KEY)
+            if (activeProgramId === DEFAULT_PROGRAM_ID && isDefaultStudent) {
+              window.localStorage.removeItem(LEGACY_RUN_STORAGE_KEY)
+            }
             setVocabularySet(frozenSet)
             setShareId(frozenSet.share?.status === 'active' ? frozenSet.share.shareId : null)
             applyRun(run, { activate: false })
             return
           } catch {
-            window.localStorage.removeItem(runStorageKey(studentId))
-            if (isDefaultStudent) window.localStorage.removeItem(RUN_STORAGE_KEY)
+            window.localStorage.removeItem(runStorageKey(activeProgramId, studentId))
+            if (activeProgramId === DEFAULT_PROGRAM_ID && isDefaultStudent) {
+              window.localStorage.removeItem(LEGACY_RUN_STORAGE_KEY)
+            }
           }
         }
         setRunState('setup')
@@ -659,7 +766,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
 
     void loadStudentVocabulary()
     return () => { cancelled = true }
-  }, [activeStudentId, applyRun, props.requestedSetId, students])
+  }, [activeProgramId, activeStudentId, applyRun, props.requestedSetId, students])
 
   useEffect(() => () => {
     if (copyTimerRef.current !== null) window.clearTimeout(copyTimerRef.current)
@@ -778,8 +885,8 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
     try {
       setVocabularySet(null)
       setShareId(null)
-      window.localStorage.removeItem(pausedRunStorageKey(activeStudentId))
-      applyRun(await createVocabularyReviewRun(activeStudentId, targetInput, { mode: 'main' }))
+      window.localStorage.removeItem(pausedRunStorageKey(activeProgramId, activeStudentId))
+      applyRun(await createVocabularyReviewRun(activeProgramId, activeStudentId, targetInput, { mode: 'main' }))
     } catch (error) {
       setRequestError(error instanceof Error ? error.message : '无法开始过词，请重试。')
       setRunState('error')
@@ -809,7 +916,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
     setProgressUpdateMessage('')
     setProgressUpdateError('')
     try {
-      const result = await setVocabularyProgressStart(activeStudentId, entry.id, progressRequiresRunReplacement)
+      const result = await setVocabularyProgressStart(activeProgramId, activeStudentId, entry.id, progressRequiresRunReplacement)
       const nextState = createVocabularyReviewState(result.progress.lastTarget)
       setMainProgressCursor(result.progress.cursor)
       setTargetInput(result.progress.lastTarget)
@@ -822,9 +929,11 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
       setProgressReplaceRequired(false)
       setProgressUpdateMessage(`已将下一词设为 ${result.startEntry.headword}（第 ${result.startEntry.sourceOrder} 词）。`)
       window.requestAnimationFrame(() => progressCurrentRef.current?.focus())
-      window.localStorage.removeItem(runStorageKey(activeStudentId))
-      window.localStorage.removeItem(pausedRunStorageKey(activeStudentId))
-      if (activeStudent?.isDefault) window.localStorage.removeItem(RUN_STORAGE_KEY)
+      window.localStorage.removeItem(runStorageKey(activeProgramId, activeStudentId))
+      window.localStorage.removeItem(pausedRunStorageKey(activeProgramId, activeStudentId))
+      if (activeProgramId === DEFAULT_PROGRAM_ID && activeStudent?.isDefault) {
+        window.localStorage.removeItem(LEGACY_RUN_STORAGE_KEY)
+      }
       if (vocabularySet) syncVocabularySetRoute(null)
       setVocabularySet(null)
       setShareId(null)
@@ -844,7 +953,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
     if (!activeStudentId || !runId) return
     reviewAudioRef.current?.pause()
     reviewAudioRef.current = null
-    window.localStorage.setItem(pausedRunStorageKey(activeStudentId), runId)
+    window.localStorage.setItem(pausedRunStorageKey(activeProgramId, activeStudentId), runId)
     setReviewState((current) => ({ ...current, revealed: false }))
     setRequestError('')
     setRunState('setup')
@@ -855,8 +964,11 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
     setRequestError('')
     try {
       if (runId && !vocabularySet) await discardVocabularyReviewRun(runId)
-      if (activeStudentId) window.localStorage.removeItem(runStorageKey(activeStudentId))
-      if (activeStudentId) window.localStorage.removeItem(pausedRunStorageKey(activeStudentId))
+      if (activeStudentId) window.localStorage.removeItem(runStorageKey(activeProgramId, activeStudentId))
+      if (activeStudentId) window.localStorage.removeItem(pausedRunStorageKey(activeProgramId, activeStudentId))
+      if (activeProgramId === DEFAULT_PROGRAM_ID && activeStudent?.isDefault) {
+        window.localStorage.removeItem(LEGACY_RUN_STORAGE_KEY)
+      }
       setRunId(null)
       setRunStatus('active')
       setVocabularySet(null)
@@ -879,10 +991,12 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
     if (runStatus !== 'frozen') return
 
     if (activeStudentId) {
-      window.localStorage.removeItem(runStorageKey(activeStudentId))
-      window.localStorage.removeItem(pausedRunStorageKey(activeStudentId))
+      window.localStorage.removeItem(runStorageKey(activeProgramId, activeStudentId))
+      window.localStorage.removeItem(pausedRunStorageKey(activeProgramId, activeStudentId))
     }
-    if (activeStudent?.isDefault) window.localStorage.removeItem(RUN_STORAGE_KEY)
+    if (activeProgramId === DEFAULT_PROGRAM_ID && activeStudent?.isDefault) {
+      window.localStorage.removeItem(LEGACY_RUN_STORAGE_KEY)
+    }
     setRunId(null)
     setRunStatus('active')
     setReviewState(createVocabularyReviewState(targetInput))
@@ -918,6 +1032,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
     setRequestError('')
     try {
       const nextSet = await createVocabularySetFromEntries(
+        activeProgramId,
         activeStudentId,
         directInputResult.matchedEntries.map((entry) => entry.id),
       )
@@ -1082,7 +1197,22 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
 
   function chooseReviewAccent(accent: VocabularyAccent) {
     setReviewAccent(accent)
-    saveVocabularyAudioAccent(accent)
+    setPrintAccent(accent)
+    saveVocabularyAudioAccent(accent, activeProgramId)
+  }
+
+  function chooseVocabularyProgram(programId: string) {
+    if (programId === activeProgramId || runState === 'active') return
+    reviewAudioRef.current?.pause()
+    reviewAudioRef.current = null
+    syncVocabularySetRoute(null)
+    setVocabularySet(null)
+    setShareId(null)
+    setRequestError('')
+    setProgressExplorerOpen(false)
+    setActiveProgramId(programId)
+    window.localStorage.setItem(LAST_PROGRAM_STORAGE_KEY, programId)
+    replaceVocabularyProgramUrl(programId)
   }
 
   const currentGlobalOrder = currentEntry?.source.globalOrder ?? program.entries.length
@@ -1110,7 +1240,11 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   const printAccentControl = vocabularySet ? (
     <label className="vocabulary-print-accent-control">
       <span>下载读音</span>
-      <select value={printAccent} onChange={(event) => setPrintAccent(event.target.value as VocabularyAccent)}>
+      <select value={printAccent} onChange={(event) => {
+        const accent = event.target.value as VocabularyAccent
+        setPrintAccent(accent)
+        saveVocabularyAudioAccent(accent, activeProgramId)
+      }}>
         <option value="american">美式</option>
         <option value="british">英式</option>
       </select>
@@ -1184,6 +1318,19 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                 <button className="ghost-button" type="button" onClick={() => props.onOpenVocabularyDictationWorkbench()}>
                   <ClipboardCheck size={16} />单词复习
                 </button>
+              )}
+              {programs.length > 1 && (
+                <label className="vocabulary-program-switcher">
+                  <span>词汇课程</span>
+                  <select
+                    aria-label="切换词汇课程"
+                    value={activeProgramId}
+                    disabled={requestBusy || runState === 'active'}
+                    onChange={(event) => chooseVocabularyProgram(event.target.value)}
+                  >
+                    {programs.map((item) => <option value={item.id} key={item.id}>{item.title}</option>)}
+                  </select>
+                </label>
               )}
               <div className="vocabulary-student-switcher">
                 <label>
@@ -1374,7 +1521,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
             <div className="vocabulary-direct-set">
               <div className="vocabulary-direct-set-heading">
                 <h3>已有单词，直接生成词表</h3>
-                <span>只保留当前 1600 词库中的词</span>
+                <span>只匹配当前课程已入库的 {program.entries.length} 词</span>
               </div>
               <label className="vocabulary-direct-set-input" htmlFor="vocabulary-direct-set-input">
                 <span>用中文逗号隔开</span>
@@ -1434,7 +1581,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
           <aside className="vocabulary-course-rail" aria-label="课程位置">
             <div className="vocabulary-rail-heading">
               <h2>第{currentWeek}周</h2>
-              <span>{currentStage === 'core' ? '核心掌握词' : currentStage === 'basic' ? '基础识记词' : '认识拓展词'}</span>
+              <span>{currentStageLabel}</span>
             </div>
             <ol className="vocabulary-group-list">
               {visibleGroups.map((group) => {
@@ -1510,6 +1657,30 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                       <VocabularyPronunciationGuide entry={currentEntry} accent={reviewAccent} />
                       <VocabularyExample entry={currentEntry} />
                       <dl>
+                        {currentEntry.source.metadata?.frequencyRank && (
+                          <div>
+                            <dt>频序</dt>
+                            <dd>第 {currentEntry.source.metadata.frequencyRank} 词</dd>
+                          </div>
+                        )}
+                        {currentEntry.source.metadata?.frequencyStage && (
+                          <div>
+                            <dt>频率</dt>
+                            <dd>{frequencyStageLabel(currentEntry.source.metadata.frequencyStage)}</dd>
+                          </div>
+                        )}
+                        {currentEntry.source.metadata?.curriculumTag && (
+                          <div>
+                            <dt>课标</dt>
+                            <dd>{curriculumTagLabel(currentEntry.source.metadata.curriculumTag)}</dd>
+                          </div>
+                        )}
+                        {currentEntry.source.metadata?.sourceGroup && (
+                          <div>
+                            <dt>源书组</dt>
+                            <dd>No. {currentEntry.source.metadata.sourceGroup}</dd>
+                          </div>
+                        )}
                         {currentEntry.examFrequency != null && currentEntry.examFrequency > 0 && (
                           <div>
                             <dt>来源考频</dt>

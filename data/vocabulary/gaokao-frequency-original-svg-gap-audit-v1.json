@@ -1,0 +1,312 @@
+{
+  "schemaVersion": "gaokao-frequency-original-svg-gap-audit-v1",
+  "checkedAt": "2026-08-11",
+  "method": "Twelve exact headwords queried individually against Koboyo's public client search shards; no bulk icon download.",
+  "limitation": "Search absence is evidence of no direct indexed term match, not proof that no remotely related metaphor exists anywhere in the library.",
+  "entries": [
+    {
+      "headword": "however",
+      "teachingSense": "然而",
+      "query": "however",
+      "officialSearchIndex": "https://koboyo.com/icons/data/search/v1/",
+      "checkedAt": "2026-08-11",
+      "shardChain": [
+        {
+          "prefix": "ho",
+          "url": "https://koboyo.com/icons/data/search/v1/ho.json",
+          "status": 200
+        },
+        {
+          "prefix": "how",
+          "url": "https://koboyo.com/icons/data/search/v1/how.json",
+          "status": 200
+        }
+      ],
+      "searchedShardEntryCount": 22,
+      "matchingTermHits": [],
+      "assessment": "no_direct_teaching_sense_match",
+      "rationale": "没有直接词项命中；需要表达前后分句的转折关系。"
+    },
+    {
+      "headword": "beyond",
+      "teachingSense": "超出",
+      "query": "beyond",
+      "officialSearchIndex": "https://koboyo.com/icons/data/search/v1/",
+      "checkedAt": "2026-08-11",
+      "shardChain": [
+        {
+          "prefix": "be",
+          "url": "https://koboyo.com/icons/data/search/v1/be.json",
+          "status": 200
+        }
+      ],
+      "searchedShardEntryCount": 800,
+      "matchingTermHits": [],
+      "assessment": "no_direct_teaching_sense_match",
+      "rationale": "没有直接词项命中；需要表达越过边界后的空间关系。"
+    },
+    {
+      "headword": "although",
+      "teachingSense": "虽",
+      "query": "although",
+      "officialSearchIndex": "https://koboyo.com/icons/data/search/v1/",
+      "checkedAt": "2026-08-11",
+      "shardChain": [
+        {
+          "prefix": "al",
+          "url": "https://koboyo.com/icons/data/search/v1/al.json",
+          "status": 200
+        },
+        {
+          "prefix": "alt",
+          "url": "https://koboyo.com/icons/data/search/v1/alt.json",
+          "status": 200
+        }
+      ],
+      "searchedShardEntryCount": 41,
+      "matchingTermHits": [],
+      "assessment": "no_direct_teaching_sense_match",
+      "rationale": "没有直接词项命中；需要同时保留让步条件与主句。"
+    },
+    {
+      "headword": "throughout",
+      "teachingSense": "遍及",
+      "query": "throughout",
+      "officialSearchIndex": "https://koboyo.com/icons/data/search/v1/",
+      "checkedAt": "2026-08-11",
+      "shardChain": [
+        {
+          "prefix": "th",
+          "url": "https://koboyo.com/icons/data/search/v1/th.json",
+          "status": 200
+        },
+        {
+          "prefix": "thr",
+          "url": "https://koboyo.com/icons/data/search/v1/thr.json",
+          "status": 200
+        },
+        {
+          "prefix": "thro",
+          "url": "https://koboyo.com/icons/data/search/v1/thro.json",
+          "status": 200
+        }
+      ],
+      "searchedShardEntryCount": 456,
+      "matchingTermHits": [],
+      "assessment": "no_direct_teaching_sense_match",
+      "rationale": "没有直接词项命中；需要表达从头到尾覆盖全部范围。"
+    },
+    {
+      "headword": "unless",
+      "teachingSense": "除非",
+      "query": "unless",
+      "officialSearchIndex": "https://koboyo.com/icons/data/search/v1/",
+      "checkedAt": "2026-08-11",
+      "shardChain": [
+        {
+          "prefix": "un",
+          "url": "https://koboyo.com/icons/data/search/v1/un.json",
+          "status": 200
+        },
+        {
+          "prefix": "unl",
+          "url": "https://koboyo.com/icons/data/search/v1/unl.json",
+          "status": 200
+        },
+        {
+          "prefix": "unle",
+          "url": "https://koboyo.com/icons/data/search/v1/unle.json",
+          "status": 200
+        }
+      ],
+      "searchedShardEntryCount": 2,
+      "matchingTermHits": [
+        {
+          "slug": "cartoon-unless-order",
+          "name": "A unless order",
+          "normalizedName": "cartoon unless order",
+          "keywords": "cartoon legal object order unless",
+          "score": 6,
+          "group": "object",
+          "subgroup": "legal",
+          "style": "cartoon",
+          "officialPageUrl": "https://koboyo.com/icons/cartoon-unless-order"
+        },
+        {
+          "slug": "unless-order",
+          "name": "An unless order",
+          "normalizedName": "unless order",
+          "keywords": "unless order court order legal document gavel deadline compliance litigation sanction legal document icon law conditional court order peremptory order court sanction",
+          "score": 8,
+          "group": "object",
+          "subgroup": "legal",
+          "style": "",
+          "officialPageUrl": "https://koboyo.com/icons/unless-order"
+        }
+      ],
+      "assessment": "no_direct_teaching_sense_match",
+      "rationale": "仅命中法律术语 unless order，与连词教学义无关。"
+    },
+    {
+      "headword": "otherwise",
+      "teachingSense": "否则；以别的方式",
+      "query": "otherwise",
+      "officialSearchIndex": "https://koboyo.com/icons/data/search/v1/",
+      "checkedAt": "2026-08-11",
+      "shardChain": [
+        {
+          "prefix": "ot",
+          "url": "https://koboyo.com/icons/data/search/v1/ot.json",
+          "status": 200
+        }
+      ],
+      "searchedShardEntryCount": 323,
+      "matchingTermHits": [],
+      "assessment": "no_direct_teaching_sense_match",
+      "rationale": "没有直接词项命中；需要表达条件不成立时的替代分支。"
+    },
+    {
+      "headword": "despite",
+      "teachingSense": "尽管",
+      "query": "despite",
+      "officialSearchIndex": "https://koboyo.com/icons/data/search/v1/",
+      "checkedAt": "2026-08-11",
+      "shardChain": [
+        {
+          "prefix": "de",
+          "url": "https://koboyo.com/icons/data/search/v1/de.json",
+          "status": 200
+        },
+        {
+          "prefix": "des",
+          "url": "https://koboyo.com/icons/data/search/v1/des.json",
+          "status": 200
+        },
+        {
+          "prefix": "desp",
+          "url": "https://koboyo.com/icons/data/search/v1/desp.json",
+          "status": 200
+        }
+      ],
+      "searchedShardEntryCount": 2,
+      "matchingTermHits": [],
+      "assessment": "no_direct_teaching_sense_match",
+      "rationale": "没有直接词项命中；需要表达阻力存在但行动继续。"
+    },
+    {
+      "headword": "indeed",
+      "teachingSense": "确实；其实",
+      "query": "indeed",
+      "officialSearchIndex": "https://koboyo.com/icons/data/search/v1/",
+      "checkedAt": "2026-08-11",
+      "shardChain": [
+        {
+          "prefix": "in",
+          "url": "https://koboyo.com/icons/data/search/v1/in.json",
+          "status": 200
+        },
+        {
+          "prefix": "ind",
+          "url": "https://koboyo.com/icons/data/search/v1/ind.json",
+          "status": 200
+        },
+        {
+          "prefix": "inde",
+          "url": "https://koboyo.com/icons/data/search/v1/inde.json",
+          "status": 200
+        }
+      ],
+      "searchedShardEntryCount": 206,
+      "matchingTermHits": [],
+      "assessment": "no_direct_teaching_sense_match",
+      "rationale": "没有直接词项命中；需要表达确认或加强陈述。"
+    },
+    {
+      "headword": "somehow",
+      "teachingSense": "以某种方式",
+      "query": "somehow",
+      "officialSearchIndex": "https://koboyo.com/icons/data/search/v1/",
+      "checkedAt": "2026-08-11",
+      "shardChain": [
+        {
+          "prefix": "so",
+          "url": "https://koboyo.com/icons/data/search/v1/so.json",
+          "status": 200
+        },
+        {
+          "prefix": "som",
+          "url": "https://koboyo.com/icons/data/search/v1/som.json",
+          "status": 200
+        }
+      ],
+      "searchedShardEntryCount": 422,
+      "matchingTermHits": [],
+      "assessment": "no_direct_teaching_sense_match",
+      "rationale": "没有直接词项命中；需要表达路径不明确但结果达成。"
+    },
+    {
+      "headword": "merely",
+      "teachingSense": "仅仅",
+      "query": "merely",
+      "officialSearchIndex": "https://koboyo.com/icons/data/search/v1/",
+      "checkedAt": "2026-08-11",
+      "shardChain": [
+        {
+          "prefix": "me",
+          "url": "https://koboyo.com/icons/data/search/v1/me.json",
+          "status": 200
+        },
+        {
+          "prefix": "mer",
+          "url": "https://koboyo.com/icons/data/search/v1/mer.json",
+          "status": 200
+        }
+      ],
+      "searchedShardEntryCount": 97,
+      "matchingTermHits": [],
+      "assessment": "no_direct_teaching_sense_match",
+      "rationale": "没有直接词项命中；需要表达数量或程度被限制为单一。"
+    },
+    {
+      "headword": "regardless",
+      "teachingSense": "不管",
+      "query": "regardless",
+      "officialSearchIndex": "https://koboyo.com/icons/data/search/v1/",
+      "checkedAt": "2026-08-11",
+      "shardChain": [
+        {
+          "prefix": "re",
+          "url": "https://koboyo.com/icons/data/search/v1/re.json",
+          "status": 200
+        },
+        {
+          "prefix": "reg",
+          "url": "https://koboyo.com/icons/data/search/v1/reg.json",
+          "status": 200
+        }
+      ],
+      "searchedShardEntryCount": 270,
+      "matchingTermHits": [],
+      "assessment": "no_direct_teaching_sense_match",
+      "rationale": "没有直接词项命中；需要表达外部条件不改变主路径。"
+    },
+    {
+      "headword": "nevertheless",
+      "teachingSense": "尽管如此",
+      "query": "nevertheless",
+      "officialSearchIndex": "https://koboyo.com/icons/data/search/v1/",
+      "checkedAt": "2026-08-11",
+      "shardChain": [
+        {
+          "prefix": "ne",
+          "url": "https://koboyo.com/icons/data/search/v1/ne.json",
+          "status": 200
+        }
+      ],
+      "searchedShardEntryCount": 800,
+      "matchingTermHits": [],
+      "assessment": "no_direct_teaching_sense_match",
+      "rationale": "没有直接词项命中；需要表达在既有阻碍之后仍继续。"
+    }
+  ]
+}

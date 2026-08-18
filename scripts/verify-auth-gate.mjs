@@ -565,8 +565,8 @@ async function main() {
       `got status=${renamedVocabularySet.status} body=${JSON.stringify(renamedVocabularySet.json)}`,
     )
 
-    const studentSets = await req(`/api/vocabulary/sets?studentId=${encodeURIComponent(studentId)}`, { cookie })
-    const defaultStudentSets = await req(`/api/vocabulary/sets?studentId=${encodeURIComponent(defaultStudentId)}`, { cookie })
+    const studentSets = await req(`/api/vocabulary/sets?studentId=${encodeURIComponent(studentId)}&programId=wanwei-round-one-v1`, { cookie })
+    const defaultStudentSets = await req(`/api/vocabulary/sets?studentId=${encodeURIComponent(defaultStudentId)}&programId=wanwei-round-one-v1`, { cookie })
     assert(
       '(c) vocabulary Sets are isolated by student profile',
       studentSets.status === 200 && studentSets.json?.vocabularySets?.length === 1 &&

@@ -41,10 +41,13 @@ function legacyExampleCandidate(example, teachingSense) {
   }
 }
 
-function normalizeExampleCandidates(rawCandidates, fallbackExample, teachingSense) {
+function normalizeExampleCandidates(rawCandidates, fallbackExample, teachingSenses) {
+  const allowedTeachingSenses = Array.isArray(teachingSenses) && teachingSenses.length
+    ? teachingSenses
+    : [requireNonEmpty(teachingSenses, 'teachingSense')]
   const candidates = Array.isArray(rawCandidates) && rawCandidates.length
     ? rawCandidates
-    : [legacyExampleCandidate(fallbackExample, teachingSense)]
+    : [legacyExampleCandidate(fallbackExample, allowedTeachingSenses[0])]
   const seenIds = new Set()
   const normalizedCandidates = candidates.map((candidate, index) => {
     if (!candidate || typeof candidate !== 'object' || Array.isArray(candidate)) {
@@ -62,8 +65,8 @@ function normalizeExampleCandidates(rawCandidates, fallbackExample, teachingSens
       highlight: requireNonEmpty(candidate.highlight, `exampleCandidates[${index}].highlight`),
       reviewStatus: candidate.reviewStatus,
     }
-    if (normalized.version === 'legacy-single-v1') normalized.teachingSense = teachingSense
-    if (normalized.teachingSense !== teachingSense) {
+    if (normalized.version === 'legacy-single-v1') normalized.teachingSense = allowedTeachingSenses[0]
+    if (!allowedTeachingSenses.includes(normalized.teachingSense)) {
       throw new VocabularyStoreError(`例句候选 ${candidateId} 与教学核心义不一致。`)
     }
     if (normalized.reviewStatus !== 'approved') {
@@ -77,6 +80,37 @@ function normalizeExampleCandidates(rawCandidates, fallbackExample, teachingSens
   const versions = new Set(normalizedCandidates.map((candidate) => candidate.version))
   if (versions.size !== 1) throw new VocabularyStoreError('同一词条的例句候选版本必须一致。')
   return normalizedCandidates
+}
+
+function normalizeVocabularyVisualBinding(rawBinding, exampleCandidates) {
+  if (rawBinding == null) return null
+  if (!rawBinding || typeof rawBinding !== 'object' || Array.isArray(rawBinding)) {
+    throw new VocabularyStoreError('visual.binding格式无效。')
+  }
+  if (Object.keys(rawBinding).length === 0) return null
+  const mode = requireNonEmpty(rawBinding.mode, 'visual.binding.mode')
+  if (mode === 'direct-sense') {
+    if (rawBinding.sentenceId != null || rawBinding.sentenceTextSha256 != null) {
+      throw new VocabularyStoreError('direct-sense 视觉不能绑定例句。')
+    }
+    if (rawBinding.displayContract !== 'image_may_appear_with_headword_only') {
+      throw new VocabularyStoreError('direct-sense 视觉显示合同无效。')
+    }
+    return { mode, displayContract: rawBinding.displayContract }
+  }
+  if (mode !== 'sentence-scene') throw new VocabularyStoreError(`不支持的视觉绑定模式：${mode}。`)
+  const sentenceId = requireNonEmpty(rawBinding.sentenceId, 'visual.binding.sentenceId')
+  const candidateId = sentenceId.match(/^candidate-([abc])$/u)?.[1]
+  const sentence = candidateId ? exampleCandidates.find((candidate) => candidate.candidateId === candidateId) : null
+  if (!sentence) throw new VocabularyStoreError(`sentence-scene 例句无法解析：${sentenceId}。`)
+  const sentenceTextSha256 = requireNonEmpty(rawBinding.sentenceTextSha256, 'visual.binding.sentenceTextSha256')
+  if (!/^[a-f0-9]{64}$/u.test(sentenceTextSha256) || createHash('sha256').update(sentence.english).digest('hex') !== sentenceTextSha256) {
+    throw new VocabularyStoreError(`sentence-scene 例句哈希不一致：${sentenceId}。`)
+  }
+  if (rawBinding.displayContract !== 'image_and_exact_sentence_with_target_highlight') {
+    throw new VocabularyStoreError('sentence-scene 视觉显示合同无效。')
+  }
+  return { mode, sentenceId, sentenceTextSha256, displayContract: rawBinding.displayContract }
 }
 
 function requireNonEmpty(value, label) {
@@ -173,6 +207,27 @@ function defaultStudentId(userId) {
   return `${DEFAULT_STUDENT_ID_PREFIX}${userId}`
 }
 
+function projectVocabularyVisualBinding(rawBinding, invalid) {
+  if (rawBinding == null) return undefined
+  if (!rawBinding || typeof rawBinding !== 'object' || Array.isArray(rawBinding)) invalid()
+  if (rawBinding.mode === 'direct-sense') {
+    if (rawBinding.sentenceId != null || rawBinding.sentenceTextSha256 != null || rawBinding.displayContract !== 'image_may_appear_with_headword_only') invalid()
+    return { mode: 'direct-sense', displayContract: rawBinding.displayContract }
+  }
+  if (
+    rawBinding.mode !== 'sentence-scene'
+    || !/^candidate-[abc]$/u.test(String(rawBinding.sentenceId ?? ''))
+    || !/^[a-f0-9]{64}$/u.test(String(rawBinding.sentenceTextSha256 ?? ''))
+    || rawBinding.displayContract !== 'image_and_exact_sentence_with_target_highlight'
+  ) invalid()
+  return {
+    mode: 'sentence-scene',
+    sentenceId: rawBinding.sentenceId,
+    sentenceTextSha256: rawBinding.sentenceTextSha256,
+    displayContract: rawBinding.displayContract,
+  }
+}
+
 function projectVocabularySnapshot(snapshot, invalid) {
   if (!snapshot || typeof snapshot !== 'object' || Array.isArray(snapshot)) invalid()
   const visual = snapshot.visual
@@ -180,7 +235,6 @@ function projectVocabularySnapshot(snapshot, invalid) {
   const syllables = snapshot.syllables
   if (!visual || typeof visual !== 'object' || !audio || typeof audio !== 'object' || !Array.isArray(syllables)) invalid()
   if (!['syllables', 'forms'].includes(snapshot.pronunciationMode)) invalid()
-  if (!['eqb-british-teacher-v1', 'en-GB-SoniaNeural'].includes(audio.voice)) invalid()
   const projectParts = (parts) => parts.map((part) => {
     if (typeof part === 'string' && part.trim()) return part
     if (!part || typeof part !== 'object' || Array.isArray(part)) invalid()
@@ -207,6 +261,7 @@ function projectVocabularySnapshot(snapshot, invalid) {
     if (!normalized) invalid()
     return normalized
   }
+  const visualBinding = projectVocabularyVisualBinding(visual.binding, invalid)
   const projected = applyAmericanVocabularyPhonetics({
     id: text(snapshot.id),
     headword: text(snapshot.headword),
@@ -221,18 +276,40 @@ function projectVocabularySnapshot(snapshot, invalid) {
       version: text(visual.version),
       path: text(visual.path),
       alt: text(visual.alt),
+      ...(visualBinding ? { binding: visualBinding } : {}),
     },
     audio: {
       key: text(audio.key),
       version: text(audio.version),
       path: text(audio.path),
-      voice: audio.voice,
+      voice: text(audio.voice),
     },
   })
-  const phonetics = snapshot.phonetics
-  if (!phonetics || typeof phonetics !== 'object' || Array.isArray(phonetics)) return projected
-  return {
+  const teachingSenses = Array.isArray(snapshot.teachingSenses)
+    ? [...new Set(snapshot.teachingSenses.map((sense) => String(sense ?? '').trim()).filter(Boolean))].slice(0, 3)
+    : []
+  const rawAudioVariants = snapshot.audioVariants
+  let audioVariants
+  if (rawAudioVariants != null) {
+    if (!rawAudioVariants || typeof rawAudioVariants !== 'object' || Array.isArray(rawAudioVariants)) invalid()
+    const projectAudio = (value) => {
+      if (!value || typeof value !== 'object' || Array.isArray(value)) invalid()
+      return { key: text(value.key), version: text(value.version), path: text(value.path), voice: text(value.voice) }
+    }
+    audioVariants = {
+      american: projectAudio(rawAudioVariants.american),
+      british: projectAudio(rawAudioVariants.british),
+    }
+  }
+  const projectedWithVariants = {
     ...projected,
+    teachingSenses: teachingSenses.length ? teachingSenses : [projected.teachingSense],
+    ...(audioVariants ? { audioVariants } : {}),
+  }
+  const phonetics = snapshot.phonetics
+  if (!phonetics || typeof phonetics !== 'object' || Array.isArray(phonetics)) return projectedWithVariants
+  return {
+    ...projectedWithVariants,
     phonetics: {
       american: text(phonetics.american),
       british: text(phonetics.british),
@@ -266,6 +343,7 @@ function projectPublicVocabularyDictationEntry(snapshot) {
     sourceMeanings: sourceMeanings.length ? sourceMeanings : [entry.teachingSense],
     teachingSense: entry.teachingSense,
     audio: entry.audio,
+    ...(entry.audioVariants ? { audioVariants: entry.audioVariants } : {}),
   }
 }
 
@@ -294,6 +372,7 @@ function projectFrozenVocabularyEntry(snapshot) {
     ...entry,
     sourceMeanings: sourceMeanings.length ? sourceMeanings : [entry.teachingSense],
     example: {
+      ...(exampleSelection ? { candidateId: exampleSelection.candidateId, version: exampleSelection.version } : {}),
       english: text(example.english),
       chinese: text(example.chinese),
       highlight: text(example.highlight),
@@ -321,13 +400,15 @@ export function ensureSharedVocabularyShape(db) {
       source_title TEXT NOT NULL,
       source_edition TEXT NOT NULL DEFAULT '',
       total_planned_entries INTEGER NOT NULL,
+      structure_json TEXT NOT NULL DEFAULT '{}',
+      availability TEXT NOT NULL DEFAULT 'available' CHECK (availability IN ('available', 'hidden')),
       created_at TEXT NOT NULL DEFAULT (datetime('now')),
       updated_at TEXT NOT NULL DEFAULT (datetime('now'))
     );
     CREATE TABLE IF NOT EXISTS vocabulary_groups (
       id TEXT PRIMARY KEY,
       program_id TEXT NOT NULL REFERENCES vocabulary_programs(id) ON DELETE CASCADE,
-      stage TEXT NOT NULL CHECK (stage IN ('core', 'basic', 'recognition')),
+      stage TEXT NOT NULL,
       week INTEGER NOT NULL,
       group_number INTEGER NOT NULL,
       source_label TEXT NOT NULL,
@@ -343,12 +424,15 @@ export function ensureSharedVocabularyShape(db) {
       group_id TEXT NOT NULL REFERENCES vocabulary_groups(id) ON DELETE CASCADE,
       headword TEXT NOT NULL,
       phonetic TEXT NOT NULL,
+      phonetics_json TEXT NOT NULL DEFAULT '{}',
       part_of_speech TEXT NOT NULL,
       source_meanings_json TEXT NOT NULL,
       teaching_sense TEXT NOT NULL,
+      teaching_senses_json TEXT NOT NULL DEFAULT '[]',
       exam_frequency INTEGER NOT NULL DEFAULT 0,
       pronunciation_mode TEXT NOT NULL CHECK (pronunciation_mode IN ('syllables', 'forms')),
       syllables_json TEXT NOT NULL,
+      pronunciation_parts_json TEXT NOT NULL DEFAULT '{}',
       example_english TEXT NOT NULL,
       example_chinese TEXT NOT NULL,
       example_highlight TEXT NOT NULL,
@@ -358,15 +442,18 @@ export function ensureSharedVocabularyShape(db) {
       visual_version TEXT NOT NULL,
       visual_path TEXT NOT NULL,
       visual_alt TEXT NOT NULL,
+      visual_binding_json TEXT NOT NULL DEFAULT '{}',
       audio_key TEXT NOT NULL,
       audio_version TEXT NOT NULL,
       audio_path TEXT NOT NULL,
-      audio_voice TEXT NOT NULL CHECK (audio_voice IN ('en-GB-SoniaNeural', 'eqb-british-teacher-v1')),
-      source_stage TEXT NOT NULL CHECK (source_stage IN ('core', 'basic', 'recognition')),
+      audio_voice TEXT NOT NULL,
+      audio_variants_json TEXT NOT NULL DEFAULT '{}',
+      source_stage TEXT NOT NULL,
       source_day INTEGER NOT NULL,
       source_order INTEGER NOT NULL,
       printed_page INTEGER NOT NULL,
       source_verification TEXT NOT NULL CHECK (source_verification IN ('page-checked', 'index-and-heading-reviewed')),
+      source_metadata_json TEXT NOT NULL DEFAULT '{}',
       created_at TEXT NOT NULL DEFAULT (datetime('now')),
       updated_at TEXT NOT NULL DEFAULT (datetime('now')),
       UNIQUE(program_id, source_order)
@@ -378,15 +465,33 @@ export function ensureSharedVocabularyShape(db) {
     CREATE UNIQUE INDEX IF NOT EXISTS idx_vocabulary_entries_program_audio
       ON vocabulary_entries(program_id, audio_key);
   `)
+  const vocabularyProgramColumns = new Set(
+    db.prepare('PRAGMA table_info(vocabulary_programs)').all().map((column) => column.name),
+  )
+  if (!vocabularyProgramColumns.has('structure_json')) {
+    db.exec("ALTER TABLE vocabulary_programs ADD COLUMN structure_json TEXT NOT NULL DEFAULT '{}'")
+  }
+  if (!vocabularyProgramColumns.has('availability')) {
+    db.exec("ALTER TABLE vocabulary_programs ADD COLUMN availability TEXT NOT NULL DEFAULT 'available' CHECK (availability IN ('available', 'hidden'))")
+  }
   const vocabularyEntryColumns = new Set(
     db.prepare('PRAGMA table_info(vocabulary_entries)').all().map((column) => column.name),
   )
   const missingExamFrequency = !vocabularyEntryColumns.has('exam_frequency')
   const hasExampleCandidates = vocabularyEntryColumns.has('example_candidates_json')
+  const hasPhonetics = vocabularyEntryColumns.has('phonetics_json')
+  const hasPronunciationParts = vocabularyEntryColumns.has('pronunciation_parts_json')
+  const hasTeachingSenses = vocabularyEntryColumns.has('teaching_senses_json')
+  const hasAudioVariants = vocabularyEntryColumns.has('audio_variants_json')
+  const hasSourceMetadata = vocabularyEntryColumns.has('source_metadata_json')
+  const hasVisualBinding = vocabularyEntryColumns.has('visual_binding_json')
+  const vocabularyGroupsSql = String(db.prepare("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'vocabulary_groups'").get()?.sql ?? '')
   const vocabularyEntriesSql = String(db.prepare("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'vocabulary_entries'").get()?.sql ?? '')
   const requiresEntryContractMigration = !vocabularyEntriesSql.includes('index-and-heading-reviewed')
-    || !vocabularyEntriesSql.includes(FORMAL_AUDIO_VOICE)
-  if (requiresEntryContractMigration) {
+    || vocabularyEntriesSql.includes("source_stage IN ('core', 'basic', 'recognition')")
+    || vocabularyEntriesSql.includes('audio_voice IN')
+  const requiresGroupContractMigration = vocabularyGroupsSql.includes("stage IN ('core', 'basic', 'recognition')")
+  if (requiresEntryContractMigration || requiresGroupContractMigration) {
     db.exec('PRAGMA foreign_keys = OFF')
     try {
       db.exec('BEGIN')
@@ -394,20 +499,46 @@ export function ensureSharedVocabularyShape(db) {
         db.exec('ALTER TABLE vocabulary_entries ADD COLUMN exam_frequency INTEGER NOT NULL DEFAULT 0')
       }
       const legacyExampleCandidatesSelect = hasExampleCandidates ? 'example_candidates_json' : "'[]'"
+      const legacyPhoneticsSelect = hasPhonetics ? 'phonetics_json' : "'{}'"
+      const legacyPronunciationPartsSelect = hasPronunciationParts ? 'pronunciation_parts_json' : "'{}'"
+      const legacyTeachingSensesSelect = hasTeachingSenses ? 'teaching_senses_json' : "'[]'"
+      const legacyAudioVariantsSelect = hasAudioVariants ? 'audio_variants_json' : "'{}'"
+      const legacySourceMetadataSelect = hasSourceMetadata ? 'source_metadata_json' : "'{}'"
+      const legacyVisualBindingSelect = hasVisualBinding ? 'visual_binding_json' : "'{}'"
       db.exec(`
         ALTER TABLE vocabulary_entries RENAME TO vocabulary_entries_legacy_contract;
+        ALTER TABLE vocabulary_groups RENAME TO vocabulary_groups_legacy_contract;
+        CREATE TABLE vocabulary_groups (
+          id TEXT PRIMARY KEY,
+          program_id TEXT NOT NULL REFERENCES vocabulary_programs(id) ON DELETE CASCADE,
+          stage TEXT NOT NULL,
+          week INTEGER NOT NULL,
+          group_number INTEGER NOT NULL,
+          source_label TEXT NOT NULL,
+          start_order INTEGER NOT NULL,
+          end_order INTEGER NOT NULL,
+          UNIQUE(program_id, stage, group_number)
+        );
+        INSERT INTO vocabulary_groups (
+          id, program_id, stage, week, group_number, source_label, start_order, end_order
+        ) SELECT
+          id, program_id, stage, week, group_number, source_label, start_order, end_order
+        FROM vocabulary_groups_legacy_contract;
         CREATE TABLE vocabulary_entries (
         id TEXT PRIMARY KEY,
         program_id TEXT NOT NULL REFERENCES vocabulary_programs(id) ON DELETE CASCADE,
         group_id TEXT NOT NULL REFERENCES vocabulary_groups(id) ON DELETE CASCADE,
         headword TEXT NOT NULL,
         phonetic TEXT NOT NULL,
+        phonetics_json TEXT NOT NULL DEFAULT '{}',
         part_of_speech TEXT NOT NULL,
         source_meanings_json TEXT NOT NULL,
         teaching_sense TEXT NOT NULL,
+        teaching_senses_json TEXT NOT NULL DEFAULT '[]',
         exam_frequency INTEGER NOT NULL DEFAULT 0,
         pronunciation_mode TEXT NOT NULL CHECK (pronunciation_mode IN ('syllables', 'forms')),
         syllables_json TEXT NOT NULL,
+        pronunciation_parts_json TEXT NOT NULL DEFAULT '{}',
         example_english TEXT NOT NULL,
         example_chinese TEXT NOT NULL,
         example_highlight TEXT NOT NULL,
@@ -417,34 +548,39 @@ export function ensureSharedVocabularyShape(db) {
         visual_version TEXT NOT NULL,
         visual_path TEXT NOT NULL,
         visual_alt TEXT NOT NULL,
+        visual_binding_json TEXT NOT NULL DEFAULT '{}',
         audio_key TEXT NOT NULL,
         audio_version TEXT NOT NULL,
         audio_path TEXT NOT NULL,
-        audio_voice TEXT NOT NULL CHECK (audio_voice IN ('en-GB-SoniaNeural', 'eqb-british-teacher-v1')),
-        source_stage TEXT NOT NULL CHECK (source_stage IN ('core', 'basic', 'recognition')),
+        audio_voice TEXT NOT NULL,
+        audio_variants_json TEXT NOT NULL DEFAULT '{}',
+        source_stage TEXT NOT NULL,
         source_day INTEGER NOT NULL,
         source_order INTEGER NOT NULL,
         printed_page INTEGER NOT NULL,
         source_verification TEXT NOT NULL CHECK (source_verification IN ('page-checked', 'index-and-heading-reviewed')),
+        source_metadata_json TEXT NOT NULL DEFAULT '{}',
         created_at TEXT NOT NULL DEFAULT (datetime('now')),
         updated_at TEXT NOT NULL DEFAULT (datetime('now')),
         UNIQUE(program_id, source_order)
       );
       INSERT INTO vocabulary_entries (
-        id, program_id, group_id, headword, phonetic, part_of_speech, source_meanings_json,
-        teaching_sense, exam_frequency, pronunciation_mode, syllables_json, example_english,
+        id, program_id, group_id, headword, phonetic, phonetics_json, part_of_speech, source_meanings_json,
+        teaching_sense, teaching_senses_json, exam_frequency, pronunciation_mode, syllables_json, pronunciation_parts_json, example_english,
         example_chinese, example_highlight, example_review_status, example_candidates_json, visual_key, visual_version,
-        visual_path, visual_alt, audio_key, audio_version, audio_path, audio_voice, source_stage,
-        source_day, source_order, printed_page, source_verification, created_at, updated_at
+        visual_path, visual_alt, visual_binding_json, audio_key, audio_version, audio_path, audio_voice, audio_variants_json, source_stage,
+        source_day, source_order, printed_page, source_verification, source_metadata_json, created_at, updated_at
       )
       SELECT
-        id, program_id, group_id, headword, phonetic, part_of_speech, source_meanings_json,
-        teaching_sense, exam_frequency, pronunciation_mode, syllables_json, example_english,
+        id, program_id, group_id, headword, phonetic, ${legacyPhoneticsSelect}, part_of_speech, source_meanings_json,
+        teaching_sense, ${legacyTeachingSensesSelect}, exam_frequency, pronunciation_mode, syllables_json, ${legacyPronunciationPartsSelect}, example_english,
         example_chinese, example_highlight, example_review_status, ${legacyExampleCandidatesSelect}, visual_key, visual_version,
-        visual_path, visual_alt, audio_key, audio_version, audio_path, audio_voice, source_stage,
-        source_day, source_order, printed_page, source_verification, created_at, updated_at
+        visual_path, visual_alt, ${legacyVisualBindingSelect}, audio_key, audio_version, audio_path, audio_voice, ${legacyAudioVariantsSelect}, source_stage,
+        source_day, source_order, printed_page, source_verification, ${legacySourceMetadataSelect}, created_at, updated_at
       FROM vocabulary_entries_legacy_contract;
       DROP TABLE vocabulary_entries_legacy_contract;
+      DROP TABLE vocabulary_groups_legacy_contract;
+      CREATE INDEX idx_vocabulary_groups_program_order ON vocabulary_groups(program_id, start_order);
       CREATE INDEX idx_vocabulary_entries_program_order ON vocabulary_entries(program_id, source_order);
       CREATE UNIQUE INDEX idx_vocabulary_entries_program_visual ON vocabulary_entries(program_id, visual_key);
       CREATE UNIQUE INDEX idx_vocabulary_entries_program_audio ON vocabulary_entries(program_id, audio_key);
@@ -469,6 +605,25 @@ export function ensureSharedVocabularyShape(db) {
   if (!migratedEntryColumns.has('example_candidates_json')) {
     db.exec("ALTER TABLE vocabulary_entries ADD COLUMN example_candidates_json TEXT NOT NULL DEFAULT '[]'")
   }
+  if (!migratedEntryColumns.has('phonetics_json')) {
+    db.exec("ALTER TABLE vocabulary_entries ADD COLUMN phonetics_json TEXT NOT NULL DEFAULT '{}'")
+  }
+  if (!migratedEntryColumns.has('pronunciation_parts_json')) {
+    db.exec("ALTER TABLE vocabulary_entries ADD COLUMN pronunciation_parts_json TEXT NOT NULL DEFAULT '{}'")
+  }
+  if (!migratedEntryColumns.has('teaching_senses_json')) {
+    db.exec("ALTER TABLE vocabulary_entries ADD COLUMN teaching_senses_json TEXT NOT NULL DEFAULT '[]'")
+  }
+  if (!migratedEntryColumns.has('audio_variants_json')) {
+    db.exec("ALTER TABLE vocabulary_entries ADD COLUMN audio_variants_json TEXT NOT NULL DEFAULT '{}'")
+  }
+  if (!migratedEntryColumns.has('source_metadata_json')) {
+    db.exec("ALTER TABLE vocabulary_entries ADD COLUMN source_metadata_json TEXT NOT NULL DEFAULT '{}'")
+  }
+  if (!migratedEntryColumns.has('visual_binding_json')) {
+    db.exec("ALTER TABLE vocabulary_entries ADD COLUMN visual_binding_json TEXT NOT NULL DEFAULT '{}'")
+  }
+  db.exec("UPDATE vocabulary_entries SET teaching_senses_json = json_array(teaching_sense) WHERE teaching_senses_json = '[]'")
   const legacyExampleRows = db.prepare(`
     SELECT id, teaching_sense, example_english, example_chinese, example_highlight
     FROM vocabulary_entries
@@ -1099,13 +1254,55 @@ function normalizeProgramEntry(entry, program) {
   const audio = entry.audio ?? {}
   const syllables = entry.syllables ?? pronunciation.parts?.map((part) => part.spelling) ?? []
   const pronunciationMode = entry.pronunciationMode ?? pronunciation.mode
-  const teachingSense = requireNonEmpty(entry.teachingSense, 'teachingSense')
+  const rawPhonetics = entry.phonetics
+  const phonetics = rawPhonetics == null ? {} : {
+    american: requireNonEmpty(rawPhonetics?.american, 'phonetics.american'),
+    british: requireNonEmpty(rawPhonetics?.british, 'phonetics.british'),
+  }
+  const rawPronunciationParts = entry.pronunciationParts
+  const pronunciationParts = rawPronunciationParts == null ? {} : Object.fromEntries(
+    ['american', 'british'].map((accent) => {
+      const parts = rawPronunciationParts?.[accent]
+      if (!Array.isArray(parts) || !parts.length) {
+        throw new VocabularyStoreError(`pronunciationParts.${accent}不能为空。`)
+      }
+      return [accent, parts.map((part, index) => ({
+        spelling: requireNonEmpty(part?.spelling, `pronunciationParts.${accent}[${index}].spelling`),
+        phonetic: requireNonEmpty(part?.phonetic, `pronunciationParts.${accent}[${index}].phonetic`),
+      }))]
+    }),
+  )
+  const rawTeachingSenses = Array.isArray(entry.teachingSenses) && entry.teachingSenses.length
+    ? entry.teachingSenses
+    : [entry.teachingSense]
+  const teachingSenses = [...new Set(rawTeachingSenses.map((sense, index) => requireNonEmpty(sense, `teachingSenses[${index}]`)))]
+  if (teachingSenses.length > 3) throw new VocabularyStoreError('teachingSenses 最多保留三个核心义。')
+  const teachingSense = requireNonEmpty(entry.teachingSense ?? teachingSenses.join('；'), 'teachingSense')
   const fallbackExample = {
     english: requireNonEmpty(example.english, 'example.english'),
     chinese: requireNonEmpty(example.chinese, 'example.chinese'),
     highlight: requireNonEmpty(example.highlight, 'example.highlight'),
   }
-  const exampleCandidates = normalizeExampleCandidates(entry.exampleCandidates, fallbackExample, teachingSense)
+  const exampleCandidates = normalizeExampleCandidates(entry.exampleCandidates, fallbackExample, teachingSenses)
+  const visualBinding = normalizeVocabularyVisualBinding(visual.binding, exampleCandidates)
+  const audioVariants = {}
+  if (entry.audioVariants != null) {
+    if (!entry.audioVariants || typeof entry.audioVariants !== 'object' || Array.isArray(entry.audioVariants)) {
+      throw new VocabularyStoreError('audioVariants格式无效。')
+    }
+    for (const accent of ['american', 'british']) {
+      const variant = entry.audioVariants[accent]
+      if (!variant || typeof variant !== 'object' || Array.isArray(variant)) {
+        throw new VocabularyStoreError(`audioVariants.${accent}不能为空。`)
+      }
+      audioVariants[accent] = {
+        key: requireNonEmpty(variant.key, `audioVariants.${accent}.key`),
+        version: requireNonEmpty(variant.version, `audioVariants.${accent}.version`),
+        path: requireNonEmpty(variant.path, `audioVariants.${accent}.path`),
+        voice: requireNonEmpty(variant.voice, `audioVariants.${accent}.voice`),
+      }
+    }
+  }
   if (!Array.isArray(syllables) || syllables.length === 0) {
     throw new VocabularyStoreError(`${entry.id || entry.headword} 缺少音节或词形拆分。`)
   }
@@ -1114,13 +1311,16 @@ function normalizeProgramEntry(entry, program) {
     programId: program.id,
     groupId: requireNonEmpty(entry.groupId ?? source.groupId, 'Vocabulary Group id'),
     headword: requireNonEmpty(entry.headword, 'headword'),
-    phonetic: requireNonEmpty(entry.phonetic, 'phonetic'),
+    phonetic: requireNonEmpty(entry.phonetic ?? phonetics.british, 'phonetic'),
+    phonetics,
     partOfSpeech: requireNonEmpty(entry.partOfSpeech, 'partOfSpeech'),
     sourceMeanings: Array.isArray(entry.sourceMeanings) ? entry.sourceMeanings : [],
     teachingSense,
+    teachingSenses,
     examFrequency: Number.isInteger(Number(entry.examFrequency)) ? Number(entry.examFrequency) : 0,
     pronunciationMode: requireNonEmpty(pronunciationMode, 'pronunciationMode'),
     syllables,
+    pronunciationParts,
     exampleEnglish: fallbackExample.english,
     exampleChinese: fallbackExample.chinese,
     exampleHighlight: fallbackExample.highlight,
@@ -1130,20 +1330,32 @@ function normalizeProgramEntry(entry, program) {
     visualVersion: requireNonEmpty(visual.version, 'visual.version'),
     visualPath: requireNonEmpty(visual.path ?? visual.src, 'visual.path'),
     visualAlt: requireNonEmpty(visual.alt, 'visual.alt'),
+    visualBinding,
     audioKey: requireNonEmpty(audio.key, 'audio.key'),
     audioVersion: requireNonEmpty(audio.version, 'audio.version'),
     audioPath: requireNonEmpty(audio.path, 'audio.path'),
     audioVoice: audio.voice ?? FORMAL_AUDIO_VOICE,
+    audioVariants,
     sourceStage: source.stage,
     sourceDay: Number(source.day ?? source.group),
     sourceOrder: Number(source.sourceOrder ?? source.globalOrder),
     printedPage: Number(source.printedPage),
     sourceVerification: source.verification,
+    sourceMetadata: source.metadata && typeof source.metadata === 'object' && !Array.isArray(source.metadata)
+      ? source.metadata
+      : {},
   }
 }
 
 export function replaceVocabularyProgram(db, input) {
   ensureSharedVocabularyShape(db)
+  const structure = input?.structure && typeof input.structure === 'object' && !Array.isArray(input.structure)
+    ? input.structure
+    : {}
+  const availability = input?.availability ?? 'available'
+  if (!['available', 'hidden'].includes(availability)) {
+    throw new VocabularyStoreError('Program availability 必须是 available 或 hidden。')
+  }
   const program = {
     id: requireNonEmpty(input?.id, 'Program id'),
     version: requireNonEmpty(input?.version, 'Program version'),
@@ -1152,6 +1364,8 @@ export function replaceVocabularyProgram(db, input) {
     sourceTitle: requireNonEmpty(input?.sourceTitle, 'sourceTitle'),
     sourceEdition: String(input?.sourceEdition ?? ''),
     totalPlannedEntries: Number(input?.totalPlannedEntries),
+    structure,
+    availability,
   }
   if (!Number.isInteger(program.totalPlannedEntries) || program.totalPlannedEntries < 1) {
     throw new VocabularyStoreError('totalPlannedEntries 必须是正整数。')
@@ -1162,15 +1376,36 @@ export function replaceVocabularyProgram(db, input) {
   if (!groups.length || entries.some((entry) => !groupIds.has(entry.groupId))) {
     throw new VocabularyStoreError('Vocabulary Entry 必须引用同一 Program 内的 Vocabulary Group。')
   }
+  const stageKeys = new Set(
+    Array.isArray(structure.stages)
+      ? structure.stages.map((stage) => requireNonEmpty(stage?.key, 'Stage key'))
+      : [],
+  )
+  for (const group of groups) {
+    const stage = requireNonEmpty(group.stage, 'Group stage')
+    if (stageKeys.size && !stageKeys.has(stage)) {
+      throw new VocabularyStoreError(`Vocabulary Group 引用了 Program 未定义的阶段：${stage}。`)
+    }
+  }
+  for (const entry of entries) {
+    if (stageKeys.size && !stageKeys.has(entry.sourceStage)) {
+      throw new VocabularyStoreError(`Vocabulary Entry 引用了 Program 未定义的阶段：${entry.sourceStage}。`)
+    }
+  }
 
   db.exec('BEGIN')
   try {
     db.prepare('DELETE FROM vocabulary_programs WHERE id = ?').run(program.id)
     db.prepare(`
       INSERT INTO vocabulary_programs
-        (id, version, title, subtitle, source_title, source_edition, total_planned_entries, updated_at)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    `).run(program.id, program.version, program.title, program.subtitle, program.sourceTitle, program.sourceEdition, program.totalPlannedEntries, nowIso())
+        (id, version, title, subtitle, source_title, source_edition, total_planned_entries,
+         structure_json, availability, updated_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `).run(
+      program.id, program.version, program.title, program.subtitle, program.sourceTitle,
+      program.sourceEdition, program.totalPlannedEntries, JSON.stringify(program.structure),
+      program.availability, nowIso(),
+    )
     const insertGroup = db.prepare(`
       INSERT INTO vocabulary_groups
         (id, program_id, stage, week, group_number, source_label, start_order, end_order)
@@ -1190,22 +1425,24 @@ export function replaceVocabularyProgram(db, input) {
     }
     const insertEntry = db.prepare(`
       INSERT INTO vocabulary_entries (
-        id, program_id, group_id, headword, phonetic, part_of_speech,
-        source_meanings_json, teaching_sense, exam_frequency, pronunciation_mode, syllables_json,
+        id, program_id, group_id, headword, phonetic, phonetics_json, part_of_speech,
+        source_meanings_json, teaching_sense, teaching_senses_json, exam_frequency, pronunciation_mode, syllables_json,
+        pronunciation_parts_json,
         example_english, example_chinese, example_highlight, example_review_status, example_candidates_json,
-        visual_key, visual_version, visual_path, visual_alt,
-        audio_key, audio_version, audio_path, audio_voice,
-        source_stage, source_day, source_order, printed_page, source_verification, updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        visual_key, visual_version, visual_path, visual_alt, visual_binding_json,
+        audio_key, audio_version, audio_path, audio_voice, audio_variants_json,
+        source_stage, source_day, source_order, printed_page, source_verification, source_metadata_json, updated_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `)
     for (const entry of entries) {
       insertEntry.run(
-        entry.id, entry.programId, entry.groupId, entry.headword, entry.phonetic, entry.partOfSpeech,
-        JSON.stringify(entry.sourceMeanings), entry.teachingSense, entry.examFrequency, entry.pronunciationMode, JSON.stringify(entry.syllables),
+        entry.id, entry.programId, entry.groupId, entry.headword, entry.phonetic, JSON.stringify(entry.phonetics), entry.partOfSpeech,
+        JSON.stringify(entry.sourceMeanings), entry.teachingSense, JSON.stringify(entry.teachingSenses), entry.examFrequency, entry.pronunciationMode, JSON.stringify(entry.syllables),
+        JSON.stringify(entry.pronunciationParts),
         entry.exampleEnglish, entry.exampleChinese, entry.exampleHighlight, entry.exampleReviewStatus, JSON.stringify(entry.exampleCandidates),
-        entry.visualKey, entry.visualVersion, entry.visualPath, entry.visualAlt,
-        entry.audioKey, entry.audioVersion, entry.audioPath, entry.audioVoice,
-        entry.sourceStage, entry.sourceDay, entry.sourceOrder, entry.printedPage, entry.sourceVerification, nowIso(),
+        entry.visualKey, entry.visualVersion, entry.visualPath, entry.visualAlt, JSON.stringify(entry.visualBinding ?? {}),
+        entry.audioKey, entry.audioVersion, entry.audioPath, entry.audioVoice, JSON.stringify(entry.audioVariants),
+        entry.sourceStage, entry.sourceDay, entry.sourceOrder, entry.printedPage, entry.sourceVerification, JSON.stringify(entry.sourceMetadata), nowIso(),
       )
     }
     db.exec('COMMIT')
@@ -1217,6 +1454,20 @@ export function replaceVocabularyProgram(db, input) {
 }
 
 function rowToEntry(row, sourceTitle, sourceEdition, includeExampleCandidates = false) {
+  const audioVariants = parseJson(row.audio_variants_json, {})
+  const storedPhonetics = parseJson(row.phonetics_json, {})
+  const storedPronunciationParts = parseJson(row.pronunciation_parts_json, {})
+  const storedTeachingSenses = parseJson(row.teaching_senses_json, [row.teaching_sense])
+  const storedExampleCandidates = normalizeExampleCandidates(
+    parseJson(row.example_candidates_json, []),
+    { english: row.example_english, chinese: row.example_chinese, highlight: row.example_highlight },
+    storedTeachingSenses,
+  )
+  const storedVisualBinding = normalizeVocabularyVisualBinding(parseJson(row.visual_binding_json, {}), storedExampleCandidates)
+  const hasStoredPronunciationParts = Array.isArray(storedPronunciationParts?.american)
+    && storedPronunciationParts.american.length
+    && Array.isArray(storedPronunciationParts?.british)
+    && storedPronunciationParts.british.length
   const projected = applyAmericanVocabularyPhonetics({
     id: row.id,
     headword: row.headword,
@@ -1224,9 +1475,11 @@ function rowToEntry(row, sourceTitle, sourceEdition, includeExampleCandidates = 
     partOfSpeech: row.part_of_speech,
     sourceMeanings: parseJson(row.source_meanings_json, []),
     teachingSense: row.teaching_sense,
+    teachingSenses: storedTeachingSenses,
     examFrequency: row.exam_frequency,
     pronunciationMode: row.pronunciation_mode,
     syllables: parseJson(row.syllables_json, []),
+    ...(hasStoredPronunciationParts ? { pronunciationParts: storedPronunciationParts } : {}),
     example: {
       english: row.example_english,
       chinese: row.example_chinese,
@@ -1238,6 +1491,7 @@ function rowToEntry(row, sourceTitle, sourceEdition, includeExampleCandidates = 
       version: row.visual_version,
       path: row.visual_path,
       alt: row.visual_alt,
+      ...(storedVisualBinding ? { binding: storedVisualBinding } : {}),
     },
     audio: {
       key: row.audio_key,
@@ -1245,6 +1499,7 @@ function rowToEntry(row, sourceTitle, sourceEdition, includeExampleCandidates = 
       path: row.audio_path,
       voice: row.audio_voice,
     },
+    ...(audioVariants?.american && audioVariants?.british ? { audioVariants } : {}),
     source: {
       title: sourceTitle,
       edition: sourceEdition,
@@ -1253,21 +1508,22 @@ function rowToEntry(row, sourceTitle, sourceEdition, includeExampleCandidates = 
       sourceOrder: row.source_order,
       printedPage: row.printed_page,
       verification: row.source_verification,
+      metadata: parseJson(row.source_metadata_json, {}),
     },
   })
   const entry = {
     ...projected,
-    phonetics: {
-      american: projected.phonetic,
-      british: row.phonetic,
+    example: {
+      ...projected.example,
+      candidateId: storedExampleCandidates[0].candidateId,
+      version: storedExampleCandidates[0].version,
     },
+    phonetics: storedPhonetics?.american && storedPhonetics?.british
+      ? storedPhonetics
+      : { american: projected.phonetic, british: row.phonetic },
   }
   if (includeExampleCandidates) {
-    entry.exampleCandidates = normalizeExampleCandidates(
-      parseJson(row.example_candidates_json, []),
-      projected.example,
-      projected.teachingSense,
-    )
+    entry.exampleCandidates = storedExampleCandidates
   }
   return entry
 }
@@ -1298,9 +1554,32 @@ export function getVocabularyProgram(db, programId, { includeExampleCandidates =
     sourceTitle: row.source_title,
     sourceEdition: row.source_edition,
     totalPlannedEntries: row.total_planned_entries,
+    structure: parseJson(row.structure_json, {}),
+    availability: row.availability ?? 'available',
     groups,
     entries,
   }
+}
+
+export function listVocabularyPrograms(db, { includeHidden = false } = {}) {
+  const rows = db.prepare(`
+    SELECT id, version, title, subtitle, source_title, source_edition,
+           total_planned_entries, structure_json, availability
+    FROM vocabulary_programs
+    ${includeHidden ? '' : "WHERE availability = 'available'"}
+    ORDER BY CASE availability WHEN 'available' THEN 0 ELSE 1 END, created_at, id
+  `).all()
+  return rows.map((row) => ({
+    id: row.id,
+    version: row.version,
+    title: row.title,
+    subtitle: row.subtitle,
+    sourceTitle: row.source_title,
+    sourceEdition: row.source_edition,
+    totalPlannedEntries: row.total_planned_entries,
+    structure: parseJson(row.structure_json, {}),
+    availability: row.availability,
+  }))
 }
 
 function getOwnedRun(userDb, userId, runId) {
@@ -1484,7 +1763,6 @@ export function setVocabularyProgressStart({ userDb, bankDb }, userId, input = {
 
 export function createVocabularyReviewRun({ userDb, bankDb }, userId, input) {
   ensureUserVocabularyShape(userDb)
-  ensureSharedVocabularyShape(bankDb)
   const studentId = requireNonEmpty(input?.studentId, '学生档案')
   requireOwnedVocabularyStudent(userDb, userId, studentId)
   const programId = requireNonEmpty(input?.programId, 'programId')
@@ -1497,7 +1775,9 @@ export function createVocabularyReviewRun({ userDb, bankDb }, userId, input) {
   const target = normalizeTarget(input?.targetUnfamiliarCount, progress.lastTarget)
   const temporaryStage = mode === 'temporary' && input?.temporaryStage ? String(input.temporaryStage) : null
   const temporaryDay = mode === 'temporary' && input?.temporaryDay != null ? Number(input.temporaryDay) : null
-  if (temporaryStage && !['core', 'basic', 'recognition'].includes(temporaryStage)) {
+  if (temporaryStage && !bankDb.prepare(`
+    SELECT 1 FROM vocabulary_groups WHERE program_id = ? AND stage = ? LIMIT 1
+  `).get(programId, temporaryStage)) {
     throw new VocabularyStoreError('临时过词阶段无效。')
   }
   if (temporaryDay != null && (!Number.isInteger(temporaryDay) || temporaryDay < 1)) {
@@ -1669,7 +1949,7 @@ export function undoVocabularyReviewDecision({ userDb, bankDb }, userId, runId) 
 }
 
 export function selectVocabularyExampleCandidate(entry, setId) {
-  const candidates = normalizeExampleCandidates(entry.exampleCandidates, entry.example, entry.teachingSense)
+  const candidates = normalizeExampleCandidates(entry.exampleCandidates, entry.example, entry.teachingSenses ?? [entry.teachingSense])
   const selectionVersion = candidates[0]?.version ?? EXAMPLE_CANDIDATE_VERSION
   const digestHex = createHash('sha256')
     .update(`${selectionVersion}\0${setId}\0${entry.id}`)
@@ -1699,6 +1979,7 @@ function snapshotEntry(entry, setId) {
     partOfSpeech: entry.partOfSpeech,
     sourceMeanings: entry.sourceMeanings,
     teachingSense: entry.teachingSense,
+    teachingSenses: entry.teachingSenses,
     pronunciationMode: entry.pronunciationMode,
     syllables: entry.syllables,
     pronunciationParts: entry.pronunciationParts,
@@ -1706,6 +1987,7 @@ function snapshotEntry(entry, setId) {
     exampleSelection: selectedExample.exampleSelection,
     visual: entry.visual,
     audio: entry.audio,
+    audioVariants: entry.audioVariants,
   }
 }
 
@@ -1838,12 +2120,15 @@ export function createVocabularySetFromEntries({ userDb, bankDb }, userId, input
   return readVocabularySetRows(userDb, userId, setId)
 }
 
-export function listVocabularySets(userDb, userId, studentId) {
+export function listVocabularySets(userDb, userId, studentId, programId) {
   ensureUserVocabularyShape(userDb)
   requireOwnedVocabularyStudent(userDb, userId, studentId)
+  const normalizedProgramId = requireNonEmpty(programId, 'programId')
   return userDb.prepare(`
-    SELECT id FROM vocabulary_sets WHERE user_id = ? AND student_id = ? ORDER BY created_at DESC LIMIT 20
-  `).all(userId, studentId).map((row) => readVocabularySetRows(userDb, userId, row.id))
+    SELECT id FROM vocabulary_sets
+    WHERE user_id = ? AND student_id = ? AND program_id = ?
+    ORDER BY created_at DESC LIMIT 20
+  `).all(userId, studentId, normalizedProgramId).map((row) => readVocabularySetRows(userDb, userId, row.id))
 }
 
 export function getVocabularySet(userDb, userId, setId) {

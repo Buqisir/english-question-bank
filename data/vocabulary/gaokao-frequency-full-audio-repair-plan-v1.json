@@ -1,0 +1,1970 @@
+{
+  "schemaVersion": "gaokao-frequency-full-audio-repair-plan-v1",
+  "status": "owner_approved_finalized",
+  "createdAt": "2026-08-16",
+  "qa": {
+    "qaTarget": "gaokao-frequency-full-3000-audio-v1",
+    "exportedAt": "2026-08-16T01:13:20.757Z",
+    "path": "docs/cuts/gaokao-vocabulary-3000/evidence/gaokao-frequency-full-3000-audio-owner-qa-v1.json",
+    "sha256": "6fa4f07e11b2fe9d27e08401ca6fe9f68443127773c784fa18eb19aa280f4d7a"
+  },
+  "pronunciationSource": {
+    "repository": "https://github.com/open-dict-data/ipa-dict",
+    "revision": "43c3570eb3553bdd19fccd2bd0091534889af023",
+    "american": {
+      "path": "data/en_US.txt",
+      "sha256": "2af6f154a5c363275f052d1f85acedef38ed185ca9745aa4314be77f6b70de67"
+    },
+    "british": {
+      "path": "data/en_UK.txt",
+      "sha256": "221394caef0cf723b4f2df81a98ac33191293257b88aed5b1fb89466d3a0dc77"
+    },
+    "googleSsmlReference": "https://docs.cloud.google.com/text-to-speech/docs/ssml",
+    "googlePhonemeReference": "https://docs.cloud.google.com/text-to-speech/docs/phonemes"
+  },
+  "counts": {
+    "failedEntries": 117,
+    "americanRepairs": 107,
+    "britishRepairs": 51
+  },
+  "entries": [
+    {
+      "entryId": "gaokao-frequency-0001-the",
+      "headword": "the",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ðə",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ˈðə/",
+            "/ðə/",
+            "/ði/"
+          ]
+        },
+        "british": {
+          "ipa": "ðə",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ðə, ði/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0139-become",
+      "headword": "become",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "bɪˈkəm",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/bɪˈkəm/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0227-research",
+      "headword": "research",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˈɹiːsɚʧ",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ˈɹisɝtʃ/",
+            "/ɹiˈsɝtʃ/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0363-enough",
+      "headword": "enough",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ɪˈnʌf",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/iˈnəf/",
+            "/ɪˈnəf/"
+          ]
+        },
+        "british": {
+          "ipa": "ɪnˈʌf",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ɪnˈʌf/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0446-until",
+      "headword": "until",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ənˈtɪl",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ənˈtɪɫ/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0468-p-m-pm",
+      "headword": "p.m.,pm",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˌpiːˈɛm",
+          "source": "manual_reviewed",
+          "sourceVariants": []
+        },
+        "british": {
+          "ipa": "ˌpiːˈɛm",
+          "source": "manual_reviewed",
+          "sourceVariants": []
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0469-hotel",
+      "headword": "hotel",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "hoʊˈtɛl",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/hoʊˈtɛɫ/"
+          ]
+        },
+        "british": {
+          "ipa": "həʊtˈɛl",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/həʊtˈɛl/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0477-event",
+      "headword": "event",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ɪˈvɛnt",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/iˈvɛnt/",
+            "/ɪˈvɛnt/"
+          ]
+        },
+        "british": {
+          "ipa": "ɪvˈɛnt",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ɪvˈɛnt/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0478-reduce",
+      "headword": "reduce",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ɹɪˈduːs",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ɹəˈdus/",
+            "/ɹiˈdus/",
+            "/ɹɪˈdus/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0580-within",
+      "headword": "within",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "wɪˈðɪn",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/wɪˈðɪn/",
+            "/wɪˈθɪn/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0582-communication",
+      "headword": "communication",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "kəmˌjuːnəˈkeɪʃən",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/kəmˌjunəˈkeɪʃən/"
+          ]
+        },
+        "british": {
+          "ipa": "kəmjˌuːnɪkˈeɪʃən",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/kəmjˌuːnɪkˈeɪʃən/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0583-describe",
+      "headword": "describe",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "dɪsˈkɹaɪb",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/dɪsˈkɹaɪb/"
+          ]
+        },
+        "british": {
+          "ipa": "dɪskɹˈaɪb",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/dɪskɹˈaɪb/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0593-opportunity",
+      "headword": "opportunity",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˌɑːpɚˈtuːnətiː",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ˌɑpɝˈtunəti/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0617-remain",
+      "headword": "remain",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ɹɪˈmeɪn",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ɹiˈmeɪn/",
+            "/ɹɪˈmeɪn/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0624-themselves",
+      "headword": "themselves",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ðəmˈsɛlvz",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ðəmˈsɛɫvz/",
+            "/ðɛmˈsɛɫvz/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0625-percent",
+      "headword": "percent",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "pɚˈsɛnt",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/pɝˈsɛnt/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0634-alone",
+      "headword": "alone",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "əˈloʊn",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/əˈɫoʊn/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0652-accept",
+      "headword": "accept",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "əkˈsɛpt",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ækˈsɛpt/",
+            "/əkˈsɛpt/"
+          ]
+        },
+        "british": {
+          "ipa": "əksˈɛpt",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ɐksˈɛpt/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0662-protect",
+      "headword": "protect",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "pɹəˈtɛkt",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/pɹəˈtɛkt/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0687-advance",
+      "headword": "advance",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ədˈvæns",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ədˈvæns/"
+          ]
+        },
+        "british": {
+          "ipa": "ədvˈæns",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ɐdvˈæns/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0704-creative",
+      "headword": "creative",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "kɹiːˈeɪtɪv",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/kɹiˈeɪtɪv/"
+          ]
+        },
+        "british": {
+          "ipa": "kɹiːˈeɪtɪv",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/kɹiːˈeɪtɪv/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0716-recognize-recognise",
+      "headword": "recognize, recognise",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˈɹɛkəɡˌnaɪz",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ˈɹɛkəɡˌnaɪz/"
+          ]
+        },
+        "british": {
+          "ipa": "ˈɹɛkəɡnaɪz",
+          "source": "manual_reviewed",
+          "sourceVariants": []
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0732-relate",
+      "headword": "relate",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ɹɪˈleɪt",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ɹiˈɫeɪt/",
+            "/ɹɪˈɫeɪt/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0747-beyond",
+      "headword": "beyond",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "bɪˈɑːnd",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ˌbiˈɔnd/",
+            "/bɪˈɑnd/",
+            "/bɪˈɔnd/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0832-a-m-am",
+      "headword": "a.m., am",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˌeɪˈɛm",
+          "source": "manual_reviewed",
+          "sourceVariants": []
+        },
+        "british": {
+          "ipa": "ˌeɪˈɛm",
+          "source": "manual_reviewed",
+          "sourceVariants": []
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0833-invite",
+      "headword": "invite",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˌɪnˈvaɪt",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ˌɪnˈvaɪt/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0836-depend",
+      "headword": "depend",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "dɪˈpɛnd",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/dɪˈpɛnd/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0849-imagine",
+      "headword": "imagine",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˌɪˈmæʤən",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ˌɪˈmædʒən/"
+          ]
+        },
+        "british": {
+          "ipa": "ɪmˈæʤɪn",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ɪmˈædʒɪn/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0852-contain",
+      "headword": "contain",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "kənˈteɪn",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/kənˈteɪn/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0865-respect",
+      "headword": "respect",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ɹɪˈspɛkt",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ɹiˈspɛkt/",
+            "/ɹɪˈspɛkt/"
+          ]
+        },
+        "british": {
+          "ipa": "ɹɪspˈɛkt",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ɹɪspˈɛkt/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0866-advice",
+      "headword": "advice",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ədˈvaɪs",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ædˈvaɪs/",
+            "/ədˈvaɪs/"
+          ]
+        },
+        "british": {
+          "ipa": "ədvˈaɪs",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ɐdvˈaɪs/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0877-conduct",
+      "headword": "conduct",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "kənˈdʌkt",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ˈkɑndəkt/",
+            "/kɑnˈdəkt/"
+          ]
+        },
+        "british": {
+          "ipa": "kənˈdʌkt",
+          "source": "manual_reviewed",
+          "sourceVariants": []
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0878-unique",
+      "headword": "unique",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "juːˈniːk",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/juˈnik/"
+          ]
+        },
+        "british": {
+          "ipa": "juːnˈiːk",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/juːnˈiːk/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0994-reflect",
+      "headword": "reflect",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ɹɪˈflɛkt",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ɹɪˈfɫɛkt/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1011-ms",
+      "headword": "Ms",
+      "ownerVerdict": "british_fail",
+      "repairs": {
+        "british": {
+          "ipa": "mɪz",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ˌɛmˈɛs/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1012-eventually",
+      "headword": "eventually",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ɪˈvɛnʧuəliː",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/iˈvɛnʃəɫi/",
+            "/iˈvɛntʃəwəɫi/",
+            "/ɪˈvɛnʃəɫi/",
+            "/ɪˈvɛntʃəwəɫi/"
+          ]
+        },
+        "british": {
+          "ipa": "ɪvˈɛnʧuːəliː",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ɪvˈɛntʃuːəli/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1024-admit",
+      "headword": "admit",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ədˈmɪt",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ədˈmɪt/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1079-emotion",
+      "headword": "emotion",
+      "ownerVerdict": "british_fail",
+      "repairs": {
+        "british": {
+          "ipa": "ɪmˈəʊʃən",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ɪmˈəʊʃən/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1107-economic",
+      "headword": "economic",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˌɛkəˈnɑːmɪk",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ˌɛkəˈnɑmɪk/",
+            "/ˌikəˈnɑmɪk/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1164-unless",
+      "headword": "unless",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ənˈlɛs",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ənˈɫɛs/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1289-resource",
+      "headword": "resource",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˈɹiːsɔːɹs",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ˈɹisɔɹs/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1364-evaluate",
+      "headword": "evaluate",
+      "ownerVerdict": "british_fail",
+      "repairs": {
+        "british": {
+          "ipa": "ɪˈvæljuːeɪt",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ɪvˈæljuːˌeɪt/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1366-donate",
+      "headword": "donate",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˈdoʊˌneɪt",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ˈdoʊˌneɪt/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1372-separate",
+      "headword": "separate",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˈsɛpəɹət",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ˈsɛpɝˌeɪt/",
+            "/ˈsɛpɝɪt/",
+            "/ˈsɛpɹət/"
+          ]
+        },
+        "british": {
+          "ipa": "ˈsɛpəɹət",
+          "source": "manual_reviewed",
+          "sourceVariants": []
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1402-electricity",
+      "headword": "electricity",
+      "ownerVerdict": "british_fail",
+      "repairs": {
+        "british": {
+          "ipa": "ɪˌlɛkˈtɹɪsɪtiː",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ɪlɛktɹˈɪsɪtˌi/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1419-supply",
+      "headword": "supply",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "səˈplaɪ",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/səˈpɫaɪ/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1454-organization",
+      "headword": "organization",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˌɔːɹɡənəˈzeɪʃən",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ˌɔɹɡənəˈzeɪʃən/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1488-characteristic",
+      "headword": "characteristic",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˌkɛɹəktɚˈɪstɪk",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ˌkɛɹəktɝˈɪstɪk/"
+          ]
+        },
+        "british": {
+          "ipa": "kˌæɹɪktəɹˈɪstɪk",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/kˌæɹɪktəɹˈɪstɪk/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1513-presentation",
+      "headword": "presentation",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˌpɹɛzənˈteɪʃən",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ˌpɹɛzənˈteɪʃən/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1582-debate",
+      "headword": "debate",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "dəˈbeɪt",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/dəˈbeɪt/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1689-diverse",
+      "headword": "diverse",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "daɪˈvɚs",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/daɪˈvɝs/",
+            "/dɪˈvɝs/"
+          ]
+        },
+        "british": {
+          "ipa": "daɪvˈɜːs",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/daɪvˈɜːs/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1766-insist",
+      "headword": "insist",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˌɪnˈsɪst",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ˌɪnˈsɪst/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1774-mobile-phone",
+      "headword": "mobile phone",
+      "ownerVerdict": "british_fail",
+      "repairs": {
+        "british": {
+          "ssml": "<speak><phoneme alphabet=\"ipa\" ph=\"ˌməʊbaɪl\">mobile</phoneme> <phoneme alphabet=\"ipa\" ph=\"ˈfəʊn\">phone</phoneme></speak>",
+          "source": "manual_teacher_sense"
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1781-accommodation",
+      "headword": "accommodation",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "əˌkɑːməˈdeɪʃən",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/əˌkɑməˈdeɪʃən/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1816-pretend",
+      "headword": "pretend",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "pɹiːˈtɛnd",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/pɹiˈtɛnd/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1861-narrow",
+      "headword": "narrow",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˈnæɹoʊ",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ˈnæɹoʊ/",
+            "/ˈnɛɹoʊ/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1882-behave",
+      "headword": "behave",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "bɪˈheɪv",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/bɪˈheɪv/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1887-hello",
+      "headword": "hello",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "həˈloʊ",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/həˈɫoʊ/",
+            "/hɛˈɫoʊ/"
+          ]
+        },
+        "british": {
+          "ipa": "həlˈəʊ",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/həlˈəʊ/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1902-maintain",
+      "headword": "maintain",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "meɪnˈteɪn",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/meɪnˈteɪn/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2002-advertisement",
+      "headword": "advertisement",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˌædvɚˈtaɪzmənt",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ˌædvɝˈtaɪzmənt/",
+            "/ædˈvɝtəzmənt/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2035-suspect",
+      "headword": "suspect",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "səˈspɛkt",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ˈsəsˌpɛkt/",
+            "/səˈspɛkt/"
+          ]
+        },
+        "british": {
+          "ipa": "səˈspɛkt",
+          "source": "manual_reviewed",
+          "sourceVariants": []
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2043-enthusiastic",
+      "headword": "enthusiastic",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ɪnˌθuːziːˈæstɪk",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ɪnˌθuziˈæstɪk/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2081-violin",
+      "headword": "violin",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "vaɪəˈlɪn",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/vaɪəˈɫɪn/"
+          ]
+        },
+        "british": {
+          "ipa": "vaɪəlˈɪn",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/vaɪəlˈɪn/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2168-ought-to",
+      "headword": "ought to",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ssml": "<speak><phoneme alphabet=\"ipa\" ph=\"ˈɔːt\">ought</phoneme> <phoneme alphabet=\"ipa\" ph=\"tə\">to</phoneme></speak>",
+          "source": "manual_teacher_sense"
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2172-digest",
+      "headword": "digest",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "daɪˈʤɛst",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ˈdaɪdʒɛst/",
+            "/daɪˈdʒɛst/"
+          ]
+        },
+        "british": {
+          "ipa": "daɪˈʤɛst",
+          "source": "manual_reviewed",
+          "sourceVariants": []
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2213-energetic",
+      "headword": "energetic",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˌɛnɚˈʤɛtɪk",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ˌɛnɝˈdʒɛtɪk/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2214-alongside",
+      "headword": "alongside",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "əˈlɔːŋˈsaɪd",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/əˈɫɔŋˈsaɪd/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2222-fundamental",
+      "headword": "fundamental",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˌfʌndəˈmɛntəl",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ˌfəndəˈmɛnəɫ/",
+            "/ˌfəndəˈmɛntəɫ/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2262-database",
+      "headword": "database",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˈdeɪtəˌbeɪs",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ˈdætəˌbeɪs/",
+            "/ˈdeɪtəˌbeɪs/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2270-protein",
+      "headword": "protein",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˈpɹoʊˌtiːn",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ˈpɹoʊˌtin/"
+          ]
+        },
+        "british": {
+          "ipa": "pɹˈəʊtiːn",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/pɹˈəʊtiːn/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2273-dynasty",
+      "headword": "dynasty",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˈdaɪnəstiː",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ˈdaɪnəsti/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2315-ecology",
+      "headword": "ecology",
+      "ownerVerdict": "british_fail",
+      "repairs": {
+        "british": {
+          "ipa": "iːˈkɒləʤiː",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ɛkˈɒlədʒi/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2333-refresh",
+      "headword": "refresh",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ɹɪˈfɹɛʃ",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ɹɪˈfɹɛʃ/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2396-ballet",
+      "headword": "ballet",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "bæˈleɪ",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/bæˈɫeɪ/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2439-chaos",
+      "headword": "chaos",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˈkeɪɑːs",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ˈkeɪɑs/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2463-mankind",
+      "headword": "mankind",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˈmænˈkaɪnd",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ˈmænˈkaɪnd/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2486-illegal",
+      "headword": "illegal",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˌɪˈliːɡəl",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ˌɪˈɫiɡəɫ/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2515-japan",
+      "headword": "Japan",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ʤəˈpæn",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/dʒəˈpæn/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2519-receipt",
+      "headword": "receipt",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ɹɪˈsiːt",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ɹiˈsit/",
+            "/ɹɪˈsit/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2524-contrary",
+      "headword": "contrary",
+      "ownerVerdict": "british_fail",
+      "repairs": {
+        "british": {
+          "ipa": "ˈkɒntɹəɹiː",
+          "source": "manual_reviewed",
+          "sourceVariants": []
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2536-dismiss",
+      "headword": "dismiss",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "dɪsˈmɪs",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/dɪsˈmɪs/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2585-distinct",
+      "headword": "distinct",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "dɪˈstɪŋkt",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/dɪˈstɪŋkt/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2602-congratulation",
+      "headword": "congratulation",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "kənˌɡɹæʧəˈleɪʃən",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/kənˌɡɹætʃəˈɫeɪʃən/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2619-superb",
+      "headword": "superb",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "sʊˈpɚb",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/sʊˈpɝb/"
+          ]
+        },
+        "british": {
+          "ipa": "suːpˈɜːb",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/suːpˈɜːb/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2634-potato",
+      "headword": "potato",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "pəˈteɪˌtoʊ",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/pəˈteɪˌtoʊ/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2656-erupt",
+      "headword": "erupt",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ɪˈɹʌpt",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ˈiɹəpt/",
+            "/ɪˈɹəpt/"
+          ]
+        },
+        "british": {
+          "ipa": "ɪɹˈʌpt",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ɪɹˈʌpt/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2662-occupation",
+      "headword": "occupation",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˌɑːkjəˈpeɪʃən",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ˌɑkjəˈpeɪʃən/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2684-era",
+      "headword": "era",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˈɪɹə",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ˈɛɹə/",
+            "/ˈɪɹə/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2716-applaud",
+      "headword": "applaud",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "əˈplɔːd",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/əˈpɫɔd/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2727-restrict",
+      "headword": "restrict",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ɹiːˈstɹɪkt",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ɹiˈstɹɪkt/"
+          ]
+        },
+        "british": {
+          "ipa": "ɹɪstɹˈɪkt",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ɹɪstɹˈɪkt/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2735-atlantic",
+      "headword": "Atlantic",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ətˈlæntɪk",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ətˈɫænɪk/",
+            "/ətˈɫæntɪk/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2739-ad-a-d",
+      "headword": "AD,A.D.",
+      "ownerVerdict": "british_fail",
+      "repairs": {
+        "british": {
+          "ipa": "ˌeɪˈdiː",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ˈæd/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2741-canteen",
+      "headword": "canteen",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "kænˈtiːn",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/kænˈtin/"
+          ]
+        },
+        "british": {
+          "ipa": "kɑːntˈiːn",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/kɑːntˈiːn/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2754-eighteen",
+      "headword": "eighteen",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˌeɪˈtiːn",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ˈeɪˈtin/",
+            "/eɪˈtin/"
+          ]
+        },
+        "british": {
+          "ipa": "eɪtˈiːn",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/eɪtˈiːn/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2758-pe-p-e",
+      "headword": "PE, P. E.",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˌpiːˈiː",
+          "source": "manual_reviewed",
+          "sourceVariants": []
+        },
+        "british": {
+          "ipa": "ˌpiːˈiː",
+          "source": "manual_reviewed",
+          "sourceVariants": []
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2760-sixteen",
+      "headword": "sixteen",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˌsɪkˈstiːn",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ˈsɪkˈstin/",
+            "/sɪkˈstin/"
+          ]
+        },
+        "british": {
+          "ipa": "sɪkstˈiːn",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/sɪkstˈiːn/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2766-download",
+      "headword": "download",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˌdaʊnˈloʊd",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ˈdaʊnˌɫoʊd/"
+          ]
+        },
+        "british": {
+          "ipa": "ˌdaʊnˈləʊd",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/dˈaʊnləʊd/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2775-dimension",
+      "headword": "dimension",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "dɪˈmɛnʃən",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/dɪˈmɛnʃən/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2778-frontier",
+      "headword": "frontier",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "fɹənˈtɪɹ",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/fɹənˈtɪɹ/"
+          ]
+        },
+        "british": {
+          "ipa": "fɹˈʌntiːə",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/fɹˈʌntiə/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2789-subscribe",
+      "headword": "subscribe",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "səbsˈkɹaɪb",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/səbsˈkɹaɪb/"
+          ]
+        },
+        "british": {
+          "ipa": "səbskɹˈaɪb",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/səbskɹˈaɪb/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2804-correspond",
+      "headword": "correspond",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˌkɔːɹəˈspɑːnd",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ˌkɔɹəˈspɑnd/"
+          ]
+        },
+        "british": {
+          "ipa": "kˌɒɹɪspˈɒnd",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/kˌɒɹɪspˈɒnd/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2814-premier",
+      "headword": "premier",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "pɹɪˈmɪɹ",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/pɹɛˈmɪɹ/",
+            "/pɹiˈmɪɹ/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2823-dolphin",
+      "headword": "dolphin",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˈdɑːlfən",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ˈdɑɫfən/"
+          ]
+        },
+        "british": {
+          "ipa": "dˈɒlfɪn",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/dˈɒlfɪn/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2824-anticipate",
+      "headword": "anticipate",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ænˈtɪsəˌpeɪt",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ænˈtɪsəˌpeɪt/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2830-compose",
+      "headword": "compose",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "kəmˈpoʊz",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/kəmˈpoʊz/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2836-harmonious",
+      "headword": "harmonious",
+      "ownerVerdict": "british_fail",
+      "repairs": {
+        "british": {
+          "ipa": "hɑːˈməʊniːəs",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/hɑːmˈəʊnɪəs/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2866-downstairs",
+      "headword": "downstairs",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˈdaʊnˈstɛɹz",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ˈdaʊnˈstɛɹz/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2867-extent",
+      "headword": "extent",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ɪkˈstɛnt",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ɪkˈstɛnt/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2921-kangaroo",
+      "headword": "kangaroo",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˌkæŋɡɚˈuː",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ˌkæŋɡɝˈu/"
+          ]
+        },
+        "british": {
+          "ipa": "kˈæŋɡəɹˌuː",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/kˈæŋɡɐɹˌuː/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2938-bow",
+      "headword": "bow",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˈbaʊ",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ˈbaʊ/",
+            "/ˈboʊ/"
+          ]
+        },
+        "british": {
+          "ipa": "ˈbaʊ",
+          "source": "manual_reviewed",
+          "sourceVariants": []
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2951-directory",
+      "headword": "directory",
+      "ownerVerdict": "british_fail",
+      "repairs": {
+        "british": {
+          "ipa": "dɪˈɹɛktəɹiː",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/daɪɹˈɛktəɹˌi/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2952-domain",
+      "headword": "domain",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "doʊˈmeɪn",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/doʊˈmeɪn/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2955-entitle",
+      "headword": "entitle",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ɪnˈtaɪtəl",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ɛnˈtaɪtəɫ/",
+            "/ɪnˈtaɪtəɫ/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2956-equator",
+      "headword": "equator",
+      "ownerVerdict": "both_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ɪˈkweɪtɚ",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ɪˈkweɪtɝ/"
+          ]
+        },
+        "british": {
+          "ipa": "ɪkwˈeɪtə",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ɪkwˈeɪtɐ/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2957-fabric",
+      "headword": "fabric",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˈfæbɹɪk",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ˈfæbɹɪk/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2964-handkerchief",
+      "headword": "handkerchief",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˈhæŋkɚʧɪf",
+          "source": "manual_reviewed",
+          "sourceVariants": [
+            "/ˈhæŋkɝtʃif/",
+            "/ˈhæŋkɝtʃɪf/"
+          ]
+        }
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2970-liberation",
+      "headword": "liberation",
+      "ownerVerdict": "american_fail",
+      "repairs": {
+        "american": {
+          "ipa": "ˌlɪˌbɚˈeɪʃən",
+          "source": "open-dict-data/ipa-dict",
+          "sourceVariants": [
+            "/ˌɫɪˌbɝˈeɪʃən/"
+          ]
+        }
+      }
+    }
+  ],
+  "appliedAt": "2026-08-16",
+  "backupPath": ".scratch/gaokao-audio-owner-finalize-v1/backup-before-finalization",
+  "finalizedAt": "2026-08-18",
+  "ownerSelectionManifest": "data/vocabulary/gaokao-frequency-audio-owner-selections-v1.json"
+}

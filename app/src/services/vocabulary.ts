@@ -18,6 +18,8 @@ export type VocabularyProgramDto = {
   sourceTitle: string
   sourceEdition: string
   totalPlannedEntries: number
+  structure: VocabularyProgramStructure
+  availability: 'available' | 'hidden'
   groups: Array<{
     id: string
     stage: VocabularyStage
@@ -35,11 +37,14 @@ export type VocabularyProgramDto = {
     partOfSpeech: string
     sourceMeanings: string[]
     teachingSense: string
+    teachingSenses?: string[]
     examFrequency: number
     pronunciationMode: 'syllables' | 'forms'
     syllables: Array<string | VocabularyPronunciationPart>
     pronunciationParts?: VocabularyPronunciationParts
     example: {
+      candidateId?: 'a' | 'b' | 'c'
+      version?: string
       english: string
       chinese: string
       highlight: string
@@ -47,6 +52,10 @@ export type VocabularyProgramDto = {
     }
     visual: VocabularyVisualAsset
     audio: VocabularyAudioAsset
+    audioVariants?: {
+      american: VocabularyAudioAsset
+      british: VocabularyAudioAsset
+    }
     source: {
       title: string
       edition: string
@@ -55,8 +64,36 @@ export type VocabularyProgramDto = {
       sourceOrder: number
       printedPage: number
       verification: 'page-checked'
+      metadata?: {
+        frequencyRank?: number
+        frequencyStage?: VocabularyStage
+        sourceGroup?: number
+        curriculumTag?: 'initial' | 'required' | 'elective'
+      }
     }
   }>
+}
+
+export type VocabularyProgramStructure = {
+  dayCount?: number
+  daysPerWeek?: number
+  stages?: Array<{
+    key: VocabularyStage
+    label: string
+    entryCount: number
+    dayStart: number
+    dayEnd: number
+  }>
+}
+
+export type VocabularyProgramSummaryDto = Omit<VocabularyProgramDto, 'groups' | 'entries'> & {
+  progress?: {
+    studentId: string
+    programId: string
+    cursor: number
+    lastTarget: number
+    updatedAt: string | null
+  }
 }
 
 export type VocabularyReviewRunDto = {
@@ -286,8 +323,14 @@ async function requestJson(path: string, init?: RequestInit): Promise<Record<str
   return body
 }
 
-export async function getVocabularyProgram(): Promise<VocabularyProgramDto> {
-  const body = await requestJson('/api/vocabulary/programs/wanwei-round-one-v1')
+export async function listVocabularyPrograms(studentId?: string): Promise<VocabularyProgramSummaryDto[]> {
+  const query = studentId ? `?studentId=${encodeURIComponent(studentId)}` : ''
+  const body = await requestJson(`/api/vocabulary/programs${query}`)
+  return body.programs as VocabularyProgramSummaryDto[]
+}
+
+export async function getVocabularyProgram(programId: string): Promise<VocabularyProgramDto> {
+  const body = await requestJson(`/api/vocabulary/programs/${encodeURIComponent(programId)}`)
   return body.program as VocabularyProgramDto
 }
 
@@ -304,12 +347,13 @@ export async function createVocabularyStudent(displayName: string): Promise<Voca
   return body.student as VocabularyStudentDto
 }
 
-export async function getVocabularyProgress(studentId: string): Promise<{ cursor: number; lastTarget: number }> {
-  const body = await requestJson(`/api/vocabulary/progress/wanwei-round-one-v1?studentId=${encodeURIComponent(studentId)}`)
+export async function getVocabularyProgress(programId: string, studentId: string): Promise<{ cursor: number; lastTarget: number }> {
+  const body = await requestJson(`/api/vocabulary/progress/${encodeURIComponent(programId)}?studentId=${encodeURIComponent(studentId)}`)
   return body.progress as { cursor: number; lastTarget: number }
 }
 
 export async function setVocabularyProgressStart(
+  programId: string,
   studentId: string,
   entryId: string,
   replaceActiveRun: boolean,
@@ -318,7 +362,7 @@ export async function setVocabularyProgressStart(
   startEntry: { id: string; headword: string; sourceOrder: number }
   discardedRunId: string | null
 }> {
-  const body = await requestJson('/api/vocabulary/progress/wanwei-round-one-v1', {
+  const body = await requestJson(`/api/vocabulary/progress/${encodeURIComponent(programId)}`, {
     method: 'PATCH',
     body: JSON.stringify({ studentId, entryId, replaceActiveRun }),
   })
@@ -330,6 +374,7 @@ export async function setVocabularyProgressStart(
 }
 
 export async function createVocabularyReviewRun(
+  programId: string,
   studentId: string,
   targetUnfamiliarCount: number,
   scope: { mode?: 'main' | 'temporary'; stage?: VocabularyStage; day?: number } = {},
@@ -338,7 +383,7 @@ export async function createVocabularyReviewRun(
     method: 'POST',
     body: JSON.stringify({
       studentId,
-      programId: 'wanwei-round-one-v1',
+      programId,
       mode: scope.mode ?? 'main',
       targetUnfamiliarCount,
       ...(scope.stage ? { temporaryStage: scope.stage } : {}),
@@ -359,10 +404,10 @@ export async function getVocabularyReviewRun(runId: string): Promise<{
   }
 }
 
-export async function getCurrentVocabularyReviewRun(studentId: string): Promise<VocabularyReviewRunDto | null> {
+export async function getCurrentVocabularyReviewRun(programId: string, studentId: string): Promise<VocabularyReviewRunDto | null> {
   const query = new URLSearchParams({
     studentId,
-    programId: 'wanwei-round-one-v1',
+    programId,
   })
   const body = await requestJson(`/api/vocabulary/review-runs/current?${query.toString()}`)
   return (body.reviewRun ?? null) as VocabularyReviewRunDto | null
@@ -406,8 +451,9 @@ export async function shareVocabularySet(setId: string): Promise<{ shareId: stri
   return body.share as { shareId: string; status: 'active' }
 }
 
-export async function listVocabularySets(studentId: string): Promise<VocabularySetDto[]> {
-  const body = await requestJson(`/api/vocabulary/sets?studentId=${encodeURIComponent(studentId)}`)
+export async function listVocabularySets(programId: string, studentId: string): Promise<VocabularySetDto[]> {
+  const query = new URLSearchParams({ studentId, programId })
+  const body = await requestJson(`/api/vocabulary/sets?${query.toString()}`)
   return body.vocabularySets as VocabularySetDto[]
 }
 
@@ -654,6 +700,7 @@ export async function getVocabularyPrintJob(printJobId: string): Promise<Vocabul
 }
 
 export async function createVocabularySetFromEntries(
+  programId: string,
   studentId: string,
   entryIds: string[],
   title?: string,
@@ -662,7 +709,7 @@ export async function createVocabularySetFromEntries(
     method: 'POST',
     body: JSON.stringify({
       studentId,
-      programId: 'wanwei-round-one-v1',
+      programId,
       entryIds,
       ...(title ? { title } : {}),
     }),

@@ -1,4 +1,4 @@
-export type VocabularyStage = 'core' | 'basic' | 'recognition'
+export type VocabularyStage = string
 
 export type VocabularyReviewVerdict = 'known' | 'unfamiliar'
 
@@ -8,12 +8,27 @@ export type VocabularyAsset = {
   path: string
 }
 
+export type VocabularyVisualBinding =
+  | {
+      mode: 'direct-sense'
+      sentenceId?: never
+      sentenceTextSha256?: never
+      displayContract: 'image_may_appear_with_headword_only'
+    }
+  | {
+      mode: 'sentence-scene'
+      sentenceId: `candidate-${'a' | 'b' | 'c'}`
+      sentenceTextSha256: string
+      displayContract: 'image_and_exact_sentence_with_target_highlight'
+    }
+
 export type VocabularyVisualAsset = VocabularyAsset & {
   alt: string
+  binding?: VocabularyVisualBinding
 }
 
 export type VocabularyAudioAsset = VocabularyAsset & {
-  voice: 'eqb-british-teacher-v1' | 'en-GB-SoniaNeural'
+  voice: string
 }
 
 export type VocabularyPhonetics = {
@@ -29,10 +44,13 @@ export type VocabularySetEntry = {
   partOfSpeech: string
   sourceMeanings: string[]
   teachingSense: string
+  teachingSenses?: string[]
   pronunciationMode: 'syllables' | 'forms'
   syllables: Array<string | VocabularyPronunciationPart>
   pronunciationParts?: VocabularyPronunciationParts
   example: {
+    candidateId?: 'a' | 'b' | 'c'
+    version?: string
     english: string
     chinese: string
     highlight: string
@@ -44,6 +62,10 @@ export type VocabularySetEntry = {
   }
   visual: VocabularyVisualAsset
   audio: VocabularyAudioAsset
+  audioVariants?: {
+    american: VocabularyAudioAsset
+    british: VocabularyAudioAsset
+  }
 }
 
 export type PublicVocabularyEntry = Omit<VocabularySetEntry, 'example' | 'sourceMeanings' | 'exampleSelection'>
@@ -61,6 +83,7 @@ export type PublicVocabularyDictationEntry = Pick<
   'id' | 'partOfSpeech' | 'sourceMeanings' | 'teachingSense' | 'audio'
 > & {
   answer: string
+  audioVariants?: VocabularySetEntry['audioVariants']
 }
 
 export type PublicVocabularyDictationSet = {
@@ -99,6 +122,8 @@ export type VocabularyLearningContent = {
     parts: VocabularyPronunciationPart[]
   }
   example: {
+    candidateId?: 'a' | 'b' | 'c'
+    version?: string
     english: string
     chinese: string
     highlight: string
@@ -113,11 +138,16 @@ export type VocabularyEntry = {
   partOfSpeech: string
   sourceMeanings: string[]
   teachingSense: string
+  teachingSenses?: string[]
   examFrequency?: number
   primaryStageReview?: boolean
   visualKey: VocabularyVisualKey
   visual?: VocabularyVisualAsset
   audio?: VocabularyAudioAsset
+  audioVariants?: {
+    american: VocabularyAudioAsset
+    british: VocabularyAudioAsset
+  }
   learning: VocabularyLearningContent
   pronunciationParts?: VocabularyPronunciationParts
   source: {
@@ -131,6 +161,12 @@ export type VocabularyEntry = {
     globalOrder: number
     printedPage: number
     verification: 'page-checked' | 'index-and-heading-reviewed'
+    metadata?: {
+      frequencyRank?: number
+      frequencyStage?: VocabularyStage
+      sourceGroup?: number
+      curriculumTag?: 'initial' | 'required' | 'elective'
+    }
   }
 }
 
@@ -143,6 +179,17 @@ export type VocabularyProgram = {
   sourceEdition: string
   totalPlannedEntries: number
   calibrationSize: number
+  structure?: {
+    dayCount?: number
+    daysPerWeek?: number
+    stages?: Array<{
+      key: VocabularyStage
+      label: string
+      entryCount: number
+      dayStart: number
+      dayEnd: number
+    }>
+  }
   groups: VocabularyProgramGroup[]
   entries: VocabularyEntry[]
 }
@@ -173,6 +220,10 @@ function vocabularyHeadwordAliases(headword: string): string[] {
   const base = headword.replace(/\s*\([^)]*\)\s*/gu, ' ').replace(/\s+/gu, ' ').trim()
   add(base)
   base.split(/\s*\/\s*/u).forEach(add)
+  headword.split(/\s*[,;，；]\s*/u).forEach(add)
+  if (/\p{L}\([A-Za-z]+\)\p{L}/u.test(headword)) {
+    add(headword.replace(/\(([A-Za-z]+)\)/gu, '$1'))
+  }
 
   for (const match of headword.matchAll(/\(([^)]*)\)/gu)) {
     const rawInner = match[1].trim()

@@ -234,7 +234,28 @@ async function installApiFixtures(page, {
   currentActive = false,
   continuityScope = null,
   britishReady = true,
+  stageContract = null,
 } = {}) {
+  const apiProgram = stageContract
+    ? {
+        ...program,
+        structure: {
+          stages: [{
+            key: stageContract.key,
+            label: stageContract.label,
+            entryCount: 10,
+            dayStart: 1,
+            dayEnd: 1,
+          }],
+        },
+        groups: program.groups.map((group, index) => index === 0
+          ? { ...group, stage: stageContract.key }
+          : group),
+        entries: program.entries.map((item, index) => index < 10
+          ? { ...item, source: { ...item.source, stage: stageContract.key } }
+          : item),
+      }
+    : program
   const fixtureStudents = [defaultStudent, alternateStudent]
   let continuityRun = null
   const renamedTitles = new Map()
@@ -275,10 +296,22 @@ async function installApiFixtures(page, {
       await route.fulfill({ status: 201, json: { student } })
     } else if (pathname === '/api/vocabulary/students') {
       await route.fulfill({ json: { students: fixtureStudents } })
+    } else if (pathname === '/api/vocabulary/programs') {
+      await route.fulfill({ json: { programs: [{
+        id: apiProgram.id,
+        version: apiProgram.version,
+        title: apiProgram.title,
+        subtitle: apiProgram.subtitle,
+        sourceTitle: apiProgram.sourceTitle,
+        sourceEdition: apiProgram.sourceEdition,
+        totalPlannedEntries: apiProgram.totalPlannedEntries,
+        structure: apiProgram.structure ?? {},
+        availability: 'available',
+      }] } })
     } else if (pathname === '/api/vocabulary/programs/wanwei-round-one-v1') {
       await route.fulfill(programFails
         ? { status: 503, json: { message: '完整词库暂时不可用。' } }
-        : { json: { program } })
+        : { json: { program: apiProgram } })
     } else if (pathname === '/api/vocabulary/progress/wanwei-round-one-v1' && route.request().method() === 'PATCH') {
       const input = JSON.parse(route.request().postData() || '{}')
       const selectedEntry = programEntries.find((item) => item.id === input.entryId)
@@ -653,6 +686,15 @@ async function verifyDirectSetMobileLayout(page) {
   assert.equal(layout.scrollWidth, layout.viewportWidth)
   await page.screenshot({ path: path.join(evidenceRoot, 'direct-set-mobile.png'), fullPage: true })
   pass('390px 下已有单词输入区自然换行且无横向溢出')
+}
+
+async function verifyProgramSpecificCourseCopy(page) {
+  await page.goto(`${origin}/?view=vocabulary-review`, { waitUntil: 'networkidle' })
+  await page.getByText('只匹配当前课程已入库的 60 词', { exact: true }).waitFor()
+  await page.getByRole('button', { name: '开始过词' }).click()
+  await page.getByRole('heading', { name: 'about', exact: true }).waitFor()
+  assert.equal(await page.getByText('高频词汇', { exact: true }).count(), 1)
+  pass('多课程开始页显示实际入库词数，过词栏使用课程定义的阶段名称')
 }
 
 async function verifyStudentProfiles(page) {
@@ -1503,6 +1545,14 @@ async function main() {
     await installApiFixtures(directSetMobilePage)
     await verifyDirectSetMobileLayout(directSetMobilePage)
     await directSetMobilePage.close()
+
+    const programSpecificCopyPage = await browser.newPage({ viewport: { width: 1440, height: 1000 } })
+    await installApiFixtures(programSpecificCopyPage, {
+      continuityScope: 'main',
+      stageContract: { key: 'high_frequency', label: '高频词汇' },
+    })
+    await verifyProgramSpecificCourseCopy(programSpecificCopyPage)
+    await programSpecificCopyPage.close()
 
     const studentProfilesPage = await browser.newPage({ viewport: { width: 1440, height: 1000 } })
     await installApiFixtures(studentProfilesPage)

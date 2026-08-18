@@ -40,6 +40,7 @@ import {
   listVocabularyMeaningRecallRecords,
   listVocabularySetLibrary,
   listVocabularyStudents,
+  listVocabularyPrograms,
   listVocabularySets,
   renameVocabularySet,
   restoreVocabularyDictationRecord,
@@ -73,6 +74,10 @@ function readQueryPart(request, name) {
 
 function readQuery(request) {
   return new URL(request.url ?? '/', 'http://localhost').searchParams
+}
+
+function readOptionalQueryPart(request, name) {
+  return new URL(request.url ?? '/', 'http://localhost').searchParams.get(name)?.trim() || null
 }
 
 function sendVocabularyError(response, context, error) {
@@ -156,6 +161,25 @@ function expectedVocabularyPrintPages(entryCount, kind) {
 
 export function createVocabularyRoutes() {
   return [
+    defineRoute('GET', /^\/api\/vocabulary\/programs$/, ({ request, response, context }) => {
+      const programs = withBankDb(context, true, (db) => listVocabularyPrograms(db))
+      const studentId = readOptionalQueryPart(request, 'studentId')
+      if (!studentId) {
+        context.sendJson(response, 200, { programs })
+        return
+      }
+      const userId = context.resolveDataUserId(context)
+      try {
+        const programsWithProgress = withUserDb(context, true, (db) => programs.map((program) => ({
+          ...program,
+          progress: getVocabularyProgress(db, userId, studentId, program.id),
+        })))
+        context.sendJson(response, 200, { programs: programsWithProgress })
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      }
+    }),
+
     defineRoute('GET', /^\/api\/vocabulary\/programs\/([^/]+)$/, ({ response, match, context }) => {
       const programId = decodePathPart(match[1])
       const program = withBankDb(context, true, (db) => getVocabularyProgram(db, programId))
@@ -828,7 +852,8 @@ export function createVocabularyRoutes() {
       const userId = context.resolveDataUserId(context)
       try {
         const studentId = readQueryPart(request, 'studentId')
-        const vocabularySets = withUserDb(context, true, (db) => listVocabularySets(db, userId, studentId))
+        const programId = readQueryPart(request, 'programId')
+        const vocabularySets = withUserDb(context, true, (db) => listVocabularySets(db, userId, studentId, programId))
         context.sendJson(response, 200, { vocabularySets })
       } catch (error) {
         sendVocabularyError(response, context, error)
