@@ -101,6 +101,7 @@ export function VocabularyMeaningRecallPanel({
   const [busy, setBusy] = useState(false)
   const [saveState, setSaveState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
   const [error, setError] = useState('')
+  const [dictationTitle, setDictationTitle] = useState('')
   const recordRef = useRef<VocabularyMeaningRecallRecordDto | null>(null)
   const saveQueueRef = useRef<Promise<unknown>>(Promise.resolve())
   const saveRevisionRef = useRef(0)
@@ -116,6 +117,11 @@ export function VocabularyMeaningRecallPanel({
   useEffect(() => {
     recordRef.current = activeRecord
   }, [activeRecord])
+
+  useEffect(() => {
+    if (activeRecord?.status !== 'completed') return
+    setDictationTitle(`${activeRecord.recallDate} 错词听写`)
+  }, [activeRecord?.id, activeRecord?.recallDate, activeRecord?.status])
 
   useEffect(() => {
     const active = activeRecord?.status === 'draft'
@@ -334,6 +340,11 @@ export function VocabularyMeaningRecallPanel({
   async function generateTask(entries: Array<VocabularySetEntry & { sourceSetIds?: string[] }>) {
     const limitedEntries = entries.slice(0, 60)
     if (!limitedEntries.length) return
+    const normalizedTitle = dictationTitle.trim().replace(/\s+/gu, ' ')
+    if (!normalizedTitle) {
+      setError('请先填写文件名。')
+      return
+    }
     const sourceSetIds = [...new Set(limitedEntries.flatMap((entry) => entry.sourceSetIds ?? []))]
     if (!sourceSetIds.length) {
       setError('这些词缺少来源词组，暂时无法生成听写。')
@@ -347,7 +358,7 @@ export function VocabularyMeaningRecallPanel({
         sourceSetIds,
         entryIds: limitedEntries.map((entry) => entry.id),
         taskDate: activeRecord?.recallDate ?? today(),
-        title: `${activeRecord?.recallDate ?? today()} 错词听写`,
+        title: normalizedTitle,
         accent,
         share: true,
         ...(activeRecord ? { meaningRecallRecordId: activeRecord.id } : {}),
@@ -445,14 +456,30 @@ export function VocabularyMeaningRecallPanel({
         <div className="meaning-recall-result-summary">
           <strong>会 {counts.correct}</strong><strong>不会 {counts.wrong}</strong><span>未测 {counts.untested}</span>
         </div>
+        {error && <p className="meaning-recall-error" role="alert">{error}</p>}
         <div className="meaning-recall-result-actions">
+          <label className="meaning-recall-export-name">
+            <span>文件名</span>
+            <input
+              type="text"
+              aria-label="错词听写文件名"
+              autoComplete="off"
+              spellCheck={false}
+              maxLength={60}
+              value={dictationTitle}
+              onChange={(event) => {
+                setDictationTitle(event.target.value)
+                setError('')
+              }}
+            />
+          </label>
           <fieldset>
             <legend>听写发音</legend>
             <button type="button" aria-pressed={accent === 'american'} className={accent === 'american' ? 'is-selected' : ''} onClick={() => onAccentChange('american')}>美音</button>
             <button type="button" aria-pressed={accent === 'british'} className={accent === 'british' ? 'is-selected' : ''} onClick={() => onAccentChange('british')}>英音</button>
           </fieldset>
-          <button type="button" className="is-primary" onClick={() => void generateTask(forgotten)} disabled={!forgotten.length || busy}><QrCode size={16} />生成错词听写</button>
-          <span>二维码会按所选口音自动听写。</span>
+          <button type="button" className="is-primary" onClick={() => void generateTask(forgotten)} disabled={!forgotten.length || !dictationTitle.trim() || busy}><QrCode size={16} />生成错词听写</button>
+          <span>下载时会自动补上听写纸、词数和口音。</span>
         </div>
         <div className="meaning-recall-result-list">
           {activeRecord.entries.map((entry) => (

@@ -1483,7 +1483,8 @@
 .meaning-recall-home button:focus-visible,
 .meaning-recall-result button:focus-visible,
 .meaning-recall-stage button:focus-visible,
-.meaning-recall-home input:focus-visible {
+.meaning-recall-home input:focus-visible,
+.meaning-recall-result input:focus-visible {
   outline: 0;
   box-shadow: 0 0 0 3px rgba(44, 110, 86, 0.2);
 }
@@ -1725,6 +1726,30 @@
 .meaning-recall-result-actions {
   padding: 8px 16px 20px;
   border-bottom: 1px solid #e8e8e4;
+}
+
+.meaning-recall-export-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #6a6a64;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.meaning-recall-export-name input {
+  width: 240px;
+  border: 1px solid #d8d8d2;
+  border-radius: 6px;
+  padding: 8px 12px;
+  outline: none;
+  background: #fff;
+  color: #1e1e1c;
+  font-size: 14px;
+}
+
+.meaning-recall-export-name input:focus {
+  border-color: #2c6e56;
 }
 
 .meaning-recall-result-actions fieldset {
@@ -2063,6 +2088,15 @@
   .meaning-recall-suggestion-result > div,
   .meaning-recall-result-actions {
     flex-wrap: wrap;
+  }
+
+  .meaning-recall-export-name {
+    width: 100%;
+  }
+
+  .meaning-recall-export-name input {
+    min-width: 0;
+    flex: 1;
   }
 
   .meaning-recall-start-row fieldset button,

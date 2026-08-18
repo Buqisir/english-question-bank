@@ -388,10 +388,17 @@ assert.match(
   /<legend>听写发音<\/legend>[\s\S]{0,500}>美音<\/button>[\s\S]{0,500}>英音<\/button>/u,
   '认词结果生成错词听写前必须能选择美音或英音',
 )
+assert.match(
+  resultActionsSource,
+  /<span>文件名<\/span>[\s\S]{0,500}aria-label="错词听写文件名"[\s\S]{0,500}value=\{dictationTitle\}/u,
+  '认词结果生成错词听写前必须能编辑导出文件名',
+)
+assert.match(resultActionsSource, /disabled=\{!forgotten\.length \|\| !dictationTitle\.trim\(\) \|\| busy\}/u, '文件名为空时不得生成错词听写')
 assert.doesNotMatch(resultActionsSource, /立即巩固|当前待认义|整组生成/u, '抽查结果不得再展示其他任务范围')
 assert.match(panelSource, /share: true/u, '本轮错词复听写必须原子创建任务和公开二维码')
 assert.doesNotMatch(panelSource, /shareVocabularyDictationTask/u, '本轮错词复听写不得拆成任务创建与分享两次请求')
-assert.match(panelSource, /title: `\$\{activeRecord\?\.recallDate \?\? today\(\)\} 错词听写`/u, '本轮错词听写标题必须和认词日期一致')
+assert.match(panelSource, /setDictationTitle\(`\$\{activeRecord\.recallDate\} 错词听写`\)/u, '本轮错词听写文件名必须默认使用认词日期')
+assert.match(panelSource, /title: normalizedTitle/u, '本轮错词听写任务标题必须使用老师编辑后的文件名')
 assert.match(panelSource, /<h2>看词说义<\/h2>[\s\S]{0,180}给学生看英文，让他说中文；老师判对错。/u, '认词首页必须使用老师一眼能懂的说明')
 
 bankDb.close()
