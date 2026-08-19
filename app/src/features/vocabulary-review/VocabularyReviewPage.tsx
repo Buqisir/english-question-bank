@@ -8,6 +8,7 @@ import {
   Eye,
   Grid2X2,
   RotateCcw,
+  Save,
   Volume2,
 } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
@@ -53,6 +54,7 @@ import {
   type VocabularySetDto,
   type VocabularyStudentDto,
 } from '../../services/vocabulary'
+import { prepareFileSaveTarget, type FileSaveMode } from '../../services/fileDownload.ts'
 import { calibrationVocabularyProgram } from './calibrationVocabularyProgram'
 import { VocabularyProgressExplorer } from './VocabularyProgressExplorer'
 import { vocabularyVisualManifest } from './vocabularyVisualManifest'
@@ -89,6 +91,17 @@ type VocabularyReviewPageProps = {
 type VocabularyAccent = VocabularyAudioAccent
 type VocabularyPrintKind = 'cards' | 'dictation' | 'answer' | 'word-search'
 type VocabularySetPrintKind = VocabularyPrintKind
+
+const VOCABULARY_DOWNLOAD_OPTIONS: Array<{
+  kind: VocabularySetPrintKind
+  label: string
+  description: string
+}> = [
+  { kind: 'cards', label: '单词纸', description: '带图片、音节和例句' },
+  { kind: 'dictation', label: '听写纸', description: '15题一页，扫码自动听写' },
+  { kind: 'answer', label: '教师答案', description: '与听写纸逐题对应' },
+  { kind: 'word-search', label: '圈词与拼写', description: '找词、辨形并抄写，内附答案' },
+]
 
 type VocabularyPrintRequest = {
   setId: string | null
@@ -458,7 +471,10 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   const [printShareKind, setPrintShareKind] = useState<'listen' | 'dictation' | null>(null)
   const [pdfDownloadBusy, setPdfDownloadBusy] = useState(false)
   const [downloadMenuOpen, setDownloadMenuOpen] = useState(false)
-  const [pendingShareDownload, setPendingShareDownload] = useState<'cards' | 'dictation' | null>(null)
+  const [pendingShareDownload, setPendingShareDownload] = useState<{
+    kind: 'cards' | 'dictation'
+    mode: FileSaveMode
+  } | null>(null)
   const [directVocabularyInput, setDirectVocabularyInput] = useState('')
   const [setTitleInput, setSetTitleInput] = useState('')
   const [progressExplorerOpen, setProgressExplorerOpen] = useState(false)
@@ -1140,30 +1156,41 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
     shareCopyTimerRef.current = window.setTimeout(() => setShareCopyStatus('idle'), 1800)
   }
 
-  async function downloadVocabularySheet(kind: VocabularySetPrintKind = 'cards', options: { shareConfirmed?: boolean } = {}) {
+  async function downloadVocabularySheet(
+    kind: VocabularySetPrintKind = 'cards',
+    mode: FileSaveMode = 'download',
+    options: { shareConfirmed?: boolean } = {},
+  ) {
     if (!vocabularySet || pdfDownloadBusy) return
     if (vocabularyPrintRequiresShare(kind) && !shareId && !options.shareConfirmed) {
       setDownloadMenuOpen(false)
-      setPendingShareDownload(kind)
+      setPendingShareDownload({ kind, mode })
       return
     }
-    setPdfDownloadBusy(true)
     setDownloadMenuOpen(false)
     setPendingShareDownload(null)
     setRequestError('')
     try {
       const title = setTitleInput.trim()
-      let setForDownload = vocabularySet
       if (!title) throw new Error('请先填写单词纸名称。')
+      const option = VOCABULARY_DOWNLOAD_OPTIONS.find((item) => item.kind === kind)
+      const target = await prepareFileSaveTarget({
+        mode,
+        suggestedName: `${title}-${option?.label || '生词资料'}-${printAccent === 'american' ? '美音' : '英音'}.pdf`,
+        mimeType: 'application/pdf',
+      })
+      if (!target) return
+      setPdfDownloadBusy(true)
+      let setForDownload = vocabularySet
       if (title !== vocabularySet.title) {
         setForDownload = await renameVocabularySet(vocabularySet.id, title)
         setVocabularySet(setForDownload)
         setRecentSets((current) => current.map((item) => item.id === setForDownload.id ? setForDownload : item))
       }
       if (vocabularyPrintRequiresShare(kind) && !shareId) await activateShare(setForDownload)
-      await downloadVocabularySetPdf(setForDownload.id, printAccent, kind)
+      await downloadVocabularySetPdf(setForDownload.id, printAccent, kind, target)
     } catch (error) {
-      setRequestError(error instanceof Error ? error.message : '文件下载失败，请重试。')
+      setRequestError(error instanceof Error ? error.message : mode === 'save-as' ? '文件另存为失败，请重试。' : '文件下载失败，请重试。')
     } finally {
       setPdfDownloadBusy(false)
     }
@@ -1265,10 +1292,21 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
       </button>
       {downloadMenuOpen && (
         <div id="vocabulary-download-options" role="group" aria-label="选择下载内容">
-          <button type="button" onClick={() => void downloadVocabularySheet('cards')}>单词纸<span>带图片、音节和例句</span></button>
-          <button type="button" onClick={() => void downloadVocabularySheet('dictation')}>听写纸<span>15题一页，扫码自动听写</span></button>
-          <button type="button" onClick={() => void downloadVocabularySheet('answer')}>教师答案<span>与听写纸逐题对应</span></button>
-          <button type="button" onClick={() => void downloadVocabularySheet('word-search')}>圈词与拼写<span>找词、辨形并抄写，内附答案</span></button>
+          {VOCABULARY_DOWNLOAD_OPTIONS.map((option) => (
+            <div className="vocabulary-download-option" key={option.kind}>
+              <button type="button" onClick={() => void downloadVocabularySheet(option.kind)}>
+                {option.label}<span>{option.description}</span>
+              </button>
+              <button
+                type="button"
+                className="vocabulary-download-save-as"
+                aria-label={`${option.label}另存为`}
+                onClick={() => void downloadVocabularySheet(option.kind, 'save-as')}
+              >
+                <Save size={14} aria-hidden="true" />另存为…
+              </button>
+            </div>
+          ))}
         </div>
       )}
     </div>
@@ -1281,7 +1319,13 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
       </div>
       <div>
         <button type="button" className="ghost-button" onClick={() => setPendingShareDownload(null)}>取消</button>
-        <button type="button" className="primary-button" onClick={() => void downloadVocabularySheet(pendingShareDownload, { shareConfirmed: true })}>生成链接并下载</button>
+        <button
+          type="button"
+          className="primary-button"
+          onClick={() => void downloadVocabularySheet(pendingShareDownload.kind, pendingShareDownload.mode, { shareConfirmed: true })}
+        >
+          {pendingShareDownload.mode === 'save-as' ? '生成链接并另存为…' : '生成链接并下载'}
+        </button>
       </div>
     </div>
   ) : null

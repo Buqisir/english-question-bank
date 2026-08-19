@@ -152,6 +152,7 @@ const registry = {
   'scripts/verify-genre-truth.mjs',
   'scripts/verify-generated-docx-disconnected.mjs',
   'scripts/verify-generated-docx-output-deleted.mjs',
+  'scripts/verify-file-save-as.mjs',
   'scripts/verify-detail-redesign.mjs',
   'scripts/verify-vocabulary-closed-loop.mjs',
   'scripts/verify-vocabulary-dictation-review.mjs',

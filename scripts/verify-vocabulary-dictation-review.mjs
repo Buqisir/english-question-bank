@@ -559,12 +559,12 @@ assert.ok(
 assert.doesNotMatch(workbenchSource, /QRCodeSVG|qrcode\.react/u, '工作台不得显示屏幕二维码')
 assert.match(
   workbenchSource,
-  /downloadTaskMaterial\(task\.id, 'cards'\)[\s\S]{0,180}单词卡（含二维码）/u,
+  /downloadTaskMaterial\(task, 'cards'\)[\s\S]{0,240}单词卡（含二维码）/u,
   '已生成任务必须提供右下角带二维码的单词卡',
 )
 assert.match(
   workbenchSource,
-  /downloadTaskMaterial\(task\.id, 'dictation'\)[\s\S]{0,180}复听写纸（含二维码）/u,
+  /downloadTaskMaterial\(task, 'dictation'\)[\s\S]{0,240}复听写纸（含二维码）/u,
   '已生成任务必须提供右上角带二维码的复听写纸',
 )
 assert.match(workbenchSource, /下载资料[\s\S]{0,900}单词卡（含二维码）[\s\S]{0,900}复听写纸（含二维码）[\s\S]{0,900}教师答案/u, '三个下载项必须收进一个下载资料菜单')
@@ -597,7 +597,7 @@ assert.match(dateExportSource, /share: true/u, '按日期导出必须原子创�
 assert.doesNotMatch(dateExportSource, /shareVocabularyDictationTask/u, '按日期导出不得拆成任务创建与分享两次请求')
 assert.match(dateExportSource, /sourceTaskIds: group\.tasks\.map/u, '按日期导出必须直接复用所选任务的冻结快照，不能依赖来源生词组')
 assert.doesNotMatch(dateExportSource, /缺少来源生词组/u, '没有来源生词组的合法冻结任务也必须可合并导出')
-assert.match(dateExportSource, /downloadVocabularyDictationTaskPdf\(task\.id, 'dictation'\)/u, '按日期导出必须下载复听写纸')
+assert.match(dateExportSource, /downloadVocabularyDictationTaskPdf\(task\.id, 'dictation'(?:, target)?\)/u, '按日期导出必须下载复听写纸')
 assert.match(workbenchSource, /全选当天[\s\S]{0,6000}自动带二维码[\s\S]{0,1200}合并导出听写纸/u, '听写列表必须提供日期全选和明确的二维码导出说明')
 assert.match(workbenchSource, /aria-pressed=\{accent === 'american'\}[\s\S]{0,300}aria-pressed=\{accent === 'british'\}/u, '导出口音必须向辅助技术暴露选中状态')
 const workbenchCss = readFileSync(path.join(import.meta.dirname, '../app/src/features/vocabulary-dictation-workbench/vocabularyDictationWorkbench.css'), 'utf8')

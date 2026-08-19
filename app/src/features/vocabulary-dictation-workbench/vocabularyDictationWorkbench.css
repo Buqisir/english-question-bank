@@ -529,7 +529,7 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(120px, 1fr));
   gap: 8px;
-  width: 304px;
+  width: 380px;
   padding: 12px;
   border: 1px solid #d8d8d2;
   border-radius: 8px;
@@ -556,6 +556,29 @@
   background: #f6f6f4;
   cursor: pointer;
   font-size: 12px;
+}
+
+.dictation-download-option {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px;
+}
+
+.dictation-selection-actions details > div > .dictation-download-option {
+  grid-column: 1 / -1;
+}
+
+.dictation-download-option > button:first-child {
+  justify-content: flex-start;
+  min-width: 0;
+}
+
+.dictation-download-option > .dictation-save-as-button {
+  justify-content: center;
+  min-width: 94px;
+  color: #1e4a3a;
+  font-size: 12px;
+  white-space: nowrap;
 }
 
 .dictation-created-results {
@@ -707,7 +730,7 @@
   top: calc(100% + 6px);
   right: 0;
   display: grid;
-  min-width: 220px;
+  width: min(340px, calc(100vw - 24px));
   gap: 2px;
   padding: 6px;
   border: 1px solid #d8d8d2;
@@ -721,6 +744,10 @@
   width: 100%;
   border-color: transparent;
   text-align: left;
+}
+
+.dictation-download-menu > div > button {
+  grid-column: 1 / -1;
 }
 
 .dictation-records-workspace {
@@ -892,6 +919,21 @@
   flex: 1;
   flex-direction: column;
   gap: 2px;
+}
+
+.dictation-task-selection-panel > .dictation-batch-export-actions {
+  display: flex;
+  min-width: 0;
+  flex: 0 0 auto;
+  flex-direction: row;
+  gap: 6px;
+}
+
+.dictation-batch-export-actions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
 }
 
 .dictation-task-selection-panel > div strong {
@@ -2010,6 +2052,12 @@
 
   .dictation-task-selection-panel > div {
     min-width: 0;
+  }
+
+  .dictation-task-selection-panel > .dictation-batch-export-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    width: 100%;
   }
 
   .dictation-task-selection-panel fieldset,

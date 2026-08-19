@@ -657,10 +657,10 @@ async function verifyDirectSetCreation(page) {
   assert.equal(await page.getByRole('button', { name: '生成公开二维码' }).count(), 1)
   assert.equal(await page.getByRole('button', { name: '下载', exact: true }).isEnabled(), true)
   await page.getByRole('button', { name: '下载', exact: true }).click()
-  assert.equal(await page.getByRole('button', { name: /^听写纸/ }).count(), 1)
-  assert.equal(await page.getByRole('button', { name: /^教师答案/ }).count(), 1)
+  assert.equal(await page.getByRole('button', { name: /^听写纸\s/u }).count(), 1)
+  assert.equal(await page.getByRole('button', { name: /^教师答案\s/u }).count(), 1)
   await page.screenshot({ path: path.join(evidenceRoot, 'download-menu-desktop.png'), fullPage: true })
-  await page.getByRole('button', { name: /^听写纸/ }).click()
+  await page.getByRole('button', { name: /^听写纸\s/u }).click()
   await page.getByText('这份文件需要公开二维码', { exact: true }).waitFor()
   assert.match(await page.locator('.vocabulary-share-download-confirmation').innerText(), /单词卡扫码听音频.*听写纸扫码自动听写.*随时撤销/s)
   await page.getByRole('button', { name: '取消', exact: true }).click()
@@ -876,7 +876,7 @@ async function verifyPrint(page, count, expectedPages, expectedLastPageCount, ac
   assert.equal(await page.getByRole('button', { name: '下载', exact: true }).isEnabled(), true)
   const downloadPromise = page.waitForEvent('download')
   await page.getByRole('button', { name: '下载', exact: true }).click()
-  await page.getByRole('button', { name: /^单词纸/ }).click()
+  await page.getByRole('button', { name: /^单词纸\s/u }).click()
   const download = await downloadPromise
   assert.equal(download.suggestedFilename(), `${expectedTitle}${count === 1 ? `-${count}词` : ''}-${accent === 'american' ? '美式' : '英式'}.pdf`)
   const downloadedPath = path.join(tempRoot, `downloaded-vocabulary-${count}.pdf`)
@@ -1053,19 +1053,19 @@ async function verifyDictationDownloads(page) {
 
   let downloadPromise = page.waitForEvent('download')
   await page.getByRole('button', { name: '下载', exact: true }).click()
-  await page.getByRole('button', { name: /^听写纸/ }).click()
+  await page.getByRole('button', { name: /^听写纸\s/u }).click()
   let download = await downloadPromise
   assert.equal(download.suggestedFilename(), '固定生词组-听写纸-15词-英式.pdf')
 
   downloadPromise = page.waitForEvent('download')
   await page.getByRole('button', { name: '下载', exact: true }).click()
-  await page.getByRole('button', { name: /^教师答案/ }).click()
+  await page.getByRole('button', { name: /^教师答案\s/u }).click()
   download = await downloadPromise
   assert.equal(download.suggestedFilename(), '固定生词组-教师答案-15词.pdf')
 
   downloadPromise = page.waitForEvent('download')
   await page.getByRole('button', { name: '下载', exact: true }).click()
-  await page.getByRole('button', { name: /^圈词与拼写/ }).click()
+  await page.getByRole('button', { name: /^圈词与拼写\s/u }).click()
   download = await downloadPromise
   assert.equal(download.suggestedFilename(), '固定生词组-圈词与拼写-15词.pdf')
   pass('下载菜单可分别导出听写纸、教师答案和圈词练习，文件名包含名称、用途与题数')

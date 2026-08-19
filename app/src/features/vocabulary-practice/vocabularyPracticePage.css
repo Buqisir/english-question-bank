@@ -101,7 +101,7 @@
 }
 
 .vocabulary-practice-modes > span,
-.vocabulary-practice-modes > button {
+.vocabulary-practice-download-actions > button {
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
@@ -123,22 +123,28 @@
   background: color-mix(in srgb, var(--accent) 6%, var(--panel));
 }
 
-.vocabulary-practice-modes > button {
+.vocabulary-practice-download-actions {
+  display: grid;
+  grid-template-columns: minmax(190px, 1fr) minmax(118px, auto);
+  gap: 6px;
+}
+
+.vocabulary-practice-download-actions > button {
   cursor: pointer;
   transition: background var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover);
 }
 
-.vocabulary-practice-modes > button:hover:not(:disabled) {
+.vocabulary-practice-download-actions > button:hover:not(:disabled) {
   border-color: var(--line-strong);
   background: var(--surface-strong);
 }
 
-.vocabulary-practice-modes > button:focus-visible {
+.vocabulary-practice-download-actions > button:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
-.vocabulary-practice-modes > button:disabled {
+.vocabulary-practice-download-actions > button:disabled {
   color: var(--faint);
   cursor: wait;
 }
@@ -424,8 +430,12 @@
   }
 
   .vocabulary-practice-modes > span,
-  .vocabulary-practice-modes > button {
+  .vocabulary-practice-download-actions > button {
     min-width: 0;
+  }
+
+  .vocabulary-practice-download-actions {
+    grid-template-columns: minmax(0, 1fr) minmax(104px, auto);
   }
 
   .vocabulary-practice-round {

@@ -1,16 +1,6 @@
 import type { MySpaceArtifact, MySpaceFolder } from '../domain/questionBank'
+import { directDownloadTarget, saveBlobToTarget, type FileSaveTarget } from './fileDownload.ts'
 import { apiPath, errorMessageFromResponse as readError } from './httpClient.ts'
-
-function downloadBlob(blob: Blob, fileName: string) {
-  const url = URL.createObjectURL(blob)
-  const link = document.createElement('a')
-  link.href = url
-  link.download = fileName
-  document.body.appendChild(link)
-  link.click()
-  link.remove()
-  URL.revokeObjectURL(url)
-}
 
 export type MySpaceSnapshot = {
   folders: MySpaceFolder[]
@@ -70,9 +60,12 @@ export async function deleteMySpaceArtifact(id: string): Promise<void> {
   if (!response.ok) throw new Error(await readError(response, `Failed to delete artifact: ${response.status}`))
 }
 
-export async function downloadMySpaceArtifact(artifact: MySpaceArtifact): Promise<void> {
+export async function downloadMySpaceArtifact(
+  artifact: MySpaceArtifact,
+  target: FileSaveTarget = directDownloadTarget(),
+): Promise<void> {
   const response = await fetch(apiPath(artifact.fileUrl))
   if (!response.ok) throw new Error(await readError(response, `Failed to download artifact: ${response.status}`))
   const blob = await response.blob()
-  downloadBlob(blob, artifact.fileName || '英语草稿卷-学生卷.pdf')
+  await saveBlobToTarget(blob, artifact.fileName || '英语草稿卷-学生卷.pdf', target)
 }

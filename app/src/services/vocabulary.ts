@@ -9,6 +9,7 @@ import type {
   VocabularyStage,
   VocabularyVisualAsset,
 } from '../domain/vocabulary'
+import { directDownloadTarget, saveBlobToTarget, type FileSaveTarget } from './fileDownload.ts'
 
 export type VocabularyProgramDto = {
   id: string
@@ -732,17 +733,6 @@ export async function revokeVocabularySetShare(setId: string): Promise<{ status:
   return body.share as { status: 'revoked' }
 }
 
-function downloadBlob(blob: Blob, fileName: string) {
-  const url = URL.createObjectURL(blob)
-  const link = document.createElement('a')
-  link.href = url
-  link.download = fileName
-  document.body.appendChild(link)
-  link.click()
-  link.remove()
-  URL.revokeObjectURL(url)
-}
-
 function decodeHeaderValue(value: string | null): string {
   if (!value) return ''
   try {
@@ -756,6 +746,7 @@ export async function downloadVocabularySetPdf(
   setId: string,
   accent: 'american' | 'british',
   kind: 'cards' | 'dictation' | 'answer' | 'word-search' = 'cards',
+  target: FileSaveTarget = directDownloadTarget(),
 ): Promise<void> {
   const response = await fetch(
     `/api/vocabulary/sets/${encodeURIComponent(setId)}/pdf?accent=${encodeURIComponent(accent)}&kind=${encodeURIComponent(kind)}`,
@@ -771,7 +762,7 @@ export async function downloadVocabularySetPdf(
   }
   const blob = await response.blob()
   const fileName = decodeHeaderValue(response.headers.get('x-file-name')) || '生词记忆纸.pdf'
-  downloadBlob(blob, fileName)
+  await saveBlobToTarget(blob, fileName, target)
 }
 
 export async function downloadCombinedVocabularyPdf(input: {
@@ -782,7 +773,7 @@ export async function downloadCombinedVocabularyPdf(input: {
   mode?: 'dedupe' | 'grouped'
   accent: 'american' | 'british'
   kind: 'cards' | 'dictation' | 'answer' | 'word-search'
-}): Promise<void> {
+}, target: FileSaveTarget = directDownloadTarget()): Promise<void> {
   const response = await fetch('/api/vocabulary/combined-pdf', {
     method: 'POST',
     headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
@@ -798,12 +789,13 @@ export async function downloadCombinedVocabularyPdf(input: {
   }
   const blob = await response.blob()
   const fileName = decodeHeaderValue(response.headers.get('x-file-name')) || '生词合集.pdf'
-  downloadBlob(blob, fileName)
+  await saveBlobToTarget(blob, fileName, target)
 }
 
 export async function downloadVocabularyDictationTaskPdf(
   taskId: string,
   kind: 'cards' | 'dictation' | 'answer' | 'word-search',
+  target: FileSaveTarget = directDownloadTarget(),
 ): Promise<void> {
   const response = await fetch(
     `/api/vocabulary/dictation-tasks/${encodeURIComponent(taskId)}/pdf?kind=${encodeURIComponent(kind)}`,
@@ -819,12 +811,13 @@ export async function downloadVocabularyDictationTaskPdf(
   }
   const blob = await response.blob()
   const fileName = decodeHeaderValue(response.headers.get('x-file-name')) || '综合听写.pdf'
-  downloadBlob(blob, fileName)
+  await saveBlobToTarget(blob, fileName, target)
 }
 
 export async function downloadVocabularyDictationTaskMaterialsZip(
   taskIds: string[],
   kinds: Array<'cards' | 'dictation' | 'answer'>,
+  target: FileSaveTarget = directDownloadTarget(),
 ): Promise<void> {
   const response = await fetch('/api/vocabulary/dictation-task-materials.zip', {
     method: 'POST',
@@ -841,7 +834,7 @@ export async function downloadVocabularyDictationTaskMaterialsZip(
   }
   const blob = await response.blob()
   const fileName = decodeHeaderValue(response.headers.get('x-file-name')) || '错词复听写-资料.zip'
-  downloadBlob(blob, fileName)
+  await saveBlobToTarget(blob, fileName, target)
 }
 
 export async function getPublicVocabularyDictationSet(

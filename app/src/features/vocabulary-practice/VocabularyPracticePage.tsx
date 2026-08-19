@@ -1,8 +1,9 @@
-import { ArrowLeft, ArrowRight, BookMarked, Check, Download, Grid2X2, RotateCcw, Search, Volume2 } from 'lucide-react'
+import { ArrowLeft, ArrowRight, BookMarked, Check, Download, Grid2X2, RotateCcw, Save, Search, Volume2 } from 'lucide-react'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import type { VocabularySetDto } from '../../services/vocabulary'
 import { downloadVocabularySetPdf, getVocabularySet } from '../../services/vocabulary'
+import { prepareFileSaveTarget, type FileSaveMode } from '../../services/fileDownload.ts'
 import {
   getVocabularyAudioPath,
   readVocabularyAudioAccent,
@@ -157,14 +158,20 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
     })
   }
 
-  async function downloadWordSearchPaper() {
+  async function downloadWordSearchPaper(mode: FileSaveMode = 'download') {
     if (!vocabularySet || paperDownloadBusy) return
-    setPaperDownloadBusy(true)
     setPaperDownloadError('')
     try {
-      await downloadVocabularySetPdf(vocabularySet.id, accent, 'word-search')
+      const target = await prepareFileSaveTarget({
+        mode,
+        suggestedName: `${vocabularySet.title || '生词组'}-圈词与拼写-${accent === 'american' ? '美音' : '英音'}.pdf`,
+        mimeType: 'application/pdf',
+      })
+      if (!target) return
+      setPaperDownloadBusy(true)
+      await downloadVocabularySetPdf(vocabularySet.id, accent, 'word-search', target)
     } catch (error) {
-      setPaperDownloadError(error instanceof Error ? error.message : '圈词练习纸暂时无法下载，请稍后重试。')
+      setPaperDownloadError(error instanceof Error ? error.message : mode === 'save-as' ? '圈词练习纸另存为失败，请稍后重试。' : '圈词练习纸暂时无法下载，请稍后重试。')
     } finally {
       setPaperDownloadBusy(false)
     }
@@ -212,11 +219,18 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
 
             <div className="vocabulary-practice-modes" aria-label="趣味练习方式">
               <span aria-current="page"><Grid2X2 size={17} aria-hidden="true" /><strong>翻牌消消乐</strong><small>当前练习</small></span>
-              <button type="button" onClick={() => void downloadWordSearchPaper()} disabled={paperDownloadBusy}>
-                {paperDownloadBusy ? <Download size={17} aria-hidden="true" /> : <Search size={17} aria-hidden="true" />}
-                <strong>{paperDownloadBusy ? '正在生成…' : '圈词与拼写'}</strong>
-                <small>下载纸质练习</small>
-              </button>
+              <div className="vocabulary-practice-download-actions">
+                <button type="button" onClick={() => void downloadWordSearchPaper()} disabled={paperDownloadBusy}>
+                  {paperDownloadBusy ? <Download size={17} aria-hidden="true" /> : <Search size={17} aria-hidden="true" />}
+                  <strong>{paperDownloadBusy ? '正在生成…' : '圈词与拼写'}</strong>
+                  <small>下载纸质练习</small>
+                </button>
+                <button type="button" onClick={() => void downloadWordSearchPaper('save-as')} disabled={paperDownloadBusy}>
+                  <Save size={17} aria-hidden="true" />
+                  <strong>另存为…</strong>
+                  <small>自选位置</small>
+                </button>
+              </div>
             </div>
             {paperDownloadError && <p className="vocabulary-practice-paper-error" role="alert">{paperDownloadError}</p>}
 
