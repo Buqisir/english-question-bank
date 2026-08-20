@@ -276,12 +276,24 @@ export type StudentVocabularyReviewStateDto = VocabularySetEntry & {
   reason?: string
 }
 
+export type VocabularyMaterialKind = 'cards' | 'dictation' | 'answer' | 'word-search' | 'handwriting'
+export type VocabularyHandwritingMode = 'standard' | 'single'
+
+export const VOCABULARY_MATERIAL_KINDS: VocabularyMaterialKind[] = [
+  'cards',
+  'dictation',
+  'answer',
+  'word-search',
+  'handwriting',
+]
+
 export type VocabularyPrintJobDto = {
   vocabularySet: VocabularySetDto
   sections: Array<{ startIndex: number; title: string }>
   shareKind: 'listen' | 'dictation' | null
   accent: 'american' | 'british'
-  kind: 'cards' | 'dictation' | 'answer' | 'word-search'
+  kind: VocabularyMaterialKind
+  handwritingMode?: VocabularyHandwritingMode
 }
 
 export class VocabularyApiError extends Error {
@@ -745,12 +757,19 @@ function decodeHeaderValue(value: string | null): string {
 export async function downloadVocabularySetPdf(
   setId: string,
   accent: 'american' | 'british',
-  kind: 'cards' | 'dictation' | 'answer' | 'word-search' = 'cards',
+  kind: VocabularyMaterialKind = 'cards',
   target: FileSaveTarget = directDownloadTarget(),
+  entryIds?: string[],
+  handwritingMode?: VocabularyHandwritingMode,
 ): Promise<void> {
+  const hasBody = Boolean(entryIds || handwritingMode)
   const response = await fetch(
     `/api/vocabulary/sets/${encodeURIComponent(setId)}/pdf?accent=${encodeURIComponent(accent)}&kind=${encodeURIComponent(kind)}`,
-    { method: 'POST' },
+    {
+      method: 'POST',
+      headers: hasBody ? { Accept: 'application/json', 'Content-Type': 'application/json' } : undefined,
+      body: hasBody ? JSON.stringify({ selectedEntryIds: entryIds, handwritingMode }) : undefined,
+    },
   )
   if (!response.ok) {
     const body = await readJson(response)
@@ -770,9 +789,11 @@ export async function downloadCombinedVocabularyPdf(input: {
   title: string
   sourceSetIds?: string[]
   entryIds?: string[]
+  selectedEntryIds?: string[]
+  handwritingMode?: VocabularyHandwritingMode
   mode?: 'dedupe' | 'grouped'
   accent: 'american' | 'british'
-  kind: 'cards' | 'dictation' | 'answer' | 'word-search'
+  kind: VocabularyMaterialKind
 }, target: FileSaveTarget = directDownloadTarget()): Promise<void> {
   const response = await fetch('/api/vocabulary/combined-pdf', {
     method: 'POST',
@@ -794,12 +815,19 @@ export async function downloadCombinedVocabularyPdf(input: {
 
 export async function downloadVocabularyDictationTaskPdf(
   taskId: string,
-  kind: 'cards' | 'dictation' | 'answer' | 'word-search',
+  kind: VocabularyMaterialKind,
   target: FileSaveTarget = directDownloadTarget(),
+  entryIds?: string[],
+  handwritingMode?: VocabularyHandwritingMode,
 ): Promise<void> {
+  const hasBody = Boolean(entryIds || handwritingMode)
   const response = await fetch(
     `/api/vocabulary/dictation-tasks/${encodeURIComponent(taskId)}/pdf?kind=${encodeURIComponent(kind)}`,
-    { method: 'POST' },
+    {
+      method: 'POST',
+      headers: hasBody ? { Accept: 'application/json', 'Content-Type': 'application/json' } : undefined,
+      body: hasBody ? JSON.stringify({ selectedEntryIds: entryIds, handwritingMode }) : undefined,
+    },
   )
   if (!response.ok) {
     const body = await readJson(response)
@@ -816,7 +844,7 @@ export async function downloadVocabularyDictationTaskPdf(
 
 export async function downloadVocabularyDictationTaskMaterialsZip(
   taskIds: string[],
-  kinds: Array<'cards' | 'dictation' | 'answer'>,
+  kinds: VocabularyMaterialKind[] = VOCABULARY_MATERIAL_KINDS,
   target: FileSaveTarget = directDownloadTarget(),
 ): Promise<void> {
   const response = await fetch('/api/vocabulary/dictation-task-materials.zip', {
@@ -835,6 +863,61 @@ export async function downloadVocabularyDictationTaskMaterialsZip(
   const blob = await response.blob()
   const fileName = decodeHeaderValue(response.headers.get('x-file-name')) || '错词复听写-资料.zip'
   await saveBlobToTarget(blob, fileName, target)
+}
+
+async function downloadVocabularyMaterialsZip(
+  path: string,
+  input: Record<string, unknown>,
+  fallbackName: string,
+  target: FileSaveTarget,
+) {
+  const response = await fetch(path, {
+    method: 'POST',
+    headers: { Accept: 'application/zip', 'Content-Type': 'application/json' },
+    body: JSON.stringify(input),
+  })
+  if (!response.ok) {
+    const body = await readJson(response)
+    throw new VocabularyApiError(
+      typeof body.message === 'string' ? body.message : '词汇资料包暂时无法生成，请重试。',
+      response.status,
+      typeof body.error === 'string' ? body.error : undefined,
+    )
+  }
+  const blob = await response.blob()
+  const fileName = decodeHeaderValue(response.headers.get('x-file-name')) || fallbackName
+  await saveBlobToTarget(blob, fileName, target)
+}
+
+export async function downloadVocabularySetMaterialsZip(
+  setId: string,
+  accent: 'american' | 'british',
+  target: FileSaveTarget = directDownloadTarget(),
+  kinds: VocabularyMaterialKind[] = VOCABULARY_MATERIAL_KINDS,
+) {
+  await downloadVocabularyMaterialsZip(
+    `/api/vocabulary/sets/${encodeURIComponent(setId)}/materials.zip`,
+    { accent, kinds },
+    '生词组-全套资料.zip',
+    target,
+  )
+}
+
+export async function downloadCombinedVocabularyMaterialsZip(input: {
+  studentId: string
+  title: string
+  sourceSetIds?: string[]
+  entryIds?: string[]
+  mode?: 'dedupe' | 'grouped'
+  accent: 'american' | 'british'
+  kinds?: VocabularyMaterialKind[]
+}, target: FileSaveTarget = directDownloadTarget()) {
+  await downloadVocabularyMaterialsZip(
+    '/api/vocabulary/combined-materials.zip',
+    { ...input, programId: 'wanwei-round-one-v1', kinds: input.kinds ?? VOCABULARY_MATERIAL_KINDS },
+    '生词合集-全套资料.zip',
+    target,
+  )
 }
 
 export async function getPublicVocabularyDictationSet(

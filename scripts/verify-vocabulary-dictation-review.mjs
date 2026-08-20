@@ -564,14 +564,14 @@ assert.match(
 )
 assert.match(
   workbenchSource,
-  /downloadTaskMaterial\(task, 'dictation'\)[\s\S]{0,240}复听写纸（含二维码）/u,
-  '已生成任务必须提供右上角带二维码的复听写纸',
+  /downloadTaskMaterial\(task, 'dictation'\)[\s\S]{0,240}听写纸（含二维码）/u,
+  '已生成任务必须提供右上角带二维码的听写纸',
 )
-assert.match(workbenchSource, /下载资料[\s\S]{0,900}单词卡（含二维码）[\s\S]{0,900}复听写纸（含二维码）[\s\S]{0,900}教师答案/u, '三个下载项必须收进一个下载资料菜单')
+assert.match(workbenchSource, /function renderTaskDownloadOptions[\s\S]{0,2400}单词卡（含二维码）[\s\S]{0,900}听写纸（含二维码）[\s\S]{0,900}教师答案[\s\S]{0,900}圈词与拼写[\s\S]{0,900}衡水体练字纸[\s\S]{0,900}下载全套/u, '五类资料与全套下载必须收进同一个下载资料菜单')
 assert.match(workbenchSource, /已选 \{selectedReviewWords\.length\} 词[\s\S]{0,600}生成错词听写[\s\S]{0,600}复制清单[\s\S]{0,600}取消/u, '错词选择栏只保留生成听写、复制和取消')
 assert.doesNotMatch(workbenchSource, /订正纸|带二维码听写纸|二维码任务/u, '工作台不得保留旧术语或重复入口')
 assert.match(workbenchSource, /错词资料（\{selectedGroupReviewWords\.length\}词）/u, '词组多选工具必须直接显示当前错词数量')
-assert.match(workbenchSource, /合并去重[\s\S]{0,500}按组装订[\s\S]{0,500}记忆卡[\s\S]{0,500}复听写纸[\s\S]{0,500}教师答案[\s\S]{0,500}下载全套/u, '错词资料必须提供两种版式和四个精简下载动作')
+assert.match(workbenchSource, /合并去重[\s\S]{0,500}按组装订[\s\S]{0,500}单词卡[\s\S]{0,500}听写纸[\s\S]{0,500}教师答案[\s\S]{0,500}圈词与拼写[\s\S]{0,500}衡水体练字纸[\s\S]{0,500}下载全套/u, '错词资料必须提供两种版式、五类单份资料和全套下载')
 assert.match(workbenchSource, /暂无错词/u, '所选词组无当前错词时必须显示明确禁用态')
 assert.doesNotMatch(workbenchSource, /查看组内错词/u, '词组错词资料不得再要求老师跳转错词页')
 assert.match(workbenchSource, /createVocabularySetErrorTasks\([\s\S]{0,500}materialLayout: errorMaterialLayout/u, '错词资料必须由服务端重新计算并冻结版式')

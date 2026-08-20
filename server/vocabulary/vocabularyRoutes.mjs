@@ -1,5 +1,6 @@
 import { defineRoute } from '../router/index.mjs'
 import archiver from 'archiver'
+import { readFileSync } from 'node:fs'
 import {
   createVocabularyPrintJob,
   deleteVocabularyPrintJob,
@@ -57,6 +58,9 @@ import {
   voidVocabularyDictationRecord,
   voidVocabularyMeaningRecallRecord,
 } from './vocabularyStore.mjs'
+
+const VOCABULARY_MATERIAL_KINDS = ['cards', 'dictation', 'answer', 'word-search', 'handwriting']
+const HENGSHUI_FONT_BYTES = readFileSync(new URL('./assets/shuyao-hengshui.ttf', import.meta.url))
 
 function decodePathPart(raw) {
   try {
@@ -134,7 +138,91 @@ function sendVocabularyZipHeaders(response, fileName) {
   })
 }
 
-function vocabularyPdfFileName(title, entryCount, accent, kind = 'cards') {
+function isVocabularyMaterialKind(kind) {
+  return VOCABULARY_MATERIAL_KINDS.includes(kind)
+}
+
+function readVocabularyMaterialKinds(input) {
+  const kinds = Array.isArray(input.kinds)
+    ? [...new Set(input.kinds.map((value) => String(value ?? '').trim()).filter(Boolean))]
+    : []
+  if (!kinds.length || kinds.some((kind) => !isVocabularyMaterialKind(kind))) {
+    throw new VocabularyStoreError('资料包类型无效。', 400, 'invalid_vocabulary_bundle_kinds')
+  }
+  return kinds
+}
+
+function selectVocabularyPrintEntries(payload, rawEntryIds) {
+  if (!Array.isArray(rawEntryIds)) return payload
+  const selectedEntryIds = [...new Set(rawEntryIds.map((value) => String(value ?? '').trim()).filter(Boolean))]
+  if (!selectedEntryIds.length || selectedEntryIds.length > 3000) {
+    throw new VocabularyStoreError('练字纸必须选择1–3000个单词。', 400, 'invalid_vocabulary_handwriting_selection')
+  }
+  const requested = new Set(selectedEntryIds)
+  const sourceEntries = payload.vocabularySet.entries
+  const seen = new Set()
+  const selectedEntries = sourceEntries.filter((entry) => {
+    if (!requested.has(entry.id) || seen.has(entry.id)) return false
+    seen.add(entry.id)
+    return true
+  })
+  if (selectedEntries.length !== requested.size) {
+    throw new VocabularyStoreError('练字纸所选单词不属于当前资料。', 400, 'invalid_vocabulary_handwriting_entries')
+  }
+  const sourceSections = payload.sections?.length
+    ? payload.sections
+    : [{ startIndex: 0, title: payload.vocabularySet.title }]
+  const sections = []
+  let activeTitle = null
+  const sectioned = new Set()
+  sourceEntries.forEach((entry, sourceIndex) => {
+    if (!requested.has(entry.id) || sectioned.has(entry.id)) return
+    sectioned.add(entry.id)
+    const sourceSection = [...sourceSections].reverse().find((section) => section.startIndex <= sourceIndex)
+    const title = sourceSection?.title || payload.vocabularySet.title
+    if (title !== activeTitle) {
+      activeTitle = title
+      sections.push({ startIndex: selectedEntries.findIndex((selected) => selected.id === entry.id), title })
+    }
+  })
+  return {
+    ...payload,
+    vocabularySet: {
+      ...payload.vocabularySet,
+      entryCount: selectedEntries.length,
+      entries: selectedEntries,
+    },
+    sections,
+  }
+}
+
+function buildVocabularySetPrintPayload(vocabularySet, accent) {
+  return {
+    vocabularySet,
+    sections: [{ startIndex: 0, title: vocabularySet.title }],
+    accent,
+    materialLayout: 'dedupe',
+  }
+}
+
+function readVocabularyHandwritingMode(rawMode) {
+  if (rawMode === undefined || rawMode === null || rawMode === '') return 'standard'
+  if (rawMode === 'standard' || rawMode === 'single') return rawMode
+  throw new VocabularyStoreError('练字方式无效。', 400, 'invalid_vocabulary_handwriting_mode')
+}
+
+async function readOptionalVocabularyPrintOptions(request, context) {
+  if (!String(request.headers['content-type'] ?? '').includes('application/json')) {
+    return { selectedEntryIds: null, handwritingMode: 'standard' }
+  }
+  const input = await context.readJsonBody(request, { maxBytes: 100_000 })
+  return {
+    selectedEntryIds: input.selectedEntryIds,
+    handwritingMode: readVocabularyHandwritingMode(input.handwritingMode),
+  }
+}
+
+function vocabularyPdfFileName(title, entryCount, accent, kind = 'cards', handwritingMode = 'standard') {
   const safeTitle = String(title ?? '')
     .replace(/[\\/:*?"<>|]/gu, ' ')
     .replace(/[\p{Cc}\p{Cf}]/gu, '')
@@ -150,13 +238,89 @@ function vocabularyPdfFileName(title, entryCount, accent, kind = 'cards') {
     return `${exportTitle}-听写纸-${entryCount}词-${accent === 'american' ? '美式' : '英式'}.pdf`
   }
   if (kind === 'word-search') return `${exportTitle}-圈词与拼写-${entryCount}词.pdf`
+  if (kind === 'handwriting') {
+    return `${exportTitle}-衡水体练字纸${handwritingMode === 'single' ? '-每词1遍' : ''}-${entryCount}词.pdf`
+  }
   return `${safeTitle}${countSuffix}-${accent === 'american' ? '美式' : '英式'}.pdf`
 }
 
-function expectedVocabularyPrintPages(entryCount, kind) {
+function expectedVocabularyPrintPages(entryCount, kind, handwritingMode = 'standard') {
   if (kind === 'word-search') return Math.ceil(entryCount / 10) * 2
   if (kind === 'cards') return Math.ceil(entryCount / 6)
+  if (kind === 'handwriting') return Math.ceil(entryCount / (handwritingMode === 'single' ? 10 : 7))
   return Math.ceil(entryCount / 15)
+}
+
+async function streamVocabularyMaterialBundle({
+  request,
+  response,
+  context,
+  userId,
+  payloads,
+  kinds,
+  zipFileName,
+}) {
+  sendVocabularyZipHeaders(response, zipFileName)
+  const archive = archiver('zip', { zlib: { level: 9 } })
+  let activePrintJobId = null
+  let archiveError = null
+  let clientDisconnected = false
+  archive.once('error', (error) => { archiveError = error })
+  response.once('close', () => {
+    if (response.writableEnded) return
+    clientDisconnected = true
+    archive.abort()
+  })
+  archive.on('warning', (warning) => {
+    if (warning.code !== 'ENOENT') archive.emit('error', warning)
+  })
+  archive.pipe(response)
+  try {
+    renderMaterials:
+    for (const payload of payloads) {
+      for (const kind of kinds) {
+        if (clientDisconnected) break renderMaterials
+        if (archiveError) throw archiveError
+        activePrintJobId = createVocabularyPrintJob(userId, {
+          ...payload,
+          kind,
+          shareKind: kind === 'cards' ? 'listen' : kind === 'dictation' ? 'dictation' : null,
+        })
+        try {
+          const hasQr = payload.vocabularySet.share?.status === 'active' && ['cards', 'dictation'].includes(kind)
+          const result = await context.renderVocabularySetPdf({
+            cookie: request.headers.cookie ?? '',
+            printJobId: activePrintJobId,
+            accent: payload.accent,
+            kind,
+            expectedPageCount: payload.materialLayout === 'grouped'
+              ? undefined
+              : expectedVocabularyPrintPages(payload.vocabularySet.entryCount, kind),
+            expectedQrCount: hasQr ? 1 : 0,
+          })
+          if (clientDisconnected) break renderMaterials
+          if (archiveError) throw archiveError
+          archive.append(Buffer.from(result.pdfBytes), {
+            name: vocabularyPdfFileName(
+              payload.vocabularySet.title,
+              payload.vocabularySet.entryCount,
+              payload.accent,
+              kind,
+            ),
+          })
+        } finally {
+          deleteVocabularyPrintJob(activePrintJobId)
+          activePrintJobId = null
+        }
+      }
+    }
+    if (clientDisconnected) return
+    if (archiveError) throw archiveError
+    await archive.finalize()
+  } catch (error) {
+    if (activePrintJobId) deleteVocabularyPrintJob(activePrintJobId)
+    throw error
+  }
 }
 
 export function createVocabularyRoutes() {
@@ -353,23 +517,37 @@ export function createVocabularyRoutes() {
       context.sendJson(response, 200, { printJob })
     }),
 
+    defineRoute('GET', /^\/api\/vocabulary\/print-assets\/hengshui\.ttf$/, ({ response, context }) => {
+      context.resolveDataUserId(context)
+      response.writeHead(200, {
+        'cache-control': 'private, max-age=86400',
+        'content-length': HENGSHUI_FONT_BYTES.length,
+        'content-type': 'font/ttf',
+      })
+      response.end(HENGSHUI_FONT_BYTES)
+    }),
+
     defineRoute('POST', /^\/api\/vocabulary\/combined-pdf$/, async ({ request, response, context }) => {
       const userId = context.resolveDataUserId(context)
       const input = await context.readJsonBody(request, { maxBytes: 100_000 })
       const accent = input.accent
       const kind = input.kind
+      const handwritingMode = readVocabularyHandwritingMode(input.handwritingMode)
       if (accent !== 'american' && accent !== 'british') {
         context.sendJson(response, 400, { error: 'invalid_vocabulary_accent', message: '合并打印必须选择英式或美式。' })
         return
       }
-      if (!['cards', 'dictation', 'answer', 'word-search'].includes(kind)) {
+      if (!isVocabularyMaterialKind(kind)) {
         context.sendJson(response, 400, { error: 'invalid_vocabulary_pdf_kind', message: '下载类型无效。' })
         return
       }
       let printJobId = null
       try {
-        const payload = withUserDb(context, false, (db) => buildCombinedVocabularyPrintPayload(db, userId, input))
-        printJobId = createVocabularyPrintJob(userId, { ...payload, accent, kind })
+        const payload = selectVocabularyPrintEntries(
+          withUserDb(context, false, (db) => buildCombinedVocabularyPrintPayload(db, userId, input)),
+          input.selectedEntryIds,
+        )
+        printJobId = createVocabularyPrintJob(userId, { ...payload, accent, kind, handwritingMode })
         const result = await context.renderVocabularySetPdf({
           cookie: request.headers.cookie ?? '',
           printJobId,
@@ -377,18 +555,44 @@ export function createVocabularyRoutes() {
           kind,
           expectedPageCount: input.mode === 'grouped'
             ? undefined
-            : expectedVocabularyPrintPages(payload.vocabularySet.entryCount, kind),
+            : expectedVocabularyPrintPages(payload.vocabularySet.entryCount, kind, handwritingMode),
           expectedQrCount: 0,
         })
         sendVocabularyPdf(
           response,
           result.pdfBytes,
-          vocabularyPdfFileName(payload.vocabularySet.title, payload.vocabularySet.entryCount, accent, kind),
+          vocabularyPdfFileName(payload.vocabularySet.title, payload.vocabularySet.entryCount, accent, kind, handwritingMode),
         )
       } catch (error) {
         sendVocabularyError(response, context, error)
       } finally {
         if (printJobId) deleteVocabularyPrintJob(printJobId)
+      }
+    }),
+
+    defineRoute('POST', /^\/api\/vocabulary\/combined-materials\.zip$/, async ({ request, response, context }) => {
+      const userId = context.resolveDataUserId(context)
+      const input = await context.readJsonBody(request, { maxBytes: 100_000 })
+      if (input.accent !== 'american' && input.accent !== 'british') {
+        context.sendJson(response, 400, { error: 'invalid_vocabulary_accent', message: '资料包必须选择英式或美式。' })
+        return
+      }
+      try {
+        const kinds = readVocabularyMaterialKinds(input)
+        const payload = withUserDb(context, false, (db) => buildCombinedVocabularyPrintPayload(db, userId, input))
+        const zipFileName = `${String(payload.vocabularySet.title || '生词合集').replace(/[\\/:*?"<>|]/gu, ' ')}-全套资料.zip`
+        await streamVocabularyMaterialBundle({
+          request,
+          response,
+          context,
+          userId,
+          payloads: [{ ...payload, accent: input.accent }],
+          kinds,
+          zipFileName,
+        })
+      } catch (error) {
+        if (response.headersSent) response.destroy(error instanceof Error ? error : new Error('生词资料包生成失败。'))
+        else sendVocabularyError(response, context, error)
       }
     }),
 
@@ -565,20 +769,25 @@ export function createVocabularyRoutes() {
     defineRoute('POST', /^\/api\/vocabulary\/dictation-tasks\/([^/]+)\/pdf$/, async ({ request, response, match, context }) => {
       const userId = context.resolveDataUserId(context)
       const kind = readQuery(request).get('kind') ?? 'dictation'
-      if (!['cards', 'dictation', 'answer', 'word-search'].includes(kind)) {
+      if (!isVocabularyMaterialKind(kind)) {
         context.sendJson(response, 400, { error: 'invalid_vocabulary_pdf_kind', message: '下载类型无效。' })
         return
       }
       let printJobId = null
       try {
-        const payload = withUserDb(context, false, (db) => buildVocabularyDictationTaskPrintPayload(
-          db,
-          userId,
-          decodePathPart(match[1]),
-        ))
+        const { selectedEntryIds, handwritingMode } = await readOptionalVocabularyPrintOptions(request, context)
+        const payload = selectVocabularyPrintEntries(
+          withUserDb(context, false, (db) => buildVocabularyDictationTaskPrintPayload(
+            db,
+            userId,
+            decodePathPart(match[1]),
+          )),
+          selectedEntryIds,
+        )
         printJobId = createVocabularyPrintJob(userId, {
           ...payload,
           kind,
+          handwritingMode,
           shareKind: kind === 'cards' ? 'listen' : kind === 'dictation' ? 'dictation' : null,
         })
         const hasQr = payload.vocabularySet.share?.status === 'active' && ['cards', 'dictation'].includes(kind)
@@ -589,13 +798,13 @@ export function createVocabularyRoutes() {
           kind,
           expectedPageCount: payload.materialLayout === 'grouped'
             ? undefined
-            : expectedVocabularyPrintPages(payload.vocabularySet.entryCount, kind),
+            : expectedVocabularyPrintPages(payload.vocabularySet.entryCount, kind, handwritingMode),
           expectedQrCount: hasQr ? 1 : 0,
         })
         sendVocabularyPdf(
           response,
           result.pdfBytes,
-          vocabularyPdfFileName(payload.vocabularySet.title, payload.vocabularySet.entryCount, payload.accent, kind),
+          vocabularyPdfFileName(payload.vocabularySet.title, payload.vocabularySet.entryCount, payload.accent, kind, handwritingMode),
         )
       } catch (error) {
         sendVocabularyError(response, context, error)
@@ -610,19 +819,12 @@ export function createVocabularyRoutes() {
       const taskIds = Array.isArray(input.taskIds)
         ? [...new Set(input.taskIds.map((value) => String(value ?? '').trim()).filter(Boolean))]
         : []
-      const kinds = Array.isArray(input.kinds)
-        ? [...new Set(input.kinds.map((value) => String(value ?? '').trim()).filter(Boolean))]
-        : []
       if (!taskIds.length || taskIds.length > 30) {
         context.sendJson(response, 400, { error: 'invalid_vocabulary_bundle_tasks', message: '资料包必须包含1–30份听写任务。' })
         return
       }
-      if (!kinds.length || kinds.some((kind) => !['cards', 'dictation', 'answer'].includes(kind))) {
-        context.sendJson(response, 400, { error: 'invalid_vocabulary_bundle_kinds', message: '资料包类型无效。' })
-        return
-      }
-      let activePrintJobId = null
       try {
+        const kinds = readVocabularyMaterialKinds(input)
         const payloads = withUserDb(context, false, (db) => taskIds.map((taskId) => (
           buildVocabularyDictationTaskPrintPayload(db, userId, taskId)
         )))
@@ -632,65 +834,8 @@ export function createVocabularyRoutes() {
         }
         const firstTitle = payloads[0].vocabularySet.title.replace(/（\d+\/\d+）$/u, '').trim()
         const zipFileName = `${firstTitle || '错词复听写'}-资料.zip`
-        sendVocabularyZipHeaders(response, zipFileName)
-        const archive = archiver('zip', { zlib: { level: 9 } })
-        let archiveError = null
-        let clientDisconnected = false
-        archive.once('error', (error) => {
-          archiveError = error
-        })
-        response.once('close', () => {
-          if (response.writableEnded) return
-          clientDisconnected = true
-          archive.abort()
-        })
-        archive.on('warning', (warning) => {
-          if (warning.code !== 'ENOENT') archive.emit('error', warning)
-        })
-        archive.pipe(response)
-        renderMaterials:
-        for (const payload of payloads) {
-          for (const kind of kinds) {
-            if (clientDisconnected) break renderMaterials
-            if (archiveError) throw archiveError
-            activePrintJobId = createVocabularyPrintJob(userId, {
-              ...payload,
-              kind,
-              shareKind: kind === 'cards' ? 'listen' : kind === 'dictation' ? 'dictation' : null,
-            })
-            try {
-              const hasQr = payload.vocabularySet.share?.status === 'active' && ['cards', 'dictation'].includes(kind)
-              const result = await context.renderVocabularySetPdf({
-                cookie: request.headers.cookie ?? '',
-                printJobId: activePrintJobId,
-                accent: payload.accent,
-                kind,
-                expectedPageCount: payload.materialLayout === 'grouped'
-                  ? undefined
-                  : expectedVocabularyPrintPages(payload.vocabularySet.entryCount, kind),
-                expectedQrCount: hasQr ? 1 : 0,
-              })
-              if (clientDisconnected) break renderMaterials
-              if (archiveError) throw archiveError
-              archive.append(Buffer.from(result.pdfBytes), {
-                name: vocabularyPdfFileName(
-                  payload.vocabularySet.title,
-                  payload.vocabularySet.entryCount,
-                  payload.accent,
-                  kind,
-                ),
-              })
-            } finally {
-              deleteVocabularyPrintJob(activePrintJobId)
-              activePrintJobId = null
-            }
-          }
-        }
-        if (clientDisconnected) return
-        if (archiveError) throw archiveError
-        await archive.finalize()
+        await streamVocabularyMaterialBundle({ request, response, context, userId, payloads, kinds, zipFileName })
       } catch (error) {
-        if (activePrintJobId) deleteVocabularyPrintJob(activePrintJobId)
         if (response.headersSent) {
           response.destroy(error instanceof Error ? error : new Error('错词资料包生成失败。'))
         } else {
@@ -903,10 +1048,11 @@ export function createVocabularyRoutes() {
         context.sendJson(response, 400, { error: 'invalid_vocabulary_accent', message: '单词纸音标必须选择英式或美式。' })
         return
       }
-      if (!['cards', 'dictation', 'answer', 'word-search'].includes(kind)) {
+      if (!isVocabularyMaterialKind(kind)) {
         context.sendJson(response, 400, { error: 'invalid_vocabulary_pdf_kind', message: '下载类型无效。' })
         return
       }
+      let printJobId = null
       try {
         const vocabularySet = withUserDb(context, true, (db) =>
           getVocabularySet(db, userId, decodePathPart(match[1])))
@@ -917,22 +1063,67 @@ export function createVocabularyRoutes() {
             'vocabulary_share_required',
           )
         }
+        const { selectedEntryIds, handwritingMode } = await readOptionalVocabularyPrintOptions(request, context)
+        const payload = selectVocabularyPrintEntries(buildVocabularySetPrintPayload(vocabularySet, accent), selectedEntryIds)
+        if (selectedEntryIds || handwritingMode !== 'standard') {
+          printJobId = createVocabularyPrintJob(userId, {
+            ...payload,
+            kind,
+            handwritingMode,
+            shareKind: kind === 'cards' ? 'listen' : kind === 'dictation' ? 'dictation' : null,
+          })
+        }
         const result = await context.renderVocabularySetPdf({
           cookie: request.headers.cookie ?? '',
-          setId: vocabularySet.id,
+          ...(printJobId ? { printJobId } : { setId: vocabularySet.id }),
           accent,
           kind,
-          expectedPageCount: kind === 'word-search'
-            ? Math.ceil(vocabularySet.entryCount / 10) * 2
-            : Math.ceil(vocabularySet.entryCount / (kind === 'cards' ? 6 : 15)),
+          expectedPageCount: expectedVocabularyPrintPages(payload.vocabularySet.entryCount, kind, handwritingMode),
         })
         sendVocabularyPdf(
           response,
           result.pdfBytes,
-          vocabularyPdfFileName(vocabularySet.title, vocabularySet.entryCount, accent, kind),
+          vocabularyPdfFileName(payload.vocabularySet.title, payload.vocabularySet.entryCount, accent, kind, handwritingMode),
         )
       } catch (error) {
         sendVocabularyError(response, context, error)
+      } finally {
+        if (printJobId) deleteVocabularyPrintJob(printJobId)
+      }
+    }),
+
+    defineRoute('POST', /^\/api\/vocabulary\/sets\/([^/]+)\/materials\.zip$/, async ({ request, response, match, context }) => {
+      const userId = context.resolveDataUserId(context)
+      const input = await context.readJsonBody(request, { maxBytes: 40_000 })
+      if (input.accent !== 'american' && input.accent !== 'british') {
+        context.sendJson(response, 400, { error: 'invalid_vocabulary_accent', message: '资料包必须选择英式或美式。' })
+        return
+      }
+      try {
+        const kinds = readVocabularyMaterialKinds(input)
+        const vocabularySet = withUserDb(context, true, (db) =>
+          getVocabularySet(db, userId, decodePathPart(match[1])))
+        if (kinds.some((kind) => ['cards', 'dictation'].includes(kind)) && vocabularySet.share?.status !== 'active') {
+          throw new VocabularyStoreError(
+            '请先生成二维码，再下载全套资料。',
+            409,
+            'vocabulary_share_required',
+          )
+        }
+        const payload = buildVocabularySetPrintPayload(vocabularySet, input.accent)
+        const safeTitle = String(vocabularySet.title || '生词组').replace(/[\\/:*?"<>|]/gu, ' ')
+        await streamVocabularyMaterialBundle({
+          request,
+          response,
+          context,
+          userId,
+          payloads: [payload],
+          kinds,
+          zipFileName: `${safeTitle}-全套资料.zip`,
+        })
+      } catch (error) {
+        if (response.headersSent) response.destroy(error instanceof Error ? error : new Error('生词资料包生成失败。'))
+        else sendVocabularyError(response, context, error)
       }
     }),
 

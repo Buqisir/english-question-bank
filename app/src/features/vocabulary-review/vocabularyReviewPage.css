@@ -1016,7 +1016,7 @@
 
 .vocabulary-download-menu > #vocabulary-download-options {
   position: absolute;
-  top: calc(100% + 8px);
+  bottom: calc(100% + 8px);
   left: 50%;
   z-index: 30;
   display: grid;
@@ -1034,6 +1034,12 @@
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: stretch;
   gap: 2px;
+}
+
+.vocabulary-download-option.is-bundle {
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px solid var(--line);
 }
 
 .vocabulary-download-menu > #vocabulary-download-options button {
@@ -1055,6 +1061,11 @@
 
 .vocabulary-download-option > button:first-child {
   display: grid;
+}
+
+.vocabulary-download-option > button:first-child strong {
+  font-weight: 650;
+  white-space: nowrap;
 }
 
 .vocabulary-download-menu > #vocabulary-download-options button:hover {

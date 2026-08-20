@@ -33,6 +33,7 @@ import {
   decideVocabularyReviewRun,
   discardVocabularyReviewRun,
   downloadVocabularySetPdf,
+  downloadVocabularySetMaterialsZip,
   freezeVocabularyReviewRun,
   getVocabularyProgram as fetchVocabularyProgram,
   getVocabularyProgress,
@@ -49,6 +50,8 @@ import {
   shareVocabularySet,
   undoVocabularyReviewRun,
   VocabularyApiError,
+  VOCABULARY_MATERIAL_KINDS,
+  type VocabularyHandwritingMode,
   type VocabularyReviewRunDto,
   type VocabularyProgramSummaryDto,
   type VocabularySetDto,
@@ -66,6 +69,13 @@ import {
 } from '../vocabulary-listen/vocabularyAudioVariants'
 import { VocabularyWordSearchPrint } from '../vocabulary-practice/VocabularyWordSearchPrint'
 import { buildVocabularyWordSearchPages } from '../vocabulary-practice/vocabularyWordSearch'
+import {
+  HANDWRITING_PRINT_ENTRIES_PER_PAGE,
+  HANDWRITING_SINGLE_ENTRIES_PER_PAGE,
+  VocabularyHandwritingPrint,
+} from '../vocabulary-practice/VocabularyHandwritingPrint'
+import { VocabularyHandwritingSelector } from '../vocabulary-practice/VocabularyHandwritingSelector'
+import '../vocabulary-practice/vocabularyHandwriting.css'
 import './vocabularyReviewPage.css'
 
 const DEFAULT_PROGRAM_ID = 'wanwei-round-one-v1'
@@ -89,7 +99,7 @@ type VocabularyReviewPageProps = {
 }
 
 type VocabularyAccent = VocabularyAudioAccent
-type VocabularyPrintKind = 'cards' | 'dictation' | 'answer' | 'word-search'
+type VocabularyPrintKind = 'cards' | 'dictation' | 'answer' | 'word-search' | 'handwriting'
 type VocabularySetPrintKind = VocabularyPrintKind
 
 const VOCABULARY_DOWNLOAD_OPTIONS: Array<{
@@ -101,6 +111,7 @@ const VOCABULARY_DOWNLOAD_OPTIONS: Array<{
   { kind: 'dictation', label: '听写纸', description: '15题一页，扫码自动听写' },
   { kind: 'answer', label: '教师答案', description: '与听写纸逐题对应' },
   { kind: 'word-search', label: '圈词与拼写', description: '找词、辨形并抄写，内附答案' },
+  { kind: 'handwriting', label: '衡水体练字纸', description: '自选单词，描红后独立书写' },
 ]
 
 type VocabularyPrintRequest = {
@@ -125,7 +136,9 @@ function readVocabularyPrintRequest(): VocabularyPrintRequest | null {
         ? 'answer'
         : params.get('vocabularyPrintMode') === 'word-search'
           ? 'word-search'
-          : 'cards',
+          : params.get('vocabularyPrintMode') === 'handwriting'
+            ? 'handwriting'
+            : 'cards',
   }
 }
 
@@ -469,12 +482,14 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   const [printLoadState, setPrintLoadState] = useState<'idle' | 'loading' | 'ready' | 'error'>(printRequest ? 'loading' : 'idle')
   const [printSections, setPrintSections] = useState<Array<{ startIndex: number; title: string }>>([])
   const [printShareKind, setPrintShareKind] = useState<'listen' | 'dictation' | null>(null)
+  const [printHandwritingMode, setPrintHandwritingMode] = useState<VocabularyHandwritingMode>('standard')
   const [pdfDownloadBusy, setPdfDownloadBusy] = useState(false)
   const [downloadMenuOpen, setDownloadMenuOpen] = useState(false)
   const [pendingShareDownload, setPendingShareDownload] = useState<{
-    kind: 'cards' | 'dictation'
+    kind: 'cards' | 'dictation' | 'bundle'
     mode: FileSaveMode
   } | null>(null)
+  const [handwritingSelectionMode, setHandwritingSelectionMode] = useState<FileSaveMode | null>(null)
   const [directVocabularyInput, setDirectVocabularyInput] = useState('')
   const [setTitleInput, setSetTitleInput] = useState('')
   const [progressExplorerOpen, setProgressExplorerOpen] = useState(false)
@@ -515,12 +530,16 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
       printEntries,
       printRequest?.kind === 'word-search'
         ? WORD_SEARCH_PRINT_ENTRIES_PER_PAGE
+        : printRequest?.kind === 'handwriting'
+          ? printHandwritingMode === 'single'
+            ? HANDWRITING_SINGLE_ENTRIES_PER_PAGE
+            : HANDWRITING_PRINT_ENTRIES_PER_PAGE
         : printRequest?.kind === 'dictation' || printRequest?.kind === 'answer'
         ? DICTATION_PRINT_ENTRIES_PER_PAGE
         : CARD_PRINT_ENTRIES_PER_PAGE,
       printSections,
     ),
-    [printEntries, printRequest?.kind, printSections],
+    [printEntries, printHandwritingMode, printRequest?.kind, printSections],
   )
   const wordSearchPages = useMemo(
     () => {
@@ -657,6 +676,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
             setPrintSections(printJob.sections)
             setPrintShareKind(printJob.shareKind)
             setPrintAccent(printJob.accent)
+            setPrintHandwritingMode(printJob.handwritingMode === 'single' ? 'single' : 'standard')
           })
         : getVocabularySet(printRequest.setId!).then((nextSet) => {
             if (vocabularyPrintRequiresShare(printRequest.kind) && nextSet.share?.status !== 'active') {
@@ -666,6 +686,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
             setVocabularySet(nextSet)
             setShareId(nextSet.share?.status === 'active' ? nextSet.share.shareId : null)
             setPrintShareKind(printRequest.kind === 'dictation' ? 'dictation' : 'listen')
+            setPrintHandwritingMode('standard')
           })
       loadPrint
         .then(() => setPrintLoadState('ready'))
@@ -1159,9 +1180,18 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   async function downloadVocabularySheet(
     kind: VocabularySetPrintKind = 'cards',
     mode: FileSaveMode = 'download',
-    options: { shareConfirmed?: boolean } = {},
+    options: {
+      shareConfirmed?: boolean
+      selectedEntryIds?: string[]
+      handwritingMode?: VocabularyHandwritingMode
+    } = {},
   ) {
     if (!vocabularySet || pdfDownloadBusy) return
+    if (kind === 'handwriting' && !options.selectedEntryIds) {
+      setDownloadMenuOpen(false)
+      setHandwritingSelectionMode(mode)
+      return
+    }
     if (vocabularyPrintRequiresShare(kind) && !shareId && !options.shareConfirmed) {
       setDownloadMenuOpen(false)
       setPendingShareDownload({ kind, mode })
@@ -1176,7 +1206,9 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
       const option = VOCABULARY_DOWNLOAD_OPTIONS.find((item) => item.kind === kind)
       const target = await prepareFileSaveTarget({
         mode,
-        suggestedName: `${title}-${option?.label || '生词资料'}-${printAccent === 'american' ? '美音' : '英音'}.pdf`,
+        suggestedName: kind === 'handwriting'
+          ? `${title}-衡水体练字纸${options.handwritingMode === 'single' ? '-每词1遍' : ''}-${options.selectedEntryIds?.length ?? printEntries.length}词.pdf`
+          : `${title}-${option?.label || '生词资料'}-${printAccent === 'american' ? '美音' : '英音'}.pdf`,
         mimeType: 'application/pdf',
       })
       if (!target) return
@@ -1188,9 +1220,54 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
         setRecentSets((current) => current.map((item) => item.id === setForDownload.id ? setForDownload : item))
       }
       if (vocabularyPrintRequiresShare(kind) && !shareId) await activateShare(setForDownload)
-      await downloadVocabularySetPdf(setForDownload.id, printAccent, kind, target)
+      await downloadVocabularySetPdf(
+        setForDownload.id,
+        printAccent,
+        kind,
+        target,
+        options.selectedEntryIds,
+        options.handwritingMode,
+      )
     } catch (error) {
       setRequestError(error instanceof Error ? error.message : mode === 'save-as' ? '文件另存为失败，请重试。' : '文件下载失败，请重试。')
+    } finally {
+      setPdfDownloadBusy(false)
+    }
+  }
+
+  async function downloadVocabularyBundle(
+    mode: FileSaveMode = 'download',
+    options: { shareConfirmed?: boolean } = {},
+  ) {
+    if (!vocabularySet || pdfDownloadBusy) return
+    if (!shareId && !options.shareConfirmed) {
+      setDownloadMenuOpen(false)
+      setPendingShareDownload({ kind: 'bundle', mode })
+      return
+    }
+    setDownloadMenuOpen(false)
+    setPendingShareDownload(null)
+    setRequestError('')
+    try {
+      const title = setTitleInput.trim()
+      if (!title) throw new Error('请先填写单词纸名称。')
+      const target = await prepareFileSaveTarget({
+        mode,
+        suggestedName: `${title}-全套资料.zip`,
+        mimeType: 'application/zip',
+      })
+      if (!target) return
+      setPdfDownloadBusy(true)
+      let setForDownload = vocabularySet
+      if (title !== vocabularySet.title) {
+        setForDownload = await renameVocabularySet(vocabularySet.id, title)
+        setVocabularySet(setForDownload)
+        setRecentSets((current) => current.map((item) => item.id === setForDownload.id ? setForDownload : item))
+      }
+      if (!shareId) await activateShare(setForDownload)
+      await downloadVocabularySetMaterialsZip(setForDownload.id, printAccent, target, VOCABULARY_MATERIAL_KINDS)
+    } catch (error) {
+      setRequestError(error instanceof Error ? error.message : mode === 'save-as' ? '资料包另存为失败，请重试。' : '资料包下载失败，请重试。')
     } finally {
       setPdfDownloadBusy(false)
     }
@@ -1295,7 +1372,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
           {VOCABULARY_DOWNLOAD_OPTIONS.map((option) => (
             <div className="vocabulary-download-option" key={option.kind}>
               <button type="button" onClick={() => void downloadVocabularySheet(option.kind)}>
-                {option.label}<span>{option.description}</span>
+                <strong>{option.label}</strong><span>{option.description}</span>
               </button>
               <button
                 type="button"
@@ -1307,6 +1384,19 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
               </button>
             </div>
           ))}
+          <div className="vocabulary-download-option is-bundle">
+            <button type="button" onClick={() => void downloadVocabularyBundle()}>
+              <strong>下载全套</strong><span>五份 PDF 打包为一个 ZIP</span>
+            </button>
+            <button
+              type="button"
+              className="vocabulary-download-save-as"
+              aria-label="全套资料另存为"
+              onClick={() => void downloadVocabularyBundle('save-as')}
+            >
+              <Save size={14} aria-hidden="true" />另存为…
+            </button>
+          </div>
         </div>
       )}
     </div>
@@ -1322,12 +1412,30 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
         <button
           type="button"
           className="primary-button"
-          onClick={() => void downloadVocabularySheet(pendingShareDownload.kind, pendingShareDownload.mode, { shareConfirmed: true })}
+          onClick={() => void (pendingShareDownload.kind === 'bundle'
+            ? downloadVocabularyBundle(pendingShareDownload.mode, { shareConfirmed: true })
+            : downloadVocabularySheet(pendingShareDownload.kind, pendingShareDownload.mode, { shareConfirmed: true }))}
         >
           {pendingShareDownload.mode === 'save-as' ? '生成链接并另存为…' : '生成链接并下载'}
         </button>
       </div>
     </div>
+  ) : null
+  const handwritingSelector = handwritingSelectionMode && vocabularySet ? (
+    <VocabularyHandwritingSelector
+      title={setTitleInput.trim() || vocabularySet.title}
+      entries={printEntries}
+      busy={pdfDownloadBusy}
+      onCancel={() => setHandwritingSelectionMode(null)}
+      onConfirm={(selectedEntryIds, practiceMode) => {
+        const saveMode = handwritingSelectionMode
+        setHandwritingSelectionMode(null)
+        void downloadVocabularySheet('handwriting', saveMode, {
+          selectedEntryIds,
+          handwritingMode: practiceMode,
+        })
+      }}
+    />
   ) : null
   const embeddedPrintState = printRequest
     ? printLoadState === 'error' || programLoadState === 'error'
@@ -1849,8 +1957,17 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
         </div>}
       </main>
 
+      {handwritingSelector}
+
       <section className={`vocabulary-print-sheet is-${printRequest?.kind ?? 'cards'}`} aria-hidden="true">
-        {printRequest?.kind === 'word-search' ? (
+        {printRequest?.kind === 'handwriting' ? (
+          <VocabularyHandwritingPrint
+            title={vocabularySet?.title ?? '生词衡水体练字纸'}
+            entryCount={printEntries.length}
+            pages={printPages}
+            mode={printHandwritingMode}
+          />
+        ) : printRequest?.kind === 'word-search' ? (
           <VocabularyWordSearchPrint
             title={vocabularySet?.title ?? '生词圈词练习'}
             entryCount={printEntries.length}

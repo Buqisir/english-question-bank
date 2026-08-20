@@ -318,6 +318,20 @@ async function main() {
       `got status=${privateVocabularyPdf.status} body=${JSON.stringify(privateVocabularyPdf.json)}`,
     )
 
+    const privateVocabularyBundle = await req('/api/vocabulary/sets/public-fixture-set/materials.zip?accent=british', { method: 'POST' })
+    assert(
+      '(c) forced mode: vocabulary full-set ZIP remains protected without a cookie',
+      privateVocabularyBundle.status === 401 && privateVocabularyBundle.json?.error === 'not_authenticated',
+      `got status=${privateVocabularyBundle.status} body=${JSON.stringify(privateVocabularyBundle.json)}`,
+    )
+
+    const privateHandwritingFont = await req('/api/vocabulary/print-assets/hengshui.ttf')
+    assert(
+      '(c) forced mode: private handwriting font remains protected without a cookie',
+      privateHandwritingFont.status === 401 && privateHandwritingFont.json?.error === 'not_authenticated',
+      `got status=${privateHandwritingFont.status} body=${JSON.stringify(privateHandwritingFont.json)}`,
+    )
+
     const privateVocabularyRename = await req('/api/vocabulary/sets/public-fixture-set', {
       method: 'PATCH',
       body: { title: '越权改名' },

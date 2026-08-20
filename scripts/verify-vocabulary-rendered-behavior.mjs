@@ -423,12 +423,40 @@ async function installApiFixtures(page, {
       renamedTitles.set(count, input.title)
       const original = fixtureSets.find((item) => item.entryCount === count)
       await route.fulfill({ json: { vocabularySet: { ...original, title: input.title } } })
+    } else if (pathname === '/api/vocabulary/print-assets/hengshui.ttf') {
+      await route.fulfill({
+        status: 200,
+        contentType: 'font/ttf',
+        body: readFileSync(path.join(rootDir, 'server/vocabulary/assets/shuyao-hengshui.ttf')),
+      })
+    } else if (pathname === '/api/vocabulary/print-jobs/handwriting-single-15') {
+      const vocabularySet = fixtureSets.find((item) => item.entryCount === 15)
+      await route.fulfill({ json: { printJob: {
+        vocabularySet,
+        sections: [{ startIndex: 0, title: vocabularySet.title }],
+        shareKind: null,
+        accent: 'american',
+        kind: 'handwriting',
+        handwritingMode: 'single',
+      } } })
+    } else if (/^\/api\/vocabulary\/sets\/set-(1|15|16|60)\/materials\.zip$/.test(pathname)) {
+      const count = Number(pathname.match(/set-(\d+)/)?.[1])
+      const input = JSON.parse(route.request().postData() || '{}')
+      assert.deepEqual(input.kinds, ['cards', 'dictation', 'answer', 'word-search', 'handwriting'])
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/zip',
+        headers: { 'x-file-name': encodeURIComponent(`固定生词组 ${count} 词-全套资料.zip`) },
+        body: Buffer.from('PK\u0005\u0006' + '\u0000'.repeat(18), 'binary'),
+      })
     } else if (/^\/api\/vocabulary\/sets\/set-(1|15|16|60)\/pdf$/.test(pathname)) {
       const count = Number(pathname.match(/set-(\d+)/)?.[1])
       const accent = url.searchParams.get('accent')
       const kind = url.searchParams.get('kind') ?? 'cards'
       assert.ok(['american', 'british'].includes(accent))
-      assert.ok(['cards', 'dictation', 'answer', 'word-search'].includes(kind))
+      assert.ok(['cards', 'dictation', 'answer', 'word-search', 'handwriting'].includes(kind))
+      const input = JSON.parse(route.request().postData() || '{}')
+      const selectedCount = Array.isArray(input.selectedEntryIds) ? input.selectedEntryIds.length : count
       const rawTitle = renamedTitles.get(count) ?? `固定生词组 ${count} 词`
       const exportTitle = rawTitle.replace(new RegExp(`[·\\s-]*${count}\\s*词$`, 'u'), '').trim() || rawTitle
       const fileName = kind === 'dictation'
@@ -437,6 +465,8 @@ async function installApiFixtures(page, {
           ? `${exportTitle}-教师答案-${count}词.pdf`
           : kind === 'word-search'
             ? `${exportTitle}-圈词与拼写-${count}词.pdf`
+          : kind === 'handwriting'
+            ? `${exportTitle}-衡水体练字纸${input.handwritingMode === 'single' ? '-每词1遍' : ''}-${selectedCount}词.pdf`
           : `${rawTitle}${renamedTitles.has(count) ? `-${count}词` : ''}-${accent === 'american' ? '美式' : '英式'}.pdf`
       await route.fulfill({
         status: 200,
@@ -1068,7 +1098,83 @@ async function verifyDictationDownloads(page) {
   await page.getByRole('button', { name: /^圈词与拼写\s/u }).click()
   download = await downloadPromise
   assert.equal(download.suggestedFilename(), '固定生词组-圈词与拼写-15词.pdf')
-  pass('下载菜单可分别导出听写纸、教师答案和圈词练习，文件名包含名称、用途与题数')
+
+  await page.getByRole('button', { name: '下载', exact: true }).click()
+  await page.getByRole('button', { name: /^衡水体练字纸\s/u }).click()
+  await page.getByRole('dialog', { name: '选择练字单词' }).waitFor()
+  assert.equal(await page.getByText('已选 10 / 15 词', { exact: true }).count(), 1)
+  assert.equal(await page.getByRole('checkbox').count(), 15)
+  assert.equal(await page.locator('.vocabulary-handwriting-selector-list input:checked').count(), 10)
+  downloadPromise = page.waitForEvent('download')
+  await page.getByRole('button', { name: '生成 10 词练字纸' }).click()
+  download = await downloadPromise
+  assert.equal(download.suggestedFilename(), '固定生词组-衡水体练字纸-10词.pdf')
+
+  await page.getByRole('button', { name: '下载', exact: true }).click()
+  await page.getByRole('button', { name: /^衡水体练字纸\s/u }).click()
+  await page.getByText('每词写 1 遍', { exact: true }).click()
+  assert.equal(await page.getByRole('radio', { name: /每词写 1 遍/u }).isChecked(), true)
+  assert.equal(await page.getByText('每词保留 1 个书写位，每页约 10 词。', { exact: true }).count(), 1)
+  downloadPromise = page.waitForEvent('download')
+  await page.getByRole('button', { name: '生成 10 词练字纸' }).click()
+  download = await downloadPromise
+  assert.equal(download.suggestedFilename(), '固定生词组-衡水体练字纸-每词1遍-10词.pdf')
+
+  downloadPromise = page.waitForEvent('download')
+  await page.getByRole('button', { name: '下载', exact: true }).click()
+  await page.getByRole('button', { name: /^下载全套\s/u }).click()
+  download = await downloadPromise
+  assert.equal(download.suggestedFilename(), '固定生词组 15 词-全套资料.zip')
+  pass('下载菜单可导出五类单份资料与完整 ZIP；练字纸默认按原序选前10词并以实际题数命名')
+}
+
+async function verifyHandwritingPrint(page, count, expectedPages, mode = 'standard') {
+  await page.emulateMedia({ media: 'screen' })
+  const requestQuery = mode === 'single'
+    ? `vocabularyPrintJobId=handwriting-single-${count}`
+    : `vocabularyPrintSetId=set-${count}`
+  await page.goto(`${origin}/?view=vocabulary-review&${requestQuery}&printAccent=american&vocabularyPrintMode=handwriting`, { waitUntil: 'networkidle' })
+  await page.locator('[data-vocabulary-print-state="ready"]').waitFor()
+  await page.emulateMedia({ media: 'print' })
+  await page.evaluate(() => document.fonts.ready)
+
+  const pages = page.locator('.vocabulary-handwriting-print-page')
+  const rows = page.locator('.vocabulary-handwriting-row')
+  assert.equal(await pages.count(), expectedPages)
+  assert.equal(await rows.count(), count)
+  assert.equal(await page.locator('.vocabulary-handwriting-meaning').count(), count)
+  assert.equal(await rows.first().locator('.vocabulary-handwriting-guide').count(), mode === 'single' ? 2 : 4)
+  if (mode === 'standard' && count >= 8) assert.equal(await rows.nth(7).locator('.vocabulary-handwriting-guide').count(), 3)
+  const traceCount = await page.locator('.vocabulary-handwriting-guide.is-trace').count()
+  if (mode === 'single') assert.equal(traceCount, 0)
+  else assert.ok(traceCount >= count)
+  assert.equal(await page.getByText('姓名：', { exact: true }).count(), expectedPages)
+  assert.equal(await page.getByText('日期：', { exact: true }).count(), expectedPages)
+  assert.equal(await page.locator('.vocabulary-handwriting-print-footer').count(), expectedPages)
+  const fontFamilies = await page.locator('.vocabulary-handwriting-guide strong').evaluateAll((nodes) => (
+    nodes.map((node) => getComputedStyle(node).fontFamily)
+  ))
+  assert.equal(fontFamilies.every((family) => family.includes('Shuyao Hengshui')), true)
+  const overflow = await pages.evaluateAll((nodes) => nodes.map((node) => (
+    node.scrollWidth > node.clientWidth + 1 || node.scrollHeight > node.clientHeight + 1
+  )))
+  assert.equal(overflow.some(Boolean), false)
+
+  const pdfPath = path.join(tempRoot, `handwriting-${mode}-${count}.pdf`)
+  await page.pdf({ path: pdfPath, preferCSSPageSize: true, printBackground: true })
+  const info = spawnSync('pdfinfo', [pdfPath], { encoding: 'utf8' })
+  assert.equal(info.status, 0, info.stderr)
+  assert.match(info.stdout, new RegExp(`Pages:\\s+${expectedPages}\\b`))
+  assert.match(info.stdout, /Page size:\s+59[45]\.\d+ x 841\.\d+ pts \(A4\)/)
+  const rasterPrefix = path.join(tempRoot, `handwriting-${mode}-${count}`)
+  const raster = spawnSync('pdftoppm', ['-png', '-r', '120', pdfPath, rasterPrefix], { encoding: 'utf8' })
+  assert.equal(raster.status, 0, raster.stderr)
+  for (let pageIndex = 1; pageIndex <= expectedPages; pageIndex += 1) {
+    assert.ok(readFileSync(`${rasterPrefix}-${pageIndex}.png`).length > 10_000)
+  }
+  pass(mode === 'single'
+    ? `${count} 词轻量练字纸按每页10词生成 A4，每词仅保留范字与一个独立书写位且无描红`
+    : `${count} 词衡水体练字纸按每页7词生成 A4，短词四格、长词三格、首格中文与姓名日期均无溢出`)
 }
 
 async function verifyDictationPrint(page, count, expectedPages, accent = 'american') {
@@ -1535,6 +1641,12 @@ async function main() {
     }
     await verifyDirectOnlyWordSearchPrint(wordSearchPrintPage)
     await wordSearchPrintPage.close()
+
+    const handwritingPrintPage = await browser.newPage({ viewport: { width: 1440, height: 1000 } })
+    await installApiFixtures(handwritingPrintPage)
+    await verifyHandwritingPrint(handwritingPrintPage, 15, 3)
+    await verifyHandwritingPrint(handwritingPrintPage, 15, 2, 'single')
+    await handwritingPrintPage.close()
 
     const directSetPage = await browser.newPage({ viewport: { width: 1440, height: 1000 } })
     await installApiFixtures(directSetPage)

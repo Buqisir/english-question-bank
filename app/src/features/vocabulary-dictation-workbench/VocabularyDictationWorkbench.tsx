@@ -30,6 +30,7 @@ import {
   createVocabularyDictationRecord,
   createVocabularyDictationTask,
   createVocabularySetErrorTasks,
+  downloadCombinedVocabularyMaterialsZip,
   downloadCombinedVocabularyPdf,
   downloadVocabularyDictationTaskMaterialsZip,
   downloadVocabularyDictationTaskPdf,
@@ -56,20 +57,28 @@ import {
   type VocabularyDictationRecordDto,
   type VocabularyDictationResult,
   type VocabularyDictationTaskDto,
+  type VocabularyHandwritingMode,
   type VocabularyMeaningRecallRecordDto,
+  type VocabularyMaterialKind,
   type VocabularySetLibraryDto,
   type VocabularySetLibraryItemDto,
   type VocabularyStudentDto,
+  VOCABULARY_MATERIAL_KINDS,
 } from '../../services/vocabulary'
 import { prepareFileSaveTarget, type FileSaveMode } from '../../services/fileDownload.ts'
 import { VocabularyMeaningRecallPanel } from './VocabularyMeaningRecallPanel'
+import {
+  VocabularyHandwritingSelector,
+  type VocabularyHandwritingEntry,
+} from '../vocabulary-practice/VocabularyHandwritingSelector'
+import '../vocabulary-practice/vocabularyHandwriting.css'
 import './vocabularyDictationWorkbench.css'
 
 const ACTIVE_STUDENT_STORAGE_KEY = 'eqb-vocabulary-active-student-wanwei-round-one-v1'
 const SUGGESTION_TARGET_STORAGE_KEY = 'eqb-vocabulary-review-suggestion-target-v1'
 type WorkspaceTab = 'sets' | 'meaning' | 'tasks' | 'review' | 'history'
 type Accent = 'american' | 'british'
-type PrintKind = 'cards' | 'dictation' | 'answer' | 'word-search'
+type PrintKind = VocabularyMaterialKind
 type ReviewFilter = 'all' | 'meaning' | 'dictation' | 'frequent'
 type DictationTaskDateGroup = {
   dateKey: string
@@ -82,6 +91,16 @@ type ReviewWord = VocabularySetEntry & {
   pinned: boolean
   paused: boolean
   frequent: boolean
+}
+
+type HandwritingDownloadRequest = {
+  mode: FileSaveMode
+  title: string
+  entries: VocabularyHandwritingEntry[]
+  source:
+    | { kind: 'sets'; sourceSetIds: string[]; layout: 'dedupe' | 'grouped' }
+    | { kind: 'task'; taskId: string }
+    | { kind: 'errors' }
 }
 
 type GraderState = {
@@ -346,6 +365,7 @@ export function VocabularyDictationWorkbench({
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
   const [createdTasks, setCreatedTasks] = useState<VocabularyDictationTaskDto[]>([])
+  const [handwritingDownloadRequest, setHandwritingDownloadRequest] = useState<HandwritingDownloadRequest | null>(null)
   const [graderError, setGraderError] = useState('')
   const [grader, setGrader] = useState<GraderState | null>(null)
   const [suggestionTarget, setSuggestionTarget] = useState(() => {
@@ -1070,14 +1090,84 @@ export function VocabularyDictationWorkbench({
     }
   }
 
+  function openHandwritingSelector(request: HandwritingDownloadRequest) {
+    setError('')
+    setMessage('')
+    setHandwritingDownloadRequest(request)
+  }
+
+  async function confirmHandwritingDownload(
+    selectedEntryIds: string[],
+    handwritingMode: VocabularyHandwritingMode,
+  ) {
+    const request = handwritingDownloadRequest
+    if (!request || !activeStudent) return
+    setHandwritingDownloadRequest(null)
+    setError('')
+    setMessage('')
+    try {
+      const target = await prepareFileSaveTarget({
+        mode: request.mode,
+        suggestedName: `${request.title}-衡水体练字纸${handwritingMode === 'single' ? '-每词1遍' : ''}-${selectedEntryIds.length}词.pdf`,
+        mimeType: 'application/pdf',
+      })
+      if (!target) return
+      setBusy(true)
+      if (request.source.kind === 'sets') {
+        await downloadCombinedVocabularyPdf({
+          studentId: activeStudent.id,
+          title: request.title,
+          sourceSetIds: request.source.sourceSetIds,
+          selectedEntryIds,
+          handwritingMode,
+          mode: request.source.layout,
+          accent,
+          kind: 'handwriting',
+        }, target)
+      } else if (request.source.kind === 'task') {
+        await downloadVocabularyDictationTaskPdf(
+          request.source.taskId,
+          'handwriting',
+          target,
+          selectedEntryIds,
+          handwritingMode,
+        )
+      } else {
+        await downloadCombinedVocabularyPdf({
+          studentId: activeStudent.id,
+          title: request.title,
+          entryIds: selectedEntryIds,
+          handwritingMode,
+          accent,
+          kind: 'handwriting',
+        }, target)
+      }
+      setMessage(target.kind === 'file' || target.kind === 'directory' ? '衡水体练字纸已保存。' : '衡水体练字纸已开始下载。')
+    } catch (nextError) {
+      setError(nextError instanceof Error ? nextError.message : '衡水体练字纸生成失败。')
+    } finally {
+      setBusy(false)
+    }
+  }
+
   async function printSelectedSets(kind: PrintKind, mode: FileSaveMode = 'download') {
     if (!activeStudent || !selectedSets.length) return
+    if (kind === 'handwriting') {
+      openHandwritingSelector({
+        mode,
+        title: collectionTitle || '生词合集',
+        entries: uniqueSelectedEntries,
+        source: { kind: 'sets', sourceSetIds: selectedSets.map((set) => set.id), layout: printMode },
+      })
+      return
+    }
     if (rawSelectedCount > 120 && !window.confirm(`这次会打印 ${rawSelectedCount} 个原始词，页数较多。继续吗？`)) return
     const kindLabel: Record<PrintKind, string> = {
       cards: '单词卡',
       dictation: '听写纸',
       answer: '教师答案',
-      'word-search': '找单词练习',
+      'word-search': '圈词与拼写',
+      handwriting: '衡水体练字纸',
     }
     try {
       const target = await prepareFileSaveTarget({
@@ -1102,15 +1192,59 @@ export function VocabularyDictationWorkbench({
     }
   }
 
-  async function downloadTaskMaterial(
-    task: VocabularyDictationTaskDto,
-    kind: 'cards' | 'dictation' | 'answer',
-    mode: FileSaveMode = 'download',
-  ) {
+  async function downloadSelectedSetsBundle(mode: FileSaveMode = 'download') {
+    if (!activeStudent || !selectedSets.length) return
     setError('')
     setMessage('')
     try {
-      const kindLabel = kind === 'cards' ? '单词卡' : kind === 'dictation' ? '复听写纸' : '教师答案'
+      const title = collectionTitle || '生词合集'
+      const target = await prepareFileSaveTarget({
+        mode,
+        suggestedName: `${title}-全套资料.zip`,
+        mimeType: 'application/zip',
+      })
+      if (!target) return
+      setBusy(true)
+      await downloadCombinedVocabularyMaterialsZip({
+        studentId: activeStudent.id,
+        title,
+        sourceSetIds: selectedSets.map((set) => set.id),
+        mode: printMode,
+        accent,
+        kinds: VOCABULARY_MATERIAL_KINDS,
+      }, target)
+      setMessage(target.kind === 'file' || target.kind === 'directory' ? '全套资料已保存。' : '全套资料已开始下载。')
+    } catch (nextError) {
+      setError(nextError instanceof Error ? nextError.message : '全套资料生成失败。')
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  async function downloadTaskMaterial(
+    task: VocabularyDictationTaskDto,
+    kind: PrintKind,
+    mode: FileSaveMode = 'download',
+  ) {
+    if (kind === 'handwriting') {
+      openHandwritingSelector({
+        mode,
+        title: task.title || '综合听写',
+        entries: task.entries,
+        source: { kind: 'task', taskId: task.id },
+      })
+      return
+    }
+    setError('')
+    setMessage('')
+    try {
+      const kindLabel = kind === 'cards'
+        ? '单词卡'
+        : kind === 'dictation'
+          ? '听写纸'
+          : kind === 'answer'
+            ? '教师答案'
+            : '圈词与拼写'
       const target = await prepareFileSaveTarget({
         mode,
         suggestedName: `${task.title || '综合听写'}-${kindLabel}.pdf`,
@@ -1126,8 +1260,38 @@ export function VocabularyDictationWorkbench({
     }
   }
 
+  async function downloadTaskBundle(task: VocabularyDictationTaskDto, mode: FileSaveMode = 'download') {
+    setError('')
+    setMessage('')
+    try {
+      const target = await prepareFileSaveTarget({
+        mode,
+        suggestedName: `${task.title || '综合听写'}-全套资料.zip`,
+        mimeType: 'application/zip',
+      })
+      if (!target) return
+      setBusy(true)
+      await downloadVocabularyDictationTaskMaterialsZip([task.id], VOCABULARY_MATERIAL_KINDS, target)
+      setMessage(target.kind === 'file' || target.kind === 'directory' ? '听写全套资料已保存。' : '听写全套资料已开始下载。')
+    } catch (nextError) {
+      setError(nextError instanceof Error ? nextError.message : '听写全套资料生成失败。')
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  function downloadErrorHandwriting(mode: FileSaveMode = 'download') {
+    if (!selectedGroupReviewWords.length) return
+    openHandwritingSelector({
+      mode,
+      title: `${today()}-错词`,
+      entries: selectedGroupReviewWords,
+      source: { kind: 'errors' },
+    })
+  }
+
   async function createAndDownloadSetErrorMaterials(
-    kinds: Array<'cards' | 'dictation' | 'answer'>,
+    kinds: PrintKind[],
     mode: FileSaveMode = 'download',
   ) {
     if (!activeStudent || !selectedSets.length || !selectedGroupReviewWords.length) return
@@ -1136,7 +1300,13 @@ export function VocabularyDictationWorkbench({
     let nextTasks: VocabularyDictationTaskDto[] = []
     try {
       const singlePdf = selectedGroupReviewWords.length <= 60 && kinds.length === 1
-      const kindLabel = kinds[0] === 'cards' ? '记忆卡' : kinds[0] === 'dictation' ? '复听写纸' : '教师答案'
+      const kindLabel = kinds[0] === 'cards'
+        ? '单词卡'
+        : kinds[0] === 'dictation'
+          ? '听写纸'
+          : kinds[0] === 'answer'
+            ? '教师答案'
+            : '圈词与拼写'
       const target = await prepareFileSaveTarget({
         mode,
         suggestedName: singlePdf ? `${today()}-错词复听写-${kindLabel}.pdf` : `${today()}-错词复听写-资料.zip`,
@@ -1172,6 +1342,19 @@ export function VocabularyDictationWorkbench({
     } finally {
       setBusy(false)
     }
+  }
+
+  function renderTaskDownloadOptions(task: VocabularyDictationTaskDto, publicHref: string | null) {
+    return (
+      <>
+        <DownloadOption label="单词卡" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'cards')} onSaveAs={() => void downloadTaskMaterial(task, 'cards', 'save-as')}><BookOpenCheck size={14} />{publicHref ? '单词卡（含二维码）' : '单词卡'}</DownloadOption>
+        <DownloadOption label="听写纸" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'dictation')} onSaveAs={() => void downloadTaskMaterial(task, 'dictation', 'save-as')}><Download size={14} />{publicHref ? '听写纸（含二维码）' : '听写纸'}</DownloadOption>
+        <DownloadOption label="教师答案" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'answer')} onSaveAs={() => void downloadTaskMaterial(task, 'answer', 'save-as')}><FileCheck2 size={14} />教师答案</DownloadOption>
+        <DownloadOption label="圈词与拼写" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'word-search')} onSaveAs={() => void downloadTaskMaterial(task, 'word-search', 'save-as')}><Search size={14} />圈词与拼写</DownloadOption>
+        <DownloadOption label="衡水体练字纸" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'handwriting')} onSaveAs={() => void downloadTaskMaterial(task, 'handwriting', 'save-as')}><Printer size={14} />衡水体练字纸</DownloadOption>
+        <DownloadOption label="下载全套" disabled={busy} onDownload={() => void downloadTaskBundle(task)} onSaveAs={() => void downloadTaskBundle(task, 'save-as')}><Download size={14} />下载全套</DownloadOption>
+      </>
+    )
   }
 
   if (loadState === 'loading') {
@@ -1257,9 +1440,7 @@ export function VocabularyDictationWorkbench({
                       <details className="dictation-download-menu">
                         <summary><Download size={14} />下载资料<ChevronDown size={14} aria-hidden="true" /></summary>
                         <div>
-                          <DownloadOption label="单词卡" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'cards')} onSaveAs={() => void downloadTaskMaterial(task, 'cards', 'save-as')}><BookOpenCheck size={14} />{publicHref ? '单词卡（含二维码）' : '单词卡'}</DownloadOption>
-                          <DownloadOption label="复听写纸" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'dictation')} onSaveAs={() => void downloadTaskMaterial(task, 'dictation', 'save-as')}><Download size={14} />{publicHref ? '复听写纸（含二维码）' : '复听写纸'}</DownloadOption>
-                          <DownloadOption label="教师答案" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'answer')} onSaveAs={() => void downloadTaskMaterial(task, 'answer', 'save-as')}><FileCheck2 size={14} />教师答案</DownloadOption>
+                          {renderTaskDownloadOptions(task, publicHref)}
                         </div>
                       </details>
                     </div>
@@ -1345,9 +1526,11 @@ export function VocabularyDictationWorkbench({
                       <label><input type="radio" name="print-mode" checked={printMode === 'dedupe'} onChange={() => setPrintMode('dedupe')} />合并去重</label>
                       <label><input type="radio" name="print-mode" checked={printMode === 'grouped'} onChange={() => setPrintMode('grouped')} />按组装订</label>
                       <DownloadOption label="单词卡" onDownload={() => void printSelectedSets('cards')} onSaveAs={() => void printSelectedSets('cards', 'save-as')}>单词卡</DownloadOption>
-                      <DownloadOption label="无二维码听写纸" onDownload={() => void printSelectedSets('dictation')} onSaveAs={() => void printSelectedSets('dictation', 'save-as')}>无二维码听写纸</DownloadOption>
+                      <DownloadOption label="听写纸" onDownload={() => void printSelectedSets('dictation')} onSaveAs={() => void printSelectedSets('dictation', 'save-as')}>听写纸</DownloadOption>
                       <DownloadOption label="教师答案" onDownload={() => void printSelectedSets('answer')} onSaveAs={() => void printSelectedSets('answer', 'save-as')}>教师答案</DownloadOption>
-                      <DownloadOption label="找单词练习" onDownload={() => void printSelectedSets('word-search')} onSaveAs={() => void printSelectedSets('word-search', 'save-as')}>找单词练习</DownloadOption>
+                      <DownloadOption label="圈词与拼写" onDownload={() => void printSelectedSets('word-search')} onSaveAs={() => void printSelectedSets('word-search', 'save-as')}>圈词与拼写</DownloadOption>
+                      <DownloadOption label="衡水体练字纸" onDownload={() => void printSelectedSets('handwriting')} onSaveAs={() => void printSelectedSets('handwriting', 'save-as')}>衡水体练字纸</DownloadOption>
+                      <DownloadOption label="下载全套" onDownload={() => void downloadSelectedSetsBundle()} onSaveAs={() => void downloadSelectedSetsBundle('save-as')}>下载全套</DownloadOption>
                     </div>
                   </details>
                   <button type="button" onClick={() => void createTasks({ share: true, openFirst: false })} disabled={busy}><QrCode size={16} />生成扫码听写</button>
@@ -1358,10 +1541,12 @@ export function VocabularyDictationWorkbench({
                       <div>
                         <label><input type="radio" name="error-material-layout" checked={errorMaterialLayout === 'merged'} onChange={() => setErrorMaterialLayout('merged')} />合并去重</label>
                         <label><input type="radio" name="error-material-layout" checked={errorMaterialLayout === 'grouped'} onChange={() => setErrorMaterialLayout('grouped')} />按组装订</label>
-                        <DownloadOption label="记忆卡" disabled={busy} onDownload={() => void createAndDownloadSetErrorMaterials(['cards'])} onSaveAs={() => void createAndDownloadSetErrorMaterials(['cards'], 'save-as')}><BookOpenCheck size={14} />记忆卡</DownloadOption>
-                        <DownloadOption label="复听写纸" disabled={busy} onDownload={() => void createAndDownloadSetErrorMaterials(['dictation'])} onSaveAs={() => void createAndDownloadSetErrorMaterials(['dictation'], 'save-as')}><Download size={14} />复听写纸</DownloadOption>
+                        <DownloadOption label="单词卡" disabled={busy} onDownload={() => void createAndDownloadSetErrorMaterials(['cards'])} onSaveAs={() => void createAndDownloadSetErrorMaterials(['cards'], 'save-as')}><BookOpenCheck size={14} />单词卡</DownloadOption>
+                        <DownloadOption label="听写纸" disabled={busy} onDownload={() => void createAndDownloadSetErrorMaterials(['dictation'])} onSaveAs={() => void createAndDownloadSetErrorMaterials(['dictation'], 'save-as')}><Download size={14} />听写纸</DownloadOption>
                         <DownloadOption label="教师答案" disabled={busy} onDownload={() => void createAndDownloadSetErrorMaterials(['answer'])} onSaveAs={() => void createAndDownloadSetErrorMaterials(['answer'], 'save-as')}><FileCheck2 size={14} />教师答案</DownloadOption>
-                        <DownloadOption label="全套错词资料" disabled={busy} onDownload={() => void createAndDownloadSetErrorMaterials(['cards', 'dictation', 'answer'])} onSaveAs={() => void createAndDownloadSetErrorMaterials(['cards', 'dictation', 'answer'], 'save-as')}><Download size={14} />下载全套</DownloadOption>
+                        <DownloadOption label="圈词与拼写" disabled={busy} onDownload={() => void createAndDownloadSetErrorMaterials(['word-search'])} onSaveAs={() => void createAndDownloadSetErrorMaterials(['word-search'], 'save-as')}><Search size={14} />圈词与拼写</DownloadOption>
+                        <DownloadOption label="衡水体练字纸" disabled={busy} onDownload={() => downloadErrorHandwriting()} onSaveAs={() => downloadErrorHandwriting('save-as')}><Printer size={14} />衡水体练字纸</DownloadOption>
+                        <DownloadOption label="全套错词资料" disabled={busy} onDownload={() => void createAndDownloadSetErrorMaterials(VOCABULARY_MATERIAL_KINDS)} onSaveAs={() => void createAndDownloadSetErrorMaterials(VOCABULARY_MATERIAL_KINDS, 'save-as')}><Download size={14} />下载全套</DownloadOption>
                       </div>
                     </details>
                   ) : <button type="button" disabled><ListChecks size={16} />暂无错词</button>}
@@ -1418,9 +1603,7 @@ export function VocabularyDictationWorkbench({
                             <details className="dictation-download-menu">
                               <summary><Download size={14} />下载资料<ChevronDown size={14} aria-hidden="true" /></summary>
                               <div>
-                                <DownloadOption label="单词卡" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'cards')} onSaveAs={() => void downloadTaskMaterial(task, 'cards', 'save-as')}><BookOpenCheck size={14} />{publicHref ? '单词卡（含二维码）' : '单词卡'}</DownloadOption>
-                                <DownloadOption label="复听写纸" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'dictation')} onSaveAs={() => void downloadTaskMaterial(task, 'dictation', 'save-as')}><Download size={14} />{publicHref ? '复听写纸（含二维码）' : '复听写纸'}</DownloadOption>
-                                <DownloadOption label="教师答案" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'answer')} onSaveAs={() => void downloadTaskMaterial(task, 'answer', 'save-as')}><FileCheck2 size={14} />教师答案</DownloadOption>
+                                {renderTaskDownloadOptions(task, publicHref)}
                                 <button type="button" disabled={busy} onClick={(event) => { event.currentTarget.closest('details')?.removeAttribute('open'); void toggleTaskShare(task) }}>{publicHref ? '撤销二维码' : <><QrCode size={14} />生成二维码</>}</button>
                               </div>
                             </details>
@@ -1550,6 +1733,16 @@ export function VocabularyDictationWorkbench({
           </section>
         )}
       </main>
+
+      {handwritingDownloadRequest && (
+        <VocabularyHandwritingSelector
+          title={handwritingDownloadRequest.title}
+          entries={handwritingDownloadRequest.entries}
+          busy={busy}
+          onCancel={() => setHandwritingDownloadRequest(null)}
+          onConfirm={(entryIds, handwritingMode) => void confirmHandwritingDownload(entryIds, handwritingMode)}
+        />
+      )}
 
       {grader && (
         <div className="dictation-grader-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) void closeGraderAndSave() }}>
