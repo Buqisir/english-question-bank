@@ -9,14 +9,13 @@ import {
 import {
   VocabularyStoreError,
   buildCombinedVocabularyPrintPayload,
+  buildVocabularyMeaningRecallRecordPrintPayload,
   buildVocabularyDictationTaskPrintPayload,
-  createVocabularyDictationRecord,
   createVocabularyDictationTask,
   createVocabularyMeaningRecallRecord,
   createVocabularyStudent,
   createVocabularyReviewRun,
   createVocabularySetFromEntries,
-  createVocabularySetErrorTasks,
   decideVocabularyReviewEntry,
   discardVocabularyReviewRun,
   freezeVocabularySet,
@@ -24,9 +23,7 @@ import {
   getPublicVocabularyListenResource,
   getCurrentVocabularyReviewRun,
   getPublicVocabularyShare,
-  getStudentVocabularyReviewStates,
   getStudentVocabularyMeaningStates,
-  getSuggestedVocabularyReview,
   getSuggestedVocabularyMeaningRecall,
   getVocabularyDictationRecord,
   getVocabularyDictationTask,
@@ -44,7 +41,6 @@ import {
   listVocabularyPrograms,
   listVocabularySets,
   renameVocabularySet,
-  restoreVocabularyDictationRecord,
   restoreVocabularyMeaningRecallRecord,
   revokeVocabularyDictationTaskShare,
   revokeVocabularyShare,
@@ -53,13 +49,11 @@ import {
   shareVocabularySet,
   undoVocabularyReviewDecision,
   updateStudentVocabularyWordFlag,
-  updateVocabularyDictationRecord,
   updateVocabularyMeaningRecallRecord,
-  voidVocabularyDictationRecord,
   voidVocabularyMeaningRecallRecord,
 } from './vocabularyStore.mjs'
 
-const VOCABULARY_MATERIAL_KINDS = ['cards', 'dictation', 'answer', 'word-search', 'handwriting']
+const VOCABULARY_MATERIAL_KINDS = ['cards', 'dictation', 'answer', 'handwriting']
 const HENGSHUI_FONT_BYTES = readFileSync(new URL('./assets/shuyao-hengshui.ttf', import.meta.url))
 
 function decodePathPart(raw) {
@@ -146,6 +140,9 @@ function readVocabularyMaterialKinds(input) {
   const kinds = Array.isArray(input.kinds)
     ? [...new Set(input.kinds.map((value) => String(value ?? '').trim()).filter(Boolean))]
     : []
+  if (kinds.includes('word-search')) {
+    throw new VocabularyStoreError('圈词与拼写已停用。', 410, 'vocabulary_word_search_retired')
+  }
   if (!kinds.length || kinds.some((kind) => !isVocabularyMaterialKind(kind))) {
     throw new VocabularyStoreError('资料包类型无效。', 400, 'invalid_vocabulary_bundle_kinds')
   }
@@ -237,7 +234,6 @@ function vocabularyPdfFileName(title, entryCount, accent, kind = 'cards', handwr
   if (kind === 'dictation') {
     return `${exportTitle}-听写纸-${entryCount}词-${accent === 'american' ? '美式' : '英式'}.pdf`
   }
-  if (kind === 'word-search') return `${exportTitle}-圈词与拼写-${entryCount}词.pdf`
   if (kind === 'handwriting') {
     return `${exportTitle}-衡水体练字纸${handwritingMode === 'single' ? '-每词1遍' : ''}-${entryCount}词.pdf`
   }
@@ -245,7 +241,6 @@ function vocabularyPdfFileName(title, entryCount, accent, kind = 'cards', handwr
 }
 
 function expectedVocabularyPrintPages(entryCount, kind, handwritingMode = 'standard') {
-  if (kind === 'word-search') return Math.ceil(entryCount / 10) * 2
   if (kind === 'cards') return Math.ceil(entryCount / 6)
   if (kind === 'handwriting') return Math.ceil(entryCount / (handwritingMode === 'single' ? 10 : 7))
   return Math.ceil(entryCount / 15)
@@ -284,7 +279,9 @@ async function streamVocabularyMaterialBundle({
         activePrintJobId = createVocabularyPrintJob(userId, {
           ...payload,
           kind,
-          shareKind: kind === 'cards' ? 'listen' : kind === 'dictation' ? 'dictation' : null,
+          shareKind: payload.vocabularySet.share?.status === 'active'
+            ? kind === 'cards' ? 'listen' : kind === 'dictation' ? 'dictation' : null
+            : null,
         })
         try {
           const hasQr = payload.vocabularySet.share?.status === 'active' && ['cards', 'dictation'].includes(kind)
@@ -537,6 +534,10 @@ export function createVocabularyRoutes() {
         context.sendJson(response, 400, { error: 'invalid_vocabulary_accent', message: '合并打印必须选择英式或美式。' })
         return
       }
+      if (kind === 'word-search') {
+        context.sendJson(response, 410, { error: 'vocabulary_word_search_retired', message: '圈词与拼写已停用。' })
+        return
+      }
       if (!isVocabularyMaterialKind(kind)) {
         context.sendJson(response, 400, { error: 'invalid_vocabulary_pdf_kind', message: '下载类型无效。' })
         return
@@ -623,17 +624,6 @@ export function createVocabularyRoutes() {
       }
     }),
 
-    defineRoute('POST', /^\/api\/vocabulary\/dictation-tasks\/from-set-errors$/, async ({ request, response, context }) => {
-      const userId = context.resolveDataUserId(context)
-      const input = await context.readJsonBody(request, { maxBytes: 40_000 })
-      try {
-        const tasks = withVocabularyDbs(context, (dbs) => createVocabularySetErrorTasks(dbs, userId, input))
-        context.sendJson(response, 201, { tasks })
-      } catch (error) {
-        sendVocabularyError(response, context, error)
-      }
-    }),
-
     defineRoute('GET', /^\/api\/vocabulary\/meaning-recall-records$/, ({ request, response, context }) => {
       const userId = context.resolveDataUserId(context)
       const query = readQuery(request)
@@ -676,6 +666,88 @@ export function createVocabularyRoutes() {
         context.sendJson(response, 200, { record })
       } catch (error) {
         sendVocabularyError(response, context, error)
+      }
+    }),
+
+    defineRoute('POST', /^\/api\/vocabulary\/meaning-recall-records\/([^/]+)\/material\.pdf$/, async ({ request, response, match, context }) => {
+      const userId = context.resolveDataUserId(context)
+      const kind = readQuery(request).get('kind') ?? 'cards'
+      if (kind === 'word-search') {
+        context.sendJson(response, 410, { error: 'vocabulary_word_search_retired', message: '圈词与拼写已停用。' })
+        return
+      }
+      if (!isVocabularyMaterialKind(kind)) {
+        context.sendJson(response, 400, { error: 'invalid_vocabulary_pdf_kind', message: '下载类型无效。' })
+        return
+      }
+      const input = String(request.headers['content-type'] ?? '').includes('application/json')
+        ? await context.readJsonBody(request, { maxBytes: 20_000 })
+        : {}
+      const accent = input.accent
+      if (accent !== 'american' && accent !== 'british') {
+        context.sendJson(response, 400, { error: 'invalid_vocabulary_accent', message: '资料必须选择英式或美式。' })
+        return
+      }
+      let printJobId = null
+      try {
+        const handwritingMode = readVocabularyHandwritingMode(input.handwritingMode)
+        const payload = withUserDb(context, false, (db) => buildVocabularyMeaningRecallRecordPrintPayload(
+          db,
+          userId,
+          decodePathPart(match[1]),
+        ))
+        printJobId = createVocabularyPrintJob(userId, {
+          ...payload,
+          accent,
+          kind,
+          handwritingMode,
+          shareKind: null,
+        })
+        const result = await context.renderVocabularySetPdf({
+          cookie: request.headers.cookie ?? '',
+          printJobId,
+          accent,
+          kind,
+          expectedPageCount: expectedVocabularyPrintPages(payload.vocabularySet.entryCount, kind, handwritingMode),
+          expectedQrCount: 0,
+        })
+        sendVocabularyPdf(
+          response,
+          result.pdfBytes,
+          vocabularyPdfFileName(payload.vocabularySet.title, payload.vocabularySet.entryCount, accent, kind, handwritingMode),
+        )
+      } catch (error) {
+        sendVocabularyError(response, context, error)
+      } finally {
+        if (printJobId) deleteVocabularyPrintJob(printJobId)
+      }
+    }),
+
+    defineRoute('POST', /^\/api\/vocabulary\/meaning-recall-records\/([^/]+)\/materials\.zip$/, async ({ request, response, match, context }) => {
+      const userId = context.resolveDataUserId(context)
+      const input = await context.readJsonBody(request, { maxBytes: 20_000 })
+      if (input.accent !== 'american' && input.accent !== 'british') {
+        context.sendJson(response, 400, { error: 'invalid_vocabulary_accent', message: '资料包必须选择英式或美式。' })
+        return
+      }
+      try {
+        const payload = withUserDb(context, false, (db) => buildVocabularyMeaningRecallRecordPrintPayload(
+          db,
+          userId,
+          decodePathPart(match[1]),
+        ))
+        await streamVocabularyMaterialBundle({
+          request,
+          response,
+          context,
+          userId,
+          payloads: [{ ...payload, accent: input.accent }],
+          kinds: VOCABULARY_MATERIAL_KINDS,
+          zipFileName: `${payload.vocabularySet.title}-${payload.vocabularySet.entryCount}词-全套资料.zip`,
+        })
+      } catch (error) {
+        if (response.headersSent) response.destroy(error instanceof Error ? error : new Error('本轮错词资料包生成失败。'))
+        else sendVocabularyError(response, context, error)
       }
     }),
 
@@ -769,6 +841,10 @@ export function createVocabularyRoutes() {
     defineRoute('POST', /^\/api\/vocabulary\/dictation-tasks\/([^/]+)\/pdf$/, async ({ request, response, match, context }) => {
       const userId = context.resolveDataUserId(context)
       const kind = readQuery(request).get('kind') ?? 'dictation'
+      if (kind === 'word-search') {
+        context.sendJson(response, 410, { error: 'vocabulary_word_search_retired', message: '圈词与拼写已停用。' })
+        return
+      }
       if (!isVocabularyMaterialKind(kind)) {
         context.sendJson(response, 400, { error: 'invalid_vocabulary_pdf_kind', message: '下载类型无效。' })
         return
@@ -864,20 +940,12 @@ export function createVocabularyRoutes() {
       }
     }),
 
-    defineRoute('POST', /^\/api\/vocabulary\/dictation-tasks\/([^/]+)\/records$/, async ({ request, response, match, context }) => {
-      const userId = context.resolveDataUserId(context)
-      const input = await context.readJsonBody(request, { maxBytes: 100_000 })
-      try {
-        const record = withUserDb(context, false, (db) => createVocabularyDictationRecord(
-          db,
-          userId,
-          decodePathPart(match[1]),
-          input,
-        ))
-        context.sendJson(response, 201, { record })
-      } catch (error) {
-        sendVocabularyError(response, context, error)
-      }
+    defineRoute('POST', /^\/api\/vocabulary\/dictation-tasks\/([^/]+)\/records$/, ({ response, context }) => {
+      context.resolveDataUserId(context)
+      context.sendJson(response, 410, {
+        error: 'vocabulary_dictation_grading_retired',
+        message: '听写批改已停用；历史记录仍可查看。',
+      })
     }),
 
     defineRoute('GET', /^\/api\/vocabulary\/dictation-records$/, ({ request, response, context }) => {
@@ -906,73 +974,28 @@ export function createVocabularyRoutes() {
       }
     }),
 
-    defineRoute('PATCH', /^\/api\/vocabulary\/dictation-records\/([^/]+)$/, async ({ request, response, match, context }) => {
-      const userId = context.resolveDataUserId(context)
-      const input = await context.readJsonBody(request, { maxBytes: 100_000 })
-      try {
-        const record = withUserDb(context, false, (db) => updateVocabularyDictationRecord(
-          db,
-          userId,
-          decodePathPart(match[1]),
-          input,
-        ))
-        context.sendJson(response, 200, { record })
-      } catch (error) {
-        sendVocabularyError(response, context, error)
-      }
+    defineRoute('PATCH', /^\/api\/vocabulary\/dictation-records\/([^/]+)$/, ({ response, context }) => {
+      context.resolveDataUserId(context)
+      context.sendJson(response, 410, {
+        error: 'vocabulary_dictation_grading_retired',
+        message: '听写批改已停用；历史记录仍可查看。',
+      })
     }),
 
-    defineRoute('POST', /^\/api\/vocabulary\/dictation-records\/([^/]+)\/void$/, ({ response, match, context }) => {
-      const userId = context.resolveDataUserId(context)
-      try {
-        const record = withUserDb(context, false, (db) => voidVocabularyDictationRecord(db, userId, decodePathPart(match[1])))
-        context.sendJson(response, 200, { record })
-      } catch (error) {
-        sendVocabularyError(response, context, error)
-      }
+    defineRoute('POST', /^\/api\/vocabulary\/dictation-records\/([^/]+)\/void$/, ({ response, context }) => {
+      context.resolveDataUserId(context)
+      context.sendJson(response, 410, {
+        error: 'vocabulary_dictation_grading_retired',
+        message: '听写批改已停用；历史记录仍可查看。',
+      })
     }),
 
-    defineRoute('POST', /^\/api\/vocabulary\/dictation-records\/([^/]+)\/restore$/, ({ response, match, context }) => {
-      const userId = context.resolveDataUserId(context)
-      try {
-        const record = withUserDb(context, false, (db) => restoreVocabularyDictationRecord(db, userId, decodePathPart(match[1])))
-        context.sendJson(response, 200, { record })
-      } catch (error) {
-        sendVocabularyError(response, context, error)
-      }
-    }),
-
-    defineRoute('GET', /^\/api\/vocabulary\/review-states$/, ({ request, response, context }) => {
-      const userId = context.resolveDataUserId(context)
-      const query = readQuery(request)
-      try {
-        const states = withUserDb(context, false, (db) => getStudentVocabularyReviewStates(
-          db,
-          userId,
-          readQueryPart(request, 'studentId'),
-          query.get('programId') ?? 'wanwei-round-one-v1',
-        ))
-        context.sendJson(response, 200, { states })
-      } catch (error) {
-        sendVocabularyError(response, context, error)
-      }
-    }),
-
-    defineRoute('GET', /^\/api\/vocabulary\/review-suggestion$/, ({ request, response, context }) => {
-      const userId = context.resolveDataUserId(context)
-      const query = readQuery(request)
-      try {
-        const entries = withUserDb(context, false, (db) => getSuggestedVocabularyReview(
-          db,
-          userId,
-          readQueryPart(request, 'studentId'),
-          query.get('programId') ?? 'wanwei-round-one-v1',
-          query.get('target'),
-        ))
-        context.sendJson(response, 200, { entries })
-      } catch (error) {
-        sendVocabularyError(response, context, error)
-      }
+    defineRoute('POST', /^\/api\/vocabulary\/dictation-records\/([^/]+)\/restore$/, ({ response, context }) => {
+      context.resolveDataUserId(context)
+      context.sendJson(response, 410, {
+        error: 'vocabulary_dictation_grading_retired',
+        message: '听写批改已停用；历史记录仍可查看。',
+      })
     }),
 
     defineRoute('PATCH', /^\/api\/vocabulary\/review-states\/([^/]+)\/flag$/, async ({ request, response, match, context }) => {
@@ -1046,6 +1069,10 @@ export function createVocabularyRoutes() {
       const kind = searchParams.get('kind') ?? 'cards'
       if (accent !== 'american' && accent !== 'british') {
         context.sendJson(response, 400, { error: 'invalid_vocabulary_accent', message: '单词纸音标必须选择英式或美式。' })
+        return
+      }
+      if (kind === 'word-search') {
+        context.sendJson(response, 410, { error: 'vocabulary_word_search_retired', message: '圈词与拼写已停用。' })
         return
       }
       if (!isVocabularyMaterialKind(kind)) {

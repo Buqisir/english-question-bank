@@ -166,7 +166,6 @@ const registry = {
   'scripts/verify-gaokao-vocabulary-golden-import.mjs',
   'scripts/verify-vocabulary-migration.mjs',
   'scripts/verify-vocabulary-match-game.mjs',
-  'scripts/verify-vocabulary-word-search.mjs',
   'scripts/verify-vocabulary-rendered-behavior.mjs',
   'scripts/verify-paper-canonical-detail-screen-consumption.mjs',
   'scripts/verify-reading-analysis-retire.mjs',

@@ -4,12 +4,9 @@ import {
   ChevronDown,
   ChevronLeft,
   ChevronRight,
-  ClipboardCheck,
-  Copy,
   Download,
   Eye,
   FileCheck2,
-  Flag,
   Link2,
   ListChecks,
   PauseCircle,
@@ -20,24 +17,21 @@ import {
   Save,
   Shuffle,
   Sparkles,
-  Undo2,
   X,
 } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import type { VocabularySetEntry } from '../../domain/vocabulary'
 import {
-  createVocabularyDictationRecord,
   createVocabularyDictationTask,
-  createVocabularySetErrorTasks,
   downloadCombinedVocabularyMaterialsZip,
   downloadCombinedVocabularyPdf,
   downloadVocabularyDictationTaskMaterialsZip,
   downloadVocabularyDictationTaskPdf,
+  downloadVocabularyMeaningRecallRecordMaterialsZip,
+  downloadVocabularyMeaningRecallRecordPdf,
   getStudentVocabularyMeaningStates,
-  getStudentVocabularyReviewStates,
-  getSuggestedVocabularyReview,
-  getVocabularyDictationTask,
+  getSuggestedVocabularyMeaningRecall,
   getVocabularySet,
   getVocabularySetLibrary,
   listVocabularyDictationRecords,
@@ -45,17 +39,12 @@ import {
   listVocabularyMeaningRecallRecords,
   listVocabularyStudents,
   revokeVocabularyDictationTaskShare,
-  restoreVocabularyDictationRecord,
-  restoreVocabularyMeaningRecallRecord,
   shareVocabularyDictationTask,
   updateStudentVocabularyWordFlag,
-  updateVocabularyDictationRecord,
-  voidVocabularyDictationRecord,
+  vocabularyMeaningRecallRecordMaterialFileName,
   voidVocabularyMeaningRecallRecord,
   type StudentVocabularyMeaningStateDto,
-  type StudentVocabularyReviewStateDto,
   type VocabularyDictationRecordDto,
-  type VocabularyDictationResult,
   type VocabularyDictationTaskDto,
   type VocabularyHandwritingMode,
   type VocabularyMeaningRecallRecordDto,
@@ -79,18 +68,11 @@ const SUGGESTION_TARGET_STORAGE_KEY = 'eqb-vocabulary-review-suggestion-target-v
 type WorkspaceTab = 'sets' | 'meaning' | 'tasks' | 'review' | 'history'
 type Accent = 'american' | 'british'
 type PrintKind = VocabularyMaterialKind
-type ReviewFilter = 'all' | 'meaning' | 'dictation' | 'frequent'
+type ReviewFilter = 'all' | 'frequent'
+type HistoryFilter = 'meaning' | 'dictation'
 type DictationTaskDateGroup = {
   dateKey: string
   tasks: VocabularyDictationTaskDto[]
-}
-type ReviewWord = VocabularySetEntry & {
-  sourceSetIds: string[]
-  meaningState: StudentVocabularyMeaningStateDto | null
-  dictationState: StudentVocabularyReviewStateDto | null
-  pinned: boolean
-  paused: boolean
-  frequent: boolean
 }
 
 type HandwritingDownloadRequest = {
@@ -100,23 +82,8 @@ type HandwritingDownloadRequest = {
   source:
     | { kind: 'sets'; sourceSetIds: string[]; layout: 'dedupe' | 'grouped' }
     | { kind: 'task'; taskId: string }
-    | { kind: 'errors' }
 }
 
-type GraderState = {
-  task: VocabularyDictationTaskDto
-  record: VocabularyDictationRecordDto | null
-  mode: 'all' | 'partial'
-  dictationDate: string
-  note: string
-  results: Record<string, { result: VocabularyDictationResult; wrongSpelling: string }>
-  activeIndex: number
-  wrongNumbers: string
-  testedNumbers: string
-  dirty: boolean
-  saving: boolean
-  editVersion: number
-}
 
 type DownloadOptionProps = {
   label: string
@@ -193,52 +160,6 @@ function dedupeTaskEntries(tasks: VocabularyDictationTaskDto[]) {
   })
 }
 
-function mergeReviewWords(
-  meaningStates: StudentVocabularyMeaningStateDto[],
-  dictationStates: StudentVocabularyReviewStateDto[],
-): ReviewWord[] {
-  const merged = new Map<string, {
-    meaningState: StudentVocabularyMeaningStateDto | null
-    dictationState: StudentVocabularyReviewStateDto | null
-    firstIndex: number
-  }>()
-
-  meaningStates.forEach((state, index) => {
-    merged.set(state.id, { meaningState: state, dictationState: null, firstIndex: index })
-  })
-  dictationStates.forEach((state, index) => {
-    const current = merged.get(state.id)
-    merged.set(state.id, current
-      ? { ...current, dictationState: state, firstIndex: Math.min(current.firstIndex, index) }
-      : { meaningState: null, dictationState: state, firstIndex: index })
-  })
-
-  return [...merged.values()].flatMap(({ meaningState, dictationState, firstIndex }) => {
-    const meaningPending = Boolean(meaningState && meaningState.status !== 'improved')
-    const dictationPending = Boolean(dictationState && dictationState.status !== 'improved')
-    if (!meaningPending && !dictationPending) return []
-    const base = dictationState ?? meaningState!
-    return [{
-      ...base,
-      sourceSetIds: [...new Set([
-        ...(meaningState?.sourceSetIds ?? []),
-        ...(dictationState?.sourceSetIds ?? []),
-      ])],
-      meaningState: meaningPending ? meaningState : null,
-      dictationState: dictationPending ? dictationState : null,
-      pinned: Boolean(meaningState?.pinned || dictationState?.pinned),
-      paused: Boolean(meaningState?.paused || dictationState?.paused),
-      frequent: meaningState?.status === 'repeated' || dictationState?.status === 'stubborn',
-      firstIndex,
-    }]
-  }).sort((left, right) => (
-    Number(right.pinned) - Number(left.pinned)
-    || Number(Boolean(right.meaningState && right.dictationState)) - Number(Boolean(left.meaningState && left.dictationState))
-    || Number(right.frequent) - Number(left.frequent)
-    || left.firstIndex - right.firstIndex
-  )).map(({ firstIndex: _firstIndex, ...word }) => word)
-}
-
 function defaultCollectionTitle(studentName: string) {
   return `${studentName} · 生词合集 · ${today()}`
 }
@@ -247,26 +168,6 @@ function defaultTaskTitle() {
   return `${today()} 综合听写`
 }
 
-function parseDictationNumberExpression(value: string, max: number): number[] {
-  const numbers = new Set<number>()
-  for (const rawPart of value.split(/[，,、;；\s]+/u)) {
-    const part = rawPart.trim()
-    if (!part) continue
-    const range = part.match(/^(\d+)-(\d+)$/u)
-    if (range) {
-      const start = Number(range[1])
-      const end = Number(range[2])
-      if (start < 1 || end < start || end > max) throw new Error(`题号范围必须在 1–${max} 之间。`)
-      for (let number = start; number <= end; number += 1) numbers.add(number)
-      continue
-    }
-    if (!/^\d+$/u.test(part)) throw new Error('题号请用逗号分隔，连续题号可写成 8-10。')
-    const number = Number(part)
-    if (number < 1 || number > max) throw new Error(`题号必须在 1–${max} 之间。`)
-    numbers.add(number)
-  }
-  return [...numbers].sort((left, right) => left - right)
-}
 
 function dedupeEntries(sets: VocabularySetLibraryItemDto[]) {
   const seen = new Set<string>()
@@ -314,20 +215,6 @@ function countMeaningRecordResults(record: VocabularyMeaningRecallRecordDto) {
   }, { correct: 0, wrong: 0, untested: 0 })
 }
 
-function initialResults(
-  task: VocabularyDictationTaskDto,
-  record: VocabularyDictationRecordDto | null,
-  mode: 'all' | 'partial',
-) {
-  return Object.fromEntries(task.entries.map((entry) => {
-    const existing = record?.entries.find((item) => item.id === entry.id)
-    return [entry.id, {
-      result: existing?.result ?? (mode === 'all' ? 'correct' : 'untested'),
-      wrongSpelling: existing?.wrongSpelling ?? '',
-    }]
-  }))
-}
-
 export function VocabularyDictationWorkbench({
   onBackToVocabulary,
   requestedSetId,
@@ -347,7 +234,6 @@ export function VocabularyDictationWorkbench({
   const [meaningRecords, setMeaningRecords] = useState<VocabularyMeaningRecallRecordDto[]>([])
   const [meaningStates, setMeaningStates] = useState<StudentVocabularyMeaningStateDto[]>([])
   const [meaningSessionActive, setMeaningSessionActive] = useState(false)
-  const [reviewStates, setReviewStates] = useState<StudentVocabularyReviewStateDto[]>([])
   const [selectedSets, setSelectedSets] = useState<VocabularySetLibraryItemDto[]>([])
   const [selectedTaskIds, setSelectedTaskIds] = useState<string[]>([])
   const [selectedReviewIds, setSelectedReviewIds] = useState<string[]>([])
@@ -356,7 +242,6 @@ export function VocabularyDictationWorkbench({
   const [fromDate, setFromDate] = useState('')
   const [toDate, setToDate] = useState('')
   const [printMode, setPrintMode] = useState<'dedupe' | 'grouped'>('dedupe')
-  const [errorMaterialLayout, setErrorMaterialLayout] = useState<'merged' | 'grouped'>('merged')
   const [accent, setAccent] = useState<Accent>('american')
   const [shuffleBeforeFreeze, setShuffleBeforeFreeze] = useState(false)
   const [collectionTitle, setCollectionTitle] = useState('')
@@ -366,20 +251,20 @@ export function VocabularyDictationWorkbench({
   const [error, setError] = useState('')
   const [createdTasks, setCreatedTasks] = useState<VocabularyDictationTaskDto[]>([])
   const [handwritingDownloadRequest, setHandwritingDownloadRequest] = useState<HandwritingDownloadRequest | null>(null)
-  const [graderError, setGraderError] = useState('')
-  const [grader, setGrader] = useState<GraderState | null>(null)
   const [suggestionTarget, setSuggestionTarget] = useState(() => {
     const stored = Number(window.localStorage.getItem(SUGGESTION_TARGET_STORAGE_KEY))
     return Math.max(1, Math.min(60, stored || 20))
   })
-  const [suggestion, setSuggestion] = useState<StudentVocabularyReviewStateDto[]>([])
+  const [suggestion, setSuggestion] = useState<Array<VocabularySetEntry & { sourceSetIds: string[]; reason: string }>>([])
   const [showPausedReview, setShowPausedReview] = useState(false)
   const [reviewMode, setReviewMode] = useState<ReviewFilter>('all')
+  const [historyFilter, setHistoryFilter] = useState<HistoryFilter>('meaning')
   const [requestedMeaningRecordId, setRequestedMeaningRecordId] = useState<string | null>(null)
+  const [requestedMeaningReview, setRequestedMeaningReview] = useState<{
+    requestId: string
+    entries: Array<VocabularySetEntry & { sourceSetIds: string[] }>
+  } | null>(null)
   const [libraryRefreshVersion, setLibraryRefreshVersion] = useState(0)
-  const graderRef = useRef<GraderState | null>(null)
-  const graderDialogRef = useRef<HTMLElement | null>(null)
-  const graderFirstControlRef = useRef<HTMLButtonElement | null>(null)
   const createdTasksRef = useRef<HTMLElement | null>(null)
   const studentDataVersionRef = useRef(0)
   const activeStudentIdRef = useRef('')
@@ -409,7 +294,6 @@ export function VocabularyDictationWorkbench({
   }
 
   const activeStudent = students.find((student) => student.id === activeStudentId) ?? null
-  const graderTaskId = grader?.task.id ?? null
   const uniqueSelectedEntries = useMemo(() => dedupeEntries(selectedSets), [selectedSets])
   const rawSelectedCount = selectedSets.reduce((sum, set) => sum + set.entryCount, 0)
   const taskDateGroups = useMemo(() => groupTasksByDate(tasks), [tasks])
@@ -417,39 +301,25 @@ export function VocabularyDictationWorkbench({
   const selectedTasks = useMemo(() => tasks.filter((task) => selectedTaskIdSet.has(task.id)), [selectedTaskIdSet, tasks])
   const selectedTaskRawCount = selectedTasks.reduce((sum, task) => sum + task.entryCount, 0)
   const selectedTaskUniqueCount = useMemo(() => dedupeTaskEntries(selectedTasks).length, [selectedTasks])
-  const pendingStates = reviewStates.filter((state) => state.status !== 'improved' && !state.paused)
-  const pendingMeaningStates = meaningStates.filter((state) => state.status !== 'improved' && !state.paused)
-  const selectedSetIdSet = new Set(selectedSets.map((set) => set.id))
-  const reviewWords = useMemo(() => mergeReviewWords(meaningStates, reviewStates), [meaningStates, reviewStates])
-  const selectedGroupReviewWords = reviewWords.filter((word) => (
-    !word.paused && word.sourceSetIds.some((id) => selectedSetIdSet.has(id))
-  ))
+  const reviewWords = meaningStates.filter((state) => state.status !== 'improved')
   const filteredReviewWords = reviewWords.filter((word) => (
     reviewMode === 'all'
-    || (reviewMode === 'meaning' && word.meaningState)
-    || (reviewMode === 'dictation' && word.dictationState)
-    || (reviewMode === 'frequent' && word.frequent)
+    || (reviewMode === 'frequent' && word.status === 'repeated')
   ))
   const pausedReviewCount = filteredReviewWords.filter((word) => word.paused).length
   const visibleReviewWords = filteredReviewWords.filter((word) => !word.paused || showPausedReview)
   const selectedReviewWords = reviewWords.filter((word) => !word.paused && selectedReviewIds.includes(word.id))
-  const detectionHistory = useMemo(() => [
-    ...meaningRecords.map((record) => ({ kind: 'meaning' as const, date: record.recallDate, updatedAt: record.updatedAt, record })),
-    ...records.map((record) => ({ kind: 'dictation' as const, date: record.dictationDate, updatedAt: record.updatedAt, record })),
-  ].sort((left, right) => right.date.localeCompare(left.date) || right.updatedAt.localeCompare(left.updatedAt)), [meaningRecords, records])
-
-  useEffect(() => {
-    graderRef.current = grader
-  }, [grader])
+  const detectionHistory = useMemo(() => historyFilter === 'meaning'
+    ? meaningRecords.map((record) => ({ kind: 'meaning' as const, date: record.recallDate, updatedAt: record.updatedAt, record }))
+      .sort((left, right) => right.date.localeCompare(left.date) || right.updatedAt.localeCompare(left.updatedAt))
+    : records.map((record) => ({ kind: 'dictation' as const, date: record.dictationDate, updatedAt: record.updatedAt, record }))
+      .sort((left, right) => right.date.localeCompare(left.date) || right.updatedAt.localeCompare(left.updatedAt)),
+  [historyFilter, meaningRecords, records])
 
   useEffect(() => {
     const availableIds = new Set(tasks.map((task) => task.id))
     setSelectedTaskIds((current) => current.filter((id) => availableIds.has(id)))
   }, [tasks])
-
-  useEffect(() => {
-    if (graderTaskId) window.requestAnimationFrame(() => graderFirstControlRef.current?.focus())
-  }, [graderTaskId])
 
   useEffect(() => {
     if (!createdTasks.length) return
@@ -463,17 +333,15 @@ export function VocabularyDictationWorkbench({
   const refreshStudentData = useCallback(async (studentId: string) => {
     const requestedVersion = studentDataVersionRef.current + 1
     studentDataVersionRef.current = requestedVersion
-    const [nextTasks, nextRecords, nextStates, nextMeaningRecords, nextMeaningStates] = await Promise.all([
+    const [nextTasks, nextRecords, nextMeaningRecords, nextMeaningStates] = await Promise.all([
       listVocabularyDictationTasks(studentId),
       listVocabularyDictationRecords(studentId),
-      getStudentVocabularyReviewStates(studentId),
       listVocabularyMeaningRecallRecords(studentId),
       getStudentVocabularyMeaningStates(studentId),
     ])
     if (requestedVersion !== studentDataVersionRef.current || studentId !== activeStudentIdRef.current) return
     setTasks(nextTasks)
     setRecords(nextRecords)
-    setReviewStates(nextStates)
     setMeaningRecords(nextMeaningRecords)
     setMeaningStates(nextMeaningStates)
     setLibraryRefreshVersion((current) => current + 1)
@@ -564,121 +432,6 @@ export function VocabularyDictationWorkbench({
     return () => window.clearTimeout(timer)
   }, [searchInput])
 
-  const updateGrader = useCallback((updater: (current: GraderState) => GraderState) => {
-    setGrader((current) => current ? updater(current) : current)
-  }, [])
-
-  const persistGrader = useCallback(async (status: 'draft' | 'completed', explicitSnapshot?: GraderState) => {
-    const snapshot = explicitSnapshot ?? graderRef.current
-    if (!snapshot || snapshot.saving) return null
-    setGrader((current) => current ? { ...current, saving: true } : current)
-    const results = snapshot.task.entries.map((entry) => ({
-      entryId: entry.id,
-      result: snapshot.results[entry.id].result,
-      wrongSpelling: snapshot.results[entry.id].wrongSpelling,
-    }))
-    try {
-      const saved = snapshot.record
-        ? await updateVocabularyDictationRecord(snapshot.record.id, {
-            mode: snapshot.mode,
-            status,
-            dictationDate: snapshot.dictationDate,
-            note: snapshot.note,
-            results,
-          })
-        : await createVocabularyDictationRecord(snapshot.task.id, {
-            mode: snapshot.mode,
-            status,
-            dictationDate: snapshot.dictationDate,
-            note: snapshot.note,
-            results,
-          })
-      setGrader((current) => {
-        if (!current || current.task.id !== snapshot.task.id) return current
-        return {
-          ...current,
-          record: saved,
-          saving: false,
-          dirty: current.editVersion === snapshot.editVersion ? false : current.dirty,
-        }
-      })
-      if (activeStudentId) await refreshStudentData(activeStudentId)
-      return saved
-    } catch (nextError) {
-      setGrader((current) => current ? { ...current, saving: false } : current)
-      setGraderError(nextError instanceof Error ? nextError.message : '听写记录保存失败。')
-      return null
-    }
-  }, [activeStudentId, refreshStudentData])
-
-  useEffect(() => {
-    if (!grader?.dirty || grader.saving || grader.record?.status === 'completed') return
-    const timer = window.setTimeout(() => { void persistGrader('draft') }, 700)
-    return () => window.clearTimeout(timer)
-  }, [grader?.dirty, grader?.editVersion, grader?.record?.status, grader?.saving, persistGrader])
-
-  useEffect(() => {
-    const flushPendingDraft = () => {
-      const current = graderRef.current
-      if (!current?.dirty || current.saving) return
-      void persistGrader(current.record?.status === 'completed' ? 'completed' : 'draft', current)
-    }
-    const warnBeforeUnload = (event: BeforeUnloadEvent) => {
-      const current = graderRef.current
-      if (!current?.dirty && !current?.saving) return
-      event.preventDefault()
-      event.returnValue = ''
-    }
-    window.addEventListener('popstate', flushPendingDraft)
-    window.addEventListener('beforeunload', warnBeforeUnload)
-    return () => {
-      window.removeEventListener('popstate', flushPendingDraft)
-      window.removeEventListener('beforeunload', warnBeforeUnload)
-    }
-  }, [persistGrader])
-
-  useEffect(() => {
-    if (!grader) return
-    const onKeyDown = (event: KeyboardEvent) => {
-      const target = event.target as HTMLElement | null
-      if (event.key === 'Tab') {
-        const dialog = graderDialogRef.current
-        const focusable = dialog
-          ? [...dialog.querySelectorAll<HTMLElement>('a[href], button:not(:disabled), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex]:not([tabindex="-1"])')]
-          : []
-        const first = focusable[0]
-        const last = focusable.at(-1)
-        if (event.shiftKey && (document.activeElement === first || document.activeElement === dialog)) {
-          event.preventDefault()
-          last?.focus()
-        } else if (!event.shiftKey && document.activeElement === last) {
-          event.preventDefault()
-          first?.focus()
-        }
-        return
-      }
-      if (event.key === 'Enter' && (event.metaKey || event.ctrlKey)) {
-        event.preventDefault()
-        void completeGrading()
-        return
-      }
-      if (target?.matches('input, textarea, select')) return
-      if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
-        event.preventDefault()
-        updateGrader((current) => ({ ...current, activeIndex: Math.min(current.task.entryCount - 1, current.activeIndex + 1) }))
-      } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
-        event.preventDefault()
-        updateGrader((current) => ({ ...current, activeIndex: Math.max(0, current.activeIndex - 1) }))
-      } else if (event.key === ' ') {
-        if (target?.matches('button:not(.dictation-grade-number)')) return
-        event.preventDefault()
-        toggleWrong(grader.task.entries[grader.activeIndex].id)
-      }
-    }
-    window.addEventListener('keydown', onKeyDown)
-    return () => window.removeEventListener('keydown', onKeyDown)
-  })
-
   function toggleSet(set: VocabularySetLibraryItemDto) {
     setSelectedSets((current) => current.some((item) => item.id === set.id)
       ? current.filter((item) => item.id !== set.id)
@@ -687,12 +440,6 @@ export function VocabularyDictationWorkbench({
 
   async function changeStudent(studentId: string) {
     if (!await flushMeaningSaves()) return
-    const currentGrader = graderRef.current
-    if (currentGrader?.saving) return
-    if (currentGrader?.dirty) {
-      const saved = await persistGrader(currentGrader.record?.status === 'completed' ? 'completed' : 'draft')
-      if (!saved) return
-    }
     studentDataVersionRef.current += 1
     activeStudentIdRef.current = studentId
     setActiveStudentId(studentId)
@@ -700,10 +447,8 @@ export function VocabularyDictationWorkbench({
     setSelectedTaskIds([])
     setSelectedReviewIds([])
     setCreatedTasks([])
-    setGrader(null)
     setTasks([])
     setRecords([])
-    setReviewStates([])
     setMeaningRecords([])
     setMeaningStates([])
     setRequestedMeaningRecordId(null)
@@ -713,7 +458,7 @@ export function VocabularyDictationWorkbench({
     setCollectionTitle(defaultCollectionTitle(students.find((student) => student.id === studentId)?.displayName ?? '学生'))
   }
 
-  async function createTasks({ share, openFirst }: { share: boolean; openFirst: boolean }) {
+  async function createTasks({ share }: { share: boolean }) {
     if (!activeStudent || !selectedSets.length) return
     setBusy(true)
     setError('')
@@ -743,7 +488,6 @@ export function VocabularyDictationWorkbench({
       setCreatedTasks(nextTasks)
       setTasks((current) => [...nextTasks, ...current])
       setSelectedSets([])
-      if (openFirst) openGrader(nextTasks[0])
     } catch (nextError) {
       setError(nextError instanceof Error ? nextError.message : '听写生成失败。')
     } finally {
@@ -852,166 +596,43 @@ export function VocabularyDictationWorkbench({
     }
   }
 
-  function openGrader(task: VocabularyDictationTaskDto, record: VocabularyDictationRecordDto | null = null) {
-    const mode = record?.mode ?? 'all'
-    setGraderError('')
-    setGrader({
-      task,
-      record,
-      mode,
-      dictationDate: record?.dictationDate ?? today(),
-      note: record?.note ?? '',
-      results: initialResults(task, record, mode),
-      activeIndex: 0,
-      wrongNumbers: '',
-      testedNumbers: '',
-      dirty: false,
-      saving: false,
-      editVersion: 0,
-    })
-  }
-
-  function markDirty(current: GraderState, patch: Partial<GraderState>): GraderState {
-    return { ...current, ...patch, dirty: true, editVersion: current.editVersion + 1 }
-  }
-
-  function toggleWrong(entryId: string) {
-    updateGrader((current) => {
-      const previous = current.results[entryId]
-      const result: VocabularyDictationResult = previous.result === 'wrong'
-        ? current.mode === 'all' ? 'correct' : 'untested'
-        : 'wrong'
-      return markDirty(current, {
-        results: {
-          ...current.results,
-          [entryId]: { result, wrongSpelling: result === 'wrong' ? previous.wrongSpelling : '' },
-        },
-      })
-    })
-  }
-
-  function changeGraderMode(mode: 'all' | 'partial') {
-    updateGrader((current) => markDirty(current, {
-      mode,
-      results: Object.fromEntries(current.task.entries.map((entry) => {
-        const previous = current.results[entry.id]
-        if (previous.result === 'wrong') return [entry.id, previous]
-        return [entry.id, { result: mode === 'all' ? 'correct' : 'untested', wrongSpelling: '' }]
-      })),
-    }))
-  }
-
-  function resultsFromNumberInputs(current: GraderState): GraderState['results'] {
-    const tested = current.mode === 'partial'
-      ? new Set(parseDictationNumberExpression(current.testedNumbers, current.task.entryCount))
-      : new Set(Array.from({ length: current.task.entryCount }, (_, index) => index + 1))
-    const wrong = new Set(parseDictationNumberExpression(current.wrongNumbers, current.task.entryCount))
-    if ([...wrong].some((number) => !tested.has(number))) {
-      throw new Error('错词题号必须先包含在实际抽听题号中。')
-    }
-    return Object.fromEntries(current.task.entries.map((entry, index) => {
-      const number = index + 1
-      const previous = current.results[entry.id]
-      const result: VocabularyDictationResult = wrong.has(number) ? 'wrong' : tested.has(number) ? 'correct' : 'untested'
-      return [entry.id, { result, wrongSpelling: result === 'wrong' ? previous.wrongSpelling : '' }]
-    }))
-  }
-
-  function consumeNumberInputs(current: GraderState): GraderState {
-    return markDirty(current, {
-      results: resultsFromNumberInputs(current),
-      wrongNumbers: '',
-      testedNumbers: '',
-    })
-  }
-
-  function applyNumberInputs() {
-    if (!grader) return
-    try {
-      updateGrader((current) => consumeNumberInputs(current))
-      setGraderError('')
-    } catch (nextError) {
-      setGraderError(nextError instanceof Error ? nextError.message : '题号格式无效。')
-    }
-  }
-
-  async function completeGrading() {
-    let current = graderRef.current
-    if (!current) return
-    if (current.wrongNumbers.trim() || (current.mode === 'partial' && current.testedNumbers.trim())) {
-      try {
-        current = consumeNumberInputs(current)
-        graderRef.current = current
-        setGrader(current)
-        setGraderError('')
-      } catch (nextError) {
-        setGraderError(nextError instanceof Error ? nextError.message : '题号格式无效。')
-        return
-      }
-    }
-    const untestedCount = Object.values(current.results).filter((result) => result.result === 'untested').length
-    if (untestedCount > 0 && !window.confirm(`${untestedCount} 个词会记为“未考”，不参与错词统计。确认完成吗？`)) return
-    const saved = await persistGrader('completed', current)
-    if (saved) setMessage(current.record ? '听写记录已更新，复习状态已重新计算。' : '听写记录已完成。')
-  }
-
-  async function closeGraderAndSave() {
-    const current = graderRef.current
-    if (!current || current.saving) return
-    if (!current.dirty) {
-      setGrader(null)
-      return
-    }
-    const saved = await persistGrader(current.record?.status === 'completed' ? 'completed' : 'draft')
-    if (saved) setGrader(null)
-  }
-
   async function leaveWorkbench(next: () => void) {
     if (!await flushMeaningSaves()) return
-    const current = graderRef.current
-    if (current?.saving) return
-    if (current?.dirty) {
-      const saved = await persistGrader(current.record?.status === 'completed' ? 'completed' : 'draft', current)
-      if (!saved) return
-    }
     next()
-  }
-
-  async function editRecord(record: VocabularyDictationRecordDto) {
-    setBusy(true)
-    try {
-      const task = tasks.find((item) => item.id === record.taskId) ?? await getVocabularyDictationTask(record.taskId)
-      if (!tasks.some((item) => item.id === task.id)) setTasks((current) => [...current, task])
-      openGrader(task, record)
-    } catch (nextError) {
-      setError(nextError instanceof Error ? nextError.message : '听写加载失败。')
-    } finally {
-      setBusy(false)
-    }
-  }
-
-  async function toggleRecordVoid(record: VocabularyDictationRecordDto) {
-    setBusy(true)
-    try {
-      if (record.status === 'void') await restoreVocabularyDictationRecord(record.id)
-      else await voidVocabularyDictationRecord(record.id)
-      await refreshStudentData(activeStudentId)
-    } catch (nextError) {
-      setError(nextError instanceof Error ? nextError.message : '听写记录状态更新失败。')
-    } finally {
-      setBusy(false)
-    }
   }
 
   async function toggleMeaningRecordVoid(record: VocabularyMeaningRecallRecordDto) {
     setBusy(true)
     setError('')
     try {
-      if (record.status === 'void') await restoreVocabularyMeaningRecallRecord(record.id)
-      else await voidVocabularyMeaningRecallRecord(record.id)
+      await voidVocabularyMeaningRecallRecord(record.id)
       if (activeStudentId) await refreshStudentData(activeStudentId)
     } catch (nextError) {
       setError(nextError instanceof Error ? nextError.message : '认词记录状态修改失败。')
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  async function downloadMeaningRecordMaterial(
+    record: VocabularyMeaningRecallRecordDto,
+    kind: VocabularyMaterialKind | 'bundle',
+    mode: FileSaveMode,
+    handwritingMode: VocabularyHandwritingMode = 'standard',
+  ) {
+    setBusy(true)
+    setError('')
+    try {
+      const target = await prepareFileSaveTarget({
+        mode,
+        suggestedName: vocabularyMeaningRecallRecordMaterialFileName(record, accent, kind, handwritingMode),
+        mimeType: kind === 'bundle' ? 'application/zip' : 'application/pdf',
+      })
+      if (!target) return
+      if (kind === 'bundle') await downloadVocabularyMeaningRecallRecordMaterialsZip(record.id, accent, target)
+      else await downloadVocabularyMeaningRecallRecordPdf(record.id, accent, kind, target, handwritingMode)
+    } catch (nextError) {
+      setError(nextError instanceof Error ? nextError.message : '本轮错词资料下载失败。')
     } finally {
       setBusy(false)
     }
@@ -1041,13 +662,21 @@ export function VocabularyDictationWorkbench({
     const studentId = activeStudentId
     setBusy(true)
     try {
-      const entries = await getSuggestedVocabularyReview(studentId, suggestionTarget)
+      const entries = await getSuggestedVocabularyMeaningRecall(studentId, suggestionTarget)
       if (studentId === activeStudentIdRef.current) setSuggestion(entries)
     } catch (nextError) {
-      setError(nextError instanceof Error ? nextError.message : '建议听写加载失败。')
+      setError(nextError instanceof Error ? nextError.message : '复习建议加载失败。')
     } finally {
       setBusy(false)
     }
+  }
+
+  function startMeaningReview(entries: Array<VocabularySetEntry & { sourceSetIds: string[] }>) {
+    if (!entries.length) return
+    setRequestedMeaningReview({ requestId: crypto.randomUUID(), entries: entries.slice(0, 60) })
+    setSelectedReviewIds([])
+    setSuggestion([])
+    setTab('meaning')
   }
 
   async function createTaskFromReviewEntries(entries: Array<VocabularySetEntry & { sourceSetIds: string[] }>) {
@@ -1078,15 +707,6 @@ export function VocabularyDictationWorkbench({
       setError(nextError instanceof Error ? nextError.message : '错词听写生成失败。')
     } finally {
       setBusy(false)
-    }
-  }
-
-  async function copyEntries(entries: Array<VocabularySetEntry>) {
-    try {
-      await navigator.clipboard.writeText(entries.map((entry, index) => `${index + 1}. ${entry.headword}  ${formatMeaning(entry)}`).join('\n'))
-      setMessage(`已复制 ${entries.length} 个词。`)
-    } catch {
-      setError('复制失败，请检查浏览器剪贴板权限。')
     }
   }
 
@@ -1132,15 +752,6 @@ export function VocabularyDictationWorkbench({
           selectedEntryIds,
           handwritingMode,
         )
-      } else {
-        await downloadCombinedVocabularyPdf({
-          studentId: activeStudent.id,
-          title: request.title,
-          entryIds: selectedEntryIds,
-          handwritingMode,
-          accent,
-          kind: 'handwriting',
-        }, target)
       }
       setMessage(target.kind === 'file' || target.kind === 'directory' ? '衡水体练字纸已保存。' : '衡水体练字纸已开始下载。')
     } catch (nextError) {
@@ -1166,7 +777,6 @@ export function VocabularyDictationWorkbench({
       cards: '单词卡',
       dictation: '听写纸',
       answer: '教师答案',
-      'word-search': '圈词与拼写',
       handwriting: '衡水体练字纸',
     }
     try {
@@ -1244,7 +854,7 @@ export function VocabularyDictationWorkbench({
           ? '听写纸'
           : kind === 'answer'
             ? '教师答案'
-            : '圈词与拼写'
+            : '衡水体练字纸'
       const target = await prepareFileSaveTarget({
         mode,
         suggestedName: `${task.title || '综合听写'}-${kindLabel}.pdf`,
@@ -1280,79 +890,14 @@ export function VocabularyDictationWorkbench({
     }
   }
 
-  function downloadErrorHandwriting(mode: FileSaveMode = 'download') {
-    if (!selectedGroupReviewWords.length) return
-    openHandwritingSelector({
-      mode,
-      title: `${today()}-错词`,
-      entries: selectedGroupReviewWords,
-      source: { kind: 'errors' },
-    })
-  }
-
-  async function createAndDownloadSetErrorMaterials(
-    kinds: PrintKind[],
-    mode: FileSaveMode = 'download',
-  ) {
-    if (!activeStudent || !selectedSets.length || !selectedGroupReviewWords.length) return
-    setError('')
-    setMessage('')
-    let nextTasks: VocabularyDictationTaskDto[] = []
-    try {
-      const singlePdf = selectedGroupReviewWords.length <= 60 && kinds.length === 1
-      const kindLabel = kinds[0] === 'cards'
-        ? '单词卡'
-        : kinds[0] === 'dictation'
-          ? '听写纸'
-          : kinds[0] === 'answer'
-            ? '教师答案'
-            : '圈词与拼写'
-      const target = await prepareFileSaveTarget({
-        mode,
-        suggestedName: singlePdf ? `${today()}-错词复听写-${kindLabel}.pdf` : `${today()}-错词复听写-资料.zip`,
-        mimeType: singlePdf ? 'application/pdf' : 'application/zip',
-      })
-      if (!target) return
-      setBusy(true)
-      nextTasks = await createVocabularySetErrorTasks({
-        studentId: activeStudent.id,
-        sourceSetIds: selectedSets.map((set) => set.id),
-        taskDate: today(),
-        accent,
-        materialLayout: errorMaterialLayout,
-      })
-      setCreatedTasks(nextTasks)
-      setTasks((current) => [...nextTasks, ...current])
-      try {
-        if (nextTasks.length === 1 && kinds.length === 1) {
-          await downloadVocabularyDictationTaskPdf(nextTasks[0].id, kinds[0], target)
-        } else {
-          await downloadVocabularyDictationTaskMaterialsZip(nextTasks.map((task) => task.id), kinds, target)
-        }
-        setMessage(target.kind === 'download'
-          ? target.fallbackFromSaveAs
-            ? `已生成 ${nextTasks.length} 份错词复听写；当前浏览器不支持系统另存为，已改为普通下载。`
-            : `已生成 ${nextTasks.length} 份错词复听写并开始下载。`
-          : `已生成 ${nextTasks.length} 份错词复听写并保存到所选位置。`)
-      } catch (downloadError) {
-        setError(`复听写任务已经生成，但资料下载失败。请到“听写”中重试：${downloadError instanceof Error ? downloadError.message : '下载失败。'}`)
-      }
-    } catch (nextError) {
-      setError(nextError instanceof Error ? nextError.message : '错词资料暂时无法生成，请重试。')
-    } finally {
-      setBusy(false)
-    }
-  }
-
   function renderTaskDownloadOptions(task: VocabularyDictationTaskDto, publicHref: string | null) {
     return (
       <>
         <DownloadOption label="单词卡" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'cards')} onSaveAs={() => void downloadTaskMaterial(task, 'cards', 'save-as')}><BookOpenCheck size={14} />{publicHref ? '单词卡（含二维码）' : '单词卡'}</DownloadOption>
         <DownloadOption label="听写纸" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'dictation')} onSaveAs={() => void downloadTaskMaterial(task, 'dictation', 'save-as')}><Download size={14} />{publicHref ? '听写纸（含二维码）' : '听写纸'}</DownloadOption>
         <DownloadOption label="教师答案" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'answer')} onSaveAs={() => void downloadTaskMaterial(task, 'answer', 'save-as')}><FileCheck2 size={14} />教师答案</DownloadOption>
-        <DownloadOption label="圈词与拼写" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'word-search')} onSaveAs={() => void downloadTaskMaterial(task, 'word-search', 'save-as')}><Search size={14} />圈词与拼写</DownloadOption>
         <DownloadOption label="衡水体练字纸" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'handwriting')} onSaveAs={() => void downloadTaskMaterial(task, 'handwriting', 'save-as')}><Printer size={14} />衡水体练字纸</DownloadOption>
-        <DownloadOption label="下载全套" disabled={busy} onDownload={() => void downloadTaskBundle(task)} onSaveAs={() => void downloadTaskBundle(task, 'save-as')}><Download size={14} />下载全套</DownloadOption>
+        <DownloadOption label="下载全套" disabled={busy} onDownload={() => void downloadTaskBundle(task)} onSaveAs={() => void downloadTaskBundle(task, 'save-as')}><Download size={14} />下载全套（4份）</DownloadOption>
       </>
     )
   }
@@ -1393,7 +938,7 @@ export function VocabularyDictationWorkbench({
               听写
             </button>
             <button type="button" className={tab === 'review' ? 'is-active' : ''} onClick={() => { void switchWorkbenchTab('review') }}>
-              错词
+              待复习
             </button>
             <button type="button" className={tab === 'history' ? 'is-active' : ''} onClick={() => { void switchWorkbenchTab('history') }}>
               记录
@@ -1401,7 +946,7 @@ export function VocabularyDictationWorkbench({
           </nav>
           <label className="dictation-student-picker">
             <span>当前学生</span>
-            <select value={activeStudentId} disabled={busy || Boolean(grader) || meaningSessionActive} onChange={(event) => void changeStudent(event.target.value)}>
+            <select value={activeStudentId} disabled={busy || meaningSessionActive} onChange={(event) => void changeStudent(event.target.value)}>
               {students.map((student) => <option key={student.id} value={student.id}>{student.displayName}</option>)}
             </select>
           </label>
@@ -1419,7 +964,7 @@ export function VocabularyDictationWorkbench({
             <header>
               <div className="dictation-created-summary">
                 <strong>{createdTasks.length > 1 ? `已生成 ${createdTasks.length} 份错词听写` : '错词听写已生成'}</strong>
-                <span>{createdTasks.every((task) => task.share?.status === 'active') ? '单词卡扫码听音频，听写纸扫码自动听写。' : '词序已固定，可以下载或批改。'}</span>
+                <span>{createdTasks.every((task) => task.share?.status === 'active') ? '单词卡扫码听音频，听写纸扫码自动听写。' : '词序已固定，可以下载资料。'}</span>
               </div>
               <div className="dictation-created-header-actions">
                 <button type="button" onClick={() => { void switchWorkbenchTab('tasks') }}>去听写查看</button>
@@ -1436,7 +981,6 @@ export function VocabularyDictationWorkbench({
                     <span><strong>{task.title}</strong><small>{task.entryCount} 词 · {task.accent === 'american' ? '美音' : '英音'}</small></span>
                     <div className="dictation-created-actions">
                       {publicHref && <a href={publicHref} target="_blank" rel="noreferrer"><Link2 size={14} />打开听写</a>}
-                      <button type="button" onClick={() => openGrader(task)}><ClipboardCheck size={14} />批改</button>
                       <details className="dictation-download-menu">
                         <summary><Download size={14} />下载资料<ChevronDown size={14} aria-hidden="true" /></summary>
                         <div>
@@ -1467,15 +1011,12 @@ export function VocabularyDictationWorkbench({
               {library.items.length ? library.items.map((set) => {
                 const selectedIndex = selectedSets.findIndex((item) => item.id === set.id)
                 const hasMeaningHistory = Boolean(set.dictationSummary.meaningRecall.latestDate)
-                const hasDictationHistory = set.dictationSummary.recordCount > 0
                 const pendingParts = [
                   set.dictationSummary.meaningRecall.pendingCount > 0 ? `认词错 ${set.dictationSummary.meaningRecall.pendingCount}` : '',
-                  set.dictationSummary.pendingCount > 0 ? `听写错 ${set.dictationSummary.pendingCount}` : '',
                   set.dictationSummary.meaningRecall.repeatedCount > 0 ? `常忘 ${set.dictationSummary.meaningRecall.repeatedCount}` : '',
                 ].filter(Boolean)
                 const historyParts = [
                   hasMeaningHistory ? `认词 ${displayDate(set.dictationSummary.meaningRecall.latestDate)}` : '',
-                  hasDictationHistory ? `听写 ${set.dictationSummary.recordCount} 次 · 最近错 ${set.dictationSummary.latestWrongCount} 词` : '',
                 ].filter(Boolean)
                 return (
                   <label className={selectedIndex >= 0 ? 'dictation-set-row is-selected' : 'dictation-set-row'} key={set.id}>
@@ -1486,7 +1027,7 @@ export function VocabularyDictationWorkbench({
                       <small>{set.entryCount} 词 · {set.entries.slice(0, 5).map((entry) => entry.headword).join('、')}{set.entryCount > 5 ? '…' : ''}</small>
                     </span>
                     <span className="dictation-set-stats">
-                      <strong>{pendingParts.length ? pendingParts.join(' · ') : hasMeaningHistory || hasDictationHistory ? '目前无错词' : '还没检测'}</strong>
+                      <strong>{pendingParts.length ? pendingParts.join(' · ') : hasMeaningHistory ? '目前无待复习词' : '还没认词'}</strong>
                       {historyParts.length > 0 && <small>{historyParts.join(' · ')}</small>}
                     </span>
                   </label>
@@ -1528,28 +1069,11 @@ export function VocabularyDictationWorkbench({
                       <DownloadOption label="单词卡" onDownload={() => void printSelectedSets('cards')} onSaveAs={() => void printSelectedSets('cards', 'save-as')}>单词卡</DownloadOption>
                       <DownloadOption label="听写纸" onDownload={() => void printSelectedSets('dictation')} onSaveAs={() => void printSelectedSets('dictation', 'save-as')}>听写纸</DownloadOption>
                       <DownloadOption label="教师答案" onDownload={() => void printSelectedSets('answer')} onSaveAs={() => void printSelectedSets('answer', 'save-as')}>教师答案</DownloadOption>
-                      <DownloadOption label="圈词与拼写" onDownload={() => void printSelectedSets('word-search')} onSaveAs={() => void printSelectedSets('word-search', 'save-as')}>圈词与拼写</DownloadOption>
                       <DownloadOption label="衡水体练字纸" onDownload={() => void printSelectedSets('handwriting')} onSaveAs={() => void printSelectedSets('handwriting', 'save-as')}>衡水体练字纸</DownloadOption>
-                      <DownloadOption label="下载全套" onDownload={() => void downloadSelectedSetsBundle()} onSaveAs={() => void downloadSelectedSetsBundle('save-as')}>下载全套</DownloadOption>
+                      <DownloadOption label="下载全套" onDownload={() => void downloadSelectedSetsBundle()} onSaveAs={() => void downloadSelectedSetsBundle('save-as')}>下载全套（4份）</DownloadOption>
                     </div>
                   </details>
-                  <button type="button" onClick={() => void createTasks({ share: true, openFirst: false })} disabled={busy}><QrCode size={16} />生成扫码听写</button>
-                  <button type="button" onClick={() => void createTasks({ share: false, openFirst: true })} disabled={busy}><ClipboardCheck size={16} />记录纸笔听写</button>
-                  {selectedGroupReviewWords.length > 0 ? (
-                    <details className="dictation-error-materials-menu">
-                      <summary><ListChecks size={16} />错词资料（{selectedGroupReviewWords.length}词）</summary>
-                      <div>
-                        <label><input type="radio" name="error-material-layout" checked={errorMaterialLayout === 'merged'} onChange={() => setErrorMaterialLayout('merged')} />合并去重</label>
-                        <label><input type="radio" name="error-material-layout" checked={errorMaterialLayout === 'grouped'} onChange={() => setErrorMaterialLayout('grouped')} />按组装订</label>
-                        <DownloadOption label="单词卡" disabled={busy} onDownload={() => void createAndDownloadSetErrorMaterials(['cards'])} onSaveAs={() => void createAndDownloadSetErrorMaterials(['cards'], 'save-as')}><BookOpenCheck size={14} />单词卡</DownloadOption>
-                        <DownloadOption label="听写纸" disabled={busy} onDownload={() => void createAndDownloadSetErrorMaterials(['dictation'])} onSaveAs={() => void createAndDownloadSetErrorMaterials(['dictation'], 'save-as')}><Download size={14} />听写纸</DownloadOption>
-                        <DownloadOption label="教师答案" disabled={busy} onDownload={() => void createAndDownloadSetErrorMaterials(['answer'])} onSaveAs={() => void createAndDownloadSetErrorMaterials(['answer'], 'save-as')}><FileCheck2 size={14} />教师答案</DownloadOption>
-                        <DownloadOption label="圈词与拼写" disabled={busy} onDownload={() => void createAndDownloadSetErrorMaterials(['word-search'])} onSaveAs={() => void createAndDownloadSetErrorMaterials(['word-search'], 'save-as')}><Search size={14} />圈词与拼写</DownloadOption>
-                        <DownloadOption label="衡水体练字纸" disabled={busy} onDownload={() => downloadErrorHandwriting()} onSaveAs={() => downloadErrorHandwriting('save-as')}><Printer size={14} />衡水体练字纸</DownloadOption>
-                        <DownloadOption label="全套错词资料" disabled={busy} onDownload={() => void createAndDownloadSetErrorMaterials(VOCABULARY_MATERIAL_KINDS)} onSaveAs={() => void createAndDownloadSetErrorMaterials(VOCABULARY_MATERIAL_KINDS, 'save-as')}><Download size={14} />下载全套</DownloadOption>
-                      </div>
-                    </details>
-                  ) : <button type="button" disabled><ListChecks size={16} />暂无错词</button>}
+                  <button type="button" onClick={() => void createTasks({ share: true })} disabled={busy}><QrCode size={16} />生成扫码听写</button>
                 </div>
               </aside>
             )}
@@ -1565,6 +1089,8 @@ export function VocabularyDictationWorkbench({
             onAccentChange={setAccent}
             requestedRecordId={requestedMeaningRecordId}
             onRequestedRecordHandled={() => setRequestedMeaningRecordId(null)}
+            requestedReview={requestedMeaningReview}
+            onRequestedReviewHandled={() => setRequestedMeaningReview(null)}
             onNeedSets={() => setTab('sets')}
             onChanged={() => refreshStudentData(activeStudentId)}
             onCreatedTask={(task) => {
@@ -1598,7 +1124,6 @@ export function VocabularyDictationWorkbench({
                           <label className="dictation-task-select"><input type="checkbox" checked={selectedTaskIdSet.has(task.id)} onChange={() => toggleTaskSelection(task.id)} /><span>选择“{task.title}”</span></label>
                           <div><strong title={task.title}>{taskRowTitle(task)}</strong><span>{task.entryCount} 词 · {task.accent === 'american' ? '美音' : '英音'} · {publicHref ? '可扫码' : '无二维码'}</span></div>
                           <div>
-                            <button type="button" onClick={() => openGrader(task)}>批改</button>
                             {publicHref && <a href={publicHref} target="_blank" rel="noreferrer"><Link2 size={14} />打开听写</a>}
                             <details className="dictation-download-menu">
                               <summary><Download size={14} />下载资料<ChevronDown size={14} aria-hidden="true" /></summary>
@@ -1613,7 +1138,7 @@ export function VocabularyDictationWorkbench({
                     })}</div>
                   </section>
                 )
-              })}</div> : <div className="dictation-empty-state"><ClipboardCheck size={28} /><h2>还没有听写</h2><p>先到“词组”选择单词。</p></div>}
+              })}</div> : <div className="dictation-empty-state"><ListChecks size={28} /><h2>还没有听写</h2><p>先到“词组”选择单词。</p></div>}
             </div>
 
             {selectedTasks.length > 0 && (
@@ -1635,6 +1160,10 @@ export function VocabularyDictationWorkbench({
 
         {tab === 'history' && (
           <section className="dictation-record-list dictation-history-list">
+            <header className="dictation-history-filter" role="group" aria-label="记录类型">
+              <button type="button" className={historyFilter === 'meaning' ? 'is-selected' : ''} onClick={() => setHistoryFilter('meaning')}>认词记录</button>
+              <button type="button" className={historyFilter === 'dictation' ? 'is-selected' : ''} onClick={() => setHistoryFilter('dictation')}>历史听写</button>
+            </header>
             {detectionHistory.length ? detectionHistory.map((item) => {
               if (item.kind === 'meaning') {
                 const record = item.record
@@ -1644,8 +1173,21 @@ export function VocabularyDictationWorkbench({
                     <div><strong>{record.title}</strong><span>{displayDate(item.date)} · 认词 · {record.status === 'completed' ? '已完成' : record.status === 'draft' ? '草稿' : '已作废'}</span></div>
                     <div className="dictation-record-counts"><span>错 {counts.wrong}</span><span>对 {counts.correct}</span>{counts.untested > 0 && <span>未测 {counts.untested}</span>}</div>
                     <div>
-                      <button type="button" disabled={record.status === 'void'} onClick={() => { setRequestedMeaningRecordId(record.id); setTab('meaning') }}>{record.status === 'draft' ? '继续' : '查看'}</button>
-                      <button type="button" onClick={() => void toggleMeaningRecordVoid(record)} disabled={busy}>{record.status === 'void' ? <><Undo2 size={14} />恢复</> : '作废'}</button>
+                      {record.status !== 'void' && <button type="button" onClick={() => { setRequestedMeaningRecordId(record.id); setTab('meaning') }}>{record.status === 'draft' ? '继续' : '查看结果'}</button>}
+                      {record.status === 'completed' && counts.wrong > 0 && (
+                        <details className="dictation-download-menu">
+                          <summary><Download size={14} />下载本轮错词<ChevronDown size={14} /></summary>
+                          <div>
+                            <DownloadOption label="单词卡" disabled={busy} onDownload={() => void downloadMeaningRecordMaterial(record, 'cards', 'download')} onSaveAs={() => void downloadMeaningRecordMaterial(record, 'cards', 'save-as')}><BookOpenCheck size={14} />单词卡</DownloadOption>
+                            <DownloadOption label="听写纸" disabled={busy} onDownload={() => void downloadMeaningRecordMaterial(record, 'dictation', 'download')} onSaveAs={() => void downloadMeaningRecordMaterial(record, 'dictation', 'save-as')}><Download size={14} />听写纸</DownloadOption>
+                            <DownloadOption label="教师答案" disabled={busy} onDownload={() => void downloadMeaningRecordMaterial(record, 'answer', 'download')} onSaveAs={() => void downloadMeaningRecordMaterial(record, 'answer', 'save-as')}><FileCheck2 size={14} />教师答案</DownloadOption>
+                            <DownloadOption label="衡水体练字纸" disabled={busy} onDownload={() => void downloadMeaningRecordMaterial(record, 'handwriting', 'download')} onSaveAs={() => void downloadMeaningRecordMaterial(record, 'handwriting', 'save-as')}><Printer size={14} />衡水体练字纸</DownloadOption>
+                            <DownloadOption label="每词写1遍练字纸" disabled={busy} onDownload={() => void downloadMeaningRecordMaterial(record, 'handwriting', 'download', 'single')} onSaveAs={() => void downloadMeaningRecordMaterial(record, 'handwriting', 'save-as', 'single')}><Printer size={14} />练字纸（每词写1遍）</DownloadOption>
+                            <DownloadOption label="下载全套" disabled={busy} onDownload={() => void downloadMeaningRecordMaterial(record, 'bundle', 'download')} onSaveAs={() => void downloadMeaningRecordMaterial(record, 'bundle', 'save-as')}><Download size={14} />下载全套（4份）</DownloadOption>
+                          </div>
+                        </details>
+                      )}
+                      {record.status === 'completed' && <button type="button" onClick={() => void toggleMeaningRecordVoid(record)} disabled={busy}>作废</button>}
                     </div>
                   </article>
                 )
@@ -1656,24 +1198,22 @@ export function VocabularyDictationWorkbench({
                 <article className={record.status === 'void' ? 'is-void' : ''} key={`dictation-${record.id}`}>
                   <div><strong>{record.taskTitle}</strong><span>{displayDate(item.date)} · {record.mode === 'all' ? '完整听写' : '抽听'} · {record.status === 'completed' ? '已完成' : record.status === 'draft' ? '草稿' : '已作废'}</span></div>
                   <div className="dictation-record-counts"><span>错 {counts.wrong}</span><span>对 {counts.correct}</span>{counts.untested > 0 && <span>未测 {counts.untested}</span>}</div>
-                  <div>
-                    <button type="button" onClick={() => void editRecord(record)} disabled={record.status === 'void'}>查看</button>
-                    <button type="button" onClick={() => void toggleRecordVoid(record)} disabled={busy}>{record.status === 'void' ? <><Undo2 size={14} />恢复</> : '作废'}</button>
-                  </div>
+                  <details className="dictation-history-details">
+                    <summary>查看</summary>
+                    <div>{record.entries.map((entry) => <p key={entry.id}><strong>{entry.headword}</strong><span>{entry.result === 'correct' ? '对' : entry.result === 'wrong' ? '错' : '未测'}{entry.wrongSpelling ? ` · 写成 ${entry.wrongSpelling}` : ''}</span></p>)}</div>
+                  </details>
                 </article>
               )
-            }) : <div className="dictation-empty-state"><FileCheck2 size={28} /><h2>还没有记录</h2><p>完成认词或听写后会自动保留。</p></div>}
+            }) : <div className="dictation-empty-state"><FileCheck2 size={28} /><h2>{historyFilter === 'meaning' ? '还没有认词记录' : '还没有历史听写'}</h2><p>{historyFilter === 'meaning' ? '完成认词后会自动保留。' : '旧听写结果会只读保留在这里。'}</p></div>}
           </section>
         )}
 
         {tab === 'review' && (
           <section className="dictation-review-workspace">
             <header className="dictation-review-heading">
-              <div className="dictation-review-channel" role="group" aria-label="错词筛选">
+              <div className="dictation-review-channel" role="group" aria-label="待复习筛选">
                 <button type="button" className={reviewMode === 'all' ? 'is-selected' : ''} onClick={() => { setReviewMode('all'); setSelectedReviewIds([]) }}>全部 {reviewWords.filter((word) => !word.paused).length}</button>
-                <button type="button" className={reviewMode === 'meaning' ? 'is-selected' : ''} onClick={() => { setReviewMode('meaning'); setSelectedReviewIds([]) }}>认词 {pendingMeaningStates.length}</button>
-                <button type="button" className={reviewMode === 'dictation' ? 'is-selected' : ''} onClick={() => { setReviewMode('dictation'); setSelectedReviewIds([]) }}>听写 {pendingStates.length}</button>
-                <button type="button" className={reviewMode === 'frequent' ? 'is-selected' : ''} onClick={() => { setReviewMode('frequent'); setSelectedReviewIds([]) }}>常错 {reviewWords.filter((word) => word.frequent && !word.paused).length}</button>
+                <button type="button" className={reviewMode === 'frequent' ? 'is-selected' : ''} onClick={() => { setReviewMode('frequent'); setSelectedReviewIds([]) }}>常错 {reviewWords.filter((word) => word.status === 'repeated' && !word.paused).length}</button>
               </div>
             </header>
 
@@ -1685,51 +1225,38 @@ export function VocabularyDictationWorkbench({
 
             {suggestion.length > 0 && (
               <aside className="dictation-suggestion-panel">
-                <div><strong>推荐 {suggestion.length} 词</strong><span>确认名单后生成错词听写。</span></div>
+                <div><strong>推荐 {suggestion.length} 词</strong><span>确认名单后直接开始认词复习。</span></div>
                 <ol>{suggestion.map((entry) => <li key={entry.id}><span>{entry.headword}</span><small>{entry.reason}</small></li>)}</ol>
-                <div><button type="button" onClick={() => void createTaskFromReviewEntries(suggestion)}><Sparkles size={15} />生成错词听写</button><button type="button" onClick={() => setSuggestion([])}>收起</button></div>
+                <div><button type="button" className="is-primary" onClick={() => startMeaningReview(suggestion)}><Eye size={15} />开始认词复习</button><button type="button" onClick={() => void createTaskFromReviewEntries(suggestion)}><QrCode size={15} />生成听写</button><button type="button" onClick={() => setSuggestion([])}>收起</button></div>
               </aside>
             )}
 
             {selectedReviewWords.length > 0 && (
               <div className="dictation-review-actions">
                 <span>已选 {selectedReviewWords.length} 词</span>
-                <button type="button" onClick={() => void createTaskFromReviewEntries(selectedReviewWords)} disabled={busy}><Sparkles size={15} />生成错词听写</button>
-                <button type="button" onClick={() => void copyEntries(selectedReviewWords)}><Copy size={15} />复制清单</button>
+                <button type="button" className="is-primary" onClick={() => startMeaningReview(selectedReviewWords)} disabled={busy}><Eye size={15} />开始认词复习</button>
+                <button type="button" onClick={() => void createTaskFromReviewEntries(selectedReviewWords)} disabled={busy}><QrCode size={15} />生成听写</button>
                 <button type="button" onClick={() => setSelectedReviewIds([])}>取消</button>
               </div>
             )}
 
             {visibleReviewWords.length ? (
-              <div className="dictation-review-table" role="table" aria-label="错词列表">
-                <div className="dictation-review-table-head" role="row"><span>选择</span><span>单词</span><span>错误来源</span><span>当前情况</span><span>操作</span></div>
-                {visibleReviewWords.map((word, index) => {
-                  const recentDate = [word.meaningState?.lastForgottenDate, word.dictationState?.lastWrongDate]
-                    .filter((value): value is string => Boolean(value))
-                    .sort()
-                    .reverse()[0] ?? null
-                  return (
+              <div className="dictation-review-table" role="table" aria-label="待复习列表">
+                <div className="dictation-review-table-head" role="row"><span>选择</span><span>单词</span><span>认词记录</span><span>当前情况</span><span>操作</span></div>
+                {visibleReviewWords.map((word, index) => (
                     <div className={word.paused ? 'dictation-review-row is-paused' : 'dictation-review-row'} role="row" key={word.id}>
                       <label><input type="checkbox" checked={selectedReviewIds.includes(word.id)} disabled={word.paused} onChange={() => setSelectedReviewIds((current) => current.includes(word.id) ? current.filter((id) => id !== word.id) : [...current, word.id])} /><span>{reviewMode === 'frequent' ? index + 1 : ''}</span></label>
                       <div><strong>{word.headword}</strong><small>{word.partOfSpeech} {formatMeaning(word)}</small></div>
                       <div className="dictation-review-evidence">
-                        <span>{word.meaningState && <b>认词</b>}{word.dictationState && <b>听写</b>}</span>
-                        <small>{[
-                          word.meaningState ? `认词错 ${word.meaningState.totalWrong} 次` : '',
-                          word.dictationState ? `听写错 ${word.dictationState.totalWrong} 次` : '',
-                        ].filter(Boolean).join(' · ')} · 最近 {displayDate(recentDate)}</small>
-                        {word.dictationState?.lastWrongSpelling && <small>上次写成：{word.dictationState.lastWrongSpelling}</small>}
+                        <span><b>认词</b></span>
+                        <small>忘记 {word.totalWrong} 次 · 最近 {displayDate(word.lastForgottenDate)}</small>
                       </div>
-                      <div><strong>{word.frequent ? '常错' : '待复习'}</strong><small>{[
-                        word.meaningState ? `认词还需 ${Math.max(0, 2 - word.meaningState.currentCorrectDateCount)} 天` : '',
-                        word.dictationState ? `听写还需 ${Math.max(0, 2 - word.dictationState.currentConsecutiveCorrect)} 次` : '',
-                      ].filter(Boolean).join(' · ')}{word.paused ? ' · 已暂停' : ''}</small></div>
+                      <div><strong>{word.status === 'repeated' ? '常错' : '待复习'}</strong><small>还需 {Math.max(0, 2 - word.currentCorrectDateCount)} 天认词正确{word.paused ? ' · 已暂停' : ''}</small></div>
                       <div><button type="button" className={word.pinned ? 'is-active' : ''} aria-pressed={word.pinned} onClick={() => void toggleFlag(word, 'pinned')}><Pin size={14} />重点</button><button type="button" className={word.paused ? 'is-active' : ''} aria-pressed={word.paused} onClick={() => void toggleFlag(word, 'paused')}><PauseCircle size={14} />暂停</button></div>
                     </div>
-                  )
-                })}
+                ))}
               </div>
-            ) : <div className="dictation-empty-state"><Check size={28} /><h2>{reviewMode === 'all' ? '现在没有错词' : reviewMode === 'meaning' ? '现在没有认词错词' : reviewMode === 'dictation' ? '现在没有听写错词' : '现在没有常错词'}</h2><p>出错后会自动出现在这里。</p></div>}
+            ) : <div className="dictation-empty-state"><Check size={28} /><h2>{reviewMode === 'all' ? '现在没有待复习单词' : '现在没有常错词'}</h2><p>认词时忘记的词会自动出现在这里。</p></div>}
           </section>
         )}
       </main>
@@ -1744,45 +1271,6 @@ export function VocabularyDictationWorkbench({
         />
       )}
 
-      {grader && (
-        <div className="dictation-grader-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) void closeGraderAndSave() }}>
-          <section ref={graderDialogRef} className="dictation-grader" role="dialog" aria-modal="true" aria-labelledby="dictation-grader-title">
-            <header>
-              <div><h2 id="dictation-grader-title">{grader.task.title}</h2><p>{grader.task.entryCount} 词 · {grader.record?.status === 'completed' ? '编辑已完成记录' : grader.record ? '草稿自动保存' : '本次批改'}</p></div>
-              <button type="button" aria-label="保存并关闭批改" onClick={() => void closeGraderAndSave()} disabled={grader.saving}><X /></button>
-            </header>
-            <div className="dictation-grader-settings">
-              <fieldset><legend>听写方式</legend><button ref={graderFirstControlRef} type="button" className={grader.mode === 'all' ? 'is-selected' : ''} onClick={() => changeGraderMode('all')}>整组听写</button><button type="button" className={grader.mode === 'partial' ? 'is-selected' : ''} onClick={() => changeGraderMode('partial')}>抽听</button></fieldset>
-              <label><span>听写日期</span><input type="date" value={grader.dictationDate} onChange={(event) => updateGrader((current) => markDirty(current, { dictationDate: event.target.value }))} /></label>
-              <span className="dictation-save-status">{grader.saving ? '正在保存…' : grader.dirty ? '等待自动保存' : grader.record ? '已保存' : '尚未修改'}</span>
-            </div>
-            <div className="dictation-number-entry">
-              {grader.mode === 'partial' && <label><span>实际抽听题号</span><input value={grader.testedNumbers} placeholder="1-10, 15, 18" onChange={(event) => updateGrader((current) => ({ ...current, testedNumbers: event.target.value }))} /></label>}
-              <label><span>错词题号</span><input value={grader.wrongNumbers} placeholder="2, 5, 8-10" onChange={(event) => updateGrader((current) => ({ ...current, wrongNumbers: event.target.value }))} /></label>
-              <button type="button" onClick={applyNumberInputs}>标记错词</button>
-              <small>输入题号或直接点题号。空格标错 · 方向键移动 · Cmd/Ctrl+Enter 完成</small>
-            </div>
-            {graderError && <p className="dictation-grader-error" role="alert">{graderError}</p>}
-            <div className="dictation-grader-grid">
-              {grader.task.entries.map((entry, index) => {
-                const result = grader.results[entry.id]
-                return (
-                  <article className={`is-${result.result}${grader.activeIndex === index ? ' is-active' : ''}`} key={entry.id} onClick={() => updateGrader((current) => ({ ...current, activeIndex: index }))}>
-                    <button type="button" className="dictation-grade-number" onClick={() => toggleWrong(entry.id)} aria-label={`第 ${index + 1} 题，${result.result === 'wrong' ? '已标错' : result.result === 'untested' ? '未考' : '正确'}`}><span>{index + 1}</span>{result.result === 'wrong' ? <X size={15} /> : result.result === 'correct' ? <Check size={15} /> : '—'}</button>
-                    <div><strong>{entry.headword}</strong><small>{entry.partOfSpeech} {formatMeaning(entry)}</small></div>
-                    {result.result === 'wrong' && <input aria-label={`${entry.headword} 的错误拼写`} value={result.wrongSpelling} placeholder="错误拼写（选填）" onChange={(event) => updateGrader((current) => markDirty(current, { results: { ...current.results, [entry.id]: { ...current.results[entry.id], wrongSpelling: event.target.value } } }))} />}
-                  </article>
-                )
-              })}
-            </div>
-            <label className="dictation-grader-note"><span>教师备注（选填）</span><textarea rows={2} value={grader.note} onChange={(event) => updateGrader((current) => markDirty(current, { note: event.target.value }))} /></label>
-            <footer>
-              <div><Flag size={15} /><span>错 {Object.values(grader.results).filter((result) => result.result === 'wrong').length}</span><span>对 {Object.values(grader.results).filter((result) => result.result === 'correct').length}</span><span>未考 {Object.values(grader.results).filter((result) => result.result === 'untested').length}</span></div>
-              <div><button type="button" onClick={() => void closeGraderAndSave()} disabled={grader.saving}>稍后继续</button><button type="button" className="is-primary" onClick={() => void completeGrading()} disabled={grader.saving}><FileCheck2 size={16} />{grader.record?.status === 'completed' ? '保存修改' : '完成批改'}</button></div>
-            </footer>
-          </section>
-        </div>
-      )}
     </div>
   )
 }

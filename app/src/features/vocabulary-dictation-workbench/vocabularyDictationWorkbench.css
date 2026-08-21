@@ -56,9 +56,7 @@
 .dictation-student-picker,
 .dictation-library-tools label,
 .dictation-combine-settings > label,
-.dictation-grader-settings > label,
-.dictation-number-entry label,
-.dictation-grader-note {
+.dictation-number-entry label {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -70,11 +68,8 @@
 .dictation-student-picker select,
 .dictation-library-tools input,
 .dictation-combine-settings input,
-.dictation-grader-settings input,
 .dictation-number-entry input,
-.dictation-grader-note textarea,
-.dictation-suggestion-control input,
-.dictation-grader-grid input {
+.dictation-suggestion-control input {
   border: 1px solid #d8d8d2;
   border-radius: 6px;
   background: #fff;
@@ -86,11 +81,8 @@
 .dictation-student-picker select:focus,
 .dictation-library-tools input:focus,
 .dictation-combine-settings input:focus,
-.dictation-grader-settings input:focus,
 .dictation-number-entry input:focus,
-.dictation-grader-note textarea:focus,
-.dictation-suggestion-control input:focus,
-.dictation-grader-grid input:focus {
+.dictation-suggestion-control input:focus {
   border-color: #2c6e56;
   box-shadow: 0 0 0 3px rgba(44, 110, 86, 0.2);
 }
@@ -201,7 +193,6 @@
 .dictation-suggestion-panel button,
 .dictation-review-actions button,
 .dictation-review-row button,
-.dictation-grader footer button,
 .dictation-number-entry > button {
   display: inline-flex;
   align-items: center;
@@ -232,7 +223,6 @@
 .dictation-suggestion-panel button:hover,
 .dictation-review-actions button:hover,
 .dictation-review-row button:hover,
-.dictation-grader footer button:hover,
 .dictation-number-entry > button:hover {
   border-color: #a5cdbd;
   background: #eaf1ed;
@@ -442,8 +432,7 @@
   font-size: 14px;
 }
 
-.dictation-combine-settings fieldset,
-.dictation-grader-settings fieldset {
+.dictation-combine-settings fieldset {
   display: flex;
   gap: 0;
   margin: 0;
@@ -451,8 +440,7 @@
   border: 0;
 }
 
-.dictation-combine-settings legend,
-.dictation-grader-settings legend {
+.dictation-combine-settings legend {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -460,8 +448,7 @@
   clip: rect(0, 0, 0, 0);
 }
 
-.dictation-combine-settings fieldset button,
-.dictation-grader-settings fieldset button {
+.dictation-combine-settings fieldset button {
   min-height: 36px;
   border: 1px solid #d8d8d2;
   background: #fff;
@@ -470,19 +457,16 @@
   font-size: 14px;
 }
 
-.dictation-combine-settings fieldset button:first-of-type,
-.dictation-grader-settings fieldset button:first-of-type {
+.dictation-combine-settings fieldset button:first-of-type {
   border-radius: 6px 0 0 6px;
 }
 
-.dictation-combine-settings fieldset button:last-of-type,
-.dictation-grader-settings fieldset button:last-of-type {
+.dictation-combine-settings fieldset button:last-of-type {
   border-left: 0;
   border-radius: 0 6px 6px 0;
 }
 
-.dictation-combine-settings fieldset button.is-selected,
-.dictation-grader-settings fieldset button.is-selected {
+.dictation-combine-settings fieldset button.is-selected {
   border-color: #2c6e56;
   background: #eaf1ed;
   color: #1e4a3a;
@@ -502,8 +486,7 @@
 
 .dictation-selection-actions > button:nth-of-type(1),
 .dictation-suggestion-control button,
-.dictation-suggestion-panel > div:last-child button:first-child,
-.dictation-grader footer button.is-primary {
+.dictation-suggestion-panel > div:last-child button:first-child {
   border-color: #2c6e56;
   background: #2c6e56;
   color: #fff;
@@ -1209,201 +1192,6 @@
   font-weight: 600;
 }
 
-.dictation-grader-backdrop {
-  position: fixed;
-  z-index: 100;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  padding: 24px;
-  background: rgba(30, 30, 28, 0.45);
-}
-
-.dictation-grader {
-  display: flex;
-  width: min(1040px, 100%);
-  max-height: calc(100vh - 48px);
-  flex-direction: column;
-  overflow: hidden;
-  border: 1px solid #c6c6c0;
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: var(--eqb-shadow-floating);
-}
-
-.dictation-grader > header,
-.dictation-grader > footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 12px 16px;
-  border-bottom: 1px solid #e8e8e4;
-}
-
-.dictation-grader > header h2 {
-  margin: 0;
-  font-size: 16px;
-}
-
-.dictation-grader > header p {
-  margin: 2px 0 0;
-  color: #6a6a64;
-  font-size: 12px;
-}
-
-.dictation-grader > header > button {
-  display: grid;
-  width: 36px;
-  height: 36px;
-  place-items: center;
-  border: 0;
-  border-radius: 6px;
-  background: transparent;
-  cursor: pointer;
-}
-
-.dictation-grader-settings,
-.dictation-number-entry {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 16px;
-  border-bottom: 1px solid #e8e8e4;
-  background: #f6f6f4;
-}
-
-.dictation-grader-settings > label {
-  flex-direction: row;
-}
-
-.dictation-save-status,
-.dictation-number-entry small {
-  margin-left: auto;
-  color: #6a6a64;
-  font-size: 12px;
-}
-
-.dictation-number-entry label {
-  flex: 1;
-}
-
-.dictation-number-entry input {
-  flex: 1;
-  min-width: 0;
-  font-size: 14px;
-}
-
-.dictation-grader-error {
-  margin: 0;
-  padding: 8px 16px;
-  background: var(--eqb-color-danger-soft);
-  color: var(--eqb-color-danger);
-  font-size: 12px;
-}
-
-.dictation-grader-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
-  padding: 16px;
-  overflow: auto;
-  background: #f6f6f4;
-}
-
-.dictation-grader-grid article {
-  display: grid;
-  grid-template-columns: 42px minmax(0, 1fr);
-  align-items: center;
-  gap: 8px;
-  min-height: 72px;
-  padding: 8px;
-  border: 1px solid #d8d8d2;
-  border-radius: 6px;
-  background: #fff;
-  cursor: pointer;
-}
-
-.dictation-grader-grid article.is-active {
-  border-color: #2c6e56;
-  box-shadow: 0 0 0 3px rgba(44, 110, 86, 0.2);
-}
-
-.dictation-grader-grid article.is-wrong {
-  border-color: var(--eqb-color-danger);
-  background: var(--eqb-color-danger-soft);
-}
-
-.dictation-grader-grid article.is-untested {
-  background: #ededea;
-}
-
-.dictation-grade-number {
-  display: flex;
-  width: 38px;
-  height: 38px;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
-  border: 1px solid #d8d8d2;
-  border-radius: 50%;
-  background: #fff;
-  cursor: pointer;
-  font-size: 12px;
-}
-
-.dictation-grader-grid article > div {
-  display: flex;
-  min-width: 0;
-  flex-direction: column;
-}
-
-.dictation-grader-grid strong {
-  overflow: hidden;
-  font-size: 14px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.dictation-grader-grid small {
-  overflow: hidden;
-  color: #6a6a64;
-  font-size: 12px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.dictation-grader-grid input {
-  grid-column: 2;
-  width: 100%;
-  padding: 5px 8px;
-  font-size: 12px;
-}
-
-.dictation-grader-note {
-  align-items: stretch;
-  padding: 10px 16px;
-}
-
-.dictation-grader-note textarea {
-  flex: 1;
-  resize: vertical;
-  font-size: 14px;
-}
-
-.dictation-grader > footer {
-  border-top: 1px solid #e8e8e4;
-  border-bottom: 0;
-}
-
-.dictation-grader > footer > div {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: #6a6a64;
-  font-size: 12px;
-}
-
 .dictation-workbench-message {
   display: grid;
   min-height: 100vh;
@@ -1434,14 +1222,16 @@
   width: 100%;
 }
 
-.dictation-review-channel {
+.dictation-review-channel,
+.dictation-history-filter {
   display: inline-flex;
   border: 1px solid #d8d8d2;
   border-radius: 6px;
   overflow: hidden;
 }
 
-.dictation-review-channel button {
+.dictation-review-channel button,
+.dictation-history-filter button {
   min-height: 36px;
   border: 0;
   border-right: 1px solid #d8d8d2;
@@ -1452,13 +1242,75 @@
   font-weight: 500;
 }
 
-.dictation-review-channel button:last-child {
+.dictation-review-channel button:last-child,
+.dictation-history-filter button:last-child {
   border-right: 0;
 }
 
-.dictation-review-channel button.is-selected {
+.dictation-review-channel button.is-selected,
+.dictation-history-filter button.is-selected {
   background: #eaf1ed;
   color: #1e4a3a;
+}
+
+.dictation-history-filter {
+  justify-content: flex-start;
+}
+
+.dictation-history-details {
+  position: relative;
+}
+
+.dictation-history-details > summary {
+  min-height: 32px;
+  box-sizing: border-box;
+  padding: 6px 10px;
+  border: 1px solid #d8d8d2;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  list-style: none;
+}
+
+.dictation-history-details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.dictation-history-details[open] > summary {
+  border-color: #a5cdbd;
+  background: #eaf1ed;
+  color: #1e4a3a;
+}
+
+.dictation-history-details > div {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 6px);
+  right: 0;
+  width: min(360px, calc(100vw - 48px));
+  max-height: 320px;
+  overflow: auto;
+  border: 1px solid #c6c6c0;
+  border-radius: 8px;
+  background: #fff;
+  padding: 8px 12px;
+  box-shadow: var(--eqb-shadow-floating);
+}
+
+.dictation-history-details p {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0;
+  padding: 7px 0;
+  border-bottom: 1px solid #e8e8e4;
+  font-size: 12px;
+}
+
+.dictation-history-details p:last-child {
+  border-bottom: 0;
 }
 
 .dictation-suggestion-control-row {
@@ -1930,10 +1782,6 @@
     flex-direction: row;
   }
 
-  .dictation-grader-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .dictation-number-entry {
     align-items: stretch;
     flex-wrap: wrap;
@@ -2200,28 +2048,6 @@
     flex-direction: row;
   }
 
-  .dictation-grader-backdrop {
-    padding: 0;
-  }
-
-  .dictation-grader {
-    width: 100%;
-    max-height: 100vh;
-    min-height: 100vh;
-    border: 0;
-    border-radius: 0;
-  }
-
-  .dictation-grader-settings {
-    align-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  .dictation-save-status {
-    flex-basis: 100%;
-    margin-left: 0;
-  }
-
   .dictation-number-entry {
     flex-direction: column;
   }
@@ -2235,18 +2061,6 @@
     margin-left: 0;
   }
 
-  .dictation-grader-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .dictation-grader > footer {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  .dictation-grader > footer > div:last-child button {
-    flex: 1;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

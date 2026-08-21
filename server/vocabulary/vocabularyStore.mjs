@@ -3645,18 +3645,6 @@ export function getStudentVocabularyMeaningStates(userDb, userId, studentId, pro
     WHERE records.user_id = ? AND records.student_id = ? AND records.program_id = ?
       AND records.status = 'completed' AND entries.result <> 'untested'
   `).all(userId, studentId, programId).map((row) => ({ ...row, source: 'meaning_recall' }))
-  const dictationCorrectRows = userDb.prepare(`
-    SELECT records.id AS record_id, records.dictation_date AS evidence_date,
-      COALESCE(records.completed_at, records.updated_at) AS occurred_at,
-      results.entry_id, results.result, entries.snapshot_json
-    FROM vocabulary_dictation_records AS records
-    JOIN vocabulary_dictation_record_results AS results ON results.record_id = records.id
-    JOIN vocabulary_dictation_tasks AS tasks ON tasks.id = records.task_id
-    JOIN vocabulary_dictation_task_entries AS entries
-      ON entries.task_id = tasks.id AND entries.entry_id = results.entry_id
-    WHERE records.user_id = ? AND records.student_id = ? AND tasks.program_id = ?
-      AND records.status = 'completed' AND results.result = 'correct'
-  `).all(userId, studentId, programId).map((row) => ({ ...row, source: 'dictation' }))
   const flags = new Map(userDb.prepare(`
     SELECT entry_id, pinned, paused FROM vocabulary_student_word_flags
     WHERE user_id = ? AND student_id = ? AND program_id = ?
@@ -3674,16 +3662,8 @@ export function getStudentVocabularyMeaningStates(userDb, userId, studentId, pro
     WHERE records.user_id = ? AND records.student_id = ? AND records.program_id = ?
     ORDER BY entry_sources.set_id
   `).all(userId, studentId, programId)) addSource(row.entry_id, row.set_id)
-  for (const row of userDb.prepare(`
-    SELECT DISTINCT entry_sources.entry_id, entry_sources.set_id
-    FROM vocabulary_dictation_task_entry_sources AS entry_sources
-    JOIN vocabulary_dictation_tasks AS tasks ON tasks.id = entry_sources.task_id
-    WHERE tasks.user_id = ? AND tasks.student_id = ? AND tasks.program_id = ?
-    ORDER BY entry_sources.set_id
-  `).all(userId, studentId, programId)) addSource(row.entry_id, row.set_id)
-
   const histories = new Map()
-  for (const row of [...recallRows, ...dictationCorrectRows]) {
+  for (const row of recallRows) {
     const history = histories.get(row.entry_id) ?? []
     history.push(row)
     histories.set(row.entry_id, history)
@@ -3694,12 +3674,12 @@ export function getStudentVocabularyMeaningStates(userDb, userId, studentId, pro
       left.evidence_date.localeCompare(right.evidence_date)
         || String(left.occurred_at).localeCompare(String(right.occurred_at))
         || left.record_id.localeCompare(right.record_id))
-    const wrongRows = history.filter((row) => row.source === 'meaning_recall' && row.result === 'wrong')
+    const wrongRows = history.filter((row) => row.result === 'wrong')
     if (!wrongRows.length) continue
     const days = new Map()
     for (const row of history) {
       const day = days.get(row.evidence_date) ?? { hasWrong: false, hasCorrect: false }
-      if (row.source === 'meaning_recall' && row.result === 'wrong') day.hasWrong = true
+      if (row.result === 'wrong') day.hasWrong = true
       if (row.result === 'correct') day.hasCorrect = true
       days.set(row.evidence_date, day)
     }
@@ -3719,18 +3699,17 @@ export function getStudentVocabularyMeaningStates(userDb, userId, studentId, pro
     }
     const latest = history.at(-1)
     const snapshot = projectFrozenVocabularyEntry(parseJson(latest.snapshot_json, null))
-    const latestRecall = [...history].reverse().find((row) => row.source === 'meaning_recall')
     const flag = flags.get(entryId)
     states.push({
       ...snapshot,
       status: status ?? 'pending',
       attempts: history.length,
-      meaningAttempts: history.filter((row) => row.source === 'meaning_recall').length,
+      meaningAttempts: history.length,
       totalWrong: wrongRows.length,
       currentWrongDateCount: wrongDates.length,
       currentCorrectDateCount: correctDates.length,
       lastForgottenDate: wrongRows.at(-1)?.evidence_date ?? null,
-      lastCheckedDate: latestRecall?.evidence_date ?? null,
+      lastCheckedDate: latest.evidence_date,
       latestEvidenceDate: latest.evidence_date,
       latestResult: latest.result,
       latestSource: latest.source,
@@ -3748,8 +3727,6 @@ export function getSuggestedVocabularyMeaningRecall(userDb, userId, studentId, p
   const safeTarget = normalizeTarget(target, 20)
   const states = getStudentVocabularyMeaningStates(userDb, userId, studentId, programId)
   const statesByEntry = new Map(states.map((state) => [state.id, state]))
-  const dictationStates = new Map(getStudentVocabularyReviewStates(userDb, userId, studentId, programId)
-    .map((state) => [state.id, state]))
   const flags = new Map(userDb.prepare(`
     SELECT entry_id, pinned, paused FROM vocabulary_student_word_flags
     WHERE user_id = ? AND student_id = ? AND program_id = ?
@@ -3782,15 +3759,12 @@ export function getSuggestedVocabularyMeaningRecall(userDb, userId, studentId, p
   }
   const candidates = [...candidatesByEntry.values()].map((entry) => {
     const meaningState = statesByEntry.get(entry.id)
-    const dictationState = dictationStates.get(entry.id)
     const flag = flags.get(entry.id)
-    const meaningPending = meaningState && meaningState.status !== 'improved'
-    const dictationPending = dictationState && dictationState.status !== 'improved'
     return {
       ...entry,
       meaningStatus: meaningState?.status ?? (latestRecallByEntry.has(entry.id) ? 'remembered' : 'unchecked'),
-      dictationStatus: dictationState?.status ?? 'none',
-      doublePending: Boolean(meaningPending && dictationPending),
+      dictationStatus: 'none',
+      doublePending: false,
       lastCheckedDate: latestRecallByEntry.get(entry.id) ?? null,
       lastForgottenDate: meaningState?.lastForgottenDate ?? null,
       pinned: flag?.pinned === 1,
@@ -3799,7 +3773,6 @@ export function getSuggestedVocabularyMeaningRecall(userDb, userId, studentId, p
   }).filter((entry) => !entry.paused)
   const statusRank = { repeated: 0, pending: 1, unchecked: 2, remembered: 3, improved: 4 }
   candidates.sort((left, right) => Number(right.pinned) - Number(left.pinned)
-    || Number(right.doublePending) - Number(left.doublePending)
     || (statusRank[left.meaningStatus] ?? 9) - (statusRank[right.meaningStatus] ?? 9)
     || String(left.lastCheckedDate ?? '').localeCompare(String(right.lastCheckedDate ?? ''))
     || left.headword.localeCompare(right.headword, 'en'))
@@ -3814,9 +3787,7 @@ export function getSuggestedVocabularyMeaningRecall(userDb, userId, studentId, p
     ...entry,
     reason: entry.pinned
       ? '老师重点关注'
-      : entry.doublePending
-        ? '认义和听写都待复习'
-        : entry.meaningStatus === 'repeated'
+      : entry.meaningStatus === 'repeated'
           ? '跨日反复忘记'
           : entry.meaningStatus === 'pending'
             ? '上次词义抽查忘记'
@@ -3828,7 +3799,7 @@ export function getSuggestedVocabularyMeaningRecall(userDb, userId, studentId, p
   }))
 }
 
-function vocabularySetDictationSummary(userDb, userId, studentId, programId, setId, reviewStates, meaningStates) {
+function vocabularySetDictationSummary(userDb, userId, studentId, programId, setId, meaningStates) {
   const recordCount = userDb.prepare(`
     SELECT COUNT(DISTINCT records.id) AS count
     FROM vocabulary_dictation_records AS records
@@ -3852,8 +3823,6 @@ function vocabularySetDictationSummary(userDb, userId, studentId, programId, set
       AND sources.entry_id = results.entry_id
     WHERE results.record_id = ? AND sources.set_id = ? AND results.result = 'wrong'
   `).get(latestRecord.id, setId).count : 0
-  const pendingCount = reviewStates.filter((state) =>
-    state.status !== 'improved' && !state.paused && state.sourceSetIds.includes(setId)).length
   const latestMeaningRecall = userDb.prepare(`
     SELECT records.recall_date
     FROM vocabulary_meaning_recall_records AS records
@@ -3870,7 +3839,7 @@ function vocabularySetDictationSummary(userDb, userId, studentId, programId, set
     recordCount,
     latestWrongCount,
     latestDate: latestRecord?.dictation_date ?? null,
-    pendingCount,
+    pendingCount: 0,
     meaningRecall: {
       latestDate: latestMeaningRecall?.recall_date ?? null,
       pendingCount: meaningPendingCount,
@@ -3913,7 +3882,6 @@ export function listVocabularySetLibrary(userDb, userId, input = {}) {
     SELECT sets.id FROM vocabulary_sets AS sets WHERE ${where}
     ORDER BY sets.created_at DESC, sets.id DESC LIMIT ? OFFSET ?
   `).all(...values, pageSize, (page - 1) * pageSize)
-  const reviewStates = getStudentVocabularyReviewStates(userDb, userId, studentId, programId)
   const meaningStates = getStudentVocabularyMeaningStates(userDb, userId, studentId, programId)
   return {
     items: ids.map((row) => ({
@@ -3924,7 +3892,6 @@ export function listVocabularySetLibrary(userDb, userId, input = {}) {
         studentId,
         programId,
         row.id,
-        reviewStates,
         meaningStates,
       ),
     })),
@@ -3968,13 +3935,11 @@ export function buildCombinedVocabularyPrintPayload(userDb, userId, input = {}) 
       if (entries.length > sectionStart) sections.push({ startIndex: sectionStart, title: source.set.title })
     }
   } else {
-    const dictationStates = getStudentVocabularyReviewStates(userDb, userId, studentId, programId)
     const meaningStates = getStudentVocabularyMeaningStates(userDb, userId, studentId, programId)
     const stateById = new Map(meaningStates.map((state) => [state.id, state]))
-    for (const state of dictationStates) stateById.set(state.id, state)
     for (const entryId of entryIds) {
       const state = stateById.get(entryId)
-      if (!state) throw new VocabularyStoreError('错词清单包含当前学生没有认词或听写历史的词。', 409, 'vocabulary_print_review_state_missing')
+      if (!state) throw new VocabularyStoreError('错词清单包含当前学生没有认词历史的词。', 409, 'vocabulary_print_review_state_missing')
       const {
         attempts: _attempts,
         meaningAttempts: _meaningAttempts,
@@ -4019,6 +3984,45 @@ export function buildCombinedVocabularyPrintPayload(userDb, userId, input = {}) 
     },
     sections: mode === 'dedupe' ? [{ startIndex: 0, title }] : sections,
     shareKind: null,
+  }
+}
+
+export function buildVocabularyMeaningRecallRecordPrintPayload(userDb, userId, recordId) {
+  ensureUserVocabularyShape(userDb)
+  const record = readMeaningRecallRecordRows(userDb, userId, recordId)
+  if (record.status !== 'completed') {
+    throw new VocabularyStoreError(
+      record.status === 'void' ? '已作废的认词记录不能导出。' : '认词草稿完成后才能导出。',
+      409,
+      'vocabulary_meaning_recall_record_not_exportable',
+    )
+  }
+  const wrongEntries = record._entryRows
+    .filter((entry) => entry.result === 'wrong')
+    .map(({ result: _result, sourceSetIds: _sourceSetIds, snapshot: _snapshot, ...entry }) => entry)
+  if (!wrongEntries.length) {
+    throw new VocabularyStoreError(
+      '本轮没有错词，无需导出。',
+      409,
+      'vocabulary_meaning_recall_record_no_wrong_entries',
+    )
+  }
+  const title = `${record.title}-本轮错词`
+  return {
+    vocabularySet: {
+      id: `vocabulary-meaning-record-print-${record.id}`,
+      studentId: record.studentId,
+      programId: record.programId,
+      reviewRunId: null,
+      title,
+      entryCount: wrongEntries.length,
+      entries: wrongEntries,
+      share: null,
+      createdAt: record.updatedAt,
+    },
+    sections: [{ startIndex: 0, title }],
+    shareKind: null,
+    materialLayout: 'dedupe',
   }
 }
 

@@ -442,7 +442,7 @@ async function installApiFixtures(page, {
     } else if (/^\/api\/vocabulary\/sets\/set-(1|15|16|60)\/materials\.zip$/.test(pathname)) {
       const count = Number(pathname.match(/set-(\d+)/)?.[1])
       const input = JSON.parse(route.request().postData() || '{}')
-      assert.deepEqual(input.kinds, ['cards', 'dictation', 'answer', 'word-search', 'handwriting'])
+      assert.deepEqual(input.kinds, ['cards', 'dictation', 'answer', 'handwriting'])
       await route.fulfill({
         status: 200,
         contentType: 'application/zip',
@@ -454,7 +454,7 @@ async function installApiFixtures(page, {
       const accent = url.searchParams.get('accent')
       const kind = url.searchParams.get('kind') ?? 'cards'
       assert.ok(['american', 'british'].includes(accent))
-      assert.ok(['cards', 'dictation', 'answer', 'word-search', 'handwriting'].includes(kind))
+      assert.ok(['cards', 'dictation', 'answer', 'handwriting'].includes(kind))
       const input = JSON.parse(route.request().postData() || '{}')
       const selectedCount = Array.isArray(input.selectedEntryIds) ? input.selectedEntryIds.length : count
       const rawTitle = renamedTitles.get(count) ?? `固定生词组 ${count} 词`
@@ -463,8 +463,6 @@ async function installApiFixtures(page, {
         ? `${exportTitle}-听写纸-${count}词-${accent === 'american' ? '美式' : '英式'}.pdf`
         : kind === 'answer'
           ? `${exportTitle}-教师答案-${count}词.pdf`
-          : kind === 'word-search'
-            ? `${exportTitle}-圈词与拼写-${count}词.pdf`
           : kind === 'handwriting'
             ? `${exportTitle}-衡水体练字纸${input.handwritingMode === 'single' ? '-每词1遍' : ''}-${selectedCount}词.pdf`
           : `${rawTitle}${renamedTitles.has(count) ? `-${count}词` : ''}-${accent === 'american' ? '美式' : '英式'}.pdf`
@@ -786,11 +784,6 @@ async function verifyMatchingGame(page) {
   assert.equal(await page.locator('audio').count(), 1)
   assert.equal(await page.getByText('沿用英音', { exact: true }).count(), 1)
 
-  const paperDownloadPromise = page.waitForEvent('download')
-  await page.getByRole('button', { name: /圈词与拼写/ }).click()
-  const paperDownload = await paperDownloadPromise
-  assert.equal(paperDownload.suggestedFilename(), '固定生词组-圈词与拼写-15词.pdf')
-
   await page.goBack({ waitUntil: 'networkidle' })
   await page.getByRole('heading', { name: '固定生词组 15 词' }).waitFor()
   assert.match(page.url(), /view=vocabulary-review.*setId=set-15/)
@@ -1093,12 +1086,6 @@ async function verifyDictationDownloads(page) {
   download = await downloadPromise
   assert.equal(download.suggestedFilename(), '固定生词组-教师答案-15词.pdf')
 
-  downloadPromise = page.waitForEvent('download')
-  await page.getByRole('button', { name: '下载', exact: true }).click()
-  await page.getByRole('button', { name: /^圈词与拼写\s/u }).click()
-  download = await downloadPromise
-  assert.equal(download.suggestedFilename(), '固定生词组-圈词与拼写-15词.pdf')
-
   await page.getByRole('button', { name: '下载', exact: true }).click()
   await page.getByRole('button', { name: /^衡水体练字纸\s/u }).click()
   await page.getByRole('dialog', { name: '选择练字单词' }).waitFor()
@@ -1125,7 +1112,7 @@ async function verifyDictationDownloads(page) {
   await page.getByRole('button', { name: /^下载全套\s/u }).click()
   download = await downloadPromise
   assert.equal(download.suggestedFilename(), '固定生词组 15 词-全套资料.zip')
-  pass('下载菜单可导出五类单份资料与完整 ZIP；练字纸默认按原序选前10词并以实际题数命名')
+  pass('下载菜单可导出四类单份资料与完整 ZIP；练字纸默认按原序选前10词并以实际题数命名')
 }
 
 async function verifyHandwritingPrint(page, count, expectedPages, mode = 'standard') {
@@ -1264,106 +1251,6 @@ async function verifyDictationPrint(page, count, expectedPages, accent = 'americ
     }
   }
   pass(`${count} 词听写纸与教师答案均为 A4 双栏、每页最多 15 题；学生四线三格为固定毫米尺寸、教师全义、二维码仅在听写纸首页`)
-}
-
-async function verifyWordSearchPrint(page, count, expectedPuzzlePages) {
-  await page.emulateMedia({ media: 'screen' })
-  await page.goto(`${origin}/?view=vocabulary-review&vocabularyPrintSetId=set-${count}&printAccent=american&vocabularyPrintMode=word-search`, { waitUntil: 'networkidle' })
-  await page.locator('[data-vocabulary-print-state="ready"]').waitFor()
-  await page.emulateMedia({ media: 'print' })
-
-  const allPages = page.locator('.vocabulary-word-search-print-page')
-  const studentPages = page.locator('.vocabulary-word-search-print-page:not(.is-answer)')
-  const answerPages = page.locator('.vocabulary-word-search-print-page.is-answer')
-  assert.equal(await allPages.count(), expectedPuzzlePages * 2)
-  assert.equal(await studentPages.count(), expectedPuzzlePages)
-  assert.equal(await answerPages.count(), expectedPuzzlePages)
-  assert.equal(await page.locator('.vocabulary-word-search-clues li').count(), count * 2)
-  const gridCount = await page.locator('.vocabulary-word-search-grid').count()
-  const directOnlyCount = await page.locator('.vocabulary-word-search-direct-only').count()
-  assert.equal(gridCount + directOnlyCount, expectedPuzzlePages * 2)
-  assert.equal(directOnlyCount % 2, 0)
-  assert.equal(await page.locator('.vocabulary-word-search-grid > span').count(), gridCount * 144)
-  assert.equal(await studentPages.locator('.vocabulary-word-search-grid svg').count(), 0)
-  const directWriteCount = await answerPages.locator('.vocabulary-word-search-clues small').filter({ hasText: '直接写' }).count()
-  assert.equal(await studentPages.locator('.vocabulary-word-search-clues small').filter({ hasText: '直接写' }).count(), directWriteCount)
-  assert.equal(await answerPages.locator('.vocabulary-word-search-grid svg line').count(), count - directWriteCount)
-  assert.equal(await page.locator('.vocabulary-print-qr').count(), 0)
-
-  const expectedAnswers = programEntries.slice(0, count).map((item) => item.headword.split(/\s+\/\s+/u)[0])
-  assert.deepEqual(
-    await answerPages.locator('.vocabulary-word-search-clues li b').allTextContents(),
-    expectedAnswers,
-  )
-  assert.deepEqual(
-    await studentPages.locator('.vocabulary-word-search-clues li > span').allTextContents(),
-    Array.from({ length: count }, (_, index) => String(index + 1)),
-  )
-
-  const layout = await allPages.evaluateAll((nodes) => nodes.map((node) => {
-    const grid = node.querySelector('.vocabulary-word-search-grid')
-    const clues = node.querySelector('.vocabulary-word-search-clues')
-    const gridRect = grid?.getBoundingClientRect()
-    const clueStyle = getComputedStyle(clues)
-    return {
-      hasGrid: Boolean(grid),
-      gridWidthMm: gridRect ? gridRect.width / (96 / 25.4) : null,
-      gridHeightMm: gridRect ? gridRect.height / (96 / 25.4) : null,
-      clueColumns: clueStyle.gridTemplateColumns.split(' ').length,
-      overflow: node.scrollWidth > node.clientWidth + 1 || node.scrollHeight > node.clientHeight + 1,
-      gridOverflow: grid ? grid.scrollWidth > grid.clientWidth + 1 || grid.scrollHeight > grid.clientHeight + 1 : false,
-      clueOverflow: clues.scrollWidth > clues.clientWidth + 1 || clues.scrollHeight > clues.clientHeight + 1,
-    }
-  }))
-  assert.equal(layout.every((item) => !item.hasGrid || (Math.abs(item.gridWidthMm - 132) < 0.3 && Math.abs(item.gridHeightMm - 132) < 0.3)), true)
-  assert.equal(layout.every((item) => item.clueColumns === 2 && !item.overflow && !item.gridOverflow && !item.clueOverflow), true)
-
-  const pageColumns = await allPages.evaluateAll((nodes) => nodes.map((node) => (
-    [...node.querySelectorAll('.vocabulary-word-search-clues ol')].map((column) => column.querySelectorAll('li').length)
-  )))
-  assert.equal(pageColumns.every((columns) => columns.length === 2 && Math.abs(columns[0] - columns[1]) <= 1), true)
-
-  const pdfPath = path.join(tempRoot, `word-search-${count}.pdf`)
-  await page.pdf({ path: pdfPath, preferCSSPageSize: true, printBackground: true })
-  const info = spawnSync('pdfinfo', [pdfPath], { encoding: 'utf8' })
-  assert.equal(info.status, 0, info.stderr)
-  assert.match(info.stdout, new RegExp(`Pages:\\s+${expectedPuzzlePages * 2}\\b`))
-  assert.match(info.stdout, /Page size:\s+59[45]\.\d+ x 841\.\d+ pts \(A4\)/)
-  const rasterPrefix = path.join(tempRoot, `word-search-${count}`)
-  const raster = spawnSync('pdftoppm', ['-png', '-r', '120', pdfPath, rasterPrefix], { encoding: 'utf8' })
-  assert.equal(raster.status, 0, raster.stderr)
-  const rasterPages = readdirSync(tempRoot)
-    .filter((name) => name.startsWith(`word-search-${count}-`) && name.endsWith('.png'))
-    .map((name) => path.join(tempRoot, name))
-  assert.equal(rasterPages.length, expectedPuzzlePages * 2)
-  assert.equal(rasterPages.every((pagePath) => readFileSync(pagePath).length > 10_000), true)
-  if (count === 16) {
-    copyFileSync(pdfPath, path.join(evidenceRoot, 'word-search-paper-current-16.pdf'))
-    rasterPages.forEach((pagePath, index) => {
-      copyFileSync(pagePath, path.join(evidenceRoot, `word-search-paper-current-16-page-${index + 1}.png`))
-    })
-  }
-  pass(`${count} 词圈词与拼写纸按10词分页，学生页与教师答案均为A4，双栏提示、12×12词阵、答案标记和干扰词说明无溢出`)
-}
-
-async function verifyDirectOnlyWordSearchPrint(page) {
-  await page.emulateMedia({ media: 'screen' })
-  await page.goto(`${origin}/?view=vocabulary-review&vocabularyPrintSetId=set-direct-only&printAccent=american&vocabularyPrintMode=word-search`, { waitUntil: 'networkidle' })
-  await page.locator('[data-vocabulary-print-state="ready"]').waitFor()
-  await page.emulateMedia({ media: 'print' })
-  const pages = page.locator('.vocabulary-word-search-print-page')
-  assert.equal(await pages.count(), 2)
-  assert.equal(await page.locator('.vocabulary-word-search-grid').count(), 0)
-  assert.equal(await page.locator('.vocabulary-word-search-direct-only').count(), 2)
-  assert.equal(await page.locator('.vocabulary-word-search-answer-notes').count(), 0)
-  assert.equal(await pages.first().getByText('本页词语均标为“直接写”，不设词阵。').count(), 1)
-  const footerGaps = await pages.evaluateAll((nodes) => nodes.map((node) => {
-    const pageRect = node.getBoundingClientRect()
-    const footerRect = node.querySelector('.vocabulary-word-search-footer').getBoundingClientRect()
-    return (pageRect.bottom - footerRect.bottom) / (96 / 25.4)
-  }))
-  assert.equal(footerGaps.every((gap) => gap >= 8.8 && gap <= 9.2), true)
-  pass('全页仅有直接写词时不生成干扰词阵，学生与教师页脚都稳定贴底')
 }
 
 async function verifyDictationPlayer(page) {
@@ -1633,14 +1520,6 @@ async function main() {
       await verifyDictationPrint(dictationPrintPage, count, pages, accent)
     }
     await dictationPrintPage.close()
-
-    const wordSearchPrintPage = await browser.newPage({ viewport: { width: 1440, height: 1000 } })
-    await installApiFixtures(wordSearchPrintPage)
-    for (const [count, pages] of [[1, 1], [15, 2], [16, 2], [60, 6]]) {
-      await verifyWordSearchPrint(wordSearchPrintPage, count, pages)
-    }
-    await verifyDirectOnlyWordSearchPrint(wordSearchPrintPage)
-    await wordSearchPrintPage.close()
 
     const handwritingPrintPage = await browser.newPage({ viewport: { width: 1440, height: 1000 } })
     await installApiFixtures(handwritingPrintPage)

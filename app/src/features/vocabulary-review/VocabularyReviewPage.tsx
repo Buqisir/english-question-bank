@@ -67,8 +67,6 @@ import {
   saveVocabularyAudioAccent,
   type VocabularyAudioAccent,
 } from '../vocabulary-listen/vocabularyAudioVariants'
-import { VocabularyWordSearchPrint } from '../vocabulary-practice/VocabularyWordSearchPrint'
-import { buildVocabularyWordSearchPages } from '../vocabulary-practice/vocabularyWordSearch'
 import {
   HANDWRITING_PRINT_ENTRIES_PER_PAGE,
   HANDWRITING_SINGLE_ENTRIES_PER_PAGE,
@@ -86,7 +84,6 @@ const LEGACY_PAUSED_RUN_STORAGE_KEY = 'eqb-vocabulary-review-paused-wanwei-round
 const TARGET_UNFAMILIAR_COUNT = 15
 const CARD_PRINT_ENTRIES_PER_PAGE = 6
 const DICTATION_PRINT_ENTRIES_PER_PAGE = 15
-const WORD_SEARCH_PRINT_ENTRIES_PER_PAGE = 16
 const PUBLIC_LISTEN_ORIGIN = 'https://eqbank.cc'
 
 type VocabularyReviewPageProps = {
@@ -99,7 +96,7 @@ type VocabularyReviewPageProps = {
 }
 
 type VocabularyAccent = VocabularyAudioAccent
-type VocabularyPrintKind = 'cards' | 'dictation' | 'answer' | 'word-search' | 'handwriting'
+type VocabularyPrintKind = 'cards' | 'dictation' | 'answer' | 'handwriting'
 type VocabularySetPrintKind = VocabularyPrintKind
 
 const VOCABULARY_DOWNLOAD_OPTIONS: Array<{
@@ -110,7 +107,6 @@ const VOCABULARY_DOWNLOAD_OPTIONS: Array<{
   { kind: 'cards', label: '单词纸', description: '带图片、音节和例句' },
   { kind: 'dictation', label: '听写纸', description: '15题一页，扫码自动听写' },
   { kind: 'answer', label: '教师答案', description: '与听写纸逐题对应' },
-  { kind: 'word-search', label: '圈词与拼写', description: '找词、辨形并抄写，内附答案' },
   { kind: 'handwriting', label: '衡水体练字纸', description: '自选单词，描红后独立书写' },
 ]
 
@@ -134,9 +130,7 @@ function readVocabularyPrintRequest(): VocabularyPrintRequest | null {
       ? 'dictation'
       : params.get('vocabularyPrintMode') === 'answer'
         ? 'answer'
-        : params.get('vocabularyPrintMode') === 'word-search'
-          ? 'word-search'
-          : params.get('vocabularyPrintMode') === 'handwriting'
+        : params.get('vocabularyPrintMode') === 'handwriting'
             ? 'handwriting'
             : 'cards',
   }
@@ -528,9 +522,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   const printPages = useMemo(
     () => paginateVocabularyEntries(
       printEntries,
-      printRequest?.kind === 'word-search'
-        ? WORD_SEARCH_PRINT_ENTRIES_PER_PAGE
-        : printRequest?.kind === 'handwriting'
+      printRequest?.kind === 'handwriting'
           ? printHandwritingMode === 'single'
             ? HANDWRITING_SINGLE_ENTRIES_PER_PAGE
             : HANDWRITING_PRINT_ENTRIES_PER_PAGE
@@ -540,23 +532,6 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
       printSections,
     ),
     [printEntries, printHandwritingMode, printRequest?.kind, printSections],
-  )
-  const wordSearchPages = useMemo(
-    () => {
-      if (printRequest?.kind !== 'word-search' || !printEntries.length) return []
-      const seed = printRequest.setId ?? printRequest.printJobId ?? 'vocabulary-print'
-      if (!printSections.length) return buildVocabularyWordSearchPages(seed, printEntries, program.entries)
-      const pages = printSections.flatMap((section, sectionIndex) => {
-        const endIndex = printSections[sectionIndex + 1]?.startIndex ?? printEntries.length
-        return buildVocabularyWordSearchPages(
-          `${seed}:${sectionIndex}`,
-          printEntries.slice(section.startIndex, endIndex),
-          program.entries,
-        )
-      })
-      return pages.map((page, pageIndex) => ({ ...page, pageIndex }))
-    },
-    [printEntries, printRequest, printSections, program.entries],
   )
   const directInputResult = useMemo(
     () => filterVocabularyInput(directVocabularyInput, program.entries),
@@ -1386,7 +1361,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
           ))}
           <div className="vocabulary-download-option is-bundle">
             <button type="button" onClick={() => void downloadVocabularyBundle()}>
-              <strong>下载全套</strong><span>五份 PDF 打包为一个 ZIP</span>
+              <strong>下载全套</strong><span>四份 PDF 打包为一个 ZIP</span>
             </button>
             <button
               type="button"
@@ -1442,7 +1417,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
       ? 'error'
       : printLoadState === 'ready'
         && programLoadState === 'ready'
-        && (printRequest.kind === 'word-search' ? wordSearchPages.length > 0 : printPages.length > 0)
+        && printPages.length > 0
         ? 'ready'
         : 'loading'
     : undefined
@@ -1966,12 +1941,6 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
             entryCount={printEntries.length}
             pages={printPages}
             mode={printHandwritingMode}
-          />
-        ) : printRequest?.kind === 'word-search' ? (
-          <VocabularyWordSearchPrint
-            title={vocabularySet?.title ?? '生词圈词练习'}
-            entryCount={printEntries.length}
-            pages={wordSearchPages}
           />
         ) : printPages.map(({ entries: pageEntries, title: pageTitle, startIndex: pageStartIndex }, pageIndex) => (
           printRequest?.kind === 'dictation' || printRequest?.kind === 'answer' ? (

@@ -1,9 +1,8 @@
-import { ArrowLeft, ArrowRight, BookMarked, Check, Download, Grid2X2, RotateCcw, Save, Search, Volume2 } from 'lucide-react'
+import { ArrowLeft, ArrowRight, BookMarked, Check, Grid2X2, RotateCcw, Volume2 } from 'lucide-react'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import type { VocabularySetDto } from '../../services/vocabulary'
-import { downloadVocabularySetPdf, getVocabularySet } from '../../services/vocabulary'
-import { prepareFileSaveTarget, type FileSaveMode } from '../../services/fileDownload.ts'
+import { getVocabularySet } from '../../services/vocabulary'
 import {
   getVocabularyAudioPath,
   readVocabularyAudioAccent,
@@ -35,8 +34,6 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
   const [game, setGame] = useState<VocabularyMatchGameState | null>(null)
   const [liveMessage, setLiveMessage] = useState('全部卡片已盖好。请选择第一张卡。')
   const [audioError, setAudioError] = useState('')
-  const [paperDownloadBusy, setPaperDownloadBusy] = useState(false)
-  const [paperDownloadError, setPaperDownloadError] = useState('')
   const [accent, setAccent] = useState<VocabularyAudioAccent>(readVocabularyAudioAccent)
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const audioRequestRef = useRef(0)
@@ -158,25 +155,6 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
     })
   }
 
-  async function downloadWordSearchPaper(mode: FileSaveMode = 'download') {
-    if (!vocabularySet || paperDownloadBusy) return
-    setPaperDownloadError('')
-    try {
-      const target = await prepareFileSaveTarget({
-        mode,
-        suggestedName: `${vocabularySet.title || '生词组'}-圈词与拼写-${accent === 'american' ? '美音' : '英音'}.pdf`,
-        mimeType: 'application/pdf',
-      })
-      if (!target) return
-      setPaperDownloadBusy(true)
-      await downloadVocabularySetPdf(vocabularySet.id, accent, 'word-search', target)
-    } catch (error) {
-      setPaperDownloadError(error instanceof Error ? error.message : mode === 'save-as' ? '圈词练习纸另存为失败，请稍后重试。' : '圈词练习纸暂时无法下载，请稍后重试。')
-    } finally {
-      setPaperDownloadBusy(false)
-    }
-  }
-
   return (
     <div className="vocabulary-practice-page">
       <AppTopbar variant="sub" pageTitle="趣味练习" {...shellNav} />
@@ -219,20 +197,7 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
 
             <div className="vocabulary-practice-modes" aria-label="趣味练习方式">
               <span aria-current="page"><Grid2X2 size={17} aria-hidden="true" /><strong>翻牌消消乐</strong><small>当前练习</small></span>
-              <div className="vocabulary-practice-download-actions">
-                <button type="button" onClick={() => void downloadWordSearchPaper()} disabled={paperDownloadBusy}>
-                  {paperDownloadBusy ? <Download size={17} aria-hidden="true" /> : <Search size={17} aria-hidden="true" />}
-                  <strong>{paperDownloadBusy ? '正在生成…' : '圈词与拼写'}</strong>
-                  <small>下载纸质练习</small>
-                </button>
-                <button type="button" onClick={() => void downloadWordSearchPaper('save-as')} disabled={paperDownloadBusy}>
-                  <Save size={17} aria-hidden="true" />
-                  <strong>另存为…</strong>
-                  <small>自选位置</small>
-                </button>
-              </div>
             </div>
-            {paperDownloadError && <p className="vocabulary-practice-paper-error" role="alert">{paperDownloadError}</p>}
 
             <section className="vocabulary-practice-board-section" aria-labelledby="vocabulary-match-board-title">
               <h2 id="vocabulary-match-board-title" className="sr-only">单词配对卡片</h2>

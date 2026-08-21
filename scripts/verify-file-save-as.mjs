@@ -142,7 +142,7 @@ try {
     ['个人空间 exposes save-as', 'app/src/features/my-space/MySpacePage.tsx', "downloadArtifact(artifact, 'save-as')"],
     ['草稿卷 exposes save-as', 'app/src/features/draft-paper/DraftPaperWorkbench.tsx', "exportPdf('save-as')"],
     ['生词组 exposes save-as', 'app/src/features/vocabulary-review/VocabularyReviewPage.tsx', "downloadVocabularySheet(option.kind, 'save-as')"],
-    ['趣味练习 exposes save-as', 'app/src/features/vocabulary-practice/VocabularyPracticePage.tsx', "downloadWordSearchPaper('save-as')"],
+    ['认词本轮错词 exposes save-as', 'app/src/features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx', "downloadRecordMaterial(activeRecord, 'bundle', 'save-as')"],
     ['单词复习 exposes save-as', 'app/src/features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx', "'save-as'"],
     ['卷面导出 accepts save-as', 'app/src/paperAssembly/usePaperExports.ts', "mode: FileSaveMode = 'download'"],
   ]

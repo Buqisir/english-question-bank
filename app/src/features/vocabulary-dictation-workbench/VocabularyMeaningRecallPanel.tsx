@@ -1,10 +1,16 @@
 import {
+  BookOpenCheck,
   Check,
+  ChevronDown,
+  Download,
   Eye,
   EyeOff,
+  FileCheck2,
   Play,
+  Printer,
   QrCode,
   RotateCcw,
+  Save,
   Shuffle,
   Sparkles,
   Volume2,
@@ -15,14 +21,19 @@ import type { VocabularySetEntry } from '../../domain/vocabulary'
 import {
   createVocabularyDictationTask,
   createVocabularyMeaningRecallRecord,
+  downloadVocabularyMeaningRecallRecordMaterialsZip,
+  downloadVocabularyMeaningRecallRecordPdf,
   getSuggestedVocabularyMeaningRecall,
   getVocabularyMeaningRecallRecord,
   updateVocabularyMeaningRecallRecord,
+  vocabularyMeaningRecallRecordMaterialFileName,
   type VocabularyDictationTaskDto,
   type VocabularyMeaningRecallRecordDto,
   type VocabularyMeaningSuggestionDto,
+  type VocabularyMaterialKind,
   type VocabularySetLibraryItemDto,
 } from '../../services/vocabulary'
+import { prepareFileSaveTarget, type FileSaveMode } from '../../services/fileDownload.ts'
 import { getVocabularyAudioPath } from '../vocabulary-listen/vocabularyAudioVariants'
 
 const MEANING_SUGGESTION_TARGET_STORAGE_KEY = 'eqb-vocabulary-meaning-suggestion-target-v1'
@@ -35,6 +46,8 @@ type MeaningRecallPanelProps = {
   onAccentChange: (accent: 'american' | 'british') => void
   requestedRecordId: string | null
   onRequestedRecordHandled: () => void
+  requestedReview: { requestId: string; entries: Array<VocabularySetEntry & { sourceSetIds: string[] }> } | null
+  onRequestedReviewHandled: () => void
   onNeedSets: () => void
   onChanged: () => Promise<void>
   onCreatedTask: (task: VocabularyDictationTaskDto) => void
@@ -81,6 +94,8 @@ export function VocabularyMeaningRecallPanel({
   onAccentChange,
   requestedRecordId,
   onRequestedRecordHandled,
+  requestedReview,
+  onRequestedReviewHandled,
   onNeedSets,
   onChanged,
   onCreatedTask,
@@ -324,6 +339,14 @@ export function VocabularyMeaningRecallPanel({
     }
   }
 
+  useEffect(() => {
+    if (!requestedReview) return
+    const sourceSetIds = [...new Set(requestedReview.entries.flatMap((entry) => entry.sourceSetIds))]
+    void startRecall(requestedReview.entries, sourceSetIds).finally(onRequestedReviewHandled)
+  // requestId is the stable event boundary; callbacks are intentionally not dependencies.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [requestedReview?.requestId])
+
   async function loadSuggestion() {
     setBusy(true)
     setError('')
@@ -367,6 +390,30 @@ export function VocabularyMeaningRecallPanel({
       await onChanged()
     } catch (nextError) {
       setError(nextError instanceof Error ? nextError.message : '错词听写生成失败。')
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  async function downloadRecordMaterial(
+    record: VocabularyMeaningRecallRecordDto,
+    kind: VocabularyMaterialKind | 'bundle',
+    mode: FileSaveMode,
+    handwritingMode: 'standard' | 'single' = 'standard',
+  ) {
+    setBusy(true)
+    setError('')
+    try {
+      const target = await prepareFileSaveTarget({
+        mode,
+        suggestedName: vocabularyMeaningRecallRecordMaterialFileName(record, accent, kind, handwritingMode),
+        mimeType: kind === 'bundle' ? 'application/zip' : 'application/pdf',
+      })
+      if (!target) return
+      if (kind === 'bundle') await downloadVocabularyMeaningRecallRecordMaterialsZip(record.id, accent, target)
+      else await downloadVocabularyMeaningRecallRecordPdf(record.id, accent, kind, target, handwritingMode)
+    } catch (nextError) {
+      setError(nextError instanceof Error ? nextError.message : '本轮错词资料下载失败。')
     } finally {
       setBusy(false)
     }
@@ -478,8 +525,33 @@ export function VocabularyMeaningRecallPanel({
             <button type="button" aria-pressed={accent === 'american'} className={accent === 'american' ? 'is-selected' : ''} onClick={() => onAccentChange('american')}>美音</button>
             <button type="button" aria-pressed={accent === 'british'} className={accent === 'british' ? 'is-selected' : ''} onClick={() => onAccentChange('british')}>英音</button>
           </fieldset>
+          <details className="dictation-download-menu meaning-recall-download-menu">
+            <summary><Download size={16} />下载本轮错词<ChevronDown size={14} aria-hidden="true" /></summary>
+            <div>
+              {([
+                ['cards', '单词卡', <BookOpenCheck size={14} key="cards" />],
+                ['dictation', '听写纸', <Download size={14} key="dictation" />],
+                ['answer', '教师答案', <FileCheck2 size={14} key="answer" />],
+                ['handwriting', '衡水体练字纸', <Printer size={14} key="handwriting" />],
+              ] as const).map(([kind, label, icon]) => (
+                <div className="dictation-download-option" key={kind}>
+                  <button type="button" disabled={!forgotten.length || busy} onClick={() => void downloadRecordMaterial(activeRecord, kind, 'download')}>{icon}{label}</button>
+                  <button type="button" className="dictation-save-as-button" aria-label={`${label}另存为`} disabled={!forgotten.length || busy} onClick={() => void downloadRecordMaterial(activeRecord, kind, 'save-as')}><Save size={13} />另存为…</button>
+                </div>
+              ))}
+              <div className="dictation-download-option">
+                <button type="button" disabled={!forgotten.length || busy} onClick={() => void downloadRecordMaterial(activeRecord, 'handwriting', 'download', 'single')}><Printer size={14} />练字纸（每词写1遍）</button>
+                <button type="button" className="dictation-save-as-button" aria-label="每词写1遍练字纸另存为" disabled={!forgotten.length || busy} onClick={() => void downloadRecordMaterial(activeRecord, 'handwriting', 'save-as', 'single')}><Save size={13} />另存为…</button>
+              </div>
+              <div className="dictation-download-divider" />
+              <div className="dictation-download-option">
+                <button type="button" disabled={!forgotten.length || busy} onClick={() => void downloadRecordMaterial(activeRecord, 'bundle', 'download')}><Download size={14} />下载全套（4份）</button>
+                <button type="button" className="dictation-save-as-button" aria-label="全套错词资料另存为" disabled={!forgotten.length || busy} onClick={() => void downloadRecordMaterial(activeRecord, 'bundle', 'save-as')}><Save size={13} />另存为…</button>
+              </div>
+            </div>
+          </details>
           <button type="button" className="is-primary" onClick={() => void generateTask(forgotten)} disabled={!forgotten.length || !dictationTitle.trim() || busy}><QrCode size={16} />生成错词听写</button>
-          <span>下载时会自动补上听写纸、词数和口音。</span>
+          <span>下载不会创建听写任务；需要扫码练习时再生成听写。</span>
         </div>
         <div className="meaning-recall-result-list">
           {activeRecord.entries.map((entry) => (
