@@ -3968,23 +3968,32 @@ export function buildCombinedVocabularyPrintPayload(userDb, userId, input = {}) 
       if (entries.length > sectionStart) sections.push({ startIndex: sectionStart, title: source.set.title })
     }
   } else {
-    const states = getStudentVocabularyReviewStates(userDb, userId, studentId, programId)
-    const stateById = new Map(states.map((state) => [state.id, state]))
+    const dictationStates = getStudentVocabularyReviewStates(userDb, userId, studentId, programId)
+    const meaningStates = getStudentVocabularyMeaningStates(userDb, userId, studentId, programId)
+    const stateById = new Map(meaningStates.map((state) => [state.id, state]))
+    for (const state of dictationStates) stateById.set(state.id, state)
     for (const entryId of entryIds) {
       const state = stateById.get(entryId)
-      if (!state) throw new VocabularyStoreError('错词清单包含当前学生没有听写历史的词。', 409, 'vocabulary_print_review_state_missing')
+      if (!state) throw new VocabularyStoreError('错词清单包含当前学生没有认词或听写历史的词。', 409, 'vocabulary_print_review_state_missing')
       const {
         attempts: _attempts,
+        meaningAttempts: _meaningAttempts,
         totalWrong: _totalWrong,
         currentConsecutiveWrong: _currentConsecutiveWrong,
         currentConsecutiveCorrect: _currentConsecutiveCorrect,
+        currentWrongDateCount: _currentWrongDateCount,
+        currentCorrectDateCount: _currentCorrectDateCount,
         recentAttempts: _recentAttempts,
         recentWrong: _recentWrong,
         recentWrongRate: _recentWrongRate,
         wrongDateCount: _wrongDateCount,
         lastWrongDate: _lastWrongDate,
         lastWrongSpelling: _lastWrongSpelling,
+        lastForgottenDate: _lastForgottenDate,
+        lastCheckedDate: _lastCheckedDate,
+        latestEvidenceDate: _latestEvidenceDate,
         latestResult: _latestResult,
+        latestSource: _latestSource,
         status: _status,
         pinned: _pinned,
         paused: _paused,

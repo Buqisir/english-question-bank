@@ -4,6 +4,7 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 import {
+  buildCombinedVocabularyPrintPayload,
   buildVocabularyDictationTaskPrintPayload,
   createVocabularyDictationRecord,
   createVocabularyDictationTask,
@@ -181,6 +182,27 @@ const firstWrong = updateVocabularyMeaningRecallRecord(userDb, 'teacher-a', draf
 assert.equal(firstWrong.status, 'completed')
 let states = getStudentVocabularyMeaningStates(userDb, 'teacher-a', student.id, 'wanwei-round-one-v1')
 assert.equal(states.find((state) => state.id === entries[0].id).status, 'pending')
+const meaningOnlyPrint = buildCombinedVocabularyPrintPayload(userDb, 'teacher-a', {
+  studentId: student.id,
+  programId: 'wanwei-round-one-v1',
+  title: '认词错词练字纸',
+  entryIds: [entries[0].id],
+})
+assert.deepEqual(
+  meaningOnlyPrint.vocabularySet.entries.map((entry) => entry.id),
+  [entries[0].id],
+  '只有认词错误历史的词也必须能进入错词打印资料',
+)
+assert.throws(
+  () => buildCombinedVocabularyPrintPayload(userDb, 'teacher-a', {
+    studentId: student.id,
+    programId: 'wanwei-round-one-v1',
+    title: '无复习历史',
+    entryIds: [entries[9].id],
+  }),
+  (error) => error?.code === 'vocabulary_print_review_state_missing',
+  '没有认词或听写复习历史的词仍必须被拒绝',
+)
 
 createVocabularyMeaningRecallRecord(dbs, 'teacher-a', {
   studentId: student.id,
