@@ -3987,7 +3987,33 @@ export function buildCombinedVocabularyPrintPayload(userDb, userId, input = {}) 
   }
 }
 
-export function buildVocabularyMeaningRecallRecordPrintPayload(userDb, userId, recordId) {
+function findMeaningRecallRecordPrintShare(userDb, userId, recordId, entryIds, accent) {
+  if (accent !== 'american' && accent !== 'british') return null
+  const candidates = userDb.prepare(`
+    SELECT tasks.id, shares.share_id, shares.status, shares.created_at, shares.revoked_at
+    FROM vocabulary_meaning_recall_dictation_tasks AS links
+    JOIN vocabulary_dictation_tasks AS tasks ON tasks.id = links.task_id
+    JOIN vocabulary_dictation_task_shares AS shares ON shares.task_id = tasks.id
+    WHERE links.record_id = ? AND tasks.user_id = ? AND tasks.accent = ? AND shares.status = 'active'
+    ORDER BY tasks.created_at DESC, tasks.id DESC
+  `).all(recordId, userId, accent)
+  for (const candidate of candidates) {
+    const taskEntryIds = userDb.prepare(`
+      SELECT entry_id FROM vocabulary_dictation_task_entries
+      WHERE task_id = ? ORDER BY order_index
+    `).all(candidate.id).map((entry) => entry.entry_id)
+    if (taskEntryIds.length !== entryIds.length || taskEntryIds.some((entryId, index) => entryId !== entryIds[index])) continue
+    return {
+      shareId: candidate.share_id,
+      status: candidate.status,
+      createdAt: candidate.created_at,
+      revokedAt: candidate.revoked_at,
+    }
+  }
+  return null
+}
+
+export function buildVocabularyMeaningRecallRecordPrintPayload(userDb, userId, recordId, { accent = null } = {}) {
   ensureUserVocabularyShape(userDb)
   const record = readMeaningRecallRecordRows(userDb, userId, recordId)
   if (record.status !== 'completed') {
@@ -4008,6 +4034,13 @@ export function buildVocabularyMeaningRecallRecordPrintPayload(userDb, userId, r
     )
   }
   const title = `${record.title}-本轮错词`
+  const share = findMeaningRecallRecordPrintShare(
+    userDb,
+    userId,
+    record.id,
+    wrongEntries.map((entry) => entry.id),
+    accent,
+  )
   return {
     vocabularySet: {
       id: `vocabulary-meaning-record-print-${record.id}`,
@@ -4017,7 +4050,7 @@ export function buildVocabularyMeaningRecallRecordPrintPayload(userDb, userId, r
       title,
       entryCount: wrongEntries.length,
       entries: wrongEntries,
-      share: null,
+      share,
       createdAt: record.updatedAt,
     },
     sections: [{ startIndex: 0, title }],

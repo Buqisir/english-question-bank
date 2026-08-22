@@ -695,21 +695,25 @@ export function createVocabularyRoutes() {
           db,
           userId,
           decodePathPart(match[1]),
+          { accent },
         ))
         printJobId = createVocabularyPrintJob(userId, {
           ...payload,
           accent,
           kind,
           handwritingMode,
-          shareKind: null,
+          shareKind: payload.vocabularySet.share?.status === 'active'
+            ? kind === 'cards' ? 'listen' : kind === 'dictation' ? 'dictation' : null
+            : null,
         })
+        const hasQr = payload.vocabularySet.share?.status === 'active' && ['cards', 'dictation'].includes(kind)
         const result = await context.renderVocabularySetPdf({
           cookie: request.headers.cookie ?? '',
           printJobId,
           accent,
           kind,
           expectedPageCount: expectedVocabularyPrintPages(payload.vocabularySet.entryCount, kind, handwritingMode),
-          expectedQrCount: 0,
+          expectedQrCount: hasQr ? 1 : 0,
         })
         sendVocabularyPdf(
           response,
@@ -735,6 +739,7 @@ export function createVocabularyRoutes() {
           db,
           userId,
           decodePathPart(match[1]),
+          { accent: input.accent },
         ))
         await streamVocabularyMaterialBundle({
           request,

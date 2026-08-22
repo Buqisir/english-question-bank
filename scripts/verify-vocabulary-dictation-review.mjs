@@ -715,6 +715,28 @@ for (const [label, source] of [
 }
 
 restoreVocabularyMeaningRecallRecord(userDb, 'teacher-a', meaningRecord.id)
+const linkedMeaningTask = createVocabularyDictationTask(dbs, 'teacher-a', {
+  studentId: student.id,
+  programId: 'wanwei-round-one-v1',
+  sourceSetIds: [setA.id, setB.id],
+  entryIds: [entries[1].id, entries[60].id],
+  meaningRecallRecordId: meaningRecord.id,
+  taskDate: '2026-08-21',
+  title: '多词组词义抽查错词听写',
+  accent: 'american',
+  share: true,
+})
+assert.equal(linkedMeaningTask.share?.status, 'active')
+assert.equal(
+  buildVocabularyMeaningRecallRecordPrintPayload(userDb, 'teacher-a', meaningRecord.id, { accent: 'american' }).vocabularySet.share?.shareId,
+  linkedMeaningTask.share.shareId,
+  '本轮错词导出必须复用词序与口音完全一致的已生成听写二维码',
+)
+assert.equal(
+  buildVocabularyMeaningRecallRecordPrintPayload(userDb, 'teacher-a', meaningRecord.id, { accent: 'british' }).vocabularySet.share,
+  null,
+  '不同口音的错词资料不得误用已生成的二维码',
+)
 const routeRenderCalls = []
 let routeBody = {}
 const routeContext = {
@@ -780,31 +802,35 @@ for (const [kind, handwritingMode] of [
   assert.match(decodeURIComponent(response.responseHeaders['x-file-name']), /多词组词义抽查-本轮错词/u)
 }
 assert.equal(routeRenderCalls.length, 5)
-assert.equal(routeRenderCalls.every((call) => call.expectedQrCount === 0), true, '认词错词资料不得生成二维码')
+assert.deepEqual(
+  routeRenderCalls.map((call) => call.expectedQrCount),
+  [1, 1, 0, 0, 0],
+  '已生成错词听写后，本轮错词单词卡和听写纸必须各带一个二维码',
+)
 assert.equal(routeRenderCalls.at(-1).expectedPageCount, 1, '每词写1遍必须使用独立分页规则')
 
 routeRenderCalls.length = 0
 const zipResponse = await invokeVocabularyRoute(
   'POST',
   `/api/vocabulary/meaning-recall-records/${meaningRecord.id}/materials.zip`,
-  { accent: 'british' },
+  { accent: 'american' },
 )
 assert.equal(zipResponse.statusCode, 200)
 assert.equal(zipResponse.responseHeaders['content-type'], 'application/zip')
 assert.deepEqual(routeRenderCalls.map((call) => call.kind), ['cards', 'dictation', 'answer', 'handwriting'])
-assert.equal(routeRenderCalls.every((call) => call.expectedQrCount === 0), true)
+assert.deepEqual(routeRenderCalls.map((call) => call.expectedQrCount), [1, 1, 0, 0])
 const zipPath = path.join(root, 'meaning-record-materials.zip')
 writeFileSync(zipPath, Buffer.concat(zipResponse.bodyChunks))
 const zipList = spawnSync('bsdtar', ['-tf', zipPath], { encoding: 'utf8' })
 assert.equal(zipList.status, 0, zipList.stderr)
 const zipEntries = zipList.stdout.trim().split('\n').filter(Boolean)
 assert.equal(zipEntries.length, 4)
-assert.match(zipEntries[0], /多词组词义抽查-本轮错词-2词-英式\.pdf$/u)
+assert.match(zipEntries[0], /多词组词义抽查-本轮错词-2词-美式\.pdf$/u)
 assert.match(zipEntries[1], /听写纸/u)
 assert.match(zipEntries[2], /教师答案/u)
 assert.match(zipEntries[3], /衡水体练字纸/u)
 assert.equal(zipEntries.some((name) => /圈词/u.test(name)), false)
-assert.equal(userDb.prepare('SELECT COUNT(*) AS count FROM vocabulary_dictation_tasks').get().count, taskCountBeforeRecordDownloads, '纯下载不得创建听写任务')
+assert.equal(userDb.prepare('SELECT COUNT(*) AS count FROM vocabulary_dictation_tasks').get().count, taskCountBeforeRecordDownloads, '下载必须复用已生成的二维码听写任务，不得重复创建')
 
 for (const [method, url] of [
   ['POST', `/api/vocabulary/dictation-tasks/${task.id}/records`],
