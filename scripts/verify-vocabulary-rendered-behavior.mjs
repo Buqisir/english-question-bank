@@ -1142,6 +1142,20 @@ async function verifyHandwritingPrint(page, count, expectedPages, mode = 'standa
     nodes.map((node) => getComputedStyle(node).fontFamily)
   ))
   assert.equal(fontFamilies.every((family) => family.includes('Shuyao Hengshui')), true)
+  const guideGeometry = await page.locator('.vocabulary-handwriting-guide').evaluateAll((guides) => guides.map((guide) => {
+    const lineRects = [...guide.querySelectorAll('i')].map((line) => line.getBoundingClientRect())
+    return {
+      lineCount: lineRects.length,
+      lineGaps: lineRects.slice(1).map((line, index) => line.top - lineRects[index].top),
+      lineStyles: [...guide.querySelectorAll('i')].map((line) => getComputedStyle(line).borderTopStyle),
+    }
+  }))
+  const mm = 96 / 25.4
+  assert.equal(guideGeometry.every((guide) => (
+    guide.lineCount === 4
+    && guide.lineGaps.every((gap) => gap >= 2.8 * mm && gap <= 3.2 * mm)
+    && guide.lineStyles.join('/') === 'dashed/dashed/solid/dashed'
+  )), true)
   const overflow = await pages.evaluateAll((nodes) => nodes.map((node) => (
     node.scrollWidth > node.clientWidth + 1 || node.scrollHeight > node.clientHeight + 1
   )))
@@ -1160,8 +1174,8 @@ async function verifyHandwritingPrint(page, count, expectedPages, mode = 'standa
     assert.ok(readFileSync(`${rasterPrefix}-${pageIndex}.png`).length > 10_000)
   }
   pass(mode === 'single'
-    ? `${count} 词轻量练字纸按每页10词生成 A4，每词仅保留范字与一个独立书写位且无描红`
-    : `${count} 词衡水体练字纸按每页7词生成 A4，短词四格、长词三格、首格中文与姓名日期均无溢出`)
+    ? `${count} 词轻量练字纸按每页10词生成 A4，每词仅保留范字与一个独立书写位，并复用听写纸四线三格`
+    : `${count} 词衡水体练字纸按每页7词生成 A4，短词四格、长词三格、复用听写纸四线三格且首格中文与姓名日期均无溢出`)
 }
 
 async function verifyDictationPrint(page, count, expectedPages, accent = 'american') {
