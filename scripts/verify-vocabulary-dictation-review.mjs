@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict'
-import { spawnSync } from 'node:child_process'
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { mkdtempSync, readFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
@@ -35,6 +34,32 @@ import {
   buildVocabularyMeaningRecallRecordPrintPayload,
 } from '../server/vocabulary/vocabularyStore.mjs'
 import { createVocabularyRoutes } from '../server/vocabulary/vocabularyRoutes.mjs'
+
+function readZipEntryNames(zipBytes) {
+  const eocdSignature = 0x06054b50
+  const centralDirectorySignature = 0x02014b50
+  const minimumEocdOffset = Math.max(0, zipBytes.length - 65_557)
+  let eocdOffset = -1
+  for (let offset = zipBytes.length - 22; offset >= minimumEocdOffset; offset -= 1) {
+    if (zipBytes.readUInt32LE(offset) === eocdSignature) {
+      eocdOffset = offset
+      break
+    }
+  }
+  assert.notEqual(eocdOffset, -1, 'ZIP must contain an end-of-central-directory record')
+  const entryCount = zipBytes.readUInt16LE(eocdOffset + 10)
+  let offset = zipBytes.readUInt32LE(eocdOffset + 16)
+  const names = []
+  for (let index = 0; index < entryCount; index += 1) {
+    assert.equal(zipBytes.readUInt32LE(offset), centralDirectorySignature, 'ZIP central-directory entry must be valid')
+    const nameLength = zipBytes.readUInt16LE(offset + 28)
+    const extraLength = zipBytes.readUInt16LE(offset + 30)
+    const commentLength = zipBytes.readUInt16LE(offset + 32)
+    names.push(zipBytes.subarray(offset + 46, offset + 46 + nameLength).toString('utf8'))
+    offset += 46 + nameLength + extraLength + commentLength
+  }
+  return names
+}
 
 function makeEntry(index) {
   const label = `word${String(index + 1).padStart(2, '0')}`
@@ -819,11 +844,7 @@ assert.equal(zipResponse.statusCode, 200)
 assert.equal(zipResponse.responseHeaders['content-type'], 'application/zip')
 assert.deepEqual(routeRenderCalls.map((call) => call.kind), ['cards', 'dictation', 'answer', 'handwriting'])
 assert.deepEqual(routeRenderCalls.map((call) => call.expectedQrCount), [1, 1, 0, 0])
-const zipPath = path.join(root, 'meaning-record-materials.zip')
-writeFileSync(zipPath, Buffer.concat(zipResponse.bodyChunks))
-const zipList = spawnSync('bsdtar', ['-tf', zipPath], { encoding: 'utf8' })
-assert.equal(zipList.status, 0, zipList.stderr)
-const zipEntries = zipList.stdout.trim().split('\n').filter(Boolean)
+const zipEntries = readZipEntryNames(Buffer.concat(zipResponse.bodyChunks))
 assert.equal(zipEntries.length, 4)
 assert.match(zipEntries[0], /多词组词义抽查-本轮错词-2词-美式\.pdf$/u)
 assert.match(zipEntries[1], /听写纸/u)
