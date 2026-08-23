@@ -322,7 +322,7 @@
   }
 
   .vocabulary-handwriting-print-page.is-single .vocabulary-handwriting-guide strong {
-    font-size: 23pt;
+    font-size: 18pt;
   }
 
   .vocabulary-handwriting-guide {
@@ -357,10 +357,11 @@
     max-width: 100%;
     overflow: hidden;
     font-family: 'Shuyao Hengshui', 'Times New Roman', serif;
-    font-size: 25pt;
+    font-size: 18pt;
     font-weight: 400;
     line-height: 1;
     text-align: center;
+    transform: translateY(-0.35mm);
     white-space: nowrap;
   }
 

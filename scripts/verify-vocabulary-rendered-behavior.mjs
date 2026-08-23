@@ -1144,9 +1144,33 @@ async function verifyHandwritingPrint(page, count, expectedPages, mode = 'standa
   assert.equal(fontFamilies.every((family) => family.includes('Shuyao Hengshui')), true)
   const guideGeometry = await page.locator('.vocabulary-handwriting-guide').evaluateAll((guides) => guides.map((guide) => {
     const lineRects = [...guide.querySelectorAll('i')].map((line) => line.getBoundingClientRect())
+    const strong = guide.querySelector('strong')
+    let letterAlignment = null
+    if (strong) {
+      const marker = document.createElement('span')
+      marker.style.cssText = 'display:inline-block;width:0;height:0;padding:0;margin:0;border:0;vertical-align:baseline'
+      strong.append(marker)
+      const baseline = marker.getBoundingClientRect().top
+      marker.remove()
+      const style = getComputedStyle(strong)
+      const context = document.createElement('canvas').getContext('2d')
+      context.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`
+      const xMetrics = context.measureText('x')
+      const capMetrics = context.measureText('H')
+      const descenderMetrics = context.measureText('p')
+      letterAlignment = {
+        baseline,
+        capTop: baseline - capMetrics.actualBoundingBoxAscent,
+        descenderBottom: baseline + descenderMetrics.actualBoundingBoxDescent,
+        fontSize: Number.parseFloat(style.fontSize),
+        xTop: baseline - xMetrics.actualBoundingBoxAscent,
+      }
+    }
     return {
+      letterAlignment,
       lineCount: lineRects.length,
       lineGaps: lineRects.slice(1).map((line, index) => line.top - lineRects[index].top),
+      lineTops: lineRects.map((line) => line.top),
       lineStyles: [...guide.querySelectorAll('i')].map((line) => getComputedStyle(line).borderTopStyle),
     }
   }))
@@ -1155,6 +1179,17 @@ async function verifyHandwritingPrint(page, count, expectedPages, mode = 'standa
     guide.lineCount === 4
     && guide.lineGaps.every((gap) => gap >= 2.8 * mm && gap <= 3.2 * mm)
     && guide.lineStyles.join('/') === 'dashed/dashed/solid/dashed'
+  )), true)
+  const alignedLetters = guideGeometry.filter((guide) => guide.letterAlignment)
+  assert.ok(alignedLetters.length > 0)
+  assert.equal(alignedLetters.every(({ letterAlignment, lineTops }) => (
+    Math.abs(letterAlignment.fontSize - 24) <= 0.2
+    && Math.abs(letterAlignment.xTop - lineTops[1]) <= 1
+    && Math.abs(letterAlignment.baseline - lineTops[2]) <= 1
+    && letterAlignment.capTop >= lineTops[0] - 1
+    && letterAlignment.capTop < lineTops[1]
+    && letterAlignment.descenderBottom > lineTops[2]
+    && letterAlignment.descenderBottom <= lineTops[3] + 1
   )), true)
   const overflow = await pages.evaluateAll((nodes) => nodes.map((node) => (
     node.scrollWidth > node.clientWidth + 1 || node.scrollHeight > node.clientHeight + 1
