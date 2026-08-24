@@ -6,7 +6,6 @@ import { createHash } from 'node:crypto'
 import {
   mkdtempSync,
   readFileSync,
-  readdirSync,
   rmSync,
   writeFileSync,
 } from 'node:fs'
@@ -278,7 +277,11 @@ assert.deepEqual(
   },
 )
 
-const corpusFiles = readdirSync('app/public/paper-assets')
+const frozenCorpusManifest = JSON.parse(readFileSync(
+  'docs/cuts/paper-canonical-unification/migration/manifest-v2.json',
+  'utf8',
+))
+const corpusFiles = frozenCorpusManifest.membership.paperIds
   .map((paperId) => ({
     paperId,
     assetPath: path.join(
@@ -287,14 +290,6 @@ const corpusFiles = readdirSync('app/public/paper-assets')
       'latest/paper-asset.json',
     ),
   }))
-  .filter(({ assetPath }) => {
-    try {
-      readFileSync(assetPath)
-      return true
-    } catch {
-      return false
-    }
-  })
   .sort((left, right) => left.paperId.localeCompare(right.paperId))
 assert.equal(corpusFiles.length, 33)
 assert.equal(

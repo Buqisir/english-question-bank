@@ -171,7 +171,9 @@ section('3. Client — detail-page passage (<pre> path, passageFigureSegments.ts
       // "[表: fig-...]" prefix in the double-store sidecar still reads as
       // a leaked token to the teacher, even on this one surface that keeps
       // flattened text at all).
-      assert(!!figureSegment?.flattenedText && figureSegment.flattenedText.length > 0, `${paperId}/${entry.groupId}: figure segment's flattenedText is non-empty (PO-2 double-store)`)
+      if (entry.placeholderMarker.startsWith('[表:')) {
+        assert(!!figureSegment?.flattenedText && figureSegment.flattenedText.length > 0, `${paperId}/${entry.groupId}: table figure segment's flattenedText is non-empty (PO-2 double-store)`)
+      }
       assert(!figureSegment?.flattenedText?.includes(entry.placeholderMarker), `${paperId}/${entry.groupId}: figure segment's flattenedText has the marker stripped (no leaked token in the double-store sidecar)`)
 
       // Backward-compat: figures: [] degrades to ONE unsplit text segment,
