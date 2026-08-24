@@ -29,7 +29,7 @@ Spec: `docs/cuts/reading-framed-columns/spec.md`
 
 ## Result
 
-Commit:
+Commit: `b0de44fe`
 Verify:
 - `node scripts/verify-paper-canonical-framed-columns.mjs` PASS（合同夹具 + 深圳一模真块编译）
 - `node scripts/verify-nck1-new-paper-locks.mjs` 8 passed（锁改名为 `published format ② PDF pair keeps Reading A puzzle as framed_columns`）
@@ -44,6 +44,6 @@ Notes:
 - 原卷 `"Uruguay"further` 缺空格按桌面 PDF 第 1 页保留。字母对应按原图 / IOL：`რ→R, ა→A, გ→G, ე→E`（不采用 OCR 的 `ზ→G`）。
 - Puzzle PNG 留 `figures/`；`[图: fig-paper-mock-sz-2026-m1-reading-a-puzzle-1]` 只在 staged `groups.json`。Canonical 正文无 figure、无 `[图:]`。
 - 台灯仍是 `writing-application-lamp.png` overlay。Q33 仍是 figures PNG + 选项 `[Fig.]`，未收成 `framed_columns`，未改 overlay。
-- 未 bump 权威。未 commit。未把 `compiler.mjs` PDF-pair figure 编译入口带进本票。
+- 未 bump 权威。未把 `compiler.mjs` PDF-pair figure 编译入口带进本票。派生接线仍在未提交的格式② PDF-pair adapter 厨房里。
 - 独立审查：Standards 无硬违规；Spec 有一条「Q33 应进 Canonical figure」——与本票 Out of scope /「不要动 Q33 overlay」冲突，不改。
 - Owner QA 视觉（2026-08-24）：栏内对照表无格、收窄稍居中、行距松开；表后问句只略隔开，短栏底部留白，不把内容顶到框底。已收成共享渲染约定，不为单卷 CSS。权威：`exam-paper-format-standards.md` §3c；导题：`nck1-paper-standard.md` §8；下一卷：spec「下一卷怎么干」。

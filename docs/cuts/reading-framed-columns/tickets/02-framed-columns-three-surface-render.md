@@ -29,7 +29,7 @@ PaperSurface、打印 HTML、PDF 从同一份投影画出 `framed_columns`：两
 
 ## Result
 
-Commit:
+Commit: `b0de44fe`
 Verify:
 - `node scripts/verify-paper-canonical-framed-columns.mjs` PASS
 - `node scripts/verify-paper-canonical-framed-columns-rendered.mjs` PASS
@@ -44,5 +44,5 @@ Notes:
 - JSON 字段仍是 `columnHeading`。渲染只认该标记，不靠第一段。
 - 未 bump 权威。未知阅读块不再当 figure。
 - 打印超高：最小高度超过一页内容区 → `CANONICAL_FRAMED_COLUMNS_EXCEEDS_PAGE`。
-- 深圳一模正文未换（票 03）。未 commit。
+- 深圳一模正文随票 03 同一 commit 换上。
 - Owner QA 2026-08-24：过关。合成夹具格鲁吉亚文三面够用；原卷 Puzzle|Solution 全文归票 03。
