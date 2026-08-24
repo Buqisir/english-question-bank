@@ -82,6 +82,68 @@ surface.
 
 ## Result
 
-Not started. Record exact selected digests, Owner decision, implementation
-commit, all verification and review results, rendered evidence, and any
-remaining unresolved visual issue here.
+Awaiting Owner exact digest selection at Stop A.
+
+- Candidate package:
+  `sha256:695c87ccf75d6f59132cbb1d7be1a85d32cea83f24d721d199743a2e3869822f`.
+- Successor visual Source Capture:
+  `source-capture:3bc14ad0fcc859e6c350b` /
+  `sha256:3bc14ad0fcc859e6c350b32dd86889fb993e761f865d1b2e9044427a6c798832`.
+- The two tracked 1380×220 strips remain byte-identical at
+  `sha256:60f02d3ac7194ac22d52137f0e64801d348818548d3e385bf6200c025aa8702d`.
+  The strip is immutable comparison evidence only.
+- Four observations bind page-4 PDF XObjects 58–61 by left-to-right source
+  placement, never by answer identity:
+  - `observation:paper-mock-sz-2026-m1:q33:option:A` →
+    `option:q-mock-sz-2026-m1-033:A`;
+  - `observation:paper-mock-sz-2026-m1:q33:option:B` →
+    `option:q-mock-sz-2026-m1-033:B`;
+  - `observation:paper-mock-sz-2026-m1:q33:option:C` →
+    `option:q-mock-sz-2026-m1-033:C`;
+  - `observation:paper-mock-sz-2026-m1:q33:option:D` →
+    `option:q-mock-sz-2026-m1-033:D`.
+- Exact candidate digests:
+
+  | Option | `source_crop` | `vector_authored` | `reference_restored` |
+  | --- | --- | --- | --- |
+  | A | `sha256:9560aa56e21febbaf630c5e56693f4042abca2a8206f62c49befbb143822241f` | `sha256:566a6eb58b7aaa8d6a04cd41dec94caa60ea11cf1cffce07e84ef75bdada86d3` | `sha256:457e4af4322582bdccddc86687fcb1a044cba35ee140d589937500a49c212c0d` |
+  | B | `sha256:a4fc54e2a8129c435c58f92d057d734c3a3750ef94c0fbc13c19eb1a3faaec18` | `sha256:e613ce9761ffc6b054087952c6425bfe2f9098882c82325ee69c9b242231e796` | `sha256:90358084fa34af4aa2c38c7be178d2410fcc6e85904a885fc671ae2cb9a03603` |
+  | C | `sha256:60b8397229ff3625270c7e22d63717e4a0e5b6027db86e57ceb2cba116f57b2f` | `sha256:3191a409a0f7065f26ce6ceb27d2afc1e6b1fa467a3e0449e7a9ea8463cb374c` | `sha256:b8728e6adc9a9fc65c9a72cf6487c6bbbb50f1a459e6177a2eb45f1eb8680995` |
+  | D | `sha256:29bba5d9d7c887ae55f801afd460a53f620aab379f7daab50a2d6d36ac73af21` | `sha256:53e5fe85a40515d1a1c893d57372f8e1ec080f6792335e808fc28d9301e7b5df` | `sha256:6efc93028120a2a117fa144ee23bebf0dcc3bdc415b8308cf8f89474c538765c` |
+
+- The local comparison is
+  `scripts/import-pipeline/papers/paper-mock-sz-2026-m1/visual-candidates/q33/comparison.html`.
+  Serve the paper directory with
+  `python3 -m http.server 4174 --bind 127.0.0.1 --directory scripts/import-pipeline/papers/paper-mock-sz-2026-m1`
+  and open
+  `http://127.0.0.1:4174/visual-candidates/q33/comparison.html`.
+- All three rows use the Ticket 03 four-track layout and the same white
+  96×60pt `contain` box with renderer-owned external A–D labels. The default
+  exported confirmation has `decisions: []`; a smoke selection proved the
+  export repeats package digest, observation, complete owner, and exact
+  candidate digest, then the page was restored to unresolved.
+- Agent visual findings remain literal and are not Owner acceptance:
+  - vector A simplifies fine internal contours; vector B regularizes the two
+    droplets and highlights; vector C omits source raster texture; vector D
+    regularizes border and gap geometry;
+  - reference-restored A materially invents/rearranges internal topology;
+    B regularizes the central separation/highlights; C changes edge-light and
+    texture; D regularizes gaps, border, and internal whitespace.
+  - `source_crop` remains an equal-authority fallback for every Option.
+- Focused Stop-A verifier: PASS. It freshly checks source/strip/XObject bytes
+  and placements, all candidate PNG bytes/digests/IHDR dimensions, owners,
+  package and confirmation mutations, Ticket 03 geometry, the independent
+  per-Option checklist item, and unresolved no-Canonical behavior.
+- Ticket 01 `verify-paper-canonical-visual-candidate.mjs`: PASS. Materializer
+  rerun was byte-idempotent; staged diff check and protected strip/Canonical
+  no-diff checks: PASS.
+- Local comparison Playwright smoke and visual screenshot inspection: PASS.
+- Owner decision: Awaiting exact exported confirmation; no candidate is
+  selected or confirmed.
+- Canonical migration, Screen, Student/Teacher Print, PDF, rendered-behavior
+  final proof, `pnpm -C app verify:paper`, `pnpm -C app verify:all`, independent
+  Standards review, and independent Spec review: SKIP at Stop A. No final gate
+  has run.
+- No current Canonical artifact, publication ref, paper asset, answer identity,
+  deployment, production data, or R2 object changed. The implementation commit
+  is the Stop-A selection-evidence commit reported in the handoff.

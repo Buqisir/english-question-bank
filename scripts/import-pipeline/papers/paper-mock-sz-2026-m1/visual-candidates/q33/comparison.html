@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Shenzhen Q33 exact visual candidate selection</title>
+  <style>
+    :root { font-family: ui-sans-serif, system-ui, sans-serif; color: #171717; background: #f3f4f6; }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 24px; }
+    main { max-width: 1180px; margin: 0 auto; background: #fff; padding: 28px; border: 1px solid #d4d4d4; border-radius: 16px; }
+    h1, h2 { margin: 0 0 12px; }
+    p { line-height: 1.5; }
+    code { overflow-wrap: anywhere; }
+    .warning { padding: 12px 14px; background: #fff7ed; border: 1px solid #fdba74; border-radius: 10px; }
+    .baseline { max-width: 690px; width: 100%; height: auto; border: 1px solid #d4d4d4; background: #fff; }
+    .candidate-set { margin: 28px 0; overflow-x: auto; }
+    .target-row { display: grid; grid-template-columns: repeat(4, 109.55pt); width: 438.2pt; min-width: 438.2pt; background: #fff; }
+    .track { width: 109.55pt; }
+    .option-label { display: block; font: 10.5pt/18pt Georgia, serif; height: 18pt; }
+    .image-box { width: 96pt; height: 60pt; margin-top: 4.5pt; display: flex; align-items: center; justify-content: center; background: #fff; overflow: hidden; }
+    .image-box img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; }
+    .meta { width: 438.2pt; min-width: 438.2pt; display: grid; grid-template-columns: repeat(4, 109.55pt); gap: 0; margin-top: 10px; font-size: 11px; color: #525252; }
+    .meta > div { padding-right: 12px; overflow-wrap: anywhere; }
+    .issue { color: #9a3412; }
+    .selection-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    label { display: grid; gap: 6px; font-weight: 650; }
+    select, button, textarea { font: inherit; }
+    .selection-grid > label { min-width: 0; }
+    select { width: 100%; min-width: 0; padding: 9px; }
+    button { margin-top: 14px; padding: 10px 14px; cursor: pointer; }
+    textarea { width: 100%; min-height: 260px; margin-top: 12px; font-family: ui-monospace, monospace; font-size: 12px; }
+    details { margin: 10px 0; }
+    @media (max-width: 760px) { .selection-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Shenzhen Reading D Q33 - exact candidate selection</h1>
+  <p class="warning"><strong>Stop A.</strong> Nothing on this page is Canonical. No selection is the default. Opening or exporting this page is not Owner acceptance.</p>
+  <p id="package"></p>
+  <h2>Immutable full-strip baseline</h2>
+  <img class="baseline" src="../../figures/reading-d-q33.png" alt="Immutable Q33 full-strip source evidence">
+  <section id="sets"></section>
+  <h2>Source-truth checklists</h2>
+  <section id="checklists"></section>
+  <h2>Exact exported confirmation</h2>
+  <p>Choose one exact digest per Option, choose rejection, or leave blank. Source crop is offered on equal authority. Blank or partial export remains unresolved.</p>
+  <div class="selection-grid" id="selection"></div>
+  <button id="export" type="button">Build and download exact confirmation JSON</button>
+  <textarea id="output" readonly aria-label="Exact confirmation JSON"></textarea>
+</main>
+<script type="module">
+  const manifest = await fetch('./comparison-manifest.json').then((response) => response.json())
+  document.querySelector('#package').innerHTML = '<strong>Package digest:</strong> <code>' + manifest.packageDigest + '</code>'
+  const methods = ['source_crop', 'vector_authored', 'reference_restored']
+  const sets = document.querySelector('#sets')
+  for (const method of methods) {
+    const section = document.createElement('section')
+    section.className = 'candidate-set'
+    section.innerHTML = '<h2>' + method + '</h2><div class="target-row"></div><div class="meta"></div>'
+    const row = section.querySelector('.target-row')
+    const meta = section.querySelector('.meta')
+    for (const observation of manifest.observations) {
+      const candidate = observation.candidates.find((entry) => entry.method === method)
+      const label = observation.owner.optionId.at(-1)
+      row.insertAdjacentHTML('beforeend', '<div class="track"><span class="option-label">' + label + '.</span><div class="image-box"><img src="' + candidate.relativePath + '" alt="Option ' + label + ' ' + method + ' candidate"></div></div>')
+      const issue = candidate.agentVisualIssues.length ? '<p class="issue">' + candidate.agentVisualIssues.join(' ') + '</p>' : '<p>Unedited source fallback; Owner review still required.</p>'
+      meta.insertAdjacentHTML('beforeend', '<div><strong>' + candidate.artifact.pixelWidth + 'x' + candidate.artifact.pixelHeight + '</strong><br><code>' + candidate.candidateDigest + '</code>' + issue + '</div>')
+    }
+    sets.append(section)
+  }
+  const checklists = document.querySelector('#checklists')
+  for (const observation of manifest.observations) {
+    const label = observation.owner.optionId.at(-1)
+    const details = document.createElement('details')
+    details.innerHTML = '<summary>Option ' + label + ' - ' + observation.observationId + '</summary><p><code>' + JSON.stringify(observation.owner) + '</code></p><ul>' + observation.sourceTruthChecklist.map((entry) => '<li><strong>' + entry.relationship + ':</strong> ' + entry.sourceTruth + '</li>').join('') + '</ul>'
+    checklists.append(details)
+  }
+  const selection = document.querySelector('#selection')
+  for (const observation of manifest.observations) {
+    const label = observation.owner.optionId.at(-1)
+    const wrapper = document.createElement('label')
+    wrapper.textContent = 'Option ' + label
+    const select = document.createElement('select')
+    select.dataset.observationId = observation.observationId
+    select.dataset.owner = JSON.stringify(observation.owner)
+    select.innerHTML = '<option value="">-- no selection (unresolved) --</option>' + observation.candidates.map((candidate) => '<option value="' + candidate.candidateDigest + '">' + candidate.method + ' - ' + candidate.candidateDigest + '</option>').join('') + '<option value="__rejected__">reject all candidates for this Option</option>'
+    wrapper.append(select)
+    selection.append(wrapper)
+  }
+  const buildConfirmation = () => ({
+    schemaVersion: 'visual-teacher-confirmation-v1',
+    packageDigest: manifest.packageDigest,
+    decisions: [...document.querySelectorAll('select')].flatMap((select) => {
+      if (!select.value) return []
+      const base = { observationId: select.dataset.observationId, owner: JSON.parse(select.dataset.owner) }
+      return [select.value === '__rejected__'
+        ? { ...base, disposition: 'rejected' }
+        : { ...base, disposition: 'confirmed', selectedCandidateDigest: select.value }]
+    }),
+  })
+  const output = document.querySelector('#output')
+  output.value = JSON.stringify(buildConfirmation(), null, 2)
+  selection.addEventListener('change', () => { output.value = JSON.stringify(buildConfirmation(), null, 2) })
+  document.querySelector('#export').addEventListener('click', () => {
+    const json = JSON.stringify(buildConfirmation(), null, 2) + '\n'
+    output.value = json
+    const link = document.createElement('a')
+    link.href = URL.createObjectURL(new Blob([json], { type: 'application/json' }))
+    link.download = 'visual-teacher-confirmation-v1.json'
+    link.click()
+    URL.revokeObjectURL(link.href)
+  })
+</script>
+</body>
+</html>

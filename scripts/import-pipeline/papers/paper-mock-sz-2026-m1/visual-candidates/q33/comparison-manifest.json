@@ -1,0 +1,699 @@
+{
+  "schemaVersion": "q33-visual-comparison-manifest-v1",
+  "paperId": "paper-mock-sz-2026-m1",
+  "questionId": "q-mock-sz-2026-m1-033",
+  "state": "awaiting_owner_exact_digest_selection",
+  "packageDigest": "sha256:695c87ccf75d6f59132cbb1d7be1a85d32cea83f24d721d199743a2e3869822f",
+  "sourceCaptureRef": {
+    "captureId": "source-capture:3bc14ad0fcc859e6c350b",
+    "digest": "sha256:3bc14ad0fcc859e6c350b32dd86889fb993e761f865d1b2e9044427a6c798832"
+  },
+  "baseline": {
+    "role": "immutable_full_strip_comparison_only",
+    "relativePath": "../../figures/reading-d-q33.png",
+    "sha256": "sha256:60f02d3ac7194ac22d52137f0e64801d348818548d3e385bf6200c025aa8702d",
+    "byteLength": 64006,
+    "pixelWidth": 1380,
+    "pixelHeight": 220,
+    "byteIdenticalTrackedCopies": [
+      "scripts/import-pipeline/papers/paper-mock-sz-2026-m1/figures/reading-d-q33.png",
+      "app/public/paper-assets/paper-mock-sz-2026-m1/latest/figures/reading-d-q33.png"
+    ]
+  },
+  "layout": {
+    "layoutRef": {
+      "id": "reading-option-figure-layout",
+      "version": "1",
+      "digest": "sha256:0fc321dbadbc8079a974a75df8ae5819fa846181d3d14e4a8ba04bb5f6ced439",
+      "authorityRef": {
+        "manifestId": "paper-canonical",
+        "manifestVersion": "47",
+        "manifestDigest": "sha256:2cff53e73575305bd6ec908ccb0535cb013fb198d9edab087465f29c8511f9a1"
+      }
+    },
+    "rowStartPt": 17.3,
+    "rowWidthPt": 438.2,
+    "trackCount": 4,
+    "trackWidthPt": 109.55,
+    "labelFontSizePt": 10.5,
+    "labelLineHeightPt": 18,
+    "labelToBoxGapPt": 4.5,
+    "imageBoxWidthPt": 96,
+    "imageBoxHeightPt": 60,
+    "objectFit": "contain",
+    "objectPosition": "center",
+    "background": "#ffffff",
+    "crop": false,
+    "stretch": false
+  },
+  "selection": {
+    "default": "unresolved",
+    "confirmationSchemaVersion": "visual-teacher-confirmation-v1",
+    "requiredBindings": [
+      "packageDigest",
+      "observationId",
+      "completeOwner",
+      "selectedCandidateDigest"
+    ],
+    "sourceCropIsEqualFallback": true
+  },
+  "observations": [
+    {
+      "observationId": "observation:paper-mock-sz-2026-m1:q33:option:A",
+      "owner": {
+        "kind": "reading_option",
+        "groupId": "group-mock-sz-2026-m1-reading-d",
+        "questionId": "q-mock-sz-2026-m1-033",
+        "optionId": "option:q-mock-sz-2026-m1-033:A"
+      },
+      "source": {
+        "sourcePage": 4,
+        "sourcePosition": 0,
+        "sourcePositionRule": "pdf_page_4_xobject_placement_left_to_right",
+        "targetOwner": {
+          "kind": "reading_option",
+          "groupId": "group-mock-sz-2026-m1-reading-d",
+          "questionId": "q-mock-sz-2026-m1-033",
+          "optionId": "option:q-mock-sz-2026-m1-033:A"
+        },
+        "pdfXObject": "/IM58",
+        "pdfObject": "58 0",
+        "placementCommand": "q 20.52 0 0 -51.48 74.64 658.56 cm /IM58 Do Q",
+        "placementMatrix": [
+          20.52,
+          0,
+          0,
+          -51.48,
+          74.64,
+          658.56
+        ],
+        "rawImageDocumentRef": {
+          "documentId": "document:a64f8f3954b2c1a443330",
+          "inputKey": "q33_pdf_xobject_A",
+          "sha256": "sha256:64232bdcd07269a4690781b11f3cf9fee884fad9e2a8633738c49d2566a90935",
+          "byteLength": 2813,
+          "pixelWidth": 43,
+          "pixelHeight": 105
+        },
+        "fullStripBaselineRef": {
+          "documentId": "document:aec6c63f8a46c9577af9e",
+          "inputKey": "q33_full_strip_baseline",
+          "sha256": "sha256:60f02d3ac7194ac22d52137f0e64801d348818548d3e385bf6200c025aa8702d",
+          "byteLength": 64006,
+          "pixelWidth": 1380,
+          "pixelHeight": 220
+        }
+      },
+      "sourceTruthChecklist": [
+        {
+          "relationship": "count",
+          "sourceTruth": "One tube retains every visible connected wavy lobe and constriction."
+        },
+        {
+          "relationship": "order",
+          "sourceTruth": "All visible lobes and constrictions retain their source top-to-bottom order."
+        },
+        {
+          "relationship": "connectivity",
+          "sourceTruth": "The source-connected wavy flow remains connected through its constrictions."
+        },
+        {
+          "relationship": "gaps",
+          "sourceTruth": "Only irregular source-visible separations are present; no clean rectangular air-gap pattern is invented."
+        },
+        {
+          "relationship": "dark_light_topology",
+          "sourceTruth": "The alternating dark boundaries and light internal regions retain the source topology."
+        },
+        {
+          "relationship": "independent_option_relationship",
+          "sourceTruth": "The upper spiral-like lobe, central elongated lobe, lower constriction, and bottom lobe retain their independent source-visible relationships."
+        },
+        {
+          "relationship": "orientation",
+          "sourceTruth": "The single bordered tube remains vertical with the source top-to-bottom orientation."
+        },
+        {
+          "relationship": "containment",
+          "sourceTruth": "Every meaning-bearing dark or light region remains contained inside the single source tube."
+        },
+        {
+          "relationship": "labels",
+          "sourceTruth": "No question stem or A-D glyph is inside the image; the renderer owns every Option label."
+        },
+        {
+          "relationship": "aspect_ratio",
+          "sourceTruth": "The source object relative aspect ratio is preserved without crop or stretch."
+        },
+        {
+          "relationship": "internal_whitespace",
+          "sourceTruth": "Source-authored internal whitespace and edge clearance remain meaning-bearing and are not normalized away."
+        }
+      ],
+      "candidates": [
+        {
+          "method": "source_crop",
+          "candidateDigest": "sha256:9560aa56e21febbaf630c5e56693f4042abca2a8206f62c49befbb143822241f",
+          "artifact": {
+            "mimeType": "image/png",
+            "byteLength": 10069,
+            "sha256": "sha256:f44da659893c5a49c412627f59fffb8aa906c5374403b7eefa2114b4482de747",
+            "pixelWidth": 43,
+            "pixelHeight": 105
+          },
+          "relativePath": "candidates/source_crop/A.png",
+          "reproducibility": {
+            "tool": "Poppler pdfimages 26.08.0 exact JPEG extraction; Pillow 12.3.0 RGB decode",
+            "exportSettings": "PNG, native intrinsic dimensions, RGB, optimize=false, compress_level=9, no semantic edit"
+          },
+          "builtInGeneratedSource": null,
+          "agentVisualStatus": "unresolved_owner_review_required",
+          "agentVisualIssues": []
+        },
+        {
+          "method": "vector_authored",
+          "candidateDigest": "sha256:566a6eb58b7aaa8d6a04cd41dec94caa60ea11cf1cffce07e84ef75bdada86d3",
+          "artifact": {
+            "mimeType": "image/png",
+            "byteLength": 31351,
+            "sha256": "sha256:20c83cb55408be3bd38c2d5593b0d33b51698dbc9ceef32f87f230cb0602d3a5",
+            "pixelWidth": 344,
+            "pixelHeight": 840
+          },
+          "relativePath": "candidates/vector_authored/A.png",
+          "reproducibility": {
+            "editableVector": "vector-evidence/A.svg sha256:320336a2f8eae98a054498bc1b4ea6e7abaf3d8117c847a71c6cefd25173634f",
+            "tool": "librsvg rsvg-convert 2.62.1",
+            "exportSettings": "deterministic PNG export at 8x intrinsic dimensions (344x840), RGB"
+          },
+          "builtInGeneratedSource": null,
+          "agentVisualStatus": "visual_issue_requires_owner_review",
+          "agentVisualIssues": [
+            "The authored reconstruction simplifies fine internal contours and must not be treated as source-faithful without Owner review."
+          ]
+        },
+        {
+          "method": "reference_restored",
+          "candidateDigest": "sha256:457e4af4322582bdccddc86687fcb1a044cba35ee140d589937500a49c212c0d",
+          "artifact": {
+            "mimeType": "image/png",
+            "byteLength": 953805,
+            "sha256": "sha256:d507e4b0dc28ad14878d1960ca0a3013d284c9c335b0ad2cb38ad58659b9a899",
+            "pixelWidth": 800,
+            "pixelHeight": 1967
+          },
+          "relativePath": "candidates/reference_restored/A.png",
+          "reproducibility": {
+            "prompt": "Use case: scientific-educational. Edit mode: precise preservation. Asset type: Option A source-faithful diagram restoration for exact teacher comparison. Input image 1 is the sole edit target. Primary request: only remove JPEG/capture noise, improve edge clarity, and upscale this exact black-and-white diagram. Preserve exactly the outer bordered vertical tube, the count and top-to-bottom order of every visible connected wavy lobe and constriction, their orientation, containment, connectivity, gaps, dark/light topology, relative aspect ratio, and internal whitespace. Keep the composition centered on a plain white background. Do not redesign or reinterpret. Do not add text, labels, arrows, color, gradients, texture, extra borders, shapes, gaps, or watermarks. Do not remove, merge, split, relabel, rotate, crop, stretch, or stylize any shape. The output must contain only the same diagram, clearer and higher resolution, with no answer hint.",
+            "tool": "built-in image_gen.imagegen default edit path; one local edit target; no CLI or API fallback",
+            "model": "built-in default; exact model identifier not exposed by the tool response",
+            "exportSettings": "built-in PNG copied byte-for-byte from $CODEX_HOME/generated_images; no post-processing"
+          },
+          "builtInGeneratedSource": "/Users/huangxuewei/.codex/generated_images/01a0343a-8dfa-7752-b598-2994c81fba73/exec-0e8131e0-c0b1-4048-a600-b951d631b1f3.png",
+          "agentVisualStatus": "visual_issue_requires_owner_review",
+          "agentVisualIssues": [
+            "The generated edit materially invents and rearranges internal lobe topology; retain as evidence but do not select without explicit Owner acceptance."
+          ]
+        }
+      ]
+    },
+    {
+      "observationId": "observation:paper-mock-sz-2026-m1:q33:option:B",
+      "owner": {
+        "kind": "reading_option",
+        "groupId": "group-mock-sz-2026-m1-reading-d",
+        "questionId": "q-mock-sz-2026-m1-033",
+        "optionId": "option:q-mock-sz-2026-m1-033:B"
+      },
+      "source": {
+        "sourcePage": 4,
+        "sourcePosition": 1,
+        "sourcePositionRule": "pdf_page_4_xobject_placement_left_to_right",
+        "targetOwner": {
+          "kind": "reading_option",
+          "groupId": "group-mock-sz-2026-m1-reading-d",
+          "questionId": "q-mock-sz-2026-m1-033",
+          "optionId": "option:q-mock-sz-2026-m1-033:B"
+        },
+        "pdfXObject": "/IM59",
+        "pdfObject": "59 0",
+        "placementCommand": "q 24.6 0 0 -51.96 194.04 658.56 cm /IM59 Do Q",
+        "placementMatrix": [
+          24.6,
+          0,
+          0,
+          -51.96,
+          194.04,
+          658.56
+        ],
+        "rawImageDocumentRef": {
+          "documentId": "document:f1f9b22106b6e29c545c2",
+          "inputKey": "q33_pdf_xobject_B",
+          "sha256": "sha256:6b3208d53a474bc5e5758c17fb09ef4fc75d97677c97d5413b08da0c2275962d",
+          "byteLength": 2235,
+          "pixelWidth": 49,
+          "pixelHeight": 105
+        },
+        "fullStripBaselineRef": {
+          "documentId": "document:aec6c63f8a46c9577af9e",
+          "inputKey": "q33_full_strip_baseline",
+          "sha256": "sha256:60f02d3ac7194ac22d52137f0e64801d348818548d3e385bf6200c025aa8702d",
+          "byteLength": 64006,
+          "pixelWidth": 1380,
+          "pixelHeight": 220
+        }
+      },
+      "sourceTruthChecklist": [
+        {
+          "relationship": "count",
+          "sourceTruth": "Exactly two separated droplet-like bodies remain inside one tube."
+        },
+        {
+          "relationship": "order",
+          "sourceTruth": "The smaller upper body remains above the larger lower body."
+        },
+        {
+          "relationship": "connectivity",
+          "sourceTruth": "Each droplet body remains internally connected while the two bodies remain mutually disconnected."
+        },
+        {
+          "relationship": "gaps",
+          "sourceTruth": "The source-authored light separation between the two droplet bodies remains open."
+        },
+        {
+          "relationship": "dark_light_topology",
+          "sourceTruth": "Both dark droplet bodies and their source-visible light highlights retain their topology."
+        },
+        {
+          "relationship": "independent_option_relationship",
+          "sourceTruth": "The central light gap independently separates the pointed ends of the upper and lower droplets."
+        },
+        {
+          "relationship": "orientation",
+          "sourceTruth": "The single bordered tube remains vertical with the source top-to-bottom orientation."
+        },
+        {
+          "relationship": "containment",
+          "sourceTruth": "Every meaning-bearing dark or light region remains contained inside the single source tube."
+        },
+        {
+          "relationship": "labels",
+          "sourceTruth": "No question stem or A-D glyph is inside the image; the renderer owns every Option label."
+        },
+        {
+          "relationship": "aspect_ratio",
+          "sourceTruth": "The source object relative aspect ratio is preserved without crop or stretch."
+        },
+        {
+          "relationship": "internal_whitespace",
+          "sourceTruth": "Source-authored internal whitespace and edge clearance remain meaning-bearing and are not normalized away."
+        }
+      ],
+      "candidates": [
+        {
+          "method": "source_crop",
+          "candidateDigest": "sha256:a4fc54e2a8129c435c58f92d057d734c3a3750ef94c0fbc13c19eb1a3faaec18",
+          "artifact": {
+            "mimeType": "image/png",
+            "byteLength": 7277,
+            "sha256": "sha256:1ad2a4d428d707151e424480fa51ab5a72237f690ff635b2c4a4e0389bc80021",
+            "pixelWidth": 49,
+            "pixelHeight": 105
+          },
+          "relativePath": "candidates/source_crop/B.png",
+          "reproducibility": {
+            "tool": "Poppler pdfimages 26.08.0 exact JPEG extraction; Pillow 12.3.0 RGB decode",
+            "exportSettings": "PNG, native intrinsic dimensions, RGB, optimize=false, compress_level=9, no semantic edit"
+          },
+          "builtInGeneratedSource": null,
+          "agentVisualStatus": "unresolved_owner_review_required",
+          "agentVisualIssues": []
+        },
+        {
+          "method": "vector_authored",
+          "candidateDigest": "sha256:e613ce9761ffc6b054087952c6425bfe2f9098882c82325ee69c9b242231e796",
+          "artifact": {
+            "mimeType": "image/png",
+            "byteLength": 19534,
+            "sha256": "sha256:bd4ca57e03f3085a41345c9d850cbf0598c149000f7ad31c8f2df4c0b87b3a46",
+            "pixelWidth": 392,
+            "pixelHeight": 840
+          },
+          "relativePath": "candidates/vector_authored/B.png",
+          "reproducibility": {
+            "editableVector": "vector-evidence/B.svg sha256:66ecac0f996d77a156d3edfc0365a8ad683514da24c0dfb0ebb8c33ed9fbad89",
+            "tool": "librsvg rsvg-convert 2.62.1",
+            "exportSettings": "deterministic PNG export at 8x intrinsic dimensions (392x840), RGB"
+          },
+          "builtInGeneratedSource": null,
+          "agentVisualStatus": "visual_issue_requires_owner_review",
+          "agentVisualIssues": [
+            "The authored contours regularize the two source droplets and their edge highlights; exact fidelity remains unresolved."
+          ]
+        },
+        {
+          "method": "reference_restored",
+          "candidateDigest": "sha256:90358084fa34af4aa2c38c7be178d2410fcc6e85904a885fc671ae2cb9a03603",
+          "artifact": {
+            "mimeType": "image/png",
+            "byteLength": 743732,
+            "sha256": "sha256:aa9662f4e2859bd9cdd8bae0c18b34ab8d51a7aeddcb39db87e1182897517f65",
+            "pixelWidth": 856,
+            "pixelHeight": 1837
+          },
+          "relativePath": "candidates/reference_restored/B.png",
+          "reproducibility": {
+            "prompt": "Use case: scientific-educational. Edit mode: precise preservation. Asset type: Option B source-faithful diagram restoration for exact teacher comparison. Input image 1 is the sole edit target. Primary request: only remove JPEG/capture noise, improve edge clarity, and upscale this exact black-and-white diagram. Preserve exactly the outer bordered vertical tube, exactly two separated droplet-like bodies, their top-to-bottom order and orientation, the source-authored light gap between them, their containment, connectivity within each body, dark/light topology, relative aspect ratio, and internal whitespace. Keep the composition centered on a plain white background. Do not redesign or reinterpret. Do not add text, labels, arrows, color, gradients, texture, extra borders, shapes, gaps, or watermarks. Do not remove, merge, split, relabel, rotate, crop, stretch, or stylize any shape. The output must contain only the same diagram, clearer and higher resolution, with no answer hint.",
+            "tool": "built-in image_gen.imagegen default edit path; one local edit target; no CLI or API fallback",
+            "model": "built-in default; exact model identifier not exposed by the tool response",
+            "exportSettings": "built-in PNG copied byte-for-byte from $CODEX_HOME/generated_images; no post-processing"
+          },
+          "builtInGeneratedSource": "/Users/huangxuewei/.codex/generated_images/01a0343a-8dfa-7752-b598-2994c81fba73/exec-8f32959c-63f9-4896-aa56-62edb95d8175.png",
+          "agentVisualStatus": "visual_issue_requires_owner_review",
+          "agentVisualIssues": [
+            "The two-body topology remains visible, but the central separation and highlight contours are regularized and need exact Owner review."
+          ]
+        }
+      ]
+    },
+    {
+      "observationId": "observation:paper-mock-sz-2026-m1:q33:option:C",
+      "owner": {
+        "kind": "reading_option",
+        "groupId": "group-mock-sz-2026-m1-reading-d",
+        "questionId": "q-mock-sz-2026-m1-033",
+        "optionId": "option:q-mock-sz-2026-m1-033:C"
+      },
+      "source": {
+        "sourcePage": 4,
+        "sourcePosition": 2,
+        "sourcePositionRule": "pdf_page_4_xobject_placement_left_to_right",
+        "targetOwner": {
+          "kind": "reading_option",
+          "groupId": "group-mock-sz-2026-m1-reading-d",
+          "questionId": "q-mock-sz-2026-m1-033",
+          "optionId": "option:q-mock-sz-2026-m1-033:C"
+        },
+        "pdfXObject": "/IM60",
+        "pdfObject": "60 0",
+        "placementCommand": "q 22.08 0 0 -51.96 314.04 657.84 cm /IM60 Do Q",
+        "placementMatrix": [
+          22.08,
+          0,
+          0,
+          -51.96,
+          314.04,
+          657.84
+        ],
+        "rawImageDocumentRef": {
+          "documentId": "document:5cbe65ae830d9828e4059",
+          "inputKey": "q33_pdf_xobject_C",
+          "sha256": "sha256:0ba857a99f636f4535d8387c9684816575b28f28c9f681741c583c45fa61c7db",
+          "byteLength": 1949,
+          "pixelWidth": 45,
+          "pixelHeight": 105
+        },
+        "fullStripBaselineRef": {
+          "documentId": "document:aec6c63f8a46c9577af9e",
+          "inputKey": "q33_full_strip_baseline",
+          "sha256": "sha256:60f02d3ac7194ac22d52137f0e64801d348818548d3e385bf6200c025aa8702d",
+          "byteLength": 64006,
+          "pixelWidth": 1380,
+          "pixelHeight": 220
+        }
+      },
+      "sourceTruthChecklist": [
+        {
+          "relationship": "count",
+          "sourceTruth": "Exactly one uninterrupted dark vertical fill remains inside one tube."
+        },
+        {
+          "relationship": "order",
+          "sourceTruth": "The fill remains a single top-to-bottom region with no reordered segment."
+        },
+        {
+          "relationship": "connectivity",
+          "sourceTruth": "The dark fill remains connected from top to bottom."
+        },
+        {
+          "relationship": "gaps",
+          "sourceTruth": "No horizontal light gap or segmentation is introduced."
+        },
+        {
+          "relationship": "dark_light_topology",
+          "sourceTruth": "One continuous dark interior remains bounded by the source tube edges."
+        },
+        {
+          "relationship": "independent_option_relationship",
+          "sourceTruth": "The uninterrupted top-to-bottom fill remains independent of narrow source-visible edge highlights."
+        },
+        {
+          "relationship": "orientation",
+          "sourceTruth": "The single bordered tube remains vertical with the source top-to-bottom orientation."
+        },
+        {
+          "relationship": "containment",
+          "sourceTruth": "Every meaning-bearing dark or light region remains contained inside the single source tube."
+        },
+        {
+          "relationship": "labels",
+          "sourceTruth": "No question stem or A-D glyph is inside the image; the renderer owns every Option label."
+        },
+        {
+          "relationship": "aspect_ratio",
+          "sourceTruth": "The source object relative aspect ratio is preserved without crop or stretch."
+        },
+        {
+          "relationship": "internal_whitespace",
+          "sourceTruth": "Source-authored internal whitespace and edge clearance remain meaning-bearing and are not normalized away."
+        }
+      ],
+      "candidates": [
+        {
+          "method": "source_crop",
+          "candidateDigest": "sha256:60b8397229ff3625270c7e22d63717e4a0e5b6027db86e57ceb2cba116f57b2f",
+          "artifact": {
+            "mimeType": "image/png",
+            "byteLength": 6203,
+            "sha256": "sha256:e8574102337438553c81484acfa94d53ba0e7b428364dbde43772c97b24bd25b",
+            "pixelWidth": 45,
+            "pixelHeight": 105
+          },
+          "relativePath": "candidates/source_crop/C.png",
+          "reproducibility": {
+            "tool": "Poppler pdfimages 26.08.0 exact JPEG extraction; Pillow 12.3.0 RGB decode",
+            "exportSettings": "PNG, native intrinsic dimensions, RGB, optimize=false, compress_level=9, no semantic edit"
+          },
+          "builtInGeneratedSource": null,
+          "agentVisualStatus": "unresolved_owner_review_required",
+          "agentVisualIssues": []
+        },
+        {
+          "method": "vector_authored",
+          "candidateDigest": "sha256:3191a409a0f7065f26ce6ceb27d2afc1e6b1fa467a3e0449e7a9ea8463cb374c",
+          "artifact": {
+            "mimeType": "image/png",
+            "byteLength": 3276,
+            "sha256": "sha256:23298b75054e7ea64828df3f01dd7fb70c0964b06f793cf28b068aeadfc2d5a3",
+            "pixelWidth": 360,
+            "pixelHeight": 840
+          },
+          "relativePath": "candidates/vector_authored/C.png",
+          "reproducibility": {
+            "editableVector": "vector-evidence/C.svg sha256:9604c7459ed594237ebfae33eadb0e50b7ed46cd1d1da8af375306bd1a5f270c",
+            "tool": "librsvg rsvg-convert 2.62.1",
+            "exportSettings": "deterministic PNG export at 8x intrinsic dimensions (360x840), RGB"
+          },
+          "builtInGeneratedSource": null,
+          "agentVisualStatus": "visual_issue_requires_owner_review",
+          "agentVisualIssues": [
+            "The authored uninterrupted fill deliberately omits source raster texture; exact edge relationships remain unresolved."
+          ]
+        },
+        {
+          "method": "reference_restored",
+          "candidateDigest": "sha256:b8728e6adc9a9fc65c9a72cf6487c6bbbb50f1a459e6177a2eb45f1eb8680995",
+          "artifact": {
+            "mimeType": "image/png",
+            "byteLength": 1453722,
+            "sha256": "sha256:7c6f0c40c93e8336bb07f107563feef610cc11db39293ae00468ce4858a4c64e",
+            "pixelWidth": 822,
+            "pixelHeight": 1913
+          },
+          "relativePath": "candidates/reference_restored/C.png",
+          "reproducibility": {
+            "prompt": "Use case: scientific-educational. Edit mode: precise preservation. Asset type: Option C source-faithful diagram restoration for exact teacher comparison. Input image 1 is the sole edit target. Primary request: only remove JPEG/capture noise, improve edge clarity, and upscale this exact black-and-white diagram. Preserve exactly the outer bordered vertical tube and one uninterrupted dark vertical fill from top to bottom, including its original narrow edge highlights/noise structure only where already visible, its orientation, containment, connectivity, lack of horizontal gaps, dark/light topology, relative aspect ratio, and internal whitespace. Keep the composition centered on a plain white background. Do not redesign or reinterpret. Do not add text, labels, arrows, color, gradients, texture, extra borders, shapes, gaps, segments, or watermarks. Do not remove, merge, split, relabel, rotate, crop, stretch, or stylize any shape. The output must contain only the same diagram, clearer and higher resolution, with no answer hint.",
+            "tool": "built-in image_gen.imagegen default edit path; one local edit target; no CLI or API fallback",
+            "model": "built-in default; exact model identifier not exposed by the tool response",
+            "exportSettings": "built-in PNG copied byte-for-byte from $CODEX_HOME/generated_images; no post-processing"
+          },
+          "builtInGeneratedSource": "/Users/huangxuewei/.codex/generated_images/01a0343a-8dfa-7752-b598-2994c81fba73/exec-7b454fd0-4787-4842-af63-c6891c17606f.png",
+          "agentVisualStatus": "visual_issue_requires_owner_review",
+          "agentVisualIssues": [
+            "The uninterrupted fill remains visible, but the edit adds or regularizes edge-light features and surface texture."
+          ]
+        }
+      ]
+    },
+    {
+      "observationId": "observation:paper-mock-sz-2026-m1:q33:option:D",
+      "owner": {
+        "kind": "reading_option",
+        "groupId": "group-mock-sz-2026-m1-reading-d",
+        "questionId": "q-mock-sz-2026-m1-033",
+        "optionId": "option:q-mock-sz-2026-m1-033:D"
+      },
+      "source": {
+        "sourcePage": 4,
+        "sourcePosition": 3,
+        "sourcePositionRule": "pdf_page_4_xobject_placement_left_to_right",
+        "targetOwner": {
+          "kind": "reading_option",
+          "groupId": "group-mock-sz-2026-m1-reading-d",
+          "questionId": "q-mock-sz-2026-m1-033",
+          "optionId": "option:q-mock-sz-2026-m1-033:D"
+        },
+        "pdfXObject": "/IM61",
+        "pdfObject": "61 0",
+        "placementCommand": "q 19.56 0 0 -51.96 410.16 659.52 cm /IM61 Do Q",
+        "placementMatrix": [
+          19.56,
+          0,
+          0,
+          -51.96,
+          410.16,
+          659.52
+        ],
+        "rawImageDocumentRef": {
+          "documentId": "document:03cfe39e16574d7e24647",
+          "inputKey": "q33_pdf_xobject_D",
+          "sha256": "sha256:3c667a48c3a75fb8929252f80478a282e3ac98211911f8b620ccf90d40c750dc",
+          "byteLength": 1898,
+          "pixelWidth": 40,
+          "pixelHeight": 105
+        },
+        "fullStripBaselineRef": {
+          "documentId": "document:aec6c63f8a46c9577af9e",
+          "inputKey": "q33_full_strip_baseline",
+          "sha256": "sha256:60f02d3ac7194ac22d52137f0e64801d348818548d3e385bf6200c025aa8702d",
+          "byteLength": 64006,
+          "pixelWidth": 1380,
+          "pixelHeight": 220
+        }
+      },
+      "sourceTruthChecklist": [
+        {
+          "relationship": "count",
+          "sourceTruth": "Exactly three dark vertical mini-columns and exactly two horizontal light gaps remain."
+        },
+        {
+          "relationship": "order",
+          "sourceTruth": "Dark, light, dark, light, dark regions retain their source top-to-bottom order."
+        },
+        {
+          "relationship": "connectivity",
+          "sourceTruth": "Each dark mini-column remains internally connected and disconnected from the other two."
+        },
+        {
+          "relationship": "gaps",
+          "sourceTruth": "Exactly two horizontal light gaps retain their source positions between the three dark regions."
+        },
+        {
+          "relationship": "dark_light_topology",
+          "sourceTruth": "Three dark regions alternate with two light gaps inside one bordered tube."
+        },
+        {
+          "relationship": "independent_option_relationship",
+          "sourceTruth": "Each of the two light gaps independently separates its adjacent pair of dark mini-columns."
+        },
+        {
+          "relationship": "orientation",
+          "sourceTruth": "The single bordered tube remains vertical with the source top-to-bottom orientation."
+        },
+        {
+          "relationship": "containment",
+          "sourceTruth": "Every meaning-bearing dark or light region remains contained inside the single source tube."
+        },
+        {
+          "relationship": "labels",
+          "sourceTruth": "No question stem or A-D glyph is inside the image; the renderer owns every Option label."
+        },
+        {
+          "relationship": "aspect_ratio",
+          "sourceTruth": "The source object relative aspect ratio is preserved without crop or stretch."
+        },
+        {
+          "relationship": "internal_whitespace",
+          "sourceTruth": "Source-authored internal whitespace and edge clearance remain meaning-bearing and are not normalized away."
+        }
+      ],
+      "candidates": [
+        {
+          "method": "source_crop",
+          "candidateDigest": "sha256:29bba5d9d7c887ae55f801afd460a53f620aab379f7daab50a2d6d36ac73af21",
+          "artifact": {
+            "mimeType": "image/png",
+            "byteLength": 5726,
+            "sha256": "sha256:f48479f5d18c5da6c1d2830d24242b4656567fb55da0a44c62469fd828ed276f",
+            "pixelWidth": 40,
+            "pixelHeight": 105
+          },
+          "relativePath": "candidates/source_crop/D.png",
+          "reproducibility": {
+            "tool": "Poppler pdfimages 26.08.0 exact JPEG extraction; Pillow 12.3.0 RGB decode",
+            "exportSettings": "PNG, native intrinsic dimensions, RGB, optimize=false, compress_level=9, no semantic edit"
+          },
+          "builtInGeneratedSource": null,
+          "agentVisualStatus": "unresolved_owner_review_required",
+          "agentVisualIssues": []
+        },
+        {
+          "method": "vector_authored",
+          "candidateDigest": "sha256:53e5fe85a40515d1a1c893d57372f8e1ec080f6792335e808fc28d9301e7b5df",
+          "artifact": {
+            "mimeType": "image/png",
+            "byteLength": 3329,
+            "sha256": "sha256:b1bce80c44c236aa1e933b79f40b6a6446c8dda9ec48959f4e999203afa1d830",
+            "pixelWidth": 320,
+            "pixelHeight": 840
+          },
+          "relativePath": "candidates/vector_authored/D.png",
+          "reproducibility": {
+            "editableVector": "vector-evidence/D.svg sha256:1e58c48aee995565f964856b558ca6263e2c02731b186b53e27d558600de8454",
+            "tool": "librsvg rsvg-convert 2.62.1",
+            "exportSettings": "deterministic PNG export at 8x intrinsic dimensions (320x840), RGB"
+          },
+          "builtInGeneratedSource": null,
+          "agentVisualStatus": "visual_issue_requires_owner_review",
+          "agentVisualIssues": [
+            "The authored rectangles regularize source edge texture and both gap dimensions; exact fidelity remains unresolved."
+          ]
+        },
+        {
+          "method": "reference_restored",
+          "candidateDigest": "sha256:6efc93028120a2a117fa144ee23bebf0dcc3bdc415b8308cf8f89474c538765c",
+          "artifact": {
+            "mimeType": "image/png",
+            "byteLength": 575581,
+            "sha256": "sha256:4045f812ba8b0071c74319e2c28c34b7740936dfb5f846fe2fba698f08af7d23",
+            "pixelWidth": 775,
+            "pixelHeight": 2029
+          },
+          "relativePath": "candidates/reference_restored/D.png",
+          "reproducibility": {
+            "prompt": "Use case: scientific-educational. Edit mode: precise preservation. Asset type: Option D source-faithful diagram restoration for exact teacher comparison. Input image 1 is the sole edit target. Primary request: only remove JPEG/capture noise, improve edge clarity, and upscale this exact black-and-white diagram. Preserve exactly the outer bordered vertical tube, exactly three dark vertical mini-columns in their original top-to-bottom order, exactly two horizontal light gaps separating them, their orientation, containment, connectivity within each dark mini-column, gap widths and placements, dark/light topology, relative aspect ratio, and internal whitespace. Keep the composition centered on a plain white background. Do not redesign or reinterpret. Do not add text, labels, arrows, color, gradients, texture, extra borders, shapes, gaps, or watermarks. Do not remove, merge, split, relabel, rotate, crop, stretch, or stylize any shape. The output must contain only the same diagram, clearer and higher resolution, with no answer hint.",
+            "tool": "built-in image_gen.imagegen default edit path; one local edit target; no CLI or API fallback",
+            "model": "built-in default; exact model identifier not exposed by the tool response",
+            "exportSettings": "built-in PNG copied byte-for-byte from $CODEX_HOME/generated_images; no post-processing"
+          },
+          "builtInGeneratedSource": "/Users/huangxuewei/.codex/generated_images/01a0343a-8dfa-7752-b598-2994c81fba73/exec-f57d5138-4aa6-4207-aee4-2a5b1f845324.png",
+          "agentVisualStatus": "visual_issue_requires_owner_review",
+          "agentVisualIssues": [
+            "The three dark regions and two light gaps remain visible, but gap proportions, border, and internal whitespace are visibly regularized."
+          ]
+        }
+      ]
+    }
+  ],
+  "manifestDigest": "sha256:c44d19a2dc645b9819cf24e6da55f6ce89362e14c4ebc5219e07e893ee466fd5"
+}
