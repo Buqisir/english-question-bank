@@ -1,3 +1,4 @@
+import { forEachRichInline } from './richContent.mjs'
 import { exactKeys, isRecordValue } from './stable.mjs'
 
 function issue(code, disposition, path, message) {
@@ -7,15 +8,10 @@ function issue(code, disposition, path, message) {
 function orderedBlankRefs(content) {
   const refs = []
   let rawMarker = false
-  for (const block of content?.blocks || []) {
-    const inlineSets = block.kind === 'table'
-      ? (block.rows || []).flatMap((row) => (row.cells || []).map((cell) => cell.inlines))
-      : [block.kind === 'figure' ? block.caption : block.inlines]
-    for (const inlines of inlineSets) for (const inline of inlines || []) {
-      if (inline?.kind === 'blank_ref') refs.push(inline.blankId)
-      if (inline?.kind === 'text' && /_+\d+_+|\([1-5]\)/u.test(inline.text)) rawMarker = true
-    }
-  }
+  forEachRichInline(content, (inline) => {
+    if (inline?.kind === 'blank_ref') refs.push(inline.blankId)
+    if (inline?.kind === 'text' && /_+\d+_+|\([1-5]\)/u.test(inline.text)) rawMarker = true
+  })
   return { refs, rawMarker }
 }
 

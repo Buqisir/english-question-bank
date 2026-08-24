@@ -110,101 +110,104 @@ function projectReadingConsumerGroup(input, occurrence) {
   )
 
   const seenMediaIds = new Set()
-  const blocks = occurrence.blocks.map((block) => {
-    if (!block || typeof block.nodeId !== 'string') {
-      throw rejected(`Canonical Reading occurrence ${groupId} has an invalid rich block`)
+  const projectReadingParagraph = (block) => ({
+    kind: 'paragraph',
+    nodeId: block.nodeId,
+    role: rolesByNodeId.get(block.nodeId) || 'body',
+    text: textContent(block.inlines),
+    inlines: structuredClone(block.inlines),
+  })
+  const projectReadingTable = (block) => {
+    if (
+      !Number.isInteger(block.columnCount)
+      || block.columnCount < 1
+      || !Array.isArray(block.rows)
+      || block.rows.length === 0
+    ) {
+      throw rejected(`Canonical Reading occurrence ${groupId} has an invalid table`)
     }
-    if (block.kind === 'paragraph') {
-      return {
-        kind: 'paragraph',
-        nodeId: block.nodeId,
-        role: rolesByNodeId.get(block.nodeId) || 'body',
-        text: textContent(block.inlines),
-        inlines: structuredClone(block.inlines),
+    const activeRowSpans = new Map()
+    const rows = block.rows.map((row) => {
+      if (!row || typeof row.rowId !== 'string' || !Array.isArray(row.cells)) {
+        throw rejected(`Canonical Reading occurrence ${groupId} has an invalid table row`)
       }
-    }
-    if (block.kind === 'table') {
-      if (
-        !Number.isInteger(block.columnCount)
-        || block.columnCount < 1
-        || !Array.isArray(block.rows)
-        || block.rows.length === 0
-      ) {
-        throw rejected(`Canonical Reading occurrence ${groupId} has an invalid table`)
-      }
-      const activeRowSpans = new Map()
-      const rows = block.rows.map((row) => {
-        if (!row || typeof row.rowId !== 'string' || !Array.isArray(row.cells)) {
-          throw rejected(`Canonical Reading occurrence ${groupId} has an invalid table row`)
+      const cells = row.cells.map((cell) => {
+        if (
+          !cell
+          || typeof cell.cellId !== 'string'
+          || !Number.isInteger(cell.columnStart)
+          || !Number.isInteger(cell.columnSpan)
+          || !Number.isInteger(cell.rowSpan)
+          || cell.columnSpan < 1
+          || cell.rowSpan < 1
+          || cell.columnStart < 0
+          || cell.columnStart + cell.columnSpan > block.columnCount
+        ) {
+          throw rejected(`Canonical Reading occurrence ${groupId} has an invalid table cell`)
         }
-        const cells = row.cells.map((cell) => {
-          if (
-            !cell
-            || typeof cell.cellId !== 'string'
-            || !Number.isInteger(cell.columnStart)
-            || !Number.isInteger(cell.columnSpan)
-            || !Number.isInteger(cell.rowSpan)
-            || cell.columnSpan < 1
-            || cell.rowSpan < 1
-            || cell.columnStart < 0
-            || cell.columnStart + cell.columnSpan > block.columnCount
-          ) {
-            throw rejected(`Canonical Reading occurrence ${groupId} has an invalid table cell`)
+        return {
+          ...structuredClone(cell),
+          text: textContent(cell.inlines),
+        }
+      })
+      const occupied = new Set(activeRowSpans.keys())
+      for (const cell of cells) {
+        for (
+          let column = cell.columnStart;
+          column < cell.columnStart + cell.columnSpan;
+          column += 1
+        ) {
+          if (occupied.has(column)) {
+            throw rejected(`Canonical Reading occurrence ${groupId} has overlapping table cells`)
           }
-          return {
-            ...structuredClone(cell),
-            text: textContent(cell.inlines),
-          }
-        })
-        const occupied = new Set(activeRowSpans.keys())
-        for (const cell of cells) {
+          occupied.add(column)
+        }
+        if (cell.rowSpan > 1) {
           for (
             let column = cell.columnStart;
             column < cell.columnStart + cell.columnSpan;
             column += 1
           ) {
-            if (occupied.has(column)) {
-              throw rejected(`Canonical Reading occurrence ${groupId} has overlapping table cells`)
-            }
-            occupied.add(column)
-          }
-          if (cell.rowSpan > 1) {
-            for (
-              let column = cell.columnStart;
-              column < cell.columnStart + cell.columnSpan;
-              column += 1
-            ) {
-              activeRowSpans.set(column, cell.rowSpan - 1)
-            }
+            activeRowSpans.set(column, cell.rowSpan - 1)
           }
         }
-        if (occupied.size !== block.columnCount) {
-          throw rejected(`Canonical Reading occurrence ${groupId} has a non-rectangular table`)
-        }
-        for (const [column, remaining] of [...activeRowSpans]) {
-          if (
-            cells.some(
-              (cell) =>
-                column >= cell.columnStart
-                && column < cell.columnStart + cell.columnSpan,
-            )
-          ) continue
-          if (remaining === 1) activeRowSpans.delete(column)
-          else activeRowSpans.set(column, remaining - 1)
-        }
-        return { rowId: row.rowId, cells }
-      })
-      if (activeRowSpans.size > 0) {
-        throw rejected(`Canonical Reading occurrence ${groupId} has a table row span beyond its final row`)
       }
-      return {
-        kind: 'table',
-        nodeId: block.nodeId,
-        columnCount: block.columnCount,
-        rows,
+      if (occupied.size !== block.columnCount) {
+        throw rejected(`Canonical Reading occurrence ${groupId} has a non-rectangular table`)
       }
+      for (const [column, remaining] of [...activeRowSpans]) {
+        if (
+          cells.some(
+            (cell) =>
+              column >= cell.columnStart
+              && column < cell.columnStart + cell.columnSpan,
+          )
+        ) continue
+        if (remaining === 1) activeRowSpans.delete(column)
+        else activeRowSpans.set(column, remaining - 1)
+      }
+      return { rowId: row.rowId, cells }
+    })
+    if (activeRowSpans.size > 0) {
+      throw rejected(`Canonical Reading occurrence ${groupId} has a table row span beyond its final row`)
     }
+    return {
+      kind: 'table',
+      nodeId: block.nodeId,
+      columnCount: block.columnCount,
+      rows,
+    }
+  }
+  const projectReadingChildBlock = (block, { allowFramedColumns, allowFigure }) => {
+    if (!block || typeof block.nodeId !== 'string') {
+      throw rejected(`Canonical Reading occurrence ${groupId} has an invalid rich block`)
+    }
+    if (block.kind === 'paragraph') return projectReadingParagraph(block)
+    if (block.kind === 'table') return projectReadingTable(block)
     if (block.kind === 'figure') {
+      if (!allowFigure) {
+        throw rejected(`Canonical Reading occurrence ${groupId} contains an unsupported framed_columns child`)
+      }
       const media = mediaById.get(block.mediaId)
       const artifact = mediaArtifactsById.get(block.mediaId)
       const mediaBytes = decodeBase64Bytes(artifact?.encodedBytes)
@@ -235,8 +238,55 @@ function projectReadingConsumerGroup(input, occurrence) {
         captionInlines: structuredClone(block.caption),
       }
     }
+    if (block.kind === 'framed_columns') {
+      if (
+        !allowFramedColumns
+        || block.columnCount !== 2
+        || !Array.isArray(block.columns)
+        || block.columns.length !== 2
+      ) {
+        throw rejected(`Canonical Reading occurrence ${groupId} contains an unsupported rich block`)
+      }
+      return {
+        kind: 'framed_columns',
+        nodeId: block.nodeId,
+        columnCount: 2,
+        columns: block.columns.map((column) => {
+          if (
+            !column
+            || typeof column.columnId !== 'string'
+            || !Array.isArray(column.blocks)
+            || column.blocks.length === 0
+          ) {
+            throw rejected(`Canonical Reading occurrence ${groupId} has an invalid framed_columns column`)
+          }
+          if (column.columnHeading != null) {
+            const heading = column.blocks.find((child) => child?.nodeId === column.columnHeading)
+            if (!heading || heading.kind !== 'paragraph') {
+              throw rejected(`Canonical Reading occurrence ${groupId} has an invalid framed_columns heading`)
+            }
+          }
+          return {
+            columnId: column.columnId,
+            ...(
+              typeof column.columnHeading === 'string'
+                ? { columnHeading: column.columnHeading }
+                : {}
+            ),
+            blocks: column.blocks.map((child) => projectReadingChildBlock(child, {
+              allowFramedColumns: false,
+              allowFigure: false,
+            })),
+          }
+        }),
+      }
+    }
     throw rejected(`Canonical Reading occurrence ${groupId} contains an unsupported rich block`)
-  })
+  }
+  const blocks = occurrence.blocks.map((block) => projectReadingChildBlock(block, {
+    allowFramedColumns: true,
+    allowFigure: true,
+  }))
   if (seenMediaIds.size !== mediaById.size) {
     throw rejected(`Canonical Reading occurrence ${groupId} does not place every media item exactly once`)
   }
@@ -302,7 +352,7 @@ function projectReadingConsumerGroup(input, occurrence) {
     }
   })
 
-  const contentNodeIds = occurrence.blocks.flatMap((block) => {
+  const collectOccurrenceContentNodeIds = (block) => {
     const identities = [block.nodeId]
     if (block.kind === 'table') {
       for (const row of block.rows) {
@@ -312,13 +362,23 @@ function projectReadingConsumerGroup(input, occurrence) {
           identities.push(...cell.inlines.map((inline) => inline.nodeId))
         }
       }
-    } else {
-      identities.push(...(
-        block.kind === 'figure' ? block.caption : block.inlines
-      ).map((inline) => inline.nodeId))
+      return identities
     }
+    if (block.kind === 'framed_columns') {
+      for (const column of block.columns || []) {
+        identities.push(column.columnId)
+        for (const child of column.blocks || []) {
+          identities.push(...collectOccurrenceContentNodeIds(child))
+        }
+      }
+      return identities
+    }
+    identities.push(...(
+      block.kind === 'figure' ? block.caption : block.inlines
+    ).map((inline) => inline.nodeId))
     return identities
-  })
+  }
+  const contentNodeIds = occurrence.blocks.flatMap((block) => collectOccurrenceContentNodeIds(block))
   const anchors = occurrence.anchors
   if (
     !anchors

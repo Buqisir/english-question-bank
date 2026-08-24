@@ -41,6 +41,19 @@ import {
   isRegisteredConfirmedCanonicalHistoricalReplayCapability,
 } from '../../server/paper-canonical/registeredConfirmedCanonicalAdmission.mjs'
 import { validateReadingContract } from './reading.mjs'
+import {
+  FRAMED_COLUMNS_CHILD_KINDS,
+  FRAMED_COLUMNS_COLUMN_COUNT,
+  FRAMED_COLUMNS_KIND,
+  collectRichContentTargetValues,
+  collectRichContentTargets,
+  contentHasFramedColumns,
+  forEachRichInline,
+  framedColumnsHeadingBlock,
+  isQuestionLikeRichBlock,
+  readingCaptureHasUnregisteredBlock,
+  someRichBlocks,
+} from './richContent.mjs'
 import { validateSevenChoicesContract } from './sevenChoices.mjs'
 import { cloneJson, digestJson, exactKeys, isRecordValue, sha256, stableStringify, withoutKey } from './stable.mjs'
 
@@ -435,32 +448,7 @@ function referenceOptions(paper, group, diagnostics, familyId) {
 }
 
 function readingContentTargetValues(content) {
-  const targets = new Map()
-  let duplicate = false
-  const add = (id, value) => {
-    if (typeof id !== 'string') return
-    const targetKey = `content_node:${id}`
-    if (targets.has(targetKey)) duplicate = true
-    targets.set(targetKey, value)
-  }
-  const addInlines = (inlines) => {
-    for (const inline of inlines || []) add(inline?.nodeId, inline)
-  }
-  for (const block of content?.blocks || []) {
-    add(block?.nodeId, block)
-    if (block?.kind === 'table') {
-      for (const row of block.rows || []) {
-        add(row?.rowId, row)
-        for (const cell of row.cells || []) {
-          add(cell?.cellId, cell)
-          addInlines(cell?.inlines)
-        }
-      }
-    } else {
-      addInlines(block?.kind === 'figure' ? block.caption : block?.inlines)
-    }
-  }
-  return { targets, duplicate }
+  return collectRichContentTargetValues(content)
 }
 
 function visitVisibleTextNodes(value, visit, seen = new Set()) {
@@ -699,7 +687,7 @@ function appendReadingReferenceGroups({
       }
       observedTargets.set(targetKey, observation)
     }
-    if ((captured.content?.blocks || []).some((block) => !['paragraph', 'table', 'figure'].includes(block?.kind))) {
+    if (readingCaptureHasUnregisteredBlock(captured.content?.blocks)) {
       diagnostics.push(diagnostic('RICH_BLOCK_UNSUPPORTED', 'unsupported', '$.evidence.readingCapture', `Reading slot ${slot.slotId} contains an unregistered rich-content block`))
       continue
     }
@@ -716,7 +704,7 @@ function appendReadingReferenceGroups({
       continue
     }
     if (observedTargets.size !== expectedTargets.size) {
-      const tableIncomplete = (captured.content?.blocks || []).some((block) => block?.kind === 'table' && (
+      const tableIncomplete = someRichBlocks(captured.content?.blocks, (block) => block?.kind === 'table' && (
         !Array.isArray(block.rows)
         || block.rows.length === 0
         || block.rows.some((row) => !Array.isArray(row?.cells) || row.cells.reduce((total, cell) => total + (Number.isInteger(cell?.columnSpan) ? cell.columnSpan : 0), 0) < block.columnCount)
@@ -2347,23 +2335,7 @@ export function validateExactTransformationRecords(records, capture, closure) {
 }
 
 function collectRichTargetIds(content) {
-  const targets = []
-  function inlines(values) {
-    for (const inline of values || []) targets.push({ kind: inline.kind === 'blank_ref' ? 'blank' : 'content_node', id: inline.kind === 'blank_ref' ? inline.blankId : inline.nodeId })
-  }
-  for (const block of content?.blocks || []) {
-    targets.push({ kind: 'content_node', id: block.nodeId })
-    if (block.kind === 'paragraph') inlines(block.inlines)
-    if (block.kind === 'figure') inlines(block.caption)
-    if (block.kind === 'table') for (const row of block.rows || []) {
-      targets.push({ kind: 'content_node', id: row.rowId })
-      for (const cell of row.cells || []) {
-        targets.push({ kind: 'content_node', id: cell.cellId })
-        inlines(cell.inlines)
-      }
-    }
-  }
-  return targets
+  return collectRichContentTargets(content)
 }
 
 function collectReadingTargetIds(variant) {
@@ -2496,6 +2468,106 @@ function validateInlines(inlines, blankIds, path, diagnostics, ids) {
   }
 }
 
+function validateRichBlock(block, path, blankIds, mediaIds, diagnostics, ids, allowedKinds) {
+  if (!isRecordValue(block) || typeof block.kind !== 'string' || typeof block.nodeId !== 'string' || ids.has(block.nodeId)) {
+    diagnostics.push(diagnostic('RICH_BLOCK_INVALID', 'needs_review', path, 'Blocks need unique identities'))
+    return
+  }
+  ids.add(block.nodeId)
+  if (!allowedKinds.includes(block.kind)) {
+    diagnostics.push(diagnostic(
+      'RICH_BLOCK_UNSUPPORTED',
+      'unsupported',
+      path,
+      allowedKinds.includes(FRAMED_COLUMNS_KIND)
+        ? 'Only paragraph, table, figure, and framed_columns blocks are representable'
+        : 'framed_columns children may only be paragraph or table',
+    ))
+    return
+  }
+  if (block.kind === 'paragraph') {
+    if (!exactKeys(block, ['kind', 'nodeId', 'inlines'])) diagnostics.push(diagnostic('RICH_BLOCK_SHAPE', 'needs_review', path, 'Paragraph fields are closed'))
+    validateInlines(block.inlines, blankIds, `${path}.inlines`, diagnostics, ids)
+    return
+  }
+  if (block.kind === 'figure') {
+    if (!exactKeys(block, ['kind', 'nodeId', 'mediaId', 'caption']) || !mediaIds.has(block.mediaId)) diagnostics.push(diagnostic('RICH_FIGURE_INVALID', 'unsupported', path, 'Figures need resolved captured media and no layout fields'))
+    validateInlines(block.caption, blankIds, `${path}.caption`, diagnostics, ids)
+    return
+  }
+  if (block.kind === 'table') {
+    if (!exactKeys(block, ['kind', 'nodeId', 'columnCount', 'rows']) || !Number.isInteger(block.columnCount) || block.columnCount < 1 || !Array.isArray(block.rows)) {
+      diagnostics.push(diagnostic('RICH_TABLE_INVALID', 'needs_review', path, 'Tables need a rectangular semantic grid'))
+      return
+    }
+    for (const [rowIndex, row] of block.rows.entries()) {
+      if (!isRecordValue(row) || !exactKeys(row, ['rowId', 'cells']) || !Array.isArray(row.cells)) {
+        diagnostics.push(diagnostic('RICH_TABLE_ROW_INVALID', 'needs_review', `${path}.rows[${rowIndex}]`, 'Table rows are closed'))
+        continue
+      }
+      let covered = 0
+      for (const [cellIndex, cell] of row.cells.entries()) {
+        if (!isRecordValue(cell) || !exactKeys(cell, ['cellId', 'columnStart', 'columnSpan', 'rowSpan', 'role', 'inlines']) || cell.columnStart !== covered || !Number.isInteger(cell.columnSpan) || cell.columnSpan < 1 || !Number.isInteger(cell.rowSpan) || cell.rowSpan < 1 || !['header', 'data'].includes(cell.role)) {
+          diagnostics.push(diagnostic('RICH_TABLE_CELL_INVALID', 'needs_review', `${path}.rows[${rowIndex}].cells[${cellIndex}]`, 'Table cells must establish a rectangular grid'))
+          continue
+        }
+        covered += cell.columnSpan
+        validateInlines(cell.inlines, blankIds, `${path}.rows[${rowIndex}].cells[${cellIndex}].inlines`, diagnostics, ids)
+      }
+      if (covered !== block.columnCount) diagnostics.push(diagnostic('RICH_TABLE_NOT_RECTANGULAR', 'needs_review', `${path}.rows[${rowIndex}]`, 'Cells do not cover the declared columns'))
+    }
+    return
+  }
+  if (block.columnCount !== FRAMED_COLUMNS_COLUMN_COUNT || !Array.isArray(block.columns) || block.columns.length !== FRAMED_COLUMNS_COLUMN_COUNT) {
+    diagnostics.push(diagnostic('RICH_BLOCK_UNSUPPORTED', 'unsupported', path, 'framed_columns v1 requires exactly two columns'))
+    return
+  }
+  if (!exactKeys(block, ['kind', 'nodeId', 'columnCount', 'columns'])) {
+    diagnostics.push(diagnostic('RICH_BLOCK_SHAPE', 'needs_review', path, 'framed_columns fields are closed'))
+    return
+  }
+  for (const [columnIndex, column] of block.columns.entries()) {
+    const columnPath = `${path}.columns[${columnIndex}]`
+    if (
+      !isRecordValue(column)
+      || typeof column.columnId !== 'string'
+      || !Array.isArray(column.blocks)
+      || column.blocks.length === 0
+      || (Object.hasOwn(column, 'columnHeading')
+        ? !exactKeys(column, ['columnId', 'columnHeading', 'blocks'])
+        : !exactKeys(column, ['columnId', 'blocks']))
+    ) {
+      diagnostics.push(diagnostic('RICH_BLOCK_SHAPE', 'needs_review', columnPath, 'framed_columns columns are closed'))
+      continue
+    }
+    if (ids.has(column.columnId)) diagnostics.push(diagnostic('RICH_NODE_DUPLICATE', 'needs_review', `${columnPath}.columnId`, 'Rich node ids must be unique'))
+    ids.add(column.columnId)
+    if (Object.hasOwn(column, 'questions') || column.blocks.some((child) => isQuestionLikeRichBlock(child))) {
+      diagnostics.push(diagnostic('RICH_BLOCK_UNSUPPORTED', 'unsupported', columnPath, 'Questions cannot live inside framed_columns'))
+    }
+    if (Object.hasOwn(column, 'columnHeading') && typeof column.columnHeading !== 'string') {
+      diagnostics.push(diagnostic('RICH_FRAMED_COLUMNS_HEADING_INVALID', 'needs_review', `${columnPath}.columnHeading`, 'columnHeading must be a paragraph nodeId in the same column'))
+    }
+    for (const [childIndex, child] of column.blocks.entries()) {
+      validateRichBlock(
+        child,
+        `${columnPath}.blocks[${childIndex}]`,
+        blankIds,
+        mediaIds,
+        diagnostics,
+        ids,
+        FRAMED_COLUMNS_CHILD_KINDS,
+      )
+    }
+    if (Object.hasOwn(column, 'columnHeading')) {
+      const heading = framedColumnsHeadingBlock(column)
+      if (!heading || heading.kind !== 'paragraph') {
+        diagnostics.push(diagnostic('RICH_FRAMED_COLUMNS_HEADING_INVALID', 'needs_review', `${columnPath}.columnHeading`, 'columnHeading must point at a paragraph in the same column'))
+      }
+    }
+  }
+}
+
 function validateRichContent(content, blankIds, mediaIds) {
   const diagnostics = []
   const ids = new Set()
@@ -2503,42 +2575,15 @@ function validateRichContent(content, blankIds, mediaIds) {
     return [diagnostic('RICH_CONTENT_INVALID', 'needs_review', '$.content', 'Rich content must be a closed block document')]
   }
   for (const [index, block] of content.blocks.entries()) {
-    const path = `$.content.blocks[${index}]`
-    if (!isRecordValue(block) || typeof block.kind !== 'string' || typeof block.nodeId !== 'string' || ids.has(block.nodeId)) {
-      diagnostics.push(diagnostic('RICH_BLOCK_INVALID', 'needs_review', path, 'Blocks need unique identities'))
-      continue
-    }
-    ids.add(block.nodeId)
-    if (block.kind === 'paragraph') {
-      if (!exactKeys(block, ['kind', 'nodeId', 'inlines'])) diagnostics.push(diagnostic('RICH_BLOCK_SHAPE', 'needs_review', path, 'Paragraph fields are closed'))
-      validateInlines(block.inlines, blankIds, `${path}.inlines`, diagnostics, ids)
-    } else if (block.kind === 'figure') {
-      if (!exactKeys(block, ['kind', 'nodeId', 'mediaId', 'caption']) || !mediaIds.has(block.mediaId)) diagnostics.push(diagnostic('RICH_FIGURE_INVALID', 'unsupported', path, 'Figures need resolved captured media and no layout fields'))
-      validateInlines(block.caption, blankIds, `${path}.caption`, diagnostics, ids)
-    } else if (block.kind === 'table') {
-      if (!exactKeys(block, ['kind', 'nodeId', 'columnCount', 'rows']) || !Number.isInteger(block.columnCount) || block.columnCount < 1 || !Array.isArray(block.rows)) {
-        diagnostics.push(diagnostic('RICH_TABLE_INVALID', 'needs_review', path, 'Tables need a rectangular semantic grid'))
-        continue
-      }
-      for (const [rowIndex, row] of block.rows.entries()) {
-        if (!isRecordValue(row) || !exactKeys(row, ['rowId', 'cells']) || !Array.isArray(row.cells)) {
-          diagnostics.push(diagnostic('RICH_TABLE_ROW_INVALID', 'needs_review', `${path}.rows[${rowIndex}]`, 'Table rows are closed'))
-          continue
-        }
-        let covered = 0
-        for (const [cellIndex, cell] of row.cells.entries()) {
-          if (!isRecordValue(cell) || !exactKeys(cell, ['cellId', 'columnStart', 'columnSpan', 'rowSpan', 'role', 'inlines']) || cell.columnStart !== covered || !Number.isInteger(cell.columnSpan) || cell.columnSpan < 1 || !Number.isInteger(cell.rowSpan) || cell.rowSpan < 1 || !['header', 'data'].includes(cell.role)) {
-            diagnostics.push(diagnostic('RICH_TABLE_CELL_INVALID', 'needs_review', `${path}.rows[${rowIndex}].cells[${cellIndex}]`, 'Table cells must establish a rectangular grid'))
-            continue
-          }
-          covered += cell.columnSpan
-          validateInlines(cell.inlines, blankIds, `${path}.rows[${rowIndex}].cells[${cellIndex}].inlines`, diagnostics, ids)
-        }
-        if (covered !== block.columnCount) diagnostics.push(diagnostic('RICH_TABLE_NOT_RECTANGULAR', 'needs_review', `${path}.rows[${rowIndex}]`, 'Cells do not cover the declared columns'))
-      }
-    } else {
-      diagnostics.push(diagnostic('RICH_BLOCK_UNSUPPORTED', 'unsupported', path, 'Only paragraph, table, and figure blocks are representable'))
-    }
+    validateRichBlock(
+      block,
+      `$.content.blocks[${index}]`,
+      blankIds,
+      mediaIds,
+      diagnostics,
+      ids,
+      [ 'paragraph', 'table', 'figure', FRAMED_COLUMNS_KIND ],
+    )
   }
   return diagnostics
 }
@@ -2569,19 +2614,12 @@ function validateReferenceBlankClosure(familyId, questionIds, blankIds, content)
     diagnostics.push(diagnostic('REFERENCE_BLANK_CARDINALITY', 'needs_review', '$.blankIds', 'Cloze and Grammar Fill require one Blank for every Question'))
   }
   const occurrences = new Map(blankIds.map((blankId) => [blankId, 0]))
-  for (const block of content?.blocks || []) {
-    const inlineSets = block.kind === 'table'
-      ? (block.rows || []).flatMap((row) => (row.cells || []).map((cell) => cell.inlines))
-      : [block.kind === 'figure' ? block.caption : block.inlines]
-    for (const inlines of inlineSets) {
-      for (const inline of inlines || []) {
-        if (inline?.kind === 'blank_ref' && occurrences.has(inline.blankId)) occurrences.set(inline.blankId, occurrences.get(inline.blankId) + 1)
-        if (inline?.kind === 'text' && /__\d+__/.test(inline.text)) {
-          diagnostics.push(diagnostic('REFERENCE_MARKER_AMBIGUOUS', 'needs_review', '$.content', 'Source Blank markers must be resolved to semantic Blank refs'))
-        }
-      }
+  forEachRichInline(content, (inline) => {
+    if (inline?.kind === 'blank_ref' && occurrences.has(inline.blankId)) occurrences.set(inline.blankId, occurrences.get(inline.blankId) + 1)
+    if (inline?.kind === 'text' && /__\d+__/.test(inline.text)) {
+      diagnostics.push(diagnostic('REFERENCE_MARKER_AMBIGUOUS', 'needs_review', '$.content', 'Source Blank markers must be resolved to semantic Blank refs'))
     }
-  }
+  })
   if ([...occurrences.values()].some((count) => count !== 1)) {
     diagnostics.push(diagnostic('REFERENCE_BLANK_OCCURRENCE', 'needs_review', '$.content', 'Every Cloze and Grammar Fill Blank must occur exactly once in semantic content'))
   }
@@ -2647,6 +2685,9 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
   }
   const content = cloneJson(sourceGroup.content || { blocks: [] })
   diagnostics.push(...validateRichContent(content, new Set(sourceGroup.blankIds), mediaIds))
+  if (family.familyContractId !== 'reading' && contentHasFramedColumns(content)) {
+    diagnostics.push(diagnostic('RICH_BLOCK_UNSUPPORTED', 'unsupported', '$.content', 'framed_columns is only representable in Reading'))
+  }
   diagnostics.push(...validateReferenceBlankClosure(family.familyContractId, sourceGroup.questionIds, sourceGroup.blankIds, content))
   const variant = cloneJson(sourceGroup.variant || {})
   const variantKeys = family.familyContractId === 'seven-choices'

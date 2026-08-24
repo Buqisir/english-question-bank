@@ -92,24 +92,37 @@ function contentIdentityLists(content) {
     contentNodeIds.push(id)
     sourceMappedIds.push(id)
   }
-  for (const block of content?.blocks || []) {
-    addStructuralId(block.nodeId)
-    const inlineSets = block.kind === 'table'
-      ? (block.rows || []).flatMap((row) => {
+  const walk = (blocks) => {
+    for (const block of blocks || []) {
+      addStructuralId(block.nodeId)
+      if (block.kind === 'table') {
+        for (const row of block.rows || []) {
           addStructuralId(row.rowId)
-          return (row.cells || []).map((cell) => {
+          for (const cell of row.cells || []) {
             addStructuralId(cell.cellId)
-            return cell.inlines
-          })
-        })
-      : [block.kind === 'figure' ? block.caption : block.inlines]
-    for (const inlines of inlineSets) {
+            for (const inline of cell.inlines || []) {
+              contentNodeIds.push(inline.nodeId)
+              if (inline.kind === 'text') sourceMappedIds.push(inline.nodeId)
+            }
+          }
+        }
+        continue
+      }
+      if (block.kind === 'framed_columns') {
+        for (const column of block.columns || []) {
+          if (typeof column?.columnId === 'string') addStructuralId(column.columnId)
+          walk(column.blocks)
+        }
+        continue
+      }
+      const inlines = block.kind === 'figure' ? block.caption : block.inlines
       for (const inline of inlines || []) {
         contentNodeIds.push(inline.nodeId)
         if (inline.kind === 'text') sourceMappedIds.push(inline.nodeId)
       }
     }
   }
+  walk(content?.blocks)
   return { contentNodeIds, sourceMappedIds }
 }
 

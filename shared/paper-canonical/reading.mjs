@@ -1,3 +1,10 @@
+import {
+  FRAMED_COLUMNS_COLUMN_COUNT,
+  framedColumnsHeadingBlock,
+  isFramedColumnsBlock,
+  isQuestionLikeRichBlock,
+  richBlockInlineSets,
+} from './richContent.mjs'
 import { exactKeys, isRecordValue } from './stable.mjs'
 
 function issue(code, disposition, path, message) {
@@ -24,6 +31,132 @@ function literalInlineIssues(inlines, path) {
   return issues
 }
 
+function flattenedMarkerIssues(block, path) {
+  if (richBlockInlineSets(block).flat().some((inline) => inline?.kind === 'text' && /\[(?:表|图)\s*:/u.test(inline.text))) {
+    return [issue('READING_FLATTENED_BRIDGE_FORBIDDEN', 'incomplete_source', path, 'Flattened marker or placeholder text cannot qualify as canonical Reading')]
+  }
+  return []
+}
+
+function readingLeafBlockIssues(block, path, mediaById, mediaOccurrences, { allowFigure }) {
+  const issues = flattenedMarkerIssues(block, path)
+  if (block.kind === 'paragraph') {
+    if (!Array.isArray(block.inlines) || block.inlines.length === 0) {
+      issues.push(issue('READING_PARAGRAPH_INCOMPLETE', 'incomplete_source', path, 'Reading paragraphs cannot be empty'))
+    }
+    return issues
+  }
+  if (block.kind === 'table') {
+    if (!Array.isArray(block.rows) || block.rows.length === 0) {
+      issues.push(issue('READING_TABLE_INCOMPLETE', 'incomplete_source', path, 'Reading tables require captured rows and cells'))
+    } else if (block.rows.some((row) => !Array.isArray(row?.cells) || row.cells.reduce((total, cell) => total + (Number.isInteger(cell?.columnSpan) ? cell.columnSpan : 0), 0) < block.columnCount)) {
+      issues.push(issue('READING_TABLE_INCOMPLETE', 'incomplete_source', path, 'Reading tables cannot qualify with missing captured cells'))
+    }
+    return issues
+  }
+  if (block.kind === 'figure') {
+    if (!allowFigure) {
+      issues.push(issue('READING_FRAMED_COLUMNS_CHILD_UNSUPPORTED', 'unsupported', path, 'framed_columns children may only be paragraph or table'))
+      return issues
+    }
+    const mediaItem = mediaById.get(block.mediaId)
+    if (mediaOccurrences.has(block.mediaId)) mediaOccurrences.set(block.mediaId, mediaOccurrences.get(block.mediaId) + 1)
+    if (
+      !mediaItem
+      || !['image/png', 'image/jpeg', 'image/webp'].includes(mediaItem.mimeType)
+      || typeof mediaItem.sha256 !== 'string'
+      || !Number.isInteger(mediaItem.pixelWidth)
+      || mediaItem.pixelWidth < 1
+      || !Number.isInteger(mediaItem.pixelHeight)
+      || mediaItem.pixelHeight < 1
+      || typeof mediaItem.sourceArtifactRef?.artifactId !== 'string'
+    ) {
+      issues.push(issue('READING_FIGURE_INCOMPLETE', 'incomplete_source', path, 'Reading Figures require closed immutable media, dimensions, and source artifact identity'))
+    }
+    return issues
+  }
+  issues.push(issue(
+    allowFigure ? 'READING_BLOCK_INVALID' : 'READING_FRAMED_COLUMNS_CHILD_UNSUPPORTED',
+    allowFigure ? 'needs_review' : 'unsupported',
+    path,
+    allowFigure
+      ? 'Reading blocks must be closed rich-content objects'
+      : 'framed_columns children may only be paragraph or table',
+  ))
+  return issues
+}
+
+function readingFramedColumnsIssues(block, path, mediaById, mediaOccurrences) {
+  const issues = []
+  if (
+    block.columnCount !== FRAMED_COLUMNS_COLUMN_COUNT
+    || !Array.isArray(block.columns)
+    || block.columns.length !== FRAMED_COLUMNS_COLUMN_COUNT
+  ) {
+    issues.push(issue('READING_FRAMED_COLUMNS_INVALID', 'unsupported', path, 'framed_columns v1 requires exactly two columns'))
+    return issues
+  }
+  for (const [columnIndex, column] of block.columns.entries()) {
+    const columnPath = `${path}.columns[${columnIndex}]`
+    if (!isRecordValue(column) || typeof column.columnId !== 'string' || !Array.isArray(column.blocks) || column.blocks.length === 0) {
+      issues.push(issue('READING_FRAMED_COLUMNS_INVALID', 'needs_review', columnPath, 'framed_columns columns need identities and ordered child blocks'))
+      continue
+    }
+    if (Object.hasOwn(column, 'questions') || column.blocks.some((child) => isQuestionLikeRichBlock(child))) {
+      issues.push(issue('READING_FRAMED_COLUMNS_CHILD_UNSUPPORTED', 'unsupported', columnPath, 'Questions cannot live inside framed_columns'))
+    }
+    if (Object.hasOwn(column, 'columnHeading')) {
+      const heading = framedColumnsHeadingBlock(column)
+      if (!heading || heading.kind !== 'paragraph') {
+        issues.push(issue('READING_FRAMED_COLUMNS_HEADING_INVALID', 'needs_review', `${columnPath}.columnHeading`, 'columnHeading must point at a paragraph in the same column'))
+      }
+    }
+    issues.push(...readingContentBlockIssues(
+      column.blocks,
+      `${columnPath}.blocks`,
+      mediaById,
+      mediaOccurrences,
+      { allowFramedColumns: false, allowFigure: false },
+    ))
+  }
+  return issues
+}
+
+function readingContentBlockIssues(blocks, pathPrefix, mediaById, mediaOccurrences, {
+  allowFramedColumns,
+  allowFigure,
+}) {
+  const issues = []
+  for (const [index, block] of (Array.isArray(blocks) ? blocks : []).entries()) {
+    const path = `${pathPrefix}[${index}]`
+    if (!isRecordValue(block)) {
+      issues.push(issue('READING_BLOCK_INVALID', 'needs_review', path, 'Reading blocks must be closed rich-content objects'))
+      continue
+    }
+    if (isFramedColumnsBlock(block)) {
+      if (!allowFramedColumns) {
+        issues.push(issue('READING_FRAMED_COLUMNS_CHILD_UNSUPPORTED', 'unsupported', path, 'framed_columns cannot nest'))
+        continue
+      }
+      issues.push(...readingFramedColumnsIssues(block, path, mediaById, mediaOccurrences))
+      continue
+    }
+    if (isQuestionLikeRichBlock(block) && block.kind !== 'paragraph' && block.kind !== 'table' && block.kind !== 'figure') {
+      issues.push(issue(
+        allowFramedColumns ? 'READING_BLOCK_INVALID' : 'READING_FRAMED_COLUMNS_CHILD_UNSUPPORTED',
+        'unsupported',
+        path,
+        allowFramedColumns
+          ? 'Reading Questions stay on the variant, not in passage content'
+          : 'Questions cannot live inside framed_columns',
+      ))
+      continue
+    }
+    issues.push(...readingLeafBlockIssues(block, path, mediaById, mediaOccurrences, { allowFigure }))
+  }
+  return issues
+}
+
 function readingContentIssues(content, media) {
   const issues = []
   const mediaItems = Array.isArray(media) ? media : []
@@ -32,53 +165,47 @@ function readingContentIssues(content, media) {
   if (!Array.isArray(content?.blocks) || content.blocks.length === 0) {
     return [issue('READING_CONTENT_INCOMPLETE', 'incomplete_source', '$.content.blocks', 'Reading requires one ordered rich-content stream')]
   }
-  for (const [index, block] of content.blocks.entries()) {
-    const path = `$.content.blocks[${index}]`
-    if (!isRecordValue(block)) {
-      issues.push(issue('READING_BLOCK_INVALID', 'needs_review', path, 'Reading blocks must be closed rich-content objects'))
-      continue
-    }
-    const inlineSets = block.kind === 'table'
-      ? (block.rows || []).flatMap((row) => (row.cells || []).map((cell) => cell.inlines))
-      : [block.kind === 'figure' ? block.caption : block.inlines]
-    if (inlineSets.flat().some((inline) => inline?.kind === 'text' && /\[(?:表|图)\s*:/u.test(inline.text))) {
-      issues.push(issue('READING_FLATTENED_BRIDGE_FORBIDDEN', 'incomplete_source', path, 'Flattened marker or placeholder text cannot qualify as canonical Reading'))
-    }
-    if (block.kind === 'paragraph') {
-      if (!Array.isArray(block.inlines) || block.inlines.length === 0) {
-        issues.push(issue('READING_PARAGRAPH_INCOMPLETE', 'incomplete_source', path, 'Reading paragraphs cannot be empty'))
-      }
-      continue
-    }
-    if (block.kind === 'table') {
-      if (!Array.isArray(block.rows) || block.rows.length === 0) {
-        issues.push(issue('READING_TABLE_INCOMPLETE', 'incomplete_source', path, 'Reading tables require captured rows and cells'))
-      } else if (block.rows.some((row) => !Array.isArray(row?.cells) || row.cells.reduce((total, cell) => total + (Number.isInteger(cell?.columnSpan) ? cell.columnSpan : 0), 0) < block.columnCount)) {
-        issues.push(issue('READING_TABLE_INCOMPLETE', 'incomplete_source', path, 'Reading tables cannot qualify with missing captured cells'))
-      }
-      continue
-    }
-    if (block.kind === 'figure') {
-      const mediaItem = mediaById.get(block.mediaId)
-      if (mediaOccurrences.has(block.mediaId)) mediaOccurrences.set(block.mediaId, mediaOccurrences.get(block.mediaId) + 1)
-      if (
-        !mediaItem
-        || !['image/png', 'image/jpeg', 'image/webp'].includes(mediaItem.mimeType)
-        || typeof mediaItem.sha256 !== 'string'
-        || !Number.isInteger(mediaItem.pixelWidth)
-        || mediaItem.pixelWidth < 1
-        || !Number.isInteger(mediaItem.pixelHeight)
-        || mediaItem.pixelHeight < 1
-        || typeof mediaItem.sourceArtifactRef?.artifactId !== 'string'
-      ) {
-        issues.push(issue('READING_FIGURE_INCOMPLETE', 'incomplete_source', path, 'Reading Figures require closed immutable media, dimensions, and source artifact identity'))
-      }
-    }
-  }
+  issues.push(...readingContentBlockIssues(
+    content.blocks,
+    '$.content.blocks',
+    mediaById,
+    mediaOccurrences,
+    { allowFramedColumns: true, allowFigure: true },
+  ))
   if ([...mediaOccurrences.values()].some((count) => count !== 1)) {
     issues.push(issue('READING_MEDIA_PLACEMENT_INVALID', 'needs_review', '$.media', 'Every Reading media entry must be placed by exactly one Figure block'))
   }
   return issues
+}
+
+function registerBlockSemanticIds(block, path, registerSemanticId) {
+  registerSemanticId(block.nodeId, `${path}.nodeId`)
+  if (block.kind === 'table') {
+    for (const [rowIndex, row] of (block.rows || []).entries()) {
+      if (!isRecordValue(row)) continue
+      registerSemanticId(row.rowId, `${path}.rows[${rowIndex}].rowId`)
+      for (const [cellIndex, cell] of (row.cells || []).entries()) {
+        if (!isRecordValue(cell)) continue
+        registerSemanticId(cell.cellId, `${path}.rows[${rowIndex}].cells[${cellIndex}].cellId`)
+        for (const inline of cell.inlines || []) registerSemanticId(inline.nodeId, path)
+      }
+    }
+    return
+  }
+  if (isFramedColumnsBlock(block)) {
+    for (const [columnIndex, column] of (block.columns || []).entries()) {
+      if (!isRecordValue(column)) continue
+      registerSemanticId(column.columnId, `${path}.columns[${columnIndex}].columnId`)
+      for (const [childIndex, child] of (column.blocks || []).entries()) {
+        if (!isRecordValue(child)) continue
+        registerBlockSemanticIds(child, `${path}.columns[${columnIndex}].blocks[${childIndex}]`, registerSemanticId)
+      }
+    }
+    return
+  }
+  for (const inlines of richBlockInlineSets(block)) {
+    for (const inline of inlines || []) registerSemanticId(inline.nodeId, path)
+  }
 }
 
 export function validateReadingContract({
@@ -111,19 +238,7 @@ export function validateReadingContract({
   }
   for (const [blockIndex, block] of blocks.entries()) {
     if (!isRecordValue(block)) continue
-    registerSemanticId(block.nodeId, `$.content.blocks[${blockIndex}].nodeId`)
-    const inlineSets = block.kind === 'table'
-      ? (block.rows || []).flatMap((row, rowIndex) => {
-          if (!isRecordValue(row)) return []
-          registerSemanticId(row.rowId, `$.content.blocks[${blockIndex}].rows[${rowIndex}].rowId`)
-          return (row.cells || []).map((cell, cellIndex) => {
-            if (!isRecordValue(cell)) return []
-            registerSemanticId(cell.cellId, `$.content.blocks[${blockIndex}].rows[${rowIndex}].cells[${cellIndex}].cellId`)
-            return cell.inlines
-          })
-        })
-      : [block.kind === 'figure' ? block.caption : block.inlines]
-    for (const inlines of inlineSets) for (const inline of inlines || []) registerSemanticId(inline.nodeId, `$.content.blocks[${blockIndex}]`)
+    registerBlockSemanticIds(block, `$.content.blocks[${blockIndex}]`, registerSemanticId)
   }
 
   const paragraphIds = new Set(blocks.filter((block) => block?.kind === 'paragraph').map((block) => block.nodeId))
