@@ -145,7 +145,7 @@ export type BuildPaperAssetSurfaceModelInput = {
   figures?: ReadonlyArray<PaperFigureManifestEntry>
   /**
    * figure-render cut: OPTIONAL — the resolved asset base
-   * (`/paper-assets/<paperId>/latest`) used to build each figure's `<img>`
+   * (`/paper-assets/<paperId>/latest`) used to build each figure image's
    * src (`${assetBase}/figures/<file>`). Required for a manifest match to
    * actually resolve to a renderable image; omitting it while `figures` is
    * non-empty degrades a matched figure to the placeholder card rather
@@ -614,10 +614,15 @@ function buildShellReport(input: {
           tCard: '',
           boundaryFlags: [],
           reviewNeeded: false,
-          options: question.options.map((option) => ({
-            label: option.label,
-            content: option.text,
-          })),
+          options: question.options.map((option) => {
+            if (option.kind === 'figure') {
+              throw new Error('Paper Intelligence analysis requires literal option text')
+            }
+            return {
+              label: option.label,
+              content: option.text,
+            }
+          }),
         })),
       },
     ],

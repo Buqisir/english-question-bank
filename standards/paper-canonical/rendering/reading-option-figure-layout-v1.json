@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "reading-option-figure-layout-v1",
+  "id": "reading-option-figure-layout",
+  "version": "1",
+  "owner": "renderer_typography",
+  "projectionContract": "canonical-projector-v1",
+  "compatibleProjectionAuthority": {
+    "manifestId": "paper-canonical",
+    "manifestVersion": "46",
+    "manifestDigest": "sha256:b2ff52332752409e915a33ca976b475510dbcf1822094e5a647e3ea5e612fede"
+  },
+  "compatibleConsumerContracts": {
+    "screen": {
+      "id": "screen",
+      "version": "38",
+      "digest": "sha256:4fcc3e54037c84596fc49414fb75288aebd8463ae19dd49b7fae31aefb75ab9c"
+    },
+    "print_pdf": {
+      "id": "print_pdf",
+      "version": "39",
+      "digest": "sha256:98c66109b5ed8c266eed0d57a33f16370b7bfa118ce09930e7f83e9f27ae737a"
+    }
+  },
+  "physicalUnits": "pt",
+  "topology": {
+    "optionCount": 4,
+    "orderedLabels": ["A", "B", "C", "D"],
+    "trackCount": 4,
+    "rowStartPt": 17.3,
+    "rowWidthPt": 438.2,
+    "trackWidthPt": 109.55
+  },
+  "label": {
+    "fontSizePt": 10.5,
+    "lineHeightPt": 18,
+    "alignment": "image_box_start"
+  },
+  "imageBox": {
+    "widthPt": 96,
+    "heightPt": 60,
+    "objectFit": "contain",
+    "objectPosition": "center",
+    "crop": false,
+    "stretch": false,
+    "chrome": "none"
+  },
+  "rhythm": {
+    "stemToBankGapPt": 4.5,
+    "labelToBoxGapPt": 4.5,
+    "questionTailGapPt": 9
+  },
+  "responsive": {
+    "policy": "fit_down_then_overflow",
+    "minTrackWidthPt": 48,
+    "preserveTrackCount": true,
+    "preserveImageBoxAspectRatio": true,
+    "extremeOverflow": "horizontal"
+  },
+  "pagination": {
+    "policy": "move_whole_question_to_next_page",
+    "atomicContent": ["stem", "labels", "figure_bank"]
+  },
+  "accessibility": {
+    "policy": "neutral_option_identity"
+  }
+}

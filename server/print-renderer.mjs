@@ -82,6 +82,7 @@ import {
   selectedFamilyContractIdForGroup,
   selectConsumerGroupMode,
 } from '../shared/paper-canonical/consumerProjection.mjs'
+import { translateReadingOptionFigureLayout } from '../shared/paper-canonical/readingOptionFigureLayout.mjs'
 import {
   assertCanonicalConsumptionVisibleStructure,
 } from '../shared/paper-canonical/visibleStructure.mjs'
@@ -820,6 +821,25 @@ function renderCanonicalQuestionOptions(
   }).join('')}</div>`
 }
 
+function renderCanonicalFigureQuestionOptions(
+  question,
+  placement,
+  readingTail = null,
+) {
+  const attrs = ` data-canonical-layout-id="${escapeHtml(placement.layoutId)}" data-canonical-layout-version="${escapeHtml(placement.layoutVersion)}" data-canonical-layout-digest="${escapeHtml(placement.layoutDigest)}" data-canonical-placement-signature="${escapeHtml(placement.placementSignature)}" data-canonical-pagination-policy="${escapeHtml(placement.paginationPolicy)}" style="--figure-row-start:${placement.rowStartPt}pt;--figure-row-width:${placement.rowWidthPt}pt;--figure-track-width:${placement.trackWidthPt}pt;--figure-label-font-size:${placement.labelFontSizePt}pt;--figure-label-line-height:${placement.labelLineHeightPt}pt;--figure-box-width:${placement.imageBoxWidthPt}pt;--figure-box-height:${placement.imageBoxHeightPt}pt;--figure-stem-gap:${placement.stemToBankGapPt}pt;--figure-label-gap:${placement.labelToBoxGapPt}pt;--figure-tail-gap:${placement.questionTailGapPt}pt"`
+  return `<ol class="canonical-figure-options" aria-label="Figure options A to D"${attrs}>${question.options.map((option, index) => {
+    const figurePlacement = placement.placements[index]
+    const isTailOption =
+      readingTail
+      && readingTail.isLastQuestion
+      && index === question.options.length - 1
+    const tailAttrs = isTailOption
+      ? ` data-canonical-reading-anchor-for="${escapeHtml(readingTail.targetId)}" data-canonical-reading-predecessor-question-id="${escapeHtml(question.questionId)}" data-canonical-reading-predecessor-option-id="${escapeHtml(option.optionId)}"${readingTail.successorGroupId ? ` data-canonical-reading-preceding-kind="prior_question_tail"${readingTail.visiblePredecessorOnOption ? ` data-canonical-reading-preceding-for="${escapeHtml(readingTail.successorGroupId)}"` : ''}` : readingTail.visiblePredecessorOnOption ? ` data-canonical-reading-before-section="${escapeHtml(readingTail.followingSectionId)}"` : ''}`
+      : ''
+    return `<li class="canonical-figure-option" data-canonical-option-id="${escapeHtml(option.optionId)}" data-canonical-media-id="${escapeHtml(option.figure.mediaId)}" data-canonical-media-sha256="${escapeHtml(option.figure.mediaArtifact.sha256)}" data-canonical-reading-rhythm-role="option_line"${tailAttrs}><span class="canonical-figure-option-label" aria-hidden="true">${escapeHtml(option.label)}.</span><span class="canonical-figure-option-box"><img class="canonical-figure-option-image" src="data:${escapeHtml(option.figure.mediaArtifact.mimeType)};base64,${escapeHtml(option.figure.mediaArtifact.encodedBytes)}" alt="${escapeHtml(figurePlacement.neutralAlt)}" width="${option.figure.mediaArtifact.pixelWidth}" height="${option.figure.mediaArtifact.pixelHeight}"></span></li>`
+  }).join('')}</ol>`
+}
+
 function cssBackgroundForBlankRuling(ruling) {
   if (
     ruling.lineStyle !== 'single-thin'
@@ -1467,6 +1487,7 @@ export function buildPrintHtml({
       return {
         status: 'ready',
         group: canonicalGroup,
+        consumption: sourceConsumption,
         diagnostic: {
           status: 'ready',
           source: 'whole-paper-consumption',
@@ -1645,6 +1666,10 @@ export function buildPrintHtml({
         let canonicalGroup =
           canonicalResolution?.status === 'ready'
             ? canonicalResolution.group
+            : null
+        const canonicalGroupConsumption =
+          canonicalResolution?.status === 'ready'
+            ? canonicalResolution.consumption
             : null
         if (
           canonicalGroup
@@ -1886,18 +1911,32 @@ export function buildPrintHtml({
                 ...(canonicalGroup.groupType === 'reading'
                   ? { stemContent: canonicalQuestion.stemContent }
                   : {}),
-                options: canonicalQuestion.options.map((option) => ({
-                  optionId: option.optionId,
-                  label: option.label,
-                  content: option.text,
-                  ...(canonicalGroup.groupType === 'reading'
-                    ? { canonicalContent: option.content }
-                    : {}),
-                })),
+                options: canonicalQuestion.optionMode === 'figure'
+                  ? canonicalQuestion.options.map((option) => ({
+                      optionId: option.optionId,
+                      label: option.label,
+                      kind: option.kind,
+                      figure: option.figure,
+                    }))
+                  : canonicalQuestion.options.map((option) => ({
+                      optionId: option.optionId,
+                      label: option.label,
+                      content: option.text,
+                      ...(canonicalGroup.groupType === 'reading'
+                        ? { canonicalContent: option.content }
+                        : {}),
+                    })),
                 canonicalPlacement: canonicalQuestion.layoutPlan
                   ? translateAbcdPlanToPointPlacement(
                       canonicalQuestion.layoutPlan,
                     )
+                  : null,
+                figurePlacement: canonicalQuestion.optionMode === 'figure'
+                  ? translateReadingOptionFigureLayout({
+                      consumerId: 'print_pdf',
+                      consumption: canonicalGroupConsumption,
+                      question: canonicalQuestion,
+                    })
                   : null,
                 answer: canonicalQuestion.correctOptionId
                   ? canonicalQuestion.options.find(
@@ -1987,9 +2026,27 @@ export function buildPrintHtml({
             const stemAttrs = stemPlacement
               ? ` data-canonical-question-stem-start-pt="${stemPlacement.questionStemStartPt}" style="grid-template-columns:${stemPlacement.questionStemStartPt}pt minmax(0,1fr)"`
               : ''
-            groupHtml += `<div class="question"${canonicalQuestionAttrs}><p class="stem${stemPlacement ? ' stem--canonical' : ''}"${canonicalGroup?.groupType === 'reading' ? ' data-canonical-reading-rhythm-role="question_stem_line"' : ''}${stemAttrs}><span class="qnum">${displayQuestionNo}.</span>${stemPlacement ? `<span class="canonical-stem-text">${renderedStem}</span>` : ` ${renderedStem}`}</p>`
-            groupHtml += canonicalQuestion?.layoutPlan
-              ? renderCanonicalQuestionOptions(
+            groupHtml += `<div class="question${printQuestion.figurePlacement ? ' question--canonical-figure' : ''}"${canonicalQuestionAttrs}><p class="stem${stemPlacement ? ' stem--canonical' : ''}"${canonicalGroup?.groupType === 'reading' ? ' data-canonical-reading-rhythm-role="question_stem_line"' : ''}${stemAttrs}><span class="qnum">${displayQuestionNo}.</span>${stemPlacement ? `<span class="canonical-stem-text">${renderedStem}</span>` : ` ${renderedStem}`}</p>`
+            groupHtml += printQuestion.figurePlacement
+              ? renderCanonicalFigureQuestionOptions(
+                  canonicalQuestion,
+                  printQuestion.figurePlacement,
+                  readingSuccessorGroupId || readingFollowingSectionId
+                    ? {
+                        isLastQuestion:
+                          canonicalQuestion.questionId
+                            === lastReadingQuestionId,
+                        targetId:
+                          readingSuccessorGroupId
+                          || readingFollowingSectionId,
+                        successorGroupId: readingSuccessorGroupId,
+                        followingSectionId: readingFollowingSectionId,
+                        visiblePredecessorOnOption: !isTeacher,
+                      }
+                    : null,
+                )
+              : canonicalQuestion?.layoutPlan
+                ? renderCanonicalQuestionOptions(
                   canonicalQuestion,
                   canonicalGroup.groupType === 'reading',
                   canonicalGroup.groupType === 'reading'
@@ -2006,8 +2063,8 @@ export function buildPrintHtml({
                         visiblePredecessorOnOption: !isTeacher,
                       }
                     : null,
-                )
-              : renderOptions(printQuestion.options, detail.groupType)
+                  )
+                : renderOptions(printQuestion.options, detail.groupType)
           }
           if (isTeacher) {
             const isReadingTransitionTail =
@@ -2790,10 +2847,62 @@ body {
   display: block;
 }
 
+.canonical-figure-options {
+  box-sizing: border-box;
+  display: grid;
+  width: var(--figure-row-width);
+  grid-template-columns: repeat(4, var(--figure-track-width));
+  gap: 0;
+  margin: var(--figure-stem-gap) 0 var(--figure-tail-gap) var(--figure-row-start);
+  padding: 0;
+  list-style: none;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.canonical-figure-option {
+  display: grid;
+  min-width: 0;
+  grid-template-rows: var(--figure-label-line-height) var(--figure-box-height);
+  gap: var(--figure-label-gap);
+  align-items: start;
+  justify-items: center;
+  font-size: var(--figure-label-font-size);
+  line-height: var(--figure-label-line-height);
+}
+
+.canonical-figure-option-label {
+  box-sizing: border-box;
+  width: var(--figure-box-width);
+  font-size: var(--figure-label-font-size);
+  font-weight: ${paperTypographyRuntime.visibleWeight.optionLabel};
+  line-height: var(--figure-label-line-height);
+  text-align: left;
+}
+
+.canonical-figure-option-box {
+  display: block;
+  width: var(--figure-box-width);
+  height: var(--figure-box-height);
+}
+
+.canonical-figure-option-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
 /* standard §3b 分页纪律(owner 2026-07-08):段落可跨页;单个小题不拆;
    标题不落页尾;写作框整框不拆。 */
 .question {
   break-inside: avoid;
+}
+
+.question--canonical-figure {
+  break-inside: avoid;
+  page-break-inside: avoid;
 }
 
 .question[data-canonical-reading-last-question-for] {

@@ -58,6 +58,12 @@ assertDeclarationCompanions({
 })
 
 assertDeclarationCompanions({
+  label: 'readingOptionFigureLayout',
+  dtsPath: 'shared/paper-canonical/readingOptionFigureLayout.d.ts',
+  dmtsPath: 'shared/paper-canonical/readingOptionFigureLayout.d.mts',
+})
+
+assertDeclarationCompanions({
   label: 'writingPageModel',
   dtsPath: 'app/src/features/paper-intelligence/writingPageModel.d.ts',
   dmtsPath: 'app/src/features/paper-intelligence/writingPageModel.d.mts',

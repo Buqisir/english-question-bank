@@ -1292,8 +1292,11 @@ function PaperSurfaceQuestionItem({
                 }
               : undefined}
           >
-            {question.options.map((opt) => (
-              <span
+            {question.options.map((opt) => {
+              if (opt.kind === 'figure') {
+                throw new Error('Figure Options require a visible stem and Figure placement')
+              }
+              return <span
                 key={`${question.id}-${opt.label}`}
                 className="ps-question-options-inline-item"
                 {...{ [paperSurfaceAnchorAttrs.optionLabel]: opt.label }}
@@ -1324,7 +1327,7 @@ function PaperSurfaceQuestionItem({
                     : opt.text}
                 </span>
               </span>
-            ))}
+            })}
           </span>
         </button>
       ) : (
@@ -1367,6 +1370,7 @@ function PaperSurfaceQuestionItem({
               questionId={question.id}
               options={question.options}
               canonicalPlacement={question.canonicalPlacement}
+              figurePlacement={question.figurePlacement}
               canonicalOptionIds={question.canonicalIdentity?.optionIds}
               readingSuccessorGroupId={readingSuccessorGroupId}
               readingFollowingSectionId={readingFollowingSectionId}
@@ -1386,6 +1390,7 @@ type PaperSurfaceOptionListProps = {
   questionId: string
   options: ReadonlyArray<PaperQuestionOption>
   canonicalPlacement?: PaperQuestion['canonicalPlacement']
+  figurePlacement?: PaperQuestion['figurePlacement']
   canonicalOptionIds?: ReadonlyArray<string>
   readingSuccessorGroupId?: string
   readingFollowingSectionId?: string
@@ -1397,12 +1402,80 @@ function PaperSurfaceOptionList({
   questionId,
   options,
   canonicalPlacement,
+  figurePlacement,
   canonicalOptionIds,
   readingSuccessorGroupId,
   readingFollowingSectionId,
   predecessorQuestionId,
   readingRhythmEnabled,
 }: PaperSurfaceOptionListProps): ReactNode {
+  if (figurePlacement) {
+    if (
+      options.length !== figurePlacement.trackCount
+      || options.some((option) => option.kind !== 'figure')
+    ) {
+      throw new Error(`Figure placement ${figurePlacement.signature} requires four Figure Options`)
+    }
+    const figureStyle = {
+      '--ps-figure-row-width': `${figurePlacement.rowWidthPt}pt`,
+      '--ps-figure-row-start': `${figurePlacement.rowStartPt}pt`,
+      '--ps-figure-min-row-width':
+        `${figurePlacement.trackCount * figurePlacement.minTrackWidthPt}pt`,
+      '--ps-figure-min-track-width': `${figurePlacement.minTrackWidthPt}pt`,
+      '--ps-figure-track-width': `${figurePlacement.trackWidthPt}pt`,
+      '--ps-figure-label-font-size': `${figurePlacement.labelFontSizePt}pt`,
+      '--ps-figure-label-line-height': `${figurePlacement.labelLineHeightPt}pt`,
+      '--ps-figure-box-width': `${figurePlacement.imageBoxWidthPt}pt`,
+      '--ps-figure-box-height': `${figurePlacement.imageBoxHeightPt}pt`,
+      '--ps-figure-stem-gap': `${figurePlacement.stemToBankGapPt}pt`,
+      '--ps-figure-label-gap': `${figurePlacement.labelToBoxGapPt}pt`,
+      '--ps-figure-tail-gap': `${figurePlacement.questionTailGapPt}pt`,
+    } as CSSProperties
+    return (
+      <div
+        className="ps-option-figure-scroll"
+        role="group"
+        aria-label="Figure options A to D"
+        style={figureStyle}
+      >
+        <ol
+          className="ps-option-list ps-option-list--figure"
+          data-canonical-layout-id={figurePlacement.layoutId}
+          data-canonical-layout-version={figurePlacement.layoutVersion}
+          data-canonical-layout-digest={figurePlacement.layoutDigest}
+          data-canonical-placement-signature={figurePlacement.signature}
+          data-canonical-pagination-policy={figurePlacement.paginationPolicy}
+        >
+          {options.map((option, index) => {
+            if (option.kind !== 'figure') return null
+            return (
+              <li
+                key={`${questionId}-${option.label}`}
+                className="ps-option ps-option--figure"
+                {...{ [paperSurfaceAnchorAttrs.optionLabel]: option.label }}
+                data-canonical-option-id={canonicalOptionIds?.[index]}
+                data-canonical-media-id={option.figure.mediaId}
+                data-canonical-media-sha256={option.figure.sha256}
+              >
+                <span className="ps-option-label ps-option-label--figure" aria-hidden="true">
+                  {option.label}.
+                </span>
+                <span className="ps-option-figure-box">
+                  <img
+                    className="ps-option-figure-image"
+                    src={`data:${option.figure.mimeType};base64,${option.figure.encodedBytes}`}
+                    alt={option.figure.neutralAlt}
+                    width={option.figure.pixelWidth}
+                    height={option.figure.pixelHeight}
+                  />
+                </span>
+              </li>
+            )
+          })}
+        </ol>
+      </div>
+    )
+  }
   return (
     <ol
       className={`ps-option-list${canonicalPlacement ? ` ps-option-list--canonical ps-option-list--${canonicalPlacement.mode}${canonicalPlacement.questionStemStartPt !== undefined ? ' ps-option-list--stem-aligned' : ''}` : ''}`}
@@ -1430,6 +1503,9 @@ function PaperSurfaceOptionList({
         : undefined}
     >
       {options.map((opt, index) => {
+        if (opt.kind === 'figure') {
+          throw new Error('Figure Options require Figure placement')
+        }
         const physicalPlacement = canonicalPlacement?.placements?.[index]
         const continuationStartPt =
           physicalPlacement?.continuationStartPt

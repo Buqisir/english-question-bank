@@ -1538,6 +1538,16 @@
     width: 100% !important;
   }
 
+  /* Figure comparison retains four equal source-order tracks. This explicit
+     override wins over the text-only mobile one-column rule immediately above. */
+  .paper-browse-content .ps-option-list.ps-option-list--figure {
+    grid-template-columns: repeat(4, minmax(var(--ps-figure-min-track-width), 1fr)) !important;
+    min-width: var(--ps-figure-min-row-width);
+    max-width: var(--ps-figure-row-width) !important;
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+
   .paper-browse-content .ps-option-list--four_columns,
   .paper-browse-content .ps-option-list--two_by_two,
   .paper-browse-content .ps-question-options-inline--four_columns,

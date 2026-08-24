@@ -678,6 +678,73 @@ button.ps-paper-blank.ps-paper-blank--clickable {
   margin-right: 6px;
 }
 
+/* Figure Options are one comparison band, not four cards. This branch
+   deliberately overrides the generic option grid and its <=700px collapse;
+   literal Reading Options retain the existing cascade above unchanged. */
+.ps-option-figure-scroll {
+  box-sizing: border-box;
+  width: calc(100% - var(--ps-figure-row-start));
+  max-width: var(--ps-figure-row-width);
+  margin-left: var(--ps-figure-row-start);
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.ps-option-list.ps-option-list--figure {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: var(--ps-figure-min-row-width);
+  max-width: var(--ps-figure-row-width);
+  grid-template-columns: repeat(4, minmax(var(--ps-figure-min-track-width), 1fr));
+  gap: 0;
+  margin: var(--ps-figure-stem-gap) 0 var(--ps-figure-tail-gap);
+  padding: 0;
+  white-space: normal;
+}
+
+/* This scoped rule owns Figure rhythm over the earlier Reading text-option
+   zero-gap rule; the text branch remains byte/behavior compatible. */
+.ps-canonical-reading ~ .ps-question-list .ps-option-list--figure {
+  margin-top: var(--ps-figure-stem-gap);
+  margin-bottom: var(--ps-figure-tail-gap);
+  row-gap: 0;
+}
+
+.ps-option.ps-option--figure {
+  display: grid;
+  min-width: 0;
+  grid-template-rows: var(--ps-figure-label-line-height) auto;
+  gap: var(--ps-figure-label-gap);
+  align-items: start;
+  justify-items: center;
+  font-size: var(--ps-figure-label-font-size);
+  line-height: var(--ps-figure-label-line-height);
+}
+
+.ps-option-label--figure {
+  box-sizing: border-box;
+  width: min(var(--ps-figure-box-width), 100%);
+  font-size: var(--ps-figure-label-font-size);
+  font-weight: var(--ps-reading-visible-weight);
+  line-height: var(--ps-figure-label-line-height);
+  text-align: left;
+}
+
+.ps-option-figure-box {
+  display: block;
+  width: min(var(--ps-figure-box-width), 100%);
+  max-height: var(--ps-figure-box-height);
+  aspect-ratio: 8 / 5;
+}
+
+.ps-option-figure-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
 .ps-option-label {
   font-weight: 700;
 }

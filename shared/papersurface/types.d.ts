@@ -438,7 +438,7 @@ export type PaperEvidence = {
  * ADR 0003 §7. Keeping them off PaperQuestionOption stops the wire
  * payload for the left column from secretly leaking the answer key.
  */
-export type PaperQuestionOption = {
+export type PaperQuestionTextOption = {
   /** Option letter as authored ('A' | 'B' | 'C' | 'D' for v1
    *  multiple-choice; typed as `string` to leave room for future
    *  question types without a schema break). */
@@ -459,7 +459,32 @@ export type PaperQuestionOption = {
    *  may render it under the option as a faint companion line; the
    *  host decides whether translations are visible. */
   readonly translation?: string
+
+  /** Literal options retain their historical runtime shape. */
+  readonly kind?: never
+  readonly figure?: never
 }
+
+export type PaperQuestionFigureOption = {
+  readonly label: 'A' | 'B' | 'C' | 'D'
+  readonly kind: 'figure'
+  readonly figure: {
+    readonly mediaId: string
+    readonly mimeType: 'image/png'
+    readonly encodedBytes: string
+    readonly sha256: string
+    readonly pixelWidth: number
+    readonly pixelHeight: number
+    readonly neutralAlt: string
+  }
+  readonly text?: never
+  readonly canonicalContent?: never
+  readonly translation?: never
+}
+
+export type PaperQuestionOption =
+  | PaperQuestionTextOption
+  | PaperQuestionFigureOption
 
 /**
  * One question, in the shape PaperSurface needs to render it.
@@ -529,6 +554,32 @@ export type PaperQuestion = {
       readonly startPt: number
       readonly continuationStartPt: number | null
     }>
+  }
+
+  /** Figure-only physical layout translated once from scoped v47 authority. */
+  readonly figurePlacement?: {
+    readonly mode: 'figure_four_equal_tracks'
+    readonly signature: string
+    readonly layoutId: 'reading-option-figure-layout'
+    readonly layoutVersion: '1'
+    readonly layoutDigest: string
+    readonly rowStartPt: number
+    readonly rowWidthPt: number
+    readonly trackCount: 4
+    readonly trackWidthPt: number
+    readonly labelFontSizePt: number
+    readonly labelLineHeightPt: number
+    readonly imageBoxWidthPt: number
+    readonly imageBoxHeightPt: number
+    readonly objectFit: 'contain'
+    readonly objectPosition: 'center'
+    readonly stemToBankGapPt: number
+    readonly labelToBoxGapPt: number
+    readonly questionTailGapPt: number
+    readonly minTrackWidthPt: number
+    readonly responsivePolicy: 'fit_down_then_overflow'
+    readonly extremeOverflow: 'horizontal'
+    readonly paginationPolicy: 'move_whole_question_to_next_page'
   }
 
   /** Stable canonical Reading identity; answer authority stays in

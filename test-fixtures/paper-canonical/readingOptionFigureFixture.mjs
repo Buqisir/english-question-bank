@@ -1,3 +1,5 @@
+import { deflateSync } from 'node:zlib'
+
 import { readingOptionFigureAuthorityRef } from '../../shared/paper-canonical/authority.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import {
@@ -6,26 +8,98 @@ import {
 } from '../../server/paper-canonical/visualCandidate.mjs'
 import { makeReadyCanonicalFixture } from './foundationFixture.mjs'
 
-const optionPngBase64 = Object.freeze([
-  'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4nGP4z8DwHwAFAAH/iZk9HQAAAABJRU5ErkJggg==',
-  'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4nGNg+M/wHwAEAQH/cetH5QAAAABJRU5ErkJggg==',
-  'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4nGNgYPj/HwADAgH/5ncLrgAAAABJRU5ErkJggg==',
-  'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4nGNgYGD4DwABBAEAX+XDSwAAAABJRU5ErkJggg==',
+const optionPngFixtures = Object.freeze([
+  Object.freeze({
+    pixelWidth: 160,
+    pixelHeight: 80,
+    encodedBytes: 'iVBORw0KGgoAAAANSUhEUgAAAKAAAABQCAYAAACeXX40AAAA+0lEQVR4nO3bsQkDAQwEwS/n+2/QbuJgkT0DlyvYVM8HQk99AP9NgKQESEqApARISoCkBEhKgKQESEqApARISoCkBEhKgKQESEqApARISoCkBEhKgKQESEqApARISoCkBEhKgKQESEqApARISoCk5gG+72s/viUBmgDt1pYEaAK0W1sSoAnQbm1JgCZAu7UlAZoA7daWBGgCtFtbEqAJ0G5tSYAmQLu1JQGaAO3WlvyEkBIgKQGSEiApAZISICkBkhIgKQGSEiApAZISICkBkhIgKQGSEiApAZISICkBkhIgKQGSEiApAZISICkBkhIgKQGSEiApAZISIKkvO7Kh6t2kgxoAAAAASUVORK5CYII=',
+  }),
+  Object.freeze({
+    pixelWidth: 80,
+    pixelHeight: 160,
+    encodedBytes: 'iVBORw0KGgoAAAANSUhEUgAAAFAAAACgCAYAAACbg+u0AAABZklEQVR4nO3QwQnAMBADQZdz/TeYFLGBw2EG9Bd7HpKzfeB2AkYCRgJGAkYCRgJGAkYCRgJGAkYCRgJGAkYCRgJGAkYCRgJGqwFn5rNtETASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwEjASMBIwWg34BwJGAkYCRgJGAkYCRgJGAkYCRgJGAkYCRgJGAkYCRgJGAkYCRi91VqHqxq+tUwAAAABJRU5ErkJggg==',
+  }),
+  Object.freeze({
+    pixelWidth: 120,
+    pixelHeight: 120,
+    encodedBytes: 'iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAYAAAA5ZDbSAAACDUlEQVR4nO3bUWoDMRAEUR/H979gwhAWjAkhCZJ6prYK5n/p9yn28WHoHukPsL0JDE9geALDExiewPAEhicwPIHhCQxPYHgCwxMYnsDwBIYnMDyB4QkMT2B4AsMTGJ7A8geEJDA8L/Hw+/3zEMMD/Ab0D+HjgHbAk6JHAJ1Ap2OOAk7gTkccAp1GnQo8ATkNORm4NnMYjQLcFToNRkFsCp6FIyO2A00A05FbAaRgichvgNAgVWWCB95eGICPHgdMAdGSBBd5Xevg7IMeA04PfBVlggfeUHlvgjaWHvhOywAKvLT1whzuZwAKvLT1uhzuZwAKvKz1spzuVwAKvKz1qpzuVwAKvKz1qpzuVwAKvKz1qpzuVwAKvKz1qpzuVwAKvKz1qpzuVwAKvKz1qpzuVr0lg3EpggdeWHrfDnUxggdeXHvguuJXAAu8pPfQdcCuBBd5TemyBD5QenI5b+Yc/GLcSWOD9pQGouFUL4CoNQcStBBb4XGkQGm7VCrhKw5Bwq3bAVRqIglu1BK7SUATcqi1wlQabjlu1Br5K402EvRoBXKUhJ+JWY4Cv0qhTYK/GAVfi/r6RwK+J+nPjga+E/T4M8Ht3BX0PC2xfCQxPYHgCwxMYnsDwBIYnMDyB4QkMT2B4AsMTGJ7A8geEJDE9geALDExiewPAEhicwPIHhCQzvEzDhRlfA3m/eAAAAAElFTkSuQmCC',
+  }),
+  Object.freeze({
+    pixelWidth: 200,
+    pixelHeight: 100,
+    encodedBytes: 'iVBORw0KGgoAAAANSUhEUgAAAMgAAABkCAYAAADDhn8LAAABWUlEQVR4nO3coQ3EQBAEQYdz+Sf4Robf1CO5Shq+pOleP+Cv6+0DYJlAIAgEgkAgCASCQCAIBIJAIAgEgkAgCASCQCAIBIJAIAgEgkAgCASCQCAIBIJAIAgEgkAgTAZyzrGPbo1AbGprBGJTWyMQm9oagdjU1gjEprZGIDa1NQKxqa0RiE1tjUBsamsEYlNbIxCb2hqB2NTWTAYCKwQCQSAQBAJBIBAEAkEgEAQCQSAQBAJBIBAEAkEgEAQCQSAQBAJBIBAEAkEgEAQCQSAQBAJBIBAEAkEgEAQCQSAQBAJBIBAmA3n7w7j57v4QiE1tjUBsamsEYlNbIxCb2hqB2NTWCMSmtkYgNrU1ArGprRGITW2NQGxqawRiU1sjEJvamslAYIVAIAgEgkAgCASCQCAIBIJAIAgEgkAgCASCQCAIBIJAIAgEgkAgCASCQCAIBIJAIAgEgkAg3Mt22E0w7ybWAAAAAElFTkSuQmCC',
+  }),
 ])
 
 function stableId(prefix, value) {
   return `${prefix}:${digestJson(value).slice('sha256:'.length, 28)}`
 }
 
-function pngArtifact(encodedBytes) {
+function pngCrc32(bytes) {
+  let crc = 0xffffffff
+  for (const byte of bytes) {
+    crc ^= byte
+    for (let bit = 0; bit < 8; bit += 1) {
+      crc = ((crc >>> 1) ^ ((crc & 1) ? 0xedb88320 : 0)) >>> 0
+    }
+  }
+  return (crc ^ 0xffffffff) >>> 0
+}
+
+function pngChunk(type, data) {
+  const typeBytes = Buffer.from(type)
+  const chunk = Buffer.alloc(12 + data.byteLength)
+  chunk.writeUInt32BE(data.byteLength, 0)
+  typeBytes.copy(chunk, 4)
+  data.copy(chunk, 8)
+  chunk.writeUInt32BE(
+    pngCrc32(Buffer.concat([typeBytes, data])),
+    8 + data.byteLength,
+  )
+  return chunk
+}
+
+function genericPngBase64(pixelWidth, pixelHeight, variant) {
+  const rowLength = pixelWidth * 4 + 1
+  const scanlines = Buffer.alloc(rowLength * pixelHeight, 255)
+  for (let y = 0; y < pixelHeight; y += 1) {
+    const rowStart = y * rowLength
+    scanlines[rowStart] = 0
+    for (let x = 0; x < pixelWidth; x += 1) {
+      const pixelStart = rowStart + 1 + x * 4
+      const ink = variant % 2 === 0
+        ? y > pixelHeight * 0.38 && y < pixelHeight * 0.62
+        : x > pixelWidth * 0.38 && x < pixelWidth * 0.62
+      const value = ink ? 40 : 255
+      scanlines[pixelStart] = value
+      scanlines[pixelStart + 1] = value
+      scanlines[pixelStart + 2] = value
+      scanlines[pixelStart + 3] = 255
+    }
+  }
+  const header = Buffer.alloc(13)
+  header.writeUInt32BE(pixelWidth, 0)
+  header.writeUInt32BE(pixelHeight, 4)
+  header[8] = 8
+  header[9] = 6
+  return Buffer.concat([
+    Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]),
+    pngChunk('IHDR', header),
+    pngChunk('IDAT', deflateSync(scanlines)),
+    pngChunk('IEND', Buffer.alloc(0)),
+  ]).toString('base64')
+}
+
+function pngArtifact({ pixelWidth, pixelHeight }, index) {
+  const encodedBytes = genericPngBase64(pixelWidth, pixelHeight, index)
   const bytes = new Uint8Array(Buffer.from(encodedBytes, 'base64'))
   return {
     mimeType: 'image/png',
     encodedBytes,
     byteLength: bytes.byteLength,
     sha256: sha256(bytes),
-    pixelWidth: 1,
-    pixelHeight: 1,
+    pixelWidth,
+    pixelHeight,
   }
 }
 
@@ -157,7 +231,7 @@ export function makeReadingOptionFigureFixture() {
   )
   const question = group.variant.questions[0]
   const set = group.variant.choiceOwnership.sets[0]
-  const artifacts = optionPngBase64.map(pngArtifact)
+  const artifacts = optionPngFixtures.map(pngArtifact)
   const owners = set.options.map((option) => ({
     kind: 'reading_option',
     groupId: group.groupId,

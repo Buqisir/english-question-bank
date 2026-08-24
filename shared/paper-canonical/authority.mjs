@@ -44,6 +44,7 @@ import manifestV43 from '../../standards/paper-canonical/manifest-v43.json' with
 import manifestV44 from '../../standards/paper-canonical/manifest-v44.json' with { type: 'json' }
 import manifestV45 from '../../standards/paper-canonical/manifest-v45.json' with { type: 'json' }
 import manifestV46 from '../../standards/paper-canonical/manifest-v46.json' with { type: 'json' }
+import manifestV47 from '../../standards/paper-canonical/manifest-v47.json' with { type: 'json' }
 import legacyRhythmManifestV13 from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/manifest-v13.json' with { type: 'json' }
 import legacyRhythmTypographyV3 from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/paper-typography-v3.json' with { type: 'json' }
 import legacyRhythmTypographyV3Schema from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/renderer-typography-v3.schema.json' with { type: 'json' }
@@ -162,6 +163,7 @@ import continuationWritingRhythmV2 from '../../standards/paper-canonical/renderi
 import continuationWritingRhythmV3 from '../../standards/paper-canonical/rendering/continuation-writing-rhythm-v3.json' with { type: 'json' }
 import continuationWritingRhythmV4 from '../../standards/paper-canonical/rendering/continuation-writing-rhythm-v4.json' with { type: 'json' }
 import continuationWritingRhythmV5 from '../../standards/paper-canonical/rendering/continuation-writing-rhythm-v5.json' with { type: 'json' }
+import readingOptionFigureLayoutV1 from '../../standards/paper-canonical/rendering/reading-option-figure-layout-v1.json' with { type: 'json' }
 import standardManifestSchema from '../../schemas/paper-canonical/standard-manifest-v1.schema.json' with { type: 'json' }
 import coreSchema from '../../schemas/paper-canonical/core-invariants-v1.schema.json' with { type: 'json' }
 import coreV2Schema from '../../schemas/paper-canonical/core-invariants-v2.schema.json' with { type: 'json' }
@@ -251,6 +253,7 @@ import continuationWritingRhythmV2Schema from '../../schemas/paper-canonical/con
 import continuationWritingRhythmV3Schema from '../../schemas/paper-canonical/continuation-writing-rhythm-v3.schema.json' with { type: 'json' }
 import continuationWritingRhythmV4Schema from '../../schemas/paper-canonical/continuation-writing-rhythm-v4.schema.json' with { type: 'json' }
 import continuationWritingRhythmV5Schema from '../../schemas/paper-canonical/continuation-writing-rhythm-v5.schema.json' with { type: 'json' }
+import readingOptionFigureLayoutV1Schema from '../../schemas/paper-canonical/reading-option-figure-layout-v1.schema.json' with { type: 'json' }
 import sourceCaptureSchema from '../../schemas/paper-canonical/source-capture-v1.schema.json' with { type: 'json' }
 import planSchema from '../../schemas/paper-canonical/canonical-paper-plan-v1.schema.json' with { type: 'json' }
 import groupSchema from '../../schemas/paper-canonical/canonical-question-group-v1.schema.json' with { type: 'json' }
@@ -1912,6 +1915,10 @@ const artifactsV46 = {
   'profile-national-legacy': nationalLegacyV4,
   'family-reading': readingV2,
 }
+const artifactsV47 = {
+  ...artifactsV46,
+  'renderer-reading-option-figure-layout': readingOptionFigureLayoutV1,
+}
 const schemasV1 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v1': normalizationSchema, 'normalization-report-v1': reportSchema, 'canonical-paper-publication-v1': publicationSchema }
 const schemasV2 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v2': reportV2Schema, 'canonical-paper-publication-v2': publicationV2Schema }
 const schemasV3 = { ...sharedSchemas, 'renderer-typography-v2': typographyV2Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v3': reportV3Schema, 'canonical-paper-publication-v3': publicationV3Schema }
@@ -2442,6 +2449,10 @@ const schemasV46 = {
   'normalization-report-v46': reportV46Schema,
   'canonical-paper-publication-v46': publicationV46Schema,
 }
+const schemasV47 = {
+  ...schemasV46,
+  'reading-option-figure-layout-v1': readingOptionFigureLayoutV1Schema,
+}
 const validationV1 = validateAuthorityClosure({ manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 })
 const validationV2 = validateAuthorityClosure({ manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 })
 const validationV3 = validateAuthorityClosure({ manifest: manifestV3, artifacts: artifactsV3, schemas: schemasV3 })
@@ -2493,6 +2504,7 @@ const validationV43 = validateAuthorityClosure({ manifest: manifestV43, artifact
 const validationV44 = validateAuthorityClosure({ manifest: manifestV44, artifacts: artifactsV44, schemas: schemasV44 })
 const validationV45 = validateAuthorityClosure({ manifest: manifestV45, artifacts: artifactsV45, schemas: schemasV45 })
 const validationV46 = validateAuthorityClosure({ manifest: manifestV46, artifacts: artifactsV46, schemas: schemasV46 })
+const validationV47 = validateAuthorityClosure({ manifest: manifestV47, artifacts: artifactsV47, schemas: schemasV47 })
 const validations = [
   validationV1,
   validationV2,
@@ -2541,6 +2553,7 @@ const validations = [
   validationV44,
   validationV45,
   validationV46,
+  validationV47,
 ]
 if (validations.some((validation) => !validation.ok)) {
   throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify(validations.flatMap((validation) => validation.issues))}`)
@@ -2602,6 +2615,7 @@ const authorities = [
   { manifest: manifestV44, artifacts: artifactsV44, schemas: schemasV44 },
   { manifest: manifestV45, artifacts: artifactsV45, schemas: schemasV45 },
   { manifest: manifestV46, artifacts: artifactsV46, schemas: schemasV46 },
+  { manifest: manifestV47, artifacts: artifactsV47, schemas: schemasV47 },
 ].map((authority) => ({
   ...authority,
   authorityRef: authorityRef(authority.manifest),
@@ -2630,6 +2644,9 @@ export const paper2026IOwnerQaContentSuccessorCandidateAuthorityRef = authoritie
 // Reading Figure Options are admitted only through the Ticket 01 exact
 // confirmation seam. This scoped successor does not advance current v36.
 export const readingOptionFigureAuthorityRef = authorities.find((authority) => authority.manifest.version === '46').authorityRef
+// Ticket 03 adds only the shared renderer layout for v46 Figure Options. It is
+// a scoped successor and does not advance current/public v36 or mutate v46.
+export const readingOptionFigureRenderingAuthorityRef = authorities.find((authority) => authority.manifest.version === '47').authorityRef
 
 export function resolveCanonicalAuthority(authorityRef) {
   const authority = authorities.find((candidate) => candidate.authorityRef.manifestId === authorityRef?.manifestId && candidate.authorityRef.manifestVersion === authorityRef?.manifestVersion && candidate.authorityRef.manifestDigest === authorityRef?.manifestDigest)

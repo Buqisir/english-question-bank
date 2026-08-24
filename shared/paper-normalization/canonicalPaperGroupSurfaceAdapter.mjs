@@ -5,6 +5,7 @@ import {
   projectCanonicalConsumerGroup,
   projectCanonicalWritingChrome,
 } from '../paper-canonical/consumerProjection.mjs'
+import { translateReadingOptionFigureLayout } from '../paper-canonical/readingOptionFigureLayout.mjs'
 import { buildExactPaperGroupSourceSlice } from './exactPaperGroupSourceSlice.mjs'
 import { normalizePaperGroup } from './normalizePaperGroup.mjs'
 
@@ -330,12 +331,21 @@ export function buildCanonicalReadingConsumptionSurfaceData({
         sentences: segmented.sentences,
       }
     })
+  const placements = canonicalGroup.questions.map((question) => (
+    question.optionMode === 'figure'
+      ? translateReadingOptionFigureLayout({
+          consumerId: 'screen',
+          consumption,
+          question,
+        })
+      : translateAbcdPlanToPointPlacement(question.layoutPlan)
+  ))
   return {
     status: 'ready',
     semanticDigest: canonicalGroup.semanticSignature,
     passageLetter: canonicalGroup.passageLetter,
-    placementSignatures: canonicalGroup.questions.map(
-      (question) => question.placementSignature,
+    placementSignatures: placements.map(
+      (placement) => placement.placementSignature,
     ),
     richBlocks: canonicalGroup.blocks,
     anchors: canonicalGroup.anchors,
@@ -345,9 +355,58 @@ export function buildCanonicalReadingConsumptionSurfaceData({
         paragraphs: textMapParagraphs,
       },
       questions: canonicalGroup.questions.map((question, order) => {
-        const placement = translateAbcdPlanToPointPlacement(
-          question.layoutPlan,
-        )
+        const placement = placements[order]
+        if (question.optionMode === 'figure') {
+          return {
+            id: question.questionId,
+            section: '__global__',
+            order,
+            questionNo: String(question.questionNo),
+            stem: question.stem,
+            canonicalStemContent: question.stemContent,
+            options: question.options.map((option, index) => ({
+              label: option.label,
+              kind: 'figure',
+              figure: {
+                mediaId: option.figure.mediaId,
+                mimeType: option.figure.mediaArtifact.mimeType,
+                encodedBytes: option.figure.mediaArtifact.encodedBytes,
+                sha256: option.figure.mediaArtifact.sha256,
+                pixelWidth: option.figure.mediaArtifact.pixelWidth,
+                pixelHeight: option.figure.mediaArtifact.pixelHeight,
+                neutralAlt: placement.placements[index].neutralAlt,
+              },
+            })),
+            canonicalIdentity: {
+              questionId: question.questionId,
+              optionIds: question.options.map((option) => option.optionId),
+            },
+            figurePlacement: {
+              mode: placement.mode,
+              signature: placement.placementSignature,
+              layoutId: placement.layoutId,
+              layoutVersion: placement.layoutVersion,
+              layoutDigest: placement.layoutDigest,
+              rowStartPt: placement.rowStartPt,
+              rowWidthPt: placement.rowWidthPt,
+              trackCount: placement.trackCount,
+              trackWidthPt: placement.trackWidthPt,
+              labelFontSizePt: placement.labelFontSizePt,
+              labelLineHeightPt: placement.labelLineHeightPt,
+              imageBoxWidthPt: placement.imageBoxWidthPt,
+              imageBoxHeightPt: placement.imageBoxHeightPt,
+              objectFit: placement.objectFit,
+              objectPosition: placement.objectPosition,
+              stemToBankGapPt: placement.stemToBankGapPt,
+              labelToBoxGapPt: placement.labelToBoxGapPt,
+              questionTailGapPt: placement.questionTailGapPt,
+              minTrackWidthPt: placement.minTrackWidthPt,
+              responsivePolicy: placement.responsivePolicy,
+              extremeOverflow: placement.extremeOverflow,
+              paginationPolicy: placement.paginationPolicy,
+            },
+          }
+        }
         return {
           id: question.questionId,
           section: '__global__',
