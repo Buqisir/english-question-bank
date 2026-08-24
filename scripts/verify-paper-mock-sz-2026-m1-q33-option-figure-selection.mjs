@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { execFileSync } from 'node:child_process'
+import { execFileSync, spawnSync } from 'node:child_process'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 
@@ -25,6 +25,15 @@ const paperRoot = path.join(
 )
 const evidenceRoot = path.join(paperRoot, 'visual-candidates/q33')
 const sourcePdfPath = '/Users/huangxuewei/Desktop/试卷题库/05_真题模拟与试卷库/各地模拟/2026年3月高三试卷/26年3月高三试卷/26.3广东深圳高三一模英语试卷.pdf'
+const pdfimagesPath = '/opt/homebrew/bin/pdfimages'
+const pdfimagesBinaryDigest = 'sha256:c3503fe7e90a0d99a501946338b20fa1f15dfbbcc8d546dae78826e6dc4f8bc7'
+const sourceObjectPrefix = 'scripts/import-pipeline/papers/paper-mock-sz-2026-m1/visual-candidates/q33/source-objects/q33'
+const sourceObjectExtractionInvocation = `pdfimages -f 4 -l 4 -j '${sourcePdfPath}' ${sourceObjectPrefix}`
+const sourceObjectRenameMapping = 'q33-000.jpg->A.jpg, q33-001.jpg->B.jpg, q33-002.jpg->C.jpg, q33-003.jpg->D.jpg'
+const expectedSourceCropReproducibility = {
+  tool: '/opt/homebrew/bin/pdfimages version 26.04.0; binary SHA-256 c3503fe7e90a0d99a501946338b20fa1f15dfbbcc8d546dae78826e6dc4f8bc7; Pillow 12.3.0 RGB decode',
+  exportSettings: `Exact extraction invocation: ${sourceObjectExtractionInvocation}; exact rename mapping: ${sourceObjectRenameMapping}; PNG native intrinsic dimensions, RGB, optimize=false, compress_level=9, no semantic edit`,
+}
 const labels = ['A', 'B', 'C', 'D']
 const methods = ['source_crop', 'vector_authored', 'reference_restored']
 const groupId = 'group-mock-sz-2026-m1-reading-d'
@@ -118,6 +127,10 @@ const comparisonHtml = await fs.readFile(comparisonHtmlPath, 'utf8')
 
 assert.equal(sha256(await readBytes(sourcePdfPath)), 'sha256:df0c4e0a0d1aee4557f122591e3b778d7b48f2f324d75dba120343bb00926c80')
 assert.equal((await readBytes(sourcePdfPath)).byteLength, 505330)
+assert.equal(sha256(await readBytes(pdfimagesPath)), pdfimagesBinaryDigest)
+const pdfimagesVersion = spawnSync(pdfimagesPath, ['-v'], { encoding: 'utf8' })
+assert.equal(pdfimagesVersion.status, 0)
+assert.match(`${pdfimagesVersion.stdout}${pdfimagesVersion.stderr}`, /^pdfimages version 26\.04\.0$/mu)
 
 const pipelineStrip = await readBytes(path.join(paperRoot, 'figures/reading-d-q33.png'))
 const publicStrip = await readBytes(path.join(
@@ -161,7 +174,7 @@ const pageStream = execFileSync('qpdf', [
   '--filtered-stream-data',
   sourcePdfPath,
 ], { encoding: 'utf8' }).replace(/\s+/gu, ' ')
-const imageInventory = execFileSync('pdfimages', [
+const imageInventory = execFileSync(pdfimagesPath, [
   '-f', '4', '-l', '4', '-list', sourcePdfPath,
 ], { encoding: 'utf8' })
 for (const label of labels) {
@@ -259,6 +272,7 @@ for (const label of labels) {
   const sourceCrop = candidates.find((candidate) => candidate.method === 'source_crop')
   const observation = candidatePackage.observations.find((entry) => entry.observationId === observationId)
   assert.deepEqual(sourceCrop.artifact, observation.sourceCrop, 'source_crop must remain the exact equal-authority fallback')
+  assert.deepEqual(sourceCrop.reproducibility, expectedSourceCropReproducibility)
   for (const candidate of candidates) {
     const bytes = new Uint8Array(Buffer.from(candidate.artifact.encodedBytes, 'base64'))
     assert.equal(candidate.artifact.mimeType, 'image/png')
@@ -385,6 +399,13 @@ assert.ok(comparisonManifest.observations.every((observation) => observation.can
 assert.ok(comparisonManifest.observations.flatMap((observation) => observation.candidates).every((candidate) => (
   candidate.agentVisualStatus !== 'passed'
 )))
+assert.ok(comparisonManifest.observations.flatMap((observation) => observation.candidates)
+  .filter((candidate) => candidate.method === 'source_crop')
+  .every((candidate) => (
+    JSON.stringify(candidate.reproducibility) === JSON.stringify(expectedSourceCropReproducibility)
+  )))
+assert.equal(JSON.stringify(candidatePackage).includes('26.08.0'), false)
+assert.equal(JSON.stringify(comparisonManifest).includes('26.08.0'), false)
 
 for (const requiredFragment of [
   'grid-template-columns: repeat(4, 109.55pt)',

@@ -85,10 +85,15 @@ surface.
 Awaiting Owner exact digest selection at Stop A.
 
 - Candidate package:
-  `sha256:695c87ccf75d6f59132cbb1d7be1a85d32cea83f24d721d199743a2e3869822f`.
+  `sha256:53d29f20c9bd6ad1b1c0138e030f679ebfad2cf945c7e85eb3bd5ed89881d7b8`.
 - Successor visual Source Capture:
   `source-capture:3bc14ad0fcc859e6c350b` /
   `sha256:3bc14ad0fcc859e6c350b32dd86889fb993e761f865d1b2e9044427a6c798832`.
+- Source XObjects were extracted with `/opt/homebrew/bin/pdfimages` 26.04.0,
+  binary SHA-256
+  `c3503fe7e90a0d99a501946338b20fa1f15dfbbcc8d546dae78826e6dc4f8bc7`.
+  The candidate evidence records the exact extraction invocation and explicit
+  `q33-000.jpg`–`q33-003.jpg` to A–D rename mapping.
 - The two tracked 1380×220 strips remain byte-identical at
   `sha256:60f02d3ac7194ac22d52137f0e64801d348818548d3e385bf6200c025aa8702d`.
   The strip is immutable comparison evidence only.
@@ -106,10 +111,10 @@ Awaiting Owner exact digest selection at Stop A.
 
   | Option | `source_crop` | `vector_authored` | `reference_restored` |
   | --- | --- | --- | --- |
-  | A | `sha256:9560aa56e21febbaf630c5e56693f4042abca2a8206f62c49befbb143822241f` | `sha256:566a6eb58b7aaa8d6a04cd41dec94caa60ea11cf1cffce07e84ef75bdada86d3` | `sha256:457e4af4322582bdccddc86687fcb1a044cba35ee140d589937500a49c212c0d` |
-  | B | `sha256:a4fc54e2a8129c435c58f92d057d734c3a3750ef94c0fbc13c19eb1a3faaec18` | `sha256:e613ce9761ffc6b054087952c6425bfe2f9098882c82325ee69c9b242231e796` | `sha256:90358084fa34af4aa2c38c7be178d2410fcc6e85904a885fc671ae2cb9a03603` |
-  | C | `sha256:60b8397229ff3625270c7e22d63717e4a0e5b6027db86e57ceb2cba116f57b2f` | `sha256:3191a409a0f7065f26ce6ceb27d2afc1e6b1fa467a3e0449e7a9ea8463cb374c` | `sha256:b8728e6adc9a9fc65c9a72cf6487c6bbbb50f1a459e6177a2eb45f1eb8680995` |
-  | D | `sha256:29bba5d9d7c887ae55f801afd460a53f620aab379f7daab50a2d6d36ac73af21` | `sha256:53e5fe85a40515d1a1c893d57372f8e1ec080f6792335e808fc28d9301e7b5df` | `sha256:6efc93028120a2a117fa144ee23bebf0dcc3bdc415b8308cf8f89474c538765c` |
+  | A | `sha256:033b4c7a56070f9ff6dc021f3a7ae4d61459f19bfaf7e10bf7328f2dc2c6c8b2` | `sha256:566a6eb58b7aaa8d6a04cd41dec94caa60ea11cf1cffce07e84ef75bdada86d3` | `sha256:457e4af4322582bdccddc86687fcb1a044cba35ee140d589937500a49c212c0d` |
+  | B | `sha256:7b07503f9a76b5323c0b20282b97794b04db99bc33da4ebdd5ca918e7124b126` | `sha256:e613ce9761ffc6b054087952c6425bfe2f9098882c82325ee69c9b242231e796` | `sha256:90358084fa34af4aa2c38c7be178d2410fcc6e85904a885fc671ae2cb9a03603` |
+  | C | `sha256:474e39a0690268135727b44d4c8e17c3bce7410ddc96013a5f048b7f166818de` | `sha256:3191a409a0f7065f26ce6ceb27d2afc1e6b1fa467a3e0449e7a9ea8463cb374c` | `sha256:b8728e6adc9a9fc65c9a72cf6487c6bbbb50f1a459e6177a2eb45f1eb8680995` |
+  | D | `sha256:5b97c34cb36ac51885c4e99fee05e557b2a51ccb2e3b2a9ebbf09dc6b5c38f8e` | `sha256:53e5fe85a40515d1a1c893d57372f8e1ec080f6792335e808fc28d9301e7b5df` | `sha256:6efc93028120a2a117fa144ee23bebf0dcc3bdc415b8308cf8f89474c538765c` |
 
 - The local comparison is
   `scripts/import-pipeline/papers/paper-mock-sz-2026-m1/visual-candidates/q33/comparison.html`.

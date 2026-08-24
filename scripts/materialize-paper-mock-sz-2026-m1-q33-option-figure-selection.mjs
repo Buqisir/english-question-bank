@@ -14,6 +14,11 @@ const paperRoot = path.join(
 )
 const evidenceRoot = path.join(paperRoot, 'visual-candidates/q33')
 const sourcePdfPath = '/Users/huangxuewei/Desktop/试卷题库/05_真题模拟与试卷库/各地模拟/2026年3月高三试卷/26年3月高三试卷/26.3广东深圳高三一模英语试卷.pdf'
+const sourceObjectPrefix = 'scripts/import-pipeline/papers/paper-mock-sz-2026-m1/visual-candidates/q33/source-objects/q33'
+const sourceObjectExtractionInvocation = `pdfimages -f 4 -l 4 -j '${sourcePdfPath}' ${sourceObjectPrefix}`
+const sourceObjectRenameMapping = 'q33-000.jpg->A.jpg, q33-001.jpg->B.jpg, q33-002.jpg->C.jpg, q33-003.jpg->D.jpg'
+const sourceCropTool = '/opt/homebrew/bin/pdfimages version 26.04.0; binary SHA-256 c3503fe7e90a0d99a501946338b20fa1f15dfbbcc8d546dae78826e6dc4f8bc7; Pillow 12.3.0 RGB decode'
+const sourceCropExportSettings = `Exact extraction invocation: ${sourceObjectExtractionInvocation}; exact rename mapping: ${sourceObjectRenameMapping}; PNG native intrinsic dimensions, RGB, optimize=false, compress_level=9, no semantic edit`
 const pipelineStripPath = path.join(paperRoot, 'figures/reading-d-q33.png')
 const publicStripPath = path.join(
   repoRoot,
@@ -320,8 +325,8 @@ async function buildCandidateRequest() {
       artifact: await pngArtifact(candidatePath('source_crop', label)),
       sourceTruthChecklist: checklist,
       reproducibility: {
-        tool: 'Poppler pdfimages 26.08.0 exact JPEG extraction; Pillow 12.3.0 RGB decode',
-        exportSettings: 'PNG, native intrinsic dimensions, RGB, optimize=false, compress_level=9, no semantic edit',
+        tool: sourceCropTool,
+        exportSettings: sourceCropExportSettings,
       },
     })
     candidates.push({

@@ -3,7 +3,7 @@
   "paperId": "paper-mock-sz-2026-m1",
   "questionId": "q-mock-sz-2026-m1-033",
   "state": "awaiting_owner_exact_digest_selection",
-  "packageDigest": "sha256:695c87ccf75d6f59132cbb1d7be1a85d32cea83f24d721d199743a2e3869822f",
+  "packageDigest": "sha256:53d29f20c9bd6ad1b1c0138e030f679ebfad2cf945c7e85eb3bd5ed89881d7b8",
   "sourceCaptureRef": {
     "captureId": "source-capture:3bc14ad0fcc859e6c350b",
     "digest": "sha256:3bc14ad0fcc859e6c350b32dd86889fb993e761f865d1b2e9044427a6c798832"
@@ -153,7 +153,7 @@
       "candidates": [
         {
           "method": "source_crop",
-          "candidateDigest": "sha256:9560aa56e21febbaf630c5e56693f4042abca2a8206f62c49befbb143822241f",
+          "candidateDigest": "sha256:033b4c7a56070f9ff6dc021f3a7ae4d61459f19bfaf7e10bf7328f2dc2c6c8b2",
           "artifact": {
             "mimeType": "image/png",
             "byteLength": 10069,
@@ -163,8 +163,8 @@
           },
           "relativePath": "candidates/source_crop/A.png",
           "reproducibility": {
-            "tool": "Poppler pdfimages 26.08.0 exact JPEG extraction; Pillow 12.3.0 RGB decode",
-            "exportSettings": "PNG, native intrinsic dimensions, RGB, optimize=false, compress_level=9, no semantic edit"
+            "tool": "/opt/homebrew/bin/pdfimages version 26.04.0; binary SHA-256 c3503fe7e90a0d99a501946338b20fa1f15dfbbcc8d546dae78826e6dc4f8bc7; Pillow 12.3.0 RGB decode",
+            "exportSettings": "Exact extraction invocation: pdfimages -f 4 -l 4 -j '/Users/huangxuewei/Desktop/试卷题库/05_真题模拟与试卷库/各地模拟/2026年3月高三试卷/26年3月高三试卷/26.3广东深圳高三一模英语试卷.pdf' scripts/import-pipeline/papers/paper-mock-sz-2026-m1/visual-candidates/q33/source-objects/q33; exact rename mapping: q33-000.jpg->A.jpg, q33-001.jpg->B.jpg, q33-002.jpg->C.jpg, q33-003.jpg->D.jpg; PNG native intrinsic dimensions, RGB, optimize=false, compress_level=9, no semantic edit"
           },
           "builtInGeneratedSource": null,
           "agentVisualStatus": "unresolved_owner_review_required",
@@ -312,7 +312,7 @@
       "candidates": [
         {
           "method": "source_crop",
-          "candidateDigest": "sha256:a4fc54e2a8129c435c58f92d057d734c3a3750ef94c0fbc13c19eb1a3faaec18",
+          "candidateDigest": "sha256:7b07503f9a76b5323c0b20282b97794b04db99bc33da4ebdd5ca918e7124b126",
           "artifact": {
             "mimeType": "image/png",
             "byteLength": 7277,
@@ -322,8 +322,8 @@
           },
           "relativePath": "candidates/source_crop/B.png",
           "reproducibility": {
-            "tool": "Poppler pdfimages 26.08.0 exact JPEG extraction; Pillow 12.3.0 RGB decode",
-            "exportSettings": "PNG, native intrinsic dimensions, RGB, optimize=false, compress_level=9, no semantic edit"
+            "tool": "/opt/homebrew/bin/pdfimages version 26.04.0; binary SHA-256 c3503fe7e90a0d99a501946338b20fa1f15dfbbcc8d546dae78826e6dc4f8bc7; Pillow 12.3.0 RGB decode",
+            "exportSettings": "Exact extraction invocation: pdfimages -f 4 -l 4 -j '/Users/huangxuewei/Desktop/试卷题库/05_真题模拟与试卷库/各地模拟/2026年3月高三试卷/26年3月高三试卷/26.3广东深圳高三一模英语试卷.pdf' scripts/import-pipeline/papers/paper-mock-sz-2026-m1/visual-candidates/q33/source-objects/q33; exact rename mapping: q33-000.jpg->A.jpg, q33-001.jpg->B.jpg, q33-002.jpg->C.jpg, q33-003.jpg->D.jpg; PNG native intrinsic dimensions, RGB, optimize=false, compress_level=9, no semantic edit"
           },
           "builtInGeneratedSource": null,
           "agentVisualStatus": "unresolved_owner_review_required",
@@ -471,7 +471,7 @@
       "candidates": [
         {
           "method": "source_crop",
-          "candidateDigest": "sha256:60b8397229ff3625270c7e22d63717e4a0e5b6027db86e57ceb2cba116f57b2f",
+          "candidateDigest": "sha256:474e39a0690268135727b44d4c8e17c3bce7410ddc96013a5f048b7f166818de",
           "artifact": {
             "mimeType": "image/png",
             "byteLength": 6203,
@@ -481,8 +481,8 @@
           },
           "relativePath": "candidates/source_crop/C.png",
           "reproducibility": {
-            "tool": "Poppler pdfimages 26.08.0 exact JPEG extraction; Pillow 12.3.0 RGB decode",
-            "exportSettings": "PNG, native intrinsic dimensions, RGB, optimize=false, compress_level=9, no semantic edit"
+            "tool": "/opt/homebrew/bin/pdfimages version 26.04.0; binary SHA-256 c3503fe7e90a0d99a501946338b20fa1f15dfbbcc8d546dae78826e6dc4f8bc7; Pillow 12.3.0 RGB decode",
+            "exportSettings": "Exact extraction invocation: pdfimages -f 4 -l 4 -j '/Users/huangxuewei/Desktop/试卷题库/05_真题模拟与试卷库/各地模拟/2026年3月高三试卷/26年3月高三试卷/26.3广东深圳高三一模英语试卷.pdf' scripts/import-pipeline/papers/paper-mock-sz-2026-m1/visual-candidates/q33/source-objects/q33; exact rename mapping: q33-000.jpg->A.jpg, q33-001.jpg->B.jpg, q33-002.jpg->C.jpg, q33-003.jpg->D.jpg; PNG native intrinsic dimensions, RGB, optimize=false, compress_level=9, no semantic edit"
           },
           "builtInGeneratedSource": null,
           "agentVisualStatus": "unresolved_owner_review_required",
@@ -630,7 +630,7 @@
       "candidates": [
         {
           "method": "source_crop",
-          "candidateDigest": "sha256:29bba5d9d7c887ae55f801afd460a53f620aab379f7daab50a2d6d36ac73af21",
+          "candidateDigest": "sha256:5b97c34cb36ac51885c4e99fee05e557b2a51ccb2e3b2a9ebbf09dc6b5c38f8e",
           "artifact": {
             "mimeType": "image/png",
             "byteLength": 5726,
@@ -640,8 +640,8 @@
           },
           "relativePath": "candidates/source_crop/D.png",
           "reproducibility": {
-            "tool": "Poppler pdfimages 26.08.0 exact JPEG extraction; Pillow 12.3.0 RGB decode",
-            "exportSettings": "PNG, native intrinsic dimensions, RGB, optimize=false, compress_level=9, no semantic edit"
+            "tool": "/opt/homebrew/bin/pdfimages version 26.04.0; binary SHA-256 c3503fe7e90a0d99a501946338b20fa1f15dfbbcc8d546dae78826e6dc4f8bc7; Pillow 12.3.0 RGB decode",
+            "exportSettings": "Exact extraction invocation: pdfimages -f 4 -l 4 -j '/Users/huangxuewei/Desktop/试卷题库/05_真题模拟与试卷库/各地模拟/2026年3月高三试卷/26年3月高三试卷/26.3广东深圳高三一模英语试卷.pdf' scripts/import-pipeline/papers/paper-mock-sz-2026-m1/visual-candidates/q33/source-objects/q33; exact rename mapping: q33-000.jpg->A.jpg, q33-001.jpg->B.jpg, q33-002.jpg->C.jpg, q33-003.jpg->D.jpg; PNG native intrinsic dimensions, RGB, optimize=false, compress_level=9, no semantic edit"
           },
           "builtInGeneratedSource": null,
           "agentVisualStatus": "unresolved_owner_review_required",
@@ -695,5 +695,5 @@
       ]
     }
   ],
-  "manifestDigest": "sha256:c44d19a2dc645b9819cf24e6da55f6ce89362e14c4ebc5219e07e893ee466fd5"
+  "manifestDigest": "sha256:38c1850fa763e7edd64311522b598a6d6ddf5fe4c8d08b756bb003b442afb93a"
 }
