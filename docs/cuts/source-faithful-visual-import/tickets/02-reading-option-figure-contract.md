@@ -70,8 +70,8 @@ crops, or reconstruct semantic ownership.
 
 ## Result
 
-Implemented on `codex/sfvi-ticket-02` in the one-line Ticket 02 implementation
-commit.
+Implemented on `codex/sfvi-ticket-02` in the Ticket 02 implementation commit
+plus one separate one-line Merger Must Fix commit.
 
 - Added scoped manifest v46 while keeping `canonicalAuthorityRef` at v36.
   Reading v2, `nck1-v14`, `zhejiang-legacy-v12`, `national-legacy-v4`, and
@@ -98,6 +98,15 @@ commit.
   Writing, and Continuation Writing focused verifiers. The frozen literal
   Reading v36 Canonical Paper digest remains
   `sha256:435525747864b69e13a4cbe7e1fe9b40dc33e081c3c5e3f24c0d24496e499e07`.
+- Merger Must Fix closed the live admission proof over an immutable digest of
+  the complete Canonical compilation, exact source-asset bytes, Canonical
+  identity, and confirmed candidate/selection identity. Fresh proof validation
+  is content-based rather than object-reference-based: an exact compilation
+  clone seals, while a post-confirmation A/D media swap still fails after both
+  Group and Normalization Report semantic digests are recomputed. Forged proof,
+  changed Teacher Confirmation, and changed source-asset bytes also fail. The
+  focused verifier plus publication, recovery/rollback, and existing Reading
+  direct verifiers all pass after this repair.
 - Paper pack: `pnpm -C app verify:paper` — overall FAIL with
   `PASS 77 / SKIP 0 / FAIL 1`. The sole failure is the same unrelated local-data
   coverage failure already recorded by Ticket 01:

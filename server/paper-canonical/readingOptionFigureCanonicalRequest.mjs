@@ -1,8 +1,39 @@
 import { compileConfirmedReadingOptionFigurePaper } from '../../shared/paper-canonical/compiler.mjs'
-import { sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { confirmVisualImportCandidate } from './visualCandidate.mjs'
 
 const liveAdmissions = new WeakMap()
+
+function confirmationIdentity(confirmedSelection, compilation) {
+  const canonicalPaper = compilation?.artifacts?.canonicalPaper
+  const authority = canonicalPaper?.paperPlan?.authorityRef
+  return Object.freeze({
+    paperId: canonicalPaper?.paperPlan?.paperId,
+    authorityDigest: authority ? digestJson(authority) : null,
+    schemaVersion: confirmedSelection.schemaVersion,
+    candidatePackageDigest: confirmedSelection.candidatePackageDigest,
+    confirmationDigest: confirmedSelection.confirmationDigest,
+    sourceCaptureRefDigest: digestJson(confirmedSelection.sourceCaptureRef),
+    confirmedSelectionsDigest: digestJson(confirmedSelection.confirmedSelections),
+  })
+}
+
+function proofSnapshotDigest({ compilation, sourceAsset, identity }) {
+  const canonicalPaper = compilation?.artifacts?.canonicalPaper
+  return digestJson({
+    compilation,
+    sourceAsset: {
+      sha256: sha256(sourceAsset),
+      byteLength: sourceAsset.byteLength,
+    },
+    identity,
+    canonicalIdentity: {
+      paperId: canonicalPaper?.paperPlan?.paperId,
+      authority: canonicalPaper?.paperPlan?.authorityRef,
+      digest: canonicalPaper ? digestJson(canonicalPaper) : null,
+    },
+  })
+}
 
 export function admitLiveConfirmedReadingOptionFigureImport({
   request,
@@ -27,11 +58,17 @@ export function admitLiveConfirmedReadingOptionFigureImport({
     request,
     confirmedSelection,
   )
+  const identity = confirmationIdentity(confirmedSelection, compilation)
   const proof = Object.freeze({})
   liveAdmissions.set(proof, Object.freeze({
-    compilation,
     sourceAssetDigest: sha256(sourceAsset),
-    confirmationDigest: confirmedSelection.confirmationDigest,
+    sourceAssetByteLength: sourceAsset.byteLength,
+    identity,
+    snapshotDigest: proofSnapshotDigest({
+      compilation,
+      sourceAsset,
+      identity,
+    }),
   }))
   return {
     compilation,
@@ -47,10 +84,19 @@ export function isLiveConfirmedReadingOptionFigureAdmission({
   sourceAsset,
 }) {
   const admission = liveAdmissions.get(proof)
-  return Boolean(
-    admission
-    && admission.compilation === compilation
-    && sourceAsset instanceof Uint8Array
-    && admission.sourceAssetDigest === sha256(sourceAsset)
-  )
+  if (
+    !admission
+    || !(sourceAsset instanceof Uint8Array)
+    || admission.sourceAssetByteLength !== sourceAsset.byteLength
+    || admission.sourceAssetDigest !== sha256(sourceAsset)
+  ) return false
+  try {
+    return admission.snapshotDigest === proofSnapshotDigest({
+      compilation,
+      sourceAsset,
+      identity: admission.identity,
+    })
+  } catch {
+    return false
+  }
 }

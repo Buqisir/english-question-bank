@@ -28,7 +28,12 @@ import {
   createFileSystemCanonicalPublicationStore,
   loadCanonicalOnlyConsumers,
   publishCanonicalPaperPublication,
+  sealCanonicalPublication,
 } from '../server/paper-canonical/publication.mjs'
+import {
+  admitLiveConfirmedReadingOptionFigureImport,
+  isLiveConfirmedReadingOptionFigureAdmission,
+} from '../server/paper-canonical/readingOptionFigureCanonicalRequest.mjs'
 import { makeReadyCanonicalFixture } from '../test-fixtures/paper-canonical/foundationFixture.mjs'
 import {
   makeReadingOptionFigureFixture,
@@ -95,6 +100,40 @@ function assertContractRejected(mutator, expectedCode) {
     true,
     stableStringify(issues),
   )
+}
+
+function refreshReadyCompilationSemanticDigests(compilation, group) {
+  const {
+    sourceMap: _sourceMap,
+    sourceFingerprint: _sourceFingerprint,
+    semanticDigest: _semanticDigest,
+    ...semanticGroup
+  } = group
+  group.semanticDigest = digestJson(semanticGroup)
+  const report = compilation.artifacts.normalizationReport
+  report.semanticDigest = digestJson({
+    groups: compilation.artifacts.canonicalPaper.questionGroups.map(
+      (candidate) => candidate.semanticDigest,
+    ),
+    reviewDecisionDigest: digestJson(report.reviewDecisions),
+    inactiveSourceClosureDigests: report.inactiveSourceClosures.map(
+      (closure) => closure.closureDigest,
+    ),
+  })
+}
+
+function assertLiveSealRejected({ compilation, sourceAsset, proof }) {
+  assert.equal(isLiveConfirmedReadingOptionFigureAdmission({
+    proof,
+    compilation,
+    sourceAsset,
+  }), false)
+  assert.throws(() => sealCanonicalPublication({
+    compilation,
+    sourceAssetVersion: 1,
+    sourceAsset,
+    readingOptionFigureConfirmationProof: proof,
+  }), (error) => error?.code === 'CANONICAL_PUBLICATION_AUTHORITY_RETIRED')
 }
 
 assert.equal(canonicalAuthorityRef.manifestVersion, '36')
@@ -192,6 +231,75 @@ for (const [index, option] of canonicalOptions.entries()) {
   )
   assert.equal(canonicalGroup.media[index].sha256, fixture.selectedArtifacts[index].sha256)
 }
+
+const liveFixture = makeReadingOptionFigureFixture()
+const liveAdmission = admitLiveConfirmedReadingOptionFigureImport({
+  request: liveFixture.request,
+  candidatePackage: liveFixture.candidatePackage,
+  teacherConfirmation: liveFixture.teacherConfirmation,
+  sourceAsset: liveFixture.sourceAsset,
+})
+assert.equal(liveAdmission.compilation.disposition, 'ready')
+assert.equal(isLiveConfirmedReadingOptionFigureAdmission({
+  proof: liveAdmission.proof,
+  compilation: liveAdmission.compilation,
+  sourceAsset: liveAdmission.sourceAsset,
+}), true)
+const exactCompilationClone = structuredClone(liveAdmission.compilation)
+assert.equal(isLiveConfirmedReadingOptionFigureAdmission({
+  proof: liveAdmission.proof,
+  compilation: exactCompilationClone,
+  sourceAsset: liveAdmission.sourceAsset,
+}), true)
+assert.equal(sealCanonicalPublication({
+  compilation: exactCompilationClone,
+  sourceAssetVersion: 1,
+  sourceAsset: liveAdmission.sourceAsset,
+  readingOptionFigureConfirmationProof: liveAdmission.proof,
+}).manifest.schemaVersion, 'canonical-paper-publication-v46')
+
+assert.throws(() => {
+  liveAdmission.proof.mutated = true
+}, TypeError)
+assertLiveSealRejected({
+  compilation: exactCompilationClone,
+  sourceAsset: liveAdmission.sourceAsset,
+  proof: Object.freeze({}),
+})
+const changedSourceAsset = new Uint8Array(liveAdmission.sourceAsset)
+changedSourceAsset[changedSourceAsset.byteLength - 1] ^= 1
+assertLiveSealRejected({
+  compilation: exactCompilationClone,
+  sourceAsset: changedSourceAsset,
+  proof: liveAdmission.proof,
+})
+
+const changedConfirmationFixture = makeReadingOptionFigureFixture()
+changedConfirmationFixture.teacherConfirmation.decisions[0].selectedCandidateDigest =
+  changedConfirmationFixture.candidatePackage.candidates[1].candidateDigest
+assert.throws(() => admitLiveConfirmedReadingOptionFigureImport({
+  request: changedConfirmationFixture.request,
+  candidatePackage: changedConfirmationFixture.candidatePackage,
+  teacherConfirmation: changedConfirmationFixture.teacherConfirmation,
+  sourceAsset: changedConfirmationFixture.sourceAsset,
+}), /confirm|selection/iu)
+
+const mutatedCanonicalGroup = liveAdmission.compilation.artifacts.canonicalPaper.questionGroups.find(
+  (group) => group.identity.groupId === readingOptionFigureFixtureOracle.groupId,
+)
+const mutatedOptions = mutatedCanonicalGroup.variant.choiceOwnership.sets[0].options
+const firstMediaId = mutatedOptions[0].figure.mediaId
+mutatedOptions[0].figure.mediaId = mutatedOptions[3].figure.mediaId
+mutatedOptions[3].figure.mediaId = firstMediaId
+refreshReadyCompilationSemanticDigests(
+  liveAdmission.compilation,
+  mutatedCanonicalGroup,
+)
+assertLiveSealRejected({
+  compilation: liveAdmission.compilation,
+  sourceAsset: liveAdmission.sourceAsset,
+  proof: liveAdmission.proof,
+})
 
 const admission = admitCanonicalPaperImport({
   request: fixture.request,
