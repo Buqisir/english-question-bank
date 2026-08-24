@@ -172,7 +172,7 @@ function sourceEvidenceDescriptors(sourceCapture) {
   }).sort((left, right) => left.documentId.localeCompare(right.documentId))
 }
 
-function validateSourceCaptureIntegrity(sourceCapture, { requireEmbeddedEvidence = true } = {}) {
+export function validateSourceCaptureIntegrity(sourceCapture, { requireEmbeddedEvidence = true } = {}) {
   if (!sourceCapture || sourceCapture.digest !== digestJson(withoutKey(withoutKey(sourceCapture, 'captureId'), 'digest'))) throw publicationError('CANONICAL_PUBLICATION_CAPTURE_DIGEST_INVALID', 'Source Capture digest differs from its immutable content')
   const expectedCaptureId = `source-capture:${sourceCapture.digest.slice('sha256:'.length, 28)}`
   if (sourceCapture.captureId !== expectedCaptureId) throw publicationError('CANONICAL_PUBLICATION_CAPTURE_ID_INVALID', 'Source Capture identity does not derive from its immutable content')

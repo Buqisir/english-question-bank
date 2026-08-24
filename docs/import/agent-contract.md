@@ -6,6 +6,7 @@
 
 - 数据契约：`docs/product/nck1-paper-standard.md`（导题过程中不改；owner 拍板修订后以新文本为准）
 - 阅读 Word 细线框（框里只有能打的字和矩形表）：写成 Canonical `framed_columns`（nck1 §8）；观感见 `docs/product/exam-paper-format-standards.md` §3c。不要截整图当 Canonical 正文，不要为单卷改 CSS。下一卷步骤见 `docs/cuts/reading-framed-columns/spec.md`「下一卷怎么干」。
+- 视觉路由与确认：段落、真表格和已接受的 `framed_columns` 继续写结构化内容；只有语义依赖空间或图像的示意图、统计图、图画、照片进入 Figure 路线。先保留绑定 Source Capture 的精确源裁图，再把 `source_crop`、`vector_authored` 或 `reference_restored` PNG 候选连同 Passage / Reading Option owner、digest、尺寸和 source-truth checklist 交给老师按 exact bytes 确认。源裁图是正常 fallback；拒绝、漏选或证据变化必须停在 unresolved，不得自动选图、推断答案、写 Transformation Record 或进入 Canonical media。生成与确认只在本机导题后台 seam，网站仍只消费已确认 Canonical。
 - 格式②（PDF 试题卷 + 独立答案 PDF）逐步 how-to：`docs/import/agent-runbook.md`
 - 格式①（DOCX 答案版）切卷 / 校验 / 打包工序：`scripts/import-pipeline/README.md` stages 1–5，以及 runbook 里与格式无关的门禁（`validate-one`、dry-run、`verify-publish-gate`、`verify-nck1`、`--publish` 纪律）。canonical 物化用 `scripts/import-pipeline/build-trusted-docx-canonical-request.mjs`，不要套用格式② PDF envelope。
 - 格式③（试题 DOCX + 答案解析 DOCX）：映射见标准附录 A。切卷用 `scripts/import-pipeline/03-split-docx-pair.mjs`。canonical 物化用 `scripts/import-pipeline/build-docx-pair-canonical-request.mjs`（开局 `paperId` 必填，不走格式①标题派生，不套用格式② PDF envelope）。

@@ -39,6 +39,7 @@ const registry = {
   'scripts/verify-production-canonical-publication-backfill.mjs',
   'scripts/verify-paper-canonical-import-pilot-fixes.mjs',
   'scripts/verify-paper-canonical-docx-source-adapter.mjs',
+  'scripts/verify-paper-canonical-visual-candidate.mjs',
   'scripts/verify-paper-canonical-trusted-docx-request.mjs',
   'scripts/verify-paper-canonical-docx-pair-request.mjs',
   'scripts/verify-paper-canonical-legacy-source-capture-adapter.mjs',
