@@ -145,6 +145,9 @@ async function figureGeometry(page, surface) {
   const imageSelector = surface === 'screen'
     ? '.ps-option-figure-image'
     : '.canonical-figure-option-image'
+  const labelSelector = surface === 'screen'
+    ? '.ps-option-label--figure'
+    : '.canonical-figure-option-label'
   return root.evaluate((element, selectors) => {
     const rect = (target) => {
       const value = target.getBoundingClientRect()
@@ -153,14 +156,24 @@ async function figureGeometry(page, surface) {
         y: value.y,
         width: value.width,
         height: value.height,
+        right: value.right,
         bottom: value.bottom,
       }
     }
+    const viewport = selectors.screen
+      ? element.parentElement
+      : element
     return {
       list: rect(element),
-      clientWidth: element.parentElement?.clientWidth ?? element.clientWidth,
-      scrollWidth: element.parentElement?.scrollWidth ?? element.scrollWidth,
+      viewport: rect(viewport),
+      paper: rect(element.closest(selectors.screen ? '.ps-page' : 'body')),
+      question: rect(element.closest(
+        selectors.screen ? '.ps-question' : '.question',
+      )),
+      clientWidth: viewport.clientWidth,
+      scrollWidth: viewport.scrollWidth,
       items: [...element.querySelectorAll(selectors.itemSelector)].map(rect),
+      labels: [...element.querySelectorAll(selectors.labelSelector)].map(rect),
       boxes: [...element.querySelectorAll(selectors.boxSelector)].map(rect),
       images: [...element.querySelectorAll(selectors.imageSelector)].map(
         (image) => ({
@@ -174,7 +187,19 @@ async function figureGeometry(page, surface) {
         }),
       ),
     }
-  }, { itemSelector, boxSelector, imageSelector })
+  }, {
+    itemSelector,
+    labelSelector,
+    boxSelector,
+    imageSelector,
+    screen: surface === 'screen',
+  })
+}
+
+function intersectionArea(left, right) {
+  const width = Math.max(0, Math.min(left.right, right.right) - Math.max(left.x, right.x))
+  const height = Math.max(0, Math.min(left.bottom, right.bottom) - Math.max(left.y, right.y))
+  return width * height
 }
 
 function assertEqualTracks(geometry, label) {
@@ -316,6 +341,7 @@ async function verifyActualSurfaces() {
       url.searchParams.set('groupId', screenGroup.groupId)
       await page.goto(url.href)
       const list = page.locator('[data-canonical-layout-id="reading-option-figure-layout"]')
+      const scrollViewport = page.locator('.ps-option-figure-scroll')
       await list.waitFor()
       assert.equal(await page.locator('[data-canonical-correct-option-id]').count(), 0)
       assert.equal(await page.locator('.ps-option-list--figure').count(), 1)
@@ -324,6 +350,9 @@ async function verifyActualSurfaces() {
         await page.locator('.ps-option-label--figure').allTextContents(),
         ['A.', 'B.', 'C.', 'D.'],
       )
+      assert.equal(await scrollViewport.getAttribute('role'), 'group')
+      assert.equal(await scrollViewport.getAttribute('aria-label'), 'Figure options A to D')
+      assert.equal(await scrollViewport.getAttribute('tabindex'), '0')
       assert.deepEqual(
         await page.locator('.ps-option-figure-image').evaluateAll(
           (images) => images.map((image) => image.getAttribute('src')),
@@ -348,7 +377,73 @@ async function verifyActualSurfaces() {
         assert.ok(geometry.scrollWidth <= geometry.clientWidth + 1)
       } else {
         assert.ok(geometry.items[0].width >= 48 * (96 / 72) - 0.5)
+        assert.ok(geometry.clientWidth > 0, 'extreme scroll viewport has visible width')
         assert.ok(geometry.scrollWidth > geometry.clientWidth)
+        assert.ok(
+          intersectionArea(geometry.viewport, geometry.paper) > 0,
+          'extreme scroll viewport intersects the visible paper',
+        )
+        assert.ok(
+          intersectionArea(geometry.viewport, geometry.question) > 0,
+          'extreme scroll viewport intersects the Figure question',
+        )
+        assert.ok(
+          intersectionArea(geometry.viewport, geometry.items[0]) > 0,
+          'extreme viewport exposes the first Option track',
+        )
+        assert.ok(
+          intersectionArea(geometry.viewport, geometry.labels[0]) > 0,
+          'extreme viewport exposes the real A. label',
+        )
+        await scrollViewport.focus()
+        assert.equal(
+          await scrollViewport.evaluate((element) => document.activeElement === element),
+          true,
+          'extreme horizontal viewport is keyboard focusable',
+        )
+        const beforeKeyboardScroll = await scrollViewport.evaluate(
+          (element) => element.scrollLeft,
+        )
+        await page.keyboard.press('ArrowRight')
+        await page.waitForFunction(
+          () => {
+            const viewport = document.querySelector('.ps-option-figure-scroll')
+            return viewport && viewport.scrollLeft >= Math.min(
+              16,
+              viewport.scrollWidth - viewport.clientWidth,
+            )
+          },
+        )
+        const afterArrowRight = await scrollViewport.evaluate(
+          (element) => element.scrollLeft,
+        )
+        assert.ok(afterArrowRight > beforeKeyboardScroll)
+        await page.keyboard.press('ArrowLeft')
+        await page.waitForFunction(
+          () => document.querySelector('.ps-option-figure-scroll')?.scrollLeft === 0,
+        )
+        const afterArrowLeft = await scrollViewport.evaluate(
+          (element) => element.scrollLeft,
+        )
+        assert.equal(afterArrowLeft, 0, 'ArrowLeft returns keyboard scroll to Option A')
+        await scrollViewport.evaluate((element) => element.blur())
+        if (persistActualArtifacts) {
+          writeFileSync(
+            path.join(artifactRoot, 'screen-extreme-overflow-geometry.json'),
+            `${JSON.stringify({
+              viewportWidth: geometry.clientWidth,
+              scrollWidth: geometry.scrollWidth,
+              questionWidth: geometry.question.width,
+              visibleFirstTrackWidth: geometry.items[0].width,
+              visibleFirstLabel: 'A.',
+              keyboardScroll: {
+                before: beforeKeyboardScroll,
+                afterArrowRight,
+                afterArrowLeft,
+              },
+            }, null, 2)}\n`,
+          )
+        }
       }
       if (persistActualArtifacts) {
         await page.screenshot({

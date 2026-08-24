@@ -586,6 +586,15 @@ button.ps-paper-blank.ps-paper-blank--clickable {
      不扫，但硬编码值仍是一处漂移源，归队到全站 motion token 词汇表。 */
 }
 
+/* At an extreme viewport the fixed paper margins can leave the question
+   content box at 0px. Figure comparison alone retains one 48pt track-sized
+   viewport; the remaining tracks stay inside its native horizontal scroller. */
+.ps-question--figure {
+  min-width: calc(
+    var(--ps-figure-row-start) + var(--ps-figure-min-track-width)
+  );
+}
+
 .ps-question--active::before {
   position: absolute;
   top: 0;
@@ -683,11 +692,22 @@ button.ps-paper-blank.ps-paper-blank--clickable {
    literal Reading Options retain the existing cascade above unchanged. */
 .ps-option-figure-scroll {
   box-sizing: border-box;
-  width: calc(100% - var(--ps-figure-row-start));
+  width: min(
+    var(--ps-figure-row-width),
+    max(
+      var(--ps-figure-min-track-width),
+      calc(100% - var(--ps-figure-row-start))
+    )
+  );
   max-width: var(--ps-figure-row-width);
   margin-left: var(--ps-figure-row-start);
   overflow-x: auto;
   overflow-y: hidden;
+}
+
+.ps-option-figure-scroll:focus-visible {
+  outline: 2px solid var(--ps-active-rail);
+  outline-offset: 2px;
 }
 
 .ps-option-list.ps-option-list--figure {

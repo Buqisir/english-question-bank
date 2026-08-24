@@ -1209,6 +1209,9 @@ function PaperSurfaceQuestionItem({
   //     surface for the question's focus delegate.
   const trimmedStem = question.stem.trim()
   const hasOptions = question.options.length > 0
+  const figureQuestionStyle = question.figurePlacement
+    ? figureOptionPlacementStyle(question.figurePlacement)
+    : undefined
 
   // Empty-stem policy (surface-question-policy cut) — mirrors the
   // Print/PDF policy (server/print-renderer.mjs's empty-stem
@@ -1232,7 +1235,8 @@ function PaperSurfaceQuestionItem({
 
   return (
     <li
-      className={isActive ? 'ps-question ps-question--active' : 'ps-question'}
+      className={`ps-question${isActive ? ' ps-question--active' : ''}${question.figurePlacement ? ' ps-question--figure' : ''}`}
+      style={figureQuestionStyle}
       {...{ [paperSurfaceAnchorAttrs.questionId]: question.id }}
       data-canonical-question-id={question.canonicalIdentity?.questionId}
       data-canonical-reading-rhythm-role={
@@ -1416,27 +1420,12 @@ function PaperSurfaceOptionList({
     ) {
       throw new Error(`Figure placement ${figurePlacement.signature} requires four Figure Options`)
     }
-    const figureStyle = {
-      '--ps-figure-row-width': `${figurePlacement.rowWidthPt}pt`,
-      '--ps-figure-row-start': `${figurePlacement.rowStartPt}pt`,
-      '--ps-figure-min-row-width':
-        `${figurePlacement.trackCount * figurePlacement.minTrackWidthPt}pt`,
-      '--ps-figure-min-track-width': `${figurePlacement.minTrackWidthPt}pt`,
-      '--ps-figure-track-width': `${figurePlacement.trackWidthPt}pt`,
-      '--ps-figure-label-font-size': `${figurePlacement.labelFontSizePt}pt`,
-      '--ps-figure-label-line-height': `${figurePlacement.labelLineHeightPt}pt`,
-      '--ps-figure-box-width': `${figurePlacement.imageBoxWidthPt}pt`,
-      '--ps-figure-box-height': `${figurePlacement.imageBoxHeightPt}pt`,
-      '--ps-figure-stem-gap': `${figurePlacement.stemToBankGapPt}pt`,
-      '--ps-figure-label-gap': `${figurePlacement.labelToBoxGapPt}pt`,
-      '--ps-figure-tail-gap': `${figurePlacement.questionTailGapPt}pt`,
-    } as CSSProperties
     return (
       <div
         className="ps-option-figure-scroll"
         role="group"
         aria-label="Figure options A to D"
-        style={figureStyle}
+        tabIndex={0}
       >
         <ol
           className="ps-option-list ps-option-list--figure"
@@ -1573,6 +1562,26 @@ function PaperSurfaceOptionList({
       })}
     </ol>
   )
+}
+
+function figureOptionPlacementStyle(
+  figurePlacement: NonNullable<PaperQuestion['figurePlacement']>,
+): CSSProperties {
+  return {
+    '--ps-figure-row-width': `${figurePlacement.rowWidthPt}pt`,
+    '--ps-figure-row-start': `${figurePlacement.rowStartPt}pt`,
+    '--ps-figure-min-row-width':
+      `${figurePlacement.trackCount * figurePlacement.minTrackWidthPt}pt`,
+    '--ps-figure-min-track-width': `${figurePlacement.minTrackWidthPt}pt`,
+    '--ps-figure-track-width': `${figurePlacement.trackWidthPt}pt`,
+    '--ps-figure-label-font-size': `${figurePlacement.labelFontSizePt}pt`,
+    '--ps-figure-label-line-height': `${figurePlacement.labelLineHeightPt}pt`,
+    '--ps-figure-box-width': `${figurePlacement.imageBoxWidthPt}pt`,
+    '--ps-figure-box-height': `${figurePlacement.imageBoxHeightPt}pt`,
+    '--ps-figure-stem-gap': `${figurePlacement.stemToBankGapPt}pt`,
+    '--ps-figure-label-gap': `${figurePlacement.labelToBoxGapPt}pt`,
+    '--ps-figure-tail-gap': `${figurePlacement.questionTailGapPt}pt`,
+  } as CSSProperties
 }
 
 /* ─── Option bank renderer (seven-options-on-paper) ────────────── */

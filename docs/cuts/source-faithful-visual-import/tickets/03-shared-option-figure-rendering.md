@@ -91,7 +91,7 @@ Implemented on `codex/sfvi-ticket-03` in this one-line implementation commit.
   collapse, and 260px horizontal overflow only at the 48pt floor. Screen and
   Student/Teacher Print HTML retain the same four data URLs, media digests,
   Option order, visible A-D labels, and neutral `Option A`…`Option D` alts.
-- Actual artifacts:
+- Initial actual artifacts:
   `node scripts/verify-paper-canonical-reading-option-figure-rendered-behavior.mjs --actual-artifacts`
   — PASS. Evidence is under
   `.scratch/source-faithful-visual-import-ticket-03/1d12fc40b31734feb16bdf89034989d821f37d28/`.
@@ -100,8 +100,28 @@ Implemented on `codex/sfvi-ticket-03` in this one-line implementation commit.
   `pdftotext -bbox-layout`, `pdfimages -list`, and 120dpi page rasters. The
   forced A4 marker is on page 2; Question 32 stem plus A-D bank move together
   to page 3. PDF contains exactly four images in A-D order at the projected
-  intrinsic dimensions. First-round visual QA passed; no second round was
-  required.
+  intrinsic dimensions. Desktop, fit-down, Print, and PDF visual evidence was
+  established here, but the initial extreme-overflow assertion did not reject
+  a zero-width scroll viewport.
+- A separate Merger Must Fix commit closes that extreme-only gap. At 260px,
+  fixed 91px PaperSurface side margins left the ordinary question content box
+  at 0px; `calc(100% - 17.3pt)` therefore produced a 0px Figure scroll
+  viewport even though its hidden content had `scrollWidth=256`. Figure-only
+  layout variables now live on `.ps-question--figure`; that question retains
+  `rowStart + one 48pt track` as its minimum, and the inner viewport uses
+  `max(48pt, available width)` while the four-track bank remains horizontally
+  scrollable. Text Options and other responsive behavior are untouched.
+  The viewport is focusable as a neutral labelled group and retains native
+  ArrowRight/ArrowLeft scrolling.
+- The focused verifier now rejects 0px client width, off-paper/off-question
+  viewports, invisible first Options/labels, and non-keyboard-scrollable
+  overflow. Final 260px geometry is question `87.0625px`, visible scroll
+  viewport `64px`, four-track scroll width `256px`, first track/label visible,
+  and keyboard scroll `0 → 16 → 0px`. The second and final visual QA round
+  passed against the updated screenshot and artifacts under
+  `.scratch/source-faithful-visual-import-ticket-03/44e213e953eecfc85efae648a9ae68b48d2ab15d/`,
+  including `screen-extreme-overflow.png` and
+  `screen-extreme-overflow-geometry.json`.
 - PDF evidence is deliberately bounded: Chromium may re-encode PDF image
   streams, so exact source PNG byte identity is asserted across Screen and
   Student/Teacher Print HTML data URLs, not across the PDF container. PDF
@@ -132,7 +152,8 @@ Implemented on `codex/sfvi-ticket-03` in this one-line implementation commit.
   ```
 
   The match was a documentation comment's literal `<img>`, not a rendered
-  element. The comment now says `figure image`; the detector was not rerun.
+  element. The comment now says `figure image`; the detector was not rerun,
+  including after the Merger Must Fix as explicitly required.
 - `pnpm -C app verify:paper` — overall FAIL with
   `PASS 78 / SKIP 0 / FAIL 1`. The sole failure is the unrelated local-data
   coverage failure in `scripts/verify-genre-truth.mjs`: 18 current database
@@ -144,6 +165,12 @@ Implemented on `codex/sfvi-ticket-03` in this one-line implementation commit.
   `SKIP 0`.
 - App build — PASS, with the existing unresolved-at-build-time Hengshui font
   and large-chunk warnings. `git diff --check` — PASS.
+- Merger Must Fix direct gates — PASS: focused verifier and
+  `--actual-artifacts`, Ticket 02 Figure contract, existing text Reading
+  Screen/Print/PDF behavior, adapter/layout declaration parity (16/16),
+  PaperSurface declaration parity (25/25), app build, and `git diff --check`.
+  The full Paper pack was intentionally not rerun for this scoped responsive
+  repair.
 - Remaining work is intentionally outside this ticket: Shenzhen Q33 candidate
   assets/canary belong to Ticket 04; candidate confirmation, production
   publication, deployment, R2 mutation, push, and merge were not performed.
