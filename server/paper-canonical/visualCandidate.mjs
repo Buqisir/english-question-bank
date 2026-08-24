@@ -18,6 +18,31 @@ const candidateMethods = new Set([
   'reference_restored',
 ])
 const pngSignature = [137, 80, 78, 71, 13, 10, 26, 10]
+const pngCriticalChunks = new Set(['IHDR', 'PLTE', 'IDAT', 'IEND'])
+const pngBeforePaletteAndIdatChunks = new Set(['cHRM', 'gAMA', 'iCCP', 'sBIT', 'sRGB'])
+const pngBeforeIdatChunks = new Set(['bKGD', 'hIST', 'pHYs', 'tRNS'])
+const pngSingletonChunks = new Set([
+  ...pngBeforePaletteAndIdatChunks,
+  'bKGD',
+  'hIST',
+  'pHYs',
+  'tIME',
+  'tRNS',
+])
+const pngBitDepthsByColorType = new Map([
+  [0, new Set([1, 2, 4, 8, 16])],
+  [2, new Set([8, 16])],
+  [3, new Set([1, 2, 4, 8])],
+  [4, new Set([8, 16])],
+  [6, new Set([8, 16])],
+])
+const pngCrcTable = Uint32Array.from({ length: 256 }, (_, index) => {
+  let value = index
+  for (let bit = 0; bit < 8; bit += 1) {
+    value = (value >>> 1) ^ ((value & 1) ? 0xedb88320 : 0)
+  }
+  return value >>> 0
+})
 const reproducibilityKeys = new Set([
   'editableVector',
   'prompt',
@@ -91,6 +116,14 @@ function decodeBase64(encodedBytes, label) {
   return bytes
 }
 
+function pngCrc32(bytes, start, end) {
+  let crc = 0xffffffff
+  for (let offset = start; offset < end; offset += 1) {
+    crc = pngCrcTable[(crc ^ bytes[offset]) & 0xff] ^ (crc >>> 8)
+  }
+  return (crc ^ 0xffffffff) >>> 0
+}
+
 function pngDimensions(bytes, label) {
   if (
     bytes.byteLength < 45
@@ -100,38 +133,151 @@ function pngDimensions(bytes, label) {
   }
   const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength)
   let offset = 8
-  let firstChunk = true
+  let chunkIndex = 0
+  let ihdrSeen = false
+  let plteSeen = false
+  let paletteEntries = 0
+  let idatSeen = false
+  let idatEnded = false
+  let idatByteLength = 0
+  let iendSeen = false
   let dimensions = null
-  let closed = false
-  while (offset + 12 <= bytes.byteLength) {
+  let bitDepth = null
+  let colorType = null
+  const ancillaryChunks = new Set()
+  while (offset < bytes.byteLength) {
+    if (offset + 12 > bytes.byteLength) {
+      fail('VISUAL_CANDIDATE_PNG_BYTES_INVALID', `${label} contains truncated PNG chunk framing`)
+    }
     const length = view.getUint32(offset)
-    const type = String.fromCharCode(...bytes.slice(offset + 4, offset + 8))
-    const next = offset + 12 + length
-    if (next > bytes.byteLength) {
+    if (length > 0x7fffffff) {
+      fail('VISUAL_CANDIDATE_PNG_BYTES_INVALID', `${label} contains an oversized PNG chunk`)
+    }
+    const typeBytes = bytes.slice(offset + 4, offset + 8)
+    if (
+      typeBytes.some((byte) => !(
+        (byte >= 65 && byte <= 90)
+        || (byte >= 97 && byte <= 122)
+      ))
+      || !(typeBytes[2] >= 65 && typeBytes[2] <= 90)
+    ) {
+      fail('VISUAL_CANDIDATE_PNG_BYTES_INVALID', `${label} contains an invalid PNG chunk type`)
+    }
+    const type = String.fromCharCode(...typeBytes)
+    const dataStart = offset + 8
+    const crcOffset = dataStart + length
+    const next = crcOffset + 4
+    if (crcOffset > bytes.byteLength - 4) {
       fail('VISUAL_CANDIDATE_PNG_BYTES_INVALID', `${label} contains a truncated PNG chunk`)
     }
-    if (firstChunk) {
-      if (type !== 'IHDR' || length !== 13) {
-        fail('VISUAL_CANDIDATE_PNG_BYTES_INVALID', `${label} does not begin with one PNG IHDR`)
+    if (view.getUint32(crcOffset) !== pngCrc32(bytes, offset + 4, crcOffset)) {
+      fail('VISUAL_CANDIDATE_PNG_BYTES_INVALID', `${label} contains a PNG chunk with an invalid CRC`)
+    }
+    const critical = typeBytes[0] >= 65 && typeBytes[0] <= 90
+    if (critical && !pngCriticalChunks.has(type)) {
+      fail('VISUAL_CANDIDATE_PNG_BYTES_INVALID', `${label} contains unsupported critical PNG chunk ${type}`)
+    }
+
+    if (type === 'IHDR') {
+      if (chunkIndex !== 0 || ihdrSeen || length !== 13) {
+        fail('VISUAL_CANDIDATE_PNG_BYTES_INVALID', `${label} must contain one 13-byte IHDR as its first PNG chunk`)
       }
-      const pixelWidth = view.getUint32(offset + 8)
-      const pixelHeight = view.getUint32(offset + 12)
+      const pixelWidth = view.getUint32(dataStart)
+      const pixelHeight = view.getUint32(dataStart + 4)
       if (pixelWidth < 1 || pixelHeight < 1) {
         fail('VISUAL_CANDIDATE_PNG_DIMENSIONS_INVALID', `${label} has no positive PNG dimensions`)
       }
-      dimensions = { pixelWidth, pixelHeight }
-      firstChunk = false
-    }
-    if (type === 'IEND') {
-      if (length !== 0 || next !== bytes.byteLength) {
-        fail('VISUAL_CANDIDATE_PNG_BYTES_INVALID', `${label} does not close exactly at PNG IEND`)
+      bitDepth = bytes[dataStart + 8]
+      colorType = bytes[dataStart + 9]
+      const compressionMethod = bytes[dataStart + 10]
+      const filterMethod = bytes[dataStart + 11]
+      const interlaceMethod = bytes[dataStart + 12]
+      if (
+        pixelWidth > 0x7fffffff
+        || pixelHeight > 0x7fffffff
+        || !pngBitDepthsByColorType.get(colorType)?.has(bitDepth)
+        || compressionMethod !== 0
+        || filterMethod !== 0
+        || ![0, 1].includes(interlaceMethod)
+      ) {
+        fail('VISUAL_CANDIDATE_PNG_BYTES_INVALID', `${label} contains unsupported PNG IHDR fields`)
       }
-      closed = true
+      dimensions = { pixelWidth, pixelHeight }
+      ihdrSeen = true
+    } else {
+      if (!ihdrSeen) {
+        fail('VISUAL_CANDIDATE_PNG_BYTES_INVALID', `${label} does not begin with PNG IHDR`)
+      }
+      if (type === 'PLTE') {
+        if (
+          plteSeen
+          || idatSeen
+          || [0, 4].includes(colorType)
+          || length === 0
+          || length % 3 !== 0
+          || length > 768
+        ) {
+          fail('VISUAL_CANDIDATE_PNG_BYTES_INVALID', `${label} contains an invalid or misordered PNG PLTE`)
+        }
+        paletteEntries = length / 3
+        if (colorType === 3 && paletteEntries > 2 ** bitDepth) {
+          fail('VISUAL_CANDIDATE_PNG_BYTES_INVALID', `${label} PNG PLTE exceeds its indexed bit depth`)
+        }
+        plteSeen = true
+      } else if (type === 'IDAT') {
+        if (idatEnded || (colorType === 3 && !plteSeen)) {
+          fail('VISUAL_CANDIDATE_PNG_BYTES_INVALID', `${label} contains non-consecutive or pre-palette PNG IDAT chunks`)
+        }
+        idatSeen = true
+        idatByteLength += length
+      } else if (type === 'IEND') {
+        if (iendSeen || length !== 0 || !idatSeen || idatByteLength === 0) {
+          fail('VISUAL_CANDIDATE_PNG_BYTES_INVALID', `${label} PNG IEND does not close one non-empty IDAT sequence`)
+        }
+        iendSeen = true
+      } else {
+        if (idatSeen) idatEnded = true
+        if (
+          (pngBeforePaletteAndIdatChunks.has(type) && (plteSeen || idatSeen))
+          || (pngBeforeIdatChunks.has(type) && idatSeen)
+        ) {
+          fail('VISUAL_CANDIDATE_PNG_BYTES_INVALID', `${label} contains misordered PNG ancillary chunk ${type}`)
+        }
+        if (pngSingletonChunks.has(type)) {
+          if (ancillaryChunks.has(type)) {
+            fail('VISUAL_CANDIDATE_PNG_BYTES_INVALID', `${label} repeats singleton PNG chunk ${type}`)
+          }
+          ancillaryChunks.add(type)
+        }
+        if ((type === 'iCCP' && ancillaryChunks.has('sRGB')) || (type === 'sRGB' && ancillaryChunks.has('iCCP'))) {
+          fail('VISUAL_CANDIDATE_PNG_BYTES_INVALID', `${label} combines mutually exclusive PNG color-space chunks`)
+        }
+        if (type === 'hIST' && (!plteSeen || length !== paletteEntries * 2)) {
+          fail('VISUAL_CANDIDATE_PNG_BYTES_INVALID', `${label} PNG hIST does not match one preceding palette`)
+        }
+        if (type === 'tRNS') {
+          const validTransparency = (
+            (colorType === 0 && length === 2)
+            || (colorType === 2 && length === 6)
+            || (colorType === 3 && plteSeen && length > 0 && length <= paletteEntries)
+          )
+          if (!validTransparency) {
+            fail('VISUAL_CANDIDATE_PNG_BYTES_INVALID', `${label} PNG tRNS is invalid for its color type`)
+          }
+        }
+      }
+    }
+
+    offset = next
+    chunkIndex += 1
+    if (iendSeen) {
+      if (offset !== bytes.byteLength) {
+        fail('VISUAL_CANDIDATE_PNG_BYTES_INVALID', `${label} contains bytes after PNG IEND`)
+      }
       break
     }
-    offset = next
   }
-  if (!dimensions || !closed) {
+  if (!dimensions || !ihdrSeen || !idatSeen || idatByteLength === 0 || !iendSeen) {
     fail('VISUAL_CANDIDATE_PNG_BYTES_INVALID', `${label} is not a complete PNG artifact`)
   }
   return dimensions

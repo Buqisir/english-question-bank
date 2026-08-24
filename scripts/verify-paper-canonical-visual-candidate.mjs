@@ -40,6 +40,66 @@ function rebindCandidateRecord(candidate, index) {
   return rebindPackage(rebound)
 }
 
+function pngChunks(bytes) {
+  const chunks = []
+  let offset = 8
+  while (offset + 12 <= bytes.byteLength) {
+    const length = bytes.readUInt32BE(offset)
+    const type = bytes.subarray(offset + 4, offset + 8).toString('ascii')
+    const next = offset + length + 12
+    chunks.push({ type, bytes: bytes.subarray(offset, next) })
+    offset = next
+  }
+  return chunks
+}
+
+function crc32(bytes) {
+  let crc = 0xffffffff
+  for (const byte of bytes) {
+    crc ^= byte
+    for (let bit = 0; bit < 8; bit += 1) {
+      crc = (crc >>> 1) ^ ((crc & 1) ? 0xedb88320 : 0)
+    }
+  }
+  return (crc ^ 0xffffffff) >>> 0
+}
+
+function pngChunk(type, data = Buffer.alloc(0)) {
+  const typeBytes = Buffer.from(type, 'ascii')
+  const chunk = Buffer.alloc(data.byteLength + 12)
+  chunk.writeUInt32BE(data.byteLength, 0)
+  typeBytes.copy(chunk, 4)
+  data.copy(chunk, 8)
+  chunk.writeUInt32BE(crc32(Buffer.concat([typeBytes, data])), data.byteLength + 8)
+  return chunk
+}
+
+function pngFromChunks(signature, chunks) {
+  return Buffer.concat([signature, ...chunks.map((chunk) => chunk.bytes ?? chunk)])
+}
+
+function artifactFromPngBytes(bytes, originalArtifact) {
+  return {
+    ...structuredClone(originalArtifact),
+    encodedBytes: bytes.toString('base64'),
+    byteLength: bytes.byteLength,
+    sha256: sha256(new Uint8Array(bytes)),
+  }
+}
+
+function assertRejectedPng(bytes, message) {
+  const invalid = makeVisualCandidateFixture()
+  invalid.request.candidates[1].artifact = artifactFromPngBytes(
+    bytes,
+    invalid.request.candidates[1].artifact,
+  )
+  assertCode(
+    () => createVisualImportCandidate(invalid.request),
+    'VISUAL_CANDIDATE_PNG_BYTES_INVALID',
+    message,
+  )
+}
+
 function confirmationFor(candidate, selections) {
   return {
     schemaVersion: 'visual-teacher-confirmation-v1',
@@ -55,6 +115,55 @@ function confirmationFor(candidate, selections) {
 
 const fixture = makeVisualCandidateFixture()
 const candidate = createVisualImportCandidate(fixture.request)
+
+const validPng = Buffer.from(fixture.sourceArtifacts.vector.encodedBytes, 'base64')
+const signature = validPng.subarray(0, 8)
+const validChunks = pngChunks(validPng)
+const ihdr = validChunks.find((chunk) => chunk.type === 'IHDR')
+const idat = validChunks.find((chunk) => chunk.type === 'IDAT')
+const iend = validChunks.find((chunk) => chunk.type === 'IEND')
+
+assertRejectedPng(
+  pngFromChunks(signature, [ihdr, iend]),
+  'PNG framing without any IDAT payload must fail closed',
+)
+
+const badCrc = Buffer.from(validPng)
+badCrc[29] ^= 0x01
+assertRejectedPng(
+  badCrc,
+  'every PNG chunk CRC must be verified against the exact retained bytes',
+)
+
+assertRejectedPng(
+  validPng.subarray(0, validPng.byteLength - 3),
+  'truncated PNG chunk framing must fail closed',
+)
+
+assertRejectedPng(
+  Buffer.concat([validPng, Buffer.from([0])]),
+  'bytes trailing PNG IEND must fail closed',
+)
+
+assertRejectedPng(
+  pngFromChunks(signature, [idat, ihdr, iend]),
+  'IHDR must be the single first PNG chunk',
+)
+
+assertRejectedPng(
+  pngFromChunks(signature, [ihdr, idat, pngChunk('tEXt'), idat, iend]),
+  'IDAT chunks must remain consecutive',
+)
+
+assertRejectedPng(
+  pngFromChunks(signature, [ihdr, ihdr, idat, iend]),
+  'duplicate IHDR chunks must fail closed',
+)
+
+assertRejectedPng(
+  pngFromChunks(signature, [ihdr, pngChunk('ABCD'), idat, iend]),
+  'unknown critical PNG chunks must fail closed',
+)
 
 assert.equal(candidate.schemaVersion, 'visual-import-candidate-v1')
 assert.equal(candidate.status, 'awaiting_teacher_confirmation')

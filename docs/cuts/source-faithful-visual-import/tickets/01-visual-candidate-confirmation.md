@@ -66,7 +66,8 @@ runbook, status database, website import UI, or runtime model endpoint.
 
 ## Result
 
-Implemented in this commit.
+Implemented in source commit `24ffca7e`; the PNG integrity Must Fix is closed
+in the following repair commit.
 
 - Added the backend-only `visual-import-candidate-v1` →
   `visual-teacher-confirmation-v1` seam with fresh Source Capture, PNG byte,
@@ -90,6 +91,16 @@ Implemented in this commit.
   local-data coverage failure was the only failure. The new focused verifier
   and the other 75 Paper scripts passed.
 - `git diff --check` — PASS.
+- Merger Must Fix repair: PNG admission now validates every chunk frame and
+  CRC, requires one first-position IHDR, one non-empty consecutive IDAT
+  sequence, and one terminal IEND, validates core IHDR/PLTE ordering and fields,
+  and rejects truncated/trailing bytes, duplicate or misordered chunks, and
+  unknown critical chunks. Focused adversaries cover no-IDAT, bad-CRC,
+  truncation, trailing bytes, non-first/duplicate IHDR, split IDAT, and
+  unknown-critical cases.
+  Repair checks: focused verifier — PASS; Canonical publication direct test —
+  PASS; trusted DOCX Source Capture direct test — PASS; `git diff --check` —
+  PASS. The unrelated full-pack limitation recorded above was not rerun.
 - Remaining visual decisions: this generic contract admits no real paper media
   by itself. Shenzhen Q33 candidate production/Owner selection and the later
   Canonical/consumer handoff remain outside Ticket 01 and unresolved here.
