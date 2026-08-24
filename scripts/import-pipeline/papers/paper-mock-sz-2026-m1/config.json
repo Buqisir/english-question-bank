@@ -1,0 +1,19 @@
+{
+  "format": "2",
+  "paperPath": "/Users/huangxuewei/Desktop/试卷题库/05_真题模拟与试卷库/各地模拟/2026年3月高三试卷/26年3月高三试卷/26.3广东深圳高三一模英语试卷.pdf",
+  "answersPath": "/Users/huangxuewei/Desktop/试卷题库/05_真题模拟与试卷库/各地模拟/2026年3月高三试卷/26年3月高三试卷/26.3广东深圳高三一模英语答案解析.pdf",
+  "canonicalRequestPath": "./canonical-evidence/canonical-import-request.json",
+  "paperId": "paper-mock-sz-2026-m1",
+  "provenance": {
+    "sourceType": "模拟题",
+    "region": "深圳",
+    "paperName": "2026年3月深圳高三一模",
+    "year": 2026,
+    "defaultTags": [
+      "模拟",
+      "2026",
+      "深圳",
+      "一模"
+    ]
+  }
+}

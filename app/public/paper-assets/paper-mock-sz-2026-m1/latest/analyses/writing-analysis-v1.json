@@ -1,0 +1,687 @@
+{
+  "schemaVersion": "writing-analysis-v1",
+  "paperId": "paper-mock-sz-2026-m1",
+  "groups": {
+    "group-mock-sz-2026-m1-writing-application": {
+      "writing": {
+        "taskType": "application",
+        "modelAnswer": "Dear Alex,\nGlad to hear you’re visiting the National Museum of China! My top recommendation is the Han Dynasty Bronze Wild Goose-and-Fish Lamp.\nThis lamp is designed as a wild goose with a fish in its mouth. What’s special is how it works. When the lamp is lit, smoke rises through its neck and into its body, which is filled with water. There, the smoke is purified by the water, greatly reducing indoor air pollution.\nI find its design clever and eco-friendly. It truly reflects the wisdom of the ancient Chinese people. I’m sure you’ll like it!\nBest regards,\nLi Hua",
+        "officialModelAnswer": "Dear Alex,\n     Glad to hear you’re visiting the National Museum of China! My top recommendation is the Han Dynasty Bronze Wild Goose-and-Fish Lamp.\n     This lamp is designed as a wild goose with a fish in its mouth. What’s special is how it works.\n     When the lamp is lit, smoke rises through its neck and into its body, which is filled with water. There, the smoke is purified by the water, greatly reducing indoor air pollution.\n     I find its design clever and eco-friendly. It truly reflects the wisdom of the ancient Chinese people. I’m sure you’ll like it! （85 词）\n                                                                                                      Best regards,\n                                                                                                            Li Hua",
+        "reviewCard": {
+          "form": "回复邮件，保留 Dear Alex 与给定开场句",
+          "topic": "向朋友推荐国家博物馆的雁鱼青铜灯",
+          "reader": "计划参观国博的朋友 Alex",
+          "person": "第一人称 I",
+          "tense": "一般现在时为主，介绍外观与功能",
+          "type": "推荐信：外观加功能，再给个人评价",
+          "points": [
+            "结合外观介绍这盏汉代雁鱼青铜灯",
+            "说明衔鱼导烟、腹水净气的功能"
+          ],
+          "readerWho": "外国朋友 Alex，要选一件展品重点看",
+          "readerCares": "这件展品长什么样、有什么特别之处",
+          "readerWants": "得到一个具体、好记、值得一看的推荐",
+          "value": "用一件文物讲清古代设计里的环保智慧"
+        }
+      }
+    },
+    "group-mock-sz-2026-m1-writing-continuation": {
+      "writing": {
+        "taskType": "continuation",
+        "modelAnswer": "For the next week, Megan and Liam busied themselves with the project. They spent a day cleaning the dusty chairs and tables, arranging them to create two areas: one for reading and one for acting. They carefully selected children’s books for the reading corner where kids could read and share stories. Megan brought an old carpet from home to serve as a “stage” for acting. With everything ready, they decided to hold the opening on the coming Saturday and made colorful posters inviting everyone. “Liam, you can be the first to act out your dinosaur story,” Megan suggested. Liam agreed, already looking forward to the big day.\nOn the opening day of the project, they waited nervously in the garden. When the first few children arrived, Liam eagerly showed them the reading area. As more kids gathered, Megan invited some to sit around the acting area and nodded for Liam to begin. “Did you know I’m a dinosaur that can fly?” Liam, now in a simple dinosaur costume, began his performance with a clear, excited voice. The children watched, laughed, and were completely drawn into the story. The head librarian stopped by, smiling warmly. Megan’s heart was full. She understood that a library could also be a place where young readers discovered the pure joy of reading.",
+        "continuationAnalysis": {
+          "schemaVersion": "continuation-analysis-v1",
+          "storyUnderstanding": {
+            "centralSituation": {
+              "statement": "Megan guards a quiet library, while energetic Liam loves being there but keeps breaking the silence.",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "I really like being here"
+                }
+              ]
+            },
+            "sourceEndState": {
+              "statement": "Megan invites Liam into a Garden Reading Corner project, and his eyes already say yes.",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "the eager light in his eyes said everything"
+                }
+              ]
+            },
+            "narrativePerspective": {
+              "statement": "Third-person narration follows Megan’s view of Liam and the library.",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "The community library was Megan’s peaceful kingdom"
+                }
+              ]
+            },
+            "timeAndPlaceFrame": {
+              "statement": "Summer vacation in a community library, with an unused dusty garden at the back.",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "use the garden at the back of the library"
+                }
+              ]
+            },
+            "characters": [
+              {
+                "name": "Megan",
+                "role": "student volunteer who must turn Liam’s energy into a usable stage",
+                "establishedTraits": [
+                  {
+                    "statement": "She feels responsible for protecting the quiet.",
+                    "evidence": [
+                      {
+                        "source": "material",
+                        "excerpt": "feeling responsible for protecting this quiet"
+                      }
+                    ]
+                  }
+                ],
+                "motivations": [
+                  {
+                    "statement": "She wants a solution that does not simply silence Liam.",
+                    "evidence": [
+                      {
+                        "source": "material",
+                        "excerpt": "give his energy and love for books a positive stage"
+                      }
+                    ]
+                  }
+                ],
+                "currentState": {
+                  "statement": "She has just invited him, voice low but excited.",
+                  "evidence": [
+                    {
+                      "source": "material",
+                      "excerpt": "Want to do something really cool?"
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "Liam",
+                "role": "curious boy whose body cannot stay still in a silent reading room",
+                "establishedTraits": [
+                  {
+                    "statement": "He is not rude; he simply cannot sit still and loves books in bursts.",
+                    "evidence": [
+                      {
+                        "source": "material",
+                        "excerpt": "he just couldn’t sit still"
+                      }
+                    ]
+                  }
+                ],
+                "motivations": [
+                  {
+                    "statement": "He sincerely wants to stay in the library.",
+                    "evidence": [
+                      {
+                        "source": "material",
+                        "excerpt": "I really like being here"
+                      }
+                    ]
+                  }
+                ],
+                "currentState": {
+                  "statement": "He is too excited to answer at once, but his eyes agree.",
+                  "evidence": [
+                    {
+                      "source": "material",
+                      "excerpt": "the eager light in his eyes said everything"
+                    }
+                  ]
+                }
+              }
+            ],
+            "relationships": [
+              {
+                "participants": [
+                  "Megan",
+                  "Liam"
+                ],
+                "currentRelation": {
+                  "statement": "She has been reminding him, he has apologized, and they are about to become project partners.",
+                  "evidence": [
+                    {
+                      "source": "material",
+                      "excerpt": "really sorry"
+                    }
+                  ]
+                }
+              }
+            ],
+            "causalChain": [
+              {
+                "cause": {
+                  "statement": "Liam’s movement and sudden Whoa break the silence.",
+                  "evidence": [
+                    {
+                      "source": "material",
+                      "excerpt": "he let out a loud “Whoa!”"
+                    }
+                  ]
+                },
+                "effect": {
+                  "statement": "Other readers look over, and Megan has to remind him again.",
+                  "evidence": [
+                    {
+                      "source": "material",
+                      "excerpt": "each sound drew looks from other readers"
+                    }
+                  ]
+                }
+              },
+              {
+                "cause": {
+                  "statement": "A note asks for livelier reading activities and the garden is free to use.",
+                  "evidence": [
+                    {
+                      "source": "material",
+                      "excerpt": "Lively Reading Activities?"
+                    }
+                  ]
+                },
+                "effect": {
+                  "statement": "Megan connects Liam’s energy with a Garden Reading Corner.",
+                  "evidence": [
+                    {
+                      "source": "material",
+                      "excerpt": "Garden Reading Corner"
+                    }
+                  ]
+                }
+              }
+            ],
+            "unresolvedProblem": {
+              "statement": "The project exists only as an invitation; the garden is still dusty and unused.",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "all piled up gathering dust under a large tree"
+                }
+              ]
+            },
+            "usableClues": [
+              {
+                "statement": "Old chairs and folding tables are stored in the garden.",
+                "evidence": [
+                  {
+                    "source": "material",
+                    "excerpt": "some old chairs, folding tables"
+                  }
+                ]
+              },
+              {
+                "statement": "Liam focuses hard on dinosaurs, volcanoes, and rockets.",
+                "evidence": [
+                  {
+                    "source": "material",
+                    "excerpt": "a book on dinosaurs"
+                  }
+                ]
+              },
+              {
+                "statement": "The head librarian has already asked for book sharing and acting.",
+                "evidence": [
+                  {
+                    "source": "material",
+                    "excerpt": "Book sharing? Acting?"
+                  }
+                ]
+              }
+            ],
+            "meaningDirection": {
+              "statement": "A library can keep peace without forcing every young reader to be silent.",
+              "confidence": "stronglyInferred",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "give his energy and love for books a positive stage"
+                }
+              ]
+            },
+            "sourceStyle": {
+              "statement": "Warm third-person scenes, short dialogue, and concrete library details.",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "quiet whispers and turning pages"
+                }
+              ]
+            }
+          },
+          "continuationContract": {
+            "hardConstraints": [
+              {
+                "id": "hc-week-of-work",
+                "statement": "Paragraph one must show Megan and Liam working on the project for the next week.",
+                "evidence": [
+                  {
+                    "source": "paragraph1Starter",
+                    "excerpt": "Megan and Liam busied themselves with the project"
+                  }
+                ]
+              },
+              {
+                "id": "hc-opening-day",
+                "statement": "Paragraph two begins on opening day, with both waiting nervously in the garden.",
+                "evidence": [
+                  {
+                    "source": "paragraph2Starter",
+                    "excerpt": "they waited nervously in the garden"
+                  }
+                ]
+              },
+              {
+                "id": "hc-garden-stage",
+                "statement": "The solution must use the garden as a positive stage, not send Liam away.",
+                "evidence": [
+                  {
+                    "source": "material",
+                    "excerpt": "a positive stage"
+                  }
+                ]
+              }
+            ],
+            "softAffordances": [
+              {
+                "statement": "They can clean and arrange the stored chairs and tables.",
+                "evidence": [
+                  {
+                    "source": "material",
+                    "excerpt": "some old chairs, folding tables"
+                  }
+                ]
+              },
+              {
+                "statement": "Liam can act out a dinosaur story.",
+                "evidence": [
+                  {
+                    "source": "material",
+                    "excerpt": "giant dinosaur filled the page"
+                  }
+                ]
+              }
+            ],
+            "openChoices": [
+              "Whether other children come on opening day",
+              "Whether the head librarian appears",
+              "How Liam’s first performance is staged"
+            ],
+            "forbiddenContradictions": [
+              {
+                "id": "fc-silence-only",
+                "statement": "Do not solve the story by making Liam sit still and stay silent forever.",
+                "evidence": [
+                  {
+                    "source": "material",
+                    "excerpt": "the solution wasn’t to quiet Liam down"
+                  }
+                ]
+              },
+              {
+                "id": "fc-rude-liam",
+                "statement": "Do not recast Liam as a rude troublemaker.",
+                "evidence": [
+                  {
+                    "source": "material",
+                    "excerpt": "Liam wasn’t rude"
+                  }
+                ]
+              }
+            ],
+            "paragraphs": [
+              {
+                "paragraphIndex": 1,
+                "entryState": {
+                  "statement": "They have agreed in spirit and now must build the corner.",
+                  "evidence": [
+                    {
+                      "source": "paragraph1Starter",
+                      "excerpt": "busied themselves with the project"
+                    }
+                  ]
+                },
+                "starterFunction": {
+                  "statement": "The first starter jumps a week and forces visible preparation.",
+                  "evidence": [
+                    {
+                      "source": "paragraph1Starter",
+                      "excerpt": "For the next week"
+                    }
+                  ]
+                },
+                "requiredMoves": [
+                  {
+                    "id": "rm-clean-garden",
+                    "statement": "Show them turning dusty furniture into reading and acting spaces.",
+                    "evidence": [
+                      {
+                        "source": "material",
+                        "excerpt": "old chairs, folding tables"
+                      }
+                    ]
+                  }
+                ],
+                "requiredExitState": [
+                  {
+                    "id": "re-ready-to-open",
+                    "statement": "By the end of paragraph one the project is ready to open.",
+                    "evidence": [
+                      {
+                        "source": "paragraph2Starter",
+                        "excerpt": "On the opening day of the project"
+                      }
+                    ]
+                  }
+                ],
+                "supportedOptions": [
+                  {
+                    "statement": "Posters and a Saturday opening are allowed.",
+                    "evidence": [
+                      {
+                        "source": "material",
+                        "excerpt": "Garden Reading Corner"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "paragraphIndex": 2,
+                "entryState": {
+                  "statement": "They wait nervously in the finished garden.",
+                  "evidence": [
+                    {
+                      "source": "paragraph2Starter",
+                      "excerpt": "they waited nervously in the garden"
+                    }
+                  ]
+                },
+                "starterFunction": {
+                  "statement": "The second starter tests whether the stage works with real children.",
+                  "evidence": [
+                    {
+                      "source": "paragraph2Starter",
+                      "excerpt": "On the opening day of the project"
+                    }
+                  ]
+                },
+                "requiredMoves": [
+                  {
+                    "id": "rm-lively-use",
+                    "statement": "Young readers must actually use the corner, not sit in silence only.",
+                    "evidence": [
+                      {
+                        "source": "material",
+                        "excerpt": "Lively Reading Activities?"
+                      }
+                    ]
+                  }
+                ],
+                "requiredExitState": [
+                  {
+                    "id": "re-library-meaning",
+                    "statement": "Megan should see that the library can hold both quiet and joy.",
+                    "evidence": [
+                      {
+                        "source": "material",
+                        "excerpt": "a positive stage"
+                      }
+                    ]
+                  }
+                ],
+                "supportedOptions": [
+                  {
+                    "statement": "Liam may perform the dinosaur page that once made him shout.",
+                    "evidence": [
+                      {
+                        "source": "material",
+                        "excerpt": "giant dinosaur filled the page"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "closureRequirements": [
+              {
+                "id": "cr-belonging",
+                "statement": "End with Liam belonging in the library without being shamed for energy.",
+                "evidence": [
+                  {
+                    "source": "material",
+                    "excerpt": "I really like being here"
+                  }
+                ]
+              }
+            ]
+          },
+          "narrativeDevelopment": {
+            "coreTension": {
+              "statement": "Can Liam’s energy stay in the library if the space itself changes?",
+              "evidence": [
+                {
+                  "source": "material",
+                  "excerpt": "the solution wasn’t to quiet Liam down"
+                }
+              ]
+            },
+            "drivingMotivations": [
+              {
+                "statement": "Megan wants a usable stage for his love of books.",
+                "evidence": [
+                  {
+                    "source": "material",
+                    "excerpt": "a positive stage"
+                  }
+                ]
+              }
+            ],
+            "requiredTurningPoints": [
+              {
+                "statement": "Opening day must move from nervous waiting to children actually arriving.",
+                "evidence": [
+                  {
+                    "source": "paragraph2Starter",
+                    "excerpt": "they waited nervously in the garden"
+                  }
+                ]
+              }
+            ],
+            "eventChain": [
+              {
+                "cause": "The garden is full of unused furniture.",
+                "event": "They clean and arrange two areas.",
+                "immediateEffect": "The project becomes visible.",
+                "evidence": [
+                  {
+                    "source": "material",
+                    "excerpt": "old chairs, folding tables"
+                  }
+                ]
+              },
+              {
+                "cause": "Children arrive on opening day.",
+                "event": "Liam shows the reading area and then performs.",
+                "immediateEffect": "The garden becomes a lively reading place.",
+                "evidence": [
+                  {
+                    "source": "paragraph2Starter",
+                    "excerpt": "On the opening day of the project"
+                  }
+                ]
+              }
+            ],
+            "emotionLogic": [
+              {
+                "trigger": "Liam is invited to build something cool.",
+                "internalResponse": "He is too excited to speak.",
+                "visibleAction": "His eyes light up."
+              },
+              {
+                "trigger": "Opening day begins with an empty garden.",
+                "internalResponse": "Both feel nervous.",
+                "visibleAction": "They wait together."
+              }
+            ],
+            "relationshipMovement": [
+              {
+                "participants": [
+                  "Megan",
+                  "Liam"
+                ],
+                "from": "volunteer reminding a restless boy",
+                "to": "partners running a garden corner",
+                "cause": "They share one week of work and one opening."
+              }
+            ],
+            "interactionMoves": [
+              {
+                "speaker": "Megan",
+                "listener": "Liam",
+                "purpose": "Give him the first acting turn",
+                "relationshipNeed": "Show trust rather than control",
+                "expectedEffect": "He prepares a dinosaur story",
+                "evidence": [
+                  {
+                    "source": "material",
+                    "excerpt": "Want to do something really cool?"
+                  }
+                ]
+              }
+            ],
+            "cluePayoffs": [
+              {
+                "clue": {
+                  "source": "material",
+                  "excerpt": "Book sharing? Acting?"
+                },
+                "payoff": "Opening day includes both reading and acting."
+              },
+              {
+                "clue": {
+                  "source": "material",
+                  "excerpt": "giant dinosaur filled the page"
+                },
+                "payoff": "Liam acts the dinosaur instead of shouting indoors."
+              }
+            ],
+            "endingState": "The garden corner works, children enjoy it, and Megan sees a wider meaning of the library."
+          },
+          "languageAlignment": {
+            "personAndPerspective": "Keep third person, close to Megan, with Liam’s actions visible.",
+            "baseTense": "Simple past, matching the source story.",
+            "licensedTenseShifts": [
+              "Short present in dialogue",
+              "Past continuous for waiting"
+            ],
+            "narrativeDistanceAndRegister": "Warm, concrete, high-school narrative English.",
+            "sourceStyleContinuity": "Reuse library objects, short spoken lines, and Liam’s dinosaur interest.",
+            "cohesionPlan": [
+              {
+                "relation": "sequence",
+                "use": "For the next week → Saturday opening → first children arrive."
+              },
+              {
+                "relation": "cause",
+                "use": "Dusty furniture becomes the reason they spend a week cleaning."
+              },
+              {
+                "relation": "echo",
+                "use": "Whoa / dinosaur returns as a planned performance."
+              }
+            ],
+            "dialoguePolicy": "A few short lines only; Megan invites, Liam performs.",
+            "descriptionPriorities": [
+              "Dust, chairs, carpet, posters",
+              "Children’s faces and Liam’s costume or voice"
+            ],
+            "functionLedLanguage": [
+              "busied themselves, arranged, invited, nodded",
+              "nervously, eagerly, warmly"
+            ],
+            "languageRisks": [
+              "Do not turn paragraph one into a speech about library theory",
+              "Do not invent a new conflict that sends Liam away"
+            ]
+          },
+          "paragraphBlueprint": {
+            "selectedRoute": "Build the garden corner in a week, then let Liam open it with a dinosaur performance.",
+            "routeRationale": [
+              {
+                "statement": "The starters already lock a week of work and a nervous opening.",
+                "evidence": [
+                  {
+                    "source": "paragraph1Starter",
+                    "excerpt": "busied themselves with the project"
+                  }
+                ]
+              }
+            ],
+            "paragraphs": [
+              {
+                "paragraphIndex": 1,
+                "narrativeFunction": "Turn the dusty garden into a ready project.",
+                "eventMoves": [
+                  "Clean chairs and tables",
+                  "Set reading and acting areas",
+                  "Invite people to Saturday"
+                ],
+                "characterActionsAndReactions": [
+                  "Megan organizes and suggests Liam perform first",
+                  "Liam works hard and looks forward to the day"
+                ],
+                "evidenceToReuse": [
+                  {
+                    "source": "material",
+                    "excerpt": "old chairs, folding tables"
+                  }
+                ],
+                "stateChange": "From an idea to a finished garden corner.",
+                "bridgeToNext": "They are ready, so opening-day nerves make sense."
+              },
+              {
+                "paragraphIndex": 2,
+                "narrativeFunction": "Prove the stage works when children come.",
+                "eventMoves": [
+                  "Wait in the garden",
+                  "Welcome children",
+                  "Let Liam act"
+                ],
+                "characterActionsAndReactions": [
+                  "Liam shows the reading area and performs",
+                  "Megan feels the library can hold joy"
+                ],
+                "evidenceToReuse": [
+                  {
+                    "source": "material",
+                    "excerpt": "giant dinosaur filled the page"
+                  }
+                ],
+                "stateChange": "From nervous waiting to a living reading place.",
+                "bridgeToNext": "The story can rest on belonging and joy."
+              }
+            ],
+            "finalEffect": "Readers see energy welcomed, not punished.",
+            "validAlternativeRoutes": [
+              "A quieter book-sharing circle if acting stays light",
+              "The librarian’s smile as the only adult close"
+            ],
+            "qualityRisks": [
+              "Skipping the week of work and jumping to a speech",
+              "Making Liam suddenly perfectly still"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -113,8 +113,11 @@ agent 不得以"源卷长得不一样"为由自行放宽。与本标准冲突的
 
 ## 8. 图文条款(owner 2026-07-08 拍板:原料先存,渲染后建)
 
-- **边界**:表格 ≠ 图。行列结构能表达的是**表格**;统计图、示意图、
-  图画等视觉对象是**图**,走 figures 原料通道。
+- **边界**:表格 ≠ 图 ≠ 阅读细线框。行列结构能表达的是**表格**;
+  统计图、示意图、图画等视觉对象是**图**,走 figures 原料通道;
+  Word 左右细线框、框里只有能打的字和矩形表,是阅读
+  `framed_columns` 正文(见本条末),不是整图,也不要把整块焊成一张
+  假大表。
 - **图(figures 原料区)**:含图篇导入时,必须把图无损截存为图片
   文件,存入该卷 paper-assets 的 `figures/` 原料区;正文以占位
   标记(如 `[图:fig-1]`)记录图与篇章/题目的关联。一张图不许丢。
@@ -134,6 +137,20 @@ agent 不得以"源卷长得不一样"为由自行放宽。与本标准冲突的
   `exam-paper-format-standards.md`;网站详情页要求语义完整、
   图表在场、阅读友好,不要求仿真卷版式。
 
+- **阅读细线框正文(`framed_columns`,2026-08-16 落地)**:源是 Word
+  左右细线框、框里只有能打的字和矩形表时,Canonical 正文写成阅读
+  `framed_columns`(恰好两栏,栏内只有 `paragraph` / `table`)。示意图、
+  实物图、统计图仍走 figures。`paper-mock-sz-2026-m1` Reading A 的
+  Puzzle | Solution 落地后认两栏真字真表,不再把
+  `fig-paper-mock-sz-2026-m1-reading-a-puzzle-1` 当 Canonical 正文;PNG
+  留 `figures/` 作原料/证据,`[图:]` 只留在 `groups.json`。台灯与 Q33
+  流程图仍是图。两栏须在该格式 producer 里写明,不是从 PDF / DOCX
+  自动认文本框。栏内对照表无格、收窄稍居中、行距松开;表后问句只
+  略隔开,短栏底部可留白,禁止顶到框底。观感由共享渲染画出
+  (`exam-paper-format-standards.md` §3c);导题只写 Canonical
+  `framed_columns`,不为下一道同类题改 CSS。下一卷步骤见
+  `docs/cuts/reading-framed-columns/spec.md`「下一卷怎么干」。
+
 ## 附录 A:格式③ 试题 DOCX + 答案解析 DOCX(2026-08-13 owner 拍板)
 
 适用:各地模拟卷,卷面已是 NCK1 九题组(阅读 A–D / 七选五 / 完形 /
@@ -149,6 +166,9 @@ agent 不得以"源卷长得不一样"为由自行放宽。与本标准冲突的
   `listening/`,不编造(§4)。
 - **图**:源无内嵌图、表已在正文以文字出现 → 不建 `figures/`,
   不编造(§8)。
+- **阅读细线框**:Word 左右细线框、框里只有能打的字和矩形表 →
+  Canonical `framed_columns`(§8)。本格式不探测 DOCX 文本框,须在
+  pair producer 里写明两栏。不为单卷改 CSS。
 - **身份**:以开局 `paperId` 为准,不按真题标题派生
   `paper-YYYY-i` / `paper-zj-YYYY-jan`。
 - **出处**:`sourceType` 为模拟,provenance 标明出卷方;不得标成真题。

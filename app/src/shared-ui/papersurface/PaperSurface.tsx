@@ -66,6 +66,9 @@ import type {
 import type {
   CanonicalSurfaceParagraph,
   CanonicalReadingSurfaceBlock,
+  CanonicalReadingSurfaceColumnChildBlock,
+  CanonicalReadingSurfaceParagraphBlock,
+  CanonicalReadingSurfaceTableBlock,
 } from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 
 /**
@@ -173,6 +176,13 @@ type PaperSurfaceComponentProps = Omit<PaperSurfaceProps, 'blankFocusMode'> & {
       readonly nodeId: string
       readonly text: string
     }>
+    readonly figure?: {
+      readonly kind: 'figure'
+      readonly src: string
+      readonly alt: string
+    } | {
+      readonly kind: 'placeholder'
+    }
   }>
   /** Ordered canonical Continuation Writing material rendered without legacy parsing. */
   readonly canonicalContinuationMaterialBlocks?: ReadonlyArray<{
@@ -533,6 +543,160 @@ function CanonicalApplicationWritingPrompt({
   )
 }
 
+function renderCanonicalReadingInlines(
+  inlines: ReadonlyArray<{ nodeId: string; text: string }>,
+): ReactNode {
+  return inlines.map((inline) => (
+    <span
+      key={inline.nodeId}
+      data-canonical-content-node-id={inline.nodeId}
+    >
+      {inline.text}
+    </span>
+  ))
+}
+
+function CanonicalReadingParagraph({
+  block,
+  columnHeading = false,
+}: {
+  block: CanonicalReadingSurfaceParagraphBlock
+  columnHeading?: boolean
+}): ReactNode {
+  const className = columnHeading
+    ? 'ps-canonical-reading-column-heading'
+    : block.role === 'title'
+      ? 'ps-canonical-reading-title'
+      : block.role === 'subtitle'
+        ? 'ps-canonical-reading-subtitle'
+        : 'ps-canonical-reading-paragraph'
+  return (
+    <p
+      key={block.nodeId}
+      className={className}
+      data-canonical-block-id={block.nodeId}
+      data-canonical-block-kind="paragraph"
+      data-canonical-reading-role={block.role}
+      data-canonical-reading-rhythm-role={
+        block.role === 'title'
+          ? 'passage_title'
+          : block.role === 'subtitle'
+            ? 'passage_subtitle'
+            : 'passage_body_line'
+      }
+      {...(columnHeading ? { 'data-canonical-column-heading': '' } : {})}
+    >
+      {renderCanonicalReadingInlines(block.inlines)}
+    </p>
+  )
+}
+
+function CanonicalReadingTable({
+  block,
+}: {
+  block: CanonicalReadingSurfaceTableBlock
+}): ReactNode {
+  return (
+    <table
+      key={block.nodeId}
+      className="ps-canonical-reading-table"
+      data-canonical-block-id={block.nodeId}
+      data-canonical-block-kind="table"
+      data-canonical-reading-rhythm-role="native_table_line"
+      data-canonical-table-columns={block.columnCount}
+    >
+      <tbody>
+        {block.rows.map((row) => (
+          <tr key={row.rowId} data-canonical-row-id={row.rowId}>
+            {row.cells.map((cell) => (
+              <td
+                key={cell.cellId}
+                colSpan={cell.columnSpan}
+                rowSpan={cell.rowSpan}
+                data-canonical-cell-id={cell.cellId}
+                data-canonical-column-start={cell.columnStart}
+              >
+                {renderCanonicalReadingInlines(cell.inlines)}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )
+}
+
+function renderCanonicalReadingColumnChild(
+  block: CanonicalReadingSurfaceColumnChildBlock,
+  columnHeadingId?: string,
+): ReactNode {
+  if (block.kind === 'paragraph') {
+    return (
+      <CanonicalReadingParagraph
+        key={block.nodeId}
+        block={block}
+        columnHeading={columnHeadingId === block.nodeId}
+      />
+    )
+  }
+  if (block.kind === 'table') {
+    return <CanonicalReadingTable key={block.nodeId} block={block} />
+  }
+  throw new Error(
+    `Canonical Reading framed_columns child ${String((block as { kind?: string }).kind)} is not representable`,
+  )
+}
+
+function renderCanonicalReadingBlock(block: CanonicalReadingSurfaceBlock): ReactNode {
+  if (block.kind === 'paragraph') {
+    return <CanonicalReadingParagraph key={block.nodeId} block={block} />
+  }
+  if (block.kind === 'table') {
+    return <CanonicalReadingTable key={block.nodeId} block={block} />
+  }
+  if (block.kind === 'framed_columns') {
+    return (
+      <div
+        key={block.nodeId}
+        className="ps-canonical-reading-framed-columns"
+        data-canonical-block-id={block.nodeId}
+        data-canonical-block-kind="framed_columns"
+        data-canonical-column-count={block.columnCount}
+      >
+        {block.columns.map((column) => (
+          <div
+            key={column.columnId}
+            className="ps-canonical-reading-framed-column"
+            data-canonical-column-id={column.columnId}
+          >
+            {column.blocks.map((child) =>
+              renderCanonicalReadingColumnChild(child, column.columnHeading))}
+          </div>
+        ))}
+      </div>
+    )
+  }
+  if (block.kind === 'figure') {
+    const src =
+      `data:${block.mediaArtifact.mimeType};base64,`
+      + block.mediaArtifact.encodedBytes
+    return (
+      <figure
+        key={block.nodeId}
+        className="ps-canonical-reading-figure"
+        data-canonical-block-id={block.nodeId}
+        data-canonical-block-kind="figure"
+        data-canonical-media-id={block.mediaId}
+      >
+        <img src={src} alt="" />
+      </figure>
+    )
+  }
+  throw new Error(
+    `Canonical Reading block ${String((block as { kind?: string }).kind)} is not representable`,
+  )
+}
+
 function CanonicalReadingBlocks({
   blocks,
   passageLetter,
@@ -544,16 +708,6 @@ function CanonicalReadingBlocks({
 }): ReactNode {
   const precedingGeometry =
     readingPassageLetterGeometryForLetter(passageLetter, 'screen')
-  const renderInlines = (
-    inlines: ReadonlyArray<{ nodeId: string; text: string }>,
-  ): ReactNode => inlines.map((inline) => (
-    <span
-      key={inline.nodeId}
-      data-canonical-content-node-id={inline.nodeId}
-    >
-      {inline.text}
-    </span>
-  ))
   return (
     <>
       <div
@@ -584,78 +738,7 @@ function CanonicalReadingBlocks({
         className="ps-canonical-reading"
         data-canonical-reading-semantic-signature={semanticSignature}
       >
-        {blocks.map((block) => {
-        if (block.kind === 'paragraph') {
-          const className =
-            block.role === 'title'
-              ? 'ps-canonical-reading-title'
-              : block.role === 'subtitle'
-                ? 'ps-canonical-reading-subtitle'
-                : 'ps-canonical-reading-paragraph'
-          return (
-            <p
-              key={block.nodeId}
-              className={className}
-              data-canonical-block-id={block.nodeId}
-              data-canonical-block-kind="paragraph"
-              data-canonical-reading-role={block.role}
-              data-canonical-reading-rhythm-role={
-                block.role === 'title'
-                  ? 'passage_title'
-                  : block.role === 'subtitle'
-                    ? 'passage_subtitle'
-                    : 'passage_body_line'
-              }
-            >
-              {renderInlines(block.inlines)}
-            </p>
-          )
-        }
-        if (block.kind === 'table') {
-          return (
-            <table
-              key={block.nodeId}
-              className="ps-canonical-reading-table"
-              data-canonical-block-id={block.nodeId}
-              data-canonical-block-kind="table"
-              data-canonical-reading-rhythm-role="native_table_line"
-              data-canonical-table-columns={block.columnCount}
-            >
-              <tbody>
-                {block.rows.map((row) => (
-                  <tr key={row.rowId} data-canonical-row-id={row.rowId}>
-                    {row.cells.map((cell) => (
-                      <td
-                        key={cell.cellId}
-                        colSpan={cell.columnSpan}
-                        rowSpan={cell.rowSpan}
-                        data-canonical-cell-id={cell.cellId}
-                        data-canonical-column-start={cell.columnStart}
-                      >
-                        {renderInlines(cell.inlines)}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )
-        }
-        const src =
-          `data:${block.mediaArtifact.mimeType};base64,`
-          + block.mediaArtifact.encodedBytes
-        return (
-          <figure
-            key={block.nodeId}
-            className="ps-canonical-reading-figure"
-            data-canonical-block-id={block.nodeId}
-            data-canonical-block-kind="figure"
-            data-canonical-media-id={block.mediaId}
-          >
-            <img src={src} alt="" />
-          </figure>
-        )
-        })}
+        {blocks.map((block) => renderCanonicalReadingBlock(block))}
       </div>
     </>
   )

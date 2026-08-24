@@ -5,6 +5,7 @@
 机械步骤不要在本文件展开，按格式链到：
 
 - 数据契约：`docs/product/nck1-paper-standard.md`（导题过程中不改；owner 拍板修订后以新文本为准）
+- 阅读 Word 细线框（框里只有能打的字和矩形表）：写成 Canonical `framed_columns`（nck1 §8）；观感见 `docs/product/exam-paper-format-standards.md` §3c。不要截整图当 Canonical 正文，不要为单卷改 CSS。下一卷步骤见 `docs/cuts/reading-framed-columns/spec.md`「下一卷怎么干」。
 - 格式②（PDF 试题卷 + 独立答案 PDF）逐步 how-to：`docs/import/agent-runbook.md`
 - 格式①（DOCX 答案版）切卷 / 校验 / 打包工序：`scripts/import-pipeline/README.md` stages 1–5，以及 runbook 里与格式无关的门禁（`validate-one`、dry-run、`verify-publish-gate`、`verify-nck1`、`--publish` 纪律）。canonical 物化用 `scripts/import-pipeline/build-trusted-docx-canonical-request.mjs`，不要套用格式② PDF envelope。
 - 格式③（试题 DOCX + 答案解析 DOCX）：映射见标准附录 A。切卷用 `scripts/import-pipeline/03-split-docx-pair.mjs`。canonical 物化用 `scripts/import-pipeline/build-docx-pair-canonical-request.mjs`（开局 `paperId` 必填，不走格式①标题派生，不套用格式② PDF envelope）。
@@ -183,4 +184,4 @@ QA 之后 owner 必须另说「上线」（当前口头，不是历史聊天里�
 
 ## 禁止
 
-网站消费端改动；恢复网站导入 UI；后台直连 LLM API；单卷增量传输；导题时为过闸改 nck1 标准；格式①临时 canonical 映射；清单未允许时跑 `pull-run-push`；未获当前 owner 口头「上线」/「重试上线」动生产。
+网站消费端改动；恢复网站导入 UI；后台直连 LLM API；单卷增量传输；导题时为过闸改 nck1 标准；格式①临时 canonical 映射；清单未允许时跑 `pull-run-push`；未获当前 owner 口头「上线」/「重试上线」动生产；为下一道同类 Word 细线框改 PaperSurface / print-renderer。

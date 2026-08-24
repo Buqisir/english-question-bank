@@ -1,0 +1,1788 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-mock-sz-2026-m1",
+  "sourceAssetVersion": 10,
+  "targetGroups": [
+    "group-mock-sz-2026-m1-reading-a",
+    "group-mock-sz-2026-m1-reading-b",
+    "group-mock-sz-2026-m1-reading-c",
+    "group-mock-sz-2026-m1-reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai",
+    "model": "cursor-grok-4.6",
+    "reviewedBy": "format2-pdf-pair-import",
+    "reviewedAt": "2026-08-13T00:00:00Z"
+  },
+  "groups": {
+    "group-mock-sz-2026-m1-reading-a": {
+      "overview": "应用文。介绍国际语言学奥林匹克（IOL）：参赛不需专业知识，附入门字谜，再列个人赛与团体赛规则及奖牌比例。",
+      "discourseStructure": {
+        "summary": "先总述 IOL 与能力要求，再给字谜样例，然后分 Contest Rules 与 Awards 说明赛制与奖牌。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-1",
+            "summary": "IOL 面向大学前学生。",
+            "function": "点明赛事"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-1",
+            "summary": "自 2003 年起每年换国举办，个人与团体解题。",
+            "function": "补充赛制背景"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-1",
+            "summary": "解语言学谜题，不需专门知识。",
+            "function": "降低门槛"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-1",
+            "summary": "只需基本语言概念、逻辑、耐心与创想。",
+            "function": "列出必备能力"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-1",
+            "summary": "邀请读者试做样例。",
+            "function": "转入样例"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-fig-puzzle-1",
+            "summary": "字谜配图占位。",
+            "function": "图"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-2",
+            "summary": "Puzzle / Solution 双栏标题。",
+            "function": "样例标题"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-3",
+            "summary": "南美国名与格鲁吉亚语对照说明开始。",
+            "function": "样例材料"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-3",
+            "summary": "字母数一一对应。",
+            "function": "解题线索"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-3",
+            "summary": "格鲁吉亚语与字母对应。",
+            "function": "解题线索"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-4",
+            "summary": "Uruguay 中重复的 U 证明从左到右。",
+            "function": "书写方向"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-4",
+            "summary": "英译对照。",
+            "function": "样例材料"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-5",
+            "summary": "从左到右书写。",
+            "function": "书写方向"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-6",
+            "summary": "Brazil。",
+            "function": "样例词"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-6",
+            "summary": "Brazil 字母数较少但仍可推字母。",
+            "function": "解题线索"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-3",
+            "summary": "Peru。",
+            "function": "样例词"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-9",
+            "summary": "已知字母对应。",
+            "function": "解题线索"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-10",
+            "summary": "G、E 对应。",
+            "function": "解题线索"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-11",
+            "summary": "问该国英文名。",
+            "function": "样例设问"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-12",
+            "summary": "可用已知字母翻译。",
+            "function": "解题步骤"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-12",
+            "summary": "未知国名空格。",
+            "function": "样例设问"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-13",
+            "summary": "译成 Argentina。",
+            "function": "样例答案"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-14",
+            "summary": "Contest Rules。",
+            "function": "规则小标题"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-15",
+            "summary": "须选定工作语言。",
+            "function": "语言规则"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-15",
+            "summary": "开赛前两周不可改语言。",
+            "function": "语言时限"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-16",
+            "summary": "个人赛五题六小时，团体赛题量不同。",
+            "function": "时长对比"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-16",
+            "summary": "团体赛一题且少两小时。",
+            "function": "时长对比"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-17",
+            "summary": "多答得零分，须详细解释。",
+            "function": "作答规则"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-17",
+            "summary": "不解释会降分。",
+            "function": "作答规则"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-18",
+            "summary": "Awards。",
+            "function": "奖项小标题"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-19",
+            "summary": "团体赛金银铜上限。",
+            "function": "团体奖牌"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-19",
+            "summary": "个人赛奖牌比 1:2:3。",
+            "function": "个人奖牌比例"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-19",
+            "summary": "奖牌总数在四分之一到三分之一之间。",
+            "function": "个人奖牌区间"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-a-19",
+            "summary": "其他奖项链接。",
+            "function": "收束"
+          }
+        ]
+      }
+    },
+    "group-mock-sz-2026-m1-reading-b": {
+      "overview": "记叙文。七十多岁的作者与友人荒野徒步，先后克服恐高、遇熊与怕老，向导的赞赏让她感到仍被看见。",
+      "discourseStructure": {
+        "summary": "开篇点出三种恐惧，再写过桥、遇熊、取物反思，最后向导的话化解“过气”之惧。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-b-1",
+            "summary": "面对恐高、熊与衰老。",
+            "function": "点题"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-b-2",
+            "summary": "七十多岁仍决定出发。",
+            "function": "人物与动机"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-b-2",
+            "summary": "山路开车已吓人。",
+            "function": "起势"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-b-2",
+            "summary": "山路。",
+            "function": "场景"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-b-3",
+            "summary": "腐木桥高悬急流。",
+            "function": "恐高场景"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-b-3",
+            "summary": "靠向导鼓励才敢走。",
+            "function": "外部支持"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-b-3",
+            "summary": "盯着靴子一点点挪过。",
+            "function": "过桥动作"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-b-3",
+            "summary": "过后兴奋又释然。",
+            "function": "情绪收束"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-b-4",
+            "summary": "见熊迹后故意大声。",
+            "function": "转入怕熊"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-b-4",
+            "summary": "紧张消退成游戏。",
+            "function": "过渡"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-b-5",
+            "summary": "时间仿佛静止。",
+            "function": "转折"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-b-6",
+            "summary": "向导低声说有熊。",
+            "function": "遇熊"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-b-6",
+            "summary": "母熊与幼崽在上方。",
+            "function": "遇熊"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-b-7",
+            "summary": "害怕仍觉得它们美。",
+            "function": "心理"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-b-7",
+            "summary": "熊靠近，众人喊叫挥杆。",
+            "function": "反应"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-b-7",
+            "summary": "熊一愣后转身离开。",
+            "function": "结果"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-b-7",
+            "summary": "又克服一怕。",
+            "function": "收束"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-b-8",
+            "summary": "末晨被要求带回棍石叶。",
+            "function": "反思活动"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-b-8",
+            "summary": "用 stick/rock/leaf 谐音谈收获。",
+            "function": "活动说明"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-b-8",
+            "summary": "友谊与互助会留下。",
+            "function": "作者解读"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-b-8",
+            "summary": "希望留下恐惧。",
+            "function": "作者解读"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-b-9",
+            "summary": "向导称赞体能与态度。",
+            "function": "向导评价"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-b-9",
+            "summary": "希望几十年后像她们。",
+            "function": "向导评价"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-b-9",
+            "summary": "这话减轻“过气”之惧。",
+            "function": "点题 over the hill"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-b-9",
+            "summary": "被看见的成就感。",
+            "function": "收束"
+          }
+        ]
+      }
+    },
+    "group-mock-sz-2026-m1-reading-c": {
+      "overview": "说明文。布宜诺斯艾利斯大学用机器导师把失落半个多世纪的 chingolo 地方歌谣教回幼鸟，以保存鸟类文化多样性。",
+      "discourseStructure": {
+        "summary": "先交代失落歌声与社会功能，再写机器导师实验，最后报告幼鸟学会并带上种群口音。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-c-1",
+            "summary": "用机器导师教雄性 chingolo。",
+            "function": "总起"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-c-1",
+            "summary": "歌声曾是物种文化的一部分。",
+            "function": "背景"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-c-1",
+            "summary": "失落超过半个世纪。",
+            "function": "背景"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-c-2",
+            "summary": "雄鸟向成年雄鸟学两秒旋律。",
+            "function": "学习链"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-c-2",
+            "summary": "歌声像指纹，用来求偶护域。",
+            "function": "功能"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-c-2",
+            "summary": "城市化打断学习链。",
+            "function": "问题"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-c-2",
+            "summary": "地方方言消失。",
+            "function": "问题"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-c-3",
+            "summary": "要找回失落歌声。",
+            "function": "任务"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-c-3",
+            "summary": "只存在于 1960 年代唱片。",
+            "function": "材料来源"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-c-3",
+            "summary": "面向一群 chingolo。",
+            "function": "对象"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-c-4",
+            "summary": "按声道建模。",
+            "function": "方法"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-c-4",
+            "summary": "做成机器导师。",
+            "function": "方法"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-c-4",
+            "summary": "在关键学习期播放。",
+            "function": "实验"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-c-4",
+            "summary": "十月到二月，高峰时段。",
+            "function": "实验"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-c-4",
+            "summary": "最长八小时，中间随机停顿。",
+            "function": "实验"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-c-4",
+            "summary": "让鸟把播放当成真实交流。",
+            "function": "停顿目的"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-c-4",
+            "summary": "刺激发声回应。",
+            "function": "停顿目的"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-c-5",
+            "summary": "幼鸟学会并加入自己的口音。",
+            "function": "结果"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-c-5",
+            "summary": "末颤音带种群口音。",
+            "function": "结果"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-c-5",
+            "summary": "习得与先天共同塑造。",
+            "function": "结果"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-c-6",
+            "summary": "保存文化生物多样性。",
+            "function": "意义"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-c-6",
+            "summary": "继续用 AI 识别个鸟歌声。",
+            "function": "后续"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-c-6",
+            "summary": "防止鸟类文化再失落。",
+            "function": "收束"
+          }
+        ]
+      }
+    },
+    "group-mock-sz-2026-m1-reading-d": {
+      "overview": "说明文。新加坡国立大学用雨滴冲击细管形成 plug flow，大幅提高电荷分离效率，展示屋顶集雨发电的可能。",
+      "discourseStructure": {
+        "summary": "先用摩擦起电引入电荷分离，再对比连续流低效，然后解释 plug flow 装置，末段谈城市绿色能源前景。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-d-1",
+            "summary": "摩擦气球产生电。",
+            "function": "类比引入"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-d-1",
+            "summary": "解释电荷分离。",
+            "function": "概念"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-d-1",
+            "summary": "雨滴打细管也能产生能量。",
+            "function": "过渡"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-d-1",
+            "summary": "NUS 利用该效应。",
+            "function": "研究对象"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-d-1",
+            "summary": "用类雨滴发电。",
+            "function": "研究对象"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-d-2",
+            "summary": "传统水电依赖大流量。",
+            "function": "对照"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-d-2",
+            "summary": "小慢流也曾探索电荷分离。",
+            "function": "对照"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-d-2",
+            "summary": "连续流让电荷聚在管壁。",
+            "function": "旧法"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-d-2",
+            "summary": "连续流收集电荷效率很低。",
+            "function": "问题"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-d-3",
+            "summary": "NUS 做了新装置。",
+            "function": "解题"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-d-3",
+            "summary": "管顶与杯底接导线。",
+            "function": "装置"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-d-3",
+            "summary": "针尖放出类雨滴。",
+            "function": "装置"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-d-3",
+            "summary": "冲击形成 plug flow。",
+            "function": "关键机制"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-d-3",
+            "summary": "水柱被气隙隔开。",
+            "function": "关键机制"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-d-3",
+            "summary": "电荷分离可提高十万倍。",
+            "function": "效果"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-d-3",
+            "summary": "落入杯中形成电流。",
+            "function": "效果"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-d-3",
+            "summary": "四管可点亮 12 盏灯。",
+            "function": "实验数据"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-d-4",
+            "summary": "雨可清洁可持续发电。",
+            "function": "前景"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-d-4",
+            "summary": "尤其适合多雨城市。",
+            "function": "前景"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-d-4",
+            "summary": "屋顶集雨装置想象。",
+            "function": "应用"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-d-4",
+            "summary": "一小步雨滴，一大步可持续。",
+            "function": "收束"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-d-4",
+            "summary": "可持续能源技术。",
+            "function": "收束"
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-reading-d-23",
+            "summary": "Q33 四图。",
+            "function": "图"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-mock-sz-2026-m1-021": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查解样例字谜真正必需的能力，需回到开篇对 IOL 能力要求的表述。",
+      "stemTranslationZh": "解这道样例字谜，什么是必不可少的？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "语言流利。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "no special knowledge is required, only basic",
+            "sourceHighlight": "no special knowledge is required",
+            "optionText": "Linguistic fluency.",
+            "optionHighlight": "Linguistic fluency",
+            "explanation": "原文明确不需要专门知识，只要求基本语言概念与逻辑等，把“不需要流利/专门语言能力”说成必需流利。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-1",
+              "quote": "no special knowledge is required, only basic",
+              "anchor": "no special knowledge is required"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "推理能力。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-1",
+              "quote": "language concepts, logic, patience, and creative thinking",
+              "anchor": "logic, patience, and creative thinking"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "地理知识。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Geographic knowledge.",
+            "explanation": "样例虽用南美国名，但解题靠字母对应与逻辑，原文未把地理知识列为参赛或解题必需。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "数学计算。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Mathematical calculation.",
+            "explanation": "原文能力清单是语言概念、逻辑、耐心与创想，未要求数学计算。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Reasoning ability",
+          "sourceRole": "correctOption",
+          "targetText": "language concepts, logic, patience, and creative thinking",
+          "targetParagraphId": "para-mock-sz-2026-m1-reading-a-1",
+          "relationType": "paraphrase",
+          "note": "Reasoning ability 对应 logic 与 creative thinking，而不是流利或计算。"
+        }
+      ]
+    },
+    "q-mock-sz-2026-m1-022": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查个人赛与团体赛规则的差异点，需对比时长表述。",
+      "stemTranslationZh": "个人赛与团体赛的规则有何不同？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "比赛时长。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-16",
+              "quote": "The individual contest involves solving five problems in six hours, whereas the team contest features",
+              "anchor": "six hours, whereas the team contest"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "选定语言的截止日期。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "a choice that cannot be changed less than two weeks before the Olympiad begins.",
+            "sourceHighlight": "cannot be changed less than two weeks",
+            "optionText": "The deadline for language choice.",
+            "optionHighlight": "deadline for language choice",
+            "explanation": "语言时限对个人与团体同样适用，不是两者的差异。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-15",
+              "quote": "a choice that cannot be changed less than two weeks before the Olympiad begins.",
+              "anchor": "two weeks before the Olympiad"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "多答的结果。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "giving multiple answers will receive zero marks",
+            "sourceHighlight": "multiple answers will receive zero marks",
+            "optionText": "The result of giving multiple answers.",
+            "optionHighlight": "giving multiple answers",
+            "explanation": "多答得零分是共同规则，不是个人赛与团体赛的差别。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-17",
+              "quote": "giving multiple answers will receive zero marks",
+              "anchor": "multiple answers will receive zero marks"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "答案解释的要求。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "a detailed explanation is",
+            "sourceHighlight": "a detailed explanation",
+            "optionText": "The requirement for answer explanations.",
+            "optionHighlight": "requirement for answer explanations",
+            "explanation": "须详细解释是共同要求，文中用 whereas 对比的是时长与题量。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-17",
+              "quote": "a detailed explanation is",
+              "anchor": "a detailed explanation"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "different about the rules for the individual and team contest",
+          "sourceRole": "stem",
+          "targetText": "The individual contest involves solving five problems in six hours, whereas the team contest features",
+          "targetParagraphId": "para-mock-sz-2026-m1-reading-a-16",
+          "relationType": "locationCue",
+          "note": "题干问两者不同，原文用 whereas 对比个人赛六小时与团体赛。"
+        }
+      ]
+    },
+    "q-mock-sz-2026-m1-023": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查根据个人赛奖牌比例与总数区间推算 240 人时可能的奖牌总数。",
+      "stemTranslationZh": "若个人赛有 240 名选手，奖牌总数可能是多少？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "40。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "the total",
+            "sourceHighlight": "the total",
+            "optionText": "40.",
+            "optionHighlight": "40",
+            "explanation": "240 的四分之一是 60，40 低于下限。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-19",
+              "quote": "the number of gold, silver, and bronze medals awarded shall be in the ratio 1:2:3, with the total",
+              "anchor": "ratio 1:2:3, with the total"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "54。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "the number of gold, silver, and bronze medals awarded shall be in the ratio 1:2:3, with the total",
+            "sourceHighlight": "ratio 1:2:3",
+            "optionText": "54.",
+            "optionHighlight": "54",
+            "explanation": "54 低于 240 的四分之一（60），不在原文区间。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-19",
+              "quote": "the number of gold, silver, and bronze medals awarded shall be in the ratio 1:2:3, with the total",
+              "anchor": "ratio 1:2:3"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "72。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-19",
+              "quote": "the number of gold, silver, and bronze medals awarded shall be in the ratio 1:2:3, with the total",
+              "anchor": "ratio 1:2:3, with the total"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "84。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "number of medals being between one quarter and one third of the contestants",
+            "sourceHighlight": "between one quarter and one third",
+            "optionText": "84.",
+            "optionHighlight": "84",
+            "explanation": "240 的三分之一是 80，84 超出上限。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-19",
+              "quote": "number of medals being between one quarter and one third of the contestants",
+              "anchor": "between one quarter and one third"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "how many medals could be awarded in total",
+          "sourceRole": "stem",
+          "targetText": "number of medals being between one quarter and one third of the contestants",
+          "targetParagraphId": "para-mock-sz-2026-m1-reading-a-19",
+          "relationType": "calculation",
+          "note": "240 的 1/4 到 1/3 是 60–80，且须能按 1:2:3 整分，72=12+24+36 落在区间内。"
+        }
+      ]
+    },
+    "q-mock-sz-2026-m1-024": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查作者如何过桥，需定位盯靴慢挪的动作。",
+      "stemTranslationZh": "作者是怎样过桥的？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "靠留心的一步步挪动。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-3",
+              "quote": "Fixing my eyes on her boots, I inched along the shaky logs",
+              "anchor": "I inched along the shaky logs"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "勇敢地冲过去。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "I inched along the shaky logs",
+            "sourceHighlight": "inched along",
+            "optionText": "By rushing across it bravely.",
+            "optionHighlight": "rushing across",
+            "explanation": "原文是一点点挪，不是冲过去。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-3",
+              "quote": "I inched along the shaky logs",
+              "anchor": "inched along"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "靠方向感。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "By using her sense of direction.",
+            "explanation": "原文写盯着向导靴子慢挪，未提方向感。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "被向导拖过去。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "I would never have attempted it without our guide ahead, mouthing",
+            "sourceEntity": "guide ahead, mouthing",
+            "optionText": "By having the guide drag her over.",
+            "optionEntity": "guide drag her over",
+            "explanation": "向导在前方鼓劲，并未把她拖过桥。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-3",
+              "quote": "I would never have attempted it without our guide ahead, mouthing",
+              "anchor": "guide ahead, mouthing"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "taking mindful steps",
+          "sourceRole": "correctOption",
+          "targetText": "Fixing my eyes on her boots, I inched along the shaky logs",
+          "targetParagraphId": "para-mock-sz-2026-m1-reading-b-3",
+          "relationType": "paraphrase",
+          "note": "mindful steps 对应盯靴、inch along 的小心挪步。"
+        }
+      ]
+    },
+    "q-mock-sz-2026-m1-025": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查熊离开的直接原因。",
+      "stemTranslationZh": "熊为什么离开？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们被自然环境吸引。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "I couldn’t help noticing how beautiful they looked in their natural setting",
+            "sourceEntity": "they looked in their natural setting",
+            "optionText": "They were attracted by the natural setting.",
+            "optionEntity": "attracted by the natural setting",
+            "explanation": "自然环境是作者眼中的美，不是熊离开的原因。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-7",
+              "quote": "I couldn’t help noticing how beautiful they looked in their natural setting",
+              "anchor": "natural setting"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们害怕急流的声音。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "They were afraid of the noise of the rapids.",
+            "explanation": "急流出现在过桥段，遇熊段未写熊因急流而走。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们被一行人的举动吓了一跳。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-7",
+              "quote": "Taken aback, they stopped, and then slowly turned away",
+              "anchor": "Taken aback, they stopped"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们被向导的石块威胁。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "wave our hiking poles",
+            "sourceEntity": "hiking poles",
+            "optionText": "They were threatened by the guide’s rocks.",
+            "optionEntity": "guide’s rocks",
+            "explanation": "众人挥的是登山杖，不是向导扔石头。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-7",
+              "quote": "wave our hiking poles",
+              "anchor": "hiking poles"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "surprised at the group’s actions",
+          "sourceRole": "correctOption",
+          "targetText": "Taken aback, they stopped, and then slowly turned away",
+          "targetParagraphId": "para-mock-sz-2026-m1-reading-b-7",
+          "relationType": "paraphrase",
+          "note": "Taken aback 即被喊叫挥杆的举动吓住。"
+        }
+      ]
+    },
+    "q-mock-sz-2026-m1-026": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查向导要棍石叶的目的。",
+      "stemTranslationZh": "向导为什么要他们找一根棍、一块石头和一片叶子？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "捡些纪念品。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To pick up some souvenirs.",
+            "explanation": "活动是分享“留下什么、震撼什么、放下什么”，不是带纪念品。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "反思这次旅程。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-8",
+              "quote": "what would “stick” with us, what “rocked,” and what we would",
+              "anchor": "what would “stick” with us"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "象征团队合作。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "The bond of friendship would stick with me",
+            "sourceHighlight": "bond of friendship",
+            "optionText": "To symbolize their teamwork.",
+            "optionHighlight": "symbolize their teamwork",
+            "explanation": "友谊是作者自己的解读之一，不是向导布置任务的全部目的。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-8",
+              "quote": "The bond of friendship would stick with me",
+              "anchor": "bond of friendship"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "检查观察力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To check their observation skills.",
+            "explanation": "原文没有考查观察力的表述。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "reflect on the journey",
+          "sourceRole": "correctOption",
+          "targetText": "what would “stick” with us, what “rocked,” and what we would",
+          "targetParagraphId": "para-mock-sz-2026-m1-reading-b-8",
+          "relationType": "paraphrase",
+          "note": "stick/rock/leaf 谐音是让他们回看旅程收获与放下。"
+        }
+      ]
+    },
+    "q-mock-sz-2026-m1-027": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "questionFocus": "考查划线短语 over the hill 在末段语境中的含义。",
+      "stemTranslationZh": "最后一段划线短语 over the hill 是什么意思？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "已过青春巅峰。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-9",
+              "quote": "eased my fear of being “over the hill.”",
+              "anchor": "fear of being “over the hill.”"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "高得下不来。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "over the hill",
+            "optionText": "Too high to go down.",
+            "matchType": "exact",
+            "relationNote": "用 hill 的字面“高”去解习语，忽略衰老语境。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-9",
+              "quote": "eased my fear of being “over the hill.”",
+              "anchor": "over the hill"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "与社会格格不入。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Out of place in society.",
+            "explanation": "末段谈的是年龄被看见，不是社会位置。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "超出体能极限。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "praising not only our fitness but also our positive",
+            "sourceHighlight": "our fitness",
+            "optionText": "Beyond physical limits. 第 2 页 共 8 页",
+            "optionHighlight": "Beyond physical limits",
+            "explanation": "向导称赞的是体能仍在，习语指年龄心态，不是已经超出极限。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-9",
+              "quote": "praising not only our fitness but also our positive",
+              "anchor": "our fitness"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "over the hill",
+          "sourceRole": "stem",
+          "targetText": "eased my fear of being “over the hill.”",
+          "targetParagraphId": "para-mock-sz-2026-m1-reading-b-9",
+          "relationType": "locationCue",
+          "note": "与开篇 ageing、七十多岁及向导希望几十年后像她们对读，指过了青春巅峰。"
+        }
+      ]
+    },
+    "q-mock-sz-2026-m1-028": {
+      "skill": {
+        "primary": "authorPurpose"
+      },
+      "questionFocus": "考查研究者教歌的目的。",
+      "stemTranslationZh": "研究者为什么要教这些鸟这首歌？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "拯救濒危物种。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To save an endangered species.",
+            "explanation": "文中谈的是歌声文化失落，未说该物种濒危。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "研究鸟脑结构。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "physics-based modeling of the bird’s vocal tract",
+            "sourceEntity": "vocal tract",
+            "optionText": "To study the birds’ brain structure.",
+            "optionEntity": "brain structure",
+            "explanation": "建模的是声道，不是脑结构。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-4",
+              "quote": "physics-based modeling of the bird’s vocal tract",
+              "anchor": "vocal tract"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "开发新的机器人装置。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "a “robotic tutor.”",
+            "sourceHighlight": "robotic tutor",
+            "optionText": "To develop new robotic devices.",
+            "optionHighlight": "develop new robotic devices",
+            "explanation": "机器导师是手段，目的是找回失落歌声。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-4",
+              "quote": "a “robotic tutor.”",
+              "anchor": "robotic tutor"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "保存这些鸟的文化遗产。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-6",
+              "quote": "preserving not just genetic, but cultural biodiversity",
+              "anchor": "cultural biodiversity"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "preserve the birds’ cultural heritage",
+          "sourceRole": "correctOption",
+          "targetText": "preserving not just genetic, but cultural biodiversity",
+          "targetParagraphId": "para-mock-sz-2026-m1-reading-c-6",
+          "relationType": "paraphrase",
+          "note": "cultural heritage 对应 cultural biodiversity / 失落的地方歌声。"
+        }
+      ]
+    },
+    "q-mock-sz-2026-m1-029": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查 chingolo 歌声的作用。",
+      "stemTranslationZh": "chingolo 的歌声有什么作用？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "让猎人远离它们。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It keeps hunters away from them.",
+            "explanation": "原文写求偶与护域，未提猎人。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "帮助它们适应城市扩张。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "causeEffectReversal",
+            "sourceQuote": "urbanization and habitat loss have broken",
+            "sourceHighlight": "urbanization and habitat loss have broken",
+            "optionText": "It helps them adapt to urban growth.",
+            "optionHighlight": "adapt to urban growth",
+            "explanation": "城市化打断了学歌链，歌声并不是适应城市的工具。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-2",
+              "quote": "urbanization and habitat loss have broken",
+              "anchor": "urbanization and habitat loss have broken"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "充当它们的社会身份。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-2",
+              "quote": "It serves to attract females and protect territory",
+              "anchor": "attract females and protect territory"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "让它们记住栖息地。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It makes them remember their habitat.",
+            "explanation": "歌声标记“我是谁、我在这”，不是记忆栖息地的工具。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "social identity",
+          "sourceRole": "correctOption",
+          "targetText": "It serves to attract females and protect territory",
+          "targetParagraphId": "para-mock-sz-2026-m1-reading-c-2",
+          "relationType": "paraphrase",
+          "note": "求偶护域加上 This is me 即社会身份。"
+        }
+      ]
+    },
+    "q-mock-sz-2026-m1-030": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查随机停顿的目的。",
+      "stemTranslationZh": "随机停顿的目的是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "保护鸟的声道。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "physics-based modeling of the bird’s vocal tract",
+            "sourceEntity": "vocal tract",
+            "optionText": "To protect the birds’ vocal tract.",
+            "optionEntity": "protect the birds’ vocal tract",
+            "explanation": "声道只出现在建模阶段，与停顿无关。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-4",
+              "quote": "physics-based modeling of the bird’s vocal tract",
+              "anchor": "vocal tract"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "测试鸟的反应速度。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To test the birds’ reaction speed.",
+            "explanation": "停顿是为了让播放像真实对唱，不是测反应速度。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "逼鸟跟上节拍。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To push the birds to catch the beat.",
+            "explanation": "原文没有节拍训练的表述。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "诱使鸟把播放当成互动。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-4",
+              "quote": "the birds interpreted the playback from the three devices placed in the area as a real",
+              "anchor": "interpreted the playback ... as a real"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "trick the birds into interaction",
+          "sourceRole": "correctOption",
+          "targetText": "the birds interpreted the playback from the three devices placed in the area as a real",
+          "targetParagraphId": "para-mock-sz-2026-m1-reading-c-4",
+          "relationType": "paraphrase",
+          "note": "随机停顿让三台设备像在对唱，从而诱发出声。"
+        }
+      ]
+    },
+    "q-mock-sz-2026-m1-031": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查幼鸟学习结果说明了什么。",
+      "stemTranslationZh": "从 chingolo 的学习结果能看出什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "这首歌已传到其他鸟种。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The song has spread to other bird species.",
+            "explanation": "结果只写幼年 chingolo 学会，未写跨物种传播。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们的歌唱带有特殊的发声特征。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-5",
+              "quote": "own population’s “accent” to the final trill",
+              "anchor": "population’s “accent”"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们对这首歌的反应还需改进。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "The results were impressive",
+            "sourceHighlight": "impressive",
+            "optionText": "Their response to the song needs improving.",
+            "optionHighlight": "needs improving",
+            "explanation": "原文说结果令人印象深刻，幼鸟已经学会。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-5",
+              "quote": "The results were impressive",
+              "anchor": "impressive"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "效果取决于种群数量。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "own population’s “accent”",
+            "optionText": "The effectiveness depends on their population. 第 3 页 共 8 页",
+            "matchType": "wordFamily",
+            "relationNote": "原文 population 指种群口音，不是效果取决于数量。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-5",
+              "quote": "own population’s “accent” to the final trill",
+              "anchor": "population’s “accent”"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "special vocal features",
+          "sourceRole": "correctOption",
+          "targetText": "own population’s “accent” to the final trill",
+          "targetParagraphId": "para-mock-sz-2026-m1-reading-c-5",
+          "relationType": "paraphrase",
+          "note": "种群口音与先天特征即特殊发声特点。"
+        }
+      ]
+    },
+    "q-mock-sz-2026-m1-032": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查 NUS 团队要解决的问题。",
+      "stemTranslationZh": "NUS 研究者旨在解决什么问题？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "电荷分离本身很难。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "can collect charges, but it is far from effective",
+            "sourceHighlight": "far from effective",
+            "optionText": "The difficulty of separating charges.",
+            "optionHighlight": "difficulty of separating charges",
+            "explanation": "连续流已经能分离电荷，难的是效率低，不是分离本身做不到。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-2",
+              "quote": "can collect charges, but it is far from effective",
+              "anchor": "far from effective"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "缺少清洁电源。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The lack of clean electricity sources.",
+            "explanation": "末段谈清洁能源前景，开篇问题是小流量收集电荷效率低。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "收集电荷效率低。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-2",
+              "quote": "can collect charges, but it is far from effective",
+              "anchor": "far from effective"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "传统水电的破坏。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The damage of traditional hydropower.",
+            "explanation": "传统水电只被写成依赖大河流量，未写其破坏。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "inefficiency of charge harvesting",
+          "sourceRole": "correctOption",
+          "targetText": "can collect charges, but it is far from effective",
+          "targetParagraphId": "para-mock-sz-2026-m1-reading-d-2",
+          "relationType": "paraphrase",
+          "note": "far from effective 即收集电荷效率低，后文 To solve this problem 接新装置。"
+        }
+      ]
+    },
+    "q-mock-sz-2026-m1-033": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查哪幅图最能表示 plug flow：水柱被气隙隔开。",
+      "stemTranslationZh": "下面哪一幅最能说明 plug flow？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "连续波浪状液柱。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "[Fig.]",
+            "explanation": "A 图是连续起伏液柱，没有被气隙隔开的小水柱。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "两颗分离的大液滴。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "[Fig.]",
+            "explanation": "B 图是稀疏大液滴，不是管内 mini columns separated by air gaps。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "充满整管的连续液柱。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "the water forms mini columns",
+            "sourceHighlight": "mini columns",
+            "optionText": "[Fig.]",
+            "optionHighlight": "[Fig.]",
+            "explanation": "C 图是连续充满，正是前文 far from effective 的 continuous flow。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-3",
+              "quote": "the water forms mini columns",
+              "anchor": "mini columns"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "数段水柱被空隙隔开。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-3",
+              "quote": "the water forms mini columns",
+              "anchor": "mini columns"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "plug flow",
+          "sourceRole": "stem",
+          "targetText": "the water forms mini columns",
+          "targetParagraphId": "para-mock-sz-2026-m1-reading-d-3",
+          "relationType": "locationCue",
+          "note": "plug flow 定义为 mini columns separated by air gaps，对应 D 图分段水柱。"
+        }
+      ]
+    },
+    "q-mock-sz-2026-m1-034": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "questionFocus": "考查末段主要谈该模型的什么。",
+      "stemTranslationZh": "关于这一模型，最后一段主要讲什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它在城市里的潜在成本。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Its potential cost in urban areas.",
+            "explanation": "末段写城市潜力与屋顶发电，未谈成本。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它在绿色能源上的前景。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-4",
+              "quote": "rain can be used to generate clean",
+              "anchor": "generate clean"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它复杂的雨水发电设计。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "the NUS team built a special device",
+            "sourceEntity": "special device",
+            "optionText": "Its complex design for rain power.",
+            "optionEntity": "complex design",
+            "explanation": "装置细节在第三段，末段谈前景不是设计复杂度。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-3",
+              "quote": "the NUS team built a special device",
+              "anchor": "special device"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它实际需要更多装置。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Its practical need for more devices.",
+            "explanation": "末段没有要求增加装置数量。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "promising use in green energy",
+          "sourceRole": "correctOption",
+          "targetText": "rain can be used to generate clean",
+          "targetParagraphId": "para-mock-sz-2026-m1-reading-d-4",
+          "relationType": "paraphrase",
+          "note": "clean / sustainably / alternative energy / roof device 都指向绿色能源前景。"
+        }
+      ]
+    },
+    "q-mock-sz-2026-m1-035": {
+      "skill": {
+        "primary": "title"
+      },
+      "questionFocus": "考查最能概括全文的标题。",
+      "stemTranslationZh": "哪一个标题适合这篇文章？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "来自雨滴的革命性能源。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-1",
+              "quote": "have tapped into this effect to generate electricity using",
+              "anchor": "generate electricity using"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "对可持续能源的迫切需求。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "a giant leap for",
+            "sourceHighlight": "giant leap",
+            "optionText": "Urgent Demand for Sustainable Energy",
+            "optionHighlight": "Urgent Demand",
+            "explanation": "全文写的是雨滴发电新法，不是呼吁能源短缺。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-4",
+              "quote": "a giant leap for",
+              "anchor": "giant leap"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "用创新捕捉雨滴。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "generate electricity using",
+            "sourceHighlight": "generate electricity",
+            "optionText": "Capturing Raindrops through Innovation",
+            "optionHighlight": "Capturing Raindrops",
+            "explanation": "核心不是捕捉雨滴，而是用雨滴发电。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-1",
+              "quote": "generate electricity using",
+              "anchor": "generate electricity"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "把电荷分离变成电。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "a familiar example of charge",
+            "sourceHighlight": "charge",
+            "optionText": "Turning Charge Separation into Electricity 第 4 页 共 8 页",
+            "optionHighlight": "Charge Separation into Electricity",
+            "explanation": "电荷分离是原理，标题应点出雨滴这一新场景。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-1",
+              "quote": "a familiar example of charge",
+              "anchor": "charge"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Revolutionary Energy from Raindrops",
+          "sourceRole": "correctOption",
+          "targetText": "have tapped into this effect to generate electricity using",
+          "targetParagraphId": "para-mock-sz-2026-m1-reading-d-1",
+          "relationType": "paraphrase",
+          "note": "雨滴 + 发电贯穿全文，100,000 times 与 giant leap 对应 revolutionary。"
+        }
+      ]
+    }
+  }
+}

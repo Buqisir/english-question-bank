@@ -31,7 +31,7 @@ Spec: `docs/cuts/reading-framed-columns/spec.md`
 
 ## Result
 
-Commit:
+Commit: `fc2d34cc`
 Verify:
 - `node scripts/verify-paper-canonical-framed-columns.mjs` PASS
 - `node scripts/verify-paper-canonical-foundation.mjs` PASS

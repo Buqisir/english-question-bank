@@ -536,6 +536,78 @@ function renderCanonicalInlineNodes(nodes) {
   ).join('')
 }
 
+const PRINT_PAGE_CONTENT_HEIGHT_PT = (297 - 21 - 24) * (72 / 25.4)
+
+export function estimateFramedColumnsMinHeightPt(block) {
+  const lineHeightPt = readingPassageLetterTypography.lineHeightPt
+  return Math.max(...(block.columns || []).map((column) =>
+    (column.blocks || []).reduce((height, child) => {
+      if (child?.kind === 'paragraph') return height + lineHeightPt
+      if (child?.kind === 'table') {
+        return height + ((child.rows || []).length * lineHeightPt)
+      }
+      return height + lineHeightPt
+    }, 0)))
+}
+
+export function assertFramedColumnsFitsPrintPage(block) {
+  const minHeightPt = estimateFramedColumnsMinHeightPt(block)
+  if (minHeightPt > PRINT_PAGE_CONTENT_HEIGHT_PT) {
+    const error = new Error(
+      `framed_columns ${block.nodeId} exceeds one print page`,
+    )
+    error.code = 'CANONICAL_FRAMED_COLUMNS_EXCEEDS_PAGE'
+    throw error
+  }
+}
+
+function renderCanonicalReadingParagraph(block, { columnHeading = false } = {}) {
+  const tag = !columnHeading && block.role === 'title' ? 'h3' : 'p'
+  const className = columnHeading
+    ? 'canonical-reading-column-heading'
+    : `canonical-reading-${block.role}`
+  const rhythmRole =
+    block.role === 'title'
+      ? 'passage_title'
+      : block.role === 'subtitle'
+        ? 'passage_subtitle'
+        : 'passage_body_line'
+  const headingAttr = columnHeading ? ' data-canonical-column-heading=""' : ''
+  return `<${tag} class="${className}" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="paragraph" data-canonical-reading-role="${block.role}" data-canonical-reading-rhythm-role="${rhythmRole}"${headingAttr}>${renderCanonicalInlineNodes(block.inlines)}</${tag}>`
+}
+
+function renderCanonicalReadingTable(block) {
+  return `<table class="canonical-reading-table" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="table" data-canonical-reading-rhythm-role="native_table_line" data-canonical-table-columns="${block.columnCount}"><tbody>${block.rows.map((row) => `<tr data-canonical-row-id="${escapeHtml(row.rowId)}">${row.cells.map((cell) => `<td colspan="${cell.columnSpan}" rowspan="${cell.rowSpan}" data-canonical-cell-id="${escapeHtml(cell.cellId)}" data-canonical-column-start="${cell.columnStart}">${renderCanonicalInlineNodes(cell.inlines)}</td>`).join('')}</tr>`).join('')}</tbody></table>`
+}
+
+function renderCanonicalReadingColumnChild(block, columnHeadingId) {
+  if (block.kind === 'paragraph') {
+    return renderCanonicalReadingParagraph(block, {
+      columnHeading: columnHeadingId === block.nodeId,
+    })
+  }
+  if (block.kind === 'table') return renderCanonicalReadingTable(block)
+  rejectCanonicalPrint(
+    `Canonical Reading framed_columns child ${block?.kind || 'unknown'} is not representable`,
+  )
+}
+
+function renderCanonicalReadingBlock(block) {
+  if (block.kind === 'paragraph') return renderCanonicalReadingParagraph(block)
+  if (block.kind === 'table') return renderCanonicalReadingTable(block)
+  if (block.kind === 'framed_columns') {
+    assertFramedColumnsFitsPrintPage(block)
+    return `<div class="canonical-reading-framed-columns" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="framed_columns" data-canonical-column-count="${block.columnCount}">${block.columns.map((column) => `<div class="canonical-reading-framed-column" data-canonical-column-id="${escapeHtml(column.columnId)}">${column.blocks.map((child) => renderCanonicalReadingColumnChild(child, column.columnHeading)).join('')}</div>`).join('')}</div>`
+  }
+  if (block.kind === 'figure') {
+    const src = `data:${block.mediaArtifact.mimeType};base64,${block.mediaArtifact.encodedBytes}`
+    return `<figure class="canonical-reading-figure" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="figure" data-canonical-media-id="${escapeHtml(block.mediaId)}"><img src="${escapeHtml(src)}" alt=""></figure>`
+  }
+  rejectCanonicalPrint(
+    `Canonical Reading block ${block?.kind || 'unknown'} is not representable`,
+  )
+}
+
 function renderCanonicalReadingBlocks(canonicalGroup) {
   const precedingGeometry =
     readingPassageLetterGeometryForLetter(
@@ -554,23 +626,7 @@ function renderCanonicalReadingBlocks(canonicalGroup) {
   const beforeStyle = beforeAdjustment < 0
     ? `margin-top:${beforeAdjustment}pt`
     : `padding-top:${beforeAdjustment}pt`
-  return `<div class="canonical-reading-start"><div class="canonical-reading-passage-letter" data-canonical-passage-letter="${escapeHtml(canonicalGroup.passageLetter)}" data-canonical-reading-rhythm-role="passage_letter" data-canonical-reading-preceding-kind="${precedingGeometry.precedingKind}" style="${beforeStyle}">${escapeHtml(canonicalGroup.passageLetter)}</div></div><div class="canonical-reading" data-canonical-reading-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}">${canonicalGroup.blocks.map((block) => {
-    if (block.kind === 'paragraph') {
-      const tag = block.role === 'title' ? 'h3' : 'p'
-      const rhythmRole =
-        block.role === 'title'
-          ? 'passage_title'
-          : block.role === 'subtitle'
-            ? 'passage_subtitle'
-            : 'passage_body_line'
-      return `<${tag} class="canonical-reading-${block.role}" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="paragraph" data-canonical-reading-role="${block.role}" data-canonical-reading-rhythm-role="${rhythmRole}">${renderCanonicalInlineNodes(block.inlines)}</${tag}>`
-    }
-    if (block.kind === 'table') {
-      return `<table class="canonical-reading-table" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="table" data-canonical-reading-rhythm-role="native_table_line" data-canonical-table-columns="${block.columnCount}"><tbody>${block.rows.map((row) => `<tr data-canonical-row-id="${escapeHtml(row.rowId)}">${row.cells.map((cell) => `<td colspan="${cell.columnSpan}" rowspan="${cell.rowSpan}" data-canonical-cell-id="${escapeHtml(cell.cellId)}" data-canonical-column-start="${cell.columnStart}">${renderCanonicalInlineNodes(cell.inlines)}</td>`).join('')}</tr>`).join('')}</tbody></table>`
-    }
-    const src = `data:${block.mediaArtifact.mimeType};base64,${block.mediaArtifact.encodedBytes}`
-    return `<figure class="canonical-reading-figure" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="figure" data-canonical-media-id="${escapeHtml(block.mediaId)}"><img src="${escapeHtml(src)}" alt=""></figure>`
-  }).join('')}</div>`
+  return `<div class="canonical-reading-start"><div class="canonical-reading-passage-letter" data-canonical-passage-letter="${escapeHtml(canonicalGroup.passageLetter)}" data-canonical-reading-rhythm-role="passage_letter" data-canonical-reading-preceding-kind="${precedingGeometry.precedingKind}" style="${beforeStyle}">${escapeHtml(canonicalGroup.passageLetter)}</div></div><div class="canonical-reading" data-canonical-reading-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}">${canonicalGroup.blocks.map((block) => renderCanonicalReadingBlock(block)).join('')}</div>`
 }
 
 function renderCanonicalWritingChrome(
@@ -2503,6 +2559,62 @@ body {
   max-width: 100%;
   height: auto;
 }
+
+/* 阅读细线框：共享约定，不为单卷改。权威 exam-paper-format-standards.md §3c */
+.canonical-reading-framed-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6pt;
+  margin: 6pt 0;
+  width: 100%;
+  box-sizing: border-box;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.canonical-reading-framed-column {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 4pt 6pt;
+  border: 0.5pt solid #000;
+}
+
+.canonical-reading-framed-column .canonical-reading-table {
+  width: max-content;
+  max-width: 92%;
+  margin-top: 7pt;
+  margin-bottom: 0;
+  align-self: center;
+  table-layout: auto;
+}
+
+.canonical-reading-framed-column .canonical-reading-table td {
+  border: 0;
+  padding: 3pt 0;
+  line-height: 16pt;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.canonical-reading-framed-column .canonical-reading-table td:first-child {
+  padding-right: 12pt;
+}
+
+.canonical-reading-framed-column .canonical-reading-table + .canonical-reading-body {
+  margin-top: 9pt;
+}
+
+.canonical-reading-column-heading {
+  margin: 0 0 4pt;
+  font-size: ${readingPassageLetterTypography.fontSizePt}pt;
+  line-height: ${readingPassageLetterTypography.lineHeightPt}pt;
+  font-weight: bold;
+  text-align: center;
+  text-indent: 0;
+}
+
 
 .options-inline {
   margin: 0.2em 0 0.2em 2em;

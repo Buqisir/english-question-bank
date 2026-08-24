@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "import-meta-v1",
+  "paperId": "paper-mock-sz-2026-m1",
+  "sourceFileName": "26.3广东深圳高三一模英语试卷.pdf",
+  "sourceFileSha256": "df0c4e0a0d1aee4557f122591e3b778d7b48f2f324d75dba120343bb00926c80",
+  "importedBy": "paper-import-ai",
+  "importedAt": "2026-08-24T01:38:25.943Z",
+  "paper": {
+    "year": 2026,
+    "region": "深圳",
+    "paperName": "2026年3月深圳高三一模",
+    "examCode": "mock-sz-2026-m1",
+    "subject": "English",
+    "sourceType": "模拟题",
+    "defaultTags": [
+      "模拟",
+      "2026",
+      "深圳",
+      "一模"
+    ]
+  },
+  "groups": {
+    "group-mock-sz-2026-m1-reading-a": {
+      "groupId": "group-mock-sz-2026-m1-reading-a",
+      "difficulty": "中",
+      "summary": "应用文。介绍国际语言学奥林匹克（IOL）：参赛不需专业知识，附入门字谜，再列个人赛与团体赛规则及奖牌比例。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading A"
+    },
+    "group-mock-sz-2026-m1-reading-b": {
+      "groupId": "group-mock-sz-2026-m1-reading-b",
+      "difficulty": "中",
+      "summary": "记叙文。七十多岁的作者与友人荒野徒步，先后克服恐高、遇熊与怕老，向导的赞赏让她感到仍被看见。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading B"
+    },
+    "group-mock-sz-2026-m1-reading-c": {
+      "groupId": "group-mock-sz-2026-m1-reading-c",
+      "difficulty": "中",
+      "summary": "说明文。布宜诺斯艾利斯大学用机器导师把失落半个多世纪的 chingolo 地方歌谣教回幼鸟，以保存鸟类文化多样性。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading C"
+    },
+    "group-mock-sz-2026-m1-reading-d": {
+      "groupId": "group-mock-sz-2026-m1-reading-d",
+      "difficulty": "中",
+      "summary": "说明文。新加坡国立大学用雨滴冲击细管形成 plug flow，大幅提高电荷分离效率，展示屋顶集雨发电的可能。",
+      "tags": [
+        "阅读理解"
+      ],
+      "displayTitleOverride": "Reading D"
+    },
+    "group-mock-sz-2026-m1-seven-choices": {
+      "groupId": "group-mock-sz-2026-m1-seven-choices",
+      "difficulty": "中",
+      "summary": "议论文。作者戴上 VR 立刻“到别处”，承认虚拟旅行便利，随即对比真实旅行的不可预测与在场感，结论是 VR 不能取代亲身到场。",
+      "tags": [
+        "七选五"
+      ],
+      "displayTitleOverride": "七选五"
+    },
+    "group-mock-sz-2026-m1-cloze": {
+      "groupId": "group-mock-sz-2026-m1-cloze",
+      "difficulty": "中",
+      "summary": "完形填空",
+      "tags": [
+        "完形填空"
+      ],
+      "displayTitleOverride": "完形填空"
+    },
+    "group-mock-sz-2026-m1-grammar-fill": {
+      "groupId": "group-mock-sz-2026-m1-grammar-fill",
+      "difficulty": "中",
+      "summary": "语法填空",
+      "tags": [
+        "语法填空"
+      ],
+      "displayTitleOverride": "语法填空"
+    },
+    "group-mock-sz-2026-m1-writing-application": {
+      "groupId": "group-mock-sz-2026-m1-writing-application",
+      "difficulty": "中",
+      "summary": "应用文写作",
+      "tags": [
+        "应用文写作"
+      ],
+      "displayTitleOverride": "应用文写作"
+    },
+    "group-mock-sz-2026-m1-writing-continuation": {
+      "groupId": "group-mock-sz-2026-m1-writing-continuation",
+      "difficulty": "中",
+      "summary": "读后续写",
+      "tags": [
+        "读后续写"
+      ],
+      "displayTitleOverride": "读后续写"
+    }
+  }
+}

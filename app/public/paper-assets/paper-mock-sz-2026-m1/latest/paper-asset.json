@@ -1,0 +1,3681 @@
+{
+  "schemaVersion": "paper-asset-v1",
+  "paper": {
+    "paperId": "paper-mock-sz-2026-m1",
+    "title": "26.3广东深圳高三一模英语试卷",
+    "subject": "English",
+    "source": "AI 导题",
+    "assetVersion": 10,
+    "status": "published"
+  },
+  "sources": {
+    "primarySourceType": "docx",
+    "docx": {
+      "fileName": "26.3广东深圳高三一模英语试卷.pdf",
+      "sha256": "df0c4e0a0d1aee4557f122591e3b778d7b48f2f324d75dba120343bb00926c80",
+      "sourcePath": "",
+      "sourceNote": "未上传答案解析版"
+    }
+  },
+  "layoutTree": {
+    "parts": [
+      {
+        "partId": "part-mock-sz-2026-m1-reading",
+        "title": "第二部分 阅读",
+        "sections": [
+          {
+            "sectionId": "section-mock-sz-2026-m1-reading-choice",
+            "title": "第一节 阅读理解",
+            "groups": [
+              {
+                "groupId": "group-mock-sz-2026-m1-reading-a",
+                "title": "Reading A"
+              },
+              {
+                "groupId": "group-mock-sz-2026-m1-reading-b",
+                "title": "Reading B"
+              },
+              {
+                "groupId": "group-mock-sz-2026-m1-reading-c",
+                "title": "Reading C"
+              },
+              {
+                "groupId": "group-mock-sz-2026-m1-reading-d",
+                "title": "Reading D"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-mock-sz-2026-m1-reading-seven",
+            "title": "第二节 七选五",
+            "groups": [
+              {
+                "groupId": "group-mock-sz-2026-m1-seven-choices",
+                "title": "七选五"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "partId": "part-mock-sz-2026-m1-language",
+        "title": "第三部分 语言运用",
+        "sections": [
+          {
+            "sectionId": "section-mock-sz-2026-m1-cloze",
+            "title": "第一节 完形填空",
+            "groups": [
+              {
+                "groupId": "group-mock-sz-2026-m1-cloze",
+                "title": "完形填空"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-mock-sz-2026-m1-grammar-fill",
+            "title": "第二节 语法填空",
+            "groups": [
+              {
+                "groupId": "group-mock-sz-2026-m1-grammar-fill",
+                "title": "语法填空"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "partId": "part-mock-sz-2026-m1-writing",
+        "title": "第四部分 写作",
+        "sections": [
+          {
+            "sectionId": "section-mock-sz-2026-m1-writing-application",
+            "title": "第一节 应用文写作",
+            "groups": [
+              {
+                "groupId": "group-mock-sz-2026-m1-writing-application",
+                "title": "应用文写作"
+              }
+            ]
+          },
+          {
+            "sectionId": "section-mock-sz-2026-m1-writing-continuation",
+            "title": "第二节 读后续写",
+            "groups": [
+              {
+                "groupId": "group-mock-sz-2026-m1-writing-continuation",
+                "title": "读后续写"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "content": {
+    "blocks": [
+      {
+        "type": "partHeading",
+        "partId": "part-mock-sz-2026-m1-reading",
+        "text": "第二部分 阅读"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-mock-sz-2026-m1-reading-choice",
+        "text": "第一节 阅读理解"
+      },
+      {
+        "type": "group",
+        "groupId": "group-mock-sz-2026-m1-reading-a"
+      },
+      {
+        "type": "group",
+        "groupId": "group-mock-sz-2026-m1-reading-b"
+      },
+      {
+        "type": "group",
+        "groupId": "group-mock-sz-2026-m1-reading-c"
+      },
+      {
+        "type": "group",
+        "groupId": "group-mock-sz-2026-m1-reading-d"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-mock-sz-2026-m1-reading-seven",
+        "text": "第二节 (共5小题；每小题2.5分，满分12.5分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从短文后的选项中选出可以填入空白处的最佳选项。选项中有两项为多余选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-mock-sz-2026-m1-seven-choices"
+      },
+      {
+        "type": "pageBreakHint"
+      },
+      {
+        "type": "partHeading",
+        "partId": "part-mock-sz-2026-m1-language",
+        "text": "第三部分 语言运用(共两节，满分30分)"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-mock-sz-2026-m1-cloze",
+        "text": "第一节(共15小题；每小题1分，满分15分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，从每题所给的A、B、C、D四个选项中选出最佳选项。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-mock-sz-2026-m1-cloze"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-mock-sz-2026-m1-grammar-fill",
+        "text": "第二节(共10小题；每小题1.5分，满分15分)"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面短文，在空白处填入1个适当的单词或括号内单词的正确形式。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-mock-sz-2026-m1-grammar-fill"
+      },
+      {
+        "type": "pageBreakHint"
+      },
+      {
+        "type": "partHeading",
+        "partId": "part-mock-sz-2026-m1-writing",
+        "text": "第四部分 写作（共两节，满分40分）"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-mock-sz-2026-m1-writing-application",
+        "text": "第一节（满分15分）"
+      },
+      {
+        "type": "group",
+        "groupId": "group-mock-sz-2026-m1-writing-application"
+      },
+      {
+        "type": "instruction",
+        "text": "注意：\n（1）写作词数应为80个左右；\n（2）请按如下格式在答题卡的相应位置作答。"
+      },
+      {
+        "type": "answerBox",
+        "writingTaskId": "wt-mock-sz-2026-m1-application",
+        "label": "应用文写作答题区"
+      },
+      {
+        "type": "sectionHeading",
+        "sectionId": "section-mock-sz-2026-m1-writing-continuation",
+        "text": "第二节（满分25分）"
+      },
+      {
+        "type": "instruction",
+        "text": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。"
+      },
+      {
+        "type": "group",
+        "groupId": "group-mock-sz-2026-m1-writing-continuation"
+      },
+      {
+        "type": "instruction",
+        "text": "注意：\n（1）续写词数应为150个左右；\n（2）请按如下格式在答题卡的相应位置作答。"
+      },
+      {
+        "type": "instruction",
+        "text": "Paragraph 1: For the next week, Megan and Liam busied themselves with the project.\n\nParagraph 2: On the opening day of the project, they waited nervously in the garden."
+      },
+      {
+        "type": "answerBox",
+        "writingTaskId": "wt-mock-sz-2026-m1-continuation",
+        "label": "读后续写答题区"
+      }
+    ],
+    "groups": {
+      "group-mock-sz-2026-m1-reading-a": {
+        "groupId": "group-mock-sz-2026-m1-reading-a",
+        "groupType": "reading",
+        "title": "Reading A",
+        "questionIds": [
+          "q-mock-sz-2026-m1-021",
+          "q-mock-sz-2026-m1-022",
+          "q-mock-sz-2026-m1-023"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-1",
+              "text": "The International Linguistics Olympiad (IOL) is a competition for pre-university students, held in a different country each year since 2003. It challenges participants, both individually and in teams, to solve linguistic ( 语 言 学 的 ) puzzles. To compete at the IOL, no special knowledge is required, only basic language concepts, logic, patience, and creative thinking. Try this beginner sample to see if the IOL is right for you."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-fig-puzzle-1",
+              "text": "[图: fig-paper-mock-sz-2026-m1-reading-a-puzzle-1]"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-14",
+              "text": "Contest Rules"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-15",
+              "text": "● Each individual contestant or team must choose a working language for their problems and solutions, a choice that cannot be changed less than two weeks before the Olympiad begins."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-16",
+              "text": "● The individual contest involves solving five problems in six hours, whereas the team contest features one problem with two hours less."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-17",
+              "text": "● Unless instructed, giving multiple answers will receive zero marks. Besides, a detailed explanation is required for each answer; failure to provide one will result in a lower score."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-18",
+              "text": "Awards"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-19",
+              "text": "The team contest will award up to one gold, two silver, and three bronze medals. In the individual contest, the number of gold, silver, and bronze medals awarded shall be in the ratio 1:2:3, with the total number of medals being between one quarter and one third of the contestants. Click here to find out other awards."
+            }
+          ]
+        }
+      },
+      "group-mock-sz-2026-m1-reading-b": {
+        "groupId": "group-mock-sz-2026-m1-reading-b",
+        "groupType": "reading",
+        "title": "Reading B",
+        "questionIds": [
+          "q-mock-sz-2026-m1-024",
+          "q-mock-sz-2026-m1-025",
+          "q-mock-sz-2026-m1-026",
+          "q-mock-sz-2026-m1-027"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-1",
+              "text": "This summer I came face-to-face with three deep-rooted fears: heights, bears, and ageing."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-2",
+              "text": "Two friends joined me on a four-day wilderness getaway, and since we were all in our seventies, we decided we’d better go while we still could. Our adventure began with a scary drive up a winding mountain road."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-3",
+              "text": "On one hike, I found myself hanging onto a wire on a bridge made of two partly rotten (腐烂的) logs, suspended high above rushing rapids. I would never have attempted it without our guide ahead, mouthing encouraging words. Fixing my eyes on her boots, I inched along the shaky logs. Somehow, I made it across, flooded with a rush of intense excitement and huge relief."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-4",
+              "text": "Later, after spotting bear tracks, we were told to make loud noises, which soon became a game once the tension faded."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-5",
+              "text": "Until suddenly, time stood still."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-6",
+              "text": "We had just crossed a stream when the guide whispered, “There’s a bear.” I looked up in disbelief and saw not one, but two, about ten meters above us—the brown mother in front, her cub behind."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-7",
+              "text": "Though scared speechless, I couldn’t help noticing how beautiful they looked in their natural setting. I wondered if it would be my last memory. As they started towards us, we recovered enough to shout and wave our hiking poles. Taken aback, they stopped, and then slowly turned away. Another fear was overcome!"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-8",
+              "text": "On our final morning, after a quiet, thoughtful walk through the forest, we were asked to bring back a “meaningful” stick, rock, and leaf to share what would “stick” with us, what “rocked,” and what we would “leaf” behind. The bond of friendship would stick with me. Women supporting one another truly rocked. And I hoped to leave some fears behind."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-9",
+              "text": "Our guide ended by expressing her admiration, praising not only our fitness but also our positive attitude, and saying she hoped to be like us in another thirty or forty years. Those unexpected words warmed my heart and eased my fear of being “over the hill.” Being valued for what we had accomplished felt like winning an Olympic medal—even if just for participation."
+            }
+          ]
+        }
+      },
+      "group-mock-sz-2026-m1-reading-c": {
+        "groupId": "group-mock-sz-2026-m1-reading-c",
+        "groupType": "reading",
+        "title": "Reading C",
+        "questionIds": [
+          "q-mock-sz-2026-m1-028",
+          "q-mock-sz-2026-m1-029",
+          "q-mock-sz-2026-m1-030",
+          "q-mock-sz-2026-m1-031"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-1",
+              "text": "Researchers from the University of Buenos Aires have successfully used a robotic tutor to teach the male chingolo, a kind of small bird in South America, a song that was once part of the species’ culture but had been lost for more than half a century."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-2",
+              "text": "Male chingolos learn their unique, two-second melody from adult males. “It is a distinctive song—like a fingerprint, but learned,” says one of the researchers. “It serves to attract females and protect territory. It is the bird’s way of saying, ‘This is me, and here I am.’”However, urbanization and habitat loss have broken this learning chain, causing local song “dialects” to disappear."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-3",
+              "text": "Driven by this problem, researchers took on a pioneering task: bringing back a song that had disappeared from the wild—known only from a musical record made in the 1960s—to a population of chingolos."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-4",
+              "text": "Using physics-based modeling of the bird’s vocal tract ( 声 道 ) , the team first created an accurate artificial version of the lost song. They then engineered this model into a physical device designed to broadcast the forgotten melody—a “robotic tutor.” This artificial song was introduced to the chingolos in the park during their critical learning period from October to February. The sessions took place during peak singing hours and were limited to a maximum of eight hours. There were random pauses ( 停 顿 ) in between so that the birds interpreted the playback from the three devices placed in the area as a real exchange, as if these devices were responding to each other. This stimulated the birds’ vocal responses."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-5",
+              "text": "The results were impressive. Young chingolos learned and adopted the song, though they added their own population’s “accent” to the final trill (颤音) , which showed that their singing is shaped by learned behaviors and inborn characteristics."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-6",
+              "text": "“This is about preserving not just genetic, but cultural biodiversity,” says another researcher. The team is now developing AI systems to automatically identify individual bird songs and planning to study cultural spread in bird populations to ensure that bird culture is not lost again."
+            }
+          ]
+        }
+      },
+      "group-mock-sz-2026-m1-reading-d": {
+        "groupId": "group-mock-sz-2026-m1-reading-d",
+        "groupType": "reading",
+        "title": "Reading D",
+        "questionIds": [
+          "q-mock-sz-2026-m1-032",
+          "q-mock-sz-2026-m1-033",
+          "q-mock-sz-2026-m1-034",
+          "q-mock-sz-2026-m1-035"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-1",
+              "text": "When you rub (摩擦) a balloon on your skin, it produces electricity—a familiar example of charge separation ( 电 荷 分 离 ) , a process in which opposite charges are separated, creating electric potential. Similarly, raindrops striking a narrow tube create a tiny yet significant burst of energy. Now, researchers from the National University of Singapore (NUS) have tapped into this effect to generate electricity using rain-like droplets."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-2",
+              "text": "Conventional hydropower (水力 发电) relies on large water flows, which only work in places like rivers. For smaller, slower flows, researchers have explored charge separation. They use a tube to let water flow through it continuously. Charges gather on the surface that the water touches. In this way, researchers can collect charges, but it is far from effective."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-3",
+              "text": "To solve this problem, the NUS team built a special device. At both ends of the device—the top of the newly-designed tube (about 2 millimeters in width), and the water-collecting cup at the bottom—electrical wires were placed to harvest charges. First, water is released from a metal needle, forming rain-like droplets. When these droplets enter the tube, their impacts create “plug flow,” in which the water forms mini columns separated by air gaps. This flow is crucial because it allows more surface contact and more time for charges to build up, generating up to 100,000 times more charge separation than continuous flow. As charged droplets exit the tube and fall into the cup, charges build up in the water, creating an electric current. In tests, four tubes produced enough electricity to power 12LED lights continuously for 20 seconds."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-4",
+              "text": "According to the study’s lead author, this model shows how rain can be used to generate clean electricity effectively and sustainably, especially in rainy places such as Singapore. Its potential is enormous, as it offers an alternative energy source even in cities. Imagine a rain collection device on your roof, producing small amounts of electricity whenever it rains—a small step for a raindrop, but a giant leap for sustainable energy technology."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-fig-q33",
+              "text": "[图: fig-paper-mock-sz-2026-m1-reading-d-q33]"
+            }
+          ]
+        }
+      },
+      "group-mock-sz-2026-m1-seven-choices": {
+        "groupId": "group-mock-sz-2026-m1-seven-choices",
+        "groupType": "sevenChoices",
+        "title": "七选五",
+        "questionIds": [
+          "q-mock-sz-2026-m1-036",
+          "q-mock-sz-2026-m1-037",
+          "q-mock-sz-2026-m1-038",
+          "q-mock-sz-2026-m1-039",
+          "q-mock-sz-2026-m1-040"
+        ],
+        "blankIds": [
+          "blank-mock-sz-2026-m1-036",
+          "blank-mock-sz-2026-m1-037",
+          "blank-mock-sz-2026-m1-038",
+          "blank-mock-sz-2026-m1-039",
+          "blank-mock-sz-2026-m1-040"
+        ],
+        "optionBank": [
+          {
+            "label": "A",
+            "text": "I am not moving, yet I am traveling."
+          },
+          {
+            "label": "B",
+            "text": "Yet real travel leaves a deeper mark."
+          },
+          {
+            "label": "C",
+            "text": "My feet ache as my journey stretches across the day."
+          },
+          {
+            "label": "D",
+            "text": "Virtual journeys are convenient, time-saving, and widely accessible."
+          },
+          {
+            "label": "E",
+            "text": "Some knowledge, it seems, only arrives when your feet are on the ground."
+          },
+          {
+            "label": "F",
+            "text": "It demands choices, adaptation, and constant awareness of the unexpected."
+          },
+          {
+            "label": "G",
+            "text": "But the convenience may gradually weaken our desire to explore the real world."
+          }
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-seven-title",
+              "text": "I put on a headset, and within seconds I am somewhere else. Ice sheets float on dark water. Wind brushes past my ears, sharp and restless. In the distance, mountains glow ( 发 光 ) under the moonlight. Moments later, I find myself inside a museum, leaning close to a painting I have never seen in real life. __36__ This is the promise of virtual reality (VR): a world delivered to us without leaving home."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-seven-p1",
+              "text": "There is much to appreciate in this form of travel. __37__ There is no need to consider weather conditions, health issues or financial pressure. You may enter distant places at any moment and leave just as freely. For those restricted by schedule, health, or income, VR quietly removes barriers that traditional travel often sets in place."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-seven-p2",
+              "text": "__38__ Travelers wander through unfamiliar streets, sample local dishes, and engage face-to-face with people shaped by different traditions. Such encounters awaken the senses and create lasting memories. More importantly, they change how places feel to us, not just how we understand them."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-seven-p3",
+              "text": "This distinction is clear, because learning about a destination is not the same as being there. Virtual travel offers designed scenes and programmed sensations, but it remains carefully controlled. Real travel, by contrast, is shaped by unpredictability. __39__ In those unplanned moments, understanding becomes lived rather than recorded."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-seven-p4",
+              "text": "Virtual reality will undoubtedly continue to evolve, enriching how we preview journeys and imagine distant worlds. Still, it cannot replace actual presence. Travel is not simply about seeing farther; it is also about feeling where you stand. __40__"
+            }
+          ]
+        }
+      },
+      "group-mock-sz-2026-m1-cloze": {
+        "groupId": "group-mock-sz-2026-m1-cloze",
+        "groupType": "cloze",
+        "title": "完形填空",
+        "questionIds": [
+          "q-mock-sz-2026-m1-041",
+          "q-mock-sz-2026-m1-042",
+          "q-mock-sz-2026-m1-043",
+          "q-mock-sz-2026-m1-044",
+          "q-mock-sz-2026-m1-045",
+          "q-mock-sz-2026-m1-046",
+          "q-mock-sz-2026-m1-047",
+          "q-mock-sz-2026-m1-048",
+          "q-mock-sz-2026-m1-049",
+          "q-mock-sz-2026-m1-050",
+          "q-mock-sz-2026-m1-051",
+          "q-mock-sz-2026-m1-052",
+          "q-mock-sz-2026-m1-053",
+          "q-mock-sz-2026-m1-054",
+          "q-mock-sz-2026-m1-055"
+        ],
+        "blankIds": [
+          "blank-mock-sz-2026-m1-041",
+          "blank-mock-sz-2026-m1-042",
+          "blank-mock-sz-2026-m1-043",
+          "blank-mock-sz-2026-m1-044",
+          "blank-mock-sz-2026-m1-045",
+          "blank-mock-sz-2026-m1-046",
+          "blank-mock-sz-2026-m1-047",
+          "blank-mock-sz-2026-m1-048",
+          "blank-mock-sz-2026-m1-049",
+          "blank-mock-sz-2026-m1-050",
+          "blank-mock-sz-2026-m1-051",
+          "blank-mock-sz-2026-m1-052",
+          "blank-mock-sz-2026-m1-053",
+          "blank-mock-sz-2026-m1-054",
+          "blank-mock-sz-2026-m1-055"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-cloze-title",
+              "text": "I still remember the day I bought my “nice” notebook. It was a leather-bound journal with cream-colored pages. I was sure it would make me the type of person who journals regularly, and who __41__ beautiful thoughts. But it didn’t work."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-cloze-p1",
+              "text": "That gorgeous notebook sat __42__ for months. When I finally opened it, I hesitated. The pages felt too delicate and too __43__ to waste on my messy handwriting and ideas. So I __44__ it. Instead, I grabbed an old, ugly composition notebook with a __45__ cover and dog-eared corners. I started to __46__ it with everything: morning pages, random thoughts and reminders. This is surprisingly __47__. I actually wrote. Every day. Without exception."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-cloze-p2",
+              "text": "The psychology is real. When we __48__ something too much, we place limits around it, feeling it is “too good.” But the ugly notebook carries no such __49__. It has been used. It tells me, “This is a __50__ for thinking and living, not a museum piece.”"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-cloze-p3",
+              "text": "Here’s the thing: __51__ notebooks are idea incubators ( 孵 化 器 ) . With the pressure off, you experiment more. You try things that might __52__. And in that freedom, bad ideas I was __53__ embarrassed about gradually evolved into work I’m proud of. And that’s where the real work of creation happens."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-cloze-p4",
+              "text": "The best notebook is never the most beautiful one. It’s the one you’ll actually __54__. Because the magic happens in the __55__, not in perfect pages."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-cloze-p5",
+              "text": "Your ugly notebook is waiting."
+            }
+          ]
+        }
+      },
+      "group-mock-sz-2026-m1-grammar-fill": {
+        "groupId": "group-mock-sz-2026-m1-grammar-fill",
+        "groupType": "grammarFill",
+        "title": "语法填空",
+        "questionIds": [
+          "q-mock-sz-2026-m1-056",
+          "q-mock-sz-2026-m1-057",
+          "q-mock-sz-2026-m1-058",
+          "q-mock-sz-2026-m1-059",
+          "q-mock-sz-2026-m1-060",
+          "q-mock-sz-2026-m1-061",
+          "q-mock-sz-2026-m1-062",
+          "q-mock-sz-2026-m1-063",
+          "q-mock-sz-2026-m1-064",
+          "q-mock-sz-2026-m1-065"
+        ],
+        "blankIds": [
+          "blank-mock-sz-2026-m1-056",
+          "blank-mock-sz-2026-m1-057",
+          "blank-mock-sz-2026-m1-058",
+          "blank-mock-sz-2026-m1-059",
+          "blank-mock-sz-2026-m1-060",
+          "blank-mock-sz-2026-m1-061",
+          "blank-mock-sz-2026-m1-062",
+          "blank-mock-sz-2026-m1-063",
+          "blank-mock-sz-2026-m1-064",
+          "blank-mock-sz-2026-m1-065"
+        ],
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-grammar-fill-title",
+              "text": "When I first opened Where the Deer Hide in the Woods, I felt as if I were stepping into a world __56__ the author’s words flow like gentle music. The Tang poems, __57__ (translate) with the master touch of Xu Yuanchong, speak softly in two voices—one Chinese, one English—each echoing (回 响 ) with calm, beauty, and quiet __58__ (deep) ."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-grammar-fill-p1",
+              "text": "The book __59__ (divide) into six chapters, each unfolding a distinct landscape of emotion—sorrow, peace, love, longing, solitude, and reflection. I was __60__ (genuine) moved when I read “The monkeys on both banks are still calling; my light boat has sailed past a thousand hills.” I fully __61__ (sense) Li Bai’s liberated soul—his joy at being pardoned by the emperor—flowing through the lines."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-grammar-fill-p2",
+              "text": "Each page of the book is enriched with thoughtful notes, vivid background stories, and traditional Chinese brush-style __62__ (illustration) . Xu’s artful work transforms the rhythm ( 节 奏 ) of Chinese poems __63__ English music, a recreation that honors both the original and its new form."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-grammar-fill-p3",
+              "text": "__64__ (read) this book feels like a journey through hearts and landscapes. For anyone who treasures poetry, painting, or the meeting of two cultures in perfect harmony, Where the Deer Hide in the Woods is __65__ must-read that beautifully serves as the bridge."
+            }
+          ]
+        }
+      },
+      "group-mock-sz-2026-m1-writing-application": {
+        "groupId": "group-mock-sz-2026-m1-writing-application",
+        "groupType": "writing",
+        "title": "应用文写作",
+        "questionIds": [],
+        "writingTaskId": "wt-mock-sz-2026-m1-application",
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-writing-app-title",
+              "text": "假定你是李华。你的朋友Alex计划参观中国国家博物馆，他来信请你推荐一件你喜欢的展品。 请你给他回复邮件，结合外观、功能等，推荐这盏汉代的雁鱼青铜灯(Bronze Wild Goose-and-Fish Lamp)。"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-writing-app-fig-lamp",
+              "text": "[图: fig-paper-mock-sz-2026-m1-writing-application-lamp]"
+            }
+          ]
+        }
+      },
+      "group-mock-sz-2026-m1-writing-continuation": {
+        "groupId": "group-mock-sz-2026-m1-writing-continuation",
+        "groupType": "writing",
+        "title": "读后续写",
+        "questionIds": [],
+        "writingTaskId": "wt-mock-sz-2026-m1-continuation",
+        "passage": {
+          "paragraphs": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-writing-cont-title",
+              "text": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-writing-cont-p1",
+              "text": "The community library was Megan’s peaceful kingdom, a place of quiet whispers and turning pages. Every summer vacation, she worked as a student volunteer, feeling responsible for protecting this quiet space."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-writing-cont-p2",
+              "text": "Lately, a boy named Liam had become her challenge. Liam wasn’t rude—he just couldn’t sit still. Like clockwork, he would get up to “stretch his legs,” pacing between the bookshelves. Sometimes he’d accidentally knock over a chair. Once, absorbed in a picture book, he let out a loud “Whoa!” when he saw a giant dinosaur filled the page. In the silence, each sound drew looks from other readers."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-writing-cont-p3",
+              "text": "Yesterday, when Megan walked over and reminded him gently again, Liam’s face turned red. “I’m really sorry,” he whispered sincerely. “I don’t mean to. I just... I really like being here.” She believed him. She had noticed that Liam was a curious explorer of books. He would pull out a book on dinosaurs, reading with intense focus for a few minutes, then move on to another about volcanoes or space rockets. He just loved the library."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-writing-cont-p4",
+              "text": "Megan went back to her office. A note on the head librarian’s desk caught her eye. It read, “More Lively Reading Activities? Book sharing? Acting?” Seeing this, Megan suddenly remembered the librarian had mentioned she could feel free to use the garden at the back of the library. It was a place where some unused items were stored—some old chairs, folding tables, all piled up gathering dust under a large tree. At the time, Megan hadn’t thought much about it. But now, the thoughts of directing Liam’s energy and making use of the garden connected in her mind. Perhaps the solution wasn’t to quiet Liam down, but to give his energy and love for books a positive stage, right here in their own library."
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-writing-cont-p5",
+              "text": "An idea for a “Garden Reading Corner” project, aimed at young readers, began to take shape. The next morning, she found Liam among the bookshelves. “Want to do something really cool?” she said, her voice low but excited. Liam did not answer at once, but the eager light in his eyes said everything."
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-mock-sz-2026-m1-021": {
+        "questionId": "q-mock-sz-2026-m1-021",
+        "questionNo": 21,
+        "groupId": "group-mock-sz-2026-m1-reading-a",
+        "stem": "Which is essential to solve the sample puzzle?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Linguistic fluency."
+          },
+          {
+            "label": "B",
+            "text": "Reasoning ability."
+          },
+          {
+            "label": "C",
+            "text": "Geographic knowledge."
+          },
+          {
+            "label": "D",
+            "text": "Mathematical calculation."
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-022": {
+        "questionId": "q-mock-sz-2026-m1-022",
+        "questionNo": 22,
+        "groupId": "group-mock-sz-2026-m1-reading-a",
+        "stem": "What is different about the rules for the individual and team contest?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The duration of the competition."
+          },
+          {
+            "label": "B",
+            "text": "The deadline for language choice."
+          },
+          {
+            "label": "C",
+            "text": "The result of giving multiple answers."
+          },
+          {
+            "label": "D",
+            "text": "The requirement for answer explanations."
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-023": {
+        "questionId": "q-mock-sz-2026-m1-023",
+        "questionNo": 23,
+        "groupId": "group-mock-sz-2026-m1-reading-a",
+        "stem": "If there are 240 individual contestants, how many medals could be awarded in total?",
+        "options": [
+          {
+            "label": "A",
+            "text": "40."
+          },
+          {
+            "label": "B",
+            "text": "54."
+          },
+          {
+            "label": "C",
+            "text": "72."
+          },
+          {
+            "label": "D",
+            "text": "84."
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-024": {
+        "questionId": "q-mock-sz-2026-m1-024",
+        "questionNo": 24,
+        "groupId": "group-mock-sz-2026-m1-reading-b",
+        "stem": "How did the author cross the bridge?",
+        "options": [
+          {
+            "label": "A",
+            "text": "By taking mindful steps."
+          },
+          {
+            "label": "B",
+            "text": "By rushing across it bravely."
+          },
+          {
+            "label": "C",
+            "text": "By using her sense of direction."
+          },
+          {
+            "label": "D",
+            "text": "By having the guide drag her over."
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-025": {
+        "questionId": "q-mock-sz-2026-m1-025",
+        "questionNo": 25,
+        "groupId": "group-mock-sz-2026-m1-reading-b",
+        "stem": "Why did the bears leave?",
+        "options": [
+          {
+            "label": "A",
+            "text": "They were attracted by the natural setting."
+          },
+          {
+            "label": "B",
+            "text": "They were afraid of the noise of the rapids."
+          },
+          {
+            "label": "C",
+            "text": "They were surprised at the group’s actions."
+          },
+          {
+            "label": "D",
+            "text": "They were threatened by the guide’s rocks."
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-026": {
+        "questionId": "q-mock-sz-2026-m1-026",
+        "questionNo": 26,
+        "groupId": "group-mock-sz-2026-m1-reading-b",
+        "stem": "Why did the guide ask them for a stick, rock, and leaf?",
+        "options": [
+          {
+            "label": "A",
+            "text": "To pick up some souvenirs."
+          },
+          {
+            "label": "B",
+            "text": "To reflect on the journey."
+          },
+          {
+            "label": "C",
+            "text": "To symbolize their teamwork."
+          },
+          {
+            "label": "D",
+            "text": "To check their observation skills."
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-027": {
+        "questionId": "q-mock-sz-2026-m1-027",
+        "questionNo": 27,
+        "groupId": "group-mock-sz-2026-m1-reading-b",
+        "stem": "What does the underlined phrase “over the hill” in the last paragraph mean?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Past the peak of youth."
+          },
+          {
+            "label": "B",
+            "text": "Too high to go down."
+          },
+          {
+            "label": "C",
+            "text": "Out of place in society."
+          },
+          {
+            "label": "D",
+            "text": "Beyond physical limits."
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-028": {
+        "questionId": "q-mock-sz-2026-m1-028",
+        "questionNo": 28,
+        "groupId": "group-mock-sz-2026-m1-reading-c",
+        "stem": "Why did the researchers teach the birds the song?",
+        "options": [
+          {
+            "label": "A",
+            "text": "To save an endangered species."
+          },
+          {
+            "label": "B",
+            "text": "To study the birds’ brain structure."
+          },
+          {
+            "label": "C",
+            "text": "To develop new robotic devices."
+          },
+          {
+            "label": "D",
+            "text": "To preserve the birds’ cultural heritage."
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-029": {
+        "questionId": "q-mock-sz-2026-m1-029",
+        "questionNo": 29,
+        "groupId": "group-mock-sz-2026-m1-reading-c",
+        "stem": "What is a role of chingolos’ song?",
+        "options": [
+          {
+            "label": "A",
+            "text": "It keeps hunters away from them."
+          },
+          {
+            "label": "B",
+            "text": "It helps them adapt to urban growth."
+          },
+          {
+            "label": "C",
+            "text": "It functions as their social identity."
+          },
+          {
+            "label": "D",
+            "text": "It makes them remember their habitat."
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-030": {
+        "questionId": "q-mock-sz-2026-m1-030",
+        "questionNo": 30,
+        "groupId": "group-mock-sz-2026-m1-reading-c",
+        "stem": "What is the purpose of the random pauses?",
+        "options": [
+          {
+            "label": "A",
+            "text": "To protect the birds’ vocal tract."
+          },
+          {
+            "label": "B",
+            "text": "To test the birds’ reaction speed."
+          },
+          {
+            "label": "C",
+            "text": "To push the birds to catch the beat."
+          },
+          {
+            "label": "D",
+            "text": "To trick the birds into interaction."
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-031": {
+        "questionId": "q-mock-sz-2026-m1-031",
+        "questionNo": 31,
+        "groupId": "group-mock-sz-2026-m1-reading-c",
+        "stem": "What can we learn from chingolos’ learning results?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The song has spread to other bird species."
+          },
+          {
+            "label": "B",
+            "text": "Their singing shows special vocal features."
+          },
+          {
+            "label": "C",
+            "text": "Their response to the song needs improving."
+          },
+          {
+            "label": "D",
+            "text": "The effectiveness depends on their population."
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-032": {
+        "questionId": "q-mock-sz-2026-m1-032",
+        "questionNo": 32,
+        "groupId": "group-mock-sz-2026-m1-reading-d",
+        "stem": "What problem do the NUS researchers aim to solve?",
+        "options": [
+          {
+            "label": "A",
+            "text": "The difficulty of separating charges."
+          },
+          {
+            "label": "B",
+            "text": "The lack of clean electricity sources."
+          },
+          {
+            "label": "C",
+            "text": "The inefficiency of charge harvesting."
+          },
+          {
+            "label": "D",
+            "text": "The damage of traditional hydropower."
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-033": {
+        "questionId": "q-mock-sz-2026-m1-033",
+        "questionNo": 33,
+        "groupId": "group-mock-sz-2026-m1-reading-d",
+        "stem": "Which of the following best illustrates “plug flow”?",
+        "options": [
+          {
+            "label": "A",
+            "text": "[Fig.]"
+          },
+          {
+            "label": "B",
+            "text": "[Fig.]"
+          },
+          {
+            "label": "C",
+            "text": "[Fig.]"
+          },
+          {
+            "label": "D",
+            "text": "[Fig.]"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-034": {
+        "questionId": "q-mock-sz-2026-m1-034",
+        "questionNo": 34,
+        "groupId": "group-mock-sz-2026-m1-reading-d",
+        "stem": "What is the last paragraph mainly about concerning the model?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Its potential cost in urban areas."
+          },
+          {
+            "label": "B",
+            "text": "Its promising use in green energy."
+          },
+          {
+            "label": "C",
+            "text": "Its complex design for rain power."
+          },
+          {
+            "label": "D",
+            "text": "Its practical need for more devices."
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-035": {
+        "questionId": "q-mock-sz-2026-m1-035",
+        "questionNo": 35,
+        "groupId": "group-mock-sz-2026-m1-reading-d",
+        "stem": "What is a suitable title for the text?",
+        "options": [
+          {
+            "label": "A",
+            "text": "Revolutionary Energy from Raindrops"
+          },
+          {
+            "label": "B",
+            "text": "Urgent Demand for Sustainable Energy"
+          },
+          {
+            "label": "C",
+            "text": "Capturing Raindrops through Innovation"
+          },
+          {
+            "label": "D",
+            "text": "Turning Charge Separation into Electricity"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-036": {
+        "questionId": "q-mock-sz-2026-m1-036",
+        "questionNo": 36,
+        "groupId": "group-mock-sz-2026-m1-seven-choices",
+        "stem": "36",
+        "blankId": "blank-mock-sz-2026-m1-036"
+      },
+      "q-mock-sz-2026-m1-037": {
+        "questionId": "q-mock-sz-2026-m1-037",
+        "questionNo": 37,
+        "groupId": "group-mock-sz-2026-m1-seven-choices",
+        "stem": "37",
+        "blankId": "blank-mock-sz-2026-m1-037"
+      },
+      "q-mock-sz-2026-m1-038": {
+        "questionId": "q-mock-sz-2026-m1-038",
+        "questionNo": 38,
+        "groupId": "group-mock-sz-2026-m1-seven-choices",
+        "stem": "38",
+        "blankId": "blank-mock-sz-2026-m1-038"
+      },
+      "q-mock-sz-2026-m1-039": {
+        "questionId": "q-mock-sz-2026-m1-039",
+        "questionNo": 39,
+        "groupId": "group-mock-sz-2026-m1-seven-choices",
+        "stem": "39",
+        "blankId": "blank-mock-sz-2026-m1-039"
+      },
+      "q-mock-sz-2026-m1-040": {
+        "questionId": "q-mock-sz-2026-m1-040",
+        "questionNo": 40,
+        "groupId": "group-mock-sz-2026-m1-seven-choices",
+        "stem": "40",
+        "blankId": "blank-mock-sz-2026-m1-040"
+      },
+      "q-mock-sz-2026-m1-041": {
+        "questionId": "q-mock-sz-2026-m1-041",
+        "questionNo": 41,
+        "groupId": "group-mock-sz-2026-m1-cloze",
+        "stem": "41",
+        "blankId": "blank-mock-sz-2026-m1-041",
+        "options": [
+          {
+            "label": "A",
+            "text": "changes"
+          },
+          {
+            "label": "B",
+            "text": "captures"
+          },
+          {
+            "label": "C",
+            "text": "follows"
+          },
+          {
+            "label": "D",
+            "text": "lacks"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-042": {
+        "questionId": "q-mock-sz-2026-m1-042",
+        "questionNo": 42,
+        "groupId": "group-mock-sz-2026-m1-cloze",
+        "stem": "42",
+        "blankId": "blank-mock-sz-2026-m1-042",
+        "options": [
+          {
+            "label": "A",
+            "text": "unfinished"
+          },
+          {
+            "label": "B",
+            "text": "unclaimed"
+          },
+          {
+            "label": "C",
+            "text": "undiscovered"
+          },
+          {
+            "label": "D",
+            "text": "untouched"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-043": {
+        "questionId": "q-mock-sz-2026-m1-043",
+        "questionNo": 43,
+        "groupId": "group-mock-sz-2026-m1-cloze",
+        "stem": "43",
+        "blankId": "blank-mock-sz-2026-m1-043",
+        "options": [
+          {
+            "label": "A",
+            "text": "secret"
+          },
+          {
+            "label": "B",
+            "text": "smart"
+          },
+          {
+            "label": "C",
+            "text": "precious"
+          },
+          {
+            "label": "D",
+            "text": "personal"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-044": {
+        "questionId": "q-mock-sz-2026-m1-044",
+        "questionNo": 44,
+        "groupId": "group-mock-sz-2026-m1-cloze",
+        "stem": "44",
+        "blankId": "blank-mock-sz-2026-m1-044",
+        "options": [
+          {
+            "label": "A",
+            "text": "closed"
+          },
+          {
+            "label": "B",
+            "text": "decorated"
+          },
+          {
+            "label": "C",
+            "text": "delivered"
+          },
+          {
+            "label": "D",
+            "text": "fixed"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-045": {
+        "questionId": "q-mock-sz-2026-m1-045",
+        "questionNo": 45,
+        "groupId": "group-mock-sz-2026-m1-cloze",
+        "stem": "45",
+        "blankId": "blank-mock-sz-2026-m1-045",
+        "options": [
+          {
+            "label": "A",
+            "text": "torn"
+          },
+          {
+            "label": "B",
+            "text": "hard"
+          },
+          {
+            "label": "C",
+            "text": "hidden"
+          },
+          {
+            "label": "D",
+            "text": "fancy"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-046": {
+        "questionId": "q-mock-sz-2026-m1-046",
+        "questionNo": 46,
+        "groupId": "group-mock-sz-2026-m1-cloze",
+        "stem": "46",
+        "blankId": "blank-mock-sz-2026-m1-046",
+        "options": [
+          {
+            "label": "A",
+            "text": "guard"
+          },
+          {
+            "label": "B",
+            "text": "surround"
+          },
+          {
+            "label": "C",
+            "text": "fill"
+          },
+          {
+            "label": "D",
+            "text": "serve"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-047": {
+        "questionId": "q-mock-sz-2026-m1-047",
+        "questionNo": 47,
+        "groupId": "group-mock-sz-2026-m1-cloze",
+        "stem": "47",
+        "blankId": "blank-mock-sz-2026-m1-047",
+        "options": [
+          {
+            "label": "A",
+            "text": "annoying"
+          },
+          {
+            "label": "B",
+            "text": "freeing"
+          },
+          {
+            "label": "C",
+            "text": "demanding"
+          },
+          {
+            "label": "D",
+            "text": "convincing"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-048": {
+        "questionId": "q-mock-sz-2026-m1-048",
+        "questionNo": 48,
+        "groupId": "group-mock-sz-2026-m1-cloze",
+        "stem": "48",
+        "blankId": "blank-mock-sz-2026-m1-048",
+        "options": [
+          {
+            "label": "A",
+            "text": "plan"
+          },
+          {
+            "label": "B",
+            "text": "doubt"
+          },
+          {
+            "label": "C",
+            "text": "control"
+          },
+          {
+            "label": "D",
+            "text": "admire"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-049": {
+        "questionId": "q-mock-sz-2026-m1-049",
+        "questionNo": 49,
+        "groupId": "group-mock-sz-2026-m1-cloze",
+        "stem": "49",
+        "blankId": "blank-mock-sz-2026-m1-049",
+        "options": [
+          {
+            "label": "A",
+            "text": "luck"
+          },
+          {
+            "label": "B",
+            "text": "warning"
+          },
+          {
+            "label": "C",
+            "text": "promise"
+          },
+          {
+            "label": "D",
+            "text": "pressure"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-050": {
+        "questionId": "q-mock-sz-2026-m1-050",
+        "questionNo": 50,
+        "groupId": "group-mock-sz-2026-m1-cloze",
+        "stem": "50",
+        "blankId": "blank-mock-sz-2026-m1-050",
+        "options": [
+          {
+            "label": "A",
+            "text": "tool"
+          },
+          {
+            "label": "B",
+            "text": "test"
+          },
+          {
+            "label": "C",
+            "text": "guide"
+          },
+          {
+            "label": "D",
+            "text": "reason"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-051": {
+        "questionId": "q-mock-sz-2026-m1-051",
+        "questionNo": 51,
+        "groupId": "group-mock-sz-2026-m1-cloze",
+        "stem": "51",
+        "blankId": "blank-mock-sz-2026-m1-051",
+        "options": [
+          {
+            "label": "A",
+            "text": "incomplete"
+          },
+          {
+            "label": "B",
+            "text": "impractical"
+          },
+          {
+            "label": "C",
+            "text": "imperfect"
+          },
+          {
+            "label": "D",
+            "text": "irregular"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-052": {
+        "questionId": "q-mock-sz-2026-m1-052",
+        "questionNo": 52,
+        "groupId": "group-mock-sz-2026-m1-cloze",
+        "stem": "52",
+        "blankId": "blank-mock-sz-2026-m1-052",
+        "options": [
+          {
+            "label": "A",
+            "text": "cheat"
+          },
+          {
+            "label": "B",
+            "text": "fail"
+          },
+          {
+            "label": "C",
+            "text": "hurt"
+          },
+          {
+            "label": "D",
+            "text": "disappear"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-053": {
+        "questionId": "q-mock-sz-2026-m1-053",
+        "questionNo": 53,
+        "groupId": "group-mock-sz-2026-m1-cloze",
+        "stem": "53",
+        "blankId": "blank-mock-sz-2026-m1-053",
+        "options": [
+          {
+            "label": "A",
+            "text": "slightly"
+          },
+          {
+            "label": "B",
+            "text": "initially"
+          },
+          {
+            "label": "C",
+            "text": "hardly"
+          },
+          {
+            "label": "D",
+            "text": "consequently"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-054": {
+        "questionId": "q-mock-sz-2026-m1-054",
+        "questionNo": 54,
+        "groupId": "group-mock-sz-2026-m1-cloze",
+        "stem": "54",
+        "blankId": "blank-mock-sz-2026-m1-054",
+        "options": [
+          {
+            "label": "A",
+            "text": "run into"
+          },
+          {
+            "label": "B",
+            "text": "refer to"
+          },
+          {
+            "label": "C",
+            "text": "look at"
+          },
+          {
+            "label": "D",
+            "text": "reach for"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-055": {
+        "questionId": "q-mock-sz-2026-m1-055",
+        "questionNo": 55,
+        "groupId": "group-mock-sz-2026-m1-cloze",
+        "stem": "55",
+        "blankId": "blank-mock-sz-2026-m1-055",
+        "options": [
+          {
+            "label": "A",
+            "text": "preparing"
+          },
+          {
+            "label": "B",
+            "text": "thinking"
+          },
+          {
+            "label": "C",
+            "text": "writing"
+          },
+          {
+            "label": "D",
+            "text": "reading"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-056": {
+        "questionId": "q-mock-sz-2026-m1-056",
+        "questionNo": 56,
+        "groupId": "group-mock-sz-2026-m1-grammar-fill",
+        "stem": "56",
+        "blankId": "blank-mock-sz-2026-m1-056"
+      },
+      "q-mock-sz-2026-m1-057": {
+        "questionId": "q-mock-sz-2026-m1-057",
+        "questionNo": 57,
+        "groupId": "group-mock-sz-2026-m1-grammar-fill",
+        "stem": "57",
+        "blankId": "blank-mock-sz-2026-m1-057"
+      },
+      "q-mock-sz-2026-m1-058": {
+        "questionId": "q-mock-sz-2026-m1-058",
+        "questionNo": 58,
+        "groupId": "group-mock-sz-2026-m1-grammar-fill",
+        "stem": "58",
+        "blankId": "blank-mock-sz-2026-m1-058"
+      },
+      "q-mock-sz-2026-m1-059": {
+        "questionId": "q-mock-sz-2026-m1-059",
+        "questionNo": 59,
+        "groupId": "group-mock-sz-2026-m1-grammar-fill",
+        "stem": "59",
+        "blankId": "blank-mock-sz-2026-m1-059"
+      },
+      "q-mock-sz-2026-m1-060": {
+        "questionId": "q-mock-sz-2026-m1-060",
+        "questionNo": 60,
+        "groupId": "group-mock-sz-2026-m1-grammar-fill",
+        "stem": "60",
+        "blankId": "blank-mock-sz-2026-m1-060"
+      },
+      "q-mock-sz-2026-m1-061": {
+        "questionId": "q-mock-sz-2026-m1-061",
+        "questionNo": 61,
+        "groupId": "group-mock-sz-2026-m1-grammar-fill",
+        "stem": "61",
+        "blankId": "blank-mock-sz-2026-m1-061"
+      },
+      "q-mock-sz-2026-m1-062": {
+        "questionId": "q-mock-sz-2026-m1-062",
+        "questionNo": 62,
+        "groupId": "group-mock-sz-2026-m1-grammar-fill",
+        "stem": "62",
+        "blankId": "blank-mock-sz-2026-m1-062"
+      },
+      "q-mock-sz-2026-m1-063": {
+        "questionId": "q-mock-sz-2026-m1-063",
+        "questionNo": 63,
+        "groupId": "group-mock-sz-2026-m1-grammar-fill",
+        "stem": "63",
+        "blankId": "blank-mock-sz-2026-m1-063"
+      },
+      "q-mock-sz-2026-m1-064": {
+        "questionId": "q-mock-sz-2026-m1-064",
+        "questionNo": 64,
+        "groupId": "group-mock-sz-2026-m1-grammar-fill",
+        "stem": "64",
+        "blankId": "blank-mock-sz-2026-m1-064"
+      },
+      "q-mock-sz-2026-m1-065": {
+        "questionId": "q-mock-sz-2026-m1-065",
+        "questionNo": 65,
+        "groupId": "group-mock-sz-2026-m1-grammar-fill",
+        "stem": "65",
+        "blankId": "blank-mock-sz-2026-m1-065"
+      }
+    },
+    "blanks": {
+      "blank-mock-sz-2026-m1-056": {
+        "blankId": "blank-mock-sz-2026-m1-056",
+        "groupId": "group-mock-sz-2026-m1-grammar-fill",
+        "questionId": "q-mock-sz-2026-m1-056"
+      },
+      "blank-mock-sz-2026-m1-057": {
+        "blankId": "blank-mock-sz-2026-m1-057",
+        "groupId": "group-mock-sz-2026-m1-grammar-fill",
+        "questionId": "q-mock-sz-2026-m1-057",
+        "prompt": "translate"
+      },
+      "blank-mock-sz-2026-m1-058": {
+        "blankId": "blank-mock-sz-2026-m1-058",
+        "groupId": "group-mock-sz-2026-m1-grammar-fill",
+        "questionId": "q-mock-sz-2026-m1-058",
+        "prompt": "deep"
+      },
+      "blank-mock-sz-2026-m1-059": {
+        "blankId": "blank-mock-sz-2026-m1-059",
+        "groupId": "group-mock-sz-2026-m1-grammar-fill",
+        "questionId": "q-mock-sz-2026-m1-059",
+        "prompt": "divide"
+      },
+      "blank-mock-sz-2026-m1-060": {
+        "blankId": "blank-mock-sz-2026-m1-060",
+        "groupId": "group-mock-sz-2026-m1-grammar-fill",
+        "questionId": "q-mock-sz-2026-m1-060",
+        "prompt": "genuine"
+      },
+      "blank-mock-sz-2026-m1-061": {
+        "blankId": "blank-mock-sz-2026-m1-061",
+        "groupId": "group-mock-sz-2026-m1-grammar-fill",
+        "questionId": "q-mock-sz-2026-m1-061",
+        "prompt": "sense"
+      },
+      "blank-mock-sz-2026-m1-062": {
+        "blankId": "blank-mock-sz-2026-m1-062",
+        "groupId": "group-mock-sz-2026-m1-grammar-fill",
+        "questionId": "q-mock-sz-2026-m1-062",
+        "prompt": "illustration"
+      },
+      "blank-mock-sz-2026-m1-063": {
+        "blankId": "blank-mock-sz-2026-m1-063",
+        "groupId": "group-mock-sz-2026-m1-grammar-fill",
+        "questionId": "q-mock-sz-2026-m1-063"
+      },
+      "blank-mock-sz-2026-m1-064": {
+        "blankId": "blank-mock-sz-2026-m1-064",
+        "groupId": "group-mock-sz-2026-m1-grammar-fill",
+        "questionId": "q-mock-sz-2026-m1-064",
+        "prompt": "read"
+      },
+      "blank-mock-sz-2026-m1-065": {
+        "blankId": "blank-mock-sz-2026-m1-065",
+        "groupId": "group-mock-sz-2026-m1-grammar-fill",
+        "questionId": "q-mock-sz-2026-m1-065"
+      }
+    },
+    "writingTasks": {
+      "wt-mock-sz-2026-m1-application": {
+        "writingTaskId": "wt-mock-sz-2026-m1-application",
+        "groupId": "group-mock-sz-2026-m1-writing-application",
+        "taskType": "application",
+        "title": "应用文写作",
+        "instruction": "假定你是李华。你的朋友Alex计划参观中国国家博物馆，他来信请你推荐一件你喜欢的展品。 请你给他回复邮件，结合外观、功能等，推荐这盏汉代的雁鱼青铜灯(Bronze Wild Goose-and-Fish Lamp)。",
+        "wordCountTarget": 80
+      },
+      "wt-mock-sz-2026-m1-continuation": {
+        "writingTaskId": "wt-mock-sz-2026-m1-continuation",
+        "groupId": "group-mock-sz-2026-m1-writing-continuation",
+        "taskType": "continuation",
+        "title": "读后续写",
+        "instruction": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。\nThe community library was Megan’s peaceful kingdom, a place of quiet whispers and turning pages. Every summer vacation, she worked as a student volunteer, feeling responsible for protecting this quiet space.\nLately, a boy named Liam had become her challenge. Liam wasn’t rude—he just couldn’t sit still. Like clockwork, he would get up to “stretch his legs,” pacing between the bookshelves. Sometimes he’d accidentally knock over a chair. Once, absorbed in a picture book, he let out a loud “Whoa!” when he saw a giant dinosaur filled the page. In the silence, each sound drew looks from other readers.\nYesterday, when Megan walked over and reminded him gently again, Liam’s face turned red. “I’m really sorry,” he whispered sincerely. “I don’t mean to. I just... I really like being here.” She believed him. She had noticed that Liam was a curious explorer of books. He would pull out a book on dinosaurs, reading with intense focus for a few minutes, then move on to another about volcanoes or space rockets. He just loved the library.\nMegan went back to her office. A note on the head librarian’s desk caught her eye. It read, “More Lively Reading Activities? Book sharing? Acting?” Seeing this, Megan suddenly remembered the librarian had mentioned she could feel free to use the garden at the back of the library. It was a place where some unused items were stored—some old chairs, folding tables, all piled up gathering dust under a large tree. At the time, Megan hadn’t thought much about it. But now, the thoughts of directing Liam’s energy and making use of the garden connected in her mind. Perhaps the solution wasn’t to quiet Liam down, but to give his energy and love for books a positive stage, right here in their own library.\nAn idea for a “Garden Reading Corner” project, aimed at young readers, began to take shape. The next morning, she found Liam among the bookshelves. “Want to do something really cool?” she said, her voice low but excited. Liam did not answer at once, but the eager light in his eyes said everything.",
+        "continuationStarters": [
+          "For the next week, Megan and Liam busied themselves with the project.",
+          "On the opening day of the project, they waited nervously in the garden."
+        ],
+        "materialText": "阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。\n\nThe community library was Megan’s peaceful kingdom, a place of quiet whispers and turning pages. Every summer vacation, she worked as a student volunteer, feeling responsible for protecting this quiet space.\n\nLately, a boy named Liam had become her challenge. Liam wasn’t rude—he just couldn’t sit still. Like clockwork, he would get up to “stretch his legs,” pacing between the bookshelves. Sometimes he’d accidentally knock over a chair. Once, absorbed in a picture book, he let out a loud “Whoa!” when he saw a giant dinosaur filled the page. In the silence, each sound drew looks from other readers.\n\nYesterday, when Megan walked over and reminded him gently again, Liam’s face turned red. “I’m really sorry,” he whispered sincerely. “I don’t mean to. I just... I really like being here.” She believed him. She had noticed that Liam was a curious explorer of books. He would pull out a book on dinosaurs, reading with intense focus for a few minutes, then move on to another about volcanoes or space rockets. He just loved the library.\n\nMegan went back to her office. A note on the head librarian’s desk caught her eye. It read, “More Lively Reading Activities? Book sharing? Acting?” Seeing this, Megan suddenly remembered the librarian had mentioned she could feel free to use the garden at the back of the library. It was a place where some unused items were stored—some old chairs, folding tables, all piled up gathering dust under a large tree. At the time, Megan hadn’t thought much about it. But now, the thoughts of directing Liam’s energy and making use of the garden connected in her mind. Perhaps the solution wasn’t to quiet Liam down, but to give his energy and love for books a positive stage, right here in their own library.\n\nAn idea for a “Garden Reading Corner” project, aimed at young readers, began to take shape. The next morning, she found Liam among the bookshelves. “Want to do something really cool?” she said, her voice low but excited. Liam did not answer at once, but the eager light in his eyes said everything.",
+        "wordCountTarget": 150
+      }
+    }
+  },
+  "answerKey": {
+    "answers": {
+      "q-mock-sz-2026-m1-021": {
+        "questionId": "q-mock-sz-2026-m1-021",
+        "questionNo": 21,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-022": {
+        "questionId": "q-mock-sz-2026-m1-022",
+        "questionNo": 22,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-023": {
+        "questionId": "q-mock-sz-2026-m1-023",
+        "questionNo": 23,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-024": {
+        "questionId": "q-mock-sz-2026-m1-024",
+        "questionNo": 24,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-025": {
+        "questionId": "q-mock-sz-2026-m1-025",
+        "questionNo": 25,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-026": {
+        "questionId": "q-mock-sz-2026-m1-026",
+        "questionNo": 26,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-027": {
+        "questionId": "q-mock-sz-2026-m1-027",
+        "questionNo": 27,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-028": {
+        "questionId": "q-mock-sz-2026-m1-028",
+        "questionNo": 28,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-029": {
+        "questionId": "q-mock-sz-2026-m1-029",
+        "questionNo": 29,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-030": {
+        "questionId": "q-mock-sz-2026-m1-030",
+        "questionNo": 30,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-031": {
+        "questionId": "q-mock-sz-2026-m1-031",
+        "questionNo": 31,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-032": {
+        "questionId": "q-mock-sz-2026-m1-032",
+        "questionNo": 32,
+        "answer": "C",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-033": {
+        "questionId": "q-mock-sz-2026-m1-033",
+        "questionNo": 33,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-034": {
+        "questionId": "q-mock-sz-2026-m1-034",
+        "questionNo": 34,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-035": {
+        "questionId": "q-mock-sz-2026-m1-035",
+        "questionNo": 35,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-036": {
+        "questionId": "q-mock-sz-2026-m1-036",
+        "questionNo": 36,
+        "answer": "A",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-037": {
+        "questionId": "q-mock-sz-2026-m1-037",
+        "questionNo": 37,
+        "answer": "D",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-038": {
+        "questionId": "q-mock-sz-2026-m1-038",
+        "questionNo": 38,
+        "answer": "B",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-039": {
+        "questionId": "q-mock-sz-2026-m1-039",
+        "questionNo": 39,
+        "answer": "F",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-040": {
+        "questionId": "q-mock-sz-2026-m1-040",
+        "questionNo": 40,
+        "answer": "E",
+        "score": 2.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-041": {
+        "questionId": "q-mock-sz-2026-m1-041",
+        "questionNo": 41,
+        "answer": "B",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-042": {
+        "questionId": "q-mock-sz-2026-m1-042",
+        "questionNo": 42,
+        "answer": "D",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-043": {
+        "questionId": "q-mock-sz-2026-m1-043",
+        "questionNo": 43,
+        "answer": "C",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-044": {
+        "questionId": "q-mock-sz-2026-m1-044",
+        "questionNo": 44,
+        "answer": "A",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-045": {
+        "questionId": "q-mock-sz-2026-m1-045",
+        "questionNo": 45,
+        "answer": "A",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-046": {
+        "questionId": "q-mock-sz-2026-m1-046",
+        "questionNo": 46,
+        "answer": "C",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-047": {
+        "questionId": "q-mock-sz-2026-m1-047",
+        "questionNo": 47,
+        "answer": "B",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-048": {
+        "questionId": "q-mock-sz-2026-m1-048",
+        "questionNo": 48,
+        "answer": "D",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-049": {
+        "questionId": "q-mock-sz-2026-m1-049",
+        "questionNo": 49,
+        "answer": "D",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-050": {
+        "questionId": "q-mock-sz-2026-m1-050",
+        "questionNo": 50,
+        "answer": "A",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-051": {
+        "questionId": "q-mock-sz-2026-m1-051",
+        "questionNo": 51,
+        "answer": "C",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-052": {
+        "questionId": "q-mock-sz-2026-m1-052",
+        "questionNo": 52,
+        "answer": "B",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-053": {
+        "questionId": "q-mock-sz-2026-m1-053",
+        "questionNo": 53,
+        "answer": "B",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-054": {
+        "questionId": "q-mock-sz-2026-m1-054",
+        "questionNo": 54,
+        "answer": "D",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-055": {
+        "questionId": "q-mock-sz-2026-m1-055",
+        "questionNo": 55,
+        "answer": "C",
+        "score": 1,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-056": {
+        "questionId": "q-mock-sz-2026-m1-056",
+        "questionNo": 56,
+        "answer": "where",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-057": {
+        "questionId": "q-mock-sz-2026-m1-057",
+        "questionNo": 57,
+        "answer": "translated",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-058": {
+        "questionId": "q-mock-sz-2026-m1-058",
+        "questionNo": 58,
+        "answer": "depth",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-059": {
+        "questionId": "q-mock-sz-2026-m1-059",
+        "questionNo": 59,
+        "answer": "is divided",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-060": {
+        "questionId": "q-mock-sz-2026-m1-060",
+        "questionNo": 60,
+        "answer": "genuinely",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-061": {
+        "questionId": "q-mock-sz-2026-m1-061",
+        "questionNo": 61,
+        "answer": "sensed",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-062": {
+        "questionId": "q-mock-sz-2026-m1-062",
+        "questionNo": 62,
+        "answer": "illustrations",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-063": {
+        "questionId": "q-mock-sz-2026-m1-063",
+        "questionNo": 63,
+        "answer": "into",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-064": {
+        "questionId": "q-mock-sz-2026-m1-064",
+        "questionNo": 64,
+        "answer": "Reading",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      },
+      "q-mock-sz-2026-m1-065": {
+        "questionId": "q-mock-sz-2026-m1-065",
+        "questionNo": 65,
+        "answer": "a",
+        "score": 1.5,
+        "note": "AI 导题：答案解析版抽取"
+      }
+    }
+  },
+  "analysis": {
+    "meta": {
+      "generatedBy": "external-ai",
+      "promptVersion": "reading-choice-analysis-v1",
+      "reviewStatus": "reviewed",
+      "importMode": "paper-import-ai",
+      "model": "cursor-grok-4.6",
+      "reviewedBy": "format2-pdf-pair-import",
+      "reviewedAt": "2026-08-13T00:00:00Z"
+    },
+    "groups": {
+      "group-mock-sz-2026-m1-reading-a": {
+        "overview": "应用文。介绍国际语言学奥林匹克（IOL）：参赛不需专业知识，附入门字谜，再列个人赛与团体赛规则及奖牌比例。",
+        "discourseStructure": {
+          "summary": "先总述 IOL 与能力要求，再给字谜样例，然后分 Contest Rules 与 Awards 说明赛制与奖牌。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-1",
+              "summary": "IOL 面向大学前学生。",
+              "function": "点明赛事"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-1",
+              "summary": "自 2003 年起每年换国举办，个人与团体解题。",
+              "function": "补充赛制背景"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-1",
+              "summary": "解语言学谜题，不需专门知识。",
+              "function": "降低门槛"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-1",
+              "summary": "只需基本语言概念、逻辑、耐心与创想。",
+              "function": "列出必备能力"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-1",
+              "summary": "邀请读者试做样例。",
+              "function": "转入样例"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-fig-puzzle-1",
+              "summary": "字谜配图占位。",
+              "function": "图"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-2",
+              "summary": "Puzzle / Solution 双栏标题。",
+              "function": "样例标题"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-3",
+              "summary": "南美国名与格鲁吉亚语对照说明开始。",
+              "function": "样例材料"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-3",
+              "summary": "字母数一一对应。",
+              "function": "解题线索"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-3",
+              "summary": "格鲁吉亚语与字母对应。",
+              "function": "解题线索"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-4",
+              "summary": "Uruguay 中重复的 U 证明从左到右。",
+              "function": "书写方向"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-4",
+              "summary": "英译对照。",
+              "function": "样例材料"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-5",
+              "summary": "从左到右书写。",
+              "function": "书写方向"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-6",
+              "summary": "Brazil。",
+              "function": "样例词"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-6",
+              "summary": "Brazil 字母数较少但仍可推字母。",
+              "function": "解题线索"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-3",
+              "summary": "Peru。",
+              "function": "样例词"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-9",
+              "summary": "已知字母对应。",
+              "function": "解题线索"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-10",
+              "summary": "G、E 对应。",
+              "function": "解题线索"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-11",
+              "summary": "问该国英文名。",
+              "function": "样例设问"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-12",
+              "summary": "可用已知字母翻译。",
+              "function": "解题步骤"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-12",
+              "summary": "未知国名空格。",
+              "function": "样例设问"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-13",
+              "summary": "译成 Argentina。",
+              "function": "样例答案"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-14",
+              "summary": "Contest Rules。",
+              "function": "规则小标题"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-15",
+              "summary": "须选定工作语言。",
+              "function": "语言规则"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-15",
+              "summary": "开赛前两周不可改语言。",
+              "function": "语言时限"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-16",
+              "summary": "个人赛五题六小时，团体赛题量不同。",
+              "function": "时长对比"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-16",
+              "summary": "团体赛一题且少两小时。",
+              "function": "时长对比"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-17",
+              "summary": "多答得零分，须详细解释。",
+              "function": "作答规则"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-17",
+              "summary": "不解释会降分。",
+              "function": "作答规则"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-18",
+              "summary": "Awards。",
+              "function": "奖项小标题"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-19",
+              "summary": "团体赛金银铜上限。",
+              "function": "团体奖牌"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-19",
+              "summary": "个人赛奖牌比 1:2:3。",
+              "function": "个人奖牌比例"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-19",
+              "summary": "奖牌总数在四分之一到三分之一之间。",
+              "function": "个人奖牌区间"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-a-19",
+              "summary": "其他奖项链接。",
+              "function": "收束"
+            }
+          ]
+        }
+      },
+      "group-mock-sz-2026-m1-reading-b": {
+        "overview": "记叙文。七十多岁的作者与友人荒野徒步，先后克服恐高、遇熊与怕老，向导的赞赏让她感到仍被看见。",
+        "discourseStructure": {
+          "summary": "开篇点出三种恐惧，再写过桥、遇熊、取物反思，最后向导的话化解“过气”之惧。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-1",
+              "summary": "面对恐高、熊与衰老。",
+              "function": "点题"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-2",
+              "summary": "七十多岁仍决定出发。",
+              "function": "人物与动机"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-2",
+              "summary": "山路开车已吓人。",
+              "function": "起势"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-2",
+              "summary": "山路。",
+              "function": "场景"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-3",
+              "summary": "腐木桥高悬急流。",
+              "function": "恐高场景"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-3",
+              "summary": "靠向导鼓励才敢走。",
+              "function": "外部支持"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-3",
+              "summary": "盯着靴子一点点挪过。",
+              "function": "过桥动作"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-3",
+              "summary": "过后兴奋又释然。",
+              "function": "情绪收束"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-4",
+              "summary": "见熊迹后故意大声。",
+              "function": "转入怕熊"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-4",
+              "summary": "紧张消退成游戏。",
+              "function": "过渡"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-5",
+              "summary": "时间仿佛静止。",
+              "function": "转折"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-6",
+              "summary": "向导低声说有熊。",
+              "function": "遇熊"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-6",
+              "summary": "母熊与幼崽在上方。",
+              "function": "遇熊"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-7",
+              "summary": "害怕仍觉得它们美。",
+              "function": "心理"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-7",
+              "summary": "熊靠近，众人喊叫挥杆。",
+              "function": "反应"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-7",
+              "summary": "熊一愣后转身离开。",
+              "function": "结果"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-7",
+              "summary": "又克服一怕。",
+              "function": "收束"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-8",
+              "summary": "末晨被要求带回棍石叶。",
+              "function": "反思活动"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-8",
+              "summary": "用 stick/rock/leaf 谐音谈收获。",
+              "function": "活动说明"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-8",
+              "summary": "友谊与互助会留下。",
+              "function": "作者解读"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-8",
+              "summary": "希望留下恐惧。",
+              "function": "作者解读"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-9",
+              "summary": "向导称赞体能与态度。",
+              "function": "向导评价"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-9",
+              "summary": "希望几十年后像她们。",
+              "function": "向导评价"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-9",
+              "summary": "这话减轻“过气”之惧。",
+              "function": "点题 over the hill"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-b-9",
+              "summary": "被看见的成就感。",
+              "function": "收束"
+            }
+          ]
+        }
+      },
+      "group-mock-sz-2026-m1-reading-c": {
+        "overview": "说明文。布宜诺斯艾利斯大学用机器导师把失落半个多世纪的 chingolo 地方歌谣教回幼鸟，以保存鸟类文化多样性。",
+        "discourseStructure": {
+          "summary": "先交代失落歌声与社会功能，再写机器导师实验，最后报告幼鸟学会并带上种群口音。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-1",
+              "summary": "用机器导师教雄性 chingolo。",
+              "function": "总起"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-1",
+              "summary": "歌声曾是物种文化的一部分。",
+              "function": "背景"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-1",
+              "summary": "失落超过半个世纪。",
+              "function": "背景"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-2",
+              "summary": "雄鸟向成年雄鸟学两秒旋律。",
+              "function": "学习链"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-2",
+              "summary": "歌声像指纹，用来求偶护域。",
+              "function": "功能"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-2",
+              "summary": "城市化打断学习链。",
+              "function": "问题"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-2",
+              "summary": "地方方言消失。",
+              "function": "问题"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-3",
+              "summary": "要找回失落歌声。",
+              "function": "任务"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-3",
+              "summary": "只存在于 1960 年代唱片。",
+              "function": "材料来源"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-3",
+              "summary": "面向一群 chingolo。",
+              "function": "对象"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-4",
+              "summary": "按声道建模。",
+              "function": "方法"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-4",
+              "summary": "做成机器导师。",
+              "function": "方法"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-4",
+              "summary": "在关键学习期播放。",
+              "function": "实验"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-4",
+              "summary": "十月到二月，高峰时段。",
+              "function": "实验"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-4",
+              "summary": "最长八小时，中间随机停顿。",
+              "function": "实验"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-4",
+              "summary": "让鸟把播放当成真实交流。",
+              "function": "停顿目的"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-4",
+              "summary": "刺激发声回应。",
+              "function": "停顿目的"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-5",
+              "summary": "幼鸟学会并加入自己的口音。",
+              "function": "结果"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-5",
+              "summary": "末颤音带种群口音。",
+              "function": "结果"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-5",
+              "summary": "习得与先天共同塑造。",
+              "function": "结果"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-6",
+              "summary": "保存文化生物多样性。",
+              "function": "意义"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-6",
+              "summary": "继续用 AI 识别个鸟歌声。",
+              "function": "后续"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-c-6",
+              "summary": "防止鸟类文化再失落。",
+              "function": "收束"
+            }
+          ]
+        }
+      },
+      "group-mock-sz-2026-m1-reading-d": {
+        "overview": "说明文。新加坡国立大学用雨滴冲击细管形成 plug flow，大幅提高电荷分离效率，展示屋顶集雨发电的可能。",
+        "discourseStructure": {
+          "summary": "先用摩擦起电引入电荷分离，再对比连续流低效，然后解释 plug flow 装置，末段谈城市绿色能源前景。",
+          "paragraphs": [
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-1",
+              "summary": "摩擦气球产生电。",
+              "function": "类比引入"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-1",
+              "summary": "解释电荷分离。",
+              "function": "概念"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-1",
+              "summary": "雨滴打细管也能产生能量。",
+              "function": "过渡"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-1",
+              "summary": "NUS 利用该效应。",
+              "function": "研究对象"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-1",
+              "summary": "用类雨滴发电。",
+              "function": "研究对象"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-2",
+              "summary": "传统水电依赖大流量。",
+              "function": "对照"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-2",
+              "summary": "小慢流也曾探索电荷分离。",
+              "function": "对照"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-2",
+              "summary": "连续流让电荷聚在管壁。",
+              "function": "旧法"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-2",
+              "summary": "连续流收集电荷效率很低。",
+              "function": "问题"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-3",
+              "summary": "NUS 做了新装置。",
+              "function": "解题"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-3",
+              "summary": "管顶与杯底接导线。",
+              "function": "装置"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-3",
+              "summary": "针尖放出类雨滴。",
+              "function": "装置"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-3",
+              "summary": "冲击形成 plug flow。",
+              "function": "关键机制"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-3",
+              "summary": "水柱被气隙隔开。",
+              "function": "关键机制"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-3",
+              "summary": "电荷分离可提高十万倍。",
+              "function": "效果"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-3",
+              "summary": "落入杯中形成电流。",
+              "function": "效果"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-3",
+              "summary": "四管可点亮 12 盏灯。",
+              "function": "实验数据"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-4",
+              "summary": "雨可清洁可持续发电。",
+              "function": "前景"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-4",
+              "summary": "尤其适合多雨城市。",
+              "function": "前景"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-4",
+              "summary": "屋顶集雨装置想象。",
+              "function": "应用"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-4",
+              "summary": "一小步雨滴，一大步可持续。",
+              "function": "收束"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-4",
+              "summary": "可持续能源技术。",
+              "function": "收束"
+            },
+            {
+              "paragraphId": "para-mock-sz-2026-m1-reading-d-23",
+              "summary": "Q33 四图。",
+              "function": "图"
+            }
+          ]
+        }
+      }
+    },
+    "questions": {
+      "q-mock-sz-2026-m1-021": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查解样例字谜真正必需的能力，需回到开篇对 IOL 能力要求的表述。",
+        "stemTranslationZh": "解这道样例字谜，什么是必不可少的？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "语言流利。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "negationReversal",
+              "sourceQuote": "no special knowledge is required, only basic",
+              "sourceHighlight": "no special knowledge is required",
+              "optionText": "Linguistic fluency.",
+              "optionHighlight": "Linguistic fluency",
+              "explanation": "原文明确不需要专门知识，只要求基本语言概念与逻辑等，把“不需要流利/专门语言能力”说成必需流利。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-mock-sz-2026-m1-reading-a-1",
+                "quote": "no special knowledge is required, only basic",
+                "anchor": "no special knowledge is required"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "推理能力。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-mock-sz-2026-m1-reading-a-1",
+                "quote": "language concepts, logic, patience, and creative thinking",
+                "anchor": "logic, patience, and creative thinking"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "地理知识。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Geographic knowledge.",
+              "explanation": "样例虽用南美国名，但解题靠字母对应与逻辑，原文未把地理知识列为参赛或解题必需。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "数学计算。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Mathematical calculation.",
+              "explanation": "原文能力清单是语言概念、逻辑、耐心与创想，未要求数学计算。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Reasoning ability",
+            "sourceRole": "correctOption",
+            "targetText": "language concepts, logic, patience, and creative thinking",
+            "targetParagraphId": "para-mock-sz-2026-m1-reading-a-1",
+            "relationType": "paraphrase",
+            "note": "Reasoning ability 对应 logic 与 creative thinking，而不是流利或计算。"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-022": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查个人赛与团体赛规则的差异点，需对比时长表述。",
+        "stemTranslationZh": "个人赛与团体赛的规则有何不同？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "比赛时长。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-mock-sz-2026-m1-reading-a-16",
+                "quote": "The individual contest involves solving five problems in six hours, whereas the team contest features",
+                "anchor": "six hours, whereas the team contest"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "选定语言的截止日期。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "a choice that cannot be changed less than two weeks before the Olympiad begins.",
+              "sourceHighlight": "cannot be changed less than two weeks",
+              "optionText": "The deadline for language choice.",
+              "optionHighlight": "deadline for language choice",
+              "explanation": "语言时限对个人与团体同样适用，不是两者的差异。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-mock-sz-2026-m1-reading-a-15",
+                "quote": "a choice that cannot be changed less than two weeks before the Olympiad begins.",
+                "anchor": "two weeks before the Olympiad"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "多答的结果。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "giving multiple answers will receive zero marks",
+              "sourceHighlight": "multiple answers will receive zero marks",
+              "optionText": "The result of giving multiple answers.",
+              "optionHighlight": "giving multiple answers",
+              "explanation": "多答得零分是共同规则，不是个人赛与团体赛的差别。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-mock-sz-2026-m1-reading-a-17",
+                "quote": "giving multiple answers will receive zero marks",
+                "anchor": "multiple answers will receive zero marks"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "答案解释的要求。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overgeneralization",
+              "sourceQuote": "a detailed explanation is",
+              "sourceHighlight": "a detailed explanation",
+              "optionText": "The requirement for answer explanations.",
+              "optionHighlight": "requirement for answer explanations",
+              "explanation": "须详细解释是共同要求，文中用 whereas 对比的是时长与题量。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-mock-sz-2026-m1-reading-a-17",
+                "quote": "a detailed explanation is",
+                "anchor": "a detailed explanation"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "different about the rules for the individual and team contest",
+            "sourceRole": "stem",
+            "targetText": "The individual contest involves solving five problems in six hours, whereas the team contest features",
+            "targetParagraphId": "para-mock-sz-2026-m1-reading-a-16",
+            "relationType": "locationCue",
+            "note": "题干问两者不同，原文用 whereas 对比个人赛六小时与团体赛。"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-023": {
+        "skill": {
+          "primary": "detail",
+          "secondary": "inference"
+        },
+        "questionFocus": "考查根据个人赛奖牌比例与总数区间推算 240 人时可能的奖牌总数。",
+        "stemTranslationZh": "若个人赛有 240 名选手，奖牌总数可能是多少？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "40。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "the total",
+              "sourceHighlight": "the total",
+              "optionText": "40.",
+              "optionHighlight": "40",
+              "explanation": "240 的四分之一是 60，40 低于下限。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-mock-sz-2026-m1-reading-a-19",
+                "quote": "the number of gold, silver, and bronze medals awarded shall be in the ratio 1:2:3, with the total",
+                "anchor": "ratio 1:2:3, with the total"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "54。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "the number of gold, silver, and bronze medals awarded shall be in the ratio 1:2:3, with the total",
+              "sourceHighlight": "ratio 1:2:3",
+              "optionText": "54.",
+              "optionHighlight": "54",
+              "explanation": "54 低于 240 的四分之一（60），不在原文区间。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-mock-sz-2026-m1-reading-a-19",
+                "quote": "the number of gold, silver, and bronze medals awarded shall be in the ratio 1:2:3, with the total",
+                "anchor": "ratio 1:2:3"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "72。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-mock-sz-2026-m1-reading-a-19",
+                "quote": "the number of gold, silver, and bronze medals awarded shall be in the ratio 1:2:3, with the total",
+                "anchor": "ratio 1:2:3, with the total"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "84。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "number of medals being between one quarter and one third of the contestants",
+              "sourceHighlight": "between one quarter and one third",
+              "optionText": "84.",
+              "optionHighlight": "84",
+              "explanation": "240 的三分之一是 80，84 超出上限。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-mock-sz-2026-m1-reading-a-19",
+                "quote": "number of medals being between one quarter and one third of the contestants",
+                "anchor": "between one quarter and one third"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "how many medals could be awarded in total",
+            "sourceRole": "stem",
+            "targetText": "number of medals being between one quarter and one third of the contestants",
+            "targetParagraphId": "para-mock-sz-2026-m1-reading-a-19",
+            "relationType": "calculation",
+            "note": "240 的 1/4 到 1/3 是 60–80，且须能按 1:2:3 整分，72=12+24+36 落在区间内。"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-024": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查作者如何过桥，需定位盯靴慢挪的动作。",
+        "stemTranslationZh": "作者是怎样过桥的？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "靠留心的一步步挪动。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-mock-sz-2026-m1-reading-b-3",
+                "quote": "Fixing my eyes on her boots, I inched along the shaky logs",
+                "anchor": "I inched along the shaky logs"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "勇敢地冲过去。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "I inched along the shaky logs",
+              "sourceHighlight": "inched along",
+              "optionText": "By rushing across it bravely.",
+              "optionHighlight": "rushing across",
+              "explanation": "原文是一点点挪，不是冲过去。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-mock-sz-2026-m1-reading-b-3",
+                "quote": "I inched along the shaky logs",
+                "anchor": "inched along"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "靠方向感。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "By using her sense of direction.",
+              "explanation": "原文写盯着向导靴子慢挪，未提方向感。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "被向导拖过去。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "I would never have attempted it without our guide ahead, mouthing",
+              "sourceEntity": "guide ahead, mouthing",
+              "optionText": "By having the guide drag her over.",
+              "optionEntity": "guide drag her over",
+              "explanation": "向导在前方鼓劲，并未把她拖过桥。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-mock-sz-2026-m1-reading-b-3",
+                "quote": "I would never have attempted it without our guide ahead, mouthing",
+                "anchor": "guide ahead, mouthing"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "taking mindful steps",
+            "sourceRole": "correctOption",
+            "targetText": "Fixing my eyes on her boots, I inched along the shaky logs",
+            "targetParagraphId": "para-mock-sz-2026-m1-reading-b-3",
+            "relationType": "paraphrase",
+            "note": "mindful steps 对应盯靴、inch along 的小心挪步。"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-025": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查熊离开的直接原因。",
+        "stemTranslationZh": "熊为什么离开？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "它们被自然环境吸引。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "I couldn’t help noticing how beautiful they looked in their natural setting",
+              "sourceEntity": "they looked in their natural setting",
+              "optionText": "They were attracted by the natural setting.",
+              "optionEntity": "attracted by the natural setting",
+              "explanation": "自然环境是作者眼中的美，不是熊离开的原因。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-mock-sz-2026-m1-reading-b-7",
+                "quote": "I couldn’t help noticing how beautiful they looked in their natural setting",
+                "anchor": "natural setting"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "它们害怕急流的声音。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "They were afraid of the noise of the rapids.",
+              "explanation": "急流出现在过桥段，遇熊段未写熊因急流而走。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它们被一行人的举动吓了一跳。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-mock-sz-2026-m1-reading-b-7",
+                "quote": "Taken aback, they stopped, and then slowly turned away",
+                "anchor": "Taken aback, they stopped"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "它们被向导的石块威胁。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "wave our hiking poles",
+              "sourceEntity": "hiking poles",
+              "optionText": "They were threatened by the guide’s rocks.",
+              "optionEntity": "guide’s rocks",
+              "explanation": "众人挥的是登山杖，不是向导扔石头。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-mock-sz-2026-m1-reading-b-7",
+                "quote": "wave our hiking poles",
+                "anchor": "hiking poles"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "surprised at the group’s actions",
+            "sourceRole": "correctOption",
+            "targetText": "Taken aback, they stopped, and then slowly turned away",
+            "targetParagraphId": "para-mock-sz-2026-m1-reading-b-7",
+            "relationType": "paraphrase",
+            "note": "Taken aback 即被喊叫挥杆的举动吓住。"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-026": {
+        "skill": {
+          "primary": "inference"
+        },
+        "questionFocus": "考查向导要棍石叶的目的。",
+        "stemTranslationZh": "向导为什么要他们找一根棍、一块石头和一片叶子？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "捡些纪念品。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "To pick up some souvenirs.",
+              "explanation": "活动是分享“留下什么、震撼什么、放下什么”，不是带纪念品。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "反思这次旅程。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-mock-sz-2026-m1-reading-b-8",
+                "quote": "what would “stick” with us, what “rocked,” and what we would",
+                "anchor": "what would “stick” with us"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "象征团队合作。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "The bond of friendship would stick with me",
+              "sourceHighlight": "bond of friendship",
+              "optionText": "To symbolize their teamwork.",
+              "optionHighlight": "symbolize their teamwork",
+              "explanation": "友谊是作者自己的解读之一，不是向导布置任务的全部目的。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-mock-sz-2026-m1-reading-b-8",
+                "quote": "The bond of friendship would stick with me",
+                "anchor": "bond of friendship"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "检查观察力。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "To check their observation skills.",
+              "explanation": "原文没有考查观察力的表述。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "reflect on the journey",
+            "sourceRole": "correctOption",
+            "targetText": "what would “stick” with us, what “rocked,” and what we would",
+            "targetParagraphId": "para-mock-sz-2026-m1-reading-b-8",
+            "relationType": "paraphrase",
+            "note": "stick/rock/leaf 谐音是让他们回看旅程收获与放下。"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-027": {
+        "skill": {
+          "primary": "wordMeaning"
+        },
+        "questionFocus": "考查划线短语 over the hill 在末段语境中的含义。",
+        "stemTranslationZh": "最后一段划线短语 over the hill 是什么意思？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "已过青春巅峰。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-mock-sz-2026-m1-reading-b-9",
+                "quote": "eased my fear of being “over the hill.”",
+                "anchor": "fear of being “over the hill.”"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "高得下不来。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "over the hill",
+              "optionText": "Too high to go down.",
+              "matchType": "exact",
+              "relationNote": "用 hill 的字面“高”去解习语，忽略衰老语境。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-mock-sz-2026-m1-reading-b-9",
+                "quote": "eased my fear of being “over the hill.”",
+                "anchor": "over the hill"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "与社会格格不入。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Out of place in society.",
+              "explanation": "末段谈的是年龄被看见，不是社会位置。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "超出体能极限。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "praising not only our fitness but also our positive",
+              "sourceHighlight": "our fitness",
+              "optionText": "Beyond physical limits. 第 2 页 共 8 页",
+              "optionHighlight": "Beyond physical limits",
+              "explanation": "向导称赞的是体能仍在，习语指年龄心态，不是已经超出极限。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-mock-sz-2026-m1-reading-b-9",
+                "quote": "praising not only our fitness but also our positive",
+                "anchor": "our fitness"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "over the hill",
+            "sourceRole": "stem",
+            "targetText": "eased my fear of being “over the hill.”",
+            "targetParagraphId": "para-mock-sz-2026-m1-reading-b-9",
+            "relationType": "locationCue",
+            "note": "与开篇 ageing、七十多岁及向导希望几十年后像她们对读，指过了青春巅峰。"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-028": {
+        "skill": {
+          "primary": "authorPurpose"
+        },
+        "questionFocus": "考查研究者教歌的目的。",
+        "stemTranslationZh": "研究者为什么要教这些鸟这首歌？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "拯救濒危物种。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "To save an endangered species.",
+              "explanation": "文中谈的是歌声文化失落，未说该物种濒危。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "研究鸟脑结构。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "physics-based modeling of the bird’s vocal tract",
+              "sourceEntity": "vocal tract",
+              "optionText": "To study the birds’ brain structure.",
+              "optionEntity": "brain structure",
+              "explanation": "建模的是声道，不是脑结构。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-mock-sz-2026-m1-reading-c-4",
+                "quote": "physics-based modeling of the bird’s vocal tract",
+                "anchor": "vocal tract"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "开发新的机器人装置。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "a “robotic tutor.”",
+              "sourceHighlight": "robotic tutor",
+              "optionText": "To develop new robotic devices.",
+              "optionHighlight": "develop new robotic devices",
+              "explanation": "机器导师是手段，目的是找回失落歌声。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-mock-sz-2026-m1-reading-c-4",
+                "quote": "a “robotic tutor.”",
+                "anchor": "robotic tutor"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "保存这些鸟的文化遗产。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-mock-sz-2026-m1-reading-c-6",
+                "quote": "preserving not just genetic, but cultural biodiversity",
+                "anchor": "cultural biodiversity"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "preserve the birds’ cultural heritage",
+            "sourceRole": "correctOption",
+            "targetText": "preserving not just genetic, but cultural biodiversity",
+            "targetParagraphId": "para-mock-sz-2026-m1-reading-c-6",
+            "relationType": "paraphrase",
+            "note": "cultural heritage 对应 cultural biodiversity / 失落的地方歌声。"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-029": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查 chingolo 歌声的作用。",
+        "stemTranslationZh": "chingolo 的歌声有什么作用？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "让猎人远离它们。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "It keeps hunters away from them.",
+              "explanation": "原文写求偶与护域，未提猎人。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "帮助它们适应城市扩张。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "causeEffectReversal",
+              "sourceQuote": "urbanization and habitat loss have broken",
+              "sourceHighlight": "urbanization and habitat loss have broken",
+              "optionText": "It helps them adapt to urban growth.",
+              "optionHighlight": "adapt to urban growth",
+              "explanation": "城市化打断了学歌链，歌声并不是适应城市的工具。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-mock-sz-2026-m1-reading-c-2",
+                "quote": "urbanization and habitat loss have broken",
+                "anchor": "urbanization and habitat loss have broken"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "充当它们的社会身份。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-mock-sz-2026-m1-reading-c-2",
+                "quote": "It serves to attract females and protect territory",
+                "anchor": "attract females and protect territory"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "让它们记住栖息地。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "It makes them remember their habitat.",
+              "explanation": "歌声标记“我是谁、我在这”，不是记忆栖息地的工具。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "social identity",
+            "sourceRole": "correctOption",
+            "targetText": "It serves to attract females and protect territory",
+            "targetParagraphId": "para-mock-sz-2026-m1-reading-c-2",
+            "relationType": "paraphrase",
+            "note": "求偶护域加上 This is me 即社会身份。"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-030": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查随机停顿的目的。",
+        "stemTranslationZh": "随机停顿的目的是什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "保护鸟的声道。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "physics-based modeling of the bird’s vocal tract",
+              "sourceEntity": "vocal tract",
+              "optionText": "To protect the birds’ vocal tract.",
+              "optionEntity": "protect the birds’ vocal tract",
+              "explanation": "声道只出现在建模阶段，与停顿无关。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-mock-sz-2026-m1-reading-c-4",
+                "quote": "physics-based modeling of the bird’s vocal tract",
+                "anchor": "vocal tract"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "测试鸟的反应速度。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "To test the birds’ reaction speed.",
+              "explanation": "停顿是为了让播放像真实对唱，不是测反应速度。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "逼鸟跟上节拍。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "To push the birds to catch the beat.",
+              "explanation": "原文没有节拍训练的表述。"
+            }
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "诱使鸟把播放当成互动。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-mock-sz-2026-m1-reading-c-4",
+                "quote": "the birds interpreted the playback from the three devices placed in the area as a real",
+                "anchor": "interpreted the playback ... as a real"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "trick the birds into interaction",
+            "sourceRole": "correctOption",
+            "targetText": "the birds interpreted the playback from the three devices placed in the area as a real",
+            "targetParagraphId": "para-mock-sz-2026-m1-reading-c-4",
+            "relationType": "paraphrase",
+            "note": "随机停顿让三台设备像在对唱，从而诱发出声。"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-031": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查幼鸟学习结果说明了什么。",
+        "stemTranslationZh": "从 chingolo 的学习结果能看出什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "这首歌已传到其他鸟种。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "The song has spread to other bird species.",
+              "explanation": "结果只写幼年 chingolo 学会，未写跨物种传播。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "它们的歌唱带有特殊的发声特征。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-mock-sz-2026-m1-reading-c-5",
+                "quote": "own population’s “accent” to the final trill",
+                "anchor": "population’s “accent”"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它们对这首歌的反应还需改进。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAttitude",
+              "sourceQuote": "The results were impressive",
+              "sourceHighlight": "impressive",
+              "optionText": "Their response to the song needs improving.",
+              "optionHighlight": "needs improving",
+              "explanation": "原文说结果令人印象深刻，幼鸟已经学会。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-mock-sz-2026-m1-reading-c-5",
+                "quote": "The results were impressive",
+                "anchor": "impressive"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "效果取决于种群数量。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "sourceLexicalTrap",
+              "sourceText": "own population’s “accent”",
+              "optionText": "The effectiveness depends on their population. 第 3 页 共 8 页",
+              "matchType": "wordFamily",
+              "relationNote": "原文 population 指种群口音，不是效果取决于数量。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-mock-sz-2026-m1-reading-c-5",
+                "quote": "own population’s “accent” to the final trill",
+                "anchor": "population’s “accent”"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "special vocal features",
+            "sourceRole": "correctOption",
+            "targetText": "own population’s “accent” to the final trill",
+            "targetParagraphId": "para-mock-sz-2026-m1-reading-c-5",
+            "relationType": "paraphrase",
+            "note": "种群口音与先天特征即特殊发声特点。"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-032": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查 NUS 团队要解决的问题。",
+        "stemTranslationZh": "NUS 研究者旨在解决什么问题？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "电荷分离本身很难。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "can collect charges, but it is far from effective",
+              "sourceHighlight": "far from effective",
+              "optionText": "The difficulty of separating charges.",
+              "optionHighlight": "difficulty of separating charges",
+              "explanation": "连续流已经能分离电荷，难的是效率低，不是分离本身做不到。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-mock-sz-2026-m1-reading-d-2",
+                "quote": "can collect charges, but it is far from effective",
+                "anchor": "far from effective"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "缺少清洁电源。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "The lack of clean electricity sources.",
+              "explanation": "末段谈清洁能源前景，开篇问题是小流量收集电荷效率低。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "收集电荷效率低。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-mock-sz-2026-m1-reading-d-2",
+                "quote": "can collect charges, but it is far from effective",
+                "anchor": "far from effective"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "传统水电的破坏。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "The damage of traditional hydropower.",
+              "explanation": "传统水电只被写成依赖大河流量，未写其破坏。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "inefficiency of charge harvesting",
+            "sourceRole": "correctOption",
+            "targetText": "can collect charges, but it is far from effective",
+            "targetParagraphId": "para-mock-sz-2026-m1-reading-d-2",
+            "relationType": "paraphrase",
+            "note": "far from effective 即收集电荷效率低，后文 To solve this problem 接新装置。"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-033": {
+        "skill": {
+          "primary": "detail"
+        },
+        "questionFocus": "考查哪幅图最能表示 plug flow：水柱被气隙隔开。",
+        "stemTranslationZh": "下面哪一幅最能说明 plug flow？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "连续波浪状液柱。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "[Fig.]",
+              "explanation": "A 图是连续起伏液柱，没有被气隙隔开的小水柱。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "两颗分离的大液滴。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "[Fig.]",
+              "explanation": "B 图是稀疏大液滴，不是管内 mini columns separated by air gaps。"
+            }
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "充满整管的连续液柱。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "polarityReversal",
+              "subtype": "oppositeAction",
+              "sourceQuote": "the water forms mini columns",
+              "sourceHighlight": "mini columns",
+              "optionText": "[Fig.]",
+              "optionHighlight": "[Fig.]",
+              "explanation": "C 图是连续充满，正是前文 far from effective 的 continuous flow。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-mock-sz-2026-m1-reading-d-3",
+                "quote": "the water forms mini columns",
+                "anchor": "mini columns"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "数段水柱被空隙隔开。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-mock-sz-2026-m1-reading-d-3",
+                "quote": "the water forms mini columns",
+                "anchor": "mini columns"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "plug flow",
+            "sourceRole": "stem",
+            "targetText": "the water forms mini columns",
+            "targetParagraphId": "para-mock-sz-2026-m1-reading-d-3",
+            "relationType": "locationCue",
+            "note": "plug flow 定义为 mini columns separated by air gaps，对应 D 图分段水柱。"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-034": {
+        "skill": {
+          "primary": "mainIdea"
+        },
+        "questionFocus": "考查末段主要谈该模型的什么。",
+        "stemTranslationZh": "关于这一模型，最后一段主要讲什么？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "它在城市里的潜在成本。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Its potential cost in urban areas.",
+              "explanation": "末段写城市潜力与屋顶发电，未谈成本。"
+            }
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "它在绿色能源上的前景。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-mock-sz-2026-m1-reading-d-4",
+                "quote": "rain can be used to generate clean",
+                "anchor": "generate clean"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "它复杂的雨水发电设计。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "entityMismatch",
+              "sourceQuote": "the NUS team built a special device",
+              "sourceEntity": "special device",
+              "optionText": "Its complex design for rain power.",
+              "optionEntity": "complex design",
+              "explanation": "装置细节在第三段，末段谈前景不是设计复杂度。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-mock-sz-2026-m1-reading-d-3",
+                "quote": "the NUS team built a special device",
+                "anchor": "special device"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "它实际需要更多装置。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "unsupportedClaim",
+              "claim": "Its practical need for more devices.",
+              "explanation": "末段没有要求增加装置数量。"
+            }
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "promising use in green energy",
+            "sourceRole": "correctOption",
+            "targetText": "rain can be used to generate clean",
+            "targetParagraphId": "para-mock-sz-2026-m1-reading-d-4",
+            "relationType": "paraphrase",
+            "note": "clean / sustainably / alternative energy / roof device 都指向绿色能源前景。"
+          }
+        ]
+      },
+      "q-mock-sz-2026-m1-035": {
+        "skill": {
+          "primary": "title"
+        },
+        "questionFocus": "考查最能概括全文的标题。",
+        "stemTranslationZh": "哪一个标题适合这篇文章？",
+        "optionAnalysis": [
+          {
+            "label": "A",
+            "optionTranslationZh": "来自雨滴的革命性能源。",
+            "status": "correct",
+            "evidence": [
+              {
+                "role": "primary",
+                "paragraphId": "para-mock-sz-2026-m1-reading-d-1",
+                "quote": "have tapped into this effect to generate electricity using",
+                "anchor": "generate electricity using"
+              }
+            ]
+          },
+          {
+            "label": "B",
+            "optionTranslationZh": "对可持续能源的迫切需求。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "overstatement",
+              "sourceQuote": "a giant leap for",
+              "sourceHighlight": "giant leap",
+              "optionText": "Urgent Demand for Sustainable Energy",
+              "optionHighlight": "Urgent Demand",
+              "explanation": "全文写的是雨滴发电新法，不是呼吁能源短缺。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-mock-sz-2026-m1-reading-d-4",
+                "quote": "a giant leap for",
+                "anchor": "giant leap"
+              }
+            ]
+          },
+          {
+            "label": "C",
+            "optionTranslationZh": "用创新捕捉雨滴。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "generate electricity using",
+              "sourceHighlight": "generate electricity",
+              "optionText": "Capturing Raindrops through Innovation",
+              "optionHighlight": "Capturing Raindrops",
+              "explanation": "核心不是捕捉雨滴，而是用雨滴发电。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-mock-sz-2026-m1-reading-d-1",
+                "quote": "generate electricity using",
+                "anchor": "generate electricity"
+              }
+            ]
+          },
+          {
+            "label": "D",
+            "optionTranslationZh": "把电荷分离变成电。",
+            "status": "wrong",
+            "trap": {
+              "primaryType": "scopeShift",
+              "subtype": "understatement",
+              "sourceQuote": "a familiar example of charge",
+              "sourceHighlight": "charge",
+              "optionText": "Turning Charge Separation into Electricity 第 4 页 共 8 页",
+              "optionHighlight": "Charge Separation into Electricity",
+              "explanation": "电荷分离是原理，标题应点出雨滴这一新场景。"
+            },
+            "trapEvidence": [
+              {
+                "paragraphId": "para-mock-sz-2026-m1-reading-d-1",
+                "quote": "a familiar example of charge",
+                "anchor": "charge"
+              }
+            ]
+          }
+        ],
+        "locationParaphrases": [
+          {
+            "sourceText": "Revolutionary Energy from Raindrops",
+            "sourceRole": "correctOption",
+            "targetText": "have tapped into this effect to generate electricity using",
+            "targetParagraphId": "para-mock-sz-2026-m1-reading-d-1",
+            "relationType": "paraphrase",
+            "note": "雨滴 + 发电贯穿全文，100,000 times 与 giant leap 对应 revolutionary。"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -223,6 +223,7 @@ console.log('\nTest 6: Blank-marker styling (paperBlankPattern, real marker shap
   assert('§3b: section-header break-after: avoid (标题不落页尾)', /\.section-header,\s*\.group-meta,\s*\.group-header \{\s*break-after:\s*avoid/.test(html), '')
   assert('Continuation compatibility: shared writing-answer-box is not atomic', html.match(/\.writing-answer-box \{[^}]*\}/g)?.every((r) => !/break-inside:\s*avoid/.test(r) && !/page-break-inside:\s*avoid/.test(r)) === true, '')
   assert('Application Writing: canonical response box moves atomically', html.match(/\.canonical-application-response \{[^}]*\}/g)?.some((r) => /break-inside:\s*avoid/.test(r) && /page-break-inside:\s*avoid/.test(r)) === true, '')
+  assert('Reading framed_columns: whole block is atomic', html.match(/\.canonical-reading-framed-columns \{[^}]*\}/g)?.some((r) => /break-inside:\s*avoid/.test(r) && /page-break-inside:\s*avoid/.test(r)) === true, '')
 
   // draft-numbering-style cr.md MF-1: the hard consistency assertion must be
   // proven to REJECT, not only to admit matched fixtures — otherwise deleting

@@ -317,6 +317,25 @@ px 换算(A4=794px@96dpi):10.5pt ≈ 14px。
 
 页尾因此略有参差,是不实现纵向撑满(§3)的已知代价,接受。
 
+## 3c. 阅读细线框(`framed_columns`,2026-08-24 Owner QA 收口)
+
+Word 左右细线框、框里只有能打的字和矩形对照时,三面由共享
+`framed_columns` 画出,不为单卷改 CSS、不测像素仿真 Word。
+
+- **栏框**:单实细线。Screen 1px、Print/PDF 0.5pt,与 §6 挖空细线原语
+  同一意图。不另造虚线、双线或其它 Word 线型。
+- **栏标题**:该栏 `columnHeading` 指向的段落居中加粗;不靠「第一段」,
+  不是篇章 A/B/C/D 标题。
+- **栏内对照表**:无格线。按内容收窄,整块稍居中;行距松开。不要画成
+  满宽带框的 HTML 表。
+- **表后问句 / 段落**:紧跟表后,只略隔开。两栏等高而一栏更短时,短栏
+  底部可留白;禁止把问句或对照表顶到框底去填空。
+
+实现: `PaperSurface.css` / `print-renderer.mjs` 的
+`.canonical-reading-framed-column` 规则。导题写入见
+`nck1-paper-standard.md` §8。下一卷只写 Canonical 块,步骤见
+`docs/cuts/reading-framed-columns/spec.md`「下一卷怎么干」。
+
 ## 4. 层级与标题
 
 - **部标题**:中黑加粗,**左顶格**,分值信息内嵌同行——

@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "paper-figures-manifest-v1",
+  "paperId": "paper-mock-sz-2026-m1",
+  "figures": [
+    {
+      "figureId": "fig-paper-mock-sz-2026-m1-reading-a-puzzle-1",
+      "groupId": "group-mock-sz-2026-m1-reading-a",
+      "kind": "figure",
+      "file": "reading-a-puzzle-1.png",
+      "caption": "IOL beginner sample: Georgian Puzzle and Solution boxes (Reading A, paper.pdf p.1)",
+      "sourceDocument": "paper.pdf",
+      "sourcePage": 1,
+      "placeholderMarker": "[图: fig-paper-mock-sz-2026-m1-reading-a-puzzle-1]"
+    },
+    {
+      "figureId": "fig-paper-mock-sz-2026-m1-reading-d-q33",
+      "groupId": "group-mock-sz-2026-m1-reading-d",
+      "kind": "figure",
+      "file": "reading-d-q33.png",
+      "caption": "Four plug-flow diagrams for Q33 (Reading D, paper.pdf p.4)",
+      "sourceDocument": "paper.pdf",
+      "sourcePage": 4,
+      "placeholderMarker": "[图: fig-paper-mock-sz-2026-m1-reading-d-q33]"
+    },
+    {
+      "figureId": "fig-paper-mock-sz-2026-m1-writing-application-lamp",
+      "groupId": "group-mock-sz-2026-m1-writing-application",
+      "kind": "figure",
+      "file": "writing-application-lamp.png",
+      "caption": "Han Dynasty Bronze Wild Goose-and-Fish Lamp (application writing, paper.pdf p.7)",
+      "sourceDocument": "paper.pdf",
+      "sourcePage": 7,
+      "placeholderMarker": "[图: fig-paper-mock-sz-2026-m1-writing-application-lamp]"
+    }
+  ]
+}

@@ -427,7 +427,13 @@ Per `nck1-paper-standard.md` §4/§8 (schemas fully specified there, this cut's
   + timing/rate table) and `paper.pdf` (stems/options for Q1-20). No DB
   writes, no group building — these are inert files.
 - `figures/manifest.json` + one PNG per table/figure — see §8 for the
-  boundary (table = flatten to text + screenshot; figure = screenshot only).
+  boundary (table = flatten to text + screenshot; figure = screenshot only;
+  Word 左右细线框、框里只有能打的字和矩形表 → Canonical
+  `framed_columns`, not a screenshot as Canonical body. PNG 可留
+  `figures/` 作证据；`[图:]` 只留 `groups.json`。两栏须在该格式
+  producer 里写明，不从 PDF 自动认框。观感已由共享渲染画出
+  (`exam-paper-format-standards.md` §3c)；不要为单卷改 CSS。步骤见
+  `docs/cuts/reading-framed-columns/spec.md`「下一卷怎么干」)。
 
 **Table/figure screenshot procedure** (macOS, no new dependencies):
 

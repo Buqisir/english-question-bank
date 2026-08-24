@@ -1,0 +1,1172 @@
+{
+  "schemaVersion": "paper-normalized-groups-v1",
+  "paperId": "paper-mock-sz-2026-m1",
+  "sourceAssetVersion": 10,
+  "normalizerVersion": "canonical-paper-group-v1",
+  "groups": {
+    "group-mock-sz-2026-m1-cloze": {
+      "sourceFingerprint": "a118dbda32af73193b06cec3c43cba890fd68ef590503c3333acfa5707e38147",
+      "semanticDigest": "c374f9885843c05f0567ec613a0f1f6bb5f65c96c078b2312d046534d5e4d273",
+      "canonicalGroup": {
+        "schemaVersion": "canonical-paper-group-v1",
+        "groupId": "group-mock-sz-2026-m1-cloze",
+        "groupType": "cloze",
+        "title": "完形填空",
+        "paragraphs": [
+          {
+            "paragraphId": "para-mock-sz-2026-m1-cloze-title",
+            "nodes": [
+              {
+                "type": "text",
+                "text": "I still remember the day I bought my “nice” notebook. It was a leather-bound journal with cream-colored pages. I was sure it would make me the type of person who journals regularly, and who ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[0].text",
+                  "start": 0,
+                  "end": 190
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-sz-2026-m1-041",
+                "blankId": "blank-mock-sz-2026-m1-041",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[0].text",
+                  "start": 190,
+                  "end": 196
+                }
+              },
+              {
+                "type": "text",
+                "text": " beautiful thoughts. But it didn’t work.",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[0].text",
+                  "start": 196,
+                  "end": 236
+                }
+              }
+            ],
+            "sourceSpan": {
+              "sourcePath": "group.passage.paragraphs[0].text",
+              "start": 0,
+              "end": 236
+            }
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-cloze-p1",
+            "nodes": [
+              {
+                "type": "text",
+                "text": "That gorgeous notebook sat ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 0,
+                  "end": 27
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-sz-2026-m1-042",
+                "blankId": "blank-mock-sz-2026-m1-042",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 27,
+                  "end": 33
+                }
+              },
+              {
+                "type": "text",
+                "text": " for months. When I finally opened it, I hesitated. The pages felt too delicate and too ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 33,
+                  "end": 121
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-sz-2026-m1-043",
+                "blankId": "blank-mock-sz-2026-m1-043",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 121,
+                  "end": 127
+                }
+              },
+              {
+                "type": "text",
+                "text": " to waste on my messy handwriting and ideas. So I ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 127,
+                  "end": 177
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-sz-2026-m1-044",
+                "blankId": "blank-mock-sz-2026-m1-044",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 177,
+                  "end": 183
+                }
+              },
+              {
+                "type": "text",
+                "text": " it. Instead, I grabbed an old, ugly composition notebook with a ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 183,
+                  "end": 248
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-sz-2026-m1-045",
+                "blankId": "blank-mock-sz-2026-m1-045",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 248,
+                  "end": 254
+                }
+              },
+              {
+                "type": "text",
+                "text": " cover and dog-eared corners. I started to ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 254,
+                  "end": 297
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-sz-2026-m1-046",
+                "blankId": "blank-mock-sz-2026-m1-046",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 297,
+                  "end": 303
+                }
+              },
+              {
+                "type": "text",
+                "text": " it with everything: morning pages, random thoughts and reminders. This is surprisingly ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 303,
+                  "end": 391
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-sz-2026-m1-047",
+                "blankId": "blank-mock-sz-2026-m1-047",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 391,
+                  "end": 397
+                }
+              },
+              {
+                "type": "text",
+                "text": ". I actually wrote. Every day. Without exception.",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 397,
+                  "end": 446
+                }
+              }
+            ],
+            "sourceSpan": {
+              "sourcePath": "group.passage.paragraphs[1].text",
+              "start": 0,
+              "end": 446
+            }
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-cloze-p2",
+            "nodes": [
+              {
+                "type": "text",
+                "text": "The psychology is real. When we ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[2].text",
+                  "start": 0,
+                  "end": 32
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-sz-2026-m1-048",
+                "blankId": "blank-mock-sz-2026-m1-048",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[2].text",
+                  "start": 32,
+                  "end": 38
+                }
+              },
+              {
+                "type": "text",
+                "text": " something too much, we place limits around it, feeling it is “too good.” But the ugly notebook carries no such ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[2].text",
+                  "start": 38,
+                  "end": 150
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-sz-2026-m1-049",
+                "blankId": "blank-mock-sz-2026-m1-049",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[2].text",
+                  "start": 150,
+                  "end": 156
+                }
+              },
+              {
+                "type": "text",
+                "text": ". It has been used. It tells me, “This is a ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[2].text",
+                  "start": 156,
+                  "end": 200
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-sz-2026-m1-050",
+                "blankId": "blank-mock-sz-2026-m1-050",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[2].text",
+                  "start": 200,
+                  "end": 206
+                }
+              },
+              {
+                "type": "text",
+                "text": " for thinking and living, not a museum piece.”",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[2].text",
+                  "start": 206,
+                  "end": 252
+                }
+              }
+            ],
+            "sourceSpan": {
+              "sourcePath": "group.passage.paragraphs[2].text",
+              "start": 0,
+              "end": 252
+            }
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-cloze-p3",
+            "nodes": [
+              {
+                "type": "text",
+                "text": "Here’s the thing: ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[3].text",
+                  "start": 0,
+                  "end": 18
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-sz-2026-m1-051",
+                "blankId": "blank-mock-sz-2026-m1-051",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[3].text",
+                  "start": 18,
+                  "end": 24
+                }
+              },
+              {
+                "type": "text",
+                "text": " notebooks are idea incubators ( 孵 化 器 ) . With the pressure off, you experiment more. You try things that might ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[3].text",
+                  "start": 24,
+                  "end": 137
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-sz-2026-m1-052",
+                "blankId": "blank-mock-sz-2026-m1-052",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[3].text",
+                  "start": 137,
+                  "end": 143
+                }
+              },
+              {
+                "type": "text",
+                "text": ". And in that freedom, bad ideas I was ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[3].text",
+                  "start": 143,
+                  "end": 182
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-sz-2026-m1-053",
+                "blankId": "blank-mock-sz-2026-m1-053",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[3].text",
+                  "start": 182,
+                  "end": 188
+                }
+              },
+              {
+                "type": "text",
+                "text": " embarrassed about gradually evolved into work I’m proud of. And that’s where the real work of creation happens.",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[3].text",
+                  "start": 188,
+                  "end": 300
+                }
+              }
+            ],
+            "sourceSpan": {
+              "sourcePath": "group.passage.paragraphs[3].text",
+              "start": 0,
+              "end": 300
+            }
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-cloze-p4",
+            "nodes": [
+              {
+                "type": "text",
+                "text": "The best notebook is never the most beautiful one. It’s the one you’ll actually ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[4].text",
+                  "start": 0,
+                  "end": 80
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-sz-2026-m1-054",
+                "blankId": "blank-mock-sz-2026-m1-054",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[4].text",
+                  "start": 80,
+                  "end": 86
+                }
+              },
+              {
+                "type": "text",
+                "text": ". Because the magic happens in the ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[4].text",
+                  "start": 86,
+                  "end": 121
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-sz-2026-m1-055",
+                "blankId": "blank-mock-sz-2026-m1-055",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[4].text",
+                  "start": 121,
+                  "end": 127
+                }
+              },
+              {
+                "type": "text",
+                "text": ", not in perfect pages.",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[4].text",
+                  "start": 127,
+                  "end": 150
+                }
+              }
+            ],
+            "sourceSpan": {
+              "sourcePath": "group.passage.paragraphs[4].text",
+              "start": 0,
+              "end": 150
+            }
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-cloze-p5",
+            "nodes": [
+              {
+                "type": "text",
+                "text": "Your ugly notebook is waiting.",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[5].text",
+                  "start": 0,
+                  "end": 30
+                }
+              }
+            ],
+            "sourceSpan": {
+              "sourcePath": "group.passage.paragraphs[5].text",
+              "start": 0,
+              "end": 30
+            }
+          }
+        ],
+        "questions": [
+          {
+            "questionId": "q-mock-sz-2026-m1-041",
+            "questionNo": 41,
+            "groupId": "group-mock-sz-2026-m1-cloze",
+            "blankId": "blank-mock-sz-2026-m1-041",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "changes"
+              },
+              {
+                "label": "B",
+                "text": "captures"
+              },
+              {
+                "label": "C",
+                "text": "follows"
+              },
+              {
+                "label": "D",
+                "text": "lacks"
+              }
+            ]
+          },
+          {
+            "questionId": "q-mock-sz-2026-m1-042",
+            "questionNo": 42,
+            "groupId": "group-mock-sz-2026-m1-cloze",
+            "blankId": "blank-mock-sz-2026-m1-042",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "unfinished"
+              },
+              {
+                "label": "B",
+                "text": "unclaimed"
+              },
+              {
+                "label": "C",
+                "text": "undiscovered"
+              },
+              {
+                "label": "D",
+                "text": "untouched"
+              }
+            ]
+          },
+          {
+            "questionId": "q-mock-sz-2026-m1-043",
+            "questionNo": 43,
+            "groupId": "group-mock-sz-2026-m1-cloze",
+            "blankId": "blank-mock-sz-2026-m1-043",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "secret"
+              },
+              {
+                "label": "B",
+                "text": "smart"
+              },
+              {
+                "label": "C",
+                "text": "precious"
+              },
+              {
+                "label": "D",
+                "text": "personal"
+              }
+            ]
+          },
+          {
+            "questionId": "q-mock-sz-2026-m1-044",
+            "questionNo": 44,
+            "groupId": "group-mock-sz-2026-m1-cloze",
+            "blankId": "blank-mock-sz-2026-m1-044",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "closed"
+              },
+              {
+                "label": "B",
+                "text": "decorated"
+              },
+              {
+                "label": "C",
+                "text": "delivered"
+              },
+              {
+                "label": "D",
+                "text": "fixed"
+              }
+            ]
+          },
+          {
+            "questionId": "q-mock-sz-2026-m1-045",
+            "questionNo": 45,
+            "groupId": "group-mock-sz-2026-m1-cloze",
+            "blankId": "blank-mock-sz-2026-m1-045",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "torn"
+              },
+              {
+                "label": "B",
+                "text": "hard"
+              },
+              {
+                "label": "C",
+                "text": "hidden"
+              },
+              {
+                "label": "D",
+                "text": "fancy"
+              }
+            ]
+          },
+          {
+            "questionId": "q-mock-sz-2026-m1-046",
+            "questionNo": 46,
+            "groupId": "group-mock-sz-2026-m1-cloze",
+            "blankId": "blank-mock-sz-2026-m1-046",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "guard"
+              },
+              {
+                "label": "B",
+                "text": "surround"
+              },
+              {
+                "label": "C",
+                "text": "fill"
+              },
+              {
+                "label": "D",
+                "text": "serve"
+              }
+            ]
+          },
+          {
+            "questionId": "q-mock-sz-2026-m1-047",
+            "questionNo": 47,
+            "groupId": "group-mock-sz-2026-m1-cloze",
+            "blankId": "blank-mock-sz-2026-m1-047",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "annoying"
+              },
+              {
+                "label": "B",
+                "text": "freeing"
+              },
+              {
+                "label": "C",
+                "text": "demanding"
+              },
+              {
+                "label": "D",
+                "text": "convincing"
+              }
+            ]
+          },
+          {
+            "questionId": "q-mock-sz-2026-m1-048",
+            "questionNo": 48,
+            "groupId": "group-mock-sz-2026-m1-cloze",
+            "blankId": "blank-mock-sz-2026-m1-048",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "plan"
+              },
+              {
+                "label": "B",
+                "text": "doubt"
+              },
+              {
+                "label": "C",
+                "text": "control"
+              },
+              {
+                "label": "D",
+                "text": "admire"
+              }
+            ]
+          },
+          {
+            "questionId": "q-mock-sz-2026-m1-049",
+            "questionNo": 49,
+            "groupId": "group-mock-sz-2026-m1-cloze",
+            "blankId": "blank-mock-sz-2026-m1-049",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "luck"
+              },
+              {
+                "label": "B",
+                "text": "warning"
+              },
+              {
+                "label": "C",
+                "text": "promise"
+              },
+              {
+                "label": "D",
+                "text": "pressure"
+              }
+            ]
+          },
+          {
+            "questionId": "q-mock-sz-2026-m1-050",
+            "questionNo": 50,
+            "groupId": "group-mock-sz-2026-m1-cloze",
+            "blankId": "blank-mock-sz-2026-m1-050",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "tool"
+              },
+              {
+                "label": "B",
+                "text": "test"
+              },
+              {
+                "label": "C",
+                "text": "guide"
+              },
+              {
+                "label": "D",
+                "text": "reason"
+              }
+            ]
+          },
+          {
+            "questionId": "q-mock-sz-2026-m1-051",
+            "questionNo": 51,
+            "groupId": "group-mock-sz-2026-m1-cloze",
+            "blankId": "blank-mock-sz-2026-m1-051",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "incomplete"
+              },
+              {
+                "label": "B",
+                "text": "impractical"
+              },
+              {
+                "label": "C",
+                "text": "imperfect"
+              },
+              {
+                "label": "D",
+                "text": "irregular"
+              }
+            ]
+          },
+          {
+            "questionId": "q-mock-sz-2026-m1-052",
+            "questionNo": 52,
+            "groupId": "group-mock-sz-2026-m1-cloze",
+            "blankId": "blank-mock-sz-2026-m1-052",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "cheat"
+              },
+              {
+                "label": "B",
+                "text": "fail"
+              },
+              {
+                "label": "C",
+                "text": "hurt"
+              },
+              {
+                "label": "D",
+                "text": "disappear"
+              }
+            ]
+          },
+          {
+            "questionId": "q-mock-sz-2026-m1-053",
+            "questionNo": 53,
+            "groupId": "group-mock-sz-2026-m1-cloze",
+            "blankId": "blank-mock-sz-2026-m1-053",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "slightly"
+              },
+              {
+                "label": "B",
+                "text": "initially"
+              },
+              {
+                "label": "C",
+                "text": "hardly"
+              },
+              {
+                "label": "D",
+                "text": "consequently"
+              }
+            ]
+          },
+          {
+            "questionId": "q-mock-sz-2026-m1-054",
+            "questionNo": 54,
+            "groupId": "group-mock-sz-2026-m1-cloze",
+            "blankId": "blank-mock-sz-2026-m1-054",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "run into"
+              },
+              {
+                "label": "B",
+                "text": "refer to"
+              },
+              {
+                "label": "C",
+                "text": "look at"
+              },
+              {
+                "label": "D",
+                "text": "reach for"
+              }
+            ]
+          },
+          {
+            "questionId": "q-mock-sz-2026-m1-055",
+            "questionNo": 55,
+            "groupId": "group-mock-sz-2026-m1-cloze",
+            "blankId": "blank-mock-sz-2026-m1-055",
+            "stem": null,
+            "options": [
+              {
+                "label": "A",
+                "text": "preparing"
+              },
+              {
+                "label": "B",
+                "text": "thinking"
+              },
+              {
+                "label": "C",
+                "text": "writing"
+              },
+              {
+                "label": "D",
+                "text": "reading"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "group-mock-sz-2026-m1-grammar-fill": {
+      "sourceFingerprint": "9ddf0d087c31b1950a6822abc41fb70d4069dac1444263431763f5c9d2ca5fc9",
+      "semanticDigest": "82a4f9b74c889a7ff8b4b4c0e61f0c85ef47ca1f1aa043b492c1ac540350b00b",
+      "canonicalGroup": {
+        "schemaVersion": "canonical-paper-group-v1",
+        "groupId": "group-mock-sz-2026-m1-grammar-fill",
+        "groupType": "grammarFill",
+        "title": "语法填空",
+        "paragraphs": [
+          {
+            "paragraphId": "para-mock-sz-2026-m1-grammar-fill-title",
+            "nodes": [
+              {
+                "type": "text",
+                "text": "When I first opened Where the Deer Hide in the Woods, I felt as if I were stepping into a world ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[0].text",
+                  "start": 0,
+                  "end": 96
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-sz-2026-m1-056",
+                "blankId": "blank-mock-sz-2026-m1-056",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[0].text",
+                  "start": 96,
+                  "end": 102
+                }
+              },
+              {
+                "type": "text",
+                "text": " the author’s words flow like gentle music. The Tang poems, ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[0].text",
+                  "start": 102,
+                  "end": 162
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-sz-2026-m1-057",
+                "blankId": "blank-mock-sz-2026-m1-057",
+                "hint": "translate",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[0].text",
+                  "start": 162,
+                  "end": 180
+                }
+              },
+              {
+                "type": "text",
+                "text": " with the master touch of Xu Yuanchong, speak softly in two voices—one Chinese, one English—each echoing (回 响 ) with calm, beauty, and quiet ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[0].text",
+                  "start": 180,
+                  "end": 321
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-sz-2026-m1-058",
+                "blankId": "blank-mock-sz-2026-m1-058",
+                "hint": "deep",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[0].text",
+                  "start": 321,
+                  "end": 334
+                }
+              },
+              {
+                "type": "text",
+                "text": " .",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[0].text",
+                  "start": 334,
+                  "end": 336
+                }
+              }
+            ],
+            "sourceSpan": {
+              "sourcePath": "group.passage.paragraphs[0].text",
+              "start": 0,
+              "end": 336
+            }
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-grammar-fill-p1",
+            "nodes": [
+              {
+                "type": "text",
+                "text": "The book ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 0,
+                  "end": 9
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-sz-2026-m1-059",
+                "blankId": "blank-mock-sz-2026-m1-059",
+                "hint": "divide",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 9,
+                  "end": 24
+                }
+              },
+              {
+                "type": "text",
+                "text": " into six chapters, each unfolding a distinct landscape of emotion—sorrow, peace, love, longing, solitude, and reflection. I was ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 24,
+                  "end": 153
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-sz-2026-m1-060",
+                "blankId": "blank-mock-sz-2026-m1-060",
+                "hint": "genuine",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 153,
+                  "end": 169
+                }
+              },
+              {
+                "type": "text",
+                "text": " moved when I read “The monkeys on both banks are still calling; my light boat has sailed past a thousand hills.” I fully ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 169,
+                  "end": 291
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-sz-2026-m1-061",
+                "blankId": "blank-mock-sz-2026-m1-061",
+                "hint": "sense",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 291,
+                  "end": 305
+                }
+              },
+              {
+                "type": "text",
+                "text": " Li Bai’s liberated soul—his joy at being pardoned by the emperor—flowing through the lines.",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[1].text",
+                  "start": 305,
+                  "end": 397
+                }
+              }
+            ],
+            "sourceSpan": {
+              "sourcePath": "group.passage.paragraphs[1].text",
+              "start": 0,
+              "end": 397
+            }
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-grammar-fill-p2",
+            "nodes": [
+              {
+                "type": "text",
+                "text": "Each page of the book is enriched with thoughtful notes, vivid background stories, and traditional Chinese brush-style ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[2].text",
+                  "start": 0,
+                  "end": 119
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-sz-2026-m1-062",
+                "blankId": "blank-mock-sz-2026-m1-062",
+                "hint": "illustration",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[2].text",
+                  "start": 119,
+                  "end": 140
+                }
+              },
+              {
+                "type": "text",
+                "text": " . Xu’s artful work transforms the rhythm ( 节 奏 ) of Chinese poems ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[2].text",
+                  "start": 140,
+                  "end": 207
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-sz-2026-m1-063",
+                "blankId": "blank-mock-sz-2026-m1-063",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[2].text",
+                  "start": 207,
+                  "end": 213
+                }
+              },
+              {
+                "type": "text",
+                "text": " English music, a recreation that honors both the original and its new form.",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[2].text",
+                  "start": 213,
+                  "end": 289
+                }
+              }
+            ],
+            "sourceSpan": {
+              "sourcePath": "group.passage.paragraphs[2].text",
+              "start": 0,
+              "end": 289
+            }
+          },
+          {
+            "paragraphId": "para-mock-sz-2026-m1-grammar-fill-p3",
+            "nodes": [
+              {
+                "type": "blank",
+                "questionId": "q-mock-sz-2026-m1-064",
+                "blankId": "blank-mock-sz-2026-m1-064",
+                "hint": "read",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[3].text",
+                  "start": 0,
+                  "end": 13
+                }
+              },
+              {
+                "type": "text",
+                "text": " this book feels like a journey through hearts and landscapes. For anyone who treasures poetry, painting, or the meeting of two cultures in perfect harmony, Where the Deer Hide in the Woods is ",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[3].text",
+                  "start": 13,
+                  "end": 206
+                }
+              },
+              {
+                "type": "blank",
+                "questionId": "q-mock-sz-2026-m1-065",
+                "blankId": "blank-mock-sz-2026-m1-065",
+                "hint": null,
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[3].text",
+                  "start": 206,
+                  "end": 212
+                }
+              },
+              {
+                "type": "text",
+                "text": " must-read that beautifully serves as the bridge.",
+                "sourceSpan": {
+                  "sourcePath": "group.passage.paragraphs[3].text",
+                  "start": 212,
+                  "end": 261
+                }
+              }
+            ],
+            "sourceSpan": {
+              "sourcePath": "group.passage.paragraphs[3].text",
+              "start": 0,
+              "end": 261
+            }
+          }
+        ],
+        "questions": [
+          {
+            "questionId": "q-mock-sz-2026-m1-056",
+            "questionNo": 56,
+            "groupId": "group-mock-sz-2026-m1-grammar-fill",
+            "blankId": "blank-mock-sz-2026-m1-056",
+            "stem": null,
+            "options": []
+          },
+          {
+            "questionId": "q-mock-sz-2026-m1-057",
+            "questionNo": 57,
+            "groupId": "group-mock-sz-2026-m1-grammar-fill",
+            "blankId": "blank-mock-sz-2026-m1-057",
+            "stem": null,
+            "options": []
+          },
+          {
+            "questionId": "q-mock-sz-2026-m1-058",
+            "questionNo": 58,
+            "groupId": "group-mock-sz-2026-m1-grammar-fill",
+            "blankId": "blank-mock-sz-2026-m1-058",
+            "stem": null,
+            "options": []
+          },
+          {
+            "questionId": "q-mock-sz-2026-m1-059",
+            "questionNo": 59,
+            "groupId": "group-mock-sz-2026-m1-grammar-fill",
+            "blankId": "blank-mock-sz-2026-m1-059",
+            "stem": null,
+            "options": []
+          },
+          {
+            "questionId": "q-mock-sz-2026-m1-060",
+            "questionNo": 60,
+            "groupId": "group-mock-sz-2026-m1-grammar-fill",
+            "blankId": "blank-mock-sz-2026-m1-060",
+            "stem": null,
+            "options": []
+          },
+          {
+            "questionId": "q-mock-sz-2026-m1-061",
+            "questionNo": 61,
+            "groupId": "group-mock-sz-2026-m1-grammar-fill",
+            "blankId": "blank-mock-sz-2026-m1-061",
+            "stem": null,
+            "options": []
+          },
+          {
+            "questionId": "q-mock-sz-2026-m1-062",
+            "questionNo": 62,
+            "groupId": "group-mock-sz-2026-m1-grammar-fill",
+            "blankId": "blank-mock-sz-2026-m1-062",
+            "stem": null,
+            "options": []
+          },
+          {
+            "questionId": "q-mock-sz-2026-m1-063",
+            "questionNo": 63,
+            "groupId": "group-mock-sz-2026-m1-grammar-fill",
+            "blankId": "blank-mock-sz-2026-m1-063",
+            "stem": null,
+            "options": []
+          },
+          {
+            "questionId": "q-mock-sz-2026-m1-064",
+            "questionNo": 64,
+            "groupId": "group-mock-sz-2026-m1-grammar-fill",
+            "blankId": "blank-mock-sz-2026-m1-064",
+            "stem": null,
+            "options": []
+          },
+          {
+            "questionId": "q-mock-sz-2026-m1-065",
+            "questionNo": 65,
+            "groupId": "group-mock-sz-2026-m1-grammar-fill",
+            "blankId": "blank-mock-sz-2026-m1-065",
+            "stem": null,
+            "options": []
+          }
+        ]
+      }
+    }
+  }
+}

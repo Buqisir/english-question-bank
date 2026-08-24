@@ -1,0 +1,347 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-mock-sz-2026-m1",
+  "sourceAssetVersion": 10,
+  "targetGroups": [
+    "group-mock-sz-2026-m1-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "cursor-grok-4.6",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "format2-pdf-pair-import",
+    "reviewedAt": "2026-08-13T00:00:00Z",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-mock-sz-2026-m1-seven-choices": {
+      "overview": "议论文。作者戴上 VR 立刻“到别处”，承认虚拟旅行便利，随即对比真实旅行的不可预测与在场感，结论是 VR 不能取代亲身到场。",
+      "discourseStructure": {
+        "summary": "开篇用极地与博物馆场景引出 VR 承诺；第二段写便利；第三段转入真实行走与相遇；第四段对比不可预测；末段收束：看见更远不等于站在那里。",
+        "units": [
+          {
+            "unitId": "unit-mock-sz-2026-m1-seven-vr",
+            "heading": null,
+            "paragraphIds": [
+              "para-mock-sz-2026-m1-seven-title",
+              "para-mock-sz-2026-m1-seven-p1",
+              "para-mock-sz-2026-m1-seven-p2",
+              "para-mock-sz-2026-m1-seven-p3"
+            ],
+            "summary": "戴上耳机即到冰原与博物馆，点出 VR 足不出户的承诺。"
+          },
+          {
+            "unitId": "unit-mock-sz-2026-m1-seven-convenient",
+            "heading": null,
+            "paragraphIds": [
+              "para-mock-sz-2026-m1-seven-p4",
+              "para-mock-sz-2026-m1-seven-p5",
+              "para-mock-sz-2026-m1-seven-p6",
+              "para-mock-sz-2026-m1-seven-p7"
+            ],
+            "summary": "虚拟旅行不受天气、健康与金钱限制。"
+          },
+          {
+            "unitId": "unit-mock-sz-2026-m1-seven-real",
+            "heading": null,
+            "paragraphIds": [
+              "para-mock-sz-2026-m1-seven-p8",
+              "para-mock-sz-2026-m1-seven-p9",
+              "para-mock-sz-2026-m1-seven-p10"
+            ],
+            "summary": "真实行者走街、尝食、面对面相遇。"
+          },
+          {
+            "unitId": "unit-mock-sz-2026-m1-seven-unplanned",
+            "heading": null,
+            "paragraphIds": [
+              "para-mock-sz-2026-m1-seven-p11",
+              "para-mock-sz-2026-m1-seven-p12",
+              "para-mock-sz-2026-m1-seven-p13",
+              "para-mock-sz-2026-m1-seven-p14"
+            ],
+            "summary": "虚拟场景被设计，真实旅行由不可预测塑造。"
+          },
+          {
+            "unitId": "unit-mock-sz-2026-m1-seven-close",
+            "heading": null,
+            "paragraphIds": [
+              "para-mock-sz-2026-m1-seven-p15",
+              "para-mock-sz-2026-m1-seven-p16",
+              "para-mock-sz-2026-m1-seven-p17"
+            ],
+            "summary": "VR 会进化，但不能取代站在当地的感觉。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-mock-sz-2026-m1-036": {
+      "blankId": "blank-mock-sz-2026-m1-036",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "headset",
+        "somewhere else",
+        "without leaving home",
+        "virtual reality"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-mock-sz-2026-m1-seven-title",
+        "headingAnchor": null,
+        "beforeQuote": "I find myself inside a museum, leaning close to a painting I have never seen in real life.",
+        "afterQuote": "This is the promise of virtual reality (VR): a world delivered to us without leaving home."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "I am not moving, yet I am traveling",
+          "signalSide": "option",
+          "targetText": "without leaving home",
+          "relation": "人没动却在旅行，正好接到足不出户的 VR 承诺。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "without leaving home",
+          "signalSide": "context-after",
+          "targetText": "I am not moving, yet I am traveling",
+          "relation": "空后点明 VR：世界送上门，人不必离开家。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "A",
+        "fitSummary": "A 把冰原与博物馆两段体验收成一句：没移动却在旅行，再交给 VR 定义。",
+        "matchedClues": [
+          {
+            "contextSide": "without leaving home",
+            "optionSide": "I am not moving, yet I am traveling",
+            "relation": "不动与不出门同义。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C 写脚痛走一天，与戴耳机坐着的场景相反。"
+        }
+      ],
+      "teachingNote": "段末空看空后是否下定义：A 的“没动却在旅行”正好接到 This is the promise of VR。"
+    },
+    "q-mock-sz-2026-m1-037": {
+      "blankId": "blank-mock-sz-2026-m1-037",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.elaboration",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "appreciate",
+        "weather",
+        "health",
+        "financial pressure",
+        "removes barriers"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-mock-sz-2026-m1-seven-p1",
+        "headingAnchor": null,
+        "beforeQuote": "There is much to appreciate in this form of travel.",
+        "afterQuote": "There is no need to consider weather"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "convenient, time-saving, and widely accessible",
+          "signalSide": "option",
+          "targetText": "There is no need to consider weather",
+          "relation": "便利、省时、易得，后文用天气健康金钱展开。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "no need to consider weather",
+          "signalSide": "context-after",
+          "targetText": "widely accessible",
+          "relation": "不必考虑天气健康金钱，即 widely accessible。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "D 总说虚拟旅行便利易得，空后三条限制被拿掉是展开。",
+        "matchedClues": [
+          {
+            "contextSide": "no need to consider weather",
+            "optionSide": "convenient, time-saving, and widely accessible",
+            "relation": "总说便利，后文分说。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "G 开始批评便利会削弱出门欲望，本段仍在赞便利。"
+        }
+      ],
+      "teachingNote": "空前 There is much to appreciate，空后列具体便利，中间要总括句 D。"
+    },
+    "q-mock-sz-2026-m1-038": {
+      "blankId": "blank-mock-sz-2026-m1-038",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.turn",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "unfamiliar streets",
+        "local dishes",
+        "face-to-face",
+        "awaken the senses"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-mock-sz-2026-m1-seven-p2",
+        "headingAnchor": null,
+        "beforeQuote": "VR quietly removes barriers that traditional travel",
+        "afterQuote": "Travelers wander through unfamiliar streets, sample local dishes, and engage face-to-"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Yet real travel leaves a deeper mark",
+          "signalSide": "option",
+          "targetText": "Travelers wander through unfamiliar streets",
+          "relation": "Yet 转入真实旅行，后文写走街尝食面对面。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "wander through unfamiliar streets",
+          "signalSide": "context-after",
+          "targetText": "real travel leaves a deeper mark",
+          "relation": "真实行者的身体经验支撑 deeper mark。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "B 用 Yet 从 VR 便利转到真实旅行留下更深印记。",
+        "matchedClues": [
+          {
+            "contextSide": "Travelers wander through unfamiliar streets",
+            "optionSide": "real travel leaves a deeper mark",
+            "relation": "真实行走与更深印记同场。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "G 批评 VR 便利，但空后主语是 Travelers 的真实行走，不是继续谈 VR 副作用。"
+        }
+      ],
+      "teachingNote": "段首空看转折：前段 VR 便利，后文真实行者，B 的 Yet real travel 最贴。"
+    },
+    "q-mock-sz-2026-m1-039": {
+      "blankId": "blank-mock-sz-2026-m1-039",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.elaboration",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "unpredictability",
+        "unplanned moments",
+        "designed scenes",
+        "controlled"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-mock-sz-2026-m1-seven-p3",
+        "headingAnchor": null,
+        "beforeQuote": "is shaped by unpredictability.",
+        "afterQuote": "In those unplanned moments, understanding becomes"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "choices, adaptation, and constant awareness of the unexpected",
+          "signalSide": "option",
+          "targetText": "shaped by unpredictability",
+          "relation": "选择、适应、对意外保持警觉，展开 unpredictability。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "unplanned moments",
+          "signalSide": "context-after",
+          "targetText": "the unexpected",
+          "relation": "those unplanned moments 回指 unexpected。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "F 把 unpredictability 具体化为选择、适应与对意外的觉察，再接到 unplanned moments。",
+        "matchedClues": [
+          {
+            "contextSide": "unpredictability",
+            "optionSide": "constant awareness of the unexpected",
+            "relation": "不可预测与 unexpected 同场。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C 只写脚痛，不能展开 unpredictability，也接不上 those unplanned moments。"
+        }
+      ],
+      "teachingNote": "空前 unpredictability，空后 those unplanned moments，中间要解释意外从何而来：F。"
+    },
+    "q-mock-sz-2026-m1-040": {
+      "blankId": "blank-mock-sz-2026-m1-040",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.closure",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "cannot replace actual presence",
+        "feeling where you stand",
+        "seeing farther"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-mock-sz-2026-m1-seven-p4",
+        "headingAnchor": null,
+        "beforeQuote": "Travel is not simply about seeing farther; it is also",
+        "afterQuote": "about feeling where you stand."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "only arrives when your feet are on the ground",
+          "signalSide": "option",
+          "targetText": "feeling where you stand",
+          "relation": "有些认识只有脚踩实地才来，收束在场感。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "feeling where you stand",
+          "signalSide": "context-before",
+          "targetText": "feet are on the ground",
+          "relation": "站在哪里与脚在地上同义收束。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "E 把“看见更远不如站在那里”收成：有些知识只在脚踩实地时到来。",
+        "matchedClues": [
+          {
+            "contextSide": "feeling where you stand",
+            "optionSide": "feet are on the ground",
+            "relation": "在场才能获得那种认识。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "G 谈便利削弱欲望，末段要的是在场结论，不是再批便利。"
+        }
+      ],
+      "teachingNote": "篇末空对齐 cannot replace actual presence：E 的 feet on the ground 是收束句。"
+    }
+  }
+}

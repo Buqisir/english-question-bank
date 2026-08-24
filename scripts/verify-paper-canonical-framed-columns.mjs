@@ -12,6 +12,7 @@ import {
   makeFramedColumnsCanonicalFixture,
   makeFramedColumnsReadingBlocks,
 } from '../test-fixtures/paper-canonical/framedColumnsFixture.mjs'
+import { makeSz2026M1ReadingAFramedColumns } from '../shared/paper-canonical/paperMockSz2026M1ReadingAFramedColumns.mjs'
 
 function compileSource(source, fixture = makeReadyCanonicalFixture()) {
   return compileCanonicalPaper(bindCanonicalFixtureRequest(fixture, source).request)
@@ -224,5 +225,28 @@ assert.throws(
   }),
   (error) => error.code === 'CANONICAL_CONSUMPTION_REJECTED',
 )
+
+const szFixture = makeFramedColumnsCanonicalFixture()
+const szGroup = szFixture.source.groups.find((item) => item.slotId === 'reading.a')
+szGroup.content = {
+  blocks: [
+    szGroup.content.blocks[0],
+    makeSz2026M1ReadingAFramedColumns(),
+  ],
+}
+const szCompiled = compileCanonicalPaper(bindCanonicalFixtureRequest(szFixture, szFixture.source).request)
+assert.equal(
+  szCompiled.disposition,
+  'ready',
+  szCompiled.artifacts.normalizationReport.diagnostics.map((item) => `${item.code}: ${item.message}`).join('\n'),
+)
+const szCompiledGroup = readingGroupFromCompilation(szCompiled)
+const szFramed = szCompiledGroup.content.blocks[1]
+assert.equal(szFramed.kind, 'framed_columns')
+assert.equal(szFramed.columns[0].blocks.some((block) => block.kind === 'table'), true)
+assert.equal(szFramed.columns[1].blocks.length, 5)
+assert.match(JSON.stringify(szFramed), /ბრაზილია/)
+assert.match(JSON.stringify(szFramed), /Argentina/)
+assert.equal(szCompiledGroup.variant.passageBlockRoles.length, 0)
 
 console.log('verify-paper-canonical-framed-columns: PASS')

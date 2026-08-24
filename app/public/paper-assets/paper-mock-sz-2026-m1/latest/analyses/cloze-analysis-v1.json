@@ -1,0 +1,610 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-mock-sz-2026-m1",
+  "sourceAssetVersion": 10,
+  "targetGroups": [
+    "group-mock-sz-2026-m1-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "cursor-grok-4.6",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "format2-pdf-pair-import",
+    "reviewedAt": "2026-08-13T00:00:00Z",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-mock-sz-2026-m1-cloze": {
+      "overview": "夹叙夹议。作者买了精美笔记本却不敢写，换上破旧练习本后天天写；结论是最好的本子是你真会伸手去拿的那本。",
+      "affectiveArc": "从对精美本的期待，到不敢下笔，再到破本带来的轻松与持续书写。"
+    }
+  },
+  "blanks": {
+    "q-mock-sz-2026-m1-041": {
+      "blankId": "blank-mock-sz-2026-m1-041",
+      "blankNo": 41,
+      "pos": "verb",
+      "signatureFacet": "cloze.signature.verb.action-sequence",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "who journals regularly, and who __ beautiful thoughts：记下、捕捉想法，captures。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "changes",
+          "meaning": "改变"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "follows",
+          "meaning": "跟随"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "lacks",
+          "meaning": "缺乏"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "beautiful thoughts",
+          "signalSide": "context-after",
+          "targetText": "captures beautiful thoughts",
+          "relation": "空的宾语是美好想法，宜用捕捉/记下。"
+        }
+      ],
+      "teachingNote": "who journals ... and who __ thoughts，与 journals 并列的是记下想法。"
+    },
+    "q-mock-sz-2026-m1-042": {
+      "blankId": "blank-mock-sz-2026-m1-042",
+      "blankNo": 42,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "sat __ for months，后文 When I finally opened it，说明一直没动过，untouched。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "unfinished",
+          "meaning": "未完成的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "unclaimed",
+          "meaning": "无人认领的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "undiscovered",
+          "meaning": "未被发现的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "sat",
+          "signalSide": "context-before",
+          "targetText": "sat untouched",
+          "relation": "sat + 状态，配合数月未开。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "When I finally opened it",
+          "signalSide": "context-after",
+          "relation": "终于打开，反证此前未碰。"
+        }
+      ],
+      "teachingNote": "sat ... for months 与 finally opened 对读，选 untouched。"
+    },
+    "q-mock-sz-2026-m1-043": {
+      "blankId": "blank-mock-sz-2026-m1-043",
+      "blankNo": 43,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "too delicate and too __ to waste：纸页精贵，precious。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "secret",
+          "meaning": "秘密的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "smart",
+          "meaning": "聪明/时髦的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "personal",
+          "meaning": "私人的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "delicate and too",
+          "signalSide": "context-before",
+          "targetText": "too precious to waste",
+          "relation": "与 delicate 并列、后又 to waste。"
+        }
+      ],
+      "teachingNote": "too A and too B to waste，B 与 delicate 同向，选 precious。"
+    },
+    "q-mock-sz-2026-m1-044": {
+      "blankId": "blank-mock-sz-2026-m1-044",
+      "blankNo": 44,
+      "pos": "verb",
+      "signatureFacet": "cloze.signature.verb.action-sequence",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "不敢浪费就合上精美本，closed。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "decorated",
+          "meaning": "装饰"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "delivered",
+          "meaning": "递送"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "fixed",
+          "meaning": "修理/固定"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Instead, I grabbed an",
+          "signalSide": "context-after",
+          "targetText": "closed it. Instead",
+          "relation": "合上之后改抓旧本。"
+        }
+      ],
+      "teachingNote": "opened 之后犹豫，下一动作是合上再换本。"
+    },
+    "q-mock-sz-2026-m1-045": {
+      "blankId": "blank-mock-sz-2026-m1-045",
+      "blankNo": 45,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "old, ugly ... with a __ cover and dog-eared corners，破旧封面，torn。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "hard",
+          "meaning": "硬的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "hidden",
+          "meaning": "隐藏的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "fancy",
+          "meaning": "花哨的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "dog-eared corners",
+          "signalSide": "context-after",
+          "targetText": "torn cover and dog-eared",
+          "relation": "卷角与破封面同场。"
+        }
+      ],
+      "teachingNote": "ugly + dog-eared 指向破损，不选 fancy。"
+    },
+    "q-mock-sz-2026-m1-046": {
+      "blankId": "blank-mock-sz-2026-m1-046",
+      "blankNo": 46,
+      "pos": "verb",
+      "signatureFacet": "cloze.signature.verb.action-sequence",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "__ it with everything：往本子里填满内容，fill。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "guard",
+          "meaning": "看守"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "surround",
+          "meaning": "包围"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "serve",
+          "meaning": "服务"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "everything: morning pages",
+          "signalSide": "context-after",
+          "targetText": "fill it with everything",
+          "relation": "fill A with B 的固定搭配。"
+        }
+      ],
+      "teachingNote": "__ it with everything 是 fill ... with。"
+    },
+    "q-mock-sz-2026-m1-047": {
+      "blankId": "blank-mock-sz-2026-m1-047",
+      "blankNo": 47,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "This is surprisingly __ . I actually wrote：压力卸下，freeing。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "annoying",
+          "meaning": "恼人的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "demanding",
+          "meaning": "费力的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "convincing",
+          "meaning": "令人信服的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I actually wrote",
+          "signalSide": "context-after",
+          "targetText": "surprisingly freeing",
+          "relation": "真的写起来了，说明这种做法让人松绑。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "Without exception",
+          "signalSide": "context-after",
+          "relation": "天天写，情绪是轻松而非恼人。"
+        }
+      ],
+      "teachingNote": "后文 actually wrote / Every day 与 freeing 同向。"
+    },
+    "q-mock-sz-2026-m1-048": {
+      "blankId": "blank-mock-sz-2026-m1-048",
+      "blankNo": 48,
+      "pos": "verb",
+      "signatureFacet": "cloze.signature.verb.action-sequence",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "When we __ something too much, we place limits ... “too good.” 过度珍视，admire。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "plan",
+          "meaning": "计划"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "doubt",
+          "meaning": "怀疑"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "control",
+          "meaning": "控制"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "too good",
+          "signalSide": "context-after",
+          "targetText": "admire something too much",
+          "relation": "觉得它太好，是过度欣赏。"
+        }
+      ],
+      "teachingNote": "too much + too good 指向 admire，不是 doubt。"
+    },
+    "q-mock-sz-2026-m1-049": {
+      "blankId": "blank-mock-sz-2026-m1-049",
+      "blankNo": 49,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "ugly notebook carries no such __，后文 With the pressure off，pressure。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "luck",
+          "meaning": "运气"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "warning",
+          "meaning": "警告"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "promise",
+          "meaning": "承诺"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "With the pressure off",
+          "signalSide": "context-after",
+          "targetText": "no such pressure",
+          "relation": "后文 pressure off 回指此空。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "pressure off",
+          "signalSide": "context-after",
+          "relation": "pressure 原词复现。"
+        }
+      ],
+      "teachingNote": "no such __ 与 the pressure off 对读。"
+    },
+    "q-mock-sz-2026-m1-050": {
+      "blankId": "blank-mock-sz-2026-m1-050",
+      "blankNo": 50,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "This is a __ for thinking and living, not a museum piece：工具，tool。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "test",
+          "meaning": "测试"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "guide",
+          "meaning": "指南"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "reason",
+          "meaning": "理由"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "for thinking and living, not a museum piece",
+          "signalSide": "context-after",
+          "targetText": "a tool for thinking",
+          "relation": "与博物馆藏品对举，是使用的工具。"
+        }
+      ],
+      "teachingNote": "a __ for doing，对博物馆藏品，选 tool。"
+    },
+    "q-mock-sz-2026-m1-051": {
+      "blankId": "blank-mock-sz-2026-m1-051",
+      "blankNo": 51,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "__ notebooks are idea incubators，呼应 ugly / 不完美，imperfect。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "incomplete",
+          "meaning": "不完整的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "impractical",
+          "meaning": "不切实际的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "irregular",
+          "meaning": "不规则的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "idea incubators",
+          "signalSide": "context-after",
+          "targetText": "imperfect notebooks are idea incubators",
+          "relation": "不完美的本子反而孵化想法。"
+        }
+      ],
+      "teachingNote": "与 ugly notebook 同场，选 imperfect 不是 irregular。"
+    },
+    "q-mock-sz-2026-m1-052": {
+      "blankId": "blank-mock-sz-2026-m1-052",
+      "blankNo": 52,
+      "pos": "verb",
+      "signatureFacet": "cloze.signature.verb.action-sequence",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "You try things that might __. 压力卸下才敢试可能失败的事，fail。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "cheat",
+          "meaning": "欺骗"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "hurt",
+          "meaning": "伤害"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "disappear",
+          "meaning": "消失"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "You try things that might",
+          "signalSide": "context-before",
+          "targetText": "might fail",
+          "relation": "try things that might fail 是常见搭配。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "bad ideas",
+          "signalSide": "context-after",
+          "relation": "后文坏想法能进化，说明允许失败。"
+        }
+      ],
+      "teachingNote": "experiment more 后接可能失败的尝试。"
+    },
+    "q-mock-sz-2026-m1-053": {
+      "blankId": "blank-mock-sz-2026-m1-053",
+      "blankNo": 53,
+      "pos": "adverb",
+      "signatureFacet": "cloze.signature.adverb.affective-consistency",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "bad ideas I was __ embarrassed about gradually evolved：起初难为情，initially。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "slightly",
+          "meaning": "稍微"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "hardly",
+          "meaning": "几乎不"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "consequently",
+          "meaning": "因此"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "gradually evolved into work I’m proud of",
+          "signalSide": "context-after",
+          "targetText": "initially embarrassed",
+          "relation": "起初尴尬，后来骄傲，需要时间副词 initially。"
+        }
+      ],
+      "teachingNote": "embarrassed → proud 的时间对照，选 initially。"
+    },
+    "q-mock-sz-2026-m1-054": {
+      "blankId": "blank-mock-sz-2026-m1-054",
+      "blankNo": 54,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "the one you’ll actually __：真会伸手去拿来用的，reach for。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "run into",
+          "meaning": "偶遇"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "refer to",
+          "meaning": "查阅/提及"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "look at",
+          "meaning": "看着"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the one you’ll actually",
+          "signalSide": "context-before",
+          "targetText": "actually reach for",
+          "relation": "与精美本不敢写对照，要的是真会拿起来的本。"
+        }
+      ],
+      "teachingNote": "best notebook is the one you’ll actually reach for。"
+    },
+    "q-mock-sz-2026-m1-055": {
+      "blankId": "blank-mock-sz-2026-m1-055",
+      "blankNo": 55,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "magic happens in the __ , not in perfect pages：魔法在书写里，writing。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "preparing",
+          "meaning": "准备"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "thinking",
+          "meaning": "思考"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "reading 第 6 页 共 8 页",
+          "meaning": "阅读"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "not in perfect pages",
+          "signalSide": "context-after",
+          "targetText": "in the writing, not in perfect pages",
+          "relation": "与完美纸页对举的是写的动作。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "I actually wrote",
+          "signalSide": "context-before",
+          "relation": "前文 wrote 在此收束为 writing。"
+        }
+      ],
+      "teachingNote": "全文主线是写，不是看或准备。"
+    }
+  }
+}

@@ -1,0 +1,254 @@
+{
+  "schemaVersion": "grammar-fill-analysis-v2",
+  "paperId": "paper-mock-sz-2026-m1",
+  "sourceAssetVersion": 10,
+  "targetGroups": [
+    "group-mock-sz-2026-m1-grammar-fill"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "grammar-fill-analysis-v2",
+    "reviewStatus": "reviewed",
+    "model": "cursor-grok-4.6",
+    "reviewedBy": "format2-pdf-pair-import",
+    "reviewedAt": "2026-08-13T00:00:00Z",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-mock-sz-2026-m1-grammar-fill": {
+      "overview": "书评。作者读《Where the Deer Hide in the Woods》，写许渊冲英译唐诗如何以双语、注释与水墨插图把中文诗变成英文音乐。"
+    }
+  },
+  "blanks": {
+    "q-mock-sz-2026-m1-056": {
+      "blankId": "blank-mock-sz-2026-m1-056",
+      "blankNo": 56,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.conjunction.relative-clause",
+      "answer": "where",
+      "role": null,
+      "path": null,
+      "reason": "先行词 a world，空后 the author’s words flow 是完整主谓，用关系副词 where。",
+      "evidence": [
+        {
+          "type": "antecedent",
+          "signalText": "a world",
+          "signalSide": "passage",
+          "relation": "地点名词 world 后接定语从句。"
+        },
+        {
+          "type": "clause-frame",
+          "signalText": "the author’s words flow like gentle music",
+          "signalSide": "passage",
+          "relation": "从句不缺主宾，缺地点关系词。"
+        }
+      ],
+      "teachingNote": "a world __ 主谓完整，选 where。"
+    },
+    "q-mock-sz-2026-m1-057": {
+      "blankId": "blank-mock-sz-2026-m1-057",
+      "blankNo": 57,
+      "blankType": "given",
+      "hint": "translate",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "translated",
+      "role": "attributive",
+      "path": "fast",
+      "reason": "The Tang poems 是主语，speak 是谓语，空处作后置定语，诗被翻译，用过去分词 translated。",
+      "evidence": [
+        {
+          "type": "governing-word",
+          "signalText": "The Tang poems",
+          "signalSide": "passage",
+          "relation": "空修饰 poems，与主语同指。"
+        },
+        {
+          "type": "modified-word",
+          "signalText": "speak softly in two voices",
+          "signalSide": "passage",
+          "relation": "句中已有谓语 speak，translate 不能再作谓语。"
+        }
+      ],
+      "teachingNote": "名词, __ (v), 谓语已在后面，被动用 -ed。"
+    },
+    "q-mock-sz-2026-m1-058": {
+      "blankId": "blank-mock-sz-2026-m1-058",
+      "blankNo": 58,
+      "blankType": "given",
+      "hint": "deep",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-noun",
+      "answer": "depth",
+      "role": null,
+      "path": null,
+      "reason": "quiet __ 与 calm, beauty 并列，需名词 depth。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "calm, beauty, and quiet",
+          "signalSide": "passage",
+          "relation": "and 连接名词性成分。"
+        }
+      ],
+      "teachingNote": "形容词 quiet 后接名词，deep → depth。"
+    },
+    "q-mock-sz-2026-m1-059": {
+      "blankId": "blank-mock-sz-2026-m1-059",
+      "blankNo": 59,
+      "blankType": "given",
+      "hint": "divide",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "is divided",
+      "role": null,
+      "path": null,
+      "reason": "The book 与 divide 是被动，客观说明用一般现在时 is divided。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "The book",
+          "signalSide": "passage",
+          "relation": "书被分成六章。"
+        },
+        {
+          "type": "collocation",
+          "signalText": "into six chapters",
+          "signalSide": "passage",
+          "relation": "be divided into 固定搭配。"
+        }
+      ],
+      "teachingNote": "be divided into + 部分。"
+    },
+    "q-mock-sz-2026-m1-060": {
+      "blankId": "blank-mock-sz-2026-m1-060",
+      "blankNo": 60,
+      "blankType": "given",
+      "hint": "genuine",
+      "facetKey": "grammar-fill.given.conversion.adjective-to-adverb",
+      "answer": "genuinely",
+      "role": null,
+      "path": null,
+      "reason": "修饰 moved，genuine 应变副词 genuinely。",
+      "evidence": [
+        {
+          "type": "modified-word",
+          "signalText": "moved when I read",
+          "signalSide": "passage",
+          "relation": "was __ moved，空修饰过去分词。"
+        }
+      ],
+      "teachingNote": "be + 副词 + moved。"
+    },
+    "q-mock-sz-2026-m1-061": {
+      "blankId": "blank-mock-sz-2026-m1-061",
+      "blankNo": 61,
+      "blankType": "given",
+      "hint": "sense",
+      "facetKey": "grammar-fill.given.verb.finite",
+      "answer": "sensed",
+      "role": null,
+      "path": null,
+      "reason": "I fully __ Li Bai’s liberated soul，叙述过去感受，用过去式 sensed。",
+      "evidence": [
+        {
+          "type": "subject",
+          "signalText": "I fully",
+          "signalSide": "passage",
+          "relation": "主语 I，叙述已发生的阅读感受。"
+        },
+        {
+          "type": "time-marker",
+          "signalText": "I was",
+          "signalSide": "passage",
+          "relation": "前句 I was moved 用过去时，本空保持一致。"
+        }
+      ],
+      "teachingNote": "与 I was moved 同一时间线，sense → sensed。"
+    },
+    "q-mock-sz-2026-m1-062": {
+      "blankId": "blank-mock-sz-2026-m1-062",
+      "blankNo": 62,
+      "blankType": "given",
+      "hint": "illustration",
+      "facetKey": "grammar-fill.given.noun.number",
+      "answer": "illustrations",
+      "role": null,
+      "path": null,
+      "reason": "与 notes, stories 并列，用复数 illustrations。",
+      "evidence": [
+        {
+          "type": "parallel",
+          "signalText": "thoughtful notes, vivid background stories, and traditional",
+          "signalSide": "passage",
+          "relation": "and 连接复数名词。"
+        }
+      ],
+      "teachingNote": "notes, stories, and __，复数 illustrations。"
+    },
+    "q-mock-sz-2026-m1-063": {
+      "blankId": "blank-mock-sz-2026-m1-063",
+      "blankNo": 63,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.preposition",
+      "answer": "into",
+      "role": null,
+      "path": null,
+      "reason": "transforms the rhythm of Chinese poems __ English music，transform A into B。",
+      "evidence": [
+        {
+          "type": "collocation",
+          "signalText": "transforms the rhythm",
+          "signalSide": "passage",
+          "relation": "transform ... into 固定搭配。"
+        },
+        {
+          "type": "governing-word",
+          "signalText": "English music",
+          "signalSide": "passage",
+          "relation": "转化后的结果用 into。"
+        }
+      ],
+      "teachingNote": "transform A into B。"
+    },
+    "q-mock-sz-2026-m1-064": {
+      "blankId": "blank-mock-sz-2026-m1-064",
+      "blankNo": 64,
+      "blankType": "given",
+      "hint": "read",
+      "facetKey": "grammar-fill.given.verb.non-finite",
+      "answer": "Reading",
+      "role": "subject",
+      "path": "fast",
+      "reason": "句首 __ this book feels like，动名词作主语 Reading。",
+      "evidence": [
+        {
+          "type": "clause-frame",
+          "signalText": "this book feels like a journey",
+          "signalSide": "passage",
+          "relation": "feels 是谓语，空处是主语。"
+        }
+      ],
+      "teachingNote": "句首动词 + 名词 + feels，用 -ing 作主语。"
+    },
+    "q-mock-sz-2026-m1-065": {
+      "blankId": "blank-mock-sz-2026-m1-065",
+      "blankNo": 65,
+      "blankType": "no-hint",
+      "hint": null,
+      "facetKey": "grammar-fill.no-hint.article",
+      "answer": "a",
+      "role": null,
+      "path": null,
+      "reason": "__ must-read 是单数可数名词，用不定冠词 a。",
+      "evidence": [
+        {
+          "type": "determiner",
+          "signalText": "must-read that beautifully serves as the bridge",
+          "signalSide": "passage",
+          "relation": "单数名词前缺冠词。"
+        }
+      ],
+      "teachingNote": "a must-read 是习语。"
+    }
+  }
+}

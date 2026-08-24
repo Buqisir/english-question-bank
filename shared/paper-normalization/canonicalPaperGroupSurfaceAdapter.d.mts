@@ -46,60 +46,76 @@ export type CanonicalPaperGroupSurfaceData = {
   readonly evidence: ReadonlyArray<PaperEvidence>
 }
 
-export type CanonicalReadingSurfaceBlock =
-  | {
-      readonly kind: 'paragraph'
-      readonly nodeId: string
-      readonly role: 'title' | 'subtitle' | 'body'
+export type CanonicalReadingSurfaceTextInline = {
+  readonly kind: 'text'
+  readonly nodeId: string
+  readonly text: string
+}
+
+export type CanonicalReadingSurfaceParagraphBlock = {
+  readonly kind: 'paragraph'
+  readonly nodeId: string
+  readonly role: 'title' | 'subtitle' | 'body'
+  readonly text: string
+  readonly inlines: ReadonlyArray<CanonicalReadingSurfaceTextInline>
+}
+
+export type CanonicalReadingSurfaceTableBlock = {
+  readonly kind: 'table'
+  readonly nodeId: string
+  readonly columnCount: number
+  readonly rows: ReadonlyArray<{
+    readonly rowId: string
+    readonly cells: ReadonlyArray<{
+      readonly cellId: string
+      readonly columnStart: number
+      readonly columnSpan: number
+      readonly rowSpan: number
+      readonly role: string
       readonly text: string
-      readonly inlines: ReadonlyArray<{
-        readonly kind: 'text'
-        readonly nodeId: string
-        readonly text: string
-      }>
-    }
-  | {
-      readonly kind: 'table'
-      readonly nodeId: string
-      readonly columnCount: number
-      readonly rows: ReadonlyArray<{
-        readonly rowId: string
-        readonly cells: ReadonlyArray<{
-          readonly cellId: string
-          readonly columnStart: number
-          readonly columnSpan: number
-          readonly rowSpan: number
-          readonly role: string
-          readonly text: string
-          readonly inlines: ReadonlyArray<{
-            readonly kind: 'text'
-            readonly nodeId: string
-            readonly text: string
-          }>
-        }>
-      }>
-    }
-  | {
-      readonly kind: 'figure'
-      readonly nodeId: string
-      readonly mediaId: string
-      readonly caption: string
-      readonly captionInlines: ReadonlyArray<{
-        readonly kind: 'text'
-        readonly nodeId: string
-        readonly text: string
-      }>
-      readonly media: {
-        readonly mimeType: string
-        readonly sha256: string
-        readonly sourceArtifactRef: { readonly artifactId: string }
-      }
-      readonly mediaArtifact: {
-        readonly mimeType: string
-        readonly sha256: string
-        readonly encodedBytes: string
-      }
-    }
+      readonly inlines: ReadonlyArray<CanonicalReadingSurfaceTextInline>
+    }>
+  }>
+}
+
+export type CanonicalReadingSurfaceFigureBlock = {
+  readonly kind: 'figure'
+  readonly nodeId: string
+  readonly mediaId: string
+  readonly caption: string
+  readonly captionInlines: ReadonlyArray<CanonicalReadingSurfaceTextInline>
+  readonly media: {
+    readonly mimeType: string
+    readonly sha256: string
+    readonly sourceArtifactRef: { readonly artifactId: string }
+  }
+  readonly mediaArtifact: {
+    readonly mimeType: string
+    readonly sha256: string
+    readonly encodedBytes: string
+  }
+}
+
+export type CanonicalReadingSurfaceColumnChildBlock =
+  | CanonicalReadingSurfaceParagraphBlock
+  | CanonicalReadingSurfaceTableBlock
+
+export type CanonicalReadingSurfaceFramedColumnsBlock = {
+  readonly kind: 'framed_columns'
+  readonly nodeId: string
+  readonly columnCount: 2
+  readonly columns: ReadonlyArray<{
+    readonly columnId: string
+    readonly columnHeading?: string
+    readonly blocks: ReadonlyArray<CanonicalReadingSurfaceColumnChildBlock>
+  }>
+}
+
+export type CanonicalReadingSurfaceBlock =
+  | CanonicalReadingSurfaceParagraphBlock
+  | CanonicalReadingSurfaceTableBlock
+  | CanonicalReadingSurfaceFigureBlock
+  | CanonicalReadingSurfaceFramedColumnsBlock
 
 export type CanonicalPaperGroupSurfaceResult =
   | {
