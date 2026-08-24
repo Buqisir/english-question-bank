@@ -1,0 +1,166 @@
+{
+  "schemaVersion": "koboyo-adapted-pilot-qa-v1",
+  "checkedAt": "2026-08-11",
+  "status": "pass-technical-owner-qa-pending",
+  "scope": {
+    "adaptedAssetCount": 12,
+    "uniqueBaseCount": 12
+  },
+  "checks": {
+    "officialBaseReceipts": "12/12 pass",
+    "declaredBasePathsPreserved": "12/12 pass",
+    "semanticOverlayAdded": "12/12 pass",
+    "xmlAndSvgSafety": "12/12 pass",
+    "targetSourceBinding": "12/12 pass",
+    "searchGapReceipt": "12/12 pass",
+    "independentOriginalClaim": "none; all assets explicitly koboyo-adapted",
+    "formalManifestIntegration": "not-run",
+    "ownerVisualQa": "pending"
+  },
+  "entries": [
+    {
+      "entryId": "gaokao-frequency-0209-however",
+      "headword": "however",
+      "baseEntryId": "wanwei-core-0115-either",
+      "baseSha256": "b5b101dba65cc5b5428a4ea82cf43a38a9e15d87b3e83f89140880037404f5ea",
+      "adaptedSha256": "b2fe285ff8c7cc1c8f5c54ef35c21e1482b8f51cc4b7f73ec7e0005b67f89fd0",
+      "basePathCount": 2,
+      "adaptedPathCount": 3,
+      "officialSourceMatch": "pass",
+      "xmlAndSafety": "pass",
+      "adaptationReceipt": "pass"
+    },
+    {
+      "entryId": "gaokao-frequency-0747-beyond",
+      "headword": "beyond",
+      "baseEntryId": "wanwei-core-0015-along",
+      "baseSha256": "6d41d1f11de5017b11eb4edb3fe47685f6d15d16d67aa09566939c61f5464b7b",
+      "adaptedSha256": "06c522ead9ac42ebee2cee0830f4048d07759add7ce518bd29a9d1f5f73a2c7c",
+      "basePathCount": 2,
+      "adaptedPathCount": 3,
+      "officialSourceMatch": "pass",
+      "xmlAndSafety": "pass",
+      "adaptationReceipt": "pass"
+    },
+    {
+      "entryId": "gaokao-frequency-0828-although",
+      "headword": "although",
+      "baseEntryId": "wanwei-basic-0795-hurry",
+      "baseSha256": "19899f546cd86628e11fdf737c79a45ea03b6b36f46b6fcc35a79b51714f368a",
+      "adaptedSha256": "cc45bb23de7df6d4fe7e8bd0be1ce41fcf5ade79991e1f89dd6fa24eee0d4ac3",
+      "basePathCount": 2,
+      "adaptedPathCount": 3,
+      "officialSourceMatch": "pass",
+      "xmlAndSafety": "pass",
+      "adaptationReceipt": "pass"
+    },
+    {
+      "entryId": "gaokao-frequency-0970-throughout",
+      "headword": "throughout",
+      "baseEntryId": "wanwei-core-0149-follow",
+      "baseSha256": "dc2c7bd6d70c3e6c698d2996677d4e5a8c8528047070cb7e2f8c47ea7c513915",
+      "adaptedSha256": "3618b3c073d15b00a4f5685a6508174aec798caba89ef8064000b7eae4150fcb",
+      "basePathCount": 3,
+      "adaptedPathCount": 5,
+      "officialSourceMatch": "pass",
+      "xmlAndSafety": "pass",
+      "adaptationReceipt": "pass"
+    },
+    {
+      "entryId": "gaokao-frequency-1164-unless",
+      "headword": "unless",
+      "baseEntryId": "wanwei-core-0013-allow",
+      "baseSha256": "6d43575e0beca52d27093077df17cd54789c22220d78777ab489f9bdcb05fb50",
+      "adaptedSha256": "259f5311f8e2a3b81703e2280f28b590d3e53847f0cf3e4b4d1d9c6c583d23bb",
+      "basePathCount": 2,
+      "adaptedPathCount": 3,
+      "officialSourceMatch": "pass",
+      "xmlAndSafety": "pass",
+      "adaptationReceipt": "pass"
+    },
+    {
+      "entryId": "gaokao-frequency-1266-otherwise",
+      "headword": "otherwise",
+      "baseEntryId": "wanwei-core-0063-choose",
+      "baseSha256": "546b4bdbf784844f33a0f1ef311f72da5ff1b4163352f0b36feb931d70689b25",
+      "adaptedSha256": "4cbebf9cd91c1141d083f0ec886762cbb813a1a795deefb23cf194d8abf484e5",
+      "basePathCount": 2,
+      "adaptedPathCount": 3,
+      "officialSourceMatch": "pass",
+      "xmlAndSafety": "pass",
+      "adaptationReceipt": "pass"
+    },
+    {
+      "entryId": "gaokao-frequency-1502-despite",
+      "headword": "despite",
+      "baseEntryId": "wanwei-core-0098-difficult",
+      "baseSha256": "6cab97d9fafc8af28bf161331d50a2eccf31c690a2fabe70b3fb4df282f8b080",
+      "adaptedSha256": "31e171ba48cc0ea7fe9d8e072c856c6739ca13f47a726cf2f523193a96fd6236",
+      "basePathCount": 2,
+      "adaptedPathCount": 3,
+      "officialSourceMatch": "pass",
+      "xmlAndSafety": "pass",
+      "adaptationReceipt": "pass"
+    },
+    {
+      "entryId": "gaokao-frequency-1538-indeed",
+      "headword": "indeed",
+      "baseEntryId": "wanwei-basic-0982-really",
+      "baseSha256": "df191217722b278f892a689c7e49e5243052770d1a236f690af07fb97ce702a6",
+      "adaptedSha256": "a3aeb920943c503cad720f67b08aa357228634fd19478519fc0ca4a3961d95e1",
+      "basePathCount": 2,
+      "adaptedPathCount": 3,
+      "officialSourceMatch": "pass",
+      "xmlAndSafety": "pass",
+      "adaptationReceipt": "pass"
+    },
+    {
+      "entryId": "gaokao-frequency-1694-somehow",
+      "headword": "somehow",
+      "baseEntryId": "wanwei-basic-0841-lost",
+      "baseSha256": "9068eae07bc638cda9faadabc1509f41eb0e56db17cff54bbde155cb5224616a",
+      "adaptedSha256": "89f57e1075758cdc29d8d21c2ba70360be3b39a1046091780935d531dbbe591f",
+      "basePathCount": 2,
+      "adaptedPathCount": 4,
+      "officialSourceMatch": "pass",
+      "xmlAndSafety": "pass",
+      "adaptationReceipt": "pass"
+    },
+    {
+      "entryId": "gaokao-frequency-1779-merely",
+      "headword": "merely",
+      "baseEntryId": "wanwei-core-0140-few",
+      "baseSha256": "aa7f0bc1b8054491ff2551911372f1908d5a39c32fff55290f6b8c42b778ca8f",
+      "adaptedSha256": "529b2b4710bcd658e74e52b250b34201c008cc6af7ad7605ececd66d71b13101",
+      "basePathCount": 3,
+      "adaptedPathCount": 4,
+      "officialSourceMatch": "pass",
+      "xmlAndSafety": "pass",
+      "adaptationReceipt": "pass"
+    },
+    {
+      "entryId": "gaokao-frequency-1823-regardless",
+      "headword": "regardless",
+      "baseEntryId": "wanwei-core-0069-come",
+      "baseSha256": "29b9a88af6ac1975e14d70d1b94675d1e665c77ffb5759065c0059f024079c4e",
+      "adaptedSha256": "aea332350257d830f23726848c4c6d70fd96dbe6ddeb58d0f74829a83c08f79e",
+      "basePathCount": 2,
+      "adaptedPathCount": 3,
+      "officialSourceMatch": "pass",
+      "xmlAndSafety": "pass",
+      "adaptationReceipt": "pass"
+    },
+    {
+      "entryId": "gaokao-frequency-2646-nevertheless",
+      "headword": "nevertheless",
+      "baseEntryId": "wanwei-core-0066-climb",
+      "baseSha256": "bf996cec66cb54c507e8a5249522db5a637a10c0b85e349785e3b56c15af7f5a",
+      "adaptedSha256": "6547b85d43154aab4189b89547945c4fc710ec6a1bc6c53bd9f203b5fae7fd9f",
+      "basePathCount": 3,
+      "adaptedPathCount": 5,
+      "officialSourceMatch": "pass",
+      "xmlAndSafety": "pass",
+      "adaptationReceipt": "pass"
+    }
+  ]
+}

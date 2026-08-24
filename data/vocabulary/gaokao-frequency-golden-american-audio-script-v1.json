@@ -1,0 +1,637 @@
+{
+  "schemaVersion": "gaokao-frequency-audio-script-v1",
+  "programId": "gaokao-curriculum-3000-frequency-v1",
+  "entries": [
+    {
+      "id": "gaokao-frequency-0001-the",
+      "headword": "the",
+      "audio": {
+        "text": "the"
+      }
+    },
+    {
+      "id": "gaokao-frequency-0004-a-an",
+      "headword": "a,an",
+      "audio": {
+        "text": "a"
+      }
+    },
+    {
+      "id": "gaokao-frequency-0026-as",
+      "headword": "as",
+      "audio": {
+        "text": "as"
+      }
+    },
+    {
+      "id": "gaokao-frequency-0031-about",
+      "headword": "about",
+      "audio": {
+        "text": "about"
+      }
+    },
+    {
+      "id": "gaokao-frequency-0074-may",
+      "headword": "may",
+      "audio": {
+        "text": "may"
+      }
+    },
+    {
+      "id": "gaokao-frequency-0111-author",
+      "headword": "author",
+      "audio": {
+        "text": "author"
+      }
+    },
+    {
+      "id": "gaokao-frequency-0123-live",
+      "headword": "live",
+      "audio": {
+        "text": "live"
+      }
+    },
+    {
+      "id": "gaokao-frequency-0133-paragraph",
+      "headword": "paragraph",
+      "audio": {
+        "text": "paragraph"
+      }
+    },
+    {
+      "id": "gaokao-frequency-0265-improve",
+      "headword": "improve",
+      "audio": {
+        "text": "improve"
+      }
+    },
+    {
+      "id": "gaokao-frequency-0317-challenge",
+      "headword": "challenge",
+      "audio": {
+        "text": "challenge"
+      }
+    },
+    {
+      "id": "gaokao-frequency-0360-design",
+      "headword": "design",
+      "audio": {
+        "text": "design"
+      }
+    },
+    {
+      "id": "gaokao-frequency-0392-comprehension",
+      "headword": "comprehension",
+      "audio": {
+        "text": "comprehension"
+      }
+    },
+    {
+      "id": "gaokao-frequency-0393-china",
+      "headword": "China",
+      "audio": {
+        "text": "China"
+      }
+    },
+    {
+      "id": "gaokao-frequency-0451-reward",
+      "headword": "reward",
+      "audio": {
+        "text": "reward"
+      }
+    },
+    {
+      "id": "gaokao-frequency-0468-p-m-pm",
+      "headword": "p.m.,pm",
+      "audio": {
+        "text": "p.m."
+      }
+    },
+    {
+      "id": "gaokao-frequency-0491-data",
+      "headword": "data",
+      "audio": {
+        "text": "data"
+      }
+    },
+    {
+      "id": "gaokao-frequency-0498-miss",
+      "headword": "miss",
+      "audio": {
+        "text": "miss"
+      }
+    },
+    {
+      "id": "gaokao-frequency-0529-plastic",
+      "headword": "plastic",
+      "audio": {
+        "text": "plastic"
+      }
+    },
+    {
+      "id": "gaokao-frequency-0557-performance",
+      "headword": "performance",
+      "audio": {
+        "text": "performance"
+      }
+    },
+    {
+      "id": "gaokao-frequency-0564-species",
+      "headword": "species",
+      "audio": {
+        "text": "species"
+      }
+    },
+    {
+      "id": "gaokao-frequency-0587-colo-u-r",
+      "headword": "colo (u )r",
+      "audio": {
+        "text": "color"
+      }
+    },
+    {
+      "id": "gaokao-frequency-0593-opportunity",
+      "headword": "opportunity",
+      "audio": {
+        "text": "opportunity"
+      }
+    },
+    {
+      "id": "gaokao-frequency-0598-professor",
+      "headword": "professor",
+      "audio": {
+        "text": "professor"
+      }
+    },
+    {
+      "id": "gaokao-frequency-0623-involve",
+      "headword": "involve",
+      "audio": {
+        "text": "involve"
+      }
+    },
+    {
+      "id": "gaokao-frequency-0643-career",
+      "headword": "career",
+      "audio": {
+        "text": "career"
+      }
+    },
+    {
+      "id": "gaokao-frequency-0819-responsibility",
+      "headword": "responsibility",
+      "audio": {
+        "text": "responsibility"
+      }
+    },
+    {
+      "id": "gaokao-frequency-0862-novel",
+      "headword": "novel",
+      "audio": {
+        "text": "novel"
+      }
+    },
+    {
+      "id": "gaokao-frequency-0909-pack",
+      "headword": "pack",
+      "audio": {
+        "text": "pack"
+      }
+    },
+    {
+      "id": "gaokao-frequency-0978-us-u-s",
+      "headword": "US,U.S.",
+      "audio": {
+        "text": "US"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1016-favo-u-rite",
+      "headword": "favo(u)rite",
+      "audio": {
+        "text": "favorite"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1081-concept",
+      "headword": "concept",
+      "audio": {
+        "text": "concept"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1082-black",
+      "headword": "black",
+      "audio": {
+        "text": "black"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1084-contact",
+      "headword": "contact",
+      "audio": {
+        "text": "contact"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1086-cheese",
+      "headword": "cheese",
+      "audio": {
+        "text": "cheese"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1090-account",
+      "headword": "account",
+      "audio": {
+        "text": "account"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1094-complex",
+      "headword": "complex",
+      "audio": {
+        "text": "complex"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1095-afraid",
+      "headword": "afraid",
+      "audio": {
+        "text": "afraid"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1098-personality",
+      "headword": "personality",
+      "audio": {
+        "text": "personality"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1101-firm",
+      "headword": "firm",
+      "audio": {
+        "text": "firm"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1106-britain",
+      "headword": "Britain",
+      "audio": {
+        "text": "Britain"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1107-economic",
+      "headword": "economic",
+      "audio": {
+        "text": "economic"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1110-theory",
+      "headword": "theory",
+      "audio": {
+        "text": "theory"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1112-transport",
+      "headword": "transport",
+      "audio": {
+        "text": "transport"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1113-graduate",
+      "headword": "graduate",
+      "audio": {
+        "text": "graduate"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1116-immediately",
+      "headword": "immediately",
+      "audio": {
+        "text": "immediately"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1118-youth",
+      "headword": "youth",
+      "audio": {
+        "text": "youth"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1130-application",
+      "headword": "application",
+      "audio": {
+        "text": "application"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1189-monday",
+      "headword": "Monday",
+      "audio": {
+        "text": "Monday"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1194-neighbourhood",
+      "headword": "neighbourhood",
+      "audio": {
+        "text": "neighbourhood"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1203-uk-u-k",
+      "headword": "UK, U. K.",
+      "audio": {
+        "text": "UK"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1232-progress",
+      "headword": "progress",
+      "audio": {
+        "text": "progress"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1233-beauty",
+      "headword": "beauty",
+      "audio": {
+        "text": "beauty"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1242-appointment",
+      "headword": "appointment",
+      "audio": {
+        "text": "appointment"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1273-grateful",
+      "headword": "grateful",
+      "audio": {
+        "text": "grateful"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1286-angry",
+      "headword": "angry",
+      "audio": {
+        "text": "angry"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1296-display",
+      "headword": "display",
+      "audio": {
+        "text": "display"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1343-purchase",
+      "headword": "purchase",
+      "audio": {
+        "text": "purchase"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1368-quit",
+      "headword": "quit",
+      "audio": {
+        "text": "quit"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1378-manner",
+      "headword": "manner",
+      "audio": {
+        "text": "manner"
+      }
+    },
+    {
+      "id": "gaokao-frequency-1508-route",
+      "headword": "route",
+      "audio": {
+        "text": "route"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2001-cent",
+      "headword": "cent",
+      "audio": {
+        "text": "cent"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2002-advertisement",
+      "headword": "advertisement",
+      "audio": {
+        "text": "advertisement"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2004-dessert",
+      "headword": "dessert",
+      "audio": {
+        "text": "dessert"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2006-metal",
+      "headword": "metal",
+      "audio": {
+        "text": "metal"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2011-illustrate",
+      "headword": "illustrate",
+      "audio": {
+        "text": "illustrate"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2012-agreement",
+      "headword": "agreement",
+      "audio": {
+        "text": "agreement"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2018-flexible",
+      "headword": "flexible",
+      "audio": {
+        "text": "flexible"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2020-poetry",
+      "headword": "poetry",
+      "audio": {
+        "text": "poetry"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2025-secretary",
+      "headword": "secretary",
+      "audio": {
+        "text": "secretary"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2027-context",
+      "headword": "context",
+      "audio": {
+        "text": "context"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2043-enthusiastic",
+      "headword": "enthusiastic",
+      "audio": {
+        "text": "enthusiastic"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2050-invention",
+      "headword": "invention",
+      "audio": {
+        "text": "invention"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2056-kindergarten",
+      "headword": "kindergarten",
+      "audio": {
+        "text": "kindergarten"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2066-russia",
+      "headword": "Russia",
+      "audio": {
+        "text": "Russia"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2070-concentrate",
+      "headword": "concentrate",
+      "audio": {
+        "text": "concentrate"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2087-conservation",
+      "headword": "conservation",
+      "audio": {
+        "text": "conservation"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2090-broadcast",
+      "headword": "broadcast",
+      "audio": {
+        "text": "broadcast"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2095-pronunciation",
+      "headword": "pronunciation",
+      "audio": {
+        "text": "pronunciation"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2126-dialog-ue",
+      "headword": "dialog ( ue)",
+      "audio": {
+        "text": "dialog"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2147-grey-gray",
+      "headword": "grey , gray",
+      "audio": {
+        "text": "grey"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2156-o-clock",
+      "headword": "o'clock",
+      "audio": {
+        "text": "o'clock"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2168-ought-to",
+      "headword": "ought to",
+      "audio": {
+        "text": "ought to"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2284-arrangement",
+      "headword": "arrangement",
+      "audio": {
+        "text": "arrangement"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2285-defence-defense",
+      "headword": "defence , defense",
+      "audio": {
+        "text": "de-fense"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2296-underground",
+      "headword": "underground",
+      "audio": {
+        "text": "underground"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2342-b-c",
+      "headword": "B.C.",
+      "audio": {
+        "text": "B.C."
+      }
+    },
+    {
+      "id": "gaokao-frequency-2409-guideline",
+      "headword": "guideline",
+      "audio": {
+        "text": "guideline"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2495-afterward-s",
+      "headword": "afterward(s)",
+      "audio": {
+        "text": "afterward"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2739-ad-a-d",
+      "headword": "AD,A.D.",
+      "audio": {
+        "text": "AD"
+      }
+    },
+    {
+      "id": "gaokao-frequency-2916-china",
+      "headword": "china",
+      "audio": {
+        "text": "china"
+      }
+    }
+  ],
+  "voice": "en-US-Neural2-C"
+}

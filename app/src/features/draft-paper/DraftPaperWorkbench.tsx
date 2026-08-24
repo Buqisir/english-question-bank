@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import { Archive, ArrowDown, ArrowLeftRight, ArrowUp, FileDown, FolderPlus, MoreHorizontal, Printer, RotateCcw, SeparatorHorizontal, Trash2 } from 'lucide-react'
+import { Archive, ArrowDown, ArrowLeftRight, ArrowUp, FileDown, FolderPlus, MoreHorizontal, Printer, RotateCcw, Save, SeparatorHorizontal, Trash2 } from 'lucide-react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import type { DraftPaper, DraftPaperItem, DraftPaperSummary, DraftPrintForm, GroupType, MySpaceFolder, QuestionGroupCard } from '../../domain/questionBank'
 import {
@@ -22,6 +22,7 @@ import {
   fetchMySpace,
   saveDraftPaperToMySpace,
 } from '../../services/mySpace'
+import { prepareFileSaveTarget, type FileSaveMode } from '../../services/fileDownload.ts'
 import {
   ASSEMBLY_BASKET_STORAGE_KEY,
   parseAssemblyBasket,
@@ -108,6 +109,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const [saveError, setSaveError] = useState('')
   const [exportStatus, setExportStatus] = useState<'idle' | 'exporting' | 'exported' | 'error'>('idle')
   const [exportError, setExportError] = useState('')
+  const [exportSuccessMessage, setExportSuccessMessage] = useState('')
   const [spaceDialogOpen, setSpaceDialogOpen] = useState(false)
   // motion-press-exit #2: 弹层退出 ~120ms（var(--motion-fast)）播完再卸载。
   const spaceDialogPresence = usePresence(spaceDialogOpen, 120)
@@ -1144,16 +1146,27 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     }
   }
 
-  async function exportPdf() {
+  async function exportPdf(mode: FileSaveMode = 'download') {
     if (!draftPaper || draftPaper.items.length === 0) return
-    setExportStatus('exporting')
+    setExportStatus('idle')
     setExportError('')
+    setExportSuccessMessage('')
     try {
-      await downloadDraftPaperPdf(draftPaper.id, versionType)
+      const target = await prepareFileSaveTarget({
+        mode,
+        suggestedName: `${draftPaper.title || '英语草稿卷'}-${versionType === 'teacher' ? '教师卷' : '学生卷'}.pdf`,
+        mimeType: 'application/pdf',
+      })
+      if (!target) return
+      setExportStatus('exporting')
+      await downloadDraftPaperPdf(draftPaper.id, versionType, target)
       setExportStatus('exported')
+      setExportSuccessMessage(target.kind === 'download'
+        ? target.fallbackFromSaveAs ? '当前浏览器不支持系统另存为，已改为普通下载。' : 'PDF 已开始下载。'
+        : 'PDF 已保存到所选位置。')
     } catch (error) {
       setExportStatus('error')
-      setExportError(describeError('导出 PDF', error))
+      setExportError(describeError(mode === 'save-as' ? '另存为 PDF' : '导出 PDF', error))
     }
   }
 
@@ -1340,6 +1353,17 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           <button
             type="button"
             role="menuitem"
+            disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'}
+            onClick={() => {
+              setExportMenuOpen(false)
+              void exportPdf('save-as')
+            }}
+          >
+            <Save size={15} /> 另存为 PDF…
+          </button>
+          <button
+            type="button"
+            role="menuitem"
             disabled={draftPaper.items.length === 0}
             onClick={() => {
               setExportMenuOpen(false)
@@ -1455,7 +1479,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       )}
       {migrationNotice && <p className="draft-warning" role="status">{migrationNotice}</p>}
       {exportStatus === 'error' && <p className="draft-error">{exportError}</p>}
-      {exportStatus === 'exported' && <p className="draft-success">PDF 已开始下载。</p>}
+      {exportStatus === 'exported' && <p className="draft-success">{exportSuccessMessage}</p>}
 
       {/* reorder-suggest (plan.md 施工契约 3 "卡"): 卷头行之下、纸面之上 —
           same slot as the notices above, ahead of <main>'s preview desk. */}

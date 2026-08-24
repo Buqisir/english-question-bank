@@ -234,7 +234,28 @@ async function installApiFixtures(page, {
   currentActive = false,
   continuityScope = null,
   britishReady = true,
+  stageContract = null,
 } = {}) {
+  const apiProgram = stageContract
+    ? {
+        ...program,
+        structure: {
+          stages: [{
+            key: stageContract.key,
+            label: stageContract.label,
+            entryCount: 10,
+            dayStart: 1,
+            dayEnd: 1,
+          }],
+        },
+        groups: program.groups.map((group, index) => index === 0
+          ? { ...group, stage: stageContract.key }
+          : group),
+        entries: program.entries.map((item, index) => index < 10
+          ? { ...item, source: { ...item.source, stage: stageContract.key } }
+          : item),
+      }
+    : program
   const fixtureStudents = [defaultStudent, alternateStudent]
   let continuityRun = null
   const renamedTitles = new Map()
@@ -275,10 +296,22 @@ async function installApiFixtures(page, {
       await route.fulfill({ status: 201, json: { student } })
     } else if (pathname === '/api/vocabulary/students') {
       await route.fulfill({ json: { students: fixtureStudents } })
+    } else if (pathname === '/api/vocabulary/programs') {
+      await route.fulfill({ json: { programs: [{
+        id: apiProgram.id,
+        version: apiProgram.version,
+        title: apiProgram.title,
+        subtitle: apiProgram.subtitle,
+        sourceTitle: apiProgram.sourceTitle,
+        sourceEdition: apiProgram.sourceEdition,
+        totalPlannedEntries: apiProgram.totalPlannedEntries,
+        structure: apiProgram.structure ?? {},
+        availability: 'available',
+      }] } })
     } else if (pathname === '/api/vocabulary/programs/wanwei-round-one-v1') {
       await route.fulfill(programFails
         ? { status: 503, json: { message: '完整词库暂时不可用。' } }
-        : { json: { program } })
+        : { json: { program: apiProgram } })
     } else if (pathname === '/api/vocabulary/progress/wanwei-round-one-v1' && route.request().method() === 'PATCH') {
       const input = JSON.parse(route.request().postData() || '{}')
       const selectedEntry = programEntries.find((item) => item.id === input.entryId)
@@ -390,20 +423,48 @@ async function installApiFixtures(page, {
       renamedTitles.set(count, input.title)
       const original = fixtureSets.find((item) => item.entryCount === count)
       await route.fulfill({ json: { vocabularySet: { ...original, title: input.title } } })
+    } else if (pathname === '/api/vocabulary/print-assets/hengshui.ttf') {
+      await route.fulfill({
+        status: 200,
+        contentType: 'font/ttf',
+        body: readFileSync(path.join(rootDir, 'server/vocabulary/assets/shuyao-hengshui.ttf')),
+      })
+    } else if (pathname === '/api/vocabulary/print-jobs/handwriting-single-15') {
+      const vocabularySet = fixtureSets.find((item) => item.entryCount === 15)
+      await route.fulfill({ json: { printJob: {
+        vocabularySet,
+        sections: [{ startIndex: 0, title: vocabularySet.title }],
+        shareKind: null,
+        accent: 'american',
+        kind: 'handwriting',
+        handwritingMode: 'single',
+      } } })
+    } else if (/^\/api\/vocabulary\/sets\/set-(1|15|16|60)\/materials\.zip$/.test(pathname)) {
+      const count = Number(pathname.match(/set-(\d+)/)?.[1])
+      const input = JSON.parse(route.request().postData() || '{}')
+      assert.deepEqual(input.kinds, ['cards', 'dictation', 'answer', 'handwriting'])
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/zip',
+        headers: { 'x-file-name': encodeURIComponent(`固定生词组 ${count} 词-全套资料.zip`) },
+        body: Buffer.from('PK\u0005\u0006' + '\u0000'.repeat(18), 'binary'),
+      })
     } else if (/^\/api\/vocabulary\/sets\/set-(1|15|16|60)\/pdf$/.test(pathname)) {
       const count = Number(pathname.match(/set-(\d+)/)?.[1])
       const accent = url.searchParams.get('accent')
       const kind = url.searchParams.get('kind') ?? 'cards'
       assert.ok(['american', 'british'].includes(accent))
-      assert.ok(['cards', 'dictation', 'answer', 'word-search'].includes(kind))
+      assert.ok(['cards', 'dictation', 'answer', 'handwriting'].includes(kind))
+      const input = JSON.parse(route.request().postData() || '{}')
+      const selectedCount = Array.isArray(input.selectedEntryIds) ? input.selectedEntryIds.length : count
       const rawTitle = renamedTitles.get(count) ?? `固定生词组 ${count} 词`
       const exportTitle = rawTitle.replace(new RegExp(`[·\\s-]*${count}\\s*词$`, 'u'), '').trim() || rawTitle
       const fileName = kind === 'dictation'
         ? `${exportTitle}-听写纸-${count}词-${accent === 'american' ? '美式' : '英式'}.pdf`
         : kind === 'answer'
           ? `${exportTitle}-教师答案-${count}词.pdf`
-          : kind === 'word-search'
-            ? `${exportTitle}-圈词与拼写-${count}词.pdf`
+          : kind === 'handwriting'
+            ? `${exportTitle}-衡水体练字纸${input.handwritingMode === 'single' ? '-每词1遍' : ''}-${selectedCount}词.pdf`
           : `${rawTitle}${renamedTitles.has(count) ? `-${count}词` : ''}-${accent === 'american' ? '美式' : '英式'}.pdf`
       await route.fulfill({
         status: 200,
@@ -621,15 +682,15 @@ async function verifyDirectSetCreation(page) {
   await page.getByText('可生成 2 词', { exact: true }).waitFor()
   await page.getByRole('button', { name: '生成固定词组' }).click()
   await page.getByRole('heading', { name: '输入词表 · 2词' }).waitFor()
-  assert.equal(await page.getByRole('button', { name: '生成扫码听写' }).count(), 1)
+  assert.equal(await page.getByRole('button', { name: '生成公开二维码' }).count(), 1)
   assert.equal(await page.getByRole('button', { name: '下载', exact: true }).isEnabled(), true)
   await page.getByRole('button', { name: '下载', exact: true }).click()
-  assert.equal(await page.getByRole('button', { name: /^听写纸/ }).count(), 1)
-  assert.equal(await page.getByRole('button', { name: /^教师答案/ }).count(), 1)
+  assert.equal(await page.getByRole('button', { name: /^听写纸\s/u }).count(), 1)
+  assert.equal(await page.getByRole('button', { name: /^教师答案\s/u }).count(), 1)
   await page.screenshot({ path: path.join(evidenceRoot, 'download-menu-desktop.png'), fullPage: true })
-  await page.getByRole('button', { name: /^听写纸/ }).click()
-  await page.getByText('这份文件需要扫码播放录音', { exact: true }).waitFor()
-  assert.match(await page.locator('.vocabulary-share-download-confirmation').innerText(), /匿名公开听写链接.*随时撤销/s)
+  await page.getByRole('button', { name: /^听写纸\s/u }).click()
+  await page.getByText('这份文件需要公开二维码', { exact: true }).waitFor()
+  assert.match(await page.locator('.vocabulary-share-download-confirmation').innerText(), /单词卡扫码听音频.*听写纸扫码自动听写.*随时撤销/s)
   await page.getByRole('button', { name: '取消', exact: true }).click()
   assert.deepEqual(
     await page.locator('.vocabulary-print-entry .vocabulary-print-word-heading h2').allTextContents(),
@@ -653,6 +714,15 @@ async function verifyDirectSetMobileLayout(page) {
   assert.equal(layout.scrollWidth, layout.viewportWidth)
   await page.screenshot({ path: path.join(evidenceRoot, 'direct-set-mobile.png'), fullPage: true })
   pass('390px 下已有单词输入区自然换行且无横向溢出')
+}
+
+async function verifyProgramSpecificCourseCopy(page) {
+  await page.goto(`${origin}/?view=vocabulary-review`, { waitUntil: 'networkidle' })
+  await page.getByText('只匹配当前课程已入库的 60 词', { exact: true }).waitFor()
+  await page.getByRole('button', { name: '开始过词' }).click()
+  await page.getByRole('heading', { name: 'about', exact: true }).waitFor()
+  assert.equal(await page.getByText('高频词汇', { exact: true }).count(), 1)
+  pass('多课程开始页显示实际入库词数，过词栏使用课程定义的阶段名称')
 }
 
 async function verifyStudentProfiles(page) {
@@ -713,11 +783,6 @@ async function verifyMatchingGame(page) {
   assert.equal(await page.locator('.vocabulary-match-board').evaluate((node) => getComputedStyle(node).gridTemplateColumns.split(' ').length), 5)
   assert.equal(await page.locator('audio').count(), 1)
   assert.equal(await page.getByText('沿用英音', { exact: true }).count(), 1)
-
-  const paperDownloadPromise = page.waitForEvent('download')
-  await page.getByRole('button', { name: /圈词与拼写/ }).click()
-  const paperDownload = await paperDownloadPromise
-  assert.equal(paperDownload.suggestedFilename(), '固定生词组-圈词与拼写-15词.pdf')
 
   await page.goBack({ waitUntil: 'networkidle' })
   await page.getByRole('heading', { name: '固定生词组 15 词' }).waitFor()
@@ -834,7 +899,7 @@ async function verifyPrint(page, count, expectedPages, expectedLastPageCount, ac
   assert.equal(await page.getByRole('button', { name: '下载', exact: true }).isEnabled(), true)
   const downloadPromise = page.waitForEvent('download')
   await page.getByRole('button', { name: '下载', exact: true }).click()
-  await page.getByRole('button', { name: /^单词纸/ }).click()
+  await page.getByRole('button', { name: /^单词纸\s/u }).click()
   const download = await downloadPromise
   assert.equal(download.suggestedFilename(), `${expectedTitle}${count === 1 ? `-${count}词` : ''}-${accent === 'american' ? '美式' : '英式'}.pdf`)
   const downloadedPath = path.join(tempRoot, `downloaded-vocabulary-${count}.pdf`)
@@ -941,7 +1006,7 @@ async function verifyPrint(page, count, expectedPages, expectedLastPageCount, ac
   assert.equal(qr.page, 0)
   assert.ok(qr.widthMm >= 18.5 && qr.widthMm <= 19.5, `QR width was ${qr.widthMm}mm`)
   assert.ok(Math.abs(Number.parseFloat(qr.footerMinHeight) / (96 / 25.4) - 22) < 0.1, `Footer min-height was ${qr.footerMinHeight}`)
-  assert.equal(qr.svgTitle, '扫码听写')
+  assert.equal(qr.svgTitle, '扫码听音频')
 
   const pdfPath = path.join(tempRoot, `vocabulary-${count}.pdf`)
   await page.pdf({ path: pdfPath, preferCSSPageSize: true, printBackground: true })
@@ -1011,22 +1076,141 @@ async function verifyDictationDownloads(page) {
 
   let downloadPromise = page.waitForEvent('download')
   await page.getByRole('button', { name: '下载', exact: true }).click()
-  await page.getByRole('button', { name: /^听写纸/ }).click()
+  await page.getByRole('button', { name: /^听写纸\s/u }).click()
   let download = await downloadPromise
   assert.equal(download.suggestedFilename(), '固定生词组-听写纸-15词-英式.pdf')
 
   downloadPromise = page.waitForEvent('download')
   await page.getByRole('button', { name: '下载', exact: true }).click()
-  await page.getByRole('button', { name: /^教师答案/ }).click()
+  await page.getByRole('button', { name: /^教师答案\s/u }).click()
   download = await downloadPromise
   assert.equal(download.suggestedFilename(), '固定生词组-教师答案-15词.pdf')
 
+  await page.getByRole('button', { name: '下载', exact: true }).click()
+  await page.getByRole('button', { name: /^衡水体练字纸\s/u }).click()
+  await page.getByRole('dialog', { name: '选择练字单词' }).waitFor()
+  assert.equal(await page.getByText('已选 10 / 15 词', { exact: true }).count(), 1)
+  assert.equal(await page.getByRole('checkbox').count(), 15)
+  assert.equal(await page.locator('.vocabulary-handwriting-selector-list input:checked').count(), 10)
+  downloadPromise = page.waitForEvent('download')
+  await page.getByRole('button', { name: '生成 10 词练字纸' }).click()
+  download = await downloadPromise
+  assert.equal(download.suggestedFilename(), '固定生词组-衡水体练字纸-10词.pdf')
+
+  await page.getByRole('button', { name: '下载', exact: true }).click()
+  await page.getByRole('button', { name: /^衡水体练字纸\s/u }).click()
+  await page.getByText('每词写 1 遍', { exact: true }).click()
+  assert.equal(await page.getByRole('radio', { name: /每词写 1 遍/u }).isChecked(), true)
+  assert.equal(await page.getByText('每词保留 1 个书写位，每页约 10 词。', { exact: true }).count(), 1)
+  downloadPromise = page.waitForEvent('download')
+  await page.getByRole('button', { name: '生成 10 词练字纸' }).click()
+  download = await downloadPromise
+  assert.equal(download.suggestedFilename(), '固定生词组-衡水体练字纸-每词1遍-10词.pdf')
+
   downloadPromise = page.waitForEvent('download')
   await page.getByRole('button', { name: '下载', exact: true }).click()
-  await page.getByRole('button', { name: /^圈词与拼写/ }).click()
+  await page.getByRole('button', { name: /^下载全套\s/u }).click()
   download = await downloadPromise
-  assert.equal(download.suggestedFilename(), '固定生词组-圈词与拼写-15词.pdf')
-  pass('下载菜单可分别导出听写纸、教师答案和圈词练习，文件名包含名称、用途与题数')
+  assert.equal(download.suggestedFilename(), '固定生词组 15 词-全套资料.zip')
+  pass('下载菜单可导出四类单份资料与完整 ZIP；练字纸默认按原序选前10词并以实际题数命名')
+}
+
+async function verifyHandwritingPrint(page, count, expectedPages, mode = 'standard') {
+  await page.emulateMedia({ media: 'screen' })
+  const requestQuery = mode === 'single'
+    ? `vocabularyPrintJobId=handwriting-single-${count}`
+    : `vocabularyPrintSetId=set-${count}`
+  await page.goto(`${origin}/?view=vocabulary-review&${requestQuery}&printAccent=american&vocabularyPrintMode=handwriting`, { waitUntil: 'networkidle' })
+  await page.locator('[data-vocabulary-print-state="ready"]').waitFor()
+  await page.emulateMedia({ media: 'print' })
+  await page.evaluate(() => document.fonts.ready)
+
+  const pages = page.locator('.vocabulary-handwriting-print-page')
+  const rows = page.locator('.vocabulary-handwriting-row')
+  assert.equal(await pages.count(), expectedPages)
+  assert.equal(await rows.count(), count)
+  assert.equal(await page.locator('.vocabulary-handwriting-meaning').count(), count)
+  assert.equal(await rows.first().locator('.vocabulary-handwriting-guide').count(), mode === 'single' ? 2 : 4)
+  if (mode === 'standard' && count >= 8) assert.equal(await rows.nth(7).locator('.vocabulary-handwriting-guide').count(), 3)
+  const traceCount = await page.locator('.vocabulary-handwriting-guide.is-trace').count()
+  if (mode === 'single') assert.equal(traceCount, 0)
+  else assert.ok(traceCount >= count)
+  assert.equal(await page.getByText('姓名：', { exact: true }).count(), expectedPages)
+  assert.equal(await page.getByText('日期：', { exact: true }).count(), expectedPages)
+  assert.equal(await page.locator('.vocabulary-handwriting-print-footer').count(), expectedPages)
+  const fontFamilies = await page.locator('.vocabulary-handwriting-guide strong').evaluateAll((nodes) => (
+    nodes.map((node) => getComputedStyle(node).fontFamily)
+  ))
+  assert.equal(fontFamilies.every((family) => family.includes('Shuyao Hengshui')), true)
+  const guideGeometry = await page.locator('.vocabulary-handwriting-guide').evaluateAll((guides) => guides.map((guide) => {
+    const lineRects = [...guide.querySelectorAll('i')].map((line) => line.getBoundingClientRect())
+    const strong = guide.querySelector('strong')
+    let letterAlignment = null
+    if (strong) {
+      const marker = document.createElement('span')
+      marker.style.cssText = 'display:inline-block;width:0;height:0;padding:0;margin:0;border:0;vertical-align:baseline'
+      strong.append(marker)
+      const baseline = marker.getBoundingClientRect().top
+      marker.remove()
+      const style = getComputedStyle(strong)
+      const context = document.createElement('canvas').getContext('2d')
+      context.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`
+      const xMetrics = context.measureText('x')
+      const capMetrics = context.measureText('H')
+      const descenderMetrics = context.measureText('p')
+      letterAlignment = {
+        baseline,
+        capTop: baseline - capMetrics.actualBoundingBoxAscent,
+        descenderBottom: baseline + descenderMetrics.actualBoundingBoxDescent,
+        fontSize: Number.parseFloat(style.fontSize),
+        xTop: baseline - xMetrics.actualBoundingBoxAscent,
+      }
+    }
+    return {
+      letterAlignment,
+      lineCount: lineRects.length,
+      lineGaps: lineRects.slice(1).map((line, index) => line.top - lineRects[index].top),
+      lineTops: lineRects.map((line) => line.top),
+      lineStyles: [...guide.querySelectorAll('i')].map((line) => getComputedStyle(line).borderTopStyle),
+    }
+  }))
+  const mm = 96 / 25.4
+  assert.equal(guideGeometry.every((guide) => (
+    guide.lineCount === 4
+    && guide.lineGaps.every((gap) => gap >= 2.8 * mm && gap <= 3.2 * mm)
+    && guide.lineStyles.join('/') === 'dashed/dashed/solid/dashed'
+  )), true)
+  const alignedLetters = guideGeometry.filter((guide) => guide.letterAlignment)
+  assert.ok(alignedLetters.length > 0)
+  assert.equal(alignedLetters.every(({ letterAlignment, lineTops }) => (
+    Math.abs(letterAlignment.fontSize - 24) <= 0.2
+    && Math.abs(letterAlignment.xTop - lineTops[1]) <= 1
+    && Math.abs(letterAlignment.baseline - lineTops[2]) <= 1
+    && letterAlignment.capTop >= lineTops[0] - 1
+    && letterAlignment.capTop < lineTops[1]
+    && letterAlignment.descenderBottom > lineTops[2]
+    && letterAlignment.descenderBottom <= lineTops[3] + 1
+  )), true)
+  const overflow = await pages.evaluateAll((nodes) => nodes.map((node) => (
+    node.scrollWidth > node.clientWidth + 1 || node.scrollHeight > node.clientHeight + 1
+  )))
+  assert.equal(overflow.some(Boolean), false)
+
+  const pdfPath = path.join(tempRoot, `handwriting-${mode}-${count}.pdf`)
+  await page.pdf({ path: pdfPath, preferCSSPageSize: true, printBackground: true })
+  const info = spawnSync('pdfinfo', [pdfPath], { encoding: 'utf8' })
+  assert.equal(info.status, 0, info.stderr)
+  assert.match(info.stdout, new RegExp(`Pages:\\s+${expectedPages}\\b`))
+  assert.match(info.stdout, /Page size:\s+59[45]\.\d+ x 841\.\d+ pts \(A4\)/)
+  const rasterPrefix = path.join(tempRoot, `handwriting-${mode}-${count}`)
+  const raster = spawnSync('pdftoppm', ['-png', '-r', '120', pdfPath, rasterPrefix], { encoding: 'utf8' })
+  assert.equal(raster.status, 0, raster.stderr)
+  for (let pageIndex = 1; pageIndex <= expectedPages; pageIndex += 1) {
+    assert.ok(readFileSync(`${rasterPrefix}-${pageIndex}.png`).length > 10_000)
+  }
+  pass(mode === 'single'
+    ? `${count} 词轻量练字纸按每页10词生成 A4，每词仅保留范字与一个独立书写位，并复用听写纸四线三格`
+    : `${count} 词衡水体练字纸按每页7词生成 A4，短词四格、长词三格、复用听写纸四线三格且首格中文与姓名日期均无溢出`)
 }
 
 async function verifyDictationPrint(page, count, expectedPages, accent = 'american') {
@@ -1058,7 +1242,8 @@ async function verifyDictationPrint(page, count, expectedPages, accent = 'americ
       ))
     )))
     assert.equal(columnCounts.every((counts) => counts.length === 2 && Math.abs(counts[0] - counts[1]) <= 1), true)
-    if (count === 16) assert.deepEqual(columnCounts, [[8, 8]])
+    if (count === 15) assert.deepEqual(columnCounts, [[8, 7]])
+    if (count === 16) assert.deepEqual(columnCounts, [[8, 7], [1, 0]])
     const metaLineWidths = await page.locator('.vocabulary-dictation-print-meta').evaluateAll((metas) => metas.map((meta) => (
       [...meta.querySelectorAll('i')].map((line) => line.getBoundingClientRect().width)
     )))
@@ -1114,107 +1299,7 @@ async function verifyDictationPrint(page, count, expectedPages, accent = 'americ
       copyFileSync(pdfPath, path.join(evidenceRoot, `${kind}-paper-current-${count}-${accent}.pdf`))
     }
   }
-  pass(`${count} 词听写纸与教师答案均为 A4 双栏、每页最多 16 题；学生四线三格为固定毫米尺寸、教师全义、二维码仅在听写纸首页`)
-}
-
-async function verifyWordSearchPrint(page, count, expectedPuzzlePages) {
-  await page.emulateMedia({ media: 'screen' })
-  await page.goto(`${origin}/?view=vocabulary-review&vocabularyPrintSetId=set-${count}&printAccent=american&vocabularyPrintMode=word-search`, { waitUntil: 'networkidle' })
-  await page.locator('[data-vocabulary-print-state="ready"]').waitFor()
-  await page.emulateMedia({ media: 'print' })
-
-  const allPages = page.locator('.vocabulary-word-search-print-page')
-  const studentPages = page.locator('.vocabulary-word-search-print-page:not(.is-answer)')
-  const answerPages = page.locator('.vocabulary-word-search-print-page.is-answer')
-  assert.equal(await allPages.count(), expectedPuzzlePages * 2)
-  assert.equal(await studentPages.count(), expectedPuzzlePages)
-  assert.equal(await answerPages.count(), expectedPuzzlePages)
-  assert.equal(await page.locator('.vocabulary-word-search-clues li').count(), count * 2)
-  const gridCount = await page.locator('.vocabulary-word-search-grid').count()
-  const directOnlyCount = await page.locator('.vocabulary-word-search-direct-only').count()
-  assert.equal(gridCount + directOnlyCount, expectedPuzzlePages * 2)
-  assert.equal(directOnlyCount % 2, 0)
-  assert.equal(await page.locator('.vocabulary-word-search-grid > span').count(), gridCount * 144)
-  assert.equal(await studentPages.locator('.vocabulary-word-search-grid svg').count(), 0)
-  const directWriteCount = await answerPages.locator('.vocabulary-word-search-clues small').filter({ hasText: '直接写' }).count()
-  assert.equal(await studentPages.locator('.vocabulary-word-search-clues small').filter({ hasText: '直接写' }).count(), directWriteCount)
-  assert.equal(await answerPages.locator('.vocabulary-word-search-grid svg line').count(), count - directWriteCount)
-  assert.equal(await page.locator('.vocabulary-print-qr').count(), 0)
-
-  const expectedAnswers = programEntries.slice(0, count).map((item) => item.headword.split(/\s+\/\s+/u)[0])
-  assert.deepEqual(
-    await answerPages.locator('.vocabulary-word-search-clues li b').allTextContents(),
-    expectedAnswers,
-  )
-  assert.deepEqual(
-    await studentPages.locator('.vocabulary-word-search-clues li > span').allTextContents(),
-    Array.from({ length: count }, (_, index) => String(index + 1)),
-  )
-
-  const layout = await allPages.evaluateAll((nodes) => nodes.map((node) => {
-    const grid = node.querySelector('.vocabulary-word-search-grid')
-    const clues = node.querySelector('.vocabulary-word-search-clues')
-    const gridRect = grid?.getBoundingClientRect()
-    const clueStyle = getComputedStyle(clues)
-    return {
-      hasGrid: Boolean(grid),
-      gridWidthMm: gridRect ? gridRect.width / (96 / 25.4) : null,
-      gridHeightMm: gridRect ? gridRect.height / (96 / 25.4) : null,
-      clueColumns: clueStyle.gridTemplateColumns.split(' ').length,
-      overflow: node.scrollWidth > node.clientWidth + 1 || node.scrollHeight > node.clientHeight + 1,
-      gridOverflow: grid ? grid.scrollWidth > grid.clientWidth + 1 || grid.scrollHeight > grid.clientHeight + 1 : false,
-      clueOverflow: clues.scrollWidth > clues.clientWidth + 1 || clues.scrollHeight > clues.clientHeight + 1,
-    }
-  }))
-  assert.equal(layout.every((item) => !item.hasGrid || (Math.abs(item.gridWidthMm - 132) < 0.3 && Math.abs(item.gridHeightMm - 132) < 0.3)), true)
-  assert.equal(layout.every((item) => item.clueColumns === 2 && !item.overflow && !item.gridOverflow && !item.clueOverflow), true)
-
-  const pageColumns = await allPages.evaluateAll((nodes) => nodes.map((node) => (
-    [...node.querySelectorAll('.vocabulary-word-search-clues ol')].map((column) => column.querySelectorAll('li').length)
-  )))
-  assert.equal(pageColumns.every((columns) => columns.length === 2 && Math.abs(columns[0] - columns[1]) <= 1), true)
-
-  const pdfPath = path.join(tempRoot, `word-search-${count}.pdf`)
-  await page.pdf({ path: pdfPath, preferCSSPageSize: true, printBackground: true })
-  const info = spawnSync('pdfinfo', [pdfPath], { encoding: 'utf8' })
-  assert.equal(info.status, 0, info.stderr)
-  assert.match(info.stdout, new RegExp(`Pages:\\s+${expectedPuzzlePages * 2}\\b`))
-  assert.match(info.stdout, /Page size:\s+59[45]\.\d+ x 841\.\d+ pts \(A4\)/)
-  const rasterPrefix = path.join(tempRoot, `word-search-${count}`)
-  const raster = spawnSync('pdftoppm', ['-png', '-r', '120', pdfPath, rasterPrefix], { encoding: 'utf8' })
-  assert.equal(raster.status, 0, raster.stderr)
-  const rasterPages = readdirSync(tempRoot)
-    .filter((name) => name.startsWith(`word-search-${count}-`) && name.endsWith('.png'))
-    .map((name) => path.join(tempRoot, name))
-  assert.equal(rasterPages.length, expectedPuzzlePages * 2)
-  assert.equal(rasterPages.every((pagePath) => readFileSync(pagePath).length > 10_000), true)
-  if (count === 16) {
-    copyFileSync(pdfPath, path.join(evidenceRoot, 'word-search-paper-current-16.pdf'))
-    rasterPages.forEach((pagePath, index) => {
-      copyFileSync(pagePath, path.join(evidenceRoot, `word-search-paper-current-16-page-${index + 1}.png`))
-    })
-  }
-  pass(`${count} 词圈词与拼写纸按10词分页，学生页与教师答案均为A4，双栏提示、12×12词阵、答案标记和干扰词说明无溢出`)
-}
-
-async function verifyDirectOnlyWordSearchPrint(page) {
-  await page.emulateMedia({ media: 'screen' })
-  await page.goto(`${origin}/?view=vocabulary-review&vocabularyPrintSetId=set-direct-only&printAccent=american&vocabularyPrintMode=word-search`, { waitUntil: 'networkidle' })
-  await page.locator('[data-vocabulary-print-state="ready"]').waitFor()
-  await page.emulateMedia({ media: 'print' })
-  const pages = page.locator('.vocabulary-word-search-print-page')
-  assert.equal(await pages.count(), 2)
-  assert.equal(await page.locator('.vocabulary-word-search-grid').count(), 0)
-  assert.equal(await page.locator('.vocabulary-word-search-direct-only').count(), 2)
-  assert.equal(await page.locator('.vocabulary-word-search-answer-notes').count(), 0)
-  assert.equal(await pages.first().getByText('本页词语均标为“直接写”，不设词阵。').count(), 1)
-  const footerGaps = await pages.evaluateAll((nodes) => nodes.map((node) => {
-    const pageRect = node.getBoundingClientRect()
-    const footerRect = node.querySelector('.vocabulary-word-search-footer').getBoundingClientRect()
-    return (pageRect.bottom - footerRect.bottom) / (96 / 25.4)
-  }))
-  assert.equal(footerGaps.every((gap) => gap >= 8.8 && gap <= 9.2), true)
-  pass('全页仅有直接写词时不生成干扰词阵，学生与教师页脚都稳定贴底')
+  pass(`${count} 词听写纸与教师答案均为 A4 双栏、每页最多 15 题；学生四线三格为固定毫米尺寸、教师全义、二维码仅在听写纸首页`)
 }
 
 async function verifyDictationPlayer(page) {
@@ -1480,18 +1565,16 @@ async function main() {
 
     const dictationPrintPage = await browser.newPage({ viewport: { width: 1440, height: 1000 } })
     await installApiFixtures(dictationPrintPage)
-    for (const [count, pages, accent] of [[1, 1, 'british'], [15, 1, 'american'], [16, 1, 'american'], [60, 4, 'british']]) {
+    for (const [count, pages, accent] of [[1, 1, 'british'], [15, 1, 'american'], [16, 2, 'american'], [60, 4, 'british']]) {
       await verifyDictationPrint(dictationPrintPage, count, pages, accent)
     }
     await dictationPrintPage.close()
 
-    const wordSearchPrintPage = await browser.newPage({ viewport: { width: 1440, height: 1000 } })
-    await installApiFixtures(wordSearchPrintPage)
-    for (const [count, pages] of [[1, 1], [15, 2], [16, 2], [60, 6]]) {
-      await verifyWordSearchPrint(wordSearchPrintPage, count, pages)
-    }
-    await verifyDirectOnlyWordSearchPrint(wordSearchPrintPage)
-    await wordSearchPrintPage.close()
+    const handwritingPrintPage = await browser.newPage({ viewport: { width: 1440, height: 1000 } })
+    await installApiFixtures(handwritingPrintPage)
+    await verifyHandwritingPrint(handwritingPrintPage, 15, 3)
+    await verifyHandwritingPrint(handwritingPrintPage, 15, 2, 'single')
+    await handwritingPrintPage.close()
 
     const directSetPage = await browser.newPage({ viewport: { width: 1440, height: 1000 } })
     await installApiFixtures(directSetPage)
@@ -1502,6 +1585,14 @@ async function main() {
     await installApiFixtures(directSetMobilePage)
     await verifyDirectSetMobileLayout(directSetMobilePage)
     await directSetMobilePage.close()
+
+    const programSpecificCopyPage = await browser.newPage({ viewport: { width: 1440, height: 1000 } })
+    await installApiFixtures(programSpecificCopyPage, {
+      continuityScope: 'main',
+      stageContract: { key: 'high_frequency', label: '高频词汇' },
+    })
+    await verifyProgramSpecificCourseCopy(programSpecificCopyPage)
+    await programSpecificCopyPage.close()
 
     const studentProfilesPage = await browser.newPage({ viewport: { width: 1440, height: 1000 } })
     await installApiFixtures(studentProfilesPage)
@@ -1546,9 +1637,9 @@ async function main() {
     const revokedPage = await browser.newPage()
     await installApiFixtures(revokedPage)
     await revokedPage.goto(`${origin}/vocabulary/listen/revoked`, { waitUntil: 'networkidle' })
-    await revokedPage.getByRole('heading', { name: '这份听写单已停止分享' }).waitFor()
+    await revokedPage.getByRole('heading', { name: '这份听音词卡已停止分享' }).waitFor()
     await revokedPage.goto(`${origin}/vocabulary/listen/missing`, { waitUntil: 'networkidle' })
-    await revokedPage.getByRole('heading', { name: '没有找到这份听写单' }).waitFor()
+    await revokedPage.getByRole('heading', { name: '没有找到这份听音词卡' }).waitFor()
     await revokedPage.goto(`${origin}/vocabulary/dictation/revoked?accent=american`, { waitUntil: 'networkidle' })
     await revokedPage.getByRole('heading', { name: '这份听写练习已停止分享' }).waitFor()
     await revokedPage.goto(`${origin}/vocabulary/dictation/missing?accent=american`, { waitUntil: 'networkidle' })
@@ -1577,7 +1668,7 @@ async function main() {
     await frozenResumePage.goto(`${origin}/?view=vocabulary-review`, { waitUntil: 'networkidle' })
     await frozenResumePage.getByRole('heading', { name: '固定生词组 15 词' }).waitFor()
     assert.equal(await frozenResumePage.getByRole('button', { name: '下载', exact: true }).isEnabled(), true)
-    assert.equal(await frozenResumePage.getByRole('button', { name: '复制听写链接' }).count(), 1)
+    assert.equal(await frozenResumePage.getByRole('button', { name: '复制公开链接' }).count(), 1)
     assert.equal(await frozenResumePage.getByRole('button', { name: '生成固定生词组' }).count(), 0)
     assert.equal(await frozenResumePage.evaluate(() => window.localStorage.getItem('eqb-vocabulary-review-run-wanwei-round-one-v1')), null)
     assert.equal(await frozenResumePage.evaluate(() => window.localStorage.getItem('eqb-vocabulary-review-run-wanwei-round-one-v1:student-default')), 'run-15')

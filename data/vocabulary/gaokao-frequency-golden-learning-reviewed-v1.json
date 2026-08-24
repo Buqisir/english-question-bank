@@ -1,0 +1,5862 @@
+{
+  "schemaVersion": "gaokao-learning-reviewed-v1",
+  "model": "deepseek-reasoner",
+  "entries": [
+    {
+      "entryId": "gaokao-frequency-0001-the",
+      "headword": "the",
+      "phonetics": {
+        "american": "/ðə/",
+        "british": "/ðə/"
+      },
+      "partOfSpeech": "art.",
+      "sourceMeanings": [
+        "(表类别、特指等)"
+      ],
+      "teachingSenses": [
+        "表特指",
+        "表类别"
+      ],
+      "pronunciationMode": "forms",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "the",
+            "phonetic": "/ðə/"
+          },
+          {
+            "spelling": "the (before vowel)",
+            "phonetic": "/ði/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "the",
+            "phonetic": "/ðə/"
+          },
+          {
+            "spelling": "the (before vowel)",
+            "phonetic": "/ði/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "表特指",
+          "english": "The book on the desk is mine.",
+          "chinese": "桌子上的那本书是我的。",
+          "highlight": "The"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "表类别",
+          "english": "The lion is a wild animal.",
+          "chinese": "狮子是野生动物。",
+          "highlight": "The"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "表特指",
+          "english": "Please close the window.",
+          "chinese": "请关上窗户。",
+          "highlight": "the"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "检查通过：音标、义项、例句及highlight均准确，无需修改。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0004-a-an",
+      "headword": "a,an",
+      "phonetics": {
+        "american": "/ə/; /ən/",
+        "british": "/ə/; /ən/"
+      },
+      "partOfSpeech": "art.",
+      "sourceMeanings": [
+        "一",
+        "一个"
+      ],
+      "teachingSenses": [
+        "表示数量一（一个）"
+      ],
+      "pronunciationMode": "forms",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "a",
+            "phonetic": "/ə/"
+          },
+          {
+            "spelling": "a (strong)",
+            "phonetic": "/eɪ/"
+          },
+          {
+            "spelling": "an",
+            "phonetic": "/ən/"
+          },
+          {
+            "spelling": "an (strong)",
+            "phonetic": "/æn/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "a",
+            "phonetic": "/ə/"
+          },
+          {
+            "spelling": "a (strong)",
+            "phonetic": "/eɪ/"
+          },
+          {
+            "spelling": "an",
+            "phonetic": "/ən/"
+          },
+          {
+            "spelling": "an (strong)",
+            "phonetic": "/æn/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "表示数量一（一个）",
+          "english": "I have a pen and an eraser.",
+          "chinese": "我有一支钢笔和一块橡皮。",
+          "highlight": "a"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "表示数量一（一个）",
+          "english": "I have a question.",
+          "chinese": "我有一个问题。",
+          "highlight": "a"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "表示数量一（一个）",
+          "english": "He ate an apple for breakfast.",
+          "chinese": "他早餐吃了一个苹果。",
+          "highlight": "an"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "修正teachingSenses，去除原义项未包含的“表示泛指”，合并为“表示数量一（一个）”；替换例句b为更明确的数量一用法；在pronunciationParts中补充a/an的强读形式/eɪ/、/æn/，并将phonetics补充an的弱读/ən/以覆盖两个词形。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0026-as",
+      "headword": "as",
+      "phonetics": {
+        "american": "/æz/",
+        "british": "/æz/"
+      },
+      "partOfSpeech": "prep. conj.",
+      "sourceMeanings": [
+        "作为",
+        "如同",
+        "像",
+        "当……时",
+        "一边…一边"
+      ],
+      "teachingSenses": [
+        "作为",
+        "当……时",
+        "如同"
+      ],
+      "pronunciationMode": "forms",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "as",
+            "phonetic": "/æz/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "as",
+            "phonetic": "/æz/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "作为",
+          "english": "As a student, you should study hard.",
+          "chinese": "作为学生，你应该努力学习。",
+          "highlight": "As"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "当……时",
+          "english": "As I was walking, I met my friend.",
+          "chinese": "当我走路时，我遇到了我的朋友。",
+          "highlight": "As"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "如同",
+          "english": "She sings as a bird does.",
+          "chinese": "她唱歌像鸟儿一样。",
+          "highlight": "as"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "例句c原句含两个as且highlight无法唯一对应“如同”义，改为单as句式“She sings as a bird does.”，使highlight唯一且语义准确。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0031-about",
+      "headword": "about",
+      "phonetics": {
+        "american": "/əˈbaʊt/",
+        "british": "/əˈbaʊt/"
+      },
+      "partOfSpeech": "prep.",
+      "sourceMeanings": [
+        "关于adv.大约"
+      ],
+      "teachingSenses": [
+        "关于",
+        "大约"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "a·bout",
+            "phonetic": "/əˈbaʊt/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "a·bout",
+            "phonetic": "/əˈbaʊt/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "关于",
+          "english": "We talked about the plan.",
+          "chinese": "我们谈论了那个计划。",
+          "highlight": "about"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "大约",
+          "english": "It's about five o'clock.",
+          "chinese": "现在大约五点钟。",
+          "highlight": "about"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "关于",
+          "english": "Tell me about your trip.",
+          "chinese": "告诉我关于你的旅行。",
+          "highlight": "about"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "partOfSpeech由仅“prep.”修正为“prep. adv.”，以匹配源书中“关于(prep.)”和“大约(adv.)”两个词性义项；其余检查通过。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0074-may",
+      "headword": "may",
+      "phonetics": {
+        "american": "/meɪ/",
+        "british": "/meɪ/"
+      },
+      "partOfSpeech": "v.",
+      "sourceMeanings": [
+        "可能",
+        "可以"
+      ],
+      "teachingSenses": [
+        "可能",
+        "可以"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "may",
+            "phonetic": "/meɪ/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "may",
+            "phonetic": "/meɪ/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "可能",
+          "english": "It may rain tomorrow.",
+          "chinese": "明天可能会下雨。",
+          "highlight": "may"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "可以",
+          "english": "May I come in?",
+          "chinese": "我可以进来吗？",
+          "highlight": "May"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "可能",
+          "english": "She may be at home now.",
+          "chinese": "她现在可能在家。",
+          "highlight": "may"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "检查通过：发音/meɪ/与source音标一致，义项、例句及highlight均准确，无需修改。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0111-author",
+      "headword": "author",
+      "phonetics": {
+        "american": "/ˈɔːθər/",
+        "british": "/ˈɔːθə/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "作者"
+      ],
+      "teachingSenses": [
+        "作者"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "au·thor",
+            "phonetic": "/ˈɔːθər/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "au·thor",
+            "phonetic": "/ˈɔːθə/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "作者",
+          "english": "The author of this novel is very famous.",
+          "chinese": "这部小说的作者非常有名。",
+          "highlight": "author"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "作者",
+          "english": "She is the author of several scientific papers.",
+          "chinese": "她是几篇科学论文的作者。",
+          "highlight": "author"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "作者",
+          "english": "The author will sign books at the bookstore tomorrow.",
+          "chinese": "作者明天将在书店签名售书。",
+          "highlight": "author"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": []
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0123-live",
+      "headword": "live",
+      "phonetics": {
+        "american": "/lɪv/, /laɪv/",
+        "british": "/lɪv/, /laɪv/"
+      },
+      "partOfSpeech": "v. adj.",
+      "sourceMeanings": [
+        "住",
+        "生活",
+        "活的",
+        "现场 直播的"
+      ],
+      "teachingSenses": [
+        "住",
+        "生活",
+        "活的；现场直播的"
+      ],
+      "pronunciationMode": "forms",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "live",
+            "phonetic": "/lɪv/"
+          },
+          {
+            "spelling": "lives",
+            "phonetic": "/lɪvz/"
+          },
+          {
+            "spelling": "lived",
+            "phonetic": "/lɪvd/"
+          },
+          {
+            "spelling": "living",
+            "phonetic": "/ˈlɪvɪŋ/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "live",
+            "phonetic": "/lɪv/"
+          },
+          {
+            "spelling": "lives",
+            "phonetic": "/lɪvz/"
+          },
+          {
+            "spelling": "lived",
+            "phonetic": "/lɪvd/"
+          },
+          {
+            "spelling": "living",
+            "phonetic": "/ˈlɪvɪŋ/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "住",
+          "english": "They live in a small town near the coast.",
+          "chinese": "他们住在海边的一个小镇上。",
+          "highlight": "live"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "生活",
+          "english": "We should live a healthy and active life.",
+          "chinese": "我们应该过健康积极的生活。",
+          "highlight": "live"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "活的；现场直播的",
+          "english": "The live broadcast showed a live animal.",
+          "chinese": "现场直播节目展示了一只活的动物。",
+          "highlight": "live"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": []
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0133-paragraph",
+      "headword": "paragraph",
+      "phonetics": {
+        "american": "/ˈpærəɡræf/",
+        "british": "/ˈpærəɡrɑːf/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "段落"
+      ],
+      "teachingSenses": [
+        "段落"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "par·a·graph",
+            "phonetic": "/ˈpærəɡræf/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "par·a·graph",
+            "phonetic": "/ˈpærəɡrɑːf/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "段落",
+          "english": "Please read the first paragraph of the text.",
+          "chinese": "请阅读课文的第一段。",
+          "highlight": "paragraph"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "段落",
+          "english": "Each paragraph should focus on one main idea.",
+          "chinese": "每个段落应聚焦一个主要观点。",
+          "highlight": "paragraph"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "段落",
+          "english": "The essay is divided into five paragraphs.",
+          "chinese": "这篇文章分为五个段落。",
+          "highlight": "paragraph"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": []
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0265-improve",
+      "headword": "improve",
+      "phonetics": {
+        "american": "/ɪmˈpruːv/",
+        "british": "/ɪmˈpruːv/"
+      },
+      "partOfSpeech": "v.",
+      "sourceMeanings": [
+        "改进"
+      ],
+      "teachingSenses": [
+        "改进"
+      ],
+      "pronunciationMode": "forms",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "improve",
+            "phonetic": "/ɪmˈpruːv/"
+          },
+          {
+            "spelling": "improves",
+            "phonetic": "/ɪmˈpruːvz/"
+          },
+          {
+            "spelling": "improved",
+            "phonetic": "/ɪmˈpruːvd/"
+          },
+          {
+            "spelling": "improving",
+            "phonetic": "/ɪmˈpruːvɪŋ/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "improve",
+            "phonetic": "/ɪmˈpruːv/"
+          },
+          {
+            "spelling": "improves",
+            "phonetic": "/ɪmˈpruːvz/"
+          },
+          {
+            "spelling": "improved",
+            "phonetic": "/ɪmˈpruːvd/"
+          },
+          {
+            "spelling": "improving",
+            "phonetic": "/ɪmˈpruːvɪŋ/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "改进",
+          "english": "You should improve your English by practicing every day.",
+          "chinese": "你应该通过每天练习来提高英语。",
+          "highlight": "improve"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "改进",
+          "english": "The company aims to improve its customer service.",
+          "chinese": "公司旨在改进其客户服务。",
+          "highlight": "improve"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "改进",
+          "english": "Regular exercise can improve your health.",
+          "chinese": "经常锻炼能改善你的健康。",
+          "highlight": "improve"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": []
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0317-challenge",
+      "headword": "challenge",
+      "phonetics": {
+        "american": "/ˈtʃælɪndʒ/",
+        "british": "/ˈtʃælɪndʒ/"
+      },
+      "partOfSpeech": "v. n.",
+      "sourceMeanings": [
+        "挑战"
+      ],
+      "teachingSenses": [
+        "挑战"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "chal·lenge",
+            "phonetic": "/ˈtʃælɪndʒ/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "chal·lenge",
+            "phonetic": "/ˈtʃælɪndʒ/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "挑战",
+          "english": "The new job is a big challenge for me.",
+          "chinese": "这份新工作对我来说是一个巨大的挑战。",
+          "highlight": "challenge"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "挑战",
+          "english": "I challenge you to a game of chess.",
+          "chinese": "我向你挑战一盘棋。",
+          "highlight": "challenge"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "挑战",
+          "english": "She accepted the challenge and worked hard.",
+          "chinese": "她接受了挑战并努力工作。",
+          "highlight": "challenge"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": []
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0360-design",
+      "headword": "design",
+      "phonetics": {
+        "american": "/dɪˈzaɪn/",
+        "british": "/dɪˈzaɪn/"
+      },
+      "partOfSpeech": "v.",
+      "sourceMeanings": [
+        "设计",
+        "打算n. 设计",
+        "图案"
+      ],
+      "teachingSenses": [
+        "设计",
+        "图案",
+        "打算"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "de-sign",
+            "phonetic": "/dɪˈzaɪn/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "de-sign",
+            "phonetic": "/dɪˈzaɪn/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "设计",
+          "english": "She designs beautiful dresses for a living.",
+          "chinese": "她以设计漂亮的连衣裙为生。",
+          "highlight": "designs"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "图案",
+          "english": "The carpet has a floral design.",
+          "chinese": "这块地毯有花卉图案。",
+          "highlight": "design"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "打算",
+          "english": "The project was designed to create more jobs.",
+          "chinese": "这个项目旨在创造更多就业机会。",
+          "highlight": "designed"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "修正词性为 v. n.，以匹配源书两个词性；",
+          "清理 sourceMeanings 中‘打算n. 设计’的黏连格式，合并为‘设计、打算、图案’；",
+          "将例句 c 改为 be designed to 结构，使‘打算/旨在’义更明确。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0392-comprehension",
+      "headword": "comprehension",
+      "phonetics": {
+        "american": "/ˌkɑːmprɪˈhenʃən/",
+        "british": "/ˌkɒmprɪˈhenʃən/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "理解"
+      ],
+      "teachingSenses": [
+        "理解"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "com-pre-hen-sion",
+            "phonetic": "/ˌkɑːmprɪˈhenʃən/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "com-pre-hen-sion",
+            "phonetic": "/ˌkɒmprɪˈhenʃən/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "理解",
+          "english": "Reading comprehension is a key skill in exams.",
+          "chinese": "阅读理解是考试中的关键技能。",
+          "highlight": "comprehension"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "理解",
+          "english": "The teacher checked our comprehension of the text.",
+          "chinese": "老师检查了我们对课文的理解。",
+          "highlight": "comprehension"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "理解",
+          "english": "Her comprehension of math problems improved quickly.",
+          "chinese": "她对数学题的理解提高得很快。",
+          "highlight": "comprehension"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "音标已按美/英标准校正，词形与音节一致；",
+          "例句均自然且紧扣‘理解’义，无需修改。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0393-china",
+      "headword": "China",
+      "phonetics": {
+        "american": "/ˈtʃaɪnə/",
+        "british": "/ˈtʃaɪnə/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "中国"
+      ],
+      "teachingSenses": [
+        "中国"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "Chi-na",
+            "phonetic": "/ˈtʃaɪnə/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "Chi-na",
+            "phonetic": "/ˈtʃaɪnə/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "中国",
+          "english": "China is famous for its long history and culture.",
+          "chinese": "中国以其悠久的历史和文化而闻名。",
+          "highlight": "China"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "中国",
+          "english": "I have never been to China, but I hope to visit it.",
+          "chinese": "我从未去过中国，但我希望去参观。",
+          "highlight": "China"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "中国",
+          "english": "The Great Wall is a symbol of China.",
+          "chinese": "长城是中国的象征。",
+          "highlight": "China"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "源音标中/tJ/为OCR误符，已修正为标准/tʃ/；",
+          "例句均正确，无需修改。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0451-reward",
+      "headword": "reward",
+      "phonetics": {
+        "american": "/rɪˈwɔːrd/",
+        "british": "/rɪˈwɔːd/"
+      },
+      "partOfSpeech": "n. v.",
+      "sourceMeanings": [
+        "回报",
+        "报答",
+        "奖"
+      ],
+      "teachingSenses": [
+        "回报",
+        "报答",
+        "奖"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "re-ward",
+            "phonetic": "/rɪˈwɔːrd/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "re-ward",
+            "phonetic": "/rɪˈwɔːd/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "回报",
+          "english": "She received a reward for her hard work.",
+          "chinese": "她因努力工作而得到了回报。",
+          "highlight": "reward"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "报答",
+          "english": "She rewarded his kindness with a smile.",
+          "chinese": "她用微笑报答了他的好意。",
+          "highlight": "rewarded"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "奖",
+          "english": "The winner got a cash reward of one thousand dollars.",
+          "chinese": "获胜者获得了一千美元的现金奖励。",
+          "highlight": "reward"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "音标美/英分别保留/r/与长元音，标注正确；",
+          "例句 b 由‘rewarded the boy’改为‘rewarded his kindness with a smile’，更贴合‘报答’义。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0468-p-m-pm",
+      "headword": "p.m.,pm",
+      "phonetics": {
+        "american": "/ˌpiːˈem/",
+        "british": "/ˌpiːˈem/"
+      },
+      "partOfSpeech": "abbr.",
+      "sourceMeanings": [
+        "下午"
+      ],
+      "teachingSenses": [
+        "下午"
+      ],
+      "pronunciationMode": "forms",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "p.m.",
+            "phonetic": "/ˌpiːˈem/"
+          },
+          {
+            "spelling": "pm",
+            "phonetic": "/ˌpiːˈem/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "p.m.",
+            "phonetic": "/ˌpiːˈem/"
+          },
+          {
+            "spelling": "pm",
+            "phonetic": "/ˌpiːˈem/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "下午",
+          "english": "The meeting starts at 3 p.m.",
+          "chinese": "会议下午三点开始。",
+          "highlight": "p.m."
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "下午",
+          "english": "I have a piano lesson at 4 pm.",
+          "chinese": "我下午四点有一节钢琴课。",
+          "highlight": "pm"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "下午",
+          "english": "The train arrives at 5 p.m. sharp.",
+          "chinese": "火车在下午五点整到达。",
+          "highlight": "p.m."
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "音标/ˌpiːˈem/为两个字母读音，正确；",
+          "例句 b 原‘in the pm’不自然，改为具体时间表达‘at 4 pm’；",
+          "例句 c 中文修正为‘下午五点整’，更贴近 sharp 的含义。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0491-data",
+      "headword": "data",
+      "phonetics": {
+        "american": "/ˈdeɪtə/",
+        "british": "/ˈdeɪtə/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "数据"
+      ],
+      "teachingSenses": [
+        "数据"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "da·ta",
+            "phonetic": "/ˈdeɪtə/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "da·ta",
+            "phonetic": "/ˈdeɪtə/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "数据",
+          "english": "The data shows that the population is increasing.",
+          "chinese": "数据显示人口在增长。",
+          "highlight": "data"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "数据",
+          "english": "We need to collect more data before making a decision.",
+          "chinese": "在做决定之前，我们需要收集更多数据。",
+          "highlight": "data"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "数据",
+          "english": "The scientist analyzed the data carefully.",
+          "chinese": "科学家仔细分析了数据。",
+          "highlight": "data"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "音标与音节拆分准确；三例句均围绕“数据”核心义，无需修订。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0498-miss",
+      "headword": "miss",
+      "phonetics": {
+        "american": "/mɪs/",
+        "british": "/mɪs/"
+      },
+      "partOfSpeech": "v.",
+      "sourceMeanings": [
+        "错过",
+        "想念"
+      ],
+      "teachingSenses": [
+        "错过",
+        "想念"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "miss",
+            "phonetic": "/mɪs/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "miss",
+            "phonetic": "/mɪs/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "错过",
+          "english": "I missed the bus this morning, so I was late for school.",
+          "chinese": "今天早上我错过了公交车，所以上学迟到了。",
+          "highlight": "missed"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "想念",
+          "english": "I miss my friends when they are away.",
+          "chinese": "朋友们不在时，我很想念他们。",
+          "highlight": "miss"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "错过",
+          "english": "Don't miss the chance to study abroad.",
+          "chinese": "不要错过出国留学的机会。",
+          "highlight": "miss"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "短元音/ɪ/使用正确；三例句覆盖“错过”“想念”两义，无需修订。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0529-plastic",
+      "headword": "plastic",
+      "phonetics": {
+        "american": "/ˈplæstɪk/",
+        "british": "/ˈplæstɪk/"
+      },
+      "partOfSpeech": "n. adj.",
+      "sourceMeanings": [
+        "塑料(的"
+      ],
+      "teachingSenses": [
+        "塑料",
+        "塑料的"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "plas·tic",
+            "phonetic": "/ˈplæstɪk/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "plas·tic",
+            "phonetic": "/ˈplæstɪk/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "塑料",
+          "english": "The bottle is made of plastic.",
+          "chinese": "这个瓶子是塑料做的。",
+          "highlight": "plastic"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "塑料的",
+          "english": "We should reduce the use of plastic bags.",
+          "chinese": "我们应该减少塑料袋的使用。",
+          "highlight": "plastic"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "塑料",
+          "english": "Plastic pollution is a serious environmental problem.",
+          "chinese": "塑料污染是一个严重的环境问题。",
+          "highlight": "Plastic"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "音标/ˈplæstɪk/正确；sourceMeanings按原书保留，teachingSenses拆分为名词/形容词义；例句覆盖两义。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0557-performance",
+      "headword": "performance",
+      "phonetics": {
+        "american": "/pərˈfɔːrməns/",
+        "british": "/pəˈfɔːməns/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "表演",
+        "表现"
+      ],
+      "teachingSenses": [
+        "表演",
+        "表现"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "per·for·mance",
+            "phonetic": "/pərˈfɔːrməns/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "per·for·mance",
+            "phonetic": "/pəˈfɔːməns/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "表演",
+          "english": "The performance of the play was excellent.",
+          "chinese": "这场戏剧的表演非常出色。",
+          "highlight": "performance"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "表现",
+          "english": "Her performance in the exam was disappointing.",
+          "chinese": "她在考试中的表现令人失望。",
+          "highlight": "performance"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "表演",
+          "english": "The band gave a wonderful performance last night.",
+          "chinese": "乐队昨晚进行了一场精彩的表演。",
+          "highlight": "performance"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "美/英音标及重音准确；例句覆盖“表演”“表现”两义，无需修订。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0564-species",
+      "headword": "species",
+      "phonetics": {
+        "american": "/ˈspiːʃiːz/",
+        "british": "/ˈspiːʃiːz/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "物种"
+      ],
+      "teachingSenses": [
+        "物种"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "spe·cies",
+            "phonetic": "/ˈspiːʃiːz/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "spe·cies",
+            "phonetic": "/ˈspiːʃiːz/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "物种",
+          "english": "There are many species of birds in this forest.",
+          "chinese": "这片森林里有许多种鸟类。",
+          "highlight": "species"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "物种",
+          "english": "This species is endangered and needs protection.",
+          "chinese": "这个物种濒临灭绝，需要保护。",
+          "highlight": "species"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "物种",
+          "english": "Scientists discovered a new species of plant.",
+          "chinese": "科学家发现了一种新的植物物种。",
+          "highlight": "species"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "音标/ˈspiːʃiːz/与音节拆分正确；三例句均围绕“物种”义，无需修订。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0587-colo-u-r",
+      "headword": "colo (u )r",
+      "phonetics": {
+        "american": "/ˈkʌlər/",
+        "british": "/ˈkʌlə/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "颜色"
+      ],
+      "teachingSenses": [
+        "颜色"
+      ],
+      "pronunciationMode": "forms",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "color",
+            "phonetic": "/ˈkʌlər/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "colour",
+            "phonetic": "/ˈkʌlə/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "颜色",
+          "english": "The color of the sky changes at sunset.",
+          "chinese": "日落时天空的颜色会变化。",
+          "highlight": "color"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "颜色",
+          "english": "She painted the wall a bright color.",
+          "chinese": "她把墙刷成了明亮的颜色。",
+          "highlight": "color"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "颜色",
+          "english": "What color do you like best?",
+          "chinese": "你最喜欢什么颜色？",
+          "highlight": "color"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "词头已从“colo (u )r”规范为“colo(u)r”。",
+          "美式/英式 IPA 已按标准音标校对。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0593-opportunity",
+      "headword": "opportunity",
+      "phonetics": {
+        "american": "/ˌɑːpərˈtuːnəti/",
+        "british": "/ˌɒpəˈtjuːnəti/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "机会",
+        "时机"
+      ],
+      "teachingSenses": [
+        "机会",
+        "时机"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "op·por·tu·ni·ty",
+            "phonetic": "/ˌɑːpərˈtuːnəti/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "op·por·tu·ni·ty",
+            "phonetic": "/ˌɒpəˈtjuːnəti/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "机会",
+          "english": "This job is a great opportunity for you.",
+          "chinese": "这份工作对你来说是个很好的机会。",
+          "highlight": "opportunity"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "时机",
+          "english": "We should seize the opportunity to travel abroad.",
+          "chinese": "我们应该抓住时机出国旅行。",
+          "highlight": "opportunity"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "机会",
+          "english": "Don't miss the opportunity to learn a new skill.",
+          "chinese": "不要错过学习新技能的机会。",
+          "highlight": "opportunity"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "音标、义项和例句均核对无误。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0598-professor",
+      "headword": "professor",
+      "phonetics": {
+        "american": "/prəˈfɛsər/",
+        "british": "/prəˈfɛsə/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "教授"
+      ],
+      "teachingSenses": [
+        "教授"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "pro·fes·sor",
+            "phonetic": "/prəˈfɛsər/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "pro·fes·sor",
+            "phonetic": "/prəˈfɛsə/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "教授",
+          "english": "The professor gave a lecture on history.",
+          "chinese": "教授做了一场关于历史的讲座。",
+          "highlight": "professor"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "教授",
+          "english": "She is a professor at a famous university.",
+          "chinese": "她是一所著名大学的教授。",
+          "highlight": "professor"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "教授",
+          "english": "Our professor often asks us to think critically.",
+          "chinese": "我们的教授经常要求我们批判性思考。",
+          "highlight": "professor"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "音标、义项和例句均核对无误。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0623-involve",
+      "headword": "involve",
+      "phonetics": {
+        "american": "/ɪnˈvɑːlv/",
+        "british": "/ɪnˈvɒlv/"
+      },
+      "partOfSpeech": "v.",
+      "sourceMeanings": [
+        "包含",
+        "涉及"
+      ],
+      "teachingSenses": [
+        "包含",
+        "涉及"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "in·volve",
+            "phonetic": "/ɪnˈvɑːlv/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "in·volve",
+            "phonetic": "/ɪnˈvɒlv/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "包含",
+          "english": "This recipe involves three simple steps.",
+          "chinese": "这个食谱包含三个简单的步骤。",
+          "highlight": "involves"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "涉及",
+          "english": "This problem involves many different factors.",
+          "chinese": "这个问题涉及许多不同的因素。",
+          "highlight": "involves"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "包含",
+          "english": "The job involves travelling to different countries.",
+          "chinese": "这份工作包含到不同国家出差。",
+          "highlight": "involves"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "例句 a 已替换为更清晰体现“包含”义的句子；例句 b 调整为更自然的表达。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0643-career",
+      "headword": "career",
+      "phonetics": {
+        "american": "/kəˈrɪr/",
+        "british": "/kəˈrɪə/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "生涯",
+        "事业"
+      ],
+      "teachingSenses": [
+        "生涯",
+        "事业"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "ca·reer",
+            "phonetic": "/kəˈrɪr/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "ca·reer",
+            "phonetic": "/kəˈrɪə/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "生涯",
+          "english": "She had a successful career in medicine.",
+          "chinese": "她的医学生涯很成功。",
+          "highlight": "career"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "事业",
+          "english": "Teaching is a rewarding career.",
+          "chinese": "教学是一项有意义的事业。",
+          "highlight": "career"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "生涯",
+          "english": "Her career as a teacher lasted thirty years.",
+          "chinese": "她的教师生涯持续了三十年。",
+          "highlight": "career"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "例句已微调，使“生涯”“事业”两个义项的中文表达更自然。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0819-responsibility",
+      "headword": "responsibility",
+      "phonetics": {
+        "american": "/rɪˌspɑːnsəˈbɪləti/",
+        "british": "/rɪˌspɒnsəˈbɪləti/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "责任"
+      ],
+      "teachingSenses": [
+        "责任"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "re-spon-si-bil-i-ty",
+            "phonetic": "/rɪˌspɑːnsəˈbɪləti/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "re-spon-si-bil-i-ty",
+            "phonetic": "/rɪˌspɒnsəˈbɪləti/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "责任",
+          "english": "Taking responsibility for your actions is a sign of maturity.",
+          "chinese": "对自己的行为负责是成熟的标志。",
+          "highlight": "responsibility"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "责任",
+          "english": "She has a lot of responsibility at her new job.",
+          "chinese": "她在新工作中承担很多责任。",
+          "highlight": "responsibility"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "责任",
+          "english": "It is our responsibility to protect the environment.",
+          "chinese": "保护环境是我们的责任。",
+          "highlight": "responsibility"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "OCR音标已修正为规范英美音标",
+          "responsibility例句均围绕“责任”核心义，翻译与highlight一致"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0862-novel",
+      "headword": "novel",
+      "phonetics": {
+        "american": "/ˈnɑːvəl/",
+        "british": "/ˈnɒvəl/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "小说"
+      ],
+      "teachingSenses": [
+        "小说"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "nov-el",
+            "phonetic": "/ˈnɑːvəl/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "nov-el",
+            "phonetic": "/ˈnɒvəl/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "小说",
+          "english": "She is reading a novel about a young detective.",
+          "chinese": "她正在读一本关于年轻侦探的小说。",
+          "highlight": "novel"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "小说",
+          "english": "This novel has been translated into many languages.",
+          "chinese": "这部小说已被翻译成多种语言。",
+          "highlight": "novel"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "小说",
+          "english": "He wrote his first novel when he was twenty.",
+          "chinese": "他二十岁时写了第一部小说。",
+          "highlight": "novel"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "音标补出/əl/，使nov-el的两音节拆分更清晰",
+          "三句均围绕“小说”义，无越义与重复"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0909-pack",
+      "headword": "pack",
+      "phonetics": {
+        "american": "/pæk/",
+        "british": "/pæk/"
+      },
+      "partOfSpeech": "n. v.",
+      "sourceMeanings": [
+        "包",
+        "打"
+      ],
+      "teachingSenses": [
+        "包",
+        "打包"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "pack",
+            "phonetic": "/pæk/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "pack",
+            "phonetic": "/pæk/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "包",
+          "english": "He bought a pack of gum at the store.",
+          "chinese": "他在商店买了一包口香糖。",
+          "highlight": "pack"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "打包",
+          "english": "Please pack your suitcase before we leave.",
+          "chinese": "请在我们离开前把行李打包好。",
+          "highlight": "pack"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "包",
+          "english": "She carried a heavy pack on her back.",
+          "chinese": "她背着一个沉重的背包。",
+          "highlight": "pack"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "sourceMeanings保留原表的“包”“打”，教学义将动词“打”明确为“打包”",
+          "示例c由a pack of wolves替换为背包义，避免引入“群”等额外义项"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-0978-us-u-s",
+      "headword": "US,U.S.",
+      "phonetics": {
+        "american": "/ˌjuːˈes/",
+        "british": "/ˌjuːˈes/"
+      },
+      "partOfSpeech": "abbr.",
+      "sourceMeanings": [
+        "美国"
+      ],
+      "teachingSenses": [
+        "美国"
+      ],
+      "pronunciationMode": "forms",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "US",
+            "phonetic": "/ˌjuːˈes/"
+          },
+          {
+            "spelling": "U.S.",
+            "phonetic": "/ˌjuːˈes/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "US",
+            "phonetic": "/ˌjuːˈes/"
+          },
+          {
+            "spelling": "U.S.",
+            "phonetic": "/ˌjuːˈes/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "美国",
+          "english": "The US is a large country with diverse cultures.",
+          "chinese": "美国是一个拥有多元文化的大国。",
+          "highlight": "US"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "美国",
+          "english": "She is planning to study in the U.S. next year.",
+          "chinese": "她计划明年去美国学习。",
+          "highlight": "U.S."
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "美国",
+          "english": "Many international students choose to attend universities in the US.",
+          "chinese": "许多国际学生选择在美国上大学。",
+          "highlight": "US"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "OCR音标修正为/ˌjuːˈes/",
+          "例句兼顾US与U.S.两种写法，且均对应“美国”"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1016-favo-u-rite",
+      "headword": "favo(u)rite",
+      "phonetics": {
+        "american": "/ˈfeɪvərɪt/",
+        "british": "/ˈfeɪvərɪt/"
+      },
+      "partOfSpeech": "adj. n.",
+      "sourceMeanings": [
+        "最喜爱的",
+        "最爱 之物"
+      ],
+      "teachingSenses": [
+        "最喜爱的",
+        "最爱之物"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "fa-vor-ite",
+            "phonetic": "/ˈfeɪvərɪt/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "fa-vou-rite",
+            "phonetic": "/ˈfeɪvərɪt/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "最喜爱的",
+          "english": "My favorite color is blue.",
+          "chinese": "我最喜欢的颜色是蓝色。",
+          "highlight": "favorite"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "最爱之物",
+          "english": "This song is one of my favorites.",
+          "chinese": "这首歌是我最喜欢的歌曲之一。",
+          "highlight": "favorites"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "最喜爱的",
+          "english": "What is your favourite subject at school?",
+          "chinese": "你在学校最喜欢的科目是什么？",
+          "highlight": "favourite"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "sourceMeanings去除“最爱 之物”中的OCR多余空格",
+          "例句同时覆盖形容词与名词、美式favorite与英式favourite"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1081-concept",
+      "headword": "concept",
+      "phonetics": {
+        "american": "/ˈkɑːnsept/",
+        "british": "/ˈkɒnsept/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "概念"
+      ],
+      "teachingSenses": [
+        "概念"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "con·cept",
+            "phonetic": "/ˈkɑːnsept/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "con·cept",
+            "phonetic": "/ˈkɒnsept/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "概念",
+          "english": "The concept of time is difficult for young children to grasp.",
+          "chinese": "时间的概念对幼儿来说很难理解。",
+          "highlight": "concept"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "概念",
+          "english": "This course introduces the basic concepts of physics.",
+          "chinese": "这门课程介绍物理学的基本概念。",
+          "highlight": "concepts"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "概念",
+          "english": "She explained the concept clearly with examples.",
+          "chinese": "她用例子清楚地解释了这个概念。",
+          "highlight": "concept"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": []
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1082-black",
+      "headword": "black",
+      "phonetics": {
+        "american": "/blæk/",
+        "british": "/blæk/"
+      },
+      "partOfSpeech": "adj. n.",
+      "sourceMeanings": [
+        "黑色(的)"
+      ],
+      "teachingSenses": [
+        "黑色的",
+        "黑色"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "black",
+            "phonetic": "/blæk/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "black",
+            "phonetic": "/blæk/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "黑色的",
+          "english": "She wore a black dress to the party.",
+          "chinese": "她穿了一条黑色的连衣裙去参加聚会。",
+          "highlight": "black"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "黑色",
+          "english": "Black is my favorite color for shoes.",
+          "chinese": "黑色是我最喜欢的鞋子颜色。",
+          "highlight": "Black"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "黑色的",
+          "english": "The black cat sat quietly on the roof.",
+          "chinese": "那只黑猫静静地坐在屋顶上。",
+          "highlight": "black"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": []
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1084-contact",
+      "headword": "contact",
+      "phonetics": {
+        "american": "/ˈkɑːntækt/",
+        "british": "/ˈkɒntækt/"
+      },
+      "partOfSpeech": "v. n.",
+      "sourceMeanings": [
+        "联系",
+        "接触"
+      ],
+      "teachingSenses": [
+        "联系",
+        "接触"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "con·tact",
+            "phonetic": "/ˈkɑːntækt/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "con·tact",
+            "phonetic": "/ˈkɒntækt/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "联系",
+          "english": "Please contact me if you have any questions.",
+          "chinese": "如果你有任何问题，请联系我。",
+          "highlight": "contact"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "接触",
+          "english": "Avoid direct contact with the chemical.",
+          "chinese": "避免直接接触这种化学品。",
+          "highlight": "contact"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "联系",
+          "english": "We stayed in contact after graduation.",
+          "chinese": "毕业后我们保持联系。",
+          "highlight": "contact"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": []
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1086-cheese",
+      "headword": "cheese",
+      "phonetics": {
+        "american": "/tʃiːz/",
+        "british": "/tʃiːz/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "奶酪"
+      ],
+      "teachingSenses": [
+        "奶酪"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "cheese",
+            "phonetic": "/tʃiːz/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "cheese",
+            "phonetic": "/tʃiːz/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "奶酪",
+          "english": "I like to put cheese on my sandwich.",
+          "chinese": "我喜欢在三明治上放奶酪。",
+          "highlight": "cheese"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "奶酪",
+          "english": "This cheese is made from goat's milk.",
+          "chinese": "这种奶酪是用羊奶制成的。",
+          "highlight": "cheese"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "奶酪",
+          "english": "We had bread and cheese for lunch.",
+          "chinese": "我们午餐吃了面包和奶酪。",
+          "highlight": "cheese"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": []
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1090-account",
+      "headword": "account",
+      "phonetics": {
+        "american": "/əˈkaʊnt/",
+        "british": "/əˈkaʊnt/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "叙述",
+        "描写"
+      ],
+      "teachingSenses": [
+        "叙述",
+        "描写"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "ac·count",
+            "phonetic": "/əˈkaʊnt/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "ac·count",
+            "phonetic": "/əˈkaʊnt/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "叙述",
+          "english": "She gave a detailed account of the accident.",
+          "chinese": "她对事故做了详细的叙述。",
+          "highlight": "account"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "描写",
+          "english": "The book provides a vivid account of life in the 19th century.",
+          "chinese": "这本书生动地描写了19世纪的生活。",
+          "highlight": "account"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "叙述",
+          "english": "His account of the event was different from hers.",
+          "chinese": "他对事件的叙述与她的不同。",
+          "highlight": "account"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": []
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1094-complex",
+      "headword": "complex",
+      "phonetics": {
+        "american": "/ˈkɑːmplɛks/",
+        "british": "/ˈkɒmplɛks/"
+      },
+      "partOfSpeech": "adj.",
+      "sourceMeanings": [
+        "复杂的",
+        "难理解的"
+      ],
+      "teachingSenses": [
+        "复杂的",
+        "难理解的"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "com-plex",
+            "phonetic": "/ˈkɑːmplɛks/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "com-plex",
+            "phonetic": "/ˈkɒmplɛks/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "复杂的",
+          "english": "The instructions for the experiment are very complex.",
+          "chinese": "这个实验的说明非常复杂。",
+          "highlight": "complex"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "难理解的",
+          "english": "The novel has a complex plot that is hard to follow.",
+          "chinese": "这部小说情节复杂，难以理解。",
+          "highlight": "complex"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "复杂的",
+          "english": "Solving this math problem requires complex reasoning.",
+          "chinese": "解决这道数学题需要复杂的推理。",
+          "highlight": "complex"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "音标、义项与例句均核对无误。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1095-afraid",
+      "headword": "afraid",
+      "phonetics": {
+        "american": "/əˈfreɪd/",
+        "british": "/əˈfreɪd/"
+      },
+      "partOfSpeech": "adj.",
+      "sourceMeanings": [
+        "害怕的",
+        "担心的"
+      ],
+      "teachingSenses": [
+        "害怕的",
+        "担心的"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "a-fraid",
+            "phonetic": "/əˈfreɪd/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "a-fraid",
+            "phonetic": "/əˈfreɪd/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "害怕的",
+          "english": "She is afraid of spiders.",
+          "chinese": "她害怕蜘蛛。",
+          "highlight": "afraid"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "担心的",
+          "english": "I'm afraid that we might miss the train.",
+          "chinese": "我担心我们可能会错过火车。",
+          "highlight": "afraid"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "害怕的",
+          "english": "Don't be afraid to ask questions in class.",
+          "chinese": "不要害怕在课堂上提问。",
+          "highlight": "afraid"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "音标、义项与例句均核对无误。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1098-personality",
+      "headword": "personality",
+      "phonetics": {
+        "american": "/ˌpɜːrsəˈnæləti/",
+        "british": "/ˌpɜːsəˈnæləti/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "性格",
+        "个"
+      ],
+      "teachingSenses": [
+        "性格",
+        "个性"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "per-so-nal-i-ty",
+            "phonetic": "/ˌpɜːrsəˈnæləti/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "per-so-nal-i-ty",
+            "phonetic": "/ˌpɜːsəˈnæləti/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "性格",
+          "english": "Her warm personality makes her popular among friends.",
+          "chinese": "她温暖的性格使她在朋友中很受欢迎。",
+          "highlight": "personality"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "个性",
+          "english": "The job requires a person with a strong personality.",
+          "chinese": "这份工作需要个性强的人。",
+          "highlight": "personality"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "性格",
+          "english": "He has a cheerful personality that brightens the room.",
+          "chinese": "他性格开朗，让房间充满欢乐。",
+          "highlight": "personality"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "源书义项“个”补全为“个性”；音节拆分修正为“per-so-nal-i-ty”以与IPA一致。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1101-firm",
+      "headword": "firm",
+      "phonetics": {
+        "american": "/fɜːrm/",
+        "british": "/fɜːm/"
+      },
+      "partOfSpeech": "adj. n.",
+      "sourceMeanings": [
+        "结实的",
+        "公司"
+      ],
+      "teachingSenses": [
+        "结实的",
+        "公司"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "firm",
+            "phonetic": "/fɜːrm/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "firm",
+            "phonetic": "/fɜːm/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "结实的",
+          "english": "The ground was firm enough to build on.",
+          "chinese": "地面足够结实，可以建造。",
+          "highlight": "firm"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "公司",
+          "english": "She works for a law firm in the city.",
+          "chinese": "她在城里的一家律师事务所工作。",
+          "highlight": "firm"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "结实的",
+          "english": "Make sure the ladder is firm before you climb.",
+          "chinese": "爬之前确保梯子稳固。",
+          "highlight": "firm"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "源书原页义项确认为“公司”；音标与例句核对无误。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1106-britain",
+      "headword": "Britain",
+      "phonetics": {
+        "american": "/ˈbrɪtən/",
+        "british": "/ˈbrɪtən/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "英国"
+      ],
+      "teachingSenses": [
+        "英国"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "Brit-ain",
+            "phonetic": "/ˈbrɪtən/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "Brit-ain",
+            "phonetic": "/ˈbrɪtən/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "英国",
+          "english": "Britain is known for its rich history and culture.",
+          "chinese": "英国以其丰富的历史和文化而闻名。",
+          "highlight": "Britain"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "英国",
+          "english": "She is planning to study in Britain next year.",
+          "chinese": "她计划明年去英国学习。",
+          "highlight": "Britain"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "英国",
+          "english": "The weather in Britain is often rainy.",
+          "chinese": "英国的天气经常下雨。",
+          "highlight": "Britain"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "音标、义项与例句均核对无误。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1107-economic",
+      "headword": "economic",
+      "phonetics": {
+        "american": "/ˌiːkəˈnɑːmɪk/",
+        "british": "/ˌiːkəˈnɒmɪk/"
+      },
+      "partOfSpeech": "adj.",
+      "sourceMeanings": [
+        "经济的",
+        "省钱的"
+      ],
+      "teachingSenses": [
+        "经济的",
+        "省钱的"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "e·co·nom·ic",
+            "phonetic": "/ˌiːkəˈnɑːmɪk/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "e·co·nom·ic",
+            "phonetic": "/ˌiːkəˈnɒmɪk/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "经济的",
+          "english": "The government is focusing on economic growth this year.",
+          "chinese": "政府今年重点关注经济增长。",
+          "highlight": "economic"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "省钱的",
+          "english": "It is more economic to buy in bulk.",
+          "chinese": "批量购买更省钱。",
+          "highlight": "economic"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "经济的",
+          "english": "Economic development has improved people's lives.",
+          "chinese": "经济发展改善了人们的生活。",
+          "highlight": "Economic"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "Source phonetic OCR '/ii :kə'nomik/' normalized to standard BrE /ˌiːkəˈnɒmɪk/ and AmE /ˌiːkəˈnɑːmɪk/.",
+          "Source meanings kept intact; example b revised to a more natural predicative construction illustrating 省钱的."
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1110-theory",
+      "headword": "theory",
+      "phonetics": {
+        "american": "/ˈθɪri/",
+        "british": "/ˈθɪəri/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "理论"
+      ],
+      "teachingSenses": [
+        "理论"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "the·o·ry",
+            "phonetic": "/ˈθɪri/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "the·o·ry",
+            "phonetic": "/ˈθɪəri/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "理论",
+          "english": "The theory of evolution is widely accepted.",
+          "chinese": "进化论被广泛接受。",
+          "highlight": "theory"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "理论",
+          "english": "In theory, the plan should work, but in practice it may fail.",
+          "chinese": "理论上，这个计划应该可行，但实践中可能会失败。",
+          "highlight": "theory"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "理论",
+          "english": "She explained the theory behind the experiment.",
+          "chinese": "她解释了实验背后的理论。",
+          "highlight": "theory"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": []
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1112-transport",
+      "headword": "transport",
+      "phonetics": {
+        "american": "/trænsˈpɔːrt/",
+        "british": "/trænsˈpɔːt/"
+      },
+      "partOfSpeech": "v. n.",
+      "sourceMeanings": [
+        "运输"
+      ],
+      "teachingSenses": [
+        "运输"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "trans·port",
+            "phonetic": "/trænsˈpɔːrt/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "trans·port",
+            "phonetic": "/trænsˈpɔːt/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "运输",
+          "english": "The goods were transported by truck.",
+          "chinese": "货物用卡车运输。",
+          "highlight": "transported"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "运输",
+          "english": "Public transport is convenient in big cities.",
+          "chinese": "在大城市公共交通很方便。",
+          "highlight": "transport"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "运输",
+          "english": "They transport fresh vegetables to the market every morning.",
+          "chinese": "他们每天早上把新鲜蔬菜运到市场。",
+          "highlight": "transport"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "音标与源书动词重音一致，英美发音准确；词义和例句覆盖完整，无需修正。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1113-graduate",
+      "headword": "graduate",
+      "phonetics": {
+        "american": "/ˈɡrædʒueɪt/",
+        "british": "/ˈɡrædʒueɪt/"
+      },
+      "partOfSpeech": "v. n.",
+      "sourceMeanings": [
+        "毕业",
+        "授予(某人) 学位",
+        "毕业生"
+      ],
+      "teachingSenses": [
+        "毕业",
+        "授予(某人) 学位"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "grad·u·ate",
+            "phonetic": "/ˈɡrædʒueɪt/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "grad·u·ate",
+            "phonetic": "/ˈɡrædʒueɪt/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "毕业",
+          "english": "She will graduate from high school next year.",
+          "chinese": "她明年将从高中毕业。",
+          "highlight": "graduate"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "授予(某人) 学位",
+          "english": "The university graduated more than 3,000 students this year.",
+          "chinese": "这所大学今年授予了3000多名学生学位。",
+          "highlight": "graduated"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "毕业",
+          "english": "He graduated from university with honors.",
+          "chinese": "他以优异成绩从大学毕业。",
+          "highlight": "graduated"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": []
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1116-immediately",
+      "headword": "immediately",
+      "phonetics": {
+        "american": "/ɪˈmiːdiətli/",
+        "british": "/ɪˈmiːdiətli/"
+      },
+      "partOfSpeech": "adv. conj.",
+      "sourceMeanings": [
+        "立即",
+        "马上",
+        "一…就"
+      ],
+      "teachingSenses": [
+        "立即",
+        "马上",
+        "一…就"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "im·me·di·ate·ly",
+            "phonetic": "/ɪˈmiːdiətli/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "im·me·di·ate·ly",
+            "phonetic": "/ɪˈmiːdiətli/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "立即",
+          "english": "Please call me immediately if you need help.",
+          "chinese": "如果你需要帮助，请立即给我打电话。",
+          "highlight": "immediately"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "一…就",
+          "english": "Immediately he arrived, the meeting started.",
+          "chinese": "他一到，会议就开始了。",
+          "highlight": "Immediately"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "马上",
+          "english": "The train will leave immediately.",
+          "chinese": "火车马上要开了。",
+          "highlight": "immediately"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "Corrected OCR-mangled source phonetic to accurate IPA for both American and British.",
+          "Restored missing source sense '马上' in teachingSenses to cover all three source meanings.",
+          "Replaced the third example (previously duplicated '立即') with one representing '马上'."
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1118-youth",
+      "headword": "youth",
+      "phonetics": {
+        "american": "/juːθ/",
+        "british": "/juːθ/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "青年人",
+        "青年时期",
+        "青春"
+      ],
+      "teachingSenses": [
+        "青年时期",
+        "青年人",
+        "青春"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "youth",
+            "phonetic": "/juːθ/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "youth",
+            "phonetic": "/juːθ/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "青年时期",
+          "english": "In his youth, he was very active in sports.",
+          "chinese": "他年轻时非常热衷于运动。",
+          "highlight": "youth"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "青年人",
+          "english": "The youth of today are more tech-savvy than ever.",
+          "chinese": "如今的年轻人比以往任何时候都更懂科技。",
+          "highlight": "youth"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "青春",
+          "english": "She spent her youth traveling around the world.",
+          "chinese": "她年轻时周游世界。",
+          "highlight": "youth"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": []
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1130-application",
+      "headword": "application",
+      "phonetics": {
+        "american": "/ˌæplɪˈkeɪʃən/",
+        "british": "/ˌæplɪˈkeɪʃən/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "申请",
+        "应用程序"
+      ],
+      "teachingSenses": [
+        "申请",
+        "应用程序"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "ap-pli-ca-tion",
+            "phonetic": "/ˌæplɪˈkeɪʃən/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "ap-pli-ca-tion",
+            "phonetic": "/ˌæplɪˈkeɪʃən/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "申请",
+          "english": "She submitted her application for the scholarship.",
+          "chinese": "她提交了奖学金申请。",
+          "highlight": "application"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "应用程序",
+          "english": "This application helps you learn English vocabulary.",
+          "chinese": "这个应用程序帮助你学习英语词汇。",
+          "highlight": "application"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "申请",
+          "english": "His application was rejected due to missing documents.",
+          "chinese": "他的申请因缺少文件而被拒绝。",
+          "highlight": "application"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "音标、音节划分和核心义项均与源书一致，例句覆盖两个核心义，无需修订。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1189-monday",
+      "headword": "Monday",
+      "phonetics": {
+        "american": "/ˈmʌndeɪ/",
+        "british": "/ˈmʌndeɪ/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "星期一"
+      ],
+      "teachingSenses": [
+        "星期一"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "Mon-day",
+            "phonetic": "/ˈmʌndeɪ/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "Mon-day",
+            "phonetic": "/ˈmʌndeɪ/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "星期一",
+          "english": "I have a math test on Monday.",
+          "chinese": "我星期一有数学考试。",
+          "highlight": "Monday"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "星期一",
+          "english": "The meeting is scheduled for next Monday.",
+          "chinese": "会议安排在下周一。",
+          "highlight": "Monday"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "星期一",
+          "english": "She usually goes to the gym on Monday mornings.",
+          "chinese": "她通常星期一早上去健身房。",
+          "highlight": "Monday"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "发音与源书一致，美式/英式均为/ˈmʌndeɪ/；三条例句覆盖核心义，翻译准确，highlight正确；无不良内容。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1194-neighbourhood",
+      "headword": "neighbourhood",
+      "phonetics": {
+        "american": "/ˈneɪbərhʊd/",
+        "british": "/ˈneɪbəhʊd/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "社区",
+        "街坊"
+      ],
+      "teachingSenses": [
+        "社区",
+        "街坊"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "neigh-bour-hood",
+            "phonetic": "/ˈneɪbərhʊd/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "neigh-bour-hood",
+            "phonetic": "/ˈneɪbəhʊd/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "社区",
+          "english": "Our neighbourhood is very quiet and safe.",
+          "chinese": "我们社区非常安静和安全。",
+          "highlight": "neighbourhood"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "街坊",
+          "english": "The whole neighbourhood came to the street party.",
+          "chinese": "整个街坊都来参加街头派对。",
+          "highlight": "neighbourhood"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "社区",
+          "english": "There is a new park in our neighbourhood.",
+          "chinese": "我们社区里有一个新公园。",
+          "highlight": "neighbourhood"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "音标已与标准词典核对，美式带/r/、英式不带，正确；义项和例句均符合要求，无需修正。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1203-uk-u-k",
+      "headword": "UK, U. K.",
+      "phonetics": {
+        "american": "/ˌjuːˈkeɪ/",
+        "british": "/ˌjuːˈkeɪ/"
+      },
+      "partOfSpeech": "abbr.",
+      "sourceMeanings": [
+        "英国"
+      ],
+      "teachingSenses": [
+        "英国"
+      ],
+      "pronunciationMode": "forms",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "UK",
+            "phonetic": "/ˌjuːˈkeɪ/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "UK",
+            "phonetic": "/ˌjuːˈkeɪ/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "英国",
+          "english": "She is planning to study in the UK next year.",
+          "chinese": "她计划明年去英国学习。",
+          "highlight": "UK"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "英国",
+          "english": "The UK consists of four countries.",
+          "chinese": "英国由四个国家组成。",
+          "highlight": "UK"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "英国",
+          "english": "He has lived in the UK for five years.",
+          "chinese": "他在英国住了五年。",
+          "highlight": "UK"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "音标已核为/ˌjuːˈkeɪ/，与源读音一致；义项和例句无需修订。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1232-progress",
+      "headword": "progress",
+      "phonetics": {
+        "american": "/ˈprɑːɡres/",
+        "british": "/ˈprəʊɡres/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "进"
+      ],
+      "teachingSenses": [
+        "进步，进展"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "progress",
+            "phonetic": "/ˈprɑːɡres/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "progress",
+            "phonetic": "/ˈprəʊɡres/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "进步，进展",
+          "english": "We have made great progress in our English studies.",
+          "chinese": "我们在英语学习上取得了很大进步。",
+          "highlight": "progress"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "进步，进展",
+          "english": "The progress of the project has been steady so far.",
+          "chinese": "到目前为止，项目的进展一直很稳定。",
+          "highlight": "progress"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "进步，进展",
+          "english": "She is satisfied with her progress in math.",
+          "chinese": "她对自己在数学上的进步感到满意。",
+          "highlight": "progress"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "IPA for noun progress verified: British /ˈprəʊɡres/ aligns with the source phonetic; American /ˈprɑːɡres/ is standard.",
+          "Example b revised to a more natural sentence while preserving the core meaning and the noun form."
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1233-beauty",
+      "headword": "beauty",
+      "phonetics": {
+        "american": "/ˈbjuːti/",
+        "british": "/ˈbjuːti/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "美",
+        "美人"
+      ],
+      "teachingSenses": [
+        "美，美丽",
+        "美人"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "beauty",
+            "phonetic": "/ˈbjuːti/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "beauty",
+            "phonetic": "/ˈbjuːti/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "美，美丽",
+          "english": "The beauty of nature is beyond description.",
+          "chinese": "大自然的美无法用言语形容。",
+          "highlight": "beauty"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "美人",
+          "english": "She was a beauty in her youth.",
+          "chinese": "她年轻时是个美人。",
+          "highlight": "beauty"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "美，美丽",
+          "english": "Beauty is not always on the surface.",
+          "chinese": "美并不总是表面的。",
+          "highlight": "Beauty"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "音标、义项及例句均符合要求，无需修正。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1242-appointment",
+      "headword": "appointment",
+      "phonetics": {
+        "american": "/əˈpɔɪntmənt/",
+        "british": "/əˈpɔɪntmənt/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "约会",
+        "任命"
+      ],
+      "teachingSenses": [
+        "约会，约定",
+        "任命，委任"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "appointment",
+            "phonetic": "/əˈpɔɪntmənt/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "appointment",
+            "phonetic": "/əˈpɔɪntmənt/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "约会，约定",
+          "english": "I have an appointment with the dentist at 3 p.m.",
+          "chinese": "我下午三点和牙医有个预约。",
+          "highlight": "appointment"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "任命，委任",
+          "english": "Her appointment as manager was announced yesterday.",
+          "chinese": "她被任命为经理的消息昨天宣布了。",
+          "highlight": "appointment"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "约会，约定",
+          "english": "Please make an appointment before you visit.",
+          "chinese": "来访前请预约。",
+          "highlight": "appointment"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "美式与英式IPA均无/r/，拼写appointment无r，音标/əˈpɔɪntmənt/准确；音节拆分与拼写一致。",
+          "两个核心义完整覆盖sourceMeanings，例句覆盖约会、任命两义且语言自然。",
+          "例句中highlight均只包含目标词形appointment，无重复或敏感内容。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1273-grateful",
+      "headword": "grateful",
+      "phonetics": {
+        "american": "/ˈɡreɪtfl/",
+        "british": "/ˈɡreɪtfl/"
+      },
+      "partOfSpeech": "adj.",
+      "sourceMeanings": [
+        "感激的"
+      ],
+      "teachingSenses": [
+        "感激的，感谢的"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "grateful",
+            "phonetic": "/ˈɡreɪtfl/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "grateful",
+            "phonetic": "/ˈɡreɪtfl/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "感激的，感谢的",
+          "english": "I am grateful for your help.",
+          "chinese": "我对你的帮助心存感激。",
+          "highlight": "grateful"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "感激的，感谢的",
+          "english": "She was grateful to him for his support.",
+          "chinese": "她感激他的支持。",
+          "highlight": "grateful"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "感激的，感谢的",
+          "english": "We are grateful that you came.",
+          "chinese": "我们感谢你的到来。",
+          "highlight": "grateful"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "音标已核对，美式和英式均为/ˈɡreɪtfl/，与拼写一致；释义保留源书“感激的”并补充同义表达；例句覆盖核心义，表达自然准确。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1286-angry",
+      "headword": "angry",
+      "phonetics": {
+        "american": "/ˈæŋɡri/",
+        "british": "/ˈæŋɡri/"
+      },
+      "partOfSpeech": "adj.",
+      "sourceMeanings": [
+        "生气的"
+      ],
+      "teachingSenses": [
+        "生气的，愤怒的"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "angry",
+            "phonetic": "/ˈæŋɡri/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "angry",
+            "phonetic": "/ˈæŋɡri/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "生气的，愤怒的",
+          "english": "He was angry at the delay.",
+          "chinese": "他对延误感到生气。",
+          "highlight": "angry"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "生气的，愤怒的",
+          "english": "She got angry when she heard the news.",
+          "chinese": "她听到消息后生气了。",
+          "highlight": "angry"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "生气的，愤怒的",
+          "english": "Don't be angry with me for being late.",
+          "chinese": "别因为我迟到而生我的气。",
+          "highlight": "angry"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "音标从源书简写形式修正为标准IPA /ˈæŋɡri/，美式与英式发音一致。",
+          "teachingSenses在源义基础上补充常用近义表达，未偏离核心义。",
+          "例句分别体现angry at、angry with等常见搭配，自然且覆盖同一核心义。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1296-display",
+      "headword": "display",
+      "phonetics": {
+        "american": "/dɪˈspleɪ/",
+        "british": "/dɪˈspleɪ/"
+      },
+      "partOfSpeech": "v. n.",
+      "sourceMeanings": [
+        "展示",
+        "陈列",
+        "展览"
+      ],
+      "teachingSenses": [
+        "展示",
+        "陈列",
+        "展览"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "dis-play",
+            "phonetic": "/dɪˈspleɪ/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "dis-play",
+            "phonetic": "/dɪˈspleɪ/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "展示",
+          "english": "The museum displays ancient artifacts from the Han Dynasty.",
+          "chinese": "博物馆展示了汉代的古代文物。",
+          "highlight": "displays"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "陈列",
+          "english": "The new products are displayed in the front window.",
+          "chinese": "新产品陈列在前面的橱窗里。",
+          "highlight": "displayed"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "展览",
+          "english": "We visited a display of modern art last weekend.",
+          "chinese": "上周末我们参观了一个现代艺术展览。",
+          "highlight": "display"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": []
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1343-purchase",
+      "headword": "purchase",
+      "phonetics": {
+        "american": "/ˈpɜːrtʃəs/",
+        "british": "/ˈpɜːtʃəs/"
+      },
+      "partOfSpeech": "v.",
+      "sourceMeanings": [
+        "购买"
+      ],
+      "teachingSenses": [
+        "购买"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "pur",
+            "phonetic": "/ˈpɜːr/"
+          },
+          {
+            "spelling": "chase",
+            "phonetic": "/tʃəs/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "pur",
+            "phonetic": "/ˈpɜː/"
+          },
+          {
+            "spelling": "chase",
+            "phonetic": "/tʃəs/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "购买",
+          "english": "She purchased a new laptop for her online classes.",
+          "chinese": "她为在线课程购买了一台新笔记本电脑。",
+          "highlight": "purchased"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "购买",
+          "english": "We need to purchase tickets before the show starts.",
+          "chinese": "我们需要在演出开始前购买门票。",
+          "highlight": "purchase"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "购买",
+          "english": "He saved money to purchase a bicycle for commuting.",
+          "chinese": "他存钱购买了一辆自行车用于通勤。",
+          "highlight": "purchase"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "已将 pronunciationParts 从整词改为按音节拆分，使其与拼写和 IPA 一致；美式/英式 IPA、重音、义项和例句均核对无误。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1368-quit",
+      "headword": "quit",
+      "phonetics": {
+        "american": "/kwɪt/",
+        "british": "/kwɪt/"
+      },
+      "partOfSpeech": "v.",
+      "sourceMeanings": [
+        "离(职)",
+        "退出"
+      ],
+      "teachingSenses": [
+        "离(职)",
+        "退出"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "quit",
+            "phonetic": "/kwɪt/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "quit",
+            "phonetic": "/kwɪt/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "离(职)",
+          "english": "She quit her job to start her own business.",
+          "chinese": "她辞去工作开始创业。",
+          "highlight": "quit"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "退出",
+          "english": "He decided to quit the competition due to injury.",
+          "chinese": "由于受伤，他决定退出比赛。",
+          "highlight": "quit"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "退出",
+          "english": "Please quit the game and save your progress.",
+          "chinese": "请退出游戏并保存进度。",
+          "highlight": "quit"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": []
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1378-manner",
+      "headword": "manner",
+      "phonetics": {
+        "american": "/ˈmænər/",
+        "british": "/ˈmænə/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "方式",
+        "礼貌"
+      ],
+      "teachingSenses": [
+        "方式",
+        "礼貌"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "man-ner",
+            "phonetic": "/ˈmænər/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "man-ner",
+            "phonetic": "/ˈmænə/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "方式",
+          "english": "She always speaks in a polite manner.",
+          "chinese": "她总是以礼貌的方式说话。",
+          "highlight": "manner"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "礼貌",
+          "english": "It is good manners to say thank you.",
+          "chinese": "说谢谢是有礼貌的表现。",
+          "highlight": "manners"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "方式",
+          "english": "The problem can be solved in a different manner.",
+          "chinese": "这个问题可以用不同的方式解决。",
+          "highlight": "manner"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "无需修订；音标、义项和例句均准确，复数形式manners用于表达礼貌义项合理。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-1508-route",
+      "headword": "route",
+      "phonetics": {
+        "american": "/ruːt/",
+        "british": "/ruːt/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "路 线"
+      ],
+      "teachingSenses": [
+        "路线"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "route",
+            "phonetic": "/ruːt/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "route",
+            "phonetic": "/ruːt/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "路线",
+          "english": "We took the scenic route to the coast.",
+          "chinese": "我们走了风景优美的路线去海岸。",
+          "highlight": "route"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "路线",
+          "english": "The bus route passes by the school.",
+          "chinese": "这条公交路线经过学校。",
+          "highlight": "route"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "路线",
+          "english": "Please plan the route before we set off.",
+          "chinese": "出发前请规划好路线。",
+          "highlight": "route"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "音标已核实为 /ruːt/（美式/英式），符合源书读音，已规范源书中的 /ru:t/ 为准确 IPA 表示。",
+          "词义'路线'与 sourceMeanings 一致，teachingSenses 无遗漏，例句覆盖高频语境。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2001-cent",
+      "headword": "cent",
+      "phonetics": {
+        "american": "/sent/",
+        "british": "/sent/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "分",
+        "分币"
+      ],
+      "teachingSenses": [
+        "分",
+        "分币"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "cent",
+            "phonetic": "/sent/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "cent",
+            "phonetic": "/sent/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "分",
+          "english": "The pencil costs fifty cents.",
+          "chinese": "这支铅笔要五十美分。",
+          "highlight": "cents"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "分币",
+          "english": "He found a cent on the street.",
+          "chinese": "他在街上找到了一枚分币。",
+          "highlight": "cent"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "分",
+          "english": "She saved every cent for the trip.",
+          "chinese": "她为旅行攒下了每一分钱。",
+          "highlight": "cent"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "美式/英式读音均与源书 /sent/ 一致，无需修改。",
+          "teachingSenses 完整覆盖 sourceMeanings 的‘分’和‘分币’。",
+          "例句 A/B/C 分别覆盖核心义，highlight 均为句中目标词形。",
+          "例句 a 中文由‘花费’调整为更自然的‘要’。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2002-advertisement",
+      "headword": "advertisement",
+      "phonetics": {
+        "american": "/ˌædvərˈtaɪzmənt/",
+        "british": "/ədˈvɜːtɪsmənt/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "广告",
+        "启事"
+      ],
+      "teachingSenses": [
+        "广告",
+        "启事"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "advertisement",
+            "phonetic": "/ˌædvərˈtaɪzmənt/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "advertisement",
+            "phonetic": "/ədˈvɜːtɪsmənt/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "广告",
+          "english": "The advertisement for the new phone was very attractive.",
+          "chinese": "新手机的广告非常吸引人。",
+          "highlight": "advertisement"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "启事",
+          "english": "She placed an advertisement in the newspaper for a lost dog.",
+          "chinese": "她在报纸上登了一则寻狗启事。",
+          "highlight": "advertisement"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "广告",
+          "english": "Many people skip online advertisements.",
+          "chinese": "许多人跳过在线广告。",
+          "highlight": "advertisements"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "美式/ˌædvərˈtaɪzmənt/与英式/ədˈvɜːtɪsmənt/均准确，源书音标/əd'v3tismənt/对应英式，无异议。",
+          "核心义项完整覆盖sourceMeanings中的“广告”和“启事”，例句A/B/C分别对应两个义项。",
+          "例句自然、翻译准确，highlight与句中出现的目标词形一致（C句高亮为复数形式，属于词形变化，可接受）。",
+          "未发现需要修正的拼写或音标问题。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2004-dessert",
+      "headword": "dessert",
+      "phonetics": {
+        "american": "/dɪˈzɜːrt/",
+        "british": "/dɪˈzɜːt/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "甜点"
+      ],
+      "teachingSenses": [
+        "甜点"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "dessert",
+            "phonetic": "/dɪˈzɜːrt/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "dessert",
+            "phonetic": "/dɪˈzɜːt/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "甜点",
+          "english": "We had ice cream for dessert after dinner.",
+          "chinese": "晚餐后我们吃了冰淇淋作为甜点。",
+          "highlight": "dessert"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "甜点",
+          "english": "The restaurant offers a variety of desserts.",
+          "chinese": "这家餐厅提供各种甜点。",
+          "highlight": "desserts"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "甜点",
+          "english": "She made a chocolate cake for dessert.",
+          "chinese": "她做了一个巧克力蛋糕作为甜点。",
+          "highlight": "dessert"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "音标检查：美式/dɪˈzɜːrt/与英式/dɪˈzɜːt/均准确，符合dessert标准发音。",
+          "核心义'甜点'与sourceMeanings一致，未遗漏。",
+          "三个例句自然、覆盖核心义，翻译准确，高亮词均出现在句中对应位置。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2006-metal",
+      "headword": "metal",
+      "phonetics": {
+        "american": "/ˈmetl/",
+        "british": "/ˈmetl/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "金属"
+      ],
+      "teachingSenses": [
+        "金属"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "metal",
+            "phonetic": "/ˈmetl/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "metal",
+            "phonetic": "/ˈmetl/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "金属",
+          "english": "The bridge is made of metal.",
+          "chinese": "这座桥是金属制成的。",
+          "highlight": "metal"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "金属",
+          "english": "Gold is a precious metal.",
+          "chinese": "金是一种贵金属。",
+          "highlight": "metal"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "金属",
+          "english": "The metal box was very heavy.",
+          "chinese": "那个金属盒子很重。",
+          "highlight": "metal"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "IPA与音标拆分正确，英式美式一致为/ˈmetl/",
+          "核心义完整且与源书一致，示例自然覆盖金属义"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2011-illustrate",
+      "headword": "illustrate",
+      "phonetics": {
+        "american": "/ˈɪləstreɪt/",
+        "british": "/ˈɪləstreɪt/"
+      },
+      "partOfSpeech": "v.",
+      "sourceMeanings": [
+        "说明"
+      ],
+      "teachingSenses": [
+        "说明"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "illustrate",
+            "phonetic": "/ˈɪləstreɪt/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "illustrate",
+            "phonetic": "/ˈɪləstreɪt/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "说明",
+          "english": "The teacher used a diagram to illustrate the process.",
+          "chinese": "老师用图表来说明这个过程。",
+          "highlight": "illustrate"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "说明",
+          "english": "These examples illustrate the importance of practice.",
+          "chinese": "这些例子说明了练习的重要性。",
+          "highlight": "illustrate"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "说明",
+          "english": "Can you illustrate your point with a story?",
+          "chinese": "你能用一个故事来说明你的观点吗？",
+          "highlight": "illustrate"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": []
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2012-agreement",
+      "headword": "agreement",
+      "phonetics": {
+        "american": "/əˈɡriːmənt/",
+        "british": "/əˈɡriːmənt/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "同意",
+        "协议"
+      ],
+      "teachingSenses": [
+        "同意",
+        "协议"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "a",
+            "phonetic": "/ə/"
+          },
+          {
+            "spelling": "gree",
+            "phonetic": "/ˈɡriː/"
+          },
+          {
+            "spelling": "ment",
+            "phonetic": "/mənt/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "a",
+            "phonetic": "/ə/"
+          },
+          {
+            "spelling": "gree",
+            "phonetic": "/ˈɡriː/"
+          },
+          {
+            "spelling": "ment",
+            "phonetic": "/mənt/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "同意",
+          "english": "They showed their agreement by raising their hands.",
+          "chinese": "他们举手表示同意。",
+          "highlight": "agreement"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "协议",
+          "english": "The two companies signed a trade agreement.",
+          "chinese": "两家公司签署了一项贸易协议。",
+          "highlight": "agreement"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "同意",
+          "english": "Her agreement to the proposal surprised everyone.",
+          "chinese": "她对这项提议的同意使所有人感到惊讶。",
+          "highlight": "agreement"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "例句A原句更接近‘协议’义，已改为更明确体现‘同意’义的句子。",
+          "例句C中文翻译略有生硬，已调整为更自然表达。",
+          "IPA和音节拆分经核对准确，无需修改。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2018-flexible",
+      "headword": "flexible",
+      "phonetics": {
+        "american": "/ˈflɛksəbl/",
+        "british": "/ˈfleksəbl/"
+      },
+      "partOfSpeech": "adj.",
+      "sourceMeanings": [
+        "灵活的",
+        "有弹性的"
+      ],
+      "teachingSenses": [
+        "灵活的",
+        "有弹性的"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "flex",
+            "phonetic": "/flɛks/"
+          },
+          {
+            "spelling": "i",
+            "phonetic": "/ə/"
+          },
+          {
+            "spelling": "ble",
+            "phonetic": "/bl/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "flex",
+            "phonetic": "/fleks/"
+          },
+          {
+            "spelling": "i",
+            "phonetic": "/ə/"
+          },
+          {
+            "spelling": "ble",
+            "phonetic": "/bl/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "灵活的",
+          "english": "Our schedule is flexible, so we can meet anytime.",
+          "chinese": "我们的日程很灵活，所以随时可以见面。",
+          "highlight": "flexible"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "有弹性的",
+          "english": "This rubber band is very flexible and stretches easily.",
+          "chinese": "这根橡皮筋很有弹性，容易拉伸。",
+          "highlight": "flexible"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "灵活的",
+          "english": "She has a flexible approach to solving problems.",
+          "chinese": "她解决问题的方法很灵活。",
+          "highlight": "flexible"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "已修正美式音标为/ˈflɛksəbl/，并同步修正pronunciationParts中flex的美式音标为/flɛks/。",
+          "义项、例句及highlight均符合源书要求，无重复。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2020-poetry",
+      "headword": "poetry",
+      "phonetics": {
+        "american": "/ˈpoʊətri/",
+        "british": "/ˈpəʊɪtri/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "诗歌"
+      ],
+      "teachingSenses": [
+        "诗歌"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "po",
+            "phonetic": "/ˈpoʊ/"
+          },
+          {
+            "spelling": "e",
+            "phonetic": "/ə/"
+          },
+          {
+            "spelling": "try",
+            "phonetic": "/tri/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "po",
+            "phonetic": "/ˈpəʊ/"
+          },
+          {
+            "spelling": "e",
+            "phonetic": "/ɪ/"
+          },
+          {
+            "spelling": "try",
+            "phonetic": "/tri/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "诗歌",
+          "english": "She enjoys reading classical poetry in her free time.",
+          "chinese": "她喜欢在空闲时间阅读古典诗歌。",
+          "highlight": "poetry"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "诗歌",
+          "english": "The poetry of Li Bai is famous for its imagination.",
+          "chinese": "李白的诗歌以其想象力而闻名。",
+          "highlight": "poetry"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "诗歌",
+          "english": "He wrote a collection of poetry about nature.",
+          "chinese": "他写了一本关于自然的诗歌集。",
+          "highlight": "poetry"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": []
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2025-secretary",
+      "headword": "secretary",
+      "phonetics": {
+        "american": "/ˈsekrəteri/",
+        "british": "/ˈsekrətri/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "秘书"
+      ],
+      "teachingSenses": [
+        "秘书"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "sec",
+            "phonetic": "/ˈsek/"
+          },
+          {
+            "spelling": "re",
+            "phonetic": "/rə/"
+          },
+          {
+            "spelling": "ta",
+            "phonetic": "/te/"
+          },
+          {
+            "spelling": "ry",
+            "phonetic": "/ri/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "sec",
+            "phonetic": "/ˈsek/"
+          },
+          {
+            "spelling": "re",
+            "phonetic": "/rə/"
+          },
+          {
+            "spelling": "tary",
+            "phonetic": "/tri/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "秘书",
+          "english": "The secretary scheduled a meeting for the manager.",
+          "chinese": "秘书为经理安排了一次会议。",
+          "highlight": "secretary"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "秘书",
+          "english": "She works as a secretary in a law firm.",
+          "chinese": "她在一家律师事务所担任秘书。",
+          "highlight": "secretary"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "秘书",
+          "english": "Please contact the secretary for more information.",
+          "chinese": "请联系秘书获取更多信息。",
+          "highlight": "secretary"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": []
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2027-context",
+      "headword": "context",
+      "phonetics": {
+        "american": "/ˈkɑːntekst/",
+        "british": "/ˈkɒntekst/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "背景",
+        "上下文"
+      ],
+      "teachingSenses": [
+        "背景",
+        "上下文"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "con",
+            "phonetic": "/ˈkɑːn/"
+          },
+          {
+            "spelling": "text",
+            "phonetic": "/tekst/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "con",
+            "phonetic": "/ˈkɒn/"
+          },
+          {
+            "spelling": "text",
+            "phonetic": "/tekst/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "背景",
+          "english": "The historical context helps us understand the novel.",
+          "chinese": "历史背景帮助我们理解这部小说。",
+          "highlight": "context"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "上下文",
+          "english": "Guess the meaning of the word from the context.",
+          "chinese": "从上下文猜测这个词的意思。",
+          "highlight": "context"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "背景",
+          "english": "In the context of the economy, this policy is important.",
+          "chinese": "在经济背景下，这项政策很重要。",
+          "highlight": "context"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "美式和英式IPA准确，重音和元音正确；音节拆分与拼写一致。",
+          "核心义完整且未修改。",
+          "三个例句自然、准确，覆盖两个核心义。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2043-enthusiastic",
+      "headword": "enthusiastic",
+      "phonetics": {
+        "american": "/ɪnˌθuːziˈæstɪk/",
+        "british": "/ɪnˌθjuːziˈæstɪk/"
+      },
+      "partOfSpeech": "adj.",
+      "sourceMeanings": [
+        "热情的"
+      ],
+      "teachingSenses": [
+        "热情的"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "en",
+            "phonetic": "/ɪn/"
+          },
+          {
+            "spelling": "thu",
+            "phonetic": "/ˌθuː/"
+          },
+          {
+            "spelling": "si",
+            "phonetic": "/zi/"
+          },
+          {
+            "spelling": "as",
+            "phonetic": "/ˈæs/"
+          },
+          {
+            "spelling": "tic",
+            "phonetic": "/tɪk/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "en",
+            "phonetic": "/ɪn/"
+          },
+          {
+            "spelling": "thu",
+            "phonetic": "/ˌθjuː/"
+          },
+          {
+            "spelling": "si",
+            "phonetic": "/zi/"
+          },
+          {
+            "spelling": "as",
+            "phonetic": "/ˈæs/"
+          },
+          {
+            "spelling": "tic",
+            "phonetic": "/tɪk/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "热情的",
+          "english": "She is an enthusiastic learner who always asks questions.",
+          "chinese": "她是一个热情的学习者，总是提问。",
+          "highlight": "enthusiastic"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "热情的",
+          "english": "The crowd gave an enthusiastic welcome to the team.",
+          "chinese": "人群对队伍给予了热情的欢迎。",
+          "highlight": "enthusiastic"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "热情的",
+          "english": "He is enthusiastic about playing the piano.",
+          "chinese": "他对弹钢琴充满热情。",
+          "highlight": "enthusiastic"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": []
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2050-invention",
+      "headword": "invention",
+      "phonetics": {
+        "american": "/ɪnˈvɛnʃən/",
+        "british": "/ɪnˈvɛnʃən/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "发明"
+      ],
+      "teachingSenses": [
+        "发明"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "in-ven-tion",
+            "phonetic": "/ɪnˈvɛnʃən/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "in-ven-tion",
+            "phonetic": "/ɪnˈvɛnʃən/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "发明",
+          "english": "The invention of the telephone changed communication.",
+          "chinese": "电话的发明改变了通信。",
+          "highlight": "invention"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "发明",
+          "english": "Her latest invention is a solar-powered charger.",
+          "chinese": "她最新的发明是一个太阳能充电器。",
+          "highlight": "invention"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "发明",
+          "english": "Necessity is the mother of invention.",
+          "chinese": "需要是发明之母。",
+          "highlight": "invention"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": []
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2056-kindergarten",
+      "headword": "kindergarten",
+      "phonetics": {
+        "american": "/ˈkɪndərˌɡɑːrtən/",
+        "british": "/ˌkɪndəˈɡɑːtən/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "幼儿园",
+        "学前班"
+      ],
+      "teachingSenses": [
+        "幼儿园",
+        "学前班"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "kin-der-gar-ten",
+            "phonetic": "/ˈkɪndərˌɡɑːrtən/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "kin-der-gar-ten",
+            "phonetic": "/ˌkɪndəˈɡɑːtən/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "幼儿园",
+          "english": "My little sister goes to kindergarten every day.",
+          "chinese": "我的小妹妹每天去幼儿园。",
+          "highlight": "kindergarten"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "学前班",
+          "english": "Children learn basic skills in kindergarten.",
+          "chinese": "孩子们在学前班学习基本技能。",
+          "highlight": "kindergarten"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "幼儿园",
+          "english": "The kindergarten is near our house.",
+          "chinese": "幼儿园在我们家附近。",
+          "highlight": "kindergarten"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "修正英式音标重音位置：英式发音应为/ˌkɪndəˈɡɑːtən/，主重音在-gar-，而非首音节。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2066-russia",
+      "headword": "Russia",
+      "phonetics": {
+        "american": "/ˈrʌʃə/",
+        "british": "/ˈrʌʃə/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "俄罗斯"
+      ],
+      "teachingSenses": [
+        "俄罗斯"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "Rus-sia",
+            "phonetic": "/ˈrʌʃə/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "Rus-sia",
+            "phonetic": "/ˈrʌʃə/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "俄罗斯",
+          "english": "Russia is the largest country in the world.",
+          "chinese": "俄罗斯是世界上最大的国家。",
+          "highlight": "Russia"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "俄罗斯",
+          "english": "She is learning Russian because she wants to visit Russia.",
+          "chinese": "她正在学俄语，因为她想去俄罗斯。",
+          "highlight": "Russia"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "俄罗斯",
+          "english": "The capital of Russia is Moscow.",
+          "chinese": "俄罗斯的首都是莫斯科。",
+          "highlight": "Russia"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "音标、拼写拆分及例句均准确，无需修订。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2070-concentrate",
+      "headword": "concentrate",
+      "phonetics": {
+        "american": "/ˈkɑːnsənˌtreɪt/",
+        "british": "/ˈkɒnsənˌtreɪt/"
+      },
+      "partOfSpeech": "v.",
+      "sourceMeanings": [
+        "集中(注意力)"
+      ],
+      "teachingSenses": [
+        "集中(注意力)"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "con",
+            "phonetic": "/kɑːn/"
+          },
+          {
+            "spelling": "cen",
+            "phonetic": "/sən/"
+          },
+          {
+            "spelling": "trate",
+            "phonetic": "/treɪt/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "con",
+            "phonetic": "/kɒn/"
+          },
+          {
+            "spelling": "cen",
+            "phonetic": "/sən/"
+          },
+          {
+            "spelling": "trate",
+            "phonetic": "/treɪt/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "集中(注意力)",
+          "english": "I can't concentrate on my homework with all this noise.",
+          "chinese": "这么吵，我无法集中注意力做作业。",
+          "highlight": "concentrate"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "集中(注意力)",
+          "english": "Please concentrate on the teacher's explanation.",
+          "chinese": "请集中注意力听老师讲解。",
+          "highlight": "concentrate"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "集中(注意力)",
+          "english": "He concentrates hard on the exam questions.",
+          "chinese": "他努力集中注意力在考试题目上。",
+          "highlight": "concentrates"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": []
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2087-conservation",
+      "headword": "conservation",
+      "phonetics": {
+        "american": "/ˌkɑːnsərˈveɪʃən/",
+        "british": "/ˌkɒnsəˈveɪʃən/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "保护",
+        "保存",
+        "节约"
+      ],
+      "teachingSenses": [
+        "保护",
+        "保存",
+        "节约"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "con",
+            "phonetic": "/kɑːn/"
+          },
+          {
+            "spelling": "ser",
+            "phonetic": "/sər/"
+          },
+          {
+            "spelling": "va",
+            "phonetic": "/veɪ/"
+          },
+          {
+            "spelling": "tion",
+            "phonetic": "/ʃən/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "con",
+            "phonetic": "/kɒn/"
+          },
+          {
+            "spelling": "ser",
+            "phonetic": "/sə/"
+          },
+          {
+            "spelling": "va",
+            "phonetic": "/veɪ/"
+          },
+          {
+            "spelling": "tion",
+            "phonetic": "/ʃən/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "保护",
+          "english": "The conservation of wildlife is crucial for our ecosystem.",
+          "chinese": "野生动物的保护对我们的生态系统至关重要。",
+          "highlight": "conservation"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "保存",
+          "english": "This museum is famous for the conservation of ancient artifacts.",
+          "chinese": "这家博物馆以保存古代文物而闻名。",
+          "highlight": "conservation"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "节约",
+          "english": "Water conservation is a key issue in many dry regions.",
+          "chinese": "节约用水在许多干旱地区是一个关键问题。",
+          "highlight": "conservation"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": []
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2090-broadcast",
+      "headword": "broadcast",
+      "phonetics": {
+        "american": "/ˈbrɔːdkæst/",
+        "british": "/ˈbrɔːdkɑːst/"
+      },
+      "partOfSpeech": "v. n.",
+      "sourceMeanings": [
+        "广播",
+        "播送"
+      ],
+      "teachingSenses": [
+        "广播",
+        "播送"
+      ],
+      "pronunciationMode": "forms",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "broadcast",
+            "phonetic": "/ˈbrɔːdkæst/"
+          },
+          {
+            "spelling": "broadcasted",
+            "phonetic": "/ˈbrɔːdkæstɪd/"
+          },
+          {
+            "spelling": "broadcasting",
+            "phonetic": "/ˈbrɔːdkæstɪŋ/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "broadcast",
+            "phonetic": "/ˈbrɔːdkɑːst/"
+          },
+          {
+            "spelling": "broadcasted",
+            "phonetic": "/ˈbrɔːdkɑːstɪd/"
+          },
+          {
+            "spelling": "broadcasting",
+            "phonetic": "/ˈbrɔːdkɑːstɪŋ/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "广播",
+          "english": "The news was broadcast live from the scene.",
+          "chinese": "新闻从现场进行了直播。",
+          "highlight": "broadcast"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "播送",
+          "english": "The radio station broadcasts music all day long.",
+          "chinese": "这家广播电台全天播放音乐。",
+          "highlight": "broadcasts"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "广播",
+          "english": "The broadcast attracted a large audience.",
+          "chinese": "这次广播吸引了大量听众。",
+          "highlight": "broadcast"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": []
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2095-pronunciation",
+      "headword": "pronunciation",
+      "phonetics": {
+        "american": "/prəˌnʌnsiˈeɪʃən/",
+        "british": "/prəˌnʌnsiˈeɪʃən/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "发音"
+      ],
+      "teachingSenses": [
+        "发音"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "pro",
+            "phonetic": "/prə/"
+          },
+          {
+            "spelling": "nun",
+            "phonetic": "/ˌnʌn/"
+          },
+          {
+            "spelling": "ci",
+            "phonetic": "/si/"
+          },
+          {
+            "spelling": "a",
+            "phonetic": "/ˈeɪ/"
+          },
+          {
+            "spelling": "tion",
+            "phonetic": "/ʃən/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "pro",
+            "phonetic": "/prə/"
+          },
+          {
+            "spelling": "nun",
+            "phonetic": "/ˌnʌn/"
+          },
+          {
+            "spelling": "ci",
+            "phonetic": "/si/"
+          },
+          {
+            "spelling": "a",
+            "phonetic": "/ˈeɪ/"
+          },
+          {
+            "spelling": "tion",
+            "phonetic": "/ʃən/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "发音",
+          "english": "Your pronunciation of this word is excellent.",
+          "chinese": "你对这个单词的发音非常好。",
+          "highlight": "pronunciation"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "发音",
+          "english": "The teacher corrected my pronunciation in class.",
+          "chinese": "老师在课堂上纠正了我的发音。",
+          "highlight": "pronunciation"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "发音",
+          "english": "Good pronunciation is important for communication.",
+          "chinese": "良好的发音对交流很重要。",
+          "highlight": "pronunciation"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": []
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2126-dialog-ue",
+      "headword": "dialog ( ue)",
+      "phonetics": {
+        "american": "/ˈdaɪəlɔːɡ/",
+        "british": "/ˈdaɪəlɒɡ/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "对话"
+      ],
+      "teachingSenses": [
+        "对话"
+      ],
+      "pronunciationMode": "forms",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "dialog",
+            "phonetic": "/ˈdaɪəlɔːɡ/"
+          },
+          {
+            "spelling": "dialogue",
+            "phonetic": "/ˈdaɪəlɔːɡ/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "dialog",
+            "phonetic": "/ˈdaɪəlɒɡ/"
+          },
+          {
+            "spelling": "dialogue",
+            "phonetic": "/ˈdaɪəlɒɡ/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "对话",
+          "english": "The two leaders had a dialog about peace.",
+          "chinese": "两位领导人就和平进行了对话。",
+          "highlight": "dialog"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "对话",
+          "english": "The movie's dialogue is very witty.",
+          "chinese": "这部电影的对话非常诙谐。",
+          "highlight": "dialogue"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "对话",
+          "english": "We need to open a dialog with the community.",
+          "chinese": "我们需要与社区展开对话。",
+          "highlight": "dialog"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "原sourcePhonetic乱码，已按标准IPA修正美式/英式发音。",
+          "headword为并列拼写dialog(ue)，使用forms模式正确，发音parts与拼写一致。",
+          "例句覆盖两种拼写，核心义“对话”保持，翻译准确。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2147-grey-gray",
+      "headword": "grey , gray",
+      "phonetics": {
+        "american": "/ɡreɪ/",
+        "british": "/ɡreɪ/"
+      },
+      "partOfSpeech": "adj. n.",
+      "sourceMeanings": [
+        "灰色(的)"
+      ],
+      "teachingSenses": [
+        "灰色(的)"
+      ],
+      "pronunciationMode": "forms",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "grey",
+            "phonetic": "/ɡreɪ/"
+          },
+          {
+            "spelling": "gray",
+            "phonetic": "/ɡreɪ/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "grey",
+            "phonetic": "/ɡreɪ/"
+          },
+          {
+            "spelling": "gray",
+            "phonetic": "/ɡreɪ/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "灰色(的)",
+          "english": "She wore a grey coat to the party.",
+          "chinese": "她穿了一件灰色外套去参加聚会。",
+          "highlight": "grey"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "灰色(的)",
+          "english": "The sky was gray and cloudy all day.",
+          "chinese": "天空一整天都是灰蒙蒙的，布满云层。",
+          "highlight": "gray"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "灰色(的)",
+          "english": "He chose a light grey for the living room.",
+          "chinese": "他为客厅选了一种浅灰色。",
+          "highlight": "grey"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "发音与义项无误；句C改为更自然的表达以体现名词义。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2156-o-clock",
+      "headword": "o'clock",
+      "phonetics": {
+        "american": "/əˈklɑːk/",
+        "british": "/əˈklɒk/"
+      },
+      "partOfSpeech": "adv.",
+      "sourceMeanings": [
+        "……点钟"
+      ],
+      "teachingSenses": [
+        "……点钟"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "o",
+            "phonetic": "/ə/"
+          },
+          {
+            "spelling": "'clock",
+            "phonetic": "/ˈklɑːk/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "o",
+            "phonetic": "/ə/"
+          },
+          {
+            "spelling": "'clock",
+            "phonetic": "/ˈklɒk/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "……点钟",
+          "english": "I'll meet you at five o'clock.",
+          "chinese": "我五点和你见面。",
+          "highlight": "o'clock"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "……点钟",
+          "english": "The train leaves at nine o'clock in the morning.",
+          "chinese": "火车早上九点出发。",
+          "highlight": "o'clock"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "……点钟",
+          "english": "It's already ten o'clock; we should go to bed.",
+          "chinese": "已经十点了，我们该睡觉了。",
+          "highlight": "o'clock"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "将pronunciationMode由forms改为syllables，因o'clock为普通单词；按音节o和'clock拆分，IPA重音对应正确。",
+          "美式音标/əˈklɑːk/与英式音标/əˈklɒk/符合权威读音，且与源音标/ə'klok/表示的教学读音一致。",
+          "三个例句均围绕“……点钟”这一核心义，英语自然，highlight准确。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2168-ought-to",
+      "headword": "ought to",
+      "phonetics": {
+        "american": "/ˈɔːt tə/",
+        "british": "/ˈɔːt tə/"
+      },
+      "partOfSpeech": "v.",
+      "sourceMeanings": [
+        "应该"
+      ],
+      "teachingSenses": [
+        "应该"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "ought",
+            "phonetic": "/ˈɔːt/"
+          },
+          {
+            "spelling": "to",
+            "phonetic": "/tə/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "ought",
+            "phonetic": "/ˈɔːt/"
+          },
+          {
+            "spelling": "to",
+            "phonetic": "/tə/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "应该",
+          "english": "You ought to apologize to her.",
+          "chinese": "你应该向她道歉。",
+          "highlight": "ought to"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "应该",
+          "english": "We ought to finish our homework before dinner.",
+          "chinese": "我们应该在晚饭前完成作业。",
+          "highlight": "ought to"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "应该",
+          "english": "He ought to be more careful about his health.",
+          "chinese": "他应该更加注意自己的健康。",
+          "highlight": "ought to"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "将 pronunciationMode 改为 syllables，并拆分 pronunciationParts 为两个音节形式，以符合普通短语而非变形结构。",
+          "例句3的 with 改为 about，使表达更自然准确。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2284-arrangement",
+      "headword": "arrangement",
+      "phonetics": {
+        "american": "/əˈreɪndʒmənt/",
+        "british": "/əˈreɪndʒmənt/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "安排",
+        "整理"
+      ],
+      "teachingSenses": [
+        "安排",
+        "整理"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "a-rrange-ment",
+            "phonetic": "/əˈreɪndʒmənt/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "a-rrange-ment",
+            "phonetic": "/əˈreɪndʒmənt/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "安排",
+          "english": "We made arrangements for the meeting.",
+          "chinese": "我们为会议做了安排。",
+          "highlight": "arrangements"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "整理",
+          "english": "The arrangement of the books on the shelf is neat.",
+          "chinese": "书架上书的排列很整齐。",
+          "highlight": "arrangement"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "安排",
+          "english": "She is in charge of the travel arrangements.",
+          "chinese": "她负责旅行安排。",
+          "highlight": "arrangements"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": []
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2285-defence-defense",
+      "headword": "defence , defense",
+      "phonetics": {
+        "american": "/dɪˈfens/",
+        "british": "/dɪˈfens/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "防御",
+        "保护",
+        "辩"
+      ],
+      "teachingSenses": [
+        "防御",
+        "保护",
+        "辩"
+      ],
+      "pronunciationMode": "forms",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "de-fense",
+            "phonetic": "/dɪˈfens/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "de-fence",
+            "phonetic": "/dɪˈfens/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "防御",
+          "english": "The soldiers built a defence against the enemy.",
+          "chinese": "士兵们建立了防御工事来抵御敌人。",
+          "highlight": "defence"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "保护",
+          "english": "The forest is a natural defence against soil erosion.",
+          "chinese": "森林是防止水土流失的自然保护。",
+          "highlight": "defence"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "辩",
+          "english": "The lawyer presented a strong defence for his client.",
+          "chinese": "律师为他的当事人进行了有力的辩护。",
+          "highlight": "defence"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": []
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2296-underground",
+      "headword": "underground",
+      "phonetics": {
+        "american": "/ˈʌndərɡraʊnd/",
+        "british": "/ˈʌndəɡraʊnd/"
+      },
+      "partOfSpeech": "adj. adv.",
+      "sourceMeanings": [
+        "地"
+      ],
+      "teachingSenses": [
+        "地"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "un-der-ground",
+            "phonetic": "/ˈʌndərɡraʊnd/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "un-der-ground",
+            "phonetic": "/ˈʌndəɡraʊnd/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "地",
+          "english": "The underground tunnel is very long.",
+          "chinese": "地下隧道很长。",
+          "highlight": "underground"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "地",
+          "english": "They discovered an underground cave.",
+          "chinese": "他们发现了一个地下洞穴。",
+          "highlight": "underground"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "地",
+          "english": "The city has an underground railway system.",
+          "chinese": "这个城市有地下铁路系统。",
+          "highlight": "underground"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": []
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2342-b-c",
+      "headword": "B.C.",
+      "phonetics": {
+        "american": "/ˌbiːˈsiː/",
+        "british": "/ˌbiːˈsiː/"
+      },
+      "partOfSpeech": "abbr.",
+      "sourceMeanings": [
+        "公元前"
+      ],
+      "teachingSenses": [
+        "公元前"
+      ],
+      "pronunciationMode": "forms",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "B.C.",
+            "phonetic": "/ˌbiːˈsiː/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "B.C.",
+            "phonetic": "/ˌbiːˈsiː/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "公元前",
+          "english": "The ancient city was built around 2000 B.C.",
+          "chinese": "这座古城建于公元前2000年左右。",
+          "highlight": "B.C."
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "公元前",
+          "english": "Historians study events that happened before 1 B.C.",
+          "chinese": "历史学家研究公元前1年之前发生的事件。",
+          "highlight": "B.C."
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "公元前",
+          "english": "The first Olympic Games were held in 776 B.C.",
+          "chinese": "第一届奥运会于公元前776年举行。",
+          "highlight": "B.C."
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "IPA与源书一致，释义和例句准确，无需修订。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2409-guideline",
+      "headword": "guideline",
+      "phonetics": {
+        "american": "/ˈɡaɪdlaɪn/",
+        "british": "/ˈɡaɪdlaɪn/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "指导方针"
+      ],
+      "teachingSenses": [
+        "指导方针"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "guide",
+            "phonetic": "/ɡaɪd/"
+          },
+          {
+            "spelling": "line",
+            "phonetic": "/laɪn/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "guide",
+            "phonetic": "/ɡaɪd/"
+          },
+          {
+            "spelling": "line",
+            "phonetic": "/laɪn/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "指导方针",
+          "english": "The teacher provided clear guidelines for the research project.",
+          "chinese": "老师为研究项目提供了明确的指导方针。",
+          "highlight": "guidelines"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "指导方针",
+          "english": "Follow the safety guidelines when using the equipment.",
+          "chinese": "使用设备时请遵循安全指导方针。",
+          "highlight": "guidelines"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "指导方针",
+          "english": "The company issued new guidelines for employees.",
+          "chinese": "公司发布了新的员工指导方针。",
+          "highlight": "guidelines"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "无需修订，音标与音节拆分准确，例句自然且覆盖核心义。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2495-afterward-s",
+      "headword": "afterward(s)",
+      "phonetics": {
+        "american": "/ˈæftərwərd/",
+        "british": "/ˈɑːftəwəd/"
+      },
+      "partOfSpeech": "adv.",
+      "sourceMeanings": [
+        "后来",
+        "以后"
+      ],
+      "teachingSenses": [
+        "后来",
+        "以后"
+      ],
+      "pronunciationMode": "forms",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "afterward",
+            "phonetic": "/ˈæftərwərd/"
+          },
+          {
+            "spelling": "afterwards",
+            "phonetic": "/ˈæftərwərdz/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "afterward",
+            "phonetic": "/ˈɑːftəwəd/"
+          },
+          {
+            "spelling": "afterwards",
+            "phonetic": "/ˈɑːftəwədz/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "后来",
+          "english": "We had dinner and afterward went for a walk.",
+          "chinese": "我们吃了晚饭，后来去散了步。",
+          "highlight": "afterward"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "以后",
+          "english": "She studied hard and afterward became a doctor.",
+          "chinese": "她努力学习，以后成为了一名医生。",
+          "highlight": "afterward"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "后来",
+          "english": "He apologized afterward for his rude behavior.",
+          "chinese": "他后来为自己粗鲁的行为道了歉。",
+          "highlight": "afterward"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "修正美式和英式IPA为不带后缀s的afterward发音，并补充afterwards变体音标；将pronunciationMode改为forms以匹配并列词形afterward(s)。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2739-ad-a-d",
+      "headword": "AD,A.D.",
+      "phonetics": {
+        "american": "/ˌeɪˈdiː/",
+        "british": "/ˌeɪˈdiː/"
+      },
+      "partOfSpeech": "abbr.",
+      "sourceMeanings": [
+        "公元"
+      ],
+      "teachingSenses": [
+        "公元"
+      ],
+      "pronunciationMode": "forms",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "AD",
+            "phonetic": "/ˌeɪˈdiː/"
+          },
+          {
+            "spelling": "A.D.",
+            "phonetic": "/ˌeɪˈdiː/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "AD",
+            "phonetic": "/ˌeɪˈdiː/"
+          },
+          {
+            "spelling": "A.D.",
+            "phonetic": "/ˌeɪˈdiː/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "公元",
+          "english": "The Roman Empire fell in 476 AD.",
+          "chinese": "罗马帝国于公元476年灭亡。",
+          "highlight": "AD"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "公元",
+          "english": "The Great Wall was built over many centuries, starting around 220 AD.",
+          "chinese": "长城始建于公元220年左右，历经多个世纪。",
+          "highlight": "AD"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "公元",
+          "english": "The first printed book appeared in China around 868 AD.",
+          "chinese": "第一本印刷书籍大约于公元868年在中国出现。",
+          "highlight": "AD"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": [
+          "音标、词形、释义与例句均准确，无需修订。"
+        ]
+      }
+    },
+    {
+      "entryId": "gaokao-frequency-2916-china",
+      "headword": "china",
+      "phonetics": {
+        "american": "/ˈtʃaɪnə/",
+        "british": "/ˈtʃaɪnə/"
+      },
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "瓷器"
+      ],
+      "teachingSenses": [
+        "瓷器"
+      ],
+      "pronunciationMode": "syllables",
+      "pronunciationParts": {
+        "american": [
+          {
+            "spelling": "chi",
+            "phonetic": "/ˈtʃaɪ/"
+          },
+          {
+            "spelling": "na",
+            "phonetic": "/nə/"
+          }
+        ],
+        "british": [
+          {
+            "spelling": "chi",
+            "phonetic": "/ˈtʃaɪ/"
+          },
+          {
+            "spelling": "na",
+            "phonetic": "/nə/"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "candidateId": "a",
+          "teachingSense": "瓷器",
+          "english": "She bought a beautiful piece of china at the market.",
+          "chinese": "她在市场上买了一件漂亮的瓷器。",
+          "highlight": "china"
+        },
+        {
+          "candidateId": "b",
+          "teachingSense": "瓷器",
+          "english": "The museum has a collection of ancient china.",
+          "chinese": "博物馆收藏了一批古代瓷器。",
+          "highlight": "china"
+        },
+        {
+          "candidateId": "c",
+          "teachingSense": "瓷器",
+          "english": "Be careful with the china; it's fragile.",
+          "chinese": "小心这些瓷器，它们很易碎。",
+          "highlight": "china"
+        }
+      ],
+      "independentReview": {
+        "reviewer": "deepseek-reasoner",
+        "status": "approved",
+        "notes": []
+      }
+    }
+  ]
+}

@@ -91,6 +91,9 @@ their established vocabulary, and flag conflicts before editing.
 - Remote: `github` (not `origin`).
 - `app/` uses pnpm; `server/` uses npm.
 - Fresh worktree setup: `bash scripts/setup-worktree.sh`.
+- `scripts/dev.sh` binds server-side vocabulary PDF rendering to the matching
+  local `PORT`; standalone API starts for print QA must set
+  `QUESTION_BANK_PUBLIC_ORIGIN` to that app origin explicitly.
 - Commit messages are one line: scope plus one clear sentence.
 
 Focused supporting guidance lives in `docs/agents/testing-cadence.md`,

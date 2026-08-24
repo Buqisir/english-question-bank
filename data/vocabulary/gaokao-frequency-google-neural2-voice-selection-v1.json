@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "gaokao-frequency-google-neural2-voice-selection-v1",
+  "status": "owner_approved",
+  "decidedAt": "2026-08-11",
+  "provider": "Google Cloud Text-to-Speech",
+  "voiceFamily": "Neural2",
+  "requestGranularity": "one_entry_per_request",
+  "audioConfig": {
+    "audioEncoding": "MP3",
+    "sampleRateHertz": 24000,
+    "speakingRate": 0.92
+  },
+  "american": {
+    "voice": "en-US-Neural2-C",
+    "languageCode": "en-US",
+    "ssmlGender": "FEMALE",
+    "version": "google-neural2-us-c-v1",
+    "ownerVerdict": "approved",
+    "pilotDirectory": ".scratch/google-neural2-pilot-20260811/individual/us-c",
+    "pilotSampleSha256ByText": {
+      "author": "1626d0db440723502bc481754a49022964cb67e4b452e0c060572b03436e1656",
+      "live": "ae3da4623f809997b1a86b16b3fe92280066973ae4d20c8d9a9f63dcebb659cd",
+      "data": "a676daf8e6c519cae8ce33564898ed1a7555bd7a6980db402d4ee1ffb90d2b78",
+      "route": "b7673e614db3043687930fa1031e5726356f1bcb17765992046a225d9dc065c6",
+      "advertisement": "e4ccf89ac93f10ece56af57ce23c11d08be87b0751de0cb888fb67c9468347fa",
+      "complex": "5c6369f9585bc0a1d7b114893020f6616e63e631abfa9fa7dea27a342caddce8",
+      "economic": "5d520379220171c50f14cff5a44993654d9c49bfb0f5ba1f543b2daa4e45654b",
+      "graduate": "767bef28f956d77806219b22412db95c92ece342a32beff7de20eee742ba1850",
+      "progress": "25d734ef49bae7b9edb0ba77452170537c773084f9265048580abf84574e83d0",
+      "secretary": "93685c3b243b30f5e988c03c751b4bf541b2b0a69150130b5e99f2da21fa14f3",
+      "concentrate": "8f1f51dcc5ecffe0162d6348d73c8beb4850a4583c88e59cf41a93bb80d379bd",
+      "pronunciation": "ed28d36108f9999206b5c3ec6b87e6abdd5b2fcc7cf6f708bed68bc1ffda1ffe"
+    }
+  },
+  "british": {
+    "voice": "en-GB-Neural2-D",
+    "languageCode": "en-GB",
+    "ssmlGender": "MALE",
+    "version": "google-neural2-gb-d-v1",
+    "ownerVerdict": "approved",
+    "pilotDirectory": ".scratch/google-neural2-pilot-20260811/individual/gb-d",
+    "pilotSampleSha256ByText": {
+      "author": "31553551bbb3eec39c51105cd84d9654e120696f584ee78ac90b6b248f024df5",
+      "live": "ad78b1eb171a51c44537e80c1a742ca630fc54dcc896e1a13a50d4cf5c779a4d",
+      "route": "781acdde92c845a893f283b7e9f94ba4eaf38875644f7eba0e53291ec857c9e8",
+      "advertisement": "1c6c212d6f3618029dbbbc587ff84a5e772cab57752a3eaab08ef20af193ded7",
+      "pronunciation": "f0d9c63377cb48b203da68facdccf662731d0992da6860e91274a731b2c085f7"
+    }
+  },
+  "qaPolicy": {
+    "unit": "one_word_one_accent_one_file",
+    "productionStatus": "generated_audio_requires_owner_word_qa",
+    "continuousPlaybackForQa": false
+  }
+}

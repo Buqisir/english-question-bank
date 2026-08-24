@@ -37,10 +37,13 @@ run "cd $REPO && sudo runuser -u eqb -- pnpm -C app install --frozen-lockfile &&
 echo "== 3/5 build =="
 run "cd $REPO && sudo runuser -u eqb -- pnpm -C app build" | tail -3
 
-echo "== 4/5 restart + health =="
+echo "== 4/6 canonical publication readiness =="
+run "cd $REPO && sudo runuser -u eqb -- node scripts/backfill-production-canonical-publications.mjs --runtime-only"
+
+echo "== 5/6 restart + health =="
 run "sudo systemctl restart eqb && sleep 3 && systemctl is-active eqb caddy && curl -s http://127.0.0.1:8787/api/health"
 
-echo "== 5/5 public check (local line to HK can flap; 3 tries, non-fatal) =="
+echo "== 6/6 public check (local line to HK can flap; 3 tries, non-fatal) =="
 ok=""
 for i in 1 2 3; do
   code=$(curl -s -o /dev/null -w "%{http_code}" --connect-timeout 15 https://eqbank.cc/ || true)

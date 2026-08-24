@@ -1,0 +1,720 @@
+{
+  "schemaVersion": "gaokao-frequency-headword-overrides-v1",
+  "entries": [
+    {
+      "sourceOrder": 2,
+      "headword": "be",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 5,
+      "headword": "of",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 7,
+      "headword": "in",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 11,
+      "headword": "for",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 13,
+      "headword": "do",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 16,
+      "headword": "on",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 27,
+      "headword": "we",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 73,
+      "headword": "use",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 104,
+      "headword": "book",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 198,
+      "headword": "interest",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 212,
+      "headword": "eat",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 350,
+      "headword": "cause",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 481,
+      "headword": "paint",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 675,
+      "headword": "average",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 684,
+      "headword": "medium",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 711,
+      "headword": "poor",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 766,
+      "headword": "demand",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 817,
+      "headword": "classroom",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 829,
+      "headword": "lack",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 873,
+      "headword": "wrong",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 877,
+      "headword": "conduct",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 917,
+      "headword": "appeal",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 928,
+      "headword": "coach",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 998,
+      "headword": "classmate",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1011,
+      "headword": "Ms",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1019,
+      "headword": "cool",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1024,
+      "headword": "admit",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1025,
+      "headword": "audience",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1035,
+      "headword": "passenger",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1053,
+      "headword": "café, cafe",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1060,
+      "headword": "cry",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1064,
+      "headword": "bed",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1066,
+      "headword": "balance",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1088,
+      "headword": "cross",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1093,
+      "headword": "vegetable",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1118,
+      "headword": "youth",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1132,
+      "headword": "issue",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1232,
+      "headword": "progress",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1233,
+      "headword": "beauty",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1273,
+      "headword": "grateful",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1276,
+      "headword": "evidence",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1286,
+      "headword": "angry",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1343,
+      "headword": "purchase",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1350,
+      "headword": "trade",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1368,
+      "headword": "quit",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1375,
+      "headword": "hungry",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1378,
+      "headword": "manner",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1379,
+      "headword": "mix",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1383,
+      "headword": "Thursday",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1421,
+      "headword": "previous",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1424,
+      "headword": "indicate",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1425,
+      "headword": "western",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1458,
+      "headword": "stadium",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1463,
+      "headword": "treatment",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1464,
+      "headword": "unusual",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1495,
+      "headword": "warning",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1508,
+      "headword": "route",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1523,
+      "headword": "recipe",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1547,
+      "headword": "entry",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1559,
+      "headword": "boss",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1605,
+      "headword": "wine",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1647,
+      "headword": "private",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1688,
+      "headword": "dining",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1690,
+      "headword": "trick",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1697,
+      "headword": "gallery",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1698,
+      "headword": "zoo",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1717,
+      "headword": "negative",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1732,
+      "headword": "shade",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1752,
+      "headword": "billion",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1794,
+      "headword": "moral",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1795,
+      "headword": "everyday",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1804,
+      "headword": "expose",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1813,
+      "headword": "fortunately",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1861,
+      "headword": "narrow",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1906,
+      "headword": "custom",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1915,
+      "headword": "sand",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1921,
+      "headword": "Germany",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1981,
+      "headword": "purple",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1984,
+      "headword": "folk",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2015,
+      "headword": "candidate",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2025,
+      "headword": "secretary",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2030,
+      "headword": "passport",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2049,
+      "headword": "quantity",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2060,
+      "headword": "authority",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2090,
+      "headword": "broadcast",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2098,
+      "headword": "demonstrate",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2101,
+      "headword": "airline",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2146,
+      "headword": "elder",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2188,
+      "headword": "tolerate",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2191,
+      "headword": "strategy",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2263,
+      "headword": "toast",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2269,
+      "headword": "priority",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2270,
+      "headword": "protein",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2273,
+      "headword": "dynasty",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2295,
+      "headword": "loan",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2343,
+      "headword": "crisis",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2356,
+      "headword": "province",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2371,
+      "headword": "globe",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2378,
+      "headword": "boundary",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2407,
+      "headword": "pancake",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2409,
+      "headword": "guideline",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2426,
+      "headword": "wealth",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2434,
+      "headword": "sponsor",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2443,
+      "headword": "ultimately",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2469,
+      "headword": "Russian",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2511,
+      "headword": "pudding",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2512,
+      "headword": "barely",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2556,
+      "headword": "deadline",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2613,
+      "headword": "clinic",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2675,
+      "headword": "cotton",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2713,
+      "headword": "dragon",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2717,
+      "headword": "arise",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2750,
+      "headword": "shadow",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2829,
+      "headword": "chemist",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2852,
+      "headword": "eighty",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2864,
+      "headword": "watermelon",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2876,
+      "headword": "chorus",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2885,
+      "headword": "logical",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2889,
+      "headword": "navy",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2892,
+      "headword": "rating",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2897,
+      "headword": "suburb",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2975,
+      "headword": "noble",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2976,
+      "headword": "outline",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 958,
+      "headword": "impact",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 984,
+      "headword": "May",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1511,
+      "headword": "ambitious",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1561,
+      "headword": "Miss",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1749,
+      "headword": "income",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1930,
+      "headword": "draft",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 1979,
+      "headword": "ball",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2156,
+      "headword": "o'clock",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2275,
+      "headword": "launch",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2495,
+      "headword": "afterward(s)",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2522,
+      "headword": "county",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2580,
+      "headword": "brick",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2608,
+      "headword": "waist",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2657,
+      "headword": "march",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2664,
+      "headword": "telescope",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2834,
+      "headword": "garlic",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2863,
+      "headword": "volleyball",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2916,
+      "headword": "china",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2920,
+      "headword": "justice",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    },
+    {
+      "sourceOrder": 2974,
+      "headword": "nephew",
+      "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+    }
+  ]
+}

@@ -1,0 +1,636 @@
+{
+  "schemaVersion": "gaokao-frequency-visual-concepts-v1",
+  "model": "deepseek-chat",
+  "entries": [
+    {
+      "entryId": "gaokao-frequency-0001-the",
+      "headword": "the",
+      "concept": "pointing at a specific object",
+      "searchQuery": "pointing finger",
+      "alt": "一只手食指指向一个特定的物体，表示特指某个事物"
+    },
+    {
+      "entryId": "gaokao-frequency-0004-a-an",
+      "headword": "a,an",
+      "concept": "one apple",
+      "searchQuery": "one apple",
+      "alt": "一个苹果，表示数量一"
+    },
+    {
+      "entryId": "gaokao-frequency-0026-as",
+      "headword": "as",
+      "concept": "role as a teacher",
+      "searchQuery": "teacher role",
+      "alt": "一个人戴着眼镜站在黑板前，扮演老师的角色，表示作为"
+    },
+    {
+      "entryId": "gaokao-frequency-0031-about",
+      "headword": "about",
+      "concept": "talking about a topic",
+      "searchQuery": "speech bubble",
+      "alt": "两个人对话，头顶有对话气泡，表示关于某个话题"
+    },
+    {
+      "entryId": "gaokao-frequency-0074-may",
+      "headword": "may",
+      "concept": "person asking permission",
+      "searchQuery": "raising hand",
+      "alt": "一个人举手提问，表示请求允许，可能"
+    },
+    {
+      "entryId": "gaokao-frequency-0111-author",
+      "headword": "author",
+      "concept": "person writing a book",
+      "searchQuery": "writing book",
+      "alt": "一个人坐在书桌前写作，桌上放着一本书，表示作者"
+    },
+    {
+      "entryId": "gaokao-frequency-0123-live",
+      "headword": "live",
+      "concept": "house with heart",
+      "searchQuery": "house heart",
+      "alt": "一栋房子上有一颗心，表示居住和生活"
+    },
+    {
+      "entryId": "gaokao-frequency-0133-paragraph",
+      "headword": "paragraph",
+      "concept": "indented text block",
+      "searchQuery": "indent text",
+      "alt": "一段文字开头缩进，表示段落"
+    },
+    {
+      "entryId": "gaokao-frequency-0265-improve",
+      "headword": "improve",
+      "concept": "graph going up",
+      "searchQuery": "upward graph",
+      "alt": "一个上升的折线图，表示改进和进步"
+    },
+    {
+      "entryId": "gaokao-frequency-0317-challenge",
+      "headword": "challenge",
+      "concept": "person climbing mountain",
+      "searchQuery": "climbing mountain",
+      "alt": "一个人攀登陡峭的山峰，表示挑战"
+    },
+    {
+      "entryId": "gaokao-frequency-0360-design",
+      "headword": "design",
+      "concept": "drawing blueprint",
+      "searchQuery": "blueprint drawing",
+      "alt": "一张设计图纸和铅笔，表示设计"
+    },
+    {
+      "entryId": "gaokao-frequency-0392-comprehension",
+      "headword": "comprehension",
+      "concept": "brain with lightbulb",
+      "searchQuery": "brain lightbulb",
+      "alt": "一个大脑旁边有灯泡，表示理解"
+    },
+    {
+      "entryId": "gaokao-frequency-0393-china",
+      "headword": "China",
+      "concept": "Great Wall",
+      "searchQuery": "Great Wall",
+      "alt": "中国的长城，代表中国"
+    },
+    {
+      "entryId": "gaokao-frequency-0451-reward",
+      "headword": "reward",
+      "concept": "trophy and medal",
+      "searchQuery": "trophy medal",
+      "alt": "一个奖杯和奖牌，表示奖励和回报"
+    },
+    {
+      "entryId": "gaokao-frequency-0468-p-m-pm",
+      "headword": "p.m.,pm",
+      "concept": "clock showing afternoon",
+      "searchQuery": "clock afternoon",
+      "alt": "一个时钟指向下午时间，表示下午"
+    },
+    {
+      "entryId": "gaokao-frequency-0491-data",
+      "headword": "data",
+      "concept": "a computer screen showing charts and numbers",
+      "searchQuery": "computer data charts",
+      "alt": "一台电脑屏幕上显示着柱状图和数字，表示数据信息。"
+    },
+    {
+      "entryId": "gaokao-frequency-0498-miss",
+      "headword": "miss",
+      "concept": "a person waving goodbye to a departing bus",
+      "searchQuery": "miss bus waving",
+      "alt": "一个人向驶离的公交车挥手告别，表情遗憾，表示错过。"
+    },
+    {
+      "entryId": "gaokao-frequency-0529-plastic",
+      "headword": "plastic",
+      "concept": "a plastic bottle and bag",
+      "searchQuery": "plastic bottle bag",
+      "alt": "一个塑料瓶和一个塑料袋，展示塑料材质。"
+    },
+    {
+      "entryId": "gaokao-frequency-0557-performance",
+      "headword": "performance",
+      "concept": "a singer performing on stage with lights",
+      "searchQuery": "singer stage performance",
+      "alt": "歌手在舞台上唱歌，灯光闪耀，表示表演。"
+    },
+    {
+      "entryId": "gaokao-frequency-0564-species",
+      "headword": "species",
+      "concept": "a group of different animals like a cat, dog, bird",
+      "searchQuery": "different animal species",
+      "alt": "猫、狗、鸟等不同动物在一起，表示物种多样性。"
+    },
+    {
+      "entryId": "gaokao-frequency-0587-colo-u-r",
+      "headword": "colo (u )r",
+      "concept": "a paint palette with colorful paints",
+      "searchQuery": "paint palette colors",
+      "alt": "一个调色板上有红、黄、蓝等彩色颜料，表示颜色。"
+    },
+    {
+      "entryId": "gaokao-frequency-0593-opportunity",
+      "headword": "opportunity",
+      "concept": "an open door with light shining through",
+      "searchQuery": "open door opportunity",
+      "alt": "一扇打开的门，门缝透出光芒，象征机会来临。"
+    },
+    {
+      "entryId": "gaokao-frequency-0598-professor",
+      "headword": "professor",
+      "concept": "a professor in a suit teaching at a university podium",
+      "searchQuery": "professor teaching podium",
+      "alt": "一位穿西装的教授站在大学讲台上讲课，表示教授。"
+    },
+    {
+      "entryId": "gaokao-frequency-0623-involve",
+      "headword": "involve",
+      "concept": "people joining hands in a circle",
+      "searchQuery": "people joining hands",
+      "alt": "一群人围成圈手拉手，表示参与和涉及。"
+    },
+    {
+      "entryId": "gaokao-frequency-0643-career",
+      "headword": "career",
+      "concept": "a ladder leaning against a briefcase",
+      "searchQuery": "career ladder briefcase",
+      "alt": "一个公文包旁靠着一把梯子，象征职业发展阶梯。"
+    },
+    {
+      "entryId": "gaokao-frequency-0819-responsibility",
+      "headword": "responsibility",
+      "concept": "a person carrying a heavy backpack",
+      "searchQuery": "carrying heavy backpack",
+      "alt": "一个人背着沉重的背包，表示承担责任。"
+    },
+    {
+      "entryId": "gaokao-frequency-0862-novel",
+      "headword": "novel",
+      "concept": "an open book with a bookmark",
+      "searchQuery": "open book novel",
+      "alt": "一本打开的书，夹着书签，表示小说阅读。"
+    },
+    {
+      "entryId": "gaokao-frequency-0909-pack",
+      "headword": "pack",
+      "concept": "a backpack being packed with items",
+      "searchQuery": "packing backpack",
+      "alt": "一个人往背包里装物品，表示打包。"
+    },
+    {
+      "entryId": "gaokao-frequency-0978-us-u-s",
+      "headword": "US,U.S.",
+      "concept": "the Statue of Liberty and American flag",
+      "searchQuery": "Statue of Liberty flag",
+      "alt": "自由女神像和美国国旗，代表美国。"
+    },
+    {
+      "entryId": "gaokao-frequency-1016-favo-u-rite",
+      "headword": "favo(u)rite",
+      "concept": "a heart shape around a favorite toy",
+      "searchQuery": "heart favorite toy",
+      "alt": "一个心形图案环绕着一个玩具，表示最喜爱之物。"
+    },
+    {
+      "entryId": "gaokao-frequency-1081-concept",
+      "headword": "concept",
+      "concept": "a lightbulb above a head",
+      "searchQuery": "lightbulb idea",
+      "alt": "一个人头顶上方亮起一个灯泡，表示突然想到一个概念或主意。"
+    },
+    {
+      "entryId": "gaokao-frequency-1082-black",
+      "headword": "black",
+      "concept": "a black cat",
+      "searchQuery": "black cat",
+      "alt": "一只全身黑色的猫，直观展示黑色这一颜色。"
+    },
+    {
+      "entryId": "gaokao-frequency-1084-contact",
+      "headword": "contact",
+      "concept": "two hands shaking",
+      "searchQuery": "handshake",
+      "alt": "两只手紧紧握在一起，表示人与人之间的接触或联系。"
+    },
+    {
+      "entryId": "gaokao-frequency-1086-cheese",
+      "headword": "cheese",
+      "concept": "a piece of cheese",
+      "searchQuery": "cheese",
+      "alt": "一块黄色的三角形奶酪，上面有孔洞，代表奶酪。"
+    },
+    {
+      "entryId": "gaokao-frequency-1090-account",
+      "headword": "account",
+      "concept": "a person telling a story",
+      "searchQuery": "storytelling",
+      "alt": "一个人正在绘声绘色地讲故事，表示叙述或描写。"
+    },
+    {
+      "entryId": "gaokao-frequency-1094-complex",
+      "headword": "complex",
+      "concept": "a tangled knot",
+      "searchQuery": "tangled knot",
+      "alt": "一团乱麻般的绳结，表示复杂难解。"
+    },
+    {
+      "entryId": "gaokao-frequency-1095-afraid",
+      "headword": "afraid",
+      "concept": "a scared person",
+      "searchQuery": "scared person",
+      "alt": "一个人瞪大眼睛、双手捂脸，表现出害怕的样子。"
+    },
+    {
+      "entryId": "gaokao-frequency-1098-personality",
+      "headword": "personality",
+      "concept": "a colorful jigsaw puzzle",
+      "searchQuery": "jigsaw puzzle",
+      "alt": "一个由不同颜色拼块组成的拼图，代表一个人的性格由多种特质构成。"
+    },
+    {
+      "entryId": "gaokao-frequency-1101-firm",
+      "headword": "firm",
+      "concept": "a solid rock",
+      "searchQuery": "solid rock",
+      "alt": "一块坚固的岩石，表示结实、牢固。"
+    },
+    {
+      "entryId": "gaokao-frequency-1106-britain",
+      "headword": "Britain",
+      "concept": "Big Ben and a red bus",
+      "searchQuery": "Big Ben",
+      "alt": "英国伦敦的大本钟和红色双层巴士，代表英国。"
+    },
+    {
+      "entryId": "gaokao-frequency-1107-economic",
+      "headword": "economic",
+      "concept": "a piggy bank with coins",
+      "searchQuery": "piggy bank",
+      "alt": "一个存钱罐和几枚硬币，表示与经济、省钱相关。"
+    },
+    {
+      "entryId": "gaokao-frequency-1110-theory",
+      "headword": "theory",
+      "concept": "a scientist with a formula",
+      "searchQuery": "scientist formula",
+      "alt": "一位科学家在黑板上写下公式，表示理论。"
+    },
+    {
+      "entryId": "gaokao-frequency-1112-transport",
+      "headword": "transport",
+      "concept": "a truck carrying goods",
+      "searchQuery": "truck goods",
+      "alt": "一辆卡车装载着货物，表示运输。"
+    },
+    {
+      "entryId": "gaokao-frequency-1113-graduate",
+      "headword": "graduate",
+      "concept": "a graduate in cap and gown",
+      "searchQuery": "graduation cap",
+      "alt": "一位戴着学士帽、穿着学位服的毕业生，表示毕业。"
+    },
+    {
+      "entryId": "gaokao-frequency-1116-immediately",
+      "headword": "immediately",
+      "concept": "a clock with a lightning bolt",
+      "searchQuery": "clock lightning",
+      "alt": "一个时钟旁边有闪电符号，表示立即、马上。"
+    },
+    {
+      "entryId": "gaokao-frequency-1118-youth",
+      "headword": "youth",
+      "concept": "young people playing basketball",
+      "searchQuery": "young people",
+      "alt": "一群年轻人正在打篮球，体现青春活力"
+    },
+    {
+      "entryId": "gaokao-frequency-1130-application",
+      "headword": "application",
+      "concept": "person filling out a form",
+      "searchQuery": "filling form",
+      "alt": "一个人正在填写申请表，表达申请之意"
+    },
+    {
+      "entryId": "gaokao-frequency-1189-monday",
+      "headword": "Monday",
+      "concept": "calendar showing Monday",
+      "searchQuery": "calendar Monday",
+      "alt": "日历上星期一被圈出，表示一周的开始"
+    },
+    {
+      "entryId": "gaokao-frequency-1194-neighbourhood",
+      "headword": "neighbourhood",
+      "concept": "houses on a street",
+      "searchQuery": "houses street",
+      "alt": "街道两旁排列着房屋，展现社区邻里环境"
+    },
+    {
+      "entryId": "gaokao-frequency-1203-uk-u-k",
+      "headword": "UK, U. K.",
+      "concept": "map of United Kingdom",
+      "searchQuery": "UK map",
+      "alt": "英国地图轮廓，代表英国"
+    },
+    {
+      "entryId": "gaokao-frequency-1232-progress",
+      "headword": "progress",
+      "concept": "arrow going upward on a chart",
+      "searchQuery": "upward arrow",
+      "alt": "图表中箭头向上，表示进步和进展"
+    },
+    {
+      "entryId": "gaokao-frequency-1233-beauty",
+      "headword": "beauty",
+      "concept": "flower blooming",
+      "searchQuery": "flower",
+      "alt": "一朵盛开的花，象征美丽"
+    },
+    {
+      "entryId": "gaokao-frequency-1242-appointment",
+      "headword": "appointment",
+      "concept": "handshake between two people",
+      "searchQuery": "handshake",
+      "alt": "两人握手，表示约定或任命"
+    },
+    {
+      "entryId": "gaokao-frequency-1273-grateful",
+      "headword": "grateful",
+      "concept": "person giving thanks with hands together",
+      "searchQuery": "thanks gesture",
+      "alt": "一个人双手合十表示感谢，表达感激之情"
+    },
+    {
+      "entryId": "gaokao-frequency-1286-angry",
+      "headword": "angry",
+      "concept": "angry face with red color",
+      "searchQuery": "angry face",
+      "alt": "一张愤怒的脸，眉头紧锁，表达生气"
+    },
+    {
+      "entryId": "gaokao-frequency-1296-display",
+      "headword": "display",
+      "concept": "items on a shelf in a store",
+      "searchQuery": "shelf items",
+      "alt": "商店货架上陈列着商品，展示物品"
+    },
+    {
+      "entryId": "gaokao-frequency-1343-purchase",
+      "headword": "purchase",
+      "concept": "shopping cart with groceries",
+      "searchQuery": "shopping cart",
+      "alt": "购物车装满商品，表示购买行为"
+    },
+    {
+      "entryId": "gaokao-frequency-1368-quit",
+      "headword": "quit",
+      "concept": "person leaving office with box",
+      "searchQuery": "leaving office",
+      "alt": "一个人抱着箱子离开办公室，表示离职"
+    },
+    {
+      "entryId": "gaokao-frequency-1378-manner",
+      "headword": "manner",
+      "concept": "person holding door for another",
+      "searchQuery": "holding door",
+      "alt": "一个人为他人扶门，体现礼貌的举止"
+    },
+    {
+      "entryId": "gaokao-frequency-1508-route",
+      "headword": "route",
+      "concept": "map with marked path",
+      "searchQuery": "map path",
+      "alt": "地图上标出的路线，表示路径"
+    },
+    {
+      "entryId": "gaokao-frequency-2001-cent",
+      "headword": "cent",
+      "concept": "a coin of small value",
+      "searchQuery": "coin",
+      "alt": "一枚硬币，表示一分钱，体现cent作为货币单位的概念。"
+    },
+    {
+      "entryId": "gaokao-frequency-2002-advertisement",
+      "headword": "advertisement",
+      "concept": "a poster promoting a product",
+      "searchQuery": "poster",
+      "alt": "一张海报，上面有商品图片和文字，表示广告。"
+    },
+    {
+      "entryId": "gaokao-frequency-2004-dessert",
+      "headword": "dessert",
+      "concept": "a sweet dish after a meal",
+      "searchQuery": "cake",
+      "alt": "一块蛋糕，表示甜点，体现dessert作为餐后甜食的概念。"
+    },
+    {
+      "entryId": "gaokao-frequency-2006-metal",
+      "headword": "metal",
+      "concept": "a hard shiny material",
+      "searchQuery": "iron bar",
+      "alt": "一根铁棒，表面有光泽，表示金属。"
+    },
+    {
+      "entryId": "gaokao-frequency-2011-illustrate",
+      "headword": "illustrate",
+      "concept": "a teacher drawing a diagram to explain",
+      "searchQuery": "drawing",
+      "alt": "一位老师在黑板上画图，表示说明、解释。"
+    },
+    {
+      "entryId": "gaokao-frequency-2012-agreement",
+      "headword": "agreement",
+      "concept": "two people shaking hands",
+      "searchQuery": "handshake",
+      "alt": "两个人握手，表示达成协议或同意。"
+    },
+    {
+      "entryId": "gaokao-frequency-2018-flexible",
+      "headword": "flexible",
+      "concept": "a bending rubber band",
+      "searchQuery": "rubber band",
+      "alt": "一根弯曲的橡皮筋，表示有弹性、灵活。"
+    },
+    {
+      "entryId": "gaokao-frequency-2020-poetry",
+      "headword": "poetry",
+      "concept": "a book of poems",
+      "searchQuery": "book",
+      "alt": "一本诗集，封面有诗歌字样，表示诗歌。"
+    },
+    {
+      "entryId": "gaokao-frequency-2025-secretary",
+      "headword": "secretary",
+      "concept": "a person at a desk typing",
+      "searchQuery": "typing",
+      "alt": "一位秘书在办公桌前打字，表示秘书职业。"
+    },
+    {
+      "entryId": "gaokao-frequency-2027-context",
+      "headword": "context",
+      "concept": "a sentence with surrounding words",
+      "searchQuery": "sentence",
+      "alt": "一个句子，周围有上下文单词，表示语境、上下文。"
+    },
+    {
+      "entryId": "gaokao-frequency-2043-enthusiastic",
+      "headword": "enthusiastic",
+      "concept": "a fan cheering with excitement",
+      "searchQuery": "cheering",
+      "alt": "一位球迷兴奋地欢呼，表示热情的。"
+    },
+    {
+      "entryId": "gaokao-frequency-2050-invention",
+      "headword": "invention",
+      "concept": "a light bulb with a gear",
+      "searchQuery": "light bulb",
+      "alt": "一个灯泡和齿轮，表示发明创造。"
+    },
+    {
+      "entryId": "gaokao-frequency-2056-kindergarten",
+      "headword": "kindergarten",
+      "concept": "children playing in a classroom",
+      "searchQuery": "children playing",
+      "alt": "孩子们在教室里玩耍，表示幼儿园。"
+    },
+    {
+      "entryId": "gaokao-frequency-2066-russia",
+      "headword": "Russia",
+      "concept": "a map of Russia with flag",
+      "searchQuery": "map",
+      "alt": "一张俄罗斯地图，带有国旗，表示俄罗斯。"
+    },
+    {
+      "entryId": "gaokao-frequency-2070-concentrate",
+      "headword": "concentrate",
+      "concept": "a student focusing on a book",
+      "searchQuery": "studying",
+      "alt": "一位学生专注地看书，表示集中注意力。"
+    },
+    {
+      "entryId": "gaokao-frequency-2087-conservation",
+      "headword": "conservation",
+      "concept": "a person turning off a water tap to save water",
+      "searchQuery": "turning off tap",
+      "alt": "一个人正在关水龙头，表示节约用水，体现保护资源的概念"
+    },
+    {
+      "entryId": "gaokao-frequency-2090-broadcast",
+      "headword": "broadcast",
+      "concept": "a radio microphone with sound waves",
+      "searchQuery": "radio microphone",
+      "alt": "一个广播麦克风，旁边有声音波纹，表示正在广播或播送"
+    },
+    {
+      "entryId": "gaokao-frequency-2095-pronunciation",
+      "headword": "pronunciation",
+      "concept": "a mouth with a speech bubble showing letters",
+      "searchQuery": "mouth speech bubble",
+      "alt": "一张嘴旁边有一个气泡，里面显示字母，表示发音"
+    },
+    {
+      "entryId": "gaokao-frequency-2126-dialog-ue",
+      "headword": "dialog ( ue)",
+      "concept": "two people talking with speech bubbles",
+      "searchQuery": "two people talking",
+      "alt": "两个人面对面交谈，各自有对话气泡，表示对话"
+    },
+    {
+      "entryId": "gaokao-frequency-2147-grey-gray",
+      "headword": "grey , gray",
+      "concept": "a grey paint swatch",
+      "searchQuery": "grey paint swatch",
+      "alt": "一个灰色的油漆色卡，表示灰色"
+    },
+    {
+      "entryId": "gaokao-frequency-2156-o-clock",
+      "headword": "o'clock",
+      "concept": "a clock face showing 12 o'clock",
+      "searchQuery": "clock",
+      "alt": "一个圆形钟表，指针指向12点，表示整点时间，表达“点钟”的含义。"
+    },
+    {
+      "entryId": "gaokao-frequency-2168-ought-to",
+      "headword": "ought to",
+      "concept": "a person pointing at a sign saying 'should'",
+      "searchQuery": "pointing sign",
+      "alt": "一个人手指向一块写着“应该”的牌子，表达“应当”的劝告或义务。"
+    },
+    {
+      "entryId": "gaokao-frequency-2284-arrangement",
+      "headword": "arrangement",
+      "concept": "flowers arranged in a vase",
+      "searchQuery": "flower vase",
+      "alt": "一个花瓶里插着整齐排列的鲜花，表达“安排”或“整理”后的有序状态。"
+    },
+    {
+      "entryId": "gaokao-frequency-2285-defence-defense",
+      "headword": "defence , defense",
+      "concept": "a shield blocking an arrow",
+      "searchQuery": "shield arrow",
+      "alt": "一面盾牌挡住一支飞来的箭，表达“防御”或“保护”的动作。"
+    },
+    {
+      "entryId": "gaokao-frequency-2296-underground",
+      "headword": "underground",
+      "concept": "a subway train in a tunnel",
+      "searchQuery": "subway tunnel",
+      "alt": "一列地铁行驶在隧道中，表达“地下的”或“地铁”的含义。"
+    },
+    {
+      "entryId": "gaokao-frequency-2342-b-c",
+      "headword": "B.C.",
+      "concept": "ancient Roman colosseum with a calendar showing BC",
+      "searchQuery": "colosseum",
+      "alt": "画面中有一座古罗马斗兽场，旁边有一本翻开的日历，日历上标注着“BC”字样，表示公元前的时间。"
+    },
+    {
+      "entryId": "gaokao-frequency-2409-guideline",
+      "headword": "guideline",
+      "concept": "a ruler drawing a straight line on paper",
+      "searchQuery": "ruler line",
+      "alt": "一只手握着直尺在纸上画一条直线，直尺旁边有“guideline”的文字标注，表示指导方针或准则。"
+    },
+    {
+      "entryId": "gaokao-frequency-2495-afterward-s",
+      "headword": "afterward(s)",
+      "concept": "a person walking away from a clock, looking back",
+      "searchQuery": "clock walking",
+      "alt": "一个人从时钟旁走开，回头看向时钟，表示“后来”或“以后”的时间概念。"
+    },
+    {
+      "entryId": "gaokao-frequency-2739-ad-a-d",
+      "headword": "AD,A.D.",
+      "concept": "a modern city skyline with a calendar showing AD",
+      "searchQuery": "city skyline",
+      "alt": "画面中有一座现代城市的天际线，旁边有一本日历，日历上标注着“AD”字样，表示公元后的时间。"
+    },
+    {
+      "entryId": "gaokao-frequency-2916-china",
+      "headword": "china",
+      "concept": "a delicate porcelain teacup with floral pattern",
+      "searchQuery": "porcelain teacup",
+      "alt": "一只精美的瓷器茶杯，上面有花卉图案，旁边有“china”的文字标注，表示瓷器。"
+    }
+  ]
+}
