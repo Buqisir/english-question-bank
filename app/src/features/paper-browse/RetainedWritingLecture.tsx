@@ -38,13 +38,14 @@ export function isCompleteReviewCard(value: unknown): value is ReviewCard {
   )
 }
 
-export function hasCompleteApplicationLecturePayload({
-  sourceTaskType,
-  analysis,
-}: {
+export function hasCompleteApplicationLecturePayload(payload: {
   sourceTaskType: string | undefined
   analysis: WritingAnalysis | undefined
-}): analysis is ApplicationWritingAnalysis {
+}): payload is {
+  sourceTaskType: 'application'
+  analysis: ApplicationWritingAnalysis
+} {
+  const { sourceTaskType, analysis } = payload
   return (
     sourceTaskType === 'application'
     && analysis?.taskType === 'application'
@@ -67,12 +68,13 @@ export function getRetainedWritingLecture({
   sourceTaskType: string | undefined
   analysis: WritingAnalysis | undefined
 }): ApplicationWritingAnalysis | null {
+  const payload = { sourceTaskType, analysis }
   if (
     !lectureOpen
     || panelGroupId !== groupId
-    || !hasCompleteApplicationLecturePayload({ sourceTaskType, analysis })
+    || !hasCompleteApplicationLecturePayload(payload)
   ) return null
-  return analysis
+  return payload.analysis
 }
 
 function RetainedModelAnswerSection({
