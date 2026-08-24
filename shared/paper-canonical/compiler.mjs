@@ -8,6 +8,7 @@ import {
   paper2026IPrintSuccessorCandidateAuthorityRef,
   paper2026ISuccessorCandidateAuthorityRef,
   paper2026IOwnerQaContentSuccessorCandidateAuthorityRef,
+  readingOptionFigureAuthorityRef,
   validateJsonSchema,
 } from './authority.mjs'
 import { validateApplicationWritingContract } from './applicationWriting.mjs'
@@ -41,6 +42,7 @@ import {
   isRegisteredConfirmedCanonicalHistoricalReplayCapability,
 } from '../../server/paper-canonical/registeredConfirmedCanonicalAdmission.mjs'
 import { validateReadingContract } from './reading.mjs'
+import { decodeCanonicalBase64, inspectPng } from './png.mjs'
 import {
   FRAMED_COLUMNS_CHILD_KINDS,
   FRAMED_COLUMNS_COLUMN_COUNT,
@@ -60,6 +62,7 @@ import { cloneJson, digestJson, exactKeys, isRecordValue, sha256, stableStringif
 const trustedDocxCandidateCompile = Symbol('trustedDocxCandidateCompile')
 const docxPairCandidateCompile = Symbol('docxPairCandidateCompile')
 const trustedLegacyCaptureCandidateCompile = Symbol('trustedLegacyCaptureCandidateCompile')
+const confirmedReadingOptionFigureCompile = Symbol('confirmedReadingOptionFigureCompile')
 import { canonicalizeVisibleEnglishTypography } from './visibleTypography.mjs'
 import { replayCanonicalVisibleTypography } from './visibleTypographyReplay.mjs'
 
@@ -2351,6 +2354,120 @@ function collectReadingTargetIds(variant) {
   ].filter((target) => typeof target.id === 'string')
 }
 
+function confirmedReadingOptionFigureIssues(source, capture, selection) {
+  const diagnostics = []
+  const selectionKeys = [
+    'schemaVersion',
+    'candidatePackageDigest',
+    'sourceCaptureRef',
+    'confirmationDigest',
+    'status',
+    'confirmedSelections',
+    'unresolvedIssues',
+  ]
+  if (
+    !isRecordValue(selection)
+    || !exactKeys(selection, selectionKeys)
+    || selection.schemaVersion !== 'confirmed-visual-selection-v1'
+    || selection.status !== 'confirmed'
+    || !/^sha256:[0-9a-f]{64}$/u.test(selection.candidatePackageDigest)
+    || !/^sha256:[0-9a-f]{64}$/u.test(selection.confirmationDigest)
+    || !Array.isArray(selection.confirmedSelections)
+    || !Array.isArray(selection.unresolvedIssues)
+    || selection.unresolvedIssues.length !== 0
+  ) {
+    return [diagnostic('READING_OPTION_FIGURE_CONFIRMATION_INVALID', 'incomplete_source', '$.confirmedVisualSelection', 'Figure Options require one closed confirmed Ticket 01 selection')]
+  }
+  const expected = []
+  for (const group of source.groups || []) {
+    if (group.family !== 'reading') continue
+    const mediaById = new Map((group.media || []).map((item) => [item.mediaId, item]))
+    for (const set of group.variant?.choiceOwnership?.sets || []) {
+      for (const option of set.options || []) {
+        if (!isRecordValue(option?.figure)) continue
+        expected.push({
+          group,
+          questionId: set.questionId,
+          option,
+          media: mediaById.get(option.figure.mediaId),
+        })
+      }
+    }
+  }
+  if (expected.length === 0 || selection.confirmedSelections.length !== expected.length) {
+    diagnostics.push(diagnostic('READING_OPTION_FIGURE_CONFIRMATION_CLOSURE_INVALID', 'incomplete_source', '$.confirmedVisualSelection.confirmedSelections', 'Confirmed selection must close every and only Reading Figure Option'))
+    return diagnostics
+  }
+  const documentsByArtifact = new Map(capture.documents.map((document) => [
+    document.immutableArtifactRef?.artifactId,
+    document,
+  ]))
+  const sourceSpans = new Map(capture.sourceSpans.map((span) => [span.sourceSpanId, span]))
+  const usedSelectionIndexes = new Set()
+  for (const item of expected) {
+    const owner = {
+      kind: 'reading_option',
+      groupId: item.group.groupId,
+      questionId: item.questionId,
+      optionId: item.option.optionId,
+    }
+    const selectedIndex = selection.confirmedSelections.findIndex((candidate) =>
+      isRecordValue(candidate?.owner)
+      && exactKeys(candidate.owner, ['kind', 'groupId', 'questionId', 'optionId'])
+      && candidate.owner.kind === owner.kind
+      && candidate.owner.groupId === owner.groupId
+      && candidate.owner.questionId === owner.questionId
+      && candidate.owner.optionId === owner.optionId)
+    const selected = selection.confirmedSelections[selectedIndex]
+    const optionSpans = item.group.sourceSpanRefsByTarget?.[`option:${item.option.optionId}`]
+    const mediaSpans = item.group.sourceSpanRefsByTarget?.[`media:${item.option.figure.mediaId}`]
+    const exactSpan = Array.isArray(optionSpans)
+      && optionSpans.length === 1
+      && Array.isArray(mediaSpans)
+      && mediaSpans.length === 1
+      && optionSpans[0] === mediaSpans[0]
+      && optionSpans[0] === selected?.source?.sourceSpanId
+    const captureSpan = sourceSpans.get(selected?.source?.sourceSpanId)
+    const sourceDocument = capture.documents.find((document) =>
+      document.documentId === captureSpan?.documentId)
+    const artifactDocument = documentsByArtifact.get(item.media?.sourceArtifactRef?.artifactId)
+    const bytes = decodeCanonicalBase64(selected?.artifact?.encodedBytes)
+    const png = inspectPng(bytes)
+    const exactArtifact = Boolean(
+      item.media
+      && artifactDocument
+      && selected?.artifact?.mimeType === 'image/png'
+      && item.media.mimeType === 'image/png'
+      && bytes
+      && selected.artifact.byteLength === bytes.byteLength
+      && selected.artifact.byteLength === artifactDocument.byteLength
+      && selected.artifact.sha256 === sha256(bytes)
+      && selected.artifact.sha256 === item.media.sha256
+      && selected.artifact.sha256 === artifactDocument.sha256
+      && selected.artifact.encodedBytes === artifactDocument.encodedBytes
+      && png?.width === selected.artifact.pixelWidth
+      && png?.height === selected.artifact.pixelHeight
+      && png.width === item.media.pixelWidth
+      && png.height === item.media.pixelHeight
+    )
+    const exactSource = Boolean(
+      exactSpan
+      && captureSpan
+      && sourceDocument
+      && selected.source.documentId === sourceDocument.documentId
+      && selected.source.documentInputKey === sourceDocument.inputKey
+      && selected.source.documentDigest === sourceDocument.sha256
+      && digestJson(selected.source.coordinate) === digestJson(captureSpan.coordinate)
+    )
+    if (selectedIndex < 0 || usedSelectionIndexes.has(selectedIndex) || !exactArtifact || !exactSource) {
+      diagnostics.push(diagnostic('READING_OPTION_FIGURE_CONFIRMATION_MISMATCH', 'incomplete_source', `$.groups.${item.group.groupId}.${item.option.optionId}`, 'Option identity, media bytes, IHDR dimensions, and source map must equal the confirmed selection'))
+    } else {
+      usedSelectionIndexes.add(selectedIndex)
+    }
+  }
+  return diagnostics
+}
+
 function collectGrammarFillTargetIds(variant) {
   if (variant?.family !== 'grammar-fill') return []
   return (variant.promptBindings || []).map((binding) => ({
@@ -2588,7 +2705,7 @@ function validateRichContent(content, blankIds, mediaIds) {
   return diagnostics
 }
 
-function validateChoiceOwnership(choiceOwnership, questionIds, expectedOwnership) {
+function validateChoiceOwnership(choiceOwnership, questionIds, expectedOwnership, familyId) {
   const diagnostics = []
   if (!isRecordValue(choiceOwnership) || choiceOwnership.ownership !== expectedOwnership) {
     return [diagnostic('CHOICE_OWNERSHIP_INVALID', 'needs_review', '$.variant.choiceOwnership', 'Choice ownership must match its family contract')]
@@ -2603,6 +2720,14 @@ function validateChoiceOwnership(choiceOwnership, questionIds, expectedOwnership
       const setIds = choiceOwnership.sets.map((set) => set.questionId)
       if (new Set(setIds).size !== setIds.length || setIds.length !== questionIds.length || setIds.some((questionId) => !questionIds.includes(questionId))) diagnostics.push(diagnostic('PER_QUESTION_OPTIONS_COVERAGE', 'needs_review', '$.variant.choiceOwnership', 'Choice sets must cover each question exactly once'))
     }
+  }
+  const options = expectedOwnership === 'shared_bank'
+    ? choiceOwnership.options || []
+    : expectedOwnership === 'per_question'
+      ? (choiceOwnership.sets || []).flatMap((set) => set.options || [])
+      : []
+  if (familyId !== 'reading' && options.some((option) => Object.hasOwn(option || {}, 'figure'))) {
+    diagnostics.push(diagnostic('FIGURE_OPTION_NON_READING_FORBIDDEN', 'unsupported', '$.variant.choiceOwnership', 'Figure Options belong only to the Reading v2 contract'))
   }
   return diagnostics
 }
@@ -2665,9 +2790,18 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     },
   }))
   const mediaIds = new Set()
+  const readingOptionMediaIds = new Set(
+    family.familyContractId === 'reading' && family.version === '2'
+      ? (sourceGroup.variant?.choiceOwnership?.sets || []).flatMap((set) =>
+          (set.options || []).map((option) => option?.figure?.mediaId).filter(Boolean))
+      : [],
+  )
   const capturedArtifacts = new Map(capture.documents.map((document) => [document.immutableArtifactRef?.artifactId, document]))
   for (const [index, item] of media.entries()) {
     const captured = capturedArtifacts.get(item?.sourceArtifactRef?.artifactId)
+    const optionFigurePng = readingOptionMediaIds.has(item?.mediaId)
+      ? inspectPng(decodeCanonicalBase64(captured?.encodedBytes))
+      : null
     if (
       !isRecordValue(item)
       || !exactKeys(item, ['mediaId', 'mimeType', 'sha256', 'pixelWidth', 'pixelHeight', 'sourceArtifactRef'])
@@ -2680,6 +2814,13 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
       || item.pixelHeight < 1
       || !captured
       || captured.sha256 !== item.sha256
+      || captured.mediaType !== item.mimeType
+      || (readingOptionMediaIds.has(item?.mediaId) && (
+        item.mimeType !== 'image/png'
+        || !optionFigurePng
+        || optionFigurePng.width !== item.pixelWidth
+        || optionFigurePng.height !== item.pixelHeight
+      ))
     ) diagnostics.push(diagnostic('MEDIA_INVALID', 'incomplete_source', `$.groups.media[${index}]`, 'Media must close immutable bytes, digest, dimensions, and source artifact identity'))
     mediaIds.add(item.mediaId)
   }
@@ -2712,7 +2853,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     const variantSchemaIssues = variantSchema ? validateJsonSchema(variant, variantSchema, '$.groups.variant') : [{ code: 'APPLICATION_VARIANT_SCHEMA_MISSING', path: '$.groups.variant', message: 'Family variant schema is unavailable' }]
     diagnostics.push(...variantSchemaIssues.map((item) => diagnostic(item.code, 'needs_review', item.path, item.message)))
   }
-  diagnostics.push(...validateChoiceOwnership(variant.choiceOwnership, sourceGroup.questionIds, family.choiceOwnership))
+  diagnostics.push(...validateChoiceOwnership(variant.choiceOwnership, sourceGroup.questionIds, family.choiceOwnership, family.familyContractId))
   if (family.familyContractId === 'grammar-fill' && Number(family.version) >= 2) {
     diagnostics.push(
       ...validateGrammarFillPromptBindings(
@@ -2736,6 +2877,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
   }
   if (family.familyContractId === 'reading') {
     diagnostics.push(...validateReadingContract({
+      familyVersion: family.version,
       questionIds: sourceGroup.questionIds,
       blankIds: sourceGroup.blankIds,
       content,
@@ -3176,11 +3318,16 @@ export function compileCanonicalPaper(
       closure.authorityRef,
       { allowsHistoricalReplay },
     ))
+  const acceptsConfirmedReadingOptionFigure = Boolean(
+    request?.[confirmedReadingOptionFigureCompile]
+    && sameAuthorityRef(closure.authorityRef, readingOptionFigureAuthorityRef),
+  )
   if (
     closure.authorityRef.manifestDigest !== canonicalAuthorityRef.manifestDigest
     && !acceptsTrustedDocxCandidate
     && !acceptsDocxPairCandidate
     && !acceptsTrustedLegacyCaptureCandidate
+    && !acceptsConfirmedReadingOptionFigure
   ) {
     diagnostics.push(diagnostic('AUTHORITY_RETIRED', 'unsupported', '$.authority', 'Only the current canonical authority may compile new papers'))
     return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, [], [])
@@ -3211,6 +3358,13 @@ export function compileCanonicalPaper(
   if (typeof source.paperId !== 'string' || typeof source.profileId !== 'string' || !Array.isArray(source.groups)) {
     diagnostics.push(diagnostic('FIXTURE_SOURCE_SHAPE_INVALID', 'incomplete_source', '$', 'Source evidence does not close a paper, profile, and group list'))
   }
+  if (acceptsConfirmedReadingOptionFigure) {
+    diagnostics.push(...confirmedReadingOptionFigureIssues(
+      source,
+      capture,
+      request[confirmedReadingOptionFigureCompile],
+    ))
+  }
   validateAmbiguities(source.ambiguities, effectiveReviewDecisions, diagnostics)
   for (const marker of source.unsupportedFeatures || []) diagnostics.push(diagnostic('SOURCE_FEATURE_UNSUPPORTED', 'unsupported', '$.unsupportedFeatures', String(marker)))
   validateAnswerAssertions(capture, diagnostics)
@@ -3223,6 +3377,18 @@ export function compileCanonicalPaper(
     const built = buildGroupArtifact({ ...rawGroup, paperId: source.paperId, profileId: source.profileId }, capture, closure, transformations.records)
     diagnostics.push(...built.diagnostics)
     if (built.artifact) builtGroups.push({ ...built.artifact, slotId: rawGroup.slotId })
+  }
+  if (sameAuthorityRef(closure.authorityRef, readingOptionFigureAuthorityRef)) {
+    const mediaOwners = new Map()
+    for (const group of builtGroups) {
+      if (group.contractRef.familyContractId !== 'reading') continue
+      for (const media of group.media || []) {
+        if (mediaOwners.has(media.mediaId)) {
+          diagnostics.push(diagnostic('READING_MEDIA_CROSS_GROUP_DUPLICATE', 'needs_review', '$.groups.media', 'Reading media identity may belong to exactly one Group'))
+        }
+        mediaOwners.set(media.mediaId, group.identity.groupId)
+      }
+    }
   }
   if (dispositionFor(diagnostics) !== 'ready') return blockedResult(dispositionFor(diagnostics), capture, closure.authorityRef, diagnostics, transformations.records, effectiveReviewDecisions)
   const planResult = buildPlan(
@@ -3274,6 +3440,14 @@ export function compileCanonicalPaper(
       normalizationReport: report,
     },
   }
+}
+
+export function compileConfirmedReadingOptionFigurePaper(request, confirmedSelection) {
+  return compileCanonicalPaper({
+    ...request,
+    authority: readingOptionFigureAuthorityRef,
+    [confirmedReadingOptionFigureCompile]: confirmedSelection,
+  })
 }
 
 function compileTrustedDocxCandidate(request) {

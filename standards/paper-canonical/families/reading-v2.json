@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "canonical-family-contract-v10",
+  "familyContractId": "reading",
+  "version": "2",
+  "owner": "family",
+  "choiceOwnership": "per_question",
+  "questionCardinality": "profile_bound",
+  "blankCardinality": "none",
+  "variantStatus": "closed",
+  "variantSchemaId": "canonical-reading-variant-v1"
+}

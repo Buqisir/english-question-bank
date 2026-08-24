@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "canonical-reading-variant-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["family", "passageBlockRoles", "questions", "choiceOwnership"],
+  "properties": {
+    "family": { "const": "reading" },
+    "passageBlockRoles": { "type": "array" },
+    "questions": { "type": "array" },
+    "choiceOwnership": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ownership", "sets"],
+      "properties": {
+        "ownership": { "const": "per_question" },
+        "sets": { "type": "array" }
+      }
+    }
+  }
+}

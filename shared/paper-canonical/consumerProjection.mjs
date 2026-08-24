@@ -6,6 +6,7 @@ import {
 import { resolveCanonicalAuthority } from './authority.mjs'
 import { readingPassageLetterBySlotId } from './readingPassageLetter.mjs'
 import { digestJson, sha256, stableStringify } from './stable.mjs'
+import { decodeCanonicalBase64, inspectPng } from './png.mjs'
 
 const SUPPORTED_FAMILIES = new Set([
   'cloze',
@@ -36,19 +37,6 @@ function textContent(nodes) {
     throw rejected('Canonical option content is not plain renderable text')
   }
   return nodes.map((node) => node.text).join('')
-}
-
-function decodeBase64Bytes(value) {
-  if (
-    typeof value !== 'string'
-    || !/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(value)
-  ) return null
-  try {
-    const decoded = atob(value)
-    return Uint8Array.from(decoded, (character) => character.charCodeAt(0))
-  } catch {
-    return null
-  }
 }
 
 function projectReadingConsumerGroup(input, occurrence) {
@@ -102,14 +90,46 @@ function projectReadingConsumerGroup(input, occurrence) {
     }
     mediaById.set(media.mediaId, media)
   }
-  const mediaArtifactsById = new Map(
-    (input.consumption.mediaArtifacts || []).map((artifact) => [
-      artifact?.mediaId,
-      artifact,
-    ]),
-  )
+  const mediaArtifactsById = new Map()
+  for (const artifact of input.consumption.mediaArtifacts || []) {
+    if (typeof artifact?.mediaId !== 'string' || mediaArtifactsById.has(artifact.mediaId)) {
+      throw rejected(`Canonical Reading occurrence ${groupId} has ambiguous media artifacts`)
+    }
+    mediaArtifactsById.set(artifact.mediaId, artifact)
+  }
 
   const seenMediaIds = new Set()
+  const resolveReadingMedia = (mediaId, { requirePng = false } = {}) => {
+    const media = mediaById.get(mediaId)
+    const artifact = mediaArtifactsById.get(mediaId)
+    const mediaBytes = decodeCanonicalBase64(artifact?.encodedBytes)
+    const png = media?.mimeType === 'image/png' ? inspectPng(mediaBytes) : null
+    if (
+      !media
+      || seenMediaIds.has(mediaId)
+      || !artifact
+      || artifact.mimeType !== media.mimeType
+      || artifact.sha256 !== media.sha256
+      || artifact.pixelWidth !== media.pixelWidth
+      || artifact.pixelHeight !== media.pixelHeight
+      || artifact.sourceArtifactRef?.artifactId !== media.sourceArtifactRef.artifactId
+      || !mediaBytes
+      || sha256(mediaBytes) !== media.sha256
+      || (requirePng && media.mimeType !== 'image/png')
+      || (media.mimeType === 'image/png' && (
+        !png
+        || png.width !== media.pixelWidth
+        || png.height !== media.pixelHeight
+      ))
+    ) {
+      throw rejected(`Canonical Reading occurrence ${groupId} has unresolved Figure media`)
+    }
+    seenMediaIds.add(mediaId)
+    return {
+      media: structuredClone(media),
+      mediaArtifact: structuredClone(artifact),
+    }
+  }
   const projectReadingParagraph = (block) => ({
     kind: 'paragraph',
     nodeId: block.nodeId,
@@ -208,32 +228,12 @@ function projectReadingConsumerGroup(input, occurrence) {
       if (!allowFigure) {
         throw rejected(`Canonical Reading occurrence ${groupId} contains an unsupported framed_columns child`)
       }
-      const media = mediaById.get(block.mediaId)
-      const artifact = mediaArtifactsById.get(block.mediaId)
-      const mediaBytes = decodeBase64Bytes(artifact?.encodedBytes)
-      if (
-        !media
-        || seenMediaIds.has(block.mediaId)
-        || !artifact
-        || artifact.mimeType !== media.mimeType
-        || artifact.sha256 !== media.sha256
-        || artifact.pixelWidth !== media.pixelWidth
-        || artifact.pixelHeight !== media.pixelHeight
-        || artifact.sourceArtifactRef?.artifactId !==
-          media.sourceArtifactRef.artifactId
-        || typeof artifact.encodedBytes !== 'string'
-        || !mediaBytes
-        || sha256(mediaBytes) !== media.sha256
-      ) {
-        throw rejected(`Canonical Reading occurrence ${groupId} has unresolved Figure media`)
-      }
-      seenMediaIds.add(block.mediaId)
+      const resolved = resolveReadingMedia(block.mediaId)
       return {
         kind: 'figure',
         nodeId: block.nodeId,
         mediaId: block.mediaId,
-        media: structuredClone(media),
-        mediaArtifact: structuredClone(artifact),
+        ...resolved,
         caption: textContent(block.caption),
         captionInlines: structuredClone(block.caption),
       }
@@ -287,10 +287,6 @@ function projectReadingConsumerGroup(input, occurrence) {
     allowFramedColumns: true,
     allowFigure: true,
   }))
-  if (seenMediaIds.size !== mediaById.size) {
-    throw rejected(`Canonical Reading occurrence ${groupId} does not place every media item exactly once`)
-  }
-
   const numberByQuestionId = new Map()
   for (const assignment of occurrence.numbering) {
     if (
@@ -326,6 +322,40 @@ function projectReadingConsumerGroup(input, occurrence) {
     ) {
       throw rejected(`Canonical Reading occurrence ${groupId} has an invalid A-D Question`)
     }
+    const figureMode = question.options.every((option) =>
+      option
+      && Object.keys(option).sort().join(',') === 'figure,label,optionId'
+      && option.figure
+      && Object.keys(option.figure).join(',') === 'mediaId')
+    const textMode = question.options.every((option) =>
+      option
+      && Object.keys(option).sort().join(',') === 'content,label,optionId')
+    if (!figureMode && !textMode) {
+      throw rejected(`Canonical Reading occurrence ${groupId} mixes text and Figure Options`)
+    }
+    if (figureMode) {
+      const options = question.options.map((option) => ({
+        optionId: option.optionId,
+        label: option.label,
+        kind: 'figure',
+        figure: {
+          mediaId: option.figure.mediaId,
+          ...resolveReadingMedia(option.figure.mediaId, { requirePng: true }),
+          accessibility: {
+            kind: 'neutral_option_identity',
+            optionLabel: option.label,
+          },
+        },
+      }))
+      return {
+        questionId: question.questionId,
+        questionNo: numberByQuestionId.get(question.questionId),
+        stem: textContent(question.stem),
+        stemContent: structuredClone(question.stem),
+        optionMode: 'figure',
+        options,
+      }
+    }
     const options = question.options.map((option) => ({
       optionId: option.optionId,
       label: option.label,
@@ -351,6 +381,9 @@ function projectReadingConsumerGroup(input, occurrence) {
       placementSignature: abcdPlacementSignature(layoutPlan),
     }
   })
+  if (seenMediaIds.size !== mediaById.size) {
+    throw rejected(`Canonical Reading occurrence ${groupId} does not place every media item exactly once`)
+  }
 
   const collectOccurrenceContentNodeIds = (block) => {
     const identities = [block.nodeId]
@@ -1050,12 +1083,20 @@ function selectOccurrence(input) {
   ) {
     throw rejected(`Family ${familyContractId} projected occurrences do not close the selection`)
   }
-  if (familyContractId === 'cloze' || familyContractId === 'grammar-fill') {
+  const requiresReadingOccurrenceIntegrity = familyContractId === 'reading'
+    && Number(consumption?.authorityRef?.manifestVersion) >= 46
+  if (
+    familyContractId === 'cloze'
+    || familyContractId === 'grammar-fill'
+    || requiresReadingOccurrenceIntegrity
+  ) {
     const authorityRef = consumption?.authorityRef
     const consumptionDigest = sha256(`${stableStringify(consumption)}\n`)
     const verifiedHistoricalDigests = familyContractId === 'cloze'
       ? VERIFIED_PRE_V18_CLOZE_CONSUMPTION_DIGESTS
-      : VERIFIED_PRE_V20_GRAMMAR_FILL_CONSUMPTION_DIGESTS
+      : familyContractId === 'grammar-fill'
+        ? VERIFIED_PRE_V20_GRAMMAR_FILL_CONSUMPTION_DIGESTS
+        : new Set()
     const verifiedHistoricalPlan =
       authorityRef === undefined
       && selection.projectedOccurrenceDigests === undefined

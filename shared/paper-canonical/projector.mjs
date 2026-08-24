@@ -41,7 +41,7 @@ function sourceMapCoverageIssues(group, sourceCapture, family) {
           ...group.variant.questions.flatMap((question) => question.stem.map((inline) => `content_node:${inline.nodeId}`)),
           ...group.variant.choiceOwnership.sets.flatMap((set) => set.options.flatMap((option) => [
             `option:${option.optionId}`,
-            ...option.content.map((inline) => `content_node:${inline.nodeId}`),
+            ...(option.content || []).map((inline) => `content_node:${inline.nodeId}`),
           ])),
         ]
       : []),
@@ -129,6 +129,14 @@ function contentIdentityLists(content) {
 function choiceOwnershipIssues(group, family) {
   const choice = group.variant.choiceOwnership
   if (!choice || choice.ownership !== family.choiceOwnership) return ['choice ownership does not match family contract']
+  const ownedOptions = choice.ownership === 'shared_bank'
+    ? choice.options || []
+    : choice.ownership === 'per_question'
+      ? (choice.sets || []).flatMap((set) => set.options || [])
+      : []
+  if (family.familyContractId !== 'reading' && ownedOptions.some((option) => Object.hasOwn(option || {}, 'figure'))) {
+    return ['Figure Options belong only to the Reading v2 contract']
+  }
   if (choice.ownership === 'none') return Object.keys(choice).length === 1 ? [] : ['non-choice family carries option fields']
   if (choice.ownership === 'shared_bank') {
     return Object.keys(choice).sort().join(',') === 'bankId,options,ownership' && Array.isArray(choice.options) && choice.options.length > 0
@@ -200,6 +208,7 @@ function assertCanonicalPackage(canonicalPackage) {
     }
     if (family.familyContractId === 'reading') {
       const readingIssues = validateReadingContract({
+        familyVersion: family.version,
         questionIds: group.questionRefs.map(({ questionId }) => questionId),
         blankIds: group.blankRefs.map(({ blankId }) => blankId),
         content: group.content,

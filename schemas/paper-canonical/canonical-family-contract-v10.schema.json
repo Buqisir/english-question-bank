@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "canonical-family-contract-v10",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "familyContractId", "version", "owner", "choiceOwnership", "questionCardinality", "blankCardinality", "variantStatus", "variantSchemaId"],
+  "properties": {
+    "schemaVersion": { "const": "canonical-family-contract-v10" },
+    "familyContractId": { "const": "reading" },
+    "version": { "const": "2" },
+    "owner": { "const": "family" },
+    "choiceOwnership": { "const": "per_question" },
+    "questionCardinality": { "const": "profile_bound" },
+    "blankCardinality": { "const": "none" },
+    "variantStatus": { "const": "closed" },
+    "variantSchemaId": { "const": "canonical-reading-variant-v1" }
+  }
+}

@@ -70,5 +70,41 @@ crops, or reconstruct semantic ownership.
 
 ## Result
 
-Not started. Record the authority successor, implementation commit, focused
-checks, compatibility evidence, and unresolved issues here.
+Implemented on `codex/sfvi-ticket-02` in the one-line Ticket 02 implementation
+commit.
+
+- Added scoped manifest v46 while keeping `canonicalAuthorityRef` at v36.
+  Reading v2, `nck1-v14`, `zhejiang-legacy-v12`, `national-legacy-v4`, and
+  additive Screen v38 / Print-PDF v39 Consumer Contracts form one exact
+  authority closure; predecessor family, profile, authority, and Consumer
+  Contract bytes remain unchanged.
+- Figure Options compile and seal only through Ticket 01's exact Teacher
+  Confirmation. The closed A-D text/Figure union, same-Group exact-once media
+  ownership, PNG bytes/digest/IHDR dimensions, Option/media/source-map joins,
+  and cross-Group ownership all fail closed before consumption.
+- Shared projection emits a renderer-neutral `figure` Option with resolved
+  immutable media and neutral Option identity. Reading v46 occurrence digests
+  bind Option-to-media associations; source crops, prompts, candidates, and
+  answer hints do not enter the Figure Option projection.
+- Added frozen generic fixture and focused adversarial verifier:
+  `node scripts/verify-paper-canonical-reading-option-figure.mjs` — PASS.
+  Its matrix covers mixed/incomplete/placeholder/rich Options; duplicate,
+  missing, unplaced, Passage+Option, Option+Option, and cross-Group media;
+  MIME/bytes/digest/dimension/IHDR/source-map/confirmation drift; all
+  non-Reading families; unresolved confirmation; and missing/swapped/tampered
+  projected-occurrence/media artifacts.
+- Compatibility checks — PASS: existing Reading publication (including Passage
+  Figure), `framed_columns`, Seven Choices, Cloze/Grammar Fill, Application
+  Writing, and Continuation Writing focused verifiers. The frozen literal
+  Reading v36 Canonical Paper digest remains
+  `sha256:435525747864b69e13a4cbe7e1fe9b40dc33e081c3c5e3f24c0d24496e499e07`.
+- Paper pack: `pnpm -C app verify:paper` — overall FAIL with
+  `PASS 77 / SKIP 0 / FAIL 1`. The sole failure is the same unrelated local-data
+  coverage failure already recorded by Ticket 01:
+  `scripts/verify-genre-truth.mjs` reports 18 database passages absent from its
+  decisions artifact. Ticket 02 changes no database, genre-truth artifact, or
+  production data. All Canonical Paper checks, including the new focused
+  verifier, passed. Literal SKIP count: `SKIP 0`.
+- `git diff --check` — PASS.
+- Remaining work is intentionally outside this ticket: Screen/Print/PDF layout
+  belongs to Ticket 03, and Shenzhen Q33 assets/migration belong to Ticket 04.

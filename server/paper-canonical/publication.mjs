@@ -31,7 +31,12 @@ import {
   isLiveConfirmedDocxPairAdmission,
 } from './docxPairCanonicalRequest.mjs'
 import {
+  admitLiveConfirmedReadingOptionFigureImport,
+  isLiveConfirmedReadingOptionFigureAdmission,
+} from './readingOptionFigureCanonicalRequest.mjs'
+import {
   consumerContractRefs,
+  readingOptionFigureConsumerContractRefs,
   resolveConsumerContract,
 } from '../../shared/paper-canonical/consumers.mjs'
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
@@ -45,6 +50,7 @@ const publicationFileName =
   `canonical-paper-publication-v${canonicalAuthorityRef.manifestVersion}.json`
 const publicationFileNames = [
   publicationFileName,
+  'canonical-paper-publication-v46.json',
   'canonical-paper-publication-v45.json',
   'canonical-paper-publication-v44.json',
   'canonical-paper-publication-v43.json',
@@ -383,6 +389,7 @@ export function sealCanonicalPublication({
   registeredConfirmationProof = null,
   trustedDocxConfirmationProof = null,
   docxPairConfirmationProof = null,
+  readingOptionFigureConfirmationProof = null,
 }) {
   if (compilation?.disposition !== 'ready') throw publicationError('CANONICAL_PUBLICATION_BLOCKED', 'Only a complete ready compilation may be published')
   if (!(sourceAsset instanceof Uint8Array) || !Number.isInteger(sourceAssetVersion) || sourceAssetVersion < 1) throw publicationError('CANONICAL_PUBLICATION_INPUT_INVALID', 'Publication needs immutable source asset bytes and a positive version')
@@ -407,7 +414,12 @@ export function sealCanonicalPublication({
       compilation,
       sourceAsset,
     })
-  ) throw publicationError('CANONICAL_PUBLICATION_AUTHORITY_RETIRED', 'Only the current canonical authority, one exact registered confirmed chain, one live Teacher-Confirmed trusted DOCX request, or one live Teacher-Confirmed DOCX pair request may create a new publication')
+    && !isLiveConfirmedReadingOptionFigureAdmission({
+      proof: readingOptionFigureConfirmationProof,
+      compilation,
+      sourceAsset,
+    })
+  ) throw publicationError('CANONICAL_PUBLICATION_AUTHORITY_RETIRED', 'Only the current canonical authority or one exact registered/live Teacher-Confirmed admission may create a new publication')
   const artifactPaths = artifactPathsFor(closure.authorityRef)
   assertPaperId(canonicalPaper?.paperPlan?.paperId)
   validateSourceCaptureIntegrity(sourceCapture)
@@ -1005,10 +1017,22 @@ function candidateStore(sealed, ref) {
   }
 }
 
-export function loadCanonicalOnlyConsumers({ ref, store }) {
+export function loadCanonicalOnlyConsumers({
+  ref,
+  store,
+  consumerContracts = null,
+}) {
+  const effectiveConsumerContracts = consumerContracts || (
+    store.readVersionArtifact(
+      ref,
+      'canonical/canonical-paper-publication-v46.json',
+    )
+      ? readingOptionFigureConsumerContractRefs
+      : consumerContractRefs
+  )
   const consumers = {}
   for (const [consumerId, consumerContract] of Object.entries(
-    consumerContractRefs,
+    effectiveConsumerContracts,
   )) {
     const consumption = loadPaperForConsumptionSync({
       paperId: ref.paperId,
@@ -1066,15 +1090,21 @@ export function admitCanonicalPaperImport({
   sourceAssetVersion,
   sourceAsset,
   registeredConfirmation,
+  visualConfirmation,
 }) {
   let compilation
   let effectiveSourceAsset = sourceAsset
   let registeredConfirmationProof = null
   let trustedDocxConfirmationProof = null
   let docxPairConfirmationProof = null
+  let readingOptionFigureConfirmationProof = null
   try {
     if (registeredConfirmation !== undefined) {
-      if (request !== undefined || sourceAsset !== undefined) {
+      if (
+        request !== undefined
+        || sourceAsset !== undefined
+        || visualConfirmation !== undefined
+      ) {
         throw publicationError(
           'CANONICAL_PUBLICATION_REGISTERED_INPUT_INVALID',
           'Registered confirmation admission resolves its own source and does not accept an import request or source override',
@@ -1086,6 +1116,16 @@ export function admitCanonicalPaperImport({
       compilation = registered.compilation
       effectiveSourceAsset = registered.sourceAsset
       registeredConfirmationProof = registered.proof
+    } else if (visualConfirmation !== undefined) {
+      const admitted = admitLiveConfirmedReadingOptionFigureImport({
+        request,
+        candidatePackage: visualConfirmation.candidatePackage,
+        teacherConfirmation: visualConfirmation.teacherConfirmation,
+        sourceAsset,
+      })
+      compilation = admitted.compilation
+      effectiveSourceAsset = admitted.sourceAsset
+      readingOptionFigureConfirmationProof = admitted.proof
     } else if (isDocxPairCanonicalImportRequest(request)) {
       const admitted = admitLiveConfirmedDocxPairImport(request)
       compilation = admitted.compilation
@@ -1135,6 +1175,7 @@ export function admitCanonicalPaperImport({
       registeredConfirmationProof,
       trustedDocxConfirmationProof,
       docxPairConfirmationProof,
+      readingOptionFigureConfirmationProof,
     })
     const ref = {
       paperId: sealed.manifest.paperId,
@@ -1145,6 +1186,10 @@ export function admitCanonicalPaperImport({
     const consumers = loadCanonicalOnlyConsumers({
       ref,
       store: candidateStore(sealed, ref),
+      consumerContracts:
+        compilation.artifacts.canonicalPaper.paperPlan.authorityRef.manifestVersion === '46'
+          ? readingOptionFigureConsumerContractRefs
+          : consumerContractRefs,
     })
     return {
       ok: true,
@@ -1166,6 +1211,7 @@ export function publishCanonicalPaperPublication({
   sourceAssetVersion,
   sourceAsset,
   registeredConfirmation,
+  visualConfirmation,
   failurePoint = null,
 }) {
   const admission = admitCanonicalPaperImport({
@@ -1173,6 +1219,7 @@ export function publishCanonicalPaperPublication({
     sourceAssetVersion,
     sourceAsset,
     registeredConfirmation,
+    visualConfirmation,
   })
   if (!admission.ok) return admission
   const { sealed } = admission
@@ -1207,6 +1254,9 @@ export function publishCanonicalPaperPublication({
     const consumers = loadCanonicalOnlyConsumers({
       ref,
       store: createFileSystemCanonicalPublicationStore({ rootDir, db }),
+      consumerContracts: sealed.manifest.authority.manifestVersion === '46'
+        ? readingOptionFigureConsumerContractRefs
+        : consumerContractRefs,
     })
     return {
       status: 'idempotent',
@@ -1249,6 +1299,9 @@ export function publishCanonicalPaperPublication({
       validateCommitted: () => loadCanonicalOnlyConsumers({
         ref: target,
         store: createFileSystemCanonicalPublicationStore({ rootDir, db }),
+        consumerContracts: sealed.manifest.authority.manifestVersion === '46'
+          ? readingOptionFigureConsumerContractRefs
+          : consumerContractRefs,
       }),
     })
     return {
@@ -1474,6 +1527,10 @@ function canonicalSelections(validated, contract, sourceAsset) {
           familyContractId === 'grammar-fill'
           && Number(validated.plan.authorityRef.manifestVersion) >= 20
         )
+        || (
+          familyContractId === 'reading'
+          && Number(validated.plan.authorityRef.manifestVersion) >= 46
+        )
         ? {
             projectedOccurrenceDigests: projectedOccurrences.map(
               (occurrence) => ({
@@ -1530,9 +1587,28 @@ function canonicalMediaArtifacts(validated) {
     ]),
   )
   const mediaById = new Map()
+  const mediaOwnerById = new Map()
   for (const occurrence of validated.projected.nodes) {
     if (occurrence?.kind !== 'group') continue
     for (const media of occurrence.media || []) {
+      if (
+        Number(validated.plan.authorityRef.manifestVersion) >= 46
+        && mediaOwnerById.has(media.mediaId)
+        && mediaOwnerById.get(media.mediaId).groupId !== occurrence.groupId
+        && (
+          occurrence.familyContractId === 'reading'
+          || mediaOwnerById.get(media.mediaId).familyContractId === 'reading'
+        )
+      ) {
+        throw publicationError(
+          'CANONICAL_PUBLICATION_MEDIA_CLOSURE_INVALID',
+          `Reading media identity ${media.mediaId} is owned by more than one Group`,
+        )
+      }
+      mediaOwnerById.set(media.mediaId, {
+        groupId: occurrence.groupId,
+        familyContractId: occurrence.familyContractId,
+      })
       const document = documentsByArtifactId.get(
         media.sourceArtifactRef?.artifactId,
       )
