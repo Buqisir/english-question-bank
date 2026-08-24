@@ -28,10 +28,11 @@
  *     ClozeAnalysisPanel / GrammarFillAnalysisPanel / WritingAnalysisPanel),
  *     fed by the SAME adapters the解析页 harness uses — "整卷看的和单个题组
  *     点进去看的是一个东西，只统一了宽度" (owner).
- *   - `cloze-analysis-v1` / `grammar-fill-analysis-v1` / `writing-analysis-v1`
- *     are fetched once, lazily, the first time 讲评态 opens (reading /
- *     sevenChoices analyses are already fetched unconditionally at page
- *     load). A missing/failed analysis degrades that
+ *   - `cloze-analysis-v1` / `grammar-fill-analysis-v1` are fetched once,
+ *     lazily, the first time 讲评态 opens. `writing-analysis-v1` is prefetched
+ *     once so a complete application payload can open lecture from the answer
+ *     box (reading / sevenChoices analyses are already fetched unconditionally
+ *     at page load). A missing/failed analysis degrades that
  *     group's 讲评栏 to "解析未发布" without crashing or blocking other
  *     groups; the group's卷面 PaperSurface mount keeps rendering its plain
  *     (non-analysis) view.
@@ -1283,24 +1284,8 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         }
       }
 
-      const writingGroupIds = groupIdsByType('writing')
-      if (writingGroupIds.length > 0) {
-        try {
-          const res = await fetch(`${base}/analyses/writing-analysis-v1.json`)
-          const raw = res.ok ? ((await res.json()) as WritingAnalysisFilePayload) : null
-          for (const groupId of writingGroupIds) {
-            const writing = raw?.groups?.[groupId]?.writing
-            entries[groupId] = isRenderableWritingAnalysis(writing)
-              ? { kind: 'writing', analysis: writing }
-              : { kind: 'unavailable' }
-          }
-        } catch {
-          for (const groupId of writingGroupIds) entries[groupId] = { kind: 'unavailable' }
-        }
-      }
-
       if (cancelled) return
-      setLectureAnalysisByGroupId(entries)
+      setLectureAnalysisByGroupId((previous) => ({ ...previous, ...entries }))
       setLectureAnalysisFetched(true)
       setLectureAnalysisLoading(false)
     }

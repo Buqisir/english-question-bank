@@ -3164,10 +3164,15 @@ async function assertBrowserArtifacts() {
       url.searchParams.set('focusGroupId', zhejiangApplication.groupId)
       url.searchParams.set('lecture', '1')
       await page.goto(url.href)
+      const applicationResponse = page.locator(
+        `[data-canonical-response-slot-id="${zhejiangApplication.answerRegion.responseSlotId}"]`,
+      )
       const continuationResponse = page.locator(
         `[data-canonical-response-slot-id="${zhejiangContinuation.answerRegion.responseSlotId}"]`,
       )
+      await applicationResponse.waitFor({ timeout: 10_000 })
       await continuationResponse.waitFor({ timeout: 10_000 })
+      await applicationResponse.click()
       await page.locator('.paper-browse-lecture-empty')
         .filter({ hasText: '解析未发布' })
         .waitFor({ timeout: 10_000 })
@@ -3746,6 +3751,7 @@ async function assertBrowserArtifacts() {
         const writingPage = response.locator(
           'xpath=ancestor::*[@data-pi-writing-page]',
         )
+        await response.click()
         if (analysisVariant.label === 'valid') {
           await page.getByText('FORGED ANALYSIS THEME', { exact: true })
             .waitFor()
