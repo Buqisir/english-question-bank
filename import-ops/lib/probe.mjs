@@ -1,5 +1,6 @@
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import path from 'node:path'
+import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 export const LABELS = {
   queued: '排队',
@@ -30,7 +31,7 @@ export function isOpsVisible(probes) {
     probes.shipped ||
     Boolean(probes.helpNeeded)
   if (probes.latest) return hasSignal
-  return hasSignal || probes.source || probes.groups || (probes.config && probes.analyses)
+  return hasSignal || Boolean(probes.format2Stop) || probes.source || probes.groups || (probes.config && probes.analyses)
 }
 
 export function statusOf(probes) {
@@ -38,6 +39,7 @@ export function statusOf(probes) {
   if (probes.blocked) return 'failed'
   if (probes.qaAccepted && probes.latest && probes.aiCheck) return 'ready_to_ship'
   if (probes.latest && probes.aiCheck) return 'awaiting_qa'
+  if (probes.format2Stop?.lifecycle === 'importing') return 'importing'
   if (probes.config) return 'importing'
   return 'queued'
 }
@@ -60,12 +62,38 @@ function mtimeMs(filePath) {
   }
 }
 
-function hasSource(paperDir) {
+function hasSource(paperDir, format2Stop) {
   return (
     existsSync(path.join(paperDir, 'source.docx')) ||
     existsSync(path.join(paperDir, 'source', 'paper.pdf')) ||
-    existsSync(path.join(paperDir, 'source', 'answers.pdf'))
+    existsSync(path.join(paperDir, 'source', 'answers.pdf')) ||
+    Boolean(format2Stop)
   )
+}
+
+function format2StopOf(receipt, paperId) {
+  if (
+    !receipt
+    || receipt._invalid
+    || receipt.schemaVersion !== 'format2-import-job-receipt-v1'
+    || receipt.result?.schemaVersion !== 'format2-import-job-result-v1'
+    || receipt.result?.paperId !== paperId
+    || receipt.result?.lifecycle !== 'importing'
+    || receipt.result?.stopReason?.code !== 'exact_teacher_confirmation_required'
+  ) return null
+  const comparison = receipt.result.humanEntryPoints?.comparison
+  if (
+    comparison?.href !== `/papers/${paperId}/format2-comparison`
+    || !/^sha256:[a-f0-9]{64}$/u.test(comparison?.packageDigest)
+    || receipt.result.artifacts?.candidatePackage?.packageDigest !== comparison.packageDigest
+  ) return null
+  return {
+    lifecycle: receipt.result.lifecycle,
+    stopCode: receipt.result.stopReason.code,
+    packageDigest: comparison.packageDigest,
+    comparisonEntryPoint: comparison.href,
+    resumeInstruction: `Resume this Job with exact visual package ${comparison.packageDigest}.`,
+  }
 }
 
 function analysisCounts(paperDir) {
@@ -94,6 +122,8 @@ export function probePaper({ repoRoot, paperId }) {
   const aiCheck = readJsonIfPresent(path.join(signalsDir, 'ai-answer-check.json'))
   const qaAccepted = readJsonIfPresent(path.join(signalsDir, 'qa-accepted.json'))
   const shipped = readJsonIfPresent(path.join(signalsDir, 'shipped.json'))
+  const format2Receipt = readJsonIfPresent(path.join(paperDir, 'job', 'current.json'))
+  const format2Stop = format2StopOf(format2Receipt, paperId)
   const counts = analysisCounts(paperDir)
   const writingCount = writingAnalysisCount(paperDir)
   const format3 = Boolean(config) && !config._invalid && String(config.format) === '3'
@@ -102,8 +132,9 @@ export function probePaper({ repoRoot, paperId }) {
     paperId,
     paperName:
       (config && !config._invalid && config.provenance && config.provenance.paperName) ||
+      (format2Receipt && !format2Receipt._invalid && format2Receipt.result?.provenance?.paperName) ||
       paperId,
-    source: hasSource(paperDir),
+    source: hasSource(paperDir, format2Stop),
     config: Boolean(config) && !config._invalid,
     groups: existsSync(path.join(paperDir, 'groups.json')),
     analyzeCount: counts.analyze,
@@ -124,6 +155,7 @@ export function probePaper({ repoRoot, paperId }) {
     shipped: Boolean(shipped) && !shipped._invalid,
     blocked: blocked && !blocked._invalid ? blocked : null,
     helpNeeded: helpNeeded && !helpNeeded._invalid ? helpNeeded : null,
+    format2Stop,
     mtimeMs: Math.max(
       mtimeMs(path.join(paperDir, 'config.json')),
       mtimeMs(path.join(paperDir, 'groups.json')),
@@ -132,6 +164,7 @@ export function probePaper({ repoRoot, paperId }) {
       mtimeMs(path.join(signalsDir, 'qa-accepted.json')),
       mtimeMs(path.join(signalsDir, 'shipped.json')),
       mtimeMs(path.join(signalsDir, 'help-needed.json')),
+      mtimeMs(path.join(paperDir, 'job', 'current.json')),
       mtimeMs(latestDir),
     ),
   }
@@ -143,6 +176,29 @@ export function probePaper({ repoRoot, paperId }) {
     gatesGreen: probes.latest && probes.aiCheck && !probes.blocked,
     visible: isOpsVisible(probes),
   }
+}
+
+export function format2ComparisonFile({ repoRoot, paperId }) {
+  if (!/^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(paperId)) return null
+  const paperDir = path.join(repoRoot, 'scripts/import-pipeline/papers', paperId)
+  const receipt = readJsonIfPresent(path.join(paperDir, 'job', 'current.json'))
+  if (!format2StopOf(receipt, paperId)) return null
+  const relativePath = receipt?.result?.artifacts?.comparison?.relativePath
+  if (typeof relativePath !== 'string' || path.isAbsolute(relativePath)) return null
+  const resolved = path.resolve(paperDir, relativePath)
+  const paperRoot = `${path.resolve(paperDir)}${path.sep}`
+  if (!resolved.startsWith(paperRoot) || !existsSync(resolved)) return null
+  const expectedDigest = receipt?.result?.artifacts?.comparison?.sha256
+  try {
+    if (
+      !statSync(resolved).isFile()
+      || !/^sha256:[a-f0-9]{64}$/u.test(expectedDigest)
+      || sha256(new Uint8Array(readFileSync(resolved))) !== expectedDigest
+    ) return null
+  } catch {
+    return null
+  }
+  return resolved
 }
 
 export function listPaperIds(repoRoot) {
