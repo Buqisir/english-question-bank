@@ -1,7 +1,7 @@
 # 03 — Shenzhen Q33 generic parity and materializer retirement
 
 Status: ready-for-agent
-Blocked by: 02 — Exact Confirmation resume to local awaiting_qa
+Blocked by: 02A — Generic source-measured Figure Option layout seam
 
 ## What to build
 

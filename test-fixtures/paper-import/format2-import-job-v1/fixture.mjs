@@ -294,6 +294,84 @@ function visual({ observationId, owner, page, x, y, width, height, variant }) {
   }
 }
 
+function sourceMeasuredFigureLayout({
+  questionId,
+  optionOwners,
+  optionObservationIds,
+  questionPdfSha256,
+}) {
+  const sourcePage = 2
+  const pageHeight = 842
+  const imageWidth = 90
+  const imageHeight = 72
+  const rowOrigin = 40
+  const measurementBody = {
+    schemaVersion: 'synthetic-source-layout-measurement-v1',
+    questionId,
+    sourceDocumentSha256: questionPdfSha256,
+    sourcePage,
+    labels: ['A', 'B', 'C', 'D'].map((label, index) => ({
+      label,
+      leftPt: rowOrigin + index * 125,
+      topPt: 420,
+      widthPt: 10,
+      heightPt: 16,
+    })),
+  }
+  const measurementDigest = digestJson(measurementBody)
+  const intentBody = {
+    schemaVersion: 'reading-option-figure-source-layout-intent-v1',
+    questionId,
+    sourcePage,
+    coordinateSystem: 'question_content_box_pt',
+    measurementEvidence: {
+      kind: 'digest_bound_external_evidence',
+      evidenceSchemaVersion: measurementBody.schemaVersion,
+      evidenceDigest: measurementDigest,
+      sourceDocumentSha256: questionPdfSha256,
+    },
+    rowStartPt: rowOrigin,
+    rowWidthPt: 485,
+    bankHeightPt: imageHeight,
+    labelFontSizePt: 10.5,
+    labelLineHeightPt: 16,
+    stemToBankGapPt: 4.5,
+    questionTailGapPt: 9,
+    placements: ['A', 'B', 'C', 'D'].map((label, index) => {
+      const imageLeft = 60 + index * 125
+      return {
+        optionId: optionOwners[index].optionId,
+        label,
+        sourceSpanId: `source-span:${optionObservationIds[index]}`,
+        sourcePlacementMatrix: [
+          imageWidth,
+          0,
+          0,
+          -imageHeight,
+          imageLeft,
+          pageHeight - 420,
+        ],
+        labelLeftPt: index * 125,
+        labelTopPt: 0,
+        imageLeftPt: imageLeft - rowOrigin,
+        imageTopPt: 0,
+        imageWidthPt: imageWidth,
+        imageHeightPt: imageHeight,
+      }
+    }),
+  }
+  return {
+    measurementEvidenceBody: {
+      ...measurementBody,
+      measurementDigest,
+    },
+    intent: {
+      ...intentBody,
+      intentDigest: digestJson(intentBody),
+    },
+  }
+}
+
 export function makeFormat2ImportJobFixture({
   sourceDir,
   paperId = 'paper-format2-synthetic',
@@ -520,6 +598,12 @@ export function makeFormat2ImportJobFixture({
         variant: index + 1,
       })),
     ],
+    sourceMeasuredFigureLayouts: [sourceMeasuredFigureLayout({
+      questionId: optionQuestionId,
+      optionOwners,
+      optionObservationIds,
+      questionPdfSha256,
+    })],
   }
   const questionNumberById = new Map(transcription.groups.flatMap((group) => (
     group.questions.map((item) => [item.questionId, item.questionNo])

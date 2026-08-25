@@ -633,7 +633,12 @@ export function buildConfirmedFormat2CanonicalRequest({
       observationId: visual.observationId,
       kind: 'source_figure',
       documentInputKey: 'original_question_source',
-      value: { owner: clone(visual.owner) },
+      value: {
+        owner: clone(visual.owner),
+        pageSizePoints: clone(visual.source.pageSizePoints),
+        pointGeometry: clone(visual.source.pointGeometry),
+        extraction: clone(visual.source.extraction),
+      },
       span: {
         kind: 'page_region',
         page: visual.source.page,
@@ -642,6 +647,48 @@ export function buildConfirmedFormat2CanonicalRequest({
           y: visual.source.pointGeometry.y / visual.source.pageSizePoints.height,
           width: visual.source.pointGeometry.width / visual.source.pageSizePoints.width,
           height: visual.source.pointGeometry.height / visual.source.pageSizePoints.height,
+        },
+      },
+    })
+  }
+
+  const visualsByQuestionAndOption = new Map()
+  for (const visual of transcription.visuals) {
+    if (visual.owner.kind !== 'reading_option') continue
+    const visualsByOption = visualsByQuestionAndOption.get(
+      visual.owner.questionId,
+    ) || new Map()
+    visualsByOption.set(visual.owner.optionId, visual)
+    visualsByQuestionAndOption.set(visual.owner.questionId, visualsByOption)
+  }
+  for (const layout of transcription.sourceMeasuredFigureLayouts || []) {
+    const intent = layout.intent
+    const visualsByOption = visualsByQuestionAndOption.get(intent.questionId)
+    const visuals = intent.placements.map((placement) => (
+      visualsByOption.get(placement.optionId)
+    ))
+    const page = visuals[0].source.pageSizePoints
+    const left = Math.min(...visuals.map((visual) => visual.source.pointGeometry.x))
+    const top = Math.min(...visuals.map((visual) => visual.source.pointGeometry.y))
+    const right = Math.max(...visuals.map((visual) => (
+      visual.source.pointGeometry.x + visual.source.pointGeometry.width
+    )))
+    const bottom = Math.max(...visuals.map((visual) => (
+      visual.source.pointGeometry.y + visual.source.pointGeometry.height
+    )))
+    observations.push({
+      observationId: `observation:format2-source-layout:${intent.questionId}`,
+      kind: 'reading_option_figure_source_layout',
+      documentInputKey: 'original_question_source',
+      value: clone(layout),
+      span: {
+        kind: 'page_region',
+        page: intent.sourcePage,
+        region: {
+          x: left / page.width,
+          y: top / page.height,
+          width: (right - left) / page.width,
+          height: (bottom - top) / page.height,
         },
       },
     })
