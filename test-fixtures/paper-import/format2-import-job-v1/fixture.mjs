@@ -4,6 +4,10 @@ import { deflateSync } from 'node:zlib'
 
 import { digestJson, sha256 } from '../../../shared/paper-canonical/stable.mjs'
 import { extractAnswerTextFromPdfBytes } from '../../../server/paper-import/internal/answerTextExtraction.mjs'
+import {
+  describeAnswerImageRasterizer,
+  renderAnswerPdfPageRegion,
+} from '../../../server/paper-import/internal/answerImageEvidence.mjs'
 
 const answerRanges = [[21, 23], [24, 27], [28, 31], [32, 35], [36, 40], [41, 55], [56, 65]]
 const syntheticAnswerSourceText = answerRanges.map(([start, end]) => (
@@ -49,6 +53,57 @@ function compressedTextPdf(value) {
     `trailer\n<< /Size ${objects.length + 1} /Root 1 0 R >>\nstartxref\n${xrefOffset}\n%%EOF\n`,
   ].join('')
   chunks.push(Buffer.from(xref))
+  return Buffer.concat(chunks)
+}
+
+function imageOnlyAnswerPdf() {
+  const width = 612
+  const height = 792
+  const pixels = Buffer.alloc(width * height, 255)
+  for (let questionNo = 21; questionNo <= 65; questionNo += 1) {
+    const top = 20 + (questionNo - 21) * 16
+    for (let y = top; y < top + 10; y += 1) {
+      for (let x = 60; x < 552; x += 1) {
+        pixels[y * width + x] = ((x - 60 + questionNo) % 36) < 18 ? 25 : 210
+      }
+    }
+  }
+  const image = deflateSync(pixels)
+  const content = Buffer.from('q 612 0 0 792 0 0 cm /AnswerPage Do Q')
+  const objects = [
+    Buffer.from('<< /Type /Catalog /Pages 2 0 R >>'),
+    Buffer.from('<< /Type /Pages /Kids [3 0 R] /Count 1 >>'),
+    Buffer.from('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /XObject << /AnswerPage 4 0 R >> >> /Contents 5 0 R >>'),
+    Buffer.concat([
+      Buffer.from(`<< /Type /XObject /Subtype /Image /Width ${width} /Height ${height} /ColorSpace /DeviceGray /BitsPerComponent 8 /Filter /FlateDecode /Length ${image.byteLength} >>\nstream\n`),
+      image,
+      Buffer.from('\nendstream'),
+    ]),
+    Buffer.concat([
+      Buffer.from(`<< /Length ${content.byteLength} >>\nstream\n`),
+      content,
+      Buffer.from('\nendstream'),
+    ]),
+  ]
+  const chunks = [Buffer.from('%PDF-1.4\n%\xE2\xE3\xCF\xD3\n', 'binary')]
+  const offsets = [0]
+  let offset = chunks[0].byteLength
+  objects.forEach((object, index) => {
+    offsets.push(offset)
+    const chunk = Buffer.concat([
+      Buffer.from(`${index + 1} 0 obj\n`),
+      object,
+      Buffer.from('\nendobj\n'),
+    ])
+    chunks.push(chunk)
+    offset += chunk.byteLength
+  })
+  chunks.push(Buffer.from([
+    `xref\n0 ${objects.length + 1}\n`,
+    '0000000000 65535 f \n',
+    ...offsets.slice(1).map((entry) => `${String(entry).padStart(10, '0')} 00000 n \n`),
+    `trailer\n<< /Size ${objects.length + 1} /Root 1 0 R >>\nstartxref\n${offset}\n%%EOF\n`,
+  ].join('')))
   return Buffer.concat(chunks)
 }
 
@@ -243,11 +298,14 @@ export function makeFormat2ImportJobFixture({
   sourceDir,
   paperId = 'paper-format2-synthetic',
   writerId = 'ticket-01-fixture-writer',
+  answerEvidenceKind = 'text',
 } = {}) {
   if (!sourceDir) throw new Error('sourceDir is required')
   mkdirSync(sourceDir, { recursive: true })
   const questionPdfBytes = Buffer.from('%PDF-1.7\n% compact synthetic Format 2 question source\n')
-  const answerPdfBytes = compressedTextPdf(syntheticAnswerSourceText)
+  const answerPdfBytes = answerEvidenceKind === 'image'
+    ? imageOnlyAnswerPdf()
+    : compressedTextPdf(syntheticAnswerSourceText)
   const questionPdfPath = path.join(sourceDir, 'synthetic-questions.pdf')
   const answerPdfPath = path.join(sourceDir, 'synthetic-answers.pdf')
   writeFileSync(questionPdfPath, questionPdfBytes)
@@ -294,7 +352,10 @@ export function makeFormat2ImportJobFixture({
             visualObservationId: passageObservationId,
           },
         ],
-        questions: [21, 22, 23].map((number) => question(`question:reading-a:${number}`, number)),
+        questions: [21, 22, 23].map((number) => question(
+          number === 21 ? 'q-2026-i-021' : `question:reading-a:${number}`,
+          number,
+        )),
       },
       {
         groupId: 'group:reading-b',
@@ -426,7 +487,9 @@ export function makeFormat2ImportJobFixture({
       },
     ],
     officialAnswers: [
-      ...[21, 22, 23].map((number) => answer(`question:reading-a:${number}`)),
+      ...[21, 22, 23].map((number) => answer(
+        number === 21 ? 'q-2026-i-021' : `question:reading-a:${number}`,
+      )),
       answer(optionQuestionId),
       ...[25, 26, 27].map((number) => answer(`question:reading-b:${number}`)),
       ...[28, 29, 30, 31].map((number) => answer(`question:reading-c:${number}`)),
@@ -458,17 +521,73 @@ export function makeFormat2ImportJobFixture({
       })),
     ],
   }
-  const extraction = extractAnswerTextFromPdfBytes(answerPdfBytes)
-  const extractedAnswerText = extraction.extractedText
-  transcription.answerTranscriptionCheck = {
-    schemaVersion: 'answer-transcription-check-v1',
+  const questionNumberById = new Map(transcription.groups.flatMap((group) => (
+    group.questions.map((item) => [item.questionId, item.questionNo])
+  )))
+  const commonCheck = {
+    schemaVersion: 'answer-transcription-check-v2',
     method: 'ai-source-markings-vs-answer-key',
     answerPdfSha256,
     officialAnswersDigest: digestJson(transcription.officialAnswers),
-    extraction,
-    sourceMarkings: transcription.officialAnswers.map((officialAnswer) => ({
-      ...(() => {
-        const questionNo = Number(officialAnswer.questionId.split(':').at(-1))
+  }
+  if (answerEvidenceKind === 'image') {
+    const rasterizer = describeAnswerImageRasterizer()
+    const dpi = 72
+    const pageRaster = renderAnswerPdfPageRegion(answerPdfBytes, { page: 1, dpi })
+    const pixelBox = { x: 45, y: 16, width: 522, height: 724 }
+    const regionRaster = renderAnswerPdfPageRegion(answerPdfBytes, {
+      page: 1,
+      dpi,
+      pixelBox,
+    })
+    const regions = [{
+      regionId: 'answer-region:objective-grid',
+      page: 1,
+      pixelBox,
+      sha256: regionRaster.sha256,
+      byteLength: regionRaster.byteLength,
+    }]
+    const sourceMarking = transcription.officialAnswers.map((officialAnswer) => (
+      `${questionNumberById.get(officialAnswer.questionId)}. ${officialAnswer.answer}`
+    )).join('\n')
+    transcription.answerTranscriptionCheck = {
+      ...commonCheck,
+      evidenceKind: 'page_image_regions',
+      rasterization: { ...rasterizer, dpi },
+      pages: [{
+        page: 1,
+        pixelWidth: pageRaster.pixelWidth,
+        pixelHeight: pageRaster.pixelHeight,
+        sha256: pageRaster.sha256,
+        byteLength: pageRaster.byteLength,
+      }],
+      regions,
+      sourceMarkings: transcription.officialAnswers.map((officialAnswer) => ({
+        ...(() => {
+          const questionNo = questionNumberById.get(officialAnswer.questionId)
+          return {
+            questionId: officialAnswer.questionId,
+            questionNo,
+            questionRange: { start: 21, end: 65 },
+            answerOrdinal: questionNo - 21,
+            answer: officialAnswer.answer,
+            page: officialAnswer.source.page,
+            sourceMarking,
+            regionId: 'answer-region:objective-grid',
+          }
+        })(),
+      })),
+    }
+  } else {
+    const extraction = extractAnswerTextFromPdfBytes(answerPdfBytes)
+    const extractedAnswerText = extraction.extractedText
+    transcription.answerTranscriptionCheck = {
+      ...commonCheck,
+      evidenceKind: 'text',
+      extraction,
+      sourceMarkings: transcription.officialAnswers.map((officialAnswer) => ({
+        ...(() => {
+          const questionNo = questionNumberById.get(officialAnswer.questionId)
         const [rangeStart, rangeEnd] = answerRanges.find(
           ([start, end]) => questionNo >= start && questionNo <= end,
         )
@@ -487,8 +606,9 @@ export function makeFormat2ImportJobFixture({
           byteSpan: { start, end: start + Buffer.byteLength(sourceMarking) },
           answerByteSpan: { start: answerStart, end: answerStart + 1 },
         }
-      })(),
-    })),
+        })(),
+      })),
+    }
   }
   return {
     input: {

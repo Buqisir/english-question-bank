@@ -15,17 +15,20 @@ import * as format2ImportJobModule from '../server/paper-import/format2ImportJob
 import {
   createFormat2ImportJobRuntime,
 } from '../server/paper-import/internal/format2ImportJobRuntime.mjs'
+import { extractAnswerTextFromPdfBytes } from '../server/paper-import/internal/answerTextExtraction.mjs'
 import {
   confirmVisualImportCandidate,
 } from '../server/paper-canonical/visualCandidate.mjs'
 import { readingOptionFigureAuthorityRef } from '../shared/paper-canonical/authority.mjs'
 import { readingOptionFigureConsumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
 import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
+import { projectCanonicalPaperBrowseDisplayAsset } from '../shared/paper-canonical/paperBrowseDisplayAsset.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 import {
   createFileSystemCanonicalPublicationStore,
   loadPaperForConsumptionSync,
 } from '../server/paper-canonical/publication.mjs'
+import { createCanonicalConsumerRuntime } from '../server/paper-canonical/consumerRuntime.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
 import { createExportImplementation } from '../server/exports/exportImplementation.mjs'
 import { grammarFillRhythm } from '../shared/paper-canonical/grammarFillRhythm.mjs'
@@ -151,6 +154,9 @@ failureCase((input) => {
   input.transcription.answerTranscriptionCheck.sourceMarkings[0].byteSpan.start += 1
 }, 'FORMAT2_ANSWER_TRANSCRIPTION_CHECK_INVALID')
 failureCase((input) => {
+  input.transcription.answerTranscriptionCheck.sourceMarkings[0].questionNo = 22
+}, 'FORMAT2_ANSWER_TRANSCRIPTION_CHECK_INVALID')
+failureCase((input) => {
   input.transcription.officialAnswers[0].answer = 'B'
   input.transcription.answerTranscriptionCheck.officialAnswersDigest = digestJson(
     input.transcription.officialAnswers,
@@ -158,6 +164,105 @@ failureCase((input) => {
   input.transcription.answerTranscriptionCheck.sourceMarkings[0].answer = 'B'
   input.transcription.answerTranscriptionCheck.sourceMarkings[0].sourceMarking = '21=B'
 }, 'FORMAT2_ANSWER_TRANSCRIPTION_CHECK_INVALID')
+
+const imageAnswer = freshFixture('image-answer-')
+const imageAnswerFixture = makeFormat2ImportJobFixture({
+  sourceDir: path.join(imageAnswer.repositoryRoot, 'image-answer-sources'),
+  paperId: 'paper-format2-image-answer',
+  writerId: 'image-answer-writer',
+  answerEvidenceKind: 'image',
+})
+const imageAnswerText = extractAnswerTextFromPdfBytes(imageAnswerFixture.answerPdfBytes).extractedText
+assert.match(imageAnswerText, /^\f+$/u, 'image-only answer fixture has no extracted answer text')
+const imageAnswerResult = run(imageAnswer.repositoryRoot, imageAnswerFixture.input)
+assert.equal(imageAnswerResult.lifecycle, 'importing')
+assert.equal(
+  imageAnswerFixture.input.transcription.answerTranscriptionCheck.evidenceKind,
+  'page_image_regions',
+)
+const tamperedImageAnswer = structuredClone(imageAnswerFixture.input)
+tamperedImageAnswer.state.writerId = 'image-answer-negative-writer'
+tamperedImageAnswer.paperId = 'paper-format2-image-answer-negative'
+tamperedImageAnswer.transcription.paperId = tamperedImageAnswer.paperId
+tamperedImageAnswer.transcription.answerTranscriptionCheck.regions[0].sha256 = `sha256:${'f'.repeat(64)}`
+assertFailed(
+  run(mkdtempSync(path.join(tmpdir(), 'eqb-format2-image-negative-')), tamperedImageAnswer),
+  'FORMAT2_ANSWER_TRANSCRIPTION_CHECK_INVALID',
+)
+
+function completedFixtureForInvalidation(suffix) {
+  const prepared = freshFixture(suffix)
+  const started = run(prepared.repositoryRoot, prepared.fixture.input)
+  const candidate = JSON.parse(readFileSync(
+    artifactPath(prepared.repositoryRoot, started, 'candidatePackage'),
+    'utf8',
+  ))
+  const confirmation = exactConfirmation(candidate)
+  const completedResult = resume(prepared.repositoryRoot, {
+    paperId: prepared.fixture.input.paperId,
+    jobId: started.jobId,
+    teacherConfirmation: confirmation,
+  })
+  assert.equal(completedResult.lifecycle, 'awaiting_qa')
+  const durableDir = paperDir(prepared.repositoryRoot, prepared.fixture.input.paperId)
+  writeFileSync(
+    path.join(durableDir, 'signals/qa-accepted.json'),
+    `${JSON.stringify({
+      ...completedResult.humanEntryPoints.qaAcceptance.expectedReceipt,
+      acceptedAt: '2026-08-25T00:00:00.000Z',
+    }, null, 2)}\n`,
+  )
+  return { ...prepared, started, confirmation, durableDir }
+}
+
+const invalidSourceJob = completedFixtureForInvalidation('invalidated-source-')
+const changedInvalidSourceInput = structuredClone(invalidSourceJob.fixture.input)
+const changedInvalidQuestionBytes = Buffer.from('%PDF-1.7\n% changed source paired with invalid transcription\n')
+writeFileSync(changedInvalidSourceInput.sources.questionPdf.absolutePath, changedInvalidQuestionBytes)
+const changedInvalidQuestionDigest = sha256(new Uint8Array(changedInvalidQuestionBytes))
+changedInvalidSourceInput.sources.questionPdf.sha256 = changedInvalidQuestionDigest
+changedInvalidSourceInput.transcription.sourceBindings.questionPdfSha256 = changedInvalidQuestionDigest
+delete changedInvalidSourceInput.transcription.groups
+assertFailed(
+  run(invalidSourceJob.repositoryRoot, changedInvalidSourceInput),
+  'FORMAT2_TRANSCRIPTION_SCHEMA_INVALID',
+)
+for (const signal of ['ai-answer-check.json', 'qa-accepted.json']) {
+  assert.equal(existsSync(path.join(invalidSourceJob.durableDir, 'signals', signal)), false)
+}
+assert.equal(
+  JSON.parse(readFileSync(path.join(invalidSourceJob.durableDir, 'job/current.json'), 'utf8')).result.lifecycle,
+  'failed',
+  'changed source invalidates the prior durable awaiting_qa state before new semantic validation',
+)
+assert.equal(
+  JSON.parse(readFileSync(path.join(invalidSourceJob.durableDir, 'signals/blocked.json'), 'utf8')).code,
+  'format2_input_invalidated',
+)
+assertFailed(
+  resume(invalidSourceJob.repositoryRoot, {
+    paperId: invalidSourceJob.fixture.input.paperId,
+    jobId: invalidSourceJob.started.jobId,
+    teacherConfirmation: invalidSourceJob.confirmation,
+  }),
+  'FORMAT2_JOB_IDENTITY_MISMATCH',
+)
+
+const invalidTranscriptionJob = completedFixtureForInvalidation('invalidated-transcription-')
+const invalidChangedTranscription = structuredClone(invalidTranscriptionJob.fixture.input)
+invalidChangedTranscription.transcription.answerTranscriptionCheck.sourceMarkings[0].questionNo = 999
+assertFailed(
+  run(invalidTranscriptionJob.repositoryRoot, invalidChangedTranscription),
+  'FORMAT2_ANSWER_TRANSCRIPTION_CHECK_INVALID',
+)
+for (const signal of ['ai-answer-check.json', 'qa-accepted.json']) {
+  assert.equal(existsSync(path.join(invalidTranscriptionJob.durableDir, 'signals', signal)), false)
+}
+assert.equal(
+  JSON.parse(readFileSync(path.join(invalidTranscriptionJob.durableDir, 'job/current.json'), 'utf8')).result.lifecycle,
+  'failed',
+  'changed invalid transcription cannot leave the old Job ready_to_ship',
+)
 
 const { repositoryRoot, fixture } = freshFixture('happy-')
 const pathChoiceRoot = mkdtempSync(path.join(tmpdir(), 'eqb-format2-public-path-choice-'))
@@ -284,6 +389,11 @@ assert.deepEqual(
   'shared answer extraction covers the entire PDF and has no paper-specific page truncation',
 )
 assert.match(extractedAnswerText, /21-23 AAA/u)
+assert.equal(
+  fixture.input.transcription.answerTranscriptionCheck.sourceMarkings[0].questionId,
+  'q-2026-i-021',
+  'answer evidence accepts opaque Question IDs and uses explicit schema numbering',
+)
 for (const officialAnswer of fixture.input.transcription.officialAnswers) {
   const marking = fixture.input.transcription.answerTranscriptionCheck.sourceMarkings.find(
     (candidate) => candidate.questionId === officialAnswer.questionId,
@@ -485,6 +595,59 @@ try {
   }, publicStore)
   assert.equal(screenConsumption.disposition, 'ready')
   assert.equal(printConsumption.disposition, 'ready')
+  const publicRuntime = createCanonicalConsumerRuntime({
+    rootDir: path.join(repositoryRoot, 'app/public/paper-assets'),
+    db: publicDb,
+  })
+  const publicScreenConsumption = publicRuntime.load({
+    paperId: fixture.input.paperId,
+    consumerId: 'screen',
+  })
+  assert.equal(publicScreenConsumption.disposition, 'ready')
+  assert.equal(
+    publicScreenConsumption.publicationDigest,
+    completed.canonicalPublication.publicationDigest,
+    'the public Screen runtime resolves the exact current committed Publication',
+  )
+  assert.deepEqual(
+    publicScreenConsumption.consumerContractRef,
+    readingOptionFigureConsumerContractRefs.screen,
+    'the public Screen runtime selects the Consumer Contract bound to v46 authority',
+  )
+  const committedManifestPath = path.join(
+    repositoryRoot,
+    'app/public/paper-assets',
+    fixture.input.paperId,
+    'versions',
+    completed.canonicalPublication.versionName,
+    'canonical/canonical-paper-publication-v46.json',
+  )
+  const committedManifestBytes = readFileSync(committedManifestPath)
+  const substitutedManifest = JSON.parse(committedManifestBytes.toString('utf8'))
+  substitutedManifest.publicationDigest = `sha256:${'0'.repeat(64)}`
+  writeFileSync(committedManifestPath, JSON.stringify(substitutedManifest))
+  assert.throws(
+    () => publicRuntime.load({ paperId: fixture.input.paperId, consumerId: 'screen' }),
+    (error) => error?.code === 'CANONICAL_CONSUMPTION_REJECTED'
+      && error.diagnostics?.[0]?.code === 'CANONICAL_PUBLICATION_REF_MISMATCH',
+    'a merely-present v46 file cannot choose the Screen contract unless it matches the current committed ref',
+  )
+  writeFileSync(committedManifestPath, committedManifestBytes)
+  const screenDisplayAsset = projectCanonicalPaperBrowseDisplayAsset(
+    publicScreenConsumption,
+  )
+  assert.equal(screenDisplayAsset.schemaVersion, 'paper-asset-v1')
+  assert.equal(screenDisplayAsset.paper.paperId, fixture.input.paperId)
+  assert.deepEqual(
+    screenDisplayAsset.content.blocks
+      .filter((block) => block.type === 'group')
+      .map((block) => block.groupId),
+    publicScreenConsumption.visibleStructure
+      .filter((node) => node.kind === 'group')
+      .map((node) => node.groupId),
+    'PaperBrowse display shell is projected from the exact committed visible Group order',
+  )
+  assert.equal(screenDisplayAsset.answerKey.answers['q-2026-i-021'], undefined)
   assert.equal(screenConsumption.selections.some((selection) => selection.familyContractId === 'listening'), false)
   assert.equal(printConsumption.selections.some((selection) => selection.familyContractId === 'listening'), false)
   const qaArtifacts = completed.artifacts.qa
@@ -735,6 +898,7 @@ writeFileSync(
   path.join(durablePaperDir, 'signals/qa-accepted.json'),
   `${JSON.stringify(oldQaReceipt, null, 2)}\n`,
 )
+
 const changedGeometryInput = structuredClone(fixture.input)
 changedGeometryInput.transcription.visuals[0].source.pointGeometry.x += 1
 const changedGeometry = run(repositoryRoot, changedGeometryInput)
@@ -829,7 +993,7 @@ failureCase(
   'FORMAT2_ANSWER_OPTION_MISMATCH',
 )
 failureCase(
-  (input) => { input.transcription.groups[1].questions[0].questionId = 'question:reading-a:21' },
+  (input) => { input.transcription.groups[1].questions[0].questionId = 'q-2026-i-021' },
   'FORMAT2_TRANSCRIPTION_INVALID',
   'FORMAT2_TRANSCRIPTION_IDENTITY_DUPLICATE',
 )

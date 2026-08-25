@@ -14,18 +14,21 @@ function freezeObject(value) {
 
 export const grammarFillRhythm = freezeObject(v5Contract)
 
-const paper2026IV43GrammarFillRhythm = freezeObject(v6Contract)
-const paper2026IV44GrammarFillRhythm = freezeObject(v7Contract)
+const grammarFillRhythmV6 = freezeObject(v6Contract)
+const grammarFillRhythmV7 = freezeObject(v7Contract)
 
 export function grammarFillRhythmForPaperAuthority({ paperId, manifestVersion }) {
+  if (Number(manifestVersion) === 46) {
+    return grammarFillRhythmV7
+  }
   if (
     paperId === 'paper-2026-i'
     && [44, 45].includes(Number(manifestVersion))
   ) {
-    return paper2026IV44GrammarFillRhythm
+    return grammarFillRhythmV7
   }
   if (paperId === 'paper-2026-i' && Number(manifestVersion) === 43) {
-    return paper2026IV43GrammarFillRhythm
+    return grammarFillRhythmV6
   }
   return grammarFillRhythm
 }

@@ -41,6 +41,10 @@ import {
 } from '../../../shared/paper-canonical/consumers.mjs'
 import { readingOptionFigureAuthorityRef } from '../../../shared/paper-canonical/authority.mjs'
 import { extractAnswerTextFromPdfBytes } from './answerTextExtraction.mjs'
+import {
+  describeAnswerImageRasterizer,
+  renderAnswerPdfPageRegion,
+} from './answerImageEvidence.mjs'
 import { projectCanonicalConsumerGroup } from '../../../shared/paper-canonical/consumerProjection.mjs'
 import { createExportImplementation } from '../../exports/exportImplementation.mjs'
 import { buildPrintHtml } from '../../print-renderer.mjs'
@@ -269,60 +273,133 @@ function validateAnswerTranscriptionCheck(input, answerPdfBytes) {
   const check = transcription.answerTranscriptionCheck
   const expectedAnswers = transcription.officialAnswers
   const markings = check?.sourceMarkings
-  const extractedTextBytes = new TextEncoder().encode(check?.extraction?.extractedText || '')
-  const actualExtraction = extractAnswerTextFromPdfBytes(answerPdfBytes)
+  const questionNumberById = new Map(transcription.groups.flatMap((group) => (
+    group.questions.map((question) => [question.questionId, question.questionNo])
+  )))
   const invalidBinding = (
     !check
     || check.answerPdfSha256 !== input.sources.answerPdf.sha256
     || check.officialAnswersDigest !== digestJson(expectedAnswers)
-    || check.extraction.extractedTextSha256 !== sha256(extractedTextBytes)
-    || !sameValue(check.extraction, actualExtraction)
   )
   const answersByQuestion = new Map(expectedAnswers.map((answer) => [answer.questionId, answer]))
-  const invalidMarkings = (
+  let invalidMarkings = (
     !Array.isArray(markings)
     || markings.length !== expectedAnswers.length
     || new Set(markings?.map((marking) => marking.questionId)).size !== expectedAnswers.length
     || markings?.some((marking) => {
       const answer = answersByQuestion.get(marking.questionId)
-      const questionNo = Number(marking.questionId.split(':').at(-1))
-      const extractedPage = 1 + Buffer.from(extractedTextBytes)
-        .subarray(0, marking.byteSpan?.start)
-        .filter((byte) => byte === 0x0c).length
       return !answer
+        || !questionNumberById.has(marking.questionId)
         || marking.answer !== answer.answer
         || marking.page !== answer.source.page
-        || marking.page !== extractedPage
-        || marking.questionNo !== questionNo
+        || marking.questionNo !== questionNumberById.get(marking.questionId)
         || marking.questionRange?.start > marking.questionNo
         || marking.questionRange?.end < marking.questionNo
         || marking.answerOrdinal !== marking.questionNo - marking.questionRange?.start
-        || !Number.isInteger(marking.byteSpan?.start)
-        || !Number.isInteger(marking.byteSpan?.end)
-        || marking.byteSpan.start < 0
-        || marking.byteSpan.end <= marking.byteSpan.start
-        || marking.byteSpan.end > extractedTextBytes.byteLength
-        || Buffer.from(extractedTextBytes)
-          .subarray(marking.byteSpan.start, marking.byteSpan.end)
-          .toString('utf8') !== marking.sourceMarking
-        || !Number.isInteger(marking.answerByteSpan?.start)
-        || !Number.isInteger(marking.answerByteSpan?.end)
-        || marking.answerByteSpan.start < marking.byteSpan.start
-        || marking.answerByteSpan.end > marking.byteSpan.end
-        || marking.answerByteSpan.end <= marking.answerByteSpan.start
-        || Buffer.from(extractedTextBytes)
-          .subarray(marking.answerByteSpan.start, marking.answerByteSpan.end)
-          .toString('utf8') !== marking.answer
     })
   )
-  const markingsBySpan = new Map()
-  for (const marking of markings || []) {
-    const key = `${marking.byteSpan?.start}:${marking.byteSpan?.end}`
-    const entries = markingsBySpan.get(key) || []
-    entries.push(marking)
-    markingsBySpan.set(key, entries)
+  let evidenceDigest = null
+  let extractedTextSha256 = null
+  const markingsByEvidence = new Map()
+  if (check?.evidenceKind === 'text') {
+    const extractedTextBytes = new TextEncoder().encode(check.extraction.extractedText)
+    const actualExtraction = extractAnswerTextFromPdfBytes(answerPdfBytes)
+    invalidMarkings ||= (
+      check.extraction.extractedTextSha256 !== sha256(extractedTextBytes)
+      || !sameValue(check.extraction, actualExtraction)
+      || markings.some((marking) => {
+        const extractedPage = 1 + Buffer.from(extractedTextBytes)
+          .subarray(0, marking.byteSpan.start)
+          .filter((byte) => byte === 0x0c).length
+        return marking.page !== extractedPage
+          || marking.byteSpan.end > extractedTextBytes.byteLength
+          || Buffer.from(extractedTextBytes)
+            .subarray(marking.byteSpan.start, marking.byteSpan.end)
+            .toString('utf8') !== marking.sourceMarking
+          || marking.answerByteSpan.start < marking.byteSpan.start
+          || marking.answerByteSpan.end > marking.byteSpan.end
+          || Buffer.from(extractedTextBytes)
+            .subarray(marking.answerByteSpan.start, marking.answerByteSpan.end)
+            .toString('utf8') !== marking.answer
+      })
+    )
+    extractedTextSha256 = check.extraction.extractedTextSha256
+    evidenceDigest = extractedTextSha256
+    for (const marking of markings || []) {
+      const key = `${marking.byteSpan?.start}:${marking.byteSpan?.end}`
+      const entries = markingsByEvidence.get(key) || []
+      entries.push(marking)
+      markingsByEvidence.set(key, entries)
+    }
+  } else if (check?.evidenceKind === 'page_image_regions') {
+    const actualRasterizer = describeAnswerImageRasterizer()
+    const expectedRasterizer = {
+      schemaVersion: check.rasterization.schemaVersion,
+      tool: check.rasterization.tool,
+      toolVersion: check.rasterization.toolVersion,
+      parameters: check.rasterization.parameters,
+    }
+    const pagesByNumber = new Map((check.pages || []).map((page) => [page.page, page]))
+    const regionsById = new Map((check.regions || []).map((region) => [region.regionId, region]))
+    invalidMarkings ||= (
+      !sameValue(actualRasterizer, expectedRasterizer)
+      || pagesByNumber.size !== check.pages.length
+      || regionsById.size !== check.regions.length
+    )
+    if (!invalidMarkings) {
+      for (const pageEvidence of check.pages) {
+        const rendered = renderAnswerPdfPageRegion(answerPdfBytes, {
+          page: pageEvidence.page,
+          dpi: check.rasterization.dpi,
+        })
+        if (
+          rendered.pixelWidth !== pageEvidence.pixelWidth
+          || rendered.pixelHeight !== pageEvidence.pixelHeight
+          || rendered.byteLength !== pageEvidence.byteLength
+          || rendered.sha256 !== pageEvidence.sha256
+        ) invalidMarkings = true
+      }
+      for (const region of check.regions) {
+        const pageEvidence = pagesByNumber.get(region.page)
+        if (
+          !pageEvidence
+          || region.pixelBox.x + region.pixelBox.width > pageEvidence.pixelWidth
+          || region.pixelBox.y + region.pixelBox.height > pageEvidence.pixelHeight
+        ) {
+          invalidMarkings = true
+          continue
+        }
+        const rendered = renderAnswerPdfPageRegion(answerPdfBytes, {
+          page: region.page,
+          dpi: check.rasterization.dpi,
+          pixelBox: region.pixelBox,
+        })
+        if (
+          rendered.pixelWidth !== region.pixelBox.width
+          || rendered.pixelHeight !== region.pixelBox.height
+          || rendered.byteLength !== region.byteLength
+          || rendered.sha256 !== region.sha256
+        ) invalidMarkings = true
+      }
+    }
+    invalidMarkings ||= markings.some((marking) => {
+      const region = regionsById.get(marking.regionId)
+      return !region || region.page !== marking.page
+    })
+    evidenceDigest = digestJson({
+      rasterization: check.rasterization,
+      pages: check.pages,
+      regions: check.regions,
+    })
+    for (const marking of markings || []) {
+      const entries = markingsByEvidence.get(marking.regionId) || []
+      entries.push(marking)
+      markingsByEvidence.set(marking.regionId, entries)
+    }
+  } else {
+    invalidMarkings = true
   }
-  const invalidRangeCoverage = [...markingsBySpan.values()].some((entries) => {
+  const invalidRangeCoverage = [...markingsByEvidence.values()].some((entries) => {
     const first = entries[0]
     const start = first?.questionRange?.start
     const end = first?.questionRange?.end
@@ -331,10 +408,10 @@ function validateAnswerTranscriptionCheck(input, answerPdfBytes) {
       || !Number.isInteger(end)
       || end < start
       || entries.length !== expectedCount
-      || !first.sourceMarking.includes(`${start}-${end}`)
       || entries.some((marking) => (
         !sameValue(marking.questionRange, first.questionRange)
-        || !sameValue(marking.byteSpan, first.byteSpan)
+        || (check.evidenceKind === 'text' && !sameValue(marking.byteSpan, first.byteSpan))
+        || (check.evidenceKind === 'page_image_regions' && marking.regionId !== first.regionId)
         || marking.sourceMarking !== first.sourceMarking
       ))
       || !Array.from({ length: expectedCount }, (_value, index) => start + index)
@@ -353,7 +430,9 @@ function validateAnswerTranscriptionCheck(input, answerPdfBytes) {
     answerPdfSha256: check.answerPdfSha256,
     officialAnswersDigest: check.officialAnswersDigest,
     checkDigest: digestJson(check),
-    extractedTextSha256: check.extraction.extractedTextSha256,
+    evidenceKind: check.evidenceKind,
+    evidenceDigest,
+    ...(extractedTextSha256 ? { extractedTextSha256 } : {}),
     markingCount: markings.length,
   }
 }
@@ -840,6 +919,80 @@ function claimWriter(jobRoot, writerId) {
   }
 }
 
+function invalidateChangedDownstreamBeforeSemanticValidation({
+  input,
+  documents,
+  repositoryRoot,
+}) {
+  const paperDir = path.join(
+    repositoryRoot,
+    'scripts/import-pipeline/papers',
+    input.paperId,
+  )
+  const jobRoot = path.join(paperDir, 'job')
+  const currentPath = path.join(jobRoot, 'current.json')
+  if (!existsSync(currentPath)) return { paperDir, jobRoot }
+  claimWriter(jobRoot, input.state.writerId)
+  const current = readJson(currentPath, 'Format 2 Job current receipt')
+  if (
+    current.schemaVersion !== RECEIPT_SCHEMA_VERSION
+    || current.writerId !== input.state.writerId
+    || current.result?.paperId !== input.paperId
+  ) {
+    fail(
+      'FORMAT2_JOB_DURABLE_STATE_INVALID',
+      'Existing Format 2 Job does not bind the safely identified paper and writer',
+    )
+  }
+  const nextDigests = {
+    questionPdfSha256: documents.questionDocument.sha256,
+    answerPdfSha256: documents.answerDocument.sha256,
+    transcriptionDigest: digestJson(input.transcription),
+  }
+  const changed = Object.entries(nextDigests).some(
+    ([key, value]) => current.inputDigests?.[key] !== value,
+  )
+  if (!changed) return { paperDir, jobRoot }
+
+  const signalsDir = path.join(paperDir, 'signals')
+  mkdirSync(signalsDir, { recursive: true })
+  for (const fileName of ['ai-answer-check.json', 'qa-accepted.json', 'help-needed.json']) {
+    const signalPath = path.join(signalsDir, fileName)
+    if (existsSync(signalPath)) unlinkSync(signalPath)
+  }
+  const invalidationCode = 'format2_input_invalidated'
+  const invalidatedResult = {
+    schemaVersion: RESULT_SCHEMA_VERSION,
+    paperId: input.paperId,
+    provenance: cloneJson(input.provenance),
+    jobId: null,
+    lifecycle: 'failed',
+    stopReason: { code: invalidationCode },
+    diagnostics: [{
+      code: 'FORMAT2_UPSTREAM_INPUT_CHANGED',
+      message: 'Changed source or transcription invalidated every downstream Format 2 result before new semantic admission.',
+    }],
+    artifacts: {},
+    humanEntryPoints: null,
+    canonicalPublication: null,
+  }
+  atomicWrite(currentPath, jsonBytes({
+    schemaVersion: RECEIPT_SCHEMA_VERSION,
+    writerId: input.state.writerId,
+    inputDigests: nextDigests,
+    contractVersions: current.contractVersions || {},
+    disposition: 'failed',
+    nextStopReason: invalidationCode,
+    result: invalidatedResult,
+  }))
+  atomicWrite(path.join(signalsDir, 'blocked.json'), jsonBytes({
+    code: invalidationCode,
+    at: new Date().toISOString(),
+    note: 'Changed Format 2 source or transcription invalidated prior AI Answer Check and Owner QA.',
+  }))
+  return { paperDir, jobRoot }
+}
+
 function relativeFromPaper(paperDir, targetPath) {
   return path.relative(paperDir, targetPath).split(path.sep).join('/')
 }
@@ -961,6 +1114,15 @@ function persistRun({
   const qaAcceptedPath = path.join(signalsDir, 'qa-accepted.json')
   if (existsSync(qaAcceptedPath)) unlinkSync(qaAcceptedPath)
   const helpPath = path.join(signalsDir, 'help-needed.json')
+  const blockedPath = path.join(signalsDir, 'blocked.json')
+  if (existsSync(blockedPath)) {
+    try {
+      const blocked = JSON.parse(readFileSync(blockedPath, 'utf8'))
+      if (blocked.code === 'format2_input_invalidated') unlinkSync(blockedPath)
+    } catch {
+      // A malformed or unrelated blocker is not owned by this Job run.
+    }
+  }
   let at = new Date().toISOString()
   if (existsSync(helpPath)) {
     try {
@@ -985,7 +1147,13 @@ function persistRun({
 function runStartOrContinue(input, repositoryRoot) {
   validateOperationInput(input)
   const documents = captureExactDocuments(input)
+  const { paperDir, jobRoot } = invalidateChangedDownstreamBeforeSemanticValidation({
+    input,
+    documents,
+    repositoryRoot,
+  })
   validateTranscriptionSemantics(input, documents.answerBytes)
+  claimWriter(jobRoot, input.state.writerId)
   const sourceCapture = buildSourceCapture(documents, input.transcription)
   let candidatePackage
   try {
@@ -1011,13 +1179,6 @@ function runStartOrContinue(input, repositoryRoot) {
     authorityDigest: digestJson(readingOptionFigureAuthorityRef),
   }
   const jobId = stableId('format2-job', inputIdentity)
-  const paperDir = path.join(
-    repositoryRoot,
-    'scripts/import-pipeline/papers',
-    input.paperId,
-  )
-  const jobRoot = path.join(paperDir, 'job')
-  claimWriter(jobRoot, input.state.writerId)
   const currentPath = path.join(jobRoot, 'current.json')
   if (existsSync(currentPath)) {
     const current = readJson(currentPath, 'Format 2 Job current receipt')

@@ -425,6 +425,13 @@ const format2QaPaperDir = path.join(
 const qaAcceptedPath = path.join(format2QaPaperDir, 'signals/qa-accepted.json')
 writeFileSync(qaAcceptedPath, `${JSON.stringify(initialQaReceipt, null, 2)}\n`)
 assert.equal(probePaper({ repoRoot: root, paperId: format2QaFixture.input.paperId }).status, 'ready_to_ship')
+writeFileSync(studentArtifactPath, Buffer.concat([exactStudentBytes, Buffer.from('tampered')]))
+const tamperedQaProbe = probePaper({ repoRoot: root, paperId: format2QaFixture.input.paperId })
+assert.equal(tamperedQaProbe.qaAccepted, false)
+assert.equal(tamperedQaProbe.status, 'awaiting_qa')
+assert.equal(tamperedQaProbe.gatesGreen, false)
+writeFileSync(studentArtifactPath, exactStudentBytes)
+assert.equal(probePaper({ repoRoot: root, paperId: format2QaFixture.input.paperId }).status, 'ready_to_ship')
 
 const changedQaInput = structuredClone(format2QaFixture.input)
 const sourceVisual = changedQaInput.transcription.visuals[0]

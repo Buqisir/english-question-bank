@@ -105,7 +105,42 @@ function format2StopOf(receipt, paperId) {
   }
 }
 
-function format2QaOf(receipt, paperId) {
+function qaArtifactManifestBytesAreCurrent(paperDir, qaArtifacts) {
+  const artifacts = [
+    qaArtifacts?.studentPrint,
+    qaArtifacts?.teacherPrint,
+    qaArtifacts?.pdf,
+    ...(Array.isArray(qaArtifacts?.support) ? qaArtifacts.support : []),
+  ]
+  if (qaArtifacts?.schemaVersion !== 'format2-qa-artifacts-v1') return false
+  const paperRoot = `${path.resolve(paperDir)}${path.sep}`
+  const resolvedPaths = new Set()
+  for (const artifact of artifacts) {
+    if (
+      typeof artifact?.relativePath !== 'string'
+      || path.isAbsolute(artifact.relativePath)
+      || !/^sha256:[a-f0-9]{64}$/u.test(artifact.sha256)
+      || !Number.isInteger(artifact.byteLength)
+      || artifact.byteLength < 1
+    ) return false
+    const resolved = path.resolve(paperDir, artifact.relativePath)
+    if (!resolved.startsWith(paperRoot) || resolvedPaths.has(resolved)) return false
+    resolvedPaths.add(resolved)
+    try {
+      const bytes = readFileSync(resolved)
+      if (
+        !statSync(resolved).isFile()
+        || bytes.byteLength !== artifact.byteLength
+        || sha256(new Uint8Array(bytes)) !== artifact.sha256
+      ) return false
+    } catch {
+      return false
+    }
+  }
+  return true
+}
+
+function format2QaOf(receipt, paperId, paperDir) {
   if (
     !receipt
     || receipt._invalid
@@ -151,6 +186,7 @@ function format2QaOf(receipt, paperId) {
       !== receipt.result.canonicalPublication.publicationDigest
     || entryPoints?.qaAcceptance?.identity?.qaArtifactsManifestDigest !== digestJson(qaArtifacts)
     || entryPoints?.qaAcceptance?.expectedReceipt?.qaArtifactsManifestDigest !== digestJson(qaArtifacts)
+    || !qaArtifactManifestBytesAreCurrent(paperDir, qaArtifacts)
     || artifacts.some(([key]) => (
       entryPoints?.[key]?.sha256 !== qaArtifacts?.[key]?.sha256
       || entryPoints?.[key]?.byteLength !== qaArtifacts?.[key]?.byteLength
@@ -203,7 +239,7 @@ export function probePaper({ repoRoot, paperId }) {
   const format2ReceiptPresent = existsSync(format2ReceiptPath)
   const format2Receipt = readJsonIfPresent(format2ReceiptPath)
   const format2Stop = format2StopOf(format2Receipt, paperId)
-  const format2Qa = format2QaOf(format2Receipt, paperId)
+  const format2Qa = format2QaOf(format2Receipt, paperId, paperDir)
   const qaAccepted = format2ReceiptPresent
     ? format2QaAcceptanceIsValid(qaAcceptedReceipt, format2Qa)
     : Boolean(qaAcceptedReceipt) && !qaAcceptedReceipt._invalid
@@ -257,7 +293,9 @@ export function probePaper({ repoRoot, paperId }) {
     ...probes,
     status,
     statusLabel: LABELS[status],
-    gatesGreen: probes.latest && probes.aiCheck && !probes.blocked,
+    gatesGreen: format2ReceiptPresent
+      ? Boolean(probes.format2Qa) && probes.latest && probes.aiCheck && !probes.blocked
+      : probes.latest && probes.aiCheck && !probes.blocked,
     visible: isOpsVisible(probes),
   }
 }
@@ -295,7 +333,7 @@ export function format2QaArtifactFile({ repoRoot, paperId, artifactName }) {
   const key = routeToKey[artifactName]
   const paperDir = path.join(repoRoot, 'scripts/import-pipeline/papers', paperId)
   const receipt = readJsonIfPresent(path.join(paperDir, 'job', 'current.json'))
-  const qa = format2QaOf(receipt, paperId)
+  const qa = format2QaOf(receipt, paperId, paperDir)
   const qaArtifacts = receipt?.result?.artifacts?.qa
   const support = Array.isArray(qaArtifacts?.support)
     ? qaArtifacts.support.find((candidate) => candidate.fileName === artifactName)
