@@ -64,11 +64,11 @@ export const readingOptionFigureLayoutRef = Object.freeze({
   authorityRef: readingOptionFigureRenderingAuthorityRef,
 })
 
-function validateQuestion(question) {
+function validateQuestion(question, consumerId) {
   const labels = readingOptionFigureLayout.topology.orderedLabels
+  const hasCorrectOptionId = Object.hasOwn(question || {}, 'correctOptionId')
   if (
     question?.optionMode !== 'figure'
-    || Object.hasOwn(question, 'correctOptionId')
     || !Array.isArray(question.options)
     || question.options.length !== readingOptionFigureLayout.topology.optionCount
     || question.options.some((option, index) => (
@@ -82,6 +82,17 @@ function validateQuestion(question) {
       || option.figure?.accessibility?.kind !== 'neutral_option_identity'
       || option.figure.accessibility.optionLabel !== option.label
     ))
+    || (consumerId === 'screen' && hasCorrectOptionId)
+    || (
+      consumerId === 'print_pdf'
+      && (
+        !hasCorrectOptionId
+        || typeof question.correctOptionId !== 'string'
+        || !question.options.some(
+          (option) => option.optionId === question.correctOptionId,
+        )
+      )
+    )
   ) rejected('Reading Option Figure set is incompatible with layout v1')
 }
 
@@ -100,7 +111,7 @@ export function translateReadingOptionFigureLayout({
       expectedConsumer,
     )
   ) rejected('Reading Option Figure consumption is incompatible with layout v1')
-  validateQuestion(question)
+  validateQuestion(question, consumerId)
 
   const { topology, label, imageBox, rhythm, responsive, pagination } =
     readingOptionFigureLayout

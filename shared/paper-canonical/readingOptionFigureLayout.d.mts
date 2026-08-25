@@ -20,7 +20,9 @@ export type ReadingOptionFigureProjectedOption<Label extends 'A' | 'B' | 'C' | '
   }
 }
 
-export type ReadingOptionFigureProjectedQuestion = {
+export type ReadingOptionFigureProjectedQuestion<
+  ConsumerId extends ReadingOptionFigureConsumerId = ReadingOptionFigureConsumerId,
+> = {
   readonly optionMode: 'figure'
   readonly options: readonly [
     ReadingOptionFigureProjectedOption<'A'>,
@@ -28,8 +30,9 @@ export type ReadingOptionFigureProjectedQuestion = {
     ReadingOptionFigureProjectedOption<'C'>,
     ReadingOptionFigureProjectedOption<'D'>,
   ]
-  readonly correctOptionId?: never
-}
+} & (ConsumerId extends 'print_pdf'
+  ? { readonly correctOptionId: string }
+  : { readonly correctOptionId?: never })
 
 export type ReadingOptionFigurePlacement = {
   readonly mode: 'figure_four_equal_tracks'
@@ -70,11 +73,13 @@ export const readingOptionFigureLayoutRef: Readonly<{
   digest: string
   authorityRef: Readonly<Record<string, string>>
 }>
-export function translateReadingOptionFigureLayout(input: {
-  consumerId: ReadingOptionFigureConsumerId
+export function translateReadingOptionFigureLayout<
+  ConsumerId extends ReadingOptionFigureConsumerId,
+>(input: {
+  consumerId: ConsumerId
   consumption: {
     readonly authorityRef: Readonly<Record<string, string>>
     readonly consumerContractRef: Readonly<Record<string, string>>
   }
-  question: ReadingOptionFigureProjectedQuestion
+  question: ReadingOptionFigureProjectedQuestion<ConsumerId>
 }): ReadingOptionFigurePlacement

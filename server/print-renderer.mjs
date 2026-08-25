@@ -826,7 +826,7 @@ function renderCanonicalFigureQuestionOptions(
   placement,
   readingTail = null,
 ) {
-  const attrs = ` data-canonical-layout-id="${escapeHtml(placement.layoutId)}" data-canonical-layout-version="${escapeHtml(placement.layoutVersion)}" data-canonical-layout-digest="${escapeHtml(placement.layoutDigest)}" data-canonical-placement-signature="${escapeHtml(placement.placementSignature)}" data-canonical-pagination-policy="${escapeHtml(placement.paginationPolicy)}" style="--figure-row-start:${placement.rowStartPt}pt;--figure-row-width:${placement.rowWidthPt}pt;--figure-track-width:${placement.trackWidthPt}pt;--figure-label-font-size:${placement.labelFontSizePt}pt;--figure-label-line-height:${placement.labelLineHeightPt}pt;--figure-box-width:${placement.imageBoxWidthPt}pt;--figure-box-height:${placement.imageBoxHeightPt}pt;--figure-stem-gap:${placement.stemToBankGapPt}pt;--figure-label-gap:${placement.labelToBoxGapPt}pt;--figure-tail-gap:${placement.questionTailGapPt}pt"`
+  const attrs = ` data-canonical-layout-id="${escapeHtml(placement.layoutId)}" data-canonical-layout-version="${escapeHtml(placement.layoutVersion)}" data-canonical-layout-digest="${escapeHtml(placement.layoutDigest)}" data-canonical-placement-signature="${escapeHtml(placement.placementSignature)}" data-canonical-pagination-policy="${escapeHtml(placement.paginationPolicy)}" style="--figure-row-start:${placement.rowStartPt}pt;--figure-row-width:${placement.rowWidthPt}pt;--figure-track-count:${placement.trackCount};--figure-track-width:${placement.trackWidthPt}pt;--figure-label-font-size:${placement.labelFontSizePt}pt;--figure-label-line-height:${placement.labelLineHeightPt}pt;--figure-box-width:${placement.imageBoxWidthPt}pt;--figure-box-height:${placement.imageBoxHeightPt}pt;--figure-stem-gap:${placement.stemToBankGapPt}pt;--figure-label-gap:${placement.labelToBoxGapPt}pt;--figure-tail-gap:${placement.questionTailGapPt}pt"`
   return `<ol class="canonical-figure-options" aria-label="Figure options A to D"${attrs}>${question.options.map((option, index) => {
     const figurePlacement = placement.placements[index]
     const isTailOption =
@@ -2851,7 +2851,7 @@ body {
   box-sizing: border-box;
   display: grid;
   width: var(--figure-row-width);
-  grid-template-columns: repeat(4, var(--figure-track-width));
+  grid-template-columns: repeat(var(--figure-track-count), var(--figure-track-width));
   gap: 0;
   margin: var(--figure-stem-gap) 0 var(--figure-tail-gap) var(--figure-row-start);
   padding: 0;

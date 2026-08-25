@@ -4,6 +4,7 @@ import {
   layoutFixedFourColumnClozeOptionSet,
 } from './abcdLayout.mjs'
 import { resolveCanonicalAuthority } from './authority.mjs'
+import { readingOptionFigureConsumerContractRefs } from './consumers.mjs'
 import { readingPassageLetterBySlotId } from './readingPassageLetter.mjs'
 import { digestJson, sha256, stableStringify } from './stable.mjs'
 import { decodeCanonicalBase64, inspectPng } from './png.mjs'
@@ -37,6 +38,12 @@ function textContent(nodes) {
     throw rejected('Canonical option content is not plain renderable text')
   }
   return nodes.map((node) => node.text).join('')
+}
+
+function sameConsumerRef(left, right) {
+  return left?.id === right?.id
+    && left?.version === right?.version
+    && left?.digest === right?.digest
 }
 
 function projectReadingConsumerGroup(input, occurrence) {
@@ -334,6 +341,10 @@ function projectReadingConsumerGroup(input, occurrence) {
       throw rejected(`Canonical Reading occurrence ${groupId} mixes text and Figure Options`)
     }
     if (figureMode) {
+      const includeCorrectOptionId = sameConsumerRef(
+        input.consumption?.consumerContractRef,
+        readingOptionFigureConsumerContractRefs.print_pdf,
+      )
       const options = question.options.map((option) => ({
         optionId: option.optionId,
         label: option.label,
@@ -354,6 +365,9 @@ function projectReadingConsumerGroup(input, occurrence) {
         stemContent: structuredClone(question.stem),
         optionMode: 'figure',
         options,
+        ...(includeCorrectOptionId
+          ? { correctOptionId: question.correctOptionId }
+          : {}),
       }
     }
     const options = question.options.map((option) => ({

@@ -21,6 +21,7 @@ import {
   resolveConsumerContract,
 } from '../shared/paper-canonical/consumers.mjs'
 import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
+import { translateReadingOptionFigureLayout } from '../shared/paper-canonical/readingOptionFigureLayout.mjs'
 import { validateReadingContract } from '../shared/paper-canonical/reading.mjs'
 import { digestJson, sha256, stableStringify } from '../shared/paper-canonical/stable.mjs'
 import {
@@ -376,7 +377,16 @@ for (const [consumerId, consumption] of Object.entries(admission.consumers)) {
   })
   const question = projected.questions[0]
   assert.equal(question.optionMode, 'figure')
-  assert.equal(Object.hasOwn(question, 'correctOptionId'), false)
+  assert.equal(
+    Object.hasOwn(question, 'correctOptionId'),
+    consumerId === 'print_pdf',
+  )
+  if (consumerId === 'print_pdf') {
+    assert.equal(
+      question.correctOptionId,
+      readingOptionFigureFixtureOracle.optionIds[0],
+    )
+  }
   assert.deepEqual(question.options.map((option) => option.optionId), readingOptionFigureFixtureOracle.optionIds)
   assert.deepEqual(question.options.map((option) => option.label), ['A', 'B', 'C', 'D'])
   for (const [index, option] of question.options.entries()) {
@@ -391,8 +401,29 @@ for (const [consumerId, consumption] of Object.entries(admission.consumers)) {
     })
   }
   const serialized = stableStringify(question)
-  for (const forbidden of ['sourceCrop', 'prompt', 'candidate', 'modelMetadata', 'correctOptionId']) {
+  const forbiddenFields = ['sourceCrop', 'prompt', 'candidate', 'modelMetadata']
+  if (consumerId === 'screen') forbiddenFields.push('correctOptionId')
+  for (const forbidden of forbiddenFields) {
     assert.equal(serialized.includes(forbidden), false)
+  }
+  if (consumerId === 'print_pdf') {
+    assert.throws(() => translateReadingOptionFigureLayout({
+      consumerId,
+      consumption,
+      question: {
+        ...structuredClone(question),
+        correctOptionId: 'option:not-in-set',
+      },
+    }), /incompatible/u)
+  } else {
+    assert.throws(() => translateReadingOptionFigureLayout({
+      consumerId,
+      consumption,
+      question: {
+        ...structuredClone(question),
+        correctOptionId: readingOptionFigureFixtureOracle.optionIds[0],
+      },
+    }), /incompatible/u)
   }
 }
 

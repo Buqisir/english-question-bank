@@ -3,11 +3,14 @@
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 import {
+  mkdtempSync,
   mkdirSync,
   readFileSync,
   readdirSync,
+  rmSync,
   writeFileSync,
 } from 'node:fs'
+import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -153,6 +156,60 @@ function bytesFromDataUrl(source) {
   return new Uint8Array(Buffer.from(source.split(',')[1], 'base64'))
 }
 
+function extractPdfImageDataUrls(pdfFile) {
+  const extractionRoot = mkdtempSync(path.join(tmpdir(), 'eqb-q33-pdfimages-'))
+  try {
+    execFileSync('pdfimages', [
+      '-png',
+      pdfFile,
+      path.join(extractionRoot, 'q33-image'),
+    ])
+    const imageFiles = readdirSync(extractionRoot)
+      .filter((name) => /^q33-image-\d+\.png$/.test(name))
+      .sort()
+    assert.equal(imageFiles.length, 4, 'PDF contains exactly four decoded image streams')
+    return imageFiles.map((name) =>
+      `data:image/png;base64,${readFileSync(path.join(extractionRoot, name)).toString('base64')}`)
+  } finally {
+    rmSync(extractionRoot, { recursive: true, force: true })
+  }
+}
+
+async function decodedRgbaIdentities(page, sources) {
+  const decoded = await page.evaluate(async (imageSources) => Promise.all(
+    imageSources.map(async (source) => {
+      const image = new Image()
+      image.src = source
+      await image.decode()
+      const canvas = document.createElement('canvas')
+      canvas.width = image.naturalWidth
+      canvas.height = image.naturalHeight
+      const context = canvas.getContext('2d', {
+        alpha: true,
+        colorSpace: 'srgb',
+        willReadFrequently: true,
+      })
+      context.drawImage(image, 0, 0)
+      const rgba = context.getImageData(
+        0,
+        0,
+        image.naturalWidth,
+        image.naturalHeight,
+        { colorSpace: 'srgb' },
+      ).data
+      return {
+        pixelWidth: image.naturalWidth,
+        pixelHeight: image.naturalHeight,
+        rgba: [...rgba],
+      }
+    }),
+  ), sources)
+  return decoded.map(({ rgba, ...identity }) => ({
+    ...identity,
+    rgbaSha256: sha256(Uint8Array.from(rgba)),
+  }))
+}
+
 function syntheticPrintItem(group) {
   return {
     detail: {
@@ -169,7 +226,9 @@ function syntheticPrintItem(group) {
         id: question.questionId,
         questionNo: String(question.questionNo),
         stem: 'POISONED LEGACY STEM',
-        answer: question.questionId === questionId ? 'D' : 'A',
+        answer: question.questionId === questionId
+          ? 'WRONG-LEGACY-ANSWER'
+          : 'A',
         explanation: question.questionId === questionId
           ? 'Official answer identity retained from the admitted answer source.'
           : '',
@@ -186,6 +245,8 @@ const screenGroup = project(canary.screenConsumption)
 const printGroup = project(canary.printConsumption)
 const screenQuestion = figureQuestion(screenGroup)
 const printQuestion = figureQuestion(printGroup)
+assert.equal(Object.hasOwn(screenQuestion, 'correctOptionId'), false)
+assert.equal(printQuestion.correctOptionId, `option:${questionId}:D`)
 const selectedArtifactDigests = canary.confirmedSelection.confirmedSelections
   .sort((left, right) => left.owner.optionId.localeCompare(right.owner.optionId))
   .map((selection) => selection.artifact.sha256)
@@ -234,6 +295,7 @@ for (const versionType of ['student', 'teacher']) {
   assert.equal(html.includes('Which of the following best illustrates'), true)
   assert.equal(html.includes('data-canonical-correct-option-id='), versionType === 'teacher')
   assert.equal(html.includes('<strong>【答案】</strong>D'), versionType === 'teacher')
+  assert.equal(html.includes('WRONG-LEGACY-ANSWER'), false)
   const sources = dataUrlSources(html, 'canonical-figure-option-image')
   assert.equal(sources.length, 4)
   assert.deepEqual(
@@ -286,6 +348,8 @@ function pdfImageDimensions(pdfFile) {
     )].map((match) => [Number(match[1]), Number(match[2])]),
   }
 }
+
+let pdfImagePixelIdentityEvidence = null
 
 async function verifyRenderedArtifacts() {
   const vite = await import('../app/node_modules/vite/dist/node/index.js')
@@ -395,6 +459,27 @@ async function verifyRenderedArtifacts() {
       preferCSSPageSize: true,
     })
     assert.equal(pdfBytes.subarray(0, 4).toString(), '%PDF')
+    const confirmedSources = printCases.get('student').sources
+    const extractedPdfSources = extractPdfImageDataUrls(pdfPath)
+    const confirmedPixelIdentities = await decodedRgbaIdentities(
+      pdfPage,
+      confirmedSources,
+    )
+    const pdfPixelIdentities = await decodedRgbaIdentities(
+      pdfPage,
+      extractedPdfSources,
+    )
+    assert.deepEqual(
+      pdfPixelIdentities,
+      confirmedPixelIdentities,
+      'PDF decoded RGBA pixels retain the four confirmed source images in A-D order',
+    )
+    pdfImagePixelIdentityEvidence = labels.map((label, index) => ({
+      label,
+      confirmedArtifactSha256: selectedArtifactDigests[index],
+      ...confirmedPixelIdentities[index],
+      pdfRgbaSha256: pdfPixelIdentities[index].rgbaSha256,
+    }))
     await pdfPage.close()
   } finally {
     await browser.close()
@@ -418,6 +503,7 @@ assert.deepEqual(
     option.figure.pixelHeight,
   ]),
 )
+assert.ok(pdfImagePixelIdentityEvidence)
 writeFileSync(path.join(artifactRoot, 'q33-student.pdfinfo.txt'), pdfInfo)
 writeFileSync(path.join(artifactRoot, 'q33-student.pdfimages.txt'), pdfImages.listing)
 writeFileSync(path.join(artifactRoot, 'q33-student.txt'), pdfText)
@@ -443,6 +529,7 @@ writeFileSync(
     pdfPath: path.relative(repoRoot, pdfPath),
     rasterFiles,
     pdfImageDimensions: pdfImages.dimensions,
+    pdfImagePixelIdentities: pdfImagePixelIdentityEvidence,
   }, null, 2)}\n`,
 )
 

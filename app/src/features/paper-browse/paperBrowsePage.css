@@ -1541,7 +1541,7 @@
   /* Figure comparison retains four equal source-order tracks. This explicit
      override wins over the text-only mobile one-column rule immediately above. */
   .paper-browse-content .ps-option-list.ps-option-list--figure {
-    grid-template-columns: repeat(4, minmax(var(--ps-figure-min-track-width), 1fr)) !important;
+    grid-template-columns: repeat(var(--ps-figure-track-count), minmax(var(--ps-figure-min-track-width), 1fr)) !important;
     min-width: var(--ps-figure-min-row-width);
     max-width: var(--ps-figure-row-width) !important;
     margin-left: 0 !important;

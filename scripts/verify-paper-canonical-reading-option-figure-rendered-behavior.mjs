@@ -78,7 +78,7 @@ function syntheticPrintItem(group) {
         id: question.questionId,
         questionNo: String(question.questionNo),
         stem: 'POISONED LEGACY STEM',
-        answer: 'A',
+        answer: 'B',
         explanation: 'teacher explanation supplement',
         options: [{ label: 'A', content: 'POISONED LEGACY OPTION' }],
       })),
@@ -241,6 +241,11 @@ const screenGroup = project(screenConsumption)
 const printGroup = project(printConsumption)
 const screenQuestion = figureQuestion(screenGroup)
 const printQuestion = figureQuestion(printGroup)
+assert.equal(Object.hasOwn(screenQuestion, 'correctOptionId'), false)
+assert.equal(
+  printQuestion.correctOptionId,
+  readingOptionFigureFixtureOracle.optionIds[0],
+)
 const surfacePayload = buildCanonicalReadingConsumptionSurfaceData({
   consumption: screenConsumption,
   groupId: screenGroup.groupId,
@@ -292,6 +297,7 @@ for (const versionType of ['student', 'teacher']) {
   assert.equal(html.includes('<figcaption'), false)
   assert.equal(html.includes('data-canonical-correct-option-id='), versionType === 'teacher')
   assert.equal(html.includes('<strong>【答案】</strong>A'), versionType === 'teacher')
+  assert.equal(html.includes('<strong>【答案】</strong>B'), false)
   const sources = dataUrlSources(html, 'canonical-figure-option-image')
   assert.equal(sources.length, 4)
   assert.deepEqual(

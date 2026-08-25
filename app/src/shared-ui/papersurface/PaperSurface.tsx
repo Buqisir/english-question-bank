@@ -1572,12 +1572,15 @@ function figureOptionPlacementStyle(
     '--ps-figure-row-start': `${figurePlacement.rowStartPt}pt`,
     '--ps-figure-min-row-width':
       `${figurePlacement.trackCount * figurePlacement.minTrackWidthPt}pt`,
+    '--ps-figure-track-count': figurePlacement.trackCount,
     '--ps-figure-min-track-width': `${figurePlacement.minTrackWidthPt}pt`,
     '--ps-figure-track-width': `${figurePlacement.trackWidthPt}pt`,
     '--ps-figure-label-font-size': `${figurePlacement.labelFontSizePt}pt`,
     '--ps-figure-label-line-height': `${figurePlacement.labelLineHeightPt}pt`,
     '--ps-figure-box-width': `${figurePlacement.imageBoxWidthPt}pt`,
     '--ps-figure-box-height': `${figurePlacement.imageBoxHeightPt}pt`,
+    '--ps-figure-box-aspect':
+      `${figurePlacement.imageBoxWidthPt} / ${figurePlacement.imageBoxHeightPt}`,
     '--ps-figure-stem-gap': `${figurePlacement.stemToBankGapPt}pt`,
     '--ps-figure-label-gap': `${figurePlacement.labelToBoxGapPt}pt`,
     '--ps-figure-tail-gap': `${figurePlacement.questionTailGapPt}pt`,

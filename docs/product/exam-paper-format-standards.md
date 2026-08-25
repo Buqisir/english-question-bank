@@ -19,6 +19,16 @@ immutable v4 Publication
 卷型题号、分值、题组 cardinality、清洗条件或字体/物理排版数值，也不能被 caller
 当作第二套配置。
 
+Source-faithful Reading Figure Option 另有一条 additive scoped successor 链：
+[`manifest-v46.json`](../../standards/paper-canonical/manifest-v46.json) 将 Reading v2
+的确认后 admission 与共享投影闭合到
+[`screen-v38.json`](../../standards/paper-canonical/consumers/screen-v38.json) 和
+[`print-pdf-v39.json`](../../standards/paper-canonical/consumers/print-pdf-v39.json)；
+[`manifest-v47.json`](../../standards/paper-canonical/manifest-v47.json) 保留这组
+Canonical/consumer 身份并新增共享 Figure Option layout authority。v46/v47 只供
+新近明确兼容的 Publication 与显式迁移的本地深圳 Q33 canary 使用；它们既不推进
+全局 accepted v36，也不推进或替代 `paper-2026-i` 当前 scoped v45。
+
 机器 manifest 分别绑定 Core Invariants、NCK1 / Zhejiang legacy / national
 legacy Profiles、各 family contract、Normalization Rules、Source Adapters、
 Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、digest 不符、
