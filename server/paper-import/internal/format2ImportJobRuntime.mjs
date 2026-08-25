@@ -6,10 +6,12 @@ import {
   openSync,
   readFileSync,
   renameSync,
+  unlinkSync,
   writeFileSync,
 } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { DatabaseSync } from 'node:sqlite'
 
 import {
   cloneJson,
@@ -18,7 +20,23 @@ import {
   sha256,
   stableStringify,
 } from '../../../shared/paper-canonical/stable.mjs'
-import { createVisualImportCandidate } from '../../paper-canonical/visualCandidate.mjs'
+import {
+  createFileSystemCanonicalPublicationStore,
+  loadPaperForConsumptionSync,
+  publishCanonicalPaperPublication,
+  recoverCanonicalPaperPublication,
+} from '../../paper-canonical/publication.mjs'
+import {
+  buildConfirmedFormat2CanonicalRequest,
+} from '../../paper-canonical/format2CanonicalRequest.mjs'
+import {
+  confirmVisualImportCandidate,
+  createVisualImportCandidate,
+} from '../../paper-canonical/visualCandidate.mjs'
+import {
+  readingOptionFigureConsumerContractRefs,
+} from '../../../shared/paper-canonical/consumers.mjs'
+import { readingOptionFigureAuthorityRef } from '../../../shared/paper-canonical/authority.mjs'
 
 const FORMAT = 'format2-pdf-pair-v1'
 const RESULT_SCHEMA_VERSION = 'format2-import-job-result-v1'
@@ -26,6 +44,7 @@ const RECEIPT_SCHEMA_VERSION = 'format2-import-job-receipt-v1'
 const TRANSCRIPTION_SCHEMA_VERSION = 'format2-transcription-v1'
 const SOURCE_PAIR_SCHEMA_VERSION = 'format2-source-pair-v1'
 const STOP_CODE = 'exact_teacher_confirmation_required'
+const QA_STOP_CODE = 'owner_qa_required'
 const PAPER_ID_PATTERN = /^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/u
 const SHA256_PATTERN = /^sha256:[a-f0-9]{64}$/u
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..')
@@ -285,6 +304,7 @@ function validateTranscriptionSemantics(input) {
   const questionNumbers = new Set()
   const answerRefs = new Set()
   const blockIds = new Set()
+  const slotIds = new Set()
   const visualReferences = new Map()
   for (const [groupIndex, group] of transcription.groups.entries()) {
     const groupPath = `/groups/${groupIndex}`
@@ -292,6 +312,14 @@ function validateTranscriptionSemantics(input) {
       issues.push(semanticIssue('FORMAT2_TRANSCRIPTION_IDENTITY_DUPLICATE', `${groupPath}/groupId`, 'Group identity is duplicated'))
     }
     groups.set(group.groupId, group)
+    if (slotIds.has(group.slotId)) {
+      issues.push(semanticIssue(
+        'FORMAT2_TRANSCRIPTION_IDENTITY_DUPLICATE',
+        `${groupPath}/slotId`,
+        'Canonical source slot identity is duplicated',
+      ))
+    }
+    slotIds.add(group.slotId)
     const writingBlocks = group.blocks.filter((block) => block.kind === 'writing_material')
     const listeningBlocks = group.blocks.filter((block) => block.kind === 'listening_material')
     const objectiveGroup = ['reading', 'seven_choices', 'cloze', 'grammar_fill'].includes(group.groupType)
@@ -313,6 +341,20 @@ function validateTranscriptionSemantics(input) {
       ))
       || (!expectedWritingTask && writingBlocks.length > 0)
       || (group.groupType !== 'listening' && listeningBlocks.length > 0)
+      || (expectedWritingTask === 'application'
+        && (
+          writingBlocks[0]?.continuationStarters !== undefined
+          || writingBlocks[0]?.sourceInstruction !== undefined
+          || writingBlocks[0]?.wordCountScope !== 'student_authored_only'
+          || writingBlocks[0]?.applicationEvidence?.answerRegionAbsent !== true
+        ))
+      || (expectedWritingTask === 'continuation'
+        && (
+          writingBlocks[0]?.continuationStarters?.length !== 2
+          || typeof writingBlocks[0]?.sourceInstruction !== 'string'
+          || writingBlocks[0]?.wordCountScope !== 'unspecified'
+          || writingBlocks[0]?.applicationEvidence !== undefined
+        ))
     ) {
       issues.push(semanticIssue(
         'FORMAT2_TRANSCRIPTION_GROUP_SHAPE_INVALID',
@@ -409,6 +451,16 @@ function validateTranscriptionSemantics(input) {
         'FORMAT2_ANSWER_QUESTION_MISMATCH',
         answerPath,
         'Official answer does not bind one exact transcribed question',
+      ))
+    }
+    if (
+      questionRecord?.question.options.length > 0
+      && !questionRecord.question.options.some((option) => option.label === answer.answer)
+    ) {
+      issues.push(semanticIssue(
+        'FORMAT2_ANSWER_OPTION_MISMATCH',
+        `${answerPath}/answer`,
+        'Official objective answer must name one exact transcribed option label',
       ))
     }
     if (answer.source.documentRole !== 'answer_pdf') {
@@ -786,6 +838,7 @@ function persistRun({
       questionPdfSha256: documents.questionDocument.sha256,
       answerPdfSha256: documents.answerDocument.sha256,
       transcriptionDigest: digestJson(input.transcription),
+      authorityDigest: digestJson(readingOptionFigureAuthorityRef),
     },
     contractVersions: {
       transcription: TRANSCRIPTION_SCHEMA_VERSION,
@@ -799,6 +852,8 @@ function persistRun({
   atomicWrite(path.join(jobRoot, 'current.json'), jsonBytes(currentReceipt))
   const signalsDir = path.join(paperDir, 'signals')
   mkdirSync(signalsDir, { recursive: true })
+  const aiCheckPath = path.join(signalsDir, 'ai-answer-check.json')
+  if (existsSync(aiCheckPath)) unlinkSync(aiCheckPath)
   const helpPath = path.join(signalsDir, 'help-needed.json')
   let at = new Date().toISOString()
   if (existsSync(helpPath)) {
@@ -847,6 +902,7 @@ function runStartOrContinue(input, repositoryRoot) {
     transcriptionDigest: digestJson(input.transcription),
     sourceCaptureDigest: sourceCapture.digest,
     candidatePackageDigest: candidatePackage.packageDigest,
+    authorityDigest: digestJson(readingOptionFigureAuthorityRef),
   }
   const jobId = stableId('format2-job', inputIdentity)
   const paperDir = path.join(
@@ -856,6 +912,15 @@ function runStartOrContinue(input, repositoryRoot) {
   )
   const jobRoot = path.join(paperDir, 'job')
   claimWriter(jobRoot, input.state.writerId)
+  const currentPath = path.join(jobRoot, 'current.json')
+  if (existsSync(currentPath)) {
+    const current = readJson(currentPath, 'Format 2 Job current receipt')
+    if (
+      current.schemaVersion === RECEIPT_SCHEMA_VERSION
+      && current.result?.jobId === jobId
+      && current.result?.lifecycle === 'awaiting_qa'
+    ) return verifyCompletedAwaitingQa(repositoryRoot, paperDir, jobRoot, current)
+  }
   const runDir = path.join(jobRoot, 'runs', jobId.slice('format2-job:'.length))
   const comparisonBytes = Buffer.from(buildComparisonHtml({
     paperId: input.paperId,
@@ -885,7 +950,497 @@ function runStartOrContinue(input, repositoryRoot) {
   return cloneJson(result)
 }
 
-export function createFormat2ImportJobRuntime({ repositoryRoot }) {
+function validateResumeInput(input) {
+  if (!exactKeys(input, ['paperId', 'jobId', 'teacherConfirmation'])) {
+    fail(
+      'FORMAT2_JOB_RESUME_REQUEST_INVALID',
+      'Format 2 Job resume accepts only paperId, jobId, and teacherConfirmation',
+    )
+  }
+  if (!PAPER_ID_PATTERN.test(input.paperId)) {
+    fail('FORMAT2_JOB_PAPER_ID_UNSAFE', 'Format 2 Job paperId is unsafe')
+  }
+  if (!/^format2-job:[a-f0-9]{21}$/u.test(input.jobId)) {
+    fail('FORMAT2_JOB_IDENTITY_INVALID', 'Format 2 Job resume requires one exact Job identity')
+  }
+  if (!input.teacherConfirmation || typeof input.teacherConfirmation !== 'object') {
+    fail(
+      'FORMAT2_JOB_CONFIRMATION_INVALID',
+      'Format 2 Job resume requires one exact Teacher Confirmation',
+    )
+  }
+}
+
+function resolveDurableArtifact(paperDir, relativePath, label) {
+  if (!nonEmptyString(relativePath) || path.isAbsolute(relativePath)) {
+    fail('FORMAT2_JOB_DURABLE_STATE_INVALID', `${label} path is invalid`)
+  }
+  const resolved = path.resolve(paperDir, relativePath)
+  if (!resolved.startsWith(`${path.resolve(paperDir)}${path.sep}`)) {
+    fail('FORMAT2_JOB_DURABLE_STATE_INVALID', `${label} path escapes the paper Job`)
+  }
+  if (!existsSync(resolved)) {
+    fail('FORMAT2_JOB_DURABLE_STATE_INVALID', `${label} is missing`)
+  }
+  return resolved
+}
+
+function loadResumeEvidence(repositoryRoot, input) {
+  const paperDir = path.join(
+    repositoryRoot,
+    'scripts/import-pipeline/papers',
+    input.paperId,
+  )
+  const jobRoot = path.join(paperDir, 'job')
+  const currentPath = path.join(jobRoot, 'current.json')
+  if (!existsSync(currentPath)) {
+    fail('FORMAT2_JOB_NOT_FOUND', 'Format 2 Job durable receipt is missing')
+  }
+  const receipt = readJson(currentPath, 'Format 2 Job current receipt')
+  if (
+    receipt.schemaVersion !== RECEIPT_SCHEMA_VERSION
+    || receipt.result?.schemaVersion !== RESULT_SCHEMA_VERSION
+    || receipt.result.paperId !== input.paperId
+    || receipt.result.jobId !== input.jobId
+  ) {
+    fail(
+      'FORMAT2_JOB_IDENTITY_MISMATCH',
+      'Resume identity differs from the exact current durable Job',
+    )
+  }
+  if (receipt.inputDigests?.authorityDigest !== digestJson(readingOptionFigureAuthorityRef)) {
+    fail(
+      'FORMAT2_JOB_AUTHORITY_STALE',
+      'The durable Job authority differs from the current closed compiler authority',
+    )
+  }
+  if (receipt.result.lifecycle === 'awaiting_qa') {
+    if (
+      input.teacherConfirmation.packageDigest
+        !== receipt.result.artifacts?.candidatePackage?.packageDigest
+      || digestJson(input.teacherConfirmation)
+        !== receipt.result.artifacts?.confirmedSelection?.confirmationDigest
+    ) {
+      fail(
+        'FORMAT2_JOB_CONFIRMATION_STALE',
+        'Completed Job no-op requires the exact committed Teacher Confirmation',
+      )
+    }
+    return { paperDir, jobRoot, receipt, completed: true }
+  }
+  if (
+    receipt.result.lifecycle !== 'importing'
+    || receipt.result.stopReason?.code !== STOP_CODE
+  ) {
+    fail(
+      'FORMAT2_JOB_STATE_INVALID',
+      'Format 2 Job is not stopped at exact Teacher Confirmation',
+    )
+  }
+  const transcriptionPath = resolveDurableArtifact(
+    paperDir,
+    receipt.result.artifacts?.transcription?.relativePath,
+    'Format 2 transcription',
+  )
+  const sourceCapturePath = resolveDurableArtifact(
+    paperDir,
+    receipt.result.artifacts?.sourceCapture?.relativePath,
+    'Source Capture',
+  )
+  const candidatePath = resolveDurableArtifact(
+    paperDir,
+    receipt.result.artifacts?.candidatePackage?.relativePath,
+    'Visual Candidate package',
+  )
+  const transcription = readJson(transcriptionPath, 'Format 2 transcription')
+  const sourceCapture = readJson(sourceCapturePath, 'Format 2 Source Capture')
+  const candidatePackage = readJson(candidatePath, 'Format 2 Visual Candidate package')
+  if (
+    digestJson(transcription) !== receipt.result.artifacts.transcription.digest
+    || sourceCapture.digest !== receipt.result.artifacts.sourceCapture.digest
+    || candidatePackage.packageDigest !== receipt.result.artifacts.candidatePackage.packageDigest
+    || candidatePackage.packageDigest !== input.teacherConfirmation.packageDigest
+  ) {
+    fail(
+      'FORMAT2_JOB_CONFIRMATION_STALE',
+      'Teacher Confirmation or durable evidence differs from the exact current candidate package',
+    )
+  }
+  const questionDocument = sourceCapture.documents.find(
+    (document) => document.inputKey === 'question_pdf',
+  )
+  const answerDocument = sourceCapture.documents.find(
+    (document) => document.inputKey === 'answer_pdf',
+  )
+  if (!questionDocument || !answerDocument) {
+    fail('FORMAT2_JOB_DURABLE_STATE_INVALID', 'Source Capture PDF pair is incomplete')
+  }
+  const questionPdfBytes = new Uint8Array(Buffer.from(questionDocument.encodedBytes, 'base64'))
+  const answerPdfBytes = new Uint8Array(Buffer.from(answerDocument.encodedBytes, 'base64'))
+  if (
+    sha256(questionPdfBytes) !== receipt.inputDigests.questionPdfSha256
+    || sha256(answerPdfBytes) !== receipt.inputDigests.answerPdfSha256
+    || digestJson(transcription) !== receipt.inputDigests.transcriptionDigest
+    || receipt.inputDigests.authorityDigest !== digestJson(readingOptionFigureAuthorityRef)
+  ) {
+    fail(
+      'FORMAT2_JOB_DURABLE_STATE_INVALID',
+      'Durable source or transcription bytes no longer bind the current Job',
+    )
+  }
+  return {
+    paperDir,
+    jobRoot,
+    receipt,
+    completed: false,
+    transcription,
+    sourceCapture,
+    candidatePackage,
+    questionPdfBytes,
+    answerPdfBytes,
+  }
+}
+
+function unresolvedResumeResult(evidence, confirmedSelection) {
+  return {
+    ...cloneJson(evidence.receipt.result),
+    diagnostics: confirmedSelection.unresolvedIssues.map((issue) => cloneJson(issue)),
+  }
+}
+
+function canonicalDiagnostics(compilation) {
+  return (compilation?.artifacts?.normalizationReport?.diagnostics || [])
+    .filter((diagnostic) => diagnostic.disposition !== 'ready')
+    .map((diagnostic) => cloneJson(diagnostic))
+}
+
+function readingOptionPublicationConfirmation(evidence, confirmedSelection) {
+  const readingObservationIds = new Set(evidence.candidatePackage.observations
+    .filter((observation) => observation.owner?.kind === 'reading_option')
+    .map((observation) => observation.observationId))
+  const candidatePackage = createVisualImportCandidate({
+    sourceCapture: evidence.sourceCapture,
+    observations: evidence.candidatePackage.observations
+      .filter((observation) => readingObservationIds.has(observation.observationId))
+      .map((observation) => ({
+        observationId: observation.observationId,
+        owner: cloneJson(observation.owner),
+        sourceCrop: cloneJson(observation.sourceCrop),
+      })),
+    candidates: evidence.candidatePackage.candidates
+      .filter((candidate) => readingObservationIds.has(candidate.observationId))
+      .map((candidate) => ({
+        observationId: candidate.observationId,
+        owner: cloneJson(candidate.owner),
+        method: candidate.method,
+        artifact: cloneJson(candidate.artifact),
+        sourceTruthChecklist: cloneJson(candidate.sourceTruthChecklist),
+        ...(candidate.reproducibility
+          ? { reproducibility: cloneJson(candidate.reproducibility) }
+          : {}),
+      })),
+  })
+  const selectedByObservation = new Map(confirmedSelection.confirmedSelections.map(
+    (selection) => [selection.observationId, selection],
+  ))
+  const teacherConfirmation = {
+    schemaVersion: 'visual-teacher-confirmation-v1',
+    packageDigest: candidatePackage.packageDigest,
+    decisions: candidatePackage.observations.map((observation) => ({
+      observationId: observation.observationId,
+      owner: cloneJson(observation.owner),
+      disposition: 'confirmed',
+      selectedCandidateDigest: selectedByObservation.get(
+        observation.observationId,
+      ).candidateDigest,
+    })),
+  }
+  return { candidatePackage, teacherConfirmation }
+}
+
+function buildQaEntryPoints(paperId, publication) {
+  const encodedPaperId = encodeURIComponent(paperId)
+  const screen = `/?view=paper-browse&paperId=${encodedPaperId}`
+  return {
+    service: {
+      command: 'bash scripts/dev.sh',
+      appOrigin: 'http://127.0.0.1:3000',
+    },
+    screen: { href: screen, mode: 'canonical-screen' },
+    studentPrint: { href: screen, mode: 'student-print' },
+    teacherPrint: { href: `${screen}&lecture=1`, mode: 'teacher-print' },
+    pdf: { href: screen, mode: 'browser-generated-pdf' },
+    firstFocusState: {
+      view: 'paper-browse',
+      paperId,
+      lecture: false,
+    },
+    gateSummary: `Canonical ${publication.versionName} exact reload is ready; Owner QA remains required.`,
+  }
+}
+
+function committedPublicationIdentity({ paperId, published, screen, printPdf }) {
+  return {
+    paperId,
+    versionName: published.versionName,
+    sourceAssetVersion: 1,
+    publicationDigest: published.publicationDigest,
+    reloads: {
+      screen: {
+        disposition: screen.disposition,
+        paperId: screen.paperId,
+        versionName: published.versionName,
+        publicationDigest: published.publicationDigest,
+      },
+      printPdf: {
+        disposition: printPdf.disposition,
+        paperId: printPdf.paperId,
+        versionName: published.versionName,
+        publicationDigest: published.publicationDigest,
+      },
+    },
+  }
+}
+
+function verifyCompletedAwaitingQa(repositoryRoot, paperDir, jobRoot, receipt) {
+  const committed = receipt.result?.canonicalPublication
+  const publicationDbPath = path.join(jobRoot, 'canonical-publication.sqlite')
+  if (
+    committed?.paperId !== receipt.result.paperId
+    || !nonEmptyString(committed.versionName)
+    || !nonEmptyString(committed.publicationDigest)
+    || !existsSync(publicationDbPath)
+  ) {
+    fail(
+      'FORMAT2_JOB_DURABLE_STATE_INVALID',
+      'Completed Format 2 Job lacks one closed local publication identity',
+    )
+  }
+  const db = new DatabaseSync(publicationDbPath)
+  try {
+    const store = createFileSystemCanonicalPublicationStore({
+      rootDir: path.join(repositoryRoot, 'app/public/paper-assets'),
+      db,
+    })
+    const screen = loadPaperForConsumptionSync({
+      paperId: committed.paperId,
+      version: committed.versionName,
+      consumerContract: readingOptionFigureConsumerContractRefs.screen,
+    }, store)
+    const printPdf = loadPaperForConsumptionSync({
+      paperId: committed.paperId,
+      version: committed.versionName,
+      consumerContract: readingOptionFigureConsumerContractRefs.print_pdf,
+    }, store)
+    const currentRef = store.readPublishedRefs(committed.paperId).current
+    if (
+      screen.disposition !== 'ready'
+      || printPdf.disposition !== 'ready'
+      || currentRef?.versionName !== committed.versionName
+      || currentRef?.publicationDigest !== committed.publicationDigest
+    ) {
+      fail(
+        'FORMAT2_CANONICAL_EXACT_RELOAD_FAILED',
+        'Completed Format 2 Job no-op requires the exact committed local reload',
+      )
+    }
+  } finally {
+    db.close()
+  }
+  const signalsDir = path.join(paperDir, 'signals')
+  const aiCheckPath = path.join(signalsDir, 'ai-answer-check.json')
+  let aiCheckValid = false
+  if (existsSync(aiCheckPath)) {
+    try {
+      aiCheckValid = readJson(aiCheckPath, 'Format 2 AI answer-check signal').ok === true
+    } catch {
+      aiCheckValid = false
+    }
+  }
+  if (!aiCheckValid) {
+    mkdirSync(signalsDir, { recursive: true })
+    atomicWrite(aiCheckPath, jsonBytes({
+      ok: true,
+      checkedAt: new Date().toISOString(),
+      method: 'source-markings-vs-answerKey',
+    }))
+  }
+  const helpPath = path.join(signalsDir, 'help-needed.json')
+  if (existsSync(helpPath)) unlinkSync(helpPath)
+  writeImmutable(
+    path.join(jobRoot, 'publication-store.json'),
+    jsonBytes({
+      schemaVersion: 'format2-local-publication-store-v1',
+      database: path.basename(publicationDbPath),
+    }),
+    'Format 2 local publication store descriptor',
+  )
+  return cloneJson(receipt.result)
+}
+
+function persistAwaitingQa({ evidence, result, publicationDbPath }) {
+  const current = {
+    ...cloneJson(evidence.receipt),
+    contractVersions: {
+      ...cloneJson(evidence.receipt.contractVersions),
+      canonicalPublication: 'canonical-paper-publication-v46',
+    },
+    disposition: 'stopped',
+    nextStopReason: QA_STOP_CODE,
+    result,
+  }
+  atomicWrite(path.join(evidence.jobRoot, 'current.json'), jsonBytes(current))
+  const signalsDir = path.join(evidence.paperDir, 'signals')
+  mkdirSync(signalsDir, { recursive: true })
+  atomicWrite(path.join(signalsDir, 'ai-answer-check.json'), jsonBytes({
+    ok: true,
+    checkedAt: new Date().toISOString(),
+    method: 'source-markings-vs-answerKey',
+  }))
+  const helpPath = path.join(signalsDir, 'help-needed.json')
+  if (existsSync(helpPath)) unlinkSync(helpPath)
+  writeImmutable(
+    path.join(evidence.jobRoot, 'publication-store.json'),
+    jsonBytes({
+      schemaVersion: 'format2-local-publication-store-v1',
+      database: path.basename(publicationDbPath),
+    }),
+    'Format 2 local publication store descriptor',
+  )
+}
+
+function runResume(input, repositoryRoot, publicationFailurePoint = null) {
+  validateResumeInput(input)
+  const evidence = loadResumeEvidence(repositoryRoot, input)
+  if (evidence.completed) {
+    return verifyCompletedAwaitingQa(
+      repositoryRoot,
+      evidence.paperDir,
+      evidence.jobRoot,
+      evidence.receipt,
+    )
+  }
+  let confirmedSelection
+  try {
+    confirmedSelection = confirmVisualImportCandidate(
+      evidence.candidatePackage,
+      input.teacherConfirmation,
+    )
+  } catch (error) {
+    fail(
+      error?.code || 'FORMAT2_JOB_CONFIRMATION_INVALID',
+      error?.message || 'Exact Teacher Confirmation failed closed',
+    )
+  }
+  if (
+    confirmedSelection.status !== 'confirmed'
+    || confirmedSelection.unresolvedIssues.length > 0
+  ) {
+    return unresolvedResumeResult(evidence, confirmedSelection)
+  }
+  const prepared = buildConfirmedFormat2CanonicalRequest({
+    transcription: evidence.transcription,
+    questionPdfBytes: evidence.questionPdfBytes,
+    answerPdfBytes: evidence.answerPdfBytes,
+    confirmedSelection,
+  })
+  const publicationConfirmation = readingOptionPublicationConfirmation(
+    evidence,
+    confirmedSelection,
+  )
+  const publicationRoot = path.join(repositoryRoot, 'app/public/paper-assets')
+  mkdirSync(evidence.jobRoot, { recursive: true })
+  const publicationDbPath = path.join(evidence.jobRoot, 'canonical-publication.sqlite')
+  const db = new DatabaseSync(publicationDbPath)
+  try {
+    recoverCanonicalPaperPublication({
+      rootDir: publicationRoot,
+      db,
+      paperId: input.paperId,
+    })
+    const published = publishCanonicalPaperPublication({
+      rootDir: publicationRoot,
+      db,
+      request: prepared.request,
+      sourceAssetVersion: 1,
+      sourceAsset: prepared.sourceAsset,
+      visualConfirmation: {
+        candidatePackage: publicationConfirmation.candidatePackage,
+        teacherConfirmation: publicationConfirmation.teacherConfirmation,
+      },
+      failurePoint: publicationFailurePoint,
+    })
+    if (!['published', 'idempotent'].includes(published.status)) {
+      const diagnostics = canonicalDiagnostics(published.compilation)
+      fail(
+        'FORMAT2_CANONICAL_COMPILATION_UNRESOLVED',
+        'Confirmed Format 2 source did not produce one complete Canonical Paper',
+        diagnostics.length > 0 ? diagnostics : published.diagnostics,
+      )
+    }
+    const store = createFileSystemCanonicalPublicationStore({
+      rootDir: publicationRoot,
+      db,
+    })
+    const screen = loadPaperForConsumptionSync({
+      paperId: input.paperId,
+      version: published.versionName,
+      consumerContract: readingOptionFigureConsumerContractRefs.screen,
+    }, store)
+    const printPdf = loadPaperForConsumptionSync({
+      paperId: input.paperId,
+      version: published.versionName,
+      consumerContract: readingOptionFigureConsumerContractRefs.print_pdf,
+    }, store)
+    const currentRef = store.readPublishedRefs(input.paperId).current
+    if (
+      screen.disposition !== 'ready'
+      || printPdf.disposition !== 'ready'
+      || currentRef?.versionName !== published.versionName
+      || currentRef?.publicationDigest !== published.publicationDigest
+    ) {
+      fail(
+        'FORMAT2_CANONICAL_EXACT_RELOAD_FAILED',
+        'Local publication success requires exact committed Screen and Print/PDF reload',
+      )
+    }
+    const canonicalPublication = committedPublicationIdentity({
+      paperId: input.paperId,
+      published,
+      screen,
+      printPdf,
+    })
+    const result = {
+      schemaVersion: RESULT_SCHEMA_VERSION,
+      paperId: input.paperId,
+      provenance: cloneJson(evidence.receipt.result.provenance),
+      jobId: input.jobId,
+      lifecycle: 'awaiting_qa',
+      stopReason: { code: QA_STOP_CODE },
+      diagnostics: [],
+      artifacts: {
+        ...cloneJson(evidence.receipt.result.artifacts),
+        confirmedSelection: {
+          schemaVersion: confirmedSelection.schemaVersion,
+          candidatePackageDigest: confirmedSelection.candidatePackageDigest,
+          confirmationDigest: confirmedSelection.confirmationDigest,
+          digest: digestJson(confirmedSelection),
+        },
+      },
+      humanEntryPoints: buildQaEntryPoints(input.paperId, canonicalPublication),
+      canonicalPublication,
+    }
+    persistAwaitingQa({ evidence, result, publicationDbPath })
+    return cloneJson(result)
+  } finally {
+    db.close()
+  }
+}
+
+export function createFormat2ImportJobRuntime({
+  repositoryRoot,
+  publicationFailurePoint = null,
+}) {
   if (!path.isAbsolute(repositoryRoot)) {
     throw format2Error(
       'FORMAT2_JOB_RUNTIME_INVALID',
@@ -896,6 +1451,13 @@ export function createFormat2ImportJobRuntime({ repositoryRoot }) {
     startOrContinueFormat2ImportJob(input) {
       try {
         return runStartOrContinue(input, repositoryRoot)
+      } catch (error) {
+        return failureResult(error)
+      }
+    },
+    resumeFormat2ImportJob(input) {
+      try {
+        return runResume(input, repositoryRoot, publicationFailurePoint)
       } catch (error) {
         return failureResult(error)
       }

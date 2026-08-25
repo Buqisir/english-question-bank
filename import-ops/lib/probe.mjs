@@ -31,7 +31,7 @@ export function isOpsVisible(probes) {
     probes.shipped ||
     Boolean(probes.helpNeeded)
   if (probes.latest) return hasSignal
-  return hasSignal || Boolean(probes.format2Stop) || probes.source || probes.groups || (probes.config && probes.analyses)
+  return hasSignal || Boolean(probes.format2Stop) || Boolean(probes.format2Qa) || probes.source || probes.groups || (probes.config && probes.analyses)
 }
 
 export function statusOf(probes) {
@@ -96,6 +96,35 @@ function format2StopOf(receipt, paperId) {
   }
 }
 
+function format2QaOf(receipt, paperId) {
+  if (
+    !receipt
+    || receipt._invalid
+    || receipt.schemaVersion !== 'format2-import-job-receipt-v1'
+    || receipt.result?.schemaVersion !== 'format2-import-job-result-v1'
+    || receipt.result?.paperId !== paperId
+    || receipt.result?.lifecycle !== 'awaiting_qa'
+    || receipt.result?.stopReason?.code !== 'owner_qa_required'
+    || receipt.result?.canonicalPublication?.paperId !== paperId
+    || receipt.result?.canonicalPublication?.reloads?.screen?.disposition !== 'ready'
+    || receipt.result?.canonicalPublication?.reloads?.printPdf?.disposition !== 'ready'
+  ) return null
+  const entryPoints = receipt.result.humanEntryPoints
+  if (
+    entryPoints?.firstFocusState?.paperId !== paperId
+    || typeof entryPoints?.screen?.href !== 'string'
+    || typeof entryPoints?.studentPrint?.href !== 'string'
+    || typeof entryPoints?.teacherPrint?.href !== 'string'
+    || typeof entryPoints?.pdf?.href !== 'string'
+    || typeof entryPoints?.gateSummary !== 'string'
+  ) return null
+  return {
+    lifecycle: 'awaiting_qa',
+    publication: structuredClone(receipt.result.canonicalPublication),
+    entryPoints: structuredClone(entryPoints),
+  }
+}
+
 function analysisCounts(paperDir) {
   let analyze = 0
   let analysis = 0
@@ -124,6 +153,7 @@ export function probePaper({ repoRoot, paperId }) {
   const shipped = readJsonIfPresent(path.join(signalsDir, 'shipped.json'))
   const format2Receipt = readJsonIfPresent(path.join(paperDir, 'job', 'current.json'))
   const format2Stop = format2StopOf(format2Receipt, paperId)
+  const format2Qa = format2QaOf(format2Receipt, paperId)
   const counts = analysisCounts(paperDir)
   const writingCount = writingAnalysisCount(paperDir)
   const format3 = Boolean(config) && !config._invalid && String(config.format) === '3'
@@ -134,7 +164,7 @@ export function probePaper({ repoRoot, paperId }) {
       (config && !config._invalid && config.provenance && config.provenance.paperName) ||
       (format2Receipt && !format2Receipt._invalid && format2Receipt.result?.provenance?.paperName) ||
       paperId,
-    source: hasSource(paperDir, format2Stop),
+    source: hasSource(paperDir, format2Stop || format2Qa),
     config: Boolean(config) && !config._invalid,
     groups: existsSync(path.join(paperDir, 'groups.json')),
     analyzeCount: counts.analyze,
@@ -156,6 +186,7 @@ export function probePaper({ repoRoot, paperId }) {
     blocked: blocked && !blocked._invalid ? blocked : null,
     helpNeeded: helpNeeded && !helpNeeded._invalid ? helpNeeded : null,
     format2Stop,
+    format2Qa,
     mtimeMs: Math.max(
       mtimeMs(path.join(paperDir, 'config.json')),
       mtimeMs(path.join(paperDir, 'groups.json')),
@@ -240,12 +271,30 @@ export function shipPrompt(paper) {
 
 export function qaLinks(paper, appOrigin) {
   const origin = appOrigin.replace(/\/$/, '')
+  if (paper.format2Qa) {
+    const withOrigin = (entry) => ({
+      ...entry,
+      href: new URL(entry.href, `${origin}/`).toString(),
+    })
+    const points = paper.format2Qa.entryPoints
+    return {
+      screen: withOrigin(points.screen).href,
+      studentPrint: withOrigin(points.studentPrint).href,
+      teacherPrint: withOrigin(points.teacherPrint).href,
+      pdf: withOrigin(points.pdf).href,
+      firstFocusState: points.firstFocusState,
+      gateSummary: points.gateSummary,
+      service: points.service,
+      note: 'Format 2 Job 已准备同一 Canonical Paper 的 exact Screen / Student Print / Teacher Print / PDF QA 入口；本后台不写 Owner QA 收据。',
+    }
+  }
   const screen = `${origin}/?view=paper-browse&paperId=${encodeURIComponent(paper.paperId)}`
   if (!paper.latest) {
     return {
       screen: null,
       studentPrint: null,
       teacherPrint: null,
+      pdf: null,
       note: '本地尚未 publish（无 latest），Screen / Print 入口不可用。',
     }
   }
@@ -253,6 +302,7 @@ export function qaLinks(paper, appOrigin) {
     screen,
     studentPrint: screen,
     teacherPrint: `${screen}&lecture=1`,
+    pdf: screen,
     note: 'Screen 打开消费端整卷预览。Student / Teacher Print 走同一消费端共享渲染：将该卷入草稿卷后切换学生版 / 教师版。本后台不另造卷面、不对答案。',
   }
 }

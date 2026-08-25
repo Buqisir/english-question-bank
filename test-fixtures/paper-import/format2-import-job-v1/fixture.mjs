@@ -140,7 +140,7 @@ export function makeFormat2ImportJobFixture({
     paperName: 'Compact synthetic Format 2 paper',
     sourceLabel: 'Ticket 01 synthetic fixture',
   }
-  const optionQuestionId = 'question:reading-b:2'
+  const optionQuestionId = 'question:reading-b:24'
   const optionOwners = ['A', 'B', 'C', 'D'].map((label) => ({
     kind: 'reading_option',
     groupId: 'group:reading-b',
@@ -160,6 +160,7 @@ export function makeFormat2ImportJobFixture({
     groups: [
       {
         groupId: 'group:reading-a',
+        slotId: 'reading.a',
         groupType: 'reading',
         blocks: [
           { blockId: 'block:reading-a:text', kind: 'text', text: 'Short synthetic passage.' },
@@ -174,27 +175,46 @@ export function makeFormat2ImportJobFixture({
             visualObservationId: passageObservationId,
           },
         ],
-        questions: [question('question:reading-a:1', 1)],
+        questions: [21, 22, 23].map((number) => question(`question:reading-a:${number}`, number)),
       },
       {
         groupId: 'group:reading-b',
+        slotId: 'reading.b',
         groupType: 'reading',
         blocks: [{ blockId: 'block:reading-b:text', kind: 'text', text: 'Choose the matching diagram.' }],
-        questions: [{
-          questionId: optionQuestionId,
-          questionNo: 2,
-          stem: 'Which source-authored figure matches the description?',
-          options: ['A', 'B', 'C', 'D'].map((label, index) => ({
-            optionId: optionOwners[index].optionId,
-            label,
-            contentKind: 'figure',
-            visualObservationId: optionObservationIds[index],
-          })),
-          answerRef: `answer:${optionQuestionId}`,
-        }],
+        questions: [
+          {
+            questionId: optionQuestionId,
+            questionNo: 24,
+            stem: 'Which source-authored figure matches the description?',
+            options: ['A', 'B', 'C', 'D'].map((label, index) => ({
+              optionId: optionOwners[index].optionId,
+              label,
+              contentKind: 'figure',
+              visualObservationId: optionObservationIds[index],
+            })),
+            answerRef: `answer:${optionQuestionId}`,
+          },
+          ...[25, 26, 27].map((number) => question(`question:reading-b:${number}`, number)),
+        ],
+      },
+      {
+        groupId: 'group:reading-c',
+        slotId: 'reading.c',
+        groupType: 'reading',
+        blocks: [{ blockId: 'block:reading-c:text', kind: 'text', text: 'Compact Reading C passage.' }],
+        questions: [28, 29, 30, 31].map((number) => question(`question:reading-c:${number}`, number)),
+      },
+      {
+        groupId: 'group:reading-d',
+        slotId: 'reading.d',
+        groupType: 'reading',
+        blocks: [{ blockId: 'block:reading-d:text', kind: 'text', text: 'Compact Reading D passage.' }],
+        questions: [32, 33, 34, 35].map((number) => question(`question:reading-d:${number}`, number)),
       },
       {
         groupId: 'group:seven',
+        slotId: 'reading.seven-choices',
         groupType: 'seven_choices',
         blocks: [{
           blockId: 'block:seven:framed-columns',
@@ -204,28 +224,38 @@ export function makeFormat2ImportJobFixture({
             { columnId: 'column:right', heading: 'After', paragraphs: ['Synthetic right column.'] },
           ],
         }],
-        questions: [{
-          ...question('question:seven:3', 3),
-          options: textOptions('question:seven:3', ['A', 'B', 'C', 'D', 'E', 'F', 'G']),
-        }],
+        questions: [36, 37, 38, 39, 40].map((number) => ({
+          ...question(`question:seven:${number}`, number),
+          options: textOptions(`question:seven:${number}`, ['A', 'B', 'C', 'D', 'E', 'F', 'G'])
+            .map((option) => ({
+              ...option,
+              text: `Shared synthetic option ${option.label}`,
+            })),
+        })),
       },
       {
         groupId: 'group:cloze',
+        slotId: 'language.cloze',
         groupType: 'cloze',
         blocks: [{ blockId: 'block:cloze:text', kind: 'text', text: 'A compact cloze ___.' }],
-        questions: [question('question:cloze:4', 4)],
+        questions: Array.from({ length: 15 }, (_value, index) => {
+          const number = 41 + index
+          return question(`question:cloze:${number}`, number)
+        }),
       },
       {
         groupId: 'group:grammar',
+        slotId: 'language.grammar-fill',
         groupType: 'grammar_fill',
         blocks: [{ blockId: 'block:grammar:text', kind: 'text', text: 'A compact grammar blank.' }],
-        questions: [{
-          ...question('question:grammar:5', 5),
-          options: [],
-        }],
+        questions: Array.from({ length: 10 }, (_value, index) => {
+          const number = 56 + index
+          return { ...question(`question:grammar:${number}`, number), options: [] }
+        }),
       },
       {
         groupId: 'group:listening',
+        slotId: 'listening.raw',
         groupType: 'listening',
         blocks: [{
           blockId: 'block:listening:material',
@@ -236,33 +266,55 @@ export function makeFormat2ImportJobFixture({
       },
       {
         groupId: 'group:application',
+        slotId: 'writing.application',
         groupType: 'application_writing',
         blocks: [{
           blockId: 'block:application:material',
           kind: 'writing_material',
           taskType: 'application',
-          prompt: 'Write a short synthetic note to a classmate.',
+          prompt: 'You are a student. Write a short note to a classmate to invite them to the reading club; include its time and place.',
+          wordCountTarget: 80,
+          wordCountScope: 'student_authored_only',
+          applicationEvidence: {
+            writerRole: 'a student',
+            audienceOrDestination: 'a classmate',
+            deliverable: 'a short note',
+            communicativePurpose: 'invite them to the reading club',
+            contentRequirements: ['include the reading club time and place'],
+            answerRegionAbsent: true,
+          },
         }],
         questions: [],
       },
       {
         groupId: 'group:continuation',
+        slotId: 'writing.continuation',
         groupType: 'continuation_writing',
         blocks: [{
           blockId: 'block:continuation:material',
           kind: 'writing_material',
           taskType: 'continuation',
-          prompt: 'Continue the short synthetic story in two paragraphs.',
+          prompt: 'Continue the short synthetic story in about 150 words.',
+          wordCountTarget: 150,
+          wordCountScope: 'unspecified',
+          sourceInstruction: '阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。',
+          continuationStarters: [
+            'Paragraph 1: The student opened the classroom door.',
+            'Paragraph 2: The class finally understood the message.',
+          ],
         }],
         questions: [],
       },
     ],
     officialAnswers: [
-      answer('question:reading-a:1'),
+      ...[21, 22, 23].map((number) => answer(`question:reading-a:${number}`)),
       answer(optionQuestionId),
-      answer('question:seven:3'),
-      answer('question:cloze:4'),
-      answer('question:grammar:5'),
+      ...[25, 26, 27].map((number) => answer(`question:reading-b:${number}`)),
+      ...[28, 29, 30, 31].map((number) => answer(`question:reading-c:${number}`)),
+      ...[32, 33, 34, 35].map((number) => answer(`question:reading-d:${number}`)),
+      ...[36, 37, 38, 39, 40].map((number) => answer(`question:seven:${number}`)),
+      ...Array.from({ length: 15 }, (_value, index) => answer(`question:cloze:${41 + index}`)),
+      ...Array.from({ length: 10 }, (_value, index) => answer(`question:grammar:${56 + index}`)),
     ],
     visuals: [
       visual({

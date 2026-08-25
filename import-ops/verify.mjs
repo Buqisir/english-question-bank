@@ -62,6 +62,39 @@ const format2Result = createFormat2ImportJobRuntime({ repositoryRoot: root })
   .startOrContinueFormat2ImportJob(format2Fixture.input)
 assert.equal(format2Result.lifecycle, 'importing')
 
+const format2QaFixture = makeFormat2ImportJobFixture({
+  sourceDir: path.join(root, 'format2-qa-fixture-sources'),
+  paperId: 'paper-format2-qa',
+  writerId: 'import-ops-format2-qa-writer',
+})
+const format2QaRuntime = createFormat2ImportJobRuntime({ repositoryRoot: root })
+const format2QaStart = format2QaRuntime.startOrContinueFormat2ImportJob(
+  format2QaFixture.input,
+)
+const format2QaCandidate = JSON.parse(readFileSync(path.join(
+  root,
+  'scripts/import-pipeline/papers',
+  format2QaFixture.input.paperId,
+  format2QaStart.artifacts.candidatePackage.relativePath,
+), 'utf8'))
+const format2QaResult = format2QaRuntime.resumeFormat2ImportJob({
+  paperId: format2QaFixture.input.paperId,
+  jobId: format2QaStart.jobId,
+  teacherConfirmation: {
+    schemaVersion: 'visual-teacher-confirmation-v1',
+    packageDigest: format2QaCandidate.packageDigest,
+    decisions: format2QaCandidate.observations.map((observation) => ({
+      observationId: observation.observationId,
+      owner: structuredClone(observation.owner),
+      disposition: 'confirmed',
+      selectedCandidateDigest: format2QaCandidate.candidates.find(
+        (candidate) => candidate.observationId === observation.observationId,
+      ).candidateDigest,
+    })),
+  },
+})
+assert.equal(format2QaResult.lifecycle, 'awaiting_qa')
+
 const queuedId = 'paper-queued'
 mkdirSync(path.join(root, 'scripts/import-pipeline/papers', queuedId), { recursive: true })
 writeFileSync(path.join(root, 'scripts/import-pipeline/papers', queuedId, 'source.docx'), 'x')
@@ -130,6 +163,10 @@ const format2Importing = probePaper({
   repoRoot: root,
   paperId: format2Fixture.input.paperId,
 })
+const format2AwaitingQa = probePaper({
+  repoRoot: root,
+  paperId: format2QaFixture.input.paperId,
+})
 
 assert.equal(queued.status, 'queued')
 assert.equal(importing.status, 'importing')
@@ -146,6 +183,13 @@ assert.deepEqual(format2Importing.format2Stop, {
 })
 assert.equal(JSON.stringify(format2Importing.format2Stop).includes('Short synthetic passage'), false)
 assert.equal(JSON.stringify(format2Importing.format2Stop).includes('officialAnswers'), false)
+assert.equal(format2AwaitingQa.status, 'awaiting_qa')
+assert.equal(format2AwaitingQa.format2Stop, null)
+assert.equal(format2AwaitingQa.format2Qa.lifecycle, 'awaiting_qa')
+assert.equal(format2AwaitingQa.format2Qa.publication.publicationDigest,
+  format2QaResult.canonicalPublication.publicationDigest)
+assert.equal(format2AwaitingQa.format2Qa.entryPoints.firstFocusState.paperId,
+  format2QaFixture.input.paperId)
 const exactComparisonPath = path.join(
   root,
   'scripts/import-pipeline/papers',
@@ -218,6 +262,15 @@ assert.deepEqual(lists.failed.map((p) => p.paperId).sort(), [
 const qa = qaLinks(awaiting, 'http://127.0.0.1:5173')
 assert.match(qa.screen, /view=paper-browse/)
 assert.match(qa.screen, /paper-awaiting-qa/)
+const format2Qa = qaLinks(format2AwaitingQa, 'http://127.0.0.1:5173')
+assert.equal(format2Qa.screen,
+  'http://127.0.0.1:5173/?view=paper-browse&paperId=paper-format2-qa')
+assert.equal(format2Qa.studentPrint.includes('lecture=1'), false)
+assert.equal(format2Qa.teacherPrint.includes('lecture=1'), true)
+assert.match(format2Qa.pdf, /paper-format2-qa/u)
+assert.deepEqual(format2Qa.firstFocusState, format2QaResult.humanEntryPoints.firstFocusState)
+assert.equal(format2Qa.gateSummary, format2QaResult.humanEntryPoints.gateSummary)
+assert.match(format2Qa.note, /不写 Owner QA 收据/u)
 assert.equal(qaLinks(blocked, 'http://127.0.0.1:5173').screen, null)
 
 assert.equal(html.includes('pull-run-push'), false)
@@ -245,6 +298,7 @@ assert.equal(contract.includes('--owner-said-ship'), true)
 assert.deepEqual(listOpsPapers(root).map((p) => p.paperId).sort(), [
   'paper-awaiting-qa',
   'paper-format1-blocked',
+  'paper-format2-qa',
   'paper-format2-synthetic',
   'paper-importing',
   'paper-queued',

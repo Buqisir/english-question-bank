@@ -350,12 +350,45 @@
     "writingBlock": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["blockId", "kind", "taskType", "prompt"],
+      "required": ["blockId", "kind", "taskType", "prompt", "wordCountTarget"],
       "properties": {
         "blockId": { "$ref": "#/$defs/nonEmpty" },
         "kind": { "const": "writing_material" },
         "taskType": { "enum": ["application", "continuation"] },
-        "prompt": { "$ref": "#/$defs/nonEmpty" }
+        "prompt": { "$ref": "#/$defs/nonEmpty" },
+        "wordCountTarget": { "type": "integer", "minimum": 1 },
+        "wordCountScope": { "enum": ["student_authored_only", "unspecified"] },
+        "sourceInstruction": { "$ref": "#/$defs/nonEmpty" },
+        "applicationEvidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "writerRole",
+            "audienceOrDestination",
+            "deliverable",
+            "communicativePurpose",
+            "contentRequirements",
+            "answerRegionAbsent"
+          ],
+          "properties": {
+            "writerRole": { "$ref": "#/$defs/nonEmpty" },
+            "audienceOrDestination": { "$ref": "#/$defs/nonEmpty" },
+            "deliverable": { "$ref": "#/$defs/nonEmpty" },
+            "communicativePurpose": { "$ref": "#/$defs/nonEmpty" },
+            "contentRequirements": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "#/$defs/nonEmpty" }
+            },
+            "answerRegionAbsent": { "const": true }
+          }
+        },
+        "continuationStarters": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": { "$ref": "#/$defs/nonEmpty" }
+        }
       }
     },
     "block": {
@@ -371,9 +404,23 @@
     "group": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["groupId", "groupType", "blocks", "questions"],
+      "required": ["groupId", "slotId", "groupType", "blocks", "questions"],
       "properties": {
         "groupId": { "$ref": "#/$defs/nonEmpty" },
+        "slotId": {
+          "enum": [
+            "reading.a",
+            "reading.b",
+            "reading.c",
+            "reading.d",
+            "reading.seven-choices",
+            "language.cloze",
+            "language.grammar-fill",
+            "writing.application",
+            "writing.continuation",
+            "listening.raw"
+          ]
+        },
         "groupType": {
           "enum": [
             "reading",
