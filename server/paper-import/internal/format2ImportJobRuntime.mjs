@@ -56,6 +56,7 @@ const TRANSCRIPTION_SCHEMA_VERSION = 'format2-transcription-v1'
 const SOURCE_PAIR_SCHEMA_VERSION = 'format2-source-pair-v1'
 const STOP_CODE = 'exact_teacher_confirmation_required'
 const QA_STOP_CODE = 'owner_qa_required'
+const COMPLETION_FAILURE_POINT = 'after-awaiting-qa-dependencies-before-current-crash'
 const QA_ACCEPTANCE_SCHEMA_VERSION = 'format2-owner-qa-acceptance-v1'
 const PAPER_ID_PATTERN = /^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/u
 const SHA256_PATTERN = /^sha256:[a-f0-9]{64}$/u
@@ -1252,6 +1253,71 @@ function resolveDurableArtifact(paperDir, relativePath, label) {
   return resolved
 }
 
+function retainedCandidatePackage(paperDir, receipt) {
+  const candidatePath = resolveDurableArtifact(
+    paperDir,
+    receipt.result.artifacts?.candidatePackage?.relativePath,
+    'Visual Candidate package',
+  )
+  const candidatePackage = readJson(candidatePath, 'Format 2 Visual Candidate package')
+  if (
+    candidatePackage.packageDigest
+      !== receipt.result.artifacts?.candidatePackage?.packageDigest
+  ) {
+    fail(
+      'FORMAT2_JOB_DURABLE_STATE_INVALID',
+      'Visual Candidate package no longer matches the current durable Job',
+    )
+  }
+  return candidatePackage
+}
+
+function invalidateCompletedConfirmation({ paperDir, jobRoot, receipt, candidatePackage }) {
+  const artifacts = {}
+  for (const key of ['sourceCapture', 'transcription', 'candidatePackage', 'comparison']) {
+    if (!receipt.result.artifacts?.[key]) {
+      fail(
+        'FORMAT2_JOB_DURABLE_STATE_INVALID',
+        `Completed Format 2 Job lacks retained ${key} evidence`,
+      )
+    }
+    artifacts[key] = cloneJson(receipt.result.artifacts[key])
+  }
+  const result = {
+    schemaVersion: RESULT_SCHEMA_VERSION,
+    paperId: receipt.result.paperId,
+    provenance: cloneJson(receipt.result.provenance),
+    jobId: receipt.result.jobId,
+    lifecycle: 'importing',
+    stopReason: { code: STOP_CODE },
+    diagnostics: candidatePackage.unresolvedIssues.map((issue) => cloneJson(issue)),
+    artifacts,
+    humanEntryPoints: {
+      comparison: {
+        href: `/papers/${encodeURIComponent(receipt.result.paperId)}/format2-comparison`,
+        packageDigest: candidatePackage.packageDigest,
+      },
+      resumeInstruction: `Resume this Job with exact visual package ${candidatePackage.packageDigest}.`,
+    },
+    canonicalPublication: null,
+  }
+  const signalsDir = path.join(paperDir, 'signals')
+  mkdirSync(signalsDir, { recursive: true })
+  for (const fileName of ['ai-answer-check.json', 'qa-accepted.json', 'help-needed.json']) {
+    const signalPath = path.join(signalsDir, fileName)
+    if (existsSync(signalPath)) unlinkSync(signalPath)
+  }
+  const contractVersions = cloneJson(receipt.contractVersions || {})
+  delete contractVersions.canonicalPublication
+  atomicWrite(path.join(jobRoot, 'current.json'), jsonBytes({
+    ...cloneJson(receipt),
+    contractVersions,
+    disposition: 'stopped',
+    nextStopReason: STOP_CODE,
+    result,
+  }))
+}
+
 function loadResumeEvidence(repositoryRoot, input) {
   const paperDir = path.join(
     repositoryRoot,
@@ -1282,15 +1348,32 @@ function loadResumeEvidence(repositoryRoot, input) {
     )
   }
   if (receipt.result.lifecycle === 'awaiting_qa') {
-    if (
-      input.teacherConfirmation.packageDigest
-        !== receipt.result.artifacts?.candidatePackage?.packageDigest
-      || digestJson(input.teacherConfirmation)
-        !== receipt.result.artifacts?.confirmedSelection?.confirmationDigest
-    ) {
+    const committedPackageDigest = receipt.result.artifacts?.candidatePackage?.packageDigest
+    const committedConfirmationDigest =
+      receipt.result.artifacts?.confirmedSelection?.confirmationDigest
+    if (input.teacherConfirmation.packageDigest !== committedPackageDigest) {
       fail(
         'FORMAT2_JOB_CONFIRMATION_STALE',
         'Completed Job no-op requires the exact committed Teacher Confirmation',
+      )
+    }
+    if (digestJson(input.teacherConfirmation) !== committedConfirmationDigest) {
+      const candidatePackage = retainedCandidatePackage(paperDir, receipt)
+      try {
+        confirmVisualImportCandidate(candidatePackage, input.teacherConfirmation)
+      } catch (error) {
+        if (String(error?.code || '').startsWith('VISUAL_CONFIRMATION_')) {
+          fail(
+            'FORMAT2_JOB_CONFIRMATION_STALE',
+            'Completed Job received a malformed or substituted Teacher Confirmation',
+          )
+        }
+        throw error
+      }
+      invalidateCompletedConfirmation({ paperDir, jobRoot, receipt, candidatePackage })
+      fail(
+        'FORMAT2_JOB_CONFIRMATION_CHANGED',
+        'Changed exact Teacher Confirmation invalidated the completed Job; retry the same Job with that confirmation',
       )
     }
     return { paperDir, jobRoot, receipt, completed: true }
@@ -1572,7 +1655,13 @@ function persistQaArtifacts({
     }
     writeImmutable(paths.studentPrint, Buffer.from(student.body), 'Format 2 Student Print QA artifact')
     writeImmutable(paths.teacherPrint, Buffer.from(teacher.body), 'Format 2 Teacher Print QA artifact')
-    writeImmutable(paths.pdf, Buffer.from(pdf.body), 'Format 2 PDF QA artifact')
+    if (existsSync(paths.pdf)) {
+      if (readFileSync(paths.pdf).subarray(0, 4).toString() !== '%PDF') {
+        fail('FORMAT2_QA_ARTIFACT_INVALID', 'Retained Format 2 PDF QA artifact is invalid')
+      }
+    } else {
+      writeImmutable(paths.pdf, Buffer.from(pdf.body), 'Format 2 PDF QA artifact')
+    }
     const supportFiles = new Map()
     for (const image of [...student.images, ...teacher.images]) {
       const bytes = readFileSync(image.absoluteSourcePath)
@@ -1828,20 +1917,39 @@ function verifyCompletedAwaitingQa(repositoryRoot, paperDir, jobRoot, receipt) {
     fail('FORMAT2_ANSWER_TRANSCRIPTION_CHECK_INVALID', 'Completed Job lacks its exact digest-bound AI Answer Transcription Check signal')
   }
   verifyQaArtifacts(paperDir, receipt.result)
+  verifyPublicationStoreDescriptor(jobRoot)
   const helpPath = path.join(signalsDir, 'help-needed.json')
   if (existsSync(helpPath)) unlinkSync(helpPath)
-  writeImmutable(
-    path.join(jobRoot, 'publication-store.json'),
-    jsonBytes({
-      schemaVersion: 'format2-local-publication-store-v1',
-      database: 'data/question-bank.sqlite',
-    }),
-    'Format 2 local publication store descriptor',
-  )
   return cloneJson(receipt.result)
 }
 
-function persistAwaitingQa({ evidence, result, answerCheck }) {
+function verifyPublicationStoreDescriptor(jobRoot) {
+  const descriptorPath = path.join(jobRoot, 'publication-store.json')
+  if (!existsSync(descriptorPath)) {
+    fail(
+      'FORMAT2_JOB_DURABLE_STATE_INVALID',
+      'Completed Format 2 Job lacks its local publication store descriptor',
+    )
+  }
+  const descriptor = readJson(descriptorPath, 'Format 2 local publication store descriptor')
+  if (
+    !exactKeys(descriptor, ['schemaVersion', 'database'])
+    || descriptor.schemaVersion !== 'format2-local-publication-store-v1'
+    || descriptor.database !== 'data/question-bank.sqlite'
+  ) {
+    fail(
+      'FORMAT2_JOB_DURABLE_STATE_INVALID',
+      'Format 2 local publication store descriptor is invalid',
+    )
+  }
+}
+
+function persistAwaitingQa({
+  evidence,
+  result,
+  answerCheck,
+  completionFailurePoint,
+}) {
   const current = {
     ...cloneJson(evidence.receipt),
     contractVersions: {
@@ -1852,17 +1960,33 @@ function persistAwaitingQa({ evidence, result, answerCheck }) {
     nextStopReason: QA_STOP_CODE,
     result,
   }
-  atomicWrite(path.join(evidence.jobRoot, 'current.json'), jsonBytes(current))
   const signalsDir = path.join(evidence.paperDir, 'signals')
   mkdirSync(signalsDir, { recursive: true })
   const qaAcceptedPath = path.join(signalsDir, 'qa-accepted.json')
   if (existsSync(qaAcceptedPath)) unlinkSync(qaAcceptedPath)
-  atomicWrite(path.join(signalsDir, 'ai-answer-check.json'), jsonBytes({
+  const aiCheckPath = path.join(signalsDir, 'ai-answer-check.json')
+  atomicWrite(aiCheckPath, jsonBytes({
     ok: true,
     checkedAt: new Date().toISOString(),
     method: 'ai-source-markings-vs-answer-key',
     ...answerCheck,
   }))
+  const persistedAnswerCheck = readJson(aiCheckPath, 'Format 2 AI answer-check signal')
+  if (
+    !nonEmptyString(persistedAnswerCheck.checkedAt)
+    || !Number.isFinite(Date.parse(persistedAnswerCheck.checkedAt))
+    || !sameValue(persistedAnswerCheck, {
+      ok: true,
+      checkedAt: persistedAnswerCheck.checkedAt,
+      method: 'ai-source-markings-vs-answer-key',
+      ...answerCheck,
+    })
+  ) {
+    fail(
+      'FORMAT2_ANSWER_TRANSCRIPTION_CHECK_INVALID',
+      'Awaiting-QA completion requires one exact persisted AI Answer Transcription Check signal',
+    )
+  }
   const helpPath = path.join(signalsDir, 'help-needed.json')
   if (existsSync(helpPath)) unlinkSync(helpPath)
   writeImmutable(
@@ -1873,9 +1997,23 @@ function persistAwaitingQa({ evidence, result, answerCheck }) {
     }),
     'Format 2 local publication store descriptor',
   )
+  verifyPublicationStoreDescriptor(evidence.jobRoot)
+  verifyQaArtifacts(evidence.paperDir, result)
+  if (completionFailurePoint === COMPLETION_FAILURE_POINT) {
+    fail(
+      'FORMAT2_JOB_PERSISTENCE_FORCED_CRASH',
+      'Forced interruption after awaiting-QA dependencies and before the current receipt',
+    )
+  }
+  atomicWrite(path.join(evidence.jobRoot, 'current.json'), jsonBytes(current))
 }
 
-function runResume(input, repositoryRoot, publicationFailurePoint = null) {
+function runResume(
+  input,
+  repositoryRoot,
+  publicationFailurePoint = null,
+  completionFailurePoint = null,
+) {
   validateResumeInput(input)
   const evidence = loadResumeEvidence(repositoryRoot, input)
   if (evidence.completed) {
@@ -2017,7 +2155,7 @@ function runResume(input, repositoryRoot, publicationFailurePoint = null) {
       }),
       canonicalPublication,
     }
-    persistAwaitingQa({ evidence, result, answerCheck })
+    persistAwaitingQa({ evidence, result, answerCheck, completionFailurePoint })
     return cloneJson(result)
   } finally {
     db.close()
@@ -2027,6 +2165,7 @@ function runResume(input, repositoryRoot, publicationFailurePoint = null) {
 export function createFormat2ImportJobRuntime({
   repositoryRoot,
   publicationFailurePoint = null,
+  completionFailurePoint = null,
 }) {
   if (!path.isAbsolute(repositoryRoot)) {
     throw format2Error(
@@ -2044,7 +2183,12 @@ export function createFormat2ImportJobRuntime({
     },
     resumeFormat2ImportJob(input) {
       try {
-        return runResume(input, repositoryRoot, publicationFailurePoint)
+        return runResume(
+          input,
+          repositoryRoot,
+          publicationFailurePoint,
+          completionFailurePoint,
+        )
       } catch (error) {
         return failureResult(error)
       }

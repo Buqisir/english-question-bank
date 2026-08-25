@@ -38,9 +38,9 @@ export function isOpsVisible(probes) {
 export function statusOf(probes) {
   if (probes.shipped) return 'shipped'
   if (probes.blocked) return 'failed'
+  if (probes.format2Stop?.lifecycle === 'importing') return 'importing'
   if (probes.qaAccepted && probes.latest && probes.aiCheck) return 'ready_to_ship'
   if (probes.latest && probes.aiCheck) return 'awaiting_qa'
-  if (probes.format2Stop?.lifecycle === 'importing') return 'importing'
   if (probes.config) return 'importing'
   return 'queued'
 }

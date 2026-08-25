@@ -32,6 +32,7 @@ import { createCanonicalConsumerRuntime } from '../server/paper-canonical/consum
 import { buildPrintHtml } from '../server/print-renderer.mjs'
 import { createExportImplementation } from '../server/exports/exportImplementation.mjs'
 import { grammarFillRhythm } from '../shared/paper-canonical/grammarFillRhythm.mjs'
+import { probePaper } from '../import-ops/lib/probe.mjs'
 import {
   makeFormat2ImportJobFixture,
 } from '../test-fixtures/paper-import/format2-import-job-v1/fixture.mjs'
@@ -214,6 +215,184 @@ function completedFixtureForInvalidation(suffix) {
   )
   return { ...prepared, started, confirmation, durableDir }
 }
+
+const completionWindow = freshFixture('completion-window-')
+const completionWindowStarted = run(completionWindow.repositoryRoot, completionWindow.fixture.input)
+const completionWindowCandidate = JSON.parse(readFileSync(
+  artifactPath(completionWindow.repositoryRoot, completionWindowStarted, 'candidatePackage'),
+  'utf8',
+))
+const completionWindowConfirmation = exactConfirmation(completionWindowCandidate)
+assertFailed(
+  resume(completionWindow.repositoryRoot, {
+    paperId: completionWindow.fixture.input.paperId,
+    jobId: completionWindowStarted.jobId,
+    teacherConfirmation: completionWindowConfirmation,
+  }, {
+    completionFailurePoint: 'after-awaiting-qa-dependencies-before-current-crash',
+  }),
+  'FORMAT2_JOB_PERSISTENCE_FORCED_CRASH',
+)
+const completionWindowPaperDir = paperDir(
+  completionWindow.repositoryRoot,
+  completionWindow.fixture.input.paperId,
+)
+const completionWindowCurrentPath = path.join(completionWindowPaperDir, 'job/current.json')
+const interruptedCompletionReceipt = JSON.parse(readFileSync(completionWindowCurrentPath, 'utf8'))
+assert.equal(interruptedCompletionReceipt.result.lifecycle, 'importing')
+assert.equal(interruptedCompletionReceipt.result.stopReason.code, 'exact_teacher_confirmation_required')
+assert.equal(interruptedCompletionReceipt.result.canonicalPublication, null)
+assert.equal(
+  existsSync(path.join(completionWindowPaperDir, 'signals/ai-answer-check.json')),
+  true,
+  'the exact AI answer-check dependency is durable before the completion marker',
+)
+assert.deepEqual(
+  JSON.parse(readFileSync(path.join(
+    completionWindowPaperDir,
+    'job/publication-store.json',
+  ), 'utf8')),
+  {
+    schemaVersion: 'format2-local-publication-store-v1',
+    database: 'data/question-bank.sqlite',
+  },
+)
+const interruptedCompletionProbe = probePaper({
+  repoRoot: completionWindow.repositoryRoot,
+  paperId: completionWindow.fixture.input.paperId,
+})
+assert.equal(interruptedCompletionProbe.status, 'importing')
+assert.equal(interruptedCompletionProbe.gatesGreen, false)
+assert.equal(interruptedCompletionProbe.format2Qa, null)
+const completionWindowRecovered = resume(completionWindow.repositoryRoot, {
+  paperId: completionWindow.fixture.input.paperId,
+  jobId: completionWindowStarted.jobId,
+  teacherConfirmation: completionWindowConfirmation,
+})
+assert.equal(completionWindowRecovered.lifecycle, 'awaiting_qa')
+assert.equal(
+  probePaper({
+    repoRoot: completionWindow.repositoryRoot,
+    paperId: completionWindow.fixture.input.paperId,
+  }).gatesGreen,
+  true,
+  'exact retry promotes the current receipt only after its dependencies verify',
+)
+
+const completionWindowSignals = path.join(completionWindowPaperDir, 'signals')
+writeFileSync(
+  path.join(completionWindowSignals, 'qa-accepted.json'),
+  `${JSON.stringify({
+    ...completionWindowRecovered.humanEntryPoints.qaAcceptance.expectedReceipt,
+    acceptedAt: '2026-08-25T00:00:00.000Z',
+  }, null, 2)}\n`,
+)
+writeFileSync(
+  path.join(completionWindowSignals, 'help-needed.json'),
+  `${JSON.stringify({ code: 'stale-completed-help-signal' }, null, 2)}\n`,
+)
+const completedReceiptBeforeInvalidation = readFileSync(completionWindowCurrentPath)
+const staleCompletedConfirmation = structuredClone(completionWindowConfirmation)
+staleCompletedConfirmation.packageDigest = `sha256:${'d'.repeat(64)}`
+assertFailed(
+  resume(completionWindow.repositoryRoot, {
+    paperId: completionWindow.fixture.input.paperId,
+    jobId: completionWindowStarted.jobId,
+    teacherConfirmation: staleCompletedConfirmation,
+  }),
+  'FORMAT2_JOB_CONFIRMATION_STALE',
+)
+assertFailed(
+  resume(completionWindow.repositoryRoot, {
+    paperId: completionWindow.fixture.input.paperId,
+    jobId: completionWindowStarted.jobId,
+    teacherConfirmation: {
+      ...structuredClone(completionWindowConfirmation),
+      unsupported: true,
+    },
+  }),
+  'FORMAT2_JOB_CONFIRMATION_STALE',
+)
+const substitutedCompletedConfirmation = structuredClone(completionWindowConfirmation)
+substitutedCompletedConfirmation.decisions[0].selectedCandidateDigest =
+  substitutedCompletedConfirmation.decisions[1].selectedCandidateDigest
+assertFailed(
+  resume(completionWindow.repositoryRoot, {
+    paperId: completionWindow.fixture.input.paperId,
+    jobId: completionWindowStarted.jobId,
+    teacherConfirmation: substitutedCompletedConfirmation,
+  }),
+  'FORMAT2_JOB_CONFIRMATION_STALE',
+)
+assert.deepEqual(
+  readFileSync(completionWindowCurrentPath),
+  completedReceiptBeforeInvalidation,
+  'stale, malformed, and substituted completed confirmations preserve the exact completed no-op',
+)
+
+const changedCompletedConfirmation = {
+  ...structuredClone(completionWindowConfirmation),
+  decisions: [...completionWindowConfirmation.decisions].reverse(),
+}
+assert.notEqual(
+  digestJson(changedCompletedConfirmation),
+  digestJson(completionWindowConfirmation),
+)
+assertFailed(
+  resume(completionWindow.repositoryRoot, {
+    paperId: completionWindow.fixture.input.paperId,
+    jobId: completionWindowStarted.jobId,
+    teacherConfirmation: changedCompletedConfirmation,
+  }),
+  'FORMAT2_JOB_CONFIRMATION_CHANGED',
+)
+const invalidatedConfirmationReceipt = JSON.parse(readFileSync(completionWindowCurrentPath, 'utf8'))
+assert.equal(invalidatedConfirmationReceipt.result.jobId, completionWindowStarted.jobId)
+assert.equal(invalidatedConfirmationReceipt.result.lifecycle, 'importing')
+assert.equal(
+  invalidatedConfirmationReceipt.result.stopReason.code,
+  'exact_teacher_confirmation_required',
+)
+assert.equal(invalidatedConfirmationReceipt.result.canonicalPublication, null)
+assert.deepEqual(
+  Object.keys(invalidatedConfirmationReceipt.result.artifacts).sort(),
+  ['candidatePackage', 'comparison', 'sourceCapture', 'transcription'],
+)
+assert.equal(
+  invalidatedConfirmationReceipt.result.humanEntryPoints.comparison.packageDigest,
+  completionWindowCandidate.packageDigest,
+)
+assert.equal(
+  Object.hasOwn(invalidatedConfirmationReceipt.contractVersions, 'canonicalPublication'),
+  false,
+)
+for (const signal of ['ai-answer-check.json', 'qa-accepted.json', 'help-needed.json']) {
+  assert.equal(existsSync(path.join(completionWindowSignals, signal)), false)
+}
+const invalidatedConfirmationProbe = probePaper({
+  repoRoot: completionWindow.repositoryRoot,
+  paperId: completionWindow.fixture.input.paperId,
+})
+assert.equal(invalidatedConfirmationProbe.status, 'importing')
+assert.equal(invalidatedConfirmationProbe.gatesGreen, false)
+assert.equal(invalidatedConfirmationProbe.format2Qa, null)
+const changedConfirmationRecovered = resume(completionWindow.repositoryRoot, {
+  paperId: completionWindow.fixture.input.paperId,
+  jobId: completionWindowStarted.jobId,
+  teacherConfirmation: changedCompletedConfirmation,
+})
+assert.equal(changedConfirmationRecovered.lifecycle, 'awaiting_qa')
+assert.equal(
+  changedConfirmationRecovered.artifacts.confirmedSelection.confirmationDigest,
+  digestJson(changedCompletedConfirmation),
+)
+assert.equal(
+  probePaper({
+    repoRoot: completionWindow.repositoryRoot,
+    paperId: completionWindow.fixture.input.paperId,
+  }).gatesGreen,
+  true,
+)
 
 const invalidSourceJob = completedFixtureForInvalidation('invalidated-source-')
 const changedInvalidSourceInput = structuredClone(invalidSourceJob.fixture.input)
@@ -871,17 +1050,6 @@ assertFailed(
   'FORMAT2_JOB_AUTHORITY_STALE',
 )
 writeFileSync(currentPath, authorityBoundReceiptBytes)
-assertFailed(
-  resume(repositoryRoot, {
-    paperId: fixture.input.paperId,
-    jobId: result.jobId,
-    teacherConfirmation: {
-      ...structuredClone(exactTeacherConfirmation),
-      decisions: [...exactTeacherConfirmation.decisions].reverse(),
-    },
-  }),
-  'FORMAT2_JOB_CONFIRMATION_STALE',
-)
 
 const currentBytesBefore = readFileSync(currentPath)
 const repeat = run(repositoryRoot, fixture.input)
