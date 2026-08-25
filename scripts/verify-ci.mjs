@@ -250,6 +250,7 @@ function changedPlan(files) {
     'shared/papersurface/',
     'server/paper-canonical/',
     'server/paper-import/format2ImportJob.mjs',
+    'server/paper-import/internal/format2ImportJobRuntime.mjs',
     'schemas/paper-import/format2-transcription-v1.schema.json',
     'server/print-renderer.mjs',
     'server/vocabulary/vocabularyPdfRenderer.mjs',

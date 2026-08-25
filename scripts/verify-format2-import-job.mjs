@@ -12,6 +12,9 @@ import path from 'node:path'
 
 import * as format2ImportJobModule from '../server/paper-import/format2ImportJob.mjs'
 import {
+  createFormat2ImportJobRuntime,
+} from '../server/paper-import/internal/format2ImportJobRuntime.mjs'
+import {
   confirmVisualImportCandidate,
 } from '../server/paper-canonical/visualCandidate.mjs'
 import { sha256 } from '../shared/paper-canonical/stable.mjs'
@@ -25,6 +28,11 @@ assert.deepEqual(
   ['startOrContinueFormat2ImportJob'],
   'Ticket 01 exposes one start-or-continue operation and no internal adapter/path controls',
 )
+assert.equal(
+  startOrContinueFormat2ImportJob.length,
+  1,
+  'the public operation accepts exactly one domain input',
+)
 
 function freshFixture(suffix = '') {
   const repositoryRoot = mkdtempSync(path.join(tmpdir(), `eqb-format2-job-${suffix}`))
@@ -35,7 +43,8 @@ function freshFixture(suffix = '') {
 }
 
 function run(repositoryRoot, input) {
-  return startOrContinueFormat2ImportJob(input, { repositoryRoot })
+  return createFormat2ImportJobRuntime({ repositoryRoot })
+    .startOrContinueFormat2ImportJob(input)
 }
 
 function paperDir(repositoryRoot, paperId) {
@@ -69,6 +78,38 @@ function failureCase(mutator, code, diagnosticCode = code) {
 }
 
 const { repositoryRoot, fixture } = freshFixture('happy-')
+const pathChoiceRoot = mkdtempSync(path.join(tmpdir(), 'eqb-format2-public-path-choice-'))
+const publicPathChoice = startOrContinueFormat2ImportJob(
+  fixture.input,
+  { repositoryRoot: pathChoiceRoot },
+)
+assertFailed(publicPathChoice, 'FORMAT2_JOB_REQUEST_INVALID')
+assert.equal(
+  existsSync(path.join(
+    pathChoiceRoot,
+    'scripts/import-pipeline/papers',
+    fixture.input.paperId,
+    'job',
+  )),
+  false,
+  'public callers cannot redirect Job storage through a second argument',
+)
+const publicInputPathChoice = structuredClone(fixture.input)
+publicInputPathChoice.repositoryRoot = pathChoiceRoot
+assertFailed(
+  startOrContinueFormat2ImportJob(publicInputPathChoice),
+  'FORMAT2_JOB_REQUEST_INVALID',
+)
+assert.equal(
+  existsSync(path.join(
+    pathChoiceRoot,
+    'scripts/import-pipeline/papers',
+    fixture.input.paperId,
+    'job',
+  )),
+  false,
+  'public domain input rejects embedded repository/storage path selection',
+)
 const result = run(repositoryRoot, fixture.input)
 assert.equal(result.schemaVersion, 'format2-import-job-result-v1')
 assert.equal(result.paperId, fixture.input.paperId)

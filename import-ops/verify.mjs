@@ -17,8 +17,8 @@ import {
   statusOf,
 } from './lib/probe.mjs'
 import {
-  startOrContinueFormat2ImportJob,
-} from '../server/paper-import/format2ImportJob.mjs'
+  createFormat2ImportJobRuntime,
+} from '../server/paper-import/internal/format2ImportJobRuntime.mjs'
 import {
   makeFormat2ImportJobFixture,
 } from '../test-fixtures/paper-import/format2-import-job-v1/fixture.mjs'
@@ -58,9 +58,8 @@ const root = mkdtempSync(path.join(tmpdir(), 'eqb-import-ops-'))
 const format2Fixture = makeFormat2ImportJobFixture({
   sourceDir: path.join(root, 'format2-fixture-sources'),
 })
-const format2Result = startOrContinueFormat2ImportJob(format2Fixture.input, {
-  repositoryRoot: root,
-})
+const format2Result = createFormat2ImportJobRuntime({ repositoryRoot: root })
+  .startOrContinueFormat2ImportJob(format2Fixture.input)
 assert.equal(format2Result.lifecycle, 'importing')
 
 const queuedId = 'paper-queued'
