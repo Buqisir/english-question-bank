@@ -562,6 +562,29 @@ async function verifyRenderedArtifacts() {
     await screenPage.goto(screenUrl.href)
     const bank = screenPage.locator('[data-canonical-layout-id="reading-option-figure-layout"]')
     await bank.waitFor()
+    const readingGroup = screenPage.locator('[data-canonical-group-type="reading"]')
+    assert.equal(await readingGroup.count(), 1)
+    assert.equal(await readingGroup.getAttribute('data-canonical-group-id'), groupId)
+    assert.equal(
+      await readingGroup.getAttribute('data-canonical-semantic-signature'),
+      surface.semanticDigest,
+    )
+    assert.deepEqual(
+      await readingGroup.locator('.ps-question-no').evaluateAll(
+        (elements) => elements.map((element) => getComputedStyle(element).fontWeight),
+      ),
+      surface.surfaceData.questions.map(() => '400'),
+      'Reading Screen question numbers use the canonical visible weight',
+    )
+    assert.deepEqual(
+      await readingGroup.locator('.ps-option-label').evaluateAll(
+        (elements) => elements.map((element) => getComputedStyle(element).fontWeight),
+      ),
+      surface.surfaceData.questions.flatMap(
+        (question) => question.options.map(() => '400'),
+      ),
+      'Reading Screen option labels use the canonical visible weight',
+    )
     assert.equal(await screenPage.locator('.ps-option--figure').count(), 4)
     assert.deepEqual(
       await screenPage.locator('.ps-option-label--figure').allTextContents(),

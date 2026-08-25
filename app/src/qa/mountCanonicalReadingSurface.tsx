@@ -29,23 +29,29 @@ async function mount(): Promise<void> {
   if (!root) throw new Error('QA root is missing')
   createRoot(root).render(
     <StrictMode>
-      <PaperSurface
-        textMap={model.surfaceData.textMap}
-        annotations={[]}
-        evidence={[]}
-        questions={model.surfaceData.questions}
-        canonicalReadingBlocks={model.richBlocks}
-        canonicalReadingPassageLetter={
-          invalidCompanion === 'missing-letter'
-            ? undefined
-            : model.passageLetter
-        }
-        canonicalReadingSemanticSignature={model.semanticDigest}
-        mode="lecture"
-        lectureFocus={null}
-        readingFocusBySection={{}}
-        onFocusIntent={() => {}}
-      />
+      <section
+        data-canonical-group-id={groupId}
+        data-canonical-group-type="reading"
+        data-canonical-semantic-signature={model.semanticDigest}
+      >
+        <PaperSurface
+          textMap={model.surfaceData.textMap}
+          annotations={[]}
+          evidence={[]}
+          questions={model.surfaceData.questions}
+          canonicalReadingBlocks={model.richBlocks}
+          canonicalReadingPassageLetter={
+            invalidCompanion === 'missing-letter'
+              ? undefined
+              : model.passageLetter
+          }
+          canonicalReadingSemanticSignature={model.semanticDigest}
+          mode="lecture"
+          lectureFocus={null}
+          readingFocusBySection={{}}
+          onFocusIntent={() => {}}
+        />
+      </section>
     </StrictMode>,
   )
 }

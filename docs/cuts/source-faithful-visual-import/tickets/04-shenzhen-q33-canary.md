@@ -115,6 +115,13 @@ release action, merge, or content push was performed.
   Chinese glosses. The deterministic passage normalizer now materializes them
   as `(电荷分离),` and `(水力发电)` across Screen, Print, and PDF; it does not use
   CSS letter-spacing or change the source-measured Q33 figure layout.
+- Owner QA also identified that the isolated Canonical Reading Screen harness
+  omitted the production-shaped `reading` group boundary, so its question
+  numbers and A–D labels fell back to the generic `700` weight. The harness now
+  carries the exact group id, type, and semantic signature; the existing shared
+  Reading rule renders all four question numbers and all 16 Option labels at
+  `400`, matching Print/PDF without changing shared CSS, spacing, or figure
+  geometry. The focused canary asserts this computed Screen typography.
 - Follow-up `pnpm -C app verify:changed`: `PASS 146 / SKIP 1 / FAIL 1`.
   The literal SKIP remains the absent off-repo teaching-dimension fixture; the
   sole FAIL remains the unrelated `genre-truth` local-DB coverage gap. The
