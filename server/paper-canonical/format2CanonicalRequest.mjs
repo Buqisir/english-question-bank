@@ -368,50 +368,6 @@ function writingVariant(group, family) {
   }
 }
 
-function inactiveClosure(slot, sourceSpanId, paperId, sequence) {
-  const recordId = `record:${slot.slotId}:inactive-closure`
-  const record = {
-    recordId,
-    sequence,
-    ruleId: 'direct-projection',
-    ruleVersion: '2',
-    target: { identity: slot.slotId, path: `inactive_slot:${slot.slotId}` },
-    operation: 'direct_projection',
-    inputSourceSpanIds: [sourceSpanId],
-    before: slot.slotId,
-    after: slot.slotId,
-    certainty: 'exact',
-    preconditions: {
-      sourceObservationIds: [`observation:${slot.slotId}`],
-      sourceValueDigests: [digestJson(slot.slotId)],
-    },
-    outputDigest: digestJson(slot.slotId),
-  }
-  const base = {
-    scopeId: `inactive-source-closure:${paperId}:${slot.slotId}`,
-    slotId: slot.slotId,
-    contractRef: clone(slot.sourceClosureContractRef),
-    status: 'closed',
-    sourceSliceRefs: [sourceSpanId],
-    questionCount: slot.questionRule.cardinality,
-    optionLabels: [...slot.questionRule.optionLabels],
-    officialAnswerCount: slot.questionRule.cardinality,
-    transcriptSegmentCount: slot.transcriptRule.segmentCardinality,
-    transcriptCoverage: 'exactly_once',
-    timing: { disposition: 'not_supplied' },
-    audio: { disposition: 'not_supplied' },
-    sourceMap: {
-      entries: [{
-        target: { kind: 'inactive_slot', id: slot.slotId },
-        sourceSpanRefs: [sourceSpanId],
-        transformationRecordIds: [recordId],
-      }],
-    },
-    transformationRecordIds: [recordId],
-  }
-  return { record, closure: { ...base, closureDigest: digestJson(base) } }
-}
-
 function instructionEvidence(paperId, questionPdfDigest, instruction, sourceInstruction) {
   if (sourceInstruction === instruction.text) {
     throw format2CanonicalError(
@@ -517,29 +473,6 @@ export function buildConfirmedFormat2CanonicalRequest({
   const assertions = []
   const sourceGroups = []
   const transformations = []
-  const inactiveSlots = {}
-  const inactiveSourceClosures = []
-  for (const slot of slots.filter((candidate) => candidate.activation === 'inactive_source')) {
-    const observationId = `observation:${slot.slotId}`
-    observations.push({
-      observationId,
-      kind: 'fixture_section',
-      documentInputKey: 'question_pdf',
-      value: slot.slotId,
-      span: { start: 0, end: questionPdfBytes.byteLength },
-    })
-    const sourceSpanId = `source-span:${observationId}`
-    const inactive = inactiveClosure(
-      slot,
-      sourceSpanId,
-      transcription.paperId,
-      transformations.length + 1,
-    )
-    transformations.push(inactive.record)
-    inactiveSlots[slot.slotId] = [sourceSpanId]
-    inactiveSourceClosures.push(inactive.closure)
-  }
-
   for (const slot of activeSlots) {
     const group = groupsBySlot.get(slot.slotId)
     const expectedFamily = slot.familyContractRef.id
@@ -571,7 +504,7 @@ export function buildConfirmedFormat2CanonicalRequest({
     observations.push({
       observationId,
       kind: 'fixture_section',
-      documentInputKey: 'question_pdf',
+      documentInputKey: 'original_question_source',
       value: slot.slotId,
       span: { start: 0, end: questionPdfBytes.byteLength },
     })
@@ -618,7 +551,7 @@ export function buildConfirmedFormat2CanonicalRequest({
         observations.push({
           observationId: promptObservationId,
           kind: 'grammar_fill_prompt_provision',
-          documentInputKey: 'question_pdf',
+          documentInputKey: 'original_question_source',
           value: { blankId: `blank:${question.questionId}`, provision: 'source_proven_none' },
           span: { start: 0, end: questionPdfBytes.byteLength },
         })
@@ -632,7 +565,7 @@ export function buildConfirmedFormat2CanonicalRequest({
         {
           observationId: `observation:${group.groupId}:answer-region-empty`,
           kind: 'application_answer_region_absence',
-          documentInputKey: 'question_pdf',
+          documentInputKey: 'original_question_source',
           value: {
             groupId: group.groupId,
             answerRegionRef: 'writing.application-box',
@@ -642,7 +575,7 @@ export function buildConfirmedFormat2CanonicalRequest({
         {
           observationId: `observation:${group.groupId}:word-count`,
           kind: 'application_word_count_ruling',
-          documentInputKey: 'question_pdf',
+          documentInputKey: 'original_question_source',
           value: {
             groupId: group.groupId,
             target: group.blocks.find((block) => block.kind === 'writing_material').wordCountTarget,
@@ -653,7 +586,7 @@ export function buildConfirmedFormat2CanonicalRequest({
         {
           observationId: `observation:${group.groupId}:response`,
           kind: 'application_response_binding',
-          documentInputKey: 'question_pdf',
+          documentInputKey: 'original_question_source',
           value: {
             groupId: group.groupId,
             writingTaskId: `writing-task:${group.groupId}`,
@@ -681,7 +614,7 @@ export function buildConfirmedFormat2CanonicalRequest({
       observations.push({
         observationId: answerObservationId,
         kind: 'official_answer',
-        documentInputKey: 'answer_pdf',
+        documentInputKey: 'listening_answer_source',
         value: { questionId: question.questionId, answer: answer.answer },
         span: { start: 0, end: answerPdfBytes.byteLength },
       })
@@ -699,7 +632,7 @@ export function buildConfirmedFormat2CanonicalRequest({
     observations.push({
       observationId: visual.observationId,
       kind: 'source_figure',
-      documentInputKey: 'question_pdf',
+      documentInputKey: 'original_question_source',
       value: { owner: clone(visual.owner) },
       span: {
         kind: 'page_region',
@@ -723,8 +656,8 @@ export function buildConfirmedFormat2CanonicalRequest({
     assertions,
     groups: sourceGroups,
     transformations,
-    inactiveSlots,
-    inactiveSourceClosures,
+    inactiveSlots: {},
+    inactiveSourceClosures: [],
   }
   const sourceAsset = encoder.encode(JSON.stringify(source))
   const continuationInstruction = profile.instructions['writing.continuation.prompt']
@@ -738,6 +671,9 @@ export function buildConfirmedFormat2CanonicalRequest({
     continuationInstruction,
     continuationSourceInstruction,
   )))
+  const listeningBlock = transcription.groups
+    .find((group) => group.groupType === 'listening')
+    .blocks.find((block) => block.kind === 'listening_material')
   const documents = [
     sourceDocument(
       'canonical_source_envelope',
@@ -747,15 +683,15 @@ export function buildConfirmedFormat2CanonicalRequest({
       'format2-source-envelope.json',
     ),
     sourceDocument(
-      'question_pdf',
+      'original_question_source',
       ['question_source', 'source_provenance'],
       questionPdfBytes,
       'application/pdf',
       'paper.pdf',
     ),
     sourceDocument(
-      'answer_pdf',
-      ['official_answer_source', 'source_provenance'],
+      'listening_answer_source',
+      ['official_answer_source', 'transcript_source', 'source_provenance'],
       answerPdfBytes,
       'application/pdf',
       'answers.pdf',
@@ -766,6 +702,34 @@ export function buildConfirmedFormat2CanonicalRequest({
       instructionBytes,
       'application/vnd.eqb.profile-writing-source-evidence+json',
       'continuation-writing-instruction-evidence.json',
+    ),
+    sourceDocument(
+      'listening_questions',
+      ['structured_source', 'question_source'],
+      encoder.encode(JSON.stringify(listeningBlock.questions)),
+      'application/vnd.eqb.listening-questions+json',
+      'listening-questions.json',
+    ),
+    sourceDocument(
+      'listening_answers',
+      ['structured_source', 'official_answer_source'],
+      encoder.encode(JSON.stringify(listeningBlock.answers)),
+      'application/vnd.eqb.listening-answers+json',
+      'listening-answers.json',
+    ),
+    sourceDocument(
+      'listening_transcript',
+      ['structured_source', 'transcript_source'],
+      encoder.encode(JSON.stringify(listeningBlock.transcript)),
+      'application/vnd.eqb.listening-transcript+json',
+      'listening-transcript.json',
+    ),
+    sourceDocument(
+      'listening_inventory',
+      ['operator_assertions', 'source_provenance'],
+      encoder.encode(JSON.stringify(listeningBlock.inventory)),
+      'application/vnd.eqb.listening-source-inventory+json',
+      'listening-inventory.json',
     ),
     ...confirmedSelection.confirmedSelections.map((selection) => sourceDocument(
       `visual_${selection.observationId}`,

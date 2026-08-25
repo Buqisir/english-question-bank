@@ -2,7 +2,55 @@ import { mkdirSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { deflateSync } from 'node:zlib'
 
-import { sha256 } from '../../../shared/paper-canonical/stable.mjs'
+import { digestJson, sha256 } from '../../../shared/paper-canonical/stable.mjs'
+import { extractAnswerTextFromPdfBytes } from '../../../server/paper-import/internal/answerTextExtraction.mjs'
+
+const answerRanges = [[21, 23], [24, 27], [28, 31], [32, 35], [36, 40], [41, 55], [56, 65]]
+const syntheticAnswerSourceText = answerRanges.map(([start, end]) => (
+  `${start}-${end} ${'A'.repeat(end - start + 1)}`
+)).join('\n')
+
+function compressedTextPdf(value) {
+  const textCommands = value.split('\n').map((line, index) => {
+    const escaped = line.replace(/([\\()])/gu, '\\$1')
+    return `${index === 0 ? '' : '0 -20 Td '}(${escaped}) Tj`
+  }).join(' ')
+  const content = Buffer.from(`BT /F1 12 Tf 72 720 Td ${textCommands} ET`)
+  const compressed = deflateSync(content)
+  const objects = [
+    Buffer.from('<< /Type /Catalog /Pages 2 0 R >>'),
+    Buffer.from('<< /Type /Pages /Kids [3 0 R] /Count 1 >>'),
+    Buffer.from('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>'),
+    Buffer.from('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>'),
+    Buffer.concat([
+      Buffer.from(`<< /Length ${compressed.byteLength} /Filter /FlateDecode >>\nstream\n`),
+      compressed,
+      Buffer.from('\nendstream'),
+    ]),
+  ]
+  const chunks = [Buffer.from('%PDF-1.4\n%\xE2\xE3\xCF\xD3\n', 'binary')]
+  const offsets = [0]
+  let offset = chunks[0].byteLength
+  objects.forEach((object, index) => {
+    offsets.push(offset)
+    const chunk = Buffer.concat([
+      Buffer.from(`${index + 1} 0 obj\n`),
+      object,
+      Buffer.from('\nendobj\n'),
+    ])
+    chunks.push(chunk)
+    offset += chunk.byteLength
+  })
+  const xrefOffset = offset
+  const xref = [
+    `xref\n0 ${objects.length + 1}\n`,
+    '0000000000 65535 f \n',
+    ...offsets.slice(1).map((entry) => `${String(entry).padStart(10, '0')} 00000 n \n`),
+    `trailer\n<< /Size ${objects.length + 1} /Root 1 0 R >>\nstartxref\n${xrefOffset}\n%%EOF\n`,
+  ].join('')
+  chunks.push(Buffer.from(xref))
+  return Buffer.concat(chunks)
+}
 
 function pngCrc32(bytes) {
   let crc = 0xffffffff
@@ -95,6 +143,76 @@ function answer(questionId, page = 1) {
   }
 }
 
+function listeningEvidence(paperId, questionPdfSha256, answerPdfSha256) {
+  const questions = {
+    schemaVersion: 'paper-listening-questions-v1',
+    paperId,
+    section1: {
+      questions: Array.from({ length: 5 }, (_value, index) => ({
+        no: index + 1,
+        stem: `Synthetic listening question ${index + 1}`,
+        options: { A: 'Alpha', B: 'Beta', C: 'Gamma' },
+      })),
+    },
+    section2: {
+      questions: Array.from({ length: 15 }, (_value, index) => ({
+        no: index + 6,
+        stem: `Synthetic listening question ${index + 6}`,
+        options: { A: 'Alpha', B: 'Beta', C: 'Gamma' },
+        textRef: `Text ${6 + Math.floor(index / 3)}`,
+      })),
+    },
+  }
+  const answers = {
+    schemaVersion: 'paper-listening-answers-v1',
+    paperId,
+    answers: Object.fromEntries(Array.from({ length: 20 }, (_value, index) => [String(index + 1), 'A'])),
+  }
+  const transcript = {
+    schemaVersion: 'paper-listening-transcript-v1',
+    paperId,
+    texts: Array.from({ length: 10 }, (_value, index) => ({
+      textId: `Text ${index + 1}`,
+      label: `Text ${index + 1}`,
+      lines: [{ speaker: 'Speaker', line: `Synthetic listening source segment ${index + 1}.` }],
+      ...(index >= 5
+        ? { coversQuestions: [6 + (index - 5) * 3, 7 + (index - 5) * 3, 8 + (index - 5) * 3] }
+        : {}),
+    })),
+  }
+  const jsonDigest = (value) => sha256(new TextEncoder().encode(JSON.stringify(value)))
+  const inventory = {
+    schemaVersion: 'listening-source-inventory-v1',
+    paperId,
+    profileId: 'nck1',
+    contractRef: { id: 'listening-raw-closure', version: 'nck1-v1' },
+    review: { method: 'manual_source_transcription', status: 'accepted' },
+    sourceBindings: {
+      questions: { extractedDocumentDigest: jsonDigest(questions), sourceDocumentDigest: questionPdfSha256 },
+      answers: { extractedDocumentDigest: jsonDigest(answers), sourceDocumentDigest: answerPdfSha256 },
+      transcript: { extractedDocumentDigest: jsonDigest(transcript), sourceDocumentDigest: answerPdfSha256 },
+    },
+    shortDialogueJoins: Array.from({ length: 5 }, (_value, index) => ({
+      questionNo: index + 1,
+      textId: `Text ${index + 1}`,
+    })),
+    timing: { disposition: 'not_supplied' },
+    audio: { disposition: 'not_supplied', sourceReferences: [] },
+    receivedArtifactInventory: {
+      status: 'complete',
+      inputKeys: [
+        'original_question_source',
+        'listening_answer_source',
+        'listening_questions',
+        'listening_answers',
+        'listening_transcript',
+        'listening_inventory',
+      ],
+    },
+  }
+  return { questions, answers, transcript, inventory }
+}
+
 function visual({ observationId, owner, page, x, y, width, height, variant }) {
   return {
     observationId,
@@ -129,7 +247,7 @@ export function makeFormat2ImportJobFixture({
   if (!sourceDir) throw new Error('sourceDir is required')
   mkdirSync(sourceDir, { recursive: true })
   const questionPdfBytes = Buffer.from('%PDF-1.7\n% compact synthetic Format 2 question source\n')
-  const answerPdfBytes = Buffer.from('%PDF-1.7\n% compact synthetic Format 2 official answer source\n')
+  const answerPdfBytes = compressedTextPdf(syntheticAnswerSourceText)
   const questionPdfPath = path.join(sourceDir, 'synthetic-questions.pdf')
   const answerPdfPath = path.join(sourceDir, 'synthetic-answers.pdf')
   writeFileSync(questionPdfPath, questionPdfBytes)
@@ -141,6 +259,7 @@ export function makeFormat2ImportJobFixture({
     sourceLabel: 'Ticket 01 synthetic fixture',
   }
   const optionQuestionId = 'question:reading-b:24'
+  const listening = listeningEvidence(paperId, questionPdfSha256, answerPdfSha256)
   const optionOwners = ['A', 'B', 'C', 'D'].map((label) => ({
     kind: 'reading_option',
     groupId: 'group:reading-b',
@@ -260,7 +379,7 @@ export function makeFormat2ImportJobFixture({
         blocks: [{
           blockId: 'block:listening:material',
           kind: 'listening_material',
-          transcript: 'Speaker one gives a short synthetic direction.',
+          ...listening,
         }],
         questions: [],
       },
@@ -338,6 +457,38 @@ export function makeFormat2ImportJobFixture({
         variant: index + 1,
       })),
     ],
+  }
+  const extraction = extractAnswerTextFromPdfBytes(answerPdfBytes)
+  const extractedAnswerText = extraction.extractedText
+  transcription.answerTranscriptionCheck = {
+    schemaVersion: 'answer-transcription-check-v1',
+    method: 'ai-source-markings-vs-answer-key',
+    answerPdfSha256,
+    officialAnswersDigest: digestJson(transcription.officialAnswers),
+    extraction,
+    sourceMarkings: transcription.officialAnswers.map((officialAnswer) => ({
+      ...(() => {
+        const questionNo = Number(officialAnswer.questionId.split(':').at(-1))
+        const [rangeStart, rangeEnd] = answerRanges.find(
+          ([start, end]) => questionNo >= start && questionNo <= end,
+        )
+        const sourceMarking = `${rangeStart}-${rangeEnd} ${'A'.repeat(rangeEnd - rangeStart + 1)}`
+        const start = extractedAnswerText.indexOf(sourceMarking)
+        const answerOrdinal = questionNo - rangeStart
+        const answerStart = start + Buffer.byteLength(`${rangeStart}-${rangeEnd} `) + answerOrdinal
+        return {
+          questionId: officialAnswer.questionId,
+          questionNo,
+          questionRange: { start: rangeStart, end: rangeEnd },
+          answerOrdinal,
+          answer: officialAnswer.answer,
+          page: officialAnswer.source.page,
+          sourceMarking,
+          byteSpan: { start, end: start + Buffer.byteLength(sourceMarking) },
+          answerByteSpan: { start: answerStart, end: answerStart + 1 },
+        }
+      })(),
+    })),
   }
   return {
     input: {

@@ -10,6 +10,7 @@
     "format",
     "provenance",
     "sourceBindings",
+    "answerTranscriptionCheck",
     "groups",
     "officialAnswers",
     "visuals"
@@ -26,6 +27,102 @@
       "properties": {
         "questionPdfSha256": { "$ref": "#/$defs/sha256" },
         "answerPdfSha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "answerTranscriptionCheck": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "method",
+        "answerPdfSha256",
+        "officialAnswersDigest",
+        "extraction",
+        "sourceMarkings"
+      ],
+      "properties": {
+        "schemaVersion": { "const": "answer-transcription-check-v1" },
+        "method": { "const": "ai-source-markings-vs-answer-key" },
+        "answerPdfSha256": { "$ref": "#/$defs/sha256" },
+        "officialAnswersDigest": { "$ref": "#/$defs/sha256" },
+        "extraction": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "schemaVersion",
+            "tool",
+            "toolVersion",
+            "parameters",
+            "extractedText",
+            "extractedTextSha256"
+          ],
+          "properties": {
+            "schemaVersion": { "const": "answer-text-extraction-v1" },
+            "tool": { "const": "pdftotext" },
+            "toolVersion": { "$ref": "#/$defs/nonEmpty" },
+            "parameters": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "#/$defs/nonEmpty" }
+            },
+            "extractedText": { "$ref": "#/$defs/nonEmpty" },
+            "extractedTextSha256": { "$ref": "#/$defs/sha256" }
+          }
+        },
+        "sourceMarkings": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "questionId",
+              "questionNo",
+              "questionRange",
+              "answerOrdinal",
+              "answer",
+              "page",
+              "sourceMarking",
+              "byteSpan",
+              "answerByteSpan"
+            ],
+            "properties": {
+              "questionId": { "$ref": "#/$defs/nonEmpty" },
+              "questionNo": { "type": "integer", "minimum": 1 },
+              "questionRange": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["start", "end"],
+                "properties": {
+                  "start": { "type": "integer", "minimum": 1 },
+                  "end": { "type": "integer", "minimum": 1 }
+                }
+              },
+              "answerOrdinal": { "type": "integer", "minimum": 0 },
+              "answer": { "$ref": "#/$defs/nonEmpty" },
+              "page": { "type": "integer", "minimum": 1 },
+              "sourceMarking": { "$ref": "#/$defs/nonEmpty" },
+              "byteSpan": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["start", "end"],
+                "properties": {
+                  "start": { "type": "integer", "minimum": 0 },
+                  "end": { "type": "integer", "minimum": 1 }
+                }
+              },
+              "answerByteSpan": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["start", "end"],
+                "properties": {
+                  "start": { "type": "integer", "minimum": 0 },
+                  "end": { "type": "integer", "minimum": 1 }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "groups": {
@@ -340,11 +437,14 @@
     "listeningBlock": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["blockId", "kind", "transcript"],
+      "required": ["blockId", "kind", "questions", "answers", "transcript", "inventory"],
       "properties": {
         "blockId": { "$ref": "#/$defs/nonEmpty" },
         "kind": { "const": "listening_material" },
-        "transcript": { "$ref": "#/$defs/nonEmpty" }
+        "questions": { "type": "object" },
+        "answers": { "type": "object" },
+        "transcript": { "type": "object" },
+        "inventory": { "type": "object" }
       }
     },
     "writingBlock": {

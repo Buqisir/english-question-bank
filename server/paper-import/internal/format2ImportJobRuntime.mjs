@@ -37,6 +37,7 @@ import {
   readingOptionFigureConsumerContractRefs,
 } from '../../../shared/paper-canonical/consumers.mjs'
 import { readingOptionFigureAuthorityRef } from '../../../shared/paper-canonical/authority.mjs'
+import { extractAnswerTextFromPdfBytes } from './answerTextExtraction.mjs'
 
 const FORMAT = 'format2-pdf-pair-v1'
 const RESULT_SCHEMA_VERSION = 'format2-import-job-result-v1'
@@ -229,14 +230,14 @@ function captureExactDocuments(input) {
   const questionBytes = readPdfSource(input.sources.questionPdf, 'question_pdf')
   const answerBytes = readPdfSource(input.sources.answerPdf, 'answer_pdf')
   const questionDocument = sourceDocument({
-    inputKey: 'question_pdf',
+    inputKey: 'original_question_source',
     roles: ['question_source', 'source_provenance'],
     originalName: path.basename(input.sources.questionPdf.absolutePath),
     bytes: questionBytes,
   })
   const answerDocument = sourceDocument({
-    inputKey: 'answer_pdf',
-    roles: ['official_answer_source', 'source_provenance'],
+    inputKey: 'listening_answer_source',
+    roles: ['official_answer_source', 'transcript_source', 'source_provenance'],
     originalName: path.basename(input.sources.answerPdf.absolutePath),
     bytes: answerBytes,
   })
@@ -256,7 +257,101 @@ function semanticIssue(code, pathValue, message) {
   return { code, path: pathValue, message }
 }
 
-function validateTranscriptionSemantics(input) {
+function validateAnswerTranscriptionCheck(input, answerPdfBytes) {
+  const transcription = input.transcription
+  const check = transcription.answerTranscriptionCheck
+  const expectedAnswers = transcription.officialAnswers
+  const markings = check?.sourceMarkings
+  const extractedTextBytes = new TextEncoder().encode(check?.extraction?.extractedText || '')
+  const actualExtraction = extractAnswerTextFromPdfBytes(answerPdfBytes)
+  const invalidBinding = (
+    !check
+    || check.answerPdfSha256 !== input.sources.answerPdf.sha256
+    || check.officialAnswersDigest !== digestJson(expectedAnswers)
+    || check.extraction.extractedTextSha256 !== sha256(extractedTextBytes)
+    || !sameValue(check.extraction, actualExtraction)
+  )
+  const answersByQuestion = new Map(expectedAnswers.map((answer) => [answer.questionId, answer]))
+  const invalidMarkings = (
+    !Array.isArray(markings)
+    || markings.length !== expectedAnswers.length
+    || new Set(markings?.map((marking) => marking.questionId)).size !== expectedAnswers.length
+    || markings?.some((marking) => {
+      const answer = answersByQuestion.get(marking.questionId)
+      const questionNo = Number(marking.questionId.split(':').at(-1))
+      const extractedPage = 1 + Buffer.from(extractedTextBytes)
+        .subarray(0, marking.byteSpan?.start)
+        .filter((byte) => byte === 0x0c).length
+      return !answer
+        || marking.answer !== answer.answer
+        || marking.page !== answer.source.page
+        || marking.page !== extractedPage
+        || marking.questionNo !== questionNo
+        || marking.questionRange?.start > marking.questionNo
+        || marking.questionRange?.end < marking.questionNo
+        || marking.answerOrdinal !== marking.questionNo - marking.questionRange?.start
+        || !Number.isInteger(marking.byteSpan?.start)
+        || !Number.isInteger(marking.byteSpan?.end)
+        || marking.byteSpan.start < 0
+        || marking.byteSpan.end <= marking.byteSpan.start
+        || marking.byteSpan.end > extractedTextBytes.byteLength
+        || Buffer.from(extractedTextBytes)
+          .subarray(marking.byteSpan.start, marking.byteSpan.end)
+          .toString('utf8') !== marking.sourceMarking
+        || !Number.isInteger(marking.answerByteSpan?.start)
+        || !Number.isInteger(marking.answerByteSpan?.end)
+        || marking.answerByteSpan.start < marking.byteSpan.start
+        || marking.answerByteSpan.end > marking.byteSpan.end
+        || marking.answerByteSpan.end <= marking.answerByteSpan.start
+        || Buffer.from(extractedTextBytes)
+          .subarray(marking.answerByteSpan.start, marking.answerByteSpan.end)
+          .toString('utf8') !== marking.answer
+    })
+  )
+  const markingsBySpan = new Map()
+  for (const marking of markings || []) {
+    const key = `${marking.byteSpan?.start}:${marking.byteSpan?.end}`
+    const entries = markingsBySpan.get(key) || []
+    entries.push(marking)
+    markingsBySpan.set(key, entries)
+  }
+  const invalidRangeCoverage = [...markingsBySpan.values()].some((entries) => {
+    const first = entries[0]
+    const start = first?.questionRange?.start
+    const end = first?.questionRange?.end
+    const expectedCount = end - start + 1
+    return !Number.isInteger(start)
+      || !Number.isInteger(end)
+      || end < start
+      || entries.length !== expectedCount
+      || !first.sourceMarking.includes(`${start}-${end}`)
+      || entries.some((marking) => (
+        !sameValue(marking.questionRange, first.questionRange)
+        || !sameValue(marking.byteSpan, first.byteSpan)
+        || marking.sourceMarking !== first.sourceMarking
+      ))
+      || !Array.from({ length: expectedCount }, (_value, index) => start + index)
+        .every((questionNo) => entries.some((marking) => (
+          marking.questionNo === questionNo
+          && marking.answerOrdinal === questionNo - start
+        )))
+  })
+  if (invalidBinding || invalidMarkings || invalidRangeCoverage) {
+    fail(
+      'FORMAT2_ANSWER_TRANSCRIPTION_CHECK_INVALID',
+      'AI Answer Transcription Check must bind the admitted answer PDF and match every official answer source marking',
+    )
+  }
+  return {
+    answerPdfSha256: check.answerPdfSha256,
+    officialAnswersDigest: check.officialAnswersDigest,
+    checkDigest: digestJson(check),
+    extractedTextSha256: check.extraction.extractedTextSha256,
+    markingCount: markings.length,
+  }
+}
+
+function validateTranscriptionSemantics(input, answerPdfBytes) {
   const transcription = input.transcription
   const schemaDiagnostics = transcriptionSchemaDiagnostics(transcription)
   if (schemaDiagnostics.length > 0) {
@@ -575,6 +670,7 @@ function validateTranscriptionSemantics(input) {
   if (issues.length > 0) {
     fail('FORMAT2_TRANSCRIPTION_INVALID', 'Format 2 transcription failed closed semantic validation', issues)
   }
+  validateAnswerTranscriptionCheck(input, answerPdfBytes)
 }
 
 function normalizedRegion(visual) {
@@ -839,6 +935,7 @@ function persistRun({
       answerPdfSha256: documents.answerDocument.sha256,
       transcriptionDigest: digestJson(input.transcription),
       authorityDigest: digestJson(readingOptionFigureAuthorityRef),
+      answerTranscriptionCheckDigest: digestJson(input.transcription.answerTranscriptionCheck),
     },
     contractVersions: {
       transcription: TRANSCRIPTION_SCHEMA_VERSION,
@@ -879,7 +976,7 @@ function persistRun({
 function runStartOrContinue(input, repositoryRoot) {
   validateOperationInput(input)
   const documents = captureExactDocuments(input)
-  validateTranscriptionSemantics(input)
+  validateTranscriptionSemantics(input, documents.answerBytes)
   const sourceCapture = buildSourceCapture(documents, input.transcription)
   let candidatePackage
   try {
@@ -1067,10 +1164,10 @@ function loadResumeEvidence(repositoryRoot, input) {
     )
   }
   const questionDocument = sourceCapture.documents.find(
-    (document) => document.inputKey === 'question_pdf',
+    (document) => document.inputKey === 'original_question_source',
   )
   const answerDocument = sourceCapture.documents.find(
-    (document) => document.inputKey === 'answer_pdf',
+    (document) => document.inputKey === 'listening_answer_source',
   )
   if (!questionDocument || !answerDocument) {
     fail('FORMAT2_JOB_DURABLE_STATE_INVALID', 'Source Capture PDF pair is incomplete')
@@ -1160,11 +1257,12 @@ function readingOptionPublicationConfirmation(evidence, confirmedSelection) {
 
 function buildQaEntryPoints(paperId, publication) {
   const encodedPaperId = encodeURIComponent(paperId)
-  const screen = `/?view=paper-browse&paperId=${encodedPaperId}`
+  const appOrigin = 'http://127.0.0.1:5173'
+  const screen = `${appOrigin}/?view=paper-browse&paperId=${encodedPaperId}`
   return {
     service: {
-      command: 'bash scripts/dev.sh',
-      appOrigin: 'http://127.0.0.1:3000',
+      command: 'PORT=5173 bash scripts/dev.sh',
+      appOrigin,
     },
     screen: { href: screen, mode: 'canonical-screen' },
     studentPrint: { href: screen, mode: 'student-print' },
@@ -1204,7 +1302,7 @@ function committedPublicationIdentity({ paperId, published, screen, printPdf }) 
 
 function verifyCompletedAwaitingQa(repositoryRoot, paperDir, jobRoot, receipt) {
   const committed = receipt.result?.canonicalPublication
-  const publicationDbPath = path.join(jobRoot, 'canonical-publication.sqlite')
+  const publicationDbPath = path.join(repositoryRoot, 'data/question-bank.sqlite')
   if (
     committed?.paperId !== receipt.result.paperId
     || !nonEmptyString(committed.versionName)
@@ -1252,18 +1350,16 @@ function verifyCompletedAwaitingQa(repositoryRoot, paperDir, jobRoot, receipt) {
   let aiCheckValid = false
   if (existsSync(aiCheckPath)) {
     try {
-      aiCheckValid = readJson(aiCheckPath, 'Format 2 AI answer-check signal').ok === true
+      const signal = readJson(aiCheckPath, 'Format 2 AI answer-check signal')
+      aiCheckValid = signal.ok === true
+        && signal.answerPdfSha256 === receipt.inputDigests.answerPdfSha256
+        && signal.checkDigest === receipt.inputDigests.answerTranscriptionCheckDigest
     } catch {
       aiCheckValid = false
     }
   }
   if (!aiCheckValid) {
-    mkdirSync(signalsDir, { recursive: true })
-    atomicWrite(aiCheckPath, jsonBytes({
-      ok: true,
-      checkedAt: new Date().toISOString(),
-      method: 'source-markings-vs-answerKey',
-    }))
+    fail('FORMAT2_ANSWER_TRANSCRIPTION_CHECK_INVALID', 'Completed Job lacks its exact digest-bound AI Answer Transcription Check signal')
   }
   const helpPath = path.join(signalsDir, 'help-needed.json')
   if (existsSync(helpPath)) unlinkSync(helpPath)
@@ -1271,14 +1367,14 @@ function verifyCompletedAwaitingQa(repositoryRoot, paperDir, jobRoot, receipt) {
     path.join(jobRoot, 'publication-store.json'),
     jsonBytes({
       schemaVersion: 'format2-local-publication-store-v1',
-      database: path.basename(publicationDbPath),
+      database: 'data/question-bank.sqlite',
     }),
     'Format 2 local publication store descriptor',
   )
   return cloneJson(receipt.result)
 }
 
-function persistAwaitingQa({ evidence, result, publicationDbPath }) {
+function persistAwaitingQa({ evidence, result, answerCheck }) {
   const current = {
     ...cloneJson(evidence.receipt),
     contractVersions: {
@@ -1295,7 +1391,8 @@ function persistAwaitingQa({ evidence, result, publicationDbPath }) {
   atomicWrite(path.join(signalsDir, 'ai-answer-check.json'), jsonBytes({
     ok: true,
     checkedAt: new Date().toISOString(),
-    method: 'source-markings-vs-answerKey',
+    method: 'ai-source-markings-vs-answer-key',
+    ...answerCheck,
   }))
   const helpPath = path.join(signalsDir, 'help-needed.json')
   if (existsSync(helpPath)) unlinkSync(helpPath)
@@ -1303,7 +1400,7 @@ function persistAwaitingQa({ evidence, result, publicationDbPath }) {
     path.join(evidence.jobRoot, 'publication-store.json'),
     jsonBytes({
       schemaVersion: 'format2-local-publication-store-v1',
-      database: path.basename(publicationDbPath),
+      database: 'data/question-bank.sqlite',
     }),
     'Format 2 local publication store descriptor',
   )
@@ -1338,6 +1435,12 @@ function runResume(input, repositoryRoot, publicationFailurePoint = null) {
   ) {
     return unresolvedResumeResult(evidence, confirmedSelection)
   }
+  const answerCheck = validateAnswerTranscriptionCheck({
+    transcription: evidence.transcription,
+    sources: {
+      answerPdf: { sha256: evidence.receipt.inputDigests.answerPdfSha256 },
+    },
+  }, evidence.answerPdfBytes)
   const prepared = buildConfirmedFormat2CanonicalRequest({
     transcription: evidence.transcription,
     questionPdfBytes: evidence.questionPdfBytes,
@@ -1350,7 +1453,8 @@ function runResume(input, repositoryRoot, publicationFailurePoint = null) {
   )
   const publicationRoot = path.join(repositoryRoot, 'app/public/paper-assets')
   mkdirSync(evidence.jobRoot, { recursive: true })
-  const publicationDbPath = path.join(evidence.jobRoot, 'canonical-publication.sqlite')
+  const publicationDbPath = path.join(repositoryRoot, 'data/question-bank.sqlite')
+  mkdirSync(path.dirname(publicationDbPath), { recursive: true })
   const db = new DatabaseSync(publicationDbPath)
   try {
     recoverCanonicalPaperPublication({
@@ -1430,7 +1534,7 @@ function runResume(input, repositoryRoot, publicationFailurePoint = null) {
       humanEntryPoints: buildQaEntryPoints(input.paperId, canonicalPublication),
       canonicalPublication,
     }
-    persistAwaitingQa({ evidence, result, publicationDbPath })
+    persistAwaitingQa({ evidence, result, answerCheck })
     return cloneJson(result)
   } finally {
     db.close()

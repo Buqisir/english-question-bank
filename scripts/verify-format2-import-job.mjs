@@ -9,6 +9,7 @@ import {
 } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
+import { DatabaseSync } from 'node:sqlite'
 
 import * as format2ImportJobModule from '../server/paper-import/format2ImportJob.mjs'
 import {
@@ -18,7 +19,14 @@ import {
   confirmVisualImportCandidate,
 } from '../server/paper-canonical/visualCandidate.mjs'
 import { readingOptionFigureAuthorityRef } from '../shared/paper-canonical/authority.mjs'
+import { readingOptionFigureConsumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
+import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
+import {
+  createFileSystemCanonicalPublicationStore,
+  loadPaperForConsumptionSync,
+} from '../server/paper-canonical/publication.mjs'
+import { buildPrintHtml } from '../server/print-renderer.mjs'
 import {
   makeFormat2ImportJobFixture,
 } from '../test-fixtures/paper-import/format2-import-job-v1/fixture.mjs'
@@ -103,6 +111,36 @@ function failureCase(mutator, code, diagnosticCode = code) {
   assertFailed(run(repositoryRoot, input), code, diagnosticCode)
 }
 
+failureCase((input) => {
+  delete input.transcription.answerTranscriptionCheck
+}, 'FORMAT2_TRANSCRIPTION_SCHEMA_INVALID')
+failureCase((input) => {
+  input.transcription.answerTranscriptionCheck.answerPdfSha256 = `sha256:${'a'.repeat(64)}`
+}, 'FORMAT2_ANSWER_TRANSCRIPTION_CHECK_INVALID')
+failureCase((input) => {
+  input.transcription.answerTranscriptionCheck.sourceMarkings[0].answer = 'B'
+}, 'FORMAT2_ANSWER_TRANSCRIPTION_CHECK_INVALID')
+failureCase((input) => {
+  input.transcription.answerTranscriptionCheck.extraction.extractedText += ' tampered'
+}, 'FORMAT2_ANSWER_TRANSCRIPTION_CHECK_INVALID')
+failureCase((input) => {
+  input.transcription.answerTranscriptionCheck.extraction.extractedText += ' forged but digest-consistent'
+  input.transcription.answerTranscriptionCheck.extraction.extractedTextSha256 = sha256(
+    new TextEncoder().encode(input.transcription.answerTranscriptionCheck.extraction.extractedText),
+  )
+}, 'FORMAT2_ANSWER_TRANSCRIPTION_CHECK_INVALID')
+failureCase((input) => {
+  input.transcription.answerTranscriptionCheck.sourceMarkings[0].byteSpan.start += 1
+}, 'FORMAT2_ANSWER_TRANSCRIPTION_CHECK_INVALID')
+failureCase((input) => {
+  input.transcription.officialAnswers[0].answer = 'B'
+  input.transcription.answerTranscriptionCheck.officialAnswersDigest = digestJson(
+    input.transcription.officialAnswers,
+  )
+  input.transcription.answerTranscriptionCheck.sourceMarkings[0].answer = 'B'
+  input.transcription.answerTranscriptionCheck.sourceMarkings[0].sourceMarking = '21=B'
+}, 'FORMAT2_ANSWER_TRANSCRIPTION_CHECK_INVALID')
+
 const { repositoryRoot, fixture } = freshFixture('happy-')
 const pathChoiceRoot = mkdtempSync(path.join(tmpdir(), 'eqb-format2-public-path-choice-'))
 const publicPathChoice = startOrContinueFormat2ImportJob(
@@ -185,6 +223,7 @@ assert.deepEqual(current.inputDigests, {
   answerPdfSha256: fixture.input.sources.answerPdf.sha256,
   transcriptionDigest: result.artifacts.transcription.digest,
   authorityDigest: digestJson(readingOptionFigureAuthorityRef),
+  answerTranscriptionCheckDigest: digestJson(fixture.input.transcription.answerTranscriptionCheck),
 })
 assert.deepEqual(current.contractVersions, {
   transcription: 'format2-transcription-v1',
@@ -211,10 +250,37 @@ assert.equal(signalText.includes('officialAnswers'), false)
 const sourceCapture = JSON.parse(readFileSync(artifactPath(repositoryRoot, result, 'sourceCapture'), 'utf8'))
 assert.equal(sourceCapture.schemaVersion, 'source-capture-v1')
 assert.equal(sourceCapture.documents.length, 2)
-const questionDocument = sourceCapture.documents.find((document) => document.inputKey === 'question_pdf')
-const answerDocument = sourceCapture.documents.find((document) => document.inputKey === 'answer_pdf')
+const questionDocument = sourceCapture.documents.find((document) => document.inputKey === 'original_question_source')
+const answerDocument = sourceCapture.documents.find((document) => document.inputKey === 'listening_answer_source')
 assert.deepEqual(Buffer.from(questionDocument.encodedBytes, 'base64'), fixture.questionPdfBytes)
 assert.deepEqual(Buffer.from(answerDocument.encodedBytes, 'base64'), fixture.answerPdfBytes)
+assert.equal(
+  Buffer.from(answerDocument.encodedBytes, 'base64').toString('utf8').includes('21-23'),
+  false,
+  'compressed/encoded answer PDF bytes need not expose answer markings as plaintext',
+)
+const extractedAnswerText = fixture.input.transcription.answerTranscriptionCheck.extraction.extractedText
+assert.deepEqual(
+  fixture.input.transcription.answerTranscriptionCheck.extraction.parameters,
+  ['-layout', '-enc', 'UTF-8', '-', '-'],
+  'shared answer extraction covers the entire PDF and has no paper-specific page truncation',
+)
+assert.match(extractedAnswerText, /21-23 AAA/u)
+for (const officialAnswer of fixture.input.transcription.officialAnswers) {
+  const marking = fixture.input.transcription.answerTranscriptionCheck.sourceMarkings.find(
+    (candidate) => candidate.questionId === officialAnswer.questionId,
+  )
+  assert.equal(
+    Buffer.from(extractedAnswerText).subarray(marking.byteSpan.start, marking.byteSpan.end).toString('utf8'),
+    marking.sourceMarking,
+  )
+  assert.equal(
+    Buffer.from(extractedAnswerText)
+      .subarray(marking.answerByteSpan.start, marking.answerByteSpan.end)
+      .toString('utf8'),
+    officialAnswer.answer,
+  )
+}
 assert.equal(questionDocument.sha256, fixture.input.sources.questionPdf.sha256)
 assert.equal(answerDocument.sha256, fixture.input.sources.answerPdf.sha256)
 assert.ok(sourceCapture.observations.every((observation) => (
@@ -328,6 +394,13 @@ assert.deepEqual(completed.humanEntryPoints.firstFocusState, {
   lecture: false,
 })
 assert.match(completed.humanEntryPoints.screen.href, /view=paper-browse/u)
+assert.deepEqual(completed.humanEntryPoints.service, {
+  command: 'PORT=5173 bash scripts/dev.sh',
+  appOrigin: 'http://127.0.0.1:5173',
+})
+for (const key of ['screen', 'studentPrint', 'teacherPrint', 'pdf']) {
+  assert.equal(new URL(completed.humanEntryPoints[key].href).origin, completed.humanEntryPoints.service.appOrigin)
+}
 assert.equal(completed.humanEntryPoints.studentPrint.href.includes('lecture=1'), false)
 assert.equal(completed.humanEntryPoints.teacherPrint.href.includes('lecture=1'), true)
 assert.equal(JSON.stringify(completed.humanEntryPoints.studentPrint).includes('answer'), false)
@@ -339,7 +412,122 @@ assert.equal(
   true,
   'awaiting_qa requires one exact committed local latest Publication',
 )
+assert.equal(
+  existsSync(path.join(repositoryRoot, 'data/question-bank.sqlite')),
+  true,
+  'awaiting_qa is committed to the same default database consumed by server/api.mjs',
+)
+assert.equal(
+  existsSync(path.join(durablePaperDir, 'job/canonical-publication.sqlite')),
+  false,
+  'the Job cannot self-prove through a private publication database',
+)
+
+const publicDb = new DatabaseSync(path.join(repositoryRoot, 'data/question-bank.sqlite'))
+try {
+  const publicStore = createFileSystemCanonicalPublicationStore({
+    rootDir: path.join(repositoryRoot, 'app/public/paper-assets'),
+    db: publicDb,
+  })
+  const screenConsumption = loadPaperForConsumptionSync({
+    paperId: fixture.input.paperId,
+    version: completed.canonicalPublication.versionName,
+    consumerContract: readingOptionFigureConsumerContractRefs.screen,
+  }, publicStore)
+  const printConsumption = loadPaperForConsumptionSync({
+    paperId: fixture.input.paperId,
+    version: completed.canonicalPublication.versionName,
+    consumerContract: readingOptionFigureConsumerContractRefs.print_pdf,
+  }, publicStore)
+  assert.equal(screenConsumption.disposition, 'ready')
+  assert.equal(printConsumption.disposition, 'ready')
+  assert.equal(screenConsumption.selections.some((selection) => selection.familyContractId === 'listening'), false)
+  assert.equal(printConsumption.selections.some((selection) => selection.familyContractId === 'listening'), false)
+  const printGroup = projectCanonicalConsumerGroup({
+    consumption: printConsumption,
+    familyContractId: 'reading',
+    groupId: 'group:reading-a',
+  })
+  const admittedAnswer = printGroup.questions[0].options.find(
+    (option) => option.optionId === printGroup.questions[0].correctOptionId,
+  ).label
+  const item = {
+    detail: {
+      id: printGroup.groupId,
+      paperId: printGroup.paperId,
+      title: 'Committed Format 2 renderer proof',
+      source: 'Committed Format 2 renderer proof',
+      groupType: 'reading',
+      passage: { title: '', materialText: '' },
+      questions: printGroup.questions.map((question) => ({
+        id: question.questionId,
+        questionNo: String(question.questionNo),
+        stem: question.stem,
+        answer: question.options.find((option) => option.optionId === question.correctOptionId).label,
+        explanation: 'Analysis sentinel must be teacher-only',
+        options: question.options.map((option) => ({ label: option.label, content: option.text })),
+      })),
+    },
+    score: 2.5,
+    sectionTitle: 'Reading',
+    note: '',
+  }
+  const blocks = [{ type: 'question_group', questionGroupId: printGroup.groupId, score: 2.5 }]
+  const studentHtml = buildPrintHtml({
+    title: 'Committed Format 2 renderer proof',
+    versionType: 'student',
+    printStyle: 'exam',
+    items: [item],
+    blocks,
+    canonicalConsumption: printConsumption,
+  })
+  const teacherHtml = buildPrintHtml({
+    title: 'Committed Format 2 renderer proof',
+    versionType: 'teacher',
+    printStyle: 'exam',
+    items: [item],
+    blocks,
+    canonicalConsumption: printConsumption,
+  })
+  assert.equal(studentHtml.includes('<strong>【答案】</strong>'), false)
+  assert.equal(studentHtml.includes('Analysis sentinel'), false)
+  assert.equal(teacherHtml.includes(`<strong>【答案】</strong>${admittedAnswer}`), true)
+} finally {
+  publicDb.close()
+}
+
+const normalizationReport = JSON.parse(readFileSync(path.join(
+  repositoryRoot,
+  'app/public/paper-assets',
+  fixture.input.paperId,
+  'versions',
+  completed.canonicalPublication.versionName,
+  'canonical/normalization-report-v46.json',
+), 'utf8'))
+assert.equal(normalizationReport.inactiveSourceClosures.length, 2)
+assert.deepEqual(
+  normalizationReport.inactiveSourceClosures.map((closure) => ({
+    slotId: closure.slotId,
+    questionCount: closure.questionCount,
+    officialAnswerCount: closure.officialAnswerCount,
+    transcriptSegmentCount: closure.transcriptSegmentCount,
+  })),
+  [
+    { slotId: 'listening.short-dialogue', questionCount: 5, officialAnswerCount: 5, transcriptSegmentCount: 5 },
+    { slotId: 'listening.long-form', questionCount: 15, officialAnswerCount: 15, transcriptSegmentCount: 5 },
+  ],
+)
 assert.equal(existsSync(path.join(durablePaperDir, 'signals/ai-answer-check.json')), true)
+const answerCheckSignal = JSON.parse(readFileSync(path.join(durablePaperDir, 'signals/ai-answer-check.json'), 'utf8'))
+assert.equal(answerCheckSignal.ok, true)
+assert.equal(answerCheckSignal.answerPdfSha256, fixture.input.sources.answerPdf.sha256)
+assert.equal(answerCheckSignal.officialAnswersDigest, digestJson(fixture.input.transcription.officialAnswers))
+assert.equal(answerCheckSignal.checkDigest, digestJson(fixture.input.transcription.answerTranscriptionCheck))
+assert.equal(
+  answerCheckSignal.extractedTextSha256,
+  fixture.input.transcription.answerTranscriptionCheck.extraction.extractedTextSha256,
+)
+assert.equal(answerCheckSignal.markingCount, fixture.input.transcription.officialAnswers.length)
 assert.equal(existsSync(signalPath), false, 'exact confirmation clears the help-needed projection')
 assert.equal(existsSync(path.join(durablePaperDir, 'signals/qa-accepted.json')), false)
 assert.equal(existsSync(path.join(durablePaperDir, 'signals/shipped.json')), false)
