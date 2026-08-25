@@ -1,6 +1,6 @@
 # 01 — Bind visual candidates to exact Teacher Confirmation
 
-Status: ready-for-agent
+Status: implemented
 Blocked by: None — can start immediately
 
 Spec: `docs/cuts/source-faithful-visual-import/spec.md`

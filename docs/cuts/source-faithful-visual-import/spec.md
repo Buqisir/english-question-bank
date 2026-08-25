@@ -1,6 +1,6 @@
 # 导题 Agent 的源图忠实重建与图片选项 Canonical 化 v1
 
-Status: ready-for-agent
+Status: implemented
 Date: 2026-08-24
 Planning baseline: `github/main@b9ec0961`
 First real canary: 深圳一模 `paper-mock-sz-2026-m1` Reading D Question 33

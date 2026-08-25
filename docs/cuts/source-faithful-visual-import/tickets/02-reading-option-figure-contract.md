@@ -1,6 +1,6 @@
 # 02 — Compile confirmed Figure Options through the shared projection
 
-Status: ready-for-agent
+Status: implemented
 Blocked by: `01 — Bind visual candidates to exact Teacher Confirmation`
 
 Spec: `docs/cuts/source-faithful-visual-import/spec.md`
@@ -20,35 +20,35 @@ crops, or reconstruct semantic ownership.
 
 ## Acceptance criteria
 
-- [ ] A versioned additive authority/schema successor admits a synthetic
+- [x] A versioned additive authority/schema successor admits a synthetic
       Reading question with four confirmed Figure Options while already
       published authorities remain readable under their original contracts.
-- [ ] Each Figure Option retains its existing Option identity and A–D order and
+- [x] Each Figure Option retains its existing Option identity and A–D order and
       references exactly one same-group media item with immutable PNG bytes,
       digest, positive pixel dimensions, and source artifact identity.
-- [ ] Each media item is placed exactly once by either its accepted Passage
+- [x] Each media item is placed exactly once by either its accepted Passage
       Figure location or one Figure Option; duplicate ownership and unplaced
       media fail closed.
-- [ ] A question-level A–D set is either four non-empty literal Options or four
+- [x] A question-level A–D set is either four non-empty literal Options or four
       Figure Options. Mixed modes, `[Fig.]`, arbitrary nested content, captions,
       multiple figures, and combined text-plus-figure Options fail closed.
-- [ ] Missing or duplicate Option identities, incomplete sets, cross-group
+- [x] Missing or duplicate Option identities, incomplete sets, cross-group
       references, absent media, changed bytes, digest or dimension mismatches,
       unsupported MIME types, and unresolved ownership all fail before
       consumption.
-- [ ] Source-map coverage and Canonical identities include the Option and its
+- [x] Source-map coverage and Canonical identities include the Option and its
       selected media without pretending generated content is deterministic
       source text.
-- [ ] The shared projection exposes one renderer-neutral image-option set with
+- [x] The shared projection exposes one renderer-neutral image-option set with
       resolved immutable media and neutral accessibility identity; it never
       exposes source crops, generation prompts, candidate alternatives, or
       answer hints.
-- [ ] Existing literal-text Reading fixtures remain byte- and
+- [x] Existing literal-text Reading fixtures remain byte- and
       behavior-compatible. Passage Figure and `framed_columns` fixtures retain
       their current behavior.
-- [ ] Seven Choices, Cloze, Grammar Fill, Application Writing, Continuation
+- [x] Seven Choices, Cloze, Grammar Fill, Application Writing, Continuation
       Writing, and every non-Reading family continue to reject Figure Options.
-- [ ] A frozen generic fixture plus negative cases proves compilation,
+- [x] A frozen generic fixture plus negative cases proves compilation,
       projection, identity stability, media closure, and all fail-closed edges
       independently of the Shenzhen canary.
 
