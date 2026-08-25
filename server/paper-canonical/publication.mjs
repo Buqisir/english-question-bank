@@ -10,7 +10,11 @@ import {
 } from 'node:fs'
 import path from 'node:path'
 
-import { canonicalAuthorityRef, resolveCanonicalAuthority, validateJsonSchema } from '../../shared/paper-canonical/authority.mjs'
+import {
+  canonicalAuthorityRef,
+  resolveCanonicalAuthority,
+  validateJsonSchema,
+} from '../../shared/paper-canonical/authority.mjs'
 import {
   compileCanonicalPaper,
   validateExactTransformationRecords,
@@ -40,7 +44,16 @@ import {
   resolveConsumerContract,
 } from '../../shared/paper-canonical/consumers.mjs'
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
-import { digestJson, sha256, stableStringify, withoutKey } from '../../shared/paper-canonical/stable.mjs'
+import {
+  digestJson,
+  sha256,
+  stableStringify,
+  withoutKey,
+} from '../../shared/paper-canonical/stable.mjs'
+import {
+  readingOptionFigureSourceLayoutRequirement,
+  validateReadingOptionFigureSourceLayoutEvidence,
+} from '../../shared/paper-canonical/readingOptionFigureLayout.mjs'
 import {
   assertCanonicalConsumptionVisibleStructure,
   assertCanonicalVisibleStructure,
@@ -1482,11 +1495,117 @@ function sourceOwnedApplicationInstructions(validated, sourceAsset) {
   return instructionsByGroupId
 }
 
-function canonicalSelections(validated, contract, sourceAsset) {
+function sourceMeasuredFigureLayouts(validated) {
+  const layoutObservations = validated.sourceCapture.observations.filter(
+    (observation) => observation.kind === 'reading_option_figure_source_layout',
+  )
+  if (layoutObservations.length === 0) return []
+  const sourceSpans = new Map(validated.sourceCapture.sourceSpans.map(
+    (span) => [span.sourceSpanId, span],
+  ))
+  const documents = new Map(validated.sourceCapture.documents.map(
+    (document) => [document.documentId, document],
+  ))
+  const visualObservations = validated.sourceCapture.observations.filter(
+    (observation) => observation.kind === 'source_figure',
+  )
+  const projectedQuestions = new Map()
+  for (const occurrence of validated.projected.nodes) {
+    if (occurrence?.kind !== 'group' || occurrence.familyContractId !== 'reading') continue
+    for (const question of occurrence.questions || []) {
+      if (projectedQuestions.has(question.questionId)) {
+        throw publicationError(
+          'CANONICAL_SOURCE_LAYOUT_QUESTION_AMBIGUOUS',
+          `Reading Question ${question.questionId} is duplicated`,
+        )
+      }
+      projectedQuestions.set(question.questionId, question)
+    }
+  }
+  const questionIds = new Set()
+  const intents = []
+  for (const observation of layoutObservations) {
+    const layout = observation.value
+    const intent = layout?.intent
+    const span = sourceSpans.get(observation.sourceSpanId)
+    const sourceDocument = documents.get(span?.documentId)
+    if (
+      sourceDocument?.mediaType !== 'application/pdf'
+      || span?.coordinate?.kind !== 'page_region'
+      || span.coordinate.page !== intent?.sourcePage
+      || questionIds.has(intent?.questionId)
+    ) {
+      throw publicationError(
+        'CANONICAL_SOURCE_LAYOUT_EVIDENCE_INVALID',
+        'Reading Figure Option source-layout evidence is not exact and unambiguous',
+      )
+    }
+    questionIds.add(intent.questionId)
+    const question = projectedQuestions.get(intent.questionId)
+    if (
+      !question
+      || !Array.isArray(question.options)
+      || question.options.length !== 4
+      || !question.options.every((option) => option?.figure?.mediaId)
+      || intent.placements.length !== 4
+    ) {
+      throw publicationError(
+        'CANONICAL_SOURCE_LAYOUT_QUESTION_INVALID',
+        `Source layout ${intent.questionId} does not bind one homogeneous Figure Option Question`,
+      )
+    }
+    const expectedOptions = question.options.map((option) => {
+      const matches = visualObservations.filter((visual) => (
+        visual.value?.owner?.kind === 'reading_option'
+        && visual.value.owner.questionId === question.questionId
+        && visual.value.owner.optionId === option.optionId
+      ))
+      const visual = matches.length === 1 ? matches[0] : null
+      const visualSpan = sourceSpans.get(visual?.sourceSpanId)
+      if (
+        !visual
+        || visualSpan?.documentId !== sourceDocument.documentId
+        || visualSpan.coordinate?.kind !== 'page_region'
+      ) {
+        throw publicationError(
+          'CANONICAL_SOURCE_LAYOUT_PLACEMENT_INVALID',
+          `Source layout Option ${option.optionId} lacks one exact PDF source observation`,
+        )
+      }
+      return {
+        optionId: option.optionId,
+        label: option.label,
+        sourceSpanId: visual.sourceSpanId,
+        page: visualSpan.coordinate.page,
+        pageSizePoints: visual.value.pageSizePoints,
+        pointGeometry: visual.value.pointGeometry,
+      }
+    })
+    try {
+      intents.push(validateReadingOptionFigureSourceLayoutEvidence({
+        layout,
+        sourceDocumentSha256: sourceDocument.sha256,
+        questionId: question.questionId,
+        expectedOptions,
+      }))
+    } catch (error) {
+      throw publicationError(
+        `CANONICAL_SOURCE_LAYOUT_${String(error?.reason || 'intent').toUpperCase()}_INVALID`,
+        error?.message || 'Reading Figure Option source-layout evidence is invalid',
+      )
+    }
+  }
+  return intents
+}
+
+function canonicalSelections(validated, contract, sourceAsset, figureLayoutIntents) {
   const applicationInstructions = sourceOwnedApplicationInstructions(
     validated,
     sourceAsset,
   )
+  const intentByQuestionId = new Map(figureLayoutIntents.map(
+    (intent) => [intent.questionId, intent],
+  ))
   const groupIdsByFamily = new Map()
   for (const group of validated.groups) {
     const familyId = group.contractRef.familyContractId
@@ -1509,9 +1628,23 @@ function canonicalSelections(validated, contract, sourceAsset) {
         const sourceOwnedInstructions = applicationInstructions.get(
           occurrence.groupId,
         )
-        return sourceOwnedInstructions
-          ? { ...occurrence, sourceOwnedInstructions }
-          : occurrence
+        const questions = occurrence.familyContractId === 'reading'
+          ? occurrence.questions.map((question) => {
+              const intent = intentByQuestionId.get(question.questionId)
+              return intent
+                ? {
+                    ...question,
+                    figureLayoutIntentRequirement:
+                      readingOptionFigureSourceLayoutRequirement(intent),
+                  }
+                : question
+            })
+          : occurrence.questions
+        return {
+          ...occurrence,
+          ...(sourceOwnedInstructions ? { sourceOwnedInstructions } : {}),
+          ...(questions === occurrence.questions ? {} : { questions }),
+        }
       })
     selections.push({
       mode: 'canonical',
@@ -1686,12 +1819,19 @@ function validateConsumptionPublication({
       return value
     },
   })
+  const figureLayoutIntents = sourceMeasuredFigureLayouts(validated)
   return {
     manifest,
-    selection: canonicalSelections(validated, contract, sourceAsset),
+    selection: canonicalSelections(
+      validated,
+      contract,
+      sourceAsset,
+      figureLayoutIntents,
+    ),
     visibleStructure: canonicalVisibleStructure(validated),
     profileRef: structuredClone(validated.plan.profileRef),
     mediaArtifacts: canonicalMediaArtifacts(validated),
+    figureLayoutIntents,
     publicationSource: Object.freeze({
       paperId: manifest.paperId,
       sourceAssetVersion: ref.sourceAssetVersion,
@@ -1713,6 +1853,7 @@ function readyConsumption(
   visibleStructure,
   profileRef,
   mediaArtifacts,
+  figureLayoutIntents,
   publicationSource,
 ) {
   const consumption = {
@@ -1749,6 +1890,9 @@ function readyConsumption(
         : {}
     ),
     mediaArtifacts,
+    ...(figureLayoutIntents.length > 0
+      ? { figureLayoutIntents: structuredClone(figureLayoutIntents) }
+      : {}),
     diagnostics: [],
   }
   if (Number(manifest.authority.manifestVersion) >= 31) {
@@ -1809,6 +1953,7 @@ export async function loadPaperForConsumption(request, store) {
         visibleStructure,
         profileRef,
         mediaArtifacts,
+        figureLayoutIntents,
         publicationSource,
       } = validateConsumptionPublication({
         ref,
@@ -1826,6 +1971,7 @@ export async function loadPaperForConsumption(request, store) {
         visibleStructure,
         profileRef,
         mediaArtifacts,
+        figureLayoutIntents,
         publicationSource,
       )
     } catch (error) {
@@ -1869,6 +2015,7 @@ export function loadPaperForConsumptionSync(request, store) {
         visibleStructure,
         profileRef,
         mediaArtifacts,
+        figureLayoutIntents,
         publicationSource,
       } = validateConsumptionPublication({
         ref,
@@ -1886,6 +2033,7 @@ export function loadPaperForConsumptionSync(request, store) {
         visibleStructure,
         profileRef,
         mediaArtifacts,
+        figureLayoutIntents,
         publicationSource,
       )
     } catch (error) {

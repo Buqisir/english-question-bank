@@ -9,7 +9,7 @@ import {
   resolveCanonicalAuthority,
   validateJsonSchema,
 } from './authority.mjs'
-import { digestJson } from './stable.mjs'
+import { digestJson, exactKeys, withoutKey } from './stable.mjs'
 
 const LAYOUT_ARTIFACT_ID = 'renderer-reading-option-figure-layout'
 
@@ -103,6 +103,161 @@ function validateQuestion(question, consumerId) {
 
 function isFiniteNumber(value) {
   return Number.isFinite(value)
+}
+
+function sourceLayoutRejected(reason, message) {
+  const error = new Error(message)
+  error.code = 'READING_OPTION_FIGURE_SOURCE_LAYOUT_REJECTED'
+  error.reason = reason
+  throw error
+}
+
+function closePoint(left, right) {
+  return isFiniteNumber(left)
+    && isFiniteNumber(right)
+    && Math.abs(left - right) <= 0.001
+}
+
+function sourceMatrixPointBox(matrix, pageHeight) {
+  if (
+    !Array.isArray(matrix)
+    || matrix.length !== 6
+    || matrix.some((value) => !isFiniteNumber(value))
+    || !isFiniteNumber(pageHeight)
+  ) return null
+  const [a, b, c, d, e, f] = matrix
+  const corners = [
+    [e, f],
+    [a + e, b + f],
+    [c + e, d + f],
+    [a + c + e, b + d + f],
+  ]
+  const xs = corners.map(([x]) => x)
+  const ys = corners.map(([, y]) => y)
+  const left = Math.min(...xs)
+  const right = Math.max(...xs)
+  const bottom = Math.min(...ys)
+  const top = Math.max(...ys)
+  return {
+    x: left,
+    y: pageHeight - top,
+    width: right - left,
+    height: top - bottom,
+  }
+}
+
+function exactMeasurementDigest(value) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return null
+  if (/^sha256:[a-f0-9]{64}$/u.test(value.measurementDigest)) {
+    return digestJson(withoutKey(value, 'measurementDigest'))
+      === value.measurementDigest
+      ? value.measurementDigest
+      : null
+  }
+  return digestJson(value)
+}
+
+/**
+ * Validates per-paper source evidence against the existing source-layout
+ * contract. Callers normalize their own Question/Source Capture shapes into
+ * ordered expected Options; this helper owns no paper identity or storage.
+ */
+export function validateReadingOptionFigureSourceLayoutEvidence({
+  layout,
+  sourceDocumentSha256,
+  questionId,
+  expectedOptions,
+}) {
+  const intent = layout?.intent
+  const measurement = layout?.measurementEvidenceBody
+  const schemaAuthority = resolveCanonicalAuthority(
+    readingOptionFigureSourceLayoutSchemaAuthorityRef,
+  )
+  const intentSchema = schemaAuthority.ok
+    ? schemaAuthority.closure.schemas[
+        readingOptionFigureSourceLayoutExtension.intentSchemaRef.schemaId
+      ]
+    : null
+  const { intentDigest, ...intentBody } = intent || {}
+  const sourceDigestInMeasurement =
+    measurement?.sourcePdfSha256 || measurement?.sourceDocumentSha256
+  if (
+    !exactKeys(layout, ['measurementEvidenceBody', 'intent'])
+    || !intentSchema
+    || validateJsonSchema(intent, intentSchema, '$.sourceLayoutIntent').length > 0
+    || digestJson(intentBody) !== intentDigest
+  ) {
+    sourceLayoutRejected(
+      'intent',
+      'Reading Figure Option source-layout intent is invalid',
+    )
+  }
+  if (
+    exactMeasurementDigest(measurement)
+      !== intent.measurementEvidence.evidenceDigest
+    || measurement?.schemaVersion
+      !== intent.measurementEvidence.evidenceSchemaVersion
+    || intent.measurementEvidence.sourceDocumentSha256
+      !== sourceDocumentSha256
+    || (
+      sourceDigestInMeasurement !== undefined
+      && sourceDigestInMeasurement !== sourceDocumentSha256
+    )
+  ) {
+    sourceLayoutRejected(
+      'evidence',
+      'Reading Figure Option source-layout measurement is not digest-bound to the source document',
+    )
+  }
+  if (
+    intent.questionId !== questionId
+    || !Array.isArray(expectedOptions)
+    || expectedOptions.length !== 4
+    || intent.placements.length !== expectedOptions.length
+  ) {
+    sourceLayoutRejected(
+      'owner',
+      'Reading Figure Option source-layout intent does not bind one homogeneous A-D Question',
+    )
+  }
+  for (const [index, placement] of intent.placements.entries()) {
+    const expected = expectedOptions[index]
+    const matrixBox = sourceMatrixPointBox(
+      placement.sourcePlacementMatrix,
+      expected?.pageSizePoints?.height,
+    )
+    const geometry = expected?.pointGeometry
+    if (
+      placement.optionId !== expected?.optionId
+      || placement.label !== expected?.label
+      || placement.sourceSpanId !== expected?.sourceSpanId
+      || expected?.page !== intent.sourcePage
+      || !matrixBox
+      || !geometry
+      || !closePoint(matrixBox.x, geometry.x)
+      || !closePoint(matrixBox.y, geometry.y)
+      || !closePoint(matrixBox.width, geometry.width)
+      || !closePoint(matrixBox.height, geometry.height)
+      || !closePoint(placement.imageWidthPt, geometry.width)
+      || !closePoint(placement.imageHeightPt, geometry.height)
+    ) {
+      sourceLayoutRejected(
+        'placement',
+        `Reading Figure Option source-layout placement ${index} differs from exact PDF geometry`,
+      )
+    }
+  }
+  return structuredClone(intent)
+}
+
+export function readingOptionFigureSourceLayoutRequirement(intent) {
+  return {
+    schemaVersion: 'reading-option-figure-source-layout-requirement-v1',
+    intentSchemaRef: structuredClone(
+      readingOptionFigureSourceLayoutExtension.intentSchemaRef,
+    ),
+    intentDigest: intent.intentDigest,
+  }
 }
 
 function sourceMeasuredIntent(consumption, question) {

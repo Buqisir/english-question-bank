@@ -40,6 +40,9 @@ import {
   readingOptionFigureConsumerContractRefs,
 } from '../../../shared/paper-canonical/consumers.mjs'
 import { readingOptionFigureAuthorityRef } from '../../../shared/paper-canonical/authority.mjs'
+import {
+  validateReadingOptionFigureSourceLayoutEvidence,
+} from '../../../shared/paper-canonical/readingOptionFigureLayout.mjs'
 import { extractAnswerTextFromPdfBytes } from './answerTextExtraction.mjs'
 import {
   describeAnswerImageRasterizer,
@@ -89,6 +92,76 @@ function nonEmptyString(value) {
 
 function sameValue(left, right) {
   return stableStringify(left) === stableStringify(right)
+}
+
+function sourceMeasuredFigureLayoutIssues({
+  transcription,
+  questions,
+  visualsByObservation,
+  questionPdfSha256,
+}) {
+  const layouts = transcription.sourceMeasuredFigureLayouts || []
+  if (layouts.length === 0) return []
+  const issues = []
+  const questionIds = new Set()
+  for (const [layoutIndex, layout] of layouts.entries()) {
+    const layoutPath = `/sourceMeasuredFigureLayouts/${layoutIndex}`
+    const intent = layout.intent
+    if (questionIds.has(intent.questionId)) {
+      issues.push(semanticIssue(
+        'FORMAT2_SOURCE_LAYOUT_DUPLICATE',
+        `${layoutPath}/intent/questionId`,
+        'One Reading Figure Option Question may bind only one source-measured layout intent',
+      ))
+      continue
+    }
+    questionIds.add(intent.questionId)
+    const record = questions.get(intent.questionId)
+    const question = record?.question
+    const figureOptions = question?.options?.filter(
+      (option) => option.contentKind === 'figure',
+    ) || []
+    if (
+      record?.group?.groupType !== 'reading'
+      || figureOptions.length !== 4
+      || question.options.length !== 4
+    ) {
+      issues.push(semanticIssue(
+        'FORMAT2_SOURCE_LAYOUT_OWNER_INVALID',
+        `${layoutPath}/intent/questionId`,
+        'Source-measured layout must bind one homogeneous A-D Reading Figure Option Question',
+      ))
+      continue
+    }
+    const expectedOptions = question.options.map((option) => {
+      const visual = visualsByObservation.get(option.visualObservationId)
+      return {
+        optionId: option.optionId,
+        label: option.label,
+        sourceSpanId: `source-span:${option.visualObservationId}`,
+        page: visual?.source?.page,
+        pageSizePoints: visual?.source?.pageSizePoints,
+        pointGeometry: visual?.source?.pointGeometry,
+      }
+    })
+    try {
+      validateReadingOptionFigureSourceLayoutEvidence({
+        layout,
+        sourceDocumentSha256: questionPdfSha256,
+        questionId: question.questionId,
+        expectedOptions,
+      })
+    } catch (error) {
+      const code = ({
+        intent: 'FORMAT2_SOURCE_LAYOUT_INTENT_INVALID',
+        evidence: 'FORMAT2_SOURCE_LAYOUT_EVIDENCE_INVALID',
+        owner: 'FORMAT2_SOURCE_LAYOUT_OWNER_INVALID',
+        placement: 'FORMAT2_SOURCE_LAYOUT_PLACEMENT_INVALID',
+      })[error?.reason] || 'FORMAT2_SOURCE_LAYOUT_INTENT_INVALID'
+      issues.push(semanticIssue(code, layoutPath, error.message))
+    }
+  }
+  return issues
 }
 
 function stableId(prefix, value) {
@@ -673,12 +746,14 @@ function validateTranscriptionSemantics(input, answerPdfBytes) {
 
   const observationIds = new Set()
   const ownerKeys = new Set()
+  const visualsByObservation = new Map()
   for (const [index, visual] of transcription.visuals.entries()) {
     const visualPath = `/visuals/${index}`
     if (observationIds.has(visual.observationId)) {
       issues.push(semanticIssue('FORMAT2_VISUAL_IDENTITY_DUPLICATE', `${visualPath}/observationId`, 'Visual observation is duplicated'))
     }
     observationIds.add(visual.observationId)
+    visualsByObservation.set(visual.observationId, visual)
     const ownerKey = stableStringify(visual.owner)
     if (ownerKeys.has(ownerKey)) {
       issues.push(semanticIssue('FORMAT2_VISUAL_OWNER_DUPLICATE', `${visualPath}/owner`, 'One semantic owner cannot receive multiple visual observations'))
@@ -754,6 +829,12 @@ function validateTranscriptionSemantics(input, answerPdfBytes) {
       ))
     }
   }
+  issues.push(...sourceMeasuredFigureLayoutIssues({
+    transcription,
+    questions,
+    visualsByObservation,
+    questionPdfSha256: input.sources.questionPdf.sha256,
+  }))
   if (issues.length > 0) {
     fail('FORMAT2_TRANSCRIPTION_INVALID', 'Format 2 transcription failed closed semantic validation', issues)
   }
@@ -800,6 +881,55 @@ function buildSourceCapture(documents, transcription) {
       region: normalizedRegion(visual),
     },
   }))
+  const visualsByOptionId = new Map(transcription.visuals
+    .filter((visual) => visual.owner.kind === 'reading_option')
+    .map((visual) => [visual.owner.optionId, visual]))
+  for (const [layoutIndex, layout] of (
+    transcription.sourceMeasuredFigureLayouts || []
+  ).entries()) {
+    const visuals = layout.intent.placements.map((placement) => (
+      visualsByOptionId.get(placement.optionId)
+    ))
+    const pageSize = visuals[0].source.pageSizePoints
+    const left = Math.min(...visuals.map((visual) => visual.source.pointGeometry.x))
+    const top = Math.min(...visuals.map((visual) => visual.source.pointGeometry.y))
+    const right = Math.max(...visuals.map((visual) => (
+      visual.source.pointGeometry.x + visual.source.pointGeometry.width
+    )))
+    const bottom = Math.max(...visuals.map((visual) => (
+      visual.source.pointGeometry.y + visual.source.pointGeometry.height
+    )))
+    const observationId =
+      `observation:format2-source-layout:${layout.intent.questionId}`
+    const sourceSpanId = `source-span:${observationId}`
+    observations.push({
+      observationId,
+      documentId: documents.questionDocument.documentId,
+      kind: 'reading_option_figure_source_layout',
+      value: cloneJson(layout),
+      order: transcription.visuals.length + layoutIndex,
+      extraction: {
+        adapterId: 'format2-source-layout-evidence',
+        version: '1',
+      },
+      sourceSpanId,
+    })
+    sourceSpans.push({
+      sourceSpanId,
+      documentId: documents.questionDocument.documentId,
+      documentDigest: documents.questionDocument.sha256,
+      coordinate: {
+        kind: 'page_region',
+        page: layout.intent.sourcePage,
+        region: {
+          x: left / pageSize.width,
+          y: top / pageSize.height,
+          width: (right - left) / pageSize.width,
+          height: (bottom - top) / pageSize.height,
+        },
+      },
+    })
+  }
   const body = {
     schemaVersion: 'source-capture-v1',
     documents: [documents.questionDocument, documents.answerDocument],
