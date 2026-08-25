@@ -133,10 +133,21 @@ release action, merge, or content push was performed.
   `scripts/verify-genre-truth.mjs`, whose current local DB has 18 passages not
   covered by its decisions artifact. This ticket changes neither that DB nor
   that artifact.
+- Final independent Standards review: PASS with no Must Fix, Judgment, or
+  Smell. Final independent Spec review found the committed implementation
+  conformant and no scope creep; its sole pre-handoff finding was the stopped
+  QA service and unpushed Draft-PR head. That runtime handoff finding was closed
+  by pushing the final branch, restarting the fixed service, and smoke-checking
+  the exact URL below while keeping the PR draft.
 - Exact Owner QA state: local Vite service, the Q33-focused Canonical Reading
   Screen route, Student/Teacher Print HTML, the two-page Student PDF, and the
   differently shaped portable-placement proof are prepared under
   `output/playwright/source-faithful-visual-import-q33/` and `output/pdf/`.
+  The fixed Screen URL is
+  `http://127.0.0.1:4175/canonical-reading-qa.html?groupId=group-mock-sz-2026-m1-reading-d&fixture=q33-source-crop`.
+  Browser smoke confirms one PaperSurface, four Reading D questions, exactly
+  one Question 33, four Option Figure images, real A–D labels, neutral
+  `Option A`–`Option D` alts, zero `[Fig.]`, and zero browser error logs.
 
 ### Stop A — historical candidate receipt
 
