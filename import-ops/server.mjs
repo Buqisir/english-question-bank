@@ -7,7 +7,14 @@ import { createServer } from 'node:http'
 import { readFileSync, existsSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { homeLists, listOpsPapers, probePaper, qaLinks, shipPrompt } from './lib/probe.mjs'
+import {
+  format2ComparisonFile,
+  homeLists,
+  listOpsPapers,
+  probePaper,
+  qaLinks,
+  shipPrompt,
+} from './lib/probe.mjs'
 
 const here = path.dirname(fileURLToPath(import.meta.url))
 const repoRoot = path.resolve(process.env.EQB_ROOT || path.join(here, '..'))
@@ -56,6 +63,20 @@ const server = createServer((request, response) => {
       blockedCode: paper.blocked?.code || null,
     }))
     sendJson(response, 200, { papers, lists: homeLists(papers) })
+    return
+  }
+
+  const format2Comparison = url.pathname.match(/^\/papers\/([^/]+)\/format2-comparison$/)
+  if (format2Comparison) {
+    const paperId = decodeURIComponent(format2Comparison[1])
+    const comparisonFile = format2ComparisonFile({ repoRoot, paperId })
+    if (!comparisonFile) {
+      notFound(response)
+      return
+    }
+    send(response, 200, readFileSync(comparisonFile), {
+      'content-type': 'text/html; charset=utf-8',
+    })
     return
   }
 

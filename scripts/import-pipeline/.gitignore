@@ -7,6 +7,8 @@ papers/*/analyze-*
 papers/*/analysis-*
 # Import-ops receipts (agent ↔ 导题后台); not product artifacts.
 papers/*/signals/
+# Format 2 Job immutable runs and current operational projection.
+papers/*/job/
 # Source DOCX is off-repo material, never tracked.
 papers/*/source.docx
 papers/*/*.docx

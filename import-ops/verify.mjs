@@ -7,6 +7,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import {
   ANALYSIS_KEYS,
+  format2ComparisonFile,
   homeLists,
   isOpsVisible,
   listOpsPapers,
@@ -15,6 +16,12 @@ import {
   shipPrompt,
   statusOf,
 } from './lib/probe.mjs'
+import {
+  startOrContinueFormat2ImportJob,
+} from '../server/paper-import/format2ImportJob.mjs'
+import {
+  makeFormat2ImportJobFixture,
+} from '../test-fixtures/paper-import/format2-import-job-v1/fixture.mjs'
 import {
   SHIP_COMMAND,
   evaluateShip,
@@ -47,6 +54,14 @@ function writeLatest(root, paperId) {
 }
 
 const root = mkdtempSync(path.join(tmpdir(), 'eqb-import-ops-'))
+
+const format2Fixture = makeFormat2ImportJobFixture({
+  sourceDir: path.join(root, 'format2-fixture-sources'),
+})
+const format2Result = startOrContinueFormat2ImportJob(format2Fixture.input, {
+  repositoryRoot: root,
+})
+assert.equal(format2Result.lifecycle, 'importing')
 
 const queuedId = 'paper-queued'
 mkdirSync(path.join(root, 'scripts/import-pipeline/papers', queuedId), { recursive: true })
@@ -112,11 +127,45 @@ const shipped = probePaper({ repoRoot: root, paperId: 'paper-shipped' })
 const shipFailed = probePaper({ repoRoot: root, paperId: 'paper-ship-failed' })
 const legacy = probePaper({ repoRoot: root, paperId: 'paper-legacy' })
 const leftover = probePaper({ repoRoot: root, paperId: 'paper-leftover-config' })
+const format2Importing = probePaper({
+  repoRoot: root,
+  paperId: format2Fixture.input.paperId,
+})
 
 assert.equal(queued.status, 'queued')
 assert.equal(importing.status, 'importing')
 assert.equal(importing.analyses, true)
 assert.equal(importing.writingReady, true, 'historical papers do not require staged writing analysis')
+assert.equal(format2Importing.status, 'importing')
+assert.equal(format2Importing.source, true)
+assert.deepEqual(format2Importing.format2Stop, {
+  lifecycle: 'importing',
+  stopCode: 'exact_teacher_confirmation_required',
+  packageDigest: format2Result.artifacts.candidatePackage.packageDigest,
+  comparisonEntryPoint: '/papers/paper-format2-synthetic/format2-comparison',
+  resumeInstruction: format2Result.humanEntryPoints.resumeInstruction,
+})
+assert.equal(JSON.stringify(format2Importing.format2Stop).includes('Short synthetic passage'), false)
+assert.equal(JSON.stringify(format2Importing.format2Stop).includes('officialAnswers'), false)
+const exactComparisonPath = path.join(
+  root,
+  'scripts/import-pipeline/papers',
+  format2Fixture.input.paperId,
+  format2Result.artifacts.comparison.relativePath,
+)
+assert.equal(
+  format2ComparisonFile({ repoRoot: root, paperId: format2Fixture.input.paperId }),
+  exactComparisonPath,
+)
+const exactComparisonBytes = readFileSync(exactComparisonPath)
+writeFileSync(exactComparisonPath, Buffer.concat([exactComparisonBytes, Buffer.from('tampered')]))
+assert.equal(
+  format2ComparisonFile({ repoRoot: root, paperId: format2Fixture.input.paperId }),
+  null,
+  'console must not serve a comparison page whose exact receipt digest changed',
+)
+writeFileSync(exactComparisonPath, exactComparisonBytes)
+assert.equal(format2ComparisonFile({ repoRoot: root, paperId: '../unsafe' }), null)
 
 const format3Dir = paperDir(root, 'paper-format3-writing')
 writeFileSync(
@@ -181,8 +230,11 @@ assert.equal(html.includes('Teacher Print'), true)
 assert.equal(html.includes('不对答案表'), true)
 assert.equal(html.includes('重试上线'), true)
 assert.equal(html.includes('未到可上线'), true)
+assert.equal(html.includes('Exact Teacher Confirmation'), true)
+assert.equal(html.includes('按正常尺寸比较'), true)
 assert.equal(/push<\/button>/.test(html), false)
 assert.equal(serverSrc.includes("request.method !== 'GET'"), true)
+assert.equal(serverSrc.includes('format2ComparisonFile'), true)
 assert.equal(statusOf({ shipped: true, blocked: { code: 'x' } }), 'shipped')
 
 const contract = readFileSync(path.join(here, '../docs/import/agent-contract.md'), 'utf8')
@@ -194,6 +246,7 @@ assert.equal(contract.includes('--owner-said-ship'), true)
 assert.deepEqual(listOpsPapers(root).map((p) => p.paperId).sort(), [
   'paper-awaiting-qa',
   'paper-format1-blocked',
+  'paper-format2-synthetic',
   'paper-importing',
   'paper-queued',
   'paper-ready',
