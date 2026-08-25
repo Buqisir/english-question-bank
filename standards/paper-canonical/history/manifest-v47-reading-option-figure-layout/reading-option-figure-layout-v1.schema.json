@@ -1,0 +1,159 @@
+{
+  "$id": "reading-option-figure-layout-v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "version",
+    "owner",
+    "projectionContract",
+    "compatibleProjectionAuthority",
+    "compatibleConsumerContracts",
+    "physicalUnits",
+    "topology",
+    "label",
+    "imageBox",
+    "rhythm",
+    "responsive",
+    "pagination",
+    "accessibility"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "reading-option-figure-layout-v1" },
+    "id": { "const": "reading-option-figure-layout" },
+    "version": { "const": "1" },
+    "owner": { "const": "renderer_typography" },
+    "projectionContract": { "const": "canonical-projector-v1" },
+    "compatibleProjectionAuthority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["manifestId", "manifestVersion", "manifestDigest"],
+      "properties": {
+        "manifestId": { "const": "paper-canonical" },
+        "manifestVersion": { "const": "46" },
+        "manifestDigest": { "pattern": "^sha256:[0-9a-f]{64}$", "type": "string" }
+      }
+    },
+    "compatibleConsumerContracts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["screen", "print_pdf"],
+      "properties": {
+        "screen": { "$ref": "#/$defs/consumerRef" },
+        "print_pdf": { "$ref": "#/$defs/consumerRef" }
+      }
+    },
+    "physicalUnits": { "const": "pt" },
+    "topology": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["optionCount", "orderedLabels", "trackCount", "rowStartPt", "rowWidthPt", "trackWidthPt"],
+      "properties": {
+        "optionCount": { "const": 4 },
+        "orderedLabels": {
+          "type": "array",
+          "prefixItems": [
+            { "const": "A" },
+            { "const": "B" },
+            { "const": "C" },
+            { "const": "D" }
+          ],
+          "items": false,
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "trackCount": { "const": 4 },
+        "rowStartPt": { "const": 17.3 },
+        "rowWidthPt": { "const": 438.2 },
+        "trackWidthPt": { "const": 109.55 }
+      }
+    },
+    "label": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fontSizePt", "lineHeightPt", "alignment"],
+      "properties": {
+        "fontSizePt": { "const": 10.5 },
+        "lineHeightPt": { "const": 18 },
+        "alignment": { "const": "image_box_start" }
+      }
+    },
+    "imageBox": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["widthPt", "heightPt", "objectFit", "objectPosition", "crop", "stretch", "chrome"],
+      "properties": {
+        "widthPt": { "const": 96 },
+        "heightPt": { "const": 60 },
+        "objectFit": { "const": "contain" },
+        "objectPosition": { "const": "center" },
+        "crop": { "const": false },
+        "stretch": { "const": false },
+        "chrome": { "const": "none" }
+      }
+    },
+    "rhythm": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stemToBankGapPt", "labelToBoxGapPt", "questionTailGapPt"],
+      "properties": {
+        "stemToBankGapPt": { "const": 4.5 },
+        "labelToBoxGapPt": { "const": 4.5 },
+        "questionTailGapPt": { "const": 9 }
+      }
+    },
+    "responsive": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["policy", "minTrackWidthPt", "preserveTrackCount", "preserveImageBoxAspectRatio", "extremeOverflow"],
+      "properties": {
+        "policy": { "const": "fit_down_then_overflow" },
+        "minTrackWidthPt": { "const": 48 },
+        "preserveTrackCount": { "const": true },
+        "preserveImageBoxAspectRatio": { "const": true },
+        "extremeOverflow": { "const": "horizontal" }
+      }
+    },
+    "pagination": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["policy", "atomicContent"],
+      "properties": {
+        "policy": { "const": "move_whole_question_to_next_page" },
+        "atomicContent": {
+          "type": "array",
+          "prefixItems": [
+            { "const": "stem" },
+            { "const": "labels" },
+            { "const": "figure_bank" }
+          ],
+          "items": false,
+          "minItems": 3,
+          "maxItems": 3
+        }
+      }
+    },
+    "accessibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["policy"],
+      "properties": {
+        "policy": { "const": "neutral_option_identity" }
+      }
+    }
+  },
+  "$defs": {
+    "consumerRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "digest"],
+      "properties": {
+        "id": { "enum": ["screen", "print_pdf"] },
+        "version": { "type": "string", "minLength": 1 },
+        "digest": { "pattern": "^sha256:[0-9a-f]{64}$", "type": "string" }
+      }
+    }
+  }
+}

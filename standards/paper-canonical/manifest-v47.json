@@ -136,7 +136,7 @@
     {
       "id": "renderer-reading-option-figure-layout",
       "owner": "renderer_typography",
-      "path": "rendering/reading-option-figure-layout-v1.json",
+      "path": "history/manifest-v47-reading-option-figure-layout/reading-option-figure-layout-v1.json",
       "schemaId": "reading-option-figure-layout-v1",
       "sha256": "sha256:0fc321dbadbc8079a974a75df8ae5819fa846181d3d14e4a8ba04bb5f6ced439"
     }
@@ -444,8 +444,23 @@
     },
     {
       "id": "reading-option-figure-layout-v1",
-      "path": "../../schemas/paper-canonical/reading-option-figure-layout-v1.schema.json",
+      "path": "history/manifest-v47-reading-option-figure-layout/reading-option-figure-layout-v1.schema.json",
       "sha256": "sha256:4424d279344c7d4be5c498b2cafcf363ee75d50c7d2109342df216994abda1f8"
+    },
+    {
+      "id": "consumer-contract-v3",
+      "path": "../../schemas/paper-canonical/consumer-contract-v3.schema.json",
+      "sha256": "sha256:2676b09947ecc3dde5d0e84d61e689b42790450ebc86912e1775643cedb00bf0"
+    },
+    {
+      "id": "reading-option-figure-source-layout-intent-v1",
+      "path": "../../schemas/paper-canonical/reading-option-figure-source-layout-intent-v1.schema.json",
+      "sha256": "sha256:27e4a7c0070b06dbd3282bea57663a09afe301b738a940b358e259d0bc96032d"
+    },
+    {
+      "id": "reading-option-figure-source-layout-requirement-v1",
+      "path": "../../schemas/paper-canonical/reading-option-figure-source-layout-requirement-v1.schema.json",
+      "sha256": "sha256:98f5e225a290c618a8d48c2c3695029ca916cf46edae5dc370a1791942b4e4fc"
     }
   ],
   "version": "47"

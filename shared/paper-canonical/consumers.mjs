@@ -1,9 +1,15 @@
 import screen from '../../standards/paper-canonical/consumers/screen-v37.json' with { type: 'json' }
 import printPdf from '../../standards/paper-canonical/consumers/print-pdf-v38.json' with { type: 'json' }
-import screenReadingOptionFigure from '../../standards/paper-canonical/consumers/screen-v38.json' with { type: 'json' }
-import printPdfReadingOptionFigure from '../../standards/paper-canonical/consumers/print-pdf-v39.json' with { type: 'json' }
+import screenReadingOptionFigure from '../../standards/paper-canonical/consumers/screen-v39.json' with { type: 'json' }
+import printPdfReadingOptionFigure from '../../standards/paper-canonical/consumers/print-pdf-v40.json' with { type: 'json' }
 
-import { canonicalAuthorityRef, readingOptionFigureAuthorityRef, resolveCanonicalAuthority, validateJsonSchema } from './authority.mjs'
+import {
+  canonicalAuthorityRef,
+  readingOptionFigureAuthorityRef,
+  readingOptionFigureSourceLayoutSchemaAuthorityRef,
+  resolveCanonicalAuthority,
+  validateJsonSchema,
+} from './authority.mjs'
 import { digestJson, withoutKey } from './stable.mjs'
 
 const contracts = [screen, printPdf]
@@ -22,7 +28,17 @@ function validateContract(contract) {
       : null
   const authority = resolveCanonicalAuthority(authorityRef)
   if (!authority.ok) return [{ code: 'CONSUMER_AUTHORITY_MISMATCH' }]
-  const issues = validateJsonSchema(contract, authority.closure.schemas['consumer-contract-v2'], '$.consumerContract')
+  const sourceLayoutSchemaAuthority = resolveCanonicalAuthority(
+    readingOptionFigureSourceLayoutSchemaAuthorityRef,
+  )
+  const contractSchema = contract.schemaVersion === 'consumer-contract-v3'
+    ? sourceLayoutSchemaAuthority.ok
+      ? sourceLayoutSchemaAuthority.closure.schemas['consumer-contract-v3']
+      : null
+    : authority.closure.schemas['consumer-contract-v2']
+  const issues = contractSchema
+    ? validateJsonSchema(contract, contractSchema, '$.consumerContract')
+    : [{ code: 'CONSUMER_SCHEMA_UNAVAILABLE' }]
   if (contract.authorityManifestDigest !== authorityRef.manifestDigest) issues.push({ code: 'CONSUMER_AUTHORITY_MISMATCH' })
   if (contract.contractDigest !== digestJson(withoutKey(contract, 'contractDigest'))) issues.push({ code: 'CONSUMER_DIGEST_MISMATCH' })
   const families = new Set()
@@ -34,6 +50,44 @@ function validateContract(contract) {
     families.add(entry.familyContractId)
   }
   if (families.size !== authority.closure.families.size) issues.push({ code: 'CONSUMER_FAMILY_CLOSURE_INCOMPLETE' })
+  if (contract.schemaVersion === 'consumer-contract-v3') {
+    const extension = contract.renderingExtensions?.[0]
+    const requirementSchema = sourceLayoutSchemaAuthority.ok
+      ? sourceLayoutSchemaAuthority.closure.schemas[
+          extension?.requirementSchemaRef?.schemaId
+        ]
+      : null
+    const intentSchema = sourceLayoutSchemaAuthority.ok
+      ? sourceLayoutSchemaAuthority.closure.schemas[extension?.intentSchemaRef?.schemaId]
+      : null
+    if (
+      contract.renderingExtensions?.length !== 1
+      || extension?.extensionId !== 'reading-option-figure-source-layout'
+      || extension.version !== '1'
+      || extension.binding
+        !== 'projected_question_requirement_to_consumption_intent_digest'
+      || extension.requirementSchemaRef?.authorityManifestId
+        !== readingOptionFigureSourceLayoutSchemaAuthorityRef.manifestId
+      || extension.requirementSchemaRef?.authorityManifestVersion
+        !== readingOptionFigureSourceLayoutSchemaAuthorityRef.manifestVersion
+      || extension.requirementSchemaRef?.authorityManifestDigest
+        !== readingOptionFigureSourceLayoutSchemaAuthorityRef.manifestDigest
+      || extension.intentSchemaRef?.authorityManifestId
+        !== readingOptionFigureSourceLayoutSchemaAuthorityRef.manifestId
+      || extension.intentSchemaRef?.authorityManifestVersion
+        !== readingOptionFigureSourceLayoutSchemaAuthorityRef.manifestVersion
+      || extension.intentSchemaRef?.authorityManifestDigest
+        !== readingOptionFigureSourceLayoutSchemaAuthorityRef.manifestDigest
+      || !requirementSchema
+      || extension.requirementSchemaRef.schemaDigest !== digestJson(requirementSchema)
+      || !intentSchema
+      || extension.intentSchemaRef.schemaDigest !== digestJson(intentSchema)
+    ) {
+      issues.push({ code: 'CONSUMER_RENDERING_EXTENSION_INVALID' })
+    }
+  } else if (Object.hasOwn(contract, 'renderingExtensions')) {
+    issues.push({ code: 'CONSUMER_RENDERING_EXTENSION_UNVERSIONED' })
+  }
   return issues
 }
 
@@ -44,6 +98,16 @@ for (const contract of allContracts) {
 
 export const consumerContractRefs = Object.freeze(Object.fromEntries(contracts.map((contract) => [contract.consumerId, Object.freeze({ id: contract.consumerId, version: contract.version, digest: contract.contractDigest })])))
 export const readingOptionFigureConsumerContractRefs = Object.freeze(Object.fromEntries(readingOptionFigureContracts.map((contract) => [contract.consumerId, Object.freeze({ id: contract.consumerId, version: contract.version, digest: contract.contractDigest })])))
+const sourceLayoutExtension = screenReadingOptionFigure.renderingExtensions[0]
+if (
+  digestJson(sourceLayoutExtension)
+  !== digestJson(printPdfReadingOptionFigure.renderingExtensions[0])
+) {
+  throw new Error('Reading Option Figure source-layout extension contracts drifted')
+}
+export const readingOptionFigureSourceLayoutExtension = Object.freeze(
+  structuredClone(sourceLayoutExtension),
+)
 
 export function resolveConsumerContract(ref) {
   const contract = byRef.get(`${ref?.id}:${ref?.version}:${ref?.digest}`)

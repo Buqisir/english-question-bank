@@ -558,21 +558,24 @@ export type PaperQuestion = {
 
   /** Figure-only physical layout translated once from scoped v47 authority. */
   readonly figurePlacement?: {
-    readonly mode: 'figure_four_equal_tracks'
+    readonly mode: 'figure_four_equal_tracks' | 'figure_source_measured'
     readonly signature: string
     readonly layoutId: 'reading-option-figure-layout'
     readonly layoutVersion: '1'
     readonly layoutDigest: string
     readonly rowStartPt: number
     readonly rowWidthPt: number
+    readonly bankHeightPt?: number
     readonly trackCount: 4
     readonly trackWidthPt: number
     readonly labelFontSizePt: number
     readonly labelLineHeightPt: number
     readonly imageBoxWidthPt: number
     readonly imageBoxHeightPt: number
-    readonly objectFit: 'contain'
+    readonly objectFit: 'contain' | 'fill'
     readonly objectPosition: 'center'
+    readonly sourceMatrixScalePolicy?: 'reproduce_source_authored_xy_scale'
+    readonly consumerTransformPolicy?: 'no_additional_crop_or_stretch'
     readonly stemToBankGapPt: number
     readonly labelToBoxGapPt: number
     readonly questionTailGapPt: number
@@ -580,6 +583,21 @@ export type PaperQuestion = {
     readonly responsivePolicy: 'fit_down_then_overflow'
     readonly extremeOverflow: 'horizontal'
     readonly paginationPolicy: 'move_whole_question_to_next_page'
+    readonly sourceIntentDigest?: string
+    readonly placements: ReadonlyArray<{
+      readonly optionId: string
+      readonly label: string
+      readonly neutralAlt: string
+      readonly trackIndex?: number
+      readonly sourceSpanId?: string
+      readonly sourcePlacementMatrix?: ReadonlyArray<number>
+      readonly labelLeftPt?: number
+      readonly labelTopPt?: number
+      readonly imageLeftPt?: number
+      readonly imageTopPt?: number
+      readonly imageWidthPt?: number
+      readonly imageHeightPt?: number
+    }>
   }
 
   /** Stable canonical Reading identity; answer authority stays in

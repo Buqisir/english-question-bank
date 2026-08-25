@@ -20,7 +20,13 @@ import {
 import {
   projectCanonicalConsumerGroup,
 } from '../shared/paper-canonical/consumerProjection.mjs'
-import { sha256, stableStringify } from '../shared/paper-canonical/stable.mjs'
+import {
+  resolveCanonicalAuthority,
+} from '../shared/paper-canonical/authority.mjs'
+import {
+  translateReadingOptionFigureLayout,
+} from '../shared/paper-canonical/readingOptionFigureLayout.mjs'
+import { digestJson, sha256, stableStringify } from '../shared/paper-canonical/stable.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
 import {
   materializeQ33OptionFigureCanary,
@@ -58,6 +64,31 @@ const beforeMaterialization = new Map(
   generatedPaths.map((filePath) => [filePath, readFileSync(filePath)]),
 )
 const canary = await materializeQ33OptionFigureCanary()
+const comparisonManifest = JSON.parse(readFileSync(
+  path.join(evidenceRoot, 'comparison-manifest.json'),
+  'utf8',
+))
+const historicalLayoutRef = comparisonManifest.layout.layoutRef
+const historicalLayoutAuthority = resolveCanonicalAuthority(
+  historicalLayoutRef.authorityRef,
+)
+assert.equal(
+  historicalLayoutAuthority.ok,
+  true,
+  'immutable comparison evidence resolves its exact historical v47 authority',
+)
+assert.deepEqual(
+  historicalLayoutAuthority.closure.authorityRef,
+  historicalLayoutRef.authorityRef,
+)
+assert.equal(
+  digestJson(
+    historicalLayoutAuthority.closure.artifacts[
+      'renderer-reading-option-figure-layout'
+    ],
+  ),
+  historicalLayoutRef.digest,
+)
 for (const filePath of generatedPaths) {
   assert.deepEqual(
     readFileSync(filePath),
@@ -121,15 +152,48 @@ for (const [index, label] of labels.entries()) {
 
 assert.equal(
   canary.policy.principle,
-  'The asset owns complete source-authored figure pixels; the renderer owns every placement decision.',
+  'The asset owns complete source-authored figure pixels; the source layout intent owns source-authored placement; every renderer projects that intent.',
 )
 assert.equal(canary.policy.contentEnvelope.kind, 'exact_pdf_embedded_image_extent')
 assert.equal(canary.policy.contentEnvelope.excludes.includes('A-D option labels'), true)
 assert.equal(canary.policy.contentEnvelope.excludes.includes('page margins'), true)
 assert.equal(canary.policy.contentEnvelope.noAutomaticTrim.includes('not an authority'), true)
 assert.equal(canary.policy.contentEnvelope.noTransparencyRewrite.includes('question meaning'), true)
-assert.equal(canary.policy.rendererOwnership.invariant.includes('contain'), true)
-assert.equal(canary.policy.placementProofIntent.length, 3)
+assert.equal(canary.policy.rendererOwnership.invariant.includes('source-measured'), true)
+assert.equal(canary.policy.rendererOwnership.invariant.includes('source-authored X/Y scale'), true)
+assert.equal(canary.policy.rendererOwnership.invariant.includes('consumer crop, stretch'), true)
+assert.equal(canary.policy.sourceLayoutIntent.schemaVersion, 'reading-option-figure-source-layout-intent-v1')
+assert.equal(
+  canary.policy.sourceLayoutIntent.measurementEvidence.evidenceDigest,
+  canary.sourceLayoutMeasurement.measurementDigest,
+)
+assert.equal(
+  canary.canaryManifest.sourceLayoutMeasurementDigest,
+  canary.sourceLayoutMeasurement.measurementDigest,
+)
+assert.equal(
+  canary.sourceLayoutMeasurement.sourcePdfSha256,
+  'sha256:df0c4e0a0d1aee4557f122591e3b778d7b48f2f324d75dba120343bb00926c80',
+)
+assert.equal(canary.policy.sourceLayoutIntent.rowStartPt, 24)
+assert.equal(canary.policy.sourceLayoutIntent.rowWidthPt, 369.72)
+assert.equal(canary.policy.sourceLayoutIntent.bankHeightPt, 56.12)
+assert.deepEqual(
+  canary.policy.sourceLayoutIntent.placements.map((placement) => ({
+    label: placement.label,
+    labelLeftPt: placement.labelLeftPt,
+    imageLeftPt: placement.imageLeftPt,
+    imageTopPt: placement.imageTopPt,
+    imageWidthPt: placement.imageWidthPt,
+    imageHeightPt: placement.imageHeightPt,
+  })),
+  [
+    { label: 'A', labelLeftPt: 0, imageLeftPt: 14.64, imageTopPt: 1.2, imageWidthPt: 20.52, imageHeightPt: 51.48 },
+    { label: 'B', labelLeftPt: 120, imageLeftPt: 134.04, imageTopPt: 0.72, imageWidthPt: 24.6, imageHeightPt: 51.96 },
+    { label: 'C', labelLeftPt: 240, imageLeftPt: 254.04, imageTopPt: 0, imageWidthPt: 22.08, imageHeightPt: 51.96 },
+    { label: 'D', labelLeftPt: 336, imageLeftPt: 350.16, imageTopPt: 1.68, imageWidthPt: 19.56, imageHeightPt: 51.96 },
+  ],
+)
 
 function project(consumption) {
   return projectCanonicalConsumerGroup({
@@ -266,11 +330,84 @@ const surfaceQuestion = surface.surfaceData.questions.find(
   (question) => question.id === questionId,
 )
 assert.ok(surfaceQuestion?.figurePlacement)
-assert.equal(surfaceQuestion.figurePlacement.objectFit, 'contain')
+assert.equal(surfaceQuestion.figurePlacement.mode, 'figure_source_measured')
+assert.equal(surfaceQuestion.figurePlacement.objectFit, 'fill')
 assert.equal(surfaceQuestion.figurePlacement.objectPosition, 'center')
+assert.equal(
+  surfaceQuestion.figurePlacement.sourceMatrixScalePolicy,
+  'reproduce_source_authored_xy_scale',
+)
+assert.equal(
+  surfaceQuestion.figurePlacement.consumerTransformPolicy,
+  'no_additional_crop_or_stretch',
+)
+assert.equal(
+  surfaceQuestion.figurePlacement.sourceIntentDigest,
+  canary.policy.sourceLayoutIntent.intentDigest,
+)
 assert.deepEqual(
   surfaceQuestion.options.map((option) => option.figure.sha256),
   selectedArtifactDigests,
+)
+
+assert.deepEqual(
+  screenQuestion.figureLayoutIntentRequirement,
+  printQuestion.figureLayoutIntentRequirement,
+)
+assert.equal(
+  screenQuestion.figureLayoutIntentRequirement.intentDigest,
+  canary.policy.sourceLayoutIntent.intentDigest,
+)
+for (const mutate of [
+  (consumption) => { delete consumption.figureLayoutIntents },
+  (consumption) => { consumption.figureLayoutIntents[0].placements[0].imageWidthPt += 1 },
+  (consumption) => { consumption.figureLayoutIntents.push(structuredClone(consumption.figureLayoutIntents[0])) },
+]) {
+  const invalid = structuredClone(canary.screenConsumption)
+  mutate(invalid)
+  assert.throws(
+    () => buildCanonicalReadingConsumptionSurfaceData({
+      consumption: invalid,
+      groupId,
+    }),
+    (error) => error?.code === 'READING_OPTION_FIGURE_LAYOUT_REJECTED',
+  )
+}
+for (const [consumerId, consumption] of [
+  ['screen', canary.screenConsumption],
+  ['print_pdf', canary.printConsumption],
+]) {
+  const strippedLayoutBinding = structuredClone(consumption)
+  delete strippedLayoutBinding.figureLayoutIntents
+  delete strippedLayoutBinding.figureLayoutIntentRequirements
+  const strippedQuestion = figureQuestion(project(strippedLayoutBinding))
+  assert.throws(
+    () => translateReadingOptionFigureLayout({
+      consumerId,
+      consumption: strippedLayoutBinding,
+      question: strippedQuestion,
+    }),
+    (error) => error?.code === 'READING_OPTION_FIGURE_LAYOUT_REJECTED',
+    `${consumerId} rejects deletion of both top-level source-layout fields`,
+  )
+}
+
+const otherPageConsumption = structuredClone(canary.screenConsumption)
+const otherPageIntent = otherPageConsumption.figureLayoutIntents[0]
+otherPageIntent.sourcePage = 5
+const { intentDigest: _oldIntentDigest, ...otherPageIntentBody } = otherPageIntent
+otherPageIntent.intentDigest = digestJson(otherPageIntentBody)
+const otherPageQuestion = structuredClone(screenQuestion)
+otherPageQuestion.figureLayoutIntentRequirement.intentDigest =
+  otherPageIntent.intentDigest
+assert.equal(
+  translateReadingOptionFigureLayout({
+    consumerId: 'screen',
+    consumption: otherPageConsumption,
+    question: otherPageQuestion,
+  }).mode,
+  'figure_source_measured',
+  'shared translator accepts positive source pages; page 4 remains canary evidence',
 )
 
 const blocks = [{
@@ -311,34 +448,6 @@ assert.deepEqual(
   printCases.get('teacher').sources,
 )
 
-function placementProofHtml(sources) {
-  const proofs = canary.policy.placementProofIntent.map((intent) => `
-    <section>
-      <h2>${intent.name} - ${intent.widthPt} x ${intent.heightPt} pt</h2>
-      <div class="row" style="--box-width:${intent.widthPt}pt;--box-height:${intent.heightPt}pt">
-        ${sources.map((source, index) => `<figure><figcaption>${labels[index]}.</figcaption><div class="box"><img src="${source}" alt="Option ${labels[index]}"></div></figure>`).join('')}
-      </div>
-    </section>`).join('')
-  return `<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><title>Q33 portable source crop placement proof</title>
-<style>
-  *{box-sizing:border-box} body{margin:0;padding:28px;font-family:Georgia,serif;color:#171717;background:#f5f5f4}
-  main{max-width:1000px;margin:auto;padding:28px;background:#fff;border:1px solid #d6d3d1}
-  h1{font-size:24px;margin:0 0 8px} p{max-width:760px;line-height:1.5;color:#57534e}
-  section{margin-top:28px} h2{font:600 13px/1.4 system-ui,sans-serif;color:#57534e}
-  .row{display:flex;align-items:flex-start;gap:28px;flex-wrap:wrap}
-  figure{margin:0} figcaption{font-size:10.5pt;line-height:18pt}
-  .box{display:grid;place-items:center;width:var(--box-width);height:var(--box-height);overflow:hidden;outline:1px dashed #a8a29e;background:#fff}
-  img{display:block;min-width:0;min-height:0;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;object-position:center}
-</style></head><body><main><h1>Q33 layout-neutral asset proof</h1>
-<p>The exact same four confirmed PNG bytes are placed in three renderer-owned boxes. Dashed outlines belong to this proof page, not to the assets.</p>
-${proofs}</main></body></html>`
-}
-
-const proofHtml = placementProofHtml(printCases.get('student').sources)
-const proofHtmlPath = path.join(artifactRoot, 'q33-portable-placement-proof.html')
-writeFileSync(proofHtmlPath, proofHtml)
-
 function pdfImageDimensions(pdfFile) {
   const listing = execFileSync('pdfimages', ['-list', pdfFile], { encoding: 'utf8' })
   return {
@@ -350,6 +459,78 @@ function pdfImageDimensions(pdfFile) {
 }
 
 let pdfImagePixelIdentityEvidence = null
+
+function assertNear(actual, expected, message, tolerance = 0.35) {
+  assert.ok(
+    Math.abs(actual - expected) <= tolerance,
+    `${message}: expected ${expected}, received ${actual}`,
+  )
+}
+
+async function renderedSourceGeometry(page, {
+  bankSelector,
+  labelSelector,
+  boxSelector,
+}) {
+  return page.evaluate(({ bankSelector, labelSelector, boxSelector }) => {
+    const bank = document.querySelector(bankSelector)
+    if (!bank) throw new Error(`Missing source-measured bank ${bankSelector}`)
+    const bankBox = bank.getBoundingClientRect()
+    const labels = [...bank.querySelectorAll(labelSelector)].map((label) => {
+      const box = label.getBoundingClientRect()
+      return { left: box.left - bankBox.left, top: box.top - bankBox.top }
+    })
+    const images = [...bank.querySelectorAll(boxSelector)].map((image) => {
+      const box = image.getBoundingClientRect()
+      return {
+        left: box.left - bankBox.left,
+        top: box.top - bankBox.top,
+        width: box.width,
+        height: box.height,
+      }
+    })
+    return { width: bankBox.width, height: bankBox.height, labels, images }
+  }, { bankSelector, labelSelector, boxSelector })
+}
+
+function assertSourceGeometry(geometry, surfaceName) {
+  const pxPerPt = 96 / 72
+  const intent = canary.policy.sourceLayoutIntent
+  assertNear(geometry.width / pxPerPt, intent.rowWidthPt, `${surfaceName} row width`)
+  assertNear(geometry.height / pxPerPt, intent.bankHeightPt, `${surfaceName} bank height`)
+  for (const [index, expected] of intent.placements.entries()) {
+    assertNear(
+      geometry.labels[index].left / pxPerPt,
+      expected.labelLeftPt,
+      `${surfaceName} Option ${expected.label} label left`,
+    )
+    assertNear(
+      geometry.labels[index].top / pxPerPt,
+      expected.labelTopPt,
+      `${surfaceName} Option ${expected.label} label top`,
+    )
+    assertNear(
+      geometry.images[index].left / pxPerPt,
+      expected.imageLeftPt,
+      `${surfaceName} Option ${expected.label} image left`,
+    )
+    assertNear(
+      geometry.images[index].top / pxPerPt,
+      expected.imageTopPt,
+      `${surfaceName} Option ${expected.label} image top`,
+    )
+    assertNear(
+      geometry.images[index].width / pxPerPt,
+      expected.imageWidthPt,
+      `${surfaceName} Option ${expected.label} image width`,
+    )
+    assertNear(
+      geometry.images[index].height / pxPerPt,
+      expected.imageHeightPt,
+      `${surfaceName} Option ${expected.label} image height`,
+    )
+  }
+}
 
 async function verifyRenderedArtifacts() {
   const vite = await import('../app/node_modules/vite/dist/node/index.js')
@@ -392,10 +573,15 @@ async function verifyRenderedArtifacts() {
         src: `data:image/png;base64,${option.figure.encodedBytes}`,
         naturalWidth: option.figure.pixelWidth,
         naturalHeight: option.figure.pixelHeight,
-        objectFit: 'contain',
+        objectFit: 'fill',
         objectPosition: '50% 50%',
       })),
     )
+    assertSourceGeometry(await renderedSourceGeometry(screenPage, {
+      bankSelector: '.ps-option-list--figure-source-measured',
+      labelSelector: '.ps-option-label--figure',
+      boxSelector: '.ps-option-figure-box',
+    }), 'Screen')
     assert.equal(await screenPage.locator('text=[Fig.]').count(), 0)
     assert.equal(await screenPage.locator('[data-canonical-correct-option-id]').count(), 0)
     await screenPage.screenshot({
@@ -417,38 +603,19 @@ async function verifyRenderedArtifacts() {
         await page.locator('.canonical-figure-option-image').evaluateAll(
           (images) => images.map((image) => getComputedStyle(image).objectFit),
         ),
-        ['contain', 'contain', 'contain', 'contain'],
+        ['fill', 'fill', 'fill', 'fill'],
       )
+      assertSourceGeometry(await renderedSourceGeometry(page, {
+        bankSelector: '.canonical-figure-options--source-measured',
+        labelSelector: '.canonical-figure-option-label',
+        boxSelector: '.canonical-figure-option-box',
+      }), `${versionType} Print`)
       await page.screenshot({
         path: path.join(artifactRoot, `q33-${versionType}-print.png`),
         fullPage: true,
       })
       await page.close()
     }
-
-    const proofPage = await browser.newPage({ viewport: { width: 1200, height: 1000 } })
-    await proofPage.setContent(proofHtml, { waitUntil: 'load' })
-    const proofImages = await proofPage.locator('img').evaluateAll(
-      (images) => images.map((image) => ({
-        naturalWidth: image.naturalWidth,
-        naturalHeight: image.naturalHeight,
-        objectFit: getComputedStyle(image).objectFit,
-        objectPosition: getComputedStyle(image).objectPosition,
-      })),
-    )
-    assert.equal(proofImages.length, 12)
-    for (const [index, image] of proofImages.entries()) {
-      const expected = surfaceQuestion.options[index % 4].figure
-      assert.equal(image.naturalWidth, expected.pixelWidth)
-      assert.equal(image.naturalHeight, expected.pixelHeight)
-      assert.equal(image.objectFit, 'contain')
-      assert.equal(image.objectPosition, '50% 50%')
-    }
-    await proofPage.screenshot({
-      path: path.join(artifactRoot, 'q33-portable-placement-proof.png'),
-      fullPage: true,
-    })
-    await proofPage.close()
 
     const pdfPage = await browser.newPage()
     await pdfPage.setContent(printCases.get('student').html, { waitUntil: 'load' })

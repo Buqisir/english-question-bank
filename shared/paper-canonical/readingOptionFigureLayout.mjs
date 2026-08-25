@@ -1,8 +1,13 @@
-import { readingOptionFigureConsumerContractRefs } from './consumers.mjs'
+import {
+  readingOptionFigureConsumerContractRefs,
+  readingOptionFigureSourceLayoutExtension,
+} from './consumers.mjs'
 import {
   readingOptionFigureAuthorityRef,
   readingOptionFigureRenderingAuthorityRef,
+  readingOptionFigureSourceLayoutSchemaAuthorityRef,
   resolveCanonicalAuthority,
+  validateJsonSchema,
 } from './authority.mjs'
 import { digestJson } from './stable.mjs'
 
@@ -96,6 +101,116 @@ function validateQuestion(question, consumerId) {
   ) rejected('Reading Option Figure set is incompatible with layout v1')
 }
 
+function isFiniteNumber(value) {
+  return Number.isFinite(value)
+}
+
+function sourceMeasuredIntent(consumption, question) {
+  const hasIntents = Object.hasOwn(consumption || {}, 'figureLayoutIntents')
+  const requirement = question.figureLayoutIntentRequirement
+  const matches = Array.isArray(consumption?.figureLayoutIntents)
+    ? consumption.figureLayoutIntents.filter(
+    (intent) => intent?.questionId === question.questionId,
+      )
+    : []
+  if (requirement == null) {
+    if (matches.length > 0) {
+      rejected('Reading Option Figure source layout intent is unbound')
+    }
+    return null
+  }
+  const schemaAuthority = resolveCanonicalAuthority(
+    readingOptionFigureSourceLayoutSchemaAuthorityRef,
+  )
+  const requirementSchema = schemaAuthority.ok
+    ? schemaAuthority.closure.schemas[
+        readingOptionFigureSourceLayoutExtension.requirementSchemaRef.schemaId
+      ]
+    : null
+  const intentSchema = schemaAuthority.ok
+    ? schemaAuthority.closure.schemas[
+        readingOptionFigureSourceLayoutExtension.intentSchemaRef.schemaId
+      ]
+    : null
+  if (
+    !hasIntents
+    || !Array.isArray(consumption.figureLayoutIntents)
+    || matches.length !== 1
+    || !requirementSchema
+    || validateJsonSchema(
+      requirement,
+      requirementSchema,
+      '$.question.figureLayoutIntentRequirement',
+    ).length > 0
+    || digestJson(requirement.intentSchemaRef)
+      !== digestJson(readingOptionFigureSourceLayoutExtension.intentSchemaRef)
+    || !intentSchema
+  ) {
+    rejected('Reading Option Figure source layout intent is ambiguous')
+  }
+  const intent = matches[0]
+  const { intentDigest, ...body } = intent
+  const validPlacement = (placement, index) => (
+    placement?.optionId === question.options[index].optionId
+    && placement.label === question.options[index].label
+    && typeof placement.sourceSpanId === 'string'
+    && Array.isArray(placement.sourcePlacementMatrix)
+    && placement.sourcePlacementMatrix.length === 6
+    && placement.sourcePlacementMatrix.every(isFiniteNumber)
+    && isFiniteNumber(placement.labelLeftPt)
+    && isFiniteNumber(placement.labelTopPt)
+    && isFiniteNumber(placement.imageLeftPt)
+    && isFiniteNumber(placement.imageTopPt)
+    && isFiniteNumber(placement.imageWidthPt)
+    && placement.imageWidthPt > 0
+    && isFiniteNumber(placement.imageHeightPt)
+    && placement.imageHeightPt > 0
+    && placement.labelLeftPt >= 0
+    && placement.labelTopPt >= 0
+    && placement.imageLeftPt >= 0
+    && placement.imageTopPt >= 0
+    && placement.imageLeftPt + placement.imageWidthPt <= intent.rowWidthPt + 0.001
+    && placement.imageTopPt + placement.imageHeightPt <= intent.bankHeightPt + 0.001
+  )
+  if (
+    validateJsonSchema(
+      intent,
+      intentSchema,
+      '$.consumption.figureLayoutIntents',
+    ).length > 0
+    || intent.schemaVersion
+      !== readingOptionFigureLayout.sourceMeasured.intentSchemaVersion
+    || intent.coordinateSystem
+      !== readingOptionFigureLayout.sourceMeasured.coordinateSystem
+    || typeof intent.questionId !== 'string'
+    || !Number.isInteger(intent.sourcePage)
+    || intent.sourcePage < 1
+    || !isFiniteNumber(intent.rowStartPt)
+    || intent.rowStartPt < 0
+    || !isFiniteNumber(intent.rowWidthPt)
+    || intent.rowWidthPt <= 0
+    || !isFiniteNumber(intent.bankHeightPt)
+    || intent.bankHeightPt <= 0
+    || !isFiniteNumber(intent.labelFontSizePt)
+    || intent.labelFontSizePt <= 0
+    || !isFiniteNumber(intent.labelLineHeightPt)
+    || intent.labelLineHeightPt <= 0
+    || !isFiniteNumber(intent.stemToBankGapPt)
+    || intent.stemToBankGapPt < 0
+    || !isFiniteNumber(intent.questionTailGapPt)
+    || intent.questionTailGapPt < 0
+    || !Array.isArray(intent.placements)
+    || intent.placements.length !== question.options.length
+    || intent.placements.some((placement, index) => !validPlacement(placement, index))
+    || typeof intentDigest !== 'string'
+    || digestJson(body) !== intentDigest
+    || requirement.intentDigest !== intentDigest
+  ) {
+    rejected('Reading Option Figure source layout intent is invalid')
+  }
+  return intent
+}
+
 export function translateReadingOptionFigureLayout({
   consumerId,
   consumption,
@@ -115,6 +230,47 @@ export function translateReadingOptionFigureLayout({
 
   const { topology, label, imageBox, rhythm, responsive, pagination } =
     readingOptionFigureLayout
+  const sourceIntent = sourceMeasuredIntent(consumption, question)
+  if (sourceIntent) {
+    const placement = {
+      mode: readingOptionFigureLayout.sourceMeasured.mode,
+      layoutId: readingOptionFigureLayout.id,
+      layoutVersion: readingOptionFigureLayout.version,
+      layoutDigest: readingOptionFigureLayoutRef.digest,
+      layoutAuthorityRef: readingOptionFigureRenderingAuthorityRef,
+      sourceIntentDigest: sourceIntent.intentDigest,
+      sourceMatrixScalePolicy:
+        readingOptionFigureLayout.sourceMeasured.matrixScaling,
+      consumerTransformPolicy:
+        readingOptionFigureLayout.sourceMeasured.consumerTransform,
+      rowStartPt: sourceIntent.rowStartPt,
+      rowWidthPt: sourceIntent.rowWidthPt,
+      bankHeightPt: sourceIntent.bankHeightPt,
+      trackCount: topology.trackCount,
+      trackWidthPt: topology.trackWidthPt,
+      labelFontSizePt: sourceIntent.labelFontSizePt,
+      labelLineHeightPt: sourceIntent.labelLineHeightPt,
+      imageBoxWidthPt: imageBox.widthPt,
+      imageBoxHeightPt: imageBox.heightPt,
+      objectFit: 'fill',
+      objectPosition: imageBox.objectPosition,
+      stemToBankGapPt: sourceIntent.stemToBankGapPt,
+      labelToBoxGapPt: 0,
+      questionTailGapPt: sourceIntent.questionTailGapPt,
+      minTrackWidthPt: responsive.minTrackWidthPt,
+      responsivePolicy: responsive.policy,
+      extremeOverflow: responsive.extremeOverflow,
+      paginationPolicy: pagination.policy,
+      placements: sourceIntent.placements.map((sourcePlacement) => ({
+        ...structuredClone(sourcePlacement),
+        neutralAlt: `Option ${sourcePlacement.label}`,
+      })),
+    }
+    return freezeTree({
+      ...placement,
+      placementSignature: digestJson(placement),
+    })
+  }
   const placement = {
     mode: 'figure_four_equal_tracks',
     layoutId: readingOptionFigureLayout.id,

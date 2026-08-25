@@ -15,6 +15,7 @@
     "topology",
     "label",
     "imageBox",
+    "sourceMeasured",
     "rhythm",
     "responsive",
     "pagination",
@@ -94,6 +95,32 @@
         "chrome": { "const": "none" }
       }
     },
+    "sourceMeasured": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "intentSchemaVersion",
+        "mode",
+        "coordinateSystem",
+        "labelPlacement",
+        "imagePlacement",
+        "sizing",
+        "matrixScaling",
+        "consumerTransform",
+        "fallback"
+      ],
+      "properties": {
+        "intentSchemaVersion": { "const": "reading-option-figure-source-layout-intent-v1" },
+        "mode": { "const": "figure_source_measured" },
+        "coordinateSystem": { "const": "question_content_box_pt" },
+        "labelPlacement": { "const": "source_position" },
+        "imagePlacement": { "const": "source_pdf_matrix" },
+        "sizing": { "const": "source_pdf_matrix_exact" },
+        "matrixScaling": { "const": "reproduce_source_authored_xy_scale" },
+        "consumerTransform": { "const": "no_additional_crop_or_stretch" },
+        "fallback": { "const": "reject_invalid_intent" }
+      }
+    },
     "rhythm": {
       "type": "object",
       "additionalProperties": false,
@@ -107,12 +134,12 @@
     "responsive": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["policy", "minTrackWidthPt", "preserveTrackCount", "preserveImageBoxAspectRatio", "extremeOverflow"],
+      "required": ["policy", "minTrackWidthPt", "preserveTrackCount", "genericPreserveImageBoxAspectRatio", "extremeOverflow"],
       "properties": {
         "policy": { "const": "fit_down_then_overflow" },
         "minTrackWidthPt": { "const": 48 },
         "preserveTrackCount": { "const": true },
-        "preserveImageBoxAspectRatio": { "const": true },
+        "genericPreserveImageBoxAspectRatio": { "const": true },
         "extremeOverflow": { "const": "horizontal" }
       }
     },

@@ -389,6 +389,7 @@ export function buildCanonicalReadingConsumptionSurfaceData({
               layoutDigest: placement.layoutDigest,
               rowStartPt: placement.rowStartPt,
               rowWidthPt: placement.rowWidthPt,
+              bankHeightPt: placement.bankHeightPt,
               trackCount: placement.trackCount,
               trackWidthPt: placement.trackWidthPt,
               labelFontSizePt: placement.labelFontSizePt,
@@ -397,6 +398,8 @@ export function buildCanonicalReadingConsumptionSurfaceData({
               imageBoxHeightPt: placement.imageBoxHeightPt,
               objectFit: placement.objectFit,
               objectPosition: placement.objectPosition,
+              sourceMatrixScalePolicy: placement.sourceMatrixScalePolicy,
+              consumerTransformPolicy: placement.consumerTransformPolicy,
               stemToBankGapPt: placement.stemToBankGapPt,
               labelToBoxGapPt: placement.labelToBoxGapPt,
               questionTailGapPt: placement.questionTailGapPt,
@@ -404,6 +407,8 @@ export function buildCanonicalReadingConsumptionSurfaceData({
               responsivePolicy: placement.responsivePolicy,
               extremeOverflow: placement.extremeOverflow,
               paginationPolicy: placement.paginationPolicy,
+              sourceIntentDigest: placement.sourceIntentDigest,
+              placements: structuredClone(placement.placements),
             },
           }
         }

@@ -51,9 +51,17 @@ surface.
       acceptance view; enlarged inspection is diagnostic only.
 - [x] Each admitted asset contains the complete source-authored figure plus
       only source-backed internal whitespace/edge clearance. It contains no
-      A–D label or renderer padding, receives no automatic edge trim or
-      white-to-transparency rewrite, and remains reusable in differently shaped
-      renderer-owned `contain` boxes without crop, stretch, or rotation.
+      A–D label or renderer padding and receives no automatic edge trim or
+      white-to-transparency rewrite. Asset portability does not override the
+      canary's source-measured paper placement.
+- [x] The canary uses the original PDF as its placement authority: A–D labels
+      remain to the left of the figures, their source starts are preserved, and
+      all four image positions and physical sizes come from page-4 XObject
+      matrices shared unchanged by Screen, Student/Teacher Print, and PDF.
+- [x] The page-4 text measurements are tracked as digest-bound evidence tied to
+      the embedded source PDF digest. Source-measured rendering reproduces the
+      admitted PDF matrices, including source-authored X/Y scaling, without any
+      consumer-added crop or stretch.
 - [x] Existing Shenzhen Reading A `framed_columns`, the application-writing
       lamp, all other questions, and all unrelated paper assets remain
       unchanged.
@@ -102,52 +110,67 @@ release action, merge, or content push was performed.
   `visual-candidates/q33/visual-teacher-confirmation-v1.json`, digest
   `sha256:7356ca553f2f75f8ded71c80b56d5033ec2e20bb54e575156cb0c6f2e054ea76`.
   It compiles the local canary digest
-  `sha256:b34a842223376a5e6bfc43ae15bc9aca76716b45be1f418be282f717d9189a3e`.
+  `sha256:2f83bb97b8b0cec48070309f351edfe7f2c33af39b8591131ed285063aa0b526`.
 - The canary has one literal Question 33 stem, four stable Option identities,
   four Option-owned PNGs, renderer-owned A–D labels, zero `[Fig.]`, and no
   detached whole-strip Passage Figure. Its source-backed answer remains D.
-- Asset framing is deliberately portable: an asset owns all source-authored
+- Asset framing remains portable: an asset owns all source-authored
   figure pixels, source-backed internal whitespace, and only source-object edge
   clearance. It excludes question text, A–D labels, page margins, comparison
   padding, and renderer image-box whitespace. No automatic trim or
-  white-to-alpha rewrite is allowed. The renderer owns physical size,
-  placement, alignment, fit-down, and pagination; every placement preserves
-  aspect ratio with `contain`, never crop/stretch/rotate/relabel/reinterpret.
+  white-to-alpha rewrite is allowed. For this canary, the original PDF owns
+  normal-size physical placement through the source layout intent; renderers
+  project it and retain only responsive overflow and pagination decisions.
+- The source layout intent digest is
+  `sha256:00510ed5e5b5300b3d6723ca8da6bb8fbec32181ca13e2ac29ef618d4cf9a95d`.
+  Its tracked source-layout measurement digest is
+  `sha256:dfb4bb796ca39f7b6381b8954642a8060cde36044dcd01eeae2433bb142ffffc`,
+  bound to embedded source PDF digest
+  `sha256:df0c4e0a0d1aee4557f122591e3b778d7b48f2f324d75dba120343bb00926c80`.
+  Relative to the Question content box, the A–D label starts are 24pt, 144pt,
+  264pt, and 360pt. The four exact image sizes are 20.52×51.48pt,
+  24.60×51.96pt, 22.08×51.96pt, and 19.56×51.96pt.
 - The same shared layout authority drives Screen, Student/Teacher Print, and
-  PDF. Track count and image-box aspect reach CSS from the translator instead
-  of being independently hard-coded. Screen remains answer-free; Print/PDF
+  PDF. Consumer Contract v3 binds an immutable v47 schema closure, while the
+  v48 rendering authority binds the compatible Screen v39 and Print/PDF v40
+  contracts without a digest cycle. The projected Q33 Question owns the
+  digest-bound requirement, so deleting top-level intents fails closed.
+  Track count and image-box aspect reach CSS from the translator instead of
+  being independently hard-coded. Screen remains answer-free; Print/PDF
   carry Canonical `correctOptionId`, and a poisoned legacy answer cannot
   override the teacher answer.
 - Focused Canonical contract, rendered behavior with actual artifacts, and Q33
   canary verifiers: PASS. The PDF proof extracts all four PDF image streams and
   compares decoded sRGB RGBA SHA-256 identities against the confirmed A–D
   source images, not dimensions alone: PASS.
-- `pnpm -C app verify:paper` exercised the complete Paper pack. Its initial run
-  was `PASS 78 / SKIP 0 / FAIL 2`: the known unrelated `genre-truth` coverage
-  failure plus a stale orphan test API on port 9895. After terminating only the
-  two parentless test APIs, the affected generated-DOCX isolation verifier
-  passed 28/28. The product-change checks and every Figure/Q33 check passed.
-- Final `pnpm -C app verify:all`: `PASS 146 / SKIP 1 / FAIL 1`. Literal SKIP:
+- Final `pnpm -C app verify:paper`: `PASS 79 / SKIP 0 / FAIL 1`. The sole
+  failure is the unrelated existing `scripts/verify-genre-truth.mjs`, whose
+  current local DB has 18 passages not covered by its decisions artifact.
+  Every Canonical Paper, Figure Option, Q33, Screen, Print, and PDF check in the
+  pack passed.
+- Final `pnpm -C app verify:all`: `PASS 145 / SKIP 1 / FAIL 2`. Literal SKIP:
   `scripts/verify-i16a-teaching-dimension-search.mjs` because its off-repo
-  fixture is absent. Sole FAIL: the unrelated existing
-  `scripts/verify-genre-truth.mjs`, whose current local DB has 18 passages not
-  covered by its decisions artifact. This ticket changes neither that DB nor
-  that artifact.
-- Final independent Standards review: PASS with no Must Fix, Judgment, or
-  Smell. Final independent Spec review found the committed implementation
-  conformant and no scope creep; its sole pre-handoff finding was the stopped
-  QA service and unpushed Draft-PR head. That runtime handoff finding was closed
-  by pushing the final branch, restarting the fixed service, and smoke-checking
-  the exact URL below while keeping the PR draft.
+  fixture is absent. The persistent unrelated FAIL is the same
+  `scripts/verify-genre-truth.mjs`. The second FAIL was the unrelated
+  `scripts/verify-vocabulary-rendered-behavior.mjs` 0.8-second playback timing
+  assertion under full-suite load; its immediate isolated rerun passed 42/42.
+  This ticket changes neither unrelated subsystem.
+- Final independent Standards review: PASS with no remaining Must Fix. It
+  verifies the historical comparison v47 authority, immutable schema v47,
+  renderer v48, Consumer Contract v3, declaration accuracy, source-matrix
+  semantics, and digest-bound measurement closure. Final independent Spec
+  review: PASS; all earlier fail-closed, source-scaling, declaration, shared
+  page-number, and measurement findings are closed with no scope mismatch.
 - Exact Owner QA state: local Vite service, the Q33-focused Canonical Reading
   Screen route, Student/Teacher Print HTML, the two-page Student PDF, and the
-  differently shaped portable-placement proof are prepared under
+  original-PDF-versus-final-PDF comparison are prepared under
   `output/playwright/source-faithful-visual-import-q33/` and `output/pdf/`.
   The fixed Screen URL is
   `http://127.0.0.1:4175/canonical-reading-qa.html?groupId=group-mock-sz-2026-m1-reading-d&fixture=q33-source-crop`.
-  Browser smoke confirms one PaperSurface, four Reading D questions, exactly
-  one Question 33, four Option Figure images, real A–D labels, neutral
-  `Option A`–`Option D` alts, zero `[Fig.]`, and zero browser error logs.
+  A final in-app-browser smoke against the fixed service confirms exactly one
+  Question 33, one source-measured row, four source-measured Option items, four
+  images, real A–D labels, neutral `Option A`–`Option D` alts, the four exact
+  source width/height placements, zero `[Fig.]`, and zero browser error logs.
 
 ### Stop A — historical candidate receipt
 

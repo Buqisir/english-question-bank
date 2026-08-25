@@ -12,13 +12,13 @@
   "compatibleConsumerContracts": {
     "screen": {
       "id": "screen",
-      "version": "38",
-      "digest": "sha256:4fcc3e54037c84596fc49414fb75288aebd8463ae19dd49b7fae31aefb75ab9c"
+      "version": "39",
+      "digest": "sha256:8b6cddebb51d6b059a72fca9954e727fb3a5b393db5bc18fef81afb8104a78d9"
     },
     "print_pdf": {
       "id": "print_pdf",
-      "version": "39",
-      "digest": "sha256:98c66109b5ed8c266eed0d57a33f16370b7bfa118ce09930e7f83e9f27ae737a"
+      "version": "40",
+      "digest": "sha256:b9a74ef3f14acf4a86a21d3156b276428f676144069840e306a0aae18312e7fc"
     }
   },
   "physicalUnits": "pt",
@@ -44,6 +44,17 @@
     "stretch": false,
     "chrome": "none"
   },
+  "sourceMeasured": {
+    "intentSchemaVersion": "reading-option-figure-source-layout-intent-v1",
+    "mode": "figure_source_measured",
+    "coordinateSystem": "question_content_box_pt",
+    "labelPlacement": "source_position",
+    "imagePlacement": "source_pdf_matrix",
+    "sizing": "source_pdf_matrix_exact",
+    "matrixScaling": "reproduce_source_authored_xy_scale",
+    "consumerTransform": "no_additional_crop_or_stretch",
+    "fallback": "reject_invalid_intent"
+  },
   "rhythm": {
     "stemToBankGapPt": 4.5,
     "labelToBoxGapPt": 4.5,
@@ -53,7 +64,7 @@
     "policy": "fit_down_then_overflow",
     "minTrackWidthPt": 48,
     "preserveTrackCount": true,
-    "preserveImageBoxAspectRatio": true,
+    "genericPreserveImageBoxAspectRatio": true,
     "extremeOverflow": "horizontal"
   },
   "pagination": {

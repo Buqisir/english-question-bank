@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "reading-option-figure-source-layout-requirement-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "intentSchemaRef",
+    "intentDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "reading-option-figure-source-layout-requirement-v1"
+    },
+    "intentSchemaRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authorityManifestId",
+        "authorityManifestVersion",
+        "authorityManifestDigest",
+        "schemaId",
+        "schemaDigest"
+      ],
+      "properties": {
+        "authorityManifestId": {
+          "const": "paper-canonical"
+        },
+        "authorityManifestVersion": {
+          "const": "47"
+        },
+        "authorityManifestDigest": {
+          "type": "string"
+        },
+        "schemaId": {
+          "const": "reading-option-figure-source-layout-intent-v1"
+        },
+        "schemaDigest": {
+          "type": "string"
+        }
+      }
+    },
+    "intentDigest": {
+      "type": "string"
+    }
+  }
+}

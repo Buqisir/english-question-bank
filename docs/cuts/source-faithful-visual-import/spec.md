@@ -76,7 +76,7 @@ renderer 呈现。原整条 PNG 保留为 source evidence，但不再作为 Pass
 8. As a teacher, I want Screen, Student Print, Teacher Print, and PDF to display the same four option figures, so that classroom explanation and the paper handed to students do not disagree.
 9. As a teacher, I want a rejected or unresolved reconstruction to stop publication, so that a visually plausible but semantically wrong diagram does not reach students.
 10. As a student, I want each image option to be clear at normal reading and print size, so that I do not need to enlarge a blurry full-width screenshot to answer the question.
-11. As a student, I want image proportions preserved without cropping or stretching, so that visual differences between answer choices remain the differences authored by the source.
+11. As a student, I want the source-authored display transform preserved without consumer-added cropping or stretching, so that visual differences between answer choices remain the differences authored by the source.
 12. As an import Agent, I want an explicit routing rule for text, tables, framed columns, diagrams, photos, and unsupported visuals, so that I do not turn everything into either OCR text or a screenshot.
 13. As an import Agent, I want rule-based diagrams to have a vector-authored route, so that simple lines, gaps, containers, and shapes can be redrawn cleanly without inventing photographic detail.
 14. As an import Agent, I want photos and irregular illustrations to have a reference-restoration route, so that I can improve legibility while retaining the source composition.
@@ -150,6 +150,7 @@ renderer 呈现。原整条 PNG 保留为 source evidence，但不再作为 Pass
 ### 7. Shared consumption projection
 
 - The shared projection validates all four Figure Option references, resolves their media artifacts, and exposes one renderer-neutral image-option set.
+- Source-measured layout is a closed Consumer Contract v3 extension: the projected Figure Question carries the versioned, schema-bound intent requirement, while the consumption carries the matching digest-bound intent. Removing the top-level intent cannot silently fall back to generic layout; Screen and Print/PDF reject it.
 - Projection fails closed on a missing or duplicate Option identity, mixed option mode, absent media, cross-group media reference, digest mismatch, changed bytes, dimension mismatch, unsupported MIME type, or an incomplete four-option set.
 - Renderers receive resolved media artifacts; no renderer performs manifest lookup, marker parsing, source fallback, or semantic repair.
 - Existing text-only projection remains unchanged for ordinary Reading questions.
@@ -157,11 +158,11 @@ renderer 呈现。原整条 PNG 保留为 source evidence，但不再作为 Pass
 ### 8. Screen and Print/PDF behavior
 
 - Option labels remain real renderer text. Only the meaning-bearing illustration occupies the image box.
-- A figure-only A–D set uses one shared, versioned layout rule across Screen and Print/PDF: four equal option tracks, consistent label placement, a candidate-independent image box, preserved aspect ratio, centered content, and no crop or stretch.
-- Physical layout intent is chosen once for the option set and is independent of candidate pixel dimensions. The system must not map raw source pixels directly to CSS px or PDF pt.
-- The four images use the same visual box. Natural internal whitespace may differ only when it is source-backed; the renderer does not normalize away a meaningful difference.
+- A figure-only A–D set uses one shared, versioned layout rule across Screen and Print/PDF. The generic fallback uses four equal tracks and a candidate-independent `contain` box. When an exact source-measured option-set intent is present, the same renderer projects its source text positions and PDF image matrices instead of inventing a generic comparison row.
+- Physical layout intent is chosen once for the option set and is independent of consumer surface. Raw source pixels are never mapped directly to CSS px or PDF pt; a source-measured intent uses source PDF point geometry bound to the exact Question and Option identities.
+- Generic fixtures use one visual box. A source-measured set retains each source object's authored physical width, height, and position. Natural internal whitespace remains source-backed in both modes.
 - The admitted asset owns the complete source-authored figure pixels, including source-backed internal whitespace and only the edge clearance already present in the source object. It excludes A–D labels, question text, page margins, comparison padding, and renderer image-box whitespace.
-- Automatic edge trimming or white-to-transparency rewriting is forbidden: white gaps, highlights, and JPEG edge noise are not sufficient authority to delete source pixels. The renderer owns physical size, placement, alignment, responsive fit-down, and pagination while preserving aspect ratio with `contain`.
+- Automatic edge trimming or white-to-transparency rewriting is forbidden: white gaps, highlights, and JPEG edge noise are not sufficient authority to delete source pixels. Generic layout preserves asset aspect ratio with `contain`. Source-measured layout instead reproduces the source PDF XObject matrix exactly, including any source-authored difference between its X and Y scale; consumers may add no further crop, stretch, or geometry rewrite.
 - A Figure Option question is an atomic print unit. If the stem, labels, and four figures do not fit in the remaining page space, the whole question moves together. v1 does not split an option-image set across pages.
 - Student surfaces do not expose the correct answer. Teacher surfaces may use the existing answer/Analysis behavior, but the selected figure bytes and placement remain identical.
 - No Screen, Print, or PDF path calls an image model or conditionally substitutes a different candidate.
@@ -213,8 +214,8 @@ renderer 呈现。原整条 PNG 保留为 source evidence，但不再作为 Pass
 - The same projected fixture produces four Option labels and four resolved images in Screen, Student Print HTML, Teacher Print HTML, and PDF.
 - No surface contains `[Fig.]`, duplicates the question stem, renders the old full-strip figure, or reconstructs semantic ownership independently.
 - Option-to-media association and A–D order are identical across all surfaces.
-- Images preserve aspect ratio, remain inside the shared box, do not crop or stretch, and use the same physical layout intent independent of source pixel size.
-- The exact same confirmed bytes remain contained and legible when placed in differently shaped renderer-owned boxes; portability does not permit cropping, rotation, stretching, relabeling, or removal of semantic whitespace.
+- Generic images preserve aspect ratio inside the shared `contain` box. Source-measured images reproduce the source PDF matrix, including its source-authored X/Y scaling, and receive no consumer-added crop or stretch. Both modes use one physical layout intent independent of source pixel size.
+- The exact same confirmed bytes remain independently reusable, but the Shenzhen canary acceptance surface projects the original PDF layout rather than differently shaped proof boxes. Portability never authorizes cropping, rotation, relabeling, or removal of semantic whitespace.
 - The complete question moves atomically at a print page boundary.
 - Student output does not expose answer identity; Teacher output retains existing answer behavior without changing image bytes.
 - Ordinary text-only Reading questions retain their current A–D layout and geometry.
@@ -225,6 +226,7 @@ renderer 呈现。原整条 PNG 保留为 source evidence，但不再作为 Pass
 - Question 33 has one typed stem, four renderer-owned labels, four Figure Options, zero `[Fig.]` strings, and no Passage-level duplicate figure.
 - The four selected media digests are exactly those approved during Teacher Confirmation and remain stable through Screen, Student/Teacher Print, and PDF.
 - Source comparison checks each option independently for count, order, orientation, containment, dark/light regions, gaps, and other source-authored relationships. Any missing, added, swapped, relabeled, or topologically changed element fails visual QA.
+- Source comparison also checks the Q33 row against the original PDF point geometry: A–D labels remain to the left of their figures, label and image starts retain the measured source offsets, and each image retains its captured PDF matrix width and height across Screen, Print, and PDF.
 - Candidate comparison is performed at one fixed target size with the same background and renderer layout. Enlarged inspection may diagnose artifacts but cannot substitute for normal-size QA.
 
 ### Repository gates

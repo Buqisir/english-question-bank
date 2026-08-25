@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "q33-source-layout-measurement-v1",
+  "paperId": "paper-mock-sz-2026-m1",
+  "questionId": "q-mock-sz-2026-m1-033",
+  "sourcePdfSha256": "sha256:df0c4e0a0d1aee4557f122591e3b778d7b48f2f324d75dba120343bb00926c80",
+  "sourcePage": 4,
+  "pageWidthPt": 595,
+  "pageHeightPt": 841.9,
+  "questionContentLeftPt": 36,
+  "extraction": {
+    "tool": "pdftohtml 26.04.0",
+    "outputScale": 1.5,
+    "method": "page-4 text boxes converted from 1.5x output coordinates to PDF points; image geometry retained from exact source-capture XObject matrices"
+  },
+  "labels": [
+    {
+      "label": "A",
+      "leftPt": 60,
+      "topPt": 646,
+      "widthPt": 11.33,
+      "heightPt": 16
+    },
+    {
+      "label": "B",
+      "leftPt": 180,
+      "topPt": 646,
+      "widthPt": 11.33,
+      "heightPt": 16
+    },
+    {
+      "label": "C",
+      "leftPt": 300,
+      "topPt": 646,
+      "widthPt": 11.33,
+      "heightPt": 16
+    },
+    {
+      "label": "D",
+      "leftPt": 396,
+      "topPt": 646,
+      "widthPt": 11.33,
+      "heightPt": 16
+    }
+  ],
+  "measurementDigest": "sha256:dfb4bb796ca39f7b6381b8954642a8060cde36044dcd01eeae2433bb142ffffc"
+}

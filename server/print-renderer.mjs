@@ -826,8 +826,9 @@ function renderCanonicalFigureQuestionOptions(
   placement,
   readingTail = null,
 ) {
-  const attrs = ` data-canonical-layout-id="${escapeHtml(placement.layoutId)}" data-canonical-layout-version="${escapeHtml(placement.layoutVersion)}" data-canonical-layout-digest="${escapeHtml(placement.layoutDigest)}" data-canonical-placement-signature="${escapeHtml(placement.placementSignature)}" data-canonical-pagination-policy="${escapeHtml(placement.paginationPolicy)}" style="--figure-row-start:${placement.rowStartPt}pt;--figure-row-width:${placement.rowWidthPt}pt;--figure-track-count:${placement.trackCount};--figure-track-width:${placement.trackWidthPt}pt;--figure-label-font-size:${placement.labelFontSizePt}pt;--figure-label-line-height:${placement.labelLineHeightPt}pt;--figure-box-width:${placement.imageBoxWidthPt}pt;--figure-box-height:${placement.imageBoxHeightPt}pt;--figure-stem-gap:${placement.stemToBankGapPt}pt;--figure-label-gap:${placement.labelToBoxGapPt}pt;--figure-tail-gap:${placement.questionTailGapPt}pt"`
-  return `<ol class="canonical-figure-options" aria-label="Figure options A to D"${attrs}>${question.options.map((option, index) => {
+  const sourceMeasured = placement.mode === 'figure_source_measured'
+  const attrs = ` data-canonical-layout-id="${escapeHtml(placement.layoutId)}" data-canonical-layout-version="${escapeHtml(placement.layoutVersion)}" data-canonical-layout-digest="${escapeHtml(placement.layoutDigest)}" data-canonical-placement-mode="${escapeHtml(placement.mode)}" data-canonical-placement-signature="${escapeHtml(placement.placementSignature)}" data-canonical-pagination-policy="${escapeHtml(placement.paginationPolicy)}"${placement.sourceIntentDigest ? ` data-canonical-source-intent-digest="${escapeHtml(placement.sourceIntentDigest)}"` : ''} style="--figure-row-start:${placement.rowStartPt}pt;--figure-row-width:${placement.rowWidthPt}pt;--figure-track-count:${placement.trackCount};--figure-track-width:${placement.trackWidthPt}pt;--figure-label-font-size:${placement.labelFontSizePt}pt;--figure-label-line-height:${placement.labelLineHeightPt}pt;--figure-box-width:${placement.imageBoxWidthPt}pt;--figure-box-height:${placement.imageBoxHeightPt}pt;--figure-bank-height:${placement.bankHeightPt || 0}pt;--figure-stem-gap:${placement.stemToBankGapPt}pt;--figure-label-gap:${placement.labelToBoxGapPt}pt;--figure-tail-gap:${placement.questionTailGapPt}pt"`
+  return `<ol class="canonical-figure-options${sourceMeasured ? ' canonical-figure-options--source-measured' : ''}" aria-label="Figure options A to D"${attrs}>${question.options.map((option, index) => {
     const figurePlacement = placement.placements[index]
     const isTailOption =
       readingTail
@@ -836,7 +837,10 @@ function renderCanonicalFigureQuestionOptions(
     const tailAttrs = isTailOption
       ? ` data-canonical-reading-anchor-for="${escapeHtml(readingTail.targetId)}" data-canonical-reading-predecessor-question-id="${escapeHtml(question.questionId)}" data-canonical-reading-predecessor-option-id="${escapeHtml(option.optionId)}"${readingTail.successorGroupId ? ` data-canonical-reading-preceding-kind="prior_question_tail"${readingTail.visiblePredecessorOnOption ? ` data-canonical-reading-preceding-for="${escapeHtml(readingTail.successorGroupId)}"` : ''}` : readingTail.visiblePredecessorOnOption ? ` data-canonical-reading-before-section="${escapeHtml(readingTail.followingSectionId)}"` : ''}`
       : ''
-    return `<li class="canonical-figure-option" data-canonical-option-id="${escapeHtml(option.optionId)}" data-canonical-media-id="${escapeHtml(option.figure.mediaId)}" data-canonical-media-sha256="${escapeHtml(option.figure.mediaArtifact.sha256)}" data-canonical-reading-rhythm-role="option_line"${tailAttrs}><span class="canonical-figure-option-label" aria-hidden="true">${escapeHtml(option.label)}.</span><span class="canonical-figure-option-box"><img class="canonical-figure-option-image" src="data:${escapeHtml(option.figure.mediaArtifact.mimeType)};base64,${escapeHtml(option.figure.mediaArtifact.encodedBytes)}" alt="${escapeHtml(figurePlacement.neutralAlt)}" width="${option.figure.mediaArtifact.pixelWidth}" height="${option.figure.mediaArtifact.pixelHeight}"></span></li>`
+    const sourceStyle = sourceMeasured
+      ? ` style="--figure-source-label-left:${figurePlacement.labelLeftPt}pt;--figure-source-label-top:${figurePlacement.labelTopPt}pt;--figure-source-image-left:${figurePlacement.imageLeftPt}pt;--figure-source-image-top:${figurePlacement.imageTopPt}pt;--figure-source-image-width:${figurePlacement.imageWidthPt}pt;--figure-source-image-height:${figurePlacement.imageHeightPt}pt"`
+      : ''
+    return `<li class="canonical-figure-option${sourceMeasured ? ' canonical-figure-option--source-measured' : ''}" data-canonical-option-id="${escapeHtml(option.optionId)}" data-canonical-media-id="${escapeHtml(option.figure.mediaId)}" data-canonical-media-sha256="${escapeHtml(option.figure.mediaArtifact.sha256)}"${figurePlacement.sourceSpanId ? ` data-canonical-source-span-id="${escapeHtml(figurePlacement.sourceSpanId)}"` : ''} data-canonical-reading-rhythm-role="option_line"${tailAttrs}${sourceStyle}><span class="canonical-figure-option-label" aria-hidden="true">${escapeHtml(option.label)}.</span><span class="canonical-figure-option-box"><img class="canonical-figure-option-image" src="data:${escapeHtml(option.figure.mediaArtifact.mimeType)};base64,${escapeHtml(option.figure.mediaArtifact.encodedBytes)}" alt="${escapeHtml(figurePlacement.neutralAlt)}" width="${option.figure.mediaArtifact.pixelWidth}" height="${option.figure.mediaArtifact.pixelHeight}"></span></li>`
   }).join('')}</ol>`
 }
 
@@ -2892,6 +2896,40 @@ body {
   height: 100%;
   object-fit: contain;
   object-position: center;
+}
+
+.canonical-figure-options.canonical-figure-options--source-measured {
+  position: relative;
+  display: block;
+  height: var(--figure-bank-height);
+}
+
+.canonical-figure-option.canonical-figure-option--source-measured {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.canonical-figure-option--source-measured .canonical-figure-option-label {
+  position: absolute;
+  top: var(--figure-source-label-top);
+  left: var(--figure-source-label-left);
+  width: auto;
+  line-height: var(--figure-label-line-height);
+}
+
+.canonical-figure-option--source-measured .canonical-figure-option-box {
+  position: absolute;
+  top: var(--figure-source-image-top);
+  left: var(--figure-source-image-left);
+  width: var(--figure-source-image-width);
+  height: var(--figure-source-image-height);
+}
+
+.canonical-figure-option--source-measured .canonical-figure-option-image {
+  object-fit: fill;
 }
 
 /* standard §3b 分页纪律(owner 2026-07-08):段落可跨页;单个小题不拆;

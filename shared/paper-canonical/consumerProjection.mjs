@@ -3,8 +3,15 @@ import {
   layoutAbcdOptionSet,
   layoutFixedFourColumnClozeOptionSet,
 } from './abcdLayout.mjs'
-import { resolveCanonicalAuthority } from './authority.mjs'
-import { readingOptionFigureConsumerContractRefs } from './consumers.mjs'
+import {
+  readingOptionFigureSourceLayoutSchemaAuthorityRef,
+  resolveCanonicalAuthority,
+  validateJsonSchema,
+} from './authority.mjs'
+import {
+  readingOptionFigureConsumerContractRefs,
+  readingOptionFigureSourceLayoutExtension,
+} from './consumers.mjs'
 import { readingPassageLetterBySlotId } from './readingPassageLetter.mjs'
 import { digestJson, sha256, stableStringify } from './stable.mjs'
 import { decodeCanonicalBase64, inspectPng } from './png.mjs'
@@ -44,6 +51,39 @@ function sameConsumerRef(left, right) {
   return left?.id === right?.id
     && left?.version === right?.version
     && left?.digest === right?.digest
+}
+
+function projectFigureLayoutIntentRequirement(input, question) {
+  const requirement = question?.figureLayoutIntentRequirement
+  if (requirement == null) return null
+  const matchesVersionedConsumer = Object.values(
+    readingOptionFigureConsumerContractRefs,
+  ).some((ref) => sameConsumerRef(input.consumption?.consumerContractRef, ref))
+  const renderingAuthority = resolveCanonicalAuthority(
+    readingOptionFigureSourceLayoutSchemaAuthorityRef,
+  )
+  const requirementSchema = renderingAuthority.ok
+    ? renderingAuthority.closure.schemas[
+        readingOptionFigureSourceLayoutExtension.requirementSchemaRef.schemaId
+      ]
+    : null
+  if (
+    !matchesVersionedConsumer
+    || !requirementSchema
+    || validateJsonSchema(
+      requirement,
+      requirementSchema,
+      '$.figureLayoutIntentRequirement',
+    ).length > 0
+    || digestJson(requirement.intentSchemaRef)
+      !== digestJson(readingOptionFigureSourceLayoutExtension.intentSchemaRef)
+    || !/^sha256:[0-9a-f]{64}$/.test(requirement.intentDigest)
+  ) {
+    throw rejected(
+      `Canonical Reading Figure Question ${question?.questionId} has an invalid source-layout requirement`,
+    )
+  }
+  return structuredClone(requirement)
 }
 
 function projectReadingConsumerGroup(input, occurrence) {
@@ -341,6 +381,8 @@ function projectReadingConsumerGroup(input, occurrence) {
       throw rejected(`Canonical Reading occurrence ${groupId} mixes text and Figure Options`)
     }
     if (figureMode) {
+      const figureLayoutIntentRequirement =
+        projectFigureLayoutIntentRequirement(input, question)
       const includeCorrectOptionId = sameConsumerRef(
         input.consumption?.consumerContractRef,
         readingOptionFigureConsumerContractRefs.print_pdf,
@@ -365,6 +407,9 @@ function projectReadingConsumerGroup(input, occurrence) {
         stemContent: structuredClone(question.stem),
         optionMode: 'figure',
         options,
+        ...(figureLayoutIntentRequirement
+          ? { figureLayoutIntentRequirement }
+          : {}),
         ...(includeCorrectOptionId
           ? { correctOptionId: question.correctOptionId }
           : {}),

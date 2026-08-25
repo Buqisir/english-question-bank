@@ -10,6 +10,7 @@ import {
 } from '../shared/paper-canonical/authority.mjs'
 import {
   readingOptionFigureConsumerContractRefs,
+  readingOptionFigureSourceLayoutExtension,
 } from '../shared/paper-canonical/consumers.mjs'
 import { projectCanonicalPaper } from '../shared/paper-canonical/projector.mjs'
 import {
@@ -40,6 +41,72 @@ const screenConsumptionPath = path.join(
 
 function stableId(prefix, value) {
   return `${prefix}:${digestJson(value).slice('sha256:'.length, 28)}`
+}
+
+function roundPt(value) {
+  return Math.round(value * 100) / 100
+}
+
+function validateSourceLayoutMeasurement(measurement, visualSourceCapture) {
+  const { measurementDigest, ...body } = measurement || {}
+  const sourcePdf = visualSourceCapture.documents.find(
+    (document) => document.mediaType === 'application/pdf',
+  )
+  const exactKeys = [
+    'extraction',
+    'labels',
+    'measurementDigest',
+    'pageHeightPt',
+    'pageWidthPt',
+    'paperId',
+    'questionContentLeftPt',
+    'questionId',
+    'schemaVersion',
+    'sourcePage',
+    'sourcePdfSha256',
+  ]
+  const validLabel = (entry, index) => (
+    Object.keys(entry || {}).sort().join(',')
+      === 'heightPt,label,leftPt,topPt,widthPt'
+    && entry.label === labels[index]
+    && [entry.leftPt, entry.topPt, entry.widthPt, entry.heightPt]
+      .every((value) => Number.isFinite(value) && value >= 0)
+    && entry.widthPt > 0
+    && entry.heightPt > 0
+  )
+  if (
+    Object.keys(measurement || {}).sort().join(',') !== exactKeys.join(',')
+    || measurement.schemaVersion !== 'q33-source-layout-measurement-v1'
+    || measurement.paperId !== paperId
+    || measurement.questionId !== questionId
+    || measurement.sourcePage !== 4
+    || !sourcePdf
+    || measurement.sourcePdfSha256 !== sourcePdf.sha256
+    || !Number.isFinite(measurement.pageWidthPt)
+    || measurement.pageWidthPt <= 0
+    || !Number.isFinite(measurement.pageHeightPt)
+    || measurement.pageHeightPt <= 0
+    || !Number.isFinite(measurement.questionContentLeftPt)
+    || measurement.questionContentLeftPt < 0
+    || Object.keys(measurement.extraction || {}).sort().join(',')
+      !== 'method,outputScale,tool'
+    || typeof measurement.extraction.tool !== 'string'
+    || typeof measurement.extraction.method !== 'string'
+    || !Number.isFinite(measurement.extraction.outputScale)
+    || measurement.extraction.outputScale <= 0
+    || !Array.isArray(measurement.labels)
+    || measurement.labels.length !== labels.length
+    || measurement.labels.some((entry, index) => !validLabel(entry, index))
+    || digestJson(body) !== measurementDigest
+  ) {
+    throw new Error('Q33 source-layout measurement evidence is invalid')
+  }
+  return Object.freeze({
+    measurement,
+    labelGeometry: new Map(
+      measurement.labels.map((entry) => [entry.label, entry]),
+    ),
+  })
 }
 
 async function readJson(filePath) {
@@ -355,7 +422,124 @@ function mediaArtifacts(projected, sourceCapture) {
   return artifacts
 }
 
-function makeConsumption({ projected, sourceCapture, plan, consumerId }) {
+function sourceFigureLayoutIntent(
+  visualSourceCapture,
+  selections,
+  sourceLayoutMeasurement,
+) {
+  const { measurement, labelGeometry } = validateSourceLayoutMeasurement(
+    sourceLayoutMeasurement,
+    visualSourceCapture,
+  )
+  const observations = new Map(
+    visualSourceCapture.observations.map((observation) => [
+      observation.value?.targetOwner?.optionId,
+      observation,
+    ]),
+  )
+  const sourceImages = selections.map((selection, index) => {
+    const label = labels[index]
+    const observation = observations.get(selection.owner.optionId)
+    const matrix = observation?.value?.placementMatrix
+    if (
+      observation?.value?.sourcePage !== measurement.sourcePage
+      || !Array.isArray(matrix)
+      || matrix.length !== 6
+      || matrix.some((value) => !Number.isFinite(value))
+      || matrix[0] <= 0
+      || matrix[3] >= 0
+    ) {
+      throw new Error(`Option ${label} lacks one exact source PDF placement matrix`)
+    }
+    const [widthPt, , , negativeHeightPt, leftPt, bottomPt] = matrix
+    return {
+      label,
+      optionId: selection.owner.optionId,
+      sourceSpanId: observation.sourceSpanId,
+      matrix: structuredClone(matrix),
+      leftPt,
+      topPt: bottomPt + negativeHeightPt,
+      widthPt,
+      heightPt: Math.abs(negativeHeightPt),
+      bottomPt,
+    }
+  })
+  const rowOriginPt = labelGeometry.get('A').leftPt
+  const bankTopPt = Math.min(...sourceImages.map((image) => image.topPt))
+  const bankBottomPt = Math.max(
+    ...sourceImages.map((image) => image.bottomPt),
+    ...labels.map((label) => (
+      labelGeometry.get(label).topPt + labelGeometry.get(label).heightPt
+    )),
+  )
+  const rowRightPt = Math.max(...sourceImages.map(
+    (image) => image.leftPt + image.widthPt,
+  ))
+  const base = {
+    schemaVersion: 'reading-option-figure-source-layout-intent-v1',
+    questionId,
+    sourcePage: measurement.sourcePage,
+    coordinateSystem: 'question_content_box_pt',
+    measurementEvidence: {
+      kind: 'digest_bound_external_evidence',
+      evidenceSchemaVersion: measurement.schemaVersion,
+      evidenceDigest: measurement.measurementDigest,
+      sourceDocumentSha256: measurement.sourcePdfSha256,
+    },
+    rowStartPt: roundPt(rowOriginPt - measurement.questionContentLeftPt),
+    rowWidthPt: roundPt(rowRightPt - rowOriginPt),
+    bankHeightPt: roundPt(bankBottomPt - bankTopPt),
+    labelFontSizePt: 10.5,
+    labelLineHeightPt: 16,
+    stemToBankGapPt: 4.5,
+    questionTailGapPt: 9,
+    placements: sourceImages.map((image) => ({
+      optionId: image.optionId,
+      label: image.label,
+      sourceSpanId: image.sourceSpanId,
+      sourcePlacementMatrix: image.matrix,
+      labelLeftPt: roundPt(labelGeometry.get(image.label).leftPt - rowOriginPt),
+      labelTopPt: roundPt(labelGeometry.get(image.label).topPt - bankTopPt),
+      imageLeftPt: roundPt(image.leftPt - rowOriginPt),
+      imageTopPt: roundPt(image.topPt - bankTopPt),
+      imageWidthPt: image.widthPt,
+      imageHeightPt: image.heightPt,
+    })),
+  }
+  return {
+    ...base,
+    intentDigest: digestJson(base),
+  }
+}
+
+function bindFigureLayoutRequirement(projected, figureLayoutIntent) {
+  const bound = structuredClone(projected)
+  const readingOccurrence = bound.nodes.find(
+    (node) => node.kind === 'group' && node.groupId === groupId,
+  )
+  const question = readingOccurrence?.questions?.find(
+    (candidate) => candidate.questionId === questionId,
+  )
+  if (!question || Object.hasOwn(question, 'figureLayoutIntentRequirement')) {
+    throw new Error('Q33 projected Question cannot bind source-layout requirement')
+  }
+  question.figureLayoutIntentRequirement = {
+    schemaVersion: 'reading-option-figure-source-layout-requirement-v1',
+    intentSchemaRef: structuredClone(
+      readingOptionFigureSourceLayoutExtension.intentSchemaRef,
+    ),
+    intentDigest: figureLayoutIntent.intentDigest,
+  }
+  return bound
+}
+
+function makeConsumption({
+  projected,
+  sourceCapture,
+  plan,
+  consumerId,
+  figureLayoutIntent,
+}) {
   const occurrencesByFamily = new Map()
   for (const occurrence of projected.nodes.filter((node) => node.kind === 'group')) {
     const list = occurrencesByFamily.get(occurrence.familyContractId) || []
@@ -407,6 +591,7 @@ function makeConsumption({ projected, sourceCapture, plan, consumerId }) {
       authorityRef: plan.authorityRef,
       sourceCaptureDigest: sourceCapture.digest,
       consumerId,
+      figureLayoutIntentDigest: figureLayoutIntent.intentDigest,
     }),
     consumerContractRef: structuredClone(
       readingOptionFigureConsumerContractRefs[consumerId],
@@ -420,18 +605,19 @@ function makeConsumption({ projected, sourceCapture, plan, consumerId }) {
     profileRef: structuredClone(plan.profileRef),
     visibleStructureDigest: digestJson(visibleStructure),
     mediaArtifacts: mediaArtifacts(projected, sourceCapture),
+    figureLayoutIntents: [structuredClone(figureLayoutIntent)],
     diagnostics: [],
   }
 }
 
-function assetFramingPolicy(confirmedSelection) {
+function assetFramingPolicy(confirmedSelection, figureLayoutIntent) {
   return {
     schemaVersion: 'q33-figure-asset-framing-policy-v1',
     paperId,
     questionId,
     candidatePackageDigest: confirmedSelection.candidatePackageDigest,
     confirmationDigest: confirmedSelection.confirmationDigest,
-    principle: 'The asset owns complete source-authored figure pixels; the renderer owns every placement decision.',
+    principle: 'The asset owns complete source-authored figure pixels; the source layout intent owns source-authored placement; every renderer projects that intent.',
     contentEnvelope: {
       kind: 'exact_pdf_embedded_image_extent',
       includes: [
@@ -451,14 +637,11 @@ function assetFramingPolicy(confirmedSelection) {
     },
     rendererOwnership: {
       controls: [
-        'physical target size',
-        'four-track placement',
-        'alignment',
         'responsive fit-down',
         'print pagination',
       ],
-      invariant: 'preserve aspect ratio with contain; never crop, stretch, rotate, relabel, or reinterpret the selected asset',
-      portabilityLimit: 'Portable means reusable in renderer-owned boxes at a legible size, not permission to change orientation, aspect ratio, or semantic whitespace.',
+      invariant: 'project the source-measured label geometry and source PDF image matrices exactly at normal paper size, including source-authored X/Y scale; never add consumer crop, stretch, rotation, relabeling, or semantic reinterpretation',
+      portabilityLimit: 'The crop remains reusable as an asset, but the Shenzhen canary paper placement is the measured source PDF placement rather than a generic comparison box.',
     },
     selectedAssets: confirmedSelection.confirmedSelections.map((selection) => ({
       optionId: selection.owner.optionId,
@@ -468,11 +651,7 @@ function assetFramingPolicy(confirmedSelection) {
       pixelWidth: selection.artifact.pixelWidth,
       pixelHeight: selection.artifact.pixelHeight,
     })),
-    placementProofIntent: [
-      { name: 'canonical', widthPt: 96, heightPt: 60 },
-      { name: 'compact_square', widthPt: 54, heightPt: 54 },
-      { name: 'large_portrait', widthPt: 72, heightPt: 96 },
-    ],
+    sourceLayoutIntent: structuredClone(figureLayoutIntent),
   }
 }
 
@@ -484,6 +663,7 @@ export async function materializeQ33OptionFigureCanary() {
     baseSourceCapture,
     basePlan,
     baseQuestionGroups,
+    sourceLayoutMeasurement,
   ] = await Promise.all([
     readJson(path.join(evidenceRoot, 'visual-import-candidate-v1.json')),
     readJson(path.join(evidenceRoot, 'visual-teacher-confirmation-v1.json')),
@@ -491,6 +671,7 @@ export async function materializeQ33OptionFigureCanary() {
     readJson(path.join(publicPaperRoot, 'canonical/source-capture-v1.json')),
     readJson(path.join(publicPaperRoot, 'canonical/canonical-paper-plan-v1.json')),
     readJson(path.join(publicPaperRoot, 'canonical/canonical-question-groups-v1.json')),
+    readJson(path.join(canaryRoot, 'source-layout-measurement-v1.json')),
   ])
   const confirmedSelection = confirmVisualImportCandidate(
     candidatePackage,
@@ -529,26 +710,33 @@ export async function materializeQ33OptionFigureCanary() {
     mediaDocuments,
   })
   const plan = makeSuccessorPlan(basePlan, authority.closure)
-  const projected = projectCanonicalPaper({
+  const figureLayoutIntent = sourceFigureLayoutIntent(
+    visualSourceCapture,
+    selections,
+    sourceLayoutMeasurement,
+  )
+  const projected = bindFigureLayoutRequirement(projectCanonicalPaper({
     plan,
     groups,
     sourceCapture,
     authorityClosure: authority.closure,
-  })
+  }), figureLayoutIntent)
   const screenConsumption = makeConsumption({
     projected,
     sourceCapture,
     plan,
     consumerId: 'screen',
+    figureLayoutIntent,
   })
   const printConsumption = makeConsumption({
     projected,
     sourceCapture,
     plan,
     consumerId: 'print_pdf',
+    figureLayoutIntent,
   })
   const canonicalGroup = groups.find((group) => group.identity.groupId === groupId)
-  const policy = assetFramingPolicy(confirmedSelection)
+  const policy = assetFramingPolicy(confirmedSelection, figureLayoutIntent)
   const canaryManifestBase = {
     schemaVersion: 'q33-option-figure-canary-v1',
     paperId,
@@ -557,6 +745,8 @@ export async function materializeQ33OptionFigureCanary() {
     authorityRef: structuredClone(readingOptionFigureAuthorityRef),
     candidatePackageDigest: confirmedSelection.candidatePackageDigest,
     confirmationDigest: confirmedSelection.confirmationDigest,
+    sourceLayoutIntentDigest: figureLayoutIntent.intentDigest,
+    sourceLayoutMeasurementDigest: sourceLayoutMeasurement.measurementDigest,
     assetFramingPolicyDigest: digestJson(policy),
     canonicalGroupDigest: digestJson(canonicalGroup),
     screenConsumptionDigest: digestJson(screenConsumption),
@@ -580,6 +770,7 @@ export async function materializeQ33OptionFigureCanary() {
     policy,
     canonicalGroup,
     sourceCapture,
+    sourceLayoutMeasurement,
     screenConsumption,
     printConsumption,
     canaryManifest,

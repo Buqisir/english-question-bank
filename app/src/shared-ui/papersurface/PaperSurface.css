@@ -765,6 +765,47 @@ button.ps-paper-blank.ps-paper-blank--clickable {
   object-position: center;
 }
 
+/* A source-measured Figure bank remains renderer-owned markup, but its
+   physical positions come from the immutable source PDF rather than from the
+   generic equal-track comparison layout. */
+.ps-option-list.ps-option-list--figure-source-measured {
+  position: relative;
+  display: block;
+  width: var(--ps-figure-row-width);
+  min-width: var(--ps-figure-row-width);
+  height: var(--ps-figure-bank-height);
+}
+
+.ps-option.ps-option--figure-source-measured {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ps-option--figure-source-measured .ps-option-label--figure {
+  position: absolute;
+  top: var(--ps-figure-source-label-top);
+  left: var(--ps-figure-source-label-left);
+  width: auto;
+  line-height: var(--ps-figure-label-line-height);
+}
+
+.ps-option--figure-source-measured .ps-option-figure-box {
+  position: absolute;
+  top: var(--ps-figure-source-image-top);
+  left: var(--ps-figure-source-image-left);
+  width: var(--ps-figure-source-image-width);
+  height: var(--ps-figure-source-image-height);
+  max-height: none;
+  aspect-ratio: auto;
+}
+
+.ps-option--figure-source-measured .ps-option-figure-image {
+  object-fit: fill;
+}
+
 .ps-option-label {
   font-weight: 700;
 }

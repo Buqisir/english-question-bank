@@ -30,7 +30,16 @@ or placement.
       repair.
 - [x] Figure Options use four equal tracks, consistent label placement, one
       candidate-independent image box, preserved aspect ratio, centered
-      content, and no crop or stretch.
+      content, and no crop or stretch for the generic fallback fixture.
+- [x] An exact source-measured option-set intent may replace that fallback with
+      source PDF point geometry. Screen and Print/PDF consume the same intent;
+      no surface or per-paper stylesheet reconstructs it independently.
+- [x] Source-measured mode reproduces the source PDF XObject matrix, including
+      source-authored non-uniform X/Y scale. `fill` expresses that admitted
+      matrix; consumers may not add another crop, stretch, or geometry rewrite.
+- [x] The source-measured requirement is carried by the projected Figure
+      Question under the versioned Consumer Contract extension. Removing both
+      legacy top-level binding fields still makes Screen and Print/PDF reject.
 - [x] Physical layout intent is versioned once for the option set and does not
       map raw pixel dimensions directly to CSS pixels or PDF points.
 - [x] Natural internal whitespace is preserved when source-backed; the
@@ -61,11 +70,34 @@ or placement.
 
 - Candidate generation, teacher selection, or import workflow changes beyond
   consuming Ticket 02's projection.
-- Per-paper CSS or geometry tuned for Shenzhen Question 33.
+- Per-paper CSS tuned for Shenzhen Question 33. Source-bound physical geometry
+  carried as validated option-set data is allowed and remains a shared seam.
 - Public SVG, animation, interactive diagrams, captions, or mixed Option modes.
 - Production publication, deployment, R2 mutation, or repository push.
 
 ## Result
+
+### Owner source-layout correction
+
+- The generic equal-track fixture remains unchanged and still proves the
+  fallback contract. Consumer Contract v3 adds one closed source-layout
+  extension: the projected Figure Question carries its digest-bound
+  requirement and the consumption carries the matching
+  `reading-option-figure-source-layout-intent-v1`. The shared translator
+  projects it through PaperSurface and Print/PDF without a Q33 selector or
+  per-paper CSS.
+- A valid source intent binds one Question, four ordered Option identities,
+  source spans, A–D text positions, and exact PDF XObject matrices. A required
+  intent that is missing, duplicate, tampered, incomplete, or out of bounds
+  fails closed; a generic Figure Question with no requirement continues to
+  select the equal-track layout.
+- Immutable schema authority v47 and renderer authority v48 keep the new
+  Screen v39 / Print-PDF v40 contract refs closed without a digest cycle. The
+  earlier comparison package's exact v47 layout authority remains registered
+  as a historical closure instead of silently rewriting its evidence ref.
+- This correction implements the Owner ruling: the production canary follows
+  the original PDF placement; differently shaped boxes remain diagnostic asset
+  exercises and are not visual acceptance authority.
 
 Implemented on `codex/sfvi-ticket-03` in this one-line implementation commit.
 

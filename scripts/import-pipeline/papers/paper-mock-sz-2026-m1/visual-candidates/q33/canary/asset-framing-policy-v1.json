@@ -4,7 +4,7 @@
   "questionId": "q-mock-sz-2026-m1-033",
   "candidatePackageDigest": "sha256:53d29f20c9bd6ad1b1c0138e030f679ebfad2cf945c7e85eb3bd5ed89881d7b8",
   "confirmationDigest": "sha256:7356ca553f2f75f8ded71c80b56d5033ec2e20bb54e575156cb0c6f2e054ea76",
-  "principle": "The asset owns complete source-authored figure pixels; the renderer owns every placement decision.",
+  "principle": "The asset owns complete source-authored figure pixels; the source layout intent owns source-authored placement; every renderer projects that intent.",
   "contentEnvelope": {
     "kind": "exact_pdf_embedded_image_extent",
     "includes": [
@@ -24,14 +24,11 @@
   },
   "rendererOwnership": {
     "controls": [
-      "physical target size",
-      "four-track placement",
-      "alignment",
       "responsive fit-down",
       "print pagination"
     ],
-    "invariant": "preserve aspect ratio with contain; never crop, stretch, rotate, relabel, or reinterpret the selected asset",
-    "portabilityLimit": "Portable means reusable in renderer-owned boxes at a legible size, not permission to change orientation, aspect ratio, or semantic whitespace."
+    "invariant": "project the source-measured label geometry and source PDF image matrices exactly at normal paper size, including source-authored X/Y scale; never add consumer crop, stretch, rotation, relabeling, or semantic reinterpretation",
+    "portabilityLimit": "The crop remains reusable as an asset, but the Shenzhen canary paper placement is the measured source PDF placement rather than a generic comparison box."
   },
   "selectedAssets": [
     {
@@ -67,21 +64,102 @@
       "pixelHeight": 105
     }
   ],
-  "placementProofIntent": [
-    {
-      "name": "canonical",
-      "widthPt": 96,
-      "heightPt": 60
+  "sourceLayoutIntent": {
+    "schemaVersion": "reading-option-figure-source-layout-intent-v1",
+    "questionId": "q-mock-sz-2026-m1-033",
+    "sourcePage": 4,
+    "coordinateSystem": "question_content_box_pt",
+    "measurementEvidence": {
+      "kind": "digest_bound_external_evidence",
+      "evidenceSchemaVersion": "q33-source-layout-measurement-v1",
+      "evidenceDigest": "sha256:dfb4bb796ca39f7b6381b8954642a8060cde36044dcd01eeae2433bb142ffffc",
+      "sourceDocumentSha256": "sha256:df0c4e0a0d1aee4557f122591e3b778d7b48f2f324d75dba120343bb00926c80"
     },
-    {
-      "name": "compact_square",
-      "widthPt": 54,
-      "heightPt": 54
-    },
-    {
-      "name": "large_portrait",
-      "widthPt": 72,
-      "heightPt": 96
-    }
-  ]
+    "rowStartPt": 24,
+    "rowWidthPt": 369.72,
+    "bankHeightPt": 56.12,
+    "labelFontSizePt": 10.5,
+    "labelLineHeightPt": 16,
+    "stemToBankGapPt": 4.5,
+    "questionTailGapPt": 9,
+    "placements": [
+      {
+        "optionId": "option:q-mock-sz-2026-m1-033:A",
+        "label": "A",
+        "sourceSpanId": "source-span:observation:paper-mock-sz-2026-m1:q33:option:A",
+        "sourcePlacementMatrix": [
+          20.52,
+          0,
+          0,
+          -51.48,
+          74.64,
+          658.56
+        ],
+        "labelLeftPt": 0,
+        "labelTopPt": 40.12,
+        "imageLeftPt": 14.64,
+        "imageTopPt": 1.2,
+        "imageWidthPt": 20.52,
+        "imageHeightPt": 51.48
+      },
+      {
+        "optionId": "option:q-mock-sz-2026-m1-033:B",
+        "label": "B",
+        "sourceSpanId": "source-span:observation:paper-mock-sz-2026-m1:q33:option:B",
+        "sourcePlacementMatrix": [
+          24.6,
+          0,
+          0,
+          -51.96,
+          194.04,
+          658.56
+        ],
+        "labelLeftPt": 120,
+        "labelTopPt": 40.12,
+        "imageLeftPt": 134.04,
+        "imageTopPt": 0.72,
+        "imageWidthPt": 24.6,
+        "imageHeightPt": 51.96
+      },
+      {
+        "optionId": "option:q-mock-sz-2026-m1-033:C",
+        "label": "C",
+        "sourceSpanId": "source-span:observation:paper-mock-sz-2026-m1:q33:option:C",
+        "sourcePlacementMatrix": [
+          22.08,
+          0,
+          0,
+          -51.96,
+          314.04,
+          657.84
+        ],
+        "labelLeftPt": 240,
+        "labelTopPt": 40.12,
+        "imageLeftPt": 254.04,
+        "imageTopPt": 0,
+        "imageWidthPt": 22.08,
+        "imageHeightPt": 51.96
+      },
+      {
+        "optionId": "option:q-mock-sz-2026-m1-033:D",
+        "label": "D",
+        "sourceSpanId": "source-span:observation:paper-mock-sz-2026-m1:q33:option:D",
+        "sourcePlacementMatrix": [
+          19.56,
+          0,
+          0,
+          -51.96,
+          410.16,
+          659.52
+        ],
+        "labelLeftPt": 336,
+        "labelTopPt": 40.12,
+        "imageLeftPt": 350.16,
+        "imageTopPt": 1.68,
+        "imageWidthPt": 19.56,
+        "imageHeightPt": 51.96
+      }
+    ],
+    "intentDigest": "sha256:00510ed5e5b5300b3d6723ca8da6bb8fbec32181ca13e2ac29ef618d4cf9a95d"
+  }
 }

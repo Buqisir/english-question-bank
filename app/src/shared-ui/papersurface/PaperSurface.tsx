@@ -1428,7 +1428,7 @@ function PaperSurfaceOptionList({
         tabIndex={0}
       >
         <ol
-          className="ps-option-list ps-option-list--figure"
+          className={`ps-option-list ps-option-list--figure${figurePlacement.mode === 'figure_source_measured' ? ' ps-option-list--figure-source-measured' : ''}`}
           data-canonical-layout-id={figurePlacement.layoutId}
           data-canonical-layout-version={figurePlacement.layoutVersion}
           data-canonical-layout-digest={figurePlacement.layoutDigest}
@@ -1437,14 +1437,29 @@ function PaperSurfaceOptionList({
         >
           {options.map((option, index) => {
             if (option.kind !== 'figure') return null
+            const sourcePlacement = figurePlacement.mode === 'figure_source_measured'
+              ? figurePlacement.placements[index]
+              : undefined
+            const sourceStyle = sourcePlacement
+              ? {
+                  '--ps-figure-source-label-left': `${sourcePlacement.labelLeftPt}pt`,
+                  '--ps-figure-source-label-top': `${sourcePlacement.labelTopPt}pt`,
+                  '--ps-figure-source-image-left': `${sourcePlacement.imageLeftPt}pt`,
+                  '--ps-figure-source-image-top': `${sourcePlacement.imageTopPt}pt`,
+                  '--ps-figure-source-image-width': `${sourcePlacement.imageWidthPt}pt`,
+                  '--ps-figure-source-image-height': `${sourcePlacement.imageHeightPt}pt`,
+                } as CSSProperties
+              : undefined
             return (
               <li
                 key={`${questionId}-${option.label}`}
-                className="ps-option ps-option--figure"
+                className={`ps-option ps-option--figure${sourcePlacement ? ' ps-option--figure-source-measured' : ''}`}
                 {...{ [paperSurfaceAnchorAttrs.optionLabel]: option.label }}
                 data-canonical-option-id={canonicalOptionIds?.[index]}
                 data-canonical-media-id={option.figure.mediaId}
                 data-canonical-media-sha256={option.figure.sha256}
+                data-canonical-source-span-id={sourcePlacement?.sourceSpanId}
+                style={sourceStyle}
               >
                 <span className="ps-option-label ps-option-label--figure" aria-hidden="true">
                   {option.label}.
@@ -1581,6 +1596,7 @@ function figureOptionPlacementStyle(
     '--ps-figure-box-height': `${figurePlacement.imageBoxHeightPt}pt`,
     '--ps-figure-box-aspect':
       `${figurePlacement.imageBoxWidthPt} / ${figurePlacement.imageBoxHeightPt}`,
+    '--ps-figure-bank-height': `${figurePlacement.bankHeightPt ?? 0}pt`,
     '--ps-figure-stem-gap': `${figurePlacement.stemToBankGapPt}pt`,
     '--ps-figure-label-gap': `${figurePlacement.labelToBoxGapPt}pt`,
     '--ps-figure-tail-gap': `${figurePlacement.questionTailGapPt}pt`,

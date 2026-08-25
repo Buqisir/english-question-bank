@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "consumer-contract-v3",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "consumerId",
+    "version",
+    "authorityManifestDigest",
+    "projectorVersion",
+    "families",
+    "renderingExtensions",
+    "contractDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "consumer-contract-v3"
+    },
+    "consumerId": {
+      "enum": [
+        "screen",
+        "print_pdf"
+      ]
+    },
+    "version": {
+      "type": "string"
+    },
+    "authorityManifestDigest": {
+      "type": "string"
+    },
+    "projectorVersion": {
+      "const": "canonical-projector-v1"
+    },
+    "families": {
+      "type": "array"
+    },
+    "renderingExtensions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "extensionId",
+          "version",
+          "binding",
+          "requirementSchemaRef",
+          "intentSchemaRef"
+        ],
+        "properties": {
+          "extensionId": {
+            "const": "reading-option-figure-source-layout"
+          },
+          "version": {
+            "const": "1"
+          },
+          "binding": {
+            "const": "projected_question_requirement_to_consumption_intent_digest"
+          },
+          "requirementSchemaRef": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "authorityManifestId",
+              "authorityManifestVersion",
+              "authorityManifestDigest",
+              "schemaId",
+              "schemaDigest"
+            ],
+            "properties": {
+              "authorityManifestId": {
+                "const": "paper-canonical"
+              },
+              "authorityManifestVersion": {
+                "const": "47"
+              },
+              "authorityManifestDigest": {
+                "type": "string"
+              },
+              "schemaId": {
+                "const": "reading-option-figure-source-layout-requirement-v1"
+              },
+              "schemaDigest": {
+                "type": "string"
+              }
+            }
+          },
+          "intentSchemaRef": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "authorityManifestId",
+              "authorityManifestVersion",
+              "authorityManifestDigest",
+              "schemaId",
+              "schemaDigest"
+            ],
+            "properties": {
+              "authorityManifestId": {
+                "const": "paper-canonical"
+              },
+              "authorityManifestVersion": {
+                "const": "47"
+              },
+              "authorityManifestDigest": {
+                "type": "string"
+              },
+              "schemaId": {
+                "const": "reading-option-figure-source-layout-intent-v1"
+              },
+              "schemaDigest": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "contractDigest": {
+      "type": "string"
+    }
+  }
+}
