@@ -57,12 +57,14 @@ reload；Screen、Student/Teacher Print 和 PDF 继续消费同一份 Canonical 
 形状符合已接受的通用 Figure Option 合同时，才使用现有 generic layout。任何新
 视觉所有权、混合 Option 模式或无法证明的裁剪都 fail closed。
 
-首个实现用两项现有真实证据证明泛化，而不再做第三套共享合同：深圳 Q33 通过
+首个实现先用两项现有真实证据证明兼容，而不再做第三套共享合同：深圳 Q33 通过
 通用 Job 重演 exact source-crop、Teacher Confirmation、Canonical media 和原 PDF
 摆放，不再依赖 Q33 专属 materializer；`paper-2026-i` 通过同一 Job 重演一套完整
-格式②整卷的结构、答案、听力、表格/figure、Canonical 和本地消费。完成之后，
-再导一套同形状格式②新卷只新增 per-paper 数据与 source evidence，不新增共享
-代码、CSS、renderer authority 或逐卷 verifier。
+格式②整卷的结构、答案、听力、表格/figure、Canonical 和本地消费。兼容证明完成
+后，第一张真正的新卷固定为山东济宁 2026 一模
+`paper-mock-sd-jining-2026-m1`。它必须从未导入的 PDF source pair 起跑，只新增
+per-paper 数据与 source evidence，不新增共享代码、CSS、renderer authority 或
+逐卷 verifier；否则本 spec 的 Agent 化目标未完成。
 
 ## User Stories
 
@@ -160,24 +162,27 @@ reload；Screen、Student/Teacher Print 和 PDF 继续消费同一份 Canonical 
     materializer, so that the first canary becomes proof rather than precedent.
 42. As a developer, I want `paper-2026-i` replayed through the same Job, so that
     whole-paper orchestration is proved beyond one Figure Option.
-43. As a developer, I want novel schema, ownership, source format, or renderer
+43. As a developer, I want `paper-mock-sd-jining-2026-m1` imported from scratch
+    after parity, so that genericity is proved on a paper that has never had a
+    registry entry or materializer.
+44. As a developer, I want novel schema, ownership, source format, or renderer
     behavior to fail closed into a shared-contract task, so that data addition
     and shared change remain distinct.
-44. As a reviewer, I want initial module changes tested at the public Job seam,
+45. As a reviewer, I want initial module changes tested at the public Job seam,
     so that implementation refactors do not rewrite the behavior contract.
-45. As a reviewer, I want subsequent same-shape papers verified by narrow
+46. As a reviewer, I want subsequent same-shape papers verified by narrow
     deterministic checks and one real canary, so that safety cost is paid once.
-46. As a maintainer, I want obsolete paper-specific registries and materializers
+47. As a maintainer, I want obsolete paper-specific registries and materializers
     removed after parity is proved, so that the new module produces net
     locality rather than another layer.
-47. As a maintainer, I want no website import UI or runtime model endpoint, so
+48. As a maintainer, I want no website import UI or runtime model endpoint, so
     that production remains consume-only.
-48. As a maintainer, I want no new status database, so that the existing folder
+49. As a maintainer, I want no new status database, so that the existing folder
     interface remains the durable operational record.
-49. As a maintainer, I want source passages and answer contents excluded from
+50. As a maintainer, I want source passages and answer contents excluded from
     status receipts and planning documents, so that evidence stays in its
     bounded paper package.
-50. As an operator, I want the Job to stop after local publication and QA
+51. As an operator, I want the Job to stop after local publication and QA
     preparation, so that production shipping still requires separate current
     owner authorization.
 
@@ -379,6 +384,31 @@ reload；Screen、Student/Teacher Print 和 PDF 继续消费同一份 Canonical 
   renderer behavior, authority version, or publication write pattern escalates
   out of the data-addition lane before mutation.
 
+### 16. Fixed new-paper canary
+
+- The first new-paper canary is the 2025–2026 first-semester Jining Senior 3
+  quality test, identified as `paper-mock-sd-jining-2026-m1`.
+- Its admitted Format② source pair is the 10-page question PDF
+  `26.1山东济宁高三上期末（济宁一模）英语试卷.pdf`, SHA-256
+  `fb46ee94a04b28d4ee45ac2fe3d435b10c3323f7002d1abebbfdb0e53328837c`,
+  and the independent 8-page answer PDF
+  `26.1山东济宁高三上期末（济宁一模）英语答案解析.pdf`, SHA-256
+  `5a8d157ff1ba12f68a32d605b2635a911447f4fa8e302619f84b476a35d74380`.
+- Matching question and answer DOCX files may be used as bounded transcription
+  and layout cross-check evidence. They are not admitted source authority, do
+  not turn this Job into Format③, and cannot override either PDF.
+- The question PDF includes a Reading A exercise layout with embedded imagery,
+  two homogeneous A–D Reading Figure Option sets at Questions 29 and 35, and a
+  writing-prompt poster. These exercise existing table/`framed_columns`,
+  Passage Figure, Reading Figure Option, and writing-material routes without
+  granting a new owner kind or renderer behavior.
+- The new-paper run begins only after Shenzhen Q33 and `paper-2026-i` parity is
+  proved. It must complete through the same public Job seam with zero Jining-
+  specific shared source, CSS, authority, materializer, or verifier changes.
+- If any Jining object does not fit an accepted route, the Job records the exact
+  novel shape and stops. The implementation may not weaken this requirement or
+  quietly flatten the object merely to finish the canary.
+
 ## Testing Decisions
 
 ### Test philosophy
@@ -451,11 +481,31 @@ reload；Screen、Student/Teacher Print 和 PDF 继续消费同一份 Canonical 
 - The parity test must not publish production data or replace the developer's
   live database; it uses an isolated local store and exact source identities.
 
+### Fixed new-paper canary
+
+- After both parity canaries pass, import `paper-mock-sd-jining-2026-m1` from
+  its exact admitted PDF pair with no pre-existing registry row, materializer,
+  Canonical package, or Teacher Confirmation.
+- Validate complete objective-answer coverage, the normal text groups,
+  listening and writing material, the Reading A structured exercise layout,
+  Questions 29 and 35 as independent homogeneous A–D Figure Option sets, and
+  the writing-prompt poster through their already accepted routes.
+- Every admitted visual retains exact source bytes or a source-region crop,
+  PDF page/point geometry, stable semantic ownership, and normal-size
+  source-crop-first Teacher Confirmation. Question numbers and A–D labels
+  remain renderer text rather than part of flattened Option strips.
+- The run reaches an exact local committed reload and prepared Screen, Student
+  Print, Teacher Print, and PDF QA state. It stops before Owner QA acceptance,
+  production publication, or shipping.
+- The canary fails the spec if completing it requires any Jining-specific
+  shared implementation or if a pre-existing paper package is used as a hidden
+  input.
+
 ### No-paper-code conformance
 
 - A verifier proves that the two parity papers and one synthetic fixture are
   selected through data identity, not paperId branches in shared modules.
-- Adding a third same-shape fixture requires only a new per-paper artifact and
+- Adding the fixed Jining new paper requires only its per-paper artifact and
   source evidence. The test fails if shared implementation, renderer CSS,
   authority, or a paper-specific verifier must change.
 - Once parity is proved, supported old registry/materializer paths are removed;
@@ -464,8 +514,9 @@ reload；Screen、Student/Teacher Print 和 PDF 继续消费同一份 Canonical 
 
 ### Rendered behavior and Owner QA
 
-- One actual-paper canary proves the prepared Screen, Student Print, Teacher
-  Print, and browser-generated PDF at normal size.
+- The Jining new-paper canary proves the prepared Screen, Student Print,
+  Teacher Print, and browser-generated PDF at normal size; parity replay alone
+  is not sufficient for this gate.
 - Student output contains no answer or Analysis leakage. Teacher output carries
   the admitted answer behavior without changing confirmed media.
 - The Job prepares exact service, paperId, URL, first focus state, Print views,
@@ -531,6 +582,9 @@ reload；Screen、Student/Teacher Print 和 PDF 继续消费同一份 Canonical 
   not repeat its schema, renderer, authority, full-suite, and review work.
 - Q33-specific scripts and evidence are valuable parity oracles. They are not
   the target interface for the next paper.
+- The Jining source pair is now the fixed next-paper evidence. Replacing it with
+  another already-imported paper would test compatibility again, not the
+  promised no-paper-code path.
 - The implementation should create net locality: after canary parity, deleting
   the new Import Job should make orchestration complexity reappear across many
   call sites; deleting a legacy per-paper materializer should not remove any
