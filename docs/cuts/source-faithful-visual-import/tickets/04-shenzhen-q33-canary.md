@@ -110,7 +110,16 @@ release action, merge, or content push was performed.
   `visual-candidates/q33/visual-teacher-confirmation-v1.json`, digest
   `sha256:7356ca553f2f75f8ded71c80b56d5033ec2e20bb54e575156cb0c6f2e054ea76`.
   It compiles the local canary digest
-  `sha256:2f83bb97b8b0cec48070309f351edfe7f2c33af39b8591131ed285063aa0b526`.
+  `sha256:6d9b2e4fbf42d6a726f3acf4edf3238fff93d54e985859afbd5274da8942ee2d`.
+- Owner QA identified two PDF-extraction spacing artifacts in the Reading D
+  Chinese glosses. The deterministic passage normalizer now materializes them
+  as `(电荷分离),` and `(水力发电)` across Screen, Print, and PDF; it does not use
+  CSS letter-spacing or change the source-measured Q33 figure layout.
+- Follow-up `pnpm -C app verify:changed`: `PASS 146 / SKIP 1 / FAIL 1`.
+  The literal SKIP remains the absent off-repo teaching-dimension fixture; the
+  sole FAIL remains the unrelated `genre-truth` local-DB coverage gap. The
+  registered historical Teacher Confirmation replay, focused Q33 canary, and
+  live QA page all pass; the page retains exactly four figure images.
 - The canary has one literal Question 33 stem, four stable Option identities,
   four Option-owned PNGs, renderer-owned A–D labels, zero `[Fig.]`, and no
   detached whole-strip Passage Figure. Its source-backed answer remains D.

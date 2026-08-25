@@ -108,6 +108,14 @@ assert.equal(canary.canonicalGroup.contractRef.manifestVersion, '46')
 assert.equal(canary.canonicalGroup.media.length, 4)
 assert.equal(stableStringify(canary.canonicalGroup).includes('[Fig.]'), false)
 assert.equal(stableStringify(canary.canonicalGroup).includes('reading-d-q33.png'), false)
+const canonicalPassageText = canary.canonicalGroup.content.blocks
+  .flatMap((block) => block.inlines || [])
+  .map((inline) => inline.text || '')
+  .join('\n')
+assert.equal(canonicalPassageText.includes('(电荷分离), a process'), true)
+assert.equal(canonicalPassageText.includes('(水力发电) relies'), true)
+assert.equal(canonicalPassageText.includes('( 电 荷 分 离 )'), false)
+assert.equal(canonicalPassageText.includes('(水力 发电)'), false)
 
 const canonicalQuestion = canary.canonicalGroup.variant.questions.find(
   (question) => question.questionId === questionId,

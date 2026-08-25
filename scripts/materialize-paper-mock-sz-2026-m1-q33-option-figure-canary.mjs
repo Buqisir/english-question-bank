@@ -19,6 +19,10 @@ import {
   stableStringify,
 } from '../shared/paper-canonical/stable.mjs'
 import { confirmVisualImportCandidate } from '../server/paper-canonical/visualCandidate.mjs'
+import {
+  normalizeCjkGlossExtractionSpacing,
+  normalizePassageText,
+} from '../server/paper-import-ai/normalizePassageText.mjs'
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const paperId = 'paper-mock-sz-2026-m1'
@@ -262,6 +266,28 @@ function sourceFingerprint(group, sourceCapture) {
   })
 }
 
+function normalizeQ33ReadingGlosses(readingGroup) {
+  const changedNodeIds = []
+  for (const block of readingGroup.content.blocks) {
+    for (const inline of block.inlines || []) {
+      if (inline.kind !== 'text' || typeof inline.text !== 'string') continue
+      const normalized = normalizeCjkGlossExtractionSpacing(
+        normalizePassageText(inline.text),
+      )
+      if (normalized === inline.text) continue
+      inline.text = normalized
+      changedNodeIds.push(inline.nodeId)
+    }
+  }
+  const expectedNodeIds = [
+    'text:para-mock-sz-2026-m1-reading-d-1:0',
+    'text:para-mock-sz-2026-m1-reading-d-2:0',
+  ]
+  if (stableStringify(changedNodeIds) !== stableStringify(expectedNodeIds)) {
+    throw new Error('Q33 CJK-gloss normalization changed an unexpected content node')
+  }
+}
+
 function makeSuccessorGroups({ baseGroups, closure, sourceCapture, selections, mediaDocuments }) {
   const groups = structuredClone(baseGroups)
   for (const group of groups) {
@@ -294,6 +320,7 @@ function makeSuccessorGroups({ baseGroups, closure, sourceCapture, selections, m
   }
   const readingGroup = groups.find((group) => group.identity.groupId === groupId)
   if (!readingGroup) throw new Error('Current Shenzhen Reading D group is missing')
+  normalizeQ33ReadingGlosses(readingGroup)
   const set = readingGroup.variant.choiceOwnership.sets.find(
     (candidate) => candidate.questionId === questionId,
   )

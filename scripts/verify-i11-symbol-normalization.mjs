@@ -22,7 +22,10 @@
  *    passage still indexOf-matches after normalization.
  */
 
-import { normalizePassageText } from '../server/paper-import-ai/normalizePassageText.mjs'
+import {
+  normalizeCjkGlossExtractionSpacing,
+  normalizePassageText,
+} from '../server/paper-import-ai/normalizePassageText.mjs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -60,6 +63,11 @@ function eq(label, input, expected) {
 
 function unchanged(label, input) {
   eq(label, input, input)
+}
+
+function eqGlossExtraction(label, input, expected) {
+  const actual = normalizeCjkGlossExtractionSpacing(input)
+  assert(label, actual === expected, `input: ${JSON.stringify(input)} → got: ${JSON.stringify(actual)}, want: ${JSON.stringify(expected)}`)
 }
 
 /* ─── Rule 1: Full-width → half-width in English context ─────────────── */
@@ -170,6 +178,36 @@ eq(
   'R3: photosynthesis（光合作用）process (rule 1 + 3 compose) → photosynthesis (光合作用) process',
   'photosynthesis（光合作用）process',
   'photosynthesis (光合作用) process',
+)
+
+eqGlossExtraction(
+  'R3 opt-in: extraction spaces inside an all-CJK gloss are removed',
+  'charge separation ( 电 荷 分 离 ) , a process',
+  'charge separation (电荷分离), a process',
+)
+
+eqGlossExtraction(
+  'R3 opt-in: extraction space inside a compact CJK gloss is removed',
+  'Conventional hydropower (水力 发电) relies',
+  'Conventional hydropower (水力发电) relies',
+)
+
+eqGlossExtraction(
+  'R3 opt-in: mixed-language gloss interior spacing is retained',
+  'the (版本 A) label',
+  'the (版本 A) label',
+)
+
+eqGlossExtraction(
+  'R3 opt-in: mixed-language gloss punctuation spacing is retained',
+  'the (版本 A) , label',
+  'the (版本 A) , label',
+)
+
+eqGlossExtraction(
+  'R3 opt-in: repair is idempotent',
+  'charge separation (电荷分离), a process',
+  'charge separation (电荷分离), a process',
 )
 
 unchanged(

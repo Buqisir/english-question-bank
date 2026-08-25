@@ -2421,7 +2421,7 @@
                   {
                     "kind": "text",
                     "nodeId": "text:para-mock-sz-2026-m1-reading-d-1:0",
-                    "text": "When you rub (摩擦) a balloon on your skin, it produces electricity—a familiar example of charge separation ( 电 荷 分 离 ) , a process in which opposite charges are separated, creating electric potential. Similarly, raindrops striking a narrow tube create a tiny yet significant burst of energy. Now, researchers from the National University of Singapore (NUS) have tapped into this effect to generate electricity using rain-like droplets."
+                    "text": "When you rub (摩擦) a balloon on your skin, it produces electricity—a familiar example of charge separation (电荷分离), a process in which opposite charges are separated, creating electric potential. Similarly, raindrops striking a narrow tube create a tiny yet significant burst of energy. Now, researchers from the National University of Singapore (NUS) have tapped into this effect to generate electricity using rain-like droplets."
                   }
                 ],
                 "kind": "paragraph",
@@ -2432,7 +2432,7 @@
                   {
                     "kind": "text",
                     "nodeId": "text:para-mock-sz-2026-m1-reading-d-2:0",
-                    "text": "Conventional hydropower (水力 发电) relies on large water flows, which only work in places like rivers. For smaller, slower flows, researchers have explored charge separation. They use a tube to let water flow through it continuously. Charges gather on the surface that the water touches. In this way, researchers can collect charges, but it is far from effective."
+                    "text": "Conventional hydropower (水力发电) relies on large water flows, which only work in places like rivers. For smaller, slower flows, researchers have explored charge separation. They use a tube to let water flow through it continuously. Charges gather on the surface that the water touches. In this way, researchers can collect charges, but it is far from effective."
                   }
                 ],
                 "kind": "paragraph",
@@ -2695,7 +2695,7 @@
                 {
                   "kind": "text",
                   "nodeId": "text:para-mock-sz-2026-m1-reading-d-1:0",
-                  "text": "When you rub (摩擦) a balloon on your skin, it produces electricity—a familiar example of charge separation ( 电 荷 分 离 ) , a process in which opposite charges are separated, creating electric potential. Similarly, raindrops striking a narrow tube create a tiny yet significant burst of energy. Now, researchers from the National University of Singapore (NUS) have tapped into this effect to generate electricity using rain-like droplets."
+                  "text": "When you rub (摩擦) a balloon on your skin, it produces electricity—a familiar example of charge separation (电荷分离), a process in which opposite charges are separated, creating electric potential. Similarly, raindrops striking a narrow tube create a tiny yet significant burst of energy. Now, researchers from the National University of Singapore (NUS) have tapped into this effect to generate electricity using rain-like droplets."
                 }
               ],
               "kind": "paragraph",
@@ -2706,7 +2706,7 @@
                 {
                   "kind": "text",
                   "nodeId": "text:para-mock-sz-2026-m1-reading-d-2:0",
-                  "text": "Conventional hydropower (水力 发电) relies on large water flows, which only work in places like rivers. For smaller, slower flows, researchers have explored charge separation. They use a tube to let water flow through it continuously. Charges gather on the surface that the water touches. In this way, researchers can collect charges, but it is far from effective."
+                  "text": "Conventional hydropower (水力发电) relies on large water flows, which only work in places like rivers. For smaller, slower flows, researchers have explored charge separation. They use a tube to let water flow through it continuously. Charges gather on the surface that the water touches. In this way, researchers can collect charges, but it is far from effective."
                 }
               ],
               "kind": "paragraph",
@@ -3018,7 +3018,7 @@
         },
         {
           "groupId": "group-mock-sz-2026-m1-reading-d",
-          "digest": "sha256:5933da22676ebab50613434421025ae799a8c2e3f19a0f007246641f31c71743"
+          "digest": "sha256:12cd542d34444bcaf2f025f2c48bb5f21aa79800ae19bede25a9992e43393f0a"
         }
       ]
     },

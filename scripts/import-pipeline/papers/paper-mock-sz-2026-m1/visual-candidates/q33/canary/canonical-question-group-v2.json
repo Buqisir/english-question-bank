@@ -7,7 +7,7 @@
           {
             "kind": "text",
             "nodeId": "text:para-mock-sz-2026-m1-reading-d-1:0",
-            "text": "When you rub (摩擦) a balloon on your skin, it produces electricity—a familiar example of charge separation ( 电 荷 分 离 ) , a process in which opposite charges are separated, creating electric potential. Similarly, raindrops striking a narrow tube create a tiny yet significant burst of energy. Now, researchers from the National University of Singapore (NUS) have tapped into this effect to generate electricity using rain-like droplets."
+            "text": "When you rub (摩擦) a balloon on your skin, it produces electricity—a familiar example of charge separation (电荷分离), a process in which opposite charges are separated, creating electric potential. Similarly, raindrops striking a narrow tube create a tiny yet significant burst of energy. Now, researchers from the National University of Singapore (NUS) have tapped into this effect to generate electricity using rain-like droplets."
           }
         ],
         "kind": "paragraph",
@@ -18,7 +18,7 @@
           {
             "kind": "text",
             "nodeId": "text:para-mock-sz-2026-m1-reading-d-2:0",
-            "text": "Conventional hydropower (水力 发电) relies on large water flows, which only work in places like rivers. For smaller, slower flows, researchers have explored charge separation. They use a tube to let water flow through it continuously. Charges gather on the surface that the water touches. In this way, researchers can collect charges, but it is far from effective."
+            "text": "Conventional hydropower (水力发电) relies on large water flows, which only work in places like rivers. For smaller, slower flows, researchers have explored charge separation. They use a tube to let water flow through it continuously. Charges gather on the surface that the water touches. In this way, researchers can collect charges, but it is far from effective."
           }
         ],
         "kind": "paragraph",
@@ -117,7 +117,7 @@
     }
   ],
   "schemaVersion": "canonical-question-group-v2",
-  "semanticDigest": "sha256:7135d44cec0a3e7cef72266897b04cd7c4717164a83f4760a3e09d7f2bec6ba7",
+  "semanticDigest": "sha256:a66394a249690bec074de90e6e942a53567839c052163106d079a02d65b00ab5",
   "sourceFingerprint": "sha256:1f8a78d4964139ae2eb53fa87dbde6d2cf3b65a02ae88b3fc5ec2e5fbad03276",
   "sourceMap": {
     "captureId": "source-capture:d4ce720342b5d6369a766",

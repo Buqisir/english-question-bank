@@ -129,3 +129,24 @@ export function normalizePassageText(text) {
 
   return s
 }
+
+/**
+ * Opt-in repair for human-confirmed PDF extraction artifacts inside an all-CJK
+ * parenthetical gloss. Kept outside normalizePassageText() so immutable legacy
+ * Teacher Confirmations continue to re-derive byte-for-byte.
+ *
+ * @param {string} text
+ * @returns {string}
+ */
+export function normalizeCjkGlossExtractionSpacing(text) {
+  if (!text) return String(text || '')
+  return String(text)
+    .replace(
+      /\(([ \t\u3000一-鿿㐀-䶿豈-﫿]+)\)/g,
+      (_match, interior) => `(${interior.replace(/[ \t\u3000]+/g, '')})`,
+    )
+    .replace(
+      /\(([ \t\u3000一-鿿㐀-䶿豈-﫿]+)\)\s+([.,;:!?])/g,
+      '($1)$2',
+    )
+}
