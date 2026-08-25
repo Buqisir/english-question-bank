@@ -66,6 +66,15 @@
     border-radius: 8px; padding: 8px 10px; margin: 8px 0 0;
   }
   .err { color: var(--danger); }
+  .qa-request {
+    margin-top: 8px; padding: 9px 10px; border: 1px solid var(--line);
+    border-radius: 8px; background: #fff;
+  }
+  .qa-request code, .qa-exact code {
+    display: block; margin-top: 5px; white-space: pre-wrap; overflow-wrap: anywhere;
+    font: 11.5px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .qa-exact { margin-top: 8px; }
 </style>
 </head>
 <body>
@@ -129,6 +138,25 @@ function ghost(label, href) {
   return `<a class="ghost" href="${href}" target="_blank" rel="noreferrer">${label}</a>`
 }
 
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;')
+}
+
+function qaAction(label, entry) {
+  if (!entry || typeof entry === 'string') return ghost(label, entry)
+  return `
+    <div class="qa-request">
+      <a class="ghost" href="${escapeHtml(entry.href)}" target="_blank" rel="noreferrer">${escapeHtml(label)}</a>
+      <div class="meta">${escapeHtml(entry.method)} · ${escapeHtml(entry.mediaType)} · ${escapeHtml(entry.byteLength)} bytes</div>
+      <code>${escapeHtml(entry.sha256)}</code>
+    </div>`
+}
+
 function renderDetail() {
   const el = document.getElementById('detail')
   if (!selectedId) {
@@ -165,10 +193,14 @@ function renderDetail() {
         <p class="meta" style="margin:0 0 8px">看 Screen 预览和 Print；门禁一行绿灯。不对答案表。分析不设必过抽检。</p>
         <div class="links">
           ${ghost('Screen 预览', qa.screen)}
-          ${ghost('Student Print', qa.studentPrint)}
-          ${ghost('Teacher Print', qa.teacherPrint)}
           <span class="ghost" aria-disabled="true">${p.gatesGreen ? '门禁全绿' : '门禁未绿'}</span>
         </div>
+        ${qaAction('Student Print', qa.studentPrint)}
+        ${qaAction('Teacher Print', qa.teacherPrint)}
+        ${qaAction('PDF', qa.pdf)}
+        ${qa.service ? `<div class="qa-exact"><strong>Service</strong><code>${escapeHtml(qa.service.command)}</code><div class="meta">${escapeHtml(qa.service.appOrigin)}</div><code>${escapeHtml(qa.service.qaArtifactCommand || '')}</code><div class="meta">${escapeHtml(qa.service.qaArtifactOrigin || '')}</div></div>` : ''}
+        ${qa.firstFocusState ? `<div class="qa-exact"><strong>First focus state</strong><code>${escapeHtml(JSON.stringify(qa.firstFocusState))}</code></div>` : ''}
+        ${qa.gateSummary ? `<div class="qa-exact"><strong>Gate summary</strong><div class="meta">${escapeHtml(qa.gateSummary)}</div></div>` : ''}
         <p class="meta" style="margin:8px 0 0">${qa.note || ''}</p>
       </div>
       <div class="ship-box">

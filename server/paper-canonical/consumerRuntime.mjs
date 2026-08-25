@@ -1,4 +1,8 @@
-import { consumerContractRefs, resolveConsumerContract } from '../../shared/paper-canonical/consumers.mjs'
+import {
+  consumerContractRefs,
+  readingOptionFigureConsumerContractRefs,
+  resolveConsumerContract,
+} from '../../shared/paper-canonical/consumers.mjs'
 import {
   createFileSystemCanonicalPublicationStore,
   loadPaperForConsumptionSync,
@@ -42,6 +46,34 @@ function rejected(result) {
 function isActiveCanonicalItem(item) {
   return FAMILY_BY_GROUP_TYPE.has(item?.detail?.groupType)
     || ['writing', 'continuation'].includes(item?.detail?.groupType)
+}
+
+function currentPublicationUsesReadingOptionFigureAuthority(store, currentRef) {
+  if (!currentRef) return false
+  const bytes = store.readVersionArtifact(
+    currentRef,
+    'canonical/canonical-paper-publication-v46.json',
+  )
+  if (!bytes) return false
+  let manifest
+  try {
+    manifest = JSON.parse(new TextDecoder().decode(bytes))
+  } catch {
+    throw rejected({
+      disposition: 'incompatible',
+      diagnostics: [{ code: 'CANONICAL_PUBLICATION_MANIFEST_INVALID' }],
+    })
+  }
+  if (
+    manifest?.paperId !== currentRef.paperId
+    || manifest?.sourceAssetVersion !== currentRef.sourceAssetVersion
+    || manifest?.publicationDigest !== currentRef.publicationDigest
+    || manifest?.authority?.manifestVersion !== '46'
+  ) throw rejected({
+    disposition: 'incompatible',
+    diagnostics: [{ code: 'CANONICAL_PUBLICATION_REF_MISMATCH' }],
+  })
+  return true
 }
 
 export function canonicalSourceConsumptionForGroup(consumption, groupId) {
@@ -174,7 +206,14 @@ export function createCanonicalConsumerRuntime({ rootDir, db }) {
       disposition: 'incompatible',
       diagnostics: [{ code: 'CANONICAL_PUBLICATION_PAPER_ID_INVALID' }],
     })
-    const consumerContract = consumerContractRefs[consumerId]
+    const currentRef = store.readPublishedRefs(paperId).current
+    const contractSet = currentPublicationUsesReadingOptionFigureAuthority(
+      store,
+      currentRef,
+    )
+      ? readingOptionFigureConsumerContractRefs
+      : consumerContractRefs
+    const consumerContract = contractSet[consumerId]
     if (!consumerContract) throw rejected({
       disposition: 'incompatible',
       diagnostics: [{ code: 'CONSUMER_CONTRACT_UNAVAILABLE' }],

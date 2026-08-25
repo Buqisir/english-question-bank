@@ -2,14 +2,19 @@ import Ajv from 'ajv/dist/2020.js'
 import {
   closeSync,
   existsSync,
+  mkdtempSync,
   mkdirSync,
   openSync,
   readFileSync,
   renameSync,
+  rmSync,
+  unlinkSync,
   writeFileSync,
 } from 'node:fs'
 import path from 'node:path'
+import { tmpdir } from 'node:os'
 import { fileURLToPath } from 'node:url'
+import { DatabaseSync } from 'node:sqlite'
 
 import {
   cloneJson,
@@ -18,7 +23,31 @@ import {
   sha256,
   stableStringify,
 } from '../../../shared/paper-canonical/stable.mjs'
-import { createVisualImportCandidate } from '../../paper-canonical/visualCandidate.mjs'
+import {
+  createFileSystemCanonicalPublicationStore,
+  loadPaperForConsumptionSync,
+  publishCanonicalPaperPublication,
+  recoverCanonicalPaperPublication,
+} from '../../paper-canonical/publication.mjs'
+import {
+  buildConfirmedFormat2CanonicalRequest,
+} from '../../paper-canonical/format2CanonicalRequest.mjs'
+import {
+  confirmVisualImportCandidate,
+  createVisualImportCandidate,
+} from '../../paper-canonical/visualCandidate.mjs'
+import {
+  readingOptionFigureConsumerContractRefs,
+} from '../../../shared/paper-canonical/consumers.mjs'
+import { readingOptionFigureAuthorityRef } from '../../../shared/paper-canonical/authority.mjs'
+import { extractAnswerTextFromPdfBytes } from './answerTextExtraction.mjs'
+import {
+  describeAnswerImageRasterizer,
+  renderAnswerPdfPageRegion,
+} from './answerImageEvidence.mjs'
+import { projectCanonicalConsumerGroup } from '../../../shared/paper-canonical/consumerProjection.mjs'
+import { createExportImplementation } from '../../exports/exportImplementation.mjs'
+import { buildPrintHtml } from '../../print-renderer.mjs'
 
 const FORMAT = 'format2-pdf-pair-v1'
 const RESULT_SCHEMA_VERSION = 'format2-import-job-result-v1'
@@ -26,6 +55,9 @@ const RECEIPT_SCHEMA_VERSION = 'format2-import-job-receipt-v1'
 const TRANSCRIPTION_SCHEMA_VERSION = 'format2-transcription-v1'
 const SOURCE_PAIR_SCHEMA_VERSION = 'format2-source-pair-v1'
 const STOP_CODE = 'exact_teacher_confirmation_required'
+const QA_STOP_CODE = 'owner_qa_required'
+const COMPLETION_FAILURE_POINT = 'after-awaiting-qa-dependencies-before-current-crash'
+const QA_ACCEPTANCE_SCHEMA_VERSION = 'format2-owner-qa-acceptance-v1'
 const PAPER_ID_PATTERN = /^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/u
 const SHA256_PATTERN = /^sha256:[a-f0-9]{64}$/u
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..')
@@ -210,14 +242,14 @@ function captureExactDocuments(input) {
   const questionBytes = readPdfSource(input.sources.questionPdf, 'question_pdf')
   const answerBytes = readPdfSource(input.sources.answerPdf, 'answer_pdf')
   const questionDocument = sourceDocument({
-    inputKey: 'question_pdf',
+    inputKey: 'original_question_source',
     roles: ['question_source', 'source_provenance'],
     originalName: path.basename(input.sources.questionPdf.absolutePath),
     bytes: questionBytes,
   })
   const answerDocument = sourceDocument({
-    inputKey: 'answer_pdf',
-    roles: ['official_answer_source', 'source_provenance'],
+    inputKey: 'listening_answer_source',
+    roles: ['official_answer_source', 'transcript_source', 'source_provenance'],
     originalName: path.basename(input.sources.answerPdf.absolutePath),
     bytes: answerBytes,
   })
@@ -237,7 +269,176 @@ function semanticIssue(code, pathValue, message) {
   return { code, path: pathValue, message }
 }
 
-function validateTranscriptionSemantics(input) {
+function validateAnswerTranscriptionCheck(input, answerPdfBytes) {
+  const transcription = input.transcription
+  const check = transcription.answerTranscriptionCheck
+  const expectedAnswers = transcription.officialAnswers
+  const markings = check?.sourceMarkings
+  const questionNumberById = new Map(transcription.groups.flatMap((group) => (
+    group.questions.map((question) => [question.questionId, question.questionNo])
+  )))
+  const invalidBinding = (
+    !check
+    || check.answerPdfSha256 !== input.sources.answerPdf.sha256
+    || check.officialAnswersDigest !== digestJson(expectedAnswers)
+  )
+  const answersByQuestion = new Map(expectedAnswers.map((answer) => [answer.questionId, answer]))
+  let invalidMarkings = (
+    !Array.isArray(markings)
+    || markings.length !== expectedAnswers.length
+    || new Set(markings?.map((marking) => marking.questionId)).size !== expectedAnswers.length
+    || markings?.some((marking) => {
+      const answer = answersByQuestion.get(marking.questionId)
+      return !answer
+        || !questionNumberById.has(marking.questionId)
+        || marking.answer !== answer.answer
+        || marking.page !== answer.source.page
+        || marking.questionNo !== questionNumberById.get(marking.questionId)
+        || marking.questionRange?.start > marking.questionNo
+        || marking.questionRange?.end < marking.questionNo
+        || marking.answerOrdinal !== marking.questionNo - marking.questionRange?.start
+    })
+  )
+  let evidenceDigest = null
+  let extractedTextSha256 = null
+  const markingsByEvidence = new Map()
+  if (check?.evidenceKind === 'text') {
+    const extractedTextBytes = new TextEncoder().encode(check.extraction.extractedText)
+    const actualExtraction = extractAnswerTextFromPdfBytes(answerPdfBytes)
+    invalidMarkings ||= (
+      check.extraction.extractedTextSha256 !== sha256(extractedTextBytes)
+      || !sameValue(check.extraction, actualExtraction)
+      || markings.some((marking) => {
+        const extractedPage = 1 + Buffer.from(extractedTextBytes)
+          .subarray(0, marking.byteSpan.start)
+          .filter((byte) => byte === 0x0c).length
+        return marking.page !== extractedPage
+          || marking.byteSpan.end > extractedTextBytes.byteLength
+          || Buffer.from(extractedTextBytes)
+            .subarray(marking.byteSpan.start, marking.byteSpan.end)
+            .toString('utf8') !== marking.sourceMarking
+          || marking.answerByteSpan.start < marking.byteSpan.start
+          || marking.answerByteSpan.end > marking.byteSpan.end
+          || Buffer.from(extractedTextBytes)
+            .subarray(marking.answerByteSpan.start, marking.answerByteSpan.end)
+            .toString('utf8') !== marking.answer
+      })
+    )
+    extractedTextSha256 = check.extraction.extractedTextSha256
+    evidenceDigest = extractedTextSha256
+    for (const marking of markings || []) {
+      const key = `${marking.byteSpan?.start}:${marking.byteSpan?.end}`
+      const entries = markingsByEvidence.get(key) || []
+      entries.push(marking)
+      markingsByEvidence.set(key, entries)
+    }
+  } else if (check?.evidenceKind === 'page_image_regions') {
+    const actualRasterizer = describeAnswerImageRasterizer()
+    const expectedRasterizer = {
+      schemaVersion: check.rasterization.schemaVersion,
+      tool: check.rasterization.tool,
+      toolVersion: check.rasterization.toolVersion,
+      parameters: check.rasterization.parameters,
+    }
+    const pagesByNumber = new Map((check.pages || []).map((page) => [page.page, page]))
+    const regionsById = new Map((check.regions || []).map((region) => [region.regionId, region]))
+    invalidMarkings ||= (
+      !sameValue(actualRasterizer, expectedRasterizer)
+      || pagesByNumber.size !== check.pages.length
+      || regionsById.size !== check.regions.length
+    )
+    if (!invalidMarkings) {
+      for (const pageEvidence of check.pages) {
+        const rendered = renderAnswerPdfPageRegion(answerPdfBytes, {
+          page: pageEvidence.page,
+          dpi: check.rasterization.dpi,
+        })
+        if (
+          rendered.pixelWidth !== pageEvidence.pixelWidth
+          || rendered.pixelHeight !== pageEvidence.pixelHeight
+          || rendered.byteLength !== pageEvidence.byteLength
+          || rendered.sha256 !== pageEvidence.sha256
+        ) invalidMarkings = true
+      }
+      for (const region of check.regions) {
+        const pageEvidence = pagesByNumber.get(region.page)
+        if (
+          !pageEvidence
+          || region.pixelBox.x + region.pixelBox.width > pageEvidence.pixelWidth
+          || region.pixelBox.y + region.pixelBox.height > pageEvidence.pixelHeight
+        ) {
+          invalidMarkings = true
+          continue
+        }
+        const rendered = renderAnswerPdfPageRegion(answerPdfBytes, {
+          page: region.page,
+          dpi: check.rasterization.dpi,
+          pixelBox: region.pixelBox,
+        })
+        if (
+          rendered.pixelWidth !== region.pixelBox.width
+          || rendered.pixelHeight !== region.pixelBox.height
+          || rendered.byteLength !== region.byteLength
+          || rendered.sha256 !== region.sha256
+        ) invalidMarkings = true
+      }
+    }
+    invalidMarkings ||= markings.some((marking) => {
+      const region = regionsById.get(marking.regionId)
+      return !region || region.page !== marking.page
+    })
+    evidenceDigest = digestJson({
+      rasterization: check.rasterization,
+      pages: check.pages,
+      regions: check.regions,
+    })
+    for (const marking of markings || []) {
+      const entries = markingsByEvidence.get(marking.regionId) || []
+      entries.push(marking)
+      markingsByEvidence.set(marking.regionId, entries)
+    }
+  } else {
+    invalidMarkings = true
+  }
+  const invalidRangeCoverage = [...markingsByEvidence.values()].some((entries) => {
+    const first = entries[0]
+    const start = first?.questionRange?.start
+    const end = first?.questionRange?.end
+    const expectedCount = end - start + 1
+    return !Number.isInteger(start)
+      || !Number.isInteger(end)
+      || end < start
+      || entries.length !== expectedCount
+      || entries.some((marking) => (
+        !sameValue(marking.questionRange, first.questionRange)
+        || (check.evidenceKind === 'text' && !sameValue(marking.byteSpan, first.byteSpan))
+        || (check.evidenceKind === 'page_image_regions' && marking.regionId !== first.regionId)
+        || marking.sourceMarking !== first.sourceMarking
+      ))
+      || !Array.from({ length: expectedCount }, (_value, index) => start + index)
+        .every((questionNo) => entries.some((marking) => (
+          marking.questionNo === questionNo
+          && marking.answerOrdinal === questionNo - start
+        )))
+  })
+  if (invalidBinding || invalidMarkings || invalidRangeCoverage) {
+    fail(
+      'FORMAT2_ANSWER_TRANSCRIPTION_CHECK_INVALID',
+      'AI Answer Transcription Check must bind the admitted answer PDF and match every official answer source marking',
+    )
+  }
+  return {
+    answerPdfSha256: check.answerPdfSha256,
+    officialAnswersDigest: check.officialAnswersDigest,
+    checkDigest: digestJson(check),
+    evidenceKind: check.evidenceKind,
+    evidenceDigest,
+    ...(extractedTextSha256 ? { extractedTextSha256 } : {}),
+    markingCount: markings.length,
+  }
+}
+
+function validateTranscriptionSemantics(input, answerPdfBytes) {
   const transcription = input.transcription
   const schemaDiagnostics = transcriptionSchemaDiagnostics(transcription)
   if (schemaDiagnostics.length > 0) {
@@ -285,6 +486,7 @@ function validateTranscriptionSemantics(input) {
   const questionNumbers = new Set()
   const answerRefs = new Set()
   const blockIds = new Set()
+  const slotIds = new Set()
   const visualReferences = new Map()
   for (const [groupIndex, group] of transcription.groups.entries()) {
     const groupPath = `/groups/${groupIndex}`
@@ -292,6 +494,14 @@ function validateTranscriptionSemantics(input) {
       issues.push(semanticIssue('FORMAT2_TRANSCRIPTION_IDENTITY_DUPLICATE', `${groupPath}/groupId`, 'Group identity is duplicated'))
     }
     groups.set(group.groupId, group)
+    if (slotIds.has(group.slotId)) {
+      issues.push(semanticIssue(
+        'FORMAT2_TRANSCRIPTION_IDENTITY_DUPLICATE',
+        `${groupPath}/slotId`,
+        'Canonical source slot identity is duplicated',
+      ))
+    }
+    slotIds.add(group.slotId)
     const writingBlocks = group.blocks.filter((block) => block.kind === 'writing_material')
     const listeningBlocks = group.blocks.filter((block) => block.kind === 'listening_material')
     const objectiveGroup = ['reading', 'seven_choices', 'cloze', 'grammar_fill'].includes(group.groupType)
@@ -313,6 +523,20 @@ function validateTranscriptionSemantics(input) {
       ))
       || (!expectedWritingTask && writingBlocks.length > 0)
       || (group.groupType !== 'listening' && listeningBlocks.length > 0)
+      || (expectedWritingTask === 'application'
+        && (
+          writingBlocks[0]?.continuationStarters !== undefined
+          || writingBlocks[0]?.sourceInstruction !== undefined
+          || writingBlocks[0]?.wordCountScope !== 'student_authored_only'
+          || writingBlocks[0]?.applicationEvidence?.answerRegionAbsent !== true
+        ))
+      || (expectedWritingTask === 'continuation'
+        && (
+          writingBlocks[0]?.continuationStarters?.length !== 2
+          || typeof writingBlocks[0]?.sourceInstruction !== 'string'
+          || writingBlocks[0]?.wordCountScope !== 'unspecified'
+          || writingBlocks[0]?.applicationEvidence !== undefined
+        ))
     ) {
       issues.push(semanticIssue(
         'FORMAT2_TRANSCRIPTION_GROUP_SHAPE_INVALID',
@@ -409,6 +633,16 @@ function validateTranscriptionSemantics(input) {
         'FORMAT2_ANSWER_QUESTION_MISMATCH',
         answerPath,
         'Official answer does not bind one exact transcribed question',
+      ))
+    }
+    if (
+      questionRecord?.question.options.length > 0
+      && !questionRecord.question.options.some((option) => option.label === answer.answer)
+    ) {
+      issues.push(semanticIssue(
+        'FORMAT2_ANSWER_OPTION_MISMATCH',
+        `${answerPath}/answer`,
+        'Official objective answer must name one exact transcribed option label',
       ))
     }
     if (answer.source.documentRole !== 'answer_pdf') {
@@ -523,6 +757,7 @@ function validateTranscriptionSemantics(input) {
   if (issues.length > 0) {
     fail('FORMAT2_TRANSCRIPTION_INVALID', 'Format 2 transcription failed closed semantic validation', issues)
   }
+  validateAnswerTranscriptionCheck(input, answerPdfBytes)
 }
 
 function normalizedRegion(visual) {
@@ -685,6 +920,80 @@ function claimWriter(jobRoot, writerId) {
   }
 }
 
+function invalidateChangedDownstreamBeforeSemanticValidation({
+  input,
+  documents,
+  repositoryRoot,
+}) {
+  const paperDir = path.join(
+    repositoryRoot,
+    'scripts/import-pipeline/papers',
+    input.paperId,
+  )
+  const jobRoot = path.join(paperDir, 'job')
+  const currentPath = path.join(jobRoot, 'current.json')
+  if (!existsSync(currentPath)) return { paperDir, jobRoot }
+  claimWriter(jobRoot, input.state.writerId)
+  const current = readJson(currentPath, 'Format 2 Job current receipt')
+  if (
+    current.schemaVersion !== RECEIPT_SCHEMA_VERSION
+    || current.writerId !== input.state.writerId
+    || current.result?.paperId !== input.paperId
+  ) {
+    fail(
+      'FORMAT2_JOB_DURABLE_STATE_INVALID',
+      'Existing Format 2 Job does not bind the safely identified paper and writer',
+    )
+  }
+  const nextDigests = {
+    questionPdfSha256: documents.questionDocument.sha256,
+    answerPdfSha256: documents.answerDocument.sha256,
+    transcriptionDigest: digestJson(input.transcription),
+  }
+  const changed = Object.entries(nextDigests).some(
+    ([key, value]) => current.inputDigests?.[key] !== value,
+  )
+  if (!changed) return { paperDir, jobRoot }
+
+  const signalsDir = path.join(paperDir, 'signals')
+  mkdirSync(signalsDir, { recursive: true })
+  for (const fileName of ['ai-answer-check.json', 'qa-accepted.json', 'help-needed.json']) {
+    const signalPath = path.join(signalsDir, fileName)
+    if (existsSync(signalPath)) unlinkSync(signalPath)
+  }
+  const invalidationCode = 'format2_input_invalidated'
+  const invalidatedResult = {
+    schemaVersion: RESULT_SCHEMA_VERSION,
+    paperId: input.paperId,
+    provenance: cloneJson(input.provenance),
+    jobId: null,
+    lifecycle: 'failed',
+    stopReason: { code: invalidationCode },
+    diagnostics: [{
+      code: 'FORMAT2_UPSTREAM_INPUT_CHANGED',
+      message: 'Changed source or transcription invalidated every downstream Format 2 result before new semantic admission.',
+    }],
+    artifacts: {},
+    humanEntryPoints: null,
+    canonicalPublication: null,
+  }
+  atomicWrite(currentPath, jsonBytes({
+    schemaVersion: RECEIPT_SCHEMA_VERSION,
+    writerId: input.state.writerId,
+    inputDigests: nextDigests,
+    contractVersions: current.contractVersions || {},
+    disposition: 'failed',
+    nextStopReason: invalidationCode,
+    result: invalidatedResult,
+  }))
+  atomicWrite(path.join(signalsDir, 'blocked.json'), jsonBytes({
+    code: invalidationCode,
+    at: new Date().toISOString(),
+    note: 'Changed Format 2 source or transcription invalidated prior AI Answer Check and Owner QA.',
+  }))
+  return { paperDir, jobRoot }
+}
+
 function relativeFromPaper(paperDir, targetPath) {
   return path.relative(paperDir, targetPath).split(path.sep).join('/')
 }
@@ -786,6 +1095,8 @@ function persistRun({
       questionPdfSha256: documents.questionDocument.sha256,
       answerPdfSha256: documents.answerDocument.sha256,
       transcriptionDigest: digestJson(input.transcription),
+      authorityDigest: digestJson(readingOptionFigureAuthorityRef),
+      answerTranscriptionCheckDigest: digestJson(input.transcription.answerTranscriptionCheck),
     },
     contractVersions: {
       transcription: TRANSCRIPTION_SCHEMA_VERSION,
@@ -799,7 +1110,20 @@ function persistRun({
   atomicWrite(path.join(jobRoot, 'current.json'), jsonBytes(currentReceipt))
   const signalsDir = path.join(paperDir, 'signals')
   mkdirSync(signalsDir, { recursive: true })
+  const aiCheckPath = path.join(signalsDir, 'ai-answer-check.json')
+  if (existsSync(aiCheckPath)) unlinkSync(aiCheckPath)
+  const qaAcceptedPath = path.join(signalsDir, 'qa-accepted.json')
+  if (existsSync(qaAcceptedPath)) unlinkSync(qaAcceptedPath)
   const helpPath = path.join(signalsDir, 'help-needed.json')
+  const blockedPath = path.join(signalsDir, 'blocked.json')
+  if (existsSync(blockedPath)) {
+    try {
+      const blocked = JSON.parse(readFileSync(blockedPath, 'utf8'))
+      if (blocked.code === 'format2_input_invalidated') unlinkSync(blockedPath)
+    } catch {
+      // A malformed or unrelated blocker is not owned by this Job run.
+    }
+  }
   let at = new Date().toISOString()
   if (existsSync(helpPath)) {
     try {
@@ -824,7 +1148,13 @@ function persistRun({
 function runStartOrContinue(input, repositoryRoot) {
   validateOperationInput(input)
   const documents = captureExactDocuments(input)
-  validateTranscriptionSemantics(input)
+  const { paperDir, jobRoot } = invalidateChangedDownstreamBeforeSemanticValidation({
+    input,
+    documents,
+    repositoryRoot,
+  })
+  validateTranscriptionSemantics(input, documents.answerBytes)
+  claimWriter(jobRoot, input.state.writerId)
   const sourceCapture = buildSourceCapture(documents, input.transcription)
   let candidatePackage
   try {
@@ -847,15 +1177,18 @@ function runStartOrContinue(input, repositoryRoot) {
     transcriptionDigest: digestJson(input.transcription),
     sourceCaptureDigest: sourceCapture.digest,
     candidatePackageDigest: candidatePackage.packageDigest,
+    authorityDigest: digestJson(readingOptionFigureAuthorityRef),
   }
   const jobId = stableId('format2-job', inputIdentity)
-  const paperDir = path.join(
-    repositoryRoot,
-    'scripts/import-pipeline/papers',
-    input.paperId,
-  )
-  const jobRoot = path.join(paperDir, 'job')
-  claimWriter(jobRoot, input.state.writerId)
+  const currentPath = path.join(jobRoot, 'current.json')
+  if (existsSync(currentPath)) {
+    const current = readJson(currentPath, 'Format 2 Job current receipt')
+    if (
+      current.schemaVersion === RECEIPT_SCHEMA_VERSION
+      && current.result?.jobId === jobId
+      && current.result?.lifecycle === 'awaiting_qa'
+    ) return verifyCompletedAwaitingQa(repositoryRoot, paperDir, jobRoot, current)
+  }
   const runDir = path.join(jobRoot, 'runs', jobId.slice('format2-job:'.length))
   const comparisonBytes = Buffer.from(buildComparisonHtml({
     paperId: input.paperId,
@@ -885,7 +1218,955 @@ function runStartOrContinue(input, repositoryRoot) {
   return cloneJson(result)
 }
 
-export function createFormat2ImportJobRuntime({ repositoryRoot }) {
+function validateResumeInput(input) {
+  if (!exactKeys(input, ['paperId', 'jobId', 'teacherConfirmation'])) {
+    fail(
+      'FORMAT2_JOB_RESUME_REQUEST_INVALID',
+      'Format 2 Job resume accepts only paperId, jobId, and teacherConfirmation',
+    )
+  }
+  if (!PAPER_ID_PATTERN.test(input.paperId)) {
+    fail('FORMAT2_JOB_PAPER_ID_UNSAFE', 'Format 2 Job paperId is unsafe')
+  }
+  if (!/^format2-job:[a-f0-9]{21}$/u.test(input.jobId)) {
+    fail('FORMAT2_JOB_IDENTITY_INVALID', 'Format 2 Job resume requires one exact Job identity')
+  }
+  if (!input.teacherConfirmation || typeof input.teacherConfirmation !== 'object') {
+    fail(
+      'FORMAT2_JOB_CONFIRMATION_INVALID',
+      'Format 2 Job resume requires one exact Teacher Confirmation',
+    )
+  }
+}
+
+function resolveDurableArtifact(paperDir, relativePath, label) {
+  if (!nonEmptyString(relativePath) || path.isAbsolute(relativePath)) {
+    fail('FORMAT2_JOB_DURABLE_STATE_INVALID', `${label} path is invalid`)
+  }
+  const resolved = path.resolve(paperDir, relativePath)
+  if (!resolved.startsWith(`${path.resolve(paperDir)}${path.sep}`)) {
+    fail('FORMAT2_JOB_DURABLE_STATE_INVALID', `${label} path escapes the paper Job`)
+  }
+  if (!existsSync(resolved)) {
+    fail('FORMAT2_JOB_DURABLE_STATE_INVALID', `${label} is missing`)
+  }
+  return resolved
+}
+
+function retainedCandidatePackage(paperDir, receipt) {
+  const candidatePath = resolveDurableArtifact(
+    paperDir,
+    receipt.result.artifacts?.candidatePackage?.relativePath,
+    'Visual Candidate package',
+  )
+  const candidatePackage = readJson(candidatePath, 'Format 2 Visual Candidate package')
+  if (
+    candidatePackage.packageDigest
+      !== receipt.result.artifacts?.candidatePackage?.packageDigest
+  ) {
+    fail(
+      'FORMAT2_JOB_DURABLE_STATE_INVALID',
+      'Visual Candidate package no longer matches the current durable Job',
+    )
+  }
+  return candidatePackage
+}
+
+function invalidateCompletedConfirmation({ paperDir, jobRoot, receipt, candidatePackage }) {
+  const artifacts = {}
+  for (const key of ['sourceCapture', 'transcription', 'candidatePackage', 'comparison']) {
+    if (!receipt.result.artifacts?.[key]) {
+      fail(
+        'FORMAT2_JOB_DURABLE_STATE_INVALID',
+        `Completed Format 2 Job lacks retained ${key} evidence`,
+      )
+    }
+    artifacts[key] = cloneJson(receipt.result.artifacts[key])
+  }
+  const result = {
+    schemaVersion: RESULT_SCHEMA_VERSION,
+    paperId: receipt.result.paperId,
+    provenance: cloneJson(receipt.result.provenance),
+    jobId: receipt.result.jobId,
+    lifecycle: 'importing',
+    stopReason: { code: STOP_CODE },
+    diagnostics: candidatePackage.unresolvedIssues.map((issue) => cloneJson(issue)),
+    artifacts,
+    humanEntryPoints: {
+      comparison: {
+        href: `/papers/${encodeURIComponent(receipt.result.paperId)}/format2-comparison`,
+        packageDigest: candidatePackage.packageDigest,
+      },
+      resumeInstruction: `Resume this Job with exact visual package ${candidatePackage.packageDigest}.`,
+    },
+    canonicalPublication: null,
+  }
+  const signalsDir = path.join(paperDir, 'signals')
+  mkdirSync(signalsDir, { recursive: true })
+  for (const fileName of ['ai-answer-check.json', 'qa-accepted.json', 'help-needed.json']) {
+    const signalPath = path.join(signalsDir, fileName)
+    if (existsSync(signalPath)) unlinkSync(signalPath)
+  }
+  const contractVersions = cloneJson(receipt.contractVersions || {})
+  delete contractVersions.canonicalPublication
+  atomicWrite(path.join(jobRoot, 'current.json'), jsonBytes({
+    ...cloneJson(receipt),
+    contractVersions,
+    disposition: 'stopped',
+    nextStopReason: STOP_CODE,
+    result,
+  }))
+}
+
+function loadResumeEvidence(repositoryRoot, input) {
+  const paperDir = path.join(
+    repositoryRoot,
+    'scripts/import-pipeline/papers',
+    input.paperId,
+  )
+  const jobRoot = path.join(paperDir, 'job')
+  const currentPath = path.join(jobRoot, 'current.json')
+  if (!existsSync(currentPath)) {
+    fail('FORMAT2_JOB_NOT_FOUND', 'Format 2 Job durable receipt is missing')
+  }
+  const receipt = readJson(currentPath, 'Format 2 Job current receipt')
+  if (
+    receipt.schemaVersion !== RECEIPT_SCHEMA_VERSION
+    || receipt.result?.schemaVersion !== RESULT_SCHEMA_VERSION
+    || receipt.result.paperId !== input.paperId
+    || receipt.result.jobId !== input.jobId
+  ) {
+    fail(
+      'FORMAT2_JOB_IDENTITY_MISMATCH',
+      'Resume identity differs from the exact current durable Job',
+    )
+  }
+  if (receipt.inputDigests?.authorityDigest !== digestJson(readingOptionFigureAuthorityRef)) {
+    fail(
+      'FORMAT2_JOB_AUTHORITY_STALE',
+      'The durable Job authority differs from the current closed compiler authority',
+    )
+  }
+  if (receipt.result.lifecycle === 'awaiting_qa') {
+    const committedPackageDigest = receipt.result.artifacts?.candidatePackage?.packageDigest
+    const committedConfirmationDigest =
+      receipt.result.artifacts?.confirmedSelection?.confirmationDigest
+    if (input.teacherConfirmation.packageDigest !== committedPackageDigest) {
+      fail(
+        'FORMAT2_JOB_CONFIRMATION_STALE',
+        'Completed Job no-op requires the exact committed Teacher Confirmation',
+      )
+    }
+    if (digestJson(input.teacherConfirmation) !== committedConfirmationDigest) {
+      const candidatePackage = retainedCandidatePackage(paperDir, receipt)
+      try {
+        confirmVisualImportCandidate(candidatePackage, input.teacherConfirmation)
+      } catch (error) {
+        if (String(error?.code || '').startsWith('VISUAL_CONFIRMATION_')) {
+          fail(
+            'FORMAT2_JOB_CONFIRMATION_STALE',
+            'Completed Job received a malformed or substituted Teacher Confirmation',
+          )
+        }
+        throw error
+      }
+      invalidateCompletedConfirmation({ paperDir, jobRoot, receipt, candidatePackage })
+      fail(
+        'FORMAT2_JOB_CONFIRMATION_CHANGED',
+        'Changed exact Teacher Confirmation invalidated the completed Job; retry the same Job with that confirmation',
+      )
+    }
+    return { paperDir, jobRoot, receipt, completed: true }
+  }
+  if (
+    receipt.result.lifecycle !== 'importing'
+    || receipt.result.stopReason?.code !== STOP_CODE
+  ) {
+    fail(
+      'FORMAT2_JOB_STATE_INVALID',
+      'Format 2 Job is not stopped at exact Teacher Confirmation',
+    )
+  }
+  const transcriptionPath = resolveDurableArtifact(
+    paperDir,
+    receipt.result.artifacts?.transcription?.relativePath,
+    'Format 2 transcription',
+  )
+  const sourceCapturePath = resolveDurableArtifact(
+    paperDir,
+    receipt.result.artifacts?.sourceCapture?.relativePath,
+    'Source Capture',
+  )
+  const candidatePath = resolveDurableArtifact(
+    paperDir,
+    receipt.result.artifacts?.candidatePackage?.relativePath,
+    'Visual Candidate package',
+  )
+  const transcription = readJson(transcriptionPath, 'Format 2 transcription')
+  const sourceCapture = readJson(sourceCapturePath, 'Format 2 Source Capture')
+  const candidatePackage = readJson(candidatePath, 'Format 2 Visual Candidate package')
+  if (
+    digestJson(transcription) !== receipt.result.artifacts.transcription.digest
+    || sourceCapture.digest !== receipt.result.artifacts.sourceCapture.digest
+    || candidatePackage.packageDigest !== receipt.result.artifacts.candidatePackage.packageDigest
+    || candidatePackage.packageDigest !== input.teacherConfirmation.packageDigest
+  ) {
+    fail(
+      'FORMAT2_JOB_CONFIRMATION_STALE',
+      'Teacher Confirmation or durable evidence differs from the exact current candidate package',
+    )
+  }
+  const questionDocument = sourceCapture.documents.find(
+    (document) => document.inputKey === 'original_question_source',
+  )
+  const answerDocument = sourceCapture.documents.find(
+    (document) => document.inputKey === 'listening_answer_source',
+  )
+  if (!questionDocument || !answerDocument) {
+    fail('FORMAT2_JOB_DURABLE_STATE_INVALID', 'Source Capture PDF pair is incomplete')
+  }
+  const questionPdfBytes = new Uint8Array(Buffer.from(questionDocument.encodedBytes, 'base64'))
+  const answerPdfBytes = new Uint8Array(Buffer.from(answerDocument.encodedBytes, 'base64'))
+  if (
+    sha256(questionPdfBytes) !== receipt.inputDigests.questionPdfSha256
+    || sha256(answerPdfBytes) !== receipt.inputDigests.answerPdfSha256
+    || digestJson(transcription) !== receipt.inputDigests.transcriptionDigest
+    || receipt.inputDigests.authorityDigest !== digestJson(readingOptionFigureAuthorityRef)
+  ) {
+    fail(
+      'FORMAT2_JOB_DURABLE_STATE_INVALID',
+      'Durable source or transcription bytes no longer bind the current Job',
+    )
+  }
+  return {
+    paperDir,
+    jobRoot,
+    receipt,
+    completed: false,
+    transcription,
+    sourceCapture,
+    candidatePackage,
+    questionPdfBytes,
+    answerPdfBytes,
+  }
+}
+
+function unresolvedResumeResult(evidence, confirmedSelection) {
+  return {
+    ...cloneJson(evidence.receipt.result),
+    diagnostics: confirmedSelection.unresolvedIssues.map((issue) => cloneJson(issue)),
+  }
+}
+
+function canonicalDiagnostics(compilation) {
+  return (compilation?.artifacts?.normalizationReport?.diagnostics || [])
+    .filter((diagnostic) => diagnostic.disposition !== 'ready')
+    .map((diagnostic) => cloneJson(diagnostic))
+}
+
+function readingOptionPublicationConfirmation(evidence, confirmedSelection) {
+  const readingObservationIds = new Set(evidence.candidatePackage.observations
+    .filter((observation) => observation.owner?.kind === 'reading_option')
+    .map((observation) => observation.observationId))
+  const candidatePackage = createVisualImportCandidate({
+    sourceCapture: evidence.sourceCapture,
+    observations: evidence.candidatePackage.observations
+      .filter((observation) => readingObservationIds.has(observation.observationId))
+      .map((observation) => ({
+        observationId: observation.observationId,
+        owner: cloneJson(observation.owner),
+        sourceCrop: cloneJson(observation.sourceCrop),
+      })),
+    candidates: evidence.candidatePackage.candidates
+      .filter((candidate) => readingObservationIds.has(candidate.observationId))
+      .map((candidate) => ({
+        observationId: candidate.observationId,
+        owner: cloneJson(candidate.owner),
+        method: candidate.method,
+        artifact: cloneJson(candidate.artifact),
+        sourceTruthChecklist: cloneJson(candidate.sourceTruthChecklist),
+        ...(candidate.reproducibility
+          ? { reproducibility: cloneJson(candidate.reproducibility) }
+          : {}),
+      })),
+  })
+  const selectedByObservation = new Map(confirmedSelection.confirmedSelections.map(
+    (selection) => [selection.observationId, selection],
+  ))
+  const teacherConfirmation = {
+    schemaVersion: 'visual-teacher-confirmation-v1',
+    packageDigest: candidatePackage.packageDigest,
+    decisions: candidatePackage.observations.map((observation) => ({
+      observationId: observation.observationId,
+      owner: cloneJson(observation.owner),
+      disposition: 'confirmed',
+      selectedCandidateDigest: selectedByObservation.get(
+        observation.observationId,
+      ).candidateDigest,
+    })),
+  }
+  return { candidatePackage, teacherConfirmation }
+}
+
+function groupTypeForPrint(groupType) {
+  if (groupType === 'grammarFill') return 'grammar_cloze'
+  if (groupType === 'sevenChoices') return 'seven_choices'
+  if (groupType === 'continuation') return 'writing'
+  return groupType
+}
+
+function canonicalPrintPayload(consumption, paperName) {
+  const renderedItems = []
+  for (const selection of consumption.selections) {
+    for (const groupId of selection.groupIds) {
+      const group = projectCanonicalConsumerGroup({
+        consumption,
+        familyContractId: selection.familyContractId,
+        groupId,
+      })
+      renderedItems.push({
+        detail: {
+          id: groupId,
+          paperId: consumption.paperId,
+          title: groupId,
+          source: paperName,
+          groupType: groupTypeForPrint(group.groupType),
+          passage: { title: groupId, materialText: '' },
+          questions: group.questions.map((question) => ({
+            id: question.questionId,
+            questionNo: String(question.questionNo),
+            stem: question.stem ?? '',
+            answer: question.correctOptionId
+              ? question.options.find(
+                (option) => option.optionId === question.correctOptionId,
+              )?.label || ''
+              : '',
+            explanation: '',
+            note: '',
+            options: question.options.map((option) => ({
+              label: option.label,
+              content: option.text,
+            })),
+          })),
+        },
+        score: 0,
+        sectionTitle: '',
+        note: '',
+      })
+    }
+  }
+  const details = new Map(renderedItems.map((item) => [item.detail.id, item.detail]))
+  const blocks = consumption.visibleStructure.flatMap((node) => {
+    if (node.kind === 'group') {
+      return [{ type: 'question_group', questionGroupId: node.groupId, score: 0 }]
+    }
+    if (node.kind !== 'instruction' || node.renderPolicy !== 'render') return []
+    if (node.placement === 'part_heading' || node.placement === 'section_heading') {
+      return [{
+        type: 'section_header',
+        title: node.text,
+        instructionId: node.instructionId,
+      }]
+    }
+    if (node.placement === 'group_instruction') {
+      return [{
+        type: 'instruction',
+        text: node.text,
+        instructionId: node.instructionId,
+      }]
+    }
+    return []
+  })
+  return {
+    title: paperName,
+    printStyle: 'exam',
+    questionNumberStart: 1,
+    items: renderedItems.map((item) => ({
+      questionGroupId: item.detail.id,
+      score: item.score,
+    })),
+    blocks,
+    details,
+  }
+}
+
+function artifactDescriptor(paperDir, filePath, mediaType) {
+  const bytes = readFileSync(filePath)
+  return {
+    relativePath: relativeFromPaper(paperDir, filePath),
+    sha256: sha256(new Uint8Array(bytes)),
+    byteLength: bytes.byteLength,
+    mediaType,
+  }
+}
+
+function persistQaArtifacts({
+  evidence,
+  paperName,
+  printConsumption,
+  publicationRoot,
+}) {
+  const qaDir = path.join(
+    evidence.jobRoot,
+    'runs',
+    evidence.receipt.result.jobId.slice('format2-job:'.length),
+    'qa',
+  )
+  const renderRoot = mkdtempSync(path.join(tmpdir(), 'eqb-format2-qa-render-'))
+  try {
+    const payload = canonicalPrintPayload(printConsumption, paperName)
+    const exporter = createExportImplementation({
+      rootDir,
+      exportDir: renderRoot,
+      getQuestionGroupDetail: (groupId) => payload.details.get(groupId) || null,
+      buildPrintHtml,
+      paperAssetsDir: publicationRoot,
+      resolveCanonicalConsumption: () => printConsumption,
+      timestampPrefix: () => 'format2-qa',
+    })
+    const student = exporter.exportPrintHtml({
+      ...payload,
+      versionType: 'student',
+    }, { imageMode: 'file', canonicalVisibleStructureChrome: true })
+    const teacher = exporter.exportPrintHtml({
+      ...payload,
+      versionType: 'teacher',
+    }, { imageMode: 'file', canonicalVisibleStructureChrome: true })
+    const pdf = exporter.exportPrintPdf({
+      ...payload,
+      versionType: 'student',
+    }, { canonicalVisibleStructureChrome: true })
+    if (
+      student.body.includes('<strong>【答案】</strong>')
+      || student.body.includes('Analysis sentinel')
+      || !teacher.body.includes('<strong>【答案】</strong>')
+      || Buffer.from(pdf.body).subarray(0, 4).toString() !== '%PDF'
+    ) {
+      fail(
+        'FORMAT2_QA_ARTIFACT_INVALID',
+        'Shared renderer did not produce closed Student, Teacher, and PDF QA artifacts',
+      )
+    }
+    mkdirSync(qaDir, { recursive: true })
+    const paths = {
+      studentPrint: path.join(qaDir, 'student-print.html'),
+      teacherPrint: path.join(qaDir, 'teacher-print.html'),
+      pdf: path.join(qaDir, 'student-print.pdf'),
+    }
+    writeImmutable(paths.studentPrint, Buffer.from(student.body), 'Format 2 Student Print QA artifact')
+    writeImmutable(paths.teacherPrint, Buffer.from(teacher.body), 'Format 2 Teacher Print QA artifact')
+    if (existsSync(paths.pdf)) {
+      if (readFileSync(paths.pdf).subarray(0, 4).toString() !== '%PDF') {
+        fail('FORMAT2_QA_ARTIFACT_INVALID', 'Retained Format 2 PDF QA artifact is invalid')
+      }
+    } else {
+      writeImmutable(paths.pdf, Buffer.from(pdf.body), 'Format 2 PDF QA artifact')
+    }
+    const supportFiles = new Map()
+    for (const image of [...student.images, ...teacher.images]) {
+      const bytes = readFileSync(image.absoluteSourcePath)
+      const existing = supportFiles.get(image.relativeName)
+      if (existing && !existing.equals(bytes)) {
+        fail('FORMAT2_QA_ARTIFACT_INVALID', `QA support image ${image.relativeName} is ambiguous`)
+      }
+      supportFiles.set(image.relativeName, bytes)
+    }
+    const support = []
+    for (const [fileName, bytes] of supportFiles) {
+      if (path.basename(fileName) !== fileName) {
+        fail('FORMAT2_QA_ARTIFACT_INVALID', 'QA support image name is unsafe')
+      }
+      const filePath = path.join(qaDir, fileName)
+      writeImmutable(filePath, bytes, `Format 2 QA support image ${fileName}`)
+      support.push({ fileName, ...artifactDescriptor(evidence.paperDir, filePath, 'image/png') })
+    }
+    return {
+      schemaVersion: 'format2-qa-artifacts-v1',
+      studentPrint: artifactDescriptor(evidence.paperDir, paths.studentPrint, 'text/html; charset=utf-8'),
+      teacherPrint: artifactDescriptor(evidence.paperDir, paths.teacherPrint, 'text/html; charset=utf-8'),
+      pdf: artifactDescriptor(evidence.paperDir, paths.pdf, 'application/pdf'),
+      support,
+    }
+  } finally {
+    rmSync(renderRoot, { recursive: true, force: true })
+  }
+}
+
+function buildQaAcceptanceIdentity({ evidence, publication, qaArtifacts }) {
+  const identity = {
+    schemaVersion: QA_ACCEPTANCE_SCHEMA_VERSION,
+    paperId: evidence.receipt.result.paperId,
+    jobId: evidence.receipt.result.jobId,
+    inputIdentityDigest: digestJson(evidence.receipt.inputDigests),
+    candidatePackageDigest:
+      evidence.receipt.result.artifacts.candidatePackage.packageDigest,
+    confirmationDigest:
+      publication.confirmedSelection.confirmationDigest,
+    publicationDigest: publication.canonicalPublication.publicationDigest,
+    qaArtifactsManifestDigest: digestJson(qaArtifacts),
+  }
+  const qaIdentityDigest = digestJson(identity)
+  return {
+    identity: { ...identity, qaIdentityDigest },
+    expectedReceipt: {
+      schemaVersion: QA_ACCEPTANCE_SCHEMA_VERSION,
+      by: 'owner',
+      jobId: identity.jobId,
+      inputIdentityDigest: identity.inputIdentityDigest,
+      candidatePackageDigest: identity.candidatePackageDigest,
+      confirmationDigest: identity.confirmationDigest,
+      publicationDigest: identity.publicationDigest,
+      qaArtifactsManifestDigest: identity.qaArtifactsManifestDigest,
+      qaIdentityDigest,
+    },
+    instruction: 'Only after exact Owner QA, write qa-accepted.json with acceptedAt plus every expectedReceipt field.',
+  }
+}
+
+function buildQaEntryPoints({
+  evidence,
+  publication,
+  confirmedSelection,
+  qaArtifacts,
+}) {
+  const paperId = publication.paperId
+  const encodedPaperId = encodeURIComponent(paperId)
+  const appOrigin = 'http://127.0.0.1:5173'
+  const qaArtifactOrigin = 'http://127.0.0.1:8790'
+  const screen = `${appOrigin}/?view=paper-browse&paperId=${encodedPaperId}`
+  const qaBase = `${qaArtifactOrigin}/papers/${encodedPaperId}/format2-qa`
+  const artifactEntry = (artifact, href) => ({
+    kind: 'artifact_url',
+    method: 'GET',
+    href,
+    sha256: artifact.sha256,
+    byteLength: artifact.byteLength,
+    mediaType: artifact.mediaType,
+  })
+  return {
+    service: {
+      command: 'PORT=5173 bash scripts/dev.sh',
+      appOrigin,
+      qaArtifactCommand: 'node import-ops/server.mjs',
+      qaArtifactOrigin,
+    },
+    screen: { kind: 'url', method: 'GET', href: screen },
+    studentPrint: artifactEntry(qaArtifacts.studentPrint, `${qaBase}/student-print`),
+    teacherPrint: artifactEntry(qaArtifacts.teacherPrint, `${qaBase}/teacher-print`),
+    pdf: artifactEntry(qaArtifacts.pdf, `${qaBase}/student-pdf`),
+    firstFocusState: {
+      view: 'paper-browse',
+      paperId,
+      lecture: false,
+    },
+    gateSummary: `Canonical ${publication.versionName} exact reload is ready; Owner QA remains required.`,
+    qaAcceptance: buildQaAcceptanceIdentity({
+      evidence,
+      publication: {
+        canonicalPublication: publication,
+        confirmedSelection,
+      },
+      qaArtifacts,
+    }),
+  }
+}
+
+function verifyQaArtifacts(paperDir, result) {
+  const qaArtifacts = result.artifacts?.qa
+  const entryPoints = result.humanEntryPoints
+  const descriptors = [
+    ['studentPrint', qaArtifacts?.studentPrint],
+    ['teacherPrint', qaArtifacts?.teacherPrint],
+    ['pdf', qaArtifacts?.pdf],
+    ...(Array.isArray(qaArtifacts?.support)
+      ? qaArtifacts.support.map((artifact) => ['support', artifact])
+      : []),
+  ]
+  if (
+    qaArtifacts?.schemaVersion !== 'format2-qa-artifacts-v1'
+    || entryPoints?.qaAcceptance?.identity?.qaArtifactsManifestDigest !== digestJson(qaArtifacts)
+    || entryPoints?.qaAcceptance?.expectedReceipt?.qaArtifactsManifestDigest !== digestJson(qaArtifacts)
+  ) {
+    fail('FORMAT2_QA_ARTIFACT_INVALID', 'Completed Job QA artifact manifest is not exact-receipt bound')
+  }
+  const supportNames = new Set()
+  for (const [key, artifact] of descriptors) {
+    if (
+      !artifact
+      || typeof artifact.relativePath !== 'string'
+      || path.isAbsolute(artifact.relativePath)
+      || !SHA256_PATTERN.test(artifact.sha256)
+      || !Number.isInteger(artifact.byteLength)
+      || artifact.byteLength < 1
+      || !nonEmptyString(artifact.mediaType)
+    ) {
+      fail('FORMAT2_QA_ARTIFACT_INVALID', 'Completed Job QA artifact descriptor is invalid')
+    }
+    if (key === 'support') {
+      if (
+        !nonEmptyString(artifact.fileName)
+        || path.basename(artifact.fileName) !== artifact.fileName
+        || supportNames.has(artifact.fileName)
+      ) {
+        fail('FORMAT2_QA_ARTIFACT_INVALID', 'Completed Job QA support artifact name is unsafe or duplicated')
+      }
+      supportNames.add(artifact.fileName)
+    } else if (
+      entryPoints?.[key]?.sha256 !== artifact.sha256
+      || entryPoints?.[key]?.byteLength !== artifact.byteLength
+      || entryPoints?.[key]?.mediaType !== artifact.mediaType
+    ) {
+      fail('FORMAT2_QA_ARTIFACT_INVALID', 'Completed Job QA entry point no longer matches its artifact')
+    }
+    const filePath = path.resolve(paperDir, artifact.relativePath)
+    if (!filePath.startsWith(`${path.resolve(paperDir)}${path.sep}`) || !existsSync(filePath)) {
+      fail('FORMAT2_QA_ARTIFACT_INVALID', 'Completed Job QA artifact path is missing or unsafe')
+    }
+    const bytes = readFileSync(filePath)
+    if (
+      bytes.byteLength !== artifact.byteLength
+      || sha256(new Uint8Array(bytes)) !== artifact.sha256
+    ) {
+      fail('FORMAT2_QA_ARTIFACT_INVALID', 'Completed Job QA artifact bytes changed after receipt')
+    }
+  }
+}
+
+function committedPublicationIdentity({ paperId, published, screen, printPdf }) {
+  return {
+    paperId,
+    versionName: published.versionName,
+    sourceAssetVersion: 1,
+    publicationDigest: published.publicationDigest,
+    reloads: {
+      screen: {
+        disposition: screen.disposition,
+        paperId: screen.paperId,
+        versionName: published.versionName,
+        publicationDigest: published.publicationDigest,
+      },
+      printPdf: {
+        disposition: printPdf.disposition,
+        paperId: printPdf.paperId,
+        versionName: published.versionName,
+        publicationDigest: published.publicationDigest,
+      },
+    },
+  }
+}
+
+function verifyCompletedAwaitingQa(repositoryRoot, paperDir, jobRoot, receipt) {
+  const committed = receipt.result?.canonicalPublication
+  const publicationDbPath = path.join(repositoryRoot, 'data/question-bank.sqlite')
+  if (
+    committed?.paperId !== receipt.result.paperId
+    || !nonEmptyString(committed.versionName)
+    || !nonEmptyString(committed.publicationDigest)
+    || !existsSync(publicationDbPath)
+  ) {
+    fail(
+      'FORMAT2_JOB_DURABLE_STATE_INVALID',
+      'Completed Format 2 Job lacks one closed local publication identity',
+    )
+  }
+  const db = new DatabaseSync(publicationDbPath)
+  try {
+    const store = createFileSystemCanonicalPublicationStore({
+      rootDir: path.join(repositoryRoot, 'app/public/paper-assets'),
+      db,
+    })
+    const screen = loadPaperForConsumptionSync({
+      paperId: committed.paperId,
+      version: committed.versionName,
+      consumerContract: readingOptionFigureConsumerContractRefs.screen,
+    }, store)
+    const printPdf = loadPaperForConsumptionSync({
+      paperId: committed.paperId,
+      version: committed.versionName,
+      consumerContract: readingOptionFigureConsumerContractRefs.print_pdf,
+    }, store)
+    const currentRef = store.readPublishedRefs(committed.paperId).current
+    if (
+      screen.disposition !== 'ready'
+      || printPdf.disposition !== 'ready'
+      || currentRef?.versionName !== committed.versionName
+      || currentRef?.publicationDigest !== committed.publicationDigest
+    ) {
+      fail(
+        'FORMAT2_CANONICAL_EXACT_RELOAD_FAILED',
+        'Completed Format 2 Job no-op requires the exact committed local reload',
+      )
+    }
+  } finally {
+    db.close()
+  }
+  const signalsDir = path.join(paperDir, 'signals')
+  const aiCheckPath = path.join(signalsDir, 'ai-answer-check.json')
+  let aiCheckValid = false
+  if (existsSync(aiCheckPath)) {
+    try {
+      const signal = readJson(aiCheckPath, 'Format 2 AI answer-check signal')
+      aiCheckValid = signal.ok === true
+        && signal.answerPdfSha256 === receipt.inputDigests.answerPdfSha256
+        && signal.checkDigest === receipt.inputDigests.answerTranscriptionCheckDigest
+    } catch {
+      aiCheckValid = false
+    }
+  }
+  if (!aiCheckValid) {
+    fail('FORMAT2_ANSWER_TRANSCRIPTION_CHECK_INVALID', 'Completed Job lacks its exact digest-bound AI Answer Transcription Check signal')
+  }
+  verifyQaArtifacts(paperDir, receipt.result)
+  verifyPublicationStoreDescriptor(jobRoot)
+  const helpPath = path.join(signalsDir, 'help-needed.json')
+  if (existsSync(helpPath)) unlinkSync(helpPath)
+  return cloneJson(receipt.result)
+}
+
+function verifyPublicationStoreDescriptor(jobRoot) {
+  const descriptorPath = path.join(jobRoot, 'publication-store.json')
+  if (!existsSync(descriptorPath)) {
+    fail(
+      'FORMAT2_JOB_DURABLE_STATE_INVALID',
+      'Completed Format 2 Job lacks its local publication store descriptor',
+    )
+  }
+  const descriptor = readJson(descriptorPath, 'Format 2 local publication store descriptor')
+  if (
+    !exactKeys(descriptor, ['schemaVersion', 'database'])
+    || descriptor.schemaVersion !== 'format2-local-publication-store-v1'
+    || descriptor.database !== 'data/question-bank.sqlite'
+  ) {
+    fail(
+      'FORMAT2_JOB_DURABLE_STATE_INVALID',
+      'Format 2 local publication store descriptor is invalid',
+    )
+  }
+}
+
+function persistAwaitingQa({
+  evidence,
+  result,
+  answerCheck,
+  completionFailurePoint,
+}) {
+  const current = {
+    ...cloneJson(evidence.receipt),
+    contractVersions: {
+      ...cloneJson(evidence.receipt.contractVersions),
+      canonicalPublication: 'canonical-paper-publication-v46',
+    },
+    disposition: 'stopped',
+    nextStopReason: QA_STOP_CODE,
+    result,
+  }
+  const signalsDir = path.join(evidence.paperDir, 'signals')
+  mkdirSync(signalsDir, { recursive: true })
+  const qaAcceptedPath = path.join(signalsDir, 'qa-accepted.json')
+  if (existsSync(qaAcceptedPath)) unlinkSync(qaAcceptedPath)
+  const aiCheckPath = path.join(signalsDir, 'ai-answer-check.json')
+  atomicWrite(aiCheckPath, jsonBytes({
+    ok: true,
+    checkedAt: new Date().toISOString(),
+    method: 'ai-source-markings-vs-answer-key',
+    ...answerCheck,
+  }))
+  const persistedAnswerCheck = readJson(aiCheckPath, 'Format 2 AI answer-check signal')
+  if (
+    !nonEmptyString(persistedAnswerCheck.checkedAt)
+    || !Number.isFinite(Date.parse(persistedAnswerCheck.checkedAt))
+    || !sameValue(persistedAnswerCheck, {
+      ok: true,
+      checkedAt: persistedAnswerCheck.checkedAt,
+      method: 'ai-source-markings-vs-answer-key',
+      ...answerCheck,
+    })
+  ) {
+    fail(
+      'FORMAT2_ANSWER_TRANSCRIPTION_CHECK_INVALID',
+      'Awaiting-QA completion requires one exact persisted AI Answer Transcription Check signal',
+    )
+  }
+  const helpPath = path.join(signalsDir, 'help-needed.json')
+  if (existsSync(helpPath)) unlinkSync(helpPath)
+  writeImmutable(
+    path.join(evidence.jobRoot, 'publication-store.json'),
+    jsonBytes({
+      schemaVersion: 'format2-local-publication-store-v1',
+      database: 'data/question-bank.sqlite',
+    }),
+    'Format 2 local publication store descriptor',
+  )
+  verifyPublicationStoreDescriptor(evidence.jobRoot)
+  verifyQaArtifacts(evidence.paperDir, result)
+  if (completionFailurePoint === COMPLETION_FAILURE_POINT) {
+    fail(
+      'FORMAT2_JOB_PERSISTENCE_FORCED_CRASH',
+      'Forced interruption after awaiting-QA dependencies and before the current receipt',
+    )
+  }
+  atomicWrite(path.join(evidence.jobRoot, 'current.json'), jsonBytes(current))
+}
+
+function runResume(
+  input,
+  repositoryRoot,
+  publicationFailurePoint = null,
+  completionFailurePoint = null,
+) {
+  validateResumeInput(input)
+  const evidence = loadResumeEvidence(repositoryRoot, input)
+  if (evidence.completed) {
+    return verifyCompletedAwaitingQa(
+      repositoryRoot,
+      evidence.paperDir,
+      evidence.jobRoot,
+      evidence.receipt,
+    )
+  }
+  let confirmedSelection
+  try {
+    confirmedSelection = confirmVisualImportCandidate(
+      evidence.candidatePackage,
+      input.teacherConfirmation,
+    )
+  } catch (error) {
+    fail(
+      error?.code || 'FORMAT2_JOB_CONFIRMATION_INVALID',
+      error?.message || 'Exact Teacher Confirmation failed closed',
+    )
+  }
+  if (
+    confirmedSelection.status !== 'confirmed'
+    || confirmedSelection.unresolvedIssues.length > 0
+  ) {
+    return unresolvedResumeResult(evidence, confirmedSelection)
+  }
+  const answerCheck = validateAnswerTranscriptionCheck({
+    transcription: evidence.transcription,
+    sources: {
+      answerPdf: { sha256: evidence.receipt.inputDigests.answerPdfSha256 },
+    },
+  }, evidence.answerPdfBytes)
+  const prepared = buildConfirmedFormat2CanonicalRequest({
+    transcription: evidence.transcription,
+    questionPdfBytes: evidence.questionPdfBytes,
+    answerPdfBytes: evidence.answerPdfBytes,
+    confirmedSelection,
+  })
+  const publicationConfirmation = readingOptionPublicationConfirmation(
+    evidence,
+    confirmedSelection,
+  )
+  const publicationRoot = path.join(repositoryRoot, 'app/public/paper-assets')
+  mkdirSync(evidence.jobRoot, { recursive: true })
+  const publicationDbPath = path.join(repositoryRoot, 'data/question-bank.sqlite')
+  mkdirSync(path.dirname(publicationDbPath), { recursive: true })
+  const db = new DatabaseSync(publicationDbPath)
+  try {
+    recoverCanonicalPaperPublication({
+      rootDir: publicationRoot,
+      db,
+      paperId: input.paperId,
+    })
+    const published = publishCanonicalPaperPublication({
+      rootDir: publicationRoot,
+      db,
+      request: prepared.request,
+      sourceAssetVersion: 1,
+      sourceAsset: prepared.sourceAsset,
+      visualConfirmation: {
+        candidatePackage: publicationConfirmation.candidatePackage,
+        teacherConfirmation: publicationConfirmation.teacherConfirmation,
+      },
+      failurePoint: publicationFailurePoint,
+    })
+    if (!['published', 'idempotent'].includes(published.status)) {
+      const diagnostics = canonicalDiagnostics(published.compilation)
+      fail(
+        'FORMAT2_CANONICAL_COMPILATION_UNRESOLVED',
+        'Confirmed Format 2 source did not produce one complete Canonical Paper',
+        diagnostics.length > 0 ? diagnostics : published.diagnostics,
+      )
+    }
+    const store = createFileSystemCanonicalPublicationStore({
+      rootDir: publicationRoot,
+      db,
+    })
+    const screen = loadPaperForConsumptionSync({
+      paperId: input.paperId,
+      version: published.versionName,
+      consumerContract: readingOptionFigureConsumerContractRefs.screen,
+    }, store)
+    const printPdf = loadPaperForConsumptionSync({
+      paperId: input.paperId,
+      version: published.versionName,
+      consumerContract: readingOptionFigureConsumerContractRefs.print_pdf,
+    }, store)
+    const currentRef = store.readPublishedRefs(input.paperId).current
+    if (
+      screen.disposition !== 'ready'
+      || printPdf.disposition !== 'ready'
+      || currentRef?.versionName !== published.versionName
+      || currentRef?.publicationDigest !== published.publicationDigest
+    ) {
+      fail(
+        'FORMAT2_CANONICAL_EXACT_RELOAD_FAILED',
+        'Local publication success requires exact committed Screen and Print/PDF reload',
+      )
+    }
+    const canonicalPublication = committedPublicationIdentity({
+      paperId: input.paperId,
+      published,
+      screen,
+      printPdf,
+    })
+    const qaArtifacts = persistQaArtifacts({
+      evidence,
+      paperName: evidence.receipt.result.provenance.paperName,
+      printConsumption: printPdf,
+      publicationRoot,
+    })
+    const result = {
+      schemaVersion: RESULT_SCHEMA_VERSION,
+      paperId: input.paperId,
+      provenance: cloneJson(evidence.receipt.result.provenance),
+      jobId: input.jobId,
+      lifecycle: 'awaiting_qa',
+      stopReason: { code: QA_STOP_CODE },
+      diagnostics: [],
+      artifacts: {
+        ...cloneJson(evidence.receipt.result.artifacts),
+        confirmedSelection: {
+          schemaVersion: confirmedSelection.schemaVersion,
+          candidatePackageDigest: confirmedSelection.candidatePackageDigest,
+          confirmationDigest: confirmedSelection.confirmationDigest,
+          digest: digestJson(confirmedSelection),
+        },
+        qa: qaArtifacts,
+      },
+      humanEntryPoints: buildQaEntryPoints({
+        evidence,
+        publication: canonicalPublication,
+        confirmedSelection: {
+          confirmationDigest: confirmedSelection.confirmationDigest,
+        },
+        qaArtifacts,
+      }),
+      canonicalPublication,
+    }
+    persistAwaitingQa({ evidence, result, answerCheck, completionFailurePoint })
+    return cloneJson(result)
+  } finally {
+    db.close()
+  }
+}
+
+export function createFormat2ImportJobRuntime({
+  repositoryRoot,
+  publicationFailurePoint = null,
+  completionFailurePoint = null,
+}) {
   if (!path.isAbsolute(repositoryRoot)) {
     throw format2Error(
       'FORMAT2_JOB_RUNTIME_INVALID',
@@ -896,6 +2177,18 @@ export function createFormat2ImportJobRuntime({ repositoryRoot }) {
     startOrContinueFormat2ImportJob(input) {
       try {
         return runStartOrContinue(input, repositoryRoot)
+      } catch (error) {
+        return failureResult(error)
+      }
+    },
+    resumeFormat2ImportJob(input) {
+      try {
+        return runResume(
+          input,
+          repositoryRoot,
+          publicationFailurePoint,
+          completionFailurePoint,
+        )
       } catch (error) {
         return failureResult(error)
       }

@@ -19,3 +19,13 @@ export function startOrContinueFormat2ImportJob(input) {
   if (arguments.length !== 1) return runtime.rejectUnsupportedPublicArguments()
   return runtime.startOrContinueFormat2ImportJob(input)
 }
+
+/**
+ * Public post-confirmation seam for the exact current durable Job.
+ * Compiler, publication storage, recovery, and consumer contracts stay bound
+ * behind the one-input operation.
+ */
+export function resumeFormat2ImportJob(input) {
+  if (arguments.length !== 1) return runtime.rejectUnsupportedPublicArguments()
+  return runtime.resumeFormat2ImportJob(input)
+}

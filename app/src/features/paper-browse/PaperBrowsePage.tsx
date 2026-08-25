@@ -101,6 +101,9 @@ import {
   selectConsumerGroupMode,
   selectedFamilyContractIdForGroup,
 } from '../../../../shared/paper-canonical/consumerProjection.mjs'
+import {
+  projectCanonicalPaperBrowseDisplayAsset,
+} from '../../../../shared/paper-canonical/paperBrowseDisplayAsset.mjs'
 // figure-render cut: separate import line (not folded into the block
 // above) so verify-paper-browse.mjs's `buildPaperAssetSurfaceModel...from
 // '../paper-intelligence/'` proximity regex keeps matching unchanged.
@@ -828,17 +831,19 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
 
     async function load(): Promise<void> {
       try {
+        const canonicalConsumption = await loadScreenConsumption(paperId)
         let resolvedBase = `/paper-assets/${paperId}/latest`
         let assetRes = await fetch(`${resolvedBase}/paper-asset.json`)
         if (!assetRes.ok) {
           resolvedBase = `/paper-assets/${paperId}`
           assetRes = await fetch(`${resolvedBase}/paper-asset.json`)
         }
-        if (!assetRes.ok) {
-          throw new Error(`没找到这份卷面（${paperId}），可能已被移除。回到找题页重新打开吧。`)
-        }
-        const sourceAsset = (await assetRes.json()) as PaperAssetV1
-        const canonicalConsumption = await loadScreenConsumption(paperId)
+        const staticAsset = assetRes.ok
+          ? await assetRes.json().catch(() => null) as PaperAssetV1 | null
+          : null
+        const sourceAsset = staticAsset?.schemaVersion === 'paper-asset-v1'
+          ? staticAsset
+          : projectCanonicalPaperBrowseDisplayAsset(canonicalConsumption) as PaperAssetV1
         const loadedAsset = projectAssetBlocksToCanonicalConsumption(
           sourceAsset,
           canonicalConsumption,

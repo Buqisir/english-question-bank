@@ -10,6 +10,7 @@
     "format",
     "provenance",
     "sourceBindings",
+    "answerTranscriptionCheck",
     "groups",
     "officialAnswers",
     "visuals"
@@ -27,6 +28,12 @@
         "questionPdfSha256": { "$ref": "#/$defs/sha256" },
         "answerPdfSha256": { "$ref": "#/$defs/sha256" }
       }
+    },
+    "answerTranscriptionCheck": {
+      "oneOf": [
+        { "$ref": "#/$defs/answerTextCheck" },
+        { "$ref": "#/$defs/answerImageCheck" }
+      ]
     },
     "groups": {
       "type": "array",
@@ -52,6 +59,221 @@
     "sha256": {
       "type": "string",
       "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "questionRange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["start", "end"],
+      "properties": {
+        "start": { "type": "integer", "minimum": 1 },
+        "end": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "byteSpan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["start", "end"],
+      "properties": {
+        "start": { "type": "integer", "minimum": 0 },
+        "end": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "pixelBox": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y", "width", "height"],
+      "properties": {
+        "x": { "type": "integer", "minimum": 0 },
+        "y": { "type": "integer", "minimum": 0 },
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "answerMarkingCommon": {
+      "type": "object",
+      "properties": {
+        "questionId": { "$ref": "#/$defs/nonEmpty" },
+        "questionNo": { "type": "integer", "minimum": 1 },
+        "questionRange": { "$ref": "#/$defs/questionRange" },
+        "answerOrdinal": { "type": "integer", "minimum": 0 },
+        "answer": { "$ref": "#/$defs/nonEmpty" },
+        "page": { "type": "integer", "minimum": 1 },
+        "sourceMarking": { "$ref": "#/$defs/nonEmpty" }
+      }
+    },
+    "answerTextMarking": {
+      "allOf": [
+        { "$ref": "#/$defs/answerMarkingCommon" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "questionId", "questionNo", "questionRange", "answerOrdinal",
+            "answer", "page", "sourceMarking", "byteSpan", "answerByteSpan"
+          ],
+          "properties": {
+            "questionId": { "$ref": "#/$defs/nonEmpty" },
+            "questionNo": { "type": "integer", "minimum": 1 },
+            "questionRange": { "$ref": "#/$defs/questionRange" },
+            "answerOrdinal": { "type": "integer", "minimum": 0 },
+            "answer": { "$ref": "#/$defs/nonEmpty" },
+            "page": { "type": "integer", "minimum": 1 },
+            "sourceMarking": { "$ref": "#/$defs/nonEmpty" },
+            "byteSpan": { "$ref": "#/$defs/byteSpan" },
+            "answerByteSpan": { "$ref": "#/$defs/byteSpan" }
+          }
+        }
+      ]
+    },
+    "answerImageMarking": {
+      "allOf": [
+        { "$ref": "#/$defs/answerMarkingCommon" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "questionId", "questionNo", "questionRange", "answerOrdinal",
+            "answer", "page", "sourceMarking", "regionId"
+          ],
+          "properties": {
+            "questionId": { "$ref": "#/$defs/nonEmpty" },
+            "questionNo": { "type": "integer", "minimum": 1 },
+            "questionRange": { "$ref": "#/$defs/questionRange" },
+            "answerOrdinal": { "type": "integer", "minimum": 0 },
+            "answer": { "$ref": "#/$defs/nonEmpty" },
+            "page": { "type": "integer", "minimum": 1 },
+            "sourceMarking": { "$ref": "#/$defs/nonEmpty" },
+            "regionId": { "$ref": "#/$defs/nonEmpty" }
+          }
+        }
+      ]
+    },
+    "answerCheckBaseProperties": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": { "const": "answer-transcription-check-v2" },
+        "method": { "const": "ai-source-markings-vs-answer-key" },
+        "answerPdfSha256": { "$ref": "#/$defs/sha256" },
+        "officialAnswersDigest": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "answerTextCheck": {
+      "allOf": [
+        { "$ref": "#/$defs/answerCheckBaseProperties" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "schemaVersion", "method", "answerPdfSha256",
+            "officialAnswersDigest", "evidenceKind", "extraction", "sourceMarkings"
+          ],
+          "properties": {
+            "schemaVersion": { "const": "answer-transcription-check-v2" },
+            "method": { "const": "ai-source-markings-vs-answer-key" },
+            "answerPdfSha256": { "$ref": "#/$defs/sha256" },
+            "officialAnswersDigest": { "$ref": "#/$defs/sha256" },
+            "evidenceKind": { "const": "text" },
+            "extraction": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "schemaVersion", "tool", "toolVersion", "parameters",
+                "extractedText", "extractedTextSha256"
+              ],
+              "properties": {
+                "schemaVersion": { "const": "answer-text-extraction-v1" },
+                "tool": { "const": "pdftotext" },
+                "toolVersion": { "$ref": "#/$defs/nonEmpty" },
+                "parameters": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": { "$ref": "#/$defs/nonEmpty" }
+                },
+                "extractedText": { "$ref": "#/$defs/nonEmpty" },
+                "extractedTextSha256": { "$ref": "#/$defs/sha256" }
+              }
+            },
+            "sourceMarkings": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "#/$defs/answerTextMarking" }
+            }
+          }
+        }
+      ]
+    },
+    "answerImageCheck": {
+      "allOf": [
+        { "$ref": "#/$defs/answerCheckBaseProperties" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "schemaVersion", "method", "answerPdfSha256", "officialAnswersDigest",
+            "evidenceKind", "rasterization", "pages", "regions", "sourceMarkings"
+          ],
+          "properties": {
+            "schemaVersion": { "const": "answer-transcription-check-v2" },
+            "method": { "const": "ai-source-markings-vs-answer-key" },
+            "answerPdfSha256": { "$ref": "#/$defs/sha256" },
+            "officialAnswersDigest": { "$ref": "#/$defs/sha256" },
+            "evidenceKind": { "const": "page_image_regions" },
+            "rasterization": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["schemaVersion", "tool", "toolVersion", "parameters", "dpi"],
+              "properties": {
+                "schemaVersion": { "const": "answer-page-rasterization-v1" },
+                "tool": { "const": "pdftoppm" },
+                "toolVersion": { "$ref": "#/$defs/nonEmpty" },
+                "parameters": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": { "$ref": "#/$defs/nonEmpty" }
+                },
+                "dpi": { "type": "integer", "minimum": 36, "maximum": 600 }
+              }
+            },
+            "pages": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["page", "pixelWidth", "pixelHeight", "sha256", "byteLength"],
+                "properties": {
+                  "page": { "type": "integer", "minimum": 1 },
+                  "pixelWidth": { "type": "integer", "minimum": 1 },
+                  "pixelHeight": { "type": "integer", "minimum": 1 },
+                  "sha256": { "$ref": "#/$defs/sha256" },
+                  "byteLength": { "type": "integer", "minimum": 1 }
+                }
+              }
+            },
+            "regions": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["regionId", "page", "pixelBox", "sha256", "byteLength"],
+                "properties": {
+                  "regionId": { "$ref": "#/$defs/nonEmpty" },
+                  "page": { "type": "integer", "minimum": 1 },
+                  "pixelBox": { "$ref": "#/$defs/pixelBox" },
+                  "sha256": { "$ref": "#/$defs/sha256" },
+                  "byteLength": { "type": "integer", "minimum": 1 }
+                }
+              }
+            },
+            "sourceMarkings": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "#/$defs/answerImageMarking" }
+            }
+          }
+        }
+      ]
     },
     "provenance": {
       "type": "object",
@@ -340,22 +562,58 @@
     "listeningBlock": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["blockId", "kind", "transcript"],
+      "required": ["blockId", "kind", "questions", "answers", "transcript", "inventory"],
       "properties": {
         "blockId": { "$ref": "#/$defs/nonEmpty" },
         "kind": { "const": "listening_material" },
-        "transcript": { "$ref": "#/$defs/nonEmpty" }
+        "questions": { "type": "object" },
+        "answers": { "type": "object" },
+        "transcript": { "type": "object" },
+        "inventory": { "type": "object" }
       }
     },
     "writingBlock": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["blockId", "kind", "taskType", "prompt"],
+      "required": ["blockId", "kind", "taskType", "prompt", "wordCountTarget"],
       "properties": {
         "blockId": { "$ref": "#/$defs/nonEmpty" },
         "kind": { "const": "writing_material" },
         "taskType": { "enum": ["application", "continuation"] },
-        "prompt": { "$ref": "#/$defs/nonEmpty" }
+        "prompt": { "$ref": "#/$defs/nonEmpty" },
+        "wordCountTarget": { "type": "integer", "minimum": 1 },
+        "wordCountScope": { "enum": ["student_authored_only", "unspecified"] },
+        "sourceInstruction": { "$ref": "#/$defs/nonEmpty" },
+        "applicationEvidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "writerRole",
+            "audienceOrDestination",
+            "deliverable",
+            "communicativePurpose",
+            "contentRequirements",
+            "answerRegionAbsent"
+          ],
+          "properties": {
+            "writerRole": { "$ref": "#/$defs/nonEmpty" },
+            "audienceOrDestination": { "$ref": "#/$defs/nonEmpty" },
+            "deliverable": { "$ref": "#/$defs/nonEmpty" },
+            "communicativePurpose": { "$ref": "#/$defs/nonEmpty" },
+            "contentRequirements": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "#/$defs/nonEmpty" }
+            },
+            "answerRegionAbsent": { "const": true }
+          }
+        },
+        "continuationStarters": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": { "$ref": "#/$defs/nonEmpty" }
+        }
       }
     },
     "block": {
@@ -371,9 +629,23 @@
     "group": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["groupId", "groupType", "blocks", "questions"],
+      "required": ["groupId", "slotId", "groupType", "blocks", "questions"],
       "properties": {
         "groupId": { "$ref": "#/$defs/nonEmpty" },
+        "slotId": {
+          "enum": [
+            "reading.a",
+            "reading.b",
+            "reading.c",
+            "reading.d",
+            "reading.seven-choices",
+            "language.cloze",
+            "language.grammar-fill",
+            "writing.application",
+            "writing.continuation",
+            "listening.raw"
+          ]
+        },
         "groupType": {
           "enum": [
             "reading",

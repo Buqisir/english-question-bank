@@ -9,6 +9,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import {
   format2ComparisonFile,
+  format2QaArtifactFile,
   homeLists,
   listOpsPapers,
   probePaper,
@@ -35,6 +36,16 @@ function send(response, status, body, headers = {}) {
 
 function sendJson(response, status, body) {
   send(response, status, body, { 'content-type': 'application/json; charset=utf-8' })
+}
+
+function sendBytes(response, status, body, headers = {}) {
+  response.writeHead(status, {
+    'cache-control': 'no-store',
+    'content-length': body.byteLength,
+    'x-content-type-options': 'nosniff',
+    ...headers,
+  })
+  response.end(body)
 }
 
 function notFound(response) {
@@ -74,8 +85,28 @@ const server = createServer((request, response) => {
       notFound(response)
       return
     }
-    send(response, 200, readFileSync(comparisonFile), {
+    sendBytes(response, 200, readFileSync(comparisonFile), {
       'content-type': 'text/html; charset=utf-8',
+    })
+    return
+  }
+
+  const format2QaArtifact = url.pathname.match(
+    /^\/papers\/([^/]+)\/format2-qa\/([A-Za-z0-9._-]+)$/,
+  )
+  if (format2QaArtifact) {
+    const paperId = decodeURIComponent(format2QaArtifact[1])
+    const artifact = format2QaArtifactFile({
+      repoRoot,
+      paperId,
+      artifactName: format2QaArtifact[2],
+    })
+    if (!artifact) {
+      notFound(response)
+      return
+    }
+    sendBytes(response, 200, artifact.bytes, {
+      'content-type': artifact.mediaType,
     })
     return
   }

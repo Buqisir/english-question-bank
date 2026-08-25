@@ -1,13 +1,15 @@
 #!/usr/bin/env node
 import assert from 'node:assert/strict'
-import { mkdirSync, mkdtempSync, writeFileSync, readFileSync } from 'node:fs'
-import { spawnSync } from 'node:child_process'
+import { existsSync, mkdirSync, mkdtempSync, unlinkSync, writeFileSync, readFileSync } from 'node:fs'
+import { spawn, spawnSync } from 'node:child_process'
+import { createServer as createNetServer } from 'node:net'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import {
   ANALYSIS_KEYS,
   format2ComparisonFile,
+  format2QaArtifactFile,
   homeLists,
   isOpsVisible,
   listOpsPapers,
@@ -32,6 +34,33 @@ import {
 const here = path.dirname(fileURLToPath(import.meta.url))
 const html = readFileSync(path.join(here, 'public/index.html'), 'utf8')
 const serverSrc = readFileSync(path.join(here, 'server.mjs'), 'utf8')
+
+async function freePort() {
+  const server = createNetServer()
+  await new Promise((resolve, reject) => {
+    server.once('error', reject)
+    server.listen(0, '127.0.0.1', resolve)
+  })
+  const address = server.address()
+  const port = typeof address === 'object' && address ? address.port : null
+  await new Promise((resolve, reject) => server.close((error) => error ? reject(error) : resolve()))
+  assert.ok(port)
+  return port
+}
+
+async function waitForHealth(origin) {
+  let lastError = null
+  for (let attempt = 0; attempt < 80; attempt += 1) {
+    try {
+      const response = await fetch(`${origin}/api/health`)
+      if (response.ok) return
+    } catch (error) {
+      lastError = error
+    }
+    await new Promise((resolve) => setTimeout(resolve, 25))
+  }
+  throw lastError || new Error('import-ops server did not become healthy')
+}
 
 function paperDir(root, id) {
   const dir = path.join(root, 'scripts/import-pipeline/papers', id)
@@ -61,6 +90,39 @@ const format2Fixture = makeFormat2ImportJobFixture({
 const format2Result = createFormat2ImportJobRuntime({ repositoryRoot: root })
   .startOrContinueFormat2ImportJob(format2Fixture.input)
 assert.equal(format2Result.lifecycle, 'importing')
+
+const format2QaFixture = makeFormat2ImportJobFixture({
+  sourceDir: path.join(root, 'format2-qa-fixture-sources'),
+  paperId: 'paper-format2-qa',
+  writerId: 'import-ops-format2-qa-writer',
+})
+const format2QaRuntime = createFormat2ImportJobRuntime({ repositoryRoot: root })
+const format2QaStart = format2QaRuntime.startOrContinueFormat2ImportJob(
+  format2QaFixture.input,
+)
+const format2QaCandidate = JSON.parse(readFileSync(path.join(
+  root,
+  'scripts/import-pipeline/papers',
+  format2QaFixture.input.paperId,
+  format2QaStart.artifacts.candidatePackage.relativePath,
+), 'utf8'))
+const format2QaResult = format2QaRuntime.resumeFormat2ImportJob({
+  paperId: format2QaFixture.input.paperId,
+  jobId: format2QaStart.jobId,
+  teacherConfirmation: {
+    schemaVersion: 'visual-teacher-confirmation-v1',
+    packageDigest: format2QaCandidate.packageDigest,
+    decisions: format2QaCandidate.observations.map((observation) => ({
+      observationId: observation.observationId,
+      owner: structuredClone(observation.owner),
+      disposition: 'confirmed',
+      selectedCandidateDigest: format2QaCandidate.candidates.find(
+        (candidate) => candidate.observationId === observation.observationId,
+      ).candidateDigest,
+    })),
+  },
+})
+assert.equal(format2QaResult.lifecycle, 'awaiting_qa')
 
 const queuedId = 'paper-queued'
 mkdirSync(path.join(root, 'scripts/import-pipeline/papers', queuedId), { recursive: true })
@@ -130,6 +192,10 @@ const format2Importing = probePaper({
   repoRoot: root,
   paperId: format2Fixture.input.paperId,
 })
+const format2AwaitingQa = probePaper({
+  repoRoot: root,
+  paperId: format2QaFixture.input.paperId,
+})
 
 assert.equal(queued.status, 'queued')
 assert.equal(importing.status, 'importing')
@@ -146,6 +212,13 @@ assert.deepEqual(format2Importing.format2Stop, {
 })
 assert.equal(JSON.stringify(format2Importing.format2Stop).includes('Short synthetic passage'), false)
 assert.equal(JSON.stringify(format2Importing.format2Stop).includes('officialAnswers'), false)
+assert.equal(format2AwaitingQa.status, 'awaiting_qa')
+assert.equal(format2AwaitingQa.format2Stop, null)
+assert.equal(format2AwaitingQa.format2Qa.lifecycle, 'awaiting_qa')
+assert.equal(format2AwaitingQa.format2Qa.publication.publicationDigest,
+  format2QaResult.canonicalPublication.publicationDigest)
+assert.equal(format2AwaitingQa.format2Qa.entryPoints.firstFocusState.paperId,
+  format2QaFixture.input.paperId)
 const exactComparisonPath = path.join(
   root,
   'scripts/import-pipeline/papers',
@@ -218,7 +291,211 @@ assert.deepEqual(lists.failed.map((p) => p.paperId).sort(), [
 const qa = qaLinks(awaiting, 'http://127.0.0.1:5173')
 assert.match(qa.screen, /view=paper-browse/)
 assert.match(qa.screen, /paper-awaiting-qa/)
+const format2Qa = qaLinks(format2AwaitingQa, 'http://127.0.0.1:5173')
+assert.equal(format2Qa.screen,
+  'http://127.0.0.1:5173/?view=paper-browse&paperId=paper-format2-qa')
+for (const key of ['studentPrint', 'teacherPrint', 'pdf']) {
+  const entry = format2Qa[key]
+  assert.equal(entry.kind, 'artifact_url')
+  assert.equal(entry.method, 'GET')
+  assert.equal(new URL(entry.href).origin, format2QaResult.humanEntryPoints.service.qaArtifactOrigin)
+  assert.equal(entry.sha256, format2QaResult.artifacts.qa[key].sha256)
+  assert.equal(entry.byteLength, format2QaResult.artifacts.qa[key].byteLength)
+  assert.equal(entry.mediaType, format2QaResult.artifacts.qa[key].mediaType)
+}
+assert.match(format2Qa.studentPrint.mediaType, /^text\/html/u)
+assert.match(format2Qa.teacherPrint.mediaType, /^text\/html/u)
+assert.equal(format2Qa.pdf.mediaType, 'application/pdf')
+assert.deepEqual(format2Qa.firstFocusState, format2QaResult.humanEntryPoints.firstFocusState)
+assert.equal(format2Qa.gateSummary, format2QaResult.humanEntryPoints.gateSummary)
+assert.deepEqual(format2Qa.service, format2QaResult.humanEntryPoints.service)
+assert.deepEqual(format2Qa.qaAcceptance, format2QaResult.humanEntryPoints.qaAcceptance)
+assert.match(format2Qa.note, /不写 Owner QA 收据/u)
 assert.equal(qaLinks(blocked, 'http://127.0.0.1:5173').screen, null)
+
+const opsPort = await freePort()
+const opsOrigin = `http://127.0.0.1:${opsPort}`
+const initialCurrentPath = path.join(
+  root,
+  'scripts/import-pipeline/papers',
+  format2QaFixture.input.paperId,
+  'job/current.json',
+)
+const initialCurrentBytes = readFileSync(initialCurrentPath)
+const studentArtifactPath = path.join(
+  root,
+  'scripts/import-pipeline/papers',
+  format2QaFixture.input.paperId,
+  format2QaResult.artifacts.qa.studentPrint.relativePath,
+)
+const exactStudentBytes = readFileSync(studentArtifactPath)
+const opsServer = spawn(process.execPath, [path.join(here, 'server.mjs')], {
+  cwd: path.join(here, '..'),
+  env: { ...process.env, EQB_ROOT: root, IMPORT_OPS_PORT: String(opsPort) },
+  stdio: 'ignore',
+})
+try {
+  await waitForHealth(opsOrigin)
+  for (const key of ['studentPrint', 'teacherPrint', 'pdf']) {
+    const entry = format2Qa[key]
+    const url = new URL(entry.href)
+    const response = await fetch(`${opsOrigin}${url.pathname}`)
+    assert.equal(response.status, 200)
+    assert.equal(response.headers.get('content-type'), entry.mediaType)
+    const bytes = Buffer.from(await response.arrayBuffer())
+    assert.equal(bytes.byteLength, entry.byteLength)
+    assert.deepEqual(bytes, readFileSync(path.join(
+      root,
+      'scripts/import-pipeline/papers',
+      format2QaFixture.input.paperId,
+      format2QaResult.artifacts.qa[key].relativePath,
+    )))
+    if (key === 'studentPrint') {
+      assert.equal(bytes.toString('utf8').includes('<strong>【答案】</strong>'), false)
+      assert.equal(bytes.toString('utf8').includes('Analysis sentinel'), false)
+    } else if (key === 'teacherPrint') {
+      assert.equal(bytes.toString('utf8').includes('<strong>【答案】</strong>'), true)
+    } else {
+      assert.equal(bytes.subarray(0, 4).toString(), '%PDF')
+    }
+  }
+  const support = format2QaResult.artifacts.qa.support[0]
+  if (support) {
+    const supportResponse = await fetch(`${opsOrigin}/papers/${format2QaFixture.input.paperId}/format2-qa/${support.fileName}`)
+    assert.equal(supportResponse.status, 200)
+    assert.equal(supportResponse.headers.get('content-type'), support.mediaType)
+    assert.deepEqual(
+      Buffer.from(await supportResponse.arrayBuffer()),
+      readFileSync(path.join(root, 'scripts/import-pipeline/papers', format2QaFixture.input.paperId, support.relativePath)),
+    )
+  }
+  assert.equal(
+    (await fetch(`${opsOrigin}/papers/${format2QaFixture.input.paperId}/format2-qa/%2e%2e%2fcurrent.json`)).status,
+    404,
+  )
+  try {
+    writeFileSync(studentArtifactPath, Buffer.concat([exactStudentBytes, Buffer.from('tampered')]))
+    assert.equal(
+      (await fetch(`${opsOrigin}/papers/${format2QaFixture.input.paperId}/format2-qa/student-print`)).status,
+      404,
+      'artifact GET rejects wrong bytes for the receipt digest',
+    )
+  } finally {
+    writeFileSync(studentArtifactPath, exactStudentBytes)
+  }
+  try {
+    const staleCurrent = JSON.parse(initialCurrentBytes)
+    staleCurrent.result.jobId = 'format2-job:stale-receipt-fixture'
+    writeFileSync(initialCurrentPath, `${JSON.stringify(staleCurrent, null, 2)}\n`)
+    assert.equal(
+      (await fetch(`${opsOrigin}/papers/${format2QaFixture.input.paperId}/format2-qa/student-print`)).status,
+      404,
+      'artifact GET rejects a stale Job receipt identity',
+    )
+  } finally {
+    writeFileSync(initialCurrentPath, initialCurrentBytes)
+  }
+} finally {
+  opsServer.kill('SIGTERM')
+  await new Promise((resolve) => opsServer.once('exit', resolve))
+}
+
+assert.equal(format2QaArtifactFile({
+  repoRoot: root,
+  paperId: format2QaFixture.input.paperId,
+  artifactName: '../current.json',
+}), null)
+writeFileSync(studentArtifactPath, Buffer.concat([exactStudentBytes, Buffer.from('tampered')]))
+assert.equal(format2QaArtifactFile({
+  repoRoot: root,
+  paperId: format2QaFixture.input.paperId,
+  artifactName: 'student-print',
+}), null, 'artifact GET must reject an exact digest mismatch')
+writeFileSync(studentArtifactPath, exactStudentBytes)
+
+const initialQaReceipt = {
+  ...format2QaResult.humanEntryPoints.qaAcceptance.expectedReceipt,
+  acceptedAt: '2026-08-25T00:00:00.000Z',
+}
+const format2QaPaperDir = path.join(
+  root,
+  'scripts/import-pipeline/papers',
+  format2QaFixture.input.paperId,
+)
+const qaAcceptedPath = path.join(format2QaPaperDir, 'signals/qa-accepted.json')
+writeFileSync(qaAcceptedPath, `${JSON.stringify(initialQaReceipt, null, 2)}\n`)
+assert.equal(probePaper({ repoRoot: root, paperId: format2QaFixture.input.paperId }).status, 'ready_to_ship')
+writeFileSync(studentArtifactPath, Buffer.concat([exactStudentBytes, Buffer.from('tampered')]))
+const tamperedQaProbe = probePaper({ repoRoot: root, paperId: format2QaFixture.input.paperId })
+assert.equal(tamperedQaProbe.qaAccepted, false)
+assert.equal(tamperedQaProbe.status, 'awaiting_qa')
+assert.equal(tamperedQaProbe.gatesGreen, false)
+writeFileSync(studentArtifactPath, exactStudentBytes)
+assert.equal(probePaper({ repoRoot: root, paperId: format2QaFixture.input.paperId }).status, 'ready_to_ship')
+
+const changedQaInput = structuredClone(format2QaFixture.input)
+const sourceVisual = changedQaInput.transcription.visuals[0]
+sourceVisual.alternatives.push({
+  method: 'vector_authored',
+  trigger: { kind: 'owner_request', note: 'Fixture requests one unselected comparison candidate.' },
+  artifact: structuredClone(changedQaInput.transcription.visuals[1].sourceCrop),
+  sourceTruthChecklist: structuredClone(sourceVisual.sourceTruthChecklist),
+  reproducibility: {
+    editableVector: '<svg viewBox="0 0 1 1"></svg>',
+    tool: 'deterministic-fixture-exporter-v1',
+    exportSettings: 'PNG fixture export',
+  },
+})
+const changedQaStart = format2QaRuntime.startOrContinueFormat2ImportJob(changedQaInput)
+assert.equal(changedQaStart.lifecycle, 'importing')
+assert.notEqual(changedQaStart.jobId, format2QaResult.jobId)
+assert.equal(
+  existsSync(qaAcceptedPath),
+  false,
+  'a new Job identity removes the old Owner QA receipt before confirmation',
+)
+const changedQaCandidate = JSON.parse(readFileSync(path.join(
+  format2QaPaperDir,
+  changedQaStart.artifacts.candidatePackage.relativePath,
+), 'utf8'))
+const changedQaResult = format2QaRuntime.resumeFormat2ImportJob({
+  paperId: changedQaInput.paperId,
+  jobId: changedQaStart.jobId,
+  teacherConfirmation: {
+    schemaVersion: 'visual-teacher-confirmation-v1',
+    packageDigest: changedQaCandidate.packageDigest,
+    decisions: changedQaCandidate.observations.map((observation) => ({
+      observationId: observation.observationId,
+      owner: structuredClone(observation.owner),
+      disposition: 'confirmed',
+      selectedCandidateDigest: changedQaCandidate.candidates.find((candidate) => (
+        candidate.observationId === observation.observationId
+        && candidate.method === 'source_crop'
+      )).candidateDigest,
+    })),
+  },
+})
+assert.equal(changedQaResult.lifecycle, 'awaiting_qa')
+writeFileSync(qaAcceptedPath, `${JSON.stringify(initialQaReceipt, null, 2)}\n`)
+const staleQaProbe = probePaper({ repoRoot: root, paperId: format2QaFixture.input.paperId })
+assert.equal(staleQaProbe.qaAccepted, false)
+assert.equal(staleQaProbe.status, 'awaiting_qa')
+assert.notEqual(
+  changedQaResult.humanEntryPoints.qaAcceptance.expectedReceipt.qaIdentityDigest,
+  initialQaReceipt.qaIdentityDigest,
+)
+assert.equal(format2QaArtifactFile({
+  repoRoot: root,
+  paperId: format2QaFixture.input.paperId,
+  artifactName: 'student-print',
+})?.filePath.endsWith('student-print.html'), true)
+const changedCurrentBytes = readFileSync(initialCurrentPath)
+writeFileSync(initialCurrentPath, '{ invalid current receipt')
+const invalidCurrentProbe = probePaper({ repoRoot: root, paperId: format2QaFixture.input.paperId })
+assert.equal(invalidCurrentProbe.qaAccepted, false)
+assert.equal(invalidCurrentProbe.status, 'awaiting_qa')
+writeFileSync(initialCurrentPath, changedCurrentBytes)
+unlinkSync(qaAcceptedPath)
 
 assert.equal(html.includes('pull-run-push'), false)
 assert.equal(html.includes('无生产按钮'), true)
@@ -226,6 +503,12 @@ assert.equal(html.includes('这里没有按钮'), true)
 assert.equal(html.includes('Screen 预览'), true)
 assert.equal(html.includes('Student Print'), true)
 assert.equal(html.includes('Teacher Print'), true)
+assert.equal(html.includes("qaAction('PDF', qa.pdf)"), true)
+assert.equal(html.includes('<strong>Service</strong>'), true)
+assert.equal(html.includes('<strong>First focus state</strong>'), true)
+assert.equal(html.includes('<strong>Gate summary</strong>'), true)
+assert.equal(html.includes('entry.mediaType'), true)
+assert.equal(html.includes('entry.sha256'), true)
 assert.equal(html.includes('不对答案表'), true)
 assert.equal(html.includes('重试上线'), true)
 assert.equal(html.includes('未到可上线'), true)
@@ -234,6 +517,9 @@ assert.equal(html.includes('按正常尺寸比较'), true)
 assert.equal(/push<\/button>/.test(html), false)
 assert.equal(serverSrc.includes("request.method !== 'GET'"), true)
 assert.equal(serverSrc.includes('format2ComparisonFile'), true)
+assert.equal(serverSrc.includes('format2QaArtifactFile'), true)
+assert.equal(serverSrc.includes('format2-qa'), true)
+assert.equal(serverSrc.includes('sendBytes'), true)
 assert.equal(statusOf({ shipped: true, blocked: { code: 'x' } }), 'shipped')
 
 const contract = readFileSync(path.join(here, '../docs/import/agent-contract.md'), 'utf8')
@@ -245,6 +531,7 @@ assert.equal(contract.includes('--owner-said-ship'), true)
 assert.deepEqual(listOpsPapers(root).map((p) => p.paperId).sort(), [
   'paper-awaiting-qa',
   'paper-format1-blocked',
+  'paper-format2-qa',
   'paper-format2-synthetic',
   'paper-importing',
   'paper-queued',
