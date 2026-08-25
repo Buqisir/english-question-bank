@@ -9,9 +9,16 @@ import {
 async function mount(): Promise<void> {
   const params = new URLSearchParams(window.location.search)
   const groupId = params.get('groupId')
+  const fixture = params.get('fixture')
   const invalidCompanion = params.get('invalidCompanion')
   if (!groupId) throw new Error('groupId is required')
-  const response = await fetch('/qa/canonical-reading-consumption.json')
+  if (fixture !== null && fixture !== 'q33-source-crop') {
+    throw new Error('unsupported Canonical Reading QA fixture')
+  }
+  const consumptionPath = fixture === 'q33-source-crop'
+    ? '/qa/paper-mock-sz-2026-m1-q33-screen-consumption.json'
+    : '/qa/canonical-reading-consumption.json'
+  const response = await fetch(consumptionPath)
   if (!response.ok) throw new Error('canonical Reading QA consumption unavailable')
   const consumption = await response.json() as unknown
   const model = buildCanonicalReadingConsumptionSurfaceData({

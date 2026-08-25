@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "visual-teacher-confirmation-v1",
+  "packageDigest": "sha256:53d29f20c9bd6ad1b1c0138e030f679ebfad2cf945c7e85eb3bd5ed89881d7b8",
+  "decisions": [
+    {
+      "observationId": "observation:paper-mock-sz-2026-m1:q33:option:A",
+      "owner": {
+        "kind": "reading_option",
+        "groupId": "group-mock-sz-2026-m1-reading-d",
+        "questionId": "q-mock-sz-2026-m1-033",
+        "optionId": "option:q-mock-sz-2026-m1-033:A"
+      },
+      "disposition": "confirmed",
+      "selectedCandidateDigest": "sha256:033b4c7a56070f9ff6dc021f3a7ae4d61459f19bfaf7e10bf7328f2dc2c6c8b2"
+    },
+    {
+      "observationId": "observation:paper-mock-sz-2026-m1:q33:option:B",
+      "owner": {
+        "kind": "reading_option",
+        "groupId": "group-mock-sz-2026-m1-reading-d",
+        "questionId": "q-mock-sz-2026-m1-033",
+        "optionId": "option:q-mock-sz-2026-m1-033:B"
+      },
+      "disposition": "confirmed",
+      "selectedCandidateDigest": "sha256:7b07503f9a76b5323c0b20282b97794b04db99bc33da4ebdd5ca918e7124b126"
+    },
+    {
+      "observationId": "observation:paper-mock-sz-2026-m1:q33:option:C",
+      "owner": {
+        "kind": "reading_option",
+        "groupId": "group-mock-sz-2026-m1-reading-d",
+        "questionId": "q-mock-sz-2026-m1-033",
+        "optionId": "option:q-mock-sz-2026-m1-033:C"
+      },
+      "disposition": "confirmed",
+      "selectedCandidateDigest": "sha256:474e39a0690268135727b44d4c8e17c3bce7410ddc96013a5f048b7f166818de"
+    },
+    {
+      "observationId": "observation:paper-mock-sz-2026-m1:q33:option:D",
+      "owner": {
+        "kind": "reading_option",
+        "groupId": "group-mock-sz-2026-m1-reading-d",
+        "questionId": "q-mock-sz-2026-m1-033",
+        "optionId": "option:q-mock-sz-2026-m1-033:D"
+      },
+      "disposition": "confirmed",
+      "selectedCandidateDigest": "sha256:5b97c34cb36ac51885c4e99fee05e557b2a51ccb2e3b2a9ebbf09dc6b5c38f8e"
+    }
+  ]
+}

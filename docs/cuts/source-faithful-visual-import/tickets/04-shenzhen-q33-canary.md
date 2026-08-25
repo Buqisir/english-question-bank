@@ -1,6 +1,6 @@
 # 04 — Migrate Shenzhen Question 33 through exact Owner-confirmed media
 
-Status: ready-for-agent
+Status: in-progress
 Blocked by: `01 — Bind visual candidates to exact Teacher Confirmation`; `03 — Render one Figure Option set across Screen, Print, and PDF`
 
 Spec: `docs/cuts/source-faithful-visual-import/spec.md`
@@ -49,6 +49,11 @@ surface.
 - [ ] The four selected digests and Option associations remain identical in
       Screen, Student Print, Teacher Print, and PDF. Normal-size QA is the
       acceptance view; enlarged inspection is diagnostic only.
+- [ ] Each admitted asset contains the complete source-authored figure plus
+      only source-backed internal whitespace/edge clearance. It contains no
+      A–D label or renderer padding, receives no automatic edge trim or
+      white-to-transparency rewrite, and remains reusable in differently shaped
+      renderer-owned `contain` boxes without crop, stretch, or rotation.
 - [ ] Existing Shenzhen Reading A `framed_columns`, the application-writing
       lamp, all other questions, and all unrelated paper assets remain
       unchanged.

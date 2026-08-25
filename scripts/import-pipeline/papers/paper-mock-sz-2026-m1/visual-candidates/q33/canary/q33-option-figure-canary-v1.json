@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "q33-option-figure-canary-v1",
+  "paperId": "paper-mock-sz-2026-m1",
+  "groupId": "group-mock-sz-2026-m1-reading-d",
+  "questionId": "q-mock-sz-2026-m1-033",
+  "authorityRef": {
+    "manifestId": "paper-canonical",
+    "manifestVersion": "46",
+    "manifestDigest": "sha256:b2ff52332752409e915a33ca976b475510dbcf1822094e5a647e3ea5e612fede"
+  },
+  "candidatePackageDigest": "sha256:53d29f20c9bd6ad1b1c0138e030f679ebfad2cf945c7e85eb3bd5ed89881d7b8",
+  "confirmationDigest": "sha256:7356ca553f2f75f8ded71c80b56d5033ec2e20bb54e575156cb0c6f2e054ea76",
+  "assetFramingPolicyDigest": "sha256:8154eea68e6a1ceaa6d7a8b5c7d5ea57f00bc532056f85e440e82aa3da027154",
+  "canonicalGroupDigest": "sha256:3507ac225c0b48406f22858cee235a49db692f08be8215fc7b2f8f2a91407455",
+  "screenConsumptionDigest": "sha256:41e967a7a4b3aeabee9ad1b6a99dbcf1653fb20b96b014a1925d8bf0727b0877",
+  "printConsumptionDigest": "sha256:b1e961f58cfa8ba34f8c3f473a925a65a4a3dd0f879dd073215e29e2d108a8b5",
+  "sourceCaptureDigest": "sha256:d4ce720342b5d6369a766b124878d67bb631ef1e0067943abebba8249222f80f",
+  "state": "owner_confirmed_local_canary",
+  "canaryDigest": "sha256:b34a842223376a5e6bfc43ae15bc9aca76716b45be1f418be282f717d9189a3e"
+}

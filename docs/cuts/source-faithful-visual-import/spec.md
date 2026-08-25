@@ -160,6 +160,8 @@ renderer 呈现。原整条 PNG 保留为 source evidence，但不再作为 Pass
 - A figure-only A–D set uses one shared, versioned layout rule across Screen and Print/PDF: four equal option tracks, consistent label placement, a candidate-independent image box, preserved aspect ratio, centered content, and no crop or stretch.
 - Physical layout intent is chosen once for the option set and is independent of candidate pixel dimensions. The system must not map raw source pixels directly to CSS px or PDF pt.
 - The four images use the same visual box. Natural internal whitespace may differ only when it is source-backed; the renderer does not normalize away a meaningful difference.
+- The admitted asset owns the complete source-authored figure pixels, including source-backed internal whitespace and only the edge clearance already present in the source object. It excludes A–D labels, question text, page margins, comparison padding, and renderer image-box whitespace.
+- Automatic edge trimming or white-to-transparency rewriting is forbidden: white gaps, highlights, and JPEG edge noise are not sufficient authority to delete source pixels. The renderer owns physical size, placement, alignment, responsive fit-down, and pagination while preserving aspect ratio with `contain`.
 - A Figure Option question is an atomic print unit. If the stem, labels, and four figures do not fit in the remaining page space, the whole question moves together. v1 does not split an option-image set across pages.
 - Student surfaces do not expose the correct answer. Teacher surfaces may use the existing answer/Analysis behavior, but the selected figure bytes and placement remain identical.
 - No Screen, Print, or PDF path calls an image model or conditionally substitutes a different candidate.
@@ -212,6 +214,7 @@ renderer 呈现。原整条 PNG 保留为 source evidence，但不再作为 Pass
 - No surface contains `[Fig.]`, duplicates the question stem, renders the old full-strip figure, or reconstructs semantic ownership independently.
 - Option-to-media association and A–D order are identical across all surfaces.
 - Images preserve aspect ratio, remain inside the shared box, do not crop or stretch, and use the same physical layout intent independent of source pixel size.
+- The exact same confirmed bytes remain contained and legible when placed in differently shaped renderer-owned boxes; portability does not permit cropping, rotation, stretching, relabeling, or removal of semantic whitespace.
 - The complete question moves atomically at a print page boundary.
 - Student output does not expose answer identity; Teacher output retains existing answer behavior without changing image bytes.
 - Ordinary text-only Reading questions retain their current A–D layout and geometry.

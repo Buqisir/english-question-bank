@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "q33-figure-asset-framing-policy-v1",
+  "paperId": "paper-mock-sz-2026-m1",
+  "questionId": "q-mock-sz-2026-m1-033",
+  "candidatePackageDigest": "sha256:53d29f20c9bd6ad1b1c0138e030f679ebfad2cf945c7e85eb3bd5ed89881d7b8",
+  "confirmationDigest": "sha256:7356ca553f2f75f8ded71c80b56d5033ec2e20bb54e575156cb0c6f2e054ea76",
+  "principle": "The asset owns complete source-authored figure pixels; the renderer owns every placement decision.",
+  "contentEnvelope": {
+    "kind": "exact_pdf_embedded_image_extent",
+    "includes": [
+      "the complete meaning-bearing diagram",
+      "source-backed internal whitespace and light gaps",
+      "only edge clearance already present in the embedded source object"
+    ],
+    "excludes": [
+      "question stem",
+      "A-D option labels",
+      "page margins",
+      "comparison-track padding",
+      "fixed renderer image-box whitespace"
+    ],
+    "noAutomaticTrim": "JPEG edge noise and white pixels are not an authority for deleting source-authored whitespace.",
+    "noTransparencyRewrite": "White pixels remain exact source bytes because white gaps and highlights may carry question meaning."
+  },
+  "rendererOwnership": {
+    "controls": [
+      "physical target size",
+      "four-track placement",
+      "alignment",
+      "responsive fit-down",
+      "print pagination"
+    ],
+    "invariant": "preserve aspect ratio with contain; never crop, stretch, rotate, relabel, or reinterpret the selected asset",
+    "portabilityLimit": "Portable means reusable in renderer-owned boxes at a legible size, not permission to change orientation, aspect ratio, or semantic whitespace."
+  },
+  "selectedAssets": [
+    {
+      "optionId": "option:q-mock-sz-2026-m1-033:A",
+      "method": "source_crop",
+      "candidateDigest": "sha256:033b4c7a56070f9ff6dc021f3a7ae4d61459f19bfaf7e10bf7328f2dc2c6c8b2",
+      "artifactSha256": "sha256:f44da659893c5a49c412627f59fffb8aa906c5374403b7eefa2114b4482de747",
+      "pixelWidth": 43,
+      "pixelHeight": 105
+    },
+    {
+      "optionId": "option:q-mock-sz-2026-m1-033:B",
+      "method": "source_crop",
+      "candidateDigest": "sha256:7b07503f9a76b5323c0b20282b97794b04db99bc33da4ebdd5ca918e7124b126",
+      "artifactSha256": "sha256:1ad2a4d428d707151e424480fa51ab5a72237f690ff635b2c4a4e0389bc80021",
+      "pixelWidth": 49,
+      "pixelHeight": 105
+    },
+    {
+      "optionId": "option:q-mock-sz-2026-m1-033:C",
+      "method": "source_crop",
+      "candidateDigest": "sha256:474e39a0690268135727b44d4c8e17c3bce7410ddc96013a5f048b7f166818de",
+      "artifactSha256": "sha256:e8574102337438553c81484acfa94d53ba0e7b428364dbde43772c97b24bd25b",
+      "pixelWidth": 45,
+      "pixelHeight": 105
+    },
+    {
+      "optionId": "option:q-mock-sz-2026-m1-033:D",
+      "method": "source_crop",
+      "candidateDigest": "sha256:5b97c34cb36ac51885c4e99fee05e557b2a51ccb2e3b2a9ebbf09dc6b5c38f8e",
+      "artifactSha256": "sha256:f48479f5d18c5da6c1d2830d24242b4656567fb55da0a44c62469fd828ed276f",
+      "pixelWidth": 40,
+      "pixelHeight": 105
+    }
+  ],
+  "placementProofIntent": [
+    {
+      "name": "canonical",
+      "widthPt": 96,
+      "heightPt": 60
+    },
+    {
+      "name": "compact_square",
+      "widthPt": 54,
+      "heightPt": 54
+    },
+    {
+      "name": "large_portrait",
+      "widthPt": 72,
+      "heightPt": 96
+    }
+  ]
+}

@@ -1,0 +1,852 @@
+{
+  "blankRefs": [],
+  "content": {
+    "blocks": [
+      {
+        "inlines": [
+          {
+            "kind": "text",
+            "nodeId": "text:para-mock-sz-2026-m1-reading-d-1:0",
+            "text": "When you rub (摩擦) a balloon on your skin, it produces electricity—a familiar example of charge separation ( 电 荷 分 离 ) , a process in which opposite charges are separated, creating electric potential. Similarly, raindrops striking a narrow tube create a tiny yet significant burst of energy. Now, researchers from the National University of Singapore (NUS) have tapped into this effect to generate electricity using rain-like droplets."
+          }
+        ],
+        "kind": "paragraph",
+        "nodeId": "para-mock-sz-2026-m1-reading-d-1"
+      },
+      {
+        "inlines": [
+          {
+            "kind": "text",
+            "nodeId": "text:para-mock-sz-2026-m1-reading-d-2:0",
+            "text": "Conventional hydropower (水力 发电) relies on large water flows, which only work in places like rivers. For smaller, slower flows, researchers have explored charge separation. They use a tube to let water flow through it continuously. Charges gather on the surface that the water touches. In this way, researchers can collect charges, but it is far from effective."
+          }
+        ],
+        "kind": "paragraph",
+        "nodeId": "para-mock-sz-2026-m1-reading-d-2"
+      },
+      {
+        "inlines": [
+          {
+            "kind": "text",
+            "nodeId": "text:para-mock-sz-2026-m1-reading-d-3:0",
+            "text": "To solve this problem, the NUS team built a special device. At both ends of the device—the top of the newly-designed tube (about 2 millimeters in width), and the water-collecting cup at the bottom—electrical wires were placed to harvest charges. First, water is released from a metal needle, forming rain-like droplets. When these droplets enter the tube, their impacts create “plug flow,” in which the water forms mini columns separated by air gaps. This flow is crucial because it allows more surface contact and more time for charges to build up, generating up to 100,000 times more charge separation than continuous flow. As charged droplets exit the tube and fall into the cup, charges build up in the water, creating an electric current. In tests, four tubes produced enough electricity to power 12LED lights continuously for 20 seconds."
+          }
+        ],
+        "kind": "paragraph",
+        "nodeId": "para-mock-sz-2026-m1-reading-d-3"
+      },
+      {
+        "inlines": [
+          {
+            "kind": "text",
+            "nodeId": "text:para-mock-sz-2026-m1-reading-d-4:0",
+            "text": "According to the study’s lead author, this model shows how rain can be used to generate clean electricity effectively and sustainably, especially in rainy places such as Singapore. Its potential is enormous, as it offers an alternative energy source even in cities. Imagine a rain collection device on your roof, producing small amounts of electricity whenever it rains—a small step for a raindrop, but a giant leap for sustainable energy technology."
+          }
+        ],
+        "kind": "paragraph",
+        "nodeId": "para-mock-sz-2026-m1-reading-d-4"
+      }
+    ]
+  },
+  "contractRef": {
+    "familyContractDigest": "sha256:e6121611f5b07f4d4de2b753e5677352fdc5200112f132f9108871905746628d",
+    "familyContractId": "reading",
+    "familyContractVersion": "2",
+    "manifestDigest": "sha256:b2ff52332752409e915a33ca976b475510dbcf1822094e5a647e3ea5e612fede",
+    "manifestId": "paper-canonical",
+    "manifestVersion": "46"
+  },
+  "identity": {
+    "groupId": "group-mock-sz-2026-m1-reading-d",
+    "paperId": "paper-mock-sz-2026-m1"
+  },
+  "media": [
+    {
+      "mediaId": "media:q-mock-sz-2026-m1-033:A",
+      "mimeType": "image/png",
+      "sha256": "sha256:f44da659893c5a49c412627f59fffb8aa906c5374403b7eefa2114b4482de747",
+      "pixelWidth": 43,
+      "pixelHeight": 105,
+      "sourceArtifactRef": {
+        "artifactId": "source-document:1bafd4d72cf908c0e8fe9"
+      }
+    },
+    {
+      "mediaId": "media:q-mock-sz-2026-m1-033:B",
+      "mimeType": "image/png",
+      "sha256": "sha256:1ad2a4d428d707151e424480fa51ab5a72237f690ff635b2c4a4e0389bc80021",
+      "pixelWidth": 49,
+      "pixelHeight": 105,
+      "sourceArtifactRef": {
+        "artifactId": "source-document:26aa389270288679f6ff8"
+      }
+    },
+    {
+      "mediaId": "media:q-mock-sz-2026-m1-033:C",
+      "mimeType": "image/png",
+      "sha256": "sha256:e8574102337438553c81484acfa94d53ba0e7b428364dbde43772c97b24bd25b",
+      "pixelWidth": 45,
+      "pixelHeight": 105,
+      "sourceArtifactRef": {
+        "artifactId": "source-document:19d87ca6cb994a21a8a09"
+      }
+    },
+    {
+      "mediaId": "media:q-mock-sz-2026-m1-033:D",
+      "mimeType": "image/png",
+      "sha256": "sha256:f48479f5d18c5da6c1d2830d24242b4656567fb55da0a44c62469fd828ed276f",
+      "pixelWidth": 40,
+      "pixelHeight": 105,
+      "sourceArtifactRef": {
+        "artifactId": "source-document:8639af04dbf0b9a689e06"
+      }
+    }
+  ],
+  "questionRefs": [
+    {
+      "questionId": "q-mock-sz-2026-m1-032"
+    },
+    {
+      "questionId": "q-mock-sz-2026-m1-033"
+    },
+    {
+      "questionId": "q-mock-sz-2026-m1-034"
+    },
+    {
+      "questionId": "q-mock-sz-2026-m1-035"
+    }
+  ],
+  "schemaVersion": "canonical-question-group-v2",
+  "semanticDigest": "sha256:7135d44cec0a3e7cef72266897b04cd7c4717164a83f4760a3e09d7f2bec6ba7",
+  "sourceFingerprint": "sha256:1f8a78d4964139ae2eb53fa87dbde6d2cf3b65a02ae88b3fc5ec2e5fbad03276",
+  "sourceMap": {
+    "captureId": "source-capture:d4ce720342b5d6369a766",
+    "entries": [
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "group-mock-sz-2026-m1-reading-d",
+          "kind": "group"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "q-mock-sz-2026-m1-032",
+          "kind": "question"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "q-mock-sz-2026-m1-033",
+          "kind": "question"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "q-mock-sz-2026-m1-034",
+          "kind": "question"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "q-mock-sz-2026-m1-035",
+          "kind": "question"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "para-mock-sz-2026-m1-reading-d-1",
+          "kind": "content_node"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "text:para-mock-sz-2026-m1-reading-d-1:0",
+          "kind": "content_node"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "para-mock-sz-2026-m1-reading-d-2",
+          "kind": "content_node"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "text:para-mock-sz-2026-m1-reading-d-2:0",
+          "kind": "content_node"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "para-mock-sz-2026-m1-reading-d-3",
+          "kind": "content_node"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "text:para-mock-sz-2026-m1-reading-d-3:0",
+          "kind": "content_node"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "para-mock-sz-2026-m1-reading-d-4",
+          "kind": "content_node"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "text:para-mock-sz-2026-m1-reading-d-4:0",
+          "kind": "content_node"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "text:q-mock-sz-2026-m1-032:stem",
+          "kind": "content_node"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "text:q-mock-sz-2026-m1-033:stem",
+          "kind": "content_node"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "text:q-mock-sz-2026-m1-034:stem",
+          "kind": "content_node"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "text:q-mock-sz-2026-m1-035:stem",
+          "kind": "content_node"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "option:q-mock-sz-2026-m1-032:A",
+          "kind": "option"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "text:group-mock-sz-2026-m1-reading-d:q-mock-sz-2026-m1-032:option:A",
+          "kind": "content_node"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "option:q-mock-sz-2026-m1-032:B",
+          "kind": "option"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "text:group-mock-sz-2026-m1-reading-d:q-mock-sz-2026-m1-032:option:B",
+          "kind": "content_node"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "option:q-mock-sz-2026-m1-032:C",
+          "kind": "option"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "text:group-mock-sz-2026-m1-reading-d:q-mock-sz-2026-m1-032:option:C",
+          "kind": "content_node"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "option:q-mock-sz-2026-m1-032:D",
+          "kind": "option"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "text:group-mock-sz-2026-m1-reading-d:q-mock-sz-2026-m1-032:option:D",
+          "kind": "content_node"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:paper-mock-sz-2026-m1:q33:option:A"
+        ],
+        "target": {
+          "id": "option:q-mock-sz-2026-m1-033:A",
+          "kind": "option"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:paper-mock-sz-2026-m1:q33:option:B"
+        ],
+        "target": {
+          "id": "option:q-mock-sz-2026-m1-033:B",
+          "kind": "option"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:paper-mock-sz-2026-m1:q33:option:C"
+        ],
+        "target": {
+          "id": "option:q-mock-sz-2026-m1-033:C",
+          "kind": "option"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:paper-mock-sz-2026-m1:q33:option:D"
+        ],
+        "target": {
+          "id": "option:q-mock-sz-2026-m1-033:D",
+          "kind": "option"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "option:q-mock-sz-2026-m1-034:A",
+          "kind": "option"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "text:group-mock-sz-2026-m1-reading-d:q-mock-sz-2026-m1-034:option:A",
+          "kind": "content_node"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "option:q-mock-sz-2026-m1-034:B",
+          "kind": "option"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "text:group-mock-sz-2026-m1-reading-d:q-mock-sz-2026-m1-034:option:B",
+          "kind": "content_node"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "option:q-mock-sz-2026-m1-034:C",
+          "kind": "option"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "text:group-mock-sz-2026-m1-reading-d:q-mock-sz-2026-m1-034:option:C",
+          "kind": "content_node"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "option:q-mock-sz-2026-m1-034:D",
+          "kind": "option"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "text:group-mock-sz-2026-m1-reading-d:q-mock-sz-2026-m1-034:option:D",
+          "kind": "content_node"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "option:q-mock-sz-2026-m1-035:A",
+          "kind": "option"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "text:group-mock-sz-2026-m1-reading-d:q-mock-sz-2026-m1-035:option:A",
+          "kind": "content_node"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "option:q-mock-sz-2026-m1-035:B",
+          "kind": "option"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "text:group-mock-sz-2026-m1-reading-d:q-mock-sz-2026-m1-035:option:B",
+          "kind": "content_node"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "option:q-mock-sz-2026-m1-035:C",
+          "kind": "option"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "text:group-mock-sz-2026-m1-reading-d:q-mock-sz-2026-m1-035:option:C",
+          "kind": "content_node"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "option:q-mock-sz-2026-m1-035:D",
+          "kind": "option"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "sourceSpanRefs": [
+          "source-span:observation:reading.d"
+        ],
+        "target": {
+          "id": "text:group-mock-sz-2026-m1-reading-d:q-mock-sz-2026-m1-035:option:D",
+          "kind": "content_node"
+        },
+        "transformationRecordIds": []
+      },
+      {
+        "target": {
+          "id": "media:q-mock-sz-2026-m1-033:A",
+          "kind": "media"
+        },
+        "sourceSpanRefs": [
+          "source-span:observation:paper-mock-sz-2026-m1:q33:option:A"
+        ],
+        "transformationRecordIds": []
+      },
+      {
+        "target": {
+          "id": "media:q-mock-sz-2026-m1-033:B",
+          "kind": "media"
+        },
+        "sourceSpanRefs": [
+          "source-span:observation:paper-mock-sz-2026-m1:q33:option:B"
+        ],
+        "transformationRecordIds": []
+      },
+      {
+        "target": {
+          "id": "media:q-mock-sz-2026-m1-033:C",
+          "kind": "media"
+        },
+        "sourceSpanRefs": [
+          "source-span:observation:paper-mock-sz-2026-m1:q33:option:C"
+        ],
+        "transformationRecordIds": []
+      },
+      {
+        "target": {
+          "id": "media:q-mock-sz-2026-m1-033:D",
+          "kind": "media"
+        },
+        "sourceSpanRefs": [
+          "source-span:observation:paper-mock-sz-2026-m1:q33:option:D"
+        ],
+        "transformationRecordIds": []
+      }
+    ]
+  },
+  "variant": {
+    "choiceOwnership": {
+      "ownership": "per_question",
+      "sets": [
+        {
+          "options": [
+            {
+              "content": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:group-mock-sz-2026-m1-reading-d:q-mock-sz-2026-m1-032:option:A",
+                  "text": "The difficulty of separating charges."
+                }
+              ],
+              "label": "A",
+              "optionId": "option:q-mock-sz-2026-m1-032:A"
+            },
+            {
+              "content": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:group-mock-sz-2026-m1-reading-d:q-mock-sz-2026-m1-032:option:B",
+                  "text": "The lack of clean electricity sources."
+                }
+              ],
+              "label": "B",
+              "optionId": "option:q-mock-sz-2026-m1-032:B"
+            },
+            {
+              "content": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:group-mock-sz-2026-m1-reading-d:q-mock-sz-2026-m1-032:option:C",
+                  "text": "The inefficiency of charge harvesting."
+                }
+              ],
+              "label": "C",
+              "optionId": "option:q-mock-sz-2026-m1-032:C"
+            },
+            {
+              "content": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:group-mock-sz-2026-m1-reading-d:q-mock-sz-2026-m1-032:option:D",
+                  "text": "The damage of traditional hydropower."
+                }
+              ],
+              "label": "D",
+              "optionId": "option:q-mock-sz-2026-m1-032:D"
+            }
+          ],
+          "questionId": "q-mock-sz-2026-m1-032"
+        },
+        {
+          "options": [
+            {
+              "optionId": "option:q-mock-sz-2026-m1-033:A",
+              "label": "A",
+              "figure": {
+                "mediaId": "media:q-mock-sz-2026-m1-033:A"
+              }
+            },
+            {
+              "optionId": "option:q-mock-sz-2026-m1-033:B",
+              "label": "B",
+              "figure": {
+                "mediaId": "media:q-mock-sz-2026-m1-033:B"
+              }
+            },
+            {
+              "optionId": "option:q-mock-sz-2026-m1-033:C",
+              "label": "C",
+              "figure": {
+                "mediaId": "media:q-mock-sz-2026-m1-033:C"
+              }
+            },
+            {
+              "optionId": "option:q-mock-sz-2026-m1-033:D",
+              "label": "D",
+              "figure": {
+                "mediaId": "media:q-mock-sz-2026-m1-033:D"
+              }
+            }
+          ],
+          "questionId": "q-mock-sz-2026-m1-033"
+        },
+        {
+          "options": [
+            {
+              "content": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:group-mock-sz-2026-m1-reading-d:q-mock-sz-2026-m1-034:option:A",
+                  "text": "Its potential cost in urban areas."
+                }
+              ],
+              "label": "A",
+              "optionId": "option:q-mock-sz-2026-m1-034:A"
+            },
+            {
+              "content": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:group-mock-sz-2026-m1-reading-d:q-mock-sz-2026-m1-034:option:B",
+                  "text": "Its promising use in green energy."
+                }
+              ],
+              "label": "B",
+              "optionId": "option:q-mock-sz-2026-m1-034:B"
+            },
+            {
+              "content": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:group-mock-sz-2026-m1-reading-d:q-mock-sz-2026-m1-034:option:C",
+                  "text": "Its complex design for rain power."
+                }
+              ],
+              "label": "C",
+              "optionId": "option:q-mock-sz-2026-m1-034:C"
+            },
+            {
+              "content": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:group-mock-sz-2026-m1-reading-d:q-mock-sz-2026-m1-034:option:D",
+                  "text": "Its practical need for more devices."
+                }
+              ],
+              "label": "D",
+              "optionId": "option:q-mock-sz-2026-m1-034:D"
+            }
+          ],
+          "questionId": "q-mock-sz-2026-m1-034"
+        },
+        {
+          "options": [
+            {
+              "content": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:group-mock-sz-2026-m1-reading-d:q-mock-sz-2026-m1-035:option:A",
+                  "text": "Revolutionary Energy from Raindrops"
+                }
+              ],
+              "label": "A",
+              "optionId": "option:q-mock-sz-2026-m1-035:A"
+            },
+            {
+              "content": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:group-mock-sz-2026-m1-reading-d:q-mock-sz-2026-m1-035:option:B",
+                  "text": "Urgent Demand for Sustainable Energy"
+                }
+              ],
+              "label": "B",
+              "optionId": "option:q-mock-sz-2026-m1-035:B"
+            },
+            {
+              "content": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:group-mock-sz-2026-m1-reading-d:q-mock-sz-2026-m1-035:option:C",
+                  "text": "Capturing Raindrops through Innovation"
+                }
+              ],
+              "label": "C",
+              "optionId": "option:q-mock-sz-2026-m1-035:C"
+            },
+            {
+              "content": [
+                {
+                  "kind": "text",
+                  "nodeId": "text:group-mock-sz-2026-m1-reading-d:q-mock-sz-2026-m1-035:option:D",
+                  "text": "Turning Charge Separation into Electricity"
+                }
+              ],
+              "label": "D",
+              "optionId": "option:q-mock-sz-2026-m1-035:D"
+            }
+          ],
+          "questionId": "q-mock-sz-2026-m1-035"
+        }
+      ]
+    },
+    "family": "reading",
+    "passageBlockRoles": [],
+    "questions": [
+      {
+        "correctOptionId": "option:q-mock-sz-2026-m1-032:C",
+        "questionId": "q-mock-sz-2026-m1-032",
+        "stem": [
+          {
+            "kind": "text",
+            "nodeId": "text:q-mock-sz-2026-m1-032:stem",
+            "text": "What problem do the NUS researchers aim to solve?"
+          }
+        ]
+      },
+      {
+        "correctOptionId": "option:q-mock-sz-2026-m1-033:D",
+        "questionId": "q-mock-sz-2026-m1-033",
+        "stem": [
+          {
+            "kind": "text",
+            "nodeId": "text:q-mock-sz-2026-m1-033:stem",
+            "text": "Which of the following best illustrates “plug flow”?"
+          }
+        ]
+      },
+      {
+        "correctOptionId": "option:q-mock-sz-2026-m1-034:B",
+        "questionId": "q-mock-sz-2026-m1-034",
+        "stem": [
+          {
+            "kind": "text",
+            "nodeId": "text:q-mock-sz-2026-m1-034:stem",
+            "text": "What is the last paragraph mainly about concerning the model?"
+          }
+        ]
+      },
+      {
+        "correctOptionId": "option:q-mock-sz-2026-m1-035:A",
+        "questionId": "q-mock-sz-2026-m1-035",
+        "stem": [
+          {
+            "kind": "text",
+            "nodeId": "text:q-mock-sz-2026-m1-035:stem",
+            "text": "What is a suitable title for the text?"
+          }
+        ]
+      }
+    ]
+  }
+}

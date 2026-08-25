@@ -52,6 +52,7 @@ const registry = {
   'scripts/verify-paper-canonical-reading-publication.mjs',
   'scripts/verify-paper-canonical-reading-option-figure.mjs',
   'scripts/verify-paper-canonical-reading-option-figure-rendered-behavior.mjs',
+  'scripts/verify-paper-mock-sz-2026-m1-q33-option-figure-canary.mjs',
   'scripts/verify-paper-canonical-framed-columns.mjs',
   'scripts/verify-paper-canonical-framed-columns-rendered.mjs',
   'scripts/verify-paper-canonical-application-writing-publication.mjs',
