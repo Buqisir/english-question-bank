@@ -652,13 +652,20 @@ export function buildConfirmedFormat2CanonicalRequest({
     })
   }
 
-  const visualsByOptionId = new Map(transcription.visuals
-    .filter((visual) => visual.owner.kind === 'reading_option')
-    .map((visual) => [visual.owner.optionId, visual]))
+  const visualsByQuestionAndOption = new Map()
+  for (const visual of transcription.visuals) {
+    if (visual.owner.kind !== 'reading_option') continue
+    const visualsByOption = visualsByQuestionAndOption.get(
+      visual.owner.questionId,
+    ) || new Map()
+    visualsByOption.set(visual.owner.optionId, visual)
+    visualsByQuestionAndOption.set(visual.owner.questionId, visualsByOption)
+  }
   for (const layout of transcription.sourceMeasuredFigureLayouts || []) {
     const intent = layout.intent
+    const visualsByOption = visualsByQuestionAndOption.get(intent.questionId)
     const visuals = intent.placements.map((placement) => (
-      visualsByOptionId.get(placement.optionId)
+      visualsByOption.get(placement.optionId)
     ))
     const page = visuals[0].source.pageSizePoints
     const left = Math.min(...visuals.map((visual) => visual.source.pointGeometry.x))

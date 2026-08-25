@@ -881,14 +881,23 @@ function buildSourceCapture(documents, transcription) {
       region: normalizedRegion(visual),
     },
   }))
-  const visualsByOptionId = new Map(transcription.visuals
-    .filter((visual) => visual.owner.kind === 'reading_option')
-    .map((visual) => [visual.owner.optionId, visual]))
+  const visualsByQuestionAndOption = new Map()
+  for (const visual of transcription.visuals) {
+    if (visual.owner.kind !== 'reading_option') continue
+    const visualsByOption = visualsByQuestionAndOption.get(
+      visual.owner.questionId,
+    ) || new Map()
+    visualsByOption.set(visual.owner.optionId, visual)
+    visualsByQuestionAndOption.set(visual.owner.questionId, visualsByOption)
+  }
   for (const [layoutIndex, layout] of (
     transcription.sourceMeasuredFigureLayouts || []
   ).entries()) {
+    const visualsByOption = visualsByQuestionAndOption.get(
+      layout.intent.questionId,
+    )
     const visuals = layout.intent.placements.map((placement) => (
-      visualsByOptionId.get(placement.optionId)
+      visualsByOption.get(placement.optionId)
     ))
     const pageSize = visuals[0].source.pageSizePoints
     const left = Math.min(...visuals.map((visual) => visual.source.pointGeometry.x))

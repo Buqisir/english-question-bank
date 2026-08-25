@@ -19,6 +19,9 @@ import { extractAnswerTextFromPdfBytes } from '../server/paper-import/internal/a
 import {
   confirmVisualImportCandidate,
 } from '../server/paper-canonical/visualCandidate.mjs'
+import {
+  buildConfirmedFormat2CanonicalRequest,
+} from '../server/paper-canonical/format2CanonicalRequest.mjs'
 import { readingOptionFigureAuthorityRef } from '../shared/paper-canonical/authority.mjs'
 import { readingOptionFigureConsumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
 import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
@@ -116,6 +119,118 @@ function rebindSourceMeasuredLayouts(transcription, sourceDocumentSha256) {
     layout.intent.measurementEvidence.sourceDocumentSha256 =
       sourceDocumentSha256
     refreshSourceMeasuredLayoutDigests(layout)
+  }
+}
+
+function addSecondFigureQuestionWithLocalOptionIds(fixture) {
+  const transcription = fixture.input.transcription
+  const labels = ['A', 'B', 'C', 'D']
+  const localOptionIds = labels.map((label) => `option:local:${label.toLowerCase()}`)
+  const firstLayout = transcription.sourceMeasuredFigureLayouts[0]
+  const firstQuestion = transcription.groups
+    .find((group) => group.groupId === 'group:reading-b')
+    .questions.find((question) => question.questionId === firstLayout.intent.questionId)
+  const firstVisuals = firstQuestion.options.map((option) => (
+    transcription.visuals.find(
+      (visual) => visual.observationId === option.visualObservationId,
+    )
+  ))
+  for (const [index, option] of firstQuestion.options.entries()) {
+    option.optionId = localOptionIds[index]
+    firstVisuals[index].owner.optionId = localOptionIds[index]
+    firstLayout.intent.placements[index].optionId = localOptionIds[index]
+  }
+  refreshSourceMeasuredLayoutDigests(firstLayout)
+
+  const secondGroup = transcription.groups.find(
+    (group) => group.groupId === 'group:reading-c',
+  )
+  const secondQuestion = secondGroup.questions[0]
+  const secondObservationIds = labels.map(
+    (label) => `observation:reading-c:q28:${label.toLowerCase()}`,
+  )
+  secondQuestion.stem = 'Which second source-authored figure matches?'
+  secondQuestion.options = labels.map((label, index) => ({
+    optionId: localOptionIds[index],
+    label,
+    contentKind: 'figure',
+    visualObservationId: secondObservationIds[index],
+  }))
+  const sourcePage = 2
+  const pageHeight = 842
+  const imageTopPt = 180
+  const imageWidthPt = 90
+  const imageHeightPt = 72
+  const rowOriginPt = 50
+  const imageLeftPt = labels.map((_label, index) => 70 + index * 110)
+  const secondVisuals = firstVisuals.map((visual, index) => ({
+    ...structuredClone(visual),
+    observationId: secondObservationIds[index],
+    owner: {
+      kind: 'reading_option',
+      groupId: secondGroup.groupId,
+      questionId: secondQuestion.questionId,
+      optionId: localOptionIds[index],
+    },
+    source: {
+      ...structuredClone(visual.source),
+      page: sourcePage,
+      pointGeometry: {
+        x: imageLeftPt[index],
+        y: imageTopPt,
+        width: imageWidthPt,
+        height: imageHeightPt,
+      },
+      extraction: {
+        ...structuredClone(visual.source.extraction),
+        objectId: `xref:${210 + index}`,
+      },
+    },
+  }))
+  transcription.visuals.push(...secondVisuals)
+
+  const secondLayout = structuredClone(firstLayout)
+  secondLayout.measurementEvidenceBody.questionId = secondQuestion.questionId
+  secondLayout.measurementEvidenceBody.sourcePage = sourcePage
+  secondLayout.measurementEvidenceBody.labels = labels.map((label, index) => ({
+    label,
+    leftPt: rowOriginPt + index * 110,
+    topPt: imageTopPt,
+    widthPt: 10,
+    heightPt: 16,
+  }))
+  secondLayout.intent.questionId = secondQuestion.questionId
+  secondLayout.intent.sourcePage = sourcePage
+  secondLayout.intent.rowStartPt = rowOriginPt
+  secondLayout.intent.rowWidthPt = 440
+  secondLayout.intent.placements = labels.map((label, index) => ({
+    ...structuredClone(firstLayout.intent.placements[index]),
+    optionId: localOptionIds[index],
+    label,
+    sourceSpanId: `source-span:${secondObservationIds[index]}`,
+    sourcePlacementMatrix: [
+      imageWidthPt,
+      0,
+      0,
+      -imageHeightPt,
+      imageLeftPt[index],
+      pageHeight - imageTopPt,
+    ],
+    labelLeftPt: index * 110,
+    labelTopPt: 0,
+    imageLeftPt: imageLeftPt[index] - rowOriginPt,
+    imageTopPt: 0,
+    imageWidthPt,
+    imageHeightPt,
+  }))
+  refreshSourceMeasuredLayoutDigests(secondLayout)
+  transcription.sourceMeasuredFigureLayouts.push(secondLayout)
+  return {
+    firstQuestionId: firstQuestion.questionId,
+    secondQuestionId: secondQuestion.questionId,
+    firstNormalizedY: firstVisuals[0].source.pointGeometry.y
+      / firstVisuals[0].source.pageSizePoints.height,
+    secondNormalizedY: imageTopPt / pageHeight,
   }
 }
 
@@ -663,7 +778,9 @@ const layoutMutationCandidate = JSON.parse(readFileSync(
 ))
 const layoutMutationInput = structuredClone(layoutMutationFixture.fixture.input)
 const changedLayout = layoutMutationInput.transcription.sourceMeasuredFigureLayouts[0]
-changedLayout.measurementEvidenceBody.labels[0].leftPt += 1
+for (const label of changedLayout.measurementEvidenceBody.labels) {
+  label.leftPt += 1
+}
 refreshSourceMeasuredLayoutDigests(changedLayout)
 const layoutMutationResult = run(
   layoutMutationFixture.repositoryRoot,
@@ -686,6 +803,86 @@ assertFailed(
     teacherConfirmation: exactConfirmation(layoutMutationCandidate),
   }),
   'FORMAT2_JOB_IDENTITY_MISMATCH',
+)
+
+const localOptionIdentityFixture = freshFixture('local-option-identity-')
+const localOptionIdentity = addSecondFigureQuestionWithLocalOptionIds(
+  localOptionIdentityFixture.fixture,
+)
+const localOptionIdentityStarted = run(
+  localOptionIdentityFixture.repositoryRoot,
+  localOptionIdentityFixture.fixture.input,
+)
+const localOptionSourceCapture = JSON.parse(readFileSync(
+  artifactPath(
+    localOptionIdentityFixture.repositoryRoot,
+    localOptionIdentityStarted,
+    'sourceCapture',
+  ),
+  'utf8',
+))
+const localOptionLayoutObservations = localOptionSourceCapture.observations.filter(
+  (observation) => observation.kind === 'reading_option_figure_source_layout',
+)
+const localOptionSourceSpans = new Map(localOptionSourceCapture.sourceSpans.map(
+  (span) => [span.sourceSpanId, span],
+))
+const runtimeLayoutRegion = (questionId) => {
+  const observation = localOptionLayoutObservations.find(
+    (candidate) => candidate.value.intent.questionId === questionId,
+  )
+  return {
+    sourceSpanId: observation.sourceSpanId,
+    region: localOptionSourceSpans.get(observation.sourceSpanId).coordinate.region,
+  }
+}
+const firstRuntimeLayoutRegion = runtimeLayoutRegion(
+  localOptionIdentity.firstQuestionId,
+)
+const secondRuntimeLayoutRegion = runtimeLayoutRegion(
+  localOptionIdentity.secondQuestionId,
+)
+assert.notEqual(
+  firstRuntimeLayoutRegion.sourceSpanId,
+  secondRuntimeLayoutRegion.sourceSpanId,
+)
+assert.equal(firstRuntimeLayoutRegion.region.y, localOptionIdentity.firstNormalizedY)
+assert.equal(secondRuntimeLayoutRegion.region.y, localOptionIdentity.secondNormalizedY)
+
+const localOptionCandidate = JSON.parse(readFileSync(
+  artifactPath(
+    localOptionIdentityFixture.repositoryRoot,
+    localOptionIdentityStarted,
+    'candidatePackage',
+  ),
+  'utf8',
+))
+const localOptionSelection = confirmVisualImportCandidate(
+  localOptionCandidate,
+  exactConfirmation(localOptionCandidate),
+)
+const localOptionCanonicalRequest = buildConfirmedFormat2CanonicalRequest({
+  transcription: localOptionIdentityFixture.fixture.input.transcription,
+  questionPdfBytes: localOptionIdentityFixture.fixture.questionPdfBytes,
+  answerPdfBytes: localOptionIdentityFixture.fixture.answerPdfBytes,
+  confirmedSelection: localOptionSelection,
+})
+const localOptionSourceEnvelope = JSON.parse(Buffer.from(
+  localOptionCanonicalRequest.sourceAsset,
+).toString('utf8'))
+const canonicalLayoutRegion = (questionId) => (
+  localOptionSourceEnvelope.observations.find((observation) => (
+    observation.kind === 'reading_option_figure_source_layout'
+    && observation.value.intent.questionId === questionId
+  )).span.region
+)
+assert.equal(
+  canonicalLayoutRegion(localOptionIdentity.firstQuestionId).y,
+  localOptionIdentity.firstNormalizedY,
+)
+assert.equal(
+  canonicalLayoutRegion(localOptionIdentity.secondQuestionId).y,
+  localOptionIdentity.secondNormalizedY,
 )
 
 const comparisonText = readFileSync(artifactPath(repositoryRoot, result, 'comparison'), 'utf8')
@@ -1379,6 +1576,16 @@ failureCase(
   },
   'FORMAT2_TRANSCRIPTION_INVALID',
   'FORMAT2_SOURCE_LAYOUT_EVIDENCE_INVALID',
+)
+failureCase(
+  (input) => {
+    const intent = input.transcription.sourceMeasuredFigureLayouts[0].intent
+    intent.placements[0].labelLeftPt += 1
+    const { intentDigest: _intentDigest, ...body } = intent
+    intent.intentDigest = digestJson(body)
+  },
+  'FORMAT2_TRANSCRIPTION_INVALID',
+  'FORMAT2_SOURCE_LAYOUT_PLACEMENT_INVALID',
 )
 failureCase(
   (input) => {

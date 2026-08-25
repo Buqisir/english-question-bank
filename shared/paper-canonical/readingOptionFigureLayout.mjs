@@ -197,6 +197,8 @@ export function validateReadingOptionFigureSourceLayoutEvidence({
       !== intent.measurementEvidence.evidenceDigest
     || measurement?.schemaVersion
       !== intent.measurementEvidence.evidenceSchemaVersion
+    || measurement?.questionId !== questionId
+    || measurement?.sourcePage !== intent.sourcePage
     || intent.measurementEvidence.sourceDocumentSha256
       !== sourceDocumentSha256
     || (
@@ -220,8 +222,44 @@ export function validateReadingOptionFigureSourceLayoutEvidence({
       'Reading Figure Option source-layout intent does not bind one homogeneous A-D Question',
     )
   }
+  const measurementLabels = measurement?.labels
+  if (
+    !Array.isArray(measurementLabels)
+    || measurementLabels.length !== expectedOptions.length
+    || measurementLabels.some((label) => (
+      typeof label?.label !== 'string'
+      || !isFiniteNumber(label.leftPt)
+      || !isFiniteNumber(label.topPt)
+      || !isFiniteNumber(label.widthPt)
+      || !isFiniteNumber(label.heightPt)
+      || label.widthPt <= 0
+      || label.heightPt <= 0
+    ))
+    || new Set(measurementLabels.map((label) => label.label)).size
+      !== measurementLabels.length
+  ) {
+    sourceLayoutRejected(
+      'evidence',
+      'Reading Figure Option source-layout measurement lacks exact label geometry',
+    )
+  }
+  const firstLabel = measurementLabels.find(
+    (label) => label.label === intent.placements[0].label,
+  )
+  const bankTopPt = Math.min(...expectedOptions.map(
+    (option) => option?.pointGeometry?.y,
+  ))
+  if (!firstLabel || !isFiniteNumber(bankTopPt)) {
+    sourceLayoutRejected(
+      'evidence',
+      'Reading Figure Option source-layout measurement cannot establish label coordinates',
+    )
+  }
   for (const [index, placement] of intent.placements.entries()) {
     const expected = expectedOptions[index]
+    const measuredLabel = measurementLabels.find(
+      (label) => label.label === placement.label,
+    )
     const matrixBox = sourceMatrixPointBox(
       placement.sourcePlacementMatrix,
       expected?.pageSizePoints?.height,
@@ -232,6 +270,15 @@ export function validateReadingOptionFigureSourceLayoutEvidence({
       || placement.label !== expected?.label
       || placement.sourceSpanId !== expected?.sourceSpanId
       || expected?.page !== intent.sourcePage
+      || !measuredLabel
+      || !closePoint(
+        placement.labelLeftPt,
+        measuredLabel.leftPt - firstLabel.leftPt,
+      )
+      || !closePoint(
+        placement.labelTopPt,
+        measuredLabel.topPt - bankTopPt,
+      )
       || !matrixBox
       || !geometry
       || !closePoint(matrixBox.x, geometry.x)
