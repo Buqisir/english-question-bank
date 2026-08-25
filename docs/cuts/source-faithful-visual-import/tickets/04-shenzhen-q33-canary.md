@@ -187,6 +187,11 @@ release action, merge, or content push was performed.
   Question 33, one source-measured row, four source-measured Option items, four
   images, real A–D labels, neutral `Option A`–`Option D` alts, the four exact
   source width/height placements, zero `[Fig.]`, and zero browser error logs.
+- Owner exact-page visual QA: PASS on 2026-08-25. At normal Screen scale, the
+  Owner accepted the `400` Reading question/Option-label weight, the
+  original-PDF-authored Q33 figure placement, and the normalized Chinese
+  glosses. This closes Ticket 04 Owner QA; the PR remains draft pending a
+  separate explicit Ready, merge, or publication decision.
 
 ### Stop A — historical candidate receipt
 
