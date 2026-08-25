@@ -27,6 +27,8 @@ import {
   loadPaperForConsumptionSync,
 } from '../server/paper-canonical/publication.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
+import { createExportImplementation } from '../server/exports/exportImplementation.mjs'
+import { grammarFillRhythm } from '../shared/paper-canonical/grammarFillRhythm.mjs'
 import {
   makeFormat2ImportJobFixture,
 } from '../test-fixtures/paper-import/format2-import-job-v1/fixture.mjs'
@@ -102,6 +104,22 @@ function assertFailed(result, code, diagnosticCode = code) {
     result.diagnostics.some((diagnostic) => diagnostic.code === diagnosticCode),
     `expected diagnostic ${diagnosticCode}, received ${JSON.stringify(result.diagnostics)}`,
   )
+}
+
+function visibleStructureBlocks(consumption) {
+  return consumption.visibleStructure.flatMap((node) => {
+    if (node.kind === 'group') {
+      return [{ type: 'question_group', questionGroupId: node.groupId, score: 0 }]
+    }
+    if (node.kind !== 'instruction' || node.renderPolicy !== 'render') return []
+    if (node.placement === 'part_heading' || node.placement === 'section_heading') {
+      return [{ type: 'section_header', title: node.text, instructionId: node.instructionId }]
+    }
+    if (node.placement === 'group_instruction') {
+      return [{ type: 'instruction', text: node.text, instructionId: node.instructionId }]
+    }
+    return []
+  })
 }
 
 function failureCase(mutator, code, diagnosticCode = code) {
@@ -397,16 +415,42 @@ assert.match(completed.humanEntryPoints.screen.href, /view=paper-browse/u)
 assert.deepEqual(completed.humanEntryPoints.service, {
   command: 'PORT=5173 bash scripts/dev.sh',
   appOrigin: 'http://127.0.0.1:5173',
+  qaArtifactCommand: 'node import-ops/server.mjs',
+  qaArtifactOrigin: 'http://127.0.0.1:8790',
 })
-for (const key of ['screen', 'studentPrint', 'teacherPrint', 'pdf']) {
-  assert.equal(new URL(completed.humanEntryPoints[key].href).origin, completed.humanEntryPoints.service.appOrigin)
+assert.equal(
+  new URL(completed.humanEntryPoints.screen.href).origin,
+  completed.humanEntryPoints.service.appOrigin,
+)
+for (const key of ['studentPrint', 'teacherPrint', 'pdf']) {
+  const entry = completed.humanEntryPoints[key]
+  assert.equal(new URL(entry.href).origin, completed.humanEntryPoints.service.qaArtifactOrigin)
+  assert.equal(entry.kind, 'artifact_url')
+  assert.equal(entry.method, 'GET')
+  assert.match(entry.sha256, /^sha256:[a-f0-9]{64}$/u)
+  assert.ok(entry.byteLength > 0)
 }
-assert.equal(completed.humanEntryPoints.studentPrint.href.includes('lecture=1'), false)
-assert.equal(completed.humanEntryPoints.teacherPrint.href.includes('lecture=1'), true)
-assert.equal(JSON.stringify(completed.humanEntryPoints.studentPrint).includes('answer'), false)
-assert.equal(JSON.stringify(completed.humanEntryPoints.studentPrint).includes('Analysis'), false)
-assert.match(completed.humanEntryPoints.pdf.mode, /pdf/u)
+assert.match(completed.humanEntryPoints.studentPrint.mediaType, /^text\/html/u)
+assert.match(completed.humanEntryPoints.teacherPrint.mediaType, /^text\/html/u)
+assert.equal(completed.humanEntryPoints.pdf.mediaType, 'application/pdf')
 assert.match(completed.humanEntryPoints.gateSummary, /exact reload/u)
+assert.equal(completed.humanEntryPoints.qaAcceptance.identity.jobId, completed.jobId)
+assert.equal(
+  completed.humanEntryPoints.qaAcceptance.identity.publicationDigest,
+  completed.canonicalPublication.publicationDigest,
+)
+assert.equal(
+  completed.humanEntryPoints.qaAcceptance.expectedReceipt.qaIdentityDigest,
+  completed.humanEntryPoints.qaAcceptance.identity.qaIdentityDigest,
+)
+assert.equal(
+  completed.humanEntryPoints.qaAcceptance.identity.qaArtifactsManifestDigest,
+  digestJson(completed.artifacts.qa),
+)
+assert.equal(
+  completed.humanEntryPoints.qaAcceptance.expectedReceipt.qaArtifactsManifestDigest,
+  digestJson(completed.artifacts.qa),
+)
 assert.equal(
   existsSync(path.join(repositoryRoot, 'app/public/paper-assets', fixture.input.paperId, 'latest')),
   true,
@@ -443,6 +487,55 @@ try {
   assert.equal(printConsumption.disposition, 'ready')
   assert.equal(screenConsumption.selections.some((selection) => selection.familyContractId === 'listening'), false)
   assert.equal(printConsumption.selections.some((selection) => selection.familyContractId === 'listening'), false)
+  const qaArtifacts = completed.artifacts.qa
+  assert.equal(qaArtifacts.schemaVersion, 'format2-qa-artifacts-v1')
+  const artifactBytes = Object.fromEntries(['studentPrint', 'teacherPrint', 'pdf'].map((key) => {
+    const artifact = qaArtifacts[key]
+    const bytes = readFileSync(path.join(durablePaperDir, artifact.relativePath))
+    assert.equal(bytes.byteLength, artifact.byteLength)
+    assert.equal(sha256(new Uint8Array(bytes)), artifact.sha256)
+    assert.equal(completed.humanEntryPoints[key].sha256, artifact.sha256)
+    return [key, bytes]
+  }))
+  assert.equal(artifactBytes.pdf.subarray(0, 4).toString(), '%PDF')
+  const studentArtifactHtml = artifactBytes.studentPrint.toString('utf8')
+  const teacherArtifactHtml = artifactBytes.teacherPrint.toString('utf8')
+  assert.equal(studentArtifactHtml.includes('<strong>【答案】</strong>'), false)
+  assert.equal(studentArtifactHtml.includes('Analysis sentinel'), false)
+  assert.equal(teacherArtifactHtml.includes('<strong>【答案】</strong>'), true)
+  const expectedGroupIds = printConsumption.visibleStructure
+    .filter((node) => node.kind === 'group')
+    .map((node) => node.groupId)
+  for (const groupId of expectedGroupIds) {
+    assert.equal(
+      (studentArtifactHtml.match(new RegExp(`data-canonical-group-id="${groupId}"`, 'gu')) || []).length,
+      1,
+      `Student Print contains canonical Group ${groupId} exactly once`,
+    )
+    assert.equal(
+      (teacherArtifactHtml.match(new RegExp(`data-canonical-group-id="${groupId}"`, 'gu')) || []).length,
+      1,
+      `Teacher Print contains canonical Group ${groupId} exactly once`,
+    )
+  }
+  for (const selection of printConsumption.selections) {
+    for (const groupId of selection.groupIds) {
+      const projected = projectCanonicalConsumerGroup({
+        consumption: printConsumption,
+        familyContractId: selection.familyContractId,
+        groupId,
+      })
+      for (const question of projected.questions) {
+        assert.equal(studentArtifactHtml.includes(`data-canonical-question-id="${question.questionId}"`), true)
+        assert.equal(teacherArtifactHtml.includes(`data-canonical-question-id="${question.questionId}"`), true)
+      }
+    }
+  }
+  for (const support of qaArtifacts.support) {
+    const bytes = readFileSync(path.join(durablePaperDir, support.relativePath))
+    assert.equal(bytes.byteLength, support.byteLength)
+    assert.equal(sha256(new Uint8Array(bytes)), support.sha256)
+  }
   const printGroup = projectCanonicalConsumerGroup({
     consumption: printConsumption,
     familyContractId: 'reading',
@@ -492,6 +585,50 @@ try {
   assert.equal(studentHtml.includes('<strong>【答案】</strong>'), false)
   assert.equal(studentHtml.includes('Analysis sentinel'), false)
   assert.equal(teacherHtml.includes(`<strong>【答案】</strong>${admittedAnswer}`), true)
+
+  const internalExporterInput = {
+    title: 'Canonical visible structure fail-closed proof',
+    versionType: 'student',
+    items: [{ questionGroupId: item.detail.id, score: 2.5, sectionTitle: 'Reading' }],
+    blocks: visibleStructureBlocks(printConsumption),
+  }
+  const internalExporter = createExportImplementation({
+    rootDir: repositoryRoot,
+    exportDir: path.join(repositoryRoot, 'qa-export-negative'),
+    getQuestionGroupDetail: (groupId) => groupId === item.detail.id ? item.detail : null,
+    buildPrintHtml,
+    resolveCanonicalConsumption: () => printConsumption,
+  })
+  assert.throws(
+    () => internalExporter.exportPrintHtml({
+      ...internalExporterInput,
+      blocks: internalExporterInput.blocks.slice(1),
+    }, { canonicalVisibleStructureChrome: true }),
+    (error) => error?.code === 'CANONICAL_CONSUMPTION_REJECTED',
+    'internal Format 2 chrome rejects caller blocks that differ from committed visibleStructure',
+  )
+
+  const publicOracleConsumption = structuredClone(printConsumption)
+  publicOracleConsumption.paperId = grammarFillRhythm.publicArtifactOracle.paperId
+  publicOracleConsumption.authorityRef = {
+    ...publicOracleConsumption.authorityRef,
+    manifestVersion: 20,
+  }
+  const publicOracleExporter = createExportImplementation({
+    rootDir: repositoryRoot,
+    exportDir: path.join(repositoryRoot, 'qa-export-oracle-negative'),
+    getQuestionGroupDetail: (groupId) => groupId === item.detail.id ? item.detail : null,
+    buildPrintHtml,
+    resolveCanonicalConsumption: () => publicOracleConsumption,
+  })
+  assert.throws(
+    () => publicOracleExporter.exportPrintHtml({
+      ...internalExporterInput,
+      blocks: visibleStructureBlocks(publicOracleConsumption),
+    }, { canonicalVisibleStructureChrome: true }),
+    (error) => error?.code === 'CANONICAL_CONSUMPTION_REJECTED',
+    'internal option cannot bypass immutable public-oracle source binding',
+  )
 } finally {
   publicDb.close()
 }
@@ -543,6 +680,21 @@ const completedAgain = resume(repositoryRoot, {
   teacherConfirmation: exactTeacherConfirmation,
 })
 assert.deepEqual(completedAgain, completed, 'unchanged completed resume is an exact proven no-op')
+const completedStudentPath = path.join(
+  durablePaperDir,
+  completed.artifacts.qa.studentPrint.relativePath,
+)
+const completedStudentBytes = readFileSync(completedStudentPath)
+writeFileSync(completedStudentPath, Buffer.concat([completedStudentBytes, Buffer.from('tampered')]))
+assertFailed(
+  resume(repositoryRoot, {
+    paperId: fixture.input.paperId,
+    jobId: result.jobId,
+    teacherConfirmation: exactTeacherConfirmation,
+  }),
+  'FORMAT2_QA_ARTIFACT_INVALID',
+)
+writeFileSync(completedStudentPath, completedStudentBytes)
 const authorityBoundReceiptBytes = readFileSync(currentPath)
 const staleAuthorityReceipt = JSON.parse(authorityBoundReceiptBytes)
 staleAuthorityReceipt.inputDigests.authorityDigest = `sha256:${'b'.repeat(64)}`
@@ -575,6 +727,14 @@ assert.deepEqual(readFileSync(currentPath), currentBytesBefore)
 const runsRoot = path.join(durablePaperDir, 'job/runs')
 assert.equal(readdirSync(runsRoot).length, 1, 'unchanged retry must not duplicate immutable runs')
 
+const oldQaReceipt = {
+  ...completed.humanEntryPoints.qaAcceptance.expectedReceipt,
+  acceptedAt: '2026-08-25T00:00:00.000Z',
+}
+writeFileSync(
+  path.join(durablePaperDir, 'signals/qa-accepted.json'),
+  `${JSON.stringify(oldQaReceipt, null, 2)}\n`,
+)
 const changedGeometryInput = structuredClone(fixture.input)
 changedGeometryInput.transcription.visuals[0].source.pointGeometry.x += 1
 const changedGeometry = run(repositoryRoot, changedGeometryInput)
@@ -595,6 +755,11 @@ assert.equal(
   existsSync(path.join(durablePaperDir, 'signals/ai-answer-check.json')),
   false,
   'upstream invalidation cannot retain awaiting_qa',
+)
+assert.equal(
+  existsSync(path.join(durablePaperDir, 'signals/qa-accepted.json')),
+  false,
+  'a new upstream Job identity removes the old exact Owner QA receipt',
 )
 assertFailed(
   resume(repositoryRoot, {

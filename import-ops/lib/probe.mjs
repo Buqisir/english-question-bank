@@ -1,6 +1,6 @@
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import path from 'node:path'
-import { sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 export const LABELS = {
   queued: '排队',
@@ -22,6 +22,7 @@ export const ANALYSIS_KEYS = [
 ]
 
 export const WRITING_ANALYSIS_KEYS = ['application', 'continuation']
+const PAPER_ID_PATTERN = /^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/u
 
 export function isOpsVisible(probes) {
   const hasSignal =
@@ -59,6 +60,14 @@ function mtimeMs(filePath) {
     return statSync(filePath).mtimeMs
   } catch {
     return 0
+  }
+}
+
+function urlPathEndsWith(value, suffix) {
+  try {
+    return new URL(value).pathname.endsWith(suffix)
+  } catch {
+    return false
   }
 }
 
@@ -110,19 +119,58 @@ function format2QaOf(receipt, paperId) {
     || receipt.result?.canonicalPublication?.reloads?.printPdf?.disposition !== 'ready'
   ) return null
   const entryPoints = receipt.result.humanEntryPoints
+  const qaArtifacts = receipt.result.artifacts?.qa
+  const artifacts = [
+    ['studentPrint', '/student-print', 'text/html'],
+    ['teacherPrint', '/teacher-print', 'text/html'],
+    ['pdf', '/student-pdf', 'application/pdf'],
+  ]
   if (
     entryPoints?.firstFocusState?.paperId !== paperId
+    || entryPoints?.service?.command !== 'PORT=5173 bash scripts/dev.sh'
+    || entryPoints?.service?.appOrigin !== 'http://127.0.0.1:5173'
+    || entryPoints?.service?.qaArtifactCommand !== 'node import-ops/server.mjs'
+    || entryPoints?.service?.qaArtifactOrigin !== 'http://127.0.0.1:8790'
+    || entryPoints?.screen?.kind !== 'url'
+    || entryPoints?.screen?.method !== 'GET'
     || typeof entryPoints?.screen?.href !== 'string'
-    || typeof entryPoints?.studentPrint?.href !== 'string'
-    || typeof entryPoints?.teacherPrint?.href !== 'string'
-    || typeof entryPoints?.pdf?.href !== 'string'
+    || artifacts.some(([key, pathnameSuffix, mediaType]) => {
+      const artifact = entryPoints?.[key]
+      return artifact?.kind !== 'artifact_url'
+        || artifact?.method !== 'GET'
+        || !urlPathEndsWith(artifact?.href, pathnameSuffix)
+        || !/^sha256:[a-f0-9]{64}$/u.test(artifact?.sha256)
+        || !Number.isInteger(artifact?.byteLength)
+        || artifact.byteLength < 1
+        || artifact?.mediaType?.startsWith(mediaType) !== true
+    })
     || typeof entryPoints?.gateSummary !== 'string'
+    || entryPoints?.qaAcceptance?.identity?.paperId !== paperId
+    || entryPoints?.qaAcceptance?.identity?.jobId !== receipt.result.jobId
+    || entryPoints?.qaAcceptance?.identity?.publicationDigest
+      !== receipt.result.canonicalPublication.publicationDigest
+    || entryPoints?.qaAcceptance?.identity?.qaArtifactsManifestDigest !== digestJson(qaArtifacts)
+    || entryPoints?.qaAcceptance?.expectedReceipt?.qaArtifactsManifestDigest !== digestJson(qaArtifacts)
+    || artifacts.some(([key]) => (
+      entryPoints?.[key]?.sha256 !== qaArtifacts?.[key]?.sha256
+      || entryPoints?.[key]?.byteLength !== qaArtifacts?.[key]?.byteLength
+      || entryPoints?.[key]?.mediaType !== qaArtifacts?.[key]?.mediaType
+    ))
   ) return null
   return {
     lifecycle: 'awaiting_qa',
     publication: structuredClone(receipt.result.canonicalPublication),
     entryPoints: structuredClone(entryPoints),
   }
+}
+
+function format2QaAcceptanceIsValid(qaAccepted, format2Qa) {
+  if (!qaAccepted || qaAccepted._invalid || !format2Qa) return false
+  const expected = format2Qa.entryPoints.qaAcceptance?.expectedReceipt
+  if (!expected || qaAccepted.acceptedAt === undefined) return false
+  return typeof qaAccepted.acceptedAt === 'string'
+    && Number.isFinite(Date.parse(qaAccepted.acceptedAt))
+    && Object.entries(expected).every(([key, value]) => qaAccepted[key] === value)
 }
 
 function analysisCounts(paperDir) {
@@ -149,11 +197,16 @@ export function probePaper({ repoRoot, paperId }) {
   const blocked = readJsonIfPresent(path.join(signalsDir, 'blocked.json'))
   const helpNeeded = readJsonIfPresent(path.join(signalsDir, 'help-needed.json'))
   const aiCheck = readJsonIfPresent(path.join(signalsDir, 'ai-answer-check.json'))
-  const qaAccepted = readJsonIfPresent(path.join(signalsDir, 'qa-accepted.json'))
+  const qaAcceptedReceipt = readJsonIfPresent(path.join(signalsDir, 'qa-accepted.json'))
   const shipped = readJsonIfPresent(path.join(signalsDir, 'shipped.json'))
-  const format2Receipt = readJsonIfPresent(path.join(paperDir, 'job', 'current.json'))
+  const format2ReceiptPath = path.join(paperDir, 'job', 'current.json')
+  const format2ReceiptPresent = existsSync(format2ReceiptPath)
+  const format2Receipt = readJsonIfPresent(format2ReceiptPath)
   const format2Stop = format2StopOf(format2Receipt, paperId)
   const format2Qa = format2QaOf(format2Receipt, paperId)
+  const qaAccepted = format2ReceiptPresent
+    ? format2QaAcceptanceIsValid(qaAcceptedReceipt, format2Qa)
+    : Boolean(qaAcceptedReceipt) && !qaAcceptedReceipt._invalid
   const counts = analysisCounts(paperDir)
   const writingCount = writingAnalysisCount(paperDir)
   const format3 = Boolean(config) && !config._invalid && String(config.format) === '3'
@@ -181,7 +234,7 @@ export function probePaper({ repoRoot, paperId }) {
       : true,
     aiCheck: Boolean(aiCheck) && aiCheck.ok === true,
     latest: existsSync(latestDir) && statSync(latestDir).isDirectory(),
-    qaAccepted: Boolean(qaAccepted) && !qaAccepted._invalid,
+    qaAccepted,
     shipped: Boolean(shipped) && !shipped._invalid,
     blocked: blocked && !blocked._invalid ? blocked : null,
     helpNeeded: helpNeeded && !helpNeeded._invalid ? helpNeeded : null,
@@ -232,6 +285,47 @@ export function format2ComparisonFile({ repoRoot, paperId }) {
   return resolved
 }
 
+export function format2QaArtifactFile({ repoRoot, paperId, artifactName }) {
+  if (!PAPER_ID_PATTERN.test(paperId)) return null
+  const routeToKey = {
+    'student-print': 'studentPrint',
+    'teacher-print': 'teacherPrint',
+    'student-pdf': 'pdf',
+  }
+  const key = routeToKey[artifactName]
+  const paperDir = path.join(repoRoot, 'scripts/import-pipeline/papers', paperId)
+  const receipt = readJsonIfPresent(path.join(paperDir, 'job', 'current.json'))
+  const qa = format2QaOf(receipt, paperId)
+  const qaArtifacts = receipt?.result?.artifacts?.qa
+  const support = Array.isArray(qaArtifacts?.support)
+    ? qaArtifacts.support.find((candidate) => candidate.fileName === artifactName)
+    : null
+  const artifact = key ? qaArtifacts?.[key] : support
+  const entry = key ? qa?.entryPoints?.[key] : artifact
+  if (
+    !qa
+    || (!key && (!support || path.basename(artifactName) !== artifactName))
+    || artifact?.sha256 !== entry?.sha256
+    || artifact?.byteLength !== entry?.byteLength
+    || artifact?.mediaType !== entry?.mediaType
+    || typeof artifact?.relativePath !== 'string'
+    || path.isAbsolute(artifact.relativePath)
+  ) return null
+  const resolved = path.resolve(paperDir, artifact.relativePath)
+  if (!resolved.startsWith(`${path.resolve(paperDir)}${path.sep}`)) return null
+  try {
+    const bytes = readFileSync(resolved)
+    if (
+      !statSync(resolved).isFile()
+      || bytes.byteLength !== artifact.byteLength
+      || sha256(new Uint8Array(bytes)) !== artifact.sha256
+    ) return null
+    return { filePath: resolved, mediaType: artifact.mediaType, bytes }
+  } catch {
+    return null
+  }
+}
+
 export function listPaperIds(repoRoot) {
   const papersRoot = path.join(repoRoot, 'scripts/import-pipeline/papers')
   if (!existsSync(papersRoot)) return []
@@ -279,12 +373,13 @@ export function qaLinks(paper, appOrigin) {
     const points = paper.format2Qa.entryPoints
     return {
       screen: withOrigin(points.screen).href,
-      studentPrint: withOrigin(points.studentPrint).href,
-      teacherPrint: withOrigin(points.teacherPrint).href,
-      pdf: withOrigin(points.pdf).href,
+      studentPrint: withOrigin(points.studentPrint),
+      teacherPrint: withOrigin(points.teacherPrint),
+      pdf: withOrigin(points.pdf),
       firstFocusState: points.firstFocusState,
       gateSummary: points.gateSummary,
       service: points.service,
+      qaAcceptance: points.qaAcceptance,
       note: 'Format 2 Job 已准备同一 Canonical Paper 的 exact Screen / Student Print / Teacher Print / PDF QA 入口；本后台不写 Owner QA 收据。',
     }
   }

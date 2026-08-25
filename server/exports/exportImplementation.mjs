@@ -13,6 +13,10 @@ import path from 'node:path'
 import {
   loadCanonicalGrammarFillPrintChrome,
 } from '../paper-canonical/grammarFillPrintSourceBinding.mjs'
+import { grammarFillRhythm } from '../../shared/paper-canonical/grammarFillRhythm.mjs'
+import {
+  assertCanonicalConsumptionVisibleStructure,
+} from '../../shared/paper-canonical/visibleStructure.mjs'
 
 function requiredString(value, label) {
   if (typeof value !== 'string' || !value.trim()) {
@@ -92,6 +96,30 @@ function normalizedQuestionNumberStart(input) {
     : 1
 }
 
+function blocksFromCanonicalVisibleStructure(consumption) {
+  return consumption.visibleStructure.flatMap((node) => {
+    if (node.kind === 'group') {
+      return [{ type: 'question_group', questionGroupId: node.groupId, score: 0 }]
+    }
+    if (node.kind !== 'instruction' || node.renderPolicy !== 'render') return []
+    if (node.placement === 'part_heading' || node.placement === 'section_heading') {
+      return [{
+        type: 'section_header',
+        title: node.text,
+        instructionId: node.instructionId,
+      }]
+    }
+    if (node.placement === 'group_instruction') {
+      return [{
+        type: 'instruction',
+        text: node.text,
+        instructionId: node.instructionId,
+      }]
+    }
+    return []
+  })
+}
+
 function resolveVivliostyleBin(rootDir) {
   const vivliostylePaths = [
     path.join(rootDir, 'node_modules', '.bin', 'vivliostyle'),
@@ -139,7 +167,10 @@ export function createExportImplementation({
   // exportPrintPdf can copy the real PNGs into the SAME tempdir as the
   // HTML before invoking Vivliostyle. Destructuring callers (sendHtml
   // picks only `{ body, fileName }`) safely ignore the extra field.
-  function exportPrintHtml(input, { imageMode = 'web' } = {}) {
+  function exportPrintHtml(input, {
+    imageMode = 'web',
+    canonicalVisibleStructureChrome = false,
+  } = {}) {
     const title = requiredString(input.title, 'title')
     const versionType = requiredEnum(input.versionType, ['student', 'teacher'], 'versionType')
     const exportItems = resolveExportItems(input, getQuestionGroupDetail)
@@ -155,12 +186,38 @@ export function createExportImplementation({
           items: exportItems,
         })
       : null
-    const grammarFillChrome = loadCanonicalGrammarFillPrintChrome({
-      exportItems,
-      canonicalConsumption,
-      paperAssetsDir: paperAssetsDir || rootDir,
-      versionType,
-    })
+    if (canonicalVisibleStructureChrome) {
+      const publicOracle = grammarFillRhythm.publicArtifactOracle
+      if (
+        canonicalConsumption?.disposition !== 'ready'
+        || (
+          canonicalConsumption.paperId === publicOracle.paperId
+          && Number(canonicalConsumption.authorityRef?.manifestVersion) >= 20
+        )
+        || JSON.stringify(blocks)
+          !== JSON.stringify(blocksFromCanonicalVisibleStructure(canonicalConsumption))
+      ) {
+        const error = new Error(
+          'Canonical visible-structure Print chrome requires exact non-oracle Consumption Plan blocks',
+        )
+        error.code = 'CANONICAL_CONSUMPTION_REJECTED'
+        throw error
+      }
+      assertCanonicalConsumptionVisibleStructure(canonicalConsumption)
+    }
+    // Format 2's sourceAsset is the compiler envelope, not a legacy Paper
+    // Asset projection. Its Print chrome is already closed by the committed
+    // Consumption Plan, so this internal-only option uses those exact blocks
+    // instead of trying to reconstruct legacy source chrome. HTTP input cannot
+    // select this path.
+    const grammarFillChrome = canonicalVisibleStructureChrome
+      ? null
+      : loadCanonicalGrammarFillPrintChrome({
+          exportItems,
+          canonicalConsumption,
+          paperAssetsDir: paperAssetsDir || rootDir,
+          versionType,
+        })
     const html = buildPrintHtml({
       title,
       versionType,
@@ -181,8 +238,11 @@ export function createExportImplementation({
     return { body: html, fileName, images, normalizationDiagnostics }
   }
 
-  function exportPrintPdf(input) {
-    const htmlResult = exportPrintHtml(input, { imageMode: 'file' })
+  function exportPrintPdf(input, { canonicalVisibleStructureChrome = false } = {}) {
+    const htmlResult = exportPrintHtml(input, {
+      imageMode: 'file',
+      canonicalVisibleStructureChrome,
+    })
     const title = requiredString(input.title, 'title')
     const versionType = requiredEnum(input.versionType, ['student', 'teacher'], 'versionType')
     const versionLabel = versionType === 'student' ? '学生版' : '教师版'
