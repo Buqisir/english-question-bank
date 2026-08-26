@@ -64,15 +64,16 @@ source shape data-only.
 | B05 | no | Application and Continuation Writing source composition/current contracts do not replay faithfully. | Ticket 04 |
 | B06 | no | `paper-2026-i` has an accepted non-empty passage Figure caption; the generic path emits an empty caption. | Ticket 04 |
 | B07 | no | Accepted Listening structured-document bytes/digests are not retained when the adapter reserializes compact JSON. | Ticket 03 |
-| B08 | resolved by Owner | Preserve paper/slot/group/question/Option/media identities, order/numbering, answers, owners, and source bindings. Compiler-owned block/inline/row/cell/blank/writing-task IDs need only be deterministic, unique, and internally closed; recompute `semanticDigest` from successor semantics. | Ticket 03 applies the boundary; Tickets 05–08 verify it |
+| B08 | resolved by Owner | Preserve paper/slot/group/question/Option/media identities, order/numbering, answers, owners, and source bindings. Compiler-owned block/inline/row/cell/blank/writing-task and `bank`/`shared-bank` child IDs need only be deterministic, unique, and internally closed; recompute `semanticDigest` from successor semantics. | Ticket 03 uniquely owns the shared schema/adapter implementation; Tickets 05–08 only verify the applied boundary |
 | B09 | retained human stop | `paper-2026-i` has no predecessor Visual Candidate plus exact Visual Teacher Confirmation for its table. Whole-Canonical confirmation cannot be reinterpreted as visual confirmation. | Ticket 06 requires normal direct Owner confirmation |
 | B10 | resolved by Owner | Require semantic parity for active Screen, Student/Teacher Print, PDF, Analysis, and question listing/detail/search/similar/figure consumers through the Canonical Consumer Interface or one bounded read-only Adapter. Do not recreate exact legacy answer-key/import-meta/Listening paths or canonical-media figures manifests; unaffected historical assets remain supported. | Ticket 04 |
 
 ## Owner-approved graph ruling
 
-- Ticket 03 is ready. It owns B01, B02, B03, and B07 and applies the B08
-  identity boundary in the schema/validator/trusted-adapter/compiler
-  source-evidence seam only.
+- Ticket 03 is ready. It owns B01, B02, B03, and B07 and uniquely owns B08
+  shared schema/adapter implementation in the
+  schema/validator/trusted-adapter/compiler source-evidence seam only. Tickets
+  05–08 verify the applied B08 boundary; they do not own or reimplement it.
 - Ticket 04 is blocked by Ticket 03. It owns B04, B05, B06, and B10 in the
   shared rich whole-paper and active-consumer compatibility seam.
 - Ticket 05 is blocked by Ticket 04. It replays Shenzhen Q33 as per-paper data

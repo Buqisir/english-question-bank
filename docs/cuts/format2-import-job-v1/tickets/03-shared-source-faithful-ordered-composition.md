@@ -13,9 +13,11 @@ provenance/transformation maps, and exact Listening structured-document bytes
 and digests.
 
 This ticket owns B01, B02, B03, and B07 from the
-[real parity frontier](../research/real-parity-frontier-2026-08-26.md) and
-applies the approved B08 identity boundary. It must prove the shared shapes
-without adding Shenzhen, `paper-2026-i`, or Jining transcription data.
+[real parity frontier](../research/real-parity-frontier-2026-08-26.md) and is
+the sole owner of shared schema/adapter implementation for the approved B08
+identity boundary. Tickets 05–08 only verify that applied boundary; they do not
+own or reimplement it. This ticket must prove the shared shapes without adding
+Shenzhen, `paper-2026-i`, or Jining transcription data.
 
 ## Allowed and forbidden scope
 
@@ -47,9 +49,9 @@ without adding Shenzhen, `paper-2026-i`, or Jining transcription data.
 - Preserve paper, slot, group, question, Option, and media identities across
   publication, together with order, numbering, answers, owner bindings, and
   source bindings.
-- Compiler-owned block, inline, row, cell, blank, and writing-task identifiers
-  need not reproduce predecessor strings. They must be deterministic, unique,
-  and internally closed.
+- Compiler-owned block, inline, row, cell, blank, writing-task, and `bank` or
+  `shared-bank` child identifiers need not reproduce predecessor strings. They
+  must be deterministic, unique, and internally closed.
 - Recompute `semanticDigest` from the successor Canonical semantics. Never copy
   a predecessor semantic digest into the new publication.
 

@@ -14,6 +14,10 @@ ready frontier; it owns shared source fidelity and ordered composition. The
 remaining graph is intentionally serial at the shared seam and then fans into
 the two real-paper parity proofs:
 
+Ticket 03 is the sole owner of B08 shared schema/adapter implementation.
+Tickets 05–08 only verify the applied identity boundary; they do not own or
+reimplement it.
+
 - Ticket 04 is blocked by Ticket 03 and owns shared rich whole-paper shapes and
   active-consumer compatibility.
 - Ticket 05 replays Shenzhen Q33 and retires its materializer after parity; it
@@ -360,9 +364,10 @@ per-paper 数据与 source evidence，不新增共享代码、CSS、renderer aut
 - Across successor publication, preserve paper, slot, group, question, Option,
   and media identities together with source order, numbering, answers, semantic
   owners, and source bindings.
-- Compiler-owned block, inline, row, cell, blank, and writing-task identifiers
-  do not require predecessor string parity. They must be deterministic, unique,
-  and internally closed within the successor Canonical Paper.
+- Compiler-owned block, inline, row, cell, blank, writing-task, and `bank` or
+  `shared-bank` child identifiers do not require predecessor string parity.
+  They must be deterministic, unique, and internally closed within the
+  successor Canonical Paper.
 - `semanticDigest` is always recomputed from the successor semantics. It is not
   copied from a predecessor publication merely to obtain digest parity.
 

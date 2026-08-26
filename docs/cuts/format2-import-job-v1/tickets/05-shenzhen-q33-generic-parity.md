@@ -32,7 +32,7 @@ canary remains an oracle rather than a precedent for per-paper code.
 
 - [ ] The generic Job replays Q33 without invoking a Q33-specific materializer or selecting behavior from its paperId.
 - [ ] The four accepted source-crop digests, A–D owner associations, Canonical Option/media identities, and source PDF point geometry remain unchanged.
-- [ ] Paper, slot, group, question, Option, and media identities plus order, numbering, answers, owners, and source bindings remain stable. Compiler-owned block, inline, row, cell, blank, and writing-task identifiers may be newly derived when deterministic, unique, and internally closed; `semanticDigest` is recomputed from the replayed semantics rather than copied from the predecessor.
+- [ ] Verify the B08 boundary implemented by Ticket 03: paper, slot, group, question, Option, and media identities plus order, numbering, answers, owners, and source bindings remain stable. Compiler-owned block, inline, row, cell, blank, writing-task, and `bank` or `shared-bank` child identifiers may be newly derived when deterministic, unique, and internally closed; `semanticDigest` is recomputed from the replayed semantics rather than copied from the predecessor.
 - [ ] Normal Reading typography remains renderer text, including question numbers and A–D labels; no `[Fig.]` token or flattened four-option strip reaches any consumer.
 - [ ] Screen, Student Print, Teacher Print, and PDF consume the same four confirmed images and source layout intent without consumer-side recrop, stretch, or paper-specific offsets.
 - [ ] Student and Teacher answer behavior remains separated without changing the visual result.
