@@ -1,5 +1,4 @@
 import {
-  readingOptionFigureAuthorityRef,
   resolveCanonicalAuthority,
   slotsForProfile,
 } from '../../shared/paper-canonical/authority.mjs'
@@ -9,7 +8,10 @@ import {
   format2VisualSourceObservationId,
   format2VisualSourceSpanId,
 } from './format2VisualIdentity.mjs'
-import { inspectFormat2SourceFidelity } from './format2SourceFidelity.mjs'
+import {
+  format2CandidateAuthorityRefForTranscription,
+  inspectFormat2SourceFidelity,
+} from './format2SourceFidelity.mjs'
 
 const encoder = new TextEncoder()
 
@@ -57,6 +59,17 @@ function paragraph(nodeId, value) {
   }
 }
 
+function sourceParagraphBlock(block, identity) {
+  return {
+    kind: 'paragraph',
+    nodeId: identity.nodeId,
+    inlines: block.inlines.map((inline, index) => text(
+      identity.inlines[index].nodeId,
+      inline.text,
+    )),
+  }
+}
+
 function tableBlock(block, identity = null) {
   const width = block.rows[0].length
   return {
@@ -91,6 +104,21 @@ function framedColumnsBlock(block, identity = null) {
     columns: block.columns.map((column, columnIndex) => {
       const columnIdentity = identity?.columns[columnIndex]
       const columnId = columnIdentity?.columnId || column.columnId
+      if (column.blocks) {
+        const blocks = column.blocks.map((child, childIndex) => {
+          const childIdentity = columnIdentity.blocks[childIndex]
+          return child.kind === 'source_table'
+            ? tableBlock(child, childIdentity)
+            : sourceParagraphBlock(child, childIdentity)
+        })
+        return {
+          columnId,
+          ...(column.columnHeadingBlockRef
+            ? { columnHeading: columnIdentity.heading.nodeId }
+            : {}),
+          blocks,
+        }
+      }
       const blocks = []
       if (column.heading) {
         blocks.push(paragraph(
@@ -160,9 +188,28 @@ function contentForGroup(group, selectedByObservation, identities = null) {
         kind: 'figure',
         nodeId: identity?.nodeId || block.blockId,
         mediaId: item.mediaId,
-        caption: [],
+        caption: block.captionProvision?.provision === 'source_caption'
+          ? [text(identity.captionInlineNodeId, block.captionProvision.text)]
+          : [],
       })
     } else if (block.kind === 'writing_material') {
+      if (block.promptBlocks || block.materialBlocks) {
+        blocks.push(...(block.promptBlocks || []).map((sourceBlock, index) => (
+          sourceParagraphBlock(sourceBlock, identity.promptBlocks[index])
+        )))
+        blocks.push(...(block.materialBlocks || []).map((sourceBlock, index) => (
+          sourceParagraphBlock(sourceBlock, identity.materialBlocks[index])
+        )))
+        if (block.applicationGiven?.provision === 'source_provided') {
+          blocks.push(...block.applicationGiven.parts.map((part, index) => (
+            paragraph(identity.givenParts[index].nodeId, part.text)
+          )))
+        }
+        blocks.push(...(block.continuationStarters || []).map((starter, index) => (
+          sourceParagraphBlock(starter.block, identity.starters[index])
+        )))
+        continue
+      }
       blocks.push(paragraph(identity?.nodeId || block.blockId, block.prompt))
       if (block.applicationEvidence) {
         const evidence = block.applicationEvidence
@@ -364,6 +411,59 @@ function ordinaryVariant(group, family) {
   return { family, choiceOwnership: { ownership: 'none' } }
 }
 
+function v4WritingContentRef(block, identity, sourceRef) {
+  const sourceBlocks = [
+    ...(block.promptBlocks || []).map((sourceBlock, index) => ({
+      sourceBlock,
+      canonical: identity.promptBlocks[index],
+    })),
+    ...(block.materialBlocks || []).map((sourceBlock, index) => ({
+      sourceBlock,
+      canonical: identity.materialBlocks[index],
+    })),
+    ...(block.continuationStarters || []).map((starter, index) => ({
+      sourceBlock: starter.block,
+      canonical: identity.starters[index],
+    })),
+  ]
+  const match = sourceBlocks.find(({ sourceBlock }) => (
+    sourceBlock.blockId === sourceRef.blockId
+  ))
+  if (!match) {
+    throw format2CanonicalError(
+      'FORMAT2_CANONICAL_WRITING_SOURCE_REFERENCE_INVALID',
+      `Writing source block ${sourceRef.blockId} was not validated in this group`,
+    )
+  }
+  return {
+    blockId: match.canonical.nodeId,
+    inlineNodeIds: sourceRef.contentIds.map((contentId) => {
+      const index = match.sourceBlock.inlines.findIndex(
+        (inline) => inline.contentId === contentId,
+      )
+      if (index < 0) {
+        throw format2CanonicalError(
+          'FORMAT2_CANONICAL_WRITING_SOURCE_REFERENCE_INVALID',
+          `Writing source content ${contentId} was not validated in ${sourceRef.blockId}`,
+        )
+      }
+      return match.canonical.inlines[index].nodeId
+    }),
+  }
+}
+
+function v4WritingSourceRegionRefs(block, sourceRef) {
+  const sourceBlocks = [
+    ...(block.promptBlocks || []),
+    ...(block.materialBlocks || []),
+    ...(block.continuationStarters || []).map((starter) => starter.block),
+  ]
+  const sourceBlock = sourceBlocks.find((candidate) => candidate.blockId === sourceRef.blockId)
+  return sourceRef.contentIds.flatMap((contentId) => (
+    sourceBlock.inlines.find((inline) => inline.contentId === contentId).sourceRegionRefs
+  ))
+}
+
 function writingVariant(group, family, identities = null) {
   const blockIndex = group.blocks.findIndex(
     (candidate) => candidate.kind === 'writing_material',
@@ -376,6 +476,92 @@ function writingVariant(group, family, identities = null) {
       'FORMAT2_CANONICAL_WRITING_EVIDENCE_INCOMPLETE',
       `${family} requires one source-backed wordCountTarget`,
     )
+  }
+  if (block.promptBlocks || block.materialBlocks) {
+    if (family === 'application-writing') {
+      const evidence = block.applicationEvidence
+      const applicationGiven = block.applicationGiven
+      return {
+        family,
+        writingTaskId: identity.writingTaskId,
+        promptBlockRefs: identity.promptBlocks.map((promptBlock) => promptBlock.nodeId),
+        situation: {
+          writerRole: v4WritingContentRef(block, identity, evidence.writerRole),
+          audienceOrDestination: v4WritingContentRef(
+            block,
+            identity,
+            evidence.audienceOrDestination,
+          ),
+          deliverable: v4WritingContentRef(block, identity, evidence.deliverable),
+          communicativePurpose: v4WritingContentRef(
+            block,
+            identity,
+            evidence.communicativePurpose,
+          ),
+        },
+        contentRequirements: evidence.contentRequirements.map((sourceRef, index) => ({
+          requirementId: `requirement:${group.groupId}:${index + 1}`,
+          contentRef: v4WritingContentRef(block, identity, sourceRef),
+        })),
+        wordCountRuling: {
+          kind: 'approximate_target',
+          target: wordCountTarget,
+          countScope: block.wordCountScope,
+          sourceRef: v4WritingContentRef(block, identity, evidence.wordCountSource),
+          authorityObservationRef: `observation:${group.groupId}:word-count`,
+        },
+        givenSkeleton: applicationGiven.provision === 'source_provided'
+          ? {
+              presence: 'provided',
+              parts: applicationGiven.parts.map((part, index) => ({
+                givenPartId: identity.givenParts[index].givenPartId,
+                role: part.role,
+                placement: ['title', 'salutation', 'opening'].includes(part.role)
+                  ? 'answer_region_top'
+                  : 'answer_region_bottom',
+                blockRef: identity.givenParts[index].nodeId,
+                authorityAssertionRef: `observation:${group.groupId}:given:${index + 1}`,
+              })),
+            }
+          : {
+              presence: 'none',
+              answerRegionAbsenceAssertionRef:
+                `observation:${group.groupId}:answer-region-empty`,
+            },
+        choiceOwnership: { ownership: 'none' },
+        response: {
+          kind: 'group_level_written_response',
+          answerRegionRef: 'writing.application-box',
+          authorityObservationRef: `observation:${group.groupId}:response`,
+        },
+      }
+    }
+    return {
+      family,
+      writingTaskId: identity.writingTaskId,
+      materialBlockRefs: identity.materialBlocks.map((material) => material.nodeId),
+      wordCountRuling: {
+        kind: 'approximate_target',
+        target: wordCountTarget,
+        countScope: block.wordCountScope,
+        sourceRef: v4WritingContentRef(block, identity, block.wordCountSource),
+        authorityObservationRef: `observation:${group.groupId}:word-count`,
+      },
+      starterProvision: {
+        kind: 'ordered_source_starters',
+        starters: identity.starters.map((starter, index) => ({
+          starterId: starter.starterId,
+          contentRef: starter.nodeId,
+          authorityObservationRef: `observation:${group.groupId}:starter:${index + 1}`,
+        })),
+      },
+      choiceOwnership: { ownership: 'none' },
+      response: {
+        kind: 'group_level_written_response',
+        answerRegionRef: 'writing.continuation-box',
+        authorityObservationRef: `observation:${group.groupId}:response`,
+      },
+    }
   }
   const contentBlockRefs = group.blocks
     .filter((candidate) => candidate.kind === 'writing_material')
@@ -549,13 +735,14 @@ export function buildConfirmedFormat2CanonicalRequest({
   answerPdfBytes,
   confirmedSelection,
 }) {
+  const authorityRef = format2CandidateAuthorityRefForTranscription(transcription)
   const authorityResolution = resolveCanonicalAuthority(
-    readingOptionFigureAuthorityRef,
+    authorityRef,
   )
   if (!authorityResolution.ok) {
     throw format2CanonicalError(
       'FORMAT2_CANONICAL_AUTHORITY_UNAVAILABLE',
-      'Current Reading Figure Option authority is unavailable',
+      'Closed Format 2 Candidate authority is unavailable',
     )
   }
   const profile = authorityResolution.closure.profiles.get('nck1')
@@ -759,9 +946,15 @@ export function buildConfirmedFormat2CanonicalRequest({
         provision: 'source_proven_none',
       }
       if (!sourceFidelity.legacy) {
-        const requirementSourceSpanRefs = writingBlock.applicationEvidence
-          .sourceRegionRefs.map(format2SourceRegionSpanId)
-        for (const requirement of variant.contentRequirements) {
+        for (const [index, requirement] of variant.contentRequirements.entries()) {
+          const requirementSourceSpanRefs = (
+            writingBlock.promptBlocks
+              ? v4WritingSourceRegionRefs(
+                  writingBlock,
+                  writingBlock.applicationEvidence.contentRequirements[index],
+                )
+              : writingBlock.applicationEvidence.sourceRegionRefs
+          ).map(format2SourceRegionSpanId)
           sourceSpanRefsByTarget[`requirement:${requirement.requirementId}`] = [
             ...requirementSourceSpanRefs,
           ]
@@ -816,7 +1009,12 @@ export function buildConfirmedFormat2CanonicalRequest({
           },
           span: exactSourceSpan(
             sourceFidelity,
-            writingBlock.applicationEvidence?.sourceRegionRefs
+            writingBlock.promptBlocks
+              ? v4WritingSourceRegionRefs(
+                  writingBlock,
+                  writingBlock.applicationEvidence.wordCountSource,
+                )
+              : writingBlock.applicationEvidence?.sourceRegionRefs
               || writingBlock.sourceRegionRefs,
             questionPdfBytes.byteLength,
           ),
@@ -838,6 +1036,63 @@ export function buildConfirmedFormat2CanonicalRequest({
           ),
         },
       )
+    }
+    if (expectedFamily === 'continuation-writing' && !sourceFidelity.legacy) {
+      const writingBlock = group.blocks.find(
+        (block) => block.kind === 'writing_material',
+      )
+      const writingIdentity = canonicalIdentities.blocks[
+        group.blocks.indexOf(writingBlock)
+      ]
+      if (writingBlock.materialBlocks) {
+        observations.push(
+          {
+            observationId: `observation:${group.groupId}:word-count`,
+            kind: 'continuation_word_count_ruling',
+            documentInputKey: 'original_question_source',
+            value: {
+              groupId: group.groupId,
+              target: writingBlock.wordCountTarget,
+              countScope: writingBlock.wordCountScope,
+            },
+            span: exactSourceSpan(
+              sourceFidelity,
+              v4WritingSourceRegionRefs(writingBlock, writingBlock.wordCountSource),
+              questionPdfBytes.byteLength,
+            ),
+          },
+          ...writingBlock.continuationStarters.map((starter, index) => ({
+            observationId: `observation:${group.groupId}:starter:${index + 1}`,
+            kind: 'continuation_source_starter',
+            documentInputKey: 'original_question_source',
+            value: {
+              groupId: group.groupId,
+              starterId: writingIdentity.starters[index].starterId,
+              contentRef: writingIdentity.starters[index].nodeId,
+            },
+            span: exactSourceSpan(
+              sourceFidelity,
+              starter.sourceRegionRefs,
+              questionPdfBytes.byteLength,
+            ),
+          })),
+          {
+            observationId: `observation:${group.groupId}:response`,
+            kind: 'continuation_response_binding',
+            documentInputKey: 'original_question_source',
+            value: {
+              groupId: group.groupId,
+              writingTaskId: writingIdentity.writingTaskId,
+              answerRegionRef: 'writing.continuation-box',
+            },
+            span: exactSourceSpan(
+              sourceFidelity,
+              writingBlock.sourceRegionRefs,
+              questionPdfBytes.byteLength,
+            ),
+          },
+        )
+      }
     }
     sourceGroups.push({
       groupId: group.groupId,
@@ -1080,7 +1335,7 @@ export function buildConfirmedFormat2CanonicalRequest({
   ]
   return {
     request: {
-      authority: readingOptionFigureAuthorityRef,
+      authority: authorityRef,
       evidence: { documents },
     },
     sourceAsset,

@@ -1,4 +1,5 @@
 import {
+  format2RichCandidateAuthorityRef,
   readingOptionFigureAuthorityRef,
   resolveCanonicalAuthority,
   slotsForProfile,
@@ -11,6 +12,7 @@ import {
 
 const encoder = new TextEncoder()
 const V3 = 'format2-transcription-v3'
+const V4 = 'format2-transcription-v4'
 const OBJECTIVE_GROUP_TYPES = new Set([
   'seven_choices',
   'cloze',
@@ -66,6 +68,12 @@ const EXPECTED_LISTENING_INPUT_KEYS = [
 
 function clone(value) {
   return structuredClone(value)
+}
+
+export function format2CandidateAuthorityRefForTranscription(transcription) {
+  return transcription?.schemaVersion === V4
+    ? format2RichCandidateAuthorityRef
+    : readingOptionFigureAuthorityRef
 }
 
 function issue(code, path, message) {
@@ -130,28 +138,59 @@ function paragraphIdentity(nodeId) {
   return { nodeId, inlineNodeId: `text:${nodeId}` }
 }
 
+function sourceParagraphIdentity(nodeId, block) {
+  return {
+    nodeId,
+    inlines: block.inlines.map((_inline, index) => ({
+      nodeId: `text:${nodeId}:${index + 1}`,
+    })),
+  }
+}
+
+function tableIdentity(nodeId, block) {
+  return {
+    nodeId,
+    rows: block.rows.map((values, rowIndex) => ({
+      rowId: `row:${nodeId}:${rowIndex + 1}`,
+      cells: values.map((_value, columnIndex) => {
+        const cellId = `cell:${nodeId}:${rowIndex + 1}:${columnIndex + 1}`
+        return { cellId, inlineNodeId: `text:${cellId}` }
+      }),
+    })),
+  }
+}
+
 function deriveCanonicalBlockIdentity(group, block, blockIndex) {
   const sourceAddress = `${group.groupId}:source:${blockIndex + 1}`
   if (block.kind === 'text') {
     return paragraphIdentity(`paragraph:${sourceAddress}`)
   }
   if (block.kind === 'table') {
-    return {
-      nodeId: `table:${sourceAddress}`,
-      rows: block.rows.map((values, rowIndex) => ({
-        rowId: `row:${sourceAddress}:${rowIndex + 1}`,
-        cells: values.map((_value, columnIndex) => {
-          const cellId = `cell:${sourceAddress}:${rowIndex + 1}:${columnIndex + 1}`
-          return { cellId, inlineNodeId: `text:${cellId}` }
-        }),
-      })),
-    }
+    return tableIdentity(`table:${sourceAddress}`, block)
   }
   if (block.kind === 'framed_columns') {
     return {
       nodeId: `framed-columns:${sourceAddress}`,
       columns: block.columns.map((column, columnIndex) => {
         const columnId = `column:${sourceAddress}:${columnIndex + 1}`
+        if (column.blocks) {
+          const blocks = column.blocks.map((child, childIndex) => {
+            const childAddress = `${columnId}:child:${childIndex + 1}`
+            return child.kind === 'source_table'
+              ? tableIdentity(`table:${childAddress}`, child)
+              : sourceParagraphIdentity(`paragraph:${childAddress}`, child)
+          })
+          const headingIndex = column.columnHeadingBlockRef
+            ? column.blocks.findIndex(
+                (child) => child.blockId === column.columnHeadingBlockRef,
+              )
+            : -1
+          return {
+            columnId,
+            blocks,
+            heading: headingIndex >= 0 ? blocks[headingIndex] : null,
+          }
+        }
         return {
           columnId,
           heading: column.heading
@@ -165,7 +204,12 @@ function deriveCanonicalBlockIdentity(group, block, blockIndex) {
     }
   }
   if (block.kind === 'visual_placeholder') {
-    return { nodeId: `figure:${sourceAddress}` }
+    return {
+      nodeId: `figure:${sourceAddress}`,
+      captionInlineNodeId: block.captionProvision?.provision === 'source_caption'
+        ? `text:figure:${sourceAddress}:caption`
+        : null,
+    }
   }
   if (block.kind === 'objective_paragraph') {
     return {
@@ -177,6 +221,27 @@ function deriveCanonicalBlockIdentity(group, block, blockIndex) {
   }
   if (block.kind === 'writing_material') {
     const base = `${group.groupId}:writing:${blockIndex + 1}`
+    if (block.promptBlocks || block.materialBlocks) {
+      return {
+        writingTaskId: `writing-task:${group.groupId}`,
+        promptBlocks: (block.promptBlocks || []).map((paragraphBlock, index) => (
+          sourceParagraphIdentity(`paragraph:${base}:prompt:${index + 1}`, paragraphBlock)
+        )),
+        materialBlocks: (block.materialBlocks || []).map((paragraphBlock, index) => (
+          sourceParagraphIdentity(`paragraph:${base}:material:${index + 1}`, paragraphBlock)
+        )),
+        starters: (block.continuationStarters || []).map((starter, index) => ({
+          starterId: `starter:${group.groupId}:${index + 1}`,
+          ...sourceParagraphIdentity(`paragraph:${base}:starter:${index + 1}`, starter.block),
+        })),
+        givenParts: block.applicationGiven?.provision === 'source_provided'
+          ? block.applicationGiven.parts.map((_part, index) => ({
+              givenPartId: `given-part:${group.groupId}:${index + 1}`,
+              ...paragraphIdentity(`paragraph:${base}:given:${index + 1}`),
+            }))
+          : [],
+      }
+    }
     const evidenceIdentity = (suffix) => paragraphIdentity(
       `paragraph:${base}:evidence:${suffix}`,
     )
@@ -217,28 +282,53 @@ function deriveCanonicalIdentities(group) {
   }
 }
 
-function blockTargetRefs(block, identity, targets) {
+function sourceParagraphTargetRefs(block, identity, targets) {
   assignTarget(targets, `content_node:${identity.nodeId}`, block.sourceRegionRefs)
+  block.inlines.forEach((inline, index) => {
+    assignTarget(
+      targets,
+      `content_node:${identity.inlines[index].nodeId}`,
+      inline.sourceRegionRefs,
+    )
+  })
+}
+
+function tableTargetRefs(block, identity, targets) {
+  assignTarget(targets, `content_node:${identity.nodeId}`, block.sourceRegionRefs)
+  block.rows.forEach((row, rowIndex) => {
+    const { rowId, cells } = identity.rows[rowIndex]
+    assignTarget(targets, `content_node:${rowId}`, block.sourceRegionRefs)
+    row.forEach((_value, columnIndex) => {
+      const { cellId, inlineNodeId } = cells[columnIndex]
+      assignTarget(targets, `content_node:${cellId}`, block.sourceRegionRefs)
+      assignTarget(targets, `content_node:${inlineNodeId}`, block.sourceRegionRefs)
+    })
+  })
+}
+
+function blockTargetRefs(block, identity, targets) {
+  if (identity.nodeId) {
+    assignTarget(targets, `content_node:${identity.nodeId}`, block.sourceRegionRefs)
+  }
   if (block.kind === 'text') {
     assignTarget(targets, `content_node:${identity.inlineNodeId}`, block.sourceRegionRefs)
   } else if (block.kind === 'table') {
-    block.rows.forEach((row, rowIndex) => {
-      const { rowId, cells } = identity.rows[rowIndex]
-      assignTarget(targets, `content_node:${rowId}`, block.sourceRegionRefs)
-      row.forEach((_value, columnIndex) => {
-        const { cellId, inlineNodeId } = cells[columnIndex]
-        assignTarget(targets, `content_node:${cellId}`, block.sourceRegionRefs)
-        assignTarget(
-          targets,
-          `content_node:${inlineNodeId}`,
-          block.sourceRegionRefs,
-        )
-      })
-    })
+    tableTargetRefs(block, identity, targets)
   } else if (block.kind === 'framed_columns') {
     for (const [columnIndex, column] of block.columns.entries()) {
       const columnIdentity = identity.columns[columnIndex]
       assignTarget(targets, `content_node:${columnIdentity.columnId}`, block.sourceRegionRefs)
+      if (column.blocks) {
+        column.blocks.forEach((child, childIndex) => {
+          const childIdentity = columnIdentity.blocks[childIndex]
+          if (child.kind === 'source_table') {
+            tableTargetRefs(child, childIdentity, targets)
+          } else {
+            sourceParagraphTargetRefs(child, childIdentity, targets)
+          }
+        })
+        continue
+      }
       if (column.heading) {
         assignTarget(
           targets,
@@ -257,7 +347,51 @@ function blockTargetRefs(block, identity, targets) {
         assignTarget(targets, `content_node:${paragraph.inlineNodeId}`, block.sourceRegionRefs)
       })
     }
+  } else if (block.kind === 'visual_placeholder') {
+    if (identity.captionInlineNodeId) {
+      assignTarget(
+        targets,
+        `content_node:${identity.captionInlineNodeId}`,
+        block.captionProvision.sourceRegionRefs,
+      )
+      assignTarget(
+        targets,
+        `figure_caption:${identity.nodeId}`,
+        block.captionProvision.sourceRegionRefs,
+      )
+    } else if (block.captionProvision) {
+      assignTarget(
+        targets,
+        `figure_caption_provision:${identity.nodeId}`,
+        block.captionProvision.sourceRegionRefs,
+      )
+    }
   } else if (block.kind === 'writing_material') {
+    if (block.promptBlocks || block.materialBlocks) {
+      assignTarget(targets, `writing_task:${identity.writingTaskId}`, block.sourceRegionRefs)
+      block.promptBlocks?.forEach((promptBlock, index) => {
+        sourceParagraphTargetRefs(promptBlock, identity.promptBlocks[index], targets)
+      })
+      block.materialBlocks?.forEach((materialBlock, index) => {
+        sourceParagraphTargetRefs(materialBlock, identity.materialBlocks[index], targets)
+      })
+      block.continuationStarters?.forEach((starter, index) => {
+        const starterIdentity = identity.starters[index]
+        sourceParagraphTargetRefs(starter.block, starterIdentity, targets)
+        assignTarget(
+          targets,
+          `continuation_starter:${starterIdentity.starterId}`,
+          starter.sourceRegionRefs,
+        )
+      })
+      identity.givenParts.forEach((part, index) => {
+        const refs = block.applicationGiven.parts[index].sourceRegionRefs
+        assignTarget(targets, `given_part:${part.givenPartId}`, refs)
+        assignTarget(targets, `content_node:${part.nodeId}`, refs)
+        assignTarget(targets, `content_node:${part.inlineNodeId}`, refs)
+      })
+      return
+    }
     assignTarget(targets, `content_node:${identity.inlineNodeId}`, block.sourceRegionRefs)
     assignTarget(targets, `writing_task:${identity.writingTaskId}`, block.sourceRegionRefs)
     identity.starters.forEach((starter) => {
@@ -532,8 +666,82 @@ function validateListeningContent(documents, transcription, questionDocument, an
   }
 }
 
+function registerSourceId(value, path, globalContentIds, issues) {
+  if (globalContentIds.has(value)) {
+    issues.push(issue(
+      'FORMAT2_SOURCE_CONTENT_IDENTITY_DUPLICATE',
+      path,
+      'Source-content identities must be globally unique',
+    ))
+    return false
+  }
+  globalContentIds.add(value)
+  return true
+}
+
+function registerV4SourceParagraph({
+  block,
+  identity,
+  path,
+  sourceRegions,
+  globalContentIds,
+  sourceContentByBlockId,
+  issues,
+}) {
+  refsAreClosed(block.sourceRegionRefs, sourceRegions, `${path}/sourceRegionRefs`, issues)
+  registerSourceId(block.blockId, `${path}/blockId`, globalContentIds, issues)
+  const inlinesById = new Map()
+  for (const [index, inline] of block.inlines.entries()) {
+    const inlinePath = `${path}/inlines/${index}`
+    refsAreClosed(inline.sourceRegionRefs, sourceRegions, `${inlinePath}/sourceRegionRefs`, issues)
+    registerSourceId(inline.contentId, `${inlinePath}/contentId`, globalContentIds, issues)
+    inlinesById.set(inline.contentId, {
+      source: inline,
+      canonicalNodeId: identity.inlines[index].nodeId,
+      order: index,
+    })
+  }
+  sourceContentByBlockId.set(block.blockId, {
+    source: block,
+    canonicalNodeId: identity.nodeId,
+    inlinesById,
+  })
+}
+
+function validateV4SourceContentRef({
+  ref,
+  path,
+  sourceContentByBlockId,
+  sourceRegions,
+  issues,
+}) {
+  const block = sourceContentByBlockId.get(ref?.blockId)
+  const resolved = (ref?.contentIds || []).map((contentId) => block?.inlinesById.get(contentId))
+  if (
+    !block
+    || resolved.some((inline) => !inline)
+    || new Set(ref.contentIds).size !== ref.contentIds.length
+    || resolved.some((inline, index) => index > 0 && inline.order <= resolved[index - 1].order)
+  ) {
+    issues.push(issue(
+      'FORMAT2_WRITING_SOURCE_CONTENT_REFERENCE_INVALID',
+      path,
+      'Writing source refs must resolve once within one source paragraph and retain inline order',
+    ))
+    return null
+  }
+  const refs = resolved.flatMap((inline) => inline.source.sourceRegionRefs)
+  return {
+    blockId: block.canonicalNodeId,
+    inlineNodeIds: resolved.map((inline) => inline.canonicalNodeId),
+    text: resolved.map((inline) => inline.source.text).join(''),
+    sourceRegionRefs: [...new Set(refs)],
+  }
+}
+
 function inspectV3({ transcription, questionDocument, answerDocument }) {
   const issues = []
+  const v4 = transcription.schemaVersion === V4
   const provenance = transcription.provenance
   if (
     provenance.questionSource.sha256 !== transcription.sourceBindings.questionPdfSha256
@@ -566,7 +774,9 @@ function inspectV3({ transcription, questionDocument, answerDocument }) {
     sourceRegions.set(region.sourceRegionId, region)
   }
 
-  const authority = resolveCanonicalAuthority(readingOptionFigureAuthorityRef)
+  const authority = resolveCanonicalAuthority(
+    format2CandidateAuthorityRefForTranscription(transcription),
+  )
   const profile = authority.ok ? authority.closure.profiles.get('nck1') : null
   const slots = profile ? slotsForProfile(profile) : []
   const slotsById = new Map(slots.map((slot) => [slot.slotId, slot]))
@@ -599,6 +809,7 @@ function inspectV3({ transcription, questionDocument, answerDocument }) {
     if (!SOURCE_MAPPED_GROUP_TYPES.has(group.groupType)) continue
     refsAreClosed(group.sourceRegionRefs, sourceRegions, `${groupPath}/sourceRegionRefs`, issues)
     const targets = {}
+    const sourceContentByBlockId = new Map()
     assignTarget(targets, `group:${group.groupId}`, group.sourceRegionRefs)
     const identities = deriveCanonicalIdentities(group)
     canonicalIdentitiesByGroupId.set(group.groupId, identities)
@@ -651,7 +862,69 @@ function inspectV3({ transcription, questionDocument, answerDocument }) {
               ))
             }
             globalContentIds.add(column.columnId)
+            if (v4) {
+              for (const [childIndex, child] of column.blocks.entries()) {
+                const childPath = `${blockPath}/columns/${columnIndex}/blocks/${childIndex}`
+                const childIdentity = identities.blocks[blockIndex]
+                  .columns[columnIndex].blocks[childIndex]
+                if (child.kind === 'source_paragraph') {
+                  registerV4SourceParagraph({
+                    block: child,
+                    identity: childIdentity,
+                    path: childPath,
+                    sourceRegions,
+                    globalContentIds,
+                    sourceContentByBlockId,
+                    issues,
+                  })
+                } else {
+                  refsAreClosed(
+                    child.sourceRegionRefs,
+                    sourceRegions,
+                    `${childPath}/sourceRegionRefs`,
+                    issues,
+                  )
+                  registerSourceId(
+                    child.blockId,
+                    `${childPath}/blockId`,
+                    globalContentIds,
+                    issues,
+                  )
+                  const width = child.rows[0]?.length
+                  if (!width || child.rows.some((row) => row.length !== width)) {
+                    issues.push(issue(
+                      'FORMAT2_NESTED_TABLE_INVALID',
+                      `${childPath}/rows`,
+                      'Nested framed-column table rows must be non-empty and rectangular',
+                    ))
+                  }
+                }
+              }
+              if (column.columnHeadingBlockRef) {
+                const headingMatches = column.blocks.filter(
+                  (child) => child.blockId === column.columnHeadingBlockRef,
+                )
+                if (
+                  headingMatches.length !== 1
+                  || headingMatches[0].kind !== 'source_paragraph'
+                ) {
+                  issues.push(issue(
+                    'FORMAT2_FRAMED_COLUMN_HEADING_REFERENCE_INVALID',
+                    `${blockPath}/columns/${columnIndex}/columnHeadingBlockRef`,
+                    'Column heading must resolve exactly once to a paragraph in the same column',
+                  ))
+                }
+              }
+            }
           }
+        }
+        if (block.kind === 'visual_placeholder' && v4) {
+          refsAreClosed(
+            block.captionProvision.sourceRegionRefs,
+            sourceRegions,
+            `${blockPath}/captionProvision/sourceRegionRefs`,
+            issues,
+          )
         }
         if (block.kind === 'writing_material') {
           refsAreClosed(
@@ -683,6 +956,95 @@ function inspectV3({ transcription, questionDocument, answerDocument }) {
                   ))
                 }
                 globalContentIds.add(address)
+              }
+            }
+          }
+          if (v4) {
+            for (const [sourceBlockIndex, sourceBlock] of [
+              ...(block.promptBlocks || []),
+              ...(block.materialBlocks || []),
+            ].entries()) {
+              const collection = block.promptBlocks ? 'promptBlocks' : 'materialBlocks'
+              const identityCollection = block.promptBlocks
+                ? identities.blocks[blockIndex].promptBlocks
+                : identities.blocks[blockIndex].materialBlocks
+              registerV4SourceParagraph({
+                block: sourceBlock,
+                identity: identityCollection[sourceBlockIndex],
+                path: `${blockPath}/${collection}/${sourceBlockIndex}`,
+                sourceRegions,
+                globalContentIds,
+                sourceContentByBlockId,
+                issues,
+              })
+            }
+            for (const [starterIndex, starter] of (block.continuationStarters || []).entries()) {
+              refsAreClosed(
+                starter.sourceRegionRefs,
+                sourceRegions,
+                `${blockPath}/continuationStarters/${starterIndex}/sourceRegionRefs`,
+                issues,
+              )
+              registerSourceId(
+                starter.starterId,
+                `${blockPath}/continuationStarters/${starterIndex}/starterId`,
+                globalContentIds,
+                issues,
+              )
+              registerV4SourceParagraph({
+                block: starter.block,
+                identity: identities.blocks[blockIndex].starters[starterIndex],
+                path: `${blockPath}/continuationStarters/${starterIndex}/block`,
+                sourceRegions,
+                globalContentIds,
+                sourceContentByBlockId,
+                issues,
+              })
+            }
+            const writingRefs = block.taskType === 'application'
+              ? [
+                  ['writerRole', block.applicationEvidence.writerRole],
+                  ['audienceOrDestination', block.applicationEvidence.audienceOrDestination],
+                  ['deliverable', block.applicationEvidence.deliverable],
+                  ['communicativePurpose', block.applicationEvidence.communicativePurpose],
+                  ['wordCountSource', block.applicationEvidence.wordCountSource],
+                  ...block.applicationEvidence.contentRequirements.map(
+                    (ref, index) => [`contentRequirements/${index}`, ref],
+                  ),
+                ]
+              : [['wordCountSource', block.wordCountSource]]
+            const resolvedRefs = new Map()
+            for (const [key, ref] of writingRefs) {
+              resolvedRefs.set(key, validateV4SourceContentRef({
+                ref,
+                path: `${blockPath}/${block.taskType === 'application'
+                  ? 'applicationEvidence/'
+                  : ''}${key}`,
+                sourceContentByBlockId,
+                sourceRegions,
+                issues,
+              }))
+            }
+            const wordCountRef = resolvedRefs.get('wordCountSource')
+            if (wordCountRef && !wordCountRef.text.includes(String(block.wordCountTarget))) {
+              issues.push(issue(
+                'FORMAT2_WRITING_WORD_COUNT_REFERENCE_INVALID',
+                `${blockPath}/wordCountSource`,
+                'The declared word-count source text must contain the exact target',
+              ))
+            }
+            if (block.taskType === 'application') {
+              const requirementKeys = block.applicationEvidence.contentRequirements.map(
+                (_ref, index) => stableStringify(
+                  block.applicationEvidence.contentRequirements[index],
+                ),
+              )
+              if (new Set(requirementKeys).size !== requirementKeys.length) {
+                issues.push(issue(
+                  'FORMAT2_APPLICATION_REQUIREMENT_REFERENCE_DUPLICATE',
+                  `${blockPath}/applicationEvidence/contentRequirements`,
+                  'Application requirements must bind distinct ordered source content',
+                ))
               }
             }
           }
@@ -993,7 +1355,7 @@ function inspectV3({ transcription, questionDocument, answerDocument }) {
 }
 
 /**
- * Normalizes the v3 source-faithful contract for both the public Job and the
+ * Normalizes the v3/v4 source-faithful contracts for both the public Job and the
  * trusted Canonical adapter. Older transcription versions deliberately return
  * a legacy marker so their request bytes and derived identities do not change.
  */
@@ -1002,7 +1364,7 @@ export function inspectFormat2SourceFidelity({
   questionDocument,
   answerDocument,
 }) {
-  if (transcription?.schemaVersion !== V3) {
+  if (![V3, V4].includes(transcription?.schemaVersion)) {
     return { ok: true, issues: [], model: { legacy: true } }
   }
   return inspectV3({ transcription, questionDocument, answerDocument })

@@ -23,7 +23,6 @@ const CARDS = [
     summary: 'A passage about climate science and inference.',
     groupType: 'reading',
     hit: 'What can be inferred about climate?',
-    answerPreview: 'B',
     tags: ['climate', 'inference'],
     topicLabels: [{ label: '人与自然' }],
     source: '浙江卷',
@@ -31,6 +30,9 @@ const CARDS = [
     paperName: '2023-01',
     section: '阅读',
     year: 2023,
+    canAddToDraftPaper: false,
+    difficulty: '',
+    answerPreview: '',
   },
   {
     id: 'g-beta',
@@ -148,6 +150,12 @@ verifier.assert(m0.score > m1.score, 'alpha scores higher than beta (rerank + le
 verifier.assert(m0.reason === 'DeepSeek 检测第 1 位；主题命中 climate', 'rank-1 reason from buildDeepSeekSemanticSearchReason + DeepSeek reason')
 verifier.assert(m1.reason === 'DeepSeek 检测第 2 位；弱相关', 'rank-2 reason from DeepSeek reason')
 verifier.assert(m0.questionGroup && m0.questionGroup.id === 'g-alpha', 'match carries full questionGroup card')
+verifier.assert(
+  m0.questionGroup.canAddToDraftPaper === false
+    && m0.questionGroup.difficulty === ''
+    && m0.questionGroup.answerPreview === '',
+  'Canonical-only read card remains searchable without draft capability, invented difficulty, or answer leakage',
+)
 
 // Reading-search signals folded into the candidate text sent to DeepSeek (proves the
 // reading_parse_results SQL + buildReadingSearchSignals path moved intact).

@@ -1,6 +1,6 @@
 # Format 2 real-parity frontier — 2026-08-26
 
-Status: Owner-approved graph; Ticket 03 ready
+Status: Owner-approved graph; Ticket 04 implemented
 Fixed point: `ece39897b08390642c13bc0957f68e0cf0a8da70`
 
 ## Why this preflight exists
@@ -74,13 +74,21 @@ source shape data-only.
   shared schema/adapter implementation in the
   schema/validator/trusted-adapter/compiler source-evidence seam only. Tickets
   05–08 verify the applied B08 boundary; they do not own or reimplement it.
-- Ticket 04 is blocked by Ticket 03. It owns B04, B05, B06, and B10 in the
-  shared rich whole-paper and active-consumer compatibility seam.
-- Ticket 05 is blocked by Ticket 04. It replays Shenzhen Q33 as per-paper data
-  and retires the Q33-only materializer only after parity.
-- Ticket 06 is blocked by Ticket 04 and the normal direct Owner visual
-  confirmation required by B09. It replays `paper-2026-i` and retires its
-  registry entry only after parity.
+- Ticket 04 is implemented after Ticket 03. It closes B04, B05, B06, and B10
+  in the shared rich whole-paper and active-consumer compatibility seam.
+- On 2026-08-26 the Owner approved one scoped Format 2 rich Candidate authority
+  successor after the executable v46 closure rejected the modern Continuation
+  contract. It combines the existing Reading Figure capability with a new
+  versioned modern Continuation family and source-v2 closure. Format 2 Job alone
+  binds the exact digest-bound ref; global/current authority, historical
+  authorities/assets, renderer/CSS, and paper data do not change. The merger
+  gate therefore adds `verify:paper`, one final `verify:all`, and one
+  independent Standards/Spec review.
+- Ticket 05 is ready to replay Shenzhen Q33 as per-paper data and retire the
+  Q33-only materializer only after parity.
+- Ticket 06 may proceed to its normal direct Owner visual confirmation required
+  by B09. It replays `paper-2026-i` and retires its registry entry only after
+  parity.
 - Ticket 07 is blocked by Tickets 05 and 06. It imports Jining from its admitted
   source pair to exact Teacher Confirmation.
 - Ticket 08 is blocked by Ticket 07 and that exact Owner confirmation. It

@@ -1,5 +1,6 @@
 import {
   consumerContractRefs,
+  format2RichConsumerContractRefs,
   readingOptionFigureConsumerContractRefs,
   resolveConsumerContract,
 } from '../../shared/paper-canonical/consumers.mjs'
@@ -48,11 +49,26 @@ function isActiveCanonicalItem(item) {
     || ['writing', 'continuation'].includes(item?.detail?.groupType)
 }
 
-function currentPublicationUsesReadingOptionFigureAuthority(store, currentRef) {
-  if (!currentRef) return false
+function currentPublicationContractSet(store, currentRef) {
+  if (!currentRef) return consumerContractRefs
+  const manifestCandidates = [
+    {
+      fileName: 'canonical-paper-publication-v49.json',
+      version: '49',
+      contracts: format2RichConsumerContractRefs,
+    },
+    {
+      fileName: 'canonical-paper-publication-v46.json',
+      version: '46',
+      contracts: readingOptionFigureConsumerContractRefs,
+    },
+  ]
+  const candidate = manifestCandidates.find(({ fileName }) =>
+    store.readVersionArtifact(currentRef, `canonical/${fileName}`))
+  if (!candidate) return consumerContractRefs
   const bytes = store.readVersionArtifact(
     currentRef,
-    'canonical/canonical-paper-publication-v46.json',
+    `canonical/${candidate.fileName}`,
   )
   if (!bytes) return false
   let manifest
@@ -68,12 +84,12 @@ function currentPublicationUsesReadingOptionFigureAuthority(store, currentRef) {
     manifest?.paperId !== currentRef.paperId
     || manifest?.sourceAssetVersion !== currentRef.sourceAssetVersion
     || manifest?.publicationDigest !== currentRef.publicationDigest
-    || manifest?.authority?.manifestVersion !== '46'
+    || manifest?.authority?.manifestVersion !== candidate.version
   ) throw rejected({
     disposition: 'incompatible',
     diagnostics: [{ code: 'CANONICAL_PUBLICATION_REF_MISMATCH' }],
   })
-  return true
+  return candidate.contracts
 }
 
 export function canonicalSourceConsumptionForGroup(consumption, groupId) {
@@ -192,9 +208,9 @@ function composeConsumptions({ candidates, consumptionsByPaperId }) {
   return composite
 }
 
-export function createCanonicalConsumerRuntime({ rootDir, db }) {
+export function createCanonicalConsumerRuntime({ rootDir, db, readOnly = false }) {
   const store = {
-    ...createFileSystemCanonicalPublicationStore({ rootDir, db }),
+    ...createFileSystemCanonicalPublicationStore({ rootDir, db, ensureShape: !readOnly }),
   }
   function load({ paperId, consumerId }) {
     if (
@@ -207,12 +223,10 @@ export function createCanonicalConsumerRuntime({ rootDir, db }) {
       diagnostics: [{ code: 'CANONICAL_PUBLICATION_PAPER_ID_INVALID' }],
     })
     const currentRef = store.readPublishedRefs(paperId).current
-    const contractSet = currentPublicationUsesReadingOptionFigureAuthority(
+    const contractSet = currentPublicationContractSet(
       store,
       currentRef,
     )
-      ? readingOptionFigureConsumerContractRefs
-      : consumerContractRefs
     const consumerContract = contractSet[consumerId]
     if (!consumerContract) throw rejected({
       disposition: 'incompatible',

@@ -17,6 +17,7 @@ import { createDraftPaperStore } from './draft-paper/draftPaperStore.mjs'
 import { createExportImplementation } from './exports/exportImplementation.mjs'
 import { createExportRoutes } from './exports/exportRoutes.mjs'
 import { createCanonicalConsumerRuntime } from './paper-canonical/consumerRuntime.mjs'
+import { createCanonicalActiveConsumerCompatibilityAdapter } from './paper-canonical/activeConsumerCompatibilityAdapter.mjs'
 import { loadCanonicalSourceAssetRepresentation } from './paper-canonical/sourceAssetRepresentation.mjs'
 import { createPaperCanonicalConsumerRoutes } from './paper-canonical/consumerRoutes.mjs'
 import { ensurePaperImportDatabaseShape } from './paper-import/publisher.mjs'
@@ -57,9 +58,24 @@ const promptsDir = path.join(__dirname, 'prompts')
 const verifyAuditLogPath = path.join(rootDir, 'server', 'logs', 'verify-audit.log')
 const port = Number(process.env.QUESTION_BANK_API_PORT || 8787)
 const vocabularyAppOrigin = process.env.QUESTION_BANK_PUBLIC_ORIGIN || 'https://eqbank.cc'
-const paperSurfaceAnalysisAvailability = createPaperSurfaceAnalysisAvailability({ paperAssetsDir })
-const teachingFacetIndex = createTeachingFacetIndex({ paperAssetsDir })
-const similarQuestionsStore = createSimilarQuestionsStore({ getTeachingFacetIndex, paperAssetsDir })
+const canonicalCompatibilityAdapter = createCanonicalActiveConsumerCompatibilityAdapter({
+  rootDir: paperAssetsDir,
+  openDatabase,
+})
+const getCanonicalCompatibilitySnapshot = () => canonicalCompatibilityAdapter.snapshot()
+const paperSurfaceAnalysisAvailability = createPaperSurfaceAnalysisAvailability({
+  paperAssetsDir,
+  getCanonicalCompatibilitySnapshot,
+})
+const teachingFacetIndex = createTeachingFacetIndex({
+  paperAssetsDir,
+  getCanonicalCompatibilitySnapshot,
+})
+const similarQuestionsStore = createSimilarQuestionsStore({
+  getTeachingFacetIndex,
+  paperAssetsDir,
+  getCanonicalCompatibilitySnapshot,
+})
 const exportImplementation = createExportImplementation({
   rootDir,
   exportDir,
@@ -1691,6 +1707,17 @@ function selectQuestionGroupCards(db, whereClause = '', params = [], draftContex
       draftContext,
       new Set(cards.map((card) => card.id)),
     ))
+    const canonicalGroups = Object.values(
+      getCanonicalCompatibilitySnapshot().groupsById,
+    )
+    const canonicalById = new Map(canonicalGroups.map((group) => [
+      group.groupId,
+      group.card,
+    ]))
+    for (let index = cards.length - 1; index >= 0; index -= 1) {
+      if (canonicalById.has(cards[index].id)) cards.splice(index, 1)
+    }
+    cards.push(...canonicalById.values())
   }
   return cards
 }
@@ -1779,6 +1806,8 @@ function applyPaperAssetToQuestionGroupDetail(baseDetail, asset, group, dbQuesti
 }
 
 export function getQuestionGroupDetail(id) {
+  const canonicalDetail = getCanonicalCompatibilitySnapshot().groupsById[id]?.detail
+  if (canonicalDetail) return canonicalDetail
   const db = openDatabase()
 
   try {

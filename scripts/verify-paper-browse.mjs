@@ -259,6 +259,9 @@ import {
 } from '../test-fixtures/paper-canonical/sevenChoicesReferenceFixture.mjs'
 import { findWritingBlockRange } from '../app/src/features/paper-intelligence/writingPageModel.mjs'
 import { buildPaperAssetSurfaceModel } from '../app/src/features/paper-intelligence/paperAssetSurfaceAdapter.ts'
+import {
+  createPaperSurfaceAnalysisAvailability,
+} from '../server/search/paperSurfaceAvailability.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
@@ -279,6 +282,55 @@ function assert(name, condition, details = '') {
     console.error(`FAIL ${name}${details ? `\n  ${details}` : ''}`)
   }
 }
+
+const canonicalAnalysisGroupId = 'group-canonical-analysis-reading'
+const canonicalAnalysisQuestionId = 'question-canonical-analysis-reading-1'
+const canonicalAnalysisSnapshot = {
+  papersById: { 'paper-canonical-analysis': { paperId: 'paper-canonical-analysis' } },
+  groupsById: {
+    [canonicalAnalysisGroupId]: {
+      paperId: 'paper-canonical-analysis',
+      groupId: canonicalAnalysisGroupId,
+      groupType: 'reading',
+      questionIds: [canonicalAnalysisQuestionId],
+    },
+  },
+  questionsById: {},
+  analysisSources: [{
+    paperId: 'paper-canonical-analysis',
+    schemaVersion: 'reading-choice-analysis-v1',
+    groupType: 'reading',
+    entryMapKey: 'questions',
+    groupIds: [canonicalAnalysisGroupId],
+    entryIdsByGroupId: {
+      [canonicalAnalysisGroupId]: [canonicalAnalysisQuestionId],
+    },
+    analysis: {
+      schemaVersion: 'reading-choice-analysis-v1',
+      paperId: 'paper-canonical-analysis',
+      questions: { [canonicalAnalysisQuestionId]: { reviewed: true } },
+    },
+  }],
+}
+const canonicalAnalysisAvailability = createPaperSurfaceAnalysisAvailability({
+  paperAssetsDir: path.join(rootDir, 'absent-paper-assets-for-canonical-analysis'),
+  getCanonicalCompatibilitySnapshot: () => canonicalAnalysisSnapshot,
+}).getByGroupId().get(canonicalAnalysisGroupId)
+assert(
+  'Canonical-only reviewed Analysis enters PaperBrowse through the compatibility snapshot',
+  canonicalAnalysisAvailability?.label === '阅读解析'
+    && canonicalAnalysisAvailability.href.includes('source=canonical-compatibility'),
+  JSON.stringify(canonicalAnalysisAvailability),
+)
+canonicalAnalysisSnapshot.analysisSources[0].entryIdsByGroupId[canonicalAnalysisGroupId] = []
+const incompleteCanonicalAnalysisAvailability = createPaperSurfaceAnalysisAvailability({
+  paperAssetsDir: path.join(rootDir, 'absent-paper-assets-for-incomplete-canonical-analysis'),
+  getCanonicalCompatibilitySnapshot: () => canonicalAnalysisSnapshot,
+}).getByGroupId()
+assert(
+  'Canonical-only incomplete Analysis stays unavailable',
+  !incompleteCanonicalAnalysisAvailability.has(canonicalAnalysisGroupId),
+)
 
 console.log('paper-browse verify: whole-paper preview page (刀B v1)')
 

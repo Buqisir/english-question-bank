@@ -1,4 +1,7 @@
-import { compileConfirmedReadingOptionFigurePaper } from '../../shared/paper-canonical/compiler.mjs'
+import {
+  compileConfirmedFormat2RichPaper,
+  compileConfirmedReadingOptionFigurePaper,
+} from '../../shared/paper-canonical/compiler.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { confirmVisualImportCandidate } from './visualCandidate.mjs'
 
@@ -35,12 +38,12 @@ function proofSnapshotDigest({ compilation, sourceAsset, identity }) {
   })
 }
 
-export function admitLiveConfirmedReadingOptionFigureImport({
+function admitLiveConfirmedFigureImport({
   request,
   candidatePackage,
   teacherConfirmation,
   sourceAsset,
-}) {
+}, compile) {
   if (!(sourceAsset instanceof Uint8Array)) {
     throw new TypeError('Reading Figure Option admission requires exact source asset bytes')
   }
@@ -54,7 +57,7 @@ export function admitLiveConfirmedReadingOptionFigureImport({
   ) {
     throw new TypeError('Reading Figure Option admission requires every visual selection to be confirmed')
   }
-  const compilation = compileConfirmedReadingOptionFigurePaper(
+  const compilation = compile(
     request,
     confirmedSelection,
   )
@@ -76,6 +79,17 @@ export function admitLiveConfirmedReadingOptionFigureImport({
     confirmedSelection,
     proof,
   }
+}
+
+export function admitLiveConfirmedReadingOptionFigureImport(input) {
+  return admitLiveConfirmedFigureImport(
+    input,
+    compileConfirmedReadingOptionFigurePaper,
+  )
+}
+
+export function admitLiveConfirmedFormat2RichImport(input) {
+  return admitLiveConfirmedFigureImport(input, compileConfirmedFormat2RichPaper)
 }
 
 export function isLiveConfirmedReadingOptionFigureAdmission({

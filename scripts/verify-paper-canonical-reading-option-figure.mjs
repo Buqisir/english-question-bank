@@ -8,6 +8,7 @@ import { DatabaseSync } from 'node:sqlite'
 
 import {
   canonicalAuthorityRef,
+  format2RichCandidateAuthorityRef,
   readingOptionFigureAuthorityRef,
   resolveCanonicalAuthority,
 } from '../shared/paper-canonical/authority.mjs'
@@ -139,6 +140,11 @@ function assertLiveSealRejected({ compilation, sourceAsset, proof }) {
 
 assert.equal(canonicalAuthorityRef.manifestVersion, '36')
 assert.equal(readingOptionFigureAuthorityRef.manifestVersion, '46')
+assert.equal(format2RichCandidateAuthorityRef.manifestVersion, '49')
+assert.notEqual(
+  format2RichCandidateAuthorityRef.manifestDigest,
+  readingOptionFigureAuthorityRef.manifestDigest,
+)
 assert.equal(
   canonicalAuthorityRef.manifestDigest,
   'sha256:380824bab5f66a26bd06a65f071f9e798710bc9e456e6d4796ecca425de451ca',
@@ -156,7 +162,30 @@ assert.deepEqual(consumerContractRefs, {
   },
 })
 const successorClosure = resolveCanonicalAuthority(readingOptionFigureAuthorityRef).closure
+const format2RichClosure = resolveCanonicalAuthority(format2RichCandidateAuthorityRef).closure
 assert.equal(successorClosure.families.get('reading').version, '2')
+assert.equal(format2RichClosure.families.get('reading').version, '2')
+assert.deepEqual(
+  format2RichClosure.families.get('reading'),
+  successorClosure.families.get('reading'),
+)
+assert.deepEqual(
+  {
+    version: format2RichClosure.families.get('continuation-writing').version,
+    variantSchemaId:
+      format2RichClosure.families.get('continuation-writing').variantSchemaId,
+    sourceEvidenceSchemaId:
+      format2RichClosure.families.get('continuation-writing').sourceEvidenceSchemaId,
+    sourceTranscriptionSchemaId:
+      format2RichClosure.families.get('continuation-writing').sourceTranscriptionSchemaId,
+  },
+  {
+    version: '5',
+    variantSchemaId: 'canonical-continuation-writing-variant-v1',
+    sourceEvidenceSchemaId: 'continuation-writing-source-capture-v2',
+    sourceTranscriptionSchemaId: 'continuation-writing-source-transcription-v2',
+  },
+)
 assert.equal(
   digestJson(readingV1),
   'sha256:4b4837721e3025531ca0df8f98c73c80fa39cdd24918b632956ea6bf1dc18b67',

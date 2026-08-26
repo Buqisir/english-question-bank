@@ -82,6 +82,47 @@ function readJson(filePath) {
 console.log('I16-A verify: teaching-dimension retrieval layer')
 console.log()
 
+const canonicalFacetGroupId = 'group-canonical-facet-reading'
+const canonicalFacetQuestionId = 'question-canonical-facet-reading-1'
+const canonicalFacetIndex = createTeachingFacetIndex({
+  paperAssetsDir: path.join(corpusDir, 'absent-historical-assets'),
+  getCanonicalCompatibilitySnapshot: () => ({
+    papersById: {},
+    groupsById: {
+      [canonicalFacetGroupId]: {
+        paperId: 'paper-canonical-facet',
+        groupId: canonicalFacetGroupId,
+        groupType: 'reading',
+        questionIds: [canonicalFacetQuestionId],
+      },
+    },
+    questionsById: {},
+    analysisSources: [{
+      paperId: 'paper-canonical-facet',
+      schemaVersion: 'reading-choice-analysis-v1',
+      groupType: 'reading',
+      entryMapKey: 'questions',
+      groupIds: [canonicalFacetGroupId],
+      entryIdsByGroupId: { [canonicalFacetGroupId]: [canonicalFacetQuestionId] },
+      questionIdByEntryId: { [canonicalFacetQuestionId]: canonicalFacetQuestionId },
+      analysis: {
+        schemaVersion: 'reading-choice-analysis-v1',
+        paperId: 'paper-canonical-facet',
+        questions: {
+          [canonicalFacetQuestionId]: {
+            skill: { primary: 'inference', secondary: 'evidence-location' },
+          },
+        },
+      },
+    }],
+  }),
+}).getIndex()
+assert(
+  'Canonical-only Analysis enters teaching facets through the one compatibility snapshot',
+  canonicalFacetIndex.get(canonicalFacetGroupId)?.skills.has('inference')
+    && canonicalFacetIndex.get(canonicalFacetGroupId)?.secondarySkills.has('evidence-location'),
+)
+
 // ─── Load real 960d0f8d data ──────────────────────────────────────────────────
 const base960 = path.join(paperAssetsDir, 'paper-960d0f8d', 'versions', 'v1')
 // This script tests against the real off-repo (gitignored) paper-960d0f8d

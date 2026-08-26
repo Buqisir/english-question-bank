@@ -2,6 +2,7 @@
 import assert from 'node:assert/strict'
 import {
   existsSync,
+  mkdirSync,
   mkdtempSync,
   readFileSync,
   readdirSync,
@@ -24,7 +25,10 @@ import {
 import {
   buildConfirmedFormat2CanonicalRequest,
 } from '../server/paper-canonical/format2CanonicalRequest.mjs'
-import { readingOptionFigureAuthorityRef } from '../shared/paper-canonical/authority.mjs'
+import {
+  format2RichCandidateAuthorityRef,
+  readingOptionFigureAuthorityRef,
+} from '../shared/paper-canonical/authority.mjs'
 import {
   compileConfirmedReadingOptionFigurePaper,
 } from '../shared/paper-canonical/compiler.mjs'
@@ -37,6 +41,9 @@ import {
   loadPaperForConsumptionSync,
 } from '../server/paper-canonical/publication.mjs'
 import { createCanonicalConsumerRuntime } from '../server/paper-canonical/consumerRuntime.mjs'
+import {
+  createCanonicalActiveConsumerCompatibilityAdapter,
+} from '../server/paper-canonical/activeConsumerCompatibilityAdapter.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
 import { createExportImplementation } from '../server/exports/exportImplementation.mjs'
 import { grammarFillRhythm } from '../shared/paper-canonical/grammarFillRhythm.mjs'
@@ -256,7 +263,7 @@ function artifactPath(repositoryRoot, result, artifactName) {
 
 function assertFailed(result, code, diagnosticCode = code) {
   assert.equal(result.lifecycle, 'failed')
-  assert.equal(result.stopReason.code, code)
+  assert.equal(result.stopReason.code, code, JSON.stringify(result.diagnostics))
   assert.equal(result.jobId, null)
   assert.equal(result.paperId, null)
   assert.equal(result.canonicalPublication, null)
@@ -671,6 +678,201 @@ function upgradeFixtureToTranscriptionV3(input, { listeningGroup = null } = {}) 
     }
   }
   return input
+}
+
+function upgradeFixtureToTranscriptionV4(input) {
+  upgradeFixtureToTranscriptionV3(input)
+  const transcription = input.transcription
+  transcription.schemaVersion = 'format2-transcription-v4'
+  const readingA = transcription.groups.find(
+    (group) => group.groupId === 'group:reading-a',
+  )
+  const tableIndex = readingA.blocks.findIndex((block) => block.kind === 'table')
+  const sourceTable = readingA.blocks[tableIndex]
+  readingA.blocks.splice(tableIndex, 1, {
+    blockId: 'block:reading-a:framed-columns',
+    kind: 'framed_columns',
+    sourceRegionRefs: [...sourceTable.sourceRegionRefs],
+    columns: [
+      {
+        columnId: 'column:reading-a:left',
+        heading: 'Source timetable',
+        paragraphs: ['Exact source lead.'],
+      },
+      {
+        columnId: 'column:reading-a:right',
+        heading: 'Source note',
+        paragraphs: ['Exact source tail.'],
+      },
+    ],
+  })
+  for (const group of transcription.groups) {
+    for (const block of group.blocks) {
+      if (block.kind === 'visual_placeholder') {
+        block.captionProvision = {
+          provision: 'source_proven_none',
+          sourceRegionRefs: [...block.sourceRegionRefs],
+        }
+      }
+      if (block.kind !== 'framed_columns') continue
+      block.columns = block.columns.map((column, columnIndex) => {
+        const sourceRegionRefs = [...block.sourceRegionRefs]
+        const blocks = [
+          ...(column.heading ? [{
+            blockId: `${column.columnId}:source-heading`,
+            kind: 'source_paragraph',
+            inlines: [{
+              contentId: `${column.columnId}:source-heading:text`,
+              text: column.heading,
+              sourceRegionRefs,
+            }],
+            sourceRegionRefs,
+          }] : []),
+          ...column.paragraphs.map((value, index) => ({
+            blockId: `${column.columnId}:source-paragraph:${index + 1}`,
+            kind: 'source_paragraph',
+            inlines: [{
+              contentId: `${column.columnId}:source-paragraph:${index + 1}:text`,
+              text: value,
+              sourceRegionRefs,
+            }],
+            sourceRegionRefs,
+          })),
+        ]
+        if (columnIndex === 0) {
+          blocks.splice(1, 0, {
+            blockId: `${column.columnId}:source-table`,
+            kind: 'source_table',
+            rows: [
+              ['Source heading', 'Source value'],
+              ['Exact row', 'Second cell'],
+            ],
+            sourceRegionRefs,
+          })
+        }
+        return {
+          columnId: column.columnId,
+          ...(column.heading
+            ? { columnHeadingBlockRef: blocks[0].blockId }
+            : {}),
+          blocks,
+        }
+      })
+    }
+  }
+
+  const applicationBlock = transcription.groups.find(
+    (group) => group.groupType === 'application_writing',
+  ).blocks[0]
+  const applicationRefs = [...applicationBlock.sourceRegionRefs]
+  const applicationPrompt = {
+    blockId: `${applicationBlock.blockId}:source-prompt`,
+    kind: 'source_paragraph',
+    inlines: [{
+      contentId: `${applicationBlock.blockId}:source-prompt:text`,
+      text: applicationBlock.prompt,
+      sourceRegionRefs: applicationRefs,
+    }],
+    sourceRegionRefs: applicationRefs,
+  }
+  const applicationNotice = {
+    blockId: `${applicationBlock.blockId}:source-notice`,
+    kind: 'source_paragraph',
+    inlines: [{
+      contentId: `${applicationBlock.blockId}:source-notice:text`,
+      text: `Write about ${applicationBlock.wordCountTarget} words.`,
+      sourceRegionRefs: applicationRefs,
+    }],
+    sourceRegionRefs: applicationRefs,
+  }
+  applicationBlock.promptBlocks = [applicationPrompt, applicationNotice]
+  applicationBlock.applicationEvidence = {
+    writerRole: {
+      blockId: applicationPrompt.blockId,
+      contentIds: [applicationPrompt.inlines[0].contentId],
+    },
+    audienceOrDestination: {
+      blockId: applicationPrompt.blockId,
+      contentIds: [applicationPrompt.inlines[0].contentId],
+    },
+    deliverable: {
+      blockId: applicationPrompt.blockId,
+      contentIds: [applicationPrompt.inlines[0].contentId],
+    },
+    communicativePurpose: {
+      blockId: applicationPrompt.blockId,
+      contentIds: [applicationPrompt.inlines[0].contentId],
+    },
+    contentRequirements: [{
+      blockId: applicationPrompt.blockId,
+      contentIds: [applicationPrompt.inlines[0].contentId],
+    }],
+    wordCountSource: {
+      blockId: applicationNotice.blockId,
+      contentIds: [applicationNotice.inlines[0].contentId],
+    },
+    answerRegionAbsent: false,
+    sourceRegionRefs: applicationRefs,
+  }
+  delete applicationBlock.prompt
+
+  const continuationBlock = transcription.groups.find(
+    (group) => group.groupType === 'continuation_writing',
+  ).blocks[0]
+  const continuationRefs = [...continuationBlock.sourceRegionRefs]
+  const materialTexts = [
+    continuationBlock.prompt,
+    `Continue the story in two paragraphs using about ${continuationBlock.wordCountTarget} words.`,
+  ]
+  continuationBlock.materialBlocks = materialTexts.map((value, index) => ({
+    blockId: `${continuationBlock.blockId}:source-material:${index + 1}`,
+    kind: 'source_paragraph',
+    inlines: [{
+      contentId: `${continuationBlock.blockId}:source-material:${index + 1}:text`,
+      text: value,
+      sourceRegionRefs: continuationRefs,
+    }],
+    sourceRegionRefs: continuationRefs,
+  }))
+  continuationBlock.continuationStarters = continuationBlock.continuationStarters.map(
+    (value, index) => ({
+      starterId: `${continuationBlock.blockId}:source-starter:${index + 1}`,
+      block: {
+        blockId: `${continuationBlock.blockId}:source-starter-block:${index + 1}`,
+        kind: 'source_paragraph',
+        inlines: [{
+          contentId: `${continuationBlock.blockId}:source-starter:${index + 1}:text`,
+          text: value,
+          sourceRegionRefs: continuationRefs,
+        }],
+        sourceRegionRefs: continuationRefs,
+      },
+      sourceRegionRefs: continuationRefs,
+    }),
+  )
+  continuationBlock.wordCountSource = {
+    blockId: continuationBlock.materialBlocks[1].blockId,
+    contentIds: [continuationBlock.materialBlocks[1].inlines[0].contentId],
+  }
+  continuationBlock.wordCountScope = 'student_authored_only'
+  delete continuationBlock.prompt
+
+  const captionBlock = transcription.groups.flatMap((group) => group.blocks).find(
+    (block) => block.kind === 'visual_placeholder',
+  )
+  captionBlock.captionProvision = {
+    provision: 'source_caption',
+    text: 'Exact source-backed synthetic passage figure caption.',
+    sourceRegionRefs: [...captionBlock.sourceRegionRefs],
+  }
+  return input
+}
+
+function v4FailureCase(mutator, code, diagnosticCode = code) {
+  const { repositoryRoot, fixture } = freshFixture('v4-negative-')
+  const input = upgradeFixtureToTranscriptionV4(structuredClone(fixture.input))
+  mutator(input, { repositoryRoot, fixture })
+  assertFailed(run(repositoryRoot, input), code, diagnosticCode)
 }
 
 function format2SourceAddresses(transcription) {
@@ -2949,6 +3151,320 @@ for (const entry of transcriptionV3ApplicationRequirements) {
     `${entry.target.id} maps directly to its exact evidence source region`,
   )
 }
+
+const transcriptionV4 = freshFixture('v4-rich-source-fidelity-')
+upgradeFixtureToTranscriptionV4(transcriptionV4.fixture.input)
+const transcriptionV4Started = run(
+  transcriptionV4.repositoryRoot,
+  transcriptionV4.fixture.input,
+)
+assert.equal(
+  transcriptionV4Started.lifecycle,
+  'importing',
+  JSON.stringify(transcriptionV4Started.diagnostics),
+)
+assert.equal(
+  transcriptionV4Started.artifacts.transcription.schemaVersion,
+  'format2-transcription-v4',
+)
+const transcriptionV4Candidate = JSON.parse(readFileSync(
+  artifactPath(
+    transcriptionV4.repositoryRoot,
+    transcriptionV4Started,
+    'candidatePackage',
+  ),
+  'utf8',
+))
+const transcriptionV4Completed = resume(transcriptionV4.repositoryRoot, {
+  paperId: transcriptionV4.fixture.input.paperId,
+  jobId: transcriptionV4Started.jobId,
+  teacherConfirmation: exactConfirmation(transcriptionV4Candidate),
+})
+assert.equal(
+  transcriptionV4Completed.lifecycle,
+  'awaiting_qa',
+  JSON.stringify(transcriptionV4Completed.diagnostics),
+)
+const transcriptionV4VersionDir = path.join(
+  transcriptionV4.repositoryRoot,
+  'app/public/paper-assets',
+  transcriptionV4.fixture.input.paperId,
+  'versions',
+  transcriptionV4Completed.canonicalPublication.versionName,
+)
+const transcriptionV4Paper = {
+  questionGroups: JSON.parse(readFileSync(
+    path.join(
+      transcriptionV4VersionDir,
+      'canonical/canonical-question-groups-v1.json',
+    ),
+    'utf8',
+  )).groups,
+}
+const transcriptionV4NestedFrame = transcriptionV4Paper.questionGroups
+  .flatMap((group) => group.content.blocks)
+  .find((block) => block.kind === 'framed_columns')
+assert.equal(
+  transcriptionV4NestedFrame.columns[0].blocks[1].kind,
+  'table',
+  'v4 projects a real nested table in exact framed-column source order',
+)
+assert.equal(transcriptionV4NestedFrame.columns[0].blocks[1].columnCount, 2)
+const transcriptionV4Application = transcriptionV4Paper.questionGroups.find(
+  (group) => group.variant.family === 'application-writing',
+)
+assert.equal(transcriptionV4Application.variant.promptBlockRefs.length, 2)
+assert.equal(transcriptionV4Application.content.blocks.length, 3)
+assert.deepEqual(
+  transcriptionV4Application.content.blocks.slice(0, 2).map(
+    (block) => block.inlines.map((inline) => inline.text).join(''),
+  ),
+  transcriptionV4.fixture.input.transcription.groups.find(
+    (group) => group.groupType === 'application_writing',
+  ).blocks[0].promptBlocks.map(
+    (block) => block.inlines.map((inline) => inline.text).join(''),
+  ),
+  'v4 preserves exact Application prompt and notice without adapter-authored visible prose',
+)
+const transcriptionV4Continuation = transcriptionV4Paper.questionGroups.find(
+  (group) => group.variant.family === 'continuation-writing',
+)
+assert.equal(Object.hasOwn(transcriptionV4Continuation.variant, 'mode'), false)
+assert.equal(transcriptionV4Continuation.variant.materialBlockRefs.length, 2)
+assert.equal(transcriptionV4Continuation.variant.starterProvision.starters.length, 2)
+assert.equal(transcriptionV4Continuation.content.blocks.length, 4)
+const transcriptionV4CaptionFigure = transcriptionV4Paper.questionGroups
+  .flatMap((group) => group.content.blocks)
+  .find((block) => block.kind === 'figure' && block.caption.length > 0)
+assert.equal(
+  transcriptionV4CaptionFigure.caption[0].text,
+  'Exact source-backed synthetic passage figure caption.',
+)
+const transcriptionV4StudentHtml = readFileSync(path.join(
+  paperDir(transcriptionV4.repositoryRoot, transcriptionV4.fixture.input.paperId),
+  transcriptionV4Completed.artifacts.qa.studentPrint.relativePath,
+), 'utf8')
+const transcriptionV4TeacherHtml = readFileSync(path.join(
+  paperDir(transcriptionV4.repositoryRoot, transcriptionV4.fixture.input.paperId),
+  transcriptionV4Completed.artifacts.qa.teacherPrint.relativePath,
+), 'utf8')
+assert.equal(transcriptionV4StudentHtml.includes('<strong>【答案】</strong>'), false)
+assert.equal(transcriptionV4TeacherHtml.includes('<strong>【答案】</strong>'), true)
+const transcriptionV4Manifest = JSON.parse(readFileSync(path.join(
+  transcriptionV4VersionDir,
+  'canonical/canonical-paper-publication-v49.json',
+), 'utf8'))
+assert.deepEqual(
+  transcriptionV4Manifest.authority,
+  format2RichCandidateAuthorityRef,
+  'v4 publication digest-binds the exact scoped Format 2 rich authority successor',
+)
+const transcriptionV4DbPath = path.join(
+  transcriptionV4.repositoryRoot,
+  'data/question-bank.sqlite',
+)
+const transcriptionV4DbDigestBeforeAdapter = sha256(readFileSync(transcriptionV4DbPath))
+const createTranscriptionV4CompatibilityAdapter = () =>
+  createCanonicalActiveConsumerCompatibilityAdapter({
+    rootDir: path.join(transcriptionV4.repositoryRoot, 'app/public/paper-assets'),
+    openDatabase: ({ readOnly }) => new DatabaseSync(transcriptionV4DbPath, { readOnly }),
+  })
+const transcriptionV4CompatibilitySnapshot =
+  createTranscriptionV4CompatibilityAdapter().snapshot()
+const transcriptionV3CompatibilitySnapshot =
+  createCanonicalActiveConsumerCompatibilityAdapter({
+    rootDir: path.join(transcriptionV3.repositoryRoot, 'app/public/paper-assets'),
+    openDatabase: ({ readOnly }) => new DatabaseSync(path.join(
+      transcriptionV3.repositoryRoot,
+      'data/question-bank.sqlite',
+    ), { readOnly }),
+  }).snapshot()
+assert.deepEqual(
+  transcriptionV3CompatibilitySnapshot,
+  { papersById: {}, groupsById: {}, questionsById: {}, analysisSources: [] },
+  'the scoped rich Adapter leaves the unchanged v1-v3/v46 path untouched',
+)
+assert.equal(Object.isFrozen(transcriptionV4CompatibilitySnapshot), true)
+assert.equal(
+  transcriptionV4CompatibilitySnapshot.papersById[transcriptionV4.fixture.input.paperId]
+    .publicationDigest,
+  transcriptionV4Completed.canonicalPublication.publicationDigest,
+)
+assert.deepEqual(
+  Object.values(transcriptionV4CompatibilitySnapshot.groupsById).map(
+    (group) => group.groupId,
+  ),
+  transcriptionV4.fixture.input.transcription.groups.map((group) => group.groupId),
+  'the bounded Adapter enumerates exact Canonical Group order without a legacy Paper Asset',
+)
+assert.equal(
+  Object.values(transcriptionV4CompatibilitySnapshot.groupsById).every(
+    (group) => group.card.canAddToDraftPaper === false
+      && group.card.difficulty === ''
+      && group.card.topicLabels.length === 0,
+  ),
+  true,
+  'the bounded Adapter is read-only and invents no difficulty or topic labels',
+)
+const transcriptionV4ReadingQuestion = Object.values(
+  transcriptionV4CompatibilitySnapshot.questionsById,
+).find((question) => question.groupType === 'reading')
+assert.equal(transcriptionV4ReadingQuestion.detail.answer.length > 0, true)
+assert.equal(
+  transcriptionV4CompatibilitySnapshot.groupsById[
+    transcriptionV4ReadingQuestion.groupId
+  ].card.answerPreview,
+  '',
+  'listing cards do not expose Teacher answer identity',
+)
+const transcriptionV4CompatibilityApplication =
+  transcriptionV4CompatibilitySnapshot.groupsById['group:application']
+const transcriptionV4CompatibilityContinuation =
+  transcriptionV4CompatibilitySnapshot.groupsById['group:continuation']
+assert.equal(
+  transcriptionV4CompatibilityApplication.card.summary.includes(
+    'Write a short note',
+  ),
+  true,
+  'listing/search metadata carries source-owned Application prompt text',
+)
+assert.deepEqual(
+  transcriptionV4CompatibilityContinuation.detail.writingTask
+    .continuationStarters,
+  transcriptionV4.fixture.input.transcription.groups.find(
+    (group) => group.groupType === 'continuation_writing',
+  ).blocks[0].continuationStarters.map(
+    (starter) => starter.block.inlines.map((inline) => inline.text).join(''),
+  ),
+  'detail exposes the exact two source-owned Continuation starters',
+)
+assert.equal(
+  sha256(readFileSync(transcriptionV4DbPath)),
+  transcriptionV4DbDigestBeforeAdapter,
+  'the compatibility snapshot makes no database write',
+)
+assert.deepEqual(
+  transcriptionV4CompatibilitySnapshot.analysisSources.map(
+    (source) => source.schemaVersion,
+  ).sort(),
+  transcriptionV4.fixture.input.transcription.analysisSidecars.map(
+    (analysis) => analysis.schemaVersion,
+  ).sort(),
+  'the compatibility Adapter admits each exact published Analysis sidecar',
+)
+const transcriptionV4AnalysisSource =
+  transcriptionV4CompatibilitySnapshot.analysisSources[0]
+const transcriptionV4AnalysisPath = path.join(
+  transcriptionV4VersionDir,
+  'analyses',
+  transcriptionV4AnalysisSource.fileName,
+)
+const transcriptionV4AnalysisBytes = readFileSync(transcriptionV4AnalysisPath)
+const transcriptionV4ForeignAnalysis = JSON.parse(transcriptionV4AnalysisBytes)
+transcriptionV4ForeignAnalysis.paperId = 'paper-foreign-analysis'
+writeFileSync(transcriptionV4AnalysisPath, JSON.stringify(transcriptionV4ForeignAnalysis))
+assert.throws(
+  () => createTranscriptionV4CompatibilityAdapter().snapshot(),
+  (error) => error?.code === 'CANONICAL_COMPATIBILITY_ANALYSIS_IDENTITY_MISMATCH',
+  'the compatibility Adapter rejects a sidecar from another Paper',
+)
+writeFileSync(transcriptionV4AnalysisPath, transcriptionV4AnalysisBytes)
+const transcriptionV4SourceCapture = JSON.parse(readFileSync(path.join(
+  transcriptionV4VersionDir,
+  'canonical/source-capture-v1.json',
+), 'utf8'))
+const transcriptionV4ProvenanceDocument = transcriptionV4SourceCapture.documents.find(
+  (document) => document.inputKey === 'format2_paper_provenance',
+)
+const transcriptionV4ProvenancePath = path.join(
+  transcriptionV4VersionDir,
+  transcriptionV4ProvenanceDocument.immutableArtifactRef.relativePath,
+)
+const transcriptionV4ProvenanceBytes = readFileSync(transcriptionV4ProvenancePath)
+writeFileSync(transcriptionV4ProvenancePath, Buffer.from('{}'))
+assert.throws(
+  () => createTranscriptionV4CompatibilityAdapter().snapshot(),
+  (error) => error?.code === 'CANONICAL_COMPATIBILITY_PROVENANCE_DIGEST_MISMATCH'
+    || error?.diagnostics?.[0]?.code === 'CANONICAL_PUBLICATION_SOURCE_EVIDENCE_INVALID',
+  'the compatibility Adapter rejects mutated provenance evidence',
+)
+writeFileSync(transcriptionV4ProvenancePath, transcriptionV4ProvenanceBytes)
+const transcriptionV4ConflictGroup = Object.values(
+  transcriptionV4CompatibilitySnapshot.groupsById,
+).find((group) => group.groupType === 'reading')
+const transcriptionV4ConflictAssetDir = path.join(
+  transcriptionV4.repositoryRoot,
+  'app/public/paper-assets/paper-historical-conflict',
+)
+mkdirSync(transcriptionV4ConflictAssetDir, { recursive: true })
+writeFileSync(path.join(transcriptionV4ConflictAssetDir, 'paper-asset.json'), JSON.stringify({
+  paper: { paperId: 'paper-historical-conflict' },
+  content: {
+    groups: {
+      [transcriptionV4ConflictGroup.groupId]: {
+        groupId: transcriptionV4ConflictGroup.groupId,
+        groupType: 'reading',
+        questionIds: transcriptionV4ConflictGroup.questionIds,
+      },
+    },
+  },
+}))
+assert.throws(
+  () => createTranscriptionV4CompatibilityAdapter().snapshot(),
+  (error) => error?.code === 'CANONICAL_COMPATIBILITY_HISTORICAL_CONFLICT',
+  'the compatibility Adapter rejects conflicting historical/Canonical ownership',
+)
+
+v4FailureCase(
+  (input) => {
+    const frame = input.transcription.groups.flatMap((group) => group.blocks).find(
+      (block) => block.kind === 'framed_columns',
+    )
+    frame.columns[0].blocks[1].rows[1].pop()
+  },
+  'FORMAT2_TRANSCRIPTION_INVALID',
+  'FORMAT2_NESTED_TABLE_INVALID',
+)
+v4FailureCase(
+  (input) => {
+    const frame = input.transcription.groups.flatMap((group) => group.blocks).find(
+      (block) => block.kind === 'framed_columns',
+    )
+    frame.columns[0].columnHeadingBlockRef = frame.columns[1].blocks[0].blockId
+  },
+  'FORMAT2_TRANSCRIPTION_INVALID',
+  'FORMAT2_FRAMED_COLUMN_HEADING_REFERENCE_INVALID',
+)
+v4FailureCase(
+  (input) => {
+    const application = input.transcription.groups.find(
+      (group) => group.groupType === 'application_writing',
+    ).blocks[0]
+    application.applicationEvidence.wordCountSource = structuredClone(
+      application.applicationEvidence.writerRole,
+    )
+  },
+  'FORMAT2_TRANSCRIPTION_INVALID',
+  'FORMAT2_WRITING_WORD_COUNT_REFERENCE_INVALID',
+)
+v4FailureCase(
+  (input) => {
+    const continuation = input.transcription.groups.find(
+      (group) => group.groupType === 'continuation_writing',
+    ).blocks[0]
+    continuation.continuationStarters.pop()
+  },
+  'FORMAT2_TRANSCRIPTION_SCHEMA_INVALID',
+)
+v4FailureCase(
+  (input) => {
+    const figure = input.transcription.groups.flatMap((group) => group.blocks).find(
+      (block) => block.kind === 'visual_placeholder',
+    )
+    delete figure.captionProvision
+  },
+  'FORMAT2_TRANSCRIPTION_SCHEMA_INVALID',
+)
 
 const transcriptionV3Successor = freshFixture('v3-source-fidelity-successor-')
 upgradeFixtureToTranscriptionV3(transcriptionV3Successor.fixture.input)

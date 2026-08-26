@@ -58,7 +58,11 @@ function buildPaperSurfaceHref(args) {
   return `?${params.toString()}`
 }
 
-export function createPaperSurfaceAnalysisAvailability({ paperAssetsDir, warn = console.warn }) {
+export function createPaperSurfaceAnalysisAvailability({
+  paperAssetsDir,
+  getCanonicalCompatibilitySnapshot = null,
+  warn = console.warn,
+}) {
   let availabilityByGroupIdCache = null
 
   function addAvailabilityForAnalysis({ availabilityByGroupId, asset, analysis, config, paperId }) {
@@ -81,7 +85,7 @@ export function createPaperSurfaceAnalysisAvailability({ paperAssetsDir, warn = 
 
       availabilityByGroupId.set(groupId, {
         href: buildPaperSurfaceHref({
-          source: 'paper-asset',
+          source: config.source || 'paper-asset',
           paperId,
           groupId,
           questionId: questionIds[0],
@@ -97,12 +101,7 @@ export function createPaperSurfaceAnalysisAvailability({ paperAssetsDir, warn = 
     }
 
     const availabilityByGroupId = new Map()
-    if (!existsSync(paperAssetsDir)) {
-      availabilityByGroupIdCache = availabilityByGroupId
-      return availabilityByGroupId
-    }
-
-    for (const entry of readdirSync(paperAssetsDir, { withFileTypes: true })) {
+    for (const entry of existsSync(paperAssetsDir) ? readdirSync(paperAssetsDir, { withFileTypes: true }) : []) {
       if (!entry.isDirectory()) continue
 
       const assetDir = path.join(paperAssetsDir, entry.name)
@@ -127,6 +126,34 @@ export function createPaperSurfaceAnalysisAvailability({ paperAssetsDir, warn = 
         }
       } catch (error) {
         warn(`[paper-surface-analysis] ignored invalid paper asset analysis in ${assetDir}:`, error)
+      }
+    }
+
+    if (getCanonicalCompatibilitySnapshot) {
+      const snapshot = getCanonicalCompatibilitySnapshot()
+      for (const source of snapshot.analysisSources) {
+        const config = analysisConfigs.find(
+          (candidate) => candidate.schemaVersion === source.schemaVersion,
+        )
+        const paper = snapshot.papersById[source.paperId]
+        if (!config || !paper) continue
+        for (const groupId of source.groupIds) {
+          const group = snapshot.groupsById[groupId]
+          if (
+            !group
+            || group.paperId !== source.paperId
+            || source.entryIdsByGroupId[groupId]?.length !== group.questionIds.length
+          ) continue
+          availabilityByGroupId.set(groupId, {
+            href: buildPaperSurfaceHref({
+              source: 'canonical-compatibility',
+              paperId: source.paperId,
+              groupId,
+              questionId: group.questionIds[0],
+            }),
+            label: config.label,
+          })
+        }
       }
     }
 

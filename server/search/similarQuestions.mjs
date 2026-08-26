@@ -98,13 +98,13 @@ function readJsonFile(filePath) {
 
 // ─── Raw per-question facet index + paper metadata (lazy, cached) ─────────
 
-function buildRawFacetIndex(paperAssetsDir) {
+function buildRawFacetIndex(paperAssetsDir, canonicalSnapshot = null) {
   const questionFacetById = new Map()
   const paperMetaByGroupId = new Map()
+  const virtualGroupMetaById = new Map()
+  const virtualQuestionById = new Map()
 
-  if (!existsSync(paperAssetsDir)) return { questionFacetById, paperMetaByGroupId }
-
-  for (const entry of readdirSync(paperAssetsDir, { withFileTypes: true })) {
+  for (const entry of existsSync(paperAssetsDir) ? readdirSync(paperAssetsDir, { withFileTypes: true }) : []) {
     if (!entry.isDirectory()) continue
     const { assetPath, baseDir } = resolvePaperAssetReadPaths(paperAssetsDir, entry.name)
     if (!existsSync(assetPath)) continue
@@ -160,12 +160,62 @@ function buildRawFacetIndex(paperAssetsDir) {
     }
   }
 
-  return { questionFacetById, paperMetaByGroupId }
+  if (canonicalSnapshot) {
+    for (const group of Object.values(canonicalSnapshot.groupsById)) {
+      paperMetaByGroupId.set(group.groupId, {
+        paperId: group.paperId,
+        paperTitle: group.card.paperName,
+        groupTitle: group.card.title,
+        questionIds: [...group.questionIds],
+      })
+      virtualGroupMetaById.set(group.groupId, {
+        title: group.card.title,
+        passageId: `canonical:${group.paperId}:${group.groupId}`,
+        groupType: group.groupType,
+        discourseType: '',
+        wordCount: null,
+        sourceId: group.detail.sourceDetail.id,
+        year: group.card.year,
+        region: group.card.region,
+        paperName: group.card.paperName,
+        sourceType: group.card.sourceType,
+      })
+    }
+    for (const question of Object.values(canonicalSnapshot.questionsById)) {
+      virtualQuestionById.set(question.detail.id, {
+        question_id: question.detail.id,
+        group_id: question.groupId,
+        group_type: question.groupType,
+        passage_id: `canonical:${question.paperId}:${question.groupId}`,
+      })
+    }
+    for (const source of canonicalSnapshot.analysisSources) {
+      const entryMap = source.analysis[source.entryMapKey]
+      for (const [entryId, entry] of Object.entries(entryMap)) {
+        const questionId = source.questionIdByEntryId[entryId]
+        const groupId = Object.entries(source.entryIdsByGroupId)
+          .find(([, identities]) => identities.includes(entryId))?.[0]
+        if (!questionId || !groupId) continue
+        questionFacetById.set(questionId, {
+          groupId,
+          groupType: source.groupType,
+          ...entry,
+        })
+      }
+    }
+  }
+
+  return {
+    questionFacetById,
+    paperMetaByGroupId,
+    virtualGroupMetaById,
+    virtualQuestionById,
+  }
 }
 
 // ─── DB metadata (batched per request; small pools, cheap) ────────────────
 
-function fetchGroupDbMeta(db, groupIds) {
+function fetchGroupDbMeta(db, groupIds, rawIndex = null) {
   const ids = Array.from(new Set(groupIds)).filter(Boolean)
   const byId = new Map()
   if (ids.length === 0) return byId
@@ -207,6 +257,11 @@ function fetchGroupDbMeta(db, groupIds) {
       paperName: row.paper_name || '',
       sourceType: row.source_type || '',
     })
+  }
+  for (const id of ids) {
+    if (!byId.has(id) && rawIndex?.virtualGroupMetaById.has(id)) {
+      byId.set(id, rawIndex.virtualGroupMetaById.get(id))
+    }
   }
   return byId
 }
@@ -275,7 +330,7 @@ function fetchTopicLabels(db, groupIds) {
   return byId
 }
 
-function resolveSeedRows(db, questionIds) {
+function resolveSeedRows(db, questionIds, rawIndex) {
   const placeholders = questionIds.map(() => '?').join(', ')
   const rows = db
     .prepare(
@@ -288,10 +343,11 @@ function resolveSeedRows(db, questionIds) {
     )
     .all(...questionIds)
   const byId = new Map(rows.map((row) => [row.question_id, row]))
-  return questionIds.map((id) => byId.get(id) || null)
+  return questionIds.map((id) =>
+    byId.get(id) || rawIndex.virtualQuestionById.get(id) || null)
 }
 
-function resolvePassageSeedGroupRow(db, groupId) {
+function resolvePassageSeedGroupRow(db, groupId, rawIndex) {
   const row = db
     .prepare(
       `
@@ -301,7 +357,15 @@ function resolvePassageSeedGroupRow(db, groupId) {
       `,
     )
     .get(groupId)
-  return row || null
+  if (row) return row
+  const virtual = rawIndex.virtualGroupMetaById.get(groupId)
+  return virtual
+    ? {
+        group_id: groupId,
+        group_type: virtual.groupType,
+        passage_id: virtual.passageId,
+      }
+    : null
 }
 
 // ─── small set helpers ─────────────────────────────────────────────────────
@@ -414,8 +478,9 @@ function parseGroupIdInput(input) {
 function findSimilarPassages(db, input, { getTeachingFacetIndex, getRawIndex }) {
   const groupId = parseGroupIdInput(input)
   const limit = parseLimit(input)
+  const rawIndex = getRawIndex()
 
-  const seedRow = resolvePassageSeedGroupRow(db, groupId)
+  const seedRow = resolvePassageSeedGroupRow(db, groupId, rawIndex)
   if (!seedRow) {
     throw new SimilarQuestionsError(`未找到题组 ${groupId}`)
   }
@@ -433,7 +498,6 @@ function findSimilarPassages(db, input, { getTeachingFacetIndex, getRawIndex }) 
     throw new SimilarQuestionsError('该篇暂无教学维度解析数据，无法配相似篇章')
   }
 
-  const rawIndex = getRawIndex()
   const seedPaperId = rawIndex.paperMetaByGroupId.get(groupId)?.paperId || null
 
   const seedTopicLabels = fetchTopicLabels(db, [groupId]).get(groupId) || new Set()
@@ -456,7 +520,7 @@ function findSimilarPassages(db, input, { getTeachingFacetIndex, getRawIndex }) 
   }
 
   const allGroupIds = [...new Set([groupId, ...poolEntries.map((entry) => entry.groupId)])]
-  const dbMetaByGroupId = fetchGroupDbMeta(db, allGroupIds)
+  const dbMetaByGroupId = fetchGroupDbMeta(db, allGroupIds, rawIndex)
   const topicLabelsByGroupId = fetchTopicLabels(db, allGroupIds)
 
   if (facetType === 'reading') {
@@ -727,8 +791,9 @@ function parseLimit(input) {
 function findSimilar(db, input, { getTeachingFacetIndex, getRawIndex }) {
   const seedQuestionIds = parseSeedQuestionIds(input)
   const limit = parseLimit(input)
+  const rawIndex = getRawIndex()
 
-  const seedRows = resolveSeedRows(db, seedQuestionIds)
+  const seedRows = resolveSeedRows(db, seedQuestionIds, rawIndex)
   seedRows.forEach((row, index) => {
     if (!row) throw new SimilarQuestionsError(`未找到题目 ${seedQuestionIds[index]}`)
   })
@@ -758,8 +823,6 @@ function findSimilar(db, input, { getTeachingFacetIndex, getRawIndex }) {
     }
   }
 
-  const rawIndex = getRawIndex()
-
   const seedGroupIds = new Set(seedRows.map((row) => row.group_id))
   const seedPassageIds = new Set(seedRows.map((row) => row.passage_id))
   const seedPaperIds = new Set(
@@ -774,7 +837,7 @@ function findSimilar(db, input, { getTeachingFacetIndex, getRawIndex }) {
   }
 
   const allGroupIds = [...new Set([...seedGroupIds, ...poolEntries.map((entry) => entry.groupId)])]
-  const dbMetaByGroupId = fetchGroupDbMeta(db, allGroupIds)
+  const dbMetaByGroupId = fetchGroupDbMeta(db, allGroupIds, rawIndex)
   const topicLabelsByGroupId = fetchTopicLabels(db, allGroupIds)
 
   // buildSmallQuestionSeedTargets may throw SimilarQuestionsError (grammarFill
@@ -857,12 +920,19 @@ function findSimilar(db, input, { getTeachingFacetIndex, getRawIndex }) {
 
 // ─── store factory ──────────────────────────────────────────────────────────
 
-export function createSimilarQuestionsStore({ getTeachingFacetIndex, paperAssetsDir }) {
+export function createSimilarQuestionsStore({
+  getTeachingFacetIndex,
+  paperAssetsDir,
+  getCanonicalCompatibilitySnapshot = null,
+}) {
   let rawIndexCache = null
 
   function getRawIndex() {
     if (rawIndexCache === null) {
-      rawIndexCache = buildRawFacetIndex(paperAssetsDir)
+      rawIndexCache = buildRawFacetIndex(
+        paperAssetsDir,
+        getCanonicalCompatibilitySnapshot?.() || null,
+      )
     }
     return rawIndexCache
   }

@@ -8,6 +8,7 @@ import {
   paper2026IPrintSuccessorCandidateAuthorityRef,
   paper2026ISuccessorCandidateAuthorityRef,
   paper2026IOwnerQaContentSuccessorCandidateAuthorityRef,
+  format2RichCandidateAuthorityRef,
   readingOptionFigureAuthorityRef,
   validateJsonSchema,
 } from './authority.mjs'
@@ -63,6 +64,7 @@ const trustedDocxCandidateCompile = Symbol('trustedDocxCandidateCompile')
 const docxPairCandidateCompile = Symbol('docxPairCandidateCompile')
 const trustedLegacyCaptureCandidateCompile = Symbol('trustedLegacyCaptureCandidateCompile')
 const confirmedReadingOptionFigureCompile = Symbol('confirmedReadingOptionFigureCompile')
+const confirmedFormat2RichCompile = Symbol('confirmedFormat2RichCompile')
 import { canonicalizeVisibleEnglishTypography } from './visibleTypography.mjs'
 import { replayCanonicalVisibleTypography } from './visibleTypographyReplay.mjs'
 
@@ -3337,7 +3339,13 @@ export function compileCanonicalPaper(
     ))
   const acceptsConfirmedReadingOptionFigure = Boolean(
     request?.[confirmedReadingOptionFigureCompile]
-    && sameAuthorityRef(closure.authorityRef, readingOptionFigureAuthorityRef),
+    && (
+      sameAuthorityRef(closure.authorityRef, readingOptionFigureAuthorityRef)
+      || (
+        request?.[confirmedFormat2RichCompile] === true
+        && sameAuthorityRef(closure.authorityRef, format2RichCandidateAuthorityRef)
+      )
+    ),
   )
   if (
     closure.authorityRef.manifestDigest !== canonicalAuthorityRef.manifestDigest
@@ -3395,7 +3403,7 @@ export function compileCanonicalPaper(
     diagnostics.push(...built.diagnostics)
     if (built.artifact) builtGroups.push({ ...built.artifact, slotId: rawGroup.slotId })
   }
-  if (sameAuthorityRef(closure.authorityRef, readingOptionFigureAuthorityRef)) {
+  if (acceptsConfirmedReadingOptionFigure) {
     const mediaOwners = new Map()
     for (const group of builtGroups) {
       if (group.contractRef.familyContractId !== 'reading') continue
@@ -3464,6 +3472,15 @@ export function compileConfirmedReadingOptionFigurePaper(request, confirmedSelec
     ...request,
     authority: readingOptionFigureAuthorityRef,
     [confirmedReadingOptionFigureCompile]: confirmedSelection,
+  })
+}
+
+export function compileConfirmedFormat2RichPaper(request, confirmedSelection) {
+  return compileCanonicalPaper({
+    ...request,
+    authority: format2RichCandidateAuthorityRef,
+    [confirmedReadingOptionFigureCompile]: confirmedSelection,
+    [confirmedFormat2RichCompile]: true,
   })
 }
 

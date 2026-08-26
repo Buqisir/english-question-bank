@@ -31,6 +31,24 @@ function displayGroupType(familyContractId) {
   return familyContractId
 }
 
+function paragraphTexts(blocks) {
+  const texts = []
+  for (const block of blocks || []) {
+    if (block?.kind === 'paragraph') {
+      const value = (block.inlines || [])
+        .filter((inline) => inline?.kind === 'text')
+        .map((inline) => inline.text)
+        .join('')
+      if (value) texts.push(value)
+    } else if (block?.kind === 'framed_columns') {
+      for (const column of block.columns || []) {
+        texts.push(...paragraphTexts(column.blocks))
+      }
+    }
+  }
+  return texts
+}
+
 /**
  * Produce a non-authoritative PaperBrowse shell from one committed Screen
  * Consumption Plan. Canonical projected occurrences remain the only source of
@@ -70,6 +88,11 @@ export function projectCanonicalPaperBrowseDisplayAsset(consumption) {
         groupType: displayGroupType(selection.familyContractId),
         title: groupId,
         questionIds,
+        passage: {
+          paragraphs: paragraphTexts(projected.blocks).map((value) => ({
+            text: value,
+          })),
+        },
         ...(selection.familyContractId === 'seven-choices' && projected.optionBank
           ? {
               optionBank: projected.optionBank.options.map((option) => ({

@@ -214,17 +214,17 @@ function extractReadingFacets(bucket, entry) {
  * Only analyzed groups appear in the index (MF-2). Groups in content.groups
  * with no analysis file on disk are absent.
  */
-export function createTeachingFacetIndex({ paperAssetsDir, warn = console.warn }) {
+export function createTeachingFacetIndex({
+  paperAssetsDir,
+  getCanonicalCompatibilitySnapshot = null,
+  warn = console.warn,
+}) {
   let cache = null
 
   function buildIndex() {
     const index = new Map()
 
-    if (!existsSync(paperAssetsDir)) {
-      return index
-    }
-
-    for (const entry of readdirSync(paperAssetsDir, { withFileTypes: true })) {
+    for (const entry of existsSync(paperAssetsDir) ? readdirSync(paperAssetsDir, { withFileTypes: true }) : []) {
       if (!entry.isDirectory()) continue
 
       const { assetPath, baseDir } = resolvePaperAssetReadPaths(paperAssetsDir, entry.name)
@@ -268,6 +268,31 @@ export function createTeachingFacetIndex({ paperAssetsDir, warn = console.warn }
         }
       } catch (error) {
         warn(`[teaching-facets] ignored invalid paper asset in ${entry.name}:`, error)
+      }
+    }
+
+    if (getCanonicalCompatibilitySnapshot) {
+      const snapshot = getCanonicalCompatibilitySnapshot()
+      for (const source of snapshot.analysisSources) {
+        const questionToGroup = new Map()
+        for (const [groupId, entryIds] of Object.entries(source.entryIdsByGroupId)) {
+          const group = snapshot.groupsById[groupId]
+          if (!group || group.paperId !== source.paperId) continue
+          for (const entryId of entryIds) {
+            questionToGroup.set(entryId, {
+              groupId,
+              groupType: source.groupType,
+            })
+          }
+        }
+        const groupFacets = extractGroupFacets(
+          source.groupType,
+          source.analysis,
+          questionToGroup,
+        )
+        for (const [groupId, facets] of groupFacets) {
+          index.set(groupId, { ...facets, groupType: source.groupType })
+        }
       }
     }
 
