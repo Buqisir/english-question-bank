@@ -1,7 +1,7 @@
 # 04 — paper-2026-i whole-paper parity and registry retirement
 
 Status: ready-for-agent
-Blocked by: 02 — Exact Confirmation resume to local awaiting_qa
+Blocked by: 02C — Generic transcription completeness
 
 ## What to build
 

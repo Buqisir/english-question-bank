@@ -1,0 +1,306 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "format2-transcription-v2.schema.json",
+  "title": "Format 2 per-paper transcription v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "paperId",
+    "format",
+    "provenance",
+    "sourceBindings",
+    "answerTranscriptionCheck",
+    "listeningSource",
+    "analysisSidecars",
+    "groups",
+    "officialAnswers",
+    "visuals"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "format2-transcription-v2" },
+    "paperId": { "$ref": "format2-transcription-v1.schema.json#/$defs/paperId" },
+    "format": { "const": "format2-pdf-pair-v1" },
+    "provenance": { "$ref": "format2-transcription-v1.schema.json#/$defs/provenance" },
+    "sourceBindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["questionPdfSha256", "answerPdfSha256"],
+      "properties": {
+        "questionPdfSha256": { "$ref": "format2-transcription-v1.schema.json#/$defs/sha256" },
+        "answerPdfSha256": { "$ref": "format2-transcription-v1.schema.json#/$defs/sha256" }
+      }
+    },
+    "answerTranscriptionCheck": {
+      "oneOf": [
+        { "$ref": "format2-transcription-v1.schema.json#/$defs/answerTextCheck" },
+        { "$ref": "format2-transcription-v1.schema.json#/$defs/answerImageCheck" }
+      ]
+    },
+    "listeningSource": { "$ref": "#/$defs/listeningSource" },
+    "analysisSidecars": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/analysisSidecar" }
+    },
+    "groups": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/group" }
+    },
+    "officialAnswers": {
+      "type": "array",
+      "items": { "$ref": "format2-transcription-v1.schema.json#/$defs/officialAnswer" }
+    },
+    "visuals": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "format2-transcription-v1.schema.json#/$defs/visual" }
+    },
+    "sourceMeasuredFigureLayouts": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "format2-transcription-v1.schema.json#/$defs/sourceMeasuredFigureLayout" }
+    }
+  },
+  "$defs": {
+    "listeningSource": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["disposition", "groupId"],
+          "properties": {
+            "disposition": { "const": "complete" },
+            "groupId": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["disposition", "source"],
+          "properties": {
+            "disposition": { "const": "not_supplied" },
+            "source": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "documentRole", "questionPdfSha256", "firstSuppliedSection", "page"
+              ],
+              "properties": {
+                "documentRole": { "const": "question_pdf" },
+                "questionPdfSha256": {
+                  "$ref": "format2-transcription-v1.schema.json#/$defs/sha256"
+                },
+                "firstSuppliedSection": { "const": "reading" },
+                "page": { "type": "integer", "minimum": 1 }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "analysisSidecar": {
+      "oneOf": [
+        { "$ref": "reading-choice-analysis-v1.schema.json" },
+        { "$ref": "writing-analysis-v1.schema.json" },
+        { "$ref": "#/$defs/sevenChoicesAnalysis" },
+        { "$ref": "#/$defs/clozeAnalysis" },
+        { "$ref": "#/$defs/grammarFillAnalysis" }
+      ]
+    },
+    "analysisCommon": {
+      "type": "object",
+      "required": ["paperId", "sourceAssetVersion", "targetGroups", "meta", "groups"],
+      "properties": {
+        "paperId": { "$ref": "format2-transcription-v1.schema.json#/$defs/paperId" },
+        "sourceAssetVersion": { "const": 1 },
+        "targetGroups": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" }
+        },
+        "meta": { "type": "object" },
+        "groups": { "type": "object" }
+      }
+    },
+    "sevenChoicesAnalysis": {
+      "allOf": [
+        { "$ref": "#/$defs/analysisCommon" },
+        {
+          "type": "object",
+          "required": ["schemaVersion", "questions"],
+          "properties": {
+            "schemaVersion": { "const": "seven-choices-analysis-v1" },
+            "questions": { "type": "object" }
+          }
+        }
+      ]
+    },
+    "clozeAnalysis": {
+      "allOf": [
+        { "$ref": "#/$defs/analysisCommon" },
+        {
+          "type": "object",
+          "required": ["schemaVersion", "blanks"],
+          "properties": {
+            "schemaVersion": { "const": "cloze-analysis-v1" },
+            "blanks": { "type": "object" }
+          }
+        }
+      ]
+    },
+    "grammarFillAnalysis": {
+      "allOf": [
+        { "$ref": "#/$defs/analysisCommon" },
+        {
+          "type": "object",
+          "required": ["schemaVersion", "blanks"],
+          "properties": {
+            "schemaVersion": { "const": "grammar-fill-analysis-v2" },
+            "blanks": { "type": "object" }
+          }
+        }
+      ]
+    },
+    "promptProvision": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["provision", "prompt"],
+          "properties": {
+            "provision": { "const": "source_prompt" },
+            "prompt": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["provision"],
+          "properties": {
+            "provision": { "const": "source_proven_none" }
+          }
+        }
+      ]
+    },
+    "question": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["questionId", "questionNo", "stem", "options", "answerRef"],
+      "properties": {
+        "questionId": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+        "questionNo": { "type": "integer", "minimum": 1 },
+        "stem": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+        "options": {
+          "type": "array",
+          "items": { "$ref": "format2-transcription-v1.schema.json#/$defs/option" }
+        },
+        "answerRef": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+        "promptProvision": { "$ref": "#/$defs/promptProvision" }
+      }
+    },
+    "applicationGiven": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["provision"],
+          "properties": { "provision": { "const": "source_proven_none" } }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["provision", "parts"],
+          "properties": {
+            "provision": { "const": "source_provided" },
+            "parts": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["partId", "blockId", "role", "text"],
+                "properties": {
+                  "partId": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+                  "blockId": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+                  "role": { "enum": ["title", "salutation", "opening", "closing", "signature"] },
+                  "text": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "writingBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["blockId", "kind", "taskType", "prompt", "wordCountTarget"],
+      "properties": {
+        "blockId": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+        "kind": { "const": "writing_material" },
+        "taskType": { "enum": ["application", "continuation"] },
+        "prompt": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+        "wordCountTarget": { "type": "integer", "minimum": 1 },
+        "wordCountScope": { "enum": ["student_authored_only", "unspecified"] },
+        "sourceInstruction": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+        "applicationEvidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "writerRole", "audienceOrDestination", "deliverable",
+            "communicativePurpose", "contentRequirements", "answerRegionAbsent"
+          ],
+          "properties": {
+            "writerRole": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+            "audienceOrDestination": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+            "deliverable": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+            "communicativePurpose": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+            "contentRequirements": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" }
+            },
+            "answerRegionAbsent": { "type": "boolean" }
+          }
+        },
+        "applicationGiven": { "$ref": "#/$defs/applicationGiven" },
+        "continuationStarters": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" }
+        }
+      }
+    },
+    "block": {
+      "oneOf": [
+        { "$ref": "format2-transcription-v1.schema.json#/$defs/textBlock" },
+        { "$ref": "format2-transcription-v1.schema.json#/$defs/tableBlock" },
+        { "$ref": "format2-transcription-v1.schema.json#/$defs/framedColumnsBlock" },
+        { "$ref": "format2-transcription-v1.schema.json#/$defs/visualPlaceholderBlock" },
+        { "$ref": "format2-transcription-v1.schema.json#/$defs/listeningBlock" },
+        { "$ref": "#/$defs/writingBlock" }
+      ]
+    },
+    "group": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["groupId", "slotId", "groupType", "blocks", "questions"],
+      "properties": {
+        "groupId": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+        "slotId": { "$ref": "format2-transcription-v1.schema.json#/$defs/group/properties/slotId" },
+        "groupType": { "$ref": "format2-transcription-v1.schema.json#/$defs/group/properties/groupType" },
+        "blocks": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/block" }
+        },
+        "questions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/question" }
+        }
+      }
+    }
+  }
+}

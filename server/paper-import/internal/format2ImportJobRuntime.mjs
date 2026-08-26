@@ -59,7 +59,6 @@ import { buildPrintHtml } from '../../print-renderer.mjs'
 const FORMAT = 'format2-pdf-pair-v1'
 const RESULT_SCHEMA_VERSION = 'format2-import-job-result-v1'
 const RECEIPT_SCHEMA_VERSION = 'format2-import-job-receipt-v1'
-const TRANSCRIPTION_SCHEMA_VERSION = 'format2-transcription-v1'
 const SOURCE_PAIR_SCHEMA_VERSION = 'format2-source-pair-v1'
 const STOP_CODE = 'exact_teacher_confirmation_required'
 const QA_STOP_CODE = 'owner_qa_required'
@@ -68,14 +67,60 @@ const QA_ACCEPTANCE_SCHEMA_VERSION = 'format2-owner-qa-acceptance-v1'
 const PAPER_ID_PATTERN = /^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/u
 const SHA256_PATTERN = /^sha256:[a-f0-9]{64}$/u
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..')
-const transcriptionSchema = JSON.parse(readFileSync(
+const transcriptionV1Schema = JSON.parse(readFileSync(
   path.join(rootDir, 'schemas/paper-import/format2-transcription-v1.schema.json'),
   'utf8',
 ))
-const validateTranscriptionSchema = new Ajv({
+const transcriptionV2Schema = JSON.parse(readFileSync(
+  path.join(rootDir, 'schemas/paper-import/format2-transcription-v2.schema.json'),
+  'utf8',
+))
+const readingChoiceAnalysisSchema = JSON.parse(readFileSync(
+  path.join(rootDir, 'schemas/paper-import/reading-choice-analysis-v1.schema.json'),
+  'utf8',
+))
+const writingAnalysisSchema = JSON.parse(readFileSync(
+  path.join(rootDir, 'schemas/paper-import/writing-analysis-v1.schema.json'),
+  'utf8',
+))
+const transcriptionAjv = new Ajv({
   allErrors: true,
   strict: false,
-}).compile(transcriptionSchema)
+})
+transcriptionAjv.addSchema(transcriptionV1Schema)
+transcriptionAjv.addSchema(readingChoiceAnalysisSchema)
+transcriptionAjv.addSchema(writingAnalysisSchema)
+const validateTranscriptionSchemas = new Map([
+  ['format2-transcription-v1', transcriptionAjv.getSchema(transcriptionV1Schema.$id)],
+  ['format2-transcription-v2', transcriptionAjv.compile(transcriptionV2Schema)],
+])
+const analysisSidecarConfigs = new Map([
+  ['reading-choice-analysis-v1', {
+    fileName: 'reading-choice-analysis-v1.json',
+    groupTypes: new Set(['reading']),
+    entryKey: 'questions',
+  }],
+  ['seven-choices-analysis-v1', {
+    fileName: 'seven-choices-analysis-v1.json',
+    groupTypes: new Set(['seven_choices']),
+    entryKey: 'questions',
+  }],
+  ['cloze-analysis-v1', {
+    fileName: 'cloze-analysis-v1.json',
+    groupTypes: new Set(['cloze']),
+    entryKey: 'blanks',
+  }],
+  ['grammar-fill-analysis-v2', {
+    fileName: 'grammar-fill-analysis-v1.json',
+    groupTypes: new Set(['grammar_fill']),
+    entryKey: 'blanks',
+  }],
+  ['writing-analysis-v1', {
+    fileName: 'writing-analysis-v1.json',
+    groupTypes: new Set(['application_writing', 'continuation_writing']),
+    entryKey: 'groups',
+  }],
+])
 
 function format2Error(code, message, diagnostics = []) {
   const error = new Error(message)
@@ -328,7 +373,9 @@ function captureExactDocuments(input) {
   })
   const answerDocument = sourceDocument({
     inputKey: 'listening_answer_source',
-    roles: ['official_answer_source', 'transcript_source', 'source_provenance'],
+    roles: input.transcription?.listeningSource?.disposition === 'not_supplied'
+      ? ['official_answer_source', 'source_provenance']
+      : ['official_answer_source', 'transcript_source', 'source_provenance'],
     originalName: path.basename(input.sources.answerPdf.absolutePath),
     bytes: answerBytes,
   })
@@ -336,8 +383,16 @@ function captureExactDocuments(input) {
 }
 
 function transcriptionSchemaDiagnostics(transcription) {
-  if (validateTranscriptionSchema(transcription)) return []
-  return (validateTranscriptionSchema.errors || []).map((error) => ({
+  const validate = validateTranscriptionSchemas.get(transcription?.schemaVersion)
+  if (!validate) {
+    return [{
+      code: 'FORMAT2_TRANSCRIPTION_SCHEMA_INVALID',
+      path: '/schemaVersion',
+      message: '/schemaVersion uses an unsupported Format 2 transcription contract',
+    }]
+  }
+  if (validate(transcription)) return []
+  return (validate.errors || []).map((error) => ({
     code: 'FORMAT2_TRANSCRIPTION_SCHEMA_INVALID',
     path: error.instancePath || '/',
     message: `${error.instancePath || '/'} ${error.message || 'is invalid'}`,
@@ -523,7 +578,7 @@ function validateTranscriptionSemantics(input, answerPdfBytes) {
   if (schemaDiagnostics.length > 0) {
     fail(
       'FORMAT2_TRANSCRIPTION_SCHEMA_INVALID',
-      'Format 2 transcription does not match format2-transcription-v1',
+      'Format 2 transcription does not match its declared schema version',
       schemaDiagnostics,
     )
   }
@@ -607,7 +662,12 @@ function validateTranscriptionSemantics(input, answerPdfBytes) {
           writingBlocks[0]?.continuationStarters !== undefined
           || writingBlocks[0]?.sourceInstruction !== undefined
           || writingBlocks[0]?.wordCountScope !== 'student_authored_only'
-          || writingBlocks[0]?.applicationEvidence?.answerRegionAbsent !== true
+          || (
+            transcription.schemaVersion === 'format2-transcription-v1'
+              ? writingBlocks[0]?.applicationEvidence?.answerRegionAbsent !== true
+              : typeof writingBlocks[0]?.applicationEvidence?.answerRegionAbsent
+                !== 'boolean'
+          )
         ))
       || (expectedWritingTask === 'continuation'
         && (
@@ -693,6 +753,140 @@ function validateTranscriptionSemantics(input, answerPdfBytes) {
             'Reading Figure Options must be one homogeneous renderer-labelled A-D set',
           ))
         }
+      }
+    }
+  }
+
+  if (transcription.schemaVersion === 'format2-transcription-v2') {
+    const listeningGroups = [...groups.values()].filter(
+      (group) => group.groupType === 'listening',
+    )
+    if (
+      transcription.listeningSource.disposition === 'complete'
+      && (
+        listeningGroups.length !== 1
+        || listeningGroups[0].groupId !== transcription.listeningSource.groupId
+      )
+    ) {
+      issues.push(semanticIssue(
+        'FORMAT2_LISTENING_SOURCE_CLOSURE_INVALID',
+        '/listeningSource',
+        'Complete Listening source must bind the one exact transcribed Listening group',
+      ))
+    }
+    if (
+      transcription.listeningSource.disposition === 'not_supplied'
+      && (
+        listeningGroups.length !== 0
+        || transcription.listeningSource.source.questionPdfSha256
+          !== input.sources.questionPdf.sha256
+      )
+    ) {
+      issues.push(semanticIssue(
+        'FORMAT2_LISTENING_SOURCE_CLOSURE_INVALID',
+        '/listeningSource',
+        'A Reading-first Listening absence must bind the exact question PDF and cannot invent Listening material',
+      ))
+    }
+
+    for (const { group, question, path: questionPath } of questions.values()) {
+      const grammarFill = group.groupType === 'grammar_fill'
+      if (grammarFill !== Object.hasOwn(question, 'promptProvision')) {
+        issues.push(semanticIssue(
+          'FORMAT2_GRAMMAR_PROMPT_PROVISION_INVALID',
+          `${questionPath}/promptProvision`,
+          'Every and only Grammar Fill blank requires an exact source prompt provision',
+        ))
+      }
+    }
+
+    for (const [groupIndex, group] of transcription.groups.entries()) {
+      if (group.groupType !== 'application_writing') continue
+      const writingBlockIndex = group.blocks.findIndex(
+        (block) => block.kind === 'writing_material',
+      )
+      const block = group.blocks[writingBlockIndex]
+      const provided = block.applicationGiven?.provision === 'source_provided'
+      if (
+        !block.applicationGiven
+        || block.applicationEvidence?.answerRegionAbsent === provided
+      ) {
+        issues.push(semanticIssue(
+          'FORMAT2_APPLICATION_GIVEN_PROVISION_INVALID',
+          `/groups/${groupIndex}/blocks/${writingBlockIndex}/applicationGiven`,
+          'Application given parts and affirmative answer-region absence must be mutually exclusive',
+        ))
+      }
+      const partIds = new Set()
+      const partBlockIds = new Set()
+      const roleOrder = new Map(
+        ['title', 'salutation', 'opening', 'closing', 'signature']
+          .map((role, index) => [role, index]),
+      )
+      let previousRole = -1
+      for (const [partIndex, part] of (block.applicationGiven?.parts || []).entries()) {
+        const roleIndex = roleOrder.get(part.role)
+        if (
+          partIds.has(part.partId)
+          || blockIds.has(part.blockId)
+          || partBlockIds.has(part.blockId)
+          || roleIndex < previousRole
+        ) {
+          issues.push(semanticIssue(
+            'FORMAT2_APPLICATION_GIVEN_PROVISION_INVALID',
+            `/groups/${groupIndex}/blocks/${writingBlockIndex}/applicationGiven/parts/${partIndex}`,
+            'Application given parts require unique identities and title-to-signature source order',
+          ))
+        }
+        partIds.add(part.partId)
+        partBlockIds.add(part.blockId)
+        previousRole = roleIndex
+      }
+      for (const partBlockId of partBlockIds) blockIds.add(partBlockId)
+    }
+
+    const analysisVersions = new Set()
+    for (const [index, analysis] of transcription.analysisSidecars.entries()) {
+      const config = analysisSidecarConfigs.get(analysis.schemaVersion)
+      const analysisPath = `/analysisSidecars/${index}`
+      if (!config || analysisVersions.has(analysis.schemaVersion)) {
+        issues.push(semanticIssue(
+          'FORMAT2_ANALYSIS_SIDECAR_INVALID',
+          analysisPath,
+          'Analysis sidecars require one unique supported contract',
+        ))
+        continue
+      }
+      analysisVersions.add(analysis.schemaVersion)
+      const targetGroupIds = analysis.schemaVersion === 'writing-analysis-v1'
+        ? Object.keys(analysis.groups || {})
+        : analysis.targetGroups
+      const targetGroups = targetGroupIds.map((groupId) => groups.get(groupId))
+      const expectedEntryIds = targetGroups.flatMap((group) => (
+        config.entryKey === 'groups'
+          ? [group?.groupId]
+          : group?.questions.map((question) => question.questionId) || []
+      ))
+      const actualEntryIds = Object.keys(analysis[config.entryKey] || {})
+      if (
+        analysis.paperId !== input.paperId
+        || (
+          analysis.schemaVersion !== 'writing-analysis-v1'
+          && (
+            analysis.sourceAssetVersion !== 1
+            || analysis.meta?.reviewStatus !== 'reviewed'
+          )
+        )
+        || targetGroups.some((group) => !group || !config.groupTypes.has(group.groupType))
+        || new Set(targetGroupIds).size !== targetGroupIds.length
+        || stableStringify([...actualEntryIds].sort())
+          !== stableStringify([...expectedEntryIds].sort())
+      ) {
+        issues.push(semanticIssue(
+          'FORMAT2_ANALYSIS_SIDECAR_INVALID',
+          analysisPath,
+          'Analysis sidecar identity, reviewed status, target family, or complete entry coverage differs from the transcription',
+        ))
       }
     }
   }
@@ -1172,7 +1366,8 @@ function buildResult({
   candidatePackage,
   comparisonBytes,
 }) {
-  const transcriptionPath = path.join(runDir, 'format2-transcription-v1.json')
+  const transcriptionFileName = `${input.transcription.schemaVersion}.json`
+  const transcriptionPath = path.join(runDir, transcriptionFileName)
   const capturePath = path.join(runDir, 'source-capture-v1.json')
   const candidatePath = path.join(runDir, 'visual-import-candidate-v1.json')
   const comparisonPath = path.join(runDir, 'comparison.html')
@@ -1192,7 +1387,7 @@ function buildResult({
         relativePath: relativeFromPaper(paperDir, capturePath),
       },
       transcription: {
-        schemaVersion: TRANSCRIPTION_SCHEMA_VERSION,
+        schemaVersion: input.transcription.schemaVersion,
         digest: digestJson(input.transcription),
         relativePath: relativeFromPaper(paperDir, transcriptionPath),
       },
@@ -1243,7 +1438,7 @@ function persistRun({
     'Source Capture',
   )
   writeImmutable(
-    path.join(runDir, 'format2-transcription-v1.json'),
+    path.join(runDir, `${input.transcription.schemaVersion}.json`),
     jsonBytes(input.transcription),
     'Format 2 transcription',
   )
@@ -1264,7 +1459,7 @@ function persistRun({
       answerTranscriptionCheckDigest: digestJson(input.transcription.answerTranscriptionCheck),
     },
     contractVersions: {
-      transcription: TRANSCRIPTION_SCHEMA_VERSION,
+      transcription: input.transcription.schemaVersion,
       sourceCapture: sourceCapture.schemaVersion,
       visualCandidate: candidatePackage.schemaVersion,
     },
@@ -1997,6 +2192,46 @@ function verifyQaArtifacts(paperDir, result) {
   }
 }
 
+function verifyPublishedAnalysisSidecars(repositoryRoot, result) {
+  const manifest = result.artifacts?.analysisSidecars
+  if (!manifest) return
+  if (
+    manifest.schemaVersion !== 'format2-analysis-sidecars-v1'
+    || !Array.isArray(manifest.items)
+  ) {
+    fail('FORMAT2_ANALYSIS_SIDECAR_INVALID', 'Completed Job Analysis sidecar manifest is invalid')
+  }
+  const versionDir = path.join(
+    repositoryRoot,
+    'app/public/paper-assets',
+    result.paperId,
+    'versions',
+    result.canonicalPublication.versionName,
+  )
+  for (const sidecar of manifest.items) {
+    const config = analysisSidecarConfigs.get(sidecar.schemaVersion)
+    const relativePath = config ? `analyses/${config.fileName}` : null
+    const filePath = relativePath ? path.join(versionDir, relativePath) : null
+    if (
+      !config
+      || sidecar.relativePath !== relativePath
+      || !SHA256_PATTERN.test(sidecar.sha256)
+      || !Number.isInteger(sidecar.byteLength)
+      || !filePath
+      || !existsSync(filePath)
+    ) {
+      fail('FORMAT2_ANALYSIS_SIDECAR_INVALID', 'Completed Job Analysis sidecar identity is invalid')
+    }
+    const bytes = readFileSync(filePath)
+    if (
+      bytes.byteLength !== sidecar.byteLength
+      || sha256(new Uint8Array(bytes)) !== sidecar.sha256
+    ) {
+      fail('FORMAT2_ANALYSIS_SIDECAR_INVALID', 'Completed Job Analysis sidecar bytes changed after publication')
+    }
+  }
+}
+
 function committedPublicationIdentity({ paperId, published, screen, printPdf }) {
   return {
     paperId,
@@ -2082,6 +2317,7 @@ function verifyCompletedAwaitingQa(repositoryRoot, paperDir, jobRoot, receipt) {
     fail('FORMAT2_ANSWER_TRANSCRIPTION_CHECK_INVALID', 'Completed Job lacks its exact digest-bound AI Answer Transcription Check signal')
   }
   verifyQaArtifacts(paperDir, receipt.result)
+  verifyPublishedAnalysisSidecars(repositoryRoot, receipt.result)
   verifyPublicationStoreDescriptor(jobRoot)
   const helpPath = path.join(signalsDir, 'help-needed.json')
   if (existsSync(helpPath)) unlinkSync(helpPath)
@@ -2244,6 +2480,11 @@ function runResume(
         candidatePackage: publicationConfirmation.candidatePackage,
         teacherConfirmation: publicationConfirmation.teacherConfirmation,
       },
+      sidecars: prepared.analysisSidecars.map((sidecar) => ({
+        relativePath:
+          `analyses/${analysisSidecarConfigs.get(sidecar.schemaVersion).fileName}`,
+        bytes: sidecar.bytes,
+      })),
       failurePoint: publicationFailurePoint,
     })
     if (!['published', 'idempotent'].includes(published.status)) {
@@ -2309,6 +2550,19 @@ function runResume(
           digest: digestJson(confirmedSelection),
         },
         qa: qaArtifacts,
+        ...(published.sidecars?.length > 0
+          ? {
+              analysisSidecars: {
+                schemaVersion: 'format2-analysis-sidecars-v1',
+                items: published.sidecars.map((sidecar) => ({
+                  ...cloneJson(sidecar),
+                  schemaVersion: [...analysisSidecarConfigs.entries()].find(
+                    ([, config]) => `analyses/${config.fileName}` === sidecar.relativePath,
+                  )[0],
+                })),
+              },
+            }
+          : {}),
       },
       humanEntryPoints: buildQaEntryPoints({
         evidence,
@@ -2320,6 +2574,7 @@ function runResume(
       }),
       canonicalPublication,
     }
+    verifyPublishedAnalysisSidecars(repositoryRoot, result)
     persistAwaitingQa({ evidence, result, answerCheck, completionFailurePoint })
     return cloneJson(result)
   } finally {
