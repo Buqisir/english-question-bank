@@ -72,10 +72,11 @@ assert.equal(
   'the public resume operation accepts exactly one domain input',
 )
 
-function freshFixture(suffix = '') {
+function freshFixture(suffix = '', fixtureOptions = {}) {
   const repositoryRoot = mkdtempSync(path.join(tmpdir(), `eqb-format2-job-${suffix}`))
   const fixture = makeFormat2ImportJobFixture({
     sourceDir: path.join(repositoryRoot, 'fixture-sources'),
+    ...fixtureOptions,
   })
   return { repositoryRoot, fixture }
 }
@@ -256,7 +257,7 @@ function paperDir(repositoryRoot, paperId) {
 
 function artifactPath(repositoryRoot, result, artifactName) {
   return path.join(
-    paperDir(repositoryRoot, 'paper-format2-synthetic'),
+    paperDir(repositoryRoot, result.paperId),
     result.artifacts[artifactName].relativePath,
   )
 }
@@ -3211,7 +3212,9 @@ assert.equal(
   'awaiting_qa',
   JSON.stringify(transcriptionV4Completed.diagnostics),
 )
-const passageOnlyV4 = freshFixture('v4-passage-only-')
+const passageOnlyV4 = freshFixture('v4-passage-only-', {
+  paperId: grammarFillRhythm.publicArtifactOracle.paperId,
+})
 upgradeFixtureToTranscriptionV4(passageOnlyV4.fixture.input)
 const passageOnlyTranscription = passageOnlyV4.fixture.input.transcription
 const passageOnlyFigureQuestion = passageOnlyTranscription.groups
