@@ -1,19 +1,38 @@
 # 格式② Import Job v1 — 将逐卷手艺收进导题 Agent 深模块
 
-Status: needs-task-graph-replan
+Status: implementing
 Date: 2026-08-25
 Depends on: accepted Import Agentization contract and the implemented
 source-faithful visual-import capability
 
 ## Current frontier
 
-The real-artifact parity preflight at
-[`research/real-parity-frontier-2026-08-26.md`](research/real-parity-frontier-2026-08-26.md)
-disproved the published data-only frontier for Shenzhen Q33 and
-`paper-2026-i`. Tickets 03–06 are blocked; no legacy materializer or registry
-entry may be retired. The next step is an Owner-reviewed task-graph replan,
-including explicit identity decisions for Canonical child IDs and legacy public
-extras. No additional shared implementation ticket is ready.
+The Owner accepted the complete blocker set and task-graph replan recorded in
+[`research/real-parity-frontier-2026-08-26.md`](research/real-parity-frontier-2026-08-26.md).
+Tickets 01, 02, 02A, 02B, and 02C are implemented. Ticket 03 is the current
+ready frontier; it owns shared source fidelity and ordered composition. The
+remaining graph is intentionally serial at the shared seam and then fans into
+the two real-paper parity proofs:
+
+Ticket 03 is the sole owner of B08 shared schema/adapter implementation.
+Tickets 05–08 only verify the applied identity boundary; they do not own or
+reimplement it.
+
+- Ticket 04 is blocked by Ticket 03 and owns shared rich whole-paper shapes and
+  active-consumer compatibility.
+- Ticket 05 replays Shenzhen Q33 and retires its materializer after parity; it
+  is blocked by Ticket 04.
+- Ticket 06 replays `paper-2026-i` and retires its registry entry after parity;
+  it is blocked by Ticket 04 and the normal direct Owner visual-confirmation
+  stop required by B09.
+- Ticket 07 imports Jining to exact Teacher Confirmation and is blocked by both
+  parity Tickets 05 and 06.
+- Ticket 08 resumes the exact Owner-confirmed Jining Job, proves rendered QA,
+  and closes the cut; it is blocked by Ticket 07 and that exact confirmation.
+
+No legacy materializer or registry entry may be retired before its named
+parity ticket passes. No additional lettered repair ticket is part of this
+approved graph.
 
 ## Problem Statement
 
@@ -328,7 +347,7 @@ per-paper 数据与 source evidence，不新增共享代码、CSS、renderer aut
 - Resume verifies the whole candidate-package digest before any downstream
   artifact is reused or written.
 
-### 11. Canonical compilation and local publication
+### 11. Canonical compilation, identities, and local publication
 
 - The Job calls the existing Canonical compiler and public publisher; it does
   not construct Canonical Question Groups, media closure, paper plans, or
@@ -342,6 +361,15 @@ per-paper 数据与 source evidence，不新增共享代码、CSS、renderer aut
   exit code or a console string.
 - The Job stops after preparing the local QA state. Production shipping and its
   receipts remain outside this interface.
+- Across successor publication, preserve paper, slot, group, question, Option,
+  and media identities together with source order, numbering, answers, semantic
+  owners, and source bindings.
+- Compiler-owned block, inline, row, cell, blank, writing-task, and `bank` or
+  `shared-bank` child identifiers do not require predecessor string parity.
+  They must be deterministic, unique, and internally closed within the
+  successor Canonical Paper.
+- `semanticDigest` is always recomputed from the successor semantics. It is not
+  copied from a predecessor publication merely to obtain digest parity.
 
 ### 12. Idempotency and invalidation
 
@@ -373,6 +401,15 @@ per-paper 数据与 source evidence，不新增共享代码、CSS、renderer aut
 - Existing published papers remain consumable under their immutable authority.
   This module changes how new Format② jobs are prepared, not historical
   publication meaning.
+- Compatibility means semantic parity for active consumers: Screen, Student
+  Print, Teacher Print, PDF, Analysis, and current question listing, detail,
+  search, similar-question, and figure behaviors. They consume the Canonical
+  Consumer Interface or, where one accepted legacy projection is not yet
+  exposed there, one bounded read-only compatibility Adapter.
+- Compatibility does not require byte-for-byte or path-for-path recreation of
+  standalone answer-key, import-meta, Listening three-file public outputs, or a
+  legacy figures manifest for media already present in Canonical. Unaffected
+  historical assets remain supported under their existing authority.
 - Shenzhen Q33 must produce the already accepted candidate digests, Option/media
   identities, source layout intent, and Screen/Print/PDF semantics when replayed
   from identical evidence.
@@ -599,6 +636,6 @@ per-paper 数据与 source evidence，不新增共享代码、CSS、renderer aut
   the new Import Job should make orchestration complexity reappear across many
   call sites; deleting a legacy per-paper materializer should not remove any
   supported capability.
-- This spec is ready to split with `to-tickets` after Owner review. Ticket
-  publication is separate; this spec does not pre-authorize automatic task
-  dispatch, implementation, merge, or production action.
+- The Owner-approved task graph is published in `tickets/` and implementation
+  advances only through its declared frontier. A ticket result does not by
+  itself authorize merge, production action, or Owner QA acceptance.

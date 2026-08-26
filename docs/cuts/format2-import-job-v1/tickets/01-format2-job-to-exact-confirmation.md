@@ -41,10 +41,10 @@ listening material, and writing material without embedding a full real paper.
 - [ ] Repeating identical inputs reproduces the same Job and candidate-package identities; changing an upstream digest invalidates every dependent result.
 - [ ] Rejected, missing, owner-mismatched, dimension-mismatched, or unsupported visual evidence remains unresolved with a stable diagnostic rather than being auto-approved or flattened.
 - [ ] The local console shows only the concise stop reason, package identity, comparison entry point, and resume instruction; it does not expose full passages or answer contents.
-- [ ] Focused public-Job behavioral checks, required lower-seam checks, and `git diff --check` pass. The final full repository gate remains Ticket 06 work.
+- [ ] Focused public-Job behavioral checks, required lower-seam checks, and `git diff --check` pass. The final full repository gate remains Ticket 08 work.
 
 ## Result
 
 Commit: merged as `26aee0f6`
 Verify: focused public start/continue, exact Candidate/Confirmation stop, and invalidation checks passed during implementation
-Notes: final repository gate remains downstream work
+Notes: final repository gate remains downstream Ticket 08 work
