@@ -11,6 +11,7 @@ import {
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import {
+  isFormat2RichConsumption,
   loadCanonicalGrammarFillPrintChrome,
 } from '../paper-canonical/grammarFillPrintSourceBinding.mjs'
 import { grammarFillRhythm } from '../../shared/paper-canonical/grammarFillRhythm.mjs'
@@ -193,6 +194,7 @@ export function createExportImplementation({
         || (
           canonicalConsumption.paperId === publicOracle.paperId
           && Number(canonicalConsumption.authorityRef?.manifestVersion) >= 20
+          && !isFormat2RichConsumption(canonicalConsumption)
         )
         || JSON.stringify(blocks)
           !== JSON.stringify(blocksFromCanonicalVisibleStructure(canonicalConsumption))

@@ -453,7 +453,7 @@
           "properties": {
             "canonicalMediaId": {
               "type": "string",
-              "pattern": "^media:[^\\s]+$"
+              "pattern": "^[^\\s]+$"
             },
             "sourceSpanId": {
               "type": "string",

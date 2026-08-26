@@ -6,6 +6,7 @@ import {
   grammarFillRhythm,
   grammarFillRhythmForPaperAuthority,
 } from '../../shared/paper-canonical/grammarFillRhythm.mjs'
+import { format2RichCandidateAuthorityRef } from '../../shared/paper-canonical/authority.mjs'
 import { immutablePublicationSourceForConsumption } from './publication.mjs'
 import { canonicalSourceConsumptionForPaper } from './consumerRuntime.mjs'
 import { loadCanonicalSourceAssetRepresentation } from './sourceAssetRepresentation.mjs'
@@ -21,6 +22,13 @@ function reject(message) {
 
 function digestBytes(bytes) {
   return `sha256:${createHash('sha256').update(bytes).digest('hex')}`
+}
+
+export function isFormat2RichConsumption(consumption) {
+  const authorityRef = consumption?.authorityRef
+  return authorityRef?.manifestId === format2RichCandidateAuthorityRef.manifestId
+    && authorityRef?.manifestVersion === format2RichCandidateAuthorityRef.manifestVersion
+    && authorityRef?.manifestDigest === format2RichCandidateAuthorityRef.manifestDigest
 }
 
 function readJson(bytes, label) {
@@ -162,6 +170,7 @@ export function loadCanonicalGrammarFillPrintChrome({
   const requiresPublicSourceBinding =
     sourcePaperId === publicOracle.paperId
     && Number(publicationSource.authorityRef?.manifestVersion) >= 20
+    && !isFormat2RichConsumption(sourceConsumption)
   if (
     chromeSource.kind === 'legacy_source_capture'
     && !requiresPublicSourceBinding

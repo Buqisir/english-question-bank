@@ -72,10 +72,11 @@ assert.equal(
   'the public resume operation accepts exactly one domain input',
 )
 
-function freshFixture(suffix = '') {
+function freshFixture(suffix = '', fixtureOptions = {}) {
   const repositoryRoot = mkdtempSync(path.join(tmpdir(), `eqb-format2-job-${suffix}`))
   const fixture = makeFormat2ImportJobFixture({
     sourceDir: path.join(repositoryRoot, 'fixture-sources'),
+    ...fixtureOptions,
   })
   return { repositoryRoot, fixture }
 }
@@ -256,7 +257,7 @@ function paperDir(repositoryRoot, paperId) {
 
 function artifactPath(repositoryRoot, result, artifactName) {
   return path.join(
-    paperDir(repositoryRoot, 'paper-format2-synthetic'),
+    paperDir(repositoryRoot, result.paperId),
     result.artifacts[artifactName].relativePath,
   )
 }
@@ -3210,6 +3211,83 @@ assert.equal(
   transcriptionV4Completed.lifecycle,
   'awaiting_qa',
   JSON.stringify(transcriptionV4Completed.diagnostics),
+)
+const passageOnlyV4 = freshFixture('v4-passage-only-', {
+  paperId: grammarFillRhythm.publicArtifactOracle.paperId,
+})
+upgradeFixtureToTranscriptionV4(passageOnlyV4.fixture.input)
+const passageOnlyTranscription = passageOnlyV4.fixture.input.transcription
+const stablePassageMediaId = 'fig-accepted-passage-media'
+const passageOnlyVisual = passageOnlyTranscription.visuals.find(
+  (visual) => visual.owner.kind === 'passage',
+)
+passageOnlyVisual.stableIdentities = {
+  canonicalMediaId: stablePassageMediaId,
+  sourceSpanId: `source-span:${passageOnlyVisual.observationId}`,
+}
+const passageOnlyFigureQuestion = passageOnlyTranscription.groups
+  .flatMap((group) => group.questions)
+  .find((question) => question.options.some(
+    (option) => option.contentKind === 'figure',
+  ))
+for (const option of passageOnlyFigureQuestion.options) {
+  Object.assign(option, {
+    contentKind: 'text',
+    text: `Exact text option ${option.label}.`,
+    sourceRegionRefs: [...passageOnlyFigureQuestion.sourceRegionRefs],
+  })
+  delete option.visualObservationId
+}
+passageOnlyTranscription.visuals = passageOnlyTranscription.visuals.filter(
+  (visual) => visual.owner.kind === 'passage',
+)
+delete passageOnlyTranscription.sourceMeasuredFigureLayouts
+const passageOnlyStarted = run(
+  passageOnlyV4.repositoryRoot,
+  passageOnlyV4.fixture.input,
+)
+assert.equal(
+  passageOnlyStarted.lifecycle,
+  'importing',
+  JSON.stringify(passageOnlyStarted.diagnostics),
+)
+const passageOnlyCandidate = JSON.parse(readFileSync(
+  artifactPath(
+    passageOnlyV4.repositoryRoot,
+    passageOnlyStarted,
+    'candidatePackage',
+  ),
+  'utf8',
+))
+assert.deepEqual(
+  passageOnlyCandidate.observations.map((observation) => observation.owner.kind),
+  ['passage'],
+  'the regression fixture exposes only one Passage-owned visual confirmation',
+)
+const passageOnlyCompleted = resume(passageOnlyV4.repositoryRoot, {
+  paperId: passageOnlyV4.fixture.input.paperId,
+  jobId: passageOnlyStarted.jobId,
+  teacherConfirmation: exactConfirmation(passageOnlyCandidate),
+})
+assert.equal(
+  passageOnlyCompleted.lifecycle,
+  'awaiting_qa',
+  JSON.stringify(passageOnlyCompleted.diagnostics),
+  'a v4 paper with only a Passage Figure must publish after its exact confirmation',
+)
+const passageOnlyGroups = JSON.parse(readFileSync(path.join(
+  passageOnlyV4.repositoryRoot,
+  'app/public/paper-assets',
+  passageOnlyV4.fixture.input.paperId,
+  'versions',
+  passageOnlyCompleted.canonicalPublication.versionName,
+  'canonical/canonical-question-groups-v1.json',
+), 'utf8')).groups
+assert.equal(
+  passageOnlyGroups.find((group) => group.identity.groupId === 'group:reading-a')
+    .media[0].mediaId,
+  stablePassageMediaId,
+  'publication preserves an accepted predecessor media identity without renaming it',
 )
 const transcriptionV4VersionDir = path.join(
   transcriptionV4.repositoryRoot,

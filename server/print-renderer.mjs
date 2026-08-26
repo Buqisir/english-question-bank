@@ -89,6 +89,9 @@ import {
 import {
   canonicalSourceConsumptionForGroup,
 } from './paper-canonical/consumerRuntime.mjs'
+import {
+  isFormat2RichConsumption,
+} from './paper-canonical/grammarFillPrintSourceBinding.mjs'
 import { resolveGroupFigures } from './figures/paperFigures.mjs'
 
 function renderSectionHeadingText(text) {
@@ -353,6 +356,7 @@ function assertCanonicalGrammarFillSourceBinding({
     Number(sourceConsumption.authorityRef?.manifestVersion) >= 20
     && sourceConsumption.paperId === oracle.paperId
     && sourceSelection?.groupIds.includes(oracle.grammarFill.groupId)
+    && !isFormat2RichConsumption(sourceConsumption)
   const binding = grammarFillChrome?.sourceBinding
   if (!binding) {
     if (requiresBinding) {
