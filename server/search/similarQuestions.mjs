@@ -927,11 +927,17 @@ export function createSimilarQuestionsStore({
 }) {
   let rawIndexCache = null
 
-  function getRawIndex() {
+  function getRawIndex(canonicalSnapshot = null) {
+    if (canonicalSnapshot) {
+      return buildRawFacetIndex(
+        paperAssetsDir,
+        canonicalSnapshot,
+      )
+    }
     if (rawIndexCache === null) {
       rawIndexCache = buildRawFacetIndex(
         paperAssetsDir,
-        getCanonicalCompatibilitySnapshot?.() || null,
+        null,
       )
     }
     return rawIndexCache
@@ -941,9 +947,17 @@ export function createSimilarQuestionsStore({
     rawIndexCache = null
   }
 
+  function operationIndexes() {
+    const canonicalSnapshot = getCanonicalCompatibilitySnapshot?.() || null
+    return {
+      getTeachingFacetIndex: () => getTeachingFacetIndex(canonicalSnapshot),
+      getRawIndex: () => getRawIndex(canonicalSnapshot),
+    }
+  }
+
   return {
-    findSimilar: (db, input) => findSimilar(db, input, { getTeachingFacetIndex, getRawIndex }),
-    findSimilarPassages: (db, input) => findSimilarPassages(db, input, { getTeachingFacetIndex, getRawIndex }),
+    findSimilar: (db, input) => findSimilar(db, input, operationIndexes()),
+    findSimilarPassages: (db, input) => findSimilarPassages(db, input, operationIndexes()),
     invalidate,
   }
 }

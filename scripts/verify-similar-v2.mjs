@@ -628,7 +628,18 @@ const canonicalSnapshot = {
     },
   }],
 }
-const getCanonicalCompatibilitySnapshot = () => canonicalSnapshot
+const emptyCanonicalSnapshot = {
+  papersById: {},
+  groupsById: {},
+  questionsById: {},
+  analysisSources: [],
+}
+let currentCanonicalSnapshot = emptyCanonicalSnapshot
+let canonicalSnapshotReads = 0
+const getCanonicalCompatibilitySnapshot = () => {
+  canonicalSnapshotReads += 1
+  return currentCanonicalSnapshot
+}
 const canonicalFacetIndex = createTeachingFacetIndex({
   paperAssetsDir,
   getCanonicalCompatibilitySnapshot,
@@ -649,6 +660,22 @@ function findResult(response, groupId) {
   return response.results.find((r) => r.groupId === groupId)
 }
 
+let prePublicationSimilarError = null
+try {
+  canonicalStore.findSimilar(db, {
+    seeds: [{ questionId: canonicalQuestionId }],
+  })
+} catch (error) {
+  prePublicationSimilarError = error
+}
+assert(
+  'pre-publication similar query does not retain an invented Canonical seed',
+  prePublicationSimilarError instanceof SimilarQuestionsError
+    && prePublicationSimilarError.message.includes('未找到题目'),
+  prePublicationSimilarError?.message || '',
+)
+currentCanonicalSnapshot = canonicalSnapshot
+const canonicalSnapshotReadsBeforePublicationQuery = canonicalSnapshotReads
 const canonicalQuestionResult = canonicalStore.findSimilar(db, {
   seeds: [{ questionId: canonicalQuestionId }],
 })
@@ -657,6 +684,11 @@ assert(
   canonicalQuestionResult.seedProfile.groupType === 'reading'
     && canonicalQuestionResult.results.some((result) => result.groupId === 'group-sq-reading-cand-hit'),
   JSON.stringify(canonicalQuestionResult),
+)
+assert(
+  'similar obtains one exact current compatibility snapshot per operation after publication',
+  canonicalSnapshotReads === canonicalSnapshotReadsBeforePublicationQuery + 1,
+  `reads=${canonicalSnapshotReads - canonicalSnapshotReadsBeforePublicationQuery}`,
 )
 const canonicalPassageResult = canonicalStore.findSimilarPassages(db, {
   groupId: canonicalGroupId,

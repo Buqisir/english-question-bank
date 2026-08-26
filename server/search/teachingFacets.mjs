@@ -221,7 +221,7 @@ export function createTeachingFacetIndex({
 }) {
   let cache = null
 
-  function buildIndex() {
+  function buildIndex(canonicalSnapshot = null) {
     const index = new Map()
 
     for (const entry of existsSync(paperAssetsDir) ? readdirSync(paperAssetsDir, { withFileTypes: true }) : []) {
@@ -272,7 +272,7 @@ export function createTeachingFacetIndex({
     }
 
     if (getCanonicalCompatibilitySnapshot) {
-      const snapshot = getCanonicalCompatibilitySnapshot()
+      const snapshot = canonicalSnapshot || getCanonicalCompatibilitySnapshot()
       for (const source of snapshot.analysisSources) {
         const questionToGroup = new Map()
         for (const [groupId, entryIds] of Object.entries(source.entryIdsByGroupId)) {
@@ -299,7 +299,10 @@ export function createTeachingFacetIndex({
     return index
   }
 
-  function getIndex() {
+  function getIndex(canonicalSnapshot = null) {
+    if (getCanonicalCompatibilitySnapshot) {
+      return buildIndex(canonicalSnapshot)
+    }
     if (cache === null) {
       cache = buildIndex()
     }

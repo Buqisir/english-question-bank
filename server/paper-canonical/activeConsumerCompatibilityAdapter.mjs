@@ -3,7 +3,7 @@ import path from 'node:path'
 
 import { projectCanonicalConsumerGroup } from '../../shared/paper-canonical/consumerProjection.mjs'
 import { projectCanonicalPaperBrowseDisplayAsset } from '../../shared/paper-canonical/paperBrowseDisplayAsset.mjs'
-import { sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
+import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { createCanonicalConsumerRuntime } from './consumerRuntime.mjs'
 import { resolvePaperAssetReadPaths } from '../paper-import/storage.mjs'
 
@@ -44,6 +44,33 @@ function isFormat2CompatibilityPublication(versionDir) {
     versionDir,
     'canonical/canonical-paper-publication-v49.json',
   ))
+}
+
+function validateCurrentPublicationRef(rootDir, row) {
+  const refPath = path.join(
+    rootDir,
+    row.paper_id,
+    'latest/canonical-paper-publication-ref-v1.json',
+  )
+  if (!existsSync(refPath)) {
+    rejected('CANONICAL_COMPATIBILITY_REF_INVALID', 'Current Canonical publication ref is missing')
+  }
+  let ref
+  try {
+    ref = JSON.parse(readFileSync(refPath, 'utf8'))
+  } catch {
+    rejected('CANONICAL_COMPATIBILITY_REF_INVALID', 'Current Canonical publication ref is invalid JSON')
+  }
+  if (
+    Object.keys(ref || {}).sort().join(',') !== 'paperId,publicationDigest,sourceAssetVersion,versionName'
+    || ref.paperId !== row.paper_id
+    || ref.versionName !== row.version_name
+    || ref.sourceAssetVersion !== row.source_asset_version
+    || ref.publicationDigest !== row.publication_digest
+  ) rejected(
+    'CANONICAL_COMPATIBILITY_REF_MISMATCH',
+    'Current Canonical filesystem ref disagrees with its exact database row',
+  )
 }
 
 function exactProvenance(versionDir, paperId) {
@@ -207,7 +234,111 @@ function paragraphText(group) {
   return visit(blocks).filter(Boolean).join(' ')
 }
 
-function sidecarSources(versionDir, paperId, groups) {
+function analysisReceiptPath(rootDir, paperId) {
+  return path.join(
+    path.resolve(rootDir, '../../..'),
+    'scripts/import-pipeline/papers',
+    paperId,
+    'job/current.json',
+  )
+}
+
+function verifiedAnalysisSidecars(rootDir, row, versionDir) {
+  const presentConfigs = ANALYSIS_CONFIGS.filter((config) => existsSync(path.join(
+    versionDir,
+    'analyses',
+    config.fileName,
+  )))
+  const receiptPath = analysisReceiptPath(rootDir, row.paper_id)
+  if (!existsSync(receiptPath)) {
+    if (presentConfigs.length === 0) return []
+    rejected(
+      'CANONICAL_COMPATIBILITY_ANALYSIS_DESCRIPTOR_MISSING',
+      'Format 2 Analysis sidecars require their durable Job receipt descriptors',
+    )
+  }
+  let receipt
+  try {
+    receipt = JSON.parse(readFileSync(receiptPath, 'utf8'))
+  } catch {
+    rejected(
+      'CANONICAL_COMPATIBILITY_ANALYSIS_DESCRIPTOR_INVALID',
+      'Format 2 Analysis Job receipt is invalid JSON',
+    )
+  }
+  const publication = receipt?.result?.canonicalPublication
+  const manifest = receipt?.result?.artifacts?.analysisSidecars
+  if (
+    receipt?.schemaVersion !== 'format2-import-job-receipt-v1'
+    || receipt?.disposition !== 'stopped'
+    || receipt?.result?.schemaVersion !== 'format2-import-job-result-v1'
+    || receipt?.result?.lifecycle !== 'awaiting_qa'
+    || publication?.paperId !== row.paper_id
+    || publication?.versionName !== row.version_name
+    || publication?.sourceAssetVersion !== row.source_asset_version
+    || publication?.publicationDigest !== row.publication_digest
+  ) rejected(
+    'CANONICAL_COMPATIBILITY_ANALYSIS_DESCRIPTOR_STALE',
+    'Format 2 Analysis Job receipt does not bind the exact current publication',
+  )
+  if (presentConfigs.length === 0 && manifest === undefined) return []
+  if (
+    manifest?.schemaVersion !== 'format2-analysis-sidecars-v1'
+    || !Array.isArray(manifest.items)
+  ) rejected(
+    'CANONICAL_COMPATIBILITY_ANALYSIS_DESCRIPTOR_INVALID',
+    'Format 2 Analysis descriptor manifest is missing or invalid',
+  )
+  const configsBySchema = new Map(ANALYSIS_CONFIGS.map((config) => [config.schemaVersion, config]))
+  const descriptors = []
+  const paths = new Set()
+  const schemas = new Set()
+  for (const descriptor of manifest.items) {
+    const config = configsBySchema.get(descriptor?.schemaVersion)
+    const expectedPath = config ? `analyses/${config.fileName}` : null
+    if (
+      !config
+      || Object.keys(descriptor).sort().join(',') !== 'byteLength,relativePath,schemaVersion,sha256'
+      || descriptor.relativePath !== expectedPath
+      || paths.has(descriptor.relativePath)
+      || schemas.has(descriptor.schemaVersion)
+      || !Number.isInteger(descriptor.byteLength)
+      || descriptor.byteLength < 1
+      || !/^sha256:[a-f0-9]{64}$/u.test(descriptor.sha256 || '')
+    ) rejected(
+      'CANONICAL_COMPATIBILITY_ANALYSIS_DESCRIPTOR_AMBIGUOUS',
+      'Format 2 Analysis descriptors must resolve each supported sidecar exactly once',
+    )
+    paths.add(descriptor.relativePath)
+    schemas.add(descriptor.schemaVersion)
+    const filePath = path.join(versionDir, descriptor.relativePath)
+    if (!existsSync(filePath)) {
+      rejected(
+        'CANONICAL_COMPATIBILITY_ANALYSIS_DESCRIPTOR_MISSING',
+        `${config.fileName} is missing from its immutable publication version`,
+      )
+    }
+    const bytes = new Uint8Array(readFileSync(filePath))
+    if (
+      bytes.byteLength !== descriptor.byteLength
+      || sha256(bytes) !== descriptor.sha256
+    ) rejected(
+      'CANONICAL_COMPATIBILITY_ANALYSIS_DIGEST_MISMATCH',
+      `${config.fileName} differs from its durable publication descriptor`,
+    )
+    descriptors.push({ ...descriptor, bytes })
+  }
+  if (
+    descriptors.length !== presentConfigs.length
+    || presentConfigs.some((config) => !schemas.has(config.schemaVersion))
+  ) rejected(
+    'CANONICAL_COMPATIBILITY_ANALYSIS_DESCRIPTOR_MISSING',
+    'Format 2 Analysis files and durable descriptors do not close exactly',
+  )
+  return descriptors.sort((left, right) => left.relativePath.localeCompare(right.relativePath))
+}
+
+function sidecarSources(sidecars, paperId, groups) {
   const groupsByType = new Map(groups.map((group) => [group.screenGroup.groupType, group]))
   const questionOwner = new Map(groups.flatMap((group) =>
     (group.screenGroup.questions || []).map((question) => [question.questionId, group])))
@@ -229,12 +360,13 @@ function sidecarSources(versionDir, paperId, groups) {
           : [])),
   ]))
   const sources = []
-  for (const config of ANALYSIS_CONFIGS) {
-    const filePath = path.join(versionDir, 'analyses', config.fileName)
-    if (!existsSync(filePath)) continue
+  for (const sidecar of sidecars) {
+    const config = ANALYSIS_CONFIGS.find(
+      (candidate) => candidate.schemaVersion === sidecar.schemaVersion,
+    )
     let analysis
     try {
-      analysis = JSON.parse(readFileSync(filePath, 'utf8'))
+      analysis = JSON.parse(new TextDecoder().decode(sidecar.bytes))
     } catch {
       rejected('CANONICAL_COMPATIBILITY_ANALYSIS_INVALID', `${config.fileName} is invalid JSON`)
     }
@@ -295,7 +427,7 @@ function sidecarSources(versionDir, paperId, groups) {
   return sources
 }
 
-function buildPaperSnapshot({ row, screen, printPdf, versionDir }) {
+function validateCurrentConsumption(row, screen, printPdf) {
   if (
     screen.paperId !== row.paper_id
     || printPdf.paperId !== row.paper_id
@@ -304,10 +436,14 @@ function buildPaperSnapshot({ row, screen, printPdf, versionDir }) {
     || screen.publicationDigest !== row.publication_digest
     || printPdf.publicationDigest !== row.publication_digest
   ) rejected('CANONICAL_COMPATIBILITY_REF_MISMATCH', 'Canonical consumption does not match the exact current database ref')
+}
+
+function buildPaperSnapshot({ row, screen, printPdf, versionDir, analysisSidecars }) {
+  validateCurrentConsumption(row, screen, printPdf)
   const provenance = exactProvenance(versionDir, row.paper_id)
   const groups = exactProjectedGroups(screen, printPdf)
   const displayAsset = projectCanonicalPaperBrowseDisplayAsset(screen)
-  const analysisSources = sidecarSources(versionDir, row.paper_id, groups)
+  const analysisSources = sidecarSources(analysisSidecars, row.paper_id, groups)
   const groupEntries = []
   const questionEntries = []
   for (const [groupIndex, group] of groups.entries()) {
@@ -439,9 +575,12 @@ function buildPaperSnapshot({ row, screen, printPdf, versionDir }) {
     })])
   }
   return freezeTree({
-    cacheKey: `${row.paper_id}@${row.version_name}@${row.publication_digest}`,
+    cacheKey: `${row.paper_id}@${row.version_name}@${row.source_asset_version}@${row.publication_digest}@${digestJson(
+      analysisSidecars.map(({ bytes: _bytes, ...descriptor }) => descriptor),
+    )}`,
     paperId: row.paper_id,
     versionName: row.version_name,
+    sourceAssetVersion: row.source_asset_version,
     publicationDigest: row.publication_digest,
     provenance,
     displayAsset,
@@ -557,17 +696,27 @@ export function createCanonicalActiveConsumerCompatibilityAdapter({
       const groupsById = {}
       const questionsById = {}
       const analysisSources = []
+      const activeCacheKeys = new Set()
       for (const row of rows) {
-        const cacheKey = `${row.paper_id}@${row.version_name}@${row.publication_digest}`
         const versionDir = safeVersionDir(rootDir, row)
+        validateCurrentPublicationRef(rootDir, row)
         if (!isFormat2CompatibilityPublication(versionDir)) continue
+        const screen = runtime.load({ paperId: row.paper_id, consumerId: 'screen' })
+        const printPdf = runtime.load({ paperId: row.paper_id, consumerId: 'print_pdf' })
+        validateCurrentConsumption(row, screen, printPdf)
+        const analysisSidecars = verifiedAnalysisSidecars(rootDir, row, versionDir)
+        const cacheKey = `${row.paper_id}@${row.version_name}@${row.source_asset_version}@${row.publication_digest}@${digestJson(
+          analysisSidecars.map(({ bytes: _bytes, ...descriptor }) => descriptor),
+        )}`
+        activeCacheKeys.add(cacheKey)
         let paper = cache.get(cacheKey)
         if (!paper) {
           paper = buildPaperSnapshot({
             row,
             versionDir,
-            screen: runtime.load({ paperId: row.paper_id, consumerId: 'screen' }),
-            printPdf: runtime.load({ paperId: row.paper_id, consumerId: 'print_pdf' }),
+            screen,
+            printPdf,
+            analysisSidecars,
           })
           cache.set(cacheKey, paper)
         }
@@ -586,6 +735,9 @@ export function createCanonicalActiveConsumerCompatibilityAdapter({
           questionsById[questionId] = question
         }
         analysisSources.push(...paper.analysisSources)
+      }
+      for (const cacheKey of cache.keys()) {
+        if (!activeCacheKeys.has(cacheKey)) cache.delete(cacheKey)
       }
       validateHistoricalAssetIdentity(rootDir, groupsById, questionsById)
       return freezeTree({ papersById, groupsById, questionsById, analysisSources })

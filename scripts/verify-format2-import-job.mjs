@@ -3175,6 +3175,32 @@ const transcriptionV4Candidate = JSON.parse(readFileSync(
   ),
   'utf8',
 ))
+const transcriptionV4DbPath = path.join(
+  transcriptionV4.repositoryRoot,
+  'data/question-bank.sqlite',
+)
+mkdirSync(path.dirname(transcriptionV4DbPath), { recursive: true })
+new DatabaseSync(transcriptionV4DbPath).close()
+let transcriptionV4ConsumerLoads = 0
+const transcriptionV4CompatibilityAdapter =
+  createCanonicalActiveConsumerCompatibilityAdapter({
+    rootDir: path.join(transcriptionV4.repositoryRoot, 'app/public/paper-assets'),
+    openDatabase: ({ readOnly }) => new DatabaseSync(transcriptionV4DbPath, { readOnly }),
+    createConsumerRuntime: (options) => {
+      const runtime = createCanonicalConsumerRuntime(options)
+      return {
+        load(input) {
+          transcriptionV4ConsumerLoads += 1
+          return runtime.load(input)
+        },
+      }
+    },
+  })
+assert.deepEqual(
+  transcriptionV4CompatibilityAdapter.snapshot(),
+  { papersById: {}, groupsById: {}, questionsById: {}, analysisSources: [] },
+  'one Adapter observes the exact empty pre-publication snapshot',
+)
 const transcriptionV4Completed = resume(transcriptionV4.repositoryRoot, {
   paperId: transcriptionV4.fixture.input.paperId,
   jobId: transcriptionV4Started.jobId,
@@ -3259,10 +3285,6 @@ assert.deepEqual(
   format2RichCandidateAuthorityRef,
   'v4 publication digest-binds the exact scoped Format 2 rich authority successor',
 )
-const transcriptionV4DbPath = path.join(
-  transcriptionV4.repositoryRoot,
-  'data/question-bank.sqlite',
-)
 const transcriptionV4DbDigestBeforeAdapter = sha256(readFileSync(transcriptionV4DbPath))
 const createTranscriptionV4CompatibilityAdapter = () =>
   createCanonicalActiveConsumerCompatibilityAdapter({
@@ -3270,7 +3292,28 @@ const createTranscriptionV4CompatibilityAdapter = () =>
     openDatabase: ({ readOnly }) => new DatabaseSync(transcriptionV4DbPath, { readOnly }),
   })
 const transcriptionV4CompatibilitySnapshot =
-  createTranscriptionV4CompatibilityAdapter().snapshot()
+  transcriptionV4CompatibilityAdapter.snapshot()
+assert.equal(
+  Object.hasOwn(
+    transcriptionV4CompatibilitySnapshot.papersById[
+      transcriptionV4.fixture.input.paperId
+    ],
+    'sourceAssetVersion',
+  ),
+  true,
+  'the exact Adapter snapshot identity includes source_asset_version',
+)
+const transcriptionV4ConsumerLoadsAfterFirstSnapshot = transcriptionV4ConsumerLoads
+assert.deepEqual(
+  transcriptionV4CompatibilityAdapter.snapshot(),
+  transcriptionV4CompatibilitySnapshot,
+  'an unchanged exact-identity cache hit preserves the immutable snapshot',
+)
+assert.equal(
+  transcriptionV4ConsumerLoads,
+  transcriptionV4ConsumerLoadsAfterFirstSnapshot + 2,
+  'a cache hit revalidates current Screen and Print/PDF publication refs before return',
+)
 const transcriptionV3CompatibilitySnapshot =
   createCanonicalActiveConsumerCompatibilityAdapter({
     rootDir: path.join(transcriptionV3.repositoryRoot, 'app/public/paper-assets'),
@@ -3360,15 +3403,141 @@ const transcriptionV4AnalysisPath = path.join(
   transcriptionV4AnalysisSource.fileName,
 )
 const transcriptionV4AnalysisBytes = readFileSync(transcriptionV4AnalysisPath)
-const transcriptionV4ForeignAnalysis = JSON.parse(transcriptionV4AnalysisBytes)
-transcriptionV4ForeignAnalysis.paperId = 'paper-foreign-analysis'
-writeFileSync(transcriptionV4AnalysisPath, JSON.stringify(transcriptionV4ForeignAnalysis))
+writeFileSync(
+  transcriptionV4AnalysisPath,
+  Buffer.concat([transcriptionV4AnalysisBytes, Buffer.from(' ')]),
+)
 assert.throws(
-  () => createTranscriptionV4CompatibilityAdapter().snapshot(),
-  (error) => error?.code === 'CANONICAL_COMPATIBILITY_ANALYSIS_IDENTITY_MISMATCH',
-  'the compatibility Adapter rejects a sidecar from another Paper',
+  () => transcriptionV4CompatibilityAdapter.snapshot(),
+  (error) => error?.code === 'CANONICAL_COMPATIBILITY_ANALYSIS_DIGEST_MISMATCH',
+  'a cache hit rejects same-identity valid-JSON sidecar byte mutation before parse/use',
 )
 writeFileSync(transcriptionV4AnalysisPath, transcriptionV4AnalysisBytes)
+const transcriptionV4ReceiptPath = path.join(
+  paperDir(transcriptionV4.repositoryRoot, transcriptionV4.fixture.input.paperId),
+  'job/current.json',
+)
+const transcriptionV4ReceiptBytes = readFileSync(transcriptionV4ReceiptPath)
+const mutateTranscriptionV4AnalysisDescriptor = (mutator) => {
+  const receipt = JSON.parse(transcriptionV4ReceiptBytes)
+  const descriptor = receipt.result.artifacts.analysisSidecars.items.find(
+    (item) => item.schemaVersion === transcriptionV4AnalysisSource.schemaVersion,
+  )
+  mutator(descriptor, receipt.result.artifacts.analysisSidecars.items)
+  writeFileSync(transcriptionV4ReceiptPath, JSON.stringify(receipt))
+}
+mutateTranscriptionV4AnalysisDescriptor((descriptor) => {
+  delete descriptor.sha256
+})
+assert.throws(
+  () => transcriptionV4CompatibilityAdapter.snapshot(),
+  (error) => error?.code === 'CANONICAL_COMPATIBILITY_ANALYSIS_DESCRIPTOR_AMBIGUOUS',
+  'the compatibility Adapter rejects a descriptor with missing sha256',
+)
+mutateTranscriptionV4AnalysisDescriptor((descriptor) => {
+  descriptor.sha256 = `sha256:${'0'.repeat(64)}`
+})
+assert.throws(
+  () => transcriptionV4CompatibilityAdapter.snapshot(),
+  (error) => error?.code === 'CANONICAL_COMPATIBILITY_ANALYSIS_DIGEST_MISMATCH',
+  'the compatibility Adapter rejects a descriptor with the wrong sha256',
+)
+mutateTranscriptionV4AnalysisDescriptor((descriptor) => {
+  descriptor.byteLength += 1
+})
+assert.throws(
+  () => transcriptionV4CompatibilityAdapter.snapshot(),
+  (error) => error?.code === 'CANONICAL_COMPATIBILITY_ANALYSIS_DIGEST_MISMATCH',
+  'the compatibility Adapter rejects a descriptor with the wrong byteLength',
+)
+mutateTranscriptionV4AnalysisDescriptor((_descriptor, items) => {
+  items.splice(
+    items.findIndex(
+      (item) => item.schemaVersion === transcriptionV4AnalysisSource.schemaVersion,
+    ),
+    1,
+  )
+})
+assert.throws(
+  () => transcriptionV4CompatibilityAdapter.snapshot(),
+  (error) => error?.code === 'CANONICAL_COMPATIBILITY_ANALYSIS_DESCRIPTOR_MISSING',
+  'the compatibility Adapter rejects an Analysis file with no durable descriptor',
+)
+writeFileSync(transcriptionV4ReceiptPath, transcriptionV4ReceiptBytes)
+const transcriptionV4ForeignAnalysis = JSON.parse(transcriptionV4AnalysisBytes)
+transcriptionV4ForeignAnalysis.paperId = 'paper-foreign-analysis'
+const transcriptionV4ForeignAnalysisBytes = Buffer.from(
+  JSON.stringify(transcriptionV4ForeignAnalysis),
+)
+writeFileSync(transcriptionV4AnalysisPath, transcriptionV4ForeignAnalysisBytes)
+mutateTranscriptionV4AnalysisDescriptor((descriptor) => {
+  descriptor.byteLength = transcriptionV4ForeignAnalysisBytes.byteLength
+  descriptor.sha256 = sha256(transcriptionV4ForeignAnalysisBytes)
+})
+assert.throws(
+  () => transcriptionV4CompatibilityAdapter.snapshot(),
+  (error) => error?.code === 'CANONICAL_COMPATIBILITY_ANALYSIS_IDENTITY_MISMATCH',
+  'the compatibility Adapter still rejects a digest-valid sidecar from another Paper',
+)
+writeFileSync(transcriptionV4AnalysisPath, transcriptionV4AnalysisBytes)
+writeFileSync(transcriptionV4ReceiptPath, transcriptionV4ReceiptBytes)
+const transcriptionV4LatestRefPath = path.join(
+  transcriptionV4.repositoryRoot,
+  'app/public/paper-assets',
+  transcriptionV4.fixture.input.paperId,
+  'latest/canonical-paper-publication-ref-v1.json',
+)
+const transcriptionV4LatestRefBytes = readFileSync(transcriptionV4LatestRefPath)
+const transcriptionV4MutatedLatestRef = JSON.parse(transcriptionV4LatestRefBytes)
+transcriptionV4MutatedLatestRef.sourceAssetVersion += 1
+writeFileSync(transcriptionV4LatestRefPath, JSON.stringify(transcriptionV4MutatedLatestRef))
+assert.throws(
+  () => transcriptionV4CompatibilityAdapter.snapshot(),
+  (error) => String(error?.code || error?.diagnostics?.[0]?.code || '').startsWith('CANONICAL_'),
+  'a cache hit fails closed when the exact current publication ref changes',
+)
+writeFileSync(transcriptionV4LatestRefPath, transcriptionV4LatestRefBytes)
+const transcriptionV4MutableDb = new DatabaseSync(transcriptionV4DbPath)
+transcriptionV4MutableDb.prepare(`
+  UPDATE canonical_paper_publications
+  SET source_asset_version = source_asset_version + 1
+  WHERE paper_id = ? AND is_current = 1
+`).run(transcriptionV4.fixture.input.paperId)
+transcriptionV4MutableDb.close()
+assert.throws(
+  () => transcriptionV4CompatibilityAdapter.snapshot(),
+  (error) => String(error?.code || error?.diagnostics?.[0]?.code || '').startsWith('CANONICAL_'),
+  'source_asset_version participates in cache identity and fails closed on current-row drift',
+)
+const transcriptionV4RestoreSourceVersionDb = new DatabaseSync(transcriptionV4DbPath)
+transcriptionV4RestoreSourceVersionDb.prepare(`
+  UPDATE canonical_paper_publications
+  SET source_asset_version = source_asset_version - 1
+  WHERE paper_id = ? AND is_current = 1
+`).run(transcriptionV4.fixture.input.paperId)
+transcriptionV4RestoreSourceVersionDb.close()
+const transcriptionV4RollbackDb = new DatabaseSync(transcriptionV4DbPath)
+transcriptionV4RollbackDb.prepare(`
+  UPDATE canonical_paper_publications SET is_current = 0 WHERE paper_id = ?
+`).run(transcriptionV4.fixture.input.paperId)
+transcriptionV4RollbackDb.close()
+assert.deepEqual(
+  transcriptionV4CompatibilityAdapter.snapshot(),
+  { papersById: {}, groupsById: {}, questionsById: {}, analysisSources: [] },
+  'a rollback/current-row removal invalidates the previously cached snapshot',
+)
+const transcriptionV4RestoreCurrentDb = new DatabaseSync(transcriptionV4DbPath)
+transcriptionV4RestoreCurrentDb.prepare(`
+  UPDATE canonical_paper_publications SET is_current = 1 WHERE paper_id = ?
+`).run(transcriptionV4.fixture.input.paperId)
+transcriptionV4RestoreCurrentDb.close()
+assert.equal(
+  transcriptionV4CompatibilityAdapter.snapshot().papersById[
+    transcriptionV4.fixture.input.paperId
+  ].publicationDigest,
+  transcriptionV4Completed.canonicalPublication.publicationDigest,
+  'restoring the exact current publication rebuilds after rollback invalidation',
+)
 const transcriptionV4SourceCapture = JSON.parse(readFileSync(path.join(
   transcriptionV4VersionDir,
   'canonical/source-capture-v1.json',

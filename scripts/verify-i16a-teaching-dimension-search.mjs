@@ -84,43 +84,65 @@ console.log()
 
 const canonicalFacetGroupId = 'group-canonical-facet-reading'
 const canonicalFacetQuestionId = 'question-canonical-facet-reading-1'
-const canonicalFacetIndex = createTeachingFacetIndex({
-  paperAssetsDir: path.join(corpusDir, 'absent-historical-assets'),
-  getCanonicalCompatibilitySnapshot: () => ({
-    papersById: {},
-    groupsById: {
-      [canonicalFacetGroupId]: {
-        paperId: 'paper-canonical-facet',
-        groupId: canonicalFacetGroupId,
-        groupType: 'reading',
-        questionIds: [canonicalFacetQuestionId],
-      },
-    },
-    questionsById: {},
-    analysisSources: [{
+const emptyCanonicalFacetSnapshot = {
+  papersById: {},
+  groupsById: {},
+  questionsById: {},
+  analysisSources: [],
+}
+const populatedCanonicalFacetSnapshot = {
+  papersById: {},
+  groupsById: {
+    [canonicalFacetGroupId]: {
       paperId: 'paper-canonical-facet',
-      schemaVersion: 'reading-choice-analysis-v1',
+      groupId: canonicalFacetGroupId,
       groupType: 'reading',
-      entryMapKey: 'questions',
-      groupIds: [canonicalFacetGroupId],
-      entryIdsByGroupId: { [canonicalFacetGroupId]: [canonicalFacetQuestionId] },
-      questionIdByEntryId: { [canonicalFacetQuestionId]: canonicalFacetQuestionId },
-      analysis: {
-        schemaVersion: 'reading-choice-analysis-v1',
-        paperId: 'paper-canonical-facet',
-        questions: {
-          [canonicalFacetQuestionId]: {
-            skill: { primary: 'inference', secondary: 'evidence-location' },
-          },
+      questionIds: [canonicalFacetQuestionId],
+    },
+  },
+  questionsById: {},
+  analysisSources: [{
+    paperId: 'paper-canonical-facet',
+    schemaVersion: 'reading-choice-analysis-v1',
+    groupType: 'reading',
+    entryMapKey: 'questions',
+    groupIds: [canonicalFacetGroupId],
+    entryIdsByGroupId: { [canonicalFacetGroupId]: [canonicalFacetQuestionId] },
+    questionIdByEntryId: { [canonicalFacetQuestionId]: canonicalFacetQuestionId },
+    analysis: {
+      schemaVersion: 'reading-choice-analysis-v1',
+      paperId: 'paper-canonical-facet',
+      questions: {
+        [canonicalFacetQuestionId]: {
+          skill: { primary: 'inference', secondary: 'evidence-location' },
         },
       },
-    }],
-  }),
-}).getIndex()
+    },
+  }],
+}
+let currentCanonicalFacetSnapshot = emptyCanonicalFacetSnapshot
+let canonicalFacetSnapshotReads = 0
+const canonicalFacetIndexStore = createTeachingFacetIndex({
+  paperAssetsDir: path.join(corpusDir, 'absent-historical-assets'),
+  getCanonicalCompatibilitySnapshot: () => {
+    canonicalFacetSnapshotReads += 1
+    return currentCanonicalFacetSnapshot
+  },
+})
+assert(
+  'pre-publication teaching facet query observes no Canonical Analysis',
+  !canonicalFacetIndexStore.getIndex().has(canonicalFacetGroupId),
+)
+currentCanonicalFacetSnapshot = populatedCanonicalFacetSnapshot
+const canonicalFacetIndex = canonicalFacetIndexStore.getIndex()
 assert(
   'Canonical-only Analysis enters teaching facets through the one compatibility snapshot',
   canonicalFacetIndex.get(canonicalFacetGroupId)?.skills.has('inference')
     && canonicalFacetIndex.get(canonicalFacetGroupId)?.secondarySkills.has('evidence-location'),
+)
+assert(
+  'teaching facets obtain the exact current compatibility snapshot for each operation',
+  canonicalFacetSnapshotReads === 2,
 )
 
 // ─── Load real 960d0f8d data ──────────────────────────────────────────────────
