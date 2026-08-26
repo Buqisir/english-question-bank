@@ -3217,6 +3217,14 @@ const passageOnlyV4 = freshFixture('v4-passage-only-', {
 })
 upgradeFixtureToTranscriptionV4(passageOnlyV4.fixture.input)
 const passageOnlyTranscription = passageOnlyV4.fixture.input.transcription
+const stablePassageMediaId = 'fig-accepted-passage-media'
+const passageOnlyVisual = passageOnlyTranscription.visuals.find(
+  (visual) => visual.owner.kind === 'passage',
+)
+passageOnlyVisual.stableIdentities = {
+  canonicalMediaId: stablePassageMediaId,
+  sourceSpanId: `source-span:${passageOnlyVisual.observationId}`,
+}
 const passageOnlyFigureQuestion = passageOnlyTranscription.groups
   .flatMap((group) => group.questions)
   .find((question) => question.options.some(
@@ -3266,6 +3274,20 @@ assert.equal(
   'awaiting_qa',
   JSON.stringify(passageOnlyCompleted.diagnostics),
   'a v4 paper with only a Passage Figure must publish after its exact confirmation',
+)
+const passageOnlyGroups = JSON.parse(readFileSync(path.join(
+  passageOnlyV4.repositoryRoot,
+  'app/public/paper-assets',
+  passageOnlyV4.fixture.input.paperId,
+  'versions',
+  passageOnlyCompleted.canonicalPublication.versionName,
+  'canonical/canonical-question-groups-v1.json',
+), 'utf8')).groups
+assert.equal(
+  passageOnlyGroups.find((group) => group.identity.groupId === 'group:reading-a')
+    .media[0].mediaId,
+  stablePassageMediaId,
+  'publication preserves an accepted predecessor media identity without renaming it',
 )
 const transcriptionV4VersionDir = path.join(
   transcriptionV4.repositoryRoot,
