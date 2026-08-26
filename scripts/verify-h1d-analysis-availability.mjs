@@ -30,6 +30,9 @@ const api = read('server/api.mjs')
 const availabilitySource = read('server/search/paperSurfaceAvailability.mjs')
 const verifyCi = read('scripts/verify-ci.mjs')
 const scriptsReadme = read('scripts/README.md')
+const availabilityOwnerArguments = api.match(
+  /const\s+paperSurfaceAnalysisAvailability\s*=\s*createPaperSurfaceAnalysisAvailability\s*\(\s*\{([^{}]*)\}\s*\)/,
+)?.[1] || ''
 
 assert('availability module exists and exports factory', typeof createPaperSurfaceAnalysisAvailability === 'function')
 assert('availability module owns cache variable', /let availabilityByGroupIdCache = null/.test(availabilitySource))
@@ -43,8 +46,9 @@ assert('availability module imports paper import read-path resolver', availabili
 assert('api imports availability owner module', api.includes("from './search/paperSurfaceAvailability.mjs'"))
 assert(
   'api instantiates one availability owner',
-  (api.match(/createPaperSurfaceAnalysisAvailability\(\{/g) || []).length === 1
-    && /createPaperSurfaceAnalysisAvailability\(\{[\s\S]*?paperAssetsDir,[\s\S]*?getCanonicalCompatibilitySnapshot,[\s\S]*?\}\)/.test(api),
+  (api.match(/createPaperSurfaceAnalysisAvailability\s*\(/g) || []).length === 1
+    && /\bpaperAssetsDir\b/.test(availabilityOwnerArguments)
+    && /\bgetCanonicalCompatibilitySnapshot\b/.test(availabilityOwnerArguments),
 )
 assert('api no longer owns availability cache variable', !api.includes('let paperSurfaceAnalysisAvailabilityByGroupIdCache = null'))
 assert('api no longer owns PaperSurface href builder', !api.includes('function buildPaperSurfaceHref'))
