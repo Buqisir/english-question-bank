@@ -543,6 +543,92 @@ function normalizePersistedCandidate(candidate) {
   }
 }
 
+function reviewedVisualSurface(candidate) {
+  const integrity = validateVisualSourceCapture(candidate.sourceCapture)
+  const captureObservations = new Map(
+    candidate.sourceCapture.observations.map(
+      (observation) => [observation.observationId, observation],
+    ),
+  )
+  return {
+    observations: candidate.observations.map((observation) => {
+      const captureObservation = captureObservations.get(
+        observation.observationId,
+      )
+      const span = integrity.spans.get(captureObservation.sourceSpanId)
+      const document = integrity.documents.get(span.documentId)
+      return {
+        observationId: observation.observationId,
+        source: {
+          documentDigest: observation.source.documentDigest,
+          sourceSpanId: observation.source.sourceSpanId,
+          coordinate: cloneJson(observation.source.coordinate),
+          documentAuthority: {
+            roles: cloneJson(document.roles),
+            mediaType: document.mediaType,
+          },
+        },
+        owner: cloneJson(observation.owner),
+        sourceCrop: cloneJson(observation.sourceCrop),
+      }
+    }),
+    candidates: cloneJson(candidate.candidates),
+  }
+}
+
+function validateSuccessorOnlyNonVisualEvidence(predecessor, successor) {
+  const reviewedObservationIds = new Set(
+    successor.observations.map((observation) => observation.observationId),
+  )
+  const documentAuthorityIdentity = (document) => stableStringify({
+    sha256: document.sha256,
+    roles: document.roles,
+    mediaType: document.mediaType,
+  })
+  const predecessorDocumentAuthorityIdentities = new Set(
+    predecessor.sourceCapture.documents.map(documentAuthorityIdentity),
+  )
+  const sourceAuthorityRoles = new Set([
+    'comparison_baseline',
+    'pdf_xobject_raw_stream',
+    'question_source',
+    'source_figure_evidence',
+  ])
+  const unsupportedDocument = successor.sourceCapture.documents.find(
+    (document) => (
+      !predecessorDocumentAuthorityIdentities.has(
+        documentAuthorityIdentity(document),
+      )
+      && (
+        document.mediaType?.startsWith('image/')
+        || document.roles?.some((role) => sourceAuthorityRoles.has(role))
+      )
+    ),
+  )
+  if (unsupportedDocument) {
+    fail(
+      'VISUAL_CONFIRMATION_REBIND_MISMATCH',
+      'Successor Candidate adds an unreviewed question or visual source authority document',
+    )
+  }
+  const unsupported = successor.sourceCapture.observations.find(
+    (observation) => {
+      if (reviewedObservationIds.has(observation.observationId)) return false
+      const retained = predecessor.sourceCapture.observations.some(
+        (candidate) => sameValue(candidate, observation),
+      )
+      return !retained
+        && observation.kind !== 'reading_option_figure_source_layout'
+    },
+  )
+  if (unsupported) {
+    fail(
+      'VISUAL_CONFIRMATION_REBIND_MISMATCH',
+      'Successor Candidate adds evidence outside the reviewed visuals and Job source-layout observations',
+    )
+  }
+}
+
 export function createVisualImportCandidate(input) {
   assertExactObject(
     input,
@@ -691,4 +777,75 @@ export function confirmVisualImportCandidate(candidate, teacherConfirmation) {
     confirmedSelections,
     unresolvedIssues,
   }
+}
+
+/**
+ * Migration-only bridge for an already reviewed visual surface. New imports
+ * still require a Teacher Confirmation against their exact Candidate package.
+ */
+export function rebindExactVisualTeacherConfirmation(input) {
+  assertExactObject(
+    input,
+    [
+      'predecessorCandidatePackage',
+      'predecessorTeacherConfirmation',
+      'successorCandidatePackage',
+    ],
+    'VISUAL_CONFIRMATION_REBIND_INVALID',
+    'Exact visual confirmation rebind requires predecessor Candidate and Confirmation plus successor Candidate',
+  )
+  const predecessorSelection = confirmVisualImportCandidate(
+    input.predecessorCandidatePackage,
+    input.predecessorTeacherConfirmation,
+  )
+  if (
+    predecessorSelection.status !== 'confirmed'
+    || predecessorSelection.unresolvedIssues.length !== 0
+    || predecessorSelection.confirmedSelections.length
+      !== input.predecessorCandidatePackage.observations.length
+  ) {
+    fail(
+      'VISUAL_CONFIRMATION_REBIND_PREDECESSOR_UNCONFIRMED',
+      'Prior Teacher Confirmation must exactly confirm every predecessor visual',
+    )
+  }
+
+  const predecessor = normalizePersistedCandidate(
+    input.predecessorCandidatePackage,
+  )
+  const successor = normalizePersistedCandidate(input.successorCandidatePackage)
+  validateSuccessorOnlyNonVisualEvidence(predecessor, successor)
+  if (
+    !sameValue(
+      reviewedVisualSurface(predecessor),
+      reviewedVisualSurface(successor),
+    )
+    || !sameValue(
+      predecessor.sourceCapture.assertions,
+      successor.sourceCapture.assertions,
+    )
+  ) {
+    fail(
+      'VISUAL_CONFIRMATION_REBIND_MISMATCH',
+      'Successor Candidate differs from the exact previously reviewed visual surface',
+    )
+  }
+
+  const rebound = {
+    schemaVersion: confirmationSchemaVersion,
+    packageDigest: successor.packageDigest,
+    decisions: cloneJson(input.predecessorTeacherConfirmation.decisions),
+  }
+  const reboundSelection = confirmVisualImportCandidate(successor, rebound)
+  if (
+    reboundSelection.status !== 'confirmed'
+    || reboundSelection.unresolvedIssues.length !== 0
+    || reboundSelection.confirmedSelections.length !== successor.observations.length
+  ) {
+    fail(
+      'VISUAL_CONFIRMATION_REBIND_MISMATCH',
+      'Rebound Teacher Confirmation did not exactly close the successor Candidate',
+    )
+  }
+  return rebound
 }

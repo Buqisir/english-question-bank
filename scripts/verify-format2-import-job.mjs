@@ -163,30 +163,34 @@ function addSecondFigureQuestionWithLocalOptionIds(fixture) {
   const imageHeightPt = 72
   const rowOriginPt = 50
   const imageLeftPt = labels.map((_label, index) => 70 + index * 110)
-  const secondVisuals = firstVisuals.map((visual, index) => ({
-    ...structuredClone(visual),
-    observationId: secondObservationIds[index],
-    owner: {
-      kind: 'reading_option',
-      groupId: secondGroup.groupId,
-      questionId: secondQuestion.questionId,
-      optionId: localOptionIds[index],
-    },
-    source: {
-      ...structuredClone(visual.source),
-      page: sourcePage,
-      pointGeometry: {
-        x: imageLeftPt[index],
-        y: imageTopPt,
-        width: imageWidthPt,
-        height: imageHeightPt,
+  const secondVisuals = firstVisuals.map((visual, index) => {
+    const secondVisual = {
+      ...structuredClone(visual),
+      observationId: secondObservationIds[index],
+      owner: {
+        kind: 'reading_option',
+        groupId: secondGroup.groupId,
+        questionId: secondQuestion.questionId,
+        optionId: localOptionIds[index],
       },
-      extraction: {
-        ...structuredClone(visual.source.extraction),
-        objectId: `xref:${210 + index}`,
+      source: {
+        ...structuredClone(visual.source),
+        page: sourcePage,
+        pointGeometry: {
+          x: imageLeftPt[index],
+          y: imageTopPt,
+          width: imageWidthPt,
+          height: imageHeightPt,
+        },
+        extraction: {
+          ...structuredClone(visual.source.extraction),
+          objectId: `xref:${210 + index}`,
+        },
       },
-    },
-  }))
+    }
+    delete secondVisual.stableIdentities
+    return secondVisual
+  })
   transcription.visuals.push(...secondVisuals)
 
   const secondLayout = structuredClone(firstLayout)
@@ -746,6 +750,26 @@ assert.ok(visualSourceObservations.every((observation) => (
   && observation.value.pageSizePoints
   && observation.value.targetSizePoints
 )))
+const stableVisual = fixture.input.transcription.visuals.find(
+  (visual) => visual.stableIdentities,
+)
+const defaultVisual = fixture.input.transcription.visuals.find(
+  (visual) => !visual.stableIdentities,
+)
+assert.equal(
+  visualSourceObservations.find(
+    (observation) => observation.observationId === stableVisual.observationId,
+  ).sourceSpanId,
+  fixture.stableOptionIdentities.sourceSpanId,
+  'runtime Candidate capture retains an explicit stable source-span identity',
+)
+assert.equal(
+  visualSourceObservations.find(
+    (observation) => observation.observationId === defaultVisual.observationId,
+  ).sourceSpanId,
+  `source-span:${defaultVisual.observationId}`,
+  'visuals without explicit identities retain the previous derivation',
+)
 const figureLayoutObservation = sourceCapture.observations.find(
   (observation) => observation.kind === 'reading_option_figure_source_layout',
 )
@@ -760,6 +784,13 @@ assert.equal(candidatePackage.packageDigest, result.artifacts.candidatePackage.p
 assert.equal(candidatePackage.status, 'awaiting_teacher_confirmation')
 assert.equal(candidatePackage.candidates.length, 5)
 assert.ok(candidatePackage.candidates.every((candidate) => candidate.method === 'source_crop'))
+assert.equal(
+  candidatePackage.observations.find(
+    (observation) => observation.observationId === stableVisual.observationId,
+  ).source.sourceSpanId,
+  fixture.stableOptionIdentities.sourceSpanId,
+  'the exact Candidate observation retains the explicit stable source span',
+)
 assert.equal(Object.hasOwn(candidatePackage, 'canonicalPaper'), false)
 assert.equal(Object.hasOwn(candidatePackage, 'media'), false)
 
@@ -1075,6 +1106,29 @@ try {
   )
   const printFigureQuestion = printFigureGroup.questions.find(
     (question) => question.questionId === expectedFigureLayout.questionId,
+  )
+  const stableScreenOption = screenFigureQuestion.options.find(
+    (option) => option.optionId === stableVisual.owner.optionId,
+  )
+  const stablePrintOption = printFigureQuestion.options.find(
+    (option) => option.optionId === stableVisual.owner.optionId,
+  )
+  assert.equal(
+    stableScreenOption.figure.mediaId,
+    fixture.stableOptionIdentities.canonicalMediaId,
+    'Screen consumes the explicit stable Canonical media identity',
+  )
+  assert.equal(
+    stablePrintOption.figure.mediaId,
+    fixture.stableOptionIdentities.canonicalMediaId,
+    'Print/PDF consumes the same explicit stable Canonical media identity',
+  )
+  assert.equal(
+    expectedFigureLayout.placements.find(
+      (placement) => placement.optionId === stableVisual.owner.optionId,
+    ).sourceSpanId,
+    fixture.stableOptionIdentities.sourceSpanId,
+    'media and source-span identities remain independently data-bound',
   )
   assert.equal(
     screenFigureQuestion.figureLayoutIntentRequirement.intentDigest,

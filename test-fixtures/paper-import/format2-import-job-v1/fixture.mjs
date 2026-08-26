@@ -268,9 +268,20 @@ function listeningEvidence(paperId, questionPdfSha256, answerPdfSha256) {
   return { questions, answers, transcript, inventory }
 }
 
-function visual({ observationId, owner, page, x, y, width, height, variant }) {
+function visual({
+  observationId,
+  stableIdentities,
+  owner,
+  page,
+  x,
+  y,
+  width,
+  height,
+  variant,
+}) {
   return {
     observationId,
+    ...(stableIdentities ? { stableIdentities } : {}),
     owner,
     source: {
       documentRole: 'question_pdf',
@@ -297,7 +308,7 @@ function visual({ observationId, owner, page, x, y, width, height, variant }) {
 function sourceMeasuredFigureLayout({
   questionId,
   optionOwners,
-  optionObservationIds,
+  optionSourceSpanIds,
   questionPdfSha256,
 }) {
   const sourcePage = 2
@@ -342,7 +353,7 @@ function sourceMeasuredFigureLayout({
       return {
         optionId: optionOwners[index].optionId,
         label,
-        sourceSpanId: `source-span:${optionObservationIds[index]}`,
+        sourceSpanId: optionSourceSpanIds[index],
         sourcePlacementMatrix: [
           imageWidth,
           0,
@@ -405,6 +416,15 @@ export function makeFormat2ImportJobFixture({
   const passageObservationId = 'observation:reading-a:passage-figure'
   const optionObservationIds = ['A', 'B', 'C', 'D'].map(
     (label) => `observation:reading-b:q2:${label.toLowerCase()}`,
+  )
+  const stableOptionIdentities = {
+    canonicalMediaId: 'media:accepted-reading-b-q24:A',
+    sourceSpanId: 'source-span:observation:accepted-reading-b-q24:A',
+  }
+  const optionSourceSpanIds = optionObservationIds.map(
+    (observationId, index) => index === 0
+      ? stableOptionIdentities.sourceSpanId
+      : `source-span:${observationId}`,
   )
   const transcription = {
     schemaVersion: 'format2-transcription-v1',
@@ -589,6 +609,9 @@ export function makeFormat2ImportJobFixture({
       }),
       ...optionOwners.map((owner, index) => visual({
         observationId: optionObservationIds[index],
+        ...(index === 0
+          ? { stableIdentities: stableOptionIdentities }
+          : {}),
         owner,
         page: 2,
         x: 60 + index * 125,
@@ -601,7 +624,7 @@ export function makeFormat2ImportJobFixture({
     sourceMeasuredFigureLayouts: [sourceMeasuredFigureLayout({
       questionId: optionQuestionId,
       optionOwners,
-      optionObservationIds,
+      optionSourceSpanIds,
       questionPdfSha256,
     })],
   }
@@ -711,5 +734,6 @@ export function makeFormat2ImportJobFixture({
     answerPdfBytes,
     passageObservationId,
     optionObservationIds,
+    stableOptionIdentities,
   }
 }

@@ -446,6 +446,21 @@
       ],
       "properties": {
         "observationId": { "$ref": "#/$defs/nonEmpty" },
+        "stableIdentities": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["canonicalMediaId", "sourceSpanId"],
+          "properties": {
+            "canonicalMediaId": {
+              "type": "string",
+              "pattern": "^media:[^\\s]+$"
+            },
+            "sourceSpanId": {
+              "type": "string",
+              "pattern": "^source-span:[^\\s]+$"
+            }
+          }
+        },
         "owner": { "$ref": "#/$defs/owner" },
         "source": { "$ref": "#/$defs/visualSource" },
         "targetSizePoints": { "$ref": "#/$defs/pointSize" },
