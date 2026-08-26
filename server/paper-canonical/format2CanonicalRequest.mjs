@@ -9,6 +9,7 @@ import {
   format2VisualSourceObservationId,
   format2VisualSourceSpanId,
 } from './format2VisualIdentity.mjs'
+import { inspectFormat2SourceFidelity } from './format2SourceFidelity.mjs'
 
 const encoder = new TextEncoder()
 
@@ -203,11 +204,19 @@ function readingVariant(group, answerByQuestion, selectedByObservation) {
   }
 }
 
-function sevenChoicesVariant(group, answerByQuestion) {
+function sevenChoicesVariant(group, answerByQuestion, sourceFidelity) {
   const bank = group.questions[0].options
-  const expected = JSON.stringify(bank.map(({ label, text: value }) => ({ label, text: value })))
+  const expected = JSON.stringify(bank.map(({ optionId, label, text: value }) => ({
+    ...(sourceFidelity.legacy ? {} : { optionId }),
+    label,
+    text: value,
+  })))
   if (group.questions.some((question) => (
-    JSON.stringify(question.options.map(({ label, text: value }) => ({ label, text: value }))) !== expected
+    JSON.stringify(question.options.map(({ optionId, label, text: value }) => ({
+      ...(sourceFidelity.legacy ? {} : { optionId }),
+      label,
+      text: value,
+    }))) !== expected
   ))) {
     throw format2CanonicalError(
       'FORMAT2_CANONICAL_SEVEN_CHOICES_BANK_INVALID',
@@ -220,7 +229,9 @@ function sevenChoicesVariant(group, answerByQuestion) {
       ownership: 'shared_bank',
       bankId: `bank:${group.groupId}`,
       options: bank.map((option) => ({
-        optionId: `option:${group.groupId}:${option.label}`,
+        optionId: sourceFidelity.legacy
+          ? `option:${group.groupId}:${option.label}`
+          : option.optionId,
         label: option.label,
         content: [text(`text:${group.groupId}:option:${option.label}`, option.text)],
       })),
@@ -229,7 +240,11 @@ function sevenChoicesVariant(group, answerByQuestion) {
       questionId: question.questionId,
       blankId: `blank:${question.questionId}`,
       answer: {
-        optionId: `option:${group.groupId}:${answerByQuestion.get(question.questionId).answer}`,
+        optionId: sourceFidelity.legacy
+          ? `option:${group.groupId}:${answerByQuestion.get(question.questionId).answer}`
+          : bank.find(
+              (option) => option.label === answerByQuestion.get(question.questionId).answer,
+            ).optionId,
         authorityAssertionRef: `answer:${question.questionId}`,
       },
     })),
@@ -473,6 +488,26 @@ export function buildConfirmedFormat2CanonicalRequest({
     )
   }
   const profile = authorityResolution.closure.profiles.get('nck1')
+  const sourceFidelityInspection = inspectFormat2SourceFidelity({
+    transcription,
+    questionDocument: {
+      sha256: sha256(questionPdfBytes),
+      originalName: transcription.provenance?.questionSource?.originalName
+        || 'paper.pdf',
+    },
+    answerDocument: {
+      sha256: sha256(answerPdfBytes),
+      originalName: 'answers.pdf',
+    },
+  })
+  if (!sourceFidelityInspection.ok) {
+    throw format2CanonicalError(
+      'FORMAT2_CANONICAL_SOURCE_FIDELITY_INVALID',
+      'Canonical compilation requires one closed Format 2 source-fidelity model',
+      sourceFidelityInspection.issues,
+    )
+  }
+  const sourceFidelity = sourceFidelityInspection.model
   const slots = slotsForProfile(profile)
   const activeSlots = slots.filter((slot) => slot.activation === 'canonical_group')
   const groupsBySlot = new Map(transcription.groups
@@ -544,13 +579,18 @@ export function buildConfirmedFormat2CanonicalRequest({
     }
     const observationId = `observation:format2-group:${group.groupId}`
     const sourceSpanId = `source-span:${observationId}`
-    observations.push({
-      observationId,
-      kind: 'fixture_section',
-      documentInputKey: 'original_question_source',
-      value: slot.slotId,
-      span: { start: 0, end: questionPdfBytes.byteLength },
-    })
+    if (
+      sourceFidelity.legacy
+      || !sourceFidelity.sourceSpanRefsByGroupId.has(group.groupId)
+    ) {
+      observations.push({
+        observationId,
+        kind: 'fixture_section',
+        documentInputKey: 'original_question_source',
+        value: slot.slotId,
+        span: { start: 0, end: questionPdfBytes.byteLength },
+      })
+    }
     const questionIds = group.questions.map((question) => question.questionId)
     const blankIds = ['seven-choices', 'cloze', 'grammar-fill'].includes(expectedFamily)
       ? questionIds.map((questionId) => `blank:${questionId}`)
@@ -561,10 +601,14 @@ export function buildConfirmedFormat2CanonicalRequest({
     if (expectedFamily === 'reading') {
       variant = readingVariant(group, answerByQuestion, selectedByObservation)
     } else if (expectedFamily === 'seven-choices') {
-      content = objectiveContent(group, expectedFamily)
-      variant = sevenChoicesVariant(group, answerByQuestion)
+      content = sourceFidelity.legacy
+        ? objectiveContent(group, expectedFamily)
+        : clone(sourceFidelity.objectiveGroupsById.get(group.groupId))
+      variant = sevenChoicesVariant(group, answerByQuestion, sourceFidelity)
     } else if (['cloze', 'grammar-fill'].includes(expectedFamily)) {
-      content = objectiveContent(group, expectedFamily)
+      content = sourceFidelity.legacy
+        ? objectiveContent(group, expectedFamily)
+        : clone(sourceFidelity.objectiveGroupsById.get(group.groupId))
       variant = ordinaryVariant(group, expectedFamily)
     } else {
       variant = writingVariant(group, expectedFamily)
@@ -577,7 +621,9 @@ export function buildConfirmedFormat2CanonicalRequest({
       const item = visualMedia(visual, selected.selection.artifact)
       if (!media.some((candidate) => candidate.mediaId === item.mediaId)) media.push(item)
     }
-    const sourceSpanRefsByTarget = {}
+    const sourceSpanRefsByTarget = sourceFidelity.legacy
+      ? {}
+      : clone(sourceFidelity.sourceSpanRefsByGroupId.get(group.groupId) || {})
     for (const visual of transcription.visuals.filter(
       (candidate) => candidate.owner.groupId === group.groupId,
     )) {
@@ -594,6 +640,14 @@ export function buildConfirmedFormat2CanonicalRequest({
         const promptProvision = question.promptProvision || {
           provision: 'source_proven_none',
         }
+        const promptSourceSpanId = sourceSpanRefsByTarget[
+          `prompt_provision:blank:${question.questionId}`
+        ]?.[0]
+        const promptSourceObservation = sourceFidelity.legacy
+          ? null
+          : sourceFidelity.sourceObservations.find(
+              (candidate) => `source-span:${candidate.observationId}` === promptSourceSpanId,
+            )
         observations.push({
           observationId: promptObservationId,
           kind: 'grammar_fill_prompt_provision',
@@ -605,7 +659,9 @@ export function buildConfirmedFormat2CanonicalRequest({
               ? { prompt: promptProvision.prompt }
               : {}),
           },
-          span: { start: 0, end: questionPdfBytes.byteLength },
+          span: promptSourceObservation
+            ? clone(promptSourceObservation.span)
+            : { start: 0, end: questionPdfBytes.byteLength },
         })
         sourceSpanRefsByTarget[`prompt_provision:blank:${question.questionId}`] = [
           `source-span:${promptObservationId}`,
@@ -676,7 +732,9 @@ export function buildConfirmedFormat2CanonicalRequest({
       family: expectedFamily,
       questionIds,
       blankIds,
-      sourceSpanId,
+      sourceSpanId: sourceFidelity.legacy
+        ? sourceSpanId
+        : Object.values(sourceSpanRefsByTarget)[0]?.[0] || sourceSpanId,
       content,
       media,
       variant,
@@ -700,6 +758,12 @@ export function buildConfirmedFormat2CanonicalRequest({
         sourceSpanId: `source-span:${answerObservationId}`,
       })
     }
+  }
+
+  if (!sourceFidelity.legacy) {
+    observations.push(...sourceFidelity.sourceObservations.map((observation) => (
+      clone(observation)
+    )))
   }
 
   for (const visual of transcription.visuals) {
@@ -828,6 +892,17 @@ export function buildConfirmedFormat2CanonicalRequest({
       'application/pdf',
       'answers.pdf',
     ),
+    ...(!sourceFidelity.legacy
+      ? [
+          sourceDocument(
+            sourceFidelity.provenanceDocument.inputKey,
+            sourceFidelity.provenanceDocument.roles,
+            sourceFidelity.provenanceDocument.bytes,
+            sourceFidelity.provenanceDocument.mediaType,
+            sourceFidelity.provenanceDocument.originalName,
+          ),
+        ]
+      : []),
     sourceDocument(
       'continuation_writing_instruction_evidence',
       ['structured_source', 'source_provenance'],
@@ -835,7 +910,15 @@ export function buildConfirmedFormat2CanonicalRequest({
       'application/vnd.eqb.profile-writing-source-evidence+json',
       'continuation-writing-instruction-evidence.json',
     ),
-    ...(listeningBlock
+    ...(!sourceFidelity.legacy && listeningBlock
+      ? sourceFidelity.supplementalDocuments.map((document) => sourceDocument(
+          document.inputKey,
+          document.roles,
+          document.bytes,
+          document.mediaType,
+          document.originalName,
+        ))
+      : listeningBlock
       ? [
           sourceDocument(
             'listening_questions',
@@ -866,7 +949,7 @@ export function buildConfirmedFormat2CanonicalRequest({
             'listening-inventory.json',
           ),
         ]
-      : []),
+        : []),
     ...confirmedSelection.confirmedSelections.map((selection) => sourceDocument(
       `visual_${selection.observationId}`,
       ['source_provenance'],
