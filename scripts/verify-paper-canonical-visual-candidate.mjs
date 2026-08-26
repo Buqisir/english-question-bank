@@ -10,12 +10,17 @@ import {
 const {
   confirmVisualImportCandidate,
   createVisualImportCandidate,
+  rebindExactVisualTeacherConfirmation,
 } = visualCandidateModule
 
 assert.deepEqual(
   Object.keys(visualCandidateModule).sort(),
-  ['confirmVisualImportCandidate', 'createVisualImportCandidate'],
-  'the backend-only visual candidate seam must expose only candidate creation and exact confirmation',
+  [
+    'confirmVisualImportCandidate',
+    'createVisualImportCandidate',
+    'rebindExactVisualTeacherConfirmation',
+  ],
+  'the backend-only visual candidate seam exposes creation, exact confirmation, and migration-only exact rebind',
 )
 
 function assertCode(operation, code, message) {
@@ -111,6 +116,91 @@ function confirmationFor(candidate, selections) {
       selectedCandidateDigest: candidateDigest,
     })),
   }
+}
+
+function refreshSourceCapture(sourceCapture) {
+  const body = withoutKey(withoutKey(sourceCapture, 'captureId'), 'digest')
+  const digest = digestJson(body)
+  return {
+    ...body,
+    captureId: `source-capture:${digest.slice('sha256:'.length, 28)}`,
+    digest,
+  }
+}
+
+function successorRequestWithJobOnlyEvidence(request) {
+  const successor = structuredClone(request)
+  const capture = successor.sourceCapture
+  const questionDocument = capture.documents[0]
+  const predecessorDocumentId = questionDocument.documentId
+  questionDocument.inputKey = 'successor_question_source'
+  questionDocument.originalName = 'successor-question.pdf'
+  questionDocument.documentId = `document:${digestJson({
+    digest: questionDocument.sha256,
+    roles: questionDocument.roles,
+    inputKey: questionDocument.inputKey,
+  }).slice('sha256:'.length, 28)}`
+  for (const observation of capture.observations) {
+    if (observation.documentId === predecessorDocumentId) {
+      observation.documentId = questionDocument.documentId
+    }
+  }
+  for (const span of capture.sourceSpans) {
+    if (span.documentId === predecessorDocumentId) {
+      span.documentId = questionDocument.documentId
+    }
+  }
+
+  const answerBytes = new TextEncoder().encode('%PDF-1.7\n% nonvisual Job answer evidence\n')
+  const answerDigest = sha256(answerBytes)
+  const answerInputKey = 'successor_answer_source'
+  const answerRoles = ['official_answer_source', 'source_provenance']
+  const answerArtifactId = `source-document:${digestJson({
+    sha256: answerDigest,
+  }).slice('sha256:'.length, 28)}`
+  capture.documents.push({
+    documentId: `document:${digestJson({
+      digest: answerDigest,
+      roles: answerRoles,
+      inputKey: answerInputKey,
+    }).slice('sha256:'.length, 28)}`,
+    inputKey: answerInputKey,
+    roles: answerRoles,
+    mediaType: 'application/pdf',
+    originalName: 'successor-answers.pdf',
+    byteLength: answerBytes.byteLength,
+    sha256: answerDigest,
+    immutableArtifactRef: {
+      artifactId: answerArtifactId,
+      relativePath: `source-evidence/${answerArtifactId.slice('source-document:'.length)}.bin`,
+      sha256: answerDigest,
+      byteLength: answerBytes.byteLength,
+    },
+    encodedBytes: Buffer.from(answerBytes).toString('base64'),
+  })
+  const layoutObservationId = 'observation:format2-source-layout:reading-d-1'
+  const layoutSourceSpanId = `source-span:${layoutObservationId}`
+  capture.observations.push({
+    observationId: layoutObservationId,
+    documentId: questionDocument.documentId,
+    kind: 'reading_option_figure_source_layout',
+    value: { intentDigest: `sha256:${'1'.repeat(64)}` },
+    order: capture.observations.length,
+    extraction: { adapterId: 'format2-source-layout-evidence', version: '1' },
+    sourceSpanId: layoutSourceSpanId,
+  })
+  capture.sourceSpans.push({
+    sourceSpanId: layoutSourceSpanId,
+    documentId: questionDocument.documentId,
+    documentDigest: questionDocument.sha256,
+    coordinate: {
+      kind: 'page_region',
+      page: 2,
+      region: { x: 0.1, y: 0.2, width: 0.8, height: 0.2 },
+    },
+  })
+  successor.sourceCapture = refreshSourceCapture(capture)
+  return successor
 }
 
 const fixture = makeVisualCandidateFixture()
@@ -234,6 +324,88 @@ assert.equal(Object.hasOwn(confirmed, 'transformationRecord'), false)
 assert.equal(Object.hasOwn(confirmed, 'correctOptionId'), false)
 assert.equal(JSON.stringify(confirmed).includes('reproducibility'), false)
 assert.equal(JSON.stringify(confirmed).includes('prompt'), false)
+
+const successor = createVisualImportCandidate(
+  successorRequestWithJobOnlyEvidence(fixture.request),
+)
+assert.notEqual(successor.packageDigest, candidate.packageDigest)
+const reboundConfirmation = rebindExactVisualTeacherConfirmation({
+  predecessorCandidatePackage: candidate,
+  predecessorTeacherConfirmation: exactConfirmation,
+  successorCandidatePackage: successor,
+})
+assert.equal(reboundConfirmation.schemaVersion, 'visual-teacher-confirmation-v1')
+assert.equal(reboundConfirmation.packageDigest, successor.packageDigest)
+assert.deepEqual(reboundConfirmation.decisions, exactConfirmation.decisions)
+assert.equal(
+  confirmVisualImportCandidate(successor, reboundConfirmation).status,
+  'confirmed',
+)
+
+const stalePredecessorConfirmation = structuredClone(exactConfirmation)
+stalePredecessorConfirmation.packageDigest = `sha256:${'0'.repeat(64)}`
+assertCode(
+  () => rebindExactVisualTeacherConfirmation({
+    predecessorCandidatePackage: candidate,
+    predecessorTeacherConfirmation: stalePredecessorConfirmation,
+    successorCandidatePackage: successor,
+  }),
+  'VISUAL_CONFIRMATION_PACKAGE_MISMATCH',
+  'rebind must first validate the complete predecessor Teacher Confirmation',
+)
+
+const changedOwnerRequest = structuredClone(fixture.request)
+changedOwnerRequest.observations[0].owner.optionId = 'option:reading.d.1.changed'
+for (const entry of changedOwnerRequest.candidates.filter(
+  (candidateEntry) => candidateEntry.observationId
+    === visualCandidateFixtureOracle.optionObservationId,
+)) {
+  entry.owner.optionId = 'option:reading.d.1.changed'
+}
+const changedOwnerSuccessor = createVisualImportCandidate(changedOwnerRequest)
+assertCode(
+  () => rebindExactVisualTeacherConfirmation({
+    predecessorCandidatePackage: candidate,
+    predecessorTeacherConfirmation: exactConfirmation,
+    successorCandidatePackage: changedOwnerSuccessor,
+  }),
+  'VISUAL_CONFIRMATION_REBIND_MISMATCH',
+  'reviewed visual owner mutation must fail exact confirmation rebind',
+)
+
+const changedLineageRequest = structuredClone(fixture.request)
+changedLineageRequest.sourceCapture.sourceSpans[0].coordinate.page += 1
+changedLineageRequest.sourceCapture = refreshSourceCapture(
+  changedLineageRequest.sourceCapture,
+)
+const changedLineageSuccessor = createVisualImportCandidate(
+  changedLineageRequest,
+)
+assertCode(
+  () => rebindExactVisualTeacherConfirmation({
+    predecessorCandidatePackage: candidate,
+    predecessorTeacherConfirmation: exactConfirmation,
+    successorCandidatePackage: changedLineageSuccessor,
+  }),
+  'VISUAL_CONFIRMATION_REBIND_MISMATCH',
+  'reviewed source document location mutation must fail exact confirmation rebind',
+)
+
+const changedCandidateRequest = structuredClone(fixture.request)
+changedCandidateRequest.candidates[1]
+  .sourceTruthChecklist[0].sourceTruth += ' changed'
+const changedCandidateSuccessor = createVisualImportCandidate(
+  changedCandidateRequest,
+)
+assertCode(
+  () => rebindExactVisualTeacherConfirmation({
+    predecessorCandidatePackage: candidate,
+    predecessorTeacherConfirmation: exactConfirmation,
+    successorCandidatePackage: changedCandidateSuccessor,
+  }),
+  'VISUAL_CONFIRMATION_REBIND_MISMATCH',
+  'reviewed candidate alternative mutation must fail exact confirmation rebind',
+)
 
 const allSourceCropConfirmation = confirmationFor(candidate, [
   {

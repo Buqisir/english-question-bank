@@ -4,6 +4,11 @@ import {
   slotsForProfile,
 } from '../../shared/paper-canonical/authority.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
+import {
+  format2VisualMediaId,
+  format2VisualSourceObservationId,
+  format2VisualSourceSpanId,
+} from './format2VisualIdentity.mjs'
 
 const encoder = new TextEncoder()
 
@@ -85,7 +90,7 @@ function stableArtifactId(artifact) {
 
 function visualMedia(visual, artifact) {
   return {
-    mediaId: `media:${visual.observationId}`,
+    mediaId: format2VisualMediaId(visual),
     mimeType: 'image/png',
     sha256: artifact.sha256,
     pixelWidth: artifact.pixelWidth,
@@ -185,7 +190,7 @@ function readingVariant(group, answerByQuestion, selectedByObservation) {
           return {
             optionId: option.optionId,
             label: option.label,
-            figure: { mediaId: `media:${selected.visual.observationId}` },
+            figure: { mediaId: format2VisualMediaId(selected.visual) },
           }
         }),
       })),
@@ -538,8 +543,8 @@ export function buildConfirmedFormat2CanonicalRequest({
     for (const visual of transcription.visuals.filter(
       (candidate) => candidate.owner.groupId === group.groupId,
     )) {
-      const spanId = `source-span:${visual.observationId}`
-      const mediaId = `media:${visual.observationId}`
+      const spanId = format2VisualSourceSpanId(visual)
+      const mediaId = format2VisualMediaId(visual)
       sourceSpanRefsByTarget[`media:${mediaId}`] = [spanId]
       if (visual.owner.kind === 'reading_option') {
         sourceSpanRefsByTarget[`option:${visual.owner.optionId}`] = [spanId]
@@ -630,7 +635,7 @@ export function buildConfirmedFormat2CanonicalRequest({
 
   for (const visual of transcription.visuals) {
     observations.push({
-      observationId: visual.observationId,
+      observationId: format2VisualSourceObservationId(visual),
       kind: 'source_figure',
       documentInputKey: 'original_question_source',
       value: {

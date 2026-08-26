@@ -37,6 +37,10 @@ import {
   createVisualImportCandidate,
 } from '../../paper-canonical/visualCandidate.mjs'
 import {
+  format2VisualMediaId,
+  format2VisualSourceSpanId,
+} from '../../paper-canonical/format2VisualIdentity.mjs'
+import {
   readingOptionFigureConsumerContractRefs,
 } from '../../../shared/paper-canonical/consumers.mjs'
 import { readingOptionFigureAuthorityRef } from '../../../shared/paper-canonical/authority.mjs'
@@ -138,7 +142,9 @@ function sourceMeasuredFigureLayoutIssues({
       return {
         optionId: option.optionId,
         label: option.label,
-        sourceSpanId: `source-span:${option.visualObservationId}`,
+        sourceSpanId: visual
+          ? format2VisualSourceSpanId(visual)
+          : `source-span:${option.visualObservationId}`,
         page: visual?.source?.page,
         pageSizePoints: visual?.source?.pageSizePoints,
         pointGeometry: visual?.source?.pointGeometry,
@@ -746,6 +752,8 @@ function validateTranscriptionSemantics(input, answerPdfBytes) {
 
   const observationIds = new Set()
   const ownerKeys = new Set()
+  const canonicalMediaIds = new Set()
+  const sourceSpanIds = new Set()
   const visualsByObservation = new Map()
   for (const [index, visual] of transcription.visuals.entries()) {
     const visualPath = `/visuals/${index}`
@@ -754,6 +762,24 @@ function validateTranscriptionSemantics(input, answerPdfBytes) {
     }
     observationIds.add(visual.observationId)
     visualsByObservation.set(visual.observationId, visual)
+    const canonicalMediaId = format2VisualMediaId(visual)
+    if (canonicalMediaIds.has(canonicalMediaId)) {
+      issues.push(semanticIssue(
+        'FORMAT2_VISUAL_MEDIA_IDENTITY_DUPLICATE',
+        `${visualPath}/stableIdentities/canonicalMediaId`,
+        'Canonical visual media identity must resolve exactly once',
+      ))
+    }
+    canonicalMediaIds.add(canonicalMediaId)
+    const sourceSpanId = format2VisualSourceSpanId(visual)
+    if (sourceSpanIds.has(sourceSpanId)) {
+      issues.push(semanticIssue(
+        'FORMAT2_VISUAL_SOURCE_SPAN_IDENTITY_DUPLICATE',
+        `${visualPath}/stableIdentities/sourceSpanId`,
+        'Visual source-span identity must resolve exactly once',
+      ))
+    }
+    sourceSpanIds.add(sourceSpanId)
     const ownerKey = stableStringify(visual.owner)
     if (ownerKeys.has(ownerKey)) {
       issues.push(semanticIssue('FORMAT2_VISUAL_OWNER_DUPLICATE', `${visualPath}/owner`, 'One semantic owner cannot receive multiple visual observations'))
@@ -869,7 +895,7 @@ function buildSourceCapture(documents, transcription) {
       adapterId: visual.source.extraction.extractor,
       version: visual.source.extraction.version,
     },
-    sourceSpanId: `source-span:${visual.observationId}`,
+    sourceSpanId: format2VisualSourceSpanId(visual),
   }))
   const sourceSpans = transcription.visuals.map((visual, index) => ({
     sourceSpanId: observations[index].sourceSpanId,
