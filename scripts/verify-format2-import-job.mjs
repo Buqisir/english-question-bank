@@ -3327,6 +3327,26 @@ assert.deepEqual(
   { papersById: {}, groupsById: {}, questionsById: {}, analysisSources: [] },
   'the scoped rich Adapter leaves the unchanged v1-v3/v46 path untouched',
 )
+const transcriptionV3LatestRefPath = path.join(
+  transcriptionV3.repositoryRoot,
+  'app/public/paper-assets',
+  transcriptionV3.fixture.input.paperId,
+  'latest/canonical-paper-publication-ref-v1.json',
+)
+const transcriptionV3LatestRefBytes = readFileSync(transcriptionV3LatestRefPath)
+writeFileSync(transcriptionV3LatestRefPath, Buffer.from('{'))
+assert.deepEqual(
+  createCanonicalActiveConsumerCompatibilityAdapter({
+    rootDir: path.join(transcriptionV3.repositoryRoot, 'app/public/paper-assets'),
+    openDatabase: ({ readOnly }) => new DatabaseSync(path.join(
+      transcriptionV3.repositoryRoot,
+      'data/question-bank.sqlite',
+    ), { readOnly }),
+  }).snapshot(),
+  { papersById: {}, groupsById: {}, questionsById: {}, analysisSources: [] },
+  'the scoped rich Adapter does not validate or own a non-v49 current publication ref',
+)
+writeFileSync(transcriptionV3LatestRefPath, transcriptionV3LatestRefBytes)
 assert.equal(Object.isFrozen(transcriptionV4CompatibilitySnapshot), true)
 assert.equal(
   transcriptionV4CompatibilitySnapshot.papersById[transcriptionV4.fixture.input.paperId]

@@ -699,8 +699,8 @@ export function createCanonicalActiveConsumerCompatibilityAdapter({
       const activeCacheKeys = new Set()
       for (const row of rows) {
         const versionDir = safeVersionDir(rootDir, row)
-        validateCurrentPublicationRef(rootDir, row)
         if (!isFormat2CompatibilityPublication(versionDir)) continue
+        validateCurrentPublicationRef(rootDir, row)
         const screen = runtime.load({ paperId: row.paper_id, consumerId: 'screen' })
         const printPdf = runtime.load({ paperId: row.paper_id, consumerId: 'print_pdf' })
         validateCurrentConsumption(row, screen, printPdf)
