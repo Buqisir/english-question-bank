@@ -2285,6 +2285,23 @@ export function validateExactTransformationRecords(records, capture, closure) {
       && (record.operation === 'structural_tokenization'
         ? structuralTokenizationProof
         : stableStringify(record.before) === stableStringify(observations[0].value) && stableStringify(record.after) === stableStringify(observations[0].value))
+    const sourcePrintedOrdinal = observations[0]?.value
+    const printedOrdinalMatch = /^(\d+)\.$/u.exec(record.before)
+    const profileNumberingNormalizationProof = (
+      proof.kind === 'source_identity'
+      && record.operation === 'representation_normalization'
+      && observations.length === 1
+      && observations[0]?.kind === 'source_printed_ordinal'
+      && sourcePrintedOrdinal?.interpretation === 'canonical_profile_sequence'
+      && record.target.identity === sourcePrintedOrdinal?.questionId
+      && record.target.path === 'numberingAssignments.canonicalNumber'
+      && printedOrdinalMatch
+      && Number(printedOrdinalMatch[1]) !== record.after
+      && Number.isInteger(record.after)
+      && record.after > 0
+      && record.before === sourcePrintedOrdinal?.printedOrdinal
+      && record.after === sourcePrintedOrdinal?.canonicalNumber
+    )
     const joinValue = expectedPreconditions && { sourceObservationIds: expectedPreconditions.sourceObservationIds, sourceValueDigests: expectedPreconditions.sourceValueDigests }
     const uniqueJoinProof = proof.kind === 'unique_observation_join' && observations.length === 2 && new Set(observationIds).size === 2 && stableStringify(record.before) === stableStringify(joinValue) && stableStringify(record.after) === stableStringify(joinValue) && isRecordValue(record.target) && exactKeys(record.target, ['identity', 'path']) && record.target.path === 'source_join' && record.target.identity === stableId('source-join', joinValue)
     const correctionEvidence = observations[0]?.value
@@ -2325,7 +2342,7 @@ export function validateExactTransformationRecords(records, capture, closure) {
         record.ruleVersion,
       )
     )
-    const exactProof = expectedPreconditions && stableStringify(record.preconditions) === stableStringify(expectedPreconditions) && stableStringify(record.inputSourceSpanIds) === stableStringify(expectedSpanIds) && (sourceIdentityProof || uniqueJoinProof || profileInstructionCorrectionProof || visibleTypographyProof)
+    const exactProof = expectedPreconditions && stableStringify(record.preconditions) === stableStringify(expectedPreconditions) && stableStringify(record.inputSourceSpanIds) === stableStringify(expectedSpanIds) && (sourceIdentityProof || profileNumberingNormalizationProof || uniqueJoinProof || profileInstructionCorrectionProof || visibleTypographyProof)
     if (recordIds.has(record.recordId) || !Number.isInteger(record.sequence) || record.sequence <= previousSequence || !Array.isArray(record.inputSourceSpanIds) || record.inputSourceSpanIds.length === 0 || record.inputSourceSpanIds.some((id) => !sourceSpanIds.has(id)) || record.outputDigest !== digestJson(record.after) || !exactProof) {
       diagnostics.push(diagnostic('TRANSFORMATION_CLOSURE_INVALID', 'needs_review', path, `Transformation ${record.recordId || '(unidentified)'} sequence, lineage, or output digest cannot be replayed`))
       continue

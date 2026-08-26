@@ -41,6 +41,9 @@ import {
   format2VisualSourceSpanId,
 } from '../../paper-canonical/format2VisualIdentity.mjs'
 import {
+  inspectFormat2SourceFidelity,
+} from '../../paper-canonical/format2SourceFidelity.mjs'
+import {
   readingOptionFigureConsumerContractRefs,
 } from '../../../shared/paper-canonical/consumers.mjs'
 import { readingOptionFigureAuthorityRef } from '../../../shared/paper-canonical/authority.mjs'
@@ -78,6 +81,10 @@ const transcriptionV2Schema = JSON.parse(readFileSync(
   path.join(rootDir, 'schemas/paper-import/format2-transcription-v2.schema.json'),
   'utf8',
 ))
+const transcriptionV3Schema = JSON.parse(readFileSync(
+  path.join(rootDir, 'schemas/paper-import/format2-transcription-v3.schema.json'),
+  'utf8',
+))
 const readingChoiceAnalysisSchema = JSON.parse(readFileSync(
   path.join(rootDir, 'schemas/paper-import/reading-choice-analysis-v1.schema.json'),
   'utf8',
@@ -91,11 +98,13 @@ const transcriptionAjv = new Ajv({
   strict: false,
 })
 transcriptionAjv.addSchema(transcriptionV1Schema)
+transcriptionAjv.addSchema(transcriptionV2Schema)
 transcriptionAjv.addSchema(readingChoiceAnalysisSchema)
 transcriptionAjv.addSchema(writingAnalysisSchema)
 const validateTranscriptionSchemas = new Map([
   ['format2-transcription-v1', transcriptionAjv.getSchema(transcriptionV1Schema.$id)],
-  ['format2-transcription-v2', transcriptionAjv.compile(transcriptionV2Schema)],
+  ['format2-transcription-v2', transcriptionAjv.getSchema(transcriptionV2Schema.$id)],
+  ['format2-transcription-v3', transcriptionAjv.compile(transcriptionV3Schema)],
 ])
 const analysisSidecarConfigs = new Map([
   ['reading-choice-analysis-v1', {
@@ -288,7 +297,39 @@ function validateOperationInput(input) {
   if (!PAPER_ID_PATTERN.test(input.paperId)) {
     fail('FORMAT2_JOB_PAPER_ID_UNSAFE', 'Format 2 Job paperId is unsafe')
   }
-  if (
+  const v3Provenance = input.transcription?.schemaVersion === 'format2-transcription-v3'
+  if (v3Provenance) {
+    if (
+      !exactKeys(input.provenance, [
+        'schemaVersion',
+        'paperName',
+        'sourceLabel',
+        'year',
+        'region',
+        'examCode',
+        'subject',
+        'sourceType',
+        'defaultTags',
+        'questionSource',
+      ])
+      || input.provenance.schemaVersion !== 'format2-provenance-v2'
+      || !nonEmptyString(input.provenance.paperName)
+      || !nonEmptyString(input.provenance.sourceLabel)
+      || !Number.isInteger(input.provenance.year)
+      || !nonEmptyString(input.provenance.region)
+      || !nonEmptyString(input.provenance.examCode)
+      || input.provenance.subject !== 'English'
+      || !nonEmptyString(input.provenance.sourceType)
+      || !Array.isArray(input.provenance.defaultTags)
+      || input.provenance.defaultTags.length === 0
+      || input.provenance.defaultTags.some((tag) => !nonEmptyString(tag))
+      || !exactKeys(input.provenance.questionSource, [
+        'documentRole', 'originalName', 'sha256',
+      ])
+    ) {
+      fail('FORMAT2_JOB_PROVENANCE_INVALID', 'Format 2 v3 Job provenance is incomplete or open')
+    }
+  } else if (
     !exactKeys(input.provenance, ['paperName', 'sourceLabel'])
     || !nonEmptyString(input.provenance.paperName)
     || !nonEmptyString(input.provenance.sourceLabel)
@@ -346,7 +387,13 @@ function readPdfSource(source, role) {
   return new Uint8Array(bytes)
 }
 
-function sourceDocument({ inputKey, roles, originalName, bytes }) {
+function sourceDocument({
+  inputKey,
+  roles,
+  originalName,
+  bytes,
+  mediaType = 'application/pdf',
+}) {
   const digest = sha256(bytes)
   const documentId = stableId('document', { digest, inputKey, roles })
   const artifactId = stableId('source-document', { sha256: digest })
@@ -354,7 +401,7 @@ function sourceDocument({ inputKey, roles, originalName, bytes }) {
     documentId,
     inputKey,
     roles,
-    mediaType: 'application/pdf',
+    mediaType,
     originalName,
     byteLength: bytes.byteLength,
     sha256: digest,
@@ -413,6 +460,14 @@ function analysisParagraphs(group) {
   return group.blocks.flatMap((block) => {
     if (block.kind === 'text') {
       return [{ id: block.blockId, text: block.text }]
+    }
+    if (block.kind === 'objective_paragraph') {
+      return [{
+        id: block.blockId,
+        text: block.inlines.flatMap((inline) => (
+          inline.kind === 'text' ? [inline.text] : []
+        )).join(''),
+      }]
     }
     if (block.kind === 'framed_columns') {
       return block.columns.flatMap((column) => [
@@ -630,7 +685,7 @@ function validateAnswerTranscriptionCheck(input, answerPdfBytes) {
   }
 }
 
-function validateTranscriptionSemantics(input, answerPdfBytes) {
+function validateTranscriptionSemantics(input, answerPdfBytes, documents) {
   const transcription = input.transcription
   const schemaDiagnostics = transcriptionSchemaDiagnostics(transcription)
   if (schemaDiagnostics.length > 0) {
@@ -815,7 +870,7 @@ function validateTranscriptionSemantics(input, answerPdfBytes) {
     }
   }
 
-  if (transcription.schemaVersion === 'format2-transcription-v2') {
+  if (transcription.schemaVersion !== 'format2-transcription-v1') {
     const listeningGroups = [...groups.values()].filter(
       (group) => group.groupType === 'listening',
     )
@@ -1139,6 +1194,19 @@ function validateTranscriptionSemantics(input, answerPdfBytes) {
     fail('FORMAT2_TRANSCRIPTION_INVALID', 'Format 2 transcription failed closed semantic validation', issues)
   }
   validateAnswerTranscriptionCheck(input, answerPdfBytes)
+  const sourceFidelity = inspectFormat2SourceFidelity({
+    transcription,
+    questionDocument: documents.questionDocument,
+    answerDocument: documents.answerDocument,
+  })
+  if (!sourceFidelity.ok) {
+    fail(
+      'FORMAT2_TRANSCRIPTION_INVALID',
+      'Format 2 transcription failed closed source-fidelity validation',
+      sourceFidelity.issues,
+    )
+  }
+  return sourceFidelity.model
 }
 
 function normalizedRegion(visual) {
@@ -1152,7 +1220,21 @@ function normalizedRegion(visual) {
   }
 }
 
-function buildSourceCapture(documents, transcription) {
+function buildSourceCapture(documents, transcription, sourceFidelity) {
+  const supplementalDocuments = sourceFidelity.legacy
+    ? []
+    : [
+        sourceFidelity.provenanceDocument,
+        ...sourceFidelity.supplementalDocuments,
+      ].map((document) => sourceDocument(document))
+  const capturedDocuments = [
+    documents.questionDocument,
+    documents.answerDocument,
+    ...supplementalDocuments,
+  ]
+  const capturedDocumentsByInputKey = new Map(capturedDocuments.map(
+    (document) => [document.inputKey, document],
+  ))
   const observations = transcription.visuals.map((visual, index) => ({
     observationId: visual.observationId,
     documentId: documents.questionDocument.documentId,
@@ -1239,9 +1321,41 @@ function buildSourceCapture(documents, transcription) {
       },
     })
   }
+  if (!sourceFidelity.legacy) {
+    for (const sourceObservation of sourceFidelity.sourceObservations) {
+      const document = capturedDocumentsByInputKey.get(
+        sourceObservation.documentInputKey,
+      )
+      const sourceSpanId = `source-span:${sourceObservation.observationId}`
+      observations.push({
+        observationId: sourceObservation.observationId,
+        documentId: document.documentId,
+        kind: sourceObservation.kind,
+        value: cloneJson(sourceObservation.value),
+        order: observations.length,
+        extraction: {
+          adapterId: 'format2-source-fidelity',
+          version: '3',
+        },
+        sourceSpanId,
+      })
+      sourceSpans.push({
+        sourceSpanId,
+        documentId: document.documentId,
+        documentDigest: document.sha256,
+        coordinate: sourceObservation.span.kind === 'page_region'
+          ? cloneJson(sourceObservation.span)
+          : {
+              kind: 'byte_range',
+              start: sourceObservation.span.start,
+              end: sourceObservation.span.end,
+            },
+      })
+    }
+  }
   const body = {
     schemaVersion: 'source-capture-v1',
-    documents: [documents.questionDocument, documents.answerDocument],
+    documents: capturedDocuments,
     observations,
     sourceSpans,
     assertions: [],
@@ -1254,7 +1368,7 @@ function buildSourceCapture(documents, transcription) {
   }
 }
 
-function visualCandidateRequest(transcription, sourceCapture) {
+function visualCandidateRequest(transcription, sourceCapture, sourceFidelity) {
   const observations = transcription.visuals.map((visual) => ({
     observationId: visual.observationId,
     owner: cloneJson(visual.owner),
@@ -1267,6 +1381,18 @@ function visualCandidateRequest(transcription, sourceCapture) {
       method: 'source_crop',
       artifact: cloneJson(visual.sourceCrop),
       sourceTruthChecklist: cloneJson(visual.sourceTruthChecklist),
+      ...(!sourceFidelity.legacy
+        && sourceFidelity.sourceCropReproducibilityByObservationId.has(
+          visual.observationId,
+        )
+        ? {
+            reproducibility: cloneJson(
+              sourceFidelity.sourceCropReproducibilityByObservationId.get(
+                visual.observationId,
+              ),
+            ),
+          }
+        : {}),
     },
     ...visual.alternatives.map((alternative) => ({
       observationId: visual.observationId,
@@ -1593,13 +1719,21 @@ function runStartOrContinue(input, repositoryRoot) {
     documents,
     repositoryRoot,
   })
-  validateTranscriptionSemantics(input, documents.answerBytes)
+  const sourceFidelity = validateTranscriptionSemantics(
+    input,
+    documents.answerBytes,
+    documents,
+  )
   claimWriter(jobRoot, input.state.writerId)
-  const sourceCapture = buildSourceCapture(documents, input.transcription)
+  const sourceCapture = buildSourceCapture(
+    documents,
+    input.transcription,
+    sourceFidelity,
+  )
   let candidatePackage
   try {
     candidatePackage = createVisualImportCandidate(
-      visualCandidateRequest(input.transcription, sourceCapture),
+      visualCandidateRequest(input.transcription, sourceCapture, sourceFidelity),
     )
   } catch (error) {
     fail(

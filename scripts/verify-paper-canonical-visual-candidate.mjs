@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
 
 import { digestJson, sha256, withoutKey } from '../shared/paper-canonical/stable.mjs'
 import * as visualCandidateModule from '../server/paper-canonical/visualCandidate.mjs'
@@ -155,7 +156,13 @@ function rebindSourceDocumentIdentity(capture, document, {
   return document
 }
 
-function sourceDocument({ inputKey, roles, originalName, bytes }) {
+function sourceDocument({
+  inputKey,
+  roles,
+  originalName,
+  bytes,
+  mediaType = 'application/pdf',
+}) {
   const digest = sha256(bytes)
   const artifactId = `source-document:${digestJson({
     sha256: digest,
@@ -168,7 +175,7 @@ function sourceDocument({ inputKey, roles, originalName, bytes }) {
     }).slice('sha256:'.length, 28)}`,
     inputKey,
     roles,
-    mediaType: 'application/pdf',
+    mediaType,
     originalName,
     byteLength: bytes.byteLength,
     sha256: digest,
@@ -712,6 +719,143 @@ assertCode(
   () => createVisualImportCandidate(candidateWithAnswerAuthority),
   'VISUAL_CANDIDATE_SHAPE_INVALID',
   'visual candidate records must reject answer-bearing extra fields',
+)
+
+const q33OracleRoot =
+  'scripts/import-pipeline/papers/paper-mock-sz-2026-m1/visual-candidates/q33'
+const q33Predecessor = JSON.parse(readFileSync(
+  `${q33OracleRoot}/visual-import-candidate-v1.json`,
+  'utf8',
+))
+const q33Confirmation = JSON.parse(readFileSync(
+  `${q33OracleRoot}/visual-teacher-confirmation-v1.json`,
+  'utf8',
+))
+assert.equal(
+  q33Predecessor.packageDigest,
+  'sha256:53d29f20c9bd6ad1b1c0138e030f679ebfad2cf945c7e85eb3bd5ed89881d7b8',
+  'the shared seam test uses the exact accepted Q33 Candidate oracle',
+)
+const q33SuccessorRequest = {
+  sourceCapture: structuredClone(q33Predecessor.sourceCapture),
+  observations: q33Predecessor.observations.map((observation) => ({
+    observationId: observation.observationId,
+    owner: structuredClone(observation.owner),
+    sourceCrop: structuredClone(observation.sourceCrop),
+  })),
+  candidates: q33Predecessor.candidates.map(
+    (candidateEntry) => withoutKey(candidateEntry, 'candidateDigest'),
+  ),
+}
+const q33QuestionDocument = q33SuccessorRequest.sourceCapture.documents.find(
+  (document) => document.inputKey === 'q33_question_pdf',
+)
+const q33ProvenanceBytes = new TextEncoder().encode(JSON.stringify({
+  schemaVersion: 'format2-provenance-v2',
+  sourceLabel: 'Accepted Q33 predecessor oracle',
+}))
+const q33ProvenanceDocument = sourceDocument({
+  inputKey: 'format2_paper_provenance',
+  roles: ['source_provenance'],
+  originalName: 'format2-paper-provenance.json',
+  mediaType: 'application/vnd.eqb.format2-paper-provenance+json',
+  bytes: q33ProvenanceBytes,
+})
+q33SuccessorRequest.sourceCapture.documents.push(q33ProvenanceDocument)
+for (const [kind, observationId, document, coordinate, value] of [
+  [
+    'format2_source_region',
+    'observation:format2-source-region:source-region:q33',
+    q33QuestionDocument,
+    {
+      kind: 'page_region',
+      page: 4,
+      region: { x: 0.08, y: 0.2, width: 0.84, height: 0.2 },
+    },
+    { sourceRegionId: 'source-region:q33', documentRole: 'question_pdf' },
+  ],
+  [
+    'source_printed_ordinal',
+    'observation:format2-source-numbering:q-mock-sz-2026-m1-033',
+    q33QuestionDocument,
+    {
+      kind: 'page_region',
+      page: 4,
+      region: { x: 0.08, y: 0.15, width: 0.12, height: 0.05 },
+    },
+    {
+      questionId: 'q-mock-sz-2026-m1-033',
+      slotId: 'reading.d',
+      printedOrdinal: '33.',
+      canonicalNumber: 33,
+      interpretation: 'canonical_profile_sequence',
+    },
+  ],
+  [
+    'format2_paper_provenance',
+    'observation:format2-paper-provenance',
+    q33ProvenanceDocument,
+    { kind: 'byte_range', start: 0, end: q33ProvenanceBytes.byteLength },
+    { paperId: 'paper-mock-sz-2026-m1', schemaVersion: 'format2-provenance-v2' },
+  ],
+]) {
+  const sourceSpanId = `source-span:${observationId}`
+  q33SuccessorRequest.sourceCapture.observations.push({
+    observationId,
+    documentId: document.documentId,
+    kind,
+    value,
+    order: q33SuccessorRequest.sourceCapture.observations.length,
+    extraction: { adapterId: 'format2-source-fidelity', version: '3' },
+    sourceSpanId,
+  })
+  q33SuccessorRequest.sourceCapture.sourceSpans.push({
+    sourceSpanId,
+    documentId: document.documentId,
+    documentDigest: document.sha256,
+    coordinate,
+  })
+}
+q33SuccessorRequest.sourceCapture = refreshSourceCapture(
+  q33SuccessorRequest.sourceCapture,
+)
+const q33Successor = createVisualImportCandidate(q33SuccessorRequest)
+assert.deepEqual(
+  q33Successor.candidates,
+  q33Predecessor.candidates,
+  'generic v3 data reaches every accepted Q33 Candidate body exactly',
+)
+const q33Rebound = rebindExactVisualTeacherConfirmation({
+  predecessorCandidatePackage: q33Predecessor,
+  predecessorTeacherConfirmation: q33Confirmation,
+  successorCandidatePackage: q33Successor,
+})
+assert.equal(q33Rebound.packageDigest, q33Successor.packageDigest)
+assert.equal(
+  confirmVisualImportCandidate(q33Successor, q33Rebound).status,
+  'confirmed',
+  'the accepted Q33 confirmation reaches the generic successor package through exact rebind',
+)
+const q33MissingReproducibilityRequest = structuredClone(q33SuccessorRequest)
+delete q33MissingReproducibilityRequest.candidates.find(
+  (entry) => entry.method === 'source_crop',
+).reproducibility
+const q33MissingReproducibility = createVisualImportCandidate(
+  q33MissingReproducibilityRequest,
+)
+assert.notEqual(
+  q33MissingReproducibility.packageDigest,
+  q33Successor.packageDigest,
+  'removing source-crop reproducibility changes the sealed Candidate identity',
+)
+assertCode(
+  () => rebindExactVisualTeacherConfirmation({
+    predecessorCandidatePackage: q33Predecessor,
+    predecessorTeacherConfirmation: q33Confirmation,
+    successorCandidatePackage: q33MissingReproducibility,
+  }),
+  'VISUAL_CONFIRMATION_REBIND_MISMATCH',
+  'removing accepted Q33 source-crop reproducibility invalidates exact rebind',
 )
 
 console.log('PASS visual candidate exact-byte Teacher Confirmation contract')

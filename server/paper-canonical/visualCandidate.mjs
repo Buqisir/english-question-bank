@@ -50,6 +50,12 @@ const reproducibilityKeys = new Set([
   'model',
   'exportSettings',
 ])
+const successorOnlyNonVisualObservationKinds = new Set([
+  'reading_option_figure_source_layout',
+  'format2_source_region',
+  'source_printed_ordinal',
+  'format2_paper_provenance',
+])
 
 function visualCandidateError(code, message) {
   const error = new Error(message)
@@ -601,7 +607,10 @@ function validateSuccessorOnlyNonVisualEvidence(predecessor, successor) {
       )
       && (
         document.mediaType?.startsWith('image/')
-        || document.roles?.some((role) => sourceAuthorityRoles.has(role))
+        || (
+          document.mediaType === 'application/pdf'
+          && document.roles?.some((role) => sourceAuthorityRoles.has(role))
+        )
       )
     ),
   )
@@ -618,7 +627,7 @@ function validateSuccessorOnlyNonVisualEvidence(predecessor, successor) {
         (candidate) => sameValue(candidate, observation),
       )
       return !retained
-        && observation.kind !== 'reading_option_figure_source_layout'
+        && !successorOnlyNonVisualObservationKinds.has(observation.kind)
     },
   )
   if (unsupported) {

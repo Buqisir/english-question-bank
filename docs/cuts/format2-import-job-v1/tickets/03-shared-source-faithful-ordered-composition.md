@@ -1,6 +1,6 @@
 # 03 — Shared source-faithful ordered composition
 
-Status: ready
+Status: implemented
 Blocked by: 02C — Generic transcription completeness (implemented)
 
 ## What to build
@@ -57,17 +57,17 @@ Shenzhen, `paper-2026-i`, or Jining transcription data.
 
 ## Acceptance criteria
 
-- [ ] Exact `source_crop.reproducibility` data passes unchanged through the generic Job into the existing Candidate body, and mutation or removal changes the bound digest and invalidates exact prior-confirmation rebind.
-- [ ] A shared regression proves the accepted Q33 predecessor Candidate bodies/package digest can be reached through data and the existing exact rebind without a Q33 or paperId branch.
-- [ ] Seven Choices, Cloze, and Grammar Fill preserve source paragraph boundaries and interleaved blank order from validated references; missing, duplicate, cross-group, cross-question, or unknown ownership fails closed.
-- [ ] Each admitted content unit and explicit source transformation retains exact source-document, source-span, page-region, and provenance identity required by the real-parity ledger; no group-wide whole-PDF span substitutes for a more precise supplied fact.
-- [ ] Listening question, answer, and transcript structured documents retain their exact admitted bytes and digests through Candidate, Canonical source evidence, publication, and reload; mutation fails before publication.
-- [ ] Stable publication identities follow the approved boundary above, all compiler-owned identifiers are deterministic and internally closed, and the semantic digest is freshly derived from the resulting semantics.
-- [ ] Existing v1/v2 fixtures remain valid when the new fields are absent, while supplied successor fields are fully validated and digest-bound.
-- [ ] Focused public Format 2 Job, Visual Candidate/rebind, Canonical source-evidence, ordered-content, Listening identity, schema/syntax, and `git diff --check` checks pass. No paper-specific parity run, renderer check, full suite, or independent review belongs to this ticket.
+- [x] Exact `source_crop.reproducibility` data passes unchanged through the generic Job into the existing Candidate body, and mutation or removal changes the bound digest and invalidates exact prior-confirmation rebind.
+- [x] A shared regression proves the accepted Q33 predecessor Candidate bodies/package digest can be reached through data and the existing exact rebind without a Q33 or paperId branch.
+- [x] Seven Choices, Cloze, and Grammar Fill preserve source paragraph boundaries and interleaved blank order from validated references; missing, duplicate, cross-group, cross-question, or unknown ownership fails closed.
+- [x] Each admitted content unit and explicit source transformation retains exact source-document, source-span, page-region, and provenance identity required by the real-parity ledger; no group-wide whole-PDF span substitutes for a more precise supplied fact.
+- [x] Listening question, answer, and transcript structured documents retain their exact admitted bytes and digests through Candidate, Canonical source evidence, publication, and reload; mutation fails before publication.
+- [x] Stable publication identities follow the approved boundary above, all compiler-owned identifiers are deterministic and internally closed, and the semantic digest is freshly derived from the resulting semantics.
+- [x] Existing v1/v2 fixtures remain valid when the new fields are absent, while supplied successor fields are fully validated and digest-bound.
+- [x] Focused public Format 2 Job, Visual Candidate/rebind, Canonical source-evidence, ordered-content, Listening identity, schema/syntax, and `git diff --check` checks pass. No paper-specific parity run, renderer check, full suite, or independent review belongs to this ticket.
 
 ## Result
 
-Commit:
-Verify:
-Notes:
+Commit: This implementation commit; the exact HEAD is recorded in the completion handoff.
+Verify: public Format 2 Job, Visual Candidate/exact rebind, Canonical publication, Reading Option Figure, Cloze/Grammar and Application/Continuation Writing publication, schema/syntax, and diff checks passed
+Notes: exact ordinal transformations use the registered normalization contract; v3 Writing evidence uses validated page regions; compiler-owned v3 child identities are deterministic and source-address-independent; v1/v2 behavior remains on the legacy path; no consumer, renderer, authority, publication-protocol, paper-data, retirement, or production change
