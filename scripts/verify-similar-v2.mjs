@@ -583,6 +583,72 @@ flushAssets()
 
 const facetIndex = createTeachingFacetIndex({ paperAssetsDir })
 const store = createSimilarQuestionsStore({ getTeachingFacetIndex: facetIndex.getIndex, paperAssetsDir })
+const canonicalGroupId = 'group-canonical-reading-seed'
+const canonicalQuestionId = 'question-canonical-reading-seed-1'
+const canonicalSnapshot = {
+  papersById: { 'paper-canonical-reading-seed': { paperId: 'paper-canonical-reading-seed' } },
+  groupsById: {
+    [canonicalGroupId]: {
+      paperId: 'paper-canonical-reading-seed',
+      groupId: canonicalGroupId,
+      groupType: 'reading',
+      questionIds: [canonicalQuestionId],
+      card: {
+        title: 'Canonical Reading Seed',
+        paperName: 'Canonical Reading Seed',
+        year: 2025,
+        region: 'Canonical Region',
+        sourceType: 'real_exam',
+      },
+      detail: { sourceDetail: { id: 'canonical-source' } },
+    },
+  },
+  questionsById: {
+    [canonicalQuestionId]: {
+      paperId: 'paper-canonical-reading-seed',
+      groupId: canonicalGroupId,
+      groupType: 'reading',
+      detail: { id: canonicalQuestionId },
+    },
+  },
+  analysisSources: [{
+    paperId: 'paper-canonical-reading-seed',
+    schemaVersion: CONFIG_BY_GROUP_TYPE.reading.schemaVersion,
+    groupType: 'reading',
+    entryMapKey: 'questions',
+    groupIds: [canonicalGroupId],
+    entryIdsByGroupId: { [canonicalGroupId]: [canonicalQuestionId] },
+    questionIdByEntryId: { [canonicalQuestionId]: canonicalQuestionId },
+    analysis: {
+      schemaVersion: CONFIG_BY_GROUP_TYPE.reading.schemaVersion,
+      paperId: 'paper-canonical-reading-seed',
+      questions: {
+        [canonicalQuestionId]: { skill: { primary: 'inference' } },
+      },
+    },
+  }],
+}
+const emptyCanonicalSnapshot = {
+  papersById: {},
+  groupsById: {},
+  questionsById: {},
+  analysisSources: [],
+}
+let currentCanonicalSnapshot = emptyCanonicalSnapshot
+let canonicalSnapshotReads = 0
+const getCanonicalCompatibilitySnapshot = () => {
+  canonicalSnapshotReads += 1
+  return currentCanonicalSnapshot
+}
+const canonicalFacetIndex = createTeachingFacetIndex({
+  paperAssetsDir,
+  getCanonicalCompatibilitySnapshot,
+})
+const canonicalStore = createSimilarQuestionsStore({
+  getTeachingFacetIndex: canonicalFacetIndex.getIndex,
+  paperAssetsDir,
+  getCanonicalCompatibilitySnapshot,
+})
 
 function reasonKinds(result) {
   return result.reasons.map((r) => r.kind)
@@ -593,6 +659,47 @@ function reasonLabels(result) {
 function findResult(response, groupId) {
   return response.results.find((r) => r.groupId === groupId)
 }
+
+let prePublicationSimilarError = null
+try {
+  canonicalStore.findSimilar(db, {
+    seeds: [{ questionId: canonicalQuestionId }],
+  })
+} catch (error) {
+  prePublicationSimilarError = error
+}
+assert(
+  'pre-publication similar query does not retain an invented Canonical seed',
+  prePublicationSimilarError instanceof SimilarQuestionsError
+    && prePublicationSimilarError.message.includes('未找到题目'),
+  prePublicationSimilarError?.message || '',
+)
+currentCanonicalSnapshot = canonicalSnapshot
+const canonicalSnapshotReadsBeforePublicationQuery = canonicalSnapshotReads
+const canonicalQuestionResult = canonicalStore.findSimilar(db, {
+  seeds: [{ questionId: canonicalQuestionId }],
+})
+assert(
+  'Canonical-only question seed participates through the one compatibility snapshot',
+  canonicalQuestionResult.seedProfile.groupType === 'reading'
+    && canonicalQuestionResult.results.some((result) => result.groupId === 'group-sq-reading-cand-hit'),
+  JSON.stringify(canonicalQuestionResult),
+)
+assert(
+  'similar obtains one exact current compatibility snapshot per operation after publication',
+  canonicalSnapshotReads === canonicalSnapshotReadsBeforePublicationQuery + 1,
+  `reads=${canonicalSnapshotReads - canonicalSnapshotReadsBeforePublicationQuery}`,
+)
+const canonicalPassageResult = canonicalStore.findSimilarPassages(db, {
+  groupId: canonicalGroupId,
+})
+assert(
+  'Canonical-only passage seed keeps the existing honest empty state without topic labels',
+  canonicalPassageResult.results.length === 0
+    && canonicalPassageResult.poolStats.totalInPool === 0
+    && canonicalPassageResult.notice?.includes('暂无话题标签'),
+  JSON.stringify(canonicalPassageResult),
+)
 
 // ═══ §1: /api/similar-passages ═══════════════════════════════════════════
 console.log('=== §1 /api/similar-passages ===')

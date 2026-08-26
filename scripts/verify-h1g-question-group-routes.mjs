@@ -134,6 +134,16 @@ for (const errorText of ['Question group not found', 'Question not found', 'é¢˜å
 
 assert('api imports question-group routes module', api.includes("from './question-bank/questionGroupRoutes.mjs'"))
 assert('api registers question-group routes in serverRoutes', api.includes('...createQuestionGroupRoutes(),'))
+assert(
+  'api constructs exactly one Canonical active-consumer compatibility Adapter',
+  api.includes('createCanonicalActiveConsumerCompatibilityAdapter({')
+    && api.match(/createCanonicalActiveConsumerCompatibilityAdapter\(\{/g)?.length === 1,
+)
+assert(
+  'Canonical-only detail branches through the immutable compatibility snapshot before DB-only joins',
+  api.indexOf('getCanonicalCompatibilitySnapshot().groupsById[id]?.detail')
+    < api.indexOf('const db = openDatabase()', api.indexOf('export function getQuestionGroupDetail')),
+)
 
 for (const contextName of [
   'bindTopicLabelsToQuestionGroup',
@@ -178,6 +188,44 @@ assert('createQuestionGroupRoutes returns eighteen routes', routes.length === 18
 
 const listResponse = await dispatch(routes, 'GET', '/api/question-groups', makeContext())
 assert('GET /api/question-groups returns questionGroups array', listResponse.statusCode === 200 && listResponse.body.includes('group-1'))
+
+const canonicalReadContext = makeContext({
+  listQuestionGroups: () => [{
+    id: 'group-canonical-only',
+    canAddToDraftPaper: false,
+    difficulty: '',
+    topicLabels: [],
+  }],
+  getQuestionGroupDetail: () => ({
+    id: 'group-canonical-only',
+    questions: [{ id: 'question-canonical-only', answer: 'B' }],
+  }),
+})
+const canonicalListResponse = await dispatch(
+  routes,
+  'GET',
+  '/api/question-groups',
+  canonicalReadContext,
+)
+assert(
+  'GET listing preserves a Canonical-only non-addable card without invented difficulty/topics',
+  canonicalListResponse.statusCode === 200
+    && canonicalListResponse.body.includes('group-canonical-only')
+    && canonicalListResponse.body.includes('"difficulty":""')
+    && canonicalListResponse.body.includes('"topicLabels":[]'),
+)
+const canonicalDetailResponse = await dispatch(
+  routes,
+  'GET',
+  '/api/question-groups/group-canonical-only',
+  canonicalReadContext,
+)
+assert(
+  'GET detail returns the Canonical-only whole-group read model',
+  canonicalDetailResponse.statusCode === 200
+    && canonicalDetailResponse.body.includes('question-canonical-only')
+    && canonicalDetailResponse.body.includes('"answer":"B"'),
+)
 
 const createResponseResult = await dispatch(routes, 'POST', '/api/question-groups', makeContext(), { title: 'New group' })
 assert('POST /api/question-groups returns 201', createResponseResult.statusCode === 201 && createResponseResult.body.includes('group-created'))

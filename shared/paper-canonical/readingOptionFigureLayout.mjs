@@ -1,8 +1,10 @@
 import {
+  format2RichConsumerContractRefs,
   readingOptionFigureConsumerContractRefs,
   readingOptionFigureSourceLayoutExtension,
 } from './consumers.mjs'
 import {
+  format2RichCandidateAuthorityRef,
   readingOptionFigureAuthorityRef,
   readingOptionFigureRenderingAuthorityRef,
   readingOptionFigureSourceLayoutSchemaAuthorityRef,
@@ -418,14 +420,22 @@ export function translateReadingOptionFigureLayout({
   consumption,
   question,
 }) {
-  const expectedConsumer = readingOptionFigureConsumerContractRefs[consumerId]
+  const readingConsumer = readingOptionFigureConsumerContractRefs[consumerId]
+  const format2Consumer = format2RichConsumerContractRefs[consumerId]
+  const compatibleReadingAuthority = sameRef(
+    consumption?.authorityRef,
+    readingOptionFigureAuthorityRef,
+  ) && sameConsumerRef(consumption?.consumerContractRef, readingConsumer)
+  const compatibleFormat2Authority = sameRef(
+    consumption?.authorityRef,
+    format2RichCandidateAuthorityRef,
+  ) && sameConsumerRef(consumption?.consumerContractRef, format2Consumer)
   if (
-    !expectedConsumer
-    || !sameRef(consumption?.authorityRef, readingOptionFigureAuthorityRef)
-    || !sameConsumerRef(consumption?.consumerContractRef, expectedConsumer)
+    !readingConsumer
+    || (!compatibleReadingAuthority && !compatibleFormat2Authority)
     || !sameConsumerRef(
       readingOptionFigureLayout.compatibleConsumerContracts[consumerId],
-      expectedConsumer,
+      readingConsumer,
     )
   ) rejected('Reading Option Figure consumption is incompatible with layout v1')
   validateQuestion(question, consumerId)

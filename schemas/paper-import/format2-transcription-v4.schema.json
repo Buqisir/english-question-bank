@@ -1,0 +1,346 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "format2-transcription-v4.schema.json",
+  "title": "Format 2 rich source-faithful transcription v4",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "paperId",
+    "format",
+    "provenance",
+    "sourceBindings",
+    "sourceRegions",
+    "answerTranscriptionCheck",
+    "listeningSource",
+    "analysisSidecars",
+    "groups",
+    "officialAnswers",
+    "visuals"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "format2-transcription-v4" },
+    "paperId": { "$ref": "format2-transcription-v1.schema.json#/$defs/paperId" },
+    "format": { "const": "format2-pdf-pair-v1" },
+    "provenance": { "$ref": "format2-transcription-v3.schema.json#/$defs/provenance" },
+    "sourceBindings": { "$ref": "format2-transcription-v3.schema.json#/$defs/sourceBindings" },
+    "sourceRegions": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "format2-transcription-v3.schema.json#/$defs/sourceRegion" }
+    },
+    "answerTranscriptionCheck": {
+      "oneOf": [
+        { "$ref": "format2-transcription-v1.schema.json#/$defs/answerTextCheck" },
+        { "$ref": "format2-transcription-v1.schema.json#/$defs/answerImageCheck" }
+      ]
+    },
+    "listeningSource": { "$ref": "format2-transcription-v2.schema.json#/$defs/listeningSource" },
+    "analysisSidecars": {
+      "type": "array",
+      "items": { "$ref": "format2-transcription-v2.schema.json#/$defs/analysisSidecar" }
+    },
+    "groups": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/group" }
+    },
+    "officialAnswers": {
+      "type": "array",
+      "items": { "$ref": "format2-transcription-v1.schema.json#/$defs/officialAnswer" }
+    },
+    "visuals": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "format2-transcription-v3.schema.json#/$defs/visual" }
+    },
+    "sourceMeasuredFigureLayouts": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "format2-transcription-v1.schema.json#/$defs/sourceMeasuredFigureLayout" }
+    }
+  },
+  "$defs": {
+    "sourceRegionRefs": {
+      "$ref": "format2-transcription-v3.schema.json#/$defs/sourceRegionRefs"
+    },
+    "sourceParagraphInline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contentId", "text", "sourceRegionRefs"],
+      "properties": {
+        "contentId": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+        "text": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+        "sourceRegionRefs": { "$ref": "#/$defs/sourceRegionRefs" }
+      }
+    },
+    "sourceParagraph": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["blockId", "kind", "inlines", "sourceRegionRefs"],
+      "properties": {
+        "blockId": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+        "kind": { "const": "source_paragraph" },
+        "inlines": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/sourceParagraphInline" }
+        },
+        "sourceRegionRefs": { "$ref": "#/$defs/sourceRegionRefs" }
+      }
+    },
+    "sourceTable": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["blockId", "kind", "rows", "sourceRegionRefs"],
+      "properties": {
+        "blockId": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+        "kind": { "const": "source_table" },
+        "rows": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string" }
+          }
+        },
+        "sourceRegionRefs": { "$ref": "#/$defs/sourceRegionRefs" }
+      }
+    },
+    "framedColumnsBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["blockId", "kind", "columns", "sourceRegionRefs"],
+      "properties": {
+        "blockId": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+        "kind": { "const": "framed_columns" },
+        "columns": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["columnId", "blocks"],
+            "properties": {
+              "columnId": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+              "columnHeadingBlockRef": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+              "blocks": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "oneOf": [
+                    { "$ref": "#/$defs/sourceParagraph" },
+                    { "$ref": "#/$defs/sourceTable" }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "sourceRegionRefs": { "$ref": "#/$defs/sourceRegionRefs" }
+      }
+    },
+    "captionProvision": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["provision", "text", "sourceRegionRefs"],
+          "properties": {
+            "provision": { "const": "source_caption" },
+            "text": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+            "sourceRegionRefs": { "$ref": "#/$defs/sourceRegionRefs" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["provision", "sourceRegionRefs"],
+          "properties": {
+            "provision": { "const": "source_proven_none" },
+            "sourceRegionRefs": { "$ref": "#/$defs/sourceRegionRefs" }
+          }
+        }
+      ]
+    },
+    "visualPlaceholderBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "blockId",
+        "kind",
+        "visualObservationId",
+        "captionProvision",
+        "sourceRegionRefs"
+      ],
+      "properties": {
+        "blockId": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+        "kind": { "const": "visual_placeholder" },
+        "visualObservationId": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+        "captionProvision": { "$ref": "#/$defs/captionProvision" },
+        "sourceRegionRefs": { "$ref": "#/$defs/sourceRegionRefs" }
+      }
+    },
+    "sourceContentRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["blockId", "contentIds"],
+      "properties": {
+        "blockId": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+        "contentIds": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" }
+        }
+      }
+    },
+    "applicationEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "writerRole",
+        "audienceOrDestination",
+        "deliverable",
+        "communicativePurpose",
+        "contentRequirements",
+        "wordCountSource",
+        "answerRegionAbsent",
+        "sourceRegionRefs"
+      ],
+      "properties": {
+        "writerRole": { "$ref": "#/$defs/sourceContentRef" },
+        "audienceOrDestination": { "$ref": "#/$defs/sourceContentRef" },
+        "deliverable": { "$ref": "#/$defs/sourceContentRef" },
+        "communicativePurpose": { "$ref": "#/$defs/sourceContentRef" },
+        "contentRequirements": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/sourceContentRef" }
+        },
+        "wordCountSource": { "$ref": "#/$defs/sourceContentRef" },
+        "answerRegionAbsent": { "type": "boolean" },
+        "sourceRegionRefs": { "$ref": "#/$defs/sourceRegionRefs" }
+      }
+    },
+    "continuationStarter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["starterId", "block", "sourceRegionRefs"],
+      "properties": {
+        "starterId": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+        "block": { "$ref": "#/$defs/sourceParagraph" },
+        "sourceRegionRefs": { "$ref": "#/$defs/sourceRegionRefs" }
+      }
+    },
+    "applicationWritingBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "blockId",
+        "kind",
+        "taskType",
+        "promptBlocks",
+        "applicationEvidence",
+        "applicationGiven",
+        "wordCountTarget",
+        "wordCountScope",
+        "sourceRegionRefs"
+      ],
+      "properties": {
+        "blockId": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+        "kind": { "const": "writing_material" },
+        "taskType": { "const": "application" },
+        "promptBlocks": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/sourceParagraph" }
+        },
+        "applicationEvidence": { "$ref": "#/$defs/applicationEvidence" },
+        "applicationGiven": { "$ref": "format2-transcription-v3.schema.json#/$defs/applicationGiven" },
+        "wordCountTarget": { "type": "integer", "minimum": 1 },
+        "wordCountScope": { "const": "student_authored_only" },
+        "sourceRegionRefs": { "$ref": "#/$defs/sourceRegionRefs" }
+      }
+    },
+    "continuationWritingBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "blockId",
+        "kind",
+        "taskType",
+        "materialBlocks",
+        "continuationStarters",
+        "wordCountSource",
+        "wordCountTarget",
+        "wordCountScope",
+        "sourceInstruction",
+        "sourceRegionRefs"
+      ],
+      "properties": {
+        "blockId": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+        "kind": { "const": "writing_material" },
+        "taskType": { "const": "continuation" },
+        "materialBlocks": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/sourceParagraph" }
+        },
+        "continuationStarters": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": { "$ref": "#/$defs/continuationStarter" }
+        },
+        "wordCountSource": { "$ref": "#/$defs/sourceContentRef" },
+        "wordCountTarget": { "const": 150 },
+        "wordCountScope": { "const": "student_authored_only" },
+        "sourceInstruction": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+        "sourceRegionRefs": { "$ref": "#/$defs/sourceRegionRefs" }
+      }
+    },
+    "block": {
+      "oneOf": [
+        { "$ref": "format2-transcription-v3.schema.json#/$defs/textBlock" },
+        { "$ref": "format2-transcription-v3.schema.json#/$defs/tableBlock" },
+        { "$ref": "#/$defs/framedColumnsBlock" },
+        { "$ref": "#/$defs/visualPlaceholderBlock" },
+        { "$ref": "format2-transcription-v3.schema.json#/$defs/objectiveParagraph" },
+        { "$ref": "format2-transcription-v3.schema.json#/$defs/listeningBlock" },
+        { "$ref": "#/$defs/applicationWritingBlock" },
+        { "$ref": "#/$defs/continuationWritingBlock" }
+      ]
+    },
+    "group": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["groupId", "slotId", "groupType", "blocks", "questions"],
+      "properties": {
+        "groupId": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+        "slotId": { "$ref": "format2-transcription-v1.schema.json#/$defs/group/properties/slotId" },
+        "groupType": { "$ref": "format2-transcription-v1.schema.json#/$defs/group/properties/groupType" },
+        "sourceRegionRefs": { "$ref": "#/$defs/sourceRegionRefs" },
+        "blocks": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/block" }
+        },
+        "questions": {
+          "type": "array",
+          "items": { "$ref": "format2-transcription-v3.schema.json#/$defs/question" }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "groupType": { "not": { "const": "listening" } } },
+            "required": ["groupType"]
+          },
+          "then": { "required": ["sourceRegionRefs"] }
+        }
+      ]
+    }
+  }
+}

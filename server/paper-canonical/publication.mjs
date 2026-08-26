@@ -12,6 +12,7 @@ import path from 'node:path'
 
 import {
   canonicalAuthorityRef,
+  format2RichCandidateAuthorityRef,
   resolveCanonicalAuthority,
   validateJsonSchema,
 } from '../../shared/paper-canonical/authority.mjs'
@@ -35,11 +36,13 @@ import {
   isLiveConfirmedDocxPairAdmission,
 } from './docxPairCanonicalRequest.mjs'
 import {
+  admitLiveConfirmedFormat2RichImport,
   admitLiveConfirmedReadingOptionFigureImport,
   isLiveConfirmedReadingOptionFigureAdmission,
 } from './readingOptionFigureCanonicalRequest.mjs'
 import {
   consumerContractRefs,
+  format2RichConsumerContractRefs,
   readingOptionFigureConsumerContractRefs,
   resolveConsumerContract,
 } from '../../shared/paper-canonical/consumers.mjs'
@@ -63,6 +66,7 @@ const publicationFileName =
   `canonical-paper-publication-v${canonicalAuthorityRef.manifestVersion}.json`
 const publicationFileNames = [
   publicationFileName,
+  'canonical-paper-publication-v49.json',
   'canonical-paper-publication-v46.json',
   'canonical-paper-publication-v45.json',
   'canonical-paper-publication-v44.json',
@@ -108,6 +112,20 @@ const publicationFileNames = [
 const latestRefFileName = 'canonical-paper-publication-ref-v1.json'
 const journalFileName = '.canonical-latest-swap-v1.json'
 const immutablePublicationSources = new WeakMap()
+
+function isFormat2RichAuthorityRef(authorityRef) {
+  return authorityRef?.manifestId === format2RichCandidateAuthorityRef.manifestId
+    && authorityRef?.manifestVersion === format2RichCandidateAuthorityRef.manifestVersion
+    && authorityRef?.manifestDigest === format2RichCandidateAuthorityRef.manifestDigest
+}
+
+function consumerContractsForAuthority(authorityRef) {
+  return isFormat2RichAuthorityRef(authorityRef)
+    ? format2RichConsumerContractRefs
+    : authorityRef?.manifestVersion === '46'
+      ? readingOptionFigureConsumerContractRefs
+      : consumerContractRefs
+}
 const artifactPathBase = {
   source_capture: 'canonical/source-capture-v1.json',
   paper_plan: 'canonical/canonical-paper-plan-v1.json',
@@ -1104,6 +1122,12 @@ export function loadCanonicalOnlyConsumers({
   const effectiveConsumerContracts = consumerContracts || (
     store.readVersionArtifact(
       ref,
+      'canonical/canonical-paper-publication-v49.json',
+    )
+      ? format2RichConsumerContractRefs
+      :
+    store.readVersionArtifact(
+      ref,
       'canonical/canonical-paper-publication-v46.json',
     )
       ? readingOptionFigureConsumerContractRefs
@@ -1196,7 +1220,10 @@ export function admitCanonicalPaperImport({
       effectiveSourceAsset = registered.sourceAsset
       registeredConfirmationProof = registered.proof
     } else if (visualConfirmation !== undefined) {
-      const admitted = admitLiveConfirmedReadingOptionFigureImport({
+      const admit = isFormat2RichAuthorityRef(request?.authority)
+        ? admitLiveConfirmedFormat2RichImport
+        : admitLiveConfirmedReadingOptionFigureImport
+      const admitted = admit({
         request,
         candidatePackage: visualConfirmation.candidatePackage,
         teacherConfirmation: visualConfirmation.teacherConfirmation,
@@ -1265,10 +1292,9 @@ export function admitCanonicalPaperImport({
     const consumers = loadCanonicalOnlyConsumers({
       ref,
       store: candidateStore(sealed, ref),
-      consumerContracts:
-        compilation.artifacts.canonicalPaper.paperPlan.authorityRef.manifestVersion === '46'
-          ? readingOptionFigureConsumerContractRefs
-          : consumerContractRefs,
+      consumerContracts: consumerContractsForAuthority(
+        compilation.artifacts.canonicalPaper.paperPlan.authorityRef,
+      ),
     })
     return {
       ok: true,
@@ -1335,9 +1361,7 @@ export function publishCanonicalPaperPublication({
     const consumers = loadCanonicalOnlyConsumers({
       ref,
       store: createFileSystemCanonicalPublicationStore({ rootDir, db }),
-      consumerContracts: sealed.manifest.authority.manifestVersion === '46'
-        ? readingOptionFigureConsumerContractRefs
-        : consumerContractRefs,
+      consumerContracts: consumerContractsForAuthority(sealed.manifest.authority),
     })
     verifyPublicationSidecars(
       path.join(paths.versionsDir, existing.version_name),
@@ -1395,9 +1419,7 @@ export function publishCanonicalPaperPublication({
       validateCommitted: () => loadCanonicalOnlyConsumers({
         ref: target,
         store: createFileSystemCanonicalPublicationStore({ rootDir, db }),
-        consumerContracts: sealed.manifest.authority.manifestVersion === '46'
-          ? readingOptionFigureConsumerContractRefs
-          : consumerContractRefs,
+        consumerContracts: consumerContractsForAuthority(sealed.manifest.authority),
       }),
     })
     return {
@@ -1486,10 +1508,10 @@ export function rollbackCanonicalPaperPublication({
   }
 }
 
-export function createFileSystemCanonicalPublicationStore({ rootDir, db }) {
+export function createFileSystemCanonicalPublicationStore({ rootDir, db, ensureShape = true }) {
   return {
     readPublishedRefs(paperId, versionName = null) {
-      ensureCanonicalPublicationDatabaseShape(db)
+      if (ensureShape) ensureCanonicalPublicationDatabaseShape(db)
       const paths = paperPaths(rootDir, paperId)
       const current = currentDbRef(db, paperId, versionName)
       const latest = versionName ? current : readLatestRef(paths)

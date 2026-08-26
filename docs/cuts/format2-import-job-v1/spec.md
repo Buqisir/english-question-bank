@@ -9,8 +9,8 @@ source-faithful visual-import capability
 
 The Owner accepted the complete blocker set and task-graph replan recorded in
 [`research/real-parity-frontier-2026-08-26.md`](research/real-parity-frontier-2026-08-26.md).
-Tickets 01, 02, 02A, 02B, and 02C are implemented. Ticket 03 is the current
-ready frontier; it owns shared source fidelity and ordered composition. The
+Tickets 01, 02, 02A, 02B, 02C, 03, and 04 are implemented. Ticket 04 closed
+the shared rich whole-paper and active-consumer compatibility seam. The
 remaining graph is intentionally serial at the shared seam and then fans into
 the two real-paper parity proofs:
 
@@ -18,13 +18,16 @@ Ticket 03 is the sole owner of B08 shared schema/adapter implementation.
 Tickets 05–08 only verify the applied identity boundary; they do not own or
 reimplement it.
 
-- Ticket 04 is blocked by Ticket 03 and owns shared rich whole-paper shapes and
-  active-consumer compatibility.
-- Ticket 05 replays Shenzhen Q33 and retires its materializer after parity; it
-  is blocked by Ticket 04.
+- Ticket 04 implemented shared rich whole-paper shapes and active-consumer
+  compatibility. On 2026-08-26 the Owner approved one narrow Format 2 rich
+  Candidate authority successor after the executable v46 closure rejected the
+  accepted modern Continuation shape. Format 2 Job alone binds that exact
+  digest-bound ref; global/current authority, historical authorities/assets,
+  renderer/CSS, and paper data remain unchanged.
+- Ticket 05 is ready to replay Shenzhen Q33 and retire its materializer only
+  after parity.
 - Ticket 06 replays `paper-2026-i` and retires its registry entry after parity;
-  it is blocked by Ticket 04 and the normal direct Owner visual-confirmation
-  stop required by B09.
+  it retains the normal direct Owner visual-confirmation stop required by B09.
 - Ticket 07 imports Jining to exact Teacher Confirmation and is blocked by both
   parity Tickets 05 and 06.
 - Ticket 08 resumes the exact Owner-confirmed Jining Job, proves rendered QA,
@@ -424,6 +427,11 @@ per-paper 数据与 source evidence，不新增共享代码、CSS、renderer aut
 - Building this shared Import Job is an import/persistence orchestration change.
   Its implementation receives affected public-seam checks, the final full
   repository gate, and one independent Standards/Spec review.
+- Ticket 04's scoped shared authority successor is implemented with focused
+  iteration checks. Its merger gate must additionally run
+  `pnpm -C app verify:paper`, one final `pnpm -C app verify:all`, and one
+  independent Standards/Spec review; Ticket 04 does not claim those downstream
+  gates from its focused implementation run.
 - After the shared module is accepted, a same-shape Format② paper is a data
   addition: deterministic input validation, exact Candidate/Confirmation,
   atomic publish/reload, one real paper canary, and Owner QA are sufficient.

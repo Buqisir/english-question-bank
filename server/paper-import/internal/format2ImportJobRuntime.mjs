@@ -41,12 +41,13 @@ import {
   format2VisualSourceSpanId,
 } from '../../paper-canonical/format2VisualIdentity.mjs'
 import {
+  format2CandidateAuthorityRefForTranscription,
   inspectFormat2SourceFidelity,
 } from '../../paper-canonical/format2SourceFidelity.mjs'
 import {
+  format2RichConsumerContractRefs,
   readingOptionFigureConsumerContractRefs,
 } from '../../../shared/paper-canonical/consumers.mjs'
-import { readingOptionFigureAuthorityRef } from '../../../shared/paper-canonical/authority.mjs'
 import {
   validateReadingOptionFigureSourceLayoutEvidence,
 } from '../../../shared/paper-canonical/readingOptionFigureLayout.mjs'
@@ -85,6 +86,10 @@ const transcriptionV3Schema = JSON.parse(readFileSync(
   path.join(rootDir, 'schemas/paper-import/format2-transcription-v3.schema.json'),
   'utf8',
 ))
+const transcriptionV4Schema = JSON.parse(readFileSync(
+  path.join(rootDir, 'schemas/paper-import/format2-transcription-v4.schema.json'),
+  'utf8',
+))
 const readingChoiceAnalysisSchema = JSON.parse(readFileSync(
   path.join(rootDir, 'schemas/paper-import/reading-choice-analysis-v1.schema.json'),
   'utf8',
@@ -99,12 +104,14 @@ const transcriptionAjv = new Ajv({
 })
 transcriptionAjv.addSchema(transcriptionV1Schema)
 transcriptionAjv.addSchema(transcriptionV2Schema)
+transcriptionAjv.addSchema(transcriptionV3Schema)
 transcriptionAjv.addSchema(readingChoiceAnalysisSchema)
 transcriptionAjv.addSchema(writingAnalysisSchema)
 const validateTranscriptionSchemas = new Map([
   ['format2-transcription-v1', transcriptionAjv.getSchema(transcriptionV1Schema.$id)],
   ['format2-transcription-v2', transcriptionAjv.getSchema(transcriptionV2Schema.$id)],
-  ['format2-transcription-v3', transcriptionAjv.compile(transcriptionV3Schema)],
+  ['format2-transcription-v3', transcriptionAjv.getSchema(transcriptionV3Schema.$id)],
+  ['format2-transcription-v4', transcriptionAjv.compile(transcriptionV4Schema)],
 ])
 const analysisSidecarConfigs = new Map([
   ['reading-choice-analysis-v1', {
@@ -152,6 +159,12 @@ function fail(code, message, diagnostics) {
 
 function nonEmptyString(value) {
   return typeof value === 'string' && value.trim().length > 0
+}
+
+function format2ConsumerContractRefsForTranscription(transcription) {
+  return transcription?.schemaVersion === 'format2-transcription-v4'
+    ? format2RichConsumerContractRefs
+    : readingOptionFigureConsumerContractRefs
 }
 
 function sameValue(left, right) {
@@ -297,8 +310,11 @@ function validateOperationInput(input) {
   if (!PAPER_ID_PATTERN.test(input.paperId)) {
     fail('FORMAT2_JOB_PAPER_ID_UNSAFE', 'Format 2 Job paperId is unsafe')
   }
-  const v3Provenance = input.transcription?.schemaVersion === 'format2-transcription-v3'
-  if (v3Provenance) {
+  const sourceFaithfulProvenance = [
+    'format2-transcription-v3',
+    'format2-transcription-v4',
+  ].includes(input.transcription?.schemaVersion)
+  if (sourceFaithfulProvenance) {
     if (
       !exactKeys(input.provenance, [
         'schemaVersion',
@@ -327,7 +343,7 @@ function validateOperationInput(input) {
         'documentRole', 'originalName', 'sha256',
       ])
     ) {
-      fail('FORMAT2_JOB_PROVENANCE_INVALID', 'Format 2 v3 Job provenance is incomplete or open')
+      fail('FORMAT2_JOB_PROVENANCE_INVALID', 'Format 2 source-faithful Job provenance is incomplete or open')
     }
   } else if (
     !exactKeys(input.provenance, ['paperName', 'sourceLabel'])
@@ -474,10 +490,25 @@ function analysisParagraphs(group) {
         ...(column.heading
           ? [{ id: `${column.columnId}:heading`, text: column.heading }]
           : []),
-        ...column.paragraphs.map((textValue, index) => ({
+        ...(column.paragraphs || []).map((textValue, index) => ({
           id: `${column.columnId}:paragraph:${index + 1}`,
           text: textValue,
         })),
+        ...(column.blocks || []).flatMap((child) => {
+          if (child.kind === 'source_paragraph') {
+            return [{
+              id: child.blockId,
+              text: child.inlines.map((inline) => inline.text).join(''),
+            }]
+          }
+          if (child.kind === 'source_table') {
+            return child.rows.map((row, index) => ({
+              id: `${child.blockId}:row:${index + 1}`,
+              text: row.join('\t'),
+            }))
+          }
+          return []
+        }),
       ])
     }
     if (block.kind === 'table') {
@@ -786,7 +817,11 @@ function validateTranscriptionSemantics(input, answerPdfBytes, documents) {
         && (
           writingBlocks[0]?.continuationStarters?.length !== 2
           || typeof writingBlocks[0]?.sourceInstruction !== 'string'
-          || writingBlocks[0]?.wordCountScope !== 'unspecified'
+          || writingBlocks[0]?.wordCountScope !== (
+            transcription.schemaVersion === 'format2-transcription-v4'
+              ? 'student_authored_only'
+              : 'unspecified'
+          )
           || writingBlocks[0]?.applicationEvidence !== undefined
         ))
     ) {
@@ -1629,6 +1664,9 @@ function persistRun({
   result,
   comparisonBytes,
 }) {
+  const authorityRef = format2CandidateAuthorityRefForTranscription(
+    input.transcription,
+  )
   mkdirSync(runDir, { recursive: true })
   for (const document of sourceCapture.documents) {
     const bytes = Buffer.from(document.encodedBytes, 'base64')
@@ -1661,7 +1699,7 @@ function persistRun({
       questionPdfSha256: documents.questionDocument.sha256,
       answerPdfSha256: documents.answerDocument.sha256,
       transcriptionDigest: digestJson(input.transcription),
-      authorityDigest: digestJson(readingOptionFigureAuthorityRef),
+      authorityDigest: digestJson(authorityRef),
       answerTranscriptionCheckDigest: digestJson(input.transcription.answerTranscriptionCheck),
     },
     contractVersions: {
@@ -1724,6 +1762,9 @@ function runStartOrContinue(input, repositoryRoot) {
     documents.answerBytes,
     documents,
   )
+  const authorityRef = format2CandidateAuthorityRefForTranscription(
+    input.transcription,
+  )
   claimWriter(jobRoot, input.state.writerId)
   const sourceCapture = buildSourceCapture(
     documents,
@@ -1751,7 +1792,7 @@ function runStartOrContinue(input, repositoryRoot) {
     transcriptionDigest: digestJson(input.transcription),
     sourceCaptureDigest: sourceCapture.digest,
     candidatePackageDigest: candidatePackage.packageDigest,
-    authorityDigest: digestJson(readingOptionFigureAuthorityRef),
+    authorityDigest: digestJson(authorityRef),
   }
   const jobId = stableId('format2-job', inputIdentity)
   const currentPath = path.join(jobRoot, 'current.json')
@@ -1846,6 +1887,24 @@ function retainedCandidatePackage(paperDir, receipt) {
   return candidatePackage
 }
 
+function retainedTranscription(paperDir, receipt) {
+  const transcription = readJson(
+    resolveDurableArtifact(
+      paperDir,
+      receipt.result.artifacts?.transcription?.relativePath,
+      'Format 2 transcription',
+    ),
+    'Format 2 transcription',
+  )
+  if (digestJson(transcription) !== receipt.result.artifacts?.transcription?.digest) {
+    fail(
+      'FORMAT2_JOB_DURABLE_STATE_INVALID',
+      'Retained Format 2 transcription digest does not match the durable Job',
+    )
+  }
+  return transcription
+}
+
 function invalidateCompletedConfirmation({ paperDir, jobRoot, receipt, candidatePackage }) {
   const artifacts = {}
   for (const key of ['sourceCapture', 'transcription', 'candidatePackage', 'comparison']) {
@@ -1915,7 +1974,10 @@ function loadResumeEvidence(repositoryRoot, input) {
       'Resume identity differs from the exact current durable Job',
     )
   }
-  if (receipt.inputDigests?.authorityDigest !== digestJson(readingOptionFigureAuthorityRef)) {
+  const authorityRef = format2CandidateAuthorityRefForTranscription(
+    retainedTranscription(paperDir, receipt),
+  )
+  if (receipt.inputDigests?.authorityDigest !== digestJson(authorityRef)) {
     fail(
       'FORMAT2_JOB_AUTHORITY_STALE',
       'The durable Job authority differs from the current closed compiler authority',
@@ -2005,7 +2067,9 @@ function loadResumeEvidence(repositoryRoot, input) {
     sha256(questionPdfBytes) !== receipt.inputDigests.questionPdfSha256
     || sha256(answerPdfBytes) !== receipt.inputDigests.answerPdfSha256
     || digestJson(transcription) !== receipt.inputDigests.transcriptionDigest
-    || receipt.inputDigests.authorityDigest !== digestJson(readingOptionFigureAuthorityRef)
+    || receipt.inputDigests.authorityDigest !== digestJson(
+      format2CandidateAuthorityRefForTranscription(transcription),
+    )
   ) {
     fail(
       'FORMAT2_JOB_DURABLE_STATE_INVALID',
@@ -2485,6 +2549,9 @@ function verifyCompletedAwaitingQa(repositoryRoot, paperDir, jobRoot, receipt) {
   }
   const db = new DatabaseSync(publicationDbPath)
   try {
+    const consumerContracts = format2ConsumerContractRefsForTranscription(
+      retainedTranscription(paperDir, receipt),
+    )
     const store = createFileSystemCanonicalPublicationStore({
       rootDir: path.join(repositoryRoot, 'app/public/paper-assets'),
       db,
@@ -2492,12 +2559,12 @@ function verifyCompletedAwaitingQa(repositoryRoot, paperDir, jobRoot, receipt) {
     const screen = loadPaperForConsumptionSync({
       paperId: committed.paperId,
       version: committed.versionName,
-      consumerContract: readingOptionFigureConsumerContractRefs.screen,
+      consumerContract: consumerContracts.screen,
     }, store)
     const printPdf = loadPaperForConsumptionSync({
       paperId: committed.paperId,
       version: committed.versionName,
-      consumerContract: readingOptionFigureConsumerContractRefs.print_pdf,
+      consumerContract: consumerContracts.print_pdf,
     }, store)
     const currentRef = store.readPublishedRefs(committed.paperId).current
     if (
@@ -2713,15 +2780,18 @@ function runResume(
       rootDir: publicationRoot,
       db,
     })
+    const consumerContracts = format2ConsumerContractRefsForTranscription(
+      evidence.transcription,
+    )
     const screen = loadPaperForConsumptionSync({
       paperId: input.paperId,
       version: published.versionName,
-      consumerContract: readingOptionFigureConsumerContractRefs.screen,
+      consumerContract: consumerContracts.screen,
     }, store)
     const printPdf = loadPaperForConsumptionSync({
       paperId: input.paperId,
       version: published.versionName,
-      consumerContract: readingOptionFigureConsumerContractRefs.print_pdf,
+      consumerContract: consumerContracts.print_pdf,
     }, store)
     const currentRef = store.readPublishedRefs(input.paperId).current
     if (

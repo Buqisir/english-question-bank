@@ -9,6 +9,7 @@ import {
   validateJsonSchema,
 } from './authority.mjs'
 import {
+  format2RichConsumerContractRefs,
   readingOptionFigureConsumerContractRefs,
   readingOptionFigureSourceLayoutExtension,
 } from './consumers.mjs'
@@ -57,7 +58,11 @@ function projectFigureLayoutIntentRequirement(input, question) {
   const requirement = question?.figureLayoutIntentRequirement
   if (requirement == null) return null
   const matchesVersionedConsumer = Object.values(
-    readingOptionFigureConsumerContractRefs,
+    {
+      ...readingOptionFigureConsumerContractRefs,
+      format2Screen: format2RichConsumerContractRefs.screen,
+      format2PrintPdf: format2RichConsumerContractRefs.print_pdf,
+    },
   ).some((ref) => sameConsumerRef(input.consumption?.consumerContractRef, ref))
   const renderingAuthority = resolveCanonicalAuthority(
     readingOptionFigureSourceLayoutSchemaAuthorityRef,
@@ -386,6 +391,9 @@ function projectReadingConsumerGroup(input, occurrence) {
       const includeCorrectOptionId = sameConsumerRef(
         input.consumption?.consumerContractRef,
         readingOptionFigureConsumerContractRefs.print_pdf,
+      ) || sameConsumerRef(
+        input.consumption?.consumerContractRef,
+        format2RichConsumerContractRefs.print_pdf,
       )
       const options = question.options.map((option) => ({
         optionId: option.optionId,
