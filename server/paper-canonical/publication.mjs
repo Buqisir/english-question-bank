@@ -260,7 +260,9 @@ function validatePublicationLineage({ sourceCapture, plan, groups, normalization
   const closesInactiveSource = Number(
     authorityClosure.authorityRef.manifestVersion,
   ) >= 11
+  const profile = authorityClosure.profiles.get(plan.profileRef?.profileId)
   const requiresInactiveSourceClosure = closesInactiveSource
+    && profile?.completeness?.requireInactiveSourceClosure !== false
     && !isRegisteredConfirmedCanonicalPublicationAuthority(
       authorityClosure.authorityRef,
     )
@@ -291,7 +293,6 @@ function validatePublicationLineage({ sourceCapture, plan, groups, normalization
     ? normalizationReport.inactiveSourceClosures || []
     : []
   if (requiresInactiveSourceClosure) {
-    const profile = authorityClosure.profiles.get(plan.profileRef?.profileId)
     const inactiveSlots = profile
       ? profile.parts.flatMap((part) =>
           part.sections.flatMap((section) =>
@@ -659,6 +660,71 @@ function writeBytes(filePath, bytes) {
 
 function writeJson(filePath, value) {
   writeBytes(filePath, stableBytes(value))
+}
+
+function normalizePublicationSidecars(sidecars) {
+  if (sidecars === undefined) return []
+  if (!Array.isArray(sidecars)) {
+    throw publicationError(
+      'CANONICAL_PUBLICATION_SIDECAR_INVALID',
+      'Publication sidecars must be one closed array',
+    )
+  }
+  const paths = new Set()
+  return sidecars.map((sidecar) => {
+    if (
+      !sidecar
+      || typeof sidecar !== 'object'
+      || Array.isArray(sidecar)
+      || Object.keys(sidecar).sort().join(',') !== 'bytes,relativePath'
+      || typeof sidecar.relativePath !== 'string'
+      || !/^analyses\/[a-z0-9]+(?:-[a-z0-9]+)*\.json$/u.test(sidecar.relativePath)
+      || paths.has(sidecar.relativePath)
+      || !(sidecar.bytes instanceof Uint8Array)
+      || sidecar.bytes.byteLength === 0
+    ) {
+      throw publicationError(
+        'CANONICAL_PUBLICATION_SIDECAR_INVALID',
+        'Publication sidecars require unique analyses/*.json paths and exact bytes',
+      )
+    }
+    const parsed = readJsonBytes(sidecar.bytes, sidecar.relativePath)
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+      throw publicationError(
+        'CANONICAL_PUBLICATION_SIDECAR_INVALID',
+        'Publication sidecars must contain one JSON object',
+      )
+    }
+    paths.add(sidecar.relativePath)
+    return {
+      relativePath: sidecar.relativePath,
+      bytes: new Uint8Array(sidecar.bytes),
+      byteLength: sidecar.bytes.byteLength,
+      sha256: sha256(sidecar.bytes),
+    }
+  }).sort((left, right) => left.relativePath.localeCompare(right.relativePath))
+}
+
+function verifyPublicationSidecars(versionDir, sidecars) {
+  for (const sidecar of sidecars) {
+    const filePath = path.join(versionDir, sidecar.relativePath)
+    if (!existsSync(filePath)) {
+      throw publicationError(
+        'CANONICAL_PUBLICATION_SIDECAR_INVALID',
+        `Publication sidecar ${sidecar.relativePath} is missing`,
+      )
+    }
+    const bytes = readFileSync(filePath)
+    if (
+      bytes.byteLength !== sidecar.byteLength
+      || sha256(bytes) !== sidecar.sha256
+    ) {
+      throw publicationError(
+        'CANONICAL_PUBLICATION_SIDECAR_INVALID',
+        `Publication sidecar ${sidecar.relativePath} differs from its admitted bytes`,
+      )
+    }
+  }
 }
 
 function readLatestRef(paths) {
@@ -1225,8 +1291,10 @@ export function publishCanonicalPaperPublication({
   sourceAsset,
   registeredConfirmation,
   visualConfirmation,
+  sidecars,
   failurePoint = null,
 }) {
+  const normalizedSidecars = normalizePublicationSidecars(sidecars)
   const admission = admitCanonicalPaperImport({
     request,
     sourceAssetVersion,
@@ -1271,12 +1339,23 @@ export function publishCanonicalPaperPublication({
         ? readingOptionFigureConsumerContractRefs
         : consumerContractRefs,
     })
+    verifyPublicationSidecars(
+      path.join(paths.versionsDir, existing.version_name),
+      normalizedSidecars,
+    )
     return {
       status: 'idempotent',
       paperId,
       versionName: existing.version_name,
       publicationDigest: sealed.manifest.publicationDigest,
       consumers,
+      ...(normalizedSidecars.length > 0
+        ? {
+            sidecars: normalizedSidecars.map(
+              ({ bytes: _bytes, ...descriptor }) => descriptor,
+            ),
+          }
+        : {}),
     }
   }
   const versionName = nextVersionName(paths)
@@ -1285,6 +1364,9 @@ export function publishCanonicalPaperPublication({
     writeBytes(path.join(stageDir, 'paper-asset.json'), sealed.sourceAsset)
     for (const [relativePath, bytes] of Object.entries(sealed.artifacts)) writeBytes(path.join(stageDir, relativePath), bytes)
     for (const [relativePath, bytes] of Object.entries(sealed.sourceEvidence)) writeBytes(path.join(stageDir, relativePath), bytes)
+    for (const sidecar of normalizedSidecars) {
+      writeBytes(path.join(stageDir, sidecar.relativePath), sidecar.bytes)
+    }
     const manifestFileName = publicationFileNameFor(sealed.manifest.authority)
     writeJson(path.join(stageDir, 'canonical', manifestFileName), sealed.manifest)
     const reopenedManifest = readJsonFile(path.join(stageDir, 'canonical', manifestFileName))
@@ -1293,6 +1375,7 @@ export function publishCanonicalPaperPublication({
       sourceAsset: readFileSync(path.join(stageDir, 'paper-asset.json')),
       readArtifact: (relativePath) => readFileSync(path.join(stageDir, relativePath)),
     })
+    verifyPublicationSidecars(stageDir, normalizedSidecars)
     if (failurePoint === 'before-version-rename') throw publicationError('CANONICAL_PUBLICATION_FORCED_FAILURE', 'Forced pre-rename failure')
     const previous = currentDbRef(db, paperId)
     const target = { paperId, versionName, sourceAssetVersion, publicationDigest: sealed.manifest.publicationDigest }
@@ -1323,6 +1406,13 @@ export function publishCanonicalPaperPublication({
       versionName,
       publicationDigest: sealed.manifest.publicationDigest,
       consumers,
+      ...(normalizedSidecars.length > 0
+        ? {
+            sidecars: normalizedSidecars.map(
+              ({ bytes: _bytes, ...descriptor }) => descriptor,
+            ),
+          }
+        : {}),
     }
   } catch (error) {
     if (existsSync(stageDir)) rmSync(stageDir, { recursive: true, force: true })

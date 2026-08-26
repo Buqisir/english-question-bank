@@ -142,6 +142,11 @@ function contentForGroup(group, selectedByObservation) {
           )),
         )
       }
+      if (block.applicationGiven?.provision === 'source_provided') {
+        blocks.push(...block.applicationGiven.parts.map((part) => (
+          paragraph(part.blockId, part.text)
+        )))
+      }
       for (const [index, starter] of (block.continuationStarters || []).entries()) {
         blocks.push(paragraph(`${block.blockId}:starter:${index + 1}`, starter))
       }
@@ -242,11 +247,19 @@ function objectiveContent(group, family) {
       nodeId: `paragraph:${group.groupId}:content`,
       inlines: [
         ...(sourceText ? [text(`text:${group.groupId}:content`, sourceText)] : []),
-        ...group.questions.map((question, index) => ({
-          kind: 'blank_ref',
-          nodeId: `blank-ref:${family}:${index + 1}:${question.questionId}`,
-          blankId: `blank:${question.questionId}`,
-        })),
+        ...group.questions.flatMap((question, index) => [
+          {
+            kind: 'blank_ref',
+            nodeId: `blank-ref:${family}:${index + 1}:${question.questionId}`,
+            blankId: `blank:${question.questionId}`,
+          },
+          ...(question.promptProvision?.provision === 'source_prompt'
+            ? [text(
+                `text:${question.questionId}:source-prompt`,
+                ` (${question.promptProvision.prompt})`,
+              )]
+            : []),
+        ]),
       ],
     }],
   }
@@ -257,11 +270,19 @@ function ordinaryVariant(group, family) {
     return {
       family,
       choiceOwnership: { ownership: 'none' },
-      promptBindings: group.questions.map((question) => ({
-        blankId: `blank:${question.questionId}`,
-        provision: 'source_proven_none',
-        authorityObservationRef: `observation:grammar-fill-prompt:${question.questionId}`,
-      })),
+      promptBindings: group.questions.map((question) => {
+        const promptProvision = question.promptProvision || {
+          provision: 'source_proven_none',
+        }
+        return {
+          blankId: `blank:${question.questionId}`,
+          provision: promptProvision.provision,
+          ...(promptProvision.provision === 'source_prompt'
+            ? { prompt: promptProvision.prompt }
+            : {}),
+          authorityObservationRef: `observation:grammar-fill-prompt:${question.questionId}`,
+        }
+      }),
     }
   }
   if (family === 'cloze') {
@@ -320,6 +341,9 @@ function writingVariant(group, family) {
       'word-count',
       ...evidence.contentRequirements.map((_requirement, index) => `requirement:${index + 1}`),
     ].map((suffix) => `${block.blockId}:evidence:${suffix}`)
+    const applicationGiven = block.applicationGiven || {
+      provision: 'source_proven_none',
+    }
     return {
       family,
       writingTaskId: `writing-task:${group.groupId}`,
@@ -341,11 +365,25 @@ function writingVariant(group, family) {
         sourceRef: contentRef('word-count'),
         authorityObservationRef: `observation:${group.groupId}:word-count`,
       },
-      givenSkeleton: {
-        presence: 'none',
-        answerRegionAbsenceAssertionRef:
-          `observation:${group.groupId}:answer-region-empty`,
-      },
+      givenSkeleton: applicationGiven.provision === 'source_provided'
+        ? {
+            presence: 'provided',
+            parts: applicationGiven.parts.map((part) => ({
+              givenPartId: part.partId,
+              role: part.role,
+              placement: ['title', 'salutation', 'opening'].includes(part.role)
+                ? 'answer_region_top'
+                : 'answer_region_bottom',
+              blockRef: part.blockId,
+              authorityAssertionRef:
+                `observation:${group.groupId}:given:${part.partId}`,
+            })),
+          }
+        : {
+            presence: 'none',
+            answerRegionAbsenceAssertionRef:
+              `observation:${group.groupId}:answer-region-empty`,
+          },
       choiceOwnership: { ownership: 'none' },
       response: {
         kind: 'group_level_written_response',
@@ -553,11 +591,20 @@ export function buildConfirmedFormat2CanonicalRequest({
     if (expectedFamily === 'grammar-fill') {
       for (const question of group.questions) {
         const promptObservationId = `observation:grammar-fill-prompt:${question.questionId}`
+        const promptProvision = question.promptProvision || {
+          provision: 'source_proven_none',
+        }
         observations.push({
           observationId: promptObservationId,
           kind: 'grammar_fill_prompt_provision',
           documentInputKey: 'original_question_source',
-          value: { blankId: `blank:${question.questionId}`, provision: 'source_proven_none' },
+          value: {
+            blankId: `blank:${question.questionId}`,
+            provision: promptProvision.provision,
+            ...(promptProvision.provision === 'source_prompt'
+              ? { prompt: promptProvision.prompt }
+              : {}),
+          },
           span: { start: 0, end: questionPdfBytes.byteLength },
         })
         sourceSpanRefsByTarget[`prompt_provision:blank:${question.questionId}`] = [
@@ -566,17 +613,39 @@ export function buildConfirmedFormat2CanonicalRequest({
       }
     }
     if (expectedFamily === 'application-writing') {
+      const writingBlock = group.blocks.find(
+        (block) => block.kind === 'writing_material',
+      )
+      const applicationGiven = writingBlock.applicationGiven || {
+        provision: 'source_proven_none',
+      }
       observations.push(
-        {
-          observationId: `observation:${group.groupId}:answer-region-empty`,
-          kind: 'application_answer_region_absence',
-          documentInputKey: 'original_question_source',
-          value: {
-            groupId: group.groupId,
-            answerRegionRef: 'writing.application-box',
-          },
-          span: { start: 0, end: questionPdfBytes.byteLength },
-        },
+        ...(applicationGiven.provision === 'source_provided'
+          ? applicationGiven.parts.map((part) => ({
+              observationId: `observation:${group.groupId}:given:${part.partId}`,
+              kind: 'application_given_part',
+              documentInputKey: 'original_question_source',
+              value: {
+                groupId: group.groupId,
+                givenPartId: part.partId,
+                role: part.role,
+                placement: ['title', 'salutation', 'opening'].includes(part.role)
+                  ? 'answer_region_top'
+                  : 'answer_region_bottom',
+                blockRef: part.blockId,
+              },
+              span: { start: 0, end: questionPdfBytes.byteLength },
+            }))
+          : [{
+              observationId: `observation:${group.groupId}:answer-region-empty`,
+              kind: 'application_answer_region_absence',
+              documentInputKey: 'original_question_source',
+              value: {
+                groupId: group.groupId,
+                answerRegionRef: 'writing.application-box',
+              },
+              span: { start: 0, end: questionPdfBytes.byteLength },
+            }]),
         {
           observationId: `observation:${group.groupId}:word-count`,
           kind: 'application_word_count_ruling',
@@ -699,6 +768,10 @@ export function buildConfirmedFormat2CanonicalRequest({
     })
   }
 
+  const analysisSidecars = (transcription.analysisSidecars || []).map((analysis) => ({
+    schemaVersion: analysis.schemaVersion,
+    bytes: encoder.encode(`${JSON.stringify(analysis, null, 2)}\n`),
+  }))
   const source = {
     paperId: transcription.paperId,
     profileId: 'nck1',
@@ -708,7 +781,12 @@ export function buildConfirmedFormat2CanonicalRequest({
     assertions,
     groups: sourceGroups,
     transformations,
-    inactiveSlots: {},
+    inactiveSlots: transcription.listeningSource?.disposition === 'not_supplied'
+      ? {
+          'listening.short-dialogue': 'not_supplied',
+          'listening.long-form': 'not_supplied',
+        }
+      : {},
     inactiveSourceClosures: [],
   }
   const sourceAsset = encoder.encode(JSON.stringify(source))
@@ -725,7 +803,7 @@ export function buildConfirmedFormat2CanonicalRequest({
   )))
   const listeningBlock = transcription.groups
     .find((group) => group.groupType === 'listening')
-    .blocks.find((block) => block.kind === 'listening_material')
+    ?.blocks.find((block) => block.kind === 'listening_material')
   const documents = [
     sourceDocument(
       'canonical_source_envelope',
@@ -743,7 +821,9 @@ export function buildConfirmedFormat2CanonicalRequest({
     ),
     sourceDocument(
       'listening_answer_source',
-      ['official_answer_source', 'transcript_source', 'source_provenance'],
+      listeningBlock
+        ? ['official_answer_source', 'transcript_source', 'source_provenance']
+        : ['official_answer_source', 'source_provenance'],
       answerPdfBytes,
       'application/pdf',
       'answers.pdf',
@@ -755,34 +835,38 @@ export function buildConfirmedFormat2CanonicalRequest({
       'application/vnd.eqb.profile-writing-source-evidence+json',
       'continuation-writing-instruction-evidence.json',
     ),
-    sourceDocument(
-      'listening_questions',
-      ['structured_source', 'question_source'],
-      encoder.encode(JSON.stringify(listeningBlock.questions)),
-      'application/vnd.eqb.listening-questions+json',
-      'listening-questions.json',
-    ),
-    sourceDocument(
-      'listening_answers',
-      ['structured_source', 'official_answer_source'],
-      encoder.encode(JSON.stringify(listeningBlock.answers)),
-      'application/vnd.eqb.listening-answers+json',
-      'listening-answers.json',
-    ),
-    sourceDocument(
-      'listening_transcript',
-      ['structured_source', 'transcript_source'],
-      encoder.encode(JSON.stringify(listeningBlock.transcript)),
-      'application/vnd.eqb.listening-transcript+json',
-      'listening-transcript.json',
-    ),
-    sourceDocument(
-      'listening_inventory',
-      ['operator_assertions', 'source_provenance'],
-      encoder.encode(JSON.stringify(listeningBlock.inventory)),
-      'application/vnd.eqb.listening-source-inventory+json',
-      'listening-inventory.json',
-    ),
+    ...(listeningBlock
+      ? [
+          sourceDocument(
+            'listening_questions',
+            ['structured_source', 'question_source'],
+            encoder.encode(JSON.stringify(listeningBlock.questions)),
+            'application/vnd.eqb.listening-questions+json',
+            'listening-questions.json',
+          ),
+          sourceDocument(
+            'listening_answers',
+            ['structured_source', 'official_answer_source'],
+            encoder.encode(JSON.stringify(listeningBlock.answers)),
+            'application/vnd.eqb.listening-answers+json',
+            'listening-answers.json',
+          ),
+          sourceDocument(
+            'listening_transcript',
+            ['structured_source', 'transcript_source'],
+            encoder.encode(JSON.stringify(listeningBlock.transcript)),
+            'application/vnd.eqb.listening-transcript+json',
+            'listening-transcript.json',
+          ),
+          sourceDocument(
+            'listening_inventory',
+            ['operator_assertions', 'source_provenance'],
+            encoder.encode(JSON.stringify(listeningBlock.inventory)),
+            'application/vnd.eqb.listening-source-inventory+json',
+            'listening-inventory.json',
+          ),
+        ]
+      : []),
     ...confirmedSelection.confirmedSelections.map((selection) => sourceDocument(
       `visual_${selection.observationId}`,
       ['source_provenance'],
@@ -797,5 +881,6 @@ export function buildConfirmedFormat2CanonicalRequest({
       evidence: { documents },
     },
     sourceAsset,
+    analysisSidecars,
   }
 }

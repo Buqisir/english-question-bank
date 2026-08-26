@@ -284,6 +284,170 @@ function failureCase(mutator, code, diagnosticCode = code) {
   assertFailed(run(repositoryRoot, input), code, diagnosticCode)
 }
 
+function upgradeFixtureToTranscriptionV2(input) {
+  const transcription = input.transcription
+  transcription.schemaVersion = 'format2-transcription-v2'
+  transcription.groups = transcription.groups.filter(
+    (group) => group.groupType !== 'listening',
+  )
+  transcription.listeningSource = {
+    disposition: 'not_supplied',
+    source: {
+      documentRole: 'question_pdf',
+      questionPdfSha256: transcription.sourceBindings.questionPdfSha256,
+      firstSuppliedSection: 'reading',
+      page: 1,
+    },
+  }
+  const answersByQuestionId = new Map(transcription.officialAnswers.map(
+    (answer) => [answer.questionId, answer.answer],
+  ))
+  const readingGroups = transcription.groups.filter(
+    (group) => group.groupType === 'reading',
+  )
+  const readingAnalysis = {
+    schemaVersion: 'reading-choice-analysis-v1',
+    paperId: transcription.paperId,
+    sourceAssetVersion: 1,
+    targetGroups: readingGroups.map((group) => group.groupId),
+    meta: { reviewStatus: 'reviewed' },
+    groups: {},
+    questions: Object.fromEntries(readingGroups.flatMap((group) => (
+      group.questions.map((question) => [question.questionId, {
+        skill: {},
+        questionFocus: `Reviewed focus for ${question.questionId}`,
+        stemTranslationZh: '定向测试题干。',
+        optionAnalysis: question.options.map((option) => ({
+          label: option.label,
+          optionTranslationZh: `选项 ${option.label}`,
+          status: option.label === answersByQuestionId.get(question.questionId)
+            ? 'correct'
+            : 'wrong',
+        })),
+        locationParaphrases: [],
+      }])
+    ))),
+  }
+  const sevenChoicesGroup = transcription.groups.find(
+    (group) => group.groupType === 'seven_choices',
+  )
+  const sevenChoicesAnalysis = {
+    schemaVersion: 'seven-choices-analysis-v1',
+    paperId: transcription.paperId,
+    sourceAssetVersion: 1,
+    targetGroups: [sevenChoicesGroup.groupId],
+    meta: { reviewStatus: 'reviewed' },
+    groups: { [sevenChoicesGroup.groupId]: { overview: 'Reviewed seven choices.' } },
+    questions: Object.fromEntries(sevenChoicesGroup.questions.map((question) => [
+      question.questionId,
+      {
+        blankId: `blank:${question.questionId}`,
+        positionFacet: 'middle',
+        roleFacet: 'detail',
+        primaryMechanismFacet: 'cohesion',
+        topicClues: ['Synthetic'],
+        contextEvidence: { beforeQuote: 'Synthetic left column.' },
+        mechanismSignals: [
+          { signalText: 'Synthetic left column.', signalSide: 'passage' },
+          { signalText: 'Shared synthetic option A', signalSide: 'option' },
+        ],
+        optionFit: { correctOptionLabel: answersByQuestionId.get(question.questionId) },
+        teachingNote: 'Use the exact shared option bank.',
+      },
+    ])),
+  }
+  const clozeGroup = transcription.groups.find((group) => group.groupType === 'cloze')
+  const clozeAnalysis = {
+    schemaVersion: 'cloze-analysis-v1',
+    paperId: transcription.paperId,
+    sourceAssetVersion: 1,
+    targetGroups: [clozeGroup.groupId],
+    meta: { reviewStatus: 'reviewed' },
+    groups: { [clozeGroup.groupId]: { overview: 'Reviewed cloze.' } },
+    blanks: Object.fromEntries(clozeGroup.questions.map((question) => [
+      question.questionId,
+      {
+        blankId: `blank:${question.questionId}`,
+        blankNo: question.questionNo,
+        pos: 'other',
+        correctFit: {
+          optionLabel: answersByQuestionId.get(question.questionId),
+          reason: 'The source context supports the admitted answer.',
+        },
+        distractorGlosses: question.options
+          .filter((option) => option.label !== answersByQuestionId.get(question.questionId))
+          .map((option) => ({ optionLabel: option.label })),
+        evidence: [{
+          type: 'collocation-partner',
+          signalSide: 'context-before',
+          signalText: 'compact cloze',
+        }],
+        teachingNote: 'Read the local collocation.',
+      },
+    ])),
+  }
+  const grammarFillGroup = transcription.groups.find(
+    (group) => group.groupType === 'grammar_fill',
+  )
+  grammarFillGroup.questions.forEach((question, index) => {
+    question.promptProvision = index === 0
+      ? { provision: 'source_prompt', prompt: 'hold' }
+      : { provision: 'source_proven_none' }
+  })
+  const grammarFillAnalysis = {
+    schemaVersion: 'grammar-fill-analysis-v2',
+    paperId: transcription.paperId,
+    sourceAssetVersion: 1,
+    targetGroups: [grammarFillGroup.groupId],
+    meta: { reviewStatus: 'reviewed' },
+    groups: { [grammarFillGroup.groupId]: { overview: 'Reviewed grammar fill.' } },
+    blanks: Object.fromEntries(grammarFillGroup.questions.map((question) => {
+      const prompted = question.promptProvision.provision === 'source_prompt'
+      return [question.questionId, {
+        blankId: `blank:${question.questionId}`,
+        blankNo: question.questionNo,
+        blankType: prompted ? 'given' : 'no-hint',
+        hint: prompted ? question.promptProvision.prompt : null,
+        facetKey: prompted
+          ? 'grammar-fill.given.verb.non-finite'
+          : 'grammar-fill.no-hint.article',
+        ...(prompted ? { role: 'object', path: 'fast' } : {}),
+        reason: 'The source context determines this form.',
+        teachingNote: 'Check the exact local structure.',
+        answer: answersByQuestionId.get(question.questionId),
+        evidence: [{ type: 'clause-frame', signalText: 'compact grammar' }],
+      }]
+    })),
+  }
+  transcription.analysisSidecars = [
+    readingAnalysis,
+    sevenChoicesAnalysis,
+    clozeAnalysis,
+    grammarFillAnalysis,
+  ]
+  const applicationBlock = transcription.groups
+    .find((group) => group.groupType === 'application_writing')
+    .blocks.find((block) => block.kind === 'writing_material')
+  applicationBlock.applicationEvidence.answerRegionAbsent = false
+  applicationBlock.applicationGiven = {
+    provision: 'source_provided',
+    parts: [{
+      partId: 'given-part:group:application:title',
+      blockId: 'paragraph:group:application:given:title',
+      role: 'title',
+      text: 'Reading Club Invitation',
+    }],
+  }
+  return input
+}
+
+function v2FailureCase(mutator, code, diagnosticCode = code) {
+  const { repositoryRoot, fixture } = freshFixture('v2-negative-')
+  const input = upgradeFixtureToTranscriptionV2(structuredClone(fixture.input))
+  mutator(input, { repositoryRoot, fixture })
+  assertFailed(run(repositoryRoot, input), code, diagnosticCode)
+}
+
 failureCase((input) => {
   delete input.transcription.answerTranscriptionCheck
 }, 'FORMAT2_TRANSCRIPTION_SCHEMA_INVALID')
@@ -1381,6 +1545,26 @@ try {
   publicDb.close()
 }
 
+const v1CanonicalGroups = JSON.parse(readFileSync(path.join(
+  repositoryRoot,
+  'app/public/paper-assets',
+  fixture.input.paperId,
+  'versions',
+  completed.canonicalPublication.versionName,
+  'canonical/canonical-question-groups-v1.json',
+), 'utf8')).groups
+assert.deepEqual(
+  v1CanonicalGroups.find(
+    (group) => group.identity.groupId === 'group:application',
+  ).variant.givenSkeleton,
+  {
+    presence: 'none',
+    answerRegionAbsenceAssertionRef:
+      'observation:group:application:answer-region-empty',
+  },
+  'v1 Application Writing retains its source-proven absent Given Skeleton',
+)
+
 const normalizationReport = JSON.parse(readFileSync(path.join(
   repositoryRoot,
   'app/public/paper-assets',
@@ -1707,6 +1891,290 @@ failureCase(
 failureCase(
   (input) => { input.transcription.officialAnswers[0].modelReasoning = 'A looks plausible' },
   'FORMAT2_TRANSCRIPTION_SCHEMA_INVALID',
+)
+
+v2FailureCase(
+  (input) => { delete input.transcription.listeningSource },
+  'FORMAT2_TRANSCRIPTION_SCHEMA_INVALID',
+)
+v2FailureCase(
+  (input) => { input.transcription.listeningSource.source.firstSuppliedSection = 'listening' },
+  'FORMAT2_TRANSCRIPTION_SCHEMA_INVALID',
+)
+v2FailureCase(
+  (input) => {
+    input.transcription.listeningSource.source.questionPdfSha256 =
+      `sha256:${'0'.repeat(64)}`
+  },
+  'FORMAT2_TRANSCRIPTION_INVALID',
+  'FORMAT2_LISTENING_SOURCE_CLOSURE_INVALID',
+)
+v2FailureCase(
+  (input, { fixture }) => {
+    input.transcription.groups.push(structuredClone(
+      fixture.input.transcription.groups.find((group) => group.groupType === 'listening'),
+    ))
+  },
+  'FORMAT2_TRANSCRIPTION_INVALID',
+  'FORMAT2_LISTENING_SOURCE_CLOSURE_INVALID',
+)
+v2FailureCase(
+  (input) => {
+    delete input.transcription.groups
+      .find((group) => group.groupType === 'grammar_fill')
+      .questions[0].promptProvision
+  },
+  'FORMAT2_TRANSCRIPTION_INVALID',
+  'FORMAT2_GRAMMAR_PROMPT_PROVISION_INVALID',
+)
+v2FailureCase(
+  (input) => {
+    input.transcription.groups
+      .find((group) => group.groupType === 'grammar_fill')
+      .questions[1].promptProvision.prompt = 'invented'
+  },
+  'FORMAT2_TRANSCRIPTION_SCHEMA_INVALID',
+)
+v2FailureCase(
+  (input) => {
+    input.transcription.groups
+      .find((group) => group.groupType === 'application_writing')
+      .blocks[0].applicationEvidence.answerRegionAbsent = true
+  },
+  'FORMAT2_TRANSCRIPTION_INVALID',
+  'FORMAT2_APPLICATION_GIVEN_PROVISION_INVALID',
+)
+v2FailureCase(
+  (input) => { input.transcription.analysisSidecars[0].paperId = 'paper-other' },
+  'FORMAT2_TRANSCRIPTION_INVALID',
+  'FORMAT2_ANALYSIS_SIDECAR_INVALID',
+)
+v2FailureCase(
+  (input) => {
+    delete input.transcription.analysisSidecars[0].questions[
+      Object.keys(input.transcription.analysisSidecars[0].questions)[0]
+    ]
+  },
+  'FORMAT2_TRANSCRIPTION_INVALID',
+  'FORMAT2_ANALYSIS_SIDECAR_INVALID',
+)
+v2FailureCase(
+  (input) => {
+    const analysis = input.transcription.analysisSidecars.find(
+      (sidecar) => sidecar.schemaVersion === 'seven-choices-analysis-v1',
+    )
+    analysis.questions[Object.keys(analysis.questions)[0]].positionFacet = null
+  },
+  'FORMAT2_TRANSCRIPTION_INVALID',
+  'FORMAT2_ANALYSIS_SIDECAR_CONTENT_INVALID',
+)
+v2FailureCase(
+  (input) => {
+    const analysis = input.transcription.analysisSidecars.find(
+      (sidecar) => sidecar.schemaVersion === 'cloze-analysis-v1',
+    )
+    analysis.blanks[Object.keys(analysis.blanks)[0]].correctFit = null
+  },
+  'FORMAT2_TRANSCRIPTION_INVALID',
+  'FORMAT2_ANALYSIS_SIDECAR_CONTENT_INVALID',
+)
+v2FailureCase(
+  (input) => {
+    const analysis = input.transcription.analysisSidecars.find(
+      (sidecar) => sidecar.schemaVersion === 'grammar-fill-analysis-v2',
+    )
+    analysis.blanks[Object.keys(analysis.blanks)[0]].facetKey = null
+  },
+  'FORMAT2_TRANSCRIPTION_INVALID',
+  'FORMAT2_ANALYSIS_SIDECAR_CONTENT_INVALID',
+)
+
+const transcriptionV2CompleteListening = freshFixture('v2-complete-listening-')
+const retainedListeningGroup = structuredClone(
+  transcriptionV2CompleteListening.fixture.input.transcription.groups.find(
+    (group) => group.groupType === 'listening',
+  ),
+)
+upgradeFixtureToTranscriptionV2(transcriptionV2CompleteListening.fixture.input)
+transcriptionV2CompleteListening.fixture.input.transcription.groups.push(
+  retainedListeningGroup,
+)
+transcriptionV2CompleteListening.fixture.input.transcription.listeningSource = {
+  disposition: 'complete',
+  groupId: retainedListeningGroup.groupId,
+}
+assert.equal(
+  run(
+    transcriptionV2CompleteListening.repositoryRoot,
+    transcriptionV2CompleteListening.fixture.input,
+  ).lifecycle,
+  'importing',
+  'v2 can combine complete existing Listening evidence with successor fields',
+)
+
+const transcriptionV2 = freshFixture('v2-completeness-')
+upgradeFixtureToTranscriptionV2(transcriptionV2.fixture.input)
+const transcriptionV2Started = run(
+  transcriptionV2.repositoryRoot,
+  transcriptionV2.fixture.input,
+)
+assert.equal(
+  transcriptionV2Started.lifecycle,
+  'importing',
+  JSON.stringify(transcriptionV2Started.diagnostics),
+)
+assert.equal(
+  transcriptionV2Started.artifacts.transcription.schemaVersion,
+  'format2-transcription-v2',
+)
+const transcriptionV2Candidate = JSON.parse(readFileSync(
+  artifactPath(
+    transcriptionV2.repositoryRoot,
+    transcriptionV2Started,
+    'candidatePackage',
+  ),
+  'utf8',
+))
+assert.equal(
+  transcriptionV2Candidate.sourceCapture.documents.find(
+    (document) => document.inputKey === 'listening_answer_source',
+  ).roles.includes('transcript_source'),
+  false,
+  'Reading-first source does not invent transcript authority on the answer PDF',
+)
+assert.equal(
+  transcriptionV2Candidate.sourceCapture.observations.some(
+    (observation) => observation.kind.startsWith('listening_'),
+  ),
+  false,
+  'Reading-first source does not invent Listening observations',
+)
+const transcriptionV2Confirmation = exactConfirmation(transcriptionV2Candidate)
+const transcriptionV2Completed = resume(transcriptionV2.repositoryRoot, {
+  paperId: transcriptionV2.fixture.input.paperId,
+  jobId: transcriptionV2Started.jobId,
+  teacherConfirmation: transcriptionV2Confirmation,
+})
+assert.equal(
+  transcriptionV2Completed.lifecycle,
+  'awaiting_qa',
+  JSON.stringify(transcriptionV2Completed.diagnostics),
+)
+const transcriptionV2VersionDir = path.join(
+  transcriptionV2.repositoryRoot,
+  'app/public/paper-assets',
+  transcriptionV2.fixture.input.paperId,
+  'versions',
+  transcriptionV2Completed.canonicalPublication.versionName,
+)
+const transcriptionV2Plan = JSON.parse(readFileSync(
+  path.join(transcriptionV2VersionDir, 'canonical/canonical-paper-plan-v1.json'),
+  'utf8',
+))
+assert.deepEqual(
+  transcriptionV2Plan.slotBindings
+    .filter((binding) => binding.slotId.startsWith('listening.'))
+    .map((binding) => ({
+      slotId: binding.slotId,
+      state: binding.state,
+      sourceState: binding.sourceState,
+    })),
+  [
+    { slotId: 'listening.short-dialogue', state: 'inactive', sourceState: 'not_supplied' },
+    { slotId: 'listening.long-form', state: 'inactive', sourceState: 'not_supplied' },
+  ],
+  'Reading-first Format 2 source uses existing inactive not_supplied bindings',
+)
+const transcriptionV2Groups = JSON.parse(readFileSync(
+  path.join(transcriptionV2VersionDir, 'canonical/canonical-question-groups-v1.json'),
+  'utf8',
+)).groups
+assert.equal(
+  JSON.stringify(transcriptionV2Groups).includes('Reviewed focus for'),
+  false,
+  'Analysis model output stays outside Canonical Question Group authority',
+)
+const transcriptionV2Grammar = transcriptionV2Groups.find(
+  (group) => group.identity.groupId === 'group:grammar',
+)
+assert.deepEqual(
+  transcriptionV2Grammar.variant.promptBindings.slice(0, 2).map((binding) => ({
+    provision: binding.provision,
+    prompt: binding.prompt ?? null,
+  })),
+  [
+    { provision: 'source_prompt', prompt: 'hold' },
+    { provision: 'source_proven_none', prompt: null },
+  ],
+  'Grammar Fill preserves exact per-blank prompt provision',
+)
+const transcriptionV2Application = transcriptionV2Groups.find(
+  (group) => group.identity.groupId === 'group:application',
+)
+assert.deepEqual(
+  transcriptionV2Application.variant.givenSkeleton,
+  {
+    presence: 'provided',
+    parts: [{
+      givenPartId: 'given-part:group:application:title',
+      role: 'title',
+      placement: 'answer_region_top',
+      blockRef: 'paragraph:group:application:given:title',
+      authorityAssertionRef:
+        'observation:group:application:given:given-part:group:application:title',
+    }],
+  },
+  'Application Writing preserves the source-provided title skeleton',
+)
+assert.equal(
+  transcriptionV2Application.content.blocks.find(
+    (block) => block.nodeId === 'paragraph:group:application:given:title',
+  ).inlines[0].text,
+  'Reading Club Invitation',
+)
+const analysisFileBySchemaVersion = new Map([
+  ['reading-choice-analysis-v1', 'reading-choice-analysis-v1.json'],
+  ['seven-choices-analysis-v1', 'seven-choices-analysis-v1.json'],
+  ['cloze-analysis-v1', 'cloze-analysis-v1.json'],
+  ['grammar-fill-analysis-v2', 'grammar-fill-analysis-v1.json'],
+])
+for (const analysis of transcriptionV2.fixture.input.transcription.analysisSidecars) {
+  const analysisPath = path.join(
+    transcriptionV2VersionDir,
+    'analyses',
+    analysisFileBySchemaVersion.get(analysis.schemaVersion),
+  )
+  assert.deepEqual(
+    JSON.parse(readFileSync(analysisPath, 'utf8')),
+    analysis,
+    `${analysis.schemaVersion} publishes unchanged beside the atomic version`,
+  )
+  assert.equal(
+    transcriptionV2Completed.artifacts.analysisSidecars.items.find(
+      (item) => item.schemaVersion === analysis.schemaVersion,
+    ).sha256,
+    sha256(new Uint8Array(readFileSync(analysisPath))),
+  )
+}
+const transcriptionV2AnalysisPath = path.join(
+  transcriptionV2VersionDir,
+  'analyses/reading-choice-analysis-v1.json',
+)
+const transcriptionV2Noop = resume(transcriptionV2.repositoryRoot, {
+  paperId: transcriptionV2.fixture.input.paperId,
+  jobId: transcriptionV2Started.jobId,
+  teacherConfirmation: transcriptionV2Confirmation,
+})
+assert.equal(transcriptionV2Noop.canonicalPublication.publicationDigest,
+  transcriptionV2Completed.canonicalPublication.publicationDigest)
+writeFileSync(transcriptionV2AnalysisPath, '{}\n')
+assertFailed(
+  resume(transcriptionV2.repositoryRoot, {
+    paperId: transcriptionV2.fixture.input.paperId,
+    jobId: transcriptionV2Started.jobId,
+    teacherConfirmation: transcriptionV2Confirmation,
+  }),
+  'FORMAT2_ANALYSIS_SIDECAR_INVALID',
 )
 
 const conflict = freshFixture('conflict-')

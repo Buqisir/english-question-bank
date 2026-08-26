@@ -1,7 +1,7 @@
 # 03 — Shenzhen Q33 generic parity and materializer retirement
 
 Status: ready-for-agent
-Blocked by: 02B — Stable visual identities and exact prior-confirmation rebind
+Blocked by: 02C — Generic transcription completeness
 
 ## What to build
 

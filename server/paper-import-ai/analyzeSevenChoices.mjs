@@ -94,7 +94,7 @@ export function buildSevenChoicesAnalysisMessages({ paper, group }) {
   ]
 }
 
-function validateSevenChoicesShape(analysis, { paper, group }) {
+export function validateSevenChoicesShape(analysis, { paper, group }) {
   if (!analysis || typeof analysis !== 'object' || Array.isArray(analysis)) throw new Error('AI 未返回 JSON 对象。')
   if (analysis.schemaVersion !== 'seven-choices-analysis-v1') throw new Error('AI JSON schemaVersion 不正确。')
   if (analysis.paperId !== paper.paperId) throw new Error('AI JSON paperId 与当前试卷不一致。')
