@@ -3,8 +3,9 @@
  * r1-genre-truth verify.
  *
  * Four assertions from plan.md Must Do 5:
- *   1. 273/273 覆盖 — genre-decisions.json has exactly 273 rows, one per passage
- *      in the DB (source-of-truth artifact, not DB-dependent).
+ *   1. 273/273 历史语料覆盖 — genre-decisions.json keeps the exact approved
+ *      273-row corpus and every approved passage remains present in the DB.
+ *      Later imports are additive and do not retroactively belong to this audit.
  *   2. 全落五类枚举 — every decision.decision is one of the controlled 5-way
  *      enum (记叙/说明/议论/应用/新闻), zero drift.
  *   3. 题型名旧值零残留 — DB `passages.discourse_type` no longer contains any
@@ -57,10 +58,12 @@ console.log('=== Req 1+2: decisions artifact coverage + enum ===')
       const db = new DatabaseSync(DB_PATH, { readOnly: true })
       const dbIds = db.prepare('SELECT id FROM passages').all().map((r) => r.id)
       db.close()
-      const missing = dbIds.filter((id) => !ids.has(id))
-      const extra = [...ids].filter((id) => !dbIds.includes(id))
-      assert('Req1: covers every passage in the DB', missing.length === 0, `${missing.length} DB passages missing from decisions: ${missing.slice(0, 5).join(', ')}`)
-      assert('Req1: no stray passageIds not in the DB', extra.length === 0, `${extra.length} extra: ${extra.slice(0, 5).join(', ')}`)
+      const missingApproved = [...ids].filter((id) => !dbIds.includes(id))
+      assert(
+        'Req1: every approved passage remains in the DB',
+        missingApproved.length === 0,
+        `${missingApproved.length} approved passages missing from DB: ${missingApproved.slice(0, 5).join(', ')}`,
+      )
     } else {
       console.log('  (skip DB cross-check — data/question-bank.sqlite not found)')
     }
