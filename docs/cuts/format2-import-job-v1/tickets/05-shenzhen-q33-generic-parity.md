@@ -1,15 +1,15 @@
-# 03 — Shenzhen Q33 generic parity and materializer retirement
+# 05 — Shenzhen Q33 generic parity and materializer retirement
 
-Status: blocked-by-real-parity-preflight
-Blocked by: task-graph replan in the
-[real parity frontier](../research/real-parity-frontier-2026-08-26.md)
+Status: blocked
+Blocked by: 04 — Shared rich whole-paper and active-consumer compatibility
 
 ## Primary parity sources
 
 Use the Shenzhen Q33 source capture, Candidate, exact Teacher Confirmation,
-layout/canary artifacts, and current whole-paper assets listed in that
-preflight. Ticket 02C is implemented, but B01–B05 and the applicable B08
-identity decision keep this ticket outside the frontier.
+layout/canary artifacts, and current whole-paper assets listed in the
+[real parity frontier](../research/real-parity-frontier-2026-08-26.md). Tickets
+03 and 04 close the shared source-fidelity and rich-content shapes before this
+paper-specific data replay enters the frontier.
 
 ## What to build
 
@@ -32,6 +32,7 @@ canary remains an oracle rather than a precedent for per-paper code.
 
 - [ ] The generic Job replays Q33 without invoking a Q33-specific materializer or selecting behavior from its paperId.
 - [ ] The four accepted source-crop digests, A–D owner associations, Canonical Option/media identities, and source PDF point geometry remain unchanged.
+- [ ] Paper, slot, group, question, Option, and media identities plus order, numbering, answers, owners, and source bindings remain stable. Compiler-owned block, inline, row, cell, blank, and writing-task identifiers may be newly derived when deterministic, unique, and internally closed; `semanticDigest` is recomputed from the replayed semantics rather than copied from the predecessor.
 - [ ] Normal Reading typography remains renderer text, including question numbers and A–D labels; no `[Fig.]` token or flattened four-option strip reaches any consumer.
 - [ ] Screen, Student Print, Teacher Print, and PDF consume the same four confirmed images and source layout intent without consumer-side recrop, stretch, or paper-specific offsets.
 - [ ] Student and Teacher answer behavior remains separated without changing the visual result.

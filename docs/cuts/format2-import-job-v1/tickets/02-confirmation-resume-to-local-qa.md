@@ -35,10 +35,10 @@ end-to-end proof from admitted sources to local consumption.
 - [ ] Screen, Student Print, Teacher Print, and PDF consume the same Canonical Paper and confirmed media/layout intent; Student output contains no answer or Analysis leakage.
 - [ ] The local console reports `awaiting_qa` and prepares exact service, paperId, URLs, first focus state, print views, PDF, and one concise gate summary without writing the Owner QA receipt.
 - [ ] The Job stops after local QA preparation and performs no production, R2, deploy, ship, or external mutation.
-- [ ] Focused public-Job, compiler, publisher recovery, exact reload, shared consumer, and `git diff --check` checks pass. The final full repository gate remains Ticket 06 work.
+- [ ] Focused public-Job, compiler, publisher recovery, exact reload, shared consumer, and `git diff --check` checks pass. The final full repository gate remains Ticket 08 work.
 
 ## Result
 
 Commit: merged as `7c1c8df4`
 Verify: focused resume, exact confirmation, recovery, publication/reload, QA projection, and diff checks passed during implementation
-Notes: final repository gate remains downstream work
+Notes: final repository gate remains downstream Ticket 08 work

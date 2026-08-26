@@ -1,7 +1,8 @@
-# 05 — Jining paper from zero to exact Teacher Confirmation
+# 07 — Jining paper from zero to exact Teacher Confirmation
 
-Status: blocked-by-real-parity-preflight
-Blocked by: task-graph replan, then 03 — Shenzhen Q33 generic parity and materializer retirement; 04 — paper-2026-i whole-paper parity and registry retirement
+Status: blocked
+Blocked by: 05 — Shenzhen Q33 generic parity and materializer retirement;
+06 — paper-2026-i whole-paper parity and registry retirement
 
 ## What to build
 

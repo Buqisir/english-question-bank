@@ -1,6 +1,6 @@
 # Format 2 real-parity frontier — 2026-08-26
 
-Status: task-graph replan required
+Status: Owner-approved graph; Ticket 03 ready
 Fixed point: `ece39897b08390642c13bc0957f68e0cf0a8da70`
 
 ## Why this preflight exists
@@ -11,9 +11,10 @@ work, this preflight compared their accepted predecessor artifacts with the
 generic schema, adapter, Candidate/Confirmation, Canonical, publication, and
 consumer seams at the fixed point.
 
-The comparison disproved the published frontier: Tickets 03 and 04 are not
-data-only additions yet. Their legacy materializer and registry entry remain
-supported until the applicable gaps below are resolved and real parity passes.
+The comparison disproved the original published frontier: Shenzhen Q33 and
+`paper-2026-i` were not data-only additions yet. Their parity work has moved to
+Tickets 05 and 06. Their legacy materializer and registry entry remain
+supported until the applicable shared tickets and real parity pass.
 
 The full local ledger is outside the repository at
 `/Users/huangxuewei/.codex/working-notes/format2-import-job-v1/parity-compatibility-ledger-2026-08-26.md`,
@@ -52,28 +53,37 @@ Print/Teacher Print/PDF consumers.
 These capabilities remain useful. They do not make an unrepresentable real
 source shape data-only.
 
-## Complete blocker register
+## Complete blocker register and approved ownership
 
-| ID | Status at fixed point | Real parity gap | Decision owner |
+| ID | Status at fixed point | Real parity gap or Owner decision | Approved owner |
 | --- | --- | --- | --- |
-| B01 | no | Q33 accepted `source_crop.reproducibility` cannot reach the Candidate body, so exact Candidate/package digests and prior-confirmation rebind drift. | shared source-fidelity work |
-| B02 | no | Seven Choices, Cloze, and Grammar Fill cannot retain source paragraph boundaries and interleaved blank order. | shared content-composition work |
-| B03 | no | Complete provenance, content-node/page-region source maps, and literal printed-ordinal transformations cannot be retained. | shared provenance work or explicit parity narrowing |
-| B04 | no | Shenzhen Reading A contains a real table nested inside `framed_columns`; the generic shape admits only string paragraphs. | shared content-shape work |
-| B05 | no | Application and Continuation Writing source composition/current contracts do not replay faithfully. | shared Writing work |
-| B06 | no | `paper-2026-i` has an accepted non-empty passage Figure caption; the generic path emits an empty caption. | shared Figure semantics work |
-| B07 | no | Accepted Listening structured-document bytes/digests are not retained when the adapter reserializes compact JSON. | shared source-fidelity work or explicit identity narrowing |
-| B08 | conditional no | Existing Canonical child IDs and semantic digests cannot all be reproduced. The named Q33 group/question/Option/media IDs are representable. | Owner defines the required identity boundary |
-| B09 | no/unknown authority | `paper-2026-i` has no predecessor Visual Candidate plus exact Visual Teacher Confirmation for its table. Whole-Canonical confirmation cannot be reinterpreted as visual confirmation. | Ticket 04 requires normal direct Owner confirmation |
-| B10 | conditional no | Generic publication does not recreate all exact legacy public extras and paths. | Owner defines whether semantic replacement or byte/path parity is required |
+| B01 | no | Q33 accepted `source_crop.reproducibility` cannot reach the Candidate body, so exact Candidate/package digests and prior-confirmation rebind drift. | Ticket 03 |
+| B02 | no | Seven Choices, Cloze, and Grammar Fill cannot retain source paragraph boundaries and interleaved blank order. | Ticket 03 |
+| B03 | no | Complete provenance, content-node/page-region source maps, and literal printed-ordinal transformations cannot be retained. | Ticket 03 |
+| B04 | no | Shenzhen Reading A contains a real table nested inside `framed_columns`; the generic shape admits only string paragraphs. | Ticket 04 |
+| B05 | no | Application and Continuation Writing source composition/current contracts do not replay faithfully. | Ticket 04 |
+| B06 | no | `paper-2026-i` has an accepted non-empty passage Figure caption; the generic path emits an empty caption. | Ticket 04 |
+| B07 | no | Accepted Listening structured-document bytes/digests are not retained when the adapter reserializes compact JSON. | Ticket 03 |
+| B08 | resolved by Owner | Preserve paper/slot/group/question/Option/media identities, order/numbering, answers, owners, and source bindings. Compiler-owned block/inline/row/cell/blank/writing-task IDs need only be deterministic, unique, and internally closed; recompute `semanticDigest` from successor semantics. | Ticket 03 applies the boundary; Tickets 05–08 verify it |
+| B09 | retained human stop | `paper-2026-i` has no predecessor Visual Candidate plus exact Visual Teacher Confirmation for its table. Whole-Canonical confirmation cannot be reinterpreted as visual confirmation. | Ticket 06 requires normal direct Owner confirmation |
+| B10 | resolved by Owner | Require semantic parity for active Screen, Student/Teacher Print, PDF, Analysis, and question listing/detail/search/similar/figure consumers through the Canonical Consumer Interface or one bounded read-only Adapter. Do not recreate exact legacy answer-key/import-meta/Listening paths or canonical-media figures manifests; unaffected historical assets remain supported. | Ticket 04 |
 
-## Frontier ruling
+## Owner-approved graph ruling
 
-- Tickets 03 and 04 remain blocked. Their retirement steps are forbidden.
-- Tickets 05 and 06 remain downstream-blocked.
-- The interrupted Ticket 02D worktree is unaccepted implementation evidence;
-  it does not change this fixed-point result.
-- Do not publish more lettered repair tickets from individual blockers.
-- Replan the shared work only after the Owner decides B08 and B10. Group the
-  remaining accepted requirements into bounded vertical units, then obtain one
-  graph approval before implementation resumes.
+- Ticket 03 is ready. It owns B01, B02, B03, and B07 and applies the B08
+  identity boundary in the schema/validator/trusted-adapter/compiler
+  source-evidence seam only.
+- Ticket 04 is blocked by Ticket 03. It owns B04, B05, B06, and B10 in the
+  shared rich whole-paper and active-consumer compatibility seam.
+- Ticket 05 is blocked by Ticket 04. It replays Shenzhen Q33 as per-paper data
+  and retires the Q33-only materializer only after parity.
+- Ticket 06 is blocked by Ticket 04 and the normal direct Owner visual
+  confirmation required by B09. It replays `paper-2026-i` and retires its
+  registry entry only after parity.
+- Ticket 07 is blocked by Tickets 05 and 06. It imports Jining from its admitted
+  source pair to exact Teacher Confirmation.
+- Ticket 08 is blocked by Ticket 07 and that exact Owner confirmation. It
+  resumes Jining, prepares rendered Owner QA, and closes the cut.
+- The interrupted Ticket 02D worktree remains unaccepted implementation
+  evidence and cannot satisfy Ticket 03. Do not publish additional lettered
+  repair tickets from an individual blocker.

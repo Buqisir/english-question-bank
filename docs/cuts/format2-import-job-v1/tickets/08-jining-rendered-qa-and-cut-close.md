@@ -1,7 +1,8 @@
-# 06 — Jining shared rendering, Owner QA handoff, and cut close
+# 08 — Jining shared rendering, Owner QA handoff, and cut close
 
-Status: blocked-by-real-parity-preflight
-Blocked by: task-graph replan, then 05 — Jining paper from zero to exact Teacher Confirmation
+Status: blocked
+Blocked by: 07 — Jining paper from zero to exact Teacher Confirmation, then
+exact Owner Teacher Confirmation for that candidate package
 
 ## What to build
 
