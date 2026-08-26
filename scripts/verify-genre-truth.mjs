@@ -20,6 +20,7 @@
  */
 
 import { readFileSync, existsSync } from 'node:fs'
+import { createHash } from 'node:crypto'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { DatabaseSync } from 'node:sqlite'
@@ -28,6 +29,7 @@ import { GENRE_ENUM } from './genre-truth-classify.mjs'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
 const DECISIONS_PATH = path.join(rootDir, 'docs/cuts/r1-genre-truth/genre-decisions.json')
+const APPROVED_DECISIONS_SHA256 = '2efe9b7552dd5e81a92d1ae112de59416f9eb17c6e4c17e5bae6148188f6e631'
 const DB_PATH = path.join(rootDir, 'data/question-bank.sqlite')
 
 let passed = 0
@@ -48,7 +50,14 @@ console.log('=== Req 1+2: decisions artifact coverage + enum ===')
   if (!existsSync(DECISIONS_PATH)) {
     assert('Req1: genre-decisions.json exists', false, DECISIONS_PATH)
   } else {
-    const decisions = JSON.parse(readFileSync(DECISIONS_PATH, 'utf8'))
+    const decisionBytes = readFileSync(DECISIONS_PATH)
+    const decisions = JSON.parse(decisionBytes)
+    const decisionDigest = createHash('sha256').update(decisionBytes).digest('hex')
+    assert(
+      'Req1: approved decisions artifact has exact immutable bytes',
+      decisionDigest === APPROVED_DECISIONS_SHA256,
+      `got sha256:${decisionDigest}`,
+    )
     assert('Req1: 273 decisions on file', decisions.length === 273, `got ${decisions.length}`)
 
     const ids = new Set(decisions.map((d) => d.passageId))
