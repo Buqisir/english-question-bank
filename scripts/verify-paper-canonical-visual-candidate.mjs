@@ -128,56 +128,80 @@ function refreshSourceCapture(sourceCapture) {
   }
 }
 
-function successorRequestWithJobOnlyEvidence(request) {
-  const successor = structuredClone(request)
-  const capture = successor.sourceCapture
-  const questionDocument = capture.documents[0]
-  const predecessorDocumentId = questionDocument.documentId
-  questionDocument.inputKey = 'successor_question_source'
-  questionDocument.originalName = 'successor-question.pdf'
-  questionDocument.documentId = `document:${digestJson({
-    digest: questionDocument.sha256,
-    roles: questionDocument.roles,
-    inputKey: questionDocument.inputKey,
+function rebindSourceDocumentIdentity(capture, document, {
+  inputKey,
+  roles,
+  originalName,
+}) {
+  const predecessorDocumentId = document.documentId
+  document.inputKey = inputKey
+  document.roles = roles
+  document.originalName = originalName
+  document.documentId = `document:${digestJson({
+    digest: document.sha256,
+    roles,
+    inputKey,
   }).slice('sha256:'.length, 28)}`
   for (const observation of capture.observations) {
     if (observation.documentId === predecessorDocumentId) {
-      observation.documentId = questionDocument.documentId
+      observation.documentId = document.documentId
     }
   }
   for (const span of capture.sourceSpans) {
     if (span.documentId === predecessorDocumentId) {
-      span.documentId = questionDocument.documentId
+      span.documentId = document.documentId
     }
   }
+  return document
+}
+
+function sourceDocument({ inputKey, roles, originalName, bytes }) {
+  const digest = sha256(bytes)
+  const artifactId = `source-document:${digestJson({
+    sha256: digest,
+  }).slice('sha256:'.length, 28)}`
+  return {
+    documentId: `document:${digestJson({
+      digest,
+      roles,
+      inputKey,
+    }).slice('sha256:'.length, 28)}`,
+    inputKey,
+    roles,
+    mediaType: 'application/pdf',
+    originalName,
+    byteLength: bytes.byteLength,
+    sha256: digest,
+    immutableArtifactRef: {
+      artifactId,
+      relativePath: `source-evidence/${artifactId.slice('source-document:'.length)}.bin`,
+      sha256: digest,
+      byteLength: bytes.byteLength,
+    },
+    encodedBytes: Buffer.from(bytes).toString('base64'),
+  }
+}
+
+function successorRequestWithJobOnlyEvidence(request) {
+  const successor = structuredClone(request)
+  const capture = successor.sourceCapture
+  const questionDocument = rebindSourceDocumentIdentity(
+    capture,
+    capture.documents[0],
+    {
+      inputKey: 'successor_question_source',
+      roles: capture.documents[0].roles,
+      originalName: 'successor-question.pdf',
+    },
+  )
 
   const answerBytes = new TextEncoder().encode('%PDF-1.7\n% nonvisual Job answer evidence\n')
-  const answerDigest = sha256(answerBytes)
-  const answerInputKey = 'successor_answer_source'
-  const answerRoles = ['official_answer_source', 'source_provenance']
-  const answerArtifactId = `source-document:${digestJson({
-    sha256: answerDigest,
-  }).slice('sha256:'.length, 28)}`
-  capture.documents.push({
-    documentId: `document:${digestJson({
-      digest: answerDigest,
-      roles: answerRoles,
-      inputKey: answerInputKey,
-    }).slice('sha256:'.length, 28)}`,
-    inputKey: answerInputKey,
-    roles: answerRoles,
-    mediaType: 'application/pdf',
+  capture.documents.push(sourceDocument({
+    inputKey: 'successor_answer_source',
+    roles: ['official_answer_source', 'source_provenance'],
     originalName: 'successor-answers.pdf',
-    byteLength: answerBytes.byteLength,
-    sha256: answerDigest,
-    immutableArtifactRef: {
-      artifactId: answerArtifactId,
-      relativePath: `source-evidence/${answerArtifactId.slice('source-document:'.length)}.bin`,
-      sha256: answerDigest,
-      byteLength: answerBytes.byteLength,
-    },
-    encodedBytes: Buffer.from(answerBytes).toString('base64'),
-  })
+    bytes: answerBytes,
+  }))
   const layoutObservationId = 'observation:format2-source-layout:reading-d-1'
   const layoutSourceSpanId = `source-span:${layoutObservationId}`
   capture.observations.push({
@@ -352,6 +376,57 @@ assertCode(
   }),
   'VISUAL_CONFIRMATION_PACKAGE_MISMATCH',
   'rebind must first validate the complete predecessor Teacher Confirmation',
+)
+
+const changedSourceAuthorityRequest = structuredClone(fixture.request)
+rebindSourceDocumentIdentity(
+  changedSourceAuthorityRequest.sourceCapture,
+  changedSourceAuthorityRequest.sourceCapture.documents[0],
+  {
+    inputKey: 'successor_question_source',
+    roles: ['official_answer_source', 'source_provenance'],
+    originalName: 'successor-question.pdf',
+  },
+)
+changedSourceAuthorityRequest.sourceCapture = refreshSourceCapture(
+  changedSourceAuthorityRequest.sourceCapture,
+)
+const changedSourceAuthoritySuccessor = createVisualImportCandidate(
+  changedSourceAuthorityRequest,
+)
+assertCode(
+  () => rebindExactVisualTeacherConfirmation({
+    predecessorCandidatePackage: candidate,
+    predecessorTeacherConfirmation: exactConfirmation,
+    successorCandidatePackage: changedSourceAuthoritySuccessor,
+  }),
+  'VISUAL_CONFIRMATION_REBIND_MISMATCH',
+  'reviewed question-source authority cannot become answer-source authority',
+)
+
+const addedQuestionSourceRequest = successorRequestWithJobOnlyEvidence(
+  fixture.request,
+)
+addedQuestionSourceRequest.sourceCapture.documents.push(sourceDocument({
+  inputKey: 'successor_extra_question_source',
+  roles: ['question_source', 'source_provenance'],
+  originalName: 'successor-extra-question.pdf',
+  bytes: new TextEncoder().encode('%PDF-1.7\n% extra question authority\n'),
+}))
+addedQuestionSourceRequest.sourceCapture = refreshSourceCapture(
+  addedQuestionSourceRequest.sourceCapture,
+)
+const addedQuestionSourceSuccessor = createVisualImportCandidate(
+  addedQuestionSourceRequest,
+)
+assertCode(
+  () => rebindExactVisualTeacherConfirmation({
+    predecessorCandidatePackage: candidate,
+    predecessorTeacherConfirmation: exactConfirmation,
+    successorCandidatePackage: addedQuestionSourceSuccessor,
+  }),
+  'VISUAL_CONFIRMATION_REBIND_MISMATCH',
+  'successor-only PDF question-source authority must not be treated as nonvisual Job evidence',
 )
 
 const changedOwnerRequest = structuredClone(fixture.request)

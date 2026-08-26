@@ -544,17 +544,34 @@ function normalizePersistedCandidate(candidate) {
 }
 
 function reviewedVisualSurface(candidate) {
+  const integrity = validateVisualSourceCapture(candidate.sourceCapture)
+  const captureObservations = new Map(
+    candidate.sourceCapture.observations.map(
+      (observation) => [observation.observationId, observation],
+    ),
+  )
   return {
-    observations: candidate.observations.map((observation) => ({
-      observationId: observation.observationId,
-      source: {
-        documentDigest: observation.source.documentDigest,
-        sourceSpanId: observation.source.sourceSpanId,
-        coordinate: cloneJson(observation.source.coordinate),
-      },
-      owner: cloneJson(observation.owner),
-      sourceCrop: cloneJson(observation.sourceCrop),
-    })),
+    observations: candidate.observations.map((observation) => {
+      const captureObservation = captureObservations.get(
+        observation.observationId,
+      )
+      const span = integrity.spans.get(captureObservation.sourceSpanId)
+      const document = integrity.documents.get(span.documentId)
+      return {
+        observationId: observation.observationId,
+        source: {
+          documentDigest: observation.source.documentDigest,
+          sourceSpanId: observation.source.sourceSpanId,
+          coordinate: cloneJson(observation.source.coordinate),
+          documentAuthority: {
+            roles: cloneJson(document.roles),
+            mediaType: document.mediaType,
+          },
+        },
+        owner: cloneJson(observation.owner),
+        sourceCrop: cloneJson(observation.sourceCrop),
+      }
+    }),
     candidates: cloneJson(candidate.candidates),
   }
 }
@@ -563,27 +580,35 @@ function validateSuccessorOnlyNonVisualEvidence(predecessor, successor) {
   const reviewedObservationIds = new Set(
     successor.observations.map((observation) => observation.observationId),
   )
-  const predecessorDocumentDigests = new Set(
-    predecessor.sourceCapture.documents.map((document) => document.sha256),
+  const documentAuthorityIdentity = (document) => stableStringify({
+    sha256: document.sha256,
+    roles: document.roles,
+    mediaType: document.mediaType,
+  })
+  const predecessorDocumentAuthorityIdentities = new Set(
+    predecessor.sourceCapture.documents.map(documentAuthorityIdentity),
   )
-  const visualEvidenceRoles = new Set([
+  const sourceAuthorityRoles = new Set([
     'comparison_baseline',
     'pdf_xobject_raw_stream',
+    'question_source',
     'source_figure_evidence',
   ])
   const unsupportedDocument = successor.sourceCapture.documents.find(
     (document) => (
-      !predecessorDocumentDigests.has(document.sha256)
+      !predecessorDocumentAuthorityIdentities.has(
+        documentAuthorityIdentity(document),
+      )
       && (
         document.mediaType?.startsWith('image/')
-        || document.roles?.some((role) => visualEvidenceRoles.has(role))
+        || document.roles?.some((role) => sourceAuthorityRoles.has(role))
       )
     ),
   )
   if (unsupportedDocument) {
     fail(
       'VISUAL_CONFIRMATION_REBIND_MISMATCH',
-      'Successor Candidate adds an unreviewed visual evidence document',
+      'Successor Candidate adds an unreviewed question or visual source authority document',
     )
   }
   const unsupported = successor.sourceCapture.observations.find(
