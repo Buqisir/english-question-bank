@@ -55,6 +55,9 @@ import {
 import { projectCanonicalConsumerGroup } from '../../../shared/paper-canonical/consumerProjection.mjs'
 import { createExportImplementation } from '../../exports/exportImplementation.mjs'
 import { buildPrintHtml } from '../../print-renderer.mjs'
+import { validateSevenChoicesShape } from '../../paper-import-ai/analyzeSevenChoices.mjs'
+import { validateClozeShape } from '../../paper-import-ai/analyzeCloze.mjs'
+import { validateGrammarFillShape } from '../../paper-import-ai/analyzeGrammarFill.mjs'
 
 const FORMAT = 'format2-pdf-pair-v1'
 const RESULT_SCHEMA_VERSION = 'format2-import-job-result-v1'
@@ -104,16 +107,19 @@ const analysisSidecarConfigs = new Map([
     fileName: 'seven-choices-analysis-v1.json',
     groupTypes: new Set(['seven_choices']),
     entryKey: 'questions',
+    validate: validateSevenChoicesShape,
   }],
   ['cloze-analysis-v1', {
     fileName: 'cloze-analysis-v1.json',
     groupTypes: new Set(['cloze']),
     entryKey: 'blanks',
+    validate: validateClozeShape,
   }],
   ['grammar-fill-analysis-v2', {
     fileName: 'grammar-fill-analysis-v1.json',
     groupTypes: new Set(['grammar_fill']),
     entryKey: 'blanks',
+    validate: validateGrammarFillShape,
   }],
   ['writing-analysis-v1', {
     fileName: 'writing-analysis-v1.json',
@@ -401,6 +407,58 @@ function transcriptionSchemaDiagnostics(transcription) {
 
 function semanticIssue(code, pathValue, message) {
   return { code, path: pathValue, message }
+}
+
+function analysisParagraphs(group) {
+  return group.blocks.flatMap((block) => {
+    if (block.kind === 'text') {
+      return [{ id: block.blockId, text: block.text }]
+    }
+    if (block.kind === 'framed_columns') {
+      return block.columns.flatMap((column) => [
+        ...(column.heading
+          ? [{ id: `${column.columnId}:heading`, text: column.heading }]
+          : []),
+        ...column.paragraphs.map((textValue, index) => ({
+          id: `${column.columnId}:paragraph:${index + 1}`,
+          text: textValue,
+        })),
+      ])
+    }
+    if (block.kind === 'table') {
+      return block.rows.map((row, index) => ({
+        id: `${block.blockId}:row:${index + 1}`,
+        text: row.join('\t'),
+      }))
+    }
+    return []
+  })
+}
+
+function existingAnalysisValidationGroup(group, answerByQuestionId) {
+  const questions = group.questions.map((question) => ({
+    id: question.questionId,
+    stem: String(question.questionNo),
+    blankId: `blank:${question.questionId}`,
+    options: Object.fromEntries(question.options.flatMap((option) => (
+      option.contentKind === 'text' ? [[option.label, option.text]] : []
+    ))),
+    answerKey: answerByQuestionId.get(question.questionId) || '',
+    ...(question.promptProvision?.provision === 'source_prompt'
+      ? { prompt: question.promptProvision.prompt }
+      : {}),
+  }))
+  return {
+    groupId: group.groupId,
+    title: group.slotId,
+    paragraphs: analysisParagraphs(group),
+    questions,
+    optionBank: (group.questions[0]?.options || []).flatMap((option) => (
+      option.contentKind === 'text'
+        ? [{ label: option.label, text: option.text }]
+        : []
+    )),
+  }
 }
 
 function validateAnswerTranscriptionCheck(input, answerPdfBytes) {
@@ -846,6 +904,9 @@ function validateTranscriptionSemantics(input, answerPdfBytes) {
     }
 
     const analysisVersions = new Set()
+    const analysisAnswerByQuestionId = new Map(
+      transcription.officialAnswers.map((answer) => [answer.questionId, answer.answer]),
+    )
     for (const [index, analysis] of transcription.analysisSidecars.entries()) {
       const config = analysisSidecarConfigs.get(analysis.schemaVersion)
       const analysisPath = `/analysisSidecars/${index}`
@@ -868,7 +929,7 @@ function validateTranscriptionSemantics(input, answerPdfBytes) {
           : group?.questions.map((question) => question.questionId) || []
       ))
       const actualEntryIds = Object.keys(analysis[config.entryKey] || {})
-      if (
+      const identityValid = !(
         analysis.paperId !== input.paperId
         || (
           analysis.schemaVersion !== 'writing-analysis-v1'
@@ -881,12 +942,31 @@ function validateTranscriptionSemantics(input, answerPdfBytes) {
         || new Set(targetGroupIds).size !== targetGroupIds.length
         || stableStringify([...actualEntryIds].sort())
           !== stableStringify([...expectedEntryIds].sort())
-      ) {
+      )
+      if (!identityValid) {
         issues.push(semanticIssue(
           'FORMAT2_ANALYSIS_SIDECAR_INVALID',
           analysisPath,
           'Analysis sidecar identity, reviewed status, target family, or complete entry coverage differs from the transcription',
         ))
+        continue
+      }
+      if (config.validate) {
+        try {
+          config.validate(analysis, {
+            paper: { paperId: input.paperId, sourceAssetVersion: 1 },
+            group: existingAnalysisValidationGroup(
+              targetGroups[0],
+              analysisAnswerByQuestionId,
+            ),
+          })
+        } catch (error) {
+          issues.push(semanticIssue(
+            'FORMAT2_ANALYSIS_SIDECAR_CONTENT_INVALID',
+            analysisPath,
+            `Analysis sidecar content violates its existing contract: ${error.message}`,
+          ))
+        }
       }
     }
   }

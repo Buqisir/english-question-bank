@@ -305,7 +305,7 @@ function upgradeFixtureToTranscriptionV2(input) {
   const readingGroups = transcription.groups.filter(
     (group) => group.groupType === 'reading',
   )
-  transcription.analysisSidecars = [{
+  const readingAnalysis = {
     schemaVersion: 'reading-choice-analysis-v1',
     paperId: transcription.paperId,
     sourceAssetVersion: 1,
@@ -327,15 +327,104 @@ function upgradeFixtureToTranscriptionV2(input) {
         locationParaphrases: [],
       }])
     ))),
-  }]
-  const grammarGroup = transcription.groups.find(
+  }
+  const sevenChoicesGroup = transcription.groups.find(
+    (group) => group.groupType === 'seven_choices',
+  )
+  const sevenChoicesAnalysis = {
+    schemaVersion: 'seven-choices-analysis-v1',
+    paperId: transcription.paperId,
+    sourceAssetVersion: 1,
+    targetGroups: [sevenChoicesGroup.groupId],
+    meta: { reviewStatus: 'reviewed' },
+    groups: { [sevenChoicesGroup.groupId]: { overview: 'Reviewed seven choices.' } },
+    questions: Object.fromEntries(sevenChoicesGroup.questions.map((question) => [
+      question.questionId,
+      {
+        blankId: `blank:${question.questionId}`,
+        positionFacet: 'middle',
+        roleFacet: 'detail',
+        primaryMechanismFacet: 'cohesion',
+        topicClues: ['Synthetic'],
+        contextEvidence: { beforeQuote: 'Synthetic left column.' },
+        mechanismSignals: [
+          { signalText: 'Synthetic left column.', signalSide: 'passage' },
+          { signalText: 'Shared synthetic option A', signalSide: 'option' },
+        ],
+        optionFit: { correctOptionLabel: answersByQuestionId.get(question.questionId) },
+        teachingNote: 'Use the exact shared option bank.',
+      },
+    ])),
+  }
+  const clozeGroup = transcription.groups.find((group) => group.groupType === 'cloze')
+  const clozeAnalysis = {
+    schemaVersion: 'cloze-analysis-v1',
+    paperId: transcription.paperId,
+    sourceAssetVersion: 1,
+    targetGroups: [clozeGroup.groupId],
+    meta: { reviewStatus: 'reviewed' },
+    groups: { [clozeGroup.groupId]: { overview: 'Reviewed cloze.' } },
+    blanks: Object.fromEntries(clozeGroup.questions.map((question) => [
+      question.questionId,
+      {
+        blankId: `blank:${question.questionId}`,
+        blankNo: question.questionNo,
+        pos: 'other',
+        correctFit: {
+          optionLabel: answersByQuestionId.get(question.questionId),
+          reason: 'The source context supports the admitted answer.',
+        },
+        distractorGlosses: question.options
+          .filter((option) => option.label !== answersByQuestionId.get(question.questionId))
+          .map((option) => ({ optionLabel: option.label })),
+        evidence: [{
+          type: 'collocation-partner',
+          signalSide: 'context-before',
+          signalText: 'compact cloze',
+        }],
+        teachingNote: 'Read the local collocation.',
+      },
+    ])),
+  }
+  const grammarFillGroup = transcription.groups.find(
     (group) => group.groupType === 'grammar_fill',
   )
-  grammarGroup.questions.forEach((question, index) => {
+  grammarFillGroup.questions.forEach((question, index) => {
     question.promptProvision = index === 0
       ? { provision: 'source_prompt', prompt: 'hold' }
       : { provision: 'source_proven_none' }
   })
+  const grammarFillAnalysis = {
+    schemaVersion: 'grammar-fill-analysis-v2',
+    paperId: transcription.paperId,
+    sourceAssetVersion: 1,
+    targetGroups: [grammarFillGroup.groupId],
+    meta: { reviewStatus: 'reviewed' },
+    groups: { [grammarFillGroup.groupId]: { overview: 'Reviewed grammar fill.' } },
+    blanks: Object.fromEntries(grammarFillGroup.questions.map((question) => {
+      const prompted = question.promptProvision.provision === 'source_prompt'
+      return [question.questionId, {
+        blankId: `blank:${question.questionId}`,
+        blankNo: question.questionNo,
+        blankType: prompted ? 'given' : 'no-hint',
+        hint: prompted ? question.promptProvision.prompt : null,
+        facetKey: prompted
+          ? 'grammar-fill.given.verb.non-finite'
+          : 'grammar-fill.no-hint.article',
+        ...(prompted ? { role: 'object', path: 'fast' } : {}),
+        reason: 'The source context determines this form.',
+        teachingNote: 'Check the exact local structure.',
+        answer: answersByQuestionId.get(question.questionId),
+        evidence: [{ type: 'clause-frame', signalText: 'compact grammar' }],
+      }]
+    })),
+  }
+  transcription.analysisSidecars = [
+    readingAnalysis,
+    sevenChoicesAnalysis,
+    clozeAnalysis,
+    grammarFillAnalysis,
+  ]
   const applicationBlock = transcription.groups
     .find((group) => group.groupType === 'application_writing')
     .blocks.find((block) => block.kind === 'writing_material')
@@ -1869,6 +1958,36 @@ v2FailureCase(
   'FORMAT2_TRANSCRIPTION_INVALID',
   'FORMAT2_ANALYSIS_SIDECAR_INVALID',
 )
+v2FailureCase(
+  (input) => {
+    const analysis = input.transcription.analysisSidecars.find(
+      (sidecar) => sidecar.schemaVersion === 'seven-choices-analysis-v1',
+    )
+    analysis.questions[Object.keys(analysis.questions)[0]].positionFacet = null
+  },
+  'FORMAT2_TRANSCRIPTION_INVALID',
+  'FORMAT2_ANALYSIS_SIDECAR_CONTENT_INVALID',
+)
+v2FailureCase(
+  (input) => {
+    const analysis = input.transcription.analysisSidecars.find(
+      (sidecar) => sidecar.schemaVersion === 'cloze-analysis-v1',
+    )
+    analysis.blanks[Object.keys(analysis.blanks)[0]].correctFit = null
+  },
+  'FORMAT2_TRANSCRIPTION_INVALID',
+  'FORMAT2_ANALYSIS_SIDECAR_CONTENT_INVALID',
+)
+v2FailureCase(
+  (input) => {
+    const analysis = input.transcription.analysisSidecars.find(
+      (sidecar) => sidecar.schemaVersion === 'grammar-fill-analysis-v2',
+    )
+    analysis.blanks[Object.keys(analysis.blanks)[0]].facetKey = null
+  },
+  'FORMAT2_TRANSCRIPTION_INVALID',
+  'FORMAT2_ANALYSIS_SIDECAR_CONTENT_INVALID',
+)
 
 const transcriptionV2CompleteListening = freshFixture('v2-complete-listening-')
 const retainedListeningGroup = structuredClone(
@@ -2013,18 +2132,33 @@ assert.equal(
   ).inlines[0].text,
   'Reading Club Invitation',
 )
+const analysisFileBySchemaVersion = new Map([
+  ['reading-choice-analysis-v1', 'reading-choice-analysis-v1.json'],
+  ['seven-choices-analysis-v1', 'seven-choices-analysis-v1.json'],
+  ['cloze-analysis-v1', 'cloze-analysis-v1.json'],
+  ['grammar-fill-analysis-v2', 'grammar-fill-analysis-v1.json'],
+])
+for (const analysis of transcriptionV2.fixture.input.transcription.analysisSidecars) {
+  const analysisPath = path.join(
+    transcriptionV2VersionDir,
+    'analyses',
+    analysisFileBySchemaVersion.get(analysis.schemaVersion),
+  )
+  assert.deepEqual(
+    JSON.parse(readFileSync(analysisPath, 'utf8')),
+    analysis,
+    `${analysis.schemaVersion} publishes unchanged beside the atomic version`,
+  )
+  assert.equal(
+    transcriptionV2Completed.artifacts.analysisSidecars.items.find(
+      (item) => item.schemaVersion === analysis.schemaVersion,
+    ).sha256,
+    sha256(new Uint8Array(readFileSync(analysisPath))),
+  )
+}
 const transcriptionV2AnalysisPath = path.join(
   transcriptionV2VersionDir,
   'analyses/reading-choice-analysis-v1.json',
-)
-assert.deepEqual(
-  JSON.parse(readFileSync(transcriptionV2AnalysisPath, 'utf8')),
-  transcriptionV2.fixture.input.transcription.analysisSidecars[0],
-  'the reviewed Analysis sidecar publishes unchanged beside the atomic version',
-)
-assert.equal(
-  transcriptionV2Completed.artifacts.analysisSidecars.items[0].sha256,
-  sha256(new Uint8Array(readFileSync(transcriptionV2AnalysisPath))),
 )
 const transcriptionV2Noop = resume(transcriptionV2.repositoryRoot, {
   paperId: transcriptionV2.fixture.input.paperId,
