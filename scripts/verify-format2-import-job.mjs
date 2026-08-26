@@ -18,12 +18,16 @@ import {
 import { extractAnswerTextFromPdfBytes } from '../server/paper-import/internal/answerTextExtraction.mjs'
 import {
   confirmVisualImportCandidate,
+  createVisualImportCandidate,
   rebindExactVisualTeacherConfirmation,
 } from '../server/paper-canonical/visualCandidate.mjs'
 import {
   buildConfirmedFormat2CanonicalRequest,
 } from '../server/paper-canonical/format2CanonicalRequest.mjs'
 import { readingOptionFigureAuthorityRef } from '../shared/paper-canonical/authority.mjs'
+import {
+  compileConfirmedReadingOptionFigurePaper,
+} from '../shared/paper-canonical/compiler.mjs'
 import { readingOptionFigureConsumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
 import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
 import { projectCanonicalPaperBrowseDisplayAsset } from '../shared/paper-canonical/paperBrowseDisplayAsset.mjs'
@@ -498,9 +502,7 @@ function upgradeFixtureToTranscriptionV3(input, { listeningGroup = null } = {}) 
   transcription.sourceRegions = []
 
   for (const [groupIndex, group] of transcription.groups.entries()) {
-    if (['application_writing', 'continuation_writing'].includes(group.groupType)) {
-      continue
-    }
+    if (group.groupType === 'listening') continue
     const sourceRegionId = `source-region:${group.groupId}`
     const sourceRegionRefs = [sourceRegionId]
     transcription.sourceRegions.push({
@@ -510,11 +512,58 @@ function upgradeFixtureToTranscriptionV3(input, { listeningGroup = null } = {}) 
       region: { x: 0.08, y: 0.12, width: 0.84, height: 0.72 },
     })
     group.sourceRegionRefs = sourceRegionRefs
-    for (const question of group.questions) {
+    if (['application_writing', 'continuation_writing'].includes(group.groupType)) {
+      const block = group.blocks.find(
+        (candidate) => candidate.kind === 'writing_material',
+      )
+      const addWritingRegion = (suffix, region) => {
+        const regionId = `${sourceRegionId}:${suffix}`
+        transcription.sourceRegions.push({
+          sourceRegionId: regionId,
+          documentRole: 'question_pdf',
+          page: groupIndex + 1,
+          region,
+        })
+        return [regionId]
+      }
+      block.sourceRegionRefs = addWritingRegion(
+        'prompt',
+        { x: 0.08, y: 0.12, width: 0.84, height: 0.16 },
+      )
+      if (block.applicationEvidence) {
+        block.applicationEvidence.sourceRegionRefs = addWritingRegion(
+          'evidence',
+          { x: 0.08, y: 0.3, width: 0.84, height: 0.24 },
+        )
+      }
+      if (block.applicationGiven) {
+        block.applicationGiven.sourceRegionRefs = addWritingRegion(
+          'given',
+          { x: 0.08, y: 0.56, width: 0.84, height: 0.12 },
+        )
+        for (const part of block.applicationGiven.parts || []) {
+          part.sourceRegionRefs = [...block.applicationGiven.sourceRegionRefs]
+        }
+      }
+      continue
+    }
+    for (const [questionIndex, question] of group.questions.entries()) {
+      const ordinalRegionId = `${sourceRegionId}:ordinal:${questionIndex + 1}`
+      transcription.sourceRegions.push({
+        sourceRegionId: ordinalRegionId,
+        documentRole: 'question_pdf',
+        page: groupIndex + 1,
+        region: {
+          x: 0.08,
+          y: 0.12 + questionIndex * 0.02,
+          width: 0.04,
+          height: 0.015,
+        },
+      })
       question.sourceRegionRefs = sourceRegionRefs
       question.sourceNumbering = {
         printedOrdinal: question.questionNo === 35 ? '34.' : `${question.questionNo}.`,
-        sourceRegionRefs,
+        sourceRegionRefs: [ordinalRegionId],
       }
       for (const option of question.options) {
         if (option.contentKind === 'text') option.sourceRegionRefs = sourceRegionRefs
@@ -622,6 +671,61 @@ function upgradeFixtureToTranscriptionV3(input, { listeningGroup = null } = {}) 
     }
   }
   return input
+}
+
+function format2SourceAddresses(transcription) {
+  return new Set(transcription.groups.flatMap((group) => group.blocks.flatMap((block) => [
+    block.blockId,
+    ...(block.columns || []).map((column) => column.columnId),
+    ...(block.inlines || []).map((inline) => inline.contentId),
+    ...(block.applicationGiven?.parts || []).flatMap((part) => [
+      part.partId,
+      part.blockId,
+    ]),
+  ])))
+}
+
+function readdressFormat2SourceContent(transcription) {
+  const replacements = new Map()
+  let sequence = 0
+  const replace = (value) => {
+    const replacement = `source-address:mutated:${++sequence}`
+    replacements.set(value, replacement)
+    return replacement
+  }
+  for (const group of transcription.groups) {
+    for (const block of group.blocks) {
+      block.blockId = replace(block.blockId)
+      for (const column of block.columns || []) column.columnId = replace(column.columnId)
+      for (const inline of block.inlines || []) inline.contentId = replace(inline.contentId)
+      for (const part of block.applicationGiven?.parts || []) {
+        part.partId = replace(part.partId)
+        part.blockId = replace(part.blockId)
+      }
+    }
+  }
+  for (const group of transcription.groups) {
+    for (const question of group.questions) {
+      if (question.promptProvision?.sourceContentRef) {
+        question.promptProvision.sourceContentRef = replacements.get(
+          question.promptProvision.sourceContentRef,
+        )
+      }
+    }
+  }
+}
+
+function objectContainsAnyIdentity(value, identities) {
+  if (typeof value === 'string') return identities.has(value)
+  if (Array.isArray(value)) {
+    return value.some((item) => objectContainsAnyIdentity(item, identities))
+  }
+  if (value && typeof value === 'object') {
+    return Object.entries(value).some(([key, item]) => (
+      identities.has(key) || objectContainsAnyIdentity(item, identities)
+    ))
+  }
+  return false
 }
 
 function v3FailureCase(mutator, diagnosticCode) {
@@ -2501,6 +2605,41 @@ const transcriptionV3Selection = confirmVisualImportCandidate(
   transcriptionV3Candidate,
   transcriptionV3Confirmation,
 )
+const transcriptionV3ReadingObservationIds = new Set(
+  transcriptionV3Candidate.observations
+    .filter((observation) => observation.owner.kind === 'reading_option')
+    .map((observation) => observation.observationId),
+)
+const transcriptionV3ReadingCandidate = createVisualImportCandidate({
+  sourceCapture: transcriptionV3Candidate.sourceCapture,
+  observations: transcriptionV3Candidate.observations.filter(
+    (observation) => transcriptionV3ReadingObservationIds.has(
+      observation.observationId,
+    ),
+  ).map((observation) => ({
+    observationId: observation.observationId,
+    owner: structuredClone(observation.owner),
+    sourceCrop: structuredClone(observation.sourceCrop),
+  })),
+  candidates: transcriptionV3Candidate.candidates.filter(
+    (candidate) => transcriptionV3ReadingObservationIds.has(
+      candidate.observationId,
+    ),
+  ).map((candidate) => ({
+    observationId: candidate.observationId,
+    owner: structuredClone(candidate.owner),
+    method: candidate.method,
+    artifact: structuredClone(candidate.artifact),
+    sourceTruthChecklist: structuredClone(candidate.sourceTruthChecklist),
+    ...(candidate.reproducibility
+      ? { reproducibility: structuredClone(candidate.reproducibility) }
+      : {}),
+  })),
+})
+const transcriptionV3ReadingSelection = confirmVisualImportCandidate(
+  transcriptionV3ReadingCandidate,
+  exactConfirmation(transcriptionV3ReadingCandidate),
+)
 const transcriptionV3Canonical = buildConfirmedFormat2CanonicalRequest({
   transcription: transcriptionV3.fixture.input.transcription,
   questionPdfBytes: transcriptionV3.fixture.questionPdfBytes,
@@ -2510,6 +2649,67 @@ const transcriptionV3Canonical = buildConfirmedFormat2CanonicalRequest({
 const transcriptionV3Source = JSON.parse(Buffer.from(
   transcriptionV3Canonical.sourceAsset,
 ).toString('utf8'))
+const transcriptionV3CallerAddresses = format2SourceAddresses(
+  transcriptionV3.fixture.input.transcription,
+)
+assert.equal(
+  transcriptionV3Source.groups.some((group) => (
+    objectContainsAnyIdentity(group, transcriptionV3CallerAddresses)
+  )),
+  false,
+  'all v3 caller block, column, content, and given-part IDs stay source-map-only across families',
+)
+const transcriptionV3Compiled = compileConfirmedReadingOptionFigurePaper(
+  transcriptionV3Canonical.request,
+  transcriptionV3ReadingSelection,
+)
+assert.equal(
+  transcriptionV3Compiled.disposition,
+  'ready',
+  JSON.stringify(
+    transcriptionV3Compiled.artifacts.normalizationReport.diagnostics || [],
+  ),
+)
+for (const group of transcriptionV3Compiled.artifacts.canonicalPaper.questionGroups) {
+  const {
+    sourceMap: _sourceMap,
+    sourceFingerprint: _sourceFingerprint,
+    semanticDigest,
+    ...semanticBody
+  } = group
+  assert.equal(
+    semanticDigest,
+    digestJson(semanticBody),
+    `${group.groupId} semanticDigest is freshly derived from Canonical semantics`,
+  )
+}
+const transcriptionV3Readdressed = structuredClone(
+  transcriptionV3.fixture.input.transcription,
+)
+readdressFormat2SourceContent(transcriptionV3Readdressed)
+const transcriptionV3ReaddressedCanonical = buildConfirmedFormat2CanonicalRequest({
+  transcription: transcriptionV3Readdressed,
+  questionPdfBytes: transcriptionV3.fixture.questionPdfBytes,
+  answerPdfBytes: transcriptionV3.fixture.answerPdfBytes,
+  confirmedSelection: transcriptionV3Selection,
+})
+const transcriptionV3ReaddressedCompiled = compileConfirmedReadingOptionFigurePaper(
+  transcriptionV3ReaddressedCanonical.request,
+  transcriptionV3ReadingSelection,
+)
+assert.equal(
+  transcriptionV3ReaddressedCompiled.disposition,
+  'ready',
+  JSON.stringify(
+    transcriptionV3ReaddressedCompiled.artifacts.normalizationReport.diagnostics
+      || [],
+  ),
+)
+assert.deepEqual(
+  transcriptionV3ReaddressedCompiled.artifacts.canonicalPaper.questionGroups,
+  transcriptionV3Compiled.artifacts.canonicalPaper.questionGroups,
+  'changing only v3 source-map addresses does not alter Canonical identities, references, media, Options, or semantic digests',
+)
 const transcriptionV3SevenSource = transcriptionV3Source.groups.find(
   (group) => group.groupId === 'group:seven',
 )
@@ -2577,6 +2777,49 @@ assert.ok(
   )),
   'v3 preserves printed numbering evidence without changing profile-derived numbering',
 )
+assert.deepEqual(
+  transcriptionV3Source.transformations.find((record) => (
+    record.recordId
+      === 'transformation:format2-source-numbering:question:reading-d:35'
+  )),
+  {
+    recordId: 'transformation:format2-source-numbering:question:reading-d:35',
+    sequence: 1,
+    ruleId: 'guarded-representation-normalization',
+    ruleVersion: '2',
+    target: {
+      identity: 'question:reading-d:35',
+      path: 'numberingAssignments.canonicalNumber',
+    },
+    operation: 'representation_normalization',
+    inputSourceSpanIds: [
+      'source-span:observation:format2-source-numbering:question:reading-d:35',
+    ],
+    before: '34.',
+    after: 35,
+    certainty: 'exact',
+    preconditions: {
+      sourceObservationIds: [
+        'observation:format2-source-numbering:question:reading-d:35',
+      ],
+      sourceValueDigests: [digestJson(
+        transcriptionV3Source.observations.find((observation) => (
+          observation.observationId
+            === 'observation:format2-source-numbering:question:reading-d:35'
+        )).value,
+      )],
+    },
+    outputDigest: digestJson(35),
+  },
+  'printed/canonical ordinal disagreement enters the registered exact Transformation ledger',
+)
+assert.equal(
+  transcriptionV3Source.groups.find(
+    (group) => group.groupId === 'group:application',
+  ).sourceSpanId,
+  'source-span:observation:format2-source-region:source-region:group:application',
+  'v3 Writing group binding uses its validated group source-region reference',
+)
 assert.ok(
   transcriptionV3Canonical.request.evidence.documents.some((document) => (
     document.inputKey === 'format2_paper_provenance'
@@ -2610,6 +2853,82 @@ assert.equal(
   ).canonicalNumber,
   35,
   'Canonical numbering remains profile-derived when printed source numbering differs',
+)
+const transcriptionV3OrdinalSourceSpan =
+  'source-span:observation:format2-source-numbering:question:reading-d:35'
+assert.equal(
+  transcriptionV3Plan.numberingAssignments.find(
+    (assignment) => assignment.questionId === 'question:reading-d:35',
+  ).sourceNumberSpan,
+  transcriptionV3OrdinalSourceSpan,
+  'Plan sourceNumberSpan binds the exact printed ordinal region',
+)
+const transcriptionV3Report = JSON.parse(readFileSync(
+  path.join(transcriptionV3VersionDir, 'canonical/normalization-report-v46.json'),
+  'utf8',
+))
+const transcriptionV3Capture = JSON.parse(readFileSync(
+  path.join(transcriptionV3VersionDir, 'canonical/source-capture-v1.json'),
+  'utf8',
+))
+const transcriptionV3OrdinalRecord = transcriptionV3Report.transformationRecords.find(
+  (record) => record.recordId
+    === 'transformation:format2-source-numbering:question:reading-d:35',
+)
+assert.equal(transcriptionV3OrdinalRecord.before, '34.')
+assert.equal(transcriptionV3OrdinalRecord.after, 35)
+assert.deepEqual(
+  transcriptionV3OrdinalRecord.inputSourceSpanIds,
+  [transcriptionV3OrdinalSourceSpan],
+  'Normalization Report retains the exact ordinal transformation lineage',
+)
+const transcriptionV3OrdinalDirectMap = transcriptionV3Report.directSourceMap.find(
+  (entry) => entry.target.kind === 'question'
+    && entry.target.id === 'question:reading-d:35',
+)
+assert.equal(
+  transcriptionV3OrdinalDirectMap.sourceSpanRefs[0],
+  transcriptionV3OrdinalSourceSpan,
+  'Question direct source map leads with the exact printed ordinal span',
+)
+assert.deepEqual(
+  transcriptionV3OrdinalDirectMap.transformationRecordIds,
+  [transcriptionV3OrdinalRecord.recordId],
+  'Question direct source map binds its accepted Transformation Record',
+)
+const transcriptionV3SpansById = new Map(
+  transcriptionV3Capture.sourceSpans.map((span) => [span.sourceSpanId, span]),
+)
+const transcriptionV3OrdinalRegion = transcriptionV3.fixture.input.transcription
+  .sourceRegions.find((region) => (
+    region.sourceRegionId
+      === transcriptionV3.fixture.input.transcription.groups.find(
+        (group) => group.slotId === 'reading.d',
+      ).questions.find(
+        (question) => question.questionId === 'question:reading-d:35',
+      ).sourceNumbering.sourceRegionRefs[0]
+  ))
+assert.deepEqual(
+  transcriptionV3SpansById.get(transcriptionV3OrdinalSourceSpan).coordinate,
+  {
+    kind: 'page_region',
+    page: transcriptionV3OrdinalRegion.page,
+    region: transcriptionV3OrdinalRegion.region,
+  },
+  'accepted ordinal Transformation keeps the precise supplied page region',
+)
+const transcriptionV3ApplicationMappings = transcriptionV3Report.directSourceMap.filter(
+  (entry) => String(entry.target.id).includes('group:application'),
+)
+assert.ok(transcriptionV3ApplicationMappings.length > 10)
+assert.ok(
+  transcriptionV3ApplicationMappings.every((entry) => (
+    entry.sourceSpanRefs.length > 0
+    && entry.sourceSpanRefs.every((sourceSpanId) => (
+      transcriptionV3SpansById.get(sourceSpanId)?.coordinate.kind === 'page_region'
+    ))
+  )),
+  'Application group, facts, content, given skeleton, ruling, and response use exact page-region spans',
 )
 
 const transcriptionV3Successor = freshFixture('v3-source-fidelity-successor-')
@@ -2797,6 +3116,22 @@ v3FailureCase(
     input.transcription.groups[0].sourceRegionRefs = ['source-region:missing']
   },
   'FORMAT2_SOURCE_REGION_REFERENCE_INVALID',
+)
+v3FailureCase(
+  (input) => {
+    input.transcription.groups.find(
+      (group) => group.groupType === 'application_writing',
+    ).blocks[0].applicationEvidence.sourceRegionRefs = ['source-region:missing']
+  },
+  'FORMAT2_SOURCE_REGION_REFERENCE_INVALID',
+)
+v3FailureCase(
+  (input) => {
+    input.transcription.groups.find(
+      (group) => group.slotId === 'reading.d',
+    ).questions[0].sourceNumbering.printedOrdinal = '34'
+  },
+  'FORMAT2_SOURCE_NUMBERING_INVALID',
 )
 v3FailureCase(
   (input) => {

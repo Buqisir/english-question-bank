@@ -69,5 +69,5 @@ Shenzhen, `paper-2026-i`, or Jining transcription data.
 ## Result
 
 Commit: This implementation commit; the exact HEAD is recorded in the completion handoff.
-Verify: public Format 2 Job, Visual Candidate/exact rebind, Canonical publication, Reading Option Figure, Cloze/Grammar publication, schema/syntax, and diff checks passed
-Notes: v1/v2 behavior remains on the legacy path; no consumer, renderer, authority, publication-protocol, paper-data, retirement, or production change
+Verify: public Format 2 Job, Visual Candidate/exact rebind, Canonical publication, Reading Option Figure, Cloze/Grammar and Application/Continuation Writing publication, schema/syntax, and diff checks passed
+Notes: exact ordinal transformations use the registered normalization contract; v3 Writing evidence uses validated page regions; compiler-owned v3 child identities are deterministic and source-address-independent; v1/v2 behavior remains on the legacy path; no consumer, renderer, authority, publication-protocol, paper-data, retirement, or production change

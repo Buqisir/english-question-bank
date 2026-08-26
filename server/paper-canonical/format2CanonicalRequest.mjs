@@ -26,6 +26,21 @@ function clone(value) {
   return structuredClone(value)
 }
 
+function exactSourceSpan(sourceFidelity, sourceRegionRefs, fallbackLength) {
+  if (sourceFidelity.legacy) return { start: 0, end: fallbackLength }
+  const sourceSpanId = `source-span:observation:format2-source-region:${sourceRegionRefs[0]}`
+  const observation = sourceFidelity.sourceObservations.find(
+    (candidate) => `source-span:${candidate.observationId}` === sourceSpanId,
+  )
+  if (!observation) {
+    throw format2CanonicalError(
+      'FORMAT2_CANONICAL_SOURCE_FIDELITY_INVALID',
+      `Validated source region ${sourceRegionRefs[0]} has no admitted observation`,
+    )
+  }
+  return clone(observation.span)
+}
+
 function text(nodeId, value) {
   return { kind: 'text', nodeId, text: String(value) }
 }
@@ -38,22 +53,25 @@ function paragraph(nodeId, value) {
   }
 }
 
-function tableBlock(block) {
+function tableBlock(block, identity = null) {
   const width = block.rows[0].length
   return {
     kind: 'table',
-    nodeId: block.blockId,
+    nodeId: identity?.nodeId || block.blockId,
     columnCount: width,
     rows: block.rows.map((values, rowIndex) => ({
-      rowId: `row:${block.blockId}:${rowIndex + 1}`,
+      rowId: identity?.rows[rowIndex].rowId
+        || `row:${block.blockId}:${rowIndex + 1}`,
       cells: values.map((value, columnIndex) => ({
-        cellId: `cell:${block.blockId}:${rowIndex + 1}:${columnIndex + 1}`,
+        cellId: identity?.rows[rowIndex].cells[columnIndex].cellId
+          || `cell:${block.blockId}:${rowIndex + 1}:${columnIndex + 1}`,
         columnStart: columnIndex,
         columnSpan: 1,
         rowSpan: 1,
         role: 'data',
         inlines: [text(
-          `text:${block.blockId}:${rowIndex + 1}:${columnIndex + 1}`,
+          identity?.rows[rowIndex].cells[columnIndex].inlineNodeId
+            || `text:${block.blockId}:${rowIndex + 1}:${columnIndex + 1}`,
           value,
         )],
       })),
@@ -61,23 +79,35 @@ function tableBlock(block) {
   }
 }
 
-function framedColumnsBlock(block) {
+function framedColumnsBlock(block, identity = null) {
   return {
     kind: 'framed_columns',
-    nodeId: block.blockId,
+    nodeId: identity?.nodeId || block.blockId,
     columnCount: 2,
-    columns: block.columns.map((column) => {
+    columns: block.columns.map((column, columnIndex) => {
+      const columnIdentity = identity?.columns[columnIndex]
+      const columnId = columnIdentity?.columnId || column.columnId
       const blocks = []
       if (column.heading) {
-        blocks.push(paragraph(`paragraph:${column.columnId}:heading`, column.heading))
+        blocks.push(paragraph(
+          columnIdentity?.heading.nodeId || `paragraph:${column.columnId}:heading`,
+          column.heading,
+        ))
       }
       blocks.push(...column.paragraphs.map((value, index) => (
-        paragraph(`paragraph:${column.columnId}:${index + 1}`, value)
+        paragraph(
+          columnIdentity?.paragraphs[index].nodeId
+            || `paragraph:${column.columnId}:${index + 1}`,
+          value,
+        )
       )))
       return {
-        columnId: column.columnId,
+        columnId,
         ...(column.heading
-          ? { columnHeading: `paragraph:${column.columnId}:heading` }
+          ? {
+              columnHeading: columnIdentity?.heading.nodeId
+                || `paragraph:${column.columnId}:heading`,
+            }
           : {}),
         blocks,
       }
@@ -100,16 +130,17 @@ function visualMedia(visual, artifact) {
   }
 }
 
-function contentForGroup(group, selectedByObservation) {
+function contentForGroup(group, selectedByObservation, identities = null) {
   const blocks = []
   const media = []
-  for (const block of group.blocks) {
+  for (const [blockIndex, block] of group.blocks.entries()) {
+    const identity = identities?.blocks[blockIndex]
     if (block.kind === 'text') {
-      blocks.push(paragraph(block.blockId, block.text))
+      blocks.push(paragraph(identity?.nodeId || block.blockId, block.text))
     } else if (block.kind === 'table') {
-      blocks.push(tableBlock(block))
+      blocks.push(tableBlock(block, identity))
     } else if (block.kind === 'framed_columns') {
-      blocks.push(framedColumnsBlock(block))
+      blocks.push(framedColumnsBlock(block, identity))
     } else if (block.kind === 'visual_placeholder') {
       const selected = selectedByObservation.get(block.visualObservationId)
       if (!selected) {
@@ -123,33 +154,43 @@ function contentForGroup(group, selectedByObservation) {
       media.push(item)
       blocks.push({
         kind: 'figure',
-        nodeId: block.blockId,
+        nodeId: identity?.nodeId || block.blockId,
         mediaId: item.mediaId,
         caption: [],
       })
     } else if (block.kind === 'writing_material') {
-      blocks.push(paragraph(block.blockId, block.prompt))
+      blocks.push(paragraph(identity?.nodeId || block.blockId, block.prompt))
       if (block.applicationEvidence) {
         const evidence = block.applicationEvidence
+        const evidenceIdentity = identity?.evidence
         blocks.push(
-          paragraph(`${block.blockId}:evidence:writer-role`, evidence.writerRole),
-          paragraph(`${block.blockId}:evidence:audience`, evidence.audienceOrDestination),
-          paragraph(`${block.blockId}:evidence:deliverable`, evidence.deliverable),
-          paragraph(`${block.blockId}:evidence:purpose`, evidence.communicativePurpose),
-          paragraph(`${block.blockId}:evidence:word-count`, String(block.wordCountTarget)),
+          paragraph(evidenceIdentity?.writerRole.nodeId
+            || `${block.blockId}:evidence:writer-role`, evidence.writerRole),
+          paragraph(evidenceIdentity?.audienceOrDestination.nodeId
+            || `${block.blockId}:evidence:audience`, evidence.audienceOrDestination),
+          paragraph(evidenceIdentity?.deliverable.nodeId
+            || `${block.blockId}:evidence:deliverable`, evidence.deliverable),
+          paragraph(evidenceIdentity?.communicativePurpose.nodeId
+            || `${block.blockId}:evidence:purpose`, evidence.communicativePurpose),
+          paragraph(evidenceIdentity?.wordCount.nodeId
+            || `${block.blockId}:evidence:word-count`, String(block.wordCountTarget)),
           ...evidence.contentRequirements.map((requirement, index) => paragraph(
-            `${block.blockId}:evidence:requirement:${index + 1}`,
+            evidenceIdentity?.contentRequirements[index].nodeId
+              || `${block.blockId}:evidence:requirement:${index + 1}`,
             requirement,
           )),
         )
       }
       if (block.applicationGiven?.provision === 'source_provided') {
-        blocks.push(...block.applicationGiven.parts.map((part) => (
-          paragraph(part.blockId, part.text)
+        blocks.push(...block.applicationGiven.parts.map((part, index) => (
+          paragraph(identity?.givenParts[index].nodeId || part.blockId, part.text)
         )))
       }
       for (const [index, starter] of (block.continuationStarters || []).entries()) {
-        blocks.push(paragraph(`${block.blockId}:starter:${index + 1}`, starter))
+        blocks.push(paragraph(
+          identity?.starters[index].nodeId || `${block.blockId}:starter:${index + 1}`,
+          starter,
+        ))
       }
     }
   }
@@ -319,8 +360,12 @@ function ordinaryVariant(group, family) {
   return { family, choiceOwnership: { ownership: 'none' } }
 }
 
-function writingVariant(group, family) {
+function writingVariant(group, family, identities = null) {
+  const blockIndex = group.blocks.findIndex(
+    (candidate) => candidate.kind === 'writing_material',
+  )
   const block = group.blocks.find((candidate) => candidate.kind === 'writing_material')
+  const identity = identities?.blocks[blockIndex]
   const wordCountTarget = block.wordCountTarget
   if (!Number.isInteger(wordCountTarget)) {
     throw format2CanonicalError(
@@ -331,9 +376,10 @@ function writingVariant(group, family) {
   const contentBlockRefs = group.blocks
     .filter((candidate) => candidate.kind === 'writing_material')
     .flatMap((candidate) => [
-      candidate.blockId,
+      identity?.nodeId || candidate.blockId,
       ...(candidate.continuationStarters || []).map(
-        (_starter, index) => `${candidate.blockId}:starter:${index + 1}`,
+        (_starter, index) => identity?.starters[index].nodeId
+          || `${candidate.blockId}:starter:${index + 1}`,
       ),
     ])
   if (family === 'continuation-writing' && contentBlockRefs.length !== 3) {
@@ -344,54 +390,75 @@ function writingVariant(group, family) {
   }
   if (family === 'application-writing') {
     const evidence = block.applicationEvidence
-    const contentRef = (suffix) => ({
-      blockId: `${block.blockId}:evidence:${suffix}`,
-      inlineNodeIds: [`text:${block.blockId}:evidence:${suffix}`],
+    const evidenceIdentity = identity?.evidence
+    const contentRef = (key, legacySuffix) => ({
+      blockId: evidenceIdentity?.[key].nodeId
+        || `${block.blockId}:evidence:${legacySuffix}`,
+      inlineNodeIds: [evidenceIdentity?.[key].inlineNodeId
+        || `text:${block.blockId}:evidence:${legacySuffix}`],
     })
-    const evidenceBlockIds = [
-      'writer-role',
-      'audience',
-      'deliverable',
-      'purpose',
-      'word-count',
-      ...evidence.contentRequirements.map((_requirement, index) => `requirement:${index + 1}`),
-    ].map((suffix) => `${block.blockId}:evidence:${suffix}`)
+    const evidenceBlockIds = evidenceIdentity
+      ? [
+          evidenceIdentity.writerRole.nodeId,
+          evidenceIdentity.audienceOrDestination.nodeId,
+          evidenceIdentity.deliverable.nodeId,
+          evidenceIdentity.communicativePurpose.nodeId,
+          evidenceIdentity.wordCount.nodeId,
+          ...evidenceIdentity.contentRequirements.map((item) => item.nodeId),
+        ]
+      : [
+          'writer-role',
+          'audience',
+          'deliverable',
+          'purpose',
+          'word-count',
+          ...evidence.contentRequirements.map(
+            (_requirement, index) => `requirement:${index + 1}`,
+          ),
+        ].map((suffix) => `${block.blockId}:evidence:${suffix}`)
     const applicationGiven = block.applicationGiven || {
       provision: 'source_proven_none',
     }
     return {
       family,
-      writingTaskId: `writing-task:${group.groupId}`,
-      promptBlockRefs: [block.blockId, ...evidenceBlockIds],
+      writingTaskId: identity?.writingTaskId || `writing-task:${group.groupId}`,
+      promptBlockRefs: [identity?.nodeId || block.blockId, ...evidenceBlockIds],
       situation: {
-        writerRole: contentRef('writer-role'),
-        audienceOrDestination: contentRef('audience'),
-        deliverable: contentRef('deliverable'),
-        communicativePurpose: contentRef('purpose'),
+        writerRole: contentRef('writerRole', 'writer-role'),
+        audienceOrDestination: contentRef('audienceOrDestination', 'audience'),
+        deliverable: contentRef('deliverable', 'deliverable'),
+        communicativePurpose: contentRef('communicativePurpose', 'purpose'),
       },
       contentRequirements: evidence.contentRequirements.map((_requirement, index) => ({
         requirementId: `requirement:${group.groupId}:${index + 1}`,
-        contentRef: contentRef(`requirement:${index + 1}`),
+        contentRef: evidenceIdentity
+          ? {
+              blockId: evidenceIdentity.contentRequirements[index].nodeId,
+              inlineNodeIds: [
+                evidenceIdentity.contentRequirements[index].inlineNodeId,
+              ],
+            }
+          : contentRef(null, `requirement:${index + 1}`),
       })),
       wordCountRuling: {
         kind: 'approximate_target',
         target: wordCountTarget,
         countScope: block.wordCountScope,
-        sourceRef: contentRef('word-count'),
+        sourceRef: contentRef('wordCount', 'word-count'),
         authorityObservationRef: `observation:${group.groupId}:word-count`,
       },
       givenSkeleton: applicationGiven.provision === 'source_provided'
         ? {
             presence: 'provided',
-            parts: applicationGiven.parts.map((part) => ({
-              givenPartId: part.partId,
+            parts: applicationGiven.parts.map((part, index) => ({
+              givenPartId: identity?.givenParts[index].givenPartId || part.partId,
               role: part.role,
               placement: ['title', 'salutation', 'opening'].includes(part.role)
                 ? 'answer_region_top'
                 : 'answer_region_bottom',
-              blockRef: part.blockId,
+              blockRef: identity?.givenParts[index].nodeId || part.blockId,
               authorityAssertionRef:
-                `observation:${group.groupId}:given:${part.partId}`,
+                `observation:${group.groupId}:given:${identity ? index + 1 : part.partId}`,
             })),
           }
         : {
@@ -410,7 +477,7 @@ function writingVariant(group, family) {
   return {
     family,
     mode: 'legacy_opaque',
-    writingTaskId: `writing-task:${group.groupId}`,
+    writingTaskId: identity?.writingTaskId || `writing-task:${group.groupId}`,
     sourceTaskType: 'continuation',
     contentBlockRefs,
     sourceStarterBlockRefs: contentBlockRefs.slice(1),
@@ -550,7 +617,9 @@ export function buildConfirmedFormat2CanonicalRequest({
   const observations = []
   const assertions = []
   const sourceGroups = []
-  const transformations = []
+  const transformations = sourceFidelity.legacy
+    ? []
+    : clone(sourceFidelity.transformations)
   for (const slot of activeSlots) {
     const group = groupsBySlot.get(slot.slotId)
     const expectedFamily = slot.familyContractRef.id
@@ -595,7 +664,14 @@ export function buildConfirmedFormat2CanonicalRequest({
     const blankIds = ['seven-choices', 'cloze', 'grammar-fill'].includes(expectedFamily)
       ? questionIds.map((questionId) => `blank:${questionId}`)
       : []
-    const builtContent = contentForGroup(group, selectedByObservation)
+    const canonicalIdentities = sourceFidelity.legacy
+      ? null
+      : sourceFidelity.canonicalIdentitiesByGroupId.get(group.groupId)
+    const builtContent = contentForGroup(
+      group,
+      selectedByObservation,
+      canonicalIdentities,
+    )
     let content = builtContent.content
     let variant
     if (expectedFamily === 'reading') {
@@ -611,7 +687,7 @@ export function buildConfirmedFormat2CanonicalRequest({
         : clone(sourceFidelity.objectiveGroupsById.get(group.groupId))
       variant = ordinaryVariant(group, expectedFamily)
     } else {
-      variant = writingVariant(group, expectedFamily)
+      variant = writingVariant(group, expectedFamily, canonicalIdentities)
     }
     const media = [...builtContent.media]
     for (const visual of transcription.visuals.filter(
@@ -672,25 +748,35 @@ export function buildConfirmedFormat2CanonicalRequest({
       const writingBlock = group.blocks.find(
         (block) => block.kind === 'writing_material',
       )
+      const writingIdentity = canonicalIdentities?.blocks[
+        group.blocks.indexOf(writingBlock)
+      ]
       const applicationGiven = writingBlock.applicationGiven || {
         provision: 'source_proven_none',
       }
       observations.push(
         ...(applicationGiven.provision === 'source_provided'
-          ? applicationGiven.parts.map((part) => ({
-              observationId: `observation:${group.groupId}:given:${part.partId}`,
+          ? applicationGiven.parts.map((part, index) => ({
+              observationId: `observation:${group.groupId}:given:${canonicalIdentities
+                ? index + 1
+                : part.partId}`,
               kind: 'application_given_part',
               documentInputKey: 'original_question_source',
               value: {
                 groupId: group.groupId,
-                givenPartId: part.partId,
+                givenPartId: writingIdentity?.givenParts[index].givenPartId
+                  || part.partId,
                 role: part.role,
                 placement: ['title', 'salutation', 'opening'].includes(part.role)
                   ? 'answer_region_top'
                   : 'answer_region_bottom',
-                blockRef: part.blockId,
+                blockRef: writingIdentity?.givenParts[index].nodeId || part.blockId,
               },
-              span: { start: 0, end: questionPdfBytes.byteLength },
+              span: exactSourceSpan(
+                sourceFidelity,
+                part.sourceRegionRefs,
+                questionPdfBytes.byteLength,
+              ),
             }))
           : [{
               observationId: `observation:${group.groupId}:answer-region-empty`,
@@ -700,7 +786,11 @@ export function buildConfirmedFormat2CanonicalRequest({
                 groupId: group.groupId,
                 answerRegionRef: 'writing.application-box',
               },
-              span: { start: 0, end: questionPdfBytes.byteLength },
+              span: exactSourceSpan(
+                sourceFidelity,
+                applicationGiven.sourceRegionRefs || writingBlock.sourceRegionRefs,
+                questionPdfBytes.byteLength,
+              ),
             }]),
         {
           observationId: `observation:${group.groupId}:word-count`,
@@ -711,7 +801,12 @@ export function buildConfirmedFormat2CanonicalRequest({
             target: group.blocks.find((block) => block.kind === 'writing_material').wordCountTarget,
             countScope: 'student_authored_only',
           },
-          span: { start: 0, end: questionPdfBytes.byteLength },
+          span: exactSourceSpan(
+            sourceFidelity,
+            writingBlock.applicationEvidence?.sourceRegionRefs
+              || writingBlock.sourceRegionRefs,
+            questionPdfBytes.byteLength,
+          ),
         },
         {
           observationId: `observation:${group.groupId}:response`,
@@ -719,10 +814,15 @@ export function buildConfirmedFormat2CanonicalRequest({
           documentInputKey: 'original_question_source',
           value: {
             groupId: group.groupId,
-            writingTaskId: `writing-task:${group.groupId}`,
+            writingTaskId: writingIdentity?.writingTaskId
+              || `writing-task:${group.groupId}`,
             answerRegionRef: 'writing.application-box',
           },
-          span: { start: 0, end: questionPdfBytes.byteLength },
+          span: exactSourceSpan(
+            sourceFidelity,
+            group.sourceRegionRefs || writingBlock.sourceRegionRefs,
+            questionPdfBytes.byteLength,
+          ),
         },
       )
     }
@@ -734,11 +834,18 @@ export function buildConfirmedFormat2CanonicalRequest({
       blankIds,
       sourceSpanId: sourceFidelity.legacy
         ? sourceSpanId
-        : Object.values(sourceSpanRefsByTarget)[0]?.[0] || sourceSpanId,
+        : sourceFidelity.groupSourceSpanRefsByGroupId.get(group.groupId)?.[0]
+          || sourceSpanId,
       content,
       media,
       variant,
       sourceSpanRefsByTarget,
+      ...(!sourceFidelity.legacy
+        ? { transformationRecordIdsByTarget: clone(
+            sourceFidelity.transformationRecordIdsByGroupId.get(group.groupId)
+              || {},
+          ) }
+        : {}),
     })
     for (const question of group.questions) {
       const answer = answerByQuestion.get(question.questionId)

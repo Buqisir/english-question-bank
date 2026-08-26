@@ -362,6 +362,102 @@
         "inventory": { "$ref": "#/$defs/exactDocument" }
       }
     },
+    "applicationGiven": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["provision", "sourceRegionRefs"],
+          "properties": {
+            "provision": { "const": "source_proven_none" },
+            "sourceRegionRefs": { "$ref": "#/$defs/sourceRegionRefs" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["provision", "sourceRegionRefs", "parts"],
+          "properties": {
+            "provision": { "const": "source_provided" },
+            "sourceRegionRefs": { "$ref": "#/$defs/sourceRegionRefs" },
+            "parts": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["partId", "blockId", "role", "text", "sourceRegionRefs"],
+                "properties": {
+                  "partId": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+                  "blockId": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+                  "role": { "enum": ["title", "salutation", "opening", "closing", "signature"] },
+                  "text": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+                  "sourceRegionRefs": { "$ref": "#/$defs/sourceRegionRefs" }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "applicationEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "writerRole", "audienceOrDestination", "deliverable",
+        "communicativePurpose", "contentRequirements", "answerRegionAbsent",
+        "sourceRegionRefs"
+      ],
+      "properties": {
+        "writerRole": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+        "audienceOrDestination": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+        "deliverable": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+        "communicativePurpose": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+        "contentRequirements": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" }
+        },
+        "answerRegionAbsent": { "type": "boolean" },
+        "sourceRegionRefs": { "$ref": "#/$defs/sourceRegionRefs" }
+      }
+    },
+    "writingBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "blockId", "kind", "taskType", "prompt", "wordCountTarget",
+        "wordCountScope", "sourceRegionRefs"
+      ],
+      "properties": {
+        "blockId": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+        "kind": { "const": "writing_material" },
+        "taskType": { "enum": ["application", "continuation"] },
+        "prompt": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+        "wordCountTarget": { "type": "integer", "minimum": 1 },
+        "wordCountScope": { "enum": ["student_authored_only", "unspecified"] },
+        "sourceInstruction": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" },
+        "applicationEvidence": { "$ref": "#/$defs/applicationEvidence" },
+        "applicationGiven": { "$ref": "#/$defs/applicationGiven" },
+        "continuationStarters": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": { "$ref": "format2-transcription-v1.schema.json#/$defs/nonEmpty" }
+        },
+        "sourceRegionRefs": { "$ref": "#/$defs/sourceRegionRefs" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "taskType": { "const": "application" } } },
+          "then": { "required": ["applicationEvidence", "applicationGiven"] }
+        },
+        {
+          "if": { "properties": { "taskType": { "const": "continuation" } } },
+          "then": { "required": ["sourceInstruction", "continuationStarters"] }
+        }
+      ]
+    },
     "block": {
       "oneOf": [
         { "$ref": "#/$defs/textBlock" },
@@ -370,7 +466,7 @@
         { "$ref": "#/$defs/visualPlaceholderBlock" },
         { "$ref": "#/$defs/objectiveParagraph" },
         { "$ref": "#/$defs/listeningBlock" },
-        { "$ref": "format2-transcription-v2.schema.json#/$defs/writingBlock" }
+        { "$ref": "#/$defs/writingBlock" }
       ]
     },
     "group": {
@@ -391,7 +487,16 @@
           "type": "array",
           "items": { "$ref": "#/$defs/question" }
         }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "groupType": { "not": { "const": "listening" } } },
+            "required": ["groupType"]
+          },
+          "then": { "required": ["sourceRegionRefs"] }
+        }
+      ]
     },
     "visual": {
       "type": "object",

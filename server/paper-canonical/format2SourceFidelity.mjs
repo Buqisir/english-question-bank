@@ -4,6 +4,7 @@ import {
   slotsForProfile,
 } from '../../shared/paper-canonical/authority.mjs'
 import {
+  digestJson,
   sha256,
   stableStringify,
 } from '../../shared/paper-canonical/stable.mjs'
@@ -18,6 +19,11 @@ const OBJECTIVE_GROUP_TYPES = new Set([
 const NON_WRITING_GROUP_TYPES = new Set([
   'reading',
   ...OBJECTIVE_GROUP_TYPES,
+])
+const SOURCE_MAPPED_GROUP_TYPES = new Set([
+  ...NON_WRITING_GROUP_TYPES,
+  'application_writing',
+  'continuation_writing',
 ])
 const LISTENING_DOCUMENTS = {
   questions: {
@@ -109,80 +115,210 @@ function assignTarget(targets, key, refs) {
   targets[key] = spanIds(refs)
 }
 
-function objectiveBlockNodeId(groupId, blockIndex) {
-  return `paragraph:${groupId}:source:${blockIndex + 1}`
+function sourceRegionSpan(sourceRegions, sourceRegionRef) {
+  const region = sourceRegions.get(sourceRegionRef)
+  return region
+    ? {
+        kind: 'page_region',
+        page: region.page,
+        region: clone(region.region),
+      }
+    : { start: 0, end: 1 }
 }
 
-function objectiveInlineNodeId(groupId, blockIndex, inlineIndex, kind) {
-  const prefix = kind === 'text' ? 'text' : 'blank-ref'
-  return `${prefix}:${groupId}:source:${blockIndex + 1}:${inlineIndex + 1}`
+function paragraphIdentity(nodeId) {
+  return { nodeId, inlineNodeId: `text:${nodeId}` }
 }
 
-function blockTargetRefs(block, targets) {
-  assignTarget(targets, `content_node:${block.blockId}`, block.sourceRegionRefs)
+function deriveCanonicalBlockIdentity(group, block, blockIndex) {
+  const sourceAddress = `${group.groupId}:source:${blockIndex + 1}`
   if (block.kind === 'text') {
-    assignTarget(targets, `content_node:text:${block.blockId}`, block.sourceRegionRefs)
+    return paragraphIdentity(`paragraph:${sourceAddress}`)
+  }
+  if (block.kind === 'table') {
+    return {
+      nodeId: `table:${sourceAddress}`,
+      rows: block.rows.map((values, rowIndex) => ({
+        rowId: `row:${sourceAddress}:${rowIndex + 1}`,
+        cells: values.map((_value, columnIndex) => {
+          const cellId = `cell:${sourceAddress}:${rowIndex + 1}:${columnIndex + 1}`
+          return { cellId, inlineNodeId: `text:${cellId}` }
+        }),
+      })),
+    }
+  }
+  if (block.kind === 'framed_columns') {
+    return {
+      nodeId: `framed-columns:${sourceAddress}`,
+      columns: block.columns.map((column, columnIndex) => {
+        const columnId = `column:${sourceAddress}:${columnIndex + 1}`
+        return {
+          columnId,
+          heading: column.heading
+            ? paragraphIdentity(`paragraph:${columnId}:heading`)
+            : null,
+          paragraphs: column.paragraphs.map((_value, paragraphIndex) => (
+            paragraphIdentity(`paragraph:${columnId}:${paragraphIndex + 1}`)
+          )),
+        }
+      }),
+    }
+  }
+  if (block.kind === 'visual_placeholder') {
+    return { nodeId: `figure:${sourceAddress}` }
+  }
+  if (block.kind === 'objective_paragraph') {
+    return {
+      nodeId: `paragraph:${sourceAddress}`,
+      inlines: block.inlines.map((inline, inlineIndex) => ({
+        nodeId: `${inline.kind === 'text' ? 'text' : 'blank-ref'}:${sourceAddress}:${inlineIndex + 1}`,
+      })),
+    }
+  }
+  if (block.kind === 'writing_material') {
+    const base = `${group.groupId}:writing:${blockIndex + 1}`
+    const evidenceIdentity = (suffix) => paragraphIdentity(
+      `paragraph:${base}:evidence:${suffix}`,
+    )
+    return {
+      ...paragraphIdentity(`paragraph:${base}:prompt`),
+      writingTaskId: `writing-task:${group.groupId}`,
+      starters: (block.continuationStarters || []).map((_starter, index) => (
+        paragraphIdentity(`paragraph:${base}:starter:${index + 1}`)
+      )),
+      evidence: block.applicationEvidence
+        ? {
+            writerRole: evidenceIdentity('writer-role'),
+            audienceOrDestination: evidenceIdentity('audience'),
+            deliverable: evidenceIdentity('deliverable'),
+            communicativePurpose: evidenceIdentity('purpose'),
+            wordCount: evidenceIdentity('word-count'),
+            contentRequirements: block.applicationEvidence.contentRequirements.map(
+              (_requirement, index) => evidenceIdentity(`requirement:${index + 1}`),
+            ),
+          }
+        : null,
+      givenParts: block.applicationGiven?.provision === 'source_provided'
+        ? block.applicationGiven.parts.map((_part, index) => ({
+            givenPartId: `given-part:${group.groupId}:${index + 1}`,
+            ...paragraphIdentity(`paragraph:${base}:given:${index + 1}`),
+          }))
+        : [],
+    }
+  }
+  return null
+}
+
+function deriveCanonicalIdentities(group) {
+  return {
+    blocks: group.blocks.map((block, blockIndex) => (
+      deriveCanonicalBlockIdentity(group, block, blockIndex)
+    )),
+  }
+}
+
+function blockTargetRefs(block, identity, targets) {
+  assignTarget(targets, `content_node:${identity.nodeId}`, block.sourceRegionRefs)
+  if (block.kind === 'text') {
+    assignTarget(targets, `content_node:${identity.inlineNodeId}`, block.sourceRegionRefs)
   } else if (block.kind === 'table') {
     block.rows.forEach((row, rowIndex) => {
-      const rowId = `row:${block.blockId}:${rowIndex + 1}`
+      const { rowId, cells } = identity.rows[rowIndex]
       assignTarget(targets, `content_node:${rowId}`, block.sourceRegionRefs)
       row.forEach((_value, columnIndex) => {
-        const cellId = `cell:${block.blockId}:${rowIndex + 1}:${columnIndex + 1}`
+        const { cellId, inlineNodeId } = cells[columnIndex]
         assignTarget(targets, `content_node:${cellId}`, block.sourceRegionRefs)
         assignTarget(
           targets,
-          `content_node:text:${block.blockId}:${rowIndex + 1}:${columnIndex + 1}`,
+          `content_node:${inlineNodeId}`,
           block.sourceRegionRefs,
         )
       })
     })
   } else if (block.kind === 'framed_columns') {
-    for (const column of block.columns) {
+    for (const [columnIndex, column] of block.columns.entries()) {
+      const columnIdentity = identity.columns[columnIndex]
+      assignTarget(targets, `content_node:${columnIdentity.columnId}`, block.sourceRegionRefs)
       if (column.heading) {
         assignTarget(
           targets,
-          `content_node:paragraph:${column.columnId}:heading`,
+          `content_node:${columnIdentity.heading.nodeId}`,
           block.sourceRegionRefs,
         )
         assignTarget(
           targets,
-          `content_node:text:paragraph:${column.columnId}:heading`,
+          `content_node:${columnIdentity.heading.inlineNodeId}`,
           block.sourceRegionRefs,
         )
       }
       column.paragraphs.forEach((_value, index) => {
-        const paragraphId = `paragraph:${column.columnId}:${index + 1}`
-        assignTarget(targets, `content_node:${paragraphId}`, block.sourceRegionRefs)
-        assignTarget(targets, `content_node:text:${paragraphId}`, block.sourceRegionRefs)
+        const paragraph = columnIdentity.paragraphs[index]
+        assignTarget(targets, `content_node:${paragraph.nodeId}`, block.sourceRegionRefs)
+        assignTarget(targets, `content_node:${paragraph.inlineNodeId}`, block.sourceRegionRefs)
       })
     }
+  } else if (block.kind === 'writing_material') {
+    assignTarget(targets, `content_node:${identity.inlineNodeId}`, block.sourceRegionRefs)
+    assignTarget(targets, `writing_task:${identity.writingTaskId}`, block.sourceRegionRefs)
+    identity.starters.forEach((starter) => {
+      assignTarget(targets, `content_node:${starter.nodeId}`, block.sourceRegionRefs)
+      assignTarget(targets, `content_node:${starter.inlineNodeId}`, block.sourceRegionRefs)
+    })
+    if (identity.evidence) {
+      for (const key of [
+        'writerRole',
+        'audienceOrDestination',
+        'deliverable',
+        'communicativePurpose',
+        'wordCount',
+      ]) {
+        assignTarget(
+          targets,
+          `content_node:${identity.evidence[key].nodeId}`,
+          block.applicationEvidence.sourceRegionRefs,
+        )
+        assignTarget(
+          targets,
+          `content_node:${identity.evidence[key].inlineNodeId}`,
+          block.applicationEvidence.sourceRegionRefs,
+        )
+      }
+      identity.evidence.contentRequirements.forEach((requirement) => {
+        assignTarget(
+          targets,
+          `content_node:${requirement.nodeId}`,
+          block.applicationEvidence.sourceRegionRefs,
+        )
+        assignTarget(
+          targets,
+          `content_node:${requirement.inlineNodeId}`,
+          block.applicationEvidence.sourceRegionRefs,
+        )
+      })
+    }
+    identity.givenParts.forEach((part, index) => {
+      const refs = block.applicationGiven.parts[index].sourceRegionRefs
+      assignTarget(targets, `given_part:${part.givenPartId}`, refs)
+      assignTarget(targets, `content_node:${part.nodeId}`, refs)
+      assignTarget(targets, `content_node:${part.inlineNodeId}`, refs)
+    })
   }
 }
 
-function orderedObjectiveContent(group) {
+function orderedObjectiveContent(group, identities) {
   return {
     blocks: group.blocks.map((block, blockIndex) => ({
       kind: 'paragraph',
-      nodeId: objectiveBlockNodeId(group.groupId, blockIndex),
+      nodeId: identities.blocks[blockIndex].nodeId,
       inlines: block.inlines.map((inline, inlineIndex) => inline.kind === 'text'
         ? {
             kind: 'text',
-            nodeId: objectiveInlineNodeId(
-              group.groupId,
-              blockIndex,
-              inlineIndex,
-              inline.kind,
-            ),
+            nodeId: identities.blocks[blockIndex].inlines[inlineIndex].nodeId,
             text: inline.text,
           }
         : {
             kind: 'blank_ref',
-            nodeId: objectiveInlineNodeId(
-              group.groupId,
-              blockIndex,
-              inlineIndex,
-              inline.kind,
-            ),
+            nodeId: identities.blocks[blockIndex].inlines[inlineIndex].nodeId,
             blankId: `blank:${inline.questionId}`,
           }),
     })),
@@ -449,6 +585,10 @@ function inspectV3({ transcription, questionDocument, answerDocument }) {
     },
   }))
   const sourceSpanRefsByGroupId = new Map()
+  const groupSourceSpanRefsByGroupId = new Map()
+  const canonicalIdentitiesByGroupId = new Map()
+  const transformationRecordIdsByGroupId = new Map()
+  const transformations = []
   const objectiveGroupsById = new Map()
   const globalContentIds = new Set()
   const perQuestionOptionIds = new Set()
@@ -456,11 +596,18 @@ function inspectV3({ transcription, questionDocument, answerDocument }) {
 
   for (const [groupIndex, group] of transcription.groups.entries()) {
     const groupPath = `/groups/${groupIndex}`
-    if (!NON_WRITING_GROUP_TYPES.has(group.groupType)) continue
+    if (!SOURCE_MAPPED_GROUP_TYPES.has(group.groupType)) continue
     refsAreClosed(group.sourceRegionRefs, sourceRegions, `${groupPath}/sourceRegionRefs`, issues)
     const targets = {}
-    const slot = slotsById.get(group.slotId)
-    validateQuestionNumbers(group, slot, groupPath, issues)
+    assignTarget(targets, `group:${group.groupId}`, group.sourceRegionRefs)
+    const identities = deriveCanonicalIdentities(group)
+    canonicalIdentitiesByGroupId.set(group.groupId, identities)
+    groupSourceSpanRefsByGroupId.set(group.groupId, spanIds(group.sourceRegionRefs))
+    const groupTransformationRecordIds = {}
+    if (NON_WRITING_GROUP_TYPES.has(group.groupType)) {
+      const slot = slotsById.get(group.slotId)
+      validateQuestionNumbers(group, slot, groupPath, issues)
+    }
 
     const objective = OBJECTIVE_GROUP_TYPES.has(group.groupType)
     if (objective && (
@@ -492,12 +639,59 @@ function inspectV3({ transcription, questionDocument, answerDocument }) {
       }
       globalContentIds.add(block.blockId)
       if (block.kind !== 'objective_paragraph') {
-        blockTargetRefs(block, targets)
+        blockTargetRefs(block, identities.blocks[blockIndex], targets)
+        if (block.kind === 'framed_columns') {
+          for (const [columnIndex, column] of block.columns.entries()) {
+            const columnPath = `${blockPath}/columns/${columnIndex}/columnId`
+            if (globalContentIds.has(column.columnId)) {
+              issues.push(issue(
+                'FORMAT2_SOURCE_CONTENT_IDENTITY_DUPLICATE',
+                columnPath,
+                'v3 source-content identities must be globally unique',
+              ))
+            }
+            globalContentIds.add(column.columnId)
+          }
+        }
+        if (block.kind === 'writing_material') {
+          refsAreClosed(
+            block.applicationEvidence?.sourceRegionRefs || block.sourceRegionRefs,
+            sourceRegions,
+            `${blockPath}/applicationEvidence/sourceRegionRefs`,
+            issues,
+          )
+          if (block.applicationGiven?.provision === 'source_provided') {
+            refsAreClosed(
+              block.applicationGiven.sourceRegionRefs,
+              sourceRegions,
+              `${blockPath}/applicationGiven/sourceRegionRefs`,
+              issues,
+            )
+            for (const [partIndex, part] of block.applicationGiven.parts.entries()) {
+              refsAreClosed(
+                part.sourceRegionRefs,
+                sourceRegions,
+                `${blockPath}/applicationGiven/parts/${partIndex}/sourceRegionRefs`,
+                issues,
+              )
+              for (const address of [part.partId, part.blockId]) {
+                if (globalContentIds.has(address)) {
+                  issues.push(issue(
+                    'FORMAT2_SOURCE_CONTENT_IDENTITY_DUPLICATE',
+                    `${blockPath}/applicationGiven/parts/${partIndex}`,
+                    'v3 source-content identities must be globally unique',
+                  ))
+                }
+                globalContentIds.add(address)
+              }
+            }
+          }
+        }
         continue
       }
       assignTarget(
         targets,
-        `content_node:${objectiveBlockNodeId(group.groupId, blockIndex)}`,
+        `content_node:${identities.blocks[blockIndex].nodeId}`,
         block.sourceRegionRefs,
       )
       for (const [inlineIndex, inline] of block.inlines.entries()) {
@@ -519,12 +713,7 @@ function inspectV3({ transcription, questionDocument, answerDocument }) {
         inlineById.set(inline.contentId, { inline, block, inlineIndex })
         assignTarget(
           targets,
-          `content_node:${objectiveInlineNodeId(
-            group.groupId,
-            blockIndex,
-            inlineIndex,
-            inline.kind,
-          )}`,
+          `content_node:${identities.blocks[blockIndex].inlines[inlineIndex].nodeId}`,
           inline.sourceRegionRefs,
         )
         if (inline.kind === 'blank_ref') {
@@ -566,14 +755,27 @@ function inspectV3({ transcription, questionDocument, answerDocument }) {
           'Each printed ordinal must bind one exact source region',
         ))
       }
-      assignTarget(targets, `question:${question.questionId}`, question.sourceRegionRefs)
+      const numberingMatch = /^(\d+)\.$/.exec(question.sourceNumbering.printedOrdinal)
+      if (!numberingMatch) {
+        issues.push(issue(
+          'FORMAT2_SOURCE_NUMBERING_INVALID',
+          `${questionPath}/sourceNumbering/printedOrdinal`,
+          'Each printed ordinal must preserve one exact decimal source token such as 34.',
+        ))
+      }
+      const numberingObservationId = `observation:format2-source-numbering:${question.questionId}`
+      const numberingSourceSpanId = `source-span:${numberingObservationId}`
+      targets[`question:${question.questionId}`] = [
+        numberingSourceSpanId,
+        ...spanIds(question.sourceRegionRefs),
+      ]
       assignTarget(
         targets,
         `content_node:text:${question.questionId}:stem`,
         question.sourceRegionRefs,
       )
-      sourceObservations.push({
-        observationId: `observation:format2-source-numbering:${question.questionId}`,
+      const numberingObservation = {
+        observationId: numberingObservationId,
         kind: 'source_printed_ordinal',
         documentInputKey: 'original_question_source',
         value: {
@@ -583,14 +785,39 @@ function inspectV3({ transcription, questionDocument, answerDocument }) {
           canonicalNumber: question.questionNo,
           interpretation: 'canonical_profile_sequence',
         },
-        span: clone(sourceRegions.get(
+        span: sourceRegionSpan(
+          sourceRegions,
           question.sourceNumbering.sourceRegionRefs[0],
-        ) ? {
-            kind: 'page_region',
-            page: sourceRegions.get(question.sourceNumbering.sourceRegionRefs[0]).page,
-            region: sourceRegions.get(question.sourceNumbering.sourceRegionRefs[0]).region,
-          } : { start: 0, end: 1 }),
-      })
+        ),
+      }
+      sourceObservations.push(numberingObservation)
+      if (
+        numberingMatch
+        && question.sourceNumbering.printedOrdinal !== `${question.questionNo}.`
+      ) {
+        const recordId = `transformation:format2-source-numbering:${question.questionId}`
+        transformations.push({
+          recordId,
+          sequence: transformations.length + 1,
+          ruleId: 'guarded-representation-normalization',
+          ruleVersion: '2',
+          target: {
+            identity: question.questionId,
+            path: 'numberingAssignments.canonicalNumber',
+          },
+          operation: 'representation_normalization',
+          inputSourceSpanIds: [numberingSourceSpanId],
+          before: question.sourceNumbering.printedOrdinal,
+          after: question.questionNo,
+          certainty: 'exact',
+          preconditions: {
+            sourceObservationIds: [numberingObservationId],
+            sourceValueDigests: [digestJson(numberingObservation.value)],
+          },
+          outputDigest: digestJson(question.questionNo),
+        })
+        groupTransformationRecordIds[`question:${question.questionId}`] = [recordId]
+      }
 
       const bankEntry = clone(question.options)
       if (group.groupType === 'seven_choices') {
@@ -672,8 +899,9 @@ function inspectV3({ transcription, questionDocument, answerDocument }) {
       sevenChoicesBanks.set(group.groupId, sevenChoicesBank || [])
     }
     sourceSpanRefsByGroupId.set(group.groupId, targets)
+    transformationRecordIdsByGroupId.set(group.groupId, groupTransformationRecordIds)
     if (objective) {
-      objectiveGroupsById.set(group.groupId, orderedObjectiveContent(group))
+      objectiveGroupsById.set(group.groupId, orderedObjectiveContent(group, identities))
     }
   }
 
@@ -748,6 +976,10 @@ function inspectV3({ transcription, questionDocument, answerDocument }) {
       sourceObservations,
       objectiveGroupsById,
       sourceSpanRefsByGroupId,
+      groupSourceSpanRefsByGroupId,
+      canonicalIdentitiesByGroupId,
+      transformationRecordIdsByGroupId,
+      transformations,
       sevenChoicesBanks,
       sourceCropReproducibilityByObservationId: new Map(
         transcription.visuals.flatMap((visual) => (
