@@ -3211,6 +3211,59 @@ assert.equal(
   'awaiting_qa',
   JSON.stringify(transcriptionV4Completed.diagnostics),
 )
+const passageOnlyV4 = freshFixture('v4-passage-only-')
+upgradeFixtureToTranscriptionV4(passageOnlyV4.fixture.input)
+const passageOnlyTranscription = passageOnlyV4.fixture.input.transcription
+const passageOnlyFigureQuestion = passageOnlyTranscription.groups
+  .flatMap((group) => group.questions)
+  .find((question) => question.options.some(
+    (option) => option.contentKind === 'figure',
+  ))
+for (const option of passageOnlyFigureQuestion.options) {
+  Object.assign(option, {
+    contentKind: 'text',
+    text: `Exact text option ${option.label}.`,
+    sourceRegionRefs: [...passageOnlyFigureQuestion.sourceRegionRefs],
+  })
+  delete option.visualObservationId
+}
+passageOnlyTranscription.visuals = passageOnlyTranscription.visuals.filter(
+  (visual) => visual.owner.kind === 'passage',
+)
+delete passageOnlyTranscription.sourceMeasuredFigureLayouts
+const passageOnlyStarted = run(
+  passageOnlyV4.repositoryRoot,
+  passageOnlyV4.fixture.input,
+)
+assert.equal(
+  passageOnlyStarted.lifecycle,
+  'importing',
+  JSON.stringify(passageOnlyStarted.diagnostics),
+)
+const passageOnlyCandidate = JSON.parse(readFileSync(
+  artifactPath(
+    passageOnlyV4.repositoryRoot,
+    passageOnlyStarted,
+    'candidatePackage',
+  ),
+  'utf8',
+))
+assert.deepEqual(
+  passageOnlyCandidate.observations.map((observation) => observation.owner.kind),
+  ['passage'],
+  'the regression fixture exposes only one Passage-owned visual confirmation',
+)
+const passageOnlyCompleted = resume(passageOnlyV4.repositoryRoot, {
+  paperId: passageOnlyV4.fixture.input.paperId,
+  jobId: passageOnlyStarted.jobId,
+  teacherConfirmation: exactConfirmation(passageOnlyCandidate),
+})
+assert.equal(
+  passageOnlyCompleted.lifecycle,
+  'awaiting_qa',
+  JSON.stringify(passageOnlyCompleted.diagnostics),
+  'a v4 paper with only a Passage Figure must publish after its exact confirmation',
+)
 const transcriptionV4VersionDir = path.join(
   transcriptionV4.repositoryRoot,
   'app/public/paper-assets',

@@ -2373,7 +2373,29 @@ function collectReadingTargetIds(variant) {
   ].filter((target) => typeof target.id === 'string')
 }
 
-function confirmedReadingOptionFigureIssues(source, capture, selection) {
+function passageFigureMediaIds(content) {
+  const mediaIds = []
+  const visit = (value) => {
+    if (Array.isArray(value)) {
+      for (const item of value) visit(item)
+      return
+    }
+    if (!isRecordValue(value)) return
+    if (value.kind === 'figure' && typeof value.mediaId === 'string') {
+      mediaIds.push(value.mediaId)
+    }
+    for (const child of Object.values(value)) visit(child)
+  }
+  visit(content)
+  return mediaIds
+}
+
+function confirmedReadingOptionFigureIssues(
+  source,
+  capture,
+  selection,
+  { includePassageFigures = false } = {},
+) {
   const diagnostics = []
   const selectionKeys = [
     'schemaVersion',
@@ -2409,11 +2431,29 @@ function confirmedReadingOptionFigureIssues(source, capture, selection) {
           questionId: set.questionId,
           option,
           media: mediaById.get(option.figure.mediaId),
+          owner: {
+            kind: 'reading_option',
+            groupId: group.groupId,
+            questionId: set.questionId,
+            optionId: option.optionId,
+          },
+        })
+      }
+    }
+    if (includePassageFigures) {
+      for (const mediaId of passageFigureMediaIds(group.content)) {
+        expected.push({
+          group,
+          media: mediaById.get(mediaId),
+          owner: { kind: 'passage', groupId: group.groupId },
         })
       }
     }
   }
-  if (expected.length === 0 || selection.confirmedSelections.length !== expected.length) {
+  if (
+    (!includePassageFigures && expected.length === 0)
+    || selection.confirmedSelections.length !== expected.length
+  ) {
     diagnostics.push(diagnostic('READING_OPTION_FIGURE_CONFIRMATION_CLOSURE_INVALID', 'incomplete_source', '$.confirmedVisualSelection.confirmedSelections', 'Confirmed selection must close every and only Reading Figure Option'))
     return diagnostics
   }
@@ -2424,28 +2464,22 @@ function confirmedReadingOptionFigureIssues(source, capture, selection) {
   const sourceSpans = new Map(capture.sourceSpans.map((span) => [span.sourceSpanId, span]))
   const usedSelectionIndexes = new Set()
   for (const item of expected) {
-    const owner = {
-      kind: 'reading_option',
-      groupId: item.group.groupId,
-      questionId: item.questionId,
-      optionId: item.option.optionId,
-    }
+    const owner = item.owner
     const selectedIndex = selection.confirmedSelections.findIndex((candidate) =>
       isRecordValue(candidate?.owner)
-      && exactKeys(candidate.owner, ['kind', 'groupId', 'questionId', 'optionId'])
-      && candidate.owner.kind === owner.kind
-      && candidate.owner.groupId === owner.groupId
-      && candidate.owner.questionId === owner.questionId
-      && candidate.owner.optionId === owner.optionId)
+      && stableStringify(candidate.owner) === stableStringify(owner))
     const selected = selection.confirmedSelections[selectedIndex]
-    const optionSpans = item.group.sourceSpanRefsByTarget?.[`option:${item.option.optionId}`]
-    const mediaSpans = item.group.sourceSpanRefsByTarget?.[`media:${item.option.figure.mediaId}`]
-    const exactSpan = Array.isArray(optionSpans)
-      && optionSpans.length === 1
+    const mediaSpans = item.group.sourceSpanRefsByTarget?.[`media:${item.media?.mediaId}`]
+    const optionSpans = owner.kind === 'reading_option'
+      ? item.group.sourceSpanRefsByTarget?.[`option:${owner.optionId}`]
+      : null
+    const exactSpan = (owner.kind === 'passage'
+      || (Array.isArray(optionSpans)
+        && optionSpans.length === 1
+        && optionSpans[0] === mediaSpans?.[0]))
       && Array.isArray(mediaSpans)
       && mediaSpans.length === 1
-      && optionSpans[0] === mediaSpans[0]
-      && optionSpans[0] === selected?.source?.sourceSpanId
+      && mediaSpans[0] === selected?.source?.sourceSpanId
     const captureSpan = sourceSpans.get(selected?.source?.sourceSpanId)
     const sourceDocument = capture.documents.find((document) =>
       document.documentId === captureSpan?.documentId)
@@ -2479,7 +2513,10 @@ function confirmedReadingOptionFigureIssues(source, capture, selection) {
       && digestJson(selected.source.coordinate) === digestJson(captureSpan.coordinate)
     )
     if (selectedIndex < 0 || usedSelectionIndexes.has(selectedIndex) || !exactArtifact || !exactSource) {
-      diagnostics.push(diagnostic('READING_OPTION_FIGURE_CONFIRMATION_MISMATCH', 'incomplete_source', `$.groups.${item.group.groupId}.${item.option.optionId}`, 'Option identity, media bytes, IHDR dimensions, and source map must equal the confirmed selection'))
+      const ownerPath = owner.kind === 'passage'
+        ? `$.groups.${item.group.groupId}.passage`
+        : `$.groups.${item.group.groupId}.${owner.optionId}`
+      diagnostics.push(diagnostic('READING_OPTION_FIGURE_CONFIRMATION_MISMATCH', 'incomplete_source', ownerPath, 'Visual owner identity, media bytes, IHDR dimensions, and source map must equal the confirmed selection'))
     } else {
       usedSelectionIndexes.add(selectedIndex)
     }
@@ -3388,6 +3425,9 @@ export function compileCanonicalPaper(
       source,
       capture,
       request[confirmedReadingOptionFigureCompile],
+      {
+        includePassageFigures: request?.[confirmedFormat2RichCompile] === true,
+      },
     ))
   }
   validateAmbiguities(source.ambiguities, effectiveReviewDecisions, diagnostics)

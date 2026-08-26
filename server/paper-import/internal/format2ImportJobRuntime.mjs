@@ -2102,7 +2102,17 @@ function canonicalDiagnostics(compilation) {
     .map((diagnostic) => cloneJson(diagnostic))
 }
 
-function readingOptionPublicationConfirmation(evidence, confirmedSelection) {
+function publicationVisualConfirmation(
+  evidence,
+  confirmedSelection,
+  teacherConfirmation,
+) {
+  if (evidence.transcription.schemaVersion === 'format2-transcription-v4') {
+    return {
+      candidatePackage: cloneJson(evidence.candidatePackage),
+      teacherConfirmation: cloneJson(teacherConfirmation),
+    }
+  }
   const readingObservationIds = new Set(evidence.candidatePackage.observations
     .filter((observation) => observation.owner?.kind === 'reading_option')
     .map((observation) => observation.observationId))
@@ -2131,19 +2141,21 @@ function readingOptionPublicationConfirmation(evidence, confirmedSelection) {
   const selectedByObservation = new Map(confirmedSelection.confirmedSelections.map(
     (selection) => [selection.observationId, selection],
   ))
-  const teacherConfirmation = {
-    schemaVersion: 'visual-teacher-confirmation-v1',
-    packageDigest: candidatePackage.packageDigest,
-    decisions: candidatePackage.observations.map((observation) => ({
-      observationId: observation.observationId,
-      owner: cloneJson(observation.owner),
-      disposition: 'confirmed',
-      selectedCandidateDigest: selectedByObservation.get(
-        observation.observationId,
-      ).candidateDigest,
-    })),
+  return {
+    candidatePackage,
+    teacherConfirmation: {
+      schemaVersion: 'visual-teacher-confirmation-v1',
+      packageDigest: candidatePackage.packageDigest,
+      decisions: candidatePackage.observations.map((observation) => ({
+        observationId: observation.observationId,
+        owner: cloneJson(observation.owner),
+        disposition: 'confirmed',
+        selectedCandidateDigest: selectedByObservation.get(
+          observation.observationId,
+        ).candidateDigest,
+      })),
+    },
   }
-  return { candidatePackage, teacherConfirmation }
 }
 
 function groupTypeForPrint(groupType) {
@@ -2736,9 +2748,10 @@ function runResume(
     answerPdfBytes: evidence.answerPdfBytes,
     confirmedSelection,
   })
-  const publicationConfirmation = readingOptionPublicationConfirmation(
+  const publicationConfirmation = publicationVisualConfirmation(
     evidence,
     confirmedSelection,
+    input.teacherConfirmation,
   )
   const publicationRoot = path.join(repositoryRoot, 'app/public/paper-assets')
   mkdirSync(evidence.jobRoot, { recursive: true })
