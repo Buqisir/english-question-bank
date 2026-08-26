@@ -1,6 +1,6 @@
 # 02B — Stable visual identities and exact prior-confirmation rebind
 
-Status: ready-for-agent
+Status: implemented
 Blocked by: 02A — Generic source-measured Figure Option layout seam
 
 ## What to build
@@ -37,6 +37,6 @@ visual surface is unchanged.
 
 ## Result
 
-Commit:
-Verify:
-Notes:
+Commit: merged as `21cdc8f5`
+Verify: visual Candidate, exact rebind, source-authority mutation, public Job, and Reading Option Figure checks passed
+Notes: no renderer, CSS, authority, or production change

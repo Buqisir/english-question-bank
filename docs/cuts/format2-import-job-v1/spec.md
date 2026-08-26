@@ -1,9 +1,19 @@
 # 格式② Import Job v1 — 将逐卷手艺收进导题 Agent 深模块
 
-Status: ready-for-agent
+Status: needs-task-graph-replan
 Date: 2026-08-25
 Depends on: accepted Import Agentization contract and the implemented
 source-faithful visual-import capability
+
+## Current frontier
+
+The real-artifact parity preflight at
+[`research/real-parity-frontier-2026-08-26.md`](research/real-parity-frontier-2026-08-26.md)
+disproved the published data-only frontier for Shenzhen Q33 and
+`paper-2026-i`. Tickets 03–06 are blocked; no legacy materializer or registry
+entry may be retired. The next step is an Owner-reviewed task-graph replan,
+including explicit identity decisions for Canonical child IDs and legacy public
+extras. No additional shared implementation ticket is ready.
 
 ## Problem Statement
 

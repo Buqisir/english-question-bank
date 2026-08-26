@@ -1,6 +1,6 @@
 # 02A — Generic source-measured Figure Option layout seam
 
-Status: ready-for-agent
+Status: implemented
 Blocked by: 02 — Exact Confirmation resume to local awaiting_qa
 
 ## What to build
@@ -32,6 +32,6 @@ requirement, without selecting behavior by paper identity.
 
 ## Result
 
-Commit:
-Verify:
-Notes:
+Commit: merged as `1d9caa6e`
+Verify: public Format 2 Job plus source-layout intent/consumer and evidence-mutation checks passed
+Notes: no renderer, CSS, authority, or production change

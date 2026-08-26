@@ -1,7 +1,15 @@
 # 03 — Shenzhen Q33 generic parity and materializer retirement
 
-Status: ready-for-agent
-Blocked by: 02C — Generic transcription completeness
+Status: blocked-by-real-parity-preflight
+Blocked by: task-graph replan in the
+[real parity frontier](../research/real-parity-frontier-2026-08-26.md)
+
+## Primary parity sources
+
+Use the Shenzhen Q33 source capture, Candidate, exact Teacher Confirmation,
+layout/canary artifacts, and current whole-paper assets listed in that
+preflight. Ticket 02C is implemented, but B01–B05 and the applicable B08
+identity decision keep this ticket outside the frontier.
 
 ## What to build
 

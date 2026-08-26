@@ -1,6 +1,6 @@
 # 02 — Exact Confirmation resume to local awaiting_qa
 
-Status: ready-for-agent
+Status: implemented
 Blocked by: 01 — Format② Job to exact Teacher Confirmation
 
 ## What to build
@@ -39,6 +39,6 @@ end-to-end proof from admitted sources to local consumption.
 
 ## Result
 
-Commit:
-Verify:
-Notes:
+Commit: merged as `7c1c8df4`
+Verify: focused resume, exact confirmation, recovery, publication/reload, QA projection, and diff checks passed during implementation
+Notes: final repository gate remains downstream work

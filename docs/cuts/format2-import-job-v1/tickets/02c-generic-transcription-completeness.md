@@ -1,6 +1,6 @@
 # 02C — Generic transcription completeness
 
-Status: ready-for-agent
+Status: implemented
 Blocked by: 02B — Stable visual identities and exact prior-confirmation rebind
 
 ## What to build
@@ -45,6 +45,6 @@ compatibility and keep every new choice source-bound and data-driven.
 
 ## Result
 
-Commit:
-Verify:
-Notes:
+Commit: merged as `ece39897`
+Verify: public Format 2 Job, existing Analysis contracts, publication, Reading Option Figure, schema/syntax, and bounded P1 recheck passed
+Notes: final full suite was intentionally deferred; the real-artifact preflight later proved additional shared gaps

@@ -1,7 +1,7 @@
 # 06 — Jining shared rendering, Owner QA handoff, and cut close
 
-Status: ready-for-agent
-Blocked by: 05 — Jining paper from zero to exact Teacher Confirmation
+Status: blocked-by-real-parity-preflight
+Blocked by: task-graph replan, then 05 — Jining paper from zero to exact Teacher Confirmation
 
 ## What to build
 

@@ -1,6 +1,6 @@
 # 01 — Format② Job to exact Teacher Confirmation
 
-Status: ready-for-agent
+Status: implemented
 Blocked by: None — can start immediately
 
 ## What to build
@@ -45,6 +45,6 @@ listening material, and writing material without embedding a full real paper.
 
 ## Result
 
-Commit:
-Verify:
-Notes:
+Commit: merged as `26aee0f6`
+Verify: focused public start/continue, exact Candidate/Confirmation stop, and invalidation checks passed during implementation
+Notes: final repository gate remains downstream work

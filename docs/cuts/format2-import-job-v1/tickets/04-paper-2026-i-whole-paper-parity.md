@@ -1,7 +1,16 @@
 # 04 — paper-2026-i whole-paper parity and registry retirement
 
-Status: ready-for-agent
-Blocked by: 02C — Generic transcription completeness
+Status: blocked-by-real-parity-preflight
+Blocked by: task-graph replan in the
+[real parity frontier](../research/real-parity-frontier-2026-08-26.md)
+
+## Primary parity sources
+
+Use the registry entry, admitted source pair, reviewed Canonical evidence,
+current public assets, and accepted successor fixtures listed in that
+preflight. Ticket 02C is implemented, but B02–B10 include unresolved shared
+shapes and Owner identity/compatibility decisions, so this is not data-only
+work yet.
 
 ## What to build
 

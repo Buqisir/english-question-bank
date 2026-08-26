@@ -1,7 +1,7 @@
 # 05 — Jining paper from zero to exact Teacher Confirmation
 
-Status: ready-for-agent
-Blocked by: 03 — Shenzhen Q33 generic parity and materializer retirement; 04 — paper-2026-i whole-paper parity and registry retirement
+Status: blocked-by-real-parity-preflight
+Blocked by: task-graph replan, then 03 — Shenzhen Q33 generic parity and materializer retirement; 04 — paper-2026-i whole-paper parity and registry retirement
 
 ## What to build
 
