@@ -14,6 +14,7 @@ import {
   loadCanonicalGrammarFillPrintChrome,
 } from '../paper-canonical/grammarFillPrintSourceBinding.mjs'
 import { grammarFillRhythm } from '../../shared/paper-canonical/grammarFillRhythm.mjs'
+import { format2RichCandidateAuthorityRef } from '../../shared/paper-canonical/authority.mjs'
 import {
   assertCanonicalConsumptionVisibleStructure,
 } from '../../shared/paper-canonical/visibleStructure.mjs'
@@ -120,6 +121,12 @@ function blocksFromCanonicalVisibleStructure(consumption) {
   })
 }
 
+function isFormat2RichAuthority(authorityRef) {
+  return authorityRef?.manifestId === format2RichCandidateAuthorityRef.manifestId
+    && authorityRef?.manifestVersion === format2RichCandidateAuthorityRef.manifestVersion
+    && authorityRef?.manifestDigest === format2RichCandidateAuthorityRef.manifestDigest
+}
+
 function resolveVivliostyleBin(rootDir) {
   const vivliostylePaths = [
     path.join(rootDir, 'node_modules', '.bin', 'vivliostyle'),
@@ -193,6 +200,7 @@ export function createExportImplementation({
         || (
           canonicalConsumption.paperId === publicOracle.paperId
           && Number(canonicalConsumption.authorityRef?.manifestVersion) >= 20
+          && !isFormat2RichAuthority(canonicalConsumption.authorityRef)
         )
         || JSON.stringify(blocks)
           !== JSON.stringify(blocksFromCanonicalVisibleStructure(canonicalConsumption))
