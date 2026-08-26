@@ -2930,6 +2930,25 @@ assert.ok(
   )),
   'Application group, facts, content, given skeleton, ruling, and response use exact page-region spans',
 )
+const transcriptionV3ApplicationRequirementSpan =
+  'source-span:observation:format2-source-region:source-region:group:application:evidence'
+const transcriptionV3ApplicationRequirements = transcriptionV3Report.directSourceMap.filter(
+  (entry) => entry.target.kind === 'requirement'
+    && entry.target.id.startsWith('requirement:group:application:'),
+)
+assert.equal(
+  transcriptionV3ApplicationRequirements.length,
+  transcriptionV3.fixture.input.transcription.groups.find(
+    (group) => group.groupId === 'group:application',
+  ).blocks[0].applicationEvidence.contentRequirements.length,
+)
+for (const entry of transcriptionV3ApplicationRequirements) {
+  assert.deepEqual(
+    entry.sourceSpanRefs,
+    [transcriptionV3ApplicationRequirementSpan],
+    `${entry.target.id} maps directly to its exact evidence source region`,
+  )
+}
 
 const transcriptionV3Successor = freshFixture('v3-source-fidelity-successor-')
 upgradeFixtureToTranscriptionV3(transcriptionV3Successor.fixture.input)

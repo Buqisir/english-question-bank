@@ -26,9 +26,13 @@ function clone(value) {
   return structuredClone(value)
 }
 
+function format2SourceRegionSpanId(sourceRegionRef) {
+  return `source-span:observation:format2-source-region:${sourceRegionRef}`
+}
+
 function exactSourceSpan(sourceFidelity, sourceRegionRefs, fallbackLength) {
   if (sourceFidelity.legacy) return { start: 0, end: fallbackLength }
-  const sourceSpanId = `source-span:observation:format2-source-region:${sourceRegionRefs[0]}`
+  const sourceSpanId = format2SourceRegionSpanId(sourceRegionRefs[0])
   const observation = sourceFidelity.sourceObservations.find(
     (candidate) => `source-span:${candidate.observationId}` === sourceSpanId,
   )
@@ -753,6 +757,15 @@ export function buildConfirmedFormat2CanonicalRequest({
       ]
       const applicationGiven = writingBlock.applicationGiven || {
         provision: 'source_proven_none',
+      }
+      if (!sourceFidelity.legacy) {
+        const requirementSourceSpanRefs = writingBlock.applicationEvidence
+          .sourceRegionRefs.map(format2SourceRegionSpanId)
+        for (const requirement of variant.contentRequirements) {
+          sourceSpanRefsByTarget[`requirement:${requirement.requirementId}`] = [
+            ...requirementSourceSpanRefs,
+          ]
+        }
       }
       observations.push(
         ...(applicationGiven.provision === 'source_provided'
