@@ -1153,12 +1153,18 @@ function validateTranscriptionSemantics(input, answerPdfBytes, documents) {
     const ownerGroup = groups.get(visual.owner.groupId)
     if (
       visual.owner.kind === 'passage'
-      && ['listening', 'application_writing', 'continuation_writing'].includes(ownerGroup?.groupType)
+      && (
+        ['listening', 'continuation_writing'].includes(ownerGroup?.groupType)
+        || (
+          ownerGroup?.groupType === 'application_writing'
+          && transcription.schemaVersion !== 'format2-transcription-v4'
+        )
+      )
     ) {
       issues.push(semanticIssue(
         'FORMAT2_VISUAL_OWNER_UNSUPPORTED',
         `${visualPath}/owner`,
-        'Listening and writing material visuals do not enter the Passage/Reading Option candidate contract',
+        'Only Format 2 v4 Application Writing admits a prompt Passage Figure; Listening and Continuation Writing remain unsupported',
       ))
     }
     if (refs.length !== 1 || !sameValue(

@@ -9,8 +9,9 @@ const promptPath = path.join(rootDir, 'prompts/grammar-fill-analysis-v1.md')
 const facetsPath = path.join(__dirname, 'grammar-fill-facets-v2.json')
 
 // ============================================================
-// Registry: 22 leaf facets (D1 grammar-facets-v2, 2026-07-15 owner-locked
-// semantics — docs/cuts/similar-questions/program.md §语法填空考点粒度终稿).
+// Registry: 23 leaf facets: D1 grammar-facets-v2's owner-locked semantics
+// (docs/cuts/similar-questions/program.md §语法填空考点粒度终稿) plus the
+// additive no-hint adverb leaf (2026-08-27).
 // Old `given.noun` / `given.adjective` / `given.derivation.*` (17-leaf v1
 // registry, grammar-fill-facets-v1.json) retired: 词形转换 8-way
 // `given.conversion.<src>-to-<dst>` + 3 new split-off leaves

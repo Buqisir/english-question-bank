@@ -464,6 +464,17 @@ function v4WritingSourceRegionRefs(block, sourceRef) {
   ))
 }
 
+function v4ApplicationPromptBlockRefs(group, identities) {
+  return group.blocks.flatMap((block, blockIndex) => {
+    const identity = identities.blocks[blockIndex]
+    if (block.kind === 'visual_placeholder') return [identity.nodeId]
+    if (block.kind === 'writing_material') {
+      return identity.promptBlocks.map((promptBlock) => promptBlock.nodeId)
+    }
+    return []
+  })
+}
+
 function writingVariant(group, family, identities = null) {
   const blockIndex = group.blocks.findIndex(
     (candidate) => candidate.kind === 'writing_material',
@@ -484,7 +495,7 @@ function writingVariant(group, family, identities = null) {
       return {
         family,
         writingTaskId: identity.writingTaskId,
-        promptBlockRefs: identity.promptBlocks.map((promptBlock) => promptBlock.nodeId),
+        promptBlockRefs: v4ApplicationPromptBlockRefs(group, identities),
         situation: {
           writerRole: v4WritingContentRef(block, identity, evidence.writerRole),
           audienceOrDestination: v4WritingContentRef(

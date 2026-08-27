@@ -84,13 +84,13 @@ const REGISTRY_PATH = 'app/src/features/paper-intelligence/grammarFillFacetRegis
 assert('Step 0: registry file exists', existsSync(path.join(rootDir, REGISTRY_PATH)))
 
 const serverFacets = JSON.parse(
-  // D1 (grammar-facets-v2): drift guard now compares against the v2 registry (22 leaves).
+  // D1 (grammar-facets-v2): drift guard compares against the additive v2 registry.
   readSrc('server/paper-import-ai/grammar-fill-facets-v2.json'),
 )
 const serverKeys = serverFacets.map((f) => f.facet_key).sort()
 const registryKeys = Object.keys(FACET_FRAMEWORKS).sort()
 
-assert('Step 0: registry has exactly 22 facets', registryKeys.length === 22,
+assert('Step 0: registry has exactly 23 facets', registryKeys.length === 23,
   `found: ${registryKeys.length}`)
 assert('Step 0: drift guard — registry keys EXACTLY equal server JSON keys',
   JSON.stringify(registryKeys) === JSON.stringify(serverKeys),
@@ -246,7 +246,7 @@ try {
     'grammar-fill.given.adjective.comparison',
     'grammar-fill.no-hint.pronoun',
     'grammar-fill.given.conversion.verb-to-noun',
-    'grammar-fill.given.pronoun',
+    'grammar-fill.no-hint.adverb',
   ]
   function blankFor(qid, i) {
     const facetKey = facetByIndex[i]
