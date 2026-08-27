@@ -760,6 +760,13 @@ function renderCanonicalApplicationWriting(
   const renderGivenParts = (parts, position) => parts.map((part) =>
     `<p class="canonical-application-given canonical-application-given--${position}" data-canonical-given-part-id="${escapeHtml(part.givenPartId)}" data-canonical-given-role="${escapeHtml(part.role)}" data-canonical-given-placement="${escapeHtml(part.placement)}" data-canonical-application-writing-rhythm-role="${part.role === 'title' ? 'given_title' : position === 'bottom' ? 'given_closing' : 'given_addressee'}">${renderCanonicalInlineNodes(part.inlines)}</p>`).join('')
   const prompt = canonicalGroup.promptBlocks.map((block) => {
+    if (block.kind === 'figure') {
+      const src = `data:${block.mediaArtifact.mimeType};base64,${block.mediaArtifact.encodedBytes}`
+      const caption = block.captionInlines.length > 0
+        ? `<figcaption>${renderCanonicalInlineNodes(block.captionInlines)}</figcaption>`
+        : ''
+      return `<figure class="canonical-reading-figure canonical-application-prompt-figure" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="figure" data-canonical-media-id="${escapeHtml(block.mediaId)}" data-canonical-media-sha256="${escapeHtml(block.mediaArtifact.sha256)}"><img src="${escapeHtml(src)}" alt="" width="${block.mediaArtifact.pixelWidth}" height="${block.mediaArtifact.pixelHeight}">${caption}</figure>`
+    }
     const noticeLines = block.inlines.length === 1
       ? applicationWritingNoticeLines(block.inlines[0].text)
       : null
