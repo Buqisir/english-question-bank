@@ -18,20 +18,18 @@ Historical cuts are evidence, not current instructions.
 
 ## Work proportionately
 
-- The owner defines the desired outcome, acceptance result, and explicit
-  non-goals. The agent inspects the affected code, classifies the technical
-  risk, and chooses the lightest safe implementation and verification path;
-  do not ask the owner to choose engineering ceremony or a risk lane.
+- The owner defines the outcome and non-goals. The agent inspects the code and
+  chooses the lightest safe implementation and verification path; do not ask
+  the owner to choose engineering ceremony or classify technical risk.
 - Clear, reversible work stays in the current task: understand, change, run the
   affected checks, review the diff, and commit when requested.
-- Uncertainty starts as ordinary, reversible work while the blast radius is
-  being established; it does not become high risk merely because code is
-  unfamiliar, spans several files, or has historical complexity. Escalate only
-  when inspection finds a concrete high-risk seam.
+- Treat uncertainty as ordinary, reversible work while establishing the blast
+  radius. Unfamiliarity, file count, and historical complexity are not high-risk
+  triggers; escalate only for a concrete high-risk seam.
 - Use a tracked spec and tickets only when the work genuinely needs more than
-  one context. Use Wayfinder only when the route to a spec is genuinely foggy.
-- Do not create governance-only tasks, approvals, publication/recovery stages,
-  repeated reviews, or automatic task chains. The owner starts top-level tasks.
+  one context.
+- Do not create governance-only tasks or automatic task chains. The owner
+  starts top-level tasks.
 - Use a handoff only when the owner asks or a real work boundary requires it;
   follow `docs/agents/dispatch-protocols.md`.
 - Durable product scope and decisions belong in the relevant spec, ticket, or
@@ -99,7 +97,7 @@ their established vocabulary, and flag conflicts before editing.
   require explicit current owner authorization. Check
   `docs/cuts/launch-deploy/go-live-record.md` before an authorized production
   action. Never run `scripts/pull-run-push.mjs` against production otherwise.
-- Remote: `github` (not `origin`).
+- Remote: `origin`.
 - `app/` uses pnpm; `server/` uses npm.
 - Fresh worktree setup: `bash scripts/setup-worktree.sh`.
 - `scripts/dev.sh` binds server-side vocabulary PDF rendering to the matching
