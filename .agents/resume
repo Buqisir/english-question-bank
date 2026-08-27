@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$repo_root"
+
+if [[ ! -f data/question-bank.sqlite ]]; then
+  echo "[orb-resume] restoring the local development database"
+  bash scripts/init-db.sh
+fi
+
+echo "[orb-resume] ready"
