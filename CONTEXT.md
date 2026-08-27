@@ -188,6 +188,13 @@ _Avoid_: using 考点 as a single catch-all dimension (each type's axes differ i
 calling a cross-type topic label a Teaching Axis (topic is universal, not type-bound);
 conflating it with a free-form Tag.
 
+**Grammar Fill Facet** (语法填空分面):
+A registered leaf on the Grammar Fill Teaching Axis that names the grammatical
+work of one blank. A no-hint adverb is an unprompted answer functioning as an
+adverb in its own expression (for example, `ago`), not a preposition or a clause
+introducer.
+_Avoid_: forcing an adverb into Preposition; inventing a one-paper temporal-adverb category
+
 **Verb Teaching Axis** (动词教学维度):
 Three orthogonal structured dimensions a teacher uses to find 语法填空 finite-verb
 questions: **Tense** (时态: 一般现在/一般过去/现在完成/过去完成/进行/其他),

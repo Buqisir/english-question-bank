@@ -9,7 +9,7 @@
  *
  * Critical cases:
  *  - C1: whether/if✓, Whether/whether✓, were worn✓, worn-for-wore✗, wrong-answer✗
- *  - C2: 17-leaf membership, parent-as-leaf✗, blank_type mismatch✗, role/path conditionality
+ *  - C2: 23-leaf membership, parent-as-leaf✗, blank_type mismatch✗, role/path conditionality
  *  - C3: evidence exact-substring, no blank marker in signalText (SW-2)
  *  - MF-2: post-publish ON-DISK analyses/grammar-fill-analysis-v1.json present
  */
@@ -66,7 +66,8 @@ function assertPromptContract() {
   assert('prompt names schemaVersion grammar-fill-analysis-v2', prompt.includes('grammar-fill-analysis-v2'))
   // promptVersion
   assert('prompt names promptVersion grammar-fill-analysis-v2', prompt.includes('promptVersion') || prompt.includes('grammar-fill-analysis-v2'))
-  // All 22 leaf facet keys must be named (D1: 17 v1 leaves -> 22 v2 leaves)
+  // All 23 leaf facet keys must be named (D1's 22 leaves plus the
+  // no-hint adverb leaf).
   for (const leaf of [
     'grammar-fill.given.verb.finite',
     'grammar-fill.given.verb.non-finite',
@@ -86,6 +87,7 @@ function assertPromptContract() {
     'grammar-fill.no-hint.preposition',
     'grammar-fill.no-hint.article',
     'grammar-fill.no-hint.pronoun',
+    'grammar-fill.no-hint.adverb',
     'grammar-fill.no-hint.conjunction.coordinating',
     'grammar-fill.no-hint.conjunction.relative-clause',
     'grammar-fill.no-hint.conjunction.noun-clause',
@@ -116,11 +118,11 @@ function assertPromptContract() {
 // ============================================================
 
 function assertRegistryContract() {
-  // D1 (grammar-facets-v2): registry file bumped v1 (17 leaves) -> v2 (22 leaves).
+  // D1 (grammar-facets-v2) plus the additive no-hint adverb leaf.
   const raw = readRepoFile('server/paper-import-ai/grammar-fill-facets-v2.json')
   const registry = JSON.parse(raw)
   assert('registry is an array', Array.isArray(registry))
-  assert('registry has exactly 22 leaves', registry.length === 22)
+  assert('registry has exactly 23 leaves', registry.length === 23)
 
   const EXPECTED_LEAVES = [
     'grammar-fill.given.verb.finite',
@@ -141,6 +143,7 @@ function assertRegistryContract() {
     'grammar-fill.no-hint.preposition',
     'grammar-fill.no-hint.article',
     'grammar-fill.no-hint.pronoun',
+    'grammar-fill.no-hint.adverb',
     'grammar-fill.no-hint.conjunction.coordinating',
     'grammar-fill.no-hint.conjunction.relative-clause',
     'grammar-fill.no-hint.conjunction.noun-clause',
@@ -171,7 +174,7 @@ function assertRegistryContract() {
 // ============================================================
 
 // SW-2: passage must contain both a '  56  ' blank marker AND a '(wear)' hint token.
-const FIXTURE_PASSAGE_TEXT = 'Yesterday he  56  (wear) his old coat to the party. The weather was very cold  57  the event started. It was  58  (surprise) to see how many people came. The design of  59  coat was fashionable. One of the ways  60  dressing was quite unusual. We  61  (discuss) the topic earlier that day. There  62  (be) many interesting conversations. The host chose  63  best outfit. People  64  (enjoy) themselves at the party. It was  65  unforgettable experience.'
+const FIXTURE_PASSAGE_TEXT = 'Yesterday he  56  (wear) his old coat to the party. The event happened a year  57  . It was  58  (surprise) to see how many people came. The design of  59  coat was fashionable. One of the ways  60  dressing was quite unusual. We  61  (discuss) the topic earlier that day. There  62  (be) many interesting conversations. The host chose  63  best outfit. People  64  (enjoy) themselves at the party. It was  65  unforgettable experience.'
 
 // Verify SW-2 fixture invariants
 assert('fixture passage contains  56  blank marker', FIXTURE_PASSAGE_TEXT.includes('  56  '))
@@ -180,7 +183,7 @@ assert('fixture passage contains (wear) hint token', FIXTURE_PASSAGE_TEXT.includ
 function gfFixtureInput() {
   const questionData = [
     { no: 56, answerKey: 'wore',       prompt: 'wear'    },
-    { no: 57, answerKey: 'when',       prompt: null      },
+    { no: 57, answerKey: 'ago',        prompt: null      },
     { no: 58, answerKey: 'surprising', prompt: 'surprise'},
     { no: 59, answerKey: 'the',        prompt: null      },
     { no: 60, answerKey: 'of',         prompt: null      },
@@ -227,7 +230,13 @@ function validGfAnalysis(input) {
       blankNo: no,
       blankType: isGiven ? 'given' : 'no-hint',
       hint: isGiven ? q.prompt : null,
-      facetKey: isGiven ? 'grammar-fill.given.verb.finite' : 'grammar-fill.no-hint.preposition',
+      facetKey: isGiven
+        ? 'grammar-fill.given.verb.finite'
+        : q.answerKey === 'ago'
+          ? 'grammar-fill.no-hint.adverb'
+          : ['the', 'an'].includes(q.answerKey)
+            ? 'grammar-fill.no-hint.article'
+            : 'grammar-fill.no-hint.preposition',
       answer: q.answerKey,
       role: null,
       path: null,
@@ -278,6 +287,11 @@ async function assertAnalysisValidation() {
     requestId: 'i13-verify',
   })
   assert('valid grammar-fill analysis passes', result.analysis.schemaVersion === 'grammar-fill-analysis-v2' && result.requestId === 'i13-verify')
+  const agoQuestion = input.group.questions.find((question) => question.answerKey === 'ago')
+  assert(
+    'no-hint ago is admitted as an adverb, not a preposition',
+    result.analysis.blanks[agoQuestion.id].facetKey === 'grammar-fill.no-hint.adverb',
+  )
 
   // --- meta is server-stamped ---
   const bogusMeta = validGfAnalysis(input)
@@ -432,7 +446,7 @@ async function assertAnalysisValidation() {
   assert('C1: answer conflict does not retry (called exactly once)', answerConflictTrials === 1, `called ${answerConflictTrials} times`)
 
   // ============================================================
-  // C2 — facetKey validation (17 leaves, parent rejection, blank_type match)
+  // C2 — facetKey validation (23 leaves, parent rejection, blank_type match)
   // ============================================================
 
   // C2: bad facetKey (not in registry)
@@ -441,7 +455,7 @@ async function assertAnalysisValidation() {
     const firstKey = Object.keys(bad.blanks)[0]
     bad.blanks[firstKey].facetKey = 'grammar-fill.given.verb.imperative'
     return analyzeGrammarFillImportCandidate(input, { providerCallers: { deepseek: stubProvider(bad) } })
-  }, /17 个合法叶节点|facetKey/)
+  }, /23 个合法叶节点|facetKey/)
 
   // C2: parent node used as facetKey
   await assertRejects('C2: parent-as-leaf blocks', () => {

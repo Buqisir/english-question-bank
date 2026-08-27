@@ -74,7 +74,7 @@ const NON_FINITE_KEY = 'grammar-fill.given.verb.non-finite'
 
 const registry = JSON.parse(readRepoFile('server/paper-import-ai/grammar-fill-facets-v2.json'))
 const VALID_FACET_KEYS = new Set(registry.map((f) => f.facet_key))
-assert('Req 0: v2 registry has exactly 22 leaves', VALID_FACET_KEYS.size === 22, `found: ${VALID_FACET_KEYS.size}`)
+assert('Req 0: v2 registry has exactly 23 leaves', VALID_FACET_KEYS.size === 23, `found: ${VALID_FACET_KEYS.size}`)
 const frozenPaperIds = JSON.parse(
   readRepoFile('docs/cuts/paper-canonical-unification/migration/manifest-v2.json'),
 ).membership.paperIds
@@ -164,6 +164,7 @@ const BASELINE_FACET_COUNTS = {
   'grammar-fill.given.noun.genitive': 3,
   'grammar-fill.given.numeral': 2,
   'grammar-fill.no-hint.pronoun': 0,
+  'grammar-fill.no-hint.adverb': 0,
   'grammar-fill.given.conversion.noun-to-noun': 1,
 }
 for (const [key, expected] of Object.entries(BASELINE_FACET_COUNTS)) {
@@ -277,7 +278,7 @@ assert(
   missingFromFrontend.length === 0,
   missingFromFrontend.join(', '),
 )
-assert('Req 5: grammarFillFacetRegistry.ts has exactly 22 entries', registryFrontendKeys.size === 22, `found: ${registryFrontendKeys.size}`)
+assert('Req 5: grammarFillFacetRegistry.ts has exactly 23 entries', registryFrontendKeys.size === 23, `found: ${registryFrontendKeys.size}`)
 
 // The retired v1 registry JSON is kept on disk as a historical record (Req 4
 // allowlist) but must have zero live importers — analyzeGrammarFill.mjs
@@ -376,8 +377,8 @@ function buildTeachingFacetsFixture() {
         form: 'to-do',
       },
       q3: {
-        blankId: 'b3', blankNo: 58, blankType: 'no-hint', hint: null, facetKey: 'grammar-fill.no-hint.preposition',
-        answer: 'for', role: null, path: null, reason: 'r', evidence: [], teachingNote: 't',
+        blankId: 'b3', blankNo: 58, blankType: 'no-hint', hint: null, facetKey: 'grammar-fill.no-hint.adverb',
+        answer: 'ago', role: null, path: null, reason: '时间段 + ago 构成时间状语。', evidence: [], teachingNote: '识别无提示词副词。',
       },
     },
   }
@@ -399,7 +400,7 @@ function buildTeachingFacetsFixture() {
       bucket?.agreements?.has('true'),
     )
     assert('Req 7: role (7-way, incl. subject-complement) picked up unchanged', bucket?.roles?.has('subject-complement'))
-    assert('Req 7: existing facetKeys/blankTypes preserved (MF-2 regression)', bucket?.facetKeys?.has('grammar-fill.no-hint.preposition'))
+    assert('Req 7: additive no-hint adverb facet reaches the teaching index', bucket?.facetKeys?.has('grammar-fill.no-hint.adverb'))
 
     // Filter contract: external param names tense/voice/agreement unchanged (i16a compat)
     const byTense = queryGroupsByTeaching(index, { tense: 'present' })
