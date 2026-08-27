@@ -256,6 +256,11 @@ const paperNormalizationAllowedFiles = new Set([
   // Canonical whole-paper work uses these shared declaration/heading
   // companions without changing the C7 import schema or renderer ownership.
   'shared/papersurface/headingKind.mjs',
+  // Format2 Ticket 08: reviewed shared font authority companions used by the
+  // Screen and Print/PDF consumers without changing the C7 import contract.
+  'shared/papersurface/pinnedScienceFont.d.mts',
+  'shared/papersurface/pinnedScienceFont.d.ts',
+  'shared/papersurface/pinnedScienceFont.mjs',
   'shared/papersurface/tokens.d.mts',
   'shared/papersurface/tokens.d.ts',
   'shared/papersurface/tokens.mjs',

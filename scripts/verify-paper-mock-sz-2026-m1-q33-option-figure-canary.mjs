@@ -3,6 +3,8 @@
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 import {
+  accessSync,
+  constants as fsConstants,
   existsSync,
   mkdtempSync,
   mkdirSync,
@@ -84,6 +86,15 @@ function readJson(filePath) {
   return JSON.parse(readFileSync(filePath, 'utf8'))
 }
 
+function isReadableFile(filePath) {
+  try {
+    accessSync(filePath, fsConstants.R_OK)
+    return true
+  } catch {
+    return false
+  }
+}
+
 function paperArtifactPath(repositoryRoot, result, artifactName) {
   return path.join(
     repositoryRoot,
@@ -141,6 +152,14 @@ function stablePaperBoundary({ plan, groups, answerKey }) {
 }
 
 const config = readJson(path.join(paperPipelineRoot, 'config.json'))
+const missingExactSource = [config.paperPath, config.answersPath]
+  .some((sourcePath) => !isReadableFile(sourcePath))
+if (missingExactSource) {
+  console.log(
+    'SKIP: exact Shenzhen Q33 source PDF pair is off-repo and unavailable in this checkout',
+  )
+  process.exit(2)
+}
 const transcription = readJson(path.join(
   paperPipelineRoot,
   'format2-job/format2-transcription-v4.json',
