@@ -387,9 +387,12 @@ Per-agent prompt must include, verbatim:
    AI's answer.
 5. For the grammar-fill group specifically: tell the agent to read
    `server/paper-import-ai/grammar-fill-facets-v2.json` first — every blank's
-   `facetKey` must be a real LEAF key from that registry (22 leaves, D1
-   grammar-facets-v2, 2026-07-15) whose `blank_type` matches the blank's
-   given/no-hint status. **Hard gate (D1, 挂导入门禁防哑数据)**: the produced
+   `facetKey` must be a real LEAF key from that registry (23 leaves: D1
+   grammar-facets-v2 plus the no-hint adverb leaf) whose
+   `blank_type` matches the blank's
+   given/no-hint status. A no-hint answer may require a standalone adverb such
+   as `ago`; never force it into the preposition leaf merely to
+   pass validation. **Hard gate (D1, 挂导入门禁防哑数据)**: the produced
    analysis file's `schemaVersion` must be `grammar-fill-analysis-v2` — a
    `v1`-shaped grammar-fill-analysis payload is now rejected outright by
    `server/paper-import/validator.mjs`'s schema allow-list

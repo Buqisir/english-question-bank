@@ -24,7 +24,7 @@ Reason carefully internally about:
 
 - each blank's `blankType`: `given` (has a hint word in parentheses) or `no-hint` (no hint)
 - for `given` blanks: what POS is the hint word → which `given` sub-facet → what form does the blank need
-- for `no-hint` blanks: what functional word is missing (preposition / article / pronoun / conjunction)
+- for `no-hint` blanks: what unprompted word is missing (usually preposition / article / pronoun / conjunction; sometimes a standalone adverb such as `ago`)
 - the syntactic trigger words in the passage that prove the answer (evidence)
 - exact field names and enum values
 - the `role` and `path` for non-finite verb blanks only
@@ -47,7 +47,7 @@ Every blank is solved by identifying its **考点 (facet)** and applying the **s
 Two blank families (primary axis):
 
 - **`given`** 有提示词：the hint word's POS is the gate into the `given` sub-branch; the answer is a **form-change** of the hint (tense / non-finite form / POS derivation …).
-- **`no-hint`** 无提示词：the answer is a **function word** to be supplied (article / preposition / conjunction / pronoun).
+- **`no-hint`** 无提示词：the answer is supplied without a source hint. It is usually a function word (article / preposition / conjunction / pronoun), but the sentence may require a standalone adverb such as `ago`.
 
 ### `given` sub-branch selection rule
 
@@ -103,6 +103,7 @@ For every other facet: `"role": null, "path": null`.
 | Before a noun, limits it | `no-hint.article` |
 | After a verb/adjective or collocates → prepositional phrase (no new predicate) | `no-hint.preposition` |
 | Pronoun position (subject/object), anaphora / formal-subject / it-cleft | `no-hint.pronoun` |
+| Directly modifies a word/clause or completes an adverbial expression, with no new predicate (e.g. `a year ago`) | `no-hint.adverb` |
 
 **Conjunction sub-type (4 leaves):**
 
@@ -147,7 +148,7 @@ Every `blanks[questionId]` MUST include:
 - `blankNo` — integer blank number (56–65)
 - `blankType` — exactly `given` or `no-hint` (from input)
 - `hint` — the given base word (string) for `given` blanks; `null` for `no-hint` blanks (from input)
-- `facetKey` — exactly one of the **22 leaf** keys listed below
+- `facetKey` — exactly one of the **23 leaf** keys listed below
 - `answer` — the produced form/word; MUST equal the answer key
 - `role` — required string iff `facetKey === "grammar-fill.given.verb.non-finite"` else `null`
 - `path` — required string iff `facetKey === "grammar-fill.given.verb.non-finite"` else `null`
@@ -157,7 +158,7 @@ Every `blanks[questionId]` MUST include:
 
 Do NOT output `tense`/`voice`/`agreementSensitive` (finite verb) or `form` (non-finite verb) yourself — the server stamps these deterministically from `answer` after your response.
 
-## The 22 Valid `facetKey` Leaves
+## The 23 Valid `facetKey` Leaves
 
 Use ONLY these exact string values. Do NOT use parent nodes (`grammar-fill`, `grammar-fill.given`, `grammar-fill.given.verb`, `grammar-fill.given.conversion`, `grammar-fill.no-hint`, `grammar-fill.no-hint.conjunction`) — they are NOT valid facetKeys. (The old `grammar-fill.given.noun` / `grammar-fill.given.adjective` / `grammar-fill.given.derivation.*` leaves from v1 are retired — do NOT use them.)
 
@@ -180,6 +181,7 @@ grammar-fill.given.numeral
 grammar-fill.no-hint.preposition
 grammar-fill.no-hint.article
 grammar-fill.no-hint.pronoun
+grammar-fill.no-hint.adverb
 grammar-fill.no-hint.conjunction.coordinating
 grammar-fill.no-hint.conjunction.relative-clause
 grammar-fill.no-hint.conjunction.noun-clause
@@ -238,7 +240,7 @@ Rules:
 
 ## Answer Authority
 
-`answer` MUST equal the blank's answer key. The answer key for `given` blanks is the inflected/derived form of the hint word. For `no-hint` blanks it is the functional word to fill.
+`answer` MUST equal the blank's answer key. The answer key for `given` blanks is the inflected/derived form of the hint word. For `no-hint` blanks it is the unprompted word to fill.
 
 Do NOT guess or invent. Write the exact form you determined from your syntactic analysis.
 

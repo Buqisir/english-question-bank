@@ -17,6 +17,7 @@
   { "facet_key": "grammar-fill.no-hint.preposition",                     "blank_type": "no-hint" },
   { "facet_key": "grammar-fill.no-hint.article",                         "blank_type": "no-hint" },
   { "facet_key": "grammar-fill.no-hint.pronoun",                         "blank_type": "no-hint" },
+  { "facet_key": "grammar-fill.no-hint.adverb",                          "blank_type": "no-hint" },
   { "facet_key": "grammar-fill.no-hint.conjunction.coordinating",        "blank_type": "no-hint" },
   { "facet_key": "grammar-fill.no-hint.conjunction.relative-clause",     "blank_type": "no-hint" },
   { "facet_key": "grammar-fill.no-hint.conjunction.noun-clause",         "blank_type": "no-hint" },

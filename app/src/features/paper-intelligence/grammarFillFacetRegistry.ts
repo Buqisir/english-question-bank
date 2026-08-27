@@ -15,7 +15,7 @@
  * The split entries below reuse the original v1 prose verbatim where it maps
  * 1:1 (fidelity preserved), only reorganized under the new key names.
  *
- * Drift guard: the 22 keys here MUST exactly equal the server-side
+ * Drift guard: the 23 keys here MUST exactly equal the server-side
  *   server/paper-import-ai/grammar-fill-facets-v2.json keys.
  *   The verifier (verify-i14-grammar-fill-analysis-surface.mjs /
  *   verify-grammar-facets-v2.mjs) asserts this.
@@ -307,6 +307,22 @@ export const FACET_FRAMEWORKS: Record<string, FacetFrameworkEntry> = {
         '本质（接回冠词主线）：it = the same（同一个本身）；that/those ≈ "the one(s)"（同类·特定的那个）→ 特指（the 家族）；one/ones ≈ "a one(s)"（同类·泛泛一个）→ 泛指（a 家族）。',
         '高考考向：that/those vs one/ones（特指替代 vs 泛指替代）；it 强调句（It is/was…that…）；it 形式主宾 vs 真指代。',
         '注：they 基本不作无提示词答案，主考 it / that·those / one·ones。',
+      ],
+    },
+  },
+
+  'grammar-fill.no-hint.adverb': {
+    labelZh: '副词（无提示词）',
+    framework: {
+      steps: [
+        '第一步｜确认空格不引出新的主谓结构，也不承担介词、冠词或代词功能。',
+        '第二步｜判断空格是否直接修饰动词、形容词、副词、整句，或补全固定的时间、程度表达。',
+        '第三步｜结合句义与固定表达锁定副词；如“时间段 + ago”表示距今多久以前。',
+      ],
+      notes: [
+        '高考考向：无提示词直接填副词；例如 a year ago 中的 ago。',
+        '边界：when / where / why 若引导从句，仍归相应从句叶，不因其“副词”词性改归本叶。',
+        '证据：被修饰成分、时间/程度表达与完整句义。',
       ],
     },
   },
