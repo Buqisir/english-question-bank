@@ -49,8 +49,52 @@ function readingLeafBlockIssues(block, path, mediaById, mediaOccurrences, { allo
   if (block.kind === 'table') {
     if (!Array.isArray(block.rows) || block.rows.length === 0) {
       issues.push(issue('READING_TABLE_INCOMPLETE', 'incomplete_source', path, 'Reading tables require captured rows and cells'))
-    } else if (block.rows.some((row) => !Array.isArray(row?.cells) || row.cells.reduce((total, cell) => total + (Number.isInteger(cell?.columnSpan) ? cell.columnSpan : 0), 0) < block.columnCount)) {
-      issues.push(issue('READING_TABLE_INCOMPLETE', 'incomplete_source', path, 'Reading tables cannot qualify with missing captured cells'))
+    } else {
+      const activeRowSpans = new Map()
+      for (const row of block.rows) {
+        const occupied = new Set(activeRowSpans.keys())
+        let overlaps = false
+        for (const cell of row?.cells || []) {
+          for (let column = cell.columnStart; column < cell.columnStart + cell.columnSpan; column += 1) {
+            if (occupied.has(column)) overlaps = true
+            occupied.add(column)
+            if (cell.rowSpan > 1) activeRowSpans.set(column, cell.rowSpan)
+          }
+        }
+        if (!overlaps && occupied.size !== block.columnCount) {
+          issues.push(issue('READING_TABLE_INCOMPLETE', 'incomplete_source', path, 'Reading tables cannot qualify with missing captured cells'))
+          break
+        }
+        for (const [column, remaining] of [...activeRowSpans]) {
+          if (remaining <= 1) activeRowSpans.delete(column)
+          else activeRowSpans.set(column, remaining - 1)
+        }
+      }
+      if (activeRowSpans.size > 0) issues.push(issue('READING_TABLE_INCOMPLETE', 'incomplete_source', path, 'Reading table row spans cannot exceed the final row'))
+    }
+    for (const [rowIndex, row] of (block.rows || []).entries()) {
+      for (const [cellIndex, cell] of (row?.cells || []).entries()) {
+        for (const [inlineIndex, inline] of (cell?.inlines || []).entries()) {
+          if (inline?.kind !== 'media_ref') continue
+          const inlinePath = `${path}.rows[${rowIndex}].cells[${cellIndex}].inlines[${inlineIndex}]`
+          const mediaItem = mediaById.get(inline.mediaId)
+          if (mediaOccurrences.has(inline.mediaId)) {
+            mediaOccurrences.set(inline.mediaId, mediaOccurrences.get(inline.mediaId) + 1)
+          }
+          if (
+            !mediaItem
+            || !['image/png', 'image/jpeg', 'image/webp'].includes(mediaItem.mimeType)
+            || typeof mediaItem.sha256 !== 'string'
+            || !Number.isInteger(mediaItem.pixelWidth)
+            || mediaItem.pixelWidth < 1
+            || !Number.isInteger(mediaItem.pixelHeight)
+            || mediaItem.pixelHeight < 1
+            || typeof mediaItem.sourceArtifactRef?.artifactId !== 'string'
+          ) {
+            issues.push(issue('READING_TABLE_MEDIA_INCOMPLETE', 'incomplete_source', inlinePath, 'Reading table media refs require closed immutable media, dimensions, and source artifact identity'))
+          }
+        }
+      }
     }
     return issues
   }
@@ -173,7 +217,7 @@ function readingContentIssues(content, media) {
     { allowFramedColumns: true, allowFigure: true },
   ))
   if ([...mediaOccurrences.values()].some((count) => count !== 1)) {
-    issues.push(issue('READING_MEDIA_PLACEMENT_INVALID', 'needs_review', '$.media', 'Every Reading media entry must be placed by exactly one Figure block'))
+    issues.push(issue('READING_MEDIA_PLACEMENT_INVALID', 'needs_review', '$.media', 'Every Reading media entry must be placed exactly once by a Figure or table media ref'))
   }
   return issues
 }

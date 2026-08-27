@@ -8,6 +8,7 @@ import type { WritingGivenPart, WritingPageModel } from './writingPageModel'
 import { RetainedModelAnswer } from '../paper-browse/RetainedWritingLecture.tsx'
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import { applicationWritingRhythm } from '../../../../shared/paper-canonical/applicationWritingRhythm.mjs'
+import { continuationStarterDisplayText } from '../../../../shared/paper-canonical/applicationWritingDisplay'
 import { continuationWritingRhythm } from '../../../../shared/paper-canonical/continuationWritingRhythm.mjs'
 import {
   paperTypographyRuntime,
@@ -133,8 +134,14 @@ const continuationWritingPageStyle: WritingPageStyle = {
     `${continuationWritingRhythm.starterGeometry.trailingInsetEm}em`,
 }
 
-function writingGivenText(part: WritingGivenPart): string {
-  return typeof part === 'string' ? part : part.text
+function writingGivenText(
+  part: WritingGivenPart,
+  continuationStarterIndex: number | null = null,
+): string {
+  const text = typeof part === 'string' ? part : part.text
+  return continuationStarterIndex === null
+    ? text
+    : continuationStarterDisplayText(text, continuationStarterIndex)
 }
 
 function renderSectionHeadingText(text: string): ReactNode {
@@ -368,7 +375,10 @@ export function WritingPaperPage({
                               : undefined
                           }
                         >
-                          {writingGivenText(part)}
+                          {writingGivenText(
+                            part,
+                            isContinuationWriting ? lineIndex : null,
+                          )}
                         </p>
                       )
                       if (!isContinuationWriting) {

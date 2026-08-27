@@ -2,23 +2,29 @@
 
 任意本机 coding agent 导一卷 NCK1 的**唯一进场文档**。先读完本文件再动手。
 
-机械步骤不要在本文件展开，按格式链到：
+所有新 NCK1 卷默认走统一入口，不再先判断格式①/②/③：
 
 - 数据契约：`docs/product/nck1-paper-standard.md`（导题过程中不改；owner 拍板修订后以新文本为准）
+- 统一入口：`node scripts/import-pipeline/universal-nck1.mjs init ...`。Agent 从不可变源生成并校验 `nck1-source-materialization-v1`；表格写语义网格，图标、条码、照片和图表按源提取配方生成媒体。随后 `verify` 派生 Candidate，`build` 只生成 digest-bound Candidate 摘要与未确认的 Teacher Confirmation 模板。完整命令见 `scripts/import-pipeline/README.md`。
 - 阅读 Word 细线框（框里只有能打的字和矩形表）：写成 Canonical `framed_columns`（nck1 §8）；观感见 `docs/product/exam-paper-format-standards.md` §3c。不要截整图当 Canonical 正文，不要为单卷改 CSS。下一卷步骤见 `docs/cuts/reading-framed-columns/spec.md`「下一卷怎么干」。
-- 格式②（PDF 试题卷 + 独立答案 PDF）逐步 how-to：`docs/import/agent-runbook.md`
-- 格式①（DOCX 答案版）切卷 / 校验 / 打包工序：`scripts/import-pipeline/README.md` stages 1–5，以及 runbook 里与格式无关的门禁（`validate-one`、dry-run、`verify-publish-gate`、`verify-nck1`、`--publish` 纪律）。canonical 物化用 `scripts/import-pipeline/build-trusted-docx-canonical-request.mjs`，不要套用格式② PDF envelope。
-- 格式③（试题 DOCX + 答案解析 DOCX）：映射见标准附录 A。切卷用 `scripts/import-pipeline/03-split-docx-pair.mjs`。canonical 物化用 `scripts/import-pipeline/build-docx-pair-canonical-request.mjs`（开局 `paperId` 必填，不走格式①标题派生，不套用格式② PDF envelope）。
+- 旧格式①/②/③脚本只保留已接入存量卷回退；新卷不得向旧脚本添加 `paperId`、CONTENT 登记或 shape association 特例。
 
 导题后台只读本契约的文件夹探针，不另建状态库。消费端网站不导题。
 
 ## 开局（owner 只给这三样）
 
-1. 源文件**绝对路径**（已在本机磁盘；找卷不在范围）。格式③给两份：试题 DOCX + 答案解析 DOCX。
+1. 完整源文件**绝对路径**（PDF/DOCX 可混合；找卷不在范围），并标明 `question_source`、`official_answers` 或 `question_and_answers`。至少一份完整试题源和一份权威答案源。
 2. `paperId`（真题如 `paper-2026-ii`；模拟卷如 `paper-mock-gd-2026-m1`）
-3. 格式：**①** DOCX 答案版，**②** PDF 试题卷 + 独立答案 PDF，或 **③** 试题 DOCX + 答案解析 DOCX
+3. 卷名与如实出处。
 
-不匹配 `nck1-paper-standard.md` §2 白名单 → **停**。不要发明第四种格式。
+不匹配 `nck1-paper-standard.md` 固定 NCK1 九题组，或缺完整权威答案 → **停**。源载体和普通版式变化不是新格式，也不新增格式刀。
+
+```bash
+node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
+  --paper-name '<卷名>' --provenance '<出处>' \
+  --source question_source=/abs/questions.docx \
+  --source official_answers=/abs/answers.pdf
+```
 
 ## 单 writer
 
@@ -74,7 +80,7 @@
 { "shippedAt": "<ISO-8601>", "command": "node scripts/pull-run-push.mjs push" }
 ```
 
-已知 `blocked.json` 原因码：`canonical_unavailable`（格式① / 格式③ producer / compile 仍 fail-closed 时）、`gate_failed`（同一门禁自动修 2 次仍红）、`continuation_non_narrative`、`ship_failed`（整库 push 失败）。
+已知 `blocked.json` 原因码：`source_incomplete`（统一材料化缺页、缺权威答案、冲突或不闭合）、`canonical_unavailable`（旧入口 producer / compile 仍 fail-closed 时）、`gate_failed`（同一门禁自动修 2 次仍红）、`continuation_non_narrative`、`ship_failed`（整库 push 失败）。
 
 ## 六态
 
@@ -95,7 +101,13 @@
 
 ## 硬门禁
 
-按格式跑。导题过程中**不改** `nck1-paper-standard.md` 来过闸（标准修订须 owner 另拍板后落档）。不绕闸。同一门禁最多自动修 **2** 次，仍红 → 写 `signals/blocked.json`（`gate_failed`）并停。
+新卷先走统一材料化缝。导题过程中**不改** `nck1-paper-standard.md` 来过闸（标准修订须 owner 另拍板后落档）。不绕闸。同一门禁最多自动修 **2** 次，仍红 → 写 `signals/blocked.json`（`gate_failed`）并停。
+
+0. 生成 `materialization/nck1-source-materialization-v1.json`。PDF 有文本层直接转录；扫描 PDF 先 OCR 后逐页视觉复核；DOCX 直接读 XML/table/media。DOCX 正文每个源 `<w:p>` 必须一对一生成独立 `paragraph` block，并用指向该段的 `docx_part` locator；禁止把相邻段落合并，也不要把阅读 A/B/C/D 等独立篇目标记写进正文。两篇写作必须保留源顺序：题干 →（续写标题与逐段材料）→ 独立 `注意` 结构 → 框内给定标题/称呼或两条续写开头语；`注意` 保留源本来的组合段，或保留“注意：”及其后一个或多个编号段，不得为了统一视觉而合段；必须含词数且与 `wordCountTarget` 一致，源有答题格式或其他编号说明时一字不漏。续写 `material` 每项一对一对应一个源段落，给定标题、称呼和开头语不得混进题干或材料。DOCX 初始化时自动产生不可变 PDF rendition，形状绘图从 rendition 按页裁。语义表格必须为 `table`，整表截图只能作 `visual_proof`；真实图、图标、条码不得 AI 重画。用 `universal-nck1.mjs extract-docx-media` 或 `crop-pdf` 确定性生成媒体。
+1. `node scripts/import-pipeline/universal-nck1.mjs verify <paperId>`。缺页、缺答案、答案冲突、未闭合表格、重复/漂移媒体或 Materialization `issues` 非空均写 `signals/blocked.json` 并停。
+2. `node scripts/import-pipeline/universal-nck1.mjs build <paperId>`，产生 digest-bound Candidate 摘要与 `confirmed: false` 的 Teacher Confirmation 模板并停。只有教师在外部确认精确 source/candidate digest 后，可信边界才可生成 Canonical request；Agent 不得代确认，本步不发布。
+
+以下旧格式编号步骤仅供已经登记的存量入口继续复现；新卷从分析、发布 dry-run 和 QA 公共门禁继续，不再执行旧切卷/producer：
 
 1. 切卷：格式① `node scripts/import-pipeline/01-split.mjs papers/<id>/config.json`；格式② `node scripts/import-pipeline/pdf-extract.mjs <paperId>`（先按 runbook 填 `CONTENT`）；格式③ `node scripts/import-pipeline/03-split-docx-pair.mjs papers/<id>/config.json`（试题 DOCX + 答案解析 DOCX，从解析抄 `answerKey`）。
 2. 7× `node scripts/import-pipeline/validate-one.mjs papers/<id>/config.json <key>`，key 同上。无子代理时**同一会话串行**写 7 组。禁止把别的 `paperId` 的分析 remap 当本卷交付。

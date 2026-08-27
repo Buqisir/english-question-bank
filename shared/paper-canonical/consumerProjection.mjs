@@ -4,6 +4,7 @@ import {
   layoutFixedFourColumnClozeOptionSet,
 } from './abcdLayout.mjs'
 import { resolveCanonicalAuthority } from './authority.mjs'
+import { grammarFillPromptPrefix } from './grammarFillPromptContract.mjs'
 import { readingPassageLetterBySlotId } from './readingPassageLetter.mjs'
 import { digestJson, sha256, stableStringify } from './stable.mjs'
 
@@ -110,6 +111,31 @@ function projectReadingConsumerGroup(input, occurrence) {
   )
 
   const seenMediaIds = new Set()
+  const resolveReadingMedia = (mediaId, context) => {
+    const media = mediaById.get(mediaId)
+    const artifact = mediaArtifactsById.get(mediaId)
+    const mediaBytes = decodeBase64Bytes(artifact?.encodedBytes)
+    if (
+      !media
+      || seenMediaIds.has(mediaId)
+      || !artifact
+      || artifact.mimeType !== media.mimeType
+      || artifact.sha256 !== media.sha256
+      || artifact.pixelWidth !== media.pixelWidth
+      || artifact.pixelHeight !== media.pixelHeight
+      || artifact.sourceArtifactRef?.artifactId !== media.sourceArtifactRef.artifactId
+      || typeof artifact.encodedBytes !== 'string'
+      || !mediaBytes
+      || sha256(mediaBytes) !== media.sha256
+    ) {
+      throw rejected(`Canonical Reading occurrence ${groupId} has unresolved ${context} media`)
+    }
+    seenMediaIds.add(mediaId)
+    return {
+      media: structuredClone(media),
+      mediaArtifact: structuredClone(artifact),
+    }
+  }
   const projectReadingParagraph = (block) => ({
     kind: 'paragraph',
     nodeId: block.nodeId,
@@ -145,9 +171,23 @@ function projectReadingConsumerGroup(input, occurrence) {
         ) {
           throw rejected(`Canonical Reading occurrence ${groupId} has an invalid table cell`)
         }
+        const inlines = cell.inlines.map((inline) => {
+          if (inline?.kind === 'text') return structuredClone(inline)
+          if (inline?.kind !== 'media_ref' || typeof inline.alt !== 'string') {
+            throw rejected(`Canonical Reading occurrence ${groupId} has an invalid table inline`)
+          }
+          return {
+            ...structuredClone(inline),
+            ...resolveReadingMedia(inline.mediaId, 'table'),
+          }
+        })
         return {
           ...structuredClone(cell),
-          text: textContent(cell.inlines),
+          inlines,
+          text: cell.inlines
+            .filter((inline) => inline?.kind === 'text')
+            .map((inline) => inline.text)
+            .join(''),
         }
       })
       const occupied = new Set(activeRowSpans.keys())
@@ -208,32 +248,12 @@ function projectReadingConsumerGroup(input, occurrence) {
       if (!allowFigure) {
         throw rejected(`Canonical Reading occurrence ${groupId} contains an unsupported framed_columns child`)
       }
-      const media = mediaById.get(block.mediaId)
-      const artifact = mediaArtifactsById.get(block.mediaId)
-      const mediaBytes = decodeBase64Bytes(artifact?.encodedBytes)
-      if (
-        !media
-        || seenMediaIds.has(block.mediaId)
-        || !artifact
-        || artifact.mimeType !== media.mimeType
-        || artifact.sha256 !== media.sha256
-        || artifact.pixelWidth !== media.pixelWidth
-        || artifact.pixelHeight !== media.pixelHeight
-        || artifact.sourceArtifactRef?.artifactId !==
-          media.sourceArtifactRef.artifactId
-        || typeof artifact.encodedBytes !== 'string'
-        || !mediaBytes
-        || sha256(mediaBytes) !== media.sha256
-      ) {
-        throw rejected(`Canonical Reading occurrence ${groupId} has unresolved Figure media`)
-      }
-      seenMediaIds.add(block.mediaId)
+      const resolvedMedia = resolveReadingMedia(block.mediaId, 'Figure')
       return {
         kind: 'figure',
         nodeId: block.nodeId,
         mediaId: block.mediaId,
-        media: structuredClone(media),
-        mediaArtifact: structuredClone(artifact),
+        ...resolvedMedia,
         caption: textContent(block.caption),
         captionInlines: structuredClone(block.caption),
       }
@@ -1200,14 +1220,8 @@ export function projectCanonicalConsumerGroup(input) {
         const prompt = promptByBlankId.get(inline.blankId)
         if (prompt === null || prompt === undefined) return
         const following = block.inlines[index + 1]
-        const sourcePrefix = ` (${prompt})`
-        const boundary = following?.text?.slice(sourcePrefix.length, sourcePrefix.length + 1)
-        if (
-          following?.kind !== 'text'
-          || typeof following.text !== 'string'
-          || !following.text.startsWith(sourcePrefix)
-          || (boundary !== '' && !/[\s.,;:!?]/u.test(boundary))
-        ) {
+        const sourcePrefix = grammarFillPromptPrefix(following, prompt)
+        if (sourcePrefix === null) {
           throw rejected(
             `Canonical occurrence ${groupId} prompt identity disagrees with source text`,
           )

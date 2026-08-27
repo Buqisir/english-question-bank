@@ -52,6 +52,7 @@ import {
 } from '../shared/paper-canonical/abcdLayout.mjs'
 import {
   applicationWritingNoticeLines,
+  continuationStarterDisplayText,
 } from '../shared/paper-canonical/applicationWritingDisplay.mjs'
 import {
   readingPassageLetterGeometryForLetter,
@@ -531,9 +532,25 @@ function renderCanonicalSharedBank(canonicalGroup, {
 }
 
 function renderCanonicalInlineNodes(nodes) {
-  return nodes.map((node) =>
-    `<span data-canonical-content-node-id="${escapeHtml(node.nodeId)}">${escapeHtml(node.text)}</span>`,
-  ).join('')
+  return nodes.map((node) => {
+    if (node.kind === 'media_ref') {
+      const src = `data:${node.mediaArtifact.mimeType};base64,${node.mediaArtifact.encodedBytes}`
+      return `<img class="canonical-reading-table-media" data-canonical-content-node-id="${escapeHtml(node.nodeId)}" data-canonical-media-id="${escapeHtml(node.mediaId)}" src="${escapeHtml(src)}" alt="${escapeHtml(node.alt)}">`
+    }
+    return `<span data-canonical-content-node-id="${escapeHtml(node.nodeId)}">${escapeHtml(node.text)}</span>`
+  }).join('')
+}
+
+function renderContinuationStarterInlineNodes(nodes, starterIndex) {
+  let firstText = true
+  return nodes.map((node) => {
+    if (node.kind === 'media_ref') return renderCanonicalInlineNodes([node])
+    const text = firstText
+      ? continuationStarterDisplayText(node.text, starterIndex)
+      : node.text
+    firstText = false
+    return `<span data-canonical-content-node-id="${escapeHtml(node.nodeId)}">${escapeHtml(text)}</span>`
+  }).join('')
 }
 
 const PRINT_PAGE_CONTENT_HEIGHT_PT = (297 - 21 - 24) * (72 / 25.4)
@@ -734,7 +751,7 @@ function renderCanonicalOpaqueWriting(
             `Canonical Continuation Writing starter ${contentRef} is absent from source blocks`,
           )
         }
-        return `<div class="writing-continuation-row"><p class="writing-starter-line" data-canonical-starter-id="${escapeHtml(contentRef)}" data-canonical-block-id="${escapeHtml(contentRef)}" data-canonical-continuation-writing-rhythm-role="starter_${index + 1}">${renderCanonicalInlineNodes(block.inlines)}</p><span class="writing-continuation-writable-area" data-canonical-continuation-writing-rhythm-role="writable_after_starter_${index + 1}"></span></div>`
+        return `<div class="writing-continuation-row"><p class="writing-starter-line" data-canonical-starter-id="${escapeHtml(contentRef)}" data-canonical-block-id="${escapeHtml(contentRef)}" data-canonical-continuation-writing-rhythm-role="starter_${index + 1}">${renderContinuationStarterInlineNodes(block.inlines, index)}</p><span class="writing-continuation-writable-area" data-canonical-continuation-writing-rhythm-role="writable_after_starter_${index + 1}"></span></div>`
       }).join('')
   return `<div class="${familyClass} canonical-legacy-opaque-writing" data-canonical-writing-mode="legacy_opaque" data-canonical-writing-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-writing-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}" data-canonical-word-count-target="${canonicalGroup.wordCountTarget}" data-canonical-word-count-certainty="${escapeHtml(canonicalGroup.wordCountTargetCertainty)}" data-canonical-word-count-scope="${escapeHtml(canonicalGroup.wordCountScope)}">${application ? chrome : `<div class="canonical-continuation-chrome">${chrome}</div>`}<div class="passage canonical-legacy-opaque-source">${source}</div><div class="writing-answer-box ${responseClass} canonical-legacy-opaque-response" data-canonical-legacy-opaque-response="" data-canonical-response-ownership="${escapeHtml(response.ownership)}" data-canonical-answer-region-ref="${escapeHtml(response.answerRegionRef)}" data-canonical-response-slot-id="${escapeHtml(response.responseSlotId)}" style="width:${geometry.widthMm}mm;height:${geometry.heightMm}mm;">${starters}</div></div>`
 }
@@ -786,7 +803,7 @@ function renderCanonicalContinuationWriting(canonicalGroup, writingChrome) {
     `<p data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-continuation-writing-rhythm-role="material_paragraph">${renderCanonicalInlineNodes(block.inlines)}</p>`).join('')
   const response = canonicalGroup.answerRegion
   const starters = response.starterLines.map((starter, index) =>
-    `<div class="writing-continuation-row"><p class="writing-starter-line" data-canonical-starter-id="${escapeHtml(starter.starterId)}" data-canonical-block-id="${escapeHtml(starter.contentRef)}" data-canonical-continuation-writing-rhythm-role="starter_${index + 1}">${renderCanonicalInlineNodes(starter.inlines)}</p><span class="writing-continuation-writable-area" data-canonical-continuation-writing-rhythm-role="writable_after_starter_${index + 1}"></span></div>`).join('')
+    `<div class="writing-continuation-row"><p class="writing-starter-line" data-canonical-starter-id="${escapeHtml(starter.starterId)}" data-canonical-block-id="${escapeHtml(starter.contentRef)}" data-canonical-continuation-writing-rhythm-role="starter_${index + 1}">${renderContinuationStarterInlineNodes(starter.inlines, index)}</p><span class="writing-continuation-writable-area" data-canonical-continuation-writing-rhythm-role="writable_after_starter_${index + 1}"></span></div>`).join('')
   return `<div class="canonical-continuation-writing" data-canonical-writing-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-writing-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}" data-canonical-word-count-scope="${escapeHtml(canonicalGroup.wordCountRuling.countScope)}" data-canonical-word-count-target="${canonicalGroup.wordCountRuling.target}"><div class="canonical-continuation-chrome">${chrome}</div><div class="passage canonical-continuation-material">${material}</div><div class="writing-answer-box canonical-continuation-response" data-canonical-continuation-writing-rhythm-role="response_box" data-canonical-answer-region-ref="${escapeHtml(response.answerRegionRef)}" data-canonical-response-slot-id="${escapeHtml(response.responseSlotId)}" style="width:${continuationWritingRhythm.responseGeometry.widthMm}mm;height:${continuationWritingRhythm.responseGeometry.heightMm}mm;">${starters}</div></div>`
 }
 
@@ -2547,6 +2564,20 @@ body {
   padding: 0 4pt;
   border: 0.5pt solid #000;
   vertical-align: top;
+}
+
+.canonical-reading-table-media {
+  display: inline-block;
+  max-width: 100%;
+  max-height: 4em;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+.canonical-reading-table td[rowspan]:not([rowspan="1"]) .canonical-reading-table-media {
+  max-height: 22em;
 }
 
 .canonical-reading-figure {

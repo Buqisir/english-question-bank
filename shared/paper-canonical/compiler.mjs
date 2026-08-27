@@ -1,5 +1,6 @@
 import {
   canonicalAuthorityRef,
+  nck1MaterializationCandidateAuthorityRef,
   resolveCanonicalAuthority,
   slotsForProfile,
   trustedDocxCandidateAuthorityRef,
@@ -40,6 +41,14 @@ import {
 import {
   isRegisteredConfirmedCanonicalHistoricalReplayCapability,
 } from '../../server/paper-canonical/registeredConfirmedCanonicalAdmission.mjs'
+import {
+  NCK1_MATERIALIZATION_INPUT_KIND,
+  NCK1_MATERIALIZATION_CANDIDATE_SCHEMA_VERSION,
+  cloneNck1MaterializationInput,
+  deriveNck1MaterializationBundle,
+  isNck1MaterializationInput,
+  nck1MaterializationSourceSummary,
+} from '../../server/paper-canonical/nck1MaterializationAdapter.mjs'
 import { validateReadingContract } from './reading.mjs'
 import {
   FRAMED_COLUMNS_CHILD_KINDS,
@@ -59,6 +68,7 @@ import { cloneJson, digestJson, exactKeys, isRecordValue, sha256, stableStringif
 
 const trustedDocxCandidateCompile = Symbol('trustedDocxCandidateCompile')
 const docxPairCandidateCompile = Symbol('docxPairCandidateCompile')
+const nck1MaterializationCandidateCompile = Symbol('nck1MaterializationCandidateCompile')
 const trustedLegacyCaptureCandidateCompile = Symbol('trustedLegacyCaptureCandidateCompile')
 import { canonicalizeVisibleEnglishTypography } from './visibleTypography.mjs'
 import { replayCanonicalVisibleTypography } from './visibleTypographyReplay.mjs'
@@ -2451,24 +2461,50 @@ function continuationWritingSourceSpanRefs(variant, content, capture, target) {
   return null
 }
 
-function validateInlines(inlines, blankIds, path, diagnostics, ids) {
+function validateInlines(inlines, blankIds, path, diagnostics, ids, {
+  allowMediaRefs = false,
+  mediaIds = new Set(),
+} = {}) {
   if (!Array.isArray(inlines)) {
     diagnostics.push(diagnostic('RICH_INLINE_INVALID', 'needs_review', path, 'Inlines must be ordered'))
     return
   }
   for (const [index, inline] of inlines.entries()) {
     const inlinePath = `${path}[${index}]`
-    if (!isRecordValue(inline) || (inline.kind === 'text' && !exactKeys(inline, ['kind', 'nodeId', 'text'])) || (inline.kind === 'blank_ref' && !exactKeys(inline, ['kind', 'nodeId', 'blankId']))) {
-      diagnostics.push(diagnostic('RICH_INLINE_SHAPE', 'needs_review', inlinePath, 'Only literal text and semantic blank refs are allowed'))
+    const validShape = isRecordValue(inline)
+      && typeof inline.nodeId === 'string'
+      && (
+        (inline.kind === 'text'
+          && exactKeys(inline, ['kind', 'nodeId', 'text'])
+          && typeof inline.text === 'string')
+        || (inline.kind === 'blank_ref'
+          && exactKeys(inline, ['kind', 'nodeId', 'blankId'])
+          && typeof inline.blankId === 'string')
+        || (allowMediaRefs
+          && inline.kind === 'media_ref'
+          && exactKeys(inline, ['kind', 'nodeId', 'mediaId', 'alt'])
+          && typeof inline.mediaId === 'string'
+          && typeof inline.alt === 'string')
+      )
+    if (!validShape) {
+      diagnostics.push(diagnostic(
+        'RICH_INLINE_SHAPE',
+        'needs_review',
+        inlinePath,
+        allowMediaRefs
+          ? 'Only literal text, semantic blank refs, and resolved table media refs are allowed'
+          : 'Only literal text and semantic blank refs are allowed',
+      ))
       continue
     }
     if (ids.has(inline.nodeId)) diagnostics.push(diagnostic('RICH_NODE_DUPLICATE', 'needs_review', inlinePath, 'Rich node ids must be unique'))
     ids.add(inline.nodeId)
     if (inline.kind === 'blank_ref' && !blankIds.has(inline.blankId)) diagnostics.push(diagnostic('RICH_BLANK_UNRESOLVED', 'needs_review', inlinePath, 'Blank ref is not declared by the group'))
+    if (inline.kind === 'media_ref' && !mediaIds.has(inline.mediaId)) diagnostics.push(diagnostic('RICH_MEDIA_UNRESOLVED', 'needs_review', inlinePath, 'Table media ref is not declared by the group'))
   }
 }
 
-function validateRichBlock(block, path, blankIds, mediaIds, diagnostics, ids, allowedKinds) {
+function validateRichBlock(block, path, blankIds, mediaIds, diagnostics, ids, allowedKinds, richTableV1 = false) {
   if (!isRecordValue(block) || typeof block.kind !== 'string' || typeof block.nodeId !== 'string' || ids.has(block.nodeId)) {
     diagnostics.push(diagnostic('RICH_BLOCK_INVALID', 'needs_review', path, 'Blocks need unique identities'))
     return
@@ -2500,22 +2536,40 @@ function validateRichBlock(block, path, blankIds, mediaIds, diagnostics, ids, al
       diagnostics.push(diagnostic('RICH_TABLE_INVALID', 'needs_review', path, 'Tables need a rectangular semantic grid'))
       return
     }
+    const activeRowSpans = new Map()
     for (const [rowIndex, row] of block.rows.entries()) {
       if (!isRecordValue(row) || !exactKeys(row, ['rowId', 'cells']) || !Array.isArray(row.cells)) {
         diagnostics.push(diagnostic('RICH_TABLE_ROW_INVALID', 'needs_review', `${path}.rows[${rowIndex}]`, 'Table rows are closed'))
         continue
       }
-      let covered = 0
+      const occupied = new Set(activeRowSpans.keys())
       for (const [cellIndex, cell] of row.cells.entries()) {
-        if (!isRecordValue(cell) || !exactKeys(cell, ['cellId', 'columnStart', 'columnSpan', 'rowSpan', 'role', 'inlines']) || cell.columnStart !== covered || !Number.isInteger(cell.columnSpan) || cell.columnSpan < 1 || !Number.isInteger(cell.rowSpan) || cell.rowSpan < 1 || !['header', 'data'].includes(cell.role)) {
+        if (!isRecordValue(cell) || !exactKeys(cell, ['cellId', 'columnStart', 'columnSpan', 'rowSpan', 'role', 'inlines']) || !Number.isInteger(cell.columnStart) || cell.columnStart < 0 || !Number.isInteger(cell.columnSpan) || cell.columnSpan < 1 || cell.columnStart + cell.columnSpan > block.columnCount || !Number.isInteger(cell.rowSpan) || cell.rowSpan < 1 || !['header', 'data'].includes(cell.role)) {
           diagnostics.push(diagnostic('RICH_TABLE_CELL_INVALID', 'needs_review', `${path}.rows[${rowIndex}].cells[${cellIndex}]`, 'Table cells must establish a rectangular grid'))
           continue
         }
-        covered += cell.columnSpan
-        validateInlines(cell.inlines, blankIds, `${path}.rows[${rowIndex}].cells[${cellIndex}].inlines`, diagnostics, ids)
+        if (!richTableV1 && cell.rowSpan !== 1) diagnostics.push(diagnostic('RICH_TABLE_CELL_INVALID', 'needs_review', `${path}.rows[${rowIndex}].cells[${cellIndex}].rowSpan`, 'Operative row spans require rich-content-v1 authority'))
+        for (let column = cell.columnStart; column < cell.columnStart + cell.columnSpan; column += 1) {
+          if (occupied.has(column)) diagnostics.push(diagnostic('RICH_TABLE_CELL_INVALID', 'needs_review', `${path}.rows[${rowIndex}].cells[${cellIndex}]`, 'Table cells and row spans cannot overlap'))
+          occupied.add(column)
+          if (cell.rowSpan > 1) activeRowSpans.set(column, cell.rowSpan)
+        }
+        validateInlines(
+          cell.inlines,
+          blankIds,
+          `${path}.rows[${rowIndex}].cells[${cellIndex}].inlines`,
+          diagnostics,
+          ids,
+          { allowMediaRefs: richTableV1, mediaIds },
+        )
       }
-      if (covered !== block.columnCount) diagnostics.push(diagnostic('RICH_TABLE_NOT_RECTANGULAR', 'needs_review', `${path}.rows[${rowIndex}]`, 'Cells do not cover the declared columns'))
+      if (occupied.size !== block.columnCount) diagnostics.push(diagnostic('RICH_TABLE_NOT_RECTANGULAR', 'needs_review', `${path}.rows[${rowIndex}]`, 'Cells do not cover the declared columns'))
+      for (const [column, remaining] of [...activeRowSpans]) {
+        if (remaining <= 1) activeRowSpans.delete(column)
+        else activeRowSpans.set(column, remaining - 1)
+      }
     }
+    if (activeRowSpans.size > 0) diagnostics.push(diagnostic('RICH_TABLE_NOT_RECTANGULAR', 'needs_review', path, 'Table row span exceeds the final row'))
     return
   }
   if (block.columnCount !== FRAMED_COLUMNS_COLUMN_COUNT || !Array.isArray(block.columns) || block.columns.length !== FRAMED_COLUMNS_COLUMN_COUNT) {
@@ -2557,6 +2611,7 @@ function validateRichBlock(block, path, blankIds, mediaIds, diagnostics, ids, al
         diagnostics,
         ids,
         FRAMED_COLUMNS_CHILD_KINDS,
+        richTableV1,
       )
     }
     if (Object.hasOwn(column, 'columnHeading')) {
@@ -2568,7 +2623,7 @@ function validateRichBlock(block, path, blankIds, mediaIds, diagnostics, ids, al
   }
 }
 
-function validateRichContent(content, blankIds, mediaIds) {
+function validateRichContent(content, blankIds, mediaIds, richTableV1 = false) {
   const diagnostics = []
   const ids = new Set()
   if (!isRecordValue(content) || !exactKeys(content, ['blocks']) || !Array.isArray(content.blocks)) {
@@ -2583,6 +2638,7 @@ function validateRichContent(content, blankIds, mediaIds) {
       diagnostics,
       ids,
       [ 'paragraph', 'table', 'figure', FRAMED_COLUMNS_KIND ],
+      richTableV1,
     )
   }
   return diagnostics
@@ -2684,7 +2740,12 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     mediaIds.add(item.mediaId)
   }
   const content = cloneJson(sourceGroup.content || { blocks: [] })
-  diagnostics.push(...validateRichContent(content, new Set(sourceGroup.blankIds), mediaIds))
+  diagnostics.push(...validateRichContent(
+    content,
+    new Set(sourceGroup.blankIds),
+    mediaIds,
+    closure.authorityRef.manifestVersion === '46',
+  ))
   if (family.familyContractId !== 'reading' && contentHasFramedColumns(content)) {
     diagnostics.push(diagnostic('RICH_BLOCK_UNSUPPORTED', 'unsupported', '$.content', 'framed_columns is only representable in Reading'))
   }
@@ -3171,6 +3232,13 @@ export function compileCanonicalPaper(
   const acceptsDocxPairCandidate = request?.[docxPairCandidateCompile] === true
     && closure.authorityRef.manifestDigest
       === trustedDocxCandidateAuthorityRef.manifestDigest
+  const acceptsNck1MaterializationCandidate = request?.[nck1MaterializationCandidateCompile] === true
+    && closure.authorityRef.manifestDigest
+      === nck1MaterializationCandidateAuthorityRef.manifestDigest
+  const acceptsConfirmedNck1MaterializationRequest =
+    closure.authorityRef.manifestDigest
+      === nck1MaterializationCandidateAuthorityRef.manifestDigest
+    && isConfirmedNck1MaterializationRequest(request)
   const acceptsTrustedLegacyCaptureCandidate = request?.[trustedLegacyCaptureCandidateCompile] === true
     && Boolean(trustedLegacyCaptureCandidateAuthorityFor(
       closure.authorityRef,
@@ -3180,6 +3248,8 @@ export function compileCanonicalPaper(
     closure.authorityRef.manifestDigest !== canonicalAuthorityRef.manifestDigest
     && !acceptsTrustedDocxCandidate
     && !acceptsDocxPairCandidate
+    && !acceptsNck1MaterializationCandidate
+    && !acceptsConfirmedNck1MaterializationRequest
     && !acceptsTrustedLegacyCaptureCandidate
   ) {
     diagnostics.push(diagnostic('AUTHORITY_RETIRED', 'unsupported', '$.authority', 'Only the current canonical authority may compile new papers'))
@@ -3289,6 +3359,14 @@ function compileDocxPairCandidate(request) {
     ...request,
     authority: trustedDocxCandidateAuthorityRef,
     [docxPairCandidateCompile]: true,
+  })
+}
+
+function compileNck1MaterializationCandidate(request) {
+  return compileCanonicalPaper({
+    ...request,
+    authority: nck1MaterializationCandidateAuthorityRef,
+    [nck1MaterializationCandidateCompile]: true,
   })
 }
 
@@ -3784,12 +3862,121 @@ function suppliedTrustedCandidateBody(candidate) {
     sourceBytes: _sourceBytes,
     questionBytes: _questionBytes,
     answersBytes: _answersBytes,
+    sourceInput: _sourceInput,
     ...body
   } = candidate
   return body
 }
 
+function nck1MaterializationCandidateBody(derivation) {
+  return {
+    schemaVersion: NCK1_MATERIALIZATION_CANDIDATE_SCHEMA_VERSION,
+    authority: nck1MaterializationCandidateAuthorityRef,
+    source: nck1MaterializationSourceSummary(derivation),
+    operatorChoices: {},
+    interpretation: derivation.source,
+    issues: derivation.issues,
+  }
+}
+
+function nck1MaterializationCandidateFromInput(sourceInput) {
+  const derivation = deriveNck1MaterializationBundle(sourceInput)
+  const body = nck1MaterializationCandidateBody(derivation)
+  return {
+    candidate: {
+      ...body,
+      candidateDigest: digestJson(body),
+      sourceInput: cloneNck1MaterializationInput(sourceInput),
+    },
+    derivation,
+  }
+}
+
+function nck1InputKey(prefix, id) {
+  return `${prefix}_${id.replace(/[^a-z0-9]+/gi, '_')}`
+}
+
+function compilerDocumentFingerprint(document) {
+  return digestJson({
+    inputKey: document.inputKey,
+    roles: document.roles,
+    declared: document.declared,
+    sha256: sha256(document.bytes),
+    byteLength: document.bytes.byteLength,
+  })
+}
+
+function isConfirmedNck1MaterializationRequest(request) {
+  const confirmation = request?.nck1MaterializationConfirmation
+  if (
+    !exactKeys(confirmation, ['schemaVersion', 'candidateDigest', 'sourceDigest', 'confirmed'])
+    || confirmation.schemaVersion !== confirmationSchemaVersion
+    || confirmation.confirmed !== true
+  ) return false
+  const requestDocuments = request.evidence?.documents
+  if (!Array.isArray(requestDocuments)) return false
+  const materializationDocument = requestDocuments.find((document) =>
+    document.inputKey === 'nck1_source_materialization'
+    && document.declared?.mediaType
+      === 'application/vnd.eqb.nck1-source-materialization+json')
+  if (!(materializationDocument?.bytes instanceof Uint8Array)) return false
+  let materialization
+  try {
+    materialization = JSON.parse(new TextDecoder().decode(materializationDocument.bytes))
+  } catch {
+    return false
+  }
+  const byInputKey = new Map(requestDocuments.map((document) =>
+    [document.inputKey, document]))
+  const sourceInput = {
+    kind: NCK1_MATERIALIZATION_INPUT_KIND,
+    materializationBytes: new Uint8Array(materializationDocument.bytes),
+    documents: (materialization.documents || []).map((document) => ({
+      documentId: document.documentId,
+      bytes: byInputKey.get(nck1InputKey('source_document', document.documentId))?.bytes,
+    })),
+    media: (materialization.media || []).map((media) => ({
+      mediaId: media.mediaId,
+      bytes: byInputKey.get(nck1InputKey('source_media', media.mediaId))?.bytes,
+    })),
+  }
+  if (!isNck1MaterializationInput(sourceInput)) return false
+  const rerun = nck1MaterializationCandidateFromInput(sourceInput)
+  if (
+    rerun.candidate.issues.length > 0
+    || confirmation.candidateDigest !== rerun.candidate.candidateDigest
+    || confirmation.sourceDigest !== rerun.candidate.source.sha256
+  ) return false
+  const expected = rerun.derivation.request.evidence.documents
+  return expected.length === requestDocuments.length
+    && expected.every((document, index) =>
+      compilerDocumentFingerprint(document)
+        === compilerDocumentFingerprint(requestDocuments[index]))
+}
+
+function isNck1MaterializationCandidateShape(candidate) {
+  return exactKeys(candidate, [
+    'schemaVersion',
+    'authority',
+    'source',
+    'operatorChoices',
+    'interpretation',
+    'issues',
+    'candidateDigest',
+    'sourceInput',
+  ])
+    && candidate.schemaVersion === NCK1_MATERIALIZATION_CANDIDATE_SCHEMA_VERSION
+    && exactKeys(candidate.operatorChoices, [])
+    && isNck1MaterializationInput(candidate.sourceInput)
+}
+
 function candidateRoute(candidate, historicalReplayCapability = null) {
+  if (isNck1MaterializationCandidateShape(candidate)) {
+    return {
+      rerun: () => nck1MaterializationCandidateFromInput(candidate.sourceInput),
+      compile: (rerun) => compileNck1MaterializationCandidate(rerun.derivation.request),
+    }
+  }
   if (isTrustedDocxCandidateShape(candidate)) {
     return {
       rerun: () => trustedDocxCandidateFromBytes(candidate.sourceBytes, candidate.operatorChoices),
@@ -3846,6 +4033,13 @@ function candidateRoute(candidate, historicalReplayCapability = null) {
  * a profile.
  */
 export function importCanonicalCandidate(sourceBytes, operatorChoices) {
+  if (isNck1MaterializationInput(sourceBytes)) {
+    if (operatorChoices !== undefined) {
+      return { candidate: null, issues: [trustedDocxIssue('CALLER_SEMANTICS_REJECTED', 'NCK1 Source Materialization imports do not accept caller choices or Canonical semantic fields')] }
+    }
+    const result = nck1MaterializationCandidateFromInput(sourceBytes)
+    return { candidate: result.candidate, issues: result.candidate.issues }
+  }
   if (sourceBytes instanceof Uint8Array) {
     if (sourceBytes.byteLength === 0) {
       return { candidate: null, issues: [trustedDocxIssue('SOURCE_BYTES_REQUIRED', 'Import Candidate requires immutable non-empty DOCX source bytes')] }
@@ -3867,7 +4061,52 @@ export function importCanonicalCandidate(sourceBytes, operatorChoices) {
     }
     return trustedLegacyCaptureCandidateFromBytes(sourceBytes.sourceCaptureBytes)
   }
-  return { candidate: null, issues: [trustedDocxIssue('SOURCE_BYTES_REQUIRED', 'Import Candidate requires immutable DOCX bytes or one exact Ticket 26 legacy capture input')] }
+  return { candidate: null, issues: [trustedDocxIssue('SOURCE_BYTES_REQUIRED', 'Import Candidate requires immutable DOCX bytes, one exact NCK1 Source Materialization input, or one exact Ticket 26 legacy capture input')] }
+}
+
+/**
+ * Re-derives one NCK1 Candidate and compiles its read-only preview without
+ * creating a Teacher Confirmation or a publishable admission. The Candidate
+ * authority remains retired at the publication latch, so this result is only
+ * suitable for local consumer QA.
+ */
+export function compileNck1MaterializationCandidatePreview(candidate) {
+  if (!isNck1MaterializationCandidateShape(candidate)) {
+    return { unresolvedIssues: [trustedDocxIssue('CANDIDATE_REQUIRED', 'NCK1 Candidate preview requires one trusted Source Materialization Candidate')] }
+  }
+  if (candidate.candidateDigest !== digestJson(suppliedTrustedCandidateBody(candidate))) {
+    return { unresolvedIssues: [trustedDocxIssue('CANDIDATE_BINDING_MISMATCH', 'NCK1 Candidate preview digest does not bind the supplied candidate')] }
+  }
+  const rerun = nck1MaterializationCandidateFromInput(candidate.sourceInput)
+  if (
+    !rerun.candidate
+    || rerun.candidate.candidateDigest !== candidate.candidateDigest
+  ) {
+    return { unresolvedIssues: [trustedDocxIssue('CANDIDATE_BINDING_MISMATCH', 'NCK1 Candidate preview does not match a fresh trusted derivation')] }
+  }
+  if (rerun.candidate.issues.length > 0) {
+    return { unresolvedIssues: rerun.candidate.issues }
+  }
+  const compilation = compileNck1MaterializationCandidate(
+    rerun.derivation.request,
+  )
+  if (!compilation.artifacts?.canonicalPaper) {
+    const unresolvedIssues = compilation.artifacts?.normalizationReport
+      ?.diagnostics
+      ?.filter((item) => item.disposition !== 'ready')
+      .map(({ code, disposition, message, path }) => ({
+        code,
+        disposition,
+        message,
+        path,
+      }))
+    return {
+      unresolvedIssues: unresolvedIssues?.length > 0
+        ? unresolvedIssues
+        : [trustedDocxIssue('CANONICAL_DERIVATION_INCOMPLETE', 'NCK1 Candidate preview did not derive one complete Canonical Paper')],
+    }
+  }
+  return { candidate: rerun.candidate, compilation }
 }
 
 /**

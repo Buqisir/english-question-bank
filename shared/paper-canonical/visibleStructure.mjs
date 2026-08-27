@@ -10,6 +10,7 @@ import manifestV42 from '../../standards/paper-canonical/manifest-v42.json' with
 import manifestV43 from '../../standards/paper-canonical/manifest-v43.json' with { type: 'json' }
 import manifestV44 from '../../standards/paper-canonical/manifest-v44.json' with { type: 'json' }
 import manifestV45 from '../../standards/paper-canonical/manifest-v45.json' with { type: 'json' }
+import manifestV46 from '../../standards/paper-canonical/manifest-v46.json' with { type: 'json' }
 import nck1V9 from '../../standards/paper-canonical/profiles/nck1-v9.json' with { type: 'json' }
 import nck1V10 from '../../standards/paper-canonical/profiles/nck1-v10.json' with { type: 'json' }
 import nck1V11 from '../../standards/paper-canonical/profiles/nck1-v11.json' with { type: 'json' }
@@ -99,6 +100,7 @@ const manifestV45Profiles = new Map([
     profileDigest: digestJson(profile),
   },
 ]))
+const manifestV46Profiles = new Map(manifestV37Profiles)
 const registeredManifestProfiles = new Map([
   [
     `${manifestV31.manifestId}@${manifestV31.version}@${digestJson(manifestV31)}`,
@@ -147,6 +149,10 @@ const registeredManifestProfiles = new Map([
   [
     `${manifestV45.manifestId}@${manifestV45.version}@${digestJson(manifestV45)}`,
     manifestV45Profiles,
+  ],
+  [
+    `${manifestV46.manifestId}@${manifestV46.version}@${digestJson(manifestV46)}`,
+    manifestV46Profiles,
   ],
 ])
 

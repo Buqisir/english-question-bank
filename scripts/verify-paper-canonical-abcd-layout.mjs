@@ -109,6 +109,21 @@ assert.equal(hardBreak.mode, 'one_column')
 assert.equal(hardBreak.placements[0].hardBreaks, 1)
 assert.equal(hardBreak.placements[0].renderedText, 'A. first\nsecond')
 
+const uncommonSourceGlyph = layoutAbcdOptionSet(
+  optionSet('uncommon-source-glyph', [
+    '45×36×25cm',
+    'up to £400',
+    'short',
+    'short',
+  ]),
+)
+assert.equal(uncommonSourceGlyph.status, 'selected')
+assert.equal(
+  uncommonSourceGlyph.placements[0].renderedText,
+  'A. 45×36×25cm',
+  'uncommon source glyphs are preserved while conservatively measured',
+)
+
 const plan = layoutAbcdOptionSet(optionSet('parity', gold[2].redactedText))
 const authority = resolveCanonicalAuthority(canonicalAuthorityRef).closure
 const rendererTypography = authority.artifacts['renderer-typography']

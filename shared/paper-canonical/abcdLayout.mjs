@@ -21,6 +21,7 @@ const RULES = Object.freeze({
   optionRowWidthTwip: rendererTypography.optionAnchorFramework.rowWidthTwip,
   minimumGutterTwip: 420,
   fitSafetyTwip: 20,
+  unknownGlyphAdvanceUnits: metrics.unitsPerEm,
   fourColumnPitchTwip:
     rendererTypography.optionAnchorFramework.reading.fourColumnStartsTwip[1],
   twoColumnSecondTabTwip:
@@ -116,9 +117,9 @@ function advanceTwip(text) {
   for (let index = 0; index < characters.length; index += 1) {
     const character = characters[index]
     const advance = metrics.glyphAdvanceUnits[character]
-    if (!Number.isInteger(advance)) return null
+      ?? RULES.unknownGlyphAdvanceUnits
     units += advance
-    if (index > 0) units += metrics.kerningAdjustmentUnits[
+    if (index > 0 && Object.hasOwn(metrics.glyphAdvanceUnits, character)) units += metrics.kerningAdjustmentUnits[
       `${characters[index - 1]}${character}`
     ] || 0
   }

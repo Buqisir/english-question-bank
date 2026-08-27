@@ -130,6 +130,26 @@ export function extractDocxDocumentText(docxBytes) {
   )
 }
 
+/**
+ * Extract stable, source-ordered w:p identities for materialization locator
+ * verification. Empty paragraphs retain their source index so selectors and
+ * ordering are bound to the immutable document rather than flattened text.
+ */
+export function extractDocxDocumentParagraphs(docxBytes) {
+  if (!(docxBytes instanceof Uint8Array) || docxBytes.byteLength === 0) {
+    throw new TypeError('DOCX paragraph extraction requires immutable DOCX bytes')
+  }
+  const xml = readDocxPackage(docxBytes).documentXml.text
+  return [...xml.matchAll(/<w:p(?:\s[^>]*)?>[\s\S]*?<\/w:p>/g)]
+    .map((match, index) => ({
+      sourceIndex: index + 1,
+      text: decodeXml(match[0]
+        .replace(/<w:tab\b[^>]*\/?\s*>/g, '\t')
+        .replace(/<w:(?:br|cr)\b[^>]*\/?\s*>/g, '\n')
+        .replace(/<[^>]+>/g, '')),
+    }))
+}
+
 function rawGroupsBySlot(parsed) {
   return new Map([
     ...parsed.readingGroups.map((group, index) => [`reading.${'abcd'[index]}`, group]),

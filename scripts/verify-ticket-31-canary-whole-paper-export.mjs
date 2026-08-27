@@ -18,6 +18,7 @@ import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consume
 import { createExportImplementation } from '../server/exports/exportImplementation.mjs'
 import { createCanonicalConsumerRuntime } from '../server/paper-canonical/consumerRuntime.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
+import { canonicalConsumptionPrintPayload } from './import-pipeline/canonical-consumption-print-payload.mjs'
 
 const canaryRoot =
   'test-fixtures/paper-canonical/publications/ticket-31-canary-v1/store'
@@ -30,90 +31,6 @@ const paperIds = [
 
 function sha256(bytes) {
   return `sha256:${createHash('sha256').update(bytes).digest('hex')}`
-}
-
-function groupTypeForPrint(groupType) {
-  if (groupType === 'grammarFill') return 'grammar_cloze'
-  if (groupType === 'sevenChoices') return 'seven_choices'
-  if (groupType === 'continuation') return 'writing'
-  return groupType
-}
-
-function canonicalPayload(consumption) {
-  const groups = []
-  for (const selection of consumption.selections) {
-    for (const groupId of selection.groupIds) {
-      const group = projectCanonicalConsumerGroup({
-        consumption,
-        familyContractId: selection.familyContractId,
-        groupId,
-      })
-      groups.push({
-        detail: {
-          id: groupId,
-          paperId: consumption.paperId,
-          title: groupId,
-          source: consumption.paperId,
-          groupType: groupTypeForPrint(group.groupType),
-          passage: { title: groupId, materialText: '' },
-          questions: group.questions.map((question) => ({
-            id: question.questionId,
-            questionNo: String(question.questionNo),
-            stem: question.stem ?? '',
-            answer: question.correctOptionId
-              ? question.options.find(
-                (option) => option.optionId === question.correctOptionId,
-              )?.label || ''
-              : '',
-            explanation: '',
-            note: '',
-            options: question.options.map((option) => ({
-              label: option.label,
-              content: option.text,
-            })),
-          })),
-        },
-        score: 0,
-        sectionTitle: '',
-        note: '',
-      })
-    }
-  }
-  const details = new Map(groups.map((group) => [group.detail.id, group.detail]))
-  const blocks = consumption.visibleStructure.flatMap((node) => {
-    if (node.kind === 'group') {
-      return [{
-        type: 'question_group',
-        questionGroupId: node.groupId,
-      }]
-    }
-    if (node.kind !== 'instruction' || node.renderPolicy !== 'render') {
-      return []
-    }
-    if (node.placement === 'part_heading' || node.placement === 'section_heading') {
-      return [{
-        type: 'section_header',
-        title: node.text,
-        instructionId: node.instructionId,
-      }]
-    }
-    if (node.placement === 'group_instruction') {
-      return [{
-        type: 'instruction',
-        text: node.text,
-        instructionId: node.instructionId,
-      }]
-    }
-    return []
-  })
-  return {
-    title: consumption.paperId,
-    printStyle: 'exam',
-    questionNumberStart: 1,
-    items: groups.map((group) => ({ questionGroupId: group.detail.id })),
-    blocks,
-    details,
-  }
 }
 
 function withRuntime(rootDir, run) {
@@ -139,7 +56,7 @@ function makePublicExports({ rootDir, runtime, payload }) {
 function exportWholePaper({ rootDir, runtime, paperId, versionType }) {
   const consumption = runtime.load({ paperId, consumerId: 'print_pdf' })
   assert.equal(consumption.disposition, 'ready')
-  const payload = canonicalPayload(consumption)
+  const payload = canonicalConsumptionPrintPayload(consumption)
   const result = makePublicExports({ rootDir, runtime, payload }).exportPrintHtml({
     ...payload,
     versionType,

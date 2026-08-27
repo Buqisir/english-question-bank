@@ -7,6 +7,39 @@
 ## Agent 执行入口
 
 任何 agent 要导一套新卷,先读 `docs/import/agent-contract.md`（唯一进场）。
+新卷默认使用 `universal-nck1.mjs`,不再选择格式①/②/③；下列旧 stages
+只用于已登记存量卷复现。
+
+```bash
+node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
+  --paper-name '<卷名>' --provenance '<出处>' \
+  --source question_source=/abs/questions.pdf \
+  --source official_answers=/abs/answers.docx
+node scripts/import-pipeline/universal-nck1.mjs verify <paperId>
+node scripts/import-pipeline/universal-nck1.mjs build <paperId>
+```
+
+`init` 复制并摘要绑定本地源，DOCX 同时生成确定性 PDF rendition；源文件、
+Materialization 与 canonical evidence 均 gitignored。Agent 写统一
+Materialization：DOCX 每个源 `<w:p>` 一对一保留为独立 paragraph block，禁止合并
+相邻段落；阅读 A/B/C/D 等独立篇目标记不写入正文。表格为网格，图为原媒体
+配方。应用文和读后续写按“题干/逐段材料 → 注意与词数、格式 → 框内给定内容”
+保留源顺序；续写材料逐段映射，标题、称呼与两条开头语不并入正文。`verify` 会用
+不可变 DOCX 源检查 paragraph block 未跨越段落边界，并拒绝写作注意块缺失、词数
+冲突、续写材料合段或框内给定内容错位。媒体助手：
+
+```bash
+node scripts/import-pipeline/universal-nck1.mjs extract-docx-media \
+  <source.docx> <word/media/entry> <output> [--density 300]
+node scripts/import-pipeline/universal-nck1.mjs crop-pdf \
+  <source.pdf> <page> <x,y,width,height> <output.png> [--density 300]
+```
+
+SVG 内容媒体必须用固定 density 转 PNG；DOCX shape 先用 init 生成的 PDF
+rendition，再按 `pdf_crop` 路径裁。`verify` 只派生 Candidate，`build` 只生成
+Candidate 摘要和 `confirmed: false` 的 Teacher Confirmation 模板。教师外部确认
+精确 digest 后，可信边界才可生成 request；Agent 不代确认，以上步骤都不发布。
+
 机械 how-to 见 `docs/import/agent-runbook.md`；本 README 只是它引用的工序
 参考,不重复讲工序。数据契约权威见 `docs/product/nck1-paper-standard.md`。
 格式③（试题 DOCX + 答案解析 DOCX）映射见该标准附录 A。切卷：
