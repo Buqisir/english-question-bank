@@ -13,6 +13,7 @@ import path from 'node:path'
 import {
   canonicalAuthorityRef,
   format2RichCandidateAuthorityRef,
+  legacyFormat2RichAuthorityRef,
   resolveCanonicalAuthority,
   validateJsonSchema,
 } from '../../shared/paper-canonical/authority.mjs'
@@ -43,6 +44,7 @@ import {
 import {
   consumerContractRefs,
   format2RichConsumerContractRefs,
+  legacyFormat2RichConsumerContractRefs,
   readingOptionFigureConsumerContractRefs,
   resolveConsumerContract,
 } from '../../shared/paper-canonical/consumers.mjs'
@@ -66,6 +68,7 @@ const publicationFileName =
   `canonical-paper-publication-v${canonicalAuthorityRef.manifestVersion}.json`
 const publicationFileNames = [
   publicationFileName,
+  'canonical-paper-publication-v50.json',
   'canonical-paper-publication-v49.json',
   'canonical-paper-publication-v46.json',
   'canonical-paper-publication-v45.json',
@@ -119,12 +122,20 @@ function isFormat2RichAuthorityRef(authorityRef) {
     && authorityRef?.manifestDigest === format2RichCandidateAuthorityRef.manifestDigest
 }
 
+function isLegacyFormat2RichAuthorityRef(authorityRef) {
+  return authorityRef?.manifestId === legacyFormat2RichAuthorityRef.manifestId
+    && authorityRef?.manifestVersion === legacyFormat2RichAuthorityRef.manifestVersion
+    && authorityRef?.manifestDigest === legacyFormat2RichAuthorityRef.manifestDigest
+}
+
 function consumerContractsForAuthority(authorityRef) {
   return isFormat2RichAuthorityRef(authorityRef)
     ? format2RichConsumerContractRefs
-    : authorityRef?.manifestVersion === '46'
-      ? readingOptionFigureConsumerContractRefs
-      : consumerContractRefs
+    : isLegacyFormat2RichAuthorityRef(authorityRef)
+      ? legacyFormat2RichConsumerContractRefs
+      : authorityRef?.manifestVersion === '46'
+        ? readingOptionFigureConsumerContractRefs
+        : consumerContractRefs
 }
 const artifactPathBase = {
   source_capture: 'canonical/source-capture-v1.json',
@@ -1122,9 +1133,15 @@ export function loadCanonicalOnlyConsumers({
   const effectiveConsumerContracts = consumerContracts || (
     store.readVersionArtifact(
       ref,
-      'canonical/canonical-paper-publication-v49.json',
+      'canonical/canonical-paper-publication-v50.json',
     )
       ? format2RichConsumerContractRefs
+      :
+    store.readVersionArtifact(
+      ref,
+      'canonical/canonical-paper-publication-v49.json',
+    )
+      ? legacyFormat2RichConsumerContractRefs
       :
     store.readVersionArtifact(
       ref,

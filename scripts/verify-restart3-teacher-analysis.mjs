@@ -128,8 +128,40 @@ assert(
 
 console.log('\n-- 2. analysisText.mjs four-family degrader (real tracked fixtures) --')
 
-const { loadGroupAnalysisTexts } = await import(
+const { formatObjectiveAnalysisText, loadGroupAnalysisTexts } = await import(
   path.join(rootDir, 'server', 'draft-paper', 'analysisText.mjs')
+)
+
+assert(
+  'pure reading Analysis formatter preserves reviewed focus',
+  formatObjectiveAnalysisText('reading-choice-analysis-v1', {
+    questionFocus: '定位原文信息。',
+    optionAnalysis: [],
+  }) === '定位原文信息。',
+)
+assert(
+  'pure seven-choices Analysis formatter preserves fit summary',
+  formatObjectiveAnalysisText('seven-choices-analysis-v1', {
+    optionFit: { fitSummary: '承接前句并引出下文。' },
+  }) === '正答依据：承接前句并引出下文。',
+)
+assert(
+  'pure cloze Analysis formatter preserves correct-fit reason',
+  formatObjectiveAnalysisText('cloze-analysis-v1', {
+    correctFit: { reason: '语境支持该搭配。' },
+  }) === '正答依据：语境支持该搭配。',
+)
+assert(
+  'pure Grammar Fill Analysis formatter preserves answer and reason',
+  formatObjectiveAnalysisText('grammar-fill-analysis-v2', {
+    answer: 'working',
+    reason: '介词后使用动名词。',
+  }) === '【working】介词后使用动名词。',
+)
+assert(
+  'pure Analysis formatter rejects non-objective and unknown contracts',
+  formatObjectiveAnalysisText('writing-analysis-v1', {}) === ''
+    && formatObjectiveAnalysisText('unknown-analysis-v1', {}) === '',
 )
 
 const paperAssetsDir = path.join(rootDir, 'app', 'public', 'paper-assets')

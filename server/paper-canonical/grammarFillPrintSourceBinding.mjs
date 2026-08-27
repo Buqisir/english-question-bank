@@ -6,7 +6,10 @@ import {
   grammarFillRhythm,
   grammarFillRhythmForPaperAuthority,
 } from '../../shared/paper-canonical/grammarFillRhythm.mjs'
-import { format2RichCandidateAuthorityRef } from '../../shared/paper-canonical/authority.mjs'
+import {
+  format2RichCandidateAuthorityRef,
+  legacyFormat2RichAuthorityRef,
+} from '../../shared/paper-canonical/authority.mjs'
 import { immutablePublicationSourceForConsumption } from './publication.mjs'
 import { canonicalSourceConsumptionForPaper } from './consumerRuntime.mjs'
 import { loadCanonicalSourceAssetRepresentation } from './sourceAssetRepresentation.mjs'
@@ -26,9 +29,12 @@ function digestBytes(bytes) {
 
 export function isFormat2RichConsumption(consumption) {
   const authorityRef = consumption?.authorityRef
-  return authorityRef?.manifestId === format2RichCandidateAuthorityRef.manifestId
-    && authorityRef?.manifestVersion === format2RichCandidateAuthorityRef.manifestVersion
-    && authorityRef?.manifestDigest === format2RichCandidateAuthorityRef.manifestDigest
+  return [legacyFormat2RichAuthorityRef, format2RichCandidateAuthorityRef].some(
+    (candidate) =>
+      authorityRef?.manifestId === candidate.manifestId
+      && authorityRef?.manifestVersion === candidate.manifestVersion
+      && authorityRef?.manifestDigest === candidate.manifestDigest,
+  )
 }
 
 function readJson(bytes, label) {

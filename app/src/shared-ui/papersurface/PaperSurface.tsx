@@ -138,6 +138,8 @@ type BlankFocusContext = LegacyBlankFocusContext
 type PaperSurfaceBlankFocusMode = 'rail' | 'in-passage' | 'paper-blank'
 type PaperSurfaceComponentProps = Omit<PaperSurfaceProps, 'blankFocusMode'> & {
   readonly blankFocusMode?: PaperSurfaceBlankFocusMode
+  /** Exact authority-selected paper stack; defaults to the legacy token. */
+  readonly paperFontStack?: string
   /**
    * lecture-rail-scroll-fix QA fix: supplemental blank-number →
    * questionId entries for compatibility surfaces whose `questions` prop
@@ -212,6 +214,7 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
     optionBankHeading,
     canonicalApplicationPromptBlocks,
     canonicalContinuationMaterialBlocks,
+    paperFontStack,
   } = props
 
   if (semanticParagraphs !== undefined) {
@@ -275,13 +278,16 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
     }
   }, [blankFocusMode, questions, blankQuestionIdByNo, lectureFocus, handleQuestionClick])
 
+  const authoritySurfaceStyle: PaperSurfaceStyle = paperFontStack
+    ? { ...paperSurfaceTokenStyle, '--ps-font-stack': paperFontStack }
+    : paperSurfaceTokenStyle
   const surfaceStyle: PaperSurfaceStyle = canonicalGrammarFillScreenRuling
     ? {
-        ...paperSurfaceTokenStyle,
+        ...authoritySurfaceStyle,
         '--ps-grammar-fill-baseline-step': canonicalGrammarFillScreenRuling.baselineStep,
         '--ps-grammar-fill-prompt-gap': canonicalGrammarFillScreenRuling.promptGap,
       }
-    : paperSurfaceTokenStyle
+    : authoritySurfaceStyle
 
   // Group evidence by section for neutral anchor emission.
   const evidenceBySection = useMemo(() => {

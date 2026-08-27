@@ -1365,6 +1365,16 @@ async function assertTicket35CompletePublication({ rootDir }) {
     manifestVersion: 45,
   })
   assert.equal(grammarFillAuthority.version, '7', 'Ticket 35 selects the bound Grammar Fill v7 authority')
+  for (const manifestVersion of [49, 50]) {
+    assert.equal(
+      grammarFillRhythmForPaperAuthority({
+        paperId: 'paper-generic-manifest-successor',
+        manifestVersion,
+      }).version,
+      '7',
+      `manifest v${manifestVersion} retains the shared Grammar Fill v7 authority selected at v46`,
+    )
+  }
   assert.equal(
     grammarFillAuthority.ruleVerticalGeometry.verticalAlignment,
     'blank-bottom',

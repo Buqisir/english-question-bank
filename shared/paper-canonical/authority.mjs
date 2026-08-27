@@ -47,6 +47,7 @@ import manifestV46 from '../../standards/paper-canonical/manifest-v46.json' with
 import manifestV47 from '../../standards/paper-canonical/manifest-v47.json' with { type: 'json' }
 import manifestV48 from '../../standards/paper-canonical/manifest-v48.json' with { type: 'json' }
 import manifestV49 from '../../standards/paper-canonical/manifest-v49.json' with { type: 'json' }
+import manifestV50 from '../../standards/paper-canonical/manifest-v50.json' with { type: 'json' }
 import historicalReadingOptionFigureManifestV47 from '../../standards/paper-canonical/history/manifest-v47-reading-option-figure-layout/manifest-v47.json' with { type: 'json' }
 import legacyRhythmManifestV13 from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/manifest-v13.json' with { type: 'json' }
 import legacyRhythmTypographyV3 from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/paper-typography-v3.json' with { type: 'json' }
@@ -171,6 +172,7 @@ import continuationWritingRhythmV4 from '../../standards/paper-canonical/renderi
 import continuationWritingRhythmV5 from '../../standards/paper-canonical/rendering/continuation-writing-rhythm-v5.json' with { type: 'json' }
 import readingOptionFigureLayoutV47 from '../../standards/paper-canonical/history/manifest-v47-reading-option-figure-layout/reading-option-figure-layout-v1.json' with { type: 'json' }
 import readingOptionFigureLayoutV1 from '../../standards/paper-canonical/rendering/reading-option-figure-layout-v1.json' with { type: 'json' }
+import timesCompatibleMetricsV2 from '../../standards/paper-canonical/rendering/times-compatible-metrics-v2.json' with { type: 'json' }
 import standardManifestSchema from '../../schemas/paper-canonical/standard-manifest-v1.schema.json' with { type: 'json' }
 import coreSchema from '../../schemas/paper-canonical/core-invariants-v1.schema.json' with { type: 'json' }
 import coreV2Schema from '../../schemas/paper-canonical/core-invariants-v2.schema.json' with { type: 'json' }
@@ -352,6 +354,9 @@ import publicationV38Schema from '../../schemas/paper-canonical/canonical-paper-
 import publicationV39Schema from '../../schemas/paper-canonical/canonical-paper-publication-v39.schema.json' with { type: 'json' }
 import publicationV46Schema from '../../schemas/paper-canonical/canonical-paper-publication-v46.schema.json' with { type: 'json' }
 import publicationV49Schema from '../../schemas/paper-canonical/canonical-paper-publication-v49.schema.json' with { type: 'json' }
+import reportV50Schema from '../../schemas/paper-canonical/normalization-report-v50.schema.json' with { type: 'json' }
+import publicationV50Schema from '../../schemas/paper-canonical/canonical-paper-publication-v50.schema.json' with { type: 'json' }
+import timesCompatibleMetricsV1Schema from '../../schemas/paper-canonical/times-compatible-metrics-v1.schema.json' with { type: 'json' }
 import legacyPublicationV9Schema from '../../schemas/paper-canonical/canonical-paper-publication-v9.schema.json' with { type: 'json' }
 import consumerSchema from '../../schemas/paper-canonical/consumer-contract-v1.schema.json' with { type: 'json' }
 import consumerV2Schema from '../../schemas/paper-canonical/consumer-contract-v2.schema.json' with { type: 'json' }
@@ -1945,6 +1950,10 @@ const artifactsV49 = {
   'profile-zhejiang-legacy': zhejiangLegacyV13,
   'family-continuation-writing': continuationWritingV5,
 }
+const artifactsV50 = {
+  ...artifactsV49,
+  'renderer-times-compatible-metrics': timesCompatibleMetricsV2,
+}
 const schemasV1 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v1': normalizationSchema, 'normalization-report-v1': reportSchema, 'canonical-paper-publication-v1': publicationSchema }
 const schemasV2 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v2': reportV2Schema, 'canonical-paper-publication-v2': publicationV2Schema }
 const schemasV3 = { ...sharedSchemas, 'renderer-typography-v2': typographyV2Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v3': reportV3Schema, 'canonical-paper-publication-v3': publicationV3Schema }
@@ -2504,6 +2513,18 @@ const schemasV49 = {
   'normalization-report-v49': reportV49Schema,
   'canonical-paper-publication-v49': publicationV49Schema,
 }
+const schemasV50 = {
+  ...Object.fromEntries(
+    Object.entries(schemasV49).filter(([schemaId]) =>
+      ![
+        'normalization-report-v49',
+        'canonical-paper-publication-v49',
+      ].includes(schemaId)),
+  ),
+  'times-compatible-metrics-v1': timesCompatibleMetricsV1Schema,
+  'normalization-report-v50': reportV50Schema,
+  'canonical-paper-publication-v50': publicationV50Schema,
+}
 const validationV1 = validateAuthorityClosure({ manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 })
 const validationV2 = validateAuthorityClosure({ manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 })
 const validationV3 = validateAuthorityClosure({ manifest: manifestV3, artifacts: artifactsV3, schemas: schemasV3 })
@@ -2563,6 +2584,7 @@ const historicalReadingOptionFigureValidationV47 = validateAuthorityClosure({
 })
 const validationV48 = validateAuthorityClosure({ manifest: manifestV48, artifacts: artifactsV48, schemas: schemasV48 })
 const validationV49 = validateAuthorityClosure({ manifest: manifestV49, artifacts: artifactsV49, schemas: schemasV49 })
+const validationV50 = validateAuthorityClosure({ manifest: manifestV50, artifacts: artifactsV50, schemas: schemasV50 })
 const validations = [
   validationV1,
   validationV2,
@@ -2615,6 +2637,7 @@ const validations = [
   historicalReadingOptionFigureValidationV47,
   validationV48,
   validationV49,
+  validationV50,
 ]
 if (validations.some((validation) => !validation.ok)) {
   throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify(validations.flatMap((validation) => validation.issues))}`)
@@ -2684,6 +2707,7 @@ const authorities = [
   { manifest: manifestV47, artifacts: artifactsV47, schemas: schemasV47 },
   { manifest: manifestV48, artifacts: artifactsV48, schemas: schemasV48 },
   { manifest: manifestV49, artifacts: artifactsV49, schemas: schemasV49 },
+  { manifest: manifestV50, artifacts: artifactsV50, schemas: schemasV50 },
 ].map((authority) => ({
   ...authority,
   authorityRef: authorityRef(authority.manifest),
@@ -2722,7 +2746,8 @@ export const readingOptionFigureRenderingAuthorityRef = authorities.find((author
 // Ticket 04's Format 2 rich Candidate lane combines the existing Reading
 // Figure family with the modern Continuation/source-v2 closure. It is scoped
 // to Format 2 Job and does not advance current v36.
-export const format2RichCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '49').authorityRef
+export const legacyFormat2RichAuthorityRef = authorities.find((authority) => authority.manifest.version === '49').authorityRef
+export const format2RichCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '50').authorityRef
 
 export function resolveCanonicalAuthority(authorityRef) {
   const authority = authorities.find((candidate) => candidate.authorityRef.manifestId === authorityRef?.manifestId && candidate.authorityRef.manifestVersion === authorityRef?.manifestVersion && candidate.authorityRef.manifestDigest === authorityRef?.manifestDigest)

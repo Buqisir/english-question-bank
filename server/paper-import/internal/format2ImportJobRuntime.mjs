@@ -62,6 +62,7 @@ import { buildPrintHtml } from '../../print-renderer.mjs'
 import { validateSevenChoicesShape } from '../../paper-import-ai/analyzeSevenChoices.mjs'
 import { validateClozeShape } from '../../paper-import-ai/analyzeCloze.mjs'
 import { validateGrammarFillShape } from '../../paper-import-ai/analyzeGrammarFill.mjs'
+import { formatObjectiveAnalysisText } from '../../draft-paper/analysisText.mjs'
 
 const FORMAT = 'format2-pdf-pair-v1'
 const RESULT_SCHEMA_VERSION = 'format2-import-job-result-v1'
@@ -2171,8 +2172,50 @@ function groupTypeForPrint(groupType) {
   return groupType
 }
 
-function canonicalPrintPayload(consumption, paperName) {
+function buildAnalysisTextByQuestionId(analysisSidecars) {
+  const texts = new Map()
+  for (const sidecar of analysisSidecars) {
+    const config = analysisSidecarConfigs.get(sidecar.schemaVersion)
+    if (!config) {
+      fail(
+        'FORMAT2_QA_ANALYSIS_INVALID',
+        `QA received an unsupported Analysis sidecar: ${sidecar.schemaVersion}`,
+      )
+    }
+    if (sidecar.schemaVersion === 'writing-analysis-v1') continue
+    let analysis
+    try {
+      analysis = JSON.parse(Buffer.from(sidecar.bytes).toString('utf8'))
+    } catch {
+      fail(
+        'FORMAT2_QA_ANALYSIS_INVALID',
+        `QA could not parse admitted Analysis sidecar: ${sidecar.schemaVersion}`,
+      )
+    }
+    const entries = analysis[config.entryKey]
+    if (!entries || typeof entries !== 'object' || Array.isArray(entries)) {
+      fail(
+        'FORMAT2_QA_ANALYSIS_INVALID',
+        `QA Analysis sidecar has no ${config.entryKey} table: ${sidecar.schemaVersion}`,
+      )
+    }
+    for (const [questionId, entry] of Object.entries(entries)) {
+      const text = formatObjectiveAnalysisText(sidecar.schemaVersion, entry)
+      if (!nonEmptyString(questionId) || !text || texts.has(questionId)) {
+        fail(
+          'FORMAT2_QA_ANALYSIS_INVALID',
+          `QA Analysis entry is empty or duplicated: ${questionId || sidecar.schemaVersion}`,
+        )
+      }
+      texts.set(questionId, text)
+    }
+  }
+  return texts
+}
+
+function canonicalPrintPayload(consumption, paperName, analysisTextByQuestionId) {
   const renderedItems = []
+  const canonicalQuestionIds = new Set()
   for (const selection of consumption.selections) {
     for (const groupId of selection.groupIds) {
       const group = projectCanonicalConsumerGroup({
@@ -2188,28 +2231,39 @@ function canonicalPrintPayload(consumption, paperName) {
           source: paperName,
           groupType: groupTypeForPrint(group.groupType),
           passage: { title: groupId, materialText: '' },
-          questions: group.questions.map((question) => ({
-            id: question.questionId,
-            questionNo: String(question.questionNo),
-            stem: question.stem ?? '',
-            answer: question.correctOptionId
-              ? question.options.find(
-                (option) => option.optionId === question.correctOptionId,
-              )?.label || ''
-              : '',
-            explanation: '',
-            note: '',
-            options: question.options.map((option) => ({
-              label: option.label,
-              content: option.text,
-            })),
-          })),
+          questions: group.questions.map((question) => {
+            canonicalQuestionIds.add(question.questionId)
+            return {
+              id: question.questionId,
+              questionNo: String(question.questionNo),
+              stem: question.stem ?? '',
+              answer: question.correctOptionId
+                ? question.options.find(
+                  (option) => option.optionId === question.correctOptionId,
+                )?.label || ''
+                : '',
+              explanation: analysisTextByQuestionId.get(question.questionId) || '',
+              note: '',
+              options: question.options.map((option) => ({
+                label: option.label,
+                content: option.text,
+              })),
+            }
+          }),
         },
         score: 0,
         sectionTitle: '',
         note: '',
       })
     }
+  }
+  const unmatchedAnalysisIds = [...analysisTextByQuestionId.keys()]
+    .filter((questionId) => !canonicalQuestionIds.has(questionId))
+  if (unmatchedAnalysisIds.length > 0) {
+    fail(
+      'FORMAT2_QA_ANALYSIS_INVALID',
+      `QA Analysis entries do not match Canonical questions: ${unmatchedAnalysisIds.join(', ')}`,
+    )
   }
   const details = new Map(renderedItems.map((item) => [item.detail.id, item.detail]))
   const blocks = consumption.visibleStructure.flatMap((node) => {
@@ -2261,6 +2315,7 @@ function persistQaArtifacts({
   paperName,
   printConsumption,
   publicationRoot,
+  analysisSidecars,
 }) {
   const qaDir = path.join(
     evidence.jobRoot,
@@ -2270,7 +2325,12 @@ function persistQaArtifacts({
   )
   const renderRoot = mkdtempSync(path.join(tmpdir(), 'eqb-format2-qa-render-'))
   try {
-    const payload = canonicalPrintPayload(printConsumption, paperName)
+    const analysisTextByQuestionId = buildAnalysisTextByQuestionId(analysisSidecars)
+    const payload = canonicalPrintPayload(
+      printConsumption,
+      paperName,
+      analysisTextByQuestionId,
+    )
     const exporter = createExportImplementation({
       rootDir,
       exportDir: renderRoot,
@@ -2292,10 +2352,13 @@ function persistQaArtifacts({
       ...payload,
       versionType: 'student',
     }, { canonicalVisibleStructureChrome: true })
+    const occurrences = (body, marker) => body.split(marker).length - 1
     if (
-      student.body.includes('<strong>【答案】</strong>')
-      || student.body.includes('Analysis sentinel')
-      || !teacher.body.includes('<strong>【答案】</strong>')
+      occurrences(student.body, '<strong>【答案】</strong>') !== 0
+      || occurrences(student.body, '<strong>【解析】</strong>') !== 0
+      || occurrences(teacher.body, '<strong>【答案】</strong>') < 1
+      || occurrences(teacher.body, '<strong>【解析】</strong>')
+        !== analysisTextByQuestionId.size
       || Buffer.from(pdf.body).subarray(0, 4).toString() !== '%PDF'
     ) {
       fail(
@@ -2835,6 +2898,7 @@ function runResume(
       paperName: evidence.receipt.result.provenance.paperName,
       printConsumption: printPdf,
       publicationRoot,
+      analysisSidecars: prepared.analysisSidecars,
     })
     const result = {
       schemaVersion: RESULT_SCHEMA_VERSION,

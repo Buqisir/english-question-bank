@@ -9,6 +9,7 @@ import { DatabaseSync } from 'node:sqlite'
 import {
   canonicalAuthorityRef,
   format2RichCandidateAuthorityRef,
+  legacyFormat2RichAuthorityRef,
   readingOptionFigureAuthorityRef,
   resolveCanonicalAuthority,
 } from '../shared/paper-canonical/authority.mjs'
@@ -18,6 +19,8 @@ import {
 } from '../shared/paper-canonical/compiler.mjs'
 import {
   consumerContractRefs,
+  format2RichConsumerContractRefs,
+  legacyFormat2RichConsumerContractRefs,
   readingOptionFigureConsumerContractRefs,
   resolveConsumerContract,
 } from '../shared/paper-canonical/consumers.mjs'
@@ -140,7 +143,19 @@ function assertLiveSealRejected({ compilation, sourceAsset, proof }) {
 
 assert.equal(canonicalAuthorityRef.manifestVersion, '36')
 assert.equal(readingOptionFigureAuthorityRef.manifestVersion, '46')
-assert.equal(format2RichCandidateAuthorityRef.manifestVersion, '49')
+assert.equal(legacyFormat2RichAuthorityRef.manifestVersion, '49')
+assert.equal(format2RichCandidateAuthorityRef.manifestVersion, '50')
+assert.equal(resolveCanonicalAuthority(legacyFormat2RichAuthorityRef).ok, true)
+for (const ref of [
+  ...Object.values(legacyFormat2RichConsumerContractRefs),
+  ...Object.values(format2RichConsumerContractRefs),
+]) {
+  assert.equal(resolveConsumerContract(ref).ok, true)
+}
+assert.equal(legacyFormat2RichConsumerContractRefs.screen.version, '41')
+assert.equal(legacyFormat2RichConsumerContractRefs.print_pdf.version, '42')
+assert.equal(format2RichConsumerContractRefs.screen.version, '43')
+assert.equal(format2RichConsumerContractRefs.print_pdf.version, '44')
 assert.notEqual(
   format2RichCandidateAuthorityRef.manifestDigest,
   readingOptionFigureAuthorityRef.manifestDigest,

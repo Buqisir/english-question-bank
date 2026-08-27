@@ -175,6 +175,7 @@ export function WritingPaperPage({
   onAnswerBoxActivate,
   grammarFillPredecessorGroupId,
   applicationWritingPredecessorGroupId,
+  paperFontStack,
 }: {
   pageModel: WritingPageModel
   children: ReactNode
@@ -183,6 +184,7 @@ export function WritingPaperPage({
   onAnswerBoxActivate?: () => void
   grammarFillPredecessorGroupId?: string
   applicationWritingPredecessorGroupId?: string
+  paperFontStack?: string
 }) {
   const isApplicationWriting = pageModel.blocks.some(
     (block) =>
@@ -201,6 +203,9 @@ export function WritingPaperPage({
         onAnswerBoxActivate()
       }
     : undefined
+  const authorityWritingPageStyle: WritingPageStyle = paperFontStack
+    ? { ...writingPageTokenStyle, '--ps-font-stack': paperFontStack }
+    : writingPageTokenStyle
 
   return (
     <div
@@ -212,10 +217,10 @@ export function WritingPaperPage({
       data-pi-writing-page=""
       style={
         isApplicationWriting
-          ? { ...writingPageTokenStyle, ...applicationWritingPageStyle }
+          ? { ...authorityWritingPageStyle, ...applicationWritingPageStyle }
           : isContinuationWriting
-            ? { ...writingPageTokenStyle, ...continuationWritingPageStyle }
-            : writingPageTokenStyle
+            ? { ...authorityWritingPageStyle, ...continuationWritingPageStyle }
+            : authorityWritingPageStyle
       }
     >
       {pageModel.blocks.map((block, index) => {

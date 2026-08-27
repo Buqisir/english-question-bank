@@ -71,6 +71,10 @@ for (const paperId of paperIds) {
   const assetPath = path.join(paperAssetsDir, paperId, 'latest', 'paper-asset.json')
   if (!existsSync(assetPath)) continue
   const asset = readJson(assetPath)
+  // Canonical-only Publications retain their immutable source bytes under the
+  // historical paper-asset.json filename. They are not legacy paper-asset-v1
+  // documents and are consumed through the Canonical Publication store.
+  if (!asset?.content?.groups || typeof asset.content.groups !== 'object') continue
   const manifestPath = path.join(paperAssetsDir, paperId, 'latest', 'figures', 'manifest.json')
   const figures = existsSync(manifestPath) ? (readJson(manifestPath).figures || []) : []
   papers.push({ paperId, assetPath, asset, manifestPath, figures })

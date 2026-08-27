@@ -1,10 +1,12 @@
 import {
   format2RichConsumerContractRefs,
+  legacyFormat2RichConsumerContractRefs,
   readingOptionFigureConsumerContractRefs,
   readingOptionFigureSourceLayoutExtension,
 } from './consumers.mjs'
 import {
   format2RichCandidateAuthorityRef,
+  legacyFormat2RichAuthorityRef,
   readingOptionFigureAuthorityRef,
   readingOptionFigureRenderingAuthorityRef,
   readingOptionFigureSourceLayoutSchemaAuthorityRef,
@@ -421,6 +423,7 @@ export function translateReadingOptionFigureLayout({
   question,
 }) {
   const readingConsumer = readingOptionFigureConsumerContractRefs[consumerId]
+  const legacyFormat2Consumer = legacyFormat2RichConsumerContractRefs[consumerId]
   const format2Consumer = format2RichConsumerContractRefs[consumerId]
   const compatibleReadingAuthority = sameRef(
     consumption?.authorityRef,
@@ -430,9 +433,20 @@ export function translateReadingOptionFigureLayout({
     consumption?.authorityRef,
     format2RichCandidateAuthorityRef,
   ) && sameConsumerRef(consumption?.consumerContractRef, format2Consumer)
+  const compatibleLegacyFormat2Authority = sameRef(
+    consumption?.authorityRef,
+    legacyFormat2RichAuthorityRef,
+  ) && sameConsumerRef(
+    consumption?.consumerContractRef,
+    legacyFormat2Consumer,
+  )
   if (
     !readingConsumer
-    || (!compatibleReadingAuthority && !compatibleFormat2Authority)
+    || (
+      !compatibleReadingAuthority
+      && !compatibleLegacyFormat2Authority
+      && !compatibleFormat2Authority
+    )
     || !sameConsumerRef(
       readingOptionFigureLayout.compatibleConsumerContracts[consumerId],
       readingConsumer,

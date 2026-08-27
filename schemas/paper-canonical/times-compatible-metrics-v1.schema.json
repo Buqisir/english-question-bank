@@ -1,0 +1,113 @@
+{
+  "$id": "times-compatible-metrics-v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": "times-compatible-metrics-v1"
+    },
+    "artifactId": {
+      "const": "times-compatible-metrics-v2"
+    },
+    "version": {
+      "const": "2"
+    },
+    "owner": {
+      "const": "renderer_typography"
+    },
+    "projectionContract": {
+      "const": "canonical-projector-v1"
+    },
+    "provenance": {
+      "const": {
+        "source": "https://github.com/stipub/stixfonts",
+        "sourceTag": "v2.13b171",
+        "sourcePath": "fonts/static_ttf/STIXTwoText-Regular.ttf",
+        "sourceFontFileSha256": "sha256:0566a1be411c0b2463fad8563b33f1c299442b8882c7fce9ef95e079f43233da",
+        "license": "OFL-1.1",
+        "subsetProducer": "harfbuzz-14.1.0",
+        "subsetArguments": [
+          "--face-index=0",
+          "--unicodes=2082",
+          "--no-hinting"
+        ]
+      }
+    },
+    "fontFaceId": {
+      "const": "Times New Roman"
+    },
+    "fontFileSha256": {
+      "const": "sha256:f3b4ffff71c2a0c7227d37497683b2498fb2d0a4e8beae26f022e3ccfcaabfa3"
+    },
+    "fontVersion": {
+      "const": "fc:328335"
+    },
+    "fallbacks": {
+      "items": false,
+      "maxItems": 2,
+      "minItems": 2,
+      "prefixItems": [
+        {
+          "const": {
+            "fontFaceId": "EQB Pinned Science v1",
+            "upstreamFontFaceId": "STIX Two Text",
+            "characters": "₂",
+            "unicodeRange": "U+2082",
+            "assetPath": "app/public/paper-fonts/eqb-pinned-science-u2082-v1.ttf",
+            "publicUrl": "/paper-fonts/eqb-pinned-science-u2082-v1.ttf",
+            "fontFileSha256": "sha256:faaac9b087cbda4aa1305372c7de9a0c2e2fb7ade17965a8a10688685b0558c1",
+            "fontVersion": "stix-v2.13b171-u2082-v1"
+          }
+        },
+        {
+          "const": {
+            "fontFaceId": "Songti SC",
+            "characters": "．﹣",
+            "fontFileSha256": "sha256:6873ac2ccab5c2e74d87d6b690f3773098dd6a6238805363a3b3567f2caf6f47",
+            "fontVersion": "fc:65536"
+          }
+        }
+      ],
+      "type": "array"
+    },
+    "unitsPerEm": {
+      "const": 1000
+    },
+    "glyphAdvanceUnits": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "properties": {
+        "₂": {
+          "const": 373
+        }
+      },
+      "required": [
+        "₂"
+      ],
+      "type": "object"
+    },
+    "kerningAdjustmentUnits": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "type": "object"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "artifactId",
+    "version",
+    "owner",
+    "projectionContract",
+    "provenance",
+    "fontFaceId",
+    "fontFileSha256",
+    "fontVersion",
+    "fallbacks",
+    "unitsPerEm",
+    "glyphAdvanceUnits",
+    "kerningAdjustmentUnits"
+  ],
+  "type": "object"
+}

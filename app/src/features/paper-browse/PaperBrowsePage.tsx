@@ -65,6 +65,9 @@ import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 // 内部文件，纯数据 primitives，import-only 零改动。
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import {
+  paperFontStackForAuthority,
+} from '../../../../shared/papersurface/pinnedScienceFont.mjs'
+import {
   sevenChoicesRhythm,
 } from '../../../../shared/paper-canonical/sevenChoicesRhythm.mjs'
 import {
@@ -637,6 +640,13 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   const [assetBase, setAssetBase] = useState<string | null>(null)
   const [canonicalConsumption, setCanonicalConsumption] =
     useState<WholePaperConsumption | null>(null)
+  const canonicalPaperFontStack = paperFontStackForAuthority(
+    canonicalConsumption?.authorityRef,
+  )
+  const paperBrowseRuntimeStyle: PaperBrowseContentStyle = {
+    ...paperBrowseContentStyle,
+    '--ps-font-stack': canonicalPaperFontStack,
+  }
   const [groupModels, setGroupModels] = useState<Record<string, GroupModel>>({})
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -2098,6 +2108,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
 
     const surfaceEl = (
       <PaperSurface
+        paperFontStack={canonicalPaperFontStack}
         textMap={surfaceData.textMap}
         semanticParagraphs={surfaceData.semanticParagraphs}
         canonicalGrammarFillScreenRuling={grammarFillScreenRulingFromSurfaceData(surfaceData)}
@@ -2201,6 +2212,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       )
       return (
         <WritingPaperPage
+          paperFontStack={canonicalPaperFontStack}
           pageModel={entry.model.pageModel}
           retainedModelAnswer={retainedLecture?.modelAnswer}
           retainedOfficialModelAnswer={retainedLecture?.officialModelAnswer}
@@ -3394,7 +3406,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           {/* 讲评态不是另一套胶囊导航：同一架钢琴只把可见宽度裁窄。 */}
           {renderPianoRail(lectureOpen)}
         </nav>
-        <div className="paper-browse-content" ref={scrollerRef} style={paperBrowseContentStyle}>
+        <div className="paper-browse-content" ref={scrollerRef} style={paperBrowseRuntimeStyle}>
           {grammarFillGeometryFixture && (
             <style data-canonical-grammar-fill-geometry-fixture={grammarFillGeometryVariantId}>
               {grammarFillGeometryFixtureCss}

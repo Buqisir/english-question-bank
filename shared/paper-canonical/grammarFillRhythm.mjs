@@ -18,7 +18,7 @@ const grammarFillRhythmV6 = freezeObject(v6Contract)
 const grammarFillRhythmV7 = freezeObject(v7Contract)
 
 export function grammarFillRhythmForPaperAuthority({ paperId, manifestVersion }) {
-  if (Number(manifestVersion) === 46) {
+  if ([46, 47, 48, 49, 50].includes(Number(manifestVersion))) {
     return grammarFillRhythmV7
   }
   if (

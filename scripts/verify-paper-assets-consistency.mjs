@@ -45,15 +45,42 @@ function assert(name, condition, detail = '') {
   }
 }
 
-// Renderable per the frontend contract in
-// PaperIntelligencePaperSurfaceHarness: /paper-assets/<id>/latest/paper-asset.json,
-// falling back to legacy flat /paper-assets/<id>/paper-asset.json.
+// Renderable per either public contract: legacy latest/flat paper-asset.json,
+// or a Canonical latest ref that resolves to its immutable version asset.
 function renderableAssetPath(paperId) {
   const latest = path.join(paperAssetsDir, paperId, 'latest', 'paper-asset.json')
   if (existsSync(latest)) return latest
   const flat = path.join(paperAssetsDir, paperId, 'paper-asset.json')
   if (existsSync(flat)) return flat
-  return null
+  const refPath = canonicalPublicationRefPath(paperId)
+  if (!refPath) return null
+  try {
+    const ref = JSON.parse(readFileSync(refPath, 'utf8'))
+    if (
+      ref?.paperId !== paperId
+      || !/^v\d+$/.test(ref?.versionName || '')
+    ) return null
+    const canonicalAsset = path.join(
+      paperAssetsDir,
+      paperId,
+      'versions',
+      ref.versionName,
+      'paper-asset.json',
+    )
+    return existsSync(canonicalAsset) ? canonicalAsset : null
+  } catch {
+    return null
+  }
+}
+
+function canonicalPublicationRefPath(paperId) {
+  const refPath = path.join(
+    paperAssetsDir,
+    paperId,
+    'latest',
+    'canonical-paper-publication-ref-v1.json',
+  )
+  return existsSync(refPath) ? refPath : null
 }
 
 // Backup-suffixed files (foo.bak, foo.bak.20260716, foo.orig, editor foo~)
@@ -96,10 +123,18 @@ for (const paperId of diskPaperIds) {
     assert(`${paperId}: paper-asset.json parses`, false, String(error))
     continue
   }
+  const canonicalVersionRoot = `${path.join(
+    paperAssetsDir,
+    paperId,
+    'versions',
+  )}${path.sep}`
+  const assetPaperId = assetPath.startsWith(canonicalVersionRoot)
+    ? asset?.paperId
+    : asset?.paper?.paperId
   assert(
-    `${paperId}: paper.paperId matches dir name`,
-    asset?.paper?.paperId === paperId,
-    `paper.paperId=${asset?.paper?.paperId}`,
+    `${paperId}: asset paperId matches dir name`,
+    assetPaperId === paperId,
+    `asset paperId=${assetPaperId}`,
   )
 
   const residue = readdirSync(path.join(paperAssetsDir, paperId), { withFileTypes: true })
@@ -146,9 +181,25 @@ const fileRefIds = db
   .all()
   .map((r) => r.file_ref.split('/')[1])
 
+const hasCanonicalPublicationTable = Boolean(
+  db.prepare(
+    "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = 'canonical_paper_publications'",
+  ).get(),
+)
+const canonicalPublicationIds = hasCanonicalPublicationTable
+  ? db
+      .prepare('SELECT DISTINCT paper_id FROM canonical_paper_publications WHERE is_current = 1')
+      .all()
+      .map((r) => r.paper_id)
+  : []
+
 db.close()
 
-const dbPaperIds = new Set([...publishedIds, ...fileRefIds])
+const dbPaperIds = new Set([
+  ...publishedIds,
+  ...fileRefIds,
+  ...canonicalPublicationIds,
+])
 
 for (const paperId of dbPaperIds) {
   assert(
