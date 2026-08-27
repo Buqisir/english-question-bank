@@ -1,8 +1,8 @@
 # 07 — Jining paper from zero to exact Teacher Confirmation
 
-Status: blocked
-Blocked by: 05 — Shenzhen Q33 generic parity and materializer retirement;
-06 — paper-2026-i whole-paper parity and registry retirement
+Status: implemented
+Blocked by: none; 05 — Shenzhen Q33 generic parity and materializer retirement
+and 06 — paper-2026-i whole-paper parity and registry retirement are complete
 
 ## What to build
 
@@ -32,20 +32,20 @@ paper is data and evidence rather than another shared-code project.
 
 ## Acceptance criteria
 
-- [ ] The Job starts with no pre-existing registry row, materializer, Canonical package, confirmation, or hidden transcription for the Jining paperId.
-- [ ] Exact source digests match the spec before interpretation, and every downstream artifact binds both admitted PDFs.
-- [ ] The per-paper artifact preserves the complete paper structure, source wording, objective Questions and Options, official answers, listening material, writing material, and contract-shaped analyses.
-- [ ] The required answer transcription check proves complete objective coverage against the admitted answer PDF; AI solving never supplies answer authority.
-- [ ] Reading A's structured exercise layout routes through the existing text/table/`framed_columns` and figure vocabulary rather than a flattened page screenshot.
-- [ ] Questions 29 and 35 become two independent homogeneous A–D Reading Figure Option sets with exact source crops, stable owners, PDF geometry, and renderer-owned question numbers and labels.
-- [ ] The writing-prompt poster follows the existing writing-material figure route without creating a new owner kind or consumer behavior.
-- [ ] Source crops are trimmed only to source-measured object or page-region boundaries and remain readable at intended physical size; no automatic edge trim, transparency rewrite, relabeling, redraw, or self-approval occurs.
-- [ ] The Job stops durably in `importing` with zero Canonical publication and one exact normal-size comparison package ready for Owner confirmation.
-- [ ] Adding Jining changes only its per-paper data and source evidence. A conformance check proves no shared implementation, renderer CSS, authority, or paper-specific verifier changed.
-- [ ] Narrow source, transcription, answer, Candidate, confirmation-handoff, no-paper-code, and `git diff --check` checks pass.
+- [x] The Job starts with no pre-existing registry row, materializer, Canonical package, confirmation, or hidden transcription for the Jining paperId.
+- [x] Exact source digests match the spec before interpretation, and every downstream artifact binds both admitted PDFs.
+- [x] The per-paper artifact preserves the complete paper structure, source wording, objective Questions and Options, official answers, listening material, writing material, and contract-shaped analyses.
+- [x] The required answer transcription check proves complete objective coverage against the admitted answer PDF; AI solving never supplies answer authority.
+- [x] Reading A's structured exercise layout routes through the existing text/table/`framed_columns` and figure vocabulary rather than a flattened page screenshot.
+- [x] Questions 29 and 35 become two independent homogeneous A–D Reading Figure Option sets with exact source crops, stable owners, PDF geometry, and renderer-owned question numbers and labels.
+- [x] The writing-prompt poster follows the existing writing-material figure route without creating a new owner kind or consumer behavior.
+- [x] Source crops are trimmed only to source-measured object or page-region boundaries and remain readable at intended physical size; no automatic edge trim, transparency rewrite, relabeling, redraw, or self-approval occurs.
+- [x] The Job stops durably in `importing` with zero Canonical publication and one exact normal-size comparison package ready for Owner confirmation.
+- [x] Adding Jining changes only its per-paper data and source evidence. A conformance check proves no shared implementation, renderer CSS, authority, or paper-specific verifier changed.
+- [x] Narrow source, transcription, answer, Candidate, confirmation-handoff, no-paper-code, and `git diff --check` checks pass.
 
 ## Result
 
-Commit:
-Verify:
-Notes:
+Commit: This implementation commit; the exact HEAD is recorded in the completion handoff.
+Verify: PASS — the public Format 2 Job admitted the exact PDF pair and v4 transcription, validated complete answer and analysis coverage, built the exact visual Candidate package, and stopped durably at `exact_teacher_confirmation_required`; `git diff --check` and the data-only scope check pass.
+Notes: The per-paper artifact contains 10 groups, 45 objective Questions and official-answer byte markings, 20 Listening Questions with 10 transcript segments, four analysis sidecars, and 10 source-crop visual observations. Job `format2-job:0d1e9f41ec1e06a7d5bbb` stopped with no Canonical publication. The Owner comparison package is `sha256:5c89246a7d66e480eac211a853972f2650e88f13479e086edd1dcdb0f7edceb8`; no confirmation or resume has been written.
