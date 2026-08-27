@@ -1,4 +1,5 @@
-import metrics from '../../standards/paper-canonical/rendering/times-compatible-metrics-v1.json' with { type: 'json' }
+import metricsV1 from '../../standards/paper-canonical/rendering/times-compatible-metrics-v1.json' with { type: 'json' }
+import metricsV2 from '../../standards/paper-canonical/rendering/times-compatible-metrics-v2.json' with { type: 'json' }
 import rendererTypography from '../../standards/paper-canonical/rendering/paper-typography-v10.json' with { type: 'json' }
 
 import { digestJson, sha256 } from './stable.mjs'
@@ -11,28 +12,41 @@ const SHAPING_IMPLEMENTATION = Object.freeze({
   rounding: 'outward_to_integer_twip',
 })
 
-const RULES = Object.freeze({
-  rulesetId: 'abcd-option-layout-v1',
-  shapingImplementation: `${SHAPING_IMPLEMENTATION.id}-v${SHAPING_IMPLEMENTATION.version}`,
-  shapingImplementationDigest: digestJson(SHAPING_IMPLEMENTATION),
-  fontMetricsDigest: digestJson(metrics),
-  fontFaceId: metrics.fontFaceId,
-  fontSizeHalfPoint: 21,
-  optionRowWidthTwip: rendererTypography.optionAnchorFramework.rowWidthTwip,
-  minimumGutterTwip: 420,
-  fitSafetyTwip: 20,
-  fourColumnPitchTwip:
-    rendererTypography.optionAnchorFramework.reading.fourColumnStartsTwip[1],
-  twoColumnSecondTabTwip:
-    rendererTypography.optionAnchorFramework.reading.twoColumnStartsTwip[1],
-  oneColumnHangingIndentTwip: 420,
-  questionStemAndOuterOptionBlockStartTwip:
-    rendererTypography.coordinates.questionStemAndOuterOptionBlockStartTwip,
-  rendererTypographyDigest: digestJson(rendererTypography),
-})
+function rulesForMetrics(metrics) {
+  return Object.freeze({
+    rulesetId: 'abcd-option-layout-v1',
+    shapingImplementation: `${SHAPING_IMPLEMENTATION.id}-v${SHAPING_IMPLEMENTATION.version}`,
+    shapingImplementationDigest: digestJson(SHAPING_IMPLEMENTATION),
+    fontMetricsDigest: digestJson(metrics),
+    fontFaceId: metrics.fontFaceId,
+    fontSizeHalfPoint: 21,
+    optionRowWidthTwip: rendererTypography.optionAnchorFramework.rowWidthTwip,
+    minimumGutterTwip: 420,
+    fitSafetyTwip: 20,
+    fourColumnPitchTwip:
+      rendererTypography.optionAnchorFramework.reading.fourColumnStartsTwip[1],
+    twoColumnSecondTabTwip:
+      rendererTypography.optionAnchorFramework.reading.twoColumnStartsTwip[1],
+    oneColumnHangingIndentTwip: 420,
+    questionStemAndOuterOptionBlockStartTwip:
+      rendererTypography.coordinates.questionStemAndOuterOptionBlockStartTwip,
+    rendererTypographyDigest: digestJson(rendererTypography),
+  })
+}
 
-const RULESET_DIGEST = digestJson(RULES)
+function layoutContext(metrics) {
+  const rules = rulesForMetrics(metrics)
+  return Object.freeze({ metrics, rules, rulesetDigest: digestJson(rules) })
+}
+
+const LEGACY_CONTEXT = layoutContext(metricsV1)
+const CURRENT_CONTEXT = layoutContext(metricsV2)
+const CONTEXT_BY_RULESET_DIGEST = new Map([
+  [LEGACY_CONTEXT.rulesetDigest, LEGACY_CONTEXT],
+  [CURRENT_CONTEXT.rulesetDigest, CURRENT_CONTEXT],
+])
 const VERIFIED_FONT_CLOSURES = new WeakSet()
+const FONT_CLOSURE_METRICS_DIGESTS = new WeakMap()
 
 function deeplyFreeze(value) {
   if (!value || typeof value !== 'object' || Object.isFrozen(value)) return value
@@ -41,18 +55,35 @@ function deeplyFreeze(value) {
   return value
 }
 
-export const expectedAbcdRendererFontClosure = deeplyFreeze({
-  primary: {
-    fontFaceId: metrics.fontFaceId,
-    fontFileSha256: metrics.fontFileSha256,
-    fontVersion: metrics.fontVersion,
-  },
-  fallbacks: metrics.fallbacks.map((fallback) => ({ ...fallback })),
-  fontMetricsDigest: RULES.fontMetricsDigest,
-  shapingImplementationDigest: RULES.shapingImplementationDigest,
-})
+function expectedFontClosure(context) {
+  const { metrics, rules } = context
+  return deeplyFreeze({
+    primary: {
+      fontFaceId: metrics.fontFaceId,
+      fontFileSha256: metrics.fontFileSha256,
+      fontVersion: metrics.fontVersion,
+    },
+    fallbacks: metrics.fallbacks.map((fallback) => ({
+      fontFaceId: fallback.fontFaceId,
+      characters: fallback.characters,
+      fontFileSha256: fallback.fontFileSha256,
+      fontVersion: fallback.fontVersion,
+    })),
+    fontMetricsDigest: rules.fontMetricsDigest,
+    shapingImplementationDigest: rules.shapingImplementationDigest,
+  })
+}
 
-const EXPECTED_FONT_CLOSURE_DIGEST = digestJson(expectedAbcdRendererFontClosure)
+export const expectedLegacyAbcdRendererFontClosure = expectedFontClosure(LEGACY_CONTEXT)
+export const expectedAbcdRendererFontClosure = expectedFontClosure(CURRENT_CONTEXT)
+export const expectedAbcdRendererFontClosureV2 = expectedAbcdRendererFontClosure
+const EXPECTED_FONT_CLOSURES_BY_DIGEST = new Map([
+  [
+    digestJson(expectedLegacyAbcdRendererFontClosure),
+    expectedLegacyAbcdRendererFontClosure,
+  ],
+  [digestJson(expectedAbcdRendererFontClosureV2), expectedAbcdRendererFontClosureV2],
+])
 
 export function resolveAbcdRendererFontClosure(candidate) {
   const primaryBytes = candidate?.primary?.fontBytes
@@ -82,7 +113,10 @@ export function resolveAbcdRendererFontClosure(candidate) {
     fontMetricsDigest: candidate.fontMetricsDigest,
     shapingImplementationDigest: candidate.shapingImplementationDigest,
   }
-  if (digestJson(measuredClosure) !== EXPECTED_FONT_CLOSURE_DIGEST) {
+  const expected = EXPECTED_FONT_CLOSURES_BY_DIGEST.get(
+    digestJson(measuredClosure),
+  )
+  if (!expected) {
     return {
       status: 'needs_review',
       reason: 'pinned_renderer_font_closure_unavailable',
@@ -90,6 +124,7 @@ export function resolveAbcdRendererFontClosure(candidate) {
   }
   const closure = deeplyFreeze(measuredClosure)
   VERIFIED_FONT_CLOSURES.add(closure)
+  FONT_CLOSURE_METRICS_DIGESTS.set(closure, expected.fontMetricsDigest)
   return { status: 'ready', closure }
 }
 
@@ -110,7 +145,8 @@ function optionText(option) {
   return parts.join('')
 }
 
-function advanceTwip(text) {
+function advanceTwip(text, context) {
+  const { metrics, rules } = context
   let units = 0
   const characters = [...text]
   for (let index = 0; index < characters.length; index += 1) {
@@ -122,18 +158,18 @@ function advanceTwip(text) {
       `${characters[index - 1]}${character}`
     ] || 0
   }
-  return Math.ceil((units * RULES.fontSizeHalfPoint) / (metrics.unitsPerEm / 10))
+  return Math.ceil((units * rules.fontSizeHalfPoint) / (metrics.unitsPerEm / 10))
 }
 
-function measureOption(option) {
+function measureOption(option, context) {
   const text = optionText(option)
   if (text === null) return null
   const renderedText = `${option.label}. ${text}`
   const lines = renderedText.split('\n')
-  const lineAdvancesTwip = lines.map(advanceTwip)
+  const lineAdvancesTwip = lines.map((line) => advanceTwip(line, context))
   if (lineAdvancesTwip.some((advance) => advance === null)) return null
   const unbreakableAdvancesTwip = lines.flatMap((line) =>
-    line.split(/\s+/u).filter(Boolean).map(advanceTwip))
+    line.split(/\s+/u).filter(Boolean).map((part) => advanceTwip(part, context)))
   if (unbreakableAdvancesTwip.some((advance) => advance === null)) return null
   return {
     renderedText,
@@ -143,32 +179,32 @@ function measureOption(option) {
   }
 }
 
-function capacities() {
+function capacities(rules) {
   return {
     four: [
-      RULES.fourColumnPitchTwip - RULES.minimumGutterTwip - RULES.fitSafetyTwip,
-      RULES.fourColumnPitchTwip - RULES.minimumGutterTwip - RULES.fitSafetyTwip,
-      RULES.fourColumnPitchTwip - RULES.minimumGutterTwip - RULES.fitSafetyTwip,
-      RULES.optionRowWidthTwip - RULES.fourColumnPitchTwip * 3 - RULES.fitSafetyTwip,
+      rules.fourColumnPitchTwip - rules.minimumGutterTwip - rules.fitSafetyTwip,
+      rules.fourColumnPitchTwip - rules.minimumGutterTwip - rules.fitSafetyTwip,
+      rules.fourColumnPitchTwip - rules.minimumGutterTwip - rules.fitSafetyTwip,
+      rules.optionRowWidthTwip - rules.fourColumnPitchTwip * 3 - rules.fitSafetyTwip,
     ],
     two: [
-      RULES.twoColumnSecondTabTwip - RULES.minimumGutterTwip - RULES.fitSafetyTwip,
-      RULES.optionRowWidthTwip - RULES.twoColumnSecondTabTwip - RULES.fitSafetyTwip,
-      RULES.twoColumnSecondTabTwip - RULES.minimumGutterTwip - RULES.fitSafetyTwip,
-      RULES.optionRowWidthTwip - RULES.twoColumnSecondTabTwip - RULES.fitSafetyTwip,
+      rules.twoColumnSecondTabTwip - rules.minimumGutterTwip - rules.fitSafetyTwip,
+      rules.optionRowWidthTwip - rules.twoColumnSecondTabTwip - rules.fitSafetyTwip,
+      rules.twoColumnSecondTabTwip - rules.minimumGutterTwip - rules.fitSafetyTwip,
+      rules.optionRowWidthTwip - rules.twoColumnSecondTabTwip - rules.fitSafetyTwip,
     ],
-    one: RULES.optionRowWidthTwip - RULES.oneColumnHangingIndentTwip - RULES.fitSafetyTwip,
+    one: rules.optionRowWidthTwip - rules.oneColumnHangingIndentTwip - rules.fitSafetyTwip,
   }
 }
 
-function placementFor(mode, option, measured, index) {
+function placementFor(mode, option, measured, index, rules) {
   if (mode === 'four_columns') {
     return {
       optionId: option.optionId,
       label: option.label,
       row: 0,
       column: index,
-      startTwip: index * RULES.fourColumnPitchTwip,
+      startTwip: index * rules.fourColumnPitchTwip,
       continuationStartTwip: null,
       hardBreaks: measured.hardBreaks,
       advanceTwip: measured.advanceTwip,
@@ -182,7 +218,7 @@ function placementFor(mode, option, measured, index) {
       label: option.label,
       row: Math.floor(index / 2),
       column: index % 2,
-      startTwip: (index % 2) * RULES.twoColumnSecondTabTwip,
+      startTwip: (index % 2) * rules.twoColumnSecondTabTwip,
       continuationStartTwip: null,
       hardBreaks: measured.hardBreaks,
       advanceTwip: measured.advanceTwip,
@@ -196,7 +232,7 @@ function placementFor(mode, option, measured, index) {
     row: index,
     column: 0,
     startTwip: 0,
-    continuationStartTwip: RULES.oneColumnHangingIndentTwip,
+    continuationStartTwip: rules.oneColumnHangingIndentTwip,
     hardBreaks: measured.hardBreaks,
     advanceTwip: measured.advanceTwip,
     unbreakableAdvanceTwip: measured.unbreakableAdvanceTwip,
@@ -204,24 +240,25 @@ function placementFor(mode, option, measured, index) {
   }
 }
 
-function selectedPlan(mode, optionSet, measured) {
+function selectedPlan(mode, optionSet, measured, context) {
+  const { rules, rulesetDigest } = context
   const placements = optionSet.options.map((option, index) =>
-    placementFor(mode, option, measured[index], index))
+    placementFor(mode, option, measured[index], index, rules))
   const plan = {
     status: 'selected',
     mode,
     rowCount: mode === 'four_columns' ? 1 : mode === 'two_by_two' ? 2 : 4,
     columnCount: mode === 'four_columns' ? 4 : mode === 'two_by_two' ? 2 : 1,
     rulesetRef: {
-      id: RULES.rulesetId,
-      digest: RULESET_DIGEST,
-      shapingImplementationDigest: RULES.shapingImplementationDigest,
-      fontMetricsDigest: RULES.fontMetricsDigest,
-      rendererTypographyDigest: RULES.rendererTypographyDigest,
+      id: rules.rulesetId,
+      digest: rulesetDigest,
+      shapingImplementationDigest: rules.shapingImplementationDigest,
+      fontMetricsDigest: rules.fontMetricsDigest,
+      rendererTypographyDigest: rules.rendererTypographyDigest,
     },
-    rowWidthTwip: RULES.optionRowWidthTwip,
+    rowWidthTwip: rules.optionRowWidthTwip,
     questionStemAndOuterOptionBlockStartTwip:
-      RULES.questionStemAndOuterOptionBlockStartTwip,
+      rules.questionStemAndOuterOptionBlockStartTwip,
     placements,
   }
   return {
@@ -235,7 +272,7 @@ function selectedPlan(mode, optionSet, measured) {
  * Canonical content enters by value; selected layout never mutates or returns
  * into canonical semantics.
  */
-export function layoutAbcdOptionSet(optionSet) {
+function layoutAbcdOptionSetWithContext(optionSet, context) {
   if (
     optionSet?.owner !== 'question'
     || !Array.isArray(optionSet.options)
@@ -244,7 +281,7 @@ export function layoutAbcdOptionSet(optionSet) {
       option?.label !== LABELS[index] || typeof option.optionId !== 'string')
   ) return notApplicable()
 
-  const measured = optionSet.options.map(measureOption)
+  const measured = optionSet.options.map((option) => measureOption(option, context))
   if (measured.some((value) => value === null)) {
     return {
       status: 'needs_review',
@@ -252,13 +289,13 @@ export function layoutAbcdOptionSet(optionSet) {
     }
   }
 
-  const cap = capacities()
+  const cap = capacities(context.rules)
   const hasHardBreak = measured.some(({ hardBreaks }) => hardBreaks > 0)
   if (!hasHardBreak && measured.every(({ advanceTwip }, index) => advanceTwip <= cap.four[index])) {
-    return selectedPlan('four_columns', optionSet, measured)
+    return selectedPlan('four_columns', optionSet, measured, context)
   }
   if (!hasHardBreak && measured.every(({ advanceTwip }, index) => advanceTwip <= cap.two[index])) {
-    return selectedPlan('two_by_two', optionSet, measured)
+    return selectedPlan('two_by_two', optionSet, measured, context)
   }
   if (measured.some(({ unbreakableAdvanceTwip }) => unbreakableAdvanceTwip > cap.one)) {
     return {
@@ -266,7 +303,19 @@ export function layoutAbcdOptionSet(optionSet) {
       reason: 'one_column_contains_unrenderable_unbreakable_content',
     }
   }
-  return selectedPlan('one_column', optionSet, measured)
+  return selectedPlan('one_column', optionSet, measured, context)
+}
+
+export function layoutAbcdOptionSet(optionSet) {
+  return layoutAbcdOptionSetWithContext(optionSet, CURRENT_CONTEXT)
+}
+
+export function layoutAbcdOptionSetV1(optionSet) {
+  return layoutAbcdOptionSetWithContext(optionSet, LEGACY_CONTEXT)
+}
+
+export function layoutAbcdOptionSetV2(optionSet) {
+  return layoutAbcdOptionSetWithContext(optionSet, CURRENT_CONTEXT)
 }
 
 /**
@@ -274,7 +323,7 @@ export function layoutAbcdOptionSet(optionSet) {
  * Soft-wrapping content may continue inside its own track, but a hard break,
  * unsupported glyph, or unbreakable token wider than that track fails closed.
  */
-export function layoutFixedFourColumnClozeOptionSet(optionSet) {
+function layoutFixedFourColumnClozeOptionSetWithContext(optionSet, context) {
   if (
     optionSet?.owner !== 'question'
     || !Array.isArray(optionSet.options)
@@ -283,14 +332,14 @@ export function layoutFixedFourColumnClozeOptionSet(optionSet) {
       option?.label !== LABELS[index] || typeof option.optionId !== 'string')
   ) return notApplicable()
 
-  const measured = optionSet.options.map(measureOption)
+  const measured = optionSet.options.map((option) => measureOption(option, context))
   if (measured.some((value) => value === null)) {
     return {
       status: 'needs_review',
       reason: 'fixed_four_column_contains_unrenderable_content',
     }
   }
-  const cap = capacities().four
+  const cap = capacities(context.rules).four
   if (
     measured.some(
       ({ hardBreaks, unbreakableAdvanceTwip }, index) =>
@@ -302,20 +351,46 @@ export function layoutFixedFourColumnClozeOptionSet(optionSet) {
       reason: 'fixed_four_column_contains_unrenderable_content',
     }
   }
-  return selectedPlan('four_columns', optionSet, measured)
+  return selectedPlan('four_columns', optionSet, measured, context)
+}
+
+export function layoutFixedFourColumnClozeOptionSet(optionSet) {
+  return layoutFixedFourColumnClozeOptionSetWithContext(
+    optionSet,
+    CURRENT_CONTEXT,
+  )
+}
+
+export function layoutFixedFourColumnClozeOptionSetV1(optionSet) {
+  return layoutFixedFourColumnClozeOptionSetWithContext(
+    optionSet,
+    LEGACY_CONTEXT,
+  )
+}
+
+export function layoutFixedFourColumnClozeOptionSetV2(optionSet) {
+  return layoutFixedFourColumnClozeOptionSetWithContext(
+    optionSet,
+    CURRENT_CONTEXT,
+  )
 }
 
 function assertAuthoritativePlan(plan) {
   if (plan?.status !== 'selected') {
     throw new TypeError('A selected A-D layout plan is required')
   }
+  const context = CONTEXT_BY_RULESET_DIGEST.get(plan.rulesetRef?.digest)
+  const rules = context?.rules
   if (
-    plan.rulesetRef?.id !== RULES.rulesetId
-    || plan.rulesetRef?.digest !== RULESET_DIGEST
+    !context
+    || plan.rulesetRef?.id !== rules.rulesetId
+    || plan.rulesetRef?.shapingImplementationDigest
+      !== rules.shapingImplementationDigest
+    || plan.rulesetRef?.fontMetricsDigest !== rules.fontMetricsDigest
     || plan.rulesetRef?.rendererTypographyDigest
-      !== RULES.rendererTypographyDigest
+      !== rules.rendererTypographyDigest
     || plan.questionStemAndOuterOptionBlockStartTwip
-      !== RULES.questionStemAndOuterOptionBlockStartTwip
+      !== rules.questionStemAndOuterOptionBlockStartTwip
     || plan.placementSignature !== abcdPlacementSignature(plan)
   ) {
     const error = new Error(
@@ -324,15 +399,21 @@ function assertAuthoritativePlan(plan) {
     error.code = 'ABCD_LAYOUT_AUTHORITY_MISMATCH'
     throw error
   }
+  return context
 }
 
 function assertTranslatable(plan, fontClosure) {
-  assertAuthoritativePlan(plan)
-  if (!VERIFIED_FONT_CLOSURES.has(fontClosure)) {
+  const context = assertAuthoritativePlan(plan)
+  if (
+    !VERIFIED_FONT_CLOSURES.has(fontClosure)
+    || FONT_CLOSURE_METRICS_DIGESTS.get(fontClosure)
+      !== context.rules.fontMetricsDigest
+  ) {
     const error = new Error('The pinned renderer font closure is unavailable')
     error.code = 'ABCD_RENDERER_FONT_CLOSURE_UNAVAILABLE'
     throw error
   }
+  return context
 }
 
 export function abcdPlacementSignature(plan) {
@@ -387,12 +468,12 @@ export function translateAbcdPlanToPointPlacement(plan) {
 }
 
 function translateAbcdPlanToPointSurface(plan, fontClosure, renderer) {
-  assertTranslatable(plan, fontClosure)
+  const { rules } = assertTranslatable(plan, fontClosure)
   const placement = translateAbcdPlanToPointPlacement(plan)
   return {
     renderer,
     ...placement,
-    fontSizeHalfPoint: RULES.fontSizeHalfPoint,
+    fontSizeHalfPoint: rules.fontSizeHalfPoint,
     denseWhiteSpace: plan.mode === 'one_column' ? 'normal' : 'nowrap',
     clipping: 'forbidden',
     shrinkToFit: false,
@@ -407,4 +488,4 @@ export function translateAbcdPlanToPrintPdf(plan, fontClosure) {
   return translateAbcdPlanToPointSurface(plan, fontClosure, 'print_pdf')
 }
 
-export const abcdLayoutRules = RULES
+export const abcdLayoutRules = CURRENT_CONTEXT.rules

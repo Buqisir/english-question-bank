@@ -16,13 +16,16 @@ import {
   abcdLayoutRules,
   abcdPlacementSignature,
   expectedAbcdRendererFontClosure,
+  expectedLegacyAbcdRendererFontClosure,
   layoutAbcdOptionSet,
+  layoutAbcdOptionSetV1,
   layoutFixedFourColumnClozeOptionSet,
   resolveAbcdRendererFontClosure,
   translateAbcdPlanToPaperSurface,
   translateAbcdPlanToPointPlacement,
   translateAbcdPlanToPrintPdf,
 } from '../shared/paper-canonical/abcdLayout.mjs'
+import { pinnedScienceFont } from '../shared/papersurface/pinnedScienceFont.mjs'
 import {
   canonicalAuthorityRef,
   resolveCanonicalAuthority,
@@ -48,6 +51,21 @@ function optionSet(questionId, texts) {
 function sha256File(filePath) {
   return `sha256:${createHash('sha256').update(readFileSync(filePath)).digest('hex')}`
 }
+
+const subscriptFallbackTexts = [
+  'The necessity of field research.',
+  'The importance of lab experiment.',
+  'The occurrence of natural disasters.',
+  'The overall evaluation of CO₂’s effects.',
+]
+
+assert.equal(pinnedScienceFont.characters, '₂')
+assert.equal(pinnedScienceFont.unicodeRange, 'U+2082')
+assert.equal(
+  sha256File(path.resolve(pinnedScienceFont.assetRelativePath)),
+  pinnedScienceFont.sha256,
+  'v50 glyph patch is bound to the exact checked-in font bytes',
+)
 
 for (const sourceImage of abcdLayoutReferenceFixture.sourceImages) {
   assert.equal(
@@ -108,6 +126,21 @@ assert.equal(hardBreak.status, 'selected')
 assert.equal(hardBreak.mode, 'one_column')
 assert.equal(hardBreak.placements[0].hardBreaks, 1)
 assert.equal(hardBreak.placements[0].renderedText, 'A. first\nsecond')
+
+const subscriptFallback = layoutAbcdOptionSet(
+  optionSet('subscript-fallback', subscriptFallbackTexts),
+)
+assert.equal(subscriptFallback.status, 'selected')
+assert.equal(subscriptFallback.mode, 'two_by_two')
+assert.equal(subscriptFallback.placements[3].renderedText.includes('CO₂'), true)
+assert.deepEqual(
+  layoutAbcdOptionSetV1(optionSet('legacy-subscript', subscriptFallbackTexts)),
+  {
+    status: 'needs_review',
+    reason: 'one_column_contains_unrenderable_unbreakable_content',
+  },
+  'immutable v1 metrics remain fail-closed for an unsupported U+2082 glyph',
+)
 
 const plan = layoutAbcdOptionSet(optionSet('parity', gold[2].redactedText))
 const authority = resolveCanonicalAuthority(canonicalAuthorityRef).closure
@@ -385,12 +418,13 @@ function rowsFor(translation) {
   return [...rows.values()]
 }
 
-function htmlFor(translation, embeddedFont = '') {
+function htmlFor(translation, embeddedFonts = {}) {
   const rowHeightPt = 72
   return `<!doctype html><meta charset="utf-8"><style>
     @page { size: A4; margin: 24mm; }
-    ${embeddedFont ? `@font-face { font-family: "EQB Pinned Times"; src: url(data:font/ttf;base64,${embeddedFont}); }` : ''}
-    body { margin: 0; font-family: "EQB Pinned Times", "Times New Roman", "Songti SC"; font-size: 10.5pt; font-kerning: normal; }
+    ${embeddedFonts.primary ? `@font-face { font-family: "EQB Pinned Times"; src: url(data:font/ttf;base64,${embeddedFonts.primary}); }` : ''}
+    ${embeddedFonts.science ? `@font-face { font-family: "${pinnedScienceFont.cssFamily}"; src: url(data:font/ttf;base64,${embeddedFonts.science}); unicode-range: ${pinnedScienceFont.unicodeRange}; }` : ''}
+    body { margin: 0; font-family: "${pinnedScienceFont.cssFamily}", "EQB Pinned Times", "Times New Roman", "Songti SC"; font-size: 10.5pt; font-kerning: normal; }
     .set { position: relative; width: ${translation.rowWidthPt}pt; height: ${rowsFor(translation).length * rowHeightPt}pt; }
     .option { position: absolute; box-sizing: border-box; line-height: 18pt; overflow: visible; }
     .dense { white-space: nowrap; }
@@ -451,7 +485,13 @@ function assertRenderedContent(pdfPath, outputRoot, placements, label) {
   )
 }
 
-function assertDenseContentNoWrap(pdfPath, outputRoot, placements, label) {
+function assertDenseContentNoWrap(
+  pdfPath,
+  outputRoot,
+  placements,
+  label,
+  verticalTolerancePt = 0.5,
+) {
   const words = pdfAllWords(pdfPath, outputRoot)
   let cursor = 0
   placements.forEach((placement, placementIndex) => {
@@ -471,7 +511,7 @@ function assertDenseContentNoWrap(pdfPath, outputRoot, placements, label) {
     assert.equal(optionWords.length >= 2, true, `${label}: option content follows label`)
     assert.equal(
       Math.max(...optionWords.map(({ y }) => y))
-        - Math.min(...optionWords.map(({ y }) => y)) <= 0.5,
+        - Math.min(...optionWords.map(({ y }) => y)) <= verticalTolerancePt,
       true,
       `${label}: ${placement.label} dense content does not wrap`,
     )
@@ -574,19 +614,49 @@ function hostFontClosure() {
     }
   }
   const primary = resolveFont('Times New Roman')
-  const fallback = resolveFont('Songti SC')
-  const candidate = {
+  const songtiFallback = resolveFont('Songti SC')
+  const scienceBytes = readFileSync(path.resolve(pinnedScienceFont.assetRelativePath))
+  const legacyCandidate = {
     primary: {
       fontFaceId: primary.fontFaceId,
       fontVersion: primary.fontVersion,
       fontBytes: primary.fontBytes,
     },
     fallbacks: [{
-      fontFaceId: fallback.fontFaceId,
-      characters: '．﹣',
-      fontVersion: fallback.fontVersion,
-      fontBytes: fallback.fontBytes,
+      fontFaceId: songtiFallback.fontFaceId,
+      characters: expectedLegacyAbcdRendererFontClosure.fallbacks[0].characters,
+      fontVersion: songtiFallback.fontVersion,
+      fontBytes: songtiFallback.fontBytes,
     }],
+    fontMetricsDigest: expectedLegacyAbcdRendererFontClosure.fontMetricsDigest,
+    shapingImplementationDigest:
+      expectedLegacyAbcdRendererFontClosure.shapingImplementationDigest,
+  }
+  assert.equal(
+    resolveAbcdRendererFontClosure(legacyCandidate).status,
+    'ready',
+    'immutable v1 font closure remains available',
+  )
+  const candidate = {
+    primary: {
+      fontFaceId: primary.fontFaceId,
+      fontVersion: primary.fontVersion,
+      fontBytes: primary.fontBytes,
+    },
+    fallbacks: [
+      {
+        fontFaceId: expectedAbcdRendererFontClosure.fallbacks[0].fontFaceId,
+        characters: expectedAbcdRendererFontClosure.fallbacks[0].characters,
+        fontVersion: expectedAbcdRendererFontClosure.fallbacks[0].fontVersion,
+        fontBytes: scienceBytes,
+      },
+      {
+        fontFaceId: songtiFallback.fontFaceId,
+        characters: '．﹣',
+        fontVersion: songtiFallback.fontVersion,
+        fontBytes: songtiFallback.fontBytes,
+      },
+    ],
     fontMetricsDigest: expectedAbcdRendererFontClosure.fontMetricsDigest,
     shapingImplementationDigest:
       expectedAbcdRendererFontClosure.shapingImplementationDigest,
@@ -597,7 +667,20 @@ function hostFontClosure() {
     'ready',
     'actual artifacts require the exact pinned primary and fallback font files',
   )
-  return { closure: resolved.closure, primaryFile: primary.file }
+  assert.equal(
+    execFileSync('fc-query', ['-f', '%{charset}', path.resolve(
+      pinnedScienceFont.assetRelativePath,
+    )], { encoding: 'utf8' }).trim(),
+    '2082',
+    'the checked-in glyph patch contains only U+2082',
+  )
+  return {
+    closure: resolved.closure,
+    embeddedFonts: {
+      primary: primary.fontBytes.toString('base64'),
+      science: scienceBytes.toString('base64'),
+    },
+  }
 }
 
 async function verifyActualArtifacts() {
@@ -605,7 +688,6 @@ async function verifyActualArtifacts() {
   const playwright = await import('../app/node_modules/playwright/index.js')
   const browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
   const actualFont = hostFontClosure()
-  const embeddedFont = readFileSync(actualFont.primaryFile).toString('base64')
   try {
     const actualCases = [
       ...gold.map(({ questionId, redactedText }) => ({
@@ -625,6 +707,10 @@ async function verifyActualArtifacts() {
           'short',
         ],
       },
+      {
+        questionId: 'subscript-fallback',
+        texts: subscriptFallbackTexts,
+      },
       ...[...boundaryOptionSets.values()].map((set) => ({
         questionId: set.questionId,
         texts: set.options.map(({ content }) =>
@@ -641,7 +727,7 @@ async function verifyActualArtifacts() {
       assert.equal([screen, print].every(({ clipping }) =>
         clipping === 'forbidden'), true)
       const page = await browser.newPage({ viewport: { width: 1000, height: 800 } })
-      await page.setContent(htmlFor(screen, embeddedFont))
+      await page.setContent(htmlFor(screen, actualFont.embeddedFonts))
       await page.evaluate(() => document.fonts.ready)
       const screenPositions = await readScreenPositions(page)
       assertPhysicalPlacement(selected.placements, screenPositions, `${questionId} PaperSurface`)
@@ -655,7 +741,7 @@ async function verifyActualArtifacts() {
       const screenshot = await page.screenshot()
       assert.equal(screenshot.subarray(1, 4).toString(), 'PNG')
 
-      await page.setContent(htmlFor(print, embeddedFont))
+      await page.setContent(htmlFor(print, actualFont.embeddedFonts))
       await page.evaluate(() => document.fonts.ready)
       const pdfPath = path.join(outputRoot, `${questionId}-print.pdf`)
       writeFileSync(pdfPath, await page.pdf({ format: 'A4', printBackground: true }))
@@ -671,12 +757,20 @@ async function verifyActualArtifacts() {
         selected.placements,
         `${questionId} Print/PDF`,
       )
+      if (questionId === 'subscript-fallback') {
+        assert.match(
+          execFileSync('pdffonts', [pdfPath], { encoding: 'utf8' }),
+          /\bSTIXTwoText\b/u,
+          'subscript-fallback Print/PDF embeds the exact STIX fallback glyph',
+        )
+      }
       if (selected.mode !== 'one_column') {
         assertDenseContentNoWrap(
           pdfPath,
           outputRoot,
           selected.placements,
           `${questionId} Print/PDF`,
+          questionId === 'subscript-fallback' ? 3 : 0.5,
         )
       }
       await page.close()
@@ -706,13 +800,13 @@ async function verifyActualArtifacts() {
       })))
 
     const clozePage = await browser.newPage({ viewport: { width: 1000, height: 1200 } })
-    await clozePage.setContent(htmlFor(clozeScreen, embeddedFont))
+    await clozePage.setContent(htmlFor(clozeScreen, actualFont.embeddedFonts))
     await clozePage.evaluate(() => document.fonts.ready)
     const clozeScreenWords = await readScreenPositions(clozePage)
     assertPhysicalPlacement(clozePlacements, clozeScreenWords, 'Cloze PaperSurface')
     assertSameColumnSpread(clozePlacements, clozeScreenWords, 'Cloze PaperSurface')
 
-    await clozePage.setContent(htmlFor(clozePrint, embeddedFont))
+    await clozePage.setContent(htmlFor(clozePrint, actualFont.embeddedFonts))
     await clozePage.evaluate(() => document.fonts.ready)
     const clozePrintPdf = path.join(outputRoot, 'cloze-print.pdf')
     writeFileSync(clozePrintPdf, await clozePage.pdf({ format: 'A4', printBackground: true }))

@@ -38,7 +38,14 @@
  */
 
 import path from 'node:path'
+import { readFileSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
 import { paperSurfaceTokens } from '../shared/papersurface/tokens.mjs'
+import {
+  hasPinnedScienceFontAuthority,
+  paperFontStackForAuthority,
+  pinnedScienceFont,
+} from '../shared/papersurface/pinnedScienceFont.mjs'
 import { paperBlankPattern } from '../shared/papersurface/blankPattern.mjs'
 import {
   grammarFillBlankRulingForRhythm,
@@ -74,7 +81,7 @@ import {
   hasGrammarFillPublicGeometryFixtureAuthority,
   resolveGrammarFillPublicGeometryFixture,
 } from '../shared/paper-canonical/grammarFillPublicGeometryFixtures.mjs'
-import { digestJson } from '../shared/paper-canonical/stable.mjs'
+import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 import {
   canonicalWritingChromeOwnsRenderedDocument,
   projectCanonicalConsumerGroup,
@@ -93,6 +100,29 @@ import {
   isFormat2RichConsumption,
 } from './paper-canonical/grammarFillPrintSourceBinding.mjs'
 import { resolveGroupFigures } from './figures/paperFigures.mjs'
+
+const repositoryRoot = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)),
+  '..',
+)
+
+function pinnedScienceFontFaceCss(authorityRef) {
+  if (!hasPinnedScienceFontAuthority(authorityRef)) return ''
+  const bytes = readFileSync(path.join(repositoryRoot, pinnedScienceFont.assetRelativePath))
+  if (sha256(new Uint8Array(bytes)) !== pinnedScienceFont.sha256) {
+    const error = new Error('Pinned science font bytes differ from v50 authority')
+    error.code = 'PINNED_SCIENCE_FONT_DIGEST_MISMATCH'
+    throw error
+  }
+  return `@font-face {
+  font-family: "${pinnedScienceFont.cssFamily}";
+  src: url("data:${pinnedScienceFont.mediaType};base64,${bytes.toString('base64')}") format("${pinnedScienceFont.format}");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+  unicode-range: ${pinnedScienceFont.unicodeRange};
+}`
+}
 
 function renderSectionHeadingText(text) {
   return sectionHeadingTextRuns(text)
@@ -1017,6 +1047,8 @@ export function buildPrintHtml({
   const startNum = Number.isInteger(questionNumberStart) && questionNumberStart >= 1 ? questionNumberStart : 1
   const isExam = printStyle === 'exam'
   const isTeacher = versionType === 'teacher'
+  const paperFontStack = paperFontStackForAuthority(canonicalConsumption?.authorityRef)
+  const authorityFontFaceCss = pinnedScienceFontFaceCss(canonicalConsumption?.authorityRef)
   const hasCanonicalGrammarFill = canonicalConsumption?.selections?.some(
     (selection) => selection.familyContractId === 'grammar-fill'
       && selection.mode === 'canonical'
@@ -2213,6 +2245,7 @@ export function buildPrintHtml({
 <meta charset="UTF-8">
 <title>${escapeHtml(title || '英语试题')}</title>
 <style>
+${authorityFontFaceCss}
 /* 刀⑤ render-fidelity Chunk B — standard §1: 左右 24mm / 上 ≈21mm.
    Bottom margin is 24mm (not standard-mandated directly). Chromium's margin
    box places the 9pt footer literal ≈17.5mm from the physical bottom when the
@@ -2223,7 +2256,7 @@ export function buildPrintHtml({
 
   @bottom-center {
     content: "${paperTypographyRuntime.footerContract.prefix}" counter(page) "${paperTypographyRuntime.footerContract.pageSuffix}" counter(pages) "${paperTypographyRuntime.footerContract.totalSuffix}";
-    font-family: ${paperSurfaceTokens.paperFontStack};
+    font-family: ${paperFontStack};
     font-size: ${
       sectionHeadingRuntime.printPdf.fontSizePt
       * paperTypographyRuntime.footerContract.fontSizeRelativeToBody
@@ -2235,7 +2268,7 @@ export function buildPrintHtml({
 }
 
 body {
-  font-family: ${paperSurfaceTokens.paperFontStack};
+  font-family: ${paperFontStack};
   font-size: 10.5pt;
   /* standard §3: the shared Owner-gold runtime fixes the Print/PDF
      baseline at 18pt for 10.5pt body and section-heading text. */

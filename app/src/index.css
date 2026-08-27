@@ -1,5 +1,17 @@
 @import "./shared-ui/tokens.css";
 
+/* Format 2 v50 glyph patch. The family is selected only by an exact v50
+ * Canonical authority; unicode-range keeps every ordinary Latin glyph on
+ * the existing Times-compatible stack. */
+@font-face {
+  font-family: "EQB Pinned Science v1";
+  src: url("/paper-fonts/eqb-pinned-science-u2082-v1.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+  unicode-range: U+2082;
+}
+
 :root {
   --ink: var(--eqb-color-text);
   --ink-strong: var(--eqb-color-text-strong);

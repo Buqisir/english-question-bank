@@ -37,6 +37,7 @@ import { readingOptionFigureConsumerContractRefs } from '../shared/paper-canonic
 import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
 import { projectCanonicalPaperBrowseDisplayAsset } from '../shared/paper-canonical/paperBrowseDisplayAsset.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
+import { pinnedScienceFont } from '../shared/papersurface/pinnedScienceFont.mjs'
 import {
   createFileSystemCanonicalPublicationStore,
   loadPaperForConsumptionSync,
@@ -3526,11 +3527,37 @@ const transcriptionV4TeacherHtml = readFileSync(path.join(
   paperDir(transcriptionV4.repositoryRoot, transcriptionV4.fixture.input.paperId),
   transcriptionV4Completed.artifacts.qa.teacherPrint.relativePath,
 ), 'utf8')
+const pinnedFontDataMatch = transcriptionV4StudentHtml.match(
+  /data:font\/ttf;base64,([A-Za-z0-9+/=]+)/u,
+)
+assert.ok(pinnedFontDataMatch, 'v50 Student Print embeds its authority-bound glyph patch')
+assert.equal(
+  sha256(new Uint8Array(Buffer.from(pinnedFontDataMatch[1], 'base64'))),
+  pinnedScienceFont.sha256,
+  'v50 Student Print embeds the exact checked-in glyph-patch bytes',
+)
+assert.equal(
+  transcriptionV4StudentHtml.includes(`unicode-range: ${pinnedScienceFont.unicodeRange}`),
+  true,
+)
+assert.equal(transcriptionV4StudentHtml.includes('"STIX Two Text"'), false)
 assert.equal(transcriptionV4StudentHtml.includes('<strong>【答案】</strong>'), false)
+assert.equal(transcriptionV4StudentHtml.includes('<strong>【解析】</strong>'), false)
 assert.equal(transcriptionV4TeacherHtml.includes('<strong>【答案】</strong>'), true)
+const transcriptionV4ExpectedAnalysisCount = transcriptionV4.fixture.input.transcription
+  .analysisSidecars
+  .filter((analysis) => analysis.schemaVersion !== 'writing-analysis-v1')
+  .reduce((count, analysis) => (
+    count + Object.keys(analysis.questions || analysis.blanks || {}).length
+  ), 0)
+assert.equal(
+  (transcriptionV4TeacherHtml.match(/<strong>【解析】<\/strong>/gu) || []).length,
+  transcriptionV4ExpectedAnalysisCount,
+  'Teacher Print renders every admitted objective Analysis entry exactly once',
+)
 const transcriptionV4Manifest = JSON.parse(readFileSync(path.join(
   transcriptionV4VersionDir,
-  'canonical/canonical-paper-publication-v49.json',
+  'canonical/canonical-paper-publication-v50.json',
 ), 'utf8'))
 assert.deepEqual(
   transcriptionV4Manifest.authority,
@@ -3596,7 +3623,7 @@ assert.deepEqual(
     ), { readOnly }),
   }).snapshot(),
   { papersById: {}, groupsById: {}, questionsById: {}, analysisSources: [] },
-  'the scoped rich Adapter does not validate or own a non-v49 current publication ref',
+  'the scoped rich Adapter does not validate or own a non-Format2 current publication ref',
 )
 writeFileSync(transcriptionV3LatestRefPath, transcriptionV3LatestRefBytes)
 assert.equal(Object.isFrozen(transcriptionV4CompatibilitySnapshot), true)

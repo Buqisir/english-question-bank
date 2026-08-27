@@ -1,6 +1,7 @@
 import {
   consumerContractRefs,
   format2RichConsumerContractRefs,
+  legacyFormat2RichConsumerContractRefs,
   readingOptionFigureConsumerContractRefs,
   resolveConsumerContract,
 } from '../../shared/paper-canonical/consumers.mjs'
@@ -53,9 +54,14 @@ function currentPublicationContractSet(store, currentRef) {
   if (!currentRef) return consumerContractRefs
   const manifestCandidates = [
     {
+      fileName: 'canonical-paper-publication-v50.json',
+      version: '50',
+      contracts: format2RichConsumerContractRefs,
+    },
+    {
       fileName: 'canonical-paper-publication-v49.json',
       version: '49',
-      contracts: format2RichConsumerContractRefs,
+      contracts: legacyFormat2RichConsumerContractRefs,
     },
     {
       fileName: 'canonical-paper-publication-v46.json',

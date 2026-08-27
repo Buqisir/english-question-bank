@@ -121,7 +121,7 @@ console.log('\nTest 3: CSS contract checks')
   // 刀⑤ render-fidelity Chunk B — standard §3: line-height fixed 18pt (≈1.714 at 10.5pt).
   assert('line-height 1.714 (18pt fixed baseline, token-sourced)', html.includes('line-height: 1.714'), '')
   // 刀⑤ render-fidelity Chunk B — font stacks sourced from shared/papersurface/tokens.mjs.
-  assert('body font-family sourced from tokens (Times New Roman + STSong)', html.includes('"Times New Roman", Times, "SimSun", "Songti SC", "STSong", serif'), '')
+  assert('legacy body font-family stays on the shared Times + STSong token', html.includes('"Times New Roman", Times, "SimSun", "Songti SC", "STSong", serif') && !html.includes('"STIX Two Text"'), '')
 }
 
 // --- Test 3b: heading-fidelity (刀⑤ SW-B 销账) — part/section split, h1 20pt ---

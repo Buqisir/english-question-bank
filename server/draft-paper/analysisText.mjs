@@ -150,6 +150,29 @@ const FORMATTER_BY_GROUP_TYPE = {
   seven_choices: formatSevenChoicesText,
 }
 
+const GROUP_TYPE_BY_ANALYSIS_SCHEMA = {
+  'reading-choice-analysis-v1': 'reading',
+  'cloze-analysis-v1': 'cloze',
+  'grammar-fill-analysis-v2': 'grammar_cloze',
+  'seven-choices-analysis-v1': 'seven_choices',
+}
+
+const ANALYSIS_SCHEMA_BY_GROUP_TYPE = Object.fromEntries(
+  Object.entries(GROUP_TYPE_BY_ANALYSIS_SCHEMA)
+    .map(([schemaVersion, groupType]) => [groupType, schemaVersion]),
+)
+
+/**
+ * Format one already-admitted objective Analysis entry for Teacher display.
+ * This is deliberately a pure display projection: it does not discover an
+ * owning paper, read files, or persist the result back into question data.
+ */
+export function formatObjectiveAnalysisText(schemaVersion, entry) {
+  const groupType = GROUP_TYPE_BY_ANALYSIS_SCHEMA[schemaVersion]
+  const formatter = FORMATTER_BY_GROUP_TYPE[groupType]
+  return formatter ? truncateAnalysisText(formatter(entry)) : ''
+}
+
 /**
  * Load one asset+analysis bundle for a paperId, caching per paperId so a
  * multi-item export session only reads each paper's analysis files once.
@@ -211,7 +234,10 @@ export function loadGroupAnalysisTexts(items, { paperAssetsDir }) {
     for (const question of detail.questions || []) {
       const entry = table[question.id]
       if (!entry) continue
-      const text = truncateAnalysisText(formatter(entry))
+      const text = formatObjectiveAnalysisText(
+        ANALYSIS_SCHEMA_BY_GROUP_TYPE[groupType],
+        entry,
+      )
       if (text) result.set(question.id, text)
     }
   }

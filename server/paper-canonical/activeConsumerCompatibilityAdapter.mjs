@@ -40,10 +40,10 @@ function safeVersionDir(rootDir, row) {
 }
 
 function isFormat2CompatibilityPublication(versionDir) {
-  return existsSync(path.join(
+  return [50, 49].some((version) => existsSync(path.join(
     versionDir,
-    'canonical/canonical-paper-publication-v49.json',
-  ))
+    `canonical/canonical-paper-publication-v${version}.json`,
+  )))
 }
 
 function validateCurrentPublicationRef(rootDir, row) {

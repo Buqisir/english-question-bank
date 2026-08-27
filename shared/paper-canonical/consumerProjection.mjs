@@ -1,7 +1,9 @@
 import {
   abcdPlacementSignature,
-  layoutAbcdOptionSet,
-  layoutFixedFourColumnClozeOptionSet,
+  layoutAbcdOptionSetV1,
+  layoutAbcdOptionSetV2,
+  layoutFixedFourColumnClozeOptionSetV1,
+  layoutFixedFourColumnClozeOptionSetV2,
 } from './abcdLayout.mjs'
 import {
   readingOptionFigureSourceLayoutSchemaAuthorityRef,
@@ -10,6 +12,7 @@ import {
 } from './authority.mjs'
 import {
   format2RichConsumerContractRefs,
+  legacyFormat2RichConsumerContractRefs,
   readingOptionFigureConsumerContractRefs,
   readingOptionFigureSourceLayoutExtension,
 } from './consumers.mjs'
@@ -54,16 +57,20 @@ function sameConsumerRef(left, right) {
     && left?.digest === right?.digest
 }
 
+function isCurrentFormat2ConsumerRef(ref) {
+  return Object.values(format2RichConsumerContractRefs).some(
+    (candidate) => sameConsumerRef(ref, candidate),
+  )
+}
+
 function projectFigureLayoutIntentRequirement(input, question) {
   const requirement = question?.figureLayoutIntentRequirement
   if (requirement == null) return null
-  const matchesVersionedConsumer = Object.values(
-    {
-      ...readingOptionFigureConsumerContractRefs,
-      format2Screen: format2RichConsumerContractRefs.screen,
-      format2PrintPdf: format2RichConsumerContractRefs.print_pdf,
-    },
-  ).some((ref) => sameConsumerRef(input.consumption?.consumerContractRef, ref))
+  const matchesVersionedConsumer = [
+    ...Object.values(readingOptionFigureConsumerContractRefs),
+    ...Object.values(legacyFormat2RichConsumerContractRefs),
+    ...Object.values(format2RichConsumerContractRefs),
+  ].some((ref) => sameConsumerRef(input.consumption?.consumerContractRef, ref))
   const renderingAuthority = resolveCanonicalAuthority(
     readingOptionFigureSourceLayoutSchemaAuthorityRef,
   )
@@ -418,6 +425,9 @@ function projectReadingConsumerGroup(input, occurrence) {
         readingOptionFigureConsumerContractRefs.print_pdf,
       ) || sameConsumerRef(
         input.consumption?.consumerContractRef,
+        legacyFormat2RichConsumerContractRefs.print_pdf,
+      ) || sameConsumerRef(
+        input.consumption?.consumerContractRef,
         format2RichConsumerContractRefs.print_pdf,
       )
       const options = question.options.map((option) => ({
@@ -454,7 +464,11 @@ function projectReadingConsumerGroup(input, occurrence) {
       text: textContent(option.content),
       content: structuredClone(option.content),
     }))
-    const layoutPlan = layoutAbcdOptionSet({
+    const layoutPlan = (
+      isCurrentFormat2ConsumerRef(input.consumption?.consumerContractRef)
+        ? layoutAbcdOptionSetV2
+        : layoutAbcdOptionSetV1
+    )({
       owner: 'question',
       questionId: question.questionId,
       options: question.options,
@@ -1446,11 +1460,18 @@ export function projectCanonicalConsumerGroup(input) {
           content: option.content,
         }))
       : []
+    const useCurrentFormat2Layout = isCurrentFormat2ConsumerRef(
+      input.consumption?.consumerContractRef,
+    )
     const layoutPlan = options.length === 0
       ? null
       : (familyContractId === 'cloze'
-          ? layoutFixedFourColumnClozeOptionSet
-          : layoutAbcdOptionSet)({
+          ? useCurrentFormat2Layout
+            ? layoutFixedFourColumnClozeOptionSetV2
+            : layoutFixedFourColumnClozeOptionSetV1
+          : useCurrentFormat2Layout
+            ? layoutAbcdOptionSetV2
+            : layoutAbcdOptionSetV1)({
           owner: 'question',
           questionId,
           options: choiceSet.options,

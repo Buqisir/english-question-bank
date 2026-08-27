@@ -99,11 +99,21 @@ export type AbcdRendererFontMaterial = {
 }
 
 export function layoutAbcdOptionSet(optionSet: AbcdOptionSet): AbcdLayoutResult
+export function layoutAbcdOptionSetV1(optionSet: AbcdOptionSet): AbcdLayoutResult
+export function layoutAbcdOptionSetV2(optionSet: AbcdOptionSet): AbcdLayoutResult
 export function layoutFixedFourColumnClozeOptionSet(
   optionSet: AbcdOptionSet,
 ): AbcdLayoutResult
+export function layoutFixedFourColumnClozeOptionSetV1(
+  optionSet: AbcdOptionSet,
+): AbcdLayoutResult
+export function layoutFixedFourColumnClozeOptionSetV2(
+  optionSet: AbcdOptionSet,
+): AbcdLayoutResult
 export function abcdPlacementSignature(plan: SelectedAbcdLayoutPlan): string
+export const expectedLegacyAbcdRendererFontClosure: AbcdRendererFontClosure
 export const expectedAbcdRendererFontClosure: AbcdRendererFontClosure
+export const expectedAbcdRendererFontClosureV2: AbcdRendererFontClosure
 export function resolveAbcdRendererFontClosure(
   candidate: AbcdRendererFontMaterial,
 ):

@@ -29,6 +29,13 @@ Canonical/consumer 身份并新增共享 Figure Option layout authority。v46/v4
 新近明确兼容的 Publication 与显式迁移的本地深圳 Q33 canary 使用；它们既不推进
 全局 accepted v36，也不推进或替代 `paper-2026-i` 当前 scoped v45。
 
+Format 2 rich Publication 的当前 scoped renderer successor 是
+[`manifest-v50.json`](../../standards/paper-canonical/manifest-v50.json)：它在不可变
+v49 闭包之上只新增 `times-compatible-metrics-v2`，并以 Screen v43、Print/PDF
+v44 绑定 exact-pinned `U+2082` glyph patch。既有 v49 Publication 仍由 Screen
+v41、Print/PDF v42 解析，不得因 v50 改写；迁移说明见
+[`manifest-v50-migration.md`](../../standards/paper-canonical/manifest-v50-migration.md)。
+
 机器 manifest 分别绑定 Core Invariants、NCK1 / Zhejiang legacy / national
 legacy Profiles、各 family contract、Normalization Rules、Source Adapters、
 Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、digest 不符、
@@ -303,7 +310,11 @@ v2（2026-07-08）取代 v1 文字版，并吸收双权威源实测数值与命�
 | 阅读篇章标题 A/B/C/D 及副标题 | Times New Roman Bold | 10.5pt(不放大),居中 |
 | 卷名「英 语」 | 中黑,字距拉开,居中 | 20pt |
 
-Web 字体栈映射(token 层):英文 `"Times New Roman", Times, serif`;
+Web 字体栈映射(token 层):英文 `"Times New Roman", Times, serif`。仅当 exact
+v50 authority 被消费时，renderer 才允许在该栈之前加入
+`"EQB Pinned Science v1"`；这个 face 的固定资产、digest 与
+`unicode-range: U+2082` 均由 `times-compatible-metrics-v2` 绑定，普通英文仍由
+Times 呈现。禁止使用裸系统 `"STIX Two Text"` 作为 authority fallback；
 中文正文接宋体族(`"SimSun", "Songti SC", "STSong"`),标题接黑体族。
 px 换算(A4=794px@96dpi):10.5pt ≈ 14px。
 

@@ -2,12 +2,15 @@ import screen from '../../standards/paper-canonical/consumers/screen-v37.json' w
 import printPdf from '../../standards/paper-canonical/consumers/print-pdf-v38.json' with { type: 'json' }
 import screenReadingOptionFigure from '../../standards/paper-canonical/consumers/screen-v39.json' with { type: 'json' }
 import printPdfReadingOptionFigure from '../../standards/paper-canonical/consumers/print-pdf-v40.json' with { type: 'json' }
-import screenFormat2Rich from '../../standards/paper-canonical/consumers/screen-v41.json' with { type: 'json' }
-import printPdfFormat2Rich from '../../standards/paper-canonical/consumers/print-pdf-v42.json' with { type: 'json' }
+import screenLegacyFormat2Rich from '../../standards/paper-canonical/consumers/screen-v41.json' with { type: 'json' }
+import printPdfLegacyFormat2Rich from '../../standards/paper-canonical/consumers/print-pdf-v42.json' with { type: 'json' }
+import screenFormat2Rich from '../../standards/paper-canonical/consumers/screen-v43.json' with { type: 'json' }
+import printPdfFormat2Rich from '../../standards/paper-canonical/consumers/print-pdf-v44.json' with { type: 'json' }
 
 import {
   canonicalAuthorityRef,
   format2RichCandidateAuthorityRef,
+  legacyFormat2RichAuthorityRef,
   readingOptionFigureAuthorityRef,
   readingOptionFigureSourceLayoutSchemaAuthorityRef,
   resolveCanonicalAuthority,
@@ -17,10 +20,12 @@ import { digestJson, withoutKey } from './stable.mjs'
 
 const contracts = [screen, printPdf]
 const readingOptionFigureContracts = [screenReadingOptionFigure, printPdfReadingOptionFigure]
+const legacyFormat2RichContracts = [screenLegacyFormat2Rich, printPdfLegacyFormat2Rich]
 const format2RichContracts = [screenFormat2Rich, printPdfFormat2Rich]
 const allContracts = [
   ...contracts,
   ...readingOptionFigureContracts,
+  ...legacyFormat2RichContracts,
   ...format2RichContracts,
 ]
 const byRef = new Map(allContracts.map((contract) => [
@@ -33,9 +38,11 @@ function validateContract(contract) {
     ? canonicalAuthorityRef
     : contract.authorityManifestDigest === readingOptionFigureAuthorityRef.manifestDigest
       ? readingOptionFigureAuthorityRef
-      : contract.authorityManifestDigest === format2RichCandidateAuthorityRef.manifestDigest
-        ? format2RichCandidateAuthorityRef
-        : null
+      : contract.authorityManifestDigest === legacyFormat2RichAuthorityRef.manifestDigest
+        ? legacyFormat2RichAuthorityRef
+        : contract.authorityManifestDigest === format2RichCandidateAuthorityRef.manifestDigest
+          ? format2RichCandidateAuthorityRef
+          : null
   const authority = resolveCanonicalAuthority(authorityRef)
   if (!authority.ok) return [{ code: 'CONSUMER_AUTHORITY_MISMATCH' }]
   const sourceLayoutSchemaAuthority = resolveCanonicalAuthority(
@@ -108,6 +115,7 @@ for (const contract of allContracts) {
 
 export const consumerContractRefs = Object.freeze(Object.fromEntries(contracts.map((contract) => [contract.consumerId, Object.freeze({ id: contract.consumerId, version: contract.version, digest: contract.contractDigest })])))
 export const readingOptionFigureConsumerContractRefs = Object.freeze(Object.fromEntries(readingOptionFigureContracts.map((contract) => [contract.consumerId, Object.freeze({ id: contract.consumerId, version: contract.version, digest: contract.contractDigest })])))
+export const legacyFormat2RichConsumerContractRefs = Object.freeze(Object.fromEntries(legacyFormat2RichContracts.map((contract) => [contract.consumerId, Object.freeze({ id: contract.consumerId, version: contract.version, digest: contract.contractDigest })])))
 export const format2RichConsumerContractRefs = Object.freeze(Object.fromEntries(format2RichContracts.map((contract) => [contract.consumerId, Object.freeze({ id: contract.consumerId, version: contract.version, digest: contract.contractDigest })])))
 const sourceLayoutExtension = screenReadingOptionFigure.renderingExtensions[0]
 if (
