@@ -18,8 +18,16 @@ Historical cuts are evidence, not current instructions.
 
 ## Work proportionately
 
+- The owner defines the desired outcome, acceptance result, and explicit
+  non-goals. The agent inspects the affected code, classifies the technical
+  risk, and chooses the lightest safe implementation and verification path;
+  do not ask the owner to choose engineering ceremony or a risk lane.
 - Clear, reversible work stays in the current task: understand, change, run the
   affected checks, review the diff, and commit when requested.
+- Uncertainty starts as ordinary, reversible work while the blast radius is
+  being established; it does not become high risk merely because code is
+  unfamiliar, spans several files, or has historical complexity. Escalate only
+  when inspection finds a concrete high-risk seam.
 - Use a tracked spec and tickets only when the work genuinely needs more than
   one context. Use Wayfinder only when the route to a spec is genuinely foggy.
 - Do not create governance-only tasks, approvals, publication/recovery stages,
@@ -32,8 +40,11 @@ Historical cuts are evidence, not current instructions.
 ## Verify the changed risk
 
 Run the narrowest public-seam checks that exercise the changed behavior and its
-direct consumers. These routes are deterministic; unknown scope falls back to
-the full suite.
+direct consumers. Inspect the affected code before choosing the verification
+weight. Uncertainty does not automatically require the full suite: use focused,
+reversible checks while establishing the blast radius. Run the full suite only
+for a final high-risk candidate or when the blast radius genuinely remains
+unknown after inspection, and state the reason.
 
 | Change | During work | Final gate |
 | --- | --- | --- |
