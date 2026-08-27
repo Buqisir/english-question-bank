@@ -91,6 +91,80 @@ function projectFigureLayoutIntentRequirement(input, question) {
   return structuredClone(requirement)
 }
 
+function createOccurrenceMediaResolver({
+  input,
+  mediaItems,
+  groupId,
+  groupLabel,
+}) {
+  const mediaById = new Map()
+  for (const media of mediaItems) {
+    if (
+      !media
+      || typeof media.mediaId !== 'string'
+      || typeof media.sha256 !== 'string'
+      || typeof media.mimeType !== 'string'
+      || !Number.isInteger(media.pixelWidth)
+      || !Number.isInteger(media.pixelHeight)
+      || typeof media.sourceArtifactRef?.artifactId !== 'string'
+      || mediaById.has(media.mediaId)
+    ) {
+      throw rejected(`Canonical ${groupLabel} occurrence ${groupId} has invalid media closure`)
+    }
+    mediaById.set(media.mediaId, media)
+  }
+  const mediaArtifactsById = new Map()
+  for (const artifact of input.consumption.mediaArtifacts || []) {
+    if (
+      typeof artifact?.mediaId !== 'string'
+      || mediaArtifactsById.has(artifact.mediaId)
+    ) {
+      throw rejected(`Canonical ${groupLabel} occurrence ${groupId} has ambiguous media artifacts`)
+    }
+    mediaArtifactsById.set(artifact.mediaId, artifact)
+  }
+
+  const seenMediaIds = new Set()
+  const resolveMedia = (mediaId, { requirePng = false } = {}) => {
+    const media = mediaById.get(mediaId)
+    const artifact = mediaArtifactsById.get(mediaId)
+    const mediaBytes = decodeCanonicalBase64(artifact?.encodedBytes)
+    const png = media?.mimeType === 'image/png' ? inspectPng(mediaBytes) : null
+    if (
+      !media
+      || seenMediaIds.has(mediaId)
+      || !artifact
+      || artifact.mimeType !== media.mimeType
+      || artifact.sha256 !== media.sha256
+      || artifact.pixelWidth !== media.pixelWidth
+      || artifact.pixelHeight !== media.pixelHeight
+      || artifact.sourceArtifactRef?.artifactId
+        !== media.sourceArtifactRef.artifactId
+      || !mediaBytes
+      || sha256(mediaBytes) !== media.sha256
+      || (requirePng && media.mimeType !== 'image/png')
+      || (media.mimeType === 'image/png' && (
+        !png
+        || png.width !== media.pixelWidth
+        || png.height !== media.pixelHeight
+      ))
+    ) {
+      throw rejected(`Canonical ${groupLabel} occurrence ${groupId} has unresolved Figure media`)
+    }
+    seenMediaIds.add(mediaId)
+    return {
+      media: structuredClone(media),
+      mediaArtifact: structuredClone(artifact),
+    }
+  }
+  const assertEveryMediaPlaced = () => {
+    if (seenMediaIds.size !== mediaById.size) {
+      throw rejected(`Canonical ${groupLabel} occurrence ${groupId} does not place every media item exactly once`)
+    }
+  }
+  return { resolveMedia, assertEveryMediaPlaced }
+}
+
 function projectReadingConsumerGroup(input, occurrence) {
   const { groupId } = input
   const passageLetter = readingPassageLetterBySlotId[occurrence.slotId]
@@ -126,62 +200,13 @@ function projectReadingConsumerGroup(input, occurrence) {
     rolesByNodeId.set(entry.nodeId, entry.role)
   }
 
-  const mediaById = new Map()
-  for (const media of occurrence.media) {
-    if (
-      !media
-      || typeof media.mediaId !== 'string'
-      || typeof media.sha256 !== 'string'
-      || typeof media.mimeType !== 'string'
-      || !Number.isInteger(media.pixelWidth)
-      || !Number.isInteger(media.pixelHeight)
-      || typeof media.sourceArtifactRef?.artifactId !== 'string'
-      || mediaById.has(media.mediaId)
-    ) {
-      throw rejected(`Canonical Reading occurrence ${groupId} has invalid media closure`)
-    }
-    mediaById.set(media.mediaId, media)
-  }
-  const mediaArtifactsById = new Map()
-  for (const artifact of input.consumption.mediaArtifacts || []) {
-    if (typeof artifact?.mediaId !== 'string' || mediaArtifactsById.has(artifact.mediaId)) {
-      throw rejected(`Canonical Reading occurrence ${groupId} has ambiguous media artifacts`)
-    }
-    mediaArtifactsById.set(artifact.mediaId, artifact)
-  }
-
-  const seenMediaIds = new Set()
-  const resolveReadingMedia = (mediaId, { requirePng = false } = {}) => {
-    const media = mediaById.get(mediaId)
-    const artifact = mediaArtifactsById.get(mediaId)
-    const mediaBytes = decodeCanonicalBase64(artifact?.encodedBytes)
-    const png = media?.mimeType === 'image/png' ? inspectPng(mediaBytes) : null
-    if (
-      !media
-      || seenMediaIds.has(mediaId)
-      || !artifact
-      || artifact.mimeType !== media.mimeType
-      || artifact.sha256 !== media.sha256
-      || artifact.pixelWidth !== media.pixelWidth
-      || artifact.pixelHeight !== media.pixelHeight
-      || artifact.sourceArtifactRef?.artifactId !== media.sourceArtifactRef.artifactId
-      || !mediaBytes
-      || sha256(mediaBytes) !== media.sha256
-      || (requirePng && media.mimeType !== 'image/png')
-      || (media.mimeType === 'image/png' && (
-        !png
-        || png.width !== media.pixelWidth
-        || png.height !== media.pixelHeight
-      ))
-    ) {
-      throw rejected(`Canonical Reading occurrence ${groupId} has unresolved Figure media`)
-    }
-    seenMediaIds.add(mediaId)
-    return {
-      media: structuredClone(media),
-      mediaArtifact: structuredClone(artifact),
-    }
-  }
+  const readingMedia = createOccurrenceMediaResolver({
+    input,
+    mediaItems: occurrence.media,
+    groupId,
+    groupLabel: 'Reading',
+  })
+  const resolveReadingMedia = readingMedia.resolveMedia
   const projectReadingParagraph = (block) => ({
     kind: 'paragraph',
     nodeId: block.nodeId,
@@ -448,9 +473,7 @@ function projectReadingConsumerGroup(input, occurrence) {
       placementSignature: abcdPlacementSignature(layoutPlan),
     }
   })
-  if (seenMediaIds.size !== mediaById.size) {
-    throw rejected(`Canonical Reading occurrence ${groupId} does not place every media item exactly once`)
-  }
+  readingMedia.assertEveryMediaPlaced()
 
   const collectOccurrenceContentNodeIds = (block) => {
     const identities = [block.nodeId]
@@ -737,6 +760,7 @@ function projectApplicationWritingConsumerGroup(input, occurrence) {
     || !Array.isArray(occurrence.content?.blocks)
     || !Array.isArray(occurrence.prompt?.blocks)
     || occurrence.prompt.blocks.length === 0
+    || occurrence.media != null && !Array.isArray(occurrence.media)
     || typeof occurrence.writingTaskId !== 'string'
     || typeof occurrence.answerRegion?.answerRegionRef !== 'string'
     || typeof occurrence.answerRegion?.responseSlotId !== 'string'
@@ -751,15 +775,27 @@ function projectApplicationWritingConsumerGroup(input, occurrence) {
   const contentById = new Map()
   for (const block of occurrence.content.blocks) {
     if (
-      block?.kind !== 'paragraph'
+      !['paragraph', 'figure'].includes(block?.kind)
       || typeof block.nodeId !== 'string'
-      || !Array.isArray(block.inlines)
+      || (
+        block.kind === 'paragraph'
+          ? !Array.isArray(block.inlines)
+          : typeof block.mediaId !== 'string'
+            || !Array.isArray(block.caption)
+      )
       || contentById.has(block.nodeId)
     ) {
       throw rejected(`Canonical Application Writing occurrence ${groupId} has invalid content`)
     }
     contentById.set(block.nodeId, block)
   }
+
+  const applicationMedia = createOccurrenceMediaResolver({
+    input,
+    mediaItems: occurrence.media || [],
+    groupId,
+    groupLabel: 'Application Writing',
+  })
 
   const promptBlocks = occurrence.prompt.blocks.map((block) => {
     if (
@@ -768,6 +804,16 @@ function projectApplicationWritingConsumerGroup(input, occurrence) {
       && digestJson(contentById.get(block.nodeId)) !== digestJson(block)
     ) {
       throw rejected(`Canonical Application Writing occurrence ${groupId} has invalid prompt ownership`)
+    }
+    if (block.kind === 'figure') {
+      return {
+        kind: 'figure',
+        nodeId: block.nodeId,
+        mediaId: block.mediaId,
+        ...applicationMedia.resolveMedia(block.mediaId, { requirePng: true }),
+        caption: textContent(block.caption),
+        captionInlines: structuredClone(block.caption),
+      }
     }
     return {
       nodeId: block.nodeId,
@@ -782,6 +828,11 @@ function projectApplicationWritingConsumerGroup(input, occurrence) {
   const seenGivenPartIds = new Set()
   const seenGivenBlockRefs = new Set()
   const promptBlockIds = new Set(promptBlocks.map((block) => block.nodeId))
+  if ([...contentById.values()].some(
+    (block) => block.kind === 'figure' && !promptBlockIds.has(block.nodeId),
+  )) {
+    throw rejected(`Canonical Application Writing occurrence ${groupId} has unowned Figure content`)
+  }
   const roleOrder = new Map([
     ['title', 0],
     ['salutation', 1],
@@ -804,6 +855,7 @@ function projectApplicationWritingConsumerGroup(input, occurrence) {
           : !['closing', 'signature'].includes(part.role)
       )
       || !block
+      || block.kind !== 'paragraph'
       || seenGivenPartIds.has(part.givenPartId)
       || seenGivenBlockRefs.has(part.blockRef)
       || promptBlockIds.has(part.blockRef)
@@ -834,7 +886,8 @@ function projectApplicationWritingConsumerGroup(input, occurrence) {
   const anchors = occurrence.anchors
   const contentNodeIds = occurrence.content.blocks.flatMap((block) => [
     block.nodeId,
-    ...block.inlines.map((inline) => inline.nodeId),
+    ...(block.kind === 'figure' ? block.caption : block.inlines)
+      .map((inline) => inline.nodeId),
   ])
   if (
     !anchors
@@ -848,6 +901,7 @@ function projectApplicationWritingConsumerGroup(input, occurrence) {
   ) {
     throw rejected(`Canonical Application Writing occurrence ${groupId} has invalid anchors`)
   }
+  applicationMedia.assertEveryMediaPlaced()
 
   const answerRegion = {
     answerRegionRef: occurrence.answerRegion.answerRegionRef,

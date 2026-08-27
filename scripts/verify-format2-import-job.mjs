@@ -30,6 +30,7 @@ import {
   readingOptionFigureAuthorityRef,
 } from '../shared/paper-canonical/authority.mjs'
 import {
+  compileConfirmedFormat2RichPaper,
   compileConfirmedReadingOptionFigurePaper,
 } from '../shared/paper-canonical/compiler.mjs'
 import { readingOptionFigureConsumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
@@ -681,8 +682,8 @@ function upgradeFixtureToTranscriptionV3(input, { listeningGroup = null } = {}) 
   return input
 }
 
-function upgradeFixtureToTranscriptionV4(input) {
-  upgradeFixtureToTranscriptionV3(input)
+function upgradeFixtureToTranscriptionV4(input, options = {}) {
+  upgradeFixtureToTranscriptionV3(input, options)
   const transcription = input.transcription
   transcription.schemaVersion = 'format2-transcription-v4'
   const readingA = transcription.groups.find(
@@ -867,6 +868,25 @@ function upgradeFixtureToTranscriptionV4(input) {
     sourceRegionRefs: [...captionBlock.sourceRegionRefs],
   }
   return input
+}
+
+function movePassageFigureToGroup(transcription, targetGroupType, targetIndex = 0) {
+  const visual = transcription.visuals.find((candidate) => candidate.owner.kind === 'passage')
+  const sourceGroup = transcription.groups.find((group) => group.blocks.some(
+    (block) => block.kind === 'visual_placeholder'
+      && block.visualObservationId === visual.observationId,
+  ))
+  const sourceIndex = sourceGroup.blocks.findIndex(
+    (block) => block.kind === 'visual_placeholder'
+      && block.visualObservationId === visual.observationId,
+  )
+  const [placeholder] = sourceGroup.blocks.splice(sourceIndex, 1)
+  const targetGroup = transcription.groups.find(
+    (group) => group.groupType === targetGroupType,
+  )
+  targetGroup.blocks.splice(targetIndex, 0, placeholder)
+  visual.owner.groupId = targetGroup.groupId
+  return { placeholder, targetGroup, visual }
 }
 
 function v4FailureCase(mutator, code, diagnosticCode = code) {
@@ -3289,6 +3309,160 @@ assert.equal(
   stablePassageMediaId,
   'publication preserves an accepted predecessor media identity without renaming it',
 )
+const applicationFigureV4 = freshFixture('v4-application-figure-')
+upgradeFixtureToTranscriptionV4(applicationFigureV4.fixture.input)
+const applicationFigureMove = movePassageFigureToGroup(
+  applicationFigureV4.fixture.input.transcription,
+  'application_writing',
+)
+const applicationFigurePlaceholderRegionId =
+  'source-region:group:application:prompt-figure-placeholder'
+const applicationFigureSource = applicationFigureMove.visual.source
+applicationFigureV4.fixture.input.transcription.sourceRegions.push({
+  sourceRegionId: applicationFigurePlaceholderRegionId,
+  documentRole: 'question_pdf',
+  page: applicationFigureSource.page,
+  region: {
+    x: applicationFigureSource.pointGeometry.x
+      / applicationFigureSource.pageSizePoints.width,
+    y: applicationFigureSource.pointGeometry.y
+      / applicationFigureSource.pageSizePoints.height,
+    width: applicationFigureSource.pointGeometry.width
+      / applicationFigureSource.pageSizePoints.width,
+    height: applicationFigureSource.pointGeometry.height
+      / applicationFigureSource.pageSizePoints.height,
+  },
+})
+applicationFigureMove.placeholder.sourceRegionRefs = [
+  applicationFigurePlaceholderRegionId,
+]
+applicationFigureMove.placeholder.captionProvision.sourceRegionRefs = [
+  applicationFigurePlaceholderRegionId,
+]
+const stableApplicationFigureMediaId = 'fig-accepted-application-prompt-media'
+applicationFigureMove.visual.stableIdentities = {
+  canonicalMediaId: stableApplicationFigureMediaId,
+  sourceSpanId: `source-span:${applicationFigureMove.visual.observationId}`,
+}
+const applicationFigureStarted = run(
+  applicationFigureV4.repositoryRoot,
+  applicationFigureV4.fixture.input,
+)
+assert.equal(
+  applicationFigureStarted.lifecycle,
+  'importing',
+  JSON.stringify(applicationFigureStarted.diagnostics),
+)
+const applicationFigureCandidate = JSON.parse(readFileSync(
+  artifactPath(
+    applicationFigureV4.repositoryRoot,
+    applicationFigureStarted,
+    'candidatePackage',
+  ),
+  'utf8',
+))
+assert.deepEqual(
+  applicationFigureCandidate.observations.find(
+    (observation) => observation.observationId === applicationFigureMove.visual.observationId,
+  ).owner,
+  { kind: 'passage', groupId: applicationFigureMove.targetGroup.groupId },
+  'the public Job admits one existing Passage owner for the Application prompt Figure',
+)
+const applicationFigureConfirmedSelection = confirmVisualImportCandidate(
+  applicationFigureCandidate,
+  exactConfirmation(applicationFigureCandidate),
+)
+const applicationFigurePrepared = buildConfirmedFormat2CanonicalRequest({
+  transcription: applicationFigureV4.fixture.input.transcription,
+  questionPdfBytes: applicationFigureV4.fixture.questionPdfBytes,
+  answerPdfBytes: applicationFigureV4.fixture.answerPdfBytes,
+  confirmedSelection: applicationFigureConfirmedSelection,
+})
+const missingApplicationFigureSelection = structuredClone(
+  applicationFigureConfirmedSelection,
+)
+missingApplicationFigureSelection.confirmedSelections =
+  missingApplicationFigureSelection.confirmedSelections.filter(
+    (selection) => selection.observationId !== applicationFigureMove.visual.observationId,
+  )
+const missingApplicationFigureCompilation = compileConfirmedFormat2RichPaper(
+  applicationFigurePrepared.request,
+  missingApplicationFigureSelection,
+)
+assert.equal(
+  Object.hasOwn(missingApplicationFigureCompilation.artifacts, 'canonicalPaper'),
+  false,
+  'compiler closure publishes no Canonical Paper when the Application Figure selection is missing',
+)
+assert.ok(
+  missingApplicationFigureCompilation.artifacts.normalizationReport.diagnostics.some(
+    (diagnostic) => diagnostic.code
+      === 'READING_OPTION_FIGURE_CONFIRMATION_CLOSURE_INVALID',
+  ),
+)
+const applicationFigureCompleted = resume(applicationFigureV4.repositoryRoot, {
+  paperId: applicationFigureV4.fixture.input.paperId,
+  jobId: applicationFigureStarted.jobId,
+  teacherConfirmation: exactConfirmation(applicationFigureCandidate),
+})
+assert.equal(
+  applicationFigureCompleted.lifecycle,
+  'awaiting_qa',
+  JSON.stringify(applicationFigureCompleted.diagnostics),
+)
+const applicationFigureGroups = JSON.parse(readFileSync(path.join(
+  applicationFigureV4.repositoryRoot,
+  'app/public/paper-assets',
+  applicationFigureV4.fixture.input.paperId,
+  'versions',
+  applicationFigureCompleted.canonicalPublication.versionName,
+  'canonical/canonical-question-groups-v1.json',
+), 'utf8')).groups
+const canonicalApplicationFigureGroup = applicationFigureGroups.find(
+  (group) => group.variant.family === 'application-writing',
+)
+const canonicalApplicationPromptBlocks = canonicalApplicationFigureGroup.variant.promptBlockRefs
+  .map((blockId) => canonicalApplicationFigureGroup.content.blocks.find(
+    (block) => block.nodeId === blockId,
+  ))
+assert.deepEqual(
+  canonicalApplicationPromptBlocks.map((block) => block.kind),
+  ['figure', 'paragraph', 'paragraph'],
+  'Application prompt refs retain the source Figure-before-text block order',
+)
+assert.equal(
+  canonicalApplicationPromptBlocks[0].mediaId,
+  stableApplicationFigureMediaId,
+  'the Application prompt Figure retains its confirmed stable media identity',
+)
+assert.equal(
+  canonicalApplicationFigureGroup.media.find(
+    (media) => media.mediaId === stableApplicationFigureMediaId,
+  ).sha256,
+  applicationFigureCandidate.candidates.find(
+    (candidate) => candidate.observationId === applicationFigureMove.visual.observationId,
+  ).artifact.sha256,
+  'Canonical Application media closes the exact confirmed PNG bytes',
+)
+const applicationFigureSourceMap = canonicalApplicationFigureGroup.sourceMap.entries
+assert.deepEqual(
+  applicationFigureSourceMap.find((entry) => (
+    entry.target.kind === 'media'
+    && entry.target.id === stableApplicationFigureMediaId
+  )).sourceSpanRefs,
+  [applicationFigureMove.visual.stableIdentities.sourceSpanId],
+  'Application media maps to the exact confirmed visual source span',
+)
+assert.deepEqual(
+  applicationFigureSourceMap.find((entry) => (
+    entry.target.kind === 'content_node'
+    && entry.target.id === canonicalApplicationPromptBlocks[0].nodeId
+  )).sourceSpanRefs,
+  [
+    `source-span:observation:format2-source-region:${applicationFigurePlaceholderRegionId}`,
+  ],
+  'Application Figure content maps to the exact placeholder source region',
+)
 const transcriptionV4VersionDir = path.join(
   transcriptionV4.repositoryRoot,
   'app/public/paper-assets',
@@ -3732,6 +3906,33 @@ v4FailureCase(
   },
   'FORMAT2_TRANSCRIPTION_SCHEMA_INVALID',
 )
+v4FailureCase(
+  (input) => {
+    movePassageFigureToGroup(input.transcription, 'continuation_writing', 1)
+  },
+  'FORMAT2_TRANSCRIPTION_INVALID',
+  'FORMAT2_VISUAL_OWNER_UNSUPPORTED',
+)
+const listeningFigureV4 = freshFixture('v4-listening-figure-negative-')
+const listeningFigureGroup = structuredClone(
+  listeningFigureV4.fixture.input.transcription.groups.find(
+    (group) => group.groupType === 'listening',
+  ),
+)
+upgradeFixtureToTranscriptionV4(
+  listeningFigureV4.fixture.input,
+  { listeningGroup: listeningFigureGroup },
+)
+movePassageFigureToGroup(
+  listeningFigureV4.fixture.input.transcription,
+  'listening',
+  1,
+)
+assertFailed(
+  run(listeningFigureV4.repositoryRoot, listeningFigureV4.fixture.input),
+  'FORMAT2_TRANSCRIPTION_INVALID',
+  'FORMAT2_VISUAL_OWNER_UNSUPPORTED',
+)
 
 const transcriptionV3Successor = freshFixture('v3-source-fidelity-successor-')
 upgradeFixtureToTranscriptionV3(transcriptionV3Successor.fixture.input)
@@ -3926,6 +4127,12 @@ v3FailureCase(
     ).blocks[0].applicationEvidence.sourceRegionRefs = ['source-region:missing']
   },
   'FORMAT2_SOURCE_REGION_REFERENCE_INVALID',
+)
+v3FailureCase(
+  (input) => {
+    movePassageFigureToGroup(input.transcription, 'application_writing')
+  },
+  'FORMAT2_VISUAL_OWNER_UNSUPPORTED',
 )
 v3FailureCase(
   (input) => {

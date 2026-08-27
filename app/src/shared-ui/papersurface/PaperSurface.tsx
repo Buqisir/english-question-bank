@@ -65,6 +65,7 @@ import type {
 } from '../../../../shared/papersurface/types'
 import type {
   CanonicalSurfaceParagraph,
+  CanonicalApplicationWritingPromptBlock,
   CanonicalReadingSurfaceBlock,
   CanonicalReadingSurfaceColumnChildBlock,
   CanonicalReadingSurfaceParagraphBlock,
@@ -170,20 +171,7 @@ type PaperSurfaceComponentProps = Omit<PaperSurfaceProps, 'blankFocusMode'> & {
   /** Optional fixture-backed visible bank heading; production source may omit it. */
   readonly optionBankHeading?: string
   /** Ordered canonical Application Writing prompt rendered without legacy inference. */
-  readonly canonicalApplicationPromptBlocks?: ReadonlyArray<{
-    readonly nodeId: string
-    readonly inlines: ReadonlyArray<{
-      readonly nodeId: string
-      readonly text: string
-    }>
-    readonly figure?: {
-      readonly kind: 'figure'
-      readonly src: string
-      readonly alt: string
-    } | {
-      readonly kind: 'placeholder'
-    }
-  }>
+  readonly canonicalApplicationPromptBlocks?: ReadonlyArray<CanonicalApplicationWritingPromptBlock>
   /** Ordered canonical Continuation Writing material rendered without legacy parsing. */
   readonly canonicalContinuationMaterialBlocks?: ReadonlyArray<{
     readonly nodeId: string
@@ -492,13 +480,7 @@ function CanonicalContinuationWritingMaterial({
 function CanonicalApplicationWritingPrompt({
   blocks,
 }: {
-  blocks: ReadonlyArray<{
-    readonly nodeId: string
-    readonly inlines: ReadonlyArray<{
-      readonly nodeId: string
-      readonly text: string
-    }>
-  }>
+  blocks: ReadonlyArray<CanonicalApplicationWritingPromptBlock>
 }): ReactNode {
   return (
     <div
@@ -506,6 +488,40 @@ function CanonicalApplicationWritingPrompt({
       data-canonical-application-prompt=""
     >
       {blocks.map((block) => {
+        if (block.kind === 'figure') {
+          const src =
+            `data:${block.mediaArtifact.mimeType};base64,`
+            + block.mediaArtifact.encodedBytes
+          return (
+            <figure
+              key={block.nodeId}
+              className="ps-canonical-reading-figure ps-canonical-application-prompt-figure"
+              data-canonical-block-id={block.nodeId}
+              data-canonical-block-kind="figure"
+              data-canonical-media-id={block.mediaId}
+              data-canonical-media-sha256={block.mediaArtifact.sha256}
+            >
+              <img
+                src={src}
+                alt=""
+                width={block.mediaArtifact.pixelWidth}
+                height={block.mediaArtifact.pixelHeight}
+              />
+              {block.captionInlines.length > 0 && (
+                <figcaption>
+                  {block.captionInlines.map((inline) => (
+                    <span
+                      key={inline.nodeId}
+                      data-canonical-content-node-id={inline.nodeId}
+                    >
+                      {inline.text}
+                    </span>
+                  ))}
+                </figcaption>
+              )}
+            </figure>
+          )
+        }
         const noticeLines = block.inlines.length === 1
           ? applicationWritingNoticeLines(block.inlines[0].text)
           : null

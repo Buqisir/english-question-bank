@@ -2421,30 +2421,47 @@ function confirmedReadingOptionFigureIssues(
   }
   const expected = []
   for (const group of source.groups || []) {
-    if (group.family !== 'reading') continue
     const mediaById = new Map((group.media || []).map((item) => [item.mediaId, item]))
-    for (const set of group.variant?.choiceOwnership?.sets || []) {
-      for (const option of set.options || []) {
-        if (!isRecordValue(option?.figure)) continue
-        expected.push({
-          group,
-          questionId: set.questionId,
-          option,
-          media: mediaById.get(option.figure.mediaId),
-          owner: {
-            kind: 'reading_option',
-            groupId: group.groupId,
+    if (group.family === 'reading') {
+      for (const set of group.variant?.choiceOwnership?.sets || []) {
+        for (const option of set.options || []) {
+          if (!isRecordValue(option?.figure)) continue
+          expected.push({
+            group,
             questionId: set.questionId,
-            optionId: option.optionId,
-          },
-        })
+            option,
+            media: mediaById.get(option.figure.mediaId),
+            owner: {
+              kind: 'reading_option',
+              groupId: group.groupId,
+              questionId: set.questionId,
+              optionId: option.optionId,
+            },
+          })
+        }
       }
+      if (includePassageFigures) {
+        for (const mediaId of passageFigureMediaIds(group.content)) {
+          expected.push({
+            group,
+            media: mediaById.get(mediaId),
+            owner: { kind: 'passage', groupId: group.groupId },
+          })
+        }
+      }
+      continue
     }
-    if (includePassageFigures) {
-      for (const mediaId of passageFigureMediaIds(group.content)) {
+    if (includePassageFigures && group.family === 'application-writing') {
+      const promptBlockIds = new Set(group.variant?.promptBlockRefs || [])
+      for (const block of group.content?.blocks || []) {
+        if (
+          block?.kind !== 'figure'
+          || !promptBlockIds.has(block.nodeId)
+          || typeof block.mediaId !== 'string'
+        ) continue
         expected.push({
           group,
-          media: mediaById.get(mediaId),
+          media: mediaById.get(block.mediaId),
           owner: { kind: 'passage', groupId: group.groupId },
         })
       }
@@ -2454,7 +2471,7 @@ function confirmedReadingOptionFigureIssues(
     (!includePassageFigures && expected.length === 0)
     || selection.confirmedSelections.length !== expected.length
   ) {
-    diagnostics.push(diagnostic('READING_OPTION_FIGURE_CONFIRMATION_CLOSURE_INVALID', 'incomplete_source', '$.confirmedVisualSelection.confirmedSelections', 'Confirmed selection must close every and only Reading Figure Option'))
+    diagnostics.push(diagnostic('READING_OPTION_FIGURE_CONFIRMATION_CLOSURE_INVALID', 'incomplete_source', '$.confirmedVisualSelection.confirmedSelections', 'Confirmed selection must close every and only admitted Reading or Application prompt Figure'))
     return diagnostics
   }
   const documentsByArtifact = new Map(capture.documents.map((document) => [

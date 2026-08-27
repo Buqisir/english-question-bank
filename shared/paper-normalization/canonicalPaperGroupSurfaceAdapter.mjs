@@ -485,21 +485,23 @@ export function buildCanonicalApplicationWritingConsumptionSurfaceData({
       }],
     })),
   ]
-  const paragraphs = promptBlocks.map((block) => {
-    const segmented = segmentPaperText(block.text, {
-      sectionId: block.nodeId,
-    }).paragraphs[0]
-    if (!segmented) {
-      throw new Error(
-        `Canonical Application Writing prompt ${block.nodeId} has no visible text`,
-      )
-    }
-    return {
-      id: block.nodeId,
-      section: canonicalGroup.groupId,
-      sentences: segmented.sentences,
-    }
-  })
+  const paragraphs = promptBlocks
+    .filter((block) => block.kind !== 'figure')
+    .map((block) => {
+      const segmented = segmentPaperText(block.text, {
+        sectionId: block.nodeId,
+      }).paragraphs[0]
+      if (!segmented) {
+        throw new Error(
+          `Canonical Application Writing prompt ${block.nodeId} has no visible text`,
+        )
+      }
+      return {
+        id: block.nodeId,
+        section: canonicalGroup.groupId,
+        sentences: segmented.sentences,
+      }
+    })
   const answerBox = {
     kind: 'answerBox',
     label: canonicalGroup.writingMode === 'legacy_opaque' ? '写作答题区' : '应用文写作答题区',

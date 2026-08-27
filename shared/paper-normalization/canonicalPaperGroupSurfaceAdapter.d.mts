@@ -215,6 +215,7 @@ export type CanonicalApplicationWritingGivenPart = {
 }
 
 export type CanonicalWritingSourceBlock = {
+  readonly kind?: 'paragraph'
   readonly nodeId: string
   readonly text: string
   readonly inlines: ReadonlyArray<{
@@ -223,6 +224,39 @@ export type CanonicalWritingSourceBlock = {
     readonly text: string
   }>
 }
+
+export type CanonicalApplicationWritingPromptFigureBlock = {
+  readonly kind: 'figure'
+  readonly nodeId: string
+  readonly mediaId: string
+  readonly caption: string
+  readonly captionInlines: ReadonlyArray<{
+    readonly kind: 'text'
+    readonly nodeId: string
+    readonly text: string
+  }>
+  readonly media: {
+    readonly mediaId: string
+    readonly mimeType: string
+    readonly sha256: string
+    readonly pixelWidth: number
+    readonly pixelHeight: number
+    readonly sourceArtifactRef: { readonly artifactId: string }
+  }
+  readonly mediaArtifact: {
+    readonly mediaId: string
+    readonly mimeType: string
+    readonly sha256: string
+    readonly pixelWidth: number
+    readonly pixelHeight: number
+    readonly sourceArtifactRef: { readonly artifactId: string }
+    readonly encodedBytes: string
+  }
+}
+
+export type CanonicalApplicationWritingPromptBlock =
+  | CanonicalWritingSourceBlock
+  | CanonicalApplicationWritingPromptFigureBlock
 
 export type CanonicalWritingChromePrelude =
   | { readonly kind: 'passage' }
@@ -268,7 +302,7 @@ type CanonicalApplicationWritingSurfaceCommon = {
   readonly semanticDigest: string
   readonly occurrenceSignature: string
   readonly anchors: Record<string, ReadonlyArray<string> | string>
-  readonly promptBlocks: ReadonlyArray<CanonicalWritingSourceBlock>
+  readonly promptBlocks: ReadonlyArray<CanonicalApplicationWritingPromptBlock>
   readonly surfaceData: {
     readonly textMap: PaperTextMap
     readonly questions: ReadonlyArray<PaperQuestion>
