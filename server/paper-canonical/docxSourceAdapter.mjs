@@ -111,6 +111,22 @@ function decodeXml(value) {
     .replaceAll('&amp;', '&')
 }
 
+function extractXmlText(xml) {
+  return decodeXml(
+    String(xml || '')
+      .replace(/<w:tab\b[^>]*\/?\s*>/g, '\t')
+      .replace(/<w:(?:br|cr)\b[^>]*\/?\s*>/g, '\n')
+      .replace(/<\/w:p>/g, '\n')
+      .replace(/<[^>]+>/g, ''),
+  )
+}
+
+function xmlElements(xml, tag) {
+  return [...String(xml || '').matchAll(
+    new RegExp(`<w:${tag}(?:\\s[^>]*)?>[\\s\\S]*?<\\/w:${tag}>`, 'g'),
+  )].map((match) => match[0])
+}
+
 /**
  * Extract the textual body from one immutable DOCX without using a platform
  * converter. This intentionally preserves paragraph and hard-break boundaries
@@ -121,13 +137,7 @@ export function extractDocxDocumentText(docxBytes) {
     throw new TypeError('DOCX text extraction requires immutable DOCX bytes')
   }
   const xml = readDocxPackage(docxBytes).documentXml.text
-  return decodeXml(
-    xml
-      .replace(/<w:tab\b[^>]*\/?\s*>/g, '\t')
-      .replace(/<w:(?:br|cr)\b[^>]*\/?\s*>/g, '\n')
-      .replace(/<\/w:p>/g, '\n')
-      .replace(/<[^>]+>/g, ''),
-  )
+  return extractXmlText(xml)
 }
 
 /**
@@ -143,11 +153,102 @@ export function extractDocxDocumentParagraphs(docxBytes) {
   return [...xml.matchAll(/<w:p(?:\s[^>]*)?>[\s\S]*?<\/w:p>/g)]
     .map((match, index) => ({
       sourceIndex: index + 1,
-      text: decodeXml(match[0]
-        .replace(/<w:tab\b[^>]*\/?\s*>/g, '\t')
-        .replace(/<w:(?:br|cr)\b[^>]*\/?\s*>/g, '\n')
-        .replace(/<[^>]+>/g, '')),
+      text: extractXmlText(match[0]).replace(/\n$/u, ''),
     }))
+}
+
+/**
+ * Read the source-ordered top-level paragraph/table stream needed by the
+ * universal NCK1 DOCX producer. The returned structure is descriptive only;
+ * callers must fail closed on unsupported containers, nested tables, drawings,
+ * or table merges they cannot preserve.
+ */
+export function extractDocxDocumentStructure(docxBytes) {
+  if (!(docxBytes instanceof Uint8Array) || docxBytes.byteLength === 0) {
+    throw new TypeError('DOCX structure extraction requires immutable DOCX bytes')
+  }
+  const xml = readDocxPackage(docxBytes).documentXml.text
+  const body = /<w:body(?:\s[^>]*)?>([\s\S]*?)<\/w:body>/u.exec(xml)?.[1]
+  if (body === undefined) throw new Error('DOCX document body is missing')
+  const allParagraphs = extractDocxDocumentParagraphs(docxBytes)
+  const sequence = []
+  let sourceIndex = 0
+  let tableIndex = 0
+  for (const match of body.matchAll(
+    /<w:(p|tbl)(?:\s[^>]*)?>[\s\S]*?<\/w:\1>/g,
+  )) {
+    if (match[1] === 'p') {
+      sourceIndex += 1
+      sequence.push({
+        kind: 'paragraph',
+        sourceIndex,
+        text: extractXmlText(match[0]).replace(/\n$/u, ''),
+        containsDrawing: /<(?:w:drawing|w:pict|v:shape)\b/u.test(match[0]),
+      })
+      continue
+    }
+    tableIndex += 1
+    const tableXml = match[0]
+    const nestedTableCount = (tableXml.match(/<w:tbl\b/g) || []).length - 1
+    const tableParagraphs = xmlElements(tableXml, 'p')
+    const paragraphIndexes = tableParagraphs.map(() => {
+      sourceIndex += 1
+      return sourceIndex
+    })
+    let tableParagraphOffset = 0
+    const rows = xmlElements(tableXml, 'tr').map((rowXml) => ({
+      header: /<w:tblHeader\b/u.test(rowXml),
+      cells: xmlElements(rowXml, 'tc').map((cellXml) => {
+        const cellParagraphs = xmlElements(cellXml, 'p')
+        const sourceParagraphIndexes = paragraphIndexes.slice(
+          tableParagraphOffset,
+          tableParagraphOffset + cellParagraphs.length,
+        )
+        tableParagraphOffset += cellParagraphs.length
+        const gridSpan = Number(
+          /<w:gridSpan\b[^>]*\bw:val=["'](\d+)["']/u.exec(cellXml)?.[1] || 1,
+        )
+        const merge = /<w:vMerge\b([^>]*)\/?\s*>/u.exec(cellXml)
+        const mergeValue = merge
+          ? /\bw:val=["']([^"']+)["']/u.exec(merge[1])?.[1] || 'continue'
+          : null
+        return {
+          text: cellParagraphs
+            .map((paragraphXml) =>
+              extractXmlText(paragraphXml).replace(/\n$/u, ''))
+            .filter((text) => text.length > 0)
+            .join('\n'),
+          sourceParagraphIndexes,
+          columnSpan: gridSpan,
+          verticalMerge: mergeValue,
+          containsDrawing: /<(?:w:drawing|w:pict|v:shape)\b/u.test(cellXml),
+          containsNestedTable: (cellXml.match(/<w:tbl\b/g) || []).length > 0,
+        }
+      }),
+    }))
+    const declaredColumnCount = (/<w:tblGrid(?:\s[^>]*)?>([\s\S]*?)<\/w:tblGrid>/u
+      .exec(tableXml)?.[1].match(/<w:gridCol\b/g) || []).length
+    sequence.push({
+      kind: 'table',
+      tableIndex,
+      selector: `(/w:document/w:body/w:tbl)[${tableIndex}]`,
+      columnCount: declaredColumnCount || Math.max(
+        0,
+        ...rows.map((row) => row.cells.reduce(
+          (total, cell) => total + cell.columnSpan,
+          0,
+        )),
+      ),
+      rows,
+      nestedTableCount,
+    })
+  }
+  return {
+    paragraphs: allParagraphs,
+    body: sequence,
+    tables: sequence.filter((item) => item.kind === 'table'),
+    unsupportedParagraphCount: allParagraphs.length - sourceIndex,
+  }
 }
 
 function rawGroupsBySlot(parsed) {

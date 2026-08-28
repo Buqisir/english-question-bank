@@ -19,6 +19,13 @@ import {
 import {
   sha256,
 } from '../../shared/paper-canonical/stable.mjs'
+import {
+  runNck1DocxMaterializationJob,
+} from './nck1-docx-materialize.mjs'
+import {
+  runImportEnvironmentPreflight,
+  writeImportEnvironmentPreflightReceipt,
+} from './import-environment-preflight.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const papersRoot = path.join(import.meta.dirname, 'papers')
@@ -122,6 +129,7 @@ function initialize() {
   if (!sources.some((item) => ['question_source', 'question_and_answers'].includes(item.role))) {
     fail('One complete question source is required')
   }
+  const environment = runImportEnvironmentPreflight()
   const paperDir = path.join(papersRoot, paperId)
   const configPath = path.join(paperDir, 'config.json')
   if (existsSync(configPath)) fail(`Paper already has a writer/config: ${paperId}`)
@@ -191,6 +199,7 @@ function initialize() {
     universalSourceManifestPath: 'universal-source-manifest.json',
     canonicalRequestPath: manifest.canonicalRequestPath,
   }, null, 2)}\n`)
+  writeImportEnvironmentPreflightReceipt(paperDir, environment)
   console.log(`INITIALIZED ${paperId}: ${path.relative(root, paperDir)}`)
 }
 
@@ -256,6 +265,33 @@ function verify(paperId) {
     listening: imported.candidate.interpretation.inactiveSourceClosures.length === 2
       ? 'captured'
       : 'not_supplied',
+  }, null, 2))
+}
+
+function preflight(paperId) {
+  const paperDir = paperId ? paperContext(paperId).paperDir : null
+  const result = runImportEnvironmentPreflight({ paperDir })
+  console.log(JSON.stringify({
+    ok: true,
+    environmentDigest: result.environmentDigest,
+    checks: result.checks.map(({ name, executable, launch }) => ({ name, executable, launch })),
+    receiptPath: result.receiptPath,
+  }, null, 2))
+}
+
+function materialize(paperId) {
+  const { paperDir, manifest } = paperContext(paperId)
+  runImportEnvironmentPreflight({ paperDir })
+  const result = runNck1DocxMaterializationJob({ paperDir, manifest })
+  console.log(JSON.stringify({
+    ok: true,
+    paperId,
+    cached: result.cached,
+    outputState: result.outputState,
+    disposition: result.disposition,
+    sourceDigest: result.sourceDigest,
+    materializationPath: path.relative(root, result.outputPath),
+    reviewPath: path.relative(root, result.reviewPath),
   }, null, 2))
 }
 
@@ -332,14 +368,16 @@ function cropPdf() {
 const command = process.argv[2]
 let paperId = process.argv[3]
 try {
-  if (command === 'init') initialize()
+  if (command === 'preflight') preflight(paperId)
+  else if (command === 'init') initialize()
+  else if (command === 'materialize') materialize(paperId)
   else if (command === 'verify') verify(paperId)
   else if (command === 'build') build(paperId)
   else if (command === 'extract-docx-media') extractDocxMedia()
   else if (command === 'crop-pdf') cropPdf()
-  else fail('Usage: universal-nck1.mjs init|verify|build|extract-docx-media|crop-pdf ...')
+  else fail('Usage: universal-nck1.mjs preflight|init|materialize|verify|build|extract-docx-media|crop-pdf ...')
 } catch (error) {
-  if (['verify', 'build'].includes(command) && paperId) {
+  if (['materialize', 'verify', 'build'].includes(command) && paperId) {
     const signalsDir = path.join(papersRoot, paperId, 'signals')
     mkdirSync(signalsDir, { recursive: true })
     writeFileSync(path.join(signalsDir, 'blocked.json'), `${JSON.stringify({

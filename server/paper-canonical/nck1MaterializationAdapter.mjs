@@ -223,6 +223,15 @@ export function paragraphMatchesOneDocxParagraph(block, sourceParagraphs) {
 
 function parseDocxParagraphSelector(selector) {
   const value = String(selector || '')
+  const sourceIndex = value.match(
+    /^\(\/w:document\/w:body\/\/w:p\)\[(\d+)\]$/u,
+  )
+  if (sourceIndex) {
+    return {
+      comparison: 'source_index',
+      sourceIndex: Number(sourceIndex[1]),
+    }
+  }
   const contains = value.match(
     /^\/\/w:p\[contains\(\.,\s*(["'])(.+)\1\)\](?:\[(\d+)\])?$/u,
   )
@@ -248,6 +257,10 @@ function parseDocxParagraphSelector(selector) {
 export function resolveDocxParagraphSelector(selector, sourceParagraphs) {
   const parsed = parseDocxParagraphSelector(selector)
   if (!parsed) return []
+  if (parsed.comparison === 'source_index') {
+    return sourceParagraphs.filter((paragraph) =>
+      paragraph.sourceIndex === parsed.sourceIndex)
+  }
   const normalizedLiteral = paragraphSelectorText(parsed.literal)
   if (!normalizedLiteral) return []
   const matches = sourceParagraphs.filter((paragraph) => {
