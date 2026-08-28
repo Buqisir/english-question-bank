@@ -1516,11 +1516,12 @@ assert(
 assert(
   // similar-entrypoints (E3) adds `similar` alongside `questionId`/`lecture`
   // in the same options-bag → URL/state pipeline.
-  'openPaperBrowse accepts an options bag (questionId/lecture/similar) and writes them into the URL + paperBrowseRoute',
+  'openPaperBrowse accepts an options bag (questionId/lecture/similar), clears reviewRevision, and writes the route',
   /const openPaperBrowse\s*=\s*useCallback\s*\(\s*\(paperId[^{]*options\?\s*:\s*OpenPaperBrowseOptions[^{]*\{/.test(
     appSrc,
   ) &&
-    /setPaperBrowseRoute\(\{\s*active:\s*true,\s*paperId,\s*focusGroupId:\s*focusGroupId\s*\|\|\s*null,\s*questionId,\s*lecture,\s*similar\s*\}\)/.test(
+    /url\.searchParams\.delete\(\s*['"]reviewRevision['"]\s*\)/.test(appSrc) &&
+    /setPaperBrowseRoute\(\{\s*active:\s*true,\s*paperId,\s*focusGroupId:\s*focusGroupId\s*\|\|\s*null,\s*questionId,\s*reviewRevision:\s*null,\s*lecture,\s*similar\s*\}\)/.test(
       appSrc,
     ),
   'openPaperBrowse does not accept/thread the options bag',
@@ -1582,11 +1583,11 @@ assert(
 assert(
   // similar-entrypoints (E3) adds `similar` to the stripped-param list too —
   // otherwise a stale similar=1 would leak into the workbench URL.
-  'paperBrowseOnBackToWorkbench strips questionId/lecture/similar from the URL alongside view/paperId/focusGroupId',
-  /for\s*\(const param of \[\s*['"]view['"]\s*,\s*['"]paperId['"]\s*,\s*['"]focusGroupId['"]\s*,\s*['"]questionId['"]\s*,\s*['"]lecture['"]\s*,\s*['"]similar['"]\s*\]\)/.test(
+  'paperBrowseOnBackToWorkbench strips reviewRevision and the ordinary Paper Browse route params',
+  /for\s*\(const param of \[\s*['"]view['"]\s*,\s*['"]paperId['"]\s*,\s*['"]focusGroupId['"]\s*,\s*['"]questionId['"]\s*,\s*['"]reviewRevision['"]\s*,\s*['"]lecture['"]\s*,\s*['"]similar['"]\s*\]\)/.test(
     appSrc,
   ),
-  'paperBrowseOnBackToWorkbench does not strip the new params — stale questionId/lecture/similar would leak into the workbench URL',
+  'paperBrowseOnBackToWorkbench leaves a stale Paper Browse or review parameter in the workbench URL',
 )
 
 // 47-48. ConciergeGroupCard.tsx / QuestionGroupDetailView.tsx: 看解析 href

@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 # Daily off-site backup to Cloudflare R2 (S3-compatible, via rclone).
 #
-# Scope (plan.md PM #6): BOTH sqlite dbs (question-bank.sqlite +
-# user-data.sqlite) + app/public/paper-assets/ (incl. versions/) +
-# data/user-space/files/. A backup is a read-only off-site snapshot, so
+# Scope (plan.md PM #6): all three sqlite dbs (question-bank.sqlite +
+# user-data.sqlite + import-ops.sqlite) + app/public/paper-assets/ (incl.
+# versions/) + data/user-space/files/ + data/import-ops/files/. A backup is a
+# read-only off-site snapshot, so
 # user-data.sqlite IS in scope here — this is the opposite of the
 # pull-run-push (Slice 4) rule that never touches user-data.
 #
@@ -31,6 +32,8 @@
 #   USER_DATA_DB                  default: data/user-data.sqlite
 #   QUESTION_BANK_PAPER_ASSET_ROOT default: app/public/paper-assets
 #   QUESTION_BANK_USER_SPACE_ROOT  default: data/user-space/files
+#   QUESTION_BANK_IMPORT_OPS_DB    default: data/import-ops.sqlite
+#   QUESTION_BANK_IMPORT_OPS_ROOT  default: data/import-ops/files
 #   EQB_R2_REMOTE                 default: r2:eqb-backup (rclone remote:bucket)
 #   EQB_SNAPSHOT_DIR               if set, snapshots are written there and NOT
 #                                  cleaned up (lets a caller/verifier inspect
@@ -60,6 +63,8 @@ QUESTION_BANK_DB="${QUESTION_BANK_DB:-$ROOT_DIR/data/question-bank.sqlite}"
 USER_DATA_DB="${USER_DATA_DB:-$ROOT_DIR/data/user-data.sqlite}"
 PAPER_ASSET_ROOT="${QUESTION_BANK_PAPER_ASSET_ROOT:-$ROOT_DIR/app/public/paper-assets}"
 USER_SPACE_ROOT="${QUESTION_BANK_USER_SPACE_ROOT:-$ROOT_DIR/data/user-space/files}"
+IMPORT_OPS_DB="${QUESTION_BANK_IMPORT_OPS_DB:-$ROOT_DIR/data/import-ops.sqlite}"
+IMPORT_OPS_ROOT="${QUESTION_BANK_IMPORT_OPS_ROOT:-$ROOT_DIR/data/import-ops/files}"
 R2_REMOTE="${EQB_R2_REMOTE:-r2:eqb-backup}"
 RETENTION_COUNT="${EQB_BACKUP_RETENTION_COUNT:-14}"
 
@@ -110,14 +115,17 @@ snapshot_db() {
 
 snapshot_db "$QUESTION_BANK_DB" "question-bank.sqlite"
 snapshot_db "$USER_DATA_DB" "user-data.sqlite"
+snapshot_db "$IMPORT_OPS_DB" "import-ops.sqlite"
 
 # ── Manifest of what would be pushed ─────────────────────────────────────
 echo ""
 echo "==> Backup manifest (-> $REMOTE_PREFIX):"
 echo "    $SNAPSHOT_DIR/question-bank.sqlite"
 echo "    $SNAPSHOT_DIR/user-data.sqlite"
+echo "    $SNAPSHOT_DIR/import-ops.sqlite"
 [[ -d "$PAPER_ASSET_ROOT" ]] && echo "    $PAPER_ASSET_ROOT/ (paper-assets, incl. versions/)"
 [[ -d "$USER_SPACE_ROOT" ]] && echo "    $USER_SPACE_ROOT/ (user-space files)"
+[[ -d "$IMPORT_OPS_ROOT" ]] && echo "    $IMPORT_OPS_ROOT/ (import-review files)"
 
 HAVE_RCLONE=1
 if ! command -v rclone >/dev/null 2>&1; then
@@ -131,8 +139,10 @@ if [[ "$DRY_RUN" -eq 1 ]]; then
     echo "Plan (would run when rclone is present):"
     echo "  rclone copy \"$SNAPSHOT_DIR/question-bank.sqlite\" \"$REMOTE_PREFIX/\""
     echo "  rclone copy \"$SNAPSHOT_DIR/user-data.sqlite\" \"$REMOTE_PREFIX/\""
+    echo "  rclone copy \"$SNAPSHOT_DIR/import-ops.sqlite\" \"$REMOTE_PREFIX/\""
     [[ -d "$PAPER_ASSET_ROOT" ]] && echo "  rclone copy \"$PAPER_ASSET_ROOT\" \"$REMOTE_PREFIX/paper-assets\""
     [[ -d "$USER_SPACE_ROOT" ]] && echo "  rclone copy \"$USER_SPACE_ROOT\" \"$REMOTE_PREFIX/user-space\""
+    [[ -d "$IMPORT_OPS_ROOT" ]] && echo "  rclone copy \"$IMPORT_OPS_ROOT\" \"$REMOTE_PREFIX/import-ops-files\""
     echo "==> Dry run complete (no rclone binary present, no push attempted)."
     exit 0
   fi
@@ -140,8 +150,10 @@ if [[ "$DRY_RUN" -eq 1 ]]; then
   echo "==> Dry run: invoking rclone copy --dry-run"
   rclone copy "$SNAPSHOT_DIR/question-bank.sqlite" "$REMOTE_PREFIX/" --dry-run
   rclone copy "$SNAPSHOT_DIR/user-data.sqlite" "$REMOTE_PREFIX/" --dry-run
+  rclone copy "$SNAPSHOT_DIR/import-ops.sqlite" "$REMOTE_PREFIX/" --dry-run
   [[ -d "$PAPER_ASSET_ROOT" ]] && rclone copy "$PAPER_ASSET_ROOT" "$REMOTE_PREFIX/paper-assets" --dry-run
   [[ -d "$USER_SPACE_ROOT" ]] && rclone copy "$USER_SPACE_ROOT" "$REMOTE_PREFIX/user-space" --dry-run
+  [[ -d "$IMPORT_OPS_ROOT" ]] && rclone copy "$IMPORT_OPS_ROOT" "$REMOTE_PREFIX/import-ops-files" --dry-run
   echo "==> Dry run complete."
   exit 0
 fi
@@ -155,8 +167,10 @@ fi
 echo "==> Pushing to $REMOTE_PREFIX (rclone copy — additive only)"
 rclone copy "$SNAPSHOT_DIR/question-bank.sqlite" "$REMOTE_PREFIX/"
 rclone copy "$SNAPSHOT_DIR/user-data.sqlite" "$REMOTE_PREFIX/"
+rclone copy "$SNAPSHOT_DIR/import-ops.sqlite" "$REMOTE_PREFIX/"
 [[ -d "$PAPER_ASSET_ROOT" ]] && rclone copy "$PAPER_ASSET_ROOT" "$REMOTE_PREFIX/paper-assets"
 [[ -d "$USER_SPACE_ROOT" ]] && rclone copy "$USER_SPACE_ROOT" "$REMOTE_PREFIX/user-space"
+[[ -d "$IMPORT_OPS_ROOT" ]] && rclone copy "$IMPORT_OPS_ROOT" "$REMOTE_PREFIX/import-ops-files"
 
 echo "==> Push complete. Remote size/manifest:"
 rclone size "$REMOTE_PREFIX" || true

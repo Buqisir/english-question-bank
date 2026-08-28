@@ -138,6 +138,7 @@ function App() {
         paperId: null as string | null,
         focusGroupId: null as string | null,
         questionId: null as string | null,
+        reviewRevision: null as string | null,
         lecture: false,
         similar: false,
       }
@@ -148,6 +149,7 @@ function App() {
       paperId: params.get('paperId'),
       focusGroupId: params.get('focusGroupId'),
       questionId: params.get('questionId'),
+      reviewRevision: params.get('reviewRevision'),
       lecture: params.get('lecture') === '1',
       similar: params.get('similar') === '1',
     }
@@ -505,7 +507,7 @@ function App() {
     setMySpaceRouteActive(false)
     setVocabularyReviewRouteActive(false)
     setVocabularyPracticeRoute({ active: false, setId: null })
-    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, lecture: false, similar: false })
+    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, reviewRevision: null, lecture: false, similar: false })
     setDraftPaperRoute({
       active: true,
       draftPaperId: draftPaperId || null,
@@ -547,6 +549,7 @@ function App() {
       const url = new URL(window.location.href)
       url.searchParams.set('view', 'paper-browse')
       url.searchParams.set('paperId', paperId)
+      url.searchParams.delete('reviewRevision')
       // C3b — clear groupId when navigating away from the detail view.
       url.searchParams.delete('groupId')
       if (focusGroupId) {
@@ -575,7 +578,7 @@ function App() {
     setVocabularyReviewRouteActive(false)
     setVocabularyPracticeRoute({ active: false, setId: null })
     setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
-    setPaperBrowseRoute({ active: true, paperId, focusGroupId: focusGroupId || null, questionId, lecture, similar })
+    setPaperBrowseRoute({ active: true, paperId, focusGroupId: focusGroupId || null, questionId, reviewRevision: null, lecture, similar })
   }, [])
 
   // Detail-page "看整卷" entry point: derives paperId (and the group to
@@ -613,7 +616,7 @@ function App() {
     if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
       try {
         const url = new URL(window.location.href)
-        for (const param of ['view', 'paperId', 'focusGroupId', 'questionId', 'lecture', 'similar']) {
+        for (const param of ['view', 'paperId', 'focusGroupId', 'questionId', 'reviewRevision', 'lecture', 'similar']) {
           url.searchParams.delete(param)
         }
         const nextSearch = url.searchParams.toString()
@@ -623,7 +626,7 @@ function App() {
         // State flip below is the authoritative UI change.
       }
     }
-    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, lecture: false, similar: false })
+    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, reviewRevision: null, lecture: false, similar: false })
   }, [])
 
   // flow-panel 刀 3: Back/Forward support. Every `open*`/`*OnBackToWorkbench`
@@ -666,6 +669,7 @@ function App() {
         paperId: params.get('paperId'),
         focusGroupId: params.get('focusGroupId'),
         questionId: params.get('questionId'),
+        reviewRevision: params.get('reviewRevision'),
         lecture: params.get('lecture') === '1',
         similar: params.get('similar') === '1',
       })
@@ -734,7 +738,7 @@ function App() {
       window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
     }
     setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
-    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, lecture: false, similar: false })
+    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, reviewRevision: null, lecture: false, similar: false })
     setVocabularyReviewRouteActive(false)
     setVocabularyDictationRouteActive(false)
     setVocabularyPracticeRoute({ active: false, setId: null })
@@ -756,7 +760,7 @@ function App() {
     setMySpaceRouteActive(false)
     setBrowseRouteActive(false)
     setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
-    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, lecture: false, similar: false })
+    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, reviewRevision: null, lecture: false, similar: false })
     setVocabularyPracticeRoute({ active: false, setId: null })
     setVocabularyDictationRouteActive(false)
     setVocabularyReviewSetId(null)
@@ -778,7 +782,7 @@ function App() {
     setMySpaceRouteActive(false)
     setBrowseRouteActive(false)
     setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
-    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, lecture: false, similar: false })
+    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, reviewRevision: null, lecture: false, similar: false })
     setVocabularyPracticeRoute({ active: false, setId: null })
     setVocabularyReviewRouteActive(false)
     setVocabularyDictationRouteActive(true)
@@ -968,6 +972,7 @@ function App() {
     return (
       <PaperBrowsePage
         paperId={paperBrowseRoute.paperId}
+        reviewRevision={paperBrowseRoute.reviewRevision}
         focusGroupId={paperBrowseRoute.focusGroupId}
         questionId={paperBrowseRoute.questionId}
         lecture={paperBrowseRoute.lecture}

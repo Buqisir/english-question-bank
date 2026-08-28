@@ -1,100 +1,90 @@
 #!/usr/bin/env node
 /**
- * 导题后台 — owner-only local read surface.
- * Does not write papers/, does not publish, does not run pull-run-push.
+ * Same-origin local shell for the hosted Import Review Workbench.
+ * /ops/ serves this package; all app and API requests proxy to EQB_APP_ORIGIN.
+ * It does not publish, deploy, or touch production.
  */
-import { createServer } from 'node:http'
-import { readFileSync, existsSync } from 'node:fs'
+import { createServer, request as httpRequest } from 'node:http'
+import { request as httpsRequest } from 'node:https'
+import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
-import { homeLists, listOpsPapers, probePaper, qaLinks, shipPrompt } from './lib/probe.mjs'
 
-const here = path.dirname(fileURLToPath(import.meta.url))
-const repoRoot = path.resolve(process.env.EQB_ROOT || path.join(here, '..'))
-const appOrigin = process.env.EQB_APP_ORIGIN || 'http://127.0.0.1:5173'
+const appOrigin = new URL(process.env.EQB_APP_ORIGIN || 'http://127.0.0.1:5173')
 const host = '127.0.0.1'
 const port = Number(process.env.IMPORT_OPS_PORT || 8790)
-const publicDir = path.join(here, 'public')
+const publicDir = path.join(import.meta.dirname, 'public')
 
 function send(response, status, body, headers = {}) {
-  const payload = typeof body === 'string' ? body : JSON.stringify(body)
   response.writeHead(status, {
     'cache-control': 'no-store',
+    'content-length': Buffer.byteLength(body),
     ...headers,
-    'content-length': Buffer.byteLength(payload),
   })
-  response.end(payload)
+  response.end(body)
 }
 
-function sendJson(response, status, body) {
-  send(response, status, body, { 'content-type': 'application/json; charset=utf-8' })
+function serveOps(response, pathname) {
+  const relativePath = pathname === '/ops/'
+    ? 'index.html'
+    : pathname.slice('/ops/'.length)
+  if (!relativePath || relativePath.includes('/') || relativePath.includes('\\')) {
+    send(response, 404, 'not found', { 'content-type': 'text/plain; charset=utf-8' })
+    return
+  }
+  const filePath = path.join(publicDir, relativePath)
+  if (!existsSync(filePath)) {
+    send(response, 404, 'not found', { 'content-type': 'text/plain; charset=utf-8' })
+    return
+  }
+  const contentType = relativePath.endsWith('.js')
+    ? 'text/javascript; charset=utf-8'
+    : relativePath.endsWith('.css')
+      ? 'text/css; charset=utf-8'
+      : 'text/html; charset=utf-8'
+  send(response, 200, readFileSync(filePath), { 'content-type': contentType })
 }
 
-function notFound(response) {
-  sendJson(response, 404, { error: 'not_found' })
+function proxy(request, response) {
+  const target = new URL(request.url || '/', appOrigin)
+  const client = target.protocol === 'https:' ? httpsRequest : httpRequest
+  const upstream = client(target, {
+    method: request.method,
+    headers: {
+      ...request.headers,
+      host: target.host,
+    },
+  }, (upstreamResponse) => {
+    response.writeHead(upstreamResponse.statusCode || 502, upstreamResponse.headers)
+    upstreamResponse.pipe(response)
+  })
+  upstream.on('error', (error) => {
+    if (response.headersSent) {
+      response.destroy(error)
+      return
+    }
+    send(response, 502, `upstream unavailable: ${error.message}`, {
+      'content-type': 'text/plain; charset=utf-8',
+    })
+  })
+  request.pipe(upstream)
 }
 
 const server = createServer((request, response) => {
   const url = new URL(request.url || '/', `http://${host}:${port}`)
-  if (request.method !== 'GET') {
-    sendJson(response, 405, { error: 'read_only' })
+  if (url.pathname === '/ops') {
+    response.writeHead(308, { location: '/ops/' })
+    response.end()
     return
   }
-
-  if (url.pathname === '/api/health') {
-    sendJson(response, 200, { ok: true, role: 'import-ops', write: false, repoRoot })
+  if (request.method === 'GET' && url.pathname.startsWith('/ops/')) {
+    serveOps(response, url.pathname)
     return
   }
-
-  if (url.pathname === '/api/papers') {
-    const papers = listOpsPapers(repoRoot).map((paper) => ({
-      paperId: paper.paperId,
-      paperName: paper.paperName,
-      status: paper.status,
-      statusLabel: paper.statusLabel,
-      mtimeMs: paper.mtimeMs,
-      blockedCode: paper.blocked?.code || null,
-    }))
-    sendJson(response, 200, { papers, lists: homeLists(papers) })
-    return
-  }
-
-  const detail = url.pathname.match(/^\/api\/papers\/([^/]+)$/)
-  if (detail) {
-    const paperId = decodeURIComponent(detail[1])
-    const papersRoot = path.join(repoRoot, 'scripts/import-pipeline/papers', paperId)
-    const latestDir = path.join(repoRoot, 'app/public/paper-assets', paperId, 'latest')
-    if (!existsSync(papersRoot) && !existsSync(latestDir)) {
-      notFound(response)
-      return
-    }
-    const paper = probePaper({ repoRoot, paperId })
-    const prompt = shipPrompt(paper)
-    sendJson(response, 200, {
-      paper,
-      qa: qaLinks(paper, appOrigin),
-      shipSay: prompt.say,
-      shipKind: prompt.kind,
-    })
-    return
-  }
-
-  const fileName = url.pathname === '/' ? 'index.html' : path.basename(url.pathname)
-  const filePath = path.join(publicDir, fileName)
-  if (!filePath.startsWith(publicDir) || !existsSync(filePath)) {
-    notFound(response)
-    return
-  }
-  const type = fileName.endsWith('.js')
-    ? 'text/javascript; charset=utf-8'
-    : fileName.endsWith('.css')
-      ? 'text/css; charset=utf-8'
-      : 'text/html; charset=utf-8'
-  send(response, 200, readFileSync(filePath, 'utf8'), { 'content-type': type })
+  proxy(request, response)
 })
 
 server.listen(port, host, () => {
-  console.log(`导题后台 (read-only) http://${host}:${port}`)
-  console.log(`repo ${repoRoot}`)
-  console.log('no publish, no pull-run-push, no production')
+  console.log(`导题审核 http://${host}:${port}/ops/`)
+  console.log(`same-origin app/API proxy -> ${appOrigin.origin}`)
+  console.log('no publish, no deployment, no production mutation')
 })

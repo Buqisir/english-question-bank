@@ -5,11 +5,12 @@
 所有新 NCK1 卷默认走统一入口，不再先判断格式①/②/③：
 
 - 数据契约：`docs/product/nck1-paper-standard.md`（导题过程中不改；owner 拍板修订后以新文本为准）
-- 统一入口：`node scripts/import-pipeline/universal-nck1.mjs init ...`。Agent 从不可变源生成并校验 `nck1-source-materialization-v1`；表格写语义网格，图标、条码、照片和图表按源提取配方生成媒体。随后 `verify` 派生 Candidate，`build` 只生成 digest-bound Candidate 摘要与未确认的 Teacher Confirmation 模板。完整命令见 `scripts/import-pipeline/README.md`。
+- 统一入口：`node scripts/import-pipeline/universal-nck1.mjs init ...`。Agent 从不可变源生成并校验 `nck1-source-materialization-v1`；表格写语义网格，图标、条码、照片和图表按源提取配方生成媒体。随后 `verify` 派生 Candidate，`build` 生成 digest-bound Candidate 摘要，`review.mjs push` 上传不可变审核 revision。Owner 在 `/ops/` 认可精确摘要后，`review.mjs accept` 才生成 Teacher Confirmation 与 Canonical request。完整命令见 `scripts/import-pipeline/README.md`。
 - 阅读 Word 细线框（框里只有能打的字和矩形表）：写成 Canonical `framed_columns`（nck1 §8）；观感见 `docs/product/exam-paper-format-standards.md` §3c。不要截整图当 Canonical 正文，不要为单卷改 CSS。下一卷步骤见 `docs/cuts/reading-framed-columns/spec.md`「下一卷怎么干」。
 - 旧格式①/②/③脚本只保留已接入存量卷回退；新卷不得向旧脚本添加 `paperId`、CONTENT 登记或 shape association 特例。
 
-导题后台只读本契约的文件夹探针，不另建状态库。消费端网站不导题。
+导题审核使用独立 Review DB 与文件目录作为 QA 事实源；Candidate 不进入正式题库。
+消费端网站不导题，`/ops/` 只做人工审核与 Agent 反馈，不运行 LLM。
 
 ## 开局（owner 只给这三样）
 
@@ -43,7 +44,7 @@ node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
 | 本地已 publish | `app/public/paper-assets/<paperId>/latest/`（目录存在） | **唯一**本地 publish 成功信号 |
 | 卡死 | `signals/blocked.json` | 硬停；见原因码 |
 | 要人裁决（非例行 QA） | `signals/help-needed.json` | 例如非记叙型续写、格式不在白名单 |
-| 上线前 QA 已过 | `signals/qa-accepted.json` | 仅在 owner 说过 QA 通过之后写 |
+| 网页 QA 已过 | `signals/qa-accepted.json` | 仅由 `review.mjs accept` 按认可摘要写 |
 | 已上线 | `signals/shipped.json` | 本机 ship 收据；见「上线」清单 |
 
 `signals/` 下是小 JSON 收据，不要把答案表或全文写进去。
@@ -71,13 +72,23 @@ node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
 `signals/qa-accepted.json`：
 
 ```json
-{ "acceptedAt": "<ISO-8601>", "by": "owner" }
+{
+  "schemaVersion": "web-import-review-qa-accepted-v1",
+  "acceptedAt": "<ISO-8601>",
+  "by": "<owner account>",
+  "approvalId": "approval-…",
+  "revisionId": "rev-…",
+  "sourceDigest": "sha256:…",
+  "candidateDigest": "sha256:…",
+  "visibleStructureDigest": "sha256:…",
+  "bundleDigest": "sha256:…"
+}
 ```
 
 `signals/shipped.json`：
 
 ```json
-{ "shippedAt": "<ISO-8601>", "command": "node scripts/pull-run-push.mjs push" }
+{ "shippedAt": "<ISO-8601>", "command": "node scripts/pull-run-push.mjs push <paperId> --owner-said-ship" }
 ```
 
 已知 `blocked.json` 原因码：`source_incomplete`（统一材料化缺页、缺权威答案、冲突或不闭合）、`canonical_unavailable`（旧入口 producer / compile 仍 fail-closed 时）、`gate_failed`（同一门禁自动修 2 次仍红）、`continuation_non_narrative`、`ship_failed`（整库 push 失败）。
@@ -105,7 +116,10 @@ node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
 
 0. 生成 `materialization/nck1-source-materialization-v1.json`。PDF 有文本层直接转录；扫描 PDF 先 OCR 后逐页视觉复核；DOCX 直接读 XML/table/media。DOCX 正文每个源 `<w:p>` 必须一对一生成独立 `paragraph` block，并用指向该段的 `docx_part` locator；禁止把相邻段落合并，也不要把阅读 A/B/C/D 等独立篇目标记写进正文。两篇写作必须保留源顺序：题干 →（续写标题与逐段材料）→ 独立 `注意` 结构 → 框内给定标题/称呼或两条续写开头语；`注意` 保留源本来的组合段，或保留“注意：”及其后一个或多个编号段，不得为了统一视觉而合段；必须含词数且与 `wordCountTarget` 一致，源有答题格式或其他编号说明时一字不漏。续写 `material` 每项一对一对应一个源段落，给定标题、称呼和开头语不得混进题干或材料。DOCX 初始化时自动产生不可变 PDF rendition，形状绘图从 rendition 按页裁。语义表格必须为 `table`，整表截图只能作 `visual_proof`；真实图、图标、条码不得 AI 重画。用 `universal-nck1.mjs extract-docx-media` 或 `crop-pdf` 确定性生成媒体。
 1. `node scripts/import-pipeline/universal-nck1.mjs verify <paperId>`。缺页、缺答案、答案冲突、未闭合表格、重复/漂移媒体或 Materialization `issues` 非空均写 `signals/blocked.json` 并停。
-2. `node scripts/import-pipeline/universal-nck1.mjs build <paperId>`，产生 digest-bound Candidate 摘要与 `confirmed: false` 的 Teacher Confirmation 模板并停。只有教师在外部确认精确 source/candidate digest 后，可信边界才可生成 Canonical request；Agent 不得代确认，本步不发布。
+2. `node scripts/import-pipeline/universal-nck1.mjs build <paperId>`，产生 digest-bound Candidate 摘要与 `confirmed: false` 的 Teacher Confirmation 模板。
+3. 设置 `QUESTION_BANK_IMPORT_OPS_ORIGIN` 与 Agent token，运行 `node scripts/import-pipeline/review.mjs push <paperId>`。网页 revision finalize 后不可修改；Agent 停下等待 Owner 在 `/ops/` 审核。
+4. 有问题：Agent 用 `review.mjs status` 或自己的 `import_agent` 网页待办箱读取反馈并回复；修好 Materialization 后重新 `verify` / `build`，再用 `review.mjs push <paperId> --resolves <issueId>[,<issueId>]` 提交新 revision。不得覆盖旧 revision。
+5. Owner 认可后运行 `node scripts/import-pipeline/review.mjs accept <paperId>`。该命令只有在本地 source/Candidate/visible structure/files/bundle 与网页收据全部精确匹配时，才写 `teacher-confirmation-v1.json`（`confirmed: true`）、Canonical request、web approval 与 `signals/qa-accepted.json`；它不 publish、不部署。
 
 以下旧格式编号步骤仅供已经登记的存量入口继续复现；新卷从分析、发布 dry-run 和 QA 公共门禁继续，不再执行旧切卷/producer：
 
@@ -132,24 +146,33 @@ node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
 ## 停点
 
 - **不对答案（人）。** 答案随解析字段做全；托底是 AI Answer Transcription Check。
-- **上线前 QA（人）必留。** Owner 在导题后台看 Screen / Student Print / Teacher Print 和门禁一行。不设 7 组解析必过抽检。Owner 说 QA 通过之后才写 `signals/qa-accepted.json`。
+- **网页 QA（人）必留。** Owner 在 `/ops/` 看复用现有 `PaperBrowsePage` / `PaperSurface` 的 Screen，以及共享 Canonical seam 生成的 Student Print / Teacher Print / PDF。问题绑定 revision 与语义对象；Owner 网页认可后仍由 Agent `review.mjs accept` 精确拉取，不能手写 `signals/qa-accepted.json`。
 - **上线。** 本地 publish 后停。未 `ready_to_ship` 不得 push。导题后台无生产按钮。owner 必须**当前**另说「上线」之后，才按下一节清单执行。
 
 ## 上线
 
-可执行清单（本身**不**跑 push、不连生产）：
+可执行清单（本身**不**跑 push；使用 Agent 凭证只读核对 Review 服务，不做生产写入）：
 
 ```bash
 node scripts/import-pipeline/ship-checklist.mjs check <paperId> --owner-said-ship
 ```
 
+运行时必须继续提供 `QUESTION_BANK_IMPORT_OPS_ORIGIN` 与
+`QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN`。清单会确认本地 `qa-accepted.json`
+仍对应 Review 服务的最新 `approved` revision 与同一 `approvalId` / 摘要；只要
+Agent 又提交了新 revision，旧本地收据立即失效，即使 Candidate 文件尚未变化。
+
 仅当该命令打印「允许」时，agent 才可以跑整库：
 
 ```bash
-node scripts/pull-run-push.mjs push
+node scripts/pull-run-push.mjs push <paperId> --owner-said-ship
 ```
 
-不是单卷增量，不是 `deploy.sh`。导题后台只展示口令，不跑这条命令。
+实际 push 入口会在第一次生产写操作（停服务）之前，再运行同一份本地门禁，并在
+Review DB 事务内取得绑定当前 approval/revision/digest 的 shipping guard。取得前
+若出现新 revision 会失败关闭；取得后到远端操作结束前，新 revision、问题创建/
+状态修改和重新认可都会被服务端拒绝。不是单卷增量，不是 `deploy.sh`。导题后台
+只展示口令，不跑这条命令。
 
 ### 硬前置
 
@@ -159,9 +182,20 @@ node scripts/pull-run-push.mjs push
 
 ```bash
 node scripts/import-pipeline/ship-checklist.mjs check <paperId> --owner-said-retry-ship
+node scripts/pull-run-push.mjs push <paperId> --owner-said-retry-ship
 ```
 
 口令「上线」不能当重试。生产服务可能停在 stopped，先拉起再谈重试。
+
+正常成功或正常失败都会自动释放 shipping guard。若进程被强杀，guard 会故意留在
+Review DB 中以失败关闭；确认旧 push 进程已不存在、生产服务和数据库状态已人工
+查清，并获得 Owner 当前“解除上线锁”口令后，才可运行：
+
+```bash
+node scripts/import-pipeline/review.mjs release-ship-guard <paperId> <guardId> --owner-said-abort-ship
+```
+
+`guardId` 会在取得锁时打印。不得为了继续导题而盲目解除仍可能被旧进程持有的锁。
 
 ### 授权
 
@@ -192,8 +226,11 @@ QA 之后 owner 必须另说「上线」（当前口头，不是历史聊天里�
 
 ## 导题后台
 
-本机只读面，与消费端 `app/` 分离：`import-ops/`（`node import-ops/server.mjs`，默认 `http://127.0.0.1:8790`）。无对答案 UI，无生产按钮，不跑 pull-run-push。可上线后只展示口令（`上线 paper-<id>`）；`ship_failed` 时展示 `重试上线 paper-<id>`。
+生产同域入口 `/ops/`；本机同源壳为 `node import-ops/server.mjs`（默认
+`http://127.0.0.1:8790/ops/`，代理到 `EQB_APP_ORIGIN`）。Owner 能提问题、验证
+修复和认可；`import_agent` 真实服务账号能读取待办、查看同一表面和回复，但不能
+关闭问题、认可或部署。无 LLM 动作、无生产按钮，不跑 pull-run-push。
 
 ## 禁止
 
-网站消费端改动；恢复网站导入 UI；后台直连 LLM API；单卷增量传输；导题时为过闸改 nck1 标准；格式①临时 canonical 映射；清单未允许时跑 `pull-run-push`；未获当前 owner 口头「上线」/「重试上线」动生产；为下一道同类 Word 细线框改 PaperSurface / print-renderer。
+在消费端恢复导入动作或复制审核渲染器；后台直连 LLM API；单卷增量传输；导题时为过闸改 nck1 标准；格式①临时 canonical 映射；清单未允许时跑 `pull-run-push`；未获当前 owner 口头「上线」/「重试上线」动生产；为下一道同类 Word 细线框改 PaperSurface / print-renderer。

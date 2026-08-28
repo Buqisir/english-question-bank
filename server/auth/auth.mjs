@@ -47,6 +47,7 @@ export function ensureAuthDatabaseShape(db) {
       username TEXT NOT NULL UNIQUE,
       password_hash TEXT NOT NULL,
       role TEXT NOT NULL DEFAULT 'member' CHECK (role IN ('owner', 'member')),
+      account_kind TEXT NOT NULL DEFAULT 'human' CHECK (account_kind IN ('human', 'import_agent')),
       status TEXT NOT NULL DEFAULT 'active' CHECK (status IN ('active', 'disabled')),
       created_at TEXT NOT NULL,
       updated_at TEXT NOT NULL
@@ -59,6 +60,13 @@ export function ensureAuthDatabaseShape(db) {
     );
     CREATE INDEX IF NOT EXISTS idx_sessions_user ON sessions(user_id);
   `)
+  const userColumns = db.prepare('PRAGMA table_info(users)').all()
+  if (!userColumns.some((column) => column.name === 'account_kind')) {
+    db.exec(`
+      ALTER TABLE users ADD COLUMN account_kind TEXT NOT NULL DEFAULT 'human'
+      CHECK (account_kind IN ('human', 'import_agent'));
+    `)
+  }
 }
 
 function nowIso() {
@@ -96,6 +104,7 @@ export function rowToUser(row) {
     id: row.id,
     username: row.username,
     role: row.role,
+    accountKind: row.account_kind || 'human',
   }
 }
 
@@ -145,6 +154,16 @@ export function setUserStatus(db, userId, status) {
   const result = db
     .prepare("UPDATE users SET status = ?, updated_at = ? WHERE id = ?")
     .run(status, nowIso(), userId)
+  if (result.changes === 0) throw new Error('用户不存在')
+}
+
+export function setUserAccountKind(db, userId, accountKind) {
+  if (!['human', 'import_agent'].includes(accountKind)) {
+    throw new Error('账号类型无效')
+  }
+  const result = db
+    .prepare('UPDATE users SET account_kind = ?, updated_at = ? WHERE id = ?')
+    .run(accountKind, nowIso(), userId)
   if (result.changes === 0) throw new Error('用户不存在')
 }
 
@@ -208,7 +227,8 @@ export function readSession(db, token) {
   const row = db
     .prepare(
       `
-      SELECT s.token_hash, s.user_id, s.expires_at, u.id AS user_id_check, u.username, u.role, u.status
+      SELECT s.token_hash, s.user_id, s.expires_at, u.id AS user_id_check,
+             u.username, u.role, u.account_kind, u.status
       FROM sessions s
       JOIN users u ON u.id = s.user_id
       WHERE s.token_hash = ?
@@ -223,6 +243,7 @@ export function readSession(db, token) {
     userId: row.user_id,
     username: row.username,
     role: row.role,
+    accountKind: row.account_kind || 'human',
     expiresAt: row.expires_at,
   }
 }

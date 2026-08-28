@@ -17,6 +17,9 @@ node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
   --source official_answers=/abs/answers.docx
 node scripts/import-pipeline/universal-nck1.mjs verify <paperId>
 node scripts/import-pipeline/universal-nck1.mjs build <paperId>
+QUESTION_BANK_IMPORT_OPS_ORIGIN=https://eqbank.cc \
+QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN='<secret>' \
+  node scripts/import-pipeline/review.mjs push <paperId>
 ```
 
 `init` 复制并摘要绑定本地源，DOCX 同时生成确定性 PDF rendition；源文件、
@@ -37,8 +40,21 @@ node scripts/import-pipeline/universal-nck1.mjs crop-pdf \
 
 SVG 内容媒体必须用固定 density 转 PNG；DOCX shape 先用 init 生成的 PDF
 rendition，再按 `pdf_crop` 路径裁。`verify` 只派生 Candidate，`build` 只生成
-Candidate 摘要和 `confirmed: false` 的 Teacher Confirmation 模板。教师外部确认
-精确 digest 后，可信边界才可生成 request；Agent 不代确认，以上步骤都不发布。
+Candidate 摘要和 `confirmed: false` 的 Teacher Confirmation 模板。`review.mjs
+push` 把不可变源与 Candidate 作为新 revision 上传到 `/ops/`。Owner 在真实
+Screen/Print/PDF 上审核；Agent 用自己的 `import_agent` 网页待办箱或下列命令
+读取、回复和提交修订：
+
+```bash
+node scripts/import-pipeline/review.mjs status <paperId>
+node scripts/import-pipeline/review.mjs reply <paperId> <issueId> --message '<回复>'
+node scripts/import-pipeline/review.mjs push <paperId> --resolves <issueId>[,<issueId>]
+node scripts/import-pipeline/review.mjs accept <paperId>
+```
+
+`accept` 只在最新 revision 已由 Owner 认可时成功；它重新核对本地源、Candidate、
+可见结构、文件清单和 bundle digest，才写确认、Canonical request 和摘要绑定 QA
+收据。它不 publish、不部署。Agent 不代确认，Owner 网页认可也不构成上线授权。
 
 机械 how-to 见 `docs/import/agent-runbook.md`；本 README 只是它引用的工序
 参考,不重复讲工序。数据契约权威见 `docs/product/nck1-paper-standard.md`。
@@ -131,8 +147,13 @@ node scripts/import-pipeline/build-docx-pair-canonical-request.mjs \
 node scripts/import-pipeline/ship-checklist.mjs check <paperId> --owner-said-ship
 ```
 
-仅当打印「允许」、且 owner **当前**口头「上线」时，才跑整库
-`node scripts/pull-run-push.mjs push`。不是单卷增量，不是 `deploy.sh`。
+该清单继续使用 `QUESTION_BANK_IMPORT_OPS_ORIGIN` 与 Agent token，只读确认本地
+QA 收据仍是 Review 服务的当前最新认可；新 revision 会让旧收据失败关闭。仅当
+打印「允许」、且 owner **当前**口头「上线」时，才跑整库
+`node scripts/pull-run-push.mjs push <paperId> --owner-said-ship`。实际 push 会在
+停生产服务前再次读取当前 Review revision，并事务性取得 shipping guard；若清单
+之后出现新 revision，则不做任何生产修改。guard 持有到远端操作结束，期间 Review
+服务拒绝新 revision 和会撤销认可的问题状态修改。不是单卷增量，不是 `deploy.sh`。
 导题后台无按钮。详见 `docs/import/agent-contract.md` 上线。
 
 ## 待办(productionization 续)

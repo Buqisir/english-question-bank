@@ -56,6 +56,9 @@ function assert(name, condition, details = '') {
 const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-verify-auth-gate-'))
 const dbPath = path.join(tempRoot, 'question-bank.sqlite')
 const userDataDbPath = path.join(tempRoot, 'user-data.sqlite')
+const importOpsDbPath = path.join(tempRoot, 'import-ops.sqlite')
+const importOpsFilesRoot = path.join(tempRoot, 'import-ops-files')
+const importAgentToken = 'verify-import-agent-token'
 
 async function freePort() {
   const server = createServer()
@@ -77,6 +80,9 @@ const env = {
   QUESTION_BANK_DB: dbPath,
   USER_DATA_DB: userDataDbPath,
   QUESTION_BANK_API_PORT: String(apiPort),
+  QUESTION_BANK_IMPORT_OPS_DB: importOpsDbPath,
+  QUESTION_BANK_IMPORT_OPS_ROOT: importOpsFilesRoot,
+  QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN: importAgentToken,
 }
 
 function seedMinimalBankDatabase() {
@@ -188,10 +194,11 @@ async function waitForHttp(url, timeoutMs = 20_000) {
   throw new Error(`Timed out waiting for ${url}`)
 }
 
-async function req(urlPath, { method = 'GET', body, cookie } = {}) {
+async function req(urlPath, { method = 'GET', body, cookie, authorization } = {}) {
   const headers = {}
   if (body !== undefined) headers['content-type'] = 'application/json'
   if (cookie) headers.cookie = cookie
+  if (authorization) headers.authorization = authorization
   const response = await fetch(`http://127.0.0.1:${apiPort}${urlPath}`, {
     method,
     headers,
@@ -260,6 +267,24 @@ async function main() {
       '(b) create-user.mjs creates the account (child process, real CLI invocation)',
       /created user "verify-owner"/.test(cliOutput),
       `cli output: ${cliOutput}`,
+    )
+    const memberCliOutput = await runCli([
+      '--username', 'verify-member', '--password', 'Verify-Member-123', '--role', 'member',
+    ])
+    assert(
+      '(b) create-user.mjs creates a human member account',
+      /account: human/.test(memberCliOutput),
+      `cli output: ${memberCliOutput}`,
+    )
+    const agentCliOutput = await runCli([
+      '--username', 'verify-import-agent',
+      '--password', 'Verify-Agent-123',
+      '--account-kind', 'import_agent',
+    ])
+    assert(
+      '(b) create-user.mjs creates a least-privileged import_agent account',
+      /role: member, account: import_agent/.test(agentCliOutput),
+      `cli output: ${agentCliOutput}`,
     )
 
     // (c) forced mode now that a user exists.
@@ -440,6 +465,91 @@ async function main() {
         meWithCookie.json?.user?.username === 'verify-owner' &&
         meWithCookie.json?.user?.role === 'owner',
       `got status=${meWithCookie.status} body=${JSON.stringify(meWithCookie.json)}`,
+    )
+
+    const noCookieOwnerReviews = await req('/api/import-reviews')
+    assert(
+      '(c) import review Owner API rejects unauthenticated requests',
+      noCookieOwnerReviews.status === 401 && noCookieOwnerReviews.json?.error === 'not_authenticated',
+      `got status=${noCookieOwnerReviews.status} body=${JSON.stringify(noCookieOwnerReviews.json)}`,
+    )
+    const ownerReviews = await req('/api/import-reviews', { cookie })
+    assert(
+      '(c) import review Owner API accepts the Owner cookie',
+      ownerReviews.status === 200 && Array.isArray(ownerReviews.json?.papers),
+      `got status=${ownerReviews.status} body=${JSON.stringify(ownerReviews.json)}`,
+    )
+    const ownerCannotSubstituteForAgent = await req('/api/import-agent-reviews', { cookie })
+    assert(
+      '(c) Owner cookie cannot substitute for Agent identity',
+      ownerCannotSubstituteForAgent.status === 401 &&
+        ownerCannotSubstituteForAgent.json?.error === 'agent_auth_required',
+      `got status=${ownerCannotSubstituteForAgent.status} body=${JSON.stringify(ownerCannotSubstituteForAgent.json)}`,
+    )
+    const bearerInbox = await req('/api/import-agent-reviews', {
+      authorization: `Bearer ${importAgentToken}`,
+    })
+    assert(
+      '(c) dedicated Agent bearer credential can read the review inbox without a Cookie',
+      bearerInbox.status === 200 && Array.isArray(bearerInbox.json?.papers),
+      `got status=${bearerInbox.status} body=${JSON.stringify(bearerInbox.json)}`,
+    )
+    const bearerGuardRelease = await req(
+      '/api/import-agent-reviews/papers/paper-missing/shipping-guards/guard-missing',
+      {
+        method: 'DELETE',
+        authorization: `Bearer ${importAgentToken}`,
+      },
+    )
+    assert(
+      '(c) dedicated Agent bearer credential can reach shipping-guard release without a Cookie',
+      bearerGuardRelease.status === 200 && bearerGuardRelease.json?.released === false,
+      `got status=${bearerGuardRelease.status} body=${JSON.stringify(bearerGuardRelease.json)}`,
+    )
+    const bearerCannotApprove = await req('/api/import-reviews/papers/missing/revisions/missing/approve', {
+      method: 'POST',
+      authorization: `Bearer ${importAgentToken}`,
+      body: { bundleDigest: `sha256:${'0'.repeat(64)}` },
+    })
+    assert(
+      '(c) Agent bearer credential cannot reach the Owner approval API',
+      bearerCannotApprove.status === 401 && bearerCannotApprove.json?.error === 'not_authenticated',
+      `got status=${bearerCannotApprove.status} body=${JSON.stringify(bearerCannotApprove.json)}`,
+    )
+
+    const memberLogin = await req('/api/auth/login', {
+      method: 'POST',
+      body: { username: 'verify-member', password: 'Verify-Member-123' },
+    })
+    const memberCookie = cookieHeaderFrom(memberLogin.setCookie)
+    const memberReviews = await req('/api/import-reviews', { cookie: memberCookie })
+    assert(
+      '(c) human member cannot read the import review Owner API',
+      memberReviews.status === 403 && memberReviews.json?.error === 'forbidden',
+      `got status=${memberReviews.status} body=${JSON.stringify(memberReviews.json)}`,
+    )
+
+    const agentLogin = await req('/api/auth/login', {
+      method: 'POST',
+      body: { username: 'verify-import-agent', password: 'Verify-Agent-123' },
+    })
+    const agentCookie = cookieHeaderFrom(agentLogin.setCookie)
+    const agentMe = await req('/api/auth/me', { cookie: agentCookie })
+    const agentInbox = await req('/api/import-agent-reviews', { cookie: agentCookie })
+    const agentOrdinaryApi = await req('/api/draft-papers', { cookie: agentCookie })
+    const agentOwnerApi = await req('/api/import-reviews', { cookie: agentCookie })
+    assert(
+      '(c) real import_agent login sees its identity and dedicated inbox',
+      agentLogin.status === 200 &&
+        agentMe.status === 200 && agentMe.json?.user?.accountKind === 'import_agent' &&
+        agentInbox.status === 200 && Array.isArray(agentInbox.json?.papers),
+      `login=${JSON.stringify(agentLogin.json)} me=${JSON.stringify(agentMe.json)} inbox=${JSON.stringify(agentInbox.json)}`,
+    )
+    assert(
+      '(c) import_agent account is globally denied ordinary member and Owner APIs',
+      agentOrdinaryApi.status === 403 && agentOrdinaryApi.json?.error === 'agent_account_scope_forbidden' &&
+        agentOwnerApi.status === 403 && agentOwnerApi.json?.error === 'agent_account_scope_forbidden',
+      `ordinary=${JSON.stringify(agentOrdinaryApi.json)} owner=${JSON.stringify(agentOwnerApi.json)}`,
     )
 
     const defaultStudents = await req('/api/vocabulary/students', { cookie })

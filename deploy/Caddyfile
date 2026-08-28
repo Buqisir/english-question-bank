@@ -37,6 +37,17 @@ eqbank.cc, www.eqbank.cc {
 		reverse_proxy 127.0.0.1:8787
 	}
 
+	handle /ops {
+		redir /ops/ 308
+	}
+
+	handle_path /ops/* {
+		root * /opt/eqb/english-question-bank/import-ops/public
+		header Cache-Control "no-store"
+		try_files {path} /index.html
+		file_server
+	}
+
 	handle /assets/* {
 		root * /opt/eqb/english-question-bank/app/dist
 		header Cache-Control "public, max-age=31536000, immutable"

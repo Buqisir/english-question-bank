@@ -12,7 +12,8 @@
 // printed, and the DB connection is closed in try/finally.
 //
 // Usage:
-//   node scripts/create-user.mjs --username W [--role owner|member] [--password P]
+//   node scripts/create-user.mjs --username W [--role owner|member]
+//     [--account-kind human|import_agent] [--password P]
 //     Creates a new active user. If --password is omitted, a random password is
 //     generated with crypto.randomBytes(9).toString('base64url') and printed once
 //     (never written to disk).
@@ -32,6 +33,7 @@ import {
   deleteSessionsForUser,
   findUserByUsername,
   hashPassword,
+  setUserAccountKind,
   setUserPasswordHash,
   setUserStatus,
 } from '../server/auth/auth.mjs'
@@ -43,7 +45,7 @@ function fail(message) {
 }
 
 function parseArgs(argv) {
-  const args = { role: 'member' }
+  const args = { role: 'member', accountKind: 'human' }
   for (let i = 0; i < argv.length; i += 1) {
     const token = argv[i]
     switch (token) {
@@ -55,6 +57,9 @@ function parseArgs(argv) {
         break
       case '--role':
         args.role = argv[++i]
+        break
+      case '--account-kind':
+        args.accountKind = argv[++i]
         break
       case '--reset-password':
         args.mode = 'reset-password'
@@ -92,6 +97,14 @@ async function main() {
   }
   if (!args.mode && args.role && !['owner', 'member'].includes(args.role)) {
     fail(`invalid --role: ${args.role} (expected owner or member)`)
+    return
+  }
+  if (!args.mode && !['human', 'import_agent'].includes(args.accountKind)) {
+    fail(`invalid --account-kind: ${args.accountKind} (expected human or import_agent)`)
+    return
+  }
+  if (!args.mode && args.accountKind === 'import_agent' && args.role !== 'member') {
+    fail('import_agent accounts must use --role member')
     return
   }
 
@@ -133,7 +146,8 @@ async function main() {
     const password = args.password || generatePassword()
     const passwordHash = await hashPassword(password)
     const user = createUser(db, { username: args.username, passwordHash, role: args.role })
-    console.log(`Step: created user "${user.username}" (role: ${user.role}, id: ${user.id}).`)
+    setUserAccountKind(db, user.id, args.accountKind)
+    console.log(`Step: created user "${user.username}" (role: ${user.role}, account: ${args.accountKind}, id: ${user.id}).`)
     if (!args.password) {
       console.log(`Generated password (shown once, not stored anywhere): ${password}`)
     }

@@ -22,8 +22,8 @@
  * the durable static/structural regression net around that result.
  */
 
-import { execFileSync, spawnSync } from 'node:child_process'
-import { existsSync, mkdtempSync, readdirSync, readFileSync, rmSync, statSync } from 'node:fs'
+import { execFileSync, spawn, spawnSync } from 'node:child_process'
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import { createHash } from 'node:crypto'
 import { tmpdir } from 'node:os'
 import { resolve, join } from 'node:path'
@@ -137,6 +137,11 @@ const reverseProxyCount = (caddyfile.match(/reverse_proxy 127\.0\.0\.1:8787/g) |
 assert(reverseProxyCount === 3, `Caddyfile has exactly 3 reverse_proxy → 127.0.0.1:8787 (found ${reverseProxyCount})`)
 assert(caddyfile.includes('try_files {path} /index.html'), 'Caddyfile SPA fallback: try_files {path} /index.html')
 assert(caddyfile.includes('file_server'), 'Caddyfile serves static via file_server')
+assert(caddyfile.includes('handle_path /ops/*'), 'Caddyfile serves the Import Review Workbench at /ops/')
+assert(
+  caddyfile.includes('import-ops/public'),
+  'Caddyfile /ops/ root is the review workbench public directory',
+)
 assert(
   /handle \/assets\/\* \{[\s\S]*?header Cache-Control "public, max-age=31536000, immutable"[\s\S]*?file_server[\s\S]*?\}/.test(caddyfile),
   'hashed /assets/* files carry a one-year immutable browser cache contract',
@@ -252,6 +257,9 @@ try {
   const snapshotDir = join(fixtureDir, 'snapshots')
   const paperAssetRoot = join(fixtureDir, 'paper-assets')
   const userSpaceRoot = join(fixtureDir, 'user-space')
+  const importOpsRoot = join(fixtureDir, 'import-ops-files')
+  mkdirSync(importOpsRoot, { recursive: true })
+  writeFileSync(join(importOpsRoot, 'revision.bin'), 'review fixture')
 
   const seed = spawnSync('sqlite3', [fixtureDb, 'CREATE TABLE t(x); INSERT INTO t VALUES(1);'], { encoding: 'utf8' })
   assert(seed.status === 0, `fixture sqlite db created for VA6 (${seed.stderr ? seed.stderr.trim() : 'ok'})`)
@@ -268,6 +276,8 @@ try {
         USER_DATA_DB: fixtureDb,
         QUESTION_BANK_PAPER_ASSET_ROOT: paperAssetRoot,
         QUESTION_BANK_USER_SPACE_ROOT: userSpaceRoot,
+        QUESTION_BANK_IMPORT_OPS_DB: fixtureDb,
+        QUESTION_BANK_IMPORT_OPS_ROOT: importOpsRoot,
         EQB_SNAPSHOT_DIR: snapshotDir,
       },
     },
@@ -278,8 +288,10 @@ try {
   )
 
   const snapPath = join(snapshotDir, 'question-bank.sqlite')
+  const importOpsSnapPath = join(snapshotDir, 'import-ops.sqlite')
   const snapExists = existsSync(snapPath)
   assert(snapExists, `script wrote a snapshot to EQB_SNAPSHOT_DIR (${snapPath})`)
+  assert(existsSync(importOpsSnapPath), 'script snapshots the Import Review SQLite database')
 
   if (snapExists) {
     const integrityCheck = spawnSync('sqlite3', [snapPath, 'PRAGMA integrity_check'], { encoding: 'utf8' })
@@ -318,22 +330,56 @@ const cleanRun = spawnSync(
 )
 assert(cleanRun.status === 0, `check-manifest exits 0 for a clean path list (got status ${cleanRun.status}${cleanRun.status !== 0 ? ' — ' + cleanRun.stderr.trim() : ''})`)
 
+const ungatedPushRun = spawnSync('node', [pullRunPushPath, 'push'], { encoding: 'utf8' })
+assert(
+  ungatedPushRun.status !== 0 && ungatedPushRun.stderr.includes('push requires <paperId>'),
+  'bare push is rejected before remote resolution; paperId and current owner authorization are mandatory',
+)
+const unauthorizedPushRun = spawnSync(
+  'node',
+  [pullRunPushPath, 'push', 'paper-mock-launch-gate'],
+  { encoding: 'utf8' },
+)
+assert(
+  unauthorizedPushRun.status !== 0
+    && unauthorizedPushRun.stderr.includes('requires exactly one current owner authorization flag'),
+  'paperId alone cannot reach remote resolution; exactly one current owner authorization flag is mandatory',
+)
+
 // Fake-remote push round-trip: proves (1) user-data.sqlite is never touched,
 // (2) the question-bank swap lands via atomic rename (inode changes, no
 // leftover *.incoming.* temp file), and (3) EQB_SERVICE_STOP genuinely runs
 // BEFORE the swap (it captures the OLD content's sha while it runs) while
 // EQB_SERVICE_START runs after.
 const va5Dir = mkdtempSync(join(tmpdir(), 'eqb-pull-run-push-verify-'))
+let reviewServer = null
 try {
   const remoteDir = join(va5Dir, 'fake-remote')
   const localDir = join(va5Dir, 'fake-local')
   const stopLog = join(va5Dir, 'stop-start.log')
+  const reviewStatusPath = join(va5Dir, 'review-status.json')
+  const reviewOriginPath = join(va5Dir, 'review-origin.txt')
+  const reviewGuardPath = join(va5Dir, 'shipping-guard.json')
+  const reviewServerPath = join(va5Dir, 'review-server.mjs')
+  const paperId = 'paper-mock-launch-gate'
 
   const remoteDataDir = join(remoteDir, 'data')
   const remoteAssetsDir = join(remoteDir, 'app', 'public', 'paper-assets', 'bundle-remote', 'latest')
   const localDataDir = join(localDir, 'data')
   const localAssetsDir = join(localDir, 'app', 'public', 'paper-assets', 'bundle-local', 'latest')
-  for (const dir of [remoteDataDir, remoteAssetsDir, localDataDir, localAssetsDir]) {
+  const paperDir = join(localDir, 'scripts', 'import-pipeline', 'papers', paperId)
+  const evidenceDir = join(paperDir, 'canonical-evidence')
+  const signalsDir = join(paperDir, 'signals')
+  const paperLatestDir = join(localDir, 'app', 'public', 'paper-assets', paperId, 'latest')
+  for (const dir of [
+    remoteDataDir,
+    remoteAssetsDir,
+    localDataDir,
+    localAssetsDir,
+    evidenceDir,
+    signalsDir,
+    paperLatestDir,
+  ]) {
     execFileSync('mkdir', ['-p', dir], { encoding: 'utf8' })
   }
 
@@ -353,6 +399,124 @@ try {
     'VA5 fixture: fake-remote db + fake-remote user-data + fake-local db seeded',
   )
 
+  const sourceDigest = `sha256:${'1'.repeat(64)}`
+  const candidateDigest = `sha256:${'2'.repeat(64)}`
+  const visibleStructureDigest = `sha256:${'3'.repeat(64)}`
+  const bundleDigest = `sha256:${'4'.repeat(64)}`
+  const approvalId = 'approval-launch-gate'
+  const revisionId = 'rev-launch-gate'
+  const webApproval = {
+    schemaVersion: 'web-import-review-approval-v1',
+    approvalId,
+    paperId,
+    revisionId,
+    sourceDigest,
+    candidateDigest,
+    visibleStructureDigest,
+    bundleDigest,
+  }
+  const qaReceipt = {
+    schemaVersion: 'web-import-review-qa-accepted-v1',
+    approvalId,
+    revisionId,
+    sourceDigest,
+    candidateDigest,
+    visibleStructureDigest,
+    bundleDigest,
+  }
+  const approvedReviewStatus = {
+    paperId,
+    latestRevisionId: revisionId,
+    latest: { id: revisionId, state: 'approved', bundleDigest },
+    approval: webApproval,
+  }
+  writeFileSync(join(paperDir, 'config.json'), JSON.stringify({
+    paperId,
+    format: 'universal-nck1',
+  }))
+  writeFileSync(join(signalsDir, 'ai-answer-check.json'), JSON.stringify({ ok: true }))
+  writeFileSync(join(signalsDir, 'qa-accepted.json'), JSON.stringify(qaReceipt))
+  writeFileSync(join(evidenceDir, 'candidate-summary.json'), JSON.stringify({
+    paperId,
+    sourceDigest,
+    candidateDigest,
+  }))
+  writeFileSync(join(evidenceDir, 'teacher-confirmation-v1.json'), JSON.stringify({
+    schemaVersion: 'teacher-confirmation-v1',
+    sourceDigest,
+    candidateDigest,
+    confirmed: true,
+  }))
+  writeFileSync(join(evidenceDir, 'web-review-approval-v1.json'), JSON.stringify(webApproval))
+  writeFileSync(reviewStatusPath, JSON.stringify(approvedReviewStatus))
+  writeFileSync(reviewServerPath, `
+    import { createServer } from 'node:http'
+    import { existsSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+    const [statusPath, originPath, guardPath] = process.argv.slice(2)
+    const send = (response, status, body) => {
+      response.writeHead(status, { 'content-type': 'application/json' })
+      response.end(JSON.stringify(body))
+    }
+    const server = createServer(async (request, response) => {
+      const status = JSON.parse(readFileSync(statusPath, 'utf8'))
+      if (request.method === 'POST' && request.url.endsWith('/shipping-guards')) {
+        let raw = ''
+        for await (const chunk of request) raw += chunk
+        const expected = JSON.parse(raw)
+        const approval = status.approval
+        const keys = ['approvalId', 'revisionId', 'sourceDigest', 'candidateDigest', 'visibleStructureDigest', 'bundleDigest']
+        if (
+          existsSync(guardPath)
+          || status.latest?.state !== 'approved'
+          || !approval
+          || keys.some((key) => approval[key] !== expected[key])
+        ) {
+          send(response, 409, {
+            code: 'IMPORT_REVIEW_SHIPPING_GUARD_STALE',
+            error: 'Review status changed before shipping guard acquisition',
+          })
+          return
+        }
+        const guard = {
+          id: 'ship-guard-launch-test',
+          paperId: status.paperId,
+          revisionId: approval.revisionId,
+          approvalId: approval.approvalId,
+        }
+        writeFileSync(guardPath, JSON.stringify(guard))
+        send(response, 201, { guard })
+        return
+      }
+      if (request.method === 'DELETE' && request.url.includes('/shipping-guards/')) {
+        const released = existsSync(guardPath)
+        if (released) rmSync(guardPath)
+        send(response, 200, { released })
+        return
+      }
+      send(response, 200, status)
+    })
+    server.listen(0, '127.0.0.1', () => {
+      const { port } = server.address()
+      writeFileSync(originPath, \`http://127.0.0.1:\${port}\`)
+    })
+  `)
+  reviewServer = spawn('node', [
+    reviewServerPath,
+    reviewStatusPath,
+    reviewOriginPath,
+    reviewGuardPath,
+  ], {
+    stdio: 'ignore',
+  })
+  const sleeper = new Int32Array(new SharedArrayBuffer(4))
+  for (let attempt = 0; attempt < 100 && !existsSync(reviewOriginPath); attempt += 1) {
+    Atomics.wait(sleeper, 0, 0, 20)
+  }
+  const reviewOrigin = existsSync(reviewOriginPath)
+    ? readFileSync(reviewOriginPath, 'utf8').trim()
+    : ''
+  assert(Boolean(reviewOrigin), 'VA5 fixture: isolated Review status server started')
+
   function sha256Of(path) {
     return createHash('sha256').update(readFileSync(path)).digest('hex')
   }
@@ -365,12 +529,12 @@ try {
   // it runs (proves stop happens while the db is still OLD content, i.e.
   // BEFORE the swap) and appends a STOP marker; EQB_SERVICE_START appends a
   // START marker.
-  const stopCmd = `sh -c "shasum -a 256 ${JSON.stringify(remoteDb)} >> ${JSON.stringify(stopLog)}; echo STOP >> ${JSON.stringify(stopLog)}"`
+  const stopCmd = `sh -c "test -f ${JSON.stringify(reviewGuardPath)} || exit 97; echo GUARD >> ${JSON.stringify(stopLog)}; shasum -a 256 ${JSON.stringify(remoteDb)} >> ${JSON.stringify(stopLog)}; echo STOP >> ${JSON.stringify(stopLog)}"`
   const startCmd = `sh -c "echo START >> ${JSON.stringify(stopLog)}"`
 
   const pushRun = spawnSync(
     'node',
-    [pullRunPushPath, 'push'],
+    [pullRunPushPath, 'push', paperId, '--owner-said-ship'],
     {
       encoding: 'utf8',
       env: {
@@ -379,6 +543,8 @@ try {
         EQB_LOCAL_REPO: localDir,
         EQB_SERVICE_STOP: stopCmd,
         EQB_SERVICE_START: startCmd,
+        QUESTION_BANK_IMPORT_OPS_ORIGIN: reviewOrigin,
+        QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN: 'test-agent-token',
       },
     },
   )
@@ -410,13 +576,67 @@ try {
   // START marker is present.
   const logContents = existsSync(stopLog) ? readFileSync(stopLog, 'utf8') : ''
   const stopSawContentA = logContents.includes(recordedQuestionBank.sha256A)
+  const hasGuardMarker = /^GUARD$/m.test(logContents)
   const hasStopMarker = /^STOP$/m.test(logContents)
   const hasStartMarker = /^START$/m.test(logContents)
   assert(
-    stopSawContentA && hasStopMarker && hasStartMarker,
-    `VA5.5: STOP marker ran while remote db still had content A's sha (${recordedQuestionBank.sha256A.slice(0, 12)}…), and a START marker followed (log: ${JSON.stringify(logContents.trim())})`,
+    hasGuardMarker && stopSawContentA && hasStopMarker && hasStartMarker,
+    `VA5.5: Review shipping guard existed before STOP, STOP saw content A (${recordedQuestionBank.sha256A.slice(0, 12)}…), and START followed (log: ${JSON.stringify(logContents.trim())})`,
+  )
+  assert(
+    !existsSync(reviewGuardPath)
+      && pushRun.stdout.includes('acquired Review shipping guard')
+      && pushRun.stdout.includes('released Review shipping guard'),
+    'VA5.6: actual push holds the Review shipping guard across all remote mutations and releases it after START',
+  )
+
+  // A revision finalized after an earlier checklist must invalidate the local
+  // receipt inside the actual push process, before STOP or any remote write.
+  writeFileSync(reviewStatusPath, JSON.stringify({
+    paperId,
+    latestRevisionId: 'rev-launch-gate-newer',
+    latest: {
+      id: 'rev-launch-gate-newer',
+      state: 'awaiting_review',
+      bundleDigest: `sha256:${'5'.repeat(64)}`,
+    },
+    approval: null,
+  }))
+  const beforeBlockedPush = {
+    dbSha: sha256Of(remoteDb),
+    dbIno: statSync(remoteDb).ino,
+    dataFiles: readdirSync(remoteDataDir).sort().join('\n'),
+    stopLog: readFileSync(stopLog, 'utf8'),
+  }
+  const blockedPushRun = spawnSync(
+    'node',
+    [pullRunPushPath, 'push', paperId, '--owner-said-ship'],
+    {
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        EQB_REMOTE: `local:${remoteDir}`,
+        EQB_LOCAL_REPO: localDir,
+        EQB_SERVICE_STOP: stopCmd,
+        EQB_SERVICE_START: startCmd,
+        QUESTION_BANK_IMPORT_OPS_ORIGIN: reviewOrigin,
+        QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN: 'test-agent-token',
+      },
+    },
+  )
+  assert(
+    blockedPushRun.status !== 0 && blockedPushRun.stderr.includes('网页审核收据不再是'),
+    'VA5.7: a newer Review revision makes the actual push entrypoint fail closed',
+  )
+  assert(
+    sha256Of(remoteDb) === beforeBlockedPush.dbSha
+      && statSync(remoteDb).ino === beforeBlockedPush.dbIno
+      && readdirSync(remoteDataDir).sort().join('\n') === beforeBlockedPush.dataFiles
+      && readFileSync(stopLog, 'utf8') === beforeBlockedPush.stopLog,
+    'VA5.8: stale Review approval is rejected before guard acquisition, STOP, backup, transfer, or swap',
   )
 } finally {
+  if (reviewServer) reviewServer.kill()
   rmSync(va5Dir, { recursive: true, force: true })
 }
 

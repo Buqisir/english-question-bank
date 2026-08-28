@@ -343,6 +343,9 @@ type SimilarSeedSnapshot = {
 
 export type PaperBrowsePageProps = {
   paperId: string
+  /** Import review only: read the immutable Candidate revision through the
+   * reviewer API while keeping this exact Screen renderer. */
+  reviewRevision?: string | null
   focusGroupId?: string | null
   /** flow-panel 刀 3: 入口带态——预选的题（asset 加载完成后走
    * selectLectureQuestion 同款路径），groupId 缺省时用来推导所属题组。 */
@@ -621,6 +624,7 @@ const SIMILAR_PASSAGES_MODE_GROUP_TYPES = new Set(['cloze', 'sevenChoices'])
 export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   const {
     paperId,
+    reviewRevision,
     focusGroupId,
     questionId,
     lecture,
@@ -828,9 +832,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
 
     async function load(): Promise<void> {
       try {
-        let resolvedBase = `/paper-assets/${paperId}/latest`
+        let resolvedBase = reviewRevision
+          ? `/api/import-review-preview/revisions/${encodeURIComponent(reviewRevision)}/asset`
+          : `/paper-assets/${paperId}/latest`
         let assetRes = await fetch(`${resolvedBase}/paper-asset.json`)
-        if (!assetRes.ok) {
+        if (!assetRes.ok && !reviewRevision) {
           resolvedBase = `/paper-assets/${paperId}`
           assetRes = await fetch(`${resolvedBase}/paper-asset.json`)
         }
@@ -838,7 +844,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           throw new Error(`没找到这份卷面（${paperId}），可能已被移除。回到找题页重新打开吧。`)
         }
         const sourceAsset = (await assetRes.json()) as PaperAssetV1
-        const canonicalConsumption = await loadScreenConsumption(paperId)
+        const canonicalConsumption = await loadScreenConsumption(
+          paperId,
+          fetch,
+          reviewRevision,
+        )
         const loadedAsset = projectAssetBlocksToCanonicalConsumption(
           sourceAsset,
           canonicalConsumption,
@@ -1147,7 +1157,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     return (): void => {
       cancelled = true
     }
-  }, [paperId])
+  }, [paperId, reviewRevision])
 
   // Writing analysis is prefetched so a complete application payload can open
   // lecture from the answer box before lecture mode is on. Cloze / grammar-fill
@@ -3470,18 +3480,20 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         路径都不受蒙层影响。
       */}
       {lectureOpen && <div className="paper-browse-lecture-backdrop" aria-hidden="true" />}
-      <button
-        type="button"
-        ref={lectureHandleRef}
-        className={`paper-browse-lecture-handle${
-          lectureOpen ? ' paper-browse-lecture-handle--open' : ''
-        }`}
-        onClick={toggleLecturePanel}
-        aria-pressed={lectureOpen}
-        aria-expanded={lectureOpen}
-      >
-        讲评
-      </button>
+      {!reviewRevision && (
+        <button
+          type="button"
+          ref={lectureHandleRef}
+          className={`paper-browse-lecture-handle${
+            lectureOpen ? ' paper-browse-lecture-handle--open' : ''
+          }`}
+          onClick={toggleLecturePanel}
+          aria-pressed={lectureOpen}
+          aria-expanded={lectureOpen}
+        >
+          讲评
+        </button>
+      )}
       <button
         type="button"
         className="basket-chip"

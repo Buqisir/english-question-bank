@@ -280,7 +280,8 @@ real server path.)
 
 ```
 node scripts/pull-run-push.mjs pull
-node scripts/pull-run-push.mjs push
+node scripts/pull-run-push.mjs push <paperId> --owner-said-ship
+node scripts/pull-run-push.mjs push <paperId> --owner-said-retry-ship
 node scripts/pull-run-push.mjs check-manifest <comma,separated,paths>
 ```
 
@@ -290,8 +291,10 @@ node scripts/pull-run-push.mjs check-manifest <comma,separated,paths>
   db (timestamped) before moving the snapshot into place. Never pulls the
   remote `data/` directory wholesale — only the two explicitly-named
   targets.
-- **`push`** — the locked swap recipe (PA MF-1, do not reorder): manifest
-  assertion → verify local db passes `PRAGMA integrity_check` → **stop** the
+- **`push`** — requires the paper ID plus the current Owner authorization
+  flag. Its locked swap recipe (PA MF-1, do not reorder): manifest assertion →
+  verify local db passes `PRAGMA integrity_check` → re-run the local ship gate
+  and transactionally acquire a digest-bound Review shipping guard → **stop** the
   remote `eqb` service (`sudo systemctl stop eqb`, requires the deploy user
   to have that sudo rule) → back up the remote OLD db to a timestamped path
   → transfer the local db to a remote TEMP path in the same directory as the
@@ -304,6 +307,12 @@ node scripts/pull-run-push.mjs check-manifest <comma,separated,paths>
   opened/closed per request — there is no WAL/-shm/-wal sidecar to manage).
   The active `question-bank.sqlite` path is never written to in place; every
   swap goes through a same-disk temp file + atomic rename.
+  A missing/unavailable Review service, a revision newer than the local QA
+  receipt, or failure to acquire the guard fails closed before service stop,
+  backup, transfer, or swap. While held, the guard rejects review mutations
+  that could invalidate approval; normal success/failure releases it after the
+  remote recipe. A killed process leaves the guard in place intentionally;
+  follow `docs/import/agent-contract.md` recovery rather than clearing it blindly.
 - **`check-manifest`** — runs only the manifest guard (MF-2) over an
   explicit comma-separated path list: exits non-zero if any path's basename
   matches `/user-data/i` (catches `user-data.sqlite`,

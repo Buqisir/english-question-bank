@@ -7,7 +7,7 @@ import {
   writeFileSync,
 } from 'node:fs'
 import { createServer } from 'node:http'
-import { randomUUID } from 'node:crypto'
+import { createHash, randomUUID } from 'node:crypto'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { DatabaseSync } from 'node:sqlite'
@@ -45,6 +45,8 @@ import { createSemanticSearchImplementation } from './search/semanticSearchServi
 import { createQuestionBankStewardImplementation } from './search/questionBankStewardService.mjs'
 import { createSynonymDifficultyImplementation, loadSynonymDifficultyKnowledge, normalizeSynonymCardId, normalizeSynonymConfidence, normalizeSynonymBoolean, uniqueSynonymFlags, formatSynonymDifficultyKnowledgeForReadingPrompt } from './ai-parse/synonymDifficultyService.mjs'
 import { createQuestionGroupParseImplementation } from './ai-parse/questionGroupParseService.mjs'
+import { createImportReviewStore } from './import-review/importReviewStore.mjs'
+import { createImportReviewRoutes } from './import-review/importReviewRoutes.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
@@ -53,10 +55,54 @@ const userDataDbPath = process.env.USER_DATA_DB || path.join(rootDir, 'data/user
 const exportDir = path.join(rootDir, 'exports')
 const paperAssetsDir = process.env.QUESTION_BANK_PAPER_ASSET_ROOT || path.join(rootDir, 'app/public/paper-assets')
 const userSpaceFilesDir = process.env.QUESTION_BANK_USER_SPACE_ROOT || path.join(rootDir, 'data/user-space/files')
+const importReviewDbPath = process.env.QUESTION_BANK_IMPORT_OPS_DB || path.join(rootDir, 'data/import-ops.sqlite')
+const importReviewFilesRoot = process.env.QUESTION_BANK_IMPORT_OPS_ROOT || path.join(rootDir, 'data/import-ops/files')
 const promptsDir = path.join(__dirname, 'prompts')
 const verifyAuditLogPath = path.join(rootDir, 'server', 'logs', 'verify-audit.log')
 const port = Number(process.env.QUESTION_BANK_API_PORT || 8787)
 const vocabularyAppOrigin = process.env.QUESTION_BANK_PUBLIC_ORIGIN || 'https://eqbank.cc'
+
+function rendererFiles(target) {
+  if (!existsSync(target)) return []
+  if (!statSync(target).isDirectory()) return [target]
+  return readdirSync(target, { withFileTypes: true })
+    .sort((left, right) => left.name.localeCompare(right.name))
+    .flatMap((entry) => rendererFiles(path.join(target, entry.name)))
+}
+
+function actualRendererBuildId() {
+  const roots = [
+    path.join(rootDir, 'app/dist'),
+    path.join(rootDir, 'app/src'),
+    path.join(rootDir, 'app/pnpm-lock.yaml'),
+    path.join(rootDir, 'shared'),
+    path.join(rootDir, 'server/figures'),
+    path.join(rootDir, 'server/import-review/revisionProjection.mjs'),
+    path.join(rootDir, 'server/paper-canonical'),
+    path.join(rootDir, 'server/print-renderer.mjs'),
+  ]
+  const hash = createHash('sha256')
+  for (const filePath of roots.flatMap(rendererFiles).sort()) {
+    hash.update(path.relative(rootDir, filePath))
+    hash.update('\0')
+    hash.update(readFileSync(filePath))
+    hash.update('\0')
+  }
+  return `sha256:${hash.digest('hex')}`
+}
+
+const rendererBuildId = process.env.QUESTION_BANK_BUILD_ID || actualRendererBuildId
+let importReviewStore = null
+function getImportReviewStore() {
+  if (!importReviewStore) {
+    importReviewStore = createImportReviewStore({
+      dbPath: importReviewDbPath,
+      filesRoot: importReviewFilesRoot,
+      rendererBuildId,
+    })
+  }
+  return importReviewStore
+}
 const paperSurfaceAnalysisAvailability = createPaperSurfaceAnalysisAvailability({ paperAssetsDir })
 const teachingFacetIndex = createTeachingFacetIndex({ paperAssetsDir })
 const similarQuestionsStore = createSimilarQuestionsStore({ getTeachingFacetIndex, paperAssetsDir })
@@ -537,6 +583,11 @@ const serverRoutes = [
   ...createDraftPaperRoutes(),
   ...createExportRoutes(exportImplementation),
   ...createPaperCanonicalConsumerRoutes(),
+  ...createImportReviewRoutes({
+    getStore: getImportReviewStore,
+    agentToken: process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN || '',
+    buildPrintHtml,
+  }),
   ...createQuestionGroupRoutes(),
   ...createPaperSetRoutes(),
   ...createAiProxyRoutes(),
@@ -3936,6 +3987,10 @@ const AUTH_PUBLIC_ROUTES = [
   { method: 'GET', pattern: /^\/api\/health$/ },
   { method: 'GET', pattern: /^\/api\/public\/vocabulary\/listen\/[^/]+$/ },
   { method: 'GET', pattern: /^\/api\/public\/vocabulary\/dictation\/[^/]+$/ },
+  { method: 'GET', pattern: /^\/api\/import-agent-reviews(?:\/.*)?$/ },
+  { method: 'POST', pattern: /^\/api\/import-agent-reviews(?:\/.*)?$/ },
+  { method: 'PUT', pattern: /^\/api\/import-agent-reviews(?:\/.*)?$/ },
+  { method: 'DELETE', pattern: /^\/api\/import-agent-reviews(?:\/.*)?$/ },
 ]
 
 function isAuthPublicRoute(method, pathname) {
@@ -4005,9 +4060,23 @@ function applyAuthGate(request, response, pathname) {
   }
 
   return {
-    session: { userId: session.userId, username: session.username, role: session.role },
+    session: {
+      userId: session.userId,
+      username: session.username,
+      role: session.role,
+      accountKind: session.accountKind || 'human',
+    },
     authMode: 'enforced',
   }
+}
+
+function importAgentAccountRouteAllowed(method, pathname) {
+  return (
+    (pathname === '/api/auth/me' && method === 'GET')
+    || (pathname === '/api/auth/logout' && method === 'POST')
+    || pathname.startsWith('/api/import-agent-reviews')
+    || (method === 'GET' && pathname.startsWith('/api/import-review-preview/'))
+  )
 }
 
 // M0-3 owner/member route gate (docs/cuts/m0-3-role-gate/plan.md 1a, PM revision
@@ -4045,6 +4114,14 @@ const server = createServer(async (request, response) => {
   try {
     const authResult = applyAuthGate(request, response, url.pathname)
     if (!authResult) {
+      return
+    }
+
+    if (
+      authResult.session?.accountKind === 'import_agent'
+      && !importAgentAccountRouteAllowed(request.method, url.pathname)
+    ) {
+      sendJson(response, 403, { error: 'agent_account_scope_forbidden' })
       return
     }
 
