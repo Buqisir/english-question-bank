@@ -258,7 +258,7 @@ function buildConsumption(candidate, compilation) {
       familyContractId,
       groupIds,
       projectedOccurrences,
-      ...(['cloze', 'grammar-fill'].includes(familyContractId)
+      ...(['seven-choices', 'cloze', 'grammar-fill'].includes(familyContractId)
         ? {
             projectedOccurrenceDigests: projectedOccurrences.map((occurrence) => ({
               groupId: occurrence.groupId,
@@ -359,6 +359,9 @@ export function buildNck1CompatibilityPaperAsset({
           .filter((block) => block.kind === 'paragraph')
           .map((block) => ({
             paragraphId: block.blockId,
+            ...(group.family === 'seven-choices'
+              ? { role: block.role }
+              : {}),
             text: compatibilityText(
               [block],
               questionNoByBlankId,

@@ -2744,7 +2744,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     content,
     new Set(sourceGroup.blankIds),
     mediaIds,
-    closure.authorityRef.manifestVersion === '46',
+    ['46', '47'].includes(closure.authorityRef.manifestVersion),
   ))
   if (family.familyContractId !== 'reading' && contentHasFramedColumns(content)) {
     diagnostics.push(diagnostic('RICH_BLOCK_UNSUPPORTED', 'unsupported', '$.content', 'framed_columns is only representable in Reading'))
@@ -2752,7 +2752,9 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
   diagnostics.push(...validateReferenceBlankClosure(family.familyContractId, sourceGroup.questionIds, sourceGroup.blankIds, content))
   const variant = cloneJson(sourceGroup.variant || {})
   const variantKeys = family.familyContractId === 'seven-choices'
-    ? ['family', 'members', 'choiceOwnership']
+    ? closure.authorityRef.manifestVersion === '47'
+      ? ['family', 'passageBlockRoles', 'members', 'choiceOwnership']
+      : ['family', 'members', 'choiceOwnership']
     : family.familyContractId === 'reading'
       ? ['family', 'passageBlockRoles', 'questions', 'choiceOwnership']
       : family.familyContractId === 'application-writing'
@@ -2793,6 +2795,8 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
       content,
       variant,
       assertions: capture.assertions,
+      allowPassageBlockRoles:
+        closure.authorityRef.manifestVersion === '47',
     }).map((item) => diagnostic(item.code, item.disposition, item.path, item.message)))
   }
   if (family.familyContractId === 'reading') {

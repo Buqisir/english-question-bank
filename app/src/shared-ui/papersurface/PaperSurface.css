@@ -173,6 +173,17 @@
   margin-bottom: 0;
 }
 
+.ps-paragraph[data-canonical-seven-choices-rhythm-role="passage_title"],
+.ps-paragraph[data-canonical-seven-choices-rhythm-role="passage_subtitle"] {
+  margin: 0;
+  font-weight: 700;
+  text-indent: 0;
+}
+
+.ps-paragraph[data-canonical-seven-choices-rhythm-role="passage_title"] {
+  text-align: center;
+}
+
 .ps-paragraph[data-canonical-cloze-rhythm-role="passage_body_line"] {
   margin-top: 0;
   margin-bottom: 0;

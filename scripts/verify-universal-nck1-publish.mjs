@@ -30,8 +30,11 @@ import {
 import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequest.mjs'
 import { materializeNck1CanonicalRequest } from '../server/paper-canonical/nck1MaterializationCanonicalRequest.mjs'
 import { publishUniversalNck1Import } from '../server/paper-import/publisher.mjs'
+import { buildPrintHtml } from '../server/print-renderer.mjs'
 import { runRoutes } from '../server/router/index.mjs'
+import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
+import { canonicalConsumptionPrintPayload } from './import-pipeline/canonical-consumption-print-payload.mjs'
 import { makeFixture } from './verify-nck1-source-materialization.mjs'
 
 const root = path.resolve(import.meta.dirname, '..')
@@ -471,6 +474,154 @@ async function requestReviewAsset(projection, relativePath, session) {
   return { status, body }
 }
 
+function sevenChoicesSelection(consumption) {
+  const selection = consumption.selections.find(
+    ({ familyContractId }) => familyContractId === 'seven-choices',
+  )
+  assert(selection, 'Consumption Plan includes Seven Choices')
+  assert.equal(selection.groupIds.length, 1)
+  assert.equal(selection.projectedOccurrences.length, 1)
+  return selection
+}
+
+async function assertRoleSurfaces({ projection, publishedScreen, publishedPrint }) {
+  const titleId = 'block:seven-choices:title'
+  const bodyId = 'block:seven-choices'
+  const vite = await import('../app/node_modules/vite/dist/node/index.js')
+  const playwright = await import('../app/node_modules/playwright/index.js')
+  const viteServer = await vite.createServer({
+    root: path.join(root, 'app'),
+    server: { host: '127.0.0.1', port: 0 },
+  })
+  await viteServer.listen()
+  const appUrl = viteServer.resolvedUrls?.local?.[0]
+  assert(appUrl, 'Vite exposes one local Screen QA URL')
+  const browser = await playwright.default.chromium.launch({
+    headless: true,
+    channel: 'chromium',
+  })
+  try {
+    const screenPage = await browser.newPage({
+      viewport: { width: 1280, height: 900 },
+    })
+    await screenPage.route('**/api/paper-canonical/consumption?*', (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify(projection.consumption),
+      }))
+    await screenPage.route('**/paper-assets/**/paper-asset.json', (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify(projection.paperAsset),
+      }))
+    await screenPage.route('**/paper-assets/**/analyses/**', (route) =>
+      route.fulfill({ status: 404, body: '' }))
+    await screenPage.route('**/paper-assets/**/figures/**', (route) =>
+      route.fulfill({ status: 404, body: '' }))
+    const screenUrl = new URL('canonical-consumption-qa.html', appUrl)
+    screenUrl.searchParams.set('paperId', projection.paperId)
+    screenUrl.searchParams.set('focusGroupId', 'group:seven-choices')
+    await screenPage.goto(screenUrl.href)
+    const screenTitle = screenPage.locator(
+      `[data-paper-paragraph-id="${titleId}"]`,
+    )
+    const screenBody = screenPage.locator(
+      `[data-paper-paragraph-id="${bodyId}"]`,
+    )
+    await screenTitle.waitFor()
+    assert.equal(
+      await screenTitle.getAttribute('data-canonical-seven-choices-rhythm-role'),
+      'passage_title',
+    )
+    assert.equal(
+      await screenBody.getAttribute('data-canonical-seven-choices-rhythm-role'),
+      'passage_body_line',
+    )
+    assert.equal(
+      await screenTitle.evaluate((element) => getComputedStyle(element).textAlign),
+      'center',
+    )
+    assert.notEqual(
+      await screenBody.evaluate((element) => getComputedStyle(element).textAlign),
+      'center',
+    )
+    await screenPage.close()
+
+    const answers = new Map(Object.entries(projection.paperAsset.answerKey.answers)
+      .map(([questionId, answer]) => [questionId, answer.answer]))
+    const payload = canonicalConsumptionPrintPayload(
+      publishedPrint,
+      projection.paperName,
+      answers,
+    )
+    const items = payload.items.map((item) => ({
+      detail: payload.details.get(item.questionGroupId),
+      note: '',
+      score: 0,
+      sectionTitle: '',
+    }))
+    for (const versionType of ['student', 'teacher']) {
+      const html = buildPrintHtml({
+        ...payload,
+        versionType,
+        items,
+        canonicalConsumption: publishedPrint,
+      })
+      const printPage = await browser.newPage()
+      await printPage.emulateMedia({ media: 'print' })
+      await printPage.setContent(html, { waitUntil: 'load' })
+      const printTitle = printPage.locator(
+        `[data-canonical-paragraph-id="${titleId}"]`,
+      )
+      const printBody = printPage.locator(
+        `[data-canonical-paragraph-id="${bodyId}"]`,
+      )
+      assert.equal(await printTitle.count(), 1)
+      assert.equal(await printBody.count(), 1)
+      assert.equal(
+        await printTitle.getAttribute('data-canonical-seven-choices-rhythm-role'),
+        'passage_title',
+      )
+      assert.equal(
+        await printBody.getAttribute('data-canonical-seven-choices-rhythm-role'),
+        'passage_body_line',
+      )
+      assert.equal(
+        await printTitle.evaluate((element) => getComputedStyle(element).textAlign),
+        'center',
+      )
+      assert.notEqual(
+        await printBody.evaluate((element) => getComputedStyle(element).textAlign),
+        'center',
+      )
+      const pdfBytes = await printPage.pdf({
+        format: 'A4',
+        printBackground: true,
+      })
+      assert.equal(pdfBytes.subarray(0, 4).toString(), '%PDF')
+      await printPage.close()
+    }
+
+    const screenGroup = projectCanonicalConsumerGroup({
+      consumption: publishedScreen,
+      familyContractId: 'seven-choices',
+      groupId: 'group:seven-choices',
+    })
+    const printGroup = projectCanonicalConsumerGroup({
+      consumption: publishedPrint,
+      familyContractId: 'seven-choices',
+      groupId: 'group:seven-choices',
+    })
+    assert.equal(screenGroup.semanticSignature, printGroup.semanticSignature)
+    assert.equal(screenGroup.occurrenceSignature, printGroup.occurrenceSignature)
+  } finally {
+    await browser.close()
+    await viteServer.close()
+  }
+}
+
 function runReviewCommand(args, env) {
   return new Promise((resolve, reject) => {
     const child = spawn(
@@ -601,6 +752,53 @@ try {
     result.publish.consumers.screen.visibleStructureDigest,
     happy.projection.visibleStructureDigest,
   )
+  const reviewSeven = sevenChoicesSelection(happy.projection.consumption)
+  assert.deepEqual(
+    reviewSeven.projectedOccurrences[0].passageBlockRoles,
+    [{ nodeId: 'block:seven-choices:title', role: 'title' }],
+    'Review consumption retains the source-bound Seven Choices title',
+  )
+  assert.deepEqual(
+    happy.projection.paperAsset.content.groups['group:seven-choices']
+      .passage.paragraphs.map(({ paragraphId, role }) => ({ paragraphId, role })),
+    [
+      { paragraphId: 'block:seven-choices:title', role: 'title' },
+      { paragraphId: 'block:seven-choices', role: 'body' },
+    ],
+    'Review compatibility PaperAsset retains title/body semantics',
+  )
+  for (const consumer of [
+    result.publish.consumers.screen,
+    result.publish.consumers.print_pdf,
+  ]) {
+    const publishedSeven = sevenChoicesSelection(consumer)
+    assert.deepEqual(
+      publishedSeven.projectedOccurrences[0],
+      reviewSeven.projectedOccurrences[0],
+      'Review and published consumers share one deterministic occurrence',
+    )
+    assert.deepEqual(
+      publishedSeven.projectedOccurrenceDigests,
+      reviewSeven.projectedOccurrenceDigests,
+      'Review and published consumers share one occurrence digest',
+    )
+  }
+  const invalidConsumption = structuredClone(happy.projection.consumption)
+  const invalidSeven = sevenChoicesSelection(invalidConsumption)
+  invalidSeven.projectedOccurrences[0].passageBlockRoles[0].nodeId =
+    'block:unbound-title'
+  invalidSeven.projectedOccurrenceDigests[0].digest = digestJson(
+    invalidSeven.projectedOccurrences[0],
+  )
+  assert.throws(
+    () => projectCanonicalConsumerGroup({
+      consumption: invalidConsumption,
+      familyContractId: 'seven-choices',
+      groupId: 'group:seven-choices',
+    }),
+    /invalid passage roles/,
+    'unbound Seven Choices role references fail closed at the consumer seam',
+  )
   assert.equal(Object.keys(happy.projection.paperAsset.content.groups).length, 9)
   assert.equal(Object.keys(happy.projection.paperAsset.answerKey.answers).length, 45)
   assert.equal(publishedVersionCount(happy), 1)
@@ -638,6 +836,15 @@ try {
   ]) {
     assert(existsSync(path.join(base, 'paper-asset.json')))
     assert(existsSync(path.join(base, 'answer-key.json')))
+    const publishedPaperAsset = JSON.parse(
+      readFileSync(path.join(base, 'paper-asset.json'), 'utf8'),
+    )
+    assert.deepEqual(
+      publishedPaperAsset.content.groups['group:seven-choices'].passage.paragraphs,
+      happy.projection.paperAsset.content.groups['group:seven-choices']
+        .passage.paragraphs,
+      'version/latest PaperAsset bytes retain Review title/body semantics',
+    )
     const publishedSidecars = Object.fromEntries(Object.keys(happy.projection.analysisSidecars)
       .map((fileName) => {
         const filePath = path.join(base, 'analyses', fileName)
@@ -703,6 +910,11 @@ try {
     'analyses/reading-choice-analysis-v1.json',
     { role: 'member', accountKind: 'human' },
   )).status, 403)
+  await assertRoleSurfaces({
+    projection: happy.projection,
+    publishedScreen: result.publish.consumers.screen,
+    publishedPrint: result.publish.consumers.print_pdf,
+  })
 } finally {
   close(happy)
 }

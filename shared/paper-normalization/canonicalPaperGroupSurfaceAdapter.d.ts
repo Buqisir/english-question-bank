@@ -32,6 +32,7 @@ export type CanonicalSurfaceParagraph = {
   readonly id: string
   readonly section: string
   readonly groupType: 'cloze' | 'grammarFill' | 'sevenChoices'
+  readonly role: 'title' | 'subtitle' | 'body'
   readonly sentences: ReadonlyArray<{
     readonly id: string
     readonly nodes: ReadonlyArray<CanonicalSurfaceTextNode | CanonicalSurfaceBlankNode>

@@ -50,6 +50,7 @@ const publicationFileName =
   `canonical-paper-publication-v${canonicalAuthorityRef.manifestVersion}.json`
 const publicationFileNames = [
   publicationFileName,
+  'canonical-paper-publication-v47.json',
   'canonical-paper-publication-v46.json',
   'canonical-paper-publication-v45.json',
   'canonical-paper-publication-v44.json',
@@ -1509,6 +1510,10 @@ function canonicalSelections(validated, contract, sourceAsset) {
       projectedOccurrences,
       ...(
         (
+          familyContractId === 'seven-choices'
+          && validated.plan.authorityRef.manifestVersion === '47'
+        )
+        || (
           familyContractId === 'cloze'
           && Number(validated.plan.authorityRef.manifestVersion) >= 18
         )

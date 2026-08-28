@@ -5,6 +5,7 @@ import {
   isQuestionLikeRichBlock,
   richBlockInlineSets,
 } from './richContent.mjs'
+import { resolvePassageBlockRoles } from './passageBlockRoles.mjs'
 import { exactKeys, isRecordValue } from './stable.mjs'
 
 function issue(code, disposition, path, message) {
@@ -285,22 +286,20 @@ export function validateReadingContract({
     registerBlockSemanticIds(block, `$.content.blocks[${blockIndex}]`, registerSemanticId)
   }
 
-  const paragraphIds = new Set(blocks.filter((block) => block?.kind === 'paragraph').map((block) => block.nodeId))
   const roles = variant.passageBlockRoles
+  const resolvedRoles = resolvePassageBlockRoles(blocks, roles)
   if (!Array.isArray(roles)) {
     issues.push(issue('READING_ROLE_MAP_INVALID', 'needs_review', '$.variant.passageBlockRoles', 'Reading role membership must be ordered by node identity'))
-  } else {
-    const roleIds = roles.map((entry) => entry?.nodeId)
-    if (
-      roles.some((entry) => !isRecordValue(entry) || !exactKeys(entry, ['nodeId', 'role']) || !paragraphIds.has(entry.nodeId) || !['title', 'subtitle'].includes(entry.role))
-      || new Set(roleIds).size !== roleIds.length
-      || roleIds.some((nodeId, index) => index > 0 && nodeId.localeCompare(roleIds[index - 1]) < 0)
-    ) {
-      issues.push(issue('READING_ROLE_MAP_INVALID', 'needs_review', '$.variant.passageBlockRoles', 'Roles must uniquely reference paragraph blocks and serialize by nodeId'))
-    }
-    if (roles.filter((entry) => entry?.role === 'title').length > 1) {
-      issues.push(issue('READING_TITLE_AMBIGUOUS', 'needs_review', '$.variant.passageBlockRoles', 'Reading admits at most one source-proven passage title'))
-    }
+  } else if (!resolvedRoles.ok) {
+    const ambiguousTitle = roles.filter((entry) => entry?.role === 'title').length > 1
+    issues.push(issue(
+      ambiguousTitle ? 'READING_TITLE_AMBIGUOUS' : 'READING_ROLE_MAP_INVALID',
+      'needs_review',
+      '$.variant.passageBlockRoles',
+      ambiguousTitle
+        ? 'Reading admits at most one source-proven passage title'
+        : 'Roles must uniquely reference paragraph blocks and serialize by nodeId',
+    ))
   }
 
   const questions = variant.questions

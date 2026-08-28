@@ -5,6 +5,7 @@ import {
 } from './abcdLayout.mjs'
 import { resolveCanonicalAuthority } from './authority.mjs'
 import { grammarFillPromptPrefix } from './grammarFillPromptContract.mjs'
+import { resolvePassageBlockRoles } from './passageBlockRoles.mjs'
 import { readingPassageLetterBySlotId } from './readingPassageLetter.mjs'
 import { digestJson, sha256, stableStringify } from './stable.mjs'
 
@@ -1070,12 +1071,21 @@ function selectOccurrence(input) {
   ) {
     throw rejected(`Family ${familyContractId} projected occurrences do not close the selection`)
   }
-  if (familyContractId === 'cloze' || familyContractId === 'grammar-fill') {
-    const authorityRef = consumption?.authorityRef
+  const authorityRef = consumption?.authorityRef
+  const requiresOccurrenceIntegrity =
+    familyContractId === 'cloze'
+    || familyContractId === 'grammar-fill'
+    || (
+      familyContractId === 'seven-choices'
+      && authorityRef?.manifestVersion === '47'
+    )
+  if (requiresOccurrenceIntegrity) {
     const consumptionDigest = sha256(`${stableStringify(consumption)}\n`)
     const verifiedHistoricalDigests = familyContractId === 'cloze'
       ? VERIFIED_PRE_V18_CLOZE_CONSUMPTION_DIGESTS
-      : VERIFIED_PRE_V20_GRAMMAR_FILL_CONSUMPTION_DIGESTS
+      : familyContractId === 'grammar-fill'
+        ? VERIFIED_PRE_V20_GRAMMAR_FILL_CONSUMPTION_DIGESTS
+        : new Set()
     const verifiedHistoricalPlan =
       authorityRef === undefined
       && selection.projectedOccurrenceDigests === undefined
@@ -1209,6 +1219,18 @@ export function projectCanonicalConsumerGroup(input) {
   ) throw rejected(`Canonical occurrence ${groupId} does not join every Question to one Blank`)
 
   const seenBlanks = new Set()
+  const passageRoles = familyContractId === 'seven-choices'
+    && input.consumption?.authorityRef?.manifestVersion === '47'
+    ? resolvePassageBlockRoles(
+        occurrence.content?.blocks,
+        occurrence.passageBlockRoles,
+      )
+    : { ok: true, rolesByNodeId: new Map() }
+  if (!passageRoles.ok) {
+    throw rejected(
+      `Canonical occurrence ${groupId} has invalid passage roles`,
+    )
+  }
   const paragraphs = occurrence.content?.blocks?.map((block) => {
     if (block?.kind !== 'paragraph' || typeof block.nodeId !== 'string' || !Array.isArray(block.inlines)) {
       throw rejected(`Canonical occurrence ${groupId} contains an unsupported content block`)
@@ -1234,6 +1256,7 @@ export function projectCanonicalConsumerGroup(input) {
     }
     return {
       paragraphId: block.nodeId,
+      role: passageRoles.rolesByNodeId.get(block.nodeId) || 'body',
       nodes: block.inlines.map((inline, inlineIndex) => {
         if (inline?.kind === 'text' && typeof inline.text === 'string') {
           return {
@@ -1380,6 +1403,7 @@ export function projectCanonicalConsumerGroup(input) {
     occurrenceSignature = digestJson({
       groupId,
       questionBlankPairs,
+      passageBlockRoles: occurrence.passageBlockRoles,
       bankId: optionBank.bankId,
       optionIds: optionBank.options.map((option) => option.optionId),
     })

@@ -260,6 +260,12 @@ function renderCanonicalParagraph(canonicalGroup, paragraph, displayNumberByQues
   }).join('')
 }
 
+function canonicalSevenChoicesPassageRole(paragraph) {
+  if (paragraph.role === 'title') return 'passage_title'
+  if (paragraph.role === 'subtitle') return 'passage_subtitle'
+  return 'passage_body_line'
+}
+
 function canonicalGroupMatchesPrintDetail(canonicalGroup, detail) {
   const expectedGroupType =
     canonicalGroup.groupType === 'grammarFill'
@@ -1798,7 +1804,7 @@ export function buildPrintHtml({
             groupHtml += `<div class="passage">${canonicalGroup.paragraphs
               .map(
                 (paragraph) =>
-                  `<p data-canonical-paragraph-id="${escapeHtml(paragraph.paragraphId)}"${canonicalGroup.groupType === 'sevenChoices' ? ' data-canonical-seven-choices-rhythm-role="passage_body_line"' : canonicalGroup.groupType === 'cloze' ? ' data-canonical-cloze-rhythm-role="passage_body_line"' : canonicalGroup.groupType === 'grammarFill' ? ' data-canonical-grammar-fill-rhythm-role="passage_body_line"' : ''}>${renderCanonicalParagraph(
+                  `<p data-canonical-paragraph-id="${escapeHtml(paragraph.paragraphId)}"${canonicalGroup.groupType === 'sevenChoices' ? ` data-canonical-seven-choices-rhythm-role="${canonicalSevenChoicesPassageRole(paragraph)}"` : canonicalGroup.groupType === 'cloze' ? ' data-canonical-cloze-rhythm-role="passage_body_line"' : canonicalGroup.groupType === 'grammarFill' ? ' data-canonical-grammar-fill-rhythm-role="passage_body_line"' : ''}>${renderCanonicalParagraph(
                     canonicalGroup,
                     paragraph,
                     displayNumberByQuestionId,
@@ -2381,6 +2387,22 @@ body {
 .question-group[data-canonical-group-type="sevenChoices"] .passage p {
   margin: 0;
   line-height: ${sevenChoicesRhythm.targets.printPdf.baselineStepPt}pt;
+}
+
+.question-group[data-canonical-group-type="sevenChoices"] .passage p[
+  data-canonical-seven-choices-rhythm-role="passage_title"
+],
+.question-group[data-canonical-group-type="sevenChoices"] .passage p[
+  data-canonical-seven-choices-rhythm-role="passage_subtitle"
+] {
+  font-weight: bold;
+  text-indent: 0;
+}
+
+.question-group[data-canonical-group-type="sevenChoices"] .passage p[
+  data-canonical-seven-choices-rhythm-role="passage_title"
+] {
+  text-align: center;
 }
 
 .question-group[data-canonical-group-type="cloze"] .passage {

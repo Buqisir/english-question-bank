@@ -1038,12 +1038,20 @@ function PaperSurfaceParagraph({
     )
   }
 
+  const sevenChoicesPassageRole = sevenChoicesRhythmEnabled
+    ? semanticParagraph?.role === 'title'
+      ? 'passage_title'
+      : semanticParagraph?.role === 'subtitle'
+        ? 'passage_subtitle'
+        : 'passage_body_line'
+    : undefined
+
   return (
     <p
       className="ps-paragraph"
       {...{ [paperSurfaceAnchorAttrs.paragraphId]: paragraph.id }}
       data-canonical-seven-choices-rhythm-role={
-        sevenChoicesRhythmEnabled ? 'passage_body_line' : undefined
+        sevenChoicesPassageRole
       }
       data-canonical-cloze-rhythm-role={
         clozeRhythmEnabled ? 'passage_body_line' : undefined

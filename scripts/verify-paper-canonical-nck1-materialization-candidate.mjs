@@ -6,6 +6,7 @@ import path from 'node:path'
 import {
   canonicalAuthorityRef,
   nck1MaterializationCandidateAuthorityRef,
+  resolveCanonicalAuthority,
   trustedDocxCandidateAuthorityRef,
 } from '../shared/paper-canonical/authority.mjs'
 import {
@@ -13,7 +14,9 @@ import {
   importCanonicalCandidate,
   rederiveConfirmedCanonicalCandidate,
 } from '../shared/paper-canonical/compiler.mjs'
-import { sha256 } from '../shared/paper-canonical/stable.mjs'
+import { projectCanonicalPaper } from '../shared/paper-canonical/projector.mjs'
+import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
+import manifestV46 from '../standards/paper-canonical/manifest-v46.json' with { type: 'json' }
 import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequest.mjs'
 import {
   NCK1_MATERIALIZATION_REQUEST_FILE_NAME,
@@ -268,7 +271,12 @@ assert.deepEqual(
 )
 assert.equal(canonicalAuthorityRef.manifestVersion, '36')
 assert.equal(trustedDocxCandidateAuthorityRef.manifestVersion, '37')
-assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '46')
+assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '47')
+assert.equal(resolveCanonicalAuthority({
+  manifestId: manifestV46.manifestId,
+  manifestVersion: manifestV46.version,
+  manifestDigest: digestJson(manifestV46),
+}).ok, true, 'immutable NCK1 Candidate authority v46 remains resolvable')
 const first = importCanonicalCandidate(input)
 const second = importCanonicalCandidate(input)
 assert(first.candidate)
@@ -286,12 +294,19 @@ assert.deepEqual(
   'NCK1 Candidate must preserve source paragraph blocks one-for-one',
 )
 assert.deepEqual(first.candidate.authority, nck1MaterializationCandidateAuthorityRef)
+assert.deepEqual(
+  first.candidate.interpretation.groups
+    .find((group) => group.family === 'seven-choices')
+    .variant.passageBlockRoles,
+  [{ nodeId: 'block:seven-choices:title', role: 'title' }],
+  'NCK1 Candidate binds source-proven Seven Choices passage roles',
+)
 
-const publicV46 = compileCanonicalPaper({
+const publicV47 = compileCanonicalPaper({
   authority: nck1MaterializationCandidateAuthorityRef,
   evidence: { documents: [] },
 })
-assert(publicV46.artifacts.normalizationReport.diagnostics.some((item) =>
+assert(publicV47.artifacts.normalizationReport.diagnostics.some((item) =>
   item.code === 'AUTHORITY_RETIRED'))
 
 const confirmed = rederiveConfirmedCanonicalCandidate(
@@ -309,6 +324,34 @@ assert.deepEqual(
     .map((block) => block.nodeId),
   ['block:reading-a', 'block:reading-a:second-paragraph'],
   'confirmed Canonical Paper must preserve source paragraph blocks one-for-one',
+)
+const confirmedPackage = {
+  plan: confirmed.compilation.artifacts.canonicalPaper.paperPlan,
+  groups: confirmed.compilation.artifacts.canonicalPaper.questionGroups,
+  sourceCapture: confirmed.compilation.artifacts.sourceCapture,
+  authorityClosure: resolveCanonicalAuthority(
+    nck1MaterializationCandidateAuthorityRef,
+  ).closure,
+}
+const projected = projectCanonicalPaper(confirmedPackage)
+assert.deepEqual(
+  projected.nodes.find((node) =>
+    node.kind === 'group' && node.familyContractId === 'seven-choices')
+    .passageBlockRoles,
+  [{ nodeId: 'block:seven-choices:title', role: 'title' }],
+  'Canonical projector retains source-proven Seven Choices passage roles',
+)
+const invalidRolePackage = structuredClone(confirmedPackage)
+invalidRolePackage.groups.find((group) =>
+  group.contractRef.familyContractId === 'seven-choices')
+  .variant.passageBlockRoles[0].nodeId = 'block:unbound-title'
+assert.throws(
+  () => projectCanonicalPaper(invalidRolePackage),
+  (error) =>
+    error?.code === 'CANONICAL_PROJECTION_REJECTED'
+    && error.issues?.some((issue) =>
+      issue.code === 'SEVEN_CHOICES_ROLE_MAP_INVALID'),
+  'unbound Seven Choices role references fail closed before projection',
 )
 
 const callerSemantics = importCanonicalCandidate(input, { groups: [] })

@@ -797,12 +797,12 @@ function writingVariant(group, content, issues, source, documentsById) {
 
 function groupVariant(group, answersByQuestionId, content, issues, source, documentsById) {
   const ownership = choiceOwnership(group)
+  const roles = group.blocks
+    .filter((block) =>
+      block.kind === 'paragraph' && block.role !== 'body')
+    .map((block) => ({ nodeId: block.blockId, role: block.role }))
+  roles.sort((left, right) => left.nodeId.localeCompare(right.nodeId))
   if (group.family === 'reading') {
-    const roles = group.blocks
-      .filter((block) =>
-        block.kind === 'paragraph' && block.role !== 'body')
-      .map((block) => ({ nodeId: block.blockId, role: block.role }))
-    roles.sort((left, right) => left.nodeId.localeCompare(right.nodeId))
     return {
       family: 'reading',
       passageBlockRoles: roles,
@@ -822,6 +822,7 @@ function groupVariant(group, answersByQuestionId, content, issues, source, docum
   if (group.family === 'seven-choices') {
     return {
       family: 'seven-choices',
+      passageBlockRoles: roles,
       members: group.questions.map((question) => ({
         questionId: question.questionId,
         blankId: question.blankId,

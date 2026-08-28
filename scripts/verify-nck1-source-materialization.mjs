@@ -49,6 +49,15 @@ export function makeFixture({ listening = false, mixedTable = false } = {}) {
       ],
       source: locator(),
     }]
+    if (family === 'seven-choices') {
+      blocks.unshift({
+        kind: 'paragraph',
+        blockId: 'block:seven-choices:title',
+        role: 'title',
+        content: [{ kind: 'text', text: 'A source-bound passage title' }],
+        source: locator(),
+      })
+    }
     if (slotId === 'reading.a') {
       blocks.push({
         kind: 'paragraph',
