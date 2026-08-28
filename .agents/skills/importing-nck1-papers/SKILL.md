@@ -32,7 +32,7 @@ provenance. Confirm one writer owns that paper directory before initializing.
 
 | State | Agent action |
 | --- | --- |
-| `materializing` | Continue immutable source capture and Source Materialization. Run universal `verify` and `build`, complete AI Answer Transcription Check, then submit a new review revision. |
+| `materializing` | Continue immutable source capture and Source Materialization. Produce and validate all nine staged analyses (reading A–D, seven choices, cloze, grammar fill, application, continuation), run universal `verify` and `build`, complete AI Answer Transcription Check, then submit a new review revision. |
 | `awaiting_review` | Report the current revision and stop for Owner QA. Do not create another identical revision merely to look busy. |
 | `changes_requested` | Read current issues with `review.mjs status`; reply, correct local Materialization, rerun `verify` / `build`, then `push --resolves <current issue ids>`. Never modify a finalized revision. |
 | `approved` | Follow `next.action`: run `accept` when the exact local QA receipt is not current, then rerun preflight; run `publish` only when preflight says `publish_local`, then rerun preflight. |
@@ -52,7 +52,19 @@ newer Review revision exists.
   `shipped.json`, Teacher Confirmation, Canonical request, or Review DB rows.
 - Never overwrite a finalized revision. Corrections always become a new revision
   and name the issues they resolve.
-- Never fabricate analysis sidecars or make PaperAsset the semantic authority.
+- Before every `review.mjs push`, run
+  `node scripts/import-pipeline/review.mjs verify-analyses <paperId>`. It must
+  validate all nine staged inputs and their deterministic five-sidecar Screen
+  projection. Missing, partial, or conflicting analysis fails closed; never
+  hand the Owner a revision whose Screen says `解析未发布`.
+- Correct options come only from the authoritative answer source captured by
+  Materialization. AI may explain those answers but must never solve or replace
+  them. Never fabricate analysis sidecars or make PaperAsset the semantic
+  authority.
+- Owner QA must inspect the AI-derived teaching analysis on the real `/ops/`
+  Screen before approval. The immutable revision binds the nine input bytes and
+  projected analysis digest; `accept` and atomic local `publish` must preserve
+  that exact approved projection.
 - Never run `pull-run-push.mjs`, add `--owner-said-ship`, acquire a shipping
   guard, deploy, or mutate production unless the Owner's current message
   explicitly says `上线 <paperId>` (or `重试上线 <paperId>` for `ship_failed`).

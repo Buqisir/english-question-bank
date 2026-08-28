@@ -7,10 +7,10 @@ Date: 2026-08-28
 ## Problem
 
 通用 NCK1 入口已经能从不可变源材料派生 Candidate，网页导题后台也已经能让
-Agent 上传修订版、Owner 复用真实 Screen / Print / PDF 提问题并认可。但认可后
-仍缺少一条能直接消费通用 Candidate 的本地发布桥：旧 `02-publish.mjs` 依赖
-`groups.json` 和多份教学分析，不能诚实地发布一份只有源材料、权威答案和
-Teacher Confirmation 的通用卷。
+Agent 上传修订版、Owner 复用真实 Screen / Print / PDF 提问题并认可。但原实现
+把“通用 Source Materialization 不要求教学分析”当成成功路径：Review revision
+没有绑定九份分析，Screen 的五个 analysis sidecar 全部 404，通用 publisher 也
+不发布分析。Owner 因而审核的是“解析未发布”，而不是最终应交付的完整讲评。
 
 因此当前流程会停在 `qa-accepted.json`，还不能形成“Agent 生产 → 网页 QA →
 Agent 修正 → Owner 认可 → 本地发布 → 等待单独上线命令”的完整闭环。
@@ -18,8 +18,9 @@ Agent 修正 → Owner 认可 → 本地发布 → 等待单独上线命令”�
 ## User outcome
 
 Owner 在 `/ops/` 认可当前最新、无未决问题且摘要精确绑定的修订版后，Agent
-可以运行一个明确的本地命令。命令再次核对源、Candidate、可见结构、文件清单、
-网页认可和 Teacher Confirmation，然后通过现有原子 Paper publisher 生成
+必须先在真实 Screen 审核 Agent 生产的完整教学解析，再运行一个明确的本地命令。
+命令再次核对源、Candidate、可见结构、九份 staged analysis bytes、确定性五份
+sidecar projection、网页认可和 Teacher Confirmation，然后通过现有原子 Paper publisher 生成
 `paper-assets/<paperId>/latest`、数据库版本及 Canonical current ref。成功后状态为
 `ready_to_ship`，但不部署；Owner 之后仍须另行说“上线 <paperId>”。
 
@@ -62,16 +63,32 @@ materializing -> awaiting_review <-> changes_requested -> approved
 - `qa-accepted.json`、web approval、Teacher Confirmation 和 Canonical request
   属于同一 revision；
 - Canonical admission 成功；九个题组及 45 个 active 权威答案完整；
+- reading A–D、seven choices、cloze、grammar fill、application、continuation
+  九份 staged analysis 完整，paper/group/question/blank/answer closure 无冲突；
 - Listening 明确 inactive / `not_supplied`；
-- Canonical 消费可见结构与 Owner 实际审核的 projection 一致。
+- Canonical 消费可见结构与 Owner 实际审核的 projection 一致；
+- Review `analysisDigest`、认可收据与将要原子发布的五份 sidecar 语义精确一致。
 
 Canonical Paper 是语义权威。兼容 PaperAsset 只服务现有数据库和旧读取缝，不能
 重建或改写已确认语义。
 
-### 兼容元数据
+### 教学分析与兼容元数据（2026-08-28 修订）
 
-通用 Source Materialization 不要求教学分析。发布时不得写空壳或伪造
-reading/seven/cloze/grammar analysis 文件。
+撤销旧决定“通用 Source Materialization 不要求教学分析”。所有通用 NCK1 新卷
+在 `review.mjs push` 前必须交齐并通过现有 schema / adapter / validator 的九份
+staged analysis：4× reading、seven、cloze、grammar、application、continuation。
+缺任一份、只交写作两份、闭合冲突或 AI 正确项与权威答案冲突都必须失败关闭；
+不得把缺解析当 graceful success。
+
+不可变 Review bundle 绑定九份输入的原始 bytes，并由一个通用、非 paperId 特判的
+确定性投影生成 Screen 已消费的五份 sidecar：reading-choice、seven-choices、
+cloze、grammar-fill、writing。Owner 必须在真实 `/ops/` Screen 审核这些 AI-derived
+讲评；正确项只来自 Source Materialization 的权威答案，AI 只负责解释，不能解题
+或覆盖答案。旧 revision 不因代码更新获得未打包内容。
+
+本地 publisher 必须把同一投影的五份 sidecar 纳入 `versions/vN`、`latest`、事务、
+回滚和恢复；不得在 approval 后运行另一个非原子的 writing backfill。Canonical
+Paper 仍是语义权威，PaperAsset / legacy groups 仍只作兼容投影。
 
 兼容元数据只允许确定且诚实的来源：
 
@@ -114,7 +131,12 @@ reading/seven/cloze/grammar analysis 文件。
 - [x] 已发布卷保持九题组、45 个 active 权威答案和 inactive Listening closure。
 - [x] Screen 与 Print consumers 可从 committed Canonical ref reload，visible digest
       等于网页实际认可的 projection。
-- [x] 通用发布不产生伪造 analysis sidecar。
+- [x] 新 Review revision 绑定九份 staged analysis bytes 与确定性
+      `analysisDigest`；缺项、closure 或答案冲突在 finalize 前失败关闭。
+- [x] 真实 Review Screen 在 reviewer auth 下只读提供五份确定性 sidecar，其他路径
+      404；旧 revision 保持不可变。
+- [x] 通用发布原子写入与 Review 相同的五份 sidecar（含两份写作分析），且
+      commit 前回滚、commit 后恢复不留下混合分析。
 - [x] commit 前故障零残留；commit 后 reload 中断同版本恢复且重试幂等。
 - [x] `qa-accepted`、本地发布、`ready_to_ship` 和 `shipped` 探针顺序清晰，旧的
       `latest` 先于 QA 的描述被移除。
@@ -137,7 +159,8 @@ Screen、Student Print、Teacher Print 和 PDF canary。
 - 本轮导入、认可、发布或上线任何真实试卷。
 - `/ops/` 内运行 LLM、自动唤醒 Agent、部署按钮或自动生产发布。
 - 永久轮询/webhook、多 writer 协调、单卷增量部署、一键回滚产品。
-- 为满足旧 package validator 伪造教学分析，或让兼容 PaperAsset 成为语义权威。
+- 伪造教学分析或正确项、允许不完整解析进入 Owner QA，或让兼容 PaperAsset 成为
+  语义权威。
 
 ## Tickets
 

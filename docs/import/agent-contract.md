@@ -8,7 +8,7 @@
 所有新 NCK1 卷默认走统一入口，不再先判断格式①/②/③：
 
 - 数据契约：`docs/product/nck1-paper-standard.md`（导题过程中不改；owner 拍板修订后以新文本为准）
-- 统一入口：先运行 `node scripts/import-pipeline/universal-nck1.mjs preflight`，一次性确认 magick、ffmpeg、soffice、PDF 工具、unzip 的可执行与动态链接健康；处理中途禁止安装或升级依赖。`init` 也会先执行同一检查。对于一份试题 DOCX + 一份权威答案 DOCX，`materialize <paperId>` 用受测 producer 从不可变源生成并校验 `nck1-source-materialization-v1`；表格写语义网格，图标、条码、照片和图表按源提取配方生成媒体。随后 `verify` 派生 Candidate，`build` 生成 digest-bound Candidate 摘要，`review.mjs push` 上传不可变审核 revision。Owner 在 `/ops/` 认可精确摘要后，`review.mjs accept` 生成 Teacher Confirmation 与 Canonical request；再由 `review.mjs publish` 原子发布到本地并停在 `ready_to_ship`。完整命令见 `scripts/import-pipeline/README.md`。
+- 统一入口：先运行 `node scripts/import-pipeline/universal-nck1.mjs preflight`，一次性确认 magick、ffmpeg、soffice、PDF 工具、unzip 的可执行与动态链接健康；处理中途禁止安装或升级依赖。`init` 也会先执行同一检查。对于一份试题 DOCX + 一份权威答案 DOCX，`materialize <paperId>` 用受测 producer 从不可变源生成并校验 `nck1-source-materialization-v1`；表格写语义网格，图标、条码、照片和图表按源提取配方生成媒体。随后 `verify` 派生 Candidate，`build` 生成 digest-bound Candidate 摘要；Agent 必须生产并验证 4× reading、seven、cloze、grammar、application、continuation 共九份教学分析，才可由 `review.mjs push` 上传绑定全部原始 bytes 和 `analysisDigest` 的不可变审核 revision。Owner 在 `/ops/` 真实 Screen 审核讲评并认可精确摘要后，`review.mjs accept` 生成 Teacher Confirmation 与 Canonical request；再由 `review.mjs publish` 原子发布同一五份 sidecar 到本地并停在 `ready_to_ship`。完整命令见 `scripts/import-pipeline/README.md`。
 - 阅读 Word 细线框（框里只有能打的字和矩形表）：写成 Canonical `framed_columns`（nck1 §8）；观感见 `docs/product/exam-paper-format-standards.md` §3c。不要截整图当 Canonical 正文，不要为单卷改 CSS。下一卷步骤见 `docs/cuts/reading-framed-columns/spec.md`「下一卷怎么干」。
 - 旧格式①/②/③脚本只保留已接入存量卷回退；新卷不得向旧脚本添加 `paperId`、CONTENT 登记或 shape association 特例。
 
@@ -43,8 +43,7 @@ node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
 | 信号 | 路径 | 含义 |
 | --- | --- | --- |
 | 进入 `materializing` | `config.json` | 已开局 |
-| 切卷 / 分析中 | `groups.json` + 7× `analyze-<key>-combined.txt` / `analysis-<key>.json` | key = `reading-a` `reading-b` `reading-c` `reading-d` `seven` `cloze` `grammar` |
-| 写作分析稿 | `analysis-application.json` + `analysis-continuation.json` | 新卷必交;格式③ `--publish` 硬前置 |
+| 教学分析中 | 4× `analysis-reading-{a,b,c,d}.json` + `analysis-seven.json` + `analysis-cloze.json` + `analysis-grammar.json` + `analysis-application.json` + `analysis-continuation.json` | 通用新卷九份全部是 `review.mjs push` 硬前置；原始 bytes 进入不可变 revision |
 | 答案复核过 | `signals/ai-answer-check.json` | AI Answer Transcription Check 已过 |
 | 卡死 | `signals/blocked.json` | 硬停；见原因码 |
 | 要人裁决（非例行 QA） | `signals/help-needed.json` | 例如非记叙型续写、格式不在白名单 |
@@ -86,6 +85,7 @@ node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
   "sourceDigest": "sha256:…",
   "candidateDigest": "sha256:…",
   "visibleStructureDigest": "sha256:…",
+  "analysisDigest": "sha256:…",
   "bundleDigest": "sha256:…"
 }
 ```
@@ -101,6 +101,7 @@ node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
   "sourceDigest": "sha256:…",
   "candidateDigest": "sha256:…",
   "visibleStructureDigest": "sha256:…",
+  "analysisDigest": "sha256:…",
   "bundleDigest": "sha256:…",
   "assetVersion": 1,
   "versionName": "v1",
@@ -121,6 +122,7 @@ node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
   "sourceDigest": "sha256:…",
   "candidateDigest": "sha256:…",
   "visibleStructureDigest": "sha256:…",
+  "analysisDigest": "sha256:…",
   "bundleDigest": "sha256:…",
   "assetVersion": 1,
   "versionName": "v1",
@@ -166,13 +168,14 @@ checklist。
 
 新卷先走统一材料化缝。导题过程中**不改** `nck1-paper-standard.md` 来过闸（标准修订须 owner 另拍板后落档）。不绕闸。同一门禁最多自动修 **2** 次，仍红 → 写 `signals/blocked.json`（`gate_failed`）并停。
 
-0. 先运行环境 `preflight`，再生成 `materialization/nck1-source-materialization-v1.json`。已知 NCK1 结构的 DOCX pair 运行 `node scripts/import-pipeline/universal-nck1.mjs materialize <paperId>`：producer 确定性解析段落、表格、题号、section、blank 与权威答案，生成逐段 locator、候选骨架和 `nck1-docx-materialization-review-v1.json`。它绝不解题补答案；语义不唯一时 `disposition` 为 `needs_agent_review`，只在 `review.required` 留结构化异常，Materialization `issues` 非空并失败关闭。Agent 只审这些异常与两份写作分析，不再逐段从零建模。producer receipt 绑定版本与全部 source digest；源未变时直接 resume，若 Agent 已编辑 Materialization 则标记 `agent_modified` 且不覆盖。源字节漂移必须新建 Source Capture。PDF 有文本层直接转录；扫描 PDF 先 OCR 后逐页视觉复核；其他载体按原规则处理。DOCX 正文每个源 `<w:p>` 必须一对一生成独立 `paragraph` block，并用指向该段的 `docx_part` locator；禁止把相邻段落合并，也不要把阅读 A/B/C/D 等独立篇目标记写进正文。两篇写作必须保留源顺序：题干 →（续写标题与逐段材料）→ 独立 `注意` 结构 → 框内给定标题/称呼或两条续写开头语；`注意` 保留源本来的组合段，或保留“注意：”及其后一个或多个编号段，不得为了统一视觉而合段；必须含词数且与 `wordCountTarget` 一致，源有答题格式或其他编号说明时一字不漏。续写 `material` 每项一对一对应一个源段落，给定标题、称呼和开头语不得混进题干或材料。DOCX 初始化时自动产生不可变 PDF rendition，形状绘图从 rendition 按页裁。语义表格必须为 `table`，整表截图只能作 `visual_proof`；真实图、图标、条码不得 AI 重画。用 `universal-nck1.mjs extract-docx-media` 或 `crop-pdf` 确定性生成媒体。
+0. 先运行环境 `preflight`，再生成 `materialization/nck1-source-materialization-v1.json`。已知 NCK1 结构的 DOCX pair 运行 `node scripts/import-pipeline/universal-nck1.mjs materialize <paperId>`：producer 确定性解析段落、表格、题号、section、blank 与权威答案，生成逐段 locator、候选骨架和 `nck1-docx-materialization-review-v1.json`。它绝不解题补答案；语义不唯一时 `disposition` 为 `needs_agent_review`，只在 `review.required` 留结构化异常，Materialization `issues` 非空并失败关闭。Agent 审这些异常并生产全部九份教学分析，不再逐段从零建模。任何分析中的正确项只能抄自该 Materialization 的权威答案；AI 只解释，绝不解题补答案。producer receipt 绑定版本与全部 source digest；源未变时直接 resume，若 Agent 已编辑 Materialization 则标记 `agent_modified` 且不覆盖。源字节漂移必须新建 Source Capture。PDF 有文本层直接转录；扫描 PDF 先 OCR 后逐页视觉复核；其他载体按原规则处理。DOCX 正文每个源 `<w:p>` 必须一对一生成独立 `paragraph` block，并用指向该段的 `docx_part` locator；禁止把相邻段落合并，也不要把阅读 A/B/C/D 等独立篇目标记写进正文。两篇写作必须保留源顺序：题干 →（续写标题与逐段材料）→ 独立 `注意` 结构 → 框内给定标题/称呼或两条续写开头语；`注意` 保留源本来的组合段，或保留“注意：”及其后一个或多个编号段，不得为了统一视觉而合段；必须含词数且与 `wordCountTarget` 一致，源有答题格式或其他编号说明时一字不漏。续写 `material` 每项一对一对应一个源段落，给定标题、称呼和开头语不得混进题干或材料。DOCX 初始化时自动产生不可变 PDF rendition，形状绘图从 rendition 按页裁。语义表格必须为 `table`，整表截图只能作 `visual_proof`；真实图、图标、条码不得 AI 重画。用 `universal-nck1.mjs extract-docx-media` 或 `crop-pdf` 确定性生成媒体。
 1. `node scripts/import-pipeline/universal-nck1.mjs verify <paperId>`。缺页、缺答案、答案冲突、未闭合表格、重复/漂移媒体或 Materialization `issues` 非空均写 `signals/blocked.json` 并停。
 2. `node scripts/import-pipeline/universal-nck1.mjs build <paperId>`，产生 digest-bound Candidate 摘要与 `confirmed: false` 的 Teacher Confirmation 模板。
-3. 设置 `QUESTION_BANK_IMPORT_OPS_ORIGIN` 与 Agent token，运行 `node scripts/import-pipeline/review.mjs push <paperId>`。网页 revision finalize 后不可修改；Agent 停下等待 Owner 在 `/ops/` 审核。
-4. 有问题：Agent 用 `review.mjs status` 或自己的 `import_agent` 网页待办箱读取反馈并回复；修好 Materialization 后重新 `verify` / `build`，再用 `review.mjs push <paperId> --resolves <issueId>[,<issueId>]` 提交新 revision。不得覆盖旧 revision。
-5. Owner 认可后运行 `node scripts/import-pipeline/review.mjs accept <paperId>`。该命令只有在本地 source/Candidate/visible structure/files/bundle 与网页收据全部精确匹配时，才写 `teacher-confirmation-v1.json`（`confirmed: true`）、Canonical request、web approval 与 `signals/qa-accepted.json`；它不 publish、不部署。
-6. 运行 `node scripts/import-pipeline/review.mjs publish <paperId>`。该命令再次核对当前网页认可、QA 收据、Teacher Confirmation、Canonical request 和 AI 答案复核，然后通过共享原子 publisher 写同版本 DB、`versions/vN`、`latest` 与 Canonical current ref。成功后才写 `signals/locally-published.json`；同一认可和有效收据重跑为 no-op。它不部署，打印 `ready_to_ship` 后必须停。
+3. 生成九份 staged analysis 后运行 `node scripts/import-pipeline/review.mjs verify-analyses <paperId>`。它复用现有 schema、adapter、validator，检查 4 组 reading/15 题、seven/cloze/grammar 的 question/blank closure、45 个权威 objective answer closure 和两份写作分析，并确定性投影 Screen 的 `reading-choice`、`seven-choices`、`cloze`、`grammar-fill`、`writing` 五份 sidecar。缺项、冲突或不完整一律失败关闭。
+4. 设置 `QUESTION_BANK_IMPORT_OPS_ORIGIN` 与 Agent token，运行 `node scripts/import-pipeline/review.mjs push <paperId>`。push 会再次执行同一 analysis gate；不可变 bundle 绑定九份原始 bytes，manifest / bundle 绑定 `analysisDigest`。网页 revision finalize 后不可修改；Agent 停下等待 Owner 在 `/ops/` 真实 Screen 审核讲评。旧 revision 不会因后来补文件而获得 sidecar。
+5. 有问题：Agent 用 `review.mjs status` 或自己的 `import_agent` 网页待办箱读取反馈并回复；修好 Materialization 或 analysis 后重新 `verify` / `build` / `verify-analyses`，再用 `review.mjs push <paperId> --resolves <issueId>[,<issueId>]` 提交新 revision。不得覆盖旧 revision。
+6. Owner 认可后运行 `node scripts/import-pipeline/review.mjs accept <paperId>`。该命令只有在本地 source/Candidate/visible structure/analysis/files/bundle 与网页收据全部精确匹配时，才写 `teacher-confirmation-v1.json`（`confirmed: true`）、Canonical request、web approval 与 `signals/qa-accepted.json`；它不 publish、不部署。
+7. 运行 `node scripts/import-pipeline/review.mjs publish <paperId>`。该命令再次核对当前网页认可、QA 收据、Teacher Confirmation、Canonical request、`analysisDigest` 和 AI 答案复核，然后通过共享原子 publisher 把同一确定性五份 analysis sidecar 连同 DB、`versions/vN`、`latest` 与 Canonical current ref 一起提交、回滚或恢复；不得 approval 后另跑 writing backfill。成功后才写 `signals/locally-published.json`；同一认可和有效收据重跑为 no-op。它不部署，打印 `ready_to_ship` 后必须停。
 
 `materialize`、`verify` 与 `build` 都不会创建认可、approve、publish 或 ship。Teacher Confirmation、不可变 Review revision、Owner 网页认可和上线口令边界保持不变。
 
@@ -201,7 +204,7 @@ checklist。
 ## 停点
 
 - **不对答案（人）。** 答案随解析字段做全；托底是 AI Answer Transcription Check。
-- **网页 QA（人）必留。** Owner 在 `/ops/` 看复用现有 `PaperBrowsePage` / `PaperSurface` 的 Screen，以及共享 Canonical seam 生成的 Student Print / Teacher Print / PDF。问题绑定 revision 与语义对象；Owner 网页认可后仍由 Agent `review.mjs accept` 精确拉取，不能手写 `signals/qa-accepted.json`。
+- **网页 QA（人）必留。** Owner 在 `/ops/` 看复用现有 `PaperBrowsePage` / `PaperSurface` 的 Screen，包括九份 staged analysis 确定性投影出的完整讲评，以及共享 Canonical seam 生成的 Student Print / Teacher Print / PDF。AI-derived analysis 必须由 Owner 在真实 Screen 审核；出现“解析未发布”就是失败，不是可认可的 graceful success。问题绑定 revision 与语义对象；Owner 网页认可后仍由 Agent `review.mjs accept` 精确拉取，不能手写 `signals/qa-accepted.json`。
 - **上线。** `review.mjs publish` 成功后停。未 `ready_to_ship` 不得 push。导题后台无生产按钮。owner 必须**当前**另说「上线」之后，才按下一节清单执行。
 
 ## 上线

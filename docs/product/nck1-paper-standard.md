@@ -88,18 +88,21 @@ figures 原料齐全(§8)。源无听力则跳过听力项;源无图且表已拍
 纯文本、无独立截图则跳过 figures 项,不得编造占位。现有 publish
 gate 覆盖不到的项,按格式补 verify 锁,不得靠人眼。
 
-新卷(格式③必检;其他格式一旦交出写作分析稿同样必检)还须:
+所有通用入口新卷（旧格式回退入口按各自存量合同）还须:
 
 - **应用文卷面 chrome**:题干不把「（词数N左右。）」粘在提示末尾;
   独立「注意」块写词数与答题卡格式;源给的标题/称呼进答题框
   (`givenSkeleton.presence = provided`)。格式①历史卷给定语可
   `omitted`,不得用本条去改已入库真题。排版细节见
   `exam-paper-format-standards.md` §8。
-- **九题组讲评齐**:阅读 / 七选五 / 完形 / 语法随发布包落地;写作两节
+- **九题组讲评齐**:Review `push` 前交齐 4×阅读、七选五、完形、语法、
+  应用文、续写九份 staged analysis，绑定进不可变 revision；阅读 / 七选五 /
+  完形 / 语法随发布包落地;写作两节
   必须写入 `analyses/writing-analysis-v1.json`(应用文 V3:`modelAnswer`
   + 完整 ReviewCard + 源有则 `officialModelAnswer`;续写 V1:
   `continuationAnalysis` 五段 + `modelAnswer`)。缺一组或整组只能显示
-  「解析未发布」则整卷打回。旧 `continuationDesign` 只认历史资产。
+  「解析未发布」则在 Owner QA 前整卷打回。正确项只来自权威答案，AI
+  不能解题补答案。旧 `continuationDesign` 只认历史资产。
 - **应用文讲评入口**:完整 payload 时点击答题框打开讲评;框内叠放
   「AI 参考范文」与可选「官方范文」,右栏只 ReviewCard。不新增 tab,
   不用白名单题组。
