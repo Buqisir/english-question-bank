@@ -252,12 +252,14 @@ function makeVersionedArtifacts(packageData, version) {
   const paperAsset = JSON.parse(JSON.stringify(packageData.paperAsset))
   const answerKey = JSON.parse(JSON.stringify(packageData.answerKey))
   const importMeta = JSON.parse(JSON.stringify(packageData.importMeta))
-  const readingAnalysis = JSON.parse(JSON.stringify(packageData.readingAnalysis))
+  const readingAnalysis = packageData.readingAnalysis
+    ? JSON.parse(JSON.stringify(packageData.readingAnalysis))
+    : null
 
   paperAsset.paper.assetVersion = version
   paperAsset.paper.status = 'published'
   answerKey.sourceAssetVersion = version
-  readingAnalysis.sourceAssetVersion = version
+  if (readingAnalysis) readingAnalysis.sourceAssetVersion = version
 
   const scAnalysis = packageData.scAnalysis
     ? JSON.parse(JSON.stringify(packageData.scAnalysis))
@@ -325,21 +327,25 @@ export function writePaperImportVersion({
   }
 
   const tempDir = path.join(versionsDir, `.tmp-${versionName}-${randomUUID()}`)
-  mkdirSync(path.join(tempDir, 'raw'), { recursive: true })
-  mkdirSync(path.join(tempDir, 'analyses'), { recursive: true })
+  mkdirSync(tempDir, { recursive: true })
 
   const artifacts = makeVersionedArtifacts(packageData, version)
   try {
-    const rawDir = path.join(tempDir, 'raw')
-    writeFileSync(path.join(rawDir, packageData.sourceDocx.fileName), packageData.sourceDocx.buffer)
-    writeDocxSourceCapture(tempDir, rawDir, packageData.sourceDocx, paperId)
+    if (packageData.sourceDocx) {
+      const rawDir = path.join(tempDir, 'raw')
+      mkdirSync(rawDir, { recursive: true })
+      writeFileSync(path.join(rawDir, packageData.sourceDocx.fileName), packageData.sourceDocx.buffer)
+      writeDocxSourceCapture(tempDir, rawDir, packageData.sourceDocx, paperId)
+    }
     writeJson(path.join(tempDir, 'paper-asset.json'), artifacts.paperAsset)
     if (forceFailureAt === 'version-write') {
       throw new Error('Forced version-write failure')
     }
     writeJson(path.join(tempDir, 'answer-key.json'), artifacts.answerKey)
     writeJson(path.join(tempDir, 'import-meta.json'), artifacts.importMeta)
-    writeJson(path.join(tempDir, 'analyses', readingChoiceAnalysisFileName), artifacts.readingAnalysis)
+    if (artifacts.readingAnalysis) {
+      writeJson(path.join(tempDir, 'analyses', readingChoiceAnalysisFileName), artifacts.readingAnalysis)
+    }
     if (artifacts.scAnalysis) {
       writeJson(path.join(tempDir, 'analyses', sevenChoicesAnalysisFileName), artifacts.scAnalysis)
     }
@@ -480,16 +486,21 @@ export function swapPaperImportLatest({
     }
   }
 
-  mkdirSync(path.join(tempLatest, 'analyses'), { recursive: true })
+  mkdirSync(tempLatest, { recursive: true })
   for (const fileName of ['paper-asset.json', 'answer-key.json', 'import-meta.json']) {
     writeFileSync(path.join(tempLatest, fileName), readFileSync(path.join(versionDir, fileName)))
   }
-  writeFileSync(
-    path.join(tempLatest, 'analyses', readingChoiceAnalysisFileName),
-    readFileSync(path.join(versionDir, 'analyses', readingChoiceAnalysisFileName)),
-  )
+  const readingAnalysisPath = path.join(versionDir, 'analyses', readingChoiceAnalysisFileName)
+  if (existsSync(readingAnalysisPath)) {
+    mkdirSync(path.join(tempLatest, 'analyses'), { recursive: true })
+    writeFileSync(
+      path.join(tempLatest, 'analyses', readingChoiceAnalysisFileName),
+      readFileSync(readingAnalysisPath),
+    )
+  }
   const scAnalysisPath = path.join(versionDir, 'analyses', sevenChoicesAnalysisFileName)
   if (existsSync(scAnalysisPath)) {
+    mkdirSync(path.join(tempLatest, 'analyses'), { recursive: true })
     writeFileSync(
       path.join(tempLatest, 'analyses', sevenChoicesAnalysisFileName),
       readFileSync(scAnalysisPath),
@@ -497,6 +508,7 @@ export function swapPaperImportLatest({
   }
   const clozeAnalysisPath = path.join(versionDir, 'analyses', clozeAnalysisFileName)
   if (existsSync(clozeAnalysisPath)) {
+    mkdirSync(path.join(tempLatest, 'analyses'), { recursive: true })
     writeFileSync(
       path.join(tempLatest, 'analyses', clozeAnalysisFileName),
       readFileSync(clozeAnalysisPath),
@@ -504,6 +516,7 @@ export function swapPaperImportLatest({
   }
   const grammarFillAnalysisPath = path.join(versionDir, 'analyses', grammarFillAnalysisFileName)
   if (existsSync(grammarFillAnalysisPath)) {
+    mkdirSync(path.join(tempLatest, 'analyses'), { recursive: true })
     writeFileSync(
       path.join(tempLatest, 'analyses', grammarFillAnalysisFileName),
       readFileSync(grammarFillAnalysisPath),

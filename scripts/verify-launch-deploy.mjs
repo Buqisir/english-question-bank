@@ -424,6 +424,18 @@ try {
     visibleStructureDigest,
     bundleDigest,
   }
+  const localPublication = {
+    schemaVersion: 'universal-nck1-local-publication-v1',
+    approvalId,
+    revisionId,
+    sourceDigest,
+    candidateDigest,
+    visibleStructureDigest,
+    bundleDigest,
+    assetVersion: 1,
+    versionName: 'v1',
+    canonicalPublicationDigest: `sha256:${'6'.repeat(64)}`,
+  }
   const approvedReviewStatus = {
     paperId,
     latestRevisionId: revisionId,
@@ -436,6 +448,14 @@ try {
   }))
   writeFileSync(join(signalsDir, 'ai-answer-check.json'), JSON.stringify({ ok: true }))
   writeFileSync(join(signalsDir, 'qa-accepted.json'), JSON.stringify(qaReceipt))
+  writeFileSync(
+    join(signalsDir, 'locally-published.json'),
+    JSON.stringify(localPublication),
+  )
+  writeFileSync(
+    join(paperLatestDir, 'paper-asset.json'),
+    JSON.stringify({ paper: { paperId, assetVersion: 1 } }),
+  )
   writeFileSync(join(evidenceDir, 'candidate-summary.json'), JSON.stringify({
     paperId,
     sourceDigest,

@@ -5,7 +5,7 @@
 所有新 NCK1 卷默认走统一入口，不再先判断格式①/②/③：
 
 - 数据契约：`docs/product/nck1-paper-standard.md`（导题过程中不改；owner 拍板修订后以新文本为准）
-- 统一入口：`node scripts/import-pipeline/universal-nck1.mjs init ...`。Agent 从不可变源生成并校验 `nck1-source-materialization-v1`；表格写语义网格，图标、条码、照片和图表按源提取配方生成媒体。随后 `verify` 派生 Candidate，`build` 生成 digest-bound Candidate 摘要，`review.mjs push` 上传不可变审核 revision。Owner 在 `/ops/` 认可精确摘要后，`review.mjs accept` 才生成 Teacher Confirmation 与 Canonical request。完整命令见 `scripts/import-pipeline/README.md`。
+- 统一入口：`node scripts/import-pipeline/universal-nck1.mjs init ...`。Agent 从不可变源生成并校验 `nck1-source-materialization-v1`；表格写语义网格，图标、条码、照片和图表按源提取配方生成媒体。随后 `verify` 派生 Candidate，`build` 生成 digest-bound Candidate 摘要，`review.mjs push` 上传不可变审核 revision。Owner 在 `/ops/` 认可精确摘要后，`review.mjs accept` 生成 Teacher Confirmation 与 Canonical request；再由 `review.mjs publish` 原子发布到本地并停在 `ready_to_ship`。完整命令见 `scripts/import-pipeline/README.md`。
 - 阅读 Word 细线框（框里只有能打的字和矩形表）：写成 Canonical `framed_columns`（nck1 §8）；观感见 `docs/product/exam-paper-format-standards.md` §3c。不要截整图当 Canonical 正文，不要为单卷改 CSS。下一卷步骤见 `docs/cuts/reading-framed-columns/spec.md`「下一卷怎么干」。
 - 旧格式①/②/③脚本只保留已接入存量卷回退；新卷不得向旧脚本添加 `paperId`、CONTENT 登记或 shape association 特例。
 
@@ -41,10 +41,10 @@ node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
 | 切卷 / 分析中 | `groups.json` + 7× `analyze-<key>-combined.txt` / `analysis-<key>.json` | key = `reading-a` `reading-b` `reading-c` `reading-d` `seven` `cloze` `grammar` |
 | 写作分析稿 | `analysis-application.json` + `analysis-continuation.json` | 新卷必交;格式③ `--publish` 硬前置 |
 | 答案复核过 | `signals/ai-answer-check.json` | AI Answer Transcription Check 已过 |
-| 本地已 publish | `app/public/paper-assets/<paperId>/latest/`（目录存在） | **唯一**本地 publish 成功信号 |
 | 卡死 | `signals/blocked.json` | 硬停；见原因码 |
 | 要人裁决（非例行 QA） | `signals/help-needed.json` | 例如非记叙型续写、格式不在白名单 |
 | 网页 QA 已过 | `signals/qa-accepted.json` | 仅由 `review.mjs accept` 按认可摘要写 |
+| 本地已 publish | `signals/locally-published.json` + 同版本 `latest/` | 仅由 `review.mjs publish` 在原子发布成功后写 |
 | 已上线 | `signals/shipped.json` | 本机 ship 收据；见「上线」清单 |
 
 `signals/` 下是小 JSON 收据，不要把答案表或全文写进去。
@@ -85,6 +85,24 @@ node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
 }
 ```
 
+`signals/locally-published.json`：
+
+```json
+{
+  "schemaVersion": "universal-nck1-local-publication-v1",
+  "publishedAt": "<ISO-8601>",
+  "approvalId": "approval-…",
+  "revisionId": "rev-…",
+  "sourceDigest": "sha256:…",
+  "candidateDigest": "sha256:…",
+  "visibleStructureDigest": "sha256:…",
+  "bundleDigest": "sha256:…",
+  "assetVersion": 1,
+  "versionName": "v1",
+  "canonicalPublicationDigest": "sha256:…"
+}
+```
+
 `signals/shipped.json`：
 
 ```json
@@ -93,18 +111,21 @@ node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
 
 已知 `blocked.json` 原因码：`source_incomplete`（统一材料化缺页、缺权威答案、冲突或不闭合）、`canonical_unavailable`（旧入口 producer / compile 仍 fail-closed 时）、`gate_failed`（同一门禁自动修 2 次仍红）、`continuation_non_narrative`、`ship_failed`（整库 push 失败）。
 
-## 六态
+## 状态
 
-`queued` → `importing`（含 AI 答案复核）→ `awaiting_qa` → `ready_to_ship` → `shipped`，或任意步 `failed`。
+`queued` → `importing`（含 AI 答案复核）→ `awaiting_qa` → `approved` →
+`locally_published` → `ready_to_ship` → `shipped`，或任意步 `failed`。
 
 后台按探针判定，不看进程 exit code：
 
 | 状态 | 判定 |
 | --- | --- |
 | `queued` | 卷目录或源已在，尚无 `config.json` |
-| `importing` | 有 `config.json`，尚无 `latest/`，无 `blocked.json` |
-| `awaiting_qa` | 有 `latest/` 且有 `signals/ai-answer-check.json`，无 QA 收据、无 `shipped.json`、无 `blocked.json` |
-| `ready_to_ship` | 上条 + `signals/qa-accepted.json` |
+| `importing` | 有 `config.json`，尚未完成答案复核或提交网页 QA，无 `blocked.json` |
+| `awaiting_qa` | 有 `signals/ai-answer-check.json`，无 QA 收据、无 `shipped.json`、无 `blocked.json` |
+| `approved` | 有精确 `signals/qa-accepted.json`，尚无本地发布收据 |
+| `locally_published` | 已有 `signals/locally-published.json`，但本地发布完整探针尚未全齐 |
+| `ready_to_ship` | `qa-accepted`、`locally-published`、同版本 `latest/` 和答案复核全部精确闭合 |
 | `shipped` | 有 `signals/shipped.json` |
 | `failed` | 有 `signals/blocked.json`（且未 shipped） |
 
@@ -120,6 +141,7 @@ node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
 3. 设置 `QUESTION_BANK_IMPORT_OPS_ORIGIN` 与 Agent token，运行 `node scripts/import-pipeline/review.mjs push <paperId>`。网页 revision finalize 后不可修改；Agent 停下等待 Owner 在 `/ops/` 审核。
 4. 有问题：Agent 用 `review.mjs status` 或自己的 `import_agent` 网页待办箱读取反馈并回复；修好 Materialization 后重新 `verify` / `build`，再用 `review.mjs push <paperId> --resolves <issueId>[,<issueId>]` 提交新 revision。不得覆盖旧 revision。
 5. Owner 认可后运行 `node scripts/import-pipeline/review.mjs accept <paperId>`。该命令只有在本地 source/Candidate/visible structure/files/bundle 与网页收据全部精确匹配时，才写 `teacher-confirmation-v1.json`（`confirmed: true`）、Canonical request、web approval 与 `signals/qa-accepted.json`；它不 publish、不部署。
+6. 运行 `node scripts/import-pipeline/review.mjs publish <paperId>`。该命令再次核对当前网页认可、QA 收据、Teacher Confirmation、Canonical request 和 AI 答案复核，然后通过共享原子 publisher 写同版本 DB、`versions/vN`、`latest` 与 Canonical current ref。成功后才写 `signals/locally-published.json`；同一认可和有效收据重跑为 no-op。它不部署，打印 `ready_to_ship` 后必须停。
 
 以下旧格式编号步骤仅供已经登记的存量入口继续复现；新卷从分析、发布 dry-run 和 QA 公共门禁继续，不再执行旧切卷/producer：
 
@@ -140,14 +162,14 @@ node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
    **格式③** 且 6–8 全绿：跑 DOCX-pair producer（开局 `paperId` 必填；不得占用 `paper-YYYY-i` / `paper-zj-YYYY-jan`）：
    `node scripts/import-pipeline/build-docx-pair-canonical-request.mjs <试题.docx> <答案解析.docx> --output-dir papers/<id>/canonical-evidence --expected-paper-id <paperId> --write`
    身份以开局 `paperId` 为准，不按标题派生。不要手写 Canonical Paper，不要套用格式① trusted-DOCX 或格式② PDF envelope。producer / compile 仍失败 → 写 `signals/blocked.json`，`code` = `canonical_unavailable`，停。
-10. 6–8 全绿且 `canonicalRequestPath` 可被 `loadCanonicalImportRequest` 加载：按 runbook 停本地 API → `--publish` → 重启 API →（格式②）`attach-paper-assets-extras` → POST `verify-nck1` → ledger。缺该 request 时不得把该卷当成已 publish。本地成功 **只** 以 `app/public/paper-assets/<id>/latest/` 为准。
+10. 6–8 全绿且 `canonicalRequestPath` 可被 `loadCanonicalImportRequest` 加载：按 runbook 停本地 API → `--publish` → 重启 API →（格式②）`attach-paper-assets-extras` → POST `verify-nck1` → ledger。缺该 request 时不得把该卷当成已 publish。此处只描述存量入口复现；不得把它的 `latest/` 先发布顺序套到通用入口。
 11. 本地 publish 成功后 **停**。不替人点 QA，不自动 push，不跑 `scripts/pull-run-push.mjs`。
 
 ## 停点
 
 - **不对答案（人）。** 答案随解析字段做全；托底是 AI Answer Transcription Check。
 - **网页 QA（人）必留。** Owner 在 `/ops/` 看复用现有 `PaperBrowsePage` / `PaperSurface` 的 Screen，以及共享 Canonical seam 生成的 Student Print / Teacher Print / PDF。问题绑定 revision 与语义对象；Owner 网页认可后仍由 Agent `review.mjs accept` 精确拉取，不能手写 `signals/qa-accepted.json`。
-- **上线。** 本地 publish 后停。未 `ready_to_ship` 不得 push。导题后台无生产按钮。owner 必须**当前**另说「上线」之后，才按下一节清单执行。
+- **上线。** `review.mjs publish` 成功后停。未 `ready_to_ship` 不得 push。导题后台无生产按钮。owner 必须**当前**另说「上线」之后，才按下一节清单执行。
 
 ## 上线
 
@@ -176,9 +198,9 @@ Review DB 事务内取得绑定当前 approval/revision/digest 的 shipping guar
 
 ### 硬前置
 
-该卷必须是 `ready_to_ship`：`app/public/paper-assets/<id>/latest/` + `signals/ai-answer-check.json` + `signals/qa-accepted.json`，且没有挡住的 `blocked.json`。ledger 只提示不挡。未 `ready_to_ship` → 清单拒绝，**不得** push。
+该卷必须是 `ready_to_ship`：`app/public/paper-assets/<id>/latest/` + `signals/ai-answer-check.json` + `signals/qa-accepted.json` + `signals/locally-published.json` 精确闭合，且没有挡住的 `blocked.json`。ledger 只提示不挡。未 `ready_to_ship` → 清单拒绝，**不得** push。
 
-重试：仅当 `blocked.json` 的 `code` 为 `ship_failed`，上列三件仍在，且 owner **当前**口头说「重试上线」：
+重试：仅当 `blocked.json` 的 `code` 为 `ship_failed`，上列四件仍在，且 owner **当前**口头说「重试上线」：
 
 ```bash
 node scripts/import-pipeline/ship-checklist.mjs check <paperId> --owner-said-retry-ship

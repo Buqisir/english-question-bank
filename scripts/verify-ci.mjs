@@ -36,6 +36,7 @@ const registry = {
   'scripts/verify-paper-canonical-import-admission.mjs',
   'scripts/verify-paper-canonical-registered-confirmation-admission.mjs',
   'scripts/verify-paper-canonical-import-recovery.mjs',
+  'scripts/verify-universal-nck1-publish.mjs',
   'scripts/verify-production-canonical-publication-backfill.mjs',
   'scripts/verify-paper-canonical-import-pilot-fixes.mjs',
   'scripts/verify-paper-canonical-docx-source-adapter.mjs',
@@ -206,7 +207,10 @@ const uniqueRegistered = (scripts) => [...new Set(scripts)].filter(
   (script) => registry.scripts.includes(script),
 )
 const paperScripts = uniqueRegistered(
-  registry.scripts.filter((script) => paperScriptPattern.test(script)),
+  [
+    ...registry.scripts.filter((script) => paperScriptPattern.test(script)),
+    'scripts/verify-universal-nck1-publish.mjs',
+  ],
 )
 const featureScripts = uniqueRegistered(registry.scripts.filter(
   (script) => !paperScripts.includes(script) && !securityScripts.includes(script),

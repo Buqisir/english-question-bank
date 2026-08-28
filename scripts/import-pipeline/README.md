@@ -50,11 +50,17 @@ node scripts/import-pipeline/review.mjs status <paperId>
 node scripts/import-pipeline/review.mjs reply <paperId> <issueId> --message '<回复>'
 node scripts/import-pipeline/review.mjs push <paperId> --resolves <issueId>[,<issueId>]
 node scripts/import-pipeline/review.mjs accept <paperId>
+node scripts/import-pipeline/review.mjs publish <paperId>
 ```
 
 `accept` 只在最新 revision 已由 Owner 认可时成功；它重新核对本地源、Candidate、
 可见结构、文件清单和 bundle digest，才写确认、Canonical request 和摘要绑定 QA
-收据。它不 publish、不部署。Agent 不代确认，Owner 网页认可也不构成上线授权。
+收据。它不 publish、不部署。`publish` 再核对同一网页认可、QA 收据、Teacher
+Confirmation、Canonical request 与 AI 答案复核，然后通过共享原子 publisher 写
+同版本 DB、`versions/vN`、`latest` 和 Canonical current ref；成功后写
+`signals/locally-published.json` 并进入 `ready_to_ship`。同一认可与有效本地发布
+收据重跑为 no-op。Agent 不代确认；`accept`、`publish` 和 Owner 网页认可都不构成
+上线授权。
 
 机械 how-to 见 `docs/import/agent-runbook.md`；本 README 只是它引用的工序
 参考,不重复讲工序。数据契约权威见 `docs/product/nck1-paper-standard.md`。
@@ -141,14 +147,15 @@ node scripts/import-pipeline/build-docx-pair-canonical-request.mjs \
 
 ## 上线（内容，非代码）
 
-本地 `--publish` 之后不要自动 push。可执行清单（本身不跑 push）：
+通用入口 `review.mjs publish`（存量入口为 `--publish`）之后不要自动 push。可执行清单（本身不跑 push）：
 
 ```bash
 node scripts/import-pipeline/ship-checklist.mjs check <paperId> --owner-said-ship
 ```
 
 该清单继续使用 `QUESTION_BANK_IMPORT_OPS_ORIGIN` 与 Agent token，只读确认本地
-QA 收据仍是 Review 服务的当前最新认可；新 revision 会让旧收据失败关闭。仅当
+QA 收据与 `locally-published.json` 仍是 Review 服务的当前最新认可，且对应同版本
+`latest`；新 revision 会让旧收据失败关闭。仅当
 打印「允许」、且 owner **当前**口头「上线」时，才跑整库
 `node scripts/pull-run-push.mjs push <paperId> --owner-said-ship`。实际 push 会在
 停生产服务前再次读取当前 Review revision，并事务性取得 shipping guard；若清单

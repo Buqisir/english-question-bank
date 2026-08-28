@@ -5,6 +5,8 @@ export const LABELS = {
   queued: '排队',
   importing: '导入中',
   awaiting_qa: '待 QA',
+  approved: '已认可',
+  locally_published: '本地已发布',
   ready_to_ship: '可上线',
   shipped: '已上线',
   failed: '失败',
@@ -27,6 +29,7 @@ export function isOpsVisible(probes) {
     Boolean(probes.blocked) ||
     probes.aiCheck ||
     probes.qaAccepted ||
+    probes.locallyPublished ||
     probes.shipped ||
     Boolean(probes.helpNeeded)
   if (probes.latest) return hasSignal
@@ -36,8 +39,20 @@ export function isOpsVisible(probes) {
 export function statusOf(probes) {
   if (probes.shipped) return 'shipped'
   if (probes.blocked) return 'failed'
-  if (probes.qaAccepted && probes.latest && probes.aiCheck) return 'ready_to_ship'
-  if (probes.latest && probes.aiCheck) return 'awaiting_qa'
+  if (probes.universal) {
+    if (
+      probes.locallyPublished
+      && probes.qaAccepted
+      && probes.latest
+      && probes.aiCheck
+    ) return 'ready_to_ship'
+    if (probes.locallyPublished) return 'locally_published'
+    if (probes.qaAccepted) return 'approved'
+    if (probes.aiCheck) return 'awaiting_qa'
+  } else {
+    if (probes.qaAccepted && probes.latest && probes.aiCheck) return 'ready_to_ship'
+    if (probes.latest && probes.aiCheck) return 'awaiting_qa'
+  }
   if (probes.config) return 'importing'
   return 'queued'
 }
@@ -93,9 +108,15 @@ export function probePaper({ repoRoot, paperId }) {
   const helpNeeded = readJsonIfPresent(path.join(signalsDir, 'help-needed.json'))
   const aiCheck = readJsonIfPresent(path.join(signalsDir, 'ai-answer-check.json'))
   const qaAccepted = readJsonIfPresent(path.join(signalsDir, 'qa-accepted.json'))
+  const locallyPublished = readJsonIfPresent(
+    path.join(signalsDir, 'locally-published.json'),
+  )
   const shipped = readJsonIfPresent(path.join(signalsDir, 'shipped.json'))
   const counts = analysisCounts(paperDir)
   const writingCount = writingAnalysisCount(paperDir)
+  const universal = Boolean(config)
+    && !config._invalid
+    && String(config.format) === 'universal-nck1'
   const format3 = Boolean(config) && !config._invalid && String(config.format) === '3'
   const writingPublished = existsSync(path.join(latestDir, 'analyses', 'writing-analysis-v1.json'))
   const probes = {
@@ -105,6 +126,7 @@ export function probePaper({ repoRoot, paperId }) {
       paperId,
     source: hasSource(paperDir),
     config: Boolean(config) && !config._invalid,
+    universal,
     groups: existsSync(path.join(paperDir, 'groups.json')),
     analyzeCount: counts.analyze,
     analysisCount: counts.analysis,
@@ -121,6 +143,10 @@ export function probePaper({ repoRoot, paperId }) {
     aiCheck: Boolean(aiCheck) && aiCheck.ok === true,
     latest: existsSync(latestDir) && statSync(latestDir).isDirectory(),
     qaAccepted: Boolean(qaAccepted) && !qaAccepted._invalid,
+    locallyPublished:
+      Boolean(locallyPublished)
+      && !locallyPublished._invalid
+      && locallyPublished.schemaVersion === 'universal-nck1-local-publication-v1',
     shipped: Boolean(shipped) && !shipped._invalid,
     blocked: blocked && !blocked._invalid ? blocked : null,
     helpNeeded: helpNeeded && !helpNeeded._invalid ? helpNeeded : null,
@@ -130,6 +156,7 @@ export function probePaper({ repoRoot, paperId }) {
       mtimeMs(path.join(signalsDir, 'blocked.json')),
       mtimeMs(path.join(signalsDir, 'ai-answer-check.json')),
       mtimeMs(path.join(signalsDir, 'qa-accepted.json')),
+      mtimeMs(path.join(signalsDir, 'locally-published.json')),
       mtimeMs(path.join(signalsDir, 'shipped.json')),
       mtimeMs(path.join(signalsDir, 'help-needed.json')),
       mtimeMs(latestDir),
@@ -140,7 +167,11 @@ export function probePaper({ repoRoot, paperId }) {
     ...probes,
     status,
     statusLabel: LABELS[status],
-    gatesGreen: probes.latest && probes.aiCheck && !probes.blocked,
+    gatesGreen:
+      probes.latest
+      && probes.aiCheck
+      && (!probes.universal || probes.locallyPublished)
+      && !probes.blocked,
     visible: isOpsVisible(probes),
   }
 }

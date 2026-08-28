@@ -429,6 +429,19 @@ try {
     visibleStructureDigest,
     bundleDigest,
   }
+  const localPublication = {
+    schemaVersion: 'universal-nck1-local-publication-v1',
+    publishedAt: '2026-08-28T00:00:00.000Z',
+    approvalId,
+    revisionId,
+    sourceDigest,
+    candidateDigest,
+    visibleStructureDigest,
+    bundleDigest,
+    assetVersion: 1,
+    versionName: 'v1',
+    canonicalPublicationDigest: `sha256:${'9'.repeat(64)}`,
+  }
   const webReviewStatus = {
     paperId,
     latestRevisionId: revisionId,
@@ -440,6 +453,32 @@ try {
     JSON.stringify(webApproval),
   )
   writeFileSync(path.join(signalsDir, 'qa-accepted.json'), JSON.stringify(qaReceipt))
+  const approvedOnly = evaluateShip({
+    repoRoot: shipRoot,
+    paperId,
+    ownerSaid: 'ship',
+    webReviewStatus,
+  })
+  assert.equal(approvedOnly.paper.status, 'approved')
+  assert.equal(
+    approvedOnly.code,
+    'not_ready_to_ship',
+    'web approval without a local publication receipt cannot ship',
+  )
+  writeFileSync(
+    path.join(signalsDir, 'locally-published.json'),
+    JSON.stringify(localPublication),
+  )
+  writeFileSync(
+    path.join(
+      shipRoot,
+      'app/public/paper-assets',
+      paperId,
+      'latest',
+      'paper-asset.json',
+    ),
+    JSON.stringify({ paper: { paperId, assetVersion: 1 } }),
+  )
   assert.equal(
     evaluateShip({ repoRoot: shipRoot, paperId, ownerSaid: 'ship', webReviewStatus }).ok,
     true,

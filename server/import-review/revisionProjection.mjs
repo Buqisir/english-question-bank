@@ -263,17 +263,45 @@ function buildConsumption(candidate, compilation) {
   return consumption
 }
 
-function plainText(blocks) {
+function compatibilityText(
+  blocks,
+  questionNoByBlankId = new Map(),
+  family = null,
+) {
   return blocks
     .filter((block) => block.kind === 'paragraph')
-    .map((block) => block.content
-      .filter((inline) => inline.kind === 'text')
-      .map((inline) => inline.text)
-      .join(''))
+    .map((block) => {
+      let text = ''
+      for (const [index, inline] of block.content.entries()) {
+        if (inline.kind === 'text') {
+          text += inline.text
+          continue
+        }
+        const marker = `__${questionNoByBlankId.get(inline.blankId)}__`
+        if (family !== 'grammar-fill') {
+          text += marker
+          continue
+        }
+        const nextInline = block.content[index + 1]
+        const prefix = /[\p{L}\p{N}_]$/u.test(text) ? ' ' : ''
+        const suffix =
+          nextInline?.kind === 'text'
+          && /^(?:[\p{L}\p{N}_]|\()/u.test(nextInline.text)
+            ? ' '
+            : ''
+        text += `${prefix}${marker}${suffix}`
+      }
+      return text
+    })
     .join('\n')
 }
 
-function buildPaperAsset(config, materialization, candidate) {
+export function buildNck1CompatibilityPaperAsset({
+  config,
+  materialization,
+  sourceAssetVersion,
+  primarySourceType = 'pdf',
+}) {
   const groupTypes = {
     reading: 'reading',
     'seven-choices': 'sevenChoices',
@@ -291,6 +319,9 @@ function buildPaperAsset(config, materialization, candidate) {
   for (const group of materialization.groups) {
     const questionIds = group.questions.map((question) => question.questionId)
     const blankIds = group.questions.map((question) => question.blankId).filter(Boolean)
+    const questionNoByBlankId = new Map(group.questions
+      .filter((question) => question.blankId)
+      .map((question) => [question.blankId, question.canonicalNumber]))
     const writingTaskId = group.writingTask ? `writing-task:${group.groupId}` : undefined
     groups[group.groupId] = {
       groupId: group.groupId,
@@ -302,7 +333,14 @@ function buildPaperAsset(config, materialization, candidate) {
       passage: {
         paragraphs: group.blocks
           .filter((block) => block.kind === 'paragraph')
-          .map((block) => ({ paragraphId: block.blockId, text: plainText([block]) })),
+          .map((block) => ({
+            paragraphId: block.blockId,
+            text: compatibilityText(
+              [block],
+              questionNoByBlankId,
+              group.family,
+            ),
+          })),
       },
       ...(group.optionBank.length > 0
         ? { optionBank: group.optionBank.map(({ label, text }) => ({ label, text })) }
@@ -360,10 +398,10 @@ function buildPaperAsset(config, materialization, candidate) {
       title: config.provenance.paperName,
       subject: 'English',
       source: config.provenance.source,
-      assetVersion: candidate.interpretation.sourceAssetVersion,
+      assetVersion: sourceAssetVersion,
       status: 'draft',
     },
-    sources: { primarySourceType: 'pdf' },
+    sources: { primarySourceType },
     layoutTree: { parts: [] },
     content: {
       blocks: materialization.groups.map((group) => ({ type: 'group', groupId: group.groupId })),
@@ -374,6 +412,90 @@ function buildPaperAsset(config, materialization, candidate) {
     },
     answerKey: { answers: answerKey },
     analysis: {},
+  }
+}
+
+function configuredSourceType(config, paperId) {
+  const sourceType = config.provenance?.sourceType
+    || (paperId.startsWith('paper-mock-') ? '模拟题' : '真题')
+  if (!['真题', '模拟题', '校本题', '自编题'].includes(sourceType)) {
+    fail(`Unsupported sourceType: ${sourceType}`)
+  }
+  return sourceType
+}
+
+function configuredYear(config, paperId) {
+  const explicit = Number(config.provenance?.year)
+  if (Number.isInteger(explicit) && explicit >= 1900 && explicit <= 2100) {
+    return explicit
+  }
+  const inferred = Number(
+    /(?:19|20)\d{2}/.exec(
+      `${paperId} ${config.provenance?.paperName || ''}`,
+    )?.[0],
+  )
+  if (!Number.isInteger(inferred)) {
+    fail('Universal NCK1 compatibility metadata requires a factual year')
+  }
+  return inferred
+}
+
+export function buildNck1CompatibilityPackage({
+  config,
+  manifest,
+  materialization,
+  sourceAssetVersion = 1,
+}) {
+  const sourceDocument = materialization.documents.find((document) =>
+    ['question_source', 'question_and_answers'].includes(document.role))
+  const manifestDocument = manifest.documents.find((document) =>
+    document.documentId === sourceDocument?.documentId)
+  if (!sourceDocument || !manifestDocument) {
+    fail('Universal NCK1 compatibility metadata requires one question source')
+  }
+  const sourceFileSha256 = String(sourceDocument.sha256 || '').replace(/^sha256:/, '')
+  if (!/^[a-f0-9]{64}$/.test(sourceFileSha256)) {
+    fail('Universal NCK1 question source digest is invalid')
+  }
+  const sourceType = configuredSourceType(config, materialization.paperId)
+  const year = configuredYear(config, materialization.paperId)
+  const defaultTags = Array.isArray(config.provenance?.defaultTags)
+    ? config.provenance.defaultTags
+    : [sourceType, String(year)]
+  const primarySourceType = sourceDocument.mediaType?.includes('wordprocessingml')
+    ? 'docx'
+    : 'pdf'
+  const paperAsset = buildNck1CompatibilityPaperAsset({
+    config,
+    materialization,
+    sourceAssetVersion,
+    primarySourceType,
+  })
+  const answerKey = {
+    schemaVersion: 'answer-key-v1',
+    paperId: materialization.paperId,
+    sourceAssetVersion,
+    answers: structuredClone(paperAsset.answerKey.answers),
+  }
+  return {
+    paperAsset,
+    answerKey,
+    importMeta: {
+      schemaVersion: 'import-meta-v1',
+      paperId: materialization.paperId,
+      sourceFileName: path.basename(manifestDocument.path),
+      sourceFileSha256,
+      paper: {
+        year,
+        region: config.provenance?.region || config.provenance.source,
+        paperName: config.provenance.paperName,
+        examCode: materialization.paperId.replace(/^paper-/, ''),
+        subject: 'English',
+        sourceType,
+        defaultTags,
+      },
+    },
+    sourceAssetDigest: sourceFileSha256,
   }
 }
 
@@ -400,7 +522,15 @@ export function buildNck1ReviewProjection(rootDir) {
     candidate: preview.candidate,
     compilation: preview.compilation,
     consumption,
-    paperAsset: buildPaperAsset(loaded.config, loaded.materialization, preview.candidate),
+    paperAsset: buildNck1CompatibilityPaperAsset({
+      config: loaded.config,
+      materialization: loaded.materialization,
+      sourceAssetVersion: preview.candidate.interpretation.sourceAssetVersion,
+      primarySourceType: loaded.materialization.documents.some((document) =>
+        document.mediaType?.includes('wordprocessingml'))
+        ? 'docx'
+        : 'pdf',
+    }),
   }
 }
 

@@ -2,10 +2,13 @@ import {
   nck1MaterializationCandidateAuthorityRef,
 } from '../../shared/paper-canonical/authority.mjs'
 import {
+  compileCanonicalPaper,
   importCanonicalCandidate,
   rederiveConfirmedCanonicalCandidate,
 } from '../../shared/paper-canonical/compiler.mjs'
 import {
+  digestJson,
+  sha256,
   stableStringify,
 } from '../../shared/paper-canonical/stable.mjs'
 import {
@@ -19,6 +22,7 @@ export const NCK1_MATERIALIZATION_CONFIRMATION_FILE_NAME =
   'teacher-confirmation-v1.json'
 
 const textEncoder = new TextEncoder()
+const liveNck1MaterializationProofs = new WeakMap()
 
 function requestError(code, message) {
   const error = new Error(message)
@@ -43,6 +47,113 @@ function extensionFor(mediaType) {
 
 function jsonBytes(value) {
   return textEncoder.encode(`${JSON.stringify(value, null, 2)}\n`)
+}
+
+function sameAuthority(left, right) {
+  return Boolean(
+    left
+    && right
+    && left.manifestId === right.manifestId
+    && left.manifestVersion === right.manifestVersion
+    && left.manifestDigest === right.manifestDigest,
+  )
+}
+
+export function isNck1MaterializationCanonicalImportRequest(request) {
+  if (!sameAuthority(
+    request?.authority,
+    nck1MaterializationCandidateAuthorityRef,
+  )) return false
+  const documents = request?.evidence?.documents
+  if (!Array.isArray(documents)) return false
+  const materializations = documents.filter(
+    (document) => document.inputKey === 'nck1_source_materialization',
+  )
+  return materializations.length === 1
+    && materializations[0].bytes instanceof Uint8Array
+    && request.nck1MaterializationConfirmation?.schemaVersion
+      === 'teacher-confirmation-v1'
+    && request.nck1MaterializationConfirmation.confirmed === true
+}
+
+export function nck1MaterializationPublicationSourceAsset(request) {
+  if (!isNck1MaterializationCanonicalImportRequest(request)) return null
+  return new Uint8Array(request.evidence.documents.find(
+    (document) => document.inputKey === 'nck1_source_materialization',
+  ).bytes)
+}
+
+function proofSnapshotDigest({ compilation, sourceAsset, identity }) {
+  const canonicalPaper = compilation?.artifacts?.canonicalPaper
+  return digestJson({
+    compilation,
+    sourceAsset: {
+      sha256: sha256(sourceAsset),
+      byteLength: sourceAsset.byteLength,
+    },
+    identity,
+    canonicalIdentity: {
+      paperId: canonicalPaper?.paperPlan?.paperId,
+      authority: canonicalPaper?.paperPlan?.authorityRef,
+      digest: digestJson(canonicalPaper),
+    },
+  })
+}
+
+export function admitLiveConfirmedNck1MaterializationImport(request) {
+  if (!isNck1MaterializationCanonicalImportRequest(request)) {
+    throw requestError(
+      'NCK1_MATERIALIZATION_REQUEST_INVALID',
+      'NCK1 materialization admission requires immutable source evidence and Teacher Confirmation',
+    )
+  }
+  const compilation = compileCanonicalPaper(request)
+  if (compilation.disposition !== 'ready') {
+    const first = compilation.artifacts?.normalizationReport?.diagnostics?.[0]
+    throw requestError(
+      first?.code || 'NCK1_MATERIALIZATION_REQUEST_INVALID',
+      first?.message || 'Confirmed NCK1 materialization did not derive one Canonical Paper',
+    )
+  }
+  const sourceAsset = nck1MaterializationPublicationSourceAsset(request)
+  const confirmation = request.nck1MaterializationConfirmation
+  const identity = Object.freeze({
+    paperId: compilation.artifacts.canonicalPaper.paperPlan.paperId,
+    authority: Object.freeze({ ...nck1MaterializationCandidateAuthorityRef }),
+    candidateDigest: confirmation.candidateDigest,
+    sourceDigest: confirmation.sourceDigest,
+  })
+  const proof = Object.freeze({})
+  liveNck1MaterializationProofs.set(proof, Object.freeze({
+    compilation,
+    sourceAssetDigest: sha256(sourceAsset),
+    identity,
+    snapshotDigest: proofSnapshotDigest({ compilation, sourceAsset, identity }),
+  }))
+  return { compilation, sourceAsset, proof, identity }
+}
+
+export function isLiveConfirmedNck1MaterializationAdmission({
+  proof,
+  compilation,
+  sourceAsset,
+}) {
+  const admitted = liveNck1MaterializationProofs.get(proof)
+  if (
+    !admitted
+    || admitted.compilation !== compilation
+    || !(sourceAsset instanceof Uint8Array)
+    || admitted.sourceAssetDigest !== sha256(sourceAsset)
+  ) return false
+  try {
+    return admitted.snapshotDigest === proofSnapshotDigest({
+      compilation,
+      sourceAsset,
+      identity: admitted.identity,
+    })
+  } catch {
+    return false
+  }
 }
 
 /**

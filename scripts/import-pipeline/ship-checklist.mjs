@@ -36,7 +36,7 @@ function isUniversalPaper({ repoRoot, paperId }) {
   return config?.format === 'universal-nck1'
 }
 
-function exactUniversalWebReview({ repoRoot, paperId }) {
+function exactUniversalAcceptedPublication({ repoRoot, paperId }) {
   const paperDir = path.join(repoRoot, 'scripts/import-pipeline/papers', paperId)
   if (!isUniversalPaper({ repoRoot, paperId })) return true
   const summary = readJson(path.join(paperDir, 'canonical-evidence', 'candidate-summary.json'))
@@ -51,9 +51,22 @@ function exactUniversalWebReview({ repoRoot, paperId }) {
     'web-review-approval-v1.json',
   ))
   const receipt = readJson(path.join(paperDir, 'signals', 'qa-accepted.json'))
+  const publication = readJson(path.join(
+    paperDir,
+    'signals',
+    'locally-published.json',
+  ))
+  const latest = readJson(path.join(
+    repoRoot,
+    'app/public/paper-assets',
+    paperId,
+    'latest',
+    'paper-asset.json',
+  ))
   return Boolean(
     summary
     && receipt?.schemaVersion === 'web-import-review-qa-accepted-v1'
+    && publication?.schemaVersion === 'universal-nck1-local-publication-v1'
     && confirmation?.schemaVersion === 'teacher-confirmation-v1'
     && approval?.schemaVersion === 'web-import-review-approval-v1'
     && confirmation.confirmed === true
@@ -67,6 +80,18 @@ function exactUniversalWebReview({ repoRoot, paperId }) {
     && approval.candidateDigest === receipt.candidateDigest
     && approval.visibleStructureDigest === receipt.visibleStructureDigest
     && approval.bundleDigest === receipt.bundleDigest
+    && publication.approvalId === receipt.approvalId
+    && publication.revisionId === receipt.revisionId
+    && publication.sourceDigest === receipt.sourceDigest
+    && publication.candidateDigest === receipt.candidateDigest
+    && publication.visibleStructureDigest === receipt.visibleStructureDigest
+    && publication.bundleDigest === receipt.bundleDigest
+    && Number.isInteger(publication.assetVersion)
+    && publication.assetVersion > 0
+    && publication.versionName === `v${publication.assetVersion}`
+    && latest?.paper?.paperId === paperId
+    && latest?.paper?.assetVersion === publication.assetVersion
+    && typeof publication.canonicalPublicationDigest === 'string'
     && confirmation.sourceDigest === summary.sourceDigest
     && confirmation.candidateDigest === summary.candidateDigest
     && typeof receipt.bundleDigest === 'string'
@@ -100,7 +125,8 @@ function probesReady(paper, input) {
     paper.latest
     && paper.aiCheck
     && paper.qaAccepted
-    && exactUniversalWebReview(input),
+    && (!paper.universal || paper.locallyPublished)
+    && exactUniversalAcceptedPublication(input),
   )
 }
 
@@ -167,7 +193,7 @@ export function evaluateShip({ repoRoot, paperId, ownerSaid = null, webReviewSta
         code: 'not_ready_to_ship',
         paper,
         disclosure,
-        message: `拒绝 push：${paperId} 为 ship_failed，但 latest / ai-answer-check / qa-accepted 不齐。`,
+        message: `拒绝 push：${paperId} 为 ship_failed，但 latest / ai-answer-check / qa-accepted / locally-published 不齐。`,
       }
     }
     if (!exactCurrentWebReview({ repoRoot, paperId, webReviewStatus })) {
@@ -303,7 +329,7 @@ export function writeShipFailedReceipt({
       ok: false,
       code: 'not_ready_to_ship',
       paper,
-      message: `拒绝写 ship_failed：${paperId} 未具备 latest + ai-answer-check + qa-accepted。`,
+      message: `拒绝写 ship_failed：${paperId} 未具备 latest + ai-answer-check + qa-accepted + locally-published。`,
     }
   }
   const dir = signalsDir(repoRoot, paperId)

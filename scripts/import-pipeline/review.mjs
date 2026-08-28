@@ -2,20 +2,24 @@
 
 import { execFileSync } from 'node:child_process'
 import {
+  existsSync,
   mkdirSync,
   readFileSync,
   rmSync,
   writeFileSync,
 } from 'node:fs'
 import path from 'node:path'
+import { DatabaseSync } from 'node:sqlite'
 
 import { materializeNck1CanonicalRequest } from '../../server/paper-canonical/nck1MaterializationCanonicalRequest.mjs'
+import { loadCanonicalImportRequest } from '../../server/paper-canonical/importRequest.mjs'
 import { reviewBundleDigest } from '../../server/import-review/importReviewStore.mjs'
 import {
   buildNck1ReviewProjection,
   reviewBundleFilePaths,
   resolveReviewFile,
 } from '../../server/import-review/revisionProjection.mjs'
+import { publishUniversalNck1Import } from '../../server/paper-import/publisher.mjs'
 import { sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
@@ -191,7 +195,7 @@ function exactFileDescriptors(localFiles, approvedFiles) {
   return stableStringify(comparable(localFiles)) === stableStringify(comparable(approvedFiles))
 }
 
-async function accept(paperId) {
+async function approvedLocalReview(paperId) {
   const paperDir = paperDirectory(paperId)
   const status = await api(
     `/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`,
@@ -218,6 +222,15 @@ async function accept(paperId) {
     !exactFileDescriptors(localManifest.files, status.latest.manifest.files)
     || localManifest.bundleDigest !== approval.bundleDigest
   ) fail('Local review bundle no longer matches web approval')
+  return { paperDir, status, approval, projection }
+}
+
+async function accept(paperId) {
+  const {
+    paperDir,
+    approval,
+    projection,
+  } = await approvedLocalReview(paperId)
 
   const confirmation = {
     schemaVersion: 'teacher-confirmation-v1',
@@ -257,6 +270,176 @@ async function accept(paperId) {
   console.log(`ACCEPTED ${paperId}: exact web approval materialized; no publish or deployment was run`)
 }
 
+function requiredJson(filePath, label) {
+  if (!existsSync(filePath)) fail(`${label} is missing; run review.mjs accept first`)
+  try {
+    return JSON.parse(readFileSync(filePath, 'utf8'))
+  } catch {
+    fail(`${label} is not valid JSON`)
+  }
+}
+
+function assertAcceptedReceipts(paperDir, approval, projection) {
+  const evidenceDir = path.join(paperDir, 'canonical-evidence')
+  const qaAccepted = requiredJson(
+    path.join(paperDir, 'signals', 'qa-accepted.json'),
+    'signals/qa-accepted.json',
+  )
+  const webApproval = requiredJson(
+    path.join(evidenceDir, 'web-review-approval-v1.json'),
+    'canonical-evidence/web-review-approval-v1.json',
+  )
+  const confirmation = requiredJson(
+    path.join(evidenceDir, 'teacher-confirmation-v1.json'),
+    'canonical-evidence/teacher-confirmation-v1.json',
+  )
+  if (qaAccepted.schemaVersion !== 'web-import-review-qa-accepted-v1') {
+    fail('signals/qa-accepted.json has an unsupported schemaVersion')
+  }
+  for (const [actual, expected, label] of [
+    [qaAccepted.approvalId, approval.approvalId, 'qa approvalId'],
+    [qaAccepted.revisionId, approval.revisionId, 'qa revisionId'],
+    [qaAccepted.sourceDigest, approval.sourceDigest, 'qa sourceDigest'],
+    [qaAccepted.candidateDigest, approval.candidateDigest, 'qa candidateDigest'],
+    [qaAccepted.visibleStructureDigest, approval.visibleStructureDigest, 'qa visibleStructureDigest'],
+    [qaAccepted.bundleDigest, approval.bundleDigest, 'qa bundleDigest'],
+  ]) {
+    if (actual !== expected) fail(`${label} no longer matches current web approval`)
+  }
+  if (stableStringify(webApproval) !== stableStringify(approval)) {
+    fail('Saved web approval no longer matches current web approval')
+  }
+  const expectedConfirmation = {
+    schemaVersion: 'teacher-confirmation-v1',
+    candidateDigest: projection.candidateDigest,
+    sourceDigest: projection.sourceDigest,
+    confirmed: true,
+  }
+  if (stableStringify(confirmation) !== stableStringify(expectedConfirmation)) {
+    fail('Saved Teacher Confirmation no longer matches the approved local Candidate')
+  }
+  const answerCheck = requiredJson(
+    path.join(paperDir, 'signals', 'ai-answer-check.json'),
+    'signals/ai-answer-check.json',
+  )
+  if (answerCheck.ok !== true) fail('AI Answer Transcription Check has not passed')
+  return {
+    qaAccepted,
+    canonicalRequest: loadCanonicalImportRequest(
+      path.join(evidenceDir, 'canonical-import-request.json'),
+    ),
+  }
+}
+
+function publicationReceiptIsCurrent({
+  db,
+  paperAssetsDir,
+  paperId,
+  receipt,
+}) {
+  const latestPath = path.join(paperAssetsDir, paperId, 'latest', 'paper-asset.json')
+  if (!existsSync(latestPath)) return false
+  const latest = requiredJson(latestPath, 'published latest paper-asset.json')
+  const version = Number(receipt.assetVersion)
+  const assetRow = db.prepare(
+    `
+    SELECT status
+    FROM paper_asset_versions
+    WHERE paper_id = ? AND asset_version = ?
+    `,
+  ).get(paperId, version)
+  const canonicalRow = db.prepare(
+    `
+    SELECT publication_digest
+    FROM canonical_paper_publications
+    WHERE paper_id = ? AND source_asset_version = ? AND is_current = 1
+    `,
+  ).get(paperId, version)
+  return latest.paper?.assetVersion === version
+    && assetRow?.status === 'published'
+    && canonicalRow?.publication_digest === receipt.canonicalPublicationDigest
+}
+
+function publicationReceiptMatchesApproval(receipt, approval) {
+  return receipt?.schemaVersion === 'universal-nck1-local-publication-v1'
+    && receipt.approvalId === approval.approvalId
+    && receipt.revisionId === approval.revisionId
+    && receipt.sourceDigest === approval.sourceDigest
+    && receipt.candidateDigest === approval.candidateDigest
+    && receipt.visibleStructureDigest === approval.visibleStructureDigest
+    && receipt.bundleDigest === approval.bundleDigest
+    && Number.isInteger(receipt.assetVersion)
+    && receipt.assetVersion > 0
+    && receipt.versionName === `v${receipt.assetVersion}`
+    && typeof receipt.canonicalPublicationDigest === 'string'
+}
+
+async function publish(paperId) {
+  const {
+    paperDir,
+    approval,
+    projection,
+  } = await approvedLocalReview(paperId)
+  const { canonicalRequest } = assertAcceptedReceipts(
+    paperDir,
+    approval,
+    projection,
+  )
+  const dbPath = process.env.QUESTION_BANK_DB
+    || path.join(root, 'data/question-bank.sqlite')
+  const paperAssetsDir = process.env.QUESTION_BANK_PAPER_ASSET_ROOT
+    || path.join(root, 'app/public/paper-assets')
+  const receiptPath = path.join(paperDir, 'signals', 'locally-published.json')
+  const existingReceipt = existsSync(receiptPath)
+    ? requiredJson(receiptPath, 'signals/locally-published.json')
+    : null
+  const db = new DatabaseSync(dbPath, { readOnly: false })
+  try {
+    if (existingReceipt?.approvalId === approval.approvalId) {
+      if (
+        !publicationReceiptMatchesApproval(existingReceipt, approval)
+        || !publicationReceiptIsCurrent({
+          db,
+          paperAssetsDir,
+          paperId,
+          receipt: existingReceipt,
+        })
+      ) fail('Existing local publication receipt does not match approval or committed current state')
+      console.log(`ALREADY PUBLISHED ${paperId} ${existingReceipt.versionName}: ready_to_ship; no deployment was run`)
+      return
+    }
+    const result = publishUniversalNck1Import({
+      reviewRootDir: paperDir,
+      approvedIdentity: approval,
+      canonicalRequest,
+      db,
+      paperAssetsDir,
+    })
+    if (!result.ok) {
+      const diagnostics = result.canonicalAdmission?.diagnostics || []
+      fail(diagnostics.map((item) => `${item.code}: ${item.message}`).join('; ')
+        || `Universal NCK1 publish failed: ${result.status}`)
+    }
+    const receipt = {
+      schemaVersion: 'universal-nck1-local-publication-v1',
+      publishedAt: new Date().toISOString(),
+      approvalId: approval.approvalId,
+      revisionId: approval.revisionId,
+      sourceDigest: approval.sourceDigest,
+      candidateDigest: approval.candidateDigest,
+      visibleStructureDigest: approval.visibleStructureDigest,
+      bundleDigest: approval.bundleDigest,
+      assetVersion: result.publish.assetVersion,
+      versionName: result.publish.versionName,
+      canonicalPublicationDigest: result.publish.canonicalPublicationDigest,
+    }
+    writeFileSync(receiptPath, `${JSON.stringify(receipt, null, 2)}\n`)
+    console.log(`PUBLISHED ${paperId} ${receipt.versionName}: ready_to_ship; no deployment was run`)
+  } finally {
+    db.close()
+  }
+}
+
 async function releaseShipGuard(paperId, guardId) {
   if (!guardId || !process.argv.includes('--owner-said-abort-ship')) {
     fail(
@@ -278,10 +461,12 @@ async function main() {
   else if (command === 'status') await status(paperId)
   else if (command === 'reply') await reply(paperId, issueId)
   else if (command === 'accept') await accept(paperId)
+  else if (command === 'publish') await publish(paperId)
   else if (command === 'release-ship-guard') await releaseShipGuard(paperId, issueId)
   else fail(
     'Usage: review.mjs push <paperId> [--resolves issue-1,issue-2] | '
-      + 'status <paperId> | reply <paperId> <issueId> --message <text> | accept <paperId> | '
+      + 'status <paperId> | reply <paperId> <issueId> --message <text> | '
+      + 'accept <paperId> | publish <paperId> | '
       + 'release-ship-guard <paperId> <guardId> --owner-said-abort-ship',
   )
 }
