@@ -13,11 +13,12 @@
 //
 // Usage:
 //   node scripts/create-user.mjs --username W [--role owner|member]
-//     [--account-kind human|import_agent] [--password P]
-//     Creates a new active user. If --password is omitted, a random password is
-//     generated with crypto.randomBytes(9).toString('base64url') and printed once
-//     (never written to disk).
-//   node scripts/create-user.mjs --reset-password --username W [--password P]
+//     [--account-kind human|import_agent] [--password P | --password-stdin]
+//     Creates a new active user. If neither password option is supplied, a random
+//     password is generated with crypto.randomBytes(9).toString('base64url') and
+//     printed once (never written to disk).
+//   node scripts/create-user.mjs --reset-password --username W
+//     [--password P | --password-stdin]
 //     Resets an existing user's password and deletes all of their sessions
 //     (there is no recovery flow — this command IS the recovery flow, run by the
 //     owner on the server). Password omitted -> same random-generate-and-print.
@@ -28,6 +29,7 @@
 //
 // docs/cuts/m0-2-invite-login/plan.md decision 8 / docs/adr/0012-invite-login-auth-design.md
 import { randomBytes } from 'node:crypto'
+import { readFileSync } from 'node:fs'
 import {
   createUser,
   deleteSessionsForUser,
@@ -55,6 +57,9 @@ function parseArgs(argv) {
       case '--password':
         args.password = argv[++i]
         break
+      case '--password-stdin':
+        args.passwordStdin = true
+        break
       case '--role':
         args.role = argv[++i]
         break
@@ -80,6 +85,19 @@ function parseArgs(argv) {
 
 function generatePassword() {
   return randomBytes(9).toString('base64url')
+}
+
+function resolvePassword(args) {
+  if (args.password && args.passwordStdin) {
+    throw new Error('use only one of --password or --password-stdin')
+  }
+  if (args.passwordStdin) {
+    const password = readFileSync(0, 'utf8').replace(/\r?\n$/, '')
+    if (!password) throw new Error('--password-stdin received an empty password')
+    return { password, generated: false }
+  }
+  if (args.password) return { password: args.password, generated: false }
+  return { password: generatePassword(), generated: true }
 }
 
 async function main() {
@@ -131,24 +149,24 @@ async function main() {
         fail(`no such user: ${args.username}`)
         return
       }
-      const password = args.password || generatePassword()
+      const { password, generated } = resolvePassword(args)
       const passwordHash = await hashPassword(password)
       setUserPasswordHash(db, user.id, passwordHash)
       deleteSessionsForUser(db, user.id)
       console.log(`Step: password reset for ${args.username}. All existing sessions were revoked.`)
-      if (!args.password) {
+      if (generated) {
         console.log(`Generated password (shown once, not stored anywhere): ${password}`)
       }
       return
     }
 
     // Default mode: create a new user.
-    const password = args.password || generatePassword()
+    const { password, generated } = resolvePassword(args)
     const passwordHash = await hashPassword(password)
     const user = createUser(db, { username: args.username, passwordHash, role: args.role })
     setUserAccountKind(db, user.id, args.accountKind)
     console.log(`Step: created user "${user.username}" (role: ${user.role}, account: ${args.accountKind}, id: ${user.id}).`)
-    if (!args.password) {
+    if (generated) {
       console.log(`Generated password (shown once, not stored anywhere): ${password}`)
     }
   } catch (error) {

@@ -69,6 +69,13 @@ function agentIdentity(request, context, agentToken) {
   return null
 }
 
+function shippingIdentity(request, shipToken) {
+  if (shipToken && safeEqual(bearerToken(request), shipToken)) {
+    return 'ship-authorizer-token'
+  }
+  return null
+}
+
 async function receiveFile(request, destination, expected) {
   const contentLength = Number(request.headers['content-length'])
   if (Number.isFinite(contentLength) && contentLength !== expected.byteLength) {
@@ -167,8 +174,12 @@ function reviewPrintHtml(projection, versionType, buildPrintHtml) {
 export function createImportReviewRoutes({
   getStore,
   agentToken,
+  shipToken,
   buildPrintHtml,
 }) {
+  if (agentToken && shipToken && agentToken === shipToken) {
+    throw new Error('Import Review Agent and shipping tokens must be different')
+  }
   const store = new Proxy({}, {
     get(_target, property) {
       const current = getStore()
@@ -209,9 +220,9 @@ export function createImportReviewRoutes({
     context,
     match,
   }) => {
-    const actor = agentIdentity(request, context, agentToken)
+    const actor = shippingIdentity(request, shipToken)
     if (!actor) {
-      context.sendJson(response, 401, { error: 'agent_auth_required' })
+      context.sendJson(response, 401, { error: 'shipping_auth_required' })
       return
     }
     const input = await context.readJsonBody(request, { maxBytes: 20_000 })
@@ -228,9 +239,9 @@ export function createImportReviewRoutes({
     context,
     match,
   }) => {
-    const actor = agentIdentity(request, context, agentToken)
+    const actor = shippingIdentity(request, shipToken)
     if (!actor) {
-      context.sendJson(response, 401, { error: 'agent_auth_required' })
+      context.sendJson(response, 401, { error: 'shipping_auth_required' })
       return
     }
     context.sendJson(response, 200, store.releaseShippingGuard(

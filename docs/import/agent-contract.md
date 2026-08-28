@@ -212,6 +212,7 @@ node scripts/import-pipeline/ship-checklist.mjs check <paperId> --owner-said-shi
 `QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN`。清单会确认本地 `qa-accepted.json`
 仍对应 Review 服务的最新 `approved` revision 与同一 `approvalId` / 摘要；只要
 Agent 又提交了新 revision，旧本地收据立即失效，即使 Candidate 文件尚未变化。
+Agent 网页账号和该 token 都不能取得 shipping guard。
 
 仅当该命令打印「允许」时，agent 才可以跑整库：
 
@@ -220,7 +221,9 @@ node scripts/pull-run-push.mjs push <paperId> --owner-said-ship
 ```
 
 实际 push 入口会在第一次生产写操作（停服务）之前，再运行同一份本地门禁，并在
-Review DB 事务内取得绑定当前 approval/revision/digest 的 shipping guard。取得前
+Review DB 事务内使用独立 `QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN` 取得绑定当前
+approval/revision/digest 的 shipping guard。Agent token 与 ship token 必须不同；
+ship token 只在已有当前上线口令的 push / guard 恢复路径使用。取得前
 若出现新 revision 会失败关闭；取得后到远端操作结束前，新 revision、问题创建/
 状态修改和重新认可都会被服务端拒绝。不是单卷增量，不是 `deploy.sh`。导题后台
 只展示口令，不跑这条命令。
@@ -247,6 +250,7 @@ node scripts/import-pipeline/review.mjs release-ship-guard <paperId> <guardId> -
 ```
 
 `guardId` 会在取得锁时打印。不得为了继续导题而盲目解除仍可能被旧进程持有的锁。
+该恢复命令使用 ship token，不接受普通 Agent token 或网页 Cookie。
 
 ### 授权
 

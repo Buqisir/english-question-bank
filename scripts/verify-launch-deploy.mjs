@@ -503,6 +503,14 @@ try {
     }
     const server = createServer(async (request, response) => {
       const status = JSON.parse(readFileSync(statusPath, 'utf8'))
+      const guardRequest = request.url.includes('/shipping-guards')
+      const expectedAuthorization = guardRequest
+        ? 'Bearer test-ship-token'
+        : 'Bearer test-agent-token'
+      if (request.headers.authorization !== expectedAuthorization) {
+        send(response, 401, { error: 'wrong_review_credential' })
+        return
+      }
       if (request.method === 'POST' && request.url.endsWith('/shipping-guards')) {
         let raw = ''
         for await (const chunk of request) raw += chunk
@@ -589,6 +597,7 @@ try {
         EQB_SERVICE_START: startCmd,
         QUESTION_BANK_IMPORT_OPS_ORIGIN: reviewOrigin,
         QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN: 'test-agent-token',
+        QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN: 'test-ship-token',
       },
     },
   )
@@ -665,6 +674,7 @@ try {
         EQB_SERVICE_START: startCmd,
         QUESTION_BANK_IMPORT_OPS_ORIGIN: reviewOrigin,
         QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN: 'test-agent-token',
+        QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN: 'test-ship-token',
       },
     },
   )

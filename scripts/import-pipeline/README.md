@@ -171,7 +171,9 @@ QA 收据与 `locally-published.json` 仍是 Review 服务的当前最新认可�
 `latest`；新 revision 会让旧收据失败关闭。仅当
 打印「允许」、且 owner **当前**口头「上线」时，才跑整库
 `node scripts/pull-run-push.mjs push <paperId> --owner-said-ship`。实际 push 会在
-停生产服务前再次读取当前 Review revision，并事务性取得 shipping guard；若清单
+停生产服务前再次用 Agent token 读取当前 Review revision，再用独立
+`QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN` 事务性取得 shipping guard；两个 token 必须
+不同，普通 Agent 账号/token 都不能取得 guard。若清单
 之后出现新 revision，则不做任何生产修改。guard 持有到远端操作结束，期间 Review
 服务拒绝新 revision 和会撤销认可的问题状态修改。不是单卷增量，不是 `deploy.sh`。
 导题后台无按钮。详见 `docs/import/agent-contract.md` 上线。

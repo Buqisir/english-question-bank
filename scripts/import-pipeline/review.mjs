@@ -15,6 +15,7 @@ import {
   inspectPublicationReceipt,
   preflightPaper,
 } from '../../import-ops/lib/probe.mjs'
+import { releaseShippingGuard } from './ship-checklist.mjs'
 import { materializeNck1CanonicalRequest } from '../../server/paper-canonical/nck1MaterializationCanonicalRequest.mjs'
 import { loadCanonicalImportRequest } from '../../server/paper-canonical/importRequest.mjs'
 import { reviewBundleDigest } from '../../server/import-review/importReviewStore.mjs'
@@ -453,11 +454,7 @@ async function releaseShipGuard(paperId, guardId) {
         + 'after confirming the old push process is no longer running',
     )
   }
-  const result = await api(
-    `/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`
-      + `/shipping-guards/${encodeURIComponent(guardId)}`,
-    { method: 'DELETE' },
-  )
+  const result = await releaseShippingGuard(paperId, guardId)
   console.log(JSON.stringify({ paperId, guardId, ...result }, null, 2))
 }
 

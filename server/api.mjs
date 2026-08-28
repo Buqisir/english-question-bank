@@ -586,6 +586,7 @@ const serverRoutes = [
   ...createImportReviewRoutes({
     getStore: getImportReviewStore,
     agentToken: process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN || '',
+    shipToken: process.env.QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN || '',
     buildPrintHtml,
   }),
   ...createQuestionGroupRoutes(),

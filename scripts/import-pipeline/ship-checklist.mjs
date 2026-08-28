@@ -395,19 +395,22 @@ function resolveRepoRoot() {
   return path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 }
 
-function reviewServiceCredentials() {
+function reviewServiceCredentials(kind = 'agent') {
   const origin = String(process.env.QUESTION_BANK_IMPORT_OPS_ORIGIN || '').replace(/\/$/, '')
-  const token = String(process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN || '')
+  const tokenVariable = kind === 'shipping'
+    ? 'QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN'
+    : 'QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN'
+  const token = String(process.env[tokenVariable] || '')
   if (!/^https?:\/\//.test(origin) || !token) {
     throw new Error(
-      'universal 卷上线复核需要 QUESTION_BANK_IMPORT_OPS_ORIGIN 与 QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN',
+      `universal 卷上线复核需要 QUESTION_BANK_IMPORT_OPS_ORIGIN 与 ${tokenVariable}`,
     )
   }
   return { origin, token }
 }
 
-async function reviewServiceRequest(pathname, init = {}) {
-  const { origin, token } = reviewServiceCredentials()
+async function reviewServiceRequest(pathname, init = {}, credentialKind = 'agent') {
+  const { origin, token } = reviewServiceCredentials(credentialKind)
   const response = await fetch(`${origin}${pathname}`, {
     ...init,
     headers: {
@@ -446,6 +449,7 @@ export async function acquireShippingGuard(paperId, approval) {
         bundleDigest: approval.bundleDigest,
       }),
     },
+    'shipping',
   )
   return result.guard
 }
@@ -455,6 +459,7 @@ export async function releaseShippingGuard(paperId, guardId) {
     `/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`
       + `/shipping-guards/${encodeURIComponent(guardId)}`,
     { method: 'DELETE' },
+    'shipping',
   )
 }
 
