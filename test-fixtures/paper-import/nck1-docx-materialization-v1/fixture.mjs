@@ -79,6 +79,13 @@ function question(no) {
   ]
 }
 
+function listeningQuestion(no) {
+  return [
+    paragraph(`${no}. Which listening choice fits item ${no}?`),
+    paragraph('A. Alpha  B. Bravo  C. Charlie'),
+  ]
+}
+
 function reading(letter, from, to, { table = false, duplicateQuestion = null } = {}) {
   return [
     paragraph(letter),
@@ -90,7 +97,11 @@ function reading(letter, from, to, { table = false, duplicateQuestion = null } =
   ]
 }
 
-function questionDocument({ duplicateReadingHeading = false, duplicateReadingQuestion = false } = {}) {
+function questionDocument({
+  duplicateReadingHeading = false,
+  duplicateReadingQuestion = false,
+  listening = false,
+} = {}) {
   const sevenParagraphs = Array.from({ length: 5 }, (_, index) =>
     paragraph(`A short guide has ${36 + index}._____ for learners.`))
   const sevenOptions = 'ABCDEFG'.split('').map((label) =>
@@ -101,6 +112,16 @@ function questionDocument({ duplicateReadingHeading = false, duplicateReadingQue
     `${56 + index}._____(${index % 2 === 0 ? 'learn' : 'word'})`).join(' ')
   return docx([
     paragraph('Synthetic NCK1 paper'),
+    ...(listening ? [
+      paragraph('第一部分 听力 (共两节，满分30分)'),
+      ...Array.from({ length: 20 }, (_, index) =>
+        listeningQuestion(index + 1)).flat(),
+      paragraph('听第6段材料，回答第6、7题。'),
+      paragraph('听第7段材料，回答第8、9题。'),
+      paragraph('听第8段材料，回答第10至12题。'),
+      paragraph('听第9段材料，回答第13至16题。'),
+      paragraph('听第10段材料，回答第17至20题。'),
+    ] : []),
     paragraph('第二部分 阅读 (共两节，满分50分)'),
     ...(duplicateReadingHeading
       ? [paragraph('第二部分 阅读 (共两节，满分50分)')]
@@ -148,9 +169,12 @@ function questionDocument({ duplicateReadingHeading = false, duplicateReadingQue
   ])
 }
 
-function answerDocument({ missingAnswer = false } = {}) {
+function answerDocument({ missingAnswer = false, listening = false, listeningTiming = false } = {}) {
   return docx([
     paragraph('Synthetic official answers'),
+    ...(listening ? [
+      paragraph('1-5ABCAB6-10BCABC11-15ABCAB16-20BCABC'),
+    ] : []),
     // Deliberately glue adjacent ranges and answers to exercise the real shape.
     paragraph('21-23ABC24-27DABC28-31BCDA32-35CDAB'),
     paragraph('36-40ABCDE'),
@@ -167,6 +191,14 @@ function answerDocument({ missingAnswer = false } = {}) {
     paragraph('第二节 参考范文'),
     paragraph('Mia carried the notebook to the school office. The teacher found its owner.'),
     paragraph('The next morning, a student came to thank her. They became friends.'),
+    ...(listening ? [
+      paragraph('听力原文'),
+      ...Array.from({ length: 10 }, (_, index) => [
+        paragraph(`Text ${index + 1}`),
+        paragraph(`Synthetic transcript ${index + 1}.`),
+      ]).flat(),
+      ...(listeningTiming ? [paragraph('语速：每分钟 120 词')] : []),
+    ] : []),
     paragraph('【答案解析】'),
   ])
 }

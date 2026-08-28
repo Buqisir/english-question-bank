@@ -129,6 +129,18 @@ assert.equal(missingSource.disposition, 'needs_agent_review')
 assert(missingSource.review.required.some((item) =>
   item.code === 'NCK1_DOCX_SOURCE_SET_AMBIGUOUS'))
 
+const suppliedListeningTiming = produceNck1DocxMaterialization({
+  paperId: fixture.paperId,
+  documents: makeSyntheticNck1DocxFixture({
+    listening: true,
+    listeningTiming: true,
+  }).sourceDocuments,
+})
+assert.equal(suppliedListeningTiming.disposition, 'needs_agent_review')
+assert.equal(suppliedListeningTiming.materialization.listening.questions.length, 20)
+assert(suppliedListeningTiming.review.required.some((item) =>
+  item.code === 'NCK1_DOCX_LISTENING_TIMING_REVIEW_REQUIRED'))
+
 const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-nck1-docx-producer-'))
 try {
   for (const document of fixture.sourceDocuments) {
@@ -138,6 +150,17 @@ try {
     mkdirSync(path.dirname(outputPath), { recursive: true })
     writeFileSync(outputPath, document.bytes)
   }
+  const writerLock = path.join(tempRoot, '.nck1-docx-materialize.lock')
+  mkdirSync(writerLock)
+  assert.throws(
+    () => runNck1DocxMaterializationJob({
+      paperDir: tempRoot,
+      manifest: fixture.manifest,
+    }),
+    /already has a writer/u,
+    'the same paperId cannot have concurrent materialization writers',
+  )
+  rmSync(writerLock, { recursive: true, force: true })
   const first = runNck1DocxMaterializationJob({
     paperDir: tempRoot,
     manifest: fixture.manifest,

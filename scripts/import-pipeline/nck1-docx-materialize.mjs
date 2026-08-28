@@ -3,6 +3,7 @@ import {
   mkdirSync,
   readFileSync,
   renameSync,
+  rmSync,
   writeFileSync,
 } from 'node:fs'
 import path from 'node:path'
@@ -36,7 +37,7 @@ function loadDocuments(paperDir, manifest) {
   })
 }
 
-export function runNck1DocxMaterializationJob({ paperDir, manifest }) {
+function runNck1DocxMaterializationJobUnlocked({ paperDir, manifest }) {
   if (manifest?.schemaVersion !== 'universal-nck1-source-manifest-v1') {
     throw new Error('NCK1 DOCX materialization requires a universal Source Manifest')
   }
@@ -96,5 +97,22 @@ export function runNck1DocxMaterializationJob({ paperDir, manifest }) {
     outputPath,
     reviewPath,
     receiptPath,
+  }
+}
+
+export function runNck1DocxMaterializationJob({ paperDir, manifest }) {
+  const writerLock = path.join(paperDir, '.nck1-docx-materialize.lock')
+  try {
+    mkdirSync(writerLock)
+  } catch (error) {
+    if (error.code === 'EEXIST') {
+      throw new Error(`NCK1 DOCX materialization already has a writer: ${manifest?.paperId || paperDir}`)
+    }
+    throw error
+  }
+  try {
+    return runNck1DocxMaterializationJobUnlocked({ paperDir, manifest })
+  } finally {
+    rmSync(writerLock, { recursive: true, force: true })
   }
 }

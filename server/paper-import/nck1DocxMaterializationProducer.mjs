@@ -645,8 +645,25 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
     item.kind === 'paragraph' && /听力原文/u.test(normalized(item.text)))
   const analysis = answerBody.findIndex((item) =>
     item.kind === 'paragraph' && /答案解析/u.test(normalized(item.text)))
+  if (transcriptHeading < 0) {
+    addIssue(issues, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS', 'listening.transcript',
+      'Official answer source does not close a Listening transcript section',
+      sourceRef(answerDocumentId))
+  }
+  const transcriptEnd = analysis < 0 ? answerBody.length : analysis
+  const timingSourceIndexes = new Set(answerBody
+    .slice(Math.max(0, transcriptHeading + 1), transcriptEnd)
+    .filter((item) => item.kind === 'paragraph'
+      && /(?:分段时长|录音时长|语速|每分钟\s*\d+\s*词|\b\d+(?:\.\d+)?\s*(?:sec(?:ond)?s?|wpm)\b)/iu
+        .test(normalized(item.text)))
+    .map((item) => item.sourceIndex))
+  if (timingSourceIndexes.size > 0) {
+    addIssue(issues, 'NCK1_DOCX_LISTENING_TIMING_REVIEW_REQUIRED', 'listening.timing',
+      'Source-provided Listening duration or speed data requires exact Agent transcription',
+      sourceRef(answerDocumentId, [...timingSourceIndexes][0]))
+  }
   const markers = []
-  for (let index = transcriptHeading + 1; index < (analysis < 0 ? answerBody.length : analysis); index += 1) {
+  for (let index = transcriptHeading + 1; index < transcriptEnd; index += 1) {
     const match = answerBody[index]?.kind === 'paragraph'
       ? /^Text\s*(\d{1,2})$/iu.exec(normalized(answerBody[index].text))
       : null
@@ -657,8 +674,10 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
       `Expected Text 1-10 exactly once; found ${markers.length}`, sourceRef(answerDocumentId))
   }
   const transcript = markers.map((marker, index) => {
-    const paragraphs = answerBody.slice(marker.index + 1, markers[index + 1]?.index ?? (analysis < 0 ? answerBody.length : analysis))
-      .filter((item) => item.kind === 'paragraph' && normalized(item.text))
+    const paragraphs = answerBody.slice(marker.index + 1, markers[index + 1]?.index ?? transcriptEnd)
+      .filter((item) => item.kind === 'paragraph'
+        && normalized(item.text)
+        && !timingSourceIndexes.has(item.sourceIndex))
     return {
       segmentId: `listening-text-${marker.number}`,
       text: paragraphs.map((item) => trimEdgeSpaces(item.text)).join('\n'),
