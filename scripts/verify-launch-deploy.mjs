@@ -402,6 +402,7 @@ try {
   const sourceDigest = `sha256:${'1'.repeat(64)}`
   const candidateDigest = `sha256:${'2'.repeat(64)}`
   const visibleStructureDigest = `sha256:${'3'.repeat(64)}`
+  const analysisDigest = `sha256:${'7'.repeat(64)}`
   const bundleDigest = `sha256:${'4'.repeat(64)}`
   const approvalId = 'approval-launch-gate'
   const revisionId = 'rev-launch-gate'
@@ -413,6 +414,7 @@ try {
     sourceDigest,
     candidateDigest,
     visibleStructureDigest,
+    analysisDigest,
     bundleDigest,
   }
   const qaReceipt = {
@@ -422,6 +424,7 @@ try {
     sourceDigest,
     candidateDigest,
     visibleStructureDigest,
+    analysisDigest,
     bundleDigest,
   }
   const localPublication = {
@@ -431,6 +434,7 @@ try {
     sourceDigest,
     candidateDigest,
     visibleStructureDigest,
+    analysisDigest,
     bundleDigest,
     assetVersion: 1,
     versionName: 'v1',
@@ -516,7 +520,7 @@ try {
         for await (const chunk of request) raw += chunk
         const expected = JSON.parse(raw)
         const approval = status.approval
-        const keys = ['approvalId', 'revisionId', 'sourceDigest', 'candidateDigest', 'visibleStructureDigest', 'bundleDigest']
+        const keys = ['approvalId', 'revisionId', 'sourceDigest', 'candidateDigest', 'visibleStructureDigest', 'analysisDigest', 'bundleDigest']
         if (
           existsSync(guardPath)
           || status.latest?.state !== 'approved'

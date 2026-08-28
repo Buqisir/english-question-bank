@@ -2,6 +2,7 @@ import { createHash, randomUUID } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import {
+  assertPaperImportAnalysisSidecars,
   beginPaperImportPublish,
   computeNextPaperAssetVersion,
   cleanupPaperImportTempArtifacts,
@@ -181,6 +182,7 @@ export function recoverInterruptedPaperImportPublish({
   db,
   paperAssetsDir,
   paperId,
+  validateCommittedAssets = null,
 }) {
   const current = getCurrentCanonicalPublication(db, paperId)
   return recoverPaperImportLatestSwap({
@@ -199,6 +201,7 @@ export function recoverInterruptedPaperImportPublish({
           db,
         }),
       })
+      if (validateCommittedAssets) validateCommittedAssets(targetVersion)
     },
   })
 }
@@ -1257,11 +1260,15 @@ export function publishUniversalNck1Import({
   forceDbFailure = false,
   failurePoint = null,
 }) {
-  const projection = buildNck1ReviewProjection(reviewRootDir)
+  const projection = buildNck1ReviewProjection(
+    reviewRootDir,
+    { requireAnalyses: true },
+  )
   const expectedIdentity = {
     sourceDigest: projection.sourceDigest,
     candidateDigest: projection.candidateDigest,
     visibleStructureDigest: projection.visibleStructureDigest,
+    analysisDigest: projection.analysisDigest,
   }
   if (
     !approvedIdentity
@@ -1295,6 +1302,7 @@ export function publishUniversalNck1Import({
     manifest: projection.manifest,
     materialization: projection.materialization,
     sourceAssetVersion: projection.candidate.interpretation.sourceAssetVersion,
+    analysisSidecars: projection.analysisSidecars,
   })
   return publishPreparedPaperImport({
     db,
@@ -1303,6 +1311,7 @@ export function publishUniversalNck1Import({
     publicValidation: universalValidationReport(projection),
     forceDbFailure,
     failurePoint,
+    requireCompleteAnalyses: true,
     admitPackage(version) {
       return admitBoundUniversalNck1Package({
         canonicalRequest,
@@ -1391,6 +1400,7 @@ function publishPreparedPaperImport({
   admitPackage,
   forceDbFailure = false,
   failurePoint = null,
+  requireCompleteAnalyses = false,
 }) {
   const paperId = packageData.paperAsset.paper.paperId
   const preflightVersion = computeNextPublishVersion({
@@ -1400,7 +1410,30 @@ function publishPreparedPaperImport({
   })
   const preflightAdmission = admitPackage(preflightVersion)
   if (preflightAdmission.failure) return preflightAdmission.failure
-  const recovery = recoverInterruptedPaperImportPublish({ db, paperAssetsDir, paperId })
+  const recovery = recoverInterruptedPaperImportPublish({
+    db,
+    paperAssetsDir,
+    paperId,
+    validateCommittedAssets: requireCompleteAnalyses
+      ? (targetVersion) => {
+          assertPaperImportAnalysisSidecars({
+            baseDir: path.join(
+              paperAssetsDir,
+              paperId,
+              'versions',
+              `v${targetVersion}`,
+            ),
+            packageData,
+            version: targetVersion,
+          })
+          assertPaperImportAnalysisSidecars({
+            baseDir: path.join(paperAssetsDir, paperId, 'latest'),
+            packageData,
+            version: targetVersion,
+          })
+        }
+      : null,
+  })
   cleanupPaperImportTempArtifacts(paperAssetsDir)
 
   if (recovery.finalized) {
@@ -1499,6 +1532,13 @@ function publishPreparedPaperImport({
     if (failurePoint === 'process-exit-after-version-rename') {
       process.exit(87)
     }
+    if (requireCompleteAnalyses) {
+      assertPaperImportAnalysisSidecars({
+        baseDir: writtenVersion.versionDir,
+        packageData,
+        version,
+      })
+    }
 
     const canonicalRef = {
       paperId,
@@ -1544,6 +1584,13 @@ function publishPreparedPaperImport({
       deferCleanup: true,
       forceFailureAt: failurePoint,
     })
+    if (requireCompleteAnalyses) {
+      assertPaperImportAnalysisSidecars({
+        baseDir: latestSwap.latestDir,
+        packageData,
+        version,
+      })
+    }
     if (failurePoint === 'process-exit-after-latest-swap') {
       process.exit(86)
     }

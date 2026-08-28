@@ -114,6 +114,7 @@ function reviewManifest(paperDir, projection, resolvesIssueIds = [], buildId = p
     sourceDigest: projection.sourceDigest,
     candidateDigest: projection.candidateDigest,
     visibleStructureDigest: projection.visibleStructureDigest,
+    analysisDigest: projection.analysisDigest,
     producerBuildId: buildId,
     files: fileDescriptors(paperDir),
     resolvesIssueIds,
@@ -130,7 +131,7 @@ function resolvedIssueIds() {
 
 async function pushRevision(paperId) {
   const paperDir = paperDirectory(paperId)
-  const projection = buildNck1ReviewProjection(paperDir)
+  const projection = buildNck1ReviewProjection(paperDir, { requireAnalyses: true })
   const manifest = reviewManifest(paperDir, projection, resolvedIssueIds())
   const created = await api('/api/import-agent-reviews/revisions', {
     method: 'POST',
@@ -199,6 +200,20 @@ async function preflight(paperId) {
   }), null, 2))
 }
 
+function verifyAnalyses(paperId) {
+  const projection = buildNck1ReviewProjection(
+    paperDirectory(paperId),
+    { requireAnalyses: true },
+  )
+  console.log(JSON.stringify({
+    paperId,
+    stagedInputs: 9,
+    previewSidecars: Object.keys(projection.analysisSidecars).sort(),
+    analysisDigest: projection.analysisDigest,
+    status: 'ready_for_review_push',
+  }, null, 2))
+}
+
 async function reply(paperId, issueId) {
   const message = option('--message')
   if (!issueId || !message) fail('reply requires <paperId> <issueId> --message <text>')
@@ -240,11 +255,12 @@ async function approvedLocalReview(paperId) {
   if (!approval || status.latest?.state !== 'approved') {
     fail(`${paperId} has no current approved revision`)
   }
-  const projection = buildNck1ReviewProjection(paperDir)
+  const projection = buildNck1ReviewProjection(paperDir, { requireAnalyses: true })
   for (const [actual, expected, label] of [
     [projection.sourceDigest, approval.sourceDigest, 'sourceDigest'],
     [projection.candidateDigest, approval.candidateDigest, 'candidateDigest'],
     [projection.visibleStructureDigest, approval.visibleStructureDigest, 'visibleStructureDigest'],
+    [projection.analysisDigest, approval.analysisDigest, 'analysisDigest'],
   ]) {
     if (actual !== expected) fail(`Local ${label} no longer matches web approval`)
   }
@@ -301,6 +317,7 @@ async function accept(paperId) {
     sourceDigest: approval.sourceDigest,
     candidateDigest: approval.candidateDigest,
     visibleStructureDigest: approval.visibleStructureDigest,
+    analysisDigest: approval.analysisDigest,
     bundleDigest: approval.bundleDigest,
   }, null, 2)}\n`)
   console.log(`ACCEPTED ${paperId}: exact web approval materialized; no publish or deployment was run`)
@@ -338,6 +355,7 @@ function assertAcceptedReceipts(paperDir, approval, projection) {
     [qaAccepted.sourceDigest, approval.sourceDigest, 'qa sourceDigest'],
     [qaAccepted.candidateDigest, approval.candidateDigest, 'qa candidateDigest'],
     [qaAccepted.visibleStructureDigest, approval.visibleStructureDigest, 'qa visibleStructureDigest'],
+    [qaAccepted.analysisDigest, approval.analysisDigest, 'qa analysisDigest'],
     [qaAccepted.bundleDigest, approval.bundleDigest, 'qa bundleDigest'],
   ]) {
     if (actual !== expected) fail(`${label} no longer matches current web approval`)
@@ -374,6 +392,7 @@ function publicationReceiptMatchesApproval(receipt, approval) {
     && receipt.sourceDigest === approval.sourceDigest
     && receipt.candidateDigest === approval.candidateDigest
     && receipt.visibleStructureDigest === approval.visibleStructureDigest
+    && receipt.analysisDigest === approval.analysisDigest
     && receipt.bundleDigest === approval.bundleDigest
     && Number.isInteger(receipt.assetVersion)
     && receipt.assetVersion > 0
@@ -435,6 +454,7 @@ async function publish(paperId) {
       sourceDigest: approval.sourceDigest,
       candidateDigest: approval.candidateDigest,
       visibleStructureDigest: approval.visibleStructureDigest,
+      analysisDigest: approval.analysisDigest,
       bundleDigest: approval.bundleDigest,
       assetVersion: result.publish.assetVersion,
       versionName: result.publish.versionName,
@@ -462,6 +482,7 @@ async function main() {
   const [command, paperId, issueId] = process.argv.slice(2)
   if (command === 'push') await pushRevision(paperId)
   else if (command === 'preflight') await preflight(paperId)
+  else if (command === 'verify-analyses') verifyAnalyses(paperId)
   else if (command === 'status') await status(paperId)
   else if (command === 'reply') await reply(paperId, issueId)
   else if (command === 'accept') await accept(paperId)
@@ -469,7 +490,7 @@ async function main() {
   else if (command === 'release-ship-guard') await releaseShipGuard(paperId, issueId)
   else fail(
     'Usage: review.mjs push <paperId> [--resolves issue-1,issue-2] | '
-      + 'preflight <paperId> | status <paperId> | '
+      + 'preflight <paperId> | verify-analyses <paperId> | status <paperId> | '
       + 'reply <paperId> <issueId> --message <text> | '
       + 'accept <paperId> | publish <paperId> | '
       + 'release-ship-guard <paperId> <guardId> --owner-said-abort-ship',

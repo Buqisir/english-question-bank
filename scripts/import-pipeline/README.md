@@ -31,6 +31,7 @@ node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
 node scripts/import-pipeline/universal-nck1.mjs materialize <paperId>
 node scripts/import-pipeline/universal-nck1.mjs verify <paperId>
 node scripts/import-pipeline/universal-nck1.mjs build <paperId>
+node scripts/import-pipeline/review.mjs verify-analyses <paperId>
 QUESTION_BANK_IMPORT_OPS_ORIGIN=https://eqbank.cc \
 QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN='<secret>' \
   node scripts/import-pipeline/review.mjs push <paperId>
@@ -41,7 +42,8 @@ macOS 检查 magick/ffmpeg 动态链接；失败就开工前停，中途不得�
 `init` 也先执行同一检查，再复制并摘要绑定本地源，DOCX 同时生成确定性 PDF
 rendition；源文件、Materialization 与 canonical evidence 均 gitignored。已知
 NCK1 结构的试题 DOCX + 权威答案 DOCX 用 `materialize` 生成逐段 locator、九题组
-骨架、答案与结构化复核清单。clean case 只把两份写作分析留给 Agent；不确定的
+骨架、答案与结构化复核清单。Agent 必须生产 4× reading、seven、cloze、grammar、
+application、continuation 共九份教学分析；不确定的
 section/题号/blank/答案/表格或视觉语义进入 `review.required` 并失败关闭，AI 禁止
 解题补答案。producer receipt 绑定版本和 source digest；未变源直接 resume，检测到
 Agent 已编辑输出时绝不覆盖。同一 paperId 仍单 writer；两份写作分析可并行纯读后
@@ -63,7 +65,9 @@ node scripts/import-pipeline/universal-nck1.mjs crop-pdf \
 SVG 内容媒体必须用固定 density 转 PNG；DOCX shape 先用 init 生成的 PDF
 rendition，再按 `pdf_crop` 路径裁。`verify` 只派生 Candidate，`build` 只生成
 Candidate 摘要和 `confirmed: false` 的 Teacher Confirmation 模板。`review.mjs
-push` 把不可变源与 Candidate 作为新 revision 上传到 `/ops/`。Owner 在真实
+verify-analyses` 在 push 前校验九份输入及其确定性五份 Screen sidecar projection；
+`push` 把不可变源、Candidate 与九份原始 analysis bytes 作为新 revision 上传到
+`/ops/`。Owner 在真实
 Screen/Print/PDF 上审核；Agent 用自己的 `import_agent` 网页待办箱或下列命令
 读取、回复和提交修订：
 
@@ -75,6 +79,7 @@ digest、Screen、Student/Teacher Print、PDF、publication/recovery 的独立�
 
 ```bash
 node scripts/import-pipeline/review.mjs preflight <paperId>
+node scripts/import-pipeline/review.mjs verify-analyses <paperId>
 node scripts/import-pipeline/review.mjs status <paperId>
 node scripts/import-pipeline/review.mjs reply <paperId> <issueId> --message '<回复>'
 node scripts/import-pipeline/review.mjs push <paperId> --resolves <issueId>[,<issueId>]
@@ -83,10 +88,12 @@ node scripts/import-pipeline/review.mjs publish <paperId>
 ```
 
 `accept` 只在最新 revision 已由 Owner 认可时成功；它重新核对本地源、Candidate、
-可见结构、文件清单和 bundle digest，才写确认、Canonical request 和摘要绑定 QA
-收据。它不 publish、不部署。`publish` 再核对同一网页认可、QA 收据、Teacher
+可见结构、`analysisDigest`、文件清单和 bundle digest，才写确认、Canonical
+request 和摘要绑定 QA 收据。它不 publish、不部署。`publish` 再核对同一网页认可、
+QA 收据、Teacher
 Confirmation、Canonical request 与 AI 答案复核，然后通过共享原子 publisher 写
-同版本 DB、`versions/vN`、`latest` 和 Canonical current ref；成功后写
+同版本 DB、五份 analysis sidecar、`versions/vN`、`latest` 和 Canonical current
+ref；成功后写
 `signals/locally-published.json` 并进入 `ready_to_ship`。同一认可与有效本地发布
 收据重跑为 no-op。Agent 不代确认；`accept`、`publish` 和 Owner 网页认可都不构成
 上线授权。

@@ -54,6 +54,9 @@ function manifest({
     visibleStructureDigest: `sha256:${(
       candidate === 'a' ? '2' : candidate === 'b' ? '3' : candidate === 'c' ? '4' : '5'
     ).repeat(64)}`,
+    analysisDigest: `sha256:${(
+      candidate === 'a' ? '6' : candidate === 'b' ? '7' : candidate === 'c' ? '8' : '9'
+    ).repeat(64)}`,
     groupId,
   }
   const bytes = Buffer.from(`${JSON.stringify(identity)}\n`)
@@ -64,6 +67,7 @@ function manifest({
     sourceDigest: identity.sourceDigest,
     candidateDigest: identity.candidateDigest,
     visibleStructureDigest: identity.visibleStructureDigest,
+    analysisDigest: identity.analysisDigest,
     producerBuildId: `producer-${candidate}`,
     files: [{
       path: 'projection.json',
@@ -484,6 +488,7 @@ try {
   const sourceDigest = `sha256:${'4'.repeat(64)}`
   const candidateDigest = `sha256:${'5'.repeat(64)}`
   const visibleStructureDigest = `sha256:${'8'.repeat(64)}`
+  const analysisDigest = `sha256:${'7'.repeat(64)}`
   const bundleDigest = `sha256:${'6'.repeat(64)}`
   const approvalId = 'approval-mock-current'
   const revisionId = 'rev-mock-current'
@@ -524,6 +529,7 @@ try {
     sourceDigest,
     candidateDigest,
     visibleStructureDigest,
+    analysisDigest,
     bundleDigest,
   }
   const qaReceipt = {
@@ -533,6 +539,7 @@ try {
     sourceDigest,
     candidateDigest,
     visibleStructureDigest,
+    analysisDigest,
     bundleDigest,
   }
   const localPublication = {
@@ -543,6 +550,7 @@ try {
     sourceDigest,
     candidateDigest,
     visibleStructureDigest,
+    analysisDigest,
     bundleDigest,
     assetVersion: 1,
     versionName: 'v1',

@@ -94,6 +94,7 @@ export function reviewBundleDigest(input) {
     sourceDigest: input.sourceDigest,
     candidateDigest: input.candidateDigest,
     visibleStructureDigest: input.visibleStructureDigest,
+    ...(input.analysisDigest ? { analysisDigest: input.analysisDigest } : {}),
     producerBuildId: input.producerBuildId,
     files: input.files.map(fileDescriptor).sort((a, b) => a.path.localeCompare(b.path)),
   })
@@ -128,6 +129,7 @@ export function validateReviewBundleManifest(input) {
       'visibleStructureDigest',
       160,
     ),
+    analysisDigest: requiredString(input.analysisDigest, 'analysisDigest', 160),
     producerBuildId: requiredString(input.producerBuildId, 'producerBuildId', 200),
     files,
     resolvesIssueIds: Array.isArray(input.resolvesIssueIds)
@@ -138,6 +140,7 @@ export function validateReviewBundleManifest(input) {
     manifest.sourceDigest,
     manifest.candidateDigest,
     manifest.visibleStructureDigest,
+    manifest.analysisDigest,
   ]) {
     if (!SHA256.test(digest)) {
       throw storeError('IMPORT_REVIEW_DIGEST_INVALID', 'Review identity digest is invalid', 400)
@@ -510,6 +513,9 @@ export function createImportReviewStore({
       [projection.sourceDigest, revision.sourceDigest, 'sourceDigest'],
       [projection.candidateDigest, revision.candidateDigest, 'candidateDigest'],
       [projection.visibleStructureDigest, revision.visibleStructureDigest, 'visibleStructureDigest'],
+      ...(revision.manifest.analysisDigest
+        ? [[projection.analysisDigest, revision.manifest.analysisDigest, 'analysisDigest']]
+        : []),
     ]) {
       if (actual !== expected) {
         throw storeError('IMPORT_REVIEW_PROJECTION_MISMATCH', `${label} does not match server derivation`)
@@ -525,7 +531,7 @@ export function createImportReviewStore({
     }
     const directory = revisionDirectory(revisionId)
     assertStoredRevisionFiles(status.revision)
-    const projection = projectRevision(directory)
+    const projection = projectRevision(directory, { requireAnalyses: true })
     assertProjectionIdentity(projection, status.revision)
     const timestamp = nowIso()
     const rendererId = currentRendererBuildId()
@@ -670,7 +676,10 @@ export function createImportReviewStore({
     }
     assertStoredRevisionFiles(revision)
     if (!projectionCache.has(revisionId)) {
-      const projection = projectRevision(revisionDirectory(revisionId))
+      const projection = projectRevision(
+        revisionDirectory(revisionId),
+        { requireAnalyses: false },
+      )
       assertProjectionIdentity(projection, revision)
       projectionCache.set(revisionId, projection)
     }
@@ -885,6 +894,7 @@ export function createImportReviewStore({
           sourceDigest: revision.sourceDigest,
           candidateDigest: revision.candidateDigest,
           visibleStructureDigest: revision.visibleStructureDigest,
+          analysisDigest: revision.manifest.analysisDigest,
           bundleDigest: revision.bundleDigest,
           producerBuildId: revision.producerBuildId,
           rendererBuildId: revision.rendererBuildId,
@@ -938,6 +948,7 @@ export function createImportReviewStore({
         'visibleStructureDigest',
         160,
       ),
+      analysisDigest: requiredString(input?.analysisDigest, 'analysisDigest', 160),
       bundleDigest: requiredString(input?.bundleDigest, 'bundleDigest', 160),
     }
     const acquiredAt = nowIso()
@@ -970,6 +981,7 @@ export function createImportReviewStore({
           'sourceDigest',
           'candidateDigest',
           'visibleStructureDigest',
+          'analysisDigest',
           'bundleDigest',
         ]) {
           if (approval[key] !== expected[key]) {

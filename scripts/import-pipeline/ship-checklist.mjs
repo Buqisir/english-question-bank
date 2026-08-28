@@ -89,12 +89,14 @@ function exactUniversalAcceptedPublication({ repoRoot, paperId }) {
     && approval.sourceDigest === receipt.sourceDigest
     && approval.candidateDigest === receipt.candidateDigest
     && approval.visibleStructureDigest === receipt.visibleStructureDigest
+    && approval.analysisDigest === receipt.analysisDigest
     && approval.bundleDigest === receipt.bundleDigest
     && publication.approvalId === receipt.approvalId
     && publication.revisionId === receipt.revisionId
     && publication.sourceDigest === receipt.sourceDigest
     && publication.candidateDigest === receipt.candidateDigest
     && publication.visibleStructureDigest === receipt.visibleStructureDigest
+    && publication.analysisDigest === receipt.analysisDigest
     && publication.bundleDigest === receipt.bundleDigest
     && Number.isInteger(publication.assetVersion)
     && publication.assetVersion > 0
@@ -104,6 +106,7 @@ function exactUniversalAcceptedPublication({ repoRoot, paperId }) {
     && confirmation.sourceDigest === summary.sourceDigest
     && confirmation.candidateDigest === summary.candidateDigest
     && typeof receipt.bundleDigest === 'string'
+    && typeof receipt.analysisDigest === 'string'
   )
 }
 
@@ -125,6 +128,7 @@ function exactCurrentWebReview({ repoRoot, paperId, webReviewStatus }) {
     && approval.sourceDigest === receipt.sourceDigest
     && approval.candidateDigest === receipt.candidateDigest
     && approval.visibleStructureDigest === receipt.visibleStructureDigest
+    && approval.analysisDigest === receipt.analysisDigest
     && approval.bundleDigest === receipt.bundleDigest
   )
 }
@@ -319,6 +323,7 @@ export function writeShippedReceipt({
         sourceDigest: qaReceipt.sourceDigest,
         candidateDigest: qaReceipt.candidateDigest,
         visibleStructureDigest: qaReceipt.visibleStructureDigest,
+        analysisDigest: qaReceipt.analysisDigest,
         bundleDigest: qaReceipt.bundleDigest,
         assetVersion: publicationReceipt.assetVersion,
         versionName: publicationReceipt.versionName,
@@ -446,6 +451,7 @@ export async function acquireShippingGuard(paperId, approval) {
         sourceDigest: approval.sourceDigest,
         candidateDigest: approval.candidateDigest,
         visibleStructureDigest: approval.visibleStructureDigest,
+        analysisDigest: approval.analysisDigest,
         bundleDigest: approval.bundleDigest,
       }),
     },

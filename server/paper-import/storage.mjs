@@ -10,6 +10,7 @@ import {
 } from 'node:fs'
 import path from 'node:path'
 import { createHash, randomUUID } from 'node:crypto'
+import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import {
   buildPaperNormalizedGroupsSidecar,
   PAPER_NORMALIZED_GROUPS_FILE_NAME,
@@ -20,6 +21,14 @@ const readingChoiceAnalysisFileName = 'reading-choice-analysis-v1.json'
 const sevenChoicesAnalysisFileName = 'seven-choices-analysis-v1.json'
 const clozeAnalysisFileName = 'cloze-analysis-v1.json'
 const grammarFillAnalysisFileName = 'grammar-fill-analysis-v1.json'
+const writingAnalysisFileName = 'writing-analysis-v1.json'
+const analysisArtifacts = Object.freeze([
+  ['readingAnalysis', readingChoiceAnalysisFileName],
+  ['scAnalysis', sevenChoicesAnalysisFileName],
+  ['clozeAnalysis', clozeAnalysisFileName],
+  ['grammarFillAnalysis', grammarFillAnalysisFileName],
+  ['writingAnalysis', writingAnalysisFileName],
+])
 const latestSwapJournalFileName = '.latest-swap.json'
 
 export function resolvePaperAssetReadPaths(paperAssetsDir, paperId, version = null) {
@@ -276,6 +285,10 @@ function makeVersionedArtifacts(packageData, version) {
     : null
   if (grammarFillAnalysis) grammarFillAnalysis.sourceAssetVersion = version
 
+  const writingAnalysis = packageData.writingAnalysis
+    ? JSON.parse(JSON.stringify(packageData.writingAnalysis))
+    : null
+
   const normalization = buildPaperNormalizedGroupsSidecar(paperAsset)
   if (normalization.status !== 'ready') {
     throw new Error(
@@ -301,8 +314,29 @@ function makeVersionedArtifacts(packageData, version) {
     scAnalysis,
     clozeAnalysis,
     grammarFillAnalysis,
+    writingAnalysis,
     normalizedGroupsSidecar,
   }
+}
+
+export function assertPaperImportAnalysisSidecars({ baseDir, packageData, version }) {
+  const expected = makeVersionedArtifacts(packageData, version)
+  const expectedFiles = analysisArtifacts.filter(([key]) => expected[key])
+  if (expectedFiles.length !== analysisArtifacts.length) {
+    throw new Error('Complete NCK1 analysis publication requires all five sidecars')
+  }
+  const actual = {}
+  for (const [key, fileName] of expectedFiles) {
+    const filePath = path.join(baseDir, 'analyses', fileName)
+    if (!existsSync(filePath)) {
+      throw new Error(`Published analysis sidecar is missing: ${fileName}`)
+    }
+    actual[fileName] = JSON.parse(readFileSync(filePath, 'utf8'))
+    if (digestJson(actual[fileName]) !== digestJson(expected[key])) {
+      throw new Error(`Published analysis sidecar differs from Review projection: ${fileName}`)
+    }
+  }
+  return digestJson(actual)
 }
 
 export function writePaperImportVersion({
@@ -354,6 +388,9 @@ export function writePaperImportVersion({
     }
     if (artifacts.grammarFillAnalysis) {
       writeJson(path.join(tempDir, 'analyses', grammarFillAnalysisFileName), artifacts.grammarFillAnalysis)
+    }
+    if (artifacts.writingAnalysis) {
+      writeJson(path.join(tempDir, 'analyses', writingAnalysisFileName), artifacts.writingAnalysis)
     }
     if (forceFailureAt === 'sidecar-write') {
       throw new Error('Forced sidecar-write failure')
@@ -520,6 +557,14 @@ export function swapPaperImportLatest({
     writeFileSync(
       path.join(tempLatest, 'analyses', grammarFillAnalysisFileName),
       readFileSync(grammarFillAnalysisPath),
+    )
+  }
+  const writingAnalysisPath = path.join(versionDir, 'analyses', writingAnalysisFileName)
+  if (existsSync(writingAnalysisPath)) {
+    mkdirSync(path.join(tempLatest, 'analyses'), { recursive: true })
+    writeFileSync(
+      path.join(tempLatest, 'analyses', writingAnalysisFileName),
+      readFileSync(writingAnalysisPath),
     )
   }
   writeFileSync(

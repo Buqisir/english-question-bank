@@ -13,6 +13,10 @@ import {
   assertCanonicalConsumptionVisibleStructure,
   assertCanonicalVisibleStructure,
 } from '../../shared/paper-canonical/visibleStructure.mjs'
+import {
+  buildNck1AnalysisProjection,
+  NCK1_STAGED_ANALYSIS_FILES,
+} from './nck1AnalysisProjection.mjs'
 
 function fail(message, code = 'IMPORT_REVIEW_CANDIDATE_INVALID') {
   const error = new Error(message)
@@ -116,6 +120,21 @@ export function loadNck1ReviewSource(rootDir) {
 
 export function reviewBundleFilePaths(rootDir) {
   const { manifest, materialization } = loadNck1ReviewSource(rootDir)
+  const paperAsset = buildNck1CompatibilityPaperAsset({
+    config: readJson(resolveReviewFile(rootDir, 'config.json'), 'config.json'),
+    materialization,
+    sourceAssetVersion: 1,
+    primarySourceType: materialization.documents.some((document) =>
+      document.mediaType?.includes('wordprocessingml'))
+      ? 'docx'
+      : 'pdf',
+  })
+  buildNck1AnalysisProjection({
+    rootDir,
+    materialization,
+    paperAsset,
+    required: true,
+  })
   return [
     { path: 'config.json', mediaType: 'application/json', role: 'config' },
     {
@@ -140,6 +159,11 @@ export function reviewBundleFilePaths(rootDir) {
       ),
       mediaType: media.mimeType,
       role: 'content_media',
+    })),
+    ...NCK1_STAGED_ANALYSIS_FILES.map(({ path: relativePath, role }) => ({
+      path: relativePath,
+      mediaType: 'application/json',
+      role,
     })),
   ]
 }
@@ -445,6 +469,7 @@ export function buildNck1CompatibilityPackage({
   manifest,
   materialization,
   sourceAssetVersion = 1,
+  analysisSidecars = {},
 }) {
   const sourceDocument = materialization.documents.find((document) =>
     ['question_source', 'question_and_answers'].includes(document.role))
@@ -480,6 +505,11 @@ export function buildNck1CompatibilityPackage({
   return {
     paperAsset,
     answerKey,
+    readingAnalysis: analysisSidecars['reading-choice-analysis-v1.json'] || null,
+    scAnalysis: analysisSidecars['seven-choices-analysis-v1.json'] || null,
+    clozeAnalysis: analysisSidecars['cloze-analysis-v1.json'] || null,
+    grammarFillAnalysis: analysisSidecars['grammar-fill-analysis-v1.json'] || null,
+    writingAnalysis: analysisSidecars['writing-analysis-v1.json'] || null,
     importMeta: {
       schemaVersion: 'import-meta-v1',
       paperId: materialization.paperId,
@@ -499,7 +529,7 @@ export function buildNck1CompatibilityPackage({
   }
 }
 
-export function buildNck1ReviewProjection(rootDir) {
+export function buildNck1ReviewProjection(rootDir, { requireAnalyses = false } = {}) {
   const loaded = loadNck1ReviewSource(rootDir)
   const imported = importCanonicalCandidate(loaded.sourceInput)
   if (!imported.candidate || imported.issues.length > 0) {
@@ -512,6 +542,23 @@ export function buildNck1ReviewProjection(rootDir) {
     fail(`${issue?.code || 'CANDIDATE_PREVIEW_INVALID'}: ${issue?.message || 'Candidate preview compilation failed'}`)
   }
   const consumption = buildConsumption(preview.candidate, preview.compilation)
+  const primarySourceType = loaded.materialization.documents.some((document) =>
+    document.mediaType?.includes('wordprocessingml'))
+    ? 'docx'
+    : 'pdf'
+  const paperAsset = buildNck1CompatibilityPaperAsset({
+    config: loaded.config,
+    materialization: loaded.materialization,
+    sourceAssetVersion: preview.candidate.interpretation.sourceAssetVersion,
+    primarySourceType,
+  })
+  const analysisProjection = buildNck1AnalysisProjection({
+    rootDir,
+    materialization: loaded.materialization,
+    paperAsset,
+    sourceAssetVersion: preview.candidate.interpretation.sourceAssetVersion,
+    required: requireAnalyses,
+  })
   return {
     ...loaded,
     paperId: loaded.materialization.paperId,
@@ -522,15 +569,9 @@ export function buildNck1ReviewProjection(rootDir) {
     candidate: preview.candidate,
     compilation: preview.compilation,
     consumption,
-    paperAsset: buildNck1CompatibilityPaperAsset({
-      config: loaded.config,
-      materialization: loaded.materialization,
-      sourceAssetVersion: preview.candidate.interpretation.sourceAssetVersion,
-      primarySourceType: loaded.materialization.documents.some((document) =>
-        document.mediaType?.includes('wordprocessingml'))
-        ? 'docx'
-        : 'pdf',
-    }),
+    paperAsset,
+    analysisSidecars: analysisProjection?.sidecars || {},
+    analysisDigest: analysisProjection?.digest || null,
   }
 }
 

@@ -17,7 +17,11 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 
-import { reviewBundleDigest } from '../server/import-review/importReviewStore.mjs'
+import {
+  createImportReviewStore,
+  reviewBundleDigest,
+} from '../server/import-review/importReviewStore.mjs'
+import { createImportReviewRoutes } from '../server/import-review/importReviewRoutes.mjs'
 import {
   buildNck1ReviewProjection,
   reviewBundleFilePaths,
@@ -26,7 +30,8 @@ import {
 import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequest.mjs'
 import { materializeNck1CanonicalRequest } from '../server/paper-canonical/nck1MaterializationCanonicalRequest.mjs'
 import { publishUniversalNck1Import } from '../server/paper-import/publisher.mjs'
-import { sha256 } from '../shared/paper-canonical/stable.mjs'
+import { runRoutes } from '../server/router/index.mjs'
+import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 import { makeFixture } from './verify-nck1-source-materialization.mjs'
 
 const root = path.resolve(import.meta.dirname, '..')
@@ -35,6 +40,261 @@ const paperId = 'paper-mock-contract-2026-m1'
 function writeJson(filePath, value) {
   mkdirSync(path.dirname(filePath), { recursive: true })
   writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`)
+}
+
+function continuationAnalysis() {
+  const evidence = (source, excerpt) => ({ source, excerpt })
+  const grounded = (statement, source = 'material', excerpt = 'Story material') => ({
+    statement,
+    evidence: [evidence(source, excerpt)],
+  })
+  const constraint = (id, statement, source = 'material', excerpt = 'Story material') => ({
+    id,
+    ...grounded(statement, source, excerpt),
+  })
+  const firstStarter = grounded('Paragraph one must start from its supplied sentence.', 'paragraph1Starter', 'Paragraph one starter.')
+  const secondStarter = grounded('Paragraph two must start from its supplied sentence.', 'paragraph2Starter', 'Paragraph two starter.')
+  return {
+    schemaVersion: 'continuation-analysis-v1',
+    storyUnderstanding: {
+      centralSituation: grounded('The source establishes the story situation.'),
+      sourceEndState: grounded('The source ends with an unresolved situation.'),
+      narrativePerspective: grounded('The continuation preserves the source perspective.'),
+      timeAndPlaceFrame: grounded('The continuation stays in the source setting.'),
+      characters: [{
+        name: 'the protagonist',
+        role: 'protagonist',
+        establishedTraits: [grounded('The protagonist acts consistently.')],
+        motivations: [grounded('The protagonist wants to resolve the situation.')],
+        currentState: grounded('The protagonist faces the unresolved situation.'),
+      }],
+      relationships: [],
+      causalChain: [{
+        cause: grounded('The source situation creates a problem.'),
+        effect: grounded('The protagonist must respond.'),
+      }],
+      unresolvedProblem: grounded('The story problem still requires resolution.'),
+      usableClues: [grounded('The source situation supplies the usable clue.')],
+      meaningDirection: {
+        statement: 'The ending should grow from the source situation.',
+        confidence: 'stronglyInferred',
+        evidence: [evidence('material', 'Story material')],
+      },
+      sourceStyle: grounded('The source uses concise narrative prose.'),
+    },
+    continuationContract: {
+      hardConstraints: [constraint('hard-source', 'Continue from the source situation.')],
+      softAffordances: [grounded('A plausible resolution may be developed.')],
+      openChoices: ['Choose concrete actions that preserve source continuity.'],
+      forbiddenContradictions: [constraint('forbid-reset', 'Do not erase the source situation.')],
+      paragraphs: [
+        {
+          paragraphIndex: 1,
+          entryState: firstStarter,
+          starterFunction: firstStarter,
+          requiredMoves: [constraint('p1-move', 'Develop a plausible first move.', 'paragraph1Starter', 'Paragraph one starter.')],
+          requiredExitState: [constraint('p1-exit', 'Reach the state required by paragraph two.', 'paragraph2Starter', 'Paragraph two starter.')],
+          supportedOptions: [firstStarter],
+        },
+        {
+          paragraphIndex: 2,
+          entryState: secondStarter,
+          starterFunction: secondStarter,
+          requiredMoves: [constraint('p2-move', 'Resolve the source problem.', 'paragraph2Starter', 'Paragraph two starter.')],
+          requiredExitState: [constraint('p2-exit', 'Close the story consistently.')],
+          supportedOptions: [secondStarter],
+        },
+      ],
+      closureRequirements: [constraint('close-source', 'The ending must resolve the source problem.')],
+    },
+    narrativeDevelopment: {
+      coreTension: grounded('The source problem drives the continuation.'),
+      drivingMotivations: [grounded('The protagonist wants a resolution.')],
+      requiredTurningPoints: [firstStarter, secondStarter],
+      eventChain: [{
+        cause: 'The source problem remains unresolved.',
+        event: 'The protagonist takes a plausible action.',
+        immediateEffect: 'The story moves toward resolution.',
+        evidence: [evidence('material', 'Story material')],
+      }],
+      emotionLogic: [{
+        trigger: 'The unresolved situation demands action.',
+        internalResponse: 'The protagonist decides to respond.',
+        visibleAction: 'The protagonist takes the next step.',
+      }],
+      relationshipMovement: [],
+      interactionMoves: [],
+      cluePayoffs: [{
+        clue: evidence('material', 'Story material'),
+        payoff: 'The source situation receives a coherent resolution.',
+      }],
+      endingState: 'The source problem is resolved without contradiction.',
+    },
+    languageAlignment: {
+      personAndPerspective: 'Preserve the source narrative perspective.',
+      baseTense: 'Use the simple past for main events.',
+      licensedTenseShifts: [],
+      narrativeDistanceAndRegister: 'Keep a clear narrative register.',
+      sourceStyleContinuity: 'Continue the concise source style.',
+      cohesionPlan: [{ relation: 'sequence', use: 'Connect the two supplied paragraph starters.' }],
+      dialoguePolicy: 'Use dialogue only when it advances the action.',
+      descriptionPriorities: ['Concrete actions'],
+      functionLedLanguage: ['Action verbs'],
+      languageRisks: ['Contradicting the supplied starters'],
+    },
+    paragraphBlueprint: {
+      selectedRoute: 'Develop the source problem into a coherent resolution.',
+      routeRationale: [firstStarter, secondStarter],
+      paragraphs: [
+        {
+          paragraphIndex: 1,
+          narrativeFunction: 'Develop the first required move.',
+          eventMoves: ['Continue from the first starter.'],
+          characterActionsAndReactions: ['The protagonist responds plausibly.'],
+          evidenceToReuse: [evidence('paragraph1Starter', 'Paragraph one starter.')],
+          stateChange: 'unresolved situation to progress',
+          bridgeToNext: 'Reach the second supplied starter.',
+        },
+        {
+          paragraphIndex: 2,
+          narrativeFunction: 'Resolve the source problem.',
+          eventMoves: ['Continue from the second starter.'],
+          characterActionsAndReactions: ['The protagonist completes the response.'],
+          evidenceToReuse: [evidence('paragraph2Starter', 'Paragraph two starter.')],
+          stateChange: 'progress to resolution',
+          bridgeToNext: 'Close without a new unresolved event.',
+        },
+      ],
+      finalEffect: 'The ending follows from and resolves the source situation.',
+      validAlternativeRoutes: [],
+      qualityRisks: ['Skipping a supplied starter'],
+    },
+  }
+}
+
+function writeStagedAnalyses(reviewRoot, materialization) {
+  const bySlot = new Map(materialization.groups.map((group) => [group.slotId, group]))
+  for (const letter of ['a', 'b', 'c', 'd']) {
+    const group = bySlot.get(`reading.${letter}`)
+    writeJson(path.join(reviewRoot, `analysis-reading-${letter}.json`), {
+      schemaVersion: 'reading-choice-analysis-v1',
+      paperId: materialization.paperId,
+      sourceAssetVersion: 1,
+      targetGroups: [group.groupId],
+      groups: { [group.groupId]: { summary: `Reading ${letter.toUpperCase()} analysis` } },
+      questions: Object.fromEntries(group.questions.map((question) => [question.questionId, {
+        skill: { primary: 'detail' },
+        questionFocus: 'Locate the decisive detail.',
+        stemTranslationZh: '题干翻译',
+        optionAnalysis: question.options.map((option) => ({
+          label: option.label,
+          optionTranslationZh: `选项 ${option.label}`,
+          status: option.label === 'A' ? 'correct' : 'wrong',
+          evidence: [],
+        })),
+        locationParaphrases: [],
+      }])),
+    })
+  }
+
+  const seven = bySlot.get('seven-choices')
+  writeJson(path.join(reviewRoot, 'analysis-seven.json'), {
+    schemaVersion: 'seven-choices-analysis-v1',
+    paperId: materialization.paperId,
+    sourceAssetVersion: 1,
+    targetGroups: [seven.groupId],
+    groups: { [seven.groupId]: { overview: 'Seven choices analysis' } },
+    questions: Object.fromEntries(seven.questions.map((question) => [question.questionId, {
+      blankId: question.blankId,
+      blankNo: question.canonicalNumber,
+      positionFacet: 'middle',
+      roleFacet: 'support',
+      primaryMechanismFacet: 'cohesion',
+      topicClues: ['topic'],
+      contextEvidence: { beforeQuote: 'seven-choices source text' },
+      mechanismSignals: [
+        { signalText: 'seven-choices source text', signalSide: 'context-before' },
+        { signalText: 'A option', signalSide: 'option' },
+      ],
+      optionFit: { correctOptionLabel: 'A', reason: 'Fits the official answer.' },
+      teachingNote: 'Use context and cohesion together.',
+    }])),
+  })
+
+  const cloze = bySlot.get('cloze')
+  writeJson(path.join(reviewRoot, 'analysis-cloze.json'), {
+    schemaVersion: 'cloze-analysis-v1',
+    paperId: materialization.paperId,
+    sourceAssetVersion: 1,
+    targetGroups: [cloze.groupId],
+    groups: { [cloze.groupId]: { overview: 'Cloze analysis' } },
+    blanks: Object.fromEntries(cloze.questions.map((question) => [question.questionId, {
+      blankId: question.blankId,
+      blankNo: question.canonicalNumber,
+      pos: 'other',
+      correctFit: { optionLabel: 'A', reason: 'Fits the official answer.' },
+      distractorGlosses: ['B', 'C', 'D'].map((optionLabel) => ({
+        optionLabel,
+        gloss: `Why ${optionLabel} does not fit.`,
+      })),
+      evidence: [{
+        type: 'collocation-partner',
+        signalText: 'cloze source text',
+        signalSide: 'context-before',
+      }],
+      teachingNote: 'Check collocation and context.',
+    }])),
+  })
+
+  const grammar = bySlot.get('grammar-fill')
+  writeJson(path.join(reviewRoot, 'analysis-grammar.json'), {
+    schemaVersion: 'grammar-fill-analysis-v2',
+    paperId: materialization.paperId,
+    sourceAssetVersion: 1,
+    targetGroups: [grammar.groupId],
+    groups: { [grammar.groupId]: { overview: 'Grammar fill analysis' } },
+    blanks: Object.fromEntries(grammar.questions.map((question) => {
+      const given = Boolean(question.prompt)
+      return [question.questionId, {
+        blankId: question.blankId,
+        blankNo: question.canonicalNumber,
+        blankType: given ? 'given' : 'no-hint',
+        hint: given ? question.prompt : null,
+        facetKey: given
+          ? 'grammar-fill.given.conversion.verb-to-noun'
+          : 'grammar-fill.no-hint.article',
+        role: null,
+        path: null,
+        answer: 'answer',
+        reason: 'The sentence structure determines the form.',
+        evidence: [{ type: 'clause-frame', signalText: 'grammar-fill source text' }],
+        teachingNote: 'Identify the blank type before choosing the form.',
+      }]
+    })),
+  })
+
+  writeJson(path.join(reviewRoot, 'analysis-application.json'), {
+    taskType: 'application',
+    modelAnswer: Array.from({ length: 70 }, (_, index) => `word${index + 1}`).join(' '),
+    reviewCard: {
+      form: 'Email',
+      topic: 'Topic',
+      reader: 'Chris',
+      person: 'First person',
+      tense: 'Simple present',
+      type: 'Informative',
+      points: ['Explain the topic', 'Offer details'],
+      readerWho: 'A friend',
+      readerCares: 'Clear information',
+      readerWants: 'Useful details',
+      value: 'Practical guidance',
+    },
+  })
+  writeJson(path.join(reviewRoot, 'analysis-continuation.json'), {
+    taskType: 'continuation',
+    modelAnswer: Array.from({ length: 130 }, (_, index) => `story${index + 1}`).join(' '),
+    continuationAnalysis: continuationAnalysis(),
+  })
 }
 
 function makeReviewRoot(
@@ -98,7 +358,9 @@ function makeReviewRoot(
   writeFileSync(path.join(reviewRoot, 'source/questions.pdf'), questionBytes)
   writeFileSync(path.join(reviewRoot, 'source/answers.pdf'), answerBytes)
 
-  const projection = buildNck1ReviewProjection(reviewRoot)
+  writeStagedAnalyses(reviewRoot, materialization)
+
+  const projection = buildNck1ReviewProjection(reviewRoot, { requireAnalyses: true })
   const confirmation = {
     schemaVersion: 'teacher-confirmation-v1',
     candidateDigest: projection.candidateDigest,
@@ -139,6 +401,7 @@ function approvedIdentity(projection) {
     sourceDigest: projection.sourceDigest,
     candidateDigest: projection.candidateDigest,
     visibleStructureDigest: projection.visibleStructureDigest,
+    analysisDigest: projection.analysisDigest,
   }
 }
 
@@ -162,6 +425,50 @@ function publishedVersionCount(context) {
 function close(context) {
   context.db.close()
   rmSync(context.tempRoot, { recursive: true, force: true })
+}
+
+function analysisDigestAt(baseDir) {
+  return digestJson(Object.fromEntries([
+    'reading-choice-analysis-v1.json',
+    'seven-choices-analysis-v1.json',
+    'cloze-analysis-v1.json',
+    'grammar-fill-analysis-v1.json',
+    'writing-analysis-v1.json',
+  ].map((fileName) => [
+    fileName,
+    JSON.parse(readFileSync(path.join(baseDir, 'analyses', fileName), 'utf8')),
+  ])))
+}
+
+async function requestReviewAsset(projection, relativePath, session) {
+  const pathname = `/api/import-review-preview/revisions/rev-fixture/asset/${relativePath}`
+  const routes = createImportReviewRoutes({
+    getStore: () => ({ projectionForRevision: () => ({ projection }) }),
+    agentToken: '',
+    shipToken: '',
+    buildPrintHtml: () => '',
+  })
+  let status = null
+  let body = null
+  const response = {
+    writeHead(code) { status = code },
+    end(value) { body = value ? JSON.parse(String(value)) : null },
+  }
+  const context = {
+    session,
+    sendJson(_response, code, value) {
+      status = code
+      body = value
+    },
+  }
+  const handled = await runRoutes(routes, {
+    request: { method: 'GET', headers: {} },
+    response,
+    url: new URL(`http://localhost${pathname}`),
+    context,
+  })
+  assert.equal(handled, true)
+  return { status, body }
 }
 
 function runReviewCommand(args, env) {
@@ -189,6 +496,98 @@ function runReviewCommand(args, env) {
       ))
     })
   })
+}
+
+const incomplete = makeContext('incomplete')
+try {
+  for (const fileName of [
+    'analysis-reading-a.json',
+    'analysis-reading-b.json',
+    'analysis-reading-c.json',
+    'analysis-reading-d.json',
+    'analysis-seven.json',
+    'analysis-cloze.json',
+    'analysis-grammar.json',
+  ]) rmSync(path.join(incomplete.reviewRoot, fileName))
+  assert.throws(
+    () => publish(incomplete),
+    /Incomplete staged analyses/,
+  )
+  assert(!existsSync(incomplete.paperAssetsDir))
+  assert.equal(publishedVersionCount(incomplete), 0)
+} finally {
+  close(incomplete)
+}
+
+const legacy = makeContext('legacy-revision')
+try {
+  for (const fileName of [
+    'analysis-reading-a.json',
+    'analysis-reading-b.json',
+    'analysis-reading-c.json',
+    'analysis-reading-d.json',
+    'analysis-seven.json',
+    'analysis-cloze.json',
+    'analysis-grammar.json',
+    'analysis-application.json',
+    'analysis-continuation.json',
+  ]) rmSync(path.join(legacy.reviewRoot, fileName))
+  const legacyProjection = buildNck1ReviewProjection(legacy.reviewRoot)
+  assert.deepEqual(legacyProjection.analysisSidecars, {})
+  assert.equal(legacyProjection.analysisDigest, null)
+  assert.equal((await requestReviewAsset(
+    legacyProjection,
+    'analyses/reading-choice-analysis-v1.json',
+    { role: 'owner', accountKind: 'human' },
+  )).status, 404)
+} finally {
+  close(legacy)
+}
+
+for (const [label, relativePath, mutate, expected] of [
+  [
+    'group-closure',
+    'analysis-reading-a.json',
+    (analysis) => { analysis.groups['group:other'] = { summary: 'Unbound group' } },
+    /analysis groups closure mismatch/,
+  ],
+  [
+    'question-closure',
+    'analysis-reading-a.json',
+    (analysis) => { delete analysis.questions['question:21'] },
+    /questionIds.*不匹配|closure mismatch/,
+  ],
+  [
+    'blank-closure',
+    'analysis-seven.json',
+    (analysis) => { analysis.questions['question:36'].blankId = 'blank:999' },
+    /blankId does not match/,
+  ],
+  [
+    'answer-closure',
+    'analysis-seven.json',
+    (analysis) => { analysis.questions['question:36'].optionFit.correctOptionLabel = '' },
+    /analysis answer does not close/,
+  ],
+  [
+    'answer-conflict',
+    'analysis-cloze.json',
+    (analysis) => { analysis.blanks['question:41'].correctFit.optionLabel = 'B' },
+    /答案解析版不一致/,
+  ],
+]) {
+  const context = makeContext(label)
+  try {
+    const filePath = path.join(context.reviewRoot, relativePath)
+    const analysis = JSON.parse(readFileSync(filePath, 'utf8'))
+    mutate(analysis)
+    writeJson(filePath, analysis)
+    assert.throws(() => publish(context), expected)
+    assert(!existsSync(context.paperAssetsDir))
+    assert.equal(publishedVersionCount(context), 0)
+  } finally {
+    close(context)
+  }
 }
 
 const happy = makeContext('happy')
@@ -239,8 +638,53 @@ try {
   ]) {
     assert(existsSync(path.join(base, 'paper-asset.json')))
     assert(existsSync(path.join(base, 'answer-key.json')))
-    assert(!existsSync(path.join(base, 'analyses')))
+    const publishedSidecars = Object.fromEntries(Object.keys(happy.projection.analysisSidecars)
+      .map((fileName) => {
+        const filePath = path.join(base, 'analyses', fileName)
+        assert(existsSync(filePath), `${fileName} must publish atomically`)
+        return [fileName, JSON.parse(readFileSync(filePath, 'utf8'))]
+      }))
+    assert.equal(digestJson(publishedSidecars), happy.projection.analysisDigest)
   }
+
+  assert.equal(
+    Object.keys(happy.projection.analysisSidecars['reading-choice-analysis-v1.json'].questions).length,
+    15,
+  )
+  assert.equal(
+    happy.projection.analysisSidecars['reading-choice-analysis-v1.json'].targetGroups.length,
+    4,
+  )
+  assert.equal(
+    Object.keys(happy.projection.analysisSidecars['writing-analysis-v1.json'].groups).length,
+    2,
+  )
+  assert.equal(
+    Object.keys(happy.projection.analysisSidecars['reading-choice-analysis-v1.json'].questions).length
+      + Object.keys(happy.projection.analysisSidecars['seven-choices-analysis-v1.json'].questions).length
+      + Object.keys(happy.projection.analysisSidecars['cloze-analysis-v1.json'].blanks).length
+      + Object.keys(happy.projection.analysisSidecars['grammar-fill-analysis-v1.json'].blanks).length,
+    45,
+  )
+  for (const fileName of Object.keys(happy.projection.analysisSidecars)) {
+    const response = await requestReviewAsset(
+      happy.projection,
+      `analyses/${fileName}`,
+      { role: 'owner', accountKind: 'human' },
+    )
+    assert.equal(response.status, 200)
+    assert.deepEqual(response.body, happy.projection.analysisSidecars[fileName])
+  }
+  assert.equal((await requestReviewAsset(
+    happy.projection,
+    'analyses/unknown.json',
+    { role: 'owner', accountKind: 'human' },
+  )).status, 404)
+  assert.equal((await requestReviewAsset(
+    happy.projection,
+    'analyses/reading-choice-analysis-v1.json',
+    { role: 'member', accountKind: 'human' },
+  )).status, 403)
 } finally {
   close(happy)
 }
@@ -339,6 +783,14 @@ try {
     '.latest-swap.json',
   )
   assert(existsSync(journalPath))
+  assert.equal(
+    analysisDigestAt(path.join(postCommit.paperAssetsDir, paperId, 'versions/v1')),
+    postCommit.projection.analysisDigest,
+  )
+  assert.equal(
+    analysisDigestAt(path.join(postCommit.paperAssetsDir, paperId, 'latest')),
+    postCommit.projection.analysisDigest,
+  )
   const invalidRequest = loadCanonicalImportRequest(postCommit.requestPath)
   invalidRequest.nck1MaterializationConfirmation.candidateDigest =
     `sha256:${'0'.repeat(64)}`
@@ -391,6 +843,22 @@ try {
       byteLength: bytes.byteLength,
     }
   })
+  const analysisFiles = files.filter(({ role }) => role.startsWith('analysis_'))
+  assert.equal(analysisFiles.length, 9)
+  assert.deepEqual(
+    analysisFiles.map(({ path: relativePath }) => relativePath).sort(),
+    [
+      'analysis-application.json',
+      'analysis-cloze.json',
+      'analysis-continuation.json',
+      'analysis-grammar.json',
+      'analysis-reading-a.json',
+      'analysis-reading-b.json',
+      'analysis-reading-c.json',
+      'analysis-reading-d.json',
+      'analysis-seven.json',
+    ],
+  )
   const manifestBase = {
     schemaVersion: 'web-import-review-bundle-v1',
     paperId: cliPaperId,
@@ -398,11 +866,43 @@ try {
     sourceDigest: projection.sourceDigest,
     candidateDigest: projection.candidateDigest,
     visibleStructureDigest: projection.visibleStructureDigest,
+    analysisDigest: projection.analysisDigest,
     producerBuildId,
     files,
     resolvesIssueIds: [],
   }
   const bundleDigest = reviewBundleDigest(manifestBase)
+  const changedManifest = structuredClone(manifestBase)
+  changedManifest.files.find(({ path: relativePath }) =>
+    relativePath === 'analysis-application.json').sha256 = `sha256:${'f'.repeat(64)}`
+  assert.notEqual(reviewBundleDigest(changedManifest), bundleDigest)
+  const incompleteStoreRoot = path.join(cliTempRoot, 'incomplete-review-store')
+  const incompleteManifest = {
+    ...manifestBase,
+    files: manifestBase.files.filter(({ role }) => !role.startsWith('analysis_')),
+  }
+  incompleteManifest.bundleDigest = reviewBundleDigest(incompleteManifest)
+  const incompleteStore = createImportReviewStore({
+    dbPath: path.join(incompleteStoreRoot, 'review.sqlite'),
+    filesRoot: path.join(incompleteStoreRoot, 'files'),
+    rendererBuildId: 'renderer-universal-publish-verifier',
+    projectRevision: buildNck1ReviewProjection,
+  })
+  const incompleteRevision = incompleteStore.createRevision(incompleteManifest)
+  for (const file of incompleteManifest.files) {
+    const upload = incompleteStore.fileForUpload(incompleteRevision.revision.id, file.path)
+    const bytes = readFileSync(resolveReviewFile(cliPaperDir, file.path))
+    mkdirSync(path.dirname(upload.destination), { recursive: true })
+    writeFileSync(upload.destination, bytes)
+    incompleteStore.completeFileUpload(incompleteRevision.revision.id, file.path, {
+      sha256: file.sha256,
+      byteLength: file.byteLength,
+    })
+  }
+  assert.throws(
+    () => incompleteStore.finalizeRevision(incompleteRevision.revision.id),
+    /Missing required staged analysis|Incomplete staged analyses/,
+  )
   const approval = {
     schemaVersion: 'web-import-review-approval-v1',
     approvalId: 'approval-universal-publish-verifier',
@@ -412,6 +912,7 @@ try {
     sourceDigest: projection.sourceDigest,
     candidateDigest: projection.candidateDigest,
     visibleStructureDigest: projection.visibleStructureDigest,
+    analysisDigest: projection.analysisDigest,
     bundleDigest,
     producerBuildId,
     rendererBuildId: 'renderer-universal-publish-verifier',

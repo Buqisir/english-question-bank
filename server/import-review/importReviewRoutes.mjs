@@ -417,12 +417,20 @@ export function createImportReviewRoutes({
     match,
   }) => {
     if (!requireReviewer(response, context)) return
-    if (match[2] !== 'paper-asset.json') {
+    const { projection } = store.projectionForRevision(match[1])
+    if (match[2] === 'paper-asset.json') {
+      context.sendJson(response, 200, projection.paperAsset)
+      return
+    }
+    const sidecarMatch = /^analyses\/([^/]+\.json)$/.exec(match[2])
+    const sidecar = sidecarMatch
+      ? projection.analysisSidecars?.[sidecarMatch[1]]
+      : null
+    if (!sidecar) {
       context.sendJson(response, 404, { error: 'Review asset not found' })
       return
     }
-    const { projection } = store.projectionForRevision(match[1])
-    context.sendJson(response, 200, projection.paperAsset)
+    context.sendJson(response, 200, sidecar)
   })))
 
   routes.push(defineRoute('GET', /^\/api\/import-review-preview\/revisions\/([^/]+)\/print$/, route(({

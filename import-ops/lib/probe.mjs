@@ -77,6 +77,7 @@ const APPROVAL_IDENTITY_KEYS = [
   'sourceDigest',
   'candidateDigest',
   'visibleStructureDigest',
+  'analysisDigest',
   'bundleDigest',
 ]
 
@@ -84,6 +85,7 @@ const APPROVAL_DIGEST_KEYS = [
   'sourceDigest',
   'candidateDigest',
   'visibleStructureDigest',
+  'analysisDigest',
   'bundleDigest',
 ]
 
