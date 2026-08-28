@@ -11,7 +11,7 @@
 | [07](07-mixed-carrier-routing.md) | 按 role/page 精确路由已支持的 carrier adapters | 03、06 | P2 |
 | [08](08-listening-audio-evidence.md) | Universal 导入保存 opaque listening audio evidence | — | P2 |
 | [09](09-ordered-image-source-bundle.md) | 显式排序的题卷/答案图片页进入同一 OCR seam | 01、06 | P1 |
-| [10](10-answer-source-shape-closure.md) | 详解版、纯答案键及题答同文件共享 answer authority seam | —；PDF/image复用03/09 | P1 |
+| [10](10-answer-source-shape-closure.md) | 详解版、纯答案键及题答同文件只提取同一种权威答案值 | —；PDF/image复用03/09 | P1 |
 | [11](11-source-only-awaiting-answers.md) | 无答案来源安全暂存，补答案前禁止 Candidate/发布 | —；图片入口复用09 | P1 |
 
 ```text

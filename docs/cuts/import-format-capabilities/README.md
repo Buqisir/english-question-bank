@@ -14,7 +14,8 @@
    完整真实试卷复制进 fixture。
 2. **查矩阵**：先分别登记题卷载体、答案形态（详解/纯答案键/未提供）和包装关系，
    再按真实 shape 而非“格式编号”找行。核对 detection、Source Capture、Materialization、
-   Canonical、三面和 Review 证据，不把 `manual`/`legacy` 当 producer support。
+   Canonical、三面和 Review 证据，不把 `manual`/`legacy` 当 producer support。详解版也只
+   提取权威答案值，不保存或显示逐题详解。
 3. **已有能力则复用**：运行该行列出的 adapter 与 verifier；不得加单卷 parser、CSS 或
    renderer 分支。
 4. **能力不闭合则停住 Candidate**：记录 stable issue code、source document/page/region

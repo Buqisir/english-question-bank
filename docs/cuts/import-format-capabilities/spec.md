@@ -49,13 +49,15 @@ Import Review revision，但各能力的覆盖不均：简单 DOCX 文本很成�
    载体的混合；听力音频是补充 artifact，不冒充分页题卷。
 2. **答案形态**：`detailed`（答案 + 源详解/范文）、`key_only`（只有权威答案键）、
    `not_supplied`（尚未找到权威答案）。“答案键”必须覆盖该卷所有实际作答值，不是只
-   收选择题 ABCD 而漏掉语法填空等答案。
+   收选择题 ABCD 而漏掉语法填空等答案。`detailed` 与 `key_only` 都只向下游提供权威
+   答案值；逐题详解不提取、不结构化，也不进入教师版。
 3. **包装关系**：题卷/答案分开、同一文件内合并、或多页 image bundle。包装只决定
    source role 与 locator，不改变 Canonical 题意。
 
 这三个轴组合，而不产生新的 parser 身份。例如 question PDF + detailed answer PDF 与
-question PDF + key-only answer PDF 共用 PDF carrier adapter；区别只在 answer-shape closure。
-ordered image bundle 与扫描 PDF 共用 OCR page-observation seam。
+question PDF + key-only answer PDF 共用 PDF carrier adapter，并生成同一种 `answers[]`；
+前者多出的逐题详解只留在不可变原答案文件中，不另建数据模型。ordered image bundle
+与扫描 PDF 共用 OCR page-observation seam。
 
 无权威答案的 source 可进入不可变的 **source-only / awaiting answers** 暂存状态，避免
 辛苦找到的图片卷丢失；但不得生成 ready Materialization、Canonical Candidate、Review
@@ -229,6 +231,9 @@ Owner 于 2026-08-28 接受以下默认规则：
    线型粗细等表层细节统一为 EQB 考试样式，不做逐像素 Word 表格复刻。
 3. **媒体 caption**：原卷中学生可见、帮助理解的题注是 Canonical content，三面都显示；
    文件名、来源页码和操作说明仅是 QA/accessibility metadata，不给学生看。
+4. **答案源详解**：不成为教师版内容，也不单独提取或结构化保存；只读取权威答案值。
+   原答案文件仍作为不可变 source evidence 保留，避免答案权威失去出处。写作官方范文
+   与听力原文按既有独立 contract 处理，不视为逐题详解。
 
 这些规则是通用 shape policy，不得通过 `paperId` 覆盖。
 
