@@ -118,7 +118,7 @@ reading/seven/cloze/grammar analysis 文件。
 - [x] commit 前故障零残留；commit 后 reload 中断同版本恢复且重试幂等。
 - [x] `qa-accepted`、本地发布、`ready_to_ship` 和 `shipped` 探针顺序清晰，旧的
       `latest` 先于 QA 的描述被移除。
-- [ ] Agent skill 能在匹配任务时自动触发，并能从 paperId 恢复，而非要求 Owner
+- [x] Agent skill 能在匹配任务时自动触发，并能从 paperId 恢复，而非要求 Owner
       背命令。
 - [ ] 生产账号/token 和真实卷 pilot 只在后续当前授权下执行。
 

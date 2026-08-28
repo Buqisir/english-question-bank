@@ -7,6 +7,18 @@
 ## Agent 执行入口
 
 任何 agent 要导一套新卷,先读 `docs/import/agent-contract.md`（唯一进场）。
+项目级 `importing-nck1-papers` skill 会自动匹配导题、继续某卷、审核返工、状态查询
+和认可后本地发布任务。每次先运行：
+
+```bash
+node scripts/import-pipeline/review.mjs preflight <paperId>
+```
+
+该只读命令把本地 Source / Materialization / 收据与 Review API 当前 revision 合成
+`materializing`、`awaiting_review`、`changes_requested`、`approved`、
+`locally_published`、`ready_to_ship`、`shipped` 或 `failed`，并给出可审计的
+`next.action`。Agent 据此恢复；Owner 无需记下面的机械命令。
+
 新卷默认使用 `universal-nck1.mjs`,不再选择格式①/②/③；下列旧 stages
 只用于已登记存量卷复现。
 
@@ -46,6 +58,7 @@ Screen/Print/PDF 上审核；Agent 用自己的 `import_agent` 网页待办箱�
 读取、回复和提交修订：
 
 ```bash
+node scripts/import-pipeline/review.mjs preflight <paperId>
 node scripts/import-pipeline/review.mjs status <paperId>
 node scripts/import-pipeline/review.mjs reply <paperId> <issueId> --message '<回复>'
 node scripts/import-pipeline/review.mjs push <paperId> --resolves <issueId>[,<issueId>]

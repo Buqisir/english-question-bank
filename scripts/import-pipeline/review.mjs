@@ -11,6 +11,10 @@ import {
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 
+import {
+  inspectPublicationReceipt,
+  preflightPaper,
+} from '../../import-ops/lib/probe.mjs'
 import { materializeNck1CanonicalRequest } from '../../server/paper-canonical/nck1MaterializationCanonicalRequest.mjs'
 import { loadCanonicalImportRequest } from '../../server/paper-canonical/importRequest.mjs'
 import { reviewBundleDigest } from '../../server/import-review/importReviewStore.mjs'
@@ -55,7 +59,7 @@ function token() {
   return value
 }
 
-async function api(pathname, init = {}) {
+async function api(pathname, init = {}, { allowNotFound = false } = {}) {
   const response = await fetch(`${origin()}${pathname}`, {
     ...init,
     headers: {
@@ -67,6 +71,11 @@ async function api(pathname, init = {}) {
   const body = contentType.includes('application/json')
     ? await response.json()
     : await response.text()
+  if (
+    allowNotFound
+    && response.status === 404
+    && body?.code === 'IMPORT_REVIEW_NOT_FOUND'
+  ) return null
   if (!response.ok) {
     fail(`${response.status} ${body?.code || ''} ${body?.error || body || 'Review API failed'}`.trim())
   }
@@ -161,6 +170,32 @@ async function status(paperId) {
     `/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`,
   )
   console.log(JSON.stringify(result, null, 2))
+}
+
+async function preflight(paperId) {
+  paperDirectory(paperId)
+  const configuredOrigin = String(process.env.QUESTION_BANK_IMPORT_OPS_ORIGIN || '').trim()
+  const configuredToken = String(process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN || '').trim()
+  if (Boolean(configuredOrigin) !== Boolean(configuredToken)) {
+    fail(
+      'Preflight requires both QUESTION_BANK_IMPORT_OPS_ORIGIN and '
+        + 'QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN, or neither while materializing locally',
+    )
+  }
+  const reviewChecked = Boolean(configuredOrigin && configuredToken)
+  const reviewStatus = reviewChecked
+    ? await api(
+      `/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`,
+      {},
+      { allowNotFound: true },
+    )
+    : null
+  console.log(JSON.stringify(preflightPaper({
+    repoRoot: root,
+    paperId,
+    reviewStatus,
+    reviewChecked,
+  }), null, 2))
 }
 
 async function reply(paperId, issueId) {
@@ -331,35 +366,6 @@ function assertAcceptedReceipts(paperDir, approval, projection) {
   }
 }
 
-function publicationReceiptIsCurrent({
-  db,
-  paperAssetsDir,
-  paperId,
-  receipt,
-}) {
-  const latestPath = path.join(paperAssetsDir, paperId, 'latest', 'paper-asset.json')
-  if (!existsSync(latestPath)) return false
-  const latest = requiredJson(latestPath, 'published latest paper-asset.json')
-  const version = Number(receipt.assetVersion)
-  const assetRow = db.prepare(
-    `
-    SELECT status
-    FROM paper_asset_versions
-    WHERE paper_id = ? AND asset_version = ?
-    `,
-  ).get(paperId, version)
-  const canonicalRow = db.prepare(
-    `
-    SELECT publication_digest
-    FROM canonical_paper_publications
-    WHERE paper_id = ? AND source_asset_version = ? AND is_current = 1
-    `,
-  ).get(paperId, version)
-  return latest.paper?.assetVersion === version
-    && assetRow?.status === 'published'
-    && canonicalRow?.publication_digest === receipt.canonicalPublicationDigest
-}
-
 function publicationReceiptMatchesApproval(receipt, approval) {
   return receipt?.schemaVersion === 'universal-nck1-local-publication-v1'
     && receipt.approvalId === approval.approvalId
@@ -398,12 +404,12 @@ async function publish(paperId) {
     if (existingReceipt?.approvalId === approval.approvalId) {
       if (
         !publicationReceiptMatchesApproval(existingReceipt, approval)
-        || !publicationReceiptIsCurrent({
+        || !inspectPublicationReceipt({
           db,
           paperAssetsDir,
           paperId,
           receipt: existingReceipt,
-        })
+        }).current
       ) fail('Existing local publication receipt does not match approval or committed current state')
       console.log(`ALREADY PUBLISHED ${paperId} ${existingReceipt.versionName}: ready_to_ship; no deployment was run`)
       return
@@ -458,6 +464,7 @@ async function releaseShipGuard(paperId, guardId) {
 async function main() {
   const [command, paperId, issueId] = process.argv.slice(2)
   if (command === 'push') await pushRevision(paperId)
+  else if (command === 'preflight') await preflight(paperId)
   else if (command === 'status') await status(paperId)
   else if (command === 'reply') await reply(paperId, issueId)
   else if (command === 'accept') await accept(paperId)
@@ -465,7 +472,8 @@ async function main() {
   else if (command === 'release-ship-guard') await releaseShipGuard(paperId, issueId)
   else fail(
     'Usage: review.mjs push <paperId> [--resolves issue-1,issue-2] | '
-      + 'status <paperId> | reply <paperId> <issueId> --message <text> | '
+      + 'preflight <paperId> | status <paperId> | '
+      + 'reply <paperId> <issueId> --message <text> | '
       + 'accept <paperId> | publish <paperId> | '
       + 'release-ship-guard <paperId> <guardId> --owner-said-abort-ship',
   )

@@ -1,6 +1,6 @@
 # 02 — 自动导题 skill、状态机与恢复 preflight
 
-Status: planned
+Status: done
 Blocked by: `01-universal-approved-publish.md`
 Next on PASS: `03-production-agent-identity.md`
 Terminal: no
@@ -19,11 +19,11 @@ materialization、revision、approval、local publication 和 ship receipt，再
 
 ## Acceptance criteria
 
-- [ ] skill description 可自动匹配导题、返工、状态和本地发布请求。
-- [ ] preflight 能区分 materializing、awaiting_review、changes_requested、approved、
+- [x] skill description 可自动匹配导题、返工、状态和本地发布请求。
+- [x] preflight 能区分 materializing、awaiting_review、changes_requested、approved、
       locally_published、ready_to_ship、shipped 和 failed。
-- [ ] resume 不覆盖不可变 revision，不重复发布版本，不把旧 approval 当最新认可。
-- [ ] Owner 未当前授权“上线”时，任何状态都不会触发生产 push。
+- [x] resume 不覆盖不可变 revision，不重复发布版本，不把旧 approval 当最新认可。
+- [x] Owner 未当前授权“上线”时，任何状态都不会触发生产 push。
 
 ## Out of scope
 

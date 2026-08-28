@@ -5,10 +5,19 @@
  * Does not run pull-run-push or mutate production. Universal checks make one
  * read-only request to the Review service to reject superseded approvals.
  */
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import {
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { probePaper } from '../../import-ops/lib/probe.mjs'
+import {
+  inspectPublicationReceipt,
+  probePaper,
+} from '../../import-ops/lib/probe.mjs'
 
 export const SHIP_COMMAND =
   'node scripts/pull-run-push.mjs push <paperId> --owner-said-ship'
@@ -56,13 +65,14 @@ function exactUniversalAcceptedPublication({ repoRoot, paperId }) {
     'signals',
     'locally-published.json',
   ))
-  const latest = readJson(path.join(
-    repoRoot,
-    'app/public/paper-assets',
+  const paperAssetsDir = process.env.QUESTION_BANK_PAPER_ASSET_ROOT
+    || path.join(repoRoot, 'app/public/paper-assets')
+  const publicationInspection = inspectPublicationReceipt({
+    dbPath: process.env.QUESTION_BANK_DB || path.join(repoRoot, 'data/question-bank.sqlite'),
+    paperAssetsDir,
     paperId,
-    'latest',
-    'paper-asset.json',
-  ))
+    receipt: publication,
+  })
   return Boolean(
     summary
     && receipt?.schemaVersion === 'web-import-review-qa-accepted-v1'
@@ -89,9 +99,8 @@ function exactUniversalAcceptedPublication({ repoRoot, paperId }) {
     && Number.isInteger(publication.assetVersion)
     && publication.assetVersion > 0
     && publication.versionName === `v${publication.assetVersion}`
-    && latest?.paper?.paperId === paperId
-    && latest?.paper?.assetVersion === publication.assetVersion
     && typeof publication.canonicalPublicationDigest === 'string'
+    && publicationInspection.current
     && confirmation.sourceDigest === summary.sourceDigest
     && confirmation.candidateDigest === summary.candidateDigest
     && typeof receipt.bundleDigest === 'string'
@@ -291,16 +300,33 @@ export function writeShippedReceipt({
   const dir = signalsDir(repoRoot, paperId)
   mkdirSync(dir, { recursive: true })
   const filePath = path.join(dir, 'shipped.json')
+  const qaReceipt = readJson(path.join(dir, 'qa-accepted.json'))
+  const publicationReceipt = readJson(path.join(dir, 'locally-published.json'))
+  const recordsRetry = isShipFailed(paper)
   writeFileSync(
     filePath,
     `${JSON.stringify({
+      schemaVersion: 'nck1-import-shipped-v1',
+      paperId,
       shippedAt,
       command: shipCommand({
         paperId,
-        ownerSaid: isShipFailed(paper) ? 'retry-ship' : 'ship',
+        ownerSaid: recordsRetry ? 'retry-ship' : 'ship',
       }),
+      ...(paper.universal ? {
+        approvalId: qaReceipt.approvalId,
+        revisionId: qaReceipt.revisionId,
+        sourceDigest: qaReceipt.sourceDigest,
+        candidateDigest: qaReceipt.candidateDigest,
+        visibleStructureDigest: qaReceipt.visibleStructureDigest,
+        bundleDigest: qaReceipt.bundleDigest,
+        assetVersion: publicationReceipt.assetVersion,
+        versionName: publicationReceipt.versionName,
+        canonicalPublicationDigest: publicationReceipt.canonicalPublicationDigest,
+      } : {}),
     }, null, 2)}\n`,
   )
+  if (recordsRetry) rmSync(path.join(dir, 'blocked.json'), { force: true })
   return {
     ok: true,
     code: 'shipped',

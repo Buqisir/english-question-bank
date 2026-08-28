@@ -436,6 +436,30 @@ try {
     versionName: 'v1',
     canonicalPublicationDigest: `sha256:${'6'.repeat(64)}`,
   }
+  const seedLocalPublication = spawnSync('sqlite3', [localDb, `
+    CREATE TABLE paper_asset_versions (
+      paper_id TEXT NOT NULL,
+      asset_version INTEGER NOT NULL,
+      version_name TEXT NOT NULL,
+      status TEXT NOT NULL
+    );
+    INSERT INTO paper_asset_versions (paper_id, asset_version, version_name, status)
+    VALUES ('${paperId}', 1, 'v1', 'published');
+    CREATE TABLE canonical_paper_publications (
+      paper_id TEXT NOT NULL,
+      version_name TEXT NOT NULL,
+      source_asset_version INTEGER NOT NULL,
+      publication_digest TEXT NOT NULL,
+      is_current INTEGER NOT NULL
+    );
+    INSERT INTO canonical_paper_publications
+      (paper_id, version_name, source_asset_version, publication_digest, is_current)
+    VALUES ('${paperId}', 'v1', 1, '${localPublication.canonicalPublicationDigest}', 1);
+  `], { encoding: 'utf8' })
+  assert(
+    seedLocalPublication.status === 0,
+    'VA5 fixture: local DB contains published asset and current Canonical publication',
+  )
   const approvedReviewStatus = {
     paperId,
     latestRevisionId: revisionId,

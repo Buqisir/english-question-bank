@@ -10,12 +10,17 @@ import {
 } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
+import { DatabaseSync } from 'node:sqlite'
 
 import {
   createImportReviewStore,
   reviewBundleDigest,
 } from '../server/import-review/importReviewStore.mjs'
-import { evaluateShip } from '../scripts/import-pipeline/ship-checklist.mjs'
+import { preflightPaper } from './lib/probe.mjs'
+import {
+  evaluateShip,
+  writeShippedReceipt,
+} from '../scripts/import-pipeline/ship-checklist.mjs'
 import { sha256 } from '../shared/paper-canonical/stable.mjs'
 
 const repoRoot = path.resolve(import.meta.dirname, '..')
@@ -369,6 +374,14 @@ const screen = readFileSync(
   path.join(repoRoot, 'app/src/features/paper-browse/PaperBrowsePage.tsx'),
   'utf8',
 )
+const importSkill = readFileSync(
+  path.join(repoRoot, '.agents/skills/importing-nck1-papers/SKILL.md'),
+  'utf8',
+)
+const reviewCli = readFileSync(
+  path.join(repoRoot, 'scripts/import-pipeline/review.mjs'),
+  'utf8',
+)
 assert.match(html, /<body>\s*<!--[\s\S]*THESIS:/, 'direction contract is the first body child')
 assert.match(client, /accountKind === 'import_agent'/, 'real import_agent account gets its own inbox mode')
 assert.match(client, /reviewRevision=/, 'review Screen URL binds the immutable revision')
@@ -377,14 +390,59 @@ assert.doesNotMatch(client, /pull-run-push|deploy\(/, 'review UI has no deployme
 assert.match(screen, /import-review-preview\/revisions/, 'PaperBrowsePage switches only its review data source')
 assert.match(css, /grid-template-columns: 280px minmax\(520px, 1fr\) 360px/, 'desktop uses the agreed three-pane workbench')
 assert.match(css, /@media \(max-width: 760px\)/, 'mobile composition collapses structurally')
+assert.match(
+  importSkill,
+  /^name: importing-nck1-papers$/m,
+  'project skill name matches its directory',
+)
+assert.match(
+  importSkill,
+  /^description: .*导题.*继续某套卷.*审核反馈.*本地发布/m,
+  'skill description carries automatic discovery terms for import/resume/review/publication',
+)
+assert.match(
+  importSkill,
+  /review\.mjs preflight <paperId>/,
+  'skill starts every resumed import from machine-readable preflight',
+)
+for (const state of [
+  'materializing',
+  'awaiting_review',
+  'changes_requested',
+  'approved',
+  'locally_published',
+  'ready_to_ship',
+  'shipped',
+  'failed',
+]) assert.match(importSkill, new RegExp(`\\| \`${state}\``), `skill handles ${state}`)
+assert.match(
+  importSkill,
+  /Never overwrite a finalized revision/,
+  'skill requires corrective work to create a new immutable revision',
+)
+assert.match(
+  importSkill,
+  /unless the Owner's current message\s+explicitly says `上线 <paperId>`/,
+  'skill cannot infer production authorization from approval or an old message',
+)
+assert.match(
+  reviewCli,
+  /command === 'preflight'/,
+  'review CLI exposes the preflight command used by the skill',
+)
 
 const shipRoot = mkdtempSync(path.join(tmpdir(), 'eqb-web-review-ship-'))
+let shipDb = null
 try {
   const paperId = 'paper-mock-web-review-ship'
   const paperDir = path.join(shipRoot, 'scripts/import-pipeline/papers', paperId)
   const evidenceDir = path.join(paperDir, 'canonical-evidence')
+  const materializationDir = path.join(paperDir, 'materialization')
+  const sourceDir = path.join(paperDir, 'source')
   const signalsDir = path.join(paperDir, 'signals')
   mkdirSync(evidenceDir, { recursive: true })
+  mkdirSync(materializationDir, { recursive: true })
+  mkdirSync(sourceDir, { recursive: true })
   mkdirSync(signalsDir, { recursive: true })
   mkdirSync(path.join(shipRoot, 'app/public/paper-assets', paperId, 'latest'), { recursive: true })
   const sourceDigest = `sha256:${'4'.repeat(64)}`
@@ -393,6 +451,18 @@ try {
   const bundleDigest = `sha256:${'6'.repeat(64)}`
   const approvalId = 'approval-mock-current'
   const revisionId = 'rev-mock-current'
+  writeFileSync(path.join(sourceDir, 'question-source-1.pdf'), 'question source')
+  writeFileSync(path.join(sourceDir, 'official-answers-1.pdf'), 'official answers')
+  writeFileSync(path.join(paperDir, 'universal-source-manifest.json'), JSON.stringify({
+    documents: [
+      { path: 'source/question-source-1.pdf' },
+      { path: 'source/official-answers-1.pdf' },
+    ],
+  }))
+  writeFileSync(
+    path.join(materializationDir, 'nck1-source-materialization-v1.json'),
+    JSON.stringify({ schemaVersion: 'nck1-source-materialization-v1' }),
+  )
   writeFileSync(path.join(paperDir, 'config.json'), JSON.stringify({
     paperId,
     format: 'universal-nck1',
@@ -442,17 +512,144 @@ try {
     versionName: 'v1',
     canonicalPublicationDigest: `sha256:${'9'.repeat(64)}`,
   }
+  const dbPath = path.join(shipRoot, 'data/question-bank.sqlite')
+  mkdirSync(path.dirname(dbPath), { recursive: true })
+  shipDb = new DatabaseSync(dbPath)
+  shipDb.exec(`
+    CREATE TABLE paper_asset_versions (
+      paper_id TEXT NOT NULL,
+      asset_version INTEGER NOT NULL,
+      version_name TEXT NOT NULL,
+      status TEXT NOT NULL
+    );
+    CREATE TABLE canonical_paper_publications (
+      paper_id TEXT NOT NULL,
+      version_name TEXT NOT NULL,
+      source_asset_version INTEGER NOT NULL,
+      publication_digest TEXT NOT NULL,
+      is_current INTEGER NOT NULL
+    );
+  `)
+  shipDb.prepare(
+    `
+    INSERT INTO paper_asset_versions (paper_id, asset_version, version_name, status)
+    VALUES (?, ?, ?, 'published')
+    `,
+  ).run(paperId, localPublication.assetVersion, localPublication.versionName)
+  shipDb.prepare(
+    `
+    INSERT INTO canonical_paper_publications
+      (paper_id, version_name, source_asset_version, publication_digest, is_current)
+    VALUES (?, ?, ?, ?, 1)
+    `,
+  ).run(
+    paperId,
+    localPublication.versionName,
+    localPublication.assetVersion,
+    localPublication.canonicalPublicationDigest,
+  )
   const webReviewStatus = {
     paperId,
     latestRevisionId: revisionId,
     latest: { id: revisionId, state: 'approved', bundleDigest },
     approval: webApproval,
   }
+  const materializing = preflightPaper({
+    repoRoot: shipRoot,
+    paperId,
+    reviewStatus: null,
+    reviewChecked: true,
+  })
+  assert.equal(materializing.state, 'materializing')
+  assert.equal(materializing.next.action, 'push_revision')
+  assert.equal(materializing.local.source, true, 'universal manifest documents count as source')
+  assert.equal(materializing.local.materialization, true)
+  assert.equal(materializing.production.pushAllowed, false)
+
+  rmSync(path.join(materializationDir, 'nck1-source-materialization-v1.json'))
+  const missingMaterialization = preflightPaper({
+    repoRoot: shipRoot,
+    paperId,
+    reviewStatus: webReviewStatus,
+    reviewChecked: true,
+  })
+  assert.equal(missingMaterialization.state, 'failed')
+  assert(missingMaterialization.blockers.some(
+    (item) => item.code === 'local_materialization_missing',
+  ))
+  writeFileSync(
+    path.join(materializationDir, 'nck1-source-materialization-v1.json'),
+    JSON.stringify({ schemaVersion: 'nck1-source-materialization-v1' }),
+  )
+
+  const reviewAccessMissing = preflightPaper({
+    repoRoot: shipRoot,
+    paperId,
+    reviewStatus: null,
+    reviewChecked: false,
+  })
+  assert.equal(reviewAccessMissing.state, 'failed')
+  assert(reviewAccessMissing.blockers.some((item) => item.code === 'review_access_required'))
+  assert.equal(reviewAccessMissing.next.command, null)
+
+  const awaitingReviewStatus = {
+    ...webReviewStatus,
+    latest: { ...webReviewStatus.latest, state: 'awaiting_review' },
+    approval: null,
+  }
+  const awaitingReview = preflightPaper({
+    repoRoot: shipRoot,
+    paperId,
+    reviewStatus: awaitingReviewStatus,
+    reviewChecked: true,
+  })
+  assert.equal(awaitingReview.state, 'awaiting_review')
+  assert.equal(awaitingReview.next.action, 'wait_for_owner_review')
+
+  const changesRequested = preflightPaper({
+    repoRoot: shipRoot,
+    paperId,
+    reviewStatus: {
+      ...awaitingReviewStatus,
+      latest: { ...awaitingReviewStatus.latest, state: 'changes_requested' },
+      unresolvedCount: 1,
+    },
+    reviewChecked: true,
+  })
+  assert.equal(changesRequested.state, 'changes_requested')
+  assert.equal(changesRequested.next.action, 'revise_and_resubmit')
+
+  const rendererStale = preflightPaper({
+    repoRoot: shipRoot,
+    paperId,
+    reviewStatus: { ...webReviewStatus, approval: null, rendererStale: true },
+    reviewChecked: true,
+  })
+  assert.equal(rendererStale.state, 'changes_requested')
+  assert.equal(rendererStale.next.action, 'resubmit_for_current_renderer')
+
+  const approvedBeforeAccept = preflightPaper({
+    repoRoot: shipRoot,
+    paperId,
+    reviewStatus: webReviewStatus,
+    reviewChecked: true,
+  })
+  assert.equal(approvedBeforeAccept.state, 'approved')
+  assert.equal(approvedBeforeAccept.next.action, 'accept_approval')
+
   writeFileSync(
     path.join(evidenceDir, 'web-review-approval-v1.json'),
     JSON.stringify(webApproval),
   )
   writeFileSync(path.join(signalsDir, 'qa-accepted.json'), JSON.stringify(qaReceipt))
+  const approvedAfterAccept = preflightPaper({
+    repoRoot: shipRoot,
+    paperId,
+    reviewStatus: webReviewStatus,
+    reviewChecked: true,
+  })
+  assert.equal(approvedAfterAccept.state, 'approved')
+  assert.equal(approvedAfterAccept.next.action, 'publish_local')
   const approvedOnly = evaluateShip({
     repoRoot: shipRoot,
     paperId,
@@ -469,6 +666,14 @@ try {
     path.join(signalsDir, 'locally-published.json'),
     JSON.stringify(localPublication),
   )
+  const locallyPublished = preflightPaper({
+    repoRoot: shipRoot,
+    paperId,
+    reviewStatus: webReviewStatus,
+    reviewChecked: true,
+  })
+  assert.equal(locallyPublished.state, 'locally_published')
+  assert.equal(locallyPublished.next.action, 'inspect_local_publication')
   writeFileSync(
     path.join(
       shipRoot,
@@ -479,6 +684,57 @@ try {
     ),
     JSON.stringify({ paper: { paperId, assetVersion: 1 } }),
   )
+  const readyToShip = preflightPaper({
+    repoRoot: shipRoot,
+    paperId,
+    reviewStatus: webReviewStatus,
+    reviewChecked: true,
+  })
+  assert.equal(readyToShip.state, 'ready_to_ship')
+  assert.equal(readyToShip.next.action, 'stop_ready_to_ship')
+  assert.equal(readyToShip.next.command, null)
+  assert.equal(readyToShip.production.pushAllowed, false)
+  assert.equal(readyToShip.receipts.publicationCommitted, true)
+
+  shipDb.prepare(
+    'UPDATE paper_asset_versions SET status = ? WHERE paper_id = ? AND asset_version = ?',
+  ).run('failed', paperId, localPublication.assetVersion)
+  const unpublishedAsset = preflightPaper({
+    repoRoot: shipRoot,
+    paperId,
+    reviewStatus: webReviewStatus,
+    reviewChecked: true,
+  })
+  assert.equal(unpublishedAsset.state, 'locally_published')
+  assert(unpublishedAsset.blockers.some(
+    (item) => item.code === 'publication_asset_not_published',
+  ))
+  assert.equal(
+    evaluateShip({ repoRoot: shipRoot, paperId, ownerSaid: 'ship', webReviewStatus }).ok,
+    false,
+    'an unpublished database asset cannot ship',
+  )
+  shipDb.prepare(
+    'UPDATE paper_asset_versions SET status = ? WHERE paper_id = ? AND asset_version = ?',
+  ).run('published', paperId, localPublication.assetVersion)
+
+  shipDb.prepare(
+    'UPDATE canonical_paper_publications SET publication_digest = ? WHERE paper_id = ?',
+  ).run(`sha256:${'0'.repeat(64)}`, paperId)
+  const staleCanonicalPublication = preflightPaper({
+    repoRoot: shipRoot,
+    paperId,
+    reviewStatus: webReviewStatus,
+    reviewChecked: true,
+  })
+  assert.equal(staleCanonicalPublication.state, 'locally_published')
+  assert(staleCanonicalPublication.blockers.some(
+    (item) => item.code === 'canonical_publication_not_current',
+  ))
+  shipDb.prepare(
+    'UPDATE canonical_paper_publications SET publication_digest = ? WHERE paper_id = ?',
+  ).run(localPublication.canonicalPublicationDigest, paperId)
+
   assert.equal(
     evaluateShip({ repoRoot: shipRoot, paperId, ownerSaid: 'ship', webReviewStatus }).ok,
     true,
@@ -494,6 +750,21 @@ try {
     'ship checklist rejects a stale universal review receipt',
   )
   writeFileSync(path.join(signalsDir, 'qa-accepted.json'), JSON.stringify(qaReceipt))
+  const staleLocalApproval = preflightPaper({
+    repoRoot: shipRoot,
+    paperId,
+    reviewStatus: {
+      ...awaitingReviewStatus,
+      latestRevisionId: 'rev-mock-newer',
+      latest: { id: 'rev-mock-newer', state: 'awaiting_review', bundleDigest },
+    },
+    reviewChecked: true,
+  })
+  assert.equal(staleLocalApproval.state, 'awaiting_review')
+  assert.equal(staleLocalApproval.next.action, 'wait_for_owner_review')
+  assert(staleLocalApproval.blockers.some((item) => item.code === 'stale_qa_receipt_ignored'))
+  assert.notEqual(staleLocalApproval.next.action, 'publish_local')
+
   assert.equal(
     evaluateShip({
       repoRoot: shipRoot,
@@ -509,7 +780,127 @@ try {
     'review_receipt_stale',
     'a newer Review service revision invalidates a retained local QA receipt',
   )
+
+  writeFileSync(path.join(signalsDir, 'shipped.json'), JSON.stringify({}))
+  const emptyShippedReceipt = preflightPaper({
+    repoRoot: shipRoot,
+    paperId,
+    reviewStatus: webReviewStatus,
+    reviewChecked: true,
+  })
+  assert.equal(emptyShippedReceipt.state, 'failed')
+  assert(emptyShippedReceipt.blockers.some(
+    (item) => item.code === 'shipped_receipt_invalid',
+  ))
+  writeFileSync(path.join(signalsDir, 'shipped.json'), JSON.stringify({
+    schemaVersion: 'nck1-import-shipped-v1',
+    paperId,
+    shippedAt: 'not-a-time',
+    command: 'node scripts/pull-run-push.mjs push wrong-paper --owner-said-ship',
+  }))
+  const malformedShippedReceipt = preflightPaper({
+    repoRoot: shipRoot,
+    paperId,
+    reviewStatus: webReviewStatus,
+    reviewChecked: true,
+  })
+  assert.equal(malformedShippedReceipt.state, 'failed')
+  assert(malformedShippedReceipt.blockers.some(
+    (item) => item.code === 'shipped_receipt_invalid',
+  ))
+
+  writeFileSync(path.join(signalsDir, 'qa-accepted.json'), JSON.stringify({
+    schemaVersion: 'web-import-review-qa-accepted-v1',
+  }))
+  writeFileSync(path.join(signalsDir, 'locally-published.json'), JSON.stringify({
+    schemaVersion: 'universal-nck1-local-publication-v1',
+    assetVersion: localPublication.assetVersion,
+    versionName: localPublication.versionName,
+    canonicalPublicationDigest: localPublication.canonicalPublicationDigest,
+  }))
+  writeFileSync(path.join(signalsDir, 'shipped.json'), JSON.stringify({
+    schemaVersion: 'nck1-import-shipped-v1',
+    paperId,
+    shippedAt: '2026-08-28T00:00:00.000Z',
+    command: `node scripts/pull-run-push.mjs push ${paperId} --owner-said-ship`,
+    assetVersion: localPublication.assetVersion,
+    versionName: localPublication.versionName,
+    canonicalPublicationDigest: localPublication.canonicalPublicationDigest,
+  }))
+  const missingShippedBinding = preflightPaper({
+    repoRoot: shipRoot,
+    paperId,
+    reviewStatus: webReviewStatus,
+    reviewChecked: true,
+  })
+  assert.equal(missingShippedBinding.state, 'failed')
+  assert(missingShippedBinding.blockers.some(
+    (item) => item.code === 'shipped_receipt_invalid',
+  ))
+  writeFileSync(path.join(signalsDir, 'qa-accepted.json'), JSON.stringify(qaReceipt))
+  writeFileSync(
+    path.join(signalsDir, 'locally-published.json'),
+    JSON.stringify(localPublication),
+  )
+  rmSync(path.join(signalsDir, 'shipped.json'))
+
+  const writtenShippedReceipt = writeShippedReceipt({
+    repoRoot: shipRoot,
+    paperId,
+    shippedAt: '2026-08-28T00:00:00.000Z',
+  })
+  assert.equal(writtenShippedReceipt.ok, true)
+  const shippedReceipt = JSON.parse(readFileSync(
+    path.join(signalsDir, 'shipped.json'),
+    'utf8',
+  ))
+  assert.equal(shippedReceipt.schemaVersion, 'nck1-import-shipped-v1')
+  assert.equal(shippedReceipt.paperId, paperId)
+  assert.equal(shippedReceipt.revisionId, revisionId)
+  assert.equal(
+    shippedReceipt.canonicalPublicationDigest,
+    localPublication.canonicalPublicationDigest,
+  )
+  const shipped = preflightPaper({
+    repoRoot: shipRoot,
+    paperId,
+    reviewStatus: webReviewStatus,
+    reviewChecked: true,
+  })
+  assert.equal(shipped.state, 'shipped')
+  assert.equal(shipped.next.action, 'done')
+
+  const supersededShipped = preflightPaper({
+    repoRoot: shipRoot,
+    paperId,
+    reviewStatus: {
+      ...awaitingReviewStatus,
+      latestRevisionId: 'rev-after-ship',
+      latest: { id: 'rev-after-ship', state: 'awaiting_review', bundleDigest },
+    },
+    reviewChecked: true,
+  })
+  assert.equal(supersededShipped.state, 'awaiting_review')
+  assert(supersededShipped.blockers.some(
+    (item) => item.code === 'stale_shipped_receipt_ignored',
+  ))
+  rmSync(path.join(signalsDir, 'shipped.json'))
+
+  writeFileSync(path.join(signalsDir, 'blocked.json'), JSON.stringify({
+    code: 'gate_failed',
+    note: 'fixture blocker',
+  }))
+  const failed = preflightPaper({
+    repoRoot: shipRoot,
+    paperId,
+    reviewStatus: webReviewStatus,
+    reviewChecked: true,
+  })
+  assert.equal(failed.state, 'failed')
+  assert.equal(failed.next.action, 'resolve_blocker')
+  assert.equal(failed.next.command, null)
 } finally {
+  shipDb?.close()
   rmSync(shipRoot, { recursive: true, force: true })
 }
 

@@ -1,6 +1,9 @@
 # Agent Import Contract (NCK1)
 
 任意本机 coding agent 导一卷 NCK1 的**唯一进场文档**。先读完本文件再动手。
+项目级 `importing-nck1-papers` skill 会在导题、继续某卷、审核返工、状态查询和
+认可后本地发布任务中自动触发；Owner 不需要记命令。Agent 每次先运行只读
+`review.mjs preflight <paperId>`，再从返回的唯一状态恢复。
 
 所有新 NCK1 卷默认走统一入口，不再先判断格式①/②/③：
 
@@ -37,7 +40,7 @@ node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
 
 | 信号 | 路径 | 含义 |
 | --- | --- | --- |
-| 离开 `queued` | `config.json` | 已开局 |
+| 进入 `materializing` | `config.json` | 已开局 |
 | 切卷 / 分析中 | `groups.json` + 7× `analyze-<key>-combined.txt` / `analysis-<key>.json` | key = `reading-a` `reading-b` `reading-c` `reading-d` `seven` `cloze` `grammar` |
 | 写作分析稿 | `analysis-application.json` + `analysis-continuation.json` | 新卷必交;格式③ `--publish` 硬前置 |
 | 答案复核过 | `signals/ai-answer-check.json` | AI Answer Transcription Check 已过 |
@@ -106,30 +109,56 @@ node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
 `signals/shipped.json`：
 
 ```json
-{ "shippedAt": "<ISO-8601>", "command": "node scripts/pull-run-push.mjs push <paperId> --owner-said-ship" }
+{
+  "schemaVersion": "nck1-import-shipped-v1",
+  "paperId": "<paperId>",
+  "shippedAt": "<ISO-8601>",
+  "command": "node scripts/pull-run-push.mjs push <paperId> --owner-said-ship",
+  "approvalId": "<approvalId>",
+  "revisionId": "<revisionId>",
+  "sourceDigest": "sha256:…",
+  "candidateDigest": "sha256:…",
+  "visibleStructureDigest": "sha256:…",
+  "bundleDigest": "sha256:…",
+  "assetVersion": 1,
+  "versionName": "v1",
+  "canonicalPublicationDigest": "sha256:…"
+}
 ```
 
 已知 `blocked.json` 原因码：`source_incomplete`（统一材料化缺页、缺权威答案、冲突或不闭合）、`canonical_unavailable`（旧入口 producer / compile 仍 fail-closed 时）、`gate_failed`（同一门禁自动修 2 次仍红）、`continuation_non_narrative`、`ship_failed`（整库 push 失败）。
 
 ## 状态
 
-`queued` → `importing`（含 AI 答案复核）→ `awaiting_qa` → `approved` →
+`materializing` → `awaiting_review` ↔ `changes_requested` → `approved` →
 `locally_published` → `ready_to_ship` → `shipped`，或任意步 `failed`。
 
-后台按探针判定，不看进程 exit code：
+`preflight` 合并本地文件探针与 Review API 当前 revision；不看进程 exit code，
+也不把旧的本地认可收据当成当前认可：
 
 | 状态 | 判定 |
 | --- | --- |
-| `queued` | 卷目录或源已在，尚无 `config.json` |
-| `importing` | 有 `config.json`，尚未完成答案复核或提交网页 QA，无 `blocked.json` |
-| `awaiting_qa` | 有 `signals/ai-answer-check.json`，无 QA 收据、无 `shipped.json`、无 `blocked.json` |
-| `approved` | 有精确 `signals/qa-accepted.json`，尚无本地发布收据 |
-| `locally_published` | 已有 `signals/locally-published.json`，但本地发布完整探针尚未全齐 |
-| `ready_to_ship` | `qa-accepted`、`locally-published`、同版本 `latest/` 和答案复核全部精确闭合 |
-| `shipped` | 有 `signals/shipped.json` |
-| `failed` | 有 `signals/blocked.json`（且未 shipped） |
+| `materializing` | 尚未提交可审核 revision，继续不可变源、Materialization、Candidate 与答案复核 |
+| `awaiting_review` | Review API 当前 revision 为 `awaiting_review` |
+| `changes_requested` | Review API 当前 revision 有未决问题，或 renderer 已更新需重提 revision |
+| `approved` | Review API 当前 revision 已认可；本地 QA 收据或本地发布尚未与其闭合 |
+| `locally_published` | 当前认可已有精确本地发布收据，但 `latest` / 答案复核闭合不完整，停下检查 |
+| `ready_to_ship` | 当前 web approval、`qa-accepted`、`locally-published`、同版本 `latest/`、SQLite published asset、Canonical current publication 和答案复核精确闭合 |
+| `shipped` | `signals/shipped.json` 与当前 Review approval 和本地发布身份精确闭合 |
+| `failed` | 有 `signals/blocked.json`、收据损坏，或进入审核阶段后未能核对 Review API |
 
 `help-needed.json` 不是独立状态，叠在当前态上等人。
+
+只读 preflight：
+
+```bash
+node scripts/import-pipeline/review.mjs preflight <paperId>
+```
+
+它返回 `state`、本地/Review 探针、`blockers` 和 `next.action`。它不上传 revision、
+不 accept、不 publish、不取得 shipping guard，并固定返回
+`production.pushAllowed: false`；上线授权只能来自 Owner 当前单独口令和后续 ship
+checklist。
 
 ## 硬门禁
 
