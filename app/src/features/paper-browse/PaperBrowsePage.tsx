@@ -2633,7 +2633,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           }
           aria-label={group?.title || groupId}
         >
-          {card && (
+          {!reviewRevision && card && (
             <div className="paper-browse-group-actions">
               <button
                 type="button"
@@ -2936,7 +2936,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             (program.md Q5) 渲染，写作/听力题组即便被选中也不出现这个按钮。
             E6: cloze/sevenChoices 的小题相似已下线——CTA 保留原位，文案改
             「相似篇章」，点击改调 /api/similar-passages（种子=当前题组）。 */}
-        {hasActiveQuestion && activeQuestionId && SIMILAR_SUPPORTED_GROUP_TYPES.has(group.groupType) && (
+        {!reviewRevision && hasActiveQuestion && activeQuestionId && SIMILAR_SUPPORTED_GROUP_TYPES.has(group.groupType) && (
           <div className="similar-cta">
             {/* owner 拍板 2026-07-10：按钮在最左，说明文字跟在右边 */}
             <button
@@ -3480,30 +3480,30 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         路径都不受蒙层影响。
       */}
       {lectureOpen && <div className="paper-browse-lecture-backdrop" aria-hidden="true" />}
+      <button
+        type="button"
+        ref={lectureHandleRef}
+        className={`paper-browse-lecture-handle${
+          lectureOpen ? ' paper-browse-lecture-handle--open' : ''
+        }`}
+        onClick={toggleLecturePanel}
+        aria-pressed={lectureOpen}
+        aria-expanded={lectureOpen}
+      >
+        讲评
+      </button>
       {!reviewRevision && (
         <button
           type="button"
-          ref={lectureHandleRef}
-          className={`paper-browse-lecture-handle${
-            lectureOpen ? ' paper-browse-lecture-handle--open' : ''
-          }`}
-          onClick={toggleLecturePanel}
-          aria-pressed={lectureOpen}
-          aria-expanded={lectureOpen}
+          className="basket-chip"
+          onClick={() => onOpenDraftPaperWorkbench(currentDraftPaperId)}
+          aria-label={`打开草稿卷，已选 ${currentDraftGroupCount} 个题组`}
+          disabled={!currentDraftPaperId || currentDraftGroupCount === 0}
         >
-          讲评
+          <ClipboardList size={15} />
+          <span>草稿卷 · {currentDraftGroupCount} 题组</span>
         </button>
       )}
-      <button
-        type="button"
-        className="basket-chip"
-        onClick={() => onOpenDraftPaperWorkbench(currentDraftPaperId)}
-        aria-label={`打开草稿卷，已选 ${currentDraftGroupCount} 个题组`}
-        disabled={!currentDraftPaperId || currentDraftGroupCount === 0}
-      >
-        <ClipboardList size={15} />
-        <span>草稿卷 · {currentDraftGroupCount} 题组</span>
-      </button>
     </div>
   )
 }

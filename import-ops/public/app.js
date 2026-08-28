@@ -458,7 +458,8 @@ function bindFrame() {
       frameDocument.addEventListener('click', (event) => {
         const target = screenTarget(event)
         if (!target) return
-        event.preventDefault()
+        // Observe semantic QA targets without cancelling PaperBrowse's real
+        // lecture controls inside the Screen iframe.
         applyScreenTarget(target)
       }, true)
     } catch {

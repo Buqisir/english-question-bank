@@ -197,6 +197,7 @@ summary:focus-visible {
 
 .workspace {
   display: grid;
+  min-width: 0;
   min-height: 0;
   grid-template-columns: 280px minmax(520px, 1fr) 360px;
 }
@@ -395,6 +396,7 @@ summary:focus-visible {
 
 .surface-stage {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   grid-template-rows: 48px minmax(0, 1fr);
   background: var(--surface-2);
 }
@@ -410,6 +412,7 @@ summary:focus-visible {
 }
 
 .surface-tabs {
+  min-width: 0;
   overflow-x: auto;
 }
 
@@ -711,9 +714,13 @@ summary:focus-visible {
   border: 0;
 }
 
-@media (max-width: 1180px) {
+/* Keep the real Screen in its desktop composition. The QA rail moves below
+ * until all three columns can coexist without pushing the iframe under the
+ * PaperBrowse 1200px desktop seam; at 1440px the inbox yields to 208px and
+ * leaves a 1208px iframe instead of the former 776px slot. */
+@media (max-width: 1880px) {
   .workspace {
-    grid-template-columns: 240px minmax(480px, 1fr);
+    grid-template-columns: 208px minmax(0, 1fr);
     grid-template-rows: minmax(620px, 72vh) auto;
   }
 

@@ -1080,10 +1080,25 @@ const lectureAnalysisCssSrc = read('app/src/features/paper-intelligence/lectureA
 const paperIntelligenceCssSrc = read('app/src/features/paper-intelligence/paperIntelligence.css')
 
 assert(
-  'PaperBrowsePage renders a 讲评 handle button unconditionally (always visible)',
+  'PaperBrowsePage renders a 讲评 handle button unconditionally, including Review Screen',
   /<button[\s\S]{0,200}paper-browse-lecture-handle[\s\S]{0,200}讲评/.test(pageSrc) &&
-    !/\{lectureOpen\s*&&\s*\(?\s*<button[\s\S]{0,120}paper-browse-lecture-handle/.test(pageSrc),
-  'handle button missing, or gated behind lectureOpen (should always render)',
+    !/\{lectureOpen\s*&&\s*\(?\s*<button[\s\S]{0,120}paper-browse-lecture-handle/.test(pageSrc) &&
+    !/\{!reviewRevision\s*&&\s*\(?\s*<button[\s\S]{0,160}paper-browse-lecture-handle/.test(pageSrc),
+  'handle button missing, or gated behind lectureOpen/reviewRevision (should always render)',
+)
+assert(
+  'Review Screen hides draft and similarity consumer actions while retaining the real renderer',
+  /\{!reviewRevision && card && \(\s*<div className="paper-browse-group-actions">/.test(pageSrc) &&
+    /\{!reviewRevision && hasActiveQuestion[\s\S]{0,180}<div className="similar-cta">/.test(pageSrc) &&
+    /\{!reviewRevision && \(\s*<button[\s\S]{0,120}className="basket-chip"/.test(pageSrc),
+  'one or more consumer-only actions are still visible in Review Screen',
+)
+assert(
+  'Canonical PaperBrowse QA harness can exercise immutable Review Screen mode',
+  /reviewRevision=\{search\.get\('reviewRevision'\) \?\? undefined\}/.test(
+    read('app/src/qa/mountCanonicalPaperBrowse.tsx'),
+  ),
+  'QA harness does not pass reviewRevision through to PaperBrowsePage',
 )
 assert(
   'PaperBrowsePage toggles lectureOpen via setLectureOpen((open) => !open) on the handle click',
