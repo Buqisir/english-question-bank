@@ -17,6 +17,29 @@ import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 const REVIEW_NAME = 'nck1-docx-materialization-review-v1.json'
 const RECEIPT_NAME = 'nck1-docx-materialization-producer-receipt-v1.json'
+const WRITER_LOCK_NAME = '.universal-nck1-writer.lock'
+
+export function paperWriterLockPath(paperDir) {
+  return path.join(paperDir, WRITER_LOCK_NAME)
+}
+
+export function withPaperWriterLock({ paperDir, paperId }, operation) {
+  mkdirSync(paperDir, { recursive: true })
+  const writerLock = paperWriterLockPath(paperDir)
+  try {
+    mkdirSync(writerLock)
+  } catch (error) {
+    if (error.code === 'EEXIST') {
+      throw new Error(`Universal NCK1 import already has a writer: ${paperId || paperDir}`)
+    }
+    throw error
+  }
+  try {
+    return operation()
+  } finally {
+    rmSync(writerLock, { recursive: true, force: true })
+  }
+}
 
 function atomicJson(filePath, value) {
   mkdirSync(path.dirname(filePath), { recursive: true })
@@ -37,7 +60,7 @@ function loadDocuments(paperDir, manifest) {
   })
 }
 
-function runNck1DocxMaterializationJobUnlocked({ paperDir, manifest }) {
+export function runNck1DocxMaterializationJobUnlocked({ paperDir, manifest }) {
   if (manifest?.schemaVersion !== 'universal-nck1-source-manifest-v1') {
     throw new Error('NCK1 DOCX materialization requires a universal Source Manifest')
   }
@@ -101,18 +124,6 @@ function runNck1DocxMaterializationJobUnlocked({ paperDir, manifest }) {
 }
 
 export function runNck1DocxMaterializationJob({ paperDir, manifest }) {
-  const writerLock = path.join(paperDir, '.nck1-docx-materialize.lock')
-  try {
-    mkdirSync(writerLock)
-  } catch (error) {
-    if (error.code === 'EEXIST') {
-      throw new Error(`NCK1 DOCX materialization already has a writer: ${manifest?.paperId || paperDir}`)
-    }
-    throw error
-  }
-  try {
-    return runNck1DocxMaterializationJobUnlocked({ paperDir, manifest })
-  } finally {
-    rmSync(writerLock, { recursive: true, force: true })
-  }
+  return withPaperWriterLock({ paperDir, paperId: manifest?.paperId }, () =>
+    runNck1DocxMaterializationJobUnlocked({ paperDir, manifest }))
 }

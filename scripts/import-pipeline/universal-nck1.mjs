@@ -20,7 +20,8 @@ import {
   sha256,
 } from '../../shared/paper-canonical/stable.mjs'
 import {
-  runNck1DocxMaterializationJob,
+  runNck1DocxMaterializationJobUnlocked,
+  withPaperWriterLock,
 } from './nck1-docx-materialize.mjs'
 import {
   runImportEnvironmentPreflight,
@@ -34,6 +35,37 @@ const docxMediaType =
 
 function fail(message) {
   throw new Error(message)
+}
+
+function validPaperId(paperId) {
+  return /^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(paperId || '')
+}
+
+function paperDirFor(paperId) {
+  if (!validPaperId(paperId)) fail('command requires a valid paperId')
+  return path.join(papersRoot, paperId)
+}
+
+function writeBlockedSignal(paperId, error) {
+  const signalsDir = path.join(papersRoot, paperId, 'signals')
+  mkdirSync(signalsDir, { recursive: true })
+  writeFileSync(path.join(signalsDir, 'blocked.json'), `${JSON.stringify({
+    code: 'source_incomplete',
+    at: new Date().toISOString(),
+    note: String(error.message).slice(0, 240),
+  }, null, 2)}\n`)
+}
+
+function runPaperCommand(paperId, operation, { blockOnFailure = false } = {}) {
+  const paperDir = paperDirFor(paperId)
+  return withPaperWriterLock({ paperDir, paperId }, () => {
+    try {
+      return operation()
+    } catch (error) {
+      if (blockOnFailure) writeBlockedSignal(paperId, error)
+      throw error
+    }
+  })
 }
 
 function values(name) {
@@ -117,7 +149,7 @@ function initialize() {
   const paperName = value('--paper-name')
   const provenance = value('--provenance')
   const sources = values('--source').map(parseSource)
-  if (!/^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(paperId || '')) {
+  if (!validPaperId(paperId)) {
     fail('init requires a valid paperId')
   }
   if (!paperName || !provenance || sources.length === 0) {
@@ -282,7 +314,7 @@ function preflight(paperId) {
 function materialize(paperId) {
   const { paperDir, manifest } = paperContext(paperId)
   runImportEnvironmentPreflight({ paperDir })
-  const result = runNck1DocxMaterializationJob({ paperDir, manifest })
+  const result = runNck1DocxMaterializationJobUnlocked({ paperDir, manifest })
   console.log(JSON.stringify({
     ok: true,
     paperId,
@@ -368,24 +400,21 @@ function cropPdf() {
 const command = process.argv[2]
 let paperId = process.argv[3]
 try {
-  if (command === 'preflight') preflight(paperId)
-  else if (command === 'init') initialize()
-  else if (command === 'materialize') materialize(paperId)
-  else if (command === 'verify') verify(paperId)
-  else if (command === 'build') build(paperId)
-  else if (command === 'extract-docx-media') extractDocxMedia()
+  if (command === 'preflight') {
+    if (paperId) runPaperCommand(paperId, () => preflight(paperId))
+    else preflight(null)
+  } else if (command === 'init') {
+    runPaperCommand(paperId, initialize)
+  } else if (command === 'materialize') {
+    runPaperCommand(paperId, () => materialize(paperId), { blockOnFailure: true })
+  } else if (command === 'verify') {
+    runPaperCommand(paperId, () => verify(paperId), { blockOnFailure: true })
+  } else if (command === 'build') {
+    runPaperCommand(paperId, () => build(paperId), { blockOnFailure: true })
+  } else if (command === 'extract-docx-media') extractDocxMedia()
   else if (command === 'crop-pdf') cropPdf()
   else fail('Usage: universal-nck1.mjs preflight|init|materialize|verify|build|extract-docx-media|crop-pdf ...')
 } catch (error) {
-  if (['materialize', 'verify', 'build'].includes(command) && paperId) {
-    const signalsDir = path.join(papersRoot, paperId, 'signals')
-    mkdirSync(signalsDir, { recursive: true })
-    writeFileSync(path.join(signalsDir, 'blocked.json'), `${JSON.stringify({
-      code: 'source_incomplete',
-      at: new Date().toISOString(),
-      note: String(error.message).slice(0, 240),
-    }, null, 2)}\n`)
-  }
   console.error(error.message)
   process.exitCode = 1
 }

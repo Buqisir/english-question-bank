@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict'
+import { spawn } from 'node:child_process'
+import { once } from 'node:events'
 import {
+  existsSync,
   mkdirSync,
   mkdtempSync,
   readFileSync,
@@ -16,7 +19,9 @@ import {
   produceNck1DocxMaterialization,
 } from '../server/paper-import/nck1DocxMaterializationProducer.mjs'
 import {
+  paperWriterLockPath,
   runNck1DocxMaterializationJob,
+  withPaperWriterLock,
 } from './import-pipeline/nck1-docx-materialize.mjs'
 import {
   makeSyntheticNck1DocxFixture,
@@ -150,8 +155,25 @@ try {
     mkdirSync(path.dirname(outputPath), { recursive: true })
     writeFileSync(outputPath, document.bytes)
   }
-  const writerLock = path.join(tempRoot, '.nck1-docx-materialize.lock')
-  mkdirSync(writerLock)
+  const writerLock = paperWriterLockPath(tempRoot)
+  const readyPath = path.join(tempRoot, 'concurrent-writer-ready')
+  const lockModuleUrl = new URL('./import-pipeline/nck1-docx-materialize.mjs', import.meta.url).href
+  const concurrentWriter = spawn(process.execPath, ['--input-type=module', '--eval', `
+    import { writeFileSync } from 'node:fs'
+    import { withPaperWriterLock } from ${JSON.stringify(lockModuleUrl)}
+    withPaperWriterLock(
+      { paperDir: ${JSON.stringify(tempRoot)}, paperId: ${JSON.stringify(fixture.paperId)} },
+      () => {
+        writeFileSync(${JSON.stringify(readyPath)}, 'ready')
+        Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 750)
+      },
+    )
+  `], { stdio: ['ignore', 'pipe', 'pipe'] })
+  const concurrentWriterExit = once(concurrentWriter, 'exit')
+  for (let attempt = 0; attempt < 300 && !existsSync(readyPath); attempt += 1) {
+    Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 10)
+  }
+  assert.equal(existsSync(readyPath), true, 'a real concurrent writer must acquire the paper lock')
   assert.throws(
     () => runNck1DocxMaterializationJob({
       paperDir: tempRoot,
@@ -160,7 +182,18 @@ try {
     /already has a writer/u,
     'the same paperId cannot have concurrent materialization writers',
   )
-  rmSync(writerLock, { recursive: true, force: true })
+  const [concurrentWriterCode] = await concurrentWriterExit
+  assert.equal(concurrentWriterCode, 0)
+  assert.equal(existsSync(writerLock), false, 'a successful writer releases the paper lock')
+
+  assert.throws(
+    () => withPaperWriterLock(
+      { paperDir: tempRoot, paperId: fixture.paperId },
+      () => { throw new Error('synthetic writer failure') },
+    ),
+    /synthetic writer failure/u,
+  )
+  assert.equal(existsSync(writerLock), false, 'a failed writer releases the paper lock')
   const first = runNck1DocxMaterializationJob({
     paperDir: tempRoot,
     manifest: fixture.manifest,

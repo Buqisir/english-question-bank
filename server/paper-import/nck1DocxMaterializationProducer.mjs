@@ -881,7 +881,7 @@ export function produceNck1DocxMaterialization({ paperId, documents }) {
       ],
       singleWriter: {
         paperId,
-        policy: 'one_materialization_writer_per_paper',
+        policy: 'one_import_writer_per_paper',
         parallelReadAllowed: ['writing.application', 'writing.continuation'],
       },
     },
