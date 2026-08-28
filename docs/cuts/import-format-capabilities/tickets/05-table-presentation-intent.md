@@ -1,7 +1,7 @@
 # 05 — 普通表格的最小视觉意图
 
 - Status: planned
-- Blocked by: `02-docx-semantic-table-closure.md`, `01-source-region-review-pairing.md`, Owner确认表格视觉权威边界
+- Blocked by: `02-docx-semantic-table-closure.md`, `01-source-region-review-pairing.md`
 - Next on PASS: None
 
 - Spec: `docs/cuts/import-format-capabilities/spec.md`
@@ -10,7 +10,8 @@
 ## Outcome
 
 在普通语义表不变的前提下，保留影响理解的边框存在性、相对列宽和cell对齐，并通过
-shared projection进入Screen/Print/PDF。不实现完整Word表格样式或整页像素复制。
+shared projection进入Screen/Print/PDF。按已接受 Owner 决定，字体、线型粗细等统一为
+EQB考试样式，不实现完整Word表格样式或整页像素复制。
 
 ## Input and fixture
 
@@ -35,8 +36,8 @@ Canonical只保存该枚举。shared adapter投影一次；Screen/Print把同一
 未知/冲突线型、宽度缺失导致比例不可信、merged cell对齐冲突返回
 `NCK1_DOCX_TABLE_PRESENTATION_UNSUPPORTED`或
 `NCK1_DOCX_TABLE_PRESENTATION_AMBIGUOUS`并带table selector。不得默默
-改成100% grid后声称“忠实”。若Owner选择EQB统一样式，则同样需记录teacher-confirmed
-normalization，而不是丢掉源差异。
+改成100% grid后声称“忠实”。被 Owner 明确允许归一化的字体/线型细节仍记录 source
+observation，不伪装成源中没有差异。
 
 ## Acceptance criteria
 

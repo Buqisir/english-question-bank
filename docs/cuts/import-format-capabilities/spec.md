@@ -40,6 +40,28 @@ Import Review revision，但各能力的覆盖不均：简单 DOCX 文本很成�
 本阶段只调查和写计划，不修改 schema、producer、Canonical、renderer、Review DB、
 应用代码、生产资产或试卷数据。
 
+## Source space: three independent axes
+
+以后不要把“PDF 详解版”“图片无答案版”各自命名为新格式。一个 source set 只需登记
+三个彼此独立的事实：
+
+1. **题卷载体**：DOCX、文本层 PDF、扫描 PDF、显式排序的 PNG/JPEG/WebP 页、或这些
+   载体的混合；听力音频是补充 artifact，不冒充分页题卷。
+2. **答案形态**：`detailed`（答案 + 源详解/范文）、`key_only`（只有权威答案键）、
+   `not_supplied`（尚未找到权威答案）。“答案键”必须覆盖该卷所有实际作答值，不是只
+   收选择题 ABCD 而漏掉语法填空等答案。
+3. **包装关系**：题卷/答案分开、同一文件内合并、或多页 image bundle。包装只决定
+   source role 与 locator，不改变 Canonical 题意。
+
+这三个轴组合，而不产生新的 parser 身份。例如 question PDF + detailed answer PDF 与
+question PDF + key-only answer PDF 共用 PDF carrier adapter；区别只在 answer-shape closure。
+ordered image bundle 与扫描 PDF 共用 OCR page-observation seam。
+
+无权威答案的 source 可进入不可变的 **source-only / awaiting answers** 暂存状态，避免
+辛苦找到的图片卷丢失；但不得生成 ready Materialization、Canonical Candidate、Review
+approval 或 publication，也不得由 AI 解题补答案。以后找到答案时建立新的完整 source-set
+revision，绑定原 question digest，不能原地改写旧 capture。
+
 ## Architecture boundary
 
 ```text
@@ -197,18 +219,18 @@ PDF 与 OCR 的每个后续 fixture 提供共同验收证据。
 - 听力播放 UI；本 roadmap 只讨论 inactive source closure 与原始音频证据。
 - 以整页 screenshot 替代 Canonical 正文。
 
-## True product decisions for Owner
+## Accepted Owner decisions
 
-以下决定会改变学生可见内容或 Canonical/presentation 边界，不能由实现者猜：
+Owner 于 2026-08-28 接受以下默认规则：
 
-1. **条码/二维码默认归类**：学生输出应保留，还是默认当 source furniture 仅供 QA？
-   在决定前逐个 fail closed，由教师确认 `content_media` 或 `furniture`。
-2. **普通表格的视觉权威**：除合并、边框存在性、对齐和相对列宽外，是统一成 EQB
-   考试表样式，还是要求逐项保留源边框线型/粗细与精确宽度？推荐 tickets 不做任意
-   Word 表格样式引擎，需 Owner 确认最小忠实边界。
-3. **媒体 caption 的含义**：源图题注是学生可见 Canonical content，还是只用于 QA/
-   可访问性 metadata？当前 Canonical 有 caption，但 Screen/Print figure 都不呈现，
-   因而必须先分清产品语义再修 renderer。
+1. **条码/二维码**：正文中且与题目有关的保留给学生；页眉页脚中的管理条码归为
+   source furniture，不进入学生输出；位置/用途不明确时 fail closed，交教师确认。
+2. **普通表格**：保留合并、边框存在性、对齐和相对列宽等影响理解/作答的关系；字体、
+   线型粗细等表层细节统一为 EQB 考试样式，不做逐像素 Word 表格复刻。
+3. **媒体 caption**：原卷中学生可见、帮助理解的题注是 Canonical content，三面都显示；
+   文件名、来源页码和操作说明仅是 QA/accessibility metadata，不给学生看。
+
+这些规则是通用 shape policy，不得通过 `paperId` 覆盖。
 
 “第一版是否做 overlay/自动 diff”不是阻塞产品问题：本 spec 先做并排 locator，diff
 延后；若后续实测表明并排不足，再以误报率和教师任务为依据开票。

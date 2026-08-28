@@ -1,7 +1,7 @@
 # 04 — Universal media capture 与最小布局意图
 
 - Status: planned
-- Blocked by: `01-source-region-review-pairing.md`; caption输出还需 Owner 决定其产品语义
+- Blocked by: `01-source-region-review-pairing.md`
 - Next on PASS: `05-table-presentation-intent.md`
 
 - Spec: `docs/cuts/import-format-capabilities/spec.md`
@@ -19,7 +19,7 @@ PDF 从同一投影渲染。能结构化的普通表不允许走整图 fallback�
 - PDF：同图的 normalized crop。
 - 三个 layout cases：block width 40% left、block width 60% center、table-cell inline。
 - 负例：跨栏绝对定位、shape association不唯一、用图片伪装可矩形化2×2表。
-- caption fixture 等 Owner 选择“学生可见content”或“QA/accessibility metadata”后加入。
+- caption fixture 同时含一个源卷学生可见题注和一个文件名式 QA metadata；只显示前者。
 
 ## Public seam
 
@@ -33,6 +33,8 @@ PDF 从同一投影渲染。能结构化的普通表不允许走整图 fallback�
 - shared surface adapter投影一次；Screen和Print只做单位翻译。
 - Review issue identity扩到已有 Canonical target vocabulary中的`contentNodeId`/`mediaId`，
   并与source visual region一起回放；不从图片内容猜target。
+- 原卷学生可见 caption作为 Canonical content随三面显示；来源页码、文件名与操作说明只在
+  Review metadata显示。二者不得依赖文字内容启发式互换。
 
 ## Fail closed
 
@@ -47,7 +49,7 @@ PDF 从同一投影渲染。能结构化的普通表不允许走整图 fallback�
 - [ ] table-cell icon保持inline；block figure不被renderer统一放大到100%。
 - [ ] 可矩形化表的media fallback被拒绝；复杂图形crop仍允许。
 - [ ] `/ops/`可从真实figure/inline media回source crop并将问题绑定media/content node。
-- [ ] caption按Owner决定三面一致；若尚未决定，本票不得顺手显示或删除caption。
+- [ ] 源卷学生可见 caption三面一致；QA metadata不泄漏到学生输出。
 
 ## Non-goals
 
