@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PROTOTYPE · 备课小导师门厅</title>
+  <!--
+    Throwaway. Ticket 05. Three variants of the prep tutor hall on a mocked
+    整卷浏览 page. Switch with ?variant=A|B|C or the bottom bar.
+
+    Questions this answers:
+    Q1 门厅开在哪 — A 讲评栏页签 / B 自己一列 / C 贴在题组下
+    Q2 打开时 — 用顶栏「题已在场 / 空白」对照
+    Q3 点引用 — 对话里的「第 23 空」点回卷面并点亮
+
+    Not app/. No production API.
+  -->
+  <style>
+    :root {
+      --text: #1e1e1c;
+      --muted: #6a6a64;
+      --line: #d8d8d2;
+      --paper: #fff;
+      --bg: #f3f2ee;
+      --accent: #2c6e56;
+      --accent-soft: #eaf1ed;
+      --focus: #c45c26;
+      --font: "PingFang SC", "Source Han Sans SC", "Noto Sans SC", system-ui, sans-serif;
+      --serif: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body { font-family: var(--font); color: var(--text); background: var(--bg); }
+    button, textarea { font-family: inherit; }
+    .banner {
+      background: #1e1e1c;
+      color: #f3f2ee;
+      font-size: 12px;
+      padding: 8px 16px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .qs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 10px 16px 0;
+    }
+    .q {
+      font-size: 12px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 6px 8px;
+      color: var(--muted);
+    }
+    .q b { color: var(--text); }
+    .page-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 12px 16px 0;
+    }
+    .page-head h1 { font-size: 15px; margin: 0; font-weight: 650; }
+    .page-head span { font-size: 12px; color: var(--muted); }
+    .shell { padding: 16px 16px 110px; }
+    .grid { display: grid; gap: 20px; align-items: start; }
+    .grid-a, .grid-c { grid-template-columns: 88px minmax(420px, 720px) 380px; justify-content: center; }
+    .grid-b { grid-template-columns: 72px minmax(360px, 560px) 300px 340px; justify-content: center; }
+    .rail, .lecture, .tutor, .sheet {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .rail {
+      position: sticky; top: 12px;
+      padding: 10px 6px;
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .rail b { color: var(--text); font-size: 12px; }
+    .rail .item { padding: 7px 6px; border-radius: 4px; }
+    .rail .item.on { background: var(--accent-soft); color: var(--accent); font-weight: 650; }
+    .sheet { padding: 28px 36px 22px; }
+    .sheet h2 { font-size: 13px; margin: 0 0 14px; color: var(--muted); letter-spacing: 0.04em; }
+    .passage { font-family: var(--serif); font-size: 17px; line-height: 1.75; margin: 0 0 18px; }
+    .blank {
+      display: inline-block;
+      min-width: 2.4em;
+      border-bottom: 1px solid var(--text);
+      text-align: center;
+      padding: 0 4px;
+      cursor: pointer;
+    }
+    .blank.on { background: #f8e6d8; border-bottom-color: var(--focus); color: var(--focus); font-weight: 650; }
+    .blank.flash { animation: flash 0.7s ease; }
+    @keyframes flash { 0%, 100% { box-shadow: none; } 40% { box-shadow: 0 0 0 4px #f3c4a4; } }
+    .meta { font-size: 12px; color: var(--muted); }
+    .lecture, .tutor {
+      position: sticky; top: 12px;
+      height: calc(100vh - 150px);
+      display: flex; flex-direction: column; overflow: hidden;
+    }
+    .head {
+      padding: 12px 14px 10px;
+      border-bottom: 1px solid var(--line);
+      font-size: 13px; font-weight: 650;
+      display: flex; justify-content: space-between; align-items: center; gap: 8px;
+    }
+    .tabs { display: flex; gap: 4px; }
+    .tabs button {
+      border: 0; background: transparent; padding: 4px 8px; border-radius: 4px;
+      color: var(--muted); cursor: pointer;
+    }
+    .tabs button.on { background: var(--accent-soft); color: var(--accent); font-weight: 650; }
+    .body { flex: 1; overflow: auto; padding: 12px 14px 16px; }
+    .analysis h3 { font-size: 13px; margin: 0 0 6px; }
+    .analysis p { font-size: 13px; line-height: 1.55; margin: 0 0 10px; }
+    .ans { color: var(--accent); font-weight: 650; }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+    .chip {
+      font-size: 11px; border: 1px solid var(--line); border-radius: 999px;
+      padding: 3px 8px; background: #fafaf7; color: var(--muted);
+    }
+    .chip.live { border-color: #a5cdbd; background: var(--accent-soft); color: var(--accent); }
+    .msgs { display: flex; flex-direction: column; gap: 10px; }
+    .msg { font-size: 13px; line-height: 1.55; }
+    .msg .who { font-size: 11px; color: var(--muted); margin-bottom: 2px; }
+    .msg.bot { background: #fafaf7; border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; }
+    .cite {
+      display: inline-flex; border: 1px solid #a5cdbd; background: var(--accent-soft);
+      color: var(--accent); border-radius: 4px; font-size: 11px; padding: 1px 6px;
+      margin: 0 2px; cursor: pointer;
+    }
+    .cards { display: flex; flex-direction: column; gap: 8px; margin: 8px 0; }
+    .card {
+      display: flex; gap: 8px; align-items: flex-start;
+      border: 1px solid #e8e8e4; border-radius: 8px; padding: 8px 10px; cursor: pointer;
+    }
+    .card:hover { border-color: #a5cdbd; }
+    .card.on { border-color: var(--accent); background: var(--accent-soft); }
+    .card input { margin-top: 3px; accent-color: var(--accent); }
+    .card .t { font-size: 13px; font-weight: 650; }
+    .card .s { font-size: 11px; color: var(--muted); margin: 2px 0 4px; }
+    .card .why { font-size: 11px; color: var(--accent); }
+    .composer { border-top: 1px solid var(--line); padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 8px; }
+    .composer textarea {
+      width: 100%; min-height: 56px; resize: none; border: 1px solid var(--line);
+      border-radius: 6px; padding: 8px; font-size: 13px;
+    }
+    .row { display: flex; gap: 8px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+    .ghost, .primary {
+      border-radius: 6px; font-size: 12px; padding: 6px 10px; cursor: pointer;
+    }
+    .ghost { background: transparent; border: 1px solid var(--line); }
+    .primary { background: var(--accent); border: 0; color: #fff; }
+    .primary:disabled { opacity: 0.45; cursor: not-allowed; }
+    .hint { font-size: 11px; color: var(--muted); }
+    .dock { margin-top: 12px; border: 1px dashed #c8c8c0; border-radius: 8px; background: #fafaf7; overflow: hidden; }
+    .state {
+      font-family: ui-monospace, Menlo, monospace; font-size: 11px; color: var(--muted);
+      white-space: pre-wrap; background: #fff; border: 1px dashed #c8c8c0;
+      border-radius: 6px; padding: 8px 10px; margin-top: 14px;
+    }
+    .switcher {
+      position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center;
+      background: #1e1e1c; color: #f3f2ee; border-radius: 999px;
+      padding: 8px 12px; box-shadow: 0 8px 24px rgba(30, 30, 28, 0.25);
+      z-index: 50; font-size: 12px; max-width: calc(100vw - 24px);
+    }
+    .switcher button {
+      background: #3a3a36; color: #fff; border: 0; cursor: pointer;
+    }
+    .switcher .nav { width: 28px; height: 28px; border-radius: 50%; }
+    .switcher .tog { border-radius: 999px; padding: 4px 8px; font-size: 11px; }
+    .switcher .tog.on { background: var(--accent); }
+    @media (max-width: 1100px) {
+      .grid-a, .grid-b, .grid-c { grid-template-columns: 1fr; }
+      .lecture, .tutor { position: static; height: auto; max-height: 70vh; }
+    }
+  </style>
+</head>
+<body>
+  <div class="banner">
+    <span><strong>PROTOTYPE · 可丢</strong>　票 05 · 假数据 · 不进 app/</span>
+    <span>底部栏换摆法 · 顶栏三个问题就是要你看的</span>
+  </div>
+  <div class="qs">
+    <div class="q"><b>Q1 开在哪</b>　用底部 A / B / C 看三种结构</div>
+    <div class="q"><b>Q2 打开时</b>　用底部「题已在场 / 空白」对照</div>
+    <div class="q"><b>Q3 点引用</b>　先发一句或点演示，再点「第 23 空」</div>
+  </div>
+  <div class="page-head">
+    <h1>整卷浏览 · 2026 广东一模</h1>
+    <span>讲评开 · mock</span>
+  </div>
+  <div id="app"></div>
+  <div class="switcher" role="navigation" aria-label="原型变体">
+    <button type="button" class="nav" id="prev" aria-label="上一变体">←</button>
+    <span id="label">A — 讲评栏里</span>
+    <button type="button" class="nav" id="next" aria-label="下一变体">→</button>
+    <button type="button" class="tog on" id="present" data-first="present">题已在场</button>
+    <button type="button" class="tog" id="empty" data-first="empty">空白</button>
+  </div>
+  <script>
+    const VARIANTS = [
+      { id: "A", name: "讲评栏里", blurb: "小导师是讲评栏的页签。卷面宽度不变。" },
+      { id: "B", name: "导师独占栏", blurb: "解析仍占讲评栏，对话再占一列。卷面会被挤窄。" },
+      { id: "C", name: "卷面追问条", blurb: "对话贴在当前题组底下。右栏只留讲评。" },
+    ];
+    const SIMILAR = [
+      { id: "g-2024-i-gf", title: "新课标Ⅰ 2024 · 语法填空 第 23 空", source: "make a difference", why: "同考点 · 有提示词性转换" },
+      { id: "g-2025-zj-gf", title: "浙江 2025 年 1 月 · 语法填空 第 24 空", source: "make sense of", why: "同 make + n. 搭配，考点不同" },
+      { id: "g-2023-i-gf", title: "新课标Ⅰ 2023 · 语法填空 第 22 空", source: "difference 作主语", why: "同词，句法角色不同" },
+    ];
+    const GREETING = { role: "bot", html: "当前题组已在场。问这道怎么讲、这个空为什么填。要类似练习时我会先给出卡片，勾选后才读那些题。" };
+
+    const state = {
+      variant: "A",
+      first: "present",
+      tab: "tutor",
+      focusedBlank: "23",
+      flash: false,
+      draft: "",
+      selected: [],
+      phase: "idle",
+      messages: [GREETING],
+    };
+
+    function paramVariant() {
+      const v = new URLSearchParams(location.search).get("variant");
+      return VARIANTS.some((x) => x.id === v) ? v : "A";
+    }
+
+    function setVariant(id) {
+      const next = VARIANTS.some((x) => x.id === id) ? id : "A";
+      state.variant = next;
+      const url = new URL(location.href);
+      url.searchParams.set("variant", next);
+      history.replaceState(null, "", url);
+      render();
+    }
+
+    function setFirst(mode) {
+      state.first = mode;
+      state.selected = [];
+      state.phase = "idle";
+      state.draft = "";
+      state.messages = mode === "present" ? [GREETING] : [];
+      render();
+    }
+
+    function contextChips() {
+      if (state.first === "empty" && state.phase === "idle") return "";
+      const chips = [
+        { text: "当前 · 语法填空 21–30" },
+        { text: "第 " + state.focusedBlank + " 空" },
+        { text: "Analysis 已读" },
+      ];
+      if (state.selected.length) chips.push({ text: "已纳入 " + state.selected.length + " 道相似" });
+      return `<div class="chips">${chips.map((c) => `<span class="chip live">${c.text}</span>`).join("")}</div>`;
+    }
+
+    function analysisHtml() {
+      return `<div class="analysis">
+        <h3>第 23 空 · difference</h3>
+        <p>答案 <span class="ans">difference</span>。make a difference 是固定搭配：提示词 differ 要变成名词。</p>
+        <p>前面 a 已经限定这里是可数名词单数，不能填 different / differently。</p>
+      </div>`;
+    }
+
+    function passageHtml() {
+      const flash = state.flash ? " flash" : "";
+      return `<article class="sheet" id="group-gf">
+        <h2>第二节  语法填空（共 10 小题；每小题 1.5 分，满分 15 分）</h2>
+        <p class="passage">
+          A good teacher does not simply pass on facts. She notices when a student is stuck,
+          and a timely question can make a
+          <span class="blank${state.focusedBlank === "23" ? " on" : ""}${flash}" data-blank="23" tabindex="0">23</span>
+          (differ) to whether that student keeps going.
+        </p>
+        <p class="meta">模拟卷面 · 点空会把「当前空」写进导师上下文</p>
+      </article>`;
+    }
+
+    function renderMsg(m) {
+      if (m.role === "cards") {
+        const cards = SIMILAR.map((s) => {
+          const on = state.selected.includes(s.id);
+          return `<label class="card${on ? " on" : ""}">
+            <input type="checkbox" data-similar="${s.id}" ${on ? "checked" : ""} />
+            <span>
+              <div class="t">${s.title}</div>
+              <div class="s">${s.source}</div>
+              <div class="why">${s.why}</div>
+            </span>
+          </label>`;
+        }).join("");
+        return `<div class="msg bot">
+          <div>配到 3 道同题型。第二道考点不同，先别当相似。勾选后点纳入对话。</div>
+          <div class="cards">${cards}</div>
+          <button class="primary" data-pin ${state.selected.length ? "" : "disabled"}>纳入对话</button>
+        </div>`;
+      }
+      if (m.role === "user") return `<div class="msg"><div class="who">你</div>${esc(m.text)}</div>`;
+      return `<div class="msg bot">${m.html}</div>`;
+    }
+
+    function messagesHtml() {
+      if (!state.messages.length) {
+        return `<p class="hint">空白打开：题还没进对话。开口或点演示后才会读当前题。</p>`;
+      }
+      return `<div class="msgs">${state.messages.map(renderMsg).join("")}</div>`;
+    }
+
+    function composerHtml() {
+      return `<div class="composer">
+        <textarea id="draft" placeholder="对着第 ${state.focusedBlank} 空问…">${esc(state.draft)}</textarea>
+        <div class="row">
+          <button class="ghost" type="button" data-demo>演示：要类似练习</button>
+          <button class="ghost" type="button" data-cite-demo>演示：点引用</button>
+          <button class="primary" type="button" data-send>发送</button>
+        </div>
+        <div class="hint">v1 整段返回 · 关页即丢 · 没有「存成讲评」</div>
+      </div>`;
+    }
+
+    function tutorChrome(title) {
+      return `<aside class="tutor">
+        <div class="head">${title}</div>
+        <div class="body">${contextChips()}${messagesHtml()}</div>
+        ${composerHtml()}
+      </aside>`;
+    }
+
+    function lecturePanel(withTabs) {
+      const tabs = withTabs ? `<div class="tabs">
+        <button type="button" data-tab="lecture" class="${state.tab === "lecture" ? "on" : ""}">讲评</button>
+        <button type="button" data-tab="tutor" class="${state.tab === "tutor" ? "on" : ""}">小导师</button>
+      </div>` : `<span class="hint">第 ${state.focusedBlank} 空</span>`;
+      const showTutor = withTabs && state.tab === "tutor";
+      return `<aside class="lecture">
+        <div class="head">讲评栏 ${tabs}</div>
+        <div class="body">${showTutor ? contextChips() + messagesHtml() : analysisHtml()}</div>
+        ${showTutor ? composerHtml() : ""}
+      </aside>`;
+    }
+
+    function railHtml() {
+      return `<nav class="rail"><b>目录</b>
+        <div class="item">阅读 A–D</div>
+        <div class="item">七选五</div>
+        <div class="item">完形</div>
+        <div class="item on">语法填空</div>
+        <div class="item">写作</div>
+      </nav>`;
+    }
+
+    function render() {
+      const v = VARIANTS.find((x) => x.id === state.variant);
+      document.getElementById("label").textContent = `${v.id} — ${v.name}`;
+      document.getElementById("present").classList.toggle("on", state.first === "present");
+      document.getElementById("empty").classList.toggle("on", state.first === "empty");
+      let main = "";
+      if (state.variant === "A") {
+        main = `<div class="grid grid-a">${railHtml()}<div>${passageHtml()}</div>${lecturePanel(true)}</div>`;
+      } else if (state.variant === "B") {
+        main = `<div class="grid grid-b">${railHtml()}<div>${passageHtml()}</div>${lecturePanel(false)}${tutorChrome("小导师")}</div>`;
+      } else {
+        main = `<div class="grid grid-c">${railHtml()}<div>${passageHtml()}<div class="dock"><div class="head">小导师 · 贴在这道题下</div><div class="body">${contextChips()}${messagesHtml()}</div>${composerHtml()}</div></div>${lecturePanel(false)}</div>`;
+      }
+      document.getElementById("app").innerHTML = `<div class="shell">
+        <p class="hint" style="margin:0 0 10px">${v.blurb}</p>
+        ${main}
+        <pre class="state">variant ${state.variant}  first ${state.first}  tab ${state.tab}  blank ${state.focusedBlank}
+context ${state.first === "empty" && state.phase === "idle" ? "[]" : "[group gf-21-30, blank " + state.focusedBlank + ", analysis]"}
+similarPinned ${JSON.stringify(state.selected)}  phase ${state.phase}  messages ${state.messages.length}</pre>
+      </div>`;
+      bind();
+    }
+
+    function esc(s) {
+      return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    }
+
+    function sendText(text) {
+      const t = text.trim();
+      if (!t) return;
+      state.draft = "";
+      if (state.first === "empty" && state.phase === "idle") state.first = "present";
+      state.messages.push({ role: "user", text: t });
+      if (/类似|配相似|练习/.test(t)) {
+        state.phase = "cards";
+        state.messages.push({ role: "cards" });
+      } else {
+        state.phase = "answered";
+        state.messages.push({
+          role: "bot",
+          html: `第 <button class="cite" data-cite="23">23 空</button> 要的是名词 difference，不是形容词。讲评里已经写了 make a difference。学生若把 differ 直接填进去，是没看见空前的 a。`,
+        });
+      }
+      render();
+    }
+
+    function citeBlank() {
+      state.focusedBlank = "23";
+      state.flash = true;
+      render();
+      document.getElementById("group-gf")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      setTimeout(() => { state.flash = false; }, 800);
+    }
+
+    function bind() {
+      document.querySelectorAll("[data-tab]").forEach((el) => {
+        el.onclick = () => { state.tab = el.getAttribute("data-tab"); render(); };
+      });
+      document.querySelectorAll("[data-blank]").forEach((el) => {
+        el.onclick = () => { state.focusedBlank = el.getAttribute("data-blank"); render(); };
+      });
+      document.querySelectorAll("[data-similar]").forEach((el) => {
+        el.onchange = () => {
+          const id = el.getAttribute("data-similar");
+          state.selected = el.checked
+            ? Array.from(new Set(state.selected.concat(id)))
+            : state.selected.filter((x) => x !== id);
+          render();
+        };
+      });
+      const pin = document.querySelector("[data-pin]");
+      if (pin) pin.onclick = () => {
+        if (!state.selected.length) return;
+        const titles = SIMILAR.filter((s) => state.selected.includes(s.id)).map((s) => s.title).join("；");
+        state.phase = "pinned";
+        state.messages.push({
+          role: "bot",
+          html: `已纳入 ${state.selected.length} 道。<button class="cite" data-cite="23">第 23 空</button> 仍用 make a difference。可练：${esc(titles)}。`,
+        });
+        render();
+      };
+      document.querySelectorAll("[data-cite]").forEach((el) => { el.onclick = citeBlank; });
+      const draft = document.getElementById("draft");
+      if (draft) draft.oninput = () => { state.draft = draft.value; };
+      const send = document.querySelector("[data-send]");
+      if (send) send.onclick = () => sendText((document.getElementById("draft") || {}).value || "");
+      const demo = document.querySelector("[data-demo]");
+      if (demo) demo.onclick = () => sendText("这空学生老错，有没有类似的练？");
+      const citeDemo = document.querySelector("[data-cite-demo]");
+      if (citeDemo) citeDemo.onclick = () => {
+        if (!state.messages.some((m) => m.role === "bot" && m.html && m.html.includes("data-cite"))) {
+          sendText("这空为什么填 difference？");
+          setTimeout(citeBlank, 50);
+        } else citeBlank();
+      };
+    }
+
+    state.variant = paramVariant();
+    document.getElementById("prev").onclick = () => {
+      const i = VARIANTS.findIndex((x) => x.id === state.variant);
+      setVariant(VARIANTS[(i + VARIANTS.length - 1) % VARIANTS.length].id);
+    };
+    document.getElementById("next").onclick = () => {
+      const i = VARIANTS.findIndex((x) => x.id === state.variant);
+      setVariant(VARIANTS[(i + 1) % VARIANTS.length].id);
+    };
+    document.getElementById("present").onclick = () => setFirst("present");
+    document.getElementById("empty").onclick = () => setFirst("empty");
+    document.addEventListener("keydown", (e) => {
+      const tag = (e.target && e.target.tagName) || "";
+      if (tag === "TEXTAREA" || tag === "INPUT") return;
+      if (e.key === "ArrowLeft") document.getElementById("prev").click();
+      if (e.key === "ArrowRight") document.getElementById("next").click();
+    });
+    render();
+  </script>
+</body>
+</html>
