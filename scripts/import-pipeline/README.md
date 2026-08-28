@@ -23,10 +23,12 @@ node scripts/import-pipeline/review.mjs preflight <paperId>
 只用于已登记存量卷复现。
 
 ```bash
+node scripts/import-pipeline/universal-nck1.mjs preflight
 node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
   --paper-name '<卷名>' --provenance '<出处>' \
   --source question_source=/abs/questions.pdf \
   --source official_answers=/abs/answers.docx
+node scripts/import-pipeline/universal-nck1.mjs materialize <paperId>
 node scripts/import-pipeline/universal-nck1.mjs verify <paperId>
 node scripts/import-pipeline/universal-nck1.mjs build <paperId>
 QUESTION_BANK_IMPORT_OPS_ORIGIN=https://eqbank.cc \
@@ -34,8 +36,16 @@ QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN='<secret>' \
   node scripts/import-pipeline/review.mjs push <paperId>
 ```
 
-`init` 复制并摘要绑定本地源，DOCX 同时生成确定性 PDF rendition；源文件、
-Materialization 与 canonical evidence 均 gitignored。Agent 写统一
+`preflight` 一次性启动 magick、ffmpeg、soffice、pdfinfo、pdftoppm、unzip，并在
+macOS 检查 magick/ffmpeg 动态链接；失败就开工前停，中途不得安装或升级依赖。
+`init` 也先执行同一检查，再复制并摘要绑定本地源，DOCX 同时生成确定性 PDF
+rendition；源文件、Materialization 与 canonical evidence 均 gitignored。已知
+NCK1 结构的试题 DOCX + 权威答案 DOCX 用 `materialize` 生成逐段 locator、九题组
+骨架、答案与结构化复核清单。clean case 只把两份写作分析留给 Agent；不确定的
+section/题号/blank/答案/表格或视觉语义进入 `review.required` 并失败关闭，AI 禁止
+解题补答案。producer receipt 绑定版本和 source digest；未变源直接 resume，检测到
+Agent 已编辑输出时绝不覆盖。同一 paperId 仍单 writer；两份写作分析可并行纯读后
+由该 writer 汇总。其他载体由 Agent 写统一
 Materialization：DOCX 每个源 `<w:p>` 一对一保留为独立 paragraph block，禁止合并
 相邻段落；阅读 A/B/C/D 等独立篇目标记不写入正文。表格为网格，图为原媒体
 配方。应用文和读后续写按“题干/逐段材料 → 注意与词数、格式 → 框内给定内容”
@@ -56,6 +66,12 @@ Candidate 摘要和 `confirmed: false` 的 Teacher Confirmation 模板。`review
 push` 把不可变源与 Candidate 作为新 revision 上传到 `/ops/`。Owner 在真实
 Screen/Print/PDF 上审核；Agent 用自己的 `import_agent` 网页待办箱或下列命令
 读取、回复和提交修订：
+
+单卷 Materialization 文件的 changed-file 路由使用
+`pnpm -C app verify:import-paper`：它保留 schema/Candidate admission、权威答案与
+digest、Screen、Student/Teacher Print、PDF、publication/recovery 的独立失败层，
+不再误跑普通 feature pack。共享 producer/Canonical/renderer 或未知、混合变更仍
+失败关闭到 `verify:all`。
 
 ```bash
 node scripts/import-pipeline/review.mjs preflight <paperId>

@@ -37,6 +37,11 @@ const registry = {
   'scripts/verify-paper-canonical-registered-confirmation-admission.mjs',
   'scripts/verify-paper-canonical-import-recovery.mjs',
   'scripts/verify-universal-nck1-publish.mjs',
+  'scripts/verify-nck1-docx-materialization-producer.mjs',
+  'scripts/verify-import-environment-preflight.mjs',
+  'scripts/verify-nck1-source-materialization.mjs',
+  'scripts/verify-paper-canonical-nck1-materialization-candidate.mjs',
+  'scripts/verify-import-paper-routing.mjs',
   'scripts/verify-production-canonical-publication-backfill.mjs',
   'scripts/verify-paper-canonical-import-pilot-fixes.mjs',
   'scripts/verify-paper-canonical-docx-source-adapter.mjs',
@@ -215,9 +220,26 @@ const paperScripts = uniqueRegistered(
 const featureScripts = uniqueRegistered(registry.scripts.filter(
   (script) => !paperScripts.includes(script) && !securityScripts.includes(script),
 ))
+const importPaperScripts = uniqueRegistered([
+  'scripts/verify-nck1-docx-materialization-producer.mjs',
+  'scripts/verify-import-environment-preflight.mjs',
+  'scripts/verify-nck1-source-materialization.mjs',
+  'scripts/verify-paper-canonical-docx-source-adapter.mjs',
+  'scripts/verify-paper-canonical-nck1-materialization-candidate.mjs',
+  'scripts/verify-paper-canonical-import-admission.mjs',
+  'scripts/verify-paper-canonical-registered-confirmation-admission.mjs',
+  'scripts/verify-paper-canonical-publication.mjs',
+  'scripts/verify-paper-canonical-import-recovery.mjs',
+  'scripts/verify-universal-nck1-publish.mjs',
+  'scripts/verify-paper-canonical-detail-screen-consumption.mjs',
+  'scripts/verify-print-renderer.mjs',
+  'scripts/verify-figure-render.mjs',
+  'scripts/verify-import-paper-routing.mjs',
+])
 const packs = Object.freeze({
   ui: uniqueRegistered(uiScripts),
   'paper-data': uniqueRegistered(paperDataScripts),
+  'import-paper': importPaperScripts,
   feature: featureScripts,
   paper: paperScripts,
   security: uniqueRegistered(securityScripts),
@@ -277,6 +299,15 @@ function changedPlan(files) {
     if (file.endsWith('.md')) return []
     if (file === 'server/api.mjs') return ['unknown']
     if (file.startsWith('import-ops/')) return ['feature']
+    if (/^scripts\/import-pipeline\/papers\/[^/]+\//u.test(file)) {
+      return ['import-paper']
+    }
+    if ([
+      'scripts/import-pipeline/universal-nck1.mjs',
+      'scripts/import-pipeline/nck1-docx-materialize.mjs',
+      'scripts/import-pipeline/import-environment-preflight.mjs',
+      'server/paper-import/nck1DocxMaterializationProducer.mjs',
+    ].includes(file)) return ['unknown']
     if (file.startsWith('scripts/import-pipeline/')) {
       return [/\/verify-/.test(file) ? 'paper' : 'feature']
     }
@@ -298,6 +329,9 @@ function changedPlan(files) {
   if (domains.has('unknown')) {
     return { risk: 'unknown-fallback', pack: 'all' }
   }
+  if (domains.has('import-paper') && domains.size > 1) {
+    return { risk: 'mixed-high-risk-fallback', pack: 'all' }
+  }
   if (domains.has('paper-data')) {
     return { risk: 'mixed-high-risk-fallback', pack: 'all' }
   }
@@ -309,6 +343,9 @@ function changedPlan(files) {
   }
   if (domains.has('security')) {
     return { risk: 'auth-persistence-migration', pack: 'security' }
+  }
+  if (domains.has('import-paper')) {
+    return { risk: 'single-paper-import', pack: 'import-paper' }
   }
   if (domains.has('paper')) {
     return { risk: 'shared-renderer-contract', pack: 'paper' }

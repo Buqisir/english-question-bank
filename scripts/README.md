@@ -7,6 +7,7 @@ just to create confidence theater.
 Three local entrypoints share `scripts/verify-ci.mjs`:
 
 - `pnpm -C app verify:changed` selects the smallest pack from the diff;
+- `pnpm -C app verify:import-paper` exercises one paper's import/admission/surface/recovery seams;
 - `pnpm -C app verify:paper` exercises shared Canonical Paper/Print seams;
 - `pnpm -C app verify:all` is the release/fallback suite used by CI.
 
@@ -117,6 +118,11 @@ must be confirmed green (AGENTS.md RM gate).
 | `verify-paper-canonical-registered-confirmation-admission.mjs` | Rejects unregistered or proof-mutated historical confirmation authorities before publication and proves v41/v42/v37 recovery remains atomic | yes |
 | `verify-paper-canonical-import-recovery.mjs` | Ticket 19 public canonical import recovery: byte-exact pre-commit restoration, committed-target restart recovery, idempotent retry, digest-identity conflict rejection, strict stale/corrupt load failure, and validated whole-Publication rollback without legacy or generated-DOCX fallback | yes |
 | `verify-universal-nck1-publish.mjs` | Universal NCK1 approved-revision publication: exact approval/source/confirmation binding, nine groups and 45 answers, inactive Listening, shared atomic DB/version/latest/Canonical commit, no fabricated analyses, pre-commit rollback, and committed-reload idempotent recovery | yes |
+| `verify-nck1-docx-materialization-producer.mjs` | Rejects NCK1 DOCX parsing drift across nine groups, 45 source-backed answers including glued labels, one-to-one paragraph locators, semantic tables, fail-closed exceptions, and digest-bound non-overwriting resume | yes |
+| `verify-import-environment-preflight.mjs` | Fails before import work when magick, ffmpeg, soffice, PDF tools, unzip, or macOS magick/ffmpeg dynamic-link health is unavailable | yes |
+| `verify-nck1-source-materialization.mjs` | Rejects incomplete nine-slot/45-answer Source Materialization, invalid source coverage/listening/writing boundaries, misplaced blanks, unresolved media, or digest instability | yes |
+| `verify-paper-canonical-nck1-materialization-candidate.mjs` | Proves Source Materialization derives one digest-bound Candidate with strict DOCX paragraph fidelity, source locators, media extraction, Teacher Confirmation, and fail-closed admission | yes |
+| `verify-import-paper-routing.mjs` | Keeps one-paper materialization changes on the narrow import-paper pack while mixed, shared producer, and unknown changes fail closed to all | yes |
 | `verify-production-canonical-publication-backfill.mjs` | Reproduces an empty production publication index, then proves the accepted 4+29 store merge restores 33/33 Screen and Print/PDF consumption, is idempotent, preserves bank row counts, and leaves existing latest paper assets byte-identical | yes |
 | `verify-paper-canonical-import-pilot-fixes.mjs` | Ticket 20 focused review closure: no synthetic ready semantics or default answers at the public compiler seam; complete source-bound inactive Listening; structured Reading table lineage; exact Profile/Plan order; and strict PaperBrowse rejection of Plan-external active groups | yes |
 | `verify-paper-canonical-import-pilot.mjs` | Ticket 20 real local PDF package through public capture, compile-first admission, atomic Publication, exact reload, supported Screen/Print/PDF artifacts, digest-bound Reading A-D closure plus Seven Choices two-dimensional Golden Geometry across plain/lecture Screen, Student/Teacher Print HTML, exact-A4 Chromium PDF, optional chrome/bank headings, short/long/wrapped A-G options, and same/cross-page continuations; independent semantic-role and source-identity oracles fail closed on role/group/page/line/bank/split/parity drift while preserving canonical projection, retry/rollback, resource cleanup, and zero generated-DOCX/LibreOffice-output dependency | via QA wrapper on macOS |
