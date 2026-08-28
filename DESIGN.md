@@ -193,9 +193,9 @@ components:
 
 ### Buttons
 - **Shape:** 小圆角（6px / `{rounded.md}`）。
-- **Primary:** 墨绿底（#2C6E56）+ 白字（#FFFFFF，6.05:1），padding 8px 16px。主按钮用墨绿签名，宣告"当前主操作"。
-- **Hover / Focus:** 悬浮压深一档（如 #1E4A3A / teal-800）；焦点用墨绿焦点环（`0 0 0 3px rgba(44,110,86,0.20)`）。
-- **Secondary / Ghost:** 透明或 surface-2 底 + 中性细边 + ink 文字；用于次要操作。
+- **Primary:** 墨绿底（#2C6E56）+ 白字（#FFFFFF，6.05:1），padding 8px 16px。主按钮用墨绿签名，宣告"当前主操作"。扁平无 halo 阴影（quiet-chrome 2026-08-28：accent-glow 彩色辉光移除，阴影词汇只有 Resting/Floating/Focus Ring 三种）。
+- **Hover / Focus:** 悬浮压深一档（`--eqb-color-primary-deep` = teal-800 #1E4A3A，已转正为正式 token）；焦点走单一焦点环 token（`--focus-ring`：2px solid 墨绿 + 2px offset，App.css :root 单点定义）。
+- **Secondary / Ghost（The Quiet-Chrome Rule 静铬原则，quiet-chrome 刀 2026-08-28）：** 次级按钮**平时无底无边**，直接趴在所在表面上（macOS/Amp 工具栏的原生嵌入感），hover 才浮出一层中性底（surface-2 #EDEDEA），focus-visible 仍走墨绿焦点环。适用于 ghost-button / detail-button / back-button / icon-button / peek-btn / similar-btn 全部次级词汇；描边盒（常驻 border + 填充底）在工具 chrome 里视为"贴上去的盒子"，不再使用。主操作（墨绿填充）与表单输入框不受本条影响。
 
 ### Chips（筛选/标签，找题主面的关键组件）
 - **Style:** 胶囊形（999px）+ 中性底 + ink 文字 + 中性细边（#D8D8D2）。
@@ -215,6 +215,7 @@ components:
 
 ### Navigation
 - **Style:** 中性工具外壳；当前项用墨绿强调（文字或下划），其余保持中性。手搓 `?view=` 路由，非 react-router。
+- **Topbar（quiet-chrome 2026-08-28）：** 顶栏透明无底、无 border-bottom 缝合线，直接融入所在页面底色（工具页 #F6F6F4 / 纸页暖米自动跟随），不再是「白底条 + 上下横线包边」的贴片；顶栏全站无 sticky，透明是安全前提。顶栏内按钮一律走 Quiet-Chrome 次级词汇。
 - 注意现实：导航逻辑现塞在很大的 `App.tsx`，是重构痛点，但不属于配色范畴。
 
 ### Signature Component: ConciergeDesk AI 找题主面

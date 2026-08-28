@@ -28,3 +28,12 @@ token 的扩展用法。
   只有 bg/ink/ink-strong/border 四档，没有 surface 档。
 - **临时方案**：字面量 `rgba(255, 255, 255, 0.6)`（半透明白叠暖纸底），落在
   `.paper-browse-rail-panel` 的 background。若日后收编，候选名 `--paper-surface`。
+
+## 2026-08-28 全站按钮基档字号 13px（App.css `.primary-button/.ghost-button/...` 共享块）
+
+- **想要的值**：按钮标签字号收进 The Four-Step UI Type Ramp（28/16/14/12 四档，
+  禁 13px 半档）——需 owner 拍板走 12px（Label，更秀气）还是 14px（Compact
+  Body，更舒展），再一刀切。
+- **临时方案**：维持既有 13px 不动（quiet-chrome 刀只摘盒子、不动字号，避免
+  全站布局位移）。本刀已顺手把 `.concierge-action` 的 12.5px 收进 12px，
+  其余 13px 实例留待本缺口闭环。

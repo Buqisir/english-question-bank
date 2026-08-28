@@ -29,8 +29,11 @@
   flex-wrap: wrap;
   gap: 20px;
   padding: 14px 24px;
-  border-bottom: 1px solid var(--line);
-  background: var(--panel);
+  /* quiet-chrome（2026-08-28）：顶栏不再是「白底 + 上下横线包边」的贴片，
+   * 透明底融入所在页面（工具页 #F6F6F4 / 纸页暖米自动跟随），去掉
+   * border-bottom 缝合线。AppTopbar 全站无 sticky（DraftPaperWorkbench.css
+   * 有锚注释佐证），内容不会从透明顶栏下滚过，透明是安全的。 */
+  background: transparent;
 }
 
 /* ui-shell-unify: unified AppTopbar vocabulary. `.topbar-sub` is the
@@ -250,6 +253,13 @@ button:disabled {
   font-weight: 500;
 }
 
+/* quiet-chrome（2026-08-28）：全站按钮从「贴上去的盒子」改为原生工具栏词汇——
+ * 次级按钮平时无底无边、直接趴在所在表面上（macOS/Amp 工具栏模式），hover 才
+ * 浮出一层中性底（--surface-strong），focus-visible 仍走单一墨绿焦点环；
+ * 主按钮保留墨绿签名填充，但去掉彩色 halo 阴影（DESIGN.md §4 阴影词汇只有
+ * Resting/Floating/Focus Ring，accent-glow 不在其列），hover 压深一档到
+ * teal-800。scale(0.97) 按压反馈是 emil-processing 刀立档的既有动效词汇
+ * （配 prefers-reduced-motion 退化），本刀不动。 */
 .primary-button,
 .add-button,
 .save-button,
@@ -257,8 +267,14 @@ button:disabled {
   color: #ffffff;
   background: var(--accent);
   font-weight: 600;
-  transition: transform var(--motion-fast) var(--ease-out);
-  box-shadow: 0 1px 2px var(--accent-glow);
+  transition: background-color var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
+}
+
+.primary-button:hover:not(:disabled),
+.add-button:hover:not(:disabled),
+.save-button:hover:not(:disabled),
+.export-button:hover:not(:disabled) {
+  background: var(--eqb-color-primary-deep);
 }
 
 .primary-button:active:not(:disabled),
@@ -270,22 +286,21 @@ button:disabled {
 
 .ghost-button {
   color: var(--ink);
-  background: var(--surface-strong);
-  border: 1px solid var(--line);
-  transition: background var(--motion-base) var(--ease-hover), border-color var(--motion-base) var(--ease-hover);
+  background: transparent;
+  border: 0;
+  transition: background-color var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
 }
 
-.ghost-button:hover {
-  background: var(--line);
-  border-color: var(--line-strong);
+.ghost-button:hover:not(:disabled) {
+  background: var(--surface-strong);
 }
 
 .detail-button,
 .back-button {
   color: var(--muted);
   background: transparent;
-  border: 1px solid var(--line);
-  transition: color var(--motion-base) var(--ease-hover), background var(--motion-base) var(--ease-hover), border-color var(--motion-base) var(--ease-hover);
+  border: 0;
+  transition: color var(--motion-fast) var(--ease-hover), background-color var(--motion-fast) var(--ease-hover);
 }
 
 .primary-button:focus-visible,
@@ -303,7 +318,6 @@ button:disabled {
 .back-button:hover {
   color: var(--ink);
   background: var(--surface-strong);
-  border-color: var(--line-strong);
 }
 
 .workbench {
@@ -471,7 +485,6 @@ button:disabled {
 .version-toggle .active {
   color: #ffffff;
   background: var(--accent);
-  box-shadow: 0 1px 3px var(--accent-glow);
 }
 
 .group-list {
@@ -1648,7 +1661,7 @@ button:disabled {
   place-items: center;
   width: 32px;
   height: 32px;
-  border: 1px solid var(--line);
+  border: 0;
   border-radius: 6px;
   color: var(--muted);
   background: transparent;
@@ -1658,7 +1671,6 @@ button:disabled {
 .icon-button:hover {
   color: var(--ink);
   background: var(--surface-strong);
-  border-color: var(--line-strong);
 }
 
 .entry-form {
@@ -3139,11 +3151,11 @@ button:disabled {
   line-height: 1;
   font-family: inherit;
   cursor: pointer;
-  transition: background var(--motion-base) var(--ease-hover), color var(--motion-base) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
-  box-shadow: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  transition: background-color var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
+  box-shadow: none;
 }
 
 .concierge-intent-submit.is-loading {
@@ -3152,7 +3164,7 @@ button:disabled {
 }
 
 .concierge-intent-submit:hover:not(:disabled) {
-  background: #1E4A3A;
+  background: var(--eqb-color-primary-deep);
 }
 
 /* emil-processing: press feedback — 一天按几十次的搜索提交应确认"听到了". */
@@ -3529,24 +3541,24 @@ button:disabled {
   display: inline-flex;
   align-items: center;
   background: transparent;
-  border: 1px solid #D8D8D2;
+  border: 0;
   color: #1E1E1C;
   font-family: inherit;
   text-decoration: none;
-  font-size: 12.5px;
+  /* quiet-chrome: 12.5px 是族外半档，收进 The Four-Step UI Type Ramp 的
+     12px Label 档；同时摘掉描边盒（透明底 + hover 浮中性底）。 */
+  font-size: 12px;
   padding: 4px 10px;
   border-radius: 6px;
   cursor: pointer;
-  transition: background var(--motion-base) var(--ease-hover), border-color var(--motion-base) var(--ease-hover), color var(--motion-base) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
+  transition: background-color var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
 }
 
 .concierge-action:hover:not(:disabled) {
   background: #EDEDEA;
-  border-color: #C6C6C0;
 }
 
 .concierge-action:focus-visible {
-  border-color: #2C6E56;
   outline: var(--focus-ring);
   outline-offset: 2px;
 }
@@ -3565,19 +3577,16 @@ button:disabled {
    export button so the same action reads the same everywhere. */
 .concierge-action-add {
   background: #2C6E56;
-  border-color: #2C6E56;
   color: #FFFFFF;
   font-weight: 600;
 }
 
 .concierge-action-add:hover:not(:disabled) {
-  background: #1E4A3A;
-  border-color: #1E4A3A;
+  background: var(--eqb-color-primary-deep);
   color: #FFFFFF;
 }
 
 .concierge-action-add:focus-visible {
-  border-color: #2C6E56;
   outline: var(--focus-ring);
   outline-offset: 2px;
 }
@@ -3585,14 +3594,12 @@ button:disabled {
 /* Completed state: 已在草稿卷中 — quiet, no longer competes as a CTA. */
 .concierge-action-add[aria-pressed="true"] {
   background: transparent;
-  border-color: #D8D8D2;
   color: #6A6A64;
   font-weight: 500;
 }
 
 .concierge-action-add[aria-pressed="true"]:hover:not(:disabled) {
   background: #EDEDEA;
-  border-color: #C6C6C0;
   color: #6A6A64;
 }
 
@@ -3606,30 +3613,12 @@ button:disabled {
    AI mode (homeMode='ai'): single-column quiet desk layout.
    ======================================================================== */
 
+/* quiet-chrome: topbar 透明化后，home-mode-ai 原来的顶栏底色/边线覆盖与
+   ghost-button 盒式覆盖全部失去对象，规则删除（原 3618-3633 行）。
+   本块只保留 AI-mode 的布局与非色规则。 */
+
 .app-shell.home-mode-ai {
-  /* teal-repaint C3: this block used to re-scope --surface-strong / --line /
-     --line-strong / --ink to warm values so classic mode (still slate) and
-     AI mode (warm) could coexist. :root/index.css are now the single new
-     neutral+teal source of truth, so the color remaps are gone; this rule
-     now only carries the AI-mode background + non-color layout below. */
   background: #F6F6F4;
-}
-
-.app-shell.home-mode-ai .topbar {
-  background: #F6F6F4;
-  border-bottom-color: #D8D8D2;
-  box-shadow: none;
-}
-
-.app-shell.home-mode-ai .ghost-button {
-  background: #F6F6F4;
-  border-color: #D8D8D2;
-  color: #1E1E1C;
-}
-
-.app-shell.home-mode-ai .ghost-button:hover {
-  background: #EDEDEA;
-  border-color: #C6C6C0;
 }
 
 /* Cut ⑥ P3 — `.eyebrow` reads `--muted` (slate #64748b) at :root; C1 has
@@ -4625,6 +4614,10 @@ button:disabled {
   white-space: nowrap;
   opacity: 0;
   transition: opacity var(--motion-fast) var(--ease-out);
+  /* quiet-chrome: hint 末尾的 ↑/↓ 字形换 Lucide SVG，inline-flex 对齐。 */
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
 }
 
 .concierge-paper-row:hover .concierge-row-expand-hint,

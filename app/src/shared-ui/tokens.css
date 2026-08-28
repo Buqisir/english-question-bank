@@ -11,6 +11,10 @@
   --eqb-color-text-muted: #6a6a64;
   --eqb-color-primary: #2c6e56;
   --eqb-color-primary-text: #1e4a3a;
+  /* teal-800，主按钮 hover/active 压深档（DESIGN.md §5 Buttons 既定值；
+     quiet-chrome 刀把它从 QuestionGroupDetailView.css 里的 var() 兜底
+     引用转正为正式 token）。 */
+  --eqb-color-primary-deep: #1e4a3a;
   --eqb-color-danger: #dc2626;
   --eqb-color-danger-soft: rgba(239, 68, 68, 0.08);
   --eqb-color-warning: #d97706;
