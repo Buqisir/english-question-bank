@@ -1,0 +1,78 @@
+# 06 — 扫描 PDF 的 OCR evidence 与人工确认
+
+- Status: planned
+- Blocked by: `03-text-layer-pdf-materializer.md`, `01-source-region-review-pairing.md`
+- Next on PASS: `07-mixed-carrier-routing.md`
+
+- Spec: `docs/cuts/import-format-capabilities/spec.md`
+- Matrix rows: C03, T01–T04, T06, R02, R05
+
+## Outcome
+
+扫描题卷先产生可重放、可定位、可由教师确认的 OCR observations；确认后的 ordered items
+进入 ticket 03 的同一 carrier-neutral parser。OCR 文字、阅读顺序或 shape 判断在确认前
+不是 Canonical 权威，任何低置信或覆盖不闭合的页都不能生成 ready Candidate。
+
+## Input and fixture
+
+代码生成一个最小 2 页 synthetic raster PDF：
+
+- page 1：清晰 heading、短段、题号与 ABCD；
+- page 2：一个故意模糊的 glyph、两块可能互换顺序的文本和一个 tiny synthetic image；
+- 独立 synthetic answer page，只有短答案 token。
+
+fixture 保留 page raster digest，不含真实卷文字。OCR engine fixture 固定输出正例 token、
+confidence、bbox 和一个低置信 alternatives 负例，避免测试依赖在线服务或模型漂移。
+
+## Public seam
+
+- Source Capture 保存 immutable PDF 与逐页 raster recipe/digest；OCR sidecar只保存
+  engine name/version、page、normalized bbox、text、confidence、alternatives 和 reading-order
+  edges，不增加第二套 Canonical text model。
+- Review projection用 ticket 01 的 source region + 真实 Screen seam呈现原图、OCR token和
+  未确认原因。教师确认记录绑定 source digest、observation IDs 与确认后文本/顺序；源变化
+  后确认自动失效。
+- 只有全部 content regions 已分类、所有 promoted token/ordering 已确认且页 coverage 闭合，
+  adapter 才输出 ticket 03 的 carrier-neutral ordered paragraph/table/question items。
+- AI/OCR 可提出候选与差异，但只能服务“确认转写、顺序、content-vs-furniture”三个明确
+  QA 任务；不得自动确认或用语言模型补写缺词。
+
+## Detection and failure
+
+- `NCK1_OCR_TEXT_LAYER_REQUIRED`：ticket 03 识别为 scan，必须显式转 OCR workflow。
+- `NCK1_OCR_CONFIDENCE_REVIEW_REQUIRED`：任一 promoted token 低于登记阈值或有竞争候选。
+- `NCK1_OCR_READING_ORDER_AMBIGUOUS`：region graph不唯一。
+- `NCK1_OCR_PAGE_COVERAGE_INCOMPLETE`：页面存在未分类 region 或 raster/source不闭合。
+- `NCK1_OCR_VISUAL_CLASSIFICATION_REQUIRED`：图、表、正文或 furniture 无法确定。
+- `NCK1_OCR_CONFIRMATION_STALE`：engine/source/observation digest 已变。
+
+所有 code 都带 document/page/region；不允许静默删低置信 token、把 tiny image 当字符、按
+最近 heading 猜 section，或对失败页回退为整页 Canonical screenshot。
+
+## Acceptance criteria
+
+- [ ] 清晰页产生 deterministic observations；未确认时 Candidate 为 non-ready。
+- [ ] 教师确认后，同一 ordered-item parser生成标准 NCK1 identity 与 `page_region` locators。
+- [ ] 低置信 glyph、顺序歧义、未分类 tiny image 与缺页分别返回稳定 code/region。
+- [ ] 修改 raster 或 OCR output digest 后旧确认失效。
+- [ ] Screen/Student/Teacher Print/PDF只消费确认后的同一 Canonical；整页 raster只在Review。
+
+## Non-goals
+
+自动批准、生成式纠错、OCR engine 在线评测、任意多栏布局、手写识别、图表内容理解、
+AI重画、把 OCR confidence 写进 Canonical、真实版权试卷 fixture。
+
+## Verification
+
+```bash
+node scripts/verify-nck1-pdf-materialization-producer.mjs
+node scripts/verify-nck1-ocr-source-evidence.mjs
+node scripts/verify-nck1-source-materialization.mjs
+node scripts/verify-import-review-source-pairing.mjs
+node scripts/verify-universal-nck1-candidate-surfaces.mjs paper-synthetic-ocr-evidence
+pnpm -C app verify:paper
+pnpm -C app verify:all
+```
+
+final需对一份真实但只读、非CQ8扫描源做 source/OCR/确认/三面 proof 与独立
+Standards/Spec review；不得提交、导入或发布该真实卷。
