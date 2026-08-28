@@ -6,7 +6,8 @@
 - 先读 [spec](spec.md)，确认语义权威、视觉忠实和 fail-closed 边界。
 - 再查 [capability matrix](capability-matrix.md) 的最接近行及 evidence catalog。
 - 实现工作按 [tickets](tickets/README.md) 的依赖顺序领取；推荐从
-  [01 — source-region Review pairing](tickets/01-source-region-review-pairing.md) 开始。
+  [01 — source-region Review pairing](tickets/01-source-region-review-pairing.md) 开始，第一项
+  业务发布目标是“题卷图片 + 答案图片”的端到端导题能力。
 
 ## 遇到陌生形状
 

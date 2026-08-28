@@ -2,7 +2,8 @@
 
 - Status: planned
 - Blocked by: `03-text-layer-pdf-materializer.md`, `01-source-region-review-pairing.md`
-- Next on PASS: `07-mixed-carrier-routing.md`
+- Priority: P0, required by the image-pair release track
+- Next on PASS: `09-ordered-image-source-bundle.md`; mixed carriers remain later
 
 - Spec: `docs/cuts/import-format-capabilities/spec.md`
 - Matrix rows: C03, T01–T04, T06, R02, R05
@@ -11,7 +12,8 @@
 
 扫描题卷先产生可重放、可定位、可由教师确认的 OCR observations；确认后的 ordered items
 进入 ticket 03 的同一 carrier-neutral parser。OCR 文字、阅读顺序或 shape 判断在确认前
-不是 Canonical 权威，任何低置信或覆盖不闭合的页都不能生成 ready Candidate。
+不是 Canonical 权威，任何低置信或覆盖不闭合的页都不能生成 ready Candidate。该 seam
+同时服务 ticket 09 的原始图片页，图片发布不得另建更宽松的 OCR 路径。
 
 ## Input and fixture
 

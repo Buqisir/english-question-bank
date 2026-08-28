@@ -2,7 +2,7 @@
 
 - Status: ready
 - Blocked by: None
-- Next on PASS: tickets 02–08 may use this as their common Review QA seam
+- Next on PASS: `03-text-layer-pdf-materializer.md`, then the 06 → 09 image release track
 - Risk: shared Source Materialization + Import Review UI/API; no production mutation
 
 - Spec: `docs/cuts/import-format-capabilities/spec.md`
@@ -15,8 +15,8 @@ Owner 在 `/ops/` 点击真实 Screen 的一个 Canonical table/figure/block 后
 和 source digest。Owner 可在看着这两个真实表面的同时记录问题；问题同时绑定现有
 group/question/block identity 与 `surface=source`、source page/rect。
 
-这是第一张推荐票，因为它给后续表格、媒体、文本层 PDF 和 OCR fixture 提供同一条
-可执行 QA seam。它不新增卷面格式，不复制 PaperSurface，也不改变 Canonical 题意。
+这是第一张推荐技术票，因为它给首批图片导题以及后续表格、媒体、PDF/OCR fixture提供
+同一条可执行 QA seam。它不新增卷面格式，不复制 PaperSurface，也不改变 Canonical 题意。
 
 ## Input
 

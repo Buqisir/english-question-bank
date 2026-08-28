@@ -61,7 +61,7 @@ Universal Source Materialization 已接通。
 | C04 | `partial` | `NCK1_DOCX_SOURCE_SET_AMBIGUOUS`, `source_incomplete` | [E03](#e03-docx-producer), [E04](#e04-universal-source-cli) | 题卷1页text PDF + 答案1页DOCX；反向组合各一例 | [07](tickets/07-mixed-carrier-routing.md) | **P2**：manifest已能收，需等各单载体 adapter稳定后路由 |
 | C05 | `partial`（inactive closure supported） | `NCK1_DOCX_LISTENING_RANGES_AMBIGUOUS`, `NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS`, `MATERIALIZATION_LISTENING_TRANSCRIPT_COVERAGE_INVALID` | [E03](#e03-docx-producer), [E18](#e18-inactive-listening), [E10](#e10-materialization-contract-proof) | 20个短问题+10个短 transcript segment，无版权文本；timing有/无 | 保持 inactive regression；audio走 08 | **P2**：语义闭合安全，但无专用 Review UX且不激活播放 |
 | C06 | `partial`（generic closure only） | `LISTENING_AUDIO_EVIDENCE_INCOMPLETE`, `LISTENING_ACTIVE_OR_AUDIO_REFERENCE_UNSUPPORTED`; Universal 无 audio-specific code | [E18](#e18-inactive-listening) | 1秒synthetic tone + closed digest + no-playback negative | [08](tickets/08-listening-audio-evidence.md) | **P2**：保全来源重要，但不阻塞非听力正文 |
-| C07 | `missing` | ingress只有非结构化 `Source is not PDF or DOCX` error；无图片页 shape code | [E04](#e04-universal-source-cli), [E20](#e20-generic-source-capture) | 3张不同尺寸 synthetic page images + 显式顺序；漏页/重复页/顺序缺失负例 | [09](tickets/09-ordered-image-source-bundle.md) | **P1**：搜集来源常见且易丢页；必须复用OCR而非另造图片格式 |
+| C07 | `missing` | ingress只有非结构化 `Source is not PDF or DOCX` error；无图片页 shape code | [E04](#e04-universal-source-cli), [E20](#e20-generic-source-capture) | 完整synthetic题卷/答案图片bundle + 显式顺序；漏页/重复页/低置信负例 | [09](tickets/09-ordered-image-source-bundle.md) | **P0，首批业务能力**：可覆盖难搜集、时效性高的来源；必须复用OCR并人工确认，不能把整页图直接发布 |
 | C08 | `partial`（DOCX boundary shape） | `NCK1_DOCX_ANSWER_CONFLICT`, `NCK1_DOCX_WRITING_ANSWER_AMBIGUOUS`; 无跨 carrier 的 answer-boundary code | [E21](#e21-answer-source-shapes) | 完整短答案键后带2句synthetic详解；断言详解不投影；边界不明负例 | [10](tickets/10-answer-source-shape-closure.md) | **P1**：必须证明“只取答案、忽略详解”在各 carrier 一致且不会泄漏到三面 |
 | C09 | `partial`（DOCX parser shape） | `NCK1_DOCX_ANSWER_RANGE_AMBIGUOUS`, `NCK1_DOCX_ANSWER_MISSING`, `MATERIALIZATION_ANSWERS_INCOMPLETE` | [E01](#e01-materialization-schema), [E11](#e11-docx-producer-proof), [E21](#e21-answer-source-shapes) | 全45项短 answer key，无解析/范文；漏1项与冲突负例 | [10](tickets/10-answer-source-shape-closure.md) | **P1**：这类来源足以确定正确答案；教学分析仍走独立生成与审核流程 |
 | C10 | `missing`（安全拒绝但无durable intake） | ingress只有 prose error；compiler有 `OFFICIAL_ANSWER_MISSING` | [E04](#e04-universal-source-cli), [E20](#e20-generic-source-capture), [E21](#e21-answer-source-shapes) | 1页synthetic question-only DOCX/PDF；后续附同digest对应答案 | [11](tickets/11-source-only-awaiting-answers.md) | **P1**：辛苦搜到的卷不应丢失，但无答案绝不能进入发布链 |
@@ -247,6 +247,8 @@ Universal Source Materialization 已接通。
   （C01）虽可 capture，自动 Materialization 也不存在。无答案来源（C10）连 durable
   source-only 暂存都没有。视觉侧最明显的公共缺口是 R02/M04：没有源局部—真实 Screen
   配对，也没有共享媒体布局意图。
+- **首批发布目标**：先闭合题卷图片 + 答案图片的清晰单栏 shape（C07），复杂多栏、图形
+  与表格继续 fail closed；发布速度不能以跳过 OCR 人工确认或 Canonical 三面回归为代价。
 - **不要误报**：`init` 能接收 PDF/混合载体不等于 `materialize` 支持；legacy DOCX shape
   crop 不等于 Universal media producer；按 accepted policy，详解文件只贡献权威答案值，
   不进入 Canonical/Teacher；Canonical 能手工表达不等于检测能力 supported。

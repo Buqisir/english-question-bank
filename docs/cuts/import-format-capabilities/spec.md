@@ -190,14 +190,20 @@ Canonical/renderer、Screen、Print/PDF、Review evidence、当前状态、失�
 
 ## Priority model
 
-- **P0**：否则会静默丢内容/误判，或是所有后续视觉能力的共同 QA seam。
+- **P0**：否则会静默丢内容/误判，是后续视觉能力的共同 QA seam，或是 Owner 指定的
+  首批业务发布能力。
 - **P1**：高频卷面且现有模型接近可用；补齐后能复用明显。
 - **P2**：重要但依赖 P0/P1 的稳定输入，或当前以安全人工确认可继续。
 - **P3**：低频/高复杂度、容易演化为大布局引擎；先保持 fail-closed。
 
-推荐第一张票是 `01-source-region-review-pairing.md`。它不增加一种卷面格式，而是把现有
-`sourceCoverage.visuals`、真实 Screen 和已有 issue page/rect seam 接通，为表格、媒体、
-PDF 与 OCR 的每个后续 fixture 提供共同验收证据。
+Owner 将“题卷图片 + 答案图片”定为首批发布能力，因为它能覆盖难搜集、时效性高的来源。
+因此 C07/09 是 **P0 业务里程碑**；表格视觉、媒体细节、听力音频和混合载体不得抢占它的
+实现顺序。
+
+推荐第一张技术票仍是 `01-source-region-review-pairing.md`。图片经 OCR 后必须由教师对照
+原图与真实 Screen，不能为了抢先发布而跳过确认。最短发布主线是 **01 → 03 → 06 → 09**：
+先建立局部审核与共享 ordered-item parser，再闭合 raster OCR，最后接入显式排序的题卷/
+答案图片 bundle。每张票独立验收，不授权自动启动下一张，也不授权实际发布真实试卷。
 
 ## Acceptance criteria for this roadmap
 

@@ -2,7 +2,8 @@
 
 - Status: ready
 - Blocked by: None（可与 ticket 01 串行交付，以获得局部 Review proof）
-- Next on PASS: `06-scanned-pdf-ocr-evidence.md`, `07-mixed-carrier-routing.md`
+- Priority: P0, carrier-neutral parser required by the image-pair release track
+- Next on PASS: `06-scanned-pdf-ocr-evidence.md`; mixed carriers remain later
 
 - Spec: `docs/cuts/import-format-capabilities/spec.md`
 - Matrix rows: C01, T01–T04, T06, R05
