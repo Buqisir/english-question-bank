@@ -265,7 +265,7 @@ function writeStagedAnalyses(reviewRoot, materialization) {
           : 'grammar-fill.no-hint.article',
         role: null,
         path: null,
-        answer: 'answer',
+        answer: 'ANSWER',
         reason: 'The sentence structure determines the form.',
         evidence: [{ type: 'clause-frame', signalText: 'grammar-fill source text' }],
         teachingNote: 'Identify the blank type before choosing the form.',
@@ -666,6 +666,24 @@ try {
       + Object.keys(happy.projection.analysisSidecars['grammar-fill-analysis-v1.json'].blanks).length,
     45,
   )
+  const authoritativeAnswers = happy.projection.paperAsset.answerKey.answers
+  for (const [questionId, item] of Object.entries(
+    happy.projection.analysisSidecars['reading-choice-analysis-v1.json'].questions,
+  )) {
+    assert.equal(
+      item.optionAnalysis.find(({ status }) => status === 'correct')?.label,
+      authoritativeAnswers[questionId].answer,
+    )
+  }
+  for (const [questionId, item] of Object.entries(
+    happy.projection.analysisSidecars['seven-choices-analysis-v1.json'].questions,
+  )) assert.equal(item.optionFit.correctOptionLabel, authoritativeAnswers[questionId].answer)
+  for (const [questionId, item] of Object.entries(
+    happy.projection.analysisSidecars['cloze-analysis-v1.json'].blanks,
+  )) assert.equal(item.correctFit.optionLabel, authoritativeAnswers[questionId].answer)
+  for (const [questionId, item] of Object.entries(
+    happy.projection.analysisSidecars['grammar-fill-analysis-v1.json'].blanks,
+  )) assert.equal(item.answer, authoritativeAnswers[questionId].answer)
   for (const fileName of Object.keys(happy.projection.analysisSidecars)) {
     const response = await requestReviewAsset(
       happy.projection,

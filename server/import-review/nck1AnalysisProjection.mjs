@@ -214,6 +214,14 @@ function parsedSidecar(files, fileName) {
   return JSON.parse(file.buffer.toString('utf8'))
 }
 
+function withAuthoritativeAnswers(analysis, group, collectionName, writeAnswer) {
+  const projected = structuredClone(analysis)
+  for (const question of group.questions) {
+    writeAnswer(projected[collectionName][question.id], question.answerKey)
+  }
+  return projected
+}
+
 export function buildNck1AnalysisProjection({
   rootDir,
   materialization,
@@ -296,6 +304,25 @@ export function buildNck1AnalysisProjection({
     writingTask: writingTask(paperAsset, continuation.groupId),
   })
 
+  const authoritativeSeven = withAuthoritativeAnswers(
+    raw.seven,
+    seven,
+    'questions',
+    (item, answer) => { item.optionFit.correctOptionLabel = answer },
+  )
+  const authoritativeCloze = withAuthoritativeAnswers(
+    raw.cloze,
+    cloze,
+    'blanks',
+    (item, answer) => { item.correctFit.optionLabel = answer },
+  )
+  const authoritativeGrammar = withAuthoritativeAnswers(
+    raw.grammar,
+    grammar,
+    'blanks',
+    (item, answer) => { item.answer = answer },
+  )
+
   const files = buildPaperImportAiPackageFiles({
     parseResult: { paper, readingGroups },
     analysesByGroupId: Object.fromEntries(readingGroups.map((group, index) => [
@@ -303,11 +330,11 @@ export function buildNck1AnalysisProjection({
       raw[`reading-${String.fromCharCode(97 + index)}`],
     ])),
     sevenChoicesGroup: seven,
-    sevenChoicesAnalysis: raw.seven,
+    sevenChoicesAnalysis: authoritativeSeven,
     clozeGroup: cloze,
-    clozeAnalysis: raw.cloze,
+    clozeAnalysis: authoritativeCloze,
     grammarFillGroup: grammar,
-    grammarFillAnalysis: raw.grammar,
+    grammarFillAnalysis: authoritativeGrammar,
     applicationGroup: application,
     continuationGroup: continuation,
     sourceDocx: null,

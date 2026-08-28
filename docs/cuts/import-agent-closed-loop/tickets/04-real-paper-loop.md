@@ -9,9 +9,9 @@ Spec: `docs/cuts/import-agent-closed-loop/spec.md`
 
 ## What to build
 
-用 Owner 新提供的一套未见真实 NCK1 源卷完整演练：Agent 材料化并提交；Owner
-生产并验证 4× reading、seven、cloze、grammar、application、continuation 共九份
-教学分析，确定性投影为 Screen 的五份 sidecar 后再提交；Owner 在真实 Screen
+用 Owner 新提供的一套未见真实 NCK1 源卷完整演练：Agent 材料化，生产并验证
+4× reading、seven、cloze、grammar、application、continuation 共九份教学分析，
+确定性投影为 Screen 的五份 sidecar 后再提交；Owner 在真实 Screen
 审核讲评并故意记录至少一个问题；Agent 从账号/API 读取、回复、修正并提交新 revision；Owner
 验证关闭并认可；Agent accept、本地原子发布并完成受影响三面 canary；然后停下。
 
