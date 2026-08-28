@@ -52,6 +52,10 @@ _Avoid_: incomplete Question Group, hidden Question Group, raw group
 The source-traceable semantic form of one Question Group after deterministic normalization; each question family has its own variant behind one shared normalization contract.
 _Avoid_: raw group, renderer model, analysis payload
 
+**Framed Columns** (`framed_columns`):
+A Canonical reading block for Word hairline two-column boxes whose insides are typeable text and rectangular tables. Screen / Print / PDF draw the same shared look (`exam-paper-format-standards.md` §3c). Import writes the Canonical block (`nck1-paper-standard.md` §8); it does not screenshot the boxes as Canonical body and does not change CSS per paper. Diagrams, photos, and charts stay figures.
+_Avoid_: treating the hairline box as a figure; per-paper PaperSurface CSS; PDF/DOCX text-box auto-detection
+
 **Normalization Report**:
 The durable account of direct source lineage, Transformation Records, diagnostics, and fail-closed outcomes for one paper compilation.
 _Avoid_: validation report when no transformation provenance is recorded; AI analysis
