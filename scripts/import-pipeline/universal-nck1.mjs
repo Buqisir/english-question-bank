@@ -27,6 +27,7 @@ import {
   runImportEnvironmentPreflight,
   writeImportEnvironmentPreflightReceipt,
 } from './import-environment-preflight.mjs'
+import { rasterPdfRegion } from '../../server/paper-canonical/pdfRegionRaster.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const papersRoot = path.join(import.meta.dirname, 'papers')
@@ -382,18 +383,14 @@ function cropPdf() {
   if (x < 0 || y < 0 || width <= 0 || height <= 0 || x + width > 1 || y + height > 1) {
     fail('PDF crop region must be normalized inside 0..1')
   }
-  const temp = mkdtempSync(path.join(tmpdir(), 'eqb-nck1-pdf-crop-'))
-  try {
-    const prefix = path.join(temp, 'page')
-    execFileSync('pdftoppm', ['-f', String(page), '-l', String(page), '-singlefile', '-r', String(density), '-png', sourcePath, prefix])
-    const pagePath = `${prefix}.png`
-    const dimensions = execFileSync('magick', ['identify', '-format', '%w,%h', pagePath], { encoding: 'utf8' }).split(',').map(Number)
-    const geometry = `${Math.round(width * dimensions[0])}x${Math.round(height * dimensions[1])}+${Math.round(x * dimensions[0])}+${Math.round(y * dimensions[1])}`
-    mkdirSync(path.dirname(outputPath), { recursive: true })
-    execFileSync('magick', [pagePath, '-crop', geometry, '+repage', `png32:${outputPath}`])
-  } finally {
-    rmSync(temp, { recursive: true, force: true })
-  }
+  const crop = rasterPdfRegion({
+    pdfBytes: new Uint8Array(readFileSync(sourcePath)),
+    page,
+    region: { x, y, width, height },
+    density,
+  })
+  mkdirSync(path.dirname(outputPath), { recursive: true })
+  writeFileSync(outputPath, crop.bytes)
   console.log(`${sha256(readFileSync(outputPath))} ${outputPath}`)
 }
 

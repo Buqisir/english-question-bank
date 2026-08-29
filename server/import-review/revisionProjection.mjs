@@ -118,6 +118,33 @@ export function loadNck1ReviewSource(rootDir) {
   return { config, manifest, materialization, sourceInput }
 }
 
+function sourceVisualProjection(manifest, materialization) {
+  const coverage = materialization.sourceCoverage
+  const sourceDocument = materialization.documents.find((document) =>
+    document.documentId === coverage.documentId)
+  const manifestDocument = manifest.documents.find((document) =>
+    document.documentId === coverage.documentId)
+  if (!sourceDocument || !manifestDocument) {
+    fail('Source visual inventory does not resolve to one captured document')
+  }
+  const sourcePath = normalizedRelativePath(
+    manifestDocument.path,
+    `document ${sourceDocument.documentId}`,
+  )
+  return coverage.visuals.map((visual) => ({
+    visualId: visual.visualId,
+    documentId: sourceDocument.documentId,
+    path: sourcePath,
+    sourceDigest: sourceDocument.sha256,
+    mediaType: sourceDocument.mediaType,
+    page: visual.page,
+    region: visual.region ? structuredClone(visual.region) : null,
+    disposition: visual.disposition,
+    targetId: visual.targetId,
+    state: visual.region ? 'paired' : 'unlocated',
+  }))
+}
+
 export function reviewBundleFilePaths(rootDir) {
   const { manifest, materialization } = loadNck1ReviewSource(rootDir)
   const paperAsset = buildNck1CompatibilityPaperAsset({
@@ -562,6 +589,10 @@ export function buildNck1ReviewProjection(rootDir, { requireAnalyses = false } =
     sourceAssetVersion: preview.candidate.interpretation.sourceAssetVersion,
     required: requireAnalyses,
   })
+  const sourceVisuals = sourceVisualProjection(
+    loaded.manifest,
+    loaded.materialization,
+  )
   return {
     ...loaded,
     paperId: loaded.materialization.paperId,
@@ -573,6 +604,7 @@ export function buildNck1ReviewProjection(rootDir, { requireAnalyses = false } =
     compilation: preview.compilation,
     consumption,
     paperAsset,
+    sourceVisuals,
     analysisSidecars: analysisProjection?.sidecars || {},
     analysisDigest: analysisProjection?.digest || null,
   }

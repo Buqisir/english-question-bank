@@ -1,6 +1,6 @@
 # 01 — 源区域与真实 Screen 配对审核
 
-- Status: ready
+- Status: implemented — automated verification PASS; real non-production Owner QA pending
 - Blocked by: None
 - Next on PASS: `03-text-layer-pdf-materializer.md`, then the 06 → 09 image release track
 - Risk: shared Source Materialization + Import Review UI/API; no production mutation
@@ -102,17 +102,17 @@ fixture 由测试代码生成，不提交完整试卷或真实卷面截图。
 
 ## Acceptance criteria
 
-- [ ] synthetic revision 的 table block 点击后，右栏 source crop 页码/rect/target/digest 与
+- [x] synthetic revision 的 table block 点击后，右栏 source crop 页码/rect/target/digest 与
   Materialization 精确一致；中间 iframe 仍是 `reviewRevision` 真实 Screen。
-- [ ] 从 table source visual 点击“定位 Screen”后，真实 iframe 聚焦同一 exact block；无
+- [x] 从 table source visual 点击“定位 Screen”后，真实 iframe 聚焦同一 exact block；无
   exact target时不跳最近元素。
-- [ ] icon 点击至少稳定回到其 table block 的 semantic target；本票不声称精确 mediaId
+- [x] icon 点击至少稳定回到其 table block 的 semantic target；本票不声称精确 mediaId
   issue binding，后者归 ticket 04。
-- [ ] 创建 source 问题后，Review DB 返回相同 group/block/page/rect；刷新后可回放相同 crop。
-- [ ] region/digest/visualId 任一篡改都返回相应 code，无 crop、无 fallback。
-- [ ] 无 region 的旧 revision 显示 `unlocated` 且仍能打开整份源文件；不伪装局部 proof。
-- [ ] Student/Teacher Print/PDF 路由与 approval/shipping 权限不变；页面仍无 deploy action。
-- [ ] source crop 只作 QA evidence，不进入 Canonical `content.blocks` 或 `mediaArtifacts`。
+- [x] 创建 source 问题后，Review DB 返回相同 group/block/page/rect；刷新后可回放相同 crop。
+- [x] region/digest/visualId 任一篡改都返回相应 code，无 crop、无 fallback。
+- [x] 无 region 的旧 revision 显示 `unlocated` 且仍能打开整份源文件；不伪装局部 proof。
+- [x] Student/Teacher Print/PDF 路由与 approval/shipping 权限不变；页面仍无 deploy action。
+- [x] source crop 只作 QA evidence，不进入 Canonical `content.blocks` 或 `mediaArtifacts`。
 
 ## Non-goals
 

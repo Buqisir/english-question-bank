@@ -647,9 +647,11 @@ export function createImportReviewStore({
           SELECT * FROM import_review_files WHERE revision_id = ? ORDER BY path
         `).all(latest.id).map(fileRow))
       : []
-    const visibleStructure = latest && latest.state !== 'uploading'
-      ? projectionForRevision(latest.id).projection.consumption.visibleStructure
-      : []
+    const latestProjection = latest && latest.state !== 'uploading'
+      ? projectionForRevision(latest.id).projection
+      : null
+    const visibleStructure = latestProjection?.consumption.visibleStructure || []
+    const sourceVisuals = latestProjection?.sourceVisuals || []
     const rendererStale = Boolean(
       latest?.rendererBuildId && latest.rendererBuildId !== currentRendererBuildId(),
     )
@@ -663,6 +665,7 @@ export function createImportReviewStore({
       issueMessages,
       files,
       visibleStructure,
+      sourceVisuals,
       rendererStale,
       unresolvedCount: issues.filter((issue) => UNRESOLVED_ISSUE_STATES.has(issue.state)).length,
       updatedAt: paper.updated_at,
@@ -929,6 +932,7 @@ export function createImportReviewStore({
       issueMessages: detail.issueMessages,
       files: detail.files,
       visibleStructure: detail.visibleStructure,
+      sourceVisuals: detail.sourceVisuals,
       rendererStale: detail.rendererStale,
       unresolvedCount: detail.unresolvedCount,
       approval: detail.latest?.state === 'approved' && !detail.rendererStale

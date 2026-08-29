@@ -200,9 +200,10 @@ Owner 将“题卷图片 + 答案图片”定为首批发布能力，因为它�
 因此 C07/09 是 **P0 业务里程碑**；表格视觉、媒体细节、听力音频和混合载体不得抢占它的
 实现顺序。
 
-推荐第一张技术票仍是 `01-source-region-review-pairing.md`。图片经 OCR 后必须由教师对照
-原图与真实 Screen，不能为了抢先发布而跳过确认。最短发布主线是 **01 → 03 → 06 → 09**：
-先建立局部审核与共享 ordered-item parser，再闭合 raster OCR，最后接入显式排序的题卷/
+第一张技术票 `01-source-region-review-pairing.md` 已建立自动化可证的原图局部—真实
+Screen 审核 seam，仍需在首个非生产 Candidate 上做一次真实 Owner QA。图片经 OCR 后
+必须由教师对照原图与真实 Screen，不能为了抢先发布而跳过确认。最短发布主线仍是
+**01 → 03 → 06 → 09**；下一张实现 03 的共享 ordered-item parser，再闭合 raster OCR，最后接入显式排序的题卷/
 答案图片 bundle。每张票独立验收，不授权自动启动下一张，也不授权实际发布真实试卷。
 
 ## Acceptance criteria for this roadmap

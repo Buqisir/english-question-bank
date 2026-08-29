@@ -31,7 +31,12 @@ function nonEmptyString(value) {
   return typeof value === 'string' && value.trim().length > 0
 }
 
-function validateRegion(region, path, issues) {
+function validateRegion(
+  region,
+  path,
+  issues,
+  code = 'MATERIALIZATION_REGION_INVALID',
+) {
   if (
     !isRecordValue(region)
     || !exactKeys(region, ['x', 'y', 'width', 'height'])
@@ -45,7 +50,7 @@ function validateRegion(region, path, issues) {
     || region.y + region.height > 1
   ) {
     issues.push(issue(
-      'MATERIALIZATION_REGION_INVALID',
+      code,
       path,
       'Page regions use normalized x/y/width/height within 0..1',
     ))
@@ -760,9 +765,12 @@ function validateSourceCoverage(sourceCoverage, groups, media, documents, issues
   }
   for (const [index, visual] of sourceCoverage.visuals.entries()) {
     const path = `$.sourceCoverage.visuals[${index}]`
+    const visualKeys = visual?.region === undefined
+      ? ['visualId', 'page', 'disposition', 'targetId']
+      : ['visualId', 'page', 'region', 'disposition', 'targetId']
     if (
       !isRecordValue(visual)
-      || !exactKeys(visual, ['visualId', 'page', 'disposition', 'targetId'])
+      || !exactKeys(visual, visualKeys)
       || !nonEmptyString(visual.visualId)
       || seenVisualIds.has(visual.visualId)
       || !Number.isInteger(visual.page)
@@ -775,6 +783,14 @@ function validateSourceCoverage(sourceCoverage, groups, media, documents, issues
     ) {
       issues.push(issue('MATERIALIZATION_SOURCE_VISUAL_INVALID', path, 'Each detected visual needs unique identity, source page, disposition, and content target'))
       continue
+    }
+    if (visual.region !== undefined) {
+      validateRegion(
+        visual.region,
+        `${path}.region`,
+        issues,
+        'MATERIALIZATION_SOURCE_VISUAL_REGION_INVALID',
+      )
     }
     seenVisualIds.add(visual.visualId)
     if (visual.targetId !== null) {

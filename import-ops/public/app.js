@@ -7,7 +7,9 @@ const state = {
   paperId: null,
   detail: null,
   surface: 'screen',
+  issueSurface: 'screen',
   target: null,
+  pendingScreenTargetId: null,
   error: null,
 }
 
@@ -89,6 +91,7 @@ async function loadPapers({ preserveSelection = true } = {}) {
 async function loadDetail(paperId, shouldRender = true) {
   state.paperId = paperId
   state.target = null
+  state.issueSurface = state.surface
   state.error = null
   try {
     state.detail = await request(`${actorApi()}/papers/${encodeURIComponent(paperId)}`)
@@ -247,12 +250,81 @@ function targetSummaryHtml() {
     state.target.questionId && `题 ${state.target.questionId}`,
     state.target.groupId && `题组 ${state.target.groupId}`,
     state.target.blockId && `段 ${state.target.blockId}`,
+    state.target.mediaId && `媒体 ${state.target.mediaId}`,
   ].filter(Boolean)
   return `<div class="target-summary has-target" id="target-summary">已定位：${escapeHtml(values.join(' · '))}</div>`
 }
 
+function selectedSourceVisual() {
+  if (!state.target) return null
+  const targetIds = [
+    state.target.mediaId,
+    state.target.blockId,
+    state.target.questionId,
+    state.target.groupId,
+  ].filter(Boolean)
+  const visuals = state.detail?.sourceVisuals || []
+  for (const targetId of targetIds) {
+    const visual = visuals.find((candidate) => candidate.targetId === targetId)
+    if (visual) return visual
+  }
+  return null
+}
+
+function sourceFileHref(visual) {
+  const revisionId = state.detail?.latestRevisionId
+  if (!revisionId || !visual?.path) return null
+  return `/api/import-review-preview/revisions/${encodeURIComponent(revisionId)}`
+    + `/files?path=${encodeURIComponent(visual.path)}`
+}
+
+function sourceVisualHtml() {
+  const visual = selectedSourceVisual()
+  if (!state.target) {
+    return '<p class="empty-state">在 Screen 点一个表格、图片或图标，这里会显示原卷对应局部。</p>'
+  }
+  if (!visual) {
+    return '<p class="boundary-note">源区域未配对。不能猜测原卷位置；请 Agent 补充通用 locator 后再核对。</p>'
+  }
+  const wholeSourceHref = sourceFileHref(visual)
+  const actions = `
+    <div class="source-proof-actions">
+      <button class="button" type="button" data-locate-screen="${escapeHtml(visual.targetId)}">定位 Screen</button>
+      ${wholeSourceHref ? `<a class="button source-file-button" href="${escapeHtml(wholeSourceHref)}" target="_blank" rel="noreferrer">打开整份源文件</a>` : ''}
+    </div>`
+  if (visual.state !== 'paired' || !visual.region) {
+    return `<div class="source-proof source-proof--unlocated">
+      <p class="boundary-note">源区域未配对。已知它来自第 ${escapeHtml(visual.page)} 页，但不能把整页当作局部证据。</p>
+      ${actions}
+    </div>`
+  }
+  const revisionId = state.detail.latestRevisionId
+  const cropHref = `/api/import-review-preview/revisions/${encodeURIComponent(revisionId)}`
+    + `/source-visuals/${encodeURIComponent(visual.visualId)}`
+  return `<figure class="source-proof">
+    <img src="${escapeHtml(cropHref)}" alt="原卷第 ${escapeHtml(visual.page)} 页中与 ${escapeHtml(visual.targetId)} 对应的局部" />
+    <figcaption>
+      <strong>第 ${escapeHtml(visual.page)} 页 · ${escapeHtml(visual.disposition)}</strong>
+      <span class="digest" title="${escapeHtml(visual.sourceDigest)}">${escapeHtml(shortDigest(visual.sourceDigest))}</span>
+      <span class="paper-meta">${escapeHtml(visual.targetId)}</span>
+      <span class="paper-meta">区域 ${escapeHtml(Object.values(visual.region).join(', '))}</span>
+    </figcaption>
+    ${actions}
+    ${state.actor === 'owner' ? '<button class="button button--primary" type="button" data-use-source-proof>按这个原卷局部记录问题</button>' : ''}
+  </figure>`
+}
+
+function sourceVisualSectionHtml() {
+  return `<section class="rail-section source-proof-section" id="source-proof-section">
+    <h2>原卷局部</h2>
+    ${sourceVisualHtml()}
+  </section>`
+}
+
 function issueFormHtml() {
   if (state.actor !== 'owner' || !state.detail?.latest) return ''
+  const visual = selectedSourceVisual()
+  const sourcePage = state.issueSurface === 'source' ? visual?.page : null
   return `
     <section class="rail-section">
       <h2>记录问题</h2>
@@ -262,10 +334,10 @@ function issueFormHtml() {
           <label class="field"><span>题组 ID</span><input name="groupId" value="${escapeHtml(state.target?.groupId || '')}" placeholder="group:…" /></label>
           <label class="field"><span>题目 ID</span><input name="questionId" value="${escapeHtml(state.target?.questionId || '')}" placeholder="question:…" /></label>
           <label class="field"><span>段落 ID</span><input name="blockId" value="${escapeHtml(state.target?.blockId || '')}" placeholder="block:…" /></label>
-          <label class="field"><span>页码</span><input name="pageNumber" inputmode="numeric" placeholder="Print / PDF 可填" /></label>
+          <label class="field"><span>页码</span><input name="pageNumber" inputmode="numeric" value="${escapeHtml(sourcePage || '')}" placeholder="Print / PDF 可填" /></label>
         </div>
         <label class="field"><span>要 Agent 改什么</span><textarea name="message" required placeholder="说清发生了什么，以及正确结果应该是什么。"></textarea></label>
-        <p class="field-help">问题会绑定 R${escapeHtml(state.detail.latest.revisionNumber)} · ${escapeHtml(surfaceLabels[state.surface])}，不会漂到别的 revision。</p>
+        <p class="field-help">问题会绑定 R${escapeHtml(state.detail.latest.revisionNumber)} · ${escapeHtml(surfaceLabels[state.issueSurface])}，不会漂到别的 revision。</p>
         <button class="button button--primary" type="submit">记录这个问题</button>
       </form>
     </section>
@@ -290,8 +362,24 @@ function issueActionsHtml(issue) {
   return `<div class="issue-actions"><button class="button" type="button" data-issue-action="reopen" data-issue-id="${escapeHtml(issue.id)}">重新打开</button></div>`
 }
 
+function sourceVisualForIssue(issue) {
+  if (
+    issue.surface !== 'source'
+    || issue.revisionId !== state.detail?.latestRevisionId
+    || !issue.rect
+  ) return null
+  const targetIds = [issue.blockId, issue.questionId, issue.groupId].filter(Boolean)
+  return (state.detail?.sourceVisuals || []).find((visual) =>
+    visual.state === 'paired'
+    && targetIds.includes(visual.targetId)
+    && visual.page === issue.pageNumber
+    && ['x', 'y', 'width', 'height'].every((key) =>
+      visual.region?.[key] === issue.rect[key])) || null
+}
+
 function issueHtml(issue) {
   const messages = issueMessages(issue)
+  const replayVisual = sourceVisualForIssue(issue)
   const location = [issue.groupId, issue.questionId, issue.blockId, issue.pageNumber && `第 ${issue.pageNumber} 页`]
     .filter(Boolean)
     .join(' · ')
@@ -305,6 +393,7 @@ function issueHtml(issue) {
       <span class="digest">${escapeHtml(location || issue.id)}</span>
     </div>
     <p class="issue-message">${escapeHtml(issue.message)}</p>
+    ${replayVisual ? `<button class="button" type="button" data-open-source-issue="${escapeHtml(issue.id)}">查看原卷定位</button>` : ''}
     ${messages.length ? `<div class="thread">${messages.map((message) => `
       <div class="thread-message thread-message--${escapeHtml(message.authorKind)}">
         <div class="thread-author"><strong>${escapeHtml(message.authorName)}</strong><span>${escapeHtml(formatTime(message.createdAt))}</span></div>
@@ -371,6 +460,7 @@ function approvalHtml() {
 
 function rightRailHtml() {
   return `<aside class="right-rail" aria-label="QA 问题与认可">
+    ${sourceVisualSectionHtml()}
     ${issueFormHtml()}
     <section class="rail-section">
       <h2>${state.actor === 'owner' ? 'QA 对话' : 'Owner 反馈'}</h2>
@@ -419,16 +509,22 @@ function screenTarget(event) {
   const question = element.closest('[data-paper-question-id], [data-pi-question-id]')
   const group = element.closest('[data-paper-browse-anchor]')
   const block = element.closest('[data-canonical-block-id]')
+  const media = element.closest('[data-canonical-media-id]')
   const questionId = question?.getAttribute('data-paper-question-id')
     || question?.getAttribute('data-pi-question-id')
   const groupId = group?.getAttribute('data-paper-browse-anchor')
   const blockId = block?.getAttribute('data-canonical-block-id')
-  if (!questionId && !groupId && !blockId) return null
-  return { questionId, groupId, blockId }
+  const mediaId = media?.getAttribute('data-canonical-media-id')
+  if (!questionId && !groupId && !blockId && !mediaId) return null
+  return { questionId, groupId, blockId, mediaId }
 }
 
 function applyScreenTarget(target) {
   state.target = target
+  state.issueSurface = 'screen'
+  const sourceSection = document.querySelector('#source-proof-section')
+  if (sourceSection) sourceSection.outerHTML = sourceVisualSectionHtml()
+  bindSourceProof()
   const summary = document.querySelector('#target-summary')
   const form = document.querySelector('#issue-form')
   if (!summary || !form) return
@@ -436,13 +532,62 @@ function applyScreenTarget(target) {
     target.questionId && `题 ${target.questionId}`,
     target.groupId && `题组 ${target.groupId}`,
     target.blockId && `段 ${target.blockId}`,
+    target.mediaId && `媒体 ${target.mediaId}`,
   ].filter(Boolean)
   summary.classList.add('has-target')
   summary.textContent = `已定位：${values.join(' · ')}`
   form.elements.groupId.value = target.groupId || ''
   form.elements.questionId.value = target.questionId || ''
   form.elements.blockId.value = target.blockId || ''
+  form.elements.pageNumber.value = ''
+  form.querySelector('.field-help').textContent =
+    `问题会绑定 R${state.detail.latest.revisionNumber} · Screen，不会漂到别的 revision。`
   form.elements.message.focus()
+}
+
+function locateScreenTarget(targetId) {
+  if (state.surface !== 'screen') {
+    state.surface = 'screen'
+    state.pendingScreenTargetId = targetId
+    render()
+    return false
+  }
+  const frame = document.querySelector('#review-frame')
+  if (!frame) return false
+  try {
+    const escaped = frame.contentWindow.CSS.escape(targetId)
+    const element = frame.contentDocument.querySelector(
+      `[data-canonical-media-id="${escaped}"],`
+      + `[data-canonical-block-id="${escaped}"],`
+      + `[data-paper-question-id="${escaped}"],`
+      + `[data-paper-browse-anchor="${escaped}"]`,
+    )
+    if (!element) return false
+    element.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    element.setAttribute('tabindex', '-1')
+    element.focus({ preventScroll: true })
+    return true
+  } catch {
+    // Exact same-origin target lookup only; no nearest-element fallback.
+    return false
+  }
+}
+
+function bindSourceProof() {
+  document.querySelector('[data-locate-screen]')?.addEventListener('click', (event) => {
+    locateScreenTarget(event.currentTarget.dataset.locateScreen)
+  })
+  document.querySelector('[data-use-source-proof]')?.addEventListener('click', () => {
+    const visual = selectedSourceVisual()
+    if (!visual?.region) return
+    state.issueSurface = 'source'
+    const form = document.querySelector('#issue-form')
+    if (!form) return
+    form.elements.pageNumber.value = String(visual.page)
+    form.querySelector('.field-help').textContent =
+      `问题会绑定 R${state.detail.latest.revisionNumber} · 源文件 · 第 ${visual.page} 页的精确区域。`
+    form.elements.message.focus()
+  })
 }
 
 function bindFrame() {
@@ -471,6 +616,10 @@ function bindFrame() {
     frame.classList.remove('is-loading')
     if (loading) loading.hidden = true
     attachScreenTargeting()
+    if (state.pendingScreenTargetId) {
+      const targetId = state.pendingScreenTargetId
+      if (locateScreenTarget(targetId)) state.pendingScreenTargetId = null
+    }
   }
   frame.addEventListener('load', frameLoaded)
   if (frame.contentDocument?.readyState === 'complete') frameLoaded()
@@ -483,7 +632,7 @@ function bind() {
   document.querySelectorAll('[data-surface]').forEach((button) => {
     button.addEventListener('click', () => {
       state.surface = button.dataset.surface
-      state.target = null
+      state.issueSurface = state.surface
       render()
     })
   })
@@ -496,6 +645,7 @@ function bind() {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
     const page = String(data.get('pageNumber') || '').trim()
+    const visual = selectedSourceVisual()
     try {
       state.detail = await request(
         `/api/import-reviews/papers/${encodeURIComponent(state.paperId)}/issues`,
@@ -504,11 +654,14 @@ function bind() {
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify({
             revisionId: state.detail.latestRevisionId,
-            surface: state.surface,
+            surface: state.issueSurface,
             groupId: String(data.get('groupId') || '').trim() || null,
             questionId: String(data.get('questionId') || '').trim() || null,
             blockId: String(data.get('blockId') || '').trim() || null,
             pageNumber: page || null,
+            rect: state.issueSurface === 'source' && visual?.region
+              ? visual.region
+              : null,
             message: String(data.get('message') || '').trim(),
           }),
         },
@@ -561,6 +714,23 @@ function bind() {
       }
     })
   })
+  document.querySelectorAll('[data-open-source-issue]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const issue = state.detail.issues.find((candidate) =>
+        candidate.id === button.dataset.openSourceIssue)
+      const visual = issue ? sourceVisualForIssue(issue) : null
+      if (!issue || !visual) return
+      state.target = {
+        groupId: issue.groupId,
+        questionId: issue.questionId,
+        blockId: issue.blockId,
+      }
+      state.issueSurface = 'source'
+      state.surface = 'screen'
+      state.pendingScreenTargetId = visual.targetId
+      render()
+    })
+  })
   const approvalCheck = document.querySelector('#approval-check')
   const approvalButton = document.querySelector('#approve-revision')
   approvalCheck?.addEventListener('change', () => {
@@ -584,6 +754,7 @@ function bind() {
       render()
     }
   })
+  bindSourceProof()
   bindFrame()
 }
 

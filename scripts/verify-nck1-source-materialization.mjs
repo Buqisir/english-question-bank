@@ -447,6 +447,24 @@ missingVisual.sourceCoverage.visuals.pop()
 assert(validateNck1SourceMaterialization(missingVisual).some((item) =>
   item.code === 'MATERIALIZATION_SOURCE_VISUAL_TARGET_MISSING'))
 
+const locatedVisual = structuredClone(withMixedTable)
+locatedVisual.sourceCoverage.visuals[0].region = {
+  x: 0.1,
+  y: 0.2,
+  width: 0.4,
+  height: 0.3,
+}
+assert.deepEqual(
+  validateNck1SourceMaterialization(locatedVisual),
+  [],
+  'source visuals may carry an exact normalized source-page region',
+)
+
+const invalidVisualRegion = structuredClone(locatedVisual)
+invalidVisualRegion.sourceCoverage.visuals[0].region.width = 0.95
+assert(validateNck1SourceMaterialization(invalidVisualRegion).some((item) =>
+  item.code === 'MATERIALIZATION_SOURCE_VISUAL_REGION_INVALID'))
+
 const duplicateVisualTarget = structuredClone(withMixedTable)
 duplicateVisualTarget.sourceCoverage.visuals.push({
   visualId: 'visual:warning-icon-duplicate',

@@ -1,6 +1,6 @@
 # 导题格式能力矩阵
 
-Baseline: `main@4296c85b4d135a9fa532219e2cd9a467a6b7e31d`（2026-08-28 live
+Baseline: `main@4f0def1d05247e68a14a465aa8eb0da7672a0b17`（2026-08-29 live
 `ls-remote` 复核）。状态定义见 `spec.md#capability-state-model`。
 
 这不是“文件扩展名支持表”。每行只对该行写明的真实 shape 作结论。`manual` 表示 schema
@@ -39,16 +39,16 @@ Universal Source Materialization 已接通。
 | B06 | **无法诚实结构化的复杂表/图形**：非矩形关系图、复杂流程组合 | 没有通用 classifier；人工必须先证明不是普通语义表 | source visual + crop recipe 可表达 | `content` media + `pdf_crop`/DOCX media；whole-page `visual_proof` 不可被引用为正文 | Reading `figure` 或 table-cell media；媒体不能反推题意 | figure/media支持 | figure/media支持 | 只能开源文件；需局部 crop pairing 才能审“为何不能语义化” |
 | M01 | **照片、插图、图表、流程图**：正文中的不可结构化视觉 | Universal producer看见 DOCX drawing但只报 review；PDF无 detector；legacy shape path需显式 association | embedded bytes或 PDF crop digest；legacy可枚举 shape | media kind只有 `figure/icon/barcode`，上述类型合并为 `figure`；extraction recipe可闭合 | Canonical `figure` block、immutable media identity | 支持同源 bytes | 支持同源 bytes | 源文件链接；没有自动 source crop ↔ figure 配对 |
 | M02 | **图标、条码**：表格内图标、二维码/条形码、页眉编码 | 无 universal visual classifier；media kind可由人标 `icon`/`barcode` | bytes/digest/crop可保存 | `kind=icon|barcode`；按 accepted policy，正文相关为content、管理条码为furniture，歧义需人工 | icon可经 table `media_ref`；barcode policy尚未实现 | 当普通 image | 当普通 image | 无 content-vs-furniture确认控件；产品规则已定但检测/确认仍缺 |
-| M03 | **原图裁剪与 provenance**：页码、源矩形、pixel、DPI、digest | manual `crop-pdf` 300 DPI；DOCX ZIP entry；legacy shape crop 144 DPI + 2pt padding | immutable source/media artifacts | PDF recipe有 page+normalized region+density；DOCX entry recipe无页/矩形；有 pixel dimensions/digest，无码值摘要字段 | adapter重放 recipe、核 digest/尺寸；拒绝 content SVG 未栅格化 | data URL 使用闭合 bytes | 同一 bytes | revision携带源与media；UI不展示 recipe/rect/dimensions/digest摘要 |
+| M03 | **原图裁剪与 provenance**：页码、源矩形、pixel、DPI、digest | manual `crop-pdf` 与 Review endpoint 共用 `rasterPdfRegion`；DOCX ZIP entry；legacy shape crop 144 DPI + 2pt padding | immutable source/media artifacts | PDF recipe有 page+normalized region+density；source visual可带optional normalized region；DOCX entry recipe无页/矩形 | adapter重放 recipe、核 digest/尺寸；拒绝 content SVG 未栅格化 | data URL 使用闭合 bytes | 同一 bytes | `/ops/` source card显示page/rect/target/digest；crop response带pixel dimensions headers；digest漂移拒绝 |
 | M04 | **媒体版式关系**：block/inline、对齐、跨栏、相对正文宽度、边距 | 当前不检测 source layout relation | 原字节有事实但无 observation | 只有 figure block 或 table-cell `media_ref`；无 alignment/width ratio/margin/cross-column | 只有 block figure与cell inline；renderer用居中/max-width generic规则 | generic center/contain | generic center/contain | 无字段可对照，差异会被静默归一化 |
 | M05 | **标题及前后正文关系**：图片题注、图前/图后段落 | ordered block stream保留 block邻接；producer不自动生成 figure/caption | block source locator可保邻接 | figure有 caption content；没有 caption role（学生正文 vs QA metadata） | Canonical surface type保留 caption/captionInlines | figure renderer忽略 caption、alt为空 | figure renderer忽略 caption、alt为空 | 无 caption可见性检查；这是已证实三面信息丢失 |
 | V01 | **内容像素三面同源**：Canonical content media 已闭合 | adapter re-extracts and compares bytes/dimensions/digest | immutable media artifact | exact recipe + supplied bytes必须一一匹配 | consumption `mediaArtifacts` 将同一 encoded bytes投影 | 同一 encoded bytes | 同一 encoded bytes | revision finalize重编译 Candidate；现有 surface verifier检查 image load/count |
 | V02 | **版式关系三面同源**：表/图比例、位置、留白、正文关系 | 只检测 framed_columns 和部分 semantic table geometry；媒体/表 style缺失 | 局部事实多未结构化 | 可表达 block order、table spans、2-column frame；不能表达大多数关系 | 已有关系由 shared adapter传递；缺失关系无法传递 | 对已表达部分支持 | 对已表达部分支持 | 没有 source local comparison，不能证明关系忠实 |
 | V03 | **整页视觉证据不冒充正文**：full-page screenshot/rendition仅 QA | media `usage` 与 sourceCoverage disposition闭合 | 可作为 source document/`visual_proof` artifact | `visual_proof` 不允许被 content ref；content media必须恰好用一次 | Reading拒绝 flattened `[图:]` bridge，媒体必须闭合 | 不渲染 visual proof为正文 | 不渲染 visual proof为正文 | 当前只可手工打开；原则有 validator proof |
 | R01 | **不可变真实表面审核**：同一 revision 的 Screen、两种 Print、PDF | finalize重推 Candidate/Consumption并绑定 producer/renderer/digests | revision保存 source/materialization/media files及摘要 | Review projection从 revision bytes重新 import/compile | Screen consumption + print consumption仅替换 consumer contract | 真实 `PaperBrowsePage` iframe | `buildPrintHtml`；PDF由同 HTML + Chromium | 支持 issue/reply/fix/approval 状态机；renderer drift会使认可失效 |
-| R02 | **原卷局部 + 真实 Screen 并排与 locator跳转** | 当前无从 Screen target 到 sourceCoverage visual/locator 的 join | 源 files存在；visual只有page/targetId，无region | block locator与sourceCoverage分散存在 | Screen DOM有 group/question/block IDs | 当前只显示单个真实 Screen frame | 切换到 Print/PDF，不与源并排 | 左栏源文件新窗口；没有局部 crop、配对、跳转或“未配对”状态 |
+| R02 | **原卷局部 + 真实 Screen 并排与 locator跳转** | Screen click读取exact group/question/block/media identity，以target优先级精确匹配source visual；不做最近区域猜测 | revision内immutable PDF/rendition bytes、digest、page、optional region | `sourceCoverage.visuals`投影为`paired`或`unlocated`，不建第二套locator | Screen DOM的exact block/media ID与source target join；Canonical仍是语义权威 | 中间保留真实Screen，右栏显示原卷crop并可双向聚焦 | 切换Print/PDF时保留source card；点击定位回真实Screen | authenticated crop endpoint + card metadata + whole-source link；无region明确显示未配对 |
 | R03 | **局部 overlay / 差异提示**：同定位源局部与渲染局部 | 无配准、diff、阈值/误报模型 | 无 renderer crop evidence | 无 | 无共享 comparison model | 无 | 无 | 缺失；应先完成 R02，再用教师任务验证是否值得做 |
-| R04 | **问题绑定到题组/题/表格/媒体/源区域** | Screen click用 closest DOM identity；手填 page | issue存 groupId/questionId/blockId/page/normalized rect/surface | 不读取 Materialization target identity做完整校验 | table/figure都有 blockId；cell/media/content node未进入 issue model | group/question/block可绑定 | page可手填；rect API可存但 UI不采集 | 表格可按block；figure可按block；不能精确绑定cell/mediaId/sourceVisualId，也不双向回放 |
+| R04 | **问题绑定到题组/题/表格/媒体/源区域** | Screen click用closest exact DOM identity；source card从同一target带入page/rect | issue沿用groupId/questionId/blockId/page/normalized rect/surface，无新表 | Review projection提供visual target；issue仍不保存独立media/sourceVisual identity | table/figure有blockId；media click保留其所在block；cell/content node仍未进入issue model | group/question/block可绑定并可从source issue回放 | page可手填；source crop自动提交rect | table/figure/source region可双向回放；仍不能把issue精确绑定到cell/mediaId/sourceVisualId |
 | R05 | **未知形状统一 fail closed**：未登记 container/table/media/layout/OCR | DOCX对部分已知风险检测；schema/Canonical closed unions；PDF/OCR没有shape detector | source bytes通常仍保留 | 多个稳定 `MATERIALIZATION_*`/`NCK1_DOCX_*` code；但无统一 unknown-shape inventory+region | compiler拒绝未知 rich block和未闭合 media | 未进入ready则不渲染 | 未进入ready则不渲染 | issue可人工记录；producer review code不自动成为 `/ops/` source-region task |
 
 ## B. Status, evidence and next work
@@ -80,16 +80,16 @@ Universal Source Materialization 已接通。
 | B06 | `partial` | `MATERIALIZATION_MEDIA_ITEM_INVALID`, `MATERIALIZATION_MEDIA_EXTRACTION_INVALID`, `READING_FIGURE_INCOMPLETE`; 无 classifier code | [E01](#e01-materialization-schema), [E05](#e05-materialization-adapter), [E06](#e06-reading-contract) | 一个非矩形流程关系图 + 一个可矩形化对照表（后者必须拒绝media fallback） | [04](tickets/04-media-layout-intent.md) | **P2**：允许诚实fallback，但必须防“表格截图化” |
 | M01 | `partial` | `NCK1_DOCX_VISUAL_REVIEW_REQUIRED`, `MATERIALIZATION_MEDIA_ITEM_INVALID`, `MATERIALIZATION_MEDIA_EXTRACTION_INVALID`, `READING_FIGURE_INCOMPLETE` | [E03](#e03-docx-producer), [E05](#e05-materialization-adapter), [E06](#e06-reading-contract), [E14](#e14-legacy-docx-media) | 32x24 synthetic PNG嵌DOCX + 同图PDF crop；drawing ambiguity负例 | [04](tickets/04-media-layout-intent.md) | **P1**：像素闭合已有，universal detection/placement是断点 |
 | M02 | `partial` | `MATERIALIZATION_SOURCE_VISUAL_TARGET_INVALID`; 无 content/furniture detector code | [E01](#e01-materialization-schema), [E10](#e10-materialization-contract-proof), [E12](#e12-mixed-table-media-proof) | 16x16 icon in cell + synthetic barcode分别位于正文/header；歧义位置负例 | [04](tickets/04-media-layout-intent.md) | **P2**：产品规则已定；还需通用检测和教师确认 |
-| M03 | `partial` | `MATERIALIZATION_MEDIA_RECIPE_MISMATCH`, `MATERIALIZATION_MEDIA_RECIPE_UNAVAILABLE`, `MATERIALIZATION_MEDIA_DIMENSIONS_MISMATCH`, `MATERIALIZATION_CONTENT_MEDIA_TYPE_UNSUPPORTED` | [E04](#e04-universal-source-cli), [E05](#e05-materialization-adapter), [E14](#e14-legacy-docx-media) | 20x10 PNG：PDF crop和DOCX entry各一；改1px/digest/density负例 | [01](tickets/01-source-region-review-pairing.md), [04](tickets/04-media-layout-intent.md) | **P0**：原像素可证明；需把proof暴露给Review并补layout metadata |
+| M03 | `partial`（Review proof supported） | `MATERIALIZATION_MEDIA_RECIPE_MISMATCH`, `MATERIALIZATION_SOURCE_VISUAL_REGION_INVALID`, `IMPORT_REVIEW_SOURCE_DIGEST_MISMATCH`, `IMPORT_REVIEW_SOURCE_LOCATOR_UNAVAILABLE` | [E04](#e04-universal-source-cli), [E05](#e05-materialization-adapter), [E16](#e16-review-projection-and-routes), [E22](#e22-source-region-pairing-proof) | 已有1页synthetic PDF table/icon crop；继续为media recipe保留改1px/density负例 | [04](tickets/04-media-layout-intent.md) | **P1**：原像素与Review局部已可证明；剩余是共享layout metadata |
 | M04 | `missing` | 无稳定 layout-intent code | [E07](#e07-shared-surface-adapter), [E08](#e08-screen-renderer), [E09](#e09-print-renderer) | 同图三种shape：block 40%左对齐、cell inline、跨栏拒绝例 | [04](tickets/04-media-layout-intent.md) | **P1**：当前generic居中会显著改变正文关系 |
 | M05 | `partial`（Canonical保留，renderer丢失） | 无 caption-loss code | [E07](#e07-shared-surface-adapter), [E08](#e08-screen-renderer), [E09](#e09-print-renderer) | figure前后各一段 + 学生可见caption + QA filename metadata | [04](tickets/04-media-layout-intent.md) | **P1**：产品规则已定；当前仍有明确跨层信息丢失 |
 | V01 | `supported`（已闭合content media） | `MATERIALIZATION_SOURCE_MEDIA_SET_MISMATCH`, `MATERIALIZATION_MEDIA_RECIPE_MISMATCH`, `MATERIALIZATION_MEDIA_DIMENSIONS_MISMATCH`, `READING_MEDIA_PLACEMENT_INVALID` | [E05](#e05-materialization-adapter), [E12](#e12-mixed-table-media-proof), [E13](#e13-shared-surface-proof) | 1个tiny PNG；三面digest/自然尺寸/加载断言 | 维持 E12/E13 regression | **P0 maintenance**：禁止AI重画与表面分叉的核心门禁 |
 | V02 | `partial` | 已表达部分用 rich contract code；缺失部分无code | [E06](#e06-reading-contract), [E07](#e07-shared-surface-adapter), [E19](#e19-framed-columns-proof) | 2栏+表+图的组合shape，断言单一projection | [04](tickets/04-media-layout-intent.md), [05](tickets/05-table-presentation-intent.md) | **P1**：实现“同一布局意图”的主线 |
 | V03 | `supported` | `MATERIALIZATION_MEDIA_PLACEMENT_INVALID`, `READING_FLATTENED_BRIDGE_FORBIDDEN` | [E01](#e01-materialization-schema), [E06](#e06-reading-contract), [E10](#e10-materialization-contract-proof) | full-page `visual_proof` + 未引用正例；引用为body负例 | 保持 contract regression | **P0 maintenance**：防整页截图冒充正文 |
 | R01 | `supported` | `IMPORT_REVIEW_BUNDLE_DIGEST_MISMATCH`, `IMPORT_REVIEW_REVISION_IMMUTABLE`, `IMPORT_REVIEW_STALE_REVISION`, `IMPORT_REVIEW_ISSUES_UNRESOLVED` | [E15](#e15-review-store), [E16](#e16-review-projection-and-routes), [E17](#e17-review-ui-proof) | 现有mock immutable revision bundle | 维持 `node import-ops/verify.mjs` | **P0 maintenance**：审核信任/权限/不可变性成熟，不应另造preview |
-| R02 | `missing` | 无 pairing code；只有 `IMPORT_REVIEW_PATH_INVALID`/target validation | [E15](#e15-review-store), [E16](#e16-review-projection-and-routes), [E17](#e17-review-ui-proof) | 1页synthetic PDF含table+icon；visual region分别绑定block/media target | [01](tickets/01-source-region-review-pairing.md) | **P0，推荐第一票**：所有视觉能力共同QA seam，且可复用现有模型 |
+| R02 | `supported`（exact region-bearing visual） | `MATERIALIZATION_SOURCE_VISUAL_REGION_INVALID`, `IMPORT_REVIEW_SOURCE_VISUAL_NOT_FOUND`, `IMPORT_REVIEW_SOURCE_LOCATOR_UNAVAILABLE`, `IMPORT_REVIEW_SOURCE_DIGEST_MISMATCH` | [E15](#e15-review-store), [E16](#e16-review-projection-and-routes), [E17](#e17-review-ui-proof), [E22](#e22-source-region-pairing-proof) | verifier实时生成1页PDF、table/icon/unlocated visual并在authenticated `/ops/`实点 | 真实非生产Candidate做Owner QA；producer regions由03/06/09生成 | **P0 maintenance**：后续每个adapter都必须复用，不另造preview |
 | R03 | `missing` | 无 | [E17](#e17-review-ui-proof)（证明当前单frame/文件链接） | 暂不做；需先收集R02真实QA误差样本 | R02完成并有教师证据后才开票 | **P3**：字体/重排噪声高，不先做自动diff |
-| R04 | `partial` | `IMPORT_REVIEW_TARGET_REQUIRED`, `IMPORT_REVIEW_RECT_INVALID`, `IMPORT_REVIEW_PAGE_INVALID`, `IMPORT_REVIEW_SURFACE_INVALID` | [E15](#e15-review-store), [E17](#e17-review-ui-proof) | Screen table/figure/cell/icon各一次点击；source crop rectangle一次 | [01](tickets/01-source-region-review-pairing.md) 先闭合block/source；04再补media/content-node | **P0**：反馈若不绑定对象，下个revision无法稳定复核 |
+| R04 | `partial`（block/source region supported） | `IMPORT_REVIEW_TARGET_REQUIRED`, `IMPORT_REVIEW_RECT_INVALID`, `IMPORT_REVIEW_PAGE_INVALID`, `IMPORT_REVIEW_SURFACE_INVALID` | [E15](#e15-review-store), [E17](#e17-review-ui-proof), [E22](#e22-source-region-pairing-proof) | 现有table/icon/source rectangle正例；后续补cell/content-node负例 | [04](tickets/04-media-layout-intent.md) 补精确media/content-node identity | **P1**：稳定block+source已闭合；细粒度identity不阻塞图片主线 |
 | R05 | `partial` | `MATERIALIZATION_BLOCK_UNSUPPORTED`, `NCK1_DOCX_CONTAINER_UNSUPPORTED`, `NCK1_DOCX_TABLE_REVIEW_REQUIRED`, `READING_BLOCK_INVALID` 等 | [E01](#e01-materialization-schema), [E03](#e03-docx-producer), [E05](#e05-materialization-adapter), [E06](#e06-reading-contract) | 每个ticket带一个unknown邻接shape；都必须含locator+stable code | 02/03/04/06/07/09/10/11分别补，不建第二套总模型 | **P0**：防静默丢失；按adapter局部关闭而非巨型classifier |
 
 ## Evidence catalog
@@ -195,17 +195,21 @@ Universal Source Materialization 已接通。
 
 ### E16 Review projection and routes
 
-- `server/import-review/revisionProjection.mjs`：`loadNck1ReviewSource`, `mediaArtifacts`,
-  `buildConsumption`, `buildNck1ReviewProjection`, `printConsumption`。
-- `server/import-review/importReviewRoutes.mjs`：`reviewPrintHtml` 及
-  `/consumption`, `/asset`, `/print`, `/pdf`, `/files` routes。
+- `server/import-review/revisionProjection.mjs`：`loadNck1ReviewSource`,
+  `sourceVisualProjection`, `mediaArtifacts`, `buildConsumption`, `buildNck1ReviewProjection`,
+  `printConsumption`。
+- `server/import-review/importReviewRoutes.mjs`：`reviewPrintHtml`、revision-bound
+  `/source-visuals/:visualId` 及 `/consumption`, `/asset`, `/print`, `/pdf`, `/files` routes。
+- `server/paper-canonical/pdfRegionRaster.mjs`：`rasterPdfRegion`；Review、media recipe replay
+  与 `universal-nck1 crop-pdf` 共用同一 normalized-region primitive。
 
 ### E17 Review UI proof
 
 - `import-ops/public/app.js`：`filesHtml`, `surfaceUrl`, `surfaceStageHtml`, `screenTarget`,
-  `applyScreenTarget`, `issueFormHtml`。
+  `selectedSourceVisual`, `sourceVisualHtml`, `applyScreenTarget`, `locateScreenTarget`,
+  `sourceVisualForIssue`, `issueFormHtml`。
 - `import-ops/verify.mjs`：immutable revision、issue workflow、`reviewRevision` real Screen、
-  shared Print/PDF、权限与 shipping boundary assertions。
+  source page/rect persistence、shared Print/PDF、权限与 shipping boundary assertions。
 
 ### E18 Inactive listening
 
@@ -239,14 +243,21 @@ Universal Source Materialization 已接通。
 - `scripts/verify-nck1-docx-materialization-producer.mjs`：断言45项权威答案及只有
   `writing_analysis` 留在 Agent reasoning path。
 
+### E22 Source-region pairing proof
+
+- `scripts/verify-import-review-source-pairing.mjs`：运行时生成匿名1页PDF；验证authenticated
+  PNG crop与metadata headers、unknown/unlocated/digest drift拒绝；真实浏览器打开`/ops/`，
+  实点Screen table/icon/unlocated block，验证跨Print保留card、exact Screen回跳、source issue
+  group/block/page/rect提交及刷新回放。
+
 ## Conclusions from the matrix
 
 - **最成熟**：限定形状的 DOCX 简单文本路径（C02/T01/T02）和已闭合媒体的三面同像素
   路径（V01），都有 immutable bytes、稳定 locator/identity、Canonical 与真实 surface proof。
 - **最缺失**：扫描 PDF/OCR（C03）与有序图片页（C07）没有试卷 adapter；文本层 PDF
   （C01）虽可 capture，自动 Materialization 也不存在。无答案来源（C10）连 durable
-  source-only 暂存都没有。视觉侧最明显的公共缺口是 R02/M04：没有源局部—真实 Screen
-  配对，也没有共享媒体布局意图。
+  source-only 暂存都没有。视觉侧 R02 已闭合 exact source-region Review seam，最明显的
+  剩余公共缺口是 M04：没有共享媒体布局意图。
 - **首批发布目标**：先闭合题卷图片 + 答案图片的清晰单栏 shape（C07），复杂多栏、图形
   与表格继续 fail closed；发布速度不能以跳过 OCR 人工确认或 Canonical 三面回归为代价。
 - **不要误报**：`init` 能接收 PDF/混合载体不等于 `materialize` 支持；legacy DOCX shape

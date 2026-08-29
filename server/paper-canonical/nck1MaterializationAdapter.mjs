@@ -17,6 +17,7 @@ import {
   sha256,
 } from '../../shared/paper-canonical/stable.mjs'
 import { extractDocxDocumentParagraphs } from './docxSourceAdapter.mjs'
+import { rasterPdfRegion } from './pdfRegionRaster.mjs'
 
 export const NCK1_MATERIALIZATION_INPUT_KIND =
   'nck1-source-materialization'
@@ -123,9 +124,17 @@ function bundleDigest(materializationBytes, documents, media) {
 }
 
 function reextractMedia(media, documentBytes) {
+  if (media.extraction.kind === 'pdf_crop') {
+    return rasterPdfRegion({
+      pdfBytes: documentBytes,
+      page: media.extraction.page,
+      region: media.extraction.region,
+      density: media.extraction.density,
+    }).bytes
+  }
   const temp = mkdtempSync(path.join(tmpdir(), 'eqb-nck1-media-proof-'))
   try {
-    const sourcePath = path.join(temp, media.extraction.kind === 'pdf_crop' ? 'source.pdf' : 'source.docx')
+    const sourcePath = path.join(temp, 'source.docx')
     writeFileSync(sourcePath, documentBytes)
     if (media.extraction.kind === 'docx_media') {
       return new Uint8Array(execFileSync('unzip', [
@@ -140,23 +149,7 @@ function reextractMedia(media, documentBytes) {
         '-density', String(media.extraction.density), 'svg:-', 'png32:-',
       ], { input: svg, maxBuffer: 50 * 1024 * 1024 }))
     }
-    const pagePrefix = path.join(temp, 'page')
-    execFileSync('pdftoppm', [
-      '-f', String(media.extraction.page),
-      '-l', String(media.extraction.page),
-      '-singlefile',
-      '-r', String(media.extraction.density),
-      '-png', sourcePath, pagePrefix,
-    ])
-    const pagePath = `${pagePrefix}.png`
-    const [pixelWidth, pixelHeight] = execFileSync(
-      'magick', ['identify', '-format', '%w,%h', pagePath], { encoding: 'utf8' },
-    ).split(',').map(Number)
-    const { x, y, width, height } = media.extraction.region
-    const geometry = `${Math.round(width * pixelWidth)}x${Math.round(height * pixelHeight)}+${Math.round(x * pixelWidth)}+${Math.round(y * pixelHeight)}`
-    return new Uint8Array(execFileSync('magick', [
-      pagePath, '-crop', geometry, '+repage', 'png32:-',
-    ], { maxBuffer: 50 * 1024 * 1024 }))
+    throw new Error(`Unsupported media extraction kind: ${media.extraction.kind}`)
   } finally {
     rmSync(temp, { recursive: true, force: true })
   }

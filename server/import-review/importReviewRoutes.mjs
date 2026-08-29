@@ -12,8 +12,10 @@ import {
 import path from 'node:path'
 
 import { canonicalConsumptionPrintPayload } from '../../scripts/import-pipeline/canonical-consumption-print-payload.mjs'
+import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { defineRoute } from '../router/index.mjs'
 import { withChromiumPage } from '../draft-paper/chromiumPool.mjs'
+import { rasterPdfRegion } from '../paper-canonical/pdfRegionRaster.mjs'
 import { printConsumption, resolveReviewFile } from './revisionProjection.mjs'
 
 function safeEqual(left, right) {
@@ -128,13 +130,28 @@ function sendHtml(response, html) {
   response.end(html)
 }
 
-function sendBinary(response, body, contentType, fileName, disposition = 'inline') {
+function sendBinary(
+  response,
+  body,
+  contentType,
+  fileName,
+  disposition = 'inline',
+  headers = {},
+) {
   response.writeHead(200, {
     'cache-control': 'no-store',
     'content-disposition': `${disposition}; filename*=UTF-8''${encodeURIComponent(fileName)}`,
     'content-type': contentType,
+    ...headers,
   })
   response.end(body)
+}
+
+function reviewError(code, message, status) {
+  const error = new Error(message)
+  error.code = code
+  error.status = status
+  return error
 }
 
 function reviewPrintHtml(projection, versionType, buildPrintHtml) {
@@ -409,6 +426,94 @@ export function createImportReviewRoutes({
     if (!requireReviewer(response, context)) return
     const { projection } = store.projectionForRevision(match[1])
     context.sendJson(response, 200, projection.consumption)
+  })))
+
+  routes.push(defineRoute('GET', /^\/api\/import-review-preview\/revisions\/([^/]+)\/source-visuals\/([^/]+)$/, route(({
+    response,
+    context,
+    match,
+  }) => {
+    if (!requireReviewer(response, context)) return
+    let revision
+    let projection
+    try {
+      ({ revision, projection } = store.projectionForRevision(match[1]))
+    } catch (error) {
+      if (error?.code === 'IMPORT_REVIEW_FILE_DIGEST_MISMATCH') {
+        throw reviewError(
+          'IMPORT_REVIEW_SOURCE_DIGEST_MISMATCH',
+          'Revision bytes changed; source proof is unavailable',
+          409,
+        )
+      }
+      throw error
+    }
+    const visualId = decodeURIComponent(match[2])
+    const visual = projection.sourceVisuals?.find((candidate) =>
+      candidate.visualId === visualId)
+    if (!visual) {
+      throw reviewError(
+        'IMPORT_REVIEW_SOURCE_VISUAL_NOT_FOUND',
+        'Source visual not found',
+        404,
+      )
+    }
+    if (visual.state !== 'paired' || !visual.region || visual.mediaType !== 'application/pdf') {
+      throw reviewError(
+        'IMPORT_REVIEW_SOURCE_LOCATOR_UNAVAILABLE',
+        'Source visual has no exact PDF region',
+        409,
+      )
+    }
+    const sourcePath = resolveReviewFile(
+      store.revisionDirectory(revision.id),
+      visual.path,
+      'Source visual document',
+    )
+    if (!existsSync(sourcePath)) {
+      throw reviewError(
+        'IMPORT_REVIEW_SOURCE_DIGEST_MISMATCH',
+        'Source visual document is unavailable',
+        409,
+      )
+    }
+    const sourceBytes = new Uint8Array(readFileSync(sourcePath))
+    if (sha256(sourceBytes) !== visual.sourceDigest) {
+      throw reviewError(
+        'IMPORT_REVIEW_SOURCE_DIGEST_MISMATCH',
+        'Source visual document no longer matches its immutable digest',
+        409,
+      )
+    }
+    let crop
+    try {
+      crop = rasterPdfRegion({
+        pdfBytes: sourceBytes,
+        page: visual.page,
+        region: visual.region,
+        density: 150,
+      })
+    } catch {
+      throw reviewError(
+        'IMPORT_REVIEW_SOURCE_LOCATOR_UNAVAILABLE',
+        'Source visual region cannot be rendered',
+        409,
+      )
+    }
+    sendBinary(
+      response,
+      crop.bytes,
+      'image/png',
+      `${visual.visualId.replaceAll(':', '-')}.png`,
+      'inline',
+      {
+        'x-eqb-source-digest': visual.sourceDigest,
+        'x-eqb-source-page': String(visual.page),
+        'x-eqb-source-region': JSON.stringify(visual.region),
+        'x-eqb-pixel-width': String(crop.pixelWidth),
+        'x-eqb-pixel-height': String(crop.pixelHeight),
+      },
+    )
   })))
 
   routes.push(defineRoute('GET', /^\/api\/import-review-preview\/revisions\/([^/]+)\/asset\/(.+)$/, route(({

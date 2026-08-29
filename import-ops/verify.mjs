@@ -37,6 +37,18 @@ function fixtureProjection(rootDir) {
         familyContractId: 'reading',
       }],
     },
+    sourceVisuals: [{
+      visualId: 'visual:reading-a',
+      documentId: 'paper',
+      path: 'source/questions.pdf',
+      sourceDigest: identity.sourceDigest,
+      mediaType: 'application/pdf',
+      page: 1,
+      region: { x: 0.1, y: 0.2, width: 0.3, height: 0.4 },
+      disposition: 'semantic_table',
+      targetId: identity.groupId,
+      state: 'paired',
+    }],
   }
 }
 
@@ -145,7 +157,13 @@ try {
     (error) => error.code === 'IMPORT_REVIEW_REVISION_IMMUTABLE',
     'finalized revision is immutable',
   )
-  assert.equal(store.paperDetail(first.input.paperId).visibleStructure[0].groupId, 'group:reading-a')
+  const firstDetail = store.paperDetail(first.input.paperId)
+  assert.equal(firstDetail.visibleStructure[0].groupId, 'group:reading-a')
+  assert.equal(firstDetail.sourceVisuals[0].targetId, 'group:reading-a')
+  assert.equal(
+    store.agentPaperStatus(first.input.paperId).sourceVisuals[0].visualId,
+    'visual:reading-a',
+  )
 
   assert.throws(
     () => store.createIssue(first.input.paperId, {
@@ -158,11 +176,19 @@ try {
   )
   let detail = store.createIssue(first.input.paperId, {
     revisionId: finalizedFirst.id,
-    surface: 'screen',
+    surface: 'source',
     groupId: 'group:reading-a',
+    pageNumber: 1,
+    rect: { x: 0.1, y: 0.2, width: 0.3, height: 0.4 },
     message: '第 1 段漏了一句',
   }, 'owner')
   const issueId = detail.issues[0].id
+  assert.deepEqual(detail.issues[0].rect, {
+    x: 0.1,
+    y: 0.2,
+    width: 0.3,
+    height: 0.4,
+  })
   assert.equal(detail.latest.state, 'changes_requested')
   assert.throws(
     () => store.approveRevision(
