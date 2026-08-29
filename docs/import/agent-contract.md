@@ -17,11 +17,16 @@
 
 ## 开局（owner 只给这三样）
 
-1. 完整源文件**绝对路径**（PDF/DOCX 可混合；找卷不在范围），并标明 `question_source`、`official_answers` 或 `question_and_answers`。至少一份完整试题源和一份权威答案源。
-2. `paperId`（真题如 `paper-2026-ii`；模拟卷如 `paper-mock-gd-2026-m1`）
+1. 完整源文件**绝对路径**，并标明 `question_source`、`official_answers` 或
+   `question_and_answers`。正常导入至少一份完整试题源和一份权威答案源；若暂时只有题卷，
+   走下述source-only暂存，不进入普通导入状态机。
+2. 完整source set才分配`paperId`（真题如 `paper-2026-ii`；模拟卷如
+   `paper-mock-gd-2026-m1`）。只有题卷时先使用通用`sourceSetId`，不为单卷造paperId特例。
 3. 卷名与如实出处。
 
-不匹配 `nck1-paper-standard.md` 固定 NCK1 九题组，或缺完整权威答案 → **停**。源载体和普通版式变化不是新格式，也不新增格式刀。
+不匹配 `nck1-paper-standard.md` 固定 NCK1 九题组 → **停**。缺完整权威答案时只允许
+source-only暂存后停；不得Materialize、上传Review、AI解题或发布。源载体和普通版式变化
+不是新格式，也不新增格式刀。
 
 ```bash
 node scripts/import-pipeline/universal-nck1.mjs preflight
@@ -30,6 +35,31 @@ node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
   --source question_source=/abs/questions.docx \
   --source official_answers=/abs/answers.pdf
 ```
+
+只有题卷时，先安全保留来源；图片页改用重复的
+`--source-page question_source:<页码>=/abs/page.png`：
+
+```bash
+node scripts/import-pipeline/universal-nck1.mjs capture-source-only <sourceSetId> \
+  --paper-name '<卷名>' --provenance '<题卷出处>' \
+  --source question_source=/abs/questions.pdf
+node scripts/import-pipeline/universal-nck1.mjs source-only-status <sourceSetId>
+node scripts/import-pipeline/universal-nck1.mjs list-source-only
+```
+
+它写入gitignored `imports/source-only/`，保留原bytes、页序和digest，但不生成config、
+Materialization、Candidate或Review revision。以后找到权威答案，再显式绑定status给出的
+`questionSetDigest`并创建新的完整source set；旧`capture.json`和题卷bytes不修改：
+
+```bash
+node scripts/import-pipeline/universal-nck1.mjs attach-answers \
+  <sourceSetId> <newPaperId> \
+  --question-set-digest 'sha256:…' --answer-provenance '<答案出处>' \
+  --source official_answers=/abs/answers.pdf
+```
+
+该命令只确认“调用方把这份答案绑定到哪份不可变题卷”，不猜答案是否属于该卷；新的
+complete set仍必须通过正常Materialization、答案覆盖检查和Owner Review。
 
 ## 单 writer
 

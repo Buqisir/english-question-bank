@@ -10,8 +10,9 @@
   [03 — text-layer PDF materializer](tickets/03-text-layer-pdf-materializer.md) 与
   [06 — scanned PDF OCR evidence](tickets/06-scanned-pdf-ocr-evidence.md) 已实现synthetic/public
   seam；[09 — ordered image source bundle](tickets/09-ordered-image-source-bundle.md) 也已接通
-  显式图片页、`/ops/` OCR确认和同一Canonical三面synthetic回归。下一步是另行授权的真实、
-  只读、非CQ8 Owner QA，不是自动发布。
+  显式图片页、`/ops/` OCR确认和同一Canonical三面synthetic回归；[11 — source-only
+  awaiting answers](tickets/11-source-only-awaiting-answers.md) 已让无答案DOCX/PDF/图片题卷
+  先安全暂存且禁止Candidate/审核/发布。补到答案时再走10的通用答案shape；不是自动发布。
 
 ## 遇到陌生形状
 

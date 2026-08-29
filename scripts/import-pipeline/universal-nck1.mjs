@@ -34,6 +34,21 @@ import {
   nck1ImageExtension,
 } from '../../server/paper-import/nck1ImageSourceBundle.mjs'
 import {
+  NCK1_ANSWER_ATTACHMENT_DUPLICATE,
+  NCK1_ANSWER_ATTACHMENT_QUESTION_MISMATCH,
+  NCK1_AUTHORITATIVE_ANSWERS_AWAITED,
+  assertNotNck1SourceOnly,
+  listNck1SourceOnlyCaptures,
+  makeNck1SourceOnlyCapture,
+  nck1QuestionSetDigest,
+  nck1SourceOnlyDirectory,
+  nck1SourceOnlyExists,
+  readNck1SourceOnlyCapture,
+  validNck1SourceSetId,
+  writeNck1SourceOnlyCapture,
+  writeNck1SourceOnlySuccessor,
+} from './nck1-source-only.mjs'
+import {
   runNck1MaterializationJobUnlocked,
   withPaperWriterLock,
 } from './nck1-docx-materialize.mjs'
@@ -50,6 +65,12 @@ const docxMediaType =
 
 function fail(message) {
   throw new Error(message)
+}
+
+function failCode(code, message) {
+  const error = new Error(message)
+  error.code = code
+  throw error
 }
 
 function validPaperId(paperId) {
@@ -222,13 +243,7 @@ function renderImageBundlePdf(pages, targetPath) {
   }
 }
 
-function initialize() {
-  const paperId = process.argv[3]
-  const paperName = value('--paper-name')
-  const provenance = value('--provenance')
-  const sources = values('--source').map(parseSource)
-  const sourcePages = values('--source-page').map(parseSourcePage)
-  const imageSources = groupedSourcePages(sourcePages)
+function validateSourceInputs({ paperId, paperName, provenance, sources, imageSources }) {
   if (!validPaperId(paperId)) {
     fail('init requires a valid paperId')
   }
@@ -240,16 +255,18 @@ function initialize() {
   }
   const sourceRoles = [...sources, ...imageSources].map((item) => item.role)
   if (!sourceRoles.some((role) => ['official_answers', 'question_and_answers'].includes(role))) {
-    fail('Authoritative answers are required; AI-generated answers are forbidden')
+    failCode(
+      NCK1_AUTHORITATIVE_ANSWERS_AWAITED,
+      'Authoritative answers are required; use capture-source-only instead of generating answers',
+    )
   }
   if (!sourceRoles.some((role) => ['question_source', 'question_and_answers'].includes(role))) {
     fail('One complete question source is required')
   }
-  const environment = runImportEnvironmentPreflight()
-  const paperDir = path.join(papersRoot, paperId)
-  const configPath = path.join(paperDir, 'config.json')
-  if (existsSync(configPath)) fail(`Paper already has a writer/config: ${paperId}`)
-  const sourceDir = path.join(paperDir, 'source')
+}
+
+function captureSourceDocuments({ targetDirectory, sources, imageSources }) {
+  const sourceDir = path.join(targetDirectory, 'source')
   const renditionDir = path.join(sourceDir, 'renditions')
   mkdirSync(renditionDir, { recursive: true })
   const documents = []
@@ -258,7 +275,7 @@ function initialize() {
     const extension = mediaType === 'application/pdf' ? 'pdf' : 'docx'
     const documentId = `${source.role.replaceAll('_', '-')}-${source.index + 1}`
     const relativePath = path.posix.join('source', `${documentId}.${extension}`)
-    const targetPath = path.join(paperDir, relativePath)
+    const targetPath = path.join(targetDirectory, relativePath)
     copyFileSync(source.sourcePath, targetPath)
     const record = fileRecord(
       documentId,
@@ -274,7 +291,7 @@ function initialize() {
         'renditions',
         `${renditionId}.pdf`,
       )
-      const renditionPath = path.join(paperDir, renditionRelativePath)
+      const renditionPath = path.join(targetDirectory, renditionRelativePath)
       renderDocx(targetPath, renditionPath)
       record.pageCount = pdfPageCount(renditionPath)
       record.renditionDocumentId = renditionId
@@ -307,7 +324,7 @@ function initialize() {
         pageDirectory,
         `page-${String(sourcePage.page).padStart(4, '0')}.${nck1ImageExtension(inspected.mediaType)}`,
       )
-      const targetPath = path.join(paperDir, relativePath)
+      const targetPath = path.join(targetDirectory, relativePath)
       mkdirSync(path.dirname(targetPath), { recursive: true })
       writeFileSync(targetPath, bytes)
       return {
@@ -319,7 +336,7 @@ function initialize() {
       }
     })
     const descriptorBytes = buildNck1ImageSourceBundle(pageRecords)
-    const descriptorPath = path.join(paperDir, descriptorRelativePath)
+    const descriptorPath = path.join(targetDirectory, descriptorRelativePath)
     writeFileSync(descriptorPath, descriptorBytes)
     const renditionId = `${documentId}-pdf-rendition`
     const renditionRelativePath = path.posix.join(
@@ -327,7 +344,7 @@ function initialize() {
       'renditions',
       `${renditionId}.pdf`,
     )
-    const renditionPath = path.join(paperDir, renditionRelativePath)
+    const renditionPath = path.join(targetDirectory, renditionRelativePath)
     renderImageBundlePdf(pageRecords, renditionPath)
     documents.push({
       documentId,
@@ -351,6 +368,26 @@ function initialize() {
       renditionOf: documentId,
     })
   }
+  return documents
+}
+
+function initializeCompleteSourceSet({
+  paperId,
+  paperName,
+  provenance,
+  sources,
+  imageSources,
+}) {
+  validateSourceInputs({ paperId, paperName, provenance, sources, imageSources })
+  const environment = runImportEnvironmentPreflight()
+  const paperDir = path.join(papersRoot, paperId)
+  const configPath = path.join(paperDir, 'config.json')
+  if (existsSync(configPath)) fail(`Paper already has a writer/config: ${paperId}`)
+  const documents = captureSourceDocuments({
+    targetDirectory: paperDir,
+    sources,
+    imageSources,
+  })
   const manifest = {
     schemaVersion: 'universal-nck1-source-manifest-v1',
     paperId,
@@ -375,6 +412,223 @@ function initialize() {
   }, null, 2)}\n`)
   writeImportEnvironmentPreflightReceipt(paperDir, environment)
   console.log(`INITIALIZED ${paperId}: ${path.relative(root, paperDir)}`)
+  return { paperDir, manifest }
+}
+
+function initialize() {
+  const paperId = process.argv[3]
+  const paperName = value('--paper-name')
+  const provenance = value('--provenance')
+  const sources = values('--source').map(parseSource)
+  const sourcePages = values('--source-page').map(parseSourcePage)
+  const imageSources = groupedSourcePages(sourcePages)
+  return initializeCompleteSourceSet({
+    paperId,
+    paperName,
+    provenance,
+    sources,
+    imageSources,
+  })
+}
+
+function captureSourceOnly() {
+  const sourceSetId = process.argv[3]
+  const paperName = value('--paper-name')
+  const provenance = value('--provenance')
+  const sources = values('--source').map(parseSource)
+  const imageSources = groupedSourcePages(values('--source-page').map(parseSourcePage))
+  if (!validNck1SourceSetId(sourceSetId)) {
+    fail('capture-source-only requires a valid sourceSetId beginning with source-set-')
+  }
+  if (!paperName || !provenance || (sources.length === 0 && imageSources.length === 0)) {
+    fail('capture-source-only requires --paper-name, --provenance, and question source input')
+  }
+  if (sources.length > 0 && imageSources.length > 0) {
+    fail('One source-only capture cannot mix whole-document and image page input')
+  }
+  if ([...sources, ...imageSources].some((input) => input.role !== 'question_source')) {
+    fail('capture-source-only accepts question_source input only')
+  }
+  const directory = nck1SourceOnlyDirectory(sourceSetId)
+  if (existsSync(directory)) {
+    failCode(
+      NCK1_AUTHORITATIVE_ANSWERS_AWAITED,
+      `Source-only directory already exists: ${sourceSetId}`,
+    )
+  }
+  return withPaperWriterLock({ paperDir: directory, paperId: sourceSetId }, () => {
+    try {
+      const environment = runImportEnvironmentPreflight()
+      const documents = captureSourceDocuments({
+        targetDirectory: directory,
+        sources,
+        imageSources,
+      })
+      const capture = makeNck1SourceOnlyCapture({
+        sourceSetId,
+        provenance: { paperName, source: provenance },
+        documents,
+        environmentDigest: environment.environmentDigest,
+      })
+      writeNck1SourceOnlyCapture(directory, capture)
+      console.log(JSON.stringify({
+        ok: true,
+        sourceSetId,
+        state: capture.state,
+        reasonCode: capture.reasonCode,
+        questionSetDigest: capture.questionSetDigest,
+        captureDigest: capture.captureDigest,
+        capturePath: path.relative(root, path.join(directory, 'capture.json')),
+      }, null, 2))
+      return capture
+    } catch (error) {
+      rmSync(directory, { recursive: true, force: true })
+      throw error
+    }
+  })
+}
+
+function questionInputsFromSourceOnly(context) {
+  const primaryDocuments = context.capture.documents.filter((document) =>
+    document.role === 'question_source' && !document.renditionOf)
+  const imageDocuments = primaryDocuments.filter((document) =>
+    document.mediaType === NCK1_IMAGE_BUNDLE_MEDIA_TYPE)
+  if (imageDocuments.length > 0 && imageDocuments.length !== primaryDocuments.length) {
+    fail('Source-only capture has mixed question carriers that the current router cannot complete')
+  }
+  if (imageDocuments.length > 0) {
+    return {
+      sources: [],
+      imageSources: imageDocuments.map((document, index) => ({
+        role: 'question_source',
+        index,
+        pages: document.pages.map((page) => ({
+          role: 'question_source',
+          page: page.page,
+          sourcePath: path.join(context.directory, page.path),
+          index: page.page - 1,
+        })),
+      })),
+    }
+  }
+  return {
+    sources: primaryDocuments.map((document, index) => ({
+      role: 'question_source',
+      sourcePath: path.join(context.directory, document.path),
+      index,
+    })),
+    imageSources: [],
+  }
+}
+
+function attachAnswers() {
+  const sourceSetId = process.argv[3]
+  const paperId = process.argv[4]
+  const expectedQuestionSetDigest = value('--question-set-digest')
+  const answerProvenance = value('--answer-provenance')
+  const answerSources = values('--source').map(parseSource)
+  const answerImageSources = groupedSourcePages(values('--source-page').map(parseSourcePage))
+  if (!validPaperId(paperId)) fail('attach-answers requires a new valid paperId')
+  if (!expectedQuestionSetDigest || !answerProvenance) {
+    fail('attach-answers requires --question-set-digest and --answer-provenance')
+  }
+  if (answerSources.length === 0 && answerImageSources.length === 0) {
+    fail('attach-answers requires an authoritative answer --source or --source-page')
+  }
+  if ([...answerSources, ...answerImageSources].some((input) =>
+    input.role !== 'official_answers')) {
+    fail('attach-answers accepts official_answers input only')
+  }
+  if (!nck1SourceOnlyExists(sourceSetId)) {
+    failCode(
+      NCK1_AUTHORITATIVE_ANSWERS_AWAITED,
+      `Source-only capture is missing: ${sourceSetId}`,
+    )
+  }
+  const directory = nck1SourceOnlyDirectory(sourceSetId)
+  return withPaperWriterLock({ paperDir: directory, paperId: sourceSetId }, () => {
+    const context = readNck1SourceOnlyCapture(sourceSetId)
+    if (context.successor) {
+      failCode(
+        NCK1_ANSWER_ATTACHMENT_DUPLICATE,
+        `Authoritative answers were already attached to ${sourceSetId}`,
+      )
+    }
+    if (expectedQuestionSetDigest !== context.capture.questionSetDigest) {
+      failCode(
+        NCK1_ANSWER_ATTACHMENT_QUESTION_MISMATCH,
+        'The answer attachment does not name the immutable questionSetDigest',
+      )
+    }
+    const questionInputs = questionInputsFromSourceOnly(context)
+    if (
+      (questionInputs.sources.length > 0 && answerImageSources.length > 0)
+      || (questionInputs.imageSources.length > 0 && answerSources.length > 0)
+    ) {
+      fail('The current complete-source router cannot mix document and image carriers')
+    }
+    const sources = [
+      ...questionInputs.sources,
+      ...answerSources,
+    ].map((source, index) => ({ ...source, index }))
+    const imageSources = [
+      ...questionInputs.imageSources,
+      ...answerImageSources,
+    ].map((source, index) => ({ ...source, index }))
+    const completeProvenance = `${context.capture.provenance.source}; authoritative answers: ${answerProvenance}`
+    const initialized = runPaperCommand(paperId, () => initializeCompleteSourceSet({
+      paperId,
+      paperName: context.capture.provenance.paperName,
+      provenance: completeProvenance,
+      sources,
+      imageSources,
+    }))
+    const completeQuestionSetDigest = nck1QuestionSetDigest(initialized.manifest.documents)
+    if (completeQuestionSetDigest !== context.capture.questionSetDigest) {
+      rmSync(initialized.paperDir, { recursive: true, force: true })
+      failCode(
+        NCK1_ANSWER_ATTACHMENT_QUESTION_MISMATCH,
+        'The complete source set did not preserve the captured question identity',
+      )
+    }
+    const manifestBytes = readFileSync(
+      path.join(initialized.paperDir, 'universal-source-manifest.json'),
+    )
+    const answerDocuments = initialized.manifest.documents.filter((document) =>
+      document.role === 'official_answers' && !document.renditionOf)
+    const successor = writeNck1SourceOnlySuccessor({
+      context,
+      paperId,
+      completeManifestSha256: sha256(manifestBytes),
+      answerProvenance,
+      answerDocuments,
+    })
+    console.log(JSON.stringify({
+      ok: true,
+      sourceSetId,
+      questionSetDigest: context.capture.questionSetDigest,
+      successor: successor.completeSourceSet,
+      state: 'complete_source_set_created',
+    }, null, 2))
+  })
+}
+
+function sourceOnlyStatus() {
+  const sourceSetId = process.argv[3]
+  const context = readNck1SourceOnlyCapture(sourceSetId)
+  console.log(JSON.stringify({
+    ...context.capture,
+    lifecycleState: context.successor
+      ? 'complete_source_set_created'
+      : context.capture.state,
+    successor: context.successor,
+  }, null, 2))
+}
+
+function listSourceOnly() {
+  console.log(JSON.stringify({
+    sourceOnly: listNck1SourceOnlyCaptures(),
+  }, null, 2))
 }
 
 function paperContext(paperId) {
@@ -650,19 +904,32 @@ try {
     else preflight(null)
   } else if (command === 'init') {
     runPaperCommand(paperId, initialize)
+  } else if (command === 'capture-source-only') {
+    captureSourceOnly()
+  } else if (command === 'source-only-status') {
+    sourceOnlyStatus()
+  } else if (command === 'list-source-only') {
+    listSourceOnly()
+  } else if (command === 'attach-answers') {
+    attachAnswers()
   } else if (command === 'materialize') {
+    assertNotNck1SourceOnly(paperId, command)
     runPaperCommand(paperId, () => materialize(paperId), { blockOnFailure: true })
   } else if (command === 'stage-ocr') {
+    assertNotNck1SourceOnly(paperId, command)
     runPaperCommand(paperId, () => stageOcr(paperId), { blockOnFailure: true })
   } else if (command === 'confirm-ocr') {
+    assertNotNck1SourceOnly(paperId, command)
     runPaperCommand(paperId, () => confirmOcr(paperId), { blockOnFailure: true })
   } else if (command === 'verify') {
+    assertNotNck1SourceOnly(paperId, command)
     runPaperCommand(paperId, () => verify(paperId), { blockOnFailure: true })
   } else if (command === 'build') {
+    assertNotNck1SourceOnly(paperId, command)
     runPaperCommand(paperId, () => build(paperId), { blockOnFailure: true })
   } else if (command === 'extract-docx-media') extractDocxMedia()
   else if (command === 'crop-pdf') cropPdf()
-  else fail('Usage: universal-nck1.mjs preflight|init|stage-ocr|confirm-ocr|materialize|verify|build|extract-docx-media|crop-pdf ...')
+  else fail('Usage: universal-nck1.mjs preflight|init|capture-source-only|source-only-status|list-source-only|attach-answers|stage-ocr|confirm-ocr|materialize|verify|build|extract-docx-media|crop-pdf ...')
 } catch (error) {
   console.error(error.code ? `${error.code}: ${error.message}` : error.message)
   process.exitCode = 1

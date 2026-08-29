@@ -33,6 +33,7 @@ import {
 } from '../../server/import-review/revisionProjection.mjs'
 import { publishUniversalNck1Import } from '../../server/paper-import/publisher.mjs'
 import { sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
+import { assertNotNck1SourceOnly } from './nck1-source-only.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const papersRoot = path.join(import.meta.dirname, 'papers')
@@ -546,6 +547,7 @@ async function releaseShipGuard(paperId, guardId) {
 
 async function main() {
   const [command, paperId, issueId] = process.argv.slice(2)
+  assertNotNck1SourceOnly(paperId, command)
   if (command === 'push') await pushRevision(paperId)
   else if (command === 'push-ocr') await pushOcrReview(paperId)
   else if (command === 'pull-ocr-confirmation') await pullOcrConfirmation(paperId)
@@ -567,6 +569,6 @@ async function main() {
 }
 
 main().catch((error) => {
-  console.error(error.message)
+  console.error(error.code ? `${error.code}: ${error.message}` : error.message)
   process.exitCode = 1
 })

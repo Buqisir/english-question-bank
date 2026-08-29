@@ -37,6 +37,32 @@ QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN='<secret>' \
   node scripts/import-pipeline/review.mjs push <paperId>
 ```
 
+暂时只有题卷、没有权威答案时，不运行`init`或分配可发布`paperId`。使用
+source-only状态先保留DOCX/PDF或显式排序图片页：
+
+```bash
+node scripts/import-pipeline/universal-nck1.mjs capture-source-only <sourceSetId> \
+  --paper-name '<卷名>' --provenance '<题卷出处>' \
+  --source question_source=/abs/questions.pdf
+node scripts/import-pipeline/universal-nck1.mjs source-only-status <sourceSetId>
+node scripts/import-pipeline/universal-nck1.mjs list-source-only
+```
+
+记录位于gitignored `imports/source-only/`；补答案前Materialization、Candidate、Review和
+publication均稳定拒绝。以后找到答案，按status中的exact `questionSetDigest`创建新的正常
+complete source set；旧capture与题卷bytes保持不变，独立successor receipt只记录后继：
+
+```bash
+node scripts/import-pipeline/universal-nck1.mjs attach-answers \
+  <sourceSetId> <newPaperId> \
+  --question-set-digest 'sha256:…' --answer-provenance '<答案出处>' \
+  --source official_answers=/abs/answers.pdf
+```
+
+图片题卷和图片答案分别用重复的
+`--source-page question_source:<页码>=/abs/page.png`和
+`--source-page official_answers:<页码>=/abs/page.png`，不把整页图当Canonical正文。
+
 `preflight` 一次性启动 magick、ffmpeg、soffice、pdfinfo、pdftoppm、unzip，并在
 macOS 检查 magick/ffmpeg 动态链接；失败就开工前停，中途不得安装或升级依赖。
 `init` 也先执行同一检查，再复制并摘要绑定本地源，DOCX 同时生成确定性 PDF

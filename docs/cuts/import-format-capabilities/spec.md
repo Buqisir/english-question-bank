@@ -1,6 +1,6 @@
 # 导题格式能力矩阵
 
-- Status: active（tickets 01、03、06、09 已实现synthetic/public seam；真实 Owner QA 待办）
+- Status: active（tickets 01、03、06、09、11 已实现synthetic/public seam；真实 Owner QA 待办）
 - Date: 2026-08-28
 - Planning baseline: `main@4296c85b4d135a9fa532219e2cd9a467a6b7e31d`
 - Matrix: `docs/cuts/import-format-capabilities/capability-matrix.md`
@@ -19,8 +19,8 @@
 
 当前代码已有强的 Canonical Paper、Source Materialization、共享 renderer 和不可变
 Import Review revision，但各能力的覆盖不均：简单 DOCX 文本最成熟；文本层PDF、扫描PDF
-和有序图片页已有受限synthetic/public seam，仍待真实QA；表格视觉属性、媒体布局意图、
-混合载体与无答案暂存仍有明显断点。缺少统一登记表会让文档里的“支持”与实际 producer
+和有序图片页已有受限synthetic/public seam，仍待真实QA；无答案题卷的安全暂存也已闭合，
+但表格视觉属性、媒体布局意图与混合载体仍有明显断点。缺少统一登记表会让文档里的“支持”与实际 producer
 的“支持”混在一起。
 
 ## User outcome
@@ -64,6 +64,11 @@ question PDF + key-only answer PDF 共用 PDF carrier adapter，并生成同一�
 辛苦找到的图片卷丢失；但不得生成 ready Materialization、Canonical Candidate、Review
 approval 或 publication，也不得由 AI 解题补答案。以后找到答案时建立新的完整 source-set
 revision，绑定原 question digest，不能原地改写旧 capture。
+
+Ticket 11现把这条原则落成Universal公共seam：DOCX、PDF与显式图片页写入gitignored
+`imports/source-only/`；`capture.json`与原题bytes保持不可变，后续答案只通过独立
+`successor.json`指向新的complete source set。补答案前Materialization、Candidate、Review
+与publication均返回稳定code，不写普通`source_incomplete`重试信号。
 
 ## Architecture boundary
 
