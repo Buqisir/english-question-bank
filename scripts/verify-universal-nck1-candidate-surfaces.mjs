@@ -19,7 +19,9 @@ import { canonicalConsumptionPrintPayload } from './import-pipeline/canonical-co
 
 const root = path.resolve(import.meta.dirname, '..')
 const papersRoot = path.join(root, 'scripts/import-pipeline/papers')
-const outputDir = path.join(root, '.amp/in/artifacts/nck1-blind-qa')
+const outputDir = process.env.NCK1_SURFACE_OUTPUT_DIR
+  ? path.resolve(process.env.NCK1_SURFACE_OUTPUT_DIR)
+  : path.join(root, '.amp/in/artifacts/nck1-blind-qa')
 const defaultPaperIds = [
   'paper-mock-cq-2026-m5',
   'paper-mock-foshan-2026-m1',

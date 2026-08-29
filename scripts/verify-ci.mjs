@@ -40,6 +40,8 @@ const registry = {
   'scripts/verify-nck1-docx-materialization-producer.mjs',
   'scripts/verify-nck1-pdf-materialization-producer.mjs',
   'scripts/verify-nck1-ocr-source-evidence.mjs',
+  'scripts/verify-universal-nck1-image-source-bundle.mjs',
+  'scripts/verify-import-review-ocr-confirmation.mjs',
   'scripts/verify-import-environment-preflight.mjs',
   'scripts/verify-nck1-source-materialization.mjs',
   'scripts/verify-paper-canonical-nck1-materialization-candidate.mjs',
@@ -218,6 +220,8 @@ const paperScripts = uniqueRegistered(
   [
     ...registry.scripts.filter((script) => paperScriptPattern.test(script)),
     'scripts/verify-universal-nck1-publish.mjs',
+    'scripts/verify-universal-nck1-image-source-bundle.mjs',
+    'scripts/verify-import-review-ocr-confirmation.mjs',
     'scripts/verify-import-review-source-pairing.mjs',
   ],
 )
@@ -228,6 +232,8 @@ const importPaperScripts = uniqueRegistered([
   'scripts/verify-nck1-docx-materialization-producer.mjs',
   'scripts/verify-nck1-pdf-materialization-producer.mjs',
   'scripts/verify-nck1-ocr-source-evidence.mjs',
+  'scripts/verify-universal-nck1-image-source-bundle.mjs',
+  'scripts/verify-import-review-ocr-confirmation.mjs',
   'scripts/verify-import-environment-preflight.mjs',
   'scripts/verify-nck1-source-materialization.mjs',
   'scripts/verify-paper-canonical-docx-source-adapter.mjs',
@@ -318,6 +324,7 @@ function changedPlan(files) {
       'server/paper-import/nck1PdfTextSourceAdapter.mjs',
       'server/paper-import/nck1OcrMaterializationProducer.mjs',
       'server/paper-import/nck1OcrSourceEvidence.mjs',
+      'server/paper-import/nck1ImageSourceBundle.mjs',
     ].includes(file)) return ['unknown']
     if (file.startsWith('scripts/import-pipeline/')) {
       return [/\/verify-/.test(file) ? 'paper' : 'feature']

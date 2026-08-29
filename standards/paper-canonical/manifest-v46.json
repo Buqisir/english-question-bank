@@ -375,7 +375,7 @@
     {
       "id": "nck1-source-materialization-v1",
       "path": "../../schemas/paper-canonical/nck1-source-materialization-v1.schema.json",
-      "sha256": "sha256:3a3202a6b5f3d5bfe43142bc8d2f40a658e3b04cce287296cde0b71474365496"
+      "sha256": "sha256:46b469c180e30352e493551183a6441f8c68b347fae7b39d356e605fa321e89a"
     },
     {
       "id": "rich-content-v1",

@@ -441,8 +441,8 @@ assert.ok(
 )
 assert.match(css, /@media \(max-width: 760px\)/, 'mobile composition collapses structurally')
 const inboxSlot = client.indexOf('${leftRailHtml()}')
-const surfaceSlot = client.indexOf('${state.detail ? surfaceStageHtml()')
-const issuesSlot = client.indexOf('${state.detail ? rightRailHtml()')
+const surfaceSlot = client.indexOf('${state.detail ? (isOcrReview() ? ocrReviewStageHtml() : surfaceStageHtml())')
+const issuesSlot = client.indexOf('${state.detail ? (isOcrReview() ? ocrReviewRailHtml() : rightRailHtml())')
 assert.ok(
   inboxSlot >= 0 && inboxSlot < surfaceSlot && surfaceSlot < issuesSlot,
   'mobile DOM order remains inbox, surface, issues',

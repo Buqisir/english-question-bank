@@ -24,6 +24,7 @@ const visualId = 'visual:product-label'
 const targetId = 'block:product-label'
 const iconVisualId = 'visual:warning-icon'
 const iconTargetId = 'media:warning-icon'
+const imageVisualId = 'visual:image-source-page'
 const region = { x: 0.25, y: 0.25, width: 0.5, height: 0.5 }
 
 function syntheticPdf() {
@@ -52,6 +53,15 @@ function syntheticPdf() {
   output += `trailer\n<< /Size ${objects.length + 1} /Root 1 0 R >>\n`
   output += `startxref\n${xrefOffset}\n%%EOF\n`
   return new Uint8Array(Buffer.from(output))
+}
+
+function syntheticImage() {
+  return new Uint8Array(execFileSync('magick', [
+    '-size', '400x200', 'xc:#ededea',
+    '-fill', '#2c6e56',
+    '-draw', 'rectangle 100,50 300,150',
+    'png:-',
+  ]))
 }
 
 function jsonResponseCapture() {
@@ -129,6 +139,10 @@ try {
   const sourceBytes = syntheticPdf()
   const sourceDigest = sha256(sourceBytes)
   writeFileSync(sourcePath, sourceBytes)
+  const imageSourcePath = path.join(tempRoot, 'questions-page-1.png')
+  const imageSourceBytes = syntheticImage()
+  const imageSourceDigest = sha256(imageSourceBytes)
+  writeFileSync(imageSourcePath, imageSourceBytes)
   const pairedVisual = {
     visualId,
     documentId: 'paper',
@@ -155,8 +169,17 @@ try {
     region: null,
     state: 'unlocated',
   }
+  const imageVisual = {
+    ...pairedVisual,
+    visualId: imageVisualId,
+    path: 'questions-page-1.png',
+    sourceDigest: imageSourceDigest,
+    mediaType: 'image/png',
+    disposition: 'source_region',
+    targetId: 'block:image-source-page',
+  }
   const projection = {
-    sourceVisuals: [pairedVisual, iconVisual, unlocatedVisual],
+    sourceVisuals: [pairedVisual, iconVisual, imageVisual, unlocatedVisual],
   }
   const routes = createImportReviewRoutes({
     getStore: () => ({
@@ -191,6 +214,24 @@ try {
     Number(crop.headers['x-eqb-pixel-height']),
   ])
   assert(identified[0] > 300 && identified[1] > 150)
+
+  const imageCrop = await invokeRoute(
+    routes,
+    `/api/import-review-preview/revisions/${revisionId}`
+      + `/source-visuals/${encodeURIComponent(imageVisualId)}`,
+    owner,
+  )
+  assert.equal(imageCrop.status, 200)
+  assert.equal(imageCrop.headers['content-type'], 'image/png')
+  assert.equal(imageCrop.headers['x-eqb-source-digest'], imageSourceDigest)
+  assert.deepEqual(
+    execFileSync('magick', ['identify', '-format', '%w,%h', '-'], {
+      encoding: 'utf8',
+      input: imageCrop.body,
+    }).split(',').map(Number),
+    [200, 100],
+    'Candidate source proof crops the immutable image page instead of a PDF rendition',
+  )
 
   const missing = await invokeRoute(
     routes,

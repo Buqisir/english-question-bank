@@ -10,8 +10,9 @@ import { DatabaseSync } from 'node:sqlite'
 
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import {
-  buildNck1ReviewProjection,
+  buildImportReviewProjection,
   resolveReviewFile,
+  validateNck1OcrReviewConfirmation,
 } from './revisionProjection.mjs'
 
 const PAPER_ID = /^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/
@@ -100,6 +101,19 @@ export function reviewBundleDigest(input) {
   })
 }
 
+export function ocrReviewBundleDigest(input) {
+  return digestJson({
+    schemaVersion: input.schemaVersion,
+    paperId: input.paperId,
+    paperName: input.paperName,
+    sourceSetDigest: input.sourceSetDigest,
+    evidenceDigest: input.evidenceDigest,
+    reviewStructureDigest: input.reviewStructureDigest,
+    producerBuildId: input.producerBuildId,
+    files: input.files.map(fileDescriptor).sort((a, b) => a.path.localeCompare(b.path)),
+  })
+}
+
 export function validateReviewBundleManifest(input) {
   if (input?.schemaVersion !== 'web-import-review-bundle-v1') {
     throw storeError('IMPORT_REVIEW_SCHEMA_INVALID', 'Unsupported review bundle schema', 400)
@@ -151,6 +165,67 @@ export function validateReviewBundleManifest(input) {
     throw storeError('IMPORT_REVIEW_BUNDLE_DIGEST_MISMATCH', 'bundleDigest does not match manifest', 400)
   }
   return { ...manifest, bundleDigest: computed }
+}
+
+export function validateOcrReviewBundleManifest(input) {
+  if (input?.schemaVersion !== 'web-import-ocr-review-bundle-v1') {
+    throw storeError('IMPORT_REVIEW_SCHEMA_INVALID', 'Unsupported OCR review bundle schema', 400)
+  }
+  const paperId = requiredString(input.paperId, 'paperId', 160)
+  if (!PAPER_ID.test(paperId)) {
+    throw storeError('IMPORT_REVIEW_INPUT_INVALID', 'paperId is invalid', 400)
+  }
+  const files = Array.isArray(input.files) ? input.files.map(fileDescriptor) : []
+  if (files.length === 0 || files.length > MAX_FILES) {
+    throw storeError('IMPORT_REVIEW_FILES_INVALID', 'OCR review bundle files are required', 400)
+  }
+  if (new Set(files.map((file) => file.path)).size !== files.length) {
+    throw storeError('IMPORT_REVIEW_FILES_INVALID', 'OCR review bundle file paths must be unique', 400)
+  }
+  if (files.reduce((sum, file) => sum + file.byteLength, 0) > MAX_BUNDLE_BYTES) {
+    throw storeError('IMPORT_REVIEW_SIZE_INVALID', 'OCR review bundle is too large', 413)
+  }
+  const manifest = {
+    schemaVersion: input.schemaVersion,
+    paperId,
+    paperName: requiredString(input.paperName, 'paperName', 300),
+    sourceSetDigest: requiredString(input.sourceSetDigest, 'sourceSetDigest', 160),
+    evidenceDigest: requiredString(input.evidenceDigest, 'evidenceDigest', 160),
+    reviewStructureDigest: requiredString(
+      input.reviewStructureDigest,
+      'reviewStructureDigest',
+      160,
+    ),
+    producerBuildId: requiredString(input.producerBuildId, 'producerBuildId', 200),
+    files,
+    resolvesIssueIds: [],
+  }
+  for (const digest of [
+    manifest.sourceSetDigest,
+    manifest.evidenceDigest,
+    manifest.reviewStructureDigest,
+  ]) {
+    if (!SHA256.test(digest)) {
+      throw storeError('IMPORT_REVIEW_DIGEST_INVALID', 'OCR review identity digest is invalid', 400)
+    }
+  }
+  const computed = ocrReviewBundleDigest(manifest)
+  if (input.bundleDigest !== computed) {
+    throw storeError('IMPORT_REVIEW_BUNDLE_DIGEST_MISMATCH', 'bundleDigest does not match OCR manifest', 400)
+  }
+  return { ...manifest, bundleDigest: computed }
+}
+
+function validateAnyReviewBundleManifest(input) {
+  return input?.schemaVersion === 'web-import-ocr-review-bundle-v1'
+    ? validateOcrReviewBundleManifest(input)
+    : validateReviewBundleManifest(input)
+}
+
+function reviewKind(manifest) {
+  return manifest?.schemaVersion === 'web-import-ocr-review-bundle-v1'
+    ? 'ocr'
+    : 'candidate'
 }
 
 function ensureShape(db) {
@@ -234,18 +309,20 @@ function ensureShape(db) {
 
 function revisionRow(row) {
   if (!row) return null
+  const manifest = parseJson(row.manifest_json, {})
   return {
     id: row.id,
     paperId: row.paper_id,
     revisionNumber: row.revision_number,
     state: row.state,
+    reviewKind: reviewKind(manifest),
     sourceDigest: row.source_digest,
     candidateDigest: row.candidate_digest,
     visibleStructureDigest: row.visible_structure_digest,
     bundleDigest: row.bundle_digest,
     producerBuildId: row.producer_build_id,
     rendererBuildId: row.renderer_build_id,
-    manifest: parseJson(row.manifest_json, {}),
+    manifest,
     approval: parseJson(row.approval_receipt_json),
     createdAt: row.created_at,
     finalizedAt: row.finalized_at,
@@ -317,7 +394,7 @@ export function createImportReviewStore({
   dbPath,
   filesRoot,
   rendererBuildId,
-  projectRevision = buildNck1ReviewProjection,
+  projectRevision = buildImportReviewProjection,
 }) {
   mkdirSync(path.dirname(dbPath), { recursive: true })
   mkdirSync(filesRoot, { recursive: true })
@@ -370,7 +447,19 @@ export function createImportReviewStore({
   }
 
   function createRevision(rawManifest) {
-    const manifest = validateReviewBundleManifest(rawManifest)
+    const manifest = validateAnyReviewBundleManifest(rawManifest)
+    const kind = reviewKind(manifest)
+    const identities = kind === 'ocr'
+      ? {
+          sourceDigest: manifest.sourceSetDigest,
+          candidateDigest: manifest.evidenceDigest,
+          visibleStructureDigest: manifest.reviewStructureDigest,
+        }
+      : {
+          sourceDigest: manifest.sourceDigest,
+          candidateDigest: manifest.candidateDigest,
+          visibleStructureDigest: manifest.visibleStructureDigest,
+        }
     const rendererId = currentRendererBuildId()
     const result = withDb(true, (db) => {
       const timestamp = nowIso()
@@ -410,9 +499,9 @@ export function createImportReviewStore({
           id,
           manifest.paperId,
           revisionNumber,
-          manifest.sourceDigest,
-          manifest.candidateDigest,
-          manifest.visibleStructureDigest,
+          identities.sourceDigest,
+          identities.candidateDigest,
+          identities.visibleStructureDigest,
           manifest.bundleDigest,
           manifest.producerBuildId,
           JSON.stringify(manifest),
@@ -508,15 +597,23 @@ export function createImportReviewStore({
   }
 
   function assertProjectionIdentity(projection, revision) {
-    for (const [actual, expected, label] of [
-      [projection.paperId, revision.paperId, 'paperId'],
-      [projection.sourceDigest, revision.sourceDigest, 'sourceDigest'],
-      [projection.candidateDigest, revision.candidateDigest, 'candidateDigest'],
-      [projection.visibleStructureDigest, revision.visibleStructureDigest, 'visibleStructureDigest'],
-      ...(revision.manifest.analysisDigest
-        ? [[projection.analysisDigest, revision.manifest.analysisDigest, 'analysisDigest']]
-        : []),
-    ]) {
+    const identities = revision.reviewKind === 'ocr'
+      ? [
+          [projection.paperId, revision.paperId, 'paperId'],
+          [projection.sourceSetDigest, revision.sourceDigest, 'sourceSetDigest'],
+          [projection.evidenceDigest, revision.candidateDigest, 'evidenceDigest'],
+          [projection.reviewStructureDigest, revision.visibleStructureDigest, 'reviewStructureDigest'],
+        ]
+      : [
+          [projection.paperId, revision.paperId, 'paperId'],
+          [projection.sourceDigest, revision.sourceDigest, 'sourceDigest'],
+          [projection.candidateDigest, revision.candidateDigest, 'candidateDigest'],
+          [projection.visibleStructureDigest, revision.visibleStructureDigest, 'visibleStructureDigest'],
+          ...(revision.manifest.analysisDigest
+            ? [[projection.analysisDigest, revision.manifest.analysisDigest, 'analysisDigest']]
+            : []),
+        ]
+    for (const [actual, expected, label] of identities) {
       if (actual !== expected) {
         throw storeError('IMPORT_REVIEW_PROJECTION_MISMATCH', `${label} does not match server derivation`)
       }
@@ -531,7 +628,10 @@ export function createImportReviewStore({
     }
     const directory = revisionDirectory(revisionId)
     assertStoredRevisionFiles(status.revision)
-    const projection = projectRevision(directory, { requireAnalyses: true })
+    const projection = projectRevision(directory, {
+      reviewKind: status.revision.reviewKind,
+      requireAnalyses: status.revision.reviewKind === 'candidate',
+    })
     assertProjectionIdentity(projection, status.revision)
     const timestamp = nowIso()
     const rendererId = currentRendererBuildId()
@@ -603,7 +703,7 @@ export function createImportReviewStore({
   function listPapers() {
     return withDb(false, (db) => db.prepare(`
       SELECT p.paper_id, p.paper_name, p.latest_revision_id, p.updated_at,
-             r.revision_number, r.state, r.bundle_digest,
+             r.revision_number, r.state, r.bundle_digest, r.manifest_json,
              (SELECT COUNT(*) FROM import_review_issues i
               WHERE i.paper_id = p.paper_id AND i.state IN ('open', 'fixed_pending_review')) AS unresolved_count
       FROM import_review_papers p
@@ -617,6 +717,7 @@ export function createImportReviewStore({
       latestRevisionId: row.latest_revision_id,
       revisionNumber: row.revision_number,
       state: row.state || 'uploading',
+      reviewKind: reviewKind(parseJson(row.manifest_json, {})),
       bundleDigest: row.bundle_digest,
       unresolvedCount: Number(row.unresolved_count || 0),
       updatedAt: row.updated_at,
@@ -650,10 +751,12 @@ export function createImportReviewStore({
     const latestProjection = latest && latest.state !== 'uploading'
       ? projectionForRevision(latest.id).projection
       : null
-    const visibleStructure = latestProjection?.consumption.visibleStructure || []
+    const visibleStructure = latestProjection?.consumption?.visibleStructure || []
     const sourceVisuals = latestProjection?.sourceVisuals || []
     const rendererStale = Boolean(
-      latest?.rendererBuildId && latest.rendererBuildId !== currentRendererBuildId(),
+      latest?.reviewKind === 'candidate'
+      && latest.rendererBuildId
+      && latest.rendererBuildId !== currentRendererBuildId(),
     )
     return {
       paperId: paper.paper_id,
@@ -666,6 +769,7 @@ export function createImportReviewStore({
       files,
       visibleStructure,
       sourceVisuals,
+      ocrReview: latestProjection?.ocrReview || null,
       rendererStale,
       unresolvedCount: issues.filter((issue) => UNRESOLVED_ISSUE_STATES.has(issue.state)).length,
       updatedAt: paper.updated_at,
@@ -681,7 +785,7 @@ export function createImportReviewStore({
     if (!projectionCache.has(revisionId)) {
       const projection = projectRevision(
         revisionDirectory(revisionId),
-        { requireAnalyses: false },
+        { reviewKind: revision.reviewKind, requireAnalyses: false },
       )
       assertProjectionIdentity(projection, revision)
       projectionCache.set(revisionId, projection)
@@ -731,7 +835,7 @@ export function createImportReviewStore({
       db.exec('BEGIN IMMEDIATE')
       try {
         const current = db.prepare(`
-          SELECT p.latest_revision_id, r.state
+          SELECT p.latest_revision_id, r.state, r.manifest_json
           FROM import_review_papers p
           LEFT JOIN import_review_revisions r ON r.id = p.latest_revision_id
           WHERE p.paper_id = ?
@@ -742,6 +846,12 @@ export function createImportReviewStore({
           throw storeError(
             'IMPORT_REVIEW_STALE_REVISION',
             'Issues must target the latest finalized revision',
+          )
+        }
+        if (reviewKind(parseJson(current.manifest_json, {})) !== 'candidate') {
+          throw storeError(
+            'IMPORT_REVIEW_CANDIDATE_REQUIRED',
+            'OCR review uses exact observation confirmation instead of Candidate issues',
           )
         }
         db.prepare(`
@@ -793,6 +903,18 @@ export function createImportReviewStore({
           SELECT * FROM import_review_issues WHERE id = ? AND paper_id = ?
         `).get(issueId, paperId)
         if (!issue) throw storeError('IMPORT_REVIEW_NOT_FOUND', 'Issue not found', 404)
+        const latest = db.prepare(`
+          SELECT p.latest_revision_id, r.manifest_json
+          FROM import_review_papers p
+          LEFT JOIN import_review_revisions r ON r.id = p.latest_revision_id
+          WHERE p.paper_id = ?
+        `).get(paperId)
+        if (reviewKind(parseJson(latest?.manifest_json, {})) !== 'candidate') {
+          throw storeError(
+            'IMPORT_REVIEW_CANDIDATE_REQUIRED',
+            'Candidate issues cannot mutate an OCR review revision',
+          )
+        }
         if (nextState === 'closed' && issue.state !== 'fixed_pending_review') {
           throw storeError('IMPORT_REVIEW_ISSUE_NOT_FIXED', 'Only an Agent-fixed issue can be closed')
         }
@@ -801,9 +923,6 @@ export function createImportReviewStore({
           WHERE id = ?
         `).run(nextState, optionalString(input.note, 2000), timestamp, issueId)
         if (nextState === 'open') {
-          const latest = db.prepare(`
-            SELECT latest_revision_id FROM import_review_papers WHERE paper_id = ?
-          `).get(paperId)
           db.prepare(`
             UPDATE import_review_revisions
             SET state = 'changes_requested', approval_receipt_json = NULL, updated_at = ?
@@ -868,6 +987,12 @@ export function createImportReviewStore({
           SELECT * FROM import_review_revisions WHERE id = ? AND paper_id = ?
         `).get(revisionId, paperId))
         if (!revision) throw storeError('IMPORT_REVIEW_NOT_FOUND', 'Revision not found', 404)
+        if (revision.reviewKind !== 'candidate') {
+          throw storeError(
+            'IMPORT_REVIEW_CANDIDATE_REQUIRED',
+            'OCR review must be confirmed before a Candidate revision can be approved',
+          )
+        }
         if (revision.rendererBuildId !== rendererId) {
           throw storeError(
             'IMPORT_REVIEW_RENDERER_STALE',
@@ -920,6 +1045,74 @@ export function createImportReviewStore({
     })
   }
 
+  function confirmOcrRevision(paperId, revisionId, input, actor) {
+    const { revision, projection } = projectionForRevision(revisionId)
+    if (revision.paperId !== paperId || revision.reviewKind !== 'ocr') {
+      throw storeError('IMPORT_REVIEW_OCR_REQUIRED', 'OCR review revision not found', 404)
+    }
+    if (input?.bundleDigest !== revision.bundleDigest) {
+      throw storeError('IMPORT_REVIEW_STALE_REVISION', 'Browser OCR revision digest is stale')
+    }
+    const confirmation = validateNck1OcrReviewConfirmation(
+      projection,
+      input?.confirmation,
+    )
+    const confirmedAt = nowIso()
+    return withDb(true, (db) => {
+      db.exec('BEGIN IMMEDIATE')
+      try {
+        const paper = db.prepare(`
+          SELECT latest_revision_id FROM import_review_papers WHERE paper_id = ?
+        `).get(paperId)
+        if (!paper) throw storeError('IMPORT_REVIEW_NOT_FOUND', 'Paper not found', 404)
+        assertPaperNotShipping(db, paperId)
+        if (paper.latest_revision_id !== revisionId) {
+          throw storeError('IMPORT_REVIEW_STALE_REVISION', 'Only the latest OCR revision can be confirmed')
+        }
+        const current = revisionRow(db.prepare(`
+          SELECT * FROM import_review_revisions WHERE id = ? AND paper_id = ?
+        `).get(revisionId, paperId))
+        if (!current || current.reviewKind !== 'ocr') {
+          throw storeError('IMPORT_REVIEW_OCR_REQUIRED', 'OCR review revision not found', 404)
+        }
+        if (current.state === 'approved' && current.approval?.confirmation) {
+          db.exec('COMMIT')
+          return current.approval
+        }
+        if (current.state !== 'awaiting_review') {
+          throw storeError('IMPORT_REVIEW_REVISION_NOT_REVIEWABLE', 'OCR revision is not awaiting review')
+        }
+        assertStoredRevisionFiles(current, db)
+        const receipt = {
+          schemaVersion: 'web-import-ocr-review-confirmation-v1',
+          confirmationId: `ocr-confirmation-${randomUUID()}`,
+          paperId,
+          revisionId,
+          revisionNumber: current.revisionNumber,
+          sourceSetDigest: projection.sourceSetDigest,
+          evidenceDigest: projection.evidenceDigest,
+          bundleDigest: current.bundleDigest,
+          producerBuildId: current.producerBuildId,
+          confirmedAt,
+          confirmedBy: requiredString(actor, 'actor', 200),
+          confirmation,
+        }
+        db.prepare(`
+          UPDATE import_review_revisions
+          SET state = 'approved', approval_receipt_json = ?, updated_at = ?
+          WHERE id = ?
+        `).run(JSON.stringify(receipt), confirmedAt, revisionId)
+        db.prepare(`UPDATE import_review_papers SET updated_at = ? WHERE paper_id = ?`)
+          .run(confirmedAt, paperId)
+        db.exec('COMMIT')
+        return receipt
+      } catch (error) {
+        db.exec('ROLLBACK')
+        throw error
+      }
+    })
+  }
+
   function agentPaperStatus(paperId) {
     const detail = paperDetail(paperId)
     return {
@@ -933,9 +1126,16 @@ export function createImportReviewStore({
       files: detail.files,
       visibleStructure: detail.visibleStructure,
       sourceVisuals: detail.sourceVisuals,
+      ocrReview: detail.ocrReview,
       rendererStale: detail.rendererStale,
       unresolvedCount: detail.unresolvedCount,
-      approval: detail.latest?.state === 'approved' && !detail.rendererStale
+      approval: detail.latest?.reviewKind === 'candidate'
+        && detail.latest.state === 'approved'
+        && !detail.rendererStale
+        ? detail.latest.approval
+        : null,
+      ocrConfirmation: detail.latest?.reviewKind === 'ocr'
+        && detail.latest.state === 'approved'
         ? detail.latest.approval
         : null,
     }
@@ -970,6 +1170,7 @@ export function createImportReviewStore({
         const approval = revision?.approval
         if (
           revision?.state !== 'approved'
+          || revision.reviewKind !== 'candidate'
           || revision.id !== expected.revisionId
           || revision.rendererBuildId !== currentRendererBuildId()
           || !approval
@@ -1066,6 +1267,7 @@ export function createImportReviewStore({
     approveRevision,
     agentPaperStatus,
     completeFileUpload,
+    confirmOcrRevision,
     createIssue,
     createRevision,
     fileForUpload,

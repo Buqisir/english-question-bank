@@ -1,6 +1,6 @@
 # 导题格式能力矩阵
 
-- Status: active（tickets 01、03 已实现；真实 Owner QA 待办）
+- Status: active（tickets 01、03、06、09 已实现synthetic/public seam；真实 Owner QA 待办）
 - Date: 2026-08-28
 - Planning baseline: `main@4296c85b4d135a9fa532219e2cd9a467a6b7e31d`
 - Matrix: `docs/cuts/import-format-capabilities/capability-matrix.md`
@@ -18,9 +18,10 @@
 - 一个尚未识别的形状会稳定失败，还是静默丢字、丢图或被猜成另一种形状？
 
 当前代码已有强的 Canonical Paper、Source Materialization、共享 renderer 和不可变
-Import Review revision，但各能力的覆盖不均：简单 DOCX 文本很成熟，PDF 自动
-物化、OCR、表格视觉属性、媒体布局意图与局部源图审核仍有明显断点。缺少统一
-登记表会让文档里的“支持”与实际 producer 的“支持”混在一起。
+Import Review revision，但各能力的覆盖不均：简单 DOCX 文本最成熟；文本层PDF、扫描PDF
+和有序图片页已有受限synthetic/public seam，仍待真实QA；表格视觉属性、媒体布局意图、
+混合载体与无答案暂存仍有明显断点。缺少统一登记表会让文档里的“支持”与实际 producer
+的“支持”混在一起。
 
 ## User outcome
 
@@ -205,8 +206,10 @@ Owner 将“题卷图片 + 答案图片”定为首批发布能力，因为它�
 ordered-item parser，`06-scanned-pdf-ocr-evidence.md` 已建立逐页像素摘要、OCR observations、
 digest-bound人工确认及同一parser入口；三者仍需在首个非生产 Candidate 上做一次真实
 Owner QA。图片经 OCR 后必须由教师对照原图与真实 Screen，不能为了抢先发布而跳过确认。
-最短发布主线仍是 **01 → 03 → 06 → 09**。Owner已决定：OCR原图对照和人工确认控件必须
-并入09，不延期为可选polish；但不因依赖已满足而自动启动09，也不授权实际发布真实试卷。
+最短发布主线仍是 **01 → 03 → 06 → 09**。09现已在synthetic/public seam实现：先用OCR
+revision核对原图、文字、顺序和content-vs-furniture，确认后Agent才生成Candidate revision，
+再审核原图局部与真实Screen。技术实现完成不授权实际发布真实试卷；真实、只读、非CQ8
+Owner QA与后续发布必须是独立明确授权的任务。
 
 ## Acceptance criteria for this roadmap
 

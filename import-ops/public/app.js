@@ -10,6 +10,9 @@ const state = {
   issueSurface: 'screen',
   target: null,
   pendingScreenTargetId: null,
+  ocrDocumentId: null,
+  ocrPage: 1,
+  ocrDraft: null,
   error: null,
 }
 
@@ -42,8 +45,8 @@ function escapeHtml(value) {
     .replaceAll("'", '&#039;')
 }
 
-function status(value) {
-  return `<span class="status status--${escapeHtml(value)}">${escapeHtml(stateLabels[value] || value)}</span>`
+function status(value, label = null) {
+  return `<span class="status status--${escapeHtml(value)}">${escapeHtml(label || stateLabels[value] || value)}</span>`
 }
 
 function shortDigest(value) {
@@ -89,12 +92,22 @@ async function loadPapers({ preserveSelection = true } = {}) {
 }
 
 async function loadDetail(paperId, shouldRender = true) {
+  const previousRevisionId = state.detail?.latestRevisionId
   state.paperId = paperId
   state.target = null
   state.issueSurface = state.surface
   state.error = null
   try {
     state.detail = await request(`${actorApi()}/papers/${encodeURIComponent(paperId)}`)
+    if (
+      state.detail.latest?.reviewKind === 'ocr'
+      && (state.detail.latestRevisionId !== previousRevisionId || !state.ocrDraft)
+    ) initializeOcrDraft()
+    if (state.detail.latest?.reviewKind !== 'ocr') {
+      state.ocrDocumentId = null
+      state.ocrPage = 1
+      state.ocrDraft = null
+    }
   } catch (error) {
     state.error = error.message
     state.detail = null
@@ -114,8 +127,8 @@ function paperListHtml() {
       aria-current="${paper.paperId === state.paperId}"
     >
       <span class="paper-name">${escapeHtml(paper.paperName)}</span>
-      <span class="paper-meta">R${escapeHtml(paper.revisionNumber || '—')} · ${escapeHtml(paper.unresolvedCount)} 个未决</span>
-      ${status(paper.state)}
+      <span class="paper-meta">${paper.reviewKind === 'ocr' ? 'OCR' : 'Candidate'} R${escapeHtml(paper.revisionNumber || '—')}${paper.reviewKind === 'ocr' ? ' · 原图识别核对' : ` · ${escapeHtml(paper.unresolvedCount)} 个未决`}</span>
+      ${status(paper.state, paper.reviewKind === 'ocr' && paper.state === 'approved' ? 'OCR 已确认' : null)}
     </button>
   `).join('')}</div>`
 }
@@ -126,8 +139,8 @@ function revisionsHtml() {
   return `<ul class="revision-list">${revisions.map((revision) => `
     <li class="revision-item">
       <div class="revision-line">
-        <strong>R${escapeHtml(revision.revisionNumber)}</strong>
-        ${status(revision.state)}
+        <strong>${revision.reviewKind === 'ocr' ? 'OCR ' : ''}R${escapeHtml(revision.revisionNumber)}</strong>
+        ${status(revision.state, revision.reviewKind === 'ocr' && revision.state === 'approved' ? 'OCR 已确认' : null)}
         <span class="timestamp">${escapeHtml(formatTime(revision.finalizedAt || revision.createdAt))}</span>
       </div>
       <div class="digest" title="${escapeHtml(revision.bundleDigest)}">${escapeHtml(shortDigest(revision.bundleDigest))}</div>
@@ -165,6 +178,208 @@ function filesHtml() {
   }).join('')}</div>`
 }
 
+function isOcrReview() {
+  return state.detail?.latest?.reviewKind === 'ocr' && Boolean(state.detail?.ocrReview)
+}
+
+function orderedOcrObservations(page) {
+  const observations = page.observations || []
+  const ids = observations.map((observation) => observation.observationId)
+  const byId = new Map(observations.map((observation) => [
+    observation.observationId,
+    observation,
+  ]))
+  const outgoing = new Map(ids.map((id) => [id, []]))
+  const indegree = new Map(ids.map((id) => [id, 0]))
+  for (const edge of page.readingOrderEdges || []) {
+    if (!outgoing.has(edge.before) || !outgoing.has(edge.after) || edge.before === edge.after) {
+      return observations
+    }
+    outgoing.get(edge.before).push(edge.after)
+    indegree.set(edge.after, indegree.get(edge.after) + 1)
+  }
+  const ordered = []
+  while (ordered.length < ids.length) {
+    const available = ids.filter((id) => indegree.get(id) === 0)
+    if (available.length !== 1) return observations
+    const current = available[0]
+    ordered.push(byId.get(current))
+    indegree.set(current, -1)
+    for (const target of outgoing.get(current)) {
+      indegree.set(target, indegree.get(target) - 1)
+    }
+  }
+  return ordered
+}
+
+function initializeOcrDraft() {
+  const documents = state.detail?.ocrReview?.documents || []
+  state.ocrDraft = {
+    documents: documents.map((document) => ({
+      documentId: document.documentId,
+      pages: document.pages.map((page) => ({
+        page: page.page,
+        items: orderedOcrObservations(page).map((observation, index) => ({
+          itemId: `${document.documentId}:page-${page.page}:item-${index + 1}`,
+          observationIds: [observation.observationId],
+          regionId: observation.regionId,
+          region: observation.region,
+          text: observation.text,
+          confidence: observation.confidence,
+          alternatives: observation.alternatives || [],
+          classification: 'content',
+          verified: false,
+        })),
+        visuals: page.regions
+          .filter((region) => region.kind !== 'text')
+          .map((region) => ({
+            regionId: region.regionId,
+            region: region.region,
+            classification: '',
+            verified: false,
+          })),
+      })),
+    })),
+  }
+  state.ocrDocumentId = documents[0]?.documentId || null
+  state.ocrPage = documents[0]?.pages?.[0]?.page || 1
+}
+
+function currentOcrDocument() {
+  return state.detail?.ocrReview?.documents?.find((document) =>
+    document.documentId === state.ocrDocumentId) || null
+}
+
+function currentOcrPage() {
+  const source = currentOcrDocument()?.pages?.find((page) => page.page === state.ocrPage)
+  const draft = state.ocrDraft?.documents?.find((document) =>
+    document.documentId === state.ocrDocumentId)?.pages?.find((page) =>
+    page.page === state.ocrPage)
+  return source && draft ? { source, draft } : null
+}
+
+function ocrCompletion() {
+  const pages = state.ocrDraft?.documents?.flatMap((document) => document.pages) || []
+  const items = pages.flatMap((page) => page.items)
+  const visuals = pages.flatMap((page) => page.visuals)
+  const verified = items.filter((item) =>
+    item.verified
+    && ['content', 'furniture'].includes(item.classification)
+    && (item.classification !== 'content' || item.text.trim())).length
+    + visuals.filter((visual) =>
+      visual.verified && visual.classification === 'furniture').length
+  return {
+    verified,
+    total: items.length + visuals.length,
+    ready: items.length > 0
+      && verified === items.length + visuals.length,
+  }
+}
+
+function ocrRegionStyle(region) {
+  return `left:${Number(region.x) * 100}%;top:${Number(region.y) * 100}%;width:${Number(region.width) * 100}%;height:${Number(region.height) * 100}%`
+}
+
+function ocrReviewStageHtml() {
+  const current = currentOcrPage()
+  const documents = state.detail.ocrReview.documents
+  if (!current) return '<main class="surface-stage"><div class="surface-empty"><h2>OCR 页不可用</h2><p class="boundary-note">页覆盖不完整，不能确认。</p></div></main>'
+  const { source, draft } = current
+  const revisionId = state.detail.latestRevisionId
+  const sourceHref = `/api/import-review-preview/revisions/${encodeURIComponent(revisionId)}`
+    + `/ocr/pages/${encodeURIComponent(state.ocrDocumentId)}/${source.page}`
+  const editable = state.actor === 'owner' && state.detail.latest.state === 'awaiting_review'
+  return `<main class="surface-stage ocr-stage" aria-label="OCR 原图核对">
+    <div class="surface-toolbar ocr-toolbar">
+      <div class="ocr-navigation">
+        <div class="surface-tabs" role="tablist" aria-label="题卷或答案">
+          ${documents.map((document) => `<button type="button" class="tab-button" data-ocr-document="${escapeHtml(document.documentId)}" role="tab" aria-selected="${document.documentId === state.ocrDocumentId}">${document.role === 'official_answers' ? '答案图' : '题卷图'}</button>`).join('')}
+        </div>
+        <div class="surface-tabs" role="tablist" aria-label="图片页码">
+          ${currentOcrDocument().pages.map((page) => `<button type="button" class="tab-button" data-ocr-page="${page.page}" role="tab" aria-selected="${page.page === state.ocrPage}">第 ${page.page} 页</button>`).join('')}
+        </div>
+      </div>
+      <span class="paper-meta">原图与 OCR 并排；不是整页截图发布</span>
+    </div>
+    <div class="ocr-workspace">
+      <section class="ocr-source-pane" aria-label="不可变原图">
+        <div class="ocr-pane-heading"><div><strong>不可变原图</strong><span class="paper-meta">${escapeHtml(state.ocrDocumentId)} · 第 ${source.page} 页</span></div><span class="digest" title="${escapeHtml(source.source.sha256)}">${escapeHtml(shortDigest(source.source.sha256))}</span></div>
+        <div class="ocr-page-canvas">
+          <img src="${escapeHtml(sourceHref)}" alt="${escapeHtml(state.ocrDocumentId)} 第 ${source.page} 页原图" />
+          ${draft.items.map((item) => `<span class="ocr-region ocr-region--${escapeHtml(item.classification)}" style="${escapeHtml(ocrRegionStyle(item.region))}" title="${escapeHtml(item.observationIds.join(', '))}"></span>`).join('')}
+          ${draft.visuals.map((visual) => `<span class="ocr-region ocr-region--visual" style="${escapeHtml(ocrRegionStyle(visual.region))}" title="${escapeHtml(visual.regionId)}"></span>`).join('')}
+        </div>
+      </section>
+      <section class="ocr-items-pane" aria-label="OCR 文字与顺序">
+        <div class="ocr-pane-heading"><div><strong>OCR 文字与源顺序</strong><span class="paper-meta">低置信与备选必须人工核对</span></div>${editable ? '<button class="button" type="button" data-ocr-verify-page>本页全部已核对</button>' : ''}</div>
+        <div class="ocr-item-list">
+          ${draft.items.map((item, index) => `<article class="ocr-item" data-ocr-item="${escapeHtml(item.itemId)}">
+            <div class="ocr-item-head"><strong>顺序 ${index + 1}</strong><span class="${item.confidence < state.detail.ocrReview.confidenceThreshold || item.alternatives.length ? 'ocr-confidence ocr-confidence--review' : 'ocr-confidence'}">置信度 ${Math.round(item.confidence * 1000) / 10}%</span></div>
+            <textarea data-ocr-text ${editable ? '' : 'disabled'} aria-label="顺序 ${index + 1} OCR 文字">${escapeHtml(item.text)}</textarea>
+            ${item.alternatives.length ? `<p class="ocr-alternatives">备选：${escapeHtml(item.alternatives.map((alternative) => typeof alternative === 'string' ? alternative : JSON.stringify(alternative)).join('；'))}</p>` : ''}
+            <div class="ocr-item-controls">
+              <label><span>归类</span><select data-ocr-classification ${editable ? '' : 'disabled'}><option value="content" ${item.classification === 'content' ? 'selected' : ''}>正文</option><option value="furniture" ${item.classification === 'furniture' ? 'selected' : ''}>页眉页脚/杂项</option></select></label>
+              <div class="inline-actions"><button class="text-button" type="button" data-ocr-move="up" ${!editable || index === 0 ? 'disabled' : ''}>上移</button><button class="text-button" type="button" data-ocr-move="down" ${!editable || index === draft.items.length - 1 ? 'disabled' : ''}>下移</button></div>
+              <label class="ocr-verified"><input type="checkbox" data-ocr-verified ${item.verified ? 'checked' : ''} ${editable ? '' : 'disabled'} />已对照原图核对</label>
+            </div>
+          </article>`).join('')}
+          ${draft.visuals.map((visual) => `<article class="ocr-item ocr-item--visual" data-ocr-visual="${escapeHtml(visual.regionId)}">
+            <div class="ocr-item-head"><strong>非文字区域</strong><span class="digest">${escapeHtml(visual.regionId)}</span></div>
+            <p class="boundary-note">只能诚实确认为页眉页脚/装饰。若它是表格、插图或题目内容，请选择“正文图形”，本次导入会保持阻断。</p>
+            <div class="ocr-item-controls"><label><span>归类</span><select data-ocr-visual-classification ${editable ? '' : 'disabled'}><option value="" ${!visual.classification ? 'selected' : ''}>请选择</option><option value="furniture" ${visual.classification === 'furniture' ? 'selected' : ''}>页眉页脚/装饰</option><option value="unsupported_content" ${visual.classification === 'unsupported_content' ? 'selected' : ''}>正文图形（当前不支持）</option></select></label><label class="ocr-verified"><input type="checkbox" data-ocr-visual-verified ${visual.verified ? 'checked' : ''} ${editable ? '' : 'disabled'} />已对照原图核对</label></div>
+          </article>`).join('')}
+        </div>
+      </section>
+    </div>
+  </main>`
+}
+
+function buildOcrConfirmation() {
+  return {
+    schemaVersion: 'nck1-ocr-source-confirmation-v1',
+    paperId: state.detail.paperId,
+    sourceSetDigest: state.detail.latest.manifest.sourceSetDigest,
+    evidenceDigest: state.detail.latest.manifest.evidenceDigest,
+    confirmed: true,
+    documents: state.ocrDraft.documents.map((document) => ({
+      documentId: document.documentId,
+      pages: document.pages.map((page) => ({
+        page: page.page,
+        orderedItems: page.items
+          .filter((item) => item.classification === 'content')
+          .map(({ itemId, observationIds, text }) => ({
+            itemId,
+            observationIds,
+            text,
+          })),
+        furnitureObservationIds: page.items
+          .filter((item) => item.classification === 'furniture')
+          .flatMap((item) => item.observationIds),
+        visualClassifications: page.visuals
+          .filter((visual) => visual.classification === 'furniture')
+          .map((visual) => ({
+            regionId: visual.regionId,
+            classification: 'furniture',
+          })),
+      })),
+    })),
+  }
+}
+
+function ocrReviewRailHtml() {
+  const completion = ocrCompletion()
+  const latest = state.detail.latest
+  const findings = state.detail.ocrReview.reviewFindings || []
+  if (latest.state === 'approved' && latest.approval?.confirmation) {
+    return `<aside class="right-rail" aria-label="OCR 确认结果"><section class="rail-section"><h2>OCR 已确认</h2><div class="approval-box">${status('approved', 'OCR 已确认')}<p class="muted">确认绑定原图、OCR engine output 与 observation digest。Agent 现在可拉取确认并生成真实 Screen revision。</p><p class="digest">${escapeHtml(latest.approval.confirmationId)}</p></div></section></aside>`
+  }
+  return `<aside class="right-rail" aria-label="OCR 核对进度">
+    <section class="rail-section"><h2>核对进度</h2><p class="ocr-progress" id="ocr-progress">${completion.verified} / ${completion.total} 项已核对</p><p class="muted">每段文字、顺序和归类都必须明确确认。正文图形保持 fail closed。</p></section>
+    <section class="rail-section"><h2>识别证据</h2><p class="paper-meta">${escapeHtml(state.detail.ocrReview.engine.name)} ${escapeHtml(state.detail.ocrReview.engine.version)} · 阈值 ${escapeHtml(state.detail.ocrReview.confidenceThreshold)}</p>${findings.length ? `<ul class="ocr-finding-list">${findings.map((finding) => `<li><strong>${escapeHtml(finding.code)}</strong><span>第 ${escapeHtml(finding.source?.page)} 页 · ${escapeHtml(finding.source?.documentId)}</span></li>`).join('')}</ul>` : '<p class="muted">结构证据完整；仍需人工逐项确认。</p>'}</section>
+    ${state.actor === 'owner' ? `<section class="rail-section"><h2>完成 OCR 确认</h2><p class="boundary-note">这里只确认“原图读成什么、顺序怎样、哪些是杂项”。不会认可试卷，也不会发布。</p><button class="button button--primary" id="confirm-ocr" type="button" ${completion.ready ? '' : 'disabled'}>确认全部 OCR</button><p class="field-help" id="ocr-confirm-help">${completion.ready ? '全部项目已核对，可以提交精确确认。' : '先核对所有页面和项目。'}</p></section>` : '<section class="rail-section"><h2>Agent 边界</h2><p class="boundary-note">Agent 可查看进度，不能代替 Owner 确认 OCR。</p></section>'}
+  </aside>`
+}
+
 function leftRailHtml() {
   const latest = state.detail?.latest
   return `
@@ -178,13 +393,14 @@ function leftRailHtml() {
           <h3>${escapeHtml(state.detail.paperName)}</h3>
           <p class="paper-meta">${escapeHtml(state.detail.paperId)}</p>
           ${latest ? `<p class="digest" title="${escapeHtml(latest.bundleDigest)}">当前摘要 ${escapeHtml(shortDigest(latest.bundleDigest))}</p>` : ''}
+          ${isOcrReview() ? '<p class="boundary-note">第一阶段：对照原图核准 OCR。确认后 Agent 才能生成真实 Screen revision。</p>' : ''}
           ${state.detail.rendererStale ? '<p class="boundary-note">Screen / Print 渲染器已经更新。Agent 需重新提交同一 Candidate，生成新的审核 revision。</p>' : ''}
         </section>
         <section class="rail-section"><h3>修订历史</h3>${revisionsHtml()}</section>
-        <details class="rail-section structure-section" ${window.matchMedia('(max-width: 760px)').matches ? '' : 'open'}>
+        ${isOcrReview() ? '' : `<details class="rail-section structure-section" ${window.matchMedia('(max-width: 760px)').matches ? '' : 'open'}>
           <summary><h3>卷面结构</h3><span class="paper-meta">${escapeHtml((state.detail.visibleStructure || []).length)} 项</span></summary>
           ${structureHtml()}
-        </details>
+        </details>`}
         <section class="rail-section"><h3>源文件</h3>${filesHtml()}</section>
       ` : ''}
     </aside>
@@ -495,12 +711,111 @@ function render() {
     </header>
     <div class="workspace">
       ${leftRailHtml()}
-      ${state.detail ? surfaceStageHtml() : '<main class="surface-stage"><div class="surface-empty"><h2>还没有可审核内容</h2><p class="muted">Agent 提交 revision 后，从左侧打开。</p></div></main>'}
-      ${state.detail ? rightRailHtml() : '<aside class="right-rail"></aside>'}
+      ${state.detail ? (isOcrReview() ? ocrReviewStageHtml() : surfaceStageHtml()) : '<main class="surface-stage"><div class="surface-empty"><h2>还没有可审核内容</h2><p class="muted">Agent 提交 revision 后，从左侧打开。</p></div></main>'}
+      ${state.detail ? (isOcrReview() ? ocrReviewRailHtml() : rightRailHtml()) : '<aside class="right-rail"></aside>'}
     </div>
     ${state.error ? `<div class="error-banner" role="alert">${escapeHtml(state.error)}。刷新后重试。</div>` : ''}
   </div>`
   bind()
+}
+
+function updateOcrCompletionUi() {
+  const completion = ocrCompletion()
+  const progress = document.querySelector('#ocr-progress')
+  if (progress) progress.textContent = `${completion.verified} / ${completion.total} 项已核对`
+  const button = document.querySelector('#confirm-ocr')
+  if (button) button.disabled = !completion.ready
+  const help = document.querySelector('#ocr-confirm-help')
+  if (help) help.textContent = completion.ready
+    ? '全部项目已核对，可以提交精确确认。'
+    : '先核对所有页面和项目。'
+}
+
+function bindOcrReview() {
+  document.querySelectorAll('[data-ocr-document]').forEach((button) => {
+    button.addEventListener('click', () => {
+      state.ocrDocumentId = button.dataset.ocrDocument
+      state.ocrPage = currentOcrDocument()?.pages?.[0]?.page || 1
+      render()
+    })
+  })
+  document.querySelectorAll('[data-ocr-page]').forEach((button) => {
+    button.addEventListener('click', () => {
+      state.ocrPage = Number(button.dataset.ocrPage)
+      render()
+    })
+  })
+  const current = currentOcrPage()
+  if (!current) return
+  document.querySelectorAll('[data-ocr-item]').forEach((element) => {
+    const item = current.draft.items.find((candidate) =>
+      candidate.itemId === element.dataset.ocrItem)
+    if (!item) return
+    element.querySelector('[data-ocr-text]')?.addEventListener('input', (event) => {
+      item.text = event.currentTarget.value
+      updateOcrCompletionUi()
+    })
+    element.querySelector('[data-ocr-classification]')?.addEventListener('change', (event) => {
+      item.classification = event.currentTarget.value
+      updateOcrCompletionUi()
+    })
+    element.querySelector('[data-ocr-verified]')?.addEventListener('change', (event) => {
+      item.verified = event.currentTarget.checked
+      updateOcrCompletionUi()
+    })
+    element.querySelectorAll('[data-ocr-move]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const index = current.draft.items.indexOf(item)
+        const targetIndex = button.dataset.ocrMove === 'up' ? index - 1 : index + 1
+        if (targetIndex < 0 || targetIndex >= current.draft.items.length) return
+        const [moved] = current.draft.items.splice(index, 1)
+        current.draft.items.splice(targetIndex, 0, moved)
+        render()
+      })
+    })
+  })
+  document.querySelectorAll('[data-ocr-visual]').forEach((element) => {
+    const visual = current.draft.visuals.find((candidate) =>
+      candidate.regionId === element.dataset.ocrVisual)
+    if (!visual) return
+    element.querySelector('[data-ocr-visual-classification]')?.addEventListener('change', (event) => {
+      visual.classification = event.currentTarget.value
+      updateOcrCompletionUi()
+    })
+    element.querySelector('[data-ocr-visual-verified]')?.addEventListener('change', (event) => {
+      visual.verified = event.currentTarget.checked
+      updateOcrCompletionUi()
+    })
+  })
+  document.querySelector('[data-ocr-verify-page]')?.addEventListener('click', () => {
+    current.draft.items.forEach((item) => { item.verified = true })
+    current.draft.visuals.forEach((visual) => {
+      if (visual.classification) visual.verified = true
+    })
+    render()
+  })
+  document.querySelector('#confirm-ocr')?.addEventListener('click', async (event) => {
+    if (!ocrCompletion().ready) return
+    event.currentTarget.disabled = true
+    try {
+      await request(
+        `/api/import-reviews/papers/${encodeURIComponent(state.paperId)}`
+          + `/revisions/${encodeURIComponent(state.detail.latestRevisionId)}/confirm-ocr`,
+        {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            bundleDigest: state.detail.latest.bundleDigest,
+            confirmation: buildOcrConfirmation(),
+          }),
+        },
+      )
+      await loadDetail(state.paperId)
+    } catch (error) {
+      state.error = error.message
+      render()
+    }
+  })
 }
 
 function screenTarget(event) {
@@ -641,6 +956,10 @@ function bind() {
     await request('/api/auth/logout', { method: 'POST' })
     window.location.href = '/'
   })
+  if (isOcrReview()) {
+    bindOcrReview()
+    return
+  }
   document.querySelector('#issue-form')?.addEventListener('submit', async (event) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)

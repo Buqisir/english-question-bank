@@ -27,6 +27,13 @@ import {
   validateNck1OcrSourceEvidence,
 } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
 import {
+  NCK1_IMAGE_BUNDLE_MEDIA_TYPE,
+  assertNck1ImageBundlePageArtifacts,
+  buildNck1ImageSourceBundle,
+  inspectNck1SourceImage,
+  nck1ImageExtension,
+} from '../../server/paper-import/nck1ImageSourceBundle.mjs'
+import {
   runNck1MaterializationJobUnlocked,
   withPaperWriterLock,
 } from './nck1-docx-materialize.mjs'
@@ -152,21 +159,90 @@ function parseSource(value, index) {
   return { role, sourcePath, index }
 }
 
+function parseSourcePage(input, index) {
+  const match = /^(question_source|official_answers|question_and_answers):([1-9]\d*)=(.+)$/u
+    .exec(input)
+  if (!match || !path.isAbsolute(match[3])) {
+    fail('--source-page must be role:page=/absolute/path')
+  }
+  const sourcePath = path.resolve(match[3])
+  if (!existsSync(sourcePath)) fail(`Source page is missing: ${sourcePath}`)
+  return { role: match[1], page: Number(match[2]), sourcePath, index }
+}
+
+function groupedSourcePages(sourcePages) {
+  const groups = new Map()
+  for (const sourcePage of sourcePages) {
+    const pages = groups.get(sourcePage.role) || []
+    pages.push(sourcePage)
+    groups.set(sourcePage.role, pages)
+  }
+  return [...groups].map(([role, pages], index) => {
+    const pageNumbers = pages.map((page) => page.page)
+    if (new Set(pageNumbers).size !== pageNumbers.length) {
+      const error = new Error(`Image ${role} declares a duplicate page`)
+      error.code = 'NCK1_IMAGE_PAGE_DUPLICATE'
+      throw error
+    }
+    pages.sort((left, right) => left.page - right.page)
+    if (pages.some((page, pageIndex) => page.page !== pageIndex + 1)) {
+      const error = new Error(`Image ${role} pages must cover 1..N without gaps`)
+      error.code = 'NCK1_IMAGE_BUNDLE_ORDER_INVALID'
+      throw error
+    }
+    return { role, pages, index }
+  })
+}
+
+function renderImageBundlePdf(pages, targetPath) {
+  const temp = mkdtempSync(path.join(tmpdir(), 'eqb-nck1-image-rendition-'))
+  try {
+    const normalized = pages.map((sourcePage, index) => {
+      const pagePath = path.join(temp, `page-${String(index + 1).padStart(4, '0')}.png`)
+      execFileSync('magick', [
+        sourcePage.sourcePath,
+        '-auto-orient',
+        '-resize', '1240x1754>',
+        '-gravity', 'center',
+        '-background', 'white',
+        '-extent', '1240x1754',
+        pagePath,
+      ], { stdio: 'pipe' })
+      return pagePath
+    })
+    execFileSync('magick', [
+      ...normalized,
+      '-units', 'PixelsPerInch',
+      '-density', '150',
+      targetPath,
+    ], { stdio: 'pipe' })
+    if (!existsSync(targetPath)) fail('Image bundle PDF rendition was not created')
+  } finally {
+    rmSync(temp, { recursive: true, force: true })
+  }
+}
+
 function initialize() {
   const paperId = process.argv[3]
   const paperName = value('--paper-name')
   const provenance = value('--provenance')
   const sources = values('--source').map(parseSource)
+  const sourcePages = values('--source-page').map(parseSourcePage)
+  const imageSources = groupedSourcePages(sourcePages)
   if (!validPaperId(paperId)) {
     fail('init requires a valid paperId')
   }
-  if (!paperName || !provenance || sources.length === 0) {
-    fail('init requires --paper-name, --provenance, and at least one --source role=/absolute/path')
+  if (!paperName || !provenance || (sources.length === 0 && imageSources.length === 0)) {
+    fail('init requires --paper-name, --provenance, and --source or --source-page input')
   }
-  if (!sources.some((item) => ['official_answers', 'question_and_answers'].includes(item.role))) {
+  if (sources.length > 0 && imageSources.length > 0) {
+    fail('One init cannot mix whole-document --source with image --source-page input')
+  }
+  const sourceRoles = [...sources, ...imageSources].map((item) => item.role)
+  if (!sourceRoles.some((role) => ['official_answers', 'question_and_answers'].includes(role))) {
     fail('Authoritative answers are required; AI-generated answers are forbidden')
   }
-  if (!sources.some((item) => ['question_source', 'question_and_answers'].includes(item.role))) {
+  if (!sourceRoles.some((role) => ['question_source', 'question_and_answers'].includes(role))) {
     fail('One complete question source is required')
   }
   const environment = runImportEnvironmentPreflight()
@@ -217,6 +293,64 @@ function initialize() {
       documents.push(record)
     }
   }
+  for (const imageSource of imageSources) {
+    const documentId = `${imageSource.role.replaceAll('_', '-')}-${imageSource.index + 1}`
+    const pageDirectory = path.posix.join('source', documentId)
+    const descriptorRelativePath = path.posix.join(
+      'source',
+      `${documentId}.image-bundle.json`,
+    )
+    const pageRecords = imageSource.pages.map((sourcePage) => {
+      const bytes = new Uint8Array(readFileSync(sourcePage.sourcePath))
+      const inspected = inspectNck1SourceImage(bytes)
+      const relativePath = path.posix.join(
+        pageDirectory,
+        `page-${String(sourcePage.page).padStart(4, '0')}.${nck1ImageExtension(inspected.mediaType)}`,
+      )
+      const targetPath = path.join(paperDir, relativePath)
+      mkdirSync(path.dirname(targetPath), { recursive: true })
+      writeFileSync(targetPath, bytes)
+      return {
+        page: sourcePage.page,
+        path: relativePath,
+        ...inspected,
+        bytes,
+        sourcePath: targetPath,
+      }
+    })
+    const descriptorBytes = buildNck1ImageSourceBundle(pageRecords)
+    const descriptorPath = path.join(paperDir, descriptorRelativePath)
+    writeFileSync(descriptorPath, descriptorBytes)
+    const renditionId = `${documentId}-pdf-rendition`
+    const renditionRelativePath = path.posix.join(
+      'source',
+      'renditions',
+      `${renditionId}.pdf`,
+    )
+    const renditionPath = path.join(paperDir, renditionRelativePath)
+    renderImageBundlePdf(pageRecords, renditionPath)
+    documents.push({
+      documentId,
+      role: imageSource.role,
+      mediaType: NCK1_IMAGE_BUNDLE_MEDIA_TYPE,
+      sha256: sha256(descriptorBytes),
+      byteLength: descriptorBytes.byteLength,
+      pageCount: pageRecords.length,
+      path: descriptorRelativePath,
+      renditionDocumentId: renditionId,
+      pages: pageRecords.map(({ bytes: _bytes, sourcePath: _sourcePath, ...page }) => page),
+    })
+    documents.push({
+      ...fileRecord(
+        renditionId,
+        imageSource.role,
+        renditionPath,
+        renditionRelativePath,
+        'application/pdf',
+      ),
+      renditionOf: documentId,
+    })
+  }
   const manifest = {
     schemaVersion: 'universal-nck1-source-manifest-v1',
     paperId,
@@ -259,7 +393,15 @@ function capturedDocuments(paperDir, manifest) {
     if (bytes.byteLength !== document.byteLength || sha256(bytes) !== document.sha256) {
       fail(`Captured source digest mismatch: ${document.documentId}`)
     }
-    return { ...document, bytes }
+    const captured = { ...document, bytes }
+    if (document.mediaType === NCK1_IMAGE_BUNDLE_MEDIA_TYPE) {
+      assertNck1ImageBundlePageArtifacts(captured, (document.pages || []).map((page) => {
+        const pagePath = path.join(paperDir, page.path)
+        if (!existsSync(pagePath)) fail(`Captured source page is missing: ${document.documentId}:${page.page}`)
+        return { ...page, bytes: new Uint8Array(readFileSync(pagePath)) }
+      }))
+    }
+    return captured
   })
 }
 
@@ -522,6 +664,6 @@ try {
   else if (command === 'crop-pdf') cropPdf()
   else fail('Usage: universal-nck1.mjs preflight|init|stage-ocr|confirm-ocr|materialize|verify|build|extract-docx-media|crop-pdf ...')
 } catch (error) {
-  console.error(error.message)
+  console.error(error.code ? `${error.code}: ${error.message}` : error.message)
   process.exitCode = 1
 }

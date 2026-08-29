@@ -1,6 +1,6 @@
 # 09 — 有序题卷/答案图片 bundle
 
-- Status: planned
+- Status: implemented on synthetic/public seams; real non-production Owner QA pending
 - Blocked by: `01-source-region-review-pairing.md`, `06-scanned-pdf-ocr-evidence.md`
 - Priority: P0, first business release capability
 - Owner decision: `/ops/` OCR source comparison and human confirmation are in this ticket,
@@ -19,11 +19,12 @@ page-raster OCR seam，不把“图片卷”做成第二套 parser。这是第�
 
 ## Input and fixture
 
-- question bundle：3张代码生成的 synthetic page images，尺寸各不相同；用最短token闭合
+- question bundle：4张代码生成的 synthetic page images，混合 PNG/JPEG/lossless WebP；用最短token闭合
   标准NCK1的9个active slots和45项作答，只含清晰单栏文字、题号、选项与blank。
 - answer bundle：1张synthetic compact answer-key image，完整覆盖45项作答值，包括56–65
   的短文本答案；不能只有选择题ABCD。
-- 输入顺序显式写为 page 1–3，不依赖文件名排序、EXIF时间或目录遍历顺序。
+- 输入顺序显式写为 question page 1–4、answer page 1，不依赖文件名排序、EXIF时间或
+  目录遍历顺序。
 - 负例：漏页码、重复页码、digest漂移、不支持的GIF、两页被声明为同一页、低置信文字、
   多栏或无法分类的视觉形状。
 
@@ -41,7 +42,9 @@ page-raster OCR seam，不把“图片卷”做成第二套 parser。这是第�
 - `/ops/` 使用ticket 01配对真实Screen与原始图片region，并能逐页导航、显示missing page。
   同一页面必须呈现OCR observation文字、confidence/alternatives、source order和
   content-vs-furniture分类；教师可逐项改正文字、顺序和分类，确认记录复用ticket 06并绑定
-  exact source/evidence/observation digests。所有项目确认前不得产生ready Candidate。
+  exact source/evidence/observation digests。流程分成两个不可混淆的revision：先在OCR revision
+  并排核对原图与observations；Agent拉取确认后才生成Candidate revision，再按ticket 01
+  并排审核原图局部与真实Screen。OCR确认不是试卷认可，也不能用于发布。
 
 ## Fail closed
 
@@ -52,16 +55,18 @@ ticket 11的`awaiting_authoritative_answers`状态。
 
 ## Acceptance criteria
 
-- [ ] 正例逐页保留原bytes/digest/dimensions/order，并可重放同一source crop。
-- [ ] OCR observations与扫描PDF使用同一schema/confirmation/parser，无image-only题意模型。
-- [ ] page gap/duplicate/reorder/digest drift/unsupported type各自稳定拒绝。
-- [ ] 整页图片只作source page evidence；确认后的正文结构化，局部复杂图才成为media crop。
-- [ ] Screen、Student/Teacher Print、PDF消费同一Canonical，不直接渲染整页source截图。
-- [ ] answer image闭合全部45项权威答案；漏掉56–65任一文本答案时Candidate non-ready。
-- [ ] `/ops/` 可逐页对照题卷/答案原图、OCR observations与真实Screen，并在同一任务中
-  确认文字、顺序和content-vs-furniture；所有OCR确认完成前不可进入Owner QA。
-- [ ] `/ops/` 保存的确认能由ticket 06公共producer重放；源页、engine output或observation
+- [x] 正例逐页保留原bytes/digest/dimensions/order，并可重放同一source crop。
+- [x] OCR observations与扫描PDF使用同一schema/confirmation/parser，无image-only题意模型。
+- [x] page gap/duplicate/reorder/digest drift/unsupported type各自稳定拒绝。
+- [x] 整页图片只作source page evidence；确认后的文字才结构化。首版无法诚实处理的正文图形
+  保持fail closed，不伪装成media或家具。
+- [x] Screen、Student/Teacher Print、PDF消费同一Canonical，不直接渲染整页source截图。
+- [x] answer image闭合全部45项权威答案；漏掉56–65任一文本答案时Candidate non-ready。
+- [x] `/ops/` 的OCR revision可逐页对照题卷/答案原图与observations，修改文字和顺序并确认
+  content-vs-furniture；确认后才允许Agent生成下一张真实Screen Candidate revision。
+- [x] `/ops/` 保存的确认能由ticket 06公共producer重放；源页、engine output或observation
   digest改变后旧确认失效，不允许UI另建宽松确认模型。
+- [ ] 一份真实、只读、非CQ8图片pair完成OCR revision→Candidate Screen revision的Owner QA。
 
 ## Non-goals
 
@@ -74,10 +79,13 @@ fail closed，不能为了抢先发布而猜测。
 ```bash
 node scripts/verify-universal-nck1-image-source-bundle.mjs
 node scripts/verify-nck1-ocr-source-evidence.mjs
+node scripts/verify-import-review-ocr-confirmation.mjs
 node scripts/verify-import-review-source-pairing.mjs
-node scripts/verify-universal-nck1-candidate-surfaces.mjs paper-synthetic-image-bundle
+node import-ops/verify.mjs
 pnpm -C app verify:paper
 pnpm -C app verify:all
 ```
 
-final只用synthetic pages；真实图片卷只可做非CQ8、非生产、只读smoke proof，不提交仓库。
+`verify-universal-nck1-image-source-bundle.mjs`内部会运行真实Screen、Student/Teacher Print与
+PDF verifier，输出写入临时目录后清理。仓库fixture只用synthetic pages；真实图片卷只可做
+非CQ8、非生产、只读smoke proof，不提交仓库。

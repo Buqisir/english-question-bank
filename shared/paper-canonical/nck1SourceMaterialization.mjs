@@ -746,12 +746,15 @@ function validateSourceCoverage(sourceCoverage, groups, media, documents, issues
     : []
   if (
     !['question_source', 'question_and_answers'].includes(document?.role)
-    || document.mediaType !== 'application/pdf'
+    || ![
+      'application/pdf',
+      'application/vnd.eqb.nck1-image-source-bundle+json',
+    ].includes(document.mediaType)
     || !Array.isArray(sourceCoverage.reviewedPages)
     || sourceCoverage.reviewedPages.length !== expectedPages.length
     || sourceCoverage.reviewedPages.some((page, index) => page !== expectedPages[index])
   ) {
-    issues.push(issue('MATERIALIZATION_SOURCE_PAGE_COVERAGE_INCOMPLETE', '$.sourceCoverage.reviewedPages', 'Every page of one immutable question-bearing PDF source must be reviewed exactly once in order'))
+    issues.push(issue('MATERIALIZATION_SOURCE_PAGE_COVERAGE_INCOMPLETE', '$.sourceCoverage.reviewedPages', 'Every page of one immutable question-bearing paged source must be reviewed exactly once in order'))
   }
   const tableIds = new Set(groups.flatMap((group) =>
     nestedBlocks(group.blocks).filter((block) => block.kind === 'table').map((block) => block.blockId)))
@@ -945,7 +948,11 @@ export function validateNck1SourceMaterialization(value) {
         || !idPattern.test(document.documentId || '')
         || documents.has(document.documentId)
         || !['question_source', 'official_answers', 'question_and_answers'].includes(document.role)
-        || !['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'].includes(document.mediaType)
+        || ![
+          'application/pdf',
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+          'application/vnd.eqb.nck1-image-source-bundle+json',
+        ].includes(document.mediaType)
         || !digestPattern.test(document.sha256 || '')
         || !Number.isInteger(document.byteLength)
         || document.byteLength < 1

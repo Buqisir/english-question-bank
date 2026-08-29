@@ -27,6 +27,10 @@ import {
   NCK1_OCR_CONFIRMATION_FILE_NAME,
   NCK1_OCR_EVIDENCE_FILE_NAME,
 } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
+import {
+  NCK1_IMAGE_BUNDLE_MEDIA_TYPE,
+  assertNck1ImageBundlePageArtifacts,
+} from '../../server/paper-import/nck1ImageSourceBundle.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 const WRITER_LOCK_NAME = '.universal-nck1-writer.lock'
@@ -62,7 +66,9 @@ const OCR_PRODUCER = Object.freeze({
     const evidencePath = path.join(directory, NCK1_OCR_EVIDENCE_FILE_NAME)
     const confirmationPath = path.join(directory, NCK1_OCR_CONFIRMATION_FILE_NAME)
     return {
-      evidence: JSON.parse(readFileSync(evidencePath, 'utf8')),
+      evidence: existsSync(evidencePath)
+        ? JSON.parse(readFileSync(evidencePath, 'utf8'))
+        : null,
       confirmation: existsSync(confirmationPath)
         ? JSON.parse(readFileSync(confirmationPath, 'utf8'))
         : null,
@@ -107,13 +113,30 @@ function loadDocuments(paperDir, manifest) {
     if (bytes.byteLength !== document.byteLength || sha256(bytes) !== document.sha256) {
       throw new Error(`Captured source digest mismatch: ${document.documentId}; create a new Source Capture`)
     }
-    return { ...document, bytes }
+    const captured = { ...document, bytes }
+    if (document.mediaType === NCK1_IMAGE_BUNDLE_MEDIA_TYPE) {
+      assertNck1ImageBundlePageArtifacts(captured, (document.pages || []).map((page) => {
+        const pagePath = path.join(paperDir, page.path)
+        if (!existsSync(pagePath)) {
+          throw new Error(`Captured source page is missing: ${document.documentId}:${page.page}`)
+        }
+        return { ...page, bytes: new Uint8Array(readFileSync(pagePath)) }
+      }))
+    }
+    return captured
   })
 }
 
 function selectProducer(paperDir, documents) {
   const allPdf = documents.length > 0
     && documents.every((document) => document.mediaType === 'application/pdf')
+  const sourceDocuments = documents.filter((document) => !document.renditionOf)
+  const allImageBundles = sourceDocuments.length > 0
+    && sourceDocuments.every((document) =>
+      document.mediaType === NCK1_IMAGE_BUNDLE_MEDIA_TYPE)
+    && documents.filter((document) => document.renditionOf).every((document) =>
+      document.mediaType === 'application/pdf')
+  if (allImageBundles) return OCR_PRODUCER
   if (!allPdf) return DOCX_PRODUCER
   return existsSync(path.join(
     paperDir,

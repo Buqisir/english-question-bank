@@ -18,6 +18,11 @@ import {
 } from '../../shared/paper-canonical/stable.mjs'
 import { extractDocxDocumentParagraphs } from './docxSourceAdapter.mjs'
 import { rasterPdfRegion } from './pdfRegionRaster.mjs'
+import {
+  NCK1_IMAGE_BUNDLE_MEDIA_TYPE,
+  nck1ImageExtension,
+  parseNck1ImageSourceBundle,
+} from '../paper-import/nck1ImageSourceBundle.mjs'
 
 export const NCK1_MATERIALIZATION_INPUT_KIND =
   'nck1-source-materialization'
@@ -95,7 +100,11 @@ function sourceRoles(role) {
 }
 
 function originalName(document) {
-  const extension = document.mediaType === 'application/pdf' ? 'pdf' : 'docx'
+  const extension = document.mediaType === 'application/pdf'
+    ? 'pdf'
+    : document.mediaType === NCK1_IMAGE_BUNDLE_MEDIA_TYPE
+      ? 'image-bundle.json'
+      : 'docx'
   return `${document.documentId}.${extension}`
 }
 
@@ -386,6 +395,20 @@ function validateBundle(materialization, input) {
       || sha256(supplied.bytes) !== document.sha256
     ) {
       issues.push(adapterIssue('MATERIALIZATION_SOURCE_DOCUMENT_MISMATCH', `Source document ${document.documentId} does not match its immutable materialization binding`, '$.documents'))
+    }
+    if (document.mediaType === NCK1_IMAGE_BUNDLE_MEDIA_TYPE && supplied) {
+      try {
+        const bundle = parseNck1ImageSourceBundle(supplied.bytes)
+        if (bundle.pages.length !== document.pageCount) {
+          throw new Error('page count mismatch')
+        }
+      } catch {
+        issues.push(adapterIssue(
+          'MATERIALIZATION_IMAGE_BUNDLE_INVALID',
+          `Image source bundle ${document.documentId} does not replay its immutable pages`,
+          '$.documents',
+        ))
+      }
     }
   }
   if (documentsById.size !== (materialization?.documents || []).length) {
@@ -1166,9 +1189,9 @@ function compilerDocuments(input, materialization, source, instructionDocument) 
         originalName: 'nck1-source-materialization-v1.json',
       },
     },
-    ...input.documents.map((entry) => {
+    ...input.documents.flatMap((entry) => {
       const document = documentsById.get(entry.documentId)
-      return {
+      const sourceDocument = {
         inputKey: inputKeyForDocument(entry.documentId),
         roles: sourceRoles(document.role),
         bytes: new Uint8Array(entry.bytes),
@@ -1177,6 +1200,19 @@ function compilerDocuments(input, materialization, source, instructionDocument) 
           originalName: originalName(document),
         },
       }
+      if (document.mediaType !== NCK1_IMAGE_BUNDLE_MEDIA_TYPE) {
+        return [sourceDocument]
+      }
+      const pages = parseNck1ImageSourceBundle(entry.bytes).pages.map((page) => ({
+        inputKey: `${inputKeyForDocument(entry.documentId)}_page_${page.page}`,
+        roles: sourceRoles(document.role),
+        bytes: new Uint8Array(page.bytes),
+        declared: {
+          mediaType: page.mediaType,
+          originalName: `${entry.documentId}-page-${page.page}.${nck1ImageExtension(page.mediaType)}`,
+        },
+      }))
+      return [sourceDocument, ...pages]
     }),
     ...input.media.map((entry) => {
       const media = mediaById.get(entry.mediaId)

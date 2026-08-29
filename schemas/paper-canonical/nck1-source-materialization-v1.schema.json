@@ -160,7 +160,8 @@
         "mediaType": {
           "enum": [
             "application/pdf",
-            "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "application/vnd.eqb.nck1-image-source-bundle+json"
           ]
         },
         "sha256": { "$ref": "#/$defs/digest" },

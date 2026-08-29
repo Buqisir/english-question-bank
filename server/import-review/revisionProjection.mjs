@@ -17,6 +17,16 @@ import {
   buildNck1AnalysisProjection,
   NCK1_STAGED_ANALYSIS_FILES,
 } from './nck1AnalysisProjection.mjs'
+import {
+  NCK1_IMAGE_BUNDLE_MEDIA_TYPE,
+  assertNck1ImageBundlePageArtifacts,
+} from '../paper-import/nck1ImageSourceBundle.mjs'
+import {
+  NCK1_OCR_EVIDENCE_FILE_NAME,
+  NCK1_OCR_REVIEW_CODES,
+  resolveConfirmedNck1OcrEvidence,
+  validateNck1OcrSourceEvidence,
+} from '../paper-import/nck1OcrSourceEvidence.mjs'
 
 function fail(message, code = 'IMPORT_REVIEW_CANDIDATE_INVALID') {
   const error = new Error(message)
@@ -92,6 +102,26 @@ export function loadNck1ReviewSource(rootDir) {
     document.documentId,
     resolveReviewFile(rootDir, normalizedRelativePath(document.path, `document ${document.documentId}`)),
   ]))
+  for (const document of manifest.documents) {
+    if (document.mediaType !== NCK1_IMAGE_BUNDLE_MEDIA_TYPE) continue
+    const documentPath = documentPathById.get(document.documentId)
+    if (!documentPath || !existsSync(documentPath)) {
+      fail(`Image source bundle is unavailable: ${document.documentId}`)
+    }
+    assertNck1ImageBundlePageArtifacts(
+      { ...document, bytes: new Uint8Array(readFileSync(documentPath)) },
+      (document.pages || []).map((page) => {
+        const pagePath = resolveReviewFile(
+          rootDir,
+          normalizedRelativePath(page.path, `document ${document.documentId} page ${page.page}`),
+        )
+        if (!existsSync(pagePath)) {
+          fail(`Image source page is unavailable: ${document.documentId}:${page.page}`)
+        }
+        return { ...page, bytes: new Uint8Array(readFileSync(pagePath)) }
+      }),
+    )
+  }
   const sourceInput = {
     kind: 'nck1-source-materialization',
     materializationBytes,
@@ -131,18 +161,38 @@ function sourceVisualProjection(manifest, materialization) {
     manifestDocument.path,
     `document ${sourceDocument.documentId}`,
   )
-  return coverage.visuals.map((visual) => ({
-    visualId: visual.visualId,
-    documentId: sourceDocument.documentId,
-    path: sourcePath,
-    sourceDigest: sourceDocument.sha256,
-    mediaType: sourceDocument.mediaType,
-    page: visual.page,
-    region: visual.region ? structuredClone(visual.region) : null,
-    disposition: visual.disposition,
-    targetId: visual.targetId,
-    state: visual.region ? 'paired' : 'unlocated',
-  }))
+  return coverage.visuals.map((visual) => {
+    const imagePage = sourceDocument.mediaType === NCK1_IMAGE_BUNDLE_MEDIA_TYPE
+      ? manifestDocument.pages?.find((page) => page.page === visual.page)
+      : null
+    if (sourceDocument.mediaType === NCK1_IMAGE_BUNDLE_MEDIA_TYPE && !imagePage) {
+      fail(`Source visual page is unavailable: ${sourceDocument.documentId}:${visual.page}`)
+    }
+    return {
+      visualId: visual.visualId,
+      documentId: sourceDocument.documentId,
+      path: imagePage
+        ? normalizedRelativePath(
+            imagePage.path,
+            `document ${sourceDocument.documentId} page ${visual.page}`,
+          )
+        : sourcePath,
+      sourceDigest: imagePage?.sha256 || sourceDocument.sha256,
+      mediaType: imagePage?.mediaType || sourceDocument.mediaType,
+      page: visual.page,
+      region: visual.region ? structuredClone(visual.region) : null,
+      disposition: visual.disposition,
+      targetId: visual.targetId,
+      state: visual.region ? 'paired' : 'unlocated',
+    }
+  })
+}
+
+function primarySourceType(materialization) {
+  const source = materialization.documents.find((document) =>
+    ['question_source', 'question_and_answers'].includes(document.role))
+  if (source?.mediaType === NCK1_IMAGE_BUNDLE_MEDIA_TYPE) return 'image'
+  return source?.mediaType?.includes('wordprocessingml') ? 'docx' : 'pdf'
 }
 
 export function reviewBundleFilePaths(rootDir) {
@@ -151,10 +201,7 @@ export function reviewBundleFilePaths(rootDir) {
     config: readJson(resolveReviewFile(rootDir, 'config.json'), 'config.json'),
     materialization,
     sourceAssetVersion: 1,
-    primarySourceType: materialization.documents.some((document) =>
-      document.mediaType?.includes('wordprocessingml'))
-      ? 'docx'
-      : 'pdf',
+    primarySourceType: primarySourceType(materialization),
   })
   buildNck1AnalysisProjection({
     rootDir,
@@ -179,6 +226,15 @@ export function reviewBundleFilePaths(rootDir) {
       mediaType: document.mediaType,
       role: document.role,
     })),
+    ...manifest.documents.flatMap((document) =>
+      (document.pages || []).map((page) => ({
+        path: normalizedRelativePath(
+          page.path,
+          `document ${document.documentId} page ${page.page}`,
+        ),
+        mediaType: page.mediaType,
+        role: `${document.role}_page`,
+      }))),
     ...materialization.media.map((media) => ({
       path: path.posix.join(
         normalizedRelativePath(manifest.mediaDirectory, 'mediaDirectory'),
@@ -193,6 +249,176 @@ export function reviewBundleFilePaths(rootDir) {
       role,
     })),
   ]
+}
+
+export function loadNck1OcrReviewSource(rootDir) {
+  const config = readJson(resolveReviewFile(rootDir, 'config.json'), 'config.json')
+  const manifest = readJson(
+    resolveReviewFile(rootDir, 'universal-source-manifest.json'),
+    'universal-source-manifest.json',
+  )
+  if (
+    manifest.schemaVersion !== 'universal-nck1-source-manifest-v1'
+    || manifest.paperId !== config.paperId
+    || !Array.isArray(manifest.documents)
+  ) fail('Universal NCK1 OCR source manifest is incomplete')
+  const documents = manifest.documents.map((document) => {
+    const filePath = resolveReviewFile(
+      rootDir,
+      normalizedRelativePath(document.path, `document ${document.documentId}`),
+    )
+    if (!existsSync(filePath)) fail(`OCR source document is unavailable: ${document.documentId}`)
+    const captured = { ...document, bytes: new Uint8Array(readFileSync(filePath)) }
+    if (document.mediaType === NCK1_IMAGE_BUNDLE_MEDIA_TYPE) {
+      assertNck1ImageBundlePageArtifacts(captured, (document.pages || []).map((page) => {
+        const pagePath = resolveReviewFile(
+          rootDir,
+          normalizedRelativePath(page.path, `document ${document.documentId} page ${page.page}`),
+        )
+        if (!existsSync(pagePath)) {
+          fail(`OCR source page is unavailable: ${document.documentId}:${page.page}`)
+        }
+        return { ...page, bytes: new Uint8Array(readFileSync(pagePath)) }
+      }))
+    }
+    return captured
+  })
+  const evidence = readJson(
+    resolveReviewFile(
+      rootDir,
+      path.posix.join('materialization', NCK1_OCR_EVIDENCE_FILE_NAME),
+    ),
+    NCK1_OCR_EVIDENCE_FILE_NAME,
+  )
+  const reviewFindings = validateNck1OcrSourceEvidence({
+    paperId: manifest.paperId,
+    documents,
+    evidence,
+    includeReviewFindings: true,
+  })
+  const blocking = reviewFindings.filter((item) =>
+    !NCK1_OCR_REVIEW_CODES.includes(item.code))
+  if (blocking.length > 0) {
+    fail(`${blocking[0].code}: ${blocking[0].message}`, blocking[0].code)
+  }
+  return { config, manifest, documents, evidence, reviewFindings }
+}
+
+export function ocrReviewBundleFilePaths(rootDir) {
+  const { manifest } = loadNck1OcrReviewSource(rootDir)
+  return [
+    { path: 'config.json', mediaType: 'application/json', role: 'config' },
+    {
+      path: 'universal-source-manifest.json',
+      mediaType: 'application/json',
+      role: 'source_manifest',
+    },
+    {
+      path: path.posix.join('materialization', NCK1_OCR_EVIDENCE_FILE_NAME),
+      mediaType: 'application/json',
+      role: 'ocr_evidence',
+    },
+    ...manifest.documents.map((document) => ({
+      path: normalizedRelativePath(document.path, `document ${document.documentId}`),
+      mediaType: document.mediaType,
+      role: document.renditionOf ? 'source_rendition' : document.role,
+    })),
+    ...manifest.documents.flatMap((document) =>
+      (document.pages || []).map((page) => ({
+        path: normalizedRelativePath(
+          page.path,
+          `document ${document.documentId} page ${page.page}`,
+        ),
+        mediaType: page.mediaType,
+        role: `${document.role}_page`,
+      }))),
+  ]
+}
+
+export function buildNck1OcrReviewProjection(rootDir) {
+  const loaded = loadNck1OcrReviewSource(rootDir)
+  const manifestById = new Map(loaded.manifest.documents.map((document) => [
+    document.documentId,
+    document,
+  ]))
+  const reviewDocuments = loaded.evidence.documents.map((evidenceDocument) => {
+    const sourceDocument = manifestById.get(evidenceDocument.documentId)
+    if (!sourceDocument || sourceDocument.renditionOf) {
+      fail(`OCR evidence document is unavailable: ${evidenceDocument.documentId}`)
+    }
+    return {
+      documentId: sourceDocument.documentId,
+      role: sourceDocument.role,
+      pages: evidenceDocument.pages.map((page) => {
+        const imagePage = sourceDocument.mediaType === NCK1_IMAGE_BUNDLE_MEDIA_TYPE
+          ? sourceDocument.pages?.find((candidate) => candidate.page === page.page)
+          : null
+        if (sourceDocument.mediaType === NCK1_IMAGE_BUNDLE_MEDIA_TYPE && !imagePage) {
+          fail(`OCR source page is unavailable: ${sourceDocument.documentId}:${page.page}`)
+        }
+        return {
+          page: page.page,
+          source: {
+            path: normalizedRelativePath(
+              imagePage?.path || sourceDocument.path,
+              `document ${sourceDocument.documentId} page ${page.page}`,
+            ),
+            mediaType: imagePage?.mediaType || sourceDocument.mediaType,
+            sha256: imagePage?.sha256 || sourceDocument.sha256,
+          },
+          raster: structuredClone(page.raster),
+          regions: structuredClone(page.regions),
+          observations: structuredClone(page.observations),
+          readingOrderEdges: structuredClone(page.readingOrderEdges),
+        }
+      }),
+    }
+  })
+  return {
+    ...loaded,
+    reviewKind: 'ocr',
+    paperId: loaded.manifest.paperId,
+    paperName: loaded.config.provenance.paperName,
+    sourceSetDigest: loaded.evidence.sourceSetDigest,
+    evidenceDigest: loaded.evidence.evidenceDigest,
+    reviewStructureDigest: digestJson({
+      schemaVersion: 'web-import-ocr-review-structure-v1',
+      paperId: loaded.manifest.paperId,
+      sourceSetDigest: loaded.evidence.sourceSetDigest,
+      evidenceDigest: loaded.evidence.evidenceDigest,
+    }),
+    ocrReview: {
+      engine: structuredClone(loaded.evidence.engine),
+      confidenceThreshold: loaded.evidence.confidenceThreshold,
+      reviewFindings: structuredClone(loaded.reviewFindings),
+      documents: reviewDocuments,
+    },
+  }
+}
+
+export function validateNck1OcrReviewConfirmation(projection, confirmation) {
+  if (projection?.reviewKind !== 'ocr') {
+    fail('OCR confirmation requires one OCR review projection', 'IMPORT_REVIEW_OCR_REQUIRED')
+  }
+  const resolved = resolveConfirmedNck1OcrEvidence({
+    paperId: projection.paperId,
+    documents: projection.documents,
+    evidence: projection.evidence,
+    confirmation,
+  })
+  if (resolved.issues.length > 0) {
+    fail(`${resolved.issues[0].code}: ${resolved.issues[0].message}`, resolved.issues[0].code)
+  }
+  return confirmation
+}
+
+export function buildImportReviewProjection(
+  rootDir,
+  { reviewKind = 'candidate', requireAnalyses = false } = {},
+) {
+  return reviewKind === 'ocr'
+    ? buildNck1OcrReviewProjection(rootDir)
+    : buildNck1ReviewProjection(rootDir, { requireAnalyses })
 }
 
 function visibleStructure(projected) {
@@ -517,14 +743,11 @@ export function buildNck1CompatibilityPackage({
   const defaultTags = Array.isArray(config.provenance?.defaultTags)
     ? config.provenance.defaultTags
     : [sourceType, String(year)]
-  const primarySourceType = sourceDocument.mediaType?.includes('wordprocessingml')
-    ? 'docx'
-    : 'pdf'
   const paperAsset = buildNck1CompatibilityPaperAsset({
     config,
     materialization,
     sourceAssetVersion,
-    primarySourceType,
+    primarySourceType: primarySourceType(materialization),
   })
   const answerKey = {
     schemaVersion: 'answer-key-v1',
@@ -572,15 +795,11 @@ export function buildNck1ReviewProjection(rootDir, { requireAnalyses = false } =
     fail(`${issue?.code || 'CANDIDATE_PREVIEW_INVALID'}: ${issue?.message || 'Candidate preview compilation failed'}`)
   }
   const consumption = buildConsumption(preview.candidate, preview.compilation)
-  const primarySourceType = loaded.materialization.documents.some((document) =>
-    document.mediaType?.includes('wordprocessingml'))
-    ? 'docx'
-    : 'pdf'
   const paperAsset = buildNck1CompatibilityPaperAsset({
     config: loaded.config,
     materialization: loaded.materialization,
     sourceAssetVersion: preview.candidate.interpretation.sourceAssetVersion,
-    primarySourceType,
+    primarySourceType: primarySourceType(loaded.materialization),
   })
   const analysisProjection = buildNck1AnalysisProjection({
     rootDir,

@@ -2,10 +2,14 @@ import {
   produceNck1MaterializationFromStructures,
 } from './nck1DocxMaterializationProducer.mjs'
 import {
+  nck1OcrSourceDocuments,
   nck1OcrSourceSetDigest,
   resolveConfirmedNck1OcrEvidence,
   validateNck1OcrSourceEvidence,
 } from './nck1OcrSourceEvidence.mjs'
+import {
+  NCK1_IMAGE_BUNDLE_MEDIA_TYPE,
+} from './nck1ImageSourceBundle.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 export const NCK1_OCR_MATERIALIZATION_PRODUCER_VERSION =
@@ -73,17 +77,29 @@ export function produceNck1OcrMaterialization({
     }
   }
   const questionDocs = documents.filter((document) =>
-    document.role === 'question_source' && document.mediaType === PDF)
+    !document.renditionOf && document.role === 'question_source')
   const answerDocs = documents.filter((document) =>
-    document.role === 'official_answers' && document.mediaType === PDF)
+    !document.renditionOf && document.role === 'official_answers')
   const question = questionDocs[0]
   const answer = answerDocs[0]
-  if (documents.length !== 2 || questionDocs.length !== 1 || answerDocs.length !== 1) {
+  const sourceDocuments = nck1OcrSourceDocuments(documents)
+  const sourceMediaTypes = new Set(sourceDocuments.map((document) => document.mediaType))
+  const validCarrier = sourceMediaTypes.size === 1
+    && [PDF, NCK1_IMAGE_BUNDLE_MEDIA_TYPE].includes(sourceDocuments[0]?.mediaType)
+  const sourceIds = new Set(sourceDocuments.map((document) => document.documentId))
+  const validRenditions = documents.filter((document) => document.renditionOf)
+    .every((document) =>
+      document.mediaType === PDF && sourceIds.has(document.renditionOf))
+  if (sourceDocuments.length !== 2
+    || questionDocs.length !== 1
+    || answerDocs.length !== 1
+    || !validCarrier
+    || !validRenditions) {
     addIssue(
       issues,
       'NCK1_OCR_PAGE_COVERAGE_INCOMPLETE',
       'documents',
-      'OCR producer requires exactly one question PDF and one official-answer PDF',
+      'OCR producer requires one question source and one official-answer source using the same supported raster carrier',
       question || documents[0],
     )
   }
@@ -97,7 +113,7 @@ export function produceNck1OcrMaterialization({
         issues,
         'NCK1_OCR_TEXT_LAYER_REQUIRED',
         `documents.${document.documentId}`,
-        'Scanned PDF requires staged OCR observations and explicit human confirmation',
+        'Raster source requires staged OCR observations and explicit human confirmation',
         document,
       )
     }

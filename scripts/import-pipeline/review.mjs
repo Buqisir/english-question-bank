@@ -4,12 +4,14 @@ import { execFileSync } from 'node:child_process'
 import {
   existsSync,
   mkdirSync,
+  mkdtempSync,
   readFileSync,
   rmSync,
   writeFileSync,
 } from 'node:fs'
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
+import { tmpdir } from 'node:os'
 
 import {
   inspectPublicationReceipt,
@@ -18,9 +20,14 @@ import {
 import { releaseShippingGuard } from './ship-checklist.mjs'
 import { materializeNck1CanonicalRequest } from '../../server/paper-canonical/nck1MaterializationCanonicalRequest.mjs'
 import { loadCanonicalImportRequest } from '../../server/paper-canonical/importRequest.mjs'
-import { reviewBundleDigest } from '../../server/import-review/importReviewStore.mjs'
 import {
+  ocrReviewBundleDigest,
+  reviewBundleDigest,
+} from '../../server/import-review/importReviewStore.mjs'
+import {
+  buildNck1OcrReviewProjection,
   buildNck1ReviewProjection,
+  ocrReviewBundleFilePaths,
   reviewBundleFilePaths,
   resolveReviewFile,
 } from '../../server/import-review/revisionProjection.mjs'
@@ -95,8 +102,8 @@ function producerBuildId() {
   }
 }
 
-function fileDescriptors(paperDir) {
-  return reviewBundleFilePaths(paperDir).map((file) => {
+function fileDescriptors(paperDir, files = reviewBundleFilePaths(paperDir)) {
+  return files.map((file) => {
     const bytes = readFileSync(resolveReviewFile(paperDir, file.path))
     return {
       ...file,
@@ -104,6 +111,34 @@ function fileDescriptors(paperDir) {
       byteLength: bytes.byteLength,
     }
   })
+}
+
+async function uploadReviewBundle(paperDir, manifest) {
+  const created = await api('/api/import-agent-reviews/revisions', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify(manifest),
+  })
+  for (const relativePath of created.missingFiles || []) {
+    const file = manifest.files.find((candidate) => candidate.path === relativePath)
+    if (!file) fail(`Server requested an unknown file: ${relativePath}`)
+    await api(
+      `/api/import-agent-reviews/revisions/${encodeURIComponent(created.revision.id)}`
+        + `/files?path=${encodeURIComponent(relativePath)}`,
+      {
+        method: 'PUT',
+        headers: {
+          'content-length': String(file.byteLength),
+          'content-type': file.mediaType,
+        },
+        body: readFileSync(resolveReviewFile(paperDir, relativePath)),
+      },
+    )
+  }
+  return api(
+    `/api/import-agent-reviews/revisions/${encodeURIComponent(created.revision.id)}/finalize`,
+    { method: 'POST' },
+  )
 }
 
 function reviewManifest(paperDir, projection, resolvesIssueIds = [], buildId = producerBuildId()) {
@@ -133,31 +168,7 @@ async function pushRevision(paperId) {
   const paperDir = paperDirectory(paperId)
   const projection = buildNck1ReviewProjection(paperDir, { requireAnalyses: true })
   const manifest = reviewManifest(paperDir, projection, resolvedIssueIds())
-  const created = await api('/api/import-agent-reviews/revisions', {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify(manifest),
-  })
-  for (const relativePath of created.missingFiles || []) {
-    const file = manifest.files.find((candidate) => candidate.path === relativePath)
-    if (!file) fail(`Server requested an unknown file: ${relativePath}`)
-    await api(
-      `/api/import-agent-reviews/revisions/${encodeURIComponent(created.revision.id)}`
-        + `/files?path=${encodeURIComponent(relativePath)}`,
-      {
-        method: 'PUT',
-        headers: {
-          'content-length': String(file.byteLength),
-          'content-type': file.mediaType,
-        },
-        body: readFileSync(resolveReviewFile(paperDir, relativePath)),
-      },
-    )
-  }
-  const finalized = await api(
-    `/api/import-agent-reviews/revisions/${encodeURIComponent(created.revision.id)}/finalize`,
-    { method: 'POST' },
-  )
+  const finalized = await uploadReviewBundle(paperDir, manifest)
   console.log(JSON.stringify({
     paperId,
     revisionId: finalized.revision.id,
@@ -165,6 +176,61 @@ async function pushRevision(paperId) {
     state: finalized.revision.state,
     bundleDigest: finalized.revision.bundleDigest,
   }, null, 2))
+}
+
+async function pushOcrReview(paperId) {
+  const paperDir = paperDirectory(paperId)
+  const projection = buildNck1OcrReviewProjection(paperDir)
+  const input = {
+    schemaVersion: 'web-import-ocr-review-bundle-v1',
+    paperId: projection.paperId,
+    paperName: projection.paperName,
+    sourceSetDigest: projection.sourceSetDigest,
+    evidenceDigest: projection.evidenceDigest,
+    reviewStructureDigest: projection.reviewStructureDigest,
+    producerBuildId: producerBuildId(),
+    files: fileDescriptors(paperDir, ocrReviewBundleFilePaths(paperDir)),
+  }
+  const manifest = { ...input, bundleDigest: ocrReviewBundleDigest(input) }
+  const finalized = await uploadReviewBundle(paperDir, manifest)
+  console.log(JSON.stringify({
+    paperId,
+    revisionId: finalized.revision.id,
+    revisionNumber: finalized.revision.revisionNumber,
+    state: finalized.revision.state,
+    reviewKind: 'ocr',
+    bundleDigest: finalized.revision.bundleDigest,
+  }, null, 2))
+}
+
+async function pullOcrConfirmation(paperId) {
+  const paperDir = paperDirectory(paperId)
+  const projection = buildNck1OcrReviewProjection(paperDir)
+  const reviewStatus = await api(
+    `/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`,
+  )
+  const revisionId = option('--revision') || reviewStatus.latestRevisionId
+  if (!revisionId) fail(`${paperId} has no OCR review revision`)
+  const result = await api(
+    `/api/import-agent-reviews/revisions/${encodeURIComponent(revisionId)}/ocr-confirmation`,
+  )
+  if (
+    result.receipt?.paperId !== paperId
+    || result.receipt?.sourceSetDigest !== projection.sourceSetDigest
+    || result.receipt?.evidenceDigest !== projection.evidenceDigest
+  ) fail('Web OCR confirmation no longer matches the local immutable source evidence')
+  const temporaryRoot = mkdtempSync(path.join(tmpdir(), 'eqb-ocr-confirmation-'))
+  try {
+    const temporaryPath = path.join(temporaryRoot, 'confirmation.json')
+    writeFileSync(temporaryPath, `${JSON.stringify(result.confirmation, null, 2)}\n`)
+    execFileSync(
+      process.execPath,
+      [path.join(import.meta.dirname, 'universal-nck1.mjs'), 'confirm-ocr', paperId, temporaryPath],
+      { cwd: root, stdio: 'inherit' },
+    )
+  } finally {
+    rmSync(temporaryRoot, { recursive: true, force: true })
+  }
 }
 
 async function status(paperId) {
@@ -481,6 +547,8 @@ async function releaseShipGuard(paperId, guardId) {
 async function main() {
   const [command, paperId, issueId] = process.argv.slice(2)
   if (command === 'push') await pushRevision(paperId)
+  else if (command === 'push-ocr') await pushOcrReview(paperId)
+  else if (command === 'pull-ocr-confirmation') await pullOcrConfirmation(paperId)
   else if (command === 'preflight') await preflight(paperId)
   else if (command === 'verify-analyses') verifyAnalyses(paperId)
   else if (command === 'status') await status(paperId)
@@ -490,6 +558,7 @@ async function main() {
   else if (command === 'release-ship-guard') await releaseShipGuard(paperId, issueId)
   else fail(
     'Usage: review.mjs push <paperId> [--resolves issue-1,issue-2] | '
+      + 'push-ocr <paperId> | pull-ocr-confirmation <paperId> [--revision rev-id] | '
       + 'preflight <paperId> | verify-analyses <paperId> | status <paperId> | '
       + 'reply <paperId> <issueId> --message <text> | '
       + 'accept <paperId> | publish <paperId> | '

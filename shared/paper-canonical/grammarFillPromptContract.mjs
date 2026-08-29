@@ -42,7 +42,7 @@ export function grammarFillPromptPrefix(following, prompt) {
   if (!following.text.startsWith(prefix)) return null
   const boundary = following.text.slice(prefix.length, prefix.length + 1)
   return boundary === ''
-    || [' ', '\t', '.', ',', ';', ':', '!', '?'].includes(boundary)
+    || [' ', '\t', '\r', '\n', '.', ',', ';', ':', '!', '?'].includes(boundary)
     ? prefix
     : null
 }

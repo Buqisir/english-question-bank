@@ -16,6 +16,7 @@ import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { defineRoute } from '../router/index.mjs'
 import { withChromiumPage } from '../draft-paper/chromiumPool.mjs'
 import { rasterPdfRegion } from '../paper-canonical/pdfRegionRaster.mjs'
+import { cropNck1SourceImage } from '../paper-import/nck1ImageSourceBundle.mjs'
 import { printConsumption, resolveReviewFile } from './revisionProjection.mjs'
 
 function safeEqual(left, right) {
@@ -152,6 +153,18 @@ function reviewError(code, message, status) {
   error.code = code
   error.status = status
   return error
+}
+
+function candidateProjectionForRevision(store, revisionId) {
+  const result = store.projectionForRevision(revisionId)
+  if (result.revision?.reviewKind === 'ocr' || result.projection.reviewKind === 'ocr') {
+    throw reviewError(
+      'IMPORT_REVIEW_CANDIDATE_REQUIRED',
+      'OCR review has no Candidate Screen, Print, or PDF surface',
+      409,
+    )
+  }
+  return result
 }
 
 function reviewPrintHtml(projection, versionType, buildPrintHtml) {
@@ -320,6 +333,35 @@ export function createImportReviewRoutes({
     context.sendJson(response, 200, { revision: store.finalizeRevision(match[1]) })
   })))
 
+  routes.push(defineRoute('GET', /^\/api\/import-agent-reviews\/revisions\/([^/]+)\/ocr-confirmation$/, route(({
+    request,
+    response,
+    context,
+    match,
+  }) => {
+    if (!agentIdentity(request, context, agentToken)) {
+      context.sendJson(response, 401, { error: 'agent_auth_required' })
+      return
+    }
+    const revision = store.getRevision(match[1])
+    if (
+      !revision
+      || revision.reviewKind !== 'ocr'
+      || revision.state !== 'approved'
+      || revision.approval?.schemaVersion !== 'web-import-ocr-review-confirmation-v1'
+    ) {
+      throw reviewError(
+        'IMPORT_REVIEW_OCR_CONFIRMATION_PENDING',
+        'OCR confirmation is not available',
+        404,
+      )
+    }
+    context.sendJson(response, 200, {
+      receipt: revision.approval,
+      confirmation: revision.approval.confirmation,
+    })
+  })))
+
   routes.push(defineRoute('POST', /^\/api\/import-agent-reviews\/papers\/([^/]+)\/issues\/([^/]+)\/messages$/, route(async ({
     request,
     response,
@@ -418,13 +460,29 @@ export function createImportReviewRoutes({
     ) })
   })))
 
+  routes.push(defineRoute('POST', /^\/api\/import-reviews\/papers\/([^/]+)\/revisions\/([^/]+)\/confirm-ocr$/, route(async ({
+    request,
+    response,
+    context,
+    match,
+  }) => {
+    if (!requireOwner(response, context)) return
+    const input = await context.readJsonBody(request, { maxBytes: 5_000_000 })
+    context.sendJson(response, 200, { receipt: store.confirmOcrRevision(
+      decodeURIComponent(match[1]),
+      match[2],
+      input,
+      context.session.username,
+    ) })
+  })))
+
   routes.push(defineRoute('GET', /^\/api\/import-review-preview\/revisions\/([^/]+)\/consumption$/, route(({
     response,
     context,
     match,
   }) => {
     if (!requireReviewer(response, context)) return
-    const { projection } = store.projectionForRevision(match[1])
+    const { projection } = candidateProjectionForRevision(store, match[1])
     context.sendJson(response, 200, projection.consumption)
   })))
 
@@ -437,7 +495,7 @@ export function createImportReviewRoutes({
     let revision
     let projection
     try {
-      ({ revision, projection } = store.projectionForRevision(match[1]))
+      ({ revision, projection } = candidateProjectionForRevision(store, match[1]))
     } catch (error) {
       if (error?.code === 'IMPORT_REVIEW_FILE_DIGEST_MISMATCH') {
         throw reviewError(
@@ -458,10 +516,15 @@ export function createImportReviewRoutes({
         404,
       )
     }
-    if (visual.state !== 'paired' || !visual.region || visual.mediaType !== 'application/pdf') {
+    if (
+      visual.state !== 'paired'
+      || !visual.region
+      || !['application/pdf', 'image/png', 'image/jpeg', 'image/webp']
+        .includes(visual.mediaType)
+    ) {
       throw reviewError(
         'IMPORT_REVIEW_SOURCE_LOCATOR_UNAVAILABLE',
-        'Source visual has no exact PDF region',
+        'Source visual has no exact source region',
         409,
       )
     }
@@ -487,12 +550,14 @@ export function createImportReviewRoutes({
     }
     let crop
     try {
-      crop = rasterPdfRegion({
-        pdfBytes: sourceBytes,
-        page: visual.page,
-        region: visual.region,
-        density: 150,
-      })
+      crop = visual.mediaType === 'application/pdf'
+        ? rasterPdfRegion({
+            pdfBytes: sourceBytes,
+            page: visual.page,
+            region: visual.region,
+            density: 150,
+          })
+        : cropNck1SourceImage(sourceBytes, visual.region)
     } catch {
       throw reviewError(
         'IMPORT_REVIEW_SOURCE_LOCATOR_UNAVAILABLE',
@@ -516,13 +581,89 @@ export function createImportReviewRoutes({
     )
   })))
 
+  routes.push(defineRoute('GET', /^\/api\/import-review-preview\/revisions\/([^/]+)\/ocr\/pages\/([^/]+)\/(\d+)$/, route(({
+    response,
+    context,
+    match,
+  }) => {
+    if (!requireReviewer(response, context)) return
+    const { revision, projection } = store.projectionForRevision(match[1])
+    const documentId = decodeURIComponent(match[2])
+    const pageNumber = Number(match[3])
+    const page = projection.reviewKind === 'ocr'
+      ? projection.ocrReview?.documents
+        ?.find((document) => document.documentId === documentId)
+        ?.pages?.find((candidate) => candidate.page === pageNumber)
+      : null
+    if (!page) {
+      throw reviewError(
+        'IMPORT_REVIEW_OCR_PAGE_NOT_FOUND',
+        'OCR source page not found',
+        404,
+      )
+    }
+    const sourcePath = resolveReviewFile(
+      store.revisionDirectory(revision.id),
+      page.source.path,
+      'OCR source page',
+    )
+    if (!existsSync(sourcePath)) {
+      throw reviewError(
+        'IMPORT_REVIEW_SOURCE_DIGEST_MISMATCH',
+        'OCR source page is unavailable',
+        409,
+      )
+    }
+    const sourceBytes = new Uint8Array(readFileSync(sourcePath))
+    if (sha256(sourceBytes) !== page.source.sha256) {
+      throw reviewError(
+        'IMPORT_REVIEW_SOURCE_DIGEST_MISMATCH',
+        'OCR source page no longer matches its immutable digest',
+        409,
+      )
+    }
+    const headers = {
+      'x-eqb-source-digest': page.source.sha256,
+      'x-eqb-source-page': String(page.page),
+    }
+    if (page.source.mediaType === 'application/pdf') {
+      const raster = rasterPdfRegion({
+        pdfBytes: sourceBytes,
+        page: page.page,
+        region: { x: 0, y: 0, width: 1, height: 1 },
+        density: 150,
+      })
+      sendBinary(
+        response,
+        raster.bytes,
+        'image/png',
+        `${documentId}-page-${page.page}.png`,
+        'inline',
+        {
+          ...headers,
+          'x-eqb-pixel-width': String(raster.pixelWidth),
+          'x-eqb-pixel-height': String(raster.pixelHeight),
+        },
+      )
+      return
+    }
+    sendBinary(
+      response,
+      sourceBytes,
+      page.source.mediaType,
+      `${documentId}-page-${page.page}`,
+      'inline',
+      headers,
+    )
+  })))
+
   routes.push(defineRoute('GET', /^\/api\/import-review-preview\/revisions\/([^/]+)\/asset\/(.+)$/, route(({
     response,
     context,
     match,
   }) => {
     if (!requireReviewer(response, context)) return
-    const { projection } = store.projectionForRevision(match[1])
+    const { projection } = candidateProjectionForRevision(store, match[1])
     if (match[2] === 'paper-asset.json') {
       context.sendJson(response, 200, projection.paperAsset)
       return
@@ -545,7 +686,7 @@ export function createImportReviewRoutes({
     match,
   }) => {
     if (!requireReviewer(response, context)) return
-    const { projection } = store.projectionForRevision(match[1])
+    const { projection } = candidateProjectionForRevision(store, match[1])
     sendHtml(response, reviewPrintHtml(projection, url.searchParams.get('version'), buildPrintHtml))
   })))
 
@@ -556,7 +697,7 @@ export function createImportReviewRoutes({
     match,
   }) => {
     if (!requireReviewer(response, context)) return
-    const { projection } = store.projectionForRevision(match[1])
+    const { projection } = candidateProjectionForRevision(store, match[1])
     const version = url.searchParams.get('version')
     const html = reviewPrintHtml(projection, version, buildPrintHtml)
     const pdf = await withChromiumPage(async (page) => {

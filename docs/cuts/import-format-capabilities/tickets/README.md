@@ -10,7 +10,7 @@
 | [06](06-scanned-pdf-ocr-evidence.md) | 扫描 PDF 的可核查 OCR observations 与人工确认（synthetic/public seam已实现；真实QA待办） | 01、03 | P0，图片入口前置已完成 |
 | [07](07-mixed-carrier-routing.md) | 按 role/page 精确路由已支持的 carrier adapters | 03、06 | P2 |
 | [08](08-listening-audio-evidence.md) | Universal 导入保存 opaque listening audio evidence | — | P2 |
-| [09](09-ordered-image-source-bundle.md) | 显式排序的题卷/答案图片页端到端进入三面，并在`/ops/`完成人工OCR确认（Owner已定） | 01、06 | P0，第一项业务发布能力 |
+| [09](09-ordered-image-source-bundle.md) | 显式排序的题卷/答案图片页端到端进入三面，并在`/ops/`完成人工OCR确认（synthetic/public seam已实现；真实QA待办） | 01、06 | P0，第一项业务发布能力 |
 | [10](10-answer-source-shape-closure.md) | 详解版、纯答案键及题答同文件只提取同一种权威答案值 | —；PDF/image复用03/09 | P1 |
 | [11](11-source-only-awaiting-answers.md) | 无答案来源安全暂存，补答案前禁止 Candidate/发布 | —；图片入口复用09 | P1 |
 
@@ -29,6 +29,5 @@
 
 Owner 指定的第一条发布主线是 `01 → 03 → 06 → 09`。01 已建立原图局部与真实 Screen
 配对，03 已建立共享 ordered-item parser，06 已闭合synthetic扫描PDF raster/OCR/人工确认
-seam；09再接题卷图片 + 答案图片并完成三面回归。02/04/05/07/08 不得抢占这条主线。这里的依赖
-是技术前置；Owner已明确09包含`/ops/` OCR确认，但这项产品决定不等于授权自动开票，
-也不授权 publish 或 production 操作。
+seam；09现已接通显式图片页、同一OCR确认、Canonical与三面回归。下一步只是在另一个明确
+授权的任务中做真实、只读、非CQ8 Owner QA；当前实现不授权 publish 或 production 操作。

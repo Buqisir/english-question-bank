@@ -1,10 +1,10 @@
 # 06 — 扫描 PDF 的 OCR evidence 与人工确认
 
-- Status: implemented at synthetic/public seam; real read-only QA and `/ops/` confirmation UX pending
+- Status: implemented at synthetic/public seam, including `/ops/` confirmation UX; real read-only QA pending
 - Blocked by: `03-text-layer-pdf-materializer.md`, `01-source-region-review-pairing.md`
 - Priority: P0, required by the image-pair release track
-- Next on PASS: `09-ordered-image-source-bundle.md`, which must include the `/ops/` OCR
-  confirmation UX per Owner decision; mixed carriers remain later. Do not auto-start.
+- Next on PASS: `09-ordered-image-source-bundle.md` has reused this seam and implemented the
+  `/ops/` OCR confirmation UX; mixed carriers remain later.
 
 - Spec: `docs/cuts/import-format-capabilities/spec.md`
 - Matrix rows: C03, T01–T04, T06, R02, R05
@@ -35,7 +35,8 @@ page coverage、raster digest或confirmation digest，避免测试依赖在线�
   edges，不增加第二套 Canonical text model。
 - `stage-ocr`列出原图page/region、OCR token和未确认原因；人工确认记录绑定source digest、
   observation IDs与确认后文本/顺序，源变化后自动失效。确认后的furniture region复用ticket
-  01 source crop + 真实Screen seam；pre-Canonical OCR token的`/ops/`确认控件仍是明确待办。
+  01 source crop + 真实Screen seam；pre-Canonical OCR token现可在独立OCR revision的`/ops/`
+  界面核对，确认后由Agent拉取exact sidecar再生成独立Candidate revision。
 - 只有全部 content regions 已分类、所有 promoted token/ordering 已确认且页 coverage 闭合，
   adapter 才输出 ticket 03 的 carrier-neutral ordered paragraph/table/question items。
 - AI/OCR 可提出候选与差异，但只能服务“确认转写、顺序、content-vs-furniture”三个明确
@@ -60,8 +61,8 @@ page coverage、raster digest或confirmation digest，避免测试依赖在线�
 - [x] 低置信 glyph、顺序歧义、未分类 tiny image 与缺页分别返回稳定 code/region。
 - [x] 修改 raster 或 OCR output digest 后旧确认失效。
 - [x] Screen/Student/Teacher Print/PDF只消费确认后的同一 Canonical；整页 raster不进入正文。
-- [ ] `/ops/` 直接完成OCR observation确认（当前由immutable local sidecar完成，R02只显示
-  已确认furniture crop）。
+- [x] `/ops/` 直接完成OCR observation文字、顺序与visual classification确认；OCR revision
+  不提供Candidate issue/approval/Screen/Print/PDF或shipping能力。
 - [ ] 一份真实但只读、非CQ8扫描pair完成source/OCR/确认/三面proof。
 
 ## Non-goals
@@ -75,6 +76,7 @@ AI重画、把 OCR confidence 写进 Canonical、真实版权试卷 fixture。
 node scripts/verify-nck1-pdf-materialization-producer.mjs
 node scripts/verify-nck1-ocr-source-evidence.mjs
 node scripts/verify-nck1-source-materialization.mjs
+node scripts/verify-import-review-ocr-confirmation.mjs
 node scripts/verify-import-review-source-pairing.mjs
 node scripts/verify-import-paper-routing.mjs
 pnpm -C app verify:import-paper

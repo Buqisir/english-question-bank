@@ -1,7 +1,16 @@
 import { execFileSync } from 'node:child_process'
 
 import { rasterPdfRegion } from '../paper-canonical/pdfRegionRaster.mjs'
-import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
+import {
+  NCK1_IMAGE_BUNDLE_MEDIA_TYPE,
+  nck1ImageBundlePage,
+  nck1ImagePageRgba,
+} from './nck1ImageSourceBundle.mjs'
+import {
+  digestJson,
+  sha256,
+  stableStringify,
+} from '../../shared/paper-canonical/stable.mjs'
 
 export const NCK1_OCR_EVIDENCE_SCHEMA_VERSION = 'nck1-ocr-source-evidence-v1'
 export const NCK1_OCR_CONFIRMATION_SCHEMA_VERSION = 'nck1-ocr-source-confirmation-v1'
@@ -73,7 +82,7 @@ function evidenceWithoutDigest(evidence) {
 export function nck1OcrSourceSetDigest(documents) {
   return digestJson({
     schemaVersion: 'nck1-ocr-source-set-v1',
-    documents: (documents || []).map((document) => ({
+    documents: nck1OcrSourceDocuments(documents).map((document) => ({
       documentId: document.documentId,
       role: document.role,
       mediaType: document.mediaType,
@@ -89,6 +98,16 @@ export function nck1OcrEvidenceDigest(evidence) {
 }
 
 function rasterPage(document, page) {
+  if (document.mediaType === NCK1_IMAGE_BUNDLE_MEDIA_TYPE) {
+    const sourcePage = nck1ImageBundlePage(document, page)
+    return {
+      recipe: {
+        kind: 'image_page_v1',
+        region: structuredClone(FULL_PAGE),
+      },
+      ...nck1ImagePageRgba(sourcePage),
+    }
+  }
   const raster = rasterPdfRegion({
     pdfBytes: document.bytes,
     page,
@@ -111,13 +130,17 @@ function rasterPage(document, page) {
   }
 }
 
+export function nck1OcrSourceDocuments(documents) {
+  return (documents || []).filter((document) => !document.renditionOf)
+}
+
 export function captureNck1OcrPageRasters(documents) {
   if (!Array.isArray(documents) || documents.length === 0) {
-    throw new TypeError('OCR page raster capture requires immutable PDF documents')
+    throw new TypeError('OCR page raster capture requires immutable source documents')
   }
-  return documents.map((document) => {
+  return nck1OcrSourceDocuments(documents).map((document) => {
     if (
-      document.mediaType !== PDF
+      ![PDF, NCK1_IMAGE_BUNDLE_MEDIA_TYPE].includes(document.mediaType)
       || !(document.bytes instanceof Uint8Array)
       || sha256(document.bytes) !== document.sha256
       || document.bytes.byteLength !== document.byteLength
@@ -233,17 +256,22 @@ function inspectEvidencePage({
     ))
     return
   }
-  const expectedRaster = rasterPage(document, page)
+  let expectedRaster
+  try {
+    expectedRaster = rasterPage(document, page)
+  } catch {
+    issues.push(issue(
+      'NCK1_OCR_PAGE_COVERAGE_INCOMPLETE',
+      `documents.${document.documentId}.pages.${page}.raster`,
+      'OCR source page pixels no longer replay from the immutable source',
+      document.documentId,
+      page,
+    ))
+    return
+  }
   if (
     !exactKeys(evidencePage.raster, ['recipe', 'sha256', 'pixelWidth', 'pixelHeight'])
-    || !exactKeys(evidencePage.raster?.recipe, ['kind', 'density', 'region'])
-    || evidencePage.raster.recipe.kind !== 'pdf_page_region_v1'
-    || evidencePage.raster.recipe.density !== RASTER_DENSITY
-    || !normalizedRegion(evidencePage.raster.recipe.region)
-    || JSON.stringify(evidencePage.raster.recipe.region) !== JSON.stringify(FULL_PAGE)
-    || evidencePage.raster.sha256 !== expectedRaster.sha256
-    || evidencePage.raster.pixelWidth !== expectedRaster.pixelWidth
-    || evidencePage.raster.pixelHeight !== expectedRaster.pixelHeight
+    || stableStringify(evidencePage.raster) !== stableStringify(expectedRaster)
   ) {
     issues.push(issue(
       'NCK1_OCR_PAGE_COVERAGE_INCOMPLETE',
@@ -419,12 +447,13 @@ export function validateNck1OcrSourceEvidence({
     document.documentId,
     document,
   ]))
+  const sourceDocuments = nck1OcrSourceDocuments(documents)
   const observationIds = new Set()
   const regionIds = new Set()
-  for (const document of documents) {
+  for (const document of sourceDocuments) {
     const evidenceDocument = evidenceDocuments.get(document.documentId)
     if (
-      document.mediaType !== PDF
+      ![PDF, NCK1_IMAGE_BUNDLE_MEDIA_TYPE].includes(document.mediaType)
       || !(document.bytes instanceof Uint8Array)
       || sha256(document.bytes) !== document.sha256
       || document.bytes.byteLength !== document.byteLength
@@ -472,9 +501,10 @@ export function validateNck1OcrSourceEvidence({
       }
     }
   }
-  if (evidenceDocuments.size !== documents.length
+  if (evidenceDocuments.size !== sourceDocuments.length
     || evidence.documents.some((document) =>
-      !documents.some((sourceDocument) => sourceDocument.documentId === document.documentId))) {
+      !sourceDocuments.some((sourceDocument) =>
+        sourceDocument.documentId === document.documentId))) {
     issues.push(issue(
       'NCK1_OCR_PAGE_COVERAGE_INCOMPLETE',
       'ocrEvidence.documents',
@@ -546,7 +576,8 @@ export function resolveConfirmedNck1OcrEvidence({
   const structures = new Map()
   const sourceVisuals = []
   const seenItemIds = new Set()
-  for (const document of documents) {
+  const sourceDocuments = nck1OcrSourceDocuments(documents)
+  for (const document of sourceDocuments) {
     const evidenceDocument = evidenceDocuments.get(document.documentId)
     const confirmedDocument = confirmationDocuments.get(document.documentId)
     if (!exactKeys(confirmedDocument, ['documentId', 'pages'])
@@ -700,7 +731,7 @@ export function resolveConfirmedNck1OcrEvidence({
       unsupportedParagraphCount: 0,
     })
   }
-  if (confirmationDocuments.size !== documents.length) {
+  if (confirmationDocuments.size !== sourceDocuments.length) {
     issues.push(issue(
       'NCK1_OCR_CONFIRMATION_STALE',
       'ocrConfirmation.documents',
