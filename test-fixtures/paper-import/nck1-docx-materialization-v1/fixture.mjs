@@ -97,7 +97,7 @@ function reading(letter, from, to, { table = false, duplicateQuestion = null } =
   ]
 }
 
-function questionDocument({
+function questionBlocks({
   duplicateReadingHeading = false,
   duplicateReadingQuestion = false,
   listening = false,
@@ -110,7 +110,7 @@ function questionDocument({
     `${41 + index}._____`).join(' ')
   const grammarText = Array.from({ length: 10 }, (_, index) =>
     `${56 + index}._____(${index % 2 === 0 ? 'learn' : 'word'})`).join(' ')
-  return docx([
+  return [
     paragraph('Synthetic NCK1 paper'),
     ...(listening ? [
       paragraph('第一部分 听力 (共两节，满分30分)'),
@@ -166,11 +166,23 @@ function questionDocument({
     paragraph('2. 请按如下格式在答题卡的相应位置作答。'),
     paragraph('Mia carried the notebook to the school office.'),
     paragraph('The next morning, a student came to thank her.'),
-  ])
+  ]
 }
 
-function answerDocument({ missingAnswer = false, listening = false, listeningTiming = false } = {}) {
-  return docx([
+function questionDocument(options = {}) {
+  return docx(questionBlocks(options))
+}
+
+function answerBlocks({
+  answerShape = 'detailed',
+  answerHeading = true,
+  ambiguousTextAnswer = false,
+  missingAnswer = false,
+  listening = false,
+  listeningHeading = '听力原文',
+  listeningTiming = false,
+} = {}) {
+  const key = [
     paragraph('Synthetic official answers'),
     ...(listening ? [
       paragraph('1-5ABCAB6-10BCABC11-15ABCAB16-20BCABC'),
@@ -182,8 +194,17 @@ function answerDocument({ missingAnswer = false, listening = false, listeningTim
     paragraph(
       missingAnswer
         ? '56.walked\t\t57.quickly58.on\t59.the60.path61.and62.shared63.a64.kind'
-        : '56.walked\t\t57.quickly58.on\t59.the60.path61.and62.shared63.a64.kind65.note',
+        : ambiguousTextAnswer
+          ? '56.walked\t\t57.quickly58.on\t59.the60.path61.and62.shared63.a64.kind65.note followed by a long explanation sentence whose boundary is not marked clearly enough for an authoritative grammar answer'
+          : '56.walked\t\t57.quickly58.on\t59.the60.path61.and62.shared63.a64.kind65.note',
     ),
+  ]
+  if (answerShape === 'key_only') return key
+  return [
+    ...(answerHeading ? [paragraph('答案与解析')] : []),
+    ...key,
+    paragraph('21. A【解析】DETAIL_TOKEN_MUST_NOT_LEAK into Materialization, Review, Screen, or Print.'),
+    paragraph('56. walked【解析】DETAIL_TOKEN_MUST_NOT_LEAK into Materialization, Review, Screen, or Print.'),
     paragraph('第四部分 写作'),
     paragraph('第一节 参考范文'),
     paragraph('Reading Club Notice'),
@@ -192,7 +213,7 @@ function answerDocument({ missingAnswer = false, listening = false, listeningTim
     paragraph('Mia carried the notebook to the school office. The teacher found its owner.'),
     paragraph('The next morning, a student came to thank her. They became friends.'),
     ...(listening ? [
-      paragraph('听力原文'),
+      paragraph(listeningHeading),
       ...Array.from({ length: 10 }, (_, index) => [
         paragraph(`Text ${index + 1}`),
         paragraph(`Synthetic transcript ${index + 1}.`),
@@ -200,16 +221,34 @@ function answerDocument({ missingAnswer = false, listening = false, listeningTim
       ...(listeningTiming ? [paragraph('语速：每分钟 120 词')] : []),
     ] : []),
     paragraph('【答案解析】'),
+  ]
+}
+
+function answerDocument(options = {}) {
+  return docx(answerBlocks(options))
+}
+
+function combinedDocument(options = {}) {
+  const boundary = options.combinedBoundary === 'missing'
+    ? []
+    : options.combinedBoundary === 'duplicate'
+      ? [paragraph('参考答案'), paragraph('英语答案')]
+      : [paragraph('参考答案及解析')]
+  return docx([
+    ...questionBlocks(options),
+    ...boundary,
+    ...answerBlocks({ ...options, answerHeading: false }),
   ])
 }
 
 export function makeSyntheticNck1DocxFixture(options = {}) {
   const questionBytes = questionDocument(options)
   const answerBytes = answerDocument(options)
+  const combinedBytes = combinedDocument(options)
   const renditionBytes = new Uint8Array(Buffer.from(
     '%PDF-1.7\nsynthetic deterministic rendition\n%%EOF\n',
   ))
-  const documents = [
+  const separateDocuments = [
     {
       documentId: 'question-source-1',
       role: 'question_source',
@@ -240,10 +279,37 @@ export function makeSyntheticNck1DocxFixture(options = {}) {
       path: 'source/official-answers-2.docx',
     },
   ]
+  const combinedDocuments = [
+    {
+      documentId: 'question-and-answers-1',
+      role: 'question_and_answers',
+      mediaType: docxMediaType,
+      sha256: sha256(combinedBytes),
+      byteLength: combinedBytes.byteLength,
+      pageCount: 1,
+      path: 'source/question-and-answers-1.docx',
+      renditionDocumentId: 'question-and-answers-1-pdf-rendition',
+    },
+    {
+      documentId: 'question-and-answers-1-pdf-rendition',
+      role: 'question_and_answers',
+      mediaType: 'application/pdf',
+      sha256: sha256(renditionBytes),
+      byteLength: renditionBytes.byteLength,
+      pageCount: 1,
+      path: 'source/renditions/question-and-answers-1-pdf-rendition.pdf',
+      renditionOf: 'question-and-answers-1',
+    },
+  ]
+  const documents = options.combined ? combinedDocuments : separateDocuments
+  const sourceBytes = options.combined
+    ? [combinedBytes, renditionBytes]
+    : [questionBytes, renditionBytes, answerBytes]
   return {
     paperId: 'paper-synthetic-docx-2026-m1',
     questionBytes,
     answerBytes,
+    combinedBytes,
     renditionBytes,
     manifest: {
       schemaVersion: 'universal-nck1-source-manifest-v1',
@@ -255,10 +321,9 @@ export function makeSyntheticNck1DocxFixture(options = {}) {
       mediaDirectory: 'materialization/media',
       canonicalRequestPath: 'canonical-evidence/canonical-import-request.json',
     },
-    sourceDocuments: [
-      { ...documents[0], bytes: questionBytes },
-      { ...documents[1], bytes: renditionBytes },
-      { ...documents[2], bytes: answerBytes },
-    ],
+    sourceDocuments: documents.map((document, index) => ({
+      ...document,
+      bytes: sourceBytes[index],
+    })),
   }
 }

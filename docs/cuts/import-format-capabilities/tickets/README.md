@@ -11,7 +11,7 @@
 | [07](07-mixed-carrier-routing.md) | 按 role/page 精确路由已支持的 carrier adapters | 03、06 | P2 |
 | [08](08-listening-audio-evidence.md) | Universal 导入保存 opaque listening audio evidence | — | P2 |
 | [09](09-ordered-image-source-bundle.md) | 显式排序的题卷/答案图片页端到端进入三面，并在`/ops/`完成人工OCR确认（synthetic/public seam已实现；真实QA待办） | 01、06 | P0，第一项业务发布能力 |
-| [10](10-answer-source-shape-closure.md) | 详解版、纯答案键及题答同文件只提取同一种权威答案值 | —；PDF/image复用03/09 | P1 |
+| [10](10-answer-source-shape-closure.md) | 详解版、纯答案键及题答同文件只提取同一种权威答案值（已实现） | —；PDF/image复用03/09 | P1，已闭合通用answer-shape seam |
 | [11](11-source-only-awaiting-answers.md) | 无答案来源安全暂存，补答案前禁止 Candidate/发布（已实现） | —；图片入口复用09 | P1，已闭合source-only生命周期 |
 
 ```text
@@ -23,12 +23,13 @@
         └────────────────▶ 07
 08  （独立；只闭合 inactive evidence）
 06 ──────────▶ 09
-10 （独立 answer-shape seam；按 carrier 复用 03/09）
+10 （独立 answer-shape seam；按 carrier 复用 03/09，已实现）
 11 （独立 source-only 状态；图片 intake 复用 09，已实现）
 ```
 
 Owner 指定的第一条发布主线是 `01 → 03 → 06 → 09`。01 已建立原图局部与真实 Screen
 配对，03 已建立共享 ordered-item parser，06 已闭合synthetic扫描PDF raster/OCR/人工确认
 seam；09现已接通显式图片页、同一OCR确认、Canonical与三面回归。11也已允许无答案的
-DOCX/PDF/图片题卷先进入gitignored、不可物化/不可审核/不可发布的安全暂存。接下来若补到
-答案，复用10统一关闭详解版/纯答案键的提取边界；任何真实QA或发布仍需另行明确授权。
+DOCX/PDF/图片题卷先进入gitignored、不可物化/不可审核/不可发布的安全暂存。补到答案后，
+10现已统一关闭详解版/纯答案键/题答同文件的提取边界。下一项高价值实现是04的媒体裁剪、
+布局意图和低清图分级处理；任何真实QA或发布仍需另行明确授权。

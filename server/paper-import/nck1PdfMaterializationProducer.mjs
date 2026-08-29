@@ -1,5 +1,6 @@
 import {
   produceNck1MaterializationFromStructures,
+  splitNck1CombinedSourceStructure,
 } from './nck1DocxMaterializationProducer.mjs'
 import {
   extractNck1PdfTextStructure,
@@ -8,7 +9,7 @@ import {
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 export const NCK1_PDF_MATERIALIZATION_PRODUCER_VERSION =
-  'nck1-pdf-materialization-producer-v1'
+  'nck1-pdf-materialization-producer-v2'
 
 const PDF = 'application/pdf'
 
@@ -100,22 +101,42 @@ export function produceNck1PdfMaterialization({ paperId, documents }) {
     document.role === 'question_source' && document.mediaType === PDF)
   const answerDocs = documents.filter((document) =>
     document.role === 'official_answers' && document.mediaType === PDF)
-  const question = questionDocs[0]
-  const answer = answerDocs[0]
+  const combinedDocs = documents.filter((document) =>
+    document.role === 'question_and_answers' && document.mediaType === PDF)
+  const separateSourceSet = documents.length === 2
+    && questionDocs.length === 1
+    && answerDocs.length === 1
+    && combinedDocs.length === 0
+  const combinedSourceSet = documents.length === 1
+    && questionDocs.length === 0
+    && answerDocs.length === 0
+    && combinedDocs.length === 1
+  const question = separateSourceSet ? questionDocs[0] : combinedDocs[0]
+  const answer = separateSourceSet ? answerDocs[0] : combinedDocs[0]
   if (
-    documents.length !== 2
-    || questionDocs.length !== 1
-    || answerDocs.length !== 1
+    !separateSourceSet
+    && !combinedSourceSet
   ) {
     addIssue(
       issues,
       'NCK1_PDF_SOURCE_SET_AMBIGUOUS',
       'documents',
-      'Producer requires exactly one question PDF and one official-answer PDF',
+      'Producer requires either one question PDF plus one official-answer PDF, or one combined PDF',
     )
   }
-  const questionStructure = extract(question, 'documents.question_source', issues)
-  const answerStructure = extract(answer, 'documents.official_answers', issues)
+  let questionStructure = extract(question, 'documents.question_source', issues)
+  let answerStructure
+  if (question && answer === question) {
+    const split = splitNck1CombinedSourceStructure(
+      questionStructure,
+      question?.documentId,
+      issues,
+    )
+    questionStructure = split.questionStructure
+    answerStructure = split.answerStructure
+  } else {
+    answerStructure = extract(answer, 'documents.official_answers', issues)
+  }
   if (answerStructure.tables.length > 0) {
     addIssue(
       issues,

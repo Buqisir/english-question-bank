@@ -1,5 +1,6 @@
 import {
   produceNck1MaterializationFromStructures,
+  splitNck1CombinedSourceStructure,
 } from './nck1DocxMaterializationProducer.mjs'
 import {
   nck1OcrSourceDocuments,
@@ -13,7 +14,7 @@ import {
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 export const NCK1_OCR_MATERIALIZATION_PRODUCER_VERSION =
-  'nck1-ocr-materialization-producer-v1'
+  'nck1-ocr-materialization-producer-v2'
 
 const PDF = 'application/pdf'
 const FULL_PAGE = Object.freeze({ x: 0, y: 0, width: 1, height: 1 })
@@ -80,8 +81,16 @@ export function produceNck1OcrMaterialization({
     !document.renditionOf && document.role === 'question_source')
   const answerDocs = documents.filter((document) =>
     !document.renditionOf && document.role === 'official_answers')
-  const question = questionDocs[0]
-  const answer = answerDocs[0]
+  const combinedDocs = documents.filter((document) =>
+    !document.renditionOf && document.role === 'question_and_answers')
+  const separateSourceSet = questionDocs.length === 1
+    && answerDocs.length === 1
+    && combinedDocs.length === 0
+  const combinedSourceSet = questionDocs.length === 0
+    && answerDocs.length === 0
+    && combinedDocs.length === 1
+  const question = separateSourceSet ? questionDocs[0] : combinedDocs[0]
+  const answer = separateSourceSet ? answerDocs[0] : combinedDocs[0]
   const sourceDocuments = nck1OcrSourceDocuments(documents)
   const sourceMediaTypes = new Set(sourceDocuments.map((document) => document.mediaType))
   const validCarrier = sourceMediaTypes.size === 1
@@ -90,16 +99,15 @@ export function produceNck1OcrMaterialization({
   const validRenditions = documents.filter((document) => document.renditionOf)
     .every((document) =>
       document.mediaType === PDF && sourceIds.has(document.renditionOf))
-  if (sourceDocuments.length !== 2
-    || questionDocs.length !== 1
-    || answerDocs.length !== 1
+  if ((!separateSourceSet && !combinedSourceSet)
+    || sourceDocuments.length !== (combinedSourceSet ? 1 : 2)
     || !validCarrier
     || !validRenditions) {
     addIssue(
       issues,
       'NCK1_OCR_PAGE_COVERAGE_INCOMPLETE',
       'documents',
-      'OCR producer requires one question source and one official-answer source using the same supported raster carrier',
+      'OCR producer requires one question source plus one official-answer source, or one combined source, using one supported raster carrier',
       question || documents[0],
     )
   }
@@ -108,7 +116,10 @@ export function produceNck1OcrMaterialization({
   let answerStructure = emptyStructure()
   let sourceVisuals = []
   if (!evidence) {
-    for (const document of [question, answer].filter(Boolean)) {
+    const unresolvedDocuments = [...new Map(
+      [question, answer].filter(Boolean).map((document) => [document.documentId, document]),
+    ).values()]
+    for (const document of unresolvedDocuments) {
       addIssue(
         issues,
         'NCK1_OCR_TEXT_LAYER_REQUIRED',
@@ -140,7 +151,17 @@ export function produceNck1OcrMaterialization({
     })
     issues.push(...resolved.issues)
     questionStructure = resolved.structures.get(question?.documentId) || emptyStructure()
-    answerStructure = resolved.structures.get(answer?.documentId) || emptyStructure()
+    if (question && answer === question) {
+      const split = splitNck1CombinedSourceStructure(
+        questionStructure,
+        question?.documentId,
+        issues,
+      )
+      questionStructure = split.questionStructure
+      answerStructure = split.answerStructure
+    } else {
+      answerStructure = resolved.structures.get(answer?.documentId) || emptyStructure()
+    }
     sourceVisuals = resolved.sourceVisuals
   }
 

@@ -37,6 +37,13 @@ QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN='<secret>' \
   node scripts/import-pipeline/review.mjs push <paperId>
 ```
 
+题卷与答案在同一份DOCX/PDF时只登记一个
+`--source question_and_answers=/abs/paper-with-answers.pdf`。只有完整题卷后恰好一个明确
+答案heading才拆分；无/双heading或位置不明返回
+`NCK1_COMBINED_SOURCE_BOUNDARY_AMBIGUOUS`。纯答案键与带逐题详解/写作范文的答案源都只
+生成同一套完整21–65答案值；源详解和范文不进入Materialization、Candidate或教师版，
+原source bytes/digest仍保留。只有ABCD而缺56–65答案仍失败关闭。
+
 暂时只有题卷、没有权威答案时，不运行`init`或分配可发布`paperId`。使用
 source-only状态先保留DOCX/PDF或显式排序图片页：
 
@@ -89,7 +96,10 @@ node scripts/import-pipeline/universal-nck1.mjs crop-pdf \
 ```
 
 SVG 内容媒体必须用固定 density 转 PNG；DOCX shape 先用 init 生成的 PDF
-rendition，再按 `pdf_crop` 路径裁。`verify` 只派生 Candidate，`build` 只生成
+rendition，再按 `pdf_crop` 路径裁。当前工具只支持确定性媒体；清晰图只裁准/摆准。
+低清图的AI辅助候选政策已登记在能力矩阵Ticket 04，但在原图永久保留、source/candidate
+digest绑定、禁止去水印及`/ops/`并排+overlay/闪烁人工确认gate实现前，不得用于导入。
+`verify` 只派生 Candidate，`build` 只生成
 Candidate 摘要和 `confirmed: false` 的 Teacher Confirmation 模板。`review.mjs
 verify-analyses` 在 push 前校验九份输入及其确定性五份 Screen sidecar projection；
 `push` 把不可变源、Candidate 与九份原始 analysis bytes 作为新 revision 上传到

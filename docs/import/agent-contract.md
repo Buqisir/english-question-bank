@@ -36,6 +36,16 @@ node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
   --source official_answers=/abs/answers.pdf
 ```
 
+若题卷和答案确实在同一个DOCX/PDF中，改用一个
+`--source question_and_answers=/abs/paper-with-answers.pdf`。producer只在完整写作题后找到
+恰好一个明确答案heading时拆分；无heading、双heading或位置不明返回
+`NCK1_COMBINED_SOURCE_BOUNDARY_AMBIGUOUS`并停，禁止按“后半文件大概是答案”猜。
+
+权威答案文件可以是纯答案键，也可以附带逐题详解/写作范文；两者都只生成同一套完整
+21–65答案值。逐题详解和答案文件中的写作范文不进入Materialization、Candidate或教师版，
+原文件bytes/digest仍作为Source Capture证据保留。只有ABCD而缺56–65文本答案仍不完整；
+答案值与解释边界不清时必须停。听力原文继续按独立listening contract处理。
+
 只有题卷时，先安全保留来源；图片页改用重复的
 `--source-page question_source:<页码>=/abs/page.png`：
 
@@ -198,7 +208,7 @@ checklist。
 
 新卷先走统一材料化缝。导题过程中**不改** `nck1-paper-standard.md` 来过闸（标准修订须 owner 另拍板后落档）。不绕闸。同一门禁最多自动修 **2** 次，仍红 → 写 `signals/blocked.json`（`gate_failed`）并停。
 
-0. 先运行环境 `preflight`，再生成 `materialization/nck1-source-materialization-v1.json`。已知 NCK1 结构的 DOCX pair 运行 `node scripts/import-pipeline/universal-nck1.mjs materialize <paperId>`：producer 确定性解析段落、表格、题号、section、blank 与权威答案，生成逐段 locator、候选骨架和 `nck1-docx-materialization-review-v1.json`。它绝不解题补答案；语义不唯一时 `disposition` 为 `needs_agent_review`，只在 `review.required` 留结构化异常，Materialization `issues` 非空并失败关闭。Agent 审这些异常并生产全部九份教学分析，不再逐段从零建模。任何分析中的正确项只能抄自该 Materialization 的权威答案；AI 只解释，绝不解题补答案。producer receipt 绑定版本与全部 source digest；源未变时直接 resume，若 Agent 已编辑 Materialization 则标记 `agent_modified` 且不覆盖。源字节漂移必须新建 Source Capture。PDF 有文本层直接转录；扫描 PDF 先 OCR 后逐页视觉复核；其他载体按原规则处理。DOCX 正文每个源 `<w:p>` 必须一对一生成独立 `paragraph` block，并用指向该段的 `docx_part` locator；禁止把相邻段落合并，也不要把阅读 A/B/C/D 等独立篇目标记写进正文。两篇写作必须保留源顺序：题干 →（续写标题与逐段材料）→ 独立 `注意` 结构 → 框内给定标题/称呼或两条续写开头语；`注意` 保留源本来的组合段，或保留“注意：”及其后一个或多个编号段，不得为了统一视觉而合段；必须含词数且与 `wordCountTarget` 一致，源有答题格式或其他编号说明时一字不漏。续写 `material` 每项一对一对应一个源段落，给定标题、称呼和开头语不得混进题干或材料。DOCX 初始化时自动产生不可变 PDF rendition，形状绘图从 rendition 按页裁。语义表格必须为 `table`，整表截图只能作 `visual_proof`；真实图、图标、条码不得 AI 重画。用 `universal-nck1.mjs extract-docx-media` 或 `crop-pdf` 确定性生成媒体。
+0. 先运行环境 `preflight`，再生成 `materialization/nck1-source-materialization-v1.json`。已知 NCK1 结构的 DOCX pair 运行 `node scripts/import-pipeline/universal-nck1.mjs materialize <paperId>`：producer 确定性解析段落、表格、题号、section、blank 与权威答案，生成逐段 locator、候选骨架和 `nck1-docx-materialization-review-v1.json`。它绝不解题补答案；语义不唯一时 `disposition` 为 `needs_agent_review`，只在 `review.required` 留结构化异常，Materialization `issues` 非空并失败关闭。Agent 审这些异常并生产全部九份教学分析，不再逐段从零建模。任何分析中的正确项只能抄自该 Materialization 的权威答案；AI 只解释，绝不解题补答案。producer receipt 绑定版本与全部 source digest；源未变时直接 resume，若 Agent 已编辑 Materialization 则标记 `agent_modified` 且不覆盖。源字节漂移必须新建 Source Capture。PDF 有文本层直接转录；扫描 PDF 先 OCR 后逐页视觉复核；其他载体按原规则处理。DOCX 正文每个源 `<w:p>` 必须一对一生成独立 `paragraph` block，并用指向该段的 `docx_part` locator；禁止把相邻段落合并，也不要把阅读 A/B/C/D 等独立篇目标记写进正文。两篇写作必须保留源顺序：题干 →（续写标题与逐段材料）→ 独立 `注意` 结构 → 框内给定标题/称呼或两条续写开头语；`注意` 保留源本来的组合段，或保留“注意：”及其后一个或多个编号段，不得为了统一视觉而合段；必须含词数且与 `wordCountTarget` 一致，源有答题格式或其他编号说明时一字不漏。续写 `material` 每项一对一对应一个源段落，给定标题、称呼和开头语不得混进题干或材料。DOCX 初始化时自动产生不可变 PDF rendition，形状绘图从 rendition 按页裁。语义表格必须为 `table`，整表截图只能作 `visual_proof`。当前媒体助手只允许确定性提取/裁剪；清晰图只裁准和摆准。未来低清图若启用AI辅助候选，必须保留原图、禁止擦水印，绑定原图/候选digest，经`/ops/`并排及overlay/闪烁逐项人工确认后，才可由三面共同引用同一候选；该确认gate实现前仍不得生成式重画。用 `universal-nck1.mjs extract-docx-media` 或 `crop-pdf` 确定性生成媒体。
 1. `node scripts/import-pipeline/universal-nck1.mjs verify <paperId>`。缺页、缺答案、答案冲突、未闭合表格、重复/漂移媒体或 Materialization `issues` 非空均写 `signals/blocked.json` 并停。
 2. `node scripts/import-pipeline/universal-nck1.mjs build <paperId>`，产生 digest-bound Candidate 摘要与 `confirmed: false` 的 Teacher Confirmation 模板。
 3. 生成九份 staged analysis 后运行 `node scripts/import-pipeline/review.mjs verify-analyses <paperId>`。它复用现有 schema、adapter、validator，检查 4 组 reading/15 题、seven/cloze/grammar 的 question/blank closure、45 个权威 objective answer closure 和两份写作分析，并确定性投影 Screen 的 `reading-choice`、`seven-choices`、`cloze`、`grammar-fill`、`writing` 五份 sidecar。缺项、冲突或不完整一律失败关闭。

@@ -12,7 +12,9 @@
   seam；[09 — ordered image source bundle](tickets/09-ordered-image-source-bundle.md) 也已接通
   显式图片页、`/ops/` OCR确认和同一Canonical三面synthetic回归；[11 — source-only
   awaiting answers](tickets/11-source-only-awaiting-answers.md) 已让无答案DOCX/PDF/图片题卷
-  先安全暂存且禁止Candidate/审核/发布。补到答案时再走10的通用答案shape；不是自动发布。
+  先安全暂存且禁止Candidate/审核/发布；
+  [10 — answer source shapes](tickets/10-answer-source-shape-closure.md)已让详解、纯答案键和
+  题答同文件只生成同一种权威答案。以上都不是自动发布授权。
 
 ## 遇到陌生形状
 
@@ -29,12 +31,15 @@
    source-only 暂存，不得让 AI 猜答案或生成 ready Candidate。
 5. **建最小 fixture**：只保留一个匿名或 synthetic 正例、一个相邻未知 shape 拒绝例和
    必要的短 token。图片用自制像素，音频用 synthetic tone；不提交长原文或学生数据。
+   清晰题图只做精确裁剪；轻度模糊先确定性增强。实在看不清才可登记AI辅助候选gap，
+   原图必须保留，候选不得擦水印或代替来源授权。
 6. **扩原有 source of truth**：优先扩现有 locator、block、media、shared surface projection
    和 Review issue target。只有现有模型确实无法诚实表达时才增加最小字段。
 7. **按公共 seam 验证**：source replay → Materialization → Canonical → Screen →
    Student/Teacher Print → PDF → `/ops/` source pairing；未知邻接 shape 必须稳定失败。
+   AI候选还必须经原图/候选并排及overlay/闪烁逐项人工确认，再由三面共用同一bytes。
 8. **有证据才升级矩阵**：同一 change 同步 fixture、code、verifier、ticket 和矩阵状态。
    一张真实卷通过或人工能修，不足以把 `partial` 改成 `supported`。
 
 若 gap 会改变学生可见内容或 Canonical/presentation 权威边界，提交给 Owner 决定；纯
-adapter 实现细节、overlay 是否延期等不应冒充产品决策。
+adapter 实现细节不应冒充产品决策。普通排版overlay可延期，但AI候选的对照确认不可延期。

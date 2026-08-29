@@ -1,8 +1,8 @@
 # 10 — 详解版与纯答案键的统一 answer-value closure
 
-- Status: planned
-- Blocked by: None for DOCX；PDF/image分别复用tickets 03/09的carrier adapter
-- Next on PASS: None
+- Status: implemented（DOCX/PDF + shared OCR/image parser；真实来源 QA 待办）
+- Blocked by: None
+- Next on PASS: 维持匿名 shape regression；真实卷仍走对应 carrier 的 Owner QA
 
 - Spec: `docs/cuts/import-format-capabilities/spec.md`
 - Matrix rows: C08, C09, C11, R05
@@ -15,9 +15,9 @@ Review projection或Teacher surface，也不单独提取保存；原答案文件
 
 ## Input and fixture
 
-两份最小synthetic answer DOCX，共用同一题卷：
+两份最小synthetic answer DOCX/PDF，共用同一题卷：
 
-- `detailed`：完整45项短答案，其中2项各带1句短解释，另有1个短写作范文；
+- `detailed`：完整45项短答案，另带短写作范文和一个明确详解区；
 - `key_only`：相同45项答案，无解释、无范文；
 - 负例：漏一个语法填空答案、答案值与详解边界不唯一、任一详解token进入Candidate或
   Teacher surface。
@@ -34,6 +34,8 @@ Review projection或Teacher surface，也不单独提取保存；原答案文件
   ABCD而缺填空答案仍是incomplete source。写作官方范文可以`not_supplied`。
 - `detailed`只在确定的答案区读取答案值；答案区之后的逐题详解不创建locator、digest或
   Canonical node。原答案document的bytes/digest仍按Source Capture规则保留，以证明答案出处。
+- 答案文件中的写作范文不进入`writingTask.officialModelAnswer`；该字段保持`null`。听力原文
+  仍按独立 listening contract 处理，不与逐题详解一起丢弃。
 - 教学分析仍按现有流程生成/审核；所有正确项必须等于`answers[]`，且不得读取、显示或
   冒充原答案文件中的逐题详解。
 - 有听力题时，transcript/audio closure独立判断；纯答案键不允许伪造缺失听力原文。
@@ -48,12 +50,28 @@ Review projection或Teacher surface，也不单独提取保存；原答案文件
 
 ## Acceptance criteria
 
-- [ ] 两份source产生完全相同的45项authority values，不新增answer disposition。
-- [ ] key-only可形成Candidate，但九题组analysis完成前仍不能进入Owner QA/发布。
-- [ ] detailed source的逐题详解不出现在Materialization、Canonical、Review projection或三面。
-- [ ] combined source只在唯一boundary下成功；Student三面不含answer region source文本。
-- [ ] 缺填空答案、答案冲突、答案边界不明、详解泄漏分别fail closed。
-- [ ] Student始终不见答案/解析；Teacher只见权威答案与另行审核的教学分析。
+- [x] 两份source产生完全相同的45项authority values，不新增answer disposition。
+- [x] key-only可形成Candidate，但九题组analysis完成前仍不能进入Owner QA/发布。
+- [x] detailed source的逐题详解不出现在Materialization、Canonical或Candidate preview；
+  既有shared surfaces只消费同一Candidate，不存在源详解旁路。
+- [x] combined source只在唯一boundary下成功；Student blocks不含answer region source文本。
+- [x] 缺填空答案、答案冲突、答案边界不明分别fail closed；详解 token 不得进入下游。
+- [x] Student始终不见答案/解析；Teacher只见权威答案与另行审核的教学分析。
+
+## Implementation evidence
+
+- `server/paper-import/nck1DocxMaterializationProducer.mjs`：
+  `splitNck1CombinedSourceStructure`, `parseOfficialAnswers`,
+  `produceNck1MaterializationFromStructures`, `produceNck1DocxMaterialization`。
+- `server/paper-import/nck1PdfMaterializationProducer.mjs`：
+  `produceNck1PdfMaterialization`；combined PDF 复用同一 boundary/parser。
+- `server/paper-import/nck1OcrMaterializationProducer.mjs`：
+  `produceNck1OcrMaterialization`；人工确认后的扫描PDF/图片 observations 复用同一 split/parser。
+- `test-fixtures/paper-import/nck1-docx-materialization-v1/fixture.mjs` 与
+  `test-fixtures/paper-import/nck1-pdf-materialization-v1/fixture.mjs`：detailed、key-only、
+  combined、漏/双 boundary 和模糊文本答案的匿名最小形状。
+- `scripts/verify-nck1-answer-source-shapes.mjs`：direct DOCX/PDF producer、Candidate preview
+  与真实 Universal `question_and_answers` CLI 回归。
 
 ## Non-goals
 
@@ -64,9 +82,9 @@ Review projection或Teacher surface，也不单独提取保存；原答案文件
 
 ```bash
 node scripts/verify-nck1-docx-materialization-producer.mjs
+node scripts/verify-nck1-pdf-materialization-producer.mjs
 node scripts/verify-nck1-answer-source-shapes.mjs
 node scripts/verify-nck1-source-materialization.mjs
-node scripts/verify-universal-nck1-candidate-surfaces.mjs paper-synthetic-answer-shapes
-pnpm -C app verify:paper
-pnpm -C app verify:all
+node scripts/verify-universal-nck1-image-source-bundle.mjs
+pnpm -C app verify:changed
 ```

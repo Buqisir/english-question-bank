@@ -97,13 +97,29 @@ function questionHtml({ includeTable = true } = {}) {
   ].join('')
 }
 
-function answerHtml() {
-  return [
+function answerHtml({
+  answerShape = 'detailed',
+  answerHeading = true,
+  ambiguousTextAnswer = false,
+} = {}) {
+  const key = [
     paragraph('Synthetic official answers'),
     paragraph('21-23ABC24-27DABC28-31BCDA32-35CDAB'),
     paragraph('36-40ABCDE'),
     paragraph('41-45ABCDA46-50BCDAB51-55CDABC'),
-    paragraph('56.walked 57.quickly 58.on 59.the 60.path 61.and 62.shared 63.a 64.kind 65.note'),
+    ...(ambiguousTextAnswer
+      ? [
+          paragraph('56.walked 57.quickly 58.on 59.the 60.path 61.and 62.shared 63.a 64.kind'),
+          paragraph('65.note because this sentence explains the answer without any boundary'),
+        ]
+      : [paragraph('56.walked 57.quickly 58.on 59.the 60.path 61.and 62.shared 63.a 64.kind 65.note')]),
+  ]
+  if (answerShape === 'key_only') return key.join('')
+  return [
+    ...(answerHeading ? [paragraph('答案与解析')] : []),
+    ...key,
+    paragraph('21. A【解析】deliberately untrusted explanation'),
+    paragraph('56. walked【解析】deliberately untrusted explanation'),
     paragraph('第四部分 写作'),
     paragraph('第一节 参考范文'),
     paragraph('Reading Club Notice'),
@@ -114,6 +130,15 @@ function answerHtml() {
     paragraph('【答案详解】'),
     paragraph('21. This deliberately untrusted explanation must not enter Canonical output.'),
   ].join('')
+}
+
+function combinedHtml({ combinedBoundary = 'valid', ...options } = {}) {
+  const boundary = combinedBoundary === 'missing'
+    ? ''
+    : combinedBoundary === 'duplicate'
+      ? paragraph('参考答案') + paragraph('英语答案')
+      : paragraph('参考答案及解析')
+  return questionHtml(options) + boundary + answerHtml({ ...options, answerHeading: false })
 }
 
 function documentHtml(body, extraStyle = '') {
@@ -172,11 +197,30 @@ function record(documentId, role, bytes, fileName) {
   }
 }
 
-export async function makeSyntheticNck1PdfFixture({ includeTable = true } = {}) {
+export async function makeSyntheticNck1PdfFixture({
+  includeAnswerShapes = false,
+  includeTable = true,
+} = {}) {
   const browser = await playwright.chromium.launch({ headless: true, channel: 'chromium' })
   try {
     const questionBytes = await renderPdf(browser, documentHtml(questionHtml({ includeTable })))
     const answerBytes = await renderPdf(browser, documentHtml(answerHtml()))
+    const answerShapeBytes = includeAnswerShapes ? {
+      keyOnly: await renderPdf(browser, documentHtml(answerHtml({ answerShape: 'key_only' }))),
+      ambiguous: await renderPdf(browser, documentHtml(answerHtml({
+        answerShape: 'key_only',
+        ambiguousTextAnswer: true,
+      }))),
+      combined: await renderPdf(browser, documentHtml(combinedHtml({ includeTable }))),
+      combinedMissingBoundary: await renderPdf(browser, documentHtml(combinedHtml({
+        combinedBoundary: 'missing',
+        includeTable,
+      }))),
+      combinedDuplicateBoundary: await renderPdf(browser, documentHtml(combinedHtml({
+        combinedBoundary: 'duplicate',
+        includeTable,
+      }))),
+    } : null
     const imageOnlyBytes = await renderPdf(browser, documentHtml(
       '<div class="image-only" aria-label="synthetic raster page"></div>',
       '.image-only { width: 100%; height: 250mm; background: linear-gradient(135deg, #ddd, #aaa); }',
@@ -224,6 +268,34 @@ export async function makeSyntheticNck1PdfFixture({ includeTable = true } = {}) 
         { ...documents[0], bytes: questionBytes },
         { ...documents[1], bytes: answerBytes },
       ],
+      answerShapes: answerShapeBytes ? {
+        keyOnlyDocuments: [
+          { ...documents[0], bytes: questionBytes },
+          {
+            ...record('official-answers-key-only', 'official_answers', answerShapeBytes.keyOnly, 'official-answers-key-only.pdf'),
+            bytes: answerShapeBytes.keyOnly,
+          },
+        ],
+        ambiguousDocuments: [
+          { ...documents[0], bytes: questionBytes },
+          {
+            ...record('official-answers-ambiguous', 'official_answers', answerShapeBytes.ambiguous, 'official-answers-ambiguous.pdf'),
+            bytes: answerShapeBytes.ambiguous,
+          },
+        ],
+        combinedDocuments: [{
+          ...record('question-and-answers-1', 'question_and_answers', answerShapeBytes.combined, 'question-and-answers-1.pdf'),
+          bytes: answerShapeBytes.combined,
+        }],
+        combinedMissingBoundaryDocuments: [{
+          ...record('question-and-answers-missing-boundary', 'question_and_answers', answerShapeBytes.combinedMissingBoundary, 'question-and-answers-missing-boundary.pdf'),
+          bytes: answerShapeBytes.combinedMissingBoundary,
+        }],
+        combinedDuplicateBoundaryDocuments: [{
+          ...record('question-and-answers-duplicate-boundary', 'question_and_answers', answerShapeBytes.combinedDuplicateBoundary, 'question-and-answers-duplicate-boundary.pdf'),
+          bytes: answerShapeBytes.combinedDuplicateBoundary,
+        }],
+      } : null,
       manifest: {
         schemaVersion: 'universal-nck1-source-manifest-v1',
         paperId: 'paper-synthetic-pdf-text',

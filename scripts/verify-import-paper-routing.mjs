@@ -26,10 +26,11 @@ const materialization = plan(
 assert.equal(materialization.risk, 'single-paper-import')
 assert.equal(materialization.pack, 'import-paper')
 assert(materialization.scripts.length >= 10, 'import pack keeps independent failure layers')
-assert(materialization.scripts.length <= 21, 'import pack stays narrow as carrier verifiers are added')
+assert(materialization.scripts.length <= 22, 'import pack stays narrow as carrier verifiers are added')
 for (const required of [
   'scripts/verify-nck1-docx-materialization-producer.mjs',
   'scripts/verify-nck1-pdf-materialization-producer.mjs',
+  'scripts/verify-nck1-answer-source-shapes.mjs',
   'scripts/verify-nck1-ocr-source-evidence.mjs',
   'scripts/verify-universal-nck1-image-source-bundle.mjs',
   'scripts/verify-universal-nck1-source-only-intake.mjs',

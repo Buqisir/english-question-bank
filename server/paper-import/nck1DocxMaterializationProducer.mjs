@@ -3,10 +3,12 @@ import { validateNck1SourceMaterialization } from '../../shared/paper-canonical/
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 export const NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION =
-  'nck1-docx-materialization-producer-v2'
+  'nck1-docx-materialization-producer-v3'
 
 const DOCX = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 const BLANK = /(?:\d{1,3}[.．、]?\p{Zs}*)?_{2,}\d{0,3}_{0,}/gu
+const COMBINED_ANSWER_BOUNDARY = /^(?:【)?(?:英语|参考)?答案(?:(?:及|与)(?:解析|详解|听力(?:原文|材料)))?(?:】)?$/u
+const INLINE_ANSWER_DETAIL = /(?:【)?(?:答案(?:及|与)?)?(?:解析|详解)(?:】)?\s*[:：]?|(?:Explanation|Analysis)\s*[:：]/iu
 const SLOT_SPECS = [
   ['reading.a', 'reading', 21, 23],
   ['reading.b', 'reading', 24, 27],
@@ -448,34 +450,48 @@ function wordCount(items) {
 
 function isAnswerExplanationHeading(item) {
   return item.kind === 'paragraph'
-    && /^(?:【)?(?:答案)?(?:解析|详解)(?:】)?/u.test(normalized(item.text))
+    && /^(?:【)?(?:答案(?:及|与)?)?(?:解析|详解)(?:】)?/u.test(normalized(item.text))
 }
 
-function writingAnswerRanges(answerBody, issues, answerDocumentId) {
-  const writing = answerBody.findIndex((item) =>
-    item.kind === 'paragraph' && /^第四部分\s*写作/u.test(normalized(item.text)))
-  const analysis = answerBody.findIndex(isAnswerExplanationHeading)
-  if (writing < 0) return { application: null, continuation: null }
-  const first = answerBody.findIndex((item, index) => index > writing
-    && item.kind === 'paragraph' && /^第一节/u.test(normalized(item.text)))
-  const second = answerBody.findIndex((item, index) => index > first
-    && item.kind === 'paragraph' && /^第二节/u.test(normalized(item.text)))
-  if (first < 0 || second < 0) {
-    addIssue(issues, 'NCK1_DOCX_WRITING_ANSWER_AMBIGUOUS', 'answers.writing',
-      'Official writing answer section is not closed', sourceRef(answerDocumentId))
-    return { application: null, continuation: null }
+function slicedStructure(structure, start, end = structure.body.length) {
+  const body = structure.body.slice(start, end)
+  return {
+    ...structure,
+    body,
+    paragraphs: body.filter((item) => item.kind === 'paragraph'),
+    tables: body.filter((item) => item.kind === 'table'),
   }
-  const stop = answerBody.findIndex((item, index) => index > second
-    && item.kind === 'paragraph'
-    && (/听力原文/u.test(normalized(item.text)) || isAnswerExplanationHeading(item)))
-  const join = (items) => {
-    const text = items.filter((item) => item.kind === 'paragraph' && normalized(item.text))
-      .map((item) => trimEdgeSpaces(item.text)).join('\n')
-    return text || null
+}
+
+export function splitNck1CombinedSourceStructure(structure, documentId, issues) {
+  const body = structure?.body || []
+  const boundaries = body.flatMap((item, index) =>
+    item.kind === 'paragraph' && COMBINED_ANSWER_BOUNDARY.test(normalized(item.text))
+      ? [index]
+      : [])
+  const writing = body.findIndex((item) =>
+    item.kind === 'paragraph' && /^第四部分\s*写作/u.test(normalized(item.text)))
+  if (
+    boundaries.length !== 1
+    || writing < 0
+    || boundaries[0] <= writing
+    || boundaries[0] >= body.length - 1
+  ) {
+    addIssue(
+      issues,
+      'NCK1_COMBINED_SOURCE_BOUNDARY_AMBIGUOUS',
+      'documents.question_and_answers',
+      `Combined source requires one explicit answer boundary after the complete question paper; found ${boundaries.length}`,
+      sourceRef(documentId),
+    )
+    return {
+      questionStructure: slicedStructure(structure, 0, 0),
+      answerStructure: slicedStructure(structure, 0, 0),
+    }
   }
   return {
-    application: join(answerBody.slice(first + 1, second)),
-    continuation: join(answerBody.slice(second + 1, stop < 0 ? (analysis < 0 ? answerBody.length : analysis) : stop)),
+    questionStructure: slicedStructure(structure, 0, boundaries[0]),
+    answerStructure: slicedStructure(structure, boundaries[0] + 1),
   }
 }
 
@@ -553,14 +569,16 @@ function writingGroup({ paperId, slotId, family, items, documentId, officialMode
 }
 
 function parseOfficialAnswers(answerBody, answerDocumentId, issues) {
-  const cutoff = answerBody.findIndex((item) =>
-    item.kind === 'paragraph'
-    && (/^第四部分\s*写作/u.test(normalized(item.text)) || isAnswerExplanationHeading(item)))
-  const source = answerBody.slice(0, cutoff < 0 ? answerBody.length : cutoff)
   const answers = new Map()
   const add = (number, value, item) => {
     const previous = answers.get(number)
     const cleaned = String(value).trim()
+    if (!cleaned || INLINE_ANSWER_DETAIL.test(cleaned)) {
+      addIssue(issues, 'NCK1_ANSWER_DETAIL_LEAK_DETECTED', `answers.${number}`,
+        'An answer value contains source explanation text',
+        sourceRef(answerDocumentId, item.sourceIndex))
+      return
+    }
     if (previous && previous.value !== cleaned) {
       addIssue(issues, 'NCK1_DOCX_ANSWER_CONFLICT', `answers.${number}`,
         'Official answer source contains conflicting values',
@@ -572,8 +590,17 @@ function parseOfficialAnswers(answerBody, answerDocumentId, issues) {
       authority: sourceLocator(answerDocumentId, item.sourceIndex),
     })
   }
-  for (const item of source) {
+  for (const item of answerBody) {
     if (item.kind !== 'paragraph') continue
+    if (/^第四部分\s*写作/u.test(normalized(item.text))) break
+    if (isAnswerExplanationHeading(item)) {
+      const activeAnswersComplete = Array.from(
+        { length: 45 },
+        (_, index) => answers.has(index + 21),
+      ).every(Boolean)
+      if (activeAnswersComplete) break
+      continue
+    }
     for (const match of item.text.matchAll(/(\d{1,2})\s*[-–—~至]\s*(\d{1,2})\s*([A-G]+)/gu)) {
       const from = Number(match[1])
       const to = Number(match[2])
@@ -588,7 +615,31 @@ function parseOfficialAnswers(answerBody, answerDocumentId, issues) {
     for (const match of item.text.matchAll(
       /(\d{1,2})\s*[.．、]\s*(.*?)(?=(?:\d{1,2})\s*[.．、]|$)/gu,
     )) {
-      if (Number(match[1]) >= 56 && normalized(match[2])) add(Number(match[1]), match[2], item)
+      const number = Number(match[1])
+      const rawValue = trimEdgeSpaces(match[2])
+      if (!normalized(rawValue)) continue
+      if (number <= 55) {
+        const label = /^([A-G])(?=$|[\s.．、,，;；。:：)）【])/u.exec(normalized(rawValue))?.[1]
+        if (label) add(number, label, item)
+        continue
+      }
+      const detail = INLINE_ANSWER_DETAIL.exec(rawValue)
+      const value = trimEdgeSpaces(detail ? rawValue.slice(0, detail.index) : rawValue)
+      const wordCount = normalized(value).split(' ').filter(Boolean).length
+      if (
+        !normalized(value)
+        || (!detail && (
+          value.length > 80
+          || wordCount > 4
+          || /[.!?。！？,，;；:：（）()]/u.test(value)
+        ))
+      ) {
+        addIssue(issues, 'NCK1_ANSWER_VALUE_BOUNDARY_AMBIGUOUS', `answers.${number}`,
+          'A text answer cannot be separated safely from adjacent explanation text',
+          sourceRef(answerDocumentId, item.sourceIndex))
+        continue
+      }
+      add(number, value, item)
     }
   }
   return answers
@@ -660,8 +711,9 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
       sourceRef(questionDocumentId))
   }
   const transcriptHeading = answerBody.findIndex((item) =>
-    item.kind === 'paragraph' && /听力原文/u.test(normalized(item.text)))
-  const analysis = answerBody.findIndex(isAnswerExplanationHeading)
+    item.kind === 'paragraph' && /听力(?:原文|材料)/u.test(normalized(item.text)))
+  const analysis = answerBody.findIndex((item, index) =>
+    index > transcriptHeading && isAnswerExplanationHeading(item))
   if (transcriptHeading < 0) {
     addIssue(issues, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS', 'listening.transcript',
       'Official answer source does not close a Listening transcript section',
@@ -801,16 +853,15 @@ export function produceNck1MaterializationFromStructures({
       items: body.slice(languageSecond + 2, writingStart), from: 56, to: 65,
       documentId: question.documentId, issues,
     }))
-    const models = writingAnswerRanges(answerBody, issues, answer.documentId)
     groups.push(writingGroup({
       paperId, slotId: 'writing.application', family: 'application-writing',
       items: body.slice(writingFirst + 1, writingSecond),
-      documentId: question.documentId, officialModelAnswer: models.application, issues,
+      documentId: question.documentId, officialModelAnswer: null, issues,
     }))
     groups.push(writingGroup({
       paperId, slotId: 'writing.continuation', family: 'continuation-writing',
       items: body.slice(writingSecond + 1),
-      documentId: question.documentId, officialModelAnswer: models.continuation, issues,
+      documentId: question.documentId, officialModelAnswer: null, issues,
     }))
   }
   const answerMap = parseOfficialAnswers(answerBody, answer?.documentId, issues)
@@ -914,21 +965,39 @@ export function produceNck1DocxMaterialization({ paperId, documents }) {
     document.role === 'question_source' && document.mediaType === DOCX)
   const answerDocs = documents.filter((document) =>
     document.role === 'official_answers' && document.mediaType === DOCX)
-  const question = questionDocs[0]
-  const answer = answerDocs[0]
+  const combinedDocs = documents.filter((document) =>
+    document.role === 'question_and_answers' && document.mediaType === DOCX)
+  const separateSourceSet = questionDocs.length === 1
+    && answerDocs.length === 1
+    && combinedDocs.length === 0
+  const combinedSourceSet = questionDocs.length === 0
+    && answerDocs.length === 0
+    && combinedDocs.length === 1
+  const question = separateSourceSet ? questionDocs[0] : combinedDocs[0]
+  const answer = separateSourceSet ? answerDocs[0] : combinedDocs[0]
   const rendition = documents.find((document) =>
     document.mediaType === 'application/pdf'
     && document.documentId === question?.renditionDocumentId
     && document.renditionOf === question?.documentId)
-  if (questionDocs.length !== 1 || answerDocs.length !== 1 || !rendition) {
+  if ((!separateSourceSet && !combinedSourceSet) || !rendition) {
     addIssue(issues, 'NCK1_DOCX_SOURCE_SET_AMBIGUOUS', 'documents',
-      'Producer requires exactly one question DOCX, one official-answer DOCX, and the question DOCX PDF rendition')
+      'Producer requires either one question DOCX plus one official-answer DOCX, or one combined DOCX, with the question-bearing PDF rendition')
   }
   let questionStructure = { body: [], unsupportedParagraphCount: 0, tables: [] }
   let answerStructure = { body: [], unsupportedParagraphCount: 0, tables: [] }
   try {
     if (question) questionStructure = extractDocxDocumentStructure(question.bytes)
-    if (answer) answerStructure = extractDocxDocumentStructure(answer.bytes)
+    if (question && answer === question) {
+      const split = splitNck1CombinedSourceStructure(
+        questionStructure,
+        question?.documentId,
+        issues,
+      )
+      questionStructure = split.questionStructure
+      answerStructure = split.answerStructure
+    } else if (answer) {
+      answerStructure = extractDocxDocumentStructure(answer.bytes)
+    }
   } catch (error) {
     addIssue(issues, 'NCK1_DOCX_STRUCTURE_UNREADABLE', 'documents',
       error.message, null)

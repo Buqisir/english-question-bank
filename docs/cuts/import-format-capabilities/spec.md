@@ -1,8 +1,9 @@
 # 导题格式能力矩阵
 
-- Status: active（tickets 01、03、06、09、11 已实现synthetic/public seam；真实 Owner QA 待办）
-- Date: 2026-08-28
-- Planning baseline: `main@4296c85b4d135a9fa532219e2cd9a467a6b7e31d`
+- Status: active（tickets 01、03、06、09、10、11 已实现synthetic/public seam；真实 Owner QA 待办）
+- Date: 2026-08-29
+- Current implementation baseline: `origin/main@4f0def1d05247e68a14a465aa8eb0da7672a0b17`
+  (live `ls-remote` verified before the isolated worktree was created)
 - Matrix: `docs/cuts/import-format-capabilities/capability-matrix.md`
 - Tickets: `docs/cuts/import-format-capabilities/tickets/`
 
@@ -127,11 +128,19 @@ immutable source bytes
 
 ### Two kinds of fidelity
 
-- **内容像素忠实**：进入 Canonical 的媒体必须来自源字节或确定性裁剪；保留 digest、
-  像素尺寸和可重放 recipe。禁止 AI 重画。
+- **内容证据忠实**：清晰媒体使用源字节或确定性裁剪；轻度模糊先用确定性的提亮、
+  对比度、旋转/透视、降噪、锐化和普通放大。只有原图确实无法辨认时，才可产生
+  **AI 辅助重绘候选**；原图永久保留，候选不得覆盖原图，也不得在人工确认前进入
+  Canonical 或任何学生/教师表面。
+- **发布像素一致**：人工确认后的唯一 publication rendition（原裁图、确定性增强图或
+  AI 候选）由 Screen、Student/Teacher Print 与 PDF 共同使用；三面不得各自增强或重画。
+  AI 候选确认必须绑定原图与候选 digest，并逐项核文字、数字、单位、箭头连接、图例、
+  颜色/线型、节点数/顺序、曲线高低/交点/比例。无法确认就 fail closed。
 - **版式关系忠实**：保留影响阅读或作答的比例、位置、留白、对齐、栏关系和前后正文
   邻接；由一个共享 layout-intent seam 投影到三面。
 - 不承诺整页像素级复制 Word/PDF。字体栅格、分页细差和纯装饰可按考试格式标准归一化。
+- 不用生成式工具擦除、绕开或复制第三方水印。带水印整页可留作内部 source proof；
+  是否有权公开使用仍是独立的来源授权问题，技术处理不能代替授权。
 
 ### Fail closed
 
@@ -190,9 +199,10 @@ Canonical/renderer、Screen、Print/PDF、Review evidence、当前状态、失�
   `surface=source`、页码/rect 和现有 group/question/block identity。
 - 定位缺失时显示明确的“未配对”状态，不猜最近元素。
 
-局部 alpha overlay、自动像素 diff 和 OCR 文字 diff 不是第一阶段验收项。两面不是同一
-坐标系，且当前缺少稳定局部 locator；过早做 diff 会把字体、重排和分页噪声误报成内容
-错误。等 locator 覆盖与布局意图稳定后，再用独立 ticket 评估差异提示。
+普通排版 QA 的局部 alpha overlay、自动像素 diff 和 OCR 文字 diff 不是第一阶段验收项。
+两面不是同一坐标系，且字体、重排和分页会制造噪声。**但 AI 辅助重绘候选是例外**：
+启用前必须提供原图/候选并排，以及 overlay 或闪烁切换，方便教师逐项确认内容关系；不要求
+用自动像素分数代替教师判断。
 
 ## Priority model
 
@@ -231,16 +241,17 @@ Owner QA与后续发布必须是独立明确授权的任务。
 
 ## Out of scope
 
-- 本阶段修改生产代码、schema、数据库、renderer、试卷资产或生产数据。
+- Ticket 10 之外提前实现媒体派生引擎、schema、数据库、renderer或试卷资产变更；本次只把
+  新媒体规则登记到矩阵与Ticket 04，不把规划误报成现有能力。
 - 新增或发布一张真实试卷，处理 CQ8、Review revision、认可、上线或 R2。
 - 通用任意栏数/任意绝对定位布局引擎。
-- 整页像素级复刻、AI 重画媒体、AI 自动批准 OCR/内容归类。
+- 整页像素级复刻、未经原图对照与人工确认的 AI 媒体、AI 自动批准 OCR/内容归类。
 - 听力播放 UI；本 roadmap 只讨论 inactive source closure 与原始音频证据。
 - 以整页 screenshot 替代 Canonical 正文。
 
 ## Accepted Owner decisions
 
-Owner 于 2026-08-28 接受以下默认规则：
+Owner 于 2026-08-28 至 2026-08-29 接受以下默认规则：
 
 1. **条码/二维码**：正文中且与题目有关的保留给学生；页眉页脚中的管理条码归为
    source furniture，不进入学生输出；位置/用途不明确时 fail closed，交教师确认。
@@ -249,13 +260,19 @@ Owner 于 2026-08-28 接受以下默认规则：
 3. **媒体 caption**：原卷中学生可见、帮助理解的题注是 Canonical content，三面都显示；
    文件名、来源页码和操作说明仅是 QA/accessibility metadata，不给学生看。
 4. **答案源详解**：不成为教师版内容，也不单独提取或结构化保存；只读取权威答案值。
-   原答案文件仍作为不可变 source evidence 保留，避免答案权威失去出处。写作官方范文
-   与听力原文按既有独立 contract 处理，不视为逐题详解。
+   原答案文件仍作为不可变 source evidence 保留，避免答案权威失去出处。答案文件里的
+   写作范文同样不进入 Materialization/教师版；听力原文仍按既有独立 contract 处理。
+5. **低清题图**：清晰图不生成，只做准确裁剪和版式关系记录；轻度模糊先做非生成式
+   增强。照片、插图、图表、流程图和关键题图只有在确实看不清时才允许生成候选，必须
+   保留原图并由教师对照确认全部文字、数值和关系；确认后所有表面共用同一候选。
+6. **水印与来源**：不得用 AI 或普通图像工具去除水印来规避来源授权，也不得把第三方
+   水印带进公开 Canonical 内容。带水印来源只作内部证据；无法获得可合法使用的正文素材
+   时停止发布，而不是技术“洗稿”。
 
 这些规则是通用 shape policy，不得通过 `paperId` 覆盖。
 
-“第一版是否做 overlay/自动 diff”不是阻塞产品问题：本 spec 先做并排 locator，diff
-延后；若后续实测表明并排不足，再以误报率和教师任务为依据开票。
+普通排版的“第一版是否做自动 diff”不是阻塞产品问题：先做并排 locator，自动评分延后；
+AI 辅助重绘候选则按决定5必须先有并排及overlay/闪烁确认，不能复用这条延期理由跳过。
 
 ## References
 
