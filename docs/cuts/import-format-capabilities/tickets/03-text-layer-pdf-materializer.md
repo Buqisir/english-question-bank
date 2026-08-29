@@ -1,6 +1,6 @@
 # 03 — 文本层 PDF Materialization producer
 
-- Status: ready
+- Status: implemented（synthetic/public seam PASS；真实非生产 Owner QA 待办）
 - Blocked by: None（可与 ticket 01 串行交付，以获得局部 Review proof）
 - Priority: P0, carrier-neutral parser required by the image-pair release track
 - Next on PASS: `06-scanned-pdf-ocr-evidence.md`; mixed carriers remain later
@@ -18,8 +18,8 @@ PDF”走通通用 producer；scan、双栏阅读顺序和文字层不完整时�
 
 测试代码生成最短合法 NCK1 PDF pair：保留 9 slots/45 non-listening answers 的 profile
 cardinality，但每题/段只用短 synthetic token。题卷包含普通段落、题号、ABCD、blank、
-一个简单表；答案 PDF 只含短答案 token。负例：同页双栏、文字层缺页、扫描页、bbox
-重叠导致 reading order 不唯一。
+一个简单表；答案 PDF 只含短答案 token。负例：同页双栏、文字层缺页、扫描页、带文字
+但含未处理 raster image 的页、bbox 重叠导致 reading order 不唯一。
 
 ## Public seam
 
@@ -40,6 +40,7 @@ cardinality，但每题/段只用短 synthetic token。题卷包含普通段落�
 - `NCK1_PDF_TEXT_COVERAGE_INCOMPLETE`：page/line coverage 与 source bytes不闭合。
 - `NCK1_PDF_READING_ORDER_AMBIGUOUS`：bbox排序有多个可行顺序。
 - `NCK1_PDF_MULTI_COLUMN_UNSUPPORTED`：检测到多栏但未登记通用shape。
+- `NCK1_PDF_VISUAL_REVIEW_REQUIRED`：文字页含本 adapter 尚不能保真的内嵌 raster image。
 - `NCK1_PDF_SOURCE_SET_AMBIGUOUS`：不是exact PDF pair。
 
 任何一页失败都生成 page/region evidence 与 non-ready review item；不调用 OCR、不丢页、
@@ -47,12 +48,12 @@ cardinality，但每题/段只用短 synthetic token。题卷包含普通段落�
 
 ## Acceptance criteria
 
-- [ ] synthetic PDF pair经 public CLI materialize/verify/build产生9 groups、45 answers与每个
+- [x] synthetic PDF pair经 public CLI materialize/verify/build产生9 groups、45 answers与每个
   paragraph/question的`page_region`；source order可重放。
-- [ ] 同一 carrier-neutral parser 的 DOCX fixture仍全绿。
-- [ ] scan/双栏/缺页/reading-order ambiguity各自 stable fail，无 partial ready Candidate。
-- [ ] Screen/Student/Teacher Print/PDF消费同一 Candidate；answer visibility不变。
-- [ ] source table优先 semantic table；本票不支持的PDF table layout必须fail closed，不能截图。
+- [x] 同一 carrier-neutral parser 的 DOCX fixture仍全绿。
+- [x] scan/内嵌raster/双栏/缺页/reading-order ambiguity各自 stable fail，无可用 Candidate interpretation。
+- [x] Screen/Student/Teacher Print/PDF继续消费同一 Candidate；answer visibility不变。
+- [x] source table优先 semantic table；本票不支持的PDF table layout fail closed，不能截图。
 
 ## Non-goals
 

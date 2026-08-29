@@ -20,7 +20,7 @@ import {
   sha256,
 } from '../../shared/paper-canonical/stable.mjs'
 import {
-  runNck1DocxMaterializationJobUnlocked,
+  runNck1MaterializationJobUnlocked,
   withPaperWriterLock,
 } from './nck1-docx-materialize.mjs'
 import {
@@ -315,7 +315,7 @@ function preflight(paperId) {
 function materialize(paperId) {
   const { paperDir, manifest } = paperContext(paperId)
   runImportEnvironmentPreflight({ paperDir })
-  const result = runNck1DocxMaterializationJobUnlocked({ paperDir, manifest })
+  const result = runNck1MaterializationJobUnlocked({ paperDir, manifest })
   console.log(JSON.stringify({
     ok: true,
     paperId,

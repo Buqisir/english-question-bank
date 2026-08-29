@@ -10,6 +10,8 @@ const TOOLS = [
   ['soffice', ['--version'], false],
   ['pdfinfo', ['-v'], false],
   ['pdftoppm', ['-v'], false],
+  ['pdftotext', ['-v'], false],
+  ['pdfimages', ['-v'], false],
   ['unzip', ['-v'], false],
 ]
 

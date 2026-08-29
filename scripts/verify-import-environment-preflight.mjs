@@ -15,7 +15,7 @@ assert.equal(result.schemaVersion, 'import-environment-preflight-v1')
 assert.match(result.environmentDigest, /^sha256:[a-f0-9]{64}$/u)
 assert.deepEqual(
   result.checks.map((check) => check.name),
-  ['magick', 'ffmpeg', 'soffice', 'pdfinfo', 'pdftoppm', 'unzip'],
+  ['magick', 'ffmpeg', 'soffice', 'pdfinfo', 'pdftoppm', 'pdftotext', 'pdfimages', 'unzip'],
 )
 assert(result.checks.every((check) =>
   check.launch === 'healthy'

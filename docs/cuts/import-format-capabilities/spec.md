@@ -1,6 +1,6 @@
 # 导题格式能力矩阵
 
-- Status: proposed
+- Status: active（tickets 01、03 已实现；真实 Owner QA 待办）
 - Date: 2026-08-28
 - Planning baseline: `main@4296c85b4d135a9fa532219e2cd9a467a6b7e31d`
 - Matrix: `docs/cuts/import-format-capabilities/capability-matrix.md`
@@ -37,8 +37,8 @@ Import Review revision，但各能力的覆盖不均：简单 DOCX 文本很成�
 3. 按真实依赖拆分的可执行 tickets。
 4. 新卷遇到陌生形状时的 wayfinder。
 
-本阶段只调查和写计划，不修改 schema、producer、Canonical、renderer、Review DB、
-应用代码、生产资产或试卷数据。
+本 cut 最初只调查和写计划；Owner 启动某张 ticket 后，按 ticket 的公共 seam 实现并同步
+矩阵。任何实现仍不得修改生产资产/数据，也不自动授权下一张 ticket 或发布。
 
 ## Source space: three independent axes
 
@@ -200,10 +200,11 @@ Owner 将“题卷图片 + 答案图片”定为首批发布能力，因为它�
 因此 C07/09 是 **P0 业务里程碑**；表格视觉、媒体细节、听力音频和混合载体不得抢占它的
 实现顺序。
 
-第一张技术票 `01-source-region-review-pairing.md` 已建立自动化可证的原图局部—真实
-Screen 审核 seam，仍需在首个非生产 Candidate 上做一次真实 Owner QA。图片经 OCR 后
-必须由教师对照原图与真实 Screen，不能为了抢先发布而跳过确认。最短发布主线仍是
-**01 → 03 → 06 → 09**；下一张实现 03 的共享 ordered-item parser，再闭合 raster OCR，最后接入显式排序的题卷/
+技术票 `01-source-region-review-pairing.md` 已建立自动化可证的原图局部—真实 Screen
+审核 seam，`03-text-layer-pdf-materializer.md` 已建立 PDF bbox adapter 与 DOCX/PDF 共用
+ordered-item parser；两者仍需在首个非生产 Candidate 上做一次真实 Owner QA。图片经 OCR
+后必须由教师对照原图与真实 Screen，不能为了抢先发布而跳过确认。最短发布主线仍是
+**01 → 03 → 06 → 09**；下一张是 06，闭合 raster OCR，再由 09 接入显式排序的题卷/
 答案图片 bundle。每张票独立验收，不授权自动启动下一张，也不授权实际发布真实试卷。
 
 ## Acceptance criteria for this roadmap

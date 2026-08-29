@@ -13,11 +13,32 @@ import {
   nck1DocxProducerSourceDigest,
   produceNck1DocxMaterialization,
 } from '../../server/paper-import/nck1DocxMaterializationProducer.mjs'
+import {
+  NCK1_PDF_MATERIALIZATION_PRODUCER_VERSION,
+  nck1PdfProducerSourceDigest,
+  produceNck1PdfMaterialization,
+} from '../../server/paper-import/nck1PdfMaterializationProducer.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 
-const REVIEW_NAME = 'nck1-docx-materialization-review-v1.json'
-const RECEIPT_NAME = 'nck1-docx-materialization-producer-receipt-v1.json'
 const WRITER_LOCK_NAME = '.universal-nck1-writer.lock'
+
+const DOCX_PRODUCER = Object.freeze({
+  version: NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION,
+  sourceDigest: nck1DocxProducerSourceDigest,
+  produce: produceNck1DocxMaterialization,
+  reviewName: 'nck1-docx-materialization-review-v1.json',
+  receiptName: 'nck1-docx-materialization-producer-receipt-v1.json',
+  receiptSchemaVersion: 'nck1-docx-materialization-producer-receipt-v1',
+})
+
+const PDF_PRODUCER = Object.freeze({
+  version: NCK1_PDF_MATERIALIZATION_PRODUCER_VERSION,
+  sourceDigest: nck1PdfProducerSourceDigest,
+  produce: produceNck1PdfMaterialization,
+  reviewName: 'nck1-pdf-materialization-review-v1.json',
+  receiptName: 'nck1-pdf-materialization-producer-receipt-v1.json',
+  receiptSchemaVersion: 'nck1-pdf-materialization-producer-receipt-v1',
+})
 
 export function paperWriterLockPath(paperDir) {
   return path.join(paperDir, WRITER_LOCK_NAME)
@@ -60,20 +81,28 @@ function loadDocuments(paperDir, manifest) {
   })
 }
 
-export function runNck1DocxMaterializationJobUnlocked({ paperDir, manifest }) {
+function selectProducer(documents) {
+  return documents.length > 0
+    && documents.every((document) => document.mediaType === 'application/pdf')
+    ? PDF_PRODUCER
+    : DOCX_PRODUCER
+}
+
+export function runNck1MaterializationJobUnlocked({ paperDir, manifest }) {
   if (manifest?.schemaVersion !== 'universal-nck1-source-manifest-v1') {
-    throw new Error('NCK1 DOCX materialization requires a universal Source Manifest')
+    throw new Error('NCK1 materialization requires a universal Source Manifest')
   }
   const documents = loadDocuments(paperDir, manifest)
-  const sourceDigest = nck1DocxProducerSourceDigest(documents)
+  const producer = selectProducer(documents)
+  const sourceDigest = producer.sourceDigest(documents)
   const outputPath = path.join(paperDir, manifest.materializationPath)
-  const receiptPath = path.join(path.dirname(outputPath), RECEIPT_NAME)
-  const reviewPath = path.join(path.dirname(outputPath), REVIEW_NAME)
+  const receiptPath = path.join(path.dirname(outputPath), producer.receiptName)
+  const reviewPath = path.join(path.dirname(outputPath), producer.reviewName)
   if (existsSync(receiptPath) && existsSync(outputPath)) {
     const receipt = JSON.parse(readFileSync(receiptPath, 'utf8'))
     if (
-      receipt.schemaVersion === 'nck1-docx-materialization-producer-receipt-v1'
-      && receipt.producerVersion === NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION
+      receipt.schemaVersion === producer.receiptSchemaVersion
+      && receipt.producerVersion === producer.version
       && receipt.paperId === manifest.paperId
       && receipt.sourceDigest === sourceDigest
     ) {
@@ -97,7 +126,7 @@ export function runNck1DocxMaterializationJobUnlocked({ paperDir, manifest }) {
   if (existsSync(outputPath) || existsSync(reviewPath) || existsSync(receiptPath)) {
     throw new Error('Existing materialization artifacts are not bound to this source and producer; refusing to overwrite them')
   }
-  const produced = produceNck1DocxMaterialization({
+  const produced = producer.produce({
     paperId: manifest.paperId,
     documents,
   })
@@ -105,9 +134,9 @@ export function runNck1DocxMaterializationJobUnlocked({ paperDir, manifest }) {
   atomicJson(reviewPath, produced.review)
   const outputDigest = sha256(readFileSync(outputPath))
   atomicJson(receiptPath, {
-    schemaVersion: 'nck1-docx-materialization-producer-receipt-v1',
+    schemaVersion: producer.receiptSchemaVersion,
     paperId: manifest.paperId,
-    producerVersion: NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION,
+    producerVersion: producer.version,
     sourceDigest,
     outputDigest,
     disposition: produced.disposition,
@@ -123,7 +152,10 @@ export function runNck1DocxMaterializationJobUnlocked({ paperDir, manifest }) {
   }
 }
 
-export function runNck1DocxMaterializationJob({ paperDir, manifest }) {
+export function runNck1MaterializationJob({ paperDir, manifest }) {
   return withPaperWriterLock({ paperDir, paperId: manifest?.paperId }, () =>
-    runNck1DocxMaterializationJobUnlocked({ paperDir, manifest }))
+    runNck1MaterializationJobUnlocked({ paperDir, manifest }))
 }
+
+export const runNck1DocxMaterializationJobUnlocked = runNck1MaterializationJobUnlocked
+export const runNck1DocxMaterializationJob = runNck1MaterializationJob

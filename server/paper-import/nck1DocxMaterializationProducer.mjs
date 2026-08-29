@@ -3,7 +3,7 @@ import { validateNck1SourceMaterialization } from '../../shared/paper-canonical/
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 export const NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION =
-  'nck1-docx-materialization-producer-v1'
+  'nck1-docx-materialization-producer-v2'
 
 const DOCX = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 const BLANK = /(?:\d{1,3}[.．、]?\p{Zs}*)?_{2,}\d{0,3}_{0,}/gu
@@ -27,6 +27,9 @@ function trimEdgeSpaces(value) {
 }
 
 function sourceLocator(documentId, sourceIndex) {
+  if (sourceIndex && typeof sourceIndex === 'object') {
+    return structuredClone(sourceIndex)
+  }
   return {
     kind: 'docx_part',
     documentId,
@@ -36,6 +39,13 @@ function sourceLocator(documentId, sourceIndex) {
 }
 
 function sourceRef(documentId, sourceIndex = null) {
+  if (sourceIndex && typeof sourceIndex === 'object') {
+    return {
+      documentId,
+      page: sourceIndex.page,
+      region: structuredClone(sourceIndex.region),
+    }
+  }
   return sourceIndex === null ? { documentId } : { documentId, sourceIndex }
 }
 
@@ -197,12 +207,14 @@ function tableBlock({ paperId, slotId, item, index, documentId, issues }) {
         }),
       }
     }),
-    source: {
-      kind: 'docx_part',
-      documentId,
-      part: 'word/document.xml',
-      selector: item.selector,
-    },
+    source: item.source
+      ? structuredClone(item.source)
+      : {
+          kind: 'docx_part',
+          documentId,
+          part: 'word/document.xml',
+          selector: item.selector,
+        },
   }
 }
 
@@ -434,11 +446,15 @@ function wordCount(items) {
   return Number(match?.[1] || match?.[2] || 0)
 }
 
+function isAnswerExplanationHeading(item) {
+  return item.kind === 'paragraph'
+    && /^(?:【)?(?:答案)?(?:解析|详解)(?:】)?/u.test(normalized(item.text))
+}
+
 function writingAnswerRanges(answerBody, issues, answerDocumentId) {
   const writing = answerBody.findIndex((item) =>
     item.kind === 'paragraph' && /^第四部分\s*写作/u.test(normalized(item.text)))
-  const analysis = answerBody.findIndex((item) =>
-    item.kind === 'paragraph' && /答案解析/u.test(normalized(item.text)))
+  const analysis = answerBody.findIndex(isAnswerExplanationHeading)
   if (writing < 0) return { application: null, continuation: null }
   const first = answerBody.findIndex((item, index) => index > writing
     && item.kind === 'paragraph' && /^第一节/u.test(normalized(item.text)))
@@ -450,7 +466,8 @@ function writingAnswerRanges(answerBody, issues, answerDocumentId) {
     return { application: null, continuation: null }
   }
   const stop = answerBody.findIndex((item, index) => index > second
-    && item.kind === 'paragraph' && (/听力原文/u.test(normalized(item.text)) || /答案解析/u.test(normalized(item.text))))
+    && item.kind === 'paragraph'
+    && (/听力原文/u.test(normalized(item.text)) || isAnswerExplanationHeading(item)))
   const join = (items) => {
     const text = items.filter((item) => item.kind === 'paragraph' && normalized(item.text))
       .map((item) => trimEdgeSpaces(item.text)).join('\n')
@@ -537,7 +554,8 @@ function writingGroup({ paperId, slotId, family, items, documentId, officialMode
 
 function parseOfficialAnswers(answerBody, answerDocumentId, issues) {
   const cutoff = answerBody.findIndex((item) =>
-    item.kind === 'paragraph' && (/^第四部分\s*写作/u.test(normalized(item.text)) || /答案解析/u.test(normalized(item.text))))
+    item.kind === 'paragraph'
+    && (/^第四部分\s*写作/u.test(normalized(item.text)) || isAnswerExplanationHeading(item)))
   const source = answerBody.slice(0, cutoff < 0 ? answerBody.length : cutoff)
   const answers = new Map()
   const add = (number, value, item) => {
@@ -643,8 +661,7 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
   }
   const transcriptHeading = answerBody.findIndex((item) =>
     item.kind === 'paragraph' && /听力原文/u.test(normalized(item.text)))
-  const analysis = answerBody.findIndex((item) =>
-    item.kind === 'paragraph' && /答案解析/u.test(normalized(item.text)))
+  const analysis = answerBody.findIndex(isAnswerExplanationHeading)
   if (transcriptHeading < 0) {
     addIssue(issues, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS', 'listening.transcript',
       'Official answer source does not close a Listening transcript section',
@@ -710,6 +727,168 @@ export function nck1DocxProducerSourceDigest(documents) {
   })
 }
 
+function carrierIssues(issues, codePrefix) {
+  return issues.map(({ code, path, message, source }) => ({
+    code: code.replace(/^NCK1_DOCX_/u, `${codePrefix}_`),
+    path,
+    message,
+    source,
+  }))
+}
+
+export function produceNck1MaterializationFromStructures({
+  paperId,
+  documents,
+  question,
+  answer,
+  coverage,
+  questionStructure,
+  answerStructure,
+  issues,
+  codePrefix,
+  producerVersion,
+  reviewSchemaVersion,
+  sourceDigest,
+}) {
+  const body = questionStructure.body
+  const answerBody = answerStructure.body
+  const readingStart = exactPosition(body, /^第二部分\s*阅读/u, 'sections.reading', issues, question?.documentId)
+  const languageStart = exactPosition(body, /^第三部分\s*语言运用/u, 'sections.language', issues, question?.documentId)
+  const writingStart = exactPosition(body, /^第四部分\s*写作/u, 'sections.writing', issues, question?.documentId)
+  const readingFirst = readingStart === null || languageStart === null ? null : exactPosition(
+    body, /^第一节/u, 'sections.reading.first', issues, question?.documentId,
+    [readingStart + 1, languageStart],
+  )
+  const readingSecond = readingStart === null || languageStart === null ? null : exactPosition(
+    body, /^第二节/u, 'sections.reading.second', issues, question?.documentId,
+    [readingStart + 1, languageStart],
+  )
+  const languageFirst = languageStart === null || writingStart === null ? null : exactPosition(
+    body, /^第一节/u, 'sections.language.first', issues, question?.documentId,
+    [languageStart + 1, writingStart],
+  )
+  const languageSecond = languageStart === null || writingStart === null ? null : exactPosition(
+    body, /^第二节/u, 'sections.language.second', issues, question?.documentId,
+    [languageStart + 1, writingStart],
+  )
+  const writingFirst = writingStart === null ? null : exactPosition(
+    body, /^第一节/u, 'sections.writing.first', issues, question?.documentId,
+    [writingStart + 1, body.length],
+  )
+  const writingSecond = writingStart === null ? null : exactPosition(
+    body, /^第二节/u, 'sections.writing.second', issues, question?.documentId,
+    [writingStart + 1, body.length],
+  )
+  let groups = []
+  if (question && answer && coverage
+    && [readingFirst, readingSecond, languageFirst, languageSecond, writingFirst, writingSecond]
+    .every((position) => position !== null)) {
+    groups = readingGroups({
+      paperId, body, firstStart: readingFirst, secondStart: readingSecond,
+      documentId: question.documentId, issues,
+    })
+    groups.push(sevenChoices({
+      paperId, body, start: readingSecond, end: languageStart,
+      documentId: question.documentId, issues,
+    }))
+    groups.push(clozeGroup({
+      paperId, body, start: languageFirst, end: languageSecond,
+      documentId: question.documentId, issues,
+    }))
+    groups.push(blankGroup({
+      paperId, slotId: 'grammar-fill', family: 'grammar-fill',
+      items: body.slice(languageSecond + 2, writingStart), from: 56, to: 65,
+      documentId: question.documentId, issues,
+    }))
+    const models = writingAnswerRanges(answerBody, issues, answer.documentId)
+    groups.push(writingGroup({
+      paperId, slotId: 'writing.application', family: 'application-writing',
+      items: body.slice(writingFirst + 1, writingSecond),
+      documentId: question.documentId, officialModelAnswer: models.application, issues,
+    }))
+    groups.push(writingGroup({
+      paperId, slotId: 'writing.continuation', family: 'continuation-writing',
+      items: body.slice(writingSecond + 1),
+      documentId: question.documentId, officialModelAnswer: models.continuation, issues,
+    }))
+  }
+  const answerMap = parseOfficialAnswers(answerBody, answer?.documentId, issues)
+  const answers = activeAnswers(paperId, answerMap, issues, answer?.documentId)
+  const tables = groups.flatMap((candidate) => candidate.blocks.filter((block) => block.kind === 'table'))
+  if (
+    tables.some((table) => table.source.kind !== 'page_region')
+    && coverage?.pageCount !== 1
+  ) {
+    addIssue(issues, 'NCK1_DOCX_TABLE_PAGE_REVIEW_REQUIRED', 'sourceCoverage.visuals',
+      'Semantic table page locations require Agent confirmation for multi-page renditions',
+      sourceRef(coverage.documentId))
+  }
+  const sourceCoverage = {
+    documentId: coverage?.documentId || 'unresolved-question-rendition',
+    reviewedPages: coverage
+      ? Array.from({ length: coverage.pageCount }, (_, index) => index + 1)
+      : [],
+    visuals: tables.map((table, index) => {
+      const visual = {
+        visualId: `visual:${paperId}:table-${index + 1}`,
+        page: table.source.kind === 'page_region' ? table.source.page : 1,
+        disposition: 'semantic_table',
+        targetId: table.blockId,
+      }
+      if (table.source.kind === 'page_region') {
+        visual.region = structuredClone(table.source.region)
+      }
+      return visual
+    }),
+  }
+  const listening = !question || !answer || readingStart === null
+    ? { state: 'not_supplied', evidence: { kind: 'question_source_reviewed_no_listening_content', documentId: sourceCoverage.documentId } }
+    : listeningMaterialization({
+        paperId, questionBody: body, readingStart, answerBody, answerMap,
+        questionDocumentId: question.documentId, answerDocumentId: answer.documentId,
+        coverageDocumentId: sourceCoverage.documentId, issues,
+      })
+  const materialization = {
+    schemaVersion: 'nck1-source-materialization-v1',
+    paperId,
+    profileId: 'nck1',
+    documents: documents.map(documentRecord),
+    groups,
+    answers,
+    media: [],
+    sourceCoverage,
+    listening,
+    issues: carrierIssues(issues, codePrefix),
+  }
+  if (issues.length === 0) {
+    for (const invalid of validateNck1SourceMaterialization(materialization)) {
+      addIssue(issues, `${codePrefix}_${invalid.code}`, invalid.path, invalid.message)
+    }
+    materialization.issues = carrierIssues(issues, codePrefix)
+  }
+  const required = carrierIssues(issues, codePrefix)
+  return {
+    disposition: issues.length === 0 ? 'ready_for_verification' : 'needs_agent_review',
+    materialization,
+    review: {
+      schemaVersion: reviewSchemaVersion,
+      paperId,
+      producerVersion,
+      sourceDigest,
+      required,
+      agentTasks: [
+        { kind: 'writing_analysis', slotId: 'writing.application', parallelizableRead: true },
+        { kind: 'writing_analysis', slotId: 'writing.continuation', parallelizableRead: true },
+      ],
+      singleWriter: {
+        paperId,
+        policy: 'one_import_writer_per_paper',
+        parallelReadAllowed: ['writing.application', 'writing.continuation'],
+      },
+    },
+  }
+}
+
 export function produceNck1DocxMaterialization({ paperId, documents }) {
   if (!/^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(paperId || '')) {
     throw new TypeError('NCK1 DOCX materialization requires one valid paperId')
@@ -758,132 +937,18 @@ export function produceNck1DocxMaterialization({ paperId, documents }) {
     addIssue(issues, 'NCK1_DOCX_ANSWER_TABLE_REVIEW_REQUIRED', 'documents.official_answers',
       'Official answers in DOCX tables require Agent confirmation', sourceRef(answer?.documentId))
   }
-  const body = questionStructure.body
-  const answerBody = answerStructure.body
-  const readingStart = exactPosition(body, /^第二部分\s*阅读/u, 'sections.reading', issues, question?.documentId)
-  const languageStart = exactPosition(body, /^第三部分\s*语言运用/u, 'sections.language', issues, question?.documentId)
-  const writingStart = exactPosition(body, /^第四部分\s*写作/u, 'sections.writing', issues, question?.documentId)
-  const readingFirst = readingStart === null || languageStart === null ? null : exactPosition(
-    body, /^第一节/u, 'sections.reading.first', issues, question?.documentId,
-    [readingStart + 1, languageStart],
-  )
-  const readingSecond = readingStart === null || languageStart === null ? null : exactPosition(
-    body, /^第二节/u, 'sections.reading.second', issues, question?.documentId,
-    [readingStart + 1, languageStart],
-  )
-  const languageFirst = languageStart === null || writingStart === null ? null : exactPosition(
-    body, /^第一节/u, 'sections.language.first', issues, question?.documentId,
-    [languageStart + 1, writingStart],
-  )
-  const languageSecond = languageStart === null || writingStart === null ? null : exactPosition(
-    body, /^第二节/u, 'sections.language.second', issues, question?.documentId,
-    [languageStart + 1, writingStart],
-  )
-  const writingFirst = writingStart === null ? null : exactPosition(
-    body, /^第一节/u, 'sections.writing.first', issues, question?.documentId,
-    [writingStart + 1, body.length],
-  )
-  const writingSecond = writingStart === null ? null : exactPosition(
-    body, /^第二节/u, 'sections.writing.second', issues, question?.documentId,
-    [writingStart + 1, body.length],
-  )
-  let groups = []
-  if (question && answer && rendition
-    && [readingFirst, readingSecond, languageFirst, languageSecond, writingFirst, writingSecond]
-    .every((position) => position !== null)) {
-    groups = readingGroups({
-      paperId, body, firstStart: readingFirst, secondStart: readingSecond,
-      documentId: question.documentId, issues,
-    })
-    groups.push(sevenChoices({
-      paperId, body, start: readingSecond, end: languageStart,
-      documentId: question.documentId, issues,
-    }))
-    groups.push(clozeGroup({
-      paperId, body, start: languageFirst, end: languageSecond,
-      documentId: question.documentId, issues,
-    }))
-    groups.push(blankGroup({
-      paperId, slotId: 'grammar-fill', family: 'grammar-fill',
-      items: body.slice(languageSecond + 2, writingStart), from: 56, to: 65,
-      documentId: question.documentId, issues,
-    }))
-    const models = writingAnswerRanges(answerBody, issues, answer.documentId)
-    groups.push(writingGroup({
-      paperId, slotId: 'writing.application', family: 'application-writing',
-      items: body.slice(writingFirst + 1, writingSecond),
-      documentId: question.documentId, officialModelAnswer: models.application, issues,
-    }))
-    groups.push(writingGroup({
-      paperId, slotId: 'writing.continuation', family: 'continuation-writing',
-      items: body.slice(writingSecond + 1),
-      documentId: question.documentId, officialModelAnswer: models.continuation, issues,
-    }))
-  }
-  const answerMap = parseOfficialAnswers(answerBody, answer?.documentId, issues)
-  const answers = activeAnswers(paperId, answerMap, issues, answer?.documentId)
-  const tables = groups.flatMap((candidate) => candidate.blocks.filter((block) => block.kind === 'table'))
-  if (tables.length > 0 && rendition?.pageCount !== 1) {
-    addIssue(issues, 'NCK1_DOCX_TABLE_PAGE_REVIEW_REQUIRED', 'sourceCoverage.visuals',
-      'Semantic table page locations require Agent confirmation for multi-page renditions',
-      sourceRef(rendition.documentId))
-  }
-  const sourceCoverage = {
-    documentId: rendition?.documentId || 'unresolved-question-rendition',
-    reviewedPages: rendition
-      ? Array.from({ length: rendition.pageCount }, (_, index) => index + 1)
-      : [],
-    visuals: tables.map((table, index) => ({
-      visualId: `visual:${paperId}:table-${index + 1}`,
-      page: 1,
-      disposition: 'semantic_table',
-      targetId: table.blockId,
-    })),
-  }
-  const listening = !question || !answer || readingStart === null
-    ? { state: 'not_supplied', evidence: { kind: 'question_source_reviewed_no_listening_content', documentId: sourceCoverage.documentId } }
-    : listeningMaterialization({
-        paperId, questionBody: body, readingStart, answerBody, answerMap,
-        questionDocumentId: question.documentId, answerDocumentId: answer.documentId,
-        coverageDocumentId: sourceCoverage.documentId, issues,
-      })
-  const materialization = {
-    schemaVersion: 'nck1-source-materialization-v1',
+  return produceNck1MaterializationFromStructures({
     paperId,
-    profileId: 'nck1',
-    documents: documents.map(documentRecord),
-    groups,
-    answers,
-    media: [],
-    sourceCoverage,
-    listening,
-    issues: issues.map(({ code, path, message, source }) => ({ code, path, message, source })),
-  }
-  if (issues.length === 0) {
-    for (const invalid of validateNck1SourceMaterialization(materialization)) {
-      addIssue(issues, `NCK1_DOCX_${invalid.code}`, invalid.path, invalid.message)
-    }
-    materialization.issues = issues.map(({ code, path, message, source }) => ({ code, path, message, source }))
-  }
-  const sourceDigest = nck1DocxProducerSourceDigest(documents)
-  return {
-    disposition: issues.length === 0 ? 'ready_for_verification' : 'needs_agent_review',
-    materialization,
-    review: {
-      schemaVersion: 'nck1-docx-materialization-review-v1',
-      paperId,
-      producerVersion: NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION,
-      sourceDigest,
-      required: issues.map(({ code, path, message, source }) => ({ code, path, message, source })),
-      agentTasks: [
-        { kind: 'writing_analysis', slotId: 'writing.application', parallelizableRead: true },
-        { kind: 'writing_analysis', slotId: 'writing.continuation', parallelizableRead: true },
-      ],
-      singleWriter: {
-        paperId,
-        policy: 'one_import_writer_per_paper',
-        parallelReadAllowed: ['writing.application', 'writing.continuation'],
-      },
-    },
-  }
+    documents,
+    question,
+    answer,
+    coverage: rendition,
+    questionStructure,
+    answerStructure,
+    issues,
+    codePrefix: 'NCK1_DOCX',
+    producerVersion: NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION,
+    reviewSchemaVersion: 'nck1-docx-materialization-review-v1',
+    sourceDigest: nck1DocxProducerSourceDigest(documents),
+  })
 }
