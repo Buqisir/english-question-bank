@@ -205,8 +205,8 @@ Owner 将“题卷图片 + 答案图片”定为首批发布能力，因为它�
 ordered-item parser，`06-scanned-pdf-ocr-evidence.md` 已建立逐页像素摘要、OCR observations、
 digest-bound人工确认及同一parser入口；三者仍需在首个非生产 Candidate 上做一次真实
 Owner QA。图片经 OCR 后必须由教师对照原图与真实 Screen，不能为了抢先发布而跳过确认。
-最短发布主线仍是 **01 → 03 → 06 → 09**；下一步是否将OCR确认控件并入09由Owner决定，
-且不因依赖已满足而自动启动09，也不授权实际发布真实试卷。
+最短发布主线仍是 **01 → 03 → 06 → 09**。Owner已决定：OCR原图对照和人工确认控件必须
+并入09，不延期为可选polish；但不因依赖已满足而自动启动09，也不授权实际发布真实试卷。
 
 ## Acceptance criteria for this roadmap
 

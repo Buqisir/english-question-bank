@@ -3,6 +3,8 @@
 - Status: planned
 - Blocked by: `01-source-region-review-pairing.md`, `06-scanned-pdf-ocr-evidence.md`
 - Priority: P0, first business release capability
+- Owner decision: `/ops/` OCR source comparison and human confirmation are in this ticket,
+  not a later optional polish ticket
 - Next on PASS: image-pair sources are eligible for a separate authorized real-paper import task
 
 - Spec: `docs/cuts/import-format-capabilities/spec.md`
@@ -37,6 +39,9 @@ page-raster OCR seam，不把“图片卷”做成第二套 parser。这是第�
 - 每页直接进入ticket 06的raster observation/confirmation；确认后进入ticket 03的同一
   carrier-neutral ordered-item parser。
 - `/ops/` 使用ticket 01配对真实Screen与原始图片region，并能逐页导航、显示missing page。
+  同一页面必须呈现OCR observation文字、confidence/alternatives、source order和
+  content-vs-furniture分类；教师可逐项改正文字、顺序和分类，确认记录复用ticket 06并绑定
+  exact source/evidence/observation digests。所有项目确认前不得产生ready Candidate。
 
 ## Fail closed
 
@@ -53,11 +58,14 @@ ticket 11的`awaiting_authoritative_answers`状态。
 - [ ] 整页图片只作source page evidence；确认后的正文结构化，局部复杂图才成为media crop。
 - [ ] Screen、Student/Teacher Print、PDF消费同一Canonical，不直接渲染整页source截图。
 - [ ] answer image闭合全部45项权威答案；漏掉56–65任一文本答案时Candidate non-ready。
-- [ ] `/ops/` 可逐页对照题卷/答案原图与真实Screen；所有OCR确认完成前不可进入Owner QA。
+- [ ] `/ops/` 可逐页对照题卷/答案原图、OCR observations与真实Screen，并在同一任务中
+  确认文字、顺序和content-vs-furniture；所有OCR确认完成前不可进入Owner QA。
+- [ ] `/ops/` 保存的确认能由ticket 06公共producer重放；源页、engine output或observation
+  digest改变后旧确认失效，不允许UI另建宽松确认模型。
 
 ## Non-goals
 
-目录名猜页序、相册管理、图片增强/美化、AI重画、手写识别、从社交平台自动下载、
+目录名猜页序、相册管理、图片增强/美化、AI重画、OCR自动确认、手写识别、从社交平台自动下载、
 真实版权图片fixture、无答案发布、首版多栏/复杂图形/复杂表格。遇到这些形状必须带源区域
 fail closed，不能为了抢先发布而猜测。
 

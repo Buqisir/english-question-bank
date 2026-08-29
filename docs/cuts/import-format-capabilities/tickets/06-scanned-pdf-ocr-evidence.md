@@ -3,8 +3,8 @@
 - Status: implemented at synthetic/public seam; real read-only QA and `/ops/` confirmation UX pending
 - Blocked by: `03-text-layer-pdf-materializer.md`, `01-source-region-review-pairing.md`
 - Priority: P0, required by the image-pair release track
-- Next on PASS: Owner decides whether `/ops/` confirmation UX is part of 09, then
-  `09-ordered-image-source-bundle.md`; mixed carriers remain later. Do not auto-start.
+- Next on PASS: `09-ordered-image-source-bundle.md`, which must include the `/ops/` OCR
+  confirmation UX per Owner decision; mixed carriers remain later. Do not auto-start.
 
 - Spec: `docs/cuts/import-format-capabilities/spec.md`
 - Matrix rows: C03, T01–T04, T06, R02, R05

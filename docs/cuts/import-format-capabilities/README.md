@@ -9,7 +9,7 @@
   [01 — source-region Review pairing](tickets/01-source-region-review-pairing.md) 与
   [03 — text-layer PDF materializer](tickets/03-text-layer-pdf-materializer.md) 与
   [06 — scanned PDF OCR evidence](tickets/06-scanned-pdf-ocr-evidence.md) 已实现synthetic/public
-  seam；06仍待真实只读QA与`/ops/`确认UX产品边界。未经Owner指示不要自动启动
+  seam；06仍待真实只读QA，Owner已决定将`/ops/` OCR确认UX纳入09。未经Owner指示不要自动启动
   [09 — ordered image source bundle](tickets/09-ordered-image-source-bundle.md)。第一项业务
   发布目标仍是“题卷图片 + 答案图片”的端到端导题能力。
 
