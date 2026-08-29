@@ -26,10 +26,11 @@ const materialization = plan(
 assert.equal(materialization.risk, 'single-paper-import')
 assert.equal(materialization.pack, 'import-paper')
 assert(materialization.scripts.length >= 10, 'import pack keeps independent failure layers')
-assert(materialization.scripts.length <= 16, 'import pack stays narrow as carrier verifiers are added')
+assert(materialization.scripts.length <= 17, 'import pack stays narrow as carrier verifiers are added')
 for (const required of [
   'scripts/verify-nck1-docx-materialization-producer.mjs',
   'scripts/verify-nck1-pdf-materialization-producer.mjs',
+  'scripts/verify-nck1-ocr-source-evidence.mjs',
   'scripts/verify-nck1-source-materialization.mjs',
   'scripts/verify-paper-canonical-import-admission.mjs',
   'scripts/verify-paper-canonical-import-recovery.mjs',
@@ -46,6 +47,8 @@ for (const sharedFile of [
   'server/paper-import/nck1DocxMaterializationProducer.mjs',
   'server/paper-import/nck1PdfMaterializationProducer.mjs',
   'server/paper-import/nck1PdfTextSourceAdapter.mjs',
+  'server/paper-import/nck1OcrMaterializationProducer.mjs',
+  'server/paper-import/nck1OcrSourceEvidence.mjs',
   '.github/workflows/verify.yml',
 ]) {
   assert.equal(plan(sharedFile).pack, 'all', `${sharedFile} fails closed to all`)

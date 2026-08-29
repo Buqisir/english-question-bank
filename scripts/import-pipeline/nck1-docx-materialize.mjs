@@ -18,6 +18,15 @@ import {
   nck1PdfProducerSourceDigest,
   produceNck1PdfMaterialization,
 } from '../../server/paper-import/nck1PdfMaterializationProducer.mjs'
+import {
+  NCK1_OCR_MATERIALIZATION_PRODUCER_VERSION,
+  nck1OcrProducerSourceDigest,
+  produceNck1OcrMaterialization,
+} from '../../server/paper-import/nck1OcrMaterializationProducer.mjs'
+import {
+  NCK1_OCR_CONFIRMATION_FILE_NAME,
+  NCK1_OCR_EVIDENCE_FILE_NAME,
+} from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 const WRITER_LOCK_NAME = '.universal-nck1-writer.lock'
@@ -38,6 +47,27 @@ const PDF_PRODUCER = Object.freeze({
   reviewName: 'nck1-pdf-materialization-review-v1.json',
   receiptName: 'nck1-pdf-materialization-producer-receipt-v1.json',
   receiptSchemaVersion: 'nck1-pdf-materialization-producer-receipt-v1',
+})
+
+const OCR_PRODUCER = Object.freeze({
+  version: NCK1_OCR_MATERIALIZATION_PRODUCER_VERSION,
+  sourceDigest: nck1OcrProducerSourceDigest,
+  produce: produceNck1OcrMaterialization,
+  reviewName: 'nck1-ocr-materialization-review-v1.json',
+  receiptName: 'nck1-ocr-materialization-producer-receipt-v1.json',
+  receiptSchemaVersion: 'nck1-ocr-materialization-producer-receipt-v1',
+  allowReviewResume: true,
+  loadInputs(paperDir) {
+    const directory = path.join(paperDir, 'materialization')
+    const evidencePath = path.join(directory, NCK1_OCR_EVIDENCE_FILE_NAME)
+    const confirmationPath = path.join(directory, NCK1_OCR_CONFIRMATION_FILE_NAME)
+    return {
+      evidence: JSON.parse(readFileSync(evidencePath, 'utf8')),
+      confirmation: existsSync(confirmationPath)
+        ? JSON.parse(readFileSync(confirmationPath, 'utf8'))
+        : null,
+    }
+  },
 })
 
 export function paperWriterLockPath(paperDir) {
@@ -81,11 +111,15 @@ function loadDocuments(paperDir, manifest) {
   })
 }
 
-function selectProducer(documents) {
-  return documents.length > 0
+function selectProducer(paperDir, documents) {
+  const allPdf = documents.length > 0
     && documents.every((document) => document.mediaType === 'application/pdf')
-    ? PDF_PRODUCER
-    : DOCX_PRODUCER
+  if (!allPdf) return DOCX_PRODUCER
+  return existsSync(path.join(
+    paperDir,
+    'materialization',
+    NCK1_OCR_EVIDENCE_FILE_NAME,
+  )) ? OCR_PRODUCER : PDF_PRODUCER
 }
 
 export function runNck1MaterializationJobUnlocked({ paperDir, manifest }) {
@@ -93,8 +127,9 @@ export function runNck1MaterializationJobUnlocked({ paperDir, manifest }) {
     throw new Error('NCK1 materialization requires a universal Source Manifest')
   }
   const documents = loadDocuments(paperDir, manifest)
-  const producer = selectProducer(documents)
-  const sourceDigest = producer.sourceDigest(documents)
+  const producer = selectProducer(paperDir, documents)
+  const producerInputs = producer.loadInputs?.(paperDir) || {}
+  const sourceDigest = producer.sourceDigest(documents, producerInputs)
   const outputPath = path.join(paperDir, manifest.materializationPath)
   const receiptPath = path.join(path.dirname(outputPath), producer.receiptName)
   const reviewPath = path.join(path.dirname(outputPath), producer.reviewName)
@@ -122,6 +157,19 @@ export function runNck1MaterializationJobUnlocked({ paperDir, manifest }) {
         receiptPath,
       }
     }
+    if (
+      producer.allowReviewResume
+      && receipt.schemaVersion === producer.receiptSchemaVersion
+      && receipt.producerVersion === producer.version
+      && receipt.paperId === manifest.paperId
+      && receipt.disposition === 'needs_agent_review'
+      && existsSync(reviewPath)
+      && sha256(readFileSync(outputPath)) === receipt.outputDigest
+    ) {
+      rmSync(outputPath)
+      rmSync(reviewPath)
+      rmSync(receiptPath)
+    }
   }
   if (existsSync(outputPath) || existsSync(reviewPath) || existsSync(receiptPath)) {
     throw new Error('Existing materialization artifacts are not bound to this source and producer; refusing to overwrite them')
@@ -129,6 +177,7 @@ export function runNck1MaterializationJobUnlocked({ paperDir, manifest }) {
   const produced = producer.produce({
     paperId: manifest.paperId,
     documents,
+    ...producerInputs,
   })
   atomicJson(outputPath, produced.materialization)
   atomicJson(reviewPath, produced.review)

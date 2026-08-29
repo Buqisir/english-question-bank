@@ -1,9 +1,10 @@
 # 06 — 扫描 PDF 的 OCR evidence 与人工确认
 
-- Status: planned
+- Status: implemented at synthetic/public seam; real read-only QA and `/ops/` confirmation UX pending
 - Blocked by: `03-text-layer-pdf-materializer.md`, `01-source-region-review-pairing.md`
 - Priority: P0, required by the image-pair release track
-- Next on PASS: `09-ordered-image-source-bundle.md`; mixed carriers remain later
+- Next on PASS: Owner decides whether `/ops/` confirmation UX is part of 09, then
+  `09-ordered-image-source-bundle.md`; mixed carriers remain later. Do not auto-start.
 
 - Spec: `docs/cuts/import-format-capabilities/spec.md`
 - Matrix rows: C03, T01–T04, T06, R02, R05
@@ -17,23 +18,24 @@
 
 ## Input and fixture
 
-代码生成一个最小 2 页 synthetic raster PDF：
+代码从完整但极短的anonymous synthetic NCK1 text PDF生成image-only PDF pair：
 
-- page 1：清晰 heading、短段、题号与 ABCD；
-- page 2：一个故意模糊的 glyph、两块可能互换顺序的文本和一个 tiny synthetic image；
-- 独立 synthetic answer page，只有短答案 token。
+- 题卷共4页，覆盖标准9 groups/45 answers所需的heading、短段、题号、ABCD与blank；
+- page 2另放一个tiny synthetic visual；
+- 独立1页synthetic answer scan，只有短答案token、短写作范文和一个必须丢弃的详解陷阱。
 
 fixture 保留 page raster digest，不含真实卷文字。OCR engine fixture 固定输出正例 token、
-confidence、bbox 和一个低置信 alternatives 负例，避免测试依赖在线服务或模型漂移。
+confidence、bbox；负例逐一修改low-confidence alternatives、order graph、visual classification、
+page coverage、raster digest或confirmation digest，避免测试依赖在线服务或模型漂移。
 
 ## Public seam
 
 - Source Capture 保存 immutable PDF 与逐页 raster recipe/digest；OCR sidecar只保存
   engine name/version、page、normalized bbox、text、confidence、alternatives 和 reading-order
   edges，不增加第二套 Canonical text model。
-- Review projection用 ticket 01 的 source region + 真实 Screen seam呈现原图、OCR token和
-  未确认原因。教师确认记录绑定 source digest、observation IDs 与确认后文本/顺序；源变化
-  后确认自动失效。
+- `stage-ocr`列出原图page/region、OCR token和未确认原因；人工确认记录绑定source digest、
+  observation IDs与确认后文本/顺序，源变化后自动失效。确认后的furniture region复用ticket
+  01 source crop + 真实Screen seam；pre-Canonical OCR token的`/ops/`确认控件仍是明确待办。
 - 只有全部 content regions 已分类、所有 promoted token/ordering 已确认且页 coverage 闭合，
   adapter 才输出 ticket 03 的 carrier-neutral ordered paragraph/table/question items。
 - AI/OCR 可提出候选与差异，但只能服务“确认转写、顺序、content-vs-furniture”三个明确
@@ -53,11 +55,14 @@ confidence、bbox 和一个低置信 alternatives 负例，避免测试依赖在
 
 ## Acceptance criteria
 
-- [ ] 清晰页产生 deterministic observations；未确认时 Candidate 为 non-ready。
-- [ ] 教师确认后，同一 ordered-item parser生成标准 NCK1 identity 与 `page_region` locators。
-- [ ] 低置信 glyph、顺序歧义、未分类 tiny image 与缺页分别返回稳定 code/region。
-- [ ] 修改 raster 或 OCR output digest 后旧确认失效。
-- [ ] Screen/Student/Teacher Print/PDF只消费确认后的同一 Canonical；整页 raster只在Review。
+- [x] 清晰页产生 deterministic observations；未确认时 Candidate 为 non-ready。
+- [x] 人工确认sidecar后，同一 ordered-item parser生成标准 NCK1 identity 与 `page_region` locators。
+- [x] 低置信 glyph、顺序歧义、未分类 tiny image 与缺页分别返回稳定 code/region。
+- [x] 修改 raster 或 OCR output digest 后旧确认失效。
+- [x] Screen/Student/Teacher Print/PDF只消费确认后的同一 Canonical；整页 raster不进入正文。
+- [ ] `/ops/` 直接完成OCR observation确认（当前由immutable local sidecar完成，R02只显示
+  已确认furniture crop）。
+- [ ] 一份真实但只读、非CQ8扫描pair完成source/OCR/确认/三面proof。
 
 ## Non-goals
 
@@ -71,9 +76,8 @@ node scripts/verify-nck1-pdf-materialization-producer.mjs
 node scripts/verify-nck1-ocr-source-evidence.mjs
 node scripts/verify-nck1-source-materialization.mjs
 node scripts/verify-import-review-source-pairing.mjs
-node scripts/verify-universal-nck1-candidate-surfaces.mjs paper-synthetic-ocr-evidence
-pnpm -C app verify:paper
-pnpm -C app verify:all
+node scripts/verify-import-paper-routing.mjs
+pnpm -C app verify:import-paper
 ```
 
 final需对一份真实但只读、非CQ8扫描源做 source/OCR/确认/三面 proof 与独立

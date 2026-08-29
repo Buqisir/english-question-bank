@@ -7,7 +7,7 @@
 | [03](03-text-layer-pdf-materializer.md) | 文本层 PDF adapter 与 carrier-neutral parser（已实现） | — | P0，已完成 OCR 前置 |
 | [04](04-media-layout-intent.md) | Universal media capture 与最小 shared layout intent | 01 | P1 |
 | [05](05-table-presentation-intent.md) | 普通表的边框、相对列宽与对齐 | 01、02 | P1 |
-| [06](06-scanned-pdf-ocr-evidence.md) | 扫描 PDF 的可核查 OCR observations 与人工确认 | 01、03 | P0 |
+| [06](06-scanned-pdf-ocr-evidence.md) | 扫描 PDF 的可核查 OCR observations 与人工确认（synthetic/public seam已实现；真实QA与`/ops/` UX待办） | 01、03 | P0，图片入口前置已完成 |
 | [07](07-mixed-carrier-routing.md) | 按 role/page 精确路由已支持的 carrier adapters | 03、06 | P2 |
 | [08](08-listening-audio-evidence.md) | Universal 导入保存 opaque listening audio evidence | — | P2 |
 | [09](09-ordered-image-source-bundle.md) | 显式排序的题卷/答案图片页端到端进入三面 | 01、06 | P0，第一项业务发布能力 |
@@ -28,6 +28,6 @@
 ```
 
 Owner 指定的第一条发布主线是 `01 → 03 → 06 → 09`。01 已建立原图局部与真实 Screen
-配对，03 已建立共享 ordered-item parser；下一张 06 闭合 raster OCR，09
-再接题卷图片 + 答案图片并完成三面回归。02/04/05/07/08 不得抢占这条主线。这里的依赖
+配对，03 已建立共享 ordered-item parser，06 已闭合synthetic扫描PDF raster/OCR/人工确认
+seam；09再接题卷图片 + 答案图片并完成三面回归。02/04/05/07/08 不得抢占这条主线。这里的依赖
 是技术前置，不授权自动开下一张 ticket，也不授权 publish 或 production 操作。

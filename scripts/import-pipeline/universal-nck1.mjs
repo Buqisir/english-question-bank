@@ -20,6 +20,13 @@ import {
   sha256,
 } from '../../shared/paper-canonical/stable.mjs'
 import {
+  NCK1_OCR_CONFIRMATION_FILE_NAME,
+  NCK1_OCR_EVIDENCE_FILE_NAME,
+  NCK1_OCR_REVIEW_CODES,
+  resolveConfirmedNck1OcrEvidence,
+  validateNck1OcrSourceEvidence,
+} from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
+import {
   runNck1MaterializationJobUnlocked,
   withPaperWriterLock,
 } from './nck1-docx-materialize.mjs'
@@ -244,6 +251,105 @@ function paperContext(paperId) {
   return { paperDir, manifest }
 }
 
+function capturedDocuments(paperDir, manifest) {
+  return manifest.documents.map((document) => {
+    const sourcePath = path.join(paperDir, document.path)
+    if (!existsSync(sourcePath)) fail(`Captured source is missing: ${document.documentId}`)
+    const bytes = new Uint8Array(readFileSync(sourcePath))
+    if (bytes.byteLength !== document.byteLength || sha256(bytes) !== document.sha256) {
+      fail(`Captured source digest mismatch: ${document.documentId}`)
+    }
+    return { ...document, bytes }
+  })
+}
+
+function jsonSidecar(filePath, label) {
+  if (!existsSync(filePath)) fail(`${label} is missing: ${filePath}`)
+  try {
+    return JSON.parse(readFileSync(filePath, 'utf8'))
+  } catch {
+    fail(`${label} is not valid JSON: ${filePath}`)
+  }
+}
+
+function writeImmutableSidecar(targetPath, value, label) {
+  if (existsSync(targetPath)) {
+    const existing = jsonSidecar(targetPath, label)
+    if (JSON.stringify(existing) === JSON.stringify(value)) return 'unchanged'
+    fail(`Existing ${label} is immutable; stage a new Source Capture instead of overwriting it`)
+  }
+  writeFileSync(targetPath, `${JSON.stringify(value, null, 2)}\n`)
+  return 'written'
+}
+
+function stageOcr(paperId) {
+  const inputPath = path.resolve(process.argv[4] || '')
+  const { paperDir, manifest } = paperContext(paperId)
+  const documents = capturedDocuments(paperDir, manifest)
+  const evidence = jsonSidecar(inputPath, 'OCR evidence')
+  const issues = validateNck1OcrSourceEvidence({
+    paperId,
+    documents,
+    evidence,
+    includeReviewFindings: true,
+  })
+  const blocking = issues.filter((item) => !NCK1_OCR_REVIEW_CODES.includes(item.code))
+  if (blocking.length > 0) {
+    fail(`${blocking[0].code}: ${blocking[0].message}`)
+  }
+  const state = writeImmutableSidecar(
+    path.join(paperDir, 'materialization', NCK1_OCR_EVIDENCE_FILE_NAME),
+    evidence,
+    'OCR evidence',
+  )
+  console.log(JSON.stringify({
+    ok: true,
+    paperId,
+    state,
+    evidenceDigest: evidence.evidenceDigest,
+    reviewRequired: issues.map((item) => ({
+      code: item.code,
+      source: item.source,
+    })),
+  }, null, 2))
+}
+
+function confirmOcr(paperId) {
+  const inputPath = path.resolve(process.argv[4] || '')
+  const { paperDir, manifest } = paperContext(paperId)
+  const documents = capturedDocuments(paperDir, manifest)
+  const evidence = jsonSidecar(
+    path.join(paperDir, 'materialization', NCK1_OCR_EVIDENCE_FILE_NAME),
+    'staged OCR evidence',
+  )
+  const confirmation = jsonSidecar(inputPath, 'OCR confirmation')
+  const resolved = resolveConfirmedNck1OcrEvidence({
+    paperId,
+    documents,
+    evidence,
+    confirmation,
+  })
+  if (resolved.issues.length > 0) {
+    fail(`${resolved.issues[0].code}: ${resolved.issues[0].message}`)
+  }
+  const state = writeImmutableSidecar(
+    path.join(paperDir, 'materialization', NCK1_OCR_CONFIRMATION_FILE_NAME),
+    confirmation,
+    'OCR confirmation',
+  )
+  console.log(JSON.stringify({
+    ok: true,
+    paperId,
+    state,
+    sourceSetDigest: confirmation.sourceSetDigest,
+    evidenceDigest: confirmation.evidenceDigest,
+    confirmedItems: [...resolved.structures.values()].reduce(
+      (count, structure) => count + structure.body.length,
+      0,
+    ),
+  }, null, 2))
+}
+
 function mediaFileName(media) {
   const extension = ({
     'image/png': 'png',
@@ -404,13 +510,17 @@ try {
     runPaperCommand(paperId, initialize)
   } else if (command === 'materialize') {
     runPaperCommand(paperId, () => materialize(paperId), { blockOnFailure: true })
+  } else if (command === 'stage-ocr') {
+    runPaperCommand(paperId, () => stageOcr(paperId), { blockOnFailure: true })
+  } else if (command === 'confirm-ocr') {
+    runPaperCommand(paperId, () => confirmOcr(paperId), { blockOnFailure: true })
   } else if (command === 'verify') {
     runPaperCommand(paperId, () => verify(paperId), { blockOnFailure: true })
   } else if (command === 'build') {
     runPaperCommand(paperId, () => build(paperId), { blockOnFailure: true })
   } else if (command === 'extract-docx-media') extractDocxMedia()
   else if (command === 'crop-pdf') cropPdf()
-  else fail('Usage: universal-nck1.mjs preflight|init|materialize|verify|build|extract-docx-media|crop-pdf ...')
+  else fail('Usage: universal-nck1.mjs preflight|init|stage-ocr|confirm-ocr|materialize|verify|build|extract-docx-media|crop-pdf ...')
 } catch (error) {
   console.error(error.message)
   process.exitCode = 1

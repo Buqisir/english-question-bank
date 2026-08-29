@@ -16,7 +16,7 @@ Universal Source Materialization 已接通。
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | C01 | **文本层 PDF**：单栏、可靠文字层、标准 NCK1 顺序且无未处理视觉内容的独立题卷 PDF + 答案 PDF | Universal router按exact all-PDF source set选择 adapter；`pdftotext -bbox-layout`闭合 page/word bbox、顺序和简单表；`pdfimages -list`发现内嵌raster即拒绝；空页、重叠和多栏也拒绝 | immutable PDF bytes、digest、page count；每个 ordered item保存`page_region` | 自动生成9 groups、45 answers、paragraph/question/table与region；PDF review/receipt绑定producer+source digest | 与DOCX共用`produceNck1MaterializationFromStructures`，进入同一 Canonical blocks/Candidate | 同一 Candidate 可渲染 | 同一 shared print seam；Student/Teacher答案可见性不变 | 每段/题/答案有page+rect；语义表进入`sourceCoverage.visuals`并复用R02局部配对 |
 | C02 | **DOCX 简单 NCK1 pair**：题卷 DOCX + 答案 DOCX + 确定性 PDF rendition；正文为顶层段落/简单表 | 读 OOXML `word/document.xml`，按顶层 `w:p`/`w:tbl` 顺序及固定 NCK1 heading/题号/选项/blank 模式检测 | 原 DOCX、答案 DOCX、rendition bytes/digest；段落 source index 与顺序 | 9 slots、45 answers、paragraph/table、`docx_part` locator、page coverage | 直接映射 Canonical family/rich blocks；不靠 PaperAsset 重建题意 | 支持简单文本/表 | 支持；与 Screen 同一 Candidate | revision 中有 DOCX/rendition/Materialization；局部源 locator 尚未并排 |
-| C03 | **扫描 PDF / OCR**：无可靠文字层的扫描题卷/答案 | PDF text adapter能识别整页无文字层/部分页缺文字层并指向OCR workflow；仍无OCR engine、置信区间或人工确认sidecar | 保存immutable PDF bytes、digest、page count；失败保留page+full region | 产生`NCK1_PDF_TEXT_LAYER_MISSING`/`TEXT_COVERAGE_INCOMPLETE` review item；无OCR token/line/bbox/alternatives表达 | 无可信OCR输入，不能进入Canonical | 不支持 | 不支持 | 能明确定位需OCR页，尚不能并排审核OCR observation |
+| C03 | **扫描 PDF / OCR**：无可靠文字层的扫描题卷/答案 | PDF text adapter先识别scan；OCR seam重放每页144-DPI像素摘要，校验engine/version、bbox、confidence、alternatives与reading-order graph；repo不绑定某个生产OCR engine | immutable PDF bytes/digest/page count；sidecar保存逐页raster recipe/像素digest和normalized regions，不保存整页图副本 | versioned evidence + digest-bound confirmation；确认后的ordered paragraphs携带`page_region`并进入共用parser；confidence不进入Materialization | 仅全页覆盖、文字/顺序/visual classification都人工确认后生成同一Canonical | 确认后支持同一Candidate | 确认后复用同一shared Print/PDF；未确认不渲染 | CLI `stage-ocr`列出page/region review原因，`confirm-ocr`绑定source/evidence/observation；确认的furniture复用R02 crop，OCR token尚无`/ops/`确认控件 |
 | C04 | **混合载体**：题卷 PDF + 答案 DOCX，或 DOCX/PDF/OCR 页混合 | `init`接受多source/role并为DOCX生成rendition；router只选择exact all-PDF或现有DOCX shape，mixed稳定拒绝 | manifest可同时列PDF/DOCX/rendition | schema可列多documents；没有通用分段来源合并规则 | 手工闭合可编译；producer不猜载体边界 | 手工Candidate可渲染 | 手工Candidate可渲染 | revision保存全部source files，但不能按block跳来源 |
 | C05 | **听力文本与 timing**：1–20 题、答案、10 段听力文本，可有时序 | DOCX producer 按听力 section/题号/答案/10 段范围检测；timing 出现即要求 review | immutable question/answer source observations | `listening.state=captured`，20 questions/answers、10 transcript segments、timing array | 转成两个 `inactive_source` closure；明确 suppress，不产生 active Group | 不显示听力题/文本（设计如此） | 不显示（设计如此） | Materialization/源文件可读；无专用 transcript-source 对照 UI |
 | C06 | **听力音频**：MP3/WAV 等原始附件与题卷共同到达 | Universal manifest/schema 不接受 audio document/media；generic inactive inventory 能接受 opaque captured audio | generic closure 可存 immutable audio digest/artifact ref | NCK1 Materialization 无 audio 字段 | generic `captured_uninterpreted` 可关闭为 inactive evidence；禁止 playback/active ref | 无播放（非本阶段目标） | 不输出 | `/ops/` revision manifest 当前不登记音频 role/播放器 |
@@ -49,7 +49,7 @@ Universal Source Materialization 已接通。
 | R02 | **原卷局部 + 真实 Screen 并排与 locator跳转** | Screen click读取exact group/question/block/media identity，以target优先级精确匹配source visual；不做最近区域猜测 | revision内immutable PDF/rendition bytes、digest、page、optional region | `sourceCoverage.visuals`投影为`paired`或`unlocated`，不建第二套locator | Screen DOM的exact block/media ID与source target join；Canonical仍是语义权威 | 中间保留真实Screen，右栏显示原卷crop并可双向聚焦 | 切换Print/PDF时保留source card；点击定位回真实Screen | authenticated crop endpoint + card metadata + whole-source link；无region明确显示未配对 |
 | R03 | **局部 overlay / 差异提示**：同定位源局部与渲染局部 | 无配准、diff、阈值/误报模型 | 无 renderer crop evidence | 无 | 无共享 comparison model | 无 | 无 | 缺失；应先完成 R02，再用教师任务验证是否值得做 |
 | R04 | **问题绑定到题组/题/表格/媒体/源区域** | Screen click用closest exact DOM identity；source card从同一target带入page/rect | issue沿用groupId/questionId/blockId/page/normalized rect/surface，无新表 | Review projection提供visual target；issue仍不保存独立media/sourceVisual identity | table/figure有blockId；media click保留其所在block；cell/content node仍未进入issue model | group/question/block可绑定并可从source issue回放 | page可手填；source crop自动提交rect | table/figure/source region可双向回放；仍不能把issue精确绑定到cell/mediaId/sourceVisualId |
-| R05 | **未知形状统一 fail closed**：未登记 container/table/media/layout/OCR | DOCX检测部分已知风险；PDF检测无文字层、缺页、embedded raster、多栏、重叠/并排顺序和source-set歧义；vector visual与OCR尚无完整adapter | source bytes保留；PDF失败保留document/page/region evidence | 稳定`MATERIALIZATION_*`、`NCK1_DOCX_*`与`NCK1_PDF_*` codes；仍无跨adapter总inventory | compiler不派生可用interpretation；未知rich block/media也拒绝 | 未进入ready则不渲染 | 未进入ready则不渲染 | producer review保存shape code与region；尚未自动变成`/ops/` source-region task |
+| R05 | **未知形状统一 fail closed**：未登记 container/table/media/layout/OCR | DOCX/PDF保留既有检测；OCR额外核页覆盖、像素漂移、低置信/竞争候选、顺序图、visual classification和确认digest | source bytes保留；PDF/OCR失败都保留document/page/region evidence | 稳定`MATERIALIZATION_*`、`NCK1_DOCX_*`、`NCK1_PDF_*`与`NCK1_OCR_*` codes；仍无跨adapter巨型classifier | compiler不派生可用interpretation；只有确认后的OCR items可进入共用parser | 未进入ready则不渲染 | 未进入ready则不渲染 | producer review/CLI保存shape code与region；OCR pre-Canonical任务尚未自动变成`/ops/` issue |
 
 ## B. Status, evidence and next work
 
@@ -57,7 +57,7 @@ Universal Source Materialization 已接通。
 | --- | --- | --- | --- | --- | --- | --- |
 | C01 | `partial`（producer已实现；真实Owner QA待办） | `NCK1_PDF_TEXT_LAYER_MISSING`, `NCK1_PDF_TEXT_COVERAGE_INCOMPLETE`, `NCK1_PDF_VISUAL_REVIEW_REQUIRED`, `NCK1_PDF_READING_ORDER_AMBIGUOUS`, `NCK1_PDF_MULTI_COLUMN_UNSUPPORTED`, `NCK1_PDF_SOURCE_SET_AMBIGUOUS` | [E03](#e03-docx-producer), [E04](#e04-universal-source-cli), [E13](#e13-shared-surface-proof), [E23](#e23-text-layer-pdf-producer-proof) | 已有多页题卷+单页答案synthetic PDF pair；image-only/空页/embedded raster/双栏/重叠/无边框并排负例；仍需真实非生产QA | [06](tickets/06-scanned-pdf-ocr-evidence.md) 复用ordered-item contract | **P0 maintenance**：OCR与图片主线共同底座；不得放宽成任意PDF |
 | C02 | `supported`（限定简单文本 shape） | `NCK1_DOCX_SOURCE_SET_AMBIGUOUS`, `NCK1_DOCX_SECTION_AMBIGUOUS`, `NCK1_DOCX_QUESTION_SEQUENCE_INCOMPLETE`, `NCK1_DOCX_ANSWER_MISSING` | [E02](#e02-docx-structure), [E03](#e03-docx-producer), [E11](#e11-docx-producer-proof) | 现有 tiny synthetic DOCX pair；继续保持无真实卷文本 | 保持 E11 回归；表/媒体走 02/04 | **P1 maintenance**：当前最成熟的 carrier，不需重写 |
-| C03 | `fail-closed`（已检测，OCR未实现） | `NCK1_PDF_TEXT_LAYER_MISSING`, `NCK1_PDF_TEXT_COVERAGE_INCOMPLETE` | [E23](#e23-text-layer-pdf-producer-proof)；词汇OCR不属于本seam | 已有image-only/空文字页拒绝；下一步加清晰OCR行+低置信噪声+小图 | [06](tickets/06-scanned-pdf-ocr-evidence.md) | **P0**：不会再把scan误当text PDF，但仍完全不能导题 |
+| C03 | `partial`（OCR evidence/confirmation/producer已实现；生产engine、`/ops/`确认与真实QA待办） | `NCK1_OCR_TEXT_LAYER_REQUIRED`, `NCK1_OCR_CONFIDENCE_REVIEW_REQUIRED`, `NCK1_OCR_READING_ORDER_AMBIGUOUS`, `NCK1_OCR_PAGE_COVERAGE_INCOMPLETE`, `NCK1_OCR_VISUAL_CLASSIFICATION_REQUIRED`, `NCK1_OCR_CONFIRMATION_STALE` | [E23](#e23-text-layer-pdf-producer-proof), [E24](#e24-scanned-pdf-ocr-evidence-proof)；词汇OCR不属于本seam | 已有4页synthetic扫描题卷+1页扫描答案、固定observations、小visual；低置信/顺序/漏页/像素漂移/旧确认负例 | 维持06回归；[09](tickets/09-ordered-image-source-bundle.md)复用同一seam，不另造图片OCR模型 | **P0 maintenance**：确认后已能导题；发布前还需真实只读QA与可操作的审核入口 |
 | C04 | `partial`（manifest可表达、producer拒绝） | `NCK1_DOCX_SOURCE_SET_AMBIGUOUS`, `NCK1_PDF_SOURCE_SET_AMBIGUOUS`, `source_incomplete` | [E03](#e03-docx-producer), [E04](#e04-universal-source-cli), [E23](#e23-text-layer-pdf-producer-proof) | 题卷1页text PDF + 答案1页DOCX；反向组合各一例 | [07](tickets/07-mixed-carrier-routing.md) | **P2**：manifest已能收，需等OCR adapter稳定后再合并路由 |
 | C05 | `partial`（inactive closure supported） | `NCK1_DOCX_LISTENING_RANGES_AMBIGUOUS`, `NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS`, `MATERIALIZATION_LISTENING_TRANSCRIPT_COVERAGE_INVALID` | [E03](#e03-docx-producer), [E18](#e18-inactive-listening), [E10](#e10-materialization-contract-proof) | 20个短问题+10个短 transcript segment，无版权文本；timing有/无 | 保持 inactive regression；audio走 08 | **P2**：语义闭合安全，但无专用 Review UX且不激活播放 |
 | C06 | `partial`（generic closure only） | `LISTENING_AUDIO_EVIDENCE_INCOMPLETE`, `LISTENING_ACTIVE_OR_AUDIO_REFERENCE_UNSUPPORTED`; Universal 无 audio-specific code | [E18](#e18-inactive-listening) | 1秒synthetic tone + closed digest + no-playback negative | [08](tickets/08-listening-audio-evidence.md) | **P2**：保全来源重要，但不阻塞非听力正文 |
@@ -66,12 +66,12 @@ Universal Source Materialization 已接通。
 | C09 | `partial`（DOCX parser shape） | `NCK1_DOCX_ANSWER_RANGE_AMBIGUOUS`, `NCK1_DOCX_ANSWER_MISSING`, `MATERIALIZATION_ANSWERS_INCOMPLETE` | [E01](#e01-materialization-schema), [E11](#e11-docx-producer-proof), [E21](#e21-answer-source-shapes) | 全45项短 answer key，无解析/范文；漏1项与冲突负例 | [10](tickets/10-answer-source-shape-closure.md) | **P1**：这类来源足以确定正确答案；教学分析仍走独立生成与审核流程 |
 | C10 | `missing`（安全拒绝但无durable intake） | ingress只有 prose error；compiler有 `OFFICIAL_ANSWER_MISSING` | [E04](#e04-universal-source-cli), [E20](#e20-generic-source-capture), [E21](#e21-answer-source-shapes) | 1页synthetic question-only DOCX/PDF；后续附同digest对应答案 | [11](tickets/11-source-only-awaiting-answers.md) | **P1**：辛苦搜到的卷不应丢失，但无答案绝不能进入发布链 |
 | C11 | `partial`（ingress/schema only） | `NCK1_DOCX_SOURCE_SET_AMBIGUOUS`, `NCK1_PDF_SOURCE_SET_AMBIGUOUS`; 无combined-boundary code | [E01](#e01-materialization-schema), [E03](#e03-docx-producer), [E04](#e04-universal-source-cli), [E21](#e21-answer-source-shapes) | 一份synthetic file：题卷短token→明确答案heading→完整key；无heading/双heading负例 | [10](tickets/10-answer-source-shape-closure.md) | **P2**：包装常见但必须先证明边界，避免答案混进学生正文 |
-| T01 | `partial`（DOCX supported；PDF待真实QA） | `NCK1_DOCX_CONTAINER_UNSUPPORTED`, `NCK1_PDF_READING_ORDER_AMBIGUOUS`, `NCK1_PDF_MULTI_COLUMN_UNSUPPORTED` | [E02](#e02-docx-structure), [E05](#e05-materialization-adapter), [E11](#e11-docx-producer-proof), [E23](#e23-text-layer-pdf-producer-proof) | DOCX 3段夹表；PDF多页ordered questions+table；重叠/双栏负例 | 继续E11/E23；OCR由06复用 | **P0 maintenance**：源顺序是所有邻接/布局的底座 |
+| T01 | `partial`（DOCX supported；PDF/OCR待真实QA） | `NCK1_DOCX_CONTAINER_UNSUPPORTED`, `NCK1_PDF_READING_ORDER_AMBIGUOUS`, `NCK1_PDF_MULTI_COLUMN_UNSUPPORTED`, `NCK1_OCR_READING_ORDER_AMBIGUOUS` | [E02](#e02-docx-structure), [E05](#e05-materialization-adapter), [E11](#e11-docx-producer-proof), [E23](#e23-text-layer-pdf-producer-proof), [E24](#e24-scanned-pdf-ocr-evidence-proof) | DOCX 3段夹表；text-PDF/OCR多页ordered questions；重叠/双栏/ambiguous graph负例 | 继续E11/E23/E24；图片由09复用 | **P0 maintenance**：源顺序是所有邻接/布局的底座 |
 | T02 | `partial`（DOCX supported；PDF待真实QA） | `NCK1_DOCX_QUESTION_NUMBER_AMBIGUOUS`, `NCK1_PDF_OPTIONS_AMBIGUOUS`, `NCK1_PDF_BLANK_SEQUENCE_INCOMPLETE`, carrier answer conflict/missing codes | [E03](#e03-docx-producer), [E11](#e11-docx-producer-proof), [E13](#e13-shared-surface-proof), [E23](#e23-text-layer-pdf-producer-proof) | 两载体均为45题synthetic；每个负例只破坏一个marker/shape | 维持共用parser回归 | **P0 maintenance**：内容语义主路径，不要被视觉work回归 |
 | T03 | `partial` | `NCK1_DOCX_CONTAINER_UNSUPPORTED`, `NCK1_DOCX_VISUAL_REVIEW_REQUIRED`；无 furniture detector code | [E02](#e02-docx-structure), [E03](#e03-docx-producer), [E14](#e14-legacy-docx-media) | body说明+header页码+footer校名各一个短token | [01](tickets/01-source-region-review-pairing.md) 后另开 detector ticket | **P2**：先保留并可审，再决定哪些家具无需 Canonical |
 | T04 | `partial`（PDF多栏已fail-closed） | `NCK1_PDF_MULTI_COLUMN_UNSUPPORTED`, `MATERIALIZATION_FRAMED_COLUMNS_INVALID`, `READING_FRAMED_COLUMNS_CHILD_UNSUPPORTED`, `CANONICAL_FRAMED_COLUMNS_EXCEEDS_PAGE` | [E19](#e19-framed-columns-proof), [E23](#e23-text-layer-pdf-producer-proof) | 已有PDF双栏拒绝与Canonical 2栏synthetic；另需真实频率证据再决定producer shape | 保持拒绝；有频率证据后另开窄票 | **P1**：下游成熟但producer不猜栏序；禁止通用任意栏引擎 |
 | T05 | `supported`（语义答题区） | `NCK1_DOCX_WRITING_BOUNDARY_AMBIGUOUS`, `NCK1_DOCX_WRITING_SKELETON_AMBIGUOUS`, `MATERIALIZATION_WRITING_GIVENS_PLACEMENT_INVALID` | [E03](#e03-docx-producer), [E13](#e13-shared-surface-proof) | 2个short writing task，givens/starters/word count各一 | 维持共享 writing regression | **P1 maintenance**：已遵守“关系忠实而非像素框复刻” |
-| T06 | `partial`（PDF ordered items implemented） | `NCK1_PDF_TEXT_COVERAGE_INCOMPLETE`, `NCK1_DOCX_TABLE_PAGE_REVIEW_REQUIRED`, `CANONICAL_FRAMED_COLUMNS_EXCEEDS_PAGE` | [E01](#e01-materialization-schema), [E09](#e09-print-renderer), [E23](#e23-text-layer-pdf-producer-proof) | 已有多页PDF顺序+表region、空页拒绝；仍需跨页单段/表负例 | OCR由06复用page contract；跨页单体另开窄票 | **P1**：连续items已闭合，复合locator仍缺 |
+| T06 | `partial`（text-PDF/OCR ordered items implemented） | `NCK1_PDF_TEXT_COVERAGE_INCOMPLETE`, `NCK1_OCR_PAGE_COVERAGE_INCOMPLETE`, `NCK1_DOCX_TABLE_PAGE_REVIEW_REQUIRED`, `CANONICAL_FRAMED_COLUMNS_EXCEEDS_PAGE` | [E01](#e01-materialization-schema), [E09](#e09-print-renderer), [E23](#e23-text-layer-pdf-producer-proof), [E24](#e24-scanned-pdf-ocr-evidence-proof) | 已有多页text-PDF/OCR顺序与漏页拒绝；仍需跨页单段/表负例 | 图片09复用page contract；跨页单体另开窄票 | **P1**：连续items已闭合，复合locator仍缺 |
 | B01 | `partial`（DOCX supported；PDF待真实QA） | `MATERIALIZATION_TABLE_INVALID`, `MATERIALIZATION_TABLE_OVERLAP`, `MATERIALIZATION_TABLE_NOT_RECTANGULAR`, `NCK1_PDF_READING_ORDER_AMBIGUOUS`, `READING_TABLE_INCOMPLETE` | [E01](#e01-materialization-schema), [E02](#e02-docx-structure), [E10](#e10-materialization-contract-proof), [E12](#e12-mixed-table-media-proof), [E23](#e23-text-layer-pdf-producer-proof) | DOCX 2x2+横向merge；PDF 2x2有边框正例、无边框并排负例 | [02](tickets/02-docx-semantic-table-closure.md) 扩DOCX边界；PDF复杂表保持拒绝 | **P0 maintenance**：高频且语义化优先 |
 | B02 | `partial` | `NCK1_DOCX_TABLE_REVIEW_REQUIRED`, `MATERIALIZATION_TABLE_ROWSPAN_OVERFLOW` | [E02](#e02-docx-structure), [E03](#e03-docx-producer), [E12](#e12-mixed-table-media-proof) | 3x3表：一个gridSpan、一个vMerge；overlap负例 | [02](tickets/02-docx-semantic-table-closure.md) | **P1**：模型/renderer已支持，producer是最小断点 |
 | B03 | `fail-closed` | `NCK1_DOCX_TABLE_REVIEW_REQUIRED`; Canonical无nested shape | [E02](#e02-docx-structure), [E03](#e03-docx-producer) | 1个outer cell含1x1 nested table | [02](tickets/02-docx-semantic-table-closure.md) 固化独立code，不实现嵌套 | **P3**：低频且容易变布局引擎，保持拒绝比猜测正确 |
@@ -90,7 +90,7 @@ Universal Source Materialization 已接通。
 | R02 | `supported`（exact region-bearing visual） | `MATERIALIZATION_SOURCE_VISUAL_REGION_INVALID`, `IMPORT_REVIEW_SOURCE_VISUAL_NOT_FOUND`, `IMPORT_REVIEW_SOURCE_LOCATOR_UNAVAILABLE`, `IMPORT_REVIEW_SOURCE_DIGEST_MISMATCH` | [E15](#e15-review-store), [E16](#e16-review-projection-and-routes), [E17](#e17-review-ui-proof), [E22](#e22-source-region-pairing-proof) | verifier实时生成1页PDF、table/icon/unlocated visual并在authenticated `/ops/`实点 | 真实非生产Candidate做Owner QA；producer regions由03/06/09生成 | **P0 maintenance**：后续每个adapter都必须复用，不另造preview |
 | R03 | `missing` | 无 | [E17](#e17-review-ui-proof)（证明当前单frame/文件链接） | 暂不做；需先收集R02真实QA误差样本 | R02完成并有教师证据后才开票 | **P3**：字体/重排噪声高，不先做自动diff |
 | R04 | `partial`（block/source region supported） | `IMPORT_REVIEW_TARGET_REQUIRED`, `IMPORT_REVIEW_RECT_INVALID`, `IMPORT_REVIEW_PAGE_INVALID`, `IMPORT_REVIEW_SURFACE_INVALID` | [E15](#e15-review-store), [E17](#e17-review-ui-proof), [E22](#e22-source-region-pairing-proof) | 现有table/icon/source rectangle正例；后续补cell/content-node负例 | [04](tickets/04-media-layout-intent.md) 补精确media/content-node identity | **P1**：稳定block+source已闭合；细粒度identity不阻塞图片主线 |
-| R05 | `partial`（DOCX/PDF adapters） | `MATERIALIZATION_BLOCK_UNSUPPORTED`, `NCK1_DOCX_CONTAINER_UNSUPPORTED`, `NCK1_PDF_TEXT_LAYER_MISSING`, `NCK1_PDF_VISUAL_REVIEW_REQUIRED`, `NCK1_PDF_READING_ORDER_AMBIGUOUS`, `NCK1_PDF_MULTI_COLUMN_UNSUPPORTED` 等 | [E01](#e01-materialization-schema), [E03](#e03-docx-producer), [E05](#e05-materialization-adapter), [E23](#e23-text-layer-pdf-producer-proof) | 每个ticket带一个unknown邻接shape；PDF六类负例均含page/region | 02/04/06/07/09/10/11分别补，不建第二套总模型 | **P0**：防静默丢失；按adapter局部关闭而非巨型classifier |
+| R05 | `partial`（DOCX/PDF/OCR adapters） | `MATERIALIZATION_BLOCK_UNSUPPORTED`, carrier shape codes，以及全部`NCK1_OCR_*` review codes | [E01](#e01-materialization-schema), [E03](#e03-docx-producer), [E05](#e05-materialization-adapter), [E23](#e23-text-layer-pdf-producer-proof), [E24](#e24-scanned-pdf-ocr-evidence-proof) | 每个ticket带一个unknown邻接shape；OCR六类失败均含document/page/region且无partial interpretation | 02/04/07/09/10/11分别补，不建第二套总模型 | **P0**：防静默丢失；按adapter局部关闭而非巨型classifier |
 
 ## Evidence catalog
 
@@ -118,11 +118,12 @@ Universal Source Materialization 已接通。
 
 ### E04 Universal source CLI
 
-- `scripts/import-pipeline/universal-nck1.mjs`：`initialize`, `materialize`, `extractDocxMedia`,
-  `cropPdf`。`materialize` 进入按完整 source-set shape 选择的通用 job；`cropPdf` 固定使用
-  确定性 PDF crop semantics。
+- `scripts/import-pipeline/universal-nck1.mjs`：`initialize`, `stageOcr`, `confirmOcr`,
+  `materialize`, `extractDocxMedia`, `cropPdf`。OCR sidecar immutable staging与确认均在同一
+  single-writer lock内；`materialize` 进入按完整 source-set shape 选择的通用 job。
 - `scripts/import-pipeline/nck1-docx-materialize.mjs`：`selectProducer`,
-  `runNck1MaterializationJobUnlocked`, `withPaperWriterLock`；保留旧 DOCX export alias。
+  `runNck1MaterializationJobUnlocked`, `withPaperWriterLock`；OCR确认可替换且仅可替换
+  digest未改的non-ready producer output，Agent改过的输出仍拒绝覆盖。
 
 ### E05 Materialization adapter
 
@@ -269,18 +270,38 @@ Universal Source Materialization 已接通。
   `universal-nck1 init/materialize/verify/build`；断言9 groups、45 answers、全部page-region、
   semantic table、详解排除、source order replay、stable failures和无可用partial interpretation。
 
+### E24 Scanned-PDF OCR evidence proof
+
+- `server/paper-import/nck1OcrSourceEvidence.mjs`：`captureNck1OcrPageRasters`,
+  `buildNck1OcrSourceEvidence`, `validateNck1OcrSourceEvidence`,
+  `resolveConfirmedNck1OcrEvidence`, `nck1OcrEvidenceDigest`；逐页重放immutable PDF像素，
+  闭合engine/version、observation/region、confidence/alternatives、reading-order、页覆盖与
+  source/evidence-bound人工确认。确认前不产生ordered paragraphs。
+- `server/paper-import/nck1OcrMaterializationProducer.mjs`：
+  `produceNck1OcrMaterialization`, `nck1OcrProducerSourceDigest`；只接受exact扫描题卷PDF+
+  答案PDF，确认后调用E03同一carrier-neutral parser，confidence/raster不进入Canonical。
+- `test-fixtures/paper-import/nck1-ocr-evidence-v1/fixture.mjs`：从匿名synthetic text PDF生成
+  4页题卷+1页答案的image-only PDF、固定engine observations与一个tiny furniture visual；
+  不调用在线OCR，不提交真实试卷或整页raster。
+- `scripts/verify-nck1-ocr-source-evidence.mjs`：direct producer + public
+  `init/stage-ocr/materialize/confirm-ocr/materialize/verify/build`；证明未确认non-ready、确认后
+  9 groups/45 answers/page-region、详解排除、低置信/顺序/visual/漏页/raster drift/旧确认
+  stable failure且没有可用partial interpretation。
+
 ## Conclusions from the matrix
 
 - **最成熟**：限定形状的 DOCX（C02）和已闭合媒体的三面同像素路径（V01）；单栏文本层
   PDF producer已通过synthetic/public seam，但在真实非生产Owner QA前仍是`partial`。
   PDF已为每个item闭合page-region并复用同一Canonical surface contract。
-- **最缺失**：扫描 PDF 已能被安全识别并拒绝，但 OCR 物化仍未实现（C03）；有序图片页
-  （C07）仍没有 intake/OCR adapter，无答案来源（C10）也没有 durable source-only 暂存。
+- **最缺失**：扫描 PDF 的OCR evidence、人工确认和Materialization已通过synthetic/public
+  seam，但生产OCR engine接入、`/ops/`确认控件与真实只读QA尚未闭合（C03）；有序图片页
+  （C07）仍没有 intake adapter，无答案来源（C10）也没有 durable source-only 暂存。
   视觉侧 R02 已闭合 exact source-region Review seam，另一个公共缺口是 M04：没有共享媒体
   布局意图。
 - **首批发布目标**：先闭合题卷图片 + 答案图片的清晰单栏 shape（C07），复杂多栏、图形
   与表格继续 fail closed；发布速度不能以跳过 OCR 人工确认或 Canonical 三面回归为代价。
-- **不要误报**：只有 exact、可靠文字层、单栏、标准 NCK1 的独立 PDF pair 已完成
-  producer与synthetic proof，仍待真实Owner QA；混合载体、scan OCR、combined file与任意分栏仍不支持。legacy DOCX shape crop不等于
+- **不要误报**：text-PDF与scan-OCR都只对exact、单栏、标准NCK1独立pair完成producer和
+  synthetic proof，仍待真实Owner QA；scan必须带外部engine evidence和逐项确认，不能把
+  OCR自动结果当权威。混合载体、ordered images、combined file与任意分栏仍不支持。legacy DOCX shape crop不等于
   Universal media producer；按 accepted policy，详解文件只贡献权威答案值，不进入
   Canonical/Teacher；Canonical能手工表达不等于检测能力supported。

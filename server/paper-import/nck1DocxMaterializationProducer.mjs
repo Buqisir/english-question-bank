@@ -745,6 +745,7 @@ export function produceNck1MaterializationFromStructures({
   questionStructure,
   answerStructure,
   issues,
+  sourceVisuals = [],
   codePrefix,
   producerVersion,
   reviewSchemaVersion,
@@ -828,18 +829,21 @@ export function produceNck1MaterializationFromStructures({
     reviewedPages: coverage
       ? Array.from({ length: coverage.pageCount }, (_, index) => index + 1)
       : [],
-    visuals: tables.map((table, index) => {
-      const visual = {
-        visualId: `visual:${paperId}:table-${index + 1}`,
-        page: table.source.kind === 'page_region' ? table.source.page : 1,
-        disposition: 'semantic_table',
-        targetId: table.blockId,
-      }
-      if (table.source.kind === 'page_region') {
-        visual.region = structuredClone(table.source.region)
-      }
-      return visual
-    }),
+    visuals: [
+      ...tables.map((table, index) => {
+        const visual = {
+          visualId: `visual:${paperId}:table-${index + 1}`,
+          page: table.source.kind === 'page_region' ? table.source.page : 1,
+          disposition: 'semantic_table',
+          targetId: table.blockId,
+        }
+        if (table.source.kind === 'page_region') {
+          visual.region = structuredClone(table.source.region)
+        }
+        return visual
+      }),
+      ...sourceVisuals.map((visual) => structuredClone(visual)),
+    ],
   }
   const listening = !question || !answer || readingStart === null
     ? { state: 'not_supplied', evidence: { kind: 'question_source_reviewed_no_listening_content', documentId: sourceCoverage.documentId } }

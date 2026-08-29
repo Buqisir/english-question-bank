@@ -45,7 +45,7 @@ function reading(letter, from, to, { table = false } = {}) {
   ].join('')
 }
 
-function questionHtml() {
+function questionHtml({ includeTable = true } = {}) {
   const sevenParagraphs = Array.from({ length: 5 }, (_, index) =>
     paragraph(`A short guide has ${36 + index}._____ for learners.`)).join('')
   const sevenOptions = 'ABCDEFG'.split('').map((label) =>
@@ -59,7 +59,7 @@ function questionHtml() {
     paragraph('第二部分 阅读 (共两节，满分50分)'),
     paragraph('第一节(共15小题；每小题2.5分，满分37.5分)'),
     paragraph('阅读下列短文，从每题所给的四个选项中选出最佳选项。'),
-    reading('A', 21, 23, { table: true }),
+    reading('A', 21, 23, { table: includeTable }),
     reading('B', 24, 27),
     reading('C', 28, 31),
     reading('D', 32, 35),
@@ -172,10 +172,10 @@ function record(documentId, role, bytes, fileName) {
   }
 }
 
-export async function makeSyntheticNck1PdfFixture() {
+export async function makeSyntheticNck1PdfFixture({ includeTable = true } = {}) {
   const browser = await playwright.chromium.launch({ headless: true, channel: 'chromium' })
   try {
-    const questionBytes = await renderPdf(browser, documentHtml(questionHtml()))
+    const questionBytes = await renderPdf(browser, documentHtml(questionHtml({ includeTable })))
     const answerBytes = await renderPdf(browser, documentHtml(answerHtml()))
     const imageOnlyBytes = await renderPdf(browser, documentHtml(
       '<div class="image-only" aria-label="synthetic raster page"></div>',
