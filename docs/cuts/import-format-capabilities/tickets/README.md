@@ -5,7 +5,7 @@
 | [01](01-source-region-review-pairing.md) | 原卷局部与真实 Screen 配对、稳定 issue locator（已实现；待真实 Owner QA） | — | P0，已完成技术前置 |
 | [02](02-docx-semantic-table-closure.md) | 合并/空格等 DOCX 普通表语义闭合，嵌套表稳定拒绝 | — | P1 |
 | [03](03-text-layer-pdf-materializer.md) | 文本层 PDF adapter 与 carrier-neutral parser（已实现） | — | P0，已完成 OCR 前置 |
-| [04](04-media-layout-intent.md) | Universal media capture 与最小 shared layout intent | 01 | P1 |
+| [04](04-media-layout-intent.md) | 受限DOCX media、最小shared layout与人工确认门禁已实现；PDF自动取图/classifier仍partial | 01 | P1，部分实现 |
 | [05](05-table-presentation-intent.md) | 普通表的边框、相对列宽与对齐 | 01、02 | P1 |
 | [06](06-scanned-pdf-ocr-evidence.md) | 扫描 PDF 的可核查 OCR observations 与人工确认（synthetic/public seam已实现；真实QA待办） | 01、03 | P0，图片入口前置已完成 |
 | [07](07-mixed-carrier-routing.md) | 按 role/page 精确路由已支持的 carrier adapters | 03、06 | P2 |
@@ -31,5 +31,6 @@ Owner 指定的第一条发布主线是 `01 → 03 → 06 → 09`。01 已建立
 配对，03 已建立共享 ordered-item parser，06 已闭合synthetic扫描PDF raster/OCR/人工确认
 seam；09现已接通显式图片页、同一OCR确认、Canonical与三面回归。11也已允许无答案的
 DOCX/PDF/图片题卷先进入gitignored、不可物化/不可审核/不可发布的安全暂存。补到答案后，
-10现已统一关闭详解版/纯答案键/题答同文件的提取边界。下一项高价值实现是04的媒体裁剪、
-布局意图和低清图分级处理；任何真实QA或发布仍需另行明确授权。
+10现已统一关闭详解版/纯答案键/题答同文件的提取边界。04现已闭合受限DOCX媒体裁剪、
+共享布局、低清图派生和Owner逐图确认；剩余高价值gap是PDF producer自动局部取图/正文
+关联，以及防止普通表格被截图化的classifier。任何真实QA或发布仍需另行明确授权。

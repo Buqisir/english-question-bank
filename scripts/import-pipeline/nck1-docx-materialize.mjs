@@ -105,6 +105,34 @@ function atomicJson(filePath, value) {
   renameSync(temporary, filePath)
 }
 
+function atomicBytes(filePath, bytes) {
+  mkdirSync(path.dirname(filePath), { recursive: true })
+  const temporary = `${filePath}.tmp-${process.pid}`
+  writeFileSync(temporary, bytes)
+  renameSync(temporary, filePath)
+}
+
+function producerMediaFileName(media) {
+  const extension = ({
+    'image/png': 'png',
+    'image/jpeg': 'jpg',
+    'image/webp': 'webp',
+  })[media?.mimeType]
+  if (!extension) throw new Error(`Unsupported producer media type: ${media?.mimeType}`)
+  return `${media.mediaId.replaceAll(':', '__')}.${extension}`
+}
+
+function assertReceiptMediaFiles(paperDir, receipt) {
+  for (const file of receipt.mediaFiles || []) {
+    const filePath = path.join(paperDir, file.path)
+    if (
+      !existsSync(filePath)
+      || sha256(readFileSync(filePath)) !== file.sha256
+      || readFileSync(filePath).byteLength !== file.byteLength
+    ) throw new Error(`Digest-bound producer media is missing or changed: ${file.path}`)
+  }
+}
+
 function loadDocuments(paperDir, manifest) {
   return manifest.documents.map((document) => {
     const filePath = path.join(paperDir, document.path)
@@ -167,6 +195,7 @@ export function runNck1MaterializationJobUnlocked({ paperDir, manifest }) {
       if (!existsSync(reviewPath)) {
         throw new Error('Digest-bound producer review is missing; refusing to overwrite the existing materialization')
       }
+      assertReceiptMediaFiles(paperDir, receipt)
       const currentDigest = sha256(readFileSync(outputPath))
       return {
         cached: true,
@@ -202,6 +231,35 @@ export function runNck1MaterializationJobUnlocked({ paperDir, manifest }) {
     documents,
     ...producerInputs,
   })
+  const mediaById = new Map(produced.materialization.media.map((media) => [
+    media.mediaId,
+    media,
+  ]))
+  const producedMediaIds = new Set((produced.mediaFiles || []).map((file) => file.mediaId))
+  if (
+    producedMediaIds.size !== produced.materialization.media.length
+    || produced.materialization.media.some((media) => !producedMediaIds.has(media.mediaId))
+  ) throw new Error('Producer media files do not close the Materialization media inventory')
+  const mediaFiles = (produced.mediaFiles || []).map((file) => {
+    const media = mediaById.get(file.mediaId)
+    if (!(file.bytes instanceof Uint8Array) || sha256(file.bytes) !== media?.sha256) {
+      throw new Error(`Producer media bytes do not match Materialization: ${file.mediaId}`)
+    }
+    const relativePath = path.posix.join(
+      manifest.mediaDirectory,
+      producerMediaFileName(media),
+    )
+    const targetPath = path.join(paperDir, relativePath)
+    if (existsSync(targetPath)) {
+      throw new Error(`Existing producer media is not receipt-bound: ${relativePath}`)
+    }
+    atomicBytes(targetPath, file.bytes)
+    return {
+      path: relativePath,
+      sha256: media.sha256,
+      byteLength: file.bytes.byteLength,
+    }
+  })
   atomicJson(outputPath, produced.materialization)
   atomicJson(reviewPath, produced.review)
   const outputDigest = sha256(readFileSync(outputPath))
@@ -212,6 +270,7 @@ export function runNck1MaterializationJobUnlocked({ paperDir, manifest }) {
     sourceDigest,
     outputDigest,
     disposition: produced.disposition,
+    mediaFiles,
   })
   return {
     cached: false,

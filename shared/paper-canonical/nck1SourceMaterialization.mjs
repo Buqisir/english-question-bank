@@ -3,9 +3,15 @@ import {
   exactKeys,
   isRecordValue,
 } from './stable.mjs'
+import {
+  validateMediaPresentation,
+  validateMediaPublication,
+} from './mediaPresentation.mjs'
 
 export const NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION =
   'nck1-source-materialization-v1'
+export const NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V2 =
+  'nck1-source-materialization-v2'
 
 const slots = Object.freeze([
   ['reading.a', 'reading', 21, 23],
@@ -647,17 +653,31 @@ function validateAnswers(answers, questionIds, documents, issues) {
   }
 }
 
-function validateMedia(media, documents, mediaReferences, issues) {
+function validateMedia(media, documents, mediaReferences, schemaVersion, issues) {
   if (!Array.isArray(media)) {
     issues.push(issue('MATERIALIZATION_MEDIA_INVALID', '$.media', 'Media inventory must be an array'))
     return
   }
+  const mediaKeys = schemaVersion === NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V2
+    ? [
+        'mediaId',
+        'usage',
+        'kind',
+        'mimeType',
+        'sha256',
+        'pixelWidth',
+        'pixelHeight',
+        'extraction',
+        'presentation',
+        'publication',
+      ]
+    : ['mediaId', 'usage', 'kind', 'mimeType', 'sha256', 'pixelWidth', 'pixelHeight', 'extraction']
   const byId = new Map()
   for (const [index, item] of media.entries()) {
     const path = `$.media[${index}]`
     if (
       !isRecordValue(item)
-      || !exactKeys(item, ['mediaId', 'usage', 'kind', 'mimeType', 'sha256', 'pixelWidth', 'pixelHeight', 'extraction'])
+      || !exactKeys(item, mediaKeys)
       || !nonEmptyString(item.mediaId)
       || byId.has(item.mediaId)
       || !['content', 'visual_proof'].includes(item.usage)
@@ -670,6 +690,23 @@ function validateMedia(media, documents, mediaReferences, issues) {
       || item.pixelHeight < 1
     ) {
       issues.push(issue('MATERIALIZATION_MEDIA_ITEM_INVALID', path, 'Media requires closed identity, image metadata, digest, and extraction recipe'))
+      continue
+    }
+    if (
+      schemaVersion === NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V2
+      && !validateMediaPresentation(item.presentation)
+    ) {
+      issues.push(issue('MATERIALIZATION_MEDIA_PRESENTATION_INVALID', `${path}.presentation`, 'Media layout intent requires one alignment, relative width, and finite spacing tokens'))
+      continue
+    }
+    if (
+      schemaVersion === NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V2
+      && (
+        !validateMediaPublication(item.publication, item.presentation)
+        || item.publication.sourceSha256 !== item.sha256
+      )
+    ) {
+      issues.push(issue('MATERIALIZATION_MEDIA_PUBLICATION_INVALID', `${path}.publication`, 'Media publication must select the immutable source crop, replayable enhancement, or exact human-confirmed AI candidate'))
       continue
     }
     byId.set(item.mediaId, item)
@@ -927,7 +964,10 @@ export function validateNck1SourceMaterialization(value) {
       'listening',
       'issues',
     ])
-    || value.schemaVersion !== NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION
+    || ![
+      NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION,
+      NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V2,
+    ].includes(value.schemaVersion)
     || !/^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value.paperId || '')
     || value.profileId !== 'nck1'
   ) {
@@ -968,7 +1008,7 @@ export function validateNck1SourceMaterialization(value) {
   const mediaReferences = []
   const { questionIds } = validateGroups(value.groups, documents, mediaReferences, issues)
   validateAnswers(value.answers, questionIds, documents, issues)
-  validateMedia(value.media, documents, mediaReferences, issues)
+  validateMedia(value.media, documents, mediaReferences, value.schemaVersion, issues)
   const sourceCoverage = validateSourceCoverage(value.sourceCoverage, value.groups, value.media, documents, issues)
   validateListening(value.listening, documents, sourceCoverage, issues)
   return issues

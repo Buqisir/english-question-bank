@@ -625,12 +625,19 @@ function renderCanonicalReadingInlines(
   return inlines.map((inline) => {
     if (inline.kind === 'media_ref') {
       const src = `data:${inline.mediaArtifact.mimeType};base64,${inline.mediaArtifact.encodedBytes}`
+      const presentation = inline.media.presentation
       return (
         <img
           key={inline.nodeId}
           className="ps-canonical-reading-table-media"
           data-canonical-content-node-id={inline.nodeId}
           data-canonical-media-id={inline.mediaId}
+          data-canonical-media-alignment={presentation?.alignment}
+          data-canonical-media-spacing-before={presentation?.spacingBefore}
+          data-canonical-media-spacing-after={presentation?.spacingAfter}
+          style={presentation
+            ? ({ '--ps-canonical-media-width-ratio': presentation.widthRatio } as CSSProperties)
+            : undefined}
           src={src}
           alt={inline.alt}
         />
@@ -771,6 +778,7 @@ function renderCanonicalReadingBlock(block: CanonicalReadingSurfaceBlock): React
     const src =
       `data:${block.mediaArtifact.mimeType};base64,`
       + block.mediaArtifact.encodedBytes
+    const presentation = block.media.presentation
     return (
       <figure
         key={block.nodeId}
@@ -778,8 +786,29 @@ function renderCanonicalReadingBlock(block: CanonicalReadingSurfaceBlock): React
         data-canonical-block-id={block.nodeId}
         data-canonical-block-kind="figure"
         data-canonical-media-id={block.mediaId}
+        data-canonical-media-alignment={presentation?.alignment}
+        data-canonical-media-spacing-before={presentation?.spacingBefore}
+        data-canonical-media-spacing-after={presentation?.spacingAfter}
       >
-        <img src={src} alt="" />
+        <img
+          src={src}
+          alt=""
+          style={presentation
+            ? ({ '--ps-canonical-media-width-ratio': presentation.widthRatio } as CSSProperties)
+            : undefined}
+        />
+        {block.caption && (
+          <figcaption>
+            {block.captionInlines.map((inline) => (
+              <span
+                key={inline.nodeId}
+                data-canonical-content-node-id={inline.nodeId}
+              >
+                {inline.text}
+              </span>
+            ))}
+          </figcaption>
+        )}
       </figure>
     )
   }

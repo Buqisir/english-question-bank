@@ -18,12 +18,28 @@ function paragraph(text) {
   return `<w:p><w:r><w:t xml:space="preserve">${escapeXml(text)}</w:t></w:r></w:p>`
 }
 
-function semanticTable() {
+const syntheticMediaBytes = new Uint8Array(Buffer.from(
+  'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQAAAAA3bvkkAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAACYktHRAAB3YoTpAAAAAd0SU1FB+oIGwgLAVaDsf4AAAAldEVYdGRhdGU6Y3JlYXRlADIwMjYtMDgtMjdUMDg6MTE6MDErMDA6MDCMMSViAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDI2LTA4LTI3VDA4OjExOjAxKzAwOjAw/Wyd3gAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyNi0wOC0yN1QwODoxMTowMSswMDowMKp5vAEAAAAKSURBVAjXY2AAAAACAAHiIbwzAAAAAElFTkSuQmCC',
+  'base64',
+))
+
+function mediaDrawing({ relationshipId, widthEmu, alignment, spacingBefore, spacingAfter, mode = 'inline' }) {
+  return `<w:p><w:pPr><w:jc w:val="${alignment}"/><w:spacing w:before="${spacingBefore}" w:after="${spacingAfter}"/></w:pPr><w:r><w:drawing><wp:${mode}><wp:extent cx="${widthEmu}" cy="635000"/><wp:docPr id="1" name="Synthetic media"/><a:graphic><a:graphicData><pic:pic><pic:blipFill><a:blip r:embed="${relationshipId}"/></pic:blipFill></pic:pic></a:graphicData></a:graphic></wp:${mode}></w:drawing></w:r></w:p>`
+}
+
+function semanticTable({ mediaLayout = false } = {}) {
   const cell = (text) => `<w:tc><w:p><w:r><w:t>${escapeXml(text)}</w:t></w:r></w:p></w:tc>`
+  const mediaCell = `<w:tc>${mediaDrawing({
+    relationshipId: 'rIdTableMedia',
+    widthEmu: 635000,
+    alignment: 'left',
+    spacingBefore: 0,
+    spacingAfter: 0,
+  })}</w:tc>`
   return '<w:tbl>'
     + '<w:tblGrid><w:gridCol/><w:gridCol/></w:tblGrid>'
     + `<w:tr>${cell('Day')}${cell('Task')}</w:tr>`
-    + `<w:tr>${cell('Monday')}${cell('Read')}</w:tr>`
+    + `<w:tr>${cell('Monday')}${mediaLayout ? mediaCell : cell('Read')}</w:tr>`
     + '</w:tbl>'
 }
 
@@ -65,11 +81,19 @@ function zipStore(files) {
   return new Uint8Array(Buffer.concat([...chunks, central, eocd]))
 }
 
-function docx(blocks) {
+function docx(blocks, { mediaLayout = false } = {}) {
   const documentXml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
-    + '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">'
-    + `<w:body>${blocks.join('')}</w:body></w:document>`
-  return zipStore([{ name: 'word/document.xml', bytes: documentXml }])
+    + '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">'
+    + `<w:body>${blocks.join('')}<w:sectPr><w:pgSz w:w="12000"/><w:pgMar w:left="1000" w:right="1000"/></w:sectPr></w:body></w:document>`
+  const files = [{ name: 'word/document.xml', bytes: documentXml }]
+  if (mediaLayout) {
+    files.push({
+      name: 'word/_rels/document.xml.rels',
+      bytes: '<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rIdBlockLeft" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/image1.png"/><Relationship Id="rIdBlockCenter" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/image1.png"/><Relationship Id="rIdTableMedia" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/image1.png"/></Relationships>',
+    })
+    files.push({ name: 'word/media/image1.png', bytes: syntheticMediaBytes })
+  }
+  return zipStore(files)
 }
 
 function question(no) {
@@ -86,11 +110,33 @@ function listeningQuestion(no) {
   ]
 }
 
-function reading(letter, from, to, { table = false, duplicateQuestion = null } = {}) {
+function reading(letter, from, to, {
+  table = false,
+  duplicateQuestion = null,
+  mediaLayout = false,
+  anchoredMedia = false,
+} = {}) {
   return [
     paragraph(letter),
     paragraph(`${letter} passage keeps one small promise.`),
-    ...(table ? [semanticTable()] : []),
+    ...(mediaLayout ? [
+      mediaDrawing({
+        relationshipId: 'rIdBlockLeft',
+        widthEmu: 2540000,
+        alignment: 'left',
+        spacingBefore: 120,
+        spacingAfter: 0,
+        mode: anchoredMedia ? 'anchor' : 'inline',
+      }),
+      mediaDrawing({
+        relationshipId: 'rIdBlockCenter',
+        widthEmu: 3810000,
+        alignment: 'center',
+        spacingBefore: 0,
+        spacingAfter: 240,
+      }),
+    ] : []),
+    ...(table ? [semanticTable({ mediaLayout })] : []),
     ...Array.from({ length: to - from + 1 }, (_, index) =>
       question(from + index)).flat(),
     ...(duplicateQuestion ? question(duplicateQuestion) : []),
@@ -101,6 +147,9 @@ function questionBlocks({
   duplicateReadingHeading = false,
   duplicateReadingQuestion = false,
   listening = false,
+  mediaLayout = false,
+  anchoredMedia = false,
+  orphanMedia = false,
 } = {}) {
   const sevenParagraphs = Array.from({ length: 5 }, (_, index) =>
     paragraph(`A short guide has ${36 + index}._____ for learners.`))
@@ -128,9 +177,18 @@ function questionBlocks({
       : []),
     paragraph('第一节(共15小题；每小题2.5分，满分37.5分)'),
     paragraph('阅读下列短文，从每题所给的四个选项中选出最佳选项。'),
+    ...(orphanMedia ? [mediaDrawing({
+      relationshipId: 'rIdBlockLeft',
+      widthEmu: 2540000,
+      alignment: 'left',
+      spacingBefore: 0,
+      spacingAfter: 0,
+    })] : []),
     ...reading('A', 21, 23, {
       table: true,
       duplicateQuestion: duplicateReadingQuestion ? 21 : null,
+      mediaLayout,
+      anchoredMedia,
     }),
     ...reading('B', 24, 27),
     ...reading('C', 28, 31),
@@ -170,7 +228,7 @@ function questionBlocks({
 }
 
 function questionDocument(options = {}) {
-  return docx(questionBlocks(options))
+  return docx(questionBlocks(options), options)
 }
 
 function answerBlocks({
@@ -238,7 +296,7 @@ function combinedDocument(options = {}) {
     ...questionBlocks(options),
     ...boundary,
     ...answerBlocks({ ...options, answerHeading: false }),
-  ])
+  ], options)
 }
 
 export function makeSyntheticNck1DocxFixture(options = {}) {

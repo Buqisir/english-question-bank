@@ -39,6 +39,7 @@ import {
   consumerContractRefs,
   resolveConsumerContract,
 } from '../../shared/paper-canonical/consumers.mjs'
+import { decorateProjectedMediaPresentation } from '../../shared/paper-canonical/mediaPresentation.mjs'
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { digestJson, sha256, stableStringify, withoutKey } from '../../shared/paper-canonical/stable.mjs'
 import {
@@ -1493,16 +1494,19 @@ function canonicalSelections(validated, contract, sourceAsset) {
         `Consumer Contract cannot project canonical family ${familyContractId}`,
       )
     }
-    const projectedOccurrences = validated.projected.nodes
-      .filter((node) => node.kind === 'group' && groupIds.includes(node.groupId))
-      .map((occurrence) => {
-        const sourceOwnedInstructions = applicationInstructions.get(
-          occurrence.groupId,
-        )
-        return sourceOwnedInstructions
-          ? { ...occurrence, sourceOwnedInstructions }
-          : occurrence
-      })
+    const projectedOccurrences = decorateProjectedMediaPresentation(
+      validated.projected.nodes
+        .filter((node) => node.kind === 'group' && groupIds.includes(node.groupId))
+        .map((occurrence) => {
+          const sourceOwnedInstructions = applicationInstructions.get(
+            occurrence.groupId,
+          )
+          return sourceOwnedInstructions
+            ? { ...occurrence, sourceOwnedInstructions }
+            : occurrence
+        }),
+      validated.sourceCapture,
+    )
     selections.push({
       mode: 'canonical',
       familyContractId,
@@ -1511,7 +1515,7 @@ function canonicalSelections(validated, contract, sourceAsset) {
       ...(
         (
           familyContractId === 'seven-choices'
-          && validated.plan.authorityRef.manifestVersion === '47'
+          && ['47', '48'].includes(validated.plan.authorityRef.manifestVersion)
         )
         || (
           familyContractId === 'cloze'

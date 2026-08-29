@@ -96,6 +96,81 @@ assert.deepEqual(imported.issues, [])
 assert.equal(imported.candidate?.interpretation.groups.length, 9)
 assert.equal(imported.candidate?.interpretation.assertions.length, 45)
 
+const mediaFixture = makeSyntheticNck1DocxFixture({ mediaLayout: true })
+const mediaProduced = produceNck1DocxMaterialization({
+  paperId: mediaFixture.paperId,
+  documents: mediaFixture.sourceDocuments,
+})
+assert.equal(mediaProduced.disposition, 'ready_for_verification')
+assert.equal(
+  mediaProduced.materialization.schemaVersion,
+  'nck1-source-materialization-v2',
+)
+assert.deepEqual(
+  mediaProduced.materialization.media.map((media) => media.presentation),
+  [
+    {
+      alignment: 'left',
+      widthRatio: 0.4,
+      spacingBefore: 'compact',
+      spacingAfter: 'none',
+    },
+    {
+      alignment: 'center',
+      widthRatio: 0.6,
+      spacingBefore: 'none',
+      spacingAfter: 'normal',
+    },
+    {
+      alignment: 'left',
+      widthRatio: 0.1,
+      spacingBefore: 'none',
+      spacingAfter: 'none',
+    },
+  ],
+  'DOCX relationship, extent, alignment, and spacing become one shared layout intent',
+)
+assert.deepEqual(
+  mediaProduced.materialization.groups[0].blocks.map((block) => block.kind),
+  ['paragraph', 'figure', 'figure', 'table'],
+)
+assert.equal(mediaProduced.mediaFiles.length, 3)
+const importedMedia = importCanonicalCandidate({
+  kind: 'nck1-source-materialization',
+  materializationBytes: new TextEncoder().encode(JSON.stringify(
+    mediaProduced.materialization,
+  )),
+  documents: mediaFixture.sourceDocuments.map((document) => ({
+    documentId: document.documentId,
+    bytes: document.bytes,
+  })),
+  media: mediaProduced.mediaFiles,
+})
+assert.deepEqual(importedMedia.issues, [])
+assert.equal(importedMedia.candidate?.interpretation.groups[0].media.length, 3)
+
+const anchoredMedia = produceNck1DocxMaterialization({
+  paperId: fixture.paperId,
+  documents: makeSyntheticNck1DocxFixture({
+    mediaLayout: true,
+    anchoredMedia: true,
+  }).sourceDocuments,
+})
+assert.equal(anchoredMedia.disposition, 'needs_agent_review')
+assert(anchoredMedia.review.required.some((item) =>
+  item.code === 'NCK1_DOCX_MEDIA_LAYOUT_UNSUPPORTED'))
+
+const orphanMedia = produceNck1DocxMaterialization({
+  paperId: fixture.paperId,
+  documents: makeSyntheticNck1DocxFixture({
+    mediaLayout: true,
+    orphanMedia: true,
+  }).sourceDocuments,
+})
+assert.equal(orphanMedia.disposition, 'needs_agent_review')
+assert(orphanMedia.review.required.some((item) =>
+  item.code === 'NCK1_DOCX_MEDIA_ASSOCIATION_AMBIGUOUS'))
+
 const uncertain = produceNck1DocxMaterialization({
   paperId: fixture.paperId,
   documents: makeSyntheticNck1DocxFixture({

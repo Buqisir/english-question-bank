@@ -83,6 +83,7 @@ const registry = {
   'scripts/import-pipeline/verify-source-doc-types.mjs',
   'scripts/verify-import-ops.mjs',
   'scripts/verify-import-review-source-pairing.mjs',
+  'scripts/verify-import-review-media-derivation.mjs',
   'scripts/verify-docx-source-media-input.mjs',
   'scripts/verify-canonical-paper-group-surface-adapter-declaration-parity.mjs',
   'scripts/verify-paper-surface-mjs-declaration-parity.mjs',
@@ -228,6 +229,7 @@ const paperScripts = uniqueRegistered(
     'scripts/verify-universal-nck1-source-only-boundaries.mjs',
     'scripts/verify-import-review-ocr-confirmation.mjs',
     'scripts/verify-import-review-source-pairing.mjs',
+    'scripts/verify-import-review-media-derivation.mjs',
   ],
 )
 const featureScripts = uniqueRegistered(registry.scripts.filter(
@@ -252,6 +254,7 @@ const importPaperScripts = uniqueRegistered([
   'scripts/verify-paper-canonical-import-recovery.mjs',
   'scripts/verify-universal-nck1-publish.mjs',
   'scripts/verify-import-review-source-pairing.mjs',
+  'scripts/verify-import-review-media-derivation.mjs',
   'scripts/verify-paper-canonical-detail-screen-consumption.mjs',
   'scripts/verify-print-renderer.mjs',
   'scripts/verify-figure-render.mjs',

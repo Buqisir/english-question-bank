@@ -196,7 +196,7 @@ function assertCanonicalPackage(canonicalPackage) {
         variant: group.variant,
         assertions: sourceCapture.assertions,
         allowPassageBlockRoles:
-          closure.authorityRef.manifestVersion === '47',
+          ['47', '48'].includes(closure.authorityRef.manifestVersion),
       })
       if (sevenChoicesIssues.length > 0) throw projectionError('Seven Choices canonical contract is not closed', sevenChoicesIssues)
     }
@@ -352,7 +352,7 @@ export function projectCanonicalPaper(canonicalPackage) {
         const group = groupById.get(binding.groupRef.groupId)
         const sevenChoices = group.variant.family === 'seven-choices'
           ? {
-              ...(closure.authorityRef.manifestVersion === '47'
+              ...(['47', '48'].includes(closure.authorityRef.manifestVersion)
                 ? {
                     passageBlockRoles: cloneJson(
                       group.variant.passageBlockRoles,

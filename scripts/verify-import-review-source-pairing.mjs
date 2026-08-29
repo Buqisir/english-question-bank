@@ -263,6 +263,19 @@ try {
     density: 150,
   }).bytes
   let capturedIssue = null
+  let capturedMediaConfirmation = null
+  const mediaCandidateBytes = new Uint8Array(execFileSync('magick', [
+    '-', '-fill', '#173f5f', '-draw', 'line 0,0 399,199', 'png:-',
+  ], { input: imageSourceBytes }))
+  const mediaPresentation = {
+    alignment: 'left',
+    widthRatio: 0.1,
+    spacingBefore: 'none',
+    spacingAfter: 'none',
+  }
+  const mediaPresentationDigest = sha256(new TextEncoder().encode(
+    JSON.stringify(mediaPresentation),
+  ))
   const detail = {
     paperId,
     paperName: '原卷局部配对测试卷',
@@ -284,6 +297,33 @@ try {
     }],
     visibleStructure: [],
     sourceVisuals: [pairedVisual, iconVisual, unlocatedVisual],
+    mediaDerivations: [{
+      mediaId: iconTargetId,
+      presentation: mediaPresentation,
+      presentationDigest: mediaPresentationDigest,
+      publication: {
+        selection: 'source_crop',
+        sourceSha256: imageSourceDigest,
+        candidate: {
+          kind: 'ai_assisted_redraw',
+          sha256: sha256(mediaCandidateBytes),
+        },
+      },
+      source: {
+        mimeType: 'image/png',
+        sha256: imageSourceDigest,
+        pixelWidth: 400,
+        pixelHeight: 200,
+      },
+      candidate: {
+        kind: 'ai_assisted_redraw',
+        mimeType: 'image/png',
+        sha256: sha256(mediaCandidateBytes),
+        pixelWidth: 400,
+        pixelHeight: 200,
+      },
+    }],
+    mediaConfirmations: [],
     rendererStale: false,
     unresolvedCount: 0,
   }
@@ -337,6 +377,38 @@ try {
       return
     }
     if (
+      url.pathname === `/api/import-reviews/papers/${paperId}`
+        + `/revisions/${revisionId}/confirm-media`
+      && request.method === 'POST'
+    ) {
+      capturedMediaConfirmation = await readJson(request)
+      const receipt = {
+        confirmationId: 'media-confirmation-source-pairing-fixture',
+        revisionId,
+        mediaId: iconTargetId,
+        sourceSha256: imageSourceDigest,
+        candidateSha256: sha256(mediaCandidateBytes),
+        presentationDigest: mediaPresentationDigest,
+      }
+      detail.mediaConfirmations = [receipt]
+      send(response, 200, JSON.stringify({ receipt }), 'application/json')
+      return
+    }
+    if (
+      url.pathname === `/api/import-review-preview/revisions/${revisionId}`
+        + `/media/${encodeURIComponent(iconTargetId)}/source`
+    ) {
+      send(response, 200, Buffer.from(imageSourceBytes), 'image/png')
+      return
+    }
+    if (
+      url.pathname === `/api/import-review-preview/revisions/${revisionId}`
+        + `/media/${encodeURIComponent(iconTargetId)}/candidate`
+    ) {
+      send(response, 200, Buffer.from(mediaCandidateBytes), 'image/png')
+      return
+    }
+    if (
       url.pathname === cropPath
       || url.pathname === `/api/import-review-preview/revisions/${revisionId}`
         + `/source-visuals/${encodeURIComponent(iconVisualId)}`
@@ -354,7 +426,7 @@ try {
     if (url.pathname === '/') {
       send(response, 200, `<!doctype html><html><body>
         <div data-paper-browse-anchor="group:reading-a">
-          <table data-canonical-block-id="${targetId}"><tbody><tr><td>Day</td><td>Task <img alt="warning" width="16" height="16" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-canonical-media-id="${iconTargetId}" /></td></tr></tbody></table>
+          <table data-canonical-block-id="${targetId}"><tbody><tr><td>Day</td><td>Task <img alt="warning" width="16" height="16" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-canonical-media-id="${iconTargetId}" data-canonical-content-node-id="media-ref:warning-icon" /></td></tr></tbody></table>
           <table data-canonical-block-id="block:unlocated"><tbody><tr><td>Unlocated</td></tr></tbody></table>
         </div>
       </body></html>`, 'text/html; charset=utf-8')
@@ -385,6 +457,50 @@ try {
     await page.locator('#issue-form input[name="blockId"]').inputValue(),
     targetId,
     'an inline icon issue retains its semantic table block target',
+  )
+  assert.equal(
+    await page.locator('#issue-form input[name="mediaId"]').inputValue(),
+    iconTargetId,
+  )
+  assert.equal(
+    await page.locator('#issue-form input[name="contentNodeId"]').inputValue(),
+    'media-ref:warning-icon',
+  )
+  await page.locator('.media-compare-grid img').first().waitFor()
+  assert.equal(await page.locator('.media-compare-grid img').count(), 2)
+  assert.equal(
+    await page.locator('.media-compare-grid img').evaluateAll((images) =>
+      images.every((image) => image.naturalWidth > 0)),
+    true,
+  )
+  const overlaySlider = page.locator('[data-media-overlay-opacity]')
+  await overlaySlider.fill('100')
+  assert.equal(
+    await page.locator('[data-media-compare-layer]').evaluate((layer) => layer.style.opacity),
+    '1',
+  )
+  const mediaConfirm = page.getByRole('button', { name: '确认这张候选图' })
+  assert.equal(await mediaConfirm.isDisabled(), true)
+  const mediaChecks = page.locator('#media-confirmation-form input[type="checkbox"]')
+  assert.equal(await mediaChecks.count(), 11)
+  for (let index = 0; index < await mediaChecks.count(); index += 1) {
+    await mediaChecks.nth(index).check()
+  }
+  assert.equal(await mediaConfirm.isEnabled(), true)
+  await Promise.all([
+    page.waitForResponse((response) =>
+      response.request().method() === 'GET'
+      && new URL(response.url()).pathname === `/api/import-reviews/papers/${paperId}`),
+    mediaConfirm.click(),
+  ])
+  await page.frameLocator('#review-frame')
+    .locator(`[data-canonical-media-id="${iconTargetId}"]`).click()
+  await page.getByText('这张候选图已确认').waitFor()
+  assert(capturedMediaConfirmation)
+  assert.equal(capturedMediaConfirmation.mediaId, iconTargetId)
+  assert.equal(
+    Object.values(capturedMediaConfirmation.checklist).every(Boolean),
+    true,
   )
   await page.frameLocator('#review-frame')
     .locator('[data-canonical-block-id="block:unlocated"]').click()

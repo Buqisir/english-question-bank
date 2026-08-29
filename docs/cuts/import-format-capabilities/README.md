@@ -14,7 +14,9 @@
   awaiting answers](tickets/11-source-only-awaiting-answers.md) 已让无答案DOCX/PDF/图片题卷
   先安全暂存且禁止Candidate/审核/发布；
   [10 — answer source shapes](tickets/10-answer-source-shape-closure.md)已让详解、纯答案键和
-  题答同文件只生成同一种权威答案。以上都不是自动发布授权。
+  题答同文件只生成同一种权威答案；[04 — media layout intent](tickets/04-media-layout-intent.md)
+  已接通受限DOCX direct media、共享三面布局、确定性增强和AI候选的Owner确认门禁，但
+  PDF自动局部取图与普通表格图片classifier仍是明确gap。以上都不是自动发布授权。
 
 ## 遇到陌生形状
 
@@ -40,6 +42,10 @@
    AI候选还必须经原图/候选并排及overlay/闪烁逐项人工确认，再由三面共用同一bytes。
 8. **有证据才升级矩阵**：同一 change 同步 fixture、code、verifier、ticket 和矩阵状态。
    一张真实卷通过或人工能修，不足以把 `partial` 改成 `supported`。
+
+媒体类陌生形状先判断三件事：它是否能诚实结构化（尤其普通表格）、producer是否能从
+source自动确定它与正文的归属、以及现有presentation是否能表达比例/对齐/留白。任一项
+不确定就记录page/region和stable gap，不能靠手填crop、AI猜关系或单卷CSS绕过矩阵。
 
 若 gap 会改变学生可见内容或 Canonical/presentation 权威边界，提交给 Owner 决定；纯
 adapter 实现细节不应冒充产品决策。普通排版overlay可延期，但AI候选的对照确认不可延期。

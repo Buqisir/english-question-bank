@@ -53,6 +53,13 @@ export type CanonicalReadingSurfaceTextInline = {
   readonly text: string
 }
 
+export type CanonicalMediaPresentation = {
+  readonly alignment: 'left' | 'center' | 'right'
+  readonly widthRatio: number
+  readonly spacingBefore: 'none' | 'compact' | 'normal'
+  readonly spacingAfter: 'none' | 'compact' | 'normal'
+}
+
 export type CanonicalReadingSurfaceMediaInline = {
   readonly kind: 'media_ref'
   readonly nodeId: string
@@ -62,6 +69,7 @@ export type CanonicalReadingSurfaceMediaInline = {
     readonly mimeType: string
     readonly sha256: string
     readonly sourceArtifactRef: { readonly artifactId: string }
+    readonly presentation?: CanonicalMediaPresentation
   }
   readonly mediaArtifact: {
     readonly mimeType: string
@@ -106,6 +114,7 @@ export type CanonicalReadingSurfaceFigureBlock = {
     readonly mimeType: string
     readonly sha256: string
     readonly sourceArtifactRef: { readonly artifactId: string }
+    readonly presentation?: CanonicalMediaPresentation
   }
   readonly mediaArtifact: {
     readonly mimeType: string

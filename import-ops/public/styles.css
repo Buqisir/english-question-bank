@@ -427,6 +427,109 @@ summary:focus-visible {
   text-decoration: none;
 }
 
+.media-source-only,
+.media-compare-grid figure {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  margin: 0;
+}
+
+.media-source-only img,
+.media-compare-grid img,
+.media-overlay img {
+  display: block;
+  width: 100%;
+  max-height: 260px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface-2);
+  object-fit: contain;
+}
+
+.media-source-only figcaption,
+.media-compare-grid figcaption {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.media-compare-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.media-overlay {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  background: var(--surface-2);
+}
+
+.media-overlay .media-overlay-candidate {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  opacity: 0.5;
+}
+
+.media-compare-controls,
+.media-compare-controls label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.media-compare-controls {
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.media-compare-controls label {
+  flex: 1 1 180px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.media-compare-controls input {
+  min-width: 100px;
+  flex: 1;
+  accent-color: var(--teal);
+}
+
+.media-confirmation-form,
+.media-checklist {
+  display: grid;
+  gap: 8px;
+}
+
+.media-confirmation-form {
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.media-confirmation-form p {
+  margin: 0;
+}
+
+.media-checklist {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.media-checklist label {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.media-checklist input {
+  margin: 2px 0 0;
+  accent-color: var(--teal);
+}
+
 .surface-stage {
   display: grid;
   grid-template-columns: minmax(0, 1fr);

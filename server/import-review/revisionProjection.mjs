@@ -8,6 +8,7 @@ import {
 import { resolveCanonicalAuthority } from '../../shared/paper-canonical/authority.mjs'
 import { consumerContractRefs } from '../../shared/paper-canonical/consumers.mjs'
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
+import { decorateProjectedMediaPresentation } from '../../shared/paper-canonical/mediaPresentation.mjs'
 import { digestJson, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import {
   assertCanonicalConsumptionVisibleStructure,
@@ -42,6 +43,16 @@ export function reviewMediaFileName(media) {
   })[media.mimeType]
   if (!extension) fail(`Unsupported Candidate media type: ${media.mimeType}`)
   return `${media.mediaId.replaceAll(':', '__')}.${extension}`
+}
+
+export function reviewMediaCandidateFileName(media) {
+  const extension = ({
+    'image/png': 'png',
+    'image/jpeg': 'jpg',
+    'image/webp': 'webp',
+  })[media.publication?.candidate?.mimeType]
+  if (!extension) fail(`Unsupported Candidate rendition type: ${media.publication?.candidate?.mimeType}`)
+  return `${media.mediaId.replaceAll(':', '__')}--candidate.${extension}`
 }
 
 function normalizedRelativePath(value, label) {
@@ -142,7 +153,24 @@ export function loadNck1ReviewSource(rootDir) {
       )
       const mediaPath = resolveReviewFile(rootDir, relativePath)
       if (!existsSync(mediaPath)) fail(`Materialized media is unavailable: ${media.mediaId}`)
-      return { mediaId: media.mediaId, bytes: new Uint8Array(readFileSync(mediaPath)) }
+      if (!media.publication?.candidate) {
+        return { mediaId: media.mediaId, bytes: new Uint8Array(readFileSync(mediaPath)) }
+      }
+      const renditionPath = resolveReviewFile(
+        rootDir,
+        path.posix.join(
+          normalizedRelativePath(manifest.mediaDirectory, 'mediaDirectory'),
+          reviewMediaCandidateFileName(media),
+        ),
+      )
+      if (!existsSync(renditionPath)) {
+        fail(`Materialized media Candidate is unavailable: ${media.mediaId}`)
+      }
+      return {
+        mediaId: media.mediaId,
+        bytes: new Uint8Array(readFileSync(mediaPath)),
+        renditionBytes: new Uint8Array(readFileSync(renditionPath)),
+      }
     }),
   }
   return { config, manifest, materialization, sourceInput }
@@ -235,14 +263,23 @@ export function reviewBundleFilePaths(rootDir) {
         mediaType: page.mediaType,
         role: `${document.role}_page`,
       }))),
-    ...materialization.media.map((media) => ({
+    ...materialization.media.flatMap((media) => [{
       path: path.posix.join(
         normalizedRelativePath(manifest.mediaDirectory, 'mediaDirectory'),
         reviewMediaFileName(media),
       ),
       mediaType: media.mimeType,
       role: 'content_media',
-    })),
+    }, ...(media.publication?.candidate
+      ? [{
+          path: path.posix.join(
+            normalizedRelativePath(manifest.mediaDirectory, 'mediaDirectory'),
+            reviewMediaCandidateFileName(media),
+          ),
+          mediaType: media.publication.candidate.mimeType,
+          role: 'content_media_candidate',
+        }]
+      : [])]),
     ...NCK1_STAGED_ANALYSIS_FILES.map(({ path: relativePath, role }) => ({
       path: relativePath,
       mediaType: 'application/json',
@@ -485,16 +522,80 @@ function mediaArtifacts(projected, sourceCapture) {
   return [...artifacts.values()]
 }
 
-function buildConsumption(candidate, compilation) {
+function mediaDerivationProjection(sourceCapture) {
+  const documents = new Map(sourceCapture.documents.map((document) => [
+    document.documentId,
+    document,
+  ]))
+  const candidates = new Map(sourceCapture.observations
+    .filter((observation) => observation.kind === 'media_derivation_candidate')
+    .map((observation) => [observation.value?.mediaId, observation]))
+  return sourceCapture.observations
+    .filter((observation) =>
+      observation.kind === 'source_media'
+      && observation.value?.presentation
+      && observation.value?.publication)
+    .map((observation) => {
+      const source = documents.get(observation.documentId)
+      const candidateObservation = candidates.get(observation.value.mediaId)
+      const candidateDocument = candidateObservation
+        ? documents.get(candidateObservation.documentId)
+        : null
+      if (
+        !source
+        || typeof source.encodedBytes !== 'string'
+        || source.sha256 !== observation.value.sha256
+        || (
+          candidateObservation
+          && (
+            !candidateDocument
+            || typeof candidateDocument.encodedBytes !== 'string'
+            || candidateDocument.sha256
+              !== candidateObservation.value?.candidate?.sha256
+          )
+        )
+      ) fail(`Media derivation does not close against immutable bytes: ${observation.value.mediaId}`)
+      return {
+        mediaId: observation.value.mediaId,
+        presentation: structuredClone(observation.value.presentation),
+        presentationDigest: digestJson(observation.value.presentation),
+        publication: structuredClone(observation.value.publication),
+        source: {
+          mimeType: source.mediaType,
+          sha256: source.sha256,
+          pixelWidth: observation.value.pixelWidth,
+          pixelHeight: observation.value.pixelHeight,
+          encodedBytes: source.encodedBytes,
+        },
+        ...(candidateObservation
+          ? {
+              candidate: {
+                ...structuredClone(candidateObservation.value.candidate),
+                encodedBytes: candidateDocument.encodedBytes,
+              },
+            }
+          : {}),
+      }
+    })
+}
+
+export function buildNck1ReviewConsumption(candidate, compilation) {
   const { sourceCapture, canonicalPaper } = compilation.artifacts
   const authority = resolveCanonicalAuthority(canonicalPaper.paperPlan.authorityRef)
   if (!authority.ok) fail('Candidate preview authority is unavailable')
-  const projected = projectCanonicalPaper({
+  const projectedResult = projectCanonicalPaper({
     plan: canonicalPaper.paperPlan,
     groups: canonicalPaper.questionGroups,
     sourceCapture,
     authorityClosure: authority.closure,
   })
+  const projected = {
+    ...projectedResult,
+    nodes: decorateProjectedMediaPresentation(
+      projectedResult.nodes,
+      sourceCapture,
+    ),
+  }
   const groupsByFamily = new Map()
   for (const group of canonicalPaper.questionGroups) {
     const familyContractId = group.contractRef.familyContractId
@@ -794,7 +895,13 @@ export function buildNck1ReviewProjection(rootDir, { requireAnalyses = false } =
     const issue = preview.unresolvedIssues?.[0]
     fail(`${issue?.code || 'CANDIDATE_PREVIEW_INVALID'}: ${issue?.message || 'Candidate preview compilation failed'}`)
   }
-  const consumption = buildConsumption(preview.candidate, preview.compilation)
+  const consumption = buildNck1ReviewConsumption(
+    preview.candidate,
+    preview.compilation,
+  )
+  const mediaDerivations = mediaDerivationProjection(
+    preview.compilation.artifacts.sourceCapture,
+  )
   const paperAsset = buildNck1CompatibilityPaperAsset({
     config: loaded.config,
     materialization: loaded.materialization,
@@ -822,6 +929,7 @@ export function buildNck1ReviewProjection(rootDir, { requireAnalyses = false } =
     candidate: preview.candidate,
     compilation: preview.compilation,
     consumption,
+    mediaDerivations,
     paperAsset,
     sourceVisuals,
     analysisSidecars: analysisProjection?.sidecars || {},

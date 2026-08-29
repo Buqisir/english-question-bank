@@ -362,6 +362,24 @@ export function createImportReviewRoutes({
     })
   })))
 
+  routes.push(defineRoute('GET', /^\/api\/import-agent-reviews\/revisions\/([^/]+)\/media-confirmations\/([^/]+)$/, route(({
+    request,
+    response,
+    context,
+    match,
+  }) => {
+    if (!agentIdentity(request, context, agentToken)) {
+      context.sendJson(response, 401, { error: 'agent_auth_required' })
+      return
+    }
+    context.sendJson(response, 200, {
+      receipt: store.mediaConfirmation(
+        match[1],
+        decodeURIComponent(match[2]),
+      ),
+    })
+  })))
+
   routes.push(defineRoute('POST', /^\/api\/import-agent-reviews\/papers\/([^/]+)\/issues\/([^/]+)\/messages$/, route(async ({
     request,
     response,
@@ -476,6 +494,22 @@ export function createImportReviewRoutes({
     ) })
   })))
 
+  routes.push(defineRoute('POST', /^\/api\/import-reviews\/papers\/([^/]+)\/revisions\/([^/]+)\/confirm-media$/, route(async ({
+    request,
+    response,
+    context,
+    match,
+  }) => {
+    if (!requireOwner(response, context)) return
+    const input = await context.readJsonBody(request, { maxBytes: 30_000 })
+    context.sendJson(response, 200, { receipt: store.confirmMediaDerivation(
+      decodeURIComponent(match[1]),
+      match[2],
+      input,
+      context.session.username,
+    ) })
+  })))
+
   routes.push(defineRoute('GET', /^\/api\/import-review-preview\/revisions\/([^/]+)\/consumption$/, route(({
     response,
     context,
@@ -484,6 +518,52 @@ export function createImportReviewRoutes({
     if (!requireReviewer(response, context)) return
     const { projection } = candidateProjectionForRevision(store, match[1])
     context.sendJson(response, 200, projection.consumption)
+  })))
+
+  routes.push(defineRoute('GET', /^\/api\/import-review-preview\/revisions\/([^/]+)\/media\/([^/]+)\/(source|candidate)$/, route(({
+    response,
+    context,
+    match,
+  }) => {
+    if (!requireReviewer(response, context)) return
+    const { projection } = candidateProjectionForRevision(store, match[1])
+    const mediaId = decodeURIComponent(match[2])
+    const rendition = match[3]
+    const derivation = projection.mediaDerivations?.find((candidate) =>
+      candidate.mediaId === mediaId)
+    const image = derivation?.[rendition]
+    if (!image?.encodedBytes || !['image/png', 'image/jpeg', 'image/webp'].includes(image.mimeType)) {
+      throw reviewError(
+        'IMPORT_REVIEW_MEDIA_RENDITION_NOT_FOUND',
+        'Media rendition not found',
+        404,
+      )
+    }
+    const bytes = Buffer.from(image.encodedBytes, 'base64')
+    if (sha256(bytes) !== image.sha256) {
+      throw reviewError(
+        'IMPORT_REVIEW_MEDIA_DIGEST_MISMATCH',
+        'Media rendition no longer matches its immutable digest',
+        409,
+      )
+    }
+    const extension = ({
+      'image/png': 'png',
+      'image/jpeg': 'jpg',
+      'image/webp': 'webp',
+    })[image.mimeType]
+    sendBinary(
+      response,
+      bytes,
+      image.mimeType,
+      `review-media-${rendition}.${extension}`,
+      'inline',
+      {
+        'x-eqb-media-id': mediaId,
+        'x-eqb-media-rendition': rendition,
+        'x-eqb-media-digest': image.sha256,
+      },
+    )
   })))
 
   routes.push(defineRoute('GET', /^\/api\/import-review-preview\/revisions\/([^/]+)\/source-visuals\/([^/]+)$/, route(({

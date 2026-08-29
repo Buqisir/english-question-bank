@@ -36,6 +36,20 @@ const stateLabels = {
   dismissed: '已撤销',
 }
 
+const mediaConfirmationChecks = [
+  ['text', '文字'],
+  ['numbers', '数字'],
+  ['units', '单位'],
+  ['arrows', '箭头与方向'],
+  ['legend', '图例'],
+  ['colorAndLineStyle', '颜色与线型'],
+  ['nodeCountAndOrder', '节点数量与顺序'],
+  ['curvesIntersectionsAndScale', '曲线、交点与比例'],
+  ['layoutIntent', '大小、位置与留白关系'],
+  ['sourceAuthorization', '来源授权'],
+  ['watermarkIntegrity', '未移除或改造来源水印'],
+]
+
 function escapeHtml(value) {
   return String(value ?? '')
     .replaceAll('&', '&amp;')
@@ -467,6 +481,7 @@ function targetSummaryHtml() {
     state.target.groupId && `题组 ${state.target.groupId}`,
     state.target.blockId && `段 ${state.target.blockId}`,
     state.target.mediaId && `媒体 ${state.target.mediaId}`,
+    state.target.contentNodeId && `内容节点 ${state.target.contentNodeId}`,
   ].filter(Boolean)
   return `<div class="target-summary has-target" id="target-summary">已定位：${escapeHtml(values.join(' · '))}</div>`
 }
@@ -475,6 +490,7 @@ function selectedSourceVisual() {
   if (!state.target) return null
   const targetIds = [
     state.target.mediaId,
+    state.target.contentNodeId,
     state.target.blockId,
     state.target.questionId,
     state.target.groupId,
@@ -537,6 +553,82 @@ function sourceVisualSectionHtml() {
   </section>`
 }
 
+function selectedMediaDerivation() {
+  if (!state.target?.mediaId) return null
+  return (state.detail?.mediaDerivations || []).find((derivation) =>
+    derivation.mediaId === state.target.mediaId) || null
+}
+
+function mediaConfirmationFor(derivation) {
+  return (state.detail?.mediaConfirmations || []).find((confirmation) =>
+    confirmation.revisionId === state.detail.latestRevisionId
+    && confirmation.mediaId === derivation.mediaId
+    && confirmation.sourceSha256 === derivation.source.sha256
+    && confirmation.candidateSha256 === derivation.candidate?.sha256
+    && confirmation.presentationDigest === derivation.presentationDigest) || null
+}
+
+function mediaDerivationSectionHtml() {
+  const derivation = selectedMediaDerivation()
+  if (!state.target?.mediaId) {
+    return `<section class="rail-section media-review-section" id="media-review-section">
+      <h2>媒体核对</h2>
+      <p class="empty-state">在 Screen 点一张图片，这里会显示原图、候选图和布局意图。</p>
+    </section>`
+  }
+  if (!derivation) {
+    return `<section class="rail-section media-review-section" id="media-review-section">
+      <h2>媒体核对</h2>
+      <p class="boundary-note">这个媒体没有完整的原图、布局和派生证据，不能确认或猜测。</p>
+    </section>`
+  }
+  const revisionId = state.detail.latestRevisionId
+  const base = `/api/import-review-preview/revisions/${encodeURIComponent(revisionId)}`
+    + `/media/${encodeURIComponent(derivation.mediaId)}`
+  const sourceHref = `${base}/source`
+  const candidateHref = `${base}/candidate`
+  const presentation = derivation.presentation
+  const layout = `${({ left: '左对齐', center: '居中', right: '右对齐' })[presentation.alignment]}`
+    + ` · 正文宽度 ${Math.round(presentation.widthRatio * 100)}%`
+    + ` · 前后留白 ${presentation.spacingBefore}/${presentation.spacingAfter}`
+  if (!derivation.candidate) {
+    return `<section class="rail-section media-review-section" id="media-review-section">
+      <h2>媒体核对</h2>
+      <figure class="media-source-only"><img src="${escapeHtml(sourceHref)}" alt="不可变原始裁图" /><figcaption><strong>发布使用原始裁图</strong><span class="digest">${escapeHtml(shortDigest(derivation.source.sha256))}</span><span class="paper-meta">${escapeHtml(layout)}</span></figcaption></figure>
+    </section>`
+  }
+  const confirmation = mediaConfirmationFor(derivation)
+  const isAiCandidate = derivation.candidate.kind === 'ai_assisted_redraw'
+  const awaitingConfirmation = isAiCandidate
+    && derivation.publication.selection === 'source_crop'
+    && !confirmation
+  return `<section class="rail-section media-review-section" id="media-review-section">
+    <h2>原图与候选图</h2>
+    <p class="boundary-note">候选图不会自动替换原图。先逐项比对；来源授权与技术清晰化是两件事。</p>
+    <div class="media-compare-grid">
+      <figure><img src="${escapeHtml(sourceHref)}" alt="不可变原始裁图" /><figcaption><strong>原始裁图</strong><span class="digest">${escapeHtml(shortDigest(derivation.source.sha256))}</span></figcaption></figure>
+      <figure><img src="${escapeHtml(candidateHref)}" alt="独立候选图" /><figcaption><strong>${isAiCandidate ? 'AI 辅助重绘候选' : '确定性增强候选'}</strong><span class="digest">${escapeHtml(shortDigest(derivation.candidate.sha256))}</span></figcaption></figure>
+    </div>
+    <div class="media-overlay" data-media-overlay>
+      <img src="${escapeHtml(sourceHref)}" alt="原图叠加层" />
+      <img class="media-overlay-candidate" data-media-compare-layer src="${escapeHtml(candidateHref)}" alt="候选图叠加层" />
+    </div>
+    <div class="media-compare-controls">
+      <label><span>叠加透明度</span><input type="range" min="0" max="100" value="50" data-media-overlay-opacity /></label>
+      <button class="button" type="button" data-media-toggle>切到候选图</button>
+    </div>
+    <p class="paper-meta">布局意图：${escapeHtml(layout)}</p>
+    ${confirmation ? `<div class="approval-box">${status('approved', '这张候选图已确认')}<p class="digest">${escapeHtml(confirmation.confirmationId)}</p><p class="muted">Agent 可取回这张图的精确收据，提交下一 revision；这不等于认可整卷。</p></div>` : ''}
+    ${awaitingConfirmation && state.actor === 'owner' ? `<form class="media-confirmation-form" id="media-confirmation-form">
+      <p><strong>逐项确认一致或原图没有该要素</strong></p>
+      <div class="media-checklist">${mediaConfirmationChecks.map(([key, label]) => `<label><input type="checkbox" name="${escapeHtml(key)}" />${escapeHtml(label)}</label>`).join('')}</div>
+      <button class="button button--primary" type="submit" disabled>确认这张候选图</button>
+      <p class="field-help">只确认这张图；不会认可整卷、发布或上线。</p>
+    </form>` : ''}
+    ${isAiCandidate && derivation.publication.selection === 'source_crop' && state.actor !== 'owner' && !confirmation ? '<p class="boundary-note">等待 Owner 逐项确认。Agent 不能代为确认。</p>' : ''}
+  </section>`
+}
+
 function issueFormHtml() {
   if (state.actor !== 'owner' || !state.detail?.latest) return ''
   const visual = selectedSourceVisual()
@@ -550,6 +642,8 @@ function issueFormHtml() {
           <label class="field"><span>题组 ID</span><input name="groupId" value="${escapeHtml(state.target?.groupId || '')}" placeholder="group:…" /></label>
           <label class="field"><span>题目 ID</span><input name="questionId" value="${escapeHtml(state.target?.questionId || '')}" placeholder="question:…" /></label>
           <label class="field"><span>段落 ID</span><input name="blockId" value="${escapeHtml(state.target?.blockId || '')}" placeholder="block:…" /></label>
+          <label class="field"><span>媒体 ID</span><input name="mediaId" value="${escapeHtml(state.target?.mediaId || '')}" placeholder="media:…" /></label>
+          <label class="field"><span>内容节点 ID</span><input name="contentNodeId" value="${escapeHtml(state.target?.contentNodeId || '')}" placeholder="media-ref:…" /></label>
           <label class="field"><span>页码</span><input name="pageNumber" inputmode="numeric" value="${escapeHtml(sourcePage || '')}" placeholder="Print / PDF 可填" /></label>
         </div>
         <label class="field"><span>要 Agent 改什么</span><textarea name="message" required placeholder="说清发生了什么，以及正确结果应该是什么。"></textarea></label>
@@ -584,7 +678,13 @@ function sourceVisualForIssue(issue) {
     || issue.revisionId !== state.detail?.latestRevisionId
     || !issue.rect
   ) return null
-  const targetIds = [issue.blockId, issue.questionId, issue.groupId].filter(Boolean)
+  const targetIds = [
+    issue.mediaId,
+    issue.contentNodeId,
+    issue.blockId,
+    issue.questionId,
+    issue.groupId,
+  ].filter(Boolean)
   return (state.detail?.sourceVisuals || []).find((visual) =>
     visual.state === 'paired'
     && targetIds.includes(visual.targetId)
@@ -596,7 +696,14 @@ function sourceVisualForIssue(issue) {
 function issueHtml(issue) {
   const messages = issueMessages(issue)
   const replayVisual = sourceVisualForIssue(issue)
-  const location = [issue.groupId, issue.questionId, issue.blockId, issue.pageNumber && `第 ${issue.pageNumber} 页`]
+  const location = [
+    issue.groupId,
+    issue.questionId,
+    issue.blockId,
+    issue.mediaId,
+    issue.contentNodeId,
+    issue.pageNumber && `第 ${issue.pageNumber} 页`,
+  ]
     .filter(Boolean)
     .join(' · ')
   return `<article class="issue ${['open', 'fixed_pending_review'].includes(issue.state) ? 'issue--active' : ''}">
@@ -677,6 +784,7 @@ function approvalHtml() {
 function rightRailHtml() {
   return `<aside class="right-rail" aria-label="QA 问题与认可">
     ${sourceVisualSectionHtml()}
+    ${mediaDerivationSectionHtml()}
     ${issueFormHtml()}
     <section class="rail-section">
       <h2>${state.actor === 'owner' ? 'QA 对话' : 'Owner 反馈'}</h2>
@@ -825,13 +933,15 @@ function screenTarget(event) {
   const group = element.closest('[data-paper-browse-anchor]')
   const block = element.closest('[data-canonical-block-id]')
   const media = element.closest('[data-canonical-media-id]')
+  const contentNode = element.closest('[data-canonical-content-node-id]')
   const questionId = question?.getAttribute('data-paper-question-id')
     || question?.getAttribute('data-pi-question-id')
   const groupId = group?.getAttribute('data-paper-browse-anchor')
   const blockId = block?.getAttribute('data-canonical-block-id')
   const mediaId = media?.getAttribute('data-canonical-media-id')
-  if (!questionId && !groupId && !blockId && !mediaId) return null
-  return { questionId, groupId, blockId, mediaId }
+  const contentNodeId = contentNode?.getAttribute('data-canonical-content-node-id')
+  if (!questionId && !groupId && !blockId && !mediaId && !contentNodeId) return null
+  return { questionId, groupId, blockId, mediaId, contentNodeId }
 }
 
 function applyScreenTarget(target) {
@@ -839,7 +949,10 @@ function applyScreenTarget(target) {
   state.issueSurface = 'screen'
   const sourceSection = document.querySelector('#source-proof-section')
   if (sourceSection) sourceSection.outerHTML = sourceVisualSectionHtml()
+  const mediaSection = document.querySelector('#media-review-section')
+  if (mediaSection) mediaSection.outerHTML = mediaDerivationSectionHtml()
   bindSourceProof()
+  bindMediaReview()
   const summary = document.querySelector('#target-summary')
   const form = document.querySelector('#issue-form')
   if (!summary || !form) return
@@ -848,12 +961,15 @@ function applyScreenTarget(target) {
     target.groupId && `题组 ${target.groupId}`,
     target.blockId && `段 ${target.blockId}`,
     target.mediaId && `媒体 ${target.mediaId}`,
+    target.contentNodeId && `内容节点 ${target.contentNodeId}`,
   ].filter(Boolean)
   summary.classList.add('has-target')
   summary.textContent = `已定位：${values.join(' · ')}`
   form.elements.groupId.value = target.groupId || ''
   form.elements.questionId.value = target.questionId || ''
   form.elements.blockId.value = target.blockId || ''
+  form.elements.mediaId.value = target.mediaId || ''
+  form.elements.contentNodeId.value = target.contentNodeId || ''
   form.elements.pageNumber.value = ''
   form.querySelector('.field-help').textContent =
     `问题会绑定 R${state.detail.latest.revisionNumber} · Screen，不会漂到别的 revision。`
@@ -873,6 +989,7 @@ function locateScreenTarget(targetId) {
     const escaped = frame.contentWindow.CSS.escape(targetId)
     const element = frame.contentDocument.querySelector(
       `[data-canonical-media-id="${escaped}"],`
+      + `[data-canonical-content-node-id="${escaped}"],`
       + `[data-canonical-block-id="${escaped}"],`
       + `[data-paper-question-id="${escaped}"],`
       + `[data-paper-browse-anchor="${escaped}"]`,
@@ -902,6 +1019,61 @@ function bindSourceProof() {
     form.querySelector('.field-help').textContent =
       `问题会绑定 R${state.detail.latest.revisionNumber} · 源文件 · 第 ${visual.page} 页的精确区域。`
     form.elements.message.focus()
+  })
+}
+
+function bindMediaReview() {
+  const layer = document.querySelector('[data-media-compare-layer]')
+  const opacity = document.querySelector('[data-media-overlay-opacity]')
+  const toggle = document.querySelector('[data-media-toggle]')
+  opacity?.addEventListener('input', (event) => {
+    if (layer) layer.style.opacity = String(Number(event.currentTarget.value) / 100)
+  })
+  toggle?.addEventListener('click', () => {
+    if (!layer) return
+    const showingCandidate = layer.style.opacity === '1'
+    layer.style.opacity = showingCandidate ? '0' : '1'
+    if (opacity) opacity.value = showingCandidate ? '0' : '100'
+    toggle.textContent = showingCandidate ? '切到候选图' : '切回原图'
+  })
+  const form = document.querySelector('#media-confirmation-form')
+  if (!form) return
+  const submit = form.querySelector('button[type="submit"]')
+  const updateReady = () => {
+    submit.disabled = mediaConfirmationChecks.some(([key]) =>
+      !form.elements[key]?.checked)
+  }
+  form.querySelectorAll('input[type="checkbox"]').forEach((input) =>
+    input.addEventListener('change', updateReady))
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault()
+    const derivation = selectedMediaDerivation()
+    if (!derivation?.candidate || submit.disabled) return
+    submit.disabled = true
+    try {
+      await request(
+        `/api/import-reviews/papers/${encodeURIComponent(state.paperId)}`
+          + `/revisions/${encodeURIComponent(state.detail.latestRevisionId)}/confirm-media`,
+        {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            bundleDigest: state.detail.latest.bundleDigest,
+            mediaId: derivation.mediaId,
+            sourceSha256: derivation.source.sha256,
+            candidateSha256: derivation.candidate.sha256,
+            presentationDigest: derivation.presentationDigest,
+            checklist: Object.fromEntries(
+              mediaConfirmationChecks.map(([key]) => [key, true]),
+            ),
+          }),
+        },
+      )
+      await loadDetail(state.paperId)
+    } catch (error) {
+      state.error = error.message
+      render()
+    }
   })
 }
 
@@ -977,6 +1149,8 @@ function bind() {
             groupId: String(data.get('groupId') || '').trim() || null,
             questionId: String(data.get('questionId') || '').trim() || null,
             blockId: String(data.get('blockId') || '').trim() || null,
+            mediaId: String(data.get('mediaId') || '').trim() || null,
+            contentNodeId: String(data.get('contentNodeId') || '').trim() || null,
             pageNumber: page || null,
             rect: state.issueSurface === 'source' && visual?.region
               ? visual.region
@@ -1043,6 +1217,8 @@ function bind() {
         groupId: issue.groupId,
         questionId: issue.questionId,
         blockId: issue.blockId,
+        mediaId: issue.mediaId,
+        contentNodeId: issue.contentNodeId,
       }
       state.issueSurface = 'source'
       state.surface = 'screen'
@@ -1074,6 +1250,7 @@ function bind() {
     }
   })
   bindSourceProof()
+  bindMediaReview()
   bindFrame()
 }
 

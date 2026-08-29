@@ -1,6 +1,7 @@
 # 导题格式能力矩阵
 
-- Status: active（tickets 01、03、06、09、10、11 已实现synthetic/public seam；真实 Owner QA 待办）
+- Status: active（tickets 01、03、06、09、10、11 已实现synthetic/public seam；ticket 04已实现
+  DOCX direct media、共享布局和人工确认门禁，PDF自动取图/classifier仍为partial；真实 Owner QA 待办）
 - Date: 2026-08-29
 - Current implementation baseline: `origin/main@4f0def1d05247e68a14a465aa8eb0da7672a0b17`
   (live `ls-remote` verified before the isolated worktree was created)
@@ -21,7 +22,8 @@
 当前代码已有强的 Canonical Paper、Source Materialization、共享 renderer 和不可变
 Import Review revision，但各能力的覆盖不均：简单 DOCX 文本最成熟；文本层PDF、扫描PDF
 和有序图片页已有受限synthetic/public seam，仍待真实QA；无答案题卷的安全暂存也已闭合，
-但表格视觉属性、媒体布局意图与混合载体仍有明显断点。缺少统一登记表会让文档里的“支持”与实际 producer
+DOCX direct media的最小布局意图和人工确认门禁也已闭合；但表格视觉属性、PDF自动取图、
+普通表格图片fallback分类与混合载体仍有明显断点。缺少统一登记表会让文档里的“支持”与实际 producer
 的“支持”混在一起。
 
 ## User outcome
@@ -226,6 +228,13 @@ revision核对原图、文字、顺序和content-vs-furniture，确认后Agent�
 再审核原图局部与真实Screen。技术实现完成不授权实际发布真实试卷；真实、只读、非CQ8
 Owner QA与后续发布必须是独立明确授权的任务。
 
+Ticket 04现已把受限DOCX embedded PNG/JPEG/WebP接到Source Materialization v2：原bytes、
+相对正文宽度、对齐与有限留白经同一投影进入Screen、两种Print和PDF。确定性增强必须
+exact replay；AI辅助重绘只作为独立候选进入`/ops/`并排/overlay和11项Owner确认，下一
+revision选择候选时还必须引用更早revision的exact receipt。它**没有**完成PDF producer的
+自动局部图检测/关联，也没有证明图片不是可语义化普通表格的classifier，因此矩阵保持
+`partial`；人手填一个crop不能升级成producer support。
+
 ## Acceptance criteria for this roadmap
 
 - [x] 对用户列出的来源、文本/版式、表格、媒体、原卷忠实和审核能力逐行盘点。
@@ -241,8 +250,8 @@ Owner QA与后续发布必须是独立明确授权的任务。
 
 ## Out of scope
 
-- Ticket 10 之外提前实现媒体派生引擎、schema、数据库、renderer或试卷资产变更；本次只把
-  新媒体规则登记到矩阵与Ticket 04，不把规划误报成现有能力。
+- Ticket 04之后继续扩成通用视觉理解引擎：当前不自动判断PDF局部图与正文归属、不自动
+  识别“图片其实是普通表格”，也不让模型自动判定AI候选语义一致或来源授权。
 - 新增或发布一张真实试卷，处理 CQ8、Review revision、认可、上线或 R2。
 - 通用任意栏数/任意绝对定位布局引擎。
 - 整页像素级复刻、未经原图对照与人工确认的 AI 媒体、AI 自动批准 OCR/内容归类。

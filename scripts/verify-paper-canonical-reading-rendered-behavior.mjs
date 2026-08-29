@@ -440,9 +440,11 @@ function canonicalInlineNodeIds(group) {
           row.cells.flatMap((cell) =>
             cell.inlines.map((inline) => inline.nodeId)))
       }
-      // Figure caption/provenance remains in the canonical source Block but
-      // is not public paper content on Screen or Print/PDF.
-      return (block.kind === 'figure' ? [] : block.inlines)
+      return (block.kind === 'figure'
+        ? block.media.presentation
+          ? block.captionInlines
+          : []
+        : block.inlines)
         .map((inline) => inline.nodeId)
     }),
     ...group.questions.flatMap((question) => [

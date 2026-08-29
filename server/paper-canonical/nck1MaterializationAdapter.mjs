@@ -9,6 +9,7 @@ import {
 } from '../../shared/paper-canonical/authority.mjs'
 import {
   digestNck1SourceMaterialization,
+  NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V2,
   validateNck1SourceMaterialization,
 } from '../../shared/paper-canonical/nck1SourceMaterialization.mjs'
 import {
@@ -42,6 +43,9 @@ function cloneByteEntries(entries, idKey) {
   return entries.map((entry) => ({
     [idKey]: entry[idKey],
     bytes: new Uint8Array(entry.bytes),
+    ...(entry.renditionBytes instanceof Uint8Array
+      ? { renditionBytes: new Uint8Array(entry.renditionBytes) }
+      : {}),
   }))
 }
 
@@ -58,9 +62,16 @@ export function isNck1MaterializationInput(value) {
       && entry.bytes instanceof Uint8Array)
     && Array.isArray(value.media)
     && value.media.every((entry) =>
-      exactKeys(entry, ['mediaId', 'bytes'])
+      (
+        exactKeys(entry, ['mediaId', 'bytes'])
+        || exactKeys(entry, ['mediaId', 'bytes', 'renditionBytes'])
+      )
       && typeof entry.mediaId === 'string'
-      && entry.bytes instanceof Uint8Array),
+      && entry.bytes instanceof Uint8Array
+      && (
+        entry.renditionBytes === undefined
+        || entry.renditionBytes instanceof Uint8Array
+      )),
   )
 }
 
@@ -79,6 +90,10 @@ function inputKeyForDocument(documentId) {
 
 function inputKeyForMedia(mediaId) {
   return `source_media_${mediaId.replace(/[^a-z0-9]+/gi, '_')}`
+}
+
+function inputKeyForMediaRendition(mediaId) {
+  return `candidate_media_${mediaId.replace(/[^a-z0-9]+/gi, '_')}`
 }
 
 function stableArtifactId(bytes) {
@@ -128,8 +143,74 @@ function bundleDigest(materializationBytes, documents, media) {
       mediaId: entry.mediaId,
       sha256: sha256(entry.bytes),
       byteLength: entry.bytes.byteLength,
+      ...(entry.renditionBytes
+        ? {
+            renditionSha256: sha256(entry.renditionBytes),
+            renditionByteLength: entry.renditionBytes.byteLength,
+          }
+        : {}),
     })),
   })
+}
+
+function identifyImage(bytes) {
+  const [pixelWidth, pixelHeight, mimeType] = execFileSync(
+    'magick', ['identify', '-format', '%w,%h,%m', '-'], {
+      encoding: 'utf8',
+      input: bytes,
+    },
+  ).split(',')
+  return {
+    pixelWidth: Number(pixelWidth),
+    pixelHeight: Number(pixelHeight),
+    mimeType: ({ PNG: 'image/png', JPEG: 'image/jpeg', WEBP: 'image/webp' })[mimeType],
+  }
+}
+
+function imageMagickVersion() {
+  return execFileSync('magick', ['-version'], { encoding: 'utf8' })
+    .split('\n')[0]
+    .trim()
+}
+
+function replayDeterministicEnhancement(sourceBytes, candidate) {
+  if (
+    candidate.tool !== 'imagemagick'
+    || candidate.toolVersion !== imageMagickVersion()
+    || candidate.preset !== 'document-light-cleanup-v1'
+    || candidate.mimeType !== 'image/png'
+  ) throw new Error('Unsupported deterministic media enhancement recipe')
+  return new Uint8Array(execFileSync('magick', [
+    '-',
+    '-auto-orient',
+    '-strip',
+    '-colorspace', 'sRGB',
+    '-contrast-stretch', '0.5%x0.5%',
+    '-unsharp', '0x0.75+0.75+0.008',
+    'png32:-',
+  ], { input: sourceBytes, maxBuffer: 50 * 1024 * 1024 }))
+}
+
+function selectedMedia(media, supplied) {
+  if (
+    media.publication
+    && media.publication.selection !== 'source_crop'
+  ) {
+    return {
+      bytes: supplied.renditionBytes,
+      mimeType: media.publication.candidate.mimeType,
+      sha256: media.publication.candidate.sha256,
+      pixelWidth: media.publication.candidate.pixelWidth,
+      pixelHeight: media.publication.candidate.pixelHeight,
+    }
+  }
+  return {
+    bytes: supplied.bytes,
+    mimeType: media.mimeType,
+    sha256: media.sha256,
+    pixelWidth: media.pixelWidth,
+    pixelHeight: media.pixelHeight,
+  }
 }
 
 function reextractMedia(media, documentBytes) {
@@ -445,6 +526,41 @@ function validateBundle(materialization, input) {
       }
     } catch {
       issues.push(adapterIssue('MATERIALIZATION_MEDIA_RECIPE_UNAVAILABLE', `Media ${media.mediaId} cannot be replayed from its immutable source recipe`, '$.media'))
+    }
+    const candidate = media.publication?.candidate
+    if (!candidate && supplied.renditionBytes) {
+      issues.push(adapterIssue('MATERIALIZATION_MEDIA_RENDITION_UNEXPECTED', `Media ${media.mediaId} supplied rendition bytes without a declared candidate`, '$.media'))
+      continue
+    }
+    if (candidate && !supplied.renditionBytes) {
+      issues.push(adapterIssue('MATERIALIZATION_MEDIA_RENDITION_MISSING', `Media ${media.mediaId} declares a candidate without immutable rendition bytes`, '$.media'))
+      continue
+    }
+    if (!candidate) continue
+    try {
+      const identified = identifyImage(supplied.renditionBytes)
+      if (
+        sha256(supplied.renditionBytes) !== candidate.sha256
+        || identified.mimeType !== candidate.mimeType
+        || identified.pixelWidth !== candidate.pixelWidth
+        || identified.pixelHeight !== candidate.pixelHeight
+      ) {
+        issues.push(adapterIssue('MATERIALIZATION_MEDIA_RENDITION_MISMATCH', `Media ${media.mediaId} candidate bytes do not match their immutable declaration`, '$.media'))
+        continue
+      }
+    } catch {
+      issues.push(adapterIssue('MATERIALIZATION_MEDIA_RENDITION_INVALID', `Media ${media.mediaId} candidate is not a readable supported image`, '$.media'))
+      continue
+    }
+    if (candidate.kind === 'deterministic_enhancement') {
+      try {
+        const replayed = replayDeterministicEnhancement(supplied.bytes, candidate)
+        if (sha256(replayed) !== candidate.sha256) {
+          issues.push(adapterIssue('MATERIALIZATION_MEDIA_ENHANCEMENT_REPLAY_MISMATCH', `Media ${media.mediaId} deterministic enhancement does not replay exactly`, '$.media'))
+        }
+      } catch {
+        issues.push(adapterIssue('MATERIALIZATION_MEDIA_ENHANCEMENT_REPLAY_UNAVAILABLE', `Media ${media.mediaId} deterministic enhancement tool and version are unavailable`, '$.media'))
+      }
     }
   }
   if (mediaById.size !== (materialization?.media || []).length) {
@@ -1091,36 +1207,63 @@ function deriveSource(materialization, documentsById, mediaById, instructionDocu
     const content = { blocks: canonicalBlocks.map(canonicalBlock) }
     const groupMedia = referencedMediaIds(group.blocks).map((mediaId) => {
       const media = mediaInventoryById.get(mediaId)
-      const bytes = mediaById.get(mediaId).bytes
+      const selected = selectedMedia(media, mediaById.get(mediaId))
       return {
         mediaId,
-        mimeType: media.mimeType,
-        sha256: media.sha256,
-        pixelWidth: media.pixelWidth,
-        pixelHeight: media.pixelHeight,
-        sourceArtifactRef: { artifactId: stableArtifactId(bytes) },
+        mimeType: selected.mimeType,
+        sha256: selected.sha256,
+        pixelWidth: selected.pixelWidth,
+        pixelHeight: selected.pixelHeight,
+        sourceArtifactRef: { artifactId: stableArtifactId(selected.bytes) },
       }
     })
     for (const media of groupMedia) {
       const mediaObservationId = `observation:source-media:${media.mediaId}`
       const mediaBytes = mediaById.get(media.mediaId).bytes
+      const inventory = mediaInventoryById.get(media.mediaId)
       source.observations.push({
         observationId: mediaObservationId,
         kind: 'source_media',
         documentInputKey: inputKeyForMedia(media.mediaId),
         value: {
           mediaId: media.mediaId,
-          sha256: media.sha256,
-          pixelWidth: media.pixelWidth,
-          pixelHeight: media.pixelHeight,
+          sha256: inventory.sha256,
+          pixelWidth: inventory.pixelWidth,
+          pixelHeight: inventory.pixelHeight,
+          ...(materialization.schemaVersion === NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V2
+            ? {
+                presentation: structuredClone(inventory.presentation),
+                publication: structuredClone(inventory.publication),
+              }
+            : {}),
         },
         span: { start: 0, end: mediaBytes.byteLength },
         extraction: {
           adapterId: 'nck1-source-materialization',
           version: '1',
-          recipe: mediaInventoryById.get(media.mediaId).extraction,
+          recipe: inventory.extraction,
         },
       })
+      if (inventory.publication?.candidate) {
+        const renditionBytes = mediaById.get(media.mediaId).renditionBytes
+        source.observations.push({
+          observationId: `observation:media-candidate:${media.mediaId}`,
+          kind: 'media_derivation_candidate',
+          documentInputKey: inputKeyForMediaRendition(media.mediaId),
+          value: {
+            mediaId: media.mediaId,
+            sourceSha256: inventory.sha256,
+            candidate: structuredClone(inventory.publication.candidate),
+            presentationDigest: digestJson(inventory.presentation),
+            selected: inventory.publication.selection !== 'source_crop',
+          },
+          span: { start: 0, end: renditionBytes.byteLength },
+          extraction: {
+            adapterId: 'nck1-source-materialization',
+            version: '1',
+          },
+        })
+      }
     }
     source.groups.push({
       paperId: materialization.paperId,
@@ -1186,7 +1329,7 @@ function compilerDocuments(input, materialization, source, instructionDocument) 
       bytes: new Uint8Array(input.materializationBytes),
       declared: {
         mediaType: NCK1_MATERIALIZATION_MEDIA_TYPE,
-        originalName: 'nck1-source-materialization-v1.json',
+        originalName: `${materialization.schemaVersion}.json`,
       },
     },
     ...input.documents.flatMap((entry) => {
@@ -1214,9 +1357,9 @@ function compilerDocuments(input, materialization, source, instructionDocument) 
       }))
       return [sourceDocument, ...pages]
     }),
-    ...input.media.map((entry) => {
+    ...input.media.flatMap((entry) => {
       const media = mediaById.get(entry.mediaId)
-      return {
+      const sourceDocument = {
         inputKey: inputKeyForMedia(entry.mediaId),
         roles: media.usage === 'content'
           ? ['source_media']
@@ -1227,6 +1370,20 @@ function compilerDocuments(input, materialization, source, instructionDocument) 
           originalName: `${media.mediaId.replace(/[^a-z0-9]+/gi, '-')}.${media.mimeType.split('/')[1].replace('jpeg', 'jpg')}`,
         },
       }
+      if (!media.publication?.candidate) return [sourceDocument]
+      const candidate = media.publication.candidate
+      return [sourceDocument, {
+        inputKey: inputKeyForMediaRendition(entry.mediaId),
+        roles: media.usage === 'content'
+          && media.publication.selection !== 'source_crop'
+          ? ['source_media', 'source_provenance']
+          : ['source_provenance'],
+        bytes: new Uint8Array(entry.renditionBytes),
+        declared: {
+          mediaType: candidate.mimeType,
+          originalName: `${media.mediaId.replace(/[^a-z0-9]+/gi, '-')}-candidate.${candidate.mimeType.split('/')[1].replace('jpeg', 'jpg')}`,
+        },
+      }]
     }),
     {
       inputKey: 'continuation_writing_instruction_evidence',
@@ -1332,6 +1489,12 @@ export function nck1MaterializationSourceSummary(derivation) {
       mediaId: entry.mediaId,
       sha256: sha256(entry.bytes),
       byteLength: entry.bytes.byteLength,
+      ...(entry.renditionBytes
+        ? {
+            renditionSha256: sha256(entry.renditionBytes),
+            renditionByteLength: entry.renditionBytes.byteLength,
+          }
+        : {}),
     })),
   }
 }

@@ -271,7 +271,7 @@ assert.deepEqual(
 )
 assert.equal(canonicalAuthorityRef.manifestVersion, '36')
 assert.equal(trustedDocxCandidateAuthorityRef.manifestVersion, '37')
-assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '47')
+assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '48')
 assert.equal(resolveCanonicalAuthority({
   manifestId: manifestV46.manifestId,
   manifestVersion: manifestV46.version,
@@ -302,11 +302,11 @@ assert.deepEqual(
   'NCK1 Candidate binds source-proven Seven Choices passage roles',
 )
 
-const publicV47 = compileCanonicalPaper({
+const publicV48 = compileCanonicalPaper({
   authority: nck1MaterializationCandidateAuthorityRef,
   evidence: { documents: [] },
 })
-assert(publicV47.artifacts.normalizationReport.diagnostics.some((item) =>
+assert(publicV48.artifacts.normalizationReport.diagnostics.some((item) =>
   item.code === 'AUTHORITY_RETIRED'))
 
 const confirmed = rederiveConfirmedCanonicalCandidate(

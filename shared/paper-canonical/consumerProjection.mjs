@@ -5,6 +5,7 @@ import {
 } from './abcdLayout.mjs'
 import { resolveCanonicalAuthority } from './authority.mjs'
 import { grammarFillPromptPrefix } from './grammarFillPromptContract.mjs'
+import { validateMediaPresentation } from './mediaPresentation.mjs'
 import { resolvePassageBlockRoles } from './passageBlockRoles.mjs'
 import { readingPassageLetterBySlotId } from './readingPassageLetter.mjs'
 import { digestJson, sha256, stableStringify } from './stable.mjs'
@@ -89,6 +90,9 @@ function projectReadingConsumerGroup(input, occurrence) {
   }
 
   const mediaById = new Map()
+  const presentationRequired = occurrence.media.some(
+    (media) => media?.presentation !== undefined,
+  )
   for (const media of occurrence.media) {
     if (
       !media
@@ -98,6 +102,10 @@ function projectReadingConsumerGroup(input, occurrence) {
       || !Number.isInteger(media.pixelWidth)
       || !Number.isInteger(media.pixelHeight)
       || typeof media.sourceArtifactRef?.artifactId !== 'string'
+      || (
+        presentationRequired
+        && !validateMediaPresentation(media.presentation)
+      )
       || mediaById.has(media.mediaId)
     ) {
       throw rejected(`Canonical Reading occurrence ${groupId} has invalid media closure`)
@@ -250,13 +258,16 @@ function projectReadingConsumerGroup(input, occurrence) {
         throw rejected(`Canonical Reading occurrence ${groupId} contains an unsupported framed_columns child`)
       }
       const resolvedMedia = resolveReadingMedia(block.mediaId, 'Figure')
+      const publicCaption = resolvedMedia.media.presentation
+        ? block.caption
+        : []
       return {
         kind: 'figure',
         nodeId: block.nodeId,
         mediaId: block.mediaId,
         ...resolvedMedia,
-        caption: textContent(block.caption),
-        captionInlines: structuredClone(block.caption),
+        caption: textContent(publicCaption),
+        captionInlines: structuredClone(publicCaption),
       }
     }
     if (block.kind === 'framed_columns') {
@@ -1077,7 +1088,7 @@ function selectOccurrence(input) {
     || familyContractId === 'grammar-fill'
     || (
       familyContractId === 'seven-choices'
-      && authorityRef?.manifestVersion === '47'
+      && ['47', '48'].includes(authorityRef?.manifestVersion)
     )
   if (requiresOccurrenceIntegrity) {
     const consumptionDigest = sha256(`${stableStringify(consumption)}\n`)
@@ -1220,7 +1231,7 @@ export function projectCanonicalConsumerGroup(input) {
 
   const seenBlanks = new Set()
   const passageRoles = familyContractId === 'seven-choices'
-    && input.consumption?.authorityRef?.manifestVersion === '47'
+    && ['47', '48'].includes(input.consumption?.authorityRef?.manifestVersion)
     ? resolvePassageBlockRoles(
         occurrence.content?.blocks,
         occurrence.passageBlockRoles,

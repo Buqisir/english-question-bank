@@ -756,6 +756,16 @@ function mediaFileName(media) {
   return `${media.mediaId.replaceAll(':', '__')}.${extension}`
 }
 
+function mediaCandidateFileName(media) {
+  const extension = ({
+    'image/png': 'png',
+    'image/jpeg': 'jpg',
+    'image/webp': 'webp',
+  })[media.publication?.candidate?.mimeType]
+  if (!extension) fail(`Unsupported Canonical media Candidate type: ${media.publication?.candidate?.mimeType}`)
+  return `${media.mediaId.replaceAll(':', '__')}--candidate.${extension}`
+}
+
 function loadInput(paperId) {
   const { paperDir, manifest } = paperContext(paperId)
   const materializationPath = path.join(paperDir, manifest.materializationPath)
@@ -777,7 +787,22 @@ function loadInput(paperId) {
     media: materialization.media.map((media) => {
       const mediaPath = path.join(paperDir, manifest.mediaDirectory, mediaFileName(media))
       if (!existsSync(mediaPath)) fail(`Materialized media is unavailable: ${media.mediaId}`)
-      return { mediaId: media.mediaId, bytes: new Uint8Array(readFileSync(mediaPath)) }
+      if (!media.publication?.candidate) {
+        return { mediaId: media.mediaId, bytes: new Uint8Array(readFileSync(mediaPath)) }
+      }
+      const renditionPath = path.join(
+        paperDir,
+        manifest.mediaDirectory,
+        mediaCandidateFileName(media),
+      )
+      if (!existsSync(renditionPath)) {
+        fail(`Materialized media Candidate is unavailable: ${media.mediaId}`)
+      }
+      return {
+        mediaId: media.mediaId,
+        bytes: new Uint8Array(readFileSync(mediaPath)),
+        renditionBytes: new Uint8Array(readFileSync(renditionPath)),
+      }
     }),
   }
 }

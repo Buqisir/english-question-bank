@@ -1,9 +1,11 @@
+import { execFileSync } from 'node:child_process'
+
 import { extractDocxDocumentStructure } from '../paper-canonical/docxSourceAdapter.mjs'
 import { validateNck1SourceMaterialization } from '../../shared/paper-canonical/nck1SourceMaterialization.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 export const NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION =
-  'nck1-docx-materialization-producer-v3'
+  'nck1-docx-materialization-producer-v4'
 
 const DOCX = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 const BLANK = /(?:\d{1,3}[.．、]?\p{Zs}*)?_{2,}\d{0,3}_{0,}/gu
@@ -175,10 +177,10 @@ function tableBlock({ paperId, slotId, item, index, documentId, issues }) {
     item.nestedTableCount > 0
     || item.rows.length === 0
     || item.rows.some((row) => row.cells.length === 0 || row.cells.some((cell) =>
-      cell.containsDrawing
+      (cell.containsDrawing && !cell.materializedMedia)
       || cell.containsNestedTable
       || cell.verticalMerge !== null
-      || normalized(cell.text).length === 0))
+      || (normalized(cell.text).length === 0 && !cell.materializedMedia)))
   ) {
     addIssue(issues, 'NCK1_DOCX_TABLE_REVIEW_REQUIRED',
       `groups.${slotId}.blocks[${index}]`,
@@ -200,9 +202,15 @@ function tableBlock({ paperId, slotId, item, index, documentId, issues }) {
             columnSpan: cell.columnSpan,
             rowSpan: 1,
             role: row.header ? 'header' : 'data',
-            content: normalized(cell.text)
-              ? [{ kind: 'text', text: trimEdgeSpaces(cell.text) }]
-              : [{ kind: 'text', text: '[Agent confirmation required]' }],
+            content: cell.materializedMedia
+              ? [{
+                  kind: 'media_ref',
+                  mediaId: cell.materializedMedia.mediaId,
+                  alt: '',
+                }]
+              : normalized(cell.text)
+                ? [{ kind: 'text', text: trimEdgeSpaces(cell.text) }]
+                : [{ kind: 'text', text: '[Agent confirmation required]' }],
           }
           columnStart += cell.columnSpan
           return value
@@ -222,13 +230,22 @@ function tableBlock({ paperId, slotId, item, index, documentId, issues }) {
 
 function contentBlocks(items, context) {
   return items.flatMap((item, index) => {
-    if (item.kind === 'paragraph' && normalized(item.text).length === 0) return []
     if (item.kind === 'paragraph' && item.containsDrawing) {
+      if (item.materializedMedia && normalized(item.text).length === 0) {
+        return [{
+          kind: 'figure',
+          blockId: `block:${context.paperId}:${context.slotId.replaceAll('.', '-')}:figure-${item.sourceIndex}`,
+          mediaId: item.materializedMedia.mediaId,
+          caption: '',
+          source: sourceLocator(context.documentId, item.sourceIndex),
+        }]
+      }
       addIssue(context.issues, 'NCK1_DOCX_VISUAL_REVIEW_REQUIRED',
         `groups.${context.slotId}.blocks[${index}]`,
         'A source paragraph contains a drawing that requires Agent visual confirmation',
         sourceRef(context.documentId, item.sourceIndex))
     }
+    if (item.kind === 'paragraph' && normalized(item.text).length === 0) return []
     return [item.kind === 'table'
       ? tableBlock({ ...context, item, index })
       : paragraphBlock({ ...context, item, index })]
@@ -768,6 +785,138 @@ function documentRecord(document) {
   }
 }
 
+function identifyEmbeddedMedia(bytes, declaredMimeType) {
+  const [pixelWidth, pixelHeight, format] = execFileSync(
+    'magick', ['identify', '-format', '%w,%h,%m', '-'], {
+      encoding: 'utf8',
+      input: bytes,
+    },
+  ).split(',')
+  const mimeType = ({ PNG: 'image/png', JPEG: 'image/jpeg', WEBP: 'image/webp' })[format]
+  if (
+    mimeType !== declaredMimeType
+    || !Number.isInteger(Number(pixelWidth))
+    || Number(pixelWidth) < 1
+    || !Number.isInteger(Number(pixelHeight))
+    || Number(pixelHeight) < 1
+  ) throw new Error('Embedded media bytes do not match their supported image declaration')
+  return {
+    pixelWidth: Number(pixelWidth),
+    pixelHeight: Number(pixelHeight),
+  }
+}
+
+function prepareDocxEmbeddedMedia({ paperId, structure, documentId, issues }) {
+  const media = []
+  const mediaFiles = []
+  let ordinal = 0
+  const prepare = (owner, path, text) => {
+    if (!owner.containsDrawing) return
+    const candidates = owner.embeddedMedia || []
+    if (candidates.length !== 1 || normalized(text)) {
+      addIssue(
+        issues,
+        'NCK1_DOCX_MEDIA_ASSOCIATION_AMBIGUOUS',
+        path,
+        'A DOCX media placement must be one image-only source paragraph or table cell',
+        sourceRef(documentId, candidates[0]?.sourceIndex),
+      )
+      return
+    }
+    const candidate = candidates[0]
+    if (!candidate.supported) {
+      const layoutUnsupported = candidate.drawingMode === 'anchor'
+        || candidate.presentation === null
+      addIssue(
+        issues,
+        layoutUnsupported
+          ? 'NCK1_DOCX_MEDIA_LAYOUT_UNSUPPORTED'
+          : 'NCK1_DOCX_MEDIA_ASSOCIATION_AMBIGUOUS',
+        path,
+        layoutUnsupported
+          ? 'Anchored, oversized, unusually spaced, or nonstandard-aligned DOCX media is outside the shared layout intent'
+          : 'DOCX media must bind one internal PNG/JPEG/WebP relationship and exact extent',
+        sourceRef(documentId, candidate.sourceIndex),
+      )
+      return
+    }
+    let dimensions
+    try {
+      dimensions = identifyEmbeddedMedia(candidate.bytes, candidate.mimeType)
+    } catch (error) {
+      addIssue(
+        issues,
+        'NCK1_DOCX_MEDIA_ASSOCIATION_AMBIGUOUS',
+        path,
+        error.message,
+        sourceRef(documentId, candidate.sourceIndex),
+      )
+      return
+    }
+    ordinal += 1
+    const mediaId = `media:${paperId}:docx-${candidate.sourceIndex}-${ordinal}`
+    owner.materializedMedia = { mediaId }
+    media.push({
+      mediaId,
+      usage: 'content',
+      kind: 'figure',
+      mimeType: candidate.mimeType,
+      sha256: sha256(candidate.bytes),
+      ...dimensions,
+      extraction: {
+        kind: 'docx_media',
+        documentId,
+        entryName: candidate.entryName,
+      },
+      presentation: structuredClone(candidate.presentation),
+      publication: {
+        selection: 'source_crop',
+        sourceSha256: sha256(candidate.bytes),
+      },
+    })
+    mediaFiles.push({ mediaId, bytes: candidate.bytes })
+  }
+  for (const [bodyIndex, item] of structure.body.entries()) {
+    if (item.kind === 'paragraph') {
+      prepare(item, `documents.${documentId}.body[${bodyIndex}]`, item.text)
+      continue
+    }
+    for (const [rowIndex, row] of item.rows.entries()) {
+      for (const [cellIndex, cell] of row.cells.entries()) {
+        prepare(
+          cell,
+          `documents.${documentId}.tables[${item.tableIndex}].rows[${rowIndex}].cells[${cellIndex}]`,
+          cell.text,
+        )
+      }
+    }
+  }
+  return { media, mediaFiles }
+}
+
+function referencedGroupMediaIds(groups) {
+  const ids = new Set()
+  const visitBlocks = (blocks) => {
+    for (const block of blocks || []) {
+      if (block.kind === 'figure') ids.add(block.mediaId)
+      if (block.kind === 'table') {
+        for (const row of block.rows) {
+          for (const cell of row.cells) {
+            for (const item of cell.content) {
+              if (item.kind === 'media_ref') ids.add(item.mediaId)
+            }
+          }
+        }
+      }
+      if (block.kind === 'framed_columns') {
+        for (const column of block.columns) visitBlocks(column.blocks)
+      }
+    }
+  }
+  for (const candidate of groups) visitBlocks(candidate.blocks)
+  return ids
+}
+
 export function nck1DocxProducerSourceDigest(documents) {
   return digestJson({
     producerVersion: NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION,
@@ -802,6 +951,8 @@ export function produceNck1MaterializationFromStructures({
   producerVersion,
   reviewSchemaVersion,
   sourceDigest,
+  mediaInventory = [],
+  mediaFiles = [],
 }) {
   const body = questionStructure.body
   const answerBody = answerStructure.body
@@ -875,6 +1026,19 @@ export function produceNck1MaterializationFromStructures({
       'Semantic table page locations require Agent confirmation for multi-page renditions',
       sourceRef(coverage.documentId))
   }
+  const referencedMediaIds = referencedGroupMediaIds(groups)
+  for (const item of mediaInventory) {
+    if (referencedMediaIds.has(item.mediaId)) continue
+    addIssue(
+      issues,
+      'NCK1_DOCX_MEDIA_ASSOCIATION_AMBIGUOUS',
+      `media.${item.mediaId}`,
+      'A DOCX image was captured but could not be associated with one Canonical question group',
+      sourceRef(item.extraction.documentId),
+    )
+  }
+  const selectedMedia = mediaInventory.filter((item) => referencedMediaIds.has(item.mediaId))
+  const selectedMediaFiles = mediaFiles.filter((item) => referencedMediaIds.has(item.mediaId))
   const sourceCoverage = {
     documentId: coverage?.documentId || 'unresolved-question-rendition',
     reviewedPages: coverage
@@ -894,6 +1058,14 @@ export function produceNck1MaterializationFromStructures({
         return visual
       }),
       ...sourceVisuals.map((visual) => structuredClone(visual)),
+      ...(coverage?.pageCount === 1
+        ? selectedMedia.map((item, index) => ({
+            visualId: `visual:${paperId}:media-${index + 1}`,
+            page: 1,
+            disposition: 'content_media',
+            targetId: item.mediaId,
+          }))
+        : []),
     ],
   }
   const listening = !question || !answer || readingStart === null
@@ -904,13 +1076,15 @@ export function produceNck1MaterializationFromStructures({
         coverageDocumentId: sourceCoverage.documentId, issues,
       })
   const materialization = {
-    schemaVersion: 'nck1-source-materialization-v1',
+    schemaVersion: selectedMedia.length > 0
+      ? 'nck1-source-materialization-v2'
+      : 'nck1-source-materialization-v1',
     paperId,
     profileId: 'nck1',
     documents: documents.map(documentRecord),
     groups,
     answers,
-    media: [],
+    media: selectedMedia,
     sourceCoverage,
     listening,
     issues: carrierIssues(issues, codePrefix),
@@ -925,6 +1099,7 @@ export function produceNck1MaterializationFromStructures({
   return {
     disposition: issues.length === 0 ? 'ready_for_verification' : 'needs_agent_review',
     materialization,
+    mediaFiles: selectedMediaFiles,
     review: {
       schemaVersion: reviewSchemaVersion,
       paperId,
@@ -1010,6 +1185,14 @@ export function produceNck1DocxMaterialization({ paperId, documents }) {
     addIssue(issues, 'NCK1_DOCX_ANSWER_TABLE_REVIEW_REQUIRED', 'documents.official_answers',
       'Official answers in DOCX tables require Agent confirmation', sourceRef(answer?.documentId))
   }
+  const preparedMedia = question
+    ? prepareDocxEmbeddedMedia({
+        paperId,
+        structure: questionStructure,
+        documentId: question.documentId,
+        issues,
+      })
+    : { media: [], mediaFiles: [] }
   return produceNck1MaterializationFromStructures({
     paperId,
     documents,
@@ -1023,5 +1206,7 @@ export function produceNck1DocxMaterialization({ paperId, documents }) {
     producerVersion: NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION,
     reviewSchemaVersion: 'nck1-docx-materialization-review-v1',
     sourceDigest: nck1DocxProducerSourceDigest(documents),
+    mediaInventory: preparedMedia.media,
+    mediaFiles: preparedMedia.mediaFiles,
   })
 }

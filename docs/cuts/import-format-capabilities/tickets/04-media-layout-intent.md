@@ -1,8 +1,8 @@
 # 04 — Universal media capture 与最小布局意图
 
-- Status: planned
-- Blocked by: `01-source-region-review-pairing.md`
-- Next on PASS: `05-table-presentation-intent.md`
+- Status: partial implementation（DOCX direct embedded media、共享布局投影和媒体人工确认门禁已实现；PDF producer自动取图与普通表格图片fallback分类仍待后续）
+- Blocked by: `01-source-region-review-pairing.md`（已实现）
+- Next after the remaining gaps: `05-table-presentation-intent.md`
 
 - Spec: `docs/cuts/import-format-capabilities/spec.md`
 - Matrix rows: B06, M01–M06, V01–V02, R03–R04
@@ -54,27 +54,50 @@ rendition。能结构化的普通表不允许走整图 fallback。
 
 ## Fail closed
 
-`NCK1_DOCX_MEDIA_ASSOCIATION_AMBIGUOUS`, `MATERIALIZATION_MEDIA_LAYOUT_UNSUPPORTED`,
-`MATERIALIZATION_MEDIA_LAYOUT_INVALID`, `MATERIALIZATION_STRUCTURABLE_TABLE_AS_MEDIA_FORBIDDEN`；
-继续复用 recipe/digest/dimension与placement codes。AI 候选至少新增 source-binding、
-confirmation-required、stale-confirmation 三类稳定 code；跨栏/浮动/文本环绕不在v1枚举内
-即拒绝。水印或授权不明确时不能把图送入 publication；技术增强不能把它转成“可授权”。
+`NCK1_DOCX_MEDIA_ASSOCIATION_AMBIGUOUS`, `NCK1_DOCX_MEDIA_LAYOUT_UNSUPPORTED`,
+`MATERIALIZATION_MEDIA_PRESENTATION_INVALID`, `MATERIALIZATION_MEDIA_PUBLICATION_INVALID`；
+候选bytes另用`MATERIALIZATION_MEDIA_RENDITION_*`，确定性重放另用
+`MATERIALIZATION_MEDIA_ENHANCEMENT_REPLAY_*`。Owner确认使用
+`IMPORT_REVIEW_MEDIA_CHECKLIST_INCOMPLETE`, `IMPORT_REVIEW_MEDIA_IDENTITY_MISMATCH`,
+`IMPORT_REVIEW_MEDIA_CONFIRMATION_REQUIRED`, `IMPORT_REVIEW_MEDIA_CONFIRMATION_STALE`。
+跨栏/浮动/文本环绕以`NCK1_DOCX_MEDIA_LAYOUT_UNSUPPORTED`拒绝；图片与文字或多个图片的
+归属不唯一以`NCK1_DOCX_MEDIA_ASSOCIATION_AMBIGUOUS`拒绝。水印或授权不明确时不能把图
+送入 publication；技术增强不能把它转成“可授权”。普通表格图片fallback的专用classifier
+和stable code尚未实现，因此这张ticket还不能标记完整PASS。
 
 ## Acceptance criteria
 
-- [ ] DOCX embedded bytes和PDF crop均可exact replay；改一像素/digest/recipe失败。
-- [ ] block order、alignment、widthRatio与spacing经一份projection进入三面；无per-surface inference。
-- [ ] table-cell icon保持inline；block figure不被renderer统一放大到100%。
+- [ ] DOCX embedded bytes和PDF crop均可exact replay；改一像素/digest/recipe失败。（DOCX及
+  adapter已有PDF crop replay已通过；PDF producer尚不会自动发现、裁剪并关联正文图）
+- [x] block order、alignment、widthRatio与spacing经一份projection进入三面；无per-surface inference。
+- [x] table-cell icon保持inline；block figure不被renderer统一放大到100%。
 - [ ] 可矩形化表的media fallback被拒绝；复杂图形crop仍允许。
-- [ ] `/ops/`可从真实figure/inline media回source crop并将问题绑定media/content node。
-- [ ] 源卷学生可见 caption三面一致；QA metadata不泄漏到学生输出。
-- [ ] 清晰图只裁剪，不生成；低清图证明确定性增强优先，AI 候选不覆盖原图。
-- [ ] AI 候选未经 exact human confirmation 不进入 Candidate；原图/候选任一 digest 或确认
+- [x] `/ops/`可从真实figure/inline media回source crop并将问题绑定media/content node。
+- [x] 源卷学生可见 caption三面一致；QA metadata不泄漏到学生输出。
+- [x] 清晰图只裁剪，不生成；低清图证明确定性增强优先，AI 候选不覆盖原图。
+- [x] AI 候选未经 exact human confirmation 不进入 Candidate；原图/候选任一 digest 或确认
   清单变化都会使确认失效。
-- [ ] 确认后的唯一 rendition 与同一 layout intent 进入 Screen、两种 Print 和 PDF；三面
+- [x] 确认后的唯一 rendition 与同一 layout intent 进入 Screen、两种 Print 和 PDF；三面
   image digest 一致。
 - [ ] 改错文字、数字、单位、箭头、图例、节点或曲线关系的候选均 fail closed；不得用
-  候选擦水印或代替来源授权。
+  候选擦水印或代替来源授权。（当前用11项Owner逐项确认门禁诚实fail closed，不声称代码
+  能自动判断生成图的语义一致性；自动classifier也不能代替来源授权。）
+
+## Implemented evidence and remaining gap
+
+- Source Materialization v2与authority v48扩现有`media`，没有另建平行模型。
+- DOCX producer只接受一个image-only inline PNG/JPEG/WebP paragraph或cell，直接读取包内
+  原bytes、extent、正文宽、对齐与有限spacing；anchor、多栏/不一致section、题组外图片、
+  混合文字、多图和不唯一关系拒绝。
+- Materialization把source与candidate当独立immutable artifacts；确定性增强按固定
+  ImageMagick recipe重放。`source_crop`选择时AI候选只供Review，不会偷换publication。
+- Screen、两种Print和PDF共用一个presentation；相对宽度以阅读正文container为基准，
+  包括table-cell media。学生可见caption显示，legacy provenance caption继续隐藏。
+- `/ops/`支持原图/候选并排、overlay、11项清单和单图Owner receipt；下一revision选择AI
+  candidate时必须引用更早revision的exact receipt，Agent不能伪造确认。
+- **未完成**：text-layer PDF producer仍在遇embedded raster时fail closed；尚无自动局部
+  crop/正文关联。也没有通用classifier证明一个图片不是可语义化普通表格。这两项继续
+  保持`partial`，不以手工录入或一张真卷成功冒充supported。
 
 ## Non-goals
 
@@ -86,10 +109,9 @@ confirmation-required、stale-confirmation 三类稳定 code；跨栏/浮动/文
 ```bash
 node scripts/verify-paper-canonical-nck1-materialization-candidate.mjs
 node scripts/verify-paper-canonical-mixed-table-media.mjs
-node scripts/verify-docx-source-media-input.mjs
+node scripts/verify-nck1-docx-materialization-producer.mjs
 node scripts/verify-import-review-source-pairing.mjs
 node scripts/verify-import-review-media-derivation.mjs
-node scripts/verify-universal-nck1-candidate-surfaces.mjs paper-synthetic-media-layout
 pnpm -C app verify:paper
 pnpm -C app verify:all
 ```

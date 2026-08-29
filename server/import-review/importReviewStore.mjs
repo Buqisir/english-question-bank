@@ -8,6 +8,7 @@ import {
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 
+import { MEDIA_AI_CONFIRMATION_CHECKS } from '../../shared/paper-canonical/mediaPresentation.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import {
   buildImportReviewProjection,
@@ -274,6 +275,8 @@ function ensureShape(db) {
       group_id TEXT,
       question_id TEXT,
       block_id TEXT,
+      media_id TEXT,
+      content_node_id TEXT,
       page_number INTEGER,
       rect_json TEXT,
       message TEXT NOT NULL,
@@ -292,6 +295,19 @@ function ensureShape(db) {
       message TEXT NOT NULL,
       created_at TEXT NOT NULL
     );
+    CREATE TABLE IF NOT EXISTS import_review_media_confirmations (
+      id TEXT PRIMARY KEY,
+      paper_id TEXT NOT NULL REFERENCES import_review_papers(paper_id) ON DELETE CASCADE,
+      revision_id TEXT NOT NULL REFERENCES import_review_revisions(id) ON DELETE CASCADE,
+      media_id TEXT NOT NULL,
+      source_sha256 TEXT NOT NULL,
+      candidate_sha256 TEXT NOT NULL,
+      presentation_digest TEXT NOT NULL,
+      receipt_json TEXT NOT NULL,
+      confirmed_by TEXT NOT NULL,
+      confirmed_at TEXT NOT NULL,
+      UNIQUE(revision_id, media_id, source_sha256, candidate_sha256, presentation_digest)
+    );
     CREATE TABLE IF NOT EXISTS import_review_shipping_guards (
       id TEXT PRIMARY KEY,
       paper_id TEXT NOT NULL UNIQUE REFERENCES import_review_papers(paper_id) ON DELETE CASCADE,
@@ -305,6 +321,14 @@ function ensureShape(db) {
     CREATE INDEX IF NOT EXISTS idx_import_review_issues_paper
       ON import_review_issues(paper_id, state, created_at);
   `)
+  const issueColumns = new Set(db.prepare('PRAGMA table_info(import_review_issues)').all()
+    .map((column) => column.name))
+  if (!issueColumns.has('media_id')) {
+    db.exec('ALTER TABLE import_review_issues ADD COLUMN media_id TEXT')
+  }
+  if (!issueColumns.has('content_node_id')) {
+    db.exec('ALTER TABLE import_review_issues ADD COLUMN content_node_id TEXT')
+  }
 }
 
 function revisionRow(row) {
@@ -340,6 +364,8 @@ function issueRow(row) {
     groupId: row.group_id,
     questionId: row.question_id,
     blockId: row.block_id,
+    mediaId: row.media_id,
+    contentNodeId: row.content_node_id,
     pageNumber: row.page_number,
     rect: parseJson(row.rect_json),
     message: row.message,
@@ -620,6 +646,44 @@ export function createImportReviewStore({
     }
   }
 
+  function assertSelectedMediaConfirmations(db, projection, revision) {
+    for (const derivation of projection.mediaDerivations || []) {
+      if (derivation.publication?.selection !== 'human_confirmed_ai_candidate') {
+        continue
+      }
+      const confirmation = derivation.publication.confirmation
+      const row = db.prepare(`
+        SELECT revision_id, receipt_json
+        FROM import_review_media_confirmations
+        WHERE id = ? AND paper_id = ? AND media_id = ?
+      `).get(
+        confirmation?.receiptId,
+        revision.paperId,
+        derivation.mediaId,
+      )
+      if (!row || row.revision_id === revision.id) {
+        throw storeError(
+          'IMPORT_REVIEW_MEDIA_CONFIRMATION_REQUIRED',
+          `Media ${derivation.mediaId} requires an Owner confirmation from an earlier revision`,
+        )
+      }
+      const receipt = parseJson(row.receipt_json)
+      if (
+        receipt?.confirmationId !== confirmation.receiptId
+        || receipt.sourceSha256 !== derivation.source?.sha256
+        || receipt.candidateSha256 !== derivation.candidate?.sha256
+        || receipt.presentationDigest !== derivation.presentationDigest
+        || receipt.reviewMethod !== confirmation.reviewMethod
+        || digestJson(receipt.checklist) !== digestJson(confirmation.checklist)
+      ) {
+        throw storeError(
+          'IMPORT_REVIEW_MEDIA_CONFIRMATION_STALE',
+          `Media ${derivation.mediaId} confirmation no longer matches its source, Candidate, or layout intent`,
+        )
+      }
+    }
+  }
+
   function finalizeRevision(revisionId) {
     const status = uploadStatus(revisionId)
     if (status.revision.state !== 'uploading') return status.revision
@@ -647,6 +711,7 @@ export function createImportReviewStore({
           db.exec('COMMIT')
           return
         }
+        assertSelectedMediaConfirmations(db, projection, current)
         const newerFinalized = db.prepare(`
           SELECT id FROM import_review_revisions
           WHERE paper_id = ? AND revision_number > ? AND state <> 'uploading'
@@ -742,6 +807,12 @@ export function createImportReviewStore({
       WHERE i.paper_id = ?
       ORDER BY m.created_at
     `).all(paperId).map(issueMessageRow))
+    const mediaConfirmations = withDb(false, (db) => db.prepare(`
+      SELECT receipt_json
+      FROM import_review_media_confirmations
+      WHERE paper_id = ?
+      ORDER BY confirmed_at DESC
+    `).all(paperId).map((row) => parseJson(row.receipt_json)))
     const latest = revisions.find((revision) => revision.id === paper.latest_revision_id) || null
     const files = latest
       ? withDb(false, (db) => db.prepare(`
@@ -753,6 +824,15 @@ export function createImportReviewStore({
       : null
     const visibleStructure = latestProjection?.consumption?.visibleStructure || []
     const sourceVisuals = latestProjection?.sourceVisuals || []
+    const mediaDerivations = (latestProjection?.mediaDerivations || []).map(
+      ({ source, candidate, ...derivation }) => ({
+        ...derivation,
+        source: { ...source, encodedBytes: undefined },
+        ...(candidate
+          ? { candidate: { ...candidate, encodedBytes: undefined } }
+          : {}),
+      }),
+    )
     const rendererStale = Boolean(
       latest?.reviewKind === 'candidate'
       && latest.rendererBuildId
@@ -769,6 +849,8 @@ export function createImportReviewStore({
       files,
       visibleStructure,
       sourceVisuals,
+      mediaDerivations,
+      mediaConfirmations,
       ocrReview: latestProjection?.ocrReview || null,
       rendererStale,
       unresolvedCount: issues.filter((issue) => UNRESOLVED_ISSUE_STATES.has(issue.state)).length,
@@ -818,13 +900,22 @@ export function createImportReviewStore({
     const groupId = optionalString(input.groupId, 200)
     const questionId = optionalString(input.questionId, 200)
     const blockId = optionalString(input.blockId, 200)
+    const mediaId = optionalString(input.mediaId, 200)
+    const contentNodeId = optionalString(input.contentNodeId, 200)
     const pageNumber = input.pageNumber == null || input.pageNumber === ''
       ? null
       : Number(input.pageNumber)
     if (pageNumber !== null && (!Number.isInteger(pageNumber) || pageNumber < 1 || pageNumber > 1000)) {
       throw storeError('IMPORT_REVIEW_PAGE_INVALID', 'Issue page is invalid', 400)
     }
-    if (!groupId && !questionId && !blockId && pageNumber === null) {
+    if (
+      !groupId
+      && !questionId
+      && !blockId
+      && !mediaId
+      && !contentNodeId
+      && pageNumber === null
+    ) {
       throw storeError('IMPORT_REVIEW_TARGET_REQUIRED', 'Issue needs a semantic target or page', 400)
     }
     const rect = normalizeRect(input.rect)
@@ -857,8 +948,9 @@ export function createImportReviewStore({
         db.prepare(`
           INSERT INTO import_review_issues (
             id, paper_id, revision_id, surface, group_id, question_id, block_id,
-            page_number, rect_json, message, state, created_by, created_at, updated_at
-          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'open', ?, ?, ?)
+            media_id, content_node_id, page_number, rect_json, message, state,
+            created_by, created_at, updated_at
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'open', ?, ?, ?)
         `).run(
           id,
           paperId,
@@ -867,6 +959,8 @@ export function createImportReviewStore({
           groupId,
           questionId,
           blockId,
+          mediaId,
+          contentNodeId,
           pageNumber,
           rect ? JSON.stringify(rect) : null,
           message,
@@ -888,6 +982,139 @@ export function createImportReviewStore({
       }
     })
     return paperDetail(paperId)
+  }
+
+  function confirmMediaDerivation(paperId, revisionId, input, actor) {
+    const bundleDigest = requiredString(input?.bundleDigest, 'bundleDigest', 160)
+    const mediaId = requiredString(input?.mediaId, 'mediaId', 200)
+    const sourceSha256 = requiredString(input?.sourceSha256, 'sourceSha256', 80)
+    const candidateSha256 = requiredString(input?.candidateSha256, 'candidateSha256', 80)
+    const presentationDigest = requiredString(
+      input?.presentationDigest,
+      'presentationDigest',
+      80,
+    )
+    if (
+      !input?.checklist
+      || typeof input.checklist !== 'object'
+      || Array.isArray(input.checklist)
+      || Object.keys(input.checklist).length !== MEDIA_AI_CONFIRMATION_CHECKS.length
+      || MEDIA_AI_CONFIRMATION_CHECKS.some((key) => input.checklist[key] !== true)
+    ) {
+      throw storeError(
+        'IMPORT_REVIEW_MEDIA_CHECKLIST_INCOMPLETE',
+        'Every media fidelity and source-authority check must be confirmed',
+        400,
+      )
+    }
+    const revision = getRevision(revisionId)
+    if (
+      !revision
+      || revision.paperId !== paperId
+      || revision.bundleDigest !== bundleDigest
+      || !['awaiting_review', 'changes_requested'].includes(revision.state)
+    ) {
+      throw storeError(
+        'IMPORT_REVIEW_MEDIA_REVISION_STALE',
+        'Media confirmation must bind the latest reviewable revision',
+      )
+    }
+    const latest = paperDetail(paperId)
+    if (latest.latestRevisionId !== revisionId) {
+      throw storeError(
+        'IMPORT_REVIEW_MEDIA_REVISION_STALE',
+        'Media confirmation must bind the latest reviewable revision',
+      )
+    }
+    const { projection } = projectionForRevision(revisionId)
+    const derivation = projection.mediaDerivations?.find((candidate) =>
+      candidate.mediaId === mediaId)
+    if (
+      !derivation?.candidate
+      || derivation.candidate.kind !== 'ai_assisted_redraw'
+      || derivation.publication.selection !== 'source_crop'
+      || derivation.source.sha256 !== sourceSha256
+      || derivation.candidate.sha256 !== candidateSha256
+      || derivation.presentationDigest !== presentationDigest
+    ) {
+      throw storeError(
+        'IMPORT_REVIEW_MEDIA_IDENTITY_MISMATCH',
+        'Media confirmation does not match the immutable source, Candidate, and layout intent',
+        400,
+      )
+    }
+    const confirmedAt = nowIso()
+    const confirmedBy = requiredString(actor, 'actor', 200)
+    const confirmationId = `media-confirmation-${randomUUID()}`
+    const receipt = {
+      schemaVersion: 'web-import-media-confirmation-v1',
+      confirmationId,
+      paperId,
+      revisionId,
+      bundleDigest,
+      mediaId,
+      sourceSha256,
+      candidateSha256,
+      presentationDigest,
+      reviewMethod: 'side_by_side_overlay',
+      checklist: Object.fromEntries(MEDIA_AI_CONFIRMATION_CHECKS.map((key) => [key, true])),
+      confirmedBy,
+      confirmedAt,
+    }
+    return withDb(true, (db) => {
+      const existing = db.prepare(`
+        SELECT receipt_json
+        FROM import_review_media_confirmations
+        WHERE revision_id = ? AND media_id = ? AND source_sha256 = ?
+          AND candidate_sha256 = ? AND presentation_digest = ?
+      `).get(
+        revisionId,
+        mediaId,
+        sourceSha256,
+        candidateSha256,
+        presentationDigest,
+      )
+      if (existing) return parseJson(existing.receipt_json)
+      db.prepare(`
+        INSERT INTO import_review_media_confirmations (
+          id, paper_id, revision_id, media_id, source_sha256,
+          candidate_sha256, presentation_digest, receipt_json,
+          confirmed_by, confirmed_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `).run(
+        confirmationId,
+        paperId,
+        revisionId,
+        mediaId,
+        sourceSha256,
+        candidateSha256,
+        presentationDigest,
+        JSON.stringify(receipt),
+        confirmedBy,
+        confirmedAt,
+      )
+      return receipt
+    })
+  }
+
+  function mediaConfirmation(revisionId, mediaId) {
+    return withDb(false, (db) => {
+      const row = db.prepare(`
+        SELECT receipt_json
+        FROM import_review_media_confirmations
+        WHERE revision_id = ? AND media_id = ?
+        ORDER BY confirmed_at DESC
+        LIMIT 1
+      `).get(revisionId, mediaId)
+      if (!row) {
+        throw storeError(
+          'IMPORT_REVIEW_MEDIA_CONFIRMATION_PENDING',
+          'Media confirmation is not available',
+          404,
+        )
+      }
+      return parseJson(row.receipt_json)
+    })
   }
 
   function updateIssue(paperId, issueId, input) {
@@ -1268,12 +1495,14 @@ export function createImportReviewStore({
     agentPaperStatus,
     completeFileUpload,
     confirmOcrRevision,
+    confirmMediaDerivation,
     createIssue,
     createRevision,
     fileForUpload,
     finalizeRevision,
     getRevision,
     listPapers,
+    mediaConfirmation,
     paperDetail,
     projectionForRevision,
     releaseShippingGuard,

@@ -537,11 +537,17 @@ function renderCanonicalSharedBank(canonicalGroup, {
   return `<div class="canonical-option-bank-region" data-canonical-bank-heading-state="${headingHtml ? 'present' : 'absent'}">${headingHtml}<ol class="canonical-option-bank" data-canonical-bank-id="${escapeHtml(bankId)}" data-canonical-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}">${optionHtml}</ol></div>`
 }
 
+function canonicalMediaPresentationAttributes(media) {
+  const presentation = media?.presentation
+  if (!presentation) return ''
+  return ` data-canonical-media-alignment="${presentation.alignment}" data-canonical-media-spacing-before="${presentation.spacingBefore}" data-canonical-media-spacing-after="${presentation.spacingAfter}" style="--canonical-media-width-ratio:${presentation.widthRatio}"`
+}
+
 function renderCanonicalInlineNodes(nodes) {
   return nodes.map((node) => {
     if (node.kind === 'media_ref') {
       const src = `data:${node.mediaArtifact.mimeType};base64,${node.mediaArtifact.encodedBytes}`
-      return `<img class="canonical-reading-table-media" data-canonical-content-node-id="${escapeHtml(node.nodeId)}" data-canonical-media-id="${escapeHtml(node.mediaId)}" src="${escapeHtml(src)}" alt="${escapeHtml(node.alt)}">`
+      return `<img class="canonical-reading-table-media" data-canonical-content-node-id="${escapeHtml(node.nodeId)}" data-canonical-media-id="${escapeHtml(node.mediaId)}"${canonicalMediaPresentationAttributes(node.media)} src="${escapeHtml(src)}" alt="${escapeHtml(node.alt)}">`
     }
     return `<span data-canonical-content-node-id="${escapeHtml(node.nodeId)}">${escapeHtml(node.text)}</span>`
   }).join('')
@@ -624,7 +630,10 @@ function renderCanonicalReadingBlock(block) {
   }
   if (block.kind === 'figure') {
     const src = `data:${block.mediaArtifact.mimeType};base64,${block.mediaArtifact.encodedBytes}`
-    return `<figure class="canonical-reading-figure" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="figure" data-canonical-media-id="${escapeHtml(block.mediaId)}"><img src="${escapeHtml(src)}" alt=""></figure>`
+    const caption = block.caption
+      ? `<figcaption>${renderCanonicalInlineNodes(block.captionInlines)}</figcaption>`
+      : ''
+    return `<figure class="canonical-reading-figure" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="figure" data-canonical-media-id="${escapeHtml(block.mediaId)}"${canonicalMediaPresentationAttributes(block.media)}><img src="${escapeHtml(src)}" alt=""${canonicalMediaPresentationAttributes(block.media)}>${caption}</figure>`
   }
   rejectCanonicalPrint(
     `Canonical Reading block ${block?.kind || 'unknown'} is not representable`,
@@ -2574,6 +2583,10 @@ body {
   text-align: center;
 }
 
+.canonical-reading {
+  container-type: inline-size;
+}
+
 .canonical-reading-table {
   width: 100%;
   margin: 0;
@@ -2592,10 +2605,23 @@ body {
   display: inline-block;
   max-width: 100%;
   max-height: 4em;
-  width: auto;
+  width: min(100%, calc(var(--canonical-media-width-ratio) * 100cqw));
   height: auto;
   object-fit: contain;
   vertical-align: middle;
+}
+
+.canonical-reading-table-media[data-canonical-media-alignment="center"],
+.canonical-reading-table-media[data-canonical-media-alignment="right"] {
+  display: block;
+}
+
+.canonical-reading-table-media[data-canonical-media-alignment="center"] {
+  margin-inline: auto;
+}
+
+.canonical-reading-table-media[data-canonical-media-alignment="right"] {
+  margin-left: auto;
 }
 
 .canonical-reading-table td[rowspan]:not([rowspan="1"]) .canonical-reading-table-media {
@@ -2608,9 +2634,39 @@ body {
   break-inside: avoid;
 }
 
+.canonical-reading-figure[data-canonical-media-alignment="left"] {
+  text-align: left;
+}
+
+.canonical-reading-figure[data-canonical-media-alignment="right"] {
+  text-align: right;
+}
+
+.canonical-reading-figure[data-canonical-media-spacing-before="compact"] {
+  margin-top: 3pt;
+}
+
+.canonical-reading-figure[data-canonical-media-spacing-before="normal"] {
+  margin-top: 6pt;
+}
+
+.canonical-reading-figure[data-canonical-media-spacing-after="compact"] {
+  margin-bottom: 3pt;
+}
+
+.canonical-reading-figure[data-canonical-media-spacing-after="normal"] {
+  margin-bottom: 6pt;
+}
+
 .canonical-reading-figure img {
   max-width: 100%;
+  width: min(100%, calc(var(--canonical-media-width-ratio) * 100cqw));
   height: auto;
+}
+
+.canonical-reading-figure figcaption {
+  color: #555;
+  font-size: 9pt;
 }
 
 /* 阅读细线框：共享约定，不为单卷改。权威 exam-paper-format-standards.md §3c */
