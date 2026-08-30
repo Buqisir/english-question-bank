@@ -53,7 +53,7 @@ jobs:
       - name: Install verification system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install --yes ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript
+          sudo apt-get install --yes ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript fonts-noto-cjk fonts-liberation
           printf '%s\n' \
             '#!/bin/sh' \
             'if [ "${1:-}" = identify ]; then' \
