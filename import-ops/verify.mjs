@@ -463,7 +463,7 @@ assert.match(
 )
 assert.match(
   importSkill,
-  /^description: .*导题.*继续某套卷.*审核反馈.*本地发布/m,
+  /^description: .*导题.*继续某套卷.*审核反馈.*上线某卷/m,
   'skill description carries automatic discovery terms for import/resume/review/publication',
 )
 assert.match(
@@ -476,11 +476,20 @@ for (const state of [
   'awaiting_review',
   'changes_requested',
   'approved',
-  'locally_published',
-  'ready_to_ship',
-  'shipped',
   'failed',
 ]) assert.match(importSkill, new RegExp(`\\| \`${state}\``), `skill handles ${state}`)
+for (const state of ['publishing', 'failed', 'published']) {
+  assert.match(
+    importSkill,
+    new RegExp('\\| promotion `' + state + '`'),
+    `skill handles promotion ${state}`,
+  )
+}
+assert.match(
+  importSkill,
+  /source-intake\.mjs[\s\S]*AMP_THREAD_ID/,
+  'skill starts source-ledger work in the bound Amp thread',
+)
 assert.match(
   importSkill,
   /Never overwrite a finalized revision/,
@@ -488,8 +497,18 @@ assert.match(
 )
 assert.match(
   importSkill,
-  /unless the Owner's current message\s+explicitly says `上线 <paperId>`/,
+  /Only when the Owner's current\s+message explicitly says `上线 <paperId>`/,
   'skill cannot infer production authorization from approval or an old message',
+)
+assert.match(
+  importSkill,
+  /never install it as the routine Project Orb secret/,
+  'skill keeps the shipping credential out of routine import workers',
+)
+assert.match(
+  importSkill,
+  /Never run Review-backed local `accept` \/ `publish` as a production step/,
+  'skill retires local publication for Review-backed papers',
 )
 assert.match(
   reviewCli,

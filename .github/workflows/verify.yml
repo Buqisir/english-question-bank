@@ -53,7 +53,21 @@ jobs:
       - name: Install verification system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install --yes ffmpeg poppler-utils libreoffice-writer
+          sudo apt-get install --yes ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript
+          printf '%s\n' \
+            '#!/bin/sh' \
+            'if [ "${1:-}" = identify ]; then' \
+            '  shift' \
+            '  exec /usr/bin/identify "$@"' \
+            'fi' \
+            'exec /usr/bin/convert "$@"' \
+            | sudo tee /usr/local/bin/magick >/dev/null
+          sudo chmod 755 /usr/local/bin/magick
+          policy=$(find /etc/ImageMagick-* -name policy.xml -print -quit)
+          if [ -n "$policy" ]; then
+            sudo sed -i 's/rights="none" pattern="PDF"/rights="read|write" pattern="PDF"/' "$policy"
+          fi
+          magick -version
 
       - name: Install verification Chromium
         run: pnpm exec playwright install --with-deps --no-shell chromium
