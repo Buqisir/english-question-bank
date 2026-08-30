@@ -21,7 +21,7 @@ colors:
   success: "#059669"
   warning: "#d97706"
   danger: "#dc2626"
-  paper-bg: "#f4f1ea"
+  paper-bg: "#f6f6f4" # owner 2026-08-28 改判：回首页中性白（原暖米 #f4f1ea）
   paper-desk-bg: "var(--paper-bg)" # 复用 --paper-bg，勿写死字面值
   paper-ink: "#4a4438"
   paper-ink-strong: "#2c2820"
@@ -136,8 +136,8 @@ components:
 
 语义色取成熟的中性专业工具惯用值（与"专业工具台"方向自洽），非旧暖纸方向的暖化值。它们作 chip 底 / 边 / 图标 / 大字（≥3:1）合格；**作小正文文字对浅底仅约 3–4.5:1，是跨文件语义色统一 + AA 达标的既有债**，留待独立刀，不在配色刀内落地。
 
-### Paper（暖纸系，色温法专属 token 家族 — 仅纸页壳，见下方 The Warm-Paper Boundary）
-- **Paper Bg 纸页底** (#F4F1EA): 整卷/讲评页页基底暖米、工作台预览暖纸桌（`--paper-desk-bg` 复用同值）。
+### Paper（纸页 token 家族 — 仅纸页壳，见下方 The Warm-Paper Boundary 及 2026-08-28 修订）
+- **Paper Bg 纸页底** (#F6F6F4): 整卷/讲评页页基底、工作台预览纸桌（`--paper-desk-bg` 复用同值）。2026-08-28 起与首页/工具页同一中性白（原暖米 #F4F1EA 废止——owner 实测后判定"过暖"）。
 - **Paper Ink 暖墨** (#4A4438): 纸页壳次级正文/rail 项/答案行文字。
 - **Paper Ink Strong 暖墨·强** (#2C2820): 纸页壳标题、选中态文字。
 - **Paper Border 暖边** (#E6E2D7): 讲评栏面板边线。
@@ -149,7 +149,7 @@ components:
 
 **The True-Neutral Rule（中性底原则）.** 底与面是真中性（chroma≈0，#F6F6F4 / #FFFFFF / #EDEDEA），既不偏冷 slate 蓝，也不偏暖米黄。"温度"由墨绿签名、排版、留白和文案口吻承载，不由背景染色承载。（历史上的"配色锁定/禁改 token"铁律已随墨绿方向作废：token 现在是一套可维护的设计系统，改色是正当的设计决策，但**必须同步更新钉死颜色的 CI 断言**，否则回归护栏会误报。）
 
-**The Warm-Paper Boundary / 色温法（暖纸边界，owner 拍板 2026-07-09，割裂议题 grilling 落锤 2026-07-10 改判——docs/cuts/draft-desk/program.md 关联决策）.** 病根是「纸不像纸」：纸页要读出"纸"的物理隐喻，工具页要读出"工具"的中性专业感——两套色温是设计意图，不是分裂事故。**纸页入暖**：整卷页 / 讲评页 / 工作台预览（桌 + A4 纸面）统一走 `--paper-*` token 家族（见上方 Paper 小节）；**工具页中性**：home / 找题 / admin / my-space 等一切工具 chrome 仍走本文件的中性 token 体系 + 墨绿签名，无例外。纸页现存的暖色硬编码是**等值转正**为 `--paper-*` token（暖纸转正小刀，零视觉变化），不是新引入的颜色——新代码在纸页范围内可以直接用 `--paper-*`，在工具页范围内仍不得出现暖米色。`readingAnalysis.css` 整页暖系**不豁免也不整改**（owner 拍板 2026-07-10）：该页是待退役孤儿支（flow-panel 刀 3 挂账），随退役刀一并销账，不作为色温法的合法例外先例；my-space 微缩 A4 卡＝暖纸卡浮中性页（卡本身可暖，卡外的 my-space 页壳仍中性）。
+**The Warm-Paper Boundary / 色温法（暖纸边界，owner 拍板 2026-07-09，割裂议题 grilling 落锤 2026-07-10 改判——docs/cuts/draft-desk/program.md 关联决策；owner 2026-08-28 再改判：废止）.** **2026-08-28 修订：色温边界取消**——owner 实测后判定暖米底（#F4F1EA）「过暖」，纸页页基底（`--paper-bg` / `--paper-desk-bg`）回归与首页同一中性白 #F6F6F4；「纸」的物理隐喻由白色纸面（Surface #FFFFFF）+ 贴地阴影独立承担（macOS Preview 模型：中性桌面 + 白纸）。`--paper-ink` / `--paper-ink-strong` / `--paper-border` 暖墨色家族暂保留在 rail/讲评栏使用，待观察后再议是否中性化。以下为 2026-07-10 原条文存档：~~病根是「纸不像纸」……（略，见 git 历史）~~。原条文要点：纸页入暖、工具页中性、暖色硬编码等值转正；`readingAnalysis.css` 孤儿支随退役刀销账；my-space 微缩 A4 卡的暖卡浮中性页规则随本次废止自动失效（卡面仍白、页壳中性，不再涉及暖色）。
 
 **The Deletion-Cost Rule（成本定交互，owner 拍板 2026-07-10）.** 删除交互不追求全站同一形态，追求同一**规则**：**可恢复的删除**（对象还在库里/可轻易重建，如工作台移除题组）= 即删 + toast 撤销，不设确认弹窗（低成本操作的确认弹窗只会训练确认盲点）；**不可逆的删除**（永久删除 + 有陪葬物，如个人空间删卷及其 PDF）= 具名确认模态（alertdialog，标题写明删什么、陪葬什么）。两处现状（工作台即删撤销 / my-space 模态确认）均符合本规则，2026-07-10 审计 P1#9「双标」判定以本规则闭环——差异是故意的、由删除成本决定。若未来某面要从确认模态改为即删撤销，先做软删除/回收站兜底。
 
@@ -193,9 +193,9 @@ components:
 
 ### Buttons
 - **Shape:** 小圆角（6px / `{rounded.md}`）。
-- **Primary:** 墨绿底（#2C6E56）+ 白字（#FFFFFF，6.05:1），padding 8px 16px。主按钮用墨绿签名，宣告"当前主操作"。
-- **Hover / Focus:** 悬浮压深一档（如 #1E4A3A / teal-800）；焦点用墨绿焦点环（`0 0 0 3px rgba(44,110,86,0.20)`）。
-- **Secondary / Ghost:** 透明或 surface-2 底 + 中性细边 + ink 文字；用于次要操作。
+- **Primary:** 墨绿底（#2C6E56）+ 白字（#FFFFFF，6.05:1），padding 8px 16px。主按钮用墨绿签名，宣告"当前主操作"。扁平无 halo 阴影（quiet-chrome 2026-08-28：accent-glow 彩色辉光移除，阴影词汇只有 Resting/Floating/Focus Ring 三种）。
+- **Hover / Focus:** 悬浮压深一档（`--eqb-color-primary-deep` = teal-800 #1E4A3A，已转正为正式 token）；焦点走单一焦点环 token（`--focus-ring`：2px solid 墨绿 + 2px offset，App.css :root 单点定义）。
+- **Secondary / Ghost（The Quiet-Chrome Rule 静铬原则，quiet-chrome 刀 2026-08-28）：** 次级按钮**平时无底无边**，直接趴在所在表面上（macOS/Amp 工具栏的原生嵌入感），hover 才浮出一层中性底（surface-2 #EDEDEA），focus-visible 仍走墨绿焦点环。适用于 ghost-button / detail-button / back-button / icon-button / peek-btn / similar-btn 全部次级词汇；描边盒（常驻 border + 填充底）在工具 chrome 里视为"贴上去的盒子"，不再使用。主操作（墨绿填充）与表单输入框不受本条影响。
 
 ### Chips（筛选/标签，找题主面的关键组件）
 - **Style:** 胶囊形（999px）+ 中性底 + ink 文字 + 中性细边（#D8D8D2）。
@@ -215,6 +215,7 @@ components:
 
 ### Navigation
 - **Style:** 中性工具外壳；当前项用墨绿强调（文字或下划），其余保持中性。手搓 `?view=` 路由，非 react-router。
+- **Topbar（quiet-chrome 2026-08-28）：** 顶栏透明无底、无 border-bottom 缝合线，直接融入所在页面底色（工具页 #F6F6F4 / 纸页暖米自动跟随），不再是「白底条 + 上下横线包边」的贴片；顶栏全站无 sticky，透明是安全前提。顶栏内按钮一律走 Quiet-Chrome 次级词汇。
 - 注意现实：导航逻辑现塞在很大的 `App.tsx`，是重构痛点，但不属于配色范畴。
 
 ### Signature Component: ConciergeDesk AI 找题主面

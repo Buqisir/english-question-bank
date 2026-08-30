@@ -1,8 +1,9 @@
-import { Download, FileText, Trash2 } from 'lucide-react'
+import { Download, FileText, Save, Trash2 } from 'lucide-react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import type { MySpaceArtifact, MySpaceFolder } from '../../domain/questionBank'
 import { deleteMySpaceArtifact, downloadMySpaceArtifact, fetchMySpace } from '../../services/mySpace'
+import { prepareFileSaveTarget, type FileSaveMode } from '../../services/fileDownload.ts'
 import { describeError } from '../shared/errorCopy'
 import { useToastPresence } from '../shared/useToastPresence.ts'
 import './MySpacePage.css'
@@ -107,13 +108,19 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
     await load(folderId)
   }
 
-  async function downloadArtifact(artifact: MySpaceArtifact) {
-    setBusyId(artifact.id)
+  async function downloadArtifact(artifact: MySpaceArtifact, mode: FileSaveMode = 'download') {
     setMessage('')
     try {
-      await downloadMySpaceArtifact(artifact)
+      const target = await prepareFileSaveTarget({
+        mode,
+        suggestedName: artifact.fileName || '英语草稿卷-学生卷.pdf',
+        mimeType: 'application/pdf',
+      })
+      if (!target) return
+      setBusyId(artifact.id)
+      await downloadMySpaceArtifact(artifact, target)
     } catch (error) {
-      setMessage(describeError('下载 PDF', error))
+      setMessage(describeError(mode === 'save-as' ? '另存为 PDF' : '下载 PDF', error))
     } finally {
       setBusyId(null)
     }
@@ -273,6 +280,14 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
                             onClick={() => void downloadArtifact(artifact)}
                           >
                             <Download size={14} /> 下载 PDF
+                          </button>
+                          <button
+                            type="button"
+                            className="my-space-card-ghost"
+                            disabled={busyId === artifact.id}
+                            onClick={() => void downloadArtifact(artifact, 'save-as')}
+                          >
+                            <Save size={14} /> 另存为…
                           </button>
                           <button type="button" className="my-space-card-ghost" onClick={() => openSourceDraft(artifact)}>
                             打开原草稿

@@ -1080,10 +1080,25 @@ const lectureAnalysisCssSrc = read('app/src/features/paper-intelligence/lectureA
 const paperIntelligenceCssSrc = read('app/src/features/paper-intelligence/paperIntelligence.css')
 
 assert(
-  'PaperBrowsePage renders a 讲评 handle button unconditionally (always visible)',
+  'PaperBrowsePage renders a 讲评 handle button unconditionally, including Review Screen',
   /<button[\s\S]{0,200}paper-browse-lecture-handle[\s\S]{0,200}讲评/.test(pageSrc) &&
-    !/\{lectureOpen\s*&&\s*\(?\s*<button[\s\S]{0,120}paper-browse-lecture-handle/.test(pageSrc),
-  'handle button missing, or gated behind lectureOpen (should always render)',
+    !/\{lectureOpen\s*&&\s*\(?\s*<button[\s\S]{0,120}paper-browse-lecture-handle/.test(pageSrc) &&
+    !/\{!reviewRevision\s*&&\s*\(?\s*<button[\s\S]{0,160}paper-browse-lecture-handle/.test(pageSrc),
+  'handle button missing, or gated behind lectureOpen/reviewRevision (should always render)',
+)
+assert(
+  'Review Screen hides draft and similarity consumer actions while retaining the real renderer',
+  /\{!reviewRevision && card && \(\s*<div className="paper-browse-group-actions">/.test(pageSrc) &&
+    /\{!reviewRevision && hasActiveQuestion[\s\S]{0,180}<div className="similar-cta">/.test(pageSrc) &&
+    /\{!reviewRevision && \(\s*<button[\s\S]{0,120}className="basket-chip"/.test(pageSrc),
+  'one or more consumer-only actions are still visible in Review Screen',
+)
+assert(
+  'Canonical PaperBrowse QA harness can exercise immutable Review Screen mode',
+  /reviewRevision=\{search\.get\('reviewRevision'\) \?\? undefined\}/.test(
+    read('app/src/qa/mountCanonicalPaperBrowse.tsx'),
+  ),
+  'QA harness does not pass reviewRevision through to PaperBrowsePage',
 )
 assert(
   'PaperBrowsePage toggles lectureOpen via setLectureOpen((open) => !open) on the handle click',
@@ -1516,11 +1531,12 @@ assert(
 assert(
   // similar-entrypoints (E3) adds `similar` alongside `questionId`/`lecture`
   // in the same options-bag → URL/state pipeline.
-  'openPaperBrowse accepts an options bag (questionId/lecture/similar) and writes them into the URL + paperBrowseRoute',
+  'openPaperBrowse accepts an options bag (questionId/lecture/similar), clears reviewRevision, and writes the route',
   /const openPaperBrowse\s*=\s*useCallback\s*\(\s*\(paperId[^{]*options\?\s*:\s*OpenPaperBrowseOptions[^{]*\{/.test(
     appSrc,
   ) &&
-    /setPaperBrowseRoute\(\{\s*active:\s*true,\s*paperId,\s*focusGroupId:\s*focusGroupId\s*\|\|\s*null,\s*questionId,\s*lecture,\s*similar\s*\}\)/.test(
+    /url\.searchParams\.delete\(\s*['"]reviewRevision['"]\s*\)/.test(appSrc) &&
+    /setPaperBrowseRoute\(\{\s*active:\s*true,\s*paperId,\s*focusGroupId:\s*focusGroupId\s*\|\|\s*null,\s*questionId,\s*reviewRevision:\s*null,\s*lecture,\s*similar\s*\}\)/.test(
       appSrc,
     ),
   'openPaperBrowse does not accept/thread the options bag',
@@ -1582,11 +1598,11 @@ assert(
 assert(
   // similar-entrypoints (E3) adds `similar` to the stripped-param list too —
   // otherwise a stale similar=1 would leak into the workbench URL.
-  'paperBrowseOnBackToWorkbench strips questionId/lecture/similar from the URL alongside view/paperId/focusGroupId',
-  /for\s*\(const param of \[\s*['"]view['"]\s*,\s*['"]paperId['"]\s*,\s*['"]focusGroupId['"]\s*,\s*['"]questionId['"]\s*,\s*['"]lecture['"]\s*,\s*['"]similar['"]\s*\]\)/.test(
+  'paperBrowseOnBackToWorkbench strips reviewRevision and the ordinary Paper Browse route params',
+  /for\s*\(const param of \[\s*['"]view['"]\s*,\s*['"]paperId['"]\s*,\s*['"]focusGroupId['"]\s*,\s*['"]questionId['"]\s*,\s*['"]reviewRevision['"]\s*,\s*['"]lecture['"]\s*,\s*['"]similar['"]\s*\]\)/.test(
     appSrc,
   ),
-  'paperBrowseOnBackToWorkbench does not strip the new params — stale questionId/lecture/similar would leak into the workbench URL',
+  'paperBrowseOnBackToWorkbench leaves a stale Paper Browse or review parameter in the workbench URL',
 )
 
 // 47-48. ConciergeGroupCard.tsx / QuestionGroupDetailView.tsx: 看解析 href

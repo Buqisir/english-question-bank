@@ -36,6 +36,7 @@ import {
   listVocabularyStudents,
   replaceVocabularyProgram,
 } from '../server/vocabulary/vocabularyStore.mjs'
+import { createImportReviewRoutes } from '../server/import-review/importReviewRoutes.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
@@ -56,6 +57,12 @@ function assert(name, condition, details = '') {
 const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-verify-auth-gate-'))
 const dbPath = path.join(tempRoot, 'question-bank.sqlite')
 const userDataDbPath = path.join(tempRoot, 'user-data.sqlite')
+const importOpsDbPath = path.join(tempRoot, 'import-ops.sqlite')
+const importOpsFilesRoot = path.join(tempRoot, 'import-ops-files')
+const importAgentToken = 'verify-import-agent-token'
+const importShipToken = 'verify-import-ship-token'
+const rotatedImportAgentToken = 'verify-rotated-import-agent-token'
+const rotatedImportShipToken = 'verify-rotated-import-ship-token'
 
 async function freePort() {
   const server = createServer()
@@ -77,6 +84,10 @@ const env = {
   QUESTION_BANK_DB: dbPath,
   USER_DATA_DB: userDataDbPath,
   QUESTION_BANK_API_PORT: String(apiPort),
+  QUESTION_BANK_IMPORT_OPS_DB: importOpsDbPath,
+  QUESTION_BANK_IMPORT_OPS_ROOT: importOpsFilesRoot,
+  QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN: importAgentToken,
+  QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN: importShipToken,
 }
 
 function seedMinimalBankDatabase() {
@@ -156,10 +167,10 @@ function seedMinimalBankDatabase() {
 
 const children = []
 
-function startServer() {
+function startServer(envOverrides = {}) {
   const child = spawn('node', ['server/api.mjs'], {
     cwd: rootDir,
-    env,
+    env: { ...env, ...envOverrides },
     stdio: ['ignore', 'pipe', 'pipe'],
   })
   children.push(child)
@@ -172,6 +183,14 @@ function startServer() {
   })
   child.getLog = () => logBuffer
   return child
+}
+
+function stopServer(child) {
+  if (child.exitCode !== null || child.signalCode !== null) return Promise.resolve()
+  return new Promise((resolve) => {
+    child.once('close', resolve)
+    child.kill()
+  })
 }
 
 async function waitForHttp(url, timeoutMs = 20_000) {
@@ -188,10 +207,11 @@ async function waitForHttp(url, timeoutMs = 20_000) {
   throw new Error(`Timed out waiting for ${url}`)
 }
 
-async function req(urlPath, { method = 'GET', body, cookie } = {}) {
+async function req(urlPath, { method = 'GET', body, cookie, authorization } = {}) {
   const headers = {}
   if (body !== undefined) headers['content-type'] = 'application/json'
   if (cookie) headers.cookie = cookie
+  if (authorization) headers.authorization = authorization
   const response = await fetch(`http://127.0.0.1:${apiPort}${urlPath}`, {
     method,
     headers,
@@ -208,13 +228,14 @@ async function req(urlPath, { method = 'GET', body, cookie } = {}) {
   return { status: response.status, json, setCookie }
 }
 
-function runCli(args) {
+function runCli(args, input = null) {
   return new Promise((resolve, reject) => {
     const child = spawn('node', ['scripts/create-user.mjs', ...args], {
       cwd: rootDir,
       env,
-      stdio: ['ignore', 'pipe', 'pipe'],
+      stdio: [input === null ? 'ignore' : 'pipe', 'pipe', 'pipe'],
     })
+    if (input !== null) child.stdin.end(input)
     let output = ''
     child.stdout.on('data', (chunk) => (output += chunk.toString()))
     child.stderr.on('data', (chunk) => (output += chunk.toString()))
@@ -231,7 +252,22 @@ function cookieHeaderFrom(setCookieValue) {
 
 async function main() {
   seedMinimalBankDatabase()
-  const server = startServer()
+  let identicalReviewTokensRejected = false
+  try {
+    createImportReviewRoutes({
+      getStore: () => ({}),
+      agentToken: 'same-token',
+      shipToken: 'same-token',
+      buildPrintHtml: () => '',
+    })
+  } catch (error) {
+    identicalReviewTokensRejected = /must be different/.test(String(error?.message || error))
+  }
+  assert(
+    '(b) server rejects one shared secret for Agent and shipping capabilities',
+    identicalReviewTokensRejected,
+  )
+  let server = startServer()
 
   try {
     await waitForHttp(`http://127.0.0.1:${apiPort}/api/health`)
@@ -260,6 +296,25 @@ async function main() {
       '(b) create-user.mjs creates the account (child process, real CLI invocation)',
       /created user "verify-owner"/.test(cliOutput),
       `cli output: ${cliOutput}`,
+    )
+    const memberCliOutput = await runCli([
+      '--username', 'verify-member', '--password', 'Verify-Member-123', '--role', 'member',
+    ])
+    assert(
+      '(b) create-user.mjs creates a human member account',
+      /account: human/.test(memberCliOutput),
+      `cli output: ${memberCliOutput}`,
+    )
+    const agentCliOutput = await runCli([
+      '--username', 'verify-import-agent',
+      '--password-stdin',
+      '--account-kind', 'import_agent',
+    ], 'Verify-Agent-123\n')
+    assert(
+      '(b) create-user.mjs creates a least-privileged import_agent account without logging its supplied password',
+      /role: member, account: import_agent/.test(agentCliOutput)
+        && !agentCliOutput.includes('Verify-Agent-123'),
+      `cli output: ${agentCliOutput}`,
     )
 
     // (c) forced mode now that a user exists.
@@ -316,6 +371,20 @@ async function main() {
       '(c) forced mode: vocabulary PDF download remains protected without a cookie',
       privateVocabularyPdf.status === 401 && privateVocabularyPdf.json?.error === 'not_authenticated',
       `got status=${privateVocabularyPdf.status} body=${JSON.stringify(privateVocabularyPdf.json)}`,
+    )
+
+    const privateVocabularyBundle = await req('/api/vocabulary/sets/public-fixture-set/materials.zip?accent=british', { method: 'POST' })
+    assert(
+      '(c) forced mode: vocabulary full-set ZIP remains protected without a cookie',
+      privateVocabularyBundle.status === 401 && privateVocabularyBundle.json?.error === 'not_authenticated',
+      `got status=${privateVocabularyBundle.status} body=${JSON.stringify(privateVocabularyBundle.json)}`,
+    )
+
+    const privateHandwritingFont = await req('/api/vocabulary/print-assets/hengshui.ttf')
+    assert(
+      '(c) forced mode: private handwriting font remains protected without a cookie',
+      privateHandwritingFont.status === 401 && privateHandwritingFont.json?.error === 'not_authenticated',
+      `got status=${privateHandwritingFont.status} body=${JSON.stringify(privateHandwritingFont.json)}`,
     )
 
     const privateVocabularyRename = await req('/api/vocabulary/sets/public-fixture-set', {
@@ -426,6 +495,184 @@ async function main() {
         meWithCookie.json?.user?.username === 'verify-owner' &&
         meWithCookie.json?.user?.role === 'owner',
       `got status=${meWithCookie.status} body=${JSON.stringify(meWithCookie.json)}`,
+    )
+
+    const noCookieOwnerReviews = await req('/api/import-reviews')
+    assert(
+      '(c) import review Owner API rejects unauthenticated requests',
+      noCookieOwnerReviews.status === 401 && noCookieOwnerReviews.json?.error === 'not_authenticated',
+      `got status=${noCookieOwnerReviews.status} body=${JSON.stringify(noCookieOwnerReviews.json)}`,
+    )
+    const ownerReviews = await req('/api/import-reviews', { cookie })
+    assert(
+      '(c) import review Owner API accepts the Owner cookie',
+      ownerReviews.status === 200 && Array.isArray(ownerReviews.json?.papers),
+      `got status=${ownerReviews.status} body=${JSON.stringify(ownerReviews.json)}`,
+    )
+    const ownerCannotSubstituteForAgent = await req('/api/import-agent-reviews', { cookie })
+    assert(
+      '(c) Owner cookie cannot substitute for Agent identity',
+      ownerCannotSubstituteForAgent.status === 401 &&
+        ownerCannotSubstituteForAgent.json?.error === 'agent_auth_required',
+      `got status=${ownerCannotSubstituteForAgent.status} body=${JSON.stringify(ownerCannotSubstituteForAgent.json)}`,
+    )
+    const bearerInbox = await req('/api/import-agent-reviews', {
+      authorization: `Bearer ${importAgentToken}`,
+    })
+    assert(
+      '(c) dedicated Agent bearer credential can read the review inbox without a Cookie',
+      bearerInbox.status === 200 && Array.isArray(bearerInbox.json?.papers),
+      `got status=${bearerInbox.status} body=${JSON.stringify(bearerInbox.json)}`,
+    )
+    const bearerRevisionAttempt = await req('/api/import-agent-reviews/revisions', {
+      method: 'POST',
+      authorization: `Bearer ${importAgentToken}`,
+      body: {},
+    })
+    const bearerReplyAttempt = await req(
+      '/api/import-agent-reviews/papers/paper-missing/issues/issue-missing/messages',
+      {
+        method: 'POST',
+        authorization: `Bearer ${importAgentToken}`,
+        body: { message: 'auth-scope-probe' },
+      },
+    )
+    assert(
+      '(c) dedicated Agent bearer reaches revision upload and issue reply handlers',
+      bearerRevisionAttempt.status === 400 &&
+        bearerRevisionAttempt.json?.code === 'IMPORT_REVIEW_SCHEMA_INVALID' &&
+        bearerReplyAttempt.status === 404 &&
+        bearerReplyAttempt.json?.code === 'IMPORT_REVIEW_NOT_FOUND',
+      `revision=${JSON.stringify(bearerRevisionAttempt.json)} reply=${JSON.stringify(bearerReplyAttempt.json)}`,
+    )
+    const bearerGuardRelease = await req(
+      '/api/import-agent-reviews/papers/paper-missing/shipping-guards/guard-missing',
+      {
+        method: 'DELETE',
+        authorization: `Bearer ${importAgentToken}`,
+      },
+    )
+    assert(
+      '(c) dedicated Agent bearer credential cannot acquire or release a shipping guard',
+      bearerGuardRelease.status === 401 &&
+        bearerGuardRelease.json?.error === 'shipping_auth_required',
+      `got status=${bearerGuardRelease.status} body=${JSON.stringify(bearerGuardRelease.json)}`,
+    )
+    const shipCredentialGuardRelease = await req(
+      '/api/import-agent-reviews/papers/paper-missing/shipping-guards/guard-missing',
+      {
+        method: 'DELETE',
+        authorization: `Bearer ${importShipToken}`,
+      },
+    )
+    assert(
+      '(c) independent shipping credential alone reaches shipping-guard release',
+      shipCredentialGuardRelease.status === 200 &&
+        shipCredentialGuardRelease.json?.released === false,
+      `got status=${shipCredentialGuardRelease.status} body=${JSON.stringify(shipCredentialGuardRelease.json)}`,
+    )
+    const shipCredentialInbox = await req('/api/import-agent-reviews', {
+      authorization: `Bearer ${importShipToken}`,
+    })
+    assert(
+      '(c) shipping credential cannot read the Agent inbox or upload revisions',
+      shipCredentialInbox.status === 401 &&
+        shipCredentialInbox.json?.error === 'agent_auth_required',
+      `got status=${shipCredentialInbox.status} body=${JSON.stringify(shipCredentialInbox.json)}`,
+    )
+    const bearerCannotApprove = await req('/api/import-reviews/papers/missing/revisions/missing/approve', {
+      method: 'POST',
+      authorization: `Bearer ${importAgentToken}`,
+      body: { bundleDigest: `sha256:${'0'.repeat(64)}` },
+    })
+    assert(
+      '(c) Agent bearer credential cannot reach the Owner approval API',
+      bearerCannotApprove.status === 401 && bearerCannotApprove.json?.error === 'not_authenticated',
+      `got status=${bearerCannotApprove.status} body=${JSON.stringify(bearerCannotApprove.json)}`,
+    )
+    const bearerCannotCreateIssue = await req('/api/import-reviews/papers/missing/issues', {
+      method: 'POST',
+      authorization: `Bearer ${importAgentToken}`,
+      body: {},
+    })
+    const bearerCannotCloseIssue = await req('/api/import-reviews/papers/missing/issues/missing', {
+      method: 'PATCH',
+      authorization: `Bearer ${importAgentToken}`,
+      body: { action: 'close' },
+    })
+    assert(
+      '(c) Agent bearer credential cannot create, close, or reopen Owner issues',
+      bearerCannotCreateIssue.status === 401 &&
+        bearerCannotCreateIssue.json?.error === 'not_authenticated' &&
+        bearerCannotCloseIssue.status === 401 &&
+        bearerCannotCloseIssue.json?.error === 'not_authenticated',
+      `create=${JSON.stringify(bearerCannotCreateIssue.json)} close=${JSON.stringify(bearerCannotCloseIssue.json)}`,
+    )
+
+    const memberLogin = await req('/api/auth/login', {
+      method: 'POST',
+      body: { username: 'verify-member', password: 'Verify-Member-123' },
+    })
+    const memberCookie = cookieHeaderFrom(memberLogin.setCookie)
+    const memberReviews = await req('/api/import-reviews', { cookie: memberCookie })
+    assert(
+      '(c) human member cannot read the import review Owner API',
+      memberReviews.status === 403 && memberReviews.json?.error === 'forbidden',
+      `got status=${memberReviews.status} body=${JSON.stringify(memberReviews.json)}`,
+    )
+
+    const agentLogin = await req('/api/auth/login', {
+      method: 'POST',
+      body: { username: 'verify-import-agent', password: 'Verify-Agent-123' },
+    })
+    const agentCookie = cookieHeaderFrom(agentLogin.setCookie)
+    const agentMe = await req('/api/auth/me', { cookie: agentCookie })
+    const agentInbox = await req('/api/import-agent-reviews', { cookie: agentCookie })
+    const agentRevisionAttempt = await req('/api/import-agent-reviews/revisions', {
+      method: 'POST',
+      cookie: agentCookie,
+      body: {},
+    })
+    const agentReplyAttempt = await req(
+      '/api/import-agent-reviews/papers/paper-missing/issues/issue-missing/messages',
+      {
+        method: 'POST',
+        cookie: agentCookie,
+        body: { message: 'auth-scope-probe' },
+      },
+    )
+    const agentGuardRelease = await req(
+      '/api/import-agent-reviews/papers/paper-missing/shipping-guards/guard-missing',
+      { method: 'DELETE', cookie: agentCookie },
+    )
+    const agentOrdinaryApi = await req('/api/draft-papers', { cookie: agentCookie })
+    const agentOwnerApi = await req('/api/import-reviews', { cookie: agentCookie })
+    assert(
+      '(c) real import_agent login sees its identity and dedicated inbox',
+      agentLogin.status === 200 &&
+        agentMe.status === 200 && agentMe.json?.user?.accountKind === 'import_agent' &&
+        agentInbox.status === 200 && Array.isArray(agentInbox.json?.papers),
+      `login=${JSON.stringify(agentLogin.json)} me=${JSON.stringify(agentMe.json)} inbox=${JSON.stringify(agentInbox.json)}`,
+    )
+    assert(
+      '(c) real import_agent account reaches revision upload and issue reply handlers',
+      agentRevisionAttempt.status === 400 &&
+        agentRevisionAttempt.json?.code === 'IMPORT_REVIEW_SCHEMA_INVALID' &&
+        agentReplyAttempt.status === 404 &&
+        agentReplyAttempt.json?.code === 'IMPORT_REVIEW_NOT_FOUND',
+      `revision=${JSON.stringify(agentRevisionAttempt.json)} reply=${JSON.stringify(agentReplyAttempt.json)}`,
+    )
+    assert(
+      '(c) import_agent account is globally denied ordinary member and Owner APIs',
+      agentOrdinaryApi.status === 403 && agentOrdinaryApi.json?.error === 'agent_account_scope_forbidden' &&
+        agentOwnerApi.status === 403 && agentOwnerApi.json?.error === 'agent_account_scope_forbidden',
+      `ordinary=${JSON.stringify(agentOrdinaryApi.json)} owner=${JSON.stringify(agentOwnerApi.json)}`,
+    )
+    assert(
+      '(c) import_agent account cannot acquire or release a shipping guard',
+      agentGuardRelease.status === 401 &&
+        agentGuardRelease.json?.error === 'shipping_auth_required',
+      `got status=${agentGuardRelease.status} body=${JSON.stringify(agentGuardRelease.json)}`,
     )
 
     const defaultStudents = await req('/api/vocabulary/students', { cookie })
@@ -565,8 +812,8 @@ async function main() {
       `got status=${renamedVocabularySet.status} body=${JSON.stringify(renamedVocabularySet.json)}`,
     )
 
-    const studentSets = await req(`/api/vocabulary/sets?studentId=${encodeURIComponent(studentId)}`, { cookie })
-    const defaultStudentSets = await req(`/api/vocabulary/sets?studentId=${encodeURIComponent(defaultStudentId)}`, { cookie })
+    const studentSets = await req(`/api/vocabulary/sets?studentId=${encodeURIComponent(studentId)}&programId=wanwei-round-one-v1`, { cookie })
+    const defaultStudentSets = await req(`/api/vocabulary/sets?studentId=${encodeURIComponent(defaultStudentId)}&programId=wanwei-round-one-v1`, { cookie })
     assert(
       '(c) vocabulary Sets are isolated by student profile',
       studentSets.status === 200 && studentSets.json?.vocabularySets?.length === 1 &&
@@ -625,6 +872,51 @@ async function main() {
       '(e) --disable takes effect immediately: still-valid cookie now 401s',
       afterDisable.status === 401 && afterDisable.json?.error === 'not_authenticated',
       `got status=${afterDisable.status} body=${JSON.stringify(afterDisable.json)}`,
+    )
+
+    await stopServer(server)
+    server = startServer({
+      QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN: rotatedImportAgentToken,
+      QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN: rotatedImportShipToken,
+    })
+    await waitForHttp(`http://127.0.0.1:${apiPort}/api/health`)
+
+    const oldAgentAfterRotation = await req('/api/import-agent-reviews', {
+      authorization: `Bearer ${importAgentToken}`,
+    })
+    const newAgentAfterRotation = await req('/api/import-agent-reviews', {
+      authorization: `Bearer ${rotatedImportAgentToken}`,
+    })
+    assert(
+      '(f) Agent token rotation activates the new secret and rejects the old secret after restart',
+      oldAgentAfterRotation.status === 401 &&
+        oldAgentAfterRotation.json?.error === 'agent_auth_required' &&
+        newAgentAfterRotation.status === 200 &&
+        Array.isArray(newAgentAfterRotation.json?.papers),
+      `old=${JSON.stringify(oldAgentAfterRotation)} new=${JSON.stringify(newAgentAfterRotation)}`,
+    )
+
+    const oldShipAfterRotation = await req(
+      '/api/import-agent-reviews/papers/paper-missing/shipping-guards/guard-missing',
+      {
+        method: 'DELETE',
+        authorization: `Bearer ${importShipToken}`,
+      },
+    )
+    const newShipAfterRotation = await req(
+      '/api/import-agent-reviews/papers/paper-missing/shipping-guards/guard-missing',
+      {
+        method: 'DELETE',
+        authorization: `Bearer ${rotatedImportShipToken}`,
+      },
+    )
+    assert(
+      '(f) ship token rotation activates the new secret and rejects the old secret after restart',
+      oldShipAfterRotation.status === 401 &&
+        oldShipAfterRotation.json?.error === 'shipping_auth_required' &&
+        newShipAfterRotation.status === 200 &&
+        newShipAfterRotation.json?.released === false,
+      `old=${JSON.stringify(oldShipAfterRotation)} new=${JSON.stringify(newShipAfterRotation)}`,
     )
   } finally {
     for (const child of children) child.kill()

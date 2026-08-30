@@ -1,0 +1,666 @@
+{
+  "schemaVersion": "gaokao-frequency-audio-text-overrides-v1",
+  "entries": [
+    {
+      "entryId": "gaokao-frequency-0157-ow-n",
+      "text": "own",
+      "reason": "Remove an OCR-inserted space from the spoken form."
+    },
+    {
+      "entryId": "gaokao-frequency-1392-fa-n",
+      "text": "fan",
+      "reason": "Remove an OCR-inserted space from the spoken form."
+    },
+    {
+      "entryId": "gaokao-frequency-1504-excellen-t",
+      "text": "excellent",
+      "reason": "Remove an OCR-inserted space from the spoken form."
+    },
+    {
+      "entryId": "gaokao-frequency-1988-i-llness",
+      "text": "illness",
+      "reason": "Remove an OCR-inserted space from the spoken form."
+    },
+    {
+      "entryId": "gaokao-frequency-2539-liv-ely",
+      "text": "lively",
+      "reason": "Remove an OCR-inserted space from the spoken form."
+    },
+    {
+      "entryId": "gaokao-frequency-2794-x-ray",
+      "text": "x-ray",
+      "reason": "Remove an OCR-inserted space from the spoken form."
+    },
+    {
+      "entryId": "gaokao-frequency-2285-defence-defense",
+      "text": "de-fense",
+      "reason": "Preserve the already generated golden-sample spoken form for both spelling variants."
+    },
+    {
+      "entryId": "gaokao-frequency-0001-the",
+      "americanIpa": "ðə",
+      "britishIpa": "ðə",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0139-become",
+      "americanIpa": "bɪˈkəm",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0227-research",
+      "americanIpa": "ˈɹiːsɚʧ",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0363-enough",
+      "americanIpa": "ɪˈnʌf",
+      "britishIpa": "ɪnˈʌf",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0446-until",
+      "americanIpa": "ənˈtɪl",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0468-p-m-pm",
+      "americanIpa": "ˌpiːˈɛm",
+      "britishIpa": "ˌpiːˈɛm",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0469-hotel",
+      "americanIpa": "hoʊˈtɛl",
+      "britishIpa": "həʊtˈɛl",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0477-event",
+      "americanIpa": "ɪˈvɛnt",
+      "britishIpa": "ɪvˈɛnt",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0478-reduce",
+      "americanIpa": "ɹɪˈduːs",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0580-within",
+      "americanIpa": "wɪˈðɪn",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0582-communication",
+      "americanIpa": "kəmˌjuːnəˈkeɪʃən",
+      "britishIpa": "kəmjˌuːnɪkˈeɪʃən",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0583-describe",
+      "americanIpa": "dɪsˈkɹaɪb",
+      "britishIpa": "dɪskɹˈaɪb",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0593-opportunity",
+      "americanIpa": "ˌɑːpɚˈtuːnətiː",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0617-remain",
+      "americanIpa": "ɹɪˈmeɪn",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0624-themselves",
+      "americanIpa": "ðəmˈsɛlvz",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0625-percent",
+      "americanIpa": "pɚˈsɛnt",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0634-alone",
+      "americanIpa": "əˈloʊn",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0652-accept",
+      "americanIpa": "əkˈsɛpt",
+      "britishIpa": "əksˈɛpt",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0662-protect",
+      "americanIpa": "pɹəˈtɛkt",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0687-advance",
+      "americanIpa": "ədˈvæns",
+      "britishIpa": "ədvˈæns",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0704-creative",
+      "americanIpa": "kɹiːˈeɪtɪv",
+      "britishIpa": "kɹiːˈeɪtɪv",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0716-recognize-recognise",
+      "americanIpa": "ˈɹɛkəɡˌnaɪz",
+      "britishIpa": "ˈɹɛkəɡnaɪz",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0732-relate",
+      "americanIpa": "ɹɪˈleɪt",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0747-beyond",
+      "americanIpa": "bɪˈɑːnd",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0832-a-m-am",
+      "americanIpa": "ˌeɪˈɛm",
+      "britishIpa": "ˌeɪˈɛm",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0833-invite",
+      "americanIpa": "ˌɪnˈvaɪt",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0836-depend",
+      "americanIpa": "dɪˈpɛnd",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0849-imagine",
+      "americanIpa": "ˌɪˈmæʤən",
+      "britishIpa": "ɪmˈæʤɪn",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0852-contain",
+      "americanIpa": "kənˈteɪn",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0865-respect",
+      "americanIpa": "ɹɪˈspɛkt",
+      "britishIpa": "ɹɪspˈɛkt",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0866-advice",
+      "americanIpa": "ədˈvaɪs",
+      "britishIpa": "ədvˈaɪs",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0877-conduct",
+      "americanIpa": "kənˈdʌkt",
+      "britishIpa": "kənˈdʌkt",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0878-unique",
+      "americanIpa": "juːˈniːk",
+      "britishIpa": "juːnˈiːk",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-0994-reflect",
+      "americanIpa": "ɹɪˈflɛkt",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-1011-ms",
+      "britishIpa": "mɪz",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-1012-eventually",
+      "americanIpa": "ɪˈvɛnʧuəliː",
+      "britishIpa": "ɪvˈɛnʧuːəliː",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-1024-admit",
+      "americanIpa": "ədˈmɪt",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-1079-emotion",
+      "britishIpa": "ɪmˈəʊʃən",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-1107-economic",
+      "americanIpa": "ˌɛkəˈnɑːmɪk",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-1164-unless",
+      "americanIpa": "ənˈlɛs",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-1289-resource",
+      "americanIpa": "ˈɹiːsɔːɹs",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-1364-evaluate",
+      "britishIpa": "ɪˈvæljuːeɪt",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-1366-donate",
+      "americanIpa": "ˈdoʊˌneɪt",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-1372-separate",
+      "americanIpa": "ˈsɛpəɹət",
+      "britishIpa": "ˈsɛpəɹət",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-1402-electricity",
+      "britishIpa": "ɪˌlɛkˈtɹɪsɪtiː",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-1419-supply",
+      "americanIpa": "səˈplaɪ",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-1454-organization",
+      "americanIpa": "ˌɔːɹɡənəˈzeɪʃən",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-1488-characteristic",
+      "americanIpa": "ˌkɛɹəktɚˈɪstɪk",
+      "britishIpa": "kˌæɹɪktəɹˈɪstɪk",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-1513-presentation",
+      "americanIpa": "ˌpɹɛzənˈteɪʃən",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-1582-debate",
+      "americanIpa": "dəˈbeɪt",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-1689-diverse",
+      "americanIpa": "daɪˈvɚs",
+      "britishIpa": "daɪvˈɜːs",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-1766-insist",
+      "americanIpa": "ˌɪnˈsɪst",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-1774-mobile-phone",
+      "britishSsml": "<speak><phoneme alphabet=\"ipa\" ph=\"ˌməʊbaɪl\">mobile</phoneme> <phoneme alphabet=\"ipa\" ph=\"ˈfəʊn\">phone</phoneme></speak>",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-1781-accommodation",
+      "americanIpa": "əˌkɑːməˈdeɪʃən",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-1816-pretend",
+      "americanIpa": "pɹiːˈtɛnd",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-1861-narrow",
+      "americanIpa": "ˈnæɹoʊ",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-1882-behave",
+      "americanIpa": "bɪˈheɪv",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-1887-hello",
+      "americanIpa": "həˈloʊ",
+      "britishIpa": "həlˈəʊ",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-1902-maintain",
+      "americanIpa": "meɪnˈteɪn",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2002-advertisement",
+      "americanIpa": "ˌædvɚˈtaɪzmənt",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2035-suspect",
+      "americanIpa": "səˈspɛkt",
+      "britishIpa": "səˈspɛkt",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2043-enthusiastic",
+      "americanIpa": "ɪnˌθuːziːˈæstɪk",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2081-violin",
+      "americanIpa": "vaɪəˈlɪn",
+      "britishIpa": "vaɪəlˈɪn",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2168-ought-to",
+      "americanSsml": "<speak><phoneme alphabet=\"ipa\" ph=\"ˈɔːt\">ought</phoneme> <phoneme alphabet=\"ipa\" ph=\"tə\">to</phoneme></speak>",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2172-digest",
+      "americanIpa": "daɪˈʤɛst",
+      "britishIpa": "daɪˈʤɛst",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2213-energetic",
+      "americanIpa": "ˌɛnɚˈʤɛtɪk",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2214-alongside",
+      "americanIpa": "əˈlɔːŋˈsaɪd",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2222-fundamental",
+      "americanIpa": "ˌfʌndəˈmɛntəl",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2262-database",
+      "americanIpa": "ˈdeɪtəˌbeɪs",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2270-protein",
+      "americanIpa": "ˈpɹoʊˌtiːn",
+      "britishIpa": "pɹˈəʊtiːn",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2273-dynasty",
+      "americanIpa": "ˈdaɪnəstiː",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2315-ecology",
+      "britishIpa": "iːˈkɒləʤiː",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2333-refresh",
+      "americanIpa": "ɹɪˈfɹɛʃ",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2396-ballet",
+      "americanIpa": "bæˈleɪ",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2439-chaos",
+      "americanIpa": "ˈkeɪɑːs",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2463-mankind",
+      "americanIpa": "ˈmænˈkaɪnd",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2486-illegal",
+      "americanIpa": "ˌɪˈliːɡəl",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2515-japan",
+      "americanIpa": "ʤəˈpæn",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2519-receipt",
+      "americanIpa": "ɹɪˈsiːt",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2524-contrary",
+      "britishIpa": "ˈkɒntɹəɹiː",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2536-dismiss",
+      "americanIpa": "dɪsˈmɪs",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2585-distinct",
+      "americanIpa": "dɪˈstɪŋkt",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2602-congratulation",
+      "americanIpa": "kənˌɡɹæʧəˈleɪʃən",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2619-superb",
+      "americanIpa": "sʊˈpɚb",
+      "britishIpa": "suːpˈɜːb",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2634-potato",
+      "americanIpa": "pəˈteɪˌtoʊ",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2656-erupt",
+      "americanIpa": "ɪˈɹʌpt",
+      "britishIpa": "ɪɹˈʌpt",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2662-occupation",
+      "americanIpa": "ˌɑːkjəˈpeɪʃən",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2684-era",
+      "americanIpa": "ˈɪɹə",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2716-applaud",
+      "americanIpa": "əˈplɔːd",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2727-restrict",
+      "americanIpa": "ɹiːˈstɹɪkt",
+      "britishIpa": "ɹɪstɹˈɪkt",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2735-atlantic",
+      "americanIpa": "ətˈlæntɪk",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2739-ad-a-d",
+      "britishIpa": "ˌeɪˈdiː",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2741-canteen",
+      "americanIpa": "kænˈtiːn",
+      "britishIpa": "kɑːntˈiːn",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2754-eighteen",
+      "americanIpa": "ˌeɪˈtiːn",
+      "britishIpa": "eɪtˈiːn",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2758-pe-p-e",
+      "americanIpa": "ˌpiːˈiː",
+      "britishIpa": "ˌpiːˈiː",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2760-sixteen",
+      "americanIpa": "ˌsɪkˈstiːn",
+      "britishIpa": "sɪkstˈiːn",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2766-download",
+      "americanIpa": "ˌdaʊnˈloʊd",
+      "britishIpa": "ˌdaʊnˈləʊd",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2775-dimension",
+      "americanIpa": "dɪˈmɛnʃən",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2778-frontier",
+      "americanIpa": "fɹənˈtɪɹ",
+      "britishIpa": "fɹˈʌntiːə",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2789-subscribe",
+      "americanIpa": "səbsˈkɹaɪb",
+      "britishIpa": "səbskɹˈaɪb",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2804-correspond",
+      "americanIpa": "ˌkɔːɹəˈspɑːnd",
+      "britishIpa": "kˌɒɹɪspˈɒnd",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2814-premier",
+      "americanIpa": "pɹɪˈmɪɹ",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2823-dolphin",
+      "americanIpa": "ˈdɑːlfən",
+      "britishIpa": "dˈɒlfɪn",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2824-anticipate",
+      "americanIpa": "ænˈtɪsəˌpeɪt",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2830-compose",
+      "americanIpa": "kəmˈpoʊz",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2836-harmonious",
+      "britishIpa": "hɑːˈməʊniːəs",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2866-downstairs",
+      "americanIpa": "ˈdaʊnˈstɛɹz",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2867-extent",
+      "americanIpa": "ɪkˈstɛnt",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2921-kangaroo",
+      "americanIpa": "ˌkæŋɡɚˈuː",
+      "britishIpa": "kˈæŋɡəɹˌuː",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2938-bow",
+      "americanIpa": "ˈbaʊ",
+      "britishIpa": "ˈbaʊ",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2951-directory",
+      "britishIpa": "dɪˈɹɛktəɹiː",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2952-domain",
+      "americanIpa": "doʊˈmeɪn",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2955-entitle",
+      "americanIpa": "ɪnˈtaɪtəl",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2956-equator",
+      "americanIpa": "ɪˈkweɪtɚ",
+      "britishIpa": "ɪkwˈeɪtə",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2957-fabric",
+      "americanIpa": "ˈfæbɹɪk",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2964-handkerchief",
+      "americanIpa": "ˈhæŋkɚʧɪf",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    },
+    {
+      "entryId": "gaokao-frequency-2970-liberation",
+      "americanIpa": "ˌlɪˌbɚˈeɪʃən",
+      "reason": "Owner QA pronunciation repair; IPA/SSML locks the reviewed word stress and intended classroom sense."
+    }
+  ]
+}

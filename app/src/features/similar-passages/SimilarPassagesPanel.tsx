@@ -29,6 +29,7 @@
  * title tooltip, still shown (pool honesty, not hidden).
  */
 import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { ChevronUp } from 'lucide-react'
 import type { QuestionGroupCard, SimilarPassagesResponse } from '../../domain/questionBank'
 
 export type SimilarPassagesRequestState =
@@ -81,7 +82,7 @@ export function SimilarPassagesPanel(props: SimilarPassagesPanelProps): ReactNod
         <h4 className="paper-browse-lecture-title">相似篇章</h4>
         <span className="similar-passages-sub">{recipeSummary}</span>
         <button type="button" className="similar-backlink" onClick={onCollapse}>
-          收起 ↑
+          收起 <ChevronUp size={13} aria-hidden="true" />
         </button>
       </div>
 

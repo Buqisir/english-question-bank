@@ -1,0 +1,544 @@
+{
+  "schemaVersion": 1,
+  "version": "sentence-scene-pilot-v1",
+  "status": "owner_qa_passed",
+  "question": "抽象词与确切例句和未改 Koboyo 原图共同出现时，是否比裸图更容易理解且不牵强？",
+  "generatedAt": "2026-08-11",
+  "integrationPolicy": "prototype_only_not_integrated",
+  "sentencePolicy": "owner_approved_for_pilot_binding_not_integrated",
+  "assetPolicy": "reuse_verified_unchanged_koboyo_originals_only",
+  "ownerQaReceipt": {
+    "schemaVersion": 1,
+    "version": "sentence-scene-pilot-owner-qa-v1",
+    "pilotVersion": "sentence-scene-pilot-v1",
+    "decidedAt": "2026-08-11",
+    "decision": "all_pass",
+    "reviewUnit": "image_plus_exact_sentence_plus_highlight",
+    "reviewedCount": 8,
+    "passedCount": 8,
+    "integrationAuthorized": false,
+    "note": "Owner confirmed that all eight sentence-scene pilot bindings passed QA.",
+    "entries": [
+      {
+        "entryId": "gaokao-frequency-0209-however",
+        "headword": "however",
+        "verdict": "pass"
+      },
+      {
+        "entryId": "gaokao-frequency-0828-although",
+        "headword": "although",
+        "verdict": "pass"
+      },
+      {
+        "entryId": "gaokao-frequency-0970-throughout",
+        "headword": "throughout",
+        "verdict": "pass"
+      },
+      {
+        "entryId": "gaokao-frequency-1164-unless",
+        "headword": "unless",
+        "verdict": "pass"
+      },
+      {
+        "entryId": "gaokao-frequency-1502-despite",
+        "headword": "despite",
+        "verdict": "pass"
+      },
+      {
+        "entryId": "gaokao-frequency-1538-indeed",
+        "headword": "indeed",
+        "verdict": "pass"
+      },
+      {
+        "entryId": "gaokao-frequency-1694-somehow",
+        "headword": "somehow",
+        "verdict": "pass"
+      },
+      {
+        "entryId": "gaokao-frequency-2646-nevertheless",
+        "headword": "nevertheless",
+        "verdict": "pass"
+      }
+    ]
+  },
+  "licenseReceipt": {
+    "url": "https://koboyo.com/icons/license",
+    "checkedAt": "2026-08-11",
+    "status": 200
+  },
+  "entries": [
+    {
+      "order": 1,
+      "entryId": "gaokao-frequency-0209-however",
+      "headword": "however",
+      "frequencyRank": 209,
+      "partOfSpeech": "adv.",
+      "sourceMeanings": [
+        "然而"
+      ],
+      "visualMode": "sentence-scene",
+      "teachingSense": "然而",
+      "visualSentenceId": "gaokao-frequency-0209-however-pilot-a",
+      "visualSentenceTextSha256": "483baf3de9b393dcf411f6483e61f5d3225163311abb1a72a1c458006d26b48d",
+      "sentenceStatus": "owner_approved",
+      "sentence": {
+        "candidateId": "pilot-a",
+        "english": "The storm was strong; however, she kept walking.",
+        "chinese": "暴风雨很猛烈，然而她仍继续前行。",
+        "highlight": "however"
+      },
+      "sceneQuery": {
+        "subject": "a person with an umbrella",
+        "action": "keeps walking",
+        "object": "a strong storm",
+        "condition": "the storm continues but does not stop the action"
+      },
+      "bindingRationale": "原图同时呈现强烈阻碍和继续前行，例句中的 however 负责连接这两个相反事实。",
+      "displayContract": "image_and_exact_sentence_with_target_highlight",
+      "asset": {
+        "sourceEntryId": "wanwei-basic-0731-force",
+        "sourceHeadword": "force",
+        "slug": "stormy-day-person-walking",
+        "width": 176,
+        "height": 197,
+        "path": "/vocabulary-assets/wanwei-round-one-v1/visuals/koboyo-v1/wanwei-basic-0731-force--stormy-day-person-walking.svg",
+        "sha256": "f1c69667c6c8d51523ef97afdee8aa9e3cb45d1bdf0cafd8957636ac9001f871",
+        "version": "koboyo-v1",
+        "alt": "一个人在暴风雨中撑伞继续前行",
+        "provenanceType": "koboyo-original-reuse",
+        "officialPageUrl": "https://koboyo.com/icons/stormy-day-person-walking",
+        "officialSvgUrl": "https://koboyo.com/icons/svg/stormy-day-person-walking.svg",
+        "licenseUrl": "https://koboyo.com/icons/license",
+        "sourceReceipt": {
+          "checkedAt": "2026-08-11",
+          "officialPageStatus": 200,
+          "officialSvgStatus": 200,
+          "remoteSha256": "0cde7b6b6a93813d4ed69290bf289be2adb2d1dfed31a9888aa446c2d13ded92",
+          "remoteNormalizedSha256": "0cde7b6b6a93813d4ed69290bf289be2adb2d1dfed31a9888aa446c2d13ded92",
+          "localNormalizedSha256": "0cde7b6b6a93813d4ed69290bf289be2adb2d1dfed31a9888aa446c2d13ded92",
+          "contentMatchAfterTrailingWhitespaceNormalization": true
+        }
+      },
+      "qa": {
+        "status": "owner_qa_passed",
+        "reviewUnit": "image_plus_exact_sentence_plus_highlight",
+        "verdict": "pass",
+        "integratedIntoProduct": false
+      }
+    },
+    {
+      "order": 2,
+      "entryId": "gaokao-frequency-0828-although",
+      "headword": "although",
+      "frequencyRank": 828,
+      "partOfSpeech": "conj.",
+      "sourceMeanings": [
+        "虽"
+      ],
+      "visualMode": "sentence-scene",
+      "teachingSense": "虽",
+      "visualSentenceId": "gaokao-frequency-0828-although-pilot-a",
+      "visualSentenceTextSha256": "75cad86636cf01e8b2c4e1ee9b23273c83b8045478ac13cc2de59e7147693ef7",
+      "sentenceStatus": "owner_approved",
+      "sentence": {
+        "candidateId": "pilot-a",
+        "english": "Although her umbrella was broken, she kept walking in the rain.",
+        "chinese": "虽然她的伞坏了，但她仍在雨中继续前行。",
+        "highlight": "Although"
+      },
+      "sceneQuery": {
+        "subject": "a person in the rain",
+        "action": "keeps walking",
+        "object": "a broken umbrella",
+        "condition": "the umbrella is broken"
+      },
+      "bindingRationale": "原图准确呈现让步从句中的坏伞和主句中的继续行动，不需要额外编故事。",
+      "displayContract": "image_and_exact_sentence_with_target_highlight",
+      "asset": {
+        "sourceEntryId": "wanwei-basic-1199-wet",
+        "sourceHeadword": "wet",
+        "slug": "person-broken-umbrella-rain",
+        "width": 214,
+        "height": 203,
+        "path": "/vocabulary-assets/wanwei-round-one-v1/visuals/koboyo-v1/wanwei-basic-1199-wet--person-broken-umbrella-rain.svg",
+        "sha256": "4fc42a9e2c1f9df041d93048b23894abb39b348eb70a2be6196d2e6587bf994a",
+        "version": "koboyo-v1",
+        "alt": "一个人拿着坏掉的雨伞站在雨中",
+        "provenanceType": "koboyo-original-reuse",
+        "officialPageUrl": "https://koboyo.com/icons/person-broken-umbrella-rain",
+        "officialSvgUrl": "https://koboyo.com/icons/svg/person-broken-umbrella-rain.svg",
+        "licenseUrl": "https://koboyo.com/icons/license",
+        "sourceReceipt": {
+          "checkedAt": "2026-08-11",
+          "officialPageStatus": 200,
+          "officialSvgStatus": 200,
+          "remoteSha256": "0c705e34c352cd391dd2575ddf8408895c05fd75fca9689b664a15d944a6bdc5",
+          "remoteNormalizedSha256": "0c705e34c352cd391dd2575ddf8408895c05fd75fca9689b664a15d944a6bdc5",
+          "localNormalizedSha256": "0c705e34c352cd391dd2575ddf8408895c05fd75fca9689b664a15d944a6bdc5",
+          "contentMatchAfterTrailingWhitespaceNormalization": true
+        }
+      },
+      "qa": {
+        "status": "owner_qa_passed",
+        "reviewUnit": "image_plus_exact_sentence_plus_highlight",
+        "verdict": "pass",
+        "integratedIntoProduct": false
+      }
+    },
+    {
+      "order": 3,
+      "entryId": "gaokao-frequency-0970-throughout",
+      "headword": "throughout",
+      "frequencyRank": 970,
+      "partOfSpeech": "prep.",
+      "sourceMeanings": [
+        "遍及"
+      ],
+      "visualMode": "sentence-scene",
+      "teachingSense": "遍及",
+      "visualSentenceId": "gaokao-frequency-0970-throughout-pilot-a",
+      "visualSentenceTextSha256": "9bb56e324c34ac8f1cadda59b7e105044a3b1b254f017389b7bd72dbd4e03d1a",
+      "sentenceStatus": "owner_approved",
+      "sentence": {
+        "candidateId": "pilot-a",
+        "english": "The museum stays open throughout the year.",
+        "chinese": "这家博物馆全年开放。",
+        "highlight": "throughout"
+      },
+      "sceneQuery": {
+        "subject": "a museum schedule",
+        "action": "remains open",
+        "object": "the complete year",
+        "condition": "all months are covered"
+      },
+      "bindingRationale": "原图把一年中的月份作为完整范围呈现，例句把这个范围绑定到开放状态。",
+      "displayContract": "image_and_exact_sentence_with_target_highlight",
+      "asset": {
+        "sourceEntryId": "wanwei-basic-1235-year",
+        "sourceHeadword": "year",
+        "slug": "year-view-calendar",
+        "width": 217,
+        "height": 207,
+        "path": "/vocabulary-assets/wanwei-round-one-v1/visuals/koboyo-v1/wanwei-basic-1235-year--year-view-calendar.svg",
+        "sha256": "67ac467e206fb0ef4475a265ca323351867914bb1d51418032301e5e7878a914",
+        "version": "koboyo-v1",
+        "alt": "一张展示全年月份的年历",
+        "provenanceType": "koboyo-original-reuse",
+        "officialPageUrl": "https://koboyo.com/icons/year-view-calendar",
+        "officialSvgUrl": "https://koboyo.com/icons/svg/year-view-calendar.svg",
+        "licenseUrl": "https://koboyo.com/icons/license",
+        "sourceReceipt": {
+          "checkedAt": "2026-08-11",
+          "officialPageStatus": 200,
+          "officialSvgStatus": 200,
+          "remoteSha256": "622c2b5e2e8326dd06ef521c4ff349126a09fe9c4bbe3c0b8db66b74ac604a9c",
+          "remoteNormalizedSha256": "622c2b5e2e8326dd06ef521c4ff349126a09fe9c4bbe3c0b8db66b74ac604a9c",
+          "localNormalizedSha256": "622c2b5e2e8326dd06ef521c4ff349126a09fe9c4bbe3c0b8db66b74ac604a9c",
+          "contentMatchAfterTrailingWhitespaceNormalization": true
+        }
+      },
+      "qa": {
+        "status": "owner_qa_passed",
+        "reviewUnit": "image_plus_exact_sentence_plus_highlight",
+        "verdict": "pass",
+        "integratedIntoProduct": false
+      }
+    },
+    {
+      "order": 4,
+      "entryId": "gaokao-frequency-1164-unless",
+      "headword": "unless",
+      "frequencyRank": 1164,
+      "partOfSpeech": "conj.",
+      "sourceMeanings": [
+        "除非"
+      ],
+      "visualMode": "sentence-scene",
+      "teachingSense": "除非",
+      "visualSentenceId": "gaokao-frequency-1164-unless-pilot-a",
+      "visualSentenceTextSha256": "3130a217f25e6915cbb442119168b6973e4fe41069ff6e557e5cd3dce682f642",
+      "sentenceStatus": "owner_approved",
+      "sentence": {
+        "candidateId": "pilot-a",
+        "english": "You cannot enter unless someone opens the gate.",
+        "chinese": "除非有人打开大门，否则你不能进去。",
+        "highlight": "unless"
+      },
+      "sceneQuery": {
+        "subject": "a person at a gate",
+        "action": "opens the gate",
+        "object": "entry through the gate",
+        "condition": "entry becomes possible only when the gate opens"
+      },
+      "bindingRationale": "原图呈现进入所需的可见条件；unless 在完整句中说明只有该条件成立才能进入。",
+      "displayContract": "image_and_exact_sentence_with_target_highlight",
+      "asset": {
+        "sourceEntryId": "wanwei-core-0013-allow",
+        "sourceHeadword": "allow",
+        "slug": "person-opening-gate",
+        "width": 214,
+        "height": 190,
+        "path": "/vocabulary-assets/wanwei-round-one-v1/visuals/koboyo-v1/wanwei-core-0013-allow--person-opening-gate.svg",
+        "sha256": "6d43575e0beca52d27093077df17cd54789c22220d78777ab489f9bdcb05fb50",
+        "version": "koboyo-v1",
+        "alt": "一个人正在打开木门让人通过",
+        "provenanceType": "koboyo-original-reuse",
+        "officialPageUrl": "https://koboyo.com/icons/person-opening-gate",
+        "officialSvgUrl": "https://koboyo.com/icons/svg/person-opening-gate.svg",
+        "licenseUrl": "https://koboyo.com/icons/license",
+        "sourceReceipt": {
+          "checkedAt": "2026-08-11",
+          "officialPageStatus": 200,
+          "officialSvgStatus": 200,
+          "remoteSha256": "e8aac86bda5e3e4ca21700d523a8cb13f7fb6b2e18dcbcd7e8fe2568d50e639b",
+          "remoteNormalizedSha256": "e8aac86bda5e3e4ca21700d523a8cb13f7fb6b2e18dcbcd7e8fe2568d50e639b",
+          "localNormalizedSha256": "e8aac86bda5e3e4ca21700d523a8cb13f7fb6b2e18dcbcd7e8fe2568d50e639b",
+          "contentMatchAfterTrailingWhitespaceNormalization": true
+        }
+      },
+      "qa": {
+        "status": "owner_qa_passed",
+        "reviewUnit": "image_plus_exact_sentence_plus_highlight",
+        "verdict": "pass",
+        "integratedIntoProduct": false
+      }
+    },
+    {
+      "order": 5,
+      "entryId": "gaokao-frequency-1502-despite",
+      "headword": "despite",
+      "frequencyRank": 1502,
+      "partOfSpeech": "prep.",
+      "sourceMeanings": [
+        "尽 管"
+      ],
+      "visualMode": "sentence-scene",
+      "teachingSense": "尽管",
+      "visualSentenceId": "gaokao-frequency-1502-despite-pilot-a",
+      "visualSentenceTextSha256": "c8ca373c867abbe819d378328ed02d1036003b9f099b036fb83a3018c9b40b66",
+      "sentenceStatus": "owner_approved",
+      "sentence": {
+        "candidateId": "pilot-a",
+        "english": "Despite the huge rock, he kept pushing it uphill.",
+        "chinese": "尽管岩石巨大，他仍继续把它往坡上推。",
+        "highlight": "Despite"
+      },
+      "sceneQuery": {
+        "subject": "a person on a slope",
+        "action": "keeps pushing uphill",
+        "object": "a huge rock",
+        "condition": "the obstacle is visibly difficult"
+      },
+      "bindingRationale": "巨石是可见阻力，继续推是主动作；图句组合直接体现 despite 的让步关系。",
+      "displayContract": "image_and_exact_sentence_with_target_highlight",
+      "asset": {
+        "sourceEntryId": "wanwei-core-0098-difficult",
+        "sourceHeadword": "difficult",
+        "slug": "person-pushing-large-boulder",
+        "width": 260,
+        "height": 191,
+        "path": "/vocabulary-assets/wanwei-round-one-v1/visuals/koboyo-v1/wanwei-core-0098-difficult--person-pushing-large-boulder.svg",
+        "sha256": "6cab97d9fafc8af28bf161331d50a2eccf31c690a2fabe70b3fb4df282f8b080",
+        "version": "koboyo-v1",
+        "alt": "一个人在斜坡上费力推动巨石",
+        "provenanceType": "koboyo-original-reuse",
+        "officialPageUrl": "https://koboyo.com/icons/person-pushing-large-boulder",
+        "officialSvgUrl": "https://koboyo.com/icons/svg/person-pushing-large-boulder.svg",
+        "licenseUrl": "https://koboyo.com/icons/license",
+        "sourceReceipt": {
+          "checkedAt": "2026-08-11",
+          "officialPageStatus": 200,
+          "officialSvgStatus": 200,
+          "remoteSha256": "3d3513ffa741437006a0e1d46d7c1644118149fe8e7d6a1235f7fd01fb6926ec",
+          "remoteNormalizedSha256": "3d3513ffa741437006a0e1d46d7c1644118149fe8e7d6a1235f7fd01fb6926ec",
+          "localNormalizedSha256": "3d3513ffa741437006a0e1d46d7c1644118149fe8e7d6a1235f7fd01fb6926ec",
+          "contentMatchAfterTrailingWhitespaceNormalization": true
+        }
+      },
+      "qa": {
+        "status": "owner_qa_passed",
+        "reviewUnit": "image_plus_exact_sentence_plus_highlight",
+        "verdict": "pass",
+        "integratedIntoProduct": false
+      }
+    },
+    {
+      "order": 6,
+      "entryId": "gaokao-frequency-1538-indeed",
+      "headword": "indeed",
+      "frequencyRank": 1538,
+      "partOfSpeech": "adv.",
+      "sourceMeanings": [
+        "确实",
+        "其实"
+      ],
+      "visualMode": "sentence-scene",
+      "teachingSense": "确实",
+      "visualSentenceId": "gaokao-frequency-1538-indeed-pilot-a",
+      "visualSentenceTextSha256": "6c71bac041c4305894266a9e898d1e60dd67876355f83e8eb439c121f0196c3b",
+      "sentenceStatus": "owner_approved",
+      "sentence": {
+        "candidateId": "pilot-a",
+        "english": "After checking the answer, she found it was indeed correct.",
+        "chinese": "核对答案后，她发现它确实是正确的。",
+        "highlight": "indeed"
+      },
+      "sceneQuery": {
+        "subject": "a person holding a checked document",
+        "action": "confirms the result",
+        "object": "a correct answer",
+        "condition": "the answer has been checked"
+      },
+      "bindingRationale": "原图中的勾选文件提供已经核验的证据，indeed 在句中加强确认结果。",
+      "displayContract": "image_and_exact_sentence_with_target_highlight",
+      "asset": {
+        "sourceEntryId": "wanwei-basic-0982-really",
+        "sourceHeadword": "really",
+        "slug": "person-single-source-truth",
+        "width": 169,
+        "height": 183,
+        "path": "/vocabulary-assets/wanwei-round-one-v1/visuals/koboyo-v1/wanwei-basic-0982-really--person-single-source-truth.svg",
+        "sha256": "df191217722b278f892a689c7e49e5243052770d1a236f690af07fb97ce702a6",
+        "version": "koboyo-v1",
+        "alt": "一个人举着带勾选标记的文件确认结果",
+        "provenanceType": "koboyo-original-reuse",
+        "officialPageUrl": "https://koboyo.com/icons/person-single-source-truth",
+        "officialSvgUrl": "https://koboyo.com/icons/svg/person-single-source-truth.svg",
+        "licenseUrl": "https://koboyo.com/icons/license",
+        "sourceReceipt": {
+          "checkedAt": "2026-08-11",
+          "officialPageStatus": 200,
+          "officialSvgStatus": 200,
+          "remoteSha256": "45a8d6885231be848956d240c7f5fcd17d1a1af2baf0d0dbb28419aec9cb99a9",
+          "remoteNormalizedSha256": "45a8d6885231be848956d240c7f5fcd17d1a1af2baf0d0dbb28419aec9cb99a9",
+          "localNormalizedSha256": "45a8d6885231be848956d240c7f5fcd17d1a1af2baf0d0dbb28419aec9cb99a9",
+          "contentMatchAfterTrailingWhitespaceNormalization": true
+        }
+      },
+      "qa": {
+        "status": "owner_qa_passed",
+        "reviewUnit": "image_plus_exact_sentence_plus_highlight",
+        "verdict": "pass",
+        "integratedIntoProduct": false
+      }
+    },
+    {
+      "order": 7,
+      "entryId": "gaokao-frequency-1694-somehow",
+      "headword": "somehow",
+      "frequencyRank": 1694,
+      "partOfSpeech": "adv.",
+      "sourceMeanings": [
+        "以某种方式"
+      ],
+      "visualMode": "sentence-scene",
+      "teachingSense": "以某种方式",
+      "visualSentenceId": "gaokao-frequency-1694-somehow-pilot-a",
+      "visualSentenceTextSha256": "f7d46e8539658f6c48f9e3f49aca519c414017216e0971cf09c1cb01d9ae4c4f",
+      "sentenceStatus": "owner_approved",
+      "sentence": {
+        "candidateId": "pilot-a",
+        "english": "After hours of thinking, he somehow found the answer.",
+        "chinese": "思考了几个小时后，他不知怎么找到了答案。",
+        "highlight": "somehow"
+      },
+      "sceneQuery": {
+        "subject": "a person thinking",
+        "action": "finds an answer",
+        "object": "a new idea",
+        "condition": "the method is not explained"
+      },
+      "bindingRationale": "原图清楚呈现最终找到答案；句子保留过程不明这一点，让 somehow 的作用成立。",
+      "displayContract": "image_and_exact_sentence_with_target_highlight",
+      "asset": {
+        "sourceEntryId": "wanwei-core-0144-find",
+        "sourceHeadword": "find",
+        "slug": "person-finding-answer",
+        "width": 200,
+        "height": 204,
+        "path": "/vocabulary-assets/wanwei-round-one-v1/visuals/koboyo-v1/wanwei-core-0144-find--person-finding-answer.svg",
+        "sha256": "4896e40c7bc7d207b9c301413cbd1bd8c35eec957fb38cd2d1da2fc1089ac74e",
+        "version": "koboyo-v1",
+        "alt": "一个人想到办法并举手示意找到了答案",
+        "provenanceType": "koboyo-original-reuse",
+        "officialPageUrl": "https://koboyo.com/icons/person-finding-answer",
+        "officialSvgUrl": "https://koboyo.com/icons/svg/person-finding-answer.svg",
+        "licenseUrl": "https://koboyo.com/icons/license",
+        "sourceReceipt": {
+          "checkedAt": "2026-08-11",
+          "officialPageStatus": 200,
+          "officialSvgStatus": 200,
+          "remoteSha256": "1b35e5d1504e67bf31ed2f89109e65ba4feaf93a18ec85fc9bb8b41330f91245",
+          "remoteNormalizedSha256": "1b35e5d1504e67bf31ed2f89109e65ba4feaf93a18ec85fc9bb8b41330f91245",
+          "localNormalizedSha256": "1b35e5d1504e67bf31ed2f89109e65ba4feaf93a18ec85fc9bb8b41330f91245",
+          "contentMatchAfterTrailingWhitespaceNormalization": true
+        }
+      },
+      "qa": {
+        "status": "owner_qa_passed",
+        "reviewUnit": "image_plus_exact_sentence_plus_highlight",
+        "verdict": "pass",
+        "integratedIntoProduct": false
+      }
+    },
+    {
+      "order": 8,
+      "entryId": "gaokao-frequency-2646-nevertheless",
+      "headword": "nevertheless",
+      "frequencyRank": 2646,
+      "partOfSpeech": "adv.",
+      "sourceMeanings": [
+        "尽管如此"
+      ],
+      "visualMode": "sentence-scene",
+      "teachingSense": "尽管如此",
+      "visualSentenceId": "gaokao-frequency-2646-nevertheless-pilot-a",
+      "visualSentenceTextSha256": "5f50615da421da0ec7208f52927f5bef1eaaf3aeb6c8839ce3569f5b020ec8c6",
+      "sentenceStatus": "owner_approved",
+      "sentence": {
+        "candidateId": "pilot-a",
+        "english": "The wall was high; nevertheless, he kept climbing.",
+        "chinese": "墙很高，尽管如此，他仍继续攀爬。",
+        "highlight": "nevertheless"
+      },
+      "sceneQuery": {
+        "subject": "a climber",
+        "action": "keeps climbing",
+        "object": "a high wall",
+        "condition": "the wall remains an obstacle"
+      },
+      "bindingRationale": "原图同时呈现高墙和持续攀爬，完整句用 nevertheless 明确逆势继续的关系。",
+      "displayContract": "image_and_exact_sentence_with_target_highlight",
+      "asset": {
+        "sourceEntryId": "wanwei-core-0066-climb",
+        "sourceHeadword": "climb",
+        "slug": "person-climbing-wall",
+        "width": 163,
+        "height": 200,
+        "path": "/vocabulary-assets/wanwei-round-one-v1/visuals/koboyo-v1/wanwei-core-0066-climb--person-climbing-wall.svg",
+        "sha256": "bf996cec66cb54c507e8a5249522db5a637a10c0b85e349785e3b56c15af7f5a",
+        "version": "koboyo-v1",
+        "alt": "一个人面对高墙仍继续向上攀爬",
+        "provenanceType": "koboyo-original-reuse",
+        "officialPageUrl": "https://koboyo.com/icons/person-climbing-wall",
+        "officialSvgUrl": "https://koboyo.com/icons/svg/person-climbing-wall.svg",
+        "licenseUrl": "https://koboyo.com/icons/license",
+        "sourceReceipt": {
+          "checkedAt": "2026-08-11",
+          "officialPageStatus": 200,
+          "officialSvgStatus": 200,
+          "remoteSha256": "2bc404c6436f074bbf7c75112bd395543693f4a4c903682bafe52ab6f23af02b",
+          "remoteNormalizedSha256": "2bc404c6436f074bbf7c75112bd395543693f4a4c903682bafe52ab6f23af02b",
+          "localNormalizedSha256": "2bc404c6436f074bbf7c75112bd395543693f4a4c903682bafe52ab6f23af02b",
+          "contentMatchAfterTrailingWhitespaceNormalization": true
+        }
+      },
+      "qa": {
+        "status": "owner_qa_passed",
+        "reviewUnit": "image_plus_exact_sentence_plus_highlight",
+        "verdict": "pass",
+        "integratedIntoProduct": false
+      }
+    }
+  ]
+}

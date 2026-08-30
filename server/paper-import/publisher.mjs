@@ -2,6 +2,7 @@ import { createHash, randomUUID } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import {
+  assertPaperImportAnalysisSidecars,
   beginPaperImportPublish,
   computeNextPaperAssetVersion,
   cleanupPaperImportTempArtifacts,
@@ -34,6 +35,14 @@ import {
   docxPairPublicationSourceAsset,
   isDocxPairCanonicalImportRequest,
 } from '../paper-canonical/docxPairCanonicalRequest.mjs'
+import {
+  isNck1MaterializationCanonicalImportRequest,
+  nck1MaterializationPublicationSourceAsset,
+} from '../paper-canonical/nck1MaterializationCanonicalRequest.mjs'
+import {
+  buildNck1CompatibilityPackage,
+  buildNck1ReviewProjection,
+} from '../import-review/revisionProjection.mjs'
 import {
   canonicalizeVisibleEnglishTypography,
 } from '../../shared/paper-canonical/visibleTypography.mjs'
@@ -173,6 +182,7 @@ export function recoverInterruptedPaperImportPublish({
   db,
   paperAssetsDir,
   paperId,
+  validateCommittedAssets = null,
 }) {
   const current = getCurrentCanonicalPublication(db, paperId)
   return recoverPaperImportLatestSwap({
@@ -191,6 +201,7 @@ export function recoverInterruptedPaperImportPublish({
           db,
         }),
       })
+      if (validateCommittedAssets) validateCommittedAssets(targetVersion)
     },
   })
 }
@@ -253,7 +264,7 @@ function upsertPaperAssetToDb(db, packageData, version, options = {}) {
     const materialText = getGroupMaterialText(group)
     const summary =
       groupMeta.summary ||
-      readingAnalysis.groups?.[group.groupId]?.overview ||
+      readingAnalysis?.groups?.[group.groupId]?.overview ||
       group.title ||
       paper.title
     const groupTitle = groupMeta.displayTitleOverride || group.title
@@ -399,7 +410,7 @@ function upsertPaperAssetToDb(db, packageData, version, options = {}) {
     version,
     `v${version}`,
     path.join('app/public/paper-assets', paper.paperId, 'versions', `v${version}`),
-    packageData.sourceDocx.sha256,
+    packageData.sourceDocx?.sha256 || packageData.sourceAssetDigest,
   )
 }
 
@@ -1088,6 +1099,231 @@ function admitBoundCanonicalPackage({
   return { admission }
 }
 
+function validateUniversalNck1Binding({
+  admission,
+  packageData,
+  expectedVisibleStructureDigest,
+}) {
+  const canonicalPaper = admission.compilation.artifacts.canonicalPaper
+  const sourceCapture = admission.compilation.artifacts.sourceCapture
+  const importedGroups = Object.values(packageData.paperAsset.content.groups)
+  const canonicalGroups = canonicalPaper.questionGroups
+  if (importedGroups.length !== 9 || canonicalGroups.length !== 9) {
+    return {
+      code: 'CANONICAL_IMPORT_GROUP_SET_MISMATCH',
+      message: 'Universal NCK1 publication requires exactly nine active Question Groups',
+    }
+  }
+  const canonicalById = new Map(canonicalGroups.map((group) => [
+    group.identity.groupId,
+    group,
+  ]))
+  for (const importedGroup of importedGroups) {
+    const canonicalGroup = canonicalById.get(importedGroup.groupId)
+    if (
+      !canonicalGroup
+      || canonicalGroup.contractRef.familyContractId
+        !== importedFamily(importedGroup, packageData.paperAsset)
+      || JSON.stringify(canonicalGroup.questionRefs.map(({ questionId }) => questionId))
+        !== JSON.stringify(importedGroup.questionIds)
+    ) {
+      return {
+        code: 'CANONICAL_IMPORT_GROUP_BINDING_MISMATCH',
+        message: `Universal NCK1 Group identity differs from Canonical Paper: ${importedGroup.groupId}`,
+      }
+    }
+  }
+  const answers = Object.entries(packageData.answerKey.answers || {})
+  const assertions = new Map(sourceCapture.assertions.map((assertion) => [
+    assertion.questionId,
+    assertion.answer,
+  ]))
+  if (
+    answers.length !== 45
+    || answers.some(([questionId, answer]) =>
+      assertions.get(questionId) !== answer.answer)
+  ) {
+    return {
+      code: 'CANONICAL_IMPORT_ANSWER_MISMATCH',
+      message: 'Universal NCK1 publication requires all 45 active authoritative answers',
+    }
+  }
+  const listeningSlots = ['listening.short-dialogue', 'listening.long-form']
+  const inactiveClosures = new Map((
+    admission.compilation.artifacts.normalizationReport.inactiveSourceClosures || []
+  ).map(
+    (closure) => [closure.slotId, closure],
+  ))
+  if (listeningSlots.some((slotId) => {
+    const binding = canonicalPaper.paperPlan.slotBindings.find(
+      (candidate) => candidate.slotId === slotId && candidate.state === 'inactive',
+    )
+    const closure = inactiveClosures.get(slotId)
+    return binding?.sourceState !== 'not_supplied' && closure?.status !== 'closed'
+  })) {
+    return {
+      code: 'CANONICAL_IMPORT_INACTIVE_BINDING_MISMATCH',
+      message: 'Universal NCK1 Listening must be explicitly not supplied or closed as inactive source',
+    }
+  }
+  if (
+    admission.consumers.screen.visibleStructureDigest
+      !== expectedVisibleStructureDigest
+  ) {
+    return {
+      code: 'CANONICAL_IMPORT_VISIBLE_STRUCTURE_MISMATCH',
+      message: 'Canonical Publication visible structure differs from the Owner-approved revision',
+    }
+  }
+  return null
+}
+
+function admitBoundUniversalNck1Package({
+  canonicalRequest,
+  version,
+  paperId,
+  packageData,
+  expectedVisibleStructureDigest,
+}) {
+  if (!isNck1MaterializationCanonicalImportRequest(canonicalRequest)) {
+    return {
+      failure: canonicalAdmissionFailure({
+        disposition: 'unsupported',
+        diagnostics: [{
+          code: 'NCK1_MATERIALIZATION_REQUEST_INVALID',
+          message: 'Universal NCK1 publication requires one confirmed materialization request',
+        }],
+      }),
+    }
+  }
+  const admission = admitCanonicalPaperImport({
+    request: canonicalRequest,
+    sourceAssetVersion: version,
+    sourceAsset: nck1MaterializationPublicationSourceAsset(canonicalRequest),
+  })
+  if (!admission.ok) return { failure: canonicalAdmissionFailure(admission) }
+  if (admission.sealed.manifest.paperId !== paperId) {
+    return {
+      failure: canonicalAdmissionFailure({
+        disposition: 'unsupported',
+        diagnostics: [{
+          code: 'CANONICAL_IMPORT_PAPER_ID_MISMATCH',
+          message: 'Canonical Publication paper identity differs from the approved universal import',
+        }],
+      }),
+    }
+  }
+  const bindingFailure = validateUniversalNck1Binding({
+    admission,
+    packageData,
+    expectedVisibleStructureDigest,
+  })
+  if (bindingFailure) {
+    return {
+      failure: canonicalAdmissionFailure({
+        disposition: 'unsupported',
+        diagnostics: [bindingFailure],
+      }),
+    }
+  }
+  return { admission }
+}
+
+function universalValidationReport(projection) {
+  return {
+    ok: true,
+    paperId: projection.paperId,
+    assetVersion: projection.candidate.interpretation.sourceAssetVersion,
+    acceptedFiles: [],
+    rejectedFiles: [],
+    warnings: [],
+    blockingIssues: [],
+    structurePreview: [],
+    readingGroups: getReadingChoiceGroups(projection.paperAsset).map((group) => ({
+      groupId: group.groupId,
+      title: group.title,
+      questionIds: group.questionIds,
+      defaultQuestionId: group.questionIds?.[0] || null,
+    })),
+    normalizationGroups: [],
+    limits: {},
+    generatedAt: new Date().toISOString(),
+  }
+}
+
+export function publishUniversalNck1Import({
+  reviewRootDir,
+  approvedIdentity,
+  canonicalRequest,
+  db,
+  paperAssetsDir,
+  forceDbFailure = false,
+  failurePoint = null,
+}) {
+  const projection = buildNck1ReviewProjection(
+    reviewRootDir,
+    { requireAnalyses: true },
+  )
+  const expectedIdentity = {
+    sourceDigest: projection.sourceDigest,
+    candidateDigest: projection.candidateDigest,
+    visibleStructureDigest: projection.visibleStructureDigest,
+    analysisDigest: projection.analysisDigest,
+  }
+  if (
+    !approvedIdentity
+    || Object.entries(expectedIdentity).some(
+      ([key, value]) => approvedIdentity[key] !== value,
+    )
+  ) {
+    return canonicalAdmissionFailure({
+      disposition: 'unsupported',
+      diagnostics: [{
+        code: 'IMPORT_REVIEW_APPROVAL_IDENTITY_MISMATCH',
+        message: 'Local universal Candidate does not match the exact Owner-approved identity',
+      }],
+    })
+  }
+  const requestConfirmation = canonicalRequest?.nck1MaterializationConfirmation
+  if (
+    requestConfirmation?.sourceDigest !== projection.sourceDigest
+    || requestConfirmation?.candidateDigest !== projection.candidateDigest
+  ) {
+    return canonicalAdmissionFailure({
+      disposition: 'unsupported',
+      diagnostics: [{
+        code: 'NCK1_MATERIALIZATION_REQUEST_IDENTITY_MISMATCH',
+        message: 'Canonical request does not bind the exact Owner-approved source and Candidate',
+      }],
+    })
+  }
+  const packageData = buildNck1CompatibilityPackage({
+    config: projection.config,
+    manifest: projection.manifest,
+    materialization: projection.materialization,
+    sourceAssetVersion: projection.candidate.interpretation.sourceAssetVersion,
+    analysisSidecars: projection.analysisSidecars,
+  })
+  return publishPreparedPaperImport({
+    db,
+    paperAssetsDir,
+    packageData,
+    publicValidation: universalValidationReport(projection),
+    forceDbFailure,
+    failurePoint,
+    requireCompleteAnalyses: true,
+    admitPackage(version) {
+      return admitBoundUniversalNck1Package({
+        canonicalRequest,
+        version,
+        paperId: projection.paperId,
+        packageData,
+        expectedVisibleStructureDigest: projection.visibleStructureDigest,
+      })
+    },
+  })
+}
+
 export function publishPaperImportPackage({
   files,
   db,
@@ -1130,26 +1366,79 @@ export function publishPaperImportPackage({
     }
   }
 
-  const paperId = validation.packageData.paperAsset.paper.paperId
   const sourceAssetFile = files.find(
     (file) => file.fileName === 'paper-asset.json' && Buffer.isBuffer(file.buffer),
   )
   const answerKeyFile = files.find(
     (file) => file.fileName === 'answer-key.json' && Buffer.isBuffer(file.buffer),
   )
-  const recovery = recoverInterruptedPaperImportPublish({ db, paperAssetsDir, paperId })
+  return publishPreparedPaperImport({
+    db,
+    paperAssetsDir,
+    packageData: validation.packageData,
+    publicValidation,
+    forceDbFailure,
+    failurePoint,
+    admitPackage(version) {
+      return admitBoundCanonicalPackage({
+        canonicalRequest,
+        version,
+        paperId: validation.packageData.paperAsset.paper.paperId,
+        packageData: validation.packageData,
+        sourceAssetBytes: sourceAssetFile?.buffer,
+        answerKeyBytes: answerKeyFile?.buffer,
+      })
+    },
+  })
+}
+
+function publishPreparedPaperImport({
+  db,
+  paperAssetsDir,
+  packageData,
+  publicValidation,
+  admitPackage,
+  forceDbFailure = false,
+  failurePoint = null,
+  requireCompleteAnalyses = false,
+}) {
+  const paperId = packageData.paperAsset.paper.paperId
+  const preflightVersion = computeNextPublishVersion({
+    db,
+    paperAssetsDir,
+    paperId,
+  })
+  const preflightAdmission = admitPackage(preflightVersion)
+  if (preflightAdmission.failure) return preflightAdmission.failure
+  const recovery = recoverInterruptedPaperImportPublish({
+    db,
+    paperAssetsDir,
+    paperId,
+    validateCommittedAssets: requireCompleteAnalyses
+      ? (targetVersion) => {
+          assertPaperImportAnalysisSidecars({
+            baseDir: path.join(
+              paperAssetsDir,
+              paperId,
+              'versions',
+              `v${targetVersion}`,
+            ),
+            packageData,
+            version: targetVersion,
+          })
+          assertPaperImportAnalysisSidecars({
+            baseDir: path.join(paperAssetsDir, paperId, 'latest'),
+            packageData,
+            version: targetVersion,
+          })
+        }
+      : null,
+  })
   cleanupPaperImportTempArtifacts(paperAssetsDir)
 
   if (recovery.finalized) {
     const current = getCurrentCanonicalPublication(db, paperId)
-    const retry = admitBoundCanonicalPackage({
-      canonicalRequest,
-      version: recovery.targetVersion,
-      paperId,
-      packageData: validation.packageData,
-      sourceAssetBytes: sourceAssetFile?.buffer,
-      answerKeyBytes: answerKeyFile?.buffer,
-    })
+    const retry = admitPackage(recovery.targetVersion)
     if (retry.failure) return retry.failure
     if (
       !current
@@ -1195,25 +1484,20 @@ export function publishPaperImportPackage({
     paperAssetsDir,
     paperId,
   })
-  const admissionResult = admitBoundCanonicalPackage({
-    canonicalRequest,
-    version,
-    paperId,
-    packageData: validation.packageData,
-    sourceAssetBytes: sourceAssetFile?.buffer,
-    answerKeyBytes: answerKeyFile?.buffer,
-  })
+  const admissionResult = version === preflightVersion
+    ? preflightAdmission
+    : admitPackage(version)
   if (admissionResult.failure) return admissionResult.failure
   const admission = admissionResult.admission
-  const readingGroups = getReadingChoiceGroups(validation.packageData.paperAsset).map((group) => ({
+  const readingGroups = getReadingChoiceGroups(packageData.paperAsset).map((group) => ({
     groupId: group.groupId,
     title: group.title,
     defaultQuestionId: group.questionIds?.[0] || null,
   }))
-  const scGroups = getSevenChoicesGroups(validation.packageData.paperAsset)
-  const clozeGroups = getClozeGroups(validation.packageData.paperAsset)
-  const gfGroups = getGrammarFillGroups(validation.packageData.paperAsset)
-  const writingGroups = getWritingGroups(validation.packageData.paperAsset)
+  const scGroups = getSevenChoicesGroups(packageData.paperAsset)
+  const clozeGroups = getClozeGroups(packageData.paperAsset)
+  const gfGroups = getGrammarFillGroups(packageData.paperAsset)
+  const writingGroups = getWritingGroups(packageData.paperAsset)
   const publishReport = {
     ok: true,
     paperId,
@@ -1230,7 +1514,7 @@ export function publishPaperImportPackage({
   try {
     writtenVersion = writePaperImportVersion({
       paperAssetsDir,
-      packageData: validation.packageData,
+      packageData,
       validationReport: publicValidation,
       publishReport,
       version,
@@ -1247,6 +1531,13 @@ export function publishPaperImportPackage({
     })
     if (failurePoint === 'process-exit-after-version-rename') {
       process.exit(87)
+    }
+    if (requireCompleteAnalyses) {
+      assertPaperImportAnalysisSidecars({
+        baseDir: writtenVersion.versionDir,
+        packageData,
+        version,
+      })
     }
 
     const canonicalRef = {
@@ -1266,7 +1557,7 @@ export function publishPaperImportPackage({
     db.exec('BEGIN')
     ensurePaperImportDatabaseShape(db)
     upsertPaperAssetToDb(db, {
-      ...validation.packageData,
+      ...packageData,
       paperAsset: writtenVersion.artifacts.paperAsset,
       answerKey: writtenVersion.artifacts.answerKey,
       readingAnalysis: writtenVersion.artifacts.readingAnalysis,
@@ -1293,6 +1584,13 @@ export function publishPaperImportPackage({
       deferCleanup: true,
       forceFailureAt: failurePoint,
     })
+    if (requireCompleteAnalyses) {
+      assertPaperImportAnalysisSidecars({
+        baseDir: latestSwap.latestDir,
+        packageData,
+        version,
+      })
+    }
     if (failurePoint === 'process-exit-after-latest-swap') {
       process.exit(86)
     }

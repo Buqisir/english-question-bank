@@ -13,6 +13,7 @@
     "prototype:abcd-options": "node ../docs/cuts/paper-canonical-unification/prototypes/abcd-option-layout-selector/selector-prototype.mjs",
     "prototype:prep-hall": "node ../design/deeptutor-prep-hall-prototype/serve.mjs",
     "verify:changed": "node ../scripts/verify-ci.mjs --changed",
+    "verify:import-paper": "node ../scripts/verify-ci.mjs --pack import-paper",
     "verify:paper": "node ../scripts/verify-ci.mjs --pack paper",
     "verify:all": "node ../scripts/verify-ci.mjs"
   },

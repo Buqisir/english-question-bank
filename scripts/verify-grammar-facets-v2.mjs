@@ -75,15 +75,21 @@ const NON_FINITE_KEY = 'grammar-fill.given.verb.non-finite'
 const registry = JSON.parse(readRepoFile('server/paper-import-ai/grammar-fill-facets-v2.json'))
 const VALID_FACET_KEYS = new Set(registry.map((f) => f.facet_key))
 assert('Req 0: v2 registry has exactly 22 leaves', VALID_FACET_KEYS.size === 22, `found: ${VALID_FACET_KEYS.size}`)
+const frozenPaperIds = JSON.parse(
+  readRepoFile('docs/cuts/paper-canonical-unification/migration/manifest-v2.json'),
+).membership.paperIds
 
 function findAnalysisFiles() {
-  const files = []
-  for (const entry of readdirSync(paperAssetsDir, { withFileTypes: true })) {
-    if (!entry.isDirectory()) continue
-    const p = path.join(paperAssetsDir, entry.name, 'latest', 'analyses', 'grammar-fill-analysis-v1.json')
-    if (existsSync(p)) files.push(p)
-  }
-  return files.sort()
+  return frozenPaperIds
+    .map((paperId) => path.join(
+      paperAssetsDir,
+      paperId,
+      'latest',
+      'analyses',
+      'grammar-fill-analysis-v1.json',
+    ))
+    .filter(existsSync)
+    .sort()
 }
 
 const files = findAnalysisFiles()

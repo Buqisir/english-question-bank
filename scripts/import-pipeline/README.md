@@ -7,6 +7,133 @@
 ## Agent 执行入口
 
 任何 agent 要导一套新卷,先读 `docs/import/agent-contract.md`（唯一进场）。
+项目级 `importing-nck1-papers` skill 会自动匹配导题、继续某卷、审核返工、状态查询
+和认可后本地发布任务。每次先运行：
+
+```bash
+node scripts/import-pipeline/review.mjs preflight <paperId>
+```
+
+该只读命令把本地 Source / Materialization / 收据与 Review API 当前 revision 合成
+`materializing`、`awaiting_review`、`changes_requested`、`approved`、
+`locally_published`、`ready_to_ship`、`shipped` 或 `failed`，并给出可审计的
+`next.action`。Agent 据此恢复；Owner 无需记下面的机械命令。
+
+新卷默认使用 `universal-nck1.mjs`,不再选择格式①/②/③；下列旧 stages
+只用于已登记存量卷复现。
+
+```bash
+node scripts/import-pipeline/universal-nck1.mjs preflight
+node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
+  --paper-name '<卷名>' --provenance '<出处>' \
+  --source question_source=/abs/questions.pdf \
+  --source official_answers=/abs/answers.docx
+node scripts/import-pipeline/universal-nck1.mjs materialize <paperId>
+node scripts/import-pipeline/universal-nck1.mjs verify <paperId>
+node scripts/import-pipeline/universal-nck1.mjs build <paperId>
+node scripts/import-pipeline/review.mjs verify-analyses <paperId>
+QUESTION_BANK_IMPORT_OPS_ORIGIN=https://eqbank.cc \
+QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN='<secret>' \
+  node scripts/import-pipeline/review.mjs push <paperId>
+```
+
+题卷与答案在同一份DOCX/PDF时只登记一个
+`--source question_and_answers=/abs/paper-with-answers.pdf`。只有完整题卷后恰好一个明确
+答案heading才拆分；无/双heading或位置不明返回
+`NCK1_COMBINED_SOURCE_BOUNDARY_AMBIGUOUS`。纯答案键与带逐题详解/写作范文的答案源都只
+生成同一套完整21–65答案值；源详解和范文不进入Materialization、Candidate或教师版，
+原source bytes/digest仍保留。只有ABCD而缺56–65答案仍失败关闭。
+
+暂时只有题卷、没有权威答案时，不运行`init`或分配可发布`paperId`。使用
+source-only状态先保留DOCX/PDF或显式排序图片页：
+
+```bash
+node scripts/import-pipeline/universal-nck1.mjs capture-source-only <sourceSetId> \
+  --paper-name '<卷名>' --provenance '<题卷出处>' \
+  --source question_source=/abs/questions.pdf
+node scripts/import-pipeline/universal-nck1.mjs source-only-status <sourceSetId>
+node scripts/import-pipeline/universal-nck1.mjs list-source-only
+```
+
+记录位于gitignored `imports/source-only/`；补答案前Materialization、Candidate、Review和
+publication均稳定拒绝。以后找到答案，按status中的exact `questionSetDigest`创建新的正常
+complete source set；旧capture与题卷bytes保持不变，独立successor receipt只记录后继：
+
+```bash
+node scripts/import-pipeline/universal-nck1.mjs attach-answers \
+  <sourceSetId> <newPaperId> \
+  --question-set-digest 'sha256:…' --answer-provenance '<答案出处>' \
+  --source official_answers=/abs/answers.pdf
+```
+
+图片题卷和图片答案分别用重复的
+`--source-page question_source:<页码>=/abs/page.png`和
+`--source-page official_answers:<页码>=/abs/page.png`，不把整页图当Canonical正文。
+
+`preflight` 一次性启动 magick、ffmpeg、soffice、pdfinfo、pdftoppm、unzip，并在
+macOS 检查 magick/ffmpeg 动态链接；失败就开工前停，中途不得安装或升级依赖。
+`init` 也先执行同一检查，再复制并摘要绑定本地源，DOCX 同时生成确定性 PDF
+rendition；源文件、Materialization 与 canonical evidence 均 gitignored。已知
+NCK1 结构的试题 DOCX + 权威答案 DOCX 用 `materialize` 生成逐段 locator、九题组
+骨架、答案与结构化复核清单。Agent 必须生产 4× reading、seven、cloze、grammar、
+application、continuation 共九份教学分析；不确定的
+section/题号/blank/答案/表格或视觉语义进入 `review.required` 并失败关闭，AI 禁止
+解题补答案。producer receipt 绑定版本和 source digest；未变源直接 resume，检测到
+Agent 已编辑输出时绝不覆盖。同一 paperId 仍单 writer；两份写作分析可并行纯读后
+由该 writer 汇总。其他载体由 Agent 写统一
+Materialization：DOCX 每个源 `<w:p>` 一对一保留为独立 paragraph block，禁止合并
+相邻段落；阅读 A/B/C/D 等独立篇目标记不写入正文。表格为网格，图为原媒体
+配方。应用文和读后续写按“题干/逐段材料 → 注意与词数、格式 → 框内给定内容”
+保留源顺序；续写材料逐段映射，标题、称呼与两条开头语不并入正文。`verify` 会用
+不可变 DOCX 源检查 paragraph block 未跨越段落边界，并拒绝写作注意块缺失、词数
+冲突、续写材料合段或框内给定内容错位。媒体助手：
+
+```bash
+node scripts/import-pipeline/universal-nck1.mjs extract-docx-media \
+  <source.docx> <word/media/entry> <output> [--density 300]
+node scripts/import-pipeline/universal-nck1.mjs crop-pdf \
+  <source.pdf> <page> <x,y,width,height> <output.png> [--density 300]
+```
+
+SVG 内容媒体必须用固定 density 转 PNG；DOCX shape 先用 init 生成的 PDF
+rendition，再按 `pdf_crop` 路径裁。当前工具只支持确定性媒体；清晰图只裁准/摆准。
+低清图的AI辅助候选政策已登记在能力矩阵Ticket 04，但在原图永久保留、source/candidate
+digest绑定、禁止去水印及`/ops/`并排+overlay/闪烁人工确认gate实现前，不得用于导入。
+`verify` 只派生 Candidate，`build` 只生成
+Candidate 摘要和 `confirmed: false` 的 Teacher Confirmation 模板。`review.mjs
+verify-analyses` 在 push 前校验九份输入及其确定性五份 Screen sidecar projection；
+`push` 把不可变源、Candidate 与九份原始 analysis bytes 作为新 revision 上传到
+`/ops/`。Owner 在真实
+Screen/Print/PDF 上审核；Agent 用自己的 `import_agent` 网页待办箱或下列命令
+读取、回复和提交修订：
+
+单卷 Materialization 文件的 changed-file 路由使用
+`pnpm -C app verify:import-paper`：它保留 schema/Candidate admission、权威答案与
+digest、Screen、Student/Teacher Print、PDF、publication/recovery 的独立失败层，
+不再误跑普通 feature pack。共享 producer/Canonical/renderer 或未知、混合变更仍
+失败关闭到 `verify:all`。
+
+```bash
+node scripts/import-pipeline/review.mjs preflight <paperId>
+node scripts/import-pipeline/review.mjs verify-analyses <paperId>
+node scripts/import-pipeline/review.mjs status <paperId>
+node scripts/import-pipeline/review.mjs reply <paperId> <issueId> --message '<回复>'
+node scripts/import-pipeline/review.mjs push <paperId> --resolves <issueId>[,<issueId>]
+node scripts/import-pipeline/review.mjs accept <paperId>
+node scripts/import-pipeline/review.mjs publish <paperId>
+```
+
+`accept` 只在最新 revision 已由 Owner 认可时成功；它重新核对本地源、Candidate、
+可见结构、`analysisDigest`、文件清单和 bundle digest，才写确认、Canonical
+request 和摘要绑定 QA 收据。它不 publish、不部署。`publish` 再核对同一网页认可、
+QA 收据、Teacher
+Confirmation、Canonical request 与 AI 答案复核，然后通过共享原子 publisher 写
+同版本 DB、五份 analysis sidecar、`versions/vN`、`latest` 和 Canonical current
+ref；成功后写
+`signals/locally-published.json` 并进入 `ready_to_ship`。同一认可与有效本地发布
+收据重跑为 no-op。Agent 不代确认；`accept`、`publish` 和 Owner 网页认可都不构成
+上线授权。
+
 机械 how-to 见 `docs/import/agent-runbook.md`；本 README 只是它引用的工序
 参考,不重复讲工序。数据契约权威见 `docs/product/nck1-paper-standard.md`。
 格式③（试题 DOCX + 答案解析 DOCX）映射见该标准附录 A。切卷：
@@ -92,14 +219,22 @@ node scripts/import-pipeline/build-docx-pair-canonical-request.mjs \
 
 ## 上线（内容，非代码）
 
-本地 `--publish` 之后不要自动 push。可执行清单（本身不跑 push）：
+通用入口 `review.mjs publish`（存量入口为 `--publish`）之后不要自动 push。可执行清单（本身不跑 push）：
 
 ```bash
 node scripts/import-pipeline/ship-checklist.mjs check <paperId> --owner-said-ship
 ```
 
-仅当打印「允许」、且 owner **当前**口头「上线」时，才跑整库
-`node scripts/pull-run-push.mjs push`。不是单卷增量，不是 `deploy.sh`。
+该清单继续使用 `QUESTION_BANK_IMPORT_OPS_ORIGIN` 与 Agent token，只读确认本地
+QA 收据与 `locally-published.json` 仍是 Review 服务的当前最新认可，且对应同版本
+`latest`；新 revision 会让旧收据失败关闭。仅当
+打印「允许」、且 owner **当前**口头「上线」时，才跑整库
+`node scripts/pull-run-push.mjs push <paperId> --owner-said-ship`。实际 push 会在
+停生产服务前再次用 Agent token 读取当前 Review revision，再用独立
+`QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN` 事务性取得 shipping guard；两个 token 必须
+不同，普通 Agent 账号/token 都不能取得 guard。若清单
+之后出现新 revision，则不做任何生产修改。guard 持有到远端操作结束，期间 Review
+服务拒绝新 revision 和会撤销认可的问题状态修改。不是单卷增量，不是 `deploy.sh`。
 导题后台无按钮。详见 `docs/import/agent-contract.md` 上线。
 
 ## 待办(productionization 续)

@@ -32,15 +32,19 @@ export function validateGrammarFillPromptProvision(
       )]
 }
 
-function exactPromptPrefixAgrees(following, prompt) {
+export function grammarFillPromptPrefix(following, prompt) {
   if (following?.kind !== 'text' || typeof following.text !== 'string') {
-    return false
+    return null
   }
-  const prefix = ` (${prompt})`
-  if (!following.text.startsWith(prefix)) return false
+  const prefix = following.text.startsWith(` (${prompt})`)
+    ? ` (${prompt})`
+    : `(${prompt})`
+  if (!following.text.startsWith(prefix)) return null
   const boundary = following.text.slice(prefix.length, prefix.length + 1)
   return boundary === ''
-    || [' ', '\t', '.', ',', ';', ':', '!', '?'].includes(boundary)
+    || [' ', '\t', '\r', '\n', '.', ',', ';', ':', '!', '?'].includes(boundary)
+    ? prefix
+    : null
 }
 
 export function validateGrammarFillPromptContract({
@@ -125,7 +129,7 @@ export function validateGrammarFillPromptContract({
       && !binding.prompt.includes(')')
       && !binding.prompt.includes('\r')
       && !binding.prompt.includes('\n')
-      && exactPromptPrefixAgrees(following, binding.prompt)
+      && grammarFillPromptPrefix(following, binding.prompt) !== null
     )
     const unprompted = (
       isRecordValue(binding)

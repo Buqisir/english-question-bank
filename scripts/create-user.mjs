@@ -12,11 +12,13 @@
 // printed, and the DB connection is closed in try/finally.
 //
 // Usage:
-//   node scripts/create-user.mjs --username W [--role owner|member] [--password P]
-//     Creates a new active user. If --password is omitted, a random password is
-//     generated with crypto.randomBytes(9).toString('base64url') and printed once
-//     (never written to disk).
-//   node scripts/create-user.mjs --reset-password --username W [--password P]
+//   node scripts/create-user.mjs --username W [--role owner|member]
+//     [--account-kind human|import_agent] [--password P | --password-stdin]
+//     Creates a new active user. If neither password option is supplied, a random
+//     password is generated with crypto.randomBytes(9).toString('base64url') and
+//     printed once (never written to disk).
+//   node scripts/create-user.mjs --reset-password --username W
+//     [--password P | --password-stdin]
 //     Resets an existing user's password and deletes all of their sessions
 //     (there is no recovery flow — this command IS the recovery flow, run by the
 //     owner on the server). Password omitted -> same random-generate-and-print.
@@ -27,11 +29,13 @@
 //
 // docs/cuts/m0-2-invite-login/plan.md decision 8 / docs/adr/0012-invite-login-auth-design.md
 import { randomBytes } from 'node:crypto'
+import { readFileSync } from 'node:fs'
 import {
   createUser,
   deleteSessionsForUser,
   findUserByUsername,
   hashPassword,
+  setUserAccountKind,
   setUserPasswordHash,
   setUserStatus,
 } from '../server/auth/auth.mjs'
@@ -43,7 +47,7 @@ function fail(message) {
 }
 
 function parseArgs(argv) {
-  const args = { role: 'member' }
+  const args = { role: 'member', accountKind: 'human' }
   for (let i = 0; i < argv.length; i += 1) {
     const token = argv[i]
     switch (token) {
@@ -53,8 +57,14 @@ function parseArgs(argv) {
       case '--password':
         args.password = argv[++i]
         break
+      case '--password-stdin':
+        args.passwordStdin = true
+        break
       case '--role':
         args.role = argv[++i]
+        break
+      case '--account-kind':
+        args.accountKind = argv[++i]
         break
       case '--reset-password':
         args.mode = 'reset-password'
@@ -77,6 +87,19 @@ function generatePassword() {
   return randomBytes(9).toString('base64url')
 }
 
+function resolvePassword(args) {
+  if (args.password && args.passwordStdin) {
+    throw new Error('use only one of --password or --password-stdin')
+  }
+  if (args.passwordStdin) {
+    const password = readFileSync(0, 'utf8').replace(/\r?\n$/, '')
+    if (!password) throw new Error('--password-stdin received an empty password')
+    return { password, generated: false }
+  }
+  if (args.password) return { password: args.password, generated: false }
+  return { password: generatePassword(), generated: true }
+}
+
 async function main() {
   const args = parseArgs(process.argv.slice(2))
   if (!args) return
@@ -92,6 +115,14 @@ async function main() {
   }
   if (!args.mode && args.role && !['owner', 'member'].includes(args.role)) {
     fail(`invalid --role: ${args.role} (expected owner or member)`)
+    return
+  }
+  if (!args.mode && !['human', 'import_agent'].includes(args.accountKind)) {
+    fail(`invalid --account-kind: ${args.accountKind} (expected human or import_agent)`)
+    return
+  }
+  if (!args.mode && args.accountKind === 'import_agent' && args.role !== 'member') {
+    fail('import_agent accounts must use --role member')
     return
   }
 
@@ -118,23 +149,24 @@ async function main() {
         fail(`no such user: ${args.username}`)
         return
       }
-      const password = args.password || generatePassword()
+      const { password, generated } = resolvePassword(args)
       const passwordHash = await hashPassword(password)
       setUserPasswordHash(db, user.id, passwordHash)
       deleteSessionsForUser(db, user.id)
       console.log(`Step: password reset for ${args.username}. All existing sessions were revoked.`)
-      if (!args.password) {
+      if (generated) {
         console.log(`Generated password (shown once, not stored anywhere): ${password}`)
       }
       return
     }
 
     // Default mode: create a new user.
-    const password = args.password || generatePassword()
+    const { password, generated } = resolvePassword(args)
     const passwordHash = await hashPassword(password)
     const user = createUser(db, { username: args.username, passwordHash, role: args.role })
-    console.log(`Step: created user "${user.username}" (role: ${user.role}, id: ${user.id}).`)
-    if (!args.password) {
+    setUserAccountKind(db, user.id, args.accountKind)
+    console.log(`Step: created user "${user.username}" (role: ${user.role}, account: ${args.accountKind}, id: ${user.id}).`)
+    if (generated) {
       console.log(`Generated password (shown once, not stored anywhere): ${password}`)
     }
   } catch (error) {

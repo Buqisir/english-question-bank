@@ -52,6 +52,7 @@ import {
 } from '../shared/paper-canonical/abcdLayout.mjs'
 import {
   applicationWritingNoticeLines,
+  continuationStarterDisplayText,
 } from '../shared/paper-canonical/applicationWritingDisplay.mjs'
 import {
   readingPassageLetterGeometryForLetter,
@@ -257,6 +258,12 @@ function renderCanonicalParagraph(canonicalGroup, paragraph, displayNumberByQues
           : ''
     return `<span class="print-blank-unit"${pairAttrs}><span class="print-blank ${blankWidthClass}"><span class="print-blank-num">${displayNumber}</span></span>${hint}</span>`
   }).join('')
+}
+
+function canonicalSevenChoicesPassageRole(paragraph) {
+  if (paragraph.role === 'title') return 'passage_title'
+  if (paragraph.role === 'subtitle') return 'passage_subtitle'
+  return 'passage_body_line'
 }
 
 function canonicalGroupMatchesPrintDetail(canonicalGroup, detail) {
@@ -530,10 +537,32 @@ function renderCanonicalSharedBank(canonicalGroup, {
   return `<div class="canonical-option-bank-region" data-canonical-bank-heading-state="${headingHtml ? 'present' : 'absent'}">${headingHtml}<ol class="canonical-option-bank" data-canonical-bank-id="${escapeHtml(bankId)}" data-canonical-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}">${optionHtml}</ol></div>`
 }
 
+function canonicalMediaPresentationAttributes(media) {
+  const presentation = media?.presentation
+  if (!presentation) return ''
+  return ` data-canonical-media-alignment="${presentation.alignment}" data-canonical-media-spacing-before="${presentation.spacingBefore}" data-canonical-media-spacing-after="${presentation.spacingAfter}" style="--canonical-media-width-ratio:${presentation.widthRatio}"`
+}
+
 function renderCanonicalInlineNodes(nodes) {
-  return nodes.map((node) =>
-    `<span data-canonical-content-node-id="${escapeHtml(node.nodeId)}">${escapeHtml(node.text)}</span>`,
-  ).join('')
+  return nodes.map((node) => {
+    if (node.kind === 'media_ref') {
+      const src = `data:${node.mediaArtifact.mimeType};base64,${node.mediaArtifact.encodedBytes}`
+      return `<img class="canonical-reading-table-media" data-canonical-content-node-id="${escapeHtml(node.nodeId)}" data-canonical-media-id="${escapeHtml(node.mediaId)}"${canonicalMediaPresentationAttributes(node.media)} src="${escapeHtml(src)}" alt="${escapeHtml(node.alt)}">`
+    }
+    return `<span data-canonical-content-node-id="${escapeHtml(node.nodeId)}">${escapeHtml(node.text)}</span>`
+  }).join('')
+}
+
+function renderContinuationStarterInlineNodes(nodes, starterIndex) {
+  let firstText = true
+  return nodes.map((node) => {
+    if (node.kind === 'media_ref') return renderCanonicalInlineNodes([node])
+    const text = firstText
+      ? continuationStarterDisplayText(node.text, starterIndex)
+      : node.text
+    firstText = false
+    return `<span data-canonical-content-node-id="${escapeHtml(node.nodeId)}">${escapeHtml(text)}</span>`
+  }).join('')
 }
 
 const PRINT_PAGE_CONTENT_HEIGHT_PT = (297 - 21 - 24) * (72 / 25.4)
@@ -601,7 +630,10 @@ function renderCanonicalReadingBlock(block) {
   }
   if (block.kind === 'figure') {
     const src = `data:${block.mediaArtifact.mimeType};base64,${block.mediaArtifact.encodedBytes}`
-    return `<figure class="canonical-reading-figure" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="figure" data-canonical-media-id="${escapeHtml(block.mediaId)}"><img src="${escapeHtml(src)}" alt=""></figure>`
+    const caption = block.caption
+      ? `<figcaption>${renderCanonicalInlineNodes(block.captionInlines)}</figcaption>`
+      : ''
+    return `<figure class="canonical-reading-figure" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="figure" data-canonical-media-id="${escapeHtml(block.mediaId)}"${canonicalMediaPresentationAttributes(block.media)}><img src="${escapeHtml(src)}" alt=""${canonicalMediaPresentationAttributes(block.media)}>${caption}</figure>`
   }
   rejectCanonicalPrint(
     `Canonical Reading block ${block?.kind || 'unknown'} is not representable`,
@@ -734,7 +766,7 @@ function renderCanonicalOpaqueWriting(
             `Canonical Continuation Writing starter ${contentRef} is absent from source blocks`,
           )
         }
-        return `<div class="writing-continuation-row"><p class="writing-starter-line" data-canonical-starter-id="${escapeHtml(contentRef)}" data-canonical-block-id="${escapeHtml(contentRef)}" data-canonical-continuation-writing-rhythm-role="starter_${index + 1}">${renderCanonicalInlineNodes(block.inlines)}</p><span class="writing-continuation-writable-area" data-canonical-continuation-writing-rhythm-role="writable_after_starter_${index + 1}"></span></div>`
+        return `<div class="writing-continuation-row"><p class="writing-starter-line" data-canonical-starter-id="${escapeHtml(contentRef)}" data-canonical-block-id="${escapeHtml(contentRef)}" data-canonical-continuation-writing-rhythm-role="starter_${index + 1}">${renderContinuationStarterInlineNodes(block.inlines, index)}</p><span class="writing-continuation-writable-area" data-canonical-continuation-writing-rhythm-role="writable_after_starter_${index + 1}"></span></div>`
       }).join('')
   return `<div class="${familyClass} canonical-legacy-opaque-writing" data-canonical-writing-mode="legacy_opaque" data-canonical-writing-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-writing-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}" data-canonical-word-count-target="${canonicalGroup.wordCountTarget}" data-canonical-word-count-certainty="${escapeHtml(canonicalGroup.wordCountTargetCertainty)}" data-canonical-word-count-scope="${escapeHtml(canonicalGroup.wordCountScope)}">${application ? chrome : `<div class="canonical-continuation-chrome">${chrome}</div>`}<div class="passage canonical-legacy-opaque-source">${source}</div><div class="writing-answer-box ${responseClass} canonical-legacy-opaque-response" data-canonical-legacy-opaque-response="" data-canonical-response-ownership="${escapeHtml(response.ownership)}" data-canonical-answer-region-ref="${escapeHtml(response.answerRegionRef)}" data-canonical-response-slot-id="${escapeHtml(response.responseSlotId)}" style="width:${geometry.widthMm}mm;height:${geometry.heightMm}mm;">${starters}</div></div>`
 }
@@ -786,7 +818,7 @@ function renderCanonicalContinuationWriting(canonicalGroup, writingChrome) {
     `<p data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-continuation-writing-rhythm-role="material_paragraph">${renderCanonicalInlineNodes(block.inlines)}</p>`).join('')
   const response = canonicalGroup.answerRegion
   const starters = response.starterLines.map((starter, index) =>
-    `<div class="writing-continuation-row"><p class="writing-starter-line" data-canonical-starter-id="${escapeHtml(starter.starterId)}" data-canonical-block-id="${escapeHtml(starter.contentRef)}" data-canonical-continuation-writing-rhythm-role="starter_${index + 1}">${renderCanonicalInlineNodes(starter.inlines)}</p><span class="writing-continuation-writable-area" data-canonical-continuation-writing-rhythm-role="writable_after_starter_${index + 1}"></span></div>`).join('')
+    `<div class="writing-continuation-row"><p class="writing-starter-line" data-canonical-starter-id="${escapeHtml(starter.starterId)}" data-canonical-block-id="${escapeHtml(starter.contentRef)}" data-canonical-continuation-writing-rhythm-role="starter_${index + 1}">${renderContinuationStarterInlineNodes(starter.inlines, index)}</p><span class="writing-continuation-writable-area" data-canonical-continuation-writing-rhythm-role="writable_after_starter_${index + 1}"></span></div>`).join('')
   return `<div class="canonical-continuation-writing" data-canonical-writing-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-writing-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}" data-canonical-word-count-scope="${escapeHtml(canonicalGroup.wordCountRuling.countScope)}" data-canonical-word-count-target="${canonicalGroup.wordCountRuling.target}"><div class="canonical-continuation-chrome">${chrome}</div><div class="passage canonical-continuation-material">${material}</div><div class="writing-answer-box canonical-continuation-response" data-canonical-continuation-writing-rhythm-role="response_box" data-canonical-answer-region-ref="${escapeHtml(response.answerRegionRef)}" data-canonical-response-slot-id="${escapeHtml(response.responseSlotId)}" style="width:${continuationWritingRhythm.responseGeometry.widthMm}mm;height:${continuationWritingRhythm.responseGeometry.heightMm}mm;">${starters}</div></div>`
 }
 
@@ -1781,7 +1813,7 @@ export function buildPrintHtml({
             groupHtml += `<div class="passage">${canonicalGroup.paragraphs
               .map(
                 (paragraph) =>
-                  `<p data-canonical-paragraph-id="${escapeHtml(paragraph.paragraphId)}"${canonicalGroup.groupType === 'sevenChoices' ? ' data-canonical-seven-choices-rhythm-role="passage_body_line"' : canonicalGroup.groupType === 'cloze' ? ' data-canonical-cloze-rhythm-role="passage_body_line"' : canonicalGroup.groupType === 'grammarFill' ? ' data-canonical-grammar-fill-rhythm-role="passage_body_line"' : ''}>${renderCanonicalParagraph(
+                  `<p data-canonical-paragraph-id="${escapeHtml(paragraph.paragraphId)}"${canonicalGroup.groupType === 'sevenChoices' ? ` data-canonical-seven-choices-rhythm-role="${canonicalSevenChoicesPassageRole(paragraph)}"` : canonicalGroup.groupType === 'cloze' ? ' data-canonical-cloze-rhythm-role="passage_body_line"' : canonicalGroup.groupType === 'grammarFill' ? ' data-canonical-grammar-fill-rhythm-role="passage_body_line"' : ''}>${renderCanonicalParagraph(
                     canonicalGroup,
                     paragraph,
                     displayNumberByQuestionId,
@@ -2366,6 +2398,22 @@ body {
   line-height: ${sevenChoicesRhythm.targets.printPdf.baselineStepPt}pt;
 }
 
+.question-group[data-canonical-group-type="sevenChoices"] .passage p[
+  data-canonical-seven-choices-rhythm-role="passage_title"
+],
+.question-group[data-canonical-group-type="sevenChoices"] .passage p[
+  data-canonical-seven-choices-rhythm-role="passage_subtitle"
+] {
+  font-weight: bold;
+  text-indent: 0;
+}
+
+.question-group[data-canonical-group-type="sevenChoices"] .passage p[
+  data-canonical-seven-choices-rhythm-role="passage_title"
+] {
+  text-align: center;
+}
+
 .question-group[data-canonical-group-type="cloze"] .passage {
   margin: 0;
 }
@@ -2535,6 +2583,10 @@ body {
   text-align: center;
 }
 
+.canonical-reading {
+  container-type: inline-size;
+}
+
 .canonical-reading-table {
   width: 100%;
   margin: 0;
@@ -2549,15 +2601,72 @@ body {
   vertical-align: top;
 }
 
+.canonical-reading-table-media {
+  display: inline-block;
+  max-width: 100%;
+  max-height: 4em;
+  width: min(100%, calc(var(--canonical-media-width-ratio) * 100cqw));
+  height: auto;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+.canonical-reading-table-media[data-canonical-media-alignment="center"],
+.canonical-reading-table-media[data-canonical-media-alignment="right"] {
+  display: block;
+}
+
+.canonical-reading-table-media[data-canonical-media-alignment="center"] {
+  margin-inline: auto;
+}
+
+.canonical-reading-table-media[data-canonical-media-alignment="right"] {
+  margin-left: auto;
+}
+
+.canonical-reading-table td[rowspan]:not([rowspan="1"]) .canonical-reading-table-media {
+  max-height: 22em;
+}
+
 .canonical-reading-figure {
   margin: 0;
   text-align: center;
   break-inside: avoid;
 }
 
+.canonical-reading-figure[data-canonical-media-alignment="left"] {
+  text-align: left;
+}
+
+.canonical-reading-figure[data-canonical-media-alignment="right"] {
+  text-align: right;
+}
+
+.canonical-reading-figure[data-canonical-media-spacing-before="compact"] {
+  margin-top: 3pt;
+}
+
+.canonical-reading-figure[data-canonical-media-spacing-before="normal"] {
+  margin-top: 6pt;
+}
+
+.canonical-reading-figure[data-canonical-media-spacing-after="compact"] {
+  margin-bottom: 3pt;
+}
+
+.canonical-reading-figure[data-canonical-media-spacing-after="normal"] {
+  margin-bottom: 6pt;
+}
+
 .canonical-reading-figure img {
   max-width: 100%;
+  width: min(100%, calc(var(--canonical-media-width-ratio) * 100cqw));
   height: auto;
+}
+
+.canonical-reading-figure figcaption {
+  color: #555;
+  font-size: 9pt;
 }
 
 /* 阅读细线框：共享约定，不为单卷改。权威 exam-paper-format-standards.md §3c */

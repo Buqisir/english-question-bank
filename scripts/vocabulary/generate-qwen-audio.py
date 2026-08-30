@@ -22,7 +22,6 @@ from mlx_audio.tts.utils import load_model
 from mlx_audio.utils import load_audio
 
 
-VOICE = "eqb-british-teacher-v1"
 FORMAT = "audio-24khz-48kbitrate-mono-mp3"
 GENERATOR_VERSION = "eqb-qwen-audio-generator-v2"
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -50,6 +49,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--shard-count", type=int)
     parser.add_argument("--shard-index", type=int)
     parser.add_argument("--replace-manifest", action="store_true")
+    parser.add_argument("--public-base-path")
     return parser.parse_args()
 
 
@@ -289,7 +289,7 @@ def encode_mp3(wav_path: Path, destination: Path) -> None:
     os.replace(partial, destination)
 
 
-def validate_contract(args: argparse.Namespace, profile: dict[str, Any]) -> tuple[Path, str]:
+def validate_contract(args: argparse.Namespace, profile: dict[str, Any]) -> tuple[Path, str, str]:
     if args.batch_size < 1 or args.batch_size > 8:
         raise ValueError("--batch-size must be between 1 and 8")
     if args.max_tokens < 75 or args.max_tokens > 600:
@@ -300,7 +300,8 @@ def validate_contract(args: argparse.Namespace, profile: dict[str, Any]) -> tupl
         args.shard_count < 1 or args.shard_index < 0 or args.shard_index >= args.shard_count
     ):
         raise ValueError("Shard index must be between zero and shard count minus one")
-    if profile.get("voiceId") != VOICE or profile.get("ownerApproval", {}).get("status") != "approved":
+    voice = str(profile.get("voiceId") or "").strip()
+    if not voice or profile.get("ownerApproval", {}).get("status") != "approved":
         raise ValueError("The approved EQBank voice profile is required")
 
     model_path = args.model / "model.safetensors"
@@ -315,12 +316,12 @@ def validate_contract(args: argparse.Namespace, profile: dict[str, Any]) -> tupl
     reference_path = resolve_repo_path(profile["reference"]["path"])
     if sha256_file(reference_path) != profile["reference"]["sha256"]:
         raise ValueError("Reference WAV SHA-256 does not match the approved voice profile")
-    return reference_path, expected_model_sha
+    return reference_path, expected_model_sha, voice
 
 
-def select_entries(input_payload: dict[str, Any], selection_path: Path | None) -> list[dict[str, Any]]:
+def select_entries(input_payload: dict[str, Any], selection_path: Path | None, voice: str) -> list[dict[str, Any]]:
     entries = input_payload.get("entries")
-    if input_payload.get("voice") != VOICE or not isinstance(entries, list) or not entries:
+    if input_payload.get("voice") != voice or not isinstance(entries, list) or not entries:
         raise ValueError("Input must be the non-empty EQBank audio script")
     if selection_path is None:
         return entries
@@ -351,7 +352,8 @@ def main() -> None:
     args = parse_args()
     profile = read_json(args.profile)
     input_payload = read_json(args.input)
-    entries = select_entries(input_payload, args.selection)
+    reference_path, model_sha, voice = validate_contract(args, profile)
+    entries = select_entries(input_payload, args.selection, voice)
     if args.shard_count is not None:
         entries = [
             entry for index, entry in enumerate(entries)
@@ -359,8 +361,6 @@ def main() -> None:
         ]
         if not entries:
             raise ValueError("Selected shard is empty")
-    reference_path, model_sha = validate_contract(args, profile)
-
     args.output_dir.mkdir(parents=True, exist_ok=True)
     missing = []
     for entry in entries:
@@ -379,7 +379,12 @@ def main() -> None:
         print(f"Loading Qwen Base model for {len(missing)} missing assets", flush=True)
         model = load_model(model_path=str(args.model))
         reference_audio = load_audio(str(reference_path), sample_rate=model.sample_rate)
-        reference_text = profile["reference"]["sourceExcerpt"]["referenceText"]
+        reference_text = (
+            profile["reference"].get("referenceText")
+            or profile["reference"].get("sourceExcerpt", {}).get("referenceText")
+        )
+        if not reference_text:
+            raise ValueError("Approved voice profile is missing reference text")
         with tempfile.TemporaryDirectory(prefix="eqb-qwen-audio-") as temporary_dir:
             temporary_root = Path(temporary_dir)
             for offset in range(0, len(missing), args.batch_size):
@@ -529,17 +534,18 @@ def main() -> None:
             "path": filename,
             "bytes": destination.stat().st_size,
             "sha256": sha256_file(destination),
-            "voice": VOICE,
+            "voice": voice,
             "format": FORMAT,
-            "version": VOICE,
+            "version": voice,
             **probe,
         })
 
-    write_manifest(args.manifest, {
-        "schemaVersion": "wanwei-vocabulary-audio-manifest-v1" if args.selection is None and args.shard_count is None else "wanwei-vocabulary-audio-evaluation-v1",
-        "voice": VOICE,
+    manifest_payload = {
+        "schemaVersion": "wanwei-vocabulary-audio-manifest-v1" if voice == "eqb-british-teacher-v1" and input_payload.get("programId") in (None, "wanwei-round-one-v1") and args.selection is None and args.shard_count is None else "vocabulary-audio-manifest-v1",
+        "programId": input_payload.get("programId"),
+        "voice": voice,
         "format": FORMAT,
-        "version": VOICE,
+        "version": voice,
         "generator": {
             "version": GENERATOR_VERSION,
             "runtime": profile["runtime"],
@@ -567,8 +573,13 @@ def main() -> None:
             },
         },
         "entries": manifest_entries,
-    }, args.replace_manifest)
-    print(json.dumps({"manifest": str(args.manifest), "entries": len(manifest_entries), "voice": VOICE}, ensure_ascii=False))
+    }
+    if args.public_base_path:
+        if not args.public_base_path.startswith("/vocabulary-assets/"):
+            raise ValueError("--public-base-path must be inside /vocabulary-assets/")
+        manifest_payload["publicBasePath"] = args.public_base_path.rstrip("/")
+    write_manifest(args.manifest, manifest_payload, args.replace_manifest)
+    print(json.dumps({"manifest": str(args.manifest), "entries": len(manifest_entries), "voice": voice}, ensure_ascii=False))
 
 
 if __name__ == "__main__":

@@ -30,14 +30,13 @@ cloze + grammar_cloze + writing×2),听力原料另存(§4)。
   写入导入产物留痕,不得丢失。
 - **分值覆写**:入库分值一律按上表,不采用源卷标注分值。源卷分值
   仅在留痕里保存。
-- **格式白名单制**:只导已被工序验证过的源格式。当前白名单:
-  1. 新课标答案版 DOCX(2020–2025 十二套已验证的两种变体);
-  2. 新课标 PDF 试题卷 + 独立答案 PDF(2026 起,刀②接入);
-  3. 试题 DOCX + 答案解析 DOCX(NCK1 结构模拟卷;2026-08-13 owner
-     拍板,映射见附录 A)。
-  甲卷 / 乙卷 / 浙江卷等旧格式:为收存量真题按需接入,**一个格式
-  一把刀**,接入时把该格式 → 本标准的映射规则写进本文件附录,
-  并补对应 verify 锁。白名单之外的格式不得盲导。
+- **统一材料化制**:完整 NCK1 试题和权威答案可来自文本 PDF、扫描
+  PDF、单/双 DOCX 或这些载体的组合。Agent 一律生成
+  `nck1-source-materialization-v1`,可信 adapter 从不可变原始字节重新
+  派生 Candidate。正常标题、分页、空格、表格、图片和版式变化不得新增
+  paperId 登记或格式刀。语义表格结构化重画;真实图片、图标、条码和图表
+  从源提取/裁剪,不得 AI 重画。缺页、缺权威答案、来源矛盾或结构不确定
+  必须 fail closed。旧格式①/②/③脚本只保留存量回退,停止新增登记。
 - **语义保真**:洗卷只动结构 / 题号 / 分值 / 排版,不改题干、选项、
   篇章语义(与 exam-paper-format-standards.md 的
   Import Normalization Principle 一致)。归一化可能改变语义时,
@@ -89,18 +88,21 @@ figures 原料齐全(§8)。源无听力则跳过听力项;源无图且表已拍
 纯文本、无独立截图则跳过 figures 项,不得编造占位。现有 publish
 gate 覆盖不到的项,按格式补 verify 锁,不得靠人眼。
 
-新卷(格式③必检;其他格式一旦交出写作分析稿同样必检)还须:
+所有通用入口新卷（旧格式回退入口按各自存量合同）还须:
 
 - **应用文卷面 chrome**:题干不把「（词数N左右。）」粘在提示末尾;
   独立「注意」块写词数与答题卡格式;源给的标题/称呼进答题框
   (`givenSkeleton.presence = provided`)。格式①历史卷给定语可
   `omitted`,不得用本条去改已入库真题。排版细节见
   `exam-paper-format-standards.md` §8。
-- **九题组讲评齐**:阅读 / 七选五 / 完形 / 语法随发布包落地;写作两节
+- **九题组讲评齐**:Review `push` 前交齐 4×阅读、七选五、完形、语法、
+  应用文、续写九份 staged analysis，绑定进不可变 revision；阅读 / 七选五 /
+  完形 / 语法随发布包落地;写作两节
   必须写入 `analyses/writing-analysis-v1.json`(应用文 V3:`modelAnswer`
   + 完整 ReviewCard + 源有则 `officialModelAnswer`;续写 V1:
   `continuationAnalysis` 五段 + `modelAnswer`)。缺一组或整组只能显示
-  「解析未发布」则整卷打回。旧 `continuationDesign` 只认历史资产。
+  「解析未发布」则在 Owner QA 前整卷打回。正确项只来自权威答案，AI
+  不能解题补答案。旧 `continuationDesign` 只认历史资产。
 - **应用文讲评入口**:完整 payload 时点击答题框打开讲评;框内叠放
   「AI 参考范文」与可选「官方范文」,右栏只 ReviewCard。不新增 tab,
   不用白名单题组。

@@ -32,6 +32,7 @@ function runGit(args) {
   return execFileSync('git', args, {
     cwd: rootDir,
     encoding: 'utf8',
+    maxBuffer: 64 * 1024 * 1024,
     stdio: ['ignore', 'pipe', 'pipe'],
   }).trim()
 }

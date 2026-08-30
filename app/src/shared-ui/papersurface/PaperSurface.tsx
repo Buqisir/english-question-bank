@@ -26,6 +26,7 @@ import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import { paperSurfaceAnchorAttrs } from '../../../../shared/papersurface/anchorKeys.mjs'
 import {
   applicationWritingNoticeLines,
+  writingNoticeGroup,
 } from '../../../../shared/paper-canonical/applicationWritingDisplay'
 import {
   assertCanonicalReadingCompanion,
@@ -464,28 +465,76 @@ function CanonicalContinuationWritingMaterial({
     }>
   }>
 }) {
+  const notice = writingNoticeGroup(blocks.map((block) =>
+    block.inlines.map((inline) => inline.text).join('')))
   return (
-    <section
-      className="ps-section canonical-continuation-material"
-      data-canonical-continuation-material=""
-    >
-      {blocks.map((block) => (
-        <p
-          key={block.nodeId}
-          data-canonical-block-id={block.nodeId}
-          data-canonical-continuation-writing-rhythm-role="material_paragraph"
-        >
-          {block.inlines.map((inline) => (
-            <span
-              key={inline.nodeId}
-              data-canonical-content-node-id={inline.nodeId}
+    <>
+      <section
+        className="ps-section canonical-continuation-material"
+        data-canonical-continuation-material=""
+      >
+        {blocks.map((block, index) => {
+          if (
+            notice
+            && index >= notice.startIndex
+            && index < notice.startIndex + notice.blockCount
+          ) return null
+          return (
+            <p
+              key={block.nodeId}
+              data-canonical-block-id={block.nodeId}
+              data-canonical-continuation-writing-rhythm-role="material_paragraph"
             >
-              {inline.text}
-            </span>
-          ))}
+              {block.inlines.map((inline) => (
+                <span
+                  key={inline.nodeId}
+                  data-canonical-content-node-id={inline.nodeId}
+                >
+                  {inline.text}
+                </span>
+              ))}
+            </p>
+          )
+        })}
+      </section>
+      {notice && (
+        <p
+          className="canonical-continuation-notice"
+          data-canonical-block-id={
+            notice.blockCount === 1
+              ? blocks[notice.startIndex].nodeId
+              : undefined
+          }
+          data-canonical-content-node-id={
+            notice.blockCount === 1
+              ? blocks[notice.startIndex].inlines[0]?.nodeId
+              : undefined
+          }
+          data-canonical-continuation-writing-rhythm-role="notice_line"
+        >
+          {notice.lines.map((line, index) => {
+            const block = notice.blockCount === 1
+              ? blocks[notice.startIndex]
+              : blocks[notice.startIndex + index]
+            return (
+              <span
+                key={`${block.nodeId}:${line.kind}:${index}`}
+                className={`ps-canonical-application-notice-line ps-canonical-application-notice-line--${line.kind}`}
+                data-canonical-block-id={
+                  notice.blockCount > 1 ? block.nodeId : undefined
+                }
+                data-canonical-content-node-id={
+                  notice.blockCount > 1 ? block.inlines[0]?.nodeId : undefined
+                }
+                data-canonical-continuation-notice-line={line.kind}
+              >
+                {line.text}
+              </span>
+            )
+          })}
         </p>
-      ))}
-    </section>
+      )}
+    </>
   )
 }
 
@@ -500,42 +549,68 @@ function CanonicalApplicationWritingPrompt({
     }>
   }>
 }): ReactNode {
+  const notice = writingNoticeGroup(blocks.map((block) =>
+    block.inlines.map((inline) => inline.text).join('')))
   return (
     <div
       className="ps-canonical-application-prompt"
       data-canonical-application-prompt=""
     >
-      {blocks.map((block) => {
+      {blocks.map((block, index) => {
+        if (
+          notice
+          && index > notice.startIndex
+          && index < notice.startIndex + notice.blockCount
+        ) return null
         const noticeLines = block.inlines.length === 1
           ? applicationWritingNoticeLines(block.inlines[0].text)
           : null
+        const displayedNoticeLines = notice?.startIndex === index
+          ? notice.lines
+          : noticeLines
         return (
           <p
             key={block.nodeId}
             data-canonical-block-id={block.nodeId}
-            data-canonical-application-notice={noticeLines ? '' : undefined}
+            data-canonical-application-notice={displayedNoticeLines ? '' : undefined}
             data-canonical-application-writing-rhythm-role={
-              noticeLines ? 'notice_line' : 'prompt_line'
+              displayedNoticeLines ? 'notice_line' : 'prompt_line'
             }
           >
-            {block.inlines.map((inline) => (
-              <span
-                key={inline.nodeId}
-                data-canonical-content-node-id={inline.nodeId}
-              >
-                {noticeLines
-                  ? noticeLines.map((line) => (
+            {displayedNoticeLines
+              ? displayedNoticeLines.map((line, lineIndex) => {
+                  const sourceBlock = notice?.startIndex === index
+                    && notice.blockCount > 1
+                    ? blocks[index + lineIndex]
+                    : block
+                  return (
                       <span
-                        key={`${inline.nodeId}:${line.kind}:${line.text}`}
+                        key={`${sourceBlock.nodeId}:${line.kind}:${line.text}`}
                         className={`ps-canonical-application-notice-line ps-canonical-application-notice-line--${line.kind}`}
+                        data-canonical-block-id={
+                          notice && notice.blockCount > 1 && lineIndex > 0
+                            ? sourceBlock.nodeId
+                            : undefined
+                        }
+                        data-canonical-content-node-id={
+                          (notice && notice.blockCount > 1) || lineIndex === 0
+                            ? sourceBlock.inlines[0]?.nodeId
+                            : undefined
+                        }
                         data-canonical-application-notice-line={line.kind}
                       >
                         {line.text}
                       </span>
-                    ))
-                  : inline.text}
-              </span>
-            ))}
+                  )
+                })
+              : block.inlines.map((inline) => (
+                  <span
+                    key={inline.nodeId}
+                    data-canonical-content-node-id={inline.nodeId}
+                  >
+                    {inline.text}
+                  </span>
+                ))}
           </p>
         )
       })}
@@ -544,16 +619,39 @@ function CanonicalApplicationWritingPrompt({
 }
 
 function renderCanonicalReadingInlines(
-  inlines: ReadonlyArray<{ nodeId: string; text: string }>,
+  inlines: CanonicalReadingSurfaceTableBlock['rows'][number]['cells'][number]['inlines']
+    | CanonicalReadingSurfaceParagraphBlock['inlines'],
 ): ReactNode {
-  return inlines.map((inline) => (
-    <span
-      key={inline.nodeId}
-      data-canonical-content-node-id={inline.nodeId}
-    >
-      {inline.text}
-    </span>
-  ))
+  return inlines.map((inline) => {
+    if (inline.kind === 'media_ref') {
+      const src = `data:${inline.mediaArtifact.mimeType};base64,${inline.mediaArtifact.encodedBytes}`
+      const presentation = inline.media.presentation
+      return (
+        <img
+          key={inline.nodeId}
+          className="ps-canonical-reading-table-media"
+          data-canonical-content-node-id={inline.nodeId}
+          data-canonical-media-id={inline.mediaId}
+          data-canonical-media-alignment={presentation?.alignment}
+          data-canonical-media-spacing-before={presentation?.spacingBefore}
+          data-canonical-media-spacing-after={presentation?.spacingAfter}
+          style={presentation
+            ? ({ '--ps-canonical-media-width-ratio': presentation.widthRatio } as CSSProperties)
+            : undefined}
+          src={src}
+          alt={inline.alt}
+        />
+      )
+    }
+    return (
+      <span
+        key={inline.nodeId}
+        data-canonical-content-node-id={inline.nodeId}
+      >
+        {inline.text}
+      </span>
+    )
+  })
 }
 
 function CanonicalReadingParagraph({
@@ -680,6 +778,7 @@ function renderCanonicalReadingBlock(block: CanonicalReadingSurfaceBlock): React
     const src =
       `data:${block.mediaArtifact.mimeType};base64,`
       + block.mediaArtifact.encodedBytes
+    const presentation = block.media.presentation
     return (
       <figure
         key={block.nodeId}
@@ -687,8 +786,29 @@ function renderCanonicalReadingBlock(block: CanonicalReadingSurfaceBlock): React
         data-canonical-block-id={block.nodeId}
         data-canonical-block-kind="figure"
         data-canonical-media-id={block.mediaId}
+        data-canonical-media-alignment={presentation?.alignment}
+        data-canonical-media-spacing-before={presentation?.spacingBefore}
+        data-canonical-media-spacing-after={presentation?.spacingAfter}
       >
-        <img src={src} alt="" />
+        <img
+          src={src}
+          alt=""
+          style={presentation
+            ? ({ '--ps-canonical-media-width-ratio': presentation.widthRatio } as CSSProperties)
+            : undefined}
+        />
+        {block.caption && (
+          <figcaption>
+            {block.captionInlines.map((inline) => (
+              <span
+                key={inline.nodeId}
+                data-canonical-content-node-id={inline.nodeId}
+              >
+                {inline.text}
+              </span>
+            ))}
+          </figcaption>
+        )}
       </figure>
     )
   }
@@ -947,12 +1067,20 @@ function PaperSurfaceParagraph({
     )
   }
 
+  const sevenChoicesPassageRole = sevenChoicesRhythmEnabled
+    ? semanticParagraph?.role === 'title'
+      ? 'passage_title'
+      : semanticParagraph?.role === 'subtitle'
+        ? 'passage_subtitle'
+        : 'passage_body_line'
+    : undefined
+
   return (
     <p
       className="ps-paragraph"
       {...{ [paperSurfaceAnchorAttrs.paragraphId]: paragraph.id }}
       data-canonical-seven-choices-rhythm-role={
-        sevenChoicesRhythmEnabled ? 'passage_body_line' : undefined
+        sevenChoicesPassageRole
       }
       data-canonical-cloze-rhythm-role={
         clozeRhythmEnabled ? 'passage_body_line' : undefined

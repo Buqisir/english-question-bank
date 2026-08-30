@@ -10,10 +10,12 @@
 import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import {
-  isCompleteReviewCard,
   persistWritingAnalysisGroup,
   validateWritingAnalysisCandidate,
 } from '../../server/writing-analysis/writingAnalysisBackfillService.mjs'
+import {
+  projectNck1StagedWritingAnalysis,
+} from '../../server/import-review/nck1AnalysisProjection.mjs'
 
 export const WRITING_ANALYSIS_KEYS = ['application', 'continuation']
 
@@ -42,36 +44,7 @@ export function loadStagedWritingAnalysis(paperDir, key) {
 }
 
 export function projectStagedWritingAnalysis(raw) {
-  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
-    throw new Error('staged writing analysis is missing or not an object')
-  }
-  if (raw.taskType === 'application') {
-    if (!isCompleteReviewCard(raw.reviewCard)) {
-      throw new Error('new-paper application analysis requires a complete ReviewCard')
-    }
-    return {
-      taskType: 'application',
-      modelAnswer: raw.modelAnswer,
-      reviewCard: raw.reviewCard,
-      ...(typeof raw.officialModelAnswer === 'string' && raw.officialModelAnswer.trim()
-        ? { officialModelAnswer: raw.officialModelAnswer }
-        : {}),
-    }
-  }
-  if (raw.taskType === 'continuation') {
-    if (!raw.continuationAnalysis || typeof raw.continuationAnalysis !== 'object') {
-      throw new Error('new-paper continuation analysis must use continuationAnalysis, not continuationDesign')
-    }
-    if (raw.continuationDesign !== undefined || raw.highlightExpressions !== undefined) {
-      throw new Error('new-paper continuation analysis must not mix historical continuationDesign fields')
-    }
-    return {
-      taskType: 'continuation',
-      modelAnswer: raw.modelAnswer,
-      continuationAnalysis: raw.continuationAnalysis,
-    }
-  }
-  throw new Error(`unsupported staged writing taskType: ${raw.taskType}`)
+  return projectNck1StagedWritingAnalysis(raw)
 }
 
 export function assertApplicationChromeFromGroups(application) {

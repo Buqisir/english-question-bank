@@ -9,6 +9,10 @@
 // against cross-section bleed.
 
 import { buildWritingPageModel } from '../app/src/features/paper-intelligence/writingPageModel.mjs'
+import {
+  continuationStarterDisplayText,
+  writingNoticeGroup,
+} from '../shared/paper-canonical/applicationWritingDisplay.mjs'
 
 let passed = 0
 function assert(name, condition, detail = '') {
@@ -22,6 +26,29 @@ const STARTER_TEXT = `Paragraph 1: ${STARTERS[0]}\n\nParagraph 2: ${STARTERS[1]}
 const APP_NOTICE = '注意：\n（1）写作词数应为80个左右；\n（2）请按如下格式在答题卡的相应位置作答。'
 const CONT_PROMPT = '阅读下面材料，根据其内容和所给段落开头语续写两段，使之构成一篇完整的短文。'
 const CONT_NOTICE = '注意：\n（1）续写词数应为150个左右；\n（2）请按如下格式在答题卡的相应位置作答。'
+
+assert('continuation display strips numeric Paragraph labels',
+  continuationStarterDisplayText('Paragraph 1: Starter one.', 0) === 'Starter one.'
+  && continuationStarterDisplayText('Paragraph 2: Starter two.', 1) === 'Starter two.')
+assert('continuation display strips word Paragraph labels',
+  continuationStarterDisplayText('Paragraph one: Starter one.', 0) === 'Starter one.'
+  && continuationStarterDisplayText('Paragraph two: Starter two.', 1) === 'Starter two.')
+assert('continuation display never strips the wrong paragraph label',
+  continuationStarterDisplayText('Paragraph 2: Deliberate source text.', 0)
+    === 'Paragraph 2: Deliberate source text.')
+
+const splitNotice = writingNoticeGroup([
+  'Writing prompt.',
+  '注意：',
+  '1. 写作词数应为80个左右；',
+  '2. 请按如下格式在答题卡的相应位置作答。',
+  'Given title',
+])
+assert('source-preserved notice paragraphs retain one grouped display position',
+  splitNotice?.startIndex === 1
+  && splitNotice.blockCount === 3
+  && splitNotice.lines.map((line) => line.kind).join(',') === 'label,instruction,instruction'
+  && splitNotice.lines[1].text === '（1）写作词数应为80个左右；')
 
 const asset = {
   content: {

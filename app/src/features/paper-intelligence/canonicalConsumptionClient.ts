@@ -64,10 +64,12 @@ export type WholePaperConsumption = {
 export async function loadScreenConsumption(
   paperId: string,
   fetchImpl: typeof fetch = fetch,
+  reviewRevision?: string | null,
 ): Promise<WholePaperConsumption> {
-  const response = await fetchImpl(
-    `/api/paper-canonical/consumption?paperId=${encodeURIComponent(paperId)}`,
-  )
+  const endpoint = reviewRevision
+    ? `/api/import-review-preview/revisions/${encodeURIComponent(reviewRevision)}/consumption`
+    : `/api/paper-canonical/consumption?paperId=${encodeURIComponent(paperId)}`
+  const response = await fetchImpl(endpoint)
   if (!response.ok) {
     const body = await response.json().catch(() => ({})) as { error?: string }
     throw new Error(body.error || `Canonical consumption unavailable (${response.status})`)

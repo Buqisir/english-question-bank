@@ -62,7 +62,7 @@
  */
 
 import { execSync } from 'node:child_process'
-import { existsSync, mkdtempSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { tmpdir } from 'node:os'
 import { fileURLToPath } from 'node:url'
@@ -81,6 +81,10 @@ const findingsPath = path.join(cutDir, 'scan-findings.json')
 const reportPath = path.join(cutDir, 'scan-report.md')
 const adjudicationsPath = path.join(cutDir, 'adjudications.json')
 const rulingsPath = path.join(cutDir, 'rulings.md')
+const frozenCorpusManifestPath = path.join(
+  rootDir,
+  'docs/cuts/paper-canonical-unification/migration/manifest-v2.json',
+)
 
 let passed = 0
 let failed = 0
@@ -102,10 +106,7 @@ console.log('r2-trap-audit verify')
 // ============================================================
 
 function listPaperIds() {
-  return readdirSync(paperAssetsDir, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => entry.name)
-    .sort()
+  return readJson(frozenCorpusManifestPath).membership.paperIds
 }
 
 function readJson(filePath) {

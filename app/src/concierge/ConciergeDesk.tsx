@@ -16,6 +16,7 @@
  */
 
 import { useEffect, useId, useMemo, useState, type FormEvent, type ReactNode } from 'react'
+import { ArrowRight, X } from 'lucide-react'
 import type { QuestionGroupCard } from '../domain/questionBank.ts'
 import { aggregatePaperResults, type PaperResult } from './aggregatePaperResults.ts'
 import { ConciergePaperRow } from './ConciergePaperRow.tsx'
@@ -556,7 +557,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                   aria-label="清除搜索"
                   title="清除搜索"
                 >
-                  ×
+                  <X size={15} aria-hidden="true" />
                 </button>
               )}
               <button
@@ -566,7 +567,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                 aria-label="开始取题"
                 title="开始取题"
               >
-                {state.kind === 'loading' || dataLoading ? '取题中…' : '→'}
+                {state.kind === 'loading' || dataLoading ? '取题中…' : <ArrowRight size={18} aria-hidden="true" />}
               </button>
             </form>
 

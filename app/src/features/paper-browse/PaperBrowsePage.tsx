@@ -28,10 +28,11 @@
  *     ClozeAnalysisPanel / GrammarFillAnalysisPanel / WritingAnalysisPanel),
  *     fed by the SAME adapters the解析页 harness uses — "整卷看的和单个题组
  *     点进去看的是一个东西，只统一了宽度" (owner).
- *   - `cloze-analysis-v1` / `grammar-fill-analysis-v1` / `writing-analysis-v1`
- *     are fetched once, lazily, the first time 讲评态 opens (reading /
- *     sevenChoices analyses are already fetched unconditionally at page
- *     load). A missing/failed analysis degrades that
+ *   - `cloze-analysis-v1` / `grammar-fill-analysis-v1` are fetched once,
+ *     lazily, the first time 讲评态 opens. `writing-analysis-v1` is prefetched
+ *     once so a complete application payload can open lecture from the answer
+ *     box (reading / sevenChoices analyses are already fetched unconditionally
+ *     at page load). A missing/failed analysis degrades that
  *     group's 讲评栏 to "解析未发布" without crashing or blocking other
  *     groups; the group's卷面 PaperSurface mount keeps rendering its plain
  *     (non-analysis) view.
@@ -342,6 +343,9 @@ type SimilarSeedSnapshot = {
 
 export type PaperBrowsePageProps = {
   paperId: string
+  /** Import review only: read the immutable Candidate revision through the
+   * reviewer API while keeping this exact Screen renderer. */
+  reviewRevision?: string | null
   focusGroupId?: string | null
   /** flow-panel 刀 3: 入口带态——预选的题（asset 加载完成后走
    * selectLectureQuestion 同款路径），groupId 缺省时用来推导所属题组。 */
@@ -620,6 +624,7 @@ const SIMILAR_PASSAGES_MODE_GROUP_TYPES = new Set(['cloze', 'sevenChoices'])
 export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   const {
     paperId,
+    reviewRevision,
     focusGroupId,
     questionId,
     lecture,
@@ -827,9 +832,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
 
     async function load(): Promise<void> {
       try {
-        let resolvedBase = `/paper-assets/${paperId}/latest`
+        let resolvedBase = reviewRevision
+          ? `/api/import-review-preview/revisions/${encodeURIComponent(reviewRevision)}/asset`
+          : `/paper-assets/${paperId}/latest`
         let assetRes = await fetch(`${resolvedBase}/paper-asset.json`)
-        if (!assetRes.ok) {
+        if (!assetRes.ok && !reviewRevision) {
           resolvedBase = `/paper-assets/${paperId}`
           assetRes = await fetch(`${resolvedBase}/paper-asset.json`)
         }
@@ -837,7 +844,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           throw new Error(`没找到这份卷面（${paperId}），可能已被移除。回到找题页重新打开吧。`)
         }
         const sourceAsset = (await assetRes.json()) as PaperAssetV1
-        const canonicalConsumption = await loadScreenConsumption(paperId)
+        const canonicalConsumption = await loadScreenConsumption(
+          paperId,
+          fetch,
+          reviewRevision,
+        )
         const loadedAsset = projectAssetBlocksToCanonicalConsumption(
           sourceAsset,
           canonicalConsumption,
@@ -1146,7 +1157,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     return (): void => {
       cancelled = true
     }
-  }, [paperId])
+  }, [paperId, reviewRevision])
 
   // Writing analysis is prefetched so a complete application payload can open
   // lecture from the answer box before lecture mode is on. Cloze / grammar-fill
@@ -1283,24 +1294,8 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         }
       }
 
-      const writingGroupIds = groupIdsByType('writing')
-      if (writingGroupIds.length > 0) {
-        try {
-          const res = await fetch(`${base}/analyses/writing-analysis-v1.json`)
-          const raw = res.ok ? ((await res.json()) as WritingAnalysisFilePayload) : null
-          for (const groupId of writingGroupIds) {
-            const writing = raw?.groups?.[groupId]?.writing
-            entries[groupId] = isRenderableWritingAnalysis(writing)
-              ? { kind: 'writing', analysis: writing }
-              : { kind: 'unavailable' }
-          }
-        } catch {
-          for (const groupId of writingGroupIds) entries[groupId] = { kind: 'unavailable' }
-        }
-      }
-
       if (cancelled) return
-      setLectureAnalysisByGroupId(entries)
+      setLectureAnalysisByGroupId((previous) => ({ ...previous, ...entries }))
       setLectureAnalysisFetched(true)
       setLectureAnalysisLoading(false)
     }
@@ -2638,7 +2633,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           }
           aria-label={group?.title || groupId}
         >
-          {card && (
+          {!reviewRevision && card && (
             <div className="paper-browse-group-actions">
               <button
                 type="button"
@@ -2941,7 +2936,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             (program.md Q5) 渲染，写作/听力题组即便被选中也不出现这个按钮。
             E6: cloze/sevenChoices 的小题相似已下线——CTA 保留原位，文案改
             「相似篇章」，点击改调 /api/similar-passages（种子=当前题组）。 */}
-        {hasActiveQuestion && activeQuestionId && SIMILAR_SUPPORTED_GROUP_TYPES.has(group.groupType) && (
+        {!reviewRevision && hasActiveQuestion && activeQuestionId && SIMILAR_SUPPORTED_GROUP_TYPES.has(group.groupType) && (
           <div className="similar-cta">
             {/* owner 拍板 2026-07-10：按钮在最左，说明文字跟在右边 */}
             <button
@@ -3497,16 +3492,18 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       >
         讲评
       </button>
-      <button
-        type="button"
-        className="basket-chip"
-        onClick={() => onOpenDraftPaperWorkbench(currentDraftPaperId)}
-        aria-label={`打开草稿卷，已选 ${currentDraftGroupCount} 个题组`}
-        disabled={!currentDraftPaperId || currentDraftGroupCount === 0}
-      >
-        <ClipboardList size={15} />
-        <span>草稿卷 · {currentDraftGroupCount} 题组</span>
-      </button>
+      {!reviewRevision && (
+        <button
+          type="button"
+          className="basket-chip"
+          onClick={() => onOpenDraftPaperWorkbench(currentDraftPaperId)}
+          aria-label={`打开草稿卷，已选 ${currentDraftGroupCount} 个题组`}
+          disabled={!currentDraftPaperId || currentDraftGroupCount === 0}
+        >
+          <ClipboardList size={15} />
+          <span>草稿卷 · {currentDraftGroupCount} 题组</span>
+        </button>
+      )}
     </div>
   )
 }

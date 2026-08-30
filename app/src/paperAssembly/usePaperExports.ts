@@ -13,6 +13,11 @@ import {
   exportPrintHtml as fetchExportPrintHtml,
   exportPrintPdf as fetchExportPrintPdf,
 } from '../services/questionGroups.ts'
+import {
+  prepareFileSaveTarget,
+  saveBlobToTarget,
+  type FileSaveMode,
+} from '../services/fileDownload.ts'
 
 export type ExportStatus = 'idle' | 'exporting' | 'exported' | 'error'
 
@@ -32,17 +37,6 @@ export type UsePaperExportsInput = {
   versionType: VersionType
 }
 
-function downloadBlob(blob: Blob, fileName: string) {
-  const url = URL.createObjectURL(blob)
-  const link = document.createElement('a')
-  link.href = url
-  link.download = fileName
-  document.body.appendChild(link)
-  link.click()
-  link.remove()
-  URL.revokeObjectURL(url)
-}
-
 export function usePaperExports(input: UsePaperExportsInput) {
   const [printHtmlStatus, setPrintHtmlStatus] = useState<ExportStatus>('idle')
   const [printHtmlError, setPrintHtmlError] = useState('')
@@ -60,13 +54,20 @@ export function usePaperExports(input: UsePaperExportsInput) {
     }
   }
 
-  async function exportPrintHtml() {
+  async function exportPrintHtml(mode: FileSaveMode = 'download') {
     if (input.basket.length === 0) return
-    setPrintHtmlStatus('exporting')
+    setPrintHtmlStatus('idle')
     setPrintHtmlError('')
     try {
+      const target = await prepareFileSaveTarget({
+        mode,
+        suggestedName: `${input.paperTitle || '英语试卷'}-精排.html`,
+        mimeType: 'text/html',
+      })
+      if (!target) return
+      setPrintHtmlStatus('exporting')
       const result = await fetchExportPrintHtml(buildPrintPayload(getPayloadState()))
-      downloadBlob(result.blob, result.fileName)
+      await saveBlobToTarget(result.blob, result.fileName, target)
       setPrintHtmlStatus('exported')
     } catch (error) {
       setPrintHtmlStatus('error')
@@ -74,13 +75,20 @@ export function usePaperExports(input: UsePaperExportsInput) {
     }
   }
 
-  async function exportPrintPdf() {
+  async function exportPrintPdf(mode: FileSaveMode = 'download') {
     if (input.basket.length === 0) return
-    setPrintPdfStatus('exporting')
+    setPrintPdfStatus('idle')
     setPrintPdfError('')
     try {
+      const target = await prepareFileSaveTarget({
+        mode,
+        suggestedName: `${input.paperTitle || '英语试卷'}-精排.pdf`,
+        mimeType: 'application/pdf',
+      })
+      if (!target) return
+      setPrintPdfStatus('exporting')
       const result = await fetchExportPrintPdf(buildPrintPayload(getPayloadState()))
-      downloadBlob(result.blob, result.fileName)
+      await saveBlobToTarget(result.blob, result.fileName, target)
       setPrintPdfStatus('exported')
     } catch (error) {
       setPrintPdfStatus('error')

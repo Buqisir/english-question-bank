@@ -3,6 +3,8 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 API_PORT="${QUESTION_BANK_API_PORT:-8787}"
+APP_PORT="${PORT:-5173}"
+PUBLIC_ORIGIN="${QUESTION_BANK_PUBLIC_ORIGIN:-http://127.0.0.1:${APP_PORT}}"
 # Probe an auth-whitelisted route: /api/paper-sets returns 401 once login
 # is enforced (users exist), which would make this health wait time out.
 API_URL="http://127.0.0.1:${API_PORT}/api/health"
@@ -18,7 +20,7 @@ trap cleanup EXIT INT TERM
 
 # Load secrets (e.g. DEEPSEEK_API_KEY) from a gitignored .env if present —
 # keeps keys server-side only (never in the frontend bundle or git).
-node --env-file-if-exists="$ROOT_DIR/.env" "$ROOT_DIR/server/api.mjs" &
+QUESTION_BANK_PUBLIC_ORIGIN="$PUBLIC_ORIGIN" node --env-file-if-exists="$ROOT_DIR/.env" "$ROOT_DIR/server/api.mjs" &
 API_PID="$!"
 
 echo "Waiting for API at ${API_URL}..."
@@ -32,4 +34,4 @@ until curl -fsS "$API_URL" >/dev/null 2>&1; do
 done
 
 cd "$ROOT_DIR/app"
-pnpm dev:vite --host 127.0.0.1 --port "${PORT:-5173}" --strictPort
+pnpm dev:vite --host 127.0.0.1 --port "$APP_PORT" --strictPort

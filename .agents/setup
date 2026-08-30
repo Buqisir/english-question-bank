@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$repo_root"
+
+step() {
+  local label="$1"
+  shift
+  echo "[orb-setup] $label"
+  time "$@"
+}
+
+required_packages=(ffmpeg poppler-utils libreoffice-writer sqlite3)
+missing_packages=()
+for package in "${required_packages[@]}"; do
+  if ! dpkg-query -W -f='${Status}' "$package" 2>/dev/null | grep -Fq 'install ok installed'; then
+    missing_packages+=("$package")
+  fi
+done
+
+if ((${#missing_packages[@]})); then
+  step "refreshing apt metadata" sudo apt-get update
+  step "installing system tools: ${missing_packages[*]}" \
+    sudo apt-get install -y "${missing_packages[@]}"
+else
+  echo "[orb-setup] system tools already installed"
+fi
+
+node_home="$HOME/.local/node-24"
+if [[ ! -x "$node_home/bin/node" ]] || [[ "$($node_home/bin/node --version)" != v24.* ]]; then
+  node_archive="$(curl -fsSL https://nodejs.org/dist/latest-v24.x/SHASUMS256.txt \
+    | awk '/linux-x64\.tar\.xz$/ { print $2; exit }')"
+  node_url="https://nodejs.org/dist/latest-v24.x/$node_archive"
+  temp_dir="$(mktemp -d)"
+  trap 'rm -rf "$temp_dir"' EXIT
+  step "downloading Node.js 24" curl -fsSLo "$temp_dir/$node_archive" "$node_url"
+  curl -fsSLo "$temp_dir/SHASUMS256.txt" "${node_url%/*}/SHASUMS256.txt"
+  (cd "$temp_dir" && grep "  $node_archive\$" SHASUMS256.txt | sha256sum --check --status)
+  rm -rf "$node_home"
+  mkdir -p "$node_home"
+  step "installing Node.js 24" tar -xJf "$temp_dir/$node_archive" --strip-components=1 -C "$node_home"
+  rm -rf "$temp_dir"
+  trap - EXIT
+else
+  echo "[orb-setup] Node.js $($node_home/bin/node --version) already installed"
+fi
+
+profile_marker="# english-question-bank Node.js 24"
+if ! grep -Fqx "$profile_marker" "$HOME/.bash_profile" 2>/dev/null; then
+  cat >> "$HOME/.bash_profile" <<'EOF'
+
+# english-question-bank Node.js 24
+export PATH="$HOME/.local/node-24/bin:$PATH"
+EOF
+fi
+export PATH="$node_home/bin:$PATH"
+
+step "activating pnpm 10.28.1" corepack enable
+step "preparing pnpm 10.28.1" corepack prepare pnpm@10.28.1 --activate
+step "installing app dependencies" pnpm -C app install --frozen-lockfile
+step "installing server dependencies" npm ci --prefix server
+
+if compgen -G "$HOME/.cache/ms-playwright/chromium-*/chrome-linux*/chrome" >/dev/null; then
+  step "checking Playwright Chromium" pnpm -C app exec playwright install --no-shell chromium
+else
+  step "installing Playwright Chromium and host dependencies" \
+    pnpm -C app exec playwright install --with-deps --no-shell chromium
+fi
+
+step "initializing the local question bank" bash scripts/init-db.sh
+echo "[orb-setup] ready: $(node --version), pnpm $(pnpm --version), npm $(npm --version)"

@@ -173,6 +173,17 @@
   margin-bottom: 0;
 }
 
+.ps-paragraph[data-canonical-seven-choices-rhythm-role="passage_title"],
+.ps-paragraph[data-canonical-seven-choices-rhythm-role="passage_subtitle"] {
+  margin: 0;
+  font-weight: 700;
+  text-indent: 0;
+}
+
+.ps-paragraph[data-canonical-seven-choices-rhythm-role="passage_title"] {
+  text-align: center;
+}
+
 .ps-paragraph[data-canonical-cloze-rhythm-role="passage_body_line"] {
   margin-top: 0;
   margin-bottom: 0;
@@ -228,6 +239,7 @@
 }
 
 .ps-canonical-reading {
+  container-type: inline-size;
   font-size: var(--ps-font-size);
   line-height: var(--ps-line-height);
 }
@@ -274,13 +286,65 @@
   vertical-align: top;
 }
 
+.ps-canonical-reading-table-media {
+  display: inline-block;
+  max-width: 100%;
+  max-height: 4em;
+  width: min(100%, calc(var(--ps-canonical-media-width-ratio) * 100cqw));
+  height: auto;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+.ps-canonical-reading-table-media[data-canonical-media-alignment="center"],
+.ps-canonical-reading-table-media[data-canonical-media-alignment="right"] {
+  display: block;
+}
+
+.ps-canonical-reading-table-media[data-canonical-media-alignment="center"] {
+  margin-inline: auto;
+}
+
+.ps-canonical-reading-table-media[data-canonical-media-alignment="right"] {
+  margin-left: auto;
+}
+
+.ps-canonical-reading-table td[rowspan]:not([rowspan="1"]) .ps-canonical-reading-table-media {
+  max-height: 22em;
+}
+
 .ps-canonical-reading-figure {
   margin: 0;
   text-align: center;
 }
 
+.ps-canonical-reading-figure[data-canonical-media-alignment="left"] {
+  text-align: left;
+}
+
+.ps-canonical-reading-figure[data-canonical-media-alignment="right"] {
+  text-align: right;
+}
+
+.ps-canonical-reading-figure[data-canonical-media-spacing-before="compact"] {
+  margin-top: 0.35em;
+}
+
+.ps-canonical-reading-figure[data-canonical-media-spacing-before="normal"] {
+  margin-top: 0.7em;
+}
+
+.ps-canonical-reading-figure[data-canonical-media-spacing-after="compact"] {
+  margin-bottom: 0.35em;
+}
+
+.ps-canonical-reading-figure[data-canonical-media-spacing-after="normal"] {
+  margin-bottom: 0.7em;
+}
+
 .ps-canonical-reading-figure img {
   max-width: 100%;
+  width: min(100%, calc(var(--ps-canonical-media-width-ratio) * 100cqw));
   height: auto;
 }
 
@@ -365,6 +429,12 @@
 
 .ps-canonical-application-notice-line--instruction {
   margin-left: var(--ps-passage-indent);
+}
+
+.canonical-continuation-notice {
+  margin: 0;
+  text-align: left;
+  text-indent: 0;
 }
 
 /* ─── Sentence ─────────────────────────────────────────────────── */

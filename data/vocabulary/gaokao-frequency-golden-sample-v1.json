@@ -1,0 +1,2728 @@
+{
+  "schemaVersion": "gaokao-frequency-golden-sample-v1",
+  "programId": "gaokao-curriculum-3000-frequency-v1",
+  "selectionPolicy": "Thirty source-bound entries per frequency stage, stratified across curriculum tags, overlap/new words, forms, phrases, homographs and long words.",
+  "entries": [
+    {
+      "entryId": "gaokao-frequency-0001-the",
+      "sourceOrder": 1,
+      "headword": "the",
+      "frequencyRank": 1,
+      "frequencyStage": "high_frequency",
+      "day": 1,
+      "week": 1,
+      "sourceGroup": 1,
+      "curriculumTag": "initial",
+      "printedPage": 1,
+      "pdfPage": 2,
+      "pageImageSha256": "7342bb552959425b8c8d3249dfe178ab0f6415875a25b3aaf696dd8204e7688d",
+      "sourceText": "the /ðə/ art . (表类别、特指等)",
+      "sourcePhonetic": "/ðə/",
+      "partOfSpeech": "art.",
+      "sourceMeanings": [
+        "(表类别、特指等)"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": [
+        "wanwei-basic-1122-the"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0004-a-an",
+      "sourceOrder": 4,
+      "headword": "a,an",
+      "frequencyRank": 4,
+      "frequencyStage": "high_frequency",
+      "day": 1,
+      "week": 1,
+      "sourceGroup": 1,
+      "curriculumTag": "initial",
+      "printedPage": 1,
+      "pdfPage": 2,
+      "pageImageSha256": "7342bb552959425b8c8d3249dfe178ab0f6415875a25b3aaf696dd8204e7688d",
+      "sourceText": "a,an/ er,ə/,/æ     n , on /art .一；一个",
+      "sourcePhonetic": "/er,ə/ / /æ n , on/",
+      "partOfSpeech": "art.",
+      "sourceMeanings": [
+        "一",
+        "一个"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": [
+        "wanwei-core-0001-a---an"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0026-as",
+      "sourceOrder": 26,
+      "headword": "as",
+      "frequencyRank": 26,
+      "frequencyStage": "high_frequency",
+      "day": 1,
+      "week": 1,
+      "sourceGroup": 1,
+      "curriculumTag": "initial",
+      "printedPage": 1,
+      "pdfPage": 2,
+      "pageImageSha256": "7342bb552959425b8c8d3249dfe178ab0f6415875a25b3aaf696dd8204e7688d",
+      "sourceText": "as/æ  z/ prep  .作为；如同；像 conj . 当……时 ； 一边…一边",
+      "sourcePhonetic": "/æ z/",
+      "partOfSpeech": "prep. conj.",
+      "sourceMeanings": [
+        "作为",
+        "如同",
+        "像",
+        "当……时",
+        "一边…一边"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": [
+        "wanwei-core-0022-as"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0031-about",
+      "sourceOrder": 31,
+      "headword": "about",
+      "frequencyRank": 31,
+      "frequencyStage": "high_frequency",
+      "day": 1,
+      "week": 1,
+      "sourceGroup": 2,
+      "curriculumTag": "initial",
+      "printedPage": 1,
+      "pdfPage": 2,
+      "pageImageSha256": "7342bb552959425b8c8d3249dfe178ab0f6415875a25b3aaf696dd8204e7688d",
+      "sourceText": "about/ə'baot/prep.关于adv.大约",
+      "sourcePhonetic": "/ə'baot/",
+      "partOfSpeech": "prep.",
+      "sourceMeanings": [
+        "关于adv.大约"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-fuzzy-reviewed",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF OCR included a tag or glyph artifact; the DOCX reading was confirmed against the row image."
+      },
+      "overlapCandidateEntryIds": [
+        "wanwei-core-0002-about"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0074-may",
+      "sourceOrder": 74,
+      "headword": "may",
+      "frequencyRank": 74,
+      "frequencyStage": "high_frequency",
+      "day": 2,
+      "week": 1,
+      "sourceGroup": 3,
+      "curriculumTag": "initial",
+      "printedPage": 2,
+      "pdfPage": 3,
+      "pageImageSha256": "6c529e6628a8020356490c321c0082f2eb8d6b13a6c1f29b7749560ecd3235ae",
+      "sourceText": "may / me1/ v.可能；可以",
+      "sourcePhonetic": "/me1/",
+      "partOfSpeech": "v.",
+      "sourceMeanings": [
+        "可能",
+        "可以"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-fuzzy-reviewed",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF OCR included a tag or glyph artifact; the DOCX reading was confirmed against the row image."
+      },
+      "overlapCandidateEntryIds": [
+        "wanwei-basic-0856-may"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0111-author",
+      "sourceOrder": 111,
+      "headword": "author",
+      "frequencyRank": 111,
+      "frequencyStage": "high_frequency",
+      "day": 2,
+      "week": 1,
+      "sourceGroup": 4,
+      "curriculumTag": "required",
+      "printedPage": 3,
+      "pdfPage": 4,
+      "pageImageSha256": "7f1eed7281e740f22e2b780e527fda5e405e28e32fa6711a073fc8fe5ffc92e1",
+      "sourceText": "author/'ɔ:0ə/   n.作者",
+      "sourcePhonetic": "/'ɔ:0ə/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "作者"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-0123-live",
+      "sourceOrder": 123,
+      "headword": "live",
+      "frequencyRank": 123,
+      "frequencyStage": "high_frequency",
+      "day": 3,
+      "week": 1,
+      "sourceGroup": 5,
+      "curriculumTag": "initial",
+      "printedPage": 3,
+      "pdfPage": 4,
+      "pageImageSha256": "7f1eed7281e740f22e2b780e527fda5e405e28e32fa6711a073fc8fe5ffc92e1",
+      "sourceText": "live /lv / v .住；生活/laiv /adj  .活的；现场 直播的",
+      "sourcePhonetic": "/lv/ / /laiv/",
+      "partOfSpeech": "v. adj.",
+      "sourceMeanings": [
+        "住",
+        "生活",
+        "活的",
+        "现场 直播的"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": [
+        "wanwei-core-0239-live"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0133-paragraph",
+      "sourceOrder": 133,
+      "headword": "paragraph",
+      "frequencyRank": 133,
+      "frequencyStage": "high_frequency",
+      "day": 3,
+      "week": 1,
+      "sourceGroup": 5,
+      "curriculumTag": "elective",
+      "printedPage": 3,
+      "pdfPage": 4,
+      "pageImageSha256": "7f1eed7281e740f22e2b780e527fda5e405e28e32fa6711a073fc8fe5ffc92e1",
+      "sourceText": "paragraph/' pærə gra:f / n.段落",
+      "sourcePhonetic": "/' pærə gra:f/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "段落"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-fuzzy-reviewed",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF OCR included a tag or glyph artifact; the DOCX reading was confirmed against the row image."
+      },
+      "overlapCandidateEntryIds": [
+        "wanwei-recognition-1478-paragraph"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0265-improve",
+      "sourceOrder": 265,
+      "headword": "improve",
+      "frequencyRank": 265,
+      "frequencyStage": "high_frequency",
+      "day": 5,
+      "week": 1,
+      "sourceGroup": 9,
+      "curriculumTag": "required",
+      "printedPage": 5,
+      "pdfPage": 6,
+      "pageImageSha256": "53c12cfa0a8b5f1b5a8bb9c5eaaeaa977d1ad49b06b4a5f71bd855fb6aa05383",
+      "sourceText": "improve/ im 'pru:v/ v .改进",
+      "sourcePhonetic": "/im 'pru:v/",
+      "partOfSpeech": "v.",
+      "sourceMeanings": [
+        "改进"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-fuzzy-reviewed",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF OCR included a tag or glyph artifact; the DOCX reading was confirmed against the row image."
+      },
+      "overlapCandidateEntryIds": [
+        "wanwei-core-0201-improve"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0317-challenge",
+      "sourceOrder": 317,
+      "headword": "challenge",
+      "frequencyRank": 317,
+      "frequencyStage": "high_frequency",
+      "day": 6,
+      "week": 2,
+      "sourceGroup": 11,
+      "curriculumTag": "required",
+      "printedPage": 6,
+      "pdfPage": 7,
+      "pageImageSha256": "be0c799b08ef387463ea5c81c57e938039d619781386d59b8f52a5e350438210",
+      "sourceText": "challenge/'tfæl ə nd3/ v.& n.挑战",
+      "sourcePhonetic": "/'tfæl ə nd3/",
+      "partOfSpeech": "v. n.",
+      "sourceMeanings": [
+        "挑战"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-fuzzy-reviewed",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF OCR included a tag or glyph artifact; the DOCX reading was confirmed against the row image."
+      },
+      "overlapCandidateEntryIds": [
+        "wanwei-basic-0601-challenge"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0360-design",
+      "sourceOrder": 360,
+      "headword": "design",
+      "frequencyRank": 360,
+      "frequencyStage": "high_frequency",
+      "day": 6,
+      "week": 2,
+      "sourceGroup": 12,
+      "curriculumTag": "required",
+      "printedPage": 7,
+      "pdfPage": 8,
+      "pageImageSha256": "9adb67e1cadabb0e2d38203ad461925e637f6b87202ec6d41a7ae3ede15e9e62",
+      "sourceText": "design /di'zaɪn/v.     设计；打算n.  设计；图案",
+      "sourcePhonetic": "/di'zaɪn/",
+      "partOfSpeech": "v.",
+      "sourceMeanings": [
+        "设计",
+        "打算n. 设计",
+        "图案"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": [
+        "wanwei-basic-0661-design"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0392-comprehension",
+      "sourceOrder": 392,
+      "headword": "comprehension",
+      "frequencyRank": 392,
+      "frequencyStage": "high_frequency",
+      "day": 7,
+      "week": 2,
+      "sourceGroup": 14,
+      "curriculumTag": "elective",
+      "printedPage": 7,
+      "pdfPage": 8,
+      "pageImageSha256": "9adb67e1cadabb0e2d38203ad461925e637f6b87202ec6d41a7ae3ede15e9e62",
+      "sourceText": "comprehension /kompr'henʃn/n.      理解",
+      "sourcePhonetic": "/kompr'henʃn/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "理解"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-0393-china",
+      "sourceOrder": 393,
+      "headword": "China",
+      "frequencyRank": 393,
+      "frequencyStage": "high_frequency",
+      "day": 7,
+      "week": 2,
+      "sourceGroup": 14,
+      "curriculumTag": "initial",
+      "printedPage": 7,
+      "pdfPage": 8,
+      "pageImageSha256": "9adb67e1cadabb0e2d38203ad461925e637f6b87202ec6d41a7ae3ede15e9e62",
+      "sourceText": "China /'tJainə/n.     中国",
+      "sourcePhonetic": "/'tJainə/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "中国"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-fuzzy-reviewed",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF OCR included a tag or glyph artifact; the DOCX reading was confirmed against the row image."
+      },
+      "overlapCandidateEntryIds": [
+        "wanwei-basic-0606-china"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0451-reward",
+      "sourceOrder": 451,
+      "headword": "reward",
+      "frequencyRank": 451,
+      "frequencyStage": "high_frequency",
+      "day": 8,
+      "week": 2,
+      "sourceGroup": 16,
+      "curriculumTag": "elective",
+      "printedPage": 8,
+      "pdfPage": 9,
+      "pageImageSha256": "56011c43c9b06c45f055be6d0e24f654053b63cb8b34c20354f4d76b18e2b090",
+      "sourceText": "reward/ ri'w ɔ:d/ n . 回报 v.报答；奖",
+      "sourcePhonetic": "/ri'w ɔ:d/",
+      "partOfSpeech": "n. v.",
+      "sourceMeanings": [
+        "回报",
+        "报答",
+        "奖"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-0468-p-m-pm",
+      "sourceOrder": 468,
+      "headword": "p.m.,pm",
+      "frequencyRank": 468,
+      "frequencyStage": "high_frequency",
+      "day": 8,
+      "week": 2,
+      "sourceGroup": 16,
+      "curriculumTag": "required",
+      "printedPage": 9,
+      "pdfPage": 10,
+      "pageImageSha256": "f6860e324d1672da587f53520056a9dd22cbe33e129a651170ed8f22e6cc71df",
+      "sourceText": "p.m.,pm   /ipi:'em/abbr. 下午",
+      "sourcePhonetic": "/ipi:'em/",
+      "partOfSpeech": "abbr.",
+      "sourceMeanings": [
+        "下午"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-0491-data",
+      "sourceOrder": 491,
+      "headword": "data",
+      "frequencyRank": 491,
+      "frequencyStage": "high_frequency",
+      "day": 9,
+      "week": 2,
+      "sourceGroup": 17,
+      "curriculumTag": "required",
+      "printedPage": 9,
+      "pdfPage": 10,
+      "pageImageSha256": "f6860e324d1672da587f53520056a9dd22cbe33e129a651170ed8f22e6cc71df",
+      "sourceText": "data/'dertə/n.数据",
+      "sourcePhonetic": "/'dertə/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "数据"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-fuzzy-reviewed",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF OCR included a tag or glyph artifact; the DOCX reading was confirmed against the row image."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-0498-miss",
+      "sourceOrder": 498,
+      "headword": "miss",
+      "frequencyRank": 498,
+      "frequencyStage": "high_frequency",
+      "day": 9,
+      "week": 2,
+      "sourceGroup": 17,
+      "curriculumTag": "initial",
+      "printedPage": 9,
+      "pdfPage": 10,
+      "pageImageSha256": "f6860e324d1672da587f53520056a9dd22cbe33e129a651170ed8f22e6cc71df",
+      "sourceText": "miss /mis/v.   错过；想念",
+      "sourcePhonetic": "/mis/",
+      "partOfSpeech": "v.",
+      "sourceMeanings": [
+        "错过",
+        "想念"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": [
+        "wanwei-core-0256-miss",
+        "wanwei-recognition-1453-miss"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0529-plastic",
+      "sourceOrder": 529,
+      "headword": "plastic",
+      "frequencyRank": 529,
+      "frequencyStage": "high_frequency",
+      "day": 9,
+      "week": 2,
+      "sourceGroup": 18,
+      "curriculumTag": "elective",
+      "printedPage": 10,
+      "pdfPage": 11,
+      "pageImageSha256": "10ab3951c93ef56c98ef33e12af851477283d3f0903035e83e02df7b51a8e497",
+      "sourceText": "plastic/' plæestrk/ n.&  adj .塑料(的",
+      "sourcePhonetic": "/' plæestrk/",
+      "partOfSpeech": "n. adj.",
+      "sourceMeanings": [
+        "塑料(的"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": [
+        "wanwei-basic-0950-plastic"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0557-performance",
+      "sourceOrder": 557,
+      "headword": "performance",
+      "frequencyRank": 557,
+      "frequencyStage": "high_frequency",
+      "day": 10,
+      "week": 2,
+      "sourceGroup": 19,
+      "curriculumTag": "required",
+      "printedPage": 10,
+      "pdfPage": 11,
+      "pageImageSha256": "10ab3951c93ef56c98ef33e12af851477283d3f0903035e83e02df7b51a8e497",
+      "sourceText": "performance/ pə'f ɔ mons/n.表演；表现",
+      "sourcePhonetic": "/pə'f ɔ mons/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "表演",
+        "表现"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-0564-species",
+      "sourceOrder": 564,
+      "headword": "species",
+      "frequencyRank": 564,
+      "frequencyStage": "high_frequency",
+      "day": 10,
+      "week": 2,
+      "sourceGroup": 19,
+      "curriculumTag": "elective",
+      "printedPage": 10,
+      "pdfPage": 11,
+      "pageImageSha256": "10ab3951c93ef56c98ef33e12af851477283d3f0903035e83e02df7b51a8e497",
+      "sourceText": "species/' spifi :z/ n.物种",
+      "sourcePhonetic": "/' spifi :z/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "物种"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-0587-colo-u-r",
+      "sourceOrder": 587,
+      "headword": "colo (u )r",
+      "frequencyRank": 587,
+      "frequencyStage": "high_frequency",
+      "day": 10,
+      "week": 2,
+      "sourceGroup": 20,
+      "curriculumTag": "initial",
+      "printedPage": 10,
+      "pdfPage": 11,
+      "pageImageSha256": "10ab3951c93ef56c98ef33e12af851477283d3f0903035e83e02df7b51a8e497",
+      "sourceText": "colo (u )r /'kal ə/ n.颜色",
+      "sourcePhonetic": "/'kal ə/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "颜色"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-0593-opportunity",
+      "sourceOrder": 593,
+      "headword": "opportunity",
+      "frequencyRank": 593,
+      "frequencyStage": "high_frequency",
+      "day": 10,
+      "week": 2,
+      "sourceGroup": 20,
+      "curriculumTag": "required",
+      "printedPage": 11,
+      "pdfPage": 12,
+      "pageImageSha256": "f5ab3b13bde62825b123b6bca45211deafd04a9f82950c2a447f0c79c35713a5",
+      "sourceText": "opportunity/  opə'tju: nəti/ n.机会；时机",
+      "sourcePhonetic": "/opə'tju: nəti/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "机会",
+        "时机"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-0598-professor",
+      "sourceOrder": 598,
+      "headword": "professor",
+      "frequencyRank": 598,
+      "frequencyStage": "high_frequency",
+      "day": 10,
+      "week": 2,
+      "sourceGroup": 20,
+      "curriculumTag": "elective",
+      "printedPage": 11,
+      "pdfPage": 12,
+      "pageImageSha256": "f5ab3b13bde62825b123b6bca45211deafd04a9f82950c2a447f0c79c35713a5",
+      "sourceText": "professor/prə'fesɔ/ n.教授",
+      "sourcePhonetic": "/prə'fesɔ/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "教授"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-0623-involve",
+      "sourceOrder": 623,
+      "headword": "involve",
+      "frequencyRank": 623,
+      "frequencyStage": "high_frequency",
+      "day": 11,
+      "week": 3,
+      "sourceGroup": 21,
+      "curriculumTag": "elective",
+      "printedPage": 11,
+      "pdfPage": 12,
+      "pageImageSha256": "f5ab3b13bde62825b123b6bca45211deafd04a9f82950c2a447f0c79c35713a5",
+      "sourceText": "involve / in'vplv / v.包含；涉及",
+      "sourcePhonetic": "/in'vplv/",
+      "partOfSpeech": "v.",
+      "sourceMeanings": [
+        "包含",
+        "涉及"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-0643-career",
+      "sourceOrder": 643,
+      "headword": "career",
+      "frequencyRank": 643,
+      "frequencyStage": "high_frequency",
+      "day": 11,
+      "week": 3,
+      "sourceGroup": 22,
+      "curriculumTag": "elective",
+      "printedPage": 11,
+      "pdfPage": 12,
+      "pageImageSha256": "f5ab3b13bde62825b123b6bca45211deafd04a9f82950c2a447f0c79c35713a5",
+      "sourceText": "career/  ko'rrə/ n.生涯；事业",
+      "sourcePhonetic": "/ko'rrə/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "生涯",
+        "事业"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-0819-responsibility",
+      "sourceOrder": 819,
+      "headword": "responsibility",
+      "frequencyRank": 819,
+      "frequencyStage": "high_frequency",
+      "day": 14,
+      "week": 3,
+      "sourceGroup": 28,
+      "curriculumTag": "elective",
+      "printedPage": 14,
+      "pdfPage": 15,
+      "pageImageSha256": "9a1f2aa543222f38fce6a669486485fdaff307729b7953de08fdd244820f9820",
+      "sourceText": "responsibility/ rIisppnsi'brləti /n.责任",
+      "sourcePhonetic": "/rIisppnsi'brləti/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "责任"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-0862-novel",
+      "sourceOrder": 862,
+      "headword": "novel",
+      "frequencyRank": 862,
+      "frequencyStage": "high_frequency",
+      "day": 15,
+      "week": 3,
+      "sourceGroup": 29,
+      "curriculumTag": "elective",
+      "printedPage": 15,
+      "pdfPage": 16,
+      "pageImageSha256": "c11945b5f25573b3e32809d48ecd4ec0cabe6c1fabd3b4ccea92c317c723375f",
+      "sourceText": "novel /' novl / n . 小说",
+      "sourcePhonetic": "/' novl/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "小说"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": [
+        "wanwei-basic-0909-novel"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0909-pack",
+      "sourceOrder": 909,
+      "headword": "pack",
+      "frequencyRank": 909,
+      "frequencyStage": "high_frequency",
+      "day": 16,
+      "week": 4,
+      "sourceGroup": 31,
+      "curriculumTag": "elective",
+      "printedPage": 16,
+      "pdfPage": 17,
+      "pageImageSha256": "c4709d70f9ddcf3632d79af9203713c87b5c6087a882bd89d5346049bef6fab7",
+      "sourceText": "pack/ pæk/ n.包 v .打",
+      "sourcePhonetic": "/pæk/",
+      "partOfSpeech": "n. v.",
+      "sourceMeanings": [
+        "包",
+        "打"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": [
+        "wanwei-basic-0924-pack"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0978-us-u-s",
+      "sourceOrder": 978,
+      "headword": "US,U.S.",
+      "frequencyRank": 978,
+      "frequencyStage": "high_frequency",
+      "day": 17,
+      "week": 4,
+      "sourceGroup": 33,
+      "curriculumTag": "initial",
+      "printedPage": 17,
+      "pdfPage": 18,
+      "pageImageSha256": "84e7bbddb0781fc134b9c5746e5b4a03d16a9427e7c18655c6af1a056db43800",
+      "sourceText": "US,U.S. /iju:'es/abbr. 美国",
+      "sourcePhonetic": "/iju:'es/",
+      "partOfSpeech": "abbr.",
+      "sourceMeanings": [
+        "美国"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-1016-favo-u-rite",
+      "sourceOrder": 1016,
+      "headword": "favo(u)rite",
+      "frequencyRank": 1016,
+      "frequencyStage": "high_frequency",
+      "day": 17,
+      "week": 4,
+      "sourceGroup": 34,
+      "curriculumTag": "initial",
+      "printedPage": 17,
+      "pdfPage": 18,
+      "pageImageSha256": "84e7bbddb0781fc134b9c5746e5b4a03d16a9427e7c18655c6af1a056db43800",
+      "sourceText": "favo(u)rite/'feivərit/adj.最喜爱的 n. 最爱 之物",
+      "sourcePhonetic": "/'feivərit/",
+      "partOfSpeech": "adj. n.",
+      "sourceMeanings": [
+        "最喜爱的",
+        "最爱 之物"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-1081-concept",
+      "sourceOrder": 1081,
+      "headword": "concept",
+      "frequencyRank": 1081,
+      "frequencyStage": "mid_frequency",
+      "day": 19,
+      "week": 4,
+      "sourceGroup": 37,
+      "curriculumTag": "elective",
+      "printedPage": 19,
+      "pdfPage": 20,
+      "pageImageSha256": "23620413b8e6e5120678c4323b16651ba4db8f69fdb5ec11c7396a53d822908b",
+      "sourceText": "concept /' konsept/ n .概念",
+      "sourcePhonetic": "/' konsept/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "概念"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-1082-black",
+      "sourceOrder": 1082,
+      "headword": "black",
+      "frequencyRank": 1082,
+      "frequencyStage": "mid_frequency",
+      "day": 19,
+      "week": 4,
+      "sourceGroup": 37,
+      "curriculumTag": "initial",
+      "printedPage": 19,
+      "pdfPage": 20,
+      "pageImageSha256": "23620413b8e6e5120678c4323b16651ba4db8f69fdb5ec11c7396a53d822908b",
+      "sourceText": "black / blæk/adj .& n .黑色(的)",
+      "sourcePhonetic": "/blæk/",
+      "partOfSpeech": "adj. n.",
+      "sourceMeanings": [
+        "黑色(的)"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": [
+        "wanwei-recognition-1283-black"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1084-contact",
+      "sourceOrder": 1084,
+      "headword": "contact",
+      "frequencyRank": 1084,
+      "frequencyStage": "mid_frequency",
+      "day": 19,
+      "week": 4,
+      "sourceGroup": 37,
+      "curriculumTag": "required",
+      "printedPage": 19,
+      "pdfPage": 20,
+      "pageImageSha256": "23620413b8e6e5120678c4323b16651ba4db8f69fdb5ec11c7396a53d822908b",
+      "sourceText": "contact/'kont æekt/v.& n.联系；接触",
+      "sourcePhonetic": "/'kont æekt/",
+      "partOfSpeech": "v. n.",
+      "sourceMeanings": [
+        "联系",
+        "接触"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-1086-cheese",
+      "sourceOrder": 1086,
+      "headword": "cheese",
+      "frequencyRank": 1086,
+      "frequencyStage": "mid_frequency",
+      "day": 19,
+      "week": 4,
+      "sourceGroup": 37,
+      "curriculumTag": "elective",
+      "printedPage": 19,
+      "pdfPage": 20,
+      "pageImageSha256": "23620413b8e6e5120678c4323b16651ba4db8f69fdb5ec11c7396a53d822908b",
+      "sourceText": "cheese/ tji:z/ n.奶酪",
+      "sourcePhonetic": "/tji:z/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "奶酪"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": [
+        "wanwei-recognition-1308-cheese"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1090-account",
+      "sourceOrder": 1090,
+      "headword": "account",
+      "frequencyRank": 1090,
+      "frequencyStage": "mid_frequency",
+      "day": 19,
+      "week": 4,
+      "sourceGroup": 37,
+      "curriculumTag": "required",
+      "printedPage": 19,
+      "pdfPage": 20,
+      "pageImageSha256": "23620413b8e6e5120678c4323b16651ba4db8f69fdb5ec11c7396a53d822908b",
+      "sourceText": "account/ə'kaunt/ n.叙述；描写",
+      "sourcePhonetic": "/ə'kaunt/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "叙述",
+        "描写"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": [
+        "wanwei-recognition-1243-account"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1094-complex",
+      "sourceOrder": 1094,
+      "headword": "complex",
+      "frequencyRank": 1094,
+      "frequencyStage": "mid_frequency",
+      "day": 19,
+      "week": 4,
+      "sourceGroup": 37,
+      "curriculumTag": "elective",
+      "printedPage": 19,
+      "pdfPage": 20,
+      "pageImageSha256": "23620413b8e6e5120678c4323b16651ba4db8f69fdb5ec11c7396a53d822908b",
+      "sourceText": "complex/' kompleks/adj .复杂的；难理解的",
+      "sourcePhonetic": "/' kompleks/",
+      "partOfSpeech": "adj.",
+      "sourceMeanings": [
+        "复杂的",
+        "难理解的"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-1095-afraid",
+      "sourceOrder": 1095,
+      "headword": "afraid",
+      "frequencyRank": 1095,
+      "frequencyStage": "mid_frequency",
+      "day": 19,
+      "week": 4,
+      "sourceGroup": 37,
+      "curriculumTag": "initial",
+      "printedPage": 19,
+      "pdfPage": 20,
+      "pageImageSha256": "23620413b8e6e5120678c4323b16651ba4db8f69fdb5ec11c7396a53d822908b",
+      "sourceText": "afraid /ə' freid/ adj .害怕的；担心的",
+      "sourcePhonetic": "/ə' freid/",
+      "partOfSpeech": "adj.",
+      "sourceMeanings": [
+        "害怕的",
+        "担心的"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": [
+        "wanwei-core-0009-afraid"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1098-personality",
+      "sourceOrder": 1098,
+      "headword": "personality",
+      "frequencyRank": 1098,
+      "frequencyStage": "mid_frequency",
+      "day": 19,
+      "week": 4,
+      "sourceGroup": 37,
+      "curriculumTag": "required",
+      "printedPage": 19,
+      "pdfPage": 20,
+      "pageImageSha256": "23620413b8e6e5120678c4323b16651ba4db8f69fdb5ec11c7396a53d822908b",
+      "sourceText": "personality / ps:so ' næləti / n.性格；个",
+      "sourcePhonetic": "/ps:so ' næləti/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "性格",
+        "个"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-1101-firm",
+      "sourceOrder": 1101,
+      "headword": "firm",
+      "frequencyRank": 1101,
+      "frequencyStage": "mid_frequency",
+      "day": 19,
+      "week": 4,
+      "sourceGroup": 38,
+      "curriculumTag": "elective",
+      "printedPage": 19,
+      "pdfPage": 20,
+      "pageImageSha256": "23620413b8e6e5120678c4323b16651ba4db8f69fdb5ec11c7396a53d822908b",
+      "sourceText": "firm /fɜːm/ adj. 结实的；n. 公司",
+      "sourcePhonetic": "/fɜːm/",
+      "partOfSpeech": "adj. n.",
+      "sourceMeanings": [
+        "结实的",
+        "公司"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "pdf-reviewed-override",
+        "reviewNote": "The companion DOCX truncates the final character; the complete row was transcribed from PDF page 20."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-1106-britain",
+      "sourceOrder": 1106,
+      "headword": "Britain",
+      "frequencyRank": 1106,
+      "frequencyStage": "mid_frequency",
+      "day": 19,
+      "week": 4,
+      "sourceGroup": 38,
+      "curriculumTag": "initial",
+      "printedPage": 19,
+      "pdfPage": 20,
+      "pageImageSha256": "23620413b8e6e5120678c4323b16651ba4db8f69fdb5ec11c7396a53d822908b",
+      "sourceText": "Britain /' britn/ n.英国",
+      "sourcePhonetic": "/' britn/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "英国"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-1107-economic",
+      "sourceOrder": 1107,
+      "headword": "economic",
+      "frequencyRank": 1107,
+      "frequencyStage": "mid_frequency",
+      "day": 19,
+      "week": 4,
+      "sourceGroup": 38,
+      "curriculumTag": "elective",
+      "printedPage": 19,
+      "pdfPage": 20,
+      "pageImageSha256": "23620413b8e6e5120678c4323b16651ba4db8f69fdb5ec11c7396a53d822908b",
+      "sourceText": "economic/ii :kə'nomik /adj  .经济的；省钱的",
+      "sourcePhonetic": "/ii :kə'nomik/",
+      "partOfSpeech": "adj.",
+      "sourceMeanings": [
+        "经济的",
+        "省钱的"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-1110-theory",
+      "sourceOrder": 1110,
+      "headword": "theory",
+      "frequencyRank": 1110,
+      "frequencyStage": "mid_frequency",
+      "day": 19,
+      "week": 4,
+      "sourceGroup": 38,
+      "curriculumTag": "elective",
+      "printedPage": 19,
+      "pdfPage": 20,
+      "pageImageSha256": "23620413b8e6e5120678c4323b16651ba4db8f69fdb5ec11c7396a53d822908b",
+      "sourceText": "theory /'θ rori/ n.理论",
+      "sourcePhonetic": "/'θ rori/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "理论"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-1112-transport",
+      "sourceOrder": 1112,
+      "headword": "transport",
+      "frequencyRank": 1112,
+      "frequencyStage": "mid_frequency",
+      "day": 19,
+      "week": 4,
+      "sourceGroup": 38,
+      "curriculumTag": "required",
+      "printedPage": 19,
+      "pdfPage": 20,
+      "pageImageSha256": "23620413b8e6e5120678c4323b16651ba4db8f69fdb5ec11c7396a53d822908b",
+      "sourceText": "transport/træens' p: t / v.& n.运输",
+      "sourcePhonetic": "/træens' p: t/",
+      "partOfSpeech": "v. n.",
+      "sourceMeanings": [
+        "运输"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-1113-graduate",
+      "sourceOrder": 1113,
+      "headword": "graduate",
+      "frequencyRank": 1113,
+      "frequencyStage": "mid_frequency",
+      "day": 19,
+      "week": 4,
+      "sourceGroup": 38,
+      "curriculumTag": "required",
+      "printedPage": 19,
+      "pdfPage": 20,
+      "pageImageSha256": "23620413b8e6e5120678c4323b16651ba4db8f69fdb5ec11c7396a53d822908b",
+      "sourceText": "graduate /'græd3ueit/ v .毕业；授予(某人) 学位/ 'grædʒuət/ n.毕业生",
+      "sourcePhonetic": "/'græd3ueit/ / /'grædʒuət/",
+      "partOfSpeech": "v. n.",
+      "sourceMeanings": [
+        "毕业",
+        "授予(某人) 学位",
+        "毕业生"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": [
+        "wanwei-basic-0753-graduate"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1116-immediately",
+      "sourceOrder": 1116,
+      "headword": "immediately",
+      "frequencyRank": 1116,
+      "frequencyStage": "mid_frequency",
+      "day": 19,
+      "week": 4,
+      "sourceGroup": 38,
+      "curriculumTag": "required",
+      "printedPage": 19,
+      "pdfPage": 20,
+      "pageImageSha256": "23620413b8e6e5120678c4323b16651ba4db8f69fdb5ec11c7396a53d822908b",
+      "sourceText": "immediately/ I'mi:diotli/adv .立即；马上 conj. 一…就",
+      "sourcePhonetic": "/I'mi:diotli/",
+      "partOfSpeech": "adv. conj.",
+      "sourceMeanings": [
+        "立即",
+        "马上",
+        "一…就"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-1118-youth",
+      "sourceOrder": 1118,
+      "headword": "youth",
+      "frequencyRank": 1118,
+      "frequencyStage": "mid_frequency",
+      "day": 19,
+      "week": 4,
+      "sourceGroup": 38,
+      "curriculumTag": "required",
+      "printedPage": 19,
+      "pdfPage": 20,
+      "pageImageSha256": "23620413b8e6e5120678c4323b16651ba4db8f69fdb5ec11c7396a53d822908b",
+      "sourceText": "youth/ju:0/n.青年人；青年时期；青春",
+      "sourcePhonetic": "/ju:0/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "青年人",
+        "青年时期",
+        "青春"
+      ],
+      "evidence": {
+        "identity": "page-reviewed-override",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+      },
+      "overlapCandidateEntryIds": [
+        "wanwei-recognition-1599-youth"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1130-application",
+      "sourceOrder": 1130,
+      "headword": "application",
+      "frequencyRank": 1130,
+      "frequencyStage": "mid_frequency",
+      "day": 20,
+      "week": 4,
+      "sourceGroup": 39,
+      "curriculumTag": "required",
+      "printedPage": 20,
+      "pdfPage": 21,
+      "pageImageSha256": "7839fb407edcd86e45ac6a9ea1bcb54a978498f56274ac1a86b4bcca8ac6a14c",
+      "sourceText": "application / ræplr'ke1jn /n.申请；应用程序",
+      "sourcePhonetic": "/ræplr'ke1jn/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "申请",
+        "应用程序"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-1189-monday",
+      "sourceOrder": 1189,
+      "headword": "Monday",
+      "frequencyRank": 1189,
+      "frequencyStage": "mid_frequency",
+      "day": 21,
+      "week": 5,
+      "sourceGroup": 42,
+      "curriculumTag": "initial",
+      "printedPage": 21,
+      "pdfPage": 22,
+      "pageImageSha256": "806aa456cd6859a8a729e13ea0ffbc213d03cb4f3120db3b3e697223b1ef534f",
+      "sourceText": "Monday/' mʌ ndeI/ n.星期一",
+      "sourcePhonetic": "/' mʌ ndeI/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "星期一"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-1194-neighbourhood",
+      "sourceOrder": 1194,
+      "headword": "neighbourhood",
+      "frequencyRank": 1194,
+      "frequencyStage": "mid_frequency",
+      "day": 21,
+      "week": 5,
+      "sourceGroup": 42,
+      "curriculumTag": "elective",
+      "printedPage": 21,
+      "pdfPage": 22,
+      "pageImageSha256": "806aa456cd6859a8a729e13ea0ffbc213d03cb4f3120db3b3e697223b1ef534f",
+      "sourceText": "neighbourhood/' nerbəhud /n.社区；街坊",
+      "sourcePhonetic": "/' nerbəhud/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "社区",
+        "街坊"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-1203-uk-u-k",
+      "sourceOrder": 1203,
+      "headword": "UK, U. K.",
+      "frequencyRank": 1203,
+      "frequencyStage": "mid_frequency",
+      "day": 22,
+      "week": 5,
+      "sourceGroup": 43,
+      "curriculumTag": "initial",
+      "printedPage": 21,
+      "pdfPage": 22,
+      "pageImageSha256": "806aa456cd6859a8a729e13ea0ffbc213d03cb4f3120db3b3e697223b1ef534f",
+      "sourceText": "UK,  U. K./   ju:' kei / abbr.英国",
+      "sourcePhonetic": "/ju:' kei/",
+      "partOfSpeech": "abbr.",
+      "sourceMeanings": [
+        "英国"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-1232-progress",
+      "sourceOrder": 1232,
+      "headword": "progress",
+      "frequencyRank": 1232,
+      "frequencyStage": "mid_frequency",
+      "day": 22,
+      "week": 5,
+      "sourceGroup": 44,
+      "curriculumTag": "initial",
+      "printedPage": 21,
+      "pdfPage": 22,
+      "pageImageSha256": "806aa456cd6859a8a729e13ea0ffbc213d03cb4f3120db3b3e697223b1ef534f",
+      "sourceText": "progress/' prəugres/ n.进",
+      "sourcePhonetic": "/' prəugres/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "进"
+      ],
+      "evidence": {
+        "identity": "page-reviewed-override",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+      },
+      "overlapCandidateEntryIds": [
+        "wanwei-basic-0970-progress"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1233-beauty",
+      "sourceOrder": 1233,
+      "headword": "beauty",
+      "frequencyRank": 1233,
+      "frequencyStage": "mid_frequency",
+      "day": 22,
+      "week": 5,
+      "sourceGroup": 44,
+      "curriculumTag": "elective",
+      "printedPage": 21,
+      "pdfPage": 22,
+      "pageImageSha256": "806aa456cd6859a8a729e13ea0ffbc213d03cb4f3120db3b3e697223b1ef534f",
+      "sourceText": "beauty /'bjuti / n.美；美人",
+      "sourcePhonetic": "/'bjuti/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "美",
+        "美人"
+      ],
+      "evidence": {
+        "identity": "page-reviewed-override",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-1242-appointment",
+      "sourceOrder": 1242,
+      "headword": "appointment",
+      "frequencyRank": 1242,
+      "frequencyStage": "mid_frequency",
+      "day": 23,
+      "week": 5,
+      "sourceGroup": 45,
+      "curriculumTag": "elective",
+      "printedPage": 22,
+      "pdfPage": 23,
+      "pageImageSha256": "4892384938427662de85ee99e52cfd8949ac4869787988023a52c42b16aff4ab",
+      "sourceText": "appointment  /ə'pɔintmənt/n.     约会；任命",
+      "sourcePhonetic": "/ə'pɔintmənt/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "约会",
+        "任命"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-1273-grateful",
+      "sourceOrder": 1273,
+      "headword": "grateful",
+      "frequencyRank": 1273,
+      "frequencyStage": "mid_frequency",
+      "day": 23,
+      "week": 5,
+      "sourceGroup": 46,
+      "curriculumTag": "elective",
+      "printedPage": 22,
+      "pdfPage": 23,
+      "pageImageSha256": "4892384938427662de85ee99e52cfd8949ac4869787988023a52c42b16aff4ab",
+      "sourceText": "grateful/'grertfl/adj.感激的",
+      "sourcePhonetic": "/'grertfl/",
+      "partOfSpeech": "adj.",
+      "sourceMeanings": [
+        "感激的"
+      ],
+      "evidence": {
+        "identity": "page-reviewed-override",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-1286-angry",
+      "sourceOrder": 1286,
+      "headword": "angry",
+      "frequencyRank": 1286,
+      "frequencyStage": "mid_frequency",
+      "day": 24,
+      "week": 5,
+      "sourceGroup": 47,
+      "curriculumTag": "initial",
+      "printedPage": 22,
+      "pdfPage": 23,
+      "pageImageSha256": "4892384938427662de85ee99e52cfd8949ac4869787988023a52c42b16aff4ab",
+      "sourceText": "angry /'ængri/adj.     生气的",
+      "sourcePhonetic": "/'ængri/",
+      "partOfSpeech": "adj.",
+      "sourceMeanings": [
+        "生气的"
+      ],
+      "evidence": {
+        "identity": "page-reviewed-override",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+      },
+      "overlapCandidateEntryIds": [
+        "wanwei-core-0016-angry"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1296-display",
+      "sourceOrder": 1296,
+      "headword": "display",
+      "frequencyRank": 1296,
+      "frequencyStage": "mid_frequency",
+      "day": 24,
+      "week": 5,
+      "sourceGroup": 47,
+      "curriculumTag": "elective",
+      "printedPage": 22,
+      "pdfPage": 23,
+      "pageImageSha256": "4892384938427662de85ee99e52cfd8949ac4869787988023a52c42b16aff4ab",
+      "sourceText": "display /dr'sple1/v.&n.     展示；陈列；展览",
+      "sourcePhonetic": "/dr'sple1/",
+      "partOfSpeech": "v. n.",
+      "sourceMeanings": [
+        "展示",
+        "陈列",
+        "展览"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-1343-purchase",
+      "sourceOrder": 1343,
+      "headword": "purchase",
+      "frequencyRank": 1343,
+      "frequencyStage": "mid_frequency",
+      "day": 25,
+      "week": 5,
+      "sourceGroup": 50,
+      "curriculumTag": "elective",
+      "printedPage": 23,
+      "pdfPage": 24,
+      "pageImageSha256": "b6483f9dc92d542515692857f4b3e8d53ff069cfbca6b5fb9a87263138f75119",
+      "sourceText": "purchase /' pə:t ʃəs/ v .购买",
+      "sourcePhonetic": "/' pə:t ʃəs/",
+      "partOfSpeech": "v.",
+      "sourceMeanings": [
+        "购买"
+      ],
+      "evidence": {
+        "identity": "page-reviewed-override",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-1368-quit",
+      "sourceOrder": 1368,
+      "headword": "quit",
+      "frequencyRank": 1368,
+      "frequencyStage": "mid_frequency",
+      "day": 26,
+      "week": 6,
+      "sourceGroup": 51,
+      "curriculumTag": "required",
+      "printedPage": 24,
+      "pdfPage": 25,
+      "pageImageSha256": "0238bd2d066e0723cbd2e24f29cf7ce86e2e6ec6d9b2524378bddf19546f6287",
+      "sourceText": "quit/kwit/v.离(职);退出",
+      "sourcePhonetic": "/kwit/",
+      "partOfSpeech": "v.",
+      "sourceMeanings": [
+        "离(职)",
+        "退出"
+      ],
+      "evidence": {
+        "identity": "page-reviewed-override",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-1378-manner",
+      "sourceOrder": 1378,
+      "headword": "manner",
+      "frequencyRank": 1378,
+      "frequencyStage": "mid_frequency",
+      "day": 26,
+      "week": 6,
+      "sourceGroup": 51,
+      "curriculumTag": "elective",
+      "printedPage": 24,
+      "pdfPage": 25,
+      "pageImageSha256": "0238bd2d066e0723cbd2e24f29cf7ce86e2e6ec6d9b2524378bddf19546f6287",
+      "sourceText": "manner /'mænə/n.    方式；礼貌",
+      "sourcePhonetic": "/'mænə/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "方式",
+        "礼貌"
+      ],
+      "evidence": {
+        "identity": "page-reviewed-override",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+      },
+      "overlapCandidateEntryIds": [
+        "wanwei-basic-0849-manner"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1508-route",
+      "sourceOrder": 1508,
+      "headword": "route",
+      "frequencyRank": 1508,
+      "frequencyStage": "mid_frequency",
+      "day": 29,
+      "week": 6,
+      "sourceGroup": 58,
+      "curriculumTag": "elective",
+      "printedPage": 26,
+      "pdfPage": 27,
+      "pageImageSha256": "0110e4f1dd75398f21aafca9286104ee6ef901c6238d5f7de9705a3bf65ee8bc",
+      "sourceText": "route /ru:t/n.    路 线",
+      "sourcePhonetic": "/ru:t/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "路 线"
+      ],
+      "evidence": {
+        "identity": "page-reviewed-override",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-2001-cent",
+      "sourceOrder": 2001,
+      "headword": "cent",
+      "frequencyRank": 2001,
+      "frequencyStage": "low_frequency",
+      "day": 42,
+      "week": 9,
+      "sourceGroup": 83,
+      "curriculumTag": "initial",
+      "printedPage": 35,
+      "pdfPage": 36,
+      "pageImageSha256": "69ec02556882bf038954222a56487feb2a8470f6669b393ea18429dc7e72ecce",
+      "sourceText": "cent/sent/n.分；分币",
+      "sourcePhonetic": "/sent/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "分",
+        "分币"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": [
+        "wanwei-recognition-1301-cent"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2002-advertisement",
+      "sourceOrder": 2002,
+      "headword": "advertisement",
+      "frequencyRank": 2002,
+      "frequencyStage": "low_frequency",
+      "day": 42,
+      "week": 9,
+      "sourceGroup": 83,
+      "curriculumTag": "elective",
+      "printedPage": 35,
+      "pdfPage": 36,
+      "pageImageSha256": "69ec02556882bf038954222a56487feb2a8470f6669b393ea18429dc7e72ecce",
+      "sourceText": "advertisement /əd'v3tismənt/n.     广告；启事",
+      "sourcePhonetic": "/əd'v3tismənt/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "广告",
+        "启事"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-2004-dessert",
+      "sourceOrder": 2004,
+      "headword": "dessert",
+      "frequencyRank": 2004,
+      "frequencyStage": "low_frequency",
+      "day": 42,
+      "week": 9,
+      "sourceGroup": 83,
+      "curriculumTag": "elective",
+      "printedPage": 35,
+      "pdfPage": 36,
+      "pageImageSha256": "69ec02556882bf038954222a56487feb2a8470f6669b393ea18429dc7e72ecce",
+      "sourceText": "dessert/di'zs:t/n.甜点",
+      "sourcePhonetic": "/di'zs:t/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "甜点"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-2006-metal",
+      "sourceOrder": 2006,
+      "headword": "metal",
+      "frequencyRank": 2006,
+      "frequencyStage": "low_frequency",
+      "day": 42,
+      "week": 9,
+      "sourceGroup": 83,
+      "curriculumTag": "required",
+      "printedPage": 35,
+      "pdfPage": 36,
+      "pageImageSha256": "69ec02556882bf038954222a56487feb2a8470f6669b393ea18429dc7e72ecce",
+      "sourceText": "metal /'met1/n.  金属",
+      "sourcePhonetic": "/'met1/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "金属"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-2011-illustrate",
+      "sourceOrder": 2011,
+      "headword": "illustrate",
+      "frequencyRank": 2011,
+      "frequencyStage": "low_frequency",
+      "day": 42,
+      "week": 9,
+      "sourceGroup": 84,
+      "curriculumTag": "required",
+      "printedPage": 35,
+      "pdfPage": 36,
+      "pageImageSha256": "69ec02556882bf038954222a56487feb2a8470f6669b393ea18429dc7e72ecce",
+      "sourceText": "illustrate /'rləstrert/v.  说明",
+      "sourcePhonetic": "/'rləstrert/",
+      "partOfSpeech": "v.",
+      "sourceMeanings": [
+        "说明"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-2012-agreement",
+      "sourceOrder": 2012,
+      "headword": "agreement",
+      "frequencyRank": 2012,
+      "frequencyStage": "low_frequency",
+      "day": 42,
+      "week": 9,
+      "sourceGroup": 84,
+      "curriculumTag": "initial",
+      "printedPage": 35,
+      "pdfPage": 36,
+      "pageImageSha256": "69ec02556882bf038954222a56487feb2a8470f6669b393ea18429dc7e72ecce",
+      "sourceText": "agreement/ə'gri:mənt/n.同意；协议",
+      "sourcePhonetic": "/ə'gri:mənt/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "同意",
+        "协议"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-2018-flexible",
+      "sourceOrder": 2018,
+      "headword": "flexible",
+      "frequencyRank": 2018,
+      "frequencyStage": "low_frequency",
+      "day": 42,
+      "week": 9,
+      "sourceGroup": 84,
+      "curriculumTag": "required",
+      "printedPage": 35,
+      "pdfPage": 36,
+      "pageImageSha256": "69ec02556882bf038954222a56487feb2a8470f6669b393ea18429dc7e72ecce",
+      "sourceText": "flexible /'fleksəbl/adj.     灵活的；有弹性的",
+      "sourcePhonetic": "/'fleksəbl/",
+      "partOfSpeech": "adj.",
+      "sourceMeanings": [
+        "灵活的",
+        "有弹性的"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-2020-poetry",
+      "sourceOrder": 2020,
+      "headword": "poetry",
+      "frequencyRank": 2020,
+      "frequencyStage": "low_frequency",
+      "day": 42,
+      "week": 9,
+      "sourceGroup": 84,
+      "curriculumTag": "required",
+      "printedPage": 35,
+      "pdfPage": 36,
+      "pageImageSha256": "69ec02556882bf038954222a56487feb2a8470f6669b393ea18429dc7e72ecce",
+      "sourceText": "poetry /'pəuotri/n.    诗歌",
+      "sourcePhonetic": "/'pəuotri/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "诗歌"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-2025-secretary",
+      "sourceOrder": 2025,
+      "headword": "secretary",
+      "frequencyRank": 2025,
+      "frequencyStage": "low_frequency",
+      "day": 42,
+      "week": 9,
+      "sourceGroup": 85,
+      "curriculumTag": "initial",
+      "printedPage": 35,
+      "pdfPage": 36,
+      "pageImageSha256": "69ec02556882bf038954222a56487feb2a8470f6669b393ea18429dc7e72ecce",
+      "sourceText": "secretary /'sekrətri/n.   秘书",
+      "sourcePhonetic": "/'sekrətri/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "秘书"
+      ],
+      "evidence": {
+        "identity": "page-reviewed-override",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-2027-context",
+      "sourceOrder": 2027,
+      "headword": "context",
+      "frequencyRank": 2027,
+      "frequencyStage": "low_frequency",
+      "day": 42,
+      "week": 9,
+      "sourceGroup": 85,
+      "curriculumTag": "required",
+      "printedPage": 35,
+      "pdfPage": 36,
+      "pageImageSha256": "69ec02556882bf038954222a56487feb2a8470f6669b393ea18429dc7e72ecce",
+      "sourceText": "context/'kontekst/n.背景；上下文",
+      "sourcePhonetic": "/'kontekst/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "背景",
+        "上下文"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-2043-enthusiastic",
+      "sourceOrder": 2043,
+      "headword": "enthusiastic",
+      "frequencyRank": 2043,
+      "frequencyStage": "low_frequency",
+      "day": 42,
+      "week": 9,
+      "sourceGroup": 87,
+      "curriculumTag": "elective",
+      "printedPage": 36,
+      "pdfPage": 37,
+      "pageImageSha256": "5154c0e3d7bd4aee77e403000e0c4a39ce304732dfe80af58fbd439369bdef85",
+      "sourceText": "enthusiastic/ iniθju: zi 'æstik/adj .热情的",
+      "sourcePhonetic": "/iniθju: zi 'æstik/",
+      "partOfSpeech": "adj.",
+      "sourceMeanings": [
+        "热情的"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-2050-invention",
+      "sourceOrder": 2050,
+      "headword": "invention",
+      "frequencyRank": 2050,
+      "frequencyStage": "low_frequency",
+      "day": 42,
+      "week": 9,
+      "sourceGroup": 87,
+      "curriculumTag": "initial",
+      "printedPage": 36,
+      "pdfPage": 37,
+      "pageImageSha256": "5154c0e3d7bd4aee77e403000e0c4a39ce304732dfe80af58fbd439369bdef85",
+      "sourceText": "invention /ɪ n 'ven ʃn /n.发明",
+      "sourcePhonetic": "/ɪ n 'ven ʃn/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "发明"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-2056-kindergarten",
+      "sourceOrder": 2056,
+      "headword": "kindergarten",
+      "frequencyRank": 2056,
+      "frequencyStage": "low_frequency",
+      "day": 43,
+      "week": 9,
+      "sourceGroup": 88,
+      "curriculumTag": "elective",
+      "printedPage": 36,
+      "pdfPage": 37,
+      "pageImageSha256": "5154c0e3d7bd4aee77e403000e0c4a39ce304732dfe80af58fbd439369bdef85",
+      "sourceText": "kindergarten/'kindoiga:tn / n.幼儿园；学前班",
+      "sourcePhonetic": "/'kindoiga:tn/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "幼儿园",
+        "学前班"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-2066-russia",
+      "sourceOrder": 2066,
+      "headword": "Russia",
+      "frequencyRank": 2066,
+      "frequencyStage": "low_frequency",
+      "day": 43,
+      "week": 9,
+      "sourceGroup": 89,
+      "curriculumTag": "initial",
+      "printedPage": 36,
+      "pdfPage": 37,
+      "pageImageSha256": "5154c0e3d7bd4aee77e403000e0c4a39ce304732dfe80af58fbd439369bdef85",
+      "sourceText": "Russia/' raʃə/ n .俄罗斯",
+      "sourcePhonetic": "/' raʃə/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "俄罗斯"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-2070-concentrate",
+      "sourceOrder": 2070,
+      "headword": "concentrate",
+      "frequencyRank": 2070,
+      "frequencyStage": "low_frequency",
+      "day": 43,
+      "week": 9,
+      "sourceGroup": 89,
+      "curriculumTag": "required",
+      "printedPage": 36,
+      "pdfPage": 37,
+      "pageImageSha256": "5154c0e3d7bd4aee77e403000e0c4a39ce304732dfe80af58fbd439369bdef85",
+      "sourceText": "concentrate /' konsontrert / v .集中(注意力)",
+      "sourcePhonetic": "/' konsontrert/",
+      "partOfSpeech": "v.",
+      "sourceMeanings": [
+        "集中(注意力)"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-2087-conservation",
+      "sourceOrder": 2087,
+      "headword": "conservation",
+      "frequencyRank": 2087,
+      "frequencyStage": "low_frequency",
+      "day": 43,
+      "week": 9,
+      "sourceGroup": 91,
+      "curriculumTag": "elective",
+      "printedPage": 37,
+      "pdfPage": 38,
+      "pageImageSha256": "86c559c848c886b9b112e459c9e872d66e236538bc0dca2764d6bedf400890a0",
+      "sourceText": "conservation/ ikonsə'veiʃn/ n.保护；保存；节约",
+      "sourcePhonetic": "/ikonsə'veiʃn/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "保护",
+        "保存",
+        "节约"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-2090-broadcast",
+      "sourceOrder": 2090,
+      "headword": "broadcast",
+      "frequencyRank": 2090,
+      "frequencyStage": "low_frequency",
+      "day": 43,
+      "week": 9,
+      "sourceGroup": 91,
+      "curriculumTag": "elective",
+      "printedPage": 37,
+      "pdfPage": 38,
+      "pageImageSha256": "86c559c848c886b9b112e459c9e872d66e236538bc0dca2764d6bedf400890a0",
+      "sourceText": "broadcast/' brɔ:dkast / v.& n.广播；播送",
+      "sourcePhonetic": "/' brɔ:dkast/",
+      "partOfSpeech": "v. n.",
+      "sourceMeanings": [
+        "广播",
+        "播送"
+      ],
+      "evidence": {
+        "identity": "page-reviewed-override",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-2095-pronunciation",
+      "sourceOrder": 2095,
+      "headword": "pronunciation",
+      "frequencyRank": 2095,
+      "frequencyStage": "low_frequency",
+      "day": 43,
+      "week": 9,
+      "sourceGroup": 92,
+      "curriculumTag": "initial",
+      "printedPage": 37,
+      "pdfPage": 38,
+      "pageImageSha256": "86c559c848c886b9b112e459c9e872d66e236538bc0dca2764d6bedf400890a0",
+      "sourceText": "pronunciation/prənʌ nsi'eIʃn/ n.发音",
+      "sourcePhonetic": "/prənʌ nsi'eIʃn/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "发音"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-2126-dialog-ue",
+      "sourceOrder": 2126,
+      "headword": "dialog ( ue)",
+      "frequencyRank": 2126,
+      "frequencyStage": "low_frequency",
+      "day": 44,
+      "week": 9,
+      "sourceGroup": 95,
+      "curriculumTag": "initial",
+      "printedPage": 37,
+      "pdfPage": 38,
+      "pageImageSha256": "86c559c848c886b9b112e459c9e872d66e236538bc0dca2764d6bedf400890a0",
+      "sourceText": "dialog ( ue)/' darəldg / n.对话",
+      "sourcePhonetic": "/' darəldg/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "对话"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-2147-grey-gray",
+      "sourceOrder": 2147,
+      "headword": "grey , gray",
+      "frequencyRank": 2147,
+      "frequencyStage": "low_frequency",
+      "day": 44,
+      "week": 9,
+      "sourceGroup": 97,
+      "curriculumTag": "initial",
+      "printedPage": 38,
+      "pdfPage": 39,
+      "pageImageSha256": "20d24f92485ff321ddd48ae65cda885ae414d043a6f9aa1981d3f2188b2d5cb6",
+      "sourceText": "grey ,  gray / grei / adj  .&  n .灰色(的)",
+      "sourcePhonetic": "/grei/",
+      "partOfSpeech": "adj. n.",
+      "sourceMeanings": [
+        "灰色(的)"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-2156-o-clock",
+      "sourceOrder": 2156,
+      "headword": "o'clock",
+      "frequencyRank": 2156,
+      "frequencyStage": "low_frequency",
+      "day": 45,
+      "week": 9,
+      "sourceGroup": 98,
+      "curriculumTag": "initial",
+      "printedPage": 38,
+      "pdfPage": 39,
+      "pageImageSha256": "20d24f92485ff321ddd48ae65cda885ae414d043a6f9aa1981d3f2188b2d5cb6",
+      "sourceText": "oclock /ə'klok /adv ……点钟",
+      "sourcePhonetic": "/ə'klok/",
+      "partOfSpeech": "adv.",
+      "sourceMeanings": [
+        "……点钟"
+      ],
+      "evidence": {
+        "identity": "page-reviewed-override",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+      },
+      "overlapCandidateEntryIds": [
+        "wanwei-recognition-1467-o-clock"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2168-ought-to",
+      "sourceOrder": 2168,
+      "headword": "ought to",
+      "frequencyRank": 2168,
+      "frequencyStage": "low_frequency",
+      "day": 45,
+      "week": 9,
+      "sourceGroup": 99,
+      "curriculumTag": "required",
+      "printedPage": 38,
+      "pdfPage": 39,
+      "pageImageSha256": "20d24f92485ff321ddd48ae65cda885ae414d043a6f9aa1981d3f2188b2d5cb6",
+      "sourceText": "ought  to/'ɔst tu/ v .应该",
+      "sourcePhonetic": "/'ɔst tu/",
+      "partOfSpeech": "v.",
+      "sourceMeanings": [
+        "应该"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-2284-arrangement",
+      "sourceOrder": 2284,
+      "headword": "arrangement",
+      "frequencyRank": 2284,
+      "frequencyStage": "low_frequency",
+      "day": 47,
+      "week": 10,
+      "sourceGroup": 111,
+      "curriculumTag": "required",
+      "printedPage": 40,
+      "pdfPage": 41,
+      "pageImageSha256": "f5f942e569e8f58d0f71516406c5a657803304dd53d781329c2790c3b197fbe2",
+      "sourceText": "arrangement/ə'reindʒmənt /n.安排；整理",
+      "sourcePhonetic": "/ə'reindʒmənt/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "安排",
+        "整理"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-fuzzy-reviewed",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF OCR included a tag or glyph artifact; the DOCX reading was confirmed against the row image."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-2285-defence-defense",
+      "sourceOrder": 2285,
+      "headword": "defence , defense",
+      "frequencyRank": 2285,
+      "frequencyStage": "low_frequency",
+      "day": 47,
+      "week": 10,
+      "sourceGroup": 111,
+      "curriculumTag": "required",
+      "printedPage": 40,
+      "pdfPage": 41,
+      "pageImageSha256": "f5f942e569e8f58d0f71516406c5a657803304dd53d781329c2790c3b197fbe2",
+      "sourceText": "defence ,  defense/ dr'fens /n.防御；保护；辩",
+      "sourcePhonetic": "/dr'fens/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "防御",
+        "保护",
+        "辩"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-2296-underground",
+      "sourceOrder": 2296,
+      "headword": "underground",
+      "frequencyRank": 2296,
+      "frequencyStage": "low_frequency",
+      "day": 47,
+      "week": 10,
+      "sourceGroup": 112,
+      "curriculumTag": "initial",
+      "printedPage": 40,
+      "pdfPage": 41,
+      "pageImageSha256": "f5f942e569e8f58d0f71516406c5a657803304dd53d781329c2790c3b197fbe2",
+      "sourceText": "underground/'andəgraund/ adj .&   adv . 地",
+      "sourcePhonetic": "/'andəgraund/",
+      "partOfSpeech": "adj. adv.",
+      "sourceMeanings": [
+        "地"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": [
+        "wanwei-basic-1172-underground"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2342-b-c",
+      "sourceOrder": 2342,
+      "headword": "B.C.",
+      "frequencyRank": 2342,
+      "frequencyStage": "low_frequency",
+      "day": 48,
+      "week": 10,
+      "sourceGroup": 117,
+      "curriculumTag": "elective",
+      "printedPage": 41,
+      "pdfPage": 42,
+      "pageImageSha256": "9be2d2666bee9eb850d73f4555b0b25c3e04beb430d40ff15df549a98804d92b",
+      "sourceText": "B.C. /ˌbiː ˈsiː/ abbr. 公元前",
+      "sourcePhonetic": "/ˌbiː ˈsiː/",
+      "partOfSpeech": "abbr.",
+      "sourceMeanings": [
+        "公元前"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "pdf-reviewed-override",
+        "reviewNote": "The companion DOCX truncates the final character; the complete row was transcribed from PDF page 43."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-2409-guideline",
+      "sourceOrder": 2409,
+      "headword": "guideline",
+      "frequencyRank": 2409,
+      "frequencyStage": "low_frequency",
+      "day": 50,
+      "week": 10,
+      "sourceGroup": 123,
+      "curriculumTag": "required",
+      "printedPage": 42,
+      "pdfPage": 43,
+      "pageImageSha256": "cbea44999f436b7db945815efe54a7f7a8ba52599320bc2ce47821eafd0816b0",
+      "sourceText": "guideline/' gardlan /n.指导方针",
+      "sourcePhonetic": "/' gardlan/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "指导方针"
+      ],
+      "evidence": {
+        "identity": "page-reviewed-override",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-2495-afterward-s",
+      "sourceOrder": 2495,
+      "headword": "afterward(s)",
+      "frequencyRank": 2495,
+      "frequencyStage": "low_frequency",
+      "day": 51,
+      "week": 11,
+      "sourceGroup": 132,
+      "curriculumTag": "elective",
+      "printedPage": 44,
+      "pdfPage": 45,
+      "pageImageSha256": "893f35a029e154e0117d971854ddfd1d6e3ba3eaef4768dc4ecd3b7bf0d8b335",
+      "sourceText": "afterward(s)/'a:ftowəd(z)/adv.后来；以后",
+      "sourcePhonetic": "/'a:ftowəd(z)/",
+      "partOfSpeech": "adv.",
+      "sourceMeanings": [
+        "后来",
+        "以后"
+      ],
+      "evidence": {
+        "identity": "page-reviewed-override",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-2739-ad-a-d",
+      "sourceOrder": 2739,
+      "headword": "AD,A.D.",
+      "frequencyRank": 2739,
+      "frequencyStage": "low_frequency",
+      "day": 56,
+      "week": 12,
+      "sourceGroup": 156,
+      "curriculumTag": "elective",
+      "printedPage": 48,
+      "pdfPage": 49,
+      "pageImageSha256": "d6181390b869fd5fa4c9eabda87a38ca14f08fca45a0df7db00c393bd0e7653b",
+      "sourceText": "AD,A.D.  /er'di:/abbr.     公元",
+      "sourcePhonetic": "/er'di:/",
+      "partOfSpeech": "abbr.",
+      "sourceMeanings": [
+        "公元"
+      ],
+      "evidence": {
+        "identity": "pdf-ocr-docx-exact",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "PDF row OCR and companion DOCX agree after punctuation normalisation."
+      },
+      "overlapCandidateEntryIds": []
+    },
+    {
+      "entryId": "gaokao-frequency-2916-china",
+      "sourceOrder": 2916,
+      "headword": "china",
+      "frequencyRank": 2916,
+      "frequencyStage": "low_frequency",
+      "day": 60,
+      "week": 12,
+      "sourceGroup": 174,
+      "curriculumTag": "required",
+      "printedPage": 51,
+      "pdfPage": 52,
+      "pageImageSha256": "e39fd0d2fc8785e74f3f02ea4d9f60d3d5fee2674c64f3eb44ec9970a8807eb1",
+      "sourceText": "china /'tJainə/n.    瓷器",
+      "sourcePhonetic": "/'tJainə/",
+      "partOfSpeech": "n.",
+      "sourceMeanings": [
+        "瓷器"
+      ],
+      "evidence": {
+        "identity": "page-reviewed-override",
+        "headwordChecked": true,
+        "frequencyChecked": true,
+        "curriculumTagChecked": true,
+        "contentTranscription": "docx-companion-reading",
+        "reviewNote": "Confirmed against the rendered PDF row and the companion DOCX text."
+      },
+      "overlapCandidateEntryIds": [
+        "wanwei-basic-0606-china"
+      ]
+    }
+  ]
+}

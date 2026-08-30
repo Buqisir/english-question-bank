@@ -1,12 +1,15 @@
 #!/usr/bin/env node
 import assert from 'node:assert/strict'
-import { execFileSync, spawnSync } from 'node:child_process'
+import { execFileSync } from 'node:child_process'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import {
   changedFiles,
   touchesAny,
 } from './lib/verifyScope.mjs'
+import {
+  runVerificationCommand,
+} from './lib/verificationCommandRunner.mjs'
 import {
   assertCanonicalImportPilotEvidenceRoot,
   assertCanonicalImportPilotTransientEvidenceRunsClean,
@@ -36,6 +39,20 @@ const registry = {
   'scripts/verify-paper-canonical-import-admission.mjs',
   'scripts/verify-paper-canonical-registered-confirmation-admission.mjs',
   'scripts/verify-paper-canonical-import-recovery.mjs',
+  'scripts/verify-universal-nck1-publish.mjs',
+  'scripts/verify-nck1-docx-materialization-producer.mjs',
+  'scripts/verify-nck1-pdf-materialization-producer.mjs',
+  'scripts/verify-nck1-answer-source-shapes.mjs',
+  'scripts/verify-nck1-ocr-source-evidence.mjs',
+  'scripts/verify-universal-nck1-image-source-bundle.mjs',
+  'scripts/verify-universal-nck1-source-only-intake.mjs',
+  'scripts/verify-universal-nck1-source-only-boundaries.mjs',
+  'scripts/verify-import-review-ocr-confirmation.mjs',
+  'scripts/verify-import-environment-preflight.mjs',
+  'scripts/verify-nck1-source-materialization.mjs',
+  'scripts/verify-paper-canonical-nck1-materialization-candidate.mjs',
+  'scripts/verify-import-paper-routing.mjs',
+  'scripts/verify-production-canonical-publication-backfill.mjs',
   'scripts/verify-paper-canonical-import-pilot-fixes.mjs',
   'scripts/verify-paper-canonical-docx-source-adapter.mjs',
   'scripts/verify-paper-canonical-trusted-docx-request.mjs',
@@ -68,6 +85,8 @@ const registry = {
   'scripts/verify-paper-normalization-import-gate.mjs',
   'scripts/import-pipeline/verify-source-doc-types.mjs',
   'scripts/verify-import-ops.mjs',
+  'scripts/verify-import-review-source-pairing.mjs',
+  'scripts/verify-import-review-media-derivation.mjs',
   'scripts/verify-docx-source-media-input.mjs',
   'scripts/verify-canonical-paper-group-surface-adapter-declaration-parity.mjs',
   'scripts/verify-paper-surface-mjs-declaration-parity.mjs',
@@ -83,6 +102,7 @@ const registry = {
   'scripts/verify-print-form.mjs',
   'scripts/verify-print-renderer.mjs',
   'scripts/verify-figure-render.mjs',
+  'scripts/verify-verification-command-runner.mjs',
   'scripts/verify-architecture-housekeeping.mjs',
   'scripts/verify-motion-tokens.mjs',
   'scripts/verify-lecture-panel-css.mjs',
@@ -155,11 +175,20 @@ const registry = {
   'scripts/verify-genre-truth.mjs',
   'scripts/verify-generated-docx-disconnected.mjs',
   'scripts/verify-generated-docx-output-deleted.mjs',
+  'scripts/verify-file-save-as.mjs',
   'scripts/verify-detail-redesign.mjs',
   'scripts/verify-vocabulary-closed-loop.mjs',
+  'scripts/verify-vocabulary-dictation-review.mjs',
+  'scripts/verify-vocabulary-meaning-recall.mjs',
+  'scripts/verify-gaokao-vocabulary-source.mjs',
+  'scripts/verify-gaokao-vocabulary-golden-content.mjs',
+  'scripts/verify-gaokao-vocabulary-golden-visuals.mjs',
+  'scripts/verify-gaokao-vocabulary-golden-audio.mjs',
+  'scripts/verify-gaokao-vocabulary-full-audio.mjs',
+  'scripts/verify-gaokao-vocabulary-full-audio-qa.mjs',
+  'scripts/verify-gaokao-vocabulary-golden-import.mjs',
   'scripts/verify-vocabulary-migration.mjs',
   'scripts/verify-vocabulary-match-game.mjs',
-  'scripts/verify-vocabulary-word-search.mjs',
   'scripts/verify-vocabulary-rendered-behavior.mjs',
   'scripts/verify-paper-canonical-detail-screen-consumption.mjs',
   'scripts/verify-reading-analysis-retire.mjs',
@@ -196,14 +225,49 @@ const uniqueRegistered = (scripts) => [...new Set(scripts)].filter(
   (script) => registry.scripts.includes(script),
 )
 const paperScripts = uniqueRegistered(
-  registry.scripts.filter((script) => paperScriptPattern.test(script)),
+  [
+    ...registry.scripts.filter((script) => paperScriptPattern.test(script)),
+    'scripts/verify-universal-nck1-publish.mjs',
+    'scripts/verify-universal-nck1-image-source-bundle.mjs',
+    'scripts/verify-universal-nck1-source-only-intake.mjs',
+    'scripts/verify-universal-nck1-source-only-boundaries.mjs',
+    'scripts/verify-import-review-ocr-confirmation.mjs',
+    'scripts/verify-import-review-source-pairing.mjs',
+    'scripts/verify-import-review-media-derivation.mjs',
+  ],
 )
 const featureScripts = uniqueRegistered(registry.scripts.filter(
   (script) => !paperScripts.includes(script) && !securityScripts.includes(script),
 ))
+const importPaperScripts = uniqueRegistered([
+  'scripts/verify-nck1-docx-materialization-producer.mjs',
+  'scripts/verify-nck1-pdf-materialization-producer.mjs',
+  'scripts/verify-nck1-answer-source-shapes.mjs',
+  'scripts/verify-nck1-ocr-source-evidence.mjs',
+  'scripts/verify-universal-nck1-image-source-bundle.mjs',
+  'scripts/verify-universal-nck1-source-only-intake.mjs',
+  'scripts/verify-universal-nck1-source-only-boundaries.mjs',
+  'scripts/verify-import-review-ocr-confirmation.mjs',
+  'scripts/verify-import-environment-preflight.mjs',
+  'scripts/verify-nck1-source-materialization.mjs',
+  'scripts/verify-paper-canonical-docx-source-adapter.mjs',
+  'scripts/verify-paper-canonical-nck1-materialization-candidate.mjs',
+  'scripts/verify-paper-canonical-import-admission.mjs',
+  'scripts/verify-paper-canonical-registered-confirmation-admission.mjs',
+  'scripts/verify-paper-canonical-publication.mjs',
+  'scripts/verify-paper-canonical-import-recovery.mjs',
+  'scripts/verify-universal-nck1-publish.mjs',
+  'scripts/verify-import-review-source-pairing.mjs',
+  'scripts/verify-import-review-media-derivation.mjs',
+  'scripts/verify-paper-canonical-detail-screen-consumption.mjs',
+  'scripts/verify-print-renderer.mjs',
+  'scripts/verify-figure-render.mjs',
+  'scripts/verify-import-paper-routing.mjs',
+])
 const packs = Object.freeze({
   ui: uniqueRegistered(uiScripts),
   'paper-data': uniqueRegistered(paperDataScripts),
+  'import-paper': importPaperScripts,
   feature: featureScripts,
   paper: paperScripts,
   security: uniqueRegistered(securityScripts),
@@ -235,6 +299,7 @@ function changedPlan(files) {
     'shared/papersurface/',
     'server/paper-canonical/',
     'server/print-renderer.mjs',
+    'server/vocabulary/vocabularyPdfRenderer.mjs',
     'server/draft-paper/',
     'app/src/shared-ui/papersurface/',
     'app/src/features/draft-paper/DraftPaperWorkbench.css',
@@ -250,6 +315,9 @@ function changedPlan(files) {
     'server/auth/',
     'server/user-data/',
     'server/ai-daily-limit.mjs',
+    'server/vocabulary/vocabularyStore.mjs',
+    'server/vocabulary/vocabularyRoutes.mjs',
+    'server/vocabulary/vocabularyPrintJobs.mjs',
   ]
   if (files.every((file) => touchesAny([file], paperDataPatterns))) {
     return { risk: 'known-shape-paper-data', pack: 'paper-data' }
@@ -259,6 +327,21 @@ function changedPlan(files) {
     if (file.endsWith('.md')) return []
     if (file === 'server/api.mjs') return ['unknown']
     if (file.startsWith('import-ops/')) return ['feature']
+    if (/^scripts\/import-pipeline\/papers\/[^/]+\//u.test(file)) {
+      return ['import-paper']
+    }
+    if ([
+      'scripts/import-pipeline/universal-nck1.mjs',
+      'scripts/import-pipeline/nck1-source-only.mjs',
+      'scripts/import-pipeline/nck1-docx-materialize.mjs',
+      'scripts/import-pipeline/import-environment-preflight.mjs',
+      'server/paper-import/nck1DocxMaterializationProducer.mjs',
+      'server/paper-import/nck1PdfMaterializationProducer.mjs',
+      'server/paper-import/nck1PdfTextSourceAdapter.mjs',
+      'server/paper-import/nck1OcrMaterializationProducer.mjs',
+      'server/paper-import/nck1OcrSourceEvidence.mjs',
+      'server/paper-import/nck1ImageSourceBundle.mjs',
+    ].includes(file)) return ['unknown']
     if (file.startsWith('scripts/import-pipeline/')) {
       return [/\/verify-/.test(file) ? 'paper' : 'feature']
     }
@@ -280,6 +363,9 @@ function changedPlan(files) {
   if (domains.has('unknown')) {
     return { risk: 'unknown-fallback', pack: 'all' }
   }
+  if (domains.has('import-paper') && domains.size > 1) {
+    return { risk: 'mixed-high-risk-fallback', pack: 'all' }
+  }
   if (domains.has('paper-data')) {
     return { risk: 'mixed-high-risk-fallback', pack: 'all' }
   }
@@ -291,6 +377,9 @@ function changedPlan(files) {
   }
   if (domains.has('security')) {
     return { risk: 'auth-persistence-migration', pack: 'security' }
+  }
+  if (domains.has('import-paper')) {
+    return { risk: 'single-paper-import', pack: 'import-paper' }
   }
   if (domains.has('paper')) {
     return { risk: 'shared-renderer-contract', pack: 'paper' }
@@ -390,19 +479,16 @@ if (process.argv.includes('--plan-json')) {
 // counted and listed separately so a missing-data gap stays visible.
 const SKIP_EXIT_CODE = 2
 
-function run(command, args, label, options = {}) {
+async function run(command, args, label, options = {}) {
   console.log(`\n==> ${label}`)
-  const result = spawnSync(command, args, {
+  return runVerificationCommand(command, args, {
     cwd: options.cwd || rootDir,
-    stdio: 'inherit',
-    shell: false,
   })
-  return result.status ?? 1
 }
 
 // Preflight stays hard-fail: a broken build makes the script results meaningless.
 for (const step of plan.preflight) {
-  const status = run(step.command, step.args, step.label)
+  const status = await run(step.command, step.args, step.label)
   if (status !== 0) {
     console.error(`\nPreflight failed: ${step.label} (exit ${status})`)
     process.exit(status)
@@ -413,7 +499,7 @@ for (const step of plan.preflight) {
 // failure cannot hide the status of the scripts after it.
 const results = []
 for (const script of plan.scripts) {
-  const status = run(process.execPath, [script], script)
+  const status = await run(process.execPath, [script], script)
   results.push({ script, status })
 }
 

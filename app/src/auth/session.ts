@@ -12,6 +12,7 @@ export type SessionUser = {
   id: string
   username: string
   role: 'owner' | 'member'
+  accountKind?: 'human' | 'import_agent'
 }
 
 export type MeResponse =

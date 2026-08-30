@@ -271,7 +271,7 @@ try {
       assert.equal(pdfBytes.subarray(0, 4).toString(), '%PDF')
       const pdfText = compactText(execFileSync(
         'pdftotext',
-        ['-layout', pdfPath, '-'],
+        ['-raw', pdfPath, '-'],
         { encoding: 'utf8' },
       ))
       for (const block of canonical.sourceBlocks) {

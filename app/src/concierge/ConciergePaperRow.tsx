@@ -40,6 +40,7 @@
  */
 
 import { useEffect, useRef, type MouseEvent, type ReactNode } from 'react'
+import { ChevronDown, ChevronRight, ChevronUp } from 'lucide-react'
 import { type QuestionGroupCard } from '../domain/questionBank.ts'
 import type { PaperHitContext, PaperResult, PaperResultGroup } from './aggregatePaperResults.ts'
 import { ConciergeGroupCard } from './ConciergeGroupCard.tsx'
@@ -329,7 +330,7 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
           aria-label={expanded ? '收起来源卷' : '展开来源卷'}
           title={expanded ? '收起来源卷' : '展开来源卷'}
         >
-          {expanded ? '▾' : '▸'}
+          {expanded ? <ChevronDown size={14} aria-hidden="true" /> : <ChevronRight size={14} aria-hidden="true" />}
         </button>
         <div className="concierge-paper-anchor-text">
           <div className="concierge-paper-title-line">
@@ -382,7 +383,9 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
           </button>
         )}
         <span className="concierge-row-expand-hint" aria-hidden="true">
-          {expanded ? '收起 ↑' : '展开题组 ↓'}
+          {expanded
+            ? <>收起 <ChevronUp size={12} /></>
+            : <>展开题组 <ChevronDown size={12} /></>}
         </span>
       </div>
 

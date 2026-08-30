@@ -6,7 +6,6 @@ import { createHash } from 'node:crypto'
 import {
   mkdtempSync,
   readFileSync,
-  readdirSync,
   rmSync,
   writeFileSync,
 } from 'node:fs'
@@ -109,6 +108,21 @@ assert.equal(hardBreak.status, 'selected')
 assert.equal(hardBreak.mode, 'one_column')
 assert.equal(hardBreak.placements[0].hardBreaks, 1)
 assert.equal(hardBreak.placements[0].renderedText, 'A. first\nsecond')
+
+const uncommonSourceGlyph = layoutAbcdOptionSet(
+  optionSet('uncommon-source-glyph', [
+    '45×36×25cm',
+    'up to £400',
+    'short',
+    'short',
+  ]),
+)
+assert.equal(uncommonSourceGlyph.status, 'selected')
+assert.equal(
+  uncommonSourceGlyph.placements[0].renderedText,
+  'A. 45×36×25cm',
+  'uncommon source glyphs are preserved while conservatively measured',
+)
 
 const plan = layoutAbcdOptionSet(optionSet('parity', gold[2].redactedText))
 const authority = resolveCanonicalAuthority(canonicalAuthorityRef).closure
@@ -278,7 +292,11 @@ assert.deepEqual(
   },
 )
 
-const corpusFiles = readdirSync('app/public/paper-assets')
+const frozenCorpusManifest = JSON.parse(readFileSync(
+  'docs/cuts/paper-canonical-unification/migration/manifest-v2.json',
+  'utf8',
+))
+const corpusFiles = frozenCorpusManifest.membership.paperIds
   .map((paperId) => ({
     paperId,
     assetPath: path.join(
@@ -287,14 +305,6 @@ const corpusFiles = readdirSync('app/public/paper-assets')
       'latest/paper-asset.json',
     ),
   }))
-  .filter(({ assetPath }) => {
-    try {
-      readFileSync(assetPath)
-      return true
-    } catch {
-      return false
-    }
-  })
   .sort((left, right) => left.paperId.localeCompare(right.paperId))
 assert.equal(corpusFiles.length, 33)
 assert.equal(

@@ -295,14 +295,28 @@ function assertPdfInstructionRhythm(pdfPath, group, label) {
   assert.notEqual(instructionIndex, -1, `${label} finds instruction tail`)
   assert.notEqual(instructionFirstIndex, -1, `${label} finds instruction head`)
   assert.notEqual(sectionIndex, -1, `${label} finds Reading heading`)
+  // Compare the same Latin glyph on both lines. Comparing the center of a
+  // Chinese instruction glyph with a Latin passage letter folds fallback-font
+  // ink-box differences into what is meant to be a baseline-step check.
+  const instructionBaselineProxyIndex = words.findIndex(
+    (word, index) =>
+      index >= instructionFirstIndex
+      && index <= instructionIndex
+      && word.text === letter.text,
+  )
+  assert.notEqual(
+    instructionBaselineProxyIndex,
+    -1,
+    `${label} finds the matching instruction glyph baseline proxy`,
+  )
+  const instructionToLetterPt =
+    letter.centerY - words[instructionBaselineProxyIndex].centerY
   assert.ok(
     Math.abs(
-      letter.centerY
-      - words[instructionIndex].centerY
-      - rhythm.baselineStepPt,
+      instructionToLetterPt - rhythm.baselineStepPt,
     ) <= rhythm.oneStepTolerancePt,
     `${label} keeps instruction_to_a 1x: ${JSON.stringify({
-      actual: letter.centerY - words[instructionIndex].centerY,
+      actual: instructionToLetterPt,
       expected: rhythm.baselineStepPt,
       tolerance: rhythm.oneStepTolerancePt,
     })}`,
@@ -440,9 +454,11 @@ function canonicalInlineNodeIds(group) {
           row.cells.flatMap((cell) =>
             cell.inlines.map((inline) => inline.nodeId)))
       }
-      // Figure caption/provenance remains in the canonical source Block but
-      // is not public paper content on Screen or Print/PDF.
-      return (block.kind === 'figure' ? [] : block.inlines)
+      return (block.kind === 'figure'
+        ? block.media.presentation
+          ? block.captionInlines
+          : []
+        : block.inlines)
         .map((inline) => inline.nodeId)
     }),
     ...group.questions.flatMap((question) => [

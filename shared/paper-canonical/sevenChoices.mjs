@@ -1,4 +1,5 @@
 import { forEachRichInline } from './richContent.mjs'
+import { resolvePassageBlockRoles } from './passageBlockRoles.mjs'
 import { exactKeys, isRecordValue } from './stable.mjs'
 
 function issue(code, disposition, path, message) {
@@ -15,7 +16,15 @@ function orderedBlankRefs(content) {
   return { refs, rawMarker }
 }
 
-export function validateSevenChoicesContract({ groupId, questionIds, blankIds, content, variant, assertions }) {
+export function validateSevenChoicesContract({
+  groupId,
+  questionIds,
+  blankIds,
+  content,
+  variant,
+  assertions,
+  allowPassageBlockRoles = false,
+}) {
   const issues = []
   if (questionIds.length !== 5 || blankIds.length !== 5) {
     issues.push(issue(
@@ -28,8 +37,22 @@ export function validateSevenChoicesContract({ groupId, questionIds, blankIds, c
   if (new Set(questionIds).size !== questionIds.length || new Set(blankIds).size !== blankIds.length) {
     issues.push(issue('SEVEN_CHOICES_PAIR_IDENTITY_AMBIGUOUS', 'needs_review', '$.groups', 'Seven Choices Question and Blank identities must be unique'))
   }
-  if (!isRecordValue(variant) || !exactKeys(variant, ['family', 'members', 'choiceOwnership']) || variant.family !== 'seven-choices' || !Array.isArray(variant.members)) {
+  const variantKeys = allowPassageBlockRoles
+    ? ['family', 'passageBlockRoles', 'members', 'choiceOwnership']
+    : ['family', 'members', 'choiceOwnership']
+  if (!isRecordValue(variant) || !exactKeys(variant, variantKeys) || variant.family !== 'seven-choices' || !Array.isArray(variant.members)) {
     return [...issues, issue('SEVEN_CHOICES_VARIANT_INVALID', 'needs_review', '$.groups.variant', 'Seven Choices has one closed members and shared-bank variant')]
+  }
+  if (
+    allowPassageBlockRoles
+    && !resolvePassageBlockRoles(content?.blocks, variant.passageBlockRoles).ok
+  ) {
+    issues.push(issue(
+      'SEVEN_CHOICES_ROLE_MAP_INVALID',
+      'needs_review',
+      '$.groups.variant.passageBlockRoles',
+      'Seven Choices roles must uniquely bind top-level paragraphs, serialize by nodeId, and admit at most one title',
+    ))
   }
   if (variant.members.length !== 5) {
     issues.push(issue(

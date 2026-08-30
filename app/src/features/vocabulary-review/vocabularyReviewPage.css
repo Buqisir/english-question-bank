@@ -66,6 +66,27 @@
   font-weight: 600;
 }
 
+.vocabulary-program-switcher {
+  display: grid;
+  gap: 5px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.vocabulary-program-switcher select {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 38px;
+  padding: 7px 30px 7px 10px;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--ink-strong);
+  font: inherit;
+  font-size: 14px;
+}
+
 .vocabulary-student-switcher select,
 .vocabulary-student-create input {
   box-sizing: border-box;
@@ -131,6 +152,7 @@
 }
 
 .vocabulary-student-switcher select:focus-visible,
+.vocabulary-program-switcher select:focus-visible,
 .vocabulary-student-add-button:focus-visible,
 .vocabulary-student-create input:focus-visible,
 .vocabulary-student-create button:focus-visible {
@@ -994,11 +1016,11 @@
 
 .vocabulary-download-menu > #vocabulary-download-options {
   position: absolute;
-  top: calc(100% + 8px);
+  bottom: calc(100% + 8px);
   left: 50%;
   z-index: 30;
   display: grid;
-  width: 260px;
+  width: 360px;
   padding: 6px;
   border: 1px solid var(--line-strong);
   border-radius: 8px;
@@ -1007,11 +1029,25 @@
   transform: translateX(-50%);
 }
 
-.vocabulary-download-menu > #vocabulary-download-options button {
+.vocabulary-download-option {
   display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: stretch;
+  gap: 2px;
+}
+
+.vocabulary-download-option.is-bundle {
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px solid var(--line);
+}
+
+.vocabulary-download-menu > #vocabulary-download-options button {
+  display: inline-flex;
+  align-items: center;
   gap: 2px;
   width: 100%;
-  min-height: 50px;
+  min-height: 44px;
   padding: 8px 10px;
   border: 0;
   border-radius: 4px;
@@ -1023,10 +1059,46 @@
   text-align: left;
 }
 
-.vocabulary-download-menu > #vocabulary-download-options button span {
+.vocabulary-download-option > button:first-child {
+  display: grid;
+}
+
+.vocabulary-download-option > button:first-child strong {
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.vocabulary-download-menu > #vocabulary-download-options button:hover {
+  background: var(--surface-strong);
+}
+
+.vocabulary-download-option > button:first-child span {
   color: var(--muted);
   font-size: 12px;
   font-weight: 400;
+}
+
+.vocabulary-download-menu > #vocabulary-download-options .vocabulary-download-save-as {
+  justify-content: center;
+  width: auto;
+  min-width: 96px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+@media (max-width: 520px) {
+  .vocabulary-download-menu > #vocabulary-download-options {
+    width: min(340px, calc(100vw - 24px));
+  }
+
+  .vocabulary-download-option {
+    grid-template-columns: minmax(0, 1fr) 88px;
+  }
+
+  .vocabulary-download-menu > #vocabulary-download-options .vocabulary-download-save-as {
+    min-width: 0;
+  }
 }
 
 .vocabulary-share-download-confirmation {
@@ -2215,4 +2287,5 @@
     color: #1e4a3a;
     font-weight: 600;
   }
+
 }

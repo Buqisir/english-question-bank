@@ -1,0 +1,16 @@
+{
+  "id": "rich-content",
+  "owner": "core",
+  "schemaVersion": "rich-content-v1",
+  "version": "1",
+  "table": {
+    "grid": "columnStart and columnSpan cover every row exactly once after active rowSpan occupancy",
+    "rowSpan": "integer >= 1; reserves every covered column in following rows and may not exceed the final row",
+    "cellInlines": [
+      "text",
+      "blank_ref",
+      "media_ref"
+    ],
+    "mediaRef": "mediaId resolves within the same canonical question group; alt is required literal text"
+  }
+}

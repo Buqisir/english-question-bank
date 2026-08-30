@@ -130,6 +130,7 @@ function buildParagraphModels(canonicalGroup) {
         id: paragraph.paragraphId,
         section,
         groupType: canonicalGroup.groupType,
+        role: paragraph.role || 'body',
         sentences: semanticSentences,
       },
     }

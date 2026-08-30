@@ -1,21 +1,11 @@
 import type { DraftPaper, DraftPaperSummary, DraftPrintForm } from '../domain/questionBank'
+import { directDownloadTarget, saveBlobToTarget, type FileSaveTarget } from './fileDownload.ts'
 import { apiPath, decodeHeaderValue, errorMessageFromResponse as readError } from './httpClient.ts'
 
 // print-form 收口（plan.md Forbidden 追授）：printForm 已并入 domain 的
 // DraftPaperSummary（engine-rewire 合并后并行锁解除），施工期的交叉类型
 // 绕行（DraftPaper & { printForm }）已退役——单一类型真源回归 questionBank.ts。
 export type { DraftPrintForm } from '../domain/questionBank'
-
-function downloadBlob(blob: Blob, fileName: string) {
-  const url = URL.createObjectURL(blob)
-  const link = document.createElement('a')
-  link.href = url
-  link.download = fileName
-  document.body.appendChild(link)
-  link.click()
-  link.remove()
-  URL.revokeObjectURL(url)
-}
 
 export async function fetchDraftPapers(): Promise<DraftPaperSummary[]> {
   const response = await fetch(apiPath('/api/draft-papers'))
@@ -243,6 +233,7 @@ export async function restoreDraftPaperItem(
 export async function downloadDraftPaperPdf(
   draftPaperId: string,
   versionType: 'student' | 'teacher' = 'student',
+  target: FileSaveTarget = directDownloadTarget(),
 ): Promise<void> {
   const response = await fetch(apiPath(`/api/draft-papers/${encodeURIComponent(draftPaperId)}/print-pdf`), {
     body: JSON.stringify({ versionType }),
@@ -255,5 +246,5 @@ export async function downloadDraftPaperPdf(
   const blob = await response.blob()
   const defaultFileName = versionType === 'teacher' ? '英语草稿卷-教师卷.pdf' : '英语草稿卷-学生卷.pdf'
   const fileName = decodeHeaderValue(response.headers.get('x-file-name')) || defaultFileName
-  downloadBlob(blob, fileName)
+  await saveBlobToTarget(blob, fileName, target)
 }

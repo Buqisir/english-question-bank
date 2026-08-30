@@ -1,8 +1,8 @@
-import { ArrowLeft, ArrowRight, BookMarked, Check, Download, Grid2X2, RotateCcw, Search, Volume2 } from 'lucide-react'
+import { ArrowLeft, ArrowRight, BookMarked, Check, Grid2X2, RotateCcw, Volume2 } from 'lucide-react'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import type { VocabularySetDto } from '../../services/vocabulary'
-import { downloadVocabularySetPdf, getVocabularySet } from '../../services/vocabulary'
+import { getVocabularySet } from '../../services/vocabulary'
 import {
   getVocabularyAudioPath,
   readVocabularyAudioAccent,
@@ -34,9 +34,7 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
   const [game, setGame] = useState<VocabularyMatchGameState | null>(null)
   const [liveMessage, setLiveMessage] = useState('全部卡片已盖好。请选择第一张卡。')
   const [audioError, setAudioError] = useState('')
-  const [paperDownloadBusy, setPaperDownloadBusy] = useState(false)
-  const [paperDownloadError, setPaperDownloadError] = useState('')
-  const [accent] = useState<VocabularyAudioAccent>(readVocabularyAudioAccent)
+  const [accent, setAccent] = useState<VocabularyAudioAccent>(readVocabularyAudioAccent)
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const audioRequestRef = useRef(0)
   const matchTimerRef = useRef<number | null>(null)
@@ -60,6 +58,7 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
         const nextRounds = splitVocabularyMatchRounds(nextSet.entries)
         if (!nextRounds.length) throw new Error('这个生词组里还没有可以练习的单词。')
         setVocabularySet(nextSet)
+        setAccent(readVocabularyAudioAccent(nextSet.programId))
         setRoundIndex(0)
         setGame(createVocabularyMatchGame(nextRounds[0]))
         setLoadState('ready')
@@ -156,19 +155,6 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
     })
   }
 
-  async function downloadWordSearchPaper() {
-    if (!vocabularySet || paperDownloadBusy) return
-    setPaperDownloadBusy(true)
-    setPaperDownloadError('')
-    try {
-      await downloadVocabularySetPdf(vocabularySet.id, accent, 'word-search')
-    } catch (error) {
-      setPaperDownloadError(error instanceof Error ? error.message : '圈词练习纸暂时无法下载，请稍后重试。')
-    } finally {
-      setPaperDownloadBusy(false)
-    }
-  }
-
   return (
     <div className="vocabulary-practice-page">
       <AppTopbar variant="sub" pageTitle="趣味练习" {...shellNav} />
@@ -211,13 +197,7 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
 
             <div className="vocabulary-practice-modes" aria-label="趣味练习方式">
               <span aria-current="page"><Grid2X2 size={17} aria-hidden="true" /><strong>翻牌消消乐</strong><small>当前练习</small></span>
-              <button type="button" onClick={() => void downloadWordSearchPaper()} disabled={paperDownloadBusy}>
-                {paperDownloadBusy ? <Download size={17} aria-hidden="true" /> : <Search size={17} aria-hidden="true" />}
-                <strong>{paperDownloadBusy ? '正在生成…' : '圈词与拼写'}</strong>
-                <small>下载纸质练习</small>
-              </button>
             </div>
-            {paperDownloadError && <p className="vocabulary-practice-paper-error" role="alert">{paperDownloadError}</p>}
 
             <section className="vocabulary-practice-board-section" aria-labelledby="vocabulary-match-board-title">
               <h2 id="vocabulary-match-board-title" className="sr-only">单词配对卡片</h2>

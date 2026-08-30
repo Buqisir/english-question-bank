@@ -8,6 +8,7 @@ const apiPort = Number(process.env.QUESTION_BANK_API_PORT || 8787)
 export default defineConfig({
   plugins: [react()],
   server: {
+    allowedHosts: process.env.AMP_ORB ? true : undefined,
     // Issue #21-B1 / Issue #30 gate 2 (PR #32 review fix): the React
     // paper-surface prototype imports primitive style tokens from
     // `shared/papersurface/tokens.mjs` at the repo root. Once fs.allow is

@@ -109,8 +109,10 @@
   font-size: 13px;
   padding: 7px 14px;
   border-radius: 6px;
-  border: 1px solid var(--line-strong);
-  background: var(--panel);
+  /* quiet-chrome（2026-08-28）：摘描边盒，透明底 + hover 浮中性底，与全站
+     ghost 词汇统一；主操作仍走墨绿签名。 */
+  border: 0;
+  background: transparent;
   color: var(--ink);
   cursor: pointer;
   transition: background var(--motion-fast) var(--ease-hover);
@@ -124,12 +126,11 @@
  * 正当小面积用法——当前主操作） */
 .peek-btn--primary {
   background: var(--accent);
-  border-color: var(--accent);
   color: #fff;
 }
 
 .peek-btn--primary:hover {
-  background: var(--eqb-color-primary-deep, #1e4a3a);
+  background: var(--eqb-color-primary-deep);
 }
 
 /* 编辑/删除 owner-only 次位（管理不放，但收次要位——低频纠错兜底）：

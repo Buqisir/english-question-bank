@@ -18,12 +18,18 @@ Historical cuts are evidence, not current instructions.
 
 ## Work proportionately
 
+- The owner defines the outcome and non-goals. The agent inspects the code and
+  chooses the lightest safe implementation and verification path; do not ask
+  the owner to choose engineering ceremony or classify technical risk.
 - Clear, reversible work stays in the current task: understand, change, run the
   affected checks, review the diff, and commit when requested.
+- Treat uncertainty as ordinary, reversible work while establishing the blast
+  radius. Unfamiliarity, file count, and historical complexity are not high-risk
+  triggers; escalate only for a concrete high-risk seam.
 - Use a tracked spec and tickets only when the work genuinely needs more than
-  one context. Use Wayfinder only when the route to a spec is genuinely foggy.
-- Do not create governance-only tasks, approvals, publication/recovery stages,
-  repeated reviews, or automatic task chains. The owner starts top-level tasks.
+  one context.
+- Do not create governance-only tasks or automatic task chains. The owner
+  starts top-level tasks.
 - Use a handoff only when the owner asks or a real work boundary requires it;
   follow `docs/agents/dispatch-protocols.md`.
 - Durable product scope and decisions belong in the relevant spec, ticket, or
@@ -32,8 +38,11 @@ Historical cuts are evidence, not current instructions.
 ## Verify the changed risk
 
 Run the narrowest public-seam checks that exercise the changed behavior and its
-direct consumers. These routes are deterministic; unknown scope falls back to
-the full suite.
+direct consumers. Inspect the affected code before choosing the verification
+weight. Uncertainty does not automatically require the full suite: use focused,
+reversible checks while establishing the blast radius. Run the full suite only
+for a final high-risk candidate or when the blast radius genuinely remains
+unknown after inspection, and state the reason.
 
 | Change | During work | Final gate |
 | --- | --- | --- |
@@ -88,9 +97,12 @@ their established vocabulary, and flag conflicts before editing.
   require explicit current owner authorization. Check
   `docs/cuts/launch-deploy/go-live-record.md` before an authorized production
   action. Never run `scripts/pull-run-push.mjs` against production otherwise.
-- Remote: `github` (not `origin`).
+- Remote: `origin`.
 - `app/` uses pnpm; `server/` uses npm.
 - Fresh worktree setup: `bash scripts/setup-worktree.sh`.
+- `scripts/dev.sh` binds server-side vocabulary PDF rendering to the matching
+  local `PORT`; standalone API starts for print QA must set
+  `QUESTION_BANK_PUBLIC_ORIGIN` to that app origin explicitly.
 - Commit messages are one line: scope plus one clear sentence.
 
 Focused supporting guidance lives in `docs/agents/testing-cadence.md`,

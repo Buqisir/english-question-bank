@@ -1,0 +1,595 @@
+{
+  "schemaVersion": "gaokao-frequency-koboyo-adapted-pilot-v1",
+  "version": "koboyo-adapted-portrait-v1",
+  "generatedAt": "2026-08-11",
+  "status": "pilot_owner_qa",
+  "integrationPolicy": "Adapted assets remain outside the formal visual manifest until Owner QA passes.",
+  "licensingNote": "Koboyo's official license allows modification and embedding in a larger product; these files must not be redistributed as an icon library.",
+  "licenseReceipt": {
+    "checkedAt": "2026-08-11",
+    "url": "https://koboyo.com/icons/license",
+    "status": 200,
+    "sha256": "168a4a306a58f44efd86e895fef264b985d23f1385ff3926fcf9b7d794a64d2a"
+  },
+  "entries": [
+    {
+      "order": 1,
+      "entryId": "gaokao-frequency-0209-however",
+      "headword": "however",
+      "frequencyRank": 209,
+      "partOfSpeech": "adv.",
+      "sourceMeanings": [
+        "然而"
+      ],
+      "teachingSense": "然而",
+      "visualKey": "gaokao-frequency-0209-however-koboyo-adapted-v1",
+      "slug": "person-between-contrasting-directions",
+      "width": 106,
+      "height": 175,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-adapted-v1/gaokao-frequency-0209-however--person-between-contrasting-directions.svg",
+      "alt": "一个思考的人处在相反方向之间，表示“然而”的转折关系。",
+      "sha256": "b2fe285ff8c7cc1c8f5c54ef35c21e1482b8f51cc4b7f73ec7e0005b67f89fd0",
+      "version": "koboyo-adapted-portrait-v1",
+      "assetStatus": "pilot_owner_qa",
+      "modificationSummary": "保留思考人物，在人物两侧增加方向相反的短箭头，把二选一改成前后转折。",
+      "provenance": {
+        "type": "koboyo-adapted",
+        "independentOriginal": false,
+        "baseEntryId": "wanwei-core-0115-either",
+        "baseHeadword": "either",
+        "baseSlug": "person-stuck-between-two",
+        "basePath": "/vocabulary-assets/wanwei-round-one-v1/visuals/koboyo-v1/wanwei-core-0115-either--person-stuck-between-two.svg",
+        "baseSha256": "b5b101dba65cc5b5428a4ea82cf43a38a9e15d87b3e83f89140880037404f5ea",
+        "officialPageUrl": "https://koboyo.com/icons/person-stuck-between-two",
+        "officialSvgUrl": "https://koboyo.com/icons/svg/person-stuck-between-two.svg",
+        "licenseUrl": "https://koboyo.com/icons/license",
+        "licenseCheckedAt": "2026-08-11",
+        "sourceReceipt": {
+          "checkedAt": "2026-08-11",
+          "officialPageStatus": 200,
+          "officialSvgStatus": 200,
+          "remoteSha256": "5771d99bd7666ac38ca79f8b32d832294ee4af8921443fd9a10389b755223c16",
+          "remoteNormalizedSha256": "5771d99bd7666ac38ca79f8b32d832294ee4af8921443fd9a10389b755223c16",
+          "localNormalizedSha256": "5771d99bd7666ac38ca79f8b32d832294ee4af8921443fd9a10389b755223c16",
+          "contentMatchAfterTrailingWhitespaceNormalization": true
+        }
+      },
+      "gapEvidence": {
+        "checkedAt": "2026-08-11",
+        "assessment": "no_direct_teaching_sense_match",
+        "rationale": "没有直接词项命中；需要表达前后分句的转折关系。"
+      }
+    },
+    {
+      "order": 2,
+      "entryId": "gaokao-frequency-0747-beyond",
+      "headword": "beyond",
+      "frequencyRank": 747,
+      "partOfSpeech": "prep.",
+      "sourceMeanings": [
+        "超出",
+        "晚于adv .在另"
+      ],
+      "teachingSense": "超出",
+      "visualKey": "gaokao-frequency-0747-beyond-koboyo-adapted-v1",
+      "slug": "roadmap-crossing-boundary",
+      "width": 247,
+      "height": 201,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-adapted-v1/gaokao-frequency-0747-beyond--roadmap-crossing-boundary.svg",
+      "alt": "人物指着一条越过边界的路线，表示“超出”。",
+      "sha256": "06c522ead9ac42ebee2cee0830f4048d07759add7ce518bd29a9d1f5f73a2c7c",
+      "version": "koboyo-adapted-portrait-v1",
+      "assetStatus": "pilot_owner_qa",
+      "modificationSummary": "保留人物与路线图，在图板中增加一条边界和越过边界的箭头。",
+      "provenance": {
+        "type": "koboyo-adapted",
+        "independentOriginal": false,
+        "baseEntryId": "wanwei-core-0015-along",
+        "baseHeadword": "along",
+        "baseSlug": "person-walking-through-roadmap",
+        "basePath": "/vocabulary-assets/wanwei-round-one-v1/visuals/koboyo-v1/wanwei-core-0015-along--person-walking-through-roadmap.svg",
+        "baseSha256": "6d41d1f11de5017b11eb4edb3fe47685f6d15d16d67aa09566939c61f5464b7b",
+        "officialPageUrl": "https://koboyo.com/icons/person-walking-through-roadmap",
+        "officialSvgUrl": "https://koboyo.com/icons/svg/person-walking-through-roadmap.svg",
+        "licenseUrl": "https://koboyo.com/icons/license",
+        "licenseCheckedAt": "2026-08-11",
+        "sourceReceipt": {
+          "checkedAt": "2026-08-11",
+          "officialPageStatus": 200,
+          "officialSvgStatus": 200,
+          "remoteSha256": "356e08de323f4c31803f3e5233ed8e4126076db92b2583f2364d11dea63214bb",
+          "remoteNormalizedSha256": "356e08de323f4c31803f3e5233ed8e4126076db92b2583f2364d11dea63214bb",
+          "localNormalizedSha256": "356e08de323f4c31803f3e5233ed8e4126076db92b2583f2364d11dea63214bb",
+          "contentMatchAfterTrailingWhitespaceNormalization": true
+        }
+      },
+      "gapEvidence": {
+        "checkedAt": "2026-08-11",
+        "assessment": "no_direct_teaching_sense_match",
+        "rationale": "没有直接词项命中；需要表达越过边界后的空间关系。"
+      }
+    },
+    {
+      "order": 3,
+      "entryId": "gaokao-frequency-0828-although",
+      "headword": "although",
+      "frequencyRank": 828,
+      "partOfSpeech": "conj.",
+      "sourceMeanings": [
+        "虽"
+      ],
+      "teachingSense": "虽",
+      "visualKey": "gaokao-frequency-0828-although-koboyo-adapted-v1",
+      "slug": "person-hurrying-from-rain-to-sun",
+      "width": 160,
+      "height": 221,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-adapted-v1/gaokao-frequency-0828-although--person-hurrying-from-rain-to-sun.svg",
+      "alt": "人物冒雨仍向晴朗一侧赶路，表示“虽……却……”。",
+      "sha256": "cc45bb23de7df6d4fe7e8bd0be1ce41fcf5ade79991e1f89dd6fa24eee0d4ac3",
+      "version": "koboyo-adapted-portrait-v1",
+      "assetStatus": "pilot_owner_qa",
+      "modificationSummary": "保留赶路人物，左上增加雨云，右上增加晴朗目标，形成让步对照。",
+      "provenance": {
+        "type": "koboyo-adapted",
+        "independentOriginal": false,
+        "baseEntryId": "wanwei-basic-0795-hurry",
+        "baseHeadword": "hurry",
+        "baseSlug": "person-hurrying",
+        "basePath": "/vocabulary-assets/wanwei-round-one-v1/visuals/koboyo-v1/wanwei-basic-0795-hurry--person-hurrying.svg",
+        "baseSha256": "19899f546cd86628e11fdf737c79a45ea03b6b36f46b6fcc35a79b51714f368a",
+        "officialPageUrl": "https://koboyo.com/icons/person-hurrying",
+        "officialSvgUrl": "https://koboyo.com/icons/svg/person-hurrying.svg",
+        "licenseUrl": "https://koboyo.com/icons/license",
+        "licenseCheckedAt": "2026-08-11",
+        "sourceReceipt": {
+          "checkedAt": "2026-08-11",
+          "officialPageStatus": 200,
+          "officialSvgStatus": 200,
+          "remoteSha256": "95e21fca70cb8b4609fa9f61b370e8c41f791c90afa1093019347baaa57b0516",
+          "remoteNormalizedSha256": "95e21fca70cb8b4609fa9f61b370e8c41f791c90afa1093019347baaa57b0516",
+          "localNormalizedSha256": "95e21fca70cb8b4609fa9f61b370e8c41f791c90afa1093019347baaa57b0516",
+          "contentMatchAfterTrailingWhitespaceNormalization": true
+        }
+      },
+      "gapEvidence": {
+        "checkedAt": "2026-08-11",
+        "assessment": "no_direct_teaching_sense_match",
+        "rationale": "没有直接词项命中；需要同时保留让步条件与主句。"
+      }
+    },
+    {
+      "order": 4,
+      "entryId": "gaokao-frequency-0970-throughout",
+      "headword": "throughout",
+      "frequencyRank": 970,
+      "partOfSpeech": "prep.",
+      "sourceMeanings": [
+        "遍及"
+      ],
+      "teachingSense": "遍及",
+      "visualKey": "gaokao-frequency-0970-throughout-koboyo-adapted-v1",
+      "slug": "person-following-complete-trail",
+      "width": 219,
+      "height": 227,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-adapted-v1/gaokao-frequency-0970-throughout--person-following-complete-trail.svg",
+      "alt": "人物沿着从头到尾连续的节点路线前行，表示“遍及、贯穿始终”。",
+      "sha256": "3618b3c073d15b00a4f5685a6508174aec798caba89ef8064000b7eae4150fcb",
+      "version": "koboyo-adapted-portrait-v1",
+      "assetStatus": "pilot_owner_qa",
+      "modificationSummary": "保留行走人物，把尾随痕迹改成从画面一端连续到另一端的节点路径。",
+      "provenance": {
+        "type": "koboyo-adapted",
+        "independentOriginal": false,
+        "baseEntryId": "wanwei-core-0149-follow",
+        "baseHeadword": "follow",
+        "baseSlug": "person-following-trail",
+        "basePath": "/vocabulary-assets/wanwei-round-one-v1/visuals/koboyo-v1/wanwei-core-0149-follow--person-following-trail.svg",
+        "baseSha256": "dc2c7bd6d70c3e6c698d2996677d4e5a8c8528047070cb7e2f8c47ea7c513915",
+        "officialPageUrl": "https://koboyo.com/icons/person-following-trail",
+        "officialSvgUrl": "https://koboyo.com/icons/svg/person-following-trail.svg",
+        "licenseUrl": "https://koboyo.com/icons/license",
+        "licenseCheckedAt": "2026-08-11",
+        "sourceReceipt": {
+          "checkedAt": "2026-08-11",
+          "officialPageStatus": 200,
+          "officialSvgStatus": 200,
+          "remoteSha256": "a55766a8b82f079e4abf97daced37c392390dadde837c5ebbb430399531ef412",
+          "remoteNormalizedSha256": "a55766a8b82f079e4abf97daced37c392390dadde837c5ebbb430399531ef412",
+          "localNormalizedSha256": "a55766a8b82f079e4abf97daced37c392390dadde837c5ebbb430399531ef412",
+          "contentMatchAfterTrailingWhitespaceNormalization": true
+        }
+      },
+      "gapEvidence": {
+        "checkedAt": "2026-08-11",
+        "assessment": "no_direct_teaching_sense_match",
+        "rationale": "没有直接词项命中；需要表达从头到尾覆盖全部范围。"
+      }
+    },
+    {
+      "order": 5,
+      "entryId": "gaokao-frequency-1164-unless",
+      "headword": "unless",
+      "frequencyRank": 1164,
+      "partOfSpeech": "conj.",
+      "sourceMeanings": [
+        "除非"
+      ],
+      "teachingSense": "除非",
+      "visualKey": "gaokao-frequency-1164-unless-koboyo-adapted-v1",
+      "slug": "person-opening-gate-with-key-condition",
+      "width": 214,
+      "height": 190,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-adapted-v1/gaokao-frequency-1164-unless--person-opening-gate-with-key-condition.svg",
+      "alt": "人物用钥匙条件打开上锁的门，表示“除非”。",
+      "sha256": "259f5311f8e2a3b81703e2280f28b590d3e53847f0cf3e4b4d1d9c6c583d23bb",
+      "version": "koboyo-adapted-portrait-v1",
+      "assetStatus": "pilot_owner_qa",
+      "modificationSummary": "保留开门人物，在门闩上增加锁与钥匙孔，强调只有条件满足才开放。",
+      "provenance": {
+        "type": "koboyo-adapted",
+        "independentOriginal": false,
+        "baseEntryId": "wanwei-core-0013-allow",
+        "baseHeadword": "allow",
+        "baseSlug": "person-opening-gate",
+        "basePath": "/vocabulary-assets/wanwei-round-one-v1/visuals/koboyo-v1/wanwei-core-0013-allow--person-opening-gate.svg",
+        "baseSha256": "6d43575e0beca52d27093077df17cd54789c22220d78777ab489f9bdcb05fb50",
+        "officialPageUrl": "https://koboyo.com/icons/person-opening-gate",
+        "officialSvgUrl": "https://koboyo.com/icons/svg/person-opening-gate.svg",
+        "licenseUrl": "https://koboyo.com/icons/license",
+        "licenseCheckedAt": "2026-08-11",
+        "sourceReceipt": {
+          "checkedAt": "2026-08-11",
+          "officialPageStatus": 200,
+          "officialSvgStatus": 200,
+          "remoteSha256": "e8aac86bda5e3e4ca21700d523a8cb13f7fb6b2e18dcbcd7e8fe2568d50e639b",
+          "remoteNormalizedSha256": "e8aac86bda5e3e4ca21700d523a8cb13f7fb6b2e18dcbcd7e8fe2568d50e639b",
+          "localNormalizedSha256": "e8aac86bda5e3e4ca21700d523a8cb13f7fb6b2e18dcbcd7e8fe2568d50e639b",
+          "contentMatchAfterTrailingWhitespaceNormalization": true
+        }
+      },
+      "gapEvidence": {
+        "checkedAt": "2026-08-11",
+        "assessment": "no_direct_teaching_sense_match",
+        "rationale": "仅命中法律术语 unless order，与连词教学义无关。"
+      }
+    },
+    {
+      "order": 6,
+      "entryId": "gaokao-frequency-1266-otherwise",
+      "headword": "otherwise",
+      "frequencyRank": 1266,
+      "partOfSpeech": "adv.",
+      "sourceMeanings": [
+        "否则",
+        "以别的方式"
+      ],
+      "teachingSense": "否则；以别的方式",
+      "visualKey": "gaokao-frequency-1266-otherwise-koboyo-adapted-v1",
+      "slug": "person-weighing-alternate-route",
+      "width": 200,
+      "height": 221,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-adapted-v1/gaokao-frequency-1266-otherwise--person-weighing-alternate-route.svg",
+      "alt": "人物衡量两个选项并面对替代分支，表示“否则、以别的方式”。",
+      "sha256": "4cbebf9cd91c1141d083f0ec886762cbb813a1a795deefb23cf194d8abf484e5",
+      "version": "koboyo-adapted-portrait-v1",
+      "assetStatus": "pilot_owner_qa",
+      "modificationSummary": "保留衡量两项的人物，在天平下方增加分岔路径，强调替代方案。",
+      "provenance": {
+        "type": "koboyo-adapted",
+        "independentOriginal": false,
+        "baseEntryId": "wanwei-core-0063-choose",
+        "baseHeadword": "choose",
+        "baseSlug": "person-weighing-two-options",
+        "basePath": "/vocabulary-assets/wanwei-round-one-v1/visuals/koboyo-v1/wanwei-core-0063-choose--person-weighing-two-options.svg",
+        "baseSha256": "546b4bdbf784844f33a0f1ef311f72da5ff1b4163352f0b36feb931d70689b25",
+        "officialPageUrl": "https://koboyo.com/icons/person-weighing-two-options",
+        "officialSvgUrl": "https://koboyo.com/icons/svg/person-weighing-two-options.svg",
+        "licenseUrl": "https://koboyo.com/icons/license",
+        "licenseCheckedAt": "2026-08-11",
+        "sourceReceipt": {
+          "checkedAt": "2026-08-11",
+          "officialPageStatus": 200,
+          "officialSvgStatus": 200,
+          "remoteSha256": "0e6f09f43961011c4d4ab6b304d518fda9a90f26d89dfce7bbb8ef0fb4e61244",
+          "remoteNormalizedSha256": "0e6f09f43961011c4d4ab6b304d518fda9a90f26d89dfce7bbb8ef0fb4e61244",
+          "localNormalizedSha256": "0e6f09f43961011c4d4ab6b304d518fda9a90f26d89dfce7bbb8ef0fb4e61244",
+          "contentMatchAfterTrailingWhitespaceNormalization": true
+        }
+      },
+      "gapEvidence": {
+        "checkedAt": "2026-08-11",
+        "assessment": "no_direct_teaching_sense_match",
+        "rationale": "没有直接词项命中；需要表达条件不成立时的替代分支。"
+      }
+    },
+    {
+      "order": 7,
+      "entryId": "gaokao-frequency-1502-despite",
+      "headword": "despite",
+      "frequencyRank": 1502,
+      "partOfSpeech": "prep.",
+      "sourceMeanings": [
+        "尽 管"
+      ],
+      "teachingSense": "尽管",
+      "visualKey": "gaokao-frequency-1502-despite-koboyo-adapted-v1",
+      "slug": "person-pushing-boulder-despite-resistance",
+      "width": 260,
+      "height": 191,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-adapted-v1/gaokao-frequency-1502-despite--person-pushing-boulder-despite-resistance.svg",
+      "alt": "人物顶着巨大阻力仍把巨石向前推，表示“尽管”。",
+      "sha256": "31e171ba48cc0ea7fe9d8e072c856c6739ca13f47a726cf2f523193a96fd6236",
+      "version": "koboyo-adapted-portrait-v1",
+      "assetStatus": "pilot_owner_qa",
+      "modificationSummary": "保留推巨石上坡的人物，在巨石之后增加继续前进的目标箭头。",
+      "provenance": {
+        "type": "koboyo-adapted",
+        "independentOriginal": false,
+        "baseEntryId": "wanwei-core-0098-difficult",
+        "baseHeadword": "difficult",
+        "baseSlug": "person-pushing-large-boulder",
+        "basePath": "/vocabulary-assets/wanwei-round-one-v1/visuals/koboyo-v1/wanwei-core-0098-difficult--person-pushing-large-boulder.svg",
+        "baseSha256": "6cab97d9fafc8af28bf161331d50a2eccf31c690a2fabe70b3fb4df282f8b080",
+        "officialPageUrl": "https://koboyo.com/icons/person-pushing-large-boulder",
+        "officialSvgUrl": "https://koboyo.com/icons/svg/person-pushing-large-boulder.svg",
+        "licenseUrl": "https://koboyo.com/icons/license",
+        "licenseCheckedAt": "2026-08-11",
+        "sourceReceipt": {
+          "checkedAt": "2026-08-11",
+          "officialPageStatus": 200,
+          "officialSvgStatus": 200,
+          "remoteSha256": "3d3513ffa741437006a0e1d46d7c1644118149fe8e7d6a1235f7fd01fb6926ec",
+          "remoteNormalizedSha256": "3d3513ffa741437006a0e1d46d7c1644118149fe8e7d6a1235f7fd01fb6926ec",
+          "localNormalizedSha256": "3d3513ffa741437006a0e1d46d7c1644118149fe8e7d6a1235f7fd01fb6926ec",
+          "contentMatchAfterTrailingWhitespaceNormalization": true
+        }
+      },
+      "gapEvidence": {
+        "checkedAt": "2026-08-11",
+        "assessment": "no_direct_teaching_sense_match",
+        "rationale": "没有直接词项命中；需要表达阻力存在但行动继续。"
+      }
+    },
+    {
+      "order": 8,
+      "entryId": "gaokao-frequency-1538-indeed",
+      "headword": "indeed",
+      "frequencyRank": 1538,
+      "partOfSpeech": "adv.",
+      "sourceMeanings": [
+        "确实",
+        "其实"
+      ],
+      "teachingSense": "确实",
+      "visualKey": "gaokao-frequency-1538-indeed-koboyo-adapted-v1",
+      "slug": "person-confirming-verified-document",
+      "width": 169,
+      "height": 183,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-adapted-v1/gaokao-frequency-1538-indeed--person-confirming-verified-document.svg",
+      "alt": "人物拿着已验证文件再次确认，表示“确实”。",
+      "sha256": "a3aeb920943c503cad720f67b08aa357228634fd19478519fc0ca4a3961d95e1",
+      "version": "koboyo-adapted-portrait-v1",
+      "assetStatus": "pilot_owner_qa",
+      "modificationSummary": "保留拿着已勾选文件的人物，在确认结果周围增加强调线。",
+      "provenance": {
+        "type": "koboyo-adapted",
+        "independentOriginal": false,
+        "baseEntryId": "wanwei-basic-0982-really",
+        "baseHeadword": "really",
+        "baseSlug": "person-single-source-truth",
+        "basePath": "/vocabulary-assets/wanwei-round-one-v1/visuals/koboyo-v1/wanwei-basic-0982-really--person-single-source-truth.svg",
+        "baseSha256": "df191217722b278f892a689c7e49e5243052770d1a236f690af07fb97ce702a6",
+        "officialPageUrl": "https://koboyo.com/icons/person-single-source-truth",
+        "officialSvgUrl": "https://koboyo.com/icons/svg/person-single-source-truth.svg",
+        "licenseUrl": "https://koboyo.com/icons/license",
+        "licenseCheckedAt": "2026-08-11",
+        "sourceReceipt": {
+          "checkedAt": "2026-08-11",
+          "officialPageStatus": 200,
+          "officialSvgStatus": 200,
+          "remoteSha256": "45a8d6885231be848956d240c7f5fcd17d1a1af2baf0d0dbb28419aec9cb99a9",
+          "remoteNormalizedSha256": "45a8d6885231be848956d240c7f5fcd17d1a1af2baf0d0dbb28419aec9cb99a9",
+          "localNormalizedSha256": "45a8d6885231be848956d240c7f5fcd17d1a1af2baf0d0dbb28419aec9cb99a9",
+          "contentMatchAfterTrailingWhitespaceNormalization": true
+        }
+      },
+      "gapEvidence": {
+        "checkedAt": "2026-08-11",
+        "assessment": "no_direct_teaching_sense_match",
+        "rationale": "没有直接词项命中；需要表达确认或加强陈述。"
+      }
+    },
+    {
+      "order": 9,
+      "entryId": "gaokao-frequency-1694-somehow",
+      "headword": "somehow",
+      "frequencyRank": 1694,
+      "partOfSpeech": "adv.",
+      "sourceMeanings": [
+        "以某种方式"
+      ],
+      "teachingSense": "以某种方式",
+      "visualKey": "gaokao-frequency-1694-somehow-koboyo-adapted-v1",
+      "slug": "person-finding-exit-from-map",
+      "width": 212,
+      "height": 213,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-adapted-v1/gaokao-frequency-1694-somehow--person-finding-exit-from-map.svg",
+      "alt": "人物查看地图后沿曲折路线找到出口，表示“以某种方式”。",
+      "sha256": "89f57e1075758cdc29d8d21c2ba70360be3b39a1046091780935d531dbbe591f",
+      "version": "koboyo-adapted-portrait-v1",
+      "assetStatus": "pilot_owner_qa",
+      "modificationSummary": "保留查看地图的人物，在右上增加出口旗和从地图通向出口的路线。",
+      "provenance": {
+        "type": "koboyo-adapted",
+        "independentOriginal": false,
+        "baseEntryId": "wanwei-basic-0841-lost",
+        "baseHeadword": "lost",
+        "baseSlug": "person-lost-map",
+        "basePath": "/vocabulary-assets/wanwei-round-one-v1/visuals/koboyo-v1/wanwei-basic-0841-lost--person-lost-map.svg",
+        "baseSha256": "9068eae07bc638cda9faadabc1509f41eb0e56db17cff54bbde155cb5224616a",
+        "officialPageUrl": "https://koboyo.com/icons/person-lost-map",
+        "officialSvgUrl": "https://koboyo.com/icons/svg/person-lost-map.svg",
+        "licenseUrl": "https://koboyo.com/icons/license",
+        "licenseCheckedAt": "2026-08-11",
+        "sourceReceipt": {
+          "checkedAt": "2026-08-11",
+          "officialPageStatus": 200,
+          "officialSvgStatus": 200,
+          "remoteSha256": "3f2fb9b20f28797ef77788c6350ad55a8b0490c1ae2ccb276b80635a2114a35b",
+          "remoteNormalizedSha256": "3f2fb9b20f28797ef77788c6350ad55a8b0490c1ae2ccb276b80635a2114a35b",
+          "localNormalizedSha256": "3f2fb9b20f28797ef77788c6350ad55a8b0490c1ae2ccb276b80635a2114a35b",
+          "contentMatchAfterTrailingWhitespaceNormalization": true
+        }
+      },
+      "gapEvidence": {
+        "checkedAt": "2026-08-11",
+        "assessment": "no_direct_teaching_sense_match",
+        "rationale": "没有直接词项命中；需要表达路径不明确但结果达成。"
+      }
+    },
+    {
+      "order": 10,
+      "entryId": "gaokao-frequency-1779-merely",
+      "headword": "merely",
+      "frequencyRank": 1779,
+      "partOfSpeech": "adv.",
+      "sourceMeanings": [
+        "仅仅"
+      ],
+      "teachingSense": "仅仅",
+      "visualKey": "gaokao-frequency-1779-merely-koboyo-adapted-v1",
+      "slug": "person-with-one-limited-task",
+      "width": 216,
+      "height": 214,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-adapted-v1/gaokao-frequency-1779-merely--person-with-one-limited-task.svg",
+      "alt": "人物面前只有一项被限定的任务，表示“仅仅”。",
+      "sha256": "529b2b4710bcd658e74e52b250b34201c008cc6af7ad7605ececd66d71b13101",
+      "version": "koboyo-adapted-portrait-v1",
+      "assetStatus": "pilot_owner_qa",
+      "modificationSummary": "保留轻松人物和唯一任务卡，用括号收紧视觉范围，强调仅此一项。",
+      "provenance": {
+        "type": "koboyo-adapted",
+        "independentOriginal": false,
+        "baseEntryId": "wanwei-core-0140-few",
+        "baseHeadword": "few",
+        "baseSlug": "person-relaxed-fewer-tasks",
+        "basePath": "/vocabulary-assets/wanwei-round-one-v1/visuals/koboyo-v1/wanwei-core-0140-few--person-relaxed-fewer-tasks.svg",
+        "baseSha256": "aa7f0bc1b8054491ff2551911372f1908d5a39c32fff55290f6b8c42b778ca8f",
+        "officialPageUrl": "https://koboyo.com/icons/person-relaxed-fewer-tasks",
+        "officialSvgUrl": "https://koboyo.com/icons/svg/person-relaxed-fewer-tasks.svg",
+        "licenseUrl": "https://koboyo.com/icons/license",
+        "licenseCheckedAt": "2026-08-11",
+        "sourceReceipt": {
+          "checkedAt": "2026-08-11",
+          "officialPageStatus": 200,
+          "officialSvgStatus": 200,
+          "remoteSha256": "44e1688592f2f751e70602066cd3daf0b48fe50c21a25eba0ba2f5be0e1086d0",
+          "remoteNormalizedSha256": "44e1688592f2f751e70602066cd3daf0b48fe50c21a25eba0ba2f5be0e1086d0",
+          "localNormalizedSha256": "44e1688592f2f751e70602066cd3daf0b48fe50c21a25eba0ba2f5be0e1086d0",
+          "contentMatchAfterTrailingWhitespaceNormalization": true
+        }
+      },
+      "gapEvidence": {
+        "checkedAt": "2026-08-11",
+        "assessment": "no_direct_teaching_sense_match",
+        "rationale": "没有直接词项命中；需要表达数量或程度被限制为单一。"
+      }
+    },
+    {
+      "order": 11,
+      "entryId": "gaokao-frequency-1823-regardless",
+      "headword": "regardless",
+      "frequencyRank": 1823,
+      "partOfSpeech": "adv.",
+      "sourceMeanings": [
+        "不管"
+      ],
+      "teachingSense": "不管",
+      "visualKey": "gaokao-frequency-1823-regardless-koboyo-adapted-v1",
+      "slug": "person-walking-past-opposing-signs",
+      "width": 128,
+      "height": 254,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-adapted-v1/gaokao-frequency-1823-regardless--person-walking-past-opposing-signs.svg",
+      "alt": "人物经过两侧不同方向的干扰仍继续前行，表示“不管”。",
+      "sha256": "aea332350257d830f23726848c4c6d70fd96dbe6ddeb58d0f74829a83c08f79e",
+      "version": "koboyo-adapted-portrait-v1",
+      "assetStatus": "pilot_owner_qa",
+      "modificationSummary": "保留向前走的人物，在人物两侧增加互不相同的干扰箭头，人物不改变方向。",
+      "provenance": {
+        "type": "koboyo-adapted",
+        "independentOriginal": false,
+        "baseEntryId": "wanwei-core-0069-come",
+        "baseHeadword": "come",
+        "baseSlug": "person-walking-forward",
+        "basePath": "/vocabulary-assets/wanwei-round-one-v1/visuals/koboyo-v1/wanwei-core-0069-come--person-walking-forward.svg",
+        "baseSha256": "29b9a88af6ac1975e14d70d1b94675d1e665c77ffb5759065c0059f024079c4e",
+        "officialPageUrl": "https://koboyo.com/icons/person-walking-forward",
+        "officialSvgUrl": "https://koboyo.com/icons/svg/person-walking-forward.svg",
+        "licenseUrl": "https://koboyo.com/icons/license",
+        "licenseCheckedAt": "2026-08-11",
+        "sourceReceipt": {
+          "checkedAt": "2026-08-11",
+          "officialPageStatus": 200,
+          "officialSvgStatus": 200,
+          "remoteSha256": "2f2263a895f940c5c856ccf2029fda683d1fd801c4a88966211cd08b403e3227",
+          "remoteNormalizedSha256": "2f2263a895f940c5c856ccf2029fda683d1fd801c4a88966211cd08b403e3227",
+          "localNormalizedSha256": "2f2263a895f940c5c856ccf2029fda683d1fd801c4a88966211cd08b403e3227",
+          "contentMatchAfterTrailingWhitespaceNormalization": true
+        }
+      },
+      "gapEvidence": {
+        "checkedAt": "2026-08-11",
+        "assessment": "no_direct_teaching_sense_match",
+        "rationale": "没有直接词项命中；需要表达外部条件不改变主路径。"
+      }
+    },
+    {
+      "order": 12,
+      "entryId": "gaokao-frequency-2646-nevertheless",
+      "headword": "nevertheless",
+      "frequencyRank": 2646,
+      "partOfSpeech": "adv.",
+      "sourceMeanings": [
+        "尽管如此"
+      ],
+      "teachingSense": "尽管如此",
+      "visualKey": "gaokao-frequency-2646-nevertheless-koboyo-adapted-v1",
+      "slug": "person-climbing-wall-toward-goal",
+      "width": 163,
+      "height": 200,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-adapted-v1/gaokao-frequency-2646-nevertheless--person-climbing-wall-toward-goal.svg",
+      "alt": "人物翻过障碍后仍继续朝目标前进，表示“尽管如此”。",
+      "sha256": "6547b85d43154aab4189b89547945c4fc710ec6a1bc6c53bd9f203b5fae7fd9f",
+      "version": "koboyo-adapted-portrait-v1",
+      "assetStatus": "pilot_owner_qa",
+      "modificationSummary": "保留攀墙人物，在墙顶增加继续前进的方向与目标点。",
+      "provenance": {
+        "type": "koboyo-adapted",
+        "independentOriginal": false,
+        "baseEntryId": "wanwei-core-0066-climb",
+        "baseHeadword": "climb",
+        "baseSlug": "person-climbing-wall",
+        "basePath": "/vocabulary-assets/wanwei-round-one-v1/visuals/koboyo-v1/wanwei-core-0066-climb--person-climbing-wall.svg",
+        "baseSha256": "bf996cec66cb54c507e8a5249522db5a637a10c0b85e349785e3b56c15af7f5a",
+        "officialPageUrl": "https://koboyo.com/icons/person-climbing-wall",
+        "officialSvgUrl": "https://koboyo.com/icons/svg/person-climbing-wall.svg",
+        "licenseUrl": "https://koboyo.com/icons/license",
+        "licenseCheckedAt": "2026-08-11",
+        "sourceReceipt": {
+          "checkedAt": "2026-08-11",
+          "officialPageStatus": 200,
+          "officialSvgStatus": 200,
+          "remoteSha256": "2bc404c6436f074bbf7c75112bd395543693f4a4c903682bafe52ab6f23af02b",
+          "remoteNormalizedSha256": "2bc404c6436f074bbf7c75112bd395543693f4a4c903682bafe52ab6f23af02b",
+          "localNormalizedSha256": "2bc404c6436f074bbf7c75112bd395543693f4a4c903682bafe52ab6f23af02b",
+          "contentMatchAfterTrailingWhitespaceNormalization": true
+        }
+      },
+      "gapEvidence": {
+        "checkedAt": "2026-08-11",
+        "assessment": "no_direct_teaching_sense_match",
+        "rationale": "没有直接词项命中；需要表达在既有阻碍之后仍继续。"
+      }
+    }
+  ]
+}

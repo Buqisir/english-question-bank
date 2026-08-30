@@ -21,6 +21,7 @@ const CENTRAL_FILE_SIGNATURE = 0x02014b50
 const LOCAL_FILE_SIGNATURE = 0x04034b50
 const MAX_EOCD_SEARCH_BYTES = 65_557
 const MAX_DOCUMENT_XML_BYTES = 20 * 1024 * 1024
+const MAX_CAPTURED_MEDIA_BYTES = 50 * 1024 * 1024
 
 function requireRange(buffer, offset, length, label) {
   if (offset < 0 || length < 0 || offset + length > buffer.length) {
@@ -47,6 +48,8 @@ function readDocxPackage(docxBytes) {
   }
   let offset = centralOffset
   const entries = []
+  const capturedEntries = new Map()
+  let capturedMediaBytes = 0
   let documentXml = null
   for (let index = 0; index < entryCount; index += 1) {
     requireRange(buffer, offset, 46, 'ZIP central entry')
@@ -66,10 +69,16 @@ function readDocxPackage(docxBytes) {
       .toString('utf8', offset + 46, offset + 46 + nameLength)
       .replaceAll('\\', '/')
     entries.push(name)
-    if (name === 'word/document.xml') {
+    const capture = name === 'word/document.xml'
+      || name === 'word/_rels/document.xml.rels'
+      || /^word\/media\/[^/]+$/u.test(name)
+    if (capture) {
       if ((flags & 0x1) !== 0) throw new Error('Encrypted DOCX source is unsupported')
-      if (uncompressedSize > MAX_DOCUMENT_XML_BYTES) {
-        throw new Error('DOCX document XML is too large')
+      if (
+        (name === 'word/document.xml' && uncompressedSize > MAX_DOCUMENT_XML_BYTES)
+        || (name !== 'word/document.xml' && uncompressedSize > MAX_CAPTURED_MEDIA_BYTES)
+      ) {
+        throw new Error(`DOCX package entry is too large: ${name}`)
       }
       requireRange(buffer, localOffset, 30, 'ZIP local entry')
       if (buffer.readUInt32LE(localOffset) !== LOCAL_FILE_SIGNATURE) {
@@ -87,17 +96,26 @@ function readDocxPackage(docxBytes) {
           : null
       if (!content) throw new Error(`Unsupported DOCX ZIP compression method ${method}`)
       if (content.length !== uncompressedSize) {
-        throw new Error('DOCX document XML size mismatch')
+        throw new Error(`DOCX package entry size mismatch: ${name}`)
       }
-      documentXml = {
-        compressedRange: { start: dataOffset, end: dataOffset + compressedSize },
-        text: content.toString('utf8'),
+      if (/^word\/media\/[^/]+$/u.test(name)) {
+        capturedMediaBytes += content.byteLength
+        if (capturedMediaBytes > MAX_CAPTURED_MEDIA_BYTES) {
+          throw new Error('DOCX source media capture is too large')
+        }
+      }
+      capturedEntries.set(name, content)
+      if (name === 'word/document.xml') {
+        documentXml = {
+          compressedRange: { start: dataOffset, end: dataOffset + compressedSize },
+          text: content.toString('utf8'),
+        }
       }
     }
     offset += 46 + nameLength + extraLength + commentLength
   }
   if (!documentXml) throw new Error('DOCX document XML is missing')
-  return { documentXml, entries }
+  return { documentXml, entries, capturedEntries }
 }
 
 function decodeXml(value) {
@@ -111,6 +129,161 @@ function decodeXml(value) {
     .replaceAll('&amp;', '&')
 }
 
+function extractXmlText(xml) {
+  return decodeXml(
+    String(xml || '')
+      .replace(/<w:tab\b[^>]*\/?\s*>/g, '\t')
+      .replace(/<w:(?:br|cr)\b[^>]*\/?\s*>/g, '\n')
+      .replace(/<\/w:p>/g, '\n')
+      .replace(/<[^>]+>/g, ''),
+  )
+}
+
+function xmlElements(xml, tag) {
+  return [...String(xml || '').matchAll(
+    new RegExp(`<w:${tag}(?:\\s[^>]*)?>[\\s\\S]*?<\\/w:${tag}>`, 'g'),
+  )].map((match) => match[0])
+}
+
+function xmlAttribute(source, name) {
+  return decodeXml(new RegExp(`\\b${name}=["']([^"']*)["']`, 'u')
+    .exec(String(source || ''))?.[1] || '') || null
+}
+
+function documentRelationships(packageEntries) {
+  const xml = packageEntries.get('word/_rels/document.xml.rels')?.toString('utf8')
+  if (!xml) return new Map()
+  return new Map([...xml.matchAll(/<Relationship\b([^>]*)\/?\s*>/gu)]
+    .flatMap((match) => {
+      const id = xmlAttribute(match[1], 'Id')
+      const target = xmlAttribute(match[1], 'Target')
+      const targetMode = xmlAttribute(match[1], 'TargetMode')
+      const entryName = target?.startsWith('/word/media/')
+        ? target.slice(1)
+        : target?.startsWith('media/')
+          ? `word/${target}`
+          : null
+      return id && entryName && !targetMode ? [[id, entryName]] : []
+    }))
+}
+
+function documentBodyWidthEmu(xml) {
+  const sections = [...xml.matchAll(/<w:sectPr(?:\s[^>]*)?>([\s\S]*?)<\/w:sectPr>/gu)]
+  if (sections.length === 0) return null
+  const widths = sections.map((match) => {
+    const section = match[1]
+    const pageSize = /<w:pgSz\b([^>]*)\/?>/u.exec(section)?.[1]
+    const margins = /<w:pgMar\b([^>]*)\/?>/u.exec(section)?.[1]
+    const pageWidth = xmlAttribute(pageSize, 'w:w')
+    const left = xmlAttribute(margins, 'w:left')
+    const right = xmlAttribute(margins, 'w:right')
+    const gutter = xmlAttribute(margins, 'w:gutter') || '0'
+    const columns = /<w:cols\b([^>]*)\/?>/u.exec(section)
+    const columnCount = xmlAttribute(columns?.[1], 'w:num') || '1'
+    if (
+      pageWidth === null
+      || left === null
+      || right === null
+      || !/^\d+$/u.test(pageWidth)
+      || !/^\d+$/u.test(left)
+      || !/^\d+$/u.test(right)
+      || !/^\d+$/u.test(gutter)
+      || columnCount !== '1'
+      || /<w:col\b/u.test(section)
+    ) return null
+    const bodyWidthTwips = Number(pageWidth)
+      - Number(left)
+      - Number(right)
+      - Number(gutter)
+    return Number.isFinite(bodyWidthTwips) && bodyWidthTwips > 0
+      ? bodyWidthTwips * 635
+      : null
+  })
+  return widths.every((width) => width !== null && width === widths[0])
+    ? widths[0]
+    : null
+}
+
+function spacingToken(rawValue) {
+  const twips = Number(rawValue || 0)
+  if (!Number.isInteger(twips) || twips < 0 || twips > 240) return null
+  if (twips === 0) return 'none'
+  return twips <= 120 ? 'compact' : 'normal'
+}
+
+function paragraphPresentation(paragraphXml, widthEmu, bodyWidthEmu) {
+  const properties = /<w:pPr(?:\s[^>]*)?>([\s\S]*?)<\/w:pPr>/u.exec(paragraphXml)?.[1] || ''
+  const alignmentAttributes = /<w:jc\b([^>]*)\/?>/u.exec(properties)?.[1]
+  const spacingAttributes = /<w:spacing\b([^>]*)\/?>/u.exec(properties)?.[1]
+  const alignment = xmlAttribute(alignmentAttributes, 'w:val')
+  const spacingBeforeRaw = xmlAttribute(spacingAttributes, 'w:before')
+  const spacingAfterRaw = xmlAttribute(spacingAttributes, 'w:after')
+  const spacingBefore = spacingToken(spacingBeforeRaw)
+  const spacingAfter = spacingToken(spacingAfterRaw)
+  const widthRatio = widthEmu / bodyWidthEmu
+  if (
+    alignment === null
+    || spacingBeforeRaw === null
+    || spacingAfterRaw === null
+    || /<w:ind\b/u.test(properties)
+    || xmlAttribute(spacingAttributes, 'w:beforeAutospacing') === '1'
+    || xmlAttribute(spacingAttributes, 'w:afterAutospacing') === '1'
+    || !['left', 'center', 'right'].includes(alignment)
+    || !Number.isFinite(widthRatio)
+    || widthRatio <= 0
+    || widthRatio > 1
+    || spacingBefore === null
+    || spacingAfter === null
+  ) return null
+  return {
+    alignment,
+    widthRatio: Number(widthRatio.toFixed(4)),
+    spacingBefore,
+    spacingAfter,
+  }
+}
+
+function embeddedParagraphMedia(paragraphXml, packageEntries, relationships, bodyWidthEmu) {
+  return [...paragraphXml.matchAll(/<wp:(inline|anchor)\b[\s\S]*?<\/wp:\1>/gu)]
+    .map((match) => {
+      const block = match[0]
+      const relationshipIds = [...block.matchAll(/<a:blip\b[^>]*\br:embed=["']([^"']+)["']/gu)]
+        .map((candidate) => candidate[1])
+      const extent = /<wp:extent\b([^>]*)\/?>/u.exec(block)?.[1]
+      const widthEmu = Number(xmlAttribute(extent, 'cx'))
+      const heightEmu = Number(xmlAttribute(extent, 'cy'))
+      const entryName = relationshipIds.length === 1
+        ? relationships.get(relationshipIds[0])
+        : null
+      const bytes = entryName ? packageEntries.get(entryName) : null
+      const extension = entryName?.split('.').at(-1)?.toLowerCase()
+      const mimeType = ({ png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', webp: 'image/webp' })[extension]
+      const presentation = paragraphPresentation(paragraphXml, widthEmu, bodyWidthEmu)
+      return {
+        drawingMode: match[1],
+        relationshipId: relationshipIds[0] || null,
+        entryName: entryName || null,
+        mimeType: mimeType || null,
+        bytes: bytes ? new Uint8Array(bytes) : null,
+        widthEmu,
+        heightEmu,
+        presentation,
+        supported: Boolean(
+          match[1] === 'inline'
+          && relationshipIds.length === 1
+          && entryName
+          && mimeType
+          && bytes
+          && Number.isFinite(widthEmu)
+          && widthEmu > 0
+          && Number.isFinite(heightEmu)
+          && heightEmu > 0
+          && presentation
+        ),
+      }
+    })
+}
+
 /**
  * Extract the textual body from one immutable DOCX without using a platform
  * converter. This intentionally preserves paragraph and hard-break boundaries
@@ -121,13 +294,137 @@ export function extractDocxDocumentText(docxBytes) {
     throw new TypeError('DOCX text extraction requires immutable DOCX bytes')
   }
   const xml = readDocxPackage(docxBytes).documentXml.text
-  return decodeXml(
-    xml
-      .replace(/<w:tab\b[^>]*\/?\s*>/g, '\t')
-      .replace(/<w:(?:br|cr)\b[^>]*\/?\s*>/g, '\n')
-      .replace(/<\/w:p>/g, '\n')
-      .replace(/<[^>]+>/g, ''),
-  )
+  return extractXmlText(xml)
+}
+
+/**
+ * Extract stable, source-ordered w:p identities for materialization locator
+ * verification. Empty paragraphs retain their source index so selectors and
+ * ordering are bound to the immutable document rather than flattened text.
+ */
+export function extractDocxDocumentParagraphs(docxBytes) {
+  if (!(docxBytes instanceof Uint8Array) || docxBytes.byteLength === 0) {
+    throw new TypeError('DOCX paragraph extraction requires immutable DOCX bytes')
+  }
+  const xml = readDocxPackage(docxBytes).documentXml.text
+  return [...xml.matchAll(/<w:p(?:\s[^>]*)?>[\s\S]*?<\/w:p>/g)]
+    .map((match, index) => ({
+      sourceIndex: index + 1,
+      text: extractXmlText(match[0]).replace(/\n$/u, ''),
+    }))
+}
+
+/**
+ * Read the source-ordered top-level paragraph/table stream needed by the
+ * universal NCK1 DOCX producer. The returned structure is descriptive only;
+ * callers must fail closed on unsupported containers, nested tables, drawings,
+ * or table merges they cannot preserve.
+ */
+export function extractDocxDocumentStructure(docxBytes) {
+  if (!(docxBytes instanceof Uint8Array) || docxBytes.byteLength === 0) {
+    throw new TypeError('DOCX structure extraction requires immutable DOCX bytes')
+  }
+  const docxPackage = readDocxPackage(docxBytes)
+  const xml = docxPackage.documentXml.text
+  const relationships = documentRelationships(docxPackage.capturedEntries)
+  const bodyWidthEmu = documentBodyWidthEmu(xml)
+  const body = /<w:body(?:\s[^>]*)?>([\s\S]*?)<\/w:body>/u.exec(xml)?.[1]
+  if (body === undefined) throw new Error('DOCX document body is missing')
+  const allParagraphs = extractDocxDocumentParagraphs(docxBytes)
+  const sequence = []
+  let sourceIndex = 0
+  let tableIndex = 0
+  for (const match of body.matchAll(
+    /<w:(p|tbl)(?:\s[^>]*)?>[\s\S]*?<\/w:\1>/g,
+  )) {
+    if (match[1] === 'p') {
+      sourceIndex += 1
+      sequence.push({
+        kind: 'paragraph',
+        sourceIndex,
+        text: extractXmlText(match[0]).replace(/\n$/u, ''),
+        containsDrawing: /<(?:w:drawing|w:pict|v:shape)\b/u.test(match[0]),
+        embeddedMedia: embeddedParagraphMedia(
+          match[0],
+          docxPackage.capturedEntries,
+          relationships,
+          bodyWidthEmu,
+        ).map((media) => ({ ...media, sourceIndex })),
+      })
+      continue
+    }
+    tableIndex += 1
+    const tableXml = match[0]
+    const nestedTableCount = (tableXml.match(/<w:tbl\b/g) || []).length - 1
+    const tableParagraphs = xmlElements(tableXml, 'p')
+    const paragraphIndexes = tableParagraphs.map(() => {
+      sourceIndex += 1
+      return sourceIndex
+    })
+    let tableParagraphOffset = 0
+    const rows = xmlElements(tableXml, 'tr').map((rowXml) => ({
+      header: /<w:tblHeader\b/u.test(rowXml),
+      cells: xmlElements(rowXml, 'tc').map((cellXml) => {
+        const cellParagraphs = xmlElements(cellXml, 'p')
+        const sourceParagraphIndexes = paragraphIndexes.slice(
+          tableParagraphOffset,
+          tableParagraphOffset + cellParagraphs.length,
+        )
+        tableParagraphOffset += cellParagraphs.length
+        const gridSpan = Number(
+          /<w:gridSpan\b[^>]*\bw:val=["'](\d+)["']/u.exec(cellXml)?.[1] || 1,
+        )
+        const merge = /<w:vMerge\b([^>]*)\/?\s*>/u.exec(cellXml)
+        const mergeValue = merge
+          ? /\bw:val=["']([^"']+)["']/u.exec(merge[1])?.[1] || 'continue'
+          : null
+        return {
+          text: cellParagraphs
+            .map((paragraphXml) =>
+              extractXmlText(paragraphXml).replace(/\n$/u, ''))
+            .filter((text) => text.length > 0)
+            .join('\n'),
+          sourceParagraphIndexes,
+          columnSpan: gridSpan,
+          verticalMerge: mergeValue,
+          containsDrawing: /<(?:w:drawing|w:pict|v:shape)\b/u.test(cellXml),
+          containsNestedTable: (cellXml.match(/<w:tbl\b/g) || []).length > 0,
+          embeddedMedia: cellParagraphs.flatMap((paragraphXml, index) =>
+            embeddedParagraphMedia(
+              paragraphXml,
+              docxPackage.capturedEntries,
+              relationships,
+              bodyWidthEmu,
+            ).map((media) => ({
+              ...media,
+              sourceIndex: sourceParagraphIndexes[index],
+            }))),
+        }
+      }),
+    }))
+    const declaredColumnCount = (/<w:tblGrid(?:\s[^>]*)?>([\s\S]*?)<\/w:tblGrid>/u
+      .exec(tableXml)?.[1].match(/<w:gridCol\b/g) || []).length
+    sequence.push({
+      kind: 'table',
+      tableIndex,
+      selector: `(/w:document/w:body/w:tbl)[${tableIndex}]`,
+      columnCount: declaredColumnCount || Math.max(
+        0,
+        ...rows.map((row) => row.cells.reduce(
+          (total, cell) => total + cell.columnSpan,
+          0,
+        )),
+      ),
+      rows,
+      nestedTableCount,
+    })
+  }
+  return {
+    paragraphs: allParagraphs,
+    body: sequence,
+    tables: sequence.filter((item) => item.kind === 'table'),
+    unsupportedParagraphCount: allParagraphs.length - sourceIndex,
+  }
 }
 
 function rawGroupsBySlot(parsed) {

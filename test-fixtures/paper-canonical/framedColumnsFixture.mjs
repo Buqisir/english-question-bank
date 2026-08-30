@@ -98,7 +98,11 @@ export function encodeCanonicalFixtureSource(source) {
   for (let pass = 0; pass < 3; pass += 1) {
     const byteLength = new TextEncoder().encode(JSON.stringify(next)).byteLength
     for (const observation of next.observations || []) {
-      if (observation?.span && Number.isInteger(observation.span.start)) {
+      if (
+        observation?.documentInputKey === 'questions'
+        && observation?.span
+        && Number.isInteger(observation.span.start)
+      ) {
         observation.span.end = byteLength
       }
     }

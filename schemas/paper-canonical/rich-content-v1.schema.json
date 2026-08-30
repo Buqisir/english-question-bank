@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "rich-content-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "owner",
+    "schemaVersion",
+    "version",
+    "table"
+  ],
+  "properties": {
+    "id": {
+      "const": "rich-content"
+    },
+    "owner": {
+      "const": "core"
+    },
+    "schemaVersion": {
+      "const": "rich-content-v1"
+    },
+    "version": {
+      "const": "1"
+    },
+    "table": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "grid",
+        "rowSpan",
+        "cellInlines",
+        "mediaRef"
+      ],
+      "properties": {
+        "grid": {
+          "const": "columnStart and columnSpan cover every row exactly once after active rowSpan occupancy"
+        },
+        "rowSpan": {
+          "const": "integer >= 1; reserves every covered column in following rows and may not exceed the final row"
+        },
+        "cellInlines": {
+          "const": [
+            "text",
+            "blank_ref",
+            "media_ref"
+          ]
+        },
+        "mediaRef": {
+          "const": "mediaId resolves within the same canonical question group; alt is required literal text"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,61 @@
+#!/usr/bin/env node
+
+import assert from 'node:assert/strict'
+import { createHash } from 'node:crypto'
+import { existsSync, readFileSync, readdirSync } from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
+const scratchRoot = path.join(root, '.scratch/gaokao-google-voice-qwen-context-pilot-v14')
+const publicRoot = path.join(root, 'app/public/vocabulary-assets/gaokao-frequency-v1/audio/google-voice-qwen-context-pilot-v14')
+const manifest = JSON.parse(readFileSync(path.join(scratchRoot, 'manifest.json'), 'utf8'))
+const v13 = JSON.parse(readFileSync(path.join(root, '.scratch/gaokao-google-voice-qwen-full-v13/manifest.json'), 'utf8'))
+const ownerQa = JSON.parse(readFileSync(path.join(root, '.scratch/gaokao-google-voice-qwen-full-v13/owner-qa-summary-v13.json'), 'utf8'))
+assert.equal(manifest.schemaVersion, 'gaokao-frequency-google-voice-qwen-context-pilot-v14')
+assert.equal(manifest.status, 'private_local_candidates_pending_owner_qa')
+assert.equal(manifest.formalAssetsChanged, false)
+assert.equal(manifest.distribution, 'local_private_evaluation_only')
+assert.equal(manifest.generationMode, 'target-in-syntactic-context')
+assert.equal(manifest.plannedCandidates, 15)
+assert.equal(manifest.entries.length, 15)
+assert.equal(manifest.failures.length, 0)
+assert.equal(new Set(manifest.entries.map((entry) => `${entry.entryId}:${entry.accent}`)).size, 15)
+const remainingKeys = new Set(ownerQa.remaining.map((entry) => `${entry.entryId}:${entry.accent}`))
+const oldByKey = new Map(v13.entries.map((entry) => [`${entry.entryId}:${entry.accent}`, entry]))
+const hashes = new Set()
+for (const entry of manifest.entries) {
+  const key = `${entry.entryId}:${entry.accent}`
+  const old = oldByKey.get(key)
+  assert.ok(remainingKeys.has(key))
+  assert.ok(old)
+  assert.notEqual(entry.sha256, old.sha256)
+  assert.ok(entry.contextBefore)
+  assert.ok(entry.contextAfter)
+  assert.ok(entry.contextBeforeUsed)
+  assert.ok(entry.contextAfterUsed)
+  const scratchPath = path.join(scratchRoot, entry.path)
+  const publicPath = path.join(root, 'app/public', entry.publicPath)
+  const googlePath = path.join(root, `app/public/vocabulary-assets/gaokao-frequency-v1/audio/original-word-repair-v5/${entry.accent}/${entry.entryId}.mp3`)
+  assert.ok(existsSync(scratchPath))
+  assert.ok(existsSync(publicPath))
+  assert.ok(existsSync(googlePath))
+  const bytes = readFileSync(scratchPath)
+  assert.deepEqual(readFileSync(publicPath), bytes)
+  assert.equal(createHash('sha256').update(bytes).digest('hex'), entry.sha256)
+  assert.equal(entry.sampleRate, 24000)
+  assert.equal(entry.channels, 1)
+  assert.ok(entry.durationSeconds >= 0.15 && entry.durationSeconds <= 15)
+  assert.ok(entry.peak >= 0.03)
+  assert.ok(entry.rms >= 0.015)
+  assert.ok(entry.rawActiveFrameFraction >= 0.08)
+  hashes.add(entry.sha256)
+}
+assert.equal(hashes.size, 15)
+assert.equal(readdirSync(publicRoot).filter((name) => name.endsWith('.mp3')).length, 15)
+const qaPath = path.join(root, 'app/public/vocabulary-assets/gaokao-frequency-v1/qa/google-voice-qwen-context-pilot-owner-qa-v14.html')
+assert.ok(existsSync(qaPath))
+const html = readFileSync(qaPath, 'utf8')
+assert.match(html, /上下文重音修复｜V14/)
+assert.match(html, /gaokao-google-voice-qwen-context-pilot-owner-qa-v14/)
+console.log('PASS Google-voice Qwen V14: 15 context-first candidates, unique and bound to V13 Owner-QA failures')

@@ -19,10 +19,19 @@ type VocabularyProgressExplorerProps = {
   onClose: () => void
 }
 
-function stageLabel(stage: VocabularyStage | undefined): string {
+function stageLabel(program: VocabularyProgram, stage: VocabularyStage | undefined): string {
+  const configured = program.structure?.stages?.find((candidate) => candidate.key === stage)
+  if (configured) return configured.label
   if (stage === 'core') return '核心掌握词'
   if (stage === 'basic') return '基础识记词'
   return '认识拓展词'
+}
+
+function curriculumTagLabel(tag: NonNullable<VocabularyEntry['source']['metadata']>['curriculumTag']): string {
+  if (tag === 'initial') return '初中已学'
+  if (tag === 'required') return '高中必修'
+  if (tag === 'elective') return '高中选择性必修'
+  return ''
 }
 
 export function VocabularyProgressExplorer({
@@ -88,6 +97,14 @@ export function VocabularyProgressExplorer({
           <div>
             <strong>下一次将从 {selectedEntry.headword}（第 {selectedEntry.source.globalOrder} 词）开始</strong>
             <span>第 {selectedEntry.source.week} 周 · Day {selectedEntry.source.group}</span>
+            {selectedEntry.source.metadata && (
+              <span>
+                频序 {selectedEntry.source.metadata.frequencyRank}
+                {' · '}{stageLabel(program, selectedEntry.source.metadata.frequencyStage)}
+                {' · '}{curriculumTagLabel(selectedEntry.source.metadata.curriculumTag)}
+                {' · '}{(selectedEntry.teachingSenses?.length ? selectedEntry.teachingSenses : [selectedEntry.teachingSense]).join('；')}
+              </span>
+            )}
             {hasUnfinishedRun && (
               <small>确认后会放弃当前未结束轮次及本轮判断；已生成的生词组不受影响。</small>
             )}
@@ -118,7 +135,7 @@ export function VocabularyProgressExplorer({
               <div className="vocabulary-progress-day-heading">
                 <div>
                   <h3 id={`vocabulary-progress-day-${group.id}`}>Day {group.group}</h3>
-                  <span>{stageLabel(group.stage)}</span>
+                  <span>{stageLabel(program, group.stage)}</span>
                 </div>
                 <small>{entries.length} 词</small>
               </div>

@@ -32,6 +32,7 @@ export type CanonicalSurfaceParagraph = {
   readonly id: string
   readonly section: string
   readonly groupType: 'cloze' | 'grammarFill' | 'sevenChoices'
+  readonly role: 'title' | 'subtitle' | 'body'
   readonly sentences: ReadonlyArray<{
     readonly id: string
     readonly nodes: ReadonlyArray<CanonicalSurfaceTextNode | CanonicalSurfaceBlankNode>
@@ -50,6 +51,31 @@ export type CanonicalReadingSurfaceTextInline = {
   readonly kind: 'text'
   readonly nodeId: string
   readonly text: string
+}
+
+export type CanonicalMediaPresentation = {
+  readonly alignment: 'left' | 'center' | 'right'
+  readonly widthRatio: number
+  readonly spacingBefore: 'none' | 'compact' | 'normal'
+  readonly spacingAfter: 'none' | 'compact' | 'normal'
+}
+
+export type CanonicalReadingSurfaceMediaInline = {
+  readonly kind: 'media_ref'
+  readonly nodeId: string
+  readonly mediaId: string
+  readonly alt: string
+  readonly media: {
+    readonly mimeType: string
+    readonly sha256: string
+    readonly sourceArtifactRef: { readonly artifactId: string }
+    readonly presentation?: CanonicalMediaPresentation
+  }
+  readonly mediaArtifact: {
+    readonly mimeType: string
+    readonly sha256: string
+    readonly encodedBytes: string
+  }
 }
 
 export type CanonicalReadingSurfaceParagraphBlock = {
@@ -73,7 +99,7 @@ export type CanonicalReadingSurfaceTableBlock = {
       readonly rowSpan: number
       readonly role: string
       readonly text: string
-      readonly inlines: ReadonlyArray<CanonicalReadingSurfaceTextInline>
+      readonly inlines: ReadonlyArray<CanonicalReadingSurfaceTextInline | CanonicalReadingSurfaceMediaInline>
     }>
   }>
 }
@@ -88,6 +114,7 @@ export type CanonicalReadingSurfaceFigureBlock = {
     readonly mimeType: string
     readonly sha256: string
     readonly sourceArtifactRef: { readonly artifactId: string }
+    readonly presentation?: CanonicalMediaPresentation
   }
   readonly mediaArtifact: {
     readonly mimeType: string

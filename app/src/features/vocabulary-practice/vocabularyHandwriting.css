@@ -1,0 +1,402 @@
+.vocabulary-handwriting-selector-backdrop {
+  position: fixed;
+  z-index: 80;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: color-mix(in srgb, var(--ink) 42%, transparent);
+}
+
+.vocabulary-handwriting-selector {
+  display: grid;
+  grid-template-rows: auto auto auto minmax(0, 1fr) auto;
+  width: min(620px, 100%);
+  max-height: min(720px, calc(100vh - 48px));
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: 0 18px 48px color-mix(in srgb, var(--ink) 24%, transparent);
+}
+
+.vocabulary-handwriting-selector > header,
+.vocabulary-handwriting-selector > footer,
+.vocabulary-handwriting-selector-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px 20px;
+}
+
+.vocabulary-handwriting-selector > header,
+.vocabulary-handwriting-selector-toolbar {
+  border-bottom: 1px solid var(--line);
+}
+
+.vocabulary-handwriting-selector > header h2,
+.vocabulary-handwriting-selector > header p,
+.vocabulary-handwriting-selector > footer p {
+  margin: 0;
+}
+
+.vocabulary-handwriting-selector > header h2 {
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+.vocabulary-handwriting-selector > header p,
+.vocabulary-handwriting-selector > footer p {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.vocabulary-handwriting-selector > header > button {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--ink);
+}
+
+.vocabulary-handwriting-selector-toolbar {
+  padding-block: 12px;
+}
+
+.vocabulary-handwriting-selector-toolbar > div,
+.vocabulary-handwriting-selector > footer > div {
+  display: flex;
+  gap: 8px;
+}
+
+.vocabulary-handwriting-selector-toolbar button {
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  font: inherit;
+  font-weight: 650;
+}
+
+.vocabulary-handwriting-selector-mode {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 14px 20px;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.vocabulary-handwriting-selector-mode legend {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.vocabulary-handwriting-selector-mode label {
+  position: relative;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.vocabulary-handwriting-selector-mode input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.vocabulary-handwriting-selector-mode span {
+  display: grid;
+  gap: 2px;
+  min-height: 50px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+}
+
+.vocabulary-handwriting-selector-mode label:hover span,
+.vocabulary-handwriting-selector-mode label.is-selected span {
+  border-color: var(--accent);
+  background: var(--mint-soft);
+}
+
+.vocabulary-handwriting-selector-mode input:focus-visible + span {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.vocabulary-handwriting-selector-mode strong {
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.vocabulary-handwriting-selector-mode small {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.vocabulary-handwriting-selector-list {
+  display: grid;
+  gap: 1px;
+  overflow: auto;
+  background: var(--line);
+}
+
+.vocabulary-handwriting-selector-list label {
+  display: grid;
+  grid-template-columns: 22px 28px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 8px 20px;
+  background: var(--panel);
+  cursor: pointer;
+}
+
+.vocabulary-handwriting-selector-list label:hover,
+.vocabulary-handwriting-selector-list label.is-selected {
+  background: var(--mint-soft);
+}
+
+.vocabulary-handwriting-selector-list input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.vocabulary-handwriting-selector-check {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  background: var(--panel);
+  color: var(--panel);
+}
+
+.vocabulary-handwriting-selector-list label.is-selected .vocabulary-handwriting-selector-check {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.vocabulary-handwriting-selector-list input:focus-visible + .vocabulary-handwriting-selector-check {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.vocabulary-handwriting-selector-order {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.vocabulary-handwriting-selector > footer {
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 640px) {
+  .vocabulary-handwriting-selector-backdrop {
+    align-items: end;
+    padding: 0;
+  }
+
+  .vocabulary-handwriting-selector {
+    width: 100%;
+    max-height: 86vh;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .vocabulary-handwriting-selector > footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .vocabulary-handwriting-selector > footer > div {
+    justify-content: flex-end;
+  }
+}
+
+@media print {
+  @font-face {
+    font-family: 'Shuyao Hengshui';
+    src: url('/api/vocabulary/print-assets/hengshui.ttf') format('truetype');
+    font-display: block;
+  }
+
+  .vocabulary-handwriting-selector-backdrop {
+    display: none !important;
+  }
+
+  .vocabulary-print-sheet.is-handwriting .vocabulary-print-page {
+    grid-template-rows: auto 1fr auto;
+    padding: 12mm 13mm 9mm;
+  }
+
+  .vocabulary-handwriting-print-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: 10mm;
+    padding-bottom: 5mm;
+    border-bottom: 1px solid #d8d8d2;
+  }
+
+  .vocabulary-handwriting-print-header h1,
+  .vocabulary-handwriting-print-header p {
+    margin: 0;
+  }
+
+  .vocabulary-handwriting-print-header h1 {
+    font-size: 20pt;
+    line-height: 1.12;
+  }
+
+  .vocabulary-handwriting-print-header p {
+    margin-top: 1.5mm;
+    color: #6a6a64;
+    font-size: 9pt;
+  }
+
+  .vocabulary-handwriting-print-meta {
+    display: grid;
+    grid-template-columns: auto 23mm auto 23mm;
+    align-items: end;
+    gap: 2mm;
+    color: #4d4d49;
+    font-size: 9pt;
+  }
+
+  .vocabulary-handwriting-print-meta i {
+    display: block;
+    border-bottom: 1px solid #76766f;
+  }
+
+  .vocabulary-handwriting-rows {
+    display: grid;
+    align-content: start;
+    gap: 4.4mm;
+    padding-top: 6mm;
+  }
+
+  .vocabulary-handwriting-row {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 4mm;
+    min-height: 28mm;
+    break-inside: avoid;
+  }
+
+  .vocabulary-handwriting-row:has(.vocabulary-handwriting-guide:nth-child(3):last-child) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .vocabulary-handwriting-print-page.is-single .vocabulary-handwriting-rows {
+    gap: 2.2mm;
+    padding-top: 4mm;
+  }
+
+  .vocabulary-handwriting-print-page.is-single .vocabulary-handwriting-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6mm;
+    min-height: 19mm;
+  }
+
+  .vocabulary-handwriting-print-page.is-single .vocabulary-handwriting-guide {
+    height: 18mm;
+  }
+
+  .vocabulary-handwriting-print-page.is-single .vocabulary-handwriting-guide strong {
+    font-size: 18pt;
+  }
+
+  .vocabulary-handwriting-guide {
+    position: relative;
+    display: grid;
+    align-items: center;
+    min-width: 0;
+    height: 25mm;
+    overflow: hidden;
+  }
+
+  .vocabulary-handwriting-guide > i {
+    position: absolute;
+    right: 0;
+    left: 0;
+    height: 0;
+    border-top: 0.2mm dashed #9a9a93;
+  }
+
+  .vocabulary-handwriting-guide > i:nth-of-type(1) { top: calc(50% - 4.5mm); }
+  .vocabulary-handwriting-guide > i:nth-of-type(2) { top: calc(50% - 1.5mm); }
+  .vocabulary-handwriting-guide > i:nth-of-type(3) {
+    top: calc(50% + 1.5mm);
+    border-top: 0.3mm solid #6a6a64;
+  }
+  .vocabulary-handwriting-guide > i:nth-of-type(4) { top: calc(50% + 4.5mm); }
+
+  .vocabulary-handwriting-guide strong {
+    position: relative;
+    z-index: 1;
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    font-family: 'Shuyao Hengshui', 'Times New Roman', serif;
+    font-size: 18pt;
+    font-weight: 400;
+    line-height: 1;
+    text-align: center;
+    transform: translateY(-0.35mm);
+    white-space: nowrap;
+  }
+
+  .vocabulary-handwriting-guide.is-trace strong {
+    color: #b9b9b3;
+  }
+
+  .vocabulary-handwriting-meaning {
+    position: absolute;
+    z-index: 2;
+    top: -0.2mm;
+    left: 0;
+    max-width: 100%;
+    overflow: hidden;
+    color: #575752;
+    font-family: inherit;
+    font-size: 7.5pt;
+    line-height: 1.2;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .vocabulary-handwriting-print-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8mm;
+    padding-top: 3mm;
+    border-top: 1px solid #d8d8d2;
+    color: #6a6a64;
+    font-size: 7.2pt;
+  }
+
+  .vocabulary-handwriting-print-footer strong {
+    color: #1e4a3a;
+    font-weight: 600;
+  }
+}

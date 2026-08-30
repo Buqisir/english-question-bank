@@ -18,7 +18,10 @@ import { canonicalAuthorityRef, compileCanonicalPaper, stableStringify, validate
 import { resolveCanonicalAuthority, slotsForProfile, validateAuthorityClosure } from '../shared/paper-canonical/authority.mjs'
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
 import { resolveGrammarFillPublicGeometryFixture } from '../shared/paper-canonical/grammarFillPublicGeometryFixtures.mjs'
-import { validateGrammarFillPromptProvision } from '../shared/paper-canonical/grammarFillPromptContract.mjs'
+import {
+  grammarFillPromptPrefix,
+  validateGrammarFillPromptProvision,
+} from '../shared/paper-canonical/grammarFillPromptContract.mjs'
 import { projectCanonicalPaper } from '../shared/paper-canonical/projector.mjs'
 import {
   paperTypographyRuntime,
@@ -184,6 +187,14 @@ assert.deepEqual(
   ),
   [],
   'the v2 provision contract accepts source_proven_none without prompt',
+)
+assert.equal(
+  grammarFillPromptPrefix(
+    { kind: 'text', text: '(hold)\nThe source line continues.' },
+    'hold',
+  ),
+  '(hold)',
+  'the source prompt contract accepts a preserved line boundary after a prompt',
 )
 for (const contradictoryProvision of [
   {

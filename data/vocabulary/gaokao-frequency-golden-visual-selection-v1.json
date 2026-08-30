@@ -1,0 +1,1140 @@
+{
+  "schemaVersion": "gaokao-frequency-visual-selection-v1",
+  "version": "gaokao-frequency-koboyo-subagent-v1",
+  "status": "subagent_visual_qa_pass",
+  "entries": [
+    {
+      "entryId": "gaokao-frequency-0001-the",
+      "headword": "the",
+      "visualKey": "gaokao-frequency-0001-the",
+      "slug": "person-closing-window",
+      "width": 222,
+      "height": 198,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0001-the--person-closing-window.svg",
+      "teachingSenses": [
+        "表特指",
+        "表类别"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0004-a-an",
+      "headword": "a,an",
+      "visualKey": "gaokao-frequency-0004-a-an",
+      "slug": "apple-picked",
+      "width": 213,
+      "height": 182,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0004-a-an--apple-picked.svg",
+      "teachingSenses": [
+        "表示数量一（一个）"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0026-as",
+      "headword": "as",
+      "visualKey": "gaokao-frequency-0026-as",
+      "slug": "teenager-studying",
+      "width": 156,
+      "height": 210,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0026-as--teenager-studying.svg",
+      "teachingSenses": [
+        "作为",
+        "当……时",
+        "如同"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0031-about",
+      "headword": "about",
+      "visualKey": "gaokao-frequency-0031-about",
+      "slug": "two-people-planning-board",
+      "width": 262,
+      "height": 176,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0031-about--two-people-planning-board.svg",
+      "teachingSenses": [
+        "关于",
+        "大约"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0074-may",
+      "headword": "may",
+      "visualKey": "gaokao-frequency-0074-may",
+      "slug": "composed-may",
+      "width": 900,
+      "height": 420,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0074-may--composed-may.svg",
+      "teachingSenses": [
+        "可能",
+        "可以"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0111-author",
+      "headword": "author",
+      "visualKey": "gaokao-frequency-0111-author",
+      "slug": "composed-author",
+      "width": 900,
+      "height": 420,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0111-author--composed-author.svg",
+      "teachingSenses": [
+        "作者"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0123-live",
+      "headword": "live",
+      "visualKey": "gaokao-frequency-0123-live",
+      "slug": "composed-live",
+      "width": 900,
+      "height": 420,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0123-live--composed-live.svg",
+      "teachingSenses": [
+        "住",
+        "生活",
+        "活的；现场直播的"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0133-paragraph",
+      "headword": "paragraph",
+      "visualKey": "gaokao-frequency-0133-paragraph",
+      "slug": "paragraph-block",
+      "width": 162,
+      "height": 127,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0133-paragraph--paragraph-block.svg",
+      "teachingSenses": [
+        "段落"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0265-improve",
+      "headword": "improve",
+      "visualKey": "gaokao-frequency-0265-improve",
+      "slug": "engagement-graph",
+      "width": 205,
+      "height": 137,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0265-improve--engagement-graph.svg",
+      "teachingSenses": [
+        "改进"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0317-challenge",
+      "headword": "challenge",
+      "visualKey": "gaokao-frequency-0317-challenge",
+      "slug": "peak-effort",
+      "width": 181,
+      "height": 193,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0317-challenge--peak-effort.svg",
+      "teachingSenses": [
+        "挑战"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0360-design",
+      "headword": "design",
+      "visualKey": "gaokao-frequency-0360-design",
+      "slug": "reading-blueprint",
+      "width": 200,
+      "height": 224,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0360-design--reading-blueprint.svg",
+      "teachingSenses": [
+        "设计",
+        "图案",
+        "打算"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0392-comprehension",
+      "headword": "comprehension",
+      "visualKey": "gaokao-frequency-0392-comprehension",
+      "slug": "quiz-reading",
+      "width": 202,
+      "height": 215,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0392-comprehension--quiz-reading.svg",
+      "teachingSenses": [
+        "理解"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0393-china",
+      "headword": "China",
+      "visualKey": "gaokao-frequency-0393-china",
+      "slug": "cartoon-great-wall-section",
+      "width": 285,
+      "height": 285,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0393-china--cartoon-great-wall-section.svg",
+      "teachingSenses": [
+        "中国"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0451-reward",
+      "headword": "reward",
+      "visualKey": "gaokao-frequency-0451-reward",
+      "slug": "solid-reward-medal",
+      "width": 266,
+      "height": 266,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0451-reward--solid-reward-medal.svg",
+      "teachingSenses": [
+        "回报",
+        "报答",
+        "奖"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0468-p-m-pm",
+      "headword": "p.m.,pm",
+      "visualKey": "gaokao-frequency-0468-p-m-pm",
+      "slug": "composed-p-m-pm",
+      "width": 800,
+      "height": 500,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0468-p-m-pm--composed-p-m-pm.svg",
+      "teachingSenses": [
+        "下午"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0491-data",
+      "headword": "data",
+      "visualKey": "gaokao-frequency-0491-data",
+      "slug": "cartoon-keyboard-chart-screen",
+      "width": 212,
+      "height": 212,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0491-data--cartoon-keyboard-chart-screen.svg",
+      "teachingSenses": [
+        "数据"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0498-miss",
+      "headword": "miss",
+      "visualKey": "gaokao-frequency-0498-miss",
+      "slug": "composed-miss",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0498-miss--composed-miss.svg",
+      "teachingSenses": [
+        "错过",
+        "想念"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0529-plastic",
+      "headword": "plastic",
+      "visualKey": "gaokao-frequency-0529-plastic",
+      "slug": "composed-plastic",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0529-plastic--composed-plastic.svg",
+      "teachingSenses": [
+        "塑料",
+        "塑料的"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0557-performance",
+      "headword": "performance",
+      "visualKey": "gaokao-frequency-0557-performance",
+      "slug": "singer-microphone",
+      "width": 167,
+      "height": 210,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0557-performance--singer-microphone.svg",
+      "teachingSenses": [
+        "表演",
+        "表现"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0564-species",
+      "headword": "species",
+      "visualKey": "gaokao-frequency-0564-species",
+      "slug": "biodiversity-net",
+      "width": 210,
+      "height": 162,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0564-species--biodiversity-net.svg",
+      "teachingSenses": [
+        "物种"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0587-colo-u-r",
+      "headword": "colo (u )r",
+      "visualKey": "gaokao-frequency-0587-colo-u-r",
+      "slug": "paintbrush-palette",
+      "width": 213,
+      "height": 169,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0587-colo-u-r--paintbrush-palette.svg",
+      "teachingSenses": [
+        "颜色"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0593-opportunity",
+      "headword": "opportunity",
+      "visualKey": "gaokao-frequency-0593-opportunity",
+      "slug": "composed-opportunity",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0593-opportunity--composed-opportunity.svg",
+      "teachingSenses": [
+        "机会",
+        "时机"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0598-professor",
+      "headword": "professor",
+      "visualKey": "gaokao-frequency-0598-professor",
+      "slug": "composed-professor",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0598-professor--composed-professor.svg",
+      "teachingSenses": [
+        "教授"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0623-involve",
+      "headword": "involve",
+      "visualKey": "gaokao-frequency-0623-involve",
+      "slug": "family-recipe-card",
+      "width": 185,
+      "height": 132,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0623-involve--family-recipe-card.svg",
+      "teachingSenses": [
+        "包含",
+        "涉及"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0643-career",
+      "headword": "career",
+      "visualKey": "gaokao-frequency-0643-career",
+      "slug": "composed-career",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0643-career--composed-career.svg",
+      "teachingSenses": [
+        "生涯",
+        "事业"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0819-responsibility",
+      "headword": "responsibility",
+      "visualKey": "gaokao-frequency-0819-responsibility",
+      "slug": "composed-responsibility",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0819-responsibility--composed-responsibility.svg",
+      "teachingSenses": [
+        "责任"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0862-novel",
+      "headword": "novel",
+      "visualKey": "gaokao-frequency-0862-novel",
+      "slug": "composed-novel",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0862-novel--composed-novel.svg",
+      "teachingSenses": [
+        "小说"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0909-pack",
+      "headword": "pack",
+      "visualKey": "gaokao-frequency-0909-pack",
+      "slug": "packing-bag",
+      "width": 185,
+      "height": 227,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0909-pack--packing-bag.svg",
+      "teachingSenses": [
+        "包",
+        "打包"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-0978-us-u-s",
+      "headword": "US,U.S.",
+      "visualKey": "gaokao-frequency-0978-us-u-s",
+      "slug": "liberty-style-torch",
+      "width": 82,
+      "height": 199,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-0978-us-u-s--liberty-style-torch.svg",
+      "teachingSenses": [
+        "美国"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1016-favo-u-rite",
+      "headword": "favo(u)rite",
+      "visualKey": "gaokao-frequency-1016-favo-u-rite",
+      "slug": "composed-favo-u-rite",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1016-favo-u-rite--composed-favo-u-rite.svg",
+      "teachingSenses": [
+        "最喜爱的",
+        "最爱之物"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1081-concept",
+      "headword": "concept",
+      "visualKey": "gaokao-frequency-1081-concept",
+      "slug": "composed-concept",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1081-concept--composed-concept.svg",
+      "teachingSenses": [
+        "概念"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1082-black",
+      "headword": "black",
+      "visualKey": "gaokao-frequency-1082-black",
+      "slug": "black-cat-mascot-building",
+      "width": 210,
+      "height": 243,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1082-black--black-cat-mascot-building.svg",
+      "teachingSenses": [
+        "黑色的",
+        "黑色"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1084-contact",
+      "headword": "contact",
+      "visualKey": "gaokao-frequency-1084-contact",
+      "slug": "handshake-deal",
+      "width": 227,
+      "height": 131,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1084-contact--handshake-deal.svg",
+      "teachingSenses": [
+        "联系",
+        "接触"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1086-cheese",
+      "headword": "cheese",
+      "visualKey": "gaokao-frequency-1086-cheese",
+      "slug": "cheese-served",
+      "width": 202,
+      "height": 159,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1086-cheese--cheese-served.svg",
+      "teachingSenses": [
+        "奶酪"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1090-account",
+      "headword": "account",
+      "visualKey": "gaokao-frequency-1090-account",
+      "slug": "composed-account",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1090-account--composed-account.svg",
+      "teachingSenses": [
+        "叙述",
+        "描写"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1094-complex",
+      "headword": "complex",
+      "visualKey": "gaokao-frequency-1094-complex",
+      "slug": "tangled-knot-beside-straight",
+      "width": 162,
+      "height": 178,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1094-complex--tangled-knot-beside-straight.svg",
+      "teachingSenses": [
+        "复杂的",
+        "难理解的"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1095-afraid",
+      "headword": "afraid",
+      "visualKey": "gaokao-frequency-1095-afraid",
+      "slug": "cartoon-scared",
+      "width": 278,
+      "height": 278,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1095-afraid--cartoon-scared.svg",
+      "teachingSenses": [
+        "害怕的",
+        "担心的"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1098-personality",
+      "headword": "personality",
+      "visualKey": "gaokao-frequency-1098-personality",
+      "slug": "composed-personality",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1098-personality--composed-personality.svg",
+      "teachingSenses": [
+        "性格",
+        "个性"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1101-firm",
+      "headword": "firm",
+      "visualKey": "gaokao-frequency-1101-firm",
+      "slug": "composed-firm",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1101-firm--composed-firm.svg",
+      "teachingSenses": [
+        "结实的",
+        "公司"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1106-britain",
+      "headword": "Britain",
+      "visualKey": "gaokao-frequency-1106-britain",
+      "slug": "big-ben-style-clock",
+      "width": 62,
+      "height": 232,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1106-britain--big-ben-style-clock.svg",
+      "teachingSenses": [
+        "英国"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1107-economic",
+      "headword": "economic",
+      "visualKey": "gaokao-frequency-1107-economic",
+      "slug": "composed-economic",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1107-economic--composed-economic.svg",
+      "teachingSenses": [
+        "经济的",
+        "省钱的"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1110-theory",
+      "headword": "theory",
+      "visualKey": "gaokao-frequency-1110-theory",
+      "slug": "composed-theory",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1110-theory--composed-theory.svg",
+      "teachingSenses": [
+        "理论"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1112-transport",
+      "headword": "transport",
+      "visualKey": "gaokao-frequency-1112-transport",
+      "slug": "freight-train",
+      "width": 233,
+      "height": 112,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1112-transport--freight-train.svg",
+      "teachingSenses": [
+        "运输"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1113-graduate",
+      "headword": "graduate",
+      "visualKey": "gaokao-frequency-1113-graduate",
+      "slug": "graduation-cap",
+      "width": 211,
+      "height": 147,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1113-graduate--graduation-cap.svg",
+      "teachingSenses": [
+        "毕业",
+        "授予(某人) 学位"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1116-immediately",
+      "headword": "immediately",
+      "visualKey": "gaokao-frequency-1116-immediately",
+      "slug": "composed-immediately",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1116-immediately--composed-immediately.svg",
+      "teachingSenses": [
+        "立即",
+        "马上",
+        "一…就"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1118-youth",
+      "headword": "youth",
+      "visualKey": "gaokao-frequency-1118-youth",
+      "slug": "young-adult-backpack",
+      "width": 160,
+      "height": 222,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1118-youth--young-adult-backpack.svg",
+      "teachingSenses": [
+        "青年时期",
+        "青年人",
+        "青春"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1130-application",
+      "headword": "application",
+      "visualKey": "gaokao-frequency-1130-application",
+      "slug": "person-filling-blank-form",
+      "width": 214,
+      "height": 236,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1130-application--person-filling-blank-form.svg",
+      "teachingSenses": [
+        "申请",
+        "应用程序"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1189-monday",
+      "headword": "Monday",
+      "visualKey": "gaokao-frequency-1189-monday",
+      "slug": "composed-monday",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1189-monday--composed-monday.svg",
+      "teachingSenses": [
+        "星期一"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1194-neighbourhood",
+      "headword": "neighbourhood",
+      "visualKey": "gaokao-frequency-1194-neighbourhood",
+      "slug": "cartoon-canal-houses-row",
+      "width": 310,
+      "height": 310,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1194-neighbourhood--cartoon-canal-houses-row.svg",
+      "teachingSenses": [
+        "社区",
+        "街坊"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1203-uk-u-k",
+      "headword": "UK, U. K.",
+      "visualKey": "gaokao-frequency-1203-uk-u-k",
+      "slug": "big-ben-style-clock",
+      "width": 62,
+      "height": 232,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1203-uk-u-k--big-ben-style-clock.svg",
+      "teachingSenses": [
+        "英国"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1232-progress",
+      "headword": "progress",
+      "visualKey": "gaokao-frequency-1232-progress",
+      "slug": "escalation-arrow-upward",
+      "width": 173,
+      "height": 160,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1232-progress--escalation-arrow-upward.svg",
+      "teachingSenses": [
+        "进步，进展"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1233-beauty",
+      "headword": "beauty",
+      "visualKey": "gaokao-frequency-1233-beauty",
+      "slug": "composed-beauty",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1233-beauty--composed-beauty.svg",
+      "teachingSenses": [
+        "美，美丽",
+        "美人"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1242-appointment",
+      "headword": "appointment",
+      "visualKey": "gaokao-frequency-1242-appointment",
+      "slug": "appointment-diary",
+      "width": 261,
+      "height": 179,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1242-appointment--appointment-diary.svg",
+      "teachingSenses": [
+        "约会，约定",
+        "任命，委任"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1273-grateful",
+      "headword": "grateful",
+      "visualKey": "gaokao-frequency-1273-grateful",
+      "slug": "grateful",
+      "width": 171,
+      "height": 240,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1273-grateful--grateful.svg",
+      "teachingSenses": [
+        "感激的，感谢的"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1286-angry",
+      "headword": "angry",
+      "visualKey": "gaokao-frequency-1286-angry",
+      "slug": "angry-face",
+      "width": 181,
+      "height": 235,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1286-angry--angry-face.svg",
+      "teachingSenses": [
+        "生气的，愤怒的"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1296-display",
+      "headword": "display",
+      "visualKey": "gaokao-frequency-1296-display",
+      "slug": "shop-window-display",
+      "width": 228,
+      "height": 193,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1296-display--shop-window-display.svg",
+      "teachingSenses": [
+        "展示",
+        "陈列",
+        "展览"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1343-purchase",
+      "headword": "purchase",
+      "visualKey": "gaokao-frequency-1343-purchase",
+      "slug": "shopping-cart",
+      "width": 179,
+      "height": 156,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1343-purchase--shopping-cart.svg",
+      "teachingSenses": [
+        "购买"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1368-quit",
+      "headword": "quit",
+      "visualKey": "gaokao-frequency-1368-quit",
+      "slug": "composed-quit",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1368-quit--composed-quit.svg",
+      "teachingSenses": [
+        "离(职)",
+        "退出"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1378-manner",
+      "headword": "manner",
+      "visualKey": "gaokao-frequency-1378-manner",
+      "slug": "composed-manner",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1378-manner--composed-manner.svg",
+      "teachingSenses": [
+        "方式",
+        "礼貌"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-1508-route",
+      "headword": "route",
+      "visualKey": "gaokao-frequency-1508-route",
+      "slug": "treasure-map-dotted-path",
+      "width": 195,
+      "height": 166,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-1508-route--treasure-map-dotted-path.svg",
+      "teachingSenses": [
+        "路线"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2001-cent",
+      "headword": "cent",
+      "visualKey": "gaokao-frequency-2001-cent",
+      "slug": "composed-cent",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2001-cent--composed-cent.svg",
+      "teachingSenses": [
+        "分",
+        "分币"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2002-advertisement",
+      "headword": "advertisement",
+      "visualKey": "gaokao-frequency-2002-advertisement",
+      "slug": "composed-advertisement",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2002-advertisement--composed-advertisement.svg",
+      "teachingSenses": [
+        "广告",
+        "启事"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2004-dessert",
+      "headword": "dessert",
+      "visualKey": "gaokao-frequency-2004-dessert",
+      "slug": "cake-slice",
+      "width": 152,
+      "height": 179,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2004-dessert--cake-slice.svg",
+      "teachingSenses": [
+        "甜点"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2006-metal",
+      "headword": "metal",
+      "visualKey": "gaokao-frequency-2006-metal",
+      "slug": "batch-steel",
+      "width": 206,
+      "height": 158,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2006-metal--batch-steel.svg",
+      "teachingSenses": [
+        "金属"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2011-illustrate",
+      "headword": "illustrate",
+      "visualKey": "gaokao-frequency-2011-illustrate",
+      "slug": "drawing-diagram",
+      "width": 204,
+      "height": 198,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2011-illustrate--drawing-diagram.svg",
+      "teachingSenses": [
+        "说明"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2012-agreement",
+      "headword": "agreement",
+      "visualKey": "gaokao-frequency-2012-agreement",
+      "slug": "cartoon-handshake-deal",
+      "width": 285,
+      "height": 285,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2012-agreement--cartoon-handshake-deal.svg",
+      "teachingSenses": [
+        "同意",
+        "协议"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2018-flexible",
+      "headword": "flexible",
+      "visualKey": "gaokao-frequency-2018-flexible",
+      "slug": "rubber-band",
+      "width": 179,
+      "height": 137,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2018-flexible--rubber-band.svg",
+      "teachingSenses": [
+        "灵活的",
+        "有弹性的"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2020-poetry",
+      "headword": "poetry",
+      "visualKey": "gaokao-frequency-2020-poetry",
+      "slug": "composed-poetry",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2020-poetry--composed-poetry.svg",
+      "teachingSenses": [
+        "诗歌"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2025-secretary",
+      "headword": "secretary",
+      "visualKey": "gaokao-frequency-2025-secretary",
+      "slug": "composed-secretary",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2025-secretary--composed-secretary.svg",
+      "teachingSenses": [
+        "秘书"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2027-context",
+      "headword": "context",
+      "visualKey": "gaokao-frequency-2027-context",
+      "slug": "composed-context",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2027-context--composed-context.svg",
+      "teachingSenses": [
+        "背景",
+        "上下文"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2043-enthusiastic",
+      "headword": "enthusiastic",
+      "visualKey": "gaokao-frequency-2043-enthusiastic",
+      "slug": "fan-cheering-scarf",
+      "width": 218,
+      "height": 185,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2043-enthusiastic--fan-cheering-scarf.svg",
+      "teachingSenses": [
+        "热情的"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2050-invention",
+      "headword": "invention",
+      "visualKey": "gaokao-frequency-2050-invention",
+      "slug": "led-bulb",
+      "width": 122,
+      "height": 205,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2050-invention--led-bulb.svg",
+      "teachingSenses": [
+        "发明"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2056-kindergarten",
+      "headword": "kindergarten",
+      "visualKey": "gaokao-frequency-2056-kindergarten",
+      "slug": "composed-kindergarten",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2056-kindergarten--composed-kindergarten.svg",
+      "teachingSenses": [
+        "幼儿园",
+        "学前班"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2066-russia",
+      "headword": "Russia",
+      "visualKey": "gaokao-frequency-2066-russia",
+      "slug": "composed-russia",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2066-russia--composed-russia.svg",
+      "teachingSenses": [
+        "俄罗斯"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2070-concentrate",
+      "headword": "concentrate",
+      "visualKey": "gaokao-frequency-2070-concentrate",
+      "slug": "composed-concentrate",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2070-concentrate--composed-concentrate.svg",
+      "teachingSenses": [
+        "集中(注意力)"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2087-conservation",
+      "headword": "conservation",
+      "visualKey": "gaokao-frequency-2087-conservation",
+      "slug": "composed-conservation",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2087-conservation--composed-conservation.svg",
+      "teachingSenses": [
+        "保护",
+        "保存",
+        "节约"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2090-broadcast",
+      "headword": "broadcast",
+      "visualKey": "gaokao-frequency-2090-broadcast",
+      "slug": "broadcast-podcast",
+      "width": 181,
+      "height": 146,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2090-broadcast--broadcast-podcast.svg",
+      "teachingSenses": [
+        "广播",
+        "播送"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2095-pronunciation",
+      "headword": "pronunciation",
+      "visualKey": "gaokao-frequency-2095-pronunciation",
+      "slug": "composed-pronunciation",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2095-pronunciation--composed-pronunciation.svg",
+      "teachingSenses": [
+        "发音"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2126-dialog-ue",
+      "headword": "dialog ( ue)",
+      "visualKey": "gaokao-frequency-2126-dialog-ue",
+      "slug": "chat-window",
+      "width": 194,
+      "height": 194,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2126-dialog-ue--chat-window.svg",
+      "teachingSenses": [
+        "对话"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2147-grey-gray",
+      "headword": "grey , gray",
+      "visualKey": "gaokao-frequency-2147-grey-gray",
+      "slug": "composed-grey-gray",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2147-grey-gray--composed-grey-gray.svg",
+      "teachingSenses": [
+        "灰色(的)"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2156-o-clock",
+      "headword": "o'clock",
+      "visualKey": "gaokao-frequency-2156-o-clock",
+      "slug": "cartoon-clock",
+      "width": 285,
+      "height": 285,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2156-o-clock--cartoon-clock.svg",
+      "teachingSenses": [
+        "……点钟"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2168-ought-to",
+      "headword": "ought to",
+      "visualKey": "gaokao-frequency-2168-ought-to",
+      "slug": "composed-ought-to",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2168-ought-to--composed-ought-to.svg",
+      "teachingSenses": [
+        "应该"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2284-arrangement",
+      "headword": "arrangement",
+      "visualKey": "gaokao-frequency-2284-arrangement",
+      "slug": "cartoon-schedule",
+      "width": 277,
+      "height": 277,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2284-arrangement--cartoon-schedule.svg",
+      "teachingSenses": [
+        "安排",
+        "整理"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2285-defence-defense",
+      "headword": "defence , defense",
+      "visualKey": "gaokao-frequency-2285-defence-defense",
+      "slug": "defence",
+      "width": 176,
+      "height": 212,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2285-defence-defense--defence.svg",
+      "teachingSenses": [
+        "防御",
+        "保护",
+        "辩"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2296-underground",
+      "headword": "underground",
+      "visualKey": "gaokao-frequency-2296-underground",
+      "slug": "subway-underpass",
+      "width": 197,
+      "height": 147,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2296-underground--subway-underpass.svg",
+      "teachingSenses": [
+        "地"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2342-b-c",
+      "headword": "B.C.",
+      "visualKey": "gaokao-frequency-2342-b-c",
+      "slug": "composed-b-c",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2342-b-c--composed-b-c.svg",
+      "teachingSenses": [
+        "公元前"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2409-guideline",
+      "headword": "guideline",
+      "visualKey": "gaokao-frequency-2409-guideline",
+      "slug": "policy-handbook",
+      "width": 150,
+      "height": 198,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2409-guideline--policy-handbook.svg",
+      "teachingSenses": [
+        "指导方针"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2495-afterward-s",
+      "headword": "afterward(s)",
+      "visualKey": "gaokao-frequency-2495-afterward-s",
+      "slug": "composed-afterward-s",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2495-afterward-s--composed-afterward-s.svg",
+      "teachingSenses": [
+        "后来",
+        "以后"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2739-ad-a-d",
+      "headword": "AD,A.D.",
+      "visualKey": "gaokao-frequency-2739-ad-a-d",
+      "slug": "composed-ad-a-d",
+      "width": 960,
+      "height": 640,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2739-ad-a-d--composed-ad-a-d.svg",
+      "teachingSenses": [
+        "公元"
+      ]
+    },
+    {
+      "entryId": "gaokao-frequency-2916-china",
+      "headword": "china",
+      "visualKey": "gaokao-frequency-2916-china",
+      "slug": "pot-glazed",
+      "width": 161,
+      "height": 176,
+      "path": "/vocabulary-assets/gaokao-frequency-v1/visuals/koboyo-full-v1/gaokao-frequency-2916-china--pot-glazed.svg",
+      "teachingSenses": [
+        "瓷器"
+      ]
+    }
+  ]
+}

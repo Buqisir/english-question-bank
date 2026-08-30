@@ -16,16 +16,20 @@
 //   1. Manifest assertion (MF-2): explicit transfer list, abort if any
 //      basename matches /user-data/i.
 //   2. Local question-bank.sqlite must exist + pass PRAGMA integrity_check.
-//   3. EQB_SERVICE_STOP on remote (frees nothing — journal_mode=delete, no
+//   3. Re-run the paper ship gate, then transactionally acquire a Review
+//      shipping guard. Abort if the owner flag, local receipts, latest
+//      approved revision, or guard acquisition disagree. The guard freezes
+//      review-state changes until the remote recipe finishes.
+//   4. EQB_SERVICE_STOP on remote (frees nothing — journal_mode=delete, no
 //      long-held handle — but flushes the server's startup-time in-memory
 //      indexes/route cache; see import-pipeline/README.md:29-31 precedent).
-//   4. Backup remote OLD db to a timestamped path (offline cp, service is
+//   5. Backup remote OLD db to a timestamped path (offline cp, service is
 //      stopped).
-//   5. Transfer local db -> remote TEMP path in the same dir as the final
+//   6. Transfer local db -> remote TEMP path in the same dir as the final
 //      (never the live path itself — 禁原位写, MF-1).
-//   6. Remote atomic `mv` temp -> final (same-filesystem rename replaces the
+//   7. Remote atomic `mv` temp -> final (same-filesystem rename replaces the
 //      inode in one syscall); rsync new paper-assets additively.
-//   7. EQB_SERVICE_START on remote.
+//   8. EQB_SERVICE_START on remote.
 //
 // pull:
 //   1. Manifest assertion.
@@ -63,11 +67,25 @@
 // Usage:
 //   node scripts/pull-run-push.mjs check-manifest <comma,separated,paths>
 //   node scripts/pull-run-push.mjs pull
-//   node scripts/pull-run-push.mjs push
+//   node scripts/pull-run-push.mjs push <paperId> --owner-said-ship
+//   node scripts/pull-run-push.mjs push <paperId> --owner-said-retry-ship
 import { execFileSync, spawnSync } from 'node:child_process'
-import { existsSync, mkdirSync, rmSync } from 'node:fs'
+import {
+  copyFileSync,
+  cpSync,
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  rmSync,
+} from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import {
+  acquireShippingGuard,
+  evaluateShipWithCurrentReview,
+  parseOwnerSaid,
+  releaseShippingGuard,
+} from './import-pipeline/ship-checklist.mjs'
 
 // ── Manifest guard (MF-2) ────────────────────────────────────────────────────
 // Basename REGEX (not exact-string) match so it also catches
@@ -159,8 +177,7 @@ function runRemote(remote, command, { allowFailure = false } = {}) {
     result = spawnSync('ssh', [remote.sshTarget, command], { encoding: 'utf8', stdio: 'inherit' })
   }
   if (result.status !== 0 && !allowFailure) {
-    fail(`remote command failed (exit ${result.status}): ${command}`)
-    process.exit(1)
+    throw new Error(`remote command failed (exit ${result.status}): ${command}`)
   }
   return result
 }
@@ -169,19 +186,27 @@ function remotePath(remote, relPath) {
   return join(remote.repoRoot, relPath)
 }
 
+function copyDirectoryContents(source, destination) {
+  mkdirSync(destination, { recursive: true })
+  for (const entry of readdirSync(source)) {
+    cpSync(join(source, entry), join(destination, entry), {
+      recursive: true,
+      force: true,
+    })
+  }
+}
+
 // Transfer a single file or directory from local fs into the remote target.
-// `isDir` uses rsync -a with a trailing slash (contents-of semantics);
-// single files use rsync too (works uniformly for both `local:` fixture
-// paths and real remote scp-style targets), never a raw shell-interpolated
-// cp/scp string — always execFileSync with an argv array.
+// Real remote transfer uses rsync -a with contents-of semantics for
+// directories. The `local:` test seam uses Node file APIs so it does not
+// require an external rsync binary. Neither path builds a shell-interpolated
+// cp/scp command from an external value.
 function transferToRemote(remote, localAbsPath, remoteRelPath, { isDir = false } = {}) {
   if (remote.mode === 'local') {
     const destAbs = remotePath(remote, remoteRelPath)
     mkdirSync(dirname(destAbs), { recursive: true })
-    const src = isDir ? `${localAbsPath.replace(/\/+$/, '')}/` : localAbsPath
-    const dest = isDir ? `${destAbs.replace(/\/+$/, '')}/` : destAbs
-    if (isDir) mkdirSync(destAbs, { recursive: true })
-    execFileSync('rsync', ['-a', src, dest], { encoding: 'utf8' })
+    if (isDir) copyDirectoryContents(localAbsPath, destAbs)
+    else copyFileSync(localAbsPath, destAbs)
   } else {
     const destAbs = remotePath(remote, remoteRelPath)
     // Ensure destination directory exists on the real remote before rsync.
@@ -198,9 +223,8 @@ function transferFromRemote(remote, remoteRelPath, localAbsPath, { isDir = false
   if (isDir) mkdirSync(localAbsPath, { recursive: true })
   if (remote.mode === 'local') {
     const srcAbs = remotePath(remote, remoteRelPath)
-    const src = isDir ? `${srcAbs.replace(/\/+$/, '')}/` : srcAbs
-    const dest = isDir ? `${localAbsPath.replace(/\/+$/, '')}/` : localAbsPath
-    execFileSync('rsync', ['-a', src, dest], { encoding: 'utf8' })
+    if (isDir) copyDirectoryContents(srcAbs, localAbsPath)
+    else copyFileSync(srcAbs, localAbsPath)
   } else {
     const srcAbs = remotePath(remote, remoteRelPath)
     const src = `${remote.sshTarget}:${isDir ? `${srcAbs.replace(/\/+$/, '')}/` : srcAbs}`
@@ -220,7 +244,29 @@ function timestamp() {
 }
 
 // ── push ─────────────────────────────────────────────────────────────────────
-function push() {
+async function push(argv) {
+  const [paperId, ...rest] = argv
+  if (!paperId || paperId.startsWith('--')) {
+    fail('push requires <paperId> and the current owner authorization flag')
+    process.exit(1)
+  }
+  const unknown = rest.filter((arg) => (
+    arg !== '--owner-said-ship' && arg !== '--owner-said-retry-ship'
+  ))
+  if (unknown.length > 0) {
+    fail(`unknown push argument(s): ${unknown.join(', ')}`)
+    process.exit(1)
+  }
+  const parsed = parseOwnerSaid(rest)
+  if (parsed.error) {
+    fail(parsed.error)
+    process.exit(1)
+  }
+  if (!parsed.ownerSaid || rest.length !== 1) {
+    fail('push requires exactly one current owner authorization flag')
+    process.exit(1)
+  }
+
   const remote = parseRemoteSpec()
   const localRepo = resolveLocalRepoRoot()
   const localDb = join(localRepo, QUESTION_BANK_REL)
@@ -246,38 +292,87 @@ function push() {
   const remoteBackup = `${remoteFinal}.bak.${stamp}`
   const remoteIncoming = `${remoteFinal}.incoming.${stamp}`
 
-  // 3. Stop the service BEFORE any swap (flush startup-time in-memory
-  //    indexes/route cache on the NEXT start — see import-pipeline README).
-  const stopCmd = process.env.EQB_SERVICE_STOP || 'sudo systemctl stop eqb'
-  console.log(`[pull-run-push] stopping remote service: ${stopCmd}`)
-  runRemote(remote, stopCmd)
+  // 3. Re-evaluate the paper and, for universal papers, read the Review
+  //    service's current latest revision immediately before the first remote
+  //    mutation. A separate earlier ship-checklist run is only a disclosure;
+  //    it cannot authorize this process after a newer revision appears.
+  const gate = await evaluateShipWithCurrentReview({
+    repoRoot: localRepo,
+    paperId,
+    ownerSaid: parsed.ownerSaid,
+  })
+  if (!gate.ok) {
+    fail(gate.message)
+    process.exit(1)
+  }
+  console.log(`[pull-run-push] current ship gate passed: ${gate.message}`)
 
-  // 4. Backup the remote OLD db (offline cp — service is stopped, this is
-  //    the one place a plain cp of question-bank.sqlite is safe).
-  console.log(`[pull-run-push] backing up remote old db -> ${remoteBackup}`)
-  runRemote(remote, `cp ${shellQuote(remoteFinal)} ${shellQuote(remoteBackup)}`)
-
-  // 5. Transfer local db -> remote TEMP path (same dir as final, never the
-  //    final path itself — 禁原位写).
-  console.log(`[pull-run-push] transferring local db -> remote temp ${remoteIncoming}`)
-  transferToRemote(remote, localDb, `${QUESTION_BANK_REL}.incoming.${stamp}`)
-
-  // 6. Atomic same-filesystem rename replaces the final db in one syscall.
-  console.log('[pull-run-push] atomic mv temp -> final on remote')
-  runRemote(remote, `mv ${shellQuote(remoteIncoming)} ${shellQuote(remoteFinal)}`)
-
-  // Sync new paper-assets additively (not the live-swap concern).
-  if (existsSync(localAssets)) {
-    console.log('[pull-run-push] syncing paper-assets (additive)')
-    transferToRemote(remote, localAssets, PAPER_ASSETS_REL, { isDir: true })
-  } else {
-    console.log('[pull-run-push] local paper-assets dir not found, skipping asset sync')
+  const shippingGuard = gate.requiresShippingGuard
+    ? await acquireShippingGuard(paperId, gate.webReviewStatus?.approval)
+    : null
+  if (gate.requiresShippingGuard && !shippingGuard?.id) {
+    throw new Error('Review service did not return a shipping guard; refusing remote mutation')
+  }
+  if (shippingGuard) {
+    console.log(`[pull-run-push] acquired Review shipping guard: ${shippingGuard.id}`)
   }
 
-  // 7. Start the service.
-  const startCmd = process.env.EQB_SERVICE_START || 'sudo systemctl start eqb'
-  console.log(`[pull-run-push] starting remote service: ${startCmd}`)
-  runRemote(remote, startCmd)
+  let operationError = null
+  try {
+    // 4. Stop the service BEFORE any swap (flush startup-time in-memory
+    //    indexes/route cache on the NEXT start — see import-pipeline README).
+    const stopCmd = process.env.EQB_SERVICE_STOP || 'sudo systemctl stop eqb'
+    console.log(`[pull-run-push] stopping remote service: ${stopCmd}`)
+    runRemote(remote, stopCmd)
+
+    // 5. Backup the remote OLD db (offline cp — service is stopped, this is
+    //    the one place a plain cp of question-bank.sqlite is safe).
+    console.log(`[pull-run-push] backing up remote old db -> ${remoteBackup}`)
+    runRemote(remote, `cp ${shellQuote(remoteFinal)} ${shellQuote(remoteBackup)}`)
+
+    // 6. Transfer local db -> remote TEMP path (same dir as final, never the
+    //    final path itself — 禁原位写).
+    console.log(`[pull-run-push] transferring local db -> remote temp ${remoteIncoming}`)
+    transferToRemote(remote, localDb, `${QUESTION_BANK_REL}.incoming.${stamp}`)
+
+    // 7. Atomic same-filesystem rename replaces the final db in one syscall.
+    console.log('[pull-run-push] atomic mv temp -> final on remote')
+    runRemote(remote, `mv ${shellQuote(remoteIncoming)} ${shellQuote(remoteFinal)}`)
+
+    // Sync new paper-assets additively (not the live-swap concern).
+    if (existsSync(localAssets)) {
+      console.log('[pull-run-push] syncing paper-assets (additive)')
+      transferToRemote(remote, localAssets, PAPER_ASSETS_REL, { isDir: true })
+    } else {
+      console.log('[pull-run-push] local paper-assets dir not found, skipping asset sync')
+    }
+
+    // 8. Start the service.
+    const startCmd = process.env.EQB_SERVICE_START || 'sudo systemctl start eqb'
+    console.log(`[pull-run-push] starting remote service: ${startCmd}`)
+    runRemote(remote, startCmd)
+  } catch (error) {
+    operationError = error
+  }
+
+  if (shippingGuard) {
+    try {
+      const released = await releaseShippingGuard(paperId, shippingGuard.id)
+      if (!released?.released) {
+        throw new Error(`Review shipping guard ${shippingGuard.id} was not released`)
+      }
+      console.log(`[pull-run-push] released Review shipping guard: ${shippingGuard.id}`)
+    } catch (error) {
+      if (operationError) {
+        console.error(
+          `[pull-run-push] WARNING: remote operation failed and shipping guard release also failed: ${error.message}`,
+        )
+      } else {
+        throw error
+      }
+    }
+  }
+  if (operationError) throw operationError
 
   console.log('[pull-run-push] push complete.')
 }
@@ -365,7 +460,7 @@ function checkManifest(argv) {
 }
 
 // ── CLI dispatch ──────────────────────────────────────────────────────────────
-function main() {
+async function main() {
   const [sub, ...rest] = process.argv.slice(2)
   switch (sub) {
     case 'check-manifest':
@@ -375,13 +470,21 @@ function main() {
       pull()
       break
     case 'push':
-      push()
+      await push(rest)
       break
     default:
       fail(`unknown subcommand: ${sub || '(none)'} — expected pull | push | check-manifest`)
-      console.error('Usage: node scripts/pull-run-push.mjs <pull|push|check-manifest> [args]')
+      console.error(
+        'Usage:\n'
+          + '  node scripts/pull-run-push.mjs pull\n'
+          + '  node scripts/pull-run-push.mjs push <paperId> --owner-said-ship\n'
+          + '  node scripts/pull-run-push.mjs push <paperId> --owner-said-retry-ship\n'
+          + '  node scripts/pull-run-push.mjs check-manifest <comma,separated,paths>',
+      )
       process.exit(1)
   }
 }
 
-main()
+main().catch((error) => {
+  fail(error.message)
+})

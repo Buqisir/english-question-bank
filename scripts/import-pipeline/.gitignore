@@ -10,6 +10,9 @@ papers/*/signals/
 # Source DOCX is off-repo material, never tracked.
 papers/*/source.docx
 papers/*/*.docx
+papers/*/source/
+papers/*/materialization/
+papers/*/universal-source-manifest.json
 # Regenerable format ① / ③ canonical evidence (producer output).
 papers/*/canonical-evidence/
 # Backfill scratch (per-group label JSON from the Workflow fan-out) + logs.

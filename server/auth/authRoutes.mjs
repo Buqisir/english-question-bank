@@ -101,7 +101,12 @@ export function createAuthRoutes() {
       if (context.session) {
         sendAuthJson(response, 200, {
           authRequired: true,
-          user: { id: context.session.userId, username: context.session.username, role: context.session.role },
+          user: {
+            id: context.session.userId,
+            username: context.session.username,
+            role: context.session.role,
+            accountKind: context.session.accountKind || 'human',
+          },
         })
         return
       }

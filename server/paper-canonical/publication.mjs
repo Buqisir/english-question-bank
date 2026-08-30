@@ -31,9 +31,15 @@ import {
   isLiveConfirmedDocxPairAdmission,
 } from './docxPairCanonicalRequest.mjs'
 import {
+  admitLiveConfirmedNck1MaterializationImport,
+  isLiveConfirmedNck1MaterializationAdmission,
+  isNck1MaterializationCanonicalImportRequest,
+} from './nck1MaterializationCanonicalRequest.mjs'
+import {
   consumerContractRefs,
   resolveConsumerContract,
 } from '../../shared/paper-canonical/consumers.mjs'
+import { decorateProjectedMediaPresentation } from '../../shared/paper-canonical/mediaPresentation.mjs'
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { digestJson, sha256, stableStringify, withoutKey } from '../../shared/paper-canonical/stable.mjs'
 import {
@@ -45,6 +51,9 @@ const publicationFileName =
   `canonical-paper-publication-v${canonicalAuthorityRef.manifestVersion}.json`
 const publicationFileNames = [
   publicationFileName,
+  'canonical-paper-publication-v48.json',
+  'canonical-paper-publication-v47.json',
+  'canonical-paper-publication-v46.json',
   'canonical-paper-publication-v45.json',
   'canonical-paper-publication-v44.json',
   'canonical-paper-publication-v43.json',
@@ -281,9 +290,10 @@ function validatePublicationLineage({ sourceCapture, plan, groups, normalization
               && slot.sourceClosureContractRef)))
       : []
     if (
-      inactiveSourceClosures.length !== inactiveSlots.length
-      || new Set(inactiveSourceClosures.map((closure) => closure.slotId)).size
+      new Set(inactiveSourceClosures.map((closure) => closure.slotId)).size
         !== inactiveSourceClosures.length
+      || inactiveSourceClosures.some((closure) =>
+        !inactiveSlots.some((slot) => slot.slotId === closure.slotId))
     ) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Normalization Report does not close every inactive Profile slot exactly once')
     for (const slot of inactiveSlots) {
       const closure = inactiveSourceClosures.find(
@@ -293,6 +303,17 @@ function validatePublicationLineage({ sourceCapture, plan, groups, normalization
         (candidate) =>
           candidate.slotId === slot.slotId && candidate.state === 'inactive',
       )
+      if (binding?.sourceState === 'not_supplied') {
+        if (
+          closure
+          || stableStringify(binding) !== stableStringify({
+            slotId: slot.slotId,
+            state: 'inactive',
+            sourceState: 'not_supplied',
+          })
+        ) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', `Inactive source slot ${slot.slotId} has ambiguous not_supplied evidence`)
+        continue
+      }
       if (
         !closure
         || closure.status !== 'closed'
@@ -383,6 +404,7 @@ export function sealCanonicalPublication({
   registeredConfirmationProof = null,
   trustedDocxConfirmationProof = null,
   docxPairConfirmationProof = null,
+  nck1MaterializationConfirmationProof = null,
 }) {
   if (compilation?.disposition !== 'ready') throw publicationError('CANONICAL_PUBLICATION_BLOCKED', 'Only a complete ready compilation may be published')
   if (!(sourceAsset instanceof Uint8Array) || !Number.isInteger(sourceAssetVersion) || sourceAssetVersion < 1) throw publicationError('CANONICAL_PUBLICATION_INPUT_INVALID', 'Publication needs immutable source asset bytes and a positive version')
@@ -407,7 +429,12 @@ export function sealCanonicalPublication({
       compilation,
       sourceAsset,
     })
-  ) throw publicationError('CANONICAL_PUBLICATION_AUTHORITY_RETIRED', 'Only the current canonical authority, one exact registered confirmed chain, one live Teacher-Confirmed trusted DOCX request, or one live Teacher-Confirmed DOCX pair request may create a new publication')
+    && !isLiveConfirmedNck1MaterializationAdmission({
+      proof: nck1MaterializationConfirmationProof,
+      compilation,
+      sourceAsset,
+    })
+  ) throw publicationError('CANONICAL_PUBLICATION_AUTHORITY_RETIRED', 'Only the current canonical authority or one exact live Teacher-Confirmed import chain may create a new publication')
   const artifactPaths = artifactPathsFor(closure.authorityRef)
   assertPaperId(canonicalPaper?.paperPlan?.paperId)
   validateSourceCaptureIntegrity(sourceCapture)
@@ -1072,6 +1099,7 @@ export function admitCanonicalPaperImport({
   let registeredConfirmationProof = null
   let trustedDocxConfirmationProof = null
   let docxPairConfirmationProof = null
+  let nck1MaterializationConfirmationProof = null
   try {
     if (registeredConfirmation !== undefined) {
       if (request !== undefined || sourceAsset !== undefined) {
@@ -1086,6 +1114,22 @@ export function admitCanonicalPaperImport({
       compilation = registered.compilation
       effectiveSourceAsset = registered.sourceAsset
       registeredConfirmationProof = registered.proof
+    } else if (isNck1MaterializationCanonicalImportRequest(request)) {
+      const admitted = admitLiveConfirmedNck1MaterializationImport(request)
+      compilation = admitted.compilation
+      effectiveSourceAsset = admitted.sourceAsset
+      nck1MaterializationConfirmationProof = admitted.proof
+      if (sourceAsset !== undefined) {
+        const supplied = sourceAsset instanceof Uint8Array
+          ? sourceAsset
+          : null
+        if (!supplied || sha256(supplied) !== sha256(admitted.sourceAsset)) {
+          throw publicationError(
+            'CANONICAL_PUBLICATION_SOURCE_UNBOUND',
+            'NCK1 materialization admission source asset must be the exact request materialization bytes',
+          )
+        }
+      }
     } else if (isDocxPairCanonicalImportRequest(request)) {
       const admitted = admitLiveConfirmedDocxPairImport(request)
       compilation = admitted.compilation
@@ -1135,6 +1179,7 @@ export function admitCanonicalPaperImport({
       registeredConfirmationProof,
       trustedDocxConfirmationProof,
       docxPairConfirmationProof,
+      nck1MaterializationConfirmationProof,
     })
     const ref = {
       paperId: sealed.manifest.paperId,
@@ -1450,16 +1495,19 @@ function canonicalSelections(validated, contract, sourceAsset) {
         `Consumer Contract cannot project canonical family ${familyContractId}`,
       )
     }
-    const projectedOccurrences = validated.projected.nodes
-      .filter((node) => node.kind === 'group' && groupIds.includes(node.groupId))
-      .map((occurrence) => {
-        const sourceOwnedInstructions = applicationInstructions.get(
-          occurrence.groupId,
-        )
-        return sourceOwnedInstructions
-          ? { ...occurrence, sourceOwnedInstructions }
-          : occurrence
-      })
+    const projectedOccurrences = decorateProjectedMediaPresentation(
+      validated.projected.nodes
+        .filter((node) => node.kind === 'group' && groupIds.includes(node.groupId))
+        .map((occurrence) => {
+          const sourceOwnedInstructions = applicationInstructions.get(
+            occurrence.groupId,
+          )
+          return sourceOwnedInstructions
+            ? { ...occurrence, sourceOwnedInstructions }
+            : occurrence
+        }),
+      validated.sourceCapture,
+    )
     selections.push({
       mode: 'canonical',
       familyContractId,
@@ -1467,6 +1515,10 @@ function canonicalSelections(validated, contract, sourceAsset) {
       projectedOccurrences,
       ...(
         (
+          familyContractId === 'seven-choices'
+          && ['47', '48'].includes(validated.plan.authorityRef.manifestVersion)
+        )
+        || (
           familyContractId === 'cloze'
           && Number(validated.plan.authorityRef.manifestVersion) >= 18
         )

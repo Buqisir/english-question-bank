@@ -10,6 +10,7 @@ import {
 } from 'node:fs'
 import path from 'node:path'
 import { createHash, randomUUID } from 'node:crypto'
+import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import {
   buildPaperNormalizedGroupsSidecar,
   PAPER_NORMALIZED_GROUPS_FILE_NAME,
@@ -20,6 +21,14 @@ const readingChoiceAnalysisFileName = 'reading-choice-analysis-v1.json'
 const sevenChoicesAnalysisFileName = 'seven-choices-analysis-v1.json'
 const clozeAnalysisFileName = 'cloze-analysis-v1.json'
 const grammarFillAnalysisFileName = 'grammar-fill-analysis-v1.json'
+const writingAnalysisFileName = 'writing-analysis-v1.json'
+const analysisArtifacts = Object.freeze([
+  ['readingAnalysis', readingChoiceAnalysisFileName],
+  ['scAnalysis', sevenChoicesAnalysisFileName],
+  ['clozeAnalysis', clozeAnalysisFileName],
+  ['grammarFillAnalysis', grammarFillAnalysisFileName],
+  ['writingAnalysis', writingAnalysisFileName],
+])
 const latestSwapJournalFileName = '.latest-swap.json'
 
 export function resolvePaperAssetReadPaths(paperAssetsDir, paperId, version = null) {
@@ -252,12 +261,14 @@ function makeVersionedArtifacts(packageData, version) {
   const paperAsset = JSON.parse(JSON.stringify(packageData.paperAsset))
   const answerKey = JSON.parse(JSON.stringify(packageData.answerKey))
   const importMeta = JSON.parse(JSON.stringify(packageData.importMeta))
-  const readingAnalysis = JSON.parse(JSON.stringify(packageData.readingAnalysis))
+  const readingAnalysis = packageData.readingAnalysis
+    ? JSON.parse(JSON.stringify(packageData.readingAnalysis))
+    : null
 
   paperAsset.paper.assetVersion = version
   paperAsset.paper.status = 'published'
   answerKey.sourceAssetVersion = version
-  readingAnalysis.sourceAssetVersion = version
+  if (readingAnalysis) readingAnalysis.sourceAssetVersion = version
 
   const scAnalysis = packageData.scAnalysis
     ? JSON.parse(JSON.stringify(packageData.scAnalysis))
@@ -273,6 +284,10 @@ function makeVersionedArtifacts(packageData, version) {
     ? JSON.parse(JSON.stringify(packageData.grammarFillAnalysis))
     : null
   if (grammarFillAnalysis) grammarFillAnalysis.sourceAssetVersion = version
+
+  const writingAnalysis = packageData.writingAnalysis
+    ? JSON.parse(JSON.stringify(packageData.writingAnalysis))
+    : null
 
   const normalization = buildPaperNormalizedGroupsSidecar(paperAsset)
   if (normalization.status !== 'ready') {
@@ -299,8 +314,29 @@ function makeVersionedArtifacts(packageData, version) {
     scAnalysis,
     clozeAnalysis,
     grammarFillAnalysis,
+    writingAnalysis,
     normalizedGroupsSidecar,
   }
+}
+
+export function assertPaperImportAnalysisSidecars({ baseDir, packageData, version }) {
+  const expected = makeVersionedArtifacts(packageData, version)
+  const expectedFiles = analysisArtifacts.filter(([key]) => expected[key])
+  if (expectedFiles.length !== analysisArtifacts.length) {
+    throw new Error('Complete NCK1 analysis publication requires all five sidecars')
+  }
+  const actual = {}
+  for (const [key, fileName] of expectedFiles) {
+    const filePath = path.join(baseDir, 'analyses', fileName)
+    if (!existsSync(filePath)) {
+      throw new Error(`Published analysis sidecar is missing: ${fileName}`)
+    }
+    actual[fileName] = JSON.parse(readFileSync(filePath, 'utf8'))
+    if (digestJson(actual[fileName]) !== digestJson(expected[key])) {
+      throw new Error(`Published analysis sidecar differs from Review projection: ${fileName}`)
+    }
+  }
+  return digestJson(actual)
 }
 
 export function writePaperImportVersion({
@@ -325,21 +361,25 @@ export function writePaperImportVersion({
   }
 
   const tempDir = path.join(versionsDir, `.tmp-${versionName}-${randomUUID()}`)
-  mkdirSync(path.join(tempDir, 'raw'), { recursive: true })
-  mkdirSync(path.join(tempDir, 'analyses'), { recursive: true })
+  mkdirSync(tempDir, { recursive: true })
 
   const artifacts = makeVersionedArtifacts(packageData, version)
   try {
-    const rawDir = path.join(tempDir, 'raw')
-    writeFileSync(path.join(rawDir, packageData.sourceDocx.fileName), packageData.sourceDocx.buffer)
-    writeDocxSourceCapture(tempDir, rawDir, packageData.sourceDocx, paperId)
+    if (packageData.sourceDocx) {
+      const rawDir = path.join(tempDir, 'raw')
+      mkdirSync(rawDir, { recursive: true })
+      writeFileSync(path.join(rawDir, packageData.sourceDocx.fileName), packageData.sourceDocx.buffer)
+      writeDocxSourceCapture(tempDir, rawDir, packageData.sourceDocx, paperId)
+    }
     writeJson(path.join(tempDir, 'paper-asset.json'), artifacts.paperAsset)
     if (forceFailureAt === 'version-write') {
       throw new Error('Forced version-write failure')
     }
     writeJson(path.join(tempDir, 'answer-key.json'), artifacts.answerKey)
     writeJson(path.join(tempDir, 'import-meta.json'), artifacts.importMeta)
-    writeJson(path.join(tempDir, 'analyses', readingChoiceAnalysisFileName), artifacts.readingAnalysis)
+    if (artifacts.readingAnalysis) {
+      writeJson(path.join(tempDir, 'analyses', readingChoiceAnalysisFileName), artifacts.readingAnalysis)
+    }
     if (artifacts.scAnalysis) {
       writeJson(path.join(tempDir, 'analyses', sevenChoicesAnalysisFileName), artifacts.scAnalysis)
     }
@@ -348,6 +388,9 @@ export function writePaperImportVersion({
     }
     if (artifacts.grammarFillAnalysis) {
       writeJson(path.join(tempDir, 'analyses', grammarFillAnalysisFileName), artifacts.grammarFillAnalysis)
+    }
+    if (artifacts.writingAnalysis) {
+      writeJson(path.join(tempDir, 'analyses', writingAnalysisFileName), artifacts.writingAnalysis)
     }
     if (forceFailureAt === 'sidecar-write') {
       throw new Error('Forced sidecar-write failure')
@@ -480,16 +523,21 @@ export function swapPaperImportLatest({
     }
   }
 
-  mkdirSync(path.join(tempLatest, 'analyses'), { recursive: true })
+  mkdirSync(tempLatest, { recursive: true })
   for (const fileName of ['paper-asset.json', 'answer-key.json', 'import-meta.json']) {
     writeFileSync(path.join(tempLatest, fileName), readFileSync(path.join(versionDir, fileName)))
   }
-  writeFileSync(
-    path.join(tempLatest, 'analyses', readingChoiceAnalysisFileName),
-    readFileSync(path.join(versionDir, 'analyses', readingChoiceAnalysisFileName)),
-  )
+  const readingAnalysisPath = path.join(versionDir, 'analyses', readingChoiceAnalysisFileName)
+  if (existsSync(readingAnalysisPath)) {
+    mkdirSync(path.join(tempLatest, 'analyses'), { recursive: true })
+    writeFileSync(
+      path.join(tempLatest, 'analyses', readingChoiceAnalysisFileName),
+      readFileSync(readingAnalysisPath),
+    )
+  }
   const scAnalysisPath = path.join(versionDir, 'analyses', sevenChoicesAnalysisFileName)
   if (existsSync(scAnalysisPath)) {
+    mkdirSync(path.join(tempLatest, 'analyses'), { recursive: true })
     writeFileSync(
       path.join(tempLatest, 'analyses', sevenChoicesAnalysisFileName),
       readFileSync(scAnalysisPath),
@@ -497,6 +545,7 @@ export function swapPaperImportLatest({
   }
   const clozeAnalysisPath = path.join(versionDir, 'analyses', clozeAnalysisFileName)
   if (existsSync(clozeAnalysisPath)) {
+    mkdirSync(path.join(tempLatest, 'analyses'), { recursive: true })
     writeFileSync(
       path.join(tempLatest, 'analyses', clozeAnalysisFileName),
       readFileSync(clozeAnalysisPath),
@@ -504,9 +553,18 @@ export function swapPaperImportLatest({
   }
   const grammarFillAnalysisPath = path.join(versionDir, 'analyses', grammarFillAnalysisFileName)
   if (existsSync(grammarFillAnalysisPath)) {
+    mkdirSync(path.join(tempLatest, 'analyses'), { recursive: true })
     writeFileSync(
       path.join(tempLatest, 'analyses', grammarFillAnalysisFileName),
       readFileSync(grammarFillAnalysisPath),
+    )
+  }
+  const writingAnalysisPath = path.join(versionDir, 'analyses', writingAnalysisFileName)
+  if (existsSync(writingAnalysisPath)) {
+    mkdirSync(path.join(tempLatest, 'analyses'), { recursive: true })
+    writeFileSync(
+      path.join(tempLatest, 'analyses', writingAnalysisFileName),
+      readFileSync(writingAnalysisPath),
     )
   }
   writeFileSync(

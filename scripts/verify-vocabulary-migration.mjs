@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import assert from 'node:assert/strict'
+import { createHash } from 'node:crypto'
 import { mkdtempSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -107,6 +108,7 @@ ensureSharedVocabularyShape(migrated)
 const migratedRow = migrated.prepare('SELECT * FROM vocabulary_entries WHERE id = ?').get('legacy-entry')
 assert.equal(migratedRow.headword, 'word')
 assert.equal(migratedRow.exam_frequency, 0)
+assert.deepEqual(JSON.parse(migratedRow.visual_binding_json), {})
 assert.deepEqual(JSON.parse(migratedRow.example_candidates_json), [{
   candidateId: 'a',
   version: 'legacy-single-v1',
@@ -117,7 +119,7 @@ assert.deepEqual(JSON.parse(migratedRow.example_candidates_json), [{
   reviewStatus: 'approved',
 }])
 assert.match(migrated.prepare("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'vocabulary_entries'").get().sql, /index-and-heading-reviewed/u)
-assert.match(migrated.prepare("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'vocabulary_entries'").get().sql, /eqb-british-teacher-v1/u)
+assert.doesNotMatch(migrated.prepare("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'vocabulary_entries'").get().sql, /audio_voice IN/u)
 assert.deepEqual(
   migrated.prepare("SELECT name FROM sqlite_master WHERE type = 'index' AND name LIKE 'idx_vocabulary_entries_%' ORDER BY name").all().map((row) => row.name),
   ['idx_vocabulary_entries_program_audio', 'idx_vocabulary_entries_program_order', 'idx_vocabulary_entries_program_visual'],
@@ -130,6 +132,12 @@ console.log('PASS legacy vocabulary schema migrates atomically with row, indexes
 
 const staged = legacyDatabase()
 staged.exec("ALTER TABLE vocabulary_entries ADD COLUMN example_candidates_json TEXT NOT NULL DEFAULT '[]'")
+staged.exec("ALTER TABLE vocabulary_entries ADD COLUMN phonetics_json TEXT NOT NULL DEFAULT '{}'")
+staged.exec("ALTER TABLE vocabulary_entries ADD COLUMN pronunciation_parts_json TEXT NOT NULL DEFAULT '{}'")
+staged.exec("ALTER TABLE vocabulary_entries ADD COLUMN teaching_senses_json TEXT NOT NULL DEFAULT '[]'")
+staged.exec("ALTER TABLE vocabulary_entries ADD COLUMN audio_variants_json TEXT NOT NULL DEFAULT '{}'")
+staged.exec("ALTER TABLE vocabulary_entries ADD COLUMN source_metadata_json TEXT NOT NULL DEFAULT '{}'")
+staged.exec("ALTER TABLE vocabulary_entries ADD COLUMN visual_binding_json TEXT NOT NULL DEFAULT '{}'")
 const stagedCandidates = [{
   candidateId: 'a', version: 'wanwei-examples-v1', teachingSense: '单词', english: 'A word.', chinese: '一个单词。', highlight: 'word', reviewStatus: 'approved',
 }, {
@@ -138,10 +146,50 @@ const stagedCandidates = [{
   candidateId: 'c', version: 'wanwei-examples-v1', teachingSense: '单词', english: 'The word is short.', chinese: '这个单词很短。', highlight: 'word', reviewStatus: 'approved',
 }]
 staged.prepare('UPDATE vocabulary_entries SET example_candidates_json = ?').run(JSON.stringify(stagedCandidates))
+const stagedTeachingSenses = ['单词', '词语']
+const stagedPhonetics = { american: '/wɝːd/', british: '/wɜːd/' }
+const stagedPronunciationParts = {
+  american: [{ spelling: 'word', phonetic: '/wɝːd/' }],
+  british: [{ spelling: 'word', phonetic: '/wɜːd/' }],
+}
+const stagedAudioVariants = {
+  american: { key: 'legacy-us', version: 'us-v1', path: '/word-us.mp3', voice: 'american-test' },
+  british: { key: 'legacy-uk', version: 'uk-v1', path: '/word-uk.mp3', voice: 'british-test' },
+}
+const stagedSourceMetadata = { frequencyBand: 'high_frequency', frequencyOrder: 1, curriculumTag: 'required' }
+const stagedVisualBinding = {
+  mode: 'sentence-scene',
+  sentenceId: 'candidate-a',
+  sentenceTextSha256: createHash('sha256').update(stagedCandidates[0].english).digest('hex'),
+  displayContract: 'image_and_exact_sentence_with_target_highlight',
+}
+staged.prepare(`
+  UPDATE vocabulary_entries
+  SET teaching_senses_json = ?, phonetics_json = ?, pronunciation_parts_json = ?,
+      audio_variants_json = ?, source_metadata_json = ?, visual_binding_json = ?
+`).run(
+  JSON.stringify(stagedTeachingSenses),
+  JSON.stringify(stagedPhonetics),
+  JSON.stringify(stagedPronunciationParts),
+  JSON.stringify(stagedAudioVariants),
+  JSON.stringify(stagedSourceMetadata),
+  JSON.stringify(stagedVisualBinding),
+)
 ensureSharedVocabularyShape(staged)
-assert.deepEqual(JSON.parse(staged.prepare('SELECT example_candidates_json FROM vocabulary_entries').get().example_candidates_json), stagedCandidates)
+const stagedRow = staged.prepare(`
+  SELECT example_candidates_json, teaching_senses_json, phonetics_json, pronunciation_parts_json,
+         audio_variants_json, source_metadata_json, visual_binding_json
+  FROM vocabulary_entries
+`).get()
+assert.deepEqual(JSON.parse(stagedRow.example_candidates_json), stagedCandidates)
+assert.deepEqual(JSON.parse(stagedRow.teaching_senses_json), stagedTeachingSenses)
+assert.deepEqual(JSON.parse(stagedRow.phonetics_json), stagedPhonetics)
+assert.deepEqual(JSON.parse(stagedRow.pronunciation_parts_json), stagedPronunciationParts)
+assert.deepEqual(JSON.parse(stagedRow.audio_variants_json), stagedAudioVariants)
+assert.deepEqual(JSON.parse(stagedRow.source_metadata_json), stagedSourceMetadata)
+assert.deepEqual(JSON.parse(stagedRow.visual_binding_json), stagedVisualBinding)
 staged.close()
-console.log('PASS staged vocabulary contract migration preserves existing three-example candidates')
+console.log('PASS staged vocabulary contract migration preserves examples, dual phonetics, multiple senses, dual audio, visual binding, and source metadata')
 
 const failing = legacyDatabase({ allowInvalid: true, verification: 'invalid' })
 assert.throws(() => ensureSharedVocabularyShape(failing), /CHECK constraint failed/u)
