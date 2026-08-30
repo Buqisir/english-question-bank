@@ -1,13 +1,7 @@
-import { createHash, randomUUID, timingSafeEqual } from 'node:crypto'
+import { timingSafeEqual } from 'node:crypto'
 import {
-  closeSync,
   existsSync,
-  mkdirSync,
-  openSync,
   readFileSync,
-  renameSync,
-  unlinkSync,
-  writeSync,
 } from 'node:fs'
 import path from 'node:path'
 
@@ -15,6 +9,7 @@ import { canonicalConsumptionPrintPayload } from '../../scripts/import-pipeline/
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { defineRoute } from '../router/index.mjs'
 import { withChromiumPage } from '../draft-paper/chromiumPool.mjs'
+import { receiveVerifiedUpload } from '../import-ops/receiveVerifiedUpload.mjs'
 import { rasterPdfRegion } from '../paper-canonical/pdfRegionRaster.mjs'
 import { cropNck1SourceImage } from '../paper-import/nck1ImageSourceBundle.mjs'
 import { printConsumption, resolveReviewFile } from './revisionProjection.mjs'
@@ -77,50 +72,6 @@ function shippingIdentity(request, shipToken) {
     return 'ship-authorizer-token'
   }
   return null
-}
-
-async function receiveFile(request, destination, expected) {
-  const contentLength = Number(request.headers['content-length'])
-  if (Number.isFinite(contentLength) && contentLength !== expected.byteLength) {
-    const error = new Error('Content-Length does not match manifest')
-    error.code = 'IMPORT_REVIEW_FILE_SIZE_MISMATCH'
-    error.status = 400
-    throw error
-  }
-  mkdirSync(path.dirname(destination), { recursive: true })
-  const temporary = `${destination}.upload-${randomUUID()}`
-  const descriptor = openSync(temporary, 'wx')
-  const hash = createHash('sha256')
-  let byteLength = 0
-  try {
-    try {
-      for await (const chunk of request) {
-        byteLength += chunk.length
-        if (byteLength > expected.byteLength) {
-          const error = new Error('Uploaded file is larger than manifest')
-          error.code = 'IMPORT_REVIEW_FILE_SIZE_MISMATCH'
-          error.status = 400
-          throw error
-        }
-        hash.update(chunk)
-        writeSync(descriptor, chunk)
-      }
-    } finally {
-      closeSync(descriptor)
-    }
-    const sha256 = `sha256:${hash.digest('hex')}`
-    if (byteLength !== expected.byteLength || sha256 !== expected.sha256) {
-      const error = new Error('Uploaded file does not match manifest')
-      error.code = 'IMPORT_REVIEW_FILE_DIGEST_MISMATCH'
-      error.status = 400
-      throw error
-    }
-    renameSync(temporary, destination)
-    return { sha256, byteLength }
-  } catch (error) {
-    if (existsSync(temporary)) unlinkSync(temporary)
-    throw error
-  }
 }
 
 function sendHtml(response, html) {
@@ -312,7 +263,7 @@ export function createImportReviewRoutes({
       context.sendJson(response, 200, store.uploadStatus(revisionId))
       return
     }
-    const received = await receiveFile(request, upload.destination, upload.file)
+    const received = await receiveVerifiedUpload(request, upload.destination, upload.file)
     context.sendJson(
       response,
       200,

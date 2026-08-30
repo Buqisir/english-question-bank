@@ -509,6 +509,16 @@ async function main() {
       ownerReviews.status === 200 && Array.isArray(ownerReviews.json?.papers),
       `got status=${ownerReviews.status} body=${JSON.stringify(ownerReviews.json)}`,
     )
+    const noCookieSourceIntakes = await req('/api/source-intakes')
+    const ownerSourceIntakes = await req('/api/source-intakes', { cookie })
+    assert(
+      '(c) source-intake Owner API requires and accepts the Owner cookie',
+      noCookieSourceIntakes.status === 401 &&
+        noCookieSourceIntakes.json?.error === 'not_authenticated' &&
+        ownerSourceIntakes.status === 200 &&
+        Array.isArray(ownerSourceIntakes.json?.intakes),
+      `anonymous=${JSON.stringify(noCookieSourceIntakes.json)} owner=${JSON.stringify(ownerSourceIntakes.json)}`,
+    )
     const ownerCannotSubstituteForAgent = await req('/api/import-agent-reviews', { cookie })
     assert(
       '(c) Owner cookie cannot substitute for Agent identity',
@@ -523,6 +533,18 @@ async function main() {
       '(c) dedicated Agent bearer credential can read the review inbox without a Cookie',
       bearerInbox.status === 200 && Array.isArray(bearerInbox.json?.papers),
       `got status=${bearerInbox.status} body=${JSON.stringify(bearerInbox.json)}`,
+    )
+    const ownerCannotReadSourceQueue = await req('/api/import-agent-source-intakes', { cookie })
+    const bearerSourceQueue = await req('/api/import-agent-source-intakes', {
+      authorization: `Bearer ${importAgentToken}`,
+    })
+    assert(
+      '(c) source-intake queue accepts Agent bearer but not an Owner cookie',
+      ownerCannotReadSourceQueue.status === 401 &&
+        ownerCannotReadSourceQueue.json?.error === 'agent_auth_required' &&
+        bearerSourceQueue.status === 200 &&
+        Array.isArray(bearerSourceQueue.json?.submissions),
+      `owner=${JSON.stringify(ownerCannotReadSourceQueue.json)} bearer=${JSON.stringify(bearerSourceQueue.json)}`,
     )
     const bearerRevisionAttempt = await req('/api/import-agent-reviews/revisions', {
       method: 'POST',
@@ -615,10 +637,12 @@ async function main() {
     })
     const memberCookie = cookieHeaderFrom(memberLogin.setCookie)
     const memberReviews = await req('/api/import-reviews', { cookie: memberCookie })
+    const memberSourceIntakes = await req('/api/source-intakes', { cookie: memberCookie })
     assert(
-      '(c) human member cannot read the import review Owner API',
-      memberReviews.status === 403 && memberReviews.json?.error === 'forbidden',
-      `got status=${memberReviews.status} body=${JSON.stringify(memberReviews.json)}`,
+      '(c) human member cannot read import review or source-intake Owner APIs',
+      memberReviews.status === 403 && memberReviews.json?.error === 'forbidden' &&
+        memberSourceIntakes.status === 403 && memberSourceIntakes.json?.error === 'forbidden',
+      `reviews=${JSON.stringify(memberReviews.json)} sources=${JSON.stringify(memberSourceIntakes.json)}`,
     )
 
     const agentLogin = await req('/api/auth/login', {
@@ -628,6 +652,7 @@ async function main() {
     const agentCookie = cookieHeaderFrom(agentLogin.setCookie)
     const agentMe = await req('/api/auth/me', { cookie: agentCookie })
     const agentInbox = await req('/api/import-agent-reviews', { cookie: agentCookie })
+    const agentSourceQueue = await req('/api/import-agent-source-intakes', { cookie: agentCookie })
     const agentRevisionAttempt = await req('/api/import-agent-reviews/revisions', {
       method: 'POST',
       cookie: agentCookie,
@@ -647,12 +672,14 @@ async function main() {
     )
     const agentOrdinaryApi = await req('/api/draft-papers', { cookie: agentCookie })
     const agentOwnerApi = await req('/api/import-reviews', { cookie: agentCookie })
+    const agentSourceOwnerApi = await req('/api/source-intakes', { cookie: agentCookie })
     assert(
-      '(c) real import_agent login sees its identity and dedicated inbox',
+      '(c) real import_agent login sees its identity and dedicated review/source queues',
       agentLogin.status === 200 &&
         agentMe.status === 200 && agentMe.json?.user?.accountKind === 'import_agent' &&
-        agentInbox.status === 200 && Array.isArray(agentInbox.json?.papers),
-      `login=${JSON.stringify(agentLogin.json)} me=${JSON.stringify(agentMe.json)} inbox=${JSON.stringify(agentInbox.json)}`,
+        agentInbox.status === 200 && Array.isArray(agentInbox.json?.papers) &&
+        agentSourceQueue.status === 200 && Array.isArray(agentSourceQueue.json?.submissions),
+      `login=${JSON.stringify(agentLogin.json)} me=${JSON.stringify(agentMe.json)} inbox=${JSON.stringify(agentInbox.json)} sources=${JSON.stringify(agentSourceQueue.json)}`,
     )
     assert(
       '(c) real import_agent account reaches revision upload and issue reply handlers',
@@ -665,8 +692,10 @@ async function main() {
     assert(
       '(c) import_agent account is globally denied ordinary member and Owner APIs',
       agentOrdinaryApi.status === 403 && agentOrdinaryApi.json?.error === 'agent_account_scope_forbidden' &&
-        agentOwnerApi.status === 403 && agentOwnerApi.json?.error === 'agent_account_scope_forbidden',
-      `ordinary=${JSON.stringify(agentOrdinaryApi.json)} owner=${JSON.stringify(agentOwnerApi.json)}`,
+        agentOwnerApi.status === 403 && agentOwnerApi.json?.error === 'agent_account_scope_forbidden' &&
+        agentSourceOwnerApi.status === 403 &&
+        agentSourceOwnerApi.json?.error === 'agent_account_scope_forbidden',
+      `ordinary=${JSON.stringify(agentOrdinaryApi.json)} owner=${JSON.stringify(agentOwnerApi.json)} sources=${JSON.stringify(agentSourceOwnerApi.json)}`,
     )
     assert(
       '(c) import_agent account cannot acquire or release a shipping guard',

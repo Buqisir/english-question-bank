@@ -3,6 +3,7 @@ const root = document.querySelector('#app')
 const state = {
   user: null,
   actor: null,
+  view: 'review',
   papers: [],
   paperId: null,
   detail: null,
@@ -809,8 +810,12 @@ function render() {
     <header class="topbar">
       <div class="brand">
         <div class="brand-mark" aria-hidden="true">EQ</div>
-        <div><h1>导题审核</h1><p>${state.actor === 'owner' ? '审核真实消费表面' : '读取并回应 Owner QA'}</p></div>
+        <div><h1>英语题库</h1><p>${state.actor === 'owner' ? '后台工作台' : 'Agent 待办箱'}</p></div>
       </div>
+      ${state.actor === 'owner' ? `<nav class="workspace-navigation" aria-label="后台工作台">
+        <a href="/ops/">题源台账</a>
+        <a href="/ops/?view=review" aria-current="page">导题审核</a>
+      </nav>` : ''}
       <div class="account">
         <div class="account-copy"><strong>${escapeHtml(state.user.username)}</strong><span>${state.actor === 'owner' ? 'Owner 审核台' : 'Agent 待办箱'}</span></div>
         <button class="button" id="refresh" type="button">刷新</button>
@@ -1270,6 +1275,12 @@ async function boot() {
     state.user = me.user
     if (me.user.role === 'owner' && me.user.accountKind !== 'import_agent') {
       state.actor = 'owner'
+      if (new URLSearchParams(window.location.search).get('view') !== 'review') {
+        state.view = 'sources'
+        const { mountSourceIntakes } = await import('./source-intakes.js')
+        mountSourceIntakes({ root, user: state.user, request, accessHtml })
+        return
+      }
     } else if (me.user.accountKind === 'import_agent') {
       state.actor = 'agent'
     } else {
@@ -1285,6 +1296,7 @@ async function boot() {
 void boot()
 
 window.setInterval(() => {
+  if (state.view !== 'review') return
   const active = document.activeElement
   if (document.hidden || active?.matches('input, textarea, select')) return
   void loadPapers()

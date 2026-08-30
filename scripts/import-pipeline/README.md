@@ -14,6 +14,28 @@
 node scripts/import-pipeline/review.mjs preflight <paperId>
 ```
 
+若工作来自 Owner `/ops/` 的“题源台账”，先通过私有队列取得同一份 immutable
+submission；不要从 webhook 文本或网页字段重建文件：
+
+```bash
+QUESTION_BANK_IMPORT_OPS_ORIGIN='<private origin>' \
+QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN='<secret>' \
+  node scripts/import-pipeline/source-intake.mjs list
+node scripts/import-pipeline/source-intake.mjs claim <submissionId>
+node scripts/import-pipeline/source-intake.mjs download <submissionId>
+node scripts/import-pipeline/source-intake.mjs init <submissionId> --paper-id <paperId>
+node scripts/import-pipeline/source-intake.mjs handoff <submissionId> --paper-id <paperId>
+```
+
+`claim` 写入 mode 0600 的 gitignored lease receipt；`download` 再核对响应 digest、
+字节长度与 snapshot SHA-256。长任务用 `heartbeat <submissionId>` 延长有限 lease。
+文件不完整或语义不清时改用
+`needs-owner <submissionId> --code <reason> --message '<需要 Owner 判断的事实>'`，
+不得生成答案或绕过来源缺口。`init` 只显式调用既有 universal NCK1 初始化；
+它会在 gitignored `signals/` 写入绑定 submission digest 的本地初始化收据。
+`handoff` 会再次核对该收据、源文件与本地 workspace，并拒绝已被 Import Review
+使用的 `paperId`；它仍不认可、不 publish、不 ship。
+
 该只读命令把本地 Source / Materialization / 收据与 Review API 当前 revision 合成
 `materializing`、`awaiting_review`、`changes_requested`、`approved`、
 `locally_published`、`ready_to_ship`、`shipped` 或 `failed`，并给出可审计的

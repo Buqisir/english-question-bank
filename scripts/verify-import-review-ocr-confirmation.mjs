@@ -436,7 +436,7 @@ try {
   const playwright = await import('../app/node_modules/playwright/index.js')
   browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
   const page = await browser.newPage({ viewport: { width: 1920, height: 1000 } })
-  await page.goto(`${origin}/ops/`)
+  await page.goto(`${origin}/ops/?view=review`)
   const sourceImage = page.locator('.ocr-page-canvas img')
   await sourceImage.waitFor()
   assert.equal(await sourceImage.evaluate((image) => image.naturalWidth > 0), true)

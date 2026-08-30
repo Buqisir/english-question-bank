@@ -443,7 +443,7 @@ try {
   const playwright = await import('../app/node_modules/playwright/index.js')
   browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
   const page = await browser.newPage({ viewport: { width: 1920, height: 1000 } })
-  await page.goto(`http://127.0.0.1:${address.port}/ops/`)
+  await page.goto(`http://127.0.0.1:${address.port}/ops/?view=review`)
   const screenTable = page.frameLocator('#review-frame')
     .locator(`[data-canonical-block-id="${targetId}"]`)
   await screenTable.click()

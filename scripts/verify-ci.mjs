@@ -85,6 +85,8 @@ const registry = {
   'scripts/verify-paper-normalization-import-gate.mjs',
   'scripts/import-pipeline/verify-source-doc-types.mjs',
   'scripts/verify-import-ops.mjs',
+  'scripts/verify-source-intake.mjs',
+  'scripts/verify-source-intake-webhook.mjs',
   'scripts/verify-import-review-source-pairing.mjs',
   'scripts/verify-import-review-media-derivation.mjs',
   'scripts/verify-docx-source-media-input.mjs',
@@ -215,6 +217,8 @@ const paperDataScripts = [
 const securityScripts = [
   'scripts/verify-ai-server-key-fallback.mjs',
   'scripts/verify-auth-gate.mjs',
+  'scripts/verify-source-intake.mjs',
+  'scripts/verify-source-intake-webhook.mjs',
   'scripts/verify-owner-gate.mjs',
   'scripts/verify-user-scope.mjs',
   'scripts/verify-ai-daily-limit.mjs',
@@ -311,8 +315,11 @@ function changedPlan(files) {
     'app/src/shared-ui/tokens.css',
   ]
   const securityPatterns = [
+    '.amp/plugins/source-intake-wakeup.js',
     'data/sql/',
     'server/auth/',
+    'server/import-ops/',
+    'server/source-intake/',
     'server/user-data/',
     'server/ai-daily-limit.mjs',
     'server/vocabulary/vocabularyStore.mjs',
