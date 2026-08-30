@@ -14,6 +14,7 @@ const INTAKE_ID = /^intake-[a-f0-9-]{36}$/
 const SUBMISSION_ID = /^submission-[a-f0-9-]{36}$/
 const FILE_ID = /^source-file-[a-f0-9-]{36}$/
 const PAPER_ID = /^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/
+const AMP_THREAD_ID = /^T-[a-f0-9-]{36}$/
 const SHA256 = /^sha256:[a-f0-9]{64}$/
 const FILE_ROLES = new Set(['question_source', 'official_answers', 'question_and_answers'])
 const PLATFORMS = new Set(['wechat_official', 'xiaohongshu', 'teacher_group', 'other'])
@@ -26,6 +27,7 @@ const MAX_BUNDLE_BYTES = 256 * 1024 * 1024
 const MIN_LEASE_SECONDS = 60
 const MAX_LEASE_SECONDS = 30 * 60
 const DEFAULT_LEASE_SECONDS = 10 * 60
+const ORB_RESERVATION_SECONDS = 5 * 60
 
 function intakeError(code, message, status = 409) {
   const error = new Error(message)
@@ -188,10 +190,23 @@ function ensureShape(db) {
     CREATE TABLE IF NOT EXISTS source_intake_claims (
       submission_id TEXT PRIMARY KEY REFERENCES source_intake_submissions(id) ON DELETE CASCADE,
       agent_id TEXT NOT NULL,
+      amp_thread_id TEXT,
       lease_token TEXT NOT NULL UNIQUE,
       claimed_at TEXT NOT NULL,
       heartbeat_at TEXT NOT NULL,
       lease_expires_at TEXT NOT NULL
+    );
+    CREATE TABLE IF NOT EXISTS source_intake_orb_workers (
+      submission_id TEXT PRIMARY KEY REFERENCES source_intake_submissions(id) ON DELETE CASCADE,
+      submission_digest TEXT NOT NULL,
+      webhook_event_id TEXT NOT NULL,
+      reservation_token TEXT,
+      reservation_expires_at TEXT,
+      amp_thread_id TEXT UNIQUE,
+      paper_id TEXT UNIQUE,
+      state TEXT NOT NULL CHECK (state IN ('reserved', 'bound', 'needs_owner', 'handed_off')),
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
     );
     CREATE TABLE IF NOT EXISTS source_intake_events (
       id TEXT PRIMARY KEY,
@@ -209,6 +224,12 @@ function ensureShape(db) {
     CREATE INDEX IF NOT EXISTS idx_source_intake_events_intake
       ON source_intake_events(intake_id, created_at DESC);
   `)
+  const claimColumns = new Set(
+    db.prepare('PRAGMA table_info(source_intake_claims)').all().map((column) => column.name),
+  )
+  if (!claimColumns.has('amp_thread_id')) {
+    db.exec('ALTER TABLE source_intake_claims ADD COLUMN amp_thread_id TEXT')
+  }
 }
 
 function sourceRow(row) {
@@ -261,10 +282,26 @@ function claimRow(row) {
   return {
     submissionId: row.submission_id,
     agentId: row.agent_id,
+    ampThreadId: row.amp_thread_id,
     leaseToken: row.lease_token,
     claimedAt: row.claimed_at,
     heartbeatAt: row.heartbeat_at,
     leaseExpiresAt: row.lease_expires_at,
+  }
+}
+
+function workerRow(row) {
+  if (!row) return null
+  return {
+    submissionId: row.submission_id,
+    submissionDigest: row.submission_digest,
+    webhookEventId: row.webhook_event_id,
+    reservationExpiresAt: row.reservation_expires_at,
+    ampThreadId: row.amp_thread_id,
+    paperId: row.paper_id,
+    state: row.state,
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
   }
 }
 
@@ -428,6 +465,11 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
           SELECT * FROM source_intake_claims WHERE submission_id = ?
         `).get(currentSubmission.id))
       : null
+    const worker = currentSubmission
+      ? workerRow(db.prepare(`
+          SELECT * FROM source_intake_orb_workers WHERE submission_id = ?
+        `).get(currentSubmission.id))
+      : null
     return {
       id: intake.id,
       paperName: intake.paper_name,
@@ -437,10 +479,12 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
       currentSubmission,
       claim: claim ? {
         agentId: claim.agentId,
+        ampThreadId: claim.ampThreadId,
         claimedAt: claim.claimedAt,
         heartbeatAt: claim.heartbeatAt,
         leaseExpiresAt: claim.leaseExpiresAt,
       } : null,
+      orbWorker: worker,
       handedOffPaperId: intake.handed_off_paper_id,
       lastNotification: latestNotification(db, intakeId),
       createdBy: intake.created_by,
@@ -831,7 +875,188 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
     return seconds
   }
 
-  function claimSubmission(submissionId, actor, requestedLeaseSeconds = null) {
+  function normalizeAmpThreadId(value, { required = false } = {}) {
+    const threadId = typeof value === 'string' ? value.trim() : ''
+    if (!threadId && !required) return null
+    if (!AMP_THREAD_ID.test(threadId)) {
+      throw intakeError('SOURCE_INTAKE_THREAD_ID_INVALID', 'Amp thread identity is invalid', 400)
+    }
+    return threadId
+  }
+
+  function assertSubmissionForWorker(db, submissionId, submissionDigest) {
+    if (!SUBMISSION_ID.test(submissionId || '')) {
+      throw intakeError('SOURCE_INTAKE_SUBMISSION_ID_INVALID', 'submissionId is invalid', 400)
+    }
+    if (!SHA256.test(submissionDigest || '')) {
+      throw intakeError('SOURCE_INTAKE_SUBMISSION_DIGEST_INVALID', 'submissionDigest is invalid', 400)
+    }
+    const submission = submissionRow(db.prepare(`
+      SELECT * FROM source_intake_submissions WHERE id = ?
+    `).get(submissionId))
+    if (!submission) {
+      throw intakeError('SOURCE_INTAKE_SUBMISSION_NOT_FOUND', 'Submission not found', 404)
+    }
+    if (submission.submissionDigest !== submissionDigest) {
+      throw intakeError(
+        'SOURCE_INTAKE_SUBMISSION_DIGEST_MISMATCH',
+        'Submission digest does not match the immutable queue entry',
+      )
+    }
+    return submission
+  }
+
+  function reserveOrbWorker(submissionId, input, actor) {
+    const submissionDigest = requiredString(input?.submissionDigest, 'submissionDigest', 80)
+    const webhookEventId = requiredString(input?.webhookEventId, 'webhookEventId', 200)
+    return withDb(true, (db) => transaction(db, () => {
+      const submission = assertSubmissionForWorker(db, submissionId, submissionDigest)
+      const timestamp = nowIso()
+      let worker = workerRow(db.prepare(`
+        SELECT * FROM source_intake_orb_workers WHERE submission_id = ?
+      `).get(submissionId))
+      if (worker?.ampThreadId) {
+        return {
+          action: worker.state === 'bound' ? 'resume' : 'busy',
+          submissionId,
+          submissionDigest,
+          ampThreadId: worker.ampThreadId,
+          state: worker.state,
+        }
+      }
+      if (worker?.reservationExpiresAt && worker.reservationExpiresAt > timestamp) {
+        return {
+          action: 'busy',
+          submissionId,
+          submissionDigest,
+          state: worker.state,
+        }
+      }
+      const activeClaim = claimRow(db.prepare(`
+        SELECT * FROM source_intake_claims WHERE submission_id = ?
+      `).get(submissionId))
+      if (
+        !['queued', 'claimed'].includes(submission.state)
+        || (activeClaim && activeClaim.leaseExpiresAt > timestamp)
+      ) {
+        return {
+          action: 'busy',
+          submissionId,
+          submissionDigest,
+          state: submission.state,
+        }
+      }
+      const reservationToken = `orb-reservation-${randomUUID()}`
+      const reservationExpiresAt = addSeconds(timestamp, ORB_RESERVATION_SECONDS)
+      if (worker) {
+        db.prepare(`
+          UPDATE source_intake_orb_workers
+          SET webhook_event_id = ?, reservation_token = ?, reservation_expires_at = ?,
+              state = 'reserved', updated_at = ?
+          WHERE submission_id = ?
+        `).run(
+          webhookEventId,
+          reservationToken,
+          reservationExpiresAt,
+          timestamp,
+          submissionId,
+        )
+      } else {
+        db.prepare(`
+          INSERT INTO source_intake_orb_workers (
+            submission_id, submission_digest, webhook_event_id, reservation_token,
+            reservation_expires_at, state, created_at, updated_at
+          ) VALUES (?, ?, ?, ?, ?, 'reserved', ?, ?)
+        `).run(
+          submissionId,
+          submissionDigest,
+          webhookEventId,
+          reservationToken,
+          reservationExpiresAt,
+          timestamp,
+          timestamp,
+        )
+      }
+      event(db, submission.intakeId, submissionId, 'orb_worker_reserved', actor, {
+        webhookEventId,
+        reservationExpiresAt,
+      })
+      return {
+        action: 'create',
+        submissionId,
+        submissionDigest,
+        reservationToken,
+        reservationExpiresAt,
+        state: 'reserved',
+      }
+    }))
+  }
+
+  function bindOrbWorker(submissionId, input, actor) {
+    const submissionDigest = requiredString(input?.submissionDigest, 'submissionDigest', 80)
+    const reservationToken = requiredString(input?.reservationToken, 'reservationToken', 100)
+    const ampThreadId = normalizeAmpThreadId(input?.ampThreadId, { required: true })
+    return withDb(true, (db) => transaction(db, () => {
+      const submission = assertSubmissionForWorker(db, submissionId, submissionDigest)
+      const row = db.prepare(`
+        SELECT * FROM source_intake_orb_workers WHERE submission_id = ?
+      `).get(submissionId)
+      const worker = workerRow(row)
+      if (!worker) {
+        throw intakeError('SOURCE_INTAKE_WORKER_RESERVATION_INVALID', 'Orb reservation is missing')
+      }
+      if (worker.ampThreadId) {
+        if (worker.ampThreadId !== ampThreadId) {
+          throw intakeError('SOURCE_INTAKE_WORKER_ALREADY_BOUND', 'Submission already has an Orb worker')
+        }
+        return {
+          submissionId,
+          submissionDigest,
+          ampThreadId,
+          state: worker.state,
+        }
+      }
+      const timestamp = nowIso()
+      if (
+        row.reservation_token !== reservationToken
+        || !worker.reservationExpiresAt
+        || worker.reservationExpiresAt <= timestamp
+      ) {
+        throw intakeError('SOURCE_INTAKE_WORKER_RESERVATION_INVALID', 'Orb reservation is invalid or expired')
+      }
+      try {
+        db.prepare(`
+          UPDATE source_intake_orb_workers
+          SET amp_thread_id = ?, reservation_token = NULL, reservation_expires_at = NULL,
+              state = 'bound', updated_at = ?
+          WHERE submission_id = ?
+        `).run(ampThreadId, timestamp, submissionId)
+      } catch (error) {
+        if (String(error.message).includes('UNIQUE')) {
+          throw intakeError('SOURCE_INTAKE_THREAD_ID_CONFLICT', 'Amp thread is already bound')
+        }
+        throw error
+      }
+      event(db, submission.intakeId, submissionId, 'orb_worker_bound', actor, { ampThreadId })
+      return { submissionId, submissionDigest, ampThreadId, state: 'bound' }
+    }))
+  }
+
+  function assertBoundWorkerThread(db, submissionId, ampThreadId) {
+    const worker = workerRow(db.prepare(`
+      SELECT * FROM source_intake_orb_workers WHERE submission_id = ?
+    `).get(submissionId))
+    if (worker?.ampThreadId && worker.ampThreadId !== normalizeAmpThreadId(ampThreadId)) {
+      throw intakeError(
+        'SOURCE_INTAKE_THREAD_MISMATCH',
+        'The bound Amp thread identity is required',
+        403,
+      )
+    }
+    return worker
+  }
+
+  function claimSubmission(submissionId, actor, requestedLeaseSeconds = null, ampThreadId = null) {
     if (!SUBMISSION_ID.test(submissionId || '')) {
       throw intakeError('SOURCE_INTAKE_SUBMISSION_ID_INVALID', 'submissionId is invalid', 400)
     }
@@ -842,6 +1067,13 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
       `).get(submissionId))
       if (!submission) {
         throw intakeError('SOURCE_INTAKE_SUBMISSION_NOT_FOUND', 'Submission not found', 404)
+      }
+      const worker = assertBoundWorkerThread(db, submissionId, ampThreadId)
+      if (worker && !worker.ampThreadId) {
+        throw intakeError(
+          'SOURCE_INTAKE_WORKER_NOT_BOUND',
+          'The reserved Orb worker must be bound before claim',
+        )
       }
       const currentClaim = claimRow(db.prepare(`
         SELECT * FROM source_intake_claims WHERE submission_id = ?
@@ -859,6 +1091,7 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
       const claim = {
         submissionId,
         agentId: requiredString(actor, 'actor', 200),
+        ampThreadId: worker?.ampThreadId || null,
         leaseToken: `source-lease-${randomUUID()}`,
         claimedAt: timestamp,
         heartbeatAt: timestamp,
@@ -867,11 +1100,13 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
       db.prepare('DELETE FROM source_intake_claims WHERE submission_id = ?').run(submissionId)
       db.prepare(`
         INSERT INTO source_intake_claims (
-          submission_id, agent_id, lease_token, claimed_at, heartbeat_at, lease_expires_at
-        ) VALUES (?, ?, ?, ?, ?, ?)
+          submission_id, agent_id, amp_thread_id, lease_token,
+          claimed_at, heartbeat_at, lease_expires_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?)
       `).run(
         claim.submissionId,
         claim.agentId,
+        claim.ampThreadId,
         claim.leaseToken,
         claim.claimedAt,
         claim.heartbeatAt,
@@ -884,19 +1119,23 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
         UPDATE source_intakes SET state = 'claimed', updated_at = ? WHERE id = ?
       `).run(timestamp, submission.intakeId)
       event(db, submission.intakeId, submissionId, 'submission_claimed', actor, {
+        ampThreadId: claim.ampThreadId,
         leaseExpiresAt: claim.leaseExpiresAt,
       })
       return { submission: { ...submission, state: 'claimed', updatedAt: timestamp }, claim }
     }))
   }
 
-  function assertActiveClaim(db, submissionId, actor, leaseToken) {
+  function assertActiveClaim(db, submissionId, actor, leaseToken, ampThreadId) {
+    const worker = assertBoundWorkerThread(db, submissionId, ampThreadId)
     const claim = claimRow(db.prepare(`
       SELECT * FROM source_intake_claims WHERE submission_id = ?
     `).get(submissionId))
     if (
       !claim
       || claim.agentId !== actor
+      || (claim.ampThreadId && claim.ampThreadId !== normalizeAmpThreadId(ampThreadId))
+      || (worker?.ampThreadId && claim.ampThreadId !== worker.ampThreadId)
       || claim.leaseToken !== leaseToken
       || claim.leaseExpiresAt <= nowIso()
     ) {
@@ -909,7 +1148,7 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
     return claim
   }
 
-  function claimedSubmission(submissionId, actor, leaseToken) {
+  function claimedSubmission(submissionId, actor, leaseToken, ampThreadId = null) {
     return withDb(false, (db) => {
       const submission = submissionRow(db.prepare(`
         SELECT * FROM source_intake_submissions WHERE id = ?
@@ -917,15 +1156,21 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
       if (!submission) {
         throw intakeError('SOURCE_INTAKE_SUBMISSION_NOT_FOUND', 'Submission not found', 404)
       }
-      assertActiveClaim(db, submissionId, actor, leaseToken)
+      assertActiveClaim(db, submissionId, actor, leaseToken, ampThreadId)
       return submission
     })
   }
 
-  function heartbeat(submissionId, actor, leaseToken, requestedLeaseSeconds = null) {
+  function heartbeat(
+    submissionId,
+    actor,
+    leaseToken,
+    requestedLeaseSeconds = null,
+    ampThreadId = null,
+  ) {
     const seconds = leaseSeconds(requestedLeaseSeconds)
     return withDb(true, (db) => transaction(db, () => {
-      const claim = assertActiveClaim(db, submissionId, actor, leaseToken)
+      const claim = assertActiveClaim(db, submissionId, actor, leaseToken, ampThreadId)
       const timestamp = nowIso()
       const leaseExpiresAt = addSeconds(timestamp, seconds)
       db.prepare(`
@@ -941,8 +1186,8 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
     }))
   }
 
-  function fileForDownload(submissionId, fileId, actor, leaseToken) {
-    const submission = claimedSubmission(submissionId, actor, leaseToken)
+  function fileForDownload(submissionId, fileId, actor, leaseToken, ampThreadId = null) {
+    const submission = claimedSubmission(submissionId, actor, leaseToken, ampThreadId)
     const snapshotFile = submission.snapshot.files?.find((file) => file.id === fileId)
     if (!snapshotFile) {
       throw intakeError('SOURCE_INTAKE_FILE_NOT_FOUND', 'Submission file not found', 404)
@@ -960,11 +1205,11 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
     return { file, path: assertStoredFile(file) }
   }
 
-  function needsOwner(submissionId, actor, leaseToken, input) {
+  function needsOwner(submissionId, actor, leaseToken, input, ampThreadId = null) {
     const reasonCode = requiredString(input?.reasonCode, 'reasonCode', 100)
     const message = requiredString(input?.message, 'message', 2000)
     return withDb(true, (db) => transaction(db, () => {
-      assertActiveClaim(db, submissionId, actor, leaseToken)
+      const worker = assertActiveClaim(db, submissionId, actor, leaseToken, ampThreadId)
       const submission = submissionRow(db.prepare(`
         SELECT * FROM source_intake_submissions WHERE id = ?
       `).get(submissionId))
@@ -975,6 +1220,12 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
         WHERE id = ?
       `).run(reasonCode, message, timestamp, submissionId)
       db.prepare('DELETE FROM source_intake_claims WHERE submission_id = ?').run(submissionId)
+      if (worker?.ampThreadId) {
+        db.prepare(`
+          UPDATE source_intake_orb_workers
+          SET state = 'needs_owner', updated_at = ? WHERE submission_id = ?
+        `).run(timestamp, submissionId)
+      }
       db.prepare(`
         UPDATE source_intakes SET state = 'needs_owner', updated_at = ? WHERE id = ?
       `).run(timestamp, submission.intakeId)
@@ -986,21 +1237,30 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
     }))
   }
 
-  function handoff(submissionId, actor, leaseToken, input) {
+  function handoff(submissionId, actor, leaseToken, input, ampThreadId = null) {
     const paperId = requiredString(input?.paperId, 'paperId', 160)
     if (!PAPER_ID.test(paperId)) {
       throw intakeError('SOURCE_INTAKE_PAPER_ID_INVALID', 'paperId is invalid', 400)
     }
     return withDb(true, (db) => transaction(db, () => {
-      assertActiveClaim(db, submissionId, actor, leaseToken)
+      const worker = assertActiveClaim(db, submissionId, actor, leaseToken, ampThreadId)
       const submission = submissionRow(db.prepare(`
         SELECT * FROM source_intake_submissions WHERE id = ?
       `).get(submissionId))
+      const initializationVersion = worker?.ampThreadId
+        ? 'source-intake-initialization-v2'
+        : input?.initialization?.schemaVersion
       if (
-        input?.initialization?.schemaVersion !== 'source-intake-initialization-v1'
+        !['source-intake-initialization-v1', 'source-intake-initialization-v2']
+          .includes(input?.initialization?.schemaVersion)
+        || input.initialization.schemaVersion !== initializationVersion
         || input.initialization.submissionId !== submissionId
         || input.initialization.submissionDigest !== submission.submissionDigest
         || input.initialization.paperId !== paperId
+        || (
+          input.initialization.schemaVersion === 'source-intake-initialization-v2'
+          && input.initialization.ampThreadId !== normalizeAmpThreadId(ampThreadId, { required: true })
+        )
       ) {
         throw intakeError(
           'SOURCE_INTAKE_INITIALIZATION_REQUIRED',
@@ -1028,6 +1288,20 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
         throw error
       }
       db.prepare('DELETE FROM source_intake_claims WHERE submission_id = ?').run(submissionId)
+      if (worker?.ampThreadId) {
+        try {
+          db.prepare(`
+            UPDATE source_intake_orb_workers
+            SET state = 'handed_off', paper_id = ?, updated_at = ?
+            WHERE submission_id = ?
+          `).run(paperId, timestamp, submissionId)
+        } catch (error) {
+          if (String(error.message).includes('UNIQUE')) {
+            throw intakeError('SOURCE_INTAKE_PAPER_ID_CONFLICT', 'paperId is already bound to a worker')
+          }
+          throw error
+        }
+      }
       db.prepare(`
         UPDATE source_intakes
         SET state = 'handed_off', handed_off_paper_id = ?, updated_at = ?
@@ -1040,6 +1314,7 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
 
   return {
     assertQueuedForNotification,
+    bindOrbWorker,
     claimSubmission,
     claimedSubmission,
     completeFileUpload,
@@ -1054,6 +1329,7 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
     needsOwner,
     recordNotification,
     registerFile,
+    reserveOrbWorker,
     storedFilePath,
     submitIntake,
     updateIntake,

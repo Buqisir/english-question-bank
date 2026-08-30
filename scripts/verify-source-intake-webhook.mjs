@@ -43,29 +43,115 @@ const prompt = sourceIntakeAgentPrompt(payload)
 assert.match(prompt, new RegExp(payload.submissionId))
 assert.match(prompt, new RegExp(payload.submissionDigest))
 assert.match(prompt, /atomically claim/)
+assert.match(prompt, /AMP_THREAD_ID/)
 assert.match(prompt, /Do not edit the Owner draft/)
 
 const originalEnabled = process.env.QUESTION_BANK_SOURCE_INTAKE_PLUGIN_ENABLED
-const originalRunnerId = process.env.QUESTION_BANK_SOURCE_INTAKE_RUNNER_ID
+const originalOrigin = process.env.QUESTION_BANK_IMPORT_OPS_ORIGIN
+const originalAgentToken = process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN
 const originalSecret = process.env.QUESTION_BANK_SOURCE_INTAKE_WEBHOOK_SECRET
+const originalFetch = globalThis.fetch
 let registeredWebhook = null
 let registeredCommand = null
 let createdThreadOptions = null
-let appendedMessage = null
+const apiCalls = []
+const appendedMessages = []
+let createCount = 0
+let reserveAction = 'create'
+let failBind = false
+const ampThreadId = 'T-11111111-1111-4111-8111-111111111111'
+
+function jsonResponse(bodyValue, status = 200) {
+  return new Response(JSON.stringify(bodyValue), {
+    status,
+    headers: { 'content-type': 'application/json' },
+  })
+}
+
 try {
   process.env.QUESTION_BANK_SOURCE_INTAKE_PLUGIN_ENABLED = '1'
-  process.env.QUESTION_BANK_SOURCE_INTAKE_RUNNER_ID = 'runner-verifier'
+  process.env.QUESTION_BANK_IMPORT_OPS_ORIGIN = 'https://ops.invalid'
+  process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN = 'agent-token-verifier'
   process.env.QUESTION_BANK_SOURCE_INTAKE_WEBHOOK_SECRET = secret
+  globalThis.fetch = async (url, options) => {
+    const requestBody = JSON.parse(options.body)
+    apiCalls.push({ url, options, body: requestBody })
+    assert.equal(options.headers.authorization, 'Bearer agent-token-verifier')
+    if (url.endsWith('/reserve')) {
+      assert.deepEqual(requestBody, {
+        submissionDigest: payload.submissionDigest,
+        webhookEventId: requestBody.webhookEventId,
+      })
+      if (reserveAction === 'busy') {
+        return jsonResponse({
+          worker: {
+            action: 'busy',
+            submissionId: payload.submissionId,
+            submissionDigest: payload.submissionDigest,
+            state: 'reserved',
+          },
+        })
+      }
+      if (reserveAction === 'resume') {
+        return jsonResponse({
+          worker: {
+            action: 'resume',
+            submissionId: payload.submissionId,
+            submissionDigest: payload.submissionDigest,
+            ampThreadId,
+            state: 'bound',
+          },
+        })
+      }
+      return jsonResponse({
+        worker: {
+          action: 'create',
+          submissionId: payload.submissionId,
+          submissionDigest: payload.submissionDigest,
+          reservationToken: `orb-reservation-verifier-${createCount + 1}`,
+          state: 'reserved',
+        },
+      })
+    }
+    assert.equal(url.endsWith('/bind'), true)
+    if (failBind) {
+      return jsonResponse({ code: 'SOURCE_INTAKE_WORKER_RESERVATION_INVALID' }, 409)
+    }
+    assert.equal(requestBody.ampThreadId, ampThreadId)
+    assert.match(requestBody.reservationToken, /^orb-reservation-verifier-/)
+    return jsonResponse({
+      worker: {
+        submissionId: payload.submissionId,
+        submissionDigest: payload.submissionDigest,
+        ampThreadId,
+        state: 'bound',
+      },
+    })
+  }
+
+  const resumedThread = {
+    async appendUserMessage(message, options) {
+      appendedMessages.push({ target: 'resumed', message, options })
+    },
+  }
   await sourceIntakeWakeupPlugin({
     logger: { log() {} },
+    threads: {
+      get(threadId) {
+        assert.equal(threadId, ampThreadId)
+        return resumedThread
+      },
+    },
     getBuiltinAgent(mode) {
       assert.equal(mode, 'medium')
       return {
         async createThread(options) {
+          createCount += 1
           createdThreadOptions = options
           return {
-            async appendUserMessage(message) {
-              appendedMessage = message
+            id: ampThreadId,
+            async appendUserMessage(message, appendOptions) {
+              appendedMessages.push({ target: 'created', message, options: appendOptions })
             },
           }
         },
@@ -82,32 +168,87 @@ try {
   assert.equal(registeredWebhook.key, 'eqbank-source-intake-queued-v1')
   assert.deepEqual(registeredWebhook.headers, ['x-eqbank-signature'])
   assert.equal(registeredCommand.id, 'source-intake-webhook-url')
+  const context = {
+    logger: { log() {} },
+    signal: new AbortController().signal,
+  }
   await registeredWebhook.handler(
     {
-      id: 'webhook-event-verifier',
+      id: 'webhook-event-create',
       body,
       headers: { 'x-eqbank-signature': signature },
     },
-    {
-      logger: { log() {} },
-      signal: new AbortController().signal,
-    },
+    context,
   )
   assert.deepEqual(createdThreadOptions, {
-    executor: { type: 'runner', id: 'runner-verifier' },
-    features: [],
-    show: false,
+    executor: 'orb',
+    multiplayerTTLSeconds: null,
     visibility: 'private',
   })
-  assert.equal(appendedMessage.type, 'user-message')
-  assert.match(appendedMessage.content, new RegExp(payload.submissionId))
+  assert.equal(apiCalls[0].url.endsWith('/orb-worker/reserve'), true)
+  assert.equal(apiCalls[1].url.endsWith('/orb-worker/bind'), true)
+  assert.equal(createCount, 1)
+  assert.equal(appendedMessages.length, 1)
+  assert.equal(appendedMessages[0].message.type, 'user-message')
+  assert.match(appendedMessages[0].message.content, new RegExp(payload.submissionId))
+  assert.deepEqual(appendedMessages[0].options, { steer: true })
+
+  reserveAction = 'resume'
+  await registeredWebhook.handler(
+    {
+      id: 'webhook-event-duplicate',
+      body,
+      headers: { 'x-eqbank-signature': signature },
+    },
+    context,
+  )
+  assert.equal(createCount, 1, 'duplicate delivery resumes rather than creates')
+  assert.equal(appendedMessages.at(-1).target, 'resumed')
+
+  reserveAction = 'busy'
+  const callsBeforeBusy = apiCalls.length
+  const promptsBeforeBusy = appendedMessages.length
+  await registeredWebhook.handler(
+    {
+      id: 'webhook-event-concurrent',
+      body,
+      headers: { 'x-eqbank-signature': signature },
+    },
+    context,
+  )
+  assert.equal(apiCalls.length, callsBeforeBusy + 1)
+  assert.equal(createCount, 1)
+  assert.equal(appendedMessages.length, promptsBeforeBusy)
+
+  reserveAction = 'create'
+  failBind = true
+  await assert.rejects(
+    registeredWebhook.handler(
+      {
+        id: 'webhook-event-bind-failure',
+        body,
+        headers: { 'x-eqbank-signature': signature },
+      },
+      context,
+    ),
+    /worker API bind failed/,
+  )
+  assert.equal(createCount, 2, 'bind failure can leave one empty Orb')
+  assert.equal(
+    appendedMessages.length,
+    promptsBeforeBusy,
+    'the plugin never prompts an Orb before durable bind succeeds',
+  )
 } finally {
   if (originalEnabled === undefined) delete process.env.QUESTION_BANK_SOURCE_INTAKE_PLUGIN_ENABLED
   else process.env.QUESTION_BANK_SOURCE_INTAKE_PLUGIN_ENABLED = originalEnabled
-  if (originalRunnerId === undefined) delete process.env.QUESTION_BANK_SOURCE_INTAKE_RUNNER_ID
-  else process.env.QUESTION_BANK_SOURCE_INTAKE_RUNNER_ID = originalRunnerId
+  if (originalOrigin === undefined) delete process.env.QUESTION_BANK_IMPORT_OPS_ORIGIN
+  else process.env.QUESTION_BANK_IMPORT_OPS_ORIGIN = originalOrigin
+  if (originalAgentToken === undefined) delete process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN
+  else process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN = originalAgentToken
   if (originalSecret === undefined) delete process.env.QUESTION_BANK_SOURCE_INTAKE_WEBHOOK_SECRET
   else process.env.QUESTION_BANK_SOURCE_INTAKE_WEBHOOK_SECRET = originalSecret
+  globalThis.fetch = originalFetch
 }
 
-console.log('PASS source-intake webhook validation and fixed runner prompt contract')
+console.log('PASS source-intake webhook Orb reserve, bind, resume, and crash-window contract')

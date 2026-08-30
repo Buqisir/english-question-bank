@@ -2,14 +2,16 @@
 
 `source-intake-wakeup.js` is the optional wakeup layer for the Owner source-intake queue.
 SQLite remains authoritative: a missed, duplicated, or delayed webhook cannot create a second
-active claim.
+active claim or a second bound worker.
 
 The plugin is inert by default. Activating it is a separate shared-state operation and requires
 current Owner approval. Enable it only in the dedicated owning Orb thread, not in every local Amp
-client. Before loading it, set these only in the private Amp/plugin environment:
+client. Before loading it, add these as private Amp Project Secrets so both the plugin and each new
+project Orb receive them without storing or displaying their values:
 
 - `QUESTION_BANK_SOURCE_INTAKE_PLUGIN_ENABLED=1`
-- `QUESTION_BANK_SOURCE_INTAKE_RUNNER_ID=<stable private Mac runner ID>`
+- `QUESTION_BANK_IMPORT_OPS_ORIGIN=<private Import Ops HTTPS origin>`
+- `QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN=<least-privilege source-intake Agent token>`
 - `QUESTION_BANK_SOURCE_INTAKE_WEBHOOK_SECRET=<shared HMAC secret>` (recommended)
 
 After an approved plugin reload, explicitly run the command-palette action
@@ -17,7 +19,12 @@ After an approved plugin reload, explicitly run the command-palette action
 private `QUESTION_BANK_SOURCE_INTAKE_WEBHOOK_URL`; configure the same HMAC secret as
 `QUESTION_BANK_SOURCE_INTAKE_WEBHOOK_SECRET`. Never commit or log any of those values.
 
-The Mac runner must already have the repository checkout and private
-`QUESTION_BANK_IMPORT_OPS_ORIGIN` / `QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN` environment needed
-by `scripts/import-pipeline/source-intake.mjs`. The plugin creates a private thread on that runner;
-it does not import inside the 30-second webhook handler.
+The server reserves each immutable submission before the plugin creates an empty private project
+Orb. The plugin durably binds the returned Amp thread id before appending the first prompt. A crash
+before bind therefore leaves only an inert, unprompted Orb; a repeated delivery resumes the one
+bound thread. `scripts/import-pipeline/source-intake.mjs` sends `AMP_THREAD_ID` on every claim and
+lease operation. The Agent token cannot approve Review content or promote a paper. No import runs
+inside the 30-second webhook handler.
+
+Creating the secrets, enabling/reloading the plugin, and configuring the webhook are shared-state
+operations that remain disabled until separately authorized by the Owner.

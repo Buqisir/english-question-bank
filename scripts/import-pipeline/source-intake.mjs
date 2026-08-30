@@ -18,9 +18,9 @@ import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 const inboxRoot = path.join(import.meta.dirname, 'source-intake-inbox')
 const universalCli = path.join(import.meta.dirname, 'universal-nck1.mjs')
 const papersRoot = path.join(import.meta.dirname, 'papers')
-const initializationSchemaVersion = 'source-intake-initialization-v1'
 const submissionIdPattern = /^submission-[a-f0-9-]{36}$/
 const paperIdPattern = /^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/
+const ampThreadIdPattern = /^T-[a-f0-9-]{36}$/
 
 function fail(message) {
   throw new Error(message)
@@ -43,6 +43,12 @@ function token() {
   const value = String(process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN || '')
   if (!value) fail('QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN is required')
   return value
+}
+
+function ampThreadId() {
+  const value = String(process.env.AMP_THREAD_ID || '').trim()
+  if (value && !ampThreadIdPattern.test(value)) fail('AMP_THREAD_ID is invalid')
+  return value || null
 }
 
 function validSubmissionId(submissionId) {
@@ -81,6 +87,7 @@ function readClaim(submissionId) {
     claim.submissionId !== submissionId
     || typeof claim.leaseToken !== 'string'
     || !claim.leaseToken
+    || (claim.ampThreadId != null && !ampThreadIdPattern.test(claim.ampThreadId))
   ) fail(`Claim receipt is invalid: ${submissionId}`)
   return claim
 }
@@ -98,11 +105,13 @@ function assertSubmissionDigest(submission) {
 }
 
 async function api(pathname, init = {}, { lease = null, binary = false } = {}) {
+  const threadId = ampThreadId()
   const response = await fetch(`${origin()}${pathname}`, {
     ...init,
     headers: {
       authorization: `Bearer ${token()}`,
       ...(lease ? { 'x-source-intake-lease': lease } : {}),
+      ...(threadId ? { 'x-amp-thread-id': threadId } : {}),
       ...(init.headers || {}),
     },
   })
@@ -129,6 +138,7 @@ async function list() {
 
 async function claim(submissionId) {
   validSubmissionId(submissionId)
+  const threadId = ampThreadId()
   const result = await api(
     `/api/import-agent-source-intakes/${encodeURIComponent(submissionId)}/claim`,
     {
@@ -139,13 +149,19 @@ async function claim(submissionId) {
   )
   assertSubmissionDigest(result.submission)
   writePrivateJson(receiptPath(submissionId), {
-    schemaVersion: 'eqbank-source-intake-claim-v1',
+    schemaVersion: threadId
+      ? 'eqbank-source-intake-claim-v2'
+      : 'eqbank-source-intake-claim-v1',
     submissionId,
+    ...(threadId ? { ampThreadId: threadId } : {}),
     leaseToken: result.claim.leaseToken,
     leaseExpiresAt: result.claim.leaseExpiresAt,
   })
   writePrivateJson(manifestPath(submissionId), {
-    schemaVersion: 'eqbank-source-intake-download-v1',
+    schemaVersion: threadId
+      ? 'eqbank-source-intake-download-v2'
+      : 'eqbank-source-intake-download-v1',
+    ...(threadId ? { ampThreadId: threadId } : {}),
     submission: result.submission,
     files: [],
   })
@@ -222,7 +238,10 @@ async function download(submissionId) {
     })
   }
   writePrivateJson(manifestPath(submissionId), {
-    schemaVersion: 'eqbank-source-intake-download-v1',
+    schemaVersion: claimReceipt.ampThreadId
+      ? 'eqbank-source-intake-download-v2'
+      : 'eqbank-source-intake-download-v1',
+    ...(claimReceipt.ampThreadId ? { ampThreadId: claimReceipt.ampThreadId } : {}),
     submission,
     files,
   })
@@ -312,11 +331,15 @@ function assertInitializedWorkspace(downloadManifest, paperId) {
 
 function recordInitialization(downloadManifest, paperId) {
   assertInitializedWorkspace(downloadManifest, paperId)
+  const threadId = downloadManifest.ampThreadId || null
   const receipt = {
-    schemaVersion: initializationSchemaVersion,
+    schemaVersion: threadId
+      ? 'source-intake-initialization-v2'
+      : 'source-intake-initialization-v1',
     submissionId: downloadManifest.submission.id,
     submissionDigest: downloadManifest.submission.submissionDigest,
     paperId,
+    ...(threadId ? { ampThreadId: threadId } : {}),
     recordedAt: new Date().toISOString(),
   }
   writePrivateJson(initializationReceiptPath(paperId), receipt)
@@ -329,11 +352,15 @@ function initializationReceipt(downloadManifest, paperId) {
     initializationReceiptPath(paperId),
     'Source-intake initialization receipt',
   )
+  const threadId = downloadManifest.ampThreadId || null
   if (
-    receipt.schemaVersion !== initializationSchemaVersion
+    receipt.schemaVersion !== (threadId
+      ? 'source-intake-initialization-v2'
+      : 'source-intake-initialization-v1')
     || receipt.submissionId !== downloadManifest.submission.id
     || receipt.submissionDigest !== downloadManifest.submission.submissionDigest
     || receipt.paperId !== paperId
+    || (threadId && receipt.ampThreadId !== threadId)
   ) fail(`Local initialization receipt does not match: ${paperId}`)
   return receipt
 }

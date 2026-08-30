@@ -1,6 +1,6 @@
 # 01 — Project Orb worker binding
 
-Status: planned
+Status: done
 Spec: `../spec.md`
 
 ## Deliver
@@ -16,3 +16,8 @@ Spec: `../spec.md`
 
 Focused source-intake, webhook duplicate/concurrency/crash-window, auth, lease,
 download digest, init, needs-owner, and handoff verifiers pass.
+
+Verified with:
+
+- `node scripts/verify-source-intake.mjs`
+- `node scripts/verify-source-intake-webhook.mjs`

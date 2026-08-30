@@ -18,18 +18,22 @@ const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-source-intake-'))
 const dbPath = path.join(tempRoot, 'import-ops.sqlite')
 const filesRoot = path.join(tempRoot, 'files')
 const agentToken = 'verify-source-intake-agent-token'
+const orbThreadId = 'T-11111111-1111-4111-8111-111111111111'
 let clock = new Date('2026-08-30T00:00:00.000Z')
 
 function digest(bytes) {
   return `sha256:${createHash('sha256').update(bytes).digest('hex')}`
 }
 
-function initializationReceipt(submission, paperId) {
+function initializationReceipt(submission, paperId, ampThreadId = null) {
   return {
-    schemaVersion: 'source-intake-initialization-v1',
+    schemaVersion: ampThreadId
+      ? 'source-intake-initialization-v2'
+      : 'source-intake-initialization-v1',
     submissionId: submission.id,
     submissionDigest: submission.submissionDigest,
     paperId,
+    ...(ampThreadId ? { ampThreadId } : {}),
   }
 }
 
@@ -117,6 +121,7 @@ function runSourceIntakeCli(origin, args) {
           ...process.env,
           QUESTION_BANK_IMPORT_OPS_ORIGIN: origin,
           QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN: agentToken,
+          AMP_THREAD_ID: orbThreadId,
         },
         stdio: ['ignore', 'pipe', 'pipe'],
       },
@@ -599,15 +604,124 @@ try {
     role: 'owner',
   })
   const cliSubmissionId = cliSubmitted.json.submission.id
+  const workerPath = `/api/import-agent-source-intakes/${cliSubmissionId}/orb-worker`
+  const ownerCannotReserve = await request(origin, `${workerPath}/reserve`, {
+    method: 'POST',
+    role: 'owner',
+    body: {
+      submissionDigest: cliSubmitted.json.submission.submissionDigest,
+      webhookEventId: 'webhook-owner-denied',
+    },
+  })
+  assert.equal(ownerCannotReserve.status, 401)
+  const digestMismatch = await request(origin, `${workerPath}/reserve`, {
+    method: 'POST',
+    headers: { authorization: `Bearer ${agentToken}` },
+    body: {
+      submissionDigest: `sha256:${'f'.repeat(64)}`,
+      webhookEventId: 'webhook-wrong-digest',
+    },
+  })
+  assert.equal(digestMismatch.status, 409)
+  assert.equal(digestMismatch.json.code, 'SOURCE_INTAKE_SUBMISSION_DIGEST_MISMATCH')
+
+  const reservations = await Promise.all([
+    request(origin, `${workerPath}/reserve`, {
+      method: 'POST',
+      headers: { authorization: `Bearer ${agentToken}` },
+      body: {
+        submissionDigest: cliSubmitted.json.submission.submissionDigest,
+        webhookEventId: 'webhook-concurrent-delivery',
+      },
+    }),
+    request(origin, `${workerPath}/reserve`, {
+      method: 'POST',
+      role: 'import_agent',
+      body: {
+        submissionDigest: cliSubmitted.json.submission.submissionDigest,
+        webhookEventId: 'webhook-concurrent-delivery',
+      },
+    }),
+  ])
+  assert.deepEqual(
+    reservations.map((result) => result.json.worker.action).sort(),
+    ['busy', 'create'],
+    'concurrent duplicate deliveries receive only one create reservation',
+  )
+  const firstReservation = reservations.find((result) => result.json.worker.action === 'create')
+    .json.worker
+  clock = new Date('2026-08-30T01:05:01.000Z')
+  const replacementReservation = await request(origin, `${workerPath}/reserve`, {
+    method: 'POST',
+    headers: { authorization: `Bearer ${agentToken}` },
+    body: {
+      submissionDigest: cliSubmitted.json.submission.submissionDigest,
+      webhookEventId: 'webhook-after-create-bind-crash',
+    },
+  })
+  assert.equal(replacementReservation.status, 200)
+  assert.equal(replacementReservation.json.worker.action, 'create')
+  assert.notEqual(
+    replacementReservation.json.worker.reservationToken,
+    firstReservation.reservationToken,
+  )
+  const staleBind = await request(origin, `${workerPath}/bind`, {
+    method: 'POST',
+    headers: { authorization: `Bearer ${agentToken}` },
+    body: {
+      submissionDigest: cliSubmitted.json.submission.submissionDigest,
+      reservationToken: firstReservation.reservationToken,
+      ampThreadId: orbThreadId,
+    },
+  })
+  assert.equal(staleBind.status, 409)
+  assert.equal(staleBind.json.code, 'SOURCE_INTAKE_WORKER_RESERVATION_INVALID')
+  const bound = await request(origin, `${workerPath}/bind`, {
+    method: 'POST',
+    role: 'import_agent',
+    body: {
+      submissionDigest: cliSubmitted.json.submission.submissionDigest,
+      reservationToken: replacementReservation.json.worker.reservationToken,
+      ampThreadId: orbThreadId,
+    },
+  })
+  assert.equal(bound.status, 200)
+  assert.equal(bound.json.worker.ampThreadId, orbThreadId)
+  const resumed = await request(origin, `${workerPath}/reserve`, {
+    method: 'POST',
+    headers: { authorization: `Bearer ${agentToken}` },
+    body: {
+      submissionDigest: cliSubmitted.json.submission.submissionDigest,
+      webhookEventId: 'webhook-resume-delivery',
+    },
+  })
+  assert.equal(resumed.json.worker.action, 'resume')
+  assert.equal(resumed.json.worker.ampThreadId, orbThreadId)
+
+  const unboundClaim = await request(
+    origin,
+    `/api/import-agent-source-intakes/${cliSubmissionId}/claim`,
+    {
+      method: 'POST',
+      headers: { authorization: `Bearer ${agentToken}` },
+      body: { leaseSeconds: 60 },
+    },
+  )
+  assert.equal(unboundClaim.status, 403)
+  assert.equal(unboundClaim.json.code, 'SOURCE_INTAKE_THREAD_MISMATCH')
   const concurrentClaims = await Promise.all([
     request(origin, `/api/import-agent-source-intakes/${cliSubmissionId}/claim`, {
       method: 'POST',
-      headers: { authorization: `Bearer ${agentToken}` },
+      headers: {
+        authorization: `Bearer ${agentToken}`,
+        'x-amp-thread-id': orbThreadId,
+      },
       body: { leaseSeconds: 60 },
     }),
     request(origin, `/api/import-agent-source-intakes/${cliSubmissionId}/claim`, {
       method: 'POST',
       role: 'import_agent',
+      headers: { 'x-amp-thread-id': orbThreadId },
       body: { leaseSeconds: 60 },
     }),
   ])
@@ -616,7 +730,37 @@ try {
     [200, 409],
     'concurrent claim attempts produce exactly one active lease',
   )
-  clock = new Date('2026-08-30T01:01:01.000Z')
+  const activeBoundClaim = concurrentClaims.find((result) => result.status === 200).json.claim
+  const wrongThreadHeaders = {
+    authorization: `Bearer ${agentToken}`,
+    'x-source-intake-lease': activeBoundClaim.leaseToken,
+    'x-amp-thread-id': 'T-22222222-2222-4222-8222-222222222222',
+  }
+  for (const [pathname, method, bodyValue] of [
+    [`/api/import-agent-source-intakes/${cliSubmissionId}`, 'GET', null],
+    [`/api/import-agent-source-intakes/${cliSubmissionId}/files/${cliSubmitted.json.submission.snapshot.files[0].id}`, 'GET', null],
+    [`/api/import-agent-source-intakes/${cliSubmissionId}/heartbeat`, 'POST', { leaseSeconds: 60 }],
+    [`/api/import-agent-source-intakes/${cliSubmissionId}/needs-owner`, 'POST', {
+      reasonCode: 'WRONG_THREAD', message: 'must fail before state change',
+    }],
+    [`/api/import-agent-source-intakes/${cliSubmissionId}/handoff`, 'POST', {
+      paperId: 'paper-wrong-thread',
+      initialization: initializationReceipt(
+        cliSubmitted.json.submission,
+        'paper-wrong-thread',
+        'T-22222222-2222-4222-8222-222222222222',
+      ),
+    }],
+  ]) {
+    const mismatched = await request(origin, pathname, {
+      method,
+      headers: wrongThreadHeaders,
+      ...(bodyValue ? { body: bodyValue } : {}),
+    })
+    assert.equal(mismatched.status, 403, `${method} ${pathname} rejects another Amp thread`)
+    assert.equal(mismatched.json.code, 'SOURCE_INTAKE_THREAD_MISMATCH')
+  }
+  clock = new Date('2026-08-30T01:06:02.000Z')
   assert.equal(store.listQueue().some((item) => item.submissionId === cliSubmissionId), true)
   const cliInbox = path.join(
     path.resolve(import.meta.dirname, 'import-pipeline/source-intake-inbox'),
@@ -641,6 +785,7 @@ try {
     assert.equal(downloadResult.downloadedFiles.length, 1)
     const downloadedManifest = JSON.parse(readFileSync(path.join(cliInbox, 'manifest.json'), 'utf8'))
     assert.equal(downloadedManifest.submission.id, cliSubmissionId)
+    assert.equal(downloadedManifest.ampThreadId, orbThreadId)
     assert.equal(downloadedManifest.files[0].sha256, digest(cliPdf))
     const initOutput = await runSourceIntakeCli(origin, [
       'init',
@@ -656,6 +801,8 @@ try {
     const localInitialization = JSON.parse(readFileSync(initializationReceiptFile, 'utf8'))
     assert.equal(localInitialization.submissionId, cliSubmissionId)
     assert.equal(localInitialization.submissionDigest, cliSubmitted.json.submission.submissionDigest)
+    assert.equal(localInitialization.schemaVersion, 'source-intake-initialization-v2')
+    assert.equal(localInitialization.ampThreadId, orbThreadId)
     const handoffOutput = await runSourceIntakeCli(origin, [
       'handoff',
       cliSubmissionId,
@@ -669,6 +816,12 @@ try {
       paperId: cliPaperId,
     })
     assert.equal(existsSync(path.join(cliInbox, 'claim.json')), false)
+    const handedOffDetail = await request(origin, `/api/source-intakes/${cliIntakeId}`, {
+      role: 'owner',
+    })
+    assert.equal(handedOffDetail.json.intake.orbWorker.state, 'handed_off')
+    assert.equal(handedOffDetail.json.intake.orbWorker.ampThreadId, orbThreadId)
+    assert.equal(handedOffDetail.json.intake.orbWorker.paperId, cliPaperId)
   } finally {
     rmSync(cliInbox, { recursive: true, force: true })
     rmSync(cliPaperDirectory, { recursive: true, force: true })

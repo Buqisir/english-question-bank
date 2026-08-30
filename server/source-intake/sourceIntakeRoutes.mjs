@@ -46,6 +46,10 @@ function leaseToken(request) {
   return String(request.headers['x-source-intake-lease'] || '')
 }
 
+function ampThreadId(request) {
+  return String(request.headers['x-amp-thread-id'] || '')
+}
+
 export function validateSourceIntakeUploadMagic(filePath, expected) {
   const bytes = readFileSync(filePath)
   let valid = false
@@ -225,6 +229,40 @@ export function createSourceIntakeRoutes({ getStore, notifier, agentToken = '' }
     context.sendJson(response, 200, { submissions: store.listQueue() })
   })))
 
+  routes.push(defineRoute('POST', /^\/api\/import-agent-source-intakes\/([^/]+)\/orb-worker\/reserve$/, route(async ({
+    request,
+    response,
+    context,
+    match,
+  }) => {
+    const actor = agentIdentity(request, context, agentToken)
+    if (!actor) {
+      context.sendJson(response, 401, { error: 'agent_auth_required' })
+      return
+    }
+    const input = await context.readJsonBody(request, { maxBytes: 5_000 })
+    context.sendJson(response, 200, {
+      worker: store.reserveOrbWorker(match[1], input, actor),
+    })
+  })))
+
+  routes.push(defineRoute('POST', /^\/api\/import-agent-source-intakes\/([^/]+)\/orb-worker\/bind$/, route(async ({
+    request,
+    response,
+    context,
+    match,
+  }) => {
+    const actor = agentIdentity(request, context, agentToken)
+    if (!actor) {
+      context.sendJson(response, 401, { error: 'agent_auth_required' })
+      return
+    }
+    const input = await context.readJsonBody(request, { maxBytes: 5_000 })
+    context.sendJson(response, 200, {
+      worker: store.bindOrbWorker(match[1], input, actor),
+    })
+  })))
+
   routes.push(defineRoute('POST', /^\/api\/import-agent-source-intakes\/([^/]+)\/claim$/, route(async ({
     request,
     response,
@@ -237,7 +275,12 @@ export function createSourceIntakeRoutes({ getStore, notifier, agentToken = '' }
       return
     }
     const input = await context.readJsonBody(request, { maxBytes: 5_000 })
-    context.sendJson(response, 200, store.claimSubmission(match[1], actor, input.leaseSeconds))
+    context.sendJson(response, 200, store.claimSubmission(
+      match[1],
+      actor,
+      input.leaseSeconds,
+      ampThreadId(request),
+    ))
   })))
 
   routes.push(defineRoute('GET', /^\/api\/import-agent-source-intakes\/([^/]+)$/, route(({
@@ -252,7 +295,12 @@ export function createSourceIntakeRoutes({ getStore, notifier, agentToken = '' }
       return
     }
     context.sendJson(response, 200, {
-      submission: store.claimedSubmission(match[1], actor, leaseToken(request)),
+      submission: store.claimedSubmission(
+        match[1],
+        actor,
+        leaseToken(request),
+        ampThreadId(request),
+      ),
     })
   })))
 
@@ -269,7 +317,13 @@ export function createSourceIntakeRoutes({ getStore, notifier, agentToken = '' }
     }
     sendPrivateFile(
       response,
-      store.fileForDownload(match[1], match[2], actor, leaseToken(request)),
+      store.fileForDownload(
+        match[1],
+        match[2],
+        actor,
+        leaseToken(request),
+        ampThreadId(request),
+      ),
     )
   })))
 
@@ -286,7 +340,13 @@ export function createSourceIntakeRoutes({ getStore, notifier, agentToken = '' }
     }
     const input = await context.readJsonBody(request, { maxBytes: 5_000 })
     context.sendJson(response, 200, {
-      claim: store.heartbeat(match[1], actor, leaseToken(request), input.leaseSeconds),
+      claim: store.heartbeat(
+        match[1],
+        actor,
+        leaseToken(request),
+        input.leaseSeconds,
+        ampThreadId(request),
+      ),
     })
   })))
 
@@ -303,7 +363,13 @@ export function createSourceIntakeRoutes({ getStore, notifier, agentToken = '' }
     }
     const input = await context.readJsonBody(request, { maxBytes: 10_000 })
     context.sendJson(response, 200, {
-      intake: store.needsOwner(match[1], actor, leaseToken(request), input),
+      intake: store.needsOwner(
+        match[1],
+        actor,
+        leaseToken(request),
+        input,
+        ampThreadId(request),
+      ),
     })
   })))
 
@@ -320,7 +386,13 @@ export function createSourceIntakeRoutes({ getStore, notifier, agentToken = '' }
     }
     const input = await context.readJsonBody(request, { maxBytes: 5_000 })
     context.sendJson(response, 200, {
-      intake: store.handoff(match[1], actor, leaseToken(request), input),
+      intake: store.handoff(
+        match[1],
+        actor,
+        leaseToken(request),
+        input,
+        ampThreadId(request),
+      ),
     })
   })))
 
