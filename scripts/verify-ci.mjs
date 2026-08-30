@@ -1,12 +1,15 @@
 #!/usr/bin/env node
 import assert from 'node:assert/strict'
-import { execFileSync, spawnSync } from 'node:child_process'
+import { execFileSync } from 'node:child_process'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import {
   changedFiles,
   touchesAny,
 } from './lib/verifyScope.mjs'
+import {
+  runVerificationCommand,
+} from './lib/verificationCommandRunner.mjs'
 import {
   assertCanonicalImportPilotEvidenceRoot,
   assertCanonicalImportPilotTransientEvidenceRunsClean,
@@ -99,6 +102,7 @@ const registry = {
   'scripts/verify-print-form.mjs',
   'scripts/verify-print-renderer.mjs',
   'scripts/verify-figure-render.mjs',
+  'scripts/verify-verification-command-runner.mjs',
   'scripts/verify-architecture-housekeeping.mjs',
   'scripts/verify-motion-tokens.mjs',
   'scripts/verify-lecture-panel-css.mjs',
@@ -475,19 +479,16 @@ if (process.argv.includes('--plan-json')) {
 // counted and listed separately so a missing-data gap stays visible.
 const SKIP_EXIT_CODE = 2
 
-function run(command, args, label, options = {}) {
+async function run(command, args, label, options = {}) {
   console.log(`\n==> ${label}`)
-  const result = spawnSync(command, args, {
+  return runVerificationCommand(command, args, {
     cwd: options.cwd || rootDir,
-    stdio: 'inherit',
-    shell: false,
   })
-  return result.status ?? 1
 }
 
 // Preflight stays hard-fail: a broken build makes the script results meaningless.
 for (const step of plan.preflight) {
-  const status = run(step.command, step.args, step.label)
+  const status = await run(step.command, step.args, step.label)
   if (status !== 0) {
     console.error(`\nPreflight failed: ${step.label} (exit ${status})`)
     process.exit(status)
@@ -498,7 +499,7 @@ for (const step of plan.preflight) {
 // failure cannot hide the status of the scripts after it.
 const results = []
 for (const script of plan.scripts) {
-  const status = run(process.execPath, [script], script)
+  const status = await run(process.execPath, [script], script)
   results.push({ script, status })
 }
 

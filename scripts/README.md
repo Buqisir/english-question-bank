@@ -53,6 +53,7 @@ must be confirmed green (AGENTS.md RM gate).
 | Script | Scope | Runs in CI? |
 | --- | --- | --- |
 | `verify-ci.mjs` | Selects changed/Paper/all packs deterministically and reports PASS/SKIP/FAIL without hiding later failures | yes |
+| `verify-verification-command-runner.mjs` | Prevents a completed or interrupted verifier from leaving its own Vite/Chromium/test descendants alive, and bounds oversized single-line diagnostics while retaining their head, tail, and digest | yes |
 | `verify-vocabulary-closed-loop.mjs` | Validates the 1600-entry Wanwei source/content/unique Koboyo visual, formal American and Owner-approved Cori British audio contracts, plus isolated progress, frozen-set, share/revoke, and temporary-scope persistence | yes |
 | `verify-vocabulary-dictation-review.mjs` | Verifies frozen multi-set dictation tasks, global share isolation, teacher-confirmed result editing/voiding, pending/stubborn/improved derivation, manual flags, suggestions, library search/statistics, and user/student isolation | yes |
 | `verify-vocabulary-meaning-recall.mjs` | Verifies frozen multi-set meaning-recall records, same-day evidence collapse, cross-day repeated/recovered derivation, dictation-correct contribution without fabricated meaning errors, task linkage, suggestions, and user/student isolation | yes |
