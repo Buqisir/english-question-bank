@@ -47,6 +47,7 @@ import { createSynonymDifficultyImplementation, loadSynonymDifficultyKnowledge, 
 import { createQuestionGroupParseImplementation } from './ai-parse/questionGroupParseService.mjs'
 import { createImportReviewStore } from './import-review/importReviewStore.mjs'
 import { createImportReviewRoutes } from './import-review/importReviewRoutes.mjs'
+import { createSinglePaperPromotionService } from './import-review/singlePaperPromotion.mjs'
 import { createSourceIntakeNotifier } from './source-intake/sourceIntakeNotifier.mjs'
 import { createSourceIntakeRoutes } from './source-intake/sourceIntakeRoutes.mjs'
 import { createSourceIntakeStore } from './source-intake/sourceIntakeStore.mjs'
@@ -119,6 +120,11 @@ function getSourceIntakeStore() {
 const sourceIntakeNotifier = createSourceIntakeNotifier({
   webhookUrl: process.env.QUESTION_BANK_SOURCE_INTAKE_WEBHOOK_URL || '',
   webhookSecret: process.env.QUESTION_BANK_SOURCE_INTAKE_WEBHOOK_SECRET || '',
+})
+const singlePaperPromotionService = createSinglePaperPromotionService({
+  getStore: getImportReviewStore,
+  openDatabase,
+  paperAssetsDir,
 })
 const paperSurfaceAnalysisAvailability = createPaperSurfaceAnalysisAvailability({ paperAssetsDir })
 const teachingFacetIndex = createTeachingFacetIndex({ paperAssetsDir })
@@ -605,6 +611,7 @@ const serverRoutes = [
     agentToken: process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN || '',
     shipToken: process.env.QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN || '',
     buildPrintHtml,
+    promotionService: singlePaperPromotionService,
   }),
   ...createSourceIntakeRoutes({
     getStore: getSourceIntakeStore,

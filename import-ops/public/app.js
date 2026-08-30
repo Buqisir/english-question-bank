@@ -30,6 +30,9 @@ const stateLabels = {
   awaiting_review: '待审核',
   changes_requested: '待修改',
   approved: '已认可',
+  publishing: '上线中',
+  published: '已上线',
+  failed: '上线失败',
   superseded: '旧版本',
   open: '待处理',
   fixed_pending_review: '待验证',
@@ -144,6 +147,7 @@ function paperListHtml() {
       <span class="paper-name">${escapeHtml(paper.paperName)}</span>
       <span class="paper-meta">${paper.reviewKind === 'ocr' ? 'OCR' : 'Candidate'} R${escapeHtml(paper.revisionNumber || '—')}${paper.reviewKind === 'ocr' ? ' · 原图识别核对' : ` · ${escapeHtml(paper.unresolvedCount)} 个未决`}</span>
       ${status(paper.state, paper.reviewKind === 'ocr' && paper.state === 'approved' ? 'OCR 已确认' : null)}
+      ${paper.promotionState ? status(paper.promotionState) : ''}
     </button>
   `).join('')}</div>`
 }
@@ -782,6 +786,48 @@ function approvalHtml() {
   </section>`
 }
 
+function promotionHtml() {
+  if (isOcrReview()) return ''
+  const promotion = state.detail?.promotion
+  const approval = state.detail?.latest?.approval
+  if (!promotion && !approval) return ''
+  if (approval && promotion?.approvalId !== approval.approvalId) {
+    return `<section class="rail-section">
+      <h2>上线审计</h2>
+      <div class="approval-box">
+        ${status('approved', '已认可，未上线')}
+        <p class="muted">认可不会公开这套卷。Owner 如决定上线，需在当前 Agent 对话明确说：</p>
+        <p class="digest">上线 ${escapeHtml(state.detail.paperId)}</p>
+        ${promotion ? `<p class="boundary-note">上一份上线回执：${escapeHtml(stateLabels[promotion.state] || promotion.state)} · ${escapeHtml(promotion.versionName || '未提交版本')}</p>` : ''}
+        <p class="boundary-note">网页不持有上线权限，也没有上线按钮。</p>
+      </div>
+    </section>`
+  }
+  const command = promotion.state === 'failed'
+    ? `重试上线 ${state.detail.paperId}`
+    : `上线 ${state.detail.paperId}`
+  const promotedRevision = state.detail.revisions?.find((revision) =>
+    revision.id === promotion.revisionId)
+  const version = promotion.versionName
+    ? ` · ${promotion.versionName}`
+    : ''
+  const timestamp = promotion.publishedAt || promotion.failedAt || promotion.updatedAt
+  return `<section class="rail-section">
+    <h2>上线审计</h2>
+    <div class="approval-box">
+      ${status(promotion.state)}
+      <p class="muted">R${escapeHtml(promotedRevision?.revisionNumber || '—')}${escapeHtml(version)} · 尝试 ${escapeHtml(promotion.attemptCount)}</p>
+      <p class="digest" title="${escapeHtml(promotion.promotionId)}">${escapeHtml(promotion.promotionId)}</p>
+      ${promotion.canonicalPublicationDigest ? `<p class="digest" title="${escapeHtml(promotion.canonicalPublicationDigest)}">Canonical ${escapeHtml(shortDigest(promotion.canonicalPublicationDigest))}</p>` : ''}
+      ${promotion.analysisPublicationDigest ? `<p class="digest" title="${escapeHtml(promotion.analysisPublicationDigest)}">五份分析 ${escapeHtml(shortDigest(promotion.analysisPublicationDigest))}</p>` : ''}
+      ${promotion.failureCode ? `<p class="boundary-note">${escapeHtml(promotion.failureCode)}：${escapeHtml(promotion.failureMessage)}</p>` : ''}
+      <p class="timestamp">${escapeHtml(formatTime(timestamp))}</p>
+      ${promotion.state === 'failed' ? `<p class="muted">确认生产状态后，如需重试，Owner 必须另说：</p><p class="digest">${escapeHtml(command)}</p>` : ''}
+      <p class="boundary-note">这是只读回执；网页不执行上线。</p>
+    </div>
+  </section>`
+}
+
 function rightRailHtml() {
   return `<aside class="right-rail" aria-label="QA 问题与认可">
     ${sourceVisualSectionHtml()}
@@ -791,6 +837,7 @@ function rightRailHtml() {
       <h2>${state.actor === 'owner' ? 'QA 对话' : 'Owner 反馈'}</h2>
       ${issuesHtml()}
     </section>
+    ${promotionHtml()}
     ${approvalHtml()}
   </aside>`
 }

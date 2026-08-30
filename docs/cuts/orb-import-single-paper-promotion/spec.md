@@ -1,6 +1,6 @@
 # Orb 导题与单卷生产发布闭环
 
-Status: implementation candidate
+Status: repository implementation complete; production activation blocked
 Date: 2026-08-30
 Production activation: blocked on later direct Owner approval
 
@@ -111,11 +111,21 @@ The server rejects the low-authority token on the promotion route.
    derive Teacher Confirmation, Canonical request, compatibility package, and
    five analysis sidecars from that revision.
 4. Call `publishUniversalNck1Import` against the production question-bank DB and
-   paper-assets root. Its existing staging, version journal, DB transaction,
-   latest swap, Canonical current ref, rollback, and recovery stay authoritative.
-5. Re-open/inspect the committed version and exact five-sidecar digest.
-6. In one Import Review transaction, record the immutable `published` receipt
+   paper-assets root. After admission/version selection and before its first
+   content write, persist the exact target vN, version name, and Canonical
+   publication digest back to the `publishing` receipt. A retry must derive that
+   same target or fail closed.
+5. The publisher's existing staging, version journal, DB transaction, latest
+   swap, Canonical current ref, rollback, and recovery stay authoritative.
+6. Re-open/inspect the pre-bound committed version, current ref, exact five-
+   sidecar digest, and all Canonical consumers.
+7. In one Import Review transaction, record the immutable `published` receipt
    and remove the matching shipping guard.
+
+The Review and question-bank DBs are separate SQLite files. This is a durable,
+recoverable two-phase protocol—not a cross-database ACID transaction. The
+prewrite target binding closes the committed-but-unreceipted vN+1 retry window;
+the publisher journal/compensation closes partial content writes.
 
 ### Recovery matrix
 
@@ -124,7 +134,8 @@ The server rejects the low-authority token on the promotion route.
 | before guard | no write |
 | guard/`publishing`, before content | guard remains or known admission failure records `failed`; no public paper |
 | version/latest/DB before commit | publisher restores prior DB/current/latest and removes the attempted immutable version |
-| content committed, receipt missing | state stays `publishing`; exact retry recovers the same version and completes the receipt |
+| target bound, content not committed | state stays `publishing`; publisher rollback/retry reuses the bound target |
+| content committed, receipt missing | state stays `publishing`; exact retry inspects the pre-bound version and completes the receipt without invoking a new publish |
 | duplicate successful call | inspect exact receipt/current state and return no-op |
 | newer revision/issue/re-approval attempt while publishing | rejected by shipping guard |
 | retry identity differs | rejected; old guard is not reused for different content |
@@ -153,26 +164,27 @@ button. Agent/member permissions do not widen.
 
 ### Orb worker
 
-- [ ] Duplicate delivery and concurrent delivery create/resume one bound thread.
-- [ ] Crash windows never append a prompt before durable bind.
-- [ ] Bound-thread mismatch cannot claim, heartbeat, download, `needs_owner`, or
+- [x] Duplicate delivery and concurrent delivery create/resume one bound thread.
+- [x] Crash windows never append a prompt before durable bind.
+- [x] Bound-thread mismatch cannot claim, heartbeat, download, `needs_owner`, or
       handoff.
-- [ ] Lease expiry, pause/resume, digest recheck, init, and handoff remain valid.
-- [ ] Mac runner setting is absent from the default plugin contract.
+- [x] Lease expiry, pause/resume, digest recheck, init, and handoff remain valid.
+- [x] Mac runner setting is absent from the default plugin contract.
 
 ### Promotion
 
-- [ ] Approved synthetic Candidate is absent from ordinary DB/assets before ship.
-- [ ] Agent token cannot promote; ship token cannot be equal to agent token.
-- [ ] Exact promotion writes only one paper and one version with formal rows,
+- [x] Approved synthetic Candidate is absent from ordinary DB/assets before ship.
+- [x] Agent token cannot promote; ship token cannot be equal to agent token.
+- [x] Exact promotion writes only one paper and one version with formal rows,
       Canonical current ref, five analyses, `versions/vN`, `latest`, and media.
-- [ ] New revision/issue/approval drift fails before content write.
-- [ ] Forced pre-commit failure restores DB/files; committed-reload retry returns
+- [x] New revision/issue/approval drift fails before content write.
+- [x] Forced pre-commit failure restores DB/files; committed-reload retry returns
       the same version; duplicate success is no-op.
-- [ ] Screen, Student Print, Teacher Print, and PDF bind the same Canonical
+- [x] Screen, Student Print, Teacher Print, and PDF bind the same Canonical
       publication; Student hides answers and official model answers.
-- [ ] Review exposes audit state without a web publish button.
-- [ ] Whole-DB paper push refuses and points to single-paper promotion.
+- [x] Review exposes current approval and prior promotion audit state without a
+      web publish button.
+- [x] Whole-DB paper push refuses and points to single-paper promotion.
 
 ## Verification
 

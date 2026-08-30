@@ -161,6 +161,7 @@ export function createImportReviewRoutes({
   agentToken,
   shipToken,
   buildPrintHtml,
+  promotionService = null,
 }) {
   if (agentToken && shipToken && agentToken === shipToken) {
     throw new Error('Import Review Agent and shipping tokens must be different')
@@ -197,6 +198,45 @@ export function createImportReviewRoutes({
       return
     }
     context.sendJson(response, 200, store.agentPaperStatus(decodeURIComponent(match[1])))
+  })))
+
+  routes.push(defineRoute('POST', /^\/api\/import-agent-reviews\/papers\/([^/]+)\/promotions$/, route(async ({
+    request,
+    response,
+    context,
+    match,
+  }) => {
+    const actor = shippingIdentity(request, shipToken)
+    if (!actor) {
+      context.sendJson(response, 401, { error: 'shipping_auth_required' })
+      return
+    }
+    if (!promotionService) {
+      throw reviewError(
+        'IMPORT_REVIEW_PROMOTION_UNAVAILABLE',
+        'Single-paper promotion service is unavailable',
+        503,
+      )
+    }
+    const input = await context.readJsonBody(request, { maxBytes: 20_000 })
+    const result = await promotionService.promote(
+      decodeURIComponent(match[1]),
+      input,
+      actor,
+    )
+    if (result.status === 'failed') {
+      context.sendJson(response, 409, {
+        status: result.status,
+        promotion: result.promotion,
+        code: result.failure.failureCode,
+        error: result.failure.failureMessage,
+      })
+      return
+    }
+    context.sendJson(response, result.status === 'published' ? 201 : 200, {
+      status: result.status,
+      promotion: result.promotion,
+    })
   })))
 
   routes.push(defineRoute('POST', /^\/api\/import-agent-reviews\/papers\/([^/]+)\/shipping-guards$/, route(async ({

@@ -39,8 +39,9 @@ pnpm dev   # 初始化本地 SQLite 后同时起 API (8787) 和 Vite 前端
 
 - 首次上机手册：`docs/cuts/launch-deploy/runbook.md`
 - 服务器实况记录：`docs/cuts/launch-deploy/go-live-record.md`
-- 日常发布：`scripts/deploy.sh`；R2 备份：`scripts/backup-to-r2.sh`；
-  本地 ↔ 服务器搬题库：`scripts/pull-run-push.mjs`
+- 日常代码发布：`scripts/deploy.sh`；R2 备份：`scripts/backup-to-r2.sh`；
+  Review-backed 内容上线走服务端单卷 promotion；`scripts/pull-run-push.mjs` 只保留
+  pull/manifest 与历史维护兼容
 
 ## 文档地图
 

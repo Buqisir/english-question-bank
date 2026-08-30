@@ -1,12 +1,10 @@
 #!/usr/bin/env node
 // launch-deploy Slice 4 — pull-run-push.mjs
 //
-// The local-only transport for "import new real exam papers": pull the
-// server's question-bank.sqlite down, run the local import pipeline against
-// it, push the updated library back up. This is NOT part of the running
-// product — it's an ops tool the owner runs by hand around the import
-// pipeline (scripts/import-pipeline/README.md). A mistake here can
-// overwrite/corrupt years of curated question-bank data, so every step is
+// Legacy non-Review database transport plus read-only pull/manifest maintenance.
+// Review-backed Candidate papers must use server-side single-paper promotion;
+// this script rejects them before any remote mutation. The retained push path
+// can overwrite/corrupt years of curated question-bank data, so every step is
 // deliberately explicit (no `data/` globbing, no in-place writes).
 //
 // docs/cuts/launch-deploy/plan.md — PM 拍板 #7, Slice 4, PA 裁决 R1/R2 (MF-1/MF-2).
@@ -16,10 +14,9 @@
 //   1. Manifest assertion (MF-2): explicit transfer list, abort if any
 //      basename matches /user-data/i.
 //   2. Local question-bank.sqlite must exist + pass PRAGMA integrity_check.
-//   3. Re-run the paper ship gate, then transactionally acquire a Review
-//      shipping guard. Abort if the owner flag, local receipts, latest
-//      approved revision, or guard acquisition disagree. The guard freezes
-//      review-state changes until the remote recipe finishes.
+//   3. Re-run the legacy paper ship gate. Abort a Review-backed Candidate and
+//      point it to server-side promotion before any remote mutation. Historical
+//      compatibility inputs retain their existing guard behavior.
 //   4. EQB_SERVICE_STOP on remote (frees nothing — journal_mode=delete, no
 //      long-held handle — but flushes the server's startup-time in-memory
 //      indexes/route cache; see import-pipeline/README.md:29-31 precedent).
@@ -301,6 +298,14 @@ async function push(argv) {
     paperId,
     ownerSaid: parsed.ownerSaid,
   })
+  if (gate.webReviewStatus?.latest?.reviewKind === 'candidate') {
+    fail(
+      `whole-DB push is retired for Review-backed paper ${paperId}; `
+        + `use node scripts/import-pipeline/review.mjs promote ${paperId} `
+        + `${parsed.ownerSaid === 'retry_ship' ? '--owner-said-retry-ship' : '--owner-said-ship'}`,
+    )
+    process.exit(1)
+  }
   if (!gate.ok) {
     fail(gate.message)
     process.exit(1)

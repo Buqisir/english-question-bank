@@ -4,9 +4,9 @@
 for any local coding agent. This runbook is the mechanical how-to that
 contract chains to. Do not start from this file alone.
 
-Self-contained execution contract for importing one Gaokao English paper into
-the local question bank, from raw source files to publish + backfill +
-ledger + verify. An agent following this document needs no other history of
+Self-contained mechanical contract for preparing one Gaokao English Candidate
+inside its bound private Amp Project Orb, from raw source files to Review
+handoff and verification. An agent following this document needs no other history of
 this repo's import work — only this file and the docs/scripts it points to:
 
 - **Data contract** (structure, numbering, scoring, answer rules, listening/
@@ -17,11 +17,11 @@ this repo's import work — only this file and the docs/scripts it points to:
 - Existing shipped validators (do not modify, only call):
   `server/paper-import-ai/**`, `server/paper-import/**`.
 
-Local-only. Never touches production (`.env.qa`, the production server, or
-`scripts/pull-run-push.mjs`). Everything below runs against the local SQLite
-DB (`data/question-bank.sqlite`) and local dev server. Content ship is not
-this runbook — see `docs/import/agent-contract.md` 「上线」 and
-`scripts/import-pipeline/ship-checklist.mjs`.
+The preparation steps never touch production or `scripts/pull-run-push.mjs`.
+Candidate work stays in the Orb and private Review store. Content promotion is
+not this runbook: after a separate current Owner command, use the server-side
+single-paper flow in `docs/import/agent-contract.md`「上线」. Never upload the
+Orb's SQLite or broad paper-assets root.
 
 ## Canonical-required backend boundary
 

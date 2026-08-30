@@ -311,16 +311,23 @@ summary:focus-visible {
 }
 
 .status--awaiting_review,
-.status--approved {
+.status--approved,
+.status--published {
   color: var(--teal-800);
   background: var(--teal-50);
 }
 
 .status--changes_requested,
 .status--open,
-.status--fixed_pending_review {
+.status--fixed_pending_review,
+.status--publishing {
   color: var(--warning-ink);
   background: var(--warning-bg);
+}
+
+.status--failed {
+  color: var(--danger-ink);
+  background: var(--danger-bg);
 }
 
 .status--closed,

@@ -8,7 +8,7 @@
 
 任何 agent 要导一套新卷,先读 `docs/import/agent-contract.md`（唯一进场）。
 项目级 `importing-nck1-papers` skill 会自动匹配导题、继续某卷、审核返工、状态查询
-和认可后本地发布任务。每次先运行：
+和认可后的上线准备。默认 worker 是绑定 submission 的私有 Amp Project Orb。每次先运行：
 
 ```bash
 node scripts/import-pipeline/review.mjs preflight <paperId>
@@ -36,7 +36,7 @@ node scripts/import-pipeline/source-intake.mjs handoff <submissionId> --paper-id
 `handoff` 会再次核对该收据、源文件与本地 workspace，并拒绝已被 Import Review
 使用的 `paperId`；它仍不认可、不 publish、不 ship。
 
-该只读命令把本地 Source / Materialization / 收据与 Review API 当前 revision 合成
+该只读命令把 Orb 内 Source / Materialization / 收据与 Review API 当前 revision 合成
 `materializing`、`awaiting_review`、`changes_requested`、`approved`、
 `locally_published`、`ready_to_ship`、`shipped` 或 `failed`，并给出可审计的
 `next.action`。Agent 据此恢复；Owner 无需记下面的机械命令。
@@ -141,20 +141,12 @@ node scripts/import-pipeline/review.mjs verify-analyses <paperId>
 node scripts/import-pipeline/review.mjs status <paperId>
 node scripts/import-pipeline/review.mjs reply <paperId> <issueId> --message '<回复>'
 node scripts/import-pipeline/review.mjs push <paperId> --resolves <issueId>[,<issueId>]
-node scripts/import-pipeline/review.mjs accept <paperId>
-node scripts/import-pipeline/review.mjs publish <paperId>
 ```
 
-`accept` 只在最新 revision 已由 Owner 认可时成功；它重新核对本地源、Candidate、
-可见结构、`analysisDigest`、文件清单和 bundle digest，才写确认、Canonical
-request 和摘要绑定 QA 收据。它不 publish、不部署。`publish` 再核对同一网页认可、
-QA 收据、Teacher
-Confirmation、Canonical request 与 AI 答案复核，然后通过共享原子 publisher 写
-同版本 DB、五份 analysis sidecar、`versions/vN`、`latest` 和 Canonical current
-ref；成功后写
-`signals/locally-published.json` 并进入 `ready_to_ship`。同一认可与有效本地发布
-收据重跑为 no-op。Agent 不代确认；`accept`、`publish` 和 Owner 网页认可都不构成
-上线授权。
+Owner 网页认可只写绑定当前 revision 与全部 digest 的 approval，Agent 随即停下。
+`accept`/`publish` 仍保留给离线 verifier 与存量本地恢复，但不再是 Review-backed
+生产上线步骤，也不能从 Orb 整库上传。只有 Owner 后来在当前对话明确说
+`上线 <paperId>`，才使用本 README 下方的服务端单卷 `promote` 命令。
 
 机械 how-to 见 `docs/import/agent-runbook.md`；本 README 只是它引用的工序
 参考,不重复讲工序。数据契约权威见 `docs/product/nck1-paper-standard.md`。
@@ -241,23 +233,26 @@ node scripts/import-pipeline/build-docx-pair-canonical-request.mjs \
 
 ## 上线（内容，非代码）
 
-通用入口 `review.mjs publish`（存量入口为 `--publish`）之后不要自动 push。可执行清单（本身不跑 push）：
+Owner 在 Review 认可后，Agent 必须停下。只有 Owner 后来在当前对话明确说
+`上线 <paperId>`，才运行：
 
 ```bash
-node scripts/import-pipeline/ship-checklist.mjs check <paperId> --owner-said-ship
+node scripts/import-pipeline/review.mjs promote <paperId> --owner-said-ship
 ```
 
-该清单继续使用 `QUESTION_BANK_IMPORT_OPS_ORIGIN` 与 Agent token，只读确认本地
-QA 收据与 `locally-published.json` 仍是 Review 服务的当前最新认可，且对应同版本
-`latest`；新 revision 会让旧收据失败关闭。仅当
-打印「允许」、且 owner **当前**口头「上线」时，才跑整库
-`node scripts/pull-run-push.mjs push <paperId> --owner-said-ship`。实际 push 会在
-停生产服务前再次用 Agent token 读取当前 Review revision，再用独立
-`QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN` 事务性取得 shipping guard；两个 token 必须
-不同，普通 Agent 账号/token 都不能取得 guard。若清单
-之后出现新 revision，则不做任何生产修改。guard 持有到远端操作结束，期间 Review
-服务拒绝新 revision 和会撤销认可的问题状态修改。不是单卷增量，不是 `deploy.sh`。
-导题后台无按钮。详见 `docs/import/agent-contract.md` 上线。
+命令需要 `QUESTION_BANK_IMPORT_OPS_ORIGIN`、低权限 Agent token 和只在本次明确上线
+动作中提供的独立 `QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN`。服务端重新验证最新 approval
+与不可变 bytes/digests，在 Review 事务内先建立 `publishing`+guard，再调用共享
+publisher 只提交这一卷的正式 rows、Canonical current、五份 sidecar、`versions/vN`、
+`latest` 与媒体。已提交但回执缺失的 exact retry 不创建 vN+1：
+
+```bash
+node scripts/import-pipeline/review.mjs promote <paperId> --owner-said-retry-ship
+```
+
+Review-backed paper 的 `pull-run-push push` 已退役并会拒绝；`pull` 与 manifest/历史维护
+仍保留。日常 Orb Secret 只有 Agent token；网页无按钮。详见
+`docs/import/agent-contract.md`「上线」。
 
 ## 待办(productionization 续)
 

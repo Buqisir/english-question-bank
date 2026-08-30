@@ -177,7 +177,7 @@ curl -s https://eqbank.cc/api/health
 
 ## Redeploys
 
-After first provision, use `scripts/deploy.sh` (pull → install → build →
+After first provision, use `scripts/deploy.sh` (fetch/update → install → build →
 restart → health smoke) for every subsequent code update. It's idempotent
 and safe to re-run.
 
@@ -186,7 +186,7 @@ and safe to re-run.
 push 校验 → pull → install → build → restart → health + 公网检查；
 host/key 从 gitignored `.env.deploy` 读，真实 IP 不入库）。
 
-## Backup + import (Slice 3 landed; Slice 4 — not yet landed in this cut)
+## Backup + content operations
 
 ### Daily backup to R2 (Slice 3)
 
@@ -254,15 +254,28 @@ configured):
 scripts/backup-to-r2.sh --dry-run
 ```
 
-### Import (Slice 4 — pull-run-push.mjs)
+### Content promotion and legacy transport
 
-`scripts/pull-run-push.mjs` is the local-only transport for "import new real
-exam papers": pull the server's `question-bank.sqlite` down, run the local
-import pipeline against it (`scripts/import-pipeline/`), push the updated
-library back up. It is NOT part of the running product — it's an ops tool
-the owner runs by hand, once per import session, around the import
-pipeline. Never manually scp a database onto the running server's live path
-— always go through this script.
+Review-backed paper publication no longer transports a local database. After
+online Review approval, the Agent stops. Only after a separate current Owner
+`上线 <paperId>` command does the Agent call the production server's
+ship-token-only single-paper promotion:
+
+```bash
+node scripts/import-pipeline/review.mjs promote <paperId> --owner-said-ship
+node scripts/import-pipeline/review.mjs promote <paperId> --owner-said-retry-ship
+```
+
+The command reads exact current approval with the low-authority Agent token,
+then sends that identity with the separate shipping credential. The server
+freezes Review mutation, rebuilds from immutable Review bytes, and invokes the
+existing atomic publisher against its own DB/assets. It never stops the service,
+uploads SQLite, or syncs a broad asset tree. Daily R2 remains asynchronous.
+
+`scripts/pull-run-push.mjs` remains a maintenance/legacy transport. Its `pull`
+and `check-manifest` are unchanged; `push <paperId>` refuses when Review reports
+a Candidate paper and points to `review.mjs promote`. Never manually scp a
+database onto the running server's live path.
 
 **Required env:**
 
@@ -276,7 +289,7 @@ fake "remote" repo root on the local filesystem, no ssh involved. This is
 the seam `scripts/verify-launch-deploy.mjs` VA5 uses; never point it at a
 real server path.)
 
-**Two subcommands:**
+**Maintenance/legacy subcommands:**
 
 ```
 node scripts/pull-run-push.mjs pull
@@ -291,10 +304,12 @@ node scripts/pull-run-push.mjs check-manifest <comma,separated,paths>
   db (timestamped) before moving the snapshot into place. Never pulls the
   remote `data/` directory wholesale — only the two explicitly-named
   targets.
-- **`push`** — requires the paper ID plus the current Owner authorization
-  flag. Its locked swap recipe (PA MF-1, do not reorder): manifest assertion →
-  verify local db passes `PRAGMA integrity_check` → re-run the local ship gate
-  and transactionally acquire a digest-bound Review shipping guard → **stop** the
+- **`push`** — legacy non-Review maintenance only. For a Review-backed Candidate
+  it fails before remote mutation and points to single-paper promotion. Where
+  the historical path is explicitly retained, it requires the paper ID plus the
+  current Owner authorization flag. Its locked swap recipe (PA MF-1, do not
+  reorder): manifest assertion → verify local db passes `PRAGMA integrity_check`
+  → re-run the legacy local ship gate → **stop** the
   remote `eqb` service (`sudo systemctl stop eqb`, requires the deploy user
   to have that sudo rule) → back up the remote OLD db to a timestamped path
   → transfer the local db to a remote TEMP path in the same directory as the
@@ -307,12 +322,8 @@ node scripts/pull-run-push.mjs check-manifest <comma,separated,paths>
   opened/closed per request — there is no WAL/-shm/-wal sidecar to manage).
   The active `question-bank.sqlite` path is never written to in place; every
   swap goes through a same-disk temp file + atomic rename.
-  A missing/unavailable Review service, a revision newer than the local QA
-  receipt, or failure to acquire the guard fails closed before service stop,
-  backup, transfer, or swap. While held, the guard rejects review mutations
-  that could invalidate approval; normal success/failure releases it after the
-  remote recipe. A killed process leaves the guard in place intentionally;
-  follow `docs/import/agent-contract.md` recovery rather than clearing it blindly.
+  A Review-backed Candidate is rejected before service stop, backup, transfer,
+  or swap; its shipping guard belongs exclusively to server-side promotion.
 - **`check-manifest`** — runs only the manifest guard (MF-2) over an
   explicit comma-separated path list: exits non-zero if any path's basename
   matches `/user-data/i` (catches `user-data.sqlite`,

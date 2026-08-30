@@ -37,13 +37,16 @@ deterministic Canonical request and compatibility projection from the immutable
 revision and calls the existing universal atomic publisher. It does not upload,
 download, or replace a whole database.
 
-The existing publisher remains the content commit authority. On success the
-Review DB records a digest-bound `published` receipt and releases the guard in
-one transaction. A crash after content commit but before receipt completion
-leaves `publishing` and the guard in place; an exact retry invokes publisher
-recovery, obtains the same version, records the receipt, and does not create a
-second version. Known admission rejection before content writes records
-`failed` and releases the guard. Unknown failures stay locked and fail closed.
+The existing publisher remains the content commit authority. After Canonical
+admission and version selection, but before its first DB/filesystem write, a
+publisher callback durably binds the Review receipt to the target asset version,
+version name, and Canonical publication digest. On success the Review DB records
+a digest-bound `published` receipt and releases the guard in one transaction.
+A crash after content commit but before receipt completion leaves `publishing`
+and the guard in place; an exact retry inspects the pre-bound target, completes
+publisher recovery when required, records the receipt, and does not create a
+second version. Known admission rejection before content writes records `failed`
+and releases the guard. Unknown failures stay locked and fail closed.
 
 The ordinary import-agent token can read promotion state but cannot begin,
 complete, retry, abort, or otherwise mutate promotion. The shipping credential
@@ -57,7 +60,12 @@ must not be installed as the routine project-worker secret.
   `latest`, and publisher-owned figures/media are one recoverable publisher
   unit.
 - The Review receipt records approval/revision/bundle identities, asset version,
-  Canonical publication digest, timestamps, and the prior version when present.
+  Canonical publication digest, published five-analysis digest, and timestamps.
+- The Review and question-bank stores are separate SQLite databases. Promotion
+  is therefore an explicit recoverable two-phase protocol, not one cross-DB
+  ACID transaction: Review guard/target binding first, publisher transaction and
+  filesystem journal second, exact postcondition inspection and Review receipt
+  completion last.
 - Existing immutable versions and publisher rollback remain the per-paper
   recovery boundary. The production online R2 job remains an independent,
   additive disaster-recovery boundary and includes the bank DB, paper assets,

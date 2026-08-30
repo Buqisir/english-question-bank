@@ -22,6 +22,7 @@ import {
   reviewBundleDigest,
 } from '../server/import-review/importReviewStore.mjs'
 import { createImportReviewRoutes } from '../server/import-review/importReviewRoutes.mjs'
+import { createSinglePaperPromotionService } from '../server/import-review/singlePaperPromotion.mjs'
 import {
   buildNck1ReviewProjection,
   reviewBundleFilePaths,
@@ -31,7 +32,7 @@ import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequ
 import { materializeNck1CanonicalRequest } from '../server/paper-canonical/nck1MaterializationCanonicalRequest.mjs'
 import { publishUniversalNck1Import } from '../server/paper-import/publisher.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
-import { runRoutes } from '../server/router/index.mjs'
+import { readJsonRouteBody, runRoutes } from '../server/router/index.mjs'
 import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 import { canonicalConsumptionPrintPayload } from './import-pipeline/canonical-consumption-print-payload.mjs'
@@ -474,6 +475,162 @@ function publishedVersionCount(context) {
 function close(context) {
   context.db.close()
   rmSync(context.tempRoot, { recursive: true, force: true })
+}
+
+function reviewManifestFor(reviewRoot, projection) {
+  const files = reviewBundleFilePaths(reviewRoot).map((file) => {
+    const bytes = readFileSync(resolveReviewFile(reviewRoot, file.path))
+    return {
+      ...file,
+      sha256: sha256(bytes),
+      byteLength: bytes.byteLength,
+    }
+  })
+  const manifest = {
+    schemaVersion: 'web-import-review-bundle-v1',
+    paperId: projection.paperId,
+    paperName: projection.paperName,
+    sourceDigest: projection.sourceDigest,
+    candidateDigest: projection.candidateDigest,
+    visibleStructureDigest: projection.visibleStructureDigest,
+    analysisDigest: projection.analysisDigest,
+    producerBuildId: 'single-paper-promotion-verifier',
+    files,
+    resolvesIssueIds: [],
+  }
+  return { ...manifest, bundleDigest: reviewBundleDigest(manifest) }
+}
+
+function makeOnlinePromotionContext(label, fixturePaperId = paperId) {
+  const tempRoot = mkdtempSync(path.join(tmpdir(), `eqb-single-paper-promotion-${label}-`))
+  const fixture = makeReviewRoot(tempRoot, fixturePaperId)
+  const reviewStore = createImportReviewStore({
+    dbPath: path.join(tempRoot, 'import-review.sqlite'),
+    filesRoot: path.join(tempRoot, 'review-files'),
+    rendererBuildId: 'renderer-single-paper-promotion-verifier',
+  })
+  const manifest = reviewManifestFor(fixture.reviewRoot, fixture.projection)
+  const created = reviewStore.createRevision(manifest)
+  for (const file of manifest.files) {
+    const upload = reviewStore.fileForUpload(created.revision.id, file.path)
+    const bytes = readFileSync(resolveReviewFile(fixture.reviewRoot, file.path))
+    mkdirSync(path.dirname(upload.destination), { recursive: true })
+    writeFileSync(upload.destination, bytes)
+    reviewStore.completeFileUpload(created.revision.id, file.path, {
+      sha256: file.sha256,
+      byteLength: file.byteLength,
+    })
+  }
+  const revision = reviewStore.finalizeRevision(created.revision.id)
+  const approval = reviewStore.approveRevision(
+    fixturePaperId,
+    revision.id,
+    { bundleDigest: revision.bundleDigest },
+    'synthetic-owner',
+  )
+  const dbPath = path.join(tempRoot, 'question-bank.sqlite')
+  const setupDb = new DatabaseSync(dbPath)
+  setupDb.exec(readFileSync(path.join(root, 'data/sql/schema.sql'), 'utf8'))
+  setupDb.close()
+  const openDatabase = ({ readOnly = false } = {}) => {
+    const db = new DatabaseSync(dbPath, { readOnly })
+    db.exec('PRAGMA foreign_keys = ON')
+    return db
+  }
+  return {
+    ...fixture,
+    tempRoot,
+    reviewStore,
+    revision,
+    approval,
+    dbPath,
+    openDatabase,
+    paperAssetsDir: path.join(tempRoot, 'paper-assets'),
+  }
+}
+
+function promotionRequest(approval, intent = 'ship') {
+  return {
+    intent,
+    approvalId: approval.approvalId,
+    revisionId: approval.revisionId,
+    sourceDigest: approval.sourceDigest,
+    candidateDigest: approval.candidateDigest,
+    visibleStructureDigest: approval.visibleStructureDigest,
+    analysisDigest: approval.analysisDigest,
+    bundleDigest: approval.bundleDigest,
+  }
+}
+
+async function startPromotionServer(context, promotionService) {
+  const routes = createImportReviewRoutes({
+    getStore: () => context.reviewStore,
+    agentToken: 'synthetic-agent-token',
+    shipToken: 'synthetic-ship-token',
+    buildPrintHtml,
+    promotionService,
+  })
+  const server = createServer(async (request, response) => {
+    const url = new URL(request.url || '/', 'http://127.0.0.1')
+    const staticFile = {
+      '/ops/': ['index.html', 'text/html; charset=utf-8'],
+      '/ops/index.html': ['index.html', 'text/html; charset=utf-8'],
+      '/ops/app.js': ['app.js', 'text/javascript; charset=utf-8'],
+      '/ops/styles.css': ['styles.css', 'text/css; charset=utf-8'],
+      '/ops/source-intakes.css': ['source-intakes.css', 'text/css; charset=utf-8'],
+    }[url.pathname]
+    if (staticFile) {
+      const bytes = readFileSync(path.join(root, 'import-ops/public', staticFile[0]))
+      response.writeHead(200, {
+        'content-length': bytes.byteLength,
+        'content-type': staticFile[1],
+      })
+      response.end(bytes)
+      return
+    }
+    if (url.pathname === '/api/auth/me') {
+      const bytes = Buffer.from(JSON.stringify({
+        authRequired: true,
+        user: { role: 'owner', accountKind: 'human', username: 'synthetic-owner' },
+      }))
+      response.writeHead(200, {
+        'content-length': bytes.byteLength,
+        'content-type': 'application/json',
+      })
+      response.end(bytes)
+      return
+    }
+    const handled = await runRoutes(routes, {
+      request,
+      response,
+      url,
+      context: {
+        session: request.headers['x-synthetic-owner']
+          ? { role: 'owner', accountKind: 'human', username: 'synthetic-owner' }
+          : null,
+        readJsonBody: readJsonRouteBody,
+        sendJson(target, status, body) {
+          const bytes = Buffer.from(JSON.stringify(body))
+          target.writeHead(status, {
+            'content-length': bytes.byteLength,
+            'content-type': 'application/json',
+          })
+          target.end(bytes)
+        },
+      },
+    })
+    if (!handled) {
+      response.writeHead(404, { 'content-type': 'application/json' })
+      response.end(JSON.stringify({ error: 'not found' }))
+    }
+  })
+  await new Promise((resolve, reject) => {
+    server.once('error', reject)
+    server.listen(0, '127.0.0.1', resolve)
+  })
+  const address = server.address()
+  assert(address && typeof address === 'object')
+  return { server, origin: `http://127.0.0.1:${address.port}` }
 }
 
 function analysisDigestAt(baseDir) {
@@ -1138,6 +1295,430 @@ try {
   )
 } finally {
   close(postCommit)
+}
+
+const online = makeOnlinePromotionContext('online')
+let onlineServer = null
+let onlineBrowser = null
+try {
+  const beforeDb = online.openDatabase({ readOnly: true })
+  const beforeGroupIds = beforeDb.prepare('SELECT id FROM question_groups ORDER BY id')
+    .all().map(({ id }) => id)
+  beforeDb.close()
+  assert(!existsSync(path.join(online.paperAssetsDir, paperId)))
+  assert.equal(online.reviewStore.agentPaperStatus(paperId).promotion, null)
+
+  const promotionService = createSinglePaperPromotionService({
+    getStore: () => online.reviewStore,
+    openDatabase: online.openDatabase,
+    paperAssetsDir: online.paperAssetsDir,
+  })
+  const started = await startPromotionServer(online, promotionService)
+  onlineServer = started.server
+  const playwright = await import('../app/node_modules/playwright/index.js')
+  onlineBrowser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
+  const reviewPage = await onlineBrowser.newPage({
+    extraHTTPHeaders: { 'x-synthetic-owner': '1' },
+    viewport: { width: 1440, height: 1000 },
+  })
+  await reviewPage.goto(`${started.origin}/ops/?view=review`)
+  const promotionRail = reviewPage.getByRole('heading', { name: '上线审计' }).locator('..')
+  await promotionRail.getByText('已认可，未上线', { exact: true }).waitFor()
+  await promotionRail.getByText(`上线 ${paperId}`, { exact: true }).waitFor()
+  assert.equal(
+    await promotionRail.getByRole('button', { name: /上线/u }).count(),
+    0,
+    'approved Review audit rail exposes no publish button',
+  )
+  const pathname = `/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}/promotions`
+  const body = JSON.stringify(promotionRequest(online.approval))
+  for (const headers of [
+    { authorization: 'Bearer synthetic-agent-token' },
+    { 'x-synthetic-owner': '1' },
+  ]) {
+    const denied = await fetch(`${started.origin}${pathname}`, {
+      method: 'POST',
+      headers: { ...headers, 'content-type': 'application/json' },
+      body,
+    })
+    assert.equal(denied.status, 401, 'Agent and Owner web identities cannot promote')
+    assert.equal((await denied.json()).error, 'shipping_auth_required')
+  }
+  const stale = await fetch(`${started.origin}${pathname}`, {
+    method: 'POST',
+    headers: {
+      authorization: 'Bearer synthetic-ship-token',
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify({
+      ...promotionRequest(online.approval),
+      bundleDigest: `sha256:${'0'.repeat(64)}`,
+    }),
+  })
+  assert.equal(stale.status, 409)
+  assert.equal((await stale.json()).code, 'IMPORT_REVIEW_PROMOTION_STALE')
+  assert.equal(online.reviewStore.latestPromotion(paperId), null)
+
+  const promoted = await fetch(`${started.origin}${pathname}`, {
+    method: 'POST',
+    headers: {
+      authorization: 'Bearer synthetic-ship-token',
+      'content-type': 'application/json',
+    },
+    body,
+  })
+  assert.equal(promoted.status, 201)
+  const promotedBody = await promoted.json()
+  assert.equal(promotedBody.status, 'published')
+  assert.equal(promotedBody.promotion.state, 'published')
+  assert.equal(promotedBody.promotion.versionName, 'v1')
+  assert.equal(promotedBody.promotion.revisionId, online.approval.revisionId)
+  assert.equal(
+    promotedBody.promotion.analysisPublicationDigest,
+    analysisDigestAt(path.join(online.paperAssetsDir, paperId, 'versions/v1')),
+  )
+  await reviewPage.reload()
+  const publishedRail = reviewPage.getByRole('heading', { name: '上线审计' }).locator('..')
+  await publishedRail.getByText('已上线', { exact: true }).waitFor()
+  assert.match(await publishedRail.textContent(), /R1 · v1 · 尝试 1/u)
+  assert.equal(
+    await publishedRail.getByRole('button', { name: /上线/u }).count(),
+    0,
+    'published Review audit rail remains read-only',
+  )
+
+  const afterDb = online.openDatabase({ readOnly: true })
+  const afterGroupIds = afterDb.prepare('SELECT id FROM question_groups ORDER BY id')
+    .all().map(({ id }) => id)
+  const addedGroupIds = afterGroupIds.filter((id) => !beforeGroupIds.includes(id))
+  assert.deepEqual(
+    addedGroupIds.sort(),
+    Object.keys(online.projection.paperAsset.content.groups).sort(),
+    'single-paper promotion changes only the approved paper formal groups',
+  )
+  assert.equal(
+    afterDb.prepare('SELECT COUNT(*) AS count FROM paper_asset_versions WHERE paper_id = ?')
+      .get(paperId).count,
+    1,
+  )
+  afterDb.close()
+  for (const base of [
+    path.join(online.paperAssetsDir, paperId, 'versions/v1'),
+    path.join(online.paperAssetsDir, paperId, 'latest'),
+  ]) {
+    assert(existsSync(path.join(base, 'paper-asset.json')))
+    assert.equal(analysisDigestAt(base), promotedBody.promotion.analysisPublicationDigest)
+  }
+  const agentStatusResponse = await fetch(
+    `${started.origin}/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`,
+    { headers: { authorization: 'Bearer synthetic-agent-token' } },
+  )
+  assert.equal(agentStatusResponse.status, 200)
+  assert.equal((await agentStatusResponse.json()).promotion.state, 'published')
+
+  const duplicate = await fetch(`${started.origin}${pathname}`, {
+    method: 'POST',
+    headers: {
+      authorization: 'Bearer synthetic-ship-token',
+      'content-type': 'application/json',
+    },
+    body,
+  })
+  assert.equal(duplicate.status, 200)
+  assert.equal((await duplicate.json()).status, 'idempotent')
+  const duplicateDb = online.openDatabase({ readOnly: true })
+  assert.equal(
+    duplicateDb.prepare('SELECT COUNT(*) AS count FROM paper_asset_versions WHERE paper_id = ?')
+      .get(paperId).count,
+    1,
+  )
+  duplicateDb.close()
+  const inspected = promotionService.promote(
+    paperId,
+    promotionRequest(online.approval),
+    'ship-authorizer-token',
+  )
+  assert.equal(inspected.status, 'idempotent')
+  assert.equal(inspected.consumers.screen.disposition, 'ready')
+  assert.equal(inspected.consumers.print_pdf.disposition, 'ready')
+  assert.equal(
+    inspected.consumers.screen.visibleStructureDigest,
+    inspected.consumers.print_pdf.visibleStructureDigest,
+  )
+  const promotedByCli = await runReviewCommand(
+    ['promote', paperId, '--owner-said-ship'],
+    {
+      QUESTION_BANK_IMPORT_OPS_ORIGIN: started.origin,
+      QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN: 'synthetic-agent-token',
+      QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN: 'synthetic-ship-token',
+    },
+  )
+  assert.match(promotedByCli.stdout, /"status": "idempotent"/)
+  assert.match(promotedByCli.stdout, /R2 backup remains asynchronous/)
+
+  const nextFixture = makeReviewRoot(
+    path.join(online.tempRoot, 'next-approved-revision'),
+    paperId,
+    'newer approved synthetic source that has not been promoted',
+  )
+  const nextManifest = reviewManifestFor(nextFixture.reviewRoot, nextFixture.projection)
+  const nextCreated = online.reviewStore.createRevision(nextManifest)
+  for (const file of nextManifest.files) {
+    const upload = online.reviewStore.fileForUpload(nextCreated.revision.id, file.path)
+    const bytes = readFileSync(resolveReviewFile(nextFixture.reviewRoot, file.path))
+    mkdirSync(path.dirname(upload.destination), { recursive: true })
+    writeFileSync(upload.destination, bytes)
+    online.reviewStore.completeFileUpload(nextCreated.revision.id, file.path, {
+      sha256: file.sha256,
+      byteLength: file.byteLength,
+    })
+  }
+  const nextRevision = online.reviewStore.finalizeRevision(nextCreated.revision.id)
+  online.reviewStore.approveRevision(
+    paperId,
+    nextRevision.id,
+    { bundleDigest: nextRevision.bundleDigest },
+    'synthetic-owner',
+  )
+  await reviewPage.reload()
+  const nextApprovalRail = reviewPage.getByRole('heading', { name: '上线审计' }).locator('..')
+  await nextApprovalRail.getByText('已认可，未上线', { exact: true }).waitFor()
+  await nextApprovalRail.getByText(`上线 ${paperId}`, { exact: true }).waitFor()
+  assert.match(await nextApprovalRail.textContent(), /上一份上线回执：已上线 · v1/u)
+  const paperListButton = reviewPage.locator(
+    `.paper-list button[data-paper-id="${paperId}"]`,
+  )
+  assert.equal(
+    await paperListButton.locator('.status--published').count(),
+    0,
+    'paper list does not label a newer unshipped approval as published',
+  )
+  assert.equal(
+    await nextApprovalRail.getByRole('button', { name: /上线/u }).count(),
+    0,
+    'a newer approved revision stays visibly unshipped and exposes no publish button',
+  )
+  const opsSource = readFileSync(path.join(root, 'import-ops/public/app.js'), 'utf8')
+  assert.match(opsSource, /上线审计/)
+  assert(!opsSource.includes('/promotions'), 'Review UI has no promotion mutation call')
+} finally {
+  if (onlineBrowser) await onlineBrowser.close()
+  if (onlineServer) await new Promise((resolve) => onlineServer.close(resolve))
+  rmSync(online.tempRoot, { recursive: true, force: true })
+}
+
+const preCommitPromotion = makeOnlinePromotionContext('precommit')
+try {
+  const service = createSinglePaperPromotionService({
+    getStore: () => preCommitPromotion.reviewStore,
+    openDatabase: preCommitPromotion.openDatabase,
+    paperAssetsDir: preCommitPromotion.paperAssetsDir,
+    publish(input) {
+      return publishUniversalNck1Import({ ...input, failurePoint: 'db-write' })
+    },
+  })
+  assert.throws(
+    () => service.promote(
+      paperId,
+      promotionRequest(preCommitPromotion.approval),
+      'ship-authorizer-token',
+    ),
+    /Forced db-write failure/,
+  )
+  const publishing = preCommitPromotion.reviewStore.latestPromotion(paperId)
+  assert.equal(publishing.state, 'publishing')
+  assert.equal(publishing.versionName, 'v1')
+  assert.throws(
+    () => preCommitPromotion.reviewStore.createRevision(
+      reviewManifestFor(preCommitPromotion.reviewRoot, preCommitPromotion.projection),
+    ),
+    (error) => error.code === 'IMPORT_REVIEW_SHIPPING_IN_PROGRESS',
+    'Review mutation remains frozen after an unknown publication failure',
+  )
+  const rolledBackDb = preCommitPromotion.openDatabase({ readOnly: true })
+  assert.equal(
+    rolledBackDb.prepare('SELECT COUNT(*) AS count FROM question_groups WHERE id LIKE ?')
+      .get('group-%').count,
+    0,
+  )
+  assert.equal(
+    rolledBackDb.prepare('SELECT COUNT(*) AS count FROM paper_asset_versions WHERE paper_id = ?')
+      .get(paperId).count,
+    0,
+  )
+  rolledBackDb.close()
+  assert(!existsSync(path.join(preCommitPromotion.paperAssetsDir, paperId, 'latest')))
+  const aborted = preCommitPromotion.reviewStore.releaseShippingGuard(
+    paperId,
+    publishing.guardId,
+    'ship-authorizer-token',
+  )
+  assert.equal(aborted.released, true)
+  assert.equal(aborted.promotion.state, 'failed')
+  assert.equal(aborted.promotion.failureCode, 'IMPORT_REVIEW_PROMOTION_ABORTED')
+  const recovered = createSinglePaperPromotionService({
+    getStore: () => preCommitPromotion.reviewStore,
+    openDatabase: preCommitPromotion.openDatabase,
+    paperAssetsDir: preCommitPromotion.paperAssetsDir,
+  }).promote(
+    paperId,
+    promotionRequest(preCommitPromotion.approval, 'retry_ship'),
+    'ship-authorizer-token',
+  )
+  assert.equal(recovered.status, 'published')
+  assert.equal(recovered.promotion.versionName, 'v1')
+} finally {
+  rmSync(preCommitPromotion.tempRoot, { recursive: true, force: true })
+}
+
+const committedWithoutReceipt = makeOnlinePromotionContext('committed-without-receipt')
+try {
+  const interrupted = createSinglePaperPromotionService({
+    getStore: () => committedWithoutReceipt.reviewStore,
+    openDatabase: committedWithoutReceipt.openDatabase,
+    paperAssetsDir: committedWithoutReceipt.paperAssetsDir,
+    afterPublish() {
+      throw new Error('forced receipt crash')
+    },
+  })
+  assert.throws(
+    () => interrupted.promote(
+      paperId,
+      promotionRequest(committedWithoutReceipt.approval),
+      'ship-authorizer-token',
+    ),
+    /forced receipt crash/,
+  )
+  assert.equal(committedWithoutReceipt.reviewStore.latestPromotion(paperId).state, 'publishing')
+  assert.throws(
+    () => committedWithoutReceipt.reviewStore.createIssue(paperId, {
+      revisionId: committedWithoutReceipt.revision.id,
+      surface: 'screen',
+      groupId: 'group:reading-a',
+      message: 'must remain frozen',
+    }, 'synthetic-owner'),
+    (error) => error.code === 'IMPORT_REVIEW_SHIPPING_IN_PROGRESS',
+  )
+  const resumed = createSinglePaperPromotionService({
+    getStore: () => committedWithoutReceipt.reviewStore,
+    openDatabase: committedWithoutReceipt.openDatabase,
+    paperAssetsDir: committedWithoutReceipt.paperAssetsDir,
+    publish() {
+      throw new Error('publisher must not run for committed promotion recovery')
+    },
+  }).promote(
+    paperId,
+    promotionRequest(committedWithoutReceipt.approval, 'retry_ship'),
+    'ship-authorizer-token',
+  )
+  assert.equal(resumed.status, 'idempotent')
+  assert.equal(resumed.promotion.state, 'published')
+  assert.equal(resumed.promotion.versionName, 'v1')
+  const recoveredDb = committedWithoutReceipt.openDatabase({ readOnly: true })
+  assert.equal(
+    recoveredDb.prepare('SELECT COUNT(*) AS count FROM paper_asset_versions WHERE paper_id = ?')
+      .get(paperId).count,
+    1,
+  )
+  recoveredDb.close()
+} finally {
+  rmSync(committedWithoutReceipt.tempRoot, { recursive: true, force: true })
+}
+
+const committedJournal = makeOnlinePromotionContext('committed-journal')
+try {
+  const interrupted = createSinglePaperPromotionService({
+    getStore: () => committedJournal.reviewStore,
+    openDatabase: committedJournal.openDatabase,
+    paperAssetsDir: committedJournal.paperAssetsDir,
+    publish(input) {
+      return publishUniversalNck1Import({ ...input, failurePoint: 'committed-reload' })
+    },
+  })
+  assert.throws(
+    () => interrupted.promote(
+      paperId,
+      promotionRequest(committedJournal.approval),
+      'ship-authorizer-token',
+    ),
+    /Forced committed canonical reload failure/,
+  )
+  const journalPath = path.join(
+    committedJournal.paperAssetsDir,
+    paperId,
+    '.latest-swap.json',
+  )
+  assert(existsSync(journalPath), 'committed publisher crash leaves its recovery journal')
+  assert.equal(committedJournal.reviewStore.latestPromotion(paperId).state, 'publishing')
+  const resumed = createSinglePaperPromotionService({
+    getStore: () => committedJournal.reviewStore,
+    openDatabase: committedJournal.openDatabase,
+    paperAssetsDir: committedJournal.paperAssetsDir,
+    publish() {
+      throw new Error('publisher must not start after committed journal recovery')
+    },
+  }).promote(
+    paperId,
+    promotionRequest(committedJournal.approval, 'retry_ship'),
+    'ship-authorizer-token',
+  )
+  assert.equal(resumed.status, 'idempotent')
+  assert.equal(resumed.promotion.state, 'published')
+  assert.equal(resumed.promotion.versionName, 'v1')
+  assert(!existsSync(journalPath), 'exact retry finalizes the committed publisher journal')
+  assert.equal(
+    readdirSync(path.join(committedJournal.paperAssetsDir, paperId))
+      .filter((name) => name.startsWith('.latest-')).length,
+    0,
+    'committed promotion recovery leaves no latest-swap residue',
+  )
+} finally {
+  rmSync(committedJournal.tempRoot, { recursive: true, force: true })
+}
+
+const knownFailure = makeOnlinePromotionContext('known-failure')
+try {
+  const failed = createSinglePaperPromotionService({
+    getStore: () => knownFailure.reviewStore,
+    openDatabase: knownFailure.openDatabase,
+    paperAssetsDir: knownFailure.paperAssetsDir,
+    publish() {
+      return {
+        ok: false,
+        status: 'validation_failed',
+        validation: {
+          blockingIssues: [{ code: 'SYNTHETIC_ADMISSION_FAILURE', message: 'synthetic known failure' }],
+        },
+      }
+    },
+  }).promote(
+    paperId,
+    promotionRequest(knownFailure.approval),
+    'ship-authorizer-token',
+  )
+  assert.equal(failed.status, 'failed')
+  assert.equal(failed.promotion.state, 'failed')
+  assert.throws(
+    () => knownFailure.reviewStore.beginPromotion(
+      paperId,
+      promotionRequest(knownFailure.approval),
+      'ship-authorizer-token',
+    ),
+    (error) => error.code === 'IMPORT_REVIEW_PROMOTION_RETRY_REQUIRED',
+  )
+  const retried = createSinglePaperPromotionService({
+    getStore: () => knownFailure.reviewStore,
+    openDatabase: knownFailure.openDatabase,
+    paperAssetsDir: knownFailure.paperAssetsDir,
+  }).promote(
+    paperId,
+    promotionRequest(knownFailure.approval, 'retry_ship'),
+    'ship-authorizer-token',
+  )
+  assert.equal(retried.status, 'published')
+  assert.equal(retried.promotion.attemptCount, 2)
+} finally {
+  rmSync(knownFailure.tempRoot, { recursive: true, force: true })
 }
 
 const cliTempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-universal-publish-cli-'))

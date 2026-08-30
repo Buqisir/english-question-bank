@@ -1,8 +1,8 @@
 # 02 — Approved revision to one atomic production paper
 
-Status: planned
+Status: done
 Spec: `../spec.md`
-Blocked by: none; may be implemented after ticket 01 in the same isolated branch
+Blocked by: none
 
 ## Deliver
 
@@ -20,3 +20,9 @@ Blocked by: none; may be implemented after ticket 01 in the same isolated branch
 Synthetic exact-bundle publication, auth isolation, nonvisibility, one-paper DB
 delta, five sidecars/media, stale/concurrent guard, forced rollback, committed
 recovery, duplicate no-op, and four-surface consistency all pass.
+
+Verified with:
+
+- `node scripts/verify-universal-nck1-publish.mjs`
+- `node scripts/verify-auth-gate.mjs`
+- `node scripts/verify-launch-deploy.mjs`

@@ -467,7 +467,7 @@ try {
   const approvedReviewStatus = {
     paperId,
     latestRevisionId: revisionId,
-    latest: { id: revisionId, state: 'approved', bundleDigest },
+    latest: { id: revisionId, state: 'approved', reviewKind: 'candidate', bundleDigest },
     approval: webApproval,
   }
   writeFileSync(join(paperDir, 'config.json'), JSON.stringify({
@@ -588,6 +588,44 @@ try {
   const stopCmd = `sh -c "test -f ${JSON.stringify(reviewGuardPath)} || exit 97; echo GUARD >> ${JSON.stringify(stopLog)}; shasum -a 256 ${JSON.stringify(remoteDb)} >> ${JSON.stringify(stopLog)}; echo STOP >> ${JSON.stringify(stopLog)}"`
   const startCmd = `sh -c "echo START >> ${JSON.stringify(stopLog)}"`
 
+  const retiredPushRun = spawnSync(
+    'node',
+    [pullRunPushPath, 'push', paperId, '--owner-said-ship'],
+    {
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        EQB_REMOTE: `local:${remoteDir}`,
+        EQB_LOCAL_REPO: localDir,
+        EQB_SERVICE_STOP: stopCmd,
+        EQB_SERVICE_START: startCmd,
+        QUESTION_BANK_IMPORT_OPS_ORIGIN: reviewOrigin,
+        QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN: 'test-agent-token',
+        QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN: 'test-ship-token',
+      },
+    },
+  )
+  assert(
+    retiredPushRun.status !== 0
+      && retiredPushRun.stderr.includes('whole-DB push is retired for Review-backed paper'),
+    'VA5.0a: Review-backed Candidate whole-DB push refuses and points to single-paper promotion',
+  )
+  assert(
+    sha256Of(remoteDb) === recordedQuestionBank.sha256A
+      && statSync(remoteDb).ino === recordedQuestionBank.ino
+      && !existsSync(reviewGuardPath)
+      && !existsSync(stopLog),
+    'VA5.0b: Review-backed refusal happens before guard, STOP, backup, transfer, or swap',
+  )
+
+  // Keep the historical swap recipe covered through an explicit legacy
+  // compatibility seam. Current Review API Candidates always identify their
+  // review kind and therefore never reach this path.
+  writeFileSync(reviewStatusPath, JSON.stringify({
+    ...approvedReviewStatus,
+    latest: { ...approvedReviewStatus.latest, reviewKind: 'legacy' },
+  }))
+
   const pushRun = spawnSync(
     'node',
     [pullRunPushPath, 'push', paperId, '--owner-said-ship'],
@@ -605,7 +643,7 @@ try {
       },
     },
   )
-  assert(pushRun.status === 0, `push exits 0 against the fake-remote fixture${pushRun.status !== 0 ? ' — stderr: ' + (pushRun.stderr || '').trim() + ' / stdout: ' + (pushRun.stdout || '').trim() : ''}`)
+  assert(pushRun.status === 0, `legacy push exits 0 against the fake-remote fixture${pushRun.status !== 0 ? ' — stderr: ' + (pushRun.stderr || '').trim() + ' / stdout: ' + (pushRun.stdout || '').trim() : ''}`)
 
   // (1) fake-remote user-data.sqlite identical (size + mtime + sha256).
   const afterUserDataStat = statSync(remoteUserData)

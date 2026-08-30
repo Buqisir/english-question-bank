@@ -68,11 +68,23 @@ function token() {
   return value
 }
 
-async function api(pathname, init = {}, { allowNotFound = false } = {}) {
+function shippingToken() {
+  const value = String(process.env.QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN || '')
+  if (!value) fail('QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN is required for promotion')
+  if (value === token()) fail('Import Agent and shipping tokens must be different')
+  return value
+}
+
+async function api(
+  pathname,
+  init = {},
+  { allowNotFound = false, credential = 'agent' } = {},
+) {
+  const credentialToken = credential === 'shipping' ? shippingToken() : token()
   const response = await fetch(`${origin()}${pathname}`, {
     ...init,
     headers: {
-      authorization: `Bearer ${token()}`,
+      authorization: `Bearer ${credentialToken}`,
       ...(init.headers || {}),
     },
   })
@@ -545,9 +557,65 @@ async function releaseShipGuard(paperId, guardId) {
   console.log(JSON.stringify({ paperId, guardId, ...result }, null, 2))
 }
 
+async function promote(paperId) {
+  const ship = process.argv.includes('--owner-said-ship')
+  const retry = process.argv.includes('--owner-said-retry-ship')
+  const allowed = new Set([
+    'promote',
+    paperId,
+    '--owner-said-ship',
+    '--owner-said-retry-ship',
+  ])
+  const unknown = process.argv.slice(2).filter((argument) => !allowed.has(argument))
+  if (unknown.length > 0 || ship === retry) {
+    fail(
+      'promote requires exactly one current Owner authorization flag: '
+        + '--owner-said-ship or --owner-said-retry-ship',
+    )
+  }
+  const status = await api(
+    `/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`,
+  )
+  const approval = status.approval
+  if (!approval || approval.paperId !== paperId) {
+    fail('The latest renderer-current Candidate has no exact Owner approval')
+  }
+  const identity = {
+    approvalId: approval.approvalId,
+    revisionId: approval.revisionId,
+    sourceDigest: approval.sourceDigest,
+    candidateDigest: approval.candidateDigest,
+    visibleStructureDigest: approval.visibleStructureDigest,
+    analysisDigest: approval.analysisDigest,
+    bundleDigest: approval.bundleDigest,
+  }
+  console.log(JSON.stringify({
+    action: retry ? 'retry_ship' : 'ship',
+    paperId,
+    ...identity,
+  }, null, 2))
+  const result = await api(
+    `/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}/promotions`,
+    {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        ...identity,
+        intent: retry ? 'retry_ship' : 'ship',
+      }),
+    },
+    { credential: 'shipping' },
+  )
+  console.log(JSON.stringify({
+    status: result.status,
+    promotion: result.promotion,
+    backupBoundary: 'Production R2 backup remains asynchronous and is not part of this receipt.',
+  }, null, 2))
+}
+
 async function main() {
   const [command, paperId, issueId] = process.argv.slice(2)
-  assertNotNck1SourceOnly(paperId, command)
+  if (command !== 'promote') assertNotNck1SourceOnly(paperId, command)
   if (command === 'push') await pushRevision(paperId)
   else if (command === 'push-ocr') await pushOcrReview(paperId)
   else if (command === 'pull-ocr-confirmation') await pullOcrConfirmation(paperId)
@@ -557,6 +625,7 @@ async function main() {
   else if (command === 'reply') await reply(paperId, issueId)
   else if (command === 'accept') await accept(paperId)
   else if (command === 'publish') await publish(paperId)
+  else if (command === 'promote') await promote(paperId)
   else if (command === 'release-ship-guard') await releaseShipGuard(paperId, issueId)
   else fail(
     'Usage: review.mjs push <paperId> [--resolves issue-1,issue-2] | '
@@ -564,6 +633,7 @@ async function main() {
       + 'preflight <paperId> | verify-analyses <paperId> | status <paperId> | '
       + 'reply <paperId> <issueId> --message <text> | '
       + 'accept <paperId> | publish <paperId> | '
+      + 'promote <paperId> --owner-said-ship|--owner-said-retry-ship | '
       + 'release-ship-guard <paperId> <guardId> --owner-said-abort-ship',
   )
 }

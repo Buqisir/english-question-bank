@@ -1,8 +1,9 @@
 # 03 — Rollout, secret activation, and first real pilot
 
-Status: blocked on direct Owner authorization
+Status: repository portion complete; activation and pilot blocked on direct Owner authorization
 Spec: `../spec.md`
-Blocked by: tickets 01 and 02 plus all synthetic/final gates
+Blocked by: shared configuration, deploy, and real-paper actions require a new
+direct Owner authorization after final repository gates
 
 ## Repository deliverable
 

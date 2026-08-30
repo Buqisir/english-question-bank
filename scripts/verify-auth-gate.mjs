@@ -63,6 +63,16 @@ const importAgentToken = 'verify-import-agent-token'
 const importShipToken = 'verify-import-ship-token'
 const rotatedImportAgentToken = 'verify-rotated-import-agent-token'
 const rotatedImportShipToken = 'verify-rotated-import-ship-token'
+const promotionProbeBody = {
+  intent: 'ship',
+  approvalId: 'approval-auth-probe',
+  revisionId: 'revision-auth-probe',
+  sourceDigest: `sha256:${'1'.repeat(64)}`,
+  candidateDigest: `sha256:${'2'.repeat(64)}`,
+  visibleStructureDigest: `sha256:${'3'.repeat(64)}`,
+  analysisDigest: `sha256:${'4'.repeat(64)}`,
+  bundleDigest: `sha256:${'5'.repeat(64)}`,
+}
 
 async function freePort() {
   const server = createServer()
@@ -580,6 +590,36 @@ async function main() {
         bearerGuardRelease.json?.error === 'shipping_auth_required',
       `got status=${bearerGuardRelease.status} body=${JSON.stringify(bearerGuardRelease.json)}`,
     )
+    const bearerPromotionAttempt = await req(
+      '/api/import-agent-reviews/papers/paper-missing/promotions',
+      {
+        method: 'POST',
+        authorization: `Bearer ${importAgentToken}`,
+        body: promotionProbeBody,
+      },
+    )
+    const ownerPromotionAttempt = await req(
+      '/api/import-agent-reviews/papers/paper-missing/promotions',
+      { method: 'POST', cookie, body: promotionProbeBody },
+    )
+    const shipPromotionAttempt = await req(
+      '/api/import-agent-reviews/papers/paper-missing/promotions',
+      {
+        method: 'POST',
+        authorization: `Bearer ${importShipToken}`,
+        body: promotionProbeBody,
+      },
+    )
+    assert(
+      '(c) single-paper promotion accepts only the independent shipping credential',
+      bearerPromotionAttempt.status === 401 &&
+        bearerPromotionAttempt.json?.error === 'shipping_auth_required' &&
+        ownerPromotionAttempt.status === 401 &&
+        ownerPromotionAttempt.json?.error === 'shipping_auth_required' &&
+        shipPromotionAttempt.status === 404 &&
+        shipPromotionAttempt.json?.code === 'IMPORT_REVIEW_NOT_FOUND',
+      `agent=${JSON.stringify(bearerPromotionAttempt.json)} owner=${JSON.stringify(ownerPromotionAttempt.json)} ship=${JSON.stringify(shipPromotionAttempt.json)}`,
+    )
     const shipCredentialGuardRelease = await req(
       '/api/import-agent-reviews/papers/paper-missing/shipping-guards/guard-missing',
       {
@@ -670,6 +710,10 @@ async function main() {
       '/api/import-agent-reviews/papers/paper-missing/shipping-guards/guard-missing',
       { method: 'DELETE', cookie: agentCookie },
     )
+    const agentPromotionAttempt = await req(
+      '/api/import-agent-reviews/papers/paper-missing/promotions',
+      { method: 'POST', cookie: agentCookie, body: promotionProbeBody },
+    )
     const agentOrdinaryApi = await req('/api/draft-papers', { cookie: agentCookie })
     const agentOwnerApi = await req('/api/import-reviews', { cookie: agentCookie })
     const agentSourceOwnerApi = await req('/api/source-intakes', { cookie: agentCookie })
@@ -698,10 +742,12 @@ async function main() {
       `ordinary=${JSON.stringify(agentOrdinaryApi.json)} owner=${JSON.stringify(agentOwnerApi.json)} sources=${JSON.stringify(agentSourceOwnerApi.json)}`,
     )
     assert(
-      '(c) import_agent account cannot acquire or release a shipping guard',
+      '(c) import_agent account cannot acquire/release a shipping guard or promote',
       agentGuardRelease.status === 401 &&
-        agentGuardRelease.json?.error === 'shipping_auth_required',
-      `got status=${agentGuardRelease.status} body=${JSON.stringify(agentGuardRelease.json)}`,
+        agentGuardRelease.json?.error === 'shipping_auth_required' &&
+        agentPromotionAttempt.status === 401 &&
+        agentPromotionAttempt.json?.error === 'shipping_auth_required',
+      `guard=${JSON.stringify(agentGuardRelease.json)} promotion=${JSON.stringify(agentPromotionAttempt.json)}`,
     )
 
     const defaultStudents = await req('/api/vocabulary/students', { cookie })

@@ -316,10 +316,37 @@ function ensureShape(db) {
       acquired_by TEXT NOT NULL,
       acquired_at TEXT NOT NULL
     );
+    CREATE TABLE IF NOT EXISTS import_review_promotions (
+      id TEXT PRIMARY KEY,
+      paper_id TEXT NOT NULL REFERENCES import_review_papers(paper_id) ON DELETE CASCADE,
+      revision_id TEXT NOT NULL REFERENCES import_review_revisions(id),
+      approval_id TEXT NOT NULL UNIQUE,
+      source_digest TEXT NOT NULL,
+      candidate_digest TEXT NOT NULL,
+      visible_structure_digest TEXT NOT NULL,
+      analysis_digest TEXT NOT NULL,
+      bundle_digest TEXT NOT NULL,
+      guard_id TEXT NOT NULL UNIQUE,
+      state TEXT NOT NULL CHECK (state IN ('publishing', 'published', 'failed')),
+      attempt_count INTEGER NOT NULL DEFAULT 1,
+      requested_by TEXT NOT NULL,
+      requested_at TEXT NOT NULL,
+      asset_version INTEGER,
+      version_name TEXT,
+      canonical_publication_digest TEXT,
+      analysis_publication_digest TEXT,
+      failure_code TEXT,
+      failure_message TEXT,
+      failed_at TEXT,
+      published_at TEXT,
+      updated_at TEXT NOT NULL
+    );
     CREATE INDEX IF NOT EXISTS idx_import_review_revisions_paper
       ON import_review_revisions(paper_id, revision_number DESC);
     CREATE INDEX IF NOT EXISTS idx_import_review_issues_paper
       ON import_review_issues(paper_id, state, created_at);
+    CREATE INDEX IF NOT EXISTS idx_import_review_promotions_paper
+      ON import_review_promotions(paper_id, requested_at DESC);
   `)
   const issueColumns = new Set(db.prepare('PRAGMA table_info(import_review_issues)').all()
     .map((column) => column.name))
@@ -409,6 +436,36 @@ function shippingGuardRow(row) {
     approvalId: row.approval_id,
     acquiredBy: row.acquired_by,
     acquiredAt: row.acquired_at,
+  }
+}
+
+function promotionRow(row) {
+  if (!row) return null
+  return {
+    schemaVersion: 'web-import-review-promotion-v1',
+    promotionId: row.id,
+    paperId: row.paper_id,
+    revisionId: row.revision_id,
+    approvalId: row.approval_id,
+    sourceDigest: row.source_digest,
+    candidateDigest: row.candidate_digest,
+    visibleStructureDigest: row.visible_structure_digest,
+    analysisDigest: row.analysis_digest,
+    bundleDigest: row.bundle_digest,
+    guardId: row.guard_id,
+    state: row.state,
+    attemptCount: Number(row.attempt_count),
+    requestedBy: row.requested_by,
+    requestedAt: row.requested_at,
+    assetVersion: row.asset_version == null ? null : Number(row.asset_version),
+    versionName: row.version_name,
+    canonicalPublicationDigest: row.canonical_publication_digest,
+    analysisPublicationDigest: row.analysis_publication_digest,
+    failureCode: row.failure_code,
+    failureMessage: row.failure_message,
+    failedAt: row.failed_at,
+    publishedAt: row.published_at,
+    updatedAt: row.updated_at,
   }
 }
 
@@ -769,6 +826,13 @@ export function createImportReviewStore({
     return withDb(false, (db) => db.prepare(`
       SELECT p.paper_id, p.paper_name, p.latest_revision_id, p.updated_at,
              r.revision_number, r.state, r.bundle_digest, r.manifest_json,
+             r.approval_receipt_json,
+             (SELECT pr.state FROM import_review_promotions pr
+              WHERE pr.paper_id = p.paper_id
+              ORDER BY pr.requested_at DESC, pr.rowid DESC LIMIT 1) AS promotion_state,
+             (SELECT pr.approval_id FROM import_review_promotions pr
+              WHERE pr.paper_id = p.paper_id
+              ORDER BY pr.requested_at DESC, pr.rowid DESC LIMIT 1) AS promotion_approval_id,
              (SELECT COUNT(*) FROM import_review_issues i
               WHERE i.paper_id = p.paper_id AND i.state IN ('open', 'fixed_pending_review')) AS unresolved_count
       FROM import_review_papers p
@@ -784,6 +848,10 @@ export function createImportReviewStore({
       state: row.state || 'uploading',
       reviewKind: reviewKind(parseJson(row.manifest_json, {})),
       bundleDigest: row.bundle_digest,
+      promotionState:
+        parseJson(row.approval_receipt_json)?.approvalId === row.promotion_approval_id
+          ? row.promotion_state
+          : null,
       unresolvedCount: Number(row.unresolved_count || 0),
       updatedAt: row.updated_at,
     })))
@@ -852,6 +920,7 @@ export function createImportReviewStore({
       mediaDerivations,
       mediaConfirmations,
       ocrReview: latestProjection?.ocrReview || null,
+      promotion: latestPromotion(paperId),
       rendererStale,
       unresolvedCount: issues.filter((issue) => UNRESOLVED_ISSUE_STATES.has(issue.state)).length,
       updatedAt: paper.updated_at,
@@ -1340,6 +1409,415 @@ export function createImportReviewStore({
     })
   }
 
+  function promotionIdentity(input) {
+    return {
+      approvalId: requiredString(input?.approvalId, 'approvalId', 100),
+      revisionId: requiredString(input?.revisionId, 'revisionId', 100),
+      sourceDigest: requiredString(input?.sourceDigest, 'sourceDigest', 160),
+      candidateDigest: requiredString(input?.candidateDigest, 'candidateDigest', 160),
+      visibleStructureDigest: requiredString(
+        input?.visibleStructureDigest,
+        'visibleStructureDigest',
+        160,
+      ),
+      analysisDigest: requiredString(input?.analysisDigest, 'analysisDigest', 160),
+      bundleDigest: requiredString(input?.bundleDigest, 'bundleDigest', 160),
+    }
+  }
+
+  function assertPromotionIdentity(promotion, expected) {
+    for (const key of [
+      'approvalId',
+      'revisionId',
+      'sourceDigest',
+      'candidateDigest',
+      'visibleStructureDigest',
+      'analysisDigest',
+      'bundleDigest',
+    ]) {
+      if (promotion[key] !== expected[key]) {
+        throw storeError(
+          'IMPORT_REVIEW_PROMOTION_IDENTITY_MISMATCH',
+          `Promotion ${key} does not match its immutable approval`,
+        )
+      }
+    }
+  }
+
+  function assertCurrentApprovedRevision(db, paperId, expected) {
+    const paper = db.prepare(`
+      SELECT latest_revision_id FROM import_review_papers WHERE paper_id = ?
+    `).get(paperId)
+    if (!paper) throw storeError('IMPORT_REVIEW_NOT_FOUND', 'Paper not found', 404)
+    const revision = revisionRow(db.prepare(`
+      SELECT * FROM import_review_revisions WHERE id = ? AND paper_id = ?
+    `).get(paper.latest_revision_id, paperId))
+    const approval = revision?.approval
+    if (
+      revision?.state !== 'approved'
+      || revision.reviewKind !== 'candidate'
+      || revision.id !== expected.revisionId
+      || revision.rendererBuildId !== currentRendererBuildId()
+      || !approval
+    ) {
+      throw storeError(
+        'IMPORT_REVIEW_PROMOTION_STALE',
+        'Only the current renderer-matched approved Candidate can be promoted',
+      )
+    }
+    for (const key of [
+      'approvalId',
+      'revisionId',
+      'sourceDigest',
+      'candidateDigest',
+      'visibleStructureDigest',
+      'analysisDigest',
+      'bundleDigest',
+    ]) {
+      if (approval[key] !== expected[key]) {
+        throw storeError(
+          'IMPORT_REVIEW_PROMOTION_STALE',
+          `Promotion ${key} does not match current approval`,
+        )
+      }
+    }
+    const unresolvedCount = Number(db.prepare(`
+      SELECT COUNT(*) AS count FROM import_review_issues
+      WHERE paper_id = ? AND state IN ('open', 'fixed_pending_review')
+    `).get(paperId).count)
+    if (unresolvedCount > 0) {
+      throw storeError('IMPORT_REVIEW_ISSUES_UNRESOLVED', 'Unresolved issues block promotion')
+    }
+    assertStoredRevisionFiles(revision, db)
+    return { revision, approval }
+  }
+
+  function latestPromotion(paperId) {
+    return withDb(false, (db) => promotionRow(db.prepare(`
+      SELECT * FROM import_review_promotions
+      WHERE paper_id = ?
+      ORDER BY requested_at DESC, rowid DESC
+      LIMIT 1
+    `).get(paperId)))
+  }
+
+  function beginPromotion(paperId, input, actor) {
+    const expected = promotionIdentity(input)
+    const intent = requiredString(input?.intent, 'intent', 30)
+    if (!['ship', 'retry_ship'].includes(intent)) {
+      throw storeError('IMPORT_REVIEW_PROMOTION_INTENT_INVALID', 'Promotion intent is invalid', 400)
+    }
+    const requestedBy = requiredString(actor, 'actor', 200)
+    const requestedAt = nowIso()
+    return withDb(true, (db) => {
+      db.exec('BEGIN IMMEDIATE')
+      try {
+        const existing = promotionRow(db.prepare(`
+          SELECT * FROM import_review_promotions WHERE approval_id = ?
+        `).get(expected.approvalId))
+        if (existing) {
+          if (existing.paperId !== paperId) {
+            throw storeError(
+              'IMPORT_REVIEW_PROMOTION_IDENTITY_MISMATCH',
+              'Promotion approval belongs to another paper',
+            )
+          }
+          assertPromotionIdentity(existing, expected)
+          if (existing.state === 'published') {
+            assertCurrentApprovedRevision(db, paperId, expected)
+            db.exec('COMMIT')
+            return { action: 'already_published', promotion: existing }
+          }
+          assertCurrentApprovedRevision(db, paperId, expected)
+          const guard = shippingGuardRow(db.prepare(`
+            SELECT * FROM import_review_shipping_guards WHERE paper_id = ?
+          `).get(paperId))
+          if (existing.state === 'publishing') {
+            if (
+              !guard
+              || guard.id !== existing.guardId
+              || guard.revisionId !== existing.revisionId
+              || guard.approvalId !== existing.approvalId
+            ) {
+              throw storeError(
+                'IMPORT_REVIEW_PROMOTION_GUARD_MISSING',
+                'Publishing receipt has no matching durable shipping guard',
+              )
+            }
+            if (intent !== 'retry_ship') {
+              throw storeError(
+                'IMPORT_REVIEW_PROMOTION_IN_PROGRESS',
+                'Interrupted publishing requires a current retry-ship authorization',
+              )
+            }
+            db.exec('COMMIT')
+            return { action: 'resume', promotion: existing }
+          }
+          if (intent !== 'retry_ship') {
+            throw storeError(
+              'IMPORT_REVIEW_PROMOTION_RETRY_REQUIRED',
+              'Failed promotion requires a current retry-ship authorization',
+            )
+          }
+          if (guard) {
+            throw storeError(
+              'IMPORT_REVIEW_SHIPPING_IN_PROGRESS',
+              `Review state is frozen by active shipping guard ${guard.id}`,
+            )
+          }
+          const guardId = `ship-guard-${randomUUID()}`
+          db.prepare(`
+            INSERT INTO import_review_shipping_guards (
+              id, paper_id, revision_id, approval_id, acquired_by, acquired_at
+            ) VALUES (?, ?, ?, ?, ?, ?)
+          `).run(
+            guardId,
+            paperId,
+            expected.revisionId,
+            expected.approvalId,
+            requestedBy,
+            requestedAt,
+          )
+          db.prepare(`
+            UPDATE import_review_promotions
+            SET guard_id = ?, state = 'publishing', attempt_count = attempt_count + 1,
+                requested_by = ?, failure_code = NULL, failure_message = NULL,
+                failed_at = NULL, updated_at = ?
+            WHERE id = ?
+          `).run(guardId, requestedBy, requestedAt, existing.promotionId)
+          const promotion = promotionRow(db.prepare(`
+            SELECT * FROM import_review_promotions WHERE id = ?
+          `).get(existing.promotionId))
+          db.exec('COMMIT')
+          return { action: 'retry', promotion }
+        }
+        if (intent !== 'ship') {
+          throw storeError(
+            'IMPORT_REVIEW_PROMOTION_RETRY_INVALID',
+            'Retry-ship requires an existing failed promotion for this approval',
+          )
+        }
+        assertPaperNotShipping(db, paperId)
+        const { revision, approval } = assertCurrentApprovedRevision(db, paperId, expected)
+        const promotionId = `promotion-${randomUUID()}`
+        const guardId = `ship-guard-${randomUUID()}`
+        db.prepare(`
+          INSERT INTO import_review_shipping_guards (
+            id, paper_id, revision_id, approval_id, acquired_by, acquired_at
+          ) VALUES (?, ?, ?, ?, ?, ?)
+        `).run(
+          guardId,
+          paperId,
+          revision.id,
+          approval.approvalId,
+          requestedBy,
+          requestedAt,
+        )
+        db.prepare(`
+          INSERT INTO import_review_promotions (
+            id, paper_id, revision_id, approval_id, source_digest,
+            candidate_digest, visible_structure_digest, analysis_digest,
+            bundle_digest, guard_id, state, requested_by, requested_at, updated_at
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'publishing', ?, ?, ?)
+        `).run(
+          promotionId,
+          paperId,
+          revision.id,
+          approval.approvalId,
+          approval.sourceDigest,
+          approval.candidateDigest,
+          approval.visibleStructureDigest,
+          approval.analysisDigest,
+          approval.bundleDigest,
+          guardId,
+          requestedBy,
+          requestedAt,
+          requestedAt,
+        )
+        const promotion = promotionRow(db.prepare(`
+          SELECT * FROM import_review_promotions WHERE id = ?
+        `).get(promotionId))
+        db.exec('COMMIT')
+        return { action: 'publish', promotion }
+      } catch (error) {
+        db.exec('ROLLBACK')
+        throw error
+      }
+    })
+  }
+
+  function recordPromotionTarget(paperId, promotionId, input) {
+    const assetVersion = Number(input?.assetVersion)
+    const versionName = requiredString(input?.versionName, 'versionName', 30)
+    const canonicalPublicationDigest = requiredString(
+      input?.canonicalPublicationDigest,
+      'canonicalPublicationDigest',
+      160,
+    )
+    if (
+      !Number.isInteger(assetVersion)
+      || assetVersion < 1
+      || versionName !== `v${assetVersion}`
+      || !SHA256.test(canonicalPublicationDigest)
+    ) {
+      throw storeError('IMPORT_REVIEW_PROMOTION_TARGET_INVALID', 'Promotion target is invalid', 400)
+    }
+    return withDb(true, (db) => {
+      db.exec('BEGIN IMMEDIATE')
+      try {
+        const promotion = promotionRow(db.prepare(`
+          SELECT * FROM import_review_promotions WHERE id = ? AND paper_id = ?
+        `).get(promotionId, paperId))
+        if (!promotion || promotion.state !== 'publishing') {
+          throw storeError('IMPORT_REVIEW_PROMOTION_NOT_PUBLISHING', 'Promotion is not active')
+        }
+        const guard = shippingGuardRow(db.prepare(`
+          SELECT * FROM import_review_shipping_guards WHERE paper_id = ?
+        `).get(paperId))
+        if (!guard || guard.id !== promotion.guardId) {
+          throw storeError('IMPORT_REVIEW_PROMOTION_GUARD_MISSING', 'Promotion guard is missing')
+        }
+        if (promotion.assetVersion !== null) {
+          if (
+            promotion.assetVersion !== assetVersion
+            || promotion.versionName !== versionName
+            || promotion.canonicalPublicationDigest !== canonicalPublicationDigest
+          ) {
+            throw storeError(
+              'IMPORT_REVIEW_PROMOTION_TARGET_CONFLICT',
+              'Promotion retry derived a different immutable publication target',
+            )
+          }
+          db.exec('COMMIT')
+          return promotion
+        }
+        const updatedAt = nowIso()
+        db.prepare(`
+          UPDATE import_review_promotions
+          SET asset_version = ?, version_name = ?, canonical_publication_digest = ?, updated_at = ?
+          WHERE id = ?
+        `).run(
+          assetVersion,
+          versionName,
+          canonicalPublicationDigest,
+          updatedAt,
+          promotionId,
+        )
+        const updated = promotionRow(db.prepare(`
+          SELECT * FROM import_review_promotions WHERE id = ?
+        `).get(promotionId))
+        db.exec('COMMIT')
+        return updated
+      } catch (error) {
+        db.exec('ROLLBACK')
+        throw error
+      }
+    })
+  }
+
+  function markPromotionPublished(paperId, promotionId, input) {
+    const analysisPublicationDigest = requiredString(
+      input?.analysisPublicationDigest,
+      'analysisPublicationDigest',
+      160,
+    )
+    if (!SHA256.test(analysisPublicationDigest)) {
+      throw storeError('IMPORT_REVIEW_DIGEST_INVALID', 'Published analysis digest is invalid', 400)
+    }
+    const publishedAt = nowIso()
+    return withDb(true, (db) => {
+      db.exec('BEGIN IMMEDIATE')
+      try {
+        const promotion = promotionRow(db.prepare(`
+          SELECT * FROM import_review_promotions WHERE id = ? AND paper_id = ?
+        `).get(promotionId, paperId))
+        if (!promotion) throw storeError('IMPORT_REVIEW_PROMOTION_NOT_FOUND', 'Promotion not found', 404)
+        if (promotion.state === 'published') {
+          if (promotion.analysisPublicationDigest !== analysisPublicationDigest) {
+            throw storeError(
+              'IMPORT_REVIEW_PROMOTION_IDENTITY_MISMATCH',
+              'Published analysis digest differs from immutable receipt',
+            )
+          }
+          db.exec('COMMIT')
+          return promotion
+        }
+        if (
+          promotion.state !== 'publishing'
+          || promotion.assetVersion === null
+          || !promotion.canonicalPublicationDigest
+        ) {
+          throw storeError('IMPORT_REVIEW_PROMOTION_NOT_PUBLISHING', 'Promotion target is incomplete')
+        }
+        assertCurrentApprovedRevision(db, paperId, promotion)
+        const guard = shippingGuardRow(db.prepare(`
+          SELECT * FROM import_review_shipping_guards WHERE paper_id = ?
+        `).get(paperId))
+        if (!guard || guard.id !== promotion.guardId) {
+          throw storeError('IMPORT_REVIEW_PROMOTION_GUARD_MISSING', 'Promotion guard is missing')
+        }
+        db.prepare(`
+          UPDATE import_review_promotions
+          SET state = 'published', analysis_publication_digest = ?, published_at = ?, updated_at = ?
+          WHERE id = ?
+        `).run(analysisPublicationDigest, publishedAt, publishedAt, promotionId)
+        db.prepare(`DELETE FROM import_review_shipping_guards WHERE id = ?`)
+          .run(promotion.guardId)
+        const updated = promotionRow(db.prepare(`
+          SELECT * FROM import_review_promotions WHERE id = ?
+        `).get(promotionId))
+        db.exec('COMMIT')
+        return updated
+      } catch (error) {
+        db.exec('ROLLBACK')
+        throw error
+      }
+    })
+  }
+
+  function markPromotionFailed(paperId, promotionId, input) {
+    const failureCode = requiredString(input?.failureCode, 'failureCode', 160)
+    const failureMessage = requiredString(input?.failureMessage, 'failureMessage', 1000)
+    const failedAt = nowIso()
+    return withDb(true, (db) => {
+      db.exec('BEGIN IMMEDIATE')
+      try {
+        const promotion = promotionRow(db.prepare(`
+          SELECT * FROM import_review_promotions WHERE id = ? AND paper_id = ?
+        `).get(promotionId, paperId))
+        if (!promotion) throw storeError('IMPORT_REVIEW_PROMOTION_NOT_FOUND', 'Promotion not found', 404)
+        if (promotion.state === 'published') {
+          throw storeError('IMPORT_REVIEW_PROMOTION_ALREADY_PUBLISHED', 'Published promotion cannot fail')
+        }
+        if (promotion.state === 'failed') {
+          db.exec('COMMIT')
+          return promotion
+        }
+        const guard = shippingGuardRow(db.prepare(`
+          SELECT * FROM import_review_shipping_guards WHERE paper_id = ?
+        `).get(paperId))
+        if (!guard || guard.id !== promotion.guardId) {
+          throw storeError('IMPORT_REVIEW_PROMOTION_GUARD_MISSING', 'Promotion guard is missing')
+        }
+        db.prepare(`
+          UPDATE import_review_promotions
+          SET state = 'failed', failure_code = ?, failure_message = ?, failed_at = ?, updated_at = ?
+          WHERE id = ?
+        `).run(failureCode, failureMessage, failedAt, failedAt, promotionId)
+        db.prepare(`DELETE FROM import_review_shipping_guards WHERE id = ?`)
+          .run(promotion.guardId)
+        const updated = promotionRow(db.prepare(`
+          SELECT * FROM import_review_promotions WHERE id = ?
+        `).get(promotionId))
+        db.exec('COMMIT')
+        return updated
+      } catch (error) {
+        db.exec('ROLLBACK')
+        throw error
+      }
+    })
+  }
+
   function agentPaperStatus(paperId) {
     const detail = paperDetail(paperId)
     return {
@@ -1354,6 +1832,7 @@ export function createImportReviewStore({
       visibleStructure: detail.visibleStructure,
       sourceVisuals: detail.sourceVisuals,
       ocrReview: detail.ocrReview,
+      promotion: detail.promotion,
       rendererStale: detail.rendererStale,
       unresolvedCount: detail.unresolvedCount,
       approval: detail.latest?.reviewKind === 'candidate'
@@ -1478,6 +1957,30 @@ export function createImportReviewStore({
             403,
           )
         }
+        const promotion = promotionRow(db.prepare(`
+          SELECT * FROM import_review_promotions
+          WHERE guard_id = ? AND state = 'publishing'
+        `).get(guardId))
+        if (promotion) {
+          const failedAt = nowIso()
+          db.prepare(`
+            UPDATE import_review_promotions
+            SET state = 'failed', failure_code = 'IMPORT_REVIEW_PROMOTION_ABORTED',
+                failure_message = ?, failed_at = ?, updated_at = ?
+            WHERE id = ?
+          `).run(
+            'Promotion was explicitly aborted after the old process and production state were inspected',
+            failedAt,
+            failedAt,
+            promotion.promotionId,
+          )
+          db.prepare('DELETE FROM import_review_shipping_guards WHERE id = ?').run(guardId)
+          const updated = promotionRow(db.prepare(`
+            SELECT * FROM import_review_promotions WHERE id = ?
+          `).get(promotion.promotionId))
+          db.exec('COMMIT')
+          return { released: true, promotion: updated }
+        }
         db.prepare('DELETE FROM import_review_shipping_guards WHERE id = ?').run(guardId)
         db.exec('COMMIT')
         return { released: true }
@@ -1493,6 +1996,7 @@ export function createImportReviewStore({
     addIssueMessage,
     approveRevision,
     agentPaperStatus,
+    beginPromotion,
     completeFileUpload,
     confirmOcrRevision,
     confirmMediaDerivation,
@@ -1501,10 +2005,14 @@ export function createImportReviewStore({
     fileForUpload,
     finalizeRevision,
     getRevision,
+    latestPromotion,
     listPapers,
+    markPromotionFailed,
+    markPromotionPublished,
     mediaConfirmation,
     paperDetail,
     projectionForRevision,
+    recordPromotionTarget,
     releaseShippingGuard,
     revisionDirectory,
     updateIssue,
