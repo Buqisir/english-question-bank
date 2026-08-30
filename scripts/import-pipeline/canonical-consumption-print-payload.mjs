@@ -7,10 +7,20 @@ function groupTypeForPrint(groupType) {
   return groupType
 }
 
+export function paperAssetOfficialModelAnswers(paperAsset) {
+  return new Map(Object.values(paperAsset?.content?.writingTasks || {})
+    .filter((task) =>
+      typeof task.groupId === 'string'
+      && typeof task.officialModelAnswer === 'string'
+      && task.officialModelAnswer.trim())
+    .map((task) => [task.groupId, task.officialModelAnswer]))
+}
+
 export function canonicalConsumptionPrintPayload(
   consumption,
   title = consumption.paperId,
   answerByQuestionId = new Map(),
+  officialModelAnswerByGroupId = new Map(),
 ) {
   const groups = []
   for (const selection of consumption.selections) {
@@ -28,6 +38,9 @@ export function canonicalConsumptionPrintPayload(
           source: consumption.paperId,
           groupType: groupTypeForPrint(group.groupType),
           passage: { title: groupId, materialText: '' },
+          ...(officialModelAnswerByGroupId.has(groupId)
+            ? { officialModelAnswer: officialModelAnswerByGroupId.get(groupId) }
+            : {}),
           questions: group.questions.map((question) => ({
             id: question.questionId,
             questionNo: String(question.questionNo),

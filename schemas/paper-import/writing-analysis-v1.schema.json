@@ -121,10 +121,7 @@
               {
                 "properties": { "taskType": { "const": "continuation" } },
                 "not": {
-                  "anyOf": [
-                    { "required": ["reviewCard"] },
-                    { "required": ["officialModelAnswer"] }
-                  ]
+                  "required": ["reviewCard"]
                 },
                 "oneOf": [
                   {

@@ -195,6 +195,9 @@ export function projectNck1StagedWritingAnalysis(raw) {
     return {
       taskType: 'continuation',
       modelAnswer: raw.modelAnswer,
+      ...(typeof raw.officialModelAnswer === 'string' && raw.officialModelAnswer.trim()
+        ? { officialModelAnswer: raw.officialModelAnswer }
+        : {}),
       continuationAnalysis: structuredClone(raw.continuationAnalysis),
     }
   }
@@ -220,6 +223,24 @@ function withAuthoritativeAnswers(analysis, group, collectionName, writeAnswer) 
     writeAnswer(projected[collectionName][question.id], question.answerKey)
   }
   return projected
+}
+
+function withOfficialModelAnswer(analysis, materializationGroup) {
+  const sourceAnswer = materializationGroup.writingTask?.officialModelAnswer
+  const stagedAnswer = analysis.officialModelAnswer
+  if (sourceAnswer === null) {
+    if (stagedAnswer !== undefined) {
+      fail(`${materializationGroup.groupId} staged officialModelAnswer has no source authority`)
+    }
+    return analysis
+  }
+  if (typeof sourceAnswer !== 'string' || !sourceAnswer.trim()) {
+    fail(`${materializationGroup.groupId} source officialModelAnswer is malformed`)
+  }
+  if (stagedAnswer !== undefined && stagedAnswer !== sourceAnswer) {
+    fail(`${materializationGroup.groupId} staged officialModelAnswer does not match the source Materialization`)
+  }
+  return { ...analysis, officialModelAnswer: sourceAnswer }
 }
 
 export function buildNck1AnalysisProjection({
@@ -296,8 +317,14 @@ export function buildNck1AnalysisProjection({
     item.correctFit?.optionLabel)
   assertAnswerClosure(raw.grammar, grammar, 'blanks', (item) => item.answer)
 
-  const applicationWriting = projectNck1StagedWritingAnalysis(raw.application)
-  const continuationWriting = projectNck1StagedWritingAnalysis(raw.continuation)
+  const applicationWriting = withOfficialModelAnswer(
+    projectNck1StagedWritingAnalysis(raw.application),
+    groupsBySlot.get('writing.application'),
+  )
+  const continuationWriting = withOfficialModelAnswer(
+    projectNck1StagedWritingAnalysis(raw.continuation),
+    groupsBySlot.get('writing.continuation'),
+  )
   validateWritingAnalysisCandidate(applicationWriting)
   validateWritingAnalysisCandidate(continuationWriting)
   validateNarrativeContinuationAnalysis(continuationWriting.continuationAnalysis, {

@@ -8,7 +8,7 @@
  *
  * persistWritingAnalysisGroup projection branches by taskType:
  *   application supports optional officialModelAnswer/reviewCard/highlights;
- *   new continuation keeps {taskType, modelAnswer, continuationAnalysis};
+ *   new continuation keeps {taskType, modelAnswer, officialModelAnswer?, continuationAnalysis};
  *   historical continuation keeps {taskType, modelAnswer, continuationDesign,
  *   highlightExpressions}.
  * MF-2 (I19): vocab gate uses tracked paper-asset.json (materialText+starters) as allowlist;
@@ -87,12 +87,8 @@ function wordCount(text) {
 }
 
 function assertValidOfficialModelAnswer(analysis) {
-  if (analysis?.taskType === 'continuation' && analysis.officialModelAnswer !== undefined) {
-    throw new Error('officialModelAnswer is only valid for application writing.')
-  }
   if (
-    analysis?.taskType === 'application'
-    && analysis.officialModelAnswer !== undefined
+    analysis?.officialModelAnswer !== undefined
     && (
       typeof analysis.officialModelAnswer !== 'string'
       || !analysis.officialModelAnswer.trim()
@@ -292,7 +288,8 @@ if suspect:
  * Application checks (plan Locked #5 / I18):
  *   - taskType === 'application'
  *   - modelAnswer non-empty
- *   - officialModelAnswer optional; when present, a trim-non-empty string
+ *   - officialModelAnswer optional for either writing family; when present,
+ *     a trim-non-empty source string
  *   - highlightExpressions optional for new candidates
  *   - when present, highlightExpressions keeps the existing 3–5 item checks
  *
@@ -300,6 +297,7 @@ if suspect:
  *   New narrative continuation (continuationAnalysis / continuation-analysis-v1):
  *   - taskType === 'continuation'
  *   - modelAnswer non-empty
+ *   - officialModelAnswer optional; when present, a trim-non-empty source string
  *   - continuationAnalysis matches continuation-analysis-v1 schema
  *   - continuationDesign / highlightExpressions / reviewCard forbidden
  *   Historical continuation:
@@ -547,12 +545,18 @@ export function persistWritingAnalysisGroup({ paperAssetsDir }, work, analysis) 
       writingEntry = {
         taskType: analysis.taskType,
         modelAnswer: analysis.modelAnswer,
+        ...(analysis.officialModelAnswer !== undefined
+          ? { officialModelAnswer: analysis.officialModelAnswer }
+          : {}),
         continuationAnalysis: structuredClone(analysis.continuationAnalysis),
       }
     } else {
       writingEntry = {
         taskType: analysis.taskType,
         modelAnswer: analysis.modelAnswer,
+        ...(analysis.officialModelAnswer !== undefined
+          ? { officialModelAnswer: analysis.officialModelAnswer }
+          : {}),
         continuationDesign: {
           theme: analysis.continuationDesign.theme,
           paragraphs: [

@@ -5,7 +5,10 @@ import {
 } from 'node:fs'
 import path from 'node:path'
 
-import { canonicalConsumptionPrintPayload } from '../../scripts/import-pipeline/canonical-consumption-print-payload.mjs'
+import {
+  canonicalConsumptionPrintPayload,
+  paperAssetOfficialModelAnswers,
+} from '../../scripts/import-pipeline/canonical-consumption-print-payload.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { defineRoute } from '../router/index.mjs'
 import { withChromiumPage } from '../draft-paper/chromiumPool.mjs'
@@ -134,6 +137,7 @@ function reviewPrintHtml(projection, versionType, buildPrintHtml) {
     consumption,
     projection.paperName,
     answerByQuestionId,
+    paperAssetOfficialModelAnswers(projection.paperAsset),
   )
   const items = payload.items.map((item) => ({
     detail: payload.details.get(item.questionGroupId),

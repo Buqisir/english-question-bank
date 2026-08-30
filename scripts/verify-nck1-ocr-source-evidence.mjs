@@ -147,6 +147,31 @@ assert.equal(JSON.stringify(confirmed.materialization).includes('data:image'), f
 
 const blocks = confirmed.materialization.groups.flatMap((group) => group.blocks)
 const questions = confirmed.materialization.groups.flatMap((group) => group.questions)
+const readingQuestions = confirmed.materialization.groups
+  .filter((group) => group.family === 'reading')
+  .flatMap((group) => group.questions)
+const clozeQuestions = confirmed.materialization.groups
+  .find((group) => group.family === 'cloze')
+  .questions
+const questionEvidence = fixture.evidence.documents
+  .find((document) => document.documentId === fixture.sourceDocuments
+    .find((document) => document.role === 'question_source').documentId)
+const q41Page = questionEvidence.pages.find((page) =>
+  page.observations.some((observation) => /^41[.．、]/u.test(observation.text)))
+const q41Observation = q41Page.observations.find((observation) =>
+  /^41[.．、]/u.test(observation.text))
+const q41Source = clozeQuestions[0].source
+assert.equal(q41Source.kind, 'page_region')
+assert.equal(q41Source.documentId, questionEvidence.documentId)
+assert.equal(q41Source.page, q41Page.page)
+for (const key of ['x', 'y', 'width', 'height']) {
+  assert(Math.abs(q41Source.region[key] - q41Observation.region[key]) <= Number.EPSILON,
+    `a cloze question locator must preserve the source option-row ${key}`)
+}
+assert.equal(readingQuestions[0].stem, 'Which choice fits item 21?')
+assert(readingQuestions.every((question) => question.options.every((option) =>
+  !question.stem.includes(option.text))),
+'reading stems must not repeat their separately structured option text')
 for (const locator of [
   ...blocks.map((block) => block.source),
   ...questions.map((question) => question.source),
@@ -174,7 +199,27 @@ const lowObservation = lowConfidence.documents[0].pages
   .flatMap((page) => page.observations)[0]
 lowObservation.confidence = 0.4
 lowObservation.alternatives = [{ text: `${lowObservation.text}?`, confidence: 0.39 }]
-expectedReview(rebound(lowConfidence), 'NCK1_OCR_CONFIDENCE_REVIEW_REQUIRED')
+rebound(lowConfidence)
+const lowConfidenceUnconfirmed = produceNck1OcrMaterialization({
+  paperId,
+  documents: fixture.sourceDocuments,
+  evidence: lowConfidence,
+})
+assert.equal(lowConfidenceUnconfirmed.disposition, 'needs_agent_review')
+assert(lowConfidenceUnconfirmed.review.required.some((item) =>
+  item.code === 'NCK1_OCR_TEXT_LAYER_REQUIRED'))
+assert.equal(lowConfidenceUnconfirmed.review.required.some((item) =>
+  item.code === 'NCK1_OCR_CONFIDENCE_REVIEW_REQUIRED'), false)
+const lowConfidenceConfirmation = cloneJson(fixture.confirmation)
+lowConfidenceConfirmation.evidenceDigest = lowConfidence.evidenceDigest
+const lowConfidenceClosed = produceNck1OcrMaterialization({
+  paperId,
+  documents: fixture.sourceDocuments,
+  evidence: lowConfidence,
+  confirmation: lowConfidenceConfirmation,
+})
+assert.equal(lowConfidenceClosed.disposition, 'ready_for_verification')
+assert.deepEqual(lowConfidenceClosed.review.required, [])
 
 const ambiguousOrder = cloneJson(fixture.evidence)
 const ambiguousPage = ambiguousOrder.documents[0].pages.find((page) =>
@@ -243,6 +288,65 @@ try {
   assert.match(run('verify', paperId), /"groups": 9/u)
   assert.match(run('verify', paperId), /"assertions": 45/u)
   assert.match(run('build', paperId), /BUILT CANDIDATE/u)
+  const stagedEvidencePath = path.join(
+    cliPaperDir,
+    'materialization/nck1-ocr-source-evidence-v1.json',
+  )
+  const stagedConfirmationPath = path.join(
+    cliPaperDir,
+    'materialization/nck1-ocr-source-confirmation-v1.json',
+  )
+  const outputPath = path.join(cliPaperDir, fixture.manifest.materializationPath)
+  const receiptPath = path.join(
+    cliPaperDir,
+    'materialization/nck1-ocr-materialization-producer-receipt-v1.json',
+  )
+  const readyBytes = readFileSync(outputPath)
+  const readyReceipt = JSON.parse(readFileSync(receiptPath, 'utf8'))
+  writeFileSync(receiptPath, `${JSON.stringify({
+    ...readyReceipt,
+    producerVersion: `${readyReceipt.producerVersion}-previous`,
+  }, null, 2)}\n`)
+  const correctedEvidence = cloneJson(fixture.evidence)
+  const correctedObservation = correctedEvidence.documents[0].pages[0].observations[5]
+  correctedObservation.region.y += 0.001
+  correctedEvidence.documents[0].pages[0].regions
+    .find((region) => region.regionId === correctedObservation.regionId)
+    .region = cloneJson(correctedObservation.region)
+  rebound(correctedEvidence)
+  const correctedConfirmation = cloneJson(fixture.confirmation)
+  correctedConfirmation.evidenceDigest = correctedEvidence.evidenceDigest
+  writeFileSync(stagedEvidencePath, `${JSON.stringify(correctedEvidence, null, 2)}\n`)
+  writeFileSync(stagedConfirmationPath, `${JSON.stringify(correctedConfirmation, null, 2)}\n`)
+  assert.match(run('materialize', paperId), /"cached": false/u)
+  const correctedBytes = readFileSync(outputPath)
+  const correctedReceipt = JSON.parse(readFileSync(receiptPath, 'utf8'))
+  assert.notDeepEqual(correctedBytes, readyBytes)
+  assert.notEqual(correctedReceipt.sourceDigest, readyReceipt.sourceDigest)
+  assert.notEqual(correctedReceipt.producerVersion, `${readyReceipt.producerVersion}-previous`)
+
+  const guardedEvidence = cloneJson(correctedEvidence)
+  const guardedObservation = guardedEvidence.documents[0].pages[0].observations[5]
+  guardedObservation.region.y += 0.001
+  guardedEvidence.documents[0].pages[0].regions
+    .find((region) => region.regionId === guardedObservation.regionId)
+    .region = cloneJson(guardedObservation.region)
+  rebound(guardedEvidence)
+  const guardedConfirmation = cloneJson(correctedConfirmation)
+  guardedConfirmation.evidenceDigest = guardedEvidence.evidenceDigest
+  writeFileSync(stagedEvidencePath, `${JSON.stringify(guardedEvidence, null, 2)}\n`)
+  writeFileSync(stagedConfirmationPath, `${JSON.stringify(guardedConfirmation, null, 2)}\n`)
+  const agentModifiedBytes = Buffer.concat([correctedBytes, Buffer.from('\n')])
+  writeFileSync(outputPath, agentModifiedBytes)
+  let rematerializeError
+  try {
+    run('materialize', paperId)
+  } catch (error) {
+    rematerializeError = error
+  }
+  assert.match(String(rematerializeError?.stderr), /refusing to overwrite/u)
+  assert.deepEqual(readFileSync(outputPath), agentModifiedBytes)
+
   const materialization = JSON.parse(readFileSync(path.join(
     cliPaperDir,
     fixture.manifest.materializationPath,

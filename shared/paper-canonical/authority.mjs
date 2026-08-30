@@ -46,6 +46,7 @@ import manifestV45 from '../../standards/paper-canonical/manifest-v45.json' with
 import manifestV46 from '../../standards/paper-canonical/manifest-v46.json' with { type: 'json' }
 import manifestV47 from '../../standards/paper-canonical/manifest-v47.json' with { type: 'json' }
 import manifestV48 from '../../standards/paper-canonical/manifest-v48.json' with { type: 'json' }
+import manifestV49 from '../../standards/paper-canonical/manifest-v49.json' with { type: 'json' }
 import legacyRhythmManifestV13 from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/manifest-v13.json' with { type: 'json' }
 import legacyRhythmTypographyV3 from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/paper-typography-v3.json' with { type: 'json' }
 import legacyRhythmTypographyV3Schema from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/renderer-typography-v3.schema.json' with { type: 'json' }
@@ -81,6 +82,7 @@ import nck1V10 from '../../standards/paper-canonical/profiles/nck1-v10.json' wit
 import nck1V11 from '../../standards/paper-canonical/profiles/nck1-v11.json' with { type: 'json' }
 import nck1V12 from '../../standards/paper-canonical/profiles/nck1-v12.json' with { type: 'json' }
 import nck1V13 from '../../standards/paper-canonical/profiles/nck1-v13.json' with { type: 'json' }
+import nck1V14 from '../../standards/paper-canonical/profiles/nck1-v14.json' with { type: 'json' }
 import zhejiangLegacyV2 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v2.json' with { type: 'json' }
 import zhejiangLegacyV3 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v3.json' with { type: 'json' }
 import zhejiangLegacyV4 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v4.json' with { type: 'json' }
@@ -91,6 +93,7 @@ import zhejiangLegacyV8 from '../../standards/paper-canonical/profiles/zhejiang-
 import zhejiangLegacyV9 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v9.json' with { type: 'json' }
 import zhejiangLegacyV10 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v10.json' with { type: 'json' }
 import zhejiangLegacyV11 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v11.json' with { type: 'json' }
+import zhejiangLegacyV12 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v12.json' with { type: 'json' }
 import nationalLegacy from '../../standards/paper-canonical/profiles/national-legacy-v1.json' with { type: 'json' }
 import nationalLegacyV2 from '../../standards/paper-canonical/profiles/national-legacy-v2.json' with { type: 'json' }
 import nationalLegacyV3 from '../../standards/paper-canonical/profiles/national-legacy-v3.json' with { type: 'json' }
@@ -108,6 +111,7 @@ import continuationWriting from '../../standards/paper-canonical/families/contin
 import continuationWritingV2 from '../../standards/paper-canonical/families/continuation-writing-v2.json' with { type: 'json' }
 import continuationWritingV3 from '../../standards/paper-canonical/families/continuation-writing-v3.json' with { type: 'json' }
 import continuationWritingV4 from '../../standards/paper-canonical/families/continuation-writing-v4.json' with { type: 'json' }
+import continuationWritingV5 from '../../standards/paper-canonical/families/continuation-writing-v5.json' with { type: 'json' }
 import normalizationV1 from '../../standards/paper-canonical/normalization/normalization-rules-v1.json' with { type: 'json' }
 import normalizationV2 from '../../standards/paper-canonical/normalization/normalization-rules-v2.json' with { type: 'json' }
 import normalizationV3 from '../../standards/paper-canonical/normalization/normalization-rules-v3.json' with { type: 'json' }
@@ -175,6 +179,7 @@ import familyV6Schema from '../../schemas/paper-canonical/canonical-family-contr
 import familyV7Schema from '../../schemas/paper-canonical/canonical-family-contract-v7.schema.json' with { type: 'json' }
 import familyV8Schema from '../../schemas/paper-canonical/canonical-family-contract-v8.schema.json' with { type: 'json' }
 import familyV9Schema from '../../schemas/paper-canonical/canonical-family-contract-v9.schema.json' with { type: 'json' }
+import familyV10Schema from '../../schemas/paper-canonical/canonical-family-contract-v10.schema.json' with { type: 'json' }
 import grammarFillVariantSchema from '../../schemas/paper-canonical/canonical-grammar-fill-variant-v1.schema.json' with { type: 'json' }
 import grammarFillPromptSourceCaptureSchema from '../../schemas/paper-canonical/grammar-fill-prompt-source-capture-v1.schema.json' with { type: 'json' }
 import grammarFillPromptProvisionSchema from '../../schemas/paper-canonical/grammar-fill-prompt-provision-v1.schema.json' with { type: 'json' }
@@ -182,6 +187,7 @@ import grammarFillPromptProvisionV2Schema from '../../schemas/paper-canonical/gr
 import applicationWritingVariantSchema from '../../schemas/paper-canonical/canonical-application-writing-variant-v1.schema.json' with { type: 'json' }
 import applicationWritingVariantV2Schema from '../../schemas/paper-canonical/canonical-application-writing-variant-v2.schema.json' with { type: 'json' }
 import continuationWritingVariantV2Schema from '../../schemas/paper-canonical/canonical-continuation-writing-variant-v2.schema.json' with { type: 'json' }
+import continuationWritingVariantV3Schema from '../../schemas/paper-canonical/canonical-continuation-writing-variant-v3.schema.json' with { type: 'json' }
 import applicationWritingSourceCaptureSchema from '../../schemas/paper-canonical/application-writing-source-capture-v1.schema.json' with { type: 'json' }
 import applicationWritingSourceTranscriptionSchema from '../../schemas/paper-canonical/application-writing-source-transcription-v1.schema.json' with { type: 'json' }
 import continuationWritingVariantSchema from '../../schemas/paper-canonical/canonical-continuation-writing-variant-v1.schema.json' with { type: 'json' }
@@ -295,6 +301,7 @@ import reportV39Schema from '../../schemas/paper-canonical/normalization-report-
 import reportV46Schema from '../../schemas/paper-canonical/normalization-report-v46.schema.json' with { type: 'json' }
 import reportV47Schema from '../../schemas/paper-canonical/normalization-report-v47.schema.json' with { type: 'json' }
 import reportV48Schema from '../../schemas/paper-canonical/normalization-report-v48.schema.json' with { type: 'json' }
+import reportV49Schema from '../../schemas/paper-canonical/normalization-report-v49.schema.json' with { type: 'json' }
 import legacyReportV9Schema from '../../schemas/paper-canonical/normalization-report-v9.schema.json' with { type: 'json' }
 import publicationSchema from '../../schemas/paper-canonical/canonical-paper-publication-v1.schema.json' with { type: 'json' }
 import publicationV2Schema from '../../schemas/paper-canonical/canonical-paper-publication-v2.schema.json' with { type: 'json' }
@@ -338,6 +345,7 @@ import publicationV39Schema from '../../schemas/paper-canonical/canonical-paper-
 import publicationV46Schema from '../../schemas/paper-canonical/canonical-paper-publication-v46.schema.json' with { type: 'json' }
 import publicationV47Schema from '../../schemas/paper-canonical/canonical-paper-publication-v47.schema.json' with { type: 'json' }
 import publicationV48Schema from '../../schemas/paper-canonical/canonical-paper-publication-v48.schema.json' with { type: 'json' }
+import publicationV49Schema from '../../schemas/paper-canonical/canonical-paper-publication-v49.schema.json' with { type: 'json' }
 import nck1SourceMaterializationSchema from '../../schemas/paper-canonical/nck1-source-materialization-v1.schema.json' with { type: 'json' }
 import nck1SourceMaterializationV2Schema from '../../schemas/paper-canonical/nck1-source-materialization-v2.schema.json' with { type: 'json' }
 import richContentV1Schema from '../../schemas/paper-canonical/rich-content-v1.schema.json' with { type: 'json' }
@@ -608,7 +616,7 @@ function validateNck1WritingChrome(profile) {
     ? '第二节 （满分 25 分）'
     : '第二节（满分25分）'
   const valid = (
-    ['3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13'].includes(profile.version)
+    ['3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'].includes(profile.version)
     && writingParts.length === 1
     && part.ordinal === 4
     && part.titleInstructionRef === 'part.writing'
@@ -663,7 +671,7 @@ function validateZhejiangWritingChrome(profile) {
   const application = sections[0]
   const continuation = sections[1]
   const valid = (
-    ['4', '5', '6', '7', '8', '9', '10', '11'].includes(profile?.version)
+    ['4', '5', '6', '7', '8', '9', '10', '11', '12'].includes(profile?.version)
     && writingParts.length === 1
     && part.ordinal === 4
     && part.titleInstructionRef === 'part.writing'
@@ -1353,9 +1361,9 @@ export function validateAuthorityClosure({
   schemas,
 }) {
   const issues = []
-  // v46-v48 are Candidate-only forks of v37. Their numeric identities must
+  // v46-v49 are Candidate-only forks of v37. Their numeric identities must
   // not make paper-specific v38-v45 successor rules part of this closure.
-  const semanticManifestVersion = ['46', '47', '48'].includes(candidateManifest?.version)
+  const semanticManifestVersion = ['46', '47', '48', '49'].includes(candidateManifest?.version)
     ? '37'
     : candidateManifest?.version
   const schemaById = new Map(Object.entries(schemas || {}))
@@ -1604,9 +1612,11 @@ export function validateAuthorityClosure({
   }
   if (Number(semanticManifestVersion) >= 29) {
     const continuationFamily = familyArtifacts.get('continuation-writing')
-    const expectedContinuationFamily = Number(semanticManifestVersion) >= 39
-      ? continuationWritingV4
-      : continuationWritingV3
+    const expectedContinuationFamily = candidateManifest?.version === '49'
+      ? continuationWritingV5
+      : Number(semanticManifestVersion) >= 39
+        ? continuationWritingV4
+        : continuationWritingV3
     const adapter = Object.values(artifacts || {}).find(
       (artifact) => artifact?.owner === 'source_adapter',
     )
@@ -1922,6 +1932,12 @@ const artifactsV46 = {
 }
 const artifactsV47 = artifactsV46
 const artifactsV48 = artifactsV47
+const artifactsV49 = {
+  ...artifactsV48,
+  'profile-nck1': nck1V14,
+  'profile-zhejiang-legacy': zhejiangLegacyV12,
+  'family-continuation-writing': continuationWritingV5,
+}
 const schemasV1 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v1': normalizationSchema, 'normalization-report-v1': reportSchema, 'canonical-paper-publication-v1': publicationSchema }
 const schemasV2 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v2': reportV2Schema, 'canonical-paper-publication-v2': publicationV2Schema }
 const schemasV3 = { ...sharedSchemas, 'renderer-typography-v2': typographyV2Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v3': reportV3Schema, 'canonical-paper-publication-v3': publicationV3Schema }
@@ -2466,6 +2482,15 @@ const schemasV48 = {
   'normalization-report-v48': reportV48Schema,
   'canonical-paper-publication-v48': publicationV48Schema,
 }
+const schemasV49 = {
+  ...Object.fromEntries(Object.entries(schemasV48).filter(([schemaId]) =>
+    !['normalization-report-v48', 'canonical-paper-publication-v48'].includes(schemaId))),
+  'canonical-family-contract-v10': familyV10Schema,
+  'canonical-continuation-writing-variant-v3':
+    continuationWritingVariantV3Schema,
+  'normalization-report-v49': reportV49Schema,
+  'canonical-paper-publication-v49': publicationV49Schema,
+}
 const validationV1 = validateAuthorityClosure({ manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 })
 const validationV2 = validateAuthorityClosure({ manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 })
 const validationV3 = validateAuthorityClosure({ manifest: manifestV3, artifacts: artifactsV3, schemas: schemasV3 })
@@ -2519,6 +2544,7 @@ const validationV45 = validateAuthorityClosure({ manifest: manifestV45, artifact
 const validationV46 = validateAuthorityClosure({ manifest: manifestV46, artifacts: artifactsV46, schemas: schemasV46 })
 const validationV47 = validateAuthorityClosure({ manifest: manifestV47, artifacts: artifactsV47, schemas: schemasV47 })
 const validationV48 = validateAuthorityClosure({ manifest: manifestV48, artifacts: artifactsV48, schemas: schemasV48 })
+const validationV49 = validateAuthorityClosure({ manifest: manifestV49, artifacts: artifactsV49, schemas: schemasV49 })
 const validations = [
   validationV1,
   validationV2,
@@ -2569,6 +2595,7 @@ const validations = [
   validationV46,
   validationV47,
   validationV48,
+  validationV49,
 ]
 if (validations.some((validation) => !validation.ok)) {
   throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify(validations.flatMap((validation) => validation.issues))}`)
@@ -2632,6 +2659,7 @@ const authorities = [
   { manifest: manifestV46, artifacts: artifactsV46, schemas: schemasV46 },
   { manifest: manifestV47, artifacts: artifactsV47, schemas: schemasV47 },
   { manifest: manifestV48, artifacts: artifactsV48, schemas: schemasV48 },
+  { manifest: manifestV49, artifacts: artifactsV49, schemas: schemasV49 },
 ].map((authority) => ({
   ...authority,
   authorityRef: authorityRef(authority.manifest),
@@ -2644,9 +2672,9 @@ export const canonicalAuthorityRef = authorities.find((authority) => authority.m
 // advancing publication/current authority beyond the existing v36 closure.
 export const trustedDocxCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '37').authorityRef
 // Universal NCK1 materialization has a dedicated Candidate-only authority.
-// v48 succeeds immutable v47 with source-bound media presentation and
-// publication decisions without advancing the v36 publication authority.
-export const nck1MaterializationCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '48').authorityRef
+// v49 succeeds immutable v48 with source-exact continuation instructions
+// without advancing the v36 publication authority.
+export const nck1MaterializationCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '49').authorityRef
 // Ticket 31a may replay only the exact pre-v42 legacy Candidate authority
 // recorded by the immutable confirmation lanes. It is not a current import
 // authority and cannot be selected by ordinary callers.

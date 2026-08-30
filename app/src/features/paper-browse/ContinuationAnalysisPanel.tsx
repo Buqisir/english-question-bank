@@ -154,7 +154,7 @@ export function ContinuationAnalysisPanel({
 }: {
   analysis: ContinuationWritingAnalysisV1
 }): ReactNode {
-  const { continuationAnalysis, modelAnswer } = analysis
+  const { continuationAnalysis, modelAnswer, officialModelAnswer } = analysis
   const story = continuationAnalysis.storyUnderstanding
   const contract = continuationAnalysis.continuationContract
   const development = continuationAnalysis.narrativeDevelopment
@@ -436,13 +436,23 @@ export function ContinuationAnalysisPanel({
       </section>
 
       <section className="retained-writing-card-section" data-continuation-section="modelAnswer">
-        <h5>范文</h5>
+        <h5>AI 参考范文</h5>
         <div className="continuation-analysis-model-answer">
           {modelAnswer.split('\n').map((line, index) => (
             <p key={index}>{line}</p>
           ))}
         </div>
       </section>
+      {officialModelAnswer && (
+        <section className="retained-writing-card-section" data-continuation-section="officialModelAnswer">
+          <h5>官方范文</h5>
+          <div className="continuation-analysis-model-answer">
+            {officialModelAnswer.split('\n').map((line, index) => (
+              <p key={index}>{line}</p>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   )
 }

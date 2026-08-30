@@ -19,6 +19,9 @@ export const NCK1_OCR_CONFIRMATION_FILE_NAME = 'nck1-ocr-source-confirmation-v1.
 
 export const NCK1_OCR_REVIEW_CODES = Object.freeze([
   'NCK1_OCR_TEXT_LAYER_REQUIRED',
+  // Kept for compatibility with already-finalized OCR review revisions. New
+  // evidence never emits this code: confidence is diagnostic metadata, not a
+  // workflow gate. The Agent closes text against the immutable page pixels.
   'NCK1_OCR_CONFIDENCE_REVIEW_REQUIRED',
   'NCK1_OCR_READING_ORDER_AMBIGUOUS',
   'NCK1_OCR_VISUAL_CLASSIFICATION_REQUIRED',
@@ -481,24 +484,6 @@ export function validateNck1OcrSourceEvidence({
         regionIds,
         includeReviewFindings,
       })
-      if (includeReviewFindings) {
-        for (const observation of evidencePage.observations || []) {
-          if (
-            typeof observation.confidence === 'number'
-            && (observation.confidence < evidence.confidenceThreshold
-              || (Array.isArray(observation.alternatives) && observation.alternatives.length > 0))
-          ) {
-            issues.push(issue(
-              'NCK1_OCR_CONFIDENCE_REVIEW_REQUIRED',
-              `documents.${document.documentId}.pages.${evidencePage.page}.observations.${observation.observationId}`,
-              'A promoted OCR observation is below the registered threshold or has a competing candidate',
-              document.documentId,
-              evidencePage.page,
-              observation.region,
-            ))
-          }
-        }
-      }
     }
   }
   if (evidenceDocuments.size !== sourceDocuments.length
@@ -555,7 +540,7 @@ export function resolveConfirmedNck1OcrEvidence({
       issues: [issue(
         'NCK1_OCR_CONFIRMATION_STALE',
         'ocrConfirmation',
-        'OCR confirmation is absent, incomplete, or bound to different source evidence',
+        'Agent-verified transcription closure is absent, incomplete, or bound to different source evidence',
         fallback.documentId,
         fallback.page,
         fallback.region,
@@ -587,7 +572,7 @@ export function resolveConfirmedNck1OcrEvidence({
       issues.push(issue(
         'NCK1_OCR_CONFIRMATION_STALE',
         `ocrConfirmation.documents.${document.documentId}`,
-        'OCR confirmation does not cover every evidence page exactly once',
+        'Agent-verified transcription closure does not cover every evidence page exactly once',
         document.documentId,
       ))
       continue
@@ -735,7 +720,7 @@ export function resolveConfirmedNck1OcrEvidence({
     issues.push(issue(
       'NCK1_OCR_CONFIRMATION_STALE',
       'ocrConfirmation.documents',
-      'OCR confirmation contains a missing, duplicate, or foreign source document',
+      'Agent-verified transcription closure contains a missing, duplicate, or foreign source document',
       fallback.documentId,
       fallback.page,
       fallback.region,

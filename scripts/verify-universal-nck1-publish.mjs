@@ -39,6 +39,8 @@ import { makeFixture } from './verify-nck1-source-materialization.mjs'
 
 const root = path.resolve(import.meta.dirname, '..')
 const paperId = 'paper-mock-contract-2026-m1'
+const officialApplicationSample = 'Official application sample from the supplied answer source.'
+const officialContinuationSample = 'Official continuation sample from the supplied answer source.'
 
 function writeJson(filePath, value) {
   mkdirSync(path.dirname(filePath), { recursive: true })
@@ -314,6 +316,12 @@ function makeReviewRoot(
   )
   const materialization = makeFixture()
   materialization.paperId = fixturePaperId
+  materialization.groups.find((group) =>
+    group.slotId === 'writing.application').writingTask.officialModelAnswer =
+      officialApplicationSample
+  materialization.groups.find((group) =>
+    group.slotId === 'writing.continuation').writingTask.officialModelAnswer =
+      officialContinuationSample
   for (const [documentId, bytes] of [
     ['paper', questionBytes],
     ['answers', answerBytes],
@@ -364,6 +372,44 @@ function makeReviewRoot(
   writeStagedAnalyses(reviewRoot, materialization)
 
   const projection = buildNck1ReviewProjection(reviewRoot, { requireAnalyses: true })
+  const writingTasks = Object.values(projection.paperAsset.content.writingTasks)
+  assert.deepEqual(
+    writingTasks.map(({ officialModelAnswer }) => officialModelAnswer),
+    [officialApplicationSample, officialContinuationSample],
+    'source official samples reach the Review PaperAsset',
+  )
+  assert.deepEqual(
+    Object.values(projection.analysisSidecars['writing-analysis-v1.json'].groups)
+      .map(({ writing }) => writing.officialModelAnswer),
+    [officialApplicationSample, officialContinuationSample],
+    'source official samples reach the Review analysis sidecar',
+  )
+  const firstQuestion = materialization.groups[0].questions[0]
+  const firstQuestionSource = projection.sourceVisuals.find((visual) =>
+    visual.targetId === firstQuestion.questionId)
+  assert.deepEqual(
+    {
+      documentId: firstQuestionSource?.documentId,
+      page: firstQuestionSource?.page,
+      region: firstQuestionSource?.region,
+      path: firstQuestionSource?.path,
+      state: firstQuestionSource?.state,
+    },
+    {
+      documentId: firstQuestion.source.documentId,
+      page: firstQuestion.source.page,
+      region: firstQuestion.source.region,
+      path: 'source/questions.pdf',
+      state: 'paired',
+    },
+    'page-region question locators must reach the Owner source-proof surface',
+  )
+  const firstBlock = materialization.groups[0].blocks[0]
+  assert.equal(
+    projection.sourceVisuals.find((visual) => visual.targetId === firstBlock.blockId)?.state,
+    'paired',
+    'page-region paragraph locators must reach the Owner source-proof surface',
+  )
   const confirmation = {
     schemaVersion: 'teacher-confirmation-v1',
     candidateDigest: projection.candidateDigest,
@@ -474,6 +520,37 @@ async function requestReviewAsset(projection, relativePath, session) {
   return { status, body }
 }
 
+async function requestReviewPrint(projection, versionType) {
+  const pathname = `/api/import-review-preview/revisions/rev-fixture/print?version=${versionType}`
+  const routes = createImportReviewRoutes({
+    getStore: () => ({ projectionForRevision: () => ({ projection }) }),
+    agentToken: '',
+    shipToken: '',
+    buildPrintHtml,
+  })
+  let status = null
+  let body = ''
+  const response = {
+    writeHead(code) { status = code },
+    end(value) { body = String(value || '') },
+  }
+  const context = {
+    session: { role: 'owner', accountKind: 'human' },
+    sendJson(_response, code, value) {
+      status = code
+      body = JSON.stringify(value)
+    },
+  }
+  const handled = await runRoutes(routes, {
+    request: { method: 'GET', headers: {} },
+    response,
+    url: new URL(`http://localhost${pathname}`),
+    context,
+  })
+  assert.equal(handled, true)
+  return { status, body }
+}
+
 function sevenChoicesSelection(consumption) {
   const selection = consumption.selections.find(
     ({ familyContractId }) => familyContractId === 'seven-choices',
@@ -501,6 +578,19 @@ async function assertRoleSurfaces({ projection, publishedScreen, publishedPrint 
     channel: 'chromium',
   })
   try {
+    const studentReviewPrint = await requestReviewPrint(projection, 'student')
+    assert.equal(studentReviewPrint.status, 200)
+    assert.doesNotMatch(studentReviewPrint.body, /class="teacher-official-model-answer"|Official (?:application|continuation) sample/)
+    const teacherReviewPrint = await requestReviewPrint(projection, 'teacher')
+    assert.equal(teacherReviewPrint.status, 200)
+    assert.equal(
+      (teacherReviewPrint.body.match(/class="teacher-official-model-answer"/g) || []).length,
+      2,
+      'Owner Review Teacher Print renders both source official samples',
+    )
+    assert.match(teacherReviewPrint.body, new RegExp(officialApplicationSample))
+    assert.match(teacherReviewPrint.body, new RegExp(officialContinuationSample))
+
     const screenPage = await browser.newPage({
       viewport: { width: 1280, height: 900 },
     })

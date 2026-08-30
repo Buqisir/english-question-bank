@@ -110,10 +110,10 @@ check('schema keeps continuation highlight expressions required', () => {
   delete candidate.highlightExpressions
   assert.equal(validateSchema(envelope(candidate)), false)
 })
-check('schema forbids official model answer on continuation', () => {
+check('schema accepts an official model answer on continuation', () => {
   assert.equal(validateSchema(envelope(continuationCandidate({
-    officialModelAnswer: 'Not valid for continuation.',
-  }))), false)
+    officialModelAnswer: 'Official continuation reference.',
+  }))), true)
 })
 check('schema keeps review card forbidden on continuation', () => {
   assert.equal(validateSchema(envelope(continuationCandidate({
@@ -157,13 +157,10 @@ check('runtime validator keeps continuation highlight expressions required', () 
   delete candidate.highlightExpressions
   assert.throws(() => validateWritingAnalysisCandidate(candidate), /highlightExpressions/)
 })
-check('runtime validator forbids official model answer on continuation', () => {
-  assert.throws(
-    () => validateWritingAnalysisCandidate(continuationCandidate({
-      officialModelAnswer: 'Not valid for continuation.',
-    })),
-    /officialModelAnswer/,
-  )
+check('runtime validator accepts official model answer on continuation', () => {
+  assert.doesNotThrow(() => validateWritingAnalysisCandidate(continuationCandidate({
+    officialModelAnswer: 'Official continuation reference.',
+  })))
 })
 check('runtime validator keeps review card forbidden on continuation', () => {
   assert.throws(

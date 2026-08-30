@@ -269,7 +269,18 @@ assert(
 console.log('\n-- 5. draftPaperStore wiring contract --')
 
 const draftStoreSource = read('server/draft-paper/draftPaperStore.mjs')
-assert('draftPaperStore imports loadGroupAnalysisTexts', draftStoreSource.includes("import { loadGroupAnalysisTexts } from './analysisText.mjs'"))
+assert(
+  'draftPaperStore imports loadGroupAnalysisTexts',
+  /import\s*\{[^}]*\bloadGroupAnalysisTexts\b[^}]*\}\s*from '\.\/analysisText\.mjs'/.test(
+    draftStoreSource,
+  ),
+)
+assert(
+  'draftPaperStore imports loadGroupOfficialModelAnswers',
+  /import\s*\{[^}]*\bloadGroupOfficialModelAnswers\b[^}]*\}\s*from '\.\/analysisText\.mjs'/.test(
+    draftStoreSource,
+  ),
+)
 assert('draftPaperStore factory accepts paperAssetsDir', /createDraftPaperStore\(\{[\s\S]{0,200}paperAssetsDir,/.test(draftStoreSource))
 assert(
   'buildDraftPrintHtml only joins analysis for teacher version',

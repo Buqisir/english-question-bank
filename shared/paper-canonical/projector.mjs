@@ -23,6 +23,13 @@ function projectProfileInstruction(profile, instructionId) {
   }
 }
 
+function projectSlotInstruction(profile, instructionId, group) {
+  const instruction = projectProfileInstruction(profile, instructionId)
+  return group?.variant?.sourceInstruction?.instructionId === instructionId
+    ? { ...instruction, text: group.variant.sourceInstruction.text }
+    : instruction
+}
+
 function groupSemanticPayload(group) {
   const { sourceMap: _sourceMap, sourceFingerprint: _sourceFingerprint, semanticDigest: _semanticDigest, ...semantic } = group
   return semantic
@@ -58,9 +65,16 @@ function sourceMapCoverageIssues(group, sourceCapture, family) {
       : family.variantSchemaId === 'canonical-application-writing-variant-v2'
         ? [`writing_task:${group.variant.writingTaskId}`]
       : []),
-    ...(family.variantSchemaId === 'canonical-continuation-writing-variant-v1'
+    ...([
+      'canonical-continuation-writing-variant-v1',
+      'canonical-continuation-writing-variant-v3',
+    ].includes(family.variantSchemaId)
       ? [
           `writing_task:${group.variant.writingTaskId}`,
+          ...(family.variantSchemaId
+            === 'canonical-continuation-writing-variant-v3'
+            ? [`source_instruction:${group.variant.sourceInstruction.instructionId}`]
+            : []),
           `word_ruling:${group.variant.wordCountRuling.authorityObservationRef}`,
           `response_binding:${group.variant.response.authorityObservationRef}`,
           ...(group.variant.starterProvision.kind === 'ordered_source_starters'
@@ -196,7 +210,7 @@ function assertCanonicalPackage(canonicalPackage) {
         variant: group.variant,
         assertions: sourceCapture.assertions,
         allowPassageBlockRoles:
-          ['47', '48'].includes(closure.authorityRef.manifestVersion),
+          ['47', '48', '49'].includes(closure.authorityRef.manifestVersion),
       })
       if (sevenChoicesIssues.length > 0) throw projectionError('Seven Choices canonical contract is not closed', sevenChoicesIssues)
     }
@@ -244,6 +258,7 @@ function assertCanonicalPackage(canonicalPackage) {
     }
     if (
       family.variantSchemaId === 'canonical-continuation-writing-variant-v1'
+      || family.variantSchemaId === 'canonical-continuation-writing-variant-v3'
       || family.variantSchemaId === 'canonical-continuation-writing-variant-v2'
     ) {
       const continuationIssues = validateContinuationWritingContract({
@@ -342,17 +357,17 @@ export function projectCanonicalPaper(canonicalPackage) {
       })
       for (const slot of section.slots) {
         if (slot.activation === 'inactive_source') continue
+        const binding = plan.slotBindings.find((candidate) => candidate.slotId === slot.slotId)
+        const group = groupById.get(binding.groupRef.groupId)
         for (const instructionId of slot.instructionRefs) {
           nodes.push({
             kind: 'instruction',
-            ...projectProfileInstruction(profile, instructionId),
+            ...projectSlotInstruction(profile, instructionId, group),
           })
         }
-        const binding = plan.slotBindings.find((candidate) => candidate.slotId === slot.slotId)
-        const group = groupById.get(binding.groupRef.groupId)
         const sevenChoices = group.variant.family === 'seven-choices'
           ? {
-              ...(['47', '48'].includes(closure.authorityRef.manifestVersion)
+              ...(['47', '48', '49'].includes(closure.authorityRef.manifestVersion)
                 ? {
                     passageBlockRoles: cloneJson(
                       group.variant.passageBlockRoles,
@@ -404,7 +419,7 @@ export function projectCanonicalPaper(canonicalPackage) {
                   ),
                 },
                 instructions: slot.instructionRefs.map((instructionId) =>
-                  projectProfileInstruction(profile, instructionId)),
+                  projectSlotInstruction(profile, instructionId, group)),
               },
               writingTaskId: group.variant.writingTaskId,
               ...(group.variant.mode === 'legacy_opaque'
@@ -471,7 +486,7 @@ export function projectCanonicalPaper(canonicalPackage) {
                   ),
                 },
                 instructions: slot.instructionRefs.map((instructionId) =>
-                  projectProfileInstruction(profile, instructionId)),
+                  projectSlotInstruction(profile, instructionId, group)),
               },
               writingTaskId: group.variant.writingTaskId,
               ...(group.variant.mode === 'legacy_opaque'
@@ -494,6 +509,13 @@ export function projectCanonicalPaper(canonicalPackage) {
                     },
                   }
                 : {
+                    ...(group.variant.sourceInstruction
+                      ? {
+                          sourceInstruction: cloneJson(
+                            group.variant.sourceInstruction,
+                          ),
+                        }
+                      : {}),
                     material: {
                       blocks: group.variant.materialBlockRefs.map((blockId) => cloneJson(group.content.blocks.find((block) => block.nodeId === blockId))),
                     },

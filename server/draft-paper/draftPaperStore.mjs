@@ -14,7 +14,10 @@ import {
 import {
   loadCanonicalSourceAssetRepresentation,
 } from '../paper-canonical/sourceAssetRepresentation.mjs'
-import { loadGroupAnalysisTexts } from './analysisText.mjs'
+import {
+  loadGroupAnalysisTexts,
+  loadGroupOfficialModelAnswers,
+} from './analysisText.mjs'
 import { renderPaginatedPaper } from './paginationRenderer.mjs'
 import { applyPaginationDomContract } from './paginationDomContract.mjs'
 import { proposeReorder } from './reorderSuggestion.mjs'
@@ -799,7 +802,13 @@ export function createDraftPaperStore({
       // Restart cut ③ — join teacher-version explanations from paper-assets
       // analysis files. Display-layer only: never writes questions.explanation.
       const analysisTextByQuestionId = loadGroupAnalysisTexts(exportItems, { paperAssetsDir })
+      const officialModelAnswerByGroupId = loadGroupOfficialModelAnswers(
+        exportItems,
+        { paperAssetsDir },
+      )
       for (const item of exportItems) {
+        const officialModelAnswer = officialModelAnswerByGroupId.get(item.detail.id)
+        if (officialModelAnswer) item.detail.officialModelAnswer = officialModelAnswer
         for (const question of item.detail.questions) {
           if (question.explanation) continue
           const analysisText = analysisTextByQuestionId.get(question.id)

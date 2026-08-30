@@ -60,7 +60,7 @@ const OCR_PRODUCER = Object.freeze({
   reviewName: 'nck1-ocr-materialization-review-v1.json',
   receiptName: 'nck1-ocr-materialization-producer-receipt-v1.json',
   receiptSchemaVersion: 'nck1-ocr-materialization-producer-receipt-v1',
-  allowReviewResume: true,
+  allowSourceInputRevision: true,
   loadInputs(paperDir) {
     const directory = path.join(paperDir, 'materialization')
     const evidencePath = path.join(directory, NCK1_OCR_EVIDENCE_FILE_NAME)
@@ -210,14 +210,17 @@ export function runNck1MaterializationJobUnlocked({ paperDir, manifest }) {
       }
     }
     if (
-      producer.allowReviewResume
+      producer.allowSourceInputRevision
       && receipt.schemaVersion === producer.receiptSchemaVersion
-      && receipt.producerVersion === producer.version
       && receipt.paperId === manifest.paperId
-      && receipt.disposition === 'needs_agent_review'
+      && receipt.sourceDigest !== sourceDigest
       && existsSync(reviewPath)
       && sha256(readFileSync(outputPath)) === receipt.outputDigest
     ) {
+      assertReceiptMediaFiles(paperDir, receipt)
+      for (const file of receipt.mediaFiles || []) {
+        rmSync(path.join(paperDir, file.path))
+      }
       rmSync(outputPath)
       rmSync(reviewPath)
       rmSync(receiptPath)

@@ -13,15 +13,18 @@ import manifestV45 from '../../standards/paper-canonical/manifest-v45.json' with
 import manifestV46 from '../../standards/paper-canonical/manifest-v46.json' with { type: 'json' }
 import manifestV47 from '../../standards/paper-canonical/manifest-v47.json' with { type: 'json' }
 import manifestV48 from '../../standards/paper-canonical/manifest-v48.json' with { type: 'json' }
+import manifestV49 from '../../standards/paper-canonical/manifest-v49.json' with { type: 'json' }
 import nck1V9 from '../../standards/paper-canonical/profiles/nck1-v9.json' with { type: 'json' }
 import nck1V10 from '../../standards/paper-canonical/profiles/nck1-v10.json' with { type: 'json' }
 import nck1V11 from '../../standards/paper-canonical/profiles/nck1-v11.json' with { type: 'json' }
 import nck1V12 from '../../standards/paper-canonical/profiles/nck1-v12.json' with { type: 'json' }
 import nck1V13 from '../../standards/paper-canonical/profiles/nck1-v13.json' with { type: 'json' }
+import nck1V14 from '../../standards/paper-canonical/profiles/nck1-v14.json' with { type: 'json' }
 import nationalLegacyV3 from '../../standards/paper-canonical/profiles/national-legacy-v3.json' with { type: 'json' }
 import zhejiangLegacyV7 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v7.json' with { type: 'json' }
 import zhejiangLegacyV10 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v10.json' with { type: 'json' }
 import zhejiangLegacyV11 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v11.json' with { type: 'json' }
+import zhejiangLegacyV12 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v12.json' with { type: 'json' }
 
 import { digestJson } from './stable.mjs'
 
@@ -31,6 +34,7 @@ const registeredProfiles = new Map([
   [`${nck1V11.profileId}@${nck1V11.version}`, nck1V11],
   [`${nck1V12.profileId}@${nck1V12.version}`, nck1V12],
   [`${nck1V13.profileId}@${nck1V13.version}`, nck1V13],
+  [`${nck1V14.profileId}@${nck1V14.version}`, nck1V14],
   [
     `${nationalLegacyV3.profileId}@${nationalLegacyV3.version}`,
     nationalLegacyV3,
@@ -46,6 +50,10 @@ const registeredProfiles = new Map([
   [
     `${zhejiangLegacyV11.profileId}@${zhejiangLegacyV11.version}`,
     zhejiangLegacyV11,
+  ],
+  [
+    `${zhejiangLegacyV12.profileId}@${zhejiangLegacyV12.version}`,
+    zhejiangLegacyV12,
   ],
 ])
 const manifestV31Profiles = new Map(
@@ -105,6 +113,18 @@ const manifestV45Profiles = new Map([
 const manifestV46Profiles = new Map(manifestV37Profiles)
 const manifestV47Profiles = new Map(manifestV37Profiles)
 const manifestV48Profiles = new Map(manifestV37Profiles)
+const manifestV49Profiles = new Map([
+  nck1V14,
+  nationalLegacyV3,
+  zhejiangLegacyV12,
+].map((profile) => [
+  profile.profileId,
+  {
+    profileId: profile.profileId,
+    profileVersion: profile.version,
+    profileDigest: digestJson(profile),
+  },
+]))
 const registeredManifestProfiles = new Map([
   [
     `${manifestV31.manifestId}@${manifestV31.version}@${digestJson(manifestV31)}`,
@@ -166,6 +186,10 @@ const registeredManifestProfiles = new Map([
     `${manifestV48.manifestId}@${manifestV48.version}@${digestJson(manifestV48)}`,
     manifestV48Profiles,
   ],
+  [
+    `${manifestV49.manifestId}@${manifestV49.version}@${digestJson(manifestV49)}`,
+    manifestV49Profiles,
+  ],
 ])
 
 function reject(message) {
@@ -175,7 +199,7 @@ function reject(message) {
   throw error
 }
 
-function profileVisibleStructure(profile, expectedGroups) {
+function profileVisibleStructure(profile, expectedGroups, instructionOverrides) {
   const groupBySlotId = new Map(
     expectedGroups.map((group) => [group.slotId, group]),
   )
@@ -219,11 +243,16 @@ function profileVisibleStructure(profile, expectedGroups) {
         if (slot.activation !== 'canonical_group') continue
         for (const instructionId of slot.instructionRefs) {
           const instruction = profile.instructions[instructionId]
+          const overrideKey = `${slot.slotId}\0${instructionId}`
+          const text = instructionOverrides.has(overrideKey)
+            ? instructionOverrides.get(overrideKey)
+            : instruction.text
+          instructionOverrides.delete(overrideKey)
           nodes.push({
             kind: 'instruction',
             instructionId: instruction.instructionId,
             placement: instruction.placement,
-            text: instruction.text,
+            text,
             renderPolicy: instruction.renderPolicy ?? 'render',
           })
         }
@@ -249,6 +278,9 @@ function profileVisibleStructure(profile, expectedGroups) {
   if (groupBySlotId.size > 0) {
     reject('Consumption Plan carries Groups outside the registered Profile')
   }
+  if (instructionOverrides.size > 0) {
+    reject('Consumption Plan carries source instructions outside the registered Profile')
+  }
   return nodes
 }
 
@@ -266,6 +298,58 @@ function hasExactKeys(value, expected) {
 
 function isIdentity(value) {
   return typeof value === 'string' && value.length > 0
+}
+
+function sourceInstructionOverrides(consumption) {
+  const overrides = new Map()
+  for (const selection of consumption.selections) {
+    const occurrences = selection?.projectedOccurrences || []
+    const continuationV49 =
+      consumption.authorityRef?.manifestVersion === '49'
+      && selection?.mode === 'canonical'
+      && selection?.familyContractId === 'continuation-writing'
+    const digestByGroupId = new Map(
+      (selection?.projectedOccurrenceDigests || []).map((entry) => [
+        entry?.groupId,
+        entry?.digest,
+      ]),
+    )
+    for (const occurrence of occurrences) {
+      const sourceInstruction = occurrence?.sourceInstruction
+      if (!continuationV49 && sourceInstruction === undefined) continue
+      const chromeInstructions = occurrence?.paperChrome?.instructions
+      const matchingChrome = Array.isArray(chromeInstructions)
+        ? chromeInstructions.filter((instruction) =>
+            instruction?.instructionId === sourceInstruction?.instructionId)
+        : []
+      const valid = (
+        continuationV49
+        && hasExactKeys(sourceInstruction, [
+          'instructionId',
+          'placement',
+          'text',
+          'authorityObservationRef',
+        ])
+        && sourceInstruction.instructionId === 'writing.continuation.prompt'
+        && sourceInstruction.placement === 'group_instruction'
+        && isIdentity(sourceInstruction.text)
+        && isIdentity(sourceInstruction.authorityObservationRef)
+        && matchingChrome.length === 1
+        && matchingChrome[0].placement === sourceInstruction.placement
+        && matchingChrome[0].text === sourceInstruction.text
+        && digestByGroupId.get(occurrence.groupId) === digestJson(occurrence)
+      )
+      if (!valid) {
+        reject('source-backed Profile instruction proof is invalid')
+      }
+      const key = `${occurrence.slotId}\0${sourceInstruction.instructionId}`
+      if (overrides.has(key)) {
+        reject('source-backed Profile instruction proof is duplicated')
+      }
+      overrides.set(key, sourceInstruction.text)
+    }
+  }
+  return overrides
 }
 
 /**
@@ -517,7 +601,11 @@ export function assertCanonicalConsumptionVisibleStructure(consumption) {
       !profile
       || profileRef.profileDigest !== digestJson(profile)
     ) reject('the registered Profile reference is stale or unknown')
-    const expectedStructure = profileVisibleStructure(profile, expectedGroups)
+    const expectedStructure = profileVisibleStructure(
+      profile,
+      expectedGroups,
+      sourceInstructionOverrides(consumption),
+    )
     if (
       consumption.visibleStructureDigest !== digestJson(visibleStructure)
       || digestJson(visibleStructure) !== digestJson(expectedStructure)

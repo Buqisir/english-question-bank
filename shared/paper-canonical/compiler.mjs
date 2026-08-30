@@ -2392,6 +2392,12 @@ function collectContinuationWritingTargetIds(variant) {
   }
   return [
     { kind: 'writing_task', id: variant.writingTaskId },
+    ...(variant.sourceInstruction
+      ? [{
+          kind: 'source_instruction',
+          id: variant.sourceInstruction.instructionId,
+        }]
+      : []),
     { kind: 'word_ruling', id: variant.wordCountRuling?.authorityObservationRef },
     { kind: 'response_binding', id: variant.response?.authorityObservationRef },
     ...(variant.starterProvision?.kind === 'ordered_source_starters'
@@ -2439,14 +2445,23 @@ function applicationWritingSourceSpanRefs(variant, content, capture, target) {
 function continuationWritingSourceSpanRefs(variant, content, capture, target) {
   if (variant?.family !== 'continuation-writing') return null
   if (variant.mode === 'legacy_opaque') return null
-  const observationRef = target.kind === 'word_ruling'
-    ? variant.wordCountRuling?.authorityObservationRef
-    : target.kind === 'response_binding'
-      ? variant.response?.authorityObservationRef
-      : target.kind === 'starter_absence'
-        ? variant.starterProvision?.absenceAssertionRef
-        : null
-  if (observationRef && target.id === observationRef) {
+  const observationRef = target.kind === 'source_instruction'
+    && target.id === variant.sourceInstruction?.instructionId
+    ? variant.sourceInstruction.authorityObservationRef
+    : target.kind === 'word_ruling'
+      ? variant.wordCountRuling?.authorityObservationRef
+      : target.kind === 'response_binding'
+        ? variant.response?.authorityObservationRef
+        : target.kind === 'starter_absence'
+          ? variant.starterProvision?.absenceAssertionRef
+          : null
+  if (
+    observationRef
+    && (
+      target.kind === 'source_instruction'
+      || target.id === observationRef
+    )
+  ) {
     const observation = capture.observations.find((candidate) => candidate.observationId === observationRef)
     return observation ? [observation.sourceSpanId] : null
   }
@@ -2744,7 +2759,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     content,
     new Set(sourceGroup.blankIds),
     mediaIds,
-    ['46', '47', '48'].includes(closure.authorityRef.manifestVersion),
+    ['46', '47', '48', '49'].includes(closure.authorityRef.manifestVersion),
   ))
   if (family.familyContractId !== 'reading' && contentHasFramedColumns(content)) {
     diagnostics.push(diagnostic('RICH_BLOCK_UNSUPPORTED', 'unsupported', '$.content', 'framed_columns is only representable in Reading'))
@@ -2752,7 +2767,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
   diagnostics.push(...validateReferenceBlankClosure(family.familyContractId, sourceGroup.questionIds, sourceGroup.blankIds, content))
   const variant = cloneJson(sourceGroup.variant || {})
   const variantKeys = family.familyContractId === 'seven-choices'
-    ? ['47', '48'].includes(closure.authorityRef.manifestVersion)
+    ? ['47', '48', '49'].includes(closure.authorityRef.manifestVersion)
       ? ['family', 'passageBlockRoles', 'members', 'choiceOwnership']
       : ['family', 'members', 'choiceOwnership']
     : family.familyContractId === 'reading'
@@ -2764,7 +2779,19 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
       : family.familyContractId === 'continuation-writing'
         ? variant.mode === 'legacy_opaque'
           ? ['family', 'mode', 'writingTaskId', 'sourceTaskType', 'contentBlockRefs', 'sourceStarterBlockRefs', 'wordCountTarget', 'wordCountTargetCertainty', 'wordCountScope', 'choiceOwnership', 'response']
-          : ['family', 'writingTaskId', 'materialBlockRefs', 'wordCountRuling', 'starterProvision', 'choiceOwnership', 'response']
+          : [
+              'family',
+              'writingTaskId',
+              ...(family.variantSchemaId
+                === 'canonical-continuation-writing-variant-v3'
+                ? ['sourceInstruction']
+                : []),
+              'materialBlockRefs',
+              'wordCountRuling',
+              'starterProvision',
+              'choiceOwnership',
+              'response',
+            ]
       : family.familyContractId === 'grammar-fill'
         && Number(family.version) >= 2
         ? ['family', 'promptBindings', 'choiceOwnership']
@@ -2796,7 +2823,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
       variant,
       assertions: capture.assertions,
       allowPassageBlockRoles:
-        ['47', '48'].includes(closure.authorityRef.manifestVersion),
+        ['47', '48', '49'].includes(closure.authorityRef.manifestVersion),
     }).map((item) => diagnostic(item.code, item.disposition, item.path, item.message)))
   }
   if (family.familyContractId === 'reading') {

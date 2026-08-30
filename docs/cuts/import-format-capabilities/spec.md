@@ -54,7 +54,8 @@ DOCX direct media的最小布局意图和人工确认门禁也已闭合；但表
 2. **答案形态**：`detailed`（答案 + 源详解/范文）、`key_only`（只有权威答案键）、
    `not_supplied`（尚未找到权威答案）。“答案键”必须覆盖该卷所有实际作答值，不是只
    收选择题 ABCD 而漏掉语法填空等答案。`detailed` 与 `key_only` 都只向下游提供权威
-   答案值；逐题详解不提取、不结构化，也不进入教师版。
+   答案值；逐题详解和评分说明不提取、不结构化，也不进入教师版。明确写作边界内的
+   官方应用文/续写范文保留并只进入Teacher Screen/Print/PDF，Student隐藏。
 3. **包装关系**：题卷/答案分开、同一文件内合并、或多页 image bundle。包装只决定
    source role 与 locator，不改变 Canonical 题意。
 
@@ -147,7 +148,8 @@ immutable source bytes
 ### Fail closed
 
 - 未识别容器、丢失 source locator、重叠/缺格、模糊 shape association、未闭合媒体、
-  OCR 低置信片段与未知布局关系必须产生稳定 code 和源区域；不得丢弃、补写或猜测。
+  真正未识别文字块与未知布局关系必须产生稳定 code 和源区域；不得丢弃、补写或猜测。
+  OCR confidence与alternatives只作诊断，不能单独把清晰纯文字页送入Owner逐页确认。
 - `needs_agent_review` 不是 `supported`。手工能修一卷也不是 producer 能力。
 - 失败项在 Teacher Confirmation 前不可进入 ready Canonical Candidate。
 
@@ -221,11 +223,11 @@ Owner 将“题卷图片 + 答案图片”定为首批发布能力，因为它�
 技术票 `01-source-region-review-pairing.md` 已建立自动化可证的原图局部—真实 Screen
 审核 seam，`03-text-layer-pdf-materializer.md` 已建立 PDF bbox adapter 与 DOCX/PDF 共用
 ordered-item parser，`06-scanned-pdf-ocr-evidence.md` 已建立逐页像素摘要、OCR observations、
-digest-bound人工确认及同一parser入口；三者仍需在首个非生产 Candidate 上做一次真实
-Owner QA。图片经 OCR 后必须由教师对照原图与真实 Screen，不能为了抢先发布而跳过确认。
-最短发布主线仍是 **01 → 03 → 06 → 09**。09现已在synthetic/public seam实现：先用OCR
-revision核对原图、文字、顺序和content-vs-furniture，确认后Agent才生成Candidate revision，
-再审核原图局部与真实Screen。技术实现完成不授权实际发布真实试卷；真实、只读、非CQ8
+digest-bound Agent closure及同一parser入口；三者仍需在首个非生产Candidate上做一次真实
+Owner QA。Agent对照原图闭合文字、顺序和content-vs-furniture；Candidate形成后先由独立
+识图审查核原页、转写、绑定和三面，主Agent修正后再交Owner做一次成卷验收。纯文字不按
+confidence逐页送Owner，内容图片、图表和重建表仍需视觉QA。最短发布主线仍是
+**01 → 03 → 06 → 09**。技术实现完成不授权实际发布真实试卷；真实、只读、非CQ8
 Owner QA与后续发布必须是独立明确授权的任务。
 
 Ticket 04现已把受限DOCX embedded PNG/JPEG/WebP接到Source Materialization v2：原bytes、
@@ -269,8 +271,9 @@ Owner 于 2026-08-28 至 2026-08-29 接受以下默认规则：
 3. **媒体 caption**：原卷中学生可见、帮助理解的题注是 Canonical content，三面都显示；
    文件名、来源页码和操作说明仅是 QA/accessibility metadata，不给学生看。
 4. **答案源详解**：不成为教师版内容，也不单独提取或结构化保存；只读取权威答案值。
-   原答案文件仍作为不可变 source evidence 保留，避免答案权威失去出处。答案文件里的
-   写作范文同样不进入 Materialization/教师版；听力原文仍按既有独立 contract 处理。
+   原答案文件仍作为不可变 source evidence 保留，避免答案权威失去出处。明确写作边界内的
+   官方范文进入Materialization并只在Teacher三面显示；评分/篇幅说明丢弃。听力原文仍按
+   既有独立contract完整保存。
 5. **低清题图**：清晰图不生成，只做准确裁剪和版式关系记录；轻度模糊先做非生成式
    增强。照片、插图、图表、流程图和关键题图只有在确实看不清时才允许生成候选，必须
    保留原图并由教师对照确认全部文字、数值和关系；确认后所有表面共用同一候选。

@@ -14,8 +14,10 @@ import {
   importCanonicalCandidate,
   rederiveConfirmedCanonicalCandidate,
 } from '../shared/paper-canonical/compiler.mjs'
+import { validateContinuationWritingContract } from '../shared/paper-canonical/continuationWriting.mjs'
 import { projectCanonicalPaper } from '../shared/paper-canonical/projector.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
+import { assertCanonicalConsumptionVisibleStructure } from '../shared/paper-canonical/visibleStructure.mjs'
 import manifestV46 from '../standards/paper-canonical/manifest-v46.json' with { type: 'json' }
 import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequest.mjs'
 import {
@@ -271,7 +273,7 @@ assert.deepEqual(
 )
 assert.equal(canonicalAuthorityRef.manifestVersion, '36')
 assert.equal(trustedDocxCandidateAuthorityRef.manifestVersion, '37')
-assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '48')
+assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '49')
 assert.equal(resolveCanonicalAuthority({
   manifestId: manifestV46.manifestId,
   manifestVersion: manifestV46.version,
@@ -301,12 +303,19 @@ assert.deepEqual(
   [{ nodeId: 'block:seven-choices:title', role: 'title' }],
   'NCK1 Candidate binds source-proven Seven Choices passage roles',
 )
+assert.equal(
+  first.candidate.interpretation.groups
+    .find((group) => group.family === 'continuation-writing')
+    .variant.sourceInstruction.text,
+  'continuation-writing prompt',
+  'NCK1 Candidate retains the source-exact continuation instruction',
+)
 
-const publicV48 = compileCanonicalPaper({
+const publicV49 = compileCanonicalPaper({
   authority: nck1MaterializationCandidateAuthorityRef,
   evidence: { documents: [] },
 })
-assert(publicV48.artifacts.normalizationReport.diagnostics.some((item) =>
+assert(publicV49.artifacts.normalizationReport.diagnostics.some((item) =>
   item.code === 'AUTHORITY_RETIRED'))
 
 const confirmed = rederiveConfirmedCanonicalCandidate(
@@ -341,6 +350,102 @@ assert.deepEqual(
   [{ nodeId: 'block:seven-choices:title', role: 'title' }],
   'Canonical projector retains source-proven Seven Choices passage roles',
 )
+const canonicalContinuationGroup = confirmedPackage.groups.find((group) =>
+  group.contractRef.familyContractId === 'continuation-writing')
+const projectedContinuationGroup = projected.nodes.find((node) =>
+  node.kind === 'group' && node.familyContractId === 'continuation-writing')
+assert.equal(
+  projected.nodes.find((node) =>
+    node.kind === 'instruction'
+    && node.instructionId === 'writing.continuation.prompt').text,
+  'continuation-writing prompt',
+  'top-level projection replaces the Profile default with the source instruction',
+)
+assert.equal(
+  projectedContinuationGroup.paperChrome.instructions.find((instruction) =>
+    instruction.instructionId === 'writing.continuation.prompt').text,
+  'continuation-writing prompt',
+  'Continuation paper chrome uses the same source-exact instruction',
+)
+const visibleStructure = projected.nodes.flatMap((node) => {
+  if (['part', 'section', 'instruction'].includes(node.kind)) return [node]
+  if (node.kind !== 'group') return []
+  return [{
+    kind: 'group',
+    slotId: node.slotId,
+    groupId: node.groupId,
+    familyContractId: node.familyContractId,
+  }]
+})
+const groupsByFamily = new Map()
+for (const group of confirmedPackage.groups) {
+  const familyContractId = group.contractRef.familyContractId
+  const groupIds = groupsByFamily.get(familyContractId) || []
+  groupIds.push(group.identity.groupId)
+  groupsByFamily.set(familyContractId, groupIds)
+}
+assert.deepEqual(
+  assertCanonicalConsumptionVisibleStructure({
+    authorityRef: confirmedPackage.plan.authorityRef,
+    profileRef: confirmedPackage.plan.profileRef,
+    visibleStructure,
+    visibleStructureDigest: digestJson(visibleStructure),
+    selections: [...groupsByFamily].map(([familyContractId, groupIds]) => {
+      const projectedOccurrences = projected.nodes.filter((node) =>
+        node.kind === 'group' && groupIds.includes(node.groupId))
+      return {
+        mode: 'canonical',
+        familyContractId,
+        groupIds,
+        projectedOccurrences,
+        ...(familyContractId === 'continuation-writing'
+          ? {
+              projectedOccurrenceDigests: projectedOccurrences.map(
+                (occurrence) => ({
+                  groupId: occurrence.groupId,
+                  digest: digestJson(occurrence),
+                }),
+              ),
+            }
+          : {}),
+      }
+    }),
+  }),
+  visibleStructure,
+  'visible structure accepts source-backed Profile instruction text',
+)
+const continuationValidationInput = {
+  groupId: canonicalContinuationGroup.identity.groupId,
+  profileId: 'nck1',
+  questionIds: canonicalContinuationGroup.questionRefs.map(({ questionId }) =>
+    questionId),
+  blankIds: canonicalContinuationGroup.blankRefs.map(({ blankId }) => blankId),
+  content: canonicalContinuationGroup.content,
+  variant: canonicalContinuationGroup.variant,
+  sourceCapture: confirmedPackage.sourceCapture,
+}
+assert.deepEqual(
+  validateContinuationWritingContract(continuationValidationInput),
+  [],
+  'source-exact continuation instruction authority validates before projection',
+)
+for (const [label, mutate] of [
+  ['text', (variant) => { variant.sourceInstruction.text = 'rewritten prompt' }],
+  ['observation ref', (variant) => {
+    variant.sourceInstruction.authorityObservationRef = 'observation:unbound'
+  }],
+]) {
+  const variant = structuredClone(canonicalContinuationGroup.variant)
+  mutate(variant)
+  assert(
+    validateContinuationWritingContract({
+      ...continuationValidationInput,
+      variant,
+    }).some((issue) =>
+      issue.code === 'CONTINUATION_SOURCE_INSTRUCTION_UNPROVEN'),
+    `tampered continuation source instruction ${label} must fail closed`,
+  )
+}
 const invalidRolePackage = structuredClone(confirmedPackage)
 invalidRolePackage.groups.find((group) =>
   group.contractRef.familyContractId === 'seven-choices')

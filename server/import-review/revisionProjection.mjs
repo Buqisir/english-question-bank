@@ -176,12 +176,18 @@ export function loadNck1ReviewSource(rootDir) {
   return { config, manifest, materialization, sourceInput }
 }
 
-function sourceVisualProjection(manifest, materialization) {
-  const coverage = materialization.sourceCoverage
+function projectedSourceRegion(manifest, materialization, {
+  visualId,
+  documentId,
+  page,
+  region,
+  disposition,
+  targetId,
+}) {
   const sourceDocument = materialization.documents.find((document) =>
-    document.documentId === coverage.documentId)
+    document.documentId === documentId)
   const manifestDocument = manifest.documents.find((document) =>
-    document.documentId === coverage.documentId)
+    document.documentId === documentId)
   if (!sourceDocument || !manifestDocument) {
     fail('Source visual inventory does not resolve to one captured document')
   }
@@ -189,31 +195,63 @@ function sourceVisualProjection(manifest, materialization) {
     manifestDocument.path,
     `document ${sourceDocument.documentId}`,
   )
-  return coverage.visuals.map((visual) => {
-    const imagePage = sourceDocument.mediaType === NCK1_IMAGE_BUNDLE_MEDIA_TYPE
-      ? manifestDocument.pages?.find((page) => page.page === visual.page)
-      : null
-    if (sourceDocument.mediaType === NCK1_IMAGE_BUNDLE_MEDIA_TYPE && !imagePage) {
-      fail(`Source visual page is unavailable: ${sourceDocument.documentId}:${visual.page}`)
-    }
-    return {
-      visualId: visual.visualId,
-      documentId: sourceDocument.documentId,
-      path: imagePage
-        ? normalizedRelativePath(
-            imagePage.path,
-            `document ${sourceDocument.documentId} page ${visual.page}`,
-          )
-        : sourcePath,
-      sourceDigest: imagePage?.sha256 || sourceDocument.sha256,
-      mediaType: imagePage?.mediaType || sourceDocument.mediaType,
-      page: visual.page,
-      region: visual.region ? structuredClone(visual.region) : null,
-      disposition: visual.disposition,
-      targetId: visual.targetId,
-      state: visual.region ? 'paired' : 'unlocated',
-    }
-  })
+  const imagePage = sourceDocument.mediaType === NCK1_IMAGE_BUNDLE_MEDIA_TYPE
+    ? manifestDocument.pages?.find((candidate) => candidate.page === page)
+    : null
+  if (sourceDocument.mediaType === NCK1_IMAGE_BUNDLE_MEDIA_TYPE && !imagePage) {
+    fail(`Source visual page is unavailable: ${sourceDocument.documentId}:${page}`)
+  }
+  return {
+    visualId,
+    documentId: sourceDocument.documentId,
+    path: imagePage
+      ? normalizedRelativePath(
+          imagePage.path,
+          `document ${sourceDocument.documentId} page ${page}`,
+        )
+      : sourcePath,
+    sourceDigest: imagePage?.sha256 || sourceDocument.sha256,
+    mediaType: imagePage?.mediaType || sourceDocument.mediaType,
+    page,
+    region: region ? structuredClone(region) : null,
+    disposition,
+    targetId,
+    state: region ? 'paired' : 'unlocated',
+  }
+}
+
+function sourceVisualProjection(manifest, materialization) {
+  const coverage = materialization.sourceCoverage
+  const declaredVisuals = coverage.visuals.map((visual) => projectedSourceRegion(
+    manifest,
+    materialization,
+    {
+      ...visual,
+      documentId: coverage.documentId,
+    },
+  ))
+  const semanticLocators = materialization.groups.flatMap((group) => [
+    ...group.blocks.map((block) => ({ targetId: block.blockId, source: block.source })),
+    ...group.questions.map((question) => ({
+      targetId: question.questionId,
+      source: question.source,
+    })),
+  ]).filter(({ source }) => source?.kind === 'page_region')
+  return [
+    ...declaredVisuals,
+    ...semanticLocators.map(({ targetId, source }) => projectedSourceRegion(
+      manifest,
+      materialization,
+      {
+        visualId: `visual:${materialization.paperId}:source-locator:${targetId}`,
+        documentId: source.documentId,
+        page: source.page,
+        region: source.region,
+        disposition: 'semantic_text',
+        targetId,
+      },
+    )),
+  ]
 }
 
 function primarySourceType(materialization) {
@@ -612,7 +650,14 @@ export function buildNck1ReviewConsumption(candidate, compilation) {
       familyContractId,
       groupIds,
       projectedOccurrences,
-      ...(['seven-choices', 'cloze', 'grammar-fill'].includes(familyContractId)
+      ...([
+        'seven-choices',
+        'cloze',
+        'grammar-fill',
+        ...(canonicalPaper.paperPlan.authorityRef.manifestVersion === '49'
+          ? ['continuation-writing']
+          : []),
+      ].includes(familyContractId)
         ? {
             projectedOccurrenceDigests: projectedOccurrences.map((occurrence) => ({
               groupId: occurrence.groupId,
@@ -768,6 +813,9 @@ export function buildNck1CompatibilityPaperAsset({
           : {}),
         ...(group.writingTask.starters.length > 0
           ? { continuationStarters: group.writingTask.starters }
+          : {}),
+        ...(group.writingTask.officialModelAnswer
+          ? { officialModelAnswer: group.writingTask.officialModelAnswer }
           : {}),
       }
     }

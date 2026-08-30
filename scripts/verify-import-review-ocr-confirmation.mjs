@@ -301,8 +301,9 @@ try {
   const detail = store.paperDetail(paperId)
   assert.equal(detail.latest.reviewKind, 'ocr')
   assert.equal(detail.ocrReview.documents.length, 2)
-  assert(detail.ocrReview.reviewFindings.some((item) =>
-    item.code === 'NCK1_OCR_CONFIDENCE_REVIEW_REQUIRED'))
+  assert.equal(detail.ocrReview.reviewFindings.some((item) =>
+    item.code === 'NCK1_OCR_CONFIDENCE_REVIEW_REQUIRED'), false,
+  'confidence and alternatives are diagnostic, not an Owner review gate')
   assert(detail.ocrReview.reviewFindings.some((item) =>
     item.code === 'NCK1_OCR_VISUAL_CLASSIFICATION_REQUIRED'))
 
