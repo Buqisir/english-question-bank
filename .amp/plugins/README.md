@@ -37,7 +37,9 @@ queue before the 30-second webhook handler starts a background queue drainer and
 startup also starts a drainer, so a process death leaves a durable item for recovery rather than an
 unprocessed thread message. Blocking kernel `flock` holders drain the queue serially; concurrent
 launchers wait instead of dropping work in a lock race. The webhook never depends on an LLM turn
-to wake or interpret the event.
+to wake or interpret the event. The plugin hands the controller to a detached, unreferenced child
+process so returning from the webhook callback cannot reap it; a bounded private `launcher.json`
+records the latest spawn/error/exit metadata without capturing output or environment values.
 
 The controller records one atomic private receipt per `(workflowVersion, testedSHA)`, so Amp's
 at-least-once delivery cannot execute an already reported run again. Orb pause cannot make a live
