@@ -26,6 +26,18 @@ bound thread. `scripts/import-pipeline/source-intake.mjs` sends `AMP_THREAD_ID` 
 lease operation. The Agent token cannot approve Review content or promote a paper. No import runs
 inside the 30-second webhook handler.
 
+### Import worker Orb size
+
+The plugin API's `createThread` contract accepts `executor: 'orb'` but no per-thread `orbSize`.
+Automatic import workers therefore inherit the Amp Project's default Orb size. Run this plugin in
+a dedicated import Project whose default is `a1.xxlarge` when scanned PDFs and ordered page images
+are expected; changing the default affects only new threads and does not resize an existing worker.
+Keep the import Project separate from the dedicated CI and deployment Orbs so their credentials,
+lifecycle, and workload remain isolated. The `importing-nck1-papers` skill checks actual processor
+capacity and uses bounded parallelism only for independent page work; paper state transitions stay
+single-writer. A smaller-than-expected worker may be slower but must not weaken gates or move a
+bound source-intake claim to another thread.
+
 Creating the secrets, enabling/reloading the plugin, and configuring the webhook are shared-state
 operations that remain disabled until separately authorized by the Owner.
 

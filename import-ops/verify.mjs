@@ -492,6 +492,16 @@ assert.match(
 )
 assert.match(
   importSkill,
+  /a1\.xxlarge[\s\S]*availableParallelism/,
+  'skill documents the dedicated high-compute Orb and verifies actual CPU capacity',
+)
+assert.match(
+  importSkill,
+  /bounded parallelism[\s\S]*remain serial under the one paper writer/,
+  'skill limits parallel work without weakening the single-writer state machine',
+)
+assert.match(
+  importSkill,
   /Never overwrite a finalized revision/,
   'skill requires corrective work to create a new immutable revision',
 )
