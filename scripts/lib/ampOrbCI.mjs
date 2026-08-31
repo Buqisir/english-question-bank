@@ -4,10 +4,12 @@ import {
   chmodSync,
   closeSync,
   existsSync,
+  linkSync,
   mkdirSync,
   mkdtempSync,
   openSync,
   readFileSync,
+  readdirSync,
   renameSync,
   rmSync,
   writeFileSync,
@@ -21,12 +23,14 @@ import { runVerificationCommand } from './verificationCommandRunner.mjs'
 
 export const AMP_ORB_CI_REPOSITORY = 'Buqisir/english-question-bank'
 export const AMP_ORB_CI_WORKFLOW_VERSION = 'v1'
+export const AMP_ORB_CI_QUEUE_SCHEMA_VERSION = 'amp-orb-ci-queue-v1'
 export const AMP_ORB_CI_STATUS_CONTEXT = 'Amp Orb Verify (shadow)'
 export const AMP_ORB_CI_SANDBOX_USER = 'eqb-ci'
 export const AMP_ORB_CI_SANDBOX_ROOT = '/var/tmp/eqb-amp-ci'
 
 const SHA = /^[a-f0-9]{40}$/u
 const DELIVERY_ID = /^[A-Za-z0-9][A-Za-z0-9-]{0,127}$/u
+const QUEUE_FILE = /^([A-Za-z0-9][A-Za-z0-9-]{0,127})\.json$/u
 const SANDBOX_BUNDLE = /^\/var\/tmp\/eqb-amp-ci\/inbox\/[a-f0-9-]{36}\/repository\.bundle$/u
 const THREAD_ID = /^T-[a-f0-9-]{36}$/u
 const TERMINAL_STATES = new Set(['reported'])
@@ -49,6 +53,27 @@ function atomicWriteJson(filePath, value) {
   }
   renameSync(temporary, filePath)
   chmodSync(filePath, 0o600)
+}
+
+function atomicCreateJson(filePath, value) {
+  ensurePrivateDirectory(path.dirname(filePath))
+  const temporary = `${filePath}.tmp-${process.pid}-${randomUUID()}`
+  const descriptor = openSync(temporary, 'wx', 0o600)
+  try {
+    writeFileSync(descriptor, `${JSON.stringify(value, null, 2)}\n`, 'utf8')
+  } finally {
+    closeSync(descriptor)
+  }
+  try {
+    linkSync(temporary, filePath)
+    chmodSync(filePath, 0o600)
+    return true
+  } catch (error) {
+    if (error?.code === 'EEXIST') return false
+    throw error
+  } finally {
+    rmSync(temporary, { force: true })
+  }
 }
 
 function readJson(filePath) {
@@ -90,28 +115,92 @@ export function ampOrbCIRunId(input) {
   return `${AMP_ORB_CI_WORKFLOW_VERSION}-${validateAmpOrbCIInput(input).testedSha}`
 }
 
+export function enqueueAmpOrbCIJob(input, { stateDir } = {}) {
+  const validated = validateAmpOrbCIInput(input)
+  ensurePrivateDirectory(stateDir)
+  const queueDir = path.join(stateDir, 'queue')
+  ensurePrivateDirectory(queueDir)
+  const queuePath = path.join(queueDir, `${validated.deliveryId}.json`)
+  const item = {
+    schemaVersion: AMP_ORB_CI_QUEUE_SCHEMA_VERSION,
+    input: validated,
+  }
+  const created = atomicCreateJson(queuePath, item)
+  if (!created) {
+    const existing = readJson(queuePath)
+    if (
+      existing?.schemaVersion !== AMP_ORB_CI_QUEUE_SCHEMA_VERSION
+      || JSON.stringify(existing.input) !== JSON.stringify(validated)
+    ) {
+      throw new Error('Amp Orb CI queue delivery identity mismatch')
+    }
+  }
+  return {
+    outcome: created ? 'queued' : 'duplicate',
+    queuePath,
+  }
+}
+
+export async function drainAmpOrbCIQueue({ stateDir, runJob } = {}) {
+  if (typeof runJob !== 'function') throw new Error('Amp Orb CI queue runner is missing')
+  ensurePrivateDirectory(stateDir)
+  const queueDir = path.join(stateDir, 'queue')
+  ensurePrivateDirectory(queueDir)
+  const files = readdirSync(queueDir)
+    .filter((file) => file.endsWith('.json'))
+    .sort()
+  const results = []
+  for (const file of files) {
+    const match = QUEUE_FILE.exec(file)
+    if (!match) throw new Error('Amp Orb CI queue filename is invalid')
+    const queuePath = path.join(queueDir, file)
+    const item = readJson(queuePath)
+    const input = validateAmpOrbCIInput(item?.input)
+    if (
+      item?.schemaVersion !== AMP_ORB_CI_QUEUE_SCHEMA_VERSION
+      || input.deliveryId !== match[1]
+    ) {
+      throw new Error('Amp Orb CI queue item identity mismatch')
+    }
+    const result = await runJob(input)
+    if (
+      !['cached', 'reported'].includes(result?.outcome)
+      || result?.receipt?.state !== 'reported'
+    ) {
+      throw new Error('Amp Orb CI queue job did not reach a terminal receipt')
+    }
+    rmSync(queuePath)
+    results.push({
+      deliveryId: input.deliveryId,
+      outcome: result.outcome,
+    })
+  }
+  return results
+}
+
 export function ampOrbCILockInvocation({
   stateDir,
   controllerPath,
   controllerArgs = [],
   nodePath = process.execPath,
+  wait = false,
 } = {}) {
   ensurePrivateDirectory(stateDir)
   const lockPath = path.join(stateDir, 'runner.lock')
   closeSync(openSync(lockPath, 'a', 0o600))
   chmodSync(lockPath, 0o600)
-  return {
-    command: '/usr/bin/flock',
-    args: [
-      '--no-fork',
+  const args = ['--no-fork']
+  if (!wait) {
+    args.push(
       '--nonblock',
       '--conflict-exit-code',
       String(AMP_ORB_CI_LOCK_CONFLICT_EXIT_CODE),
-      lockPath,
-      nodePath,
-      controllerPath,
-      ...controllerArgs,
-    ],
+    )
+  }
+  args.push(lockPath, nodePath, controllerPath, ...controllerArgs)
+  return {
+    command: '/usr/bin/flock',
+    args,
   }
 }
 
@@ -495,6 +584,7 @@ export async function runAmpOrbCIJob(input, {
       result: {
         kind: 'controller-error',
         errorName: error?.name || 'Error',
+        errorMessage: String(error?.message || 'Unknown controller error').slice(0, 500),
       },
     }
     conclusion = 'error'

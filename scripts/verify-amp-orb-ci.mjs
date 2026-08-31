@@ -3,7 +3,7 @@
 import assert from 'node:assert/strict'
 import { spawn, spawnSync } from 'node:child_process'
 import { createHmac } from 'node:crypto'
-import { once } from 'node:events'
+import { EventEmitter, once } from 'node:events'
 import {
   existsSync,
   mkdirSync,
@@ -18,8 +18,7 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 
 import githubCIWakeupPlugin, {
-  githubCIAgentPrompt,
-  githubCIWorkerArgs,
+  launchGitHubCIDrain,
   parseGitHubCIWebhook,
   validGitHubCISignature,
 } from '../.amp/plugins/github-ci-wakeup.js'
@@ -31,6 +30,8 @@ import {
   ampOrbCILockInvocation,
   ampOrbCIRunId,
   createGitHubStatusWriter,
+  drainAmpOrbCIQueue,
+  enqueueAmpOrbCIJob,
   reapAmpOrbCIProcesses,
   runAmpOrbCIJob,
   sandboxInvocation,
@@ -159,38 +160,35 @@ assert.equal(parseGitHubCIWebhook(pullRequestBody, {
   eventName: 'pull_request',
 }), null)
 
-const workerArgs = githubCIWorkerArgs(parsedPullRequest)
-assert.deepEqual(workerArgs, [
-  'node',
-  'scripts/amp-orb-ci.mjs',
-  'run',
-  '--event',
-  'pull_request',
-  '--sha',
-  headSha,
-  '--tested-sha',
-  testedSha,
-  '--base-sha',
-  baseSha,
-  '--delivery',
-  deliveryId,
-  '--pull-request',
-  '292',
-])
-const prompt = githubCIAgentPrompt(parsedPullRequest)
-assert.match(prompt, new RegExp(headSha))
-assert.match(prompt, new RegExp(testedSha))
-assert.match(prompt, /separate unprivileged user/u)
-assert.match(prompt, /Do not inspect or repeat a pull-request title\/body/u)
-assert.doesNotMatch(prompt, /Ignore prior instructions/u)
-assert.doesNotMatch(prompt, /QUESTION_BANK_AMP_CI_GITHUB_STATUS_TOKEN/u)
+const launchedProcesses = []
+const syntheticChild = new EventEmitter()
+const launchPromise = launchGitHubCIDrain({
+  repositoryRoot: '/trusted/controller',
+  spawnImpl(command, args, options) {
+    launchedProcesses.push({ command, args, options })
+    queueMicrotask(() => syntheticChild.emit('spawn'))
+    return syntheticChild
+  },
+})
+await launchPromise
+assert.deepEqual(launchedProcesses[0], {
+  command: 'node',
+  args: ['/trusted/controller/scripts/amp-orb-ci.mjs', 'drain'],
+  options: {
+    cwd: '/trusted/controller',
+    env: process.env,
+    stdio: 'ignore',
+  },
+})
 
 const originalEnabled = process.env.QUESTION_BANK_AMP_CI_PLUGIN_ENABLED
 const originalWebhookSecret = process.env.QUESTION_BANK_AMP_CI_GITHUB_WEBHOOK_SECRET
 const originalStatusToken = process.env.QUESTION_BANK_AMP_CI_GITHUB_STATUS_TOKEN
+const pluginState = mkdtempSync(path.join(tmpdir(), 'eqb-amp-orb-ci-plugin-'))
 let registeredWebhook = null
 let registeredCommand = null
-const appendedMessages = []
+const drainLaunches = []
+let rejectDrainLaunch = false
 const amp = {
   logger: { log() {} },
   async createWebhook(options) {
@@ -218,7 +216,14 @@ try {
 
   process.env.QUESTION_BANK_AMP_CI_GITHUB_WEBHOOK_SECRET = secret
   process.env.QUESTION_BANK_AMP_CI_GITHUB_STATUS_TOKEN = 'synthetic-status-token'
-  await githubCIWakeupPlugin(amp)
+  await githubCIWakeupPlugin(amp, {
+    repositoryRoot: '/trusted/controller',
+    stateDir: pluginState,
+    async launchDrain() {
+      drainLaunches.push('launch')
+      if (rejectDrainLaunch) throw new Error('synthetic launch failure')
+    },
+  })
   assert.equal(registeredWebhook.key, 'eqbank-github-ci-shadow-v1')
   assert.deepEqual(registeredWebhook.headers, [
     'x-github-delivery',
@@ -226,15 +231,11 @@ try {
     'x-hub-signature-256',
   ])
   assert.equal(registeredCommand.id, 'github-ci-webhook-url')
+  assert.equal(drainLaunches.length, 1, 'plugin startup recovers any durable queue residue')
 
   const context = {
     logger: { log() {} },
     signal: new AbortController().signal,
-    thread: {
-      async appendUserMessage(message, options) {
-        appendedMessages.push({ message, options })
-      },
-    },
   }
   const event = {
     id: 'amp-webhook-event-1',
@@ -247,23 +248,58 @@ try {
   }
   await registeredWebhook.handler(event, context)
   await registeredWebhook.handler(event, context)
-  assert.equal(appendedMessages.length, 2, 'at-least-once duplicate prompts reach one owning thread')
-  assert.equal(appendedMessages[0].message.type, 'user-message')
-  assert.equal(appendedMessages[0].message.content, prompt)
-  assert.deepEqual(appendedMessages[0].options, { steer: true })
-  assert.equal(appendedMessages[1].message.content, prompt, 'duplicate prompt identity is stable')
+  assert.equal(drainLaunches.length, 3, 'every accepted delivery ensures a queue drainer exists')
+  const queueDir = path.join(pluginState, 'queue')
+  const queuedFiles = readdirSync(queueDir)
+  assert.deepEqual(queuedFiles, [`${deliveryId}.json`], 'at-least-once delivery has one durable item')
+  assert.equal(statSync(path.join(queueDir, queuedFiles[0])).mode & 0o777, 0o600)
+  const queuedItem = JSON.parse(readFileSync(path.join(queueDir, queuedFiles[0]), 'utf8'))
+  assert.deepEqual(queuedItem.input, validateAmpOrbCIInput(parsedPullRequest))
+  assert.equal(JSON.stringify(queuedItem).includes('Ignore prior instructions'), false)
+  assert.equal(JSON.stringify(queuedItem).includes('QUESTION_BANK_AMP_CI_GITHUB_STATUS_TOKEN'), false)
+
+  const drainedInputs = []
+  const drained = await drainAmpOrbCIQueue({
+    stateDir: pluginState,
+    async runJob(input) {
+      drainedInputs.push(input)
+      return { outcome: 'reported', receipt: { state: 'reported' } }
+    },
+  })
+  assert.deepEqual(drainedInputs, [validateAmpOrbCIInput(parsedPullRequest)])
+  assert.deepEqual(drained, [{ deliveryId, outcome: 'reported' }])
+  assert.deepEqual(readdirSync(queueDir), [], 'successful drain removes the durable item')
 
   await registeredWebhook.handler({
     ...event,
     headers: { ...event.headers, 'x-hub-signature-256': 'sha256=' + '0'.repeat(64) },
   }, context)
-  assert.equal(appendedMessages.length, 2, 'invalid HMAC cannot queue work')
+  assert.equal(drainLaunches.length, 3, 'invalid HMAC cannot queue or launch work')
 
   const aborted = new AbortController()
   aborted.abort()
   await registeredWebhook.handler(event, { ...context, signal: aborted.signal })
-  assert.equal(appendedMessages.length, 2, 'cancelled handler cannot queue work')
+  assert.equal(drainLaunches.length, 4, 'verified delivery is durably queued even after handler abort')
+  assert.deepEqual(readdirSync(queueDir), [`${deliveryId}.json`])
+
+  await drainAmpOrbCIQueue({
+    stateDir: pluginState,
+    async runJob() { return { outcome: 'reported', receipt: { state: 'reported' } } },
+  })
+  rejectDrainLaunch = true
+  const failedLaunchDelivery = '33333333-3333-4333-8333-333333333333'
+  await assert.rejects(registeredWebhook.handler({
+    ...event,
+    headers: { ...event.headers, 'x-github-delivery': failedLaunchDelivery },
+  }, context), /synthetic launch failure/u)
+  assert.equal(drainLaunches.length, 5)
+  assert.deepEqual(
+    readdirSync(queueDir),
+    [`${failedLaunchDelivery}.json`],
+    'launch failure rejects the handler but retains its durable queue item',
+  )
 } finally {
+  rmSync(pluginState, { force: true, recursive: true })
   if (originalEnabled === undefined) delete process.env.QUESTION_BANK_AMP_CI_PLUGIN_ENABLED
   else process.env.QUESTION_BANK_AMP_CI_PLUGIN_ENABLED = originalEnabled
   if (originalWebhookSecret === undefined) delete process.env.QUESTION_BANK_AMP_CI_GITHUB_WEBHOOK_SECRET
@@ -431,6 +467,54 @@ function tempState() {
 }
 
 try {
+  const queueState = tempState()
+  const queued = enqueueAmpOrbCIJob(jobInput, { stateDir: queueState })
+  const duplicateQueue = enqueueAmpOrbCIJob(jobInput, { stateDir: queueState })
+  assert.equal(queued.outcome, 'queued')
+  assert.equal(duplicateQueue.outcome, 'duplicate')
+  assert.equal(duplicateQueue.queuePath, queued.queuePath)
+  await assert.rejects(drainAmpOrbCIQueue({
+    stateDir: queueState,
+    async runJob() { throw new Error('synthetic drain interruption') },
+  }), /synthetic drain interruption/u)
+  assert.equal(existsSync(queued.queuePath), true, 'failed drain retains its durable queue item')
+  const recoveredQueue = await drainAmpOrbCIQueue({
+    stateDir: queueState,
+    async runJob(input) {
+      assert.deepEqual(input, jobInput)
+      return { outcome: 'reported', receipt: { state: 'reported' } }
+    },
+  })
+  assert.deepEqual(recoveredQueue, [{ deliveryId, outcome: 'reported' }])
+  assert.equal(existsSync(queued.queuePath), false, 'successful retry removes its durable queue item')
+
+  const nonterminalQueue = enqueueAmpOrbCIJob(jobInput, { stateDir: queueState })
+  await assert.rejects(drainAmpOrbCIQueue({
+    stateDir: queueState,
+    async runJob() { return { outcome: 'reported', receipt: { state: 'verified' } } },
+  }), /did not reach a terminal receipt/u)
+  assert.equal(existsSync(nonterminalQueue.queuePath), true, 'nonterminal result retains its queue item')
+  rmSync(nonterminalQueue.queuePath)
+
+  const concurrentQueueState = tempState()
+  const enqueueModuleUrl = new URL('./lib/ampOrbCI.mjs', import.meta.url).href
+  const enqueueScript = [
+    `import { enqueueAmpOrbCIJob } from ${JSON.stringify(enqueueModuleUrl)}`,
+    `enqueueAmpOrbCIJob(${JSON.stringify(jobInput)}, { stateDir: ${JSON.stringify(concurrentQueueState)} })`,
+  ].join(';')
+  const enqueueProcesses = Array.from({ length: 8 }, () => spawn(process.execPath, [
+    '--input-type=module',
+    '--eval',
+    enqueueScript,
+  ], { stdio: 'ignore' }))
+  const enqueueExits = await Promise.all(enqueueProcesses.map((process) => once(process, 'exit')))
+  assert.deepEqual(enqueueExits, Array.from({ length: 8 }, () => [0, null]))
+  assert.deepEqual(
+    readdirSync(path.join(concurrentQueueState, 'queue')),
+    [`${deliveryId}.json`],
+    'concurrent delivery enqueue creates exactly one durable queue item',
+  )
+
   const successState = tempState()
   const successStatuses = []
   let successExecutions = 0
@@ -525,6 +609,19 @@ try {
   assert.equal(recovered.receipt.conclusion, 'success')
   assert.equal(recoveryExecutions, 1, 'running crash receipt is safely re-executed')
 
+  const controllerErrorState = tempState()
+  const controllerErrorStatuses = []
+  const controllerError = await runAmpOrbCIJob(jobInput, {
+    stateDir: controllerErrorState,
+    async writeStatus(status) { controllerErrorStatuses.push(status) },
+    async execute() { throw new Error('synthetic trusted fetch failed') },
+  })
+  assert.equal(controllerError.receipt.conclusion, 'error')
+  assert.equal(controllerError.receipt.result.kind, 'controller-error')
+  assert.equal(controllerError.receipt.result.errorName, 'Error')
+  assert.equal(controllerError.receipt.result.errorMessage, 'synthetic trusted fetch failed')
+  assert.deepEqual(controllerErrorStatuses.map((status) => status.state), ['pending', 'error'])
+
   const lockState = tempState()
   const lockInvocation = ampOrbCILockInvocation({
     stateDir: lockState,
@@ -546,6 +643,23 @@ try {
       'run',
       '--sha',
       headSha,
+    ],
+  })
+  const blockingDrainInvocation = ampOrbCILockInvocation({
+    stateDir: lockState,
+    controllerPath: '/trusted/controller/scripts/amp-orb-ci.mjs',
+    controllerArgs: ['drain'],
+    nodePath: '/trusted/node/bin/node',
+    wait: true,
+  })
+  assert.deepEqual(blockingDrainInvocation, {
+    command: '/usr/bin/flock',
+    args: [
+      '--no-fork',
+      lockPath,
+      '/trusted/node/bin/node',
+      '/trusted/controller/scripts/amp-orb-ci.mjs',
+      'drain',
     ],
   })
   const readyPath = path.join(lockState, 'holder-ready')
@@ -571,17 +685,21 @@ try {
     '/usr/bin/true',
   ])
   assert.equal(blocked.status, AMP_ORB_CI_LOCK_CONFLICT_EXIT_CODE, 'second controller is rejected')
+  const acquiredPath = path.join(lockState, 'waiter-acquired')
+  const waiter = spawn('/usr/bin/flock', [
+    '--no-fork',
+    lockPath,
+    process.execPath,
+    '--input-type=module',
+    '--eval',
+    `import { writeFileSync } from 'node:fs'; writeFileSync(${JSON.stringify(acquiredPath)}, 'acquired', { mode: 0o600 })`,
+  ], { stdio: 'ignore' })
+  await new Promise((resolve) => setTimeout(resolve, 100))
+  assert.equal(existsSync(acquiredPath), false, 'blocking waiter does not pass the held lock')
   holder.kill('SIGTERM')
   await once(holder, 'exit')
-  const recoveredLock = spawnSync('/usr/bin/flock', [
-    '--no-fork',
-    '--nonblock',
-    '--conflict-exit-code',
-    String(AMP_ORB_CI_LOCK_CONFLICT_EXIT_CODE),
-    lockPath,
-    '/usr/bin/true',
-  ])
-  assert.equal(recoveredLock.status, 0, 'kernel releases the lock after controller death')
+  assert.deepEqual(await once(waiter, 'exit'), [0, null])
+  assert.equal(existsSync(acquiredPath), true, 'blocking waiter acquires after controller death')
 
   for (const root of tempRoots) {
     for (const file of privateFiles(root)) {
