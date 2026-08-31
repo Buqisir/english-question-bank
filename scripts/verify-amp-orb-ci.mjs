@@ -25,6 +25,7 @@ import githubCIWakeupPlugin, {
 } from '../.amp/plugins/github-ci-wakeup.js'
 import {
   AMP_ORB_CI_E2E_COMMANDS,
+  AMP_ORB_CI_FAST_PORTS,
   ampOrbCILaneCommands,
   parseSandboxInput,
 } from './amp-orb-ci-sandbox.mjs'
@@ -874,6 +875,16 @@ assert.deepEqual(AMP_ORB_CI_E2E_COMMANDS, [
 assert.equal(ampOrbCILaneCommands('fast'), AMP_ORB_CI_E2E_COMMANDS)
 assert.deepEqual(ampOrbCILaneCommands('full'), [['pnpm', ['-C', 'app', 'verify:all']]])
 assert.throws(() => ampOrbCILaneCommands('unknown'), /Invalid sandbox lane/u)
+assert.deepEqual(AMP_ORB_CI_FAST_PORTS, {
+  'scripts/verify-a3-imposition.mjs': { api: '15997', vite: '15197' },
+  'scripts/verify-reorder-suggest.mjs': { api: '15998', vite: '15198' },
+  'scripts/smoke-golden-path.mjs': { api: '15999', vite: '15199' },
+})
+assert.equal(
+  new Set(Object.values(AMP_ORB_CI_FAST_PORTS).flatMap(({ api, vite }) => [api, vite])).size,
+  6,
+  'each Fast E2E server uses a distinct shifted port',
+)
 for (const script of [
   'scripts/verify-a3-imposition.mjs',
   'scripts/verify-reorder-suggest.mjs',

@@ -94,6 +94,12 @@ export const AMP_ORB_CI_E2E_COMMANDS = Object.freeze([
   ['node', ['scripts/smoke-golden-path.mjs']],
 ])
 
+export const AMP_ORB_CI_FAST_PORTS = Object.freeze({
+  'scripts/verify-a3-imposition.mjs': Object.freeze({ api: '15997', vite: '15197' }),
+  'scripts/verify-reorder-suggest.mjs': Object.freeze({ api: '15998', vite: '15198' }),
+  'scripts/smoke-golden-path.mjs': Object.freeze({ api: '15999', vite: '15199' }),
+})
+
 export function ampOrbCILaneCommands(lane) {
   if (lane === 'fast') return AMP_ORB_CI_E2E_COMMANDS
   if (lane === 'full') return [['pnpm', ['-C', 'app', 'verify:all']]]
@@ -160,12 +166,20 @@ export async function runSandbox(input, { signal }) {
     let verifyExitCode = null
     const e2eFailures = []
     if (input.lane === 'fast') {
-      process.env.AMP_ORB_CI_API_PORT = '15999'
-      process.env.AMP_ORB_CI_VITE_PORT = '15199'
       for (const [command, args] of ampOrbCILaneCommands(input.lane)) {
+        const ports = AMP_ORB_CI_FAST_PORTS[args[0]]
+        if (ports) {
+          process.env.AMP_ORB_CI_API_PORT = ports.api
+          process.env.AMP_ORB_CI_VITE_PORT = ports.vite
+        } else {
+          delete process.env.AMP_ORB_CI_API_PORT
+          delete process.env.AMP_ORB_CI_VITE_PORT
+        }
         const exitCode = await runCommand(command, args, { cwd: checkout, signal })
         if (exitCode !== 0) e2eFailures.push({ command, args, exitCode })
       }
+      delete process.env.AMP_ORB_CI_API_PORT
+      delete process.env.AMP_ORB_CI_VITE_PORT
     } else {
       const [[command, args]] = ampOrbCILaneCommands(input.lane)
       verifyExitCode = await runCommand(command, args, {
