@@ -1,5 +1,10 @@
 import { spawn } from 'node:child_process'
 import { createHmac, timingSafeEqual } from 'node:crypto'
+import {
+  chmodSync,
+  mkdirSync,
+  writeFileSync,
+} from 'node:fs'
 import path from 'node:path'
 
 import {
@@ -77,19 +82,73 @@ export function parseGitHubCIWebhook(body, { eventName, deliveryId }) {
   return null
 }
 
+function recordGitHubCIDrainLaunch(stateDir, record) {
+  try {
+    mkdirSync(stateDir, { recursive: true, mode: 0o700 })
+    chmodSync(stateDir, 0o700)
+    const launcherPath = path.join(stateDir, 'launcher.json')
+    writeFileSync(launcherPath, `${JSON.stringify({
+      schemaVersion: 'amp-orb-ci-launcher-v1',
+      recordedAt: new Date().toISOString(),
+      ...record,
+    }, null, 2)}\n`, { mode: 0o600 })
+    chmodSync(launcherPath, 0o600)
+  } catch {
+    // Diagnostics must never block or retain a successfully spawned drainer.
+  }
+}
+
 export async function launchGitHubCIDrain({
   repositoryRoot,
+  stateDir,
   spawnImpl = spawn,
 } = {}) {
   const controllerPath = path.join(repositoryRoot, 'scripts', 'amp-orb-ci.mjs')
+  const resolvedStateDir = stateDir || defaultAmpOrbCIStateDir(repositoryRoot)
   await new Promise((resolve, reject) => {
-    const child = spawnImpl('node', [controllerPath, 'drain'], {
-      cwd: repositoryRoot,
-      env: process.env,
-      stdio: 'ignore',
+    let spawned = false
+    let child
+    try {
+      child = spawnImpl(process.execPath, [controllerPath, 'drain'], {
+        cwd: repositoryRoot,
+        detached: true,
+        env: process.env,
+        stdio: 'ignore',
+      })
+    } catch (error) {
+      recordGitHubCIDrainLaunch(resolvedStateDir, {
+        state: 'error',
+        errorName: String(error?.name || 'Error').slice(0, 80),
+        errorCode: String(error?.code || 'unknown').slice(0, 80),
+      })
+      reject(error)
+      return
+    }
+    child.once('error', (error) => {
+      recordGitHubCIDrainLaunch(resolvedStateDir, {
+        state: 'error',
+        errorName: String(error?.name || 'Error').slice(0, 80),
+        errorCode: String(error?.code || 'unknown').slice(0, 80),
+      })
+      if (!spawned) reject(error)
     })
-    child.once('error', reject)
-    child.once('spawn', resolve)
+    child.once('spawn', () => {
+      spawned = true
+      child.unref()
+      recordGitHubCIDrainLaunch(resolvedStateDir, {
+        state: 'spawned',
+        pid: child.pid ?? null,
+      })
+      resolve()
+    })
+    child.once('exit', (code, signal) => {
+      recordGitHubCIDrainLaunch(resolvedStateDir, {
+        state: 'exited',
+        pid: child.pid ?? null,
+        code: Number.isInteger(code) ? code : null,
+        signal: typeof signal === 'string' ? signal.slice(0, 32) : null,
+      })
+    })
   })
 }
 
@@ -112,7 +171,10 @@ export default async function githubCIWakeupPlugin(amp, overrides = {}) {
 
   const repositoryRoot = overrides.repositoryRoot || repositoryRootFromModule(import.meta.url)
   const stateDir = overrides.stateDir || defaultAmpOrbCIStateDir(repositoryRoot)
-  const launchDrain = overrides.launchDrain || (() => launchGitHubCIDrain({ repositoryRoot }))
+  const launchDrain = overrides.launchDrain || (() => launchGitHubCIDrain({
+    repositoryRoot,
+    stateDir,
+  }))
 
   const registration = await amp.createWebhook({
     key: 'eqbank-github-ci-shadow-v1',

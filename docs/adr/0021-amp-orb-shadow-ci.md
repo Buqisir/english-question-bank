@@ -31,7 +31,10 @@ payload data never become instructions or reach an LLM. The webhook atomically
 enqueues before launching a queue drainer and returning within its deadline.
 Plugin startup also launches a drainer, so a process death leaves recoverable
 work on disk. No worker thread is created; the owning 16-core Orb runs one suite
-at a time.
+at a time. The plugin detaches and unreferences the controller child after the
+OS spawn handoff so the webhook callback lifecycle cannot reap it. One bounded
+private launcher record exposes only spawn/error/exit metadata for pre-lock
+diagnosis; it never captures child output or environment values.
 
 The trusted controller uses `(workflowVersion, exact tested SHA)` as the durable
 run identity. Private mode-0600 receipts bind both the tested and status SHAs and

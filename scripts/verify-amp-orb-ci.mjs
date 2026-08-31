@@ -160,26 +160,103 @@ assert.equal(parseGitHubCIWebhook(pullRequestBody, {
   eventName: 'pull_request',
 }), null)
 
-const launchedProcesses = []
-const syntheticChild = new EventEmitter()
-const launchPromise = launchGitHubCIDrain({
-  repositoryRoot: '/trusted/controller',
-  spawnImpl(command, args, options) {
-    launchedProcesses.push({ command, args, options })
-    queueMicrotask(() => syntheticChild.emit('spawn'))
-    return syntheticChild
-  },
-})
-await launchPromise
-assert.deepEqual(launchedProcesses[0], {
-  command: 'node',
-  args: ['/trusted/controller/scripts/amp-orb-ci.mjs', 'drain'],
-  options: {
-    cwd: '/trusted/controller',
-    env: process.env,
-    stdio: 'ignore',
-  },
-})
+const launchState = mkdtempSync(path.join(tmpdir(), 'eqb-amp-orb-ci-launch-'))
+const launchErrorState = mkdtempSync(path.join(tmpdir(), 'eqb-amp-orb-ci-launch-error-'))
+const launchRecordFailureRoot = mkdtempSync(path.join(tmpdir(), 'eqb-amp-orb-ci-launch-record-'))
+try {
+  const launchedProcesses = []
+  const syntheticChild = new EventEmitter()
+  syntheticChild.pid = 4242
+  let unrefCount = 0
+  syntheticChild.unref = () => { unrefCount += 1 }
+  const launchPromise = launchGitHubCIDrain({
+    repositoryRoot: '/trusted/controller',
+    stateDir: launchState,
+    spawnImpl(command, args, options) {
+      launchedProcesses.push({ command, args, options })
+      queueMicrotask(() => syntheticChild.emit('spawn'))
+      return syntheticChild
+    },
+  })
+  await launchPromise
+  assert.deepEqual(launchedProcesses[0], {
+    command: process.execPath,
+    args: ['/trusted/controller/scripts/amp-orb-ci.mjs', 'drain'],
+    options: {
+      cwd: '/trusted/controller',
+      detached: true,
+      env: process.env,
+      stdio: 'ignore',
+    },
+  })
+  assert.equal(unrefCount, 1, 'detached controller is unreferenced after spawn handoff')
+  syntheticChild.emit('exit', 9, null)
+  const launchRecordPath = path.join(launchState, 'launcher.json')
+  const launchRecord = JSON.parse(readFileSync(launchRecordPath, 'utf8'))
+  assert.deepEqual({
+    state: launchRecord.state,
+    pid: launchRecord.pid,
+    code: launchRecord.code,
+    signal: launchRecord.signal,
+  }, {
+    state: 'exited',
+    pid: 4242,
+    code: 9,
+    signal: null,
+  })
+  assert.equal(statSync(launchRecordPath).mode & 0o777, 0o600)
+
+  const syntheticLaunchError = Object.assign(new Error('synthetic spawn failure'), {
+    code: 'ENOENT',
+  })
+  await assert.rejects(launchGitHubCIDrain({
+    repositoryRoot: '/trusted/controller',
+    stateDir: launchErrorState,
+    spawnImpl() {
+      const child = new EventEmitter()
+      queueMicrotask(() => child.emit('error', syntheticLaunchError))
+      return child
+    },
+  }), /synthetic spawn failure/u)
+  const launchErrorRecordPath = path.join(launchErrorState, 'launcher.json')
+  const launchErrorRecord = JSON.parse(readFileSync(launchErrorRecordPath, 'utf8'))
+  assert.deepEqual({
+    state: launchErrorRecord.state,
+    errorName: launchErrorRecord.errorName,
+    errorCode: launchErrorRecord.errorCode,
+  }, {
+    state: 'error',
+    errorName: 'Error',
+    errorCode: 'ENOENT',
+  })
+  assert.equal(statSync(launchErrorRecordPath).mode & 0o777, 0o600)
+
+  const invalidLaunchState = path.join(launchRecordFailureRoot, 'not-a-directory')
+  writeFileSync(invalidLaunchState, 'synthetic obstruction', { mode: 0o600 })
+  const recordFailureChild = new EventEmitter()
+  recordFailureChild.pid = 4343
+  let recordFailureUnrefCount = 0
+  recordFailureChild.unref = () => { recordFailureUnrefCount += 1 }
+  const recordFailureLaunch = launchGitHubCIDrain({
+    repositoryRoot: '/trusted/controller',
+    stateDir: invalidLaunchState,
+    spawnImpl() {
+      queueMicrotask(() => recordFailureChild.emit('spawn'))
+      return recordFailureChild
+    },
+  })
+  await recordFailureLaunch
+  assert.equal(
+    recordFailureUnrefCount,
+    1,
+    'diagnostic write failure cannot retain or reject a successful spawn handoff',
+  )
+  assert.doesNotThrow(() => recordFailureChild.emit('exit', 1, null))
+} finally {
+  rmSync(launchState, { force: true, recursive: true })
+  rmSync(launchErrorState, { force: true, recursive: true })
+  rmSync(launchRecordFailureRoot, { force: true, recursive: true })
+}
 
 const originalEnabled = process.env.QUESTION_BANK_AMP_CI_PLUGIN_ENABLED
 const originalWebhookSecret = process.env.QUESTION_BANK_AMP_CI_GITHUB_WEBHOOK_SECRET
