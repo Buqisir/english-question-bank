@@ -24,6 +24,16 @@ async function waitForProcessExit(pid) {
   }
 }
 
+async function waitForMatch(readOutput, pattern, message) {
+  const deadline = Date.now() + 2_000
+  while (Date.now() < deadline) {
+    const match = pattern.exec(readOutput())
+    if (match) return match
+    await new Promise((resolve) => setTimeout(resolve, 25))
+  }
+  assert.fail(message)
+}
+
 const fixture = String.raw`
   const { spawn } = require('node:child_process')
   const descendant = spawn(process.execPath, ['-e', 'setInterval(() => {}, 1000)'], {
@@ -36,6 +46,7 @@ const fixture = String.raw`
 
 let output = ''
 let descendantPid = null
+const interruptedDescendantPids = []
 const unrelated = spawn(
   process.execPath,
   ['-e', 'setInterval(() => {}, 1000)'],
@@ -74,11 +85,59 @@ try {
       true,
       'runner leaves an unrelated process outside the verifier group alive',
     )
+
+    const abortController = new AbortController()
+    const interruptedOutputs = ['', '']
+    const interruptedFixture = String.raw`
+      const { spawn } = require('node:child_process')
+      const descendant = spawn(process.execPath, ['-e', 'setInterval(() => {}, 1000)'], {
+        stdio: 'inherit',
+      })
+      console.log('INTERRUPTED_DESCENDANT_PID=' + descendant.pid)
+      setInterval(() => {}, 1000)
+    `
+    const interruptedRuns = interruptedOutputs.map((_, index) => runVerificationCommand(
+      process.execPath,
+      ['-e', interruptedFixture],
+      {
+        cwd: process.cwd(),
+        abortSignal: abortController.signal,
+        stdout: (chunk) => { interruptedOutputs[index] += chunk },
+        stderr: (chunk) => { interruptedOutputs[index] += chunk },
+      },
+    ))
+    for (let index = 0; index < interruptedOutputs.length; index += 1) {
+      const match = await waitForMatch(
+        () => interruptedOutputs[index],
+        /INTERRUPTED_DESCENDANT_PID=(\d+)/u,
+        `concurrent runner ${index} starts its descendant before interruption`,
+      )
+      interruptedDescendantPids.push(Number(match[1]))
+    }
+    abortController.abort('SIGINT')
+    assert.deepEqual(await Promise.all(interruptedRuns), [130, 130])
+    for (const pid of interruptedDescendantPids) {
+      await waitForProcessExit(pid)
+      assert.equal(processExists(pid), false, 'shared interruption reaps every active verifier tree')
+    }
+    assert.equal(
+      processExists(unrelated.pid),
+      true,
+      'shared interruption still leaves unrelated processes alive',
+    )
   }
 } finally {
   if (descendantPid && processExists(descendantPid)) {
     try {
       process.kill(descendantPid, 'SIGKILL')
+    } catch {
+      // The runner may have reaped it between the existence check and signal.
+    }
+  }
+  for (const pid of interruptedDescendantPids) {
+    if (!processExists(pid)) continue
+    try {
+      process.kill(pid, 'SIGKILL')
     } catch {
       // The runner may have reaped it between the existence check and signal.
     }

@@ -576,6 +576,7 @@ async function startPromotionServer(context, promotionService) {
       '/ops/': ['index.html', 'text/html; charset=utf-8'],
       '/ops/index.html': ['index.html', 'text/html; charset=utf-8'],
       '/ops/app.js': ['app.js', 'text/javascript; charset=utf-8'],
+      '/ops/clipboard.js': ['clipboard.js', 'text/javascript; charset=utf-8'],
       '/ops/styles.css': ['styles.css', 'text/css; charset=utf-8'],
       '/ops/source-intakes.css': ['source-intakes.css', 'text/css; charset=utf-8'],
     }[url.pathname]
@@ -1321,6 +1322,16 @@ try {
     extraHTTPHeaders: { 'x-synthetic-owner': '1' },
     viewport: { width: 1440, height: 1000 },
   })
+  await reviewPage.addInitScript(() => {
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: {
+        async writeText(value) {
+          window.__copiedReviewText = value
+        },
+      },
+    })
+  })
   await reviewPage.goto(`${started.origin}/ops/?view=review`)
   const promotionRail = reviewPage.getByRole('heading', { name: '上线审计' }).locator('..')
   await promotionRail.getByText('已认可，未上线', { exact: true }).waitFor()
@@ -1330,6 +1341,14 @@ try {
     0,
     'approved Review audit rail exposes no publish button',
   )
+  const copyCommand = promotionRail.getByRole('button', { name: '复制口令' })
+  assert.equal(await copyCommand.count(), 1)
+  await copyCommand.click()
+  assert.equal(await reviewPage.evaluate(() => window.__copiedReviewText), `上线 ${paperId}`)
+  const copyPaperId = reviewPage.getByRole('button', { name: '复制Paper ID' })
+  assert.equal(await copyPaperId.count(), 1)
+  await copyPaperId.click()
+  assert.equal(await reviewPage.evaluate(() => window.__copiedReviewText), paperId)
   const pathname = `/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}/promotions`
   const body = JSON.stringify(promotionRequest(online.approval))
   for (const headers of [

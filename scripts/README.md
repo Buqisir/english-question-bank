@@ -11,6 +11,15 @@ Three local entrypoints share `scripts/verify-ci.mjs`:
 - `pnpm -C app verify:paper` exercises shared Canonical Paper/Print seams;
 - `pnpm -C app verify:all` is the release/fallback suite used by CI.
 
+Verifier scripts use bounded parallel execution. The default is half the
+available CPU count, capped at 8 jobs (8 jobs on the 16-core Orb). Browser,
+Chromium, Vivliostyle, and LibreOffice checks share one render lane; each fixed
+port has its own collision lock; official-evidence checks run exclusively.
+Each job spools output privately and the runner prints those logs in registry
+order, while still collecting all PASS/SKIP/FAIL results. Use `--jobs 1` or
+`VERIFY_CONCURRENCY=1` for exact serial fallback; use `--jobs N` to override
+the bounded default.
+
 Every registered row below is its one-line named failure: the distinct fault
 the verifier catches or the independent layer it supplies. A verifier without
 such a row is not registrable. `--list-json` shows the registry and packs;
@@ -52,8 +61,9 @@ must be confirmed green (AGENTS.md RM gate).
 
 | Script | Scope | Runs in CI? |
 | --- | --- | --- |
-| `verify-ci.mjs` | Selects changed/Paper/all packs deterministically and reports PASS/SKIP/FAIL without hiding later failures | yes |
-| `verify-verification-command-runner.mjs` | Prevents a completed or interrupted verifier from leaving its own Vite/Chromium/test descendants alive, and bounds oversized single-line diagnostics while retaining their head, tail, and digest | yes |
+| `verify-ci.mjs` | Selects changed/Paper/all packs, runs bounded resource-aware parallel jobs with registry-ordered logs, and reports PASS/SKIP/FAIL without hiding later failures | yes |
+| `verify-verification-command-runner.mjs` | Prevents completed or concurrently interrupted verifiers from leaving their own Vite/Chromium/test descendants alive, and bounds oversized single-line diagnostics while retaining their head, tail, and digest | yes |
+| `verify-verification-scheduler.mjs` | Proves bounded concurrency, render/port resource locks, exclusive barriers, ordered result flushing, collect-all statuses, abort stop-dispatch, and jobs=1 serial fallback | yes |
 | `verify-vocabulary-closed-loop.mjs` | Validates the 1600-entry Wanwei source/content/unique Koboyo visual, formal American and Owner-approved Cori British audio contracts, plus isolated progress, frozen-set, share/revoke, and temporary-scope persistence | yes |
 | `verify-vocabulary-dictation-review.mjs` | Verifies frozen multi-set dictation tasks, global share isolation, teacher-confirmed result editing/voiding, pending/stubborn/improved derivation, manual flags, suggestions, library search/statistics, and user/student isolation | yes |
 | `verify-vocabulary-meaning-recall.mjs` | Verifies frozen multi-set meaning-recall records, same-day evidence collapse, cross-day repeated/recovered derivation, dictation-correct contribution without fabricated meaning errors, task linkage, suggestions, and user/student isolation | yes |
@@ -167,6 +177,7 @@ must be confirmed green (AGENTS.md RM gate).
 | `import-pipeline/verify-source-doc-types.mjs` | DOCX/PDF source-input admission and magic-byte validation through the public paper-import validator | yes |
 | `verify-import-ops.mjs` | 导题 Agent 八态 preflight（本地 Source/Materialization/收据 + Review 当前 revision）、自动触发 skill、不可变 revision / 陈旧认可恢复、ready_to_ship / shipped / ship_failed、只读无生产按钮，以及无当前上线授权时拒绝 push | yes |
 | `verify-source-intake.mjs` | Rejects source-ledger auth, upload-integrity, immutable-revision, claim-lease, initialization-receipt, or handoff regressions through the real Owner and Agent HTTP seams plus the official source-intake CLI | yes |
+| `verify-source-intake-frontend.mjs` | Renders synthetic queued, Orb-created, claimed, failed, Owner-needed, and handed-off rows; proves Amp thread links, Paper ID/command copy controls, non-flashing background refresh, and active-only polling | yes |
 | `verify-source-intake-webhook.mjs` | Rejects wakeup-plugin payload, HMAC, feature-gate, runner-routing, or fixed-prompt drift without activating the plugin or creating an Amp thread | yes |
 | `verify-import-review-source-pairing.mjs` | 匿名 PDF 原卷局部与真实 Screen 的精确配对：revision-bound source crop、digest/locator fail-closed、表格/媒体定位、Print 切换保留以及 source issue 刷新回放 | yes |
 | `verify-docx-source-media-input.mjs` | Ticket 17：由真实 FODT 经 LibreOffice 生成 DOCX，在 document.xml 与 header1.xml 放置真实形状；经 public publisher 走输入侧 LibreOffice PDF、逐形状裁图、digest-bound figures manifest/body 关联，再由真实 Screen 与 Print/PDF consumer 解析；同时覆盖 splitter、ZIP 内嵌位图、不可变 versioned Source Capture 与输入模块不得依赖已删除输出实现 | yes |
