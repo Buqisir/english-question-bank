@@ -111,12 +111,34 @@ export function validateAmpOrbCIInput(input) {
   }
 }
 
+export function validateAmpOrbCIQueueInput(input) {
+  if (input?.kind !== 'resolve') return validateAmpOrbCIInput(input)
+  if (
+    input.event !== 'pull_request'
+    || !SHA.test(input.sha || '')
+    || !SHA.test(input.baseSha || '')
+    || !DELIVERY_ID.test(input.deliveryId || '')
+    || !Number.isSafeInteger(input.pullRequestNumber)
+    || input.pullRequestNumber < 1
+  ) {
+    throw new Error('Invalid unresolved Amp Orb CI pull request identity')
+  }
+  return {
+    kind: 'resolve',
+    event: 'pull_request',
+    sha: input.sha,
+    baseSha: input.baseSha,
+    deliveryId: input.deliveryId,
+    pullRequestNumber: input.pullRequestNumber,
+  }
+}
+
 export function ampOrbCIRunId(input) {
   return `${AMP_ORB_CI_WORKFLOW_VERSION}-${validateAmpOrbCIInput(input).testedSha}`
 }
 
 export function enqueueAmpOrbCIJob(input, { stateDir } = {}) {
-  const validated = validateAmpOrbCIInput(input)
+  const validated = validateAmpOrbCIQueueInput(input)
   ensurePrivateDirectory(stateDir)
   const queueDir = path.join(stateDir, 'queue')
   ensurePrivateDirectory(queueDir)
@@ -141,7 +163,7 @@ export function enqueueAmpOrbCIJob(input, { stateDir } = {}) {
   }
 }
 
-export async function drainAmpOrbCIQueue({ stateDir, runJob } = {}) {
+export async function drainAmpOrbCIQueue({ stateDir, resolveJob, runJob } = {}) {
   if (typeof runJob !== 'function') throw new Error('Amp Orb CI queue runner is missing')
   ensurePrivateDirectory(stateDir)
   const queueDir = path.join(stateDir, 'queue')
@@ -155,12 +177,36 @@ export async function drainAmpOrbCIQueue({ stateDir, runJob } = {}) {
     if (!match) throw new Error('Amp Orb CI queue filename is invalid')
     const queuePath = path.join(queueDir, file)
     const item = readJson(queuePath)
-    const input = validateAmpOrbCIInput(item?.input)
+    const queuedInput = validateAmpOrbCIQueueInput(item?.input)
     if (
       item?.schemaVersion !== AMP_ORB_CI_QUEUE_SCHEMA_VERSION
-      || input.deliveryId !== match[1]
+      || queuedInput.deliveryId !== match[1]
     ) {
       throw new Error('Amp Orb CI queue item identity mismatch')
+    }
+    let input = queuedInput
+    if (queuedInput.kind === 'resolve') {
+      if (typeof resolveJob !== 'function') {
+        throw new Error('Amp Orb CI pull request resolver is missing')
+      }
+      try {
+        input = await resolveJob(queuedInput)
+      } catch {
+        results.push({
+          deliveryId: queuedInput.deliveryId,
+          outcome: 'deferred',
+        })
+        continue
+      }
+      if (input === null) {
+        rmSync(queuePath)
+        results.push({
+          deliveryId: queuedInput.deliveryId,
+          outcome: 'stale',
+        })
+        continue
+      }
+      input = validateAmpOrbCIInput(input)
     }
     const result = await runJob(input)
     if (
@@ -329,14 +375,17 @@ export function validateAmpOrbCISandboxResult(exitCode, result) {
   return result
 }
 
-function trustedGit(repositoryRoot, args, { allowFailure = false } = {}) {
+function trustedGit(repositoryRoot, args, {
+  allowFailure = false,
+  timeoutMs = 120_000,
+} = {}) {
   try {
     return execFileSync('git', args, {
       cwd: repositoryRoot,
       encoding: 'utf8',
       env: { ...process.env, GIT_TERMINAL_PROMPT: '0' },
       stdio: ['ignore', 'pipe', 'pipe'],
-      timeout: 120_000,
+      timeout: timeoutMs,
     }).trim()
   } catch (error) {
     if (allowFailure) return null
@@ -352,6 +401,63 @@ export function ensureCompleteAmpOrbCIGitHistory(repositoryRoot, {
     trustedGitImpl(repositoryRoot, ['fetch', '--no-tags', '--unshallow', 'origin'])
   } else if (shallow !== 'false') {
     throw new Error('Trusted Amp Orb CI git returned an invalid shallow-repository state')
+  }
+}
+
+export async function resolveAmpOrbCIPullRequest(input, {
+  repositoryRoot,
+  retryDelaysMs = [0, 500, 1_000, 2_000, 4_000],
+  sleep = (delayMs) => new Promise((resolve) => setTimeout(resolve, delayMs)),
+  trustedGitImpl = trustedGit,
+} = {}) {
+  if (
+    input?.kind !== 'resolve'
+    || input.event !== 'pull_request'
+    || !SHA.test(input.sha || '')
+    || !SHA.test(input.baseSha || '')
+    || !DELIVERY_ID.test(input.deliveryId || '')
+    || !Number.isSafeInteger(input.pullRequestNumber)
+    || input.pullRequestNumber < 1
+  ) {
+    throw new Error('Invalid unresolved Amp Orb CI pull request identity')
+  }
+  const incomingRef = [
+    'refs/amp-ci/resolve/pr',
+    input.pullRequestNumber,
+    input.deliveryId,
+  ].join('/')
+  try {
+    let fetchError = null
+    for (const delayMs of retryDelaysMs) {
+      if (delayMs > 0) await sleep(delayMs)
+      try {
+        trustedGitImpl(repositoryRoot, [
+          'fetch',
+          '--no-tags',
+          'origin',
+          `+refs/pull/${input.pullRequestNumber}/merge:${incomingRef}`,
+        ], { timeoutMs: 5_000 })
+        fetchError = null
+        break
+      } catch (error) {
+        fetchError = error
+      }
+    }
+    if (fetchError) throw fetchError
+    const testedSha = trustedGitImpl(repositoryRoot, ['rev-parse', `${incomingRef}^{commit}`])
+    if (!SHA.test(testedSha || '')) {
+      throw new Error('Resolved Amp Orb CI pull request merge SHA is invalid')
+    }
+    const fetchedBase = trustedGitImpl(repositoryRoot, ['rev-parse', `${incomingRef}^1`])
+    const fetchedHead = trustedGitImpl(repositoryRoot, ['rev-parse', `${incomingRef}^2`])
+    if (fetchedBase !== input.baseSha || fetchedHead !== input.sha) return null
+    return {
+      ...input,
+      kind: 'run',
+      testedSha,
+    }
+  } finally {
+    trustedGitImpl(repositoryRoot, ['update-ref', '-d', incomingRef], { allowFailure: true })
   }
 }
 
