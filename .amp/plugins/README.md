@@ -46,15 +46,18 @@ operations that remain disabled until separately authorized by the Owner.
 `github-ci-wakeup.js` is an inert-by-default CI wakeup for one dedicated private project
 Orb thread. A verified GitHub delivery is atomically written to that Orb's private mode-0600 disk
 queue before the 30-second webhook handler starts a background queue drainer and returns. Plugin
-startup also starts a drainer, so a process death leaves a durable item for recovery rather than an
-unprocessed thread message. Blocking kernel `flock` holders drain the queue serially; concurrent
-launchers wait instead of dropping work in a lock race. The webhook never depends on an LLM turn
-to wake or interpret the event. The plugin hands the controller to a detached, unreferenced child
-process using the setup-owned `$HOME/.local/node-24/bin/node` (the plugin runtime executable is Amp,
-not Node) so returning from the webhook callback cannot reap it; a bounded private `launcher.json`
-records the latest spawn/error/exit metadata without capturing output or environment values. A
-scoped Orb keepalive lease spans that child process and is released exactly once when it settles,
-so a ten-minute verification cannot be paused immediately after the webhook handler returns.
+startup starts a drainer only when that queue already contains recovery work, so an empty automatic
+plugin load does not require an early Orb keepalive lease. If a recovery lease is temporarily
+unavailable, initialization keeps the webhook registered and the queue intact for a later delivery
+instead of unloading the plugin. Blocking kernel `flock` holders drain the queue serially;
+concurrent launchers wait instead of dropping work in a lock race. The webhook never depends on an
+LLM turn to wake or interpret the event. The plugin hands the controller to a detached, unreferenced
+child process using the setup-owned `$HOME/.local/node-24/bin/node` (the plugin runtime executable
+is Amp, not Node) so returning from the webhook callback cannot reap it; a bounded private
+`launcher.json` records the latest spawn/error/exit metadata without capturing output or environment
+values. A scoped Orb keepalive lease spans every webhook-triggered child process and is released
+exactly once when it settles, so a ten-minute verification cannot be paused immediately after the
+webhook handler returns.
 
 The controller records one atomic private receipt per `(workflowVersion, testedSHA)`, so Amp's
 at-least-once delivery cannot execute an already reported run again. Orb pause cannot make a live

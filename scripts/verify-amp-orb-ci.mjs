@@ -515,6 +515,10 @@ try {
 
   process.env.QUESTION_BANK_AMP_CI_GITHUB_WEBHOOK_SECRET = secret
   process.env.QUESTION_BANK_AMP_CI_GITHUB_STATUS_TOKEN = 'synthetic-status-token'
+  const startupRecoveryQueuePath = enqueueAmpOrbCIJob({
+    ...parsedPullRequest,
+    deliveryId: '77777777-7777-4777-8777-777777777777',
+  }, { stateDir: pluginState }).queuePath
   await githubCIWakeupPlugin(amp, {
     repositoryRoot: '/trusted/controller',
     stateDir: pluginState,
@@ -531,6 +535,7 @@ try {
   ])
   assert.equal(registeredCommand.id, 'github-ci-webhook-url')
   assert.equal(drainLaunches.length, 1, 'plugin startup recovers any durable queue residue')
+  rmSync(startupRecoveryQueuePath)
 
   const context = {
     logger: { log() {} },
@@ -733,6 +738,65 @@ try {
   else process.env.QUESTION_BANK_AMP_CI_GITHUB_STATUS_TOKEN = originalStatusToken
 }
 
+const startupCapabilityState = mkdtempSync(path.join(tmpdir(), 'eqb-amp-orb-ci-startup-'))
+let startupWebhookRegistrations = 0
+let startupCommandRegistrations = 0
+let startupKeepAliveAttempts = 0
+try {
+  process.env.QUESTION_BANK_AMP_CI_PLUGIN_ENABLED = '1'
+  process.env.QUESTION_BANK_AMP_CI_GITHUB_WEBHOOK_SECRET = secret
+  process.env.QUESTION_BANK_AMP_CI_GITHUB_STATUS_TOKEN = 'synthetic-status-token'
+  const startupAmp = {
+    logger: { log() {} },
+    system: {
+      executor: {
+        async keepAlive() {
+          startupKeepAliveAttempts += 1
+          throw new Error('Orb keepalive is only available to plugins running in an orb')
+        },
+      },
+    },
+    async createWebhook() {
+      startupWebhookRegistrations += 1
+      return { url: 'https://capability.invalid/private-ci-startup-verifier' }
+    },
+    registerCommand() { startupCommandRegistrations += 1 },
+  }
+  await githubCIWakeupPlugin(startupAmp, {
+    repositoryRoot: '/trusted/controller',
+    stateDir: startupCapabilityState,
+  })
+  assert.equal(startupKeepAliveAttempts, 0, 'empty startup does not request an Orb keepalive lease')
+  assert.equal(startupWebhookRegistrations, 1, 'empty startup keeps the durable webhook registered')
+  assert.equal(startupCommandRegistrations, 1, 'empty startup completes plugin initialization')
+
+  const startupRecoveryDelivery = '88888888-8888-4888-8888-888888888888'
+  const startupRecoveryQueuePath = enqueueAmpOrbCIJob({
+    ...parsedPullRequest,
+    deliveryId: startupRecoveryDelivery,
+  }, { stateDir: startupCapabilityState }).queuePath
+  await githubCIWakeupPlugin(startupAmp, {
+    repositoryRoot: '/trusted/controller',
+    stateDir: startupCapabilityState,
+  })
+  assert.equal(startupKeepAliveAttempts, 1, 'durable startup residue attempts recovery with a lease')
+  assert.equal(startupWebhookRegistrations, 2, 'recovery lease rejection leaves the webhook loaded')
+  assert.equal(startupCommandRegistrations, 2, 'recovery lease rejection does not abort initialization')
+  assert.equal(
+    existsSync(startupRecoveryQueuePath),
+    true,
+    'recovery lease rejection retains the durable queue item',
+  )
+} finally {
+  rmSync(startupCapabilityState, { force: true, recursive: true })
+  if (originalEnabled === undefined) delete process.env.QUESTION_BANK_AMP_CI_PLUGIN_ENABLED
+  else process.env.QUESTION_BANK_AMP_CI_PLUGIN_ENABLED = originalEnabled
+  if (originalWebhookSecret === undefined) delete process.env.QUESTION_BANK_AMP_CI_GITHUB_WEBHOOK_SECRET
+  else process.env.QUESTION_BANK_AMP_CI_GITHUB_WEBHOOK_SECRET = originalWebhookSecret
+  if (originalStatusToken === undefined) delete process.env.QUESTION_BANK_AMP_CI_GITHUB_STATUS_TOKEN
+  else process.env.QUESTION_BANK_AMP_CI_GITHUB_STATUS_TOKEN = originalStatusToken
+}
+
 const keepAliveState = mkdtempSync(path.join(tmpdir(), 'eqb-amp-orb-ci-keepalive-'))
 const keepAliveReleases = []
 const launchSettlers = []
@@ -740,6 +804,10 @@ try {
   process.env.QUESTION_BANK_AMP_CI_PLUGIN_ENABLED = '1'
   process.env.QUESTION_BANK_AMP_CI_GITHUB_WEBHOOK_SECRET = secret
   process.env.QUESTION_BANK_AMP_CI_GITHUB_STATUS_TOKEN = 'synthetic-status-token'
+  enqueueAmpOrbCIJob({
+    ...parsedPullRequest,
+    deliveryId: '99999999-9999-4999-8999-999999999999',
+  }, { stateDir: keepAliveState })
   await githubCIWakeupPlugin({
     logger: { log() {} },
     system: {
