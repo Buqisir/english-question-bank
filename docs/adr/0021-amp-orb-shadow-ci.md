@@ -25,21 +25,25 @@ accepts only:
 - non-deleted pushes to `refs/heads/main`.
 
 Only validated repository, event, exact status/head SHA, exact GitHub test-merge
-SHA, base SHA, delivery id, and pull request number enter a fixed agent prompt.
-Pull-request title, body, commits, sender text, and all other payload data never
-become instructions. The webhook appends to its owning thread; it does not
-create a worker thread. This removes the create/bind crash window and ensures
-one 16-core suite consumes the CPU at a time.
+SHA, base SHA, delivery id, and pull request number enter a private mode-0600
+filesystem queue. Pull-request title, body, commits, sender text, and all other
+payload data never become instructions or reach an LLM. The webhook atomically
+enqueues before launching a queue drainer and returning within its deadline.
+Plugin startup also launches a drainer, so a process death leaves recoverable
+work on disk. No worker thread is created; the owning 16-core Orb runs one suite
+at a time.
 
 The trusted controller uses `(workflowVersion, exact tested SHA)` as the durable
 run identity. Private mode-0600 receipts bind both the tested and status SHAs and
 move through `running -> verified -> reported`. A repeated delivery is a no-op
 after `reported`; a crash during execution re-runs the exact tested SHA; a crash
 after verification but before the GitHub status write retries only that write.
-One kernel-owned nonblocking `flock` spans the complete controller process,
-rejects concurrent controllers, survives Orb pause without becoming stale, and
-is released automatically after process death. There is no user-space stale
-owner that can delete a successor's lock.
+One kernel-owned blocking `flock` spans each complete queue-drain process.
+Concurrent launchers wait and then rescan the durable queue instead of dropping
+an event in a lock-release race. The lock survives Orb pause without becoming
+stale and is released automatically after process death. There is no user-space
+stale owner that can delete a successor's lock. A queue item is removed only
+after its controller call reaches a reported or cached outcome.
 
 The trusted controller fetches the exact candidate ref through the owning
 project checkout's existing read credential. Pull requests fetch GitHub's exact
@@ -78,8 +82,10 @@ reliability and timing evidence plus a rollback plan.
 ## Consequences
 
 - Duplicate GitHub/Amp delivery cannot multiply full-suite work for one SHA.
+- An idle agent or failed LLM wakeup cannot strand CI work because the plugin
+  launches the filesystem-backed controller directly.
 - Orb pause retains the kernel lock; process death releases it and leaves a
-  recoverable receipt state.
+  recoverable queue item or receipt state.
 - A transient final GitHub API failure does not rerun an already completed
   suite.
 - Same-repository candidate code can use network and shared content-addressed
@@ -94,6 +100,9 @@ reliability and timing evidence plus a rollback plan.
   before reliability is measured.
 - **Create one Orb thread per delivery:** introduces duplicate-thread and
   create/bind crash windows while competing for the same 16 cores.
+- **Append a fixed prompt to the owning thread:** `appendUserMessage` durably
+  appends and can steer a busy turn, but the API does not promise to start an
+  idle agent; activation proved that a queued message can remain unprocessed.
 - **Run verification inside the 30-second webhook handler:** violates Amp's
   documented handler deadline and retry contract.
 - **Pass the status token through a scrubbed same-user environment:** another

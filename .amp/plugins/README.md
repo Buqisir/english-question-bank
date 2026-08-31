@@ -32,12 +32,17 @@ operations that remain disabled until separately authorized by the Owner.
 ## GitHub shadow CI Orb
 
 `github-ci-wakeup.js` is an inert-by-default shadow CI wakeup for one dedicated private project
-Orb thread. The owning thread is the only worker: GitHub deliveries append fixed, allowlisted
-exact-SHA commands to that thread instead of spawning one Orb per delivery. The controller records
-one atomic private receipt per `(workflowVersion, testedSHA)`, so Amp's at-least-once delivery may
-append the same prompt again but cannot execute an already reported run again.
-One kernel `flock` spans the controller, so Orb pause cannot make a live lock look stale and process
-death releases it without an old owner being able to remove a successor's lock.
+Orb thread. A verified GitHub delivery is atomically written to that Orb's private mode-0600 disk
+queue before the 30-second webhook handler starts a background queue drainer and returns. Plugin
+startup also starts a drainer, so a process death leaves a durable item for recovery rather than an
+unprocessed thread message. Blocking kernel `flock` holders drain the queue serially; concurrent
+launchers wait instead of dropping work in a lock race. The webhook never depends on an LLM turn
+to wake or interpret the event.
+
+The controller records one atomic private receipt per `(workflowVersion, testedSHA)`, so Amp's
+at-least-once delivery cannot execute an already reported run again. Orb pause cannot make a live
+kernel lock look stale, and process death releases it without an old owner being able to remove a
+successor's lock. A failed drain keeps its queue item for the next plugin load or delivery.
 
 The allowlist accepts same-repository pull requests into `main` on `opened`, `synchronize`,
 `reopened`, and `ready_for_review`, plus pushes to `refs/heads/main`. It verifies GitHub's raw-body

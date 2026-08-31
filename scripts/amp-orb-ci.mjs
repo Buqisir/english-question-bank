@@ -8,6 +8,7 @@ import {
   ampOrbCILockInvocation,
   createGitHubStatusWriter,
   defaultAmpOrbCIStateDir,
+  drainAmpOrbCIQueue,
   executeAmpOrbCISandbox,
   repositoryRootFromModule,
   runAmpOrbCIJob,
@@ -40,12 +41,14 @@ function parseInput() {
 
 const repositoryRoot = repositoryRootFromModule(import.meta.url)
 const stateDir = defaultAmpOrbCIStateDir(repositoryRoot)
+const controllerCommand = process.argv[2]
 
 if (process.env.AMP_ORB_CI_LOCK_HELD !== '1') {
   const invocation = ampOrbCILockInvocation({
     stateDir,
     controllerPath: fileURLToPath(import.meta.url),
     controllerArgs: process.argv.slice(2),
+    wait: controllerCommand === 'drain',
   })
   const result = spawnSync(invocation.command, invocation.args, {
     encoding: 'utf8',
@@ -54,19 +57,18 @@ if (process.env.AMP_ORB_CI_LOCK_HELD !== '1') {
   })
   if (result.error) throw result.error
   if (result.status === AMP_ORB_CI_LOCK_CONFLICT_EXIT_CODE) {
-    console.log('Amp Orb shadow CI is already running; queued owning-thread messages remain serial.')
+    console.log('Amp Orb shadow CI is already running; durable queue work remains serial.')
     process.exit(0)
   }
   process.exit(result.status ?? 1)
 }
 
 try {
-  const input = parseInput()
   const writeStatus = createGitHubStatusWriter({
     token: String(process.env.QUESTION_BANK_AMP_CI_GITHUB_STATUS_TOKEN || ''),
     threadId: String(process.env.AMP_THREAD_ID || ''),
   })
-  const result = await runAmpOrbCIJob(input, {
+  const runJob = (input) => runAmpOrbCIJob(input, {
     stateDir: defaultAmpOrbCIStateDir(repositoryRoot),
     writeStatus,
     execute: ({ input: exactInput, writeOutput }) => executeAmpOrbCISandbox(exactInput, {
@@ -74,9 +76,16 @@ try {
       writeOutput,
     }),
   })
-  const conclusion = result.receipt?.conclusion || 'unchanged'
-  console.log(`Amp Orb shadow CI ${result.outcome}: ${conclusion} for ${input.sha}`)
-  if (result.logPath) console.log(`Private log: ${result.logPath}`)
+  if (controllerCommand === 'drain') {
+    const results = await drainAmpOrbCIQueue({ stateDir, runJob })
+    console.log(`Amp Orb shadow CI drained ${results.length} queued delivery(s).`)
+  } else {
+    const input = parseInput()
+    const result = await runJob(input)
+    const conclusion = result.receipt?.conclusion || 'unchanged'
+    console.log(`Amp Orb shadow CI ${result.outcome}: ${conclusion} for ${input.sha}`)
+    if (result.logPath) console.log(`Private log: ${result.logPath}`)
+  }
 } catch (error) {
   console.error(`Amp Orb shadow CI controller failed: ${error.message}`)
   process.exitCode = 1
