@@ -11,6 +11,7 @@ import {
   drainAmpOrbCIQueue,
   executeAmpOrbCISandbox,
   repositoryRootFromModule,
+  resolveAmpOrbCIPullRequest,
   runAmpOrbCIJob,
 } from './lib/ampOrbCI.mjs'
 
@@ -77,8 +78,14 @@ try {
     }),
   })
   if (controllerCommand === 'drain') {
-    const results = await drainAmpOrbCIQueue({ stateDir, runJob })
-    console.log(`Amp Orb shadow CI drained ${results.length} queued delivery(s).`)
+    const results = await drainAmpOrbCIQueue({
+      stateDir,
+      resolveJob: (input) => resolveAmpOrbCIPullRequest(input, { repositoryRoot }),
+      runJob,
+    })
+    const deferred = results.filter(({ outcome }) => outcome === 'deferred').length
+    console.log(`Amp Orb shadow CI processed ${results.length} queued delivery(s); ${deferred} deferred.`)
+    if (deferred > 0) process.exitCode = 1
   } else {
     const input = parseInput()
     const result = await runJob(input)

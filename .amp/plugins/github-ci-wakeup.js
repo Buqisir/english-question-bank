@@ -51,16 +51,20 @@ export function parseGitHubCIWebhook(body, { eventName, deliveryId }) {
     if (!Number.isSafeInteger(number) || number < 1) return null
     if (head?.repo?.full_name !== REPOSITORY) return null
     if (base?.repo?.full_name !== REPOSITORY || base?.ref !== 'main') return null
-    if (!SHA.test(head?.sha || '') || !SHA.test(base?.sha || '') || !SHA.test(testedSha || '')) {
+    if (
+      !SHA.test(head?.sha || '')
+      || !SHA.test(base?.sha || '')
+      || (testedSha !== null && !SHA.test(testedSha || ''))
+    ) {
       return null
     }
     return {
-      kind: 'run',
+      kind: testedSha === null ? 'resolve' : 'run',
       event: 'pull_request',
       action: payload.action,
       deliveryId,
       sha: head.sha,
-      testedSha,
+      ...(testedSha === null ? {} : { testedSha }),
       baseSha: base.sha,
       pullRequestNumber: number,
     }

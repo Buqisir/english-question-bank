@@ -59,7 +59,8 @@ so a ten-minute verification cannot be paused immediately after the webhook hand
 The controller records one atomic private receipt per `(workflowVersion, testedSHA)`, so Amp's
 at-least-once delivery cannot execute an already reported run again. Orb pause cannot make a live
 kernel lock look stale, and process death releases it without an old owner being able to remove a
-successor's lock. A failed drain keeps its queue item for the next plugin load or delivery.
+successor's lock. A temporarily unresolved merge ref keeps its queue item for the next plugin load
+or delivery without blocking later queued work.
 Before creating the isolated checkout bundle, the trusted controller completes a shallow Orb clone
 once; otherwise a merge commit can omit its second-parent objects and must fail before verification.
 
@@ -67,11 +68,14 @@ The allowlist accepts same-repository pull requests into `main` on `opened`, `sy
 `reopened`, and `ready_for_review`, plus pushes to `refs/heads/main`. It verifies GitHub's raw-body
 `X-Hub-Signature-256`, ignores PR title/body text, and rejects SHA drift. For PRs, the trusted
 checkout verifies GitHub's exact test-merge SHA and ordered base/head parents, matching the existing
-Actions workflow rather than testing the head in isolation. It then passes a one-use read-only Git
-bundle—not a repository credential—to the runner before `verify:all` and the existing GitHub E2E
-commands. Candidate code executes as the separate locked `eqb-ci` Unix user under an empty
-allowlisted environment; Amp Project Secrets and the commit-status token stay in the trusted
-controller process.
+Actions workflow rather than testing the head in isolation. When an `opened` delivery has a null
+`merge_commit_sha`, the signed base/head/PR identity is durably queued before any network lookup so
+the webhook can return promptly. The background controller retries `refs/pull/<number>/merge` and
+accepts it only when its two parents exactly match the signed delivery's base and head; it never
+substitutes the head SHA. It then passes a one-use read-only Git bundle—not a repository credential—
+to the runner before `verify:all` and the existing GitHub E2E commands. Candidate code executes as
+the separate locked `eqb-ci` Unix user under an empty allowlisted environment; Amp Project Secrets
+and the commit-status token stay in the trusted controller process.
 
 Activation is a later shared-state operation requiring current Owner approval. Configure these
 private Amp Project settings, then load the plugin only in the dedicated owning Orb thread:

@@ -36,9 +36,11 @@ import {
   ensureCompleteAmpOrbCIGitHistory,
   reapAmpOrbCIProcesses,
   repositoryRootFromModule,
+  resolveAmpOrbCIPullRequest,
   runAmpOrbCIJob,
   sandboxInvocation,
   validateAmpOrbCIInput,
+  validateAmpOrbCIQueueInput,
   validateAmpOrbCISandboxResult,
 } from './lib/ampOrbCI.mjs'
 
@@ -112,14 +114,17 @@ try {
   writeFileSync(path.join(source, 'side.txt'), 'side\n')
   git(source, ['add', 'side.txt'])
   git(source, ['commit', '-m', 'synthetic side'])
+  const syntheticHead = git(source, ['rev-parse', 'HEAD'])
   git(source, ['switch', 'main'])
   writeFileSync(path.join(source, 'main.txt'), 'main\n')
   git(source, ['add', 'main.txt'])
   git(source, ['commit', '-m', 'synthetic main'])
+  const syntheticMain = git(source, ['rev-parse', 'HEAD'])
   git(source, ['merge', '--no-ff', 'side', '-m', 'synthetic merge'])
   const syntheticMerge = git(source, ['rev-parse', 'HEAD'])
   git(source, ['remote', 'add', 'origin', remote])
   git(source, ['push', 'origin', 'main'])
+  git(source, ['push', 'origin', `${syntheticMerge}:refs/pull/292/merge`])
   git(shallowHistoryRoot, [
     'clone',
     '--depth',
@@ -136,6 +141,37 @@ try {
   ensureCompleteAmpOrbCIGitHistory(checkout, { trustedGitImpl: git })
   assert.equal(git(checkout, ['rev-parse', '--is-shallow-repository']), 'false')
   git(checkout, ['cat-file', '-e', `${syntheticBase}^{commit}`])
+  const unresolvedInput = {
+    kind: 'resolve',
+    event: 'pull_request',
+    action: 'opened',
+    deliveryId,
+    sha: syntheticHead,
+    baseSha: syntheticMain,
+    pullRequestNumber: 292,
+  }
+  assert.deepEqual(await resolveAmpOrbCIPullRequest(unresolvedInput, {
+    repositoryRoot: checkout,
+  }), {
+    ...unresolvedInput,
+    kind: 'run',
+    testedSha: syntheticMerge,
+  }, 'null webhook merge SHA resolves from the exact GitHub merge ref')
+  assert.notEqual(
+    spawnSync('git', [
+      'show-ref',
+      '--verify',
+      `refs/amp-ci/resolve/pr/292/${deliveryId}`,
+    ], { cwd: checkout }).status,
+    0,
+    'temporary pull request resolution ref is removed',
+  )
+  assert.equal(await resolveAmpOrbCIPullRequest({
+    ...unresolvedInput,
+    baseSha: syntheticBase,
+  }, {
+    repositoryRoot: checkout,
+  }), null, 'resolved merge ref must match the signed base and head parents')
   git(checkout, ['update-ref', 'refs/amp-ci/test/tested', syntheticMerge])
   git(checkout, ['update-ref', 'refs/amp-ci/test/base', syntheticBase])
   git(checkout, [
@@ -149,6 +185,49 @@ try {
 } finally {
   rmSync(shallowHistoryRoot, { force: true, recursive: true })
 }
+const resolutionGitCalls = []
+const resolutionSleeps = []
+let resolutionFetchAttempts = 0
+assert.deepEqual(await resolveAmpOrbCIPullRequest({
+  kind: 'resolve',
+  event: 'pull_request',
+  deliveryId,
+  sha: headSha,
+  baseSha,
+  pullRequestNumber: 292,
+}, {
+  repositoryRoot: '/trusted/controller',
+  retryDelaysMs: [0, 3, 5],
+  async sleep(delayMs) { resolutionSleeps.push(delayMs) },
+  trustedGitImpl(repositoryRoot, args, options) {
+    resolutionGitCalls.push({ repositoryRoot, args, options })
+    if (args[0] === 'fetch') {
+      resolutionFetchAttempts += 1
+      if (resolutionFetchAttempts < 3) throw new Error('synthetic merge ref lag')
+      return ''
+    }
+    if (args[0] === 'update-ref') return ''
+    if (args.at(-1).endsWith('^{commit}')) return testedSha
+    if (args.at(-1).endsWith('^1')) return baseSha
+    if (args.at(-1).endsWith('^2')) return headSha
+    assert.fail(`unexpected resolver git call: ${args.join(' ')}`)
+  },
+}), {
+  kind: 'run',
+  event: 'pull_request',
+  deliveryId,
+  sha: headSha,
+  testedSha,
+  baseSha,
+  pullRequestNumber: 292,
+}, 'background resolution tolerates bounded GitHub merge-ref creation lag')
+assert.equal(resolutionFetchAttempts, 3)
+assert.deepEqual(resolutionSleeps, [3, 5])
+assert.deepEqual(
+  resolutionGitCalls.filter(({ args }) => args[0] === 'fetch')
+    .map(({ options }) => options),
+  [{ timeoutMs: 5_000 }, { timeoutMs: 5_000 }, { timeoutMs: 5_000 }],
+)
 const pullRequestPayload = {
   action: 'synchronize',
   number: 292,
@@ -185,6 +264,24 @@ assert.deepEqual(parseGitHubCIWebhook(pullRequestBody, {
   deliveryId,
   eventName: 'pull_request',
 }), parsedPullRequest)
+const unresolvedPullRequestBody = Buffer.from(JSON.stringify({
+  ...pullRequestPayload,
+  action: 'opened',
+  pull_request: {
+    ...pullRequestPayload.pull_request,
+    merge_commit_sha: null,
+  },
+}))
+const parsedUnresolvedPullRequest = {
+  ...parsedPullRequest,
+  kind: 'resolve',
+  action: 'opened',
+}
+delete parsedUnresolvedPullRequest.testedSha
+assert.deepEqual(parseGitHubCIWebhook(unresolvedPullRequestBody, {
+  deliveryId,
+  eventName: 'pull_request',
+}), parsedUnresolvedPullRequest)
 assert.equal(validGitHubCISignature(pullRequestBody, signature, secret), true)
 assert.equal(validGitHubCISignature(pullRequestBody, `${signature.slice(0, -1)}0`, secret), false)
 assert.equal(validGitHubCISignature(pullRequestBody, '', secret), false)
@@ -247,6 +344,13 @@ for (const [label, body, eventName] of [
     pull_request: {
       ...pullRequestPayload.pull_request,
       merge_commit_sha: `${testedSha}\ncommand`,
+    },
+  }, 'pull_request'],
+  ['missing tested SHA field', {
+    ...pullRequestPayload,
+    pull_request: {
+      ...pullRequestPayload.pull_request,
+      merge_commit_sha: undefined,
     },
   }, 'pull_request'],
   ['deleted main', { ...pushPayload, deleted: true }, 'push'],
@@ -458,16 +562,98 @@ try {
   assert.deepEqual(drained, [{ deliveryId, outcome: 'reported' }])
   assert.deepEqual(readdirSync(queueDir), [], 'successful drain removes the durable item')
 
+  const unresolvedDelivery = '22222222-2222-4222-8222-222222222222'
+  const unresolvedSignature = `sha256=${createHmac('sha256', secret)
+    .update(unresolvedPullRequestBody).digest('hex')}`
+  await registeredWebhook.handler({
+    ...event,
+    body: unresolvedPullRequestBody,
+    headers: {
+      ...event.headers,
+      'x-github-delivery': unresolvedDelivery,
+      'x-hub-signature-256': unresolvedSignature,
+    },
+  }, context)
+  const unresolvedQueuePath = path.join(queueDir, `${unresolvedDelivery}.json`)
+  assert.equal(statSync(unresolvedQueuePath).mode & 0o777, 0o600)
+  assert.deepEqual(
+    JSON.parse(readFileSync(unresolvedQueuePath, 'utf8')).input,
+    validateAmpOrbCIQueueInput({
+      ...parsedUnresolvedPullRequest,
+      deliveryId: unresolvedDelivery,
+    }),
+    'signed unresolved identity is durable before merge-ref network work starts',
+  )
+  const resolvedQueueInputs = []
+  const resolvedRunInputs = []
+  const resolvedDrain = await drainAmpOrbCIQueue({
+    stateDir: pluginState,
+    async resolveJob(input) {
+      resolvedQueueInputs.push(input)
+      return { ...input, kind: 'run', testedSha }
+    },
+    async runJob(input) {
+      resolvedRunInputs.push(input)
+      return { outcome: 'reported', receipt: { state: 'reported' } }
+    },
+  })
+  assert.deepEqual(resolvedQueueInputs, [validateAmpOrbCIQueueInput({
+    ...parsedUnresolvedPullRequest,
+    deliveryId: unresolvedDelivery,
+  })])
+  assert.deepEqual(resolvedRunInputs, [validateAmpOrbCIInput({
+    ...parsedPullRequest,
+    deliveryId: unresolvedDelivery,
+  })])
+  assert.deepEqual(resolvedDrain, [{ deliveryId: unresolvedDelivery, outcome: 'reported' }])
+  assert.equal(existsSync(unresolvedQueuePath), false)
+  assert.equal(drainLaunches.length, 4)
+
+  const delayedDelivery = '44444444-4444-4444-8444-444444444444'
+  const delayedQueuePath = enqueueAmpOrbCIJob({
+    ...parsedUnresolvedPullRequest,
+    deliveryId: delayedDelivery,
+  }, { stateDir: pluginState }).queuePath
+  const followingDelivery = '55555555-5555-4555-8555-555555555555'
+  const followingQueuePath = enqueueAmpOrbCIJob({
+    ...parsedPullRequest,
+    deliveryId: followingDelivery,
+  }, { stateDir: pluginState }).queuePath
+  const followingRunInputs = []
+  const delayedDrain = await drainAmpOrbCIQueue({
+    stateDir: pluginState,
+    async resolveJob() { throw new Error('synthetic merge ref unavailable') },
+    async runJob(input) {
+      followingRunInputs.push(input)
+      return { outcome: 'reported', receipt: { state: 'reported' } }
+    },
+  })
+  assert.deepEqual(delayedDrain, [
+    { deliveryId: delayedDelivery, outcome: 'deferred' },
+    { deliveryId: followingDelivery, outcome: 'reported' },
+  ])
+  assert.deepEqual(followingRunInputs, [validateAmpOrbCIInput({
+    ...parsedPullRequest,
+    deliveryId: followingDelivery,
+  })])
+  assert.equal(
+    existsSync(delayedQueuePath),
+    true,
+    'temporary merge-ref lookup failure stays durable for recovery',
+  )
+  assert.equal(existsSync(followingQueuePath), false, 'one deferred PR cannot block later CI work')
+  rmSync(delayedQueuePath)
+
   await registeredWebhook.handler({
     ...event,
     headers: { ...event.headers, 'x-hub-signature-256': 'sha256=' + '0'.repeat(64) },
   }, context)
-  assert.equal(drainLaunches.length, 3, 'invalid HMAC cannot queue or launch work')
+  assert.equal(drainLaunches.length, 4, 'invalid HMAC cannot queue or launch work')
 
   const aborted = new AbortController()
   aborted.abort()
   await registeredWebhook.handler(event, { ...context, signal: aborted.signal })
-  assert.equal(drainLaunches.length, 4, 'verified delivery is durably queued even after handler abort')
+  assert.equal(drainLaunches.length, 5, 'verified delivery is durably queued even after handler abort')
   assert.deepEqual(readdirSync(queueDir), [`${deliveryId}.json`])
 
   await drainAmpOrbCIQueue({
@@ -480,7 +666,7 @@ try {
     ...event,
     headers: { ...event.headers, 'x-github-delivery': failedLaunchDelivery },
   }, context), /synthetic launch failure/u)
-  assert.equal(drainLaunches.length, 5)
+  assert.equal(drainLaunches.length, 6)
   assert.deepEqual(
     readdirSync(queueDir),
     [`${failedLaunchDelivery}.json`],
