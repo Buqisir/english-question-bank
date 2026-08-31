@@ -1,3 +1,5 @@
+import { bindClipboardButtons } from './clipboard.js'
+
 const root = document.querySelector('#app')
 
 const state = {
@@ -70,6 +72,14 @@ function status(value, label = null) {
 function shortDigest(value) {
   const text = String(value || '')
   return text.length > 24 ? `${text.slice(0, 16)}…${text.slice(-8)}` : text
+}
+
+function copyButton(value, name, label = '复制') {
+  return `<button class="copy-button" type="button" data-copy-text="${escapeHtml(value)}" data-copy-name="${escapeHtml(name)}" aria-label="复制${escapeHtml(name)}">${escapeHtml(label)}</button>`
+}
+
+function commandCopyHtml(command) {
+  return `<div class="command-copy"><code>${escapeHtml(command)}</code>${copyButton(command, '口令', '复制口令')}</div>`
 }
 
 function formatTime(value) {
@@ -410,7 +420,7 @@ function leftRailHtml() {
       ${state.detail ? `
         <section class="rail-section">
           <h3>${escapeHtml(state.detail.paperName)}</h3>
-          <p class="paper-meta">${escapeHtml(state.detail.paperId)}</p>
+          <div class="copy-row"><code class="paper-meta">${escapeHtml(state.detail.paperId)}</code>${copyButton(state.detail.paperId, 'Paper ID')}</div>
           ${latest ? `<p class="digest" title="${escapeHtml(latest.bundleDigest)}">当前摘要 ${escapeHtml(shortDigest(latest.bundleDigest))}</p>` : ''}
           ${isOcrReview() ? '<p class="boundary-note">第一阶段：对照原图核准 OCR。确认后 Agent 才能生成真实 Screen revision。</p>' : ''}
           ${state.detail.rendererStale ? '<p class="boundary-note">Screen / Print 渲染器已经更新。Agent 需重新提交同一 Candidate，生成新的审核 revision。</p>' : ''}
@@ -797,7 +807,7 @@ function promotionHtml() {
       <div class="approval-box">
         ${status('approved', '已认可，未上线')}
         <p class="muted">认可不会公开这套卷。Owner 如决定上线，需在当前 Agent 对话明确说：</p>
-        <p class="digest">上线 ${escapeHtml(state.detail.paperId)}</p>
+        ${commandCopyHtml(`上线 ${state.detail.paperId}`)}
         ${promotion ? `<p class="boundary-note">上一份上线回执：${escapeHtml(stateLabels[promotion.state] || promotion.state)} · ${escapeHtml(promotion.versionName || '未提交版本')}</p>` : ''}
         <p class="boundary-note">网页不持有上线权限，也没有上线按钮。</p>
       </div>
@@ -822,7 +832,7 @@ function promotionHtml() {
       ${promotion.analysisPublicationDigest ? `<p class="digest" title="${escapeHtml(promotion.analysisPublicationDigest)}">五份分析 ${escapeHtml(shortDigest(promotion.analysisPublicationDigest))}</p>` : ''}
       ${promotion.failureCode ? `<p class="boundary-note">${escapeHtml(promotion.failureCode)}：${escapeHtml(promotion.failureMessage)}</p>` : ''}
       <p class="timestamp">${escapeHtml(formatTime(timestamp))}</p>
-      ${promotion.state === 'failed' ? `<p class="muted">确认生产状态后，如需重试，Owner 必须另说：</p><p class="digest">${escapeHtml(command)}</p>` : ''}
+      ${promotion.state === 'failed' ? `<p class="muted">确认生产状态后，如需重试，Owner 必须另说：</p>${commandCopyHtml(command)}` : ''}
       <p class="boundary-note">这是只读回执；网页不执行上线。</p>
     </div>
   </section>`
@@ -854,6 +864,7 @@ function accessHtml(title, message, action = '') {
 function render() {
   if (!state.user) return
   root.innerHTML = `<div class="app-shell">
+    <div class="sr-only" role="status" aria-live="polite" data-copy-feedback></div>
     <header class="topbar">
       <div class="brand">
         <div class="brand-mark" aria-hidden="true">EQ</div>
@@ -1165,6 +1176,7 @@ function bindFrame() {
 }
 
 function bind() {
+  bindClipboardButtons(root)
   document.querySelectorAll('[data-paper-id]').forEach((button) => {
     button.addEventListener('click', () => void loadDetail(button.dataset.paperId))
   })

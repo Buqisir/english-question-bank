@@ -1,3 +1,5 @@
+import { bindClipboardButtons } from './clipboard.js'
+
 const platformLabels = {
   wechat_official: '公众号',
   xiaohongshu: '小红书',
@@ -9,11 +11,14 @@ const intakeStateLabels = {
   draft: '草稿',
   awaiting_answers: '待补答案',
   ready_for_agent: '可提交',
-  queued: '已排队',
-  claimed: 'Agent 处理中',
+  queued: '等待 Amp',
+  claimed: '正在导题',
   needs_owner: '需确认',
-  handed_off: '已交接',
+  handed_off: '等待审核',
 }
+
+const activeIntakeStates = new Set(['queued', 'claimed'])
+const refreshIntervalMs = 15_000
 
 const roleLabels = {
   question_source: '试题',
@@ -46,11 +51,16 @@ function closeIcon() {
   return '<svg aria-hidden="true" viewBox="0 0 18 18"><path d="m4 4 10 10M14 4 4 14" /></svg>'
 }
 
-function formatTime(value) {
+function formatActivityTime(value) {
   if (!value) return '—'
   const date = new Date(value)
   if (Number.isNaN(date.getTime())) return String(value)
-  return new Intl.DateTimeFormat('zh-CN', { month: 'numeric', day: 'numeric' }).format(date)
+  return new Intl.DateTimeFormat('zh-CN', {
+    month: 'numeric',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  }).format(date)
 }
 
 function formatBytes(value) {
@@ -95,7 +105,41 @@ function groupForState(state) {
   return 'other'
 }
 
+function ampThreadIdFor(intake) {
+  return intake.claim?.ampThreadId || intake.orbWorker?.ampThreadId || null
+}
+
+function workflowStatus(intake) {
+  if (intake.state === 'queued') {
+    if (intake.orbWorker?.ampThreadId) return { label: 'Orb 已创建', tone: 'active' }
+    if (intake.orbWorker?.state === 'reserved') return { label: '正在创建 Orb', tone: 'active' }
+    if (intake.lastNotification?.state === 'failed') return { label: '通知失败', tone: 'danger' }
+    if (intake.lastNotification?.state === 'sent') return { label: '已通知 Amp', tone: 'active' }
+    if (intake.lastNotification?.state === 'skipped') return { label: '等待通知 Amp', tone: 'warning' }
+  }
+  if (intake.state === 'claimed') return { label: '正在导题', tone: 'active' }
+  if (intake.state === 'handed_off') return { label: '等待审核', tone: 'success' }
+  if (intake.state === 'needs_owner') return { label: '需确认', tone: 'danger' }
+  if (intake.state === 'awaiting_answers') return { label: '待补答案', tone: 'warning' }
+  if (intake.state === 'ready_for_agent') return { label: '可提交', tone: 'success' }
+  return { label: intakeStateLabels[intake.state] || intake.state, tone: 'neutral' }
+}
+
+function recentActivity(intake) {
+  const candidates = [
+    [intake.claim?.heartbeatAt, 'Orb 最近活动'],
+    [intake.orbWorker?.updatedAt, intake.orbWorker?.ampThreadId ? 'Orb 线程已创建' : '正在创建 Orb'],
+    [intake.lastNotification?.createdAt, intake.lastNotification?.state === 'failed' ? '通知未送达' : '已通知 Amp'],
+    [intake.currentSubmission?.updatedAt, intake.state === 'handed_off' ? '已提交审核' : '提交已更新'],
+    [intake.updatedAt, intake.state === 'needs_owner' ? '等待 Owner 确认' : '台账已更新'],
+  ].filter(([value]) => value)
+  candidates.sort((left, right) => new Date(right[0]).getTime() - new Date(left[0]).getTime())
+  const [value, label] = candidates[0] || [intake.createdAt, '已记录题源']
+  return { value, label }
+}
+
 export function mountSourceIntakes({ root, user, request, accessHtml }) {
+  root.removeAttribute('aria-live')
   const state = {
     intakes: [],
     filter: 'all',
@@ -111,6 +155,8 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
     submittingIntakeId: null,
     returnFocusIntakeId: null,
   }
+  let refreshTimer = null
+  let refreshing = false
 
   function filteredIntakes() {
     const query = state.query.trim().toLowerCase()
@@ -128,10 +174,23 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
     return state.intakes.filter((intake) => group === 'all' || groupForState(intake.state) === group).length
   }
 
-  function statusHtml(intakeState) {
-    return `<span class="intake-status intake-status--${escapeHtml(intakeState)}">
-      <span aria-hidden="true"></span>${escapeHtml(intakeStateLabels[intakeState] || intakeState)}
+  function statusHtml(intake) {
+    const workflow = workflowStatus(intake)
+    return `<span class="intake-status intake-status--${escapeHtml(workflow.tone)}">
+      <span aria-hidden="true"></span>${escapeHtml(workflow.label)}
     </span>`
+  }
+
+  function recentActivityHtml(intake) {
+    const activity = recentActivity(intake)
+    return `<div class="ledger-activity"><span>${escapeHtml(activity.label)}</span><time datetime="${escapeHtml(activity.value)}">${escapeHtml(formatActivityTime(activity.value))}</time></div>`
+  }
+
+  function paperReferenceHtml(intake) {
+    if (!intake.handedOffPaperId) {
+      return `<span class="ledger-paper-id">R${escapeHtml(intake.currentSubmission?.revisionNumber || '—')}</span>`
+    }
+    return `<span class="ledger-paper-reference"><code>${escapeHtml(intake.handedOffPaperId)}</code><button class="copy-button" type="button" data-copy-text="${escapeHtml(intake.handedOffPaperId)}" data-copy-name="Paper ID" aria-label="复制 Paper ID">复制</button></span>`
   }
 
   function sourceHtml(intake) {
@@ -166,7 +225,7 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
   function actionFor(intake) {
     if (intake.state === 'ready_for_agent') {
       const submitting = state.submittingIntakeId === intake.id
-      return `<button class="ledger-action ledger-action--primary" type="button" data-submit-intake="${escapeHtml(intake.id)}" ${submitting ? 'disabled' : ''}>${submitting ? '正在提交…' : '提交给 Agent'}</button>`
+      return `<button class="ledger-action ledger-action--primary" type="button" data-submit-intake="${escapeHtml(intake.id)}" ${submitting ? 'disabled' : ''}>${submitting ? '正在提交…' : '提交给 Amp'}</button>`
     }
     if (intake.state === 'awaiting_answers') {
       return `<button class="ledger-action" type="button" data-edit-intake="${escapeHtml(intake.id)}">上传答案</button>`
@@ -175,13 +234,19 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
       return `<button class="ledger-action" type="button" data-edit-intake="${escapeHtml(intake.id)}">${intake.state === 'needs_owner' ? '处理问题' : '继续填写'}</button>`
     }
     if (intake.state === 'handed_off') {
-      return '<a class="ledger-action" href="/ops/?view=review">打开审核</a>'
+      const command = `继续 ${intake.handedOffPaperId}，处理线上审核反馈`
+      return `<span class="ledger-actions"><a class="ledger-action" href="/ops/?view=review">打开审核</a><button class="ledger-action" type="button" data-copy-text="${escapeHtml(command)}" data-copy-name="继续导题口令">复制继续口令</button></span>`
     }
     if (intake.state === 'queued' && intake.currentSubmission) {
       const notifying = state.submittingIntakeId === intake.id
-      return `<button class="ledger-action" type="button" data-notify-intake="${escapeHtml(intake.id)}" data-submission-id="${escapeHtml(intake.currentSubmission.id)}" ${notifying ? 'disabled' : ''}>${notifying ? '正在通知…' : '再次通知 Agent'}</button>`
+      const threadId = ampThreadIdFor(intake)
+      return `<span class="ledger-actions">${threadId ? `<a class="ledger-action" href="https://ampcode.com/threads/${encodeURIComponent(threadId)}" target="_blank" rel="noreferrer">打开 Amp 线程</a>` : ''}<button class="ledger-action" type="button" data-notify-intake="${escapeHtml(intake.id)}" data-submission-id="${escapeHtml(intake.currentSubmission.id)}" ${notifying ? 'disabled' : ''}>${notifying ? '正在通知…' : '再次通知 Amp'}</button></span>`
     }
-    return '<span class="intake-muted">等待 Agent</span>'
+    const threadId = ampThreadIdFor(intake)
+    if (threadId) {
+      return `<a class="ledger-action" href="https://ampcode.com/threads/${encodeURIComponent(threadId)}" target="_blank" rel="noreferrer">打开 Amp 线程</a>`
+    }
+    return '<span class="intake-muted">等待 Amp</span>'
   }
 
   function tableHtml() {
@@ -192,7 +257,7 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
         <h2 id="empty-title">还没有题源</h2>
         <p>从公众号、小红书或教师群发现试卷后，先记下来源并上传本地 DOCX / PDF。答案可以稍后补。</p>
         <button class="button button--primary intake-add" type="button">${plusIcon()}添加第一份题源</button>
-        <ol><li><span>1</span>记录来源</li><li><span>2</span>上传原文件</li><li><span>3</span>提交给 Agent</li></ol>
+        <ol><li><span>1</span>记录来源</li><li><span>2</span>上传原文件</li><li><span>3</span>通知 Amp</li></ol>
         <small>原文件仅供后台导题使用，不会作为网站公开资源。</small>
       </section>`
     }
@@ -202,14 +267,14 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
     return `<section class="ledger-shell" aria-label="题源台账">
       <div class="ledger-scroll">
         <table class="intake-ledger">
-          <thead><tr><th>试卷</th><th>来源</th><th>原文件</th><th>状态</th><th>发现于</th><th>下一步</th></tr></thead>
+          <thead><tr><th>试卷</th><th>来源</th><th>原文件</th><th>状态</th><th>最近活动</th><th>下一步</th></tr></thead>
           <tbody>${state.loading ? `<tr><td colspan="6"><div class="ledger-loading">正在读取题源…</div></td></tr>` : intakes.map((intake) => `
             <tr>
-              <td><strong class="ledger-paper-name">${escapeHtml(intake.paperName)}</strong><span class="ledger-paper-id">${escapeHtml(intake.handedOffPaperId || `R${intake.currentSubmission?.revisionNumber || '—'}`)}</span></td>
+              <td><strong class="ledger-paper-name">${escapeHtml(intake.paperName)}</strong>${paperReferenceHtml(intake)}</td>
               <td>${sourceHtml(intake)}</td>
               <td>${filesHtml(intake)}</td>
-              <td>${statusHtml(intake.state)}</td>
-              <td><time datetime="${escapeHtml(intake.createdAt)}">${escapeHtml(formatTime(intake.createdAt))}</time></td>
+              <td>${statusHtml(intake)}</td>
+              <td>${recentActivityHtml(intake)}</td>
               <td>${actionFor(intake)}</td>
             </tr>
           `).join('')}</tbody>
@@ -254,7 +319,7 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
             <section class="drawer-section"><h3>来源</h3><div class="source-field-row"><label class="drawer-field"><span>平台</span><select name="platform"><option value="wechat_official" ${draft.platform === 'wechat_official' ? 'selected' : ''}>公众号</option><option value="xiaohongshu" ${draft.platform === 'xiaohongshu' ? 'selected' : ''}>小红书</option><option value="teacher_group" ${draft.platform === 'teacher_group' ? 'selected' : ''}>教师群</option><option value="other" ${draft.platform === 'other' ? 'selected' : ''}>其他</option></select></label><label class="drawer-field drawer-field--grow"><span>来源名称</span><input name="sourceName" required maxlength="300" value="${escapeHtml(draft.sourceName || '')}" placeholder="账号、群或老师名称" /></label></div><label class="drawer-field"><span>公开链接（选填）</span><input name="sourceUrl" type="url" maxlength="2000" value="${escapeHtml(draft.sourceUrl || '')}" placeholder="https://…" /></label></section>
             <section class="drawer-section drawer-files"><h3>原文件</h3><div class="file-mode" role="group" aria-label="文件组合方式"><button type="button" data-file-mode="separate" aria-pressed="${state.mode === 'separate'}">题目与答案分开</button><button type="button" data-file-mode="combined" aria-pressed="${state.mode === 'combined'}">题目和答案在同一文件</button></div><div class="upload-stack">${state.mode === 'combined' ? uploadBox('question_and_answers', '题目与答案') : `${uploadBox('question_source', '试题文件')}${uploadBox('official_answers', '官方答案')}`}</div><p class="drawer-help">暂时没有答案也能先保存，台账会标记为“待补答案”。</p></section>
           </div>
-          <footer class="drawer-footer"><p>提交后将锁定这一版文件，并通知本机 Agent 开始导题。</p>${state.error ? `<div class="drawer-error" role="alert">${escapeHtml(state.error)}</div>` : ''}<div><button class="button drawer-draft" type="submit" data-save-mode="draft" ${state.busy ? 'disabled' : ''}>保存草稿</button><button class="button button--primary" type="submit" data-save-mode="submit" ${state.busy ? 'disabled' : ''}>${state.busy ? '正在保存…' : '保存并提交给 Agent'}</button></div></footer>
+          <footer class="drawer-footer"><p>提交后将锁定这一版文件，并通知 Amp 创建专用 Orb 线程开始导题。</p>${state.error ? `<div class="drawer-error" role="alert">${escapeHtml(state.error)}</div>` : ''}<div><button class="button drawer-draft" type="submit" data-save-mode="draft" ${state.busy ? 'disabled' : ''}>保存草稿</button><button class="button button--primary" type="submit" data-save-mode="submit" ${state.busy ? 'disabled' : ''}>${state.busy ? '正在保存…' : '保存并通知 Amp'}</button></div></footer>
         </form>
       </aside>
     </div>`
@@ -262,9 +327,10 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
 
   function render() {
     root.innerHTML = `<div class="source-intake-app">
+      <div class="sr-only" role="status" aria-live="polite" data-copy-feedback></div>
       <header class="topbar source-topbar"><div class="brand"><div class="brand-mark" aria-hidden="true">EQ</div><div><h1>英语题库</h1><p>后台工作台</p></div></div><nav class="workspace-navigation" aria-label="后台工作台"><a href="/ops/" aria-current="page">题源台账</a><a href="/ops/?view=review">导题审核</a></nav><div class="account"><div class="account-copy"><strong>${escapeHtml(user.username)}</strong><span>Owner</span></div><span class="owner-avatar" aria-hidden="true">${escapeHtml(initials(user.username))}</span></div></header>
-      <main class="intake-page"><div class="intake-page-heading"><div><span class="intake-kicker">SOURCE INTAKE</span><h1>题源台账</h1><p>把人工发现的试卷和原文件记在这里，材料齐全后，提交给 Agent 进入既有导题流程。</p></div><button class="button button--primary intake-add" type="button">${plusIcon()}添加题源</button></div>
-        <div class="ledger-tools"><div class="ledger-filters" role="group" aria-label="筛选题源">${[['all', '全部'], ['awaiting_answers', '待补答案'], ['ready_for_agent', '可提交'], ['agent', 'Agent 处理中'], ['needs_owner', '需确认']].map(([key, label]) => `<button type="button" data-filter="${key}" aria-pressed="${state.filter === key}">${label} <span>${count(key)}</span></button>`).join('')}</div><label class="ledger-search">${searchIcon()}<span class="sr-only">搜索试卷名或来源</span><input type="search" value="${escapeHtml(state.query)}" placeholder="搜索试卷名或来源" /></label></div>
+      <main class="intake-page"><div class="intake-page-heading"><div><span class="intake-kicker">SOURCE INTAKE</span><h1>题源台账</h1><p>把人工发现的试卷和原文件记在这里，材料齐全后，提交给 Amp Orb 进入既有导题流程。</p></div><button class="button button--primary intake-add" type="button">${plusIcon()}添加题源</button></div>
+        <div class="ledger-tools"><div class="ledger-filters" role="group" aria-label="筛选题源">${[['all', '全部'], ['awaiting_answers', '待补答案'], ['ready_for_agent', '可提交'], ['agent', 'Amp 导题中'], ['needs_owner', '需确认']].map(([key, label]) => `<button type="button" data-filter="${key}" aria-pressed="${state.filter === key}">${label} <span>${count(key)}</span></button>`).join('')}</div><label class="ledger-search">${searchIcon()}<span class="sr-only">搜索试卷名或来源</span><input type="search" value="${escapeHtml(state.query)}" placeholder="搜索试卷名或来源" /></label></div>
         ${state.error && !state.drawerOpen ? `<div class="intake-page-error" role="alert">${escapeHtml(state.error)}。请刷新后重试。</div>` : ''}
         ${tableHtml()}
       </main>${drawerHtml()}
@@ -274,6 +340,7 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
 
   function openDrawer(intake = null) {
     if (intake && !isEditable(intake)) return
+    stopAutoRefresh()
     state.editing = intake
     const source = intake?.sources?.[0] || {}
     state.draft = {
@@ -305,6 +372,7 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
       : document.querySelector('.intake-page-heading .intake-add')
     returnTarget?.focus()
     state.returnFocusIntakeId = null
+    scheduleAutoRefresh()
   }
 
   async function uploadFile(intakeId, role, file) {
@@ -416,6 +484,7 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
   }
 
   function bind() {
+    bindClipboardButtons(root)
     document.querySelectorAll('.intake-add').forEach((button) =>
       button.addEventListener('click', () => openDrawer()))
     document.querySelectorAll('[data-filter]').forEach((button) => {
@@ -487,12 +556,42 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
     })
   }
 
-  async function load() {
-    state.loading = true
+  function hasActiveIntakes() {
+    return state.intakes.some((intake) => activeIntakeStates.has(intake.state))
+  }
+
+  function stopAutoRefresh() {
+    if (refreshTimer) window.clearTimeout(refreshTimer)
+    refreshTimer = null
+  }
+
+  function scheduleAutoRefresh() {
+    stopAutoRefresh()
+    if (!hasActiveIntakes() || document.hidden || state.drawerOpen) return
+    refreshTimer = window.setTimeout(() => {
+      refreshTimer = null
+      const active = document.activeElement
+      if (document.hidden || state.drawerOpen || active?.matches('input, textarea, select, button, a[href]')) {
+        scheduleAutoRefresh()
+        return
+      }
+      void load({ background: true })
+    }, refreshIntervalMs)
+  }
+
+  async function load({ background = false } = {}) {
+    if (refreshing) return
+    refreshing = true
+    stopAutoRefresh()
+    if (!background) state.loading = true
     state.busy = false
+    let changed = true
     try {
       const result = await request('/api/source-intakes')
-      state.intakes = result.intakes || []
+      const intakes = result.intakes || []
+      changed = !background || state.error !== null
+        || JSON.stringify(intakes) !== JSON.stringify(state.intakes)
+      state.intakes = intakes
       state.error = null
     } catch (error) {
       if (/forbidden|not_authenticated/i.test(error.message)) {
@@ -503,9 +602,20 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
     } finally {
       state.loading = false
       state.submittingIntakeId = null
+      refreshing = false
     }
-    render()
+    if (changed) render()
+    scheduleAutoRefresh()
   }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      stopAutoRefresh()
+    } else if (hasActiveIntakes() && !state.drawerOpen) {
+      void load({ background: true })
+    }
+  })
+  window.addEventListener('pagehide', stopAutoRefresh)
 
   window.addEventListener('keydown', (event) => {
     if (!state.drawerOpen) return

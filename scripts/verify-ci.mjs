@@ -86,6 +86,7 @@ const registry = {
   'scripts/import-pipeline/verify-source-doc-types.mjs',
   'scripts/verify-import-ops.mjs',
   'scripts/verify-source-intake.mjs',
+  'scripts/verify-source-intake-frontend.mjs',
   'scripts/verify-source-intake-webhook.mjs',
   'scripts/verify-import-review-source-pairing.mjs',
   'scripts/verify-import-review-media-derivation.mjs',
