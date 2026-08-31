@@ -1,8 +1,8 @@
 # ADR-0021: 专用 Amp Orb 先作为 GitHub Verify 的影子 CI
 
-- Status: Accepted for repository implementation (2026-08-31 task scope)
+- Status: Accepted; authority rollout superseded by ADR-0022
 - Live activation: requires a later direct Owner approval
-- Authority replacement: not approved; GitHub Actions `Verify` remains required
+- Authority replacement: superseded by ADR-0022
 
 ## Context
 

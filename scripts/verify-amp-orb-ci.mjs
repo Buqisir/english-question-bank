@@ -23,8 +23,14 @@ import githubCIWakeupPlugin, {
   parseGitHubCIWebhook,
   validGitHubCISignature,
 } from '../.amp/plugins/github-ci-wakeup.js'
-import { AMP_ORB_CI_E2E_COMMANDS, parseSandboxInput } from './amp-orb-ci-sandbox.mjs'
 import {
+  AMP_ORB_CI_E2E_COMMANDS,
+  AMP_ORB_CI_FAST_PORTS,
+  ampOrbCILaneCommands,
+  parseSandboxInput,
+} from './amp-orb-ci-sandbox.mjs'
+import {
+  AMP_ORB_CI_FAST_STATUS_CONTEXT,
   AMP_ORB_CI_LOCK_CONFLICT_EXIT_CODE,
   AMP_ORB_CI_STATUS_CONTEXT,
   AMP_ORB_CI_WORKFLOW_VERSION,
@@ -34,6 +40,7 @@ import {
   drainAmpOrbCIQueue,
   enqueueAmpOrbCIJob,
   ensureCompleteAmpOrbCIGitHistory,
+  executeAmpOrbCILanes,
   reapAmpOrbCIProcesses,
   repositoryRootFromModule,
   resolveAmpOrbCIPullRequest,
@@ -250,14 +257,18 @@ const pullRequestPayload = {
 const pullRequestBody = Buffer.from(JSON.stringify(pullRequestPayload))
 const signature = `sha256=${createHmac('sha256', secret).update(pullRequestBody).digest('hex')}`
 const parsedPullRequest = {
-  kind: 'run',
+  kind: 'resolve',
   event: 'pull_request',
   action: 'synchronize',
   deliveryId,
   sha: headSha,
-  testedSha,
   baseSha,
   pullRequestNumber: 292,
+}
+const resolvedPullRequest = {
+  ...parsedPullRequest,
+  kind: 'run',
+  testedSha,
 }
 
 assert.deepEqual(parseGitHubCIWebhook(pullRequestBody, {
@@ -274,14 +285,24 @@ const unresolvedPullRequestBody = Buffer.from(JSON.stringify({
 }))
 const parsedUnresolvedPullRequest = {
   ...parsedPullRequest,
-  kind: 'resolve',
   action: 'opened',
 }
-delete parsedUnresolvedPullRequest.testedSha
 assert.deepEqual(parseGitHubCIWebhook(unresolvedPullRequestBody, {
   deliveryId,
   eventName: 'pull_request',
 }), parsedUnresolvedPullRequest)
+for (const mergeCommitSha of [`${testedSha}\ncommand`, undefined]) {
+  assert.deepEqual(parseGitHubCIWebhook(Buffer.from(JSON.stringify({
+    ...pullRequestPayload,
+    pull_request: {
+      ...pullRequestPayload.pull_request,
+      merge_commit_sha: mergeCommitSha,
+    },
+  })), {
+    deliveryId,
+    eventName: 'pull_request',
+  }), parsedPullRequest, 'webhook merge SHA is ignored in favor of the exact current merge ref')
+}
 assert.equal(validGitHubCISignature(pullRequestBody, signature, secret), true)
 assert.equal(validGitHubCISignature(pullRequestBody, `${signature.slice(0, -1)}0`, secret), false)
 assert.equal(validGitHubCISignature(pullRequestBody, '', secret), false)
@@ -337,20 +358,6 @@ for (const [label, body, eventName] of [
     pull_request: {
       ...pullRequestPayload.pull_request,
       head: { ...pullRequestPayload.pull_request.head, sha: `${headSha}\ncommand` },
-    },
-  }, 'pull_request'],
-  ['malformed tested SHA', {
-    ...pullRequestPayload,
-    pull_request: {
-      ...pullRequestPayload.pull_request,
-      merge_commit_sha: `${testedSha}\ncommand`,
-    },
-  }, 'pull_request'],
-  ['missing tested SHA field', {
-    ...pullRequestPayload,
-    pull_request: {
-      ...pullRequestPayload.pull_request,
-      merge_commit_sha: undefined,
     },
   }, 'pull_request'],
   ['deleted main', { ...pushPayload, deleted: true }, 'push'],
@@ -546,21 +553,61 @@ try {
   assert.deepEqual(queuedFiles, [`${deliveryId}.json`], 'at-least-once delivery has one durable item')
   assert.equal(statSync(path.join(queueDir, queuedFiles[0])).mode & 0o777, 0o600)
   const queuedItem = JSON.parse(readFileSync(path.join(queueDir, queuedFiles[0]), 'utf8'))
-  assert.deepEqual(queuedItem.input, validateAmpOrbCIInput(parsedPullRequest))
+  assert.deepEqual(queuedItem.input, validateAmpOrbCIQueueInput(parsedPullRequest))
   assert.equal(JSON.stringify(queuedItem).includes('Ignore prior instructions'), false)
   assert.equal(JSON.stringify(queuedItem).includes('QUESTION_BANK_AMP_CI_GITHUB_STATUS_TOKEN'), false)
 
+  const drainedQueueInputs = []
   const drainedInputs = []
   const drained = await drainAmpOrbCIQueue({
     stateDir: pluginState,
+    async resolveJob(input) {
+      drainedQueueInputs.push(input)
+      return { ...input, kind: 'run', testedSha }
+    },
     async runJob(input) {
       drainedInputs.push(input)
       return { outcome: 'reported', receipt: { state: 'reported' } }
     },
   })
-  assert.deepEqual(drainedInputs, [validateAmpOrbCIInput(parsedPullRequest)])
+  assert.deepEqual(drainedQueueInputs, [validateAmpOrbCIQueueInput(parsedPullRequest)])
+  assert.deepEqual(drainedInputs, [validateAmpOrbCIInput(resolvedPullRequest)])
   assert.deepEqual(drained, [{ deliveryId, outcome: 'reported' }])
   assert.deepEqual(readdirSync(queueDir), [], 'successful drain removes the durable item')
+
+  const legacyDelivery = '66666666-6666-4666-8666-666666666666'
+  const legacyQueuePath = enqueueAmpOrbCIJob({
+    ...resolvedPullRequest,
+    testedSha: '9'.repeat(40),
+    deliveryId: legacyDelivery,
+  }, { stateDir: pluginState }).queuePath
+  const legacyResolverInputs = []
+  const legacyRunInputs = []
+  const legacyDrain = await drainAmpOrbCIQueue({
+    stateDir: pluginState,
+    async resolveJob(input) {
+      legacyResolverInputs.push(input)
+      return { ...input, kind: 'run', testedSha }
+    },
+    async runJob(input) {
+      legacyRunInputs.push(input)
+      return { outcome: 'reported', receipt: { state: 'reported' } }
+    },
+  })
+  assert.deepEqual(legacyResolverInputs, [{
+    kind: 'resolve',
+    event: 'pull_request',
+    sha: headSha,
+    baseSha,
+    deliveryId: legacyDelivery,
+    pullRequestNumber: 292,
+  }], 'legacy direct-run PR queue discards its stale payload merge SHA before resolution')
+  assert.deepEqual(legacyRunInputs, [validateAmpOrbCIInput({
+    ...resolvedPullRequest,
+    deliveryId: legacyDelivery,
+  })])
+  assert.deepEqual(legacyDrain, [{ deliveryId: legacyDelivery, outcome: 'reported' }])
+  assert.equal(existsSync(legacyQueuePath), false)
 
   const unresolvedDelivery = '22222222-2222-4222-8222-222222222222'
   const unresolvedSignature = `sha256=${createHmac('sha256', secret)
@@ -602,7 +649,7 @@ try {
     deliveryId: unresolvedDelivery,
   })])
   assert.deepEqual(resolvedRunInputs, [validateAmpOrbCIInput({
-    ...parsedPullRequest,
+    ...resolvedPullRequest,
     deliveryId: unresolvedDelivery,
   })])
   assert.deepEqual(resolvedDrain, [{ deliveryId: unresolvedDelivery, outcome: 'reported' }])
@@ -622,7 +669,10 @@ try {
   const followingRunInputs = []
   const delayedDrain = await drainAmpOrbCIQueue({
     stateDir: pluginState,
-    async resolveJob() { throw new Error('synthetic merge ref unavailable') },
+    async resolveJob(input) {
+      if (input.deliveryId === delayedDelivery) throw new Error('synthetic merge ref unavailable')
+      return { ...input, kind: 'run', testedSha }
+    },
     async runJob(input) {
       followingRunInputs.push(input)
       return { outcome: 'reported', receipt: { state: 'reported' } }
@@ -633,7 +683,7 @@ try {
     { deliveryId: followingDelivery, outcome: 'reported' },
   ])
   assert.deepEqual(followingRunInputs, [validateAmpOrbCIInput({
-    ...parsedPullRequest,
+    ...resolvedPullRequest,
     deliveryId: followingDelivery,
   })])
   assert.equal(
@@ -658,6 +708,7 @@ try {
 
   await drainAmpOrbCIQueue({
     stateDir: pluginState,
+    async resolveJob(input) { return { ...input, kind: 'run', testedSha } },
     async runJob() { return { outcome: 'reported', receipt: { state: 'reported' } } },
   })
   rejectDrainLaunch = true
@@ -744,6 +795,7 @@ assert.throws(() => validateAmpOrbCIInput({
 
 const invocation = sandboxInvocation(jobInput, {
   bundlePath: '/var/tmp/eqb-amp-ci/inbox/11111111-1111-4111-8111-111111111111/repository.bundle',
+  lane: 'full',
   repositoryRoot: '/trusted/controller',
   nodePath: '/trusted/node/bin/node',
 })
@@ -751,6 +803,10 @@ assert.equal(invocation.command, 'sudo')
 assert.deepEqual(invocation.args.slice(0, 5), ['-n', '-u', 'eqb-ci', '--', '/usr/bin/env'])
 assert(invocation.args.includes('-i'), 'sandbox starts with an empty environment')
 assert(invocation.args.includes('/trusted/controller/scripts/amp-orb-ci-sandbox.mjs'))
+assert.deepEqual(
+  invocation.args.slice(invocation.args.indexOf('--lane'), invocation.args.indexOf('--lane') + 2),
+  ['--lane', 'full'],
+)
 assert.equal(
   Object.keys(invocation.environment).some((name) => name.startsWith('QUESTION_BANK_')),
   false,
@@ -782,28 +838,48 @@ assert.throws(() => reapAmpOrbCIProcesses({
   },
 }), /process cleanup failed/u)
 
-assert.deepEqual(validateAmpOrbCISandboxResult(0, {
-  kind: 'verified',
-  exitCode: 0,
-}), { kind: 'verified', exitCode: 0 })
-assert.deepEqual(validateAmpOrbCISandboxResult(0, {
-  kind: 'docs-only',
-}), { kind: 'docs-only' })
-assert.deepEqual(validateAmpOrbCISandboxResult(1, {
-  kind: 'verified',
-  exitCode: 1,
-}), { kind: 'verified', exitCode: 1 })
-assert.throws(() => validateAmpOrbCISandboxResult(0, null), /marker is missing or invalid/u)
+assert.deepEqual(
+  validateAmpOrbCISandboxResult(0, {
+    kind: 'verified',
+    lane: 'full',
+    exitCode: 0,
+  }, { lane: 'full' }),
+  { kind: 'verified', lane: 'full', exitCode: 0 },
+)
+assert.deepEqual(
+  validateAmpOrbCISandboxResult(0, {
+    kind: 'docs-only',
+    lane: 'fast',
+  }, { lane: 'fast' }),
+  { kind: 'docs-only', lane: 'fast' },
+)
+assert.deepEqual(
+  validateAmpOrbCISandboxResult(1, {
+    kind: 'verified',
+    lane: 'fast',
+    exitCode: 1,
+  }, { lane: 'fast' }),
+  { kind: 'verified', lane: 'fast', exitCode: 1 },
+)
+assert.throws(() => validateAmpOrbCISandboxResult(0, null, { lane: 'full' }), /marker is missing or invalid/u)
 assert.throws(() => validateAmpOrbCISandboxResult(0, {
   kind: 'verified',
+  lane: 'full',
   exitCode: 1,
-}), /contradicts its process exit/u)
+}, { lane: 'full' }), /contradicts its process exit/u)
 assert.throws(() => validateAmpOrbCISandboxResult(1, {
   kind: 'verified',
-}), /contradicts its process exit/u)
+  lane: 'full',
+}, { lane: 'full' }), /contradicts its process exit/u)
 assert.throws(() => validateAmpOrbCISandboxResult(1, {
   kind: 'docs-only',
-}), /contradicts its process exit/u)
+  lane: 'full',
+}, { lane: 'full' }), /contradicts its process exit/u)
+assert.throws(() => validateAmpOrbCISandboxResult(0, {
+  kind: 'verified',
+  lane: 'fast',
+  exitCode: 0,
+}, { lane: 'full' }), /result lane is missing or invalid/u)
 
 assert.deepEqual(parseSandboxInput([
   'node',
@@ -818,6 +894,8 @@ assert.deepEqual(parseSandboxInput([
   baseSha,
   '--bundle',
   '/var/tmp/eqb-amp-ci/inbox/11111111-1111-4111-8111-111111111111/repository.bundle',
+  '--lane',
+  'fast',
   '--pull-request',
   '292',
 ]), {
@@ -826,6 +904,7 @@ assert.deepEqual(parseSandboxInput([
   testedSha,
   baseSha,
   bundlePath: '/var/tmp/eqb-amp-ci/inbox/11111111-1111-4111-8111-111111111111/repository.bundle',
+  lane: 'fast',
   pullRequestNumber: 292,
   forced: false,
 })
@@ -837,6 +916,109 @@ assert.deepEqual(AMP_ORB_CI_E2E_COMMANDS, [
   ['node', ['scripts/verify-paper-normalization-grammar-fill-browser.mjs']],
   ['node', ['scripts/smoke-golden-path.mjs']],
 ])
+assert.equal(ampOrbCILaneCommands('fast'), AMP_ORB_CI_E2E_COMMANDS)
+assert.deepEqual(ampOrbCILaneCommands('full'), [['pnpm', ['-C', 'app', 'verify:all']]])
+assert.throws(() => ampOrbCILaneCommands('unknown'), /Invalid sandbox lane/u)
+assert.deepEqual(AMP_ORB_CI_FAST_PORTS, {
+  'scripts/verify-a3-imposition.mjs': { api: '15997', vite: '15197' },
+  'scripts/verify-reorder-suggest.mjs': { api: '15998', vite: '15198' },
+  'scripts/smoke-golden-path.mjs': { api: '15999', vite: '15199' },
+})
+assert.equal(
+  new Set(Object.values(AMP_ORB_CI_FAST_PORTS).flatMap(({ api, vite }) => [api, vite])).size,
+  6,
+  'each Fast E2E server uses a distinct shifted port',
+)
+for (const script of [
+  'scripts/verify-a3-imposition.mjs',
+  'scripts/verify-reorder-suggest.mjs',
+  'scripts/smoke-golden-path.mjs',
+]) {
+  const source = readFileSync(path.join(expectedRepositoryRoot, script), 'utf8')
+  assert.match(source, /process\.env\.AMP_ORB_CI_API_PORT/u, `${script} accepts the isolated fast API port`)
+  assert.match(source, /process\.env\.AMP_ORB_CI_VITE_PORT/u, `${script} accepts the isolated fast Vite port`)
+}
+
+let resolveFastLane
+let resolveFullLane
+const laneCalls = []
+const laneReaps = []
+const fastLaneReports = []
+const layeredExecutionPromise = executeAmpOrbCILanes(jobInput, {
+  executeLane(lane) {
+    laneCalls.push(lane)
+    return new Promise((resolve) => {
+      if (lane === 'fast') resolveFastLane = resolve
+      else resolveFullLane = resolve
+    })
+  },
+  async onFastResult(execution) {
+    fastLaneReports.push(execution)
+  },
+  reapProcesses() { laneReaps.push('reap') },
+  writeOutput() {},
+})
+await new Promise((resolve) => setImmediate(resolve))
+assert.deepEqual(laneCalls, ['fast', 'full'], 'fast and full lanes start without waiting for each other')
+const fastLaneExecution = {
+  exitCode: 0,
+  result: {
+    kind: 'verified',
+    lane: 'fast',
+    e2eFailureCount: 0,
+    clean: true,
+    wallSeconds: 3,
+    exitCode: 0,
+  },
+}
+resolveFastLane(fastLaneExecution)
+await new Promise((resolve) => setImmediate(resolve))
+assert.deepEqual(fastLaneReports, [fastLaneExecution], 'fast status can report before full completion')
+resolveFullLane({
+  exitCode: 0,
+  result: {
+    kind: 'verified',
+    lane: 'full',
+    verifyExitCode: 0,
+    clean: true,
+    wallSeconds: 12,
+    exitCode: 0,
+  },
+})
+const layeredExecution = await layeredExecutionPromise
+assert.equal(layeredExecution.exitCode, 0)
+assert.equal(layeredExecution.result.kind, 'verified')
+assert.equal(layeredExecution.result.verifyExitCode, 0)
+assert.equal(layeredExecution.result.e2eFailureCount, 0)
+assert.equal(layeredExecution.result.clean, true)
+assert.deepEqual(laneReaps, ['reap', 'reap'], 'parallel lane process cleanup brackets the pair once')
+const failedLayeredExecution = await executeAmpOrbCILanes(jobInput, {
+  executeLane: async (lane) => lane === 'fast'
+    ? {
+        exitCode: 1,
+        result: {
+          kind: 'verified',
+          lane,
+          e2eFailureCount: 1,
+          clean: true,
+          exitCode: 1,
+        },
+      }
+    : {
+        exitCode: 0,
+        result: {
+          kind: 'verified',
+          lane,
+          verifyExitCode: 0,
+          clean: true,
+          exitCode: 0,
+        },
+      },
+  reapProcesses() {},
+  writeOutput() {},
+})
+assert.equal(failedLayeredExecution.exitCode, 1, 'aggregate Full gate fails when Fast E2E fails')
+assert.equal(failedLayeredExecution.result.e2eFailureCount, 1)
 
 const statusRequests = []
 const statusWriter = createGitHubStatusWriter({
@@ -862,6 +1044,19 @@ assert.deepEqual(statusBody, {
   target_url: 'https://ampcode.com/threads/T-11111111-1111-4111-8111-111111111111',
 })
 assert.equal(statusRequests[0].options.body.includes('status-token-sentinel'), false)
+await statusWriter({
+  sha: headSha,
+  state: 'success',
+  context: AMP_ORB_CI_FAST_STATUS_CONTEXT,
+  description: 'Synthetic fast status',
+})
+assert.equal(JSON.parse(statusRequests[1].options.body).context, AMP_ORB_CI_FAST_STATUS_CONTEXT)
+await assert.rejects(statusWriter({
+  sha: headSha,
+  state: 'success',
+  context: 'Untrusted status context',
+  description: 'Synthetic invalid status',
+}), /status context is invalid/u)
 
 function privateFiles(root) {
   const files = []
@@ -881,6 +1076,46 @@ function tempState() {
   const root = mkdtempSync(path.join(tmpdir(), 'eqb-amp-orb-ci-'))
   tempRoots.push(root)
   return root
+}
+
+async function syntheticLayeredExecution({
+  fastExitCode = 0,
+  fullExitCode = 0,
+  onFastResult,
+  writeOutput = () => {},
+} = {}) {
+  const fast = {
+    kind: 'verified',
+    lane: 'fast',
+    e2eFailureCount: fastExitCode === 0 ? 0 : 1,
+    clean: true,
+    wallSeconds: 3,
+    exitCode: fastExitCode,
+  }
+  const full = {
+    kind: 'verified',
+    lane: 'full',
+    verifyExitCode: fullExitCode,
+    clean: true,
+    wallSeconds: 12,
+    exitCode: fullExitCode,
+  }
+  writeOutput('synthetic verify output\n')
+  await onFastResult?.({ exitCode: fastExitCode, result: fast })
+  const exitCode = fastExitCode === 0 && fullExitCode === 0 ? 0 : 1
+  return {
+    exitCode,
+    result: {
+      kind: 'verified',
+      fast,
+      full,
+      verifyExitCode: fullExitCode,
+      e2eFailureCount: fast.e2eFailureCount,
+      clean: true,
+      wallSeconds: 12,
+      exitCode,
+    },
+  }
 }
 
 try {
@@ -938,19 +1173,20 @@ try {
   const success = await runAmpOrbCIJob(jobInput, {
     stateDir: successState,
     async writeStatus(status) { successStatuses.push(status) },
-    async execute({ writeOutput }) {
+    async execute(options) {
       successExecutions += 1
-      writeOutput('synthetic verify output\n')
-      return {
-        exitCode: 0,
-        result: { kind: 'verified', wallSeconds: 12.4 },
-      }
+      return syntheticLayeredExecution(options)
     },
   })
   assert.equal(success.outcome, 'reported')
   assert.equal(success.receipt.state, 'reported')
   assert.equal(success.receipt.conclusion, 'success')
-  assert.deepEqual(successStatuses.map((status) => status.state), ['pending', 'success'])
+  assert.deepEqual(successStatuses.map(({ context, state }) => [context, state]), [
+    [AMP_ORB_CI_FAST_STATUS_CONTEXT, 'pending'],
+    [AMP_ORB_CI_STATUS_CONTEXT, 'pending'],
+    [AMP_ORB_CI_FAST_STATUS_CONTEXT, 'success'],
+    [AMP_ORB_CI_STATUS_CONTEXT, 'success'],
+  ])
   assert.equal(successExecutions, 1)
   assert.equal(statSync(successState).mode & 0o777, 0o700)
   assert.equal(statSync(success.logPath).mode & 0o777, 0o600)
@@ -969,16 +1205,16 @@ try {
 
   const failedStatusState = tempState()
   let failedStatusExecutions = 0
-  let statusAttempt = 0
   await assert.rejects(runAmpOrbCIJob(jobInput, {
     stateDir: failedStatusState,
-    async writeStatus() {
-      statusAttempt += 1
-      if (statusAttempt === 2) throw new Error('synthetic status outage')
+    async writeStatus(status) {
+      if (status.context === AMP_ORB_CI_STATUS_CONTEXT && status.state === 'failure') {
+        throw new Error('synthetic status outage')
+      }
     },
-    async execute() {
+    async execute(options) {
       failedStatusExecutions += 1
-      return { exitCode: 1, result: { kind: 'verified', wallSeconds: 3 } }
+      return syntheticLayeredExecution({ ...options, fullExitCode: 1 })
     },
   }), /synthetic status outage/u)
   const verifiedReceiptPath = path.join(
@@ -995,8 +1231,46 @@ try {
   })
   assert.equal(resumed.outcome, 'reported')
   assert.equal(resumed.receipt.conclusion, 'failure')
-  assert.deepEqual(resumedStatuses.map((status) => status.state), ['failure'])
+  assert.deepEqual(resumedStatuses.map(({ context, state }) => [context, state]), [
+    [AMP_ORB_CI_STATUS_CONTEXT, 'failure'],
+  ])
   assert.equal(failedStatusExecutions, 1)
+
+  const failedFastStatusState = tempState()
+  let failedFastStatusExecutions = 0
+  let fastTerminalAttempts = 0
+  await assert.rejects(runAmpOrbCIJob(jobInput, {
+    stateDir: failedFastStatusState,
+    async writeStatus(status) {
+      if (status.context === AMP_ORB_CI_FAST_STATUS_CONTEXT && status.state === 'success') {
+        fastTerminalAttempts += 1
+        if (fastTerminalAttempts <= 2) throw new Error('synthetic fast status outage')
+      }
+    },
+    async execute(options) {
+      failedFastStatusExecutions += 1
+      return syntheticLayeredExecution(options)
+    },
+  }), /synthetic fast status outage/u)
+  const fastVerifiedReceipt = JSON.parse(readFileSync(path.join(
+    failedFastStatusState,
+    'runs',
+    `${ampOrbCIRunId(jobInput)}.json`,
+  ), 'utf8'))
+  assert.equal(fastVerifiedReceipt.state, 'verified')
+  assert.equal(fastVerifiedReceipt.fast.state, 'verified')
+  const resumedFastStatuses = []
+  const resumedFast = await runAmpOrbCIJob(jobInput, {
+    stateDir: failedFastStatusState,
+    async writeStatus(status) { resumedFastStatuses.push(status) },
+    async execute() { assert.fail('verified receipt retries statuses without rerunning either lane') },
+  })
+  assert.equal(resumedFast.outcome, 'reported')
+  assert.deepEqual(resumedFastStatuses.map(({ context, state }) => [context, state]), [
+    [AMP_ORB_CI_FAST_STATUS_CONTEXT, 'success'],
+    [AMP_ORB_CI_STATUS_CONTEXT, 'success'],
+  ])
+  assert.equal(failedFastStatusExecutions, 1)
 
   const crashState = tempState()
   const crashRunId = ampOrbCIRunId(jobInput)
@@ -1013,17 +1287,30 @@ try {
     event: 'pull_request',
     pullRequestNumber: 292,
     firstDeliveryId: deliveryId,
+    fast: {
+      state: 'reported',
+      conclusion: 'failure',
+      exitCode: 1,
+      result: { kind: 'verified', lane: 'fast', exitCode: 1 },
+    },
   }))
   let recoveryExecutions = 0
+  const recoveryStatuses = []
   const recovered = await runAmpOrbCIJob(jobInput, {
     stateDir: crashState,
-    async writeStatus() {},
-    async execute() {
+    async writeStatus(status) { recoveryStatuses.push(status) },
+    async execute(options) {
       recoveryExecutions += 1
-      return { exitCode: 0, result: { kind: 'verified' } }
+      return syntheticLayeredExecution(options)
     },
   })
   assert.equal(recovered.receipt.conclusion, 'success')
+  assert.equal(recovered.receipt.fast.conclusion, 'success')
+  assert.deepEqual(recoveryStatuses.map(({ context, state }) => [context, state]), [
+    [AMP_ORB_CI_STATUS_CONTEXT, 'pending'],
+    [AMP_ORB_CI_FAST_STATUS_CONTEXT, 'success'],
+    [AMP_ORB_CI_STATUS_CONTEXT, 'success'],
+  ])
   assert.equal(recoveryExecutions, 1, 'running crash receipt is safely re-executed')
 
   const controllerErrorState = tempState()
@@ -1037,7 +1324,12 @@ try {
   assert.equal(controllerError.receipt.result.kind, 'controller-error')
   assert.equal(controllerError.receipt.result.errorName, 'Error')
   assert.equal(controllerError.receipt.result.errorMessage, 'synthetic trusted fetch failed')
-  assert.deepEqual(controllerErrorStatuses.map((status) => status.state), ['pending', 'error'])
+  assert.deepEqual(controllerErrorStatuses.map(({ context, state }) => [context, state]), [
+    [AMP_ORB_CI_FAST_STATUS_CONTEXT, 'pending'],
+    [AMP_ORB_CI_STATUS_CONTEXT, 'pending'],
+    [AMP_ORB_CI_FAST_STATUS_CONTEXT, 'error'],
+    [AMP_ORB_CI_STATUS_CONTEXT, 'error'],
+  ])
 
   const lockState = tempState()
   const lockInvocation = ampOrbCILockInvocation({
@@ -1129,4 +1421,4 @@ try {
   for (const root of tempRoots) rmSync(root, { force: true, recursive: true })
 }
 
-console.log('PASS Amp Orb shadow-CI webhook, isolation, idempotency, recovery, and status contract')
+console.log('PASS Amp Orb dual-lane CI webhook, isolation, idempotency, recovery, and status contract')

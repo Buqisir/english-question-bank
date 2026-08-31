@@ -14,6 +14,7 @@ import { runVerificationCommand } from './lib/verificationCommandRunner.mjs'
 const RUNNER_ROOT = '/var/tmp/eqb-amp-ci'
 const SHA = /^[a-f0-9]{40}$/u
 const BUNDLE = /^\/var\/tmp\/eqb-amp-ci\/inbox\/[a-f0-9-]{36}\/repository\.bundle$/u
+const LANES = new Set(['fast', 'full'])
 
 export function parseSandboxInput(argv = process.argv) {
   const value = (flag) => {
@@ -25,6 +26,7 @@ export function parseSandboxInput(argv = process.argv) {
   const testedSha = value('--tested-sha')
   const baseSha = value('--base-sha')
   const bundlePath = value('--bundle')
+  const lane = value('--lane')
   const pullRequestValue = value('--pull-request')
   const pullRequestNumber = pullRequestValue === undefined ? null : Number(pullRequestValue)
   if (!['pull_request', 'push'].includes(event)) throw new Error('Invalid sandbox event')
@@ -32,6 +34,7 @@ export function parseSandboxInput(argv = process.argv) {
     throw new Error('Invalid sandbox SHA')
   }
   if (!BUNDLE.test(bundlePath || '')) throw new Error('Invalid sandbox bundle path')
+  if (!LANES.has(lane)) throw new Error('Invalid sandbox lane')
   if (event === 'pull_request' && (!Number.isSafeInteger(pullRequestNumber) || pullRequestNumber < 1)) {
     throw new Error('Invalid sandbox pull request')
   }
@@ -43,6 +46,7 @@ export function parseSandboxInput(argv = process.argv) {
     testedSha,
     baseSha,
     bundlePath,
+    lane,
     pullRequestNumber,
     forced: argv.includes('--forced'),
   }
@@ -90,6 +94,18 @@ export const AMP_ORB_CI_E2E_COMMANDS = Object.freeze([
   ['node', ['scripts/smoke-golden-path.mjs']],
 ])
 
+export const AMP_ORB_CI_FAST_PORTS = Object.freeze({
+  'scripts/verify-a3-imposition.mjs': Object.freeze({ api: '15997', vite: '15197' }),
+  'scripts/verify-reorder-suggest.mjs': Object.freeze({ api: '15998', vite: '15198' }),
+  'scripts/smoke-golden-path.mjs': Object.freeze({ api: '15999', vite: '15199' }),
+})
+
+export function ampOrbCILaneCommands(lane) {
+  if (lane === 'fast') return AMP_ORB_CI_E2E_COMMANDS
+  if (lane === 'full') return [['pnpm', ['-C', 'app', 'verify:all']]]
+  throw new Error('Invalid sandbox lane')
+}
+
 async function runCommand(command, args, { cwd, signal }) {
   console.log(`\n==> ${command} ${args.join(' ')}`)
   return runVerificationCommand(command, args, {
@@ -123,7 +139,11 @@ export async function runSandbox(input, { signal }) {
       throw new Error('Exact sandbox checkout/base identity is not clean')
     }
     if (docsOnlyChange(input, checkout)) {
-      return { kind: 'docs-only', wallSeconds: (performance.now() - startedAt) / 1000 }
+      return {
+        kind: 'docs-only',
+        lane: input.lane,
+        wallSeconds: (performance.now() - startedAt) / 1000,
+      }
     }
 
     const setupCommands = [
@@ -136,32 +156,52 @@ export async function runSandbox(input, { signal }) {
       if (exitCode !== 0) {
         return {
           kind: 'setup-failed',
+          lane: input.lane,
           exitCode,
           wallSeconds: (performance.now() - startedAt) / 1000,
         }
       }
     }
 
-    const verifyExitCode = await runCommand('pnpm', ['-C', 'app', 'verify:all'], {
-      cwd: checkout,
-      signal,
-    })
+    let verifyExitCode = null
     const e2eFailures = []
-    for (const [command, args] of AMP_ORB_CI_E2E_COMMANDS) {
-      const exitCode = await runCommand(command, args, { cwd: checkout, signal })
-      if (exitCode !== 0) e2eFailures.push({ command, args, exitCode })
+    if (input.lane === 'fast') {
+      for (const [command, args] of ampOrbCILaneCommands(input.lane)) {
+        const ports = AMP_ORB_CI_FAST_PORTS[args[0]]
+        if (ports) {
+          process.env.AMP_ORB_CI_API_PORT = ports.api
+          process.env.AMP_ORB_CI_VITE_PORT = ports.vite
+        } else {
+          delete process.env.AMP_ORB_CI_API_PORT
+          delete process.env.AMP_ORB_CI_VITE_PORT
+        }
+        const exitCode = await runCommand(command, args, { cwd: checkout, signal })
+        if (exitCode !== 0) e2eFailures.push({ command, args, exitCode })
+      }
+      delete process.env.AMP_ORB_CI_API_PORT
+      delete process.env.AMP_ORB_CI_VITE_PORT
+    } else {
+      const [[command, args]] = ampOrbCILaneCommands(input.lane)
+      verifyExitCode = await runCommand(command, args, {
+        cwd: checkout,
+        signal,
+      })
     }
     const finalHead = runGit(['rev-parse', 'HEAD'], { cwd: checkout }).stdout.trim()
     const finalStatus = runGit(['status', '--porcelain', '--untracked-files=no'], { cwd: checkout })
       .stdout.trim()
     const clean = finalHead === input.testedSha && finalStatus === ''
+    const laneExitCode = input.lane === 'fast'
+      ? (e2eFailures.length === 0 && clean ? 0 : 1)
+      : (verifyExitCode === 0 && clean ? 0 : 1)
     return {
       kind: 'verified',
+      lane: input.lane,
       verifyExitCode,
       e2eFailureCount: e2eFailures.length,
       clean,
       wallSeconds: (performance.now() - startedAt) / 1000,
-      exitCode: verifyExitCode === 0 && e2eFailures.length === 0 && clean ? 0 : 1,
+      exitCode: laneExitCode,
     }
   } finally {
     rmSync(checkout, { force: true, recursive: true })
@@ -173,16 +213,20 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const abort = (signal) => abortController.abort(signal)
   process.once('SIGINT', () => abort('SIGINT'))
   process.once('SIGTERM', () => abort('SIGTERM'))
+  let input = null
   try {
-    const input = parseSandboxInput()
+    input = parseSandboxInput()
     const result = await runSandbox(input, { signal: abortController.signal })
     console.log(`AMP_ORB_CI_RESULT ${JSON.stringify(result)}`)
-    if (result.kind !== 'docs-only' && (result.exitCode ?? result.verifyExitCode) !== 0) {
+    if (result.kind !== 'docs-only' && result.exitCode !== 0) {
       process.exitCode = 1
     }
   } catch (error) {
     console.error(`Amp Orb CI sandbox failed: ${error.message}`)
-    console.log(`AMP_ORB_CI_RESULT ${JSON.stringify({ kind: 'sandbox-error' })}`)
+    console.log(`AMP_ORB_CI_RESULT ${JSON.stringify({
+      kind: 'sandbox-error',
+      lane: input?.lane ?? null,
+    })}`)
     process.exitCode = 1
   }
 }
