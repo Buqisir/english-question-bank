@@ -9,7 +9,7 @@ import {
   createGitHubStatusWriter,
   defaultAmpOrbCIStateDir,
   drainAmpOrbCIQueue,
-  executeAmpOrbCISandbox,
+  executeAmpOrbCILanes,
   repositoryRootFromModule,
   resolveAmpOrbCIPullRequest,
   runAmpOrbCIJob,
@@ -58,7 +58,7 @@ if (process.env.AMP_ORB_CI_LOCK_HELD !== '1') {
   })
   if (result.error) throw result.error
   if (result.status === AMP_ORB_CI_LOCK_CONFLICT_EXIT_CODE) {
-    console.log('Amp Orb shadow CI is already running; durable queue work remains serial.')
+    console.log('Amp Orb CI is already running; durable queue work remains serial.')
     process.exit(0)
   }
   process.exit(result.status ?? 1)
@@ -72,7 +72,8 @@ try {
   const runJob = (input) => runAmpOrbCIJob(input, {
     stateDir: defaultAmpOrbCIStateDir(repositoryRoot),
     writeStatus,
-    execute: ({ input: exactInput, writeOutput }) => executeAmpOrbCISandbox(exactInput, {
+    execute: ({ input: exactInput, onFastResult, writeOutput }) => executeAmpOrbCILanes(exactInput, {
+      onFastResult,
       repositoryRoot,
       writeOutput,
     }),
@@ -84,16 +85,16 @@ try {
       runJob,
     })
     const deferred = results.filter(({ outcome }) => outcome === 'deferred').length
-    console.log(`Amp Orb shadow CI processed ${results.length} queued delivery(s); ${deferred} deferred.`)
+    console.log(`Amp Orb CI processed ${results.length} queued delivery(s); ${deferred} deferred.`)
     if (deferred > 0) process.exitCode = 1
   } else {
     const input = parseInput()
     const result = await runJob(input)
     const conclusion = result.receipt?.conclusion || 'unchanged'
-    console.log(`Amp Orb shadow CI ${result.outcome}: ${conclusion} for ${input.sha}`)
+    console.log(`Amp Orb CI ${result.outcome}: ${conclusion} for ${input.sha}`)
     if (result.logPath) console.log(`Private log: ${result.logPath}`)
   }
 } catch (error) {
-  console.error(`Amp Orb shadow CI controller failed: ${error.message}`)
+  console.error(`Amp Orb CI controller failed: ${error.message}`)
   process.exitCode = 1
 }

@@ -52,17 +52,19 @@ original/A-D comparison pass. Its batch, candidates, and state all live under
 `.scratch/vocabulary-audio-repair-v1/`; neither pass changes formal MP3 assets
 until the owner has selected the replacements.
 
-The sole workflow authority is `.github/workflows/verify.yml`; it runs on
-pushes and PRs. Before any
-merge to `main` the run must be green, and the post-merge `main` run
-must be confirmed green (AGENTS.md RM gate).
+`.github/workflows/verify.yml` remains the hosted fallback. The dedicated
+16-core Amp Orb reports the fast E2E context `Amp Orb Verify (fast)` and the
+aggregate full context `Amp Orb Verify`; branch protection decides which
+context is authoritative. Before any merge to `main` every currently required
+check must be green, and the post-merge `main` run must be confirmed green
+(AGENTS.md RM gate).
 
 ## Stable CI entrypoint
 
 | Script | Scope | Runs in CI? |
 | --- | --- | --- |
 | `verify-ci.mjs` | Selects changed/Paper/all packs, runs bounded resource-aware parallel jobs with registry-ordered logs, and reports PASS/SKIP/FAIL without hiding later failures | yes |
-| `verify-amp-orb-ci.mjs` | Rejects GitHub shadow-CI webhook/HMAC allowlist drift, payload-to-prompt injection, secret-bearing candidate environments, duplicate/concurrent execution, unrecoverable run/status crash windows, non-private receipts, or commit-status scope drift without registering a webhook or calling GitHub | yes |
+| `verify-amp-orb-ci.mjs` | Rejects GitHub CI webhook/HMAC allowlist drift, payload-to-prompt injection, secret-bearing candidate environments, non-parallel Fast/Full lanes, duplicate execution, unrecoverable run/status crash windows, non-private receipts, or commit-status scope drift without registering a webhook or calling GitHub | yes |
 | `verify-verification-command-runner.mjs` | Prevents completed or concurrently interrupted verifiers from leaving their own Vite/Chromium/test descendants alive, and bounds oversized single-line diagnostics while retaining their head, tail, and digest | yes |
 | `verify-verification-scheduler.mjs` | Proves bounded concurrency, render/port resource locks, exclusive barriers, ordered result flushing, collect-all statuses, abort stop-dispatch, and jobs=1 serial fallback | yes |
 | `verify-vocabulary-closed-loop.mjs` | Validates the 1600-entry Wanwei source/content/unique Koboyo visual, formal American and Owner-approved Cori British audio contracts, plus isolated progress, frozen-set, share/revoke, and temporary-scope persistence | yes |

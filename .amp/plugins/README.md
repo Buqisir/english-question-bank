@@ -41,9 +41,9 @@ bound source-intake claim to another thread.
 Creating the secrets, enabling/reloading the plugin, and configuring the webhook are shared-state
 operations that remain disabled until separately authorized by the Owner.
 
-## GitHub shadow CI Orb
+## GitHub CI Orb
 
-`github-ci-wakeup.js` is an inert-by-default shadow CI wakeup for one dedicated private project
+`github-ci-wakeup.js` is an inert-by-default CI wakeup for one dedicated private project
 Orb thread. A verified GitHub delivery is atomically written to that Orb's private mode-0600 disk
 queue before the 30-second webhook handler starts a background queue drainer and returns. Plugin
 startup also starts a drainer, so a process death leaves a durable item for recovery rather than an
@@ -73,20 +73,23 @@ Actions workflow rather than testing the head in isolation. When an `opened` del
 the webhook can return promptly. The background controller retries `refs/pull/<number>/merge` and
 accepts it only when its two parents exactly match the signed delivery's base and head; it never
 substitutes the head SHA. It then passes a one-use read-only Git bundle—not a repository credential—
-to the runner before `verify:all` and the existing GitHub E2E commands. Candidate code executes as
-the separate locked `eqb-ci` Unix user under an empty allowlisted environment; Amp Project Secrets
-and the commit-status token stay in the trusted controller process.
+to the runner. Workflow v3 starts two separate candidate checkouts concurrently: the Fast lane runs
+the six existing GitHub E2E commands on isolated ports, while the Full lane runs `verify:all`. The
+informational `Amp Orb Verify (fast)` status reports as soon as E2E settles. The aggregate `Amp Orb
+Verify` status waits for both lanes and fails if either lane fails or either tracked checkout drifts.
+Candidate code executes as the separate locked `eqb-ci` Unix user under an empty allowlisted
+environment; Amp Project Secrets and the commit-status token stay in the trusted controller process.
 
-Activation is a later shared-state operation requiring current Owner approval. Configure these
-private Amp Project settings, then load the plugin only in the dedicated owning Orb thread:
+Activation and authority changes are shared-state operations requiring current Owner approval.
+Configure these private Amp Project settings, then load the plugin only in the dedicated owning Orb
+thread:
 
 - `QUESTION_BANK_AMP_CI_PLUGIN_ENABLED=1`
 - `QUESTION_BANK_AMP_CI_GITHUB_WEBHOOK_SECRET=<high-entropy GitHub webhook HMAC secret>`
 - `QUESTION_BANK_AMP_CI_GITHUB_STATUS_TOKEN=<fine-grained token limited to Commit statuses: write>`
 
-After an approved plugin load, explicitly run `CI Orb: 复制 GitHub 影子 CI Webhook URL` and put the
+After an approved plugin load, explicitly run `CI Orb: 复制 GitHub CI Webhook URL` and put the
 private capability URL in one GitHub repository webhook that sends only Pull requests and Push
-events, using the same HMAC secret. Never commit or log the URL or either secret. The status context
-is `Amp Orb Verify (shadow)`: it must remain non-required while GitHub Actions `Verify` stays the
-sole merge/release authority. Compare 10–20 paired runs before a separate Owner decision about any
-required-check change.
+events, using the same HMAC secret. Never commit or log the URL or either secret. Branch protection
+may require only the aggregate `Amp Orb Verify` context after the Owner-authorized proof and atomic
+cutover in ADR-0022; the Fast context is early feedback, not a substitute for the full gate.

@@ -19,7 +19,7 @@ const SHA = /^[a-f0-9]{40}$/u
 const DELIVERY_ID = /^[A-Za-z0-9][A-Za-z0-9-]{0,127}$/u
 const PR_ACTIONS = new Set(['opened', 'ready_for_review', 'reopened', 'synchronize'])
 
-export const description = 'Durably queues exact GitHub PR and main SHAs on one private shadow-CI Orb.'
+export const description = 'Durably queues exact GitHub PR and main SHAs on one private CI Orb.'
 
 export function validGitHubCISignature(body, signature, secret) {
   if (!secret || !/^sha256=[a-f0-9]{64}$/u.test(signature || '')) return false
@@ -180,7 +180,7 @@ export async function launchGitHubCIDrain({
 
 export default async function githubCIWakeupPlugin(amp, overrides = {}) {
   if (process.env.QUESTION_BANK_AMP_CI_PLUGIN_ENABLED !== '1') {
-    amp.logger.log('Amp Orb shadow CI is disabled; no webhook was registered.')
+    amp.logger.log('Amp Orb CI is disabled; no webhook was registered.')
     return
   }
 
@@ -191,7 +191,7 @@ export default async function githubCIWakeupPlugin(amp, overrides = {}) {
     process.env.QUESTION_BANK_AMP_CI_GITHUB_STATUS_TOKEN || '',
   )
   if (!webhookSecret || !statusToken) {
-    amp.logger.log('Amp Orb shadow CI is enabled but its private GitHub settings are missing.')
+    amp.logger.log('Amp Orb CI is enabled but its private GitHub settings are missing.')
     return
   }
 
@@ -224,7 +224,7 @@ export default async function githubCIWakeupPlugin(amp, overrides = {}) {
     handler: async (event, context) => {
       const signature = event.headers['x-hub-signature-256'] || ''
       if (!validGitHubCISignature(event.body, signature, webhookSecret)) {
-        context.logger.log('Dropped an invalid GitHub shadow-CI webhook signature.')
+        context.logger.log('Dropped an invalid GitHub CI webhook signature.')
         return
       }
       const payload = parseGitHubCIWebhook(event.body, {
@@ -232,7 +232,7 @@ export default async function githubCIWakeupPlugin(amp, overrides = {}) {
         eventName: event.headers['x-github-event'] || '',
       })
       if (!payload) {
-        context.logger.log('Dropped a GitHub event outside the shadow-CI allowlist.')
+        context.logger.log('Dropped a GitHub event outside the CI allowlist.')
         return
       }
       if (payload.kind === 'ignored') return
@@ -245,13 +245,13 @@ export default async function githubCIWakeupPlugin(amp, overrides = {}) {
   amp.registerCommand(
     'github-ci-webhook-url',
     {
-      title: '复制 GitHub 影子 CI Webhook URL',
+      title: '复制 GitHub CI Webhook URL',
       category: 'CI Orb',
       description: '仅在显式调用时显示私有 capability URL，供 GitHub repository webhook 配置。',
     },
     async (context) => {
       await context.ui.input({
-        title: 'GitHub 影子 CI Webhook URL',
+        title: 'GitHub CI Webhook URL',
         helpText: '这是私有凭据。复制到 GitHub 后关闭，不要写入 Git、日志或聊天。',
         initialValue: registration.url,
         submitButtonText: '关闭',
