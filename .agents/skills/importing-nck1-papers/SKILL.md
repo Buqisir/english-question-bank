@@ -39,6 +39,37 @@ provides off-ledger local files, collect the source roles, truthful name and
 provenance required by the contract. Confirm one writer owns the paper before
 initializing; do not synthesize a ledger record.
 
+## Use the Orb compute lane deliberately
+
+Automatic source-intake threads already use a private Project Orb and inherit
+that Amp Project's default Orb size. The plugin API cannot choose an Orb size per
+created thread. A dedicated import Project should therefore default to
+`a1.xxlarge` when scanned PDFs or ordered page images are routine; never reuse
+the CI or deployment Orb for an import.
+
+Before source-heavy processing, run the universal environment preflight and
+record the actual CPU capacity without printing secrets:
+
+```bash
+node scripts/import-pipeline/universal-nck1.mjs preflight
+node -e "const os=require('node:os'); console.log(JSON.stringify({availableParallelism:os.availableParallelism(),memoryGiB:Math.round(os.totalmem()/2**30)}))"
+```
+
+Treat native DOCX and PDFs with a reliable text layer as the standard lane.
+Treat scanned or partial-text PDFs, ordered page images, page rasterization,
+OCR evidence, media extraction, and repeated Screen/Print/PDF checks as the
+high-compute lane. Sixteen available processors confirm the intended
+`a1.xxlarge` capacity; fewer processors are an efficiency warning, not a reason
+to weaken a content gate, move the bound claim, or duplicate the import.
+
+Use bounded parallelism only for independent read-only or page-isolated work
+whose outputs have unique paths, such as rasterizing separate pages or checking
+separate OCR pages. Keep capacity for the Agent and system tools. Materialization,
+`verify`, `build`, revision submission, lease transitions, handoff, and promotion
+remain serial under the one paper writer. CPU makes local document work faster;
+it does not make AI judgment more authoritative, permit AI-derived answers, or
+replace page-by-page visual verification.
+
 ## Resume by state
 
 | State | Agent action |
