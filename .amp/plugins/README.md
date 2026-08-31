@@ -91,5 +91,6 @@ thread:
 After an approved plugin load, explicitly run `CI Orb: 复制 GitHub CI Webhook URL` and put the
 private capability URL in one GitHub repository webhook that sends only Pull requests and Push
 events, using the same HMAC secret. Never commit or log the URL or either secret. Branch protection
-may require only the aggregate `Amp Orb Verify` context after the Owner-authorized proof and atomic
-cutover in ADR-0022; the Fast context is early feedback, not a substitute for the full gate.
+requires only the aggregate `Amp Orb Verify` context after the Owner-authorized proof and cutover in
+ADR-0022; the Fast context is early feedback, not a substitute for the full gate. The hosted GitHub
+workflow is a manual fallback and does not run on ordinary pull requests or `main` pushes.

@@ -1,6 +1,6 @@
-# ADR-0022: Amp Orb dual-lane CI becomes the merge authority
+# ADR-0022: Amp Orb dual-lane CI is the merge authority
 
-- Status: Accepted; live authority cutover requires the recorded proof below
+- Status: Accepted; live authority since 2026-08-31
 - Owner authorization: 2026-08-31
 - Supersedes: ADR-0021 rollout and authority sections only
 
@@ -28,6 +28,16 @@ Both exact-SHA runs reached durable reported receipts and GitHub success statuse
 The Owner approved a proof PR followed by an atomic required-check cutover, with no
 production deployment.
 
+The dual-lane rollout then exposed two concurrency-only faults without weakening the
+gate: Fast initially reused one fixed port across concurrent E2E commands, and one
+Full verifier launched Chromium through an imported fixture without declaring the
+shared render resource. Distinct Fast ports and an explicit transitive render marker
+closed those gaps. PR #300's exact test merge passed Fast in 120 seconds and the
+aggregate in 716 seconds with `PASS 161 / SKIP 4 / FAIL 0`. Its post-merge `main`
+commit `d1de0ab1cc003eb547dd3dd11c1db631943c1652` passed naturally in 713 seconds with
+the same counts and an explicit OCR verifier pass. The pinned Orb then advanced
+fast-forward-only to that exact clean commit and loaded its byte-exact plugin.
+
 ## Decision
 
 Workflow v3 keeps the ADR-0021 queue, lock, receipt, exact-ref, Unix-user, secret,
@@ -53,22 +63,26 @@ status write. A status outage is retried from the receipt without rerunning a
 completed full suite. The workflow version bump prevents an old shadow receipt from
 suppressing the first dual-lane run.
 
-## Authority cutover
+## Authority cutover record
 
-The change reaches authority in this order:
+The live cutover completed in this order:
 
-1. A real PR must show both new contexts pending and then successful while hosted
-   `verify` and `e2e` also succeed.
-2. The merge push must complete on the exact new main SHA, after which the pinned
-   Orb updates fast-forward-only and loads the byte-exact clean main plugin.
-3. In one branch-protection update, add required `Amp Orb Verify` and remove hosted
-   `verify`/`e2e`. Never save an intermediate configuration with no required CI.
-4. Only after that cutover, change the hosted workflow to manual fallback in a
-   separate Orb-gated PR.
+1. PR #299 proved both Orb contexts pending then successful while hosted `verify`
+   and `e2e` also succeeded.
+2. PR #300 proved the transitive render-resource correction on its exact test merge.
+3. GitHub Pro branch protection was created for `main` with strict up-to-date PRs,
+   no administrator bypass, and only aggregate `Amp Orb Verify` required. Fast and
+   the hosted contexts remain informational.
+4. PR #300 merged through that enforced gate. Its exact merge push passed naturally,
+   after which the pinned Orb advanced fast-forward-only and loaded clean exact-main
+   runtime files.
+5. The hosted workflow moved to manual fallback in a separate Orb-gated PR.
 
-Rollback reverses step 3 atomically: restore hosted required checks before removing
-the Orb context. Webhook, status-token, branch-protection, and workflow changes stay
-independent; no CI authority change grants deployment authority.
+Rollback first restores hosted pull-request triggers in an Orb-gated PR and proves
+their exact-merge contexts. A later atomic protection update may then add hosted
+required checks before removing the Orb context. Webhook, status-token,
+branch-protection, and workflow changes stay independent; no CI authority change
+grants deployment authority.
 
 ## Consequences
 

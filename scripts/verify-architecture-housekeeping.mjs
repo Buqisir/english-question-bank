@@ -59,6 +59,12 @@ assert(
 
 for (const relPath of ['.github/workflows/verify.yml']) {
   const workflow = read(relPath)
+  const triggerBlock = /^on:\n([\s\S]*?)\n\njobs:/mu.exec(workflow)?.[1]?.trim()
+  assert(
+    `${relPath} is manual fallback only`,
+    triggerBlock === 'workflow_dispatch:',
+    triggerBlock || 'trigger block unavailable',
+  )
   assert(`${relPath} installs app dependencies`, workflow.includes('pnpm install --frozen-lockfile'))
   assert(
     `${relPath} installs server dependencies`,

@@ -52,10 +52,10 @@ original/A-D comparison pass. Its batch, candidates, and state all live under
 `.scratch/vocabulary-audio-repair-v1/`; neither pass changes formal MP3 assets
 until the owner has selected the replacements.
 
-`.github/workflows/verify.yml` remains the hosted fallback. The dedicated
-16-core Amp Orb reports the fast E2E context `Amp Orb Verify (fast)` and the
-aggregate full context `Amp Orb Verify`; branch protection decides which
-context is authoritative. Before any merge to `main` every currently required
+`.github/workflows/verify.yml` is the manually dispatched hosted fallback. The
+dedicated 16-core Amp Orb reports the fast E2E context `Amp Orb Verify (fast)`
+and the aggregate full context `Amp Orb Verify`; branch protection requires
+only the aggregate context. Before any merge to `main` every currently required
 check must be green, and the post-merge `main` run must be confirmed green
 (AGENTS.md RM gate).
 
@@ -86,7 +86,7 @@ check must be green, and the post-merge `main` run must be confirmed green
 | `verify-vocabulary-migration.mjs` | Replays the legacy vocabulary-entry constraint migration and proves successful row/index/FK preservation plus full rollback and FK restoration on a rejected legacy row | yes |
 | `verify-vocabulary-match-game.mjs` | Verifies the pure 10-word round builder and flip/mismatch/confirmation/match state machine for the frozen-set matching game | yes |
 | `verify-vocabulary-rendered-behavior.mjs` | Uses real Chromium to verify one-audio playback timing/cancellation/retry/end behavior, matching-game interaction, vocabulary cards, dictation/answer/handwriting PDFs, download filenames, and the hidden-answer auto-dictation flow | yes |
-| `verify-architecture-housekeeping.mjs` | Prevents missing entrypoints, undocumented verifier registration, stale workflow ownership, and six risk-route regressions | yes |
+| `verify-architecture-housekeeping.mjs` | Prevents missing entrypoints, undocumented verifier registration, automatic hosted fallback triggers, stale workflow ownership, and six risk-route regressions | yes |
 | `verify-motion-tokens.mjs` | motion-pass gate: `app/src/**/*.css` (excluding PaperSurface.css contract file) has no `ease-in`, no `transition: all`, and no bare hand-written transition/animation durations outside `token-exempt`-tagged loading or signature moments | yes |
 | `verify-lecture-panel-css.mjs` | lecture-css-restore gate: 讲评五解析面板 (pi-ps-analysis/cloze/gf/seven/writing) 活 TSX 用到的每个类必须有 CSS 定义或在 hook-only 白名单（含白名单防陈旧 + paperBrowsePage.css @import 加载链断言）——retire 刀样式陪葬事故的可执行形态 | yes |
 | `verify-radius-family.mjs` | design-canon-v2 gate: every `border-radius` in `app/src/**/*.css` is in the DESIGN.md radius ladder {0, 4, 6, 8, 999px, 50%}; 32 historical off-family literals grandfathered per file×value as a shrink-only ratchet | yes |
