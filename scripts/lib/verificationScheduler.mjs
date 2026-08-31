@@ -25,7 +25,9 @@ export function createOrderedResultFlusher(flush) {
 }
 
 export function verificationSchedulingPolicy(script, source) {
-  const renderResource = /(?:chromium\.launch|withChromiumPage|chromiumPool|vivliostyle|\bsoffice\b|libreoffice)/iu.test(source)
+  const declaredRenderResource = /^\/\/\s*verify-resource:\s*browser-render\s*$/mu.test(source)
+  const renderResource = declaredRenderResource
+    || /(?:chromium\.launch|withChromiumPage|chromiumPool|vivliostyle|\bsoffice\b|libreoffice)/iu.test(source)
   const fixedPorts = new Set([
     ...[...source.matchAll(/\.listen\(\s*([1-9]\d{2,4})\b/gu)].map((match) => match[1]),
     ...[...source.matchAll(/(?:const|let|var)\s+[A-Za-z_$][\w$]*[Pp]ort[\w$]*\s*=\s*([1-9]\d{2,4})\b/gu)].map((match) => match[1]),
