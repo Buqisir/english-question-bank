@@ -41,6 +41,24 @@ Use evidence in this order:
 The published task is authoritative. Do not reconstruct or imitate an ending
 from an original story that is not present in the task.
 
+## Teaching-language rule
+
+The five sections and their constraint categories are internal structure. Their
+English statements must still read like a strong teacher explaining this exact
+story, not like a narrative-analysis model naming abstractions.
+
+- Start with what the characters have done, what remains unresolved, and what
+  each starter makes true.
+- When paragraph 2 forces a paragraph 1 exit state, spell out the backward step:
+  “because starter 2 says ..., paragraph 1 must already have ...”.
+- Explain a route as cause → character action → immediate result/state change.
+- Do not use labels such as causal closure, emotional arc, clue payoff, or
+  relationship movement as substitutes for the actual event.
+- Keep hard, supported, open, and forbidden choices distinct. A selected route
+  is one teachable route, never the hidden answer.
+- Prefer one decisive source chain and one necessary starter-boundary check over
+  repeating the same point in several sections.
+
 ## Output requirement
 
 Return exactly one JSON object as plain text. The first non-whitespace character
@@ -359,6 +377,11 @@ Each paragraph must create a real state change. Paragraph 1 must reach the state
 required by paragraph 2's starter. Paragraph 2 must resolve or transform the
 source's central unfinished problem without adding a new final event or unsupported
 grand theme.
+
+`selectedRoute`, `routeRationale`, `eventMoves`, and `stateChange` should make
+the concrete story progression understandable without reading the constraint
+enum names. In `qualityRisks`, name the likely story mistake and the source or
+starter boundary it would break rather than using a generic label.
 
 ## Final silent checks
 

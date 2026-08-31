@@ -133,6 +133,7 @@ const registry = {
   'scripts/verify-i5-writing-ai-import.mjs',
   'scripts/verify-application-model-answer-prompt.mjs',
   'scripts/verify-continuation-analysis-v1.mjs',
+  'scripts/verify-teaching-analysis-style.mjs',
   'scripts/verify-nck1-new-paper-locks.mjs',
   'scripts/verify-i6-writing-render.mjs',
   'scripts/verify-i7-application-given.mjs',

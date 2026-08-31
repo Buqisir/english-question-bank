@@ -1,7 +1,11 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import Ajv from 'ajv/dist/2020.js'
-import { createAnalyzerProviderShell, readPromptFile } from './analyzerProviderShell.mjs'
+import {
+  createAnalyzerProviderShell,
+  readPromptFile,
+  readTeachingAnalysisPrompt,
+} from './analyzerProviderShell.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '../..')
@@ -53,7 +57,7 @@ export function buildNarrativeContinuationAnalysisMessages({ writingTask }) {
   return [
     {
       role: 'system',
-      content: readPromptFile(promptPath),
+      content: readTeachingAnalysisPrompt(promptPath),
     },
     {
       role: 'user',

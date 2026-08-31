@@ -174,7 +174,7 @@ const skillLabels: Record<string, string> = {
 }
 
 const trapLabels: Record<string, string> = {
-  sourceLexicalTrap: '原文词钩干扰',
+  sourceLexicalTrap: '原词照搬',
   polarityReversal: '黑白颠倒',
   scopeShift: '范围偷换',
   entityMismatch: '对象错配',

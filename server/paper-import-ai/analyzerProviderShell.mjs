@@ -1,8 +1,16 @@
 import { readFileSync } from 'node:fs'
 import { randomUUID } from 'node:crypto'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { callDeepSeekJson } from '../ai-providers/deepseek.mjs'
 import { callGptRelayJson } from '../ai-providers/gptRelay.mjs'
 import { extractFirstJsonObject } from './extractJson.mjs'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const teachingAnalysisStylePath = path.resolve(
+  __dirname,
+  '../../.agents/skills/importing-nck1-papers/reference/teaching-analysis-style-v1.md',
+)
 
 // ============================================================
 // Byte-identical provider-call shell shared across the 4
@@ -17,6 +25,16 @@ import { extractFirstJsonObject } from './extractJson.mjs'
 
 export function readPromptFile(promptPath) {
   return readFileSync(promptPath, 'utf8')
+}
+
+export function readTeachingAnalysisPrompt(promptPath) {
+  return [
+    readPromptFile(promptPath).trimEnd(),
+    '',
+    '---',
+    '',
+    readPromptFile(teachingAnalysisStylePath).trim(),
+  ].join('\n')
 }
 
 export function rewriteApiPrompt(raw) {

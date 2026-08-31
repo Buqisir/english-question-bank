@@ -14,14 +14,15 @@ work.
 Read these files in order:
 
 1. `docs/product/application-writing-doctrine-v1.md`
-2. `docs/sources/application-writing/curriculum/application-writing-crosswalk.md`
-3. `prompts/application-writing-model-answer-v3.md`
+2. `.agents/skills/importing-nck1-papers/reference/teaching-analysis-style-v1.md`
+3. `docs/sources/application-writing/curriculum/application-writing-crosswalk.md`
+4. `prompts/application-writing-model-answer-v3.md`
 
 For a cold-start doctrine review, an ambiguous task, or a requested
 source-grounded audit, also read both complete paper transcriptions:
 
-4. `docs/sources/application-writing/papers/zhu-jingli-task-analysis.md`
-5. `docs/sources/application-writing/papers/tang-bangshun-critical-turn.md`
+5. `docs/sources/application-writing/papers/zhu-jingli-task-analysis.md`
+6. `docs/sources/application-writing/papers/tang-bangshun-critical-turn.md`
 
 Do not load any course, lesson, student, question-bank, or model-answer-
 collection material from the source project.

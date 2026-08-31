@@ -1,6 +1,6 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { createAnalyzerProviderShell, readPromptFile } from './analyzerProviderShell.mjs'
+import { createAnalyzerProviderShell, readTeachingAnalysisPrompt } from './analyzerProviderShell.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '../..')
@@ -11,7 +11,7 @@ function optionalString(value) {
 }
 
 function readPrompt() {
-  return readPromptFile(promptPath)
+  return readTeachingAnalysisPrompt(promptPath)
 }
 
 function assertReadingAnalyzeInput(input) {

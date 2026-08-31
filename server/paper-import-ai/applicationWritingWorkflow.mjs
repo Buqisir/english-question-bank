@@ -1,6 +1,6 @@
-import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { readTeachingAnalysisPrompt } from './analyzerProviderShell.mjs'
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const promptPath = path.join(repoRoot, 'prompts/application-writing-model-answer-v3.md')
@@ -152,7 +152,7 @@ export function buildCompleteApplicationTaskText(writingTask, groupPassage) {
 }
 
 export function buildApplicationModelAnswerMessages(writingTask, groupPassage) {
-  const prompt = readFileSync(promptPath, 'utf8').trim()
+  const prompt = readTeachingAnalysisPrompt(promptPath)
   const taskText = buildCompleteApplicationTaskText(writingTask, groupPassage)
   return [{ role: 'user', content: `${prompt}\n\n${taskText}` }]
 }

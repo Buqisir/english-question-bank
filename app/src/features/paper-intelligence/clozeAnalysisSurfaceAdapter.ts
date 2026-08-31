@@ -137,10 +137,10 @@ export type ClozeAnalysisSurfaceModel = {
 
 const SIGNATURE_LABELS: Record<string, string> = {
   'cloze.signature.verb.action-sequence': '动作顺序',
-  'cloze.signature.noun.semantic-field': '语义场',
-  'cloze.signature.adjective.affective-consistency': '情感一致',
-  'cloze.signature.adverb.affective-consistency': '情感一致',
-  'cloze.signature.phrase.contextual-composition': '语境合成义',
+  'cloze.signature.noun.semantic-field': '前后呼应',
+  'cloze.signature.adjective.affective-consistency': '语气照应',
+  'cloze.signature.adverb.affective-consistency': '语气照应',
+  'cloze.signature.phrase.contextual-composition': '结合语境',
 }
 
 // cloze-panel-polish: 2-4 字教学用语，供折叠区证据类型 chip 显示。
@@ -148,8 +148,8 @@ const SIGNATURE_LABELS: Record<string, string> = {
 const CLOZE_EVIDENCE_TYPE_LABELS: Record<ClozeEvidenceType, string> = {
   'collocation-partner': '搭配线索',
   'repetition-echo': '复现呼应',
-  'semantic-field': '语义场',
-  'affective-cue': '情感线索',
+  'semantic-field': '前后呼应',
+  'affective-cue': '语气线索',
   'logical-connector': '逻辑连接',
 }
 

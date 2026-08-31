@@ -29,6 +29,8 @@ The model should reason carefully internally about:
 - option traps
 - quote exactness
 - location/paraphrase relations
+- the hidden calculation, comparison, analogy, or inference step a student must supply
+- what makes a tempting option fail in this passage rather than in the abstract
 - schema compliance
 
 But it MUST NOT output reasoning steps, planning text, markdown, comments, or
@@ -125,6 +127,38 @@ Correct shape examples:
 - **DO NOT** output analysis reasoning steps
 - **DO NOT** restate the task or explain what you are about to do
 - **DO NOT** guess answers — answerKey is authoritative, but every correct option still needs exact evidence
+
+---
+
+## Teaching Prose Rule
+
+The controlled `skill`, `primaryType`, `subtype`, and `relationType` values are
+internal classification. Keep them exact, but student-visible Chinese must not
+merely translate those labels. First explain the actual passage relation.
+
+For the correct path, use `locationParaphrases[].note` to state:
+
+```text
+题目问什么 → 原文提供什么 → 中间怎样计算、比较、类比或推断 → 为什么到达正答
+```
+
+Simple direct-detail questions may collapse this to one sentence. Calculation
+questions must show the numbers and operation. Comparison questions must name
+both sides and the common standard. Writing-method questions must say both what
+the author does and what that choice makes concrete, clear, or persuasive.
+Inference questions must expose the missing step and use conclusion language no
+stronger than the evidence.
+
+For a wrong option, the relevant `explanation` or `relationNote` should say why
+it is tempting and what exact object, scope, polarity, condition, paragraph, or
+claim fails when returned to the passage. Do not stop after naming the trap.
+`原文未提及` is valid only when no source anchor exists; when possible, add what
+the passage actually discusses so the student can see the boundary. Never turn
+“not mentioned” into “does not exist in reality.”
+
+`questionFocus` is one concise, concrete Chinese sentence about the work this
+question asks the student to do. It may name the familiar exam question type,
+but it must not expose internal enum names or repeat the full answer analysis.
 
 ---
 
@@ -439,6 +473,10 @@ Rules:
   - `wordFamily` — 词族关联
   - `calculation` — 计算/推算
 - `note`: Chinese, preserving key English expressions
+- `note` is the student-facing reasoning bridge, not only a label such as
+  “同义替换”. Include the decisive hidden step when the question is not direct
+  retrieval.
+- for `calculation`, write the complete operation and result in `note`
 - Do not use `inferenceBridge`; choose `paraphrase` or `locationCue`.
 
 ### Example:

@@ -77,9 +77,11 @@ function assertPromptContract() {
     assert(`prompt names evidence type: ${type}`, prompt.includes(type))
   }
 
-  // Asymmetric distractor rule.
-  assert('prompt describes asymmetric distractor rule', prompt.includes('distractor') && (prompt.includes('gloss') || prompt.includes('meaning')))
-  assert('prompt instructs not to argue why distractor is wrong', prompt.includes('wrong') || prompt.includes('why'))
+  // Contextual distractor analysis must cover meaning, temptation, and mismatch.
+  assert('prompt asks for distractor contextual meaning', prompt.includes('what the word or phrase would mean here'))
+  assert('prompt asks why a distractor is tempting', prompt.includes('why a student might consider it'))
+  assert('prompt asks why a distractor fails in this context', prompt.includes('放回当前语境为何不成立'))
+  assert('prompt removes the old distractor prohibition', !prompt.includes('NEVER argue why a distractor is wrong') && !prompt.includes('Do NOT explain why it is wrong'))
 
   // Exact-substring requirement.
   assert('prompt has exact-substring rule', prompt.includes('exact substring'))

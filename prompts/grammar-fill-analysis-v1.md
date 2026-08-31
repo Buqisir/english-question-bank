@@ -26,6 +26,8 @@ Reason carefully internally about:
 - for `given` blanks: what POS is the hint word → which `given` sub-facet → what form does the blank need
 - for `no-hint` blanks: what functional word is missing (preposition / article / pronoun / conjunction)
 - the syntactic trigger words in the passage that prove the answer (evidence)
+- the shortest complete sentence skeleton that shows why this slot needs this form
+- a nearby parallel, paired, referential, or tense structure that can verify the judgment when one exists
 - exact field names and enum values
 - the `role` and `path` for non-finite verb blanks only
 
@@ -111,6 +113,37 @@ For every other facet: `"role": null, "path": null`.
 - `noun-clause` — clause fills a noun slot (subject/object/predicative); no antecedent; use `what/whether/if/that/how/when/where/why`
 - `adverbial-clause` — both clauses are structurally complete; clause modifies the main clause; use time/reason/condition/concession/result connectors: `when/while/as/because/since/if/unless/although/though/so that/…`
 
+## Student-Facing Explanation Rule
+
+Facet keys, N+1, fast/slow paths, role enums, and evidence types are internal
+classification. Keep them exact in their own fields, but do not use them as the
+opening or substance of `reason`, `evidence[].relation`, or `teachingNote`.
+
+Write `reason` by walking the actual sentence:
+
+1. restore the shortest useful skeleton around the gap;
+2. state what job the gap performs in that skeleton;
+3. derive the required word or form;
+4. when useful, verify it with a nearby parallel structure, paired blank,
+   antecedent, time relation, or governing word.
+
+Simple blanks may combine these into one sentence. A difficult blank may use up
+to three. Do not expand a simple article or preposition blank into a general
+grammar lecture, and do not invent distractors for a task with no options.
+
+Prefer concrete wording such as:
+
+```text
+句子的主干是 I have found ___ taking on...；find 后缺宾语，而这个宾语仍指
+主语 I，所以要用反身代词 myself，不能用只表示普通宾语的 me。
+```
+
+Do not stop at:
+
+```text
+find oneself doing 是固定搭配。
+```
+
 ## Required Top-Level Shape
 
 ```json
@@ -151,9 +184,10 @@ Every `blanks[questionId]` MUST include:
 - `answer` — the produced form/word; MUST equal the answer key
 - `role` — required string iff `facetKey === "grammar-fill.given.verb.non-finite"` else `null`
 - `path` — required string iff `facetKey === "grammar-fill.given.verb.non-finite"` else `null`
-- `reason` — 中文 1–3 句：代入该考点框架到本空（认主语/时态/触发词/搭配…）
+- `reason` — 中文 1–3 句：还原句子骨架，说明空格职责并推出答案；有相邻
+  并列、成对空格或回指关系时，用它作必要验证
 - `evidence` — array with ≥1 item
-- `teachingNote` — 中文一句：可迁移的解题动作
+- `teachingNote` — 中文一句：只补充一个可迁移的解题动作，不换术语复述 `reason`
 
 Do NOT output `tense`/`voice`/`agreementSensitive` (finite verb) or `form` (non-finite verb) yourself — the server stamps these deterministically from `answer` after your response.
 

@@ -109,6 +109,9 @@ function assertPromptContract() {
   assert('prompt forbids parent nodes as facetKey', prompt.includes('grammar-fill.given.verb') && prompt.includes('NOT valid') || prompt.includes('Do NOT use parent'))
   // blankType
   assert('prompt names blankType values given and no-hint', prompt.includes('given') && prompt.includes('no-hint'))
+  // Student-facing reasoning restores the local sentence before naming grammar.
+  assert('prompt requires the shortest useful sentence skeleton', prompt.includes('restore the shortest useful skeleton around the gap'))
+  assert('prompt explains slot job before answer form', prompt.includes('state what job the gap performs in that skeleton') && prompt.includes('derive the required word or form'))
 }
 
 // ============================================================

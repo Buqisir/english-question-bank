@@ -182,6 +182,7 @@ must be confirmed green (AGENTS.md RM gate).
 | `verify-i5-writing-ai-import.mjs` | I5 应用文写作 + 读后续写 AI 导题接入：splitter / package / publish path contracts | yes |
 | `verify-application-model-answer-prompt.mjs` | 应用文参考范文生产护栏：运行时精确加载正式 V3 Prompt、附加完整重建题面、保留但不再使用 V2，并钉住交际对象推演与最小充分关系动作 | yes |
 | `verify-continuation-analysis-v1.mjs` | 记叙型读后续写标准解析合同：新 schema / tracked Prompt / provider seam 同形，完整候选通过，旧 `continuationDesign`、分数注入、伪造证据和段落顺序漂移被拒，非记叙任务 fail closed | yes |
+| `verify-teaching-analysis-style.mjs` | 配套解析讲解力护栏：六类正式 Prompt 运行时只加载一次共享讲解规范，题型专项动作存在，固定 25 题 benchmark 数量正确且全部指向已跟踪原题和解析 | yes |
 | `verify-i6-writing-render.mjs` | I6 写作卷面版面还原：从 content.blocks 派生写作页模型（题面外壳归属 / 续写开头句折叠进答题框 / 应用文空框 / 不串味） | yes |
 | `verify-i7-application-given.mjs` | I7 应用文给定上下格式解析：末尾纯英文 + 正向信号守卫切给定骨架（信件/标题/无给定/负向守卫/称呼型），情境剔除、夹注不误判 | yes |
 | `verify-i8-cloze-analysis.mjs` | I8 完形填空 AI 解析生成：prompt 合约、validate 校验器成功与阻断用例（stub provider）、路由 + 包构建 + 存储接线、磁盘 latest/analyses/cloze-analysis-v1.json 断言 | yes |

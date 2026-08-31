@@ -8,6 +8,37 @@ description: "Imports and resumes NCK1 English exam papers through the online so
 Run the repository's NCK1 import loop from its current durable state. The Owner
 describes the outcome; do not make them remember pipeline commands.
 
+## Generate analysis that teaches
+
+Before producing or revising any of the nine staged analyses, read and follow:
+
+- `reference/teaching-analysis-style-v1.md` — shared teaching-prose doctrine;
+- `reference/teaching-analysis-benchmark-v1.json` — fixed 25-case regression
+  set drawn only from tracked project assets.
+
+The type-specific prompt owns schema and enum details. The shared doctrine owns
+how student-visible prose explains the already-validated reasoning. Keep
+internal facets and trap labels complete for matching and QA, but never use an
+internal term in `reason`, `note`, `fitSummary`, `explanation`, or similar prose
+as a substitute for restoring the context and stating the missing logical step.
+
+During generation, use one model pass by default. Do not add a separate style
+rewrite pass merely to sound polished. If a fixed benchmark shows that teaching
+prose changes facts or evidence, preserve the factual pass and propose a
+separate constrained presentation pass before changing the pipeline.
+
+Before Owner Review:
+
+1. run the normal schema/evidence validators;
+2. apply the shared doctrine's silent quality gate;
+3. for prompt or style changes, compare affected cases from the fixed benchmark
+   on all six scoring dimensions;
+4. fail closed on a prettier explanation that weakens evidence, overstates a
+   conclusion, or treats a sample writing route as uniquely required.
+
+Do not store commercial answer-book PDFs, copied explanations, or institutional
+style imitation instructions in the repository. Distill teaching moves only.
+
 ## Start from the durable control plane
 
 1. Read `docs/import/agent-contract.md` before changing import data.
