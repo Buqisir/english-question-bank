@@ -22,7 +22,7 @@ import { fileURLToPath } from 'node:url'
 import { runVerificationCommand } from './verificationCommandRunner.mjs'
 
 export const AMP_ORB_CI_REPOSITORY = 'Buqisir/english-question-bank'
-export const AMP_ORB_CI_WORKFLOW_VERSION = 'v1'
+export const AMP_ORB_CI_WORKFLOW_VERSION = 'v2'
 export const AMP_ORB_CI_QUEUE_SCHEMA_VERSION = 'amp-orb-ci-queue-v1'
 export const AMP_ORB_CI_STATUS_CONTEXT = 'Amp Orb Verify (shadow)'
 export const AMP_ORB_CI_SANDBOX_USER = 'eqb-ci'
@@ -344,8 +344,20 @@ function trustedGit(repositoryRoot, args, { allowFailure = false } = {}) {
   }
 }
 
+export function ensureCompleteAmpOrbCIGitHistory(repositoryRoot, {
+  trustedGitImpl = trustedGit,
+} = {}) {
+  const shallow = trustedGitImpl(repositoryRoot, ['rev-parse', '--is-shallow-repository'])
+  if (shallow === 'true') {
+    trustedGitImpl(repositoryRoot, ['fetch', '--no-tags', '--unshallow', 'origin'])
+  } else if (shallow !== 'false') {
+    throw new Error('Trusted Amp Orb CI git returned an invalid shallow-repository state')
+  }
+}
+
 export function prepareAmpOrbCIBundle(input, { repositoryRoot } = {}) {
   const validated = validateAmpOrbCIInput(input)
+  ensureCompleteAmpOrbCIGitHistory(repositoryRoot)
   const identity = randomUUID()
   const namespace = `refs/amp-ci/bundle/${identity}`
   const incomingRef = validated.event === 'pull_request'
@@ -621,6 +633,12 @@ export function defaultAmpOrbCIStateDir(repositoryRoot) {
   return path.join(repositoryRoot, '.scratch', 'amp-orb-ci')
 }
 
-export function repositoryRootFromModule(metaUrl) {
-  return path.resolve(path.dirname(fileURLToPath(metaUrl)), '..', '..')
+export function repositoryRootFromModule(metaUrl, ancestorCount = 2) {
+  if (!Number.isSafeInteger(ancestorCount) || ancestorCount < 1) {
+    throw new Error('Amp Orb CI repository-root ancestor count is invalid')
+  }
+  return path.resolve(
+    path.dirname(fileURLToPath(metaUrl)),
+    ...Array.from({ length: ancestorCount }, () => '..'),
+  )
 }

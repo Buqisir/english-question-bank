@@ -82,6 +82,14 @@ export function parseGitHubCIWebhook(body, { eventName, deliveryId }) {
   return null
 }
 
+function ampOrbCINodeExecutable() {
+  const homeDirectory = String(process.env.HOME || '')
+  if (!path.isAbsolute(homeDirectory)) {
+    throw new Error('Amp Orb CI requires an absolute HOME for the setup-owned Node.js runtime')
+  }
+  return path.join(homeDirectory, '.local', 'node-24', 'bin', 'node')
+}
+
 function recordGitHubCIDrainLaunch(stateDir, record) {
   try {
     mkdirSync(stateDir, { recursive: true, mode: 0o700 })
@@ -101,15 +109,26 @@ function recordGitHubCIDrainLaunch(stateDir, record) {
 export async function launchGitHubCIDrain({
   repositoryRoot,
   stateDir,
+  onSettled = () => {},
   spawnImpl = spawn,
 } = {}) {
   const controllerPath = path.join(repositoryRoot, 'scripts', 'amp-orb-ci.mjs')
   const resolvedStateDir = stateDir || defaultAmpOrbCIStateDir(repositoryRoot)
   await new Promise((resolve, reject) => {
     let spawned = false
+    let settled = false
     let child
+    const settle = () => {
+      if (settled) return
+      settled = true
+      try {
+        onSettled()
+      } catch {
+        // Resource cleanup must not hide the controller outcome.
+      }
+    }
     try {
-      child = spawnImpl(process.execPath, [controllerPath, 'drain'], {
+      child = spawnImpl(ampOrbCINodeExecutable(), [controllerPath, 'drain'], {
         cwd: repositoryRoot,
         detached: true,
         env: process.env,
@@ -121,6 +140,7 @@ export async function launchGitHubCIDrain({
         errorName: String(error?.name || 'Error').slice(0, 80),
         errorCode: String(error?.code || 'unknown').slice(0, 80),
       })
+      settle()
       reject(error)
       return
     }
@@ -130,6 +150,7 @@ export async function launchGitHubCIDrain({
         errorName: String(error?.name || 'Error').slice(0, 80),
         errorCode: String(error?.code || 'unknown').slice(0, 80),
       })
+      settle()
       if (!spawned) reject(error)
     })
     child.once('spawn', () => {
@@ -148,6 +169,7 @@ export async function launchGitHubCIDrain({
         code: Number.isInteger(code) ? code : null,
         signal: typeof signal === 'string' ? signal.slice(0, 32) : null,
       })
+      settle()
     })
   })
 }
@@ -171,10 +193,26 @@ export default async function githubCIWakeupPlugin(amp, overrides = {}) {
 
   const repositoryRoot = overrides.repositoryRoot || repositoryRootFromModule(import.meta.url)
   const stateDir = overrides.stateDir || defaultAmpOrbCIStateDir(repositoryRoot)
-  const launchDrain = overrides.launchDrain || (() => launchGitHubCIDrain({
-    repositoryRoot,
-    stateDir,
-  }))
+  const launchController = overrides.launchController || launchGitHubCIDrain
+  const launchDrain = overrides.launchDrain || (async () => {
+    const keepAlive = await amp.system.executor.keepAlive()
+    let released = false
+    const release = () => {
+      if (released) return
+      released = true
+      keepAlive.unsubscribe()
+    }
+    try {
+      await launchController({
+        repositoryRoot,
+        stateDir,
+        onSettled: release,
+      })
+    } catch (error) {
+      release()
+      throw error
+    }
+  })
 
   const registration = await amp.createWebhook({
     key: 'eqbank-github-ci-shadow-v1',

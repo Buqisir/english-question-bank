@@ -39,7 +39,7 @@ function parseInput() {
   }
 }
 
-const repositoryRoot = repositoryRootFromModule(import.meta.url)
+const repositoryRoot = repositoryRootFromModule(import.meta.url, 1)
 const stateDir = defaultAmpOrbCIStateDir(repositoryRoot)
 const controllerCommand = process.argv[2]
 
