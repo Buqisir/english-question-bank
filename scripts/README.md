@@ -11,6 +11,15 @@ Three local entrypoints share `scripts/verify-ci.mjs`:
 - `pnpm -C app verify:paper` exercises shared Canonical Paper/Print seams;
 - `pnpm -C app verify:all` is the release/fallback suite used by CI.
 
+Verifier scripts use bounded parallel execution. The default is half the
+available CPU count, capped at 8 jobs (8 jobs on the 16-core Orb). Browser,
+Chromium, Vivliostyle, and LibreOffice checks share one render lane; each fixed
+port has its own collision lock; official-evidence checks run exclusively.
+Each job spools output privately and the runner prints those logs in registry
+order, while still collecting all PASS/SKIP/FAIL results. Use `--jobs 1` or
+`VERIFY_CONCURRENCY=1` for exact serial fallback; use `--jobs N` to override
+the bounded default.
+
 Every registered row below is its one-line named failure: the distinct fault
 the verifier catches or the independent layer it supplies. A verifier without
 such a row is not registrable. `--list-json` shows the registry and packs;
@@ -52,8 +61,9 @@ must be confirmed green (AGENTS.md RM gate).
 
 | Script | Scope | Runs in CI? |
 | --- | --- | --- |
-| `verify-ci.mjs` | Selects changed/Paper/all packs deterministically and reports PASS/SKIP/FAIL without hiding later failures | yes |
-| `verify-verification-command-runner.mjs` | Prevents a completed or interrupted verifier from leaving its own Vite/Chromium/test descendants alive, and bounds oversized single-line diagnostics while retaining their head, tail, and digest | yes |
+| `verify-ci.mjs` | Selects changed/Paper/all packs, runs bounded resource-aware parallel jobs with registry-ordered logs, and reports PASS/SKIP/FAIL without hiding later failures | yes |
+| `verify-verification-command-runner.mjs` | Prevents completed or concurrently interrupted verifiers from leaving their own Vite/Chromium/test descendants alive, and bounds oversized single-line diagnostics while retaining their head, tail, and digest | yes |
+| `verify-verification-scheduler.mjs` | Proves bounded concurrency, render/port resource locks, exclusive barriers, ordered result flushing, collect-all statuses, abort stop-dispatch, and jobs=1 serial fallback | yes |
 | `verify-vocabulary-closed-loop.mjs` | Validates the 1600-entry Wanwei source/content/unique Koboyo visual, formal American and Owner-approved Cori British audio contracts, plus isolated progress, frozen-set, share/revoke, and temporary-scope persistence | yes |
 | `verify-vocabulary-dictation-review.mjs` | Verifies frozen multi-set dictation tasks, global share isolation, teacher-confirmed result editing/voiding, pending/stubborn/improved derivation, manual flags, suggestions, library search/statistics, and user/student isolation | yes |
 | `verify-vocabulary-meaning-recall.mjs` | Verifies frozen multi-set meaning-recall records, same-day evidence collapse, cross-day repeated/recovered derivation, dictation-correct contribution without fabricated meaning errors, task linkage, suggestions, and user/student isolation | yes |

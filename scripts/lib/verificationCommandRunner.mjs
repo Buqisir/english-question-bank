@@ -62,6 +62,7 @@ function createCappedLineWriter(writeOutput, maxLineChars) {
 
 function processGroupExists(pid) {
   if (process.platform === 'win32') return false
+  if (!Number.isInteger(pid) || pid <= 0) return false
   try {
     process.kill(-pid, 0)
     return true
@@ -103,12 +104,18 @@ function signalExitCode(signal) {
   return 1
 }
 
+function abortSignalName(signal) {
+  return ['SIGINT', 'SIGTERM'].includes(signal?.reason) ? signal.reason : 'SIGTERM'
+}
+
 export async function runVerificationCommand(command, args, {
   cwd,
   maxLineChars = DEFAULT_MAX_LINE_CHARS,
+  abortSignal = null,
   stdout = (chunk) => process.stdout.write(chunk),
   stderr = (chunk) => process.stderr.write(chunk),
 } = {}) {
+  if (abortSignal?.aborted) return signalExitCode(abortSignalName(abortSignal))
   const child = spawn(command, args, {
     cwd,
     detached: process.platform !== 'win32',
@@ -131,13 +138,18 @@ export async function runVerificationCommand(command, args, {
     signalProcessTree(child, 'SIGTERM')
     interruptTimer = setTimeout(() => {
       signalProcessTree(child, 'SIGKILL')
-      process.exit(signalExitCode(signal))
+      if (!abortSignal) process.exit(signalExitCode(signal))
     }, PROCESS_GROUP_GRACE_MS)
   }
   const onSigint = () => interrupt('SIGINT')
   const onSigterm = () => interrupt('SIGTERM')
-  process.once('SIGINT', onSigint)
-  process.once('SIGTERM', onSigterm)
+  const onAbort = () => interrupt(abortSignalName(abortSignal))
+  if (abortSignal) {
+    abortSignal.addEventListener('abort', onAbort, { once: true })
+  } else {
+    process.once('SIGINT', onSigint)
+    process.once('SIGTERM', onSigterm)
+  }
 
   const result = await new Promise((resolve) => {
     let settled = false
@@ -153,12 +165,19 @@ export async function runVerificationCommand(command, args, {
   await closePromise
 
   if (interruptTimer) clearTimeout(interruptTimer)
-  process.removeListener('SIGINT', onSigint)
-  process.removeListener('SIGTERM', onSigterm)
+  if (abortSignal) {
+    abortSignal.removeEventListener('abort', onAbort)
+  } else {
+    process.removeListener('SIGINT', onSigint)
+    process.removeListener('SIGTERM', onSigterm)
+  }
   stdoutWriter.end()
   stderrWriter.end()
 
-  if (interruptedSignal) process.exit(signalExitCode(interruptedSignal))
+  if (interruptedSignal) {
+    if (!abortSignal) process.exit(signalExitCode(interruptedSignal))
+    return signalExitCode(interruptedSignal)
+  }
   if (result.error) {
     stderr(`Unable to start ${command}: ${result.error.message}\n`)
     return 1
