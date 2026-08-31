@@ -62,6 +62,7 @@ must be confirmed green (AGENTS.md RM gate).
 | Script | Scope | Runs in CI? |
 | --- | --- | --- |
 | `verify-ci.mjs` | Selects changed/Paper/all packs, runs bounded resource-aware parallel jobs with registry-ordered logs, and reports PASS/SKIP/FAIL without hiding later failures | yes |
+| `verify-amp-orb-ci.mjs` | Rejects GitHub shadow-CI webhook/HMAC allowlist drift, payload-to-prompt injection, secret-bearing candidate environments, duplicate/concurrent execution, unrecoverable run/status crash windows, non-private receipts, or commit-status scope drift without registering a webhook or calling GitHub | yes |
 | `verify-verification-command-runner.mjs` | Prevents completed or concurrently interrupted verifiers from leaving their own Vite/Chromium/test descendants alive, and bounds oversized single-line diagnostics while retaining their head, tail, and digest | yes |
 | `verify-verification-scheduler.mjs` | Proves bounded concurrency, render/port resource locks, exclusive barriers, ordered result flushing, collect-all statuses, abort stop-dispatch, and jobs=1 serial fallback | yes |
 | `verify-vocabulary-closed-loop.mjs` | Validates the 1600-entry Wanwei source/content/unique Koboyo visual, formal American and Owner-approved Cori British audio contracts, plus isolated progress, frozen-set, share/revoke, and temporary-scope persistence | yes |

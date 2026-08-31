@@ -187,6 +187,8 @@ for (const [changedFile, expectedRisk, expectedPack] of [
   ['server/vocabulary/vocabularyPdfRenderer.mjs', 'shared-renderer-contract', 'paper'],
   ['server/vocabulary/vocabularyStore.mjs', 'auth-persistence-migration', 'security'],
   ['server/vocabulary/vocabularyRoutes.mjs', 'auth-persistence-migration', 'security'],
+  ['.amp/plugins/github-ci-wakeup.js', 'auth-persistence-migration', 'security'],
+  ['scripts/amp-orb-ci.mjs', 'auth-persistence-migration', 'security'],
   ['server/api.mjs', 'unknown-fallback', 'all'],
   ['data/sql/schema.sql', 'auth-persistence-migration', 'security'],
   ['.github/workflows/verify.yml', 'unknown-fallback', 'all'],

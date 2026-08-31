@@ -28,3 +28,37 @@ inside the 30-second webhook handler.
 
 Creating the secrets, enabling/reloading the plugin, and configuring the webhook are shared-state
 operations that remain disabled until separately authorized by the Owner.
+
+## GitHub shadow CI Orb
+
+`github-ci-wakeup.js` is an inert-by-default shadow CI wakeup for one dedicated private project
+Orb thread. The owning thread is the only worker: GitHub deliveries append fixed, allowlisted
+exact-SHA commands to that thread instead of spawning one Orb per delivery. The controller records
+one atomic private receipt per `(workflowVersion, testedSHA)`, so Amp's at-least-once delivery may
+append the same prompt again but cannot execute an already reported run again.
+One kernel `flock` spans the controller, so Orb pause cannot make a live lock look stale and process
+death releases it without an old owner being able to remove a successor's lock.
+
+The allowlist accepts same-repository pull requests into `main` on `opened`, `synchronize`,
+`reopened`, and `ready_for_review`, plus pushes to `refs/heads/main`. It verifies GitHub's raw-body
+`X-Hub-Signature-256`, ignores PR title/body text, and rejects SHA drift. For PRs, the trusted
+checkout verifies GitHub's exact test-merge SHA and ordered base/head parents, matching the existing
+Actions workflow rather than testing the head in isolation. It then passes a one-use read-only Git
+bundle—not a repository credential—to the runner before `verify:all` and the existing GitHub E2E
+commands. Candidate code executes as the separate locked `eqb-ci` Unix user under an empty
+allowlisted environment; Amp Project Secrets and the commit-status token stay in the trusted
+controller process.
+
+Activation is a later shared-state operation requiring current Owner approval. Configure these
+private Amp Project settings, then load the plugin only in the dedicated owning Orb thread:
+
+- `QUESTION_BANK_AMP_CI_PLUGIN_ENABLED=1`
+- `QUESTION_BANK_AMP_CI_GITHUB_WEBHOOK_SECRET=<high-entropy GitHub webhook HMAC secret>`
+- `QUESTION_BANK_AMP_CI_GITHUB_STATUS_TOKEN=<fine-grained token limited to Commit statuses: write>`
+
+After an approved plugin load, explicitly run `CI Orb: 复制 GitHub 影子 CI Webhook URL` and put the
+private capability URL in one GitHub repository webhook that sends only Pull requests and Push
+events, using the same HMAC secret. Never commit or log the URL or either secret. The status context
+is `Amp Orb Verify (shadow)`: it must remain non-required while GitHub Actions `Verify` stays the
+sole merge/release authority. Compare 10–20 paired runs before a separate Owner decision about any
+required-check change.
