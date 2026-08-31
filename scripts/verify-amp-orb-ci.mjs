@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict'
-import { spawn, spawnSync } from 'node:child_process'
+import { execFileSync, spawn, spawnSync } from 'node:child_process'
 import { createHmac } from 'node:crypto'
 import { EventEmitter, once } from 'node:events'
 import {
@@ -16,6 +16,7 @@ import {
 } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 
 import githubCIWakeupPlugin, {
   launchGitHubCIDrain,
@@ -32,7 +33,9 @@ import {
   createGitHubStatusWriter,
   drainAmpOrbCIQueue,
   enqueueAmpOrbCIJob,
+  ensureCompleteAmpOrbCIGitHistory,
   reapAmpOrbCIProcesses,
+  repositoryRootFromModule,
   runAmpOrbCIJob,
   sandboxInvocation,
   validateAmpOrbCIInput,
@@ -45,6 +48,107 @@ const baseSha = 'b'.repeat(40)
 const testedSha = 'c'.repeat(40)
 const secret = 'synthetic-github-webhook-secret'
 const deliveryId = '11111111-1111-4111-8111-111111111111'
+const expectedRepositoryRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
+assert.equal(
+  repositoryRootFromModule(new URL('./amp-orb-ci.mjs', import.meta.url).href, 1),
+  expectedRepositoryRoot,
+  'controller resolves the repository one ancestor above scripts/',
+)
+assert.equal(
+  repositoryRootFromModule(new URL('../.amp/plugins/github-ci-wakeup.js', import.meta.url).href),
+  expectedRepositoryRoot,
+  'plugin resolves the repository two ancestors above .amp/plugins/',
+)
+const shallowGitCalls = []
+ensureCompleteAmpOrbCIGitHistory('/trusted/shallow-repository', {
+  trustedGitImpl(repositoryRoot, args) {
+    shallowGitCalls.push({ repositoryRoot, args })
+    return args.includes('--is-shallow-repository') ? 'true' : ''
+  },
+})
+assert.deepEqual(shallowGitCalls, [
+  {
+    repositoryRoot: '/trusted/shallow-repository',
+    args: ['rev-parse', '--is-shallow-repository'],
+  },
+  {
+    repositoryRoot: '/trusted/shallow-repository',
+    args: ['fetch', '--no-tags', '--unshallow', 'origin'],
+  },
+], 'trusted shallow checkout is completed before creating a commit bundle')
+const completeGitCalls = []
+ensureCompleteAmpOrbCIGitHistory('/trusted/complete-repository', {
+  trustedGitImpl(repositoryRoot, args) {
+    completeGitCalls.push({ repositoryRoot, args })
+    return 'false'
+  },
+})
+assert.deepEqual(completeGitCalls, [{
+  repositoryRoot: '/trusted/complete-repository',
+  args: ['rev-parse', '--is-shallow-repository'],
+}], 'complete trusted checkout does not fetch redundant history')
+
+const shallowHistoryRoot = mkdtempSync(path.join(tmpdir(), 'eqb-amp-orb-ci-shallow-'))
+try {
+  const remote = path.join(shallowHistoryRoot, 'remote.git')
+  const source = path.join(shallowHistoryRoot, 'source')
+  const checkout = path.join(shallowHistoryRoot, 'checkout')
+  const bundle = path.join(shallowHistoryRoot, 'repository.bundle')
+  const git = (cwd, args) => execFileSync('git', args, {
+    cwd,
+    encoding: 'utf8',
+    env: { ...process.env, GIT_CONFIG_GLOBAL: '/dev/null', GIT_CONFIG_NOSYSTEM: '1' },
+    stdio: ['ignore', 'pipe', 'pipe'],
+  }).trim()
+  git(shallowHistoryRoot, ['init', '--bare', '--initial-branch=main', remote])
+  git(shallowHistoryRoot, ['init', '--initial-branch=main', source])
+  git(source, ['config', 'user.name', 'Synthetic CI'])
+  git(source, ['config', 'user.email', 'ci@example.invalid'])
+  writeFileSync(path.join(source, 'base.txt'), 'base\n')
+  git(source, ['add', 'base.txt'])
+  git(source, ['commit', '-m', 'synthetic base'])
+  const syntheticBase = git(source, ['rev-parse', 'HEAD'])
+  git(source, ['switch', '-c', 'side'])
+  writeFileSync(path.join(source, 'side.txt'), 'side\n')
+  git(source, ['add', 'side.txt'])
+  git(source, ['commit', '-m', 'synthetic side'])
+  git(source, ['switch', 'main'])
+  writeFileSync(path.join(source, 'main.txt'), 'main\n')
+  git(source, ['add', 'main.txt'])
+  git(source, ['commit', '-m', 'synthetic main'])
+  git(source, ['merge', '--no-ff', 'side', '-m', 'synthetic merge'])
+  const syntheticMerge = git(source, ['rev-parse', 'HEAD'])
+  git(source, ['remote', 'add', 'origin', remote])
+  git(source, ['push', 'origin', 'main'])
+  git(shallowHistoryRoot, [
+    'clone',
+    '--depth',
+    '1',
+    pathToFileURL(remote).href,
+    checkout,
+  ])
+  assert.equal(git(checkout, ['rev-parse', '--is-shallow-repository']), 'true')
+  assert.notEqual(
+    spawnSync('git', ['cat-file', '-e', `${syntheticBase}^{commit}`], { cwd: checkout }).status,
+    0,
+    'depth-one merge checkout initially lacks the base history needed by the bundle',
+  )
+  ensureCompleteAmpOrbCIGitHistory(checkout, { trustedGitImpl: git })
+  assert.equal(git(checkout, ['rev-parse', '--is-shallow-repository']), 'false')
+  git(checkout, ['cat-file', '-e', `${syntheticBase}^{commit}`])
+  git(checkout, ['update-ref', 'refs/amp-ci/test/tested', syntheticMerge])
+  git(checkout, ['update-ref', 'refs/amp-ci/test/base', syntheticBase])
+  git(checkout, [
+    'bundle',
+    'create',
+    bundle,
+    'refs/amp-ci/test/tested',
+    'refs/amp-ci/test/base',
+  ])
+  git(checkout, ['bundle', 'verify', bundle])
+} finally {
+  rmSync(shallowHistoryRoot, { force: true, recursive: true })
+}
 const pullRequestPayload = {
   action: 'synchronize',
   number: 292,
@@ -168,10 +272,12 @@ try {
   const syntheticChild = new EventEmitter()
   syntheticChild.pid = 4242
   let unrefCount = 0
+  let settledCount = 0
   syntheticChild.unref = () => { unrefCount += 1 }
   const launchPromise = launchGitHubCIDrain({
     repositoryRoot: '/trusted/controller',
     stateDir: launchState,
+    onSettled() { settledCount += 1 },
     spawnImpl(command, args, options) {
       launchedProcesses.push({ command, args, options })
       queueMicrotask(() => syntheticChild.emit('spawn'))
@@ -180,7 +286,7 @@ try {
   })
   await launchPromise
   assert.deepEqual(launchedProcesses[0], {
-    command: process.execPath,
+    command: path.join(process.env.HOME, '.local', 'node-24', 'bin', 'node'),
     args: ['/trusted/controller/scripts/amp-orb-ci.mjs', 'drain'],
     options: {
       cwd: '/trusted/controller',
@@ -190,7 +296,9 @@ try {
     },
   })
   assert.equal(unrefCount, 1, 'detached controller is unreferenced after spawn handoff')
+  assert.equal(settledCount, 0, 'Orb keepalive remains held while the controller runs')
   syntheticChild.emit('exit', 9, null)
+  assert.equal(settledCount, 1, 'controller exit releases its Orb keepalive once')
   const launchRecordPath = path.join(launchState, 'launcher.json')
   const launchRecord = JSON.parse(readFileSync(launchRecordPath, 'utf8'))
   assert.deepEqual({
@@ -209,15 +317,18 @@ try {
   const syntheticLaunchError = Object.assign(new Error('synthetic spawn failure'), {
     code: 'ENOENT',
   })
+  let launchErrorSettledCount = 0
   await assert.rejects(launchGitHubCIDrain({
     repositoryRoot: '/trusted/controller',
     stateDir: launchErrorState,
+    onSettled() { launchErrorSettledCount += 1 },
     spawnImpl() {
       const child = new EventEmitter()
       queueMicrotask(() => child.emit('error', syntheticLaunchError))
       return child
     },
   }), /synthetic spawn failure/u)
+  assert.equal(launchErrorSettledCount, 1, 'spawn error releases its Orb keepalive once')
   const launchErrorRecordPath = path.join(launchErrorState, 'launcher.json')
   const launchErrorRecord = JSON.parse(readFileSync(launchErrorRecordPath, 'utf8'))
   assert.deepEqual({
@@ -377,6 +488,49 @@ try {
   )
 } finally {
   rmSync(pluginState, { force: true, recursive: true })
+  if (originalEnabled === undefined) delete process.env.QUESTION_BANK_AMP_CI_PLUGIN_ENABLED
+  else process.env.QUESTION_BANK_AMP_CI_PLUGIN_ENABLED = originalEnabled
+  if (originalWebhookSecret === undefined) delete process.env.QUESTION_BANK_AMP_CI_GITHUB_WEBHOOK_SECRET
+  else process.env.QUESTION_BANK_AMP_CI_GITHUB_WEBHOOK_SECRET = originalWebhookSecret
+  if (originalStatusToken === undefined) delete process.env.QUESTION_BANK_AMP_CI_GITHUB_STATUS_TOKEN
+  else process.env.QUESTION_BANK_AMP_CI_GITHUB_STATUS_TOKEN = originalStatusToken
+}
+
+const keepAliveState = mkdtempSync(path.join(tmpdir(), 'eqb-amp-orb-ci-keepalive-'))
+const keepAliveReleases = []
+const launchSettlers = []
+try {
+  process.env.QUESTION_BANK_AMP_CI_PLUGIN_ENABLED = '1'
+  process.env.QUESTION_BANK_AMP_CI_GITHUB_WEBHOOK_SECRET = secret
+  process.env.QUESTION_BANK_AMP_CI_GITHUB_STATUS_TOKEN = 'synthetic-status-token'
+  await githubCIWakeupPlugin({
+    logger: { log() {} },
+    system: {
+      executor: {
+        async keepAlive() {
+          const index = keepAliveReleases.length
+          keepAliveReleases.push(0)
+          return { unsubscribe() { keepAliveReleases[index] += 1 } }
+        },
+      },
+    },
+    async createWebhook() {
+      return { url: 'https://capability.invalid/private-ci-keepalive-verifier' }
+    },
+    registerCommand() {},
+  }, {
+    repositoryRoot: '/trusted/controller',
+    stateDir: keepAliveState,
+    async launchController(options) {
+      launchSettlers.push(options.onSettled)
+    },
+  })
+  assert.deepEqual(keepAliveReleases, [0], 'plugin startup keeps the Orb awake for its controller')
+  launchSettlers[0]()
+  launchSettlers[0]()
+  assert.deepEqual(keepAliveReleases, [1], 'controller settlement releases one Orb lease once')
+} finally {
+  rmSync(keepAliveState, { force: true, recursive: true })
   if (originalEnabled === undefined) delete process.env.QUESTION_BANK_AMP_CI_PLUGIN_ENABLED
   else process.env.QUESTION_BANK_AMP_CI_PLUGIN_ENABLED = originalEnabled
   if (originalWebhookSecret === undefined) delete process.env.QUESTION_BANK_AMP_CI_GITHUB_WEBHOOK_SECRET

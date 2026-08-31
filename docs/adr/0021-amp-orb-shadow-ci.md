@@ -32,9 +32,15 @@ enqueues before launching a queue drainer and returning within its deadline.
 Plugin startup also launches a drainer, so a process death leaves recoverable
 work on disk. No worker thread is created; the owning 16-core Orb runs one suite
 at a time. The plugin detaches and unreferences the controller child after the
-OS spawn handoff so the webhook callback lifecycle cannot reap it. One bounded
-private launcher record exposes only spawn/error/exit metadata for pre-lock
-diagnosis; it never captures child output or environment values.
+OS spawn handoff so the webhook callback lifecycle cannot reap it. It invokes
+the setup-owned `$HOME/.local/node-24/bin/node`, not `process.execPath`, because
+the plugin runtime executable is Amp itself. The controller resolves the repository
+one ancestor above `scripts/`; it does not reuse the plugin's two-ancestor path as
+its state root. One bounded private launcher record exposes only spawn/error/exit
+metadata for pre-lock diagnosis; it never captures child output or environment
+values. A scoped `amp.system.executor.keepAlive()` lease spans only the controller
+lifetime and is released exactly once on exit/error, preventing Orb sleep from
+suspending a live suite after the webhook returns.
 
 The trusted controller uses `(workflowVersion, exact tested SHA)` as the durable
 run identity. Private mode-0600 receipts bind both the tested and status SHAs and
@@ -48,20 +54,26 @@ stale and is released automatically after process death. There is no user-space
 stale owner that can delete a successor's lock. A queue item is removed only
 after its controller call reaches a reported or cached outcome.
 
+The workflow version advances when runner semantics change, so an old terminal
+receipt cannot suppress verification by a corrected runner.
+
 The trusted controller fetches the exact candidate ref through the owning
-project checkout's existing read credential. Pull requests fetch GitHub's exact
-`refs/pull/<number>/merge`, verify its SHA and both ordered base/head parents
-against the signed delivery, and therefore test the same merge candidate that
-the existing `pull_request` Actions workflow checks out. Pushes require the
-status and tested SHAs to be identical. The controller exports only that tested
-commit/base history as a one-use Git bundle. The unprivileged runner receives
-the read-only bundle but no repository credential. Candidate setup,
-`verify:all`, and the six existing GitHub E2E commands run as a separate locked
-`eqb-ci` Unix user under `env -i` with only tool/cache variables. No Amp Project
-Secret, GitHub token, user home, production credential, DB, or deploy capability
-enters that process. Fork pull requests are rejected in V1. Tracked checkout
-drift after verification is a failure. A missing, unknown, or process-exit-
-contradicting sandbox result marker is a controller error, never a green run.
+project checkout's existing read credential. Because a new Orb checkout can be
+shallow, the controller completes its trusted history once before creating a
+bundle; merge commits would otherwise omit second-parent objects. Pull requests
+then fetch GitHub's exact `refs/pull/<number>/merge`, verify its SHA and both
+ordered base/head parents against the signed delivery, and therefore test the
+same merge candidate that the existing `pull_request` Actions workflow checks
+out. Pushes require the status and tested SHAs to be identical. The controller
+exports only that tested commit/base history as a one-use Git bundle. The
+unprivileged runner receives the read-only bundle but no repository credential.
+Candidate setup, `verify:all`, and the six existing GitHub E2E commands run as a
+separate locked `eqb-ci` Unix user under `env -i` with only tool/cache variables.
+No Amp Project Secret, GitHub token, user home, production credential, DB, or
+deploy capability enters that process. Fork pull requests remain rejected.
+Tracked checkout drift after verification is a failure. A missing, unknown, or
+process-exit-contradicting sandbox result marker is a controller error, never a
+green run.
 
 The trusted controller alone writes the commit status
 `Amp Orb Verify (shadow)` to the PR head/push status SHA through GitHub's

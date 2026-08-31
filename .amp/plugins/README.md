@@ -38,13 +38,18 @@ startup also starts a drainer, so a process death leaves a durable item for reco
 unprocessed thread message. Blocking kernel `flock` holders drain the queue serially; concurrent
 launchers wait instead of dropping work in a lock race. The webhook never depends on an LLM turn
 to wake or interpret the event. The plugin hands the controller to a detached, unreferenced child
-process so returning from the webhook callback cannot reap it; a bounded private `launcher.json`
-records the latest spawn/error/exit metadata without capturing output or environment values.
+process using the setup-owned `$HOME/.local/node-24/bin/node` (the plugin runtime executable is Amp,
+not Node) so returning from the webhook callback cannot reap it; a bounded private `launcher.json`
+records the latest spawn/error/exit metadata without capturing output or environment values. A
+scoped Orb keepalive lease spans that child process and is released exactly once when it settles,
+so a ten-minute verification cannot be paused immediately after the webhook handler returns.
 
 The controller records one atomic private receipt per `(workflowVersion, testedSHA)`, so Amp's
 at-least-once delivery cannot execute an already reported run again. Orb pause cannot make a live
 kernel lock look stale, and process death releases it without an old owner being able to remove a
 successor's lock. A failed drain keeps its queue item for the next plugin load or delivery.
+Before creating the isolated checkout bundle, the trusted controller completes a shallow Orb clone
+once; otherwise a merge commit can omit its second-parent objects and must fail before verification.
 
 The allowlist accepts same-repository pull requests into `main` on `opened`, `synchronize`,
 `reopened`, and `ready_for_review`, plus pushes to `refs/heads/main`. It verifies GitHub's raw-body
