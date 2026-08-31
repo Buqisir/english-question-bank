@@ -68,11 +68,11 @@ The allowlist accepts same-repository pull requests into `main` on `opened`, `sy
 `reopened`, and `ready_for_review`, plus pushes to `refs/heads/main`. It verifies GitHub's raw-body
 `X-Hub-Signature-256`, ignores PR title/body text, and rejects SHA drift. For PRs, the trusted
 checkout verifies GitHub's exact test-merge SHA and ordered base/head parents, matching the existing
-Actions workflow rather than testing the head in isolation. When an `opened` delivery has a null
-`merge_commit_sha`, the signed base/head/PR identity is durably queued before any network lookup so
-the webhook can return promptly. The background controller retries `refs/pull/<number>/merge` and
-accepts it only when its two parents exactly match the signed delivery's base and head; it never
-substitutes the head SHA. It then passes a one-use read-only Git bundle—not a repository credential—
+Actions workflow rather than testing the head in isolation. GitHub PR payload merge SHAs may be null
+or stale, so every signed PR delivery durably queues only its base/head/PR identity before any
+network lookup. The background controller resolves the current `refs/pull/<number>/merge`, accepts
+it only when its two parents exactly match the signed delivery's base and head, and never substitutes
+the head SHA. It then passes a one-use read-only Git bundle—not a repository credential—
 to the runner. Workflow v3 starts two separate candidate checkouts concurrently: the Fast lane runs
 the six existing GitHub E2E commands on isolated ports, while the Full lane runs `verify:all`. The
 informational `Amp Orb Verify (fast)` status reports as soon as E2E settles. The aggregate `Amp Orb

@@ -188,12 +188,25 @@ export async function drainAmpOrbCIQueue({ stateDir, resolveJob, runJob } = {}) 
       throw new Error('Amp Orb CI queue item identity mismatch')
     }
     let input = queuedInput
-    if (queuedInput.kind === 'resolve') {
+    if (
+      queuedInput.kind === 'resolve'
+      || (queuedInput.event === 'pull_request' && typeof resolveJob === 'function')
+    ) {
       if (typeof resolveJob !== 'function') {
         throw new Error('Amp Orb CI pull request resolver is missing')
       }
+      const unresolvedInput = queuedInput.kind === 'resolve'
+        ? queuedInput
+        : {
+            kind: 'resolve',
+            event: 'pull_request',
+            sha: queuedInput.sha,
+            baseSha: queuedInput.baseSha,
+            deliveryId: queuedInput.deliveryId,
+            pullRequestNumber: queuedInput.pullRequestNumber,
+          }
       try {
-        input = await resolveJob(queuedInput)
+        input = await resolveJob(unresolvedInput)
       } catch {
         results.push({
           deliveryId: queuedInput.deliveryId,

@@ -46,25 +46,19 @@ export function parseGitHubCIWebhook(body, { eventName, deliveryId }) {
     const number = payload.number
     const head = payload.pull_request?.head
     const base = payload.pull_request?.base
-    const testedSha = payload.pull_request?.merge_commit_sha
     if (!PR_ACTIONS.has(payload.action)) return null
     if (!Number.isSafeInteger(number) || number < 1) return null
     if (head?.repo?.full_name !== REPOSITORY) return null
     if (base?.repo?.full_name !== REPOSITORY || base?.ref !== 'main') return null
-    if (
-      !SHA.test(head?.sha || '')
-      || !SHA.test(base?.sha || '')
-      || (testedSha !== null && !SHA.test(testedSha || ''))
-    ) {
+    if (!SHA.test(head?.sha || '') || !SHA.test(base?.sha || '')) {
       return null
     }
     return {
-      kind: testedSha === null ? 'resolve' : 'run',
+      kind: 'resolve',
       event: 'pull_request',
       action: payload.action,
       deliveryId,
       sha: head.sha,
-      ...(testedSha === null ? {} : { testedSha }),
       baseSha: base.sha,
       pullRequestNumber: number,
     }

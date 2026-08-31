@@ -13,6 +13,9 @@ Amp rather than Node, the keepalive API path differed from the first assumption,
 and a shallow trusted checkout produced an incomplete merge bundle. A later GitHub
 `pull_request.opened` payload carried a null merge SHA; the controller now resolves
 the exact `refs/pull/<number>/merge` commit and verifies both ordered signed parents.
+A `synchronize` proof then showed that GitHub may also send the previous merge SHA
+as a non-null value, so every PR delivery now treats the payload merge SHA as
+advisory and resolves the current ref from the signed base/head/PR identity.
 
 The corrected runner completed a real PR merge-ref run and a post-merge main run:
 

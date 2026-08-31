@@ -257,14 +257,18 @@ const pullRequestPayload = {
 const pullRequestBody = Buffer.from(JSON.stringify(pullRequestPayload))
 const signature = `sha256=${createHmac('sha256', secret).update(pullRequestBody).digest('hex')}`
 const parsedPullRequest = {
-  kind: 'run',
+  kind: 'resolve',
   event: 'pull_request',
   action: 'synchronize',
   deliveryId,
   sha: headSha,
-  testedSha,
   baseSha,
   pullRequestNumber: 292,
+}
+const resolvedPullRequest = {
+  ...parsedPullRequest,
+  kind: 'run',
+  testedSha,
 }
 
 assert.deepEqual(parseGitHubCIWebhook(pullRequestBody, {
@@ -281,14 +285,24 @@ const unresolvedPullRequestBody = Buffer.from(JSON.stringify({
 }))
 const parsedUnresolvedPullRequest = {
   ...parsedPullRequest,
-  kind: 'resolve',
   action: 'opened',
 }
-delete parsedUnresolvedPullRequest.testedSha
 assert.deepEqual(parseGitHubCIWebhook(unresolvedPullRequestBody, {
   deliveryId,
   eventName: 'pull_request',
 }), parsedUnresolvedPullRequest)
+for (const mergeCommitSha of [`${testedSha}\ncommand`, undefined]) {
+  assert.deepEqual(parseGitHubCIWebhook(Buffer.from(JSON.stringify({
+    ...pullRequestPayload,
+    pull_request: {
+      ...pullRequestPayload.pull_request,
+      merge_commit_sha: mergeCommitSha,
+    },
+  })), {
+    deliveryId,
+    eventName: 'pull_request',
+  }), parsedPullRequest, 'webhook merge SHA is ignored in favor of the exact current merge ref')
+}
 assert.equal(validGitHubCISignature(pullRequestBody, signature, secret), true)
 assert.equal(validGitHubCISignature(pullRequestBody, `${signature.slice(0, -1)}0`, secret), false)
 assert.equal(validGitHubCISignature(pullRequestBody, '', secret), false)
@@ -344,20 +358,6 @@ for (const [label, body, eventName] of [
     pull_request: {
       ...pullRequestPayload.pull_request,
       head: { ...pullRequestPayload.pull_request.head, sha: `${headSha}\ncommand` },
-    },
-  }, 'pull_request'],
-  ['malformed tested SHA', {
-    ...pullRequestPayload,
-    pull_request: {
-      ...pullRequestPayload.pull_request,
-      merge_commit_sha: `${testedSha}\ncommand`,
-    },
-  }, 'pull_request'],
-  ['missing tested SHA field', {
-    ...pullRequestPayload,
-    pull_request: {
-      ...pullRequestPayload.pull_request,
-      merge_commit_sha: undefined,
     },
   }, 'pull_request'],
   ['deleted main', { ...pushPayload, deleted: true }, 'push'],
@@ -553,21 +553,61 @@ try {
   assert.deepEqual(queuedFiles, [`${deliveryId}.json`], 'at-least-once delivery has one durable item')
   assert.equal(statSync(path.join(queueDir, queuedFiles[0])).mode & 0o777, 0o600)
   const queuedItem = JSON.parse(readFileSync(path.join(queueDir, queuedFiles[0]), 'utf8'))
-  assert.deepEqual(queuedItem.input, validateAmpOrbCIInput(parsedPullRequest))
+  assert.deepEqual(queuedItem.input, validateAmpOrbCIQueueInput(parsedPullRequest))
   assert.equal(JSON.stringify(queuedItem).includes('Ignore prior instructions'), false)
   assert.equal(JSON.stringify(queuedItem).includes('QUESTION_BANK_AMP_CI_GITHUB_STATUS_TOKEN'), false)
 
+  const drainedQueueInputs = []
   const drainedInputs = []
   const drained = await drainAmpOrbCIQueue({
     stateDir: pluginState,
+    async resolveJob(input) {
+      drainedQueueInputs.push(input)
+      return { ...input, kind: 'run', testedSha }
+    },
     async runJob(input) {
       drainedInputs.push(input)
       return { outcome: 'reported', receipt: { state: 'reported' } }
     },
   })
-  assert.deepEqual(drainedInputs, [validateAmpOrbCIInput(parsedPullRequest)])
+  assert.deepEqual(drainedQueueInputs, [validateAmpOrbCIQueueInput(parsedPullRequest)])
+  assert.deepEqual(drainedInputs, [validateAmpOrbCIInput(resolvedPullRequest)])
   assert.deepEqual(drained, [{ deliveryId, outcome: 'reported' }])
   assert.deepEqual(readdirSync(queueDir), [], 'successful drain removes the durable item')
+
+  const legacyDelivery = '66666666-6666-4666-8666-666666666666'
+  const legacyQueuePath = enqueueAmpOrbCIJob({
+    ...resolvedPullRequest,
+    testedSha: '9'.repeat(40),
+    deliveryId: legacyDelivery,
+  }, { stateDir: pluginState }).queuePath
+  const legacyResolverInputs = []
+  const legacyRunInputs = []
+  const legacyDrain = await drainAmpOrbCIQueue({
+    stateDir: pluginState,
+    async resolveJob(input) {
+      legacyResolverInputs.push(input)
+      return { ...input, kind: 'run', testedSha }
+    },
+    async runJob(input) {
+      legacyRunInputs.push(input)
+      return { outcome: 'reported', receipt: { state: 'reported' } }
+    },
+  })
+  assert.deepEqual(legacyResolverInputs, [{
+    kind: 'resolve',
+    event: 'pull_request',
+    sha: headSha,
+    baseSha,
+    deliveryId: legacyDelivery,
+    pullRequestNumber: 292,
+  }], 'legacy direct-run PR queue discards its stale payload merge SHA before resolution')
+  assert.deepEqual(legacyRunInputs, [validateAmpOrbCIInput({
+    ...resolvedPullRequest,
+    deliveryId: legacyDelivery,
+  })])
+  assert.deepEqual(legacyDrain, [{ deliveryId: legacyDelivery, outcome: 'reported' }])
+  assert.equal(existsSync(legacyQueuePath), false)
 
   const unresolvedDelivery = '22222222-2222-4222-8222-222222222222'
   const unresolvedSignature = `sha256=${createHmac('sha256', secret)
@@ -609,7 +649,7 @@ try {
     deliveryId: unresolvedDelivery,
   })])
   assert.deepEqual(resolvedRunInputs, [validateAmpOrbCIInput({
-    ...parsedPullRequest,
+    ...resolvedPullRequest,
     deliveryId: unresolvedDelivery,
   })])
   assert.deepEqual(resolvedDrain, [{ deliveryId: unresolvedDelivery, outcome: 'reported' }])
@@ -629,7 +669,10 @@ try {
   const followingRunInputs = []
   const delayedDrain = await drainAmpOrbCIQueue({
     stateDir: pluginState,
-    async resolveJob() { throw new Error('synthetic merge ref unavailable') },
+    async resolveJob(input) {
+      if (input.deliveryId === delayedDelivery) throw new Error('synthetic merge ref unavailable')
+      return { ...input, kind: 'run', testedSha }
+    },
     async runJob(input) {
       followingRunInputs.push(input)
       return { outcome: 'reported', receipt: { state: 'reported' } }
@@ -640,7 +683,7 @@ try {
     { deliveryId: followingDelivery, outcome: 'reported' },
   ])
   assert.deepEqual(followingRunInputs, [validateAmpOrbCIInput({
-    ...parsedPullRequest,
+    ...resolvedPullRequest,
     deliveryId: followingDelivery,
   })])
   assert.equal(
@@ -665,6 +708,7 @@ try {
 
   await drainAmpOrbCIQueue({
     stateDir: pluginState,
+    async resolveJob(input) { return { ...input, kind: 'run', testedSha } },
     async runJob() { return { outcome: 'reported', receipt: { state: 'reported' } } },
   })
   rejectDrainLaunch = true
