@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
 
 import {
   createOrderedResultFlusher,
@@ -94,6 +95,15 @@ assert.deepEqual(
     '// verify-resource: browser-render\nawait makeSyntheticPdfFixture()',
   ),
   { script: 'transitive-render.mjs', exclusive: false, resourceKeys: ['browser-render'] },
+)
+const imageBundleVerifier = 'scripts/verify-universal-nck1-image-source-bundle.mjs'
+assert.deepEqual(
+  verificationSchedulingPolicy(
+    imageBundleVerifier,
+    readFileSync(new URL('./verify-universal-nck1-image-source-bundle.mjs', import.meta.url), 'utf8'),
+  ),
+  { script: imageBundleVerifier, exclusive: false, resourceKeys: ['browser-render'] },
+  'transitive image-bundle OCR fixture stays in the browser/render lane',
 )
 assert.deepEqual(
   verificationSchedulingPolicy('server.mjs', 'server.listen(8787, host)'),

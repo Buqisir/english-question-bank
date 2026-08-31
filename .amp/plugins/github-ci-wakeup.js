@@ -2,7 +2,9 @@ import { spawn } from 'node:child_process'
 import { createHmac, timingSafeEqual } from 'node:crypto'
 import {
   chmodSync,
+  existsSync,
   mkdirSync,
+  readdirSync,
   writeFileSync,
 } from 'node:fs'
 import path from 'node:path'
@@ -234,7 +236,6 @@ export default async function githubCIWakeupPlugin(amp, overrides = {}) {
       await launchDrain()
     },
   })
-  await launchDrain()
 
   amp.registerCommand(
     'github-ci-webhook-url',
@@ -252,4 +253,20 @@ export default async function githubCIWakeupPlugin(amp, overrides = {}) {
       })
     },
   )
+
+  const queueDir = path.join(stateDir, 'queue')
+  let startupRecoveryRequired = false
+  try {
+    startupRecoveryRequired = existsSync(queueDir)
+      && readdirSync(queueDir).some((file) => file.endsWith('.json'))
+  } catch {
+    amp.logger.log('Amp Orb CI startup queue inspection failed; the webhook remains registered.')
+    return
+  }
+  if (!startupRecoveryRequired) return
+  try {
+    await launchDrain()
+  } catch {
+    amp.logger.log('Amp Orb CI startup recovery was deferred; its durable queue remains intact.')
+  }
 }
