@@ -89,6 +89,13 @@ assert.deepEqual(
   { script: 'render.mjs', exclusive: false, resourceKeys: ['browser-render'] },
 )
 assert.deepEqual(
+  verificationSchedulingPolicy(
+    'transitive-render.mjs',
+    '// verify-resource: browser-render\nawait makeSyntheticPdfFixture()',
+  ),
+  { script: 'transitive-render.mjs', exclusive: false, resourceKeys: ['browser-render'] },
+)
+assert.deepEqual(
   verificationSchedulingPolicy('server.mjs', 'server.listen(8787, host)'),
   { script: 'server.mjs', exclusive: false, resourceKeys: ['port:8787'] },
 )
