@@ -56,6 +56,25 @@ unknown after inspection, and state the reason.
 process rule only when it names the failure or independent detection layer it
 uniquely supplies; otherwise keep it outside daily packs.
 
+## Dedicated CI Orb
+
+- The development Orb runs the focused behavioral checks and proportionate
+  local pack above. The final full-suite merge gate runs on the dedicated CI
+  Orb; do not substitute a broad local run for that authority.
+- After the Owner authorizes commit, push, and PR actions, normal GitHub PR
+  webhooks automatically queue the current GitHub test merge. Do not manually
+  start or drain CI, synthesize or retry webhook events, or copy an uncommitted
+  workspace snapshot into the CI Orb.
+- CI must resolve the current `refs/pull/<number>/merge` and verify its ordered
+  base/head parents. `Amp Orb Verify` is the only required status and must be
+  `SUCCESS` before merge. `Amp Orb Verify (fast)` is informational only.
+- The GitHub-hosted Verify workflow is a `workflow_dispatch`-only fallback. Do
+  not trigger it unless the Owner explicitly requests fallback proof, and do
+  not treat hosted `verify` or `e2e` as merge authority.
+- Never dismiss a missing or failed `Amp Orb Verify` as unrelated, bypass it, or
+  merge around it. Diagnose and fix the failure or stop. See
+  `docs/adr/0022-amp-orb-ci-merge-authority.md` for the durable contract.
+
 ## Owner QA
 
 For visible behavior, prepare and smoke-check the exact service, data/login,
