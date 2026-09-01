@@ -59,6 +59,12 @@ assert(
 
 for (const relPath of ['.github/workflows/verify.yml']) {
   const workflow = read(relPath)
+  const triggerBlock = /^on:\n([\s\S]*?)\n\njobs:/mu.exec(workflow)?.[1]?.trim()
+  assert(
+    `${relPath} is manual fallback only`,
+    triggerBlock === 'workflow_dispatch:',
+    triggerBlock || 'trigger block unavailable',
+  )
   assert(`${relPath} installs app dependencies`, workflow.includes('pnpm install --frozen-lockfile'))
   assert(
     `${relPath} installs server dependencies`,
@@ -187,6 +193,8 @@ for (const [changedFile, expectedRisk, expectedPack] of [
   ['server/vocabulary/vocabularyPdfRenderer.mjs', 'shared-renderer-contract', 'paper'],
   ['server/vocabulary/vocabularyStore.mjs', 'auth-persistence-migration', 'security'],
   ['server/vocabulary/vocabularyRoutes.mjs', 'auth-persistence-migration', 'security'],
+  ['.amp/plugins/github-ci-wakeup.js', 'auth-persistence-migration', 'security'],
+  ['scripts/amp-orb-ci.mjs', 'auth-persistence-migration', 'security'],
   ['server/api.mjs', 'unknown-fallback', 'all'],
   ['data/sql/schema.sql', 'auth-persistence-migration', 'security'],
   ['.github/workflows/verify.yml', 'unknown-fallback', 'all'],

@@ -361,6 +361,7 @@ try {
   })
   const indexHtml = readFileSync(path.join(root, 'import-ops/public/index.html'))
   const appJs = readFileSync(path.join(root, 'import-ops/public/app.js'))
+  const clipboardJs = readFileSync(path.join(root, 'import-ops/public/clipboard.js'))
   const styles = readFileSync(path.join(root, 'import-ops/public/styles.css'))
   server = createServer(async (request, response) => {
     const url = new URL(request.url || '/', 'http://127.0.0.1')
@@ -370,6 +371,10 @@ try {
     }
     if (url.pathname === '/ops/app.js') {
       send(response, 200, appJs, 'text/javascript; charset=utf-8')
+      return
+    }
+    if (url.pathname === '/ops/clipboard.js') {
+      send(response, 200, clipboardJs, 'text/javascript; charset=utf-8')
       return
     }
     if (url.pathname === '/ops/styles.css') {

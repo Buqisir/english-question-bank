@@ -242,8 +242,8 @@ async function runPhaseB(browser) {
   const dbPath = path.join(tempRoot, 'question-bank.sqlite')
   const userDataDbPath = path.join(tempRoot, 'user-data.sqlite')
   const paperAssetsDir = path.join(tempRoot, 'paper-assets')
-  const apiPort = 9898
-  const vitePort = 5188
+  const apiPort = Number(process.env.AMP_ORB_CI_API_PORT || 9898)
+  const vitePort = Number(process.env.AMP_ORB_CI_VITE_PORT || 5188)
   const children = []
 
   function startProcess(command, args, options) {

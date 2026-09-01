@@ -220,8 +220,8 @@ async function runPhaseB(browser) {
   const dbPath = path.join(tempRoot, 'question-bank.sqlite')
   const userDataDbPath = path.join(tempRoot, 'user-data.sqlite')
   const paperAssetsDir = path.join(tempRoot, 'paper-assets')
-  const apiPort = 9897
-  const vitePort = 5187
+  const apiPort = Number(process.env.AMP_ORB_CI_API_PORT || 9897)
+  const vitePort = Number(process.env.AMP_ORB_CI_VITE_PORT || 5187)
   const children = []
 
   // detached:true + killing the whole process group in cleanup (`-pid`, see

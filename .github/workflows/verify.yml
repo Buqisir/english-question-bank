@@ -1,22 +1,9 @@
 name: Verify
 
-# paths-ignore: docs-only pushes (STATUS 落账、cut 记录、根级 md) skip the
-# full verify+e2e queue — the jobs take ~1.5min but the runner queue can eat
-# 10min+ per docs commit. A commit mixing docs with any code still runs CI
-# (skip applies only when ALL changed files match). scripts/README.md is
-# deliberately NOT ignored: its verify registration table is enforced by the
-# CI housekeeping guard.
+# Manual rollback/fallback only. Protected-branch authority belongs to the
+# aggregate `Amp Orb Verify` status from the dedicated CI Orb.
 on:
-  pull_request:
-    paths-ignore:
-      - 'docs/**'
-      - '*.md'
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - 'docs/**'
-      - '*.md'
+  workflow_dispatch:
 
 jobs:
   verify:
@@ -53,7 +40,7 @@ jobs:
       - name: Install verification system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install --yes ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript
+          sudo apt-get install --yes ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript fonts-noto-cjk fonts-liberation
           printf '%s\n' \
             '#!/bin/sh' \
             'if [ "${1:-}" = identify ]; then' \

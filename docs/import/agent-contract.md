@@ -78,6 +78,20 @@ complete set仍必须通过正常Materialization、答案覆盖检查和Owner Re
 
 正式生成每一份 staged analysis 时，唯一 writer 调项目插件 `.amp/plugins/nck1-analysis-agent.js` 注册的 `nck1_analyze_group`：模型固定为 `openai/gpt-5.6-sol`、reasoning effort 固定为 `medium`、worker tools 为空，每次调用新建一个 child context。一次只传一个 group 的源材料、该组权威答案、对应输出合同和共享讲解规范；禁止把整卷或另一组材料塞入同一次调用。工具只返回带 model / thread 身份的 envelope，不写工作树；writer 取其中 `analysis`，先跑现有题型 validator，再依次写对应文件。语法填空是唯一的前置规范化例外：须先调用 `stampGrammarFillDerivedFields`，由程序根据权威答案补时态、语态、一致敏感性和答案形式，再交给 validator；禁止让模型填写这些字段。失败时不得静默换模型、续聊旧 child thread 或自动升级 High；任何模型或重试策略调整都另行明确修改并验证。
 
+## Orb 算力边界
+
+自动 source-intake worker 使用私有 Project Orb，并继承专用导题 Amp Project 的默认 Orb
+规格；当前 plugin `createThread` 接口只选择 `executor: 'orb'`，不能逐任务传 `orbSize`。
+扫描/部分文本层 PDF、有序图片页、逐页 raster/OCR evidence、媒体提取和多面渲染验证
+使用默认 `a1.xxlarge` 的高算力 lane；原生 DOCX 和可靠文本层 PDF 属普通 lane。Agent
+开工时记录 `os.availableParallelism()`；16 表示预期 16 核可用。少于 16 只作效率告警，
+不得因此放宽内容门禁、转移已绑定 claim 或重复导入。
+
+可并行的只有互不写同一状态、输出路径唯一的逐页读取/转换/复核工作；并发必须有界并
+给 Agent 与系统工具留余量。Materialization、`verify`、`build`、revision、lease、handoff
+和 promotion 继续由该卷唯一 writer 串行提交。CPU 只加速本地文档处理，不提高 AI
+答案权威，也不替代扫描件逐页视觉复核。
+
 ## 文件夹接口（agent ↔ 导题后台）
 
 根目录：`scripts/import-pipeline/papers/<paperId>/`。后台只读下列探针。

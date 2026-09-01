@@ -11,7 +11,19 @@ step() {
   time "$@"
 }
 
-required_packages=(ffmpeg poppler-utils libreoffice-writer sqlite3)
+required_packages=(
+  ffmpeg
+  fonts-liberation
+  fonts-noto-cjk
+  ghostscript
+  imagemagick
+  libreoffice-writer
+  poppler-utils
+  sqlite3
+  unzip
+  util-linux
+  zip
+)
 missing_packages=()
 for package in "${required_packages[@]}"; do
   if ! dpkg-query -W -f='${Status}' "$package" 2>/dev/null | grep -Fq 'install ok installed'; then
@@ -25,6 +37,25 @@ if ((${#missing_packages[@]})); then
     sudo apt-get install -y "${missing_packages[@]}"
 else
   echo "[orb-setup] system tools already installed"
+fi
+
+if ! command -v magick >/dev/null 2>&1; then
+  echo "[orb-setup] installing ImageMagick 6 compatibility command"
+  sudo tee /usr/local/bin/magick >/dev/null <<'EOF'
+#!/bin/sh
+if [ "${1:-}" = identify ]; then
+  shift
+  exec /usr/bin/identify "$@"
+fi
+exec /usr/bin/convert "$@"
+EOF
+  sudo chmod 755 /usr/local/bin/magick
+fi
+
+image_magick_policy="$(find /etc/ImageMagick-* -name policy.xml -print -quit 2>/dev/null || true)"
+if [[ -n "$image_magick_policy" ]] && grep -Fq 'rights="none" pattern="PDF"' "$image_magick_policy"; then
+  step "enabling verification-only ImageMagick PDF policy" \
+    sudo sed -i 's/rights="none" pattern="PDF"/rights="read|write" pattern="PDF"/' "$image_magick_policy"
 fi
 
 node_home="$HOME/.local/node-24"
@@ -55,6 +86,25 @@ export PATH="$HOME/.local/node-24/bin:$PATH"
 EOF
 fi
 export PATH="$node_home/bin:$PATH"
+
+ci_user="eqb-ci"
+ci_root="/var/tmp/eqb-amp-ci"
+if ! id -u "$ci_user" >/dev/null 2>&1; then
+  step "creating the unprivileged Amp Orb CI user" \
+    sudo useradd --system --user-group --home-dir "$ci_root/home" --shell /usr/sbin/nologin "$ci_user"
+fi
+for directory in \
+  "$ci_root" \
+  "$ci_root/cache" \
+  "$ci_root/cache/corepack" \
+  "$ci_root/cache/ms-playwright" \
+  "$ci_root/cache/npm" \
+  "$ci_root/home" \
+  "$ci_root/inbox" \
+  "$ci_root/runs" \
+  "$ci_root/tmp"; do
+  sudo install -d -o "$ci_user" -g "$ci_user" -m 0700 "$directory"
+done
 
 step "activating pnpm 10.28.1" corepack enable
 step "preparing pnpm 10.28.1" corepack prepare pnpm@10.28.1 --activate

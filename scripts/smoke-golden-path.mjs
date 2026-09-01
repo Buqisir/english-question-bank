@@ -36,8 +36,8 @@ const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-golden-path-'))
 const dbPath = path.join(tempRoot, 'question-bank.sqlite')
 const userDataDbPath = path.join(tempRoot, 'user-data.sqlite')
 const paperAssetsDir = path.join(tempRoot, 'paper-assets')
-const apiPort = 9899
-const vitePort = 5189
+const apiPort = Number(process.env.AMP_ORB_CI_API_PORT || 9899)
+const vitePort = Number(process.env.AMP_ORB_CI_VITE_PORT || 5189)
 const children = []
 
 const OWNER_USERNAME = 'e2e-owner'
