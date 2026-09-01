@@ -188,6 +188,7 @@ function validClAnalysis(input = clFixtureInput()) {
       [group.groupId]: {
         overview: '一个男孩专心读书、不应母亲的记叙文。',
         affectiveArc: '平静专注，情感平稳。',
+        similaritySummary: '男孩专心读书没有回应母亲，事情在误会中继续发展。',
       },
     },
     blanks,
@@ -212,6 +213,18 @@ async function assertAnalysisValidation() {
     requestId: 'i8-verify',
   })
   assert('valid cloze analysis passes', result.analysis.schemaVersion === 'cloze-analysis-v1' && result.requestId === 'i8-verify')
+
+  await assertRejects('multi-line cloze similaritySummary blocks', () => {
+    const bad = validClAnalysis(input)
+    bad.groups[input.group.groupId].similaritySummary = '先发生一件事。\n后来又发生转变。'
+    return analyzeClozeImportCandidate(input, { providerCallers: { deepseek: stubProvider(bad) } })
+  }, /similaritySummary 必须是一句话/)
+
+  await assertRejects('cloze blankId must remain source-authored', () => {
+    const bad = validClAnalysis(input)
+    bad.blanks[input.group.questions[0].id].blankId = 'blank-invented'
+    return analyzeClozeImportCandidate(input, { providerCallers: { deepseek: stubProvider(bad) } })
+  }, /blankId does not match/)
 
   // --- meta provenance is server-stamped, not AI-supplied ---
   const bogusMeta = validClAnalysis(input)

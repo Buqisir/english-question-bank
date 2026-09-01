@@ -188,6 +188,48 @@ A constraint has this exact shape:
 }
 ```
 
+The arrays in this section do **not** all use the constraint shape. Use these
+item shapes exactly:
+
+| field | exact item shape |
+| --- | --- |
+| `hardConstraints`, `forbiddenContradictions`, `requiredMoves`, `requiredExitState`, `closureRequirements` | constraint object: `{ "id", "statement", "evidence" }` |
+| `softAffordances`, `supportedOptions` | grounded statement: `{ "statement", "evidence" }`; never add `id` |
+| `openChoices` | non-empty string only; never use an object |
+
+Concrete item examples (the later required shape shows where each field lives):
+
+```json
+"softAffordances": [
+  {
+    "statement": "A source-supported action may be developed without making it mandatory.",
+    "evidence": [
+      { "source": "material", "excerpt": "short exact source words" }
+    ]
+  }
+]
+```
+
+```json
+"openChoices": [
+  "Choose the exact dialogue and practical action sequence."
+]
+```
+
+```json
+"supportedOptions": [
+  {
+    "statement": "A supported intermediate action may connect the two starters.",
+    "evidence": [
+      { "source": "paragraph2Starter", "excerpt": "short exact starter words" }
+    ]
+  }
+]
+```
+
+Do not copy a constraint `id` into a grounded statement. Do not turn an open
+author choice into a grounded object merely to attach evidence.
+
 Required shape:
 
 ```json
@@ -342,7 +384,14 @@ Required shape:
 ```json
 {
   "selectedRoute": "...",
-  "routeRationale": [],
+  "routeRationale": [
+    {
+      "statement": "This route follows the source problem and reaches the state required by paragraph 2.",
+      "evidence": [
+        { "source": "paragraph2Starter", "excerpt": "short exact starter words" }
+      ]
+    }
+  ],
   "paragraphs": [
     {
       "paragraphIndex": 1,
@@ -368,6 +417,9 @@ Required shape:
   "qualityRisks": []
 }
 ```
+
+Every `routeRationale` item is a grounded statement with exactly `statement`
+and `evidence`. It is not a string and it must not contain `id`.
 
 Select one stable route for later model-answer generation, but preserve other
 valid routes when they are clear. Official examples and source-supported options
@@ -396,4 +448,7 @@ Before returning JSON, verify internally:
 7. The language plan serves narrative functions rather than surface counts.
 8. Both paragraphs change state and the ending grows from the source.
 9. No model answer, highlight list, score prediction, or reasoning trace is present.
-10. The first output character is `{` and the last is `}`.
+10. `id` appears only in constraint arrays; `softAffordances`,
+    `supportedOptions`, and `routeRationale` contain grounded statements, while
+    `openChoices` contains strings.
+11. The first output character is `{` and the last is `}`.

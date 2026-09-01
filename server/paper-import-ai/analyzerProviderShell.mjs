@@ -58,6 +58,144 @@ export function rewriteApiPrompt(raw) {
   )
 }
 
+export function assertFullTranslationZh(groupAnalysis, group, { requireBlankMarkers = false } = {}) {
+  const translation = typeof groupAnalysis?.fullTranslationZh === 'string'
+    ? groupAnalysis.fullTranslationZh.trim()
+    : ''
+  if (!translation) {
+    throw new Error('AI JSON groups.fullTranslationZh 不能为空。')
+  }
+  if (!requireBlankMarkers) return
+  let previousMarkerIndex = -1
+  for (const question of group.questions || []) {
+    const blankNo = Number(question?.stem)
+    if (!Number.isInteger(blankNo)) {
+      throw new Error(`${question?.id || 'unknown'}: 无法确定全文译文中的空号。`)
+    }
+    const marker = `[${blankNo}]`
+    const occurrences = translation.split(marker).length - 1
+    if (occurrences !== 1) {
+      throw new Error(`AI JSON groups.fullTranslationZh 必须且只能包含一次 ${marker}。`)
+    }
+    const markerIndex = translation.indexOf(marker)
+    if (markerIndex <= previousMarkerIndex) {
+      throw new Error(`AI JSON groups.fullTranslationZh 中的 ${marker} 必须按题面空号顺序出现。`)
+    }
+    previousMarkerIndex = markerIndex
+  }
+}
+
+function selectedSentenceAnswer(question, group) {
+  const answer = String(question?.answerKey || '').trim()
+  if (!answer) return ''
+  if (Array.isArray(question?.options)) {
+    const option = question.options.find(({ label }) => label === answer)
+    if (option?.text) return String(option.text)
+  } else if (question?.options && typeof question.options === 'object') {
+    if (question.options[answer]) return String(question.options[answer])
+  }
+  const bankOption = (group.optionBank || []).find(({ label }) => label === answer)
+  return String(bankOption?.text || answer)
+}
+
+function answerCompletedSentence(sourceText, group) {
+  const questionsByNumber = new Map((group.questions || []).map((question) => [
+    Number(question.stem),
+    question,
+  ]))
+  return sourceText.replace(/__\s*(\d{1,3})\s*__(\s*\(([^)]*)\))?/gu, (
+    marker,
+    rawNumber,
+    possibleHint,
+    possibleHintText,
+    offset,
+  ) => {
+    const blankNo = Number(rawNumber)
+    const question = questionsByNumber.get(blankNo)
+    let answer = selectedSentenceAnswer(question, group)
+    if (!question || !answer) {
+      throw new Error(`AI JSON selectedLongSentences 无法按权威答案补全空号 ${blankNo}。`)
+    }
+    const prompt = String(question.prompt || '').trim()
+    const consumedHint = prompt && String(possibleHintText || '').trim() === prompt
+    const suffix = consumedHint ? '' : String(possibleHint || '')
+    const previousCharacter = sourceText[offset - 1] || ''
+    const nextCharacter = sourceText[offset + marker.length] || ''
+    if (/[\p{L}\p{N}]$/u.test(previousCharacter) && /^[\p{L}\p{N}]/u.test(answer)) answer = ` ${answer}`
+    if (/[\p{L}\p{N}]$/u.test(answer) && /^[\p{L}\p{N}]/u.test(nextCharacter)) answer = `${answer} `
+    return `${answer}${suffix}`
+  })
+}
+
+export function assertSelectedLongSentences(groupAnalysis, group, { required = false } = {}) {
+  const sentences = groupAnalysis?.selectedLongSentences
+  if (sentences === undefined && !required) return
+  if (!Array.isArray(sentences) || sentences.length < 1 || sentences.length > 2) {
+    throw new Error('AI JSON groups.selectedLongSentences 必须包含 1—2 个长难句。')
+  }
+
+  const paragraphsById = new Map((group.paragraphs || []).map((paragraph) => [
+    paragraph.id,
+    paragraph.text,
+  ]))
+  const questionIds = new Set((group.questions || []).map(({ id }) => id))
+  for (const [index, sentence] of sentences.entries()) {
+    const label = `selectedLongSentences[${index}]`
+    if (!sentence || typeof sentence !== 'object' || Array.isArray(sentence)) {
+      throw new Error(`AI JSON ${label} 必须是对象。`)
+    }
+    const paragraphId = String(sentence.paragraphId || '').trim()
+    const sourceText = String(sentence.sourceText || '').trim()
+    const displayText = String(sentence.displayText || '').trim()
+    const translationZh = String(sentence.translationZh || '').trim()
+    const analysisZh = String(sentence.analysisZh || '').trim()
+    const paragraphText = paragraphsById.get(paragraphId)
+    if (!paragraphText) throw new Error(`AI JSON ${label}.paragraphId 不属于当前题组。`)
+    if (!sourceText || !paragraphText.includes(sourceText)) {
+      throw new Error(`AI JSON ${label}.sourceText 必须精确匹配所在原文段落。`)
+    }
+    if (!displayText || displayText !== answerCompletedSentence(sourceText, group)) {
+      throw new Error(`AI JSON ${label}.displayText 必须是按权威答案补全后的 sourceText。`)
+    }
+    if (!translationZh || !analysisZh) {
+      throw new Error(`AI JSON ${label} 必须包含 translationZh 和 analysisZh。`)
+    }
+
+    const relatedQuestionIds = sentence.relatedQuestionIds
+    if (
+      !Array.isArray(relatedQuestionIds)
+      || relatedQuestionIds.length < 1
+      || new Set(relatedQuestionIds).size !== relatedQuestionIds.length
+      || relatedQuestionIds.some((questionId) => !questionIds.has(questionId))
+    ) {
+      throw new Error(`AI JSON ${label}.relatedQuestionIds 必须引用当前题组内的不重复题目。`)
+    }
+
+    const underlineTexts = sentence.underlineTexts
+    if (
+      !Array.isArray(underlineTexts)
+      || underlineTexts.length < 1
+      || underlineTexts.length > 3
+      || new Set(underlineTexts).size !== underlineTexts.length
+    ) {
+      throw new Error(`AI JSON ${label}.underlineTexts 必须包含 1—3 个不重复片段。`)
+    }
+    const spans = underlineTexts.map((rawText) => {
+      const text = String(rawText || '').trim()
+      const start = displayText.indexOf(text)
+      if (!text || start < 0 || start !== displayText.lastIndexOf(text)) {
+        throw new Error(`AI JSON ${label}.underlineTexts 必须在 displayText 中唯一精确定位。`)
+      }
+      return { start, end: start + text.length }
+    }).sort((left, right) => left.start - right.start)
+    for (let spanIndex = 1; spanIndex < spans.length; spanIndex += 1) {
+      if (spans[spanIndex].start < spans[spanIndex - 1].end) {
+        throw new Error(`AI JSON ${label}.underlineTexts 不能互相重叠。`)
+      }
+    }
+  }
+}
+
 function normalizeProviderId(providerId) {
   const raw = String(providerId || '').trim().toLowerCase()
   if (raw === 'gpt-5.5' || raw === 'openai' || raw === 'chatgpt') return 'gpt-5.5'

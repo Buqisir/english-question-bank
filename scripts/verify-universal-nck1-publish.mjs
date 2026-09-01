@@ -178,6 +178,19 @@ function continuationAnalysis() {
   }
 }
 
+function selectedLongSentence(group) {
+  const sourceText = `${group.slotId} source text`
+  return [{
+    paragraphId: `block:${group.slotId.replaceAll('.', '-').replaceAll(' ', '-')}`,
+    sourceText,
+    displayText: sourceText,
+    relatedQuestionIds: [group.questions[0].questionId],
+    translationZh: '用于验证的长难句译文。',
+    analysisZh: '先找句子主干，再把修饰成分接回主干。',
+    underlineTexts: [`${group.slotId} source`],
+  }]
+}
+
 function writeStagedAnalyses(reviewRoot, materialization) {
   const bySlot = new Map(materialization.groups.map((group) => [group.slotId, group]))
   for (const letter of ['a', 'b', 'c', 'd']) {
@@ -187,7 +200,13 @@ function writeStagedAnalyses(reviewRoot, materialization) {
       paperId: materialization.paperId,
       sourceAssetVersion: 1,
       targetGroups: [group.groupId],
-      groups: { [group.groupId]: { summary: `Reading ${letter.toUpperCase()} analysis` } },
+      groups: {
+        [group.groupId]: {
+          summary: `Reading ${letter.toUpperCase()} analysis`,
+          fullTranslationZh: `阅读 ${letter.toUpperCase()} 全文译文。`,
+          selectedLongSentences: selectedLongSentence(group),
+        },
+      },
       questions: Object.fromEntries(group.questions.map((question) => [question.questionId, {
         skill: { primary: 'detail' },
         questionFocus: 'Locate the decisive detail.',
@@ -197,6 +216,9 @@ function writeStagedAnalyses(reviewRoot, materialization) {
           optionTranslationZh: `选项 ${option.label}`,
           status: option.label === 'A' ? 'correct' : 'wrong',
           evidence: [],
+          ...(option.label === 'A'
+            ? {}
+            : { trap: { explanation: `选项 ${option.label} 与原文关键信息不符。` } }),
         })),
         locationParaphrases: [],
       }])),
@@ -209,13 +231,20 @@ function writeStagedAnalyses(reviewRoot, materialization) {
     paperId: materialization.paperId,
     sourceAssetVersion: 1,
     targetGroups: [seven.groupId],
-    groups: { [seven.groupId]: { overview: 'Seven choices analysis' } },
+    groups: {
+      [seven.groupId]: {
+        overview: 'Seven choices analysis',
+        fullTranslationZh: seven.questions
+          .map((question) => `[${question.canonicalNumber}] 七选五译文。`)
+          .join(''),
+        selectedLongSentences: selectedLongSentence(seven),
+      },
+    },
     questions: Object.fromEntries(seven.questions.map((question) => [question.questionId, {
       blankId: question.blankId,
-      blankNo: question.canonicalNumber,
-      positionFacet: 'middle',
-      roleFacet: 'support',
-      primaryMechanismFacet: 'cohesion',
+      positionFacet: 'seven-choices.position.paragraph-middle',
+      roleFacet: 'seven-choices.role.cohesion',
+      primaryMechanismFacet: 'seven-choices.cohesion.grammatical.referential-cohesion',
       topicClues: ['topic'],
       contextEvidence: { beforeQuote: 'seven-choices source text' },
       mechanismSignals: [
@@ -233,7 +262,15 @@ function writeStagedAnalyses(reviewRoot, materialization) {
     paperId: materialization.paperId,
     sourceAssetVersion: 1,
     targetGroups: [cloze.groupId],
-    groups: { [cloze.groupId]: { overview: 'Cloze analysis' } },
+    groups: {
+      [cloze.groupId]: {
+        overview: 'Cloze analysis',
+        fullTranslationZh: cloze.questions
+          .map((question) => `[${question.canonicalNumber}] 完形译文。`)
+          .join(''),
+        selectedLongSentences: selectedLongSentence(cloze),
+      },
+    },
     blanks: Object.fromEntries(cloze.questions.map((question) => [question.questionId, {
       blankId: question.blankId,
       blankNo: question.canonicalNumber,
@@ -253,21 +290,34 @@ function writeStagedAnalyses(reviewRoot, materialization) {
   })
 
   const grammar = bySlot.get('grammar-fill')
+  let hasFiniteVerbFixture = false
   writeJson(path.join(reviewRoot, 'analysis-grammar.json'), {
     schemaVersion: 'grammar-fill-analysis-v2',
     paperId: materialization.paperId,
     sourceAssetVersion: 1,
     targetGroups: [grammar.groupId],
-    groups: { [grammar.groupId]: { overview: 'Grammar fill analysis' } },
+    groups: {
+      [grammar.groupId]: {
+        overview: 'Grammar fill analysis',
+        fullTranslationZh: grammar.questions
+          .map((question) => `[${question.canonicalNumber}] 语法填空译文。`)
+          .join(''),
+        selectedLongSentences: selectedLongSentence(grammar),
+      },
+    },
     blanks: Object.fromEntries(grammar.questions.map((question) => {
       const given = Boolean(question.prompt)
+      const useFiniteVerb = given && !hasFiniteVerbFixture
+      if (useFiniteVerb) hasFiniteVerbFixture = true
       return [question.questionId, {
         blankId: question.blankId,
         blankNo: question.canonicalNumber,
         blankType: given ? 'given' : 'no-hint',
         hint: given ? question.prompt : null,
         facetKey: given
-          ? 'grammar-fill.given.conversion.verb-to-noun'
+          ? useFiniteVerb
+            ? 'grammar-fill.given.verb.finite'
+            : 'grammar-fill.given.conversion.verb-to-noun'
           : 'grammar-fill.no-hint.article',
         role: null,
         path: null,
@@ -1138,6 +1188,13 @@ try {
   for (const [questionId, item] of Object.entries(
     happy.projection.analysisSidecars['grammar-fill-analysis-v1.json'].blanks,
   )) assert.equal(item.answer, authoritativeAnswers[questionId].answer)
+  const projectedFiniteVerb = Object.values(
+    happy.projection.analysisSidecars['grammar-fill-analysis-v1.json'].blanks,
+  ).find((item) => item.facetKey === 'grammar-fill.given.verb.finite')
+  assert.ok(projectedFiniteVerb, 'universal fixture must include one finite verb blank')
+  assert.notEqual(projectedFiniteVerb.tense, undefined)
+  assert.notEqual(projectedFiniteVerb.voice, undefined)
+  assert.notEqual(projectedFiniteVerb.agreementSensitive, undefined)
   for (const fileName of Object.keys(happy.projection.analysisSidecars)) {
     const response = await requestReviewAsset(
       happy.projection,

@@ -91,15 +91,24 @@ and exactly where the connection breaks. Do not fill it for symmetry.
   "targetGroups": ["group-..."],
   "meta": {
     "generatedBy": "external-ai",
-    "model": "...",
     "promptVersion": "seven-choices-analysis-v1",
-    "reviewStatus": "reviewed",
-    "reviewedBy": "...",
-    "reviewedAt": "..."
+    "reviewStatus": "reviewed"
   },
   "groups": {
     "group-...": {
       "overview": "Chinese overview of the passage topic and 七选五 structure",
+      "fullTranslationZh": "Answer-completed full Chinese passage translation with [36]...[40] markers",
+      "selectedLongSentences": [
+        {
+          "paragraphId": "para-...",
+          "sourceText": "Exact source sentence, retaining any __36__ marker",
+          "displayText": "The same sentence with the authoritative option inserted",
+          "relatedQuestionIds": ["q-...-036"],
+          "translationZh": "Natural Chinese translation",
+          "analysisZh": "Chinese explanation of the main trunk, modifiers, and relations",
+          "underlineTexts": ["1–3 exact, unique substrings of displayText"]
+        }
+      ],
       "discourseStructure": {
         "summary": "Chinese summary of the discourse flow",
         "units": [
@@ -119,6 +128,11 @@ and exactly where the connection breaks. Do not fill it for symmetry.
 }
 ```
 
+Do NOT fill `meta.model`, `meta.reviewedBy`, or `meta.reviewedAt`. The runtime
+stamps the actual model identity; Owner Review records approval provenance
+later. `reviewStatus` is a compatibility field in this analysis contract, not
+Owner Review approval.
+
 ## Group Analysis
 
 Each `groups[groupId]` item is light analysis, not copied source data.
@@ -126,8 +140,27 @@ Each `groups[groupId]` item is light analysis, not copied source data.
 Include:
 
 - `overview`
+- `fullTranslationZh`
+- `selectedLongSentences`
 - `discourseStructure.summary`
 - `discourseStructure.units[]`
+
+`fullTranslationZh` is student-visible. Translate the whole passage in source
+order and complete all five gaps with the authoritative answer sentences. Put
+the exact ASCII marker `[36]`, `[37]`, `[38]`, `[39]`, or `[40]` immediately
+before the corresponding translated inserted sentence; each marker must appear
+exactly once. Preserve paragraph breaks. Do not add option letters, analysis,
+vocabulary notes, or source text that is not present in this group.
+
+`selectedLongSentences` contains 1–2 sentences with real teaching value. Prefer
+a difficult sentence that carries the passage's central meaning or materially
+supports one of the five gaps; do not select it merely for length. `paragraphId`
+and `sourceText` must locate the stored source exactly, retaining any `__36__`
+marker. `displayText` must be the deterministic answer-completed form.
+`relatedQuestionIds` must cite questions in this group. In `analysisZh`, identify
+the main trunk first and then explain how clauses, non-finite phrases, or logical
+relations attach. `underlineTexts` must contain 1–3 unique, non-overlapping exact
+substrings of `displayText`; underline only the decisive structure.
 
 Do NOT copy paper-asset fields into `groups[groupId]`. In particular, do not
 include `groupId`, `groupType`, `questionIds`, `blankIds`, `optionBank`, or
@@ -192,6 +225,12 @@ exact passage text but must exclude the blank marker number itself, such as
 `36`, `37`, `38`, `39`, or `40`.
 
 ## Facet Values
+
+These three existing fields are also the complete small-question similarity
+profile. Do not add a second `similarityProfile` object: matching uses the exact
+per-question `blankId` together with `positionFacet`, `roleFacet`, and
+`primaryMechanismFacet`. `topicClues` and the evidence fields explain the match
+but do not replace those controlled facets.
 
 Use ONLY these position facets:
 
@@ -280,6 +319,10 @@ Each item must include:
 - `option` signal text must appear in the correct option.
 - `context-before` / `context-after` signal text must appear in the passage or
   heading.
+- Copy it character for character. Do not change tense, person, number,
+  inflection, spelling, punctuation, spacing, or capitalization to make the
+  signal read more smoothly. For example, source `serves` cannot become
+  `serve`, and source `make` cannot become `makes`.
 - Prefer short chunks, usually 1-8 English words.
 - Logical connectors and reference words may be a single word.
 - Do not put a whole sentence or paragraph in `signalText`; use `targetText`
@@ -400,6 +443,24 @@ quality. The current surface does not display distractors.
 `teachingNote` should be one plain Chinese sentence. It should state one
 transferable solving move after the concrete fit is already clear, not repeat
 the whole `fitSummary` with an internal label.
+
+## Final Literal-Substring Check
+
+Before returning JSON, silently run this check on every
+`mechanismSignals[]` item:
+
+1. For `signalSide: "option"`, search `signalText` in the authoritative correct
+   option text with a literal substring search.
+2. For `context-before` or `context-after`, search `signalText` in the supplied
+   passage or heading with a literal substring search.
+3. If the literal search fails, do not repair the source or explain the
+   intended word family. Replace `signalText` with a shorter character-for-
+   character substring that actually exists on that side.
+4. Repeat the same literal check for `contextEvidence.beforeQuote` and
+   `contextEvidence.afterQuote` against the passage.
+
+Meaning-equivalent, lemma-equivalent, differently inflected, or normalized text
+still fails this check. Do not return until every literal search succeeds.
 
 ## Strictly Forbidden
 

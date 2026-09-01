@@ -104,7 +104,20 @@ added only after the concrete explanation, when it gives a reusable name.
   "groups": {
     "group-...cloze": {
       "overview": "中文：文章主旨 + 文体（记叙文 / 夹叙夹议）",
-      "affectiveArc": "中文：用人物处境与关键变化概括情感主线或故事走向"
+      "fullTranslationZh": "填入正答后的全文中文翻译，每空保留 [41]...[55] 标记",
+      "affectiveArc": "中文：用人物处境与关键变化概括情感主线或故事走向",
+      "similaritySummary": "中文一句：谁在什么处境中做了什么，事情怎样发展或发生转变",
+      "selectedLongSentences": [
+        {
+          "paragraphId": "para-...",
+          "sourceText": "保留 __44__ 等空标的原文精确片段",
+          "displayText": "按权威答案补全空格后的同一句",
+          "relatedQuestionIds": ["q-...-044", "q-...-045"],
+          "translationZh": "自然中文翻译",
+          "analysisZh": "先找主干，再说明修饰和逻辑关系",
+          "underlineTexts": ["displayText 中 1—3 个唯一精确片段"]
+        }
+      ]
     }
   },
   "blanks": {
@@ -164,7 +177,28 @@ Every `blanks[questionId]` MUST include:
 `groups[groupId]` MUST include:
 
 - `overview` — required; Chinese: main topic + text type
+- `fullTranslationZh` — required for new NCK1 generation; translate the complete
+  answer-filled passage into natural Chinese in source order. Immediately before
+  each translated correct word or phrase, keep its exact ASCII blank marker
+  (`[41]` ... `[55]`, or the source paper's actual blank numbers), exactly once.
+  Preserve paragraph breaks; do not add analysis or vocabulary notes.
 - `affectiveArc` — required; 1–2 sentences; Chinese: emotional arc or story direction
+- `similaritySummary` — required for new generation; exactly one compact Chinese
+  sentence that says both what happens and how the situation develops or turns.
+  This is the stable text later embedded for whole-passage similarity. Do not
+  write a label such as “温暖的成长故事”, list the fifteen answers, or imitate
+  the model answer. The Embedding vector itself is generated and versioned by
+  the indexer, never by this analysis response.
+- `selectedLongSentences` — required; 1–2 sentences with real teaching value.
+  Prefer a difficult sentence that carries the story's key meaning or connects
+  several blanks; do not select it merely for length. `paragraphId` and
+  `sourceText` must locate the stored source exactly and retain its `__44__`-style
+  markers. `displayText` must be the deterministic form completed with the
+  authoritative option texts. `relatedQuestionIds` must belong to this group.
+  `analysisZh` first restores the main trunk, then attaches modifiers and logical
+  relations instead of listing grammar labels. `underlineTexts` contains 1–3
+  unique, non-overlapping exact substrings of `displayText`; underline only the
+  decisive structure.
 
 ## Evidence Rules
 

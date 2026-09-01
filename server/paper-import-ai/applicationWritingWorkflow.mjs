@@ -1,9 +1,16 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { readTeachingAnalysisPrompt } from './analyzerProviderShell.mjs'
+import {
+  readPromptFile,
+  readTeachingAnalysisPrompt,
+} from './analyzerProviderShell.mjs'
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const promptPath = path.join(repoRoot, 'prompts/application-writing-model-answer-v3.md')
+const stagedAnalysisContractPath = path.join(
+  repoRoot,
+  'prompts/application-writing-staged-analysis-v1.md',
+)
 const SPEC_CONTRADICTS = 'SPEC CONTRADICTS: cannot reconstruct complete application task'
 const APPLICATION_CJK = /[　-〿㐀-䶿一-鿿豈-﫿＀-￯]/
 const APPLICATION_SALUTATION = /^(dear|to|hi|hello)\b/i
@@ -155,6 +162,14 @@ export function buildApplicationModelAnswerMessages(writingTask, groupPassage) {
   const prompt = readTeachingAnalysisPrompt(promptPath)
   const taskText = buildCompleteApplicationTaskText(writingTask, groupPassage)
   return [{ role: 'user', content: `${prompt}\n\n${taskText}` }]
+}
+
+export function buildApplicationStagedAnalysisContract() {
+  return [
+    readPromptFile(promptPath).trimEnd(),
+    '',
+    readPromptFile(stagedAnalysisContractPath).trim(),
+  ].join('\n')
 }
 
 function wordCount(text) {

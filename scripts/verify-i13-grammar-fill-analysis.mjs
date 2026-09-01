@@ -21,7 +21,12 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { buildSupportedMarkerSequence } from './paper-normalization-test-helpers.mjs'
-import { analyzeGrammarFillImportCandidate, buildGrammarFillAnalysisMessages, validateGrammarFillShape } from '../server/paper-import-ai/analyzeGrammarFill.mjs'
+import {
+  analyzeGrammarFillImportCandidate,
+  buildGrammarFillAnalysisMessages,
+  stampGrammarFillDerivedFields,
+  validateGrammarFillShape,
+} from '../server/paper-import-ai/analyzeGrammarFill.mjs'
 import { buildPaperImportAiPackageFiles } from '../server/paper-import-ai/packageBuilder.mjs'
 import { validatePaperImportPackage, PAPER_IMPORT_SCHEMA_VERSIONS } from '../server/paper-import/validator.mjs'
 import { writePaperImportVersion, swapPaperImportLatest } from '../server/paper-import/storage.mjs'
@@ -112,6 +117,7 @@ function assertPromptContract() {
   // Student-facing reasoning restores the local sentence before naming grammar.
   assert('prompt requires the shortest useful sentence skeleton', prompt.includes('restore the shortest useful skeleton around the gap'))
   assert('prompt explains slot job before answer form', prompt.includes('state what job the gap performs in that skeleton') && prompt.includes('derive the required word or form'))
+  assert('prompt requires controlled similarityProfile', prompt.includes('Controlled `similarityProfile`') && prompt.includes('similarityForm'))
 }
 
 // ============================================================
@@ -167,6 +173,24 @@ function assertRegistryContract() {
   for (const parent of PARENT_KEYS) {
     assert(`parent node "${parent}" NOT in registry`, !registry.some((f) => f.facet_key === parent))
   }
+
+  const similarityRegistry = JSON.parse(readRepoFile('server/paper-import-ai/grammar-fill-similarity-v1.json'))
+  assert('similarity registry has exactly 22 facet entries', similarityRegistry.length === 22)
+  assert(
+    'similarity registry covers the same 22 facet keys',
+    JSON.stringify(similarityRegistry.map((entry) => entry.facet_key).sort())
+      === JSON.stringify(EXPECTED_LEAVES.sort()),
+  )
+  assert(
+    'every similarity registry entry has controlled routes and features',
+    similarityRegistry.every((entry) => (
+      Array.isArray(entry.routes)
+      && entry.routes.length > 0
+      && new Set(entry.routes).size === entry.routes.length
+      && Array.isArray(entry.features)
+      && new Set(entry.features).size === entry.features.length
+    )),
+  )
 }
 
 // ============================================================
@@ -281,6 +305,32 @@ async function assertAnalysisValidation() {
     requestId: 'i13-verify',
   })
   assert('valid grammar-fill analysis passes', result.analysis.schemaVersion === 'grammar-fill-analysis-v2' && result.requestId === 'i13-verify')
+  assert(
+    'finite verb axes are server-stamped from the authoritative answer form',
+    result.analysis.blanks['q-i13-gf-056'].tense === 'past'
+      && result.analysis.blanks['q-i13-gf-056'].voice === 'active'
+      && result.analysis.blanks['q-i13-gf-056'].agreementSensitive === false,
+  )
+
+  const derivedFormFixture = {
+    blanks: Object.fromEntries([
+      ['to-do', 'to learn'],
+      ['to-be-done', 'to be chosen'],
+      ['to-have-done', 'to have finished'],
+      ['doing', 'learning'],
+      ['being-done', 'being chosen'],
+      ['having-done', 'having finished'],
+      ['done', 'chosen'],
+    ].map(([key, answer]) => [key, {
+      facetKey: 'grammar-fill.given.verb.non-finite',
+      answer,
+    }])),
+  }
+  stampGrammarFillDerivedFields(derivedFormFixture)
+  assert(
+    'non-finite similarity forms are server-stamped at their settled granularity',
+    Object.entries(derivedFormFixture.blanks).every(([expected, blank]) => blank.similarityForm === expected),
+  )
 
   // --- meta is server-stamped ---
   const bogusMeta = validGfAnalysis(input)
@@ -291,6 +341,48 @@ async function assertAnalysisValidation() {
   assert('meta.model is server-stamped', stamped.analysis.meta.model === 'stub')
   assert('meta.reviewedBy is cleared', stamped.analysis.meta.reviewedBy === '')
   assert('meta.reviewedAt is real date', /^\d{4}-\d{2}-\d{2}$/.test(stamped.analysis.meta.reviewedAt) && stamped.analysis.meta.reviewedAt !== '2099-01-01')
+
+  // --- Similarity profile is optional for legacy analyses, strict when present ---
+  {
+    const profiled = validGfAnalysis(input)
+    profiled.blanks['q-i13-gf-056'].similarityProfile = {
+      route: 'past-explicit-time',
+      features: [],
+    }
+    const ok = await analyzeGrammarFillImportCandidate(input, {
+      providerCallers: { deepseek: stubProvider(profiled) },
+    })
+    assert('controlled finite similarityProfile passes', ok.analysis.blanks['q-i13-gf-056'].similarityProfile.route === 'past-explicit-time')
+  }
+  {
+    const profiled = validGfAnalysis(input)
+    profiled.blanks['q-i13-gf-056'].facetKey = 'grammar-fill.given.conversion.noun-to-verb'
+    profiled.blanks['q-i13-gf-056'].similarityProfile = {
+      route: 'finite-result',
+      features: ['past-explicit-time'],
+    }
+    const ok = await analyzeGrammarFillImportCandidate(input, {
+      providerCallers: { deepseek: stubProvider(profiled) },
+    })
+    assert(
+      'noun-to-verb keeps the inherited finite judgment route and server-stamped axes',
+      ok.analysis.blanks['q-i13-gf-056'].tense === 'past'
+        && ok.analysis.blanks['q-i13-gf-056'].similarityProfile.features[0] === 'past-explicit-time',
+    )
+  }
+  await assertRejects('similarityProfile route must match facet and stamped tense', () => {
+    const bad = validGfAnalysis(input)
+    bad.blanks['q-i13-gf-056'].similarityProfile = {
+      route: 'present-stable-description',
+      features: [],
+    }
+    return analyzeGrammarFillImportCandidate(input, { providerCallers: { deepseek: stubProvider(bad) } })
+  }, /similarityProfile\.route/)
+  await assertRejects('grammar hint must remain source-authored', () => {
+    const bad = validGfAnalysis(input)
+    bad.blanks['q-i13-gf-056'].hint = 'invented'
+    return analyzeGrammarFillImportCandidate(input, { providerCallers: { deepseek: stubProvider(bad) } })
+  }, /hint does not match/)
 
   // --- Wrong schemaVersion ---
   await assertRejects('wrong schemaVersion blocks', () => {

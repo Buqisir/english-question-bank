@@ -1,10 +1,49 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { createAnalyzerProviderShell, readTeachingAnalysisPrompt } from './analyzerProviderShell.mjs'
+import {
+  assertFullTranslationZh,
+  assertSelectedLongSentences,
+  createAnalyzerProviderShell,
+  readTeachingAnalysisPrompt,
+} from './analyzerProviderShell.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '../..')
 const promptPath = path.join(rootDir, 'prompts/reading-choice-analysis-v1.md')
+
+const READING_SIMILARITY_SUBTYPES = new Map([
+  ['detail', new Set(['general-detail', 'behavior-reason', 'calculation', 'comparison-integration', 'situation-match'])],
+  ['main-idea', new Set(['paragraph-main-idea', 'passage-main-idea', 'best-title'])],
+  ['inference', new Set(['detail-inference', 'attitude', 'writing-purpose', 'character-trait', 'source'])],
+  ['word-meaning', new Set(['word', 'phrase', 'sentence'])],
+  ['reference', new Set(['reference'])],
+  ['writing-method', new Set(['writing-method'])],
+])
+
+const READING_TECHNIQUES = new Set([
+  'example',
+  'comparison',
+  'quotation',
+  'statistics',
+  'definition',
+  'topic-introduction',
+  'viewpoint-support',
+])
+
+const LEGACY_SKILL_BY_SIMILARITY = {
+  detail: 'detail',
+  'paragraph-main-idea': 'mainIdea',
+  'passage-main-idea': 'mainIdea',
+  'best-title': 'title',
+  'detail-inference': 'inference',
+  attitude: 'attitude',
+  'writing-purpose': 'authorPurpose',
+  'character-trait': 'inference',
+  source: 'inference',
+  'word-meaning': 'wordMeaning',
+  reference: 'wordMeaning',
+  'writing-method': 'structure',
+}
 
 function optionalString(value) {
   return typeof value === 'string' ? value.trim() : ''
@@ -12,6 +51,43 @@ function optionalString(value) {
 
 function readPrompt() {
   return readTeachingAnalysisPrompt(promptPath)
+}
+
+function validateReadingSimilarityProfile(item, questionId) {
+  const profile = item.similarityProfile
+  if (profile === undefined) return
+  if (!profile || typeof profile !== 'object' || Array.isArray(profile)) {
+    throw new Error(`${questionId}: similarityProfile 必须是对象。`)
+  }
+  const exactFields = ['detailScope', 'family', 'subtype', 'technique']
+  if (JSON.stringify(Object.keys(profile).sort()) !== JSON.stringify(exactFields)) {
+    throw new Error(`${questionId}: similarityProfile 字段不完整或包含未知字段。`)
+  }
+  const family = optionalString(profile.family)
+  const subtype = optionalString(profile.subtype)
+  if (!READING_SIMILARITY_SUBTYPES.get(family)?.has(subtype)) {
+    throw new Error(`${questionId}: similarityProfile family/subtype 组合无效：${family}/${subtype}。`)
+  }
+  if (family === 'detail') {
+    if (profile.detailScope !== 'single' && profile.detailScope !== 'multiple') {
+      throw new Error(`${questionId}: 细节理解 similarityProfile.detailScope 必须是 single 或 multiple。`)
+    }
+  } else if (profile.detailScope !== null) {
+    throw new Error(`${questionId}: 非细节题 similarityProfile.detailScope 必须是 null。`)
+  }
+  if (family === 'writing-method') {
+    if (!READING_TECHNIQUES.has(profile.technique)) {
+      throw new Error(`${questionId}: 写作手法 similarityProfile.technique 值无效。`)
+    }
+  } else if (profile.technique !== null) {
+    throw new Error(`${questionId}: 非写作手法题 similarityProfile.technique 必须是 null。`)
+  }
+
+  const expectedLegacySkill = LEGACY_SKILL_BY_SIMILARITY[subtype]
+    || LEGACY_SKILL_BY_SIMILARITY[family]
+  if (item.skill?.primary !== expectedLegacySkill) {
+    throw new Error(`${questionId}: similarityProfile 与 skill.primary 不一致。`)
+  }
 }
 
 function assertReadingAnalyzeInput(input) {
@@ -99,7 +175,12 @@ export function buildReadingAnalysisMessages({ paper, group }) {
   ]
 }
 
-export function validateReadingAnalysisShape(analysis, { paper, group }) {
+export function validateReadingAnalysisShape(analysis, {
+  paper,
+  group,
+  requireFullTranslation = false,
+  requireSelectedLongSentences = false,
+}) {
   if (!analysis || typeof analysis !== 'object' || Array.isArray(analysis)) throw new Error('AI 未返回 JSON 对象。')
   if (analysis.schemaVersion !== 'reading-choice-analysis-v1') throw new Error('AI JSON schemaVersion 不正确。')
   if (analysis.paperId !== paper.paperId) throw new Error('AI JSON paperId 与当前试卷不一致。')
@@ -110,6 +191,10 @@ export function validateReadingAnalysisShape(analysis, { paper, group }) {
   if (!analysis.groups || typeof analysis.groups !== 'object' || !analysis.groups[group.groupId]) {
     throw new Error('AI JSON 缺少当前题组分析。')
   }
+  if (requireFullTranslation) assertFullTranslationZh(analysis.groups[group.groupId], group)
+  assertSelectedLongSentences(analysis.groups[group.groupId], group, {
+    required: requireSelectedLongSentences,
+  })
   if (!analysis.questions || typeof analysis.questions !== 'object' || Array.isArray(analysis.questions)) {
     throw new Error('AI JSON questions 必须是对象。')
   }
@@ -132,10 +217,20 @@ export function validateReadingAnalysisShape(analysis, { paper, group }) {
     const item = analysis.questions[questionId]
     if (!item || typeof item !== 'object') throw new Error(`${questionId}: 缺少题目分析。`)
     if (!item.skill || typeof item.skill !== 'object' || Array.isArray(item.skill)) throw new Error(`${questionId}: skill 必须是对象。`)
+    validateReadingSimilarityProfile(item, questionId)
     if (!optionalString(item.questionFocus)) throw new Error(`${questionId}: 缺少 questionFocus。`)
     if (!optionalString(item.stemTranslationZh)) throw new Error(`${questionId}: 缺少 stemTranslationZh。`)
     if (!Array.isArray(item.optionAnalysis)) throw new Error(`${questionId}: optionAnalysis 必须是数组。`)
     if (!Array.isArray(item.locationParaphrases)) throw new Error(`${questionId}: locationParaphrases 必须是数组。`)
+    const expectedOptionLabels = Object.keys(sourceQuestion.options).sort()
+    const actualOptionLabels = item.optionAnalysis.map((option) => optionalString(option?.label)).sort()
+    if (
+      actualOptionLabels.length !== expectedOptionLabels.length
+      || new Set(actualOptionLabels).size !== actualOptionLabels.length
+      || JSON.stringify(actualOptionLabels) !== JSON.stringify(expectedOptionLabels)
+    ) {
+      throw new Error(`${questionId}: optionAnalysis 必须按题面完整覆盖 A-D 四个选项。`)
+    }
     const correctCount = item.optionAnalysis.filter((option) => option?.status === 'correct').length
     if (correctCount !== 1) throw new Error(`${questionId}: optionAnalysis 必须有且只有一个 correct。`)
     const correctOption = item.optionAnalysis.find((option) => option?.status === 'correct')
@@ -143,6 +238,13 @@ export function validateReadingAnalysisShape(analysis, { paper, group }) {
       throw new Error(`${questionId}: AI 答案与答案解析版不一致：官方 ${sourceQuestion.answerKey}，AI ${correctOption?.label || '空'}。`)
     }
     for (const option of item.optionAnalysis) {
+      if (
+        option?.status === 'wrong'
+        && !optionalString(option?.trap?.explanation)
+        && !optionalString(option?.trap?.relationNote)
+      ) {
+        throw new Error(`${questionId}: 每个阅读错项都必须提供可展示的干扰项辨析。`)
+      }
       for (const evidence of option?.evidence || []) assertExactQuote(questionId, 'evidence', evidence)
       for (const evidence of option?.trapEvidence || []) assertExactQuote(questionId, 'trapEvidence', evidence)
       if (option?.trap?.sourceQuote) assertExactQuote(questionId, 'trap.sourceQuote', {

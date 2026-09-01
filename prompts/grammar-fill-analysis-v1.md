@@ -30,6 +30,7 @@ Reason carefully internally about:
 - a nearby parallel, paired, referential, or tense structure that can verify the judgment when one exists
 - exact field names and enum values
 - the `role` and `path` for non-finite verb blanks only
+- the controlled `similarityProfile.route` and any applicable `features`
 
 But output only the JSON object.
 
@@ -85,7 +86,7 @@ The hint word's POS = entry into which `given` sub-facet:
 Use **N+1 rule**: count predicates in the clause. If the verb slot is a predicate slot → `finite`; if already filled → `non-finite`.
 
 - **`grammar-fill.given.verb.finite`** — 谓语动词. Framework: ① find subject (number/person) ② judge voice (active/passive) ③ judge tense (time-marker words lock tense). `tense`/`voice`/`agreementSensitive` are stamped server-side from your `answer`, deterministically — do NOT output them yourself.
-- **`grammar-fill.given.verb.non-finite`** — 非谓语动词. Framework: ① judge position → identify syntactic role (`role` field, 成分七格 below) ② fast-path (subject/object/predicative/object-complement/subject-complement: fixed collocation/pattern locks one table row → judge voice only) or slow-path (attributive/adverbial: test `to-inf` condition first → if met, judge voice; else remove `to-inf` row → judge voice ± aspect). `form` (to-do/doing/done) is stamped server-side from your `answer` — do NOT output it yourself.
+- **`grammar-fill.given.verb.non-finite`** — 非谓语动词. Framework: ① judge position → identify syntactic role (`role` field, 成分七格 below) ② fast-path (subject/object/predicative/object-complement/subject-complement: fixed collocation/pattern locks one table row → judge voice only) or slow-path (attributive/adverbial: test `to-inf` condition first → if met, judge voice; else remove `to-inf` row → judge voice ± aspect). `form` (the legacy to-do/doing/done bucket) and the finer `similarityForm` (to-do/to-be-done/to-have-done/doing/being-done/having-done/done) are stamped server-side from your `answer` — do NOT output them yourself.
 
 ### `role` and `path` (non-finite only)
 
@@ -159,7 +160,19 @@ find oneself doing 是固定搭配。
   },
   "groups": {
     "group-...-grammar-fill": {
-      "overview": "中文：文章主旨 + 文体（1 句，供个别题的语境参照）"
+      "overview": "中文：文章主旨 + 文体（1 句，供个别题的语境参照）",
+      "fullTranslationZh": "填入正答后的全文中文翻译，每空保留 [56]...[65] 标记",
+      "selectedLongSentences": [
+        {
+          "paragraphId": "para-...",
+          "sourceText": "保留 __63__ 等空标的原文精确片段",
+          "displayText": "按权威答案补全空格后的同一句",
+          "relatedQuestionIds": ["q-...-063", "q-...-064", "q-...-065"],
+          "translationZh": "自然中文翻译",
+          "analysisZh": "先找主干，再说明并列、修饰等关系",
+          "underlineTexts": ["displayText 中 1—3 个唯一精确片段"]
+        }
+      ]
     }
   },
   "blanks": {
@@ -184,12 +197,19 @@ Every `blanks[questionId]` MUST include:
 - `answer` — the produced form/word; MUST equal the answer key
 - `role` — required string iff `facetKey === "grammar-fill.given.verb.non-finite"` else `null`
 - `path` — required string iff `facetKey === "grammar-fill.given.verb.non-finite"` else `null`
+- `similarityProfile` — machine-facing matching support, exactly
+  `{ "route": "controlled-value", "features": ["controlled-value"] }`; choose
+  the route that states **why this answer form is required**, and use only the
+  applicable controlled features below (`[]` when none apply)
 - `reason` — 中文 1–3 句：还原句子骨架，说明空格职责并推出答案；有相邻
   并列、成对空格或回指关系时，用它作必要验证
 - `evidence` — array with ≥1 item
 - `teachingNote` — 中文一句：只补充一个可迁移的解题动作，不换术语复述 `reason`
 
-Do NOT output `tense`/`voice`/`agreementSensitive` (finite verb) or `form` (non-finite verb) yourself — the server stamps these deterministically from `answer` after your response.
+Do NOT output `tense`/`voice`/`agreementSensitive` (finite verb), or `form`/
+`similarityForm` (non-finite verb), yourself — the server stamps these
+deterministically from `answer` after your response. `similarityProfile` is
+different: it records the contextual judgment route and MUST be generated here.
 
 ## The 22 Valid `facetKey` Leaves
 
@@ -222,11 +242,141 @@ grammar-fill.no-hint.conjunction.adverbial-clause
 
 `blank_type` match rule: any `grammar-fill.given.*` leaf MUST go with `blankType: "given"`. Any `grammar-fill.no-hint.*` leaf MUST go with `blankType: "no-hint"`.
 
+## Controlled `similarityProfile`
+
+This object is stored for later similar-question matching. It is not
+student-facing prose and must not be mentioned in `reason` or `teachingNote`.
+Use one `route` allowed by the blank's `facetKey`; `features` is a unique array
+using only the values allowed for that facet. Do not invent labels.
+
+### Verb facets
+
+For `grammar-fill.given.verb.finite`, use one route:
+
+```text
+present-stable-description | present-frequency-marker |
+past-explicit-time | past-context-cue | past-narrative-chain |
+present-perfect-explicit-marker | present-perfect-current-effect |
+past-progressive-background | past-perfect-prior-past | modal-passive
+```
+
+Use `features: []`. The route must agree with the tense/voice expressed by the
+authoritative answer. The server, not you, derives the answer's tense, voice,
+and agreement sensitivity.
+
+For `grammar-fill.given.verb.non-finite`, the route MUST start with the exact
+`role` value plus `-`:
+
+```text
+adverbial-purpose | adverbial-adjective-complement |
+adverbial-unexpected-result | adverbial-active | adverbial-passive |
+adverbial-prior-active |
+attributive-future | attributive-abstract-content |
+attributive-special-limiter | attributive-participle |
+object-verb-to-infinitive | object-verb-gerund |
+object-form-changes-meaning | object-wh-infinitive |
+object-preposition | object-but-structure |
+subject-direct-gerund | subject-direct-passive-gerund |
+subject-infinitive | subject-passive-infinitive |
+subject-fixed-gerund-frame |
+predicative-nominal-gerund | predicative-nominal-passive-gerund |
+predicative-nominal-infinitive | predicative-nominal-passive-infinitive |
+predicative-participle-property | predicative-participle-state |
+object-complement-general | object-complement-sensory |
+object-complement-special | object-complement-with |
+object-complement-participle-state |
+subject-complement-linking | subject-complement-general-passive |
+subject-complement-reporting-passive |
+subject-complement-sensory-passive |
+subject-complement-special-passive
+```
+
+`subject-complement-linking` covers structures such as `seem to have done`;
+it is not an adverbial. `subject-complement-reporting-passive` covers
+`be said/reported/believed... to do/to have done`.
+
+Allowed non-finite features are:
+
+```text
+preposed | postposed | active-relation | passive-relation |
+completed-state | ongoing-passive
+```
+
+Use them only with `attributive-participle`: select exactly one position
+(`preposed`/`postposed`) and one relation (`active-relation`,
+`passive-relation`, `completed-state`, or `ongoing-passive`). For every other
+non-finite route use `features: []`; the finer answer form is server-derived.
+
+### Given-word non-verb facets
+
+Use the exact route shown. Features are `[]` unless a row explicitly lists
+allowed features.
+
+| `facetKey` suffix | Allowed `route` | Allowed `features` |
+| --- | --- | --- |
+| `conversion.noun-to-noun` | `derived-noun` | — |
+| `conversion.noun-to-adjective` | `derived-adjective` | — |
+| `conversion.noun-to-verb` | `finite-result` / `non-finite-result` | exactly one inherited finite or non-finite route; see below |
+| `conversion.adjective-to-adverb` | `modify-adjective` / `modify-predicate` / `modify-non-finite` / `modify-sentence` / `modify-adverb-number-quantity` | — |
+| `conversion.adjective-to-noun` | `derived-noun` | — |
+| `conversion.verb-to-adjective` | `true-derived-adjective` | — |
+| `conversion.verb-to-noun` | `derived-noun` | — |
+| `conversion.verb-to-adverb` | `derived-adverb` | — |
+| `noun.number` | `quantity-determiner` / `sentence-number-agreement` / `parallel-structure` / `contextual-multiple-generic` / `countable-sense-shift` | — |
+| `noun.genitive` | `genitive` | — |
+| `adjective.comparison` | `comparative` / `superlative` | `than-marker`, `degree-modifier`, `parallel-comparative`, `semantic-comparison`, `fixed-comparative-frame`, `explicit-range-unique`, `semantic-superlative` |
+| `pronoun` | `object-pronoun` / `possessive-determiner` / `possessive-pronoun` / `reflexive-pronoun` / `one-to-ones` | — |
+| `numeral` | `cardinal-to-ordinal` | — |
+
+For `adjective.comparison`, select every genuinely present signal feature and
+at least one. Do not count `the` alone as proof of a superlative.
+
+For `conversion.noun-to-verb`, conversion is only the first layer. If the
+derived verb is the predicate, use `finite-result` and put exactly one of the
+finite judgment routes from the Verb facets section in `features`. If it is
+non-finite, use `non-finite-result` and put exactly one of the non-finite routes
+from that section in `features`. The server then derives tense/voice/agreement
+or the finer answer form from `answer`; do not output those derived fields.
+
+### No-hint facets
+
+| `facetKey` suffix | Allowed `route` | Allowed `features` |
+| --- | --- | --- |
+| `preposition` | `fixed-collocation` / `contextual-relation` | — |
+| `article` | `the-anaphoric` / `the-shared-context` / `the-postmodified-specific` / `the-structural` / `indefinite-first-mention` / `indefinite-identity-category` / `indefinite-structural` | `superlative`, `ordinal`, `one-the-other`, `the-same`, `proper-name-class`, `quantity-proportion`, `adjective-class`, `fixed-the-phrase`, `fixed-indefinite-phrase`, `concretized-abstract`, `a-consonant-sound`, `an-vowel-sound`, `spelling-sound-exception` |
+| `pronoun` | `referential-it` / `formal-subject-it` / `formal-object-it` / `cleft-it` / `substitution-that-those` / `impersonal-it` | — |
+| `conjunction.coordinating` | `addition-sequence` / `contrast` / `choice` / `restatement` / `cause-effect` / `not-but` / `not-just-but-also` / `not-only-but-also` / `both-and` / `either-or` / `neither-nor` / `whether-or` | — |
+| `conjunction.relative-clause` | `missing-subject` / `missing-object-predicative` / `missing-possessive` / `missing-adverbial` / `preposition-relative` / `as-special` | `human`, `thing`, `whole-event`, `restrictive`, `non-restrictive` |
+| `conjunction.noun-clause` | `that-clause` / `whether-if` / `what` / `who` / `when-where-why-how` / `wh-infinitive` | `subject-clause`, `object-clause`, `predicative-clause`, `appositive-clause` |
+| `conjunction.adverbial-clause` | `time` / `reason` / `condition` / `concession` / `purpose` / `result` / `manner` / `comparison` / `place` | `simultaneous`, `before-after`, `since-start`, `until-end`, `as-soon-as`, `negative-condition` |
+
+For articles, features record the decisive substructure or `a/an` sound rule;
+use `[]` when the route itself is already complete. For a relative clause,
+record the applicable antecedent type and restrictive status. For a noun
+clause, record exactly one clause-role feature. Adverbial-clause features are
+optional refinements and must be `[]` when none applies.
+
 ## Group Analysis
 
 `groups[groupId]` MUST include:
 
 - `overview` — required; Chinese: main topic + text type (1 sentence)
+- `fullTranslationZh` — required for new NCK1 generation; translate the complete
+  answer-filled passage into natural Chinese in source order. Immediately before
+  the Chinese words governed by each answer, keep the exact ASCII marker
+  (`[56]` ... `[65]`) exactly once, including function-word blanks whose Chinese
+  meaning is absorbed into the sentence. Preserve paragraph breaks and add no
+  grammar explanation or vocabulary notes.
+- `selectedLongSentences` — required; 1–2 sentences with genuine sentence-level
+  teaching value, preferably one that connects several gaps or carries the
+  passage's central meaning. Do not select a sentence merely because it is long.
+  `paragraphId` and `sourceText` must locate the stored source exactly and retain
+  every `__63__`-style marker. `displayText` must be the deterministic form
+  completed with authoritative answers. `relatedQuestionIds` must belong to this
+  group. `analysisZh` finds the main trunk first, then explains how coordination,
+  clauses, and modifiers attach; do not repeat the per-gap grammar analysis.
+  `underlineTexts` contains 1–3 unique, non-overlapping exact substrings of
+  `displayText`, limited to the decisive sentence structure.
 
 (Grammar fill reasoning is local/syntactic, so no `affectiveArc` is needed — unlike cloze.)
 
@@ -281,7 +431,7 @@ Do NOT guess or invent. Write the exact form you determined from your syntactic 
 - Do NOT output chat JSON or markdown.
 - Do NOT invent blank IDs, question IDs, or group IDs.
 - Do NOT use parent facet keys (`grammar-fill`, `grammar-fill.given`, `grammar-fill.given.verb`, `grammar-fill.given.conversion`, `grammar-fill.no-hint`, `grammar-fill.no-hint.conjunction`), nor the retired v1 leaves (`grammar-fill.given.noun`, `grammar-fill.given.adjective`, `grammar-fill.given.derivation.*`).
-- Do NOT output `tense`, `voice`, `agreementSensitive`, or `form` — the server stamps these.
+- Do NOT output `tense`, `voice`, `agreementSensitive`, `form`, or `similarityForm` — the server stamps these.
 - Do NOT include `role` or `path` for any facet other than `grammar-fill.given.verb.non-finite`.
 - Do NOT include a blank marker (`  56  ` or `(wear)` token) in any `signalText`.
 - Do NOT add `distractorGlosses` (grammar fill has no A–D options).

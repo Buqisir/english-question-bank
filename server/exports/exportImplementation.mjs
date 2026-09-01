@@ -13,6 +13,11 @@ import path from 'node:path'
 import {
   loadCanonicalGrammarFillPrintChrome,
 } from '../paper-canonical/grammarFillPrintSourceBinding.mjs'
+import {
+  buildCompanionAnalysisHtml,
+  companionAnalysisFileName,
+  loadCompanionAnalysisSource,
+} from './companionAnalysisRenderer.mjs'
 
 function requiredString(value, label) {
   if (typeof value !== 'string' || !value.trim()) {
@@ -106,7 +111,7 @@ function resolveVivliostyleBin(rootDir) {
 }
 
 function renderPrintPdfWithVivliostyle({ htmlPath, pdfPath, rootDir }) {
-  execFileSync(resolveVivliostyleBin(rootDir), ['build', htmlPath, '-o', pdfPath], { timeout: 60000 })
+  execFileSync(resolveVivliostyleBin(rootDir), ['build', htmlPath, '-o', pdfPath], { timeout: 120000 })
 }
 
 export function createExportImplementation({
@@ -217,7 +222,44 @@ export function createExportImplementation({
     }
   }
 
+  function exportCompanionAnalysisHtml(input) {
+    const paperId = requiredString(input.paperId, 'paperId')
+    const source = loadCompanionAnalysisSource({ paperAssetsDir, paperId })
+    return {
+      body: buildCompanionAnalysisHtml(source),
+      fileName: companionAnalysisFileName(source.paperAsset, 'html'),
+    }
+  }
+
+  function exportCompanionAnalysisPdf(input) {
+    const paperId = requiredString(input.paperId, 'paperId')
+    const source = loadCompanionAnalysisSource({ paperAssetsDir, paperId })
+    const html = buildCompanionAnalysisHtml(source)
+
+    mkdirSync(exportDir, { recursive: true })
+    const tempDir = mkdtempSync(path.join(tmpdir(), 'question-bank-companion-analysis-'))
+    const htmlPath = path.join(tempDir, 'companion-analysis.html')
+    const pdfPath = path.join(tempDir, 'companion-analysis.pdf')
+
+    try {
+      writeFileSync(htmlPath, html)
+      renderPrintPdf({ html, htmlPath, pdfPath, rootDir })
+      const fileName = companionAnalysisFileName(source.paperAsset)
+      const outputPath = path.join(exportDir, `${timestampPrefix()}-${fileName}`)
+      copyFileSync(pdfPath, outputPath)
+      return {
+        body: readFileSync(outputPath),
+        fileName,
+        outputPath,
+      }
+    } finally {
+      rmSync(tempDir, { recursive: true, force: true })
+    }
+  }
+
   return {
+    exportCompanionAnalysisHtml,
+    exportCompanionAnalysisPdf,
     exportPrintHtml,
     exportPrintPdf,
     sendBinary,

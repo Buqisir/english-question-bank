@@ -8,7 +8,10 @@ import {
 import { validateReadingAnalysisShape } from '../paper-import-ai/analyzeReading.mjs'
 import { validateSevenChoicesShape } from '../paper-import-ai/analyzeSevenChoices.mjs'
 import { validateClozeShape } from '../paper-import-ai/analyzeCloze.mjs'
-import { validateGrammarFillShape } from '../paper-import-ai/analyzeGrammarFill.mjs'
+import {
+  stampGrammarFillDerivedFields,
+  validateGrammarFillShape,
+} from '../paper-import-ai/analyzeGrammarFill.mjs'
 import {
   validateNarrativeContinuationAnalysis,
 } from '../paper-import-ai/analyzeNarrativeContinuation.mjs'
@@ -126,15 +129,12 @@ function exactKeys(value, expected, label) {
   }
 }
 
-function assertBlankClosure(analysis, group, collectionName) {
+function assertBlankIdClosure(analysis, group, collectionName) {
   exactKeys(analysis[collectionName], group.questions.map(({ id }) => id), `${group.groupId} ${collectionName}`)
   for (const question of group.questions) {
     const item = analysis[collectionName][question.id]
     if (item.blankId !== question.blankId) {
       fail(`${question.id} analysis blankId does not match the paper`)
-    }
-    if (Number(item.blankNo) !== Number(question.stem)) {
-      fail(`${question.id} analysis blankNo does not match the paper`)
     }
   }
 }
@@ -295,22 +295,43 @@ export function buildNck1AnalysisProjection({
       fail(`Reading analysis schema invalid: ${formatSchemaErrors(validateReadingSchema.errors)}`)
     }
     exactKeys(analysis.groups, [group.groupId], `${group.groupId} analysis groups`)
-    validateReadingAnalysisShape(analysis, { paper, group })
+    validateReadingAnalysisShape(analysis, {
+      paper,
+      group,
+      requireFullTranslation: true,
+      requireSelectedLongSentences: true,
+    })
     assertSourceVersion(analysis, sourceAssetVersion, group.groupId)
     assertReadingOptionClosure(analysis, group)
   }
   exactKeys(raw.seven.groups, [seven.groupId], `${seven.groupId} analysis groups`)
   exactKeys(raw.cloze.groups, [cloze.groupId], `${cloze.groupId} analysis groups`)
   exactKeys(raw.grammar.groups, [grammar.groupId], `${grammar.groupId} analysis groups`)
-  validateSevenChoicesShape(raw.seven, { paper, group: seven })
-  validateClozeShape(raw.cloze, { paper, group: cloze })
-  validateGrammarFillShape(raw.grammar, { paper, group: grammar })
+  validateSevenChoicesShape(raw.seven, {
+    paper,
+    group: seven,
+    requireFullTranslation: true,
+    requireSelectedLongSentences: true,
+  })
+  validateClozeShape(raw.cloze, {
+    paper,
+    group: cloze,
+    requireFullTranslation: true,
+    requireSelectedLongSentences: true,
+  })
+  stampGrammarFillDerivedFields(raw.grammar)
+  validateGrammarFillShape(raw.grammar, {
+    paper,
+    group: grammar,
+    requireFullTranslation: true,
+    requireSelectedLongSentences: true,
+  })
   assertSourceVersion(raw.seven, sourceAssetVersion, seven.groupId)
   assertSourceVersion(raw.cloze, sourceAssetVersion, cloze.groupId)
   assertSourceVersion(raw.grammar, sourceAssetVersion, grammar.groupId)
-  assertBlankClosure(raw.seven, seven, 'questions')
-  assertBlankClosure(raw.cloze, cloze, 'blanks')
-  assertBlankClosure(raw.grammar, grammar, 'blanks')
+  assertBlankIdClosure(raw.seven, seven, 'questions')
+  assertBlankIdClosure(raw.cloze, cloze, 'blanks')
+  assertBlankIdClosure(raw.grammar, grammar, 'blanks')
   assertAnswerClosure(raw.seven, seven, 'questions', (item) =>
     item.optionFit?.correctOptionLabel)
   assertAnswerClosure(raw.cloze, cloze, 'blanks', (item) =>

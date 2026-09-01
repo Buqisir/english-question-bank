@@ -458,6 +458,26 @@ export async function askQuestionBankSteward(message: string, apiKey: string, th
   return (await response.json()) as QuestionBankStewardResult
 }
 
+export async function exportCompanionAnalysisPdf(paperId: string): Promise<PrintExportResult> {
+  let response: Response
+  try {
+    response = await fetch(apiPath('/api/exports/companion-analysis-pdf'), {
+      body: JSON.stringify({ paperId }),
+      headers: { 'content-type': 'application/json' },
+      method: 'POST',
+    })
+  } catch {
+    throw new Error('题库 API 服务无法连接：请确认后端进程已启动')
+  }
+  if (!response.ok) {
+    throw new Error(await readErrorMessage(response, `配套解析 PDF 生成失败：${response.status}`))
+  }
+  return {
+    blob: await response.blob(),
+    fileName: decodeHeaderValue(response.headers.get('x-file-name')) || '英语试题-配套解析.pdf',
+  }
+}
+
 export async function exportPrintHtml(input: PrintExportInput): Promise<PrintExportResult> {
   const response = await fetch(apiPath('/api/exports/print-html'), {
     body: JSON.stringify(input),

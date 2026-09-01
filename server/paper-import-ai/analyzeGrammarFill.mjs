@@ -1,12 +1,19 @@
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { createAnalyzerProviderShell, readTeachingAnalysisPrompt, rewriteApiPrompt } from './analyzerProviderShell.mjs'
+import {
+  assertFullTranslationZh,
+  assertSelectedLongSentences,
+  createAnalyzerProviderShell,
+  readTeachingAnalysisPrompt,
+  rewriteApiPrompt,
+} from './analyzerProviderShell.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '../..')
 const promptPath = path.join(rootDir, 'prompts/grammar-fill-analysis-v1.md')
 const facetsPath = path.join(__dirname, 'grammar-fill-facets-v2.json')
+const similarityPath = path.join(__dirname, 'grammar-fill-similarity-v1.json')
 
 // ============================================================
 // Registry: 22 leaf facets (D1 grammar-facets-v2, 2026-07-15 owner-locked
@@ -20,6 +27,8 @@ const facetsPath = path.join(__dirname, 'grammar-fill-facets-v2.json')
 const FACET_REGISTRY = JSON.parse(readFileSync(facetsPath, 'utf8'))
 const LEAF_FACET_KEYS = new Set(FACET_REGISTRY.map((f) => f.facet_key))
 const FACET_BLANK_TYPE = Object.fromEntries(FACET_REGISTRY.map((f) => [f.facet_key, f.blank_type]))
+const SIMILARITY_REGISTRY = JSON.parse(readFileSync(similarityPath, 'utf8'))
+const SIMILARITY_PROFILES = new Map(SIMILARITY_REGISTRY.map((entry) => [entry.facet_key, entry]))
 
 // Parent nodes that are NOT valid leaf facetKeys.
 const PARENT_FACET_KEYS = new Set([
@@ -32,6 +41,7 @@ const PARENT_FACET_KEYS = new Set([
 ])
 
 const NON_FINITE_FACET = 'grammar-fill.given.verb.non-finite'
+const NOUN_TO_VERB_FACET = 'grammar-fill.given.conversion.noun-to-verb'
 
 const VALID_ROLE_VALUES = new Set([
   'subject',
@@ -70,6 +80,14 @@ const BLANK_MARKER_RE = /\s{2}(?:5[6-9]|6[0-5])\s{2}|\([A-Za-z]+\)/
 
 function optionalString(value) {
   return typeof value === 'string' ? value.trim() : ''
+}
+
+function assertExactKeys(value, keys, label) {
+  const expected = [...keys].sort()
+  const actual = Object.keys(value).sort()
+  if (actual.length !== expected.length || actual.some((key, index) => key !== expected[index])) {
+    throw new Error(`${label} 必须且只能包含：${expected.join(', ')}。`)
+  }
 }
 
 function readApiPrompt() {
@@ -181,7 +199,134 @@ export function buildGrammarFillAnalysisMessages({ paper, group }) {
 // Validator
 // ============================================================
 
-export function validateGrammarFillShape(analysis, { paper, group }) {
+const FINITE_ROUTE_TENSES = new Map([
+  ['present-stable-description', 'present'],
+  ['present-frequency-marker', 'present'],
+  ['past-explicit-time', 'past'],
+  ['past-context-cue', 'past'],
+  ['past-narrative-chain', 'past'],
+  ['present-perfect-explicit-marker', 'present-perfect'],
+  ['present-perfect-current-effect', 'present-perfect'],
+  ['past-progressive-background', 'progressive'],
+  ['past-perfect-prior-past', 'past-perfect'],
+  ['modal-passive', 'other'],
+])
+
+function validateSimilarityProfile(item, questionId) {
+  if (!Object.prototype.hasOwnProperty.call(item, 'similarityProfile')) return
+
+  const profile = item.similarityProfile
+  if (!profile || typeof profile !== 'object' || Array.isArray(profile)) {
+    throw new Error(`${questionId}: similarityProfile 必须是对象。`)
+  }
+  assertExactKeys(profile, ['route', 'features'], `${questionId}: similarityProfile`)
+
+  const route = optionalString(profile.route)
+  if (!route) throw new Error(`${questionId}: similarityProfile.route 不能为空。`)
+  if (!Array.isArray(profile.features)) {
+    throw new Error(`${questionId}: similarityProfile.features 必须是数组。`)
+  }
+
+  const spec = SIMILARITY_PROFILES.get(item.facetKey)
+  if (!spec) throw new Error(`${questionId}: ${item.facetKey} 没有相似题细分表。`)
+  if (!spec.routes.includes(route)) {
+    throw new Error(`${questionId}: similarityProfile.route 与 facetKey ${item.facetKey} 不匹配。`)
+  }
+
+  const seen = new Set()
+  for (const feature of profile.features) {
+    const normalized = optionalString(feature)
+    if (!normalized || !spec.features.includes(normalized)) {
+      throw new Error(`${questionId}: similarityProfile.features 包含 ${item.facetKey} 不支持的值。`)
+    }
+    if (seen.has(normalized)) {
+      throw new Error(`${questionId}: similarityProfile.features 不得重复。`)
+    }
+    seen.add(normalized)
+  }
+
+  if (item.facetKey === NON_FINITE_FACET) {
+    if (route === 'attributive-participle') {
+      const positionCount = ['preposed', 'postposed'].filter((feature) => seen.has(feature)).length
+      const relationCount = [
+        'active-relation',
+        'passive-relation',
+        'completed-state',
+        'ongoing-passive',
+      ].filter((feature) => seen.has(feature)).length
+      if (positionCount !== 1 || relationCount !== 1 || seen.size !== 2) {
+        throw new Error(`${questionId}: attributive-participle 必须各有一个位置和关系 feature。`)
+      }
+    } else if (seen.size !== 0) {
+      throw new Error(`${questionId}: 只有 attributive-participle 可设置非谓语 features。`)
+    }
+  }
+
+  if (item.facetKey === 'grammar-fill.given.adjective.comparison') {
+    const allowed = route === 'comparative'
+      ? new Set(['than-marker', 'degree-modifier', 'parallel-comparative', 'semantic-comparison', 'fixed-comparative-frame'])
+      : new Set(['explicit-range-unique', 'semantic-superlative'])
+    if (seen.size === 0 || [...seen].some((feature) => !allowed.has(feature))) {
+      throw new Error(`${questionId}: adjective.comparison 必须提供与 ${route} 一致的判断 feature。`)
+    }
+  }
+
+  if (item.facetKey === 'grammar-fill.no-hint.conjunction.relative-clause') {
+    const antecedentCount = ['human', 'thing', 'whole-event'].filter((feature) => seen.has(feature)).length
+    const restrictionCount = ['restrictive', 'non-restrictive'].filter((feature) => seen.has(feature)).length
+    if (antecedentCount !== 1 || restrictionCount !== 1 || seen.size !== 2) {
+      throw new Error(`${questionId}: relative-clause 必须各有一个先行项类型和限制性 feature。`)
+    }
+  }
+
+  if (item.facetKey === 'grammar-fill.no-hint.conjunction.noun-clause' && seen.size !== 1) {
+    throw new Error(`${questionId}: noun-clause 必须且只能有一个从句成分 feature。`)
+  }
+
+  if (item.facetKey === NOUN_TO_VERB_FACET) {
+    const allowed = route === 'finite-result'
+      ? new Set(FINITE_ROUTE_TENSES.keys())
+      : new Set(SIMILARITY_PROFILES.get(NON_FINITE_FACET).routes)
+    if (seen.size !== 1 || [...seen].some((feature) => !allowed.has(feature))) {
+      throw new Error(`${questionId}: noun-to-verb 必须提供一个与 ${route} 一致的细分 feature。`)
+    }
+    if (route === 'finite-result') {
+      const [finiteRoute] = seen
+      const expectedTense = FINITE_ROUTE_TENSES.get(finiteRoute)
+      if (expectedTense && item.tense !== expectedTense) {
+        throw new Error(`${questionId}: noun-to-verb 谓语路线与程序判定的 tense ${item.tense} 不一致。`)
+      }
+      if (finiteRoute === 'modal-passive' && item.voice !== 'passive') {
+        throw new Error(`${questionId}: noun-to-verb modal-passive 必须对应被动语态。`)
+      }
+    }
+  }
+
+  if (
+    item.facetKey === NON_FINITE_FACET
+    && optionalString(item.role)
+    && !route.startsWith(`${item.role}-`)
+  ) {
+    throw new Error(`${questionId}: similarityProfile.route 与非谓语 role ${item.role} 不一致。`)
+  }
+
+  if (item.facetKey === 'grammar-fill.given.verb.finite') {
+    const expectedTense = FINITE_ROUTE_TENSES.get(route)
+    if (expectedTense && item.tense !== expectedTense) {
+      throw new Error(`${questionId}: similarityProfile.route 与程序判定的 tense ${item.tense} 不一致。`)
+    }
+    if (route === 'modal-passive' && item.voice !== 'passive') {
+      throw new Error(`${questionId}: modal-passive 路线必须对应被动语态。`)
+    }
+  }
+}
+
+export function validateGrammarFillShape(analysis, {
+  paper,
+  group,
+  requireFullTranslation = false,
+  requireSelectedLongSentences = false,
+}) {
   if (!analysis || typeof analysis !== 'object' || Array.isArray(analysis)) throw new Error('AI 未返回 JSON 对象。')
   if (analysis.schemaVersion !== 'grammar-fill-analysis-v2') throw new Error('AI JSON schemaVersion 不正确。')
   if (analysis.paperId !== paper.paperId) throw new Error('AI JSON paperId 与当前试卷不一致。')
@@ -203,6 +348,12 @@ export function validateGrammarFillShape(analysis, { paper, group }) {
   if (!optionalString(analysis.groups?.[group.groupId]?.overview)) {
     throw new Error('AI JSON groups.overview 不能为空。')
   }
+  if (requireFullTranslation) {
+    assertFullTranslationZh(analysis.groups[group.groupId], group, { requireBlankMarkers: true })
+  }
+  assertSelectedLongSentences(analysis.groups[group.groupId], group, {
+    required: requireSelectedLongSentences,
+  })
 
   // Build passage text for exact-substring validation (C3).
   const passageText = group.paragraphs.map((p) => p.text).join('\n')
@@ -214,16 +365,24 @@ export function validateGrammarFillShape(analysis, { paper, group }) {
 
     // Required fields
     if (!optionalString(item.blankId)) throw new Error(`${questionId}: 缺少 blankId。`)
+    if (item.blankId !== sourceQuestion?.blankId) throw new Error(`${questionId}: blankId does not match source question.`)
     if (typeof item.blankNo !== 'number') throw new Error(`${questionId}: blankNo 必须是数字。`)
+    if (item.blankNo !== Number(sourceQuestion?.stem)) throw new Error(`${questionId}: blankNo does not match source question.`)
 
     // blankType
     if (item.blankType !== 'given' && item.blankType !== 'no-hint') {
       throw new Error(`${questionId}: blankType 必须是 given 或 no-hint，实际：${item.blankType}。`)
     }
 
+    const sourceBlankType = sourceQuestion?.prompt ? 'given' : 'no-hint'
+    if (item.blankType !== sourceBlankType) {
+      throw new Error(`${questionId}: blankType does not match source question.`)
+    }
+
     // hint consistency: given → non-empty string; no-hint → null
     if (item.blankType === 'given') {
       if (!optionalString(item.hint)) throw new Error(`${questionId}: given 空格的 hint 不能为空。`)
+      if (item.hint !== sourceQuestion.prompt) throw new Error(`${questionId}: hint does not match source question.`)
     } else {
       if (item.hint !== null && item.hint !== undefined && item.hint !== '') {
         throw new Error(`${questionId}: no-hint 空格的 hint 必须为 null。`)
@@ -261,6 +420,8 @@ export function validateGrammarFillShape(analysis, { paper, group }) {
         throw new Error(`${questionId}: 只有 non-finite 空格才能设置 path，当前 facetKey 是 ${facetKey}。`)
       }
     }
+
+    validateSimilarityProfile(item, questionId)
 
     // reason
     if (!optionalString(item.reason)) throw new Error(`${questionId}: 缺少 reason。`)
@@ -401,24 +562,47 @@ function deriveNonFiniteForm(answer) {
   return 'done'
 }
 
+function deriveNonFiniteSimilarityForm(answer) {
+  const normalized = String(answer || '').trim().toLowerCase().replace(/\s+/g, ' ')
+  if (normalized.startsWith('to have been ') || normalized.startsWith('having been ')) return null
+  if (normalized.startsWith('to have ')) return 'to-have-done'
+  if (normalized.startsWith('to be ')) return 'to-be-done'
+  if (normalized.startsWith('to ')) return 'to-do'
+  if (normalized.startsWith('having ')) return 'having-done'
+  if (normalized.startsWith('being ')) return 'being-done'
+  if (normalized.endsWith('ing')) return 'doing'
+  return 'done'
+}
+
 /** Stamp tense/voice/agreementSensitive (finite) or form (non-finite) onto
  * every blank, deterministically from answer/hint — never AI-authored. When
  * the deterministic rule cannot decide (should not happen on real data; see
  * migrate script comment), the field is left null rather than guessed. */
-function stampVerbAxes(analysis) {
+export function stampGrammarFillDerivedFields(analysis) {
   const blanks = analysis?.blanks
-  if (!blanks || typeof blanks !== 'object') return
+  if (!blanks || typeof blanks !== 'object') return analysis
   for (const blank of Object.values(blanks)) {
     if (!blank || typeof blank !== 'object') continue
-    if (blank.facetKey === 'grammar-fill.given.verb.finite') {
+    const nounToVerbRoute = blank.facetKey === NOUN_TO_VERB_FACET
+      ? blank.similarityProfile?.route
+      : null
+    if (
+      blank.facetKey === 'grammar-fill.given.verb.finite'
+      || nounToVerbRoute === 'finite-result'
+    ) {
       const axes = deriveVerbAxes({ hint: blank.hint, answer: blank.answer })
       blank.tense = axes?.tense ?? null
       blank.voice = axes?.voice ?? null
       blank.agreementSensitive = axes ? axes.agreementSensitive : null
-    } else if (blank.facetKey === 'grammar-fill.given.verb.non-finite') {
+    } else if (
+      blank.facetKey === NON_FINITE_FACET
+      || nounToVerbRoute === 'non-finite-result'
+    ) {
       blank.form = deriveNonFiniteForm(blank.answer)
+      blank.similarityForm = deriveNonFiniteSimilarityForm(blank.answer)
     }
   }
+  return analysis
 }
 
 // ============================================================
@@ -437,7 +621,7 @@ function stampGrammarFillMeta(analysis, { providerResult, providerId }) {
     reviewedBy: '',
     reviewedAt: new Date().toISOString().slice(0, 10),
   }
-  stampVerbAxes(analysis)
+  stampGrammarFillDerivedFields(analysis)
 }
 
 // ============================================================

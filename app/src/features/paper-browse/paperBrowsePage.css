@@ -29,6 +29,17 @@
   background: var(--paper-bg);
 }
 
+.paper-browse-export-error {
+  margin: 0 24px;
+  padding: 8px 12px;
+  border: 1px solid var(--eqb-color-danger);
+  border-radius: 6px;
+  background: var(--eqb-color-danger-soft);
+  color: var(--eqb-color-danger);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 .paper-browse-shell {
   display: grid;
   grid-template-columns: 220px 1fr;

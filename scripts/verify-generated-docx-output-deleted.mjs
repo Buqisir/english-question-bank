@@ -454,7 +454,14 @@ const implementation = createExportImplementation({
 })
 assert.deepEqual(
   Object.keys(implementation).sort(),
-  ['exportPrintHtml', 'exportPrintPdf', 'sendBinary', 'sendPdf'],
+  [
+    'exportCompanionAnalysisHtml',
+    'exportCompanionAnalysisPdf',
+    'exportPrintHtml',
+    'exportPrintPdf',
+    'sendBinary',
+    'sendPdf',
+  ],
   'the export implementation must expose no generated-DOCX or converted-PDF compatibility entry point',
 )
 

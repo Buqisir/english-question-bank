@@ -56,16 +56,18 @@ Do not wrap the JSON in a ```json code fence.
   "targetGroups": ["group-..."],
   "meta": {
     "generatedBy": "external-ai",
-    "model": "...",
     "promptVersion": "reading-choice-analysis-v1",
-    "reviewStatus": "reviewed",
-    "reviewedBy": "...",
-    "reviewedAt": "..."
+    "reviewStatus": "reviewed"
   },
   "groups": { "...": {} },
   "questions": { "...": {} }
 }
 ```
+
+Do NOT fill `meta.model`, `meta.reviewedBy`, or `meta.reviewedAt`. The runtime
+stamps the actual model identity; Owner Review records approval provenance
+later. `reviewStatus` is a compatibility field in this analysis contract, not
+Owner Review approval.
 
 This file is an import candidate only after human/code review. Dirty JSON,
 schema-drift JSON, or JSON with unmatched quotes must not be imported.
@@ -81,6 +83,7 @@ Common failure examples that are STRICTLY INVALID:
 ```json
 {
   "skill": ["detail"],
+  "similarityProfile": { "family": "detail", "subtype": "why-mention" },
   "explanationZh": "...",
   "analysisZh": "...",
   "questionNumber": 28,
@@ -96,6 +99,12 @@ Correct shape examples:
 ```json
 {
   "skill": { "primary": "detail" },
+  "similarityProfile": {
+    "family": "detail",
+    "subtype": "calculation",
+    "detailScope": "single",
+    "technique": null
+  },
   "trap": {
     "primaryType": "scopeShift",
     "subtype": "conditionRemoved",
@@ -120,6 +129,8 @@ Correct shape examples:
 - **DO NOT** include `unknown` or `reviewFlags`
 - **DO NOT** rename fields into Chinese or hybrid variants such as `explanationZh`, `analysisZh`, `questionSide`, or `sourceSide`
 - **DO NOT** use arrays for `skill`; `skill` must be an object
+- **DO NOT** omit `similarityProfile` or invent values outside its controlled
+  family-specific vocabulary
 - **DO NOT** invent enum values such as `conditionDrop`, `scopeNarrowing`, `valueReversal`, `inferenceBridge`, or `semantic`
 - **DO NOT** include markdown outside JSON
 - **DO NOT** include code fences, comments, headings, or filenames outside JSON
@@ -170,6 +181,18 @@ For each reading group:
 "groups": {
   "{groupId}": {
     "overview": "Brief Chinese overview of the passage topic and structure",
+    "fullTranslationZh": "Accurate full Chinese translation of the passage in source order",
+    "selectedLongSentences": [
+      {
+        "paragraphId": "para-...",
+        "sourceText": "One exact sentence or substring from that paragraph",
+        "displayText": "The same text, with authoritative answers inserted if it contains gaps",
+        "relatedQuestionIds": ["q-..."],
+        "translationZh": "Natural Chinese translation",
+        "analysisZh": "Chinese explanation of the main trunk, modifiers, and relations",
+        "underlineTexts": ["1–3 exact, unique substrings of displayText"]
+      }
+    ],
     "discourseStructure": {
       "summary": "Chinese summary of discourse flow",
       "paragraphs": [
@@ -187,6 +210,22 @@ For each reading group:
 - `paragraphId` must match existing content paragraph IDs exactly
 - AI must NOT create new paragraphId values
 - AI must NOT change paragraph text
+- `fullTranslationZh` is student-visible. Translate the complete textual passage
+  in source order, preserving paragraph breaks and any textual title or caption.
+  Do not omit sentences, add explanations, or append vocabulary notes. Translate
+  only source text available in this group; do not invent data hidden in an image.
+- `selectedLongSentences` is required and contains 1–2 genuinely teachable
+  sentences. Prefer a sentence that is both important to answering a related
+  question and syntactically difficult. If the answer-bearing sentence is simple,
+  choose a difficult sentence central to understanding the passage instead; do
+  not select a sentence merely because it is long. `sourceText` must be an exact
+  substring of `paragraphId`, `displayText` must equal it for gap-free reading,
+  and every `relatedQuestionIds` value must belong to this group. Explain the
+  sentence as a teacher would: find the main trunk first, then attach clauses,
+  non-finite phrases, comparisons, or logical relations. Do not just name grammar.
+- `underlineTexts` contains 1–3 short, non-overlapping substrings that each occur
+  exactly once in `displayText`. Underline only the words that reveal the trunk or
+  a decisive relation; never underline the whole sentence for decoration.
 
 ---
 
@@ -198,6 +237,12 @@ For each reading question:
 "questions": {
   "{questionId}": {
     "skill": { "primary": "...", "secondary": "..." },
+    "similarityProfile": {
+      "family": "...",
+      "subtype": "...",
+      "detailScope": null,
+      "technique": null
+    },
     "questionFocus": "Chinese description of what the question tests",
     "stemTranslationZh": "...",
     "optionAnalysis": [ ... ],
@@ -209,6 +254,47 @@ For each reading question:
 ---
 
 ## Field Specifications
+
+### similarityProfile
+
+`similarityProfile` is the machine-facing solving-action profile used to match
+questions. It is required on every new question analysis. It does not replace
+`skill`: keep the legacy-compatible `skill.primary`, and make the two agree by
+the mapping below.
+
+Use exactly one family and one family-specific subtype:
+
+| family | allowed subtype | required legacy `skill.primary` |
+| --- | --- | --- |
+| `detail` | `general-detail`, `behavior-reason`, `calculation`, `comparison-integration`, `situation-match` | `detail` |
+| `main-idea` | `paragraph-main-idea`, `passage-main-idea`, `best-title` | `mainIdea` except `best-title` → `title` |
+| `inference` | `detail-inference`, `attitude`, `writing-purpose`, `character-trait`, `source` | respectively `inference`, `attitude`, `authorPurpose`, `inference`, `inference` |
+| `word-meaning` | `word`, `phrase`, `sentence` | `wordMeaning` |
+| `reference` | `reference` | `wordMeaning` for legacy compatibility |
+| `writing-method` | `writing-method` | `structure` |
+
+`detailScope` must be `single` or `multiple` for the `detail` family and must
+be `null` for every other family. Four options that each need returning to the
+passage are `multiple` even when all four concern one paragraph or event.
+
+`technique` must be `null` unless family is `writing-method`. For
+`writing-method`, use exactly one of:
+
+- `example`
+- `comparison`
+- `quotation`
+- `statistics`
+- `definition`
+- `topic-introduction`
+- `viewpoint-support`
+
+`Why does the author mention X?` belongs to `writing-method`, not detail. Its
+answer may be example, comparison, topic introduction, or viewpoint support;
+do not force every mention question into `example`. Do not create paragraph
+function or text-organization subtypes without a confirmed source question.
+
+Reading A/B/C/D slot is source metadata. Do not output it in
+`similarityProfile`; the coordinator derives it from the group.
 
 ### skill
 
@@ -499,10 +585,8 @@ Rules:
 ```json
 "meta": {
   "generatedBy": "external-ai",
-  "model": "model-name-version",
   "promptVersion": "reading-choice-analysis-v1",
-  "reviewedBy": "reviewer-name",
-  "reviewedAt": "ISO-8601 datetime"
+  "reviewStatus": "reviewed"
 }
 ```
 
@@ -525,6 +609,7 @@ Output must:
 - Have NO invented enum values such as `conditionDrop`, `scopeNarrowing`, `valueReversal`, `inferenceBridge`, or `semantic`
 - Have NO markdown, code fence, comments, filename heading, or explanatory prose
 - Have `skill` as an object, never an array
+- Have a complete, controlled `similarityProfile` that agrees with `skill`
 - Have exactly one `status: "correct"` option per question matching answerKey
 - All `quote` fields must exactly match content paragraphs
 - All `paragraphId` references must exist in content

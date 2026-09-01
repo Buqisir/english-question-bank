@@ -87,7 +87,7 @@ const implementation = {
 }
 
 const routes = createExportRoutes(implementation)
-assert('createExportRoutes returns only the supported Print HTML/PDF routes', routes.length === 2)
+assert('createExportRoutes returns the supported Print and companion-analysis routes', routes.length === 4)
 
 const input = { ok: true }
 const request = { method: 'POST' }

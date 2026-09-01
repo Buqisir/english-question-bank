@@ -57,7 +57,7 @@
  * out of scope per aggregatePaperResults.ts:8-11).
  */
 import { Fragment, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
-import { ClipboardList, RefreshCw } from 'lucide-react'
+import { ClipboardList, FileDown, RefreshCw } from 'lucide-react'
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 // one-sheet-paper: 卷面字体/边距 token 只读消费——同 PaperSurface.tsx /
 // WritingPaperPage.tsx 的注入手法（CSS custom properties on a shared
@@ -170,6 +170,8 @@ import type {
 import { isNarrativeContinuationWritingAnalysis } from '../../domain/paperAsset.ts'
 import type { QuestionGroupCard } from '../../domain/questionBank'
 import type { LectureFocus, PaperSurfaceFocusIntent } from '../../../../shared/papersurface/types'
+import { exportCompanionAnalysisPdf as fetchCompanionAnalysisPdf } from '../../services/questionGroups.ts'
+import { prepareFileSaveTarget, saveBlobToTarget } from '../../services/fileDownload.ts'
 import { fetchSimilarPassages, fetchSimilarQuestions } from '../../services/similarQuestions.ts'
 import {
   SimilarQuestionsRailView,
@@ -646,6 +648,8 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   const [groupModels, setGroupModels] = useState<Record<string, GroupModel>>({})
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [analysisPdfBusy, setAnalysisPdfBusy] = useState(false)
+  const [analysisPdfError, setAnalysisPdfError] = useState('')
   const grammarFillGeometryFixture =
     grammarFillGeometryVariantId == null
       || (loading && canonicalConsumption == null)
@@ -3367,6 +3371,29 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     )
   }
 
+  async function downloadCompanionAnalysis(): Promise<void> {
+    if (!asset || reviewRevision || analysisPdfBusy) return
+    setAnalysisPdfError('')
+    try {
+      const cleanTitle = asset.paper.title.replace(/[-—－]\s*答案版\s*$/u, '')
+      const target = await prepareFileSaveTarget({
+        mode: 'download',
+        suggestedName: `${cleanTitle}-配套解析.pdf`,
+        mimeType: 'application/pdf',
+      })
+      if (!target) return
+      setAnalysisPdfBusy(true)
+      const result = await fetchCompanionAnalysisPdf(paperId)
+      await saveBlobToTarget(result.blob, result.fileName, target)
+    } catch (downloadError) {
+      setAnalysisPdfError(downloadError instanceof Error
+        ? downloadError.message
+        : String(downloadError))
+    } finally {
+      setAnalysisPdfBusy(false)
+    }
+  }
+
   if (loading) {
     return (
       <div className="paper-browse-page">
@@ -3390,7 +3417,23 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
 
   return (
     <div className="paper-browse-page">
-      <AppTopbar {...shellNav} pageTitle={asset.paper.title} onBack={onBackToWorkbench} />
+      <AppTopbar
+        {...shellNav}
+        pageTitle={asset.paper.title}
+        onBack={onBackToWorkbench}
+        actionsSlot={!reviewRevision ? (
+          <button
+            className="ghost-button"
+            type="button"
+            disabled={analysisPdfBusy}
+            onClick={() => void downloadCompanionAnalysis()}
+          >
+            <FileDown size={16} />
+            {analysisPdfBusy ? '生成解析中…' : '下载配套解析'}
+          </button>
+        ) : undefined}
+      />
+      {analysisPdfError && <p className="paper-browse-export-error" role="alert">{analysisPdfError}</p>}
       <div
         className={`paper-browse-shell${
           lectureOpen ? ' paper-browse-shell--lecture-open' : ''

@@ -1,0 +1,298 @@
+[
+  {
+    "facet_key": "grammar-fill.given.verb.finite",
+    "routes": [
+      "present-stable-description",
+      "present-frequency-marker",
+      "past-explicit-time",
+      "past-context-cue",
+      "past-narrative-chain",
+      "present-perfect-explicit-marker",
+      "present-perfect-current-effect",
+      "past-progressive-background",
+      "past-perfect-prior-past",
+      "modal-passive"
+    ],
+    "features": []
+  },
+  {
+    "facet_key": "grammar-fill.given.verb.non-finite",
+    "routes": [
+      "adverbial-purpose",
+      "adverbial-adjective-complement",
+      "adverbial-unexpected-result",
+      "adverbial-active",
+      "adverbial-passive",
+      "adverbial-prior-active",
+      "attributive-future",
+      "attributive-abstract-content",
+      "attributive-special-limiter",
+      "attributive-participle",
+      "object-verb-to-infinitive",
+      "object-verb-gerund",
+      "object-form-changes-meaning",
+      "object-wh-infinitive",
+      "object-preposition",
+      "object-but-structure",
+      "subject-direct-gerund",
+      "subject-direct-passive-gerund",
+      "subject-infinitive",
+      "subject-passive-infinitive",
+      "subject-fixed-gerund-frame",
+      "predicative-nominal-gerund",
+      "predicative-nominal-passive-gerund",
+      "predicative-nominal-infinitive",
+      "predicative-nominal-passive-infinitive",
+      "predicative-participle-property",
+      "predicative-participle-state",
+      "object-complement-general",
+      "object-complement-sensory",
+      "object-complement-special",
+      "object-complement-with",
+      "object-complement-participle-state",
+      "subject-complement-linking",
+      "subject-complement-general-passive",
+      "subject-complement-reporting-passive",
+      "subject-complement-sensory-passive",
+      "subject-complement-special-passive"
+    ],
+    "features": [
+      "preposed",
+      "postposed",
+      "active-relation",
+      "passive-relation",
+      "completed-state",
+      "ongoing-passive"
+    ]
+  },
+  {
+    "facet_key": "grammar-fill.given.conversion.noun-to-noun",
+    "routes": ["derived-noun"],
+    "features": []
+  },
+  {
+    "facet_key": "grammar-fill.given.conversion.noun-to-adjective",
+    "routes": ["derived-adjective"],
+    "features": []
+  },
+  {
+    "facet_key": "grammar-fill.given.conversion.noun-to-verb",
+    "routes": ["finite-result", "non-finite-result"],
+    "features": [
+      "present-stable-description",
+      "present-frequency-marker",
+      "past-explicit-time",
+      "past-context-cue",
+      "past-narrative-chain",
+      "present-perfect-explicit-marker",
+      "present-perfect-current-effect",
+      "past-progressive-background",
+      "past-perfect-prior-past",
+      "modal-passive",
+      "adverbial-purpose",
+      "adverbial-adjective-complement",
+      "adverbial-unexpected-result",
+      "adverbial-active",
+      "adverbial-passive",
+      "adverbial-prior-active",
+      "attributive-future",
+      "attributive-abstract-content",
+      "attributive-special-limiter",
+      "attributive-participle",
+      "object-verb-to-infinitive",
+      "object-verb-gerund",
+      "object-form-changes-meaning",
+      "object-wh-infinitive",
+      "object-preposition",
+      "object-but-structure",
+      "subject-direct-gerund",
+      "subject-direct-passive-gerund",
+      "subject-infinitive",
+      "subject-passive-infinitive",
+      "subject-fixed-gerund-frame",
+      "predicative-nominal-gerund",
+      "predicative-nominal-passive-gerund",
+      "predicative-nominal-infinitive",
+      "predicative-nominal-passive-infinitive",
+      "predicative-participle-property",
+      "predicative-participle-state",
+      "object-complement-general",
+      "object-complement-sensory",
+      "object-complement-special",
+      "object-complement-with",
+      "object-complement-participle-state",
+      "subject-complement-linking",
+      "subject-complement-general-passive",
+      "subject-complement-reporting-passive",
+      "subject-complement-sensory-passive",
+      "subject-complement-special-passive"
+    ]
+  },
+  {
+    "facet_key": "grammar-fill.given.conversion.adjective-to-adverb",
+    "routes": [
+      "modify-adjective",
+      "modify-predicate",
+      "modify-non-finite",
+      "modify-sentence",
+      "modify-adverb-number-quantity"
+    ],
+    "features": []
+  },
+  {
+    "facet_key": "grammar-fill.given.conversion.adjective-to-noun",
+    "routes": ["derived-noun"],
+    "features": []
+  },
+  {
+    "facet_key": "grammar-fill.given.conversion.verb-to-adjective",
+    "routes": ["true-derived-adjective"],
+    "features": []
+  },
+  {
+    "facet_key": "grammar-fill.given.conversion.verb-to-noun",
+    "routes": ["derived-noun"],
+    "features": []
+  },
+  {
+    "facet_key": "grammar-fill.given.conversion.verb-to-adverb",
+    "routes": ["derived-adverb"],
+    "features": []
+  },
+  {
+    "facet_key": "grammar-fill.given.noun.number",
+    "routes": [
+      "quantity-determiner",
+      "sentence-number-agreement",
+      "parallel-structure",
+      "contextual-multiple-generic",
+      "countable-sense-shift"
+    ],
+    "features": []
+  },
+  {
+    "facet_key": "grammar-fill.given.noun.genitive",
+    "routes": ["genitive"],
+    "features": []
+  },
+  {
+    "facet_key": "grammar-fill.given.adjective.comparison",
+    "routes": ["comparative", "superlative"],
+    "features": [
+      "than-marker",
+      "degree-modifier",
+      "parallel-comparative",
+      "semantic-comparison",
+      "fixed-comparative-frame",
+      "explicit-range-unique",
+      "semantic-superlative"
+    ]
+  },
+  {
+    "facet_key": "grammar-fill.given.pronoun",
+    "routes": [
+      "object-pronoun",
+      "possessive-determiner",
+      "possessive-pronoun",
+      "reflexive-pronoun",
+      "one-to-ones"
+    ],
+    "features": []
+  },
+  {
+    "facet_key": "grammar-fill.given.numeral",
+    "routes": ["cardinal-to-ordinal"],
+    "features": []
+  },
+  {
+    "facet_key": "grammar-fill.no-hint.preposition",
+    "routes": ["fixed-collocation", "contextual-relation"],
+    "features": []
+  },
+  {
+    "facet_key": "grammar-fill.no-hint.article",
+    "routes": [
+      "the-anaphoric",
+      "the-shared-context",
+      "the-postmodified-specific",
+      "the-structural",
+      "indefinite-first-mention",
+      "indefinite-identity-category",
+      "indefinite-structural"
+    ],
+    "features": [
+      "superlative",
+      "ordinal",
+      "one-the-other",
+      "the-same",
+      "proper-name-class",
+      "quantity-proportion",
+      "adjective-class",
+      "fixed-the-phrase",
+      "fixed-indefinite-phrase",
+      "concretized-abstract",
+      "a-consonant-sound",
+      "an-vowel-sound",
+      "spelling-sound-exception"
+    ]
+  },
+  {
+    "facet_key": "grammar-fill.no-hint.pronoun",
+    "routes": [
+      "referential-it",
+      "formal-subject-it",
+      "formal-object-it",
+      "cleft-it",
+      "substitution-that-those",
+      "impersonal-it"
+    ],
+    "features": []
+  },
+  {
+    "facet_key": "grammar-fill.no-hint.conjunction.coordinating",
+    "routes": [
+      "addition-sequence",
+      "contrast",
+      "choice",
+      "restatement",
+      "cause-effect",
+      "not-but",
+      "not-just-but-also",
+      "not-only-but-also",
+      "both-and",
+      "either-or",
+      "neither-nor",
+      "whether-or"
+    ],
+    "features": []
+  },
+  {
+    "facet_key": "grammar-fill.no-hint.conjunction.relative-clause",
+    "routes": [
+      "missing-subject",
+      "missing-object-predicative",
+      "missing-possessive",
+      "missing-adverbial",
+      "preposition-relative",
+      "as-special"
+    ],
+    "features": ["human", "thing", "whole-event", "restrictive", "non-restrictive"]
+  },
+  {
+    "facet_key": "grammar-fill.no-hint.conjunction.noun-clause",
+    "routes": ["that-clause", "whether-if", "what", "who", "when-where-why-how", "wh-infinitive"],
+    "features": ["subject-clause", "object-clause", "predicative-clause", "appositive-clause"]
+  },
+  {
+    "facet_key": "grammar-fill.no-hint.conjunction.adverbial-clause",
+    "routes": ["time", "reason", "condition", "concession", "purpose", "result", "manner", "comparison", "place"],
+    "features": [
+      "simultaneous",
+      "before-after",
+      "since-start",
+      "until-end",
+      "as-soon-as",
+      "negative-condition"
+    ]
+  }
+]
