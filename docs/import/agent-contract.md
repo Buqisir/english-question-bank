@@ -74,7 +74,9 @@ complete set仍必须通过正常Materialization、答案覆盖检查和Owner Re
 ## 单 writer
 
 同一 `paperId` 同时只允许一个 writer。发现该目录已有另一会话在写 → 停，不要并行、不要抢写。多卷并行本契约不做产品化。
-应用文与续写的写作分析可以并行做纯读取，最后仍由该卷唯一 writer 汇总；不得以多 writer 绕过 Materialization、revision 或认可合同。
+九份教学分析必须按 staged contract 拆给聚焦任务：阅读 A—D 各自独立，七选五、完形、语法填空、应用文、读后续写各自独立；不要让一个模型上下文包办整卷。该卷唯一 writer 负责汇总，同一工作树内默认逐份写入；并行只能做纯读取，或使用独立工作树和不重叠写面。九份齐全后统一跑确定性 projection，再由一个只验不写的任务检查串题、非精确证据、答案/ID 漂移、模板化复读和不恰当篇幅。不得以多 writer 绕过 Materialization、revision 或认可合同。
+
+正式生成每一份 staged analysis 时，唯一 writer 调项目插件 `.amp/plugins/nck1-analysis-agent.js` 注册的 `nck1_analyze_group`：模型固定为 `openai/gpt-5.6-sol`、reasoning effort 固定为 `medium`、worker tools 为空，每次调用新建一个 child context。一次只传一个 group 的源材料、该组权威答案、对应输出合同和共享讲解规范；禁止把整卷或另一组材料塞入同一次调用。工具只返回带 model / thread 身份的 envelope，不写工作树；writer 取其中 `analysis`，先跑现有题型 validator，再依次写对应文件。语法填空是唯一的前置规范化例外：须先调用 `stampGrammarFillDerivedFields`，由程序根据权威答案补时态、语态、一致敏感性和答案形式，再交给 validator；禁止让模型填写这些字段。失败时不得静默换模型、续聊旧 child thread 或自动升级 High；任何模型或重试策略调整都另行明确修改并验证。
 
 ## Orb 算力边界
 

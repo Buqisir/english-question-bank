@@ -1,11 +1,19 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import Ajv from 'ajv/dist/2020.js'
-import { createAnalyzerProviderShell, readPromptFile } from './analyzerProviderShell.mjs'
+import {
+  createAnalyzerProviderShell,
+  readPromptFile,
+  readTeachingAnalysisPrompt,
+} from './analyzerProviderShell.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '../..')
 const promptPath = path.join(rootDir, 'prompts/continuation-analysis-v1.md')
+const stagedAnalysisContractPath = path.join(
+  rootDir,
+  'prompts/continuation-writing-staged-analysis-v1.md',
+)
 const schemaPath = path.join(rootDir, 'schemas/paper-import/continuation-analysis-v1.schema.json')
 
 const schema = JSON.parse(readPromptFile(schemaPath))
@@ -53,7 +61,7 @@ export function buildNarrativeContinuationAnalysisMessages({ writingTask }) {
   return [
     {
       role: 'system',
-      content: readPromptFile(promptPath),
+      content: readTeachingAnalysisPrompt(promptPath),
     },
     {
       role: 'user',
@@ -68,6 +76,14 @@ export function buildNarrativeContinuationAnalysisMessages({ writingTask }) {
       ].join('\n'),
     },
   ]
+}
+
+export function buildNarrativeContinuationStagedAnalysisContract() {
+  return [
+    readPromptFile(promptPath).trimEnd(),
+    '',
+    readPromptFile(stagedAnalysisContractPath).trim(),
+  ].join('\n')
 }
 
 function formatSchemaErrors(errors = []) {

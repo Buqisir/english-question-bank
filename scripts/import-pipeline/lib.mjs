@@ -25,14 +25,8 @@
  *   sub-question lines. Does NOT strip (word) / (English phrase) / (CJK phrase) parens.
  */
 
-import { readFileSync } from 'node:fs'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { readTeachingAnalysisPrompt } from '../../server/paper-import-ai/analyzerProviderShell.mjs'
 import { normalizePassageText } from '../../server/paper-import-ai/normalizePassageText.mjs'
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const rootDir = path.resolve(__dirname, '../..')
-const readingPromptPath = path.join(rootDir, 'prompts/reading-choice-analysis-v1.md')
 
 // ---- Utility ----------------------------------------------------------------
 
@@ -880,7 +874,7 @@ export function buildGroups(fullText, paperId) {
  * Passes real answerKey (not blanked) per locked plan decision.
  */
 export function buildReadingAnalysisMessages({ paper, group }) {
-  const systemPrompt = readFileSync(readingPromptPath, 'utf8')
+  const systemPrompt = readTeachingAnalysisPrompt('prompts/reading-choice-analysis-v1.md')
 
   const sourceAssetVersion = Number(paper.sourceAssetVersion || 1) || 1
   const paragraphIds = group.paragraphs.map((p) => p.id)

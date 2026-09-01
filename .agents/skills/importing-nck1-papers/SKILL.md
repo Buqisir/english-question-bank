@@ -8,6 +8,108 @@ description: "Imports and resumes NCK1 English exam papers through the online so
 Run the repository's NCK1 import loop from its current durable state. The Owner
 describes the outcome; do not make them remember pipeline commands.
 
+## Generate analysis that teaches
+
+Before producing or revising any of the nine staged analyses, read and follow:
+
+- `reference/teaching-analysis-style-v1.md` — shared teaching-prose doctrine;
+- `reference/teaching-analysis-benchmark-v1.json` — fixed 25-case regression
+  set drawn only from tracked project assets;
+- `../../../docs/product/similar-question-dimensions.md` — settled type-specific
+  similarity fields and the boundary between model-authored analysis, source
+  metadata, deterministic derivation, and rebuildable Embedding indexes.
+
+The type-specific prompt owns schema and enum details. The shared doctrine owns
+how student-visible prose explains the already-validated reasoning. Keep
+internal facets and trap labels complete for matching and QA, but never use an
+internal term in `reason`, `note`, `fitSummary`, `explanation`, or similar prose
+as a substitute for restoring the context and stating the missing logical step.
+
+Generate teaching prose and similarity support in the same type-specific
+analysis pass. The analysis contract owns the machine-facing fields: Reading
+questions add `similarityProfile`; Seven Choices reuses its per-blank position,
+role, and primary-mechanism facets; Cloze groups add one `similaritySummary`;
+Grammar Fill blanks add `similarityProfile` beside their existing facet and
+role. Application reuses the complete Writing Task plus ReviewCard, and
+Continuation reuses the current source-grounded `continuationAnalysis`; do not
+invent duplicate AI summaries for those writing tasks. Never ask the worker to
+guess reading slot, year, source identity, authoritative answers, deterministic
+grammar answer forms, or Embedding vectors. Those are coordinator/indexer facts.
+Similarity fields are not student-facing prose and must not make Screen, Print,
+or PDF denser.
+
+Reading A–D, Seven Choices, Cloze, and Grammar Fill also produce the required
+student-visible `fullTranslationZh` in that same analysis pass. Seven Choices,
+Cloze, and Grammar Fill translate the authoritative answer-completed passage
+and retain each exact `[blankNo]` marker once in source-question order. Validate this field with the
+type-specific validator's `requireFullTranslation: true` option before accepting
+the staged result; never ask a renderer or a second model pass to fabricate it.
+The same seven objective groups also produce 1–2 reviewed
+`selectedLongSentences` with exact source anchoring, deterministic answer-filled
+display text, question links, teacher-style analysis, translation, and sparse
+underline spans. Validate them with `requireSelectedLongSentences: true`; PDF
+rendering and Paper consumption must read the same sidecar rather than fork it.
+
+Do not ask one model context to draft the whole paper. Split generation by the
+nine staged contracts: one focused worker for each Reading passage A–D, and one
+each for seven choices, cloze, grammar fill, application, and continuation.
+Each worker reads only its exact source group, authoritative answers, output
+contract, and shared doctrine. The paper's single writer remains the
+coordinator and writes or accepts one non-overlapping staged file at a time in
+the same worktree; concurrent writers require separate worktrees. After all
+nine files exist, run the deterministic projection once, then use a separate
+read-only checker to look for cross-story contamination, non-exact evidence,
+answer/ID drift, repeated stock prose, and density that does not match the
+question's difficulty.
+
+Use the project-local `nck1_analyze_group` tool for each of those nine generation
+calls. It pins `openai/gpt-5.6-sol` at medium reasoning, disables worker tools,
+and creates a fresh child context for every call. Pass exactly one `group`, one
+matching `sourceGroup`, that group's `authoritativeAnswers`, the relevant
+tracked `outputContract`, and the shared `teachingDoctrine`; never put the full
+paper or another group's material in the request. The tool returns a provenance
+envelope and does not write files. The coordinator validates only its
+`analysis` member with the existing type-specific validator before writing the
+staged file. For Grammar Fill, first run the exported
+`stampGrammarFillDerivedFields` normalizer so the source-owned tense, voice,
+agreement, and answer-form fields exist before validation; do not ask the model
+to supply them. Do not silently switch models, reuse a child thread, or add an
+automatic High retry when generation fails.
+
+Dispatch independent `nck1_analyze_group` calls with a maximum concurrency of
+four. Calls may run concurrently because they read disjoint source groups and
+the tool writes no files. The coordinator remains the only writer: after each
+envelope returns, validate it and persist staged files serially, never through
+parallel worktree writers. A failed group may be rerun alone only after its
+failure is understood; completed groups are not regenerated.
+
+Application and Continuation use tracked composed output contracts rather than
+scratch-only instructions. Build the Application contract with
+`buildApplicationStagedAnalysisContract`; build the Continuation contract with
+`buildNarrativeContinuationStagedAnalysisContract`. Each function appends its
+tracked staged packaging file to the established type-specific base prompt.
+Never pass either base prompt alone, hand-append a one-paper wrapper, or put
+paper-specific people, perspective, events, or word counts into the reusable
+packaging contract.
+
+Within each staged-analysis shard, use one model pass by default. Do not add a
+separate style rewrite pass merely to sound polished. If a fixed benchmark
+shows that teaching prose changes facts or evidence, preserve the factual pass
+and propose a separate constrained presentation pass before changing the
+pipeline.
+
+Before Owner Review:
+
+1. run the normal schema/evidence validators;
+2. apply the shared doctrine's silent quality gate;
+3. for prompt or style changes, compare affected cases from the fixed benchmark
+   on all six scoring dimensions;
+4. fail closed on a prettier explanation that weakens evidence, overstates a
+   conclusion, or treats a sample writing route as uniquely required.
+
+Do not store commercial answer-book PDFs, copied explanations, or institutional
+style imitation instructions in the repository. Distill teaching moves only.
+
 ## Start from the durable control plane
 
 1. Read `docs/import/agent-contract.md` before changing import data.

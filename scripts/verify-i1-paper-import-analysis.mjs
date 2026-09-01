@@ -267,6 +267,9 @@ function validAnalysis(input = fixtureInput()) {
             label,
             optionTranslationZh: `${label} 选项`,
             status: label === question.answerKey ? 'correct' : 'wrong',
+            ...(label === question.answerKey ? {} : {
+              trap: { primaryType: 'unsupportedClaim', explanation: `${label} 项放回原文不能成立。` },
+            }),
           })),
           locationParaphrases: [],
         },
@@ -314,6 +317,9 @@ function validFourGroupAnalyses(parseResult) {
                 label,
                 optionTranslationZh: `${label} 选项`,
                 status: label === question.answerKey ? 'correct' : 'wrong',
+                ...(label === question.answerKey ? {} : {
+                  trap: { primaryType: 'unsupportedClaim', explanation: `${label} 项放回原文不能成立。` },
+                }),
               })),
               locationParaphrases: [],
             },
@@ -525,6 +531,32 @@ async function assertAnalyzeValidation() {
   })
   assert('valid GPT relay stub analysis passes', gpt.provider === 'openai-compatible')
 
+  {
+    const profiled = validAnalysis(input)
+    for (const item of Object.values(profiled.questions)) {
+      item.similarityProfile = {
+        family: 'detail',
+        subtype: 'general-detail',
+        detailScope: 'single',
+        technique: null,
+      }
+    }
+    const result = await analyzeReadingImportCandidate(input, {
+      providerCallers: { deepseek: stubProviderReturning(profiled) },
+    })
+    assert('controlled reading similarityProfile passes', Object.values(result.analysis.questions).every((item) => item.similarityProfile.family === 'detail'))
+  }
+  await assertRejects('reading similarityProfile must agree with legacy skill', () => {
+    const payload = validAnalysis(input)
+    payload.questions[input.group.questions[0].id].similarityProfile = {
+      family: 'writing-method',
+      subtype: 'writing-method',
+      detailScope: null,
+      technique: 'example',
+    }
+    return analyzeReadingImportCandidate(input, { providerCallers: { deepseek: stubProviderReturning(payload) } })
+  }, /similarityProfile 与 skill\.primary 不一致/)
+
   const retry = await analyzeReadingImportCandidate(input, {
     providerCallers: { deepseek: stubProviderFailsOnceThen(validAnalysis(input)) },
   })
@@ -556,6 +588,13 @@ async function assertAnalyzeValidation() {
     payload.questions['q-extra'] = payload.questions[input.group.questions[0].id]
     return analyzeReadingImportCandidate(input, { providerCallers: { deepseek: stubProviderReturning(payload) } })
   }, /questionIds/)
+  await assertRejects('every wrong reading option needs student-visible analysis', () => {
+    const payload = validAnalysis(input)
+    const firstQuestion = input.group.questions[0]
+    const wrongOption = payload.questions[firstQuestion.id].optionAnalysis.find((option) => option.status === 'wrong')
+    delete wrongOption.trap
+    return analyzeReadingImportCandidate(input, { providerCallers: { deepseek: stubProviderReturning(payload) } })
+  }, /每个阅读错项都必须提供可展示的干扰项辨析/)
   await assertRejects('answer mismatch fails before publish', () => {
     const payload = validAnalysis(input)
     const firstQuestion = input.group.questions[0]

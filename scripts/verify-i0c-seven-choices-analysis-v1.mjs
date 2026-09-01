@@ -135,6 +135,10 @@ function selfCheck() {
   assert(normalizedPrompt.includes('at least one option-side signal'), 'prompt requires option-side signal')
   assert(normalizedPrompt.includes('at least one context-side signal'), 'prompt requires context-side signal')
   assert(prompt.includes('1-8 English words'), 'prompt prefers short signalText chunks')
+  assert(prompt.includes('Final Literal-Substring Check'), 'prompt requires final literal-substring audit')
+  assert(prompt.includes('source `serves` cannot become'), 'prompt forbids signal inflection drift')
+  assert(prompt.includes('literal substring search'), 'prompt requires literal source search')
+  assert(prompt.includes('Do not return until every literal search succeeds'), 'prompt fails closed on non-exact signals')
   assert(!prompt.includes('topic-word-echo'), 'prompt excludes stale topic-word-echo key')
   assert(!prompt.includes('pronoun-reference'), 'prompt excludes stale pronoun-reference key')
 

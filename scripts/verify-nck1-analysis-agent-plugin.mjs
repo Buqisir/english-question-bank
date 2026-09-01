@@ -1,0 +1,245 @@
+#!/usr/bin/env node
+
+import assert from 'node:assert/strict'
+
+import nck1AnalysisAgentPlugin, {
+  NCK1_ANALYSIS_AGENT_MODEL,
+  NCK1_ANALYSIS_AGENT_REASONING_EFFORT,
+  NCK1_ANALYSIS_GROUPS,
+  buildNck1AnalysisAgentMessage,
+  stampNck1AnalysisAgentMeta,
+  validateNck1AnalysisGroupInput,
+} from '../.amp/plugins/nck1-analysis-agent.js'
+
+function request(group, marker = group) {
+  return {
+    group,
+    sourceGroup: {
+      groupKey: group,
+      material: {
+        groupId: `group-verifier-${group}`,
+        passage: `SOURCE-${marker}`,
+        questions: [{ id: `q-${marker}`, stem: `Question ${marker}` }],
+      },
+    },
+    authoritativeAnswers: { [`q-${marker}`]: 'A' },
+    outputContract: `CONTRACT-${marker}: return {"marker":"${marker}"}`,
+    teachingDoctrine: `DOCTRINE-${marker}: explain the missing reasoning step.`,
+  }
+}
+
+const writingContractMarkers = {
+  application: [
+    '# Application Writing Model Answer Prompt — V3',
+    '# NCK1 Staged Application Analysis Packaging Contract — V1',
+  ],
+  continuation: [
+    '# Narrative Continuation Analysis Prompt — V1',
+    '# NCK1 Staged Narrative Continuation Packaging Contract — V1',
+  ],
+}
+
+function writingRequest(group) {
+  const value = request(group, `${group.toUpperCase()}-ONLY`)
+  return {
+    ...value,
+    authoritativeAnswers: {},
+    outputContract: `${value.outputContract}\n\n${writingContractMarkers[group].join('\n\n')}`,
+  }
+}
+
+assert.deepEqual(NCK1_ANALYSIS_GROUPS, [
+  'reading-a',
+  'reading-b',
+  'reading-c',
+  'reading-d',
+  'seven',
+  'cloze',
+  'grammar',
+  'application',
+  'continuation',
+])
+assert.equal(NCK1_ANALYSIS_AGENT_MODEL, 'openai/gpt-5.6-sol')
+assert.equal(NCK1_ANALYSIS_AGENT_REASONING_EFFORT, 'medium')
+
+const valid = request('reading-a', 'A-ONLY')
+assert.deepEqual(validateNck1AnalysisGroupInput(valid), valid)
+const message = buildNck1AnalysisAgentMessage(valid)
+assert.match(message, /^Generate exactly the reading-a staged analysis/u)
+assert.match(message, /SOURCE-A-ONLY/u)
+assert.match(message, /immutable authoritative answers/u)
+assert.match(message, /Return JSON only/u)
+
+assert.throws(
+  () => validateNck1AnalysisGroupInput({ ...valid, group: 'whole-paper' }),
+  /group must be one of/u,
+)
+assert.throws(
+  () => validateNck1AnalysisGroupInput({
+    ...valid,
+    sourceGroup: { ...valid.sourceGroup, groupKey: 'reading-b' },
+  }),
+  /groupKey must equal group/u,
+)
+assert.throws(
+  () => validateNck1AnalysisGroupInput({
+    ...valid,
+    sourceGroup: {
+      groupKey: 'reading-a',
+      material: {
+        groups: {
+          'group-verifier-reading-a': {},
+          'group-verifier-reading-b': {},
+        },
+      },
+    },
+  }),
+  /more than one group/u,
+)
+assert.throws(
+  () => validateNck1AnalysisGroupInput({
+    ...valid,
+    sourceGroup: {
+      groupKey: 'reading-a',
+      material: { groupId: 'group-verifier-reading-c' },
+    },
+  }),
+  /different or additional staged group/u,
+)
+assert.throws(
+  () => validateNck1AnalysisGroupInput({
+    ...valid,
+    authoritativeAnswers: {
+      'q-A-ONLY': 'A',
+      'q-OTHER-GROUP': 'B',
+    },
+  }),
+  /question outside sourceGroup/u,
+)
+assert.throws(
+  () => validateNck1AnalysisGroupInput({ ...valid, extra: true }),
+  /unexpected or missing fields/u,
+)
+for (const group of ['application', 'continuation']) {
+  assert.throws(
+    () => validateNck1AnalysisGroupInput(request(group)),
+    /must include its tracked base and staged packaging contracts/u,
+  )
+  assert.throws(
+    () => validateNck1AnalysisGroupInput({
+      ...request(group),
+      outputContract: writingContractMarkers[group][1],
+    }),
+    /must include its tracked base and staged packaging contracts/u,
+  )
+  const staged = writingRequest(group)
+  assert.deepEqual(validateNck1AnalysisGroupInput(staged), staged)
+}
+assert.throws(
+  () => validateNck1AnalysisGroupInput({
+    ...valid,
+    outputContract: 'x'.repeat(80_001),
+  }),
+  /bounded group-analysis limit/u,
+)
+
+let agentConfig = null
+let tool = null
+const runs = []
+const responses = [
+  {
+    threadID: 'T-11111111-1111-4111-8111-111111111111',
+    text: '{"marker":"A-ONLY","meta":{"generatedBy":"external-ai","model":"invented-model","promptVersion":"reading-choice-analysis-v1","reviewStatus":"reviewed","reviewedBy":"invented-reviewer","reviewedAt":"2099-01-01"}}',
+  },
+  { threadID: 'T-22222222-2222-4222-8222-222222222222', text: '{"marker":"C-ONLY"}' },
+  { threadID: 'T-33333333-3333-4333-8333-333333333333', text: '```json\n{"marker":"bad"}\n```' },
+]
+
+await nck1AnalysisAgentPlugin({
+  createAgent(config) {
+    agentConfig = config
+    return {
+      async run(prompt, options) {
+        runs.push({ prompt, options })
+        return responses[runs.length - 1]
+      },
+    }
+  },
+  registerTool(definition) {
+    tool = definition
+  },
+})
+
+assert.deepEqual(agentConfig, {
+  name: 'NCK1 staged analysis generator',
+  model: 'openai/gpt-5.6-sol',
+  reasoningEffort: 'medium',
+  tools: [],
+  features: [],
+  instructions: agentConfig.instructions,
+})
+assert.match(agentConfig.instructions, /one and only one/u)
+assert.match(agentConfig.instructions, /Never solve again or alter an authoritative answer/u)
+assert.match(agentConfig.instructions, /Do not invent a runtime model name/u)
+assert.equal(tool.name, 'nck1_analyze_group')
+assert.match(tool.description, /safe to invoke concurrently for disjoint groups/u)
+assert.deepEqual(tool.inputSchema.properties.group.enum, NCK1_ANALYSIS_GROUPS)
+assert.deepEqual(tool.inputSchema.required, [
+  'authoritativeAnswers',
+  'group',
+  'outputContract',
+  'sourceGroup',
+  'teachingDoctrine',
+])
+
+const context = { thread: { id: 'T-aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa' } }
+const first = JSON.parse(await tool.execute(valid, context))
+const secondRequest = request('reading-c', 'C-ONLY')
+const second = JSON.parse(await tool.execute(secondRequest, context))
+
+assert.deepEqual(first, {
+  schemaVersion: 'nck1-analysis-agent-result-v1',
+  group: 'reading-a',
+  model: 'openai/gpt-5.6-sol',
+  reasoningEffort: 'medium',
+  threadID: 'T-11111111-1111-4111-8111-111111111111',
+  analysis: {
+    marker: 'A-ONLY',
+    meta: {
+      generatedBy: 'external-ai',
+      model: 'openai/gpt-5.6-sol',
+      promptVersion: 'reading-choice-analysis-v1',
+      reviewStatus: 'reviewed',
+    },
+  },
+})
+assert.equal(second.group, 'reading-c')
+assert.equal(second.threadID, 'T-22222222-2222-4222-8222-222222222222')
+assert.deepEqual(second.analysis, { marker: 'C-ONLY' })
+assert.equal(runs.length, 2)
+assert.deepEqual(runs.map(({ options }) => options), [
+  {
+    parentThreadID: context.thread.id,
+    timeoutMs: 600_000,
+  },
+  {
+    parentThreadID: context.thread.id,
+    timeoutMs: 600_000,
+  },
+])
+assert.match(runs[0].prompt, /A-ONLY/u)
+assert.doesNotMatch(runs[0].prompt, /C-ONLY/u)
+assert.match(runs[1].prompt, /C-ONLY/u)
+assert.doesNotMatch(runs[1].prompt, /A-ONLY/u)
+
+await assert.rejects(
+  tool.execute(request('cloze', 'INVALID-JSON'), context),
+  /did not return JSON-only output/u,
+)
+assert.equal(runs.length, 3)
+
+const writingWithoutMeta = { taskType: 'application', modelAnswer: 'Example.' }
+assert.equal(stampNck1AnalysisAgentMeta(writingWithoutMeta), writingWithoutMeta)
+assert.deepEqual(writingWithoutMeta, { taskType: 'application', modelAnswer: 'Example.' })
+
+console.log('PASS NCK1 one-shot analysis agent pins GPT-5.6 Sol medium and isolates one JSON group per run')

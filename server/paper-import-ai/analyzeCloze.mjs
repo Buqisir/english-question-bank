@@ -1,6 +1,12 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { createAnalyzerProviderShell, readPromptFile, rewriteApiPrompt } from './analyzerProviderShell.mjs'
+import {
+  assertFullTranslationZh,
+  assertSelectedLongSentences,
+  createAnalyzerProviderShell,
+  readTeachingAnalysisPrompt,
+  rewriteApiPrompt,
+} from './analyzerProviderShell.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '../..')
@@ -40,7 +46,7 @@ function optionalString(value) {
 }
 
 function readApiPrompt() {
-  return rewriteApiPrompt(readPromptFile(promptPath))
+  return rewriteApiPrompt(readTeachingAnalysisPrompt(promptPath))
 }
 
 function assertClozeAnalyzeInput(input) {
@@ -116,7 +122,12 @@ export function buildClozeAnalysisMessages({ paper, group }) {
   ]
 }
 
-export function validateClozeShape(analysis, { paper, group }) {
+export function validateClozeShape(analysis, {
+  paper,
+  group,
+  requireFullTranslation = false,
+  requireSelectedLongSentences = false,
+}) {
   if (!analysis || typeof analysis !== 'object' || Array.isArray(analysis)) throw new Error('AI 未返回 JSON 对象。')
   if (analysis.schemaVersion !== 'cloze-analysis-v1') throw new Error('AI JSON schemaVersion 不正确。')
   if (analysis.paperId !== paper.paperId) throw new Error('AI JSON paperId 与当前试卷不一致。')
@@ -126,6 +137,18 @@ export function validateClozeShape(analysis, { paper, group }) {
   }
   if (!analysis.blanks || typeof analysis.blanks !== 'object' || Array.isArray(analysis.blanks)) {
     throw new Error('AI JSON blanks 必须是对象。')
+  }
+  const groupAnalysis = analysis.groups?.[group.groupId]
+  if (requireFullTranslation) {
+    assertFullTranslationZh(groupAnalysis, group, { requireBlankMarkers: true })
+  }
+  assertSelectedLongSentences(groupAnalysis, group, {
+    required: requireSelectedLongSentences,
+  })
+  if (groupAnalysis?.similaritySummary !== undefined) {
+    const summary = optionalString(groupAnalysis.similaritySummary)
+    if (!summary) throw new Error('AI JSON groups.similaritySummary 不能为空。')
+    if (/[\r\n]/u.test(summary)) throw new Error('AI JSON groups.similaritySummary 必须是一句话。')
   }
 
   const expectedQuestionIds = group.questions.map((q) => q.id).sort()
@@ -144,7 +167,9 @@ export function validateClozeShape(analysis, { paper, group }) {
 
     // Required fields
     if (!optionalString(item.blankId)) throw new Error(`${questionId}: 缺少 blankId。`)
+    if (item.blankId !== sourceQuestion?.blankId) throw new Error(`${questionId}: blankId does not match source question.`)
     if (typeof item.blankNo !== 'number') throw new Error(`${questionId}: blankNo 必须是数字。`)
+    if (item.blankNo !== Number(sourceQuestion?.stem)) throw new Error(`${questionId}: blankNo does not match source question.`)
     if (!VALID_POS.has(item.pos)) throw new Error(`${questionId}: pos 值无效：${item.pos}。`)
     if (!item.correctFit || typeof item.correctFit !== 'object') throw new Error(`${questionId}: 缺少 correctFit。`)
     if (!optionalString(item.correctFit.reason)) throw new Error(`${questionId}: 缺少 correctFit.reason。`)

@@ -654,8 +654,8 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
     },
     groups: grammarFillAnalysis.groups || {},
     // blanks carries the AI's facetKey/role/answer/evidence/... plus the
-    // server-stamped tense/voice/agreementSensitive/form (analyzeGrammarFill.mjs
-    // stampVerbAxes) verbatim.
+    // server-stamped tense/voice/agreementSensitive/form/similarityForm
+    // (analyzeGrammarFill.mjs stampGrammarFillDerivedFields) verbatim.
     blanks: grammarFillAnalysis.blanks || {},
   }
 

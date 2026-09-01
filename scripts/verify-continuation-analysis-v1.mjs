@@ -8,6 +8,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url'
 import {
   analyzeNarrativeContinuationImportCandidate,
   buildNarrativeContinuationAnalysisMessages,
+  buildNarrativeContinuationStagedAnalysisContract,
   validateNarrativeContinuationAnalysis,
 } from '../server/paper-import-ai/analyzeNarrativeContinuation.mjs'
 import {
@@ -346,11 +347,27 @@ check('schema and prompt artifacts name the same contract', () => {
     'utf8',
   ))
   const prompt = readFileSync(path.join(rootDir, 'prompts/continuation-analysis-v1.md'), 'utf8')
+  const stagedPrompt = readFileSync(
+    path.join(rootDir, 'prompts/continuation-writing-staged-analysis-v1.md'),
+    'utf8',
+  ).trim()
   assert.equal(schema.$id, 'continuation-analysis-v1.schema.json')
   assert.equal(schema.properties.schemaVersion.const, 'continuation-analysis-v1')
   assert.match(prompt, /continuation-analysis-v1/)
+  assert.match(prompt, /`softAffordances`, `supportedOptions`.*grounded statement/s)
+  assert.match(prompt, /`openChoices`.*non-empty string only/s)
+  assert.match(prompt, /Every `routeRationale` item is a grounded statement/)
   assert.doesNotMatch(prompt, /"modelAnswer"\s*:/)
   assert.doesNotMatch(prompt, /"continuationDesign"\s*:/)
+  assert.match(stagedPrompt, /^# NCK1 Staged Narrative Continuation Packaging Contract — V1$/m)
+  assert.match(stagedPrompt, /"taskType": "continuation"/)
+  assert.match(stagedPrompt, /"continuationAnalysis"/)
+  assert.match(stagedPrompt, /supplied `wordCountTarget`/)
+  assert.doesNotMatch(stagedPrompt, /brothers|twins|first-person|150 student-written/i)
+  assert.equal(
+    buildNarrativeContinuationStagedAnalysisContract(),
+    `${prompt.trimEnd()}\n\n${stagedPrompt}`,
+  )
 })
 
 const providerResult = await analyzeNarrativeContinuationImportCandidate(

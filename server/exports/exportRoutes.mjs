@@ -15,12 +15,43 @@ function sendHtml(response, { body, fileName }) {
 
 export function createExportRoutes(exportImplementation) {
   const {
+    exportCompanionAnalysisHtml,
+    exportCompanionAnalysisPdf,
     exportPrintHtml,
     exportPrintPdf,
     sendPdf,
   } = exportImplementation
 
   return [
+    defineRoute('POST', /^\/api\/exports\/companion-analysis-html$/, async ({ request, response, context }) => {
+      try {
+        const input = await context.readJsonBody(request)
+        const result = exportCompanionAnalysisHtml(input)
+        sendHtml(response, result)
+      } catch (error) {
+        const message = routeError(error)
+        const status = error?.code === 'COMPANION_ANALYSIS_NOT_FOUND' ? 404 : 500
+        context.sendJson(response, status, { error: message })
+      }
+    }),
+
+    defineRoute('POST', /^\/api\/exports\/companion-analysis-pdf$/, async ({ request, response, context }) => {
+      try {
+        const input = await context.readJsonBody(request)
+        const result = exportCompanionAnalysisPdf(input)
+        sendPdf(response, result.body, result.fileName, result.outputPath)
+      } catch (error) {
+        const message = routeError(error)
+        if (error?.code === 'COMPANION_ANALYSIS_NOT_FOUND') {
+          context.sendJson(response, 404, { error: message })
+        } else if (message.includes('vivliostyle') || message.includes('not found') || message.includes('ENOENT')) {
+          context.sendJson(response, 503, { error: `配套解析 PDF 不可用: ${message}` })
+        } else {
+          context.sendJson(response, 500, { error: message })
+        }
+      }
+    }),
+
     defineRoute('POST', /^\/api\/exports\/print-html$/, async ({ request, response, context }) => {
       const input = await context.readJsonBody(request)
       const result = exportPrintHtml(input)

@@ -34,7 +34,8 @@ Reason carefully internally about:
 
 - each blank's part of speech (verb / noun / adjective / adverb / phrase / other)
 - Collocation Fit: does the correct option collocate in its sentence
-- distractor glosses: what each wrong option means in this context (never why it is wrong)
+- each distractor in the current event: what it means here, why it is tempting,
+  and what concrete part of the context makes it fail
 - optional POS Signature: only when collocation alone does not lock the answer
 - exact, highlightable evidence substrings that prove the reasoning
 - exact field names and enum values
@@ -71,7 +72,19 @@ Many blanks are solved by Collocation Fit alone — omit `signatureFacet` when n
 
 **Guard `action-sequence` hardest — it is the most over-applied signature.** Use `cloze.signature.verb.action-sequence` ONLY when the temporal ORDER of two or more actions is itself the key that selects the option (e.g. one action must come before/after another, or a chain of steps fixes the answer). A verb blank solved by word meaning, collocation, or who-does-what to whom is NOT action-sequence — leave its `signatureFacet` empty. Most verb blanks have NO signature.
 
-**Asymmetric option treatment.** The correct option gets a `correctFit.reason` explaining WHY it fits. Distractors get only `distractorGlosses[].meaning` — a short Chinese gloss of what the option means in this context. NEVER argue why a distractor is wrong.
+**Different jobs, complete teaching.** The correct option gets a
+`correctFit.reason` that restores the immediate scene and explains the decisive
+context relation. Every distractor uses the existing
+`distractorGlosses[].meaning` field for one compact contextual discrimination:
+what the word or phrase would mean here, why a student might consider it, and
+why it does not describe this event or complete this sentence. The field name is
+kept for schema compatibility; its content is no longer a bare dictionary gloss.
+
+Internal labels such as Collocation Fit, POS Signature, semantic field, action
+sequence, and affective consistency are for classification. Do not lead
+`reason`, `meaning`, `relation`, or `teachingNote` with those labels. First say
+what the people, actions, comparison, or sentence actually show. A term may be
+added only after the concrete explanation, when it gives a reusable name.
 
 **Logical connectors are NOT a blank type.** They are `logical-connector` evidence items.
 
@@ -91,7 +104,20 @@ Many blanks are solved by Collocation Fit alone — omit `signatureFacet` when n
   "groups": {
     "group-...cloze": {
       "overview": "中文：文章主旨 + 文体（记叙文 / 夹叙夹议）",
-      "affectiveArc": "中文：情感主线或故事走向（如先抑后扬），供情感一致类空参照"
+      "fullTranslationZh": "填入正答后的全文中文翻译，每空保留 [41]...[55] 标记",
+      "affectiveArc": "中文：用人物处境与关键变化概括情感主线或故事走向",
+      "similaritySummary": "中文一句：谁在什么处境中做了什么，事情怎样发展或发生转变",
+      "selectedLongSentences": [
+        {
+          "paragraphId": "para-...",
+          "sourceText": "保留 __44__ 等空标的原文精确片段",
+          "displayText": "按权威答案补全空格后的同一句",
+          "relatedQuestionIds": ["q-...-044", "q-...-045"],
+          "translationZh": "自然中文翻译",
+          "analysisZh": "先找主干，再说明修饰和逻辑关系",
+          "underlineTexts": ["displayText 中 1—3 个唯一精确片段"]
+        }
+      ]
     }
   },
   "blanks": {
@@ -102,12 +128,12 @@ Many blanks are solved by Collocation Fit alone — omit `signatureFacet` when n
       "signatureFacet": "cloze.signature.verb.action-sequence",
       "correctFit": {
         "optionLabel": "C",
-        "reason": "中文：为什么对——搭配合理（施受/修饰关系）+ 特有考点怎样锁定"
+        "reason": "中文：先还原当前事件，再说明哪个上下文细节锁定答案"
       },
       "distractorGlosses": [
-        { "optionLabel": "A", "optionText": "glance", "meaning": "中文：该词在此语境的意思" },
-        { "optionLabel": "B", "optionText": "...", "meaning": "中文：词义" },
-        { "optionLabel": "D", "optionText": "...", "meaning": "中文：词义" }
+        { "optionLabel": "A", "optionText": "glance", "meaning": "中文：此处词义；看似能接哪一点；放回当前语境为何不成立" },
+        { "optionLabel": "B", "optionText": "...", "meaning": "中文：简短、具体的语境辨析" },
+        { "optionLabel": "D", "optionText": "...", "meaning": "中文：简短、具体的语境辨析" }
       ],
       "evidence": [
         {
@@ -115,7 +141,7 @@ Many blanks are solved by Collocation Fit alone — omit `signatureFacet` when n
           "signalText": "the house",
           "signalSide": "context-after",
           "targetText": "pulled down",
-          "relation": "中文：pull down 的宾语是 the house，施受关系成立。"
+          "relation": "中文：the house 是被拆除的对象，因此这里表达 pull the house down。"
         }
       ],
       "teachingNote": "中文一句：可迁移的解题动作。"
@@ -135,8 +161,12 @@ Every `blanks[questionId]` MUST include:
 - `blankId` — exact blankId from the input
 - `blankNo` — integer blank number (41–55)
 - `pos` — exactly one of: `verb`, `noun`, `adjective`, `adverb`, `phrase`, `other`
-- `correctFit` — object with `reason` (1–3 Chinese sentences); `optionLabel` is recommended and MUST match the supplied answer key when present
-- `distractorGlosses` — array; one entry per non-answer option, each with `optionLabel`, `optionText`, `meaning`
+- `correctFit` — object with `reason` (1–3 Chinese sentences); restore the
+  current event or sentence, then explain the relation that selects the answer;
+  `optionLabel` is recommended and MUST match the supplied answer key when present
+- `distractorGlosses` — array; one entry per non-answer option, each with
+  `optionLabel`, `optionText`, `meaning`; `meaning` must combine contextual
+  meaning, temptation, and concrete mismatch rather than stop at translation
 - `evidence` — array with ≥1 item; MUST include ≥1 `collocation-partner` item
 - `teachingNote` — one Chinese sentence
 
@@ -147,7 +177,28 @@ Every `blanks[questionId]` MUST include:
 `groups[groupId]` MUST include:
 
 - `overview` — required; Chinese: main topic + text type
+- `fullTranslationZh` — required for new NCK1 generation; translate the complete
+  answer-filled passage into natural Chinese in source order. Immediately before
+  each translated correct word or phrase, keep its exact ASCII blank marker
+  (`[41]` ... `[55]`, or the source paper's actual blank numbers), exactly once.
+  Preserve paragraph breaks; do not add analysis or vocabulary notes.
 - `affectiveArc` — required; 1–2 sentences; Chinese: emotional arc or story direction
+- `similaritySummary` — required for new generation; exactly one compact Chinese
+  sentence that says both what happens and how the situation develops or turns.
+  This is the stable text later embedded for whole-passage similarity. Do not
+  write a label such as “温暖的成长故事”, list the fifteen answers, or imitate
+  the model answer. The Embedding vector itself is generated and versioned by
+  the indexer, never by this analysis response.
+- `selectedLongSentences` — required; 1–2 sentences with real teaching value.
+  Prefer a difficult sentence that carries the story's key meaning or connects
+  several blanks; do not select it merely for length. `paragraphId` and
+  `sourceText` must locate the stored source exactly and retain its `__44__`-style
+  markers. `displayText` must be the deterministic form completed with the
+  authoritative option texts. `relatedQuestionIds` must belong to this group.
+  `analysisZh` first restores the main trunk, then attaches modifiers and logical
+  relations instead of listing grammar labels. `underlineTexts` contains 1–3
+  unique, non-overlapping exact substrings of `displayText`; underline only the
+  decisive structure.
 
 ## Evidence Rules
 
@@ -202,9 +253,31 @@ Do NOT pad evidence. Add an item only when it genuinely helps.
 
 One entry per non-answer option. For a standard 4-option blank with correct answer C, the three distractors are A, B, D.
 
-Each entry: `optionLabel`, `optionText` (the option text from the input), `meaning` (short Chinese gloss of what it means in context).
+Each entry: `optionLabel`, `optionText` (the option text from the input),
+`meaning` (one compact Chinese contextual discrimination).
 
-Do NOT explain why it is wrong. The student infers the mismatch from the correct-fit reasoning and the gloss.
+Write `meaning` in this order when all three steps are useful:
+
+1. the word or phrase's meaning in this sentence;
+2. the nearby word, familiar collocation, or partial event that makes it tempting;
+3. the exact action, object, contrast, cause, or story direction it fails to express.
+
+For an obvious distractor, steps 2 and 3 may be merged into one short clause.
+Do not invent a difference merely to make every line equally long. Never give
+only a reusable dictionary gloss such as `优势、好处` or `贡献`.
+
+Good shape:
+
+```text
+“贡献”；它看似也能表示正面结果，但这里比较的是作者完成 15 英里与对方准备
+52.4 英里的成绩大小，不是在说作者为别人作了什么贡献。
+```
+
+Bad shape:
+
+```text
+贡献。
+```
 
 ## Strictly Forbidden
 

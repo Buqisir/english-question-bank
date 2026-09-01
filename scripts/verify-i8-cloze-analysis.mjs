@@ -77,9 +77,11 @@ function assertPromptContract() {
     assert(`prompt names evidence type: ${type}`, prompt.includes(type))
   }
 
-  // Asymmetric distractor rule.
-  assert('prompt describes asymmetric distractor rule', prompt.includes('distractor') && (prompt.includes('gloss') || prompt.includes('meaning')))
-  assert('prompt instructs not to argue why distractor is wrong', prompt.includes('wrong') || prompt.includes('why'))
+  // Contextual distractor analysis must cover meaning, temptation, and mismatch.
+  assert('prompt asks for distractor contextual meaning', prompt.includes('what the word or phrase would mean here'))
+  assert('prompt asks why a distractor is tempting', prompt.includes('why a student might consider it'))
+  assert('prompt asks why a distractor fails in this context', prompt.includes('放回当前语境为何不成立'))
+  assert('prompt removes the old distractor prohibition', !prompt.includes('NEVER argue why a distractor is wrong') && !prompt.includes('Do NOT explain why it is wrong'))
 
   // Exact-substring requirement.
   assert('prompt has exact-substring rule', prompt.includes('exact substring'))
@@ -186,6 +188,7 @@ function validClAnalysis(input = clFixtureInput()) {
       [group.groupId]: {
         overview: '一个男孩专心读书、不应母亲的记叙文。',
         affectiveArc: '平静专注，情感平稳。',
+        similaritySummary: '男孩专心读书没有回应母亲，事情在误会中继续发展。',
       },
     },
     blanks,
@@ -210,6 +213,18 @@ async function assertAnalysisValidation() {
     requestId: 'i8-verify',
   })
   assert('valid cloze analysis passes', result.analysis.schemaVersion === 'cloze-analysis-v1' && result.requestId === 'i8-verify')
+
+  await assertRejects('multi-line cloze similaritySummary blocks', () => {
+    const bad = validClAnalysis(input)
+    bad.groups[input.group.groupId].similaritySummary = '先发生一件事。\n后来又发生转变。'
+    return analyzeClozeImportCandidate(input, { providerCallers: { deepseek: stubProvider(bad) } })
+  }, /similaritySummary 必须是一句话/)
+
+  await assertRejects('cloze blankId must remain source-authored', () => {
+    const bad = validClAnalysis(input)
+    bad.blanks[input.group.questions[0].id].blankId = 'blank-invented'
+    return analyzeClozeImportCandidate(input, { providerCallers: { deepseek: stubProvider(bad) } })
+  }, /blankId does not match/)
 
   // --- meta provenance is server-stamped, not AI-supplied ---
   const bogusMeta = validClAnalysis(input)
