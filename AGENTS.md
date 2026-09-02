@@ -75,6 +75,25 @@ uniquely supplies; otherwise keep it outside daily packs.
   it, or merge around it. Diagnose and fix the failure or stop. See
   `docs/adr/0022-amp-orb-ci-merge-authority.md` for the durable contract.
 
+## Dedicated Deployment Orb
+
+- Website deployment belongs only to the separate private Deployment Orb
+  project. Development and CI Orbs must not receive its SSH key.
+- A current Owner instruction `部署最新版` authorizes that one website-code
+  deployment attempt; the agent resolves current `main` itself and runs
+  `node scripts/amp-orb-deploy.mjs deploy --owner-said-deploy-latest`. Never ask
+  the Owner to copy a SHA.
+- The deploy command requires exact-main successful authoritative `verify` and
+  `e2e`, then sends only that SHA through pinned SSH to the root-owned fixed
+  host controller. Never stream candidate deployment code, bypass the forced
+  command, or use the legacy in-place deploy after cutover.
+- Website deployment never authorizes migration, Review/paper promotion,
+  database or R2 mutation, production configuration changes, or controller
+  upgrades. Each needs its own explicit current Owner authorization.
+- The one-time release-layout bootstrap and first real Deployment Orb run are
+  separate production actions. Follow ADR-0023 and the launch-deploy runbook;
+  do not infer their authorization from merged code or available secrets.
+
 ## Owner QA
 
 For visible behavior, prepare and smoke-check the exact service, data/login,

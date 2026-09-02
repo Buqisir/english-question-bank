@@ -357,6 +357,7 @@ function changedPlan(files) {
     '.amp/plugins/github-ci-wakeup.js',
     '.amp/plugins/source-intake-wakeup.js',
     'data/sql/',
+    'deploy/',
     'scripts/amp-orb-ci-sandbox.mjs',
     'scripts/amp-orb-ci.mjs',
     'scripts/amp-orb-deploy.mjs',

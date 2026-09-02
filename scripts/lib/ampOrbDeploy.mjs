@@ -185,6 +185,120 @@ export async function assertDeploymentCandidateStillCurrent({ readMainSha, sha }
   return currentSha
 }
 
+export function parseDeploymentControllerOutput(output, expectedSha) {
+  const sha = assertSha(expectedSha)
+  let receipt
+  try {
+    receipt = JSON.parse(String(output || '').trim())
+  } catch {
+    throw new Error('Deployment controller response is not valid JSON')
+  }
+  const expectedKeys = [
+    'conclusion',
+    'controllerVersion',
+    'failureCode',
+    'finishedAt',
+    'noOp',
+    'previousSha',
+    'receiptPath',
+    'rollbackHealthy',
+    'rolledBack',
+    'schemaVersion',
+    'staged',
+    'startedAt',
+    'state',
+    'targetSha',
+  ]
+  if (
+    !receipt
+    || typeof receipt !== 'object'
+    || Array.isArray(receipt)
+    || Object.keys(receipt).sort().join('\n') !== expectedKeys.join('\n')
+  ) {
+    throw new Error('Deployment controller response shape is invalid')
+  }
+  if (
+    receipt.schemaVersion !== 'eqb-deployment-receipt-v2'
+    || receipt.controllerVersion !== 'eqb-deploy-controller-v1'
+    || receipt.state !== 'reported'
+    || !['success', 'failure'].includes(receipt.conclusion)
+    || receipt.targetSha !== sha
+    || (receipt.previousSha !== null && !SHA.test(receipt.previousSha))
+    || !['boolean'].includes(typeof receipt.staged)
+    || !['boolean'].includes(typeof receipt.noOp)
+    || !['boolean'].includes(typeof receipt.rolledBack)
+    || ![null, true, false].includes(receipt.rollbackHealthy)
+    || (receipt.failureCode !== null && typeof receipt.failureCode !== 'string')
+    || typeof receipt.startedAt !== 'string'
+    || typeof receipt.finishedAt !== 'string'
+    || !/^\/opt\/eqb\/deployments\/receipts\/[A-Za-z0-9.-]+\.json$/u
+      .test(receipt.receiptPath || '')
+  ) {
+    throw new Error('Deployment controller response values are invalid')
+  }
+  if ((receipt.conclusion === 'success') !== (receipt.failureCode === null)) {
+    throw new Error('Deployment controller conclusion is inconsistent')
+  }
+  return receipt
+}
+
+export function parseDeploymentControllerPreflight(output) {
+  let preflight
+  try {
+    preflight = JSON.parse(String(output || '').trim())
+  } catch {
+    throw new Error('Deployment controller preflight is not valid JSON')
+  }
+  if (
+    !preflight
+    || typeof preflight !== 'object'
+    || Array.isArray(preflight)
+    || Object.keys(preflight).sort().join('\n') !== [
+      'caddy',
+      'controllerVersion',
+      'eqb',
+      'layout',
+      'productionSha',
+      'schemaVersion',
+    ].join('\n')
+    || preflight.schemaVersion !== 'eqb-deployment-preflight-v2'
+    || preflight.controllerVersion !== 'eqb-deploy-controller-v1'
+    || !SHA.test(preflight.productionSha || '')
+    || !/^[a-z-]+$/u.test(preflight.eqb || '')
+    || !/^[a-z-]+$/u.test(preflight.caddy || '')
+    || !['legacy', 'release'].includes(preflight.layout)
+  ) {
+    throw new Error('Deployment controller preflight response is invalid')
+  }
+  return preflight
+}
+
+export async function deployLatestRelease({
+  argv,
+  resolveCandidate,
+  readMainSha,
+  invokeController,
+} = {}) {
+  requireDeployLatestAuthorization(argv)
+  if (
+    typeof resolveCandidate !== 'function'
+    || typeof readMainSha !== 'function'
+    || typeof invokeController !== 'function'
+  ) {
+    throw new Error('Deployment execution dependencies are missing')
+  }
+  const candidate = await resolveCandidate()
+  await assertDeploymentCandidateStillCurrent({ readMainSha, sha: candidate.sha })
+  const receipt = parseDeploymentControllerOutput(
+    await invokeController(candidate.sha),
+    candidate.sha,
+  )
+  if (receipt.conclusion !== 'success') {
+    throw new Error(`Production controller reported ${receipt.failureCode || 'failure'}`)
+  }
+  return { candidate, receipt }
+}
+
 export function materializeDeploymentCredentials({
   privateKey,
   knownHosts,

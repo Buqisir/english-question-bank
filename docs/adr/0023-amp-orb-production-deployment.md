@@ -1,6 +1,6 @@
 # ADR-0023: A separate Amp Orb will deploy website code from verified `main`
 
-- Status: Accepted for repository preflight implementation
+- Status: Accepted; repository controller implementation ready for review
 - Production activation: blocked on a later direct Owner authorization
 - Scope: website code deployment only
 
@@ -40,11 +40,49 @@ Before SSH, the trusted controller requires all of the following:
 5. the three deployment Project Secrets are present only in the Deployment
    Orb environment.
 
-The controller writes the private key and pinned `known_hosts` into a fresh
+The Orb-side controller writes the private key and pinned `known_hosts` into a fresh
 `0700` temporary directory as `0600` files. SSH uses batch mode,
 `IdentitiesOnly`, an empty global host-key file, and
 `StrictHostKeyChecking=yes`. It never runs `ssh-keyscan`, accepts a first-use
-host key, prints a credential, or puts a key in argv.
+host key, prints a credential, or puts a key in argv. After the one-time
+bootstrap, that key can authenticate only as root with OpenSSH `restrict` and
+a forced command. It cannot open a shell, forward ports or agents, choose a
+host executable, or supply anything except `preflight` or `deploy <sha>`.
+
+The forced command is a root-owned, non-release host controller. Ordinary
+website releases cannot update it or import deployment logic into it. A
+controller update is a separate production configuration operation requiring
+new Owner authorization. Candidate package lifecycle, browser smoke, and app
+build commands run as the separate `eqb-build` user with a cleared environment,
+no production `.env`, and no access to `shared`. Every command runs in a bounded
+transient systemd cgroup, so leftover children are terminated before root
+touches the candidate tree. Root then rejects linked privileged ancestors and
+restores deployment-control files from its private archive of the exact Git
+target instead of trusting candidate-modified copies. The host controller
+attaches the fixed persistent paths only after the build succeeds, seals the
+release as root-owned without following links, keeps `/opt/eqb` and the
+`current` pointer root-owned, independently fetches `main` again, and only then
+permits activation. The `eqb` runtime user cannot replace release directories
+or the active pointer.
+
+Before staging, the fixed controller compares the current release SHA to the
+target tree without executing candidate code. Changes to the host controller,
+release systemd/Caddy configuration, or the named startup/recovery and
+high-authority persistence owners stop with a distinct terminal failure before
+build or restart. Established idempotent startup shape/recovery code may run
+only when that protected surface is unchanged. A separately authorized
+migration or host configuration procedure must establish a new safe baseline;
+candidate-provided manifests and SQL-keyword heuristics cannot waive this gate.
+This is intentionally not a ban on ordinary reviewed server code: deployment
+does not itself invoke later authenticated request-time writes, paper
+promotion, or Review actions.
+
+OpenSSH starts the fixed controller inside a host-owned transient systemd
+service, with the exclusive deployment lock inside that service. Loss of the
+Deployment Orb or SSH connection therefore does not abandon an in-flight host
+build, health check, or rollback, and a second request still fails closed.
+Candidate command output is written to a private host log, so a disconnected
+output pipe cannot interrupt package installation or the build.
 
 The target production layout is:
 
@@ -67,29 +105,42 @@ then restarts only `eqb` and checks the local API, Caddy, the public health
 endpoint, `/`, `/ops/`, and `/ops/?view=review`. Failure switches `current`
 back to the previous release, restarts, rechecks health, and reports failure.
 An already-current healthy SHA is an idempotent no-op. Releases are not deleted
-automatically.
+automatically; new staging fails before build when less than 5 GiB remains, so
+old non-current releases can be reviewed and pruned as a separate operation
+rather than risking a full production filesystem.
 
-Website deployment never invokes migrations, `pull-run-push`, single-paper
-promotion, Review mutation, database transfer, R2 mutation, or production
-configuration changes. A release that requires one of those operations stops
-for a separate explicit Owner-authorized procedure.
+Website deployment itself never invokes migrations, `pull-run-push`,
+single-paper promotion, Review mutation, database transfer, R2 mutation, or
+production configuration changes. A release that requires one of those
+operations stops for a separate explicit Owner-authorized procedure.
 
-## Repository preflight phase
+## Repository implementation and production hold
 
-The first implementation phase intentionally exposes only:
+The repository implementation exposes:
 
 - `plan`, which proves the exact clean `main` and authoritative status without
   connecting to production;
-- an explicitly authorized read-only SSH `preflight`, which reports the current
-  production SHA, tracked cleanliness, service health, and whether the release
-  layout exists;
-- a synthetic release state machine that proves atomic switch, idempotency,
-  private receipts, shared-data non-mutation, and healthy rollback.
+- a transition-only, explicitly authorized read-only `bootstrap-preflight` for
+  the legacy host before its unrestricted bootstrap key is retired;
+- an explicitly authorized `preflight` through the fixed forced-command host
+  controller after bootstrap;
+- `deploy --owner-said-deploy-latest`, which sends only the automatically
+  resolved exact SHA to that fixed controller;
+- a one-time bootstrap script that prepares the first release before outage,
+  refuses a target whose persistence authority differs from legacy production,
+  migrates persistent paths while `eqb` is stopped, installs the release-only
+  systemd/Caddy templates and forced controller key, health-checks, and restores
+  the legacy configuration and paths if cutover fails;
+- fake-host state-machine proof for staging, exact-main recheck, isolated build,
+  atomic switch, idempotency, private receipts, shared-data non-mutation, and
+  healthy rollback.
 
-There is no real `deploy` command in this phase. A later PR must add staging,
-the one-time `shared/releases/current` bootstrap, the bounded remote command,
-and its fake-remote behavioral proof. Production bootstrap and the first real
-Orb deployment each require a new direct Owner authorization.
+Code presence is not production authorization. The bootstrap remains blocked
+until the Owner directly authorizes that one-time production configuration
+change after a fresh read-only preflight. The first real daily deployment after
+bootstrap requires another direct Owner authorization. The Deployment Orb must
+also be a separate private Amp project; its forced-key secret must not remain in
+ordinary development or CI projects.
 
 ## Consequences
 
@@ -97,8 +148,9 @@ Orb deployment each require a new direct Owner authorization.
 - Daily use stays simple: the Owner says `部署最新版`; SHA and status handling
   are machine work.
 - A sleeping Deployment Orb costs nothing between explicit deployments.
-- The one-time release-layout migration remains a production configuration
-  change and cannot be implied by this ADR or by Secret presence.
+- The one-time release-layout migration and every controller upgrade remain
+  production configuration changes and cannot be implied by this ADR or by
+  Secret presence.
 - Paper Review approval and `上线 <paperId>` remain the separate server-side
   single-paper publication flow from ADR-0020.
 - Restoring Amp Orb merge authority also requires an explicit, tested update to

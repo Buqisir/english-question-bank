@@ -6,6 +6,7 @@ import {
   existsSync,
   mkdirSync,
   mkdtempSync,
+  readdirSync,
   readFileSync,
   readlinkSync,
   rmSync,
@@ -22,14 +23,22 @@ import {
   assertDeploymentCandidateStillCurrent,
   assertAuthoritativeDeploymentChecks,
   currentReleaseSha,
+  deployLatestRelease,
   deploymentGitHubApiArgs,
   deploymentLockInvocation,
   deploymentSSHInvocation,
   materializeDeploymentCredentials,
+  parseDeploymentControllerOutput,
+  parseDeploymentControllerPreflight,
   parseDeploymentPreflightOutput,
   requireDeployLatestAuthorization,
   resolveLatestDeploymentCandidate,
 } from './lib/ampOrbDeploy.mjs'
+import {
+  EQB_DEPLOY_CONTROLLER_VERSION,
+  parseControllerCommand,
+  runController,
+} from '../deploy/eqb-deploy-controller.mjs'
 import { createVerifier, readText, repoRootFrom } from './lib/verifyScope.mjs'
 
 const ROOT = repoRootFrom(import.meta.url)
@@ -276,6 +285,127 @@ assert(
   'a newer main fails closed and requires a fresh “部署最新版” command',
 )
 
+function controllerReceipt({
+  targetSha = newSha,
+  conclusion = 'success',
+  failureCode = null,
+} = {}) {
+  return JSON.stringify({
+    schemaVersion: 'eqb-deployment-receipt-v2',
+    controllerVersion: 'eqb-deploy-controller-v1',
+    state: 'reported',
+    conclusion,
+    targetSha,
+    previousSha: oldSha,
+    staged: true,
+    noOp: false,
+    rolledBack: conclusion === 'failure',
+    rollbackHealthy: conclusion === 'failure' ? true : null,
+    failureCode,
+    startedAt: '2026-09-02T00:00:00.000Z',
+    finishedAt: '2026-09-02T00:01:00.000Z',
+    receiptPath: `/opt/eqb/deployments/receipts/20260902-${targetSha}-fixture.json`,
+  })
+}
+
+const parsedControllerReceipt = parseDeploymentControllerOutput(
+  controllerReceipt(),
+  newSha,
+)
+assert(parsedControllerReceipt.targetSha === newSha, 'controller receipt is bound to the exact candidate SHA')
+
+const deploymentOrder = []
+const deployed = await deployLatestRelease({
+  argv: ['deploy', '--owner-said-deploy-latest'],
+  async resolveCandidate() {
+    deploymentOrder.push('resolve')
+    return candidate
+  },
+  async readMainSha() {
+    deploymentOrder.push('recheck')
+    return newSha
+  },
+  async invokeController(sha) {
+    deploymentOrder.push(`controller:${sha}`)
+    return controllerReceipt({ targetSha: sha })
+  },
+})
+assert(deployed.receipt.conclusion === 'success', 'healthy controller receipt completes deployment')
+assert(
+  deploymentOrder.join(',') === `resolve,recheck,controller:${newSha}`,
+  'Owner authorization resolves and rechecks exact main before controller invocation',
+)
+
+let staleInvoked = false
+assert(
+  await (async () => {
+    try {
+      await deployLatestRelease({
+        argv: ['deploy', '--owner-said-deploy-latest'],
+        resolveCandidate: async () => candidate,
+        readMainSha: async () => '3'.repeat(40),
+        invokeController: async () => {
+          staleInvoked = true
+          return controllerReceipt()
+        },
+      })
+      return false
+    } catch {
+      return true
+    }
+  })(),
+  'main advancement stops an authorized deployment',
+)
+assert(!staleInvoked, 'stale main stops before production controller invocation')
+
+assert(
+  await (async () => {
+    try {
+      await deployLatestRelease({
+        argv: ['deploy', '--owner-said-deploy-latest'],
+        resolveCandidate: async () => candidate,
+        readMainSha: async () => newSha,
+        invokeController: async () => controllerReceipt({
+          conclusion: 'failure',
+          failureCode: 'HEALTH_CHECK_FAILED',
+        }),
+      })
+      return false
+    } catch (error) {
+      return error.message.includes('HEALTH_CHECK_FAILED')
+    }
+  })(),
+  'controller failure remains a deployment failure even after healthy rollback',
+)
+
+for (const [label, output] of [
+  ['unexpected field', controllerReceipt().replace(/\}\s*$/u, ',"extra":true}')],
+  ['another SHA', controllerReceipt({ targetSha: oldSha })],
+  ['non-JSON', 'deployment succeeded'],
+]) {
+  assert(
+    (() => {
+      try {
+        parseDeploymentControllerOutput(output, newSha)
+        return false
+      } catch {
+        return true
+      }
+    })(),
+    `${label} controller response fails closed`,
+  )
+}
+
+const controllerPreflight = parseDeploymentControllerPreflight(JSON.stringify({
+  schemaVersion: 'eqb-deployment-preflight-v2',
+  controllerVersion: 'eqb-deploy-controller-v1',
+  productionSha: oldSha,
+  eqb: 'active',
+  caddy: 'active',
+  layout: 'release',
+}))
+assert(controllerPreflight.productionSha === oldSha, 'fixed controller preflight is parsed strictly')
+
 section('Private credentials and pinned SSH invocation')
 
 const credentialRoot = mkdtempSync(path.join(tmpdir(), 'eqb-deploy-credentials-'))
@@ -408,19 +538,538 @@ assert(rollback.receipt.rolledBack && rollback.receipt.rollbackHealthy, 'receipt
 assert(readFileSync(path.join(rollbackRoot, 'shared', 'production-data'), 'utf8') === 'must-not-change', 'rollback never mutates shared production data')
 rmSync(rollbackRoot, { recursive: true, force: true })
 
-section('Production activation remains intentionally closed')
+section('Fixed host controller stages without production-data access')
+
+function writeReleaseMarker(root, sha, controllerVersion = EQB_DEPLOY_CONTROLLER_VERSION) {
+  const release = path.join(root, 'releases', sha)
+  mkdirSync(path.join(release, 'app', 'dist'), { recursive: true })
+  writeFileSync(path.join(release, 'app', 'dist', 'index.html'), '<!doctype html>')
+  writeFileSync(path.join(release, '.eqb-release.json'), `${JSON.stringify({
+    schemaVersion: 'eqb-release-v1',
+    sha,
+    controllerVersion,
+  })}\n`)
+}
+
+function controllerFixture({
+  failCandidateHealth = false,
+  advanceAfterBuild = false,
+  hostConfigurationChange = false,
+  persistenceAuthorityChange = false,
+  protectedDiffFailure = false,
+  unsafeCandidateDirectory = null,
+  tamperDeploymentControl = false,
+} = {}) {
+  const root = mkdtempSync(path.join(tmpdir(), 'eqb-controller-fixture-'))
+  const source = path.join(root, 'english-question-bank')
+  mkdirSync(source)
+  for (const relative of [
+    'releases',
+    'deployments',
+    'shared/data',
+    'shared/paper-assets',
+    'shared/exports',
+    'shared/server-logs',
+  ]) {
+    mkdirSync(path.join(root, relative), { recursive: true })
+  }
+  chmodSync(path.join(root, 'shared'), 0o700)
+  writeFileSync(path.join(root, 'shared', '.env'), 'FIXTURE_ONLY=1\n', { mode: 0o600 })
+  writeFileSync(path.join(root, 'shared', 'sentinel'), 'unchanged')
+  writeReleaseMarker(root, oldSha, 'eqb-deploy-controller-older-compatible')
+  symlinkSync(path.join('releases', oldSha), path.join(root, 'current'))
+
+  const state = {
+    mainSha: newSha,
+    buildCalls: [],
+    sourceCalls: [],
+    systemCalls: [],
+    restarts: [],
+    advanced: false,
+    hostConfigurationChange,
+    persistenceAuthorityChange,
+    protectedDiffFailure,
+    unsafeCandidateDirectory,
+    tamperDeploymentControl,
+  }
+  const config = {
+    root,
+    source,
+    controllerUid: statSync(root).uid,
+    minimumFreeBytes: 0,
+    sourceUser: 'fixture-source',
+    runtimeUser: 'fixture-runtime',
+    buildUser: 'fixture-build',
+    buildGroup: 'fixture-build',
+    repositoryUrls: ['fixture://Buqisir/english-question-bank'],
+    service: 'eqb',
+    caddyService: 'caddy',
+  }
+  const currentSha = () => path.basename(readlinkSync(path.join(root, 'current')))
+  const dependencies = {
+    runSource(command, args) {
+      state.sourceCalls.push([command, ...args])
+      const joined = args.join(' ')
+      if (joined.endsWith('remote get-url origin')) {
+        return 'fixture://Buqisir/english-question-bank\n'
+      }
+      if (joined.includes(' fetch ')) return ''
+      if (joined.endsWith('rev-parse FETCH_HEAD')) return `${state.mainSha}\n`
+      if (joined.endsWith('rev-parse HEAD')) return `${oldSha}\n`
+      throw new Error(`Unexpected source command: ${command} ${joined}`)
+    },
+    runBuild(command, args, { release }) {
+      state.buildCalls.push([command, ...args])
+      if (args.at(-1) === 'build') {
+        mkdirSync(path.join(release, 'app', 'dist'), { recursive: true })
+        writeFileSync(path.join(release, 'app', 'dist', 'index.html'), '<!doctype html>')
+        if (state.tamperDeploymentControl) {
+          writeFileSync(path.join(release, 'deploy', 'eqb-deploy-controller.mjs'), 'candidate-controlled')
+        }
+        if (state.unsafeCandidateDirectory) {
+          const candidatePath = path.join(release, state.unsafeCandidateDirectory)
+          const outside = path.join(root, `outside-${state.unsafeCandidateDirectory.replaceAll('/', '-')}`)
+          rmSync(candidatePath, { recursive: true, force: true })
+          mkdirSync(outside, { recursive: true })
+          symlinkSync(outside, candidatePath)
+        }
+        symlinkSync(
+          path.join(root, 'shared', 'sentinel'),
+          path.join(release, '.eqb-release.json'),
+        )
+        if (advanceAfterBuild && !state.advanced) {
+          state.mainSha = '3'.repeat(40)
+          state.advanced = true
+        }
+      }
+      return ''
+    },
+    runSystem(command, args, options = {}) {
+      state.systemCalls.push([command, ...args])
+      if (command === '/usr/bin/git' && args.includes('diff')) {
+        if (state.protectedDiffFailure) throw new Error('fixture missing commit')
+        const pathspecs = args.slice(args.indexOf('--') + 1)
+        if (pathspecs.includes('deploy/eqb-release.service')) {
+          return state.hostConfigurationChange ? 'deploy/eqb-release.service\n' : ''
+        }
+        return state.persistenceAuthorityChange ? 'server/api.mjs\n' : ''
+      }
+      if (command === '/usr/bin/git' && args.includes('archive')) {
+        writeFileSync(options.stdio[1], 'fixture archive')
+        return ''
+      }
+      if (command === '/usr/bin/tar') {
+        const release = args[args.indexOf('-C') + 1]
+        if (args.at(-1) !== 'deploy') {
+          for (const relative of [
+            'app/public/paper-assets',
+            'server/logs',
+            'scripts',
+            'data',
+            'exports',
+          ]) {
+            mkdirSync(path.join(release, relative), { recursive: true })
+          }
+        }
+        mkdirSync(path.join(release, 'deploy'), { recursive: true })
+        for (const relative of [
+          'Caddyfile.release',
+          'eqb-release.service',
+          'eqb-deploy-controller',
+          'eqb-deploy-controller.mjs',
+        ]) {
+          writeFileSync(path.join(release, 'deploy', relative), `trusted archive ${relative}\n`)
+        }
+        return ''
+      }
+      if (command === '/usr/bin/systemctl' && args[0] === 'restart') {
+        state.restarts.push(currentSha())
+        return ''
+      }
+      if (command === '/usr/bin/systemctl' && args[0] === 'is-active') {
+        return args.includes('--quiet') ? '' : 'active\n'
+      }
+      if (command === '/usr/bin/curl') {
+        if (failCandidateHealth && currentSha() === newSha) {
+          throw new Error('fixture candidate unhealthy')
+        }
+        return ''
+      }
+      throw new Error(`Unexpected system command: ${command} ${args.join(' ')}`)
+    },
+    async sleep() {},
+    uid() {
+      return statSync(path.join(root, 'shared')).uid
+    },
+    chown() {},
+    seal(directory) {
+      chmodSync(directory, 0o755)
+    },
+  }
+  return { root, config, dependencies, state, currentSha }
+}
+
+assert(
+  parseControllerCommand(`deploy ${newSha}`).sha === newSha,
+  'fixed controller accepts only one exact machine-resolved SHA',
+)
+for (const command of ['', 'deploy', `deploy ${newSha} --force`, `deploy ${newSha}; id`, 'bash -s']) {
+  assert(
+    (() => {
+      try {
+        parseControllerCommand(command)
+        return false
+      } catch {
+        return true
+      }
+    })(),
+    `fixed controller rejects command injection shape ${JSON.stringify(command)}`,
+  )
+}
+
+const fixedSuccess = controllerFixture()
+const fixedSuccessResult = await runController({
+  originalCommand: `deploy ${newSha}`,
+  config: fixedSuccess.config,
+  dependencies: fixedSuccess.dependencies,
+})
+assert(fixedSuccessResult.exitCode === 0, 'fixed controller reports healthy activation success')
+assert(fixedSuccess.currentSha() === newSha, 'fixed controller atomically activates the prepared SHA')
+assert(fixedSuccess.state.buildCalls.length === 5, 'candidate install, Chromium smoke, and build run in the isolated build boundary')
+assert(
+  fixedSuccess.state.systemCalls.some((call) => call[0] === '/usr/bin/git' && call.includes('archive'))
+    && fixedSuccess.state.sourceCalls.every((call) => !call.includes('archive')),
+  'only the root controller archives fetched source into its private descriptor',
+)
+assert(fixedSuccess.state.restarts.join(',') === newSha, 'healthy activation restarts only the candidate')
+for (const [relative, target] of [
+  ['data', path.join(fixedSuccess.root, 'shared', 'data')],
+  ['app/public/paper-assets', path.join(fixedSuccess.root, 'shared', 'paper-assets')],
+  ['exports', path.join(fixedSuccess.root, 'shared', 'exports')],
+  ['server/logs', path.join(fixedSuccess.root, 'shared', 'server-logs')],
+  ['.env', path.join(fixedSuccess.root, 'shared', '.env')],
+]) {
+  assert(
+    readlinkSync(path.join(fixedSuccess.root, 'releases', newSha, relative)) === target,
+    `${relative} is attached only after the candidate build`,
+  )
+}
+assert(
+  readFileSync(path.join(fixedSuccess.root, 'shared', 'sentinel'), 'utf8') === 'unchanged',
+  'candidate marker replacement and activation do not mutate shared production data',
+)
+assert(
+  (statSync(fixedSuccessResult.output.receiptPath).mode & 0o777) === 0o600,
+  'fixed controller writes a private terminal receipt',
+)
+const fixedBuildLogs = readdirSync(path.join(fixedSuccess.root, 'deployments', 'logs'))
+assert(
+  fixedBuildLogs.length === 1
+    && (statSync(path.join(fixedSuccess.root, 'deployments', 'logs', fixedBuildLogs[0])).mode & 0o777) === 0o600,
+  'candidate output stays in a private host log rather than depending on the Orb connection',
+)
+const fixedIdempotent = await runController({
+  originalCommand: `deploy ${newSha}`,
+  config: fixedSuccess.config,
+  dependencies: fixedSuccess.dependencies,
+})
+assert(fixedIdempotent.output.noOp && fixedIdempotent.exitCode === 0, 'same healthy release is idempotent')
+assert(fixedSuccess.state.buildCalls.length === 5, 'idempotent deployment does not rebuild an existing sealed release')
+assert(fixedSuccess.state.restarts.length === 1, 'idempotent deployment does not restart production')
+rmSync(fixedSuccess.root, { recursive: true, force: true })
+
+const tamperedControl = controllerFixture({ tamperDeploymentControl: true })
+const tamperedControlResult = await runController({
+  originalCommand: `deploy ${newSha}`,
+  config: tamperedControl.config,
+  dependencies: tamperedControl.dependencies,
+})
+assert(tamperedControlResult.exitCode === 0, 'candidate deployment-control tampering cannot block trusted restoration')
+assert(
+  readFileSync(
+    path.join(tamperedControl.root, 'releases', newSha, 'deploy', 'eqb-deploy-controller.mjs'),
+    'utf8',
+  ) === 'trusted archive eqb-deploy-controller.mjs\n',
+  'deployment control files are restored from the root-private exact-target archive after build',
+)
+rmSync(tamperedControl.root, { recursive: true, force: true })
+
+for (const unsafeCandidateDirectory of ['app', 'app/public', 'server']) {
+  const unsafeCandidate = controllerFixture({ unsafeCandidateDirectory })
+  const unsafeCandidateResult = await runController({
+    originalCommand: `deploy ${newSha}`,
+    config: unsafeCandidate.config,
+    dependencies: unsafeCandidate.dependencies,
+  })
+  assert(
+    unsafeCandidateResult.exitCode === 1
+      && unsafeCandidateResult.output.failureCode === 'PREPARATION_FAILED',
+    `candidate symlinked ${unsafeCandidateDirectory} ancestor fails closed`,
+  )
+  assert(
+    unsafeCandidate.state.restarts.length === 0,
+    `candidate symlinked ${unsafeCandidateDirectory} ancestor stops before restart`,
+  )
+  rmSync(unsafeCandidate.root, { recursive: true, force: true })
+}
+
+const fixedRollback = controllerFixture({ failCandidateHealth: true })
+const fixedRollbackResult = await runController({
+  originalCommand: `deploy ${newSha}`,
+  config: fixedRollback.config,
+  dependencies: fixedRollback.dependencies,
+})
+assert(fixedRollbackResult.exitCode === 1, 'failed candidate remains a terminal deployment failure')
+assert(fixedRollback.currentSha() === oldSha, 'fixed controller restores the previous release after failed health')
+assert(
+  fixedRollback.state.restarts.join(',') === `${newSha},${oldSha}`,
+  'failed health restarts candidate once and restored release once',
+)
+assert(
+  fixedRollbackResult.output.rolledBack && fixedRollbackResult.output.rollbackHealthy,
+  'failed deployment receipt proves healthy rollback',
+)
+rmSync(fixedRollback.root, { recursive: true, force: true })
+
+const fixedMainChanged = controllerFixture({ advanceAfterBuild: true })
+const fixedMainChangedResult = await runController({
+  originalCommand: `deploy ${newSha}`,
+  config: fixedMainChanged.config,
+  dependencies: fixedMainChanged.dependencies,
+})
+assert(fixedMainChangedResult.exitCode === 1, 'main advancement fails the deployment')
+assert(fixedMainChangedResult.output.failureCode === 'MAIN_CHANGED', 'main advancement has a distinct failure code')
+assert(fixedMainChanged.currentSha() === oldSha, 'main advancement stops before activation')
+assert(fixedMainChanged.state.restarts.length === 0, 'main advancement never restarts production')
+rmSync(fixedMainChanged.root, { recursive: true, force: true })
+
+const insufficientSpace = controllerFixture()
+insufficientSpace.config.minimumFreeBytes = Number.MAX_SAFE_INTEGER
+const insufficientSpaceResult = await runController({
+  originalCommand: `deploy ${newSha}`,
+  config: insufficientSpace.config,
+  dependencies: insufficientSpace.dependencies,
+})
+assert(insufficientSpaceResult.exitCode === 1, 'insufficient staging space fails the deployment')
+assert(insufficientSpace.state.buildCalls.length === 0, 'insufficient staging space fails before candidate build')
+assert(insufficientSpace.state.restarts.length === 0, 'insufficient staging space never restarts production')
+rmSync(insufficientSpace.root, { recursive: true, force: true })
+
+for (const [fixtureOptions, expectedCode, label] of [
+  [
+    { hostConfigurationChange: true },
+    'HOST_CONFIGURATION_UPDATE_REQUIRED',
+    'fixed host configuration change',
+  ],
+  [
+    { persistenceAuthorityChange: true },
+    'SEPARATE_MUTATION_AUTHORIZATION_REQUIRED',
+    'production persistence-authority change',
+  ],
+  [
+    { protectedDiffFailure: true },
+    'PREPARATION_FAILED',
+    'unavailable protected-path comparison',
+  ],
+]) {
+  const protectedChange = controllerFixture(fixtureOptions)
+  const protectedChangeResult = await runController({
+    originalCommand: `deploy ${newSha}`,
+    config: protectedChange.config,
+    dependencies: protectedChange.dependencies,
+  })
+  assert(
+    protectedChangeResult.exitCode === 1
+      && protectedChangeResult.output.failureCode === expectedCode,
+    `${label} fails closed with a distinct terminal result`,
+  )
+  assert(protectedChange.state.buildCalls.length === 0, `${label} stops before candidate build`)
+  assert(protectedChange.state.restarts.length === 0, `${label} stops before production restart`)
+  rmSync(protectedChange.root, { recursive: true, force: true })
+}
+
+const fixedPreflight = controllerFixture()
+const fixedPreflightResult = await runController({
+  originalCommand: 'preflight',
+  config: fixedPreflight.config,
+  dependencies: fixedPreflight.dependencies,
+})
+assert(
+  fixedPreflightResult.output.layout === 'release'
+    && fixedPreflightResult.output.productionSha === oldSha,
+  'fixed controller provides bounded read-only preflight',
+)
+rmSync(fixedPreflight.root, { recursive: true, force: true })
+
+const partialPreflight = controllerFixture()
+rmSync(path.join(partialPreflight.root, 'current'))
+assert(
+  await (async () => {
+    try {
+      await runController({
+        originalCommand: 'preflight',
+        config: partialPreflight.config,
+        dependencies: partialPreflight.dependencies,
+      })
+      return false
+    } catch {
+      return true
+    }
+  })(),
+  'partial or dangling release layout never falls back to a legacy success',
+)
+rmSync(partialPreflight.root, { recursive: true, force: true })
+
+const writableRootPreflight = controllerFixture()
+chmodSync(writableRootPreflight.root, 0o777)
+assert(
+  await (async () => {
+    try {
+      await runController({
+        originalCommand: 'preflight',
+        config: writableRootPreflight.config,
+        dependencies: writableRootPreflight.dependencies,
+      })
+      return false
+    } catch {
+      return true
+    }
+  })(),
+  'runtime-writable deployment root fails preflight',
+)
+rmSync(writableRootPreflight.root, { recursive: true, force: true })
+
+const controllerSource = readText(ROOT, 'deploy/eqb-deploy-controller.mjs')
+const controllerWrapper = readText(ROOT, 'deploy/eqb-deploy-controller')
+const bootstrapSource = readText(ROOT, 'deploy/bootstrap-eqb-deployment.sh')
+execFileSync(process.execPath, ['--check', path.join(ROOT, 'deploy', 'eqb-deploy-controller.mjs')])
+execFileSync('/bin/sh', ['-n', path.join(ROOT, 'deploy', 'eqb-deploy-controller')])
+execFileSync('/bin/bash', ['-n', path.join(ROOT, 'deploy', 'bootstrap-eqb-deployment.sh')])
+assert(controllerWrapper.includes('/usr/bin/flock'), 'installed wrapper owns the non-blocking production lock')
+assert(
+  controllerWrapper.indexOf('/usr/bin/systemd-run') < controllerWrapper.indexOf('/usr/bin/flock'),
+  'host systemd owns the controller and lock beyond the Deployment Orb connection',
+)
+assert(controllerWrapper.includes('/usr/bin/env -i'), 'installed wrapper clears caller-controlled environment')
+assert(!controllerWrapper.includes('/opt/eqb/current'), 'installed wrapper never executes candidate release code')
+assert(controllerSource.includes("buildUser: 'eqb-build'"), 'candidate lifecycle runs as a separate unprivileged build user')
+assert(controllerSource.includes('controllerUid: 0'), 'production release control remains root-owned')
+assert(controllerSource.includes('minimumFreeBytes: 5 * 1024 * 1024 * 1024'), 'controller preserves staging headroom on the production disk')
+assert(!controllerSource.includes('eval('), 'fixed controller contains no dynamic shell evaluation')
+assert(
+  controllerSource.includes("run('/usr/bin/systemd-run'")
+    && controllerSource.includes("'--wait'")
+    && controllerSource.includes("'--pipe'")
+    && controllerSource.includes("'--collect'")
+    && controllerSource.includes("'--property=Type=exec'")
+    && controllerSource.includes("'--property=RuntimeMaxSec=1200s'")
+    && controllerSource.includes("'--property=KillMode=control-group'")
+    && controllerSource.includes('`--uid=${config.buildUser}`'),
+  'ordinary candidate commands run in transient build-user cgroups that terminate leftover children',
+)
+assert(
+  controllerSource.includes("['-hR', 'root:root', directory]")
+    && bootstrapSource.includes('chown -hR root:root "$staging"'),
+  'release sealing changes symlink ownership without following candidate links',
+)
+assert(
+  bootstrapSource.includes('restrict,command=') && bootstrapSource.includes('ssh-ed25519'),
+  'one-time bootstrap installs a forced-command-only deployment key',
+)
+assert(
+  bootstrapSource.includes('/usr/bin/systemd-run')
+    && bootstrapSource.includes('--property=Type=exec')
+    && bootstrapSource.includes('--property=RuntimeMaxSec=1200s')
+    && bootstrapSource.includes('--property=KillMode=control-group')
+    && bootstrapSource.includes('--uid=eqb-build')
+    && bootstrapSource.includes('/usr/bin/env -i'),
+  'one-time bootstrap also isolates candidate code in terminating build-user cgroups with a cleared environment',
+)
+assert(
+  bootstrapSource.includes('tar -xf "$archive" -C "$staging" deploy')
+    && bootstrapSource.includes('! -L $staging/deploy/$control_file'),
+  'bootstrap installs deployment control files only after exact-archive restoration and regular-file checks',
+)
+assert(
+  bootstrapSource.includes('rm -rf "$staging/.eqb-release.json"')
+    && bootstrapSource.includes('set -o noclobber'),
+  'bootstrap release-marker creation cannot follow a candidate-provided link',
+)
+assert(
+  bootstrapSource.includes('! -L $ROOT/releases')
+    && bootstrapSource.includes('! -L $ROOT/shared')
+    && bootstrapSource.includes('! -L $ROOT/deployments')
+    && bootstrapSource.includes('! -L $CONTROLLER')
+    && bootstrapSource.includes('! -L $AUTHORIZED_KEYS'),
+  'bootstrap rejects dangling links at privileged installation ancestors and destinations',
+)
+assert(
+  bootstrapSource.includes('! -L $SOURCE/$relative')
+    && bootstrapSource.includes('chown -hR eqb:eqb "$ROOT/shared"'),
+  'bootstrap rejects linked legacy ancestors and never follows migrated-state links while changing ownership',
+)
+assert(
+  bootstrapSource.includes('protect_legacy_path "$SOURCE/.env"')
+    && bootstrapSource.includes('chmod go-rwx "$path"')
+    && bootstrapSource.includes('restore_protected_modes'),
+  'bootstrap keeps legacy production data private during candidate preparation and restores modes on failure',
+)
+for (const protectedPath of [
+  'data/sql',
+  'server/api.mjs',
+  'server/auth/auth.mjs',
+  'server/draft-paper/draftPaperStore.mjs',
+  'server/import-review/importReviewStore.mjs',
+  'server/my-space/mySpace.mjs',
+  'server/paper-import/publisher.mjs',
+  'server/paper-import/storage.mjs',
+  'server/source-intake/sourceIntakeStore.mjs',
+  'server/user-data',
+  'server/vocabulary/vocabularyStore.mjs',
+]) {
+  assert(
+    controllerSource.includes(`'${protectedPath}'`) && bootstrapSource.includes(protectedPath),
+    `${protectedPath} is protected in both ordinary deployment and initial bootstrap`,
+  )
+}
+assert(
+  bootstrapSource.includes('chown root:root "$ROOT"')
+    && bootstrapSource.includes('chown "$root_uid:$root_gid" "$ROOT"'),
+  'bootstrap seals the deployment root and restores its former owner on rollback',
+)
+assert(
+  bootstrapSource.includes('install -d -o root -g root -m 0711 "$ROOT/deployments"')
+    && bootstrapSource.includes('install -d -o root -g root -m 0700 "$ROOT/deployments/receipts"'),
+  'deployment parent permits isolated traversal while private receipts remain unreadable',
+)
+assert(
+  bootstrapSource.includes('rollback')
+    && bootstrapSource.includes('legacy service configuration restored and healthy')
+    && bootstrapSource.includes('root-private backup retained'),
+  'one-time bootstrap verifies healthy legacy rollback and retains recovery evidence otherwise',
+)
+for (const forbidden of ['pull-run-push', 'backup-to-r2', 'rclone ', 'migrate:']) {
+  assert(!bootstrapSource.includes(forbidden), `bootstrap never invokes forbidden ${forbidden.trim()} operation`)
+}
+const service = readText(ROOT, 'deploy/eqb-release.service')
+const caddy = readText(ROOT, 'deploy/Caddyfile.release')
+assert(service.includes('WorkingDirectory=/opt/eqb/current'), 'systemd runs only the atomic current release')
+assert(service.includes('--env-file-if-exists=/opt/eqb/shared/.env'), 'systemd keeps production environment outside releases')
+assert(caddy.includes('root * /opt/eqb/current/app/dist'), 'Caddy serves only the atomic current release')
+assert(!caddy.includes('/opt/eqb/english-question-bank/app/dist'), 'Caddy no longer serves the mutable source checkout')
+
+section('Production activation is Owner-authorized and bounded')
 
 const cli = readText(ROOT, 'scripts/amp-orb-deploy.mjs')
 assert(cli.includes("process.argv[2] === 'plan'"), 'CLI exposes a no-mutation deployment plan')
 assert(cli.includes("process.argv[2] === 'preflight'"), 'CLI exposes an Owner-authorized read-only preflight')
+assert(cli.includes("process.argv[2] === 'deploy'"), 'CLI exposes the Owner-authorized deploy-latest command')
 assert(cli.includes('productionMutationAllowed: false'), 'plan and preflight declare no production mutation authority')
+assert(cli.includes('productionMutationAllowed: true'), 'successful deployment output declares production mutation')
+assert(cli.includes("invokeController(['deploy', sha]"), 'SSH sends only the exact SHA to the fixed controller')
+assert(!cli.includes("remoteArgs: ['bash', '-s']"), 'production activation never streams candidate shell code')
 assert(!cli.includes('StrictHostKeyChecking=no'), 'CLI contains no SSH trust bypass')
 
-const closedRoot = mkdtempSync(path.join(tmpdir(), 'eqb-deploy-closed-'))
-const sshMarker = path.join(closedRoot, 'ssh-called')
-const fakeSsh = path.join(closedRoot, 'ssh')
-writeFileSync(fakeSsh, '#!/bin/sh\n: > "$EQB_DEPLOY_SSH_MARKER"\nexit 99\n')
-chmodSync(fakeSsh, 0o700)
 const unauthorizedPreflight = spawnSync(
   process.execPath,
   [path.join(ROOT, 'scripts', 'amp-orb-deploy.mjs'), 'preflight'],
@@ -431,27 +1080,28 @@ assert(
   unauthorizedPreflight.stderr.includes('Current Owner authorization'),
   'unauthorized preflight stops before checkout or SSH work',
 )
-for (const command of ['deploy', 'activate', 'activate-release']) {
+const unauthorizedDeploy = spawnSync(
+  process.execPath,
+  [path.join(ROOT, 'scripts', 'amp-orb-deploy.mjs'), 'deploy'],
+  { cwd: ROOT, encoding: 'utf8' },
+)
+assert(unauthorizedDeploy.status === 1, 'deploy without current Owner authorization is rejected')
+assert(
+  unauthorizedDeploy.stderr.includes('Current Owner authorization'),
+  'unauthorized deploy stops before candidate resolution, credentials, or SSH',
+)
+for (const command of ['activate', 'activate-release']) {
   const attempted = spawnSync(
     process.execPath,
     [path.join(ROOT, 'scripts', 'amp-orb-deploy.mjs'), command, '--owner-said-deploy-latest'],
-    {
-      cwd: ROOT,
-      encoding: 'utf8',
-      env: {
-        ...process.env,
-        PATH: `${closedRoot}:${process.env.PATH || ''}`,
-        EQB_DEPLOY_SSH_MARKER: sshMarker,
-      },
-    },
+    { cwd: ROOT, encoding: 'utf8' },
   )
-  assert(attempted.status === 1, `${command} production entrypoint exits non-zero`)
+  assert(attempted.status === 1, `${command} bypass entrypoint exits non-zero`)
   assert(
-    attempted.stderr.includes('Usage: amp-orb-deploy.mjs plan | preflight'),
-    `${command} is rejected as unavailable rather than starting deployment`,
+    attempted.stderr.includes('Usage: amp-orb-deploy.mjs plan | preflight')
+      && attempted.stderr.includes('deploy --owner-said-deploy-latest'),
+    `${command} is rejected instead of bypassing deploy-latest gates`,
   )
 }
-assert(!existsSync(sshMarker), 'closed production entrypoints never invoke SSH')
-rmSync(closedRoot, { recursive: true, force: true })
 
 summary()
