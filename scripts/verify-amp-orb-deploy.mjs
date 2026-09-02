@@ -1525,6 +1525,15 @@ assert(cli.includes("invokeController(['deploy', sha]"), 'SSH sends only the exa
 assert(!cli.includes("remoteArgs: ['bash', '-s']"), 'production activation never streams candidate shell code')
 assert(!cli.includes('StrictHostKeyChecking=no'), 'CLI contains no SSH trust bypass')
 assert(
+  cli.includes(
+    'head="$(/usr/bin/sudo -n /usr/sbin/runuser -u eqb -- /usr/bin/git -C "$repo" rev-parse HEAD)"',
+  )
+    && cli.includes(
+      'status --porcelain --untracked-files=no | /usr/bin/wc -l',
+    ),
+  'legacy preflight reads tracked checkout state through the production eqb boundary',
+)
+assert(
   cli.includes("input: readFileSync(legacyBaselineSource, 'utf8')")
     && cli.includes('/var/lock/eqb-legacy-baseline.lock')
     && cli.includes("'/usr/bin/node',")

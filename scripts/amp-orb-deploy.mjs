@@ -68,8 +68,8 @@ const bootstrapPreflightScript = `
 set -euo pipefail
 repo=/opt/eqb/english-question-bank
 test -d "$repo"
-head="$(git -c safe.directory="$repo" -C "$repo" rev-parse HEAD)"
-dirty="$(git -c safe.directory="$repo" -C "$repo" status --porcelain | wc -l)"
+head="$(/usr/bin/sudo -n /usr/sbin/runuser -u eqb -- /usr/bin/git -C "$repo" rev-parse HEAD)"
+dirty="$(/usr/bin/sudo -n /usr/sbin/runuser -u eqb -- /usr/bin/git -C "$repo" status --porcelain --untracked-files=no | /usr/bin/wc -l)"
 eqb="$(systemctl is-active eqb || true)"
 caddy="$(systemctl is-active caddy || true)"
 layout=legacy
