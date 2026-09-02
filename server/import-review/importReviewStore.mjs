@@ -918,6 +918,7 @@ export function createImportReviewStore({
       visibleStructure,
       sourceVisuals,
       mediaDerivations,
+      listeningReview: latestProjection?.listeningReview || null,
       mediaConfirmations,
       ocrReview: latestProjection?.ocrReview || null,
       promotion: latestPromotion(paperId),

@@ -17,6 +17,7 @@ const SUPPORTED_FAMILIES = new Set([
   'reading',
   'application-writing',
   'continuation-writing',
+  'listening',
 ])
 
 const VERIFIED_PRE_V18_CLOZE_CONSUMPTION_DIGESTS = new Set([
@@ -39,6 +40,86 @@ function textContent(nodes) {
     throw rejected('Canonical option content is not plain renderable text')
   }
   return nodes.map((node) => node.text).join('')
+}
+
+function projectListeningConsumerGroup(input, occurrence) {
+  const { groupId } = input
+  if (
+    !Array.isArray(occurrence.blanks)
+    || occurrence.blanks.length !== 0
+    || !Array.isArray(occurrence.numbering)
+    || !Array.isArray(occurrence.questions)
+    || !Array.isArray(occurrence.transcriptSegments)
+    || occurrence.questions.length !== occurrence.numbering.length
+    || occurrence.choices?.ownership !== 'per_question'
+    || !Array.isArray(occurrence.choices.sets)
+    || occurrence.choices.sets.length !== occurrence.questions.length
+  ) {
+    throw rejected(`Canonical Listening occurrence ${groupId} is incomplete`)
+  }
+  const questions = occurrence.questions.map((question, index) => {
+    const numbering = occurrence.numbering[index]
+    const choiceSet = occurrence.choices.sets[index]
+    if (
+      question?.questionId !== numbering?.questionId
+      || question.number !== numbering.number
+      || choiceSet?.questionId !== question.questionId
+      || !Array.isArray(question.stem)
+      || !Array.isArray(question.options)
+      || question.options.length !== 3
+      || question.options.map((option) => option?.label).join('') !== 'ABC'
+      || choiceSet.options?.map((option) => option?.optionId).join(',')
+        !== question.options.map((option) => option?.optionId).join(',')
+      || !question.options.some((option) =>
+        option.optionId === question.correctOptionId)
+    ) {
+      throw rejected(`Canonical Listening occurrence ${groupId} has an invalid A-C Question`)
+    }
+    return {
+      questionId: question.questionId,
+      questionNo: question.number,
+      stem: textContent(question.stem),
+      stemContent: structuredClone(question.stem),
+      options: question.options.map((option) => ({
+        optionId: option.optionId,
+        label: option.label,
+        text: textContent(option.content),
+        content: structuredClone(option.content),
+      })),
+    }
+  })
+  const coveredQuestionIds = occurrence.transcriptSegments.flatMap((segment) => {
+    if (
+      typeof segment?.segmentId !== 'string'
+      || !Array.isArray(segment.content)
+      || textContent(segment.content).length === 0
+      || !Array.isArray(segment.questionIds)
+    ) throw rejected(`Canonical Listening occurrence ${groupId} has an invalid transcript`)
+    return segment.questionIds
+  })
+  if (
+    occurrence.transcriptSegments.length !== 5
+    || coveredQuestionIds.join(',') !== questions.map(({ questionId }) => questionId).join(',')
+    || occurrence.anchors?.questionIds?.join(',')
+      !== questions.map(({ questionId }) => questionId).join(',')
+    || occurrence.anchors?.optionIds?.join(',')
+      !== questions.flatMap((question) =>
+        question.options.map(({ optionId }) => optionId)).join(',')
+    || occurrence.anchors?.transcriptSegmentIds?.join(',')
+      !== occurrence.transcriptSegments.map(({ segmentId }) => segmentId).join(',')
+  ) throw rejected(`Canonical Listening occurrence ${groupId} has invalid anchors`)
+
+  const semantic = {
+    paperId: input.consumption.paperId,
+    groupId,
+    familyContractId: 'listening',
+    questions,
+  }
+  return Object.freeze({
+    groupType: 'listening',
+    ...semantic,
+    semanticSignature: digestJson(semantic),
+  })
 }
 
 function decodeBase64Bytes(value) {
@@ -1122,7 +1203,7 @@ function selectOccurrence(input) {
     )
     || (
       familyContractId === 'seven-choices'
-      && ['47', '48', '49'].includes(authorityRef?.manifestVersion)
+      && ['47', '48', '49', '50'].includes(authorityRef?.manifestVersion)
     )
   if (requiresOccurrenceIntegrity) {
     const consumptionDigest = sha256(`${stableStringify(consumption)}\n`)
@@ -1198,6 +1279,9 @@ export function projectCanonicalConsumerGroup(input) {
   if (familyContractId === 'reading') {
     return projectReadingConsumerGroup(input, occurrence)
   }
+  if (familyContractId === 'listening') {
+    return projectListeningConsumerGroup(input, occurrence)
+  }
   if (familyContractId === 'application-writing') {
     return projectApplicationWritingConsumerGroup(input, occurrence)
   }
@@ -1265,7 +1349,7 @@ export function projectCanonicalConsumerGroup(input) {
 
   const seenBlanks = new Set()
   const passageRoles = familyContractId === 'seven-choices'
-    && ['47', '48', '49'].includes(input.consumption?.authorityRef?.manifestVersion)
+    && ['47', '48', '49', '50'].includes(input.consumption?.authorityRef?.manifestVersion)
     ? resolvePassageBlockRoles(
         occurrence.content?.blocks,
         occurrence.passageBlockRoles,

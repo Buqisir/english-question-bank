@@ -360,6 +360,7 @@ function makeReviewRoot(
   parentDir,
   fixturePaperId = paperId,
   questionSourceLabel = 'deterministic NCK1 question source',
+  { listening = false } = {},
 ) {
   const reviewRoot = path.join(parentDir, 'review')
   const questionBytes = Buffer.from(
@@ -368,7 +369,7 @@ function makeReviewRoot(
   const answerBytes = Buffer.from(
     '%PDF-1.7 deterministic official answer source'.padEnd(100, 'a'),
   )
-  const materialization = makeFixture()
+  const materialization = makeFixture({ listening })
   materialization.paperId = fixturePaperId
   materialization.groups.find((group) =>
     group.slotId === 'writing.application').writingTask.officialModelAnswer =
@@ -422,6 +423,72 @@ function makeReviewRoot(
   mkdirSync(path.join(reviewRoot, 'source'), { recursive: true })
   writeFileSync(path.join(reviewRoot, 'source/questions.pdf'), questionBytes)
   writeFileSync(path.join(reviewRoot, 'source/answers.pdf'), answerBytes)
+
+  if (listening) {
+    const audioPath = path.join(parentDir, 'listening.mp3')
+    const asrFixturePath = path.join(parentDir, 'listening-asr.json')
+    const referencePath = path.join(parentDir, 'listening-reference.json')
+    const contentReviewPath = path.join(parentDir, 'listening-review.json')
+    const transcript = [
+      'Welcome to the English listening test for this deterministic publication fixture.',
+      'The speakers discuss a library visit, a train schedule, and a school performance.',
+      'Listen to each conversation carefully and answer the questions according to what you hear.',
+    ].join(' ')
+    execFileSync('ffmpeg', [
+      '-v', 'error',
+      '-f', 'lavfi',
+      '-i', 'sine=frequency=440:duration=12',
+      '-codec:a', 'libmp3lame',
+      '-b:a', '96k',
+      audioPath,
+    ])
+    writeJson(asrFixturePath, {
+      engine: {
+        name: 'deterministic-fixture',
+        model: 'fixture-en',
+        version: '1',
+        computeType: 'fixture',
+      },
+      language: 'en',
+      languageProbability: 1,
+      segments: [{
+        startSeconds: 0.2,
+        endSeconds: 11.5,
+        text: transcript,
+        avgLogProbability: -0.2,
+        noSpeechProbability: 0.01,
+      }],
+    })
+    const staged = stageListeningAudio({
+      paperDir: reviewRoot,
+      paperId: fixturePaperId,
+      sourcePath: audioPath,
+      asrFixturePath,
+    })
+    writeJson(referencePath, {
+      schemaVersion: 'listening-audio-reference-v1',
+      paperId: fixturePaperId,
+      basis: 'authoritative_transcript',
+      text: transcript,
+    })
+    writeJson(contentReviewPath, {
+      schemaVersion: 'listening-audio-content-review-v1',
+      paperId: fixturePaperId,
+      reviewedBy: 'import_agent',
+      reviewedAt: '2026-09-02T00:00:00.000Z',
+      reviewedTranscriptSha256: staged.asrSha256,
+      untrustedContentHandledAsData: true,
+      verdict: 'pass',
+      summary: 'Full fixture transcript reviewed as untrusted content.',
+      flaggedRanges: [],
+    })
+    finalizeListeningAudio({
+      paperDir: reviewRoot,
+      paperId: fixturePaperId,
+      reviewPath: contentReviewPath,
+      referencePath,
+    })
+  }
 
   writeStagedAnalyses(reviewRoot, materialization)
 
@@ -486,9 +553,9 @@ function makeReviewRoot(
   }
 }
 
-function makeContext(label) {
+function makeContext(label, options = {}) {
   const tempRoot = mkdtempSync(path.join(tmpdir(), `eqb-universal-publish-${label}-`))
-  const fixture = makeReviewRoot(tempRoot)
+  const fixture = makeReviewRoot(tempRoot, paperId, undefined, options)
   const db = new DatabaseSync(path.join(tempRoot, 'question-bank.sqlite'))
   db.exec(readFileSync(path.join(root, 'data/sql/schema.sql'), 'utf8'))
   return {
@@ -950,71 +1017,45 @@ function runReviewCommand(args, env) {
   })
 }
 
-const listeningPublication = makeContext('listening-publication')
+const listeningPublication = makeContext('listening-publication', { listening: true })
 try {
-  const audioPath = path.join(listeningPublication.tempRoot, 'listening.mp3')
-  const asrFixturePath = path.join(listeningPublication.tempRoot, 'listening-asr.json')
-  const referencePath = path.join(listeningPublication.tempRoot, 'listening-reference.json')
-  const contentReviewPath = path.join(listeningPublication.tempRoot, 'listening-review.json')
-  const transcript = [
-    'Welcome to the English listening test for this deterministic publication fixture.',
-    'The speakers discuss a library visit, a train schedule, and a school performance.',
-    'Listen to each conversation carefully and answer the questions according to what you hear.',
-  ].join(' ')
-  execFileSync('ffmpeg', [
-    '-v', 'error',
-    '-f', 'lavfi',
-    '-i', 'sine=frequency=440:duration=12',
-    '-codec:a', 'libmp3lame',
-    '-b:a', '96k',
-    audioPath,
-  ])
-  writeJson(asrFixturePath, {
-    engine: {
-      name: 'deterministic-fixture',
-      model: 'fixture-en',
-      version: '1',
-      computeType: 'fixture',
+  const listeningProjection = listeningPublication.projection
+  assert.deepEqual(
+    listeningProjection.paperAsset.content.blocks.slice(0, 2),
+    [
+      {
+        type: 'group',
+        groupId: `group:${paperId}:listening.short-dialogue`,
+      },
+      {
+        type: 'group',
+        groupId: `group:${paperId}:listening.long-form`,
+      },
+    ],
+    'Screen compatibility asset starts with the two Canonical Listening Groups',
+  )
+  assert.equal(listeningProjection.listeningReview.questions.length, 20)
+  assert.deepEqual(
+    listeningProjection.listeningReview.questions[5],
+    {
+      questionId: 'question:listening:6',
+      questionNo: 6,
+      officialAnswer: 'A',
+      transcriptSegments: [{
+        segmentId: 'text:6',
+        text: 'Long listening transcript 6.',
+        questionNumbers: [6, 7, 8],
+      }],
     },
-    language: 'en',
-    languageProbability: 1,
-    segments: [{
-      startSeconds: 0.2,
-      endSeconds: 11.5,
-      text: transcript,
-      avgLogProbability: -0.2,
-      noSpeechProbability: 0.01,
-    }],
-  })
-  const staged = stageListeningAudio({
-    paperDir: listeningPublication.reviewRoot,
-    paperId,
-    sourcePath: audioPath,
-    asrFixturePath,
-  })
-  writeJson(referencePath, {
-    schemaVersion: 'listening-audio-reference-v1',
-    paperId,
-    basis: 'authoritative_transcript',
-    text: transcript,
-  })
-  writeJson(contentReviewPath, {
-    schemaVersion: 'listening-audio-content-review-v1',
-    paperId,
-    reviewedBy: 'import_agent',
-    reviewedAt: '2026-09-02T00:00:00.000Z',
-    reviewedTranscriptSha256: staged.asrSha256,
-    untrustedContentHandledAsData: true,
-    verdict: 'pass',
-    summary: 'Full fixture transcript reviewed as untrusted content.',
-    flaggedRanges: [],
-  })
-  finalizeListeningAudio({
-    paperDir: listeningPublication.reviewRoot,
-    paperId,
-    reviewPath: contentReviewPath,
-    referencePath,
-  })
+  )
+  assert.equal(Math.round(listeningProjection.listeningReview.audio.durationSeconds), 12)
+  assert.equal(listeningProjection.listeningReview.audio.comparison.verdict, 'pass')
+  assert.equal(listeningProjection.listeningReview.audio.contentSafety.verdict, 'pass')
+  assert.equal(
+    Object.hasOwn(listeningProjection.paperAsset.content.questions['question:listening:6'], 'transcript'),
+    false,
+    'Student PaperAsset must not expose the Listening transcript',
+  )
   const blocked = publish(listeningPublication)
   assert.equal(blocked.ok, false)
   assert.equal(
