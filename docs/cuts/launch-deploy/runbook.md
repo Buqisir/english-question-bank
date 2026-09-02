@@ -200,14 +200,38 @@ The repository exposes:
 ```bash
 node scripts/amp-orb-deploy.mjs plan
 node scripts/amp-orb-deploy.mjs bootstrap-preflight --owner-said-preflight
+node scripts/amp-orb-deploy.mjs baseline --owner-said-baseline-migration
+node scripts/amp-orb-deploy.mjs bootstrap --owner-said-release-bootstrap
 node scripts/amp-orb-deploy.mjs preflight --owner-said-preflight
 node scripts/amp-orb-deploy.mjs deploy --owner-said-deploy-latest
 ```
 
 `plan` does not connect to production. `bootstrap-preflight` is the one-time
-read-only legacy-host check; after cutover, `preflight` goes only through the
-root-owned forced-command controller. Daily `deploy` resolves current `main`
-itself and sends only that exact SHA—never an Owner-supplied hash—to the host.
+read-only legacy-host check. `baseline` is the transition-only migration from a
+known legacy state to the exact healthy `main`; it is not an ordinary deploy.
+`bootstrap` creates the release layout and restricted controller boundary only
+after that exact baseline is healthy. After cutover, `preflight` goes only
+through the root-owned forced-command controller. Daily `deploy` resolves
+current `main` itself and sends only that exact SHA—never an Owner-supplied
+hash—to the host.
+
+The baseline operator keeps its root process at umask `077`, but every package
+install, Chromium smoke, and app build child explicitly uses umask `022`. It
+requires generated `app/dist` directories to be `0755` and files `0644`, and
+rechecks types, modes, and hashes immediately before Caddy starts in both the
+forward and rollback paths. It snapshots all three SQLite databases, proves
+integrity and foreign keys, checks the exact migration invariant, and never
+deletes the preexisting unknown release tree: that whole wrapper is atomically
+quarantined to the same filesystem and retained intact after success, with an
+exact rename-back rollback while rollback remains safe. Before the first Caddy
+start attempt, a failure may restore the exact database snapshots and old code;
+it reports healthy rollback only after the restored strict public health suite
+passes. The first Caddy start attempt is the external-write boundary. At or
+after that boundary, the operator does not overwrite possibly changed databases
+or run old code against the migrated schema: it preserves the consistent target
+code and schema, reports `rolledBack: false`, and fails closed for diagnosis.
+Do not retry a failed baseline command without a fresh state classification and
+authorization.
 
 The one-time cutover uses `deploy/bootstrap-eqb-deployment.sh` to prepare the
 first release, move writable state under `/opt/eqb/shared`, install
@@ -247,11 +271,22 @@ Repository readiness still grants no production authority. Before cutover:
 
 1. create a separate private Deployment Orb project;
 2. run a fresh read-only bootstrap preflight;
-3. obtain direct Owner authorization for the production bootstrap;
-4. generate a dedicated Ed25519 key, install only its forced public key, verify
-   the new controller route, store the private key only in that Deployment
-   project, and remove deployment secrets from development/CI projects;
-5. record the exact cutover evidence in `go-live-record.md`.
+3. obtain direct Owner authorization for the protected baseline migration, run
+   `baseline --owner-said-baseline-migration`, and require its strict success
+   receipt before proceeding;
+4. obtain a new, separate direct Owner authorization for the release-layout
+   bootstrap, then run `bootstrap --owner-said-release-bootstrap`;
+5. require bootstrap to generate the dedicated Ed25519 identity, verify the new
+   forced-controller route, atomically retire the exact old privileged key,
+   prove that the new key still works and the old key is rejected, and rotate
+   only `QUESTION_BANK_DEPLOY_SSH_PRIVATE_KEY` in the current Deployment project
+   via stdin. If the command reports failure after starting the host attempt,
+   stop without rerunning and preserve the reported private recovery identity;
+6. after successful Secret rotation, refresh the Deployment Orb environment
+   with `amp orb restart-processes --thread "$AMP_THREAD_ID"`, then obtain
+   authorization for and run the forced-controller `preflight`;
+7. confirm deployment secrets are absent from development/CI projects and
+   record the exact cutover evidence in `go-live-record.md`.
 
 The first real Orb deployment then needs a separate direct Owner authorization.
 Thereafter the Owner's normal daily instruction is only `部署最新版`; no Mac or

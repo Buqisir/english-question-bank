@@ -22,16 +22,22 @@ import {
   activatePreparedRelease,
   assertDeploymentCandidateStillCurrent,
   assertAuthoritativeDeploymentChecks,
+  bootstrapReleaseLayout,
   currentReleaseSha,
   deployLatestRelease,
   deploymentGitHubApiArgs,
   deploymentLockInvocation,
   deploymentSSHInvocation,
   materializeDeploymentCredentials,
+  migrateLegacyProductionBaseline,
+  parseBootstrapKeyRetirementReceipt,
   parseDeploymentControllerOutput,
   parseDeploymentControllerPreflight,
   parseDeploymentPreflightOutput,
+  parseLegacyBaselineReceipt,
   requireDeployLatestAuthorization,
+  requireLegacyBaselineAuthorization,
+  requireReleaseLayoutBootstrapAuthorization,
   resolveLatestDeploymentCandidate,
 } from './lib/ampOrbDeploy.mjs'
 import {
@@ -406,6 +412,353 @@ const controllerPreflight = parseDeploymentControllerPreflight(JSON.stringify({
 }))
 assert(controllerPreflight.productionSha === oldSha, 'fixed controller preflight is parsed strictly')
 
+section('One-time baseline migration and release-layout bootstrap')
+
+for (const [authorize, argv, label] of [
+  [
+    requireLegacyBaselineAuthorization,
+    ['baseline', '--owner-said-baseline-migration'],
+    'baseline migration',
+  ],
+  [
+    requireReleaseLayoutBootstrapAuthorization,
+    ['bootstrap', '--owner-said-release-bootstrap'],
+    'release-layout bootstrap',
+  ],
+]) {
+  assert((() => {
+    authorize(argv)
+    return true
+  })(), `${label} accepts only its explicit Owner authorization`)
+  assert((() => {
+    try {
+      authorize([...argv, '--sha', newSha])
+      return false
+    } catch {
+      return true
+    }
+  })(), `${label} rejects an Owner-supplied SHA`)
+}
+
+function legacyBaselineReceipt({
+  targetSha = newSha,
+  previousSha = oldSha,
+  productionSha = targetSha,
+  conclusion = 'success',
+  failureCode = null,
+  rollbackHealthy = null,
+  rolledBack = conclusion === 'failure',
+  eqb = 'active',
+  caddy = 'active',
+  identityInstalled = conclusion === 'success',
+  quarantinePreserved = conclusion === 'success',
+} = {}) {
+  return JSON.stringify({
+    schemaVersion: 'eqb-legacy-baseline-receipt-v1',
+    state: 'reported',
+    conclusion,
+    targetSha,
+    previousSha,
+    productionSha,
+    eqb,
+    caddy,
+    layout: 'legacy',
+    identityInstalled,
+    quarantinePreserved,
+    backupsVerified: true,
+    migrationVerified: true,
+    distVerified: true,
+    rolledBack,
+    rollbackHealthy,
+    failureCode,
+    startedAt: '2026-09-02T00:00:00.000Z',
+    finishedAt: '2026-09-02T00:10:00.000Z',
+    bootstrapRun: false,
+  })
+}
+
+const parsedBaselineReceipt = parseLegacyBaselineReceipt(legacyBaselineReceipt(), newSha)
+assert(
+  parsedBaselineReceipt.conclusion === 'success'
+    && parsedBaselineReceipt.productionSha === newSha,
+  'baseline receipt is strictly bound to the exact healthy target',
+)
+const parsedFailedBaselineReceipt = parseLegacyBaselineReceipt(legacyBaselineReceipt({
+  productionSha: oldSha,
+  conclusion: 'failure',
+  failureCode: 'start-caddy:strict-health',
+  rollbackHealthy: true,
+}), newSha)
+assert(
+  parsedFailedBaselineReceipt.conclusion === 'failure'
+    && parsedFailedBaselineReceipt.rolledBack
+    && parsedFailedBaselineReceipt.rollbackHealthy,
+  'baseline healthy rollback receipt proves the exact restored baseline and services',
+)
+const parsedPostTrafficFailure = parseLegacyBaselineReceipt(legacyBaselineReceipt({
+  productionSha: newSha,
+  conclusion: 'failure',
+  failureCode: 'start-caddy:strict-health',
+  rollbackHealthy: false,
+  rolledBack: false,
+  caddy: 'inactive',
+}), newSha)
+assert(
+  parsedPostTrafficFailure.conclusion === 'failure'
+    && !parsedPostTrafficFailure.rolledBack
+    && !parsedPostTrafficFailure.rollbackHealthy
+    && parsedPostTrafficFailure.productionSha === newSha,
+  'post-traffic failure receipt truthfully preserves the consistent target without claiming rollback',
+)
+for (const [label, output] of [
+  ['unexpected field', legacyBaselineReceipt().replace(/\}\s*$/u, ',"extra":true}')],
+  ['another SHA', legacyBaselineReceipt({ targetSha: oldSha })],
+  ['non-JSON', 'baseline complete'],
+  ['healthy rollback without rollback', legacyBaselineReceipt({
+    productionSha: oldSha,
+    conclusion: 'failure',
+    failureCode: 'start-caddy:strict-health',
+    rollbackHealthy: true,
+    rolledBack: false,
+  })],
+  ['healthy rollback on target code', legacyBaselineReceipt({
+    productionSha: newSha,
+    conclusion: 'failure',
+    failureCode: 'start-caddy:strict-health',
+    rollbackHealthy: true,
+  })],
+  ['healthy rollback with Caddy inactive', legacyBaselineReceipt({
+    productionSha: oldSha,
+    conclusion: 'failure',
+    failureCode: 'start-caddy:strict-health',
+    rollbackHealthy: true,
+    caddy: 'inactive',
+  })],
+]) {
+  assert((() => {
+    try {
+      parseLegacyBaselineReceipt(output, newSha)
+      return false
+    } catch {
+      return true
+    }
+  })(), `${label} baseline response fails closed`)
+}
+
+const legacyPreflight = {
+  productionSha: oldSha,
+  trackedDirtyPaths: 0,
+  eqb: 'active',
+  caddy: 'active',
+  layout: 'legacy',
+}
+const baselineOrder = []
+const migratedBaseline = await migrateLegacyProductionBaseline({
+  argv: ['baseline', '--owner-said-baseline-migration'],
+  async resolveCandidate() {
+    baselineOrder.push('resolve')
+    return candidate
+  },
+  async readMainSha() {
+    baselineOrder.push('main')
+    return newSha
+  },
+  async readLegacyPreflight() {
+    baselineOrder.push('preflight')
+    return legacyPreflight
+  },
+  async invokeOperator() {
+    baselineOrder.push('operator')
+    return { exitCode: 0, output: legacyBaselineReceipt() }
+  },
+})
+assert(migratedBaseline.receipt.conclusion === 'success', 'healthy baseline receipt completes migration')
+assert(
+  baselineOrder.join(',') === 'resolve,main,preflight,main,operator',
+  'baseline resolves, rechecks, preflights, rechecks, then invokes the host operator',
+)
+
+let ineligibleBaselineInvoked = false
+assert(await (async () => {
+  try {
+    await migrateLegacyProductionBaseline({
+      argv: ['baseline', '--owner-said-baseline-migration'],
+      resolveCandidate: async () => candidate,
+      readMainSha: async () => newSha,
+      readLegacyPreflight: async () => ({ ...legacyPreflight, layout: 'release' }),
+      invokeOperator: async () => {
+        ineligibleBaselineInvoked = true
+        return { exitCode: 0, output: legacyBaselineReceipt() }
+      },
+    })
+    return false
+  } catch {
+    return true
+  }
+})(), 'ineligible legacy production fails the baseline migration')
+assert(!ineligibleBaselineInvoked, 'ineligible baseline stops before the host operator')
+
+assert(await (async () => {
+  try {
+    await migrateLegacyProductionBaseline({
+      argv: ['baseline', '--owner-said-baseline-migration'],
+      resolveCandidate: async () => candidate,
+      readMainSha: async () => newSha,
+      readLegacyPreflight: async () => legacyPreflight,
+      invokeOperator: async () => ({ exitCode: 1, output: legacyBaselineReceipt() }),
+    })
+    return false
+  } catch {
+    return true
+  }
+})(), 'baseline process exit and structured receipt conclusion must agree')
+
+const migratedPreflight = { ...legacyPreflight, productionSha: newSha }
+const healthyReleasePreflight = {
+  schemaVersion: 'eqb-deployment-preflight-v2',
+  controllerVersion: 'eqb-deploy-controller-v1',
+  productionSha: newSha,
+  eqb: 'active',
+  caddy: 'active',
+  layout: 'release',
+}
+const keyRetirementReceipt = JSON.stringify({
+  schemaVersion: 'eqb-bootstrap-key-retirement-v1',
+  state: 'reported',
+  conclusion: 'success',
+  oldKeyRemoved: true,
+  forcedKeyPreserved: true,
+  originalDigest: '3'.repeat(64),
+  installedDigest: '4'.repeat(64),
+})
+assert(
+  parseBootstrapKeyRetirementReceipt(keyRetirementReceipt).oldKeyRemoved,
+  'bootstrap identity retirement receipt is parsed strictly',
+)
+for (const [label, output] of [
+  ['unexpected field', keyRetirementReceipt.replace(/\}\s*$/u, ',"extra":true}')],
+  ['unchanged authorized keys', keyRetirementReceipt.replace('4'.repeat(64), '3'.repeat(64))],
+  ['non-JSON', 'bootstrap key retired'],
+]) {
+  assert((() => {
+    try {
+      parseBootstrapKeyRetirementReceipt(output)
+      return false
+    } catch {
+      return true
+    }
+  })(), `${label} bootstrap key-retirement response fails closed`)
+}
+const bootstrapOrder = []
+const bootstrapped = await bootstrapReleaseLayout({
+  argv: ['bootstrap', '--owner-said-release-bootstrap'],
+  async resolveCandidate() {
+    bootstrapOrder.push('resolve')
+    return candidate
+  },
+  async readMainSha() {
+    bootstrapOrder.push('main')
+    return newSha
+  },
+  async readLegacyPreflight() {
+    bootstrapOrder.push('preflight')
+    return migratedPreflight
+  },
+  async invokeBootstrap() {
+    bootstrapOrder.push('bootstrap')
+  },
+  async readControllerPreflight() {
+    bootstrapOrder.push('controller')
+    return healthyReleasePreflight
+  },
+  async retireBootstrapIdentity() {
+    bootstrapOrder.push('retire')
+    return parseBootstrapKeyRetirementReceipt(keyRetirementReceipt)
+  },
+  async verifyBootstrapIdentityRetired() {
+    bootstrapOrder.push('old-rejected')
+    return true
+  },
+  async rotateControllerSecret() {
+    bootstrapOrder.push('secret')
+  },
+})
+assert(bootstrapped.controllerPreflight.layout === 'release', 'new forced controller proves release layout')
+assert(
+  bootstrapOrder.join(',')
+    === 'resolve,main,preflight,main,bootstrap,controller,retire,controller,old-rejected,secret',
+  'bootstrap proves the new route, retires and rejects the old key, then rotates the secret last',
+)
+
+let ineligibleBootstrapInvoked = false
+assert(await (async () => {
+  try {
+    await bootstrapReleaseLayout({
+      argv: ['bootstrap', '--owner-said-release-bootstrap'],
+      resolveCandidate: async () => candidate,
+      readMainSha: async () => newSha,
+      readLegacyPreflight: async () => legacyPreflight,
+      invokeBootstrap: async () => {
+        ineligibleBootstrapInvoked = true
+      },
+      readControllerPreflight: async () => healthyReleasePreflight,
+      retireBootstrapIdentity: async () => parseBootstrapKeyRetirementReceipt(keyRetirementReceipt),
+      verifyBootstrapIdentityRetired: async () => true,
+      rotateControllerSecret: async () => {},
+    })
+    return false
+  } catch {
+    return true
+  }
+})(), 'bootstrap rejects production that has not completed the exact baseline migration')
+assert(!ineligibleBootstrapInvoked, 'ineligible bootstrap stops before production mutation')
+
+let unverifiedSecretRotated = false
+assert(await (async () => {
+  try {
+    await bootstrapReleaseLayout({
+      argv: ['bootstrap', '--owner-said-release-bootstrap'],
+      resolveCandidate: async () => candidate,
+      readMainSha: async () => newSha,
+      readLegacyPreflight: async () => migratedPreflight,
+      invokeBootstrap: async () => {},
+      readControllerPreflight: async () => ({ ...healthyReleasePreflight, caddy: 'inactive' }),
+      retireBootstrapIdentity: async () => parseBootstrapKeyRetirementReceipt(keyRetirementReceipt),
+      verifyBootstrapIdentityRetired: async () => true,
+      rotateControllerSecret: async () => {
+        unverifiedSecretRotated = true
+      },
+    })
+    return false
+  } catch {
+    return true
+  }
+})(), 'unhealthy new controller preflight fails the bootstrap')
+assert(!unverifiedSecretRotated, 'controller key is not rotated before forced-route health proof')
+
+let unretiredSecretRotated = false
+assert(await (async () => {
+  try {
+    await bootstrapReleaseLayout({
+      argv: ['bootstrap', '--owner-said-release-bootstrap'],
+      resolveCandidate: async () => candidate,
+      readMainSha: async () => newSha,
+      readLegacyPreflight: async () => migratedPreflight,
+      invokeBootstrap: async () => {},
+      readControllerPreflight: async () => healthyReleasePreflight,
+      retireBootstrapIdentity: async () => parseBootstrapKeyRetirementReceipt(keyRetirementReceipt),
+      verifyBootstrapIdentityRetired: async () => false,
+      rotateControllerSecret: async () => {
+        unretiredSecretRotated = true
+      },
+    })
+    return false
+  } catch {
+    return true
+  }
+})(), 'still-usable privileged bootstrap identity fails the bootstrap')
+assert(!unretiredSecretRotated, 'controller key is not rotated while the old identity remains usable')
+
 section('Private credentials and pinned SSH invocation')
 
 const credentialRoot = mkdtempSync(path.join(tmpdir(), 'eqb-deploy-credentials-'))
@@ -445,6 +798,7 @@ assert(
 )
 assert(ssh.args.includes('GlobalKnownHostsFile=/dev/null'), 'global host keys cannot widen trust')
 assert(ssh.args.includes('BatchMode=yes'), 'SSH cannot fall back to an interactive password')
+assert(ssh.args.includes('PreferredAuthentications=publickey'), 'SSH attempts only the pinned public-key identity')
 assert(!ssh.args.some((arg) => arg.includes('StrictHostKeyChecking=no')), 'insecure host-key bypass is absent')
 
 const locked = deploymentLockInvocation({
@@ -942,7 +1296,11 @@ rmSync(writableRootPreflight.root, { recursive: true, force: true })
 const controllerSource = readText(ROOT, 'deploy/eqb-deploy-controller.mjs')
 const controllerWrapper = readText(ROOT, 'deploy/eqb-deploy-controller')
 const bootstrapSource = readText(ROOT, 'deploy/bootstrap-eqb-deployment.sh')
+const baselineSource = readText(ROOT, 'deploy/eqb-legacy-baseline.mjs')
+const keyRetirementSource = readText(ROOT, 'deploy/retire-eqb-bootstrap-key.mjs')
 execFileSync(process.execPath, ['--check', path.join(ROOT, 'deploy', 'eqb-deploy-controller.mjs')])
+execFileSync(process.execPath, ['--check', path.join(ROOT, 'deploy', 'eqb-legacy-baseline.mjs')])
+execFileSync(process.execPath, ['--check', path.join(ROOT, 'deploy', 'retire-eqb-bootstrap-key.mjs')])
 execFileSync('/bin/sh', ['-n', path.join(ROOT, 'deploy', 'eqb-deploy-controller')])
 execFileSync('/bin/bash', ['-n', path.join(ROOT, 'deploy', 'bootstrap-eqb-deployment.sh')])
 assert(controllerWrapper.includes('/usr/bin/flock'), 'installed wrapper owns the non-blocking production lock')
@@ -968,6 +1326,11 @@ assert(
   'ordinary candidate commands run in transient build-user cgroups that terminate leftover children',
 )
 assert(
+  controllerSource.includes("'/bin/sh', '-c', 'umask 022; exec \"$@\"', 'eqb-release-build'")
+    && bootstrapSource.includes("/bin/sh -c 'umask 022; exec \"$@\"' eqb-bootstrap-build"),
+  'ordinary and bootstrap builds explicitly create Caddy-readable artifacts',
+)
+assert(
   controllerSource.includes("['-hR', 'root:root', directory]")
     && bootstrapSource.includes('chown -hR root:root "$staging"'),
   'release sealing changes symlink ownership without following candidate links',
@@ -975,6 +1338,13 @@ assert(
 assert(
   bootstrapSource.includes('restrict,command=') && bootstrapSource.includes('ssh-ed25519'),
   'one-time bootstrap installs a forced-command-only deployment key',
+)
+assert(
+  bootstrapSource.includes('umask 077')
+    && bootstrapSource.includes('EQB_DEPLOY_CONTROLLER_PUBLIC_KEY_BODY')
+    && bootstrapSource.includes('mktemp /run/eqb-controller-public-key-XXXXXXXX')
+    && bootstrapSource.includes('cleanup_public_key'),
+  'bootstrap accepts only a private temporary materialization of the generated public key',
 )
 assert(
   bootstrapSource.includes('/usr/bin/systemd-run')
@@ -1045,12 +1415,95 @@ assert(
 assert(
   bootstrapSource.includes('rollback')
     && bootstrapSource.includes('legacy service configuration restored and healthy')
-    && bootstrapSource.includes('root-private backup retained'),
-  'one-time bootstrap verifies healthy legacy rollback and retains recovery evidence otherwise',
+    && bootstrapSource.includes('root-private backup retained')
+    && bootstrapSource.includes('--resolve eqbank.cc:443:127.0.0.1 https://eqbank.cc/')
+    && bootstrapSource.includes('https://eqbank.cc/ops/?view=review'),
+  'one-time bootstrap verifies API and static-surface rollback health and retains recovery evidence otherwise',
+)
+assert(
+  bootstrapSource.includes('bootstrap_log=$backup/build.log')
+    && bootstrapSource.includes('install -o root -g root -m 0600 /dev/null "$bootstrap_log"')
+    && bootstrapSource.includes('>> "$bootstrap_log" 2>&1'),
+  'bootstrap keeps candidate install and build output in a private host log',
 )
 for (const forbidden of ['pull-run-push', 'backup-to-r2', 'rclone ', 'migrate:']) {
   assert(!bootstrapSource.includes(forbidden), `bootstrap never invokes forbidden ${forbidden.trim()} operation`)
 }
+
+assert(
+  baselineSource.includes('process.umask(0o077)')
+    && baselineSource.includes("'umask 022; exec \"$@\"'"),
+  'baseline keeps operator evidence private while install and build children create readable artifacts',
+)
+assert(
+  baselineSource.includes('function childProof(wrapper)')
+    && baselineSource.includes("const pre = childProof('/opt/eqb/releases')")
+    && baselineSource.includes('const moved = childProof(quarantine)')
+    && baselineSource.includes('completeDigest: digest(completeFiles)')
+    && baselineSource.includes('proof.completeDigest === quarantineRecord.completeDigest'),
+  'baseline verifies the same inner quarantine child and a complete byte digest before rollback',
+)
+assert(
+  baselineSource.includes('function pathEntryExists(filePath)')
+    && baselineSource.includes('if (pathEntryExists(fixedPath))')
+    && baselineSource.includes('pathEntryExists(defaultKey)')
+    && baselineSource.includes('stat.isSymbolicLink()'),
+  'baseline rejects dangling fixed paths and linked generated trees',
+)
+assert(
+  baselineSource.includes('const expectedMode = stat.isDirectory() ? 0o755 : 0o644')
+    && baselineSource.includes("stage = 'pre-caddy-dist-proof'")
+    && baselineSource.includes('sameDistManifest(targetDist)')
+    && baselineSource.includes('rollbackDist = installBuild(true)')
+    && baselineSource.includes('sameDistManifest(rollbackDist)'),
+  'baseline proves generated dist modes and hashes before both forward and rollback Caddy starts',
+)
+assert(
+  baselineSource.includes(
+    'const healthy = baselineRestored && serviceRecoveryHealthy && strictHealth()',
+  )
+    && baselineSource.includes('rolledBack: rollbackResult.rolledBack')
+    && baselineSource.includes("curl(['--resolve', `${publicHost}:443:127.0.0.1`, `${origin}/`])"),
+  'baseline claims healthy rollback only after terminal strict health and exact baseline restoration',
+)
+assert(
+  baselineSource.includes('if (!trafficReopened && snapshotsReady)')
+    && baselineSource.includes('if (codeAdvanced && !trafficReopened)')
+    && baselineSource.indexOf("throw new Error('target-invariants-before-caddy')")
+      < baselineSource.indexOf("stage = 'start-caddy'"),
+  'baseline proves target invariants before Caddy and never restores code or DB after traffic reopening',
+)
+const baselineCaddyStart = baselineSource.slice(baselineSource.indexOf("stage = 'start-caddy'"))
+assert(
+  baselineCaddyStart.indexOf('trafficReopened = true')
+    < baselineCaddyStart.indexOf("must('/usr/bin/systemctl', ['start', 'caddy']"),
+  'the first Caddy start attempt crosses the irreversible traffic boundary',
+)
+const baselineServiceStop = baselineSource.slice(baselineSource.indexOf("stage = 'stop-services'"))
+assert(
+  baselineServiceStop.indexOf('maintenance = true')
+    < baselineServiceStop.indexOf("must('/usr/bin/systemctl', ['stop', 'caddy']"),
+  'rollback owns service recovery from the first maintenance stop attempt',
+)
+for (const forbidden of ['pull-run-push', 'backup-to-r2', 'rclone ', 'promote-paper']) {
+  assert(!baselineSource.includes(forbidden), `baseline never invokes forbidden ${forbidden.trim()} operation`)
+}
+assert(
+  keyRetirementSource.includes("const authorizedKeys = '/root/.ssh/authorized_keys'")
+    && keyRetirementSource.includes('oldMatches.length !== 1')
+    && keyRetirementSource.includes('newMatches.length !== 1')
+    && keyRetirementSource.includes('fs.renameSync(replacementPath, authorizedKeys)')
+    && keyRetirementSource.includes('fs.renameSync(rollbackPath, authorizedKeys)')
+    && keyRetirementSource.includes('syncSshDirectory()')
+    && keyRetirementSource.includes("original.includes('\\r')"),
+  'bootstrap identity retirement is exact, atomic, and restores authorized_keys on failed proof',
+)
+assert(
+  keyRetirementSource.includes("process.umask(0o077)")
+    && keyRetirementSource.includes("fs.mkdtempSync('/var/backups/eqb/bootstrap-key-retirement-')")
+    && keyRetirementSource.includes("privateWrite(backupPath, original)"),
+  'bootstrap identity retirement retains a root-private rollback copy',
+)
 const service = readText(ROOT, 'deploy/eqb-release.service')
 const caddy = readText(ROOT, 'deploy/Caddyfile.release')
 assert(service.includes('WorkingDirectory=/opt/eqb/current'), 'systemd runs only the atomic current release')
@@ -1063,12 +1516,41 @@ section('Production activation is Owner-authorized and bounded')
 const cli = readText(ROOT, 'scripts/amp-orb-deploy.mjs')
 assert(cli.includes("process.argv[2] === 'plan'"), 'CLI exposes a no-mutation deployment plan')
 assert(cli.includes("process.argv[2] === 'preflight'"), 'CLI exposes an Owner-authorized read-only preflight')
+assert(cli.includes("process.argv[2] === 'baseline'"), 'CLI exposes the protected legacy baseline command')
+assert(cli.includes("process.argv[2] === 'bootstrap'"), 'CLI exposes the one-time release-layout bootstrap')
 assert(cli.includes("process.argv[2] === 'deploy'"), 'CLI exposes the Owner-authorized deploy-latest command')
 assert(cli.includes('productionMutationAllowed: false'), 'plan and preflight declare no production mutation authority')
 assert(cli.includes('productionMutationAllowed: true'), 'successful deployment output declares production mutation')
 assert(cli.includes("invokeController(['deploy', sha]"), 'SSH sends only the exact SHA to the fixed controller')
 assert(!cli.includes("remoteArgs: ['bash', '-s']"), 'production activation never streams candidate shell code')
 assert(!cli.includes('StrictHostKeyChecking=no'), 'CLI contains no SSH trust bypass')
+assert(
+  cli.includes("input: readFileSync(legacyBaselineSource, 'utf8')")
+    && cli.includes('/var/lock/eqb-legacy-baseline.lock')
+    && cli.includes("'/usr/bin/node',")
+    && cli.includes("'--input-type=module',"),
+  'baseline streams the exact tracked operator under a non-blocking host lock',
+)
+assert(
+  cli.includes("input: readFileSync(releaseBootstrapSource, 'utf8')")
+    && cli.includes('/var/lock/eqb-release-bootstrap.lock')
+    && cli.includes('EQB_DEPLOY_CONTROLLER_PUBLIC_KEY_BODY='),
+  'bootstrap streams the exact tracked script under a separate non-blocking host lock',
+)
+assert(
+  cli.includes("input: readFileSync(bootstrapKeyRetirementSource, 'utf8')")
+    && cli.includes('EQB_DEPLOY_BOOTSTRAP_PUBLIC_KEY_BODY=')
+    && cli.includes('verifyBootstrapIdentityRetired')
+    && cli.includes('Permission denied \\(publickey'),
+  'bootstrap retires the exact old identity and distinguishes auth rejection from transport failure',
+)
+assert(
+  cli.includes("'--data-file', '-'")
+    && cli.includes('input: readFileSync(identity.privateKeyPath')
+    && cli.includes('projectId = String(process.env.AMP_PROJECT_ID')
+    && cli.includes('environmentRefreshRequired: true'),
+  'verified controller key rotates only the current Deployment project secret through stdin',
+)
 
 const unauthorizedPreflight = spawnSync(
   process.execPath,
@@ -1080,6 +1562,30 @@ assert(
   unauthorizedPreflight.stderr.includes('Current Owner authorization'),
   'unauthorized preflight stops before checkout or SSH work',
 )
+for (const [command, authorization, label] of [
+  ['baseline', '--owner-said-baseline-migration', 'baseline migration'],
+  ['bootstrap', '--owner-said-release-bootstrap', 'release-layout bootstrap'],
+]) {
+  const unauthorized = spawnSync(
+    process.execPath,
+    [path.join(ROOT, 'scripts', 'amp-orb-deploy.mjs'), command],
+    { cwd: ROOT, encoding: 'utf8' },
+  )
+  assert(unauthorized.status === 1, `${label} without current Owner authorization is rejected`)
+  assert(
+    unauthorized.stderr.includes('Current Owner authorization'),
+    `unauthorized ${label} stops before credentials, SSH, or production work`,
+  )
+  const suppliedSha = spawnSync(
+    process.execPath,
+    [path.join(ROOT, 'scripts', 'amp-orb-deploy.mjs'), command, authorization, '--sha', newSha],
+    { cwd: ROOT, encoding: 'utf8' },
+  )
+  assert(
+    suppliedSha.status === 1 && suppliedSha.stderr.includes('do not supply --sha'),
+    `${label} CLI rejects a caller-supplied SHA before production work`,
+  )
+}
 const unauthorizedDeploy = spawnSync(
   process.execPath,
   [path.join(ROOT, 'scripts', 'amp-orb-deploy.mjs'), 'deploy'],

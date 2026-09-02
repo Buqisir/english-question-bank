@@ -122,6 +122,16 @@ The repository implementation exposes:
   connecting to production;
 - a transition-only, explicitly authorized read-only `bootstrap-preflight` for
   the legacy host before its unrestricted bootstrap key is retired;
+- a transition-only, separately authorized `baseline` command that streams the
+  tracked fail-closed legacy operator, creates verified SQLite snapshots,
+  establishes the exact healthy `main` as the mutable production baseline, and
+  preserves the preexisting nonconforming release tree intact in root-private
+  quarantine;
+- a separately authorized `bootstrap` command that generates a fresh Ed25519
+  controller identity, streams the exact tracked bootstrap under a host lock,
+  proves the new forced route, atomically retires and rejects the old privileged
+  bootstrap identity, and only then rotates the current Deployment project's
+  private-key Secret through stdin;
 - an explicitly authorized `preflight` through the fixed forced-command host
   controller after bootstrap;
 - `deploy --owner-said-deploy-latest`, which sends only the automatically
@@ -135,12 +145,13 @@ The repository implementation exposes:
   atomic switch, idempotency, private receipts, shared-data non-mutation, and
   healthy rollback.
 
-Code presence is not production authorization. The bootstrap remains blocked
-until the Owner directly authorizes that one-time production configuration
-change after a fresh read-only preflight. The first real daily deployment after
-bootstrap requires another direct Owner authorization. The Deployment Orb must
-also be a separate private Amp project; its forced-key secret must not remain in
-ordinary development or CI projects.
+Code presence is not production authorization. The legacy baseline migration
+and release-layout bootstrap remain blocked until the Owner directly authorizes
+each one after the preceding gate succeeds. After bootstrap rotates the Secret,
+the Deployment Orb environment must refresh and a forced-controller preflight
+must pass. The first real daily deployment then requires another direct Owner
+authorization. The Deployment Orb must also be a separate private Amp project;
+its forced-key secret must not remain in ordinary development or CI projects.
 
 ## Consequences
 

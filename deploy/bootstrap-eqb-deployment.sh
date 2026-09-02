@@ -5,10 +5,12 @@ set -Eeuo pipefail
 # This script is never part of an ordinary deployment. Run it as root only after
 # a separate, current Owner authorization and a read-only production preflight.
 
+umask 077
 ROOT=/opt/eqb
 SOURCE=$ROOT/english-question-bank
 TARGET_SHA=${1-}
 PUBLIC_KEY_FILE=${2-}
+PUBLIC_KEY_TEMP=
 CONTROLLER=/usr/local/libexec/eqb-deploy-controller-v1
 CONTROLLER_MODULE=/usr/local/libexec/eqb-deploy-controller-v1.mjs
 AUTHORIZED_KEYS=/root/.ssh/authorized_keys
@@ -37,8 +39,22 @@ fail() {
   exit 1
 }
 
+cleanup_public_key() {
+  if [[ -n $PUBLIC_KEY_TEMP ]]; then rm -f "$PUBLIC_KEY_TEMP"; fi
+}
+
+trap cleanup_public_key EXIT
+
 [[ $(id -u) == 0 ]] || fail 'run as root'
 [[ $TARGET_SHA =~ ^[a-f0-9]{40}$ ]] || fail 'target SHA is invalid'
+if [[ $PUBLIC_KEY_FILE == - ]]; then
+  [[ ${EQB_DEPLOY_CONTROLLER_PUBLIC_KEY_BODY-} =~ ^[A-Za-z0-9+/]+={0,3}$ ]] \
+    || fail 'controller public key environment input is invalid'
+  PUBLIC_KEY_TEMP=$(mktemp /run/eqb-controller-public-key-XXXXXXXX)
+  printf 'ssh-ed25519 %s\n' "$EQB_DEPLOY_CONTROLLER_PUBLIC_KEY_BODY" > "$PUBLIC_KEY_TEMP"
+  chmod 0600 "$PUBLIC_KEY_TEMP"
+  PUBLIC_KEY_FILE=$PUBLIC_KEY_TEMP
+fi
 [[ -f $PUBLIC_KEY_FILE ]] || fail 'controller public key file is missing'
 [[ ! -e $ROOT/current && ! -L $ROOT/current ]] || fail 'release layout already has a current pointer'
 [[ ! -e $ROOT/releases && ! -L $ROOT/releases \
@@ -131,6 +147,7 @@ release=$ROOT/releases/$TARGET_SHA
 archive=
 
 cleanup() {
+  cleanup_public_key
   if [[ -n $archive_dir ]]; then rm -rf "$archive_dir"; fi
   if [[ -n $build_home ]]; then rm -rf "$build_home"; fi
   if [[ -n $staging && -d $staging ]]; then rm -rf "$staging"; fi
@@ -196,7 +213,13 @@ rollback() {
         && curl --fail --silent --show-error --max-time 10 \
           --resolve eqbank.cc:443:127.0.0.1 https://eqbank.cc/api/health >/dev/null \
         && curl --fail --silent --show-error --max-time 10 \
-          https://eqbank.cc/api/health >/dev/null; then
+          --resolve eqbank.cc:443:127.0.0.1 https://eqbank.cc/ >/dev/null \
+        && curl --fail --silent --show-error --max-time 10 \
+          https://eqbank.cc/api/health >/dev/null \
+        && curl --fail --silent --show-error --max-time 10 https://eqbank.cc/ >/dev/null \
+        && curl --fail --silent --show-error --max-time 10 https://eqbank.cc/ops/ >/dev/null \
+        && curl --fail --silent --show-error --max-time 10 \
+          'https://eqbank.cc/ops/?view=review' >/dev/null; then
         rollback_healthy=1
         break
       fi
@@ -245,6 +268,9 @@ getent group eqb-build >/dev/null || fail 'build group is missing'
 install -d -o root -g root -m 0755 "$ROOT/releases"
 install -d -o root -g root -m 0711 "$ROOT/deployments"
 install -d -o root -g root -m 0700 "$ROOT/deployments/receipts"
+install -d -o root -g root -m 0700 "$backup"
+bootstrap_log=$backup/build.log
+install -o root -g root -m 0600 /dev/null "$bootstrap_log"
 archive_dir=$(mktemp -d "$ROOT/deployments/.bootstrap-source-XXXXXXXX")
 staging=$(mktemp -d "$ROOT/releases/.bootstrap-$TARGET_SHA-XXXXXXXX")
 build_home=$(mktemp -d "$ROOT/deployments/.bootstrap-build-home-XXXXXXXX")
@@ -286,14 +312,14 @@ run_build() {
     HOME="$build_home" \
     PATH="$FIXED_PATH" \
     PLAYWRIGHT_BROWSERS_PATH="$staging/.playwright-browsers" \
-    "$@"
+    /bin/sh -c 'umask 022; exec "$@"' eqb-bootstrap-build "$@"
 }
 
-run_build /usr/bin/pnpm -C "$staging/app" install --frozen-lockfile
-run_build /usr/bin/npm --prefix "$staging/server" ci
-run_build /usr/bin/pnpm -C "$staging/app" exec playwright install --no-shell chromium
-run_build /usr/bin/node "$staging/scripts/smoke-production-chromium.mjs"
-run_build /usr/bin/pnpm -C "$staging/app" build
+run_build /usr/bin/pnpm -C "$staging/app" install --frozen-lockfile >> "$bootstrap_log" 2>&1
+run_build /usr/bin/npm --prefix "$staging/server" ci >> "$bootstrap_log" 2>&1
+run_build /usr/bin/pnpm -C "$staging/app" exec playwright install --no-shell chromium >> "$bootstrap_log" 2>&1
+run_build /usr/bin/node "$staging/scripts/smoke-production-chromium.mjs" >> "$bootstrap_log" 2>&1
+run_build /usr/bin/pnpm -C "$staging/app" build >> "$bootstrap_log" 2>&1
 
 assert_real_directory() {
   local candidate_path=$1
@@ -325,7 +351,6 @@ done
 /bin/sh -n "$staging/deploy/eqb-deploy-controller"
 /usr/bin/caddy validate --config "$staging/deploy/Caddyfile.release" >/dev/null
 
-install -d -o root -g root -m 0700 "$backup"
 if [[ -f /etc/systemd/system/eqb.service ]]; then
   cp --preserve=mode,ownership,timestamps /etc/systemd/system/eqb.service "$backup/eqb.service"
 fi
@@ -436,7 +461,6 @@ until \
 done
 
 receipt=$ROOT/deployments/receipts/$(date -u +%Y%m%dT%H%M%SZ)-bootstrap-$TARGET_SHA.json
-umask 077
 cat > "$receipt" <<EOF
 {
   "schemaVersion": "eqb-deployment-bootstrap-v1",
