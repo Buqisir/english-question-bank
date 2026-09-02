@@ -20,7 +20,7 @@ import {
   AMP_ORB_DEPLOY_RECEIPT_SCHEMA_VERSION,
   activatePreparedRelease,
   assertDeploymentCandidateStillCurrent,
-  assertAuthoritativeDeploymentStatus,
+  assertAuthoritativeDeploymentChecks,
   currentReleaseSha,
   deploymentGitHubApiArgs,
   deploymentLockInvocation,
@@ -37,18 +37,33 @@ const { assert, section, summary } = createVerifier('Amp Orb production deployme
 const oldSha = '1'.repeat(40)
 const newSha = '2'.repeat(40)
 
-function status(sha, state = 'success') {
+function checkRun(name, sha, {
+  id,
+  status = 'completed',
+  conclusion = 'success',
+  app = 'github-actions',
+  suiteId = 100,
+  detailsUrl = `https://github.com/Buqisir/english-question-bank/actions/runs/200/job/${id}`,
+} = {}) {
   return {
-    sha,
-    state,
-    statuses: [{
-      id: 1,
-      sha,
-      context: 'Amp Orb Verify',
-      state,
-      description: 'verify:all + e2e passed on Amp Orb',
-      target_url: 'https://ampcode.com/threads/T-01a0570a-57a0-77ea-b243-54843baca65d',
-    }],
+    id,
+    name,
+    head_sha: sha,
+    status,
+    conclusion,
+    details_url: detailsUrl,
+    app: { slug: app },
+    check_suite: { id: suiteId },
+  }
+}
+
+function checks(sha, { verify = {}, e2e = {} } = {}) {
+  return {
+    total_count: 2,
+    check_runs: [
+      { ...checkRun('verify', sha, { id: 1 }), ...verify },
+      { ...checkRun('e2e', sha, { id: 2 }), ...e2e },
+    ],
   }
 }
 
@@ -99,37 +114,52 @@ assert(
 const candidate = await resolveLatestDeploymentCandidate({
   runGit: fakeGit(),
   readMainSha: async () => newSha,
-  readCommitStatus: async (sha) => status(sha),
+  readCommitChecks: async (sha) => checks(sha),
 })
 assert(candidate.sha === newSha, 'current clean main resolves automatically')
-assert(candidate.status.state === 'success', 'exact Amp Orb Verify success is authoritative')
 assert(
-  deploymentGitHubApiArgs(`repos/Buqisir/english-question-bank/commits/${newSha}/status`)
-    .join(' ') === `api --hostname github.com repos/Buqisir/english-question-bank/commits/${newSha}/status`,
+  candidate.verification.provider === 'github-actions'
+    && candidate.verification.checks.map(({ name }) => name).join(',') === 'verify,e2e',
+  'exact hosted verify and e2e success is authoritative',
+)
+assert(
+  deploymentGitHubApiArgs(
+    `repos/Buqisir/english-question-bank/commits/${newSha}/check-runs?filter=latest&per_page=100`,
+  ).join(' ') === `api --hostname github.com repos/Buqisir/english-question-bank/commits/${newSha}/check-runs?filter=latest&per_page=100`,
   'GitHub API authority is pinned to github.com regardless of GH_HOST',
 )
 
 const fastForwarded = await resolveLatestDeploymentCandidate({
   runGit: fakeGit({ localSha: oldSha }),
   readMainSha: async () => newSha,
-  readCommitStatus: async (sha) => status(sha),
+  readCommitChecks: async (sha) => checks(sha),
 })
 assert(fastForwarded.sha === newSha, 'stale clean main fast-forwards without an Owner-supplied SHA')
 
-for (const [label, options, readMainSha, readCommitStatus] of [
-  ['non-main checkout', { branch: 'feature' }, async () => newSha, async (sha) => status(sha)],
-  ['dirty checkout', { dirty: ' M server/api.mjs\n' }, async () => newSha, async (sha) => status(sha)],
-  ['diverged checkout', { mergeError: true }, async () => newSha, async (sha) => status(sha)],
-  ['main changed after fetch', {}, async () => '3'.repeat(40), async (sha) => status(sha)],
-  ['missing required status', {}, async () => newSha, async (sha) => ({ sha, statuses: [] })],
-  ['pending required status', {}, async () => newSha, async (sha) => status(sha, 'pending')],
+for (const [label, options, readMainSha, readCommitChecks] of [
+  ['non-main checkout', { branch: 'feature' }, async () => newSha, async (sha) => checks(sha)],
+  ['dirty checkout', { dirty: ' M server/api.mjs\n' }, async () => newSha, async (sha) => checks(sha)],
+  ['diverged checkout', { mergeError: true }, async () => newSha, async (sha) => checks(sha)],
+  ['main changed after fetch', {}, async () => '3'.repeat(40), async (sha) => checks(sha)],
+  [
+    'missing required check',
+    {},
+    async () => newSha,
+    async (sha) => ({ total_count: 1, check_runs: [checkRun('verify', sha, { id: 1 })] }),
+  ],
+  [
+    'pending required check',
+    {},
+    async () => newSha,
+    async (sha) => checks(sha, { e2e: { status: 'in_progress', conclusion: null } }),
+  ],
 ]) {
   let rejected = false
   try {
     await resolveLatestDeploymentCandidate({
       runGit: fakeGit(options),
       readMainSha,
-      readCommitStatus,
+      readCommitChecks,
     })
   } catch {
     rejected = true
@@ -140,35 +170,24 @@ for (const [label, options, readMainSha, readCommitStatus] of [
 assert(
   (() => {
     try {
-      assertAuthoritativeDeploymentStatus(status(oldSha), newSha)
+      const wrongSha = checks(newSha)
+      wrongSha.check_runs[0].head_sha = oldSha
+      assertAuthoritativeDeploymentChecks(wrongSha, newSha)
       return false
     } catch {
       return true
     }
   })(),
-  'status for another SHA cannot authorize deployment',
+  'a required check for another SHA cannot authorize deployment',
 )
 assert(
   (() => {
     try {
-      const missingStatusSha = status(newSha)
-      delete missingStatusSha.statuses[0].sha
-      assertAuthoritativeDeploymentStatus(missingStatusSha, newSha)
-      return false
-    } catch {
-      return true
-    }
-  })(),
-  'required status without its own exact SHA is rejected',
-)
-assert(
-  (() => {
-    try {
-      assertAuthoritativeDeploymentStatus({
-        sha: newSha,
-        statuses: [
-          { ...status(newSha).statuses[0], id: 1, state: 'success' },
-          { ...status(newSha).statuses[0], id: 2, state: 'pending' },
+      assertAuthoritativeDeploymentChecks({
+        total_count: 2,
+        check_runs: [
+          checkRun('verify (manual)', newSha, { id: 1 }),
+          checkRun('e2e (manual)', newSha, { id: 2 }),
         ],
       }, newSha)
       return false
@@ -176,20 +195,63 @@ assert(
       return true
     }
   })(),
-  'an older success cannot override a newer pending required status',
+  'manual workflow jobs cannot authorize deployment',
 )
 assert(
   (() => {
     try {
-      const wrongSource = status(newSha)
-      wrongSource.statuses[0].target_url = 'https://ampcode.com/threads/T-00000000-0000-0000-0000-000000000000'
-      assertAuthoritativeDeploymentStatus(wrongSource, newSha)
+      const newerPending = checks(newSha)
+      newerPending.check_runs.push(checkRun('verify', newSha, {
+        id: 3,
+        status: 'in_progress',
+        conclusion: null,
+      }))
+      assertAuthoritativeDeploymentChecks(newerPending, newSha)
       return false
     } catch {
       return true
     }
   })(),
-  'a same-name success from another status source cannot authorize deployment',
+  'an older success cannot override a newer pending required check',
+)
+assert(
+  (() => {
+    try {
+      const wrongSource = checks(newSha)
+      wrongSource.check_runs[0].app = { slug: 'untrusted-check-app' }
+      assertAuthoritativeDeploymentChecks(wrongSource, newSha)
+      return false
+    } catch {
+      return true
+    }
+  })(),
+  'a same-name success from another check source cannot authorize deployment',
+)
+assert(
+  (() => {
+    try {
+      const wrongTarget = checks(newSha)
+      wrongTarget.check_runs[0].details_url = 'https://example.invalid/actions/runs/200/job/1'
+      assertAuthoritativeDeploymentChecks(wrongTarget, newSha)
+      return false
+    } catch {
+      return true
+    }
+  })(),
+  'a GitHub Actions check targeting another repository cannot authorize deployment',
+)
+assert(
+  (() => {
+    try {
+      const mixedRuns = checks(newSha)
+      mixedRuns.check_runs[1].check_suite = { id: 101 }
+      assertAuthoritativeDeploymentChecks(mixedRuns, newSha)
+      return false
+    } catch {
+      return true
+    }
+  })(),
+  'successes from different workflow runs cannot be combined to authorize deployment',
 )
 
 assert(

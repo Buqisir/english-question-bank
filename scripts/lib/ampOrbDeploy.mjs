@@ -18,8 +18,8 @@ import path from 'node:path'
 
 export const AMP_ORB_DEPLOY_REPOSITORY = 'Buqisir/english-question-bank'
 export const AMP_ORB_DEPLOY_GITHUB_HOST = 'github.com'
-export const AMP_ORB_DEPLOY_STATUS_CONTEXT = 'Amp Orb Verify'
-export const AMP_ORB_DEPLOY_STATUS_TARGET = 'https://ampcode.com/threads/T-01a0570a-57a0-77ea-b243-54843baca65d'
+export const AMP_ORB_DEPLOY_REQUIRED_CHECKS = Object.freeze(['verify', 'e2e'])
+export const AMP_ORB_DEPLOY_CHECK_APP = 'github-actions'
 export const AMP_ORB_DEPLOY_RECEIPT_SCHEMA_VERSION = 'amp-orb-deployment-receipt-v1'
 
 const SHA = /^[a-f0-9]{40}$/u
@@ -84,54 +84,66 @@ export function requireDeployLatestAuthorization(argv) {
 export function deploymentGitHubApiArgs(endpoint) {
   const prefix = `repos/${AMP_ORB_DEPLOY_REPOSITORY}/`
   const allowed = endpoint === `${prefix}git/ref/heads/main`
-    || new RegExp(`^${prefix}commits/[a-f0-9]{40}/status$`, 'u').test(endpoint || '')
+    || new RegExp(`^${prefix}commits/[a-f0-9]{40}/check-runs\\?filter=latest&per_page=100$`, 'u')
+      .test(endpoint || '')
   if (!allowed) throw new Error('Deployment GitHub API endpoint is invalid')
   return ['api', '--hostname', AMP_ORB_DEPLOY_GITHUB_HOST, endpoint]
 }
 
-export function assertAuthoritativeDeploymentStatus(payload, expectedSha) {
+export function assertAuthoritativeDeploymentChecks(payload, expectedSha) {
   const sha = assertSha(expectedSha)
-  if (payload?.sha !== sha || !Array.isArray(payload?.statuses)) {
-    throw new Error('GitHub deployment status identity is invalid')
+  if (!Array.isArray(payload?.check_runs)) {
+    throw new Error('GitHub deployment checks response is invalid')
   }
-  const matching = payload.statuses.filter(
-    (candidate) => candidate?.context === AMP_ORB_DEPLOY_STATUS_CONTEXT,
-  )
-  const status = matching.reduce((latest, candidate) => {
-    if (!latest) return candidate
-    if (Number.isSafeInteger(candidate?.id) && Number.isSafeInteger(latest?.id)) {
-      return candidate.id > latest.id ? candidate : latest
+
+  const checks = AMP_ORB_DEPLOY_REQUIRED_CHECKS.map((name) => {
+    const matching = payload.check_runs.filter((candidate) => candidate?.name === name)
+    const check = matching.reduce((latest, candidate) => {
+      if (!Number.isSafeInteger(candidate?.id)) {
+        throw new Error(`Required ${name} check ordering is invalid`)
+      }
+      return !latest || candidate.id > latest.id ? candidate : latest
+    }, null)
+    if (!check) throw new Error(`Required ${name} check is missing`)
+    if (check.head_sha !== sha) {
+      throw new Error(`Required ${name} check SHA is invalid`)
     }
-    const candidateTime = Date.parse(candidate?.updated_at || candidate?.created_at || '')
-    const latestTime = Date.parse(latest?.updated_at || latest?.created_at || '')
-    if (Number.isFinite(candidateTime) && Number.isFinite(latestTime)) {
-      return candidateTime > latestTime ? candidate : latest
+    if (check.app?.slug !== AMP_ORB_DEPLOY_CHECK_APP) {
+      throw new Error(`Required ${name} check source is invalid`)
     }
-    throw new Error(`Required ${AMP_ORB_DEPLOY_STATUS_CONTEXT} status ordering is ambiguous`)
-  }, null)
-  if (!status) throw new Error(`Required ${AMP_ORB_DEPLOY_STATUS_CONTEXT} status is missing`)
-  if (status.sha !== sha) {
-    throw new Error(`Required ${AMP_ORB_DEPLOY_STATUS_CONTEXT} status SHA is invalid`)
-  }
-  if (status.state !== 'success') {
-    throw new Error(`Required ${AMP_ORB_DEPLOY_STATUS_CONTEXT} status is ${status.state || 'unknown'}`)
-  }
-  if (status.target_url !== AMP_ORB_DEPLOY_STATUS_TARGET) {
-    throw new Error(`Required ${AMP_ORB_DEPLOY_STATUS_CONTEXT} status source is invalid`)
+    if (check.status !== 'completed' || check.conclusion !== 'success') {
+      throw new Error(`Required ${name} check is ${check.conclusion || check.status || 'unknown'}`)
+    }
+    const expectedTarget = `https://${AMP_ORB_DEPLOY_GITHUB_HOST}/${AMP_ORB_DEPLOY_REPOSITORY}/actions/runs/`
+    if (!String(check.details_url || '').startsWith(expectedTarget)) {
+      throw new Error(`Required ${name} check target is invalid`)
+    }
+    if (!Number.isSafeInteger(check.check_suite?.id)) {
+      throw new Error(`Required ${name} check suite identity is invalid`)
+    }
+    return {
+      name,
+      state: 'success',
+      app: AMP_ORB_DEPLOY_CHECK_APP,
+      checkRunId: check.id,
+      checkSuiteId: check.check_suite.id,
+      detailsUrl: check.details_url,
+    }
+  })
+  if (new Set(checks.map(({ checkSuiteId }) => checkSuiteId)).size !== 1) {
+    throw new Error('Required deployment checks are not from one workflow run')
   }
   return {
-    context: AMP_ORB_DEPLOY_STATUS_CONTEXT,
-    state: 'success',
-    description: typeof status.description === 'string' ? status.description : '',
-    targetUrl: AMP_ORB_DEPLOY_STATUS_TARGET,
+    provider: AMP_ORB_DEPLOY_CHECK_APP,
+    checks,
   }
 }
 
-export async function resolveLatestDeploymentCandidate({ runGit, readMainSha, readCommitStatus }) {
+export async function resolveLatestDeploymentCandidate({ runGit, readMainSha, readCommitChecks }) {
   if (
     typeof runGit !== 'function'
     || typeof readMainSha !== 'function'
-    || typeof readCommitStatus !== 'function'
+    || typeof readCommitChecks !== 'function'
   ) {
     throw new Error('Deployment candidate dependencies are missing')
   }
@@ -149,15 +161,15 @@ export async function resolveLatestDeploymentCandidate({ runGit, readMainSha, re
   if (localSha !== remoteSha) {
     throw new Error('Deployment checkout is not the current GitHub main')
   }
-  const status = assertAuthoritativeDeploymentStatus(
-    await readCommitStatus(remoteSha),
+  const verification = assertAuthoritativeDeploymentChecks(
+    await readCommitChecks(remoteSha),
     remoteSha,
   )
   return {
     repository: AMP_ORB_DEPLOY_REPOSITORY,
     sha: remoteSha,
     branch: 'main',
-    status,
+    verification,
   }
 }
 

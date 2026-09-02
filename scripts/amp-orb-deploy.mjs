@@ -21,10 +21,12 @@ function runGit(args) {
   })
 }
 
-function readCommitStatus(sha) {
+function readCommitChecks(sha) {
   return JSON.parse(execFileSync(
     'gh',
-    deploymentGitHubApiArgs(`repos/${AMP_ORB_DEPLOY_REPOSITORY}/commits/${sha}/status`),
+    deploymentGitHubApiArgs(
+      `repos/${AMP_ORB_DEPLOY_REPOSITORY}/commits/${sha}/check-runs?filter=latest&per_page=100`,
+    ),
     { cwd: repositoryRoot, encoding: 'utf8' },
   ))
 }
@@ -39,7 +41,7 @@ function readMainSha() {
 }
 
 async function candidate() {
-  return resolveLatestDeploymentCandidate({ runGit, readMainSha, readCommitStatus })
+  return resolveLatestDeploymentCandidate({ runGit, readMainSha, readCommitChecks })
 }
 
 const preflightScript = `

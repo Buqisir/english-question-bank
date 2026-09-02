@@ -12,11 +12,12 @@ It does not provide an exact GitHub status gate, private host-key pinning,
 release-directory staging, an atomic `current` switch, a durable receipt, or
 automatic rollback.
 
-The dedicated CI Orb now verifies the exact GitHub test merge and reports the
-only required status, `Amp Orb Verify`. It deliberately exposes no production,
-deployment, database, R2, or paper-publication credential to candidate code.
-Giving that Orb an SSH key would collapse the strongest existing isolation
-boundary.
+During Amp bug `amp_bug_0uiggF5jWG6i6iaB72BATT`, GitHub Actions verifies each
+exact PR test merge and post-merge `main` SHA through the required hosted
+`verify` and `e2e` checks. The dedicated CI Orb remains separate and exposes no
+production, deployment, database, R2, or paper-publication credential to
+candidate code. Giving any CI executor an SSH key would collapse the strongest
+existing isolation boundary.
 
 ## Decision
 
@@ -33,8 +34,9 @@ Before SSH, the trusted controller requires all of the following:
 3. local `HEAD` equals the official repository's live `refs/heads/main` SHA
    read from an explicitly pinned `github.com` API rather than trusting a
    locally named remote or ambient `GH_HOST`;
-4. that exact SHA has a successful `Amp Orb Verify` status whose target is the
-   current dedicated CI Orb thread from ADR-0022;
+4. that exact SHA has completed, successful `verify` and `e2e` check runs from
+   the `github-actions` App, both belonging to one workflow run in this
+   repository; the separately named manual-dispatch jobs cannot qualify;
 5. the three deployment Project Secrets are present only in the Deployment
    Orb environment.
 
@@ -99,3 +101,6 @@ Orb deployment each require a new direct Owner authorization.
   change and cannot be implied by this ADR or by Secret presence.
 - Paper Review approval and `上线 <paperId>` remain the separate server-side
   single-paper publication flow from ADR-0020.
+- Restoring Amp Orb merge authority also requires an explicit, tested update to
+  this deployment gate; it never silently accepts whichever CI happens to
+  report first.
