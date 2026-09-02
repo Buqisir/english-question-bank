@@ -1,7 +1,7 @@
-# ADR-0022: Amp Orb dual-lane CI is the merge authority
+# ADR-0022: Amp Orb dual-lane CI authority and hosted rollback
 
-- Status: Accepted; live authority since 2026-08-31
-- Owner authorization: 2026-08-31
+- Status: Accepted; hosted rollback authorized 2026-09-02
+- Owner authorization: 2026-08-31; rollback authorization 2026-09-02
 - Supersedes: ADR-0021 rollout and authority sections only
 
 ## Context
@@ -83,6 +83,38 @@ their exact-merge contexts. A later atomic protection update may then add hosted
 required checks before removing the Orb context. Webhook, status-token,
 branch-protection, and workflow changes stay independent; no CI authority change
 grants deployment authority.
+
+## Hosted rollback after Amp webhook ingress failure
+
+On 2026-09-02 the stable Amp-managed webhook began returning HTTP 404
+`Webhook unavailable` before plugin handler execution. The owning thread remained
+unarchived, the hook URL matched the retained capability exactly, and a fresh
+plugin reload completed the same-key `createWebhook` registration successfully,
+but public ingress still returned 404. No queue item, receipt, controller, sandbox,
+or GitHub status was created. Amp bug report
+`amp_bug_0uiggF5jWG6i6iaB72BATT` tracks the platform failure.
+
+Because the failed ingress prevents the Orb from gating its own rollback, the Owner
+authorized this narrow bootstrap exception:
+
+1. A dedicated rollback PR restores hosted `pull_request` and `main` push triggers
+   while retaining `workflow_dispatch` for explicitly authorized diagnostics.
+   Manual jobs use distinct `verify (manual)` / `e2e (manual)` names and can never
+   satisfy required PR checks.
+2. Naturally triggered hosted `verify` and `e2e` must pass on the rollback PR's
+   current test-merge SHA before branch protection changes. Its ordered parents
+   must be the unchanged live `main` and exact PR head, and its tree must equal the
+   clean direct-child candidate tree.
+3. Branch protection atomically adds hosted `verify` and `e2e` requirements before
+   removing `Amp Orb Verify`; strict up-to-date and no-bypass settings remain.
+4. The rollback PR merges only after both hosted checks are recognized as required
+   and successful. Its exact `main` push must also pass both jobs.
+
+During the rollback, hosted `verify` and `e2e` are the merge authority. Both Amp Orb
+contexts remain informational and may not substitute for a hosted failure or missing
+status. Restoring Orb authority requires the Amp report to be resolved, a sleeping
+Orb webhook to accept and durably queue a natural request, successful exact-merge
+and post-merge proofs, and a separate Owner-authorized atomic protection cutover.
 
 ## Consequences
 
