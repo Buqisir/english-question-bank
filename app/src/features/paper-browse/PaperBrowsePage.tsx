@@ -196,6 +196,21 @@ type GroupModel =
   | { kind: 'cloze'; model: ClozePaperViewModel }
   | { kind: 'grammarFill'; model: GrammarFillPaperViewModel }
   | {
+      kind: 'listening'
+      model: {
+        questions: ReadonlyArray<{
+          questionId: string
+          questionNo: number
+          stem: string
+          options: ReadonlyArray<{
+            optionId: string
+            label: string
+            text: string
+          }>
+        }>
+      }
+    }
+  | {
       kind: 'writing'
       model: Pick<WritingPaperViewModel, 'surfaceData' | 'pageModel'> & {
         canonicalPromptBlocks?: ReadonlyArray<{
@@ -216,6 +231,11 @@ type GroupModel =
     }
   | { kind: 'unsupported'; groupType: string }
   | { kind: 'error'; message: string }
+
+type CanonicalListeningQuestion = Extract<
+  GroupModel,
+  { kind: 'listening' }
+>['model']['questions'][number]
 
 // 讲评态按需补拉的 cloze/grammarFill/writing 解析——reading/sevenChoices 的
 // 解析已在挑题态初次加载时无条件拉取。'unavailable'
@@ -913,7 +933,21 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
               consumption: canonicalConsumption,
               groupId: block.groupId,
             })
-          if (group?.groupType === 'cloze') {
+          if (group?.groupType === 'listening') {
+            const listening = projectCanonicalConsumerGroup({
+              consumption: canonicalConsumptionForGroup(
+                canonicalConsumption,
+                'listening',
+                block.groupId,
+              ),
+              familyContractId: 'listening',
+              groupId: block.groupId,
+            }) as { questions: ReadonlyArray<CanonicalListeningQuestion> }
+            selectedModels.set(block.groupId, {
+              kind: 'listening',
+              model: { questions: listening.questions },
+            })
+          } else if (group?.groupType === 'cloze') {
             selectedModels.set(block.groupId, {
               kind: 'cloze',
               model: buildClozePaperView({
@@ -1114,7 +1148,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             continue
           }
           try {
-            if (group.groupType === 'reading') {
+            if (group.groupType === 'listening') {
+              const selectedModel = selectedModels.get(block.groupId)
+              if (!selectedModel) throw new Error('听力消费计划不完整')
+              models[block.groupId] = selectedModel
+            } else if (group.groupType === 'reading') {
               const selectedModel = selectedModels.get(block.groupId)
               if (!selectedModel) throw new Error('阅读消费计划不完整')
               models[block.groupId] = selectedModel
@@ -2058,6 +2096,30 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       return (
         <div className="paper-browse-placeholder">
           该题型（{entry.groupType}）本页暂不支持预览。
+        </div>
+      )
+    }
+    if (entry.kind === 'listening') {
+      return (
+        <div className="paper-browse-listening">
+          {entry.model.questions.map((question) => (
+            <div
+              className="paper-browse-listening-question"
+              data-paper-question-id={question.questionId}
+              key={question.questionId}
+            >
+              <p className="paper-browse-listening-stem">
+                <strong>{question.questionNo}.</strong> {question.stem}
+              </p>
+              <div className="paper-browse-listening-options">
+                {question.options.map((option) => (
+                  <span key={option.optionId}>
+                    <strong>{option.label}.</strong> {option.text}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       )
     }

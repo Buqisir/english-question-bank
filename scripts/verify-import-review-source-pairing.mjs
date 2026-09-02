@@ -3,6 +3,7 @@
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 import {
+  mkdirSync,
   mkdtempSync,
   readFileSync,
   rmSync,
@@ -13,6 +14,7 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 
 import { createImportReviewRoutes } from '../server/import-review/importReviewRoutes.mjs'
+import { loadNck1ReviewSource } from '../server/import-review/revisionProjection.mjs'
 import { rasterPdfRegion } from '../server/paper-canonical/pdfRegionRaster.mjs'
 import { runRoutes } from '../server/router/index.mjs'
 import { sha256 } from '../shared/paper-canonical/stable.mjs'
@@ -26,6 +28,7 @@ const iconVisualId = 'visual:warning-icon'
 const iconTargetId = 'media:warning-icon'
 const imageVisualId = 'visual:image-source-page'
 const region = { x: 0.25, y: 0.25, width: 0.5, height: 0.5 }
+const listeningQuestionId = 'question:listening:6'
 
 function syntheticPdf() {
   const content = [
@@ -135,6 +138,34 @@ const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-source-pairing-'))
 let browser = null
 let server = null
 try {
+  const capturedWithoutEvidenceDir = path.join(tempRoot, 'captured-without-audio-evidence')
+  mkdirSync(path.join(capturedWithoutEvidenceDir, 'materialization'), { recursive: true })
+  writeFileSync(
+    path.join(capturedWithoutEvidenceDir, 'config.json'),
+    JSON.stringify({ paperId: 'paper-captured-without-audio-evidence' }),
+  )
+  writeFileSync(
+    path.join(capturedWithoutEvidenceDir, 'universal-source-manifest.json'),
+    JSON.stringify({
+      schemaVersion: 'universal-nck1-source-manifest-v1',
+      paperId: 'paper-captured-without-audio-evidence',
+      documents: [],
+      materializationPath: 'materialization/nck1-source-materialization-v1.json',
+    }),
+  )
+  writeFileSync(
+    path.join(
+      capturedWithoutEvidenceDir,
+      'materialization/nck1-source-materialization-v1.json',
+    ),
+    JSON.stringify({ listening: { state: 'captured' } }),
+  )
+  assert.throws(
+    () => loadNck1ReviewSource(capturedWithoutEvidenceDir),
+    (error) => error.code === 'LISTENING_AUDIO_REVIEW_REQUIRED',
+    'captured listening cannot enter Review without passed audio evidence',
+  )
+
   const sourcePath = path.join(tempRoot, 'questions.pdf')
   const sourceBytes = syntheticPdf()
   const sourceDigest = sha256(sourceBytes)
@@ -348,6 +379,26 @@ try {
         pixelHeight: 200,
       },
     }],
+    listeningReview: {
+      questions: [{
+        questionId: listeningQuestionId,
+        questionNo: 6,
+        officialAnswer: 'B',
+        transcriptSegments: [{
+          segmentId: 'listening-text-6',
+          text: 'The speakers are deciding when to meet at the library.',
+          questionNumbers: [6, 7],
+        }],
+      }],
+      audio: {
+        durationSeconds: 1284,
+        engine: { name: 'faster-whisper', model: 'large-v3', version: '1' },
+        playbackAudioSha256: `sha256:${'b'.repeat(64)}`,
+        asrSha256: `sha256:${'c'.repeat(64)}`,
+        comparison: { verdict: 'pass', basis: 'authoritative_transcript' },
+        contentSafety: { verdict: 'pass', reviewedAt: '2026-09-02T00:00:00.000Z' },
+      },
+    },
     mediaConfirmations: [],
     rendererStale: false,
     unresolvedCount: 0,
@@ -356,6 +407,7 @@ try {
   const appJs = readFileSync(path.join(root, 'import-ops/public/app.js'))
   const clipboardJs = readFileSync(path.join(root, 'import-ops/public/clipboard.js'))
   const styles = readFileSync(path.join(root, 'import-ops/public/styles.css'))
+  let listeningSupplied = true
   server = createServer(async (request, response) => {
     const url = new URL(request.url || '/', 'http://127.0.0.1')
     if (url.pathname === '/ops/' || url.pathname === '/ops/index.html') {
@@ -455,6 +507,9 @@ try {
     }
     if (url.pathname === '/') {
       send(response, 200, `<!doctype html><html><body>
+        ${listeningSupplied ? `<div data-paper-browse-anchor="group:${paperId}:listening.long-form">
+          <article data-paper-question-id="${listeningQuestionId}">Listening question 6</article>
+        </div>` : ''}
         <div data-paper-browse-anchor="group:reading-a">
           <table data-canonical-block-id="${targetId}"><tbody><tr><td>Day</td><td>Task <img alt="warning" width="16" height="16" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-canonical-media-id="${iconTargetId}" data-canonical-content-node-id="media-ref:warning-icon" /></td></tr></tbody></table>
           <table data-canonical-block-id="block:unlocated"><tbody><tr><td>Unlocated</td></tr></tbody></table>
@@ -474,6 +529,35 @@ try {
   browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
   const page = await browser.newPage({ viewport: { width: 1920, height: 1000 } })
   await page.goto(`http://127.0.0.1:${address.port}/ops/?view=review`)
+  const listeningQuestion = page.frameLocator('#review-frame')
+    .locator(`[data-paper-question-id="${listeningQuestionId}"]`)
+  await listeningQuestion.waitFor()
+  assert.equal(await listeningQuestion.count(), 1)
+  await listeningQuestion.click()
+  await page.getByText('听力核对 · 第 6 题').waitFor()
+  assert.equal(await page.locator('.listening-review-answer strong').textContent(), 'B')
+  assert.match(
+    await page.locator('.listening-review-transcript').textContent(),
+    /deciding when to meet at the library/u,
+  )
+  assert.match(
+    await page.locator('.listening-audio-evidence').textContent(),
+    /与官方听力原文比对通过/u,
+  )
+  assert.match(
+    await page.locator('.listening-audio-evidence').textContent(),
+    /内容安全检查通过/u,
+  )
+  assert.equal(
+    await page.frameLocator('#review-frame').locator('text=官方答案').count(),
+    0,
+    'official answers stay outside the student Screen frame',
+  )
+  assert.equal(
+    await page.frameLocator('#review-frame').locator('text=deciding when to meet').count(),
+    0,
+    'Listening transcripts stay outside the student Screen frame',
+  )
   const screenTable = page.frameLocator('#review-frame')
     .locator(`[data-canonical-block-id="${targetId}"]`)
   await screenTable.click()
@@ -559,6 +643,23 @@ try {
   assert.match(
     await page.locator('#issue-form .field-help').textContent(),
     /源文件/u,
+  )
+
+  listeningSupplied = false
+  detail.listeningReview = null
+  await page.reload()
+  await page.frameLocator('#review-frame')
+    .locator(`[data-canonical-block-id="${targetId}"]`).waitFor()
+  assert.equal(
+    await page.frameLocator('#review-frame')
+      .locator(`[data-paper-question-id="${listeningQuestionId}"]`).count(),
+    0,
+    'not_supplied Screen has no Listening Question or phantom slot',
+  )
+  assert.equal(
+    await page.locator('.listening-review-section').count(),
+    0,
+    'not_supplied Review has no Listening rail chrome',
   )
 
   console.log('verify-import-review-source-pairing: PASS')
