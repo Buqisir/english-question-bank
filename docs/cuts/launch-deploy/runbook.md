@@ -186,7 +186,7 @@ and safe to re-run.
 push 校验 → pull → install → build → restart → health + 公网检查；
 host/key 从 gitignored `.env.deploy` 读，真实 IP 不入库）。
 
-### Dedicated Deployment Orb transition (repository preflight only)
+### Dedicated Deployment Orb transition
 
 ADR-0023 defines the replacement for the legacy in-place redeploy path: a
 separate private Deployment Orb, an Owner command `部署最新版`, automatic exact
@@ -195,21 +195,67 @@ webhook outage, pinned SSH trust, staged immutable releases, atomic activation,
 and automatic rollback. Both checks must be successful GitHub Actions checks
 from the same workflow run; `verify (manual)` and `e2e (manual)` do not qualify.
 
-The repository phase currently exposes only:
+The repository exposes:
 
 ```bash
 node scripts/amp-orb-deploy.mjs plan
+node scripts/amp-orb-deploy.mjs bootstrap-preflight --owner-said-preflight
 node scripts/amp-orb-deploy.mjs preflight --owner-said-preflight
+node scripts/amp-orb-deploy.mjs deploy --owner-said-deploy-latest
 ```
 
-`plan` does not connect to production. `preflight` is separately authorized
-and read-only: it reports the production checkout SHA, tracked dirty count,
-`eqb`/Caddy service state, and whether the future release layout exists. The
-real `deploy` command, one-time `/opt/eqb/{shared,releases,current}` migration,
-systemd/Caddy path changes, and first Orb deployment are intentionally absent
-and require later direct Owner authorization. Until that production cutover is
-completed and recorded in `go-live-record.md`, this section grants no authority
-to replace the legacy production procedure or mutate the server.
+`plan` does not connect to production. `bootstrap-preflight` is the one-time
+read-only legacy-host check; after cutover, `preflight` goes only through the
+root-owned forced-command controller. Daily `deploy` resolves current `main`
+itself and sends only that exact SHA—never an Owner-supplied hash—to the host.
+
+The one-time cutover uses `deploy/bootstrap-eqb-deployment.sh` to prepare the
+first release, move writable state under `/opt/eqb/shared`, install
+`deploy/eqb-release.service` and `deploy/Caddyfile.release`, and install the
+fixed controller. Candidate builds run as `eqb-build` without the production
+environment or shared data, inside bounded transient systemd cgroups that
+terminate leftover children before root seals the tree. Linked privileged
+ancestors fail closed, and deployment-control files are restored from the
+root-private exact-target Git archive after candidate scripts finish. The
+controller key is restricted to the installed host command; ordinary release
+code cannot change deployment rules. Keep the
+legacy `deploy/eqb.service`, `deploy/Caddyfile`, and `scripts/deploy-remote.sh`
+only for pre-cutover operation and rollback evidence; do not use the legacy
+in-place deploy after a successful cutover. Releases are retained for rollback;
+the controller refuses new staging below 5 GiB free instead of deleting them.
+Prune only reviewed, non-current releases as a separate authorized maintenance
+operation.
+
+Ordinary deployment also compares the current and target Git trees before
+staging. Any change to the fixed controller/systemd/Caddy files or to the
+named startup/recovery and high-authority persistence owners fails before build
+and restart. The initial bootstrap applies the same persistence comparison
+against the legacy production `HEAD`. Do not bypass it: complete a separately
+authorized migration/configuration procedure, establish that exact release as
+the safe production baseline, then repeat the normal command. Ordinary reviewed
+server code remains deployable; later authenticated API writes are not actions
+performed or authorized by the deployment command itself.
+
+The forced entrypoint runs the controller and deployment lock in a transient
+host systemd service. An Orb/SSH disconnect does not cancel an in-flight build,
+health check, or rollback; candidate output remains in a private host log.
+Reconnect and run an authorized read-only `preflight` to determine whether the
+lock is still held and which exact release is healthy. Host receipts/logs remain
+available for root-side incident diagnostics; do not launch a second attempt.
+
+Repository readiness still grants no production authority. Before cutover:
+
+1. create a separate private Deployment Orb project;
+2. run a fresh read-only bootstrap preflight;
+3. obtain direct Owner authorization for the production bootstrap;
+4. generate a dedicated Ed25519 key, install only its forced public key, verify
+   the new controller route, store the private key only in that Deployment
+   project, and remove deployment secrets from development/CI projects;
+5. record the exact cutover evidence in `go-live-record.md`.
+
+The first real Orb deployment then needs a separate direct Owner authorization.
+Thereafter the Owner's normal daily instruction is only `部署最新版`; no Mac or
+handwritten SHA is involved.
 
 ## Backup + content operations
 

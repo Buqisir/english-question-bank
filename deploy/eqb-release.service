@@ -1,0 +1,20 @@
+# systemd unit installed only after the immutable release-layout bootstrap.
+# `/opt/eqb/current` is switched atomically by the fixed host controller;
+# environment and writable runtime state remain under `/opt/eqb/shared`.
+
+[Unit]
+Description=english-question-bank API server
+After=network.target
+
+[Service]
+Type=simple
+User=eqb
+WorkingDirectory=/opt/eqb/current
+ExecStart=/usr/bin/node --env-file-if-exists=/opt/eqb/shared/.env server/api.mjs
+Restart=always
+RestartSec=2
+Environment=NODE_ENV=production
+Environment=PLAYWRIGHT_BROWSERS_PATH=/opt/eqb/current/.playwright-browsers
+
+[Install]
+WantedBy=multi-user.target

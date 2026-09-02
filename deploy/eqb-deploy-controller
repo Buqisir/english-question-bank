@@ -1,0 +1,22 @@
+#!/bin/sh
+set -eu
+
+original_command=${SSH_ORIGINAL_COMMAND-}
+unset SSH_AUTH_SOCK
+
+exec /usr/bin/systemd-run \
+  --quiet \
+  --wait \
+  --pipe \
+  --collect \
+  --property=Type=exec \
+  -- \
+  /usr/bin/flock \
+    --exclusive \
+    --nonblock \
+    --conflict-exit-code 75 \
+    /opt/eqb/deployments/deploy.lock \
+    /usr/bin/env -i \
+    SSH_ORIGINAL_COMMAND="$original_command" \
+    PATH=/usr/local/bin:/usr/bin:/bin \
+    /usr/bin/node --no-addons /usr/local/libexec/eqb-deploy-controller-v1.mjs
