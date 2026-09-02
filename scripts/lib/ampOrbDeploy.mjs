@@ -21,6 +21,8 @@ export const AMP_ORB_DEPLOY_GITHUB_HOST = 'github.com'
 export const AMP_ORB_DEPLOY_REQUIRED_CHECKS = Object.freeze(['verify', 'e2e'])
 export const AMP_ORB_DEPLOY_CHECK_APP = 'github-actions'
 export const AMP_ORB_DEPLOY_RECEIPT_SCHEMA_VERSION = 'amp-orb-deployment-receipt-v1'
+export const EQB_LEGACY_BASELINE_RECEIPT_SCHEMA_VERSION = 'eqb-legacy-baseline-receipt-v1'
+export const EQB_BOOTSTRAP_KEY_RETIREMENT_SCHEMA_VERSION = 'eqb-bootstrap-key-retirement-v1'
 
 const SHA = /^[a-f0-9]{40}$/u
 const SSH_TARGET = /^(?:[A-Za-z0-9._-]+@)?(?:\[[A-Fa-f0-9:]+\]|[A-Za-z0-9.-]+)$/u
@@ -78,6 +80,24 @@ export function requireDeployLatestAuthorization(argv) {
   }
   if (argv.includes('--sha')) {
     throw new Error('Deployment target SHA is resolved automatically; do not supply --sha')
+  }
+}
+
+export function requireLegacyBaselineAuthorization(argv) {
+  if (!Array.isArray(argv) || !argv.includes('--owner-said-baseline-migration')) {
+    throw new Error('Current Owner authorization for the protected baseline migration is required')
+  }
+  if (argv.includes('--sha')) {
+    throw new Error('Baseline target SHA is resolved automatically; do not supply --sha')
+  }
+}
+
+export function requireReleaseLayoutBootstrapAuthorization(argv) {
+  if (!Array.isArray(argv) || !argv.includes('--owner-said-release-bootstrap')) {
+    throw new Error('Current Owner authorization for the one-time release-layout bootstrap is required')
+  }
+  if (argv.includes('--sha')) {
+    throw new Error('Bootstrap target SHA is resolved automatically; do not supply --sha')
   }
 }
 
@@ -273,6 +293,243 @@ export function parseDeploymentControllerPreflight(output) {
   return preflight
 }
 
+export function parseLegacyBaselineReceipt(output, expectedSha) {
+  const sha = assertSha(expectedSha)
+  let receipt
+  try {
+    receipt = JSON.parse(String(output || '').trim())
+  } catch {
+    throw new Error('Legacy baseline response is not valid JSON')
+  }
+  const expectedKeys = [
+    'backupsVerified',
+    'bootstrapRun',
+    'caddy',
+    'conclusion',
+    'distVerified',
+    'eqb',
+    'failureCode',
+    'finishedAt',
+    'identityInstalled',
+    'layout',
+    'migrationVerified',
+    'previousSha',
+    'productionSha',
+    'quarantinePreserved',
+    'rollbackHealthy',
+    'rolledBack',
+    'schemaVersion',
+    'startedAt',
+    'state',
+    'targetSha',
+  ]
+  if (
+    !receipt
+    || typeof receipt !== 'object'
+    || Array.isArray(receipt)
+    || Object.keys(receipt).sort().join('\n') !== expectedKeys.join('\n')
+    || receipt.schemaVersion !== EQB_LEGACY_BASELINE_RECEIPT_SCHEMA_VERSION
+    || receipt.state !== 'reported'
+    || !['success', 'failure'].includes(receipt.conclusion)
+    || receipt.targetSha !== sha
+    || !SHA.test(receipt.previousSha || '')
+    || !SHA.test(receipt.productionSha || '')
+    || !['active', 'inactive'].includes(receipt.eqb)
+    || !['active', 'inactive'].includes(receipt.caddy)
+    || receipt.layout !== 'legacy'
+    || [
+      'identityInstalled',
+      'quarantinePreserved',
+      'backupsVerified',
+      'migrationVerified',
+      'distVerified',
+      'rolledBack',
+      'bootstrapRun',
+    ].some((key) => typeof receipt[key] !== 'boolean')
+    || ![null, true, false].includes(receipt.rollbackHealthy)
+    || typeof receipt.startedAt !== 'string'
+    || typeof receipt.finishedAt !== 'string'
+  ) {
+    throw new Error('Legacy baseline response shape is invalid')
+  }
+  const success = receipt.conclusion === 'success'
+  if (
+    (success && (
+      receipt.productionSha !== sha
+      || receipt.eqb !== 'active'
+      || receipt.caddy !== 'active'
+      || !receipt.identityInstalled
+      || !receipt.quarantinePreserved
+      || !receipt.backupsVerified
+      || !receipt.migrationVerified
+      || !receipt.distVerified
+      || receipt.rolledBack
+      || receipt.rollbackHealthy !== null
+      || receipt.failureCode !== null
+      || receipt.bootstrapRun
+    ))
+    || (!success && (
+      typeof receipt.rollbackHealthy !== 'boolean'
+      || !/^[a-z0-9-]+:[a-z0-9-]+$/u.test(receipt.failureCode || '')
+      || receipt.bootstrapRun
+      || (receipt.rollbackHealthy && (
+        !receipt.rolledBack
+        || receipt.productionSha !== receipt.previousSha
+        || receipt.eqb !== 'active'
+        || receipt.caddy !== 'active'
+        || receipt.identityInstalled
+        || receipt.quarantinePreserved
+      ))
+    ))
+  ) {
+    throw new Error('Legacy baseline response values are invalid')
+  }
+  return receipt
+}
+
+export function parseBootstrapKeyRetirementReceipt(output) {
+  let receipt
+  try {
+    receipt = JSON.parse(String(output || '').trim())
+  } catch {
+    throw new Error('Bootstrap key retirement response is not valid JSON')
+  }
+  const expectedKeys = [
+    'conclusion',
+    'forcedKeyPreserved',
+    'installedDigest',
+    'oldKeyRemoved',
+    'originalDigest',
+    'schemaVersion',
+    'state',
+  ]
+  if (
+    !receipt
+    || typeof receipt !== 'object'
+    || Array.isArray(receipt)
+    || Object.keys(receipt).sort().join('\n') !== expectedKeys.join('\n')
+    || receipt.schemaVersion !== EQB_BOOTSTRAP_KEY_RETIREMENT_SCHEMA_VERSION
+    || receipt.state !== 'reported'
+    || receipt.conclusion !== 'success'
+    || receipt.oldKeyRemoved !== true
+    || receipt.forcedKeyPreserved !== true
+    || !/^[a-f0-9]{64}$/u.test(receipt.originalDigest || '')
+    || !/^[a-f0-9]{64}$/u.test(receipt.installedDigest || '')
+    || receipt.originalDigest === receipt.installedDigest
+  ) {
+    throw new Error('Bootstrap key retirement response is invalid')
+  }
+  return receipt
+}
+
+export async function migrateLegacyProductionBaseline({
+  argv,
+  resolveCandidate,
+  readMainSha,
+  readLegacyPreflight,
+  invokeOperator,
+} = {}) {
+  requireLegacyBaselineAuthorization(argv)
+  if (
+    typeof resolveCandidate !== 'function'
+    || typeof readMainSha !== 'function'
+    || typeof readLegacyPreflight !== 'function'
+    || typeof invokeOperator !== 'function'
+  ) {
+    throw new Error('Legacy baseline dependencies are missing')
+  }
+  const candidate = await resolveCandidate()
+  await assertDeploymentCandidateStillCurrent({ readMainSha, sha: candidate.sha })
+  const preflight = await readLegacyPreflight(candidate)
+  if (
+    preflight?.layout !== 'legacy'
+    || preflight?.productionSha === candidate.sha
+    || preflight?.trackedDirtyPaths !== 0
+    || preflight?.eqb !== 'active'
+    || preflight?.caddy !== 'active'
+  ) {
+    throw new Error('Legacy production is not eligible for baseline migration')
+  }
+  await assertDeploymentCandidateStillCurrent({ readMainSha, sha: candidate.sha })
+  const operation = await invokeOperator({ candidate, preflight })
+  if (
+    !operation
+    || typeof operation !== 'object'
+    || Array.isArray(operation)
+    || !Number.isInteger(operation.exitCode)
+    || typeof operation.output !== 'string'
+  ) {
+    throw new Error('Legacy baseline operator result is invalid')
+  }
+  const receipt = parseLegacyBaselineReceipt(operation.output, candidate.sha)
+  if ((receipt.conclusion === 'success') !== (operation.exitCode === 0)) {
+    throw new Error('Legacy baseline process and receipt conclusions disagree')
+  }
+  if (receipt.conclusion !== 'success') {
+    throw new Error(`Legacy baseline operator reported ${receipt.failureCode}`)
+  }
+  return { candidate, preflight, receipt }
+}
+
+export async function bootstrapReleaseLayout({
+  argv,
+  resolveCandidate,
+  readMainSha,
+  readLegacyPreflight,
+  invokeBootstrap,
+  readControllerPreflight,
+  retireBootstrapIdentity,
+  verifyBootstrapIdentityRetired,
+  rotateControllerSecret,
+} = {}) {
+  requireReleaseLayoutBootstrapAuthorization(argv)
+  if (
+    typeof resolveCandidate !== 'function'
+    || typeof readMainSha !== 'function'
+    || typeof readLegacyPreflight !== 'function'
+    || typeof invokeBootstrap !== 'function'
+    || typeof readControllerPreflight !== 'function'
+    || typeof retireBootstrapIdentity !== 'function'
+    || typeof verifyBootstrapIdentityRetired !== 'function'
+    || typeof rotateControllerSecret !== 'function'
+  ) {
+    throw new Error('Release-layout bootstrap dependencies are missing')
+  }
+  const candidate = await resolveCandidate()
+  await assertDeploymentCandidateStillCurrent({ readMainSha, sha: candidate.sha })
+  const legacyPreflight = await readLegacyPreflight(candidate)
+  if (
+    legacyPreflight?.layout !== 'legacy'
+    || legacyPreflight?.productionSha !== candidate.sha
+    || legacyPreflight?.trackedDirtyPaths !== 0
+    || legacyPreflight?.eqb !== 'active'
+    || legacyPreflight?.caddy !== 'active'
+  ) {
+    throw new Error('Production is not an eligible migrated baseline')
+  }
+  await assertDeploymentCandidateStillCurrent({ readMainSha, sha: candidate.sha })
+  await invokeBootstrap({ candidate, legacyPreflight })
+  function assertHealthyController(preflight) {
+    if (
+      preflight?.layout !== 'release'
+      || preflight?.productionSha !== candidate.sha
+      || preflight?.eqb !== 'active'
+      || preflight?.caddy !== 'active'
+    ) {
+      throw new Error('New deployment controller did not prove a healthy release layout')
+    }
+    return preflight
+  }
+  assertHealthyController(await readControllerPreflight(candidate))
+  const keyRetirement = await retireBootstrapIdentity(candidate)
+  const controllerPreflight = assertHealthyController(await readControllerPreflight(candidate))
+  if (await verifyBootstrapIdentityRetired(candidate) !== true) {
+    throw new Error('Privileged bootstrap identity remains usable')
+  }
+  await rotateControllerSecret(candidate)
+  return { candidate, legacyPreflight, controllerPreflight, keyRetirement }
+}
+
 export async function deployLatestRelease({
   argv,
   resolveCandidate,
@@ -348,6 +605,7 @@ export function deploymentSSHInvocation({
       '-o', 'BatchMode=yes',
       '-o', 'PasswordAuthentication=no',
       '-o', 'KbdInteractiveAuthentication=no',
+      '-o', 'PreferredAuthentications=publickey',
       '-o', 'IdentitiesOnly=yes',
       '-o', 'StrictHostKeyChecking=yes',
       '-o', `UserKnownHostsFile=${knownHostsPath}`,

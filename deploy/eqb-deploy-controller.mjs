@@ -221,6 +221,7 @@ function productionDependencies(config) {
         `HOME=${home}`,
         `PATH=${fixedPath}`,
         `PLAYWRIGHT_BROWSERS_PATH=${path.join(release, '.playwright-browsers')}`,
+        '/bin/sh', '-c', 'umask 022; exec "$@"', 'eqb-release-build',
         command,
         ...args,
       ], options)

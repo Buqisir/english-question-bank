@@ -90,9 +90,14 @@ uniquely supplies; otherwise keep it outside daily packs.
 - Website deployment never authorizes migration, Review/paper promotion,
   database or R2 mutation, production configuration changes, or controller
   upgrades. Each needs its own explicit current Owner authorization.
-- The one-time release-layout bootstrap and first real Deployment Orb run are
-  separate production actions. Follow ADR-0023 and the launch-deploy runbook;
-  do not infer their authorization from merged code or available secrets.
+- The transition-only `baseline --owner-said-baseline-migration`,
+  `bootstrap --owner-said-release-bootstrap`, and first real `deploy` are three
+  separate production actions. Baseline and bootstrap each need their exact,
+  current Owner authorization. Bootstrap must prove the new forced-controller
+  route, retire and reject the old privileged identity, rotate only the current
+  Deployment project's private-key Secret through stdin, and then refresh that
+  Orb's environment before normal use. Follow ADR-0023 and the launch-deploy
+  runbook; do not infer authorization from merged code or available secrets.
 
 ## Owner QA
 
