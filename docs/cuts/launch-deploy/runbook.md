@@ -186,6 +186,31 @@ and safe to re-run.
 push 校验 → pull → install → build → restart → health + 公网检查；
 host/key 从 gitignored `.env.deploy` 读，真实 IP 不入库）。
 
+### Dedicated Deployment Orb transition (repository preflight only)
+
+ADR-0023 defines the replacement for the legacy in-place redeploy path: a
+separate private Deployment Orb, an Owner command `部署最新版`, automatic exact
+`main` resolution, exact-SHA hosted `verify` + `e2e` gating during the Amp
+webhook outage, pinned SSH trust, staged immutable releases, atomic activation,
+and automatic rollback. Both checks must be successful GitHub Actions checks
+from the same workflow run; `verify (manual)` and `e2e (manual)` do not qualify.
+
+The repository phase currently exposes only:
+
+```bash
+node scripts/amp-orb-deploy.mjs plan
+node scripts/amp-orb-deploy.mjs preflight --owner-said-preflight
+```
+
+`plan` does not connect to production. `preflight` is separately authorized
+and read-only: it reports the production checkout SHA, tracked dirty count,
+`eqb`/Caddy service state, and whether the future release layout exists. The
+real `deploy` command, one-time `/opt/eqb/{shared,releases,current}` migration,
+systemd/Caddy path changes, and first Orb deployment are intentionally absent
+and require later direct Owner authorization. Until that production cutover is
+completed and recorded in `go-live-record.md`, this section grants no authority
+to replace the legacy production procedure or mutate the server.
+
 ## Backup + content operations
 
 ### Daily backup to R2 (Slice 3)
