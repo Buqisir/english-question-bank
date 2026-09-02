@@ -784,12 +784,19 @@ export function createImportReviewRoutes({
   })))
 
   routes.push(defineRoute('GET', /^\/api\/import-review-preview\/revisions\/([^/]+)\/files$/, route(({
+    request,
     response,
     url,
     context,
     match,
   }) => {
-    if (!requireReviewer(response, context)) return
+    const reviewer = context.session?.role === 'owner'
+      || context.session?.accountKind === 'import_agent'
+      || agentIdentity(request, context, agentToken)
+    if (!reviewer) {
+      context.sendJson(response, 403, { error: 'forbidden' })
+      return
+    }
     const relativePath = url.searchParams.get('path') || ''
     const { revision } = store.projectionForRevision(match[1])
     const file = revision?.manifest?.files?.find((candidate) => candidate.path === relativePath)

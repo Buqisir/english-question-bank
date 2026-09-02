@@ -57,6 +57,10 @@ import {
   writeImportEnvironmentPreflightReceipt,
 } from './import-environment-preflight.mjs'
 import { rasterPdfRegion } from '../../server/paper-canonical/pdfRegionRaster.mjs'
+import {
+  finalizeListeningAudio,
+  stageListeningAudio,
+} from './listening-audio.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const papersRoot = path.join(import.meta.dirname, 'papers')
@@ -855,6 +859,37 @@ function materialize(paperId) {
   }, null, 2))
 }
 
+function stageAudio(paperId) {
+  const sourcePath = path.resolve(value('--audio') || '')
+  const result = stageListeningAudio({
+    paperDir: paperDirFor(paperId),
+    paperId,
+    sourcePath,
+    asrFixturePath: value('--asr-fixture'),
+  })
+  console.log(JSON.stringify({
+    ok: true,
+    state: 'awaiting_agent_content_review',
+    ...result,
+    asrPath: path.relative(root, path.join(
+      paperDirFor(paperId),
+      'materialization/listening-audio/asr-v1.json',
+    )),
+  }, null, 2))
+}
+
+function finalizeAudio(paperId) {
+  const reviewPath = value('--review')
+  if (!reviewPath) fail('finalize-listening-audio requires --review <content-review.json>')
+  const result = finalizeListeningAudio({
+    paperDir: paperDirFor(paperId),
+    paperId,
+    reviewPath,
+    referencePath: value('--reference'),
+  })
+  console.log(JSON.stringify({ ok: true, state: 'listening_audio_verified', ...result }, null, 2))
+}
+
 function build(paperId) {
   const { paperDir } = paperContext(paperId)
   const imported = importCanonicalCandidate(loadInput(paperId))
@@ -937,6 +972,12 @@ try {
     listSourceOnly()
   } else if (command === 'attach-answers') {
     attachAnswers()
+  } else if (command === 'stage-listening-audio') {
+    assertNotNck1SourceOnly(paperId, command)
+    runPaperCommand(paperId, () => stageAudio(paperId), { blockOnFailure: true })
+  } else if (command === 'finalize-listening-audio') {
+    assertNotNck1SourceOnly(paperId, command)
+    runPaperCommand(paperId, () => finalizeAudio(paperId), { blockOnFailure: true })
   } else if (command === 'materialize') {
     assertNotNck1SourceOnly(paperId, command)
     runPaperCommand(paperId, () => materialize(paperId), { blockOnFailure: true })
@@ -954,7 +995,7 @@ try {
     runPaperCommand(paperId, () => build(paperId), { blockOnFailure: true })
   } else if (command === 'extract-docx-media') extractDocxMedia()
   else if (command === 'crop-pdf') cropPdf()
-  else fail('Usage: universal-nck1.mjs preflight|init|capture-source-only|source-only-status|list-source-only|attach-answers|stage-ocr|confirm-ocr|materialize|verify|build|extract-docx-media|crop-pdf ...')
+  else fail('Usage: universal-nck1.mjs preflight|init|capture-source-only|source-only-status|list-source-only|attach-answers|stage-listening-audio|finalize-listening-audio|stage-ocr|confirm-ocr|materialize|verify|build|extract-docx-media|crop-pdf ...')
 } catch (error) {
   console.error(error.code ? `${error.code}: ${error.message}` : error.message)
   process.exitCode = 1

@@ -203,6 +203,27 @@ try {
   assert.match(await threadLink.getAttribute('rel'), /noreferrer/)
   assert.equal(await claimedRow.getByText('Orb 最近活动', { exact: true }).count(), 1)
 
+  await page.getByRole('button', { name: '添加题源' }).click()
+  const drawer = page.getByRole('dialog', { name: '添加题源' })
+  assert.equal(
+    await drawer.getByRole('button', { name: '新试卷' }).getAttribute('aria-pressed'),
+    'true',
+  )
+  assert.equal(
+    await drawer.locator('input[data-file-role="listening_audio"]').getAttribute('accept'),
+    '.mp3,audio/mpeg',
+    'new-paper intake offers one optional MP3 input',
+  )
+  await drawer.getByRole('button', { name: '为已有试卷补听力' }).click()
+  assert.equal(await drawer.getByLabel('Paper ID').count(), 1)
+  assert.equal(await drawer.getByLabel('试卷名称').count(), 0)
+  assert.equal(
+    await drawer.locator('input[type="file"]').count(),
+    1,
+    'listening supplement asks only for one MP3',
+  )
+  await drawer.getByRole('button', { name: '关闭' }).click()
+
   const screenshotDir = process.env.SOURCE_INTAKE_QA_SCREENSHOT_DIR
   if (screenshotDir) {
     mkdirSync(screenshotDir, { recursive: true })

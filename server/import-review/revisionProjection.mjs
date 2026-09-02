@@ -28,6 +28,7 @@ import {
   resolveConfirmedNck1OcrEvidence,
   validateNck1OcrSourceEvidence,
 } from '../paper-import/nck1OcrSourceEvidence.mjs'
+import { assertListeningAudioManifest } from '../paper-import/listeningAudioEvidence.mjs'
 
 function fail(message, code = 'IMPORT_REVIEW_CANDIDATE_INVALID') {
   const error = new Error(message)
@@ -93,10 +94,14 @@ export function loadNck1ReviewSource(rootDir) {
     'universal-source-manifest.json',
   )
   if (
-    manifest.schemaVersion !== 'universal-nck1-source-manifest-v1'
+    ![
+      'universal-nck1-source-manifest-v1',
+      'universal-nck1-source-manifest-v2',
+    ].includes(manifest.schemaVersion)
     || manifest.paperId !== config.paperId
     || !Array.isArray(manifest.documents)
   ) fail('Universal NCK1 source manifest is incomplete')
+  assertListeningAudioManifest(rootDir, manifest)
   const materializationPath = resolveReviewFile(
     rootDir,
     normalizedRelativePath(manifest.materializationPath, 'materializationPath'),
@@ -301,6 +306,14 @@ export function reviewBundleFilePaths(rootDir) {
         mediaType: page.mediaType,
         role: `${document.role}_page`,
       }))),
+    ...(manifest.attachments || []).map((attachment) => ({
+      path: normalizedRelativePath(
+        attachment.path,
+        `attachment ${attachment.attachmentId}`,
+      ),
+      mediaType: attachment.mediaType,
+      role: attachment.role,
+    })),
     ...materialization.media.flatMap((media) => [{
       path: path.posix.join(
         normalizedRelativePath(manifest.mediaDirectory, 'mediaDirectory'),

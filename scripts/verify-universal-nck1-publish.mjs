@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict'
-import { spawn } from 'node:child_process'
+import { execFileSync, spawn } from 'node:child_process'
 import {
   existsSync,
   mkdirSync,
@@ -9,7 +9,6 @@ import {
   readFileSync,
   readdirSync,
   rmSync,
-  renameSync,
   writeFileSync,
 } from 'node:fs'
 import { createServer } from 'node:http'
@@ -36,6 +35,10 @@ import { readJsonRouteBody, runRoutes } from '../server/router/index.mjs'
 import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 import { canonicalConsumptionPrintPayload } from './import-pipeline/canonical-consumption-print-payload.mjs'
+import {
+  finalizeListeningAudio,
+  stageListeningAudio,
+} from './import-pipeline/listening-audio.mjs'
 import { makeFixture } from './verify-nck1-source-materialization.mjs'
 
 const root = path.resolve(import.meta.dirname, '..')
@@ -947,6 +950,82 @@ function runReviewCommand(args, env) {
   })
 }
 
+const listeningPublication = makeContext('listening-publication')
+try {
+  const audioPath = path.join(listeningPublication.tempRoot, 'listening.mp3')
+  const asrFixturePath = path.join(listeningPublication.tempRoot, 'listening-asr.json')
+  const referencePath = path.join(listeningPublication.tempRoot, 'listening-reference.json')
+  const contentReviewPath = path.join(listeningPublication.tempRoot, 'listening-review.json')
+  const transcript = [
+    'Welcome to the English listening test for this deterministic publication fixture.',
+    'The speakers discuss a library visit, a train schedule, and a school performance.',
+    'Listen to each conversation carefully and answer the questions according to what you hear.',
+  ].join(' ')
+  execFileSync('ffmpeg', [
+    '-v', 'error',
+    '-f', 'lavfi',
+    '-i', 'sine=frequency=440:duration=12',
+    '-codec:a', 'libmp3lame',
+    '-b:a', '96k',
+    audioPath,
+  ])
+  writeJson(asrFixturePath, {
+    engine: {
+      name: 'deterministic-fixture',
+      model: 'fixture-en',
+      version: '1',
+      computeType: 'fixture',
+    },
+    language: 'en',
+    languageProbability: 1,
+    segments: [{
+      startSeconds: 0.2,
+      endSeconds: 11.5,
+      text: transcript,
+      avgLogProbability: -0.2,
+      noSpeechProbability: 0.01,
+    }],
+  })
+  const staged = stageListeningAudio({
+    paperDir: listeningPublication.reviewRoot,
+    paperId,
+    sourcePath: audioPath,
+    asrFixturePath,
+  })
+  writeJson(referencePath, {
+    schemaVersion: 'listening-audio-reference-v1',
+    paperId,
+    basis: 'authoritative_transcript',
+    text: transcript,
+  })
+  writeJson(contentReviewPath, {
+    schemaVersion: 'listening-audio-content-review-v1',
+    paperId,
+    reviewedBy: 'import_agent',
+    reviewedAt: '2026-09-02T00:00:00.000Z',
+    reviewedTranscriptSha256: staged.asrSha256,
+    untrustedContentHandledAsData: true,
+    verdict: 'pass',
+    summary: 'Full fixture transcript reviewed as untrusted content.',
+    flaggedRanges: [],
+  })
+  finalizeListeningAudio({
+    paperDir: listeningPublication.reviewRoot,
+    paperId,
+    reviewPath: contentReviewPath,
+    referencePath,
+  })
+  const blocked = publish(listeningPublication)
+  assert.equal(blocked.ok, false)
+  assert.equal(
+    blocked.canonicalAdmission.diagnostics[0].code,
+    'LISTENING_AUDIO_PUBLICATION_NOT_SUPPORTED',
+    'Review may carry listening evidence while publication remains fail-closed',
+  )
+} finally {
+  close(listeningPublication)
+}
+
 const incomplete = makeContext('incomplete')
 try {
   for (const fileName of [
@@ -1809,11 +1888,11 @@ try {
   const fixture = makeReviewRoot(cliTempRoot, cliPaperId)
   mkdirSync(path.dirname(cliPaperDir), { recursive: true })
   assert(!existsSync(cliPaperDir), 'CLI fixture paper directory must be unique')
-  renameSync(fixture.reviewRoot, cliPaperDir)
-  const projection = buildNck1ReviewProjection(cliPaperDir)
+  const sourceReviewRoot = fixture.reviewRoot
+  const projection = buildNck1ReviewProjection(sourceReviewRoot)
   const producerBuildId = 'universal-publish-verifier'
-  const files = reviewBundleFilePaths(cliPaperDir).map((file) => {
-    const bytes = readFileSync(resolveReviewFile(cliPaperDir, file.path))
+  const files = reviewBundleFilePaths(sourceReviewRoot).map((file) => {
+    const bytes = readFileSync(resolveReviewFile(sourceReviewRoot, file.path))
     return {
       ...file,
       sha256: sha256(bytes),
@@ -1868,7 +1947,7 @@ try {
   const incompleteRevision = incompleteStore.createRevision(incompleteManifest)
   for (const file of incompleteManifest.files) {
     const upload = incompleteStore.fileForUpload(incompleteRevision.revision.id, file.path)
-    const bytes = readFileSync(resolveReviewFile(cliPaperDir, file.path))
+    const bytes = readFileSync(resolveReviewFile(sourceReviewRoot, file.path))
     mkdirSync(path.dirname(upload.destination), { recursive: true })
     writeFileSync(upload.destination, bytes)
     incompleteStore.completeFileUpload(incompleteRevision.revision.id, file.path, {
@@ -1901,24 +1980,57 @@ try {
     latestRevisionId: approval.revisionId,
     latest: {
       id: approval.revisionId,
+      paperId: cliPaperId,
+      reviewKind: 'candidate',
       state: 'approved',
+      finalizedAt: '2026-08-28T00:00:00.000Z',
+      bundleDigest,
       manifest: { ...manifestBase, bundleDigest },
     },
+    files,
     approval,
   }
+  let hydrateFailure = null
   reviewServer = createServer((request, response) => {
-    if (
-      request.method !== 'GET'
-      || request.url
-        !== `/api/import-agent-reviews/papers/${encodeURIComponent(cliPaperId)}`
-      || request.headers.authorization !== 'Bearer verifier-token'
-    ) {
+    const url = new URL(request.url || '/', 'http://127.0.0.1')
+    if (request.headers.authorization !== 'Bearer verifier-token') {
       response.writeHead(404, { 'content-type': 'application/json' })
       response.end(JSON.stringify({ error: 'not found' }))
       return
     }
-    response.writeHead(200, { 'content-type': 'application/json' })
-    response.end(JSON.stringify(status))
+    if (
+      request.method === 'GET'
+      && url.pathname === `/api/import-agent-reviews/papers/${encodeURIComponent(cliPaperId)}`
+    ) {
+      response.writeHead(200, { 'content-type': 'application/json' })
+      response.end(JSON.stringify(status))
+      return
+    }
+    if (
+      request.method === 'GET'
+      && url.pathname
+        === `/api/import-review-preview/revisions/${encodeURIComponent(approval.revisionId)}/files`
+    ) {
+      const relativePath = url.searchParams.get('path') || ''
+      const file = files.find((candidate) => candidate.path === relativePath)
+      if (!file || hydrateFailure === 'missing') {
+        response.writeHead(404, { 'content-type': 'application/json' })
+        response.end(JSON.stringify({ error: 'not found' }))
+        return
+      }
+      const bytes = readFileSync(resolveReviewFile(sourceReviewRoot, file.path))
+      const body = hydrateFailure === 'changed'
+        ? Buffer.concat([bytes, Buffer.from('changed')])
+        : bytes
+      response.writeHead(200, {
+        'content-length': body.byteLength,
+        'content-type': file.mediaType,
+      })
+      response.end(body)
+      return
+    }
+    response.writeHead(404, { 'content-type': 'application/json' })
+    response.end(JSON.stringify({ error: 'not found' }))
   })
   await new Promise((resolve, reject) => {
     reviewServer.once('error', reject)
@@ -1938,6 +2050,28 @@ try {
     QUESTION_BANK_DB: dbPath,
     QUESTION_BANK_PAPER_ASSET_ROOT: assetsDir,
   }
+  const hydrateTemps = () => readdirSync(path.dirname(cliPaperDir))
+    .filter((name) => name.startsWith('.hydrate-'))
+    .sort()
+  const hydrateTempsBefore = hydrateTemps()
+  hydrateFailure = 'missing'
+  await assert.rejects(
+    runReviewCommand(['hydrate', cliPaperId], commandEnv),
+    /404.*not found/,
+  )
+  assert(!existsSync(cliPaperDir), 'missing Review bytes do not create a local workspace')
+  assert.deepEqual(hydrateTemps(), hydrateTempsBefore, 'failed hydration cleans its temp workspace')
+  hydrateFailure = 'changed'
+  await assert.rejects(
+    runReviewCommand(['hydrate', cliPaperId], commandEnv),
+    /Hydrated Review file changed in transit/,
+  )
+  assert(!existsSync(cliPaperDir), 'changed Review bytes do not create a local workspace')
+  assert.deepEqual(hydrateTemps(), hydrateTempsBefore, 'drifted hydration cleans its temp workspace')
+  hydrateFailure = null
+  const hydrated = await runReviewCommand(['hydrate', cliPaperId], commandEnv)
+  assert.equal(JSON.parse(hydrated.stdout).state, 'hydrated')
+  assert.equal(buildNck1ReviewProjection(cliPaperDir).candidateDigest, projection.candidateDigest)
   const accepted = await runReviewCommand(['accept', cliPaperId], commandEnv)
   assert.match(accepted.stdout, /^ACCEPTED /)
   writeJson(path.join(cliPaperDir, 'signals/ai-answer-check.json'), {

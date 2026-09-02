@@ -44,6 +44,9 @@ assert.match(prompt, new RegExp(payload.submissionId))
 assert.match(prompt, new RegExp(payload.submissionDigest))
 assert.match(prompt, /atomically claim/)
 assert.match(prompt, /AMP_THREAD_ID/)
+assert.match(prompt, /listening_supplement/)
+assert.match(prompt, /exact targetPaperId/)
+assert.match(prompt, /never invent a new paperId/)
 assert.match(prompt, /Do not edit the Owner draft/)
 
 const originalEnabled = process.env.QUESTION_BANK_SOURCE_INTAKE_PLUGIN_ENABLED

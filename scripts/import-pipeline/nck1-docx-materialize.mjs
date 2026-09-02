@@ -174,7 +174,10 @@ function selectProducer(paperDir, documents) {
 }
 
 export function runNck1MaterializationJobUnlocked({ paperDir, manifest }) {
-  if (manifest?.schemaVersion !== 'universal-nck1-source-manifest-v1') {
+  if (![
+    'universal-nck1-source-manifest-v1',
+    'universal-nck1-source-manifest-v2',
+  ].includes(manifest?.schemaVersion)) {
     throw new Error('NCK1 materialization requires a universal Source Manifest')
   }
   const documents = loadDocuments(paperDir, manifest)

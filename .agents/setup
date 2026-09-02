@@ -19,6 +19,7 @@ required_packages=(
   imagemagick
   libreoffice-writer
   poppler-utils
+  python3-venv
   sqlite3
   unzip
   util-linux
@@ -110,6 +111,21 @@ step "activating pnpm 10.28.1" corepack enable
 step "preparing pnpm 10.28.1" corepack prepare pnpm@10.28.1 --activate
 step "installing app dependencies" pnpm -C app install --frozen-lockfile
 step "installing server dependencies" npm ci --prefix server
+
+listening_asr_home="$HOME/.local/share/eqbank-listening-asr"
+listening_asr_python="$listening_asr_home/bin/python"
+listening_asr_version="1.2.1"
+if ! "$listening_asr_python" -c \
+  "import importlib.metadata; assert importlib.metadata.version('faster-whisper') == '$listening_asr_version'" \
+  >/dev/null 2>&1; then
+  rm -rf "$listening_asr_home"
+  step "creating the listening ASR Python environment" python3 -m venv "$listening_asr_home"
+  step "installing faster-whisper $listening_asr_version" \
+    "$listening_asr_home/bin/pip" install --disable-pip-version-check \
+      "faster-whisper==$listening_asr_version"
+else
+  echo "[orb-setup] faster-whisper $listening_asr_version already installed"
+fi
 
 if compgen -G "$HOME/.cache/ms-playwright/chromium-*/chrome-linux*/chrome" >/dev/null; then
   step "checking Playwright Chromium" pnpm -C app exec playwright install --no-shell chromium
