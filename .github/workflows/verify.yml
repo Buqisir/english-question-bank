@@ -1,12 +1,18 @@
 name: Verify
 
-# Manual rollback/fallback only. Protected-branch authority belongs to the
-# aggregate `Amp Orb Verify` status from the dedicated CI Orb.
+# Hosted merge authority while Amp bug amp_bug_0uiggF5jWG6i6iaB72BATT blocks
+# durable webhook delivery to the dedicated CI Orb. Keep workflow_dispatch for
+# explicit recovery diagnostics without weakening normal PR and main coverage.
 on:
+  pull_request:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
   verify:
+    name: ${{ github.event_name == 'workflow_dispatch' && 'verify (manual)' || 'verify' }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
 
@@ -65,6 +71,7 @@ jobs:
         working-directory: app
 
   e2e:
+    name: ${{ github.event_name == 'workflow_dispatch' && 'e2e (manual)' || 'e2e' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
