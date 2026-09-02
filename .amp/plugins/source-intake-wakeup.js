@@ -47,7 +47,8 @@ export function sourceIntakeAgentPrompt({ submissionId, submissionDigest }) {
     'Use scripts/import-pipeline/source-intake.mjs to list, atomically claim, download, and recheck this submission before following docs/import/agent-contract.md.',
     'The CLI sends this thread’s AMP_THREAD_ID on every lease operation; never copy the source files or claim receipt to another thread.',
     'If the material is incomplete or ambiguous, release it with the needs-owner command and a concise structured reason.',
-    'If it is usable, choose a valid paperId, run the explicit source-intake init command, continue through the existing NCK1 import contract, and call source-intake handoff only after the local paper workspace has been initialized.',
+    'After download, inspect the immutable submission snapshot mode. For listening_supplement, use its exact targetPaperId and hydrate that existing Review paper; never invent a new paperId. For new_paper, choose a valid new paperId.',
+    'Run the explicit source-intake init command, complete any listening transcript review it requests, continue through the existing NCK1 import contract, and call source-intake handoff only after the local paper workspace has been initialized.',
     'Do not edit the Owner draft, invent answers, approve review, publish locally, ship, deploy, mutate production, or create another thread.',
   ].join('\n')
 }

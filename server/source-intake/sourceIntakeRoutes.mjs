@@ -50,6 +50,28 @@ function ampThreadId(request) {
   return String(request.headers['x-amp-thread-id'] || '')
 }
 
+function mp3FrameAt(bytes, offset) {
+  if (offset + 4 > bytes.length || bytes[offset] !== 0xff || (bytes[offset + 1] & 0xe0) !== 0xe0) {
+    return false
+  }
+  const version = (bytes[offset + 1] >> 3) & 0x03
+  const layer = (bytes[offset + 1] >> 1) & 0x03
+  const bitrate = (bytes[offset + 2] >> 4) & 0x0f
+  const sampleRate = (bytes[offset + 2] >> 2) & 0x03
+  return version !== 0x01 && layer !== 0 && bitrate !== 0 && bitrate !== 0x0f && sampleRate !== 0x03
+}
+
+function mp3AudioStart(bytes) {
+  if (bytes.length < 10 || bytes.subarray(0, 3).toString('ascii') !== 'ID3') return 0
+  const sizeBytes = bytes.subarray(6, 10)
+  if ([...sizeBytes].some((byte) => byte > 0x7f)) return -1
+  const tagSize = (sizeBytes[0] << 21)
+    | (sizeBytes[1] << 14)
+    | (sizeBytes[2] << 7)
+    | sizeBytes[3]
+  return 10 + tagSize + ((bytes[5] & 0x10) ? 10 : 0)
+}
+
 export function validateSourceIntakeUploadMagic(filePath, expected) {
   const bytes = readFileSync(filePath)
   let valid = false
@@ -59,6 +81,15 @@ export function validateSourceIntakeUploadMagic(filePath, expected) {
     valid = bytes.subarray(0, 4).equals(Buffer.from([0x50, 0x4b, 0x03, 0x04]))
       && bytes.includes(Buffer.from('[Content_Types].xml'))
       && bytes.includes(Buffer.from('word/'))
+  } else if (expected.extension === '.mp3') {
+    const audioStart = mp3AudioStart(bytes)
+    const searchEnd = Math.min(bytes.length - 3, Math.max(audioStart, 0) + 4096)
+    for (let offset = audioStart; offset >= 0 && offset < searchEnd; offset += 1) {
+      if (mp3FrameAt(bytes, offset)) {
+        valid = true
+        break
+      }
+    }
   }
   if (!valid) {
     const error = new Error('Uploaded bytes do not match the declared file type')

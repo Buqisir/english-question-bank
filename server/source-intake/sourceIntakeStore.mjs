@@ -16,11 +16,17 @@ const FILE_ID = /^source-file-[a-f0-9-]{36}$/
 const PAPER_ID = /^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/
 const AMP_THREAD_ID = /^T-[a-f0-9-]{36}$/
 const SHA256 = /^sha256:[a-f0-9]{64}$/
-const FILE_ROLES = new Set(['question_source', 'official_answers', 'question_and_answers'])
+const DOCUMENT_FILE_ROLES = new Set([
+  'question_source',
+  'official_answers',
+  'question_and_answers',
+])
+const FILE_ROLES = new Set([...DOCUMENT_FILE_ROLES, 'listening_audio'])
 const PLATFORMS = new Set(['wechat_official', 'xiaohongshu', 'teacher_group', 'other'])
 const MEDIA_TYPES = new Map([
   ['.pdf', 'application/pdf'],
   ['.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
+  ['.mp3', 'audio/mpeg'],
 ])
 const MAX_FILE_BYTES = 64 * 1024 * 1024
 const MAX_BUNDLE_BYTES = 256 * 1024 * 1024
@@ -102,10 +108,14 @@ export function validateSourceIntakeFileManifest(input) {
   }
   const extension = path.extname(fileName).toLowerCase()
   const expectedMediaType = MEDIA_TYPES.get(extension)
-  if (!expectedMediaType || input?.mediaType !== expectedMediaType) {
+  if (
+    !expectedMediaType
+    || input?.mediaType !== expectedMediaType
+    || (role === 'listening_audio') !== (extension === '.mp3')
+  ) {
     throw intakeError(
       'SOURCE_INTAKE_FILE_TYPE_INVALID',
-      'Only matching DOCX and PDF files are accepted',
+      'Question sources accept matching DOCX/PDF files; listening audio accepts MP3',
       400,
     )
   }
@@ -138,6 +148,7 @@ function ensureShape(db) {
       )),
       current_submission_id TEXT,
       handed_off_paper_id TEXT,
+      target_paper_id TEXT,
       created_by TEXT NOT NULL,
       created_at TEXT NOT NULL,
       updated_at TEXT NOT NULL
@@ -156,7 +167,7 @@ function ensureShape(db) {
       id TEXT PRIMARY KEY,
       intake_id TEXT NOT NULL REFERENCES source_intakes(id) ON DELETE CASCADE,
       role TEXT NOT NULL CHECK (role IN (
-        'question_source', 'official_answers', 'question_and_answers'
+        'question_source', 'official_answers', 'question_and_answers', 'listening_audio'
       )),
       file_name TEXT NOT NULL,
       extension TEXT NOT NULL,
@@ -229,6 +240,62 @@ function ensureShape(db) {
   )
   if (!claimColumns.has('amp_thread_id')) {
     db.exec('ALTER TABLE source_intake_claims ADD COLUMN amp_thread_id TEXT')
+  }
+  const intakeColumns = new Set(
+    db.prepare('PRAGMA table_info(source_intakes)').all().map((column) => column.name),
+  )
+  if (!intakeColumns.has('target_paper_id')) {
+    db.exec('ALTER TABLE source_intakes ADD COLUMN target_paper_id TEXT')
+  }
+  const sourceFileTable = db.prepare(`
+    SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'source_intake_files'
+  `).get()
+  if (!sourceFileTable?.sql?.includes("'listening_audio'")) {
+    db.exec('PRAGMA foreign_keys = OFF; PRAGMA legacy_alter_table = ON')
+    try {
+      db.exec(`
+        BEGIN IMMEDIATE;
+        ALTER TABLE source_intake_files RENAME TO source_intake_files_before_listening;
+        DROP INDEX idx_source_intake_active_role;
+        CREATE TABLE source_intake_files (
+          id TEXT PRIMARY KEY,
+          intake_id TEXT NOT NULL REFERENCES source_intakes(id) ON DELETE CASCADE,
+          role TEXT NOT NULL CHECK (role IN (
+            'question_source', 'official_answers', 'question_and_answers', 'listening_audio'
+          )),
+          file_name TEXT NOT NULL,
+          extension TEXT NOT NULL,
+          media_type TEXT NOT NULL,
+          sha256 TEXT NOT NULL,
+          byte_length INTEGER NOT NULL,
+          active INTEGER NOT NULL DEFAULT 1 CHECK (active IN (0, 1)),
+          uploaded_at TEXT,
+          created_at TEXT NOT NULL
+        );
+        INSERT INTO source_intake_files (
+          id, intake_id, role, file_name, extension, media_type,
+          sha256, byte_length, active, uploaded_at, created_at
+        ) SELECT
+          id, intake_id, role, file_name, extension, media_type,
+          sha256, byte_length, active, uploaded_at, created_at
+        FROM source_intake_files_before_listening;
+        DROP TABLE source_intake_files_before_listening;
+        CREATE UNIQUE INDEX idx_source_intake_active_role
+          ON source_intake_files(intake_id, role) WHERE active = 1;
+        COMMIT;
+      `)
+    } catch (error) {
+      if (db.isTransaction) db.exec('ROLLBACK')
+      throw error
+    } finally {
+      db.exec('PRAGMA legacy_alter_table = OFF; PRAGMA foreign_keys = ON')
+    }
+  }
+  const foreignKeyErrors = db.prepare('PRAGMA foreign_key_check').all()
+  if (foreignKeyErrors.length > 0) {
+    throw new Error(
+      `Source Intake migration left ${foreignKeyErrors.length} foreign-key violation(s)`,
+    )
   }
 }
 
@@ -391,15 +458,36 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
     }
   }
 
-  function importReviewPaperExists(db, paperId) {
+  function importReviewPaper(db, paperId) {
     const table = db.prepare(`
       SELECT 1 FROM sqlite_master
       WHERE type = 'table' AND name = 'import_review_papers'
     `).get()
-    if (!table) return false
-    return Boolean(db.prepare(`
-      SELECT 1 FROM import_review_papers WHERE paper_id = ?
-    `).get(paperId))
+    if (!table) return null
+    return db.prepare(`
+      SELECT paper_id, paper_name FROM import_review_papers WHERE paper_id = ?
+    `).get(paperId) || null
+  }
+
+  function normalizeTargetPaperId(value) {
+    const paperId = optionalString(value, 'targetPaperId', 160)
+    if (paperId && !PAPER_ID.test(paperId)) {
+      throw intakeError('SOURCE_INTAKE_TARGET_PAPER_ID_INVALID', 'targetPaperId is invalid', 400)
+    }
+    return paperId
+  }
+
+  function assertTargetPaper(db, targetPaperId) {
+    if (!targetPaperId) return null
+    const paper = importReviewPaper(db, targetPaperId)
+    if (!paper) {
+      throw intakeError(
+        'SOURCE_INTAKE_TARGET_PAPER_NOT_FOUND',
+        'Listening supplement target does not exist in Import Review',
+        404,
+      )
+    }
+    return paper
   }
 
   function activeFiles(db, intakeId) {
@@ -410,10 +498,15 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
     `).all(intakeId).map(fileRow)
   }
 
-  function draftStateForFiles(files) {
+  function draftStateForFiles(files, targetPaperId = null) {
     const uploadedRoles = new Set(
       files.filter((file) => file.uploadedAt).map((file) => file.role),
     )
+    if (targetPaperId) {
+      return uploadedRoles.size === 1 && uploadedRoles.has('listening_audio')
+        ? 'ready_for_agent'
+        : 'draft'
+    }
     if (
       uploadedRoles.has('question_and_answers')
       || (uploadedRoles.has('question_source') && uploadedRoles.has('official_answers'))
@@ -423,7 +516,8 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
   }
 
   function refreshDraftState(db, intakeId, timestamp = nowIso()) {
-    const state = draftStateForFiles(activeFiles(db, intakeId))
+    const intake = assertIntakeExists(db, intakeId)
+    const state = draftStateForFiles(activeFiles(db, intakeId), intake.target_paper_id)
     db.prepare(`
       UPDATE source_intakes
       SET state = ?, current_submission_id = NULL, updated_at = ?
@@ -473,6 +567,8 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
     return {
       id: intake.id,
       paperName: intake.paper_name,
+      mode: intake.target_paper_id ? 'listening_supplement' : 'new_paper',
+      targetPaperId: intake.target_paper_id,
       state: intake.state,
       sources,
       files,
@@ -485,7 +581,7 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
         leaseExpiresAt: claim.leaseExpiresAt,
       } : null,
       orbWorker: worker,
-      handedOffPaperId: intake.handed_off_paper_id,
+      handedOffPaperId: intake.handed_off_paper_id || intake.target_paper_id,
       lastNotification: latestNotification(db, intakeId),
       createdBy: intake.created_by,
       createdAt: intake.created_at,
@@ -494,16 +590,31 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
   }
 
   function createIntake(input, actor) {
-    const paperName = requiredString(input?.paperName, 'paperName', 300)
-    const sources = normalizeSources(input?.sources)
+    const targetPaperId = normalizeTargetPaperId(input?.targetPaperId)
+    let paperName
+    let sources
     const intakeId = `intake-${randomUUID()}`
     const timestamp = nowIso()
     withDb(true, (db) => transaction(db, () => {
+      const targetPaper = assertTargetPaper(db, targetPaperId)
+      paperName = targetPaper
+        ? targetPaper.paper_name
+        : requiredString(input?.paperName, 'paperName', 300)
+      sources = targetPaper
+        ? [{ platform: 'other', sourceName: '听力音频补充', sourceUrl: null }]
+        : normalizeSources(input?.sources)
       db.prepare(`
         INSERT INTO source_intakes (
-          id, paper_name, state, created_by, created_at, updated_at
-        ) VALUES (?, ?, 'draft', ?, ?, ?)
-      `).run(intakeId, paperName, requiredString(actor, 'actor', 200), timestamp, timestamp)
+          id, paper_name, state, target_paper_id, created_by, created_at, updated_at
+        ) VALUES (?, ?, 'draft', ?, ?, ?, ?)
+      `).run(
+        intakeId,
+        paperName,
+        targetPaperId,
+        requiredString(actor, 'actor', 200),
+        timestamp,
+        timestamp,
+      )
       const insertSource = db.prepare(`
         INSERT INTO source_intake_sources (
           id, intake_id, position, platform, source_name, source_url, created_at
@@ -518,21 +629,41 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
         source.sourceUrl,
         timestamp,
       ))
-      event(db, intakeId, null, 'draft_created', actor)
+      event(db, intakeId, null, 'draft_created', actor, {
+        mode: targetPaperId ? 'listening_supplement' : 'new_paper',
+        targetPaperId,
+      })
     }))
     mkdirSync(intakeDirectory(intakeId), { recursive: true })
     return intakeDetail(intakeId)
   }
 
   function updateIntake(intakeId, input, actor) {
-    const paperName = requiredString(input?.paperName, 'paperName', 300)
-    const sources = normalizeSources(input?.sources)
+    const targetPaperId = normalizeTargetPaperId(input?.targetPaperId)
     withDb(true, (db) => transaction(db, () => {
       const intake = assertIntakeExists(db, intakeId)
       assertOwnerMutable(intake)
+      const targetPaper = assertTargetPaper(db, targetPaperId)
+      const paperName = targetPaper
+        ? targetPaper.paper_name
+        : requiredString(input?.paperName, 'paperName', 300)
+      const sources = targetPaper
+        ? [{ platform: 'other', sourceName: '听力音频补充', sourceUrl: null }]
+        : normalizeSources(input?.sources)
+      const incompatible = activeFiles(db, intakeId).filter((file) => targetPaperId
+        ? file.role !== 'listening_audio'
+        : false)
+      if (incompatible.length > 0) {
+        throw intakeError(
+          'SOURCE_INTAKE_MODE_FILES_CONFLICT',
+          'Remove question documents before changing this intake to a listening supplement',
+        )
+      }
       const timestamp = nowIso()
-      db.prepare('UPDATE source_intakes SET paper_name = ?, updated_at = ? WHERE id = ?')
-        .run(paperName, timestamp, intakeId)
+      db.prepare(`
+        UPDATE source_intakes
+        SET paper_name = ?, target_paper_id = ?, updated_at = ? WHERE id = ?
+      `).run(paperName, targetPaperId, timestamp, intakeId)
       db.prepare('DELETE FROM source_intake_sources WHERE intake_id = ?').run(intakeId)
       const insertSource = db.prepare(`
         INSERT INTO source_intake_sources (
@@ -549,7 +680,10 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
         timestamp,
       ))
       refreshDraftState(db, intakeId, timestamp)
-      event(db, intakeId, null, 'draft_updated', actor)
+      event(db, intakeId, null, 'draft_updated', actor, {
+        mode: targetPaperId ? 'listening_supplement' : 'new_paper',
+        targetPaperId,
+      })
     }))
     return intakeDetail(intakeId)
   }
@@ -559,6 +693,16 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
     const result = withDb(true, (db) => transaction(db, () => {
       const intake = assertIntakeExists(db, intakeId)
       assertOwnerMutable(intake)
+      if (
+        (intake.target_paper_id && manifest.role !== 'listening_audio')
+        || (!intake.target_paper_id && !FILE_ROLES.has(manifest.role))
+      ) {
+        throw intakeError(
+          'SOURCE_INTAKE_MODE_FILES_CONFLICT',
+          'Listening supplements accept exactly one MP3 and no question documents',
+          400,
+        )
+      }
       const existing = fileRow(db.prepare(`
         SELECT * FROM source_intake_files
         WHERE intake_id = ? AND role = ? AND active = 1
@@ -587,10 +731,13 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
       ))
       if (pending) return { file: pending, created: false }
 
+      const replacedRoles = manifest.role === 'question_and_answers'
+        ? DOCUMENT_FILE_ROLES
+        : new Set([manifest.role, ...(DOCUMENT_FILE_ROLES.has(manifest.role)
+          ? ['question_and_answers']
+          : [])])
       const retainedBytes = activeFiles(db, intakeId)
-        .filter((file) => manifest.role !== 'question_and_answers'
-          && file.role !== manifest.role
-          && file.role !== 'question_and_answers')
+        .filter((file) => !replacedRoles.has(file.role))
         .reduce((total, file) => total + file.byteLength, 0)
       if (retainedBytes + manifest.byteLength > MAX_BUNDLE_BYTES) {
         throw intakeError('SOURCE_INTAKE_BUNDLE_TOO_LARGE', 'Source intake bundle is too large', 413)
@@ -670,11 +817,17 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
           db.prepare(`
             UPDATE source_intake_files SET active = 0
             WHERE intake_id = ? AND active = 1
+              AND role IN ('question_source', 'official_answers', 'question_and_answers')
           `).run(intakeId)
-        } else {
+        } else if (DOCUMENT_FILE_ROLES.has(file.role)) {
           db.prepare(`
             UPDATE source_intake_files SET active = 0
             WHERE intake_id = ? AND active = 1 AND role IN (?, 'question_and_answers')
+          `).run(intakeId, file.role)
+        } else {
+          db.prepare(`
+            UPDATE source_intake_files SET active = 0
+            WHERE intake_id = ? AND active = 1 AND role = ?
           `).run(intakeId, file.role)
         }
       }
@@ -727,10 +880,17 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
       sha256: file.sha256,
       byteLength: file.byteLength,
     }))
+    const supplement = Boolean(intake.target_paper_id)
     return {
-      schemaVersion: 'source-intake-submission-v1',
+      schemaVersion: supplement
+        ? 'source-intake-submission-v2'
+        : 'source-intake-submission-v1',
       intakeId,
       revisionNumber,
+      ...(supplement ? {
+        mode: 'listening_supplement',
+        targetPaperId: intake.target_paper_id,
+      } : {}),
       paperName: intake.paper_name,
       sources,
       files,
@@ -743,14 +903,19 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
     if (before.state !== 'ready_for_agent') {
       throw intakeError(
         'SOURCE_INTAKE_NOT_READY',
-        'Question and authoritative answer files are required before submission',
+        before.targetPaperId
+          ? 'A listening supplement requires exactly one uploaded MP3'
+          : 'Question and authoritative answer files are required before submission',
       )
     }
     before.files.forEach(assertStoredFile)
     const submission = withDb(true, (db) => transaction(db, () => {
       const intake = assertIntakeExists(db, intakeId)
       assertOwnerMutable(intake)
-      if (draftStateForFiles(activeFiles(db, intakeId)) !== 'ready_for_agent') {
+      if (
+        draftStateForFiles(activeFiles(db, intakeId), intake.target_paper_id)
+          !== 'ready_for_agent'
+      ) {
         throw intakeError('SOURCE_INTAKE_NOT_READY', 'Source intake is no longer ready')
       }
       const revisionNumber = Number(db.prepare(`
@@ -1268,7 +1433,23 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
           400,
         )
       }
-      if (importReviewPaperExists(db, paperId)) {
+      const targetPaperId = submission.snapshot.targetPaperId || null
+      const supplement = submission.snapshot.mode === 'listening_supplement'
+      if (supplement && paperId !== targetPaperId) {
+        throw intakeError(
+          'SOURCE_INTAKE_TARGET_PAPER_MISMATCH',
+          'Listening supplement must hand off to its immutable target paperId',
+          400,
+        )
+      }
+      if (supplement && !importReviewPaper(db, paperId)) {
+        throw intakeError(
+          'SOURCE_INTAKE_TARGET_PAPER_NOT_FOUND',
+          'Listening supplement target no longer exists in Import Review',
+          404,
+        )
+      }
+      if (!supplement && importReviewPaper(db, paperId)) {
         throw intakeError(
           'SOURCE_INTAKE_PAPER_ID_CONFLICT',
           'paperId already exists in Import Review',
@@ -1280,7 +1461,7 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
           UPDATE source_intake_submissions
           SET state = 'handed_off', handed_off_paper_id = ?, updated_at = ?
           WHERE id = ?
-        `).run(paperId, timestamp, submissionId)
+        `).run(supplement ? null : paperId, timestamp, submissionId)
       } catch (error) {
         if (String(error.message).includes('UNIQUE')) {
           throw intakeError('SOURCE_INTAKE_PAPER_ID_CONFLICT', 'paperId is already handed off')
@@ -1294,7 +1475,7 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
             UPDATE source_intake_orb_workers
             SET state = 'handed_off', paper_id = ?, updated_at = ?
             WHERE submission_id = ?
-          `).run(paperId, timestamp, submissionId)
+          `).run(supplement ? null : paperId, timestamp, submissionId)
         } catch (error) {
           if (String(error.message).includes('UNIQUE')) {
             throw intakeError('SOURCE_INTAKE_PAPER_ID_CONFLICT', 'paperId is already bound to a worker')
@@ -1306,8 +1487,15 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
         UPDATE source_intakes
         SET state = 'handed_off', handed_off_paper_id = ?, updated_at = ?
         WHERE id = ?
-      `).run(paperId, timestamp, submission.intakeId)
-      event(db, submission.intakeId, submissionId, 'submission_handed_off', actor, { paperId })
+      `).run(supplement ? null : paperId, timestamp, submission.intakeId)
+      event(
+        db,
+        submission.intakeId,
+        submissionId,
+        supplement ? 'listening_supplement_handed_off' : 'submission_handed_off',
+        actor,
+        { paperId },
+      )
       return detailWithDb(db, submission.intakeId)
     }))
   }

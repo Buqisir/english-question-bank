@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict'
-import { spawn } from 'node:child_process'
+import { execFileSync, spawn } from 'node:child_process'
 import { createHash } from 'node:crypto'
-import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs'
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { createServer } from 'node:http'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -84,7 +84,9 @@ async function request(origin, pathname, {
 async function registerAndUpload(origin, intakeId, role, fileName, bytes, ownerRole = 'owner') {
   const mediaType = fileName.endsWith('.pdf')
     ? 'application/pdf'
-    : 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+    : fileName.endsWith('.mp3')
+      ? 'audio/mpeg'
+      : 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
   const registered = await request(origin, `/api/source-intakes/${intakeId}/files`, {
     method: 'POST',
     role: ownerRole,
@@ -110,7 +112,102 @@ async function registerAndUpload(origin, intakeId, role, fileName, bytes, ownerR
   return { fileId, uploaded }
 }
 
-function runSourceIntakeCli(origin, args) {
+function verifyLegacyDatabaseMigration() {
+  const migrationRoot = mkdtempSync(path.join(tmpdir(), 'eqb-source-intake-migration-'))
+  const migrationDbPath = path.join(migrationRoot, 'import-ops.sqlite')
+  try {
+    const legacy = new DatabaseSync(migrationDbPath)
+    legacy.exec(`
+      PRAGMA foreign_keys = ON;
+      CREATE TABLE source_intakes (
+        id TEXT PRIMARY KEY,
+        paper_name TEXT NOT NULL,
+        state TEXT NOT NULL,
+        current_submission_id TEXT,
+        handed_off_paper_id TEXT,
+        created_by TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL
+      );
+      CREATE TABLE source_intake_files (
+        id TEXT PRIMARY KEY,
+        intake_id TEXT NOT NULL REFERENCES source_intakes(id) ON DELETE CASCADE,
+        role TEXT NOT NULL CHECK (role IN (
+          'question_source', 'official_answers', 'question_and_answers'
+        )),
+        file_name TEXT NOT NULL,
+        extension TEXT NOT NULL,
+        media_type TEXT NOT NULL,
+        sha256 TEXT NOT NULL,
+        byte_length INTEGER NOT NULL,
+        active INTEGER NOT NULL DEFAULT 1 CHECK (active IN (0, 1)),
+        uploaded_at TEXT,
+        created_at TEXT NOT NULL
+      );
+      CREATE UNIQUE INDEX idx_source_intake_active_role
+        ON source_intake_files(intake_id, role) WHERE active = 1;
+      INSERT INTO source_intakes VALUES (
+        'intake-11111111-1111-4111-8111-111111111111',
+        'Legacy paper',
+        'draft',
+        NULL,
+        NULL,
+        'owner',
+        '2026-08-01T00:00:00.000Z',
+        '2026-08-01T00:00:00.000Z'
+      );
+      INSERT INTO source_intake_files VALUES (
+        'source-file-11111111-1111-4111-8111-111111111111',
+        'intake-11111111-1111-4111-8111-111111111111',
+        'question_source',
+        'legacy.pdf',
+        '.pdf',
+        'application/pdf',
+        'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+        12,
+        1,
+        NULL,
+        '2026-08-01T00:00:00.000Z'
+      );
+    `)
+    legacy.close()
+
+    createSourceIntakeStore({
+      dbPath: migrationDbPath,
+      filesRoot: path.join(migrationRoot, 'files'),
+    })
+    createSourceIntakeStore({
+      dbPath: migrationDbPath,
+      filesRoot: path.join(migrationRoot, 'files'),
+    })
+
+    const migrated = new DatabaseSync(migrationDbPath, { readOnly: true })
+    assert.equal(
+      migrated.prepare('SELECT role FROM source_intake_files').get().role,
+      'question_source',
+      'legacy file rows survive listening-role migration',
+    )
+    assert.equal(
+      migrated.prepare('PRAGMA table_info(source_intakes)').all()
+        .some((column) => column.name === 'target_paper_id'),
+      true,
+    )
+    assert.match(
+      migrated.prepare(`
+        SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'source_intake_files'
+      `).get().sql,
+      /listening_audio/,
+    )
+    assert.deepEqual(migrated.prepare('PRAGMA foreign_key_check').all(), [])
+    migrated.close()
+  } finally {
+    rmSync(migrationRoot, { recursive: true, force: true })
+  }
+}
+
+verifyLegacyDatabaseMigration()
+
+function runSourceIntakeCli(origin, args, { ampThreadId = orbThreadId } = {}) {
   return new Promise((resolve, reject) => {
     const child = spawn(
       process.execPath,
@@ -121,7 +218,7 @@ function runSourceIntakeCli(origin, args) {
           ...process.env,
           QUESTION_BANK_IMPORT_OPS_ORIGIN: origin,
           QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN: agentToken,
-          AMP_THREAD_ID: orbThreadId,
+          AMP_THREAD_ID: ampThreadId || '',
         },
         stdio: ['ignore', 'pipe', 'pipe'],
       },
@@ -556,6 +653,129 @@ try {
   assert.equal(handedOff.status, 200)
   assert.equal(handedOff.json.intake.state, 'handed_off')
 
+  const missingSupplementTarget = await request(origin, '/api/source-intakes', {
+    method: 'POST',
+    role: 'owner',
+    body: { targetPaperId: 'paper-not-in-review' },
+  })
+  assert.equal(missingSupplementTarget.status, 404)
+  assert.equal(
+    missingSupplementTarget.json.code,
+    'SOURCE_INTAKE_TARGET_PAPER_NOT_FOUND',
+  )
+
+  const supplementCreated = await request(origin, '/api/source-intakes', {
+    method: 'POST',
+    role: 'owner',
+    body: { targetPaperId: 'paper-existing-review' },
+  })
+  assert.equal(supplementCreated.status, 201)
+  assert.equal(supplementCreated.json.intake.mode, 'listening_supplement')
+  assert.equal(supplementCreated.json.intake.paperName, 'Existing review paper')
+  const supplementIntakeId = supplementCreated.json.intake.id
+  const supplementDocument = await request(
+    origin,
+    `/api/source-intakes/${supplementIntakeId}/files`,
+    {
+      method: 'POST',
+      role: 'owner',
+      body: {
+        role: 'question_source',
+        fileName: 'questions.pdf',
+        mediaType: 'application/pdf',
+        sha256: digest(pdf),
+        byteLength: pdf.length,
+      },
+    },
+  )
+  assert.equal(supplementDocument.status, 400)
+  assert.equal(supplementDocument.json.code, 'SOURCE_INTAKE_MODE_FILES_CONFLICT')
+
+  const fakeMp3 = Buffer.from('ID3 this is not MPEG audio')
+  const fakeAudio = await registerAndUpload(
+    origin,
+    supplementIntakeId,
+    'listening_audio',
+    'fake.mp3',
+    fakeMp3,
+  )
+  assert.equal(fakeAudio.uploaded.status, 400)
+  assert.equal(fakeAudio.uploaded.json.code, 'SOURCE_INTAKE_FILE_MAGIC_INVALID')
+  const mp3 = Buffer.alloc(500)
+  Buffer.from([0xff, 0xfb, 0x90, 0x64]).copy(mp3)
+  const audio = await registerAndUpload(
+    origin,
+    supplementIntakeId,
+    'listening_audio',
+    'listening.mp3',
+    mp3,
+  )
+  assert.equal(audio.uploaded.status, 200)
+  assert.equal(audio.uploaded.json.intake.state, 'ready_for_agent')
+  const supplementSubmitted = await request(
+    origin,
+    `/api/source-intakes/${supplementIntakeId}/submit`,
+    { method: 'POST', role: 'owner' },
+  )
+  assert.equal(supplementSubmitted.status, 201)
+  assert.equal(
+    supplementSubmitted.json.submission.snapshot.schemaVersion,
+    'source-intake-submission-v2',
+  )
+  assert.equal(supplementSubmitted.json.submission.snapshot.mode, 'listening_supplement')
+  assert.equal(
+    supplementSubmitted.json.submission.snapshot.targetPaperId,
+    'paper-existing-review',
+  )
+  assert.deepEqual(
+    supplementSubmitted.json.submission.snapshot.files.map((file) => file.role),
+    ['listening_audio'],
+  )
+  const supplementClaim = await request(
+    origin,
+    `/api/import-agent-source-intakes/${supplementSubmitted.json.submission.id}/claim`,
+    { method: 'POST', role: 'import_agent', body: { leaseSeconds: 60 } },
+  )
+  assert.equal(supplementClaim.status, 200)
+  const supplementLease = supplementClaim.json.claim.leaseToken
+  const wrongSupplementTarget = await request(
+    origin,
+    `/api/import-agent-source-intakes/${supplementSubmitted.json.submission.id}/handoff`,
+    {
+      method: 'POST',
+      role: 'import_agent',
+      headers: { 'x-source-intake-lease': supplementLease },
+      body: {
+        paperId: 'paper-wrong-target',
+        initialization: initializationReceipt(
+          supplementSubmitted.json.submission,
+          'paper-wrong-target',
+        ),
+      },
+    },
+  )
+  assert.equal(wrongSupplementTarget.status, 400)
+  assert.equal(wrongSupplementTarget.json.code, 'SOURCE_INTAKE_TARGET_PAPER_MISMATCH')
+  const supplementHandoff = await request(
+    origin,
+    `/api/import-agent-source-intakes/${supplementSubmitted.json.submission.id}/handoff`,
+    {
+      method: 'POST',
+      role: 'import_agent',
+      headers: { 'x-source-intake-lease': supplementLease },
+      body: {
+        paperId: 'paper-existing-review',
+        initialization: initializationReceipt(
+          supplementSubmitted.json.submission,
+          'paper-existing-review',
+        ),
+      },
+    },
+  )
+  assert.equal(supplementHandoff.status, 200)
+  assert.equal(supplementHandoff.json.intake.state, 'handed_off')
+  assert.equal(supplementHandoff.json.intake.handedOffPaperId, 'paper-existing-review')
+
   clock = new Date('2026-08-30T01:00:00.000Z')
   assert.equal(store.listQueue().length, 0)
 
@@ -825,6 +1045,148 @@ try {
   } finally {
     rmSync(cliInbox, { recursive: true, force: true })
     rmSync(cliPaperDirectory, { recursive: true, force: true })
+  }
+
+  const audioCliCreated = await request(origin, '/api/source-intakes', {
+    method: 'POST',
+    role: 'owner',
+    body: {
+      paperName: 'CLI 听力交接验证卷',
+      sources: [{ platform: 'teacher_group', sourceName: '听力验证教师群' }],
+    },
+  })
+  const audioCliIntakeId = audioCliCreated.json.intake.id
+  await registerAndUpload(
+    origin,
+    audioCliIntakeId,
+    'question_and_answers',
+    'audio-cli-combined.pdf',
+    cliPdf,
+  )
+  const audioSourcePath = path.join(tempRoot, 'listening.mp3')
+  execFileSync('ffmpeg', [
+    '-v', 'error',
+    '-f', 'lavfi',
+    '-i', 'sine=frequency=440:duration=12',
+    '-codec:a', 'libmp3lame',
+    '-b:a', '96k',
+    audioSourcePath,
+  ])
+  const audioBytes = readFileSync(audioSourcePath)
+  await registerAndUpload(
+    origin,
+    audioCliIntakeId,
+    'listening_audio',
+    'listening.mp3',
+    audioBytes,
+  )
+  const audioCliSubmitted = await request(
+    origin,
+    `/api/source-intakes/${audioCliIntakeId}/submit`,
+    { method: 'POST', role: 'owner' },
+  )
+  const audioSubmissionId = audioCliSubmitted.json.submission.id
+  const audioInbox = path.join(
+    path.resolve(import.meta.dirname, 'import-pipeline/source-intake-inbox'),
+    audioSubmissionId,
+  )
+  const audioPaperId = `paper-listening-source-intake-${process.pid}`
+  const audioPaperDirectory = path.join(
+    path.resolve(import.meta.dirname, 'import-pipeline/papers'),
+    audioPaperId,
+  )
+  const audioTranscript = [
+    'Good morning everyone and welcome to the English listening test.',
+    'The woman plans to meet her friend at the central library after lunch.',
+    'They discuss the weather, train schedule, and a school music performance.',
+    'Listen carefully and answer every question according to the conversation.',
+  ].join(' ')
+  const audioAsrFixture = path.join(tempRoot, 'listening-asr-fixture.json')
+  const audioReference = path.join(tempRoot, 'listening-reference.json')
+  const audioReview = path.join(tempRoot, 'listening-content-review.json')
+  writeFileSync(audioAsrFixture, `${JSON.stringify({
+    engine: {
+      name: 'deterministic-fixture',
+      model: 'fixture-en',
+      version: '1',
+      computeType: 'fixture',
+    },
+    language: 'en',
+    languageProbability: 1,
+    segments: [{
+      startSeconds: 0.2,
+      endSeconds: 11.5,
+      text: audioTranscript,
+      avgLogProbability: -0.2,
+      noSpeechProbability: 0.01,
+    }],
+  }, null, 2)}\n`)
+  try {
+    await runSourceIntakeCli(origin, ['claim', audioSubmissionId], { ampThreadId: null })
+    await runSourceIntakeCli(origin, ['download', audioSubmissionId], { ampThreadId: null })
+    const initOutput = await runSourceIntakeCli(origin, [
+      'init',
+      audioSubmissionId,
+      '--paper-id',
+      audioPaperId,
+      '--asr-fixture',
+      audioAsrFixture,
+    ], { ampThreadId: null })
+    assert.match(initOutput, /awaiting_agent_content_review/)
+    assert.equal(
+      existsSync(path.join(audioPaperDirectory, 'signals/source-intake-initialization.json')),
+      false,
+      'audio intake cannot hand off before Agent content review',
+    )
+    const asrPath = path.join(
+      audioPaperDirectory,
+      'materialization/listening-audio/asr-v1.json',
+    )
+    const asrDigest = digest(readFileSync(asrPath))
+    writeFileSync(audioReference, `${JSON.stringify({
+      schemaVersion: 'listening-audio-reference-v1',
+      paperId: audioPaperId,
+      basis: 'authoritative_transcript',
+      text: audioTranscript,
+    }, null, 2)}\n`)
+    writeFileSync(audioReview, `${JSON.stringify({
+      schemaVersion: 'listening-audio-content-review-v1',
+      paperId: audioPaperId,
+      reviewedBy: 'import_agent',
+      reviewedAt: '2026-09-01T00:00:00.000Z',
+      reviewedTranscriptSha256: asrDigest,
+      untrustedContentHandledAsData: true,
+      verdict: 'pass',
+      summary: 'Full transcript reviewed as untrusted quoted content; no issue found.',
+      flaggedRanges: [],
+    }, null, 2)}\n`)
+    const finalizeOutput = await runSourceIntakeCli(origin, [
+      'finalize-listening',
+      audioSubmissionId,
+      '--paper-id',
+      audioPaperId,
+      '--review',
+      audioReview,
+      '--reference',
+      audioReference,
+    ], { ampThreadId: null })
+    assert.match(finalizeOutput, /initialized_locally/)
+    const audioManifest = JSON.parse(readFileSync(
+      path.join(audioPaperDirectory, 'universal-source-manifest.json'),
+      'utf8',
+    ))
+    assert.equal(audioManifest.schemaVersion, 'universal-nck1-source-manifest-v2')
+    assert.equal(audioManifest.attachments.length, 4)
+    const handoffOutput = await runSourceIntakeCli(origin, [
+      'handoff',
+      audioSubmissionId,
+      '--paper-id',
+      audioPaperId,
+    ], { ampThreadId: null })
+    assert.equal(JSON.parse(handoffOutput).state, 'handed_off')
+  } finally {
+    rmSync(audioInbox, { recursive: true, force: true })
+    rmSync(audioPaperDirectory, { recursive: true, force: true })
   }
 
   const storedQuestion = store.fileForDownload

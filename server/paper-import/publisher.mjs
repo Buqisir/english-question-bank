@@ -1265,6 +1265,15 @@ export function publishUniversalNck1Import({
     reviewRootDir,
     { requireAnalyses: true },
   )
+  if (projection.manifest.schemaVersion === 'universal-nck1-source-manifest-v2') {
+    return canonicalAdmissionFailure({
+      disposition: 'unsupported',
+      diagnostics: [{
+        code: 'LISTENING_AUDIO_PUBLICATION_NOT_SUPPORTED',
+        message: 'Listening audio evidence may enter Review but cannot publish before listening publication support is active',
+      }],
+    })
+  }
   const expectedIdentity = {
     sourceDigest: projection.sourceDigest,
     candidateDigest: projection.candidateDigest,

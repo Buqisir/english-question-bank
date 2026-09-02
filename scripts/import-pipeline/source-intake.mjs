@@ -13,10 +13,12 @@ import {
 } from 'node:fs'
 import path from 'node:path'
 
+import { assertListeningAudioManifest } from '../../server/paper-import/listeningAudioEvidence.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 
 const inboxRoot = path.join(import.meta.dirname, 'source-intake-inbox')
 const universalCli = path.join(import.meta.dirname, 'universal-nck1.mjs')
+const reviewCli = path.join(import.meta.dirname, 'review.mjs')
 const papersRoot = path.join(import.meta.dirname, 'papers')
 const submissionIdPattern = /^submission-[a-f0-9-]{36}$/
 const paperIdPattern = /^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/
@@ -307,9 +309,24 @@ function assertInitializedWorkspace(downloadManifest, paperId) {
   }
   const sourceDocuments = (sourceManifest.documents || [])
     .filter((document) => !document.renditionOf)
+  const sourceArtifacts = [...sourceDocuments]
+  if (sourceManifest.schemaVersion === 'universal-nck1-source-manifest-v2') {
+    assertListeningAudioManifest(paperDirectory, sourceManifest)
+    const originalAudio = sourceManifest.attachments.find((attachment) =>
+      attachment.role === 'listening_audio_original')
+    sourceArtifacts.push({
+      role: 'listening_audio',
+      sha256: originalAudio.sha256,
+      byteLength: originalAudio.byteLength,
+    })
+  }
   const expectedIdentities = downloadManifest.files.map(identityKey).sort()
-  const actualIdentities = sourceDocuments.map(identityKey).sort()
-  if (JSON.stringify(actualIdentities) !== JSON.stringify(expectedIdentities)) {
+  const actualIdentities = sourceArtifacts.map(identityKey).sort()
+  const supplement = downloadManifest.submission.snapshot.mode === 'listening_supplement'
+  const identitiesMatch = supplement
+    ? expectedIdentities.every((identity) => actualIdentities.includes(identity))
+    : JSON.stringify(actualIdentities) === JSON.stringify(expectedIdentities)
+  if (!identitiesMatch) {
     fail(`Initialized workspace does not use the claimed source files: ${paperId}`)
   }
   const directoryPrefix = `${path.resolve(paperDirectory)}${path.sep}`
@@ -377,17 +394,92 @@ async function initialize(submissionId, paperId) {
   if (!paperIdPattern.test(paperId || '')) fail('init requires --paper-id paper-…')
   const manifest = readDownloadManifest(submissionId)
   await heartbeat(submissionId)
+  const supplement = manifest.submission.snapshot.mode === 'listening_supplement'
+  if (supplement && paperId !== manifest.submission.snapshot.targetPaperId) {
+    fail('Listening supplement --paper-id must equal the immutable targetPaperId')
+  }
+  const audioFiles = manifest.files.filter((file) => file.role === 'listening_audio')
+  const documentFiles = manifest.files.filter((file) => file.role !== 'listening_audio')
+  if (audioFiles.length > 1 || (supplement && (audioFiles.length !== 1 || documentFiles.length > 0))) {
+    fail('Listening supplement must contain exactly one MP3 and no question documents')
+  }
+  if (supplement) {
+    execFileSync(
+      process.execPath,
+      [reviewCli, 'hydrate', paperId],
+      { cwd: path.resolve(import.meta.dirname, '../..'), stdio: 'inherit' },
+    )
+  } else {
+    const args = [
+      universalCli,
+      'init',
+      paperId,
+      '--paper-name',
+      manifest.submission.snapshot.paperName,
+      '--provenance',
+      provenance(manifest.submission.snapshot),
+    ]
+    for (const file of documentFiles) args.push('--source', `${file.role}=${file.localPath}`)
+    execFileSync(
+      process.execPath,
+      args,
+      { cwd: path.resolve(import.meta.dirname, '../..'), stdio: 'inherit' },
+    )
+  }
+  if (audioFiles.length === 1) {
+    const args = [
+      universalCli,
+      'stage-listening-audio',
+      paperId,
+      '--audio',
+      audioFiles[0].localPath,
+    ]
+    if (option('--asr-fixture')) args.push('--asr-fixture', option('--asr-fixture'))
+    execFileSync(
+      process.execPath,
+      args,
+      { cwd: path.resolve(import.meta.dirname, '../..'), stdio: 'inherit' },
+    )
+    console.log(JSON.stringify({
+      submissionId,
+      paperId,
+      state: 'awaiting_agent_content_review',
+      next: supplement
+        ? `Read the complete ASR transcript, then run source-intake.mjs finalize-listening ${submissionId} --paper-id ${paperId} --review <content-review.json>`
+        : `Run universal-nck1.mjs materialize ${paperId} so the source transcript/questions are available; read the complete ASR transcript; then run source-intake.mjs finalize-listening ${submissionId} --paper-id ${paperId} --review <content-review.json>`,
+    }, null, 2))
+    return
+  }
+  recordInitialization(manifest, paperId)
+  console.log(JSON.stringify({
+    submissionId,
+    paperId,
+    state: 'initialized_locally',
+    next: `node scripts/import-pipeline/source-intake.mjs handoff ${submissionId} --paper-id ${paperId}`,
+  }, null, 2))
+}
+
+async function finalizeListening(submissionId, paperId) {
+  if (!paperIdPattern.test(paperId || '')) {
+    fail('finalize-listening requires --paper-id paper-…')
+  }
+  const reviewPath = option('--review')
+  if (!reviewPath) fail('finalize-listening requires --review <content-review.json>')
+  const manifest = readDownloadManifest(submissionId)
+  await heartbeat(submissionId)
   const args = [
     universalCli,
-    'init',
+    'finalize-listening-audio',
     paperId,
-    '--paper-name',
-    manifest.submission.snapshot.paperName,
-    '--provenance',
-    provenance(manifest.submission.snapshot),
+    '--review',
+    reviewPath,
   ]
-  for (const file of manifest.files) args.push('--source', `${file.role}=${file.localPath}`)
-  execFileSync(process.execPath, args, { cwd: path.resolve(import.meta.dirname, '../..'), stdio: 'inherit' })
+  if (option('--reference')) args.push('--reference', option('--reference'))
+  execFileSync(
+    process.execPath,
+    args,
+    { cwd: path.resolve(import.meta.dirname, '../..'), stdio: 'inherit' },
+  )
   recordInitialization(manifest, paperId)
   console.log(JSON.stringify({
     submissionId,
@@ -448,12 +540,14 @@ async function main() {
     console.log(JSON.stringify({ submissionId, leaseExpiresAt: result.leaseExpiresAt }, null, 2))
   } else if (command === 'init') {
     await initialize(validSubmissionId(submissionId), option('--paper-id'))
+  } else if (command === 'finalize-listening') {
+    await finalizeListening(validSubmissionId(submissionId), option('--paper-id'))
   } else if (command === 'needs-owner') {
     await needsOwner(validSubmissionId(submissionId))
   } else if (command === 'handoff') {
     await handoff(validSubmissionId(submissionId), option('--paper-id'))
   } else {
-    fail('Usage: source-intake.mjs list|claim|download|heartbeat|init|needs-owner|handoff ...')
+    fail('Usage: source-intake.mjs list|claim|download|heartbeat|init|finalize-listening|needs-owner|handoff ...')
   }
 }
 
