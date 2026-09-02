@@ -52,12 +52,12 @@ original/A-D comparison pass. Its batch, candidates, and state all live under
 `.scratch/vocabulary-audio-repair-v1/`; neither pass changes formal MP3 assets
 until the owner has selected the replacements.
 
-`.github/workflows/verify.yml` is the manually dispatched hosted fallback. The
-dedicated 16-core Amp Orb reports the fast E2E context `Amp Orb Verify (fast)`
-and the aggregate full context `Amp Orb Verify`; branch protection requires
-only the aggregate context. Before any merge to `main` every currently required
-check must be green, and the post-merge `main` run must be confirmed green
-(AGENTS.md RM gate).
+`.github/workflows/verify.yml` is the hosted PR and `main` merge authority while
+Amp bug `amp_bug_0uiggF5jWG6i6iaB72BATT` blocks durable webhook delivery to the
+dedicated CI Orb. Branch protection requires hosted `verify` and `e2e`; both
+must be green before merge, and the post-merge `main` run must be confirmed
+green. The 16-core Orb's `Amp Orb Verify (fast)` and `Amp Orb Verify` contexts
+remain informational during this rollback (AGENTS.md RM gate).
 
 ## Stable CI entrypoint
 

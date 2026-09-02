@@ -59,20 +59,20 @@ uniquely supplies; otherwise keep it outside daily packs.
 ## Dedicated CI Orb
 
 - The development Orb runs the focused behavioral checks and proportionate
-  local pack above. The final full-suite merge gate runs on the dedicated CI
-  Orb; do not substitute a broad local run for that authority.
+  local pack above. While Amp bug `amp_bug_0uiggF5jWG6i6iaB72BATT` blocks the
+  dedicated CI Orb webhook, the final merge gate is the GitHub-hosted Verify
+  workflow; do not substitute a broad local run for that authority.
 - After the Owner authorizes commit, push, and PR actions, normal GitHub PR
-  webhooks automatically queue the current GitHub test merge. Do not manually
-  start or drain CI, synthesize or retry webhook events, or copy an uncommitted
-  workspace snapshot into the CI Orb.
-- CI must resolve the current `refs/pull/<number>/merge` and verify its ordered
-  base/head parents. `Amp Orb Verify` is the only required status and must be
-  `SUCCESS` before merge. `Amp Orb Verify (fast)` is informational only.
-- The GitHub-hosted Verify workflow is a `workflow_dispatch`-only fallback. Do
-  not trigger it unless the Owner explicitly requests fallback proof, and do
-  not treat hosted `verify` or `e2e` as merge authority.
-- Never dismiss a missing or failed `Amp Orb Verify` as unrelated, bypass it, or
-  merge around it. Diagnose and fix the failure or stop. See
+  events automatically run hosted `verify` and `e2e` on GitHub's current test
+  merge. Both contexts are required and must be `SUCCESS` before merge.
+- `workflow_dispatch` remains available for explicitly authorized recovery
+  diagnostics, but a manual run is not a substitute for the required PR run.
+- The dedicated CI Orb and its `Amp Orb Verify` / `Amp Orb Verify (fast)`
+  statuses are informational during this rollback. Do not manually start or
+  drain it, synthesize or retry webhook events, or copy an uncommitted workspace
+  snapshot into it.
+- Never dismiss a missing or failed required hosted check as unrelated, bypass
+  it, or merge around it. Diagnose and fix the failure or stop. See
   `docs/adr/0022-amp-orb-ci-merge-authority.md` for the durable contract.
 
 ## Owner QA
