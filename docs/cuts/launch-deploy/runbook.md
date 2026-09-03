@@ -202,6 +202,7 @@ node scripts/amp-orb-deploy.mjs plan
 node scripts/amp-orb-deploy.mjs bootstrap-preflight --owner-said-preflight
 node scripts/amp-orb-deploy.mjs baseline --owner-said-baseline-migration
 node scripts/amp-orb-deploy.mjs bootstrap --owner-said-release-bootstrap
+node scripts/amp-orb-deploy.mjs bootstrap-resume --owner-said-release-bootstrap-resume
 node scripts/amp-orb-deploy.mjs preflight --owner-said-preflight
 node scripts/amp-orb-deploy.mjs deploy --owner-said-deploy-latest
 ```
@@ -210,10 +211,14 @@ node scripts/amp-orb-deploy.mjs deploy --owner-said-deploy-latest
 read-only legacy-host check. `baseline` is the transition-only migration from a
 known legacy state to the exact healthy `main`; it is not an ordinary deploy.
 `bootstrap` creates the release layout and restricted controller boundary only
-after that exact baseline is healthy. After cutover, `preflight` goes only
-through the root-owned forced-command controller. Daily `deploy` resolves
-current `main` itself and sends only that exact SHA—never an Owner-supplied
-hash—to the host.
+after that exact baseline is healthy. It stages only the inert hash-bound payload
+first, then writes a private durable recovery record before invoking the host
+transaction. `bootstrap-resume` is a separately authorized finalization path for
+an interrupted caller: it loads that exact record and cannot repeat the host
+bootstrap transaction. After cutover, `preflight` goes
+only through the root-owned forced-command controller. Daily `deploy` resolves
+current `main` itself and sends only that exact SHA—never an Owner-supplied hash—to
+the host.
 
 The baseline operator keeps its root process at umask `077`, but every package
 install, Chromium smoke, and app build child explicitly uses umask `022`. It
@@ -241,8 +246,18 @@ environment or shared data, inside bounded transient systemd cgroups that
 terminate leftover children before root seals the tree. Linked privileged
 ancestors fail closed, and deployment-control files are restored from the
 root-private exact-target Git archive after candidate scripts finish. The
-controller key is restricted to the installed host command; ordinary release
-code cannot change deployment rules. Keep the
+bootstrap payload is first hash-verified and retained root-private, then runs
+as a manager-owned transient service so loss of SSH does not create an
+ambiguous abandoned transaction. The controller key is installed on the
+actual non-root SSH transport account with a forced transport wrapper; that
+wrapper accepts only the bounded command grammar and enters the root-owned
+controller through `sudo -n`. Ordinary release code cannot change deployment
+rules. This transition consumes the existing, explicitly named management
+account, its one proven bootstrap key, and its already-working `sudo -n`
+boundary; it is not a host-account provisioner and does not create an account or
+silently edit sudoers. The bootstrap validates those prerequisites, and both the
+new route before retirement and the same route after retirement must execute the
+root-owned strict entrypoint successfully. Keep the
 legacy `deploy/eqb.service`, `deploy/Caddyfile`, and `scripts/deploy-remote.sh`
 only for pre-cutover operation and rollback evidence; do not use the legacy
 in-place deploy after a successful cutover. Releases are retained for rollback;
@@ -260,12 +275,17 @@ the safe production baseline, then repeat the normal command. Ordinary reviewed
 server code remains deployable; later authenticated API writes are not actions
 performed or authorized by the deployment command itself.
 
-The forced entrypoint runs the controller and deployment lock in a transient
-host systemd service. An Orb/SSH disconnect does not cancel an in-flight build,
-health check, or rollback; candidate output remains in a private host log.
-Reconnect and run an authorized read-only `preflight` to determine whether the
-lock is still held and which exact release is healthy. Host receipts/logs remain
-available for root-side incident diagnostics; do not launch a second attempt.
+The forced transport entrypoint parses the command before its strict root
+entrypoint runs the controller and deployment lock in a transient host systemd
+service with null input and journal output. An Orb/SSH disconnect does not
+cancel an in-flight build, health check, or rollback; candidate output remains
+in a private host log. For an ordinary post-cutover deploy, reconnect and run an
+authorized read-only `preflight` to determine whether the lock is still held and
+which exact release is healthy. For an interrupted one-time bootstrap, preserve
+the private Orb recovery record, classify read-only, and use only the separately
+authorized `bootstrap-resume` finalizer; do not launch a second host bootstrap.
+Host receipts, attempt logs, and unit journals remain available for root-side
+incident diagnostics.
 
 Repository readiness still grants no production authority. Before cutover:
 
@@ -280,8 +300,20 @@ Repository readiness still grants no production authority. Before cutover:
    forced-controller route, atomically retire the exact old privileged key,
    prove that the new key still works and the old key is rejected, and rotate
    only `QUESTION_BANK_DEPLOY_SSH_PRIVATE_KEY` in the current Deployment project
-   via stdin. If the command reports failure after starting the host attempt,
-   stop without rerunning and preserve the reported private recovery identity;
+   via stdin. The target SHA, host unit, generated controller identity, and old
+   bootstrap identity must already exist in the private recovery record. If the
+   caller is interrupted after host work starts, stop without rerunning
+   `bootstrap`; after read-only classification and fresh direct Owner
+   authorization, use `bootstrap-resume --owner-said-release-bootstrap-resume`.
+   Resume revalidates the recorded SHA's hosted checks, proves the new route,
+   classifies the old identity as accepted or exact public-key rejection,
+   performs retirement only when still needed, re-proves both routes, rotates
+   the Secret last, and terminalizes recovery only after rotation succeeds.
+   Terminalization atomically renames the whole recovery directory before
+   deleting either private identity; a non-secret private completion receipt is
+   retained, and a later resume can finish a partially interrupted identity
+   cleanup without repeating host or Secret mutation. Any other old-key result
+   fails closed and retains active recovery state;
 6. after successful Secret rotation, refresh the Deployment Orb environment
    with `amp orb restart-processes --thread "$AMP_THREAD_ID"`, then obtain
    authorization for and run the forced-controller `preflight`;

@@ -1,24 +1,37 @@
 #!/usr/bin/env node
 
 import { execFileSync, spawnSync } from 'node:child_process'
+import { createHash, randomUUID } from 'node:crypto'
 import { chmodSync, mkdtempSync, readFileSync, rmSync, statSync } from 'node:fs'
-import { tmpdir } from 'node:os'
+import { homedir, tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import {
   AMP_ORB_DEPLOY_REPOSITORY,
+  assertAuthoritativeDeploymentChecks,
+  bootstrapPayloadStageInput,
   bootstrapReleaseLayout,
+  clearCompletedReleaseBootstrapRecovery,
+  completeReleaseBootstrapRecovery,
+  createReleaseBootstrapRecovery,
   deployLatestRelease,
   deploymentGitHubApiArgs,
   deploymentSSHInvocation,
+  deploymentSSHTransportUser,
   materializeDeploymentCredentials,
   migrateLegacyProductionBaseline,
   parseBootstrapKeyRetirementReceipt,
   parseDeploymentControllerOutput,
   parseDeploymentControllerPreflight,
   parseDeploymentPreflightOutput,
+  parseReleaseBootstrapFailure,
+  readCompletedReleaseBootstrapRecovery,
+  readReleaseBootstrapRecovery,
+  removeReleaseBootstrapRecovery,
   requireReleaseLayoutBootstrapAuthorization,
+  requireReleaseLayoutBootstrapResumeAuthorization,
+  resumeReleaseLayoutBootstrap,
   resolveLatestDeploymentCandidate,
 } from './lib/ampOrbDeploy.mjs'
 
@@ -33,6 +46,7 @@ const bootstrapKeyRetirementSource = fileURLToPath(
   new URL('../deploy/retire-eqb-bootstrap-key.mjs', import.meta.url),
 )
 const legacyReleaseChildDigest = '25d8acc95172626cf03de96b2cc61d0f81508352082b976b9f1095bfbe15d4d5'
+const bootstrapRecoveryRoot = path.join(homedir(), '.local', 'state', 'eqb-deployment')
 
 function runGit(args) {
   return execFileSync('git', args, {
@@ -106,6 +120,11 @@ function invokeController(remoteArgs, credentials) {
   })
   if (result.error) throw result.error
   if (result.status === 75) throw new Error('Another production deployment is already running')
+  if (result.status === 255) {
+    throw new Error(
+      'Production controller outcome is unknown after SSH transport failure; inspect preflight and host receipts before any retry',
+    )
+  }
   if (!String(result.stdout || '').trim()) {
     throw new Error(`Deployment controller exited without a receipt (code ${result.status})`)
   }
@@ -240,7 +259,7 @@ function publicKeyBody(privateKeyPath) {
   return fields[1]
 }
 
-function createControllerIdentity() {
+function generateControllerIdentity() {
   const directory = mkdtempSync(path.join(tmpdir(), 'eqb-controller-identity-'))
   chmodSync(directory, 0o700)
   const privateKeyPath = path.join(directory, 'id_ed25519')
@@ -276,6 +295,59 @@ function createControllerIdentity() {
   }
 }
 
+function identityFromRecovery(recovery, { projectId, transportTarget }) {
+  if (
+    recovery.projectId !== projectId
+    || recovery.transportTargetDigest !== createHash('sha256').update(transportTarget).digest('hex')
+  ) {
+    throw new Error('Bootstrap recovery does not belong to this Deployment project and SSH target')
+  }
+  const controllerPublicKeyBody = publicKeyBody(recovery.controllerPrivateKeyPath)
+  const bootstrapPublicKeyBody = publicKeyBody(recovery.bootstrapPrivateKeyPath)
+  if (
+    recovery.controllerPublicKeyDigest
+      !== createHash('sha256').update(controllerPublicKeyBody).digest('hex')
+    || recovery.bootstrapPublicKeyDigest
+      !== createHash('sha256').update(bootstrapPublicKeyBody).digest('hex')
+  ) {
+    throw new Error('Bootstrap recovery identity digest is invalid')
+  }
+  return {
+    directory: recovery.directory,
+    unit: recovery.unit,
+    privateKeyPath: recovery.controllerPrivateKeyPath,
+    publicKeyBody: controllerPublicKeyBody,
+    bootstrapPrivateKeyPath: recovery.bootstrapPrivateKeyPath,
+    bootstrapPublicKeyBody,
+    complete() {
+      return completeReleaseBootstrapRecovery(recovery)
+    },
+    discard() {
+      removeReleaseBootstrapRecovery(recovery)
+    },
+  }
+}
+
+function createControllerIdentityRecovery({ candidate: resolved, credentials, projectId, transportTarget }) {
+  const generated = generateControllerIdentity()
+  try {
+    const recovery = createReleaseBootstrapRecovery({
+      stateRoot: bootstrapRecoveryRoot,
+      candidateSha: resolved.sha,
+      projectId,
+      transportTarget,
+      unit: `eqb-release-bootstrap-${randomUUID().replaceAll('-', '')}`,
+      controllerPrivateKey: readFileSync(generated.privateKeyPath, 'utf8'),
+      controllerPublicKeyBody: generated.publicKeyBody,
+      bootstrapPrivateKey: readFileSync(credentials.keyPath, 'utf8'),
+      bootstrapPublicKeyBody: publicKeyBody(credentials.keyPath),
+    })
+    return identityFromRecovery(recovery, { projectId, transportTarget })
+  } finally {
+    generated.cleanup()
+  }
+}
+
 function deploymentProjectId() {
   const projectId = String(process.env.AMP_PROJECT_ID || '')
   if (!/^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/u.test(projectId)) {
@@ -284,42 +356,134 @@ function deploymentProjectId() {
   return projectId
 }
 
-function invokeReleaseBootstrap({ candidate, identity }) {
+function stageReleaseBootstrapPayload(candidate) {
   return withDeploymentCredentials((credentials) => {
-    const invocation = deploymentSSHInvocation({
-      host: String(process.env.QUESTION_BANK_DEPLOY_SSH_HOST || ''),
+    const host = String(process.env.QUESTION_BANK_DEPLOY_SSH_HOST || '')
+    const bootstrapSource = readFileSync(releaseBootstrapSource, 'utf8')
+    const bootstrapDigest = createHash('sha256').update(bootstrapSource).digest('hex')
+    const payload = `/var/backups/eqb/bootstrap-payload-${candidate.sha}-${bootstrapDigest.slice(0, 16)}.sh`
+    const stageInvocation = deploymentSSHInvocation({
+      host,
       keyPath: credentials.keyPath,
       knownHostsPath: credentials.knownHostsPath,
       remoteArgs: [
         'sudo', '-n',
+        '/bin/bash',
+        '-s',
+        '--',
+        candidate.sha,
+        bootstrapDigest,
+      ],
+    })
+    const staged = spawnSync(stageInvocation.command, stageInvocation.args, {
+      encoding: 'utf8',
+      input: bootstrapPayloadStageInput(bootstrapSource, bootstrapDigest),
+      maxBuffer: 4 * 1024 * 1024,
+      timeout: 60_000,
+    })
+    if (staged.error) throw staged.error
+    if (staged.status === 75) throw new Error('Another bootstrap payload staging operation is running')
+    if (
+      staged.status !== 0
+      || String(staged.stdout || '').trim() !== `EQB bootstrap payload staged: ${candidate.sha}`
+    ) {
+      throw new Error('Release-layout bootstrap payload staging failed')
+    }
+    return payload
+  })
+}
+
+function invokeReleaseBootstrap({ candidate, identity, payload }) {
+  return withDeploymentCredentials((credentials) => {
+    const host = String(process.env.QUESTION_BANK_DEPLOY_SSH_HOST || '')
+    const transportUser = deploymentSSHTransportUser(host)
+    const invocation = deploymentSSHInvocation({
+      host,
+      keyPath: identity.bootstrapPrivateKeyPath,
+      knownHostsPath: credentials.knownHostsPath,
+      remoteArgs: [
+        'sudo', '-n',
+        '/usr/bin/systemd-run',
+        '--quiet',
+        '--wait',
+        '--collect',
+        `--unit=${identity.unit}`,
+        '--property=Type=exec',
+        '--property=KillMode=control-group',
+        '--property=StandardInput=null',
+        '--property=StandardOutput=journal',
+        '--property=StandardError=journal',
+        '--',
         '/usr/bin/flock',
         '--exclusive',
         '--nonblock',
         '--conflict-exit-code', '75',
         '/var/lock/eqb-release-bootstrap.lock',
         '/usr/bin/env',
+        `EQB_DEPLOY_TRANSPORT_USER=${transportUser}`,
+        `EQB_DEPLOY_BOOTSTRAP_PUBLIC_KEY_BODY=${identity.bootstrapPublicKeyBody}`,
         `EQB_DEPLOY_CONTROLLER_PUBLIC_KEY_BODY=${identity.publicKeyBody}`,
         '/bin/bash',
-        '-s',
-        '--',
+        payload,
         candidate.sha,
         '-',
       ],
     })
     const remote = spawnSync(invocation.command, invocation.args, {
       encoding: 'utf8',
-      input: readFileSync(releaseBootstrapSource, 'utf8'),
-      maxBuffer: 4 * 1024 * 1024,
       timeout: 3 * 60 * 60 * 1000,
     })
-    if (remote.error) throw remote.error
+    const journalInvocation = deploymentSSHInvocation({
+      host,
+      keyPath: identity.bootstrapPrivateKeyPath,
+      knownHostsPath: credentials.knownHostsPath,
+      remoteArgs: [
+        'sudo', '-n',
+        '/usr/bin/journalctl',
+        '--no-pager',
+        '--output=cat',
+        `--unit=${identity.unit}.service`,
+      ],
+    })
+    const journal = spawnSync(journalInvocation.command, journalInvocation.args, {
+      encoding: 'utf8',
+      timeout: 30_000,
+    })
+    if (journal.error) throw journal.error
+    if (journal.status !== 0) {
+      throw new Error('Release-layout bootstrap journal evidence is unavailable')
+    }
+    const journalOutput = `${journal.stdout || ''}\n${journal.stderr || ''}`
+    const failureMarkers = journalOutput.split('\n')
+      .filter((line) => line.startsWith('EQB_BOOTSTRAP_FAILURE '))
+    if (failureMarkers.length > 0) {
+      let failure
+      try {
+        failure = parseReleaseBootstrapFailure(journalOutput, candidate.sha)
+      } catch {
+        throw new Error('Release-layout bootstrap returned an invalid failure marker')
+      }
+      if (
+        Number.isInteger(remote.status)
+        && remote.status !== 255
+        && remote.status !== failure.exitCode
+      ) throw new Error('Release-layout bootstrap status does not match its failure marker')
+      throw new Error(
+        `Release-layout bootstrap failed at ${failure.failedStage} `
+        + `(code ${failure.exitCode}; rollback ${failure.rollbackHealthy ? 'healthy' : 'unhealthy'}; `
+        + `${failure.evidenceRetained ? 'private evidence retained' : 'no private evidence available'})`,
+      )
+    }
+    const completion = `EQB deployment bootstrap complete: ${candidate.sha}`
+    const completions = journalOutput.split('\n').filter((line) => line === completion)
+    if (completions.length === 1) return
     if (remote.status === 75) throw new Error('Another release-layout bootstrap is already running')
-    if (remote.status !== 0) {
-      throw new Error(`Release-layout bootstrap failed (code ${remote.status})`)
+    if (remote.error || !Number.isInteger(remote.status) || remote.status === 255) {
+      throw new Error(
+        `Release-layout bootstrap outcome is unknown for ${identity.unit}; use the explicit recovery command instead of retrying`,
+      )
     }
-    if (String(remote.stdout || '').trim() !== `EQB deployment bootstrap complete: ${candidate.sha}`) {
-      throw new Error('Release-layout bootstrap completion response is invalid')
-    }
+    throw new Error(`Release-layout bootstrap failed without valid journal evidence (code ${remote.status})`)
   })
 }
 
@@ -342,9 +506,11 @@ function readNewControllerPreflight(identity) {
 
 function retirePrivilegedBootstrapIdentity(identity) {
   return withDeploymentCredentials((credentials) => {
+    const host = String(process.env.QUESTION_BANK_DEPLOY_SSH_HOST || '')
+    const transportUser = deploymentSSHTransportUser(host)
     const invocation = deploymentSSHInvocation({
-      host: String(process.env.QUESTION_BANK_DEPLOY_SSH_HOST || ''),
-      keyPath: credentials.keyPath,
+      host,
+      keyPath: identity.bootstrapPrivateKeyPath,
       knownHostsPath: credentials.knownHostsPath,
       remoteArgs: [
         'sudo', '-n',
@@ -354,7 +520,8 @@ function retirePrivilegedBootstrapIdentity(identity) {
         '--conflict-exit-code', '75',
         '/var/lock/eqb-release-bootstrap.lock',
         '/usr/bin/env',
-        `EQB_DEPLOY_BOOTSTRAP_PUBLIC_KEY_BODY=${publicKeyBody(credentials.keyPath)}`,
+        `EQB_DEPLOY_TRANSPORT_USER=${transportUser}`,
+        `EQB_DEPLOY_BOOTSTRAP_PUBLIC_KEY_BODY=${identity.bootstrapPublicKeyBody}`,
         `EQB_DEPLOY_CONTROLLER_PUBLIC_KEY_BODY=${identity.publicKeyBody}`,
         '/usr/bin/node',
         '--input-type=module',
@@ -374,13 +541,13 @@ function retirePrivilegedBootstrapIdentity(identity) {
   })
 }
 
-function verifyBootstrapIdentityRetired() {
+function classifyPrivilegedBootstrapIdentity(identity) {
   return withDeploymentCredentials((credentials) => {
     const invocation = deploymentSSHInvocation({
       host: String(process.env.QUESTION_BANK_DEPLOY_SSH_HOST || ''),
-      keyPath: credentials.keyPath,
+      keyPath: identity.bootstrapPrivateKeyPath,
       knownHostsPath: credentials.knownHostsPath,
-      remoteArgs: ['preflight'],
+      remoteArgs: ['/bin/true'],
     })
     const remote = spawnSync(invocation.command, invocation.args, {
       encoding: 'utf8',
@@ -388,8 +555,13 @@ function verifyBootstrapIdentityRetired() {
       timeout: 30_000,
     })
     if (remote.error) throw remote.error
-    return remote.status === 255
-      && /Permission denied \(publickey(?:,[^)]+)?\)\./u.test(String(remote.stderr || ''))
+    if (remote.status === 0) return 'active'
+    if (
+      remote.status === 255
+      && /^[^\r\n]+: Permission denied \(publickey\)\.$/u
+        .test(String(remote.stderr || '').trim())
+    ) return 'retired'
+    return 'unknown'
   })
 }
 
@@ -412,18 +584,29 @@ function rotateControllerSecret({ identity, projectId }) {
 async function bootstrap() {
   requireReleaseLayoutBootstrapAuthorization(process.argv.slice(2))
   const projectId = deploymentProjectId()
-  const identity = createControllerIdentity()
+  const resolvedCandidate = await candidate()
+  const transportTarget = String(process.env.QUESTION_BANK_DEPLOY_SSH_HOST || '')
+  let identity = null
   let bootstrapAttempted = false
-  let secretRotated = false
+  let recoveryCompleted = false
   try {
     const result = await bootstrapReleaseLayout({
       argv: process.argv.slice(2),
-      resolveCandidate: candidate,
+      resolveCandidate: async () => resolvedCandidate,
       readMainSha,
       readLegacyPreflight,
       async invokeBootstrap({ candidate: resolved }) {
+        const payload = await stageReleaseBootstrapPayload(resolved)
+        identity = await withDeploymentCredentials((credentials) => (
+          createControllerIdentityRecovery({
+            candidate: resolved,
+            credentials,
+            projectId,
+            transportTarget,
+          })
+        ))
         bootstrapAttempted = true
-        return invokeReleaseBootstrap({ candidate: resolved, identity })
+        return invokeReleaseBootstrap({ candidate: resolved, identity, payload })
       },
       readControllerPreflight() {
         return readNewControllerPreflight(identity)
@@ -431,10 +614,15 @@ async function bootstrap() {
       retireBootstrapIdentity() {
         return retirePrivilegedBootstrapIdentity(identity)
       },
-      verifyBootstrapIdentityRetired,
+      classifyBootstrapIdentity() {
+        return classifyPrivilegedBootstrapIdentity(identity)
+      },
       async rotateControllerSecret() {
         rotateControllerSecret({ identity, projectId })
-        secretRotated = true
+      },
+      async cleanupRecovery() {
+        identity.complete()
+        recoveryCompleted = true
       },
     })
     console.log(JSON.stringify({
@@ -445,14 +633,103 @@ async function bootstrap() {
       ...result,
     }, null, 2))
   } catch (error) {
-    if (bootstrapAttempted && !secretRotated) {
+    if (bootstrapAttempted && !recoveryCompleted && identity) {
       console.error(`Generated controller identity retained for recovery at ${identity.directory}`)
-    } else {
-      identity.cleanup()
+    } else if (!recoveryCompleted && identity) {
+      identity.discard()
     }
     throw error
   }
-  identity.cleanup()
+}
+
+async function bootstrapResume() {
+  requireReleaseLayoutBootstrapResumeAuthorization(process.argv.slice(2))
+  const projectId = deploymentProjectId()
+  const transportTarget = String(process.env.QUESTION_BANK_DEPLOY_SSH_HOST || '')
+  const completed = readCompletedReleaseBootstrapRecovery({
+    stateRoot: bootstrapRecoveryRoot,
+    optional: true,
+  })
+  if (completed) {
+    if (
+      completed.projectId !== projectId
+      || completed.transportTargetDigest
+        !== createHash('sha256').update(transportTarget).digest('hex')
+    ) {
+      throw new Error('Completed bootstrap receipt does not belong to this Deployment project and SSH target')
+    }
+    const verification = assertAuthoritativeDeploymentChecks(
+      readCommitChecks(completed.targetSha),
+      completed.targetSha,
+    )
+    clearCompletedReleaseBootstrapRecovery({
+      stateRoot: bootstrapRecoveryRoot,
+      targetSha: completed.targetSha,
+    })
+    console.log(JSON.stringify({
+      command: 'resume release-layout bootstrap finalization',
+      productionMutationAllowed: false,
+      alreadyCompleted: true,
+      hostBootstrapRepeated: false,
+      controllerSecretRotated: true,
+      environmentRefreshRequired: true,
+      candidate: {
+        repository: AMP_ORB_DEPLOY_REPOSITORY,
+        sha: completed.targetSha,
+        branch: 'main',
+        verification,
+      },
+    }, null, 2))
+    return
+  }
+  const recovery = readReleaseBootstrapRecovery({ stateRoot: bootstrapRecoveryRoot })
+  const identity = identityFromRecovery(recovery, { projectId, transportTarget })
+  const verification = assertAuthoritativeDeploymentChecks(
+    readCommitChecks(recovery.targetSha),
+    recovery.targetSha,
+  )
+  const recoveredCandidate = {
+    repository: AMP_ORB_DEPLOY_REPOSITORY,
+    sha: recovery.targetSha,
+    branch: 'main',
+    verification,
+  }
+  let recoveryCleaned = false
+  try {
+    const result = await resumeReleaseLayoutBootstrap({
+      argv: process.argv.slice(2),
+      candidate: recoveredCandidate,
+      readControllerPreflight() {
+        return readNewControllerPreflight(identity)
+      },
+      classifyBootstrapIdentity() {
+        return classifyPrivilegedBootstrapIdentity(identity)
+      },
+      retireBootstrapIdentity() {
+        return retirePrivilegedBootstrapIdentity(identity)
+      },
+      async rotateControllerSecret() {
+        rotateControllerSecret({ identity, projectId })
+      },
+      async cleanupRecovery() {
+        identity.complete()
+        recoveryCleaned = true
+      },
+    })
+    console.log(JSON.stringify({
+      command: 'resume release-layout bootstrap finalization',
+      productionMutationAllowed: true,
+      hostBootstrapRepeated: false,
+      controllerSecretRotated: true,
+      environmentRefreshRequired: true,
+      ...result,
+    }, null, 2))
+  } catch (error) {
+    if (!recoveryCleaned) {
+      console.error(`Private bootstrap recovery retained for ${recovery.targetSha}`)
+    }
+    throw error
+  }
 }
 
 async function deploy() {
@@ -479,10 +756,11 @@ try {
   else if (process.argv[2] === 'bootstrap-preflight') await bootstrapPreflight()
   else if (process.argv[2] === 'baseline') await baseline()
   else if (process.argv[2] === 'bootstrap') await bootstrap()
+  else if (process.argv[2] === 'bootstrap-resume') await bootstrapResume()
   else if (process.argv[2] === 'deploy') await deploy()
   else {
     throw new Error(
-      'Usage: amp-orb-deploy.mjs plan | preflight --owner-said-preflight | bootstrap-preflight --owner-said-preflight | baseline --owner-said-baseline-migration | bootstrap --owner-said-release-bootstrap | deploy --owner-said-deploy-latest',
+      'Usage: amp-orb-deploy.mjs plan | preflight --owner-said-preflight | bootstrap-preflight --owner-said-preflight | baseline --owner-said-baseline-migration | bootstrap --owner-said-release-bootstrap | bootstrap-resume --owner-said-release-bootstrap-resume | deploy --owner-said-deploy-latest',
     )
   }
 } catch (error) {

@@ -11,31 +11,83 @@ SOURCE=$ROOT/english-question-bank
 TARGET_SHA=${1-}
 PUBLIC_KEY_FILE=${2-}
 PUBLIC_KEY_TEMP=
-CONTROLLER=/usr/local/libexec/eqb-deploy-controller-v1
-CONTROLLER_MODULE=/usr/local/libexec/eqb-deploy-controller-v1.mjs
-AUTHORIZED_KEYS=/root/.ssh/authorized_keys
+TRANSPORT_USER=${EQB_DEPLOY_TRANSPORT_USER-}
+BOOTSTRAP_KEY_BODY=${EQB_DEPLOY_BOOTSTRAP_PUBLIC_KEY_BODY-}
+CONTROLLER_DIRECTORY=/usr/local/libexec
+CONTROLLER=$CONTROLLER_DIRECTORY/eqb-deploy-controller-v1
+CONTROLLER_MODULE=$CONTROLLER_DIRECTORY/eqb-deploy-controller-v1.mjs
+TRANSPORT_CONTROLLER=$CONTROLLER_DIRECTORY/eqb-deploy-transport-v1
+SSH_DIRECTORY=
+AUTHORIZED_KEYS=
+AUTHORIZED_KEYS2=
 KEY_COMMENT=eqb-amp-deployment-v1
+FAILURE_BACKUP_ROOT=/var/backups/eqb
 FIXED_PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin
 export PATH=$FIXED_PATH
 export GIT_TERMINAL_PROMPT=0
 export GCM_INTERACTIVE=never
 export GIT_SSH_COMMAND='/usr/bin/ssh -F /dev/null -o BatchMode=yes -o PasswordAuthentication=no'
+exec 3>&2
 activated=0
 key_installed=0
 build_user_created=0
+build_group_created=0
+controller_directory_created=0
 rollback_armed=0
+initial_health_verified=0
 root_hardened=0
 archive_dir=
 staging=
 build_home=
+backup=
+bootstrap_log=
+success_receipt=
+stage=preflight
 declare -a protected_paths=()
 declare -A protected_modes=()
+declare -A database_identities=()
+declare -A persistence_identities=()
+
+report_failure() {
+  local failed_stage=$1 exit_code=$2 rollback_json=$3
+  local failure_receipt failure_receipt_temp
+  local evidence_retained=false
+  if [[ -n $backup && -d $backup && -n $bootstrap_log && -f $bootstrap_log ]]; then
+    failure_receipt=$backup/failure-receipt.json
+    failure_receipt_temp=$backup/.failure-receipt-$$
+    if cat > "$failure_receipt_temp" <<EOF
+{
+  "schemaVersion": "eqb-deployment-bootstrap-failure-v1",
+  "state": "reported",
+  "conclusion": "failure",
+  "targetSha": "$TARGET_SHA",
+  "failedStage": "$failed_stage",
+  "exitCode": $exit_code,
+  "rollbackHealthy": $rollback_json,
+  "evidenceRetained": true
+}
+EOF
+    then
+      if chmod 0600 "$failure_receipt_temp" \
+        && mv "$failure_receipt_temp" "$failure_receipt"; then
+        evidence_retained=true
+      fi
+    fi
+    rm -f "$failure_receipt_temp"
+  fi
+  printf 'EQB_BOOTSTRAP_FAILURE {"schemaVersion":"eqb-deployment-bootstrap-failure-v1","state":"reported","conclusion":"failure","targetSha":"%s","failedStage":"%s","exitCode":%d,"rollbackHealthy":%s,"evidenceRetained":%s}\n' \
+    "$TARGET_SHA" "$failed_stage" "$exit_code" "$rollback_json" "$evidence_retained" >&3
+}
 
 fail() {
+  local rollback_json=false
   printf 'EQB deployment bootstrap failed closed: %s\n' "$*" >&2
   if declare -F rollback >/dev/null && (( rollback_armed == 1 )); then
     rollback 1
   fi
+  set +e
+  if (( initial_health_verified == 1 )); then rollback_json=true; fi
+  report_failure "$stage" 1 "$rollback_json"
   exit 1
 }
 
@@ -43,10 +95,209 @@ cleanup_public_key() {
   if [[ -n $PUBLIC_KEY_TEMP ]]; then rm -f "$PUBLIC_KEY_TEMP"; fi
 }
 
+assert_authorized_keys_state() {
+  local expected_forced_key=${1-}
+  /usr/bin/node --input-type=module - \
+    "$AUTHORIZED_KEYS" "$BOOTSTRAP_KEY_BODY" "$key_body" "$expected_forced_key" <<'NODE'
+import fs from 'node:fs'
+
+const [filePath, bootstrapBody, controllerBody, expectedForcedKey] = process.argv.slice(2)
+const bytes = fs.readFileSync(filePath)
+if (bytes.length > 1024 * 1024 || bytes.includes(0) || bytes.includes(13)) process.exit(1)
+const lines = bytes.toString('utf8').split('\n').filter(Boolean)
+const matching = (body) => lines.filter((line) => line.trim().split(/[\t ]+/u).includes(body))
+const bootstrapLines = matching(bootstrapBody)
+const bootstrapFields = bootstrapLines[0]?.trim().split(/[\t ]+/u) || []
+if (
+  bootstrapLines.length !== 1
+  || bootstrapFields[0] !== 'ssh-ed25519'
+  || bootstrapFields[1] !== bootstrapBody
+) process.exit(1)
+const controllerLines = matching(controllerBody)
+if (
+  expectedForcedKey
+    ? controllerLines.length !== 1 || controllerLines[0].trim() !== expectedForcedKey
+    : controllerLines.length !== 0
+) process.exit(1)
+const authorizationLines = lines.filter((line) => line.trim() && !line.trim().startsWith('#'))
+if (authorizationLines.length !== (expectedForcedKey ? 2 : 1)) process.exit(1)
+NODE
+}
+
+install_forced_key() {
+  /usr/bin/node --input-type=module - \
+    "$AUTHORIZED_KEYS" "$transport_uid" "$transport_gid" "$forced_key" <<'NODE'
+import crypto from 'node:crypto'
+import fs from 'node:fs'
+import path from 'node:path'
+
+const [authorizedKeys, uidValue, gidValue, forcedKey] = process.argv.slice(2)
+const hash = (value) => crypto.createHash('sha256').update(value).digest('hex')
+const originalState = fs.lstatSync(authorizedKeys)
+if (!originalState.isFile() || originalState.isSymbolicLink() || originalState.nlink !== 1) {
+  throw new Error('authorized-keys-state')
+}
+const original = fs.readFileSync(authorizedKeys)
+const separator = original.length === 0 || original.at(-1) === 10 ? '' : '\n'
+const replacement = Buffer.concat([original, Buffer.from(`${separator}${forcedKey}\n`),])
+const temporary = path.join(
+  path.dirname(authorizedKeys),
+  `.authorized_keys-eqb-${crypto.randomBytes(12).toString('hex')}`,
+)
+let descriptor
+try {
+  descriptor = fs.openSync(temporary, 'wx', 0o600)
+  fs.writeFileSync(descriptor, replacement)
+  fs.fsyncSync(descriptor)
+  fs.fchownSync(descriptor, Number(uidValue), Number(gidValue))
+  fs.fchmodSync(descriptor, 0o600)
+  fs.closeSync(descriptor)
+  descriptor = undefined
+  const currentState = fs.lstatSync(authorizedKeys)
+  if (
+    currentState.dev !== originalState.dev
+    || currentState.ino !== originalState.ino
+    || currentState.uid !== originalState.uid
+    || currentState.gid !== originalState.gid
+    || (currentState.mode & 0o7777) !== (originalState.mode & 0o7777)
+    || currentState.nlink !== originalState.nlink
+    || hash(fs.readFileSync(authorizedKeys)) !== hash(original)
+  ) throw new Error('authorized-keys-race')
+  fs.renameSync(temporary, authorizedKeys)
+  const directory = fs.openSync(path.dirname(authorizedKeys), 'r')
+  try {
+    fs.fsyncSync(directory)
+  } finally {
+    fs.closeSync(directory)
+  }
+} finally {
+  if (descriptor !== undefined) fs.closeSync(descriptor)
+  try {
+    fs.unlinkSync(temporary)
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error
+  }
+}
+NODE
+}
+
+verify_sqlite_database() {
+  local database=$1
+  /usr/bin/node --no-warnings --input-type=module - "$database" <<'NODE'
+import { DatabaseSync } from 'node:sqlite'
+
+const database = new DatabaseSync(process.argv[2], { readOnly: true })
+try {
+  const integrity = database.prepare('PRAGMA integrity_check').all()
+  const foreignKeys = database.prepare('PRAGMA foreign_key_check').all()
+  if (
+    integrity.length !== 1
+    || Object.values(integrity[0])[0] !== 'ok'
+    || foreignKeys.length !== 0
+  ) process.exitCode = 1
+} finally {
+  database.close()
+}
+NODE
+}
+
+normalize_generated_dist() {
+  local dist=$1
+  /usr/bin/node --input-type=module - "$dist" <<'NODE'
+import crypto from 'node:crypto'
+import fs from 'node:fs'
+import path from 'node:path'
+
+const dist = process.argv[2]
+const hash = (value) => crypto.createHash('sha256').update(value).digest('hex')
+function manifest(verifyModes) {
+  const entries = []
+  function walk(absolute, relative = '.') {
+    const stat = fs.lstatSync(absolute)
+    if (stat.isSymbolicLink() || (!stat.isDirectory() && !stat.isFile())) {
+      throw new Error('generated-dist-special-node')
+    }
+    if (stat.isFile() && stat.nlink !== 1) throw new Error('generated-dist-linked-file')
+    const type = stat.isDirectory() ? 'directory' : 'file'
+    const expectedMode = type === 'directory' ? 0o755 : 0o644
+    if (verifyModes && (stat.mode & 0o7777) !== expectedMode) {
+      throw new Error('generated-dist-mode')
+    }
+    entries.push({
+      relative,
+      type,
+      uid: stat.uid,
+      gid: stat.gid,
+      dev: stat.dev,
+      ino: stat.ino,
+      nlink: stat.nlink,
+      size: stat.size,
+      digest: stat.isFile() ? hash(fs.readFileSync(absolute)) : null,
+    })
+    if (stat.isDirectory()) {
+      for (const name of fs.readdirSync(absolute).sort()) {
+        walk(path.join(absolute, name), relative === '.' ? name : `${relative}/${name}`)
+      }
+    }
+  }
+  walk(dist)
+  if (!entries.some((entry) => entry.relative === 'index.html' && entry.type === 'file')) {
+    throw new Error('generated-dist-index-missing')
+  }
+  return entries
+}
+
+const before = manifest(false)
+for (const entry of before) {
+  const absolute = entry.relative === '.' ? dist : path.join(dist, entry.relative)
+  const expectedMode = entry.type === 'directory' ? 0o755 : 0o644
+  const flags = fs.constants.O_RDONLY
+    | fs.constants.O_NOFOLLOW
+    | fs.constants.O_NONBLOCK
+    | (entry.type === 'directory' ? fs.constants.O_DIRECTORY : 0)
+  const descriptor = fs.openSync(absolute, flags)
+  try {
+    const current = fs.fstatSync(descriptor)
+    const currentType = current.isDirectory() ? 'directory' : current.isFile() ? 'file' : 'other'
+    if (
+      currentType !== entry.type
+      || current.uid !== entry.uid
+      || current.gid !== entry.gid
+      || current.dev !== entry.dev
+      || current.ino !== entry.ino
+      || current.nlink !== entry.nlink
+      || current.size !== entry.size
+    ) throw new Error('generated-dist-normalize-race')
+    fs.fchmodSync(descriptor, expectedMode)
+  } finally {
+    fs.closeSync(descriptor)
+  }
+}
+const after = manifest(true)
+if (JSON.stringify(before) !== JSON.stringify(after)) {
+  throw new Error('generated-dist-normalize-drift')
+}
+NODE
+}
+
 trap cleanup_public_key EXIT
+trap 'fail "unexpected command failure during $stage"' ERR
 
 [[ $(id -u) == 0 ]] || fail 'run as root'
 [[ $TARGET_SHA =~ ^[a-f0-9]{40}$ ]] || fail 'target SHA is invalid'
+[[ $TRANSPORT_USER =~ ^[a-z_][a-z0-9_-]*$ && $TRANSPORT_USER != root ]] \
+  || fail 'deployment SSH transport account is invalid'
+[[ $BOOTSTRAP_KEY_BODY =~ ^[A-Za-z0-9+/]+={0,3}$ ]] \
+  || fail 'bootstrap public key environment input is invalid'
+[[ -d $FAILURE_BACKUP_ROOT && ! -L $FAILURE_BACKUP_ROOT \
+  && $(stat -c '%u:%g:%a' "$FAILURE_BACKUP_ROOT") == 0:0:700 ]] \
+  || fail 'root-private bootstrap evidence directory is unavailable'
+backup=$(mktemp -d "$FAILURE_BACKUP_ROOT/bootstrap-attempt-${TARGET_SHA:0:12}-XXXXXXXX")
+chown root:root "$backup"
+chmod 0700 "$backup"
+bootstrap_log=$backup/build.log
+install -o root -g root -m 0600 /dev/null "$bootstrap_log"
+exec 2>> "$bootstrap_log"
 if [[ $PUBLIC_KEY_FILE == - ]]; then
   [[ ${EQB_DEPLOY_CONTROLLER_PUBLIC_KEY_BODY-} =~ ^[A-Za-z0-9+/]+={0,3}$ ]] \
     || fail 'controller public key environment input is invalid'
@@ -62,12 +313,45 @@ fi
   && ! -e $ROOT/deployments && ! -L $ROOT/deployments ]] \
   || fail 'partial or linked release layout requires manual inspection'
 [[ ! -e $CONTROLLER && ! -L $CONTROLLER \
-  && ! -e $CONTROLLER_MODULE && ! -L $CONTROLLER_MODULE ]] \
+  && ! -e $CONTROLLER_MODULE && ! -L $CONTROLLER_MODULE \
+  && ! -e $TRANSPORT_CONTROLLER && ! -L $TRANSPORT_CONTROLLER ]] \
   || fail 'deployment controller is already installed'
-[[ ! -L $AUTHORIZED_KEYS ]] || fail 'root authorized_keys must not be a symlink'
-if [[ -f $AUTHORIZED_KEYS ]] && grep -Fq "$KEY_COMMENT" "$AUTHORIZED_KEYS"; then
-  fail 'deployment forced key is already present'
+[[ -d /usr/local && ! -L /usr/local \
+  && $(stat -c '%u:%g:%a' /usr/local) == 0:0:755 ]] \
+  || fail 'controller parent ancestry is unsafe'
+if [[ -e $CONTROLLER_DIRECTORY || -L $CONTROLLER_DIRECTORY ]]; then
+  [[ -d $CONTROLLER_DIRECTORY && ! -L $CONTROLLER_DIRECTORY \
+    && $(stat -c '%u:%g:%a' "$CONTROLLER_DIRECTORY") == 0:0:755 ]] \
+    || fail 'controller directory is unsafe'
 fi
+IFS=: read -r resolved_transport _ transport_uid transport_gid _ transport_home transport_shell \
+  < <(getent passwd "$TRANSPORT_USER") || fail 'deployment SSH transport account is missing'
+[[ $resolved_transport == "$TRANSPORT_USER" \
+  && $transport_uid =~ ^[0-9]+$ && $transport_uid != 0 \
+  && $transport_gid =~ ^[0-9]+$ \
+  && $transport_home == /* && $transport_home != *:* ]] \
+  || fail 'deployment SSH transport account metadata is invalid'
+[[ -d $transport_home && ! -L $transport_home \
+  && $(stat -c '%u' "$transport_home") == "$transport_uid" ]] \
+  || fail 'deployment SSH transport home is unsafe'
+transport_home_mode=$(stat -c '%a' "$transport_home")
+(( (8#$transport_home_mode & 0022) == 0 )) \
+  || fail 'deployment SSH transport home is writable by another account'
+SSH_DIRECTORY=$transport_home/.ssh
+AUTHORIZED_KEYS=$SSH_DIRECTORY/authorized_keys
+AUTHORIZED_KEYS2=$SSH_DIRECTORY/authorized_keys2
+[[ -d $SSH_DIRECTORY && ! -L $SSH_DIRECTORY \
+  && $(stat -c '%u:%g:%a' "$SSH_DIRECTORY") == "$transport_uid:$transport_gid:700" ]] \
+  || fail 'deployment SSH transport directory is unsafe'
+[[ -f $AUTHORIZED_KEYS && ! -L $AUTHORIZED_KEYS \
+  && $(stat -c '%u:%g:%a:%h' "$AUTHORIZED_KEYS") == "$transport_uid:$transport_gid:600:1" \
+  && ! -e $AUTHORIZED_KEYS2 && ! -L $AUTHORIZED_KEYS2 ]] \
+  || fail 'deployment SSH transport authorized_keys boundary is unsafe'
+for host_config in /etc/systemd/system/eqb.service /etc/caddy/Caddyfile; do
+  [[ -f $host_config && ! -L $host_config \
+    && $(stat -c '%u:%g:%a' "$host_config") == 0:0:644 ]] \
+    || fail "legacy host configuration is unsafe: $host_config"
+done
 [[ -d $SOURCE && ! -L $SOURCE ]] || fail 'legacy production checkout is missing or linked'
 for relative in .git app app/public server; do
   [[ -d $SOURCE/$relative && ! -L $SOURCE/$relative ]] \
@@ -86,13 +370,27 @@ for relative in data app/public/paper-assets exports server/logs; do
   legacy_path=$SOURCE/$relative
   [[ ! -L $legacy_path ]] || fail "legacy path is already a symlink: $legacy_path"
   [[ ! -e $legacy_path || -d $legacy_path ]] || fail "legacy path is not a directory: $legacy_path"
+  if [[ -d $legacy_path ]]; then
+    persistence_identities["$relative"]=$(stat -c '%d:%i' "$legacy_path")
+  fi
+done
+persistence_identities[.env]=$(stat -c '%d:%i' "$SOURCE/.env")
+for database_name in question-bank.sqlite user-data.sqlite import-ops.sqlite; do
+  database_path=$SOURCE/data/$database_name
+  [[ -f $database_path && ! -L $database_path ]] \
+    || fail "production database is missing or linked: $database_name"
+  verify_sqlite_database "$database_path" \
+    || fail "production database integrity gate failed: $database_name"
+  database_identities["$database_name"]=$(stat -c '%d:%i' "$database_path")
 done
 
 read -r key_type key_body key_extra < "$PUBLIC_KEY_FILE" || fail 'cannot read controller public key'
 [[ $key_type == ssh-ed25519 && $key_body =~ ^[A-Za-z0-9+/]+={0,3}$ && -z ${key_extra-} ]] \
   || fail 'controller public key must be one bare Ed25519 key'
+[[ $key_body != "$BOOTSTRAP_KEY_BODY" ]] || fail 'bootstrap and controller identities must differ'
 ssh-keygen -l -f "$PUBLIC_KEY_FILE" >/dev/null || fail 'controller public key is invalid'
-forced_key="restrict,command=\"$CONTROLLER\" $key_type $key_body $KEY_COMMENT"
+forced_key="restrict,command=\"$TRANSPORT_CONTROLLER\" $key_type $key_body $KEY_COMMENT"
+assert_authorized_keys_state || fail 'bootstrap authorized_keys state is ineligible'
 
 origin=$(runuser -u eqb -- git -C "$SOURCE" remote get-url origin)
 case "$origin" in
@@ -125,9 +423,10 @@ protected_changes=$(/usr/bin/git -c safe.directory="$SOURCE" -C "$SOURCE" \
 
 for executable in \
   /usr/bin/node /usr/bin/npm /usr/bin/pnpm /usr/bin/git /usr/bin/tar /usr/bin/getent /usr/bin/df \
-  /usr/bin/caddy /usr/bin/curl /usr/bin/systemctl /usr/bin/systemd-run \
-  /usr/bin/flock /usr/bin/ssh-keygen \
-  /usr/sbin/runuser /usr/sbin/useradd /usr/sbin/userdel; do
+  /usr/bin/caddy /usr/bin/curl /usr/bin/systemctl /usr/bin/systemd-analyze /usr/bin/systemd-run \
+  /usr/bin/journalctl \
+  /usr/bin/flock /usr/bin/ssh-keygen /usr/bin/timeout \
+  /usr/sbin/runuser /usr/sbin/useradd /usr/sbin/userdel /usr/sbin/groupdel; do
   [[ -x $executable ]] || fail "required executable is missing: $executable"
 done
 available_bytes=$(/usr/bin/df --output=avail -B1 "$ROOT" | /usr/bin/tail -n 1 | /usr/bin/tr -d ' ')
@@ -137,140 +436,203 @@ available_bytes=$(/usr/bin/df --output=avail -B1 "$ROOT" | /usr/bin/tail -n 1 | 
 build_user_missing=0
 if ! id -u eqb-build >/dev/null 2>&1; then
   build_user_missing=1
+  ! getent group eqb-build >/dev/null \
+    || fail 'partial isolated build identity already exists'
 else
   [[ $(id -u eqb-build) != "$eqb_uid" ]] || fail 'build and runtime users must differ'
   getent group eqb-build >/dev/null || fail 'existing build group is missing'
 fi
 
-backup=$ROOT/deployments/bootstrap-backup-$(date -u +%Y%m%dT%H%M%SZ)
 release=$ROOT/releases/$TARGET_SHA
 archive=
 
 cleanup() {
-  cleanup_public_key
-  if [[ -n $archive_dir ]]; then rm -rf "$archive_dir"; fi
-  if [[ -n $build_home ]]; then rm -rf "$build_home"; fi
-  if [[ -n $staging && -d $staging ]]; then rm -rf "$staging"; fi
+  local cleanup_status=0
+  if ! cleanup_public_key; then cleanup_status=1; fi
+  if [[ -n $archive_dir ]] && ! rm -rf "$archive_dir"; then cleanup_status=1; fi
+  if [[ -n $build_home ]] && ! rm -rf "$build_home"; then cleanup_status=1; fi
+  if [[ -n $staging && -d $staging ]] && ! rm -rf "$staging"; then cleanup_status=1; fi
+  return "$cleanup_status"
 }
 
 restore_protected_modes() {
-  local path
+  local path restore_status=0
   for path in "${protected_paths[@]}"; do
-    if [[ -e $path || -L $path ]]; then chmod "${protected_modes[$path]}" "$path"; fi
+    if [[ -e $path || -L $path ]]; then
+      chmod "${protected_modes[$path]}" "$path" || restore_status=1
+    fi
   done
+  return "$restore_status"
 }
 
 restore_file() {
   local saved=$1 destination=$2
   if [[ -f $saved ]]; then
-    cp --preserve=mode,ownership,timestamps "$saved" "$destination"
+    local destination_directory temporary
+    destination_directory=$(dirname "$destination") || return 1
+    [[ -d $destination_directory && ! -L $destination_directory ]] || return 1
+    temporary=$(mktemp "$destination_directory/.eqb-rollback-XXXXXXXX") || return 1
+    if ! cp --preserve=mode,ownership,timestamps "$saved" "$temporary" \
+      || ! mv -fT "$temporary" "$destination"; then
+      rm -f "$temporary"
+      return 1
+    fi
   else
-    rm -f "$destination"
+    rm -f "$destination" || return 1
   fi
 }
 
 restore_migrated_directory() {
   local source_path=$1 shared_name=$2
   local shared_path=$ROOT/shared/$shared_name
-  if [[ -L $source_path ]]; then rm -f "$source_path"; fi
-  if [[ -e $source_path ]]; then return; fi
-  if [[ -f $backup/legacy-$shared_name-existed && -d $shared_path ]]; then
-    mkdir -p "$(dirname "$source_path")"
-    mv "$shared_path" "$source_path"
+  if [[ -L $source_path ]]; then rm -f "$source_path" || return 1; fi
+  if [[ -e $source_path ]]; then return 0; fi
+  if [[ -f $backup/legacy-$shared_name-existed ]]; then
+    [[ -d $shared_path && ! -L $shared_path ]] || return 1
+    mkdir -p "$(dirname "$source_path")" || return 1
+    mv "$shared_path" "$source_path" || return 1
   else
-    rm -rf "$shared_path"
+    rm -rf "$shared_path" || return 1
   fi
+}
+
+remove_empty_directory() {
+  local directory=$1
+  if [[ -e $directory || -L $directory ]]; then
+    [[ -d $directory && ! -L $directory ]] || return 1
+    rmdir "$directory" || return 1
+  fi
+}
+
+strict_health_once() {
+  /usr/bin/timeout --signal=TERM --kill-after=2s 15s /bin/bash -c '
+    set -e
+    systemctl is-active --quiet eqb
+    systemctl is-active --quiet caddy
+    curl --fail --silent --show-error --connect-timeout 3 --max-time 5 \
+      http://127.0.0.1:8787/api/health >/dev/null
+    curl --fail --fail-early --silent --show-error --connect-timeout 3 --max-time 5 \
+      --resolve eqbank.cc:443:127.0.0.1 \
+      https://eqbank.cc/api/health https://eqbank.cc/ >/dev/null
+    curl --fail --fail-early --silent --show-error --connect-timeout 3 --max-time 5 \
+      --parallel --parallel-immediate --parallel-max 4 \
+      https://eqbank.cc/api/health \
+      https://eqbank.cc/ \
+      https://eqbank.cc/ops/ \
+      "https://eqbank.cc/ops/?view=review" >/dev/null
+  '
+}
+
+wait_for_strict_health() {
+  local deadline=$((SECONDS + 30))
+  while (( SECONDS < deadline )); do
+    if strict_health_once; then return 0; fi
+    sleep 1
+  done
+  return 1
 }
 
 rollback() {
   local exit_code=${1:-1}
+  local failed_stage=$stage
   local rollback_healthy=1
+  local service_recovered=1
+  local rollback_json=false
   trap - ERR
-  if (( activated == 1 )); then
-    restore_file "$backup/eqb.service" /etc/systemd/system/eqb.service
-    restore_file "$backup/Caddyfile" /etc/caddy/Caddyfile
-    rm -f "$ROOT/current"
-    rm -rf "$release"
-    restore_migrated_directory "$SOURCE/data" data
-    restore_migrated_directory "$SOURCE/app/public/paper-assets" paper-assets
-    restore_migrated_directory "$SOURCE/exports" exports
-    restore_migrated_directory "$SOURCE/server/logs" server-logs
-    if [[ -L $SOURCE/.env ]]; then rm -f "$SOURCE/.env"; fi
-    if [[ ! -e $SOURCE/.env && -f $ROOT/shared/.env ]]; then
-      mv "$ROOT/shared/.env" "$SOURCE/.env"
+  set +e
+  rollback_step() {
+    if ! "$@"; then
+      rollback_healthy=0
+      printf 'Legacy rollback step failed: %s\n' "$*" >&2
     fi
-    rmdir "$ROOT/shared" 2>/dev/null || true
-    restore_protected_modes
-    systemctl daemon-reload || true
-    systemctl restart eqb || true
-    systemctl reload caddy || true
-    rollback_healthy=0
-    for (( attempt = 1; attempt <= 30; attempt += 1 )); do
-      if systemctl is-active --quiet eqb \
-        && systemctl is-active --quiet caddy \
-        && curl --fail --silent --show-error --max-time 10 \
-          http://127.0.0.1:8787/api/health >/dev/null \
-        && curl --fail --silent --show-error --max-time 10 \
-          --resolve eqbank.cc:443:127.0.0.1 https://eqbank.cc/api/health >/dev/null \
-        && curl --fail --silent --show-error --max-time 10 \
-          --resolve eqbank.cc:443:127.0.0.1 https://eqbank.cc/ >/dev/null \
-        && curl --fail --silent --show-error --max-time 10 \
-          https://eqbank.cc/api/health >/dev/null \
-        && curl --fail --silent --show-error --max-time 10 https://eqbank.cc/ >/dev/null \
-        && curl --fail --silent --show-error --max-time 10 https://eqbank.cc/ops/ >/dev/null \
-        && curl --fail --silent --show-error --max-time 10 \
-          'https://eqbank.cc/ops/?view=review' >/dev/null; then
-        rollback_healthy=1
-        break
-      fi
-      sleep 1
-    done
+    return 0
+  }
+  if (( activated == 1 )); then
+    rollback_step restore_file "$backup/eqb.service" /etc/systemd/system/eqb.service
+    rollback_step restore_file "$backup/Caddyfile" /etc/caddy/Caddyfile
+    rollback_step rm -f "$ROOT/current"
+    rollback_step rm -rf "$release"
+    rollback_step restore_migrated_directory "$SOURCE/data" data
+    rollback_step restore_migrated_directory "$SOURCE/app/public/paper-assets" paper-assets
+    rollback_step restore_migrated_directory "$SOURCE/exports" exports
+    rollback_step restore_migrated_directory "$SOURCE/server/logs" server-logs
+    if [[ -L $SOURCE/.env ]]; then rollback_step rm -f "$SOURCE/.env"; fi
+    if [[ ! -e $SOURCE/.env && -f $ROOT/shared/.env ]]; then
+      rollback_step mv "$ROOT/shared/.env" "$SOURCE/.env"
+    fi
+    rollback_step remove_empty_directory "$ROOT/shared"
+    rollback_step restore_protected_modes
+    rollback_step systemctl daemon-reload
+    rollback_step systemctl restart eqb
+    rollback_step systemctl reload caddy
+    service_recovered=0
+    if wait_for_strict_health; then service_recovered=1; fi
+    if (( service_recovered == 0 )); then rollback_healthy=0; fi
   else
-    restore_protected_modes
+    rollback_step restore_protected_modes
   fi
   if (( key_installed == 1 )); then
-    restore_file "$backup/authorized_keys" "$AUTHORIZED_KEYS"
+    rollback_step restore_file "$backup/authorized_keys" "$AUTHORIZED_KEYS"
   fi
-  rm -f "$CONTROLLER" "$CONTROLLER_MODULE"
-  cleanup
-  if (( rollback_healthy == 1 )); then
-    rm -rf "$backup"
-    rmdir "$ROOT/releases" "$ROOT/deployments/receipts" "$ROOT/deployments" 2>/dev/null || true
+  rollback_step rm -f "$CONTROLLER" "$CONTROLLER_MODULE" "$TRANSPORT_CONTROLLER"
+  if (( controller_directory_created == 1 )); then
+    rollback_step remove_empty_directory "$CONTROLLER_DIRECTORY"
+  fi
+  rollback_step cleanup
+  if [[ -n $success_receipt ]]; then rollback_step rm -f "$success_receipt"; fi
+  rollback_step remove_empty_directory "$ROOT/releases"
+  rollback_step remove_empty_directory "$ROOT/deployments/receipts"
+  rollback_step remove_empty_directory "$ROOT/deployments"
+  if (( build_user_created == 1 )); then
+    if id -u eqb-build >/dev/null 2>&1; then rollback_step userdel --remove eqb-build; fi
+  fi
+  if (( build_group_created == 1 )) && getent group eqb-build >/dev/null; then
+    rollback_step groupdel eqb-build
   fi
   if (( root_hardened == 1 && rollback_healthy == 1 )); then
-    chown "$root_uid:$root_gid" "$ROOT"
-    chmod "$root_mode" "$ROOT"
+    rollback_step chown "$root_uid:$root_gid" "$ROOT"
+    rollback_step chmod "$root_mode" "$ROOT"
   fi
-  if (( build_user_created == 1 )); then userdel --remove eqb-build >/dev/null 2>&1 || true; fi
+  if (( rollback_healthy == 1 )); then rollback_json=true; fi
+  report_failure "$failed_stage" "$exit_code" "$rollback_json"
   if (( rollback_healthy == 1 )); then
     printf 'EQB deployment bootstrap rolled back; legacy service configuration restored and healthy\n' >&2
   else
-    printf 'CRITICAL: legacy rollback is unhealthy; root-private backup retained at %s\n' "$backup" >&2
+    printf 'CRITICAL: legacy rollback is unhealthy; root-private backup retained\n' >&2
   fi
   exit "$exit_code"
 }
 
+stage=initial-health
+wait_for_strict_health || fail 'legacy production is not strictly healthy before bootstrap'
+initial_health_verified=1
 trap cleanup EXIT
 trap 'rollback $?' ERR
 rollback_armed=1
-chown root:root "$ROOT"
+stage=secure-root
 root_hardened=1
+chown root:root "$ROOT"
 chmod 0755 "$ROOT"
 
+stage=build-user
 if (( build_user_missing == 1 )); then
-  useradd --system --user-group --home-dir /var/lib/eqb-build \
-    --create-home --shell /usr/sbin/nologin eqb-build
-  build_user_created=1
+  if useradd --system --user-group --home-dir /var/lib/eqb-build \
+    --create-home --shell /usr/sbin/nologin eqb-build; then
+    build_user_created=1
+    build_group_created=1
+  else
+    if id -u eqb-build >/dev/null 2>&1; then build_user_created=1; fi
+    if getent group eqb-build >/dev/null; then build_group_created=1; fi
+    fail 'cannot create isolated build user'
+  fi
 fi
 [[ $(id -u eqb-build) != "$eqb_uid" ]] || fail 'build and runtime users must differ'
 getent group eqb-build >/dev/null || fail 'build group is missing'
 
+stage=layout-directories
 install -d -o root -g root -m 0755 "$ROOT/releases"
 install -d -o root -g root -m 0711 "$ROOT/deployments"
 install -d -o root -g root -m 0700 "$ROOT/deployments/receipts"
-install -d -o root -g root -m 0700 "$backup"
-bootstrap_log=$backup/build.log
-install -o root -g root -m 0600 /dev/null "$bootstrap_log"
 archive_dir=$(mktemp -d "$ROOT/deployments/.bootstrap-source-XXXXXXXX")
 staging=$(mktemp -d "$ROOT/releases/.bootstrap-$TARGET_SHA-XXXXXXXX")
 build_home=$(mktemp -d "$ROOT/deployments/.bootstrap-build-home-XXXXXXXX")
@@ -285,6 +647,7 @@ protect_legacy_path() {
   chmod go-rwx "$path"
 }
 
+stage=protect-persistence
 for relative in data app/public/paper-assets exports server/logs; do
   legacy_path=$SOURCE/$relative
   if [[ -d $legacy_path ]]; then protect_legacy_path "$legacy_path"; fi
@@ -292,6 +655,7 @@ done
 protect_legacy_path "$SOURCE/.env"
 
 chown -hR eqb-build:eqb-build "$staging" "$build_home"
+stage=archive-source
 /usr/bin/git -c safe.directory="$SOURCE" -C "$SOURCE" archive \
   --format=tar "$TARGET_SHA" > "$archive"
 tar -xf "$archive" -C "$staging"
@@ -315,12 +679,18 @@ run_build() {
     /bin/sh -c 'umask 022; exec "$@"' eqb-bootstrap-build "$@"
 }
 
+stage=build-app-install
 run_build /usr/bin/pnpm -C "$staging/app" install --frozen-lockfile >> "$bootstrap_log" 2>&1
+stage=build-server-install
 run_build /usr/bin/npm --prefix "$staging/server" ci >> "$bootstrap_log" 2>&1
+stage=build-browser-install
 run_build /usr/bin/pnpm -C "$staging/app" exec playwright install --no-shell chromium >> "$bootstrap_log" 2>&1
+stage=build-smoke
 run_build /usr/bin/node "$staging/scripts/smoke-production-chromium.mjs" >> "$bootstrap_log" 2>&1
+stage=build-app
 run_build /usr/bin/pnpm -C "$staging/app" build >> "$bootstrap_log" 2>&1
 
+stage=validate-candidate
 assert_real_directory() {
   local candidate_path=$1
   [[ -d $candidate_path && ! -L $candidate_path ]] \
@@ -332,6 +702,8 @@ assert_real_directory "$staging/app"
 assert_real_directory "$staging/app/public"
 assert_real_directory "$staging/server"
 [[ -f $staging/app/dist/index.html ]] || fail 'bootstrap candidate build is missing index.html'
+stage=normalize-generated-dist
+normalize_generated_dist "$staging/app/dist"
 
 # Candidate package scripts run as eqb-build and cannot be trusted as a root
 # installation source. The transient build units kill leftover child processes;
@@ -342,6 +714,7 @@ assert_real_directory "$staging/deploy"
 for control_file in \
   Caddyfile.release \
   eqb-release.service \
+  eqb-deploy-transport \
   eqb-deploy-controller \
   eqb-deploy-controller.mjs; do
   [[ -f $staging/deploy/$control_file && ! -L $staging/deploy/$control_file ]] \
@@ -349,8 +722,17 @@ for control_file in \
 done
 /usr/bin/node --check "$staging/deploy/eqb-deploy-controller.mjs"
 /bin/sh -n "$staging/deploy/eqb-deploy-controller"
+/bin/sh -n "$staging/deploy/eqb-deploy-transport"
+/usr/bin/systemd-analyze verify "$staging/deploy/eqb-release.service" >/dev/null
 /usr/bin/caddy validate --config "$staging/deploy/Caddyfile.release" >/dev/null
 
+stage=prepare-controller-directory
+if [[ ! -d $CONTROLLER_DIRECTORY ]]; then
+  controller_directory_created=1
+  install -d -o root -g root -m 0755 "$CONTROLLER_DIRECTORY"
+fi
+
+stage=backup-host-config
 if [[ -f /etc/systemd/system/eqb.service ]]; then
   cp --preserve=mode,ownership,timestamps /etc/systemd/system/eqb.service "$backup/eqb.service"
 fi
@@ -361,9 +743,11 @@ if [[ -f $AUTHORIZED_KEYS ]]; then
   cp --preserve=mode,ownership,timestamps "$AUTHORIZED_KEYS" "$backup/authorized_keys"
 fi
 
+stage=stop-legacy-service
 activated=1
 systemctl stop eqb
 
+stage=migrate-persistence
 install -d -o eqb -g eqb -m 0700 "$ROOT/shared"
 
 migrate_directory() {
@@ -395,6 +779,31 @@ ln -s "$ROOT/shared/.env" "$SOURCE/.env"
 chown -hR eqb:eqb "$ROOT/shared"
 chmod 0700 "$ROOT/shared"
 
+stage=verify-migrated-persistence
+for mapping in \
+  'data:data' \
+  'app/public/paper-assets:paper-assets' \
+  'exports:exports' \
+  'server/logs:server-logs'; do
+  relative=${mapping%%:*}
+  shared_name=${mapping#*:}
+  if [[ -v persistence_identities[$relative] ]]; then
+    [[ $(stat -c '%d:%i' "$ROOT/shared/$shared_name") \
+      == "${persistence_identities[$relative]}" ]] \
+      || fail "migrated directory identity changed: $relative"
+  fi
+done
+[[ $(stat -c '%d:%i' "$ROOT/shared/.env") == "${persistence_identities[.env]}" ]] \
+  || fail 'migrated environment identity changed'
+for database_name in question-bank.sqlite user-data.sqlite import-ops.sqlite; do
+  database_path=$ROOT/shared/data/$database_name
+  [[ $(stat -c '%d:%i' "$database_path") == "${database_identities[$database_name]}" ]] \
+    || fail "migrated database identity changed: $database_name"
+  verify_sqlite_database "$database_path" \
+    || fail "migrated database integrity gate failed: $database_name"
+done
+
+stage=seal-release
 rm -rf \
   "$staging/data" \
   "$staging/app/public/paper-assets" \
@@ -424,44 +833,45 @@ chown -hR root:root "$staging"
 chmod -R u+rwX,go+rX,go-w "$staging"
 chmod 0755 "$staging"
 chmod 0444 "$staging/.eqb-release.json"
+stage=pre-caddy-dist-proof
+normalize_generated_dist "$staging/app/dist"
 mv "$staging" "$release"
 ln -s "releases/$TARGET_SHA" "$ROOT/current"
 
+stage=install-controller
 install -o root -g root -m 0644 \
   "$release/deploy/eqb-deploy-controller.mjs" "$CONTROLLER_MODULE"
 install -o root -g root -m 0755 \
   "$release/deploy/eqb-deploy-controller" "$CONTROLLER"
+install -o root -g root -m 0755 \
+  "$release/deploy/eqb-deploy-transport" "$TRANSPORT_CONTROLLER"
 
+stage=install-forced-key
 key_installed=1
-install -d -o root -g root -m 0700 /root/.ssh
-touch "$AUTHORIZED_KEYS"
-chown root:root "$AUTHORIZED_KEYS"
-chmod 0600 "$AUTHORIZED_KEYS"
-grep -Fqx "$forced_key" "$AUTHORIZED_KEYS" || printf '%s\n' "$forced_key" >> "$AUTHORIZED_KEYS"
+install_forced_key
+assert_authorized_keys_state "$forced_key" || fail 'deployment forced key postcondition failed'
 
+stage=install-service-config
 install -o root -g root -m 0644 "$release/deploy/eqb-release.service" /etc/systemd/system/eqb.service
 install -o root -g root -m 0644 "$release/deploy/Caddyfile.release" /etc/caddy/Caddyfile
 systemctl daemon-reload
+stage=activate-release
 systemctl restart eqb
 systemctl reload caddy
 
-deadline=$((SECONDS + 30))
-until \
-  systemctl is-active --quiet eqb \
-  && systemctl is-active --quiet caddy \
-  && curl --fail --silent --show-error --max-time 10 http://127.0.0.1:8787/api/health >/dev/null \
-  && curl --fail --silent --show-error --max-time 10 \
-    --resolve eqbank.cc:443:127.0.0.1 https://eqbank.cc/api/health >/dev/null \
-  && curl --fail --silent --show-error --max-time 10 https://eqbank.cc/api/health >/dev/null \
-  && curl --fail --silent --show-error --max-time 10 https://eqbank.cc/ >/dev/null \
-  && curl --fail --silent --show-error --max-time 10 https://eqbank.cc/ops/ >/dev/null \
-  && curl --fail --silent --show-error --max-time 10 'https://eqbank.cc/ops/?view=review' >/dev/null; do
-  (( SECONDS < deadline )) || fail 'release-layout health check timed out'
-  sleep 1
-done
+stage=strict-health
+wait_for_strict_health || fail 'release-layout health check timed out'
 
-receipt=$ROOT/deployments/receipts/$(date -u +%Y%m%dT%H%M%SZ)-bootstrap-$TARGET_SHA.json
-cat > "$receipt" <<EOF
+stage=cleanup
+cleanup
+archive_dir=
+build_home=
+staging=
+PUBLIC_KEY_TEMP=
+
+stage=success-receipt
+success_receipt=$ROOT/deployments/receipts/$(date -u +%Y%m%dT%H%M%SZ)-bootstrap-$TARGET_SHA.json
+cat > "$success_receipt" <<EOF
 {
   "schemaVersion": "eqb-deployment-bootstrap-v1",
   "state": "reported",
@@ -471,6 +881,7 @@ cat > "$receipt" <<EOF
   "finishedAt": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 }
 EOF
-chmod 0600 "$receipt"
+chmod 0600 "$success_receipt"
 trap - ERR
+trap - EXIT
 printf 'EQB deployment bootstrap complete: %s\n' "$TARGET_SHA"

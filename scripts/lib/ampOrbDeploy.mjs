@@ -1,16 +1,22 @@
-import { randomUUID } from 'node:crypto'
+import { createHash, randomUUID } from 'node:crypto'
 import {
   chmodSync,
   closeSync,
+  constants,
   existsSync,
+  fstatSync,
+  fsyncSync,
   lstatSync,
   mkdirSync,
   mkdtempSync,
   openSync,
+  readdirSync,
+  readFileSync,
   readlinkSync,
   renameSync,
   rmSync,
   symlinkSync,
+  unlinkSync,
   writeFileSync,
 } from 'node:fs'
 import { tmpdir } from 'node:os'
@@ -22,10 +28,16 @@ export const AMP_ORB_DEPLOY_REQUIRED_CHECKS = Object.freeze(['verify', 'e2e'])
 export const AMP_ORB_DEPLOY_CHECK_APP = 'github-actions'
 export const AMP_ORB_DEPLOY_RECEIPT_SCHEMA_VERSION = 'amp-orb-deployment-receipt-v1'
 export const EQB_LEGACY_BASELINE_RECEIPT_SCHEMA_VERSION = 'eqb-legacy-baseline-receipt-v1'
+export const EQB_RELEASE_BOOTSTRAP_FAILURE_SCHEMA_VERSION = 'eqb-deployment-bootstrap-failure-v1'
 export const EQB_BOOTSTRAP_KEY_RETIREMENT_SCHEMA_VERSION = 'eqb-bootstrap-key-retirement-v1'
+export const EQB_RELEASE_BOOTSTRAP_RECOVERY_SCHEMA_VERSION = 'eqb-release-bootstrap-recovery-v1'
+export const EQB_RELEASE_BOOTSTRAP_COMPLETION_SCHEMA_VERSION = 'eqb-release-bootstrap-completion-v1'
 
 const SHA = /^[a-f0-9]{40}$/u
 const SSH_TARGET = /^(?:[A-Za-z0-9._-]+@)?(?:\[[A-Fa-f0-9:]+\]|[A-Za-z0-9.-]+)$/u
+const SSH_REMOTE_TOKEN = /^[A-Za-z0-9_@%+=:,./-]+$/u
+const PROJECT_ID = /^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/u
+const BOOTSTRAP_UNIT = /^eqb-release-bootstrap-[a-f0-9]{32}$/u
 
 function assertSha(sha, label = 'deployment SHA') {
   if (!SHA.test(sha || '')) throw new Error(`Invalid ${label}`)
@@ -41,10 +53,350 @@ function writePrivateFile(filePath, value) {
   const descriptor = openSync(filePath, 'wx', 0o600)
   try {
     writeFileSync(descriptor, value, 'utf8')
+    fsyncSync(descriptor)
   } finally {
     closeSync(descriptor)
   }
   chmodSync(filePath, 0o600)
+}
+
+function syncDirectory(directory) {
+  const descriptor = openSync(directory, constants.O_RDONLY | constants.O_DIRECTORY)
+  try {
+    fsyncSync(descriptor)
+  } finally {
+    closeSync(descriptor)
+  }
+}
+
+function writePrivateFileAtomic(filePath, value) {
+  const temporaryPath = path.join(
+    path.dirname(filePath),
+    `.${path.basename(filePath)}-${randomUUID()}`,
+  )
+  try {
+    writePrivateFile(temporaryPath, value)
+    renameSync(temporaryPath, filePath)
+    syncDirectory(path.dirname(filePath))
+  } finally {
+    rmSync(temporaryPath, { force: true })
+  }
+}
+
+function sha256(value) {
+  return createHash('sha256').update(value).digest('hex')
+}
+
+function assertPrivateRecoveryNode(nodePath, type, mode) {
+  const metadata = lstatSync(nodePath)
+  const expectedType = type === 'directory' ? metadata.isDirectory() : metadata.isFile()
+  if (
+    !expectedType
+    || metadata.isSymbolicLink()
+    || metadata.uid !== process.getuid()
+    || (metadata.mode & 0o7777) !== mode
+    || (type === 'file' && metadata.nlink !== 1)
+  ) {
+    throw new Error(`Bootstrap recovery ${type} metadata is unsafe`)
+  }
+  return metadata
+}
+
+function readPrivateRecoveryFile(filePath) {
+  const before = assertPrivateRecoveryNode(filePath, 'file', 0o600)
+  if (before.size < 1 || before.size > 64 * 1024) {
+    throw new Error('Bootstrap recovery file size is invalid')
+  }
+  const descriptor = openSync(filePath, constants.O_RDONLY | constants.O_NOFOLLOW)
+  try {
+    const opened = fstatSync(descriptor)
+    if (opened.dev !== before.dev || opened.ino !== before.ino || opened.size !== before.size) {
+      throw new Error('Bootstrap recovery file changed while opening')
+    }
+    return readFileSync(descriptor, 'utf8')
+  } finally {
+    closeSync(descriptor)
+  }
+}
+
+function assertRecoveryRoot(stateRoot, { create = false } = {}) {
+  if (!path.isAbsolute(stateRoot || '')) {
+    throw new Error('Bootstrap recovery root must be absolute')
+  }
+  if (create) {
+    if (existsSync(stateRoot)) {
+      const existing = lstatSync(stateRoot)
+      if (existing.isSymbolicLink() || !existing.isDirectory() || existing.uid !== process.getuid()) {
+        throw new Error('Bootstrap recovery root metadata is unsafe')
+      }
+    } else {
+      mkdirSync(stateRoot, { recursive: true, mode: 0o700 })
+    }
+    chmodSync(stateRoot, 0o700)
+  }
+  return assertPrivateRecoveryNode(stateRoot, 'directory', 0o700)
+}
+
+function isIsoTimestamp(value) {
+  if (typeof value !== 'string') return false
+  try {
+    return new Date(value).toISOString() === value
+  } catch {
+    return false
+  }
+}
+
+function parseReleaseBootstrapRecoveryRecord(directory, expectedTarget, directoryPrefix) {
+  const recoveryPath = path.join(directory, 'recovery.json')
+  let record
+  try {
+    record = JSON.parse(readPrivateRecoveryFile(recoveryPath))
+  } catch {
+    throw new Error('Bootstrap recovery record is not valid JSON')
+  }
+  const expectedKeys = [
+    'bootstrapPublicKeyDigest',
+    'controllerPublicKeyDigest',
+    'createdAt',
+    'projectId',
+    'schemaVersion',
+    'targetSha',
+    'transportTargetDigest',
+    'unit',
+  ]
+  if (
+    !record
+    || typeof record !== 'object'
+    || Array.isArray(record)
+    || Object.keys(record).sort().join('\n') !== expectedKeys.join('\n')
+    || record.schemaVersion !== EQB_RELEASE_BOOTSTRAP_RECOVERY_SCHEMA_VERSION
+    || !SHA.test(record.targetSha || '')
+    || path.basename(directory) !== `${directoryPrefix}${record.targetSha}`
+    || (expectedTarget !== null && record.targetSha !== expectedTarget)
+    || !PROJECT_ID.test(record.projectId || '')
+    || !BOOTSTRAP_UNIT.test(record.unit || '')
+    || ![record.transportTargetDigest, record.controllerPublicKeyDigest, record.bootstrapPublicKeyDigest]
+      .every((digest) => /^[a-f0-9]{64}$/u.test(digest || ''))
+    || !isIsoTimestamp(record.createdAt)
+  ) {
+    throw new Error('Bootstrap recovery record values are invalid')
+  }
+  return { ...record, recoveryPath }
+}
+
+function parseReleaseBootstrapCompletionReceipt(directory, targetSha) {
+  const completionPath = path.join(directory, 'completion.json')
+  let completion
+  try {
+    completion = JSON.parse(readPrivateRecoveryFile(completionPath))
+  } catch {
+    throw new Error('Bootstrap completion receipt is not valid JSON')
+  }
+  if (
+    !completion
+    || typeof completion !== 'object'
+    || Array.isArray(completion)
+    || Object.keys(completion).sort().join('\n') !== [
+      'completedAt',
+      'controllerSecretRotated',
+      'schemaVersion',
+      'targetSha',
+    ].join('\n')
+    || completion.schemaVersion !== EQB_RELEASE_BOOTSTRAP_COMPLETION_SCHEMA_VERSION
+    || completion.targetSha !== targetSha
+    || completion.controllerSecretRotated !== true
+    || !isIsoTimestamp(completion.completedAt)
+  ) {
+    throw new Error('Bootstrap completion receipt values are invalid')
+  }
+  return { ...completion, completionPath }
+}
+
+export function createReleaseBootstrapRecovery({
+  stateRoot,
+  candidateSha,
+  projectId,
+  transportTarget,
+  unit,
+  controllerPrivateKey,
+  controllerPublicKeyBody,
+  bootstrapPrivateKey,
+  bootstrapPublicKeyBody,
+  now = () => new Date(),
+} = {}) {
+  const targetSha = assertSha(candidateSha)
+  if (!PROJECT_ID.test(projectId || '')) {
+    throw new Error('Bootstrap recovery project identity is invalid')
+  }
+  deploymentSSHTransportUser(transportTarget)
+  if (!BOOTSTRAP_UNIT.test(unit || '')) {
+    throw new Error('Bootstrap recovery systemd unit identity is invalid')
+  }
+  for (const [label, value] of [
+    ['controller private key', controllerPrivateKey],
+    ['bootstrap private key', bootstrapPrivateKey],
+  ]) {
+    if (typeof value !== 'string' || !value.trim() || value.includes('\0')) {
+      throw new Error(`Bootstrap recovery ${label} is invalid`)
+    }
+  }
+  for (const [label, value] of [
+    ['controller public key', controllerPublicKeyBody],
+    ['bootstrap public key', bootstrapPublicKeyBody],
+  ]) {
+    if (!/^[A-Za-z0-9+/]+={0,3}$/u.test(value || '')) {
+      throw new Error(`Bootstrap recovery ${label} is invalid`)
+    }
+  }
+  if (controllerPublicKeyBody === bootstrapPublicKeyBody) {
+    throw new Error('Bootstrap recovery identities must be distinct')
+  }
+  const createdAt = now().toISOString()
+  assertRecoveryRoot(stateRoot, { create: true })
+  const directory = path.join(stateRoot, `bootstrap-${targetSha}`)
+  if (existsSync(directory)) {
+    throw new Error(`Private bootstrap recovery already exists for ${targetSha}; resume it instead`)
+  }
+  mkdirSync(directory, { mode: 0o700 })
+  chmodSync(directory, 0o700)
+  try {
+    writePrivateFile(path.join(directory, 'controller-identity'), controllerPrivateKey)
+    writePrivateFile(path.join(directory, 'bootstrap-identity'), bootstrapPrivateKey)
+    writePrivateFile(path.join(directory, 'recovery.json'), `${JSON.stringify({
+      schemaVersion: EQB_RELEASE_BOOTSTRAP_RECOVERY_SCHEMA_VERSION,
+      targetSha,
+      projectId,
+      transportTargetDigest: sha256(transportTarget),
+      unit,
+      controllerPublicKeyDigest: sha256(controllerPublicKeyBody),
+      bootstrapPublicKeyDigest: sha256(bootstrapPublicKeyBody),
+      createdAt,
+    }, null, 2)}\n`)
+    syncDirectory(directory)
+    syncDirectory(stateRoot)
+  } catch (error) {
+    rmSync(directory, { recursive: true, force: true })
+    syncDirectory(stateRoot)
+    throw error
+  }
+  return readReleaseBootstrapRecovery({ stateRoot, targetSha })
+}
+
+export function readReleaseBootstrapRecovery({ stateRoot, targetSha } = {}) {
+  assertRecoveryRoot(stateRoot)
+  const expectedTarget = targetSha === undefined ? null : assertSha(targetSha)
+  const candidates = readdirSync(stateRoot, { withFileTypes: true })
+    .filter((entry) => entry.name.startsWith('bootstrap-') && !entry.name.startsWith('.bootstrap-'))
+    .filter((entry) => expectedTarget === null || entry.name === `bootstrap-${expectedTarget}`)
+  if (candidates.length !== 1 || !candidates[0].isDirectory() || candidates[0].isSymbolicLink()) {
+    throw new Error('Exactly one private bootstrap recovery record is required')
+  }
+  const directory = path.join(stateRoot, candidates[0].name)
+  assertPrivateRecoveryNode(directory, 'directory', 0o700)
+  const record = parseReleaseBootstrapRecoveryRecord(directory, expectedTarget, 'bootstrap-')
+  const controllerPrivateKeyPath = path.join(directory, 'controller-identity')
+  const bootstrapPrivateKeyPath = path.join(directory, 'bootstrap-identity')
+  return {
+    ...record,
+    directory,
+    controllerPrivateKeyPath,
+    controllerPrivateKey: readPrivateRecoveryFile(controllerPrivateKeyPath),
+    bootstrapPrivateKeyPath,
+    bootstrapPrivateKey: readPrivateRecoveryFile(bootstrapPrivateKeyPath),
+  }
+}
+
+export function completeReleaseBootstrapRecovery(recovery, {
+  now = () => new Date(),
+  removeIdentity = unlinkSync,
+} = {}) {
+  if (
+    !recovery
+    || !path.isAbsolute(recovery.directory || '')
+    || path.basename(recovery.directory) !== `bootstrap-${assertSha(recovery.targetSha)}`
+  ) {
+    throw new Error('Bootstrap recovery completion target is invalid')
+  }
+  assertPrivateRecoveryNode(recovery.directory, 'directory', 0o700)
+  const completionPath = path.join(recovery.directory, 'completion.json')
+  if (!existsSync(completionPath)) {
+    writePrivateFileAtomic(completionPath, `${JSON.stringify({
+      schemaVersion: EQB_RELEASE_BOOTSTRAP_COMPLETION_SCHEMA_VERSION,
+      targetSha: recovery.targetSha,
+      controllerSecretRotated: true,
+      completedAt: now().toISOString(),
+    }, null, 2)}\n`)
+  }
+  parseReleaseBootstrapCompletionReceipt(recovery.directory, recovery.targetSha)
+  const completedDirectory = path.join(
+    path.dirname(recovery.directory),
+    `completed-bootstrap-${recovery.targetSha}`,
+  )
+  if (existsSync(completedDirectory)) {
+    throw new Error('Bootstrap terminal recovery receipt already exists')
+  }
+  renameSync(recovery.directory, completedDirectory)
+  syncDirectory(path.dirname(completedDirectory))
+  return clearCompletedReleaseBootstrapRecovery({
+    stateRoot: path.dirname(completedDirectory),
+    targetSha: recovery.targetSha,
+    removeIdentity,
+  })
+}
+
+export function readCompletedReleaseBootstrapRecovery({
+  stateRoot,
+  targetSha,
+  optional = false,
+} = {}) {
+  assertRecoveryRoot(stateRoot)
+  const expectedTarget = targetSha === undefined ? null : assertSha(targetSha)
+  const candidates = readdirSync(stateRoot, { withFileTypes: true })
+    .filter((entry) => entry.name.startsWith('completed-bootstrap-'))
+    .filter((entry) => expectedTarget === null || entry.name === `completed-bootstrap-${expectedTarget}`)
+  if (optional && candidates.length === 0) return null
+  if (candidates.length !== 1 || !candidates[0].isDirectory() || candidates[0].isSymbolicLink()) {
+    throw new Error('Exactly one completed bootstrap recovery receipt is required')
+  }
+  const directory = path.join(stateRoot, candidates[0].name)
+  assertPrivateRecoveryNode(directory, 'directory', 0o700)
+  const record = parseReleaseBootstrapRecoveryRecord(directory, expectedTarget, 'completed-bootstrap-')
+  const completion = parseReleaseBootstrapCompletionReceipt(directory, record.targetSha)
+  return { ...record, ...completion, directory }
+}
+
+export function clearCompletedReleaseBootstrapRecovery({
+  stateRoot,
+  targetSha,
+  removeIdentity = unlinkSync,
+} = {}) {
+  if (typeof removeIdentity !== 'function') {
+    throw new Error('Bootstrap recovery identity cleanup dependency is missing')
+  }
+  const completed = readCompletedReleaseBootstrapRecovery({ stateRoot, targetSha })
+  for (const name of ['controller-identity', 'bootstrap-identity']) {
+    const identityPath = path.join(completed.directory, name)
+    if (existsSync(identityPath)) {
+      assertPrivateRecoveryNode(identityPath, 'file', 0o600)
+      removeIdentity(identityPath)
+      syncDirectory(completed.directory)
+    }
+  }
+  return completed
+}
+
+export function removeReleaseBootstrapRecovery(recovery) {
+  if (
+    !recovery
+    || !path.isAbsolute(recovery.directory || '')
+    || path.basename(recovery.directory) !== `bootstrap-${assertSha(recovery.targetSha)}`
+  ) {
+    throw new Error('Bootstrap recovery cleanup target is invalid')
+  }
+  assertPrivateRecoveryNode(recovery.directory, 'directory', 0o700)
+  const stateRoot = path.dirname(recovery.directory)
+  rmSync(recovery.directory, { recursive: true })
+  syncDirectory(stateRoot)
 }
 
 function normalizePrivateKey(value) {
@@ -98,6 +450,15 @@ export function requireReleaseLayoutBootstrapAuthorization(argv) {
   }
   if (argv.includes('--sha')) {
     throw new Error('Bootstrap target SHA is resolved automatically; do not supply --sha')
+  }
+}
+
+export function requireReleaseLayoutBootstrapResumeAuthorization(argv) {
+  if (!Array.isArray(argv) || !argv.includes('--owner-said-release-bootstrap-resume')) {
+    throw new Error('Current Owner authorization to resume release-layout bootstrap finalization is required')
+  }
+  if (argv.includes('--sha')) {
+    throw new Error('Bootstrap recovery target SHA comes from private durable state; do not supply --sha')
   }
 }
 
@@ -387,6 +748,112 @@ export function parseLegacyBaselineReceipt(output, expectedSha) {
   return receipt
 }
 
+export function parseReleaseBootstrapFailure(output, expectedSha, expectedExitCode) {
+  const sha = assertSha(expectedSha)
+  if (
+    expectedExitCode !== undefined
+    && (!Number.isInteger(expectedExitCode) || expectedExitCode < 1 || expectedExitCode > 255)
+  ) {
+    throw new Error('Release-layout bootstrap exit code is invalid')
+  }
+  const prefix = 'EQB_BOOTSTRAP_FAILURE '
+  const markers = String(output || '').split('\n')
+    .filter((line) => line.startsWith(prefix))
+  if (markers.length !== 1) {
+    throw new Error('Release-layout bootstrap failure marker is missing or ambiguous')
+  }
+  let receipt
+  try {
+    receipt = JSON.parse(markers[0].slice(prefix.length))
+  } catch {
+    throw new Error('Release-layout bootstrap failure marker is not valid JSON')
+  }
+  const expectedKeys = [
+    'conclusion',
+    'evidenceRetained',
+    'exitCode',
+    'failedStage',
+    'rollbackHealthy',
+    'schemaVersion',
+    'state',
+    'targetSha',
+  ]
+  if (
+    !receipt
+    || typeof receipt !== 'object'
+    || Array.isArray(receipt)
+    || Object.keys(receipt).sort().join('\n') !== expectedKeys.join('\n')
+    || receipt.schemaVersion !== EQB_RELEASE_BOOTSTRAP_FAILURE_SCHEMA_VERSION
+    || receipt.state !== 'reported'
+    || receipt.conclusion !== 'failure'
+    || receipt.targetSha !== sha
+    || !/^[a-z0-9-]+$/u.test(receipt.failedStage || '')
+    || !Number.isInteger(receipt.exitCode)
+    || receipt.exitCode < 1
+    || receipt.exitCode > 255
+    || (expectedExitCode !== undefined && receipt.exitCode !== expectedExitCode)
+    || typeof receipt.rollbackHealthy !== 'boolean'
+    || typeof receipt.evidenceRetained !== 'boolean'
+  ) {
+    throw new Error('Release-layout bootstrap failure marker is invalid')
+  }
+  return receipt
+}
+
+export function bootstrapPayloadStageInput(sourceValue, digestValue) {
+  const source = String(sourceValue || '')
+  const digest = String(digestValue || '')
+  if (!/^[a-f0-9]{64}$/u.test(digest)) {
+    throw new Error('Release bootstrap payload digest is invalid')
+  }
+  const delimiter = `EQB_BOOTSTRAP_PAYLOAD_${digest.toUpperCase()}`
+  if (!source.endsWith('\n') || source.split('\n').includes(delimiter)) {
+    throw new Error('Release bootstrap payload cannot be staged safely')
+  }
+  return `set -Eeuo pipefail
+PATH=/usr/sbin:/usr/bin:/sbin:/bin
+umask 077
+target_sha=$1
+expected_digest=$2
+[[ "$target_sha" =~ ^[a-f0-9]{40}$ ]] || exit 91
+[[ "$expected_digest" =~ ^[a-f0-9]{64}$ ]] || exit 92
+backup_root=/var/backups/eqb
+[[ -d "$backup_root" && ! -L "$backup_root" ]] || exit 93
+[[ "$(/usr/bin/stat -c '%u:%g:%a' -- "$backup_root")" == '0:0:700' ]] || exit 94
+exec 9<"$backup_root"
+/usr/bin/flock --exclusive --nonblock --conflict-exit-code 75 9
+digest_prefix=$(/usr/bin/printf '%s' "$expected_digest" | /usr/bin/cut -c 1-16)
+destination="$backup_root/bootstrap-payload-$target_sha-$digest_prefix.sh"
+temporary=
+cleanup_stage() {
+  if [[ -n "$temporary" ]]; then
+    /usr/bin/rm -f -- "$temporary"
+  fi
+}
+trap cleanup_stage EXIT
+if [[ -e "$destination" || -L "$destination" ]]; then
+  [[ -f "$destination" && ! -L "$destination" ]] || exit 96
+  [[ "$(/usr/bin/stat -c '%u:%g:%a:%h' -- "$destination")" == '0:0:600:1' ]] || exit 97
+  installed_digest=$(/usr/bin/sha256sum -- "$destination" | /usr/bin/cut -d ' ' -f 1)
+  [[ "$installed_digest" == "$expected_digest" ]] || exit 98
+else
+  temporary=$(/usr/bin/mktemp "$backup_root/.bootstrap-payload-XXXXXXXX")
+  /usr/bin/cat >"$temporary" <<'${delimiter}'
+${source}${delimiter}
+  incoming_digest=$(/usr/bin/sha256sum -- "$temporary" | /usr/bin/cut -d ' ' -f 1)
+  [[ "$incoming_digest" == "$expected_digest" ]] || exit 99
+  /usr/bin/chown 0:0 -- "$temporary"
+  /usr/bin/chmod 0600 -- "$temporary"
+  [[ "$(/usr/bin/stat -c '%u:%g:%a:%h' -- "$temporary")" == '0:0:600:1' ]] || exit 100
+  /usr/bin/sync -d -- "$temporary"
+  /usr/bin/mv -- "$temporary" "$destination"
+  temporary=
+  /usr/bin/sync -d -- "$backup_root"
+fi
+printf 'EQB bootstrap payload staged: %s\n' "$target_sha"
+`
+}
+
 export function parseBootstrapKeyRetirementReceipt(output) {
   let receipt
   try {
@@ -471,6 +938,57 @@ export async function migrateLegacyProductionBaseline({
   return { candidate, preflight, receipt }
 }
 
+export async function completeReleaseLayoutBootstrap({
+  candidate,
+  readControllerPreflight,
+  classifyBootstrapIdentity,
+  retireBootstrapIdentity,
+  rotateControllerSecret,
+  cleanupRecovery,
+} = {}) {
+  const sha = assertSha(candidate?.sha)
+  if (
+    typeof readControllerPreflight !== 'function'
+    || typeof classifyBootstrapIdentity !== 'function'
+    || typeof retireBootstrapIdentity !== 'function'
+    || typeof rotateControllerSecret !== 'function'
+    || typeof cleanupRecovery !== 'function'
+  ) {
+    throw new Error('Release-layout bootstrap finalization dependencies are missing')
+  }
+  function assertHealthyController(preflight) {
+    if (
+      preflight?.layout !== 'release'
+      || preflight?.productionSha !== sha
+      || preflight?.eqb !== 'active'
+      || preflight?.caddy !== 'active'
+    ) {
+      throw new Error('New deployment controller did not prove a healthy release layout')
+    }
+    return preflight
+  }
+
+  assertHealthyController(await readControllerPreflight(candidate))
+  const initialIdentityState = await classifyBootstrapIdentity(candidate)
+  if (!['active', 'retired'].includes(initialIdentityState)) {
+    throw new Error('Privileged bootstrap identity state is unknown')
+  }
+  const keyRetirement = initialIdentityState === 'active'
+    ? await retireBootstrapIdentity(candidate)
+    : null
+  const controllerPreflight = assertHealthyController(await readControllerPreflight(candidate))
+  if (await classifyBootstrapIdentity(candidate) !== 'retired') {
+    throw new Error('Privileged bootstrap identity remains usable or its state is unknown')
+  }
+  await rotateControllerSecret(candidate)
+  await cleanupRecovery(candidate)
+  return {
+    controllerPreflight,
+    initialIdentityState,
+    keyRetirement,
+  }
+}
+
 export async function bootstrapReleaseLayout({
   argv,
   resolveCandidate,
@@ -479,8 +997,9 @@ export async function bootstrapReleaseLayout({
   invokeBootstrap,
   readControllerPreflight,
   retireBootstrapIdentity,
-  verifyBootstrapIdentityRetired,
+  classifyBootstrapIdentity,
   rotateControllerSecret,
+  cleanupRecovery,
 } = {}) {
   requireReleaseLayoutBootstrapAuthorization(argv)
   if (
@@ -490,8 +1009,9 @@ export async function bootstrapReleaseLayout({
     || typeof invokeBootstrap !== 'function'
     || typeof readControllerPreflight !== 'function'
     || typeof retireBootstrapIdentity !== 'function'
-    || typeof verifyBootstrapIdentityRetired !== 'function'
+    || typeof classifyBootstrapIdentity !== 'function'
     || typeof rotateControllerSecret !== 'function'
+    || typeof cleanupRecovery !== 'function'
   ) {
     throw new Error('Release-layout bootstrap dependencies are missing')
   }
@@ -509,25 +1029,36 @@ export async function bootstrapReleaseLayout({
   }
   await assertDeploymentCandidateStillCurrent({ readMainSha, sha: candidate.sha })
   await invokeBootstrap({ candidate, legacyPreflight })
-  function assertHealthyController(preflight) {
-    if (
-      preflight?.layout !== 'release'
-      || preflight?.productionSha !== candidate.sha
-      || preflight?.eqb !== 'active'
-      || preflight?.caddy !== 'active'
-    ) {
-      throw new Error('New deployment controller did not prove a healthy release layout')
-    }
-    return preflight
-  }
-  assertHealthyController(await readControllerPreflight(candidate))
-  const keyRetirement = await retireBootstrapIdentity(candidate)
-  const controllerPreflight = assertHealthyController(await readControllerPreflight(candidate))
-  if (await verifyBootstrapIdentityRetired(candidate) !== true) {
-    throw new Error('Privileged bootstrap identity remains usable')
-  }
-  await rotateControllerSecret(candidate)
-  return { candidate, legacyPreflight, controllerPreflight, keyRetirement }
+  const finalized = await completeReleaseLayoutBootstrap({
+    candidate,
+    readControllerPreflight,
+    classifyBootstrapIdentity,
+    retireBootstrapIdentity,
+    rotateControllerSecret,
+    cleanupRecovery,
+  })
+  return { candidate, legacyPreflight, ...finalized }
+}
+
+export async function resumeReleaseLayoutBootstrap({
+  argv,
+  candidate,
+  readControllerPreflight,
+  classifyBootstrapIdentity,
+  retireBootstrapIdentity,
+  rotateControllerSecret,
+  cleanupRecovery,
+} = {}) {
+  requireReleaseLayoutBootstrapResumeAuthorization(argv)
+  const finalized = await completeReleaseLayoutBootstrap({
+    candidate,
+    readControllerPreflight,
+    classifyBootstrapIdentity,
+    retireBootstrapIdentity,
+    rotateControllerSecret,
+    cleanupRecovery,
+  })
+  return { candidate, resumed: true, ...finalized }
 }
 
 export async function deployLatestRelease({
@@ -588,13 +1119,14 @@ export function deploymentSSHInvocation({
   knownHostsPath,
   remoteArgs = ['bash', '-s'],
 } = {}) {
-  if (!SSH_TARGET.test(host || '') || String(host).startsWith('-')) {
-    throw new Error('Deployment SSH target is invalid')
-  }
+  deploymentSSHTransportUser(host)
   if (!path.isAbsolute(keyPath || '') || !path.isAbsolute(knownHostsPath || '')) {
     throw new Error('Deployment SSH credential paths must be absolute')
   }
-  if (!Array.isArray(remoteArgs) || remoteArgs.some((value) => typeof value !== 'string')) {
+  if (
+    !Array.isArray(remoteArgs)
+    || remoteArgs.some((value) => typeof value !== 'string' || !SSH_REMOTE_TOKEN.test(value))
+  ) {
     throw new Error('Deployment SSH remote command is invalid')
   }
   return {
@@ -615,6 +1147,21 @@ export function deploymentSSHInvocation({
       ...remoteArgs,
     ],
   }
+}
+
+export function deploymentSSHTransportUser(host) {
+  if (!SSH_TARGET.test(host || '') || String(host).startsWith('-')) {
+    throw new Error('Deployment SSH target is invalid')
+  }
+  const separator = String(host).indexOf('@')
+  if (separator < 1) {
+    throw new Error('Deployment SSH target must name its transport account explicitly')
+  }
+  const user = String(host).slice(0, separator)
+  if (!/^[a-z_][a-z0-9_-]*$/u.test(user) || user === 'root') {
+    throw new Error('Deployment SSH transport account is invalid')
+  }
+  return user
 }
 
 export function deploymentLockInvocation({ root, executable, args = [] } = {}) {

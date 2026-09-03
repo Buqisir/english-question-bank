@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import { execFileSync } from 'node:child_process'
 import crypto from 'node:crypto'
 import fs from 'node:fs'
 import path from 'node:path'
@@ -10,10 +11,11 @@ import path from 'node:path'
 // still-live bootstrap connection and then proves that identity no longer works.
 
 const keyBodyPattern = /^[A-Za-z0-9+/]+={0,3}$/u
+const transportUserPattern = /^[a-z_][a-z0-9_-]*$/u
+const transportUser = String(process.env.EQB_DEPLOY_TRANSPORT_USER || '')
 const oldKeyBody = String(process.env.EQB_DEPLOY_BOOTSTRAP_PUBLIC_KEY_BODY || '')
 const newKeyBody = String(process.env.EQB_DEPLOY_CONTROLLER_PUBLIC_KEY_BODY || '')
-const authorizedKeys = '/root/.ssh/authorized_keys'
-const controller = '/usr/local/libexec/eqb-deploy-controller-v1'
+const transportController = '/usr/local/libexec/eqb-deploy-transport-v1'
 const keyComment = 'eqb-amp-deployment-v1'
 
 process.umask(0o077)
@@ -26,24 +28,37 @@ function hash(value) {
   return crypto.createHash('sha256').update(value).digest('hex')
 }
 
-function privateWrite(filePath, value) {
+function privateWrite(filePath, value, { uid = 0, gid = 0 } = {}) {
   const descriptor = fs.openSync(filePath, 'wx', 0o600)
   try {
     fs.writeFileSync(descriptor, value, 'utf8')
     fs.fsyncSync(descriptor)
+    fs.fchownSync(descriptor, uid, gid)
+    fs.fchmodSync(descriptor, 0o600)
   } finally {
     fs.closeSync(descriptor)
   }
-  fs.chownSync(filePath, 0, 0)
-  fs.chmodSync(filePath, 0o600)
 }
 
 function containsKeyBody(line, body) {
   return line.trim().split(/[\t ]+/u).includes(body)
 }
 
-function syncSshDirectory() {
-  const descriptor = fs.openSync('/root/.ssh', 'r')
+function lineRecords(value) {
+  const records = value.match(/[^\n]*(?:\n|$)/gu) || []
+  if (records.at(-1) === '') records.pop()
+  return records
+}
+
+function authorizationRecords(records) {
+  return records.filter((record) => {
+    const line = record.trim()
+    return line && !line.startsWith('#')
+  })
+}
+
+function syncDirectory(directory) {
+  const descriptor = fs.openSync(directory, 'r')
   try {
     fs.fsyncSync(descriptor)
   } finally {
@@ -51,19 +66,76 @@ function syncSshDirectory() {
   }
 }
 
+function pathEntryExists(filePath) {
+  try {
+    fs.lstatSync(filePath)
+    return true
+  } catch (error) {
+    if (error.code === 'ENOENT') return false
+    throw error
+  }
+}
+
+function resolveTransportBoundary() {
+  if (!transportUserPattern.test(transportUser) || transportUser === 'root') fail('transport-user')
+  const fields = execFileSync('/usr/bin/getent', ['passwd', transportUser], {
+    encoding: 'utf8',
+  }).trim().split(':')
+  if (fields.length !== 7 || fields[0] !== transportUser) fail('transport-account')
+  const uid = Number(fields[2])
+  const gid = Number(fields[3])
+  const home = fields[5]
+  if (!Number.isSafeInteger(uid) || uid < 1 || !Number.isSafeInteger(gid) || gid < 0) {
+    fail('transport-identity')
+  }
+  if (
+    !path.isAbsolute(home)
+    || path.normalize(home) !== home
+    || home === '/'
+    || home.includes('\0')
+  ) fail('transport-home')
+  const homeState = fs.lstatSync(home)
+  if (
+    !homeState.isDirectory()
+    || homeState.isSymbolicLink()
+    || homeState.uid !== uid
+    || homeState.gid !== gid
+  ) {
+    fail('transport-home-state')
+  }
+  if ((homeState.mode & 0o022) !== 0) fail('transport-home-mode')
+  const sshDirectory = path.join(home, '.ssh')
+  const sshState = fs.lstatSync(sshDirectory)
+  if (
+    !sshState.isDirectory()
+    || sshState.isSymbolicLink()
+    || sshState.uid !== uid
+    || sshState.gid !== gid
+    || (sshState.mode & 0o7777) !== 0o700
+  ) fail('transport-ssh-directory')
+  const authorizedKeys = path.join(sshDirectory, 'authorized_keys')
+  if (pathEntryExists(path.join(sshDirectory, 'authorized_keys2'))) {
+    fail('transport-secondary-authorized-keys')
+  }
+  return { uid, gid, sshDirectory, authorizedKeys }
+}
+
 if (process.getuid?.() !== 0) fail('run-as-root')
+const transport = resolveTransportBoundary()
 if (!keyBodyPattern.test(oldKeyBody) || !keyBodyPattern.test(newKeyBody)) fail('key-input')
 if (oldKeyBody === newKeyBody) fail('key-identities-equal')
 
-const authorizedState = fs.lstatSync(authorizedKeys)
+const authorizedState = fs.lstatSync(transport.authorizedKeys)
 if (
   !authorizedState.isFile()
   || authorizedState.isSymbolicLink()
-  || authorizedState.uid !== 0
-  || (authorizedState.mode & 0o077) !== 0
+  || authorizedState.uid !== transport.uid
+  || authorizedState.gid !== transport.gid
+  || (authorizedState.mode & 0o7777) !== 0o600
+  || authorizedState.nlink !== 1
 ) fail('authorized-keys-state')
 
-const original = fs.readFileSync(authorizedKeys, 'utf8')
+const original = fs.readFileSync(transport.authorizedKeys, 'utf8')
 if (
   Buffer.byteLength(original) > 1024 * 1024
   || original.includes('\0')
@@ -71,44 +143,69 @@ if (
 ) {
   fail('authorized-keys-content')
 }
-const lines = original.split('\n')
-if (lines.at(-1) === '') lines.pop()
-const oldMatches = lines.filter((line) => containsKeyBody(line, oldKeyBody))
-const newMatches = lines.filter((line) => containsKeyBody(line, newKeyBody))
-const expectedForcedKey = `restrict,command="${controller}" ssh-ed25519 ${newKeyBody} ${keyComment}`
+const records = lineRecords(original)
+const oldMatches = records.filter((record) => containsKeyBody(record, oldKeyBody))
+const newMatches = records.filter((record) => containsKeyBody(record, newKeyBody))
+const expectedForcedKey = `restrict,command="${transportController}" ssh-ed25519 ${newKeyBody} ${keyComment}`
 if (oldMatches.length !== 1) fail('bootstrap-key-count')
 if (newMatches.length !== 1 || newMatches[0].trim() !== expectedForcedKey) {
   fail('controller-key-state')
 }
+if (authorizationRecords(records).length !== 2) fail('unexpected-authorized-key')
 
-fs.mkdirSync('/var/backups/eqb', { recursive: true, mode: 0o700 })
-fs.chownSync('/var/backups/eqb', 0, 0)
-fs.chmodSync('/var/backups/eqb', 0o700)
+const backupRoot = '/var/backups/eqb'
+const backupRootState = fs.lstatSync(backupRoot)
+if (
+  !backupRootState.isDirectory()
+  || backupRootState.isSymbolicLink()
+  || backupRootState.uid !== 0
+  || backupRootState.gid !== 0
+  || (backupRootState.mode & 0o7777) !== 0o700
+) fail('backup-root-state')
 const backupDirectory = fs.mkdtempSync('/var/backups/eqb/bootstrap-key-retirement-')
 fs.chownSync(backupDirectory, 0, 0)
 fs.chmodSync(backupDirectory, 0o700)
 const backupPath = path.join(backupDirectory, 'authorized_keys.before')
 privateWrite(backupPath, original)
 
-const retained = lines.filter((line) => !containsKeyBody(line, oldKeyBody))
-const replacement = `${retained.join('\n')}\n`
-const replacementPath = `/root/.ssh/.authorized_keys-retirement-${process.pid}`
+const replacement = records
+  .filter((record) => !containsKeyBody(record, oldKeyBody))
+  .join('')
+const replacementPath = path.join(
+  transport.sshDirectory,
+  `.authorized_keys-retirement-${crypto.randomBytes(12).toString('hex')}`,
+)
 let replaced = false
 try {
-  privateWrite(replacementPath, replacement)
-  fs.renameSync(replacementPath, authorizedKeys)
-  syncSshDirectory()
+  privateWrite(replacementPath, replacement, transport)
+  const currentState = fs.lstatSync(transport.authorizedKeys)
+  if (
+    currentState.dev !== authorizedState.dev
+    || currentState.ino !== authorizedState.ino
+    || currentState.uid !== authorizedState.uid
+    || currentState.gid !== authorizedState.gid
+    || (currentState.mode & 0o7777) !== (authorizedState.mode & 0o7777)
+    || currentState.nlink !== authorizedState.nlink
+    || hash(fs.readFileSync(transport.authorizedKeys, 'utf8')) !== hash(original)
+  ) fail('authorized-keys-race')
+  fs.renameSync(replacementPath, transport.authorizedKeys)
+  syncDirectory(transport.sshDirectory)
   replaced = true
-  const installedState = fs.lstatSync(authorizedKeys)
-  const installed = fs.readFileSync(authorizedKeys, 'utf8')
+  const installedState = fs.lstatSync(transport.authorizedKeys)
+  const installed = fs.readFileSync(transport.authorizedKeys, 'utf8')
+  const installedRecords = lineRecords(installed)
   if (
     !installedState.isFile()
     || installedState.isSymbolicLink()
-    || installedState.uid !== 0
+    || installedState.uid !== transport.uid
+    || installedState.gid !== transport.gid
     || (installedState.mode & 0o7777) !== 0o600
-    || installed.split('\n').some((line) => containsKeyBody(line, oldKeyBody))
-    || installed.split('\n').filter((line) => containsKeyBody(line, newKeyBody)).length !== 1
-    || !installed.includes(`${expectedForcedKey}\n`)
+    || installedState.nlink !== 1
+    || installed !== replacement
+    || installedRecords.some((record) => containsKeyBody(record, oldKeyBody))
+    || installedRecords.filter((record) => containsKeyBody(record, newKeyBody)).length !== 1
+    || authorizationRecords(installedRecords).length !== 1
+    || installedRecords.find((record) => containsKeyBody(record, newKeyBody))?.trim() !== expectedForcedKey
   ) fail('retirement-postcondition')
 
   const receipt = {
@@ -124,12 +221,14 @@ try {
   console.log(JSON.stringify(receipt))
 } catch (error) {
   if (replaced) {
-    const rollbackPath = `/root/.ssh/.authorized_keys-retirement-rollback-${process.pid}`
-    privateWrite(rollbackPath, original)
-    fs.renameSync(rollbackPath, authorizedKeys)
-    fs.chmodSync(authorizedKeys, authorizedState.mode & 0o7777)
-    syncSshDirectory()
-    if (hash(fs.readFileSync(authorizedKeys, 'utf8')) !== hash(original)) {
+    const rollbackPath = path.join(
+      transport.sshDirectory,
+      `.authorized_keys-retirement-rollback-${crypto.randomBytes(12).toString('hex')}`,
+    )
+    privateWrite(rollbackPath, original, transport)
+    fs.renameSync(rollbackPath, transport.authorizedKeys)
+    syncDirectory(transport.sshDirectory)
+    if (hash(fs.readFileSync(transport.authorizedKeys, 'utf8')) !== hash(original)) {
       throw new Error('retirement-rollback-failed')
     }
   }
