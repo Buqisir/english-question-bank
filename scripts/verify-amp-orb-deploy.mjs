@@ -48,6 +48,7 @@ import {
   parseDeploymentControllerPreflight,
   parseDeploymentPreflightOutput,
   parseLegacyBaselineReceipt,
+  parseOpenSshEd25519PublicKeyBody,
   parseReleaseBootstrapCancellation,
   parseReleaseBootstrapFailure,
   readAbandonedReleaseBootstrapRecovery,
@@ -1509,7 +1510,9 @@ section('Private credentials and pinned SSH invocation')
 
 const credentialRoot = mkdtempSync(path.join(tmpdir(), 'eqb-deploy-credentials-'))
 const generatedKey = path.join(credentialRoot, 'generated')
-execFileSync('ssh-keygen', ['-q', '-t', 'ed25519', '-N', '', '-f', generatedKey])
+execFileSync('ssh-keygen', [
+  '-q', '-t', 'ed25519', '-N', '', '-C', 'eqb-bootstrap-comment-fixture', '-f', generatedKey,
+])
 const oneLineKey = readFileSync(generatedKey, 'utf8').replaceAll('\n', '')
 const materialized = materializeDeploymentCredentials({
   privateKey: oneLineKey,
@@ -1533,11 +1536,34 @@ assert(
 
 const generatedControllerKey = path.join(credentialRoot, 'generated-controller')
 execFileSync('ssh-keygen', ['-q', '-t', 'ed25519', '-N', '', '-f', generatedControllerKey])
-const publicKeyBody = (privateKeyPath) => execFileSync(
+const publicKeyBody = (privateKeyPath) => parseOpenSshEd25519PublicKeyBody(execFileSync(
   'ssh-keygen',
   ['-y', '-f', privateKeyPath],
   { encoding: 'utf8' },
-).trim().split(/\s+/u)[1]
+))
+const commentedPublicKey = execFileSync(
+  'ssh-keygen',
+  ['-y', '-f', materialized.keyPath],
+  { encoding: 'utf8' },
+)
+assert(
+  commentedPublicKey.trim().split(/\s+/u).length === 3
+    && publicKeyBody(materialized.keyPath) === commentedPublicKey.trim().split(/\s+/u)[1],
+  'Deployment Ed25519 private keys remain valid when ssh-keygen emits a public-key comment',
+)
+for (const invalidPublicKey of [
+  'ssh-rsa AAAAFixtureOnly comment',
+  'ssh-ed25519 AAAAFixtureOnly\nssh-ed25519 AAAASecondFixture',
+]) {
+  assert((() => {
+    try {
+      parseOpenSshEd25519PublicKeyBody(invalidPublicKey)
+      return false
+    } catch {
+      return true
+    }
+  })(), 'Deployment public-key parsing rejects wrong-key-type and multiline output')
+}
 const recoveryRoot = path.join(credentialRoot, 'recovery-state')
 const recovery = createReleaseBootstrapRecovery({
   stateRoot: recoveryRoot,
