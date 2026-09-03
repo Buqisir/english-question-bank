@@ -343,10 +343,31 @@ The current Tencent host was bootstrapped before the versioned controller
 layout existed. After this maintenance implementation is merged and its exact
 `main` SHA has authoritative CI, migrate that host once. This is a separately
 authorized production/root action; repository presence is not authorization.
-Do not run it from an ordinary Deployment Orb command.
+Do not run the installer from an ordinary Deployment Orb command.
 
-On a clean trusted checkout, materialize the installer and six-file payload
-from the exact merged SHA (never from working-tree bytes):
+The Deployment project uses the repository-owned TAT client rather than an
+ambient `tccli` profile. Configure these exact project environment names before
+readiness; changing them is a separate Secret/configuration action:
+
+- `TENCENTCLOUD_SECRET_ID` and `TENCENTCLOUD_SECRET_KEY`: a dedicated CAM
+  identity limited to `tat:RunCommand`, `tat:DescribeInvocations`, and
+  `tat:DescribeInvocationTasks` for the target host;
+- `TENCENTCLOUD_SESSION_TOKEN`: optional temporary-credential token;
+- `TENCENTCLOUD_REGION`: the exact Tencent region such as `ap-guangzhou`;
+- `QUESTION_BANK_TENCENT_TAT_INSTANCE_ID`: the exact CVM `ins-*` identity.
+
+The region and instance ID are target configuration, not authority. The client
+never reads a user profile or accepts an endpoint override. It signs direct
+`tat.tencentcloudapi.com` API v2020-10-28 requests with the official
+TC3-HMAC-SHA256 shape. TAT command authority is effectively a root break-glass
+path, so do not reuse a general cloud credential or retain this dedicated
+credential in the Deployment project after the one-time installation is
+complete. Adding, rotating, or removing it remains a separately authorized
+Secret action; routine deploys never need it.
+
+For the later installation action, a clean trusted checkout materializes the
+installer and six-file payload from the exact merged SHA (never from
+working-tree bytes):
 
 ```bash
 SHA=<exact-merged-main-sha>
@@ -363,21 +384,31 @@ sha256sum /tmp/install-eqb-maintenance-controller.sh \
   /tmp/eqb-maintenance-controller.tar
 ```
 
-Before authorizing installation, stream the exact merged inspector directly
-from `git show "$SHA:deploy/inspect-eqb-maintenance-host.sh"` into the approved
-Tencent root/TAT stdin command:
+Before authorizing installation, obtain a distinct direct Owner authorization
+for read-only maintenance-install readiness and run:
 
 ```bash
-/usr/bin/env -i PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin \
-  /bin/bash -s -- "$SHA" <payload-sha256> <transport-user>
+node scripts/amp-orb-deploy.mjs maintenance-install-readiness \
+  --owner-said-maintenance-install-readiness
 ```
 
-Do not persist or run a working-tree copy. This is a strictly
-read-only host inspection: it acquires the existing production lock, requires
-the versioned host root to be absent, rejects active maintenance state, checks
-root metadata and installed-current hashes, native parsers, all four exact sudo
-argv forms, trusted remote `main`, free space, and local/public health. It reads
-no database or Secret content and writes no host file. Accept only one
+The command resolves and rechecks exact CI-authoritative `main`, computes the
+canonical six-file `git archive` digest, and reads the inspector from that exact
+commit. It sends one Base64-encoded root `SHELL` command to exactly one configured
+CVM with `SaveCommand=false`; the command uses a cleared environment and streams
+the inspector to `/bin/bash -s` without persisting a working-tree copy. It polls
+the returned exact invocation and task IDs, requires an untruncated (`Dropped=0`)
+Base64 output and a consistent remote exit code, and reports only an opaque
+region/instance digest. `RunCommand` has no idempotency token: the client never
+automatically retries an ambiguous dispatch. Reconcile the invocation in
+Tencent before requesting any fresh readiness authorization.
+
+This is a strictly read-only host inspection: it acquires the existing
+production lock, requires the versioned host root to be absent, rejects active
+maintenance state, checks root metadata and installed-current hashes, native
+parsers, all four exact sudo argv forms, trusted remote `main`, free space, and
+local/public health. It reads no database or Secret content and writes no host
+file. Accept only one
 `EQB_MAINTENANCE_INSTALL_READINESS` marker whose strict schema binds the exact
 SHA, payload digest, transport user and `state=ready`; any command failure,
 missing/duplicate marker, unexpected field, or `state=failed` is a blocker.

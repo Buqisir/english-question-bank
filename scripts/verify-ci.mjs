@@ -363,6 +363,7 @@ function changedPlan(files) {
     'scripts/amp-orb-deploy.mjs',
     'scripts/lib/ampOrbCI.mjs',
     'scripts/lib/ampOrbDeploy.mjs',
+    'scripts/lib/tencentTat.mjs',
     'scripts/verify-amp-orb-deploy.mjs',
     'server/auth/',
     'server/import-ops/',

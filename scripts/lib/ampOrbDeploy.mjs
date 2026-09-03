@@ -719,6 +719,15 @@ export function requireUpdateHostConfigurationAuthorization(argv) {
   }
 }
 
+export function requireMaintenanceInstallReadinessAuthorization(argv) {
+  if (!Array.isArray(argv) || !argv.includes('--owner-said-maintenance-install-readiness')) {
+    throw new Error('Current Owner authorization for Tencent maintenance-install readiness is required')
+  }
+  if (argv.includes('--sha')) {
+    throw new Error('Maintenance-install readiness target SHA is resolved automatically; do not supply --sha')
+  }
+}
+
 export function requireLegacyBaselineAuthorization(argv) {
   if (!Array.isArray(argv) || !argv.includes('--owner-said-baseline-migration')) {
     throw new Error('Current Owner authorization for the protected baseline migration is required')

@@ -66,6 +66,7 @@ import {
   removeReleaseBootstrapRecovery,
   requireDeployLatestAuthorization,
   requireLegacyBaselineAuthorization,
+  requireMaintenanceInstallReadinessAuthorization,
   requireReleaseLayoutBootstrapAuthorization,
   requireReleaseLayoutBootstrapAbandonAuthorization,
   requireReleaseLayoutBootstrapResumeAuthorization,
@@ -75,6 +76,13 @@ import {
   resolveLatestDeploymentCandidate,
   updateLatestHostConfiguration,
 } from './lib/ampOrbDeploy.mjs'
+import {
+  buildMaintenanceReadinessTatCommand,
+  createTencentCloudApiRequest,
+  executeTencentTatCommand,
+  readTencentTatConfiguration,
+  tencentTatTargetDigest,
+} from './lib/tencentTat.mjs'
 import {
   EQB_DEPLOY_CONTROLLER_VERSION,
   HOST_CONFIGURATION_PATHS,
@@ -95,6 +103,15 @@ const ROOT = repoRootFrom(import.meta.url)
 const { assert, section, summary } = createVerifier('Amp Orb production deployment contract')
 const oldSha = '1'.repeat(40)
 const newSha = '2'.repeat(40)
+
+function fakeTencentResponse(response, { ok = true } = {}) {
+  return {
+    ok,
+    async text() {
+      return JSON.stringify({ Response: response })
+    },
+  }
+}
 
 function checkRun(name, sha, {
   id,
@@ -179,6 +196,11 @@ for (const [authorize, argv, label] of [
     requireUpdateHostConfigurationAuthorization,
     ['update-host-config', '--owner-said-update-host-config'],
     'host configuration update',
+  ],
+  [
+    requireMaintenanceInstallReadinessAuthorization,
+    ['maintenance-install-readiness', '--owner-said-maintenance-install-readiness'],
+    'Tencent maintenance-install readiness',
   ],
 ]) {
   assert((() => {
@@ -606,6 +628,317 @@ assert(
     maintenanceInstallTransportUser,
   ).failureCode === 'HOST_CONFIGURATION_ALREADY_PRESENT',
   'maintenance-install readiness preserves one strict fail-closed blocker marker',
+)
+
+const officialTencentSignatureVector = createTencentCloudApiRequest({
+  action: 'DescribeInstances',
+  payload: { Action: 'DescribeInstances', Version: '2017-03-12' },
+  secretId: 'test-secret-id',
+  secretKey: 'test-secret-key',
+  region: 'ap-guangzhou',
+  timestamp: 1640995200,
+  host: 'cvm.tencentcloudapi.com',
+  service: 'cvm',
+  version: '2017-03-12',
+})
+assert(
+  officialTencentSignatureVector.headers.Authorization
+    === 'TC3-HMAC-SHA256 Credential=test-secret-id/2022-01-01/cvm/tc3_request, SignedHeaders=content-type;host, Signature=96473b50fe407833672a5d6d067238d88bb44c8abcc39ef83baa3132afbfadd3',
+  'Tencent API signer matches the official SDK deterministic TC3-HMAC-SHA256 vector',
+)
+
+const tencentTatConfiguration = readTencentTatConfiguration({
+  TENCENTCLOUD_SECRET_ID: 'AKID-test-id',
+  TENCENTCLOUD_SECRET_KEY: 'test-secret-key',
+  TENCENTCLOUD_SESSION_TOKEN: 'test-session-token',
+  TENCENTCLOUD_REGION: 'ap-guangzhou',
+  QUESTION_BANK_TENCENT_TAT_INSTANCE_ID: 'ins-12345678',
+})
+assert(
+  tencentTatTargetDigest(tencentTatConfiguration)
+    === createHash('sha256').update('ap-guangzhou\0ins-12345678').digest('hex')
+    && !tencentTatTargetDigest(tencentTatConfiguration).includes('ins-12345678'),
+  'Tencent TAT configuration binds one opaque exact region and CVM target',
+)
+for (const [label, environment] of [
+  ['missing credentials', {}],
+  [
+    'invalid region',
+    {
+      TENCENTCLOUD_SECRET_ID: 'id',
+      TENCENTCLOUD_SECRET_KEY: 'key',
+      TENCENTCLOUD_REGION: 'https://example.com',
+      QUESTION_BANK_TENCENT_TAT_INSTANCE_ID: 'ins-12345678',
+    },
+  ],
+  [
+    'non-CVM target',
+    {
+      TENCENTCLOUD_SECRET_ID: 'id',
+      TENCENTCLOUD_SECRET_KEY: 'key',
+      TENCENTCLOUD_REGION: 'ap-guangzhou',
+      QUESTION_BANK_TENCENT_TAT_INSTANCE_ID: 'lhins-12345678',
+    },
+  ],
+]) {
+  assert(
+    (() => {
+      try {
+        readTencentTatConfiguration(environment)
+        return false
+      } catch {
+        return true
+      }
+    })(),
+    `Tencent TAT configuration rejects ${label}`,
+  )
+}
+
+const maintenanceTatCommand = buildMaintenanceReadinessTatCommand({
+  inspectorSource: '#!/usr/bin/env bash\nprintf \'inspected\\n\'\n',
+  targetSha: newSha,
+  payloadDigest: maintenanceInstallDigest,
+  transportUser: maintenanceInstallTransportUser,
+})
+assert(
+  maintenanceTatCommand.startsWith('#!/usr/bin/env bash\nset -Eeuo pipefail\n')
+    && maintenanceTatCommand.includes(
+      '/usr/bin/env -i PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin \\\n',
+    )
+    && maintenanceTatCommand.includes(
+      `/bin/bash -s -- '${newSha}' '${maintenanceInstallDigest}' '${maintenanceInstallTransportUser}'`,
+    )
+    && maintenanceTatCommand.includes("<<'EQB_INSPECTOR_")
+    && maintenanceTatCommand.includes("printf 'inspected\\n'"),
+  'Tencent TAT command streams the exact inspector to cleared-environment bash stdin',
+)
+
+let tencentNow = 1640995200000
+const tencentCalls = []
+let invocationPollCount = 0
+const tencentSuccess = await executeTencentTatCommand({
+  command: maintenanceTatCommand,
+  commandName: 'eqb-maint-readiness-test',
+  configuration: tencentTatConfiguration,
+  now: () => tencentNow,
+  sleep: async (milliseconds) => { tencentNow += milliseconds },
+  pollIntervalMs: 10,
+  fetchImpl: async (url, options) => {
+    const action = options.headers['X-TC-Action']
+    const payload = JSON.parse(options.body)
+    tencentCalls.push({ url, action, payload, headers: options.headers })
+    if (action === 'RunCommand') {
+      return fakeTencentResponse({
+        CommandId: 'cmd-12345678',
+        InvocationId: 'inv-12345678',
+        RequestId: 'request-run',
+      })
+    }
+    if (action === 'DescribeInvocations') {
+      invocationPollCount += 1
+      if (invocationPollCount === 1) {
+        return fakeTencentResponse({
+          TotalCount: 1,
+          InvocationSet: [{
+            InvocationId: 'inv-12345678',
+            InvocationStatus: 'RUNNING',
+          }],
+          RequestId: 'request-pending',
+        })
+      }
+      return fakeTencentResponse({
+        TotalCount: 1,
+        InvocationSet: [{
+          InvocationId: 'inv-12345678',
+          InvocationStatus: 'SUCCESS',
+          InvocationTaskBasicInfoSet: [{
+            InvocationTaskId: 'invt-12345678',
+            TaskStatus: 'SUCCESS',
+            InstanceId: tencentTatConfiguration.instanceId,
+          }],
+        }],
+        RequestId: 'request-complete',
+      })
+    }
+    return fakeTencentResponse({
+      TotalCount: 1,
+      InvocationTaskSet: [{
+        InvocationId: 'inv-12345678',
+        InvocationTaskId: 'invt-12345678',
+        InstanceId: tencentTatConfiguration.instanceId,
+        TaskStatus: 'SUCCESS',
+        TaskResult: {
+          ExitCode: 0,
+          Output: Buffer.from(maintenanceInstallOutput()).toString('base64'),
+          Dropped: 0,
+        },
+      }],
+      RequestId: 'request-task',
+    })
+  },
+})
+const runCommandCall = tencentCalls.find((call) => call.action === 'RunCommand')
+const invocationCalls = tencentCalls.filter((call) => call.action === 'DescribeInvocations')
+const taskCall = tencentCalls.find((call) => call.action === 'DescribeInvocationTasks')
+assert(
+  tencentSuccess.exitCode === 0
+    && tencentSuccess.taskStatus === 'SUCCESS'
+    && tencentSuccess.output === maintenanceInstallOutput()
+    && tencentCalls.filter((call) => call.action === 'RunCommand').length === 1
+    && invocationCalls.length === 2
+    && runCommandCall.url === 'https://tat.tencentcloudapi.com/'
+    && runCommandCall.payload.InstanceIds.length === 1
+    && runCommandCall.payload.InstanceIds[0] === tencentTatConfiguration.instanceId
+    && runCommandCall.payload.Username === 'root'
+    && runCommandCall.payload.CommandType === 'SHELL'
+    && runCommandCall.payload.SaveCommand === false
+    && runCommandCall.payload.EnableParameter === false
+    && Buffer.from(runCommandCall.payload.Content, 'base64').toString('utf8')
+      === maintenanceTatCommand
+    && runCommandCall.headers['X-TC-Token'] === 'test-session-token'
+    && invocationCalls.every((call) => (
+      call.payload.InvocationIds.length === 1
+      && call.payload.InvocationIds[0] === 'inv-12345678'
+    ))
+    && taskCall.payload.HideOutput === false
+    && taskCall.payload.InvocationTaskIds[0] === 'invt-12345678',
+  'Tencent TAT transport dispatches once, polls one invocation, and returns exact undropped output',
+)
+
+const maintenanceFailureOutput = maintenanceInstallOutput({
+  ...Object.fromEntries(Object.keys(maintenanceInstallReport).map((key) => [key, null])),
+  schemaVersion: 'eqb-maintenance-install-readiness-v1',
+  state: 'failed',
+  failureCode: 'HOST_CONFIGURATION_ALREADY_PRESENT',
+  targetSha: newSha,
+  payloadDigest: maintenanceInstallDigest,
+  transportUser: maintenanceInstallTransportUser,
+})
+const tencentFailedReadiness = await executeTencentTatCommand({
+  command: maintenanceTatCommand,
+  commandName: 'eqb-maint-readiness-failed',
+  configuration: tencentTatConfiguration,
+  fetchImpl: async (_url, options) => {
+    if (options.headers['X-TC-Action'] === 'RunCommand') {
+      return fakeTencentResponse({
+        CommandId: 'cmd-failure1',
+        InvocationId: 'inv-failure1',
+      })
+    }
+    if (options.headers['X-TC-Action'] === 'DescribeInvocations') {
+      return fakeTencentResponse({
+        TotalCount: 1,
+        InvocationSet: [{
+          InvocationId: 'inv-failure1',
+          InvocationStatus: 'FAILED',
+          InvocationTaskBasicInfoSet: [{
+            InvocationTaskId: 'invt-failure1',
+            TaskStatus: 'FAILED',
+            InstanceId: tencentTatConfiguration.instanceId,
+          }],
+        }],
+      })
+    }
+    return fakeTencentResponse({
+      TotalCount: 1,
+      InvocationTaskSet: [{
+        InvocationId: 'inv-failure1',
+        InvocationTaskId: 'invt-failure1',
+        InstanceId: tencentTatConfiguration.instanceId,
+        TaskStatus: 'FAILED',
+        TaskResult: {
+          ExitCode: 1,
+          Output: Buffer.from(maintenanceFailureOutput).toString('base64'),
+          Dropped: 0,
+        },
+      }],
+    })
+  },
+})
+assert(
+  tencentFailedReadiness.exitCode === 1
+    && parseMaintenanceInstallReadiness(
+      tencentFailedReadiness.output,
+      newSha,
+      maintenanceInstallDigest,
+      maintenanceInstallTransportUser,
+    ).failureCode === 'HOST_CONFIGURATION_ALREADY_PRESENT',
+  'Tencent TAT transport preserves a strict failed readiness marker and remote exit code',
+)
+
+let unknownDispatchCalls = 0
+assert(
+  await (async () => {
+    try {
+      await executeTencentTatCommand({
+        command: maintenanceTatCommand,
+        commandName: 'eqb-maint-readiness-unknown',
+        configuration: tencentTatConfiguration,
+        fetchImpl: async () => {
+          unknownDispatchCalls += 1
+          throw new Error('connection reset')
+        },
+      })
+      return false
+    } catch (error) {
+      return error.message.includes('outcome is unknown') && unknownDispatchCalls === 1
+    }
+  })(),
+  'Tencent TAT transport never retries an ambiguous RunCommand dispatch',
+)
+
+let truncatedCall = 0
+assert(
+  await (async () => {
+    try {
+      await executeTencentTatCommand({
+        command: maintenanceTatCommand,
+        commandName: 'eqb-maint-readiness-truncated',
+        configuration: tencentTatConfiguration,
+        fetchImpl: async (_url, options) => {
+          truncatedCall += 1
+          if (options.headers['X-TC-Action'] === 'RunCommand') {
+            return fakeTencentResponse({
+              CommandId: 'cmd-abcdefgh',
+              InvocationId: 'inv-abcdefgh',
+            })
+          }
+          if (options.headers['X-TC-Action'] === 'DescribeInvocations') {
+            return fakeTencentResponse({
+              TotalCount: 1,
+              InvocationSet: [{
+                InvocationId: 'inv-abcdefgh',
+                InvocationStatus: 'SUCCESS',
+                InvocationTaskBasicInfoSet: [{
+                  InvocationTaskId: 'invt-abcdefgh',
+                  TaskStatus: 'SUCCESS',
+                  InstanceId: tencentTatConfiguration.instanceId,
+                }],
+              }],
+            })
+          }
+          return fakeTencentResponse({
+            TotalCount: 1,
+            InvocationTaskSet: [{
+              InvocationId: 'inv-abcdefgh',
+              InvocationTaskId: 'invt-abcdefgh',
+              InstanceId: tencentTatConfiguration.instanceId,
+              TaskStatus: 'SUCCESS',
+              TaskResult: {
+                ExitCode: 0,
+                Output: Buffer.from(maintenanceInstallOutput()).toString('base64'),
+                Dropped: 1,
+              },
+            }],
+          })
+        },
+      })
+      return false
+    } catch (error) {
+      return error.message.includes('invalid or truncated') && truncatedCall === 3
+    }
+  })(),
+  'Tencent TAT transport rejects truncated task output before receipt parsing',
 )
 
 const persistencePaths = ['server/api.mjs']
@@ -3399,6 +3732,22 @@ const cancellationSource = readText(ROOT, 'deploy/cancel-eqb-bootstrap-attempt.m
 const maintenanceInstallerSource = readText(ROOT, 'deploy/install-eqb-maintenance-controller.sh')
 const maintenanceInspectorSource = readText(ROOT, 'deploy/inspect-eqb-maintenance-host.sh')
 const deployLibrarySource = readText(ROOT, 'scripts/lib/ampOrbDeploy.mjs')
+const tencentTatSource = readText(ROOT, 'scripts/lib/tencentTat.mjs')
+const exactMaintenanceTatCommand = buildMaintenanceReadinessTatCommand({
+  inspectorSource: maintenanceInspectorSource,
+  targetSha: newSha,
+  payloadDigest: maintenanceInstallDigest,
+  transportUser: maintenanceInstallTransportUser,
+})
+const exactMaintenanceTatSyntax = spawnSync('/bin/bash', ['-n'], {
+  encoding: 'utf8',
+  input: exactMaintenanceTatCommand,
+})
+assert(
+  exactMaintenanceTatSyntax.status === 0
+    && Buffer.from(exactMaintenanceTatCommand).toString('base64').length <= 64 * 1024,
+  'exact merged maintenance inspector remains valid inside the TAT command-content limit',
+)
 const baselineProtectedBlock = baselineSource.slice(
   baselineSource.indexOf('  const protectedPaths = ['),
   baselineSource.indexOf('\n  ]', baselineSource.indexOf('  const protectedPaths = [')) + 4,
@@ -4071,6 +4420,19 @@ assert(
     && maintenanceInspectorSource.includes('ACTIVE_MAINTENANCE_STATE'),
   'standalone root inspector emits one schema-bound result and covers the previously unobservable host gates',
 )
+assert(
+  tencentTatSource.includes("const TAT_ENDPOINT = 'tat.tencentcloudapi.com'")
+    && !tencentTatSource.includes('TENCENTCLOUD_ENDPOINT')
+    && tencentTatSource.includes("action: 'RunCommand'")
+    && tencentTatSource.includes('InstanceIds: [configuration.instanceId]')
+    && tencentTatSource.includes('SaveCommand: false')
+    && tencentTatSource.includes('Username: \'root\'')
+    && tencentTatSource.includes("action: 'DescribeInvocations'")
+    && tencentTatSource.includes("action: 'DescribeInvocationTasks'")
+    && tencentTatSource.includes('task?.TaskResult?.Dropped !== 0')
+    && tencentTatSource.includes('do not retry without reconciling Tencent invocation history'),
+  'repository TAT transport is endpoint-pinned, single-target, non-retrying, and output-complete',
+)
 const maintenanceInspectorChecks = maintenanceInspectorSource.slice(
   maintenanceInspectorSource.indexOf('assert_real_file "$DEPLOY_LOCK"'),
 )
@@ -4389,6 +4751,10 @@ const bootstrapInspectEntry = cli.slice(
   cli.indexOf('async function bootstrapInspect()'),
   cli.indexOf('async function bootstrapAbandon()'),
 )
+const maintenanceReadinessEntry = cli.slice(
+  cli.indexOf('function readMaintenancePayloadDigest('),
+  cli.indexOf('async function bootstrapPreflight()'),
+)
 const bootstrapAbandonEntry = cli.slice(
   cli.indexOf('async function bootstrapAbandon()'),
   cli.indexOf('async function deploy()'),
@@ -4397,6 +4763,21 @@ const deploymentRunbook = readText(ROOT, 'docs/cuts/launch-deploy/runbook.md')
 const flatDeploymentRunbook = deploymentRunbook.replaceAll('\n', ' ')
 assert(cli.includes("process.argv[2] === 'plan'"), 'CLI exposes a no-mutation deployment plan')
 assert(cli.includes("process.argv[2] === 'preflight'"), 'CLI exposes an Owner-authorized read-only preflight')
+assert(
+  cli.includes("process.argv[2] === 'maintenance-install-readiness'"),
+  'CLI exposes separately authorized Tencent maintenance-install readiness',
+)
+assert(
+  maintenanceReadinessEntry.includes("'archive',")
+    && maintenanceReadinessEntry.includes("'--format=tar',")
+    && maintenanceReadinessEntry.includes("spawnSync('git', ['show', `${sha}:${relativePath}`]")
+    && maintenanceReadinessEntry.includes('readTencentTatConfiguration()')
+    && maintenanceReadinessEntry.indexOf('assertDeploymentCandidateStillCurrent(')
+      < maintenanceReadinessEntry.indexOf('executeTencentTatCommand({')
+    && maintenanceReadinessEntry.includes('parseMaintenanceInstallReadiness(')
+    && maintenanceReadinessEntry.includes('productionMutationAllowed: false'),
+  'Tencent readiness binds exact-main bytes and rechecks main before its one read-only TAT dispatch',
+)
 assert(cli.includes("process.argv[2] === 'baseline'"), 'CLI exposes the protected legacy baseline command')
 assert(cli.includes("process.argv[2] === 'bootstrap'"), 'CLI exposes the one-time release-layout bootstrap')
 assert(cli.includes("process.argv[2] === 'bootstrap-inspect'"), 'CLI exposes read-only bootstrap recovery inspection')
@@ -4515,6 +4896,16 @@ assert(
       < deploymentRunbook.indexOf('atomically retire the exact old privileged key'),
   'runbook preserves consumed baseline, rotate-before-retire, and no-early-refresh ordering',
 )
+assert(
+  deploymentRunbook.includes('TENCENTCLOUD_SECRET_ID')
+    && deploymentRunbook.includes('TENCENTCLOUD_SECRET_KEY')
+    && deploymentRunbook.includes('TENCENTCLOUD_SESSION_TOKEN')
+    && deploymentRunbook.includes('TENCENTCLOUD_REGION')
+    && deploymentRunbook.includes('QUESTION_BANK_TENCENT_TAT_INSTANCE_ID')
+    && deploymentRunbook.includes('RunCommand` has no idempotency token')
+    && deploymentRunbook.includes('--owner-said-maintenance-install-readiness'),
+  'runbook names the complete pinned TAT target, credential, authorization, and no-retry contract',
+)
 
 const unauthorizedPreflight = spawnSync(
   process.execPath,
@@ -4576,6 +4967,16 @@ const suppliedInspectSha = spawnSync(
 assert(
   suppliedInspectSha.status === 1 && suppliedInspectSha.stderr.includes('do not supply --sha'),
   'bootstrap inspection rejects a caller-supplied target before recovery or SSH work',
+)
+const unauthorizedMaintenanceReadiness = spawnSync(
+  process.execPath,
+  [path.join(ROOT, 'scripts', 'amp-orb-deploy.mjs'), 'maintenance-install-readiness'],
+  { cwd: ROOT, encoding: 'utf8' },
+)
+assert(
+  unauthorizedMaintenanceReadiness.status === 1
+    && unauthorizedMaintenanceReadiness.stderr.includes('Current Owner authorization'),
+  'Tencent maintenance-install readiness without current authorization stops before API dispatch',
 )
 const unauthorizedDeploy = spawnSync(
   process.execPath,

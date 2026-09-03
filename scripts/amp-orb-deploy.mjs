@@ -12,6 +12,7 @@ import {
   EQB_HOST_CONFIGURATION_PATHS,
   EQB_PERSISTENCE_AUTHORITY_PATHS,
   abandonReleaseBootstrapRecovery,
+  assertDeploymentCandidateStillCurrent,
   assertAuthoritativeDeploymentChecks,
   bootstrapPayloadStageInput,
   bootstrapReleaseLayout,
@@ -34,11 +35,13 @@ import {
   parseDeploymentControllerPreflight,
   parseDeploymentPreflightOutput,
   parseHostConfigurationControllerOutput,
+  parseMaintenanceInstallReadiness,
   parseOpenSshEd25519PublicKeyBody,
   parseReviewedPersistenceControllerOutput,
   readCompletedReleaseBootstrapRecovery,
   readReleaseBootstrapRecovery,
   removeReleaseBootstrapRecovery,
+  requireMaintenanceInstallReadinessAuthorization,
   requireReleaseLayoutBootstrapAuthorization,
   requireReleaseLayoutBootstrapAbandonAuthorization,
   requireReleaseLayoutBootstrapResumeAuthorization,
@@ -46,6 +49,12 @@ import {
   resolveLatestDeploymentCandidate,
   updateLatestHostConfiguration,
 } from './lib/ampOrbDeploy.mjs'
+import {
+  buildMaintenanceReadinessTatCommand,
+  executeTencentTatCommand,
+  readTencentTatConfiguration,
+  tencentTatTargetDigest,
+} from './lib/tencentTat.mjs'
 
 const repositoryRoot = fileURLToPath(new URL('..', import.meta.url))
 const legacyBaselineSource = fileURLToPath(
@@ -63,6 +72,15 @@ const bootstrapKeyRetirementSource = fileURLToPath(
 const bootstrapCancellationSource = fileURLToPath(
   new URL('../deploy/cancel-eqb-bootstrap-attempt.mjs', import.meta.url),
 )
+const maintenanceInspectorPath = 'deploy/inspect-eqb-maintenance-host.sh'
+const maintenancePayloadPaths = Object.freeze([
+  'deploy/Caddyfile.release',
+  'deploy/eqb-release.service',
+  'deploy/eqb-deploy-transport',
+  'deploy/eqb-deploy-controller',
+  'deploy/eqb-deploy-controller.mjs',
+  maintenanceInspectorPath,
+])
 const legacyReleaseChildDigest = '25d8acc95172626cf03de96b2cc61d0f81508352082b976b9f1095bfbe15d4d5'
 const legacyReleaseChildFileCount = 4876
 const bootstrapRecoveryRoot = path.join(homedir(), '.local', 'state', 'eqb-deployment')
@@ -239,6 +257,88 @@ async function preflight() {
       ),
     }, null, 2))
   })
+}
+
+function readMaintenancePayloadDigest(sha) {
+  const archived = spawnSync('git', [
+    'archive',
+    '--format=tar',
+    sha,
+    '--',
+    ...maintenancePayloadPaths,
+  ], {
+    cwd: repositoryRoot,
+    encoding: null,
+    maxBuffer: 4 * 1024 * 1024,
+  })
+  if (archived.error) throw archived.error
+  if (archived.status !== 0 || !Buffer.isBuffer(archived.stdout) || archived.stdout.length === 0) {
+    throw new Error('Cannot construct the exact maintenance-controller payload')
+  }
+  return createHash('sha256').update(archived.stdout).digest('hex')
+}
+
+function readExactCommitFile(sha, relativePath) {
+  const result = spawnSync('git', ['show', `${sha}:${relativePath}`], {
+    cwd: repositoryRoot,
+    encoding: 'utf8',
+    maxBuffer: 1024 * 1024,
+  })
+  if (result.error) throw result.error
+  if (result.status !== 0 || !String(result.stdout || '')) {
+    throw new Error(`Cannot read exact candidate file ${relativePath}`)
+  }
+  return result.stdout
+}
+
+async function maintenanceInstallReadiness() {
+  requireMaintenanceInstallReadinessAuthorization(process.argv.slice(2))
+  const resolved = await candidate()
+  const payloadDigest = readMaintenancePayloadDigest(resolved.sha)
+  const host = String(process.env.QUESTION_BANK_DEPLOY_SSH_HOST || '')
+  const transportUser = deploymentSSHTransportUser(host)
+  const configuration = readTencentTatConfiguration()
+  const command = buildMaintenanceReadinessTatCommand({
+    inspectorSource: readExactCommitFile(resolved.sha, maintenanceInspectorPath),
+    targetSha: resolved.sha,
+    payloadDigest,
+    transportUser,
+  })
+  await assertDeploymentCandidateStillCurrent({ readMainSha, sha: resolved.sha })
+  const execution = await executeTencentTatCommand({
+    command,
+    commandName: `eqb-maint-readiness-${resolved.sha.slice(0, 16)}`,
+    configuration,
+  })
+  const readiness = parseMaintenanceInstallReadiness(
+    execution.output,
+    resolved.sha,
+    payloadDigest,
+    transportUser,
+  )
+  console.log(JSON.stringify({
+    command: 'inspect Tencent maintenance-controller installation readiness',
+    productionMutationAllowed: false,
+    candidate: resolved,
+    payloadDigest,
+    tencentTatTargetDigest: tencentTatTargetDigest(configuration),
+    tencentTat: {
+      commandId: execution.commandId,
+      invocationId: execution.invocationId,
+      invocationTaskId: execution.invocationTaskId,
+      invocationStatus: execution.invocationStatus,
+      taskStatus: execution.taskStatus,
+      exitCode: execution.exitCode,
+    },
+    readiness,
+  }, null, 2))
+  if (execution.exitCode !== 0 || readiness.state !== 'ready') {
+    throw new Error(
+      `Tencent maintenance-install readiness failed closed: ${
+        readiness.failureCode || 'REMOTE_COMMAND_FAILED'
+      }`,
+    )
+  }
 }
 
 async function bootstrapPreflight() {
@@ -1120,6 +1220,7 @@ async function updateHostConfig() {
 try {
   if (process.argv[2] === 'plan') await plan()
   else if (process.argv[2] === 'preflight') await preflight()
+  else if (process.argv[2] === 'maintenance-install-readiness') await maintenanceInstallReadiness()
   else if (process.argv[2] === 'bootstrap-preflight') await bootstrapPreflight()
   else if (process.argv[2] === 'baseline') await baseline()
   else if (process.argv[2] === 'bootstrap') await bootstrap()
@@ -1131,7 +1232,7 @@ try {
   else if (process.argv[2] === 'update-host-config') await updateHostConfig()
   else {
     throw new Error(
-      'Usage: amp-orb-deploy.mjs plan | preflight --owner-said-preflight | bootstrap-preflight --owner-said-preflight | baseline --owner-said-baseline-migration | bootstrap --owner-said-release-bootstrap | bootstrap-inspect --owner-said-preflight | bootstrap-resume --owner-said-release-bootstrap-resume | bootstrap-abandon --owner-said-release-bootstrap-abandon | deploy --owner-said-deploy-latest | reviewed-persistence --owner-said-reviewed-persistence-deploy | update-host-config --owner-said-update-host-config',
+      'Usage: amp-orb-deploy.mjs plan | preflight --owner-said-preflight | maintenance-install-readiness --owner-said-maintenance-install-readiness | bootstrap-preflight --owner-said-preflight | baseline --owner-said-baseline-migration | bootstrap --owner-said-release-bootstrap | bootstrap-inspect --owner-said-preflight | bootstrap-resume --owner-said-release-bootstrap-resume | bootstrap-abandon --owner-said-release-bootstrap-abandon | deploy --owner-said-deploy-latest | reviewed-persistence --owner-said-reviewed-persistence-deploy | update-host-config --owner-said-update-host-config',
     )
   }
 } catch (error) {
