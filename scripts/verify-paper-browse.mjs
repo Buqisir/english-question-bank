@@ -2000,12 +2000,14 @@ assert(
   'missing Reading label normalization or letter centering remains',
 )
 assert(
-  '75. quiet TOC 只显示部分名与无分数节名；分数和题号章从 DOM 退役；活跃标记为 travelling ink bar',
+  '75. quiet TOC 只显示部分名与无分数节名；分数和题号章从 DOM 退役；活跃标记为 travelling pointing hand',
   !pageSrc.includes('paper-browse-rail-part-score') &&
     !pageSrc.includes('paper-browse-rail-group-chip') &&
     /trimmed\.replace\(\/\\s\*\[（\(\][\s\S]*满分[\s\S]*\$\/, ''\)/.test(pageSrc) &&
-    pageSrc.includes('paper-browse-rail-active-bar') &&
-    /\.paper-browse-rail-active-bar\s*\{[^}]*width:\s*2px/.test(pageCssSrc) &&
+    pageSrc.includes('paper-browse-rail-hand') &&
+    pageSrc.includes('PointingHand') &&
+    /\.paper-browse-rail-hand\s*\{[^}]*position:\s*absolute/.test(pageCssSrc) &&
+    /@media\s*\(prefers-reduced-motion:\s*no-preference\)\s*\{[^}]*\.paper-browse-rail-hand[^}]*transition:[^}]*var\(--motion-base\)/.test(pageCssSrc) &&
     !/\.paper-browse-rail-group--active::before/.test(pageCssSrc),
   'score/range chrome remains in the rail, or the travelling active marker is missing',
 )

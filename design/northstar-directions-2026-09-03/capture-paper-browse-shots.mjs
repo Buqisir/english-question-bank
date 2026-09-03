@@ -37,73 +37,30 @@ async function openPaperBrowse() {
   await page.waitForTimeout(500)
 }
 
-async function waitForRailBar() {
-  await page.locator('.paper-browse-rail-active-bar').waitFor({ timeout: 10000 })
-  await page.waitForTimeout(300)
+async function waitForRailHand() {
+  await page.locator('.paper-browse-rail-hand').waitFor({ timeout: 10000 })
+  await page.waitForFunction(() => {
+    const svg = document.querySelector('.paper-browse-rail-hand svg')
+    return svg?.getAttribute('viewBox') === '0 0 16 18'
+  }, { timeout: 15000 })
+  await page.waitForTimeout(500)
 }
 
 await ensureLoggedIn()
 await openPaperBrowse()
 
-await page.evaluate(() => window.scrollTo(0, 0))
-await waitForRailBar()
-await page.screenshot({ path: join(shots, 'pb2-pick-top.png') })
-
 const railGroups = page.locator('.paper-browse-rail-group')
 const groupCount = await railGroups.count()
 const midIndex = Math.max(0, Math.floor(groupCount / 2))
 await railGroups.nth(midIndex).click()
-await waitForRailBar()
-await page.screenshot({ path: join(shots, 'pb2-pick-mid.png') })
-
-let addError = null
-try {
-  const addButtons = page.locator('.paper-browse-gutter-add:not(.paper-browse-gutter-add--disabled):not(.paper-browse-gutter-add--in-draft)')
-  const addCount = await addButtons.count()
-  let added = 0
-  for (let i = 0; i < addCount && added < 2; i += 1) {
-    const button = addButtons.nth(i)
-    const card = button.locator('xpath=ancestor::*[contains(@class,"paper-browse-group-card")]')
-    await card.hover()
-    await button.click({ timeout: 5000 })
-    await page.waitForTimeout(600)
-    added += 1
-  }
-} catch (error) {
-  addError = error instanceof Error ? error.message : String(error)
-}
-
-if (addError) {
-  console.error('ADD_ERROR:', addError)
-}
-await page.screenshot({ path: join(shots, 'pb2-pick-added.png') })
-
-const sevenChoicesRail = page.locator('.paper-browse-rail-group', { hasText: /^七选五$/ })
-await sevenChoicesRail.first().click()
-await waitForRailBar()
-
-await page.locator('.paper-browse-lecture-toggle').click()
-await waitForRailBar()
-// Docked lecture shrinks zoom and can reflow scroll — re-anchor 七选五 in compact rail.
-await page.locator('.paper-browse-rail-group', { hasText: '七' }).first().click()
-await waitForRailBar()
-await page.screenshot({ path: join(shots, 'pb2-lecture.png') })
-
-await page.locator('.paper-browse-rail-group', { hasText: '语法' }).first().click()
-await page.locator('.paper-browse-rail-group--active .paper-browse-rail-group-title', { hasText: '语法' }).waitFor({ timeout: 5000 })
-await page.waitForTimeout(300)
-await page.screenshot({ path: join(shots, 'pb2-lecture-scrolled.png') })
-
-const zoom = await page.locator('.paper-browse-content').evaluate((node) => {
-  return getComputedStyle(node).getPropertyValue('--paper-screen-zoom').trim()
-})
-console.log('LECTURE_ZOOM:', zoom || 'unknown')
+await waitForRailHand()
+await page.screenshot({ path: join(shots, 'pb3-pick-mid.png') })
 
 const rail = page.locator('.paper-browse-rail')
 const railBox = await rail.boundingBox()
 if (railBox) {
   await page.screenshot({
-    path: join(shots, 'pb2-rail-crop.png'),
+    path: join(shots, 'pb3-rail-crop.png'),
     clip: {
       x: railBox.x,
       y: railBox.y,
@@ -113,5 +70,11 @@ if (railBox) {
   })
 }
 
+await page.locator('.paper-browse-lecture-toggle').click()
+await waitForRailHand()
+await page.locator('.paper-browse-rail-group', { hasText: '七' }).first().click()
+await waitForRailHand()
+await page.screenshot({ path: join(shots, 'pb3-lecture.png') })
+
 await browser.close()
-console.log('wrote pb2 shots to', shots)
+console.log('wrote pb3 shots to', shots)

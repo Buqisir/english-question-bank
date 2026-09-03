@@ -179,6 +179,7 @@ import {
 } from './SimilarQuestionsRailView'
 import { applyPaperSurfaceFocusIntent } from './paperBrowseFocusIntent'
 import './paperBrowsePage.css'
+import { PointingHand } from './PointingHand'
 import { ScissorsMark } from './ScissorsMark'
 
 type GroupModel =
@@ -751,9 +752,8 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       && window.matchMedia(`(min-width: ${DOCKED_LECTURE_MIN_WIDTH}px)`).matches,
   )
   const [railClickedAnchor, setRailClickedAnchor] = useState<string | null>(null)
-  const [railActiveBar, setRailActiveBar] = useState<{
+  const [railActiveHand, setRailActiveHand] = useState<{
     top: number
-    height: number
     left: number
   } | null>(null)
   // similar-rail (E2): toast fade timer — the parent is the single owner of
@@ -1799,11 +1799,14 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     }
   }, [])
 
-  const updateRailActiveBar = useCallback((): void => {
+  const updateRailActiveHand = useCallback((): void => {
     const panel = railPanelRef.current
     const anchor = effectiveActiveAnchor
+    const handSize = 15
+    const handWidth = (handSize * 16) / 18
+    const handGap = 4
     if (!panel || !anchor) {
-      setRailActiveBar(null)
+      setRailActiveHand(null)
       return
     }
     const activeButton = panel.querySelector<HTMLButtonElement>(
@@ -1813,43 +1816,42 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
       '.paper-browse-rail-group-title',
     )
     if (!activeButton || !title) {
-      setRailActiveBar(null)
+      setRailActiveHand(null)
       return
     }
     const panelRect = panel.getBoundingClientRect()
     const buttonRect = activeButton.getBoundingClientRect()
     const titleRect = title.getBoundingClientRect()
-    setRailActiveBar({
-      top: buttonRect.top - panelRect.top + 4,
-      height: Math.max(0, buttonRect.height - 8),
-      left: titleRect.left - panelRect.left - 8,
+    setRailActiveHand({
+      top: buttonRect.top - panelRect.top + (buttonRect.height - handSize) / 2,
+      left: titleRect.left - panelRect.left - handGap - handWidth,
     })
   }, [effectiveActiveAnchor])
 
   useLayoutEffect(() => {
     if (loading || !asset) return
-    updateRailActiveBar()
+    updateRailActiveHand()
     const panel = railPanelRef.current
     const rail = railNavRef.current
     if (!panel) return
 
-    const observer = new ResizeObserver(updateRailActiveBar)
+    const observer = new ResizeObserver(updateRailActiveHand)
     observer.observe(panel)
     if (rail) observer.observe(rail)
 
-    window.addEventListener('resize', updateRailActiveBar)
-    panel.addEventListener('scroll', updateRailActiveBar, { passive: true })
+    window.addEventListener('resize', updateRailActiveHand)
+    panel.addEventListener('scroll', updateRailActiveHand, { passive: true })
     const rafId = requestAnimationFrame(() => {
-      updateRailActiveBar()
+      updateRailActiveHand()
     })
 
     return (): void => {
       cancelAnimationFrame(rafId)
       observer.disconnect()
-      window.removeEventListener('resize', updateRailActiveBar)
-      panel.removeEventListener('scroll', updateRailActiveBar)
+      window.removeEventListener('resize', updateRailActiveHand)
+      panel.removeEventListener('scroll', updateRailActiveHand)
     }
-  }, [effectiveActiveAnchor, asset, dockedLecture, loading, railParts, updateRailActiveBar])
+  }, [effectiveActiveAnchor, asset, dockedLecture, loading, railParts, updateRailActiveHand])
 
   useLayoutEffect(() => {
     const rail = railNavRef.current
@@ -3507,16 +3509,16 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           compact ? ' paper-browse-rail-panel--compact' : ''
         }`}
       >
-        {railActiveBar && (
+        {railActiveHand && (
           <span
-            className="paper-browse-rail-active-bar"
-            aria-hidden="true"
+            className="paper-browse-rail-hand"
             style={{
-              top: `${railActiveBar.top}px`,
-              height: `${railActiveBar.height}px`,
-              left: `${railActiveBar.left}px`,
+              top: `${railActiveHand.top}px`,
+              left: `${railActiveHand.left}px`,
             }}
-          />
+          >
+            <PointingHand size={15} />
+          </span>
         )}
         {railParts.map((part, partIndex) => (
           <div
