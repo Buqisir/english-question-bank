@@ -90,14 +90,21 @@ uniquely supplies; otherwise keep it outside daily packs.
 - Website deployment never authorizes migration, Review/paper promotion,
   database or R2 mutation, production configuration changes, or controller
   upgrades. Each needs its own explicit current Owner authorization.
-- The transition-only `baseline --owner-said-baseline-migration`,
-  `bootstrap --owner-said-release-bootstrap`, and first real `deploy` are three
-  separate production actions. Baseline and bootstrap each need their exact,
-  current Owner authorization. Bootstrap must prove the new forced-controller
-  route, retire and reject the old privileged identity, rotate only the current
-  Deployment project's private-key Secret through stdin, and then refresh that
-  Orb's environment before normal use. Follow ADR-0023 and the launch-deploy
-  runbook; do not infer authorization from merged code or available secrets.
+- The S0-to-S1 `baseline --owner-said-baseline-migration` is consumed after one
+  successful receipt. An established S1 can bootstrap a descendant candidate
+  only when the fixed persistence-authority diff is empty; never rerun baseline
+  merely to advance its SHA.
+- `bootstrap --owner-said-release-bootstrap`, recovery mutation, Orb refresh,
+  forced-controller preflight, and first real `deploy` are separate actions with
+  their own stated current Owner authorization. Bootstrap must prove the new
+  forced-controller route, rotate only the current Deployment project's private-
+  key Secret through stdin, retire and reject the old privileged identity, and
+  re-prove the new route before terminalizing recovery. On interruption inspect
+  first; never retry host bootstrap. Abandonment must cancel the exact host unit
+  under the bootstrap lock before strict S1 reproof and local cleanup. Do not
+  refresh Orb processes until finalization succeeds. Follow ADR-0023 and the
+  launch-deploy runbook; do not infer authorization from merged code or
+  available secrets.
 
 ## Owner QA
 
