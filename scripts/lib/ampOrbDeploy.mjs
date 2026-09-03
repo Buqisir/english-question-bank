@@ -34,6 +34,7 @@ export const EQB_RELEASE_BOOTSTRAP_RECOVERY_SCHEMA_VERSION = 'eqb-release-bootst
 export const EQB_RELEASE_BOOTSTRAP_COMPLETION_SCHEMA_VERSION = 'eqb-release-bootstrap-completion-v1'
 export const EQB_RELEASE_BOOTSTRAP_ABANDONMENT_SCHEMA_VERSION = 'eqb-release-bootstrap-abandonment-v2'
 export const EQB_RELEASE_BOOTSTRAP_CANCELLATION_SCHEMA_VERSION = 'eqb-release-bootstrap-cancellation-v1'
+export const EQB_MAINTENANCE_INSTALL_READINESS_SCHEMA_VERSION = 'eqb-maintenance-install-readiness-v1'
 export const EQB_PERSISTENCE_AUTHORITY_PATHS = Object.freeze([
   'data/sql',
   'server/api.mjs',
@@ -1118,6 +1119,86 @@ export function parseDeploymentControllerPreflight(output) {
     throw new Error('Deployment controller preflight response is invalid')
   }
   return preflight
+}
+
+export function parseMaintenanceInstallReadiness(
+  output,
+  expectedSha,
+  expectedDigest,
+  expectedTransportUser,
+) {
+  const targetSha = assertSha(expectedSha)
+  if (!/^[a-f0-9]{64}$/u.test(expectedDigest || '')) {
+    throw new Error('Maintenance install payload digest is invalid')
+  }
+  if (!/^[a-z_][a-z0-9_-]*$/u.test(expectedTransportUser || '')) {
+    throw new Error('Maintenance install transport user is invalid')
+  }
+  const report = parseMarkedControllerReceipt(
+    output,
+    'EQB_MAINTENANCE_INSTALL_READINESS ',
+    'Maintenance install readiness',
+  )
+  const keys = [
+    'availableBytes',
+    'caddyfileSha256',
+    'controllerModuleSha256',
+    'deploymentLockMode',
+    'failureCode',
+    'layout',
+    'payloadDigest',
+    'productionSha',
+    'rootWrapperSha256',
+    'schemaVersion',
+    'state',
+    'targetSha',
+    'transportUid',
+    'transportUser',
+    'transportWrapperSha256',
+    'unitSha256',
+  ]
+  const digest = /^[a-f0-9]{64}$/u
+  const ready = report?.state === 'ready'
+  if (
+    !report
+    || typeof report !== 'object'
+    || Array.isArray(report)
+    || Object.keys(report).sort().join('\n') !== keys.join('\n')
+    || report.schemaVersion !== EQB_MAINTENANCE_INSTALL_READINESS_SCHEMA_VERSION
+    || !['ready', 'failed'].includes(report.state)
+    || report.targetSha !== targetSha
+    || report.payloadDigest !== expectedDigest
+    || report.transportUser !== expectedTransportUser
+    || (ready && (
+      report.failureCode !== null
+      || !['0600', '0644'].includes(report.deploymentLockMode)
+      || report.layout !== 'release'
+      || !SHA.test(report.productionSha || '')
+      || !Number.isSafeInteger(report.transportUid)
+      || report.transportUid <= 0
+      || !Number.isSafeInteger(report.availableBytes)
+      || report.availableBytes < 5 * 1024 * 1024 * 1024
+      || !digest.test(report.controllerModuleSha256 || '')
+      || !digest.test(report.rootWrapperSha256 || '')
+      || !digest.test(report.transportWrapperSha256 || '')
+      || !digest.test(report.unitSha256 || '')
+      || !digest.test(report.caddyfileSha256 || '')
+    ))
+    || (!ready && (
+      !/^[A-Z0-9_]+$/u.test(report.failureCode || '')
+      || report.deploymentLockMode !== null
+      || report.layout !== null
+      || report.productionSha !== null
+      || report.transportUid !== null
+      || report.availableBytes !== null
+      || report.controllerModuleSha256 !== null
+      || report.rootWrapperSha256 !== null
+      || report.transportWrapperSha256 !== null
+      || report.unitSha256 !== null
+      || report.caddyfileSha256 !== null
+    ))
+  ) throw new Error('Maintenance install readiness response is invalid')
+  return report
 }
 
 export function parseLegacyBaselineReceipt(output, expectedSha) {

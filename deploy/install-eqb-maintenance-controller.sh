@@ -2,7 +2,7 @@
 set -Eeuo pipefail
 
 # One-time Tencent Cloud root installation for the post-bootstrap maintenance
-# controller. The payload must be a tar archive of the five exact deploy files
+# controller. The payload must be a tar archive of the six exact deploy files
 # from one reviewed main SHA; the expected archive digest is supplied out of
 # band. This script does not provision a new host or restore application data.
 # Usage: install-eqb-maintenance-controller.sh <sha> <tar-sha256> <tar> <transport-user>
@@ -17,6 +17,7 @@ TRANSPORT_USER=${4-}
 ROOT=/opt/eqb
 SOURCE=$ROOT/english-question-bank
 SOURCE_USER=eqb
+DEPLOY_LOCK=$ROOT/deployments/deploy.lock
 HOST_CONFIG_ROOT=$ROOT/deployments/host-configuration
 VERSIONS=$HOST_CONFIG_ROOT/versions
 ACTIVE=$HOST_CONFIG_ROOT/current
@@ -29,10 +30,42 @@ staging=
 backup=
 activated=0
 host_config_created=0
+deploy_lock_mode=
+lock_mode_changed=0
 
 fail() {
   printf 'EQB maintenance-controller install failed closed: %s\n' "$*" >&2
   exit 1
+}
+
+assert_real_file() {
+  local path=$1 uid=$2 gid=$3 mode=$4 label=$5
+  local actual
+  [[ -f $path && ! -L $path ]] || fail "$label must be a real file"
+  actual=$(/usr/bin/stat -c '%u:%g:%a:%h' -- "$path")
+  [[ $actual == "$uid:$gid:$mode:1" ]] || fail "$label metadata is invalid"
+}
+
+assert_legacy_deploy_lock() {
+  local actual_uid actual_gid actual_mode actual_links
+  [[ -f $DEPLOY_LOCK && ! -L $DEPLOY_LOCK ]] || fail 'deployment lock must be a real file'
+  IFS=: read -r actual_uid actual_gid actual_mode actual_links \
+    <<< "$(/usr/bin/stat -c '%u:%g:%a:%h' -- "$DEPLOY_LOCK")"
+  [[ $actual_uid == 0 && $actual_gid == 0 && $actual_links == 1 \
+    && ( $actual_mode == 600 || $actual_mode == 644 ) ]] \
+    || fail 'deployment lock metadata is invalid'
+  deploy_lock_mode=$actual_mode
+}
+
+run_source() {
+  /usr/sbin/runuser -u "$SOURCE_USER" -- \
+    /usr/bin/env -i \
+      "HOME=/home/$SOURCE_USER" \
+      PATH=/usr/local/bin:/usr/bin:/bin \
+      GIT_TERMINAL_PROMPT=0 \
+      GCM_INTERACTIVE=never \
+      'GIT_SSH_COMMAND=/usr/bin/ssh -F /dev/null -o BatchMode=yes -o PasswordAuthentication=no -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/home/eqb/.ssh/known_hosts -o GlobalKnownHostsFile=/dev/null' \
+      "$@"
 }
 
 strict_health() {
@@ -83,6 +116,9 @@ rollback() {
     caddy reload --config "$CADDYFILE" || rollback_failed=1
     strict_health || rollback_failed=1
   fi
+  if (( lock_mode_changed == 1 )); then
+    chmod "$deploy_lock_mode" "$DEPLOY_LOCK" || rollback_failed=1
+  fi
   if (( rollback_failed == 1 )); then
     printf 'EQB maintenance-controller install CRITICAL: rollback incomplete; backup=%s\n' \
       "${backup:-unavailable}" >&2
@@ -104,6 +140,25 @@ trap cleanup EXIT
 [[ $TRANSPORT_USER =~ ^[a-z_][a-z0-9_-]*$ ]] || fail 'transport user is invalid'
 id -u "$TRANSPORT_USER" >/dev/null 2>&1 || fail 'transport user does not exist'
 [[ $(id -u "$TRANSPORT_USER") != 0 ]] || fail 'transport user must be non-root'
+for tool in \
+  /usr/bin/cut \
+  /usr/bin/env \
+  /usr/bin/flock \
+  /usr/bin/git \
+  /usr/bin/mktemp \
+  /usr/bin/node \
+  /usr/bin/sha256sum \
+  /usr/bin/sort \
+  /usr/bin/ssh \
+  /usr/bin/stat \
+  /usr/bin/tar \
+  /usr/sbin/runuser; do
+  [[ -x $tool ]] || fail "required tool is unavailable: $tool"
+done
+assert_legacy_deploy_lock
+exec 9< "$DEPLOY_LOCK"
+/usr/bin/flock --exclusive --nonblock --conflict-exit-code 75 9 \
+  || fail 'deployment lock is held'
 [[ -f $PAYLOAD && ! -L $PAYLOAD ]] || fail 'payload is not one real file'
 [[ $(sha256sum "$PAYLOAD" | cut -d ' ' -f 1) == "$EXPECTED_PAYLOAD_DIGEST" ]] \
   || fail 'payload digest mismatch'
@@ -138,6 +193,7 @@ expected_names=(
   deploy/eqb-deploy-controller.mjs
   deploy/eqb-deploy-transport
   deploy/eqb-release.service
+  deploy/inspect-eqb-maintenance-host.sh
 )
 mapfile -t sorted_payload_names < <(printf '%s\n' "${payload_names[@]}" | LC_ALL=C sort)
 mapfile -t sorted_expected_names < <(printf '%s\n' "${expected_names[@]}" | LC_ALL=C sort)
@@ -167,6 +223,7 @@ const expected = new Set([
   'deploy/eqb-deploy-transport',
   'deploy/eqb-deploy-controller',
   'deploy/eqb-deploy-controller.mjs',
+  'deploy/inspect-eqb-maintenance-host.sh',
 ])
 function walk(directory, relative = '.') {
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
@@ -186,17 +243,30 @@ for (const name of expected) {
 }
 NODE
 
-resolved_target=$(/usr/sbin/runuser -u "$SOURCE_USER" -- \
-  /usr/bin/git -C "$SOURCE" rev-parse "$TARGET_SHA^{commit}")
+remote_origin=$(run_source /usr/bin/git -C "$SOURCE" remote get-url origin)
+case "$remote_origin" in
+  https://github.com/Buqisir/english-question-bank|\
+  https://github.com/Buqisir/english-question-bank.git|\
+  git@github.com:Buqisir/english-question-bank|\
+  git@github.com:Buqisir/english-question-bank.git|\
+  ssh://git@github.com/Buqisir/english-question-bank|\
+  ssh://git@github.com/Buqisir/english-question-bank.git) ;;
+  *) fail 'production source origin is not the fixed repository' ;;
+esac
+run_source /usr/bin/git -C "$SOURCE" fetch --quiet --no-tags origin main
+[[ $(run_source /usr/bin/git -C "$SOURCE" rev-parse FETCH_HEAD) == "$TARGET_SHA" ]] \
+  || fail 'fetched main does not match target SHA'
+resolved_target=$(run_source /usr/bin/git -C "$SOURCE" rev-parse "$TARGET_SHA^{commit}")
 [[ $resolved_target == "$TARGET_SHA" ]] || fail 'target commit is unavailable in the production source clone'
 for relative in \
   deploy/Caddyfile.release \
   deploy/eqb-release.service \
   deploy/eqb-deploy-transport \
   deploy/eqb-deploy-controller \
-  deploy/eqb-deploy-controller.mjs; do
-  target_digest=$(/usr/sbin/runuser -u "$SOURCE_USER" -- \
-    /usr/bin/git -C "$SOURCE" show "$TARGET_SHA:$relative" | sha256sum | cut -d ' ' -f 1)
+  deploy/eqb-deploy-controller.mjs \
+  deploy/inspect-eqb-maintenance-host.sh; do
+  target_digest=$(run_source /usr/bin/git -C "$SOURCE" show "$TARGET_SHA:$relative" \
+    | sha256sum | cut -d ' ' -f 1)
   [[ $(sha256sum "$staging/$relative" | cut -d ' ' -f 1) == "$target_digest" ]] \
     || fail "payload file is not from the exact target commit: $relative"
 done
@@ -206,6 +276,65 @@ node --check "$staging/deploy/eqb-deploy-controller.mjs"
 /bin/sh -n "$staging/deploy/eqb-deploy-transport"
 systemd-analyze verify "$staging/deploy/eqb-release.service" >/dev/null
 caddy validate --config "$staging/deploy/Caddyfile.release" >/dev/null
+
+readiness_output=$(
+  /usr/bin/env -i \
+    PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin \
+    EQB_MAINTENANCE_LOCK_FD=9 \
+    /bin/bash "$staging/deploy/inspect-eqb-maintenance-host.sh" \
+      "$TARGET_SHA" "$EXPECTED_PAYLOAD_DIGEST" "$TRANSPORT_USER"
+) || fail 'maintenance install readiness inspection failed'
+if ! /usr/bin/node --input-type=module - \
+  "$readiness_output" "$TARGET_SHA" "$EXPECTED_PAYLOAD_DIGEST" "$TRANSPORT_USER" <<'NODE'
+const [line, targetSha, payloadDigest, transportUser] = process.argv.slice(2)
+const prefix = 'EQB_MAINTENANCE_INSTALL_READINESS '
+if (!line.startsWith(prefix) || line.indexOf('\n') !== -1) process.exit(1)
+let report
+try {
+  report = JSON.parse(line.slice(prefix.length))
+} catch {
+  process.exit(1)
+}
+const expectedKeys = [
+  'availableBytes', 'caddyfileSha256', 'controllerModuleSha256',
+  'deploymentLockMode', 'failureCode', 'layout', 'payloadDigest', 'productionSha',
+  'rootWrapperSha256', 'schemaVersion', 'state', 'targetSha',
+  'transportUid', 'transportUser', 'transportWrapperSha256', 'unitSha256',
+].sort()
+if (
+  JSON.stringify(Object.keys(report).sort()) !== JSON.stringify(expectedKeys)
+  || report.schemaVersion !== 'eqb-maintenance-install-readiness-v1'
+  || report.state !== 'ready'
+  || report.failureCode !== null
+  || report.targetSha !== targetSha
+  || report.payloadDigest !== payloadDigest
+  || report.transportUser !== transportUser
+  || !['0600', '0644'].includes(report.deploymentLockMode)
+  || !Number.isSafeInteger(report.transportUid)
+  || report.transportUid <= 0
+  || !Number.isSafeInteger(report.availableBytes)
+  || report.availableBytes < 5 * 1024 * 1024 * 1024
+  || report.layout !== 'release'
+  || !/^[0-9a-f]{40}$/.test(report.productionSha)
+  || ![
+    report.controllerModuleSha256,
+    report.rootWrapperSha256,
+    report.transportWrapperSha256,
+    report.unitSha256,
+    report.caddyfileSha256,
+  ]
+    .every((value) => /^[0-9a-f]{64}$/.test(value))
+) process.exit(1)
+NODE
+then
+  fail 'maintenance install readiness report is invalid'
+fi
+
+if [[ $deploy_lock_mode != 600 ]]; then
+  lock_mode_changed=1
+  chmod 0600 "$DEPLOY_LOCK"
+  assert_real_file "$DEPLOY_LOCK" 0 0 600 'normalized deployment lock'
+fi
 
 backup=$(mktemp -d "$BACKUP_ROOT/maintenance-controller-install-${TARGET_SHA:0:12}-XXXXXXXX")
 chown root:root "$backup"
