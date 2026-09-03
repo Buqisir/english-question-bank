@@ -202,23 +202,36 @@ node scripts/amp-orb-deploy.mjs plan
 node scripts/amp-orb-deploy.mjs bootstrap-preflight --owner-said-preflight
 node scripts/amp-orb-deploy.mjs baseline --owner-said-baseline-migration
 node scripts/amp-orb-deploy.mjs bootstrap --owner-said-release-bootstrap
+node scripts/amp-orb-deploy.mjs bootstrap-inspect --owner-said-preflight
 node scripts/amp-orb-deploy.mjs bootstrap-resume --owner-said-release-bootstrap-resume
+node scripts/amp-orb-deploy.mjs bootstrap-abandon --owner-said-release-bootstrap-abandon
 node scripts/amp-orb-deploy.mjs preflight --owner-said-preflight
 node scripts/amp-orb-deploy.mjs deploy --owner-said-deploy-latest
 ```
 
-`plan` does not connect to production. `bootstrap-preflight` is the one-time
-read-only legacy-host check. `baseline` is the transition-only migration from a
-known legacy state to the exact healthy `main`; it is not an ordinary deploy.
-`bootstrap` creates the release layout and restricted controller boundary only
-after that exact baseline is healthy. It stages only the inert hash-bound payload
-first, then writes a private durable recovery record before invoking the host
-transaction. `bootstrap-resume` is a separately authorized finalization path for
-an interrupted caller: it loads that exact record and cannot repeat the host
-bootstrap transaction. After cutover, `preflight` goes
-only through the root-owned forced-command controller. Daily `deploy` resolves
-current `main` itself and sends only that exact SHA—never an Owner-supplied hash—to
-the host.
+`plan` does not connect to production. `bootstrap-preflight` is the read-only
+legacy-host classifier. `baseline` is only the S0-to-S1 migration from an
+unbaselined legacy state to an exact healthy `main`; after one successful
+receipt it is consumed and must not be rerun. `bootstrap` moves that established
+S1 directly to a descendant candidate only when the fixed persistence-authority
+diff is empty. It stages only the inert hash-bound payload first, then writes a
+private durable recovery record before invoking the host transaction.
+`bootstrap-inspect` classifies an interrupted attempt without mutation or a
+second host transaction. `bootstrap-resume` is the separately authorized,
+idempotent finalizer for a successful host transaction. `bootstrap-abandon`
+first serializes with the bootstrap host lock and installs a root-private
+target-and-unit cancellation marker. Lock contention means the transaction is
+still active and abandonment stops; a delayed queued transaction is either
+rejected by lock contention or must read the marker under that lock and stop
+before runtime mutation. Only after cancellation, controller-key rejection, the
+still-active old key, and strict healthy S1 have all been proved does it
+terminalize private Orb recovery. Unknown dispatch may
+be abandoned only when the cancellation receipt proves no durable host acceptance;
+an accepted attempt needs retained terminal failure evidence. A retained failure
+outside the known pre-mutation stages also requires the host's healthy-rollback
+verdict. After cutover, `preflight` goes only through the root-owned forced-
+command controller. Daily `deploy` resolves current `main` itself and sends only
+that exact SHA—never an Owner-supplied hash—to the host.
 
 The baseline operator keeps its root process at umask `077`, but every package
 install, Chromium smoke, and app build child explicitly uses umask `022`. It
@@ -237,6 +250,9 @@ or run old code against the migrated schema: it preserves the consistent target
 code and schema, reports `rolledBack: false`, and fails closed for diagnosis.
 Do not retry a failed baseline command without a fresh state classification and
 authorization.
+Once `bootstrap-preflight` reports an established baseline, do not run baseline
+again: the retained success receipt, quarantine, and default identity are inputs
+to bootstrap, not material to recreate for every candidate.
 
 The one-time cutover uses `deploy/bootstrap-eqb-deployment.sh` to prepare the
 first release, move writable state under `/opt/eqb/shared`, install
@@ -257,7 +273,12 @@ account, its one proven bootstrap key, and its already-working `sudo -n`
 boundary; it is not a host-account provisioner and does not create an account or
 silently edit sudoers. The bootstrap validates those prerequisites, and both the
 new route before retirement and the same route after retirement must execute the
-root-owned strict entrypoint successfully. Keep the
+root-owned strict entrypoint successfully. Before maintenance it also proves
+the baseline receipt/quarantine/identity state, descendant ancestry, an empty
+protected diff, and usable future controller `sudo` scope. It takes private
+SQLite `.backup` snapshots of all three live databases, verifies integrity and
+foreign keys, and records their SHA-256 digests; these are incident evidence and
+are never automatically replayed after traffic may have reopened. Keep the
 legacy `deploy/eqb.service`, `deploy/Caddyfile`, and `scripts/deploy-remote.sh`
 only for pre-cutover operation and rollback evidence; do not use the legacy
 in-place deploy after a successful cutover. Releases are retained for rollback;
@@ -270,10 +291,11 @@ staging. Any change to the fixed controller/systemd/Caddy files or to the
 named startup/recovery and high-authority persistence owners fails before build
 and restart. The initial bootstrap applies the same persistence comparison
 against the legacy production `HEAD`. Do not bypass it: complete a separately
-authorized migration/configuration procedure, establish that exact release as
-the safe production baseline, then repeat the normal command. Ordinary reviewed
-server code remains deployable; later authenticated API writes are not actions
-performed or authorized by the deployment command itself.
+authorized migration/configuration procedure when the protected surface changes.
+Do not use the consumed legacy baseline operator as an ordinary advancement
+mechanism. Ordinary reviewed server code remains deployable; later authenticated
+API writes are not actions performed or authorized by the deployment command
+itself.
 
 The forced transport entrypoint parses the command before its strict root
 entrypoint runs the controller and deployment lock in a transient host systemd
@@ -287,36 +309,62 @@ authorized `bootstrap-resume` finalizer; do not launch a second host bootstrap.
 Host receipts, attempt logs, and unit journals remain available for root-side
 incident diagnostics.
 
+The journal contract uses one exact `EQB_DEPLOY_RECEIPT {json}` controller
+marker and one bootstrap terminal marker. Zero terminal markers is `unknown`,
+not proof of failure and never permission to retry; duplicate or contradictory
+markers fail closed. Run `bootstrap-inspect` first. Resume only a transaction
+whose host bootstrap completed. An authorized abandon may convert failure or
+unknown dispatch into a terminal state only by installing the exact cancellation
+marker under the host lock, then independently proving controller rejection,
+the old route, and strict S1 health. Unknown dispatch additionally requires no
+durable host-acceptance marker; accepted attempts require retained terminal
+failure evidence, and post-mutation failure also needs healthy rollback. Do not
+run `amp orb restart-processes` while bootstrap finalization is pending.
+
 Repository readiness still grants no production authority. Before cutover:
 
 1. create a separate private Deployment Orb project;
 2. run a fresh read-only bootstrap preflight;
-3. obtain direct Owner authorization for the protected baseline migration, run
-   `baseline --owner-said-baseline-migration`, and require its strict success
-   receipt before proceeding;
-4. obtain a new, separate direct Owner authorization for the release-layout
-   bootstrap, then run `bootstrap --owner-said-release-bootstrap`;
+3. only in S0, obtain direct Owner authorization for the protected baseline
+   migration, run `baseline --owner-said-baseline-migration`, and require its
+   strict success receipt. In S1, require exactly one success receipt bound to
+   production `HEAD`, one intact quarantined release wrapper, the valid default
+   Git identity, no live release layout, controller-capable `sudo`, and strict
+   local, local-TLS, and public health; never invoke baseline again;
+4. prove locally and on-host that production is an ancestor of current `main`
+   and their fixed persistence-authority diff is empty. Then obtain a new,
+   separate direct Owner authorization and run
+   `bootstrap --owner-said-release-bootstrap`;
 5. require bootstrap to generate the dedicated Ed25519 identity, verify the new
-   forced-controller route, atomically retire the exact old privileged key,
-   prove that the new key still works and the old key is rejected, and rotate
-   only `QUESTION_BANK_DEPLOY_SSH_PRIVATE_KEY` in the current Deployment project
-   via stdin. The target SHA, host unit, generated controller identity, and old
-   bootstrap identity must already exist in the private recovery record. If the
-   caller is interrupted after host work starts, stop without rerunning
-   `bootstrap`; after read-only classification and fresh direct Owner
-   authorization, use `bootstrap-resume --owner-said-release-bootstrap-resume`.
-   Resume revalidates the recorded SHA's hosted checks, proves the new route,
-   classifies the old identity as accepted or exact public-key rejection,
-   performs retirement only when still needed, re-proves both routes, rotates
-   the Secret last, and terminalizes recovery only after rotation succeeds.
+   forced-controller route, rotate only
+   `QUESTION_BANK_DEPLOY_SSH_PRIVATE_KEY` in the current Deployment project via
+   stdin, atomically retire the exact old privileged key, and then prove the new
+   key still works and the old key gets exact public-key rejection. The target
+   SHA, host unit, generated controller identity, and old bootstrap identity
+   must already exist in the private recovery record. If the caller is
+   interrupted after host work starts, stop without rerunning `bootstrap`; use
+   authorized read-only `bootstrap-inspect` to classify it. With fresh direct
+   Owner authorization, use `bootstrap-resume` with
+   `--owner-said-release-bootstrap-resume` only for pending finalization, or use
+   `bootstrap-abandon` with `--owner-said-release-bootstrap-abandon` only to
+   cancel the exact target/unit under the bootstrap lock and then prove new-key
+   rejection, the still-working old key, and strict S1 health. Lock contention
+   means stop and inspect again. Unknown dispatch additionally requires the
+   cancellation receipt to report no durable host acceptance. An accepted
+   attempt requires retained terminal failure evidence, and a failure after the
+   known pre-mutation stages also needs the host's healthy-rollback verdict.
+   Resume revalidates the
+   recorded SHA's hosted checks, proves the new
+   route, rotates the Secret, classifies and retires the old identity only when
+   needed, and re-proves both routes before terminalizing recovery.
    Terminalization atomically renames the whole recovery directory before
    deleting either private identity; a non-secret private completion receipt is
    retained, and a later resume can finish a partially interrupted identity
    cleanup without repeating host or Secret mutation. Any other old-key result
    fails closed and retains active recovery state;
-6. after successful Secret rotation, refresh the Deployment Orb environment
-   with `amp orb restart-processes --thread "$AMP_THREAD_ID"`, then obtain
-   authorization for and run the forced-controller `preflight`;
+6. only after successful bootstrap finalization, refresh the Deployment Orb
+   environment with `amp orb restart-processes --thread "$AMP_THREAD_ID"`, then
+   obtain authorization for and run the forced-controller `preflight`;
 7. confirm deployment secrets are absent from development/CI projects and
    record the exact cutover evidence in `go-live-record.md`.
 

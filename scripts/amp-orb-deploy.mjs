@@ -9,9 +9,13 @@ import { fileURLToPath } from 'node:url'
 
 import {
   AMP_ORB_DEPLOY_REPOSITORY,
+  EQB_PERSISTENCE_AUTHORITY_PATHS,
+  abandonReleaseBootstrapRecovery,
   assertAuthoritativeDeploymentChecks,
   bootstrapPayloadStageInput,
   bootstrapReleaseLayout,
+  classifyReleaseBootstrapJournal,
+  classifyReleaseBootstrapOutcome,
   clearCompletedReleaseBootstrapRecovery,
   completeReleaseBootstrapRecovery,
   createReleaseBootstrapRecovery,
@@ -22,14 +26,15 @@ import {
   materializeDeploymentCredentials,
   migrateLegacyProductionBaseline,
   parseBootstrapKeyRetirementReceipt,
+  parseReleaseBootstrapCancellation,
   parseDeploymentControllerOutput,
   parseDeploymentControllerPreflight,
   parseDeploymentPreflightOutput,
-  parseReleaseBootstrapFailure,
   readCompletedReleaseBootstrapRecovery,
   readReleaseBootstrapRecovery,
   removeReleaseBootstrapRecovery,
   requireReleaseLayoutBootstrapAuthorization,
+  requireReleaseLayoutBootstrapAbandonAuthorization,
   requireReleaseLayoutBootstrapResumeAuthorization,
   resumeReleaseLayoutBootstrap,
   resolveLatestDeploymentCandidate,
@@ -39,13 +44,20 @@ const repositoryRoot = fileURLToPath(new URL('..', import.meta.url))
 const legacyBaselineSource = fileURLToPath(
   new URL('../deploy/eqb-legacy-baseline.mjs', import.meta.url),
 )
+const legacyBaselineStateSource = fileURLToPath(
+  new URL('../deploy/eqb-legacy-baseline-state.mjs', import.meta.url),
+)
 const releaseBootstrapSource = fileURLToPath(
   new URL('../deploy/bootstrap-eqb-deployment.sh', import.meta.url),
 )
 const bootstrapKeyRetirementSource = fileURLToPath(
   new URL('../deploy/retire-eqb-bootstrap-key.mjs', import.meta.url),
 )
+const bootstrapCancellationSource = fileURLToPath(
+  new URL('../deploy/cancel-eqb-bootstrap-attempt.mjs', import.meta.url),
+)
 const legacyReleaseChildDigest = '25d8acc95172626cf03de96b2cc61d0f81508352082b976b9f1095bfbe15d4d5'
+const legacyReleaseChildFileCount = 4876
 const bootstrapRecoveryRoot = path.join(homedir(), '.local', 'state', 'eqb-deployment')
 
 function runGit(args) {
@@ -53,6 +65,33 @@ function runGit(args) {
     cwd: repositoryRoot,
     encoding: 'utf8',
   })
+}
+
+function isLocalAncestor(previousSha, targetSha) {
+  const result = spawnSync('git', ['merge-base', '--is-ancestor', previousSha, targetSha], {
+    cwd: repositoryRoot,
+    encoding: 'utf8',
+  })
+  if (result.error || ![0, 1].includes(result.status)) {
+    throw new Error('Cannot compare deployment baseline ancestry')
+  }
+  return result.status === 0
+}
+
+function readLocalProtectedDiff(previousSha, targetSha, protectedPaths) {
+  if (protectedPaths !== EQB_PERSISTENCE_AUTHORITY_PATHS) {
+    throw new Error('Deployment persistence authority path set is invalid')
+  }
+  const result = spawnSync('git', [
+    'diff', '--name-only', '--no-renames', previousSha, targetSha, '--', ...protectedPaths,
+  ], {
+    cwd: repositoryRoot,
+    encoding: 'utf8',
+  })
+  if (result.error || result.status !== 0) {
+    throw new Error('Cannot compare deployment persistence authority')
+  }
+  return String(result.stdout || '').trim().split('\n').filter(Boolean)
 }
 
 function readCommitChecks(sha) {
@@ -90,8 +129,27 @@ layout=legacy
 if test -L /opt/eqb/current && test -d /opt/eqb/releases && test -d /opt/eqb/shared; then
   layout=release
 fi
-printf 'productionSha=%s\\ntrackedDirtyPaths=%s\\neqb=%s\\ncaddy=%s\\nlayout=%s\\n' \
-  "$head" "$dirty" "$eqb" "$caddy" "$layout"
+strict_health=invalid
+if /usr/bin/timeout --signal=TERM --kill-after=2s 20s /bin/bash -c '
+  set -e
+  /usr/bin/systemctl is-active --quiet eqb
+  /usr/bin/systemctl is-active --quiet caddy
+  /usr/bin/curl --fail --silent --show-error --connect-timeout 3 --max-time 5 \
+    http://127.0.0.1:8787/api/health >/dev/null
+  /usr/bin/curl --fail --fail-early --silent --show-error --connect-timeout 3 --max-time 5 \
+    --resolve eqbank.cc:443:127.0.0.1 \
+    https://eqbank.cc/api/health https://eqbank.cc/ >/dev/null
+  /usr/bin/curl --fail --fail-early --silent --show-error --connect-timeout 3 --max-time 5 \
+    --parallel --parallel-immediate --parallel-max 4 \
+    https://eqbank.cc/api/health \
+    https://eqbank.cc/ \
+    https://eqbank.cc/ops/ \
+    "https://eqbank.cc/ops/?view=review" >/dev/null
+'; then
+  strict_health=ok
+fi
+printf 'productionSha=%s\\ntrackedDirtyPaths=%s\\neqb=%s\\ncaddy=%s\\nlayout=%s\\nstrictHealth=%s\\n' \
+  "$head" "$dirty" "$eqb" "$caddy" "$layout" "$strict_health"
 `
 
 async function withDeploymentCredentials(callback) {
@@ -172,15 +230,18 @@ async function bootstrapPreflight() {
     candidate: resolved,
     productionMutationAllowed: false,
     transitionOnly: true,
-    remote: await readLegacyPreflight(),
+    remote: await readLegacyPreflight(resolved),
   }, null, 2))
 }
 
-function readLegacyPreflight() {
+function readLegacyPreflight(_candidate, { keyPath: recoveredKeyPath = null } = {}) {
   return withDeploymentCredentials((credentials) => {
+    const host = String(process.env.QUESTION_BANK_DEPLOY_SSH_HOST || '')
+    const transportUser = deploymentSSHTransportUser(host)
+    const keyPath = recoveredKeyPath || credentials.keyPath
     const invocation = deploymentSSHInvocation({
-      host: String(process.env.QUESTION_BANK_DEPLOY_SSH_HOST || ''),
-      keyPath: credentials.keyPath,
+      host,
+      keyPath,
       knownHostsPath: credentials.knownHostsPath,
     })
     const remote = spawnSync(invocation.command, invocation.args, {
@@ -189,7 +250,42 @@ function readLegacyPreflight() {
     })
     if (remote.error) throw remote.error
     if (remote.status !== 0) throw new Error('Legacy deployment preflight failed')
-    return parseDeploymentPreflightOutput(remote.stdout)
+    const productionLines = String(remote.stdout || '').split('\n')
+      .filter((line) => line.startsWith('productionSha='))
+    if (productionLines.length !== 1 || !/^productionSha=[a-f0-9]{40}$/u.test(productionLines[0])) {
+      throw new Error('Legacy deployment preflight SHA is invalid')
+    }
+    const productionSha = productionLines[0].slice('productionSha='.length)
+    const evidenceInvocation = deploymentSSHInvocation({
+      host,
+      keyPath,
+      knownHostsPath: credentials.knownHostsPath,
+      remoteArgs: [
+        'sudo', '-n',
+        '/usr/bin/env',
+        'EQB_LEGACY_BASELINE_INSPECT_STDIN=1',
+        '/usr/bin/node',
+        '--input-type=module',
+        '-',
+        '/opt/eqb/english-question-bank',
+        '/var/backups/eqb',
+        '/home/eqb',
+        productionSha,
+        legacyReleaseChildDigest,
+        String(legacyReleaseChildFileCount),
+        'eqb',
+        transportUser,
+      ],
+    })
+    const evidence = spawnSync(evidenceInvocation.command, evidenceInvocation.args, {
+      encoding: 'utf8',
+      input: readFileSync(legacyBaselineStateSource, 'utf8'),
+      maxBuffer: 16 * 1024 * 1024,
+      timeout: 5 * 60 * 1000,
+    })
+    if (evidence.error) throw evidence.error
+    if (evidence.status !== 0) throw new Error('Legacy baseline evidence inspection failed')
+    return parseDeploymentPreflightOutput(`${remote.stdout}\n${evidence.stdout}`)
   })
 }
 
@@ -314,6 +410,7 @@ function identityFromRecovery(recovery, { projectId, transportTarget }) {
   }
   return {
     directory: recovery.directory,
+    targetSha: recovery.targetSha,
     unit: recovery.unit,
     privateKeyPath: recovery.controllerPrivateKeyPath,
     publicKeyBody: controllerPublicKeyBody,
@@ -393,6 +490,48 @@ function stageReleaseBootstrapPayload(candidate) {
   })
 }
 
+function readBootstrapJournal(identity) {
+  return withDeploymentCredentials((credentials) => {
+    const host = String(process.env.QUESTION_BANK_DEPLOY_SSH_HOST || '')
+    const syncInvocation = deploymentSSHInvocation({
+      host,
+      keyPath: identity.bootstrapPrivateKeyPath,
+      knownHostsPath: credentials.knownHostsPath,
+      remoteArgs: ['sudo', '-n', '/usr/bin/journalctl', '--sync'],
+    })
+    const synced = spawnSync(syncInvocation.command, syncInvocation.args, {
+      encoding: 'utf8',
+      timeout: 30_000,
+    })
+    if (synced.error) throw synced.error
+    if (synced.status !== 0) {
+      throw new Error('Release-layout bootstrap journal synchronization failed')
+    }
+    const journalInvocation = deploymentSSHInvocation({
+      host,
+      keyPath: identity.bootstrapPrivateKeyPath,
+      knownHostsPath: credentials.knownHostsPath,
+      remoteArgs: [
+        'sudo', '-n',
+        '/usr/bin/journalctl',
+        '--quiet',
+        '--no-pager',
+        '--output=cat',
+        `--unit=${identity.unit}.service`,
+      ],
+    })
+    const journal = spawnSync(journalInvocation.command, journalInvocation.args, {
+      encoding: 'utf8',
+      timeout: 30_000,
+    })
+    if (journal.error) throw journal.error
+    if (journal.status !== 0) {
+      throw new Error('Release-layout bootstrap journal evidence is unavailable')
+    }
+    return `${journal.stdout || ''}\n${journal.stderr || ''}`
+  })
+}
+
 function invokeReleaseBootstrap({ candidate, identity, payload }) {
   return withDeploymentCredentials((credentials) => {
     const host = String(process.env.QUESTION_BANK_DEPLOY_SSH_HOST || '')
@@ -421,8 +560,10 @@ function invokeReleaseBootstrap({ candidate, identity, payload }) {
         '/var/lock/eqb-release-bootstrap.lock',
         '/usr/bin/env',
         `EQB_DEPLOY_TRANSPORT_USER=${transportUser}`,
+        `EQB_DEPLOY_BOOTSTRAP_UNIT=${identity.unit}`,
         `EQB_DEPLOY_BOOTSTRAP_PUBLIC_KEY_BODY=${identity.bootstrapPublicKeyBody}`,
         `EQB_DEPLOY_CONTROLLER_PUBLIC_KEY_BODY=${identity.publicKeyBody}`,
+        `EQB_LEGACY_BASELINE_CHILD_DIGEST=${legacyReleaseChildDigest}`,
         '/bin/bash',
         payload,
         candidate.sha,
@@ -433,57 +574,26 @@ function invokeReleaseBootstrap({ candidate, identity, payload }) {
       encoding: 'utf8',
       timeout: 3 * 60 * 60 * 1000,
     })
-    const journalInvocation = deploymentSSHInvocation({
-      host,
-      keyPath: identity.bootstrapPrivateKeyPath,
-      knownHostsPath: credentials.knownHostsPath,
-      remoteArgs: [
-        'sudo', '-n',
-        '/usr/bin/journalctl',
-        '--no-pager',
-        '--output=cat',
-        `--unit=${identity.unit}.service`,
-      ],
-    })
-    const journal = spawnSync(journalInvocation.command, journalInvocation.args, {
-      encoding: 'utf8',
-      timeout: 30_000,
-    })
-    if (journal.error) throw journal.error
-    if (journal.status !== 0) {
-      throw new Error('Release-layout bootstrap journal evidence is unavailable')
+    const journalOutput = readBootstrapJournal(identity)
+    let evidence
+    try {
+      evidence = classifyReleaseBootstrapOutcome(journalOutput, candidate.sha, remote.status)
+    } catch {
+      throw new Error('Release-layout bootstrap returned invalid journal evidence')
     }
-    const journalOutput = `${journal.stdout || ''}\n${journal.stderr || ''}`
-    const failureMarkers = journalOutput.split('\n')
-      .filter((line) => line.startsWith('EQB_BOOTSTRAP_FAILURE '))
-    if (failureMarkers.length > 0) {
-      let failure
-      try {
-        failure = parseReleaseBootstrapFailure(journalOutput, candidate.sha)
-      } catch {
-        throw new Error('Release-layout bootstrap returned an invalid failure marker')
-      }
-      if (
-        Number.isInteger(remote.status)
-        && remote.status !== 255
-        && remote.status !== failure.exitCode
-      ) throw new Error('Release-layout bootstrap status does not match its failure marker')
+    if (evidence.state === 'failure') {
+      const { failure } = evidence
       throw new Error(
         `Release-layout bootstrap failed at ${failure.failedStage} `
         + `(code ${failure.exitCode}; rollback ${failure.rollbackHealthy ? 'healthy' : 'unhealthy'}; `
         + `${failure.evidenceRetained ? 'private evidence retained' : 'no private evidence available'})`,
       )
     }
-    const completion = `EQB deployment bootstrap complete: ${candidate.sha}`
-    const completions = journalOutput.split('\n').filter((line) => line === completion)
-    if (completions.length === 1) return
-    if (remote.status === 75) throw new Error('Another release-layout bootstrap is already running')
-    if (remote.error || !Number.isInteger(remote.status) || remote.status === 255) {
-      throw new Error(
-        `Release-layout bootstrap outcome is unknown for ${identity.unit}; use the explicit recovery command instead of retrying`,
-      )
-    }
-    throw new Error(`Release-layout bootstrap failed without valid journal evidence (code ${remote.status})`)
+    if (evidence.state === 'success') return
+    if (evidence.state === 'lock') throw new Error('Another release-layout bootstrap is already running')
+    throw new Error(
+      `Release-layout bootstrap outcome is unknown for ${identity.unit}; inspect or resume it instead of retrying`,
+    )
   })
 }
 
@@ -541,6 +651,45 @@ function retirePrivilegedBootstrapIdentity(identity) {
   })
 }
 
+function cancelReleaseBootstrapAttempt(identity) {
+  return withDeploymentCredentials((credentials) => {
+    const invocation = deploymentSSHInvocation({
+      host: String(process.env.QUESTION_BANK_DEPLOY_SSH_HOST || ''),
+      keyPath: identity.bootstrapPrivateKeyPath,
+      knownHostsPath: credentials.knownHostsPath,
+      remoteArgs: [
+        'sudo', '-n',
+        '/usr/bin/flock',
+        '--exclusive',
+        '--nonblock',
+        '--conflict-exit-code', '75',
+        '/var/lock/eqb-release-bootstrap.lock',
+        '/usr/bin/node',
+        '--input-type=module',
+        '-',
+        identity.targetSha,
+        identity.unit,
+      ],
+    })
+    const remote = spawnSync(invocation.command, invocation.args, {
+      encoding: 'utf8',
+      input: readFileSync(bootstrapCancellationSource, 'utf8'),
+      maxBuffer: 1024 * 1024,
+      timeout: 60_000,
+    })
+    if (remote.error) throw remote.error
+    if (remote.status === 75) {
+      throw new Error('Release-layout bootstrap is still running; cancellation lock is held')
+    }
+    if (remote.status !== 0) throw new Error('Release-layout bootstrap cancellation failed')
+    return parseReleaseBootstrapCancellation(
+      remote.stdout,
+      identity.targetSha,
+      identity.unit,
+    )
+  })
+}
+
 function classifyPrivilegedBootstrapIdentity(identity) {
   return withDeploymentCredentials((credentials) => {
     const invocation = deploymentSSHInvocation({
@@ -561,6 +710,37 @@ function classifyPrivilegedBootstrapIdentity(identity) {
       && /^[^\r\n]+: Permission denied \(publickey\)\.$/u
         .test(String(remote.stderr || '').trim())
     ) return 'retired'
+    return 'unknown'
+  })
+}
+
+function classifyControllerIdentity(identity) {
+  return withDeploymentCredentials((credentials) => {
+    const invocation = deploymentSSHInvocation({
+      host: String(process.env.QUESTION_BANK_DEPLOY_SSH_HOST || ''),
+      keyPath: identity.privateKeyPath,
+      knownHostsPath: credentials.knownHostsPath,
+      remoteArgs: ['preflight'],
+    })
+    const remote = spawnSync(invocation.command, invocation.args, {
+      encoding: 'utf8',
+      env: { ...process.env, LC_ALL: 'C' },
+      timeout: 30_000,
+    })
+    if (remote.error) throw remote.error
+    if (remote.status === 0) {
+      try {
+        parseDeploymentControllerPreflight(remote.stdout)
+        return 'active'
+      } catch {
+        return 'unknown'
+      }
+    }
+    if (
+      remote.status === 255
+      && /^[^\r\n]+: Permission denied \(publickey\)\.$/u
+        .test(String(remote.stderr || '').trim())
+    ) return 'rejected'
     return 'unknown'
   })
 }
@@ -624,6 +804,8 @@ async function bootstrap() {
         identity.complete()
         recoveryCompleted = true
       },
+      isAncestor: isLocalAncestor,
+      readProtectedDiff: readLocalProtectedDiff,
     })
     console.log(JSON.stringify({
       command: 'one-time release-layout bootstrap',
@@ -732,6 +914,134 @@ async function bootstrapResume() {
   }
 }
 
+async function bootstrapInspect() {
+  if (!process.argv.includes('--owner-said-preflight')) {
+    throw new Error('Current Owner authorization for the read-only bootstrap inspection is required')
+  }
+  if (process.argv.includes('--sha')) {
+    throw new Error('Bootstrap recovery target SHA comes from private durable state; do not supply --sha')
+  }
+  const projectId = deploymentProjectId()
+  const transportTarget = String(process.env.QUESTION_BANK_DEPLOY_SSH_HOST || '')
+  const completed = readCompletedReleaseBootstrapRecovery({
+    stateRoot: bootstrapRecoveryRoot,
+    optional: true,
+  })
+  if (completed) {
+    if (
+      completed.projectId !== projectId
+      || completed.transportTargetDigest
+        !== createHash('sha256').update(transportTarget).digest('hex')
+    ) {
+      throw new Error('Completed bootstrap receipt does not belong to this Deployment project and SSH target')
+    }
+    console.log(JSON.stringify({
+      command: 'inspect release-layout bootstrap recovery',
+      productionMutationAllowed: false,
+      state: 'completed',
+      targetSha: completed.targetSha,
+      controllerSecretRotated: completed.controllerSecretRotated,
+    }, null, 2))
+    return
+  }
+  const recovery = readReleaseBootstrapRecovery({ stateRoot: bootstrapRecoveryRoot })
+  const identity = identityFromRecovery(recovery, { projectId, transportTarget })
+  let journal
+  try {
+    journal = classifyReleaseBootstrapJournal(
+      readBootstrapJournal(identity),
+      recovery.targetSha,
+    )
+  } catch {
+    journal = { state: 'unavailable' }
+  }
+  const controllerIdentity = classifyControllerIdentity(identity)
+  const bootstrapIdentity = classifyPrivilegedBootstrapIdentity(identity)
+  let legacy = null
+  if (bootstrapIdentity === 'active') {
+    try {
+      legacy = await readLegacyPreflight(null, { keyPath: identity.bootstrapPrivateKeyPath })
+    } catch {}
+  }
+  console.log(JSON.stringify({
+    command: 'inspect release-layout bootstrap recovery',
+    productionMutationAllowed: false,
+    state: 'pending',
+    targetSha: recovery.targetSha,
+    unit: recovery.unit,
+    journal,
+    controllerIdentity,
+    bootstrapIdentity,
+    legacy,
+  }, null, 2))
+}
+
+async function bootstrapAbandon() {
+  requireReleaseLayoutBootstrapAbandonAuthorization(process.argv.slice(2))
+  const projectId = deploymentProjectId()
+  const transportTarget = String(process.env.QUESTION_BANK_DEPLOY_SSH_HOST || '')
+  const recovery = readReleaseBootstrapRecovery({ stateRoot: bootstrapRecoveryRoot })
+  const identity = identityFromRecovery(recovery, { projectId, transportTarget })
+  const journal = classifyReleaseBootstrapJournal(
+    readBootstrapJournal(identity),
+    recovery.targetSha,
+  )
+  if (!['failure', 'unknown'].includes(journal.state)) {
+    throw new Error('Successful bootstrap recovery cannot be abandoned')
+  }
+  const cancellation = cancelReleaseBootstrapAttempt(identity)
+  if (
+    cancellation.hostAttemptStarted
+    && (journal.state === 'unknown' || !journal.failure.evidenceRetained)
+  ) {
+    throw new Error(
+      'Bootstrap recovery has durable host acceptance without retained terminal failure evidence',
+    )
+  }
+  if (classifyControllerIdentity(identity) !== 'rejected') {
+    throw new Error('Bootstrap recovery cannot be abandoned while controller identity state is not rejected')
+  }
+  if (classifyPrivilegedBootstrapIdentity(identity) !== 'active') {
+    throw new Error('Bootstrap recovery cannot be abandoned without the healthy legacy identity')
+  }
+  const legacy = await readLegacyPreflight(null, { keyPath: identity.bootstrapPrivateKeyPath })
+  if (
+    legacy.layout !== 'legacy'
+    || legacy.baselineState !== 'established'
+    || legacy.trackedDirtyPaths !== 0
+    || legacy.eqb !== 'active'
+    || legacy.caddy !== 'active'
+    || legacy.strictHealth !== 'ok'
+  ) {
+    throw new Error('Bootstrap recovery cannot be abandoned without a healthy established legacy baseline')
+  }
+  const abandoned = abandonReleaseBootstrapRecovery(recovery, {
+    failure: journal.state === 'failure' && journal.failure.evidenceRetained
+      ? journal.failure
+      : undefined,
+    cancellation,
+    previousSha: legacy.productionSha,
+    controllerIdentityRejected: true,
+    legacyHealthy: true,
+  })
+  console.log(JSON.stringify({
+    command: 'abandon failed release-layout bootstrap recovery',
+    productionMutationAllowed: false,
+    hostCancellationMutationAllowed: true,
+    privateRecoveryMutationAllowed: true,
+    state: 'abandoned',
+    targetSha: abandoned.targetSha,
+    previousSha: abandoned.previousSha,
+    evidenceKind: abandoned.evidenceKind,
+    cancellationInstalled: abandoned.cancellationInstalled,
+    hostAttemptStarted: abandoned.hostAttemptStarted,
+    rollbackHealthy: abandoned.rollbackHealthy,
+    preMutationFailure: abandoned.preMutationFailure,
+    controllerIdentityRejected: abandoned.controllerIdentityRejected,
+    legacyHealthy: abandoned.legacyHealthy,
+  }, null, 2))
+}
+
 async function deploy() {
   const result = await deployLatestRelease({
     argv: process.argv.slice(2),
@@ -756,11 +1066,13 @@ try {
   else if (process.argv[2] === 'bootstrap-preflight') await bootstrapPreflight()
   else if (process.argv[2] === 'baseline') await baseline()
   else if (process.argv[2] === 'bootstrap') await bootstrap()
+  else if (process.argv[2] === 'bootstrap-inspect') await bootstrapInspect()
   else if (process.argv[2] === 'bootstrap-resume') await bootstrapResume()
+  else if (process.argv[2] === 'bootstrap-abandon') await bootstrapAbandon()
   else if (process.argv[2] === 'deploy') await deploy()
   else {
     throw new Error(
-      'Usage: amp-orb-deploy.mjs plan | preflight --owner-said-preflight | bootstrap-preflight --owner-said-preflight | baseline --owner-said-baseline-migration | bootstrap --owner-said-release-bootstrap | bootstrap-resume --owner-said-release-bootstrap-resume | deploy --owner-said-deploy-latest',
+      'Usage: amp-orb-deploy.mjs plan | preflight --owner-said-preflight | bootstrap-preflight --owner-said-preflight | baseline --owner-said-baseline-migration | bootstrap --owner-said-release-bootstrap | bootstrap-inspect --owner-said-preflight | bootstrap-resume --owner-said-release-bootstrap-resume | bootstrap-abandon --owner-said-release-bootstrap-abandon | deploy --owner-said-deploy-latest',
     )
   }
 } catch (error) {

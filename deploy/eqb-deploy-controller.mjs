@@ -43,7 +43,7 @@ const HOST_CONFIGURATION_PATHS = Object.freeze([
   'deploy/eqb-deploy-controller',
   'deploy/eqb-deploy-controller.mjs',
 ])
-const PERSISTENCE_AUTHORITY_PATHS = Object.freeze([
+export const PERSISTENCE_AUTHORITY_PATHS = Object.freeze([
   'data/sql',
   'server/api.mjs',
   'server/auth/auth.mjs',
@@ -77,6 +77,13 @@ export const PRODUCTION_CONFIG = Object.freeze({
   service: 'eqb',
   caddyService: 'caddy',
 })
+
+export function formatControllerOutput(output) {
+  const marker = output?.schemaVersion === EQB_DEPLOY_RECEIPT_SCHEMA_VERSION
+    ? 'EQB_DEPLOY_RECEIPT '
+    : ''
+  return `${marker}${JSON.stringify(output)}\n`
+}
 
 function assertSha(value, label = 'deployment SHA') {
   if (!SHA.test(value || '')) throw new Error(`Invalid ${label}`)
@@ -853,7 +860,7 @@ if (isEntrypoint) {
   try {
     assertInstalledController()
     const result = await runController({ originalCommand: process.env.SSH_ORIGINAL_COMMAND })
-    process.stdout.write(`${JSON.stringify(result.output)}\n`)
+    process.stdout.write(formatControllerOutput(result.output))
     process.exitCode = result.exitCode
   } catch (error) {
     process.stderr.write(`EQB deployment controller failed closed: ${error.message}\n`)

@@ -119,35 +119,83 @@ single-paper promotion, Review mutation, database transfer, R2 mutation, or
 production configuration changes. A release that requires one of those
 operations stops for a separate explicit Owner-authorized procedure.
 
+### Legacy transition states
+
+The one-time transition has explicit states rather than treating production SHA
+equality as a proxy for safety:
+
+```text
+S0 Legacy-Unbaselined --baseline (consumed)--> S1 Legacy-Baselined
+S1 Legacy-Baselined  --bootstrap(candidate)--> S2 Release
+S1 with recovery     --inspect/resume--------> S2 Release
+S1 failed/unknown    --inspect/cancel/abandon--> S1 Legacy-Baselined
+S2 Release           --deploy(main)----------> S2 Release
+```
+
+S1 is evidence-bound, not candidate-bound. Bootstrap may target the same SHA or
+a descendant SHA when the fixed persistence-authority diff is exactly empty.
+Non-ancestry or unavailable Git objects produce `BASELINE_ANCESTRY_UNKNOWN`;
+protected changes produce `PERSISTENCE_AUTHORITY_CHANGED`. Neither condition
+falls back to baseline or bypasses the host's independent copy of the gate.
+
 ## Repository implementation and production hold
 
 The repository implementation exposes:
 
 - `plan`, which proves the exact clean `main` and authoritative status without
   connecting to production;
-- a transition-only, explicitly authorized read-only `bootstrap-preflight` for
-  the legacy host before its unrestricted bootstrap key is retired;
+- a transition-only, explicitly authorized read-only `bootstrap-preflight` that
+  classifies a legacy host as unbaselined or established. Established evidence
+  requires exactly one successful receipt bound to production `HEAD`, the
+  retained root-private quarantine and default Git identity, no live release
+  layout, transport `sudo` scope for the future forced controller, and strict
+  local, local-TLS, and public health;
 - a transition-only, separately authorized `baseline` command that streams the
   tracked fail-closed legacy operator, creates verified SQLite snapshots,
   establishes the exact healthy `main` as the mutable production baseline, and
   preserves the preexisting nonconforming release tree intact in root-private
-  quarantine;
+  quarantine. This S0-to-S1 transition is consumed: an established baseline is
+  rejected with `BASELINE_ALREADY_ESTABLISHED`, not advanced by rerunning the
+  historical operator;
 - a separately authorized `bootstrap` command that generates a fresh Ed25519
   controller identity and durably records that identity, the old identity,
   target SHA, and host unit in private Deployment Orb state after inert payload
-  staging but before the host transaction; it executes the hash-verified tracked
-  bootstrap in a manager-owned transient service under a host lock, proves the new
-  non-root forced-transport/root-controller route, atomically retires and
-  rejects the old privileged bootstrap identity from that same transport
-  account, and only then rotates the current Deployment project's private-key
-  Secret through stdin;
+  staging but before the host transaction. An established legacy production may
+  move directly to a descendant candidate only when the fixed persistence-
+  authority diff is empty; unknown ancestry and a non-empty protected diff fail
+  distinctly before host mutation. The host independently repeats those gates,
+  snapshots and verifies all three live SQLite databases before maintenance,
+  executes the hash-verified tracked bootstrap in a manager-owned transient
+  service under a host lock, records exact target-and-unit host acceptance before
+  the attempt, and emits uniquely marked receipts. Finalization proves the new
+  non-root forced-transport/root-controller route, rotates the
+  current Deployment project's private-key Secret through stdin while the old
+  recovery route still exists, atomically retires that old privileged identity,
+  and then proves the new route and exact old-key rejection again;
+- an explicitly authorized read-only `bootstrap-inspect` command that reports
+  durable recovery, host journal, controller-key, old-key, and legacy health
+  classification without repeating bootstrap;
 - a separately authorized `bootstrap-resume` command that loads exactly one
   private recovery record, revalidates the recorded SHA's authoritative CI,
   never repeats the host bootstrap transaction, and idempotently continues
-  route proof, old-key retirement or rejection proof, Secret rotation, and
+  route proof, Secret rotation, old-key retirement or rejection proof, and
   recovery cleanup; cleanup atomically moves the record to a terminal state
   before deleting either private key, retains a non-secret completion receipt,
   and can finish deletion after another interruption;
+- a separately authorized `bootstrap-abandon` command for a host transaction
+  that failed, definitively rolled back, or lost its dispatch acknowledgement.
+  Before discarding local recovery it acquires the same host lock and writes an
+  exact target-and-unit-bound root-private cancellation marker. A running
+  transaction wins the lock and blocks abandonment; a queued transaction is
+  either rejected by lock contention or must observe that marker under the lock
+  before its first runtime mutation. The cancellation receipt also reports
+  whether durable host acceptance already
+  exists: unknown dispatch may be abandoned only when it does not. The command
+  then requires exact controller-key rejection, a still-active old identity,
+  and a strictly healthy established legacy baseline. An accepted attempt
+  requires retained terminal failure evidence, and a post-mutation failure also
+  requires the host's healthy-rollback verdict. Cancellation never authorizes a
+  bootstrap retry;
 - an explicitly authorized `preflight` through the fixed forced-command host
   controller after bootstrap;
 - `deploy --owner-said-deploy-latest`, which sends only the automatically
@@ -161,16 +209,21 @@ The repository implementation exposes:
   atomic switch, idempotency, private receipts, shared-data non-mutation, and
   healthy rollback.
 
-Code presence is not production authorization. The legacy baseline migration,
-release-layout bootstrap, and any recovery finalization remain blocked until
-the Owner directly authorizes each action after the preceding gate succeeds.
-Recovery is not a bootstrap retry: it is allowed only with a matching private
-record and cannot invoke the host bootstrap transaction. After bootstrap rotates
-the Secret, the Deployment Orb environment must refresh and a forced-controller
-preflight must pass. The first real daily deployment then requires another
-direct Owner authorization. The Deployment Orb must also be a separate private
-Amp project; its forced-key secret must not remain in ordinary development or
-CI projects.
+Code presence is not production authorization. The consumed legacy baseline
+migration, release-layout bootstrap, recovery mutation, environment refresh,
+preflight, and first deployment remain separate actions and require their stated
+current Owner authorization. Recovery is not a bootstrap retry: inspection and
+resume use a matching private record and cannot invoke the host bootstrap
+transaction; abandonment is available only after lock-serialized host
+cancellation and current strict S1 health are proved. A retained post-mutation
+failure additionally requires healthy rollback.
+Do not refresh Orb processes between Secret rotation and successful bootstrap
+finalization, because the current executor's retained old identity is part of
+the recovery boundary. After finalization, the Deployment Orb environment must
+refresh and a forced-controller preflight must pass. The first real daily
+deployment then requires another direct Owner authorization. The Deployment Orb
+must also be a separate private Amp project; its forced-key secret must not
+remain in ordinary development or CI projects.
 
 ## Consequences
 
