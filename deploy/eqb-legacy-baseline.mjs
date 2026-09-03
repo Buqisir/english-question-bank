@@ -376,7 +376,7 @@ function schemaPass(filePath, before) {
   }
 }
 
-function distManifest() {
+function distManifest({ verifyModes = true } = {}) {
   const dist = path.join(repo, 'app', 'dist')
   const entries = []
   function walk(absolute, relative = '.') {
@@ -384,13 +384,19 @@ function distManifest() {
     if (stat.isSymbolicLink() || (!stat.isDirectory() && !stat.isFile())) {
       throw new Error('generated-dist-special-node')
     }
+    if (stat.isFile() && stat.nlink !== 1) throw new Error('generated-dist-linked-file')
     const expectedMode = stat.isDirectory() ? 0o755 : 0o644
-    if ((stat.mode & 0o7777) !== expectedMode) throw new Error('generated-dist-mode')
+    if (verifyModes && (stat.mode & 0o7777) !== expectedMode) {
+      throw new Error('generated-dist-mode')
+    }
     entries.push({
       relative,
       type: stat.isDirectory() ? 'directory' : 'file',
       uid: stat.uid,
       gid: stat.gid,
+      dev: stat.dev,
+      ino: stat.ino,
+      nlink: stat.nlink,
       mode: stat.mode & 0o7777,
       size: stat.size,
       digest: stat.isFile() ? hash(fs.readFileSync(absolute)) : null,
@@ -406,6 +412,53 @@ function distManifest() {
     throw new Error('generated-dist-index-missing')
   }
   return entries
+}
+
+function sameDistContent(left, right) {
+  const withoutModes = (entries) => entries.map(({
+    relative, type, uid, gid, dev, ino, nlink, size, digest,
+  }) => ({ relative, type, uid, gid, dev, ino, nlink, size, digest }))
+  return JSON.stringify(withoutModes(left)) === JSON.stringify(withoutModes(right))
+}
+
+function normalizeDistModes() {
+  const dist = path.join(repo, 'app', 'dist')
+  const before = distManifest({ verifyModes: false })
+  for (const entry of before) {
+    const absolute = entry.relative === '.' ? dist : path.join(dist, entry.relative)
+    const expectedMode = entry.type === 'directory' ? 0o755 : 0o644
+    const flags = fs.constants.O_RDONLY
+      | fs.constants.O_NOFOLLOW
+      | fs.constants.O_NONBLOCK
+      | (entry.type === 'directory' ? fs.constants.O_DIRECTORY : 0)
+    let descriptor = null
+    try {
+      descriptor = fs.openSync(absolute, flags)
+      const sameEntry = (stat) => (
+        (stat.isDirectory() ? 'directory' : stat.isFile() ? 'file' : 'other') === entry.type
+        && stat.uid === entry.uid
+        && stat.gid === entry.gid
+        && stat.dev === entry.dev
+        && stat.ino === entry.ino
+        && stat.nlink === entry.nlink
+        && stat.size === entry.size
+      )
+      const current = fs.fstatSync(descriptor)
+      if (!sameEntry(current) || (current.mode & 0o7777) !== entry.mode) {
+        throw new Error('generated-dist-normalize-race')
+      }
+      fs.fchmodSync(descriptor, expectedMode)
+      const normalized = fs.fstatSync(descriptor)
+      if (!sameEntry(normalized) || (normalized.mode & 0o7777) !== expectedMode) {
+        throw new Error('generated-dist-normalize-drift')
+      }
+    } finally {
+      if (descriptor !== null) fs.closeSync(descriptor)
+    }
+  }
+  const after = distManifest()
+  if (!sameDistContent(before, after)) throw new Error('generated-dist-normalize-drift')
+  return after
 }
 
 function sameDistManifest(expected) {
@@ -425,7 +478,7 @@ function installBuild(runtime) {
       'scripts/backfill-production-canonical-publications.mjs', '--runtime-only',
     ], { stdio: ['ignore', logFd, logFd] })
   }
-  return distManifest()
+  return normalizeDistModes()
 }
 
 function restoreDbs() {
