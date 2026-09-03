@@ -32,8 +32,11 @@ The one-time Tencent maintenance-controller cutover uses the exact merged
 pre-install probe. It emits one strict target/payload-bound marker and is rerun
 by `deploy/install-eqb-maintenance-controller.sh` on the installer's inherited
 production lock after six-file commit verification, immediately before lock
-normalization, backup, or installed-controller mutation. This deliberately
-avoids requiring the old static
+normalization, backup, or installed-controller mutation. The repository-owned
+`scripts/lib/tencentTat.mjs` adapter signs one direct Tencent API request,
+polls its exact invocation/task, and requires complete output plus the remote
+exit code; an ambiguous `RunCommand` is never retried automatically. This
+deliberately avoids requiring the old static
 forced controller to expose a command that does not exist until after
 installation; operational steps and authorization boundaries remain in the
 launch/deploy runbook.
@@ -79,7 +82,7 @@ authorized second phase.
 | --- | --- | --- |
 | `verify-ci.mjs` | Selects changed/Paper/all packs, runs bounded resource-aware parallel jobs with registry-ordered logs, and reports PASS/SKIP/FAIL without hiding later failures | yes |
 | `verify-amp-orb-ci.mjs` | Rejects non-exact wake sentinels, uncancelled wake turns, HMAC-coupled Action wake, non-authoritative or forked GitHub discovery, nondeterministic delivery IDs, GitHub CI webhook/HMAC allowlist drift, payload-to-prompt injection, secret-bearing candidate environments, stale merge parents, non-parallel Fast/Full lanes, duplicate execution, unrecoverable run/status crash windows, non-private receipts, or commit-status scope drift without registering a webhook or calling GitHub | yes |
-| `verify-amp-orb-deploy.mjs` | Proves the separate Deployment Orb contract without production access: automatic exact-main resolution and same-run hosted CI authority; consumed S0 baseline and evidence-bound S1-to-S2 bootstrap; pinned private SSH and forced-controller rotation; reviewed-persistence exact-diff binding, offline three-DB snapshots, idempotency checks, pre-traffic rollback and post-traffic no-replay; versioned controller/systemd/Caddy update with private rollback; strict stable-launcher grammar, standalone read-only root/TAT install inspection, and lock-adjacent six-file installer contract; marker-authenticated receipts; ordinary atomic release switch, shared-data isolation, and healthy rollback; all real mutation commands remain closed | yes |
+| `verify-amp-orb-deploy.mjs` | Proves the separate Deployment Orb contract without production access: automatic exact-main resolution and same-run hosted CI authority; consumed S0 baseline and evidence-bound S1-to-S2 bootstrap; pinned private SSH and forced-controller rotation; reviewed-persistence exact-diff binding, offline three-DB snapshots, idempotency checks, pre-traffic rollback and post-traffic no-replay; versioned controller/systemd/Caddy update with private rollback; strict stable-launcher grammar, standalone read-only root/TAT install inspection, official Tencent signing, one-dispatch exact invocation/task polling with complete output, and the lock-adjacent six-file installer contract; marker-authenticated receipts; ordinary atomic release switch, shared-data isolation, and healthy rollback; all real mutation commands remain closed | yes |
 | `verify-verification-command-runner.mjs` | Prevents completed or concurrently interrupted verifiers from leaving their own Vite/Chromium/test descendants alive, and bounds oversized single-line diagnostics while retaining their head, tail, and digest | yes |
 | `verify-verification-scheduler.mjs` | Proves bounded concurrency, render/port resource locks, exclusive barriers, ordered result flushing, collect-all statuses, abort stop-dispatch, and jobs=1 serial fallback | yes |
 | `verify-vocabulary-closed-loop.mjs` | Validates the 1600-entry Wanwei source/content/unique Koboyo visual, formal American and Owner-approved Cori British audio contracts, plus isolated progress, frozen-set, share/revoke, and temporary-scope persistence | yes |
