@@ -18,8 +18,8 @@ LEGACY_BASELINE_CHILD_DIGEST=${EQB_LEGACY_BASELINE_CHILD_DIGEST-}
 LEGACY_BASELINE_CHILD_FILE_COUNT=4876
 CONTROLLER_DIRECTORY=/usr/local/libexec
 CONTROLLER=$CONTROLLER_DIRECTORY/eqb-deploy-controller-v1
-CONTROLLER_MODULE=$CONTROLLER_DIRECTORY/eqb-deploy-controller-v1.mjs
 TRANSPORT_CONTROLLER=$CONTROLLER_DIRECTORY/eqb-deploy-transport-v1
+HOST_CONFIG_ROOT=$ROOT/deployments/host-configuration
 SSH_DIRECTORY=
 AUTHORIZED_KEYS=
 AUTHORIZED_KEYS2=
@@ -411,9 +411,10 @@ fi
   && ! -e $ROOT/deployments && ! -L $ROOT/deployments ]] \
   || fail 'partial or linked release layout requires manual inspection'
 [[ ! -e $CONTROLLER && ! -L $CONTROLLER \
-  && ! -e $CONTROLLER_MODULE && ! -L $CONTROLLER_MODULE \
   && ! -e $TRANSPORT_CONTROLLER && ! -L $TRANSPORT_CONTROLLER ]] \
   || fail 'deployment controller is already installed'
+[[ ! -e $HOST_CONFIG_ROOT && ! -L $HOST_CONFIG_ROOT ]] \
+  || fail 'deployment host configuration already exists'
 [[ -d /usr/local && ! -L /usr/local \
   && $(stat -c '%u:%g:%a' /usr/local) == 0:0:755 ]] \
   || fail 'controller parent ancestry is unsafe'
@@ -707,7 +708,8 @@ rollback() {
   if (( key_installed == 1 )); then
     rollback_step restore_file "$backup/authorized_keys" "$AUTHORIZED_KEYS"
   fi
-  rollback_step rm -f "$CONTROLLER" "$CONTROLLER_MODULE" "$TRANSPORT_CONTROLLER"
+  rollback_step rm -f "$CONTROLLER" "$TRANSPORT_CONTROLLER"
+  rollback_step rm -rf "$HOST_CONFIG_ROOT"
   if (( controller_directory_created == 1 )); then
     rollback_step remove_empty_directory "$CONTROLLER_DIRECTORY"
   fi
@@ -978,8 +980,47 @@ mv "$staging" "$release"
 ln -s "releases/$TARGET_SHA" "$ROOT/current"
 
 stage=install-controller
+install -d -o root -g root -m 0700 "$HOST_CONFIG_ROOT" "$HOST_CONFIG_ROOT/versions"
+host_config=$HOST_CONFIG_ROOT/versions/$TARGET_SHA
+install -d -o root -g root -m 0755 "$host_config/deploy"
 install -o root -g root -m 0644 \
-  "$release/deploy/eqb-deploy-controller.mjs" "$CONTROLLER_MODULE"
+  "$release/deploy/eqb-deploy-controller.mjs" "$host_config/deploy/eqb-deploy-controller.mjs"
+install -o root -g root -m 0644 \
+  "$release/deploy/eqb-release.service" "$host_config/deploy/eqb-release.service"
+install -o root -g root -m 0644 \
+  "$release/deploy/Caddyfile.release" "$host_config/deploy/Caddyfile.release"
+/usr/bin/node --input-type=module - "$host_config" "$TARGET_SHA" "$release" <<'NODE'
+import crypto from 'node:crypto'
+import fs from 'node:fs'
+import path from 'node:path'
+const [root, sha, release] = process.argv.slice(2)
+const names = [
+  'deploy/Caddyfile.release',
+  'deploy/eqb-release.service',
+  'deploy/eqb-deploy-controller.mjs',
+]
+const files = Object.fromEntries(names.map((name) => [
+  name,
+  crypto.createHash('sha256').update(fs.readFileSync(path.join(root, name))).digest('hex'),
+]))
+const stableLaunchers = Object.fromEntries([
+  'deploy/eqb-deploy-transport',
+  'deploy/eqb-deploy-controller',
+].map((name) => [
+  name,
+  crypto.createHash('sha256').update(fs.readFileSync(path.join(release, name))).digest('hex'),
+]))
+fs.writeFileSync(path.join(root, '.eqb-host-configuration.json'), `${JSON.stringify({
+  schemaVersion: 'eqb-host-configuration-v1',
+  sha,
+  files,
+  stableLaunchers,
+  preparedAt: new Date().toISOString(),
+}, null, 2)}\n`, { mode: 0o600, flag: 'wx' })
+NODE
+chown -hR root:root "$host_config"
+chmod -R u+rwX,go+rX,go-w "$host_config"
+ln -s "versions/$TARGET_SHA" "$HOST_CONFIG_ROOT/current"
 install -o root -g root -m 0755 \
   "$release/deploy/eqb-deploy-controller" "$CONTROLLER"
 install -o root -g root -m 0755 \

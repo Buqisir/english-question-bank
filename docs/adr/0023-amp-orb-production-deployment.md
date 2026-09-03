@@ -1,8 +1,7 @@
 # ADR-0023: A separate Amp Orb will deploy website code from verified `main`
 
-- Status: Accepted; repository controller implementation ready for review
-- Production activation: blocked on a later direct Owner authorization
-- Scope: website code deployment only
+- Status: Accepted; S2 release deployment is active in production
+- Scope: website deployment plus separately authorized persistence and host-configuration maintenance
 
 ## Context
 
@@ -47,26 +46,31 @@ The Orb-side controller writes the private key and pinned `known_hosts` into a f
 host key, prints a credential, or puts a key in argv. After the one-time
 bootstrap, that key can authenticate only to the named non-root SSH transport
 account with OpenSSH `restrict` and a forced command. The forced transport
-wrapper accepts only `preflight` or `deploy <sha>` and crosses the existing
-root boundary through one root-owned strict `sudo -n` entrypoint. It cannot
-open a shell, forward ports or agents, choose a host executable, or supply
-other root arguments.
+wrapper accepts only `preflight`, `deploy <sha>`,
+`deploy-reviewed-persistence <sha> <reviewed-path-digest>`, or
+`update-host-config <sha> <reviewed-path-digest>` and crosses the existing root
+boundary through one root-owned strict `sudo -n` entrypoint. It cannot open a
+shell, forward ports or agents, choose a host executable, or supply other root
+arguments.
 
-The forced command is a root-owned, non-release host controller. Ordinary
-website releases cannot update it or import deployment logic into it. A
-controller update is a separate production configuration operation requiring
-new Owner authorization. Candidate package lifecycle, browser smoke, and app
-build commands run as the separate `eqb-build` user with a cleared environment,
-no production `.env`, and no access to `shared`. Every command runs in a bounded
-transient systemd cgroup, so leftover children are terminated before root
-touches the candidate tree. Root then rejects linked privileged ancestors and
-restores deployment-control files from its private archive of the exact Git
-target instead of trusting candidate-modified copies. The host controller
-attaches the fixed persistent paths only after the build succeeds, seals the
-release as root-owned without following links, keeps `/opt/eqb` and the
-`current` pointer root-owned, independently fetches `main` again, and only then
-permits activation. The `eqb` runtime user cannot replace release directories
-or the active pointer.
+The forced command has two root-owned layers. Tiny stable transport and root
+dispatchers enforce the command grammar and systemd/lock boundary. They are not
+updatable by any forced command. The implementation module and release
+systemd/Caddy templates live in an immutable, SHA-versioned host-configuration
+directory selected by an atomic `current` pointer. Updating that version is a
+separate production configuration operation requiring new Owner authorization;
+it never grants a candidate permission to replace either stable dispatcher.
+Candidate package lifecycle, browser smoke, and app build commands run as the
+separate `eqb-build` user with a cleared environment, no production `.env`, and
+no access to `shared`. Every command runs in a bounded transient systemd cgroup,
+so leftover children are terminated before root touches the candidate tree.
+Root then rejects linked privileged ancestors and restores deployment-control
+files from its private archive of the exact Git target instead of trusting
+candidate-modified copies. The host controller attaches the fixed persistent
+paths only after the build succeeds, seals the release as root-owned without
+following links, keeps `/opt/eqb` and the release `current` pointer root-owned,
+independently fetches `main` again, and only then permits activation. The `eqb`
+runtime user cannot replace release directories or either active pointer.
 
 Before staging, the fixed controller compares the current release SHA to the
 target tree without executing candidate code. Changes to the host controller,
@@ -74,8 +78,10 @@ release systemd/Caddy configuration, or the named startup/recovery and
 high-authority persistence owners stop with a distinct terminal failure before
 build or restart. Established idempotent startup shape/recovery code may run
 only when that protected surface is unchanged. A separately authorized
-migration or host configuration procedure must establish a new safe baseline;
-candidate-provided manifests and SQL-keyword heuristics cannot waive this gate.
+migration or host configuration procedure is required for the corresponding
+protected diff; candidate-provided manifests and SQL-keyword heuristics cannot
+waive either gate. Changes to the two stable launchers remain a root-only
+operation.
 This is intentionally not a ban on ordinary reviewed server code: deployment
 does not itself invoke later authenticated request-time writes, paper
 promotion, or Review actions.
@@ -98,6 +104,9 @@ The target production layout is:
   shared/               databases, Review bytes, paper assets, user files,
                         environment, logs, and other persistent runtime state
   deployments/receipts/ private deployment receipts
+  deployments/host-configuration/
+    current -> versions/<sha>
+    versions/<sha>/     immutable controller module and systemd/Caddy templates
 ```
 
 A prepared release is installed, built, and smoked before activation. The
@@ -114,10 +123,56 @@ automatically; new staging fails before build when less than 5 GiB remains, so
 old non-current releases can be reviewed and pruned as a separate operation
 rather than risking a full production filesystem.
 
-Website deployment itself never invokes migrations, `pull-run-push`,
+Ordinary website deployment itself never invokes migrations, `pull-run-push`,
 single-paper promotion, Review mutation, database transfer, R2 mutation, or
-production configuration changes. A release that requires one of those
-operations stops for a separate explicit Owner-authorized procedure.
+production configuration changes. A release that requires a protected
+persistence or host-configuration change stops for the corresponding explicit
+Owner-authorized maintenance command. Paper/R2 operations remain outside all
+three deployment commands.
+
+### Protected maintenance channels
+
+`deploy-reviewed-persistence` is the only forced route allowed to activate a
+candidate whose fixed persistence-authority diff is non-empty. The Orb binds an
+authoritative current `main`, the current production SHA, the exact changed-path
+list, and its canonical SHA-256 digest. The host independently repeats that
+comparison and builds the release before outage. It then closes Caddy and the
+app, takes and verifies private snapshots of all three SQLite databases,
+activates the target with traffic still closed, runs the explicit import-ops
+shape owners, starts the app twice, and checks database integrity and foreign
+keys after both starts. The durable `trafficReopened` boundary is written before
+Caddy can start. Before that boundary, failure restores all snapshots and the
+previous release and must prove strict rollback health. At or after that
+boundary, no automatic path may replay a snapshot or run old code against a
+possibly advanced schema. Unsafe or unhealthy recovery retains the exact
+root-private active transaction for a later, newly authorized recovery attempt.
+
+`update-host-config` is the only forced route allowed to advance the three
+versioned host files: the controller module, release unit, and release Caddy
+configuration. It binds the same authoritative SHA and canonical protected-path
+digest, extracts those exact files from a trusted Git archive, checks the Node,
+systemd, and Caddy syntax, writes an immutable version marker with file and
+stable-launcher hashes, takes a private backup, installs files atomically, and
+switches the host-configuration pointer. Reload or health failure restores the
+previous files and pointer. An unhealthy rollback retains active recovery.
+While an update is active, the stable root dispatcher uses the retained
+previous controller module for recovery rather than trusting a newly selected
+module to recover its own interrupted installation.
+Ordinary release activation remains separate and is still required afterward.
+
+The existing Tencent Cloud S2 host predates the versioned controller layout. It
+therefore needs exactly one separately authorized root installation using
+`deploy/install-eqb-maintenance-controller.sh`. The installer accepts one
+digest-bound archive containing the five exact deploy files from one merged
+SHA, verifies every member against that commit in the production source clone,
+checks the non-root transport account's exact sudo command scope, preserves a
+root-private backup and success receipt, and rolls back on a handled failure.
+Before replacing installed files, it durably publishes the complete versioned
+layout; a handled failure before replacement removes that newly created layout.
+Rollback attempts every restore step and reports an explicit critical result
+when any restore, reload, cleanup, or health proof fails. It does not provision
+a blank server, restore data, rotate Secrets, or grant ordinary releases
+authority over stable launchers.
 
 ### Legacy transition states
 
@@ -130,6 +185,8 @@ S1 Legacy-Baselined  --bootstrap(candidate)--> S2 Release
 S1 with recovery     --inspect/resume--------> S2 Release
 S1 failed/unknown    --inspect/cancel/abandon--> S1 Legacy-Baselined
 S2 Release           --deploy(main)----------> S2 Release
+S2 Release           --reviewed-persistence--> S2 Release
+S2 host config       --update-host-config-----> S2 host config
 ```
 
 S1 is evidence-bound, not candidate-bound. Bootstrap may target the same SHA or
@@ -138,7 +195,7 @@ Non-ancestry or unavailable Git objects produce `BASELINE_ANCESTRY_UNKNOWN`;
 protected changes produce `PERSISTENCE_AUTHORITY_CHANGED`. Neither condition
 falls back to baseline or bypasses the host's independent copy of the gate.
 
-## Repository implementation and production hold
+## Repository implementation and authorization boundaries
 
 The repository implementation exposes:
 
@@ -200,6 +257,15 @@ The repository implementation exposes:
   controller after bootstrap;
 - `deploy --owner-said-deploy-latest`, which sends only the automatically
   resolved exact SHA to that fixed controller;
+- `reviewed-persistence --owner-said-reviewed-persistence-deploy`, which binds
+  the automatically resolved exact SHA and non-empty persistence-authority path
+  digest to the offline snapshot/migration/verification transaction;
+- `update-host-config --owner-said-update-host-config`, which binds the
+  automatically resolved exact SHA and non-empty host-configuration path digest
+  to one versioned, rollback-capable host update;
+- a one-time Tencent root installer for moving the already-bootstrapped S2 host
+  from its static controller module to the stable-dispatcher/versioned-module
+  layout; it is not a reusable provisioning or stable-launcher update API;
 - a one-time bootstrap script that prepares the first release before outage,
   refuses a target whose persistence authority differs from legacy production,
   migrates persistent paths while `eqb` is stopped, installs the release-only
@@ -209,14 +275,13 @@ The repository implementation exposes:
   atomic switch, idempotency, private receipts, shared-data non-mutation, and
   healthy rollback.
 
-Code presence is not production authorization. The consumed legacy baseline
-migration, release-layout bootstrap, recovery mutation, environment refresh,
-preflight, and first deployment remain separate actions and require their stated
-current Owner authorization. Recovery is not a bootstrap retry: inspection and
-resume use a matching private record and cannot invoke the host bootstrap
-transaction; abandonment is available only after lock-serialized host
-cancellation and current strict S1 health are proved. A retained post-mutation
-failure additionally requires healthy rollback.
+Code presence is not production authorization. Release deployment, reviewed
+persistence deployment, host-configuration update, one-time root installation,
+and every recovery attempt are separate actions and require their stated current
+Owner authorization. Recovery is not permission to repeat the original host
+transaction automatically. A retained maintenance state can be entered only by
+the same exact target and protected-path digest, and a failed command is never
+implicit retry authority.
 Do not refresh Orb processes between Secret rotation and successful bootstrap
 finalization, because the current executor's retained old identity is part of
 the recovery boundary. After finalization, the Deployment Orb environment must
@@ -231,9 +296,9 @@ remain in ordinary development or CI projects.
 - Daily use stays simple: the Owner says `部署最新版`; SHA and status handling
   are machine work.
 - A sleeping Deployment Orb costs nothing between explicit deployments.
-- The one-time release-layout migration and every controller upgrade remain
-  production configuration changes and cannot be implied by this ADR or by
-  Secret presence.
+- The one-time release-layout migration, the Tencent versioned-controller
+  installation, and stable-launcher changes remain root production
+  configuration changes and cannot be implied by this ADR or by Secret presence.
 - Paper Review approval and `上线 <paperId>` remain the separate server-side
   single-paper publication flow from ADR-0020.
 - Restoring Amp Orb merge authority also requires an explicit, tested update to

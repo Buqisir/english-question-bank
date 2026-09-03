@@ -207,10 +207,10 @@ export function controllerSudoAllowed(output) {
     || commands.includes(controller)
     || (
       commands.includes(`${controller} -- preflight`)
-      && (
-        commands.includes(`${controller} -- deploy *`)
-        || commands.includes(`${controller} -- deploy [a-f0-9]*`)
-      )
+      && ['deploy', 'deploy-reviewed-persistence', 'update-host-config'].every((command) => (
+        commands.includes(`${controller} -- ${command} *`)
+        || commands.includes(`${controller} -- ${command} [a-f0-9]*`)
+      ))
     )
 }
 

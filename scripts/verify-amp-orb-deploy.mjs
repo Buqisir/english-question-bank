@@ -4,6 +4,7 @@ import { execFileSync, spawnSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import {
   chmodSync,
+  copyFileSync,
   cpSync,
   existsSync,
   linkSync,
@@ -22,7 +23,9 @@ import path from 'node:path'
 
 import {
   AMP_ORB_DEPLOY_RECEIPT_SCHEMA_VERSION,
+  EQB_HOST_CONFIGURATION_PATHS,
   EQB_PERSISTENCE_AUTHORITY_PATHS,
+  EQB_STABLE_LAUNCHER_PATHS,
   abandonReleaseBootstrapRecovery,
   activatePreparedRelease,
   assertDeploymentCandidateStillCurrent,
@@ -36,7 +39,9 @@ import {
   completeReleaseBootstrapRecovery,
   createReleaseBootstrapRecovery,
   currentReleaseSha,
+  deployReviewedPersistenceLatest,
   deployLatestRelease,
+  deploymentChangedPathDigest,
   deploymentGitHubApiArgs,
   deploymentLockInvocation,
   deploymentSSHInvocation,
@@ -48,8 +53,10 @@ import {
   parseDeploymentControllerOutput,
   parseDeploymentControllerPreflight,
   parseDeploymentPreflightOutput,
+  parseHostConfigurationControllerOutput,
   parseLegacyBaselineReceipt,
   parseOpenSshEd25519PublicKeyBody,
+  parseReviewedPersistenceControllerOutput,
   parseReleaseBootstrapCancellation,
   parseReleaseBootstrapFailure,
   readAbandonedReleaseBootstrapRecovery,
@@ -61,12 +68,17 @@ import {
   requireReleaseLayoutBootstrapAuthorization,
   requireReleaseLayoutBootstrapAbandonAuthorization,
   requireReleaseLayoutBootstrapResumeAuthorization,
+  requireReviewedPersistenceDeployAuthorization,
+  requireUpdateHostConfigurationAuthorization,
   resumeReleaseLayoutBootstrap,
   resolveLatestDeploymentCandidate,
+  updateLatestHostConfiguration,
 } from './lib/ampOrbDeploy.mjs'
 import {
   EQB_DEPLOY_CONTROLLER_VERSION,
+  HOST_CONFIGURATION_PATHS,
   PERSISTENCE_AUTHORITY_PATHS,
+  STABLE_LAUNCHER_PATHS,
   formatControllerOutput,
   parseControllerCommand,
   runController,
@@ -156,6 +168,31 @@ assert(
   })(),
   'caller-supplied deployment SHA is rejected',
 )
+for (const [authorize, argv, label] of [
+  [
+    requireReviewedPersistenceDeployAuthorization,
+    ['reviewed-persistence', '--owner-said-reviewed-persistence-deploy'],
+    'reviewed-persistence deployment',
+  ],
+  [
+    requireUpdateHostConfigurationAuthorization,
+    ['update-host-config', '--owner-said-update-host-config'],
+    'host configuration update',
+  ],
+]) {
+  assert((() => {
+    authorize(argv)
+    return true
+  })(), `${label} requires its distinct Owner authorization`)
+  assert((() => {
+    try {
+      authorize([argv[0], '--sha', newSha])
+      return false
+    } catch {
+      return true
+    }
+  })(), `${label} rejects a caller-selected SHA or missing authorization`)
+}
 assert(
   (() => {
     requireReleaseLayoutBootstrapResumeAuthorization([
@@ -485,6 +522,130 @@ assert(
   ).targetSha === newSha,
   'controller entrypoint marks deployment receipts without exposing them to journal noise',
 )
+
+const persistencePaths = ['server/api.mjs']
+const persistenceDigest = deploymentChangedPathDigest(persistencePaths)
+function reviewedPersistenceOutput({ conclusion = 'success', failureCode = null } = {}) {
+  return `EQB_REVIEWED_PERSISTENCE_RECEIPT ${JSON.stringify({
+    schemaVersion: 'eqb-reviewed-persistence-receipt-v1',
+    controllerVersion: 'eqb-deploy-controller-v1',
+    state: 'reported',
+    conclusion,
+    targetSha: newSha,
+    previousSha: oldSha,
+    staged: true,
+    changedPersistencePaths: persistencePaths,
+    changedPersistencePathsDigest: persistenceDigest,
+    databaseSnapshots: {
+      'question-bank.sqlite': 'a'.repeat(64),
+      'user-data.sqlite': 'b'.repeat(64),
+      'import-ops.sqlite': 'c'.repeat(64),
+    },
+    trafficReopened: conclusion === 'success',
+    rolledBack: conclusion === 'failure',
+    databasesRestored: conclusion === 'failure',
+    rollbackHealthy: conclusion === 'failure' ? true : null,
+    recovered: false,
+    failureCode,
+    startedAt: '2026-09-03T00:00:00.000Z',
+    finishedAt: '2026-09-03T00:01:00.000Z',
+    receiptPath: `/opt/eqb/deployments/receipts/reviewed-persistence-${newSha}.json`,
+  })}`
+}
+assert(
+  parseReviewedPersistenceControllerOutput(
+    reviewedPersistenceOutput(),
+    newSha,
+    persistenceDigest,
+  ).trafficReopened,
+  'reviewed-persistence receipt binds the exact path digest and traffic boundary',
+)
+assert(
+  (() => {
+    try {
+      parseReviewedPersistenceControllerOutput(
+        reviewedPersistenceOutput(),
+        newSha,
+        'd'.repeat(64),
+      )
+      return false
+    } catch {
+      return true
+    }
+  })(),
+  'reviewed-persistence receipt for another reviewed diff fails closed',
+)
+const reviewedOrder = []
+const reviewedLatest = await deployReviewedPersistenceLatest({
+  argv: ['reviewed-persistence', '--owner-said-reviewed-persistence-deploy'],
+  resolveCandidate: async () => {
+    reviewedOrder.push('resolve')
+    return candidate
+  },
+  readMainSha: async () => {
+    reviewedOrder.push('main')
+    return newSha
+  },
+  readProductionSha: async () => {
+    reviewedOrder.push('production')
+    return oldSha
+  },
+  readChangedPaths: async (_previous, _target, paths) => {
+    reviewedOrder.push(paths === EQB_PERSISTENCE_AUTHORITY_PATHS ? 'diff' : 'wrong-diff')
+    return persistencePaths
+  },
+  invokeController: async (sha, digest) => {
+    reviewedOrder.push(`controller:${sha}:${digest}`)
+    return reviewedPersistenceOutput()
+  },
+})
+assert(
+  reviewedLatest.changedPathsDigest === persistenceDigest
+    && reviewedOrder.join(',')
+      === `resolve,main,production,diff,main,controller:${newSha}:${persistenceDigest}`,
+  'reviewed-persistence resolves CI main, binds the protected diff, rechecks main, then invokes host',
+)
+
+const hostPaths = ['deploy/eqb-deploy-controller.mjs']
+const hostDigest = deploymentChangedPathDigest(hostPaths)
+function hostConfigurationOutput({ conclusion = 'success', failureCode = null } = {}) {
+  return `EQB_HOST_CONFIGURATION_RECEIPT ${JSON.stringify({
+    schemaVersion: 'eqb-host-configuration-receipt-v1',
+    controllerVersion: 'eqb-deploy-controller-v1',
+    state: 'reported',
+    conclusion,
+    targetSha: newSha,
+    previousHostConfigurationSha: oldSha,
+    changedHostConfigurationPaths: hostPaths,
+    changedHostConfigurationPathsDigest: hostDigest,
+    staged: true,
+    installed: conclusion === 'success',
+    noOp: false,
+    rolledBack: conclusion === 'failure',
+    rollbackHealthy: conclusion === 'failure' ? true : null,
+    recovered: false,
+    failureCode,
+    startedAt: '2026-09-03T00:00:00.000Z',
+    finishedAt: '2026-09-03T00:01:00.000Z',
+    receiptPath: `/opt/eqb/deployments/receipts/host-configuration-${newSha}.json`,
+  })}`
+}
+assert(
+  parseHostConfigurationControllerOutput(hostConfigurationOutput(), newSha, hostDigest).installed,
+  'host-configuration receipt binds one exact version and reviewed path digest',
+)
+const updatedHost = await updateLatestHostConfiguration({
+  argv: ['update-host-config', '--owner-said-update-host-config'],
+  resolveCandidate: async () => candidate,
+  readMainSha: async () => newSha,
+  readProductionSha: async () => oldSha,
+  readChangedPaths: async (_previous, _target, paths) => {
+    assert(paths === EQB_HOST_CONFIGURATION_PATHS, 'host update compares only its fixed file set')
+    return hostPaths
+  },
+  invokeController: async () => hostConfigurationOutput(),
+})
+assert(updatedHost.changedPathsDigest === hostDigest, 'host update reaches the controller with exact diff evidence')
 
 section('One-time baseline migration and release-layout bootstrap')
 
@@ -1974,6 +2135,10 @@ const ssh = deploymentSSHInvocation({
 assert(ssh.command === 'ssh', 'deployment uses the system SSH client')
 assert(ssh.args.includes('StrictHostKeyChecking=yes'), 'SSH host-key checking is strict')
 assert(
+  ssh.args.includes('ServerAliveInterval=15') && ssh.args.includes('ServerAliveCountMax=4'),
+  'SSH transport detects a lost peer instead of hanging indefinitely',
+)
+assert(
   ssh.args.includes(`UserKnownHostsFile=${materialized.knownHostsPath}`),
   'SSH trusts only the private pinned known_hosts file',
 )
@@ -2176,9 +2341,16 @@ function writeReleaseMarker(root, sha, controllerVersion = EQB_DEPLOY_CONTROLLER
 
 function controllerFixture({
   failCandidateHealth = false,
+  failPostTrafficHealth = false,
+  failLiveDatabaseOnce = false,
+  failSnapshotOnce = false,
+  failHostConfigurationReloadOnce = false,
+  failHostConfigurationReload = false,
+  mutateDatabasesOnEnsure = false,
   advanceAfterBuild = false,
   hostConfigurationChange = false,
   persistenceAuthorityChange = false,
+  stableLauncherChange = false,
   protectedDiffFailure = false,
   unsafeCandidateDirectory = null,
   tamperDeploymentControl = false,
@@ -2201,6 +2373,17 @@ function controllerFixture({
   chmodSync(path.join(root, 'shared'), 0o700)
   writeFileSync(path.join(root, 'shared', '.env'), 'FIXTURE_ONLY=1\n', { mode: 0o600 })
   writeFileSync(path.join(root, 'shared', 'sentinel'), 'unchanged')
+  for (const name of ['question-bank.sqlite', 'user-data.sqlite', 'import-ops.sqlite']) {
+    writeFileSync(path.join(root, 'shared', 'data', name), `${name}:before\n`, { mode: 0o600 })
+  }
+  const systemdUnitPath = path.join(root, 'installed-eqb.service')
+  const caddyConfigPath = path.join(root, 'installed-Caddyfile')
+  const rootWrapperPath = path.join(root, 'installed-controller')
+  const transportWrapperPath = path.join(root, 'installed-transport')
+  writeFileSync(systemdUnitPath, 'old service\n')
+  writeFileSync(caddyConfigPath, 'old caddy\n')
+  writeFileSync(rootWrapperPath, 'stable controller\n')
+  writeFileSync(transportWrapperPath, 'stable transport\n')
   writeReleaseMarker(root, oldSha, 'eqb-deploy-controller-older-compatible')
   symlinkSync(path.join('releases', oldSha), path.join(root, 'current'))
 
@@ -2213,9 +2396,16 @@ function controllerFixture({
     advanced: false,
     hostConfigurationChange,
     persistenceAuthorityChange,
+    stableLauncherChange,
     protectedDiffFailure,
     unsafeCandidateDirectory,
     tamperDeploymentControl,
+    failLiveDatabaseOnce,
+    failSnapshotOnce,
+    failHostConfigurationReloadOnce,
+    failHostConfigurationReload,
+    mutateDatabasesOnEnsure,
+    trafficOpened: true,
   }
   const config = {
     root,
@@ -2229,6 +2419,10 @@ function controllerFixture({
     repositoryUrls: ['fixture://Buqisir/english-question-bank'],
     service: 'eqb',
     caddyService: 'caddy',
+    systemdUnitPath,
+    caddyConfigPath,
+    rootWrapperPath,
+    transportWrapperPath,
   }
   const currentSha = () => path.basename(readlinkSync(path.join(root, 'current')))
   const dependencies = {
@@ -2284,6 +2478,9 @@ function controllerFixture({
       if (command === '/usr/bin/git' && args.includes('diff')) {
         if (state.protectedDiffFailure) throw new Error('fixture missing commit')
         const pathspecs = args.slice(args.indexOf('--') + 1)
+        if (pathspecs.includes('deploy/eqb-deploy-transport')) {
+          return state.stableLauncherChange ? 'deploy/eqb-deploy-transport\n' : ''
+        }
         if (pathspecs.includes('deploy/eqb-release.service')) {
           return state.hostConfigurationChange ? 'deploy/eqb-release.service\n' : ''
         }
@@ -2295,7 +2492,8 @@ function controllerFixture({
       }
       if (command === '/usr/bin/tar') {
         const release = args[args.indexOf('-C') + 1]
-        if (args.at(-1) !== 'deploy') {
+        const hostConfigurationArchive = String(args[1]).includes('/.host-config-archive-')
+        if (args.at(-1) !== 'deploy' && !hostConfigurationArchive) {
           for (const relative of [
             'app/public/paper-assets',
             'server/logs',
@@ -2307,27 +2505,52 @@ function controllerFixture({
           }
         }
         mkdirSync(path.join(release, 'deploy'), { recursive: true })
-        for (const relative of [
+        const deployFiles = [
           'Caddyfile.release',
           'eqb-release.service',
           'eqb-deploy-transport',
           'eqb-deploy-controller',
           'eqb-deploy-controller.mjs',
-        ]) {
-          writeFileSync(path.join(release, 'deploy', relative), `trusted archive ${relative}\n`)
+        ]
+        for (const relative of hostConfigurationArchive
+          ? deployFiles.filter((name) => !['eqb-deploy-transport', 'eqb-deploy-controller'].includes(name))
+          : deployFiles) {
+          const content = hostConfigurationArchive && relative === 'eqb-deploy-controller.mjs'
+            ? 'export const fixtureController = true\n'
+            : `trusted archive ${relative}\n`
+          writeFileSync(path.join(release, 'deploy', relative), content)
         }
         return ''
       }
-      if (command === '/usr/bin/systemctl' && args[0] === 'restart') {
+      if (command === '/usr/bin/systemctl' && ['start', 'restart'].includes(args[0])) {
         state.restarts.push(currentSha())
+        if (args[1] === 'caddy') state.trafficOpened = true
         return ''
       }
+      if (command === '/usr/bin/systemctl' && args[0] === 'stop') {
+        if (args[1] === 'caddy') state.trafficOpened = false
+        return ''
+      }
+      if (command === '/usr/bin/systemctl' && args[0] === 'daemon-reload') return ''
       if (command === '/usr/bin/systemctl' && args[0] === 'is-active') {
         return args.includes('--quiet') ? '' : 'active\n'
+      }
+      if (command === '/usr/bin/node' && args[0] === '--check') return ''
+      if (command === '/usr/bin/systemd-analyze') return ''
+      if (command === '/usr/bin/caddy' && args[0] === 'validate') return ''
+      if (command === '/usr/bin/caddy' && args[0] === 'reload') {
+        if (state.failHostConfigurationReload || state.failHostConfigurationReloadOnce) {
+          state.failHostConfigurationReloadOnce = false
+          throw new Error('fixture Caddy reload failure')
+        }
+        return ''
       }
       if (command === '/usr/bin/curl') {
         if (failCandidateHealth && currentSha() === newSha) {
           throw new Error('fixture candidate unhealthy')
+        }
+        if (failPostTrafficHealth && state.trafficOpened && currentSha() === newSha) {
+          throw new Error('fixture post-traffic health failure')
         }
         return ''
       }
@@ -2338,18 +2561,105 @@ function controllerFixture({
       return statSync(path.join(root, 'shared')).uid
     },
     chown() {},
+    runRuntime() {
+      state.runtimeEnsures = (state.runtimeEnsures || 0) + 1
+      if (state.mutateDatabasesOnEnsure && state.runtimeEnsures === 1) {
+        for (const name of ['question-bank.sqlite', 'user-data.sqlite', 'import-ops.sqlite']) {
+          writeFileSync(path.join(root, 'shared', 'data', name), `${name}:migrated\n`)
+        }
+      }
+    },
+    snapshotDatabase(source, destination) {
+      if (state.failSnapshotOnce) {
+        state.failSnapshotOnce = false
+        throw new Error('fixture snapshot failure')
+      }
+      copyFileSync(source, destination)
+    },
+    verifyDatabase(filePath) {
+      if (
+        state.failLiveDatabaseOnce
+        && filePath.includes('/shared/data/')
+        && currentSha() === newSha
+      ) {
+        state.failLiveDatabaseOnce = false
+        throw new Error('fixture live database integrity failure')
+      }
+      return true
+    },
     seal(directory) {
       chmodSync(directory, 0o755)
     },
   }
-  return { root, config, dependencies, state, currentSha }
+  const fixture = { root, config, dependencies, state, currentSha }
+  installFixtureHostConfiguration(fixture, oldSha)
+  return fixture
+}
+
+function installFixtureHostConfiguration(fixture, sha, { candidate = false } = {}) {
+  const version = path.join(
+    fixture.root,
+    'deployments',
+    'host-configuration',
+    'versions',
+    sha,
+  )
+  mkdirSync(path.join(version, 'deploy'), { recursive: true })
+  const content = {
+    'deploy/Caddyfile.release': candidate ? 'new caddy\n' : 'old caddy\n',
+    'deploy/eqb-release.service': candidate ? 'new service\n' : 'old service\n',
+    'deploy/eqb-deploy-controller.mjs': candidate
+      ? 'export const fixtureController = true\n'
+      : 'export const oldFixtureController = true\n',
+  }
+  for (const [relative, bytes] of Object.entries(content)) {
+    writeFileSync(path.join(version, relative), bytes)
+  }
+  const stableLaunchers = {
+    'deploy/eqb-deploy-controller': createHash('sha256')
+      .update(readFileSync(fixture.config.rootWrapperPath)).digest('hex'),
+    'deploy/eqb-deploy-transport': createHash('sha256')
+      .update(readFileSync(fixture.config.transportWrapperPath)).digest('hex'),
+  }
+  writeFileSync(path.join(version, '.eqb-host-configuration.json'), `${JSON.stringify({
+    schemaVersion: 'eqb-host-configuration-v1',
+    sha,
+    files: Object.fromEntries(Object.entries(content).map(([relative, bytes]) => [
+      relative,
+      createHash('sha256').update(bytes).digest('hex'),
+    ])),
+    stableLaunchers,
+    preparedAt: '2026-09-03T00:00:00.000Z',
+  })}\n`)
+  const current = path.join(fixture.root, 'deployments', 'host-configuration', 'current')
+  rmSync(current, { force: true })
+  symlinkSync(path.join('versions', sha), current)
+  return version
 }
 
 assert(
   parseControllerCommand(`deploy ${newSha}`).sha === newSha,
   'fixed controller accepts only one exact machine-resolved SHA',
 )
-for (const command of ['', 'deploy', `deploy ${newSha} --force`, `deploy ${newSha}; id`, 'bash -s']) {
+const maintenanceDigest = '4'.repeat(64)
+for (const command of ['deploy-reviewed-persistence', 'update-host-config']) {
+  const parsed = parseControllerCommand(`${command} ${newSha} ${maintenanceDigest}`)
+  assert(
+    parsed.command === command && parsed.sha === newSha && parsed.digest === maintenanceDigest,
+    `fixed controller accepts exact ${command} SHA and reviewed-path digest`,
+  )
+}
+for (const command of [
+  '',
+  'deploy',
+  `deploy ${newSha} --force`,
+  `deploy ${newSha}; id`,
+  `deploy-reviewed-persistence ${newSha}`,
+  `deploy-reviewed-persistence ${newSha} ${maintenanceDigest} extra`,
+  `deploy-reviewed-persistence ${newSha} ${maintenanceDigest};id`,
+  `update-host-config ${newSha} short`,
+  'bash -s',
+]) {
   assert(
     (() => {
       try {
@@ -2550,6 +2860,382 @@ for (const [fixtureOptions, expectedCode, label] of [
   rmSync(protectedChange.root, { recursive: true, force: true })
 }
 
+const reviewedDigest = deploymentChangedPathDigest(['server/api.mjs'])
+const reviewedSuccess = controllerFixture({ persistenceAuthorityChange: true })
+const reviewedSuccessResult = await runController({
+  originalCommand: `deploy-reviewed-persistence ${newSha} ${reviewedDigest}`,
+  config: reviewedSuccess.config,
+  dependencies: reviewedSuccess.dependencies,
+})
+assert(
+  reviewedSuccessResult.exitCode === 0
+    && reviewedSuccessResult.output.schemaVersion === 'eqb-reviewed-persistence-receipt-v1'
+    && reviewedSuccessResult.output.trafficReopened
+    && !reviewedSuccessResult.output.rolledBack,
+  'reviewed-persistence deploy snapshots, migrates offline, and reopens traffic only on success',
+)
+assert(
+  reviewedSuccess.state.runtimeEnsures === 2
+    && reviewedSuccess.currentSha() === newSha
+    && Object.keys(reviewedSuccessResult.output.databaseSnapshots).length === 3,
+  'reviewed-persistence deploy runs import-ops owners twice and verifies all three snapshots',
+)
+rmSync(reviewedSuccess.root, { recursive: true, force: true })
+
+const wrongReviewedDigest = controllerFixture({ persistenceAuthorityChange: true })
+const wrongReviewedDigestResult = await runController({
+  originalCommand: `deploy-reviewed-persistence ${newSha} ${'f'.repeat(64)}`,
+  config: wrongReviewedDigest.config,
+  dependencies: wrongReviewedDigest.dependencies,
+})
+assert(
+  wrongReviewedDigestResult.exitCode === 1
+    && wrongReviewedDigestResult.output.failureCode === 'REVIEWED_PERSISTENCE_DIFF_MISMATCH'
+    && wrongReviewedDigest.state.buildCalls.length === 0,
+  'reviewed-persistence host independently rejects a different path digest before build',
+)
+rmSync(wrongReviewedDigest.root, { recursive: true, force: true })
+
+const snapshotFailure = controllerFixture({
+  persistenceAuthorityChange: true,
+  failSnapshotOnce: true,
+})
+const snapshotFailureResult = await runController({
+  originalCommand: `deploy-reviewed-persistence ${newSha} ${reviewedDigest}`,
+  config: snapshotFailure.config,
+  dependencies: snapshotFailure.dependencies,
+})
+assert(
+  snapshotFailureResult.exitCode === 1
+    && !snapshotFailureResult.output.trafficReopened
+    && snapshotFailure.currentSha() === oldSha
+    && snapshotFailure.state.runtimeEnsures === undefined,
+  'snapshot failure restores service on the previous release before candidate persistence runs',
+)
+rmSync(snapshotFailure.root, { recursive: true, force: true })
+
+const preTrafficFailure = controllerFixture({
+  persistenceAuthorityChange: true,
+  failLiveDatabaseOnce: true,
+  mutateDatabasesOnEnsure: true,
+})
+const preTrafficFailureResult = await runController({
+  originalCommand: `deploy-reviewed-persistence ${newSha} ${reviewedDigest}`,
+  config: preTrafficFailure.config,
+  dependencies: preTrafficFailure.dependencies,
+})
+assert(
+  preTrafficFailureResult.exitCode === 1
+    && preTrafficFailureResult.output.databasesRestored
+    && preTrafficFailureResult.output.rolledBack
+    && preTrafficFailureResult.output.rollbackHealthy
+    && !preTrafficFailureResult.output.trafficReopened
+    && preTrafficFailure.currentSha() === oldSha,
+  'pre-traffic migration verification failure restores all snapshots and previous release',
+)
+assert(
+  readFileSync(path.join(preTrafficFailure.root, 'shared/data/question-bank.sqlite'), 'utf8')
+    === 'question-bank.sqlite:before\n',
+  'pre-traffic rollback restores original database bytes',
+)
+rmSync(preTrafficFailure.root, { recursive: true, force: true })
+
+const postTrafficFailure = controllerFixture({
+  persistenceAuthorityChange: true,
+  failPostTrafficHealth: true,
+  mutateDatabasesOnEnsure: true,
+})
+const postTrafficFailureResult = await runController({
+  originalCommand: `deploy-reviewed-persistence ${newSha} ${reviewedDigest}`,
+  config: postTrafficFailure.config,
+  dependencies: postTrafficFailure.dependencies,
+})
+assert(
+  postTrafficFailureResult.exitCode === 1
+    && postTrafficFailureResult.output.trafficReopened
+    && !postTrafficFailureResult.output.databasesRestored
+    && !postTrafficFailureResult.output.rolledBack
+    && postTrafficFailure.currentSha() === newSha,
+  'post-traffic failure never replays snapshots or runs previous code against migrated data',
+)
+assert(
+  readFileSync(path.join(postTrafficFailure.root, 'shared/data/question-bank.sqlite'), 'utf8')
+    === 'question-bank.sqlite:migrated\n',
+  'post-traffic failure preserves migrated live database bytes',
+)
+assert(
+  existsSync(path.join(
+    postTrafficFailure.root,
+    'deployments/reviewed-persistence/active.json',
+  )),
+  'post-traffic failure retains recovery state instead of authorizing snapshot replay',
+)
+rmSync(postTrafficFailure.root, { recursive: true, force: true })
+
+function writeInterruptedReviewedState(fixture, { trafficReopened }) {
+  writeReleaseMarker(fixture.root, newSha)
+  rmSync(path.join(fixture.root, 'current'))
+  symlinkSync(path.join('releases', newSha), path.join(fixture.root, 'current'))
+  const stateRoot = path.join(fixture.root, 'deployments', 'reviewed-persistence')
+  const snapshotRoot = path.join(stateRoot, 'interrupted-snapshots')
+  mkdirSync(snapshotRoot, { recursive: true })
+  const snapshots = {}
+  for (const name of ['question-bank.sqlite', 'user-data.sqlite', 'import-ops.sqlite']) {
+    const live = path.join(fixture.root, 'shared', 'data', name)
+    const snapshot = path.join(snapshotRoot, name)
+    copyFileSync(live, snapshot)
+    const metadata = statSync(live)
+    snapshots[name] = {
+      digest: createHash('sha256').update(readFileSync(snapshot)).digest('hex'),
+      gid: metadata.gid,
+      mode: metadata.mode & 0o7777,
+      path: snapshot,
+      size: metadata.size,
+      uid: metadata.uid,
+    }
+    writeFileSync(live, `${name}:interrupted-migration\n`)
+  }
+  writeFileSync(path.join(stateRoot, 'active.json'), `${JSON.stringify({
+    schemaVersion: 'eqb-reviewed-persistence-state-v1',
+    targetSha: newSha,
+    previousSha: oldSha,
+    changedPaths: ['server/api.mjs'],
+    changedPathsDigest: reviewedDigest,
+    staged: true,
+    snapshots,
+    trafficReopened,
+    startedAt: '2026-09-03T00:00:00.000Z',
+  })}\n`, { mode: 0o600 })
+}
+
+const interruptedBeforeTraffic = controllerFixture({ persistenceAuthorityChange: true })
+writeInterruptedReviewedState(interruptedBeforeTraffic, { trafficReopened: false })
+const recoveredBeforeTraffic = await runController({
+  originalCommand: `deploy-reviewed-persistence ${newSha} ${reviewedDigest}`,
+  config: interruptedBeforeTraffic.config,
+  dependencies: interruptedBeforeTraffic.dependencies,
+})
+assert(
+  recoveredBeforeTraffic.exitCode === 1
+    && recoveredBeforeTraffic.output.recovered
+    && recoveredBeforeTraffic.output.databasesRestored
+    && recoveredBeforeTraffic.output.rollbackHealthy
+    && interruptedBeforeTraffic.currentSha() === oldSha,
+  'interrupted pre-traffic transaction resumes only to safe snapshot rollback',
+)
+rmSync(interruptedBeforeTraffic.root, { recursive: true, force: true })
+
+const interruptedAfterTraffic = controllerFixture({ persistenceAuthorityChange: true })
+writeInterruptedReviewedState(interruptedAfterTraffic, { trafficReopened: true })
+const recoveredAfterTraffic = await runController({
+  originalCommand: `deploy-reviewed-persistence ${newSha} ${reviewedDigest}`,
+  config: interruptedAfterTraffic.config,
+  dependencies: interruptedAfterTraffic.dependencies,
+})
+assert(
+  recoveredAfterTraffic.exitCode === 0
+    && recoveredAfterTraffic.output.recovered
+    && !recoveredAfterTraffic.output.databasesRestored
+    && readFileSync(
+      path.join(interruptedAfterTraffic.root, 'shared/data/question-bank.sqlite'),
+      'utf8',
+    ) === 'question-bank.sqlite:interrupted-migration\n',
+  'interrupted post-traffic transaction terminalizes healthy target without snapshot replay',
+)
+rmSync(interruptedAfterTraffic.root, { recursive: true, force: true })
+
+const hostUpdateSuccess = controllerFixture({ hostConfigurationChange: true })
+installFixtureHostConfiguration(hostUpdateSuccess, oldSha)
+const hostUpdateDigest = deploymentChangedPathDigest(['deploy/eqb-release.service'])
+const hostUpdateSuccessResult = await runController({
+  originalCommand: `update-host-config ${newSha} ${hostUpdateDigest}`,
+  config: hostUpdateSuccess.config,
+  dependencies: hostUpdateSuccess.dependencies,
+})
+assert(
+  hostUpdateSuccessResult.exitCode === 0
+    && hostUpdateSuccessResult.output.schemaVersion === 'eqb-host-configuration-receipt-v1'
+    && hostUpdateSuccessResult.output.installed
+    && !hostUpdateSuccessResult.output.rolledBack
+    && !existsSync(path.join(
+      hostUpdateSuccess.root,
+      'deployments/host-configuration-update/recovery-controller.mjs',
+    )),
+  `versioned host configuration validates, installs atomically, reloads, and reports success: ${JSON.stringify({ result: hostUpdateSuccessResult, state: hostUpdateSuccess.state })}`,
+)
+assert(
+  readlinkSync(path.join(hostUpdateSuccess.root, 'deployments/host-configuration/current'))
+    === path.join('versions', newSha),
+  'host configuration current pointer advances to one exact SHA',
+)
+const hostUpdateNoOp = await runController({
+  originalCommand: `update-host-config ${newSha} ${hostUpdateDigest}`,
+  config: hostUpdateSuccess.config,
+  dependencies: hostUpdateSuccess.dependencies,
+})
+assert(hostUpdateNoOp.exitCode === 0 && hostUpdateNoOp.output.noOp, 'installed host configuration is idempotent')
+rmSync(hostUpdateSuccess.root, { recursive: true, force: true })
+
+const hostUpdateRollback = controllerFixture({
+  hostConfigurationChange: true,
+  failHostConfigurationReloadOnce: true,
+})
+installFixtureHostConfiguration(hostUpdateRollback, oldSha)
+const hostUpdateRollbackResult = await runController({
+  originalCommand: `update-host-config ${newSha} ${hostUpdateDigest}`,
+  config: hostUpdateRollback.config,
+  dependencies: hostUpdateRollback.dependencies,
+})
+assert(
+  hostUpdateRollbackResult.exitCode === 1
+    && hostUpdateRollbackResult.output.rolledBack
+    && hostUpdateRollbackResult.output.rollbackHealthy
+    && readlinkSync(path.join(hostUpdateRollback.root, 'deployments/host-configuration/current'))
+      === path.join('versions', oldSha)
+    && readFileSync(hostUpdateRollback.config.systemdUnitPath, 'utf8') === 'old service\n',
+  'failed host configuration reload restores files and the previous version pointer',
+)
+const hostUpdateAfterHealthyRollback = await runController({
+  originalCommand: `update-host-config ${newSha} ${hostUpdateDigest}`,
+  config: hostUpdateRollback.config,
+  dependencies: hostUpdateRollback.dependencies,
+})
+assert(
+  hostUpdateAfterHealthyRollback.exitCode === 0
+    && hostUpdateAfterHealthyRollback.output.installed
+    && !hostUpdateAfterHealthyRollback.output.staged,
+  'a fresh authorization can reuse a validated version after healthy host-config rollback',
+)
+rmSync(hostUpdateRollback.root, { recursive: true, force: true })
+
+const hostUpdateUnsafeRollback = controllerFixture({
+  hostConfigurationChange: true,
+  failHostConfigurationReload: true,
+})
+installFixtureHostConfiguration(hostUpdateUnsafeRollback, oldSha)
+const hostUpdateUnsafeRollbackResult = await runController({
+  originalCommand: `update-host-config ${newSha} ${hostUpdateDigest}`,
+  config: hostUpdateUnsafeRollback.config,
+  dependencies: hostUpdateUnsafeRollback.dependencies,
+})
+assert(
+  hostUpdateUnsafeRollbackResult.exitCode === 1
+    && !hostUpdateUnsafeRollbackResult.output.rollbackHealthy
+    && existsSync(path.join(
+      hostUpdateUnsafeRollback.root,
+      'deployments/host-configuration-update/active.json',
+    ))
+    && existsSync(path.join(
+      hostUpdateUnsafeRollback.root,
+      'deployments/host-configuration-update/recovery-controller.mjs',
+    )),
+  'unhealthy host-configuration rollback retains exact recovery state',
+)
+rmSync(hostUpdateUnsafeRollback.root, { recursive: true, force: true })
+
+function writeInterruptedHostUpdate(fixture, { complete }) {
+  const target = installFixtureHostConfiguration(fixture, newSha, { candidate: true })
+  copyFileSync(
+    path.join(target, 'deploy/eqb-release.service'),
+    fixture.config.systemdUnitPath,
+  )
+  if (complete) {
+    copyFileSync(
+      path.join(target, 'deploy/Caddyfile.release'),
+      fixture.config.caddyConfigPath,
+    )
+  }
+  const stateRoot = path.join(
+    fixture.root,
+    'deployments',
+    'host-configuration-update',
+  )
+  mkdirSync(stateRoot, { recursive: true })
+  chmodSync(stateRoot, 0o700)
+  copyFileSync(
+    path.join(
+      fixture.root,
+      'deployments/host-configuration/versions',
+      oldSha,
+      'deploy/eqb-deploy-controller.mjs',
+    ),
+    path.join(stateRoot, 'recovery-controller.mjs'),
+  )
+  chmodSync(path.join(stateRoot, 'recovery-controller.mjs'), 0o600)
+  const backup = path.join(stateRoot, `backup-${newSha}-interrupted`)
+  mkdirSync(path.join(backup, 'deploy'), { recursive: true })
+  chmodSync(backup, 0o700)
+  writeFileSync(path.join(backup, 'deploy/eqb-release.service'), 'old service\n', { mode: 0o600 })
+  writeFileSync(path.join(backup, 'deploy/Caddyfile.release'), 'old caddy\n', { mode: 0o600 })
+  writeFileSync(path.join(stateRoot, 'active.json'), `${JSON.stringify({
+    schemaVersion: 'eqb-host-configuration-state-v1',
+    targetSha: newSha,
+    previousSha: oldSha,
+    changedPaths: ['deploy/eqb-release.service'],
+    changedPathsDigest: hostUpdateDigest,
+    staged: true,
+    backupDirectory: backup,
+    startedAt: '2026-09-03T00:00:00.000Z',
+  })}\n`, { mode: 0o600 })
+}
+
+const interruptedHostUpdate = controllerFixture({ hostConfigurationChange: true })
+writeInterruptedHostUpdate(interruptedHostUpdate, { complete: true })
+const recoveredHostUpdate = await runController({
+  originalCommand: `update-host-config ${newSha} ${hostUpdateDigest}`,
+  config: interruptedHostUpdate.config,
+  dependencies: interruptedHostUpdate.dependencies,
+})
+assert(
+  recoveredHostUpdate.exitCode === 0
+    && recoveredHostUpdate.output.recovered
+    && recoveredHostUpdate.output.installed,
+  'interrupted installed host configuration is health-checked and terminalized idempotently',
+)
+rmSync(interruptedHostUpdate.root, { recursive: true, force: true })
+
+const partialHostUpdate = controllerFixture({ hostConfigurationChange: true })
+writeInterruptedHostUpdate(partialHostUpdate, { complete: false })
+const recoveredPartialHostUpdate = await runController({
+  originalCommand: `update-host-config ${newSha} ${hostUpdateDigest}`,
+  config: partialHostUpdate.config,
+  dependencies: partialHostUpdate.dependencies,
+})
+assert(
+  recoveredPartialHostUpdate.exitCode === 1
+    && recoveredPartialHostUpdate.output.recovered
+    && recoveredPartialHostUpdate.output.rolledBack
+    && recoveredPartialHostUpdate.output.rollbackHealthy
+    && readlinkSync(path.join(partialHostUpdate.root, 'deployments/host-configuration/current'))
+      === path.join('versions', oldSha),
+  'interrupted partial host installation bypasses strict active-marker proof only to roll back',
+)
+rmSync(partialHostUpdate.root, { recursive: true, force: true })
+
+const rootInstalledTarget = controllerFixture({
+  hostConfigurationChange: true,
+  stableLauncherChange: true,
+})
+const rootInstalledVersion = installFixtureHostConfiguration(rootInstalledTarget, newSha, { candidate: true })
+copyFileSync(
+  path.join(rootInstalledVersion, 'deploy/eqb-release.service'),
+  rootInstalledTarget.config.systemdUnitPath,
+)
+copyFileSync(
+  path.join(rootInstalledVersion, 'deploy/Caddyfile.release'),
+  rootInstalledTarget.config.caddyConfigPath,
+)
+const rootInstalledDeploy = await runController({
+  originalCommand: `deploy ${newSha}`,
+  config: rootInstalledTarget.config,
+  dependencies: rootInstalledTarget.dependencies,
+})
+assert(
+  rootInstalledDeploy.exitCode === 0 && rootInstalledTarget.currentSha() === newSha,
+  'digest-bound root installation unlocks the exact stable-launcher and host-config target only',
+)
+rmSync(rootInstalledTarget.root, { recursive: true, force: true })
+
 const fixedPreflight = controllerFixture()
 const fixedPreflightResult = await runController({
   originalCommand: 'preflight',
@@ -2559,7 +3245,23 @@ const fixedPreflightResult = await runController({
 assert(
   fixedPreflightResult.output.layout === 'release'
     && fixedPreflightResult.output.productionSha === oldSha,
-  'fixed controller provides bounded read-only preflight',
+  'fixed controller provides bounded read-only preflight with active host configuration proof',
+)
+writeFileSync(fixedPreflight.config.caddyConfigPath, 'tampered caddy\n')
+assert(
+  await (async () => {
+    try {
+      await runController({
+        originalCommand: 'preflight',
+        config: fixedPreflight.config,
+        dependencies: fixedPreflight.dependencies,
+      })
+      return false
+    } catch {
+      return true
+    }
+  })(),
+  'fixed preflight rejects installed host configuration that drifts from its active version marker',
 )
 rmSync(fixedPreflight.root, { recursive: true, force: true })
 
@@ -2609,6 +3311,7 @@ const baselineSource = readText(ROOT, 'deploy/eqb-legacy-baseline.mjs')
 const baselineStateSource = readText(ROOT, 'deploy/eqb-legacy-baseline-state.mjs')
 const keyRetirementSource = readText(ROOT, 'deploy/retire-eqb-bootstrap-key.mjs')
 const cancellationSource = readText(ROOT, 'deploy/cancel-eqb-bootstrap-attempt.mjs')
+const maintenanceInstallerSource = readText(ROOT, 'deploy/install-eqb-maintenance-controller.sh')
 const deployLibrarySource = readText(ROOT, 'scripts/lib/ampOrbDeploy.mjs')
 const baselineProtectedBlock = baselineSource.slice(
   baselineSource.indexOf('  const protectedPaths = ['),
@@ -2628,6 +3331,53 @@ assert(
     && JSON.stringify(bootstrapProtectedPaths) === JSON.stringify(EQB_PERSISTENCE_AUTHORITY_PATHS),
   'Orb, baseline, bootstrap, and fixed controller use one exact persistence-authority path set',
 )
+assert(
+  JSON.stringify(HOST_CONFIGURATION_PATHS) === JSON.stringify(EQB_HOST_CONFIGURATION_PATHS)
+    && JSON.stringify(STABLE_LAUNCHER_PATHS) === JSON.stringify(EQB_STABLE_LAUNCHER_PATHS),
+  'Orb and fixed controller use exact host-configuration and stable-launcher path sets',
+)
+const privateWriteSource = controllerSource.slice(
+  controllerSource.indexOf('function privateWrite('),
+  controllerSource.indexOf('\nfunction sha256(', controllerSource.indexOf('function privateWrite(')),
+)
+assert(
+  privateWriteSource.indexOf("openSync(temporary, 'wx', 0o600)")
+      < privateWriteSource.indexOf("writeFileSync(descriptor, value, 'utf8')")
+    && privateWriteSource.indexOf("writeFileSync(descriptor, value, 'utf8')")
+      < privateWriteSource.indexOf('fsyncSync(descriptor)')
+    && privateWriteSource.indexOf('fsyncSync(descriptor)')
+      < privateWriteSource.indexOf('renameSync(temporary, filePath)')
+    && privateWriteSource.indexOf('renameSync(temporary, filePath)')
+      < privateWriteSource.indexOf('syncDirectory(path.dirname(filePath))')
+    && controllerSource.includes(
+      'fsConstants.O_RDONLY | fsConstants.O_DIRECTORY | fsConstants.O_NOFOLLOW',
+    ),
+  'maintenance state publication fsyncs bytes before rename and the parent directory after rename',
+)
+assert(
+  controllerSource.includes('syncDirectory(config.root)')
+    && controllerSource.includes('syncDirectory(directory)\n  return snapshots')
+    && controllerSource.includes('syncDirectory(path.dirname(filePath))\n      verifySqliteDatabase')
+    && controllerSource.includes('syncDirectory(hostConfigurationRoot(config))')
+    && controllerSource.includes('syncDirectory(path.dirname(statePath))'),
+  'release pointers, database snapshots/restores, host pointers, and terminal state removal are durable',
+)
+const installerRollbackSource = maintenanceInstallerSource.slice(
+  maintenanceInstallerSource.indexOf('rollback() {'),
+  maintenanceInstallerSource.indexOf('\n\ncleanup() {'),
+)
+assert(
+  maintenanceInstallerSource.indexOf('host_config_created=1')
+      < maintenanceInstallerSource.indexOf('install -d -o root -g root -m 0700 "$HOST_CONFIG_ROOT"')
+    && installerRollbackSource.includes(
+      'host_config_created == 1 && (activated == 0 || restored == 1)',
+    )
+    && installerRollbackSource.includes('rollback_failed=1')
+    && installerRollbackSource.includes('rollback incomplete; backup=%s')
+    && maintenanceInstallerSource.includes('sync -f "$HOST_CONFIG_ROOT"')
+    && maintenanceInstallerSource.includes('sync -f "$backup"'),
+  'one-time installer removes a handled partial layout and reports incomplete rollback explicitly',
+)
 execFileSync(process.execPath, ['--check', path.join(ROOT, 'deploy', 'eqb-deploy-controller.mjs')])
 execFileSync(process.execPath, ['--check', path.join(ROOT, 'deploy', 'eqb-legacy-baseline-state.mjs')])
 execFileSync(process.execPath, ['--check', path.join(ROOT, 'deploy', 'eqb-legacy-baseline.mjs')])
@@ -2636,11 +3386,16 @@ execFileSync(process.execPath, ['--check', path.join(ROOT, 'deploy', 'cancel-eqb
 execFileSync('/bin/sh', ['-n', path.join(ROOT, 'deploy', 'eqb-deploy-controller')])
 execFileSync('/bin/sh', ['-n', path.join(ROOT, 'deploy', 'eqb-deploy-transport')])
 execFileSync('/bin/bash', ['-n', path.join(ROOT, 'deploy', 'bootstrap-eqb-deployment.sh')])
+execFileSync('/bin/bash', ['-n', path.join(ROOT, 'deploy', 'install-eqb-maintenance-controller.sh')])
 for (const originalCommand of [
   '',
   'deploy',
   `deploy ${newSha} --force`,
   `deploy ${newSha}; id`,
+  `deploy-reviewed-persistence ${newSha}`,
+  `deploy-reviewed-persistence ${newSha} ${maintenanceDigest} extra`,
+  `deploy-reviewed-persistence ${newSha} ${maintenanceDigest};id`,
+  `update-host-config ${newSha} short`,
   'bash -s',
 ]) {
   const rejected = spawnSync('/bin/sh', [path.join(ROOT, 'deploy', 'eqb-deploy-transport')], {
@@ -2649,7 +3404,16 @@ for (const originalCommand of [
   })
   assert(rejected.status === 64, `transport wrapper rejects command shape ${JSON.stringify(originalCommand)}`)
 }
-for (const args of [[], ['preflight'], ['--'], ['--', 'deploy'], ['--', 'deploy', newSha, '--force']]) {
+for (const args of [
+  [],
+  ['preflight'],
+  ['--'],
+  ['--', 'deploy'],
+  ['--', 'deploy', newSha, '--force'],
+  ['--', 'deploy-reviewed-persistence', newSha],
+  ['--', 'deploy-reviewed-persistence', newSha, maintenanceDigest, 'extra'],
+  ['--', 'update-host-config', newSha, 'short'],
+]) {
   const rejected = spawnSync('/bin/sh', [path.join(ROOT, 'deploy', 'eqb-deploy-controller'), ...args], {
     encoding: 'utf8',
   })
@@ -2854,21 +3618,23 @@ for (const [label, rules, allowed] of [
     true,
   ],
   [
-    'bounded controller commands',
+    'legacy bounded controller commands',
     '    (root) NOPASSWD: /usr/local/libexec/eqb-deploy-controller-v1 -- preflight, '
       + '/usr/local/libexec/eqb-deploy-controller-v1 -- deploy *',
-    true,
+    false,
   ],
   [
-    'separate bounded controller rules',
+    'legacy separate bounded controller rules',
     '    (root) NOPASSWD: /usr/local/libexec/eqb-deploy-controller-v1 -- preflight\n'
       + '    (root) NOPASSWD: /usr/local/libexec/eqb-deploy-controller-v1 -- deploy *',
-    true,
+    false,
   ],
   [
-    'wrapped bounded controller rule',
+    'complete bounded controller rules',
     '    (root) NOPASSWD: /usr/local/libexec/eqb-deploy-controller-v1 -- preflight,\n'
-      + '        /usr/local/libexec/eqb-deploy-controller-v1 -- deploy *',
+      + '        /usr/local/libexec/eqb-deploy-controller-v1 -- deploy *,\n'
+      + '        /usr/local/libexec/eqb-deploy-controller-v1 -- deploy-reviewed-persistence *,\n'
+      + '        /usr/local/libexec/eqb-deploy-controller-v1 -- update-host-config *',
     true,
   ],
   [
@@ -2994,6 +3760,7 @@ CONTROLLER_DIRECTORY=$fixture/usr/local/libexec
 CONTROLLER=$CONTROLLER_DIRECTORY/eqb-deploy-controller-v1
 CONTROLLER_MODULE=$CONTROLLER_DIRECTORY/eqb-deploy-controller-v1.mjs
 TRANSPORT_CONTROLLER=$CONTROLLER_DIRECTORY/eqb-deploy-transport-v1
+HOST_CONFIG_ROOT=$ROOT/deployments/host-configuration
 AUTHORIZED_KEYS=$fixture/root-ssh/authorized_keys
 PUBLIC_KEY_TEMP=
 archive_dir=
@@ -3146,8 +3913,25 @@ assert(
     )
     && transportWrapper.includes(
       'exec /usr/bin/sudo -n /usr/local/libexec/eqb-deploy-controller-v1 -- deploy "$sha"',
-    ),
-  'forced transport wrapper accepts only bounded commands before the root controller boundary',
+    )
+    && transportWrapper.includes("command_name=deploy-reviewed-persistence")
+    && transportWrapper.includes("command_name=update-host-config")
+    && transportWrapper.includes('[ "${#digest}" -eq 64 ] || exit 64')
+    && controllerWrapper.includes('/opt/eqb/deployments/host-configuration/current/deploy/eqb-deploy-controller.mjs')
+    && controllerWrapper.includes('/opt/eqb/deployments/host-configuration-update/recovery-controller.mjs'),
+  'forced transport and stable root wrappers accept only bounded versioned maintenance commands',
+)
+assert(
+  maintenanceInstallerSource.indexOf('tar -tf "$PAYLOAD"')
+      < maintenanceInstallerSource.indexOf('tar -xf "$PAYLOAD"')
+    && maintenanceInstallerSource.includes("fail 'payload archive member set is not exact'")
+    && maintenanceInstallerSource.includes("fail 'payload member is not a regular file'")
+    && maintenanceInstallerSource.includes('show "$TARGET_SHA:$relative"')
+    && maintenanceInstallerSource.includes('sudo -n -l -U "$TRANSPORT_USER"')
+    && maintenanceInstallerSource.includes('SSH_ORIGINAL_COMMAND=preflight')
+    && maintenanceInstallerSource.includes('EQB_MAINTENANCE_CONTROLLER_INSTALL')
+    && maintenanceInstallerSource.includes('strict_health'),
+  'one-time root installer binds exact typed target bytes and proves the full forced route before success',
 )
 assert(
   bootstrapSource.includes('umask 077')
@@ -3280,9 +4064,11 @@ assert(
   'bootstrap proves exact old/new authorized-key state before later key retirement',
 )
 assert(
-  controllerSource.includes("? 'EQB_DEPLOY_RECEIPT '")
+  controllerSource.includes("[EQB_DEPLOY_RECEIPT_SCHEMA_VERSION, 'EQB_DEPLOY_RECEIPT ']")
+    && controllerSource.includes("[EQB_REVIEWED_PERSISTENCE_RECEIPT_SCHEMA_VERSION, 'EQB_REVIEWED_PERSISTENCE_RECEIPT ']")
+    && controllerSource.includes("[EQB_HOST_CONFIGURATION_RECEIPT_SCHEMA_VERSION, 'EQB_HOST_CONFIGURATION_RECEIPT ']")
     && controllerSource.includes('process.stdout.write(formatControllerOutput(result.output))'),
-  'fixed controller emits one parseable receipt marker instead of raw journal JSON',
+  'fixed controller emits one schema-selected parseable receipt marker instead of raw journal JSON',
 )
 assert(
   bootstrapSource.indexOf('stage=cleanup') < bootstrapSource.indexOf('stage=success-receipt')

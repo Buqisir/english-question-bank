@@ -207,6 +207,8 @@ node scripts/amp-orb-deploy.mjs bootstrap-resume --owner-said-release-bootstrap-
 node scripts/amp-orb-deploy.mjs bootstrap-abandon --owner-said-release-bootstrap-abandon
 node scripts/amp-orb-deploy.mjs preflight --owner-said-preflight
 node scripts/amp-orb-deploy.mjs deploy --owner-said-deploy-latest
+node scripts/amp-orb-deploy.mjs reviewed-persistence --owner-said-reviewed-persistence-deploy
+node scripts/amp-orb-deploy.mjs update-host-config --owner-said-update-host-config
 ```
 
 `plan` does not connect to production. `bootstrap-preflight` is the read-only
@@ -231,7 +233,11 @@ an accepted attempt needs retained terminal failure evidence. A retained failure
 outside the known pre-mutation stages also requires the host's healthy-rollback
 verdict. After cutover, `preflight` goes only through the root-owned forced-
 command controller. Daily `deploy` resolves current `main` itself and sends only
-that exact SHA—never an Owner-supplied hash—to the host.
+that exact SHA—never an Owner-supplied hash—to the host. The two maintenance
+commands do the same CI-authoritative resolution, additionally bind the current
+production SHA and exact protected changed-path digest, and require their own
+current Owner authorization. They are not fallback spellings for an ordinary
+deploy.
 
 The baseline operator keeps its root process at umask `077`, but every package
 install, Chromium smoke, and app build child explicitly uses umask `022`. It
@@ -287,15 +293,99 @@ Prune only reviewed, non-current releases as a separate authorized maintenance
 operation.
 
 Ordinary deployment also compares the current and target Git trees before
-staging. Any change to the fixed controller/systemd/Caddy files or to the
+staging. Any change to the versioned controller/systemd/Caddy files or to the
 named startup/recovery and high-authority persistence owners fails before build
 and restart. The initial bootstrap applies the same persistence comparison
-against the legacy production `HEAD`. Do not bypass it: complete a separately
-authorized migration/configuration procedure when the protected surface changes.
-Do not use the consumed legacy baseline operator as an ordinary advancement
-mechanism. Ordinary reviewed server code remains deployable; later authenticated
-API writes are not actions performed or authorized by the deployment command
-itself.
+against the legacy production `HEAD`. Do not bypass it or reuse the consumed
+legacy baseline operator as an advancement mechanism. Use the maintenance
+decision table below; later authenticated API writes are not actions performed
+or authorized by any deployment command.
+
+| Candidate diff | Required sequence after merge and authoritative CI |
+| --- | --- |
+| no protected path | `preflight`, then ordinary `deploy` |
+| only versioned controller/unit/Caddy | `update-host-config`, then ordinary `deploy` |
+| persistence authority | `reviewed-persistence` (it builds and activates the release itself) |
+| versioned host config + persistence authority | `update-host-config`, then `reviewed-persistence` |
+| either stable launcher | separately authorized root maintenance; no forced command may replace it |
+
+`reviewed-persistence` is intentionally an outage transaction, not a broad
+"migration allowed" flag. Before asking for authorization, review every changed
+protected path and the concrete forward/idempotency behavior. The controller
+binds the exact changed-path digest, builds before outage, stops Caddy and `eqb`,
+snapshots and verifies `question-bank.sqlite`, `user-data.sqlite`, and
+`import-ops.sqlite`, activates the target with traffic closed, explicitly opens
+both import-ops shape owners, starts `eqb` twice, and checks integrity/foreign
+keys after both starts. It persists `trafficReopened=true` before attempting to
+start Caddy. Failure before that marker restores all three snapshots and the old
+release; failure at or after it never replays snapshots. A failed rollback or
+post-traffic health failure retains `active.json`; do not retry on the old
+authorization. Inspect public health/preflight, diagnose, then obtain fresh
+Owner authorization for the same exact `main` and changed-path digest so the
+controller can enter its bounded recovery path.
+
+`update-host-config` changes only `deploy/eqb-deploy-controller.mjs`,
+`deploy/eqb-release.service`, and `deploy/Caddyfile.release`. It validates an
+exact Git archive with Node/systemd/Caddy, stages an immutable SHA version,
+backs up the installed unit/Caddy file, switches the version pointer, reloads,
+and requires strict health. A healthy rollback is terminal; an unhealthy one
+retains `active.json` and likewise requires diagnosis plus fresh authorization
+for the exact same target/digest. It does not activate the application release,
+so follow it with ordinary `deploy`, or with `reviewed-persistence` when that
+same candidate also changes persistence authority.
+The stable root dispatcher detects this active transaction and runs its private
+copy of the previous controller module, so interruption after pointer switch
+does not delegate rollback to unproven new controller code.
+
+### One-time Tencent S2 maintenance-controller installation
+
+The current Tencent host was bootstrapped before the versioned controller
+layout existed. After this maintenance implementation is merged and its exact
+`main` SHA has authoritative CI, migrate that host once. This is a separately
+authorized production/root action; repository presence is not authorization.
+Do not run it from an ordinary Deployment Orb command.
+
+On a clean trusted checkout, materialize the installer and five-file payload
+from the exact merged SHA (never from working-tree bytes):
+
+```bash
+SHA=<exact-merged-main-sha>
+git show "$SHA:deploy/install-eqb-maintenance-controller.sh" \
+  > /tmp/install-eqb-maintenance-controller.sh
+git archive --format=tar --output=/tmp/eqb-maintenance-controller.tar "$SHA" -- \
+  deploy/Caddyfile.release \
+  deploy/eqb-release.service \
+  deploy/eqb-deploy-transport \
+  deploy/eqb-deploy-controller \
+  deploy/eqb-deploy-controller.mjs
+sha256sum /tmp/install-eqb-maintenance-controller.sh \
+  /tmp/eqb-maintenance-controller.tar
+```
+
+Record both local digests, transfer the two files through the approved Tencent
+root/TAT path, and compare them on-host before execution. Fetch only Git objects
+as `eqb` so the installer can independently bind every payload file to the
+target commit. With the transport username taken from the pinned Deployment SSH
+target, the authorized root invocation is:
+
+```bash
+sudo -u eqb git -C /opt/eqb/english-question-bank fetch --quiet --no-tags origin main
+sudo /bin/bash /root/install-eqb-maintenance-controller.sh \
+  "$SHA" <payload-sha256> /root/eqb-maintenance-controller.tar <transport-user>
+```
+
+Require one `EQB_MAINTENANCE_CONTROLLER_INSTALL` success receipt, then run the
+normal Deployment Orb read-only `preflight`. The installer itself checks exact
+archive members/types, commit bytes, Node/systemd/Caddy syntax, all four sudo
+command forms, strict public health, and a real local invocation through the
+non-root forced route. It keeps the old files and success receipt in one
+root-private backup directory. A handled failure before file replacement
+removes the newly created host-configuration layout; after replacement it
+attempts every restore/reload/health step and emits an explicit critical result
+if rollback is incomplete. It neither changes the Deployment Secret nor touches
+databases, R2, papers, users, packages, DNS, or a blank-server setup. If it
+fails, stop and inspect the retained root-private backup; never infer retry
+authority from its rollback attempt.
 
 The forced transport entrypoint parses the command before its strict root
 entrypoint runs the controller and deployment lock in a transient host systemd
@@ -309,17 +399,19 @@ authorized `bootstrap-resume` finalizer; do not launch a second host bootstrap.
 Host receipts, attempt logs, and unit journals remain available for root-side
 incident diagnostics.
 
-The journal contract uses one exact `EQB_DEPLOY_RECEIPT {json}` controller
-marker and one bootstrap terminal marker. Zero terminal markers is `unknown`,
-not proof of failure and never permission to retry; duplicate or contradictory
-markers fail closed. Run `bootstrap-inspect` first. Resume only a transaction
-whose host bootstrap completed. An authorized abandon may convert failure or
-unknown dispatch into a terminal state only by installing the exact cancellation
-marker under the host lock, then independently proving controller rejection,
-the old route, and strict S1 health. Unknown dispatch additionally requires no
-durable host-acceptance marker; accepted attempts require retained terminal
-failure evidence, and post-mutation failure also needs healthy rollback. Do not
-run `amp orb restart-processes` while bootstrap finalization is pending.
+The journal contract uses exactly one schema-selected controller marker:
+`EQB_DEPLOY_RECEIPT`, `EQB_REVIEWED_PERSISTENCE_RECEIPT`, or
+`EQB_HOST_CONFIGURATION_RECEIPT`, plus the separate bootstrap terminal marker
+for bootstrap only. Zero terminal markers is `unknown`, not proof of failure and
+never permission to retry; duplicate or contradictory markers fail closed. For
+bootstrap, run `bootstrap-inspect` first and resume only a transaction whose
+host bootstrap completed. An authorized abandon may convert failure or unknown
+dispatch into a terminal state only by installing the exact cancellation marker
+under the host lock, then independently proving controller rejection, the old
+route, and strict S1 health. Unknown dispatch additionally requires no durable
+host-acceptance marker; accepted attempts require retained terminal failure
+evidence, and post-mutation failure also needs healthy rollback. Do not run
+`amp orb restart-processes` while bootstrap finalization is pending.
 
 Repository readiness still grants no production authority. Before cutover:
 

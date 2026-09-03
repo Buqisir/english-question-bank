@@ -13,6 +13,17 @@ elif [ "$#" -eq 2 ] && [ "$1" = deploy ]; then
   esac
   [ "${#2}" -eq 40 ] || exit 64
   original_command="deploy $2"
+elif [ "$#" -eq 3 ] \
+  && { [ "$1" = deploy-reviewed-persistence ] || [ "$1" = update-host-config ]; }; then
+  case "$2" in
+    ''|*[!a-f0-9]*) exit 64 ;;
+  esac
+  [ "${#2}" -eq 40 ] || exit 64
+  case "$3" in
+    ''|*[!a-f0-9]*) exit 64 ;;
+  esac
+  [ "${#3}" -eq 64 ] || exit 64
+  original_command="$1 $2 $3"
 else
   exit 64
 fi
@@ -23,6 +34,13 @@ case "$nonce" in
 esac
 [ "${#nonce}" -eq 36 ] || exit 70
 unit="eqb-deploy-$nonce"
+controller_module=/opt/eqb/deployments/host-configuration/current/deploy/eqb-deploy-controller.mjs
+if [ "${1-}" = update-host-config ] \
+  && [ -e /opt/eqb/deployments/host-configuration-update/active.json ]; then
+  recovery_module=/opt/eqb/deployments/host-configuration-update/recovery-controller.mjs
+  [ -f "$recovery_module" ] && [ ! -L "$recovery_module" ] || exit 70
+  controller_module=$recovery_module
+fi
 
 status=0
 /usr/bin/systemd-run \
@@ -44,7 +62,8 @@ status=0
     /usr/bin/env -i \
     SSH_ORIGINAL_COMMAND="$original_command" \
     PATH=/usr/local/bin:/usr/bin:/bin \
-    /usr/bin/node --no-addons /usr/local/libexec/eqb-deploy-controller-v1.mjs \
+    /usr/bin/node --no-addons \
+      "$controller_module" \
   || status=$?
 
 /usr/bin/journalctl --sync
