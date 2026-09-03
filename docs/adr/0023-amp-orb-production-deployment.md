@@ -45,9 +45,12 @@ The Orb-side controller writes the private key and pinned `known_hosts` into a f
 `IdentitiesOnly`, an empty global host-key file, and
 `StrictHostKeyChecking=yes`. It never runs `ssh-keyscan`, accepts a first-use
 host key, prints a credential, or puts a key in argv. After the one-time
-bootstrap, that key can authenticate only as root with OpenSSH `restrict` and
-a forced command. It cannot open a shell, forward ports or agents, choose a
-host executable, or supply anything except `preflight` or `deploy <sha>`.
+bootstrap, that key can authenticate only to the named non-root SSH transport
+account with OpenSSH `restrict` and a forced command. The forced transport
+wrapper accepts only `preflight` or `deploy <sha>` and crosses the existing
+root boundary through one root-owned strict `sudo -n` entrypoint. It cannot
+open a shell, forward ports or agents, choose a host executable, or supply
+other root arguments.
 
 The forced command is a root-owned, non-release host controller. Ordinary
 website releases cannot update it or import deployment logic into it. A
@@ -78,11 +81,13 @@ does not itself invoke later authenticated request-time writes, paper
 promotion, or Review actions.
 
 OpenSSH starts the fixed controller inside a host-owned transient systemd
-service, with the exclusive deployment lock inside that service. Loss of the
-Deployment Orb or SSH connection therefore does not abandon an in-flight host
-build, health check, or rollback, and a second request still fails closed.
-Candidate command output is written to a private host log, so a disconnected
-output pipe cannot interrupt package installation or the build.
+service without binding its standard streams to SSH, with the exclusive
+deployment lock inside that service. Loss of the Deployment Orb or SSH
+connection therefore does not abandon an in-flight host build, health check,
+or rollback, and a second request still fails closed. The connected path reads
+only manager-owned journal evidence after completion. Candidate command output
+is written to a private host log, so a disconnected output pipe cannot
+interrupt package installation or the build.
 
 The target production layout is:
 
@@ -128,10 +133,21 @@ The repository implementation exposes:
   preserves the preexisting nonconforming release tree intact in root-private
   quarantine;
 - a separately authorized `bootstrap` command that generates a fresh Ed25519
-  controller identity, streams the exact tracked bootstrap under a host lock,
-  proves the new forced route, atomically retires and rejects the old privileged
-  bootstrap identity, and only then rotates the current Deployment project's
-  private-key Secret through stdin;
+  controller identity and durably records that identity, the old identity,
+  target SHA, and host unit in private Deployment Orb state after inert payload
+  staging but before the host transaction; it executes the hash-verified tracked
+  bootstrap in a manager-owned transient service under a host lock, proves the new
+  non-root forced-transport/root-controller route, atomically retires and
+  rejects the old privileged bootstrap identity from that same transport
+  account, and only then rotates the current Deployment project's private-key
+  Secret through stdin;
+- a separately authorized `bootstrap-resume` command that loads exactly one
+  private recovery record, revalidates the recorded SHA's authoritative CI,
+  never repeats the host bootstrap transaction, and idempotently continues
+  route proof, old-key retirement or rejection proof, Secret rotation, and
+  recovery cleanup; cleanup atomically moves the record to a terminal state
+  before deleting either private key, retains a non-secret completion receipt,
+  and can finish deletion after another interruption;
 - an explicitly authorized `preflight` through the fixed forced-command host
   controller after bootstrap;
 - `deploy --owner-said-deploy-latest`, which sends only the automatically
@@ -145,13 +161,16 @@ The repository implementation exposes:
   atomic switch, idempotency, private receipts, shared-data non-mutation, and
   healthy rollback.
 
-Code presence is not production authorization. The legacy baseline migration
-and release-layout bootstrap remain blocked until the Owner directly authorizes
-each one after the preceding gate succeeds. After bootstrap rotates the Secret,
-the Deployment Orb environment must refresh and a forced-controller preflight
-must pass. The first real daily deployment then requires another direct Owner
-authorization. The Deployment Orb must also be a separate private Amp project;
-its forced-key secret must not remain in ordinary development or CI projects.
+Code presence is not production authorization. The legacy baseline migration,
+release-layout bootstrap, and any recovery finalization remain blocked until
+the Owner directly authorizes each action after the preceding gate succeeds.
+Recovery is not a bootstrap retry: it is allowed only with a matching private
+record and cannot invoke the host bootstrap transaction. After bootstrap rotates
+the Secret, the Deployment Orb environment must refresh and a forced-controller
+preflight must pass. The first real daily deployment then requires another
+direct Owner authorization. The Deployment Orb must also be a separate private
+Amp project; its forced-key secret must not remain in ordinary development or
+CI projects.
 
 ## Consequences
 

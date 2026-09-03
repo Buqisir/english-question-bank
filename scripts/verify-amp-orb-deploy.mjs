@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
 import { execFileSync, spawnSync } from 'node:child_process'
+import { createHash } from 'node:crypto'
 import {
   chmodSync,
   existsSync,
+  linkSync,
   mkdirSync,
   mkdtempSync,
   readdirSync,
@@ -22,12 +24,17 @@ import {
   activatePreparedRelease,
   assertDeploymentCandidateStillCurrent,
   assertAuthoritativeDeploymentChecks,
+  bootstrapPayloadStageInput,
   bootstrapReleaseLayout,
+  clearCompletedReleaseBootstrapRecovery,
+  completeReleaseBootstrapRecovery,
+  createReleaseBootstrapRecovery,
   currentReleaseSha,
   deployLatestRelease,
   deploymentGitHubApiArgs,
   deploymentLockInvocation,
   deploymentSSHInvocation,
+  deploymentSSHTransportUser,
   materializeDeploymentCredentials,
   migrateLegacyProductionBaseline,
   parseBootstrapKeyRetirementReceipt,
@@ -35,9 +42,15 @@ import {
   parseDeploymentControllerPreflight,
   parseDeploymentPreflightOutput,
   parseLegacyBaselineReceipt,
+  parseReleaseBootstrapFailure,
+  readCompletedReleaseBootstrapRecovery,
+  readReleaseBootstrapRecovery,
+  removeReleaseBootstrapRecovery,
   requireDeployLatestAuthorization,
   requireLegacyBaselineAuthorization,
   requireReleaseLayoutBootstrapAuthorization,
+  requireReleaseLayoutBootstrapResumeAuthorization,
+  resumeReleaseLayoutBootstrap,
   resolveLatestDeploymentCandidate,
 } from './lib/ampOrbDeploy.mjs'
 import {
@@ -124,6 +137,32 @@ assert(
     }
   })(),
   'caller-supplied deployment SHA is rejected',
+)
+assert(
+  (() => {
+    requireReleaseLayoutBootstrapResumeAuthorization([
+      'bootstrap-resume',
+      '--owner-said-release-bootstrap-resume',
+    ])
+    return true
+  })(),
+  'bootstrap recovery requires its separate explicit Owner authorization',
+)
+assert(
+  (() => {
+    try {
+      requireReleaseLayoutBootstrapResumeAuthorization([
+        'bootstrap-resume',
+        '--owner-said-release-bootstrap-resume',
+        '--sha',
+        newSha,
+      ])
+      return false
+    } catch {
+      return true
+    }
+  })(),
+  'bootstrap recovery target cannot be replaced by a caller-supplied SHA',
 )
 
 const candidate = await resolveLatestDeploymentCandidate({
@@ -649,7 +688,121 @@ for (const [label, output] of [
     }
   })(), `${label} bootstrap key-retirement response fails closed`)
 }
+const bootstrapFailureReceipt = JSON.stringify({
+  schemaVersion: 'eqb-deployment-bootstrap-failure-v1',
+  state: 'reported',
+  conclusion: 'failure',
+  targetSha: newSha,
+  failedStage: 'migrate-persistence',
+  exitCode: 1,
+  rollbackHealthy: true,
+  evidenceRetained: true,
+})
+const bootstrapFailureMarker = (receipt) => `EQB_BOOTSTRAP_FAILURE ${receipt}`
+const parsedBootstrapFailure = parseReleaseBootstrapFailure(
+  `remote diagnostic\n${bootstrapFailureMarker(bootstrapFailureReceipt)}\n`,
+  newSha,
+  1,
+)
+assert(
+  parsedBootstrapFailure.failedStage === 'migrate-persistence'
+    && parsedBootstrapFailure.rollbackHealthy
+    && parsedBootstrapFailure.evidenceRetained,
+  'bootstrap failure marker preserves a strict sanitized stage and recovery verdict',
+)
+assert(
+  parseReleaseBootstrapFailure(
+    bootstrapFailureMarker(bootstrapFailureReceipt),
+    newSha,
+  ).exitCode === 1,
+  'manager-owned bootstrap journal can authenticate failure after an SSH disconnect',
+)
+const payloadFixtureRoot = mkdtempSync(path.join(tmpdir(), 'eqb-bootstrap-payload-'))
+try {
+  chmodSync(payloadFixtureRoot, 0o700)
+  const payloadSource = '#!/usr/bin/env bash\nprintf \'%s\\n\' "${NOT_EXPANDED}"\n'
+  const payloadDigest = createHash('sha256').update(payloadSource).digest('hex')
+  const uid = statSync(payloadFixtureRoot).uid
+  const gid = statSync(payloadFixtureRoot).gid
+  const localStageInput = (source, digest) => bootstrapPayloadStageInput(source, digest)
+    .replaceAll('/var/backups/eqb', payloadFixtureRoot)
+    .replaceAll("'0:0:700'", `'${uid}:${gid}:700'`)
+    .replaceAll("'0:0:600:1'", `'${uid}:${gid}:600:1'`)
+    .replace('/usr/bin/chown 0:0', `/usr/bin/chown ${uid}:${gid}`)
+  const staged = spawnSync('/bin/bash', ['-s', '--', newSha, payloadDigest], {
+    encoding: 'utf8',
+    input: localStageInput(payloadSource, payloadDigest),
+  })
+  const payloadPath = path.join(
+    payloadFixtureRoot,
+    `bootstrap-payload-${newSha}-${payloadDigest.slice(0, 16)}.sh`,
+  )
+  const restaged = spawnSync('/bin/bash', ['-s', '--', newSha, payloadDigest], {
+    encoding: 'utf8',
+    input: localStageInput(payloadSource, payloadDigest),
+  })
+  assert(
+    staged.status === 0
+      && staged.stdout.trim() === `EQB bootstrap payload staged: ${newSha}`
+      && restaged.status === 0
+      && readFileSync(payloadPath, 'utf8') === payloadSource
+      && (statSync(payloadPath).mode & 0o7777) === 0o600
+      && statSync(payloadPath).nlink === 1,
+    'bootstrap payload staging is exact, private, hash-bound, and idempotent',
+  )
+
+  const partialSource = '#!/usr/bin/env bash\nprintf partial\\n\n'
+  const partialDigest = createHash('sha256').update(partialSource).digest('hex')
+  const delimiter = `EQB_BOOTSTRAP_PAYLOAD_${partialDigest.toUpperCase()}`
+  const completeInput = localStageInput(partialSource, partialDigest)
+  const partialInput = completeInput.slice(0, completeInput.lastIndexOf(delimiter))
+  const interrupted = spawnSync('/bin/bash', ['-s', '--', oldSha, partialDigest], {
+    encoding: 'utf8',
+    input: partialInput,
+  })
+  assert(
+    interrupted.stdout.trim() === ''
+      && !readdirSync(payloadFixtureRoot).some((name) => name.includes(oldSha) || name.startsWith('.bootstrap-payload-')),
+    'interrupted bootstrap payload transfer cannot install or leave a partial executable',
+  )
+} finally {
+  rmSync(payloadFixtureRoot, { recursive: true, force: true })
+}
+const earlyBootstrapFailure = parseReleaseBootstrapFailure(
+  bootstrapFailureMarker(bootstrapFailureReceipt
+    .replace('migrate-persistence', 'preflight')
+    .replace('"evidenceRetained":true', '"evidenceRetained":false')),
+  newSha,
+  1,
+)
+assert(
+  earlyBootstrapFailure.failedStage === 'preflight'
+    && earlyBootstrapFailure.rollbackHealthy
+    && !earlyBootstrapFailure.evidenceRetained,
+  'early bootstrap preflight failure remains classifiable before private evidence is safe to create',
+)
+for (const [label, output, expectedSha, expectedExitCode] of [
+  [
+    'unexpected field',
+    bootstrapFailureMarker(bootstrapFailureReceipt.replace(/\}\s*$/u, ',"extra":true}')),
+    newSha,
+    1,
+  ],
+  ['another SHA', bootstrapFailureMarker(bootstrapFailureReceipt), oldSha, 1],
+  ['another exit code', bootstrapFailureMarker(bootstrapFailureReceipt), newSha, 2],
+  ['non-JSON', bootstrapFailureMarker('bootstrap failed during migration'), newSha, 1],
+]) {
+  assert((() => {
+    try {
+      parseReleaseBootstrapFailure(output, expectedSha, expectedExitCode)
+      return false
+    } catch {
+      return true
+    }
+  })(), `${label} bootstrap failure marker fails closed`)
+}
 const bootstrapOrder = []
+let bootstrapIdentityClassification = 0
 const bootstrapped = await bootstrapReleaseLayout({
   argv: ['bootstrap', '--owner-said-release-bootstrap'],
   async resolveCandidate() {
@@ -675,18 +828,22 @@ const bootstrapped = await bootstrapReleaseLayout({
     bootstrapOrder.push('retire')
     return parseBootstrapKeyRetirementReceipt(keyRetirementReceipt)
   },
-  async verifyBootstrapIdentityRetired() {
-    bootstrapOrder.push('old-rejected')
-    return true
+  async classifyBootstrapIdentity() {
+    bootstrapOrder.push('classify-old')
+    bootstrapIdentityClassification += 1
+    return bootstrapIdentityClassification === 1 ? 'active' : 'retired'
   },
   async rotateControllerSecret() {
     bootstrapOrder.push('secret')
+  },
+  async cleanupRecovery() {
+    bootstrapOrder.push('cleanup')
   },
 })
 assert(bootstrapped.controllerPreflight.layout === 'release', 'new forced controller proves release layout')
 assert(
   bootstrapOrder.join(',')
-    === 'resolve,main,preflight,main,bootstrap,controller,retire,controller,old-rejected,secret',
+    === 'resolve,main,preflight,main,bootstrap,controller,classify-old,retire,controller,classify-old,secret,cleanup',
   'bootstrap proves the new route, retires and rejects the old key, then rotates the secret last',
 )
 
@@ -703,8 +860,9 @@ assert(await (async () => {
       },
       readControllerPreflight: async () => healthyReleasePreflight,
       retireBootstrapIdentity: async () => parseBootstrapKeyRetirementReceipt(keyRetirementReceipt),
-      verifyBootstrapIdentityRetired: async () => true,
+      classifyBootstrapIdentity: async () => 'active',
       rotateControllerSecret: async () => {},
+      cleanupRecovery: async () => {},
     })
     return false
   } catch {
@@ -724,10 +882,11 @@ assert(await (async () => {
       invokeBootstrap: async () => {},
       readControllerPreflight: async () => ({ ...healthyReleasePreflight, caddy: 'inactive' }),
       retireBootstrapIdentity: async () => parseBootstrapKeyRetirementReceipt(keyRetirementReceipt),
-      verifyBootstrapIdentityRetired: async () => true,
+      classifyBootstrapIdentity: async () => 'active',
       rotateControllerSecret: async () => {
         unverifiedSecretRotated = true
       },
+      cleanupRecovery: async () => {},
     })
     return false
   } catch {
@@ -747,10 +906,11 @@ assert(await (async () => {
       invokeBootstrap: async () => {},
       readControllerPreflight: async () => healthyReleasePreflight,
       retireBootstrapIdentity: async () => parseBootstrapKeyRetirementReceipt(keyRetirementReceipt),
-      verifyBootstrapIdentityRetired: async () => false,
+      classifyBootstrapIdentity: async () => 'active',
       rotateControllerSecret: async () => {
         unretiredSecretRotated = true
       },
+      cleanupRecovery: async () => {},
     })
     return false
   } catch {
@@ -758,6 +918,98 @@ assert(await (async () => {
   }
 })(), 'still-usable privileged bootstrap identity fails the bootstrap')
 assert(!unretiredSecretRotated, 'controller key is not rotated while the old identity remains usable')
+
+const resumeOrder = []
+const resumeStates = ['active', 'retired']
+let repeatedHostBootstrap = false
+const resumedBeforeRetirement = await resumeReleaseLayoutBootstrap({
+  argv: ['bootstrap-resume', '--owner-said-release-bootstrap-resume'],
+  candidate,
+  async readControllerPreflight() {
+    resumeOrder.push('controller')
+    return healthyReleasePreflight
+  },
+  async classifyBootstrapIdentity() {
+    resumeOrder.push('classify-old')
+    return resumeStates.shift()
+  },
+  async retireBootstrapIdentity() {
+    resumeOrder.push('retire')
+    return parseBootstrapKeyRetirementReceipt(keyRetirementReceipt)
+  },
+  async rotateControllerSecret() {
+    resumeOrder.push('secret')
+  },
+  async cleanupRecovery() {
+    resumeOrder.push('cleanup')
+  },
+  async invokeBootstrap() {
+    repeatedHostBootstrap = true
+  },
+})
+assert(
+  resumedBeforeRetirement.resumed
+    && resumedBeforeRetirement.initialIdentityState === 'active'
+    && resumedBeforeRetirement.keyRetirement?.oldKeyRemoved,
+  'recovery after host success completes the pending old-key retirement',
+)
+assert(
+  resumeOrder.join(',') === 'controller,classify-old,retire,controller,classify-old,secret,cleanup',
+  'resume proves host state, retires and rejects the old key, rotates Secret, then cleans recovery',
+)
+assert(!repeatedHostBootstrap, 'bootstrap resume cannot invoke the host bootstrap transaction again')
+
+const postRetirementOrder = []
+const resumedAfterRetirement = await resumeReleaseLayoutBootstrap({
+  argv: ['bootstrap-resume', '--owner-said-release-bootstrap-resume'],
+  candidate,
+  async readControllerPreflight() {
+    postRetirementOrder.push('controller')
+    return healthyReleasePreflight
+  },
+  async classifyBootstrapIdentity() {
+    postRetirementOrder.push('classify-old')
+    return 'retired'
+  },
+  async retireBootstrapIdentity() {
+    postRetirementOrder.push('retire')
+  },
+  async rotateControllerSecret() {
+    postRetirementOrder.push('secret')
+  },
+  async cleanupRecovery() {
+    postRetirementOrder.push('cleanup')
+  },
+})
+assert(
+  resumedAfterRetirement.initialIdentityState === 'retired'
+    && resumedAfterRetirement.keyRetirement === null
+    && !postRetirementOrder.includes('retire'),
+  'resume after retirement does not repeat key mutation',
+)
+assert(
+  postRetirementOrder.join(',') === 'controller,classify-old,controller,classify-old,secret,cleanup',
+  'resume after retirement still proves both routes before idempotent Secret rotation and cleanup',
+)
+
+const unknownResumeActions = []
+assert(await (async () => {
+  try {
+    await resumeReleaseLayoutBootstrap({
+      argv: ['bootstrap-resume', '--owner-said-release-bootstrap-resume'],
+      candidate,
+      readControllerPreflight: async () => healthyReleasePreflight,
+      classifyBootstrapIdentity: async () => 'unknown',
+      retireBootstrapIdentity: async () => unknownResumeActions.push('retire'),
+      rotateControllerSecret: async () => unknownResumeActions.push('secret'),
+      cleanupRecovery: async () => unknownResumeActions.push('cleanup'),
+    })
+    return false
+  } catch {
+    return true
+  }
+})(), 'unknown old-key transport state fails bootstrap recovery closed')
+assert(unknownResumeActions.length === 0, 'unknown old-key state cannot mutate keys, Secret, or recovery')
 
 section('Private credentials and pinned SSH invocation')
 
@@ -785,6 +1037,144 @@ assert(
   'single-line Project Secret is restored to a valid private key',
 )
 
+const generatedControllerKey = path.join(credentialRoot, 'generated-controller')
+execFileSync('ssh-keygen', ['-q', '-t', 'ed25519', '-N', '', '-f', generatedControllerKey])
+const publicKeyBody = (privateKeyPath) => execFileSync(
+  'ssh-keygen',
+  ['-y', '-f', privateKeyPath],
+  { encoding: 'utf8' },
+).trim().split(/\s+/u)[1]
+const recoveryRoot = path.join(credentialRoot, 'recovery-state')
+const recovery = createReleaseBootstrapRecovery({
+  stateRoot: recoveryRoot,
+  candidateSha: newSha,
+  projectId: '00000000-0000-0000-0000-000000000001',
+  transportTarget: 'deployer@production.invalid',
+  unit: `eqb-release-bootstrap-${'a'.repeat(32)}`,
+  controllerPrivateKey: readFileSync(generatedControllerKey, 'utf8'),
+  controllerPublicKeyBody: publicKeyBody(generatedControllerKey),
+  bootstrapPrivateKey: readFileSync(generatedKey, 'utf8'),
+  bootstrapPublicKeyBody: publicKeyBody(generatedKey),
+  now: () => new Date('2026-09-03T00:00:00.000Z'),
+})
+assert(
+  path.basename(recovery.directory) === `bootstrap-${newSha}`
+    && (statSync(recoveryRoot).mode & 0o777) === 0o700
+    && (statSync(recovery.directory).mode & 0o777) === 0o700,
+  'bootstrap recovery uses one deterministic private target directory',
+)
+assert(
+  [recovery.recoveryPath, recovery.controllerPrivateKeyPath, recovery.bootstrapPrivateKeyPath]
+    .every((filePath) => (statSync(filePath).mode & 0o777) === 0o600),
+  'bootstrap recovery record and both identities are private files',
+)
+const reloadedRecovery = readReleaseBootstrapRecovery({ stateRoot: recoveryRoot })
+assert(
+  reloadedRecovery.targetSha === newSha
+    && reloadedRecovery.unit === `eqb-release-bootstrap-${'a'.repeat(32)}`
+    && reloadedRecovery.controllerPrivateKey === readFileSync(generatedControllerKey, 'utf8')
+    && reloadedRecovery.bootstrapPrivateKey === readFileSync(generatedKey, 'utf8'),
+  'a fresh executor can recover the exact target, unit, controller key, and old bootstrap key',
+)
+assert((() => {
+  try {
+    createReleaseBootstrapRecovery({
+      stateRoot: recoveryRoot,
+      candidateSha: newSha,
+      projectId: '00000000-0000-0000-0000-000000000001',
+      transportTarget: 'deployer@production.invalid',
+      unit: `eqb-release-bootstrap-${'b'.repeat(32)}`,
+      controllerPrivateKey: readFileSync(generatedControllerKey, 'utf8'),
+      controllerPublicKeyBody: publicKeyBody(generatedControllerKey),
+      bootstrapPrivateKey: readFileSync(generatedKey, 'utf8'),
+      bootstrapPublicKeyBody: publicKeyBody(generatedKey),
+    })
+    return false
+  } catch {
+    return true
+  }
+})(), 'fresh bootstrap cannot overwrite a pending recovery record')
+const completedRecovery = completeReleaseBootstrapRecovery(reloadedRecovery, {
+  now: () => new Date('2026-09-03T00:01:00.000Z'),
+})
+assert(
+  !existsSync(recovery.directory)
+    && path.basename(completedRecovery.directory) === `completed-bootstrap-${newSha}`
+    && !existsSync(path.join(completedRecovery.directory, 'controller-identity'))
+    && !existsSync(path.join(completedRecovery.directory, 'bootstrap-identity')),
+  'post-rotation cleanup atomically terminalizes recovery before removing both private identities',
+)
+const reloadedCompletion = readCompletedReleaseBootstrapRecovery({ stateRoot: recoveryRoot })
+assert(
+  reloadedCompletion.controllerSecretRotated
+    && reloadedCompletion.completedAt === '2026-09-03T00:01:00.000Z'
+    && (statSync(reloadedCompletion.completionPath).mode & 0o777) === 0o600,
+  'a fresh executor can prove completed Secret rotation from the retained terminal receipt',
+)
+clearCompletedReleaseBootstrapRecovery({ stateRoot: recoveryRoot, targetSha: newSha })
+assert(
+  existsSync(completedRecovery.directory)
+    && !existsSync(path.join(completedRecovery.directory, 'controller-identity'))
+    && !existsSync(path.join(completedRecovery.directory, 'bootstrap-identity')),
+  'terminal recovery cleanup is idempotent and retains only non-secret evidence',
+)
+
+const interruptedRecoveryRoot = path.join(credentialRoot, 'interrupted-recovery-state')
+const interruptedRecovery = createReleaseBootstrapRecovery({
+  stateRoot: interruptedRecoveryRoot,
+  candidateSha: newSha,
+  projectId: '00000000-0000-0000-0000-000000000001',
+  transportTarget: 'deployer@production.invalid',
+  unit: `eqb-release-bootstrap-${'d'.repeat(32)}`,
+  controllerPrivateKey: readFileSync(generatedControllerKey, 'utf8'),
+  controllerPublicKeyBody: publicKeyBody(generatedControllerKey),
+  bootstrapPrivateKey: readFileSync(generatedKey, 'utf8'),
+  bootstrapPublicKeyBody: publicKeyBody(generatedKey),
+})
+let identityRemoval = 0
+assert((() => {
+  try {
+    completeReleaseBootstrapRecovery(interruptedRecovery, {
+      removeIdentity(filePath) {
+        identityRemoval += 1
+        if (identityRemoval === 2) throw new Error('simulated cleanup interruption')
+        rmSync(filePath)
+      },
+    })
+    return false
+  } catch {
+    return true
+  }
+})(), 'interrupted post-rotation identity cleanup remains a reported failure')
+const interruptedCompletion = readCompletedReleaseBootstrapRecovery({
+  stateRoot: interruptedRecoveryRoot,
+})
+assert(
+  interruptedCompletion.controllerSecretRotated
+    && !existsSync(path.join(interruptedCompletion.directory, 'controller-identity'))
+    && existsSync(path.join(interruptedCompletion.directory, 'bootstrap-identity')),
+  'an interrupted cleanup retains atomic terminal evidence and the unremoved private identity',
+)
+clearCompletedReleaseBootstrapRecovery({ stateRoot: interruptedRecoveryRoot })
+assert(
+  !existsSync(path.join(interruptedCompletion.directory, 'bootstrap-identity')),
+  'a fresh executor idempotently finishes an interrupted identity cleanup',
+)
+
+const discardRecovery = createReleaseBootstrapRecovery({
+  stateRoot: recoveryRoot,
+  candidateSha: oldSha,
+  projectId: '00000000-0000-0000-0000-000000000001',
+  transportTarget: 'deployer@production.invalid',
+  unit: `eqb-release-bootstrap-${'c'.repeat(32)}`,
+  controllerPrivateKey: readFileSync(generatedControllerKey, 'utf8'),
+  controllerPublicKeyBody: publicKeyBody(generatedControllerKey),
+  bootstrapPrivateKey: readFileSync(generatedKey, 'utf8'),
+  bootstrapPublicKeyBody: publicKeyBody(generatedKey),
+})
+removeReleaseBootstrapRecovery(discardRecovery)
+assert(!existsSync(discardRecovery.directory), 'pre-host recovery discard removes only its active target record')
+
 const ssh = deploymentSSHInvocation({
   host: 'deployer@production.invalid',
   keyPath: materialized.keyPath,
@@ -800,6 +1190,33 @@ assert(ssh.args.includes('GlobalKnownHostsFile=/dev/null'), 'global host keys ca
 assert(ssh.args.includes('BatchMode=yes'), 'SSH cannot fall back to an interactive password')
 assert(ssh.args.includes('PreferredAuthentications=publickey'), 'SSH attempts only the pinned public-key identity')
 assert(!ssh.args.some((arg) => arg.includes('StrictHostKeyChecking=no')), 'insecure host-key bypass is absent')
+assert((() => {
+  try {
+    deploymentSSHInvocation({
+      host: 'deployer@production.invalid',
+      keyPath: materialized.keyPath,
+      knownHostsPath: materialized.knownHostsPath,
+      remoteArgs: ['deploy', `${newSha};id`],
+    })
+    return false
+  } catch {
+    return true
+  }
+})(), 'SSH remote argv rejects shell metacharacters before OpenSSH concatenates it')
+assert(
+  deploymentSSHTransportUser('deployer@production.invalid') === 'deployer',
+  'deployment SSH transport account is explicit and machine-resolved',
+)
+for (const target of ['production.invalid', 'root@production.invalid', 'BadUser@production.invalid']) {
+  assert((() => {
+    try {
+      deploymentSSHTransportUser(target)
+      return false
+    } catch {
+      return true
+    }
+  })(), `unsafe deployment SSH transport target ${JSON.stringify(target)} fails closed`)
+}
 
 const locked = deploymentLockInvocation({
   root: '/opt/eqb',
@@ -913,6 +1330,8 @@ function controllerFixture({
   protectedDiffFailure = false,
   unsafeCandidateDirectory = null,
   tamperDeploymentControl = false,
+  wrongDistModes = false,
+  linkedDist = false,
 } = {}) {
   const root = mkdtempSync(path.join(tmpdir(), 'eqb-controller-fixture-'))
   const source = path.join(root, 'english-question-bank')
@@ -977,6 +1396,16 @@ function controllerFixture({
       if (args.at(-1) === 'build') {
         mkdirSync(path.join(release, 'app', 'dist'), { recursive: true })
         writeFileSync(path.join(release, 'app', 'dist', 'index.html'), '<!doctype html>')
+        if (wrongDistModes) {
+          chmodSync(path.join(release, 'app', 'dist'), 0o700)
+          chmodSync(path.join(release, 'app', 'dist', 'index.html'), 0o600)
+        }
+        if (linkedDist) {
+          linkSync(
+            path.join(release, 'app', 'dist', 'index.html'),
+            path.join(release, 'app', 'dist', 'linked.html'),
+          )
+        }
         if (state.tamperDeploymentControl) {
           writeFileSync(path.join(release, 'deploy', 'eqb-deploy-controller.mjs'), 'candidate-controlled')
         }
@@ -1029,6 +1458,7 @@ function controllerFixture({
         for (const relative of [
           'Caddyfile.release',
           'eqb-release.service',
+          'eqb-deploy-transport',
           'eqb-deploy-controller',
           'eqb-deploy-controller.mjs',
         ]) {
@@ -1081,7 +1511,7 @@ for (const command of ['', 'deploy', `deploy ${newSha} --force`, `deploy ${newSh
   )
 }
 
-const fixedSuccess = controllerFixture()
+const fixedSuccess = controllerFixture({ wrongDistModes: true })
 const fixedSuccessResult = await runController({
   originalCommand: `deploy ${newSha}`,
   config: fixedSuccess.config,
@@ -1089,6 +1519,18 @@ const fixedSuccessResult = await runController({
 })
 assert(fixedSuccessResult.exitCode === 0, 'fixed controller reports healthy activation success')
 assert(fixedSuccess.currentSha() === newSha, 'fixed controller atomically activates the prepared SHA')
+assert(
+  (statSync(path.join(fixedSuccess.root, 'releases', newSha, 'app', 'dist')).mode & 0o7777) === 0o755
+    && (statSync(path.join(
+      fixedSuccess.root,
+      'releases',
+      newSha,
+      'app',
+      'dist',
+      'index.html',
+    )).mode & 0o7777) === 0o644,
+  'ordinary controller normalizes generated dist to exact Caddy-readable modes',
+)
 assert(fixedSuccess.state.buildCalls.length === 5, 'candidate install, Chromium smoke, and build run in the isolated build boundary')
 assert(
   fixedSuccess.state.systemCalls.some((call) => call[0] === '/usr/bin/git' && call.includes('archive'))
@@ -1131,6 +1573,20 @@ assert(fixedIdempotent.output.noOp && fixedIdempotent.exitCode === 0, 'same heal
 assert(fixedSuccess.state.buildCalls.length === 5, 'idempotent deployment does not rebuild an existing sealed release')
 assert(fixedSuccess.state.restarts.length === 1, 'idempotent deployment does not restart production')
 rmSync(fixedSuccess.root, { recursive: true, force: true })
+
+const linkedDist = controllerFixture({ linkedDist: true })
+const linkedDistResult = await runController({
+  originalCommand: `deploy ${newSha}`,
+  config: linkedDist.config,
+  dependencies: linkedDist.dependencies,
+})
+assert(
+  linkedDistResult.exitCode === 1
+    && linkedDist.currentSha() === oldSha
+    && linkedDist.state.restarts.length === 0,
+  'ordinary controller rejects linked generated files before activation',
+)
+rmSync(linkedDist.root, { recursive: true, force: true })
 
 const tamperedControl = controllerFixture({ tamperDeploymentControl: true })
 const tamperedControlResult = await runController({
@@ -1295,6 +1751,7 @@ rmSync(writableRootPreflight.root, { recursive: true, force: true })
 
 const controllerSource = readText(ROOT, 'deploy/eqb-deploy-controller.mjs')
 const controllerWrapper = readText(ROOT, 'deploy/eqb-deploy-controller')
+const transportWrapper = readText(ROOT, 'deploy/eqb-deploy-transport')
 const bootstrapSource = readText(ROOT, 'deploy/bootstrap-eqb-deployment.sh')
 const baselineSource = readText(ROOT, 'deploy/eqb-legacy-baseline.mjs')
 const keyRetirementSource = readText(ROOT, 'deploy/retire-eqb-bootstrap-key.mjs')
@@ -1302,11 +1759,192 @@ execFileSync(process.execPath, ['--check', path.join(ROOT, 'deploy', 'eqb-deploy
 execFileSync(process.execPath, ['--check', path.join(ROOT, 'deploy', 'eqb-legacy-baseline.mjs')])
 execFileSync(process.execPath, ['--check', path.join(ROOT, 'deploy', 'retire-eqb-bootstrap-key.mjs')])
 execFileSync('/bin/sh', ['-n', path.join(ROOT, 'deploy', 'eqb-deploy-controller')])
+execFileSync('/bin/sh', ['-n', path.join(ROOT, 'deploy', 'eqb-deploy-transport')])
 execFileSync('/bin/bash', ['-n', path.join(ROOT, 'deploy', 'bootstrap-eqb-deployment.sh')])
+for (const originalCommand of [
+  '',
+  'deploy',
+  `deploy ${newSha} --force`,
+  `deploy ${newSha}; id`,
+  'bash -s',
+]) {
+  const rejected = spawnSync('/bin/sh', [path.join(ROOT, 'deploy', 'eqb-deploy-transport')], {
+    encoding: 'utf8',
+    env: { ...process.env, SSH_ORIGINAL_COMMAND: originalCommand },
+  })
+  assert(rejected.status === 64, `transport wrapper rejects command shape ${JSON.stringify(originalCommand)}`)
+}
+for (const args of [[], ['preflight'], ['--'], ['--', 'deploy'], ['--', 'deploy', newSha, '--force']]) {
+  const rejected = spawnSync('/bin/sh', [path.join(ROOT, 'deploy', 'eqb-deploy-controller'), ...args], {
+    encoding: 'utf8',
+  })
+  assert(rejected.status === 64, `root wrapper rejects argv shape ${JSON.stringify(args)}`)
+}
+
+const earlyBootstrapProcess = spawnSync(
+  '/bin/bash',
+  [path.join(ROOT, 'deploy', 'bootstrap-eqb-deployment.sh'), newSha, '-'],
+  {
+    encoding: 'utf8',
+    env: { ...process.env, EQB_DEPLOY_BOOTSTRAP_PUBLIC_KEY_BODY: '' },
+  },
+)
+const earlyBootstrapProcessFailure = parseReleaseBootstrapFailure(
+  earlyBootstrapProcess.stderr,
+  newSha,
+  earlyBootstrapProcess.status,
+)
+assert(
+  earlyBootstrapProcess.status === 1
+    && earlyBootstrapProcessFailure.failedStage === 'preflight'
+    && !earlyBootstrapProcessFailure.rollbackHealthy
+    && !earlyBootstrapProcessFailure.evidenceRetained,
+  'early bootstrap failure does not claim healthy production before the strict health gate',
+)
+
+function functionSource(source, name, next) {
+  const start = source.indexOf(`${name}() {`)
+  const end = source.indexOf(`\n\n${next}`, start)
+  if (start < 0 || end < 0) throw new Error(`Cannot isolate ${name} for rollback fixture`)
+  return source.slice(start, end)
+}
+
+const rollbackFixtureRoot = mkdtempSync(path.join(tmpdir(), 'eqb-bootstrap-rollback-'))
+try {
+  const functions = [
+    functionSource(bootstrapSource, 'report_failure', 'fail() {'),
+    functionSource(bootstrapSource, 'cleanup_public_key', 'assert_authorized_keys_state() {'),
+    functionSource(bootstrapSource, 'cleanup', 'restore_protected_modes() {'),
+    functionSource(bootstrapSource, 'restore_protected_modes', 'restore_file() {'),
+    functionSource(bootstrapSource, 'restore_file', 'restore_migrated_directory() {'),
+    functionSource(bootstrapSource, 'restore_migrated_directory', 'remove_empty_directory() {'),
+    functionSource(bootstrapSource, 'remove_empty_directory', 'strict_health_once() {'),
+    functionSource(bootstrapSource, 'rollback', 'stage=initial-health'),
+  ].join('\n\n')
+    .replaceAll('/etc/systemd/system/eqb.service', '"$LEGACY_UNIT"')
+    .replaceAll('/etc/caddy/Caddyfile', '"$LEGACY_CADDY"')
+  const harness = path.join(rollbackFixtureRoot, 'rollback-fixture.sh')
+  writeFileSync(harness, `#!/usr/bin/env bash
+set -u
+umask 077
+${functions}
+fixture=$1
+ROOT=$fixture/root
+SOURCE=$ROOT/source
+TARGET_SHA=${newSha}
+backup=$fixture/backup
+bootstrap_log=$backup/build.log
+release=$ROOT/releases/$TARGET_SHA
+LEGACY_UNIT=$fixture/missing-parent/eqb.service
+LEGACY_CADDY=$fixture/etc/caddy/Caddyfile
+CONTROLLER_DIRECTORY=$fixture/usr/local/libexec
+CONTROLLER=$CONTROLLER_DIRECTORY/eqb-deploy-controller-v1
+CONTROLLER_MODULE=$CONTROLLER_DIRECTORY/eqb-deploy-controller-v1.mjs
+TRANSPORT_CONTROLLER=$CONTROLLER_DIRECTORY/eqb-deploy-transport-v1
+AUTHORIZED_KEYS=$fixture/root-ssh/authorized_keys
+PUBLIC_KEY_TEMP=
+archive_dir=
+build_home=
+staging=
+success_receipt=
+stage=install-controller
+activated=1
+key_installed=0
+controller_directory_created=0
+root_hardened=0
+build_user_created=0
+build_group_created=0
+root_uid=0
+root_gid=0
+root_mode=755
+declare -a protected_paths=()
+declare -A protected_modes=()
+mkdir -p "$SOURCE/data" "$SOURCE/app/public/paper-assets" "$SOURCE/exports" \
+  "$SOURCE/server/logs" "$release" "$ROOT/deployments/receipts" "$backup" \
+  "$(dirname "$LEGACY_CADDY")"
+: > "$SOURCE/.env"
+: > "$backup/build.log"
+: > "$backup/eqb.service"
+: > "$backup/Caddyfile"
+systemctl() { return 0; }
+wait_for_strict_health() { return 0; }
+exec 3> "$fixture/marker"
+exec 2>> "$bootstrap_log"
+rollback 1
+`, { mode: 0o700 })
+  const rollbackProcess = spawnSync('/bin/bash', [harness, rollbackFixtureRoot], {
+    encoding: 'utf8',
+  })
+  const rollbackMarker = readFileSync(path.join(rollbackFixtureRoot, 'marker'), 'utf8')
+  const rollbackFailure = parseReleaseBootstrapFailure(rollbackMarker, newSha, 1)
+  const rollbackLog = readFileSync(path.join(rollbackFixtureRoot, 'backup', 'build.log'), 'utf8')
+  const rollbackReceipt = path.join(rollbackFixtureRoot, 'backup', 'failure-receipt.json')
+  assert(
+    rollbackProcess.status === 1
+      && !rollbackFailure.rollbackHealthy
+      && rollbackFailure.evidenceRetained
+      && rollbackLog.includes('Legacy rollback step failed: restore_file')
+      && !rollbackMarker.includes('restore_file')
+      && existsSync(rollbackReceipt)
+      && (statSync(rollbackReceipt).mode & 0o777) === 0o600,
+    'executed rollback continues after a restore error, reports unhealthy, and retains private evidence',
+  )
+} finally {
+  rmSync(rollbackFixtureRoot, { recursive: true, force: true })
+}
+
+const distFixtureRoot = mkdtempSync(path.join(tmpdir(), 'eqb-bootstrap-dist-'))
+try {
+  const normalizeSource = functionSource(
+    bootstrapSource,
+    'normalize_generated_dist',
+    'trap cleanup_public_key EXIT',
+  ).replace('/usr/bin/node', JSON.stringify(process.execPath))
+  const harness = path.join(distFixtureRoot, 'normalize-fixture.sh')
+  writeFileSync(harness, `#!/usr/bin/env bash
+set -euo pipefail
+${normalizeSource}
+normalize_generated_dist "$1"
+`, { mode: 0o700 })
+  const dist = path.join(distFixtureRoot, 'dist')
+  const nested = path.join(dist, 'assets')
+  mkdirSync(nested, { recursive: true, mode: 0o700 })
+  writeFileSync(path.join(dist, 'index.html'), 'index\n', { mode: 0o600 })
+  writeFileSync(path.join(nested, 'app.js'), 'asset\n', { mode: 0o600 })
+  chmodSync(dist, 0o700)
+  chmodSync(nested, 0o700)
+  const normalized = spawnSync('/bin/bash', [harness, dist], { encoding: 'utf8' })
+  assert(
+    normalized.status === 0
+      && readFileSync(path.join(dist, 'index.html'), 'utf8') === 'index\n'
+      && readFileSync(path.join(nested, 'app.js'), 'utf8') === 'asset\n'
+      && (statSync(dist).mode & 0o777) === 0o755
+      && (statSync(nested).mode & 0o777) === 0o755
+      && (statSync(path.join(dist, 'index.html')).mode & 0o777) === 0o644
+      && (statSync(path.join(nested, 'app.js')).mode & 0o777) === 0o644,
+    'executed bootstrap dist normalization preserves bytes and enforces exact Caddy-readable modes',
+  )
+  const linked = path.join(distFixtureRoot, 'linked-dist')
+  mkdirSync(linked)
+  writeFileSync(path.join(linked, 'index.html'), 'linked\n')
+  linkSync(path.join(linked, 'index.html'), path.join(linked, 'second.html'))
+  const rejectedLinkedDist = spawnSync('/bin/bash', [harness, linked], { encoding: 'utf8' })
+  assert(rejectedLinkedDist.status !== 0, 'bootstrap dist normalization rejects linked regular files')
+} finally {
+  rmSync(distFixtureRoot, { recursive: true, force: true })
+}
+
 assert(controllerWrapper.includes('/usr/bin/flock'), 'installed wrapper owns the non-blocking production lock')
 assert(
   controllerWrapper.indexOf('/usr/bin/systemd-run') < controllerWrapper.indexOf('/usr/bin/flock'),
   'host systemd owns the controller and lock beyond the Deployment Orb connection',
+)
+assert(
+  !controllerWrapper.includes('--pipe')
+    && controllerWrapper.includes('--property=StandardInput=null')
+    && controllerWrapper.includes('--property=StandardOutput=journal')
+    && controllerWrapper.includes('/usr/bin/journalctl'),
+  'fixed controller execution survives a disconnected SSH output pipe and returns journal evidence',
 )
 assert(controllerWrapper.includes('/usr/bin/env -i'), 'installed wrapper clears caller-controlled environment')
 assert(!controllerWrapper.includes('/opt/eqb/current'), 'installed wrapper never executes candidate release code')
@@ -1331,6 +1969,14 @@ assert(
   'ordinary and bootstrap builds explicitly create Caddy-readable artifacts',
 )
 assert(
+  bootstrapSource.includes('stage=normalize-generated-dist')
+    && bootstrapSource.includes('stage=pre-caddy-dist-proof')
+    && bootstrapSource.includes('fs.constants.O_NOFOLLOW')
+    && bootstrapSource.includes('fs.fchmodSync(descriptor, expectedMode)')
+    && bootstrapSource.includes("throw new Error('generated-dist-normalize-drift')"),
+  'bootstrap proves exact generated-dist modes and byte identity before release activation',
+)
+assert(
   controllerSource.includes("['-hR', 'root:root', directory]")
     && bootstrapSource.includes('chown -hR root:root "$staging"'),
   'release sealing changes symlink ownership without following candidate links',
@@ -1338,6 +1984,17 @@ assert(
 assert(
   bootstrapSource.includes('restrict,command=') && bootstrapSource.includes('ssh-ed25519'),
   'one-time bootstrap installs a forced-command-only deployment key',
+)
+assert(
+  bootstrapSource.includes('TRANSPORT_CONTROLLER=$CONTROLLER_DIRECTORY/eqb-deploy-transport-v1')
+    && bootstrapSource.includes('forced_key="restrict,command=\\"$TRANSPORT_CONTROLLER\\"')
+    && transportWrapper.includes(
+      'exec /usr/bin/sudo -n /usr/local/libexec/eqb-deploy-controller-v1 -- preflight',
+    )
+    && transportWrapper.includes(
+      'exec /usr/bin/sudo -n /usr/local/libexec/eqb-deploy-controller-v1 -- deploy "$sha"',
+    ),
+  'forced transport wrapper accepts only bounded commands before the root controller boundary',
 )
 assert(
   bootstrapSource.includes('umask 077')
@@ -1372,6 +2029,14 @@ assert(
     && bootstrapSource.includes('! -L $CONTROLLER')
     && bootstrapSource.includes('! -L $AUTHORIZED_KEYS'),
   'bootstrap rejects dangling links at privileged installation ancestors and destinations',
+)
+assert(
+  bootstrapSource.includes('CONTROLLER_DIRECTORY=/usr/local/libexec')
+    && bootstrapSource.includes('stage=prepare-controller-directory')
+    && bootstrapSource.includes('install -d -o root -g root -m 0755 "$CONTROLLER_DIRECTORY"')
+    && bootstrapSource.includes('controller_directory_created=1')
+    && bootstrapSource.includes('rollback_step remove_empty_directory "$CONTROLLER_DIRECTORY"'),
+  'bootstrap creates the fixed controller directory and removes only its own empty directory on rollback',
 )
 assert(
   bootstrapSource.includes('! -L $SOURCE/$relative')
@@ -1416,15 +2081,65 @@ assert(
   bootstrapSource.includes('rollback')
     && bootstrapSource.includes('legacy service configuration restored and healthy')
     && bootstrapSource.includes('root-private backup retained')
-    && bootstrapSource.includes('--resolve eqbank.cc:443:127.0.0.1 https://eqbank.cc/')
-    && bootstrapSource.includes('https://eqbank.cc/ops/?view=review'),
+    && bootstrapSource.includes('https://eqbank.cc/api/health https://eqbank.cc/')
+    && bootstrapSource.includes('"https://eqbank.cc/ops/?view=review"'),
   'one-time bootstrap verifies API and static-surface rollback health and retains recovery evidence otherwise',
+)
+assert(
+  bootstrapSource.includes('trap - ERR\n  set +e')
+    && bootstrapSource.includes('rollback_step restore_file')
+    && bootstrapSource.includes('rollback_step restore_migrated_directory')
+    && bootstrapSource.includes('if (( service_recovered == 0 )); then rollback_healthy=0; fi')
+    && bootstrapSource.match(/rollback_healthy=1/gu)?.length === 1,
+  'rollback continues through every restore step and never lets later health erase an earlier failure',
+)
+assert(
+  bootstrapSource.includes('/usr/bin/timeout --signal=TERM --kill-after=2s 15s')
+    && bootstrapSource.includes('wait_for_strict_health')
+    && bootstrapSource.includes('https://eqbank.cc/api/health https://eqbank.cc/')
+    && controllerSource.includes(
+      "curl(['--resolve', 'eqbank.cc:443:127.0.0.1', 'https://eqbank.cc/'])",
+    ),
+  'bootstrap, rollback, and ordinary deploy share the local TLS and public health surface',
+)
+assert(
+  bootstrapSource.includes('verify_sqlite_database')
+    && bootstrapSource.includes("import { DatabaseSync } from 'node:sqlite'")
+    && bootstrapSource.includes("database_identities[\"$database_name\"]=$(stat -c '%d:%i'")
+    && bootstrapSource.includes('stage=verify-migrated-persistence'),
+  'bootstrap verifies all live databases and exact moved identities before release sealing',
+)
+assert(
+  bootstrapSource.includes('assert_authorized_keys_state')
+    && bootstrapSource.includes('bootstrapLines.length !== 1')
+    && bootstrapSource.includes("bootstrapFields[0] !== 'ssh-ed25519'")
+    && bootstrapSource.includes('authorizationLines.length !== (expectedForcedKey ? 2 : 1)')
+    && bootstrapSource.includes('controllerLines.length !== 1')
+    && bootstrapSource.includes('deployment forced key postcondition failed'),
+  'bootstrap proves exact old/new authorized-key state before later key retirement',
+)
+assert(
+  bootstrapSource.indexOf('stage=cleanup') < bootstrapSource.indexOf('stage=success-receipt')
+    && bootstrapSource.includes('trap - EXIT')
+    && bootstrapSource.includes('if [[ -n $success_receipt ]]; then rollback_step rm -f'),
+  'bootstrap cleans transient state before success and removes a partial success receipt on rollback',
 )
 assert(
   bootstrapSource.includes('bootstrap_log=$backup/build.log')
     && bootstrapSource.includes('install -o root -g root -m 0600 /dev/null "$bootstrap_log"')
+    && bootstrapSource.includes('exec 3>&2')
+    && bootstrapSource.includes('exec 2>> "$bootstrap_log"')
     && bootstrapSource.includes('>> "$bootstrap_log" 2>&1'),
-  'bootstrap keeps candidate install and build output in a private host log',
+  'bootstrap keeps operator diagnostics and candidate output in a private host log',
+)
+assert(
+  bootstrapSource.includes('FAILURE_BACKUP_ROOT=/var/backups/eqb')
+    && bootstrapSource.includes('backup=$(mktemp -d "$FAILURE_BACKUP_ROOT/bootstrap-attempt-')
+    && bootstrapSource.includes('failed_stage=$stage')
+    && bootstrapSource.includes('failure-receipt.json')
+    && bootstrapSource.includes('EQB_BOOTSTRAP_FAILURE ')
+    && !bootstrapSource.includes('rm -rf "$backup"'),
+  'healthy bootstrap rollback retains a private failure receipt and build log outside release layout',
 )
 for (const forbidden of ['pull-run-push', 'backup-to-r2', 'rclone ', 'migrate:']) {
   assert(!bootstrapSource.includes(forbidden), `bootstrap never invokes forbidden ${forbidden.trim()} operation`)
@@ -1497,14 +2212,17 @@ for (const forbidden of ['pull-run-push', 'backup-to-r2', 'rclone ', 'promote-pa
   assert(!baselineSource.includes(forbidden), `baseline never invokes forbidden ${forbidden.trim()} operation`)
 }
 assert(
-  keyRetirementSource.includes("const authorizedKeys = '/root/.ssh/authorized_keys'")
+  keyRetirementSource.includes("execFileSync('/usr/bin/getent', ['passwd', transportUser]")
+    && keyRetirementSource.includes("path.join(sshDirectory, 'authorized_keys')")
+    && keyRetirementSource.includes("pathEntryExists(path.join(sshDirectory, 'authorized_keys2'))")
     && keyRetirementSource.includes('oldMatches.length !== 1')
     && keyRetirementSource.includes('newMatches.length !== 1')
-    && keyRetirementSource.includes('fs.renameSync(replacementPath, authorizedKeys)')
-    && keyRetirementSource.includes('fs.renameSync(rollbackPath, authorizedKeys)')
-    && keyRetirementSource.includes('syncSshDirectory()')
+    && keyRetirementSource.includes('authorizationRecords(records).length !== 2')
+    && keyRetirementSource.includes('fs.renameSync(replacementPath, transport.authorizedKeys)')
+    && keyRetirementSource.includes('fs.renameSync(rollbackPath, transport.authorizedKeys)')
+    && keyRetirementSource.includes('syncDirectory(transport.sshDirectory)')
     && keyRetirementSource.includes("original.includes('\\r')"),
-  'bootstrap identity retirement is exact, atomic, and restores authorized_keys on failed proof',
+  'bootstrap identity retirement resolves the transport boundary, is exact and atomic, and restores on failed proof',
 )
 assert(
   keyRetirementSource.includes("process.umask(0o077)")
@@ -1522,10 +2240,19 @@ assert(!caddy.includes('/opt/eqb/english-question-bank/app/dist'), 'Caddy no lon
 section('Production activation is Owner-authorized and bounded')
 
 const cli = readText(ROOT, 'scripts/amp-orb-deploy.mjs')
+const bootstrapCli = cli.slice(
+  cli.indexOf('function stageReleaseBootstrapPayload'),
+  cli.indexOf('function readNewControllerPreflight'),
+)
+const bootstrapEntry = cli.slice(
+  cli.indexOf('async function bootstrap()'),
+  cli.indexOf('async function bootstrapResume()'),
+)
 assert(cli.includes("process.argv[2] === 'plan'"), 'CLI exposes a no-mutation deployment plan')
 assert(cli.includes("process.argv[2] === 'preflight'"), 'CLI exposes an Owner-authorized read-only preflight')
 assert(cli.includes("process.argv[2] === 'baseline'"), 'CLI exposes the protected legacy baseline command')
 assert(cli.includes("process.argv[2] === 'bootstrap'"), 'CLI exposes the one-time release-layout bootstrap')
+assert(cli.includes("process.argv[2] === 'bootstrap-resume'"), 'CLI exposes explicit bootstrap finalization recovery')
 assert(cli.includes("process.argv[2] === 'deploy'"), 'CLI exposes the Owner-authorized deploy-latest command')
 assert(cli.includes('productionMutationAllowed: false'), 'plan and preflight declare no production mutation authority')
 assert(cli.includes('productionMutationAllowed: true'), 'successful deployment output declares production mutation')
@@ -1549,17 +2276,41 @@ assert(
   'baseline streams the exact tracked operator under a non-blocking host lock',
 )
 assert(
-  cli.includes("input: readFileSync(releaseBootstrapSource, 'utf8')")
-    && cli.includes('/var/lock/eqb-release-bootstrap.lock')
-    && cli.includes('EQB_DEPLOY_CONTROLLER_PUBLIC_KEY_BODY='),
-  'bootstrap streams the exact tracked script under a separate non-blocking host lock',
+  bootstrapCli.includes('input: bootstrapPayloadStageInput(bootstrapSource, bootstrapDigest)')
+    && bootstrapCli.includes('/var/backups/eqb/bootstrap-payload-')
+    && bootstrapCli.includes('/var/lock/eqb-release-bootstrap.lock')
+    && bootstrapCli.includes('/usr/bin/systemd-run')
+    && bootstrapCli.includes('--property=StandardInput=null')
+    && bootstrapCli.includes('--property=StandardOutput=journal')
+    && !bootstrapCli.includes("'--pipe'")
+    && bootstrapCli.includes('/usr/bin/journalctl')
+    && bootstrapCli.includes('parseReleaseBootstrapFailure(journalOutput, candidate.sha)'),
+  'bootstrap hash-stages the tracked script and runs it under a disconnect-safe host service and lock',
+)
+assert(
+  bootstrapEntry.indexOf('stageReleaseBootstrapPayload(resolved)')
+    < bootstrapEntry.indexOf('createControllerIdentityRecovery({')
+    && bootstrapEntry.indexOf('createControllerIdentityRecovery({')
+      < bootstrapEntry.indexOf('bootstrapAttempted = true')
+    && bootstrapEntry.indexOf('bootstrapAttempted = true')
+      < bootstrapEntry.indexOf('invokeReleaseBootstrap({'),
+  'inert payload staging precedes durable recovery, which precedes the host bootstrap attempt',
 )
 assert(
   cli.includes("input: readFileSync(bootstrapKeyRetirementSource, 'utf8')")
     && cli.includes('EQB_DEPLOY_BOOTSTRAP_PUBLIC_KEY_BODY=')
-    && cli.includes('verifyBootstrapIdentityRetired')
+    && cli.includes('classifyPrivilegedBootstrapIdentity')
+    && cli.includes("remoteArgs: ['/bin/true']")
     && cli.includes('Permission denied \\(publickey'),
   'bootstrap retires the exact old identity and distinguishes auth rejection from transport failure',
+)
+assert(
+  cli.includes("'.local', 'state', 'eqb-deployment'")
+    && cli.includes('createControllerIdentityRecovery')
+    && cli.includes('readReleaseBootstrapRecovery')
+    && cli.includes('readCompletedReleaseBootstrapRecovery')
+    && cli.includes('hostBootstrapRepeated: false'),
+  'bootstrap resumes finalization without repeating host bootstrap and retains crash-safe terminal evidence',
 )
 assert(
   cli.includes("'--data-file', '-'")
@@ -1582,6 +2333,7 @@ assert(
 for (const [command, authorization, label] of [
   ['baseline', '--owner-said-baseline-migration', 'baseline migration'],
   ['bootstrap', '--owner-said-release-bootstrap', 'release-layout bootstrap'],
+  ['bootstrap-resume', '--owner-said-release-bootstrap-resume', 'release-layout bootstrap recovery'],
 ]) {
   const unauthorized = spawnSync(
     process.execPath,
