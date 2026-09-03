@@ -479,6 +479,7 @@ try {
   await screenTable.click()
   const sourceImage = page.locator('.source-proof img')
   await sourceImage.waitFor()
+  await sourceImage.evaluate((image) => image.decode())
   assert.equal(await sourceImage.evaluate((image) => image.naturalWidth > 0), true)
   await page.frameLocator('#review-frame')
     .locator(`[data-canonical-media-id="${iconTargetId}"]`).click()
@@ -498,6 +499,8 @@ try {
   )
   await page.locator('.media-compare-grid img').first().waitFor()
   assert.equal(await page.locator('.media-compare-grid img').count(), 2)
+  await page.locator('.media-compare-grid img').evaluateAll((images) =>
+    Promise.all(images.map((image) => image.decode())))
   assert.equal(
     await page.locator('.media-compare-grid img').evaluateAll((images) =>
       images.every((image) => image.naturalWidth > 0)),
