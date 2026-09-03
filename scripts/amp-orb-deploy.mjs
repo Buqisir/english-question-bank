@@ -30,6 +30,7 @@ import {
   parseDeploymentControllerOutput,
   parseDeploymentControllerPreflight,
   parseDeploymentPreflightOutput,
+  parseOpenSshEd25519PublicKeyBody,
   readCompletedReleaseBootstrapRecovery,
   readReleaseBootstrapRecovery,
   removeReleaseBootstrapRecovery,
@@ -346,13 +347,10 @@ async function baseline() {
 }
 
 function publicKeyBody(privateKeyPath) {
-  const fields = execFileSync('ssh-keygen', ['-y', '-f', privateKeyPath], {
+  const publicKey = execFileSync('ssh-keygen', ['-y', '-f', privateKeyPath], {
     encoding: 'utf8',
-  }).trim().split(/\s+/u)
-  if (fields.length !== 2 || !/^[A-Za-z0-9+/]+={0,3}$/u.test(fields[1] || '')) {
-    throw new Error('Deployment SSH identity is not a valid private key')
-  }
-  return fields[1]
+  })
+  return parseOpenSshEd25519PublicKeyBody(publicKey)
 }
 
 function generateControllerIdentity() {

@@ -51,6 +51,7 @@ export const EQB_PERSISTENCE_AUTHORITY_PATHS = Object.freeze([
 const SHA = /^[a-f0-9]{40}$/u
 const SSH_TARGET = /^(?:[A-Za-z0-9._-]+@)?(?:\[[A-Fa-f0-9:]+\]|[A-Za-z0-9.-]+)$/u
 const SSH_REMOTE_TOKEN = /^[A-Za-z0-9_@%+=:,./-]+$/u
+const SSH_PUBLIC_KEY_BODY = /^[A-Za-z0-9+/]+={0,3}$/u
 const PROJECT_ID = /^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/u
 const BOOTSTRAP_UNIT = /^eqb-release-bootstrap-[a-f0-9]{32}$/u
 const PRE_MUTATION_BOOTSTRAP_FAILURE_STAGES = new Set([
@@ -62,6 +63,22 @@ const PRE_MUTATION_BOOTSTRAP_FAILURE_STAGES = new Set([
 function assertSha(sha, label = 'deployment SHA') {
   if (!SHA.test(sha || '')) throw new Error(`Invalid ${label}`)
   return sha
+}
+
+export function parseOpenSshEd25519PublicKeyBody(value) {
+  const line = String(value || '').trim()
+  const fields = line.split(/[\t ]+/u)
+  if (
+    !line
+    || line.includes('\n')
+    || line.includes('\r')
+    || fields.length < 2
+    || fields[0] !== 'ssh-ed25519'
+    || !SSH_PUBLIC_KEY_BODY.test(fields[1] || '')
+  ) {
+    throw new Error('Deployment SSH identity is not a valid private key')
+  }
+  return fields[1]
 }
 
 function ensurePrivateDirectory(directory) {
