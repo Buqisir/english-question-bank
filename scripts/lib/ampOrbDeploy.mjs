@@ -81,6 +81,14 @@ export function parseOpenSshEd25519PublicKeyBody(value) {
   return fields[1]
 }
 
+export function isSshPublicKeyAuthenticationDenied({ status, stdout, stderr } = {}) {
+  if (status !== 255 || String(stdout || '') !== '') return false
+  const denied = String(stderr || '').trim().match(
+    /^[^\r\n]+: Permission denied \(([A-Za-z0-9-]+(?:,[A-Za-z0-9-]+)*)\)\.$/u,
+  )
+  return denied?.[1].split(',').includes('publickey') === true
+}
+
 function ensurePrivateDirectory(directory) {
   mkdirSync(directory, { recursive: true, mode: 0o700 })
   chmodSync(directory, 0o700)
