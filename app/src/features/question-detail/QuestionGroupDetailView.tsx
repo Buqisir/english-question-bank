@@ -27,20 +27,21 @@
  */
 import { useEffect, useState, type CSSProperties, type MouseEvent, type ReactNode } from 'react'
 import {
-  ArrowLeft,
   BookOpen,
+  Check,
   ChevronDown,
   ChevronUp,
   Eye,
+  Files,
   Pencil,
   Plus,
-  Repeat,
   Trash2,
 } from 'lucide-react'
-import type { QuestionGroupCard, QuestionGroupDetail, ReadingParseQuestionGroupResult } from '../../domain/questionBank'
+import type { QuestionGroupCard, QuestionGroupDetail, ReadingParseQuestionGroupResult, TopicLabel } from '../../domain/questionBank'
 import { sourceTypeLabel } from '../../domain/questionBank'
 import { compactGroupMeta } from './detailHelpers'
 import { buildPaperBrowseLectureHref, parsePaperIdFromHref } from '../../concierge/paperSurfaceHref'
+import { ConciergeGroupRowMenu } from '../../concierge/ConciergeGroupRowMenu'
 import { fetchSimilarPassages } from '../../services/similarQuestions.ts'
 import {
   SimilarPassagesPanel,
@@ -72,6 +73,27 @@ import './QuestionGroupDetailView.css'
 // — this file is not the domain schema, just a display-gate reading the
 // type's existing string values.
 const SIMILAR_SUPPORTED_GROUP_TYPES = new Set(['reading', 'cloze', 'seven_choices', 'grammar_cloze'])
+
+function topicLabelPath(topicLabel: TopicLabel): string | undefined {
+  if (topicLabel.label.includes('-')) return topicLabel.label
+  const parts = [topicLabel.theme, topicLabel.themeGroup, topicLabel.subtopic].filter(Boolean)
+  return parts.length > 0 ? parts.join('-') : undefined
+}
+
+function topicLabelLeaf(topicLabel: TopicLabel): string {
+  return (topicLabel.subtopic || topicLabel.label.split('-').pop() || topicLabel.label).trim()
+}
+
+function renderSourceKind(sourceType: QuestionGroupDetail['sourceType']): ReactNode {
+  const label = sourceTypeLabel[sourceType]
+  if (sourceType === 'real_exam') {
+    return <span className="peek-meta-badge">{label}</span>
+  }
+  if (sourceType === 'mock_exam') {
+    return <span>{label}</span>
+  }
+  return <span>{label}</span>
+}
 
 export type QuestionGroupDetailViewProps = {
   isOwnerView: boolean
@@ -472,8 +494,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
     return (
       <div className="detail-view">
         <button className="back-button" type="button" onClick={onBack}>
-          <ArrowLeft size={16} />
-          返回找题
+          ← 返回找题
         </button>
         {detailStatus === 'loading' && <p className="detail-message">正在读取题组详情...</p>}
         {detailStatus === 'error' && <p className="detail-message error">{detailError}</p>}
@@ -497,8 +518,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
   return (
     <div className="detail-view">
       <button className="back-button" type="button" onClick={onBack}>
-        <ArrowLeft size={16} />
-        返回找题
+        ← 返回找题
       </button>
 
       <section className="peek-root" aria-label="题组速览">
@@ -506,7 +526,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
           <div className="peek-meta-line">
             <span>{compactGroupMeta(selectedDetail.groupType, selectedDetail.questionCount)}</span>
             <span className="peek-meta-dot">·</span>
-            <span>{sourceTypeLabel[selectedDetail.sourceType]}</span>
+            {renderSourceKind(selectedDetail.sourceType)}
           </div>
           <h3 className="peek-title">{selectedDetail.title}</h3>
           {selectedDetail.summary && <p className="peek-summary">{selectedDetail.summary}</p>}
@@ -522,11 +542,18 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
           )}
           {selectedDetail.topicLabels?.length > 0 && (
             <div className="peek-topics" aria-label="话题标签">
-              {selectedDetail.topicLabels.map((topicLabel) => (
-                <span key={topicLabel.label} className="peek-topic">
-                  {topicLabel.label}
-                </span>
-              ))}
+              {selectedDetail.topicLabels.map((topicLabel) => {
+                const path = topicLabelPath(topicLabel)
+                return (
+                  <span
+                    key={topicLabel.label}
+                    className="peek-topic"
+                    title={path}
+                  >
+                    {topicLabelLeaf(topicLabel)}
+                  </span>
+                )
+              })}
             </div>
           )}
 
@@ -536,22 +563,27 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
               type="button"
               onClick={() => onAddToBasket(selectedDetail)}
               disabled={selectedDetail.draftPaperButtonState === 'disabled'}
+              aria-pressed={selectedDetail.draftPaperButtonState === 'in_current_draft' ? true : undefined}
               title={
                 selectedDetail.draftPaperButtonState === 'disabled'
                   ? selectedDetail.printUnavailableReason || '暂不可组卷'
                   : undefined
               }
             >
-              <Plus size={15} />
+              {selectedDetail.draftPaperButtonState === 'in_current_draft' ? (
+                <Check size={16} strokeWidth={1.5} />
+              ) : (
+                <Plus size={16} strokeWidth={1.5} />
+              )}
               {selectedDetail.draftPaperButtonState === 'in_current_draft'
-                ? '已在草稿卷中'
+                ? '已在草稿卷'
                 : selectedDetail.draftPaperButtonState === 'disabled'
                   ? '暂不可组卷'
                   : '加入草稿卷'}
             </button>
             {selectedDetail.paperSurfaceHref && (
               <button className="peek-btn" type="button" onClick={() => onOpenPaperBrowse(selectedDetail)}>
-                <Eye size={15} />
+                <Eye size={16} strokeWidth={1.5} />
                 看整卷
               </button>
             )}
@@ -570,7 +602,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                   onOpenPaperBrowseLecture(selectedDetail)
                 }}
               >
-                <BookOpen size={15} />
+                <BookOpen size={16} strokeWidth={1.5} />
                 {selectedDetail.paperSurfaceLabel}
               </a>
             )}
@@ -582,26 +614,30 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                 data-ra-group-id={selectedDetail.id}
                 onClick={handleToggleSimilarPassages}
               >
-                <Repeat size={15} />
+                <Files size={16} strokeWidth={1.5} />
                 相似篇章
               </button>
             )}
             {isOwnerView && (
-              <button className="peek-btn peek-btn--minor" type="button" onClick={() => onEdit(selectedDetail)}>
-                <Pencil size={14} />
-                编辑
-              </button>
-            )}
-            {isOwnerView && (
-              <button
-                className="peek-btn peek-btn--minor peek-btn--danger"
-                type="button"
-                onClick={() => onDelete(selectedDetail)}
-                aria-label="删除题组"
-              >
-                <Trash2 size={14} />
-                删除
-              </button>
+              <div className="peek-actions-menu">
+                <ConciergeGroupRowMenu
+                  items={[
+                    {
+                      key: 'edit',
+                      label: '编辑',
+                      icon: <Pencil size={14} strokeWidth={1.5} aria-hidden="true" />,
+                      onSelect: () => onEdit(selectedDetail),
+                    },
+                    {
+                      key: 'delete',
+                      label: '删除',
+                      icon: <Trash2 size={14} strokeWidth={1.5} aria-hidden="true" />,
+                      tone: 'danger',
+                      onSelect: () => onDelete(selectedDetail),
+                    },
+                  ]}
+                />
+              </div>
             )}
           </div>
         </header>
@@ -622,16 +658,20 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
             {paperBody}
           </div>
           {load.status === 'ready' && !expanded && (
-            <button className="peek-expand" type="button" onClick={() => toggleExpanded(true)}>
-              <ChevronDown size={15} />
-              展开卷面
-            </button>
+            <div className="peek-expand-wrap">
+              <button className="peek-expand" type="button" onClick={() => toggleExpanded(true)}>
+                <ChevronDown size={16} strokeWidth={1.5} />
+                展开卷面
+              </button>
+            </div>
           )}
           {load.status === 'ready' && expanded && (
-            <button className="peek-expand peek-expand--collapse" type="button" onClick={() => toggleExpanded(false)}>
-              <ChevronUp size={15} />
-              收起卷面
-            </button>
+            <div className="peek-expand-sticky">
+              <button className="peek-expand peek-expand--collapse" type="button" onClick={() => toggleExpanded(false)}>
+                <ChevronUp size={16} strokeWidth={1.5} />
+                收起卷面
+              </button>
+            </div>
           )}
         </div>
       </section>

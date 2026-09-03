@@ -1080,11 +1080,12 @@ const lectureAnalysisCssSrc = read('app/src/features/paper-intelligence/lectureA
 const paperIntelligenceCssSrc = read('app/src/features/paper-intelligence/paperIntelligence.css')
 
 assert(
-  'PaperBrowsePage renders a 讲评 handle button unconditionally, including Review Screen',
-  /<button[\s\S]{0,200}paper-browse-lecture-handle[\s\S]{0,200}讲评/.test(pageSrc) &&
-    !/\{lectureOpen\s*&&\s*\(?\s*<button[\s\S]{0,120}paper-browse-lecture-handle/.test(pageSrc) &&
-    !/\{!reviewRevision\s*&&\s*\(?\s*<button[\s\S]{0,160}paper-browse-lecture-handle/.test(pageSrc),
-  'handle button missing, or gated behind lectureOpen/reviewRevision (should always render)',
+  'PaperBrowsePage renders a 讲评 toggle in the topbar actionsSlot unconditionally, including Review Screen',
+  /paper-browse-lecture-toggle/.test(pageSrc) &&
+    /actionsSlot=\{topbarActionsSlot\}/.test(pageSrc) &&
+    /Presentation size=\{14\}/.test(pageSrc) &&
+    !/paper-browse-lecture-handle/.test(pageSrc),
+  'topbar lecture toggle missing, or the retired right-edge handle remains',
 )
 assert(
   'Review Screen hides draft and similarity consumer actions while retaining the real renderer',
@@ -1741,11 +1742,12 @@ assert(
 )
 
 assert(
-  '47. paperBrowsePage.css: .paper-browse-content is the single sheet — one background + one box-shadow, page-margin padding driven by the shared --ps-page-margin tokens',
-  /\.paper-browse-content \{[^}]*background:\s*#fff/.test(pageCssSrc) &&
-    /\.paper-browse-content \{[^}]*box-shadow:/.test(pageCssSrc) &&
-    /\.paper-browse-content \{[^}]*padding:\s*var\(--ps-page-margin-top/.test(pageCssSrc),
-  'missing the single-sheet background/box-shadow/padding on .paper-browse-content',
+  '47. paperBrowsePage.css: .paper-browse-zoom is the single sheet — one background + one box-shadow, page-margin padding driven by the shared --ps-page-margin tokens; .paper-browse-content is the desk',
+  /\.paper-browse-content \{[^}]*background:\s*var\(--eqb-color-bg/.test(pageCssSrc) &&
+    /\.paper-browse-zoom \{[^}]*background:\s*#fff/.test(pageCssSrc) &&
+    /\.paper-browse-zoom \{[^}]*box-shadow:/.test(pageCssSrc) &&
+    /\.paper-browse-zoom \{[^}]*padding:\s*var\(--ps-page-margin-top/.test(pageCssSrc),
+  'missing the desk background on .paper-browse-content or single-sheet background/box-shadow/padding on .paper-browse-zoom',
 )
 assert(
   '48. paperBrowsePage.css retires each nested PaperSurface/WritingPaperPage\'s own texture+shadow+padding when mounted inside the one sheet (.ps-surface / .ps-page / .pi-writing-page all zeroed, scoped under .paper-browse-content)',
@@ -1970,41 +1972,42 @@ assert(
   'missing the retire-then-replace reentry guard on the settle loop',
 )
 
-// ─── 72-76. piano rail (owner-approved prototype migration) ───
+// ─── 72-76. quiet TOC rail (northstar redesign) ───
 
 assert(
-  '72. 挑题态与讲评态复用同一架 220px 钢琴；讲评态以同位移的 transform + clip-path 连续裁成 88px，琴键不重排且旧胶囊 DOM 退役',
-  pageSrc.includes('function renderPianoRail(cropped: boolean)') &&
-    pageSrc.includes("cropped ? ' paper-browse-piano-viewport--cropped' : ''") &&
-    /paper-browse-piano-black-key-layer" aria-hidden="true"/.test(pageSrc) &&
-    pageSrc.includes('renderPianoRail(lectureOpen)') &&
-    !pageSrc.includes('paper-browse-rail-panel--compact') &&
-    /\.paper-browse-piano-viewport\s*\{[^}]*width:\s*220px[^}]*clip-path:\s*inset\(0 0 0 0\)[^}]*transform:\s*translate3d\(0, -50%, 0\)[^}]*transition:[^}]*transform var\(--motion-slow\) var\(--ease-in-out\),[^}]*clip-path var\(--motion-slow\) var\(--ease-in-out\)/s.test(pageCssSrc) &&
-    /\.paper-browse-piano-viewport--cropped\s*\{[^}]*clip-path:\s*inset\(0 0 0 132px\)[^}]*transform:\s*translate3d\(-132px, -50%, 0\)/.test(pageCssSrc) &&
-    !pageCssSrc.includes('.paper-browse-rail-panel--piano-cropped'),
-  'the lecture rail is not an interruptible same-geometry crop of the full piano, or the retired compact variants remain',
+  '72. 挑题态与讲评态复用同一 quiet TOC；dock 讲评态以 compact 修饰档隐藏部分头并缩栏',
+  pageSrc.includes('function renderQuietRail(compact: boolean)') &&
+    pageSrc.includes("compact ? ' paper-browse-rail-panel--compact' : ''") &&
+    pageSrc.includes('renderQuietRail(dockedLecture)') &&
+    !pageSrc.includes('renderPianoRail') &&
+    !pageSrc.includes('paper-browse-piano-') &&
+    /@media \(min-width: 1200px\)[\s\S]{0,240}\.paper-browse-shell--lecture-open \.paper-browse-rail-part-head\s*\{[^}]*display:\s*none/.test(pageCssSrc),
+  'the quiet TOC rail is missing, or piano rail remnants remain',
 )
 assert(
-  '73. 黑键按可见白键行数动态生成真实 2+3 节奏，不硬编码某一套卷',
-  /count \+ part\.groups\.length \+ \(part\.name \? 1 : 0\)/.test(pageSrc) &&
-    /PIANO_RAIL_BLACK_BOUNDARIES\.has\(\(\(boundary - 1\) % 7\) \+ 1\)/.test(pageSrc) &&
-    /\.paper-browse-piano-black-key-layer\s*\{[^}]*pointer-events:\s*none/.test(pageCssSrc),
-  'missing dynamic white-key counting, 2+3 boundary rhythm, or click-through black keys',
+  '73. screen zoom uses ResizeObserver on shell with stepped clamp(1, available/794, 1.35)',
+  /new ResizeObserver\(computeZoom\)/.test(pageSrc) &&
+    /Math\.floor\(raw \/ 0\.05\) \* 0\.05/.test(pageSrc) &&
+    /\.paper-browse-zoom\s*\{[^}]*zoom:\s*var\(--paper-screen-zoom/.test(pageCssSrc) &&
+    /@media print\s*\{[^}]*\.paper-browse-zoom\s*\{[^}]*zoom:\s*1/.test(pageCssSrc),
+  'missing shell ResizeObserver zoom, CSS zoom wrapper, or print guard',
 )
 assert(
-  '74. Reading A-D 显示为 A-D 并在白键露出区居中，其他题组不套字母布局',
+  '74. Reading A-D 显示为 A-D；TOC 项左对齐，不再居中字母项',
   /\^Reading\\s\+\(\[A-D\]\)\$\/i/.test(pageSrc) &&
-    /isReadingLetter \? ' paper-browse-rail-group--letter'/.test(pageSrc) &&
-    /\.paper-browse-rail-panel--piano \.paper-browse-rail-group--letter\s*\{[^}]*justify-content:\s*center/.test(pageCssSrc),
-  'missing Reading label normalization or A-D centering',
+    !/paper-browse-rail-group--letter/.test(pageSrc) &&
+    !/\.paper-browse-rail-group--letter\s*\{[^}]*justify-content:\s*center/.test(pageCssSrc),
+  'missing Reading label normalization or letter centering remains',
 )
 assert(
-  '75. 钢琴目录只显示部分名与无分数节名；分数和题号章从挑题态 DOM 退役，卷面正文不受影响',
+  '75. quiet TOC 只显示部分名与无分数节名；分数和题号章从 DOM 退役；活跃标记为 travelling ink bar',
   !pageSrc.includes('paper-browse-rail-part-score') &&
     !pageSrc.includes('paper-browse-rail-group-chip') &&
     /trimmed\.replace\(\/\\s\*\[（\(\][\s\S]*满分[\s\S]*\$\/, ''\)/.test(pageSrc) &&
-    /paper-browse-rail-panel--piano \.paper-browse-rail-part-head,[\s\S]{0,900}border-left:\s*0/.test(pageCssSrc),
-  'score/range chrome remains in the full rail, score suffixes are not normalized, or the approved open-left white-key edge is missing',
+    pageSrc.includes('paper-browse-rail-active-bar') &&
+    /\.paper-browse-rail-active-bar\s*\{[^}]*width:\s*2px/.test(pageCssSrc) &&
+    !/\.paper-browse-rail-group--active::before/.test(pageCssSrc),
+  'score/range chrome remains in the rail, or the travelling active marker is missing',
 )
 assert(
   '76. 高频钢琴目录点键直接定位，不播放原生或自绘 smooth 滚动',
@@ -2044,10 +2047,8 @@ assert(
 
 const expectedPaperBrowseTypeRoles = [
   ['.paper-browse-placeholder', '12px'],
-  ['.paper-browse-lecture-handle', '12px'],
-  ['.paper-browse-lecture-empty', '14px'],
+  ['.paper-browse-page .paper-browse-lecture-toggle', '13px'],
   ['.paper-browse-lecture-title', '16px'],
-  ['.paper-browse-answer-row', '14px'],
   ['.retained-writing-card', '14px'],
   ['.retained-writing-card-row dt', '12px'],
   ['.retained-writing-card-row dd', '14px'],
@@ -2061,7 +2062,9 @@ assert(
   expectedPaperBrowseTypeRoles.every(([selector, fontSize]) => {
     const escapedSelector = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
     return new RegExp(`${escapedSelector}\\s*\\{[^}]*font-size:\\s*${fontSize}`).test(pageCssSrc)
-  }),
+  }) &&
+    /--pb-lecture-font-base:\s*14px/.test(pageCssSrc) &&
+    /--pb-lecture-font-body:\s*15px/.test(pageCssSrc),
   'one or more paper-browse type roles drifted from the approved 12/14/16 mapping',
 )
 

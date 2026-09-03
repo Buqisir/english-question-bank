@@ -71,9 +71,9 @@
 }
 
 .my-space-chip.is-selected {
-  background: color-mix(in srgb, var(--eqb-color-primary) 10%, transparent);
-  border-color: var(--eqb-color-primary);
-  color: var(--eqb-color-primary-text);
+  background: var(--eqb-color-desk);
+  border-color: var(--eqb-color-border-strong);
+  color: var(--eqb-color-text);
   font-weight: 500;
 }
 
@@ -99,22 +99,23 @@
 
 .my-space-empty-cta {
   align-items: center;
-  background: var(--eqb-color-primary);
-  border: 1px solid var(--eqb-color-primary);
-  border-radius: 6px;
+  background: var(--action);
+  border: 1px solid var(--action);
   color: var(--eqb-color-paper);
   cursor: pointer;
   display: inline-flex;
   font: inherit;
   font-weight: 600;
-  min-height: 36px;
-  padding: 7px 16px;
+  min-height: 32px;
+  border-radius: 8px;
+  font-size: 13px;
+  padding: 0 16px;
   transition: background var(--motion-base) var(--ease-hover), border-color var(--motion-base) var(--ease-hover);
 }
 
 .my-space-empty-cta:hover {
-  background: var(--eqb-color-primary-text);
-  border-color: var(--eqb-color-primary-text);
+  background: var(--action-hover);
+  border-color: var(--action-hover);
 }
 
 /* Section head — "草稿卷" / "导出保存的 PDF 成品", sits above the month
@@ -318,15 +319,15 @@
 
 /* Primary action: 下载 PDF — the one solid-green action on the card. */
 .my-space-card-actions .my-space-card-primary {
-  background: var(--eqb-color-primary);
-  border-color: var(--eqb-color-primary);
+  background: var(--action);
+  border-color: var(--action);
   color: var(--eqb-color-paper);
   font-weight: 600;
 }
 
 .my-space-card-actions .my-space-card-primary:hover:not(:disabled) {
-  background: var(--eqb-color-primary-text);
-  border-color: var(--eqb-color-primary-text);
+  background: var(--action-hover);
+  border-color: var(--action-hover);
   color: var(--eqb-color-paper);
 }
 

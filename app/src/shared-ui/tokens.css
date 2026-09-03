@@ -1,14 +1,18 @@
 :root {
-  --eqb-color-bg: #f6f6f4;
-  --eqb-color-bg-warm: #f6f6f4;
-  --eqb-color-desk: #ededea;
+  --eqb-color-bg: #f3f5f1;
+  --eqb-color-bg-warm: #f3f5f1;
+  --eqb-color-desk: #e9ece6;
   --eqb-color-paper: #ffffff;
-  --eqb-color-border-subtle: #e8e8e4;
-  --eqb-color-border: #d8d8d2;
+  --eqb-color-border-subtle: #e3e6e0;
+  --eqb-color-border: #d5d9d2;
   --eqb-color-border-strong: #c6c6c0;
-  --eqb-color-text: #1e1e1c;
-  --eqb-color-text-strong: #141412;
-  --eqb-color-text-muted: #6a6a64;
+  --eqb-color-text: #1f1f1d;
+  --eqb-color-text-strong: #1f1f1d;
+  --eqb-color-text-muted: #6b6e68;
+  --eqb-color-text-faint: #9a9d97;
+  --eqb-color-action: #1f1f1d;
+  --eqb-color-action-hover: #3a3a37;
+  --eqb-color-identity: #2c6e56;
   --eqb-color-primary: #2c6e56;
   --eqb-color-primary-text: #1e4a3a;
   /* teal-800，主按钮 hover/active 压深档（DESIGN.md §5 Buttons 既定值；

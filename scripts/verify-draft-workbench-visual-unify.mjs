@@ -185,7 +185,11 @@ const hexMatches = [...cssSrcNoComments.matchAll(/#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]
 // hex) land between L165 and the later pins — net +8 pushes L440→448,
 // L710→718; `.draft-export-menu-trigger`'s at L165 sits above every edited
 // region and is unaffected.
-const WHITELISTED_LINES = new Set([165, 448, 718])
+// ui-northstar teal→ink sweep: two comment-only insertions above the later
+// pins push `.draft-a4-repaginating`'s `#ffffff` from L448→450 and
+// `.draft-undo-toast`'s from L718→720; `.draft-export-menu-trigger`'s at
+// L165 sits above both edits and is unaffected.
+const WHITELISTED_LINES = new Set([165, 450, 720])
 
 const unexpectedHex = hexMatches.filter(
   (m) => !(m.value.toLowerCase() === '#ffffff' && WHITELISTED_LINES.has(m.line)),

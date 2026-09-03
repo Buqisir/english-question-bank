@@ -146,7 +146,43 @@ function completedContinuationCoverageObservations(
   )
 }
 
+async function readPaperScreenZoom(page) {
+  return page.evaluate(() => {
+    const node = document.querySelector('.paper-browse-zoom')
+    if (!node) return 1
+    const style = getComputedStyle(node)
+    const fromZoom = Number.parseFloat(style.zoom)
+    if (Number.isFinite(fromZoom) && fromZoom > 0) return fromZoom
+    const fromProperty = Number.parseFloat(
+      style.getPropertyValue('--paper-screen-zoom'),
+    )
+    if (Number.isFinite(fromProperty) && fromProperty > 0) return fromProperty
+    return 1
+  })
+}
+
+async function waitForPaperScreenZoomSettle(page, timeoutMs = 3000) {
+  if (await page.evaluate(() => !document.querySelector('.paper-browse-zoom'))) {
+    return
+  }
+  await page.waitForFunction(() => {
+    const node = document.querySelector('.paper-browse-zoom')
+    if (!node) return true
+    const style = getComputedStyle(node)
+    const zoom = Number.parseFloat(style.zoom)
+    const property = Number.parseFloat(
+      style.getPropertyValue('--paper-screen-zoom'),
+    )
+    if (!Number.isFinite(zoom) || zoom <= 0) return true
+    if (!Number.isFinite(property) || property <= 0) return true
+    return Math.abs(zoom - property) <= 0.001
+  }, null, { timeout: timeoutMs })
+}
+
 async function measureContinuationDomSeams(page, label, surface) {
+  const screenZoom = surface === 'screen'
+    ? await readPaperScreenZoom(page)
+    : 1
   const lines = await page.locator(
     '.pi-writing-page--continuation '
       + '[data-canonical-writing-chrome-role="section_heading"], '
@@ -210,7 +246,9 @@ async function measureContinuationDomSeams(page, label, surface) {
       ? continuationWritingRhythm.targets.screen.oneStepTolerancePx
       : continuationWritingRhythm.targets.printPdf.oneStepTolerancePt * 4 / 3
   const seam = (edgeId, fromIndex, fromEdge, toIndex, toEdge, ratio) => {
-    const distance = lines[toIndex][toEdge] - lines[fromIndex][fromEdge]
+    const distance = (
+      lines[toIndex][toEdge] - lines[fromIndex][fromEdge]
+    ) / screenZoom
     const target = baselineStep * ratio
     assert.equal(
       Math.abs(distance - target) <= tolerance,
@@ -1659,6 +1697,7 @@ async function assertContinuationStarterIndent(
   label,
 ) {
   if (canonical.answerRegion.starterLines.length === 0) return
+  const screenZoom = await readPaperScreenZoom(page)
   const observed = await response.evaluate((element) => {
     const box = element.getBoundingClientRect()
     const firstTextX = (node) => {
@@ -1690,19 +1729,18 @@ async function assertContinuationStarterIndent(
     assert.ok(starter.textX !== null)
     assert.ok(
       Math.abs(
-        starter.textX
-          - observed.boxX
+        (starter.textX - observed.boxX) / screenZoom
           - (
             continuationWritingRhythm.starterGeometry.firstLineIndentEm
             * starter.fontSizePx
           )
       ) <= 1.5,
-      `${label} keeps ${starter.starterId} at the source-correct ${continuationWritingRhythm.starterGeometry.firstLineIndentEm}em first-line indent: ${JSON.stringify(observed)}`,
+      `${label} keeps ${starter.starterId} at the source-correct ${continuationWritingRhythm.starterGeometry.firstLineIndentEm}em first-line indent: ${JSON.stringify({ ...observed, screenZoom })}`,
     )
   }
   assert.ok(
     Math.abs(
-      observed.starters[0].textX - observed.starters[1].textX,
+      (observed.starters[0].textX - observed.starters[1].textX) / screenZoom,
     ) <= 1.5,
     `${label} keeps both supplied paragraph openings on one indent origin`,
   )
@@ -2985,6 +3023,7 @@ async function assertBrowserArtifacts() {
         'authenticated whole-paper Screen',
       )
       await page.setViewportSize({ width: 520, height: 900 })
+      await waitForPaperScreenZoomSettle(page)
       await assertContinuationStarterIndent(
         page,
         mixedContinuationResponse,
@@ -3274,11 +3313,11 @@ async function assertBrowserArtifacts() {
         ).count(),
         3,
       )
-      await page.locator('.paper-browse-lecture-handle').click()
-      await page.locator('.paper-browse-lecture-handle')
+      await page.locator('.paper-browse-lecture-toggle').click()
+      await page.locator('.paper-browse-lecture-toggle')
         .waitFor({ state: 'visible' })
       assert.equal(
-        await page.locator('.paper-browse-lecture-handle')
+        await page.locator('.paper-browse-lecture-toggle')
           .getAttribute('aria-expanded'),
         'false',
       )

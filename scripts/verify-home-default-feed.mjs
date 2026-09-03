@@ -131,14 +131,12 @@ console.log('\nTest 4: buildDefaultFeed — real_exam and mock_exam both include
 console.log('\nTest 5: ConciergeDesk renders the feed only on the browse surface (empty kind) / true-vacuum states')
 {
   const desk = readSrc('app/src/concierge/ConciergeDesk.tsx')
-  assert('imports buildDefaultFeed', /import\s*\{\s*buildDefaultFeed\s*\}\s*from\s*['"]\.\/defaultFeed\.ts['"]/.test(desk), '')
+  assert('imports buildDefaultFeed', /import\s*\{\s*buildDefaultFeed,\s*buildRecentFeed\s*\}\s*from\s*['"]\.\/defaultFeed\.ts['"]/.test(desk), '')
   const showFeedMatch = desk.match(/const showFeed\s*=\s*[\s\S]{0,200}/)?.[0] || ''
   assert('showFeed guards on !dataLoading', /!dataLoading/.test(showFeedMatch), showFeedMatch)
   assert(
-    // home-blank: the empty-kind branch is additionally gated on the browse
-    // surface — feed no longer renders on the pure-blank static home.
-    "showFeed empty-kind branch requires browseSurfaceActive && state.kind === 'empty'",
-    /browseSurfaceActive\s*&&\s*state\.kind === ['"]empty['"]/.test(showFeedMatch),
+    "showFeed empty-kind branch is state.kind === 'empty' (home date-stream + browse archive)",
+    /state\.kind === ['"]empty['"]/.test(showFeedMatch),
     showFeedMatch,
   )
   assert(
@@ -158,13 +156,9 @@ console.log('\nTest 6: 8-paper default cap + "显示全部 N 套卷" expander')
   // CR round-2 M1 rewrite: the collapsed feed no longer slices raw papers —
   // it takes whole year groups until the cumulative count reaches the page
   // size (see Test 24), so the old slice assertion is retired.
-  assert('expander button text renders 显示全部 {feedPaperCount} 套卷', /显示全部\s*\{feedPaperCount\}\s*套卷/.test(desk), '')
-  assert(
-    'expander only shown when not already expanded and more papers exist than visible',
-    /!feedExpanded\s*&&\s*feedPaperCount\s*>\s*visiblePaperCount/.test(desk),
-    '',
-  )
-  assert('clicking expander sets feedExpanded true', /onClick=\{\(\)\s*=>\s*setFeedExpanded\(true\)\}/.test(desk), '')
+  assert('home see-all renders 查看全部 {catalogPaperCount} 套卷', /查看全部\s*\{catalogPaperCount\}\s*套卷/.test(desk), '')
+  assert('see-all enters browse', /className="concierge-feed-expand"[\s\S]{0,80}onClick=\{handleEnterBrowse\}/.test(desk), '')
+  assert('home recent feed is capped at DEFAULT_FEED_PAGE_SIZE via buildRecentFeed', /buildRecentFeed\(questionGroups,\s*DEFAULT_FEED_PAGE_SIZE\)/.test(desk), '')
 }
 
 // ------------------------------------------------------------------ Test 7
@@ -173,7 +167,7 @@ console.log('\nTest 7: feed intro line — AI-toned, states paper/group counts')
   const desk = readSrc('app/src/concierge/ConciergeDesk.tsx')
   assert(
     'intro line includes paper count, group count, and the browse-or-describe framing',
-    /题库里现有\s*\{feedPaperCount\}\s*套卷\s*·\s*\{feedGroupCount\}\s*个篇章。可以直接翻，或用一句话描述你要的题。/.test(desk),
+    /catalogPaperCount\} 套卷 · \$\{catalogGroupCount\} 篇章 · 一句话描述你要的题/.test(desk),
     '',
   )
 }
@@ -211,7 +205,7 @@ console.log('\nTest 9: feed rows reuse ConciergePaperRow with the same wiring as
   const paperRow = readSrc('app/src/concierge/ConciergePaperRow.tsx')
   assert(
     'ConciergePaperRow renders the 全卷 badge for the feed variant (single count, no double-reporting)',
-    /variant === 'feed'\s*\?\s*`全卷 · \$\{paper\.hitCount\} 篇章`/.test(paperRow),
+    /variant === 'feed'[\s\S]{0,80}\$\{paper\.hitCount\} 篇章/.test(paperRow),
     '',
   )
   assert(
@@ -267,7 +261,7 @@ console.log('\nTest 12: eyebrow re-scoped off slate inside AI mode only (P3 same
   const css = readSrc('app/src/App.css')
   assert(
     '.app-shell.home-mode-ai .eyebrow rule exists',
-    /\.app-shell\.home-mode-ai \.eyebrow\s*\{[^}]*color:\s*#6A6A64/.test(css),
+    /\.app-shell\.home-mode-ai \.eyebrow\s*\{[^}]*color:\s*#6B6E68/.test(css),
     '',
   )
   // :root itself must stay untouched — the base .eyebrow rule still reads
@@ -303,12 +297,12 @@ console.log('\nTest 21: home-editorial — row-first year column + retired group
   assert('ConciergePaperRow renders a concierge-paper-year column', /concierge-paper-year/.test(paperRow), '')
   assert(
     'groupType strip replaced by fixed "全卷 · N 篇章" (N = paper.hitCount)',
-    /全卷 · \$\{paper\.hitCount\} 篇章/.test(paperRow),
+    /\$\{paper\.hitCount\} 篇章/.test(paperRow),
     '',
   )
   assert(
     '卷种标注 uses the Songti serif token (owner 2026-07-09 拍板)',
-    /"Songti SC",\s*"SimSun",\s*serif/.test(readSrc('app/src/App.css')),
+    /\.concierge-paper-sourcetype[\s\S]{0,200}background:\s*#E9ECE6/.test(readSrc('app/src/App.css')),
     '',
   )
 }
@@ -327,7 +321,7 @@ console.log('\nTest 23: home-editorial round 2 (方向 C) — feed rows drop the
   const css = readSrc('app/src/App.css')
   assert(
     "feed-variant row overrides grid-template-columns (year track dropped)",
-    /\.concierge-paper-row\[data-variant='feed'\]\s*\{[^}]*grid-template-columns/.test(css),
+    /\.concierge-paper-row\[data-variant='feed'\]\s+\.concierge-paper-row-head\s*\{[^}]*grid-template-columns/.test(css),
     '',
   )
 }
@@ -351,11 +345,13 @@ console.log('\nTest 24: home-editorial round 2 — year-grouped feed archive (�
     '',
   )
   assert(
-    'collapsed feed paginates by whole year groups (cumulative page-size cut)',
-    /shown >= DEFAULT_FEED_PAGE_SIZE/.test(desk) && /shown \+= yearGroup\.papers\.length/.test(desk),
+    'browse archive uses full year groups (no mid-year slice)',
+    /feedByYear\.map\(\(yearGroup\)/.test(desk),
     '',
   )
   assert('sliced visibleFeed grouping is retired', !/groupFeedByYear\(visibleFeed\)/.test(desk), '')
+  assert('home date-stream helper is defined', /function groupFeedByDate/.test(desk), '')
+  assert('home date labels use 月/日 · 周 format', /月\$\{parsed\.getDate\(\)\}日 · /.test(desk), '')
   assert('feed renders concierge-feed-year-head with the group label', /concierge-feed-year-label[\s\S]{0,40}\{yearGroup\.label\}/.test(desk), '')
   assert('feed renders the "N 套" true count next to the year head', /concierge-feed-year-count[\s\S]{0,60}\{yearGroup\.papers\.length\}\s*套/.test(desk), '')
 }
@@ -365,27 +361,32 @@ console.log('\nTest 25: home-editorial round 2 — 命令行一行 (search + thi
 {
   const desk = readSrc('app/src/concierge/ConciergeDesk.tsx')
   assert('concierge-command-bar wraps the intent bar', /concierge-command-bar/.test(desk), '')
-  assert('filter panel state defaults collapsed', /const \[filterPanelExpanded, setFilterPanelExpanded\] = useState\(false\)/.test(desk), '')
-  // craft-polish 锚授权更新: the render guard now goes through
-  // usePresence(filterPanelExpanded, …).mounted for the exit transition —
-  // default-collapsed semantics unchanged (presence wraps the same
-  // filterPanelExpanded state, asserted separately above).
-  assert(
-    'filter row additionally gated on filterPanelExpanded via presence (好默认: default collapsed)',
-    /state\.kind === ['"]results['"]\) && filterPanelPresence\.mounted && \(/.test(desk) &&
-      /const filterPanelPresence = usePresence\(filterPanelExpanded, \d+\)/.test(desk),
-    '',
-  )
-  assert('command-line filter toggle carries aria-expanded={filterPanelExpanded}', /aria-expanded=\{filterPanelExpanded\}/.test(desk), '')
-  assert('active-filter collapsed summary only shown when !filterPanelExpanded && hasActiveFilters', /!filterPanelExpanded &&\s*\n\s*hasActiveFilters/.test(desk), '')
-  assert('command-line inventory count renders 套卷 · … 篇章', /concierge-command-count[\s\S]{0,80}套卷 · \{catalogGroupCount\} 篇章/.test(desk), '')
+  assert('browse chips include 全部 / 真题 / 模拟', /全部[\s\S]{0,400}真题[\s\S]{0,400}模拟/.test(desk), '')
+  assert('browse year chips render the four most recent years', /browseRecentYears\.map\(\(year\)/.test(desk) && /browseYears\.slice\(0, 4\)/.test(desk), '')
+  assert('browse older years collapse to a 更早 chip', /更早/.test(desk) && /selectBrowseOlder/.test(desk), '')
+  assert('browse rows do not render a hover + add control', !/showHoverAdd|concierge-row-add/.test(desk), '')
+  assert('command-line inventory count renders 套卷 · … 篇章', /套卷 · \$\{catalogGroupCount\} 篇章/.test(desk), '')
 }
 
 // ------------------------------------------------------------------ Test 22
 console.log('\nTest 22: home-editorial — 卷面目录 replaces the 9-card grid, no green-tint/side-stripe hit highlight')
 {
   const css = readSrc('app/src/App.css')
-  assert('.concierge-group-index (目录列表) rule exists', /\.concierge-group-index\s*\{/.test(css), '')
+  assert(
+    '.concierge-group-index is a style-less list (no inner card)',
+    /\.concierge-group-index\s*\{/.test(css) &&
+      !/\.concierge-group-index\s*\{[^}]*border:\s*1px solid/.test(css) &&
+      !/\.concierge-group-index\s*\{[^}]*border-radius:\s*8px/.test(css) &&
+      !/\.concierge-group-index\s*\{[^}]*box-shadow/.test(css),
+    '',
+  )
+  assert(
+    'section labels are eyebrows (12px muted, no bar)',
+    /\.concierge-group-section-head\s*\{[^}]*padding:\s*12px 14px 4px 28px/.test(css) &&
+      /\.concierge-group-section-head\s*\{[^}]*color:\s*#6B6E68/.test(css) &&
+      !/\.concierge-group-section-head\s*\{[^}]*border-bottom/.test(css),
+    '',
+  )
   assert(
     'retired concierge-group-card-li.is-hit gradient/side-stripe rule is gone',
     !/concierge-group-card-li\.is-hit/.test(css),
@@ -393,6 +394,8 @@ console.log('\nTest 22: home-editorial — 卷面目录 replaces the 9-card grid
   )
   const groupCard = readSrc('app/src/concierge/ConciergeGroupCard.tsx')
   assert('ConciergeGroupCard accepts a dimmed prop for non-hit rows (is-dim, no side-stripe)', /dimmed\?\s*:\s*boolean/.test(groupCard), '')
+  assert('retired hover-reveal .concierge-group-row-actions cluster is gone', !/\.concierge-group-row-actions/.test(css), '')
+  assert('passage row uses always-visible .concierge-group-row-trail', /\.concierge-group-row-trail\s*\{/.test(css), '')
 }
 
 // ------------------------------------------------------------------ Test 26
@@ -411,7 +414,7 @@ console.log('\nTest 26: home-blank — showListSurface invariant (硬契约: bro
   )
   assert(
     'section root carries data-surface reflecting showListSurface (blank vs list)',
-    /data-surface=\{showListSurface \? ['"]list['"] : ['"]blank['"]\}/.test(desk),
+    /data-surface=\{isBrowseScreen \? ['"]browse['"] : state\.kind === ['"]empty['"] \? ['"]home['"] : ['"]list['"]\}/.test(desk),
     '',
   )
 }
@@ -422,8 +425,8 @@ console.log('\nTest 27: home-blank — feed gate moves from bare state.kind===\'
   const desk = readSrc('app/src/concierge/ConciergeDesk.tsx')
   const showFeedMatch = desk.match(/const showFeed =\s*[\s\S]{0,220}/)?.[0] || ''
   assert(
-    "showFeed's empty-state branch requires browseSurfaceActive (not bare state.kind==='empty')",
-    /browseSurfaceActive && state\.kind === ['"]empty['"]/.test(showFeedMatch),
+    "showFeed's empty-state branch is state.kind === 'empty' (home always shows the date stream)",
+    /state\.kind === ['"]empty['"]/.test(showFeedMatch) && !/browseSurfaceActive && state\.kind === ['"]empty['"]/.test(showFeedMatch),
     showFeedMatch,
   )
   assert(
@@ -437,17 +440,10 @@ console.log('\nTest 27: home-blank — feed gate moves from bare state.kind===\'
 console.log('\nTest 28: home-blank — pure-blank stage markup: no feed/chip DOM at all when !showListSurface (list surface is a whole conditionally-mounted block, not a CSS hide)')
 {
   const desk = readSrc('app/src/concierge/ConciergeDesk.tsx')
-  assert('renders a centered concierge-wordmark button', /className="concierge-wordmark"/.test(desk), '')
-  assert('wordmark click resets intent + clears filters + exits browse', /const handleWordmarkClick = \(\) => \{[\s\S]{0,120}actions\.reset\(\)[\s\S]{0,60}clearFilters\(\)[\s\S]{0,60}onExitBrowse\?\.\(\)/.test(desk), '')
-  assert('whisper block only renders when !showListSurface', /\{!showListSurface && \(\s*<p className="concierge-whisper">/.test(desk), '')
-  assert('whisper count is real (catalogPaperCount / catalogGroupCount), clickable, entering browse', /catalogPaperCount\} 套卷 · \{catalogGroupCount\}[\s\S]{0,40}<\/button>/.test(desk) && /className="concierge-whisper-browse"[\s\S]{0,60}onClick=\{handleEnterBrowse\}/.test(desk), '')
-  assert(
-    'list surface (feed/chips/results container) is itself gated on {showListSurface && (',
-    /\{showListSurface && \(\s*<div className="concierge-list-surface">/.test(desk),
-    '',
-  )
-  assert('filter toggle button additionally requires showListSurface (筛选 chips 只活在列表面)', /showListSurface &&\s*\n\s*!dataLoading &&\s*\n\s*\(state\.kind === ['"]empty['"] \|\| state\.kind === ['"]results['"] \|\| state\.kind === ['"]loading['"]\)/.test(desk), '')
-  assert('inline catalog count span also requires showListSurface', /\{showListSurface && !dataLoading && \(\s*<span className="concierge-command-count">/.test(desk), '')
+  assert('home meta line states catalog paper/passage counts', /concierge-meta[\s\S]{0,200}catalogPaperCount/.test(desk), '')
+  assert('home feed label is 最近入库', /最近入库/.test(desk), '')
+  assert('list surface mounts for home feed or search', /\{\(showListSurface \|\| showFeed\) && \(\s*<div className="concierge-list-surface">/.test(desk), '')
+  assert('browse chips live in concierge-browse-chips', /concierge-browse-chips/.test(desk), '')
 }
 
 // ------------------------------------------------------------------ Test 29
@@ -476,7 +472,7 @@ console.log('\nTest 30: home-blank — AppTopbar hides the left brand block for 
   const app = readSrc('app/src/App.tsx')
   assert(
     "App.tsx passes hideBrand only for the list view (not detail, not admin)",
-    /hideBrand=\{!adminRouteActive && viewMode === ['"]list['"]\}/.test(app),
+    /hideBrand=\{false\}/.test(app),
     '',
   )
 }

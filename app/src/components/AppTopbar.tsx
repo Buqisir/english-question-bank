@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
-import { Archive, ArrowLeft, BookMarked, LogOut, Pencil, Tag } from 'lucide-react'
+import { Archive, ArrowLeft, Book, BookMarked, LogOut, Pencil, Tag } from 'lucide-react'
+
+function userInitials(username: string): string {
+  return username.slice(0, 2)
+}
 
 /* ui-shell-unify CR MF-1 disposition: the topbar deliberately does NOT
    carry page workspace tools. Tool-heavy pages (draft workbench) keep
@@ -84,62 +88,71 @@ export function AppTopbar(props: AppTopbarProps): ReactNode {
   return (
     <header className={variant === 'home' ? 'topbar' : 'topbar topbar-sub'}>
       <div className="topbar-brand">
-        {props.onBack && (
-          <button className="ghost-button topbar-back" type="button" onClick={props.onBack}>
-            <ArrowLeft size={16} /> 返回找题
+        {props.onBack && variant === 'sub' && (
+          <button className="topbar-back" type="button" onClick={props.onBack}>
+            <ArrowLeft size={14} /> 返回找题
           </button>
         )}
         {variant === 'home' ? (
           !props.hideBrand && (
-            <div>
-              <p className="eyebrow">English Question Bank</p>
-              <h1>英语题库工作台</h1>
+            <div className="topbar-identity">
+              <span className="topbar-brand-mark" aria-hidden="true">
+                <Book size={12} strokeWidth={1.5} />
+              </span>
+              <span className="topbar-brand-title">英语题库工作台</span>
             </div>
           )
         ) : (
-          <div className="topbar-brand-compact">
-            <button
-              className="topbar-wordmark"
-              type="button"
-              onClick={props.onBack}
-              disabled={!props.onBack}
-            >
-              英语题库工作台
-            </button>
+          <div className="topbar-identity">
+            <span className="topbar-brand-mark" aria-hidden="true">
+              <Book size={12} strokeWidth={1.5} />
+            </span>
+            <span className="topbar-brand-title">英语题库工作台</span>
             {props.pageTitleEditable ? (
               editingTitle ? (
-                <input
-                  ref={titleInputRef}
-                  className="topbar-page-title-input"
-                  value={titleDraft}
-                  onChange={(event) => setTitleDraft(event.target.value)}
-                  onBlur={commitTitleEdit}
-                  onKeyDown={(event) => {
-                    if (event.key === 'Enter') {
-                      event.preventDefault()
-                      commitTitleEdit()
-                    } else if (event.key === 'Escape') {
-                      event.preventDefault()
-                      cancelTitleEdit()
-                    }
-                  }}
-                  aria-label="草稿卷标题"
-                />
+                <>
+                  {props.pageTitle && <span className="topbar-page-sep" aria-hidden="true">·</span>}
+                  <input
+                    ref={titleInputRef}
+                    className="topbar-page-title-input"
+                    value={titleDraft}
+                    onChange={(event) => setTitleDraft(event.target.value)}
+                    onBlur={commitTitleEdit}
+                    onKeyDown={(event) => {
+                      if (event.key === 'Enter') {
+                        event.preventDefault()
+                        commitTitleEdit()
+                      } else if (event.key === 'Escape') {
+                        event.preventDefault()
+                        cancelTitleEdit()
+                      }
+                    }}
+                    aria-label="草稿卷标题"
+                  />
+                </>
               ) : (
                 props.pageTitle && (
-                  <button
-                    type="button"
-                    className="topbar-page-title topbar-page-title-editable"
-                    onClick={startTitleEdit}
-                    title="点击编辑标题"
-                  >
-                    {props.pageTitle}
-                    <Pencil aria-hidden="true" className="topbar-page-title-pencil" size={12} />
-                  </button>
+                  <>
+                    <span className="topbar-page-sep" aria-hidden="true">·</span>
+                    <button
+                      type="button"
+                      className="topbar-page-title topbar-page-title-editable"
+                      onClick={startTitleEdit}
+                      title="点击编辑标题"
+                    >
+                      {props.pageTitle}
+                      <Pencil aria-hidden="true" className="topbar-page-title-pencil" size={12} />
+                    </button>
+                  </>
                 )
               )
             ) : (
-              props.pageTitle && <span className="topbar-page-title">{props.pageTitle}</span>
+              props.pageTitle && (
+                <>
+                  <span className="topbar-page-sep" aria-hidden="true">·</span>
+                  <span className="topbar-page-title">{props.pageTitle}</span>
+                </>
+              )
             )}
           </div>
         )}
@@ -153,13 +166,13 @@ export function AppTopbar(props: AppTopbarProps): ReactNode {
         )}
         {props.onOpenVocabularyReview && (
           <button className="ghost-button" type="button" onClick={props.onOpenVocabularyReview}>
-            <BookMarked size={16} />
+            <BookMarked size={14} />
             过生词
           </button>
         )}
         {props.onOpenMySpace && (
           <button className="ghost-button" type="button" onClick={props.onOpenMySpace}>
-            <Archive size={16} />
+            <Archive size={14} />
             个人空间
           </button>
         )}
@@ -170,15 +183,18 @@ export function AppTopbar(props: AppTopbarProps): ReactNode {
             onClick={props.onToggleAdmin}
             aria-pressed={props.adminActive}
           >
-            <Tag size={16} />
+            <Tag size={14} />
             {props.adminActive ? '退出管理' : '管理'}
           </button>
         )}
         {props.user && (
           <span className="topbar-user-group">
+            <span className="topbar-avatar" aria-hidden="true">
+              {userInitials(props.user.username)}
+            </span>
             <span className="topbar-username">{props.user.username}</span>
             <button className="ghost-button" type="button" onClick={props.onLogout}>
-              <LogOut size={16} />
+              <LogOut size={14} />
               退出
             </button>
           </span>

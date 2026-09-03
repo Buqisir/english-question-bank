@@ -4,17 +4,18 @@
  * renders a dense index row, not a card — the file name is kept unchanged
  * per the cut's contract even though the visual is a list row).
  *
- * Carries the per-group reason and the teacher-facing actions (加入草稿卷,
- * 配相似, 详情), plus a lightweight PaperSurface entry (Cut 3) for groups
- * that are eligible. The action cluster reveals on row hover/focus-within;
- * clicking the row body (outside the action cluster) opens the same detail
- * view as the explicit 详情 button, for mouse convenience.
+ * Carries the per-group reason and the teacher-facing actions (加入草稿卷
+ * as a `+` icon, plus 相似篇章 / 详情 / 阅读解析 inside a `…` menu).
+ * Clicking the row (outside `+` / `…` / the menu) opens the same detail
+ * view as the 详情 item.
  *
  * Smallest add unit is still QuestionGroup. There is no per-question add UI.
  */
 
 import { type MouseEvent, type ReactNode } from 'react'
+import { BookOpen, Check, FileText, Files, Plus } from 'lucide-react'
 import { type QuestionGroupCard } from '../domain/questionBank.ts'
+import { ConciergeGroupRowMenu, type ConciergeGroupRowMenuItem } from './ConciergeGroupRowMenu.tsx'
 import { buildPaperBrowseLectureHref } from './paperSurfaceHref.ts'
 import {
   SimilarPassagesPanel,
@@ -145,18 +146,56 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
       : draftState === 'disabled'
         ? '暂不可组卷'
         : '加入草稿卷'
+  const draftAriaLabel =
+    draftState === 'in_current_draft'
+      ? '从草稿卷移出'
+      : draftState === 'disabled'
+        ? '暂不可组卷'
+        : '加入当前草稿卷'
   const draftButtonTitle =
     draftState === 'disabled'
       ? group.printUnavailableReason || '该题组暂不可加入草稿卷'
-      : draftState === 'in_current_draft'
-        ? '打开当前草稿卷并定位到该题组'
-        : '加入当前草稿卷'
+      : draftAriaLabel
 
-  const handleRowBodyClick = (event: MouseEvent<HTMLElement>) => {
+  const handleRowClick = (event: MouseEvent<HTMLElement>) => {
     if (!onOpenDetail) return
     const target = event.target as HTMLElement
-    if (target.closest('button, a, input, textarea, select, [role="button"]')) return
+    if (target.closest('button, a, input, textarea, select, [role="button"], [role="menu"]')) return
     onOpenDetail(group)
+  }
+
+  const menuItems: ConciergeGroupRowMenuItem[] = []
+  if (similarEligible) {
+    menuItems.push({
+      key: 'similar',
+      label: '相似篇章',
+      icon: <Files size={16} strokeWidth={1.5} aria-hidden="true" />,
+      dataRaEntry: 'group-card-similar',
+      dataRaGroupId: group.id,
+      onSelect: () => onToggleSimilar(group.id),
+    })
+  }
+  if (onOpenDetail) {
+    menuItems.push({
+      key: 'detail',
+      label: '详情',
+      icon: <FileText size={16} strokeWidth={1.5} aria-hidden="true" />,
+      href: `?view=detail&groupId=${encodeURIComponent(group.id)}`,
+      onClick: (event) => {
+        event.preventDefault()
+        onOpenDetail(group)
+      },
+    })
+  }
+  if (paperSurfaceAnalysisHref) {
+    menuItems.push({
+      key: 'analysis',
+      label: group.paperSurfaceLabel || '阅读解析',
+      icon: <BookOpen size={16} strokeWidth={1.5} aria-hidden="true" />,
+      href: paperSurfaceAnalysisHref,
+      dataRaEntry: 'group-card',
+      dataRaGroupId: group.id,
+    })
   }
 
   return (
@@ -164,84 +203,52 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
       className={`concierge-group-row${dimmed ? ' is-dim' : ''}`}
       data-group-id={group.id}
     >
-      {/* E6 DP-3 打回修：身体+动作条包进一行，hover 动作浮层锚到行内，
-          相似篇章面板才能全宽落在行下方（见 App.css 同名注释） */}
-      <div className="concierge-group-row-line">
-      <div className="concierge-group-row-body" onClick={handleRowBodyClick}>
-        <div className="concierge-group-row-main">
-          <strong className="concierge-group-row-title" title={passageTitle}>
-            {passageTitle}
-          </strong>
-          <span className="concierge-group-row-count">{group.questionCount} 题</span>
-          {summary && (
-            <span className="concierge-group-row-summary" title={summary}>
-              {summary}
-            </span>
+      <div className="concierge-group-row-line" onClick={handleRowClick}>
+        <div className="concierge-group-row-body">
+          <div className="concierge-group-row-main">
+            <strong className="concierge-group-row-title" title={passageTitle}>
+              {passageTitle}
+            </strong>
+            <span className="concierge-group-row-count">{group.questionCount} 题</span>
+            {summary && (
+              <span className="concierge-group-row-summary" title={summary}>
+                {summary}
+              </span>
+            )}
+          </div>
+          {reason && (
+            <p className="concierge-group-row-reason" title={reason}>
+              <span className="concierge-group-reason-label">推荐理由：</span>
+              {reason}
+            </p>
           )}
-          {topicText && <span className="concierge-group-row-topic">{topicText}</span>}
         </div>
-        {reason && (
-          <p className="concierge-group-row-reason" title={reason}>
-            <span className="concierge-group-reason-label">推荐理由：</span>
-            {reason}
-          </p>
-        )}
-      </div>
 
-      <div className="concierge-group-row-actions" aria-label="题组操作">
-        <button
-          type="button"
-          className="concierge-action concierge-action-add"
-          onClick={() => onAdd(group)}
-          disabled={draftState === 'disabled'}
-          aria-pressed={draftState === 'in_current_draft'}
-          title={draftButtonTitle}
-        >
-          {draftButtonLabel}
-        </button>
-        {similarEligible && (
+        <div className="concierge-group-row-trail">
+          {topicText && <span className="concierge-group-row-topic">{topicText}</span>}
           <button
             type="button"
-            className="concierge-action"
-            data-ra-entry="group-card-similar"
-            data-ra-group-id={group.id}
-            onClick={() => onToggleSimilar(group.id)}
-          >
-            相似篇章
-          </button>
-        )}
-        {onOpenDetail && (
-          // C3c (trust-cracks) — 详情进 URL: same family as 看解析/配相似
-          // above — a real `<a href>` so 中键/新标签 work, with an
-          // onClick preventDefault SPA fast-path so the common left-click
-          // case stays instant (no full navigation/reload). Accessible name
-          // and visible text are unchanged.
-          <a
-            className="concierge-action"
-            href={`?view=detail&groupId=${encodeURIComponent(group.id)}`}
+            className="concierge-group-row-icon concierge-action-add"
             onClick={(event) => {
-              event.preventDefault()
-              onOpenDetail(group)
+              event.stopPropagation()
+              onAdd(group)
             }}
+            disabled={draftState === 'disabled'}
+            aria-pressed={draftState === 'in_current_draft'}
+            aria-label={draftAriaLabel}
+            title={draftButtonTitle}
           >
-            详情
-          </a>
-        )}
-        {paperSurfaceAnalysisHref && (
-          // Lightweight link, NOT a button — opens the analysis route in
-          // the same tab. Reuses `.concierge-action` styling so it visually
-          // belongs to the same row of group actions but doesn't compete
-          // with the primary 加入草稿卷.
-          <a
-            className="concierge-action concierge-action-reading-analysis"
-            href={paperSurfaceAnalysisHref}
-            data-ra-entry="group-card"
-            data-ra-group-id={group.id}
-          >
-            {group.paperSurfaceLabel}
-          </a>
-        )}
-      </div>
+            <span className="visually-hidden">{draftButtonLabel}</span>
+            {draftState === 'in_current_draft' ? (
+              <span className="concierge-group-row-icon-mark">
+                <Check size={16} strokeWidth={1.5} aria-hidden="true" />
+              </span>
+            ) : (
+              <Plus size={16} strokeWidth={1.5} aria-hidden="true" />
+            )}
+          </button>
+          <ConciergeGroupRowMenu items={menuItems} />
+        </div>
       </div>
 
       {isSimilarPassagesOpen && similarPassagesRequest && (

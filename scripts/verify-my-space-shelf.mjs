@@ -98,8 +98,8 @@ assert(
 const primaryRuleMatch = css.match(/\.my-space-card-primary\s*\{[^}]*\}/)
 assert('MySpacePage.css defines .my-space-card-primary', Boolean(primaryRuleMatch))
 assert(
-  '.my-space-card-primary fills solid with the primary token',
-  Boolean(primaryRuleMatch) && /background:\s*var\(--eqb-color-primary\)/.test(primaryRuleMatch[0]),
+  '.my-space-card-primary fills solid with the action token',
+  Boolean(primaryRuleMatch) && /background:\s*var\(--action\)/.test(primaryRuleMatch[0]),
 )
 assert('MySpacePage.tsx applies the primary action class to 下载 PDF', /my-space-card-primary["'][\s\S]{0,300}下载 PDF/.test(tsx))
 

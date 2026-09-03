@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>英语题库工作台 · 北星方向</title>
+<style>
+:root {
+  --page: #F3F5F1;
+  --surface: #FFFFFF;
+  --surface-2: #E9ECE6;
+  --border: #E3E6E0;
+  --border-2: #D5D9D2;
+  --ink: #1F1F1D;
+  --muted: #6B6E68;
+  --faint: #9A9D97;
+  --identity: #2C6E56;
+  --avatar: #366B1D;
+  --action: #1F1F1D;
+  --action-hover: #3A3A37;
+  --focus: #1F1F1D;
+  --rest: 0 1px 2px rgba(30, 30, 28, 0.06);
+  --float: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --ease: 120ms ease;
+}
+* { box-sizing: border-box; }
+html { -webkit-font-smoothing: antialiased; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Inter, "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--page);
+}
+button, input { font: inherit; color: inherit; appearance: none; -webkit-appearance: none; }
+a { color: inherit; text-decoration: none; }
+
+.vh {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0);
+  white-space: nowrap; border: 0;
+}
+
+/* ── 脚手架：不属于任何一版 ── */
+.scaffold {
+  position: sticky; top: 0; z-index: 200;
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 16px;
+  background: #1A1A18;
+  color: #E9ECE6;
+  font-size: 12px;
+}
+.scaffold b { font-weight: 600; margin-right: 8px; letter-spacing: 0.04em; }
+.scaffold button {
+  background: transparent;
+  color: #9A9D97;
+  border: 0;
+  border-radius: 8px;
+  padding: 4px 12px;
+  cursor: pointer;
+}
+.scaffold button:hover { color: #F3F5F1; background: rgba(255,255,255,0.08); }
+.scaffold button[aria-pressed="true"] { background: #F3F5F1; color: #1A1A18; }
+.scaffold .hint { margin-left: auto; color: #6B6E68; }
+
+.hypothesis {
+  margin: 0;
+  padding: 8px 16px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+  background: #E9ECE6;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ── 产品壳 ── */
+.app { max-width: 920px; margin: 0 auto; padding: 24px 32px 96px; }
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 48px;
+  margin-bottom: 24px;
+  background: transparent;
+}
+body[data-screen="home"] .topbar { margin-bottom: 40px; }
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.brand-mark {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--identity);
+  color: #fff;
+  display: grid; place-items: center;
+  flex: 0 0 14px;
+  overflow: hidden;
+}
+.brand-mark svg { width: 12px; height: 12px; }
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.nav a, .nav .nav-user, .nav .nav-exit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 28px;
+  padding: 0 8px;
+  border-radius: 8px;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-size: 13px;
+}
+.nav a:hover, .nav .nav-user:hover, .nav .nav-exit:hover { background: var(--surface-2); color: var(--ink); }
+.nav svg { width: 14px; height: 14px; flex: 0 0 14px; }
+.avatar {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--avatar);
+  color: #fff;
+  display: grid; place-items: center;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.search-block { margin-bottom: 32px; }
+body[data-screen="home"] .search-block { max-width: 720px; margin-left: auto; margin-right: auto; }
+body[data-screen="browse"] .search-block { margin-bottom: 16px; }
+.toolbar { display: flex; flex-direction: column; gap: 16px; }
+body[data-screen="browse"] .toolbar {
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+}
+.search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 44px;
+  background: var(--surface);
+  border: 1px solid var(--border-2);
+  border-radius: 16px;
+  box-shadow: var(--rest);
+}
+body[data-screen="browse"] .search {
+  flex: 1 1 280px;
+  min-width: 0;
+  height: 36px;
+  border-radius: 12px;
+  box-shadow: none;
+}
+.search input {
+  flex: 1;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  padding: 0 48px 0 14px;
+  font-size: 14px;
+  outline: none;
+}
+body[data-screen="browse"] .search input {
+  padding: 0 40px 0 12px;
+  font-size: 13px;
+}
+.search input::placeholder { color: var(--muted); }
+.search-go {
+  position: absolute;
+  right: 10px;
+  width: 28px; height: 28px;
+  border: 0;
+  border-radius: 50%;
+  background-color: #1F1F1D;
+  color: #fff;
+  display: grid; place-items: center;
+  cursor: pointer;
+}
+.search-go:hover { background-color: #3A3A37; }
+body[data-screen="browse"] .search-go { right: 4px; }
+.search-go svg { width: 14px; height: 14px; }
+
+.chips { display: none; align-items: center; flex-wrap: wrap; gap: 8px; }
+body[data-screen="browse"] .chips { display: flex; }
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid #E3E6E0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 13px;
+  cursor: pointer;
+}
+.chip:hover { background: #E9ECE6; color: var(--ink); }
+.chip[aria-pressed="true"] {
+  background-color: #1F1F1D;
+  color: #fff;
+  border-color: transparent;
+}
+.chip[aria-pressed="true"]:hover { background-color: #3A3A37; }
+
+.meta {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+}
+body[data-screen="browse"] .meta { display: none; }
+
+.feed-label {
+  margin: 0 0 12px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+body[data-screen="browse"] .feed-label,
+body[data-screen="browse"] .date-feed { display: none; }
+body[data-screen="home"] .year-groups { display: none; }
+
+.year-group, .date-group { margin-top: 24px; }
+.year-group:first-child, .date-group:first-child { margin-top: 0; }
+.year-head, .date-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0 0 8px;
+}
+.year-num {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.5;
+}
+.year-count, .date-head { font-size: 12px; color: var(--muted); }
+
+.paper-card {
+  background: var(--surface);
+  border: 0;
+  border-radius: 12px;
+  box-shadow: 0 0 0 1px rgba(30, 30, 28, 0.05), 0 1px 2px rgba(30, 30, 28, 0.06);
+  overflow: hidden;
+}
+.paper-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 12px;
+  min-height: 48px;
+  padding: 10px 14px;
+  cursor: pointer;
+  position: relative;
+  background-color: var(--surface);
+}
+.paper-row + .paper-row { border-top: 1px solid var(--border); }
+.paper-row:hover { background-color: var(--surface-2); }
+.paper-row:hover .chevron { color: var(--ink); }
+
+.chevron { color: var(--faint); display: grid; place-items: center; }
+.chevron svg { width: 14px; height: 14px; }
+
+.row-main { min-width: 0; }
+.row-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.row-year {
+  flex: 0 0 auto;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--muted);
+}
+.row-name {
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.kind-real {
+  flex: 0 0 auto;
+  font-size: 12px;
+  color: #6B6E68;
+  background: #E9ECE6;
+  border: 0;
+  border-radius: 4px;
+  padding: 1px 6px;
+  line-height: 1.5;
+}
+.row-topics {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.row-aside {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-self: end;
+}
+.row-count { font-size: 13px; color: var(--muted); }
+.row-add {
+  width: 28px; height: 28px;
+  border: 0;
+  border-radius: 50%;
+  background-color: #1F1F1D;
+  color: #fff;
+  display: none;
+  place-items: center;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+}
+body[data-screen="browse"] .row-add { display: grid; }
+body[data-screen="browse"] .paper-row:hover .row-add {
+  opacity: 1;
+  visibility: visible;
+}
+.row-add:hover { background-color: #3A3A37; }
+.row-add svg { width: 14px; height: 14px; }
+
+.see-all { display: none; margin: 16px 0 0; }
+body[data-screen="home"] .see-all { display: block; }
+.see-all button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 13px;
+  cursor: pointer;
+}
+.see-all button:hover { color: var(--ink); }
+.see-all svg { width: 14px; height: 14px; }
+
+.draft {
+  position: fixed;
+  right: 24px; bottom: 24px;
+  z-index: 80;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 28px;
+  padding: 0 12px;
+  background-color: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--border-2);
+  border-radius: 999px;
+  box-shadow: var(--float);
+  font-size: 13px;
+  cursor: pointer;
+}
+.draft:hover { background-color: var(--surface-2); }
+.draft svg { width: 14px; height: 14px; }
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.paper-row, .nav a, .nav-exit, .search-go, .draft, .scaffold button, .chip, .row-add, .see-all button {
+  transition: background var(--ease), color var(--ease), border-color var(--ease), opacity var(--ease);
+}
+.chevron { transition: color var(--ease); }
+.row-add { transition: opacity var(--ease), visibility var(--ease), background-color var(--ease); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+</style>
+</head>
+<body data-screen="home">
+<!--
+  THESIS: 工作台先是一张有分量的书桌，不是搜索框漂在空白里。
+  OWN-WORLD: 软绿白纸底、白卡片、软黑动作、墨绿身份、有差事的小色点。
+  STORY: 老师一打开就能搜，也能直接翻最近入库的卷。
+  FIRST VIEWPORT: 顶栏 + 大搜索 + 真实套卷/篇章数 + 近年份大数字带卷表。
+  FORM: Owner 钉死的 Amp 北星，Operate；不走方向骰子。
+-->
+<nav class="scaffold" aria-label="原型切换">
+  <b>北星原型</b>
+  <button type="button" data-screen="home" aria-pressed="true">首页 H</button>
+  <button type="button" data-screen="browse" aria-pressed="false">浏览 B</button>
+  <span class="hint">哈希 #home · #browse</span>
+</nav>
+<p class="hypothesis">安静、精密、有分量。动作用墨，身份用墨绿，生气用有差事的小色点。</p>
+
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
+        </svg>
+      </span>
+      英语题库工作台
+    </div>
+    <nav class="nav" aria-label="工作台">
+      <a href="#vocab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+        过生词
+      </a>
+      <a href="#space">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></svg>
+        个人空间
+      </a>
+      <a href="#manage">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.7 2.8a2 2 0 0 0-1.4-.6H4a2 2 0 0 0-2 2v7.3a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4z"/><circle cx="7.5" cy="7.5" r="0.75" fill="currentColor" stroke="none"/></svg>
+        管理
+      </a>
+      <span class="nav-user">
+        <span class="avatar" aria-hidden="true">qa</span>
+        <span class="vh">qa-ui</span>
+      </span>
+      <button type="button" class="nav-exit">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/></svg>
+        退出
+      </button>
+    </nav>
+  </header>
+
+  <div class="search-block">
+    <div class="toolbar">
+      <form class="search" role="search" action="#">
+        <label class="vh" for="q">搜索题目</label>
+        <input id="q" type="search" placeholder="比如：找一道讲生态恢复的阅读 C，主旨概括" autocomplete="off" />
+        <button class="search-go" type="submit" aria-label="搜索">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+      </form>
+      <div class="chips" role="group" aria-label="筛选">
+        <button type="button" class="chip" aria-pressed="true">全部</button>
+        <button type="button" class="chip" aria-pressed="false">真题</button>
+        <button type="button" class="chip" aria-pressed="false">模拟</button>
+        <button type="button" class="chip" aria-pressed="false">2026</button>
+        <button type="button" class="chip" aria-pressed="false">2025</button>
+        <button type="button" class="chip" aria-pressed="false">2024</button>
+      </div>
+    </div>
+    <p class="meta" id="meta"></p>
+  </div>
+
+  <h1 class="feed-label">最近入库</h1>
+  <div class="date-feed" id="date-feed"></div>
+  <div class="year-groups" id="years"></div>
+  <p class="see-all">
+    <button type="button" id="see-all">
+      <span id="see-all-label">查看全部套卷</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+    </button>
+  </p>
+</div>
+
+<button type="button" class="draft">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>
+  草稿卷 · 0 题组
+</button>
+
+<script type="application/json" id="bank-data">{
+  "totals": {
+    "paperCount": 35,
+    "passageCount": 291
+  },
+  "papers": [
+    {
+      "id": "2026-real_exam-2026年1月浙江卷",
+      "title": "1月浙江卷",
+      "year": 2026,
+      "kind": "真题",
+      "importedAt": "2026-06-09 05:22:18",
+      "passageCount": 9,
+      "topicSummary": "绘画领域的代表性作品和人物 · 良好的人际关系 · 社会热点问题",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空",
+        "应用文",
+        "读后续写"
+      ]
+    },
+    {
+      "id": "2026-mock_exam-2026年3月广东高三一模",
+      "title": "3月广东高三一模",
+      "year": 2026,
+      "kind": "模拟",
+      "importedAt": "2026-08-13 06:51:51",
+      "passageCount": 9,
+      "topicSummary": "",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空",
+        "应用文",
+        "读后续写"
+      ]
+    },
+    {
+      "id": "2026-mock_exam-2026年3月深圳高三一模",
+      "title": "3月深圳高三一模",
+      "year": 2026,
+      "kind": "模拟",
+      "importedAt": "2026-08-13 11:02:09",
+      "passageCount": 9,
+      "topicSummary": "",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空",
+        "应用文",
+        "读后续写"
+      ]
+    },
+    {
+      "id": "2026-real_exam-2026年新课标Ⅰ卷",
+      "title": "新课标Ⅰ卷",
+      "year": 2026,
+      "kind": "真题",
+      "importedAt": "2026-07-08 07:10:21",
+      "passageCount": 9,
+      "topicSummary": "大型体育赛事 · 乐于学习 · 生态环境",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空",
+        "应用文",
+        "读后续写"
+      ]
+    },
+    {
+      "id": "2026-mock_exam-26.3重庆市巴蜀中学高三月考（七）英语试卷",
+      "title": "3月重庆市巴蜀中学高三月考（七）英语试卷",
+      "year": 2026,
+      "kind": "模拟",
+      "importedAt": "2026-05-30 08:10:23",
+      "passageCount": 9,
+      "topicSummary": "科技发展 · 社会交往 · 绘画领域的代表性作品和人物",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空",
+        "应用文",
+        "读后续写"
+      ]
+    },
+    {
+      "id": "2025-real_exam-2025年1月浙江卷",
+      "title": "1月浙江卷",
+      "year": 2025,
+      "kind": "真题",
+      "importedAt": "2026-06-09 05:03:26",
+      "passageCount": 9,
+      "topicSummary": "学校生活 · 健康的生活方式 · 人与环境",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空",
+        "应用文",
+        "读后续写"
+      ]
+    },
+    {
+      "id": "2025-real_exam-2025年新课标Ⅰ卷",
+      "title": "新课标Ⅰ卷",
+      "year": 2025,
+      "kind": "真题",
+      "importedAt": "2026-06-05 06:36:54",
+      "passageCount": 9,
+      "topicSummary": "科技发展 · 乐于学习 · 社会热点问题",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空",
+        "应用文",
+        "读后续写"
+      ]
+    },
+    {
+      "id": "2025-real_exam-2025年新课标Ⅱ卷",
+      "title": "新课标Ⅱ卷",
+      "year": 2025,
+      "kind": "真题",
+      "importedAt": "2026-06-05 07:27:42",
+      "passageCount": 9,
+      "topicSummary": "文化习俗 · 乐于学习 · 健康的生活方式",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空",
+        "应用文",
+        "读后续写"
+      ]
+    },
+    {
+      "id": "2024-real_exam-2024年1月浙江卷",
+      "title": "1月浙江卷",
+      "year": 2024,
+      "kind": "真题",
+      "importedAt": "2026-06-09 05:03:25",
+      "passageCount": 9,
+      "topicSummary": "戏剧 · 个人生活 · 社会热点问题",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空",
+        "应用文",
+        "读后续写"
+      ]
+    },
+    {
+      "id": "2024-real_exam-2024年全国甲卷",
+      "title": "全国甲卷",
+      "year": 2024,
+      "kind": "真题",
+      "importedAt": "2026-06-19 09:01:45",
+      "passageCount": 7,
+      "topicSummary": "绘画领域的代表性作品和人物 · 人与动植物 · 社会热点问题",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空"
+      ]
+    },
+    {
+      "id": "2024-real_exam-2024年新课标Ⅰ卷",
+      "title": "新课标Ⅰ卷",
+      "year": 2024,
+      "kind": "真题",
+      "importedAt": "2026-06-05 05:50:46",
+      "passageCount": 9,
+      "topicSummary": "志愿服务 · 对社会有突出贡献的人物 · 科技发展",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空",
+        "应用文",
+        "读后续写"
+      ]
+    },
+    {
+      "id": "2024-real_exam-2024年新课标Ⅱ卷",
+      "title": "新课标Ⅱ卷",
+      "year": 2024,
+      "kind": "真题",
+      "importedAt": "2026-06-05 07:27:42",
+      "passageCount": 9,
+      "topicSummary": "日常体育活动 · 社会进步 · 科技发展",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空",
+        "应用文",
+        "读后续写"
+      ]
+    },
+    {
+      "id": "2023-real_exam-2023年1月浙江卷",
+      "title": "1月浙江卷",
+      "year": 2023,
+      "kind": "真题",
+      "importedAt": "2026-06-09 04:37:08",
+      "passageCount": 9,
+      "topicSummary": "个人生活 · 科技发展 · 劳动实践",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空",
+        "应用文",
+        "读后续写"
+      ]
+    },
+    {
+      "id": "2023-real_exam-2023年全国甲卷",
+      "title": "全国甲卷",
+      "year": 2023,
+      "kind": "真题",
+      "importedAt": "2026-06-19 09:01:44",
+      "passageCount": 7,
+      "topicSummary": "文化习俗 · 个人生活 · 文学名著",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空"
+      ]
+    },
+    {
+      "id": "2023-real_exam-2023年全国乙卷",
+      "title": "全国乙卷",
+      "year": 2023,
+      "kind": "真题",
+      "importedAt": "2026-06-19 09:01:45",
+      "passageCount": 7,
+      "topicSummary": "对社会有突出贡献的人物 · 个人生活 · 影视领域的概况及其发展",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空"
+      ]
+    },
+    {
+      "id": "2023-real_exam-2023年新课标Ⅰ卷",
+      "title": "新课标Ⅰ卷",
+      "year": 2023,
+      "kind": "真题",
+      "importedAt": "2026-06-05 07:27:41",
+      "passageCount": 9,
+      "topicSummary": "个人生活 · 对社会有突出贡献的人物 · 健康的生活方式",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空",
+        "应用文",
+        "读后续写"
+      ]
+    },
+    {
+      "id": "2023-real_exam-2023年新课标Ⅱ卷",
+      "title": "新课标Ⅱ卷",
+      "year": 2023,
+      "kind": "真题",
+      "importedAt": "2026-06-05 07:27:41",
+      "passageCount": 9,
+      "topicSummary": "人与动植物 · 社会公益机构 · 人类文明发展",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空",
+        "应用文",
+        "读后续写"
+      ]
+    },
+    {
+      "id": "2022-real_exam-2022年1月浙江卷",
+      "title": "1月浙江卷",
+      "year": 2022,
+      "kind": "真题",
+      "importedAt": "2026-06-18 14:47:45",
+      "passageCount": 8,
+      "topicSummary": "个人生活 · 重大历史事件 · 科技发展",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空",
+        "应用文",
+        "读后续写"
+      ]
+    },
+    {
+      "id": "2022-real_exam-2022年6月浙江卷",
+      "title": "6月浙江卷",
+      "year": 2022,
+      "kind": "真题",
+      "importedAt": "2026-06-18 14:47:45",
+      "passageCount": 8,
+      "topicSummary": "跨文化沟通 · 人与环境 · 正确的人生态度",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空",
+        "应用文",
+        "读后续写"
+      ]
+    },
+    {
+      "id": "2022-real_exam-2022年全国甲卷",
+      "title": "全国甲卷",
+      "year": 2022,
+      "kind": "真题",
+      "importedAt": "2026-06-19 08:35:50",
+      "passageCount": 7,
+      "topicSummary": "戏剧 · 科学精神 · 正确的人生态度",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空"
+      ]
+    },
+    {
+      "id": "2022-real_exam-2022年全国乙卷",
+      "title": "全国乙卷",
+      "year": 2022,
+      "kind": "真题",
+      "importedAt": "2026-06-19 09:01:44",
+      "passageCount": 7,
+      "topicSummary": "绘画领域的代表性作品和人物 · 对社会有突出贡献的人物 · 信息技术创新",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空"
+      ]
+    },
+    {
+      "id": "2022-real_exam-2022年新课标Ⅰ卷",
+      "title": "新课标Ⅰ卷",
+      "year": 2022,
+      "kind": "真题",
+      "importedAt": "2026-06-05 07:27:41",
+      "passageCount": 9,
+      "topicSummary": "学校生活 · 社会热点问题 · 公益事业",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空",
+        "应用文",
+        "读后续写"
+      ]
+    },
+    {
+      "id": "2022-real_exam-2022年新课标Ⅱ卷",
+      "title": "新课标Ⅱ卷",
+      "year": 2022,
+      "kind": "真题",
+      "importedAt": "2026-06-05 07:27:41",
+      "passageCount": 9,
+      "topicSummary": "公益事业 · 社会进步 · 法治意识",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空",
+        "应用文",
+        "读后续写"
+      ]
+    },
+    {
+      "id": "2021-real_exam-2021年1月浙江卷",
+      "title": "1月浙江卷",
+      "year": 2021,
+      "kind": "真题",
+      "importedAt": "2026-06-18 14:47:44",
+      "passageCount": 8,
+      "topicSummary": "个人生活 · 健康的生活方式 · 科学精神",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空",
+        "应用文",
+        "读后续写"
+      ]
+    },
+    {
+      "id": "2021-real_exam-2021年6月浙江卷",
+      "title": "6月浙江卷",
+      "year": 2021,
+      "kind": "真题",
+      "importedAt": "2026-06-18 14:47:45",
+      "passageCount": 8,
+      "topicSummary": "影视领域的概况及其发展 · 健康的生活方式 · 科技发展",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空",
+        "应用文",
+        "读后续写"
+      ]
+    },
+    {
+      "id": "2021-real_exam-2021年全国甲卷",
+      "title": "全国甲卷",
+      "year": 2021,
+      "kind": "真题",
+      "importedAt": "2026-06-19 08:55:53",
+      "passageCount": 7,
+      "topicSummary": "绘画领域的代表性作品和人物 · 人与动植物 · 日常体育活动",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空"
+      ]
+    },
+    {
+      "id": "2021-real_exam-2021年全国乙卷",
+      "title": "全国乙卷",
+      "year": 2021,
+      "kind": "真题",
+      "importedAt": "2026-06-19 08:55:54",
+      "passageCount": 7,
+      "topicSummary": "大型体育赛事 · 科技发展 · 绘画领域的代表性作品和人物",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空"
+      ]
+    },
+    {
+      "id": "2021-real_exam-2021年新课标Ⅰ卷",
+      "title": "新课标Ⅰ卷",
+      "year": 2021,
+      "kind": "真题",
+      "importedAt": "2026-06-05 07:27:40",
+      "passageCount": 9,
+      "topicSummary": "个人生活 · 音乐领域的概况及其发展 · 人与环境",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空",
+        "应用文",
+        "读后续写"
+      ]
+    },
+    {
+      "id": "2021-real_exam-2021年新课标Ⅱ卷",
+      "title": "新课标Ⅱ卷",
+      "year": 2021,
+      "kind": "真题",
+      "importedAt": "2026-06-05 07:27:40",
+      "passageCount": 9,
+      "topicSummary": "日常体育活动 · 人与动植物 · 对社会有突出贡献的人物",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空",
+        "应用文",
+        "读后续写"
+      ]
+    },
+    {
+      "id": "2020-real_exam-2020年1月浙江卷",
+      "title": "1月浙江卷",
+      "year": 2020,
+      "kind": "真题",
+      "importedAt": "2026-06-18 14:47:44",
+      "passageCount": 8,
+      "topicSummary": "乐于学习 · 科技发展 · 正确的人生态度",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空",
+        "应用文",
+        "读后续写"
+      ]
+    },
+    {
+      "id": "2020-real_exam-2020年7月浙江卷",
+      "title": "7月浙江卷",
+      "year": 2020,
+      "kind": "真题",
+      "importedAt": "2026-06-18 14:47:44",
+      "passageCount": 8,
+      "topicSummary": "戏剧 · 社会进步 · 科技发展",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空",
+        "应用文",
+        "读后续写"
+      ]
+    },
+    {
+      "id": "2020-real_exam-2020年全国丙卷",
+      "title": "全国丙卷",
+      "year": 2020,
+      "kind": "真题",
+      "importedAt": "2026-06-19 08:55:53",
+      "passageCount": 7,
+      "topicSummary": "文化习俗 · 影视领域的概况及其发展 · 社会热点问题",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空"
+      ]
+    },
+    {
+      "id": "2020-real_exam-2020年全国甲卷",
+      "title": "全国甲卷",
+      "year": 2020,
+      "kind": "真题",
+      "importedAt": "2026-06-19 08:55:52",
+      "passageCount": 7,
+      "topicSummary": "小说 · 公益事业 · 人与环境",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空"
+      ]
+    },
+    {
+      "id": "2020-real_exam-2020年新课标Ⅰ卷",
+      "title": "新课标Ⅰ卷",
+      "year": 2020,
+      "kind": "真题",
+      "importedAt": "2026-06-05 07:27:40",
+      "passageCount": 9,
+      "topicSummary": "诗歌 · 优秀品行 · 人与环境",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空",
+        "应用文",
+        "读后续写"
+      ]
+    },
+    {
+      "id": "2020-real_exam-2020年新课标Ⅱ卷",
+      "title": "新课标Ⅱ卷",
+      "year": 2020,
+      "kind": "真题",
+      "importedAt": "2026-06-05 07:27:40",
+      "passageCount": 9,
+      "topicSummary": "个人生活 · 优秀品行 · 科学精神",
+      "passageTypes": [
+        "阅读",
+        "完形",
+        "七选五",
+        "语法填空",
+        "应用文",
+        "读后续写"
+      ]
+    }
+  ]
+}</script>
+<script>
+const ICO_CHEVRON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>'
+const ICO_PLUS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>'
+
+function esc(value) {
+  return String(value ?? '').replace(/[&<>"']/g, (ch) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[ch]))
+}
+
+const bank = JSON.parse(document.getElementById('bank-data').textContent)
+const WEEK = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
+
+function formatDateLabel(iso) {
+  const day = String(iso || '').slice(0, 10)
+  if (!day) return ''
+  const today = new Date()
+  const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`
+  if (day === todayStr) return '今天'
+  const yest = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 1)
+  const yestStr = `${yest.getFullYear()}-${String(yest.getMonth() + 1).padStart(2, '0')}-${String(yest.getDate()).padStart(2, '0')}`
+  if (day === yestStr) return '昨天'
+  const d = new Date(`${day}T12:00:00`)
+  return `${d.getMonth() + 1}月${d.getDate()}日 · ${WEEK[d.getDay()]}`
+}
+
+function renderRow(paper, opts = {}) {
+  const kind = paper.kind === '真题' ? '<span class="kind-real">真题</span>' : ''
+  const yearPrefix = opts.yearPrefix
+    ? `<span class="row-year">${esc(String(paper.year))}</span>`
+    : ''
+  const topics = paper.topicSummary ? `<p class="row-topics">${esc(paper.topicSummary)}</p>` : ''
+  return `<article class="paper-row" data-id="${esc(paper.id)}">
+      <div class="row-main">
+        <div class="row-title">
+          ${yearPrefix}<span class="row-name">${esc(paper.title)}</span>
+          ${kind}
+        </div>
+        ${topics}
+      </div>
+      <div class="row-aside">
+        <span class="row-count">${paper.passageCount} 篇章</span>
+        <button type="button" class="row-add" title="加入草稿卷">${ICO_PLUS}<span class="vh">加入草稿卷</span></button>
+        <span class="chevron">${ICO_CHEVRON}</span>
+      </div>
+    </article>`
+}
+
+const yearsRoot = document.getElementById('years')
+const groups = []
+const byYear = new Map()
+for (const paper of bank.papers) {
+  let group = byYear.get(paper.year)
+  if (!group) {
+    group = { year: paper.year, papers: [] }
+    byYear.set(paper.year, group)
+    groups.push(group)
+  }
+  group.papers.push(paper)
+}
+yearsRoot.innerHTML = groups.map((group) => `
+  <section class="year-group" data-year="${group.year}">
+    <div class="year-head">
+      <span class="year-num">${group.year}</span>
+      <span class="year-count">${group.papers.length} 套</span>
+    </div>
+    <div class="paper-card">${group.papers.map(renderRow).join('')}</div>
+  </section>`).join('')
+
+const recent = [...bank.papers].sort((a, b) => String(b.importedAt || '').localeCompare(String(a.importedAt || ''))).slice(0, 8)
+const dateGroups = []
+const byDate = new Map()
+for (const paper of recent) {
+  const key = String(paper.importedAt || '').slice(0, 10)
+  let group = byDate.get(key)
+  if (!group) {
+    group = { key, label: formatDateLabel(paper.importedAt), papers: [] }
+    byDate.set(key, group)
+    dateGroups.push(group)
+  }
+  group.papers.push(paper)
+}
+document.getElementById('date-feed').innerHTML = dateGroups.map((group) => `
+  <section class="date-group">
+    <div class="date-head">${esc(group.label)}</div>
+    <div class="paper-card">${group.papers.map((paper) => renderRow(paper, { yearPrefix: true })).join('')}</div>
+  </section>`).join('')
+
+document.getElementById('meta').textContent =
+  `${bank.totals.paperCount} 套卷 · ${bank.totals.passageCount} 篇章 · 一句话描述你要的题`
+document.getElementById('see-all-label').textContent = `查看全部 ${bank.totals.paperCount} 套卷`
+
+const body = document.body
+
+function apply(screen) {
+  body.dataset.screen = screen
+  document.querySelectorAll('.scaffold [data-screen]').forEach((btn) => {
+    btn.setAttribute('aria-pressed', String(btn.dataset.screen === screen))
+  })
+  const hash = `#${screen}`
+  if (location.hash !== hash) history.replaceState(null, '', hash)
+}
+
+function readHash() {
+  const raw = location.hash.replace(/^#/, '')
+  return raw.startsWith('browse') ? 'browse' : 'home'
+}
+
+document.querySelectorAll('.scaffold [data-screen]').forEach((btn) => {
+  btn.addEventListener('click', () => apply(btn.dataset.screen))
+})
+document.addEventListener('keydown', (event) => {
+  if (event.target.closest('input, textarea')) return
+  if (event.key === 'H' || event.key === 'h') apply('home')
+  if (event.key === 'B' || event.key === 'b') apply('browse')
+})
+window.addEventListener('hashchange', () => apply(readHash()))
+document.querySelector('.search').addEventListener('submit', (event) => event.preventDefault())
+document.getElementById('see-all').addEventListener('click', () => apply('browse'))
+document.querySelectorAll('.row-add').forEach((btn) => {
+  btn.addEventListener('click', (event) => event.stopPropagation())
+})
+
+apply(readHash())
+</script>
+</body>
+</html>

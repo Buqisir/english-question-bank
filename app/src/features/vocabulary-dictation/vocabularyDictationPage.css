@@ -113,7 +113,7 @@
 }
 
 .vocabulary-dictation-question > span.is-playing i {
-  background: var(--accent);
+  background: var(--action);
   animation: vocabulary-dictation-meter calc(var(--motion-slow) * 4) ease-in-out infinite alternate;
 }
 
@@ -161,7 +161,7 @@
   width: 100%;
   height: 100%;
   border-radius: var(--radius-pill);
-  background: var(--accent);
+  background: var(--action);
   transform-origin: left center;
   transition: transform var(--motion-base) var(--ease-out);
 }
@@ -195,8 +195,8 @@
 .vocabulary-dictation-transport .primary-control {
   width: 64px;
   height: 64px;
-  border-color: var(--accent);
-  background: var(--accent);
+  border-color: var(--line-strong);
+  background: var(--action);
   color: #fff;
 }
 
@@ -264,8 +264,8 @@
 
 .vocabulary-dictation-settings fieldset button.is-selected,
 .vocabulary-dictation-settings fieldset label.is-selected {
-  border-color: var(--accent);
-  background: #eaf1ed;
+  border-color: var(--line-strong);
+  background: var(--surface-strong);
   color: #1e4a3a;
 }
 
@@ -302,7 +302,7 @@
 
 .vocabulary-dictation-volume input {
   width: 100%;
-  accent-color: var(--accent);
+  accent-color: var(--ink);
 }
 
 .vocabulary-dictation-complete,
@@ -315,7 +315,7 @@
 }
 
 .vocabulary-dictation-complete > svg {
-  color: var(--accent);
+  color: var(--ink);
 }
 
 .vocabulary-dictation-complete h2,
@@ -364,8 +364,8 @@
 
 .vocabulary-dictation-page button.primary,
 .vocabulary-dictation-resume button.primary {
-  border-color: var(--accent);
-  background: var(--accent);
+  border-color: var(--line-strong);
+  background: var(--action);
   color: #fff;
 }
 
@@ -434,7 +434,7 @@
 
 .vocabulary-dictation-resume > svg,
 .vocabulary-dictation-message svg {
-  color: var(--accent);
+  color: var(--ink);
 }
 
 .vocabulary-dictation-resume h1,
@@ -480,8 +480,8 @@
 
   .vocabulary-dictation-page button.primary:hover,
   .vocabulary-dictation-transport .primary-control:hover {
-    border-color: var(--eqb-color-primary-text);
-    background: var(--eqb-color-primary-text);
+    border-color: var(--action-hover);
+    background: var(--action-hover);
   }
 }
 
@@ -492,7 +492,7 @@
 .vocabulary-dictation-page button:focus-visible,
 .vocabulary-dictation-page a:focus-visible,
 .vocabulary-dictation-page input:focus-visible {
-  outline: 3px solid var(--accent-glow);
+  box-shadow: 0 0 0 3px rgba(31, 31, 29, 0.12); outline: none;
   outline-offset: 2px;
 }
 

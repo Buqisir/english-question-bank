@@ -48,6 +48,8 @@ export type ConciergeFilterOptions = {
 export type ConciergeFilters = {
   groupType?: string
   year?: number
+  /** Browse 「更早」: keep groups whose year is strictly older than this cutoff. */
+  yearBefore?: number
   region?: string
   sourceType?: string
   /**
@@ -217,10 +219,11 @@ export function applyConciergeFilters(
   groups: QuestionGroupCard[],
   filters: ConciergeFilters,
 ): QuestionGroupCard[] {
-  const { groupType, year, region, sourceType, topicGroup } = filters
+  const { groupType, year, yearBefore, region, sourceType, topicGroup } = filters
   if (
     groupType === undefined &&
     year === undefined &&
+    yearBefore === undefined &&
     region === undefined &&
     sourceType === undefined &&
     topicGroup === undefined
@@ -230,6 +233,7 @@ export function applyConciergeFilters(
   return groups.filter((group) => {
     if (groupType !== undefined && group.groupType !== groupType) return false
     if (year !== undefined && group.year !== year) return false
+    if (yearBefore !== undefined && !(typeof group.year === 'number' && group.year < yearBefore)) return false
     if (region !== undefined && String(group.region ?? '').trim() !== region) return false
     if (sourceType !== undefined && group.sourceType !== sourceType) return false
     if (topicGroup !== undefined && !group.topicLabels?.some((l) => l.themeGroup === topicGroup)) {

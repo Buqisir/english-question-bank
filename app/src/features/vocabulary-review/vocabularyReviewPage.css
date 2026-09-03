@@ -156,8 +156,8 @@
 .vocabulary-student-add-button:focus-visible,
 .vocabulary-student-create input:focus-visible,
 .vocabulary-student-create button:focus-visible {
-  border-color: var(--accent);
-  outline: 2px solid var(--accent);
+  border-color: var(--line-strong);
+  outline: 2px solid var(--action);
   outline-offset: 2px;
 }
 
@@ -179,7 +179,7 @@
   border: 0;
   border-radius: 999px;
   background: var(--surface-strong);
-  color: var(--accent);
+  color: var(--ink);
 }
 
 .vocabulary-review-page progress::-webkit-progress-bar {
@@ -189,12 +189,12 @@
 
 .vocabulary-review-page progress::-webkit-progress-value {
   border-radius: 999px;
-  background: var(--accent);
+  background: var(--action);
 }
 
 .vocabulary-review-page progress::-moz-progress-bar {
   border-radius: 999px;
-  background: var(--accent);
+  background: var(--action);
 }
 
 .vocabulary-progress-toggle {
@@ -211,7 +211,7 @@
 
 .vocabulary-progress-toggle:focus-visible,
 .vocabulary-progress-explorer button:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--action);
   outline-offset: 2px;
 }
 
@@ -291,8 +291,8 @@
 }
 
 .vocabulary-progress-weeks button.is-selected {
-  border-color: var(--accent);
-  background: #eaf1ed;
+  border-color: var(--line-strong);
+  background: var(--surface-strong);
   color: #1e4a3a;
 }
 
@@ -386,14 +386,14 @@
 }
 
 .vocabulary-progress-word.is-selected {
-  border-color: var(--accent);
-  background: #eaf1ed;
+  border-color: var(--line-strong);
+  background: var(--surface-strong);
   color: #1e4a3a;
 }
 
 .vocabulary-progress-word.is-selected .vocabulary-progress-word-order,
 .vocabulary-progress-word.is-current .vocabulary-progress-word-order {
-  border-color: var(--accent);
+  border-color: var(--line-strong);
   color: #1e4a3a;
 }
 
@@ -498,7 +498,7 @@
 }
 
 .vocabulary-group-list li.is-current {
-  background: #eaf1ed;
+  background: var(--surface-strong);
   color: #1e4a3a;
 }
 
@@ -521,8 +521,8 @@
 }
 
 .is-current .vocabulary-group-marker {
-  border-color: var(--accent);
-  background: var(--accent);
+  border-color: var(--line-strong);
+  background: var(--action);
   color: #fff;
 }
 
@@ -684,7 +684,7 @@
   gap: 18px;
   margin: 0;
   padding: 28px;
-  background: #eaf1ed;
+  background: var(--surface-strong);
   color: #1e4a3a;
 }
 
@@ -782,7 +782,7 @@
 
 .vocabulary-breakdown-connector {
   margin-top: 1px;
-  color: var(--accent);
+  color: var(--ink);
   font-family: 'Times New Roman', Times, serif;
   font-size: 16px;
   font-style: normal;
@@ -986,7 +986,7 @@
 }
 
 .vocabulary-completion-state > svg {
-  color: var(--accent);
+  color: var(--ink);
 }
 
 .vocabulary-completion-state h2 {
@@ -1082,7 +1082,7 @@
   justify-content: center;
   width: auto;
   min-width: 96px;
-  color: var(--accent);
+  color: var(--ink);
   font-size: 12px;
   font-weight: 650;
 }
@@ -1212,7 +1212,7 @@
 }
 
 .vocabulary-run-setup > svg {
-  color: var(--accent);
+  color: var(--ink);
 }
 
 .vocabulary-run-setup h2 {
@@ -1304,7 +1304,7 @@
 }
 
 .vocabulary-review-accent-control button.is-selected {
-  background: #eaf1ed;
+  background: var(--surface-strong);
   color: #1e4a3a;
 }
 
@@ -1312,7 +1312,7 @@
 .vocabulary-word-replay:focus-visible,
 .vocabulary-stage-meta button:focus-visible,
 .vocabulary-set-title-control input:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--action);
   outline-offset: 2px;
 }
 
@@ -1340,8 +1340,8 @@
 .vocabulary-run-setup input:focus-visible,
 .vocabulary-run-setup select:focus-visible,
 .vocabulary-run-setup textarea:focus-visible {
-  border-color: var(--accent);
-  outline: 2px solid var(--accent);
+  border-color: var(--line-strong);
+  outline: 2px solid var(--action);
   outline-offset: 2px;
 }
 
@@ -1739,8 +1739,8 @@
   }
 
   .vocabulary-pronunciation:hover {
-    border-color: var(--accent);
-    color: var(--accent);
+    border-color: var(--line-strong);
+    color: var(--ink);
   }
 }
 
@@ -1887,7 +1887,7 @@
     padding: 3.5mm;
     overflow: hidden;
     border-radius: 6px;
-    background: #eaf1ed !important;
+    background: var(--surface-strong) !important;
     color: #1e4a3a !important;
   }
 

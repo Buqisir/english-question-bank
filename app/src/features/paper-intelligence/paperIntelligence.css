@@ -116,7 +116,7 @@
   line-height: 24px;
   text-align: center;
   border-radius: 6px;
-  background: var(--accent);
+  background: var(--action);
   color: #fff;
   font-size: 13px;
   font-weight: 700;
@@ -188,7 +188,7 @@
 }
 
 .pi-load-cell[data-filled="true"] {
-  background: var(--accent);
+  background: var(--action);
 }
 
 .pi-load-cell[data-filled="true"][data-high="true"] {
@@ -409,15 +409,15 @@
 }
 
 .pi-question-card:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--action);
   outline-offset: 1px;
 }
 
 /* ui-p1-panels #12: side-tab ban — full border + teal-50 fill instead of a
    left accent bar (章程 chip 选中态词汇). */
 .pi-question-card--active {
-  border-color: var(--accent);
-  background: #EAF1ED;
+  border-color: var(--line-strong);
+  background: var(--surface-strong);
 }
 
 .pi-question-card-head {
@@ -431,7 +431,7 @@
 
 .pi-question-card-no {
   font-weight: 700;
-  color: var(--accent);
+  color: var(--ink);
   font-size: 13px;
 }
 
@@ -499,7 +499,7 @@
 
 .pi-analysis-question-no {
   font-weight: 700;
-  color: var(--accent);
+  color: var(--ink);
   font-size: 14px;
 }
 
@@ -731,7 +731,7 @@ button.pi-analysis-distractor {
 
 button.pi-analysis-evidence:focus-visible,
 button.pi-analysis-distractor:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--action);
   outline-offset: 1px;
 }
 
@@ -814,9 +814,9 @@ button.pi-analysis-distractor:hover {
 }
 
 .pi-passage-action--addable {
-  background: var(--accent);
+  background: var(--action);
   color: #fff;
-  border: 1px solid var(--accent);
+  border: 1px solid var(--line-strong);
 }
 
 .pi-passage-action--addable:hover {
@@ -824,7 +824,7 @@ button.pi-analysis-distractor:hover {
 }
 
 .pi-passage-action--addable:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--action);
   outline-offset: 2px;
 }
 
@@ -949,7 +949,7 @@ button.pi-analysis-distractor:hover {
 }
 
 .pi-topbar-back:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--action);
   outline-offset: 2px;
 }
 
@@ -977,7 +977,7 @@ button.pi-analysis-distractor:hover {
   font: inherit;
   font-size: 12px;
   font-weight: 600;
-  color: var(--accent);
+  color: var(--ink);
   background: var(--blue-soft);
   border: 1px solid transparent;
   border-radius: 12px;
@@ -996,18 +996,18 @@ button.pi-analysis-distractor:hover {
 }
 
 .pi-topbar-basket:hover {
-  border-color: var(--accent);
+  border-color: var(--line-strong);
 }
 
 .pi-topbar-basket:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--action);
   outline-offset: 2px;
 }
 
 .pi-topbar-basket--open {
-  background: var(--accent);
+  background: var(--action);
   color: #fff;
-  border-color: var(--accent);
+  border-color: var(--line-strong);
 }
 
 .pi-topbar-basket--open:hover {
@@ -1135,7 +1135,7 @@ button.pi-analysis-distractor:hover {
 .pi-basket-preview-item-section {
   font-size: 11px;
   font-weight: 600;
-  color: var(--accent);
+  color: var(--ink);
   background: var(--blue-soft);
   border-radius: 4px;
   padding: 1px 6px;
@@ -1204,17 +1204,17 @@ button.pi-analysis-distractor:hover {
 }
 
 .pi-insight-chip:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--action);
   outline-offset: 1px;
 }
 
 .pi-insight-chip--open {
-  background: var(--accent);
+  background: var(--action);
   color: #fff;
 }
 
 .pi-insight-chip--open:hover {
-  border-color: var(--accent);
+  border-color: var(--line-strong);
   filter: brightness(0.95);
 }
 
@@ -1312,7 +1312,7 @@ button.pi-analysis-distractor:hover {
 }
 
 .pi-insight-panel-close:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--action);
   outline-offset: 1px;
 }
 
@@ -1354,7 +1354,7 @@ button.pi-analysis-distractor:hover {
 }
 
 .pi-option-block:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--action);
   outline-offset: 1px;
 }
 
@@ -1362,7 +1362,7 @@ button.pi-analysis-distractor:hover {
    选中态词汇), 错误项 danger 浅底; full border, no left accent bar. */
 .pi-option-block--correct {
   border: 1px solid var(--eqb-color-border-subtle);
-  background: #EAF1ED;
+  background: var(--surface-strong);
 }
 
 .pi-option-block--wrong {
@@ -1372,7 +1372,7 @@ button.pi-analysis-distractor:hover {
 
 .pi-option-block--selected {
   box-shadow: inset 0 0 0 1px rgba(44, 110, 86, 0.35);
-  border-color: var(--accent);
+  border-color: var(--line-strong);
 }
 
 .pi-option-block-head {
@@ -1466,7 +1466,7 @@ div.pi-option-block:hover {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--action);
   margin-right: 4px;
   vertical-align: middle;
 }

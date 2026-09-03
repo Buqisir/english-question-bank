@@ -234,6 +234,8 @@ export type ConciergePaperRowProps = {
    * they're grouped under a year head instead).
    */
   hideYear?: boolean
+  /** Home date-stream: muted year before the title. */
+  yearPrefix?: boolean
 
   /** similar-passages-entry (E6): full corpus lookup, single expanded-groupId
    * slot, and its request state — threaded straight through to each row's
@@ -257,6 +259,7 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
     onOpenPaperBrowse,
     variant = 'search',
     hideYear = false,
+    yearPrefix = false,
     questionGroupById,
     expandedSimilarGroupId,
     similarPassagesRequest,
@@ -314,6 +317,7 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
       aria-label={paper.year ? `${paper.year} 年 ${headline}` : headline}
       onClick={handleRowClick}
     >
+      <div className="concierge-paper-row-head">
       {variant !== 'feed' && (
         <div className="concierge-paper-year" aria-hidden="true">
           {hideYear ? '' : paper.year ?? '—'}
@@ -334,8 +338,11 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
         </button>
         <div className="concierge-paper-anchor-text">
           <div className="concierge-paper-title-line">
+            {yearPrefix && paper.year ? (
+              <span className="concierge-paper-year-prefix">{paper.year}</span>
+            ) : null}
             <strong className="concierge-paper-headline" title={headline}>{headline}</strong>
-            {sourceTypeLabel && (
+            {sourceTypeLabel === '真题' && (
               <span className="concierge-paper-sourcetype">{sourceTypeLabel}</span>
             )}
           </div>
@@ -357,7 +364,7 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
             data-ra-hit-scope={paper.hitContext.scope}
           >
             {variant === 'feed'
-              ? `全卷 · ${paper.hitCount} 篇章`
+              ? `${paper.hitCount} 篇章`
               : `${badgePrefix(paper.hitContext.scope)}${paper.hitCount}${badgeSuffix(paper.hitContext.scope)}`}
           </span>
         </p>
@@ -373,6 +380,9 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
       </div>
 
       <div className="concierge-paper-actions" aria-label="来源卷操作">
+        {variant === 'feed' && (
+          <span className="concierge-paper-hitcount">{paper.hitCount} 篇章</span>
+        )}
         {rowPaperId && (
           <button
             type="button"
@@ -382,11 +392,18 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
             看整卷
           </button>
         )}
-        <span className="concierge-row-expand-hint" aria-hidden="true">
-          {expanded
-            ? <>收起 <ChevronUp size={12} /></>
-            : <>展开题组 <ChevronDown size={12} /></>}
-        </span>
+        {variant === 'feed' ? (
+          <span className="concierge-row-chevron" aria-hidden="true">
+            <ChevronDown size={14} />
+          </span>
+        ) : (
+          <span className="concierge-row-expand-hint" aria-hidden="true">
+            {expanded
+              ? <>收起 <ChevronUp size={12} /></>
+              : <>展开题组 <ChevronDown size={12} /></>}
+          </span>
+        )}
+      </div>
       </div>
 
       {expanded && (

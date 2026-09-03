@@ -484,6 +484,23 @@ function App() {
     () => questionGroups.filter((group) => group.draftPaperButtonState === 'in_current_draft').length,
     [questionGroups],
   )
+  // Detail fetch (GET /api/question-groups/:id) omits draftContext, so
+  // selectedDetail.draftPaperButtonState lags the list cards that
+  // addGroupsToBasket patches via questionGroups. Mirror ConciergeGroupCard:
+  // overlay the list card's draft fields when the open detail group is in
+  // questionGroupById.
+  const selectedDetailForView = useMemo(() => {
+    if (!selectedDetail) return null
+    const card = questionGroupById.get(selectedDetail.id)
+    if (!card) return selectedDetail
+    return {
+      ...selectedDetail,
+      canAddToDraftPaper: card.canAddToDraftPaper,
+      draftPaperButtonState: card.draftPaperButtonState,
+      currentDraftPaperId: card.currentDraftPaperId,
+      printUnavailableReason: card.printUnavailableReason,
+    }
+  }, [questionGroupById, selectedDetail])
 
   const openDraftPaperWorkbench = useCallback((draftPaperId?: string | null, focusGroupId?: string | null) => {
     if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
@@ -999,7 +1016,7 @@ function App() {
         showAdmin={isOwnerView}
         adminActive={adminRouteActive}
         onToggleAdmin={toggleAdminRoute}
-        hideBrand={!adminRouteActive && viewMode === 'list'}
+        hideBrand={false}
       />
 
       {adminRouteActive && (
@@ -1052,7 +1069,7 @@ function App() {
           ) : viewMode === 'detail' ? (
             <QuestionGroupDetailView
               isOwnerView={isOwnerView}
-              detail={{ selectedDetail, detailStatus, detailError }}
+              detail={{ selectedDetail: selectedDetailForView, detailStatus, detailError }}
               readingParse={{ result: readingParseResult }}
               onBack={backToList}
               onEdit={openEditEntry}

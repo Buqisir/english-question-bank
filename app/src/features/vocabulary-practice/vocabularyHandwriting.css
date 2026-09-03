@@ -78,7 +78,7 @@
 .vocabulary-handwriting-selector-toolbar button {
   border: 0;
   background: transparent;
-  color: var(--accent);
+  color: var(--ink);
   font: inherit;
   font-weight: 650;
 }
@@ -127,12 +127,12 @@
 
 .vocabulary-handwriting-selector-mode label:hover span,
 .vocabulary-handwriting-selector-mode label.is-selected span {
-  border-color: var(--accent);
+  border-color: var(--line-strong);
   background: var(--mint-soft);
 }
 
 .vocabulary-handwriting-selector-mode input:focus-visible + span {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--action);
   outline-offset: 2px;
 }
 
@@ -191,12 +191,12 @@
 }
 
 .vocabulary-handwriting-selector-list label.is-selected .vocabulary-handwriting-selector-check {
-  border-color: var(--accent);
-  background: var(--accent);
+  border-color: var(--line-strong);
+  background: var(--action);
 }
 
 .vocabulary-handwriting-selector-list input:focus-visible + .vocabulary-handwriting-selector-check {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--action);
   outline-offset: 2px;
 }
 
