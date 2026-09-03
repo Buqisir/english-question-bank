@@ -128,7 +128,11 @@ export function loadCanonicalGrammarFillPrintChrome({
     'versions',
     `v${sourceAssetVersion}`,
   )
-  const assetPath = path.join(versionDir, 'paper-asset.json')
+  // Publication binds the sealed source asset; DOCX chrome is JSON-only.
+  const immutableSourceRelativePath = publicationSource.mediaType === docxMediaType
+    ? 'canonical/source-asset.bin'
+    : 'paper-asset.json'
+  const assetPath = path.join(versionDir, immutableSourceRelativePath)
   if (!existsSync(assetPath)) {
     reject('Canonical Grammar Fill chrome immutable source asset is unavailable')
   }

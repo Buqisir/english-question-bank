@@ -12,8 +12,11 @@ import {
   loadCanonicalGrammarFillPrintChrome,
 } from '../paper-canonical/grammarFillPrintSourceBinding.mjs'
 import {
-  loadCanonicalSourceAssetRepresentation,
+  loadPublicationBoundSourceAssetRepresentation,
 } from '../paper-canonical/sourceAssetRepresentation.mjs'
+import {
+  immutablePublicationSourceForConsumption,
+} from '../paper-canonical/publication.mjs'
 import {
   loadGroupAnalysisTexts,
   loadGroupOfficialModelAnswers,
@@ -518,6 +521,9 @@ export function createDraftPaperStore({
       : sourcePaperIds[0]
     const sourceAssetVersion = canonicalConsumption?.sourceAssetVersion
     const sourceAssetDigest = canonicalConsumption?.sourceAssetDigest
+    const publicationSource = immutablePublicationSourceForConsumption(
+      canonicalConsumption,
+    )
     if (
       (typeof canonicalPaperId === 'string'
         && sourcePaperIds.some((paperId) => paperId !== canonicalPaperId))
@@ -525,34 +531,21 @@ export function createDraftPaperStore({
       || !paperAssetsDir
       || !Number.isInteger(sourceAssetVersion)
       || typeof sourceAssetDigest !== 'string'
+      || !publicationSource
+      || publicationSource.sha256 !== sourceAssetDigest
+      || publicationSource.sourceAssetVersion !== sourceAssetVersion
     ) {
       reject('Canonical visible page-break source binding is unavailable')
     }
-    const assetPath = path.join(
+    const versionDir = path.join(
       paperAssetsDir,
       sourcePaperId,
       'versions',
       `v${sourceAssetVersion}`,
-      'paper-asset.json',
     )
-    if (!existsSync(assetPath)) {
-      reject('Canonical visible page-break source asset is unavailable')
-    }
-    const assetBytes = readFileSync(assetPath)
-    const observedDigest =
-      `sha256:${createHash('sha256').update(assetBytes).digest('hex')}`
-    if (observedDigest !== sourceAssetDigest) {
-      reject('Canonical visible page-break source digest disagrees')
-    }
-    let asset
-    try {
-      asset = JSON.parse(assetBytes)
-    } catch {
-      reject('Canonical visible page-break source asset is invalid')
-    }
-    const source = loadCanonicalSourceAssetRepresentation({
-      sourceAsset: asset,
-      versionDir: path.dirname(assetPath),
+    const source = loadPublicationBoundSourceAssetRepresentation({
+      versionDir,
+      publicationSource,
       reject,
       label: 'Canonical visible page-break source',
     })

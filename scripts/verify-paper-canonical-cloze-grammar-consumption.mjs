@@ -52,6 +52,12 @@ import {
 import {
   loadCanonicalGrammarFillPrintChrome,
 } from '../server/paper-canonical/grammarFillPrintSourceBinding.mjs'
+import {
+  immutablePublicationSourceForConsumption,
+} from '../server/paper-canonical/publication.mjs'
+import {
+  loadPublicationBoundSourceAssetRepresentation,
+} from '../server/paper-canonical/sourceAssetRepresentation.mjs'
 import { createExportImplementation } from '../server/exports/exportImplementation.mjs'
 import { createDraftPaperStore } from '../server/draft-paper/draftPaperStore.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
@@ -975,6 +981,91 @@ function assertMixedSourceDraftCanonicalComposition() {
     mixedDb.close()
   }
 }
+
+function assertDocxSourcedGrammarFillPrintChromeSkipsJsonDigest() {
+  const docxPaperId = 'paper-mock-gd-2026-m1'
+  const docxAssetsRoot = path.resolve('app/public/paper-assets')
+  const versionDir = path.join(
+    docxAssetsRoot,
+    docxPaperId,
+    'versions',
+    'v2',
+  )
+  const publicationManifest = JSON.parse(readFileSync(
+    path.join(versionDir, 'canonical', 'canonical-paper-publication-v37.json'),
+    'utf8',
+  ))
+  const paperAssetBytes = readFileSync(path.join(versionDir, 'paper-asset.json'))
+  const sourceAssetBytes = readFileSync(
+    path.join(versionDir, 'canonical', 'source-asset.bin'),
+  )
+  assert.notEqual(
+    digestJson(JSON.parse(paperAssetBytes.toString('utf8'))),
+    publicationManifest.sourceAssetDigest,
+    'DOCX fixture keeps paper-asset.json distinct from the sealed Publication source',
+  )
+  assert.equal(
+    sha256(sourceAssetBytes),
+    publicationManifest.sourceAssetDigest,
+    'DOCX fixture binds Publication source to canonical/source-asset.bin',
+  )
+  const docxDbPath = path.join(tmpdir(), `eqb-docx-gf-chrome-${process.pid}.sqlite`)
+  setCanonicalReference(docxDbPath, {
+    paperId: docxPaperId,
+    versionName: 'v2',
+    sourceAssetVersion: publicationManifest.sourceAssetVersion,
+    publicationDigest: publicationManifest.publicationDigest,
+  })
+  const docxDbLive = new DatabaseSync(docxDbPath)
+  try {
+    const runtime = createCanonicalConsumerRuntime({
+      rootDir: docxAssetsRoot,
+      db: docxDbLive,
+    })
+    const consumption = runtime.load({
+      paperId: docxPaperId,
+      consumerId: 'print_pdf',
+    })
+    const readingDetail = mixedDraftDetail(
+      consumption,
+      'group-mock-gd-2026-m1-reading-c',
+    )
+    assert.equal(
+      loadCanonicalGrammarFillPrintChrome({
+        exportItems: [{ detail: readingDetail }],
+        canonicalConsumption: consumption,
+        paperAssetsDir: docxAssetsRoot,
+        versionType: 'student',
+      }),
+      null,
+      'DOCX-sourced Publication skips grammar-fill chrome without JSON digest rejection',
+    )
+    const publicationSource = immutablePublicationSourceForConsumption(consumption)
+    const pageBreakSource = loadPublicationBoundSourceAssetRepresentation({
+      versionDir,
+      publicationSource,
+      reject: (message) => {
+        throw new Error(message)
+      },
+      label: 'Canonical visible page-break source',
+    })
+    assert.equal(
+      pageBreakSource.kind,
+      'source_asset',
+      'DOCX page-break binding reads derived paper-asset.json after sealed source verification',
+    )
+    assert.ok(
+      pageBreakSource.asset.content.blocks.some(
+        (block) => block.type === 'pageBreakHint',
+      ),
+      'DOCX page-break binding exposes pageBreakHint blocks from the derived representation',
+    )
+  } finally {
+    docxDbLive.close()
+    rmSync(docxDbPath, { force: true })
+  }
+}
+
 const ticket35GroupIds = [
   'group-2026-i-reading-a',
   'group-2026-i-reading-b',
@@ -2265,6 +2356,7 @@ try {
   })
   await assertTicket35CompletePublication({ rootDir })
   assertMixedSourceDraftCanonicalComposition()
+  assertDocxSourcedGrammarFillPrintChromeSkipsJsonDigest()
   legacyDb.close()
   const mismatchedBlankJoin = structuredClone(complete)
   const clozeOccurrence = mismatchedBlankJoin.selections

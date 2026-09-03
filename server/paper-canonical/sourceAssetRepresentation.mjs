@@ -14,6 +14,9 @@ function parseJson(bytes, reject, label) {
   }
 }
 
+const docxMediaType =
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+
 function safeEvidencePath(relativePath, reject, label) {
   if (
     typeof relativePath !== 'string'
@@ -58,4 +61,41 @@ export function loadCanonicalSourceAssetRepresentation({
   const asset = parseJson(sourceBytes, reject, label)
   if (!Array.isArray(asset?.content?.blocks)) reject(`${label} blocks are invalid`)
   return { asset, digest: sourceDigest, kind: 'legacy_source_capture' }
+}
+
+// Publication binds canonical/source-asset.bin for DOCX and paper-asset.json for
+// JSON. The derived paper-asset.json for DOCX is not sealed by sourceAssetDigest.
+export function loadPublicationBoundSourceAssetRepresentation({
+  versionDir,
+  publicationSource,
+  reject,
+  label,
+}) {
+  const isDocx = publicationSource?.mediaType === docxMediaType
+  const sealedRelativePath = isDocx
+    ? 'canonical/source-asset.bin'
+    : 'paper-asset.json'
+  const sealedPath = path.join(versionDir, sealedRelativePath)
+  if (!existsSync(sealedPath)) reject(`${label} asset is unavailable`)
+  const sealedBytes = readFileSync(sealedPath)
+  if (
+    sealedBytes.byteLength !== publicationSource.byteLength
+    || digestBytes(sealedBytes) !== publicationSource.sha256
+  ) {
+    reject(`${label} digest disagrees`)
+  }
+  let sourceAsset
+  if (isDocx) {
+    const assetPath = path.join(versionDir, 'paper-asset.json')
+    if (!existsSync(assetPath)) reject(`${label} asset is unavailable`)
+    sourceAsset = parseJson(readFileSync(assetPath), reject, label)
+  } else {
+    sourceAsset = parseJson(sealedBytes, reject, label)
+  }
+  return loadCanonicalSourceAssetRepresentation({
+    sourceAsset,
+    versionDir,
+    reject,
+    label,
+  })
 }
