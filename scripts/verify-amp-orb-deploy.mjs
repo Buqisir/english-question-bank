@@ -1452,11 +1452,19 @@ assert(
 )
 assert(
   baselineSource.includes('const expectedMode = stat.isDirectory() ? 0o755 : 0o644')
+    && baselineSource.includes("if (stat.isFile() && stat.nlink !== 1) throw new Error('generated-dist-linked-file')")
+    && baselineSource.includes('const before = distManifest({ verifyModes: false })')
+    && baselineSource.includes('fs.constants.O_NOFOLLOW')
+    && baselineSource.includes('stat.dev === entry.dev')
+    && baselineSource.includes('stat.ino === entry.ino')
+    && baselineSource.includes('fs.fchmodSync(descriptor, expectedMode)')
+    && baselineSource.includes('if (!sameDistContent(before, after))')
+    && baselineSource.includes('return normalizeDistModes()')
     && baselineSource.includes("stage = 'pre-caddy-dist-proof'")
     && baselineSource.includes('sameDistManifest(targetDist)')
     && baselineSource.includes('rollbackDist = installBuild(true)')
     && baselineSource.includes('sameDistManifest(rollbackDist)'),
-  'baseline proves generated dist modes and hashes before both forward and rollback Caddy starts',
+  'baseline normalizes only generated dist modes without content drift before both Caddy starts',
 )
 assert(
   baselineSource.includes(
