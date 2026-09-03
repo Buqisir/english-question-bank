@@ -47,6 +47,15 @@ export const EQB_PERSISTENCE_AUTHORITY_PATHS = Object.freeze([
   'server/user-data',
   'server/vocabulary/vocabularyStore.mjs',
 ])
+export const EQB_HOST_CONFIGURATION_PATHS = Object.freeze([
+  'deploy/Caddyfile.release',
+  'deploy/eqb-release.service',
+  'deploy/eqb-deploy-controller.mjs',
+])
+export const EQB_STABLE_LAUNCHER_PATHS = Object.freeze([
+  'deploy/eqb-deploy-transport',
+  'deploy/eqb-deploy-controller',
+])
 
 const SHA = /^[a-f0-9]{40}$/u
 const SSH_TARGET = /^(?:[A-Za-z0-9._-]+@)?(?:\[[A-Fa-f0-9:]+\]|[A-Za-z0-9.-]+)$/u
@@ -130,6 +139,19 @@ function writePrivateFileAtomic(filePath, value) {
 
 function sha256(value) {
   return createHash('sha256').update(value).digest('hex')
+}
+
+export function deploymentChangedPathDigest(paths) {
+  if (
+    !Array.isArray(paths)
+    || paths.length === 0
+    || paths.some((filePath) => typeof filePath !== 'string' || !filePath || filePath.includes('\n'))
+  ) throw new Error('Deployment changed-path evidence is invalid')
+  const normalized = [...new Set(paths)].sort()
+  if (normalized.length !== paths.length) {
+    throw new Error('Deployment changed-path evidence contains duplicates')
+  }
+  return sha256(`${normalized.join('\n')}\n`)
 }
 
 function assertPrivateRecoveryNode(nodePath, type, mode) {
@@ -678,6 +700,24 @@ export function requireDeployLatestAuthorization(argv) {
   }
 }
 
+export function requireReviewedPersistenceDeployAuthorization(argv) {
+  if (!Array.isArray(argv) || !argv.includes('--owner-said-reviewed-persistence-deploy')) {
+    throw new Error('Current Owner authorization for reviewed-persistence deployment is required')
+  }
+  if (argv.includes('--sha')) {
+    throw new Error('Reviewed-persistence target SHA is resolved automatically; do not supply --sha')
+  }
+}
+
+export function requireUpdateHostConfigurationAuthorization(argv) {
+  if (!Array.isArray(argv) || !argv.includes('--owner-said-update-host-config')) {
+    throw new Error('Current Owner authorization for host configuration update is required')
+  }
+  if (argv.includes('--sha')) {
+    throw new Error('Host configuration target SHA is resolved automatically; do not supply --sha')
+  }
+}
+
 export function requireLegacyBaselineAuthorization(argv) {
   if (!Array.isArray(argv) || !argv.includes('--owner-said-baseline-migration')) {
     throw new Error('Current Owner authorization for the protected baseline migration is required')
@@ -878,6 +918,174 @@ export function parseDeploymentControllerOutput(output, expectedSha) {
   if ((receipt.conclusion === 'success') !== (receipt.failureCode === null)) {
     throw new Error('Deployment controller conclusion is inconsistent')
   }
+  return receipt
+}
+
+function parseMarkedControllerReceipt(output, prefix, label) {
+  const markers = String(output || '').split('\n').filter((line) => line.startsWith(prefix))
+  if (markers.length !== 1) throw new Error(`${label} receipt marker is missing or ambiguous`)
+  try {
+    return JSON.parse(markers[0].slice(prefix.length))
+  } catch {
+    throw new Error(`${label} response is not valid JSON`)
+  }
+}
+
+function validReceiptPath(value) {
+  return /^\/opt\/eqb\/deployments\/receipts\/[A-Za-z0-9.-]+\.json$/u.test(value || '')
+}
+
+function validDigestMap(value) {
+  return value
+    && typeof value === 'object'
+    && !Array.isArray(value)
+    && Object.keys(value).sort().join('\n')
+      === ['import-ops.sqlite', 'question-bank.sqlite', 'user-data.sqlite'].join('\n')
+    && Object.values(value).every((digest) => /^[a-f0-9]{64}$/u.test(digest || ''))
+}
+
+export function parseReviewedPersistenceControllerOutput(output, expectedSha, expectedDigest) {
+  const sha = assertSha(expectedSha)
+  if (!/^[a-f0-9]{64}$/u.test(expectedDigest || '')) throw new Error('Reviewed diff digest is invalid')
+  const receipt = parseMarkedControllerReceipt(
+    output,
+    'EQB_REVIEWED_PERSISTENCE_RECEIPT ',
+    'Reviewed-persistence controller',
+  )
+  const keys = [
+    'changedPersistencePaths',
+    'changedPersistencePathsDigest',
+    'conclusion',
+    'controllerVersion',
+    'databaseSnapshots',
+    'databasesRestored',
+    'failureCode',
+    'finishedAt',
+    'previousSha',
+    'receiptPath',
+    'recovered',
+    'rollbackHealthy',
+    'rolledBack',
+    'schemaVersion',
+    'staged',
+    'startedAt',
+    'state',
+    'targetSha',
+    'trafficReopened',
+  ]
+  if (
+    !receipt
+    || typeof receipt !== 'object'
+    || Array.isArray(receipt)
+    || Object.keys(receipt).sort().join('\n') !== keys.join('\n')
+    || receipt.schemaVersion !== 'eqb-reviewed-persistence-receipt-v1'
+    || receipt.controllerVersion !== 'eqb-deploy-controller-v1'
+    || receipt.state !== 'reported'
+    || !['success', 'failure'].includes(receipt.conclusion)
+    || receipt.targetSha !== sha
+    || !SHA.test(receipt.previousSha || '')
+    || !Array.isArray(receipt.changedPersistencePaths)
+    || receipt.changedPersistencePathsDigest !== expectedDigest
+    || (receipt.changedPersistencePaths.length > 0
+      && deploymentChangedPathDigest(receipt.changedPersistencePaths) !== expectedDigest)
+    || (receipt.changedPersistencePaths.length === 0 && receipt.conclusion !== 'failure')
+    || (!validDigestMap(receipt.databaseSnapshots)
+      && !(receipt.conclusion === 'failure'
+        && Object.keys(receipt.databaseSnapshots || {}).length === 0))
+    || !['boolean'].includes(typeof receipt.staged)
+    || !['boolean'].includes(typeof receipt.trafficReopened)
+    || !['boolean'].includes(typeof receipt.rolledBack)
+    || !['boolean'].includes(typeof receipt.databasesRestored)
+    || !['boolean'].includes(typeof receipt.recovered)
+    || ![null, true, false].includes(receipt.rollbackHealthy)
+    || (receipt.failureCode !== null && typeof receipt.failureCode !== 'string')
+    || typeof receipt.startedAt !== 'string'
+    || typeof receipt.finishedAt !== 'string'
+    || !validReceiptPath(receipt.receiptPath)
+    || (receipt.conclusion === 'success') !== (receipt.failureCode === null)
+    || (receipt.databasesRestored && receipt.trafficReopened)
+    || (receipt.databasesRestored && !receipt.rolledBack)
+    || (receipt.rolledBack && receipt.trafficReopened)
+    || (receipt.conclusion === 'success' && (
+      !receipt.trafficReopened
+      || receipt.rolledBack
+      || receipt.databasesRestored
+      || receipt.rollbackHealthy !== null
+      || !validDigestMap(receipt.databaseSnapshots)
+    ))
+  ) throw new Error('Reviewed-persistence controller response is invalid')
+  return receipt
+}
+
+export function parseHostConfigurationControllerOutput(output, expectedSha, expectedDigest) {
+  const sha = assertSha(expectedSha)
+  if (!/^[a-f0-9]{64}$/u.test(expectedDigest || '')) throw new Error('Host configuration diff digest is invalid')
+  const receipt = parseMarkedControllerReceipt(
+    output,
+    'EQB_HOST_CONFIGURATION_RECEIPT ',
+    'Host-configuration controller',
+  )
+  const keys = [
+    'changedHostConfigurationPaths',
+    'changedHostConfigurationPathsDigest',
+    'conclusion',
+    'controllerVersion',
+    'failureCode',
+    'finishedAt',
+    'installed',
+    'noOp',
+    'previousHostConfigurationSha',
+    'receiptPath',
+    'recovered',
+    'rollbackHealthy',
+    'rolledBack',
+    'schemaVersion',
+    'staged',
+    'startedAt',
+    'state',
+    'targetSha',
+  ]
+  if (
+    !receipt
+    || typeof receipt !== 'object'
+    || Array.isArray(receipt)
+    || Object.keys(receipt).sort().join('\n') !== keys.join('\n')
+    || receipt.schemaVersion !== 'eqb-host-configuration-receipt-v1'
+    || receipt.controllerVersion !== 'eqb-deploy-controller-v1'
+    || receipt.state !== 'reported'
+    || !['success', 'failure'].includes(receipt.conclusion)
+    || receipt.targetSha !== sha
+    || !SHA.test(receipt.previousHostConfigurationSha || '')
+    || !Array.isArray(receipt.changedHostConfigurationPaths)
+    || receipt.changedHostConfigurationPathsDigest !== expectedDigest
+    || (!receipt.noOp && receipt.changedHostConfigurationPaths.length > 0
+      && deploymentChangedPathDigest(receipt.changedHostConfigurationPaths) !== expectedDigest)
+    || (!receipt.noOp
+      && receipt.changedHostConfigurationPaths.length === 0
+      && receipt.conclusion !== 'failure')
+    || !['boolean'].includes(typeof receipt.staged)
+    || !['boolean'].includes(typeof receipt.installed)
+    || !['boolean'].includes(typeof receipt.noOp)
+    || !['boolean'].includes(typeof receipt.rolledBack)
+    || !['boolean'].includes(typeof receipt.recovered)
+    || ![null, true, false].includes(receipt.rollbackHealthy)
+    || (receipt.failureCode !== null && typeof receipt.failureCode !== 'string')
+    || typeof receipt.startedAt !== 'string'
+    || typeof receipt.finishedAt !== 'string'
+    || !validReceiptPath(receipt.receiptPath)
+    || (receipt.conclusion === 'success') !== (receipt.failureCode === null)
+    || (receipt.noOp && (
+      receipt.conclusion !== 'success'
+      || !receipt.installed
+      || receipt.staged
+      || receipt.changedHostConfigurationPaths.length !== 0
+    ))
+    || (receipt.conclusion === 'success' && (
+      !receipt.installed
+      || receipt.rolledBack
+      || receipt.rollbackHealthy !== null
+    ))
+  ) throw new Error('Host-configuration controller response is invalid')
   return receipt
 }
 
@@ -1463,6 +1671,67 @@ export async function deployLatestRelease({
   return { candidate, receipt }
 }
 
+async function runReviewedDeploymentMaintenance({
+  argv,
+  authorize,
+  resolveCandidate,
+  readMainSha,
+  readProductionSha,
+  readChangedPaths,
+  protectedPaths,
+  invokeController,
+  parseReceipt,
+} = {}) {
+  authorize(argv)
+  if (
+    typeof resolveCandidate !== 'function'
+    || typeof readMainSha !== 'function'
+    || typeof readProductionSha !== 'function'
+    || typeof readChangedPaths !== 'function'
+    || typeof invokeController !== 'function'
+  ) throw new Error('Deployment maintenance dependencies are missing')
+  const candidate = await resolveCandidate()
+  await assertDeploymentCandidateStillCurrent({ readMainSha, sha: candidate.sha })
+  const productionSha = assertSha(await readProductionSha(), 'production SHA')
+  const changedPaths = await readChangedPaths(productionSha, candidate.sha, protectedPaths)
+  if (
+    !Array.isArray(changedPaths)
+    || changedPaths.length === 0
+    || changedPaths.some((filePath) => !protectedPaths.some((protectedPath) => (
+      filePath === protectedPath || filePath.startsWith(`${protectedPath}/`)
+    )))
+  ) throw new Error('The separately reviewed protected diff is empty or invalid')
+  const changedPathsDigest = deploymentChangedPathDigest(changedPaths)
+  await assertDeploymentCandidateStillCurrent({ readMainSha, sha: candidate.sha })
+  const receipt = parseReceipt(
+    await invokeController(candidate.sha, changedPathsDigest),
+    candidate.sha,
+    changedPathsDigest,
+  )
+  if (receipt.conclusion !== 'success') {
+    throw new Error(`Production controller reported ${receipt.failureCode || 'failure'}`)
+  }
+  return { candidate, productionSha, changedPaths, changedPathsDigest, receipt }
+}
+
+export async function deployReviewedPersistenceLatest(options = {}) {
+  return runReviewedDeploymentMaintenance({
+    ...options,
+    authorize: requireReviewedPersistenceDeployAuthorization,
+    protectedPaths: EQB_PERSISTENCE_AUTHORITY_PATHS,
+    parseReceipt: parseReviewedPersistenceControllerOutput,
+  })
+}
+
+export async function updateLatestHostConfiguration(options = {}) {
+  return runReviewedDeploymentMaintenance({
+    ...options,
+    authorize: requireUpdateHostConfigurationAuthorization,
+    protectedPaths: EQB_HOST_CONFIGURATION_PATHS,
+    parseReceipt: parseHostConfigurationControllerOutput,
+  })
+}
+
 export function materializeDeploymentCredentials({
   privateKey,
   knownHosts,
@@ -1519,6 +1788,8 @@ export function deploymentSSHInvocation({
       '-o', `UserKnownHostsFile=${knownHostsPath}`,
       '-o', 'GlobalKnownHostsFile=/dev/null',
       '-o', 'ConnectTimeout=15',
+      '-o', 'ServerAliveInterval=15',
+      '-o', 'ServerAliveCountMax=4',
       host,
       ...remoteArgs,
     ],

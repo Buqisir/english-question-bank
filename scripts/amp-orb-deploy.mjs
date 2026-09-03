@@ -9,6 +9,7 @@ import { fileURLToPath } from 'node:url'
 
 import {
   AMP_ORB_DEPLOY_REPOSITORY,
+  EQB_HOST_CONFIGURATION_PATHS,
   EQB_PERSISTENCE_AUTHORITY_PATHS,
   abandonReleaseBootstrapRecovery,
   assertAuthoritativeDeploymentChecks,
@@ -19,6 +20,7 @@ import {
   clearCompletedReleaseBootstrapRecovery,
   completeReleaseBootstrapRecovery,
   createReleaseBootstrapRecovery,
+  deployReviewedPersistenceLatest,
   deployLatestRelease,
   deploymentGitHubApiArgs,
   deploymentSSHInvocation,
@@ -31,7 +33,9 @@ import {
   parseDeploymentControllerOutput,
   parseDeploymentControllerPreflight,
   parseDeploymentPreflightOutput,
+  parseHostConfigurationControllerOutput,
   parseOpenSshEd25519PublicKeyBody,
+  parseReviewedPersistenceControllerOutput,
   readCompletedReleaseBootstrapRecovery,
   readReleaseBootstrapRecovery,
   removeReleaseBootstrapRecovery,
@@ -40,6 +44,7 @@ import {
   requireReleaseLayoutBootstrapResumeAuthorization,
   resumeReleaseLayoutBootstrap,
   resolveLatestDeploymentCandidate,
+  updateLatestHostConfiguration,
 } from './lib/ampOrbDeploy.mjs'
 
 const repositoryRoot = fileURLToPath(new URL('..', import.meta.url))
@@ -81,8 +86,11 @@ function isLocalAncestor(previousSha, targetSha) {
 }
 
 function readLocalProtectedDiff(previousSha, targetSha, protectedPaths) {
-  if (protectedPaths !== EQB_PERSISTENCE_AUTHORITY_PATHS) {
-    throw new Error('Deployment persistence authority path set is invalid')
+  if (
+    protectedPaths !== EQB_PERSISTENCE_AUTHORITY_PATHS
+    && protectedPaths !== EQB_HOST_CONFIGURATION_PATHS
+  ) {
+    throw new Error('Deployment protected path set is invalid')
   }
   const result = spawnSync('git', [
     'diff', '--name-only', '--no-renames', previousSha, targetSha, '--', ...protectedPaths,
@@ -177,6 +185,7 @@ function invokeController(remoteArgs, credentials) {
   const result = spawnSync(invocation.command, invocation.args, {
     encoding: 'utf8',
     stdio: ['ignore', 'pipe', 'inherit'],
+    timeout: 30 * 60 * 1000,
   })
   if (result.error) throw result.error
   if (result.status === 75) throw new Error('Another production deployment is already running')
@@ -189,9 +198,18 @@ function invokeController(remoteArgs, credentials) {
     throw new Error(`Deployment controller exited without a receipt (code ${result.status})`)
   }
   if (result.status !== 0) {
-    if (remoteArgs[0] === 'deploy') {
-      const receipt = parseDeploymentControllerOutput(result.stdout, remoteArgs[1])
-      throw new Error(`Production controller reported ${receipt.failureCode || 'failure'}`)
+    const receiptParser = remoteArgs[0] === 'deploy'
+      ? parseDeploymentControllerOutput
+      : remoteArgs[0] === 'deploy-reviewed-persistence'
+        ? parseReviewedPersistenceControllerOutput
+        : remoteArgs[0] === 'update-host-config'
+          ? parseHostConfigurationControllerOutput
+          : null
+    if (receiptParser) {
+      const receipt = receiptParser(result.stdout, remoteArgs[1], remoteArgs[2])
+      throw new Error(
+        `Production controller reported ${receipt.failureCode || 'failure'}: ${JSON.stringify(receipt)}`,
+      )
     }
     throw new Error(`Deployment controller failed (code ${result.status})`)
   }
@@ -1051,6 +1069,54 @@ async function deploy() {
   }, null, 2))
 }
 
+function readForcedControllerProductionSha() {
+  return withDeploymentCredentials((credentials) => parseDeploymentControllerPreflight(
+    invokeController(['preflight'], credentials),
+  ).productionSha)
+}
+
+async function reviewedPersistenceDeploy() {
+  const result = await deployReviewedPersistenceLatest({
+    argv: process.argv.slice(2),
+    resolveCandidate: candidate,
+    readMainSha,
+    readProductionSha: readForcedControllerProductionSha,
+    readChangedPaths: readLocalProtectedDiff,
+    async invokeController(sha, digest) {
+      return withDeploymentCredentials((credentials) => invokeController(
+        ['deploy-reviewed-persistence', sha, digest],
+        credentials,
+      ))
+    },
+  })
+  console.log(JSON.stringify({
+    command: 'deploy latest with reviewed persistence migration',
+    productionMutationAllowed: true,
+    ...result,
+  }, null, 2))
+}
+
+async function updateHostConfig() {
+  const result = await updateLatestHostConfiguration({
+    argv: process.argv.slice(2),
+    resolveCandidate: candidate,
+    readMainSha,
+    readProductionSha: readForcedControllerProductionSha,
+    readChangedPaths: readLocalProtectedDiff,
+    async invokeController(sha, digest) {
+      return withDeploymentCredentials((credentials) => invokeController(
+        ['update-host-config', sha, digest],
+        credentials,
+      ))
+    },
+  })
+  console.log(JSON.stringify({
+    command: 'install latest reviewed host configuration',
+    productionMutationAllowed: true,
+    ...result,
+  }, null, 2))
+}
+
 try {
   if (process.argv[2] === 'plan') await plan()
   else if (process.argv[2] === 'preflight') await preflight()
@@ -1061,9 +1127,11 @@ try {
   else if (process.argv[2] === 'bootstrap-resume') await bootstrapResume()
   else if (process.argv[2] === 'bootstrap-abandon') await bootstrapAbandon()
   else if (process.argv[2] === 'deploy') await deploy()
+  else if (process.argv[2] === 'reviewed-persistence') await reviewedPersistenceDeploy()
+  else if (process.argv[2] === 'update-host-config') await updateHostConfig()
   else {
     throw new Error(
-      'Usage: amp-orb-deploy.mjs plan | preflight --owner-said-preflight | bootstrap-preflight --owner-said-preflight | baseline --owner-said-baseline-migration | bootstrap --owner-said-release-bootstrap | bootstrap-inspect --owner-said-preflight | bootstrap-resume --owner-said-release-bootstrap-resume | bootstrap-abandon --owner-said-release-bootstrap-abandon | deploy --owner-said-deploy-latest',
+      'Usage: amp-orb-deploy.mjs plan | preflight --owner-said-preflight | bootstrap-preflight --owner-said-preflight | baseline --owner-said-baseline-migration | bootstrap --owner-said-release-bootstrap | bootstrap-inspect --owner-said-preflight | bootstrap-resume --owner-said-release-bootstrap-resume | bootstrap-abandon --owner-said-release-bootstrap-abandon | deploy --owner-said-deploy-latest | reviewed-persistence --owner-said-reviewed-persistence-deploy | update-host-config --owner-said-update-host-config',
     )
   }
 } catch (error) {
