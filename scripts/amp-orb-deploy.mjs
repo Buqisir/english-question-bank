@@ -23,6 +23,7 @@ import {
   deploymentGitHubApiArgs,
   deploymentSSHInvocation,
   deploymentSSHTransportUser,
+  isSshPublicKeyAuthenticationDenied,
   materializeDeploymentCredentials,
   migrateLegacyProductionBaseline,
   parseBootstrapKeyRetirementReceipt,
@@ -531,7 +532,7 @@ function readBootstrapJournal(identity) {
 }
 
 function invokeReleaseBootstrap({ candidate, identity, payload }) {
-  return withDeploymentCredentials((credentials) => {
+  return withDeploymentCredentials(async (credentials) => {
     const host = String(process.env.QUESTION_BANK_DEPLOY_SSH_HOST || '')
     const transportUser = deploymentSSHTransportUser(host)
     const invocation = deploymentSSHInvocation({
@@ -572,7 +573,7 @@ function invokeReleaseBootstrap({ candidate, identity, payload }) {
       encoding: 'utf8',
       timeout: 3 * 60 * 60 * 1000,
     })
-    const journalOutput = readBootstrapJournal(identity)
+    const journalOutput = await readBootstrapJournal(identity)
     let evidence
     try {
       evidence = classifyReleaseBootstrapOutcome(journalOutput, candidate.sha, remote.status)
@@ -703,11 +704,7 @@ function classifyPrivilegedBootstrapIdentity(identity) {
     })
     if (remote.error) throw remote.error
     if (remote.status === 0) return 'active'
-    if (
-      remote.status === 255
-      && /^[^\r\n]+: Permission denied \(publickey\)\.$/u
-        .test(String(remote.stderr || '').trim())
-    ) return 'retired'
+    if (isSshPublicKeyAuthenticationDenied(remote)) return 'retired'
     return 'unknown'
   })
 }
@@ -734,11 +731,7 @@ function classifyControllerIdentity(identity) {
         return 'unknown'
       }
     }
-    if (
-      remote.status === 255
-      && /^[^\r\n]+: Permission denied \(publickey\)\.$/u
-        .test(String(remote.stderr || '').trim())
-    ) return 'rejected'
+    if (isSshPublicKeyAuthenticationDenied(remote)) return 'rejected'
     return 'unknown'
   })
 }
@@ -947,14 +940,14 @@ async function bootstrapInspect() {
   let journal
   try {
     journal = classifyReleaseBootstrapJournal(
-      readBootstrapJournal(identity),
+      await readBootstrapJournal(identity),
       recovery.targetSha,
     )
   } catch {
     journal = { state: 'unavailable' }
   }
-  const controllerIdentity = classifyControllerIdentity(identity)
-  const bootstrapIdentity = classifyPrivilegedBootstrapIdentity(identity)
+  const controllerIdentity = await classifyControllerIdentity(identity)
+  const bootstrapIdentity = await classifyPrivilegedBootstrapIdentity(identity)
   let legacy = null
   if (bootstrapIdentity === 'active') {
     try {
@@ -981,13 +974,13 @@ async function bootstrapAbandon() {
   const recovery = readReleaseBootstrapRecovery({ stateRoot: bootstrapRecoveryRoot })
   const identity = identityFromRecovery(recovery, { projectId, transportTarget })
   const journal = classifyReleaseBootstrapJournal(
-    readBootstrapJournal(identity),
+    await readBootstrapJournal(identity),
     recovery.targetSha,
   )
   if (!['failure', 'unknown'].includes(journal.state)) {
     throw new Error('Successful bootstrap recovery cannot be abandoned')
   }
-  const cancellation = cancelReleaseBootstrapAttempt(identity)
+  const cancellation = await cancelReleaseBootstrapAttempt(identity)
   if (
     cancellation.hostAttemptStarted
     && (journal.state === 'unknown' || !journal.failure.evidenceRetained)
@@ -996,10 +989,10 @@ async function bootstrapAbandon() {
       'Bootstrap recovery has durable host acceptance without retained terminal failure evidence',
     )
   }
-  if (classifyControllerIdentity(identity) !== 'rejected') {
+  if (await classifyControllerIdentity(identity) !== 'rejected') {
     throw new Error('Bootstrap recovery cannot be abandoned while controller identity state is not rejected')
   }
-  if (classifyPrivilegedBootstrapIdentity(identity) !== 'active') {
+  if (await classifyPrivilegedBootstrapIdentity(identity) !== 'active') {
     throw new Error('Bootstrap recovery cannot be abandoned without the healthy legacy identity')
   }
   const legacy = await readLegacyPreflight(null, { keyPath: identity.bootstrapPrivateKeyPath })

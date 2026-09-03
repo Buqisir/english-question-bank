@@ -41,6 +41,7 @@ import {
   deploymentLockInvocation,
   deploymentSSHInvocation,
   deploymentSSHTransportUser,
+  isSshPublicKeyAuthenticationDenied,
   materializeDeploymentCredentials,
   migrateLegacyProductionBaseline,
   parseBootstrapKeyRetirementReceipt,
@@ -1563,6 +1564,67 @@ for (const invalidPublicKey of [
       return true
     }
   })(), 'Deployment public-key parsing rejects wrong-key-type and multiline output')
+}
+for (const [label, probe, expected] of [
+  [
+    'the only advertised method',
+    {
+      status: 255,
+      stdout: '',
+      stderr: 'deployer@production.invalid: Permission denied (publickey).\n',
+    },
+    true,
+  ],
+  [
+    'one of several advertised methods',
+    {
+      status: 255,
+      stdout: '',
+      stderr: 'deployer@production.invalid: Permission denied (publickey,password).\n',
+    },
+    true,
+  ],
+  [
+    'not advertised',
+    {
+      status: 255,
+      stdout: '',
+      stderr: 'deployer@production.invalid: Permission denied (password).\n',
+    },
+    false,
+  ],
+  [
+    'accompanied by command output',
+    {
+      status: 255,
+      stdout: 'remote command output\n',
+      stderr: 'deployer@production.invalid: Permission denied (publickey,password).\n',
+    },
+    false,
+  ],
+  [
+    'accompanied by another diagnostic line',
+    {
+      status: 255,
+      stdout: '',
+      stderr: 'diagnostic\ndeployer@production.invalid: Permission denied (publickey,password).\n',
+    },
+    false,
+  ],
+  [
+    'reported with a non-transport exit',
+    {
+      status: 1,
+      stdout: '',
+      stderr: 'deployer@production.invalid: Permission denied (publickey,password).\n',
+    },
+    false,
+  ],
+]) {
+  assert(
+    isSshPublicKeyAuthenticationDenied(probe) === expected,
+    `public-key authentication denial is classified when publickey is ${label}`,
+  )
 }
 const recoveryRoot = path.join(credentialRoot, 'recovery-state')
 const recovery = createReleaseBootstrapRecovery({
@@ -3434,6 +3496,7 @@ assert(
     && !bootstrapCli.includes("'--pipe'")
     && bootstrapCli.includes('/usr/bin/journalctl')
     && bootstrapCli.includes("remoteArgs: ['sudo', '-n', '/usr/bin/journalctl', '--sync']")
+    && bootstrapCli.includes('const journalOutput = await readBootstrapJournal(identity)')
     && bootstrapCli.includes('classifyReleaseBootstrapOutcome(journalOutput, candidate.sha, remote.status)'),
   'bootstrap hash-stages the tracked script and runs it under a disconnect-safe host service and lock',
 )
@@ -3451,7 +3514,7 @@ assert(
     && cli.includes('EQB_DEPLOY_BOOTSTRAP_PUBLIC_KEY_BODY=')
     && cli.includes('classifyPrivilegedBootstrapIdentity')
     && cli.includes("remoteArgs: ['/bin/true']")
-    && cli.includes('Permission denied \\(publickey'),
+    && cli.includes('isSshPublicKeyAuthenticationDenied(remote)'),
   'bootstrap retires the exact old identity and distinguishes auth rejection from transport failure',
 )
 assert(
@@ -3463,20 +3526,32 @@ assert(
   'bootstrap resumes finalization without repeating host bootstrap and retains crash-safe terminal evidence',
 )
 assert(
+  bootstrapInspectEntry.includes('await readBootstrapJournal(identity)')
+    && bootstrapInspectEntry.includes('await classifyControllerIdentity(identity)')
+    && bootstrapInspectEntry.includes('await classifyPrivilegedBootstrapIdentity(identity)'),
+  'bootstrap inspection resolves journal and identity probes before reporting their values',
+)
+assert(
   cli.includes('classifyControllerIdentity(identity)')
     && cli.includes("!['failure', 'unknown'].includes(journal.state)")
     && cli.includes('cancelReleaseBootstrapAttempt(identity)')
     && cli.includes("input: readFileSync(bootstrapCancellationSource, 'utf8')")
-    && cli.includes("classifyPrivilegedBootstrapIdentity(identity) !== 'active'")
+    && bootstrapAbandonEntry.includes(
+      "await classifyPrivilegedBootstrapIdentity(identity) !== 'active'",
+    )
     && cli.includes('abandonReleaseBootstrapRecovery(recovery, {'),
   'abandonment cancels queued dispatch under the host lock before both SSH identity classifications',
 )
 assert(
-  bootstrapAbandonEntry.indexOf('cancelReleaseBootstrapAttempt(identity)')
+  bootstrapAbandonEntry.includes('await readBootstrapJournal(identity)')
+    && bootstrapAbandonEntry.includes('await cancelReleaseBootstrapAttempt(identity)')
+    && bootstrapAbandonEntry.includes('await classifyControllerIdentity(identity)')
+    && bootstrapAbandonEntry.includes('await classifyPrivilegedBootstrapIdentity(identity)')
+    && bootstrapAbandonEntry.indexOf('cancelReleaseBootstrapAttempt(identity)')
       < bootstrapAbandonEntry.indexOf('classifyControllerIdentity(identity)')
     && bootstrapAbandonEntry.indexOf('cancelReleaseBootstrapAttempt(identity)')
       < bootstrapAbandonEntry.indexOf('readLegacyPreflight('),
-  'host cancellation wins dispatch serialization before abandonment state proofs and local cleanup',
+  'host cancellation resolves before abandonment state proofs and local cleanup',
 )
 assert(
   !bootstrapInspectEntry.includes('readCommitChecks')
