@@ -1802,7 +1802,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   const updateRailActiveHand = useCallback((): void => {
     const panel = railPanelRef.current
     const anchor = effectiveActiveAnchor
-    const handSize = 15
+    const handSize = 16
     const handWidth = (handSize * 16) / 18
     const handGap = 4
     if (!panel || !anchor) {
@@ -3517,7 +3517,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
               left: `${railActiveHand.left}px`,
             }}
           >
-            <PointingHand size={15} />
+            <PointingHand size={16} />
           </span>
         )}
         {railParts.map((part, partIndex) => (
