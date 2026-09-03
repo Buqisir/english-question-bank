@@ -345,7 +345,7 @@ layout existed. After this maintenance implementation is merged and its exact
 authorized production/root action; repository presence is not authorization.
 Do not run it from an ordinary Deployment Orb command.
 
-On a clean trusted checkout, materialize the installer and five-file payload
+On a clean trusted checkout, materialize the installer and six-file payload
 from the exact merged SHA (never from working-tree bytes):
 
 ```bash
@@ -357,29 +357,55 @@ git archive --format=tar --output=/tmp/eqb-maintenance-controller.tar "$SHA" -- 
   deploy/eqb-release.service \
   deploy/eqb-deploy-transport \
   deploy/eqb-deploy-controller \
-  deploy/eqb-deploy-controller.mjs
+  deploy/eqb-deploy-controller.mjs \
+  deploy/inspect-eqb-maintenance-host.sh
 sha256sum /tmp/install-eqb-maintenance-controller.sh \
   /tmp/eqb-maintenance-controller.tar
 ```
 
-Record both local digests, transfer the two files through the approved Tencent
-root/TAT path, and compare them on-host before execution. Fetch only Git objects
-as `eqb` so the installer can independently bind every payload file to the
-target commit. With the transport username taken from the pinned Deployment SSH
+Before authorizing installation, stream the exact merged inspector directly
+from `git show "$SHA:deploy/inspect-eqb-maintenance-host.sh"` into the approved
+Tencent root/TAT stdin command:
+
+```bash
+/usr/bin/env -i PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin \
+  /bin/bash -s -- "$SHA" <payload-sha256> <transport-user>
+```
+
+Do not persist or run a working-tree copy. This is a strictly
+read-only host inspection: it acquires the existing production lock, requires
+the versioned host root to be absent, rejects active maintenance state, checks
+root metadata and installed-current hashes, native parsers, all four exact sudo
+argv forms, trusted remote `main`, free space, and local/public health. It reads
+no database or Secret content and writes no host file. Accept only one
+`EQB_MAINTENANCE_INSTALL_READINESS` marker whose strict schema binds the exact
+SHA, payload digest, transport user and `state=ready`; any command failure,
+missing/duplicate marker, unexpected field, or `state=failed` is a blocker.
+The old forced controller does not need to support this one-time inspection.
+
+After that fresh readiness passes and the Owner separately authorizes the root
+installation, record both local digests, transfer the installer and payload
+through the approved Tencent root/TAT path, and compare them on-host before
+execution. With the transport username taken from the pinned Deployment SSH
 target, the authorized root invocation is:
 
 ```bash
-sudo -u eqb git -C /opt/eqb/english-question-bank fetch --quiet --no-tags origin main
 sudo /bin/bash /root/install-eqb-maintenance-controller.sh \
   "$SHA" <payload-sha256> /root/eqb-maintenance-controller.tar <transport-user>
 ```
 
 Require one `EQB_MAINTENANCE_CONTROLLER_INSTALL` success receipt, then run the
 normal Deployment Orb read-only `preflight`. The installer itself checks exact
-archive members/types, commit bytes, Node/systemd/Caddy syntax, all four sudo
-command forms, strict public health, and a real local invocation through the
-non-root forced route. It keeps the old files and success receipt in one
-root-private backup directory. A handled failure before file replacement
+archive members/types, fetches exact remote `main` as `eqb`, binds every byte to
+that commit, and reruns the trusted staged inspector on its inherited production
+lock descriptor before creating a backup or changing installed controller and
+service files. A root-owned, single-link legacy deployment lock may be `0600`
+or `0644`; while holding it,
+the installer normalizes it to `0600`, restores the prior mode on handled
+rollback, and installs a launcher whose `umask 077` keeps future lock creation
+private. It then checks Node/systemd/Caddy syntax and a real local invocation
+through the non-root forced route. It keeps the old files and success receipt in
+one root-private backup directory. A handled failure before file replacement
 removes the newly created host-configuration layout; after replacement it
 attempts every restore/reload/health step and emits an explicit critical result
 if rollback is incomplete. It neither changes the Deployment Secret nor touches

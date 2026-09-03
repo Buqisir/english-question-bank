@@ -1,5 +1,6 @@
 #!/bin/sh
 set -eu
+umask 077
 
 unset SSH_AUTH_SOCK
 
@@ -49,6 +50,7 @@ status=0
   --collect \
   --unit="$unit" \
   --property=Type=exec \
+  --property=UMask=0077 \
   --property=KillMode=control-group \
   --property=StandardInput=null \
   --property=StandardOutput=journal \

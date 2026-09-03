@@ -55,6 +55,7 @@ import {
   parseDeploymentPreflightOutput,
   parseHostConfigurationControllerOutput,
   parseLegacyBaselineReceipt,
+  parseMaintenanceInstallReadiness,
   parseOpenSshEd25519PublicKeyBody,
   parseReviewedPersistenceControllerOutput,
   parseReleaseBootstrapCancellation,
@@ -521,6 +522,90 @@ assert(
     newSha,
   ).targetSha === newSha,
   'controller entrypoint marks deployment receipts without exposing them to journal noise',
+)
+
+const maintenanceInstallDigest = '9'.repeat(64)
+const maintenanceInstallTransportUser = 'deploy-transport'
+const maintenanceInstallReport = {
+  schemaVersion: 'eqb-maintenance-install-readiness-v1',
+  state: 'ready',
+  failureCode: null,
+  targetSha: newSha,
+  payloadDigest: maintenanceInstallDigest,
+  productionSha: oldSha,
+  layout: 'release',
+  deploymentLockMode: '0644',
+  transportUser: maintenanceInstallTransportUser,
+  transportUid: 1001,
+  availableBytes: 6 * 1024 * 1024 * 1024,
+  controllerModuleSha256: 'a'.repeat(64),
+  rootWrapperSha256: 'b'.repeat(64),
+  transportWrapperSha256: 'c'.repeat(64),
+  unitSha256: 'd'.repeat(64),
+  caddyfileSha256: 'e'.repeat(64),
+}
+const maintenanceInstallOutput = (report = maintenanceInstallReport) =>
+  `EQB_MAINTENANCE_INSTALL_READINESS ${JSON.stringify(report)}`
+assert(
+  parseMaintenanceInstallReadiness(
+    maintenanceInstallOutput(),
+    newSha,
+    maintenanceInstallDigest,
+    maintenanceInstallTransportUser,
+  ).state === 'ready',
+  'maintenance-install readiness binds one exact target, payload, identity, and host evidence shape',
+)
+for (const [label, output, expectedDigest = maintenanceInstallDigest] of [
+  ['unexpected field', maintenanceInstallOutput({ ...maintenanceInstallReport, extra: true })],
+  ['another target', maintenanceInstallOutput({ ...maintenanceInstallReport, targetSha: oldSha })],
+  ['another payload', maintenanceInstallOutput(), '8'.repeat(64)],
+  [
+    'low disk evidence',
+    maintenanceInstallOutput({ ...maintenanceInstallReport, availableBytes: 1024 }),
+  ],
+  [
+    'writable deployment lock',
+    maintenanceInstallOutput({ ...maintenanceInstallReport, deploymentLockMode: '0666' }),
+  ],
+  ['non-JSON', 'EQB_MAINTENANCE_INSTALL_READINESS ready'],
+  [
+    'duplicate marker',
+    `${maintenanceInstallOutput()}\n${maintenanceInstallOutput()}`,
+  ],
+]) {
+  assert(
+    (() => {
+      try {
+        parseMaintenanceInstallReadiness(
+          output,
+          newSha,
+          expectedDigest,
+          maintenanceInstallTransportUser,
+        )
+        return false
+      } catch {
+        return true
+      }
+    })(),
+    `maintenance-install readiness rejects ${label}`,
+  )
+}
+assert(
+  parseMaintenanceInstallReadiness(
+    maintenanceInstallOutput({
+      ...Object.fromEntries(Object.keys(maintenanceInstallReport).map((key) => [key, null])),
+      schemaVersion: 'eqb-maintenance-install-readiness-v1',
+      state: 'failed',
+      failureCode: 'HOST_CONFIGURATION_ALREADY_PRESENT',
+      targetSha: newSha,
+      payloadDigest: maintenanceInstallDigest,
+      transportUser: maintenanceInstallTransportUser,
+    }),
+    newSha,
+    maintenanceInstallDigest,
+    maintenanceInstallTransportUser,
+  ).failureCode === 'HOST_CONFIGURATION_ALREADY_PRESENT',
+  'maintenance-install readiness preserves one strict fail-closed blocker marker',
 )
 
 const persistencePaths = ['server/api.mjs']
@@ -3312,6 +3397,7 @@ const baselineStateSource = readText(ROOT, 'deploy/eqb-legacy-baseline-state.mjs
 const keyRetirementSource = readText(ROOT, 'deploy/retire-eqb-bootstrap-key.mjs')
 const cancellationSource = readText(ROOT, 'deploy/cancel-eqb-bootstrap-attempt.mjs')
 const maintenanceInstallerSource = readText(ROOT, 'deploy/install-eqb-maintenance-controller.sh')
+const maintenanceInspectorSource = readText(ROOT, 'deploy/inspect-eqb-maintenance-host.sh')
 const deployLibrarySource = readText(ROOT, 'scripts/lib/ampOrbDeploy.mjs')
 const baselineProtectedBlock = baselineSource.slice(
   baselineSource.indexOf('  const protectedPaths = ['),
@@ -3387,6 +3473,11 @@ execFileSync('/bin/sh', ['-n', path.join(ROOT, 'deploy', 'eqb-deploy-controller'
 execFileSync('/bin/sh', ['-n', path.join(ROOT, 'deploy', 'eqb-deploy-transport')])
 execFileSync('/bin/bash', ['-n', path.join(ROOT, 'deploy', 'bootstrap-eqb-deployment.sh')])
 execFileSync('/bin/bash', ['-n', path.join(ROOT, 'deploy', 'install-eqb-maintenance-controller.sh')])
+execFileSync('/bin/bash', ['-n', path.join(ROOT, 'deploy', 'inspect-eqb-maintenance-host.sh')])
+assert(
+  (statSync(path.join(ROOT, 'deploy', 'inspect-eqb-maintenance-host.sh')).mode & 0o111) === 0o111,
+  'standalone maintenance-install inspector is committed as an executable script',
+)
 for (const originalCommand of [
   '',
   'deploy',
@@ -3933,12 +4024,77 @@ assert(
     && maintenanceInstallerSource.includes('strict_health'),
   'one-time root installer binds exact typed target bytes and proves the full forced route before success',
 )
+const installerLockIndex = maintenanceInstallerSource.indexOf(
+  '/usr/bin/flock --exclusive --nonblock --conflict-exit-code 75 9',
+)
+const installerStagingIndex = maintenanceInstallerSource.indexOf(
+  'staging=$(mktemp -d "$ROOT/deployments/.maintenance-controller-XXXXXXXX")',
+)
+const installerFetchIndex = maintenanceInstallerSource.indexOf(
+  'run_source /usr/bin/git -C "$SOURCE" fetch --quiet --no-tags origin main',
+)
+const installerReadinessIndex = maintenanceInstallerSource.indexOf(
+  '"$staging/deploy/inspect-eqb-maintenance-host.sh"',
+)
+const installerBackupIndex = maintenanceInstallerSource.indexOf(
+  'backup=$(mktemp -d "$BACKUP_ROOT/maintenance-controller-install-',
+)
+const installerLockNormalizationIndex = maintenanceInstallerSource.indexOf(
+  'chmod 0600 "$DEPLOY_LOCK"',
+)
+assert(
+  installerLockIndex !== -1
+    && installerLockIndex < installerStagingIndex
+    && installerStagingIndex < installerFetchIndex
+    && installerFetchIndex < installerReadinessIndex
+    && installerReadinessIndex < installerLockNormalizationIndex
+    && installerLockNormalizationIndex < installerBackupIndex
+    && installerReadinessIndex < installerBackupIndex
+    && maintenanceInstallerSource.includes('EQB_MAINTENANCE_LOCK_FD=9')
+    && maintenanceInstallerSource.match(/deploy\/inspect-eqb-maintenance-host\.sh/gmu)?.length >= 4,
+  'installer holds the production lock across exact-main fetch, six-file proof, adjacent inspection, and mutation',
+)
+assert(
+  maintenanceInstallerSource.includes('( $actual_mode == 600 || $actual_mode == 644 )')
+    && maintenanceInstallerSource.includes('lock_mode_changed=1\n  chmod 0600 "$DEPLOY_LOCK"')
+    && installerRollbackSource.includes('chmod "$deploy_lock_mode" "$DEPLOY_LOCK"'),
+  'installer normalizes a safe legacy deployment lock privately and restores its mode on rollback',
+)
+assert(
+  maintenanceInspectorSource.includes('EQB_MAINTENANCE_INSTALL_READINESS ')
+    && maintenanceInspectorSource.includes('"state":"ready","failureCode":null')
+    && maintenanceInspectorSource.includes('"state":"failed","failureCode":"%s"')
+    && maintenanceInspectorSource.includes('EQB_MAINTENANCE_LOCK_FD')
+    && maintenanceInspectorSource.includes('ls-remote --exit-code origin refs/heads/main')
+    && maintenanceInspectorSource.includes('sudo -n -l -U "$TRANSPORT_USER"')
+    && maintenanceInspectorSource.includes('HOST_CONFIGURATION_PRESENT')
+    && maintenanceInspectorSource.includes('ACTIVE_MAINTENANCE_STATE'),
+  'standalone root inspector emits one schema-bound result and covers the previously unobservable host gates',
+)
+const maintenanceInspectorChecks = maintenanceInspectorSource.slice(
+  maintenanceInspectorSource.indexOf('assert_real_file "$DEPLOY_LOCK"'),
+)
+assert(
+  !/\b(?:sqlite|question-bank\.sqlite|user-data\.sqlite|import-ops\.sqlite)\b/iu
+    .test(maintenanceInspectorSource)
+    && !/(?:PRIVATE_KEY|SECRET|\.env)/u.test(maintenanceInspectorSource)
+    && !/^\s*(?:\/usr\/bin\/)?(?:cp|install|ln|mkdir|mv|rm|sync|touch)\s/mu
+      .test(maintenanceInspectorChecks)
+    && !/\b(?:systemctl\s+(?:start|stop|restart)|caddy\s+reload|git\s+[^\n]*(?:fetch|merge|pull|push|reset|checkout))\b/u
+      .test(maintenanceInspectorChecks),
+  'standalone host inspection cannot read databases or secrets or invoke host mutation actions',
+)
 assert(
   bootstrapSource.includes('umask 077')
     && bootstrapSource.includes('EQB_DEPLOY_CONTROLLER_PUBLIC_KEY_BODY')
     && bootstrapSource.includes('mktemp /run/eqb-controller-public-key-XXXXXXXX')
     && bootstrapSource.includes('cleanup_public_key'),
   'bootstrap accepts only a private temporary materialization of the generated public key',
+)
+assert(
+  controllerWrapper.includes('set -eu\numask 077')
+    && controllerWrapper.includes('--property=UMask=0077'),
+  'stable root launcher creates any future deployment lock with a private mode',
 )
 assert(
   bootstrapSource.includes('/usr/bin/systemd-run')

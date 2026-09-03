@@ -163,16 +163,27 @@ Ordinary release activation remains separate and is still required afterward.
 The existing Tencent Cloud S2 host predates the versioned controller layout. It
 therefore needs exactly one separately authorized root installation using
 `deploy/install-eqb-maintenance-controller.sh`. The installer accepts one
-digest-bound archive containing the five exact deploy files from one merged
-SHA, verifies every member against that commit in the production source clone,
-checks the non-root transport account's exact sudo command scope, preserves a
-root-private backup and success receipt, and rolls back on a handled failure.
-Before replacing installed files, it durably publishes the complete versioned
-layout; a handled failure before replacement removes that newly created layout.
-Rollback attempts every restore step and reports an explicit critical result
-when any restore, reload, cleanup, or health proof fails. It does not provision
-a blank server, restore data, rotate Secrets, or grant ordinary releases
-authority over stable launchers.
+digest-bound archive containing the six exact deploy files from one merged
+SHA, including `deploy/inspect-eqb-maintenance-host.sh`. Because the old static
+controller cannot expose future inspection commands before it is replaced, the
+exact inspector is streamed through the separately authorized root/TAT path; it
+acquires the production lock read-only and emits one fixed, target- and
+payload-bound readiness marker without reading databases or Secrets or writing
+host files. The installer then acquires that same lock before any staging,
+fetches and binds remote `main`, verifies every archive member against that
+commit, and reruns the trusted staged inspector on its inherited lock descriptor
+immediately before backup or installation. The inspector accepts only the
+root-owned, single-link legacy `0600` or `0644` lock; the installer normalizes
+it to `0600` while held (restoring its prior mode on rollback), and the new
+stable launcher fixes `umask 077` for future creation. It checks the non-root
+transport account's exact sudo command scope, preserves a root-private backup
+and success receipt, and rolls back on a handled failure. Before replacing
+installed files, it durably publishes the complete versioned layout; a handled
+failure before replacement removes that newly created layout. Rollback attempts
+every restore step and reports an explicit critical result when any restore,
+reload, cleanup, or health proof fails. It does not provision a blank server,
+restore data, rotate Secrets, or grant ordinary releases authority over stable
+launchers.
 
 ### Legacy transition states
 
@@ -265,7 +276,9 @@ The repository implementation exposes:
   to one versioned, rollback-capable host update;
 - a one-time Tencent root installer for moving the already-bootstrapped S2 host
   from its static controller module to the stable-dispatcher/versioned-module
-  layout; it is not a reusable provisioning or stable-launcher update API;
+  layout, preceded and immediately rechecked under lock by the standalone
+  read-only root/TAT inspector; it is not a reusable provisioning or
+  stable-launcher update API;
 - a one-time bootstrap script that prepares the first release before outage,
   refuses a target whose persistence authority differs from legacy production,
   migrates persistent paths while `eqb` is stopped, installs the release-only
