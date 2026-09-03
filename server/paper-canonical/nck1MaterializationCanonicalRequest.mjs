@@ -200,6 +200,16 @@ export function materializeNck1CanonicalRequest(sourceInput, confirmation) {
   }
   const derivation = deriveNck1MaterializationBundle(sourceInput)
   const outputs = new Map()
+  const liveRequest = {
+    authority: nck1MaterializationCandidateAuthorityRef,
+    nck1MaterializationConfirmation: confirmation,
+    evidence: {
+      documents: derivation.request.evidence.documents.map((document) => ({
+        ...document,
+        bytes: new Uint8Array(document.bytes),
+      })),
+    },
+  }
   const documents = derivation.request.evidence.documents.map((document, index) => {
     const mediaType = document.declared.mediaType
     const fileName = `${String(index + 1).padStart(2, '0')}-${safeFileStem(document.inputKey)}.${extensionFor(mediaType)}`
@@ -225,6 +235,7 @@ export function materializeNck1CanonicalRequest(sourceInput, confirmation) {
     candidateDigest: imported.candidate.candidateDigest,
     sourceDigest: imported.candidate.source.sha256,
     canonicalPaper: confirmed.compilation.artifacts.canonicalPaper,
+    request: liveRequest,
     outputs,
   }
 }

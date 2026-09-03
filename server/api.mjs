@@ -47,6 +47,10 @@ import { createSynonymDifficultyImplementation, loadSynonymDifficultyKnowledge, 
 import { createQuestionGroupParseImplementation } from './ai-parse/questionGroupParseService.mjs'
 import { createImportReviewStore } from './import-review/importReviewStore.mjs'
 import { createImportReviewRoutes } from './import-review/importReviewRoutes.mjs'
+import { createSinglePaperPromotionService } from './import-review/singlePaperPromotion.mjs'
+import { createSourceIntakeNotifier } from './source-intake/sourceIntakeNotifier.mjs'
+import { createSourceIntakeRoutes } from './source-intake/sourceIntakeRoutes.mjs'
+import { createSourceIntakeStore } from './source-intake/sourceIntakeStore.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
@@ -103,6 +107,25 @@ function getImportReviewStore() {
   }
   return importReviewStore
 }
+let sourceIntakeStore = null
+function getSourceIntakeStore() {
+  if (!sourceIntakeStore) {
+    sourceIntakeStore = createSourceIntakeStore({
+      dbPath: importReviewDbPath,
+      filesRoot: importReviewFilesRoot,
+    })
+  }
+  return sourceIntakeStore
+}
+const sourceIntakeNotifier = createSourceIntakeNotifier({
+  webhookUrl: process.env.QUESTION_BANK_SOURCE_INTAKE_WEBHOOK_URL || '',
+  webhookSecret: process.env.QUESTION_BANK_SOURCE_INTAKE_WEBHOOK_SECRET || '',
+})
+const singlePaperPromotionService = createSinglePaperPromotionService({
+  getStore: getImportReviewStore,
+  openDatabase,
+  paperAssetsDir,
+})
 const paperSurfaceAnalysisAvailability = createPaperSurfaceAnalysisAvailability({ paperAssetsDir })
 const teachingFacetIndex = createTeachingFacetIndex({ paperAssetsDir })
 const similarQuestionsStore = createSimilarQuestionsStore({ getTeachingFacetIndex, paperAssetsDir })
@@ -588,6 +611,12 @@ const serverRoutes = [
     agentToken: process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN || '',
     shipToken: process.env.QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN || '',
     buildPrintHtml,
+    promotionService: singlePaperPromotionService,
+  }),
+  ...createSourceIntakeRoutes({
+    getStore: getSourceIntakeStore,
+    notifier: sourceIntakeNotifier,
+    agentToken: process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN || '',
   }),
   ...createQuestionGroupRoutes(),
   ...createPaperSetRoutes(),
@@ -3992,6 +4021,8 @@ const AUTH_PUBLIC_ROUTES = [
   { method: 'POST', pattern: /^\/api\/import-agent-reviews(?:\/.*)?$/ },
   { method: 'PUT', pattern: /^\/api\/import-agent-reviews(?:\/.*)?$/ },
   { method: 'DELETE', pattern: /^\/api\/import-agent-reviews(?:\/.*)?$/ },
+  { method: 'GET', pattern: /^\/api\/import-agent-source-intakes(?:\/.*)?$/ },
+  { method: 'POST', pattern: /^\/api\/import-agent-source-intakes(?:\/.*)?$/ },
 ]
 
 function isAuthPublicRoute(method, pathname) {
@@ -4076,6 +4107,7 @@ function importAgentAccountRouteAllowed(method, pathname) {
     (pathname === '/api/auth/me' && method === 'GET')
     || (pathname === '/api/auth/logout' && method === 'POST')
     || pathname.startsWith('/api/import-agent-reviews')
+    || pathname.startsWith('/api/import-agent-source-intakes')
     || (method === 'GET' && pathname.startsWith('/api/import-review-preview/'))
   )
 }

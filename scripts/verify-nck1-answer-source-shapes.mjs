@@ -47,13 +47,23 @@ function answerValues(produced) {
   }))
 }
 
-function assertReady(produced, documents, forbiddenText) {
+const expectedWritingSamples = {
+  application: 'Should We Join the Reading Club?\nJoin us on Friday to read and share ideas.',
+  continuation: 'Mia carried the notebook to the school office. The teacher found its owner.\nThe next morning, a student came to thank her. They became friends.',
+}
+
+function assertReady(produced, documents, forbiddenText, writingSamples = null) {
   assert.equal(produced.disposition, 'ready_for_verification')
   assert.deepEqual(produced.review.required, [])
   assert.equal(produced.materialization.answers.length, 45)
-  assert(produced.materialization.groups
+  const writingGroups = produced.materialization.groups
     .filter((group) => group.writingTask)
-    .every((group) => group.writingTask.officialModelAnswer === null))
+  assert.deepEqual(
+    writingGroups.map((group) => group.writingTask.officialModelAnswer),
+    writingSamples
+      ? [writingSamples.application, writingSamples.continuation]
+      : [null, null],
+  )
   const materializationText = JSON.stringify(produced.materialization)
   assert.equal(materializationText.includes(forbiddenText), false)
 
@@ -84,7 +94,12 @@ const keyOnlyDocxResult = produceNck1DocxMaterialization({
   paperId: keyOnlyDocx.paperId,
   documents: keyOnlyDocx.sourceDocuments,
 })
-assertReady(detailedDocxResult, detailedDocx.sourceDocuments, 'DETAIL_TOKEN_MUST_NOT_LEAK')
+assertReady(
+  detailedDocxResult,
+  detailedDocx.sourceDocuments,
+  'DETAIL_TOKEN_MUST_NOT_LEAK',
+  expectedWritingSamples,
+)
 assertReady(keyOnlyDocxResult, keyOnlyDocx.sourceDocuments, 'DETAIL_TOKEN_MUST_NOT_LEAK')
 assert.deepEqual(answerValues(detailedDocxResult), answerValues(keyOnlyDocxResult))
 
@@ -93,7 +108,12 @@ const combinedDocxResult = produceNck1DocxMaterialization({
   paperId: combinedDocx.paperId,
   documents: combinedDocx.sourceDocuments,
 })
-assertReady(combinedDocxResult, combinedDocx.sourceDocuments, 'DETAIL_TOKEN_MUST_NOT_LEAK')
+assertReady(
+  combinedDocxResult,
+  combinedDocx.sourceDocuments,
+  'DETAIL_TOKEN_MUST_NOT_LEAK',
+  expectedWritingSamples,
+)
 assert.deepEqual(answerValues(combinedDocxResult), answerValues(detailedDocxResult))
 assert(combinedDocxResult.materialization.documents.some((document) =>
   document.role === 'question_and_answers'))
@@ -156,6 +176,7 @@ assertReady(
   detailedPdfResult,
   pdfFixture.sourceDocuments,
   'deliberately untrusted explanation',
+  expectedWritingSamples,
 )
 assertReady(
   keyOnlyPdfResult,
@@ -172,6 +193,7 @@ assertReady(
   combinedPdfResult,
   pdfFixture.answerShapes.combinedDocuments,
   'deliberately untrusted explanation',
+  expectedWritingSamples,
 )
 assert.deepEqual(answerValues(combinedPdfResult), answerValues(detailedPdfResult))
 assert.equal(

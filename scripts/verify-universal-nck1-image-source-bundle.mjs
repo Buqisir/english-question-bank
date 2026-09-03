@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// verify-resource: browser-render
 
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
@@ -124,6 +125,12 @@ assert.equal(confirmed.materialization.answers.length, 45)
 assert.deepEqual(confirmed.materialization.media, [])
 assert.equal(JSON.stringify(confirmed.materialization).includes('data:image'), false)
 assert.equal(JSON.stringify(confirmed.materialization).includes('deliberately untrusted explanation'), false)
+const firstReadingQuestion = confirmed.materialization.groups
+  .find((group) => group.slotId === 'reading.a').questions[0]
+assert.equal(firstReadingQuestion.stem, 'Which choice fits item 21?')
+assert(firstReadingQuestion.options.every((option) =>
+  !firstReadingQuestion.stem.includes(option.text)),
+'image-source reading stems must not repeat their separately structured option text')
 const canonical = imported(confirmed)
 assert.deepEqual(canonical.issues, [])
 const preview = compileNck1MaterializationCandidatePreview(canonical.candidate)

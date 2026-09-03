@@ -1,8 +1,11 @@
+import { bindClipboardButtons } from './clipboard.js'
+
 const root = document.querySelector('#app')
 
 const state = {
   user: null,
   actor: null,
+  view: 'review',
   papers: [],
   paperId: null,
   detail: null,
@@ -29,6 +32,9 @@ const stateLabels = {
   awaiting_review: '待审核',
   changes_requested: '待修改',
   approved: '已认可',
+  publishing: '上线中',
+  published: '已上线',
+  failed: '上线失败',
   superseded: '旧版本',
   open: '待处理',
   fixed_pending_review: '待验证',
@@ -66,6 +72,14 @@ function status(value, label = null) {
 function shortDigest(value) {
   const text = String(value || '')
   return text.length > 24 ? `${text.slice(0, 16)}…${text.slice(-8)}` : text
+}
+
+function copyButton(value, name, label = '复制') {
+  return `<button class="copy-button" type="button" data-copy-text="${escapeHtml(value)}" data-copy-name="${escapeHtml(name)}" aria-label="复制${escapeHtml(name)}">${escapeHtml(label)}</button>`
+}
+
+function commandCopyHtml(command) {
+  return `<div class="command-copy"><code>${escapeHtml(command)}</code>${copyButton(command, '口令', '复制口令')}</div>`
 }
 
 function formatTime(value) {
@@ -143,6 +157,7 @@ function paperListHtml() {
       <span class="paper-name">${escapeHtml(paper.paperName)}</span>
       <span class="paper-meta">${paper.reviewKind === 'ocr' ? 'OCR' : 'Candidate'} R${escapeHtml(paper.revisionNumber || '—')}${paper.reviewKind === 'ocr' ? ' · 原图识别核对' : ` · ${escapeHtml(paper.unresolvedCount)} 个未决`}</span>
       ${status(paper.state, paper.reviewKind === 'ocr' && paper.state === 'approved' ? 'OCR 已确认' : null)}
+      ${paper.promotionState ? status(paper.promotionState) : ''}
     </button>
   `).join('')}</div>`
 }
@@ -405,7 +420,7 @@ function leftRailHtml() {
       ${state.detail ? `
         <section class="rail-section">
           <h3>${escapeHtml(state.detail.paperName)}</h3>
-          <p class="paper-meta">${escapeHtml(state.detail.paperId)}</p>
+          <div class="copy-row"><code class="paper-meta">${escapeHtml(state.detail.paperId)}</code>${copyButton(state.detail.paperId, 'Paper ID')}</div>
           ${latest ? `<p class="digest" title="${escapeHtml(latest.bundleDigest)}">当前摘要 ${escapeHtml(shortDigest(latest.bundleDigest))}</p>` : ''}
           ${isOcrReview() ? '<p class="boundary-note">第一阶段：对照原图核准 OCR。确认后 Agent 才能生成真实 Screen revision。</p>' : ''}
           ${state.detail.rendererStale ? '<p class="boundary-note">Screen / Print 渲染器已经更新。Agent 需重新提交同一 Candidate，生成新的审核 revision。</p>' : ''}
@@ -781,6 +796,48 @@ function approvalHtml() {
   </section>`
 }
 
+function promotionHtml() {
+  if (isOcrReview()) return ''
+  const promotion = state.detail?.promotion
+  const approval = state.detail?.latest?.approval
+  if (!promotion && !approval) return ''
+  if (approval && promotion?.approvalId !== approval.approvalId) {
+    return `<section class="rail-section">
+      <h2>上线审计</h2>
+      <div class="approval-box">
+        ${status('approved', '已认可，未上线')}
+        <p class="muted">认可不会公开这套卷。Owner 如决定上线，需在当前 Agent 对话明确说：</p>
+        ${commandCopyHtml(`上线 ${state.detail.paperId}`)}
+        ${promotion ? `<p class="boundary-note">上一份上线回执：${escapeHtml(stateLabels[promotion.state] || promotion.state)} · ${escapeHtml(promotion.versionName || '未提交版本')}</p>` : ''}
+        <p class="boundary-note">网页不持有上线权限，也没有上线按钮。</p>
+      </div>
+    </section>`
+  }
+  const command = promotion.state === 'failed'
+    ? `重试上线 ${state.detail.paperId}`
+    : `上线 ${state.detail.paperId}`
+  const promotedRevision = state.detail.revisions?.find((revision) =>
+    revision.id === promotion.revisionId)
+  const version = promotion.versionName
+    ? ` · ${promotion.versionName}`
+    : ''
+  const timestamp = promotion.publishedAt || promotion.failedAt || promotion.updatedAt
+  return `<section class="rail-section">
+    <h2>上线审计</h2>
+    <div class="approval-box">
+      ${status(promotion.state)}
+      <p class="muted">R${escapeHtml(promotedRevision?.revisionNumber || '—')}${escapeHtml(version)} · 尝试 ${escapeHtml(promotion.attemptCount)}</p>
+      <p class="digest" title="${escapeHtml(promotion.promotionId)}">${escapeHtml(promotion.promotionId)}</p>
+      ${promotion.canonicalPublicationDigest ? `<p class="digest" title="${escapeHtml(promotion.canonicalPublicationDigest)}">Canonical ${escapeHtml(shortDigest(promotion.canonicalPublicationDigest))}</p>` : ''}
+      ${promotion.analysisPublicationDigest ? `<p class="digest" title="${escapeHtml(promotion.analysisPublicationDigest)}">五份分析 ${escapeHtml(shortDigest(promotion.analysisPublicationDigest))}</p>` : ''}
+      ${promotion.failureCode ? `<p class="boundary-note">${escapeHtml(promotion.failureCode)}：${escapeHtml(promotion.failureMessage)}</p>` : ''}
+      <p class="timestamp">${escapeHtml(formatTime(timestamp))}</p>
+      ${promotion.state === 'failed' ? `<p class="muted">确认生产状态后，如需重试，Owner 必须另说：</p>${commandCopyHtml(command)}` : ''}
+      <p class="boundary-note">这是只读回执；网页不执行上线。</p>
+    </div>
+  </section>`
+}
+
 function rightRailHtml() {
   return `<aside class="right-rail" aria-label="QA 问题与认可">
     ${sourceVisualSectionHtml()}
@@ -790,6 +847,7 @@ function rightRailHtml() {
       <h2>${state.actor === 'owner' ? 'QA 对话' : 'Owner 反馈'}</h2>
       ${issuesHtml()}
     </section>
+    ${promotionHtml()}
     ${approvalHtml()}
   </aside>`
 }
@@ -806,11 +864,16 @@ function accessHtml(title, message, action = '') {
 function render() {
   if (!state.user) return
   root.innerHTML = `<div class="app-shell">
+    <div class="sr-only" role="status" aria-live="polite" data-copy-feedback></div>
     <header class="topbar">
       <div class="brand">
         <div class="brand-mark" aria-hidden="true">EQ</div>
-        <div><h1>导题审核</h1><p>${state.actor === 'owner' ? '审核真实消费表面' : '读取并回应 Owner QA'}</p></div>
+        <div><h1>英语题库</h1><p>${state.actor === 'owner' ? '后台工作台' : 'Agent 待办箱'}</p></div>
       </div>
+      ${state.actor === 'owner' ? `<nav class="workspace-navigation" aria-label="后台工作台">
+        <a href="/ops/">题源台账</a>
+        <a href="/ops/?view=review" aria-current="page">导题审核</a>
+      </nav>` : ''}
       <div class="account">
         <div class="account-copy"><strong>${escapeHtml(state.user.username)}</strong><span>${state.actor === 'owner' ? 'Owner 审核台' : 'Agent 待办箱'}</span></div>
         <button class="button" id="refresh" type="button">刷新</button>
@@ -1113,6 +1176,7 @@ function bindFrame() {
 }
 
 function bind() {
+  bindClipboardButtons(root)
   document.querySelectorAll('[data-paper-id]').forEach((button) => {
     button.addEventListener('click', () => void loadDetail(button.dataset.paperId))
   })
@@ -1270,6 +1334,12 @@ async function boot() {
     state.user = me.user
     if (me.user.role === 'owner' && me.user.accountKind !== 'import_agent') {
       state.actor = 'owner'
+      if (new URLSearchParams(window.location.search).get('view') !== 'review') {
+        state.view = 'sources'
+        const { mountSourceIntakes } = await import('./source-intakes.js')
+        mountSourceIntakes({ root, user: state.user, request, accessHtml })
+        return
+      }
     } else if (me.user.accountKind === 'import_agent') {
       state.actor = 'agent'
     } else {
@@ -1285,6 +1355,7 @@ async function boot() {
 void boot()
 
 window.setInterval(() => {
+  if (state.view !== 'review') return
   const active = document.activeElement
   if (document.hidden || active?.matches('input, textarea, select')) return
   void loadPapers()

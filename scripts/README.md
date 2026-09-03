@@ -11,6 +11,15 @@ Three local entrypoints share `scripts/verify-ci.mjs`:
 - `pnpm -C app verify:paper` exercises shared Canonical Paper/Print seams;
 - `pnpm -C app verify:all` is the release/fallback suite used by CI.
 
+Verifier scripts use bounded parallel execution. The default is half the
+available CPU count, capped at 8 jobs (8 jobs on the 16-core Orb). Browser,
+Chromium, Vivliostyle, and LibreOffice checks share one render lane; each fixed
+port has its own collision lock; official-evidence checks run exclusively.
+Each job spools output privately and the runner prints those logs in registry
+order, while still collecting all PASS/SKIP/FAIL results. Use `--jobs 1` or
+`VERIFY_CONCURRENCY=1` for exact serial fallback; use `--jobs N` to override
+the bounded default.
+
 Every registered row below is its one-line named failure: the distinct fault
 the verifier catches or the independent layer it supplies. A verifier without
 such a row is not registrable. `--list-json` shows the registry and packs;
@@ -43,17 +52,25 @@ original/A-D comparison pass. Its batch, candidates, and state all live under
 `.scratch/vocabulary-audio-repair-v1/`; neither pass changes formal MP3 assets
 until the owner has selected the replacements.
 
-The sole workflow authority is `.github/workflows/verify.yml`; it runs on
-pushes and PRs. Before any
-merge to `main` the run must be green, and the post-merge `main` run
-must be confirmed green (AGENTS.md RM gate).
+`.github/workflows/verify.yml` is the hosted PR and `main` merge authority while
+Amp bug `amp_bug_0uiggF5jWG6i6iaB72BATT` blocks durable webhook delivery to the
+dedicated CI Orb. Branch protection requires hosted `verify` and `e2e`; both
+must be green before merge, and the post-merge `main` run must be confirmed
+green. The 16-core Orb's `Amp Orb Verify (fast)` and `Amp Orb Verify` contexts
+remain informational during this rollback (AGENTS.md RM gate).
+The first Action-wake phase adds fixed-sentinel interception and GitHub-state
+discovery only; no wake workflow or `AMP_API_KEY` is enabled until a separately
+authorized second phase.
 
 ## Stable CI entrypoint
 
 | Script | Scope | Runs in CI? |
 | --- | --- | --- |
-| `verify-ci.mjs` | Selects changed/Paper/all packs deterministically and reports PASS/SKIP/FAIL without hiding later failures | yes |
-| `verify-verification-command-runner.mjs` | Prevents a completed or interrupted verifier from leaving its own Vite/Chromium/test descendants alive, and bounds oversized single-line diagnostics while retaining their head, tail, and digest | yes |
+| `verify-ci.mjs` | Selects changed/Paper/all packs, runs bounded resource-aware parallel jobs with registry-ordered logs, and reports PASS/SKIP/FAIL without hiding later failures | yes |
+| `verify-amp-orb-ci.mjs` | Rejects non-exact wake sentinels, uncancelled wake turns, HMAC-coupled Action wake, non-authoritative or forked GitHub discovery, nondeterministic delivery IDs, GitHub CI webhook/HMAC allowlist drift, payload-to-prompt injection, secret-bearing candidate environments, stale merge parents, non-parallel Fast/Full lanes, duplicate execution, unrecoverable run/status crash windows, non-private receipts, or commit-status scope drift without registering a webhook or calling GitHub | yes |
+| `verify-amp-orb-deploy.mjs` | Proves the separate Deployment Orb contract without production access: automatic exact-main resolution, exact-SHA same-run hosted `verify` + `e2e` gating that rejects manual jobs and foreign check sources, pinned private SSH materialization, single-writer lock invocation, atomic release switch, idempotent no-op, private receipt, shared-data isolation, and healthy rollback; the real deploy command remains closed | yes |
+| `verify-verification-command-runner.mjs` | Prevents completed or concurrently interrupted verifiers from leaving their own Vite/Chromium/test descendants alive, and bounds oversized single-line diagnostics while retaining their head, tail, and digest | yes |
+| `verify-verification-scheduler.mjs` | Proves bounded concurrency, render/port resource locks, exclusive barriers, ordered result flushing, collect-all statuses, abort stop-dispatch, and jobs=1 serial fallback | yes |
 | `verify-vocabulary-closed-loop.mjs` | Validates the 1600-entry Wanwei source/content/unique Koboyo visual, formal American and Owner-approved Cori British audio contracts, plus isolated progress, frozen-set, share/revoke, and temporary-scope persistence | yes |
 | `verify-vocabulary-dictation-review.mjs` | Verifies frozen multi-set dictation tasks, global share isolation, teacher-confirmed result editing/voiding, pending/stubborn/improved derivation, manual flags, suggestions, library search/statistics, and user/student isolation | yes |
 | `verify-vocabulary-meaning-recall.mjs` | Verifies frozen multi-set meaning-recall records, same-day evidence collapse, cross-day repeated/recovered derivation, dictation-correct contribution without fabricated meaning errors, task linkage, suggestions, and user/student isolation | yes |
@@ -73,7 +90,7 @@ must be confirmed green (AGENTS.md RM gate).
 | `verify-vocabulary-migration.mjs` | Replays the legacy vocabulary-entry constraint migration and proves successful row/index/FK preservation plus full rollback and FK restoration on a rejected legacy row | yes |
 | `verify-vocabulary-match-game.mjs` | Verifies the pure 10-word round builder and flip/mismatch/confirmation/match state machine for the frozen-set matching game | yes |
 | `verify-vocabulary-rendered-behavior.mjs` | Uses real Chromium to verify one-audio playback timing/cancellation/retry/end behavior, matching-game interaction, vocabulary cards, dictation/answer/handwriting PDFs, download filenames, and the hidden-answer auto-dictation flow | yes |
-| `verify-architecture-housekeeping.mjs` | Prevents missing entrypoints, undocumented verifier registration, stale workflow ownership, and six risk-route regressions | yes |
+| `verify-architecture-housekeeping.mjs` | Prevents missing entrypoints, undocumented verifier registration, automatic hosted fallback triggers, stale workflow ownership, and six risk-route regressions | yes |
 | `verify-motion-tokens.mjs` | motion-pass gate: `app/src/**/*.css` (excluding PaperSurface.css contract file) has no `ease-in`, no `transition: all`, and no bare hand-written transition/animation durations outside `token-exempt`-tagged loading or signature moments | yes |
 | `verify-lecture-panel-css.mjs` | lecture-css-restore gate: 讲评五解析面板 (pi-ps-analysis/cloze/gf/seven/writing) 活 TSX 用到的每个类必须有 CSS 定义或在 hook-only 白名单（含白名单防陈旧 + paperBrowsePage.css @import 加载链断言）——retire 刀样式陪葬事故的可执行形态 | yes |
 | `verify-radius-family.mjs` | design-canon-v2 gate: every `border-radius` in `app/src/**/*.css` is in the DESIGN.md radius ladder {0, 4, 6, 8, 999px, 50%}; 32 historical off-family literals grandfathered per file×value as a shrink-only ratchet | yes |
@@ -119,6 +136,7 @@ must be confirmed green (AGENTS.md RM gate).
 | `verify-paper-canonical-registered-confirmation-admission.mjs` | Rejects unregistered or proof-mutated historical confirmation authorities before publication and proves v41/v42/v37 recovery remains atomic | yes |
 | `verify-paper-canonical-import-recovery.mjs` | Ticket 19 public canonical import recovery: byte-exact pre-commit restoration, committed-target restart recovery, idempotent retry, digest-identity conflict rejection, strict stale/corrupt load failure, and validated whole-Publication rollback without legacy or generated-DOCX fallback | yes |
 | `verify-universal-nck1-publish.mjs` | Universal NCK1 analysis and Seven Choices role closure: nine staged analysis bytes bind immutable Review and five authenticated sidecars; incomplete/question/blank/answer/role joins fail closed; source-bound title/body roles remain identical across Review, publication, Screen, Student/Teacher Print HTML, and Chromium PDF; shared DB/version/latest/Canonical commit rolls back and recovers without mixed assets | yes |
+| `verify-companion-analysis-export.mjs` | Rejects companion-analysis export drift in authoritative answer joins, two-column A4 publisher layout, complete Reading distractor explanations, source translations, selected long-sentence analysis, sparse exact-source underlines, and student-facing omission of internal metadata or workflow prose | yes |
 | `verify-nck1-docx-materialization-producer.mjs` | Rejects NCK1 DOCX parsing drift across nine groups, 45 source-backed answers including glued labels, one-to-one paragraph locators, semantic tables, fail-closed exceptions, and digest-bound non-overwriting resume | yes |
 | `verify-nck1-pdf-materialization-producer.mjs` | Runs a synthetic text-layer question/answer PDF pair through the public Universal CLI; proves nine groups, 45 source-backed answers, replayable page regions, one border-confirmed semantic table, answer-explanation exclusion, and fail-closed image-only, incomplete, embedded-raster, multi-column, overlap, unbordered side-by-side, and ambiguous source shapes | yes |
 | `verify-nck1-answer-source-shapes.mjs` | Proves DOCX/PDF detailed answers, key-only answers, and one-file question-plus-answer sources converge on the same 45 authoritative values; excludes source explanations/model essays and rejects missing, duplicate, or ambiguous answer boundaries through Candidate preview and the Universal CLI | yes |
@@ -166,6 +184,10 @@ must be confirmed green (AGENTS.md RM gate).
 | `verify-paper-normalization-grammar-fill-surface.mjs` | Ticket 05 public canonical grammarFill adapter + plain/analysis PaperSurface: both real proof dialects, semantic DOM/hint/null-hint behavior, digest parity, blank focus/evidence ranges, protected prose, and explicit compatibility fallback diagnostics | yes |
 | `import-pipeline/verify-source-doc-types.mjs` | DOCX/PDF source-input admission and magic-byte validation through the public paper-import validator | yes |
 | `verify-import-ops.mjs` | 导题 Agent 八态 preflight（本地 Source/Materialization/收据 + Review 当前 revision）、自动触发 skill、不可变 revision / 陈旧认可恢复、ready_to_ship / shipped / ship_failed、只读无生产按钮，以及无当前上线授权时拒绝 push | yes |
+| `verify-source-intake.mjs` | Rejects source-ledger auth, upload-integrity, immutable-revision, claim-lease, initialization-receipt, or handoff regressions through the real Owner and Agent HTTP seams plus the official source-intake CLI | yes |
+| `verify-source-intake-frontend.mjs` | Renders synthetic queued, Orb-created, claimed, failed, Owner-needed, and handed-off rows; proves Amp thread links, Paper ID/command copy controls, non-flashing background refresh, and active-only polling | yes |
+| `verify-source-intake-webhook.mjs` | Rejects wakeup-plugin payload, HMAC, feature-gate, runner-routing, or fixed-prompt drift without activating the plugin or creating an Amp thread | yes |
+| `verify-nck1-analysis-agent-plugin.mjs` | Pins the one-group analysis worker to GPT-5.6 Sol medium with no tools, proves one-shot child isolation and provenance envelopes, and rejects whole-paper, mismatched-group, oversized, or non-JSON boundaries without calling a real model | yes |
 | `verify-import-review-source-pairing.mjs` | 匿名 PDF 原卷局部与真实 Screen 的精确配对：revision-bound source crop、digest/locator fail-closed、表格/媒体定位、Print 切换保留以及 source issue 刷新回放 | yes |
 | `verify-docx-source-media-input.mjs` | Ticket 17：由真实 FODT 经 LibreOffice 生成 DOCX，在 document.xml 与 header1.xml 放置真实形状；经 public publisher 走输入侧 LibreOffice PDF、逐形状裁图、digest-bound figures manifest/body 关联，再由真实 Screen 与 Print/PDF consumer 解析；同时覆盖 splitter、ZIP 内嵌位图、不可变 versioned Source Capture 与输入模块不得依赖已删除输出实现 | yes |
 | `verify-paper-normalization-grammar-fill-browser.mjs` | Ticket 05 Phase A owner-QA regression: real Chromium renders the actual canonical PaperSurface for both proof assets in plain/lecture states at 1440px and 1004px; measures blank-edge to hint-glyph geometry and computed text-indent for every hinted blank, preserves q56 null-hint word spaces, and rechecks cloze 3.3em / sevenChoices 4.6em | no |
@@ -180,6 +202,7 @@ must be confirmed green (AGENTS.md RM gate).
 | `verify-i5-writing-ai-import.mjs` | I5 应用文写作 + 读后续写 AI 导题接入：splitter / package / publish path contracts | yes |
 | `verify-application-model-answer-prompt.mjs` | 应用文参考范文生产护栏：运行时精确加载正式 V3 Prompt、附加完整重建题面、保留但不再使用 V2，并钉住交际对象推演与最小充分关系动作 | yes |
 | `verify-continuation-analysis-v1.mjs` | 记叙型读后续写标准解析合同：新 schema / tracked Prompt / provider seam 同形，完整候选通过，旧 `continuationDesign`、分数注入、伪造证据和段落顺序漂移被拒，非记叙任务 fail closed | yes |
+| `verify-teaching-analysis-style.mjs` | 配套解析讲解力护栏：六类正式 Prompt 运行时只加载一次共享讲解规范，题型专项动作存在，固定 25 题 benchmark 数量正确且全部指向已跟踪原题和解析 | yes |
 | `verify-i6-writing-render.mjs` | I6 写作卷面版面还原：从 content.blocks 派生写作页模型（题面外壳归属 / 续写开头句折叠进答题框 / 应用文空框 / 不串味） | yes |
 | `verify-i7-application-given.mjs` | I7 应用文给定上下格式解析：末尾纯英文 + 正向信号守卫切给定骨架（信件/标题/无给定/负向守卫/称呼型），情境剔除、夹注不误判 | yes |
 | `verify-i8-cloze-analysis.mjs` | I8 完形填空 AI 解析生成：prompt 合约、validate 校验器成功与阻断用例（stub provider）、路由 + 包构建 + 存储接线、磁盘 latest/analyses/cloze-analysis-v1.json 断言 | yes |

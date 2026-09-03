@@ -1,25 +1,18 @@
 name: Verify
 
-# paths-ignore: docs-only pushes (STATUS 落账、cut 记录、根级 md) skip the
-# full verify+e2e queue — the jobs take ~1.5min but the runner queue can eat
-# 10min+ per docs commit. A commit mixing docs with any code still runs CI
-# (skip applies only when ALL changed files match). scripts/README.md is
-# deliberately NOT ignored: its verify registration table is enforced by the
-# CI housekeeping guard.
+# Hosted merge authority while Amp bug amp_bug_0uiggF5jWG6i6iaB72BATT blocks
+# durable webhook delivery to the dedicated CI Orb. Keep workflow_dispatch for
+# explicit recovery diagnostics without weakening normal PR and main coverage.
 on:
   pull_request:
-    paths-ignore:
-      - 'docs/**'
-      - '*.md'
   push:
     branches:
       - main
-    paths-ignore:
-      - 'docs/**'
-      - '*.md'
+  workflow_dispatch:
 
 jobs:
   verify:
+    name: ${{ github.event_name == 'workflow_dispatch' && 'verify (manual)' || 'verify' }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
 
@@ -53,7 +46,21 @@ jobs:
       - name: Install verification system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install --yes ffmpeg poppler-utils libreoffice-writer
+          sudo apt-get install --yes ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript fonts-noto-cjk fonts-liberation
+          printf '%s\n' \
+            '#!/bin/sh' \
+            'if [ "${1:-}" = identify ]; then' \
+            '  shift' \
+            '  exec /usr/bin/identify "$@"' \
+            'fi' \
+            'exec /usr/bin/convert "$@"' \
+            | sudo tee /usr/local/bin/magick >/dev/null
+          sudo chmod 755 /usr/local/bin/magick
+          policy=$(find /etc/ImageMagick-* -name policy.xml -print -quit)
+          if [ -n "$policy" ]; then
+            sudo sed -i 's/rights="none" pattern="PDF"/rights="read|write" pattern="PDF"/' "$policy"
+          fi
+          magick -version
 
       - name: Install verification Chromium
         run: pnpm exec playwright install --with-deps --no-shell chromium
@@ -64,6 +71,7 @@ jobs:
         working-directory: app
 
   e2e:
+    name: ${{ github.event_name == 'workflow_dispatch' && 'e2e (manual)' || 'e2e' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
 

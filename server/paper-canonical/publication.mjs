@@ -51,6 +51,7 @@ const publicationFileName =
   `canonical-paper-publication-v${canonicalAuthorityRef.manifestVersion}.json`
 const publicationFileNames = [
   publicationFileName,
+  'canonical-paper-publication-v49.json',
   'canonical-paper-publication-v48.json',
   'canonical-paper-publication-v47.json',
   'canonical-paper-publication-v46.json',
@@ -1516,7 +1517,7 @@ function canonicalSelections(validated, contract, sourceAsset) {
       ...(
         (
           familyContractId === 'seven-choices'
-          && ['47', '48'].includes(validated.plan.authorityRef.manifestVersion)
+          && ['47', '48', '49'].includes(validated.plan.authorityRef.manifestVersion)
         )
         || (
           familyContractId === 'cloze'
@@ -1525,6 +1526,10 @@ function canonicalSelections(validated, contract, sourceAsset) {
         || (
           familyContractId === 'grammar-fill'
           && Number(validated.plan.authorityRef.manifestVersion) >= 20
+        )
+        || (
+          familyContractId === 'continuation-writing'
+          && validated.plan.authorityRef.manifestVersion === '49'
         )
         ? {
             projectedOccurrenceDigests: projectedOccurrences.map(

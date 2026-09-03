@@ -1,0 +1,451 @@
+{
+  "version": "teaching-analysis-benchmark-v1",
+  "purpose": "用项目已有真题资产检查解析是否同时保留证据严谨性与老教师式讲解力；不保存商业答案册原文。",
+  "scoring": [
+    "answerAndEvidenceAccuracy",
+    "hiddenStepMadeExplicit",
+    "understandableWithoutInternalTerms",
+    "contextualDistractorExplanation",
+    "conclusionStrengthControlled",
+    "justRightDensity"
+  ],
+  "cases": [
+    {
+      "id": "reading-2025-i-21-calculation",
+      "kind": "reading",
+      "paperId": "paper-2025-i",
+      "groupId": "group-2025-i-reading-a",
+      "targetId": "q-2025-i-021",
+      "analysisFile": "reading-choice-analysis-v1.json",
+      "focus": "图表计算题不能只报结果。",
+      "requiredTeachingMoves": [
+        "指出道路车辆由两个图表分项组成。",
+        "明确写出 45.1% + 29.4% = 74.5%。"
+      ],
+      "rejectIf": [
+        "只说图表显示 74.5%，没有计算链。",
+        "把非正文图表数据伪装成段落原句。"
+      ]
+    },
+    {
+      "id": "reading-2025-i-32-method-effect",
+      "kind": "reading",
+      "paperId": "paper-2025-i",
+      "groupId": "group-2025-i-reading-d",
+      "targetId": "q-2025-i-032",
+      "analysisFile": "reading-choice-analysis-v1.json",
+      "focus": "写作手法既要判动作，也要说明作用。",
+      "requiredTeachingMoves": [
+        "指出首段连续列出微塑料出现的多个地方。",
+        "说明这些实例把微塑料分布之广、问题之普遍写得具体可感。"
+      ],
+      "rejectIf": [
+        "只写 giving examples 与原文列举对应。",
+        "把末段专家引语误算到首段。"
+      ]
+    },
+    {
+      "id": "reading-2025-i-33-causal-scope",
+      "kind": "reading",
+      "paperId": "paper-2025-i",
+      "groupId": "group-2025-i-reading-d",
+      "targetId": "q-2025-i-033",
+      "analysisFile": "reading-choice-analysis-v1.json",
+      "focus": "数据比较题要补中间概念并控制研究范围。",
+      "requiredTeachingMoves": [
+        "讲清碳酸钙含量高对应硬水，再连接到更高的捕获比例。",
+        "用高低两组数据验证水的硬度是研究中影响效果的因素。"
+      ],
+      "rejectIf": [
+        "把碳酸钙含量、水的硬度和捕获效果压成没有中间关系的一句话。",
+        "断言该结论适用于所有水质或所有塑料。"
+      ]
+    },
+    {
+      "id": "reading-2024-ii-32-contextual-contrast",
+      "kind": "reading",
+      "paperId": "paper-2024-ii",
+      "groupId": "group-2024-ii-reading-d",
+      "targetId": "q-2024-ii-032",
+      "analysisFile": "reading-choice-analysis-v1.json",
+      "focus": "猜短语要用后文正面对照还原意思。",
+      "requiredTeachingMoves": [
+        "先说 Campbell 有多年经验，能把高深内容讲懂。",
+        "再反推 wrong hands 指缺少这种写作处理能力的人。"
+      ],
+      "rejectIf": [
+        "只把 wrong hands 翻译成能力弱的人。",
+        "把 wrong 解释成恶意、低学历或不学术。"
+      ]
+    },
+    {
+      "id": "reading-2025-ii-30-analogy-alignment",
+      "kind": "reading",
+      "paperId": "paper-2025-ii",
+      "groupId": "group-2025-ii-reading-c",
+      "targetId": "q-2025-ii-030",
+      "analysisFile": "reading-choice-analysis-v1.json",
+      "focus": "类比题要把类比两边对齐。",
+      "requiredTeachingMoves": [
+        "说明医生行医、律师执业都要靠反复练习。",
+        "指出作者借此说明照料植物同样需要练习和耐心。"
+      ],
+      "rejectIf": [
+        "只抓住 practice 与 repeated efforts 的同义替换。",
+        "把专业人士误读成专业意见的价值。"
+      ]
+    },
+    {
+      "id": "seven-2025-i-37-action-chain",
+      "kind": "sevenChoices",
+      "paperId": "paper-2025-i",
+      "groupId": "group-2025-i-seven-choices",
+      "targetId": "q-2025-i-037",
+      "analysisFile": "seven-choices-analysis-v1.json",
+      "focus": "段中空先讲现场动作推进。",
+      "requiredTeachingMoves": [
+        "完整说出做完饮品、喊杯上名字、顾客取走饮品的顺序。",
+        "说明答案补上了前后之间缺失的现场动作。"
+      ],
+      "rejectIf": [
+        "以指代衔接、话题场等术语开头。",
+        "只列出 drinks、cup、customer 等复现词。"
+      ]
+    },
+    {
+      "id": "seven-2025-ii-36-question-answer",
+      "kind": "sevenChoices",
+      "paperId": "paper-2025-ii",
+      "groupId": "group-2025-ii-seven-choices",
+      "targetId": "q-2025-ii-036",
+      "analysisFile": "seven-choices-analysis-v1.json",
+      "focus": "问答衔接要直接说问题与方案。",
+      "requiredTeachingMoves": [
+        "指出前文在寻找全家都能参与的共同活动。",
+        "说明答案把家庭志愿服务作为解决方案，并引出后文好处。"
+      ],
+      "rejectIf": [
+        "只说 family 构成话题场对齐。",
+        "错把任何志愿服务好处都当作对前文问句的直接回答。"
+      ]
+    },
+    {
+      "id": "seven-2025-ii-38-topic-example",
+      "kind": "sevenChoices",
+      "paperId": "paper-2025-ii",
+      "groupId": "group-2025-ii-seven-choices",
+      "targetId": "q-2025-ii-038",
+      "analysisFile": "seven-choices-analysis-v1.json",
+      "focus": "段首主题句要能统领后文全部例证。",
+      "requiredTeachingMoves": [
+        "先概括后文研究对象是成年人、内容是志愿活动带来的身体健康收益。",
+        "说明答案同时覆盖人群与收益，后文数据是它的具体证明。"
+      ],
+      "rejectIf": [
+        "只用 adults 和 health 的词汇复现作结论。",
+        "把心理健康干扰项与本段身体健康混为一谈。"
+      ]
+    },
+    {
+      "id": "cloze-2024-i-45-scale-contrast",
+      "kind": "cloze",
+      "paperId": "paper-2024-i",
+      "groupId": "group-2024-i-cloze",
+      "targetId": "q-2024-i-045",
+      "analysisFile": "cloze-analysis-v1.json",
+      "focus": "恢复数字尺度，解释为什么是 achievement。",
+      "requiredTeachingMoves": [
+        "把作者的 15 英里与女孩准备的 52.4 英里放在一起比较。",
+        "说明被这种差距衬得很小的是作者原本视为成就的事。",
+        "逐项说明其他名词放回该比较为何不成立。"
+      ],
+      "rejectIf": [
+        "只说 achievement 与开篇复现。",
+        "错项只给优势、贡献、影响的词典释义。"
+      ]
+    },
+    {
+      "id": "cloze-2024-i-52-agent-context",
+      "kind": "cloze",
+      "paperId": "paper-2024-i",
+      "groupId": "group-2024-i-cloze",
+      "targetId": "q-2024-i-052",
+      "analysisFile": "cloze-analysis-v1.json",
+      "focus": "用人物能力差恢复被超越的具体场景。",
+      "requiredTeachingMoves": [
+        "指出约一百名当地车手熟悉这种路况，而作者不熟悉。",
+        "说明这种实力差使 got passed by 成为自然结果。",
+        "解释其他动词与当地车手的行为、by 结构或情节不合。"
+      ],
+      "rejectIf": [
+        "只写 get passed by 表示被超过。",
+        "错项只有中文词义。"
+      ]
+    },
+    {
+      "id": "cloze-2024-ii-52-cultural-cause",
+      "kind": "cloze",
+      "paperId": "paper-2024-ii",
+      "groupId": "group-2024-ii-cloze",
+      "targetId": "q-2024-ii-052",
+      "analysisFile": "cloze-analysis-v1.json",
+      "focus": "固定短语仍要讲回全文情境。",
+      "requiredTeachingMoves": [
+        "先说明意大利人喜欢聚在一起，因此星期日、生日等都会成为聚会理由。",
+        "再说明 come up with excuses 是想出更多聚会由头。",
+        "逐项说明其他短语虽然能接 with，却不能表达这一事件。"
+      ],
+      "rejectIf": [
+        "只写 come up with 与 excuses 是固定搭配。",
+        "把全文情境压成短语拆词。"
+      ]
+    },
+    {
+      "id": "cloze-2025-i-45-concession",
+      "kind": "cloze",
+      "paperId": "paper-2025-i",
+      "groupId": "group-2025-i-cloze",
+      "targetId": "q-2025-i-045",
+      "analysisFile": "cloze-analysis-v1.json",
+      "focus": "让步结构要还原两边判断。",
+      "requiredTeachingMoves": [
+        "说清 while 连接的是不特别值钱与不该被扔掉两个判断。",
+        "说明 valuable 能形成这一让步，其他形容词不能解释后半句。"
+      ],
+      "rejectIf": [
+        "只说 while 是让步标志词。",
+        "错项只给词义而不代回句子。"
+      ]
+    },
+    {
+      "id": "cloze-2025-i-50-evidence-boundary",
+      "kind": "cloze",
+      "paperId": "paper-2025-i",
+      "groupId": "group-2025-i-cloze",
+      "targetId": "q-2025-i-050",
+      "analysisFile": "cloze-analysis-v1.json",
+      "focus": "从具体上门事件概括 visits，同时防止过度泛化。",
+      "requiredTeachingMoves": [
+        "用一位女士上门取物的事件解释 visits。",
+        "说明 daily posts 带来线下取物来访，是混乱中的积极变化。",
+        "把 reports、advice、money 逐一放回该事件辨析。"
+      ],
+      "rejectIf": [
+        "断言此后每次交换都是陌生人免费上门。",
+        "把一个已写明的来访扩大成所有交易事实。"
+      ]
+    },
+    {
+      "id": "cloze-2025-i-55-theme-payoff",
+      "kind": "cloze",
+      "paperId": "paper-2025-i",
+      "groupId": "group-2025-i-cloze",
+      "targetId": "q-2025-i-055",
+      "analysisFile": "cloze-analysis-v1.json",
+      "focus": "篇末答案要回收前文行动与作者情绪。",
+      "requiredTeachingMoves": [
+        "说明别人正在珍视作者无法带走的旧物。",
+        "把这一结果与作者感到快乐连接起来。",
+        "解释其他动作为什么不能产生这份快乐。"
+      ],
+      "rejectIf": [
+        "只写 appreciate 与 something 搭配。",
+        "只贴温暖立意标签，没有因果。"
+      ]
+    },
+    {
+      "id": "grammar-2024-i-60-transitive-meaning",
+      "kind": "grammarFill",
+      "paperId": "paper-2024-i",
+      "groupId": "group-2024-i-grammar-fill",
+      "targetId": "q-2024-i-060",
+      "analysisFile": "grammar-fill-analysis-v1.json",
+      "focus": "谓语形式与动词在句中的具体用法都要讲。",
+      "requiredTeachingMoves": [
+        "还原 the Silk Route Garden walks visitors through... 的主干。",
+        "解释 walk 在这里及物，表示引领游客走过，而不是游客自己走。",
+        "再由单数主语与一般介绍确定 walks。"
+      ],
+      "rejectIf": [
+        "只写第三人称单数所以 walks。",
+        "把 walk 误解成花园自己行走。"
+      ]
+    },
+    {
+      "id": "grammar-2024-ii-60-61-paired-structure",
+      "kind": "grammarFill",
+      "paperId": "paper-2024-ii",
+      "groupId": "group-2024-ii-grammar-fill",
+      "targetId": "q-2024-ii-060",
+      "analysisFile": "grammar-fill-analysis-v1.json",
+      "focus": "相邻两空要先划清后置定语与主句谓语。",
+      "requiredTeachingMoves": [
+        "还原 a pavilion inspired by... was built... 的完整骨架。",
+        "说明 inspired 只修饰 pavilion，真正谓语由下一空 was built 承担。",
+        "由 pavilion 是被启发的对象确定过去分词。"
+      ],
+      "rejectIf": [
+        "孤立地说 pavilion 与 inspire 是被动关系。",
+        "忽略下一空已经承担谓语导致的结构验证。"
+      ]
+    },
+    {
+      "id": "grammar-2024-ii-61-tense-voice",
+      "kind": "grammarFill",
+      "paperId": "paper-2024-ii",
+      "groupId": "group-2024-ii-grammar-fill",
+      "targetId": "q-2024-ii-061",
+      "analysisFile": "grammar-fill-analysis-v1.json",
+      "focus": "在相邻非谓语之后锁定主句谓语。",
+      "requiredTeachingMoves": [
+        "指出 inspired by... 已是修饰语，句子仍缺真正谓语。",
+        "由 pavilion 承受 build、Two years later 指过去、主语单数得到 was built。"
+      ],
+      "rejectIf": [
+        "把主语、语态、时态并列罗列却不还原句子。",
+        "漏掉与前一空的成分分工。"
+      ]
+    },
+    {
+      "id": "grammar-2025-i-56-clause-slot",
+      "kind": "grammarFill",
+      "paperId": "paper-2025-i",
+      "groupId": "group-2025-i-grammar-fill",
+      "targetId": "q-2025-i-056",
+      "analysisFile": "grammar-fill-analysis-v1.json",
+      "focus": "定语从句先还原先行词与从句缺口。",
+      "requiredTeachingMoves": [
+        "指出逗号前 Go/weiqi 是被补充说明的对象。",
+        "说明 originated 已是谓语，从句缺主语，指物所以用 which。"
+      ],
+      "rejectIf": [
+        "只背非限制性定语从句指物用 which。",
+        "没有说从句到底缺什么成分。"
+      ]
+    },
+    {
+      "id": "grammar-2025-i-60-parallel-validation",
+      "kind": "grammarFill",
+      "paperId": "paper-2025-i",
+      "groupId": "group-2025-i-grammar-fill",
+      "targetId": "q-2025-i-060",
+      "analysisFile": "grammar-fill-analysis-v1.json",
+      "focus": "谓语判断要利用并列结构复核。",
+      "requiredTeachingMoves": [
+        "还原复数主语 personalities 与 reveal 的被动关系。",
+        "用邻近并列的 are exposed 验证一般现在时复数被动 are revealed。"
+      ],
+      "rejectIf": [
+        "把 during the game 当成一般现在时的硬时间标志。",
+        "漏掉并列谓语这一更直接的验证。"
+      ]
+    },
+    {
+      "id": "grammar-2025-ii-60-reflexive-object",
+      "kind": "grammarFill",
+      "paperId": "paper-2025-ii",
+      "groupId": "group-2025-ii-grammar-fill",
+      "targetId": "q-2025-ii-060",
+      "analysisFile": "grammar-fill-analysis-v1.json",
+      "focus": "固定结构之前先解释反身关系。",
+      "requiredTeachingMoves": [
+        "还原 I have found ___ taking... 中 find 的宾语和 taking 的动作发出者。",
+        "说明这个人就是主语 I，因此宾语必须用 myself，而不是 me。"
+      ],
+      "rejectIf": [
+        "只报 find oneself doing 固定搭配。",
+        "没有解释为什么普通宾格 me 不成立。"
+      ]
+    },
+    {
+      "id": "application-2025-ii-reminder",
+      "kind": "application",
+      "paperId": "paper-2025-ii",
+      "groupId": "group-2025-ii-writing-application",
+      "targetId": "wt-2025-ii-application",
+      "analysisFile": "writing-analysis-v1.json",
+      "focus": "催稿邮件要在明确期限与维护关系之间取得平衡。",
+      "requiredTeachingMoves": [
+        "ReviewCard 说清对方此前答应供稿、写信要询问进度并提醒期限。",
+        "路线先感谢具体投入，再询问进度、提供帮助、明确交稿时间。",
+        "范文保持约 85—100 个学生新增词，并使用友好而专业的语气。"
+      ],
+      "rejectIf": [
+        "结尾说不必着急，从而抵消前文截止时间。",
+        "用多句客套挤占核心任务。"
+      ]
+    },
+    {
+      "id": "application-2024-i-experience-insight",
+      "kind": "application",
+      "paperId": "paper-2024-i",
+      "groupId": "group-2024-i-writing-application",
+      "targetId": "wt-2024-i-application",
+      "analysisFile": "writing-analysis-v1.json",
+      "focus": "分享经历要让感想从具体动作中长出来。",
+      "requiredTeachingMoves": [
+        "ReviewCard 区分作品细节与个人感想两个要点。",
+        "路线用一个作画过程的小困难或变化支撑最后领悟。",
+        "范文控制在考场可复现篇幅，避免把细节写成长故事。"
+      ],
+      "rejectIf": [
+        "只写有意义、学到很多等万能感想。",
+        "范文为追求画面而明显超过 80 词任务的推荐区间。"
+      ]
+    },
+    {
+      "id": "continuation-2024-i-gunter",
+      "kind": "continuation",
+      "paperId": "paper-2024-i",
+      "groupId": "group-2024-i-writing-continuation",
+      "targetId": "wt-2024-i-continuation",
+      "analysisFile": "writing-analysis-v1.json",
+      "focus": "由第二段 as promised 反推第一段必须形成承诺。",
+      "requiredTeachingMoves": [
+        "先锁定第一段要处理没现金与赶末班车两个问题。",
+        "由 called Gunter as promised 反推第一段结尾必须留下联系方式与之后联系的承诺。",
+        "把 Gunter 允许先走等具体解决方式保留为可行路线而非唯一要求。"
+      ],
+      "rejectIf": [
+        "把参考范文中的礼物、接机或具体台词写成硬约束。",
+        "只讲善意与信任主题，不讲段间状态。"
+      ]
+    },
+    {
+      "id": "continuation-2025-i-toby",
+      "kind": "continuation",
+      "paperId": "paper-2025-i",
+      "groupId": "group-2025-i-writing-continuation",
+      "targetId": "wt-2025-i-continuation",
+      "analysisFile": "writing-analysis-v1.json",
+      "focus": "边界锁亲情修复，具体重逢方式保持开放。",
+      "requiredTeachingMoves": [
+        "说明原文未解问题是兄弟僵局，以及我已理解 Toby 对弟弟的重要性。",
+        "由第二段带饼干上门反推第一段必须完成认错并决定主动修复。",
+        "路线体现道歉或关系修复，但不强制 Toby 先出现或以拥抱结尾。"
+      ],
+      "rejectIf": [
+        "把范文中的动作、台词和结尾意象全部升级为必写。",
+        "忽略作者对弟弟丧偶与健康问题的认识变化。"
+      ]
+    },
+    {
+      "id": "continuation-2025-ii-qiuyu",
+      "kind": "continuation",
+      "paperId": "paper-2025-ii",
+      "groupId": "group-2025-ii-writing-continuation",
+      "targetId": "wt-2025-ii-continuation",
+      "analysisFile": "writing-analysis-v1.json",
+      "focus": "从回避名字到主动分享文化身份，情绪变化必须有行动。",
+      "requiredTeachingMoves": [
+        "锁定原文矛盾：回避纠正能减少尴尬，却失去分享文化身份的机会。",
+        "第一段让被邀请解释成为转折，第二段由同学兴趣完成正向反馈。",
+        "具体解释内容和同学反应允许多条合理路线。"
+      ],
+      "rejectIf": [
+        "把秋雨的诗意解释、写汉字等范文细节写成唯一情节。",
+        "只有文化身份主题，没有从害怕到开口再到反馈的动作链。"
+      ]
+    }
+  ]
+}

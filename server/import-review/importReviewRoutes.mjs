@@ -1,20 +1,18 @@
-import { createHash, randomUUID, timingSafeEqual } from 'node:crypto'
+import { timingSafeEqual } from 'node:crypto'
 import {
-  closeSync,
   existsSync,
-  mkdirSync,
-  openSync,
   readFileSync,
-  renameSync,
-  unlinkSync,
-  writeSync,
 } from 'node:fs'
 import path from 'node:path'
 
-import { canonicalConsumptionPrintPayload } from '../../scripts/import-pipeline/canonical-consumption-print-payload.mjs'
+import {
+  canonicalConsumptionPrintPayload,
+  paperAssetOfficialModelAnswers,
+} from '../../scripts/import-pipeline/canonical-consumption-print-payload.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { defineRoute } from '../router/index.mjs'
 import { withChromiumPage } from '../draft-paper/chromiumPool.mjs'
+import { receiveVerifiedUpload } from '../import-ops/receiveVerifiedUpload.mjs'
 import { rasterPdfRegion } from '../paper-canonical/pdfRegionRaster.mjs'
 import { cropNck1SourceImage } from '../paper-import/nck1ImageSourceBundle.mjs'
 import { printConsumption, resolveReviewFile } from './revisionProjection.mjs'
@@ -79,50 +77,6 @@ function shippingIdentity(request, shipToken) {
   return null
 }
 
-async function receiveFile(request, destination, expected) {
-  const contentLength = Number(request.headers['content-length'])
-  if (Number.isFinite(contentLength) && contentLength !== expected.byteLength) {
-    const error = new Error('Content-Length does not match manifest')
-    error.code = 'IMPORT_REVIEW_FILE_SIZE_MISMATCH'
-    error.status = 400
-    throw error
-  }
-  mkdirSync(path.dirname(destination), { recursive: true })
-  const temporary = `${destination}.upload-${randomUUID()}`
-  const descriptor = openSync(temporary, 'wx')
-  const hash = createHash('sha256')
-  let byteLength = 0
-  try {
-    try {
-      for await (const chunk of request) {
-        byteLength += chunk.length
-        if (byteLength > expected.byteLength) {
-          const error = new Error('Uploaded file is larger than manifest')
-          error.code = 'IMPORT_REVIEW_FILE_SIZE_MISMATCH'
-          error.status = 400
-          throw error
-        }
-        hash.update(chunk)
-        writeSync(descriptor, chunk)
-      }
-    } finally {
-      closeSync(descriptor)
-    }
-    const sha256 = `sha256:${hash.digest('hex')}`
-    if (byteLength !== expected.byteLength || sha256 !== expected.sha256) {
-      const error = new Error('Uploaded file does not match manifest')
-      error.code = 'IMPORT_REVIEW_FILE_DIGEST_MISMATCH'
-      error.status = 400
-      throw error
-    }
-    renameSync(temporary, destination)
-    return { sha256, byteLength }
-  } catch (error) {
-    if (existsSync(temporary)) unlinkSync(temporary)
-    throw error
-  }
-}
-
 function sendHtml(response, html) {
   response.writeHead(200, {
     'cache-control': 'no-store',
@@ -183,6 +137,7 @@ function reviewPrintHtml(projection, versionType, buildPrintHtml) {
     consumption,
     projection.paperName,
     answerByQuestionId,
+    paperAssetOfficialModelAnswers(projection.paperAsset),
   )
   const items = payload.items.map((item) => ({
     detail: payload.details.get(item.questionGroupId),
@@ -206,6 +161,7 @@ export function createImportReviewRoutes({
   agentToken,
   shipToken,
   buildPrintHtml,
+  promotionService = null,
 }) {
   if (agentToken && shipToken && agentToken === shipToken) {
     throw new Error('Import Review Agent and shipping tokens must be different')
@@ -242,6 +198,45 @@ export function createImportReviewRoutes({
       return
     }
     context.sendJson(response, 200, store.agentPaperStatus(decodeURIComponent(match[1])))
+  })))
+
+  routes.push(defineRoute('POST', /^\/api\/import-agent-reviews\/papers\/([^/]+)\/promotions$/, route(async ({
+    request,
+    response,
+    context,
+    match,
+  }) => {
+    const actor = shippingIdentity(request, shipToken)
+    if (!actor) {
+      context.sendJson(response, 401, { error: 'shipping_auth_required' })
+      return
+    }
+    if (!promotionService) {
+      throw reviewError(
+        'IMPORT_REVIEW_PROMOTION_UNAVAILABLE',
+        'Single-paper promotion service is unavailable',
+        503,
+      )
+    }
+    const input = await context.readJsonBody(request, { maxBytes: 20_000 })
+    const result = await promotionService.promote(
+      decodeURIComponent(match[1]),
+      input,
+      actor,
+    )
+    if (result.status === 'failed') {
+      context.sendJson(response, 409, {
+        status: result.status,
+        promotion: result.promotion,
+        code: result.failure.failureCode,
+        error: result.failure.failureMessage,
+      })
+      return
+    }
+    context.sendJson(response, result.status === 'published' ? 201 : 200, {
+      status: result.status,
+      promotion: result.promotion,
+    })
   })))
 
   routes.push(defineRoute('POST', /^\/api\/import-agent-reviews\/papers\/([^/]+)\/shipping-guards$/, route(async ({
@@ -312,7 +307,7 @@ export function createImportReviewRoutes({
       context.sendJson(response, 200, store.uploadStatus(revisionId))
       return
     }
-    const received = await receiveFile(request, upload.destination, upload.file)
+    const received = await receiveVerifiedUpload(request, upload.destination, upload.file)
     context.sendJson(
       response,
       200,
@@ -789,12 +784,19 @@ export function createImportReviewRoutes({
   })))
 
   routes.push(defineRoute('GET', /^\/api\/import-review-preview\/revisions\/([^/]+)\/files$/, route(({
+    request,
     response,
     url,
     context,
     match,
   }) => {
-    if (!requireReviewer(response, context)) return
+    const reviewer = context.session?.role === 'owner'
+      || context.session?.accountKind === 'import_agent'
+      || agentIdentity(request, context, agentToken)
+    if (!reviewer) {
+      context.sendJson(response, 403, { error: 'forbidden' })
+      return
+    }
     const relativePath = url.searchParams.get('path') || ''
     const { revision } = store.projectionForRevision(match[1])
     const file = revision?.manifest?.files?.find((candidate) => candidate.path === relativePath)

@@ -218,3 +218,38 @@ export function loadGroupAnalysisTexts(items, { paperAssetsDir }) {
 
   return result
 }
+
+/**
+ * Load source-authoritative writing samples for Teacher Print/PDF. Student
+ * output never calls this join. The analysis sidecar owns the reviewed source
+ * text shown by Screen, so Print/PDF consume that same value rather than
+ * reconstructing it from source pages.
+ */
+export function loadGroupOfficialModelAnswers(items, { paperAssetsDir }) {
+  const result = new Map()
+  if (!Array.isArray(items) || items.length === 0 || !paperAssetsDir) return result
+  const paperIdByGroupId = new Map()
+  const writingByPaperId = new Map()
+  for (const item of items) {
+    const detail = item?.detail
+    if (!detail || !['writing', 'continuation'].includes(String(detail.groupType || ''))) continue
+    const groupId = detail.id
+    let paperId = paperIdByGroupId.get(groupId)
+    if (paperId === undefined) {
+      paperId = findOwningPaperId(paperAssetsDir, groupId)
+      paperIdByGroupId.set(groupId, paperId)
+    }
+    if (!paperId) continue
+    let writing = writingByPaperId.get(paperId)
+    if (writing === undefined) {
+      const { baseDir } = resolvePaperAssetReadPaths(paperAssetsDir, paperId)
+      writing = readJsonSafe(path.join(baseDir, 'analyses', 'writing-analysis-v1.json'))
+      writingByPaperId.set(paperId, writing)
+    }
+    const officialModelAnswer = writing?.groups?.[groupId]?.writing?.officialModelAnswer
+    if (typeof officialModelAnswer === 'string' && officialModelAnswer.trim()) {
+      result.set(groupId, officialModelAnswer)
+    }
+  }
+  return result
+}

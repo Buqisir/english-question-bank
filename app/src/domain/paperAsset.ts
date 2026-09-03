@@ -213,6 +213,7 @@ export type PaperWritingTask = {
   wordCountTarget?: number
   continuationStarters?: string[]
   materialText?: string
+  officialModelAnswer?: string
   // I7: application given 上下格式/title rendered inside the answer box — `top`
   // (salutation/opening or a given title) and `bottom` (closing/signature).
   // Absent when the paper gives no skeleton.
@@ -282,12 +283,14 @@ export type ContinuationWritingAnalysis =
 export type ContinuationWritingAnalysisV1 = {
   taskType: 'continuation'
   modelAnswer: string
+  officialModelAnswer?: string
   continuationAnalysis: ContinuationAnalysisV1
 }
 
 export type ContinuationWritingAnalysisLegacy = {
   taskType: 'continuation'
   modelAnswer: string
+  officialModelAnswer?: string
   continuationDesign: ContinuationDesign
   highlightExpressions: HighlightExpression[]
 }

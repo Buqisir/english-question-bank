@@ -246,7 +246,7 @@ function validScAnalysis(input = scFixtureInput()) {
             },
             {
               mechanismFacet: 'seven-choices.cohesion.lexical.topic-field-alignment',
-              signalText: 'starting out',
+              signalText: group.optionBank.find(({ label }) => label === q.answerKey).text,
               signalSide: 'option',
               targetText: 'keep these things in mind',
               relation: '选项与上下文话题一致。',
@@ -281,6 +281,20 @@ async function assertAnalysisValidation() {
   })
   assert('valid seven-choices analysis passes', result.analysis.schemaVersion === 'seven-choices-analysis-v1' && result.requestId === 'i2-verify')
 
+  for (const field of ['positionFacet', 'roleFacet', 'primaryMechanismFacet']) {
+    await assertRejects(`uncontrolled ${field} fails for seven-choices`, () => {
+      const bad = validScAnalysis(input)
+      bad.questions[input.group.questions[0].id][field] = 'legacy-or-invented-value'
+      return analyzeSevenChoicesImportCandidate(input, { providerCallers: { deepseek: stubProvider(bad) } })
+    }, new RegExp(field))
+  }
+
+  await assertRejects('blankId mismatch fails for seven-choices', () => {
+    const bad = validScAnalysis(input)
+    bad.questions[input.group.questions[0].id].blankId = 'blank-other'
+    return analyzeSevenChoicesImportCandidate(input, { providerCallers: { deepseek: stubProvider(bad) } })
+  }, /blankId does not match/)
+
   await assertRejects('wrong schema fails for seven-choices', () => {
     const bad = { ...validScAnalysis(input), schemaVersion: 'wrong' }
     return analyzeSevenChoicesImportCandidate(input, { providerCallers: { deepseek: stubProvider(bad) } })
@@ -310,6 +324,14 @@ async function assertAnalysisValidation() {
     bad.questions[firstQ.id].mechanismSignals[0].signalText = 'nonexistent text in passage'
     return analyzeSevenChoicesImportCandidate(input, { providerCallers: { deepseek: stubProvider(bad) } })
   }, /精确匹配原文/)
+
+  await assertRejects('option-side signal from a distractor fails for seven-choices', () => {
+    const bad = validScAnalysis(input)
+    const firstQ = input.group.questions[0]
+    const distractor = input.group.optionBank.find(({ label }) => label !== firstQ.answerKey)
+    bad.questions[firstQ.id].mechanismSignals[1].signalText = distractor.text
+    return analyzeSevenChoicesImportCandidate(input, { providerCallers: { deepseek: stubProvider(bad) } })
+  }, /未在正答选项中精确定位/)
 }
 
 function assertPromptBuilding() {

@@ -973,6 +973,16 @@ function renderWritingAnswerBox(detail) {
   return `<div class="writing-answer-box" style="width:${widthMm}mm;height:${heightMm}mm;">${starterLines}</div>`
 }
 
+function renderTeacherOfficialModelAnswer(detail) {
+  const answer = detail.officialModelAnswer
+  if (typeof answer !== 'string' || !answer.trim()) return ''
+  const paragraphs = answer
+    .split('\n')
+    .map((line) => `<p>${escapeHtml(line)}</p>`)
+    .join('')
+  return `<aside class="teacher-official-model-answer" data-model-answer-source="official"><h4>【官方范文】</h4>${paragraphs}</aside>`
+}
+
 export function buildPrintHtml({
   title,
   versionType,
@@ -1872,6 +1882,9 @@ export function buildPrintHtml({
         ) {
           groupHtml += renderWritingAnswerBox(detail)
         }
+        if (isTeacher && isWritingGroupType(detail.groupType)) {
+          groupHtml += renderTeacherOfficialModelAnswer(detail)
+        }
 
         const canonicalQuestionById = canonicalGroup
           ? new Map(canonicalGroup.questions.map((question) => [question.questionId, question]))
@@ -2149,6 +2162,7 @@ export function buildPrintHtml({
       }
       if (isWritingGroupType(detail.groupType)) {
         groupHtml += renderWritingAnswerBox(detail)
+        if (isTeacher) groupHtml += renderTeacherOfficialModelAnswer(detail)
       }
       for (const question of detail.questions) {
         groupHtml += `<div class="question"><p class="stem"><span class="qnum">${questionNum}.</span> ${escapeHtml(question.stem)}</p>`
@@ -2923,6 +2937,26 @@ body {
 
 .answer p {
   margin: 0.1em 0;
+}
+
+.teacher-official-model-answer {
+  margin: 9pt 0 0;
+  font-size: 10pt;
+  line-height: 1.55;
+}
+
+.teacher-official-model-answer h4 {
+  margin: 0 0 4.5pt;
+  font-size: 10.5pt;
+}
+
+.teacher-official-model-answer p {
+  margin: 0 0 4.5pt;
+  text-indent: 2em;
+}
+
+.teacher-official-model-answer p:empty {
+  display: none;
 }
 
 .explanation {

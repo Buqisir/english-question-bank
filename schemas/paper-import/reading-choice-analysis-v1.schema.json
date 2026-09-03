@@ -20,6 +20,29 @@
         "required": ["skill", "questionFocus", "stemTranslationZh", "optionAnalysis", "locationParaphrases"],
         "properties": {
           "skill": { "type": "object" },
+          "similarityProfile": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["family", "subtype", "detailScope", "technique"],
+            "properties": {
+              "family": {
+                "enum": ["detail", "main-idea", "inference", "word-meaning", "reference", "writing-method"]
+              },
+              "subtype": {
+                "enum": [
+                  "general-detail", "behavior-reason", "calculation", "comparison-integration", "situation-match",
+                  "paragraph-main-idea", "passage-main-idea", "best-title",
+                  "detail-inference", "attitude", "writing-purpose", "character-trait", "source",
+                  "word", "phrase", "sentence", "reference", "writing-method"
+                ]
+              },
+              "detailScope": { "type": ["string", "null"], "enum": ["single", "multiple", null] },
+              "technique": {
+                "type": ["string", "null"],
+                "enum": ["example", "comparison", "quotation", "statistics", "definition", "topic-introduction", "viewpoint-support", null]
+              }
+            }
+          },
           "questionFocus": { "type": "string" },
           "stemTranslationZh": { "type": "string" },
           "optionAnalysis": {

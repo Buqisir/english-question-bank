@@ -1,6 +1,7 @@
 # 10 — 详解版与纯答案键的统一 answer-value closure
 
-- Status: implemented（DOCX/PDF + shared OCR/image parser；真实来源 QA 待办）
+- Status: implemented（DOCX/PDF + shared OCR/image parser；真实图片source pre-review完成，
+  Owner Candidate QA待办）
 - Blocked by: None
 - Next on PASS: 维持匿名 shape regression；真实卷仍走对应 carrier 的 Owner QA
 
@@ -11,13 +12,14 @@
 
 `detailed`与`key_only`不是两套产品模型。无论DOCX/PDF/图片，producer都只提取完整的
 权威答案值并生成同一种Canonical answers。逐题详解不进入Materialization、Canonical、
-Review projection或Teacher surface，也不单独提取保存；原答案文件只作为不可变来源证据。
+Review projection或Teacher surface，也不单独提取保存；明确写作边界内的官方应用文/续写
+范文保留并只进入Teacher Screen/Print/PDF，Student隐藏。原答案文件仍是不可变来源证据。
 
 ## Input and fixture
 
 两份最小synthetic answer DOCX/PDF，共用同一题卷：
 
-- `detailed`：完整45项短答案，另带短写作范文和一个明确详解区；
+- `detailed`：完整45项短答案，另带短写作范文和一个明确详解区；范文进入Teacher-only字段；
 - `key_only`：相同45项答案，无解释、无范文；
 - 负例：漏一个语法填空答案、答案值与详解边界不唯一、任一详解token进入Candidate或
   Teacher surface。
@@ -34,8 +36,9 @@ Review projection或Teacher surface，也不单独提取保存；原答案文件
   ABCD而缺填空答案仍是incomplete source。写作官方范文可以`not_supplied`。
 - `detailed`只在确定的答案区读取答案值；答案区之后的逐题详解不创建locator、digest或
   Canonical node。原答案document的bytes/digest仍按Source Capture规则保留，以证明答案出处。
-- 答案文件中的写作范文不进入`writingTask.officialModelAnswer`；该字段保持`null`。听力原文
-  仍按独立 listening contract 处理，不与逐题详解一起丢弃。
+- 答案文件中的官方写作范文只在明确应用文/续写heading边界内进入
+  `writingTask.officialModelAnswer`；边界歧义报`NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS`，
+  不得把评分说明或逐题详解带入。听力原文仍按独立 listening contract 处理。
 - 教学分析仍按现有流程生成/审核；所有正确项必须等于`answers[]`，且不得读取、显示或
   冒充原答案文件中的逐题详解。
 - 有听力题时，transcript/audio closure独立判断；纯答案键不允许伪造缺失听力原文。
@@ -46,7 +49,8 @@ Review projection或Teacher surface，也不单独提取保存；原答案文件
 
 复用`NCK1_DOCX_ANSWER_MISSING`, `NCK1_DOCX_ANSWER_CONFLICT`,
 `NCK1_DOCX_ANSWER_RANGE_AMBIGUOUS`；新增`NCK1_ANSWER_VALUE_BOUNDARY_AMBIGUOUS`,
-`NCK1_ANSWER_DETAIL_LEAK_DETECTED`, `NCK1_COMBINED_SOURCE_BOUNDARY_AMBIGUOUS`。
+`NCK1_ANSWER_DETAIL_LEAK_DETECTED`, `NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS`,
+`NCK1_COMBINED_SOURCE_BOUNDARY_AMBIGUOUS`。
 
 ## Acceptance criteria
 
@@ -57,6 +61,9 @@ Review projection或Teacher surface，也不单独提取保存；原答案文件
 - [x] combined source只在唯一boundary下成功；Student blocks不含answer region source文本。
 - [x] 缺填空答案、答案冲突、答案边界不明分别fail closed；详解 token 不得进入下游。
 - [x] Student始终不见答案/解析；Teacher只见权威答案与另行审核的教学分析。
+- [x] 明确边界内的官方写作范文只在Teacher三面呈现；评分说明和逐题详解仍被排除。
+- [x] 真实图片answer source经公共Review routes验证：Student HTML/PDF为零答案、零官方
+  范文；Teacher为45项权威答案、2组官方范文，且没有详解或评分说明泄漏。
 
 ## Implementation evidence
 
@@ -72,10 +79,14 @@ Review projection或Teacher surface，也不单独提取保存；原答案文件
   combined、漏/双 boundary 和模糊文本答案的匿名最小形状。
 - `scripts/verify-nck1-answer-source-shapes.mjs`：direct DOCX/PDF producer、Candidate preview
   与真实 Universal `question_and_answers` CLI 回归。
+- `scripts/import-pipeline/canonical-consumption-print-payload.mjs`、
+  `server/import-review/importReviewRoutes.mjs`与`scripts/verify-universal-nck1-publish.mjs`：
+  source-authoritative官方范文进入Review Teacher Print/PDF，而Student保持隐藏；专项回归走
+  authenticated Owner Review Student/Teacher routes断言实际markup。
 
 ## Non-goals
 
-让AI补答案、强制源提供写作范文、提取或保存逐题详解、把详解直接发布、答案质量裁判、
+让AI补答案、强制源提供写作范文、提取或保存逐题详解、把详解直接发布、保存评分说明、答案质量裁判、
 逐个carrier复制answer parser、真实长篇解析fixture。
 
 ## Verification

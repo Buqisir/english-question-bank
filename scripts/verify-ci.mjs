@@ -1,7 +1,18 @@
 #!/usr/bin/env node
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
+import { setMaxListeners } from 'node:events'
+import {
+  closeSync,
+  mkdtempSync,
+  openSync,
+  readFileSync,
+  rmSync,
+  writeSync,
+} from 'node:fs'
+import { availableParallelism, tmpdir } from 'node:os'
 import path from 'node:path'
+import { performance } from 'node:perf_hooks'
 import { fileURLToPath } from 'node:url'
 import {
   changedFiles,
@@ -10,6 +21,11 @@ import {
 import {
   runVerificationCommand,
 } from './lib/verificationCommandRunner.mjs'
+import {
+  createOrderedResultFlusher,
+  runVerificationSchedule,
+  verificationSchedulingPolicy,
+} from './lib/verificationScheduler.mjs'
 import {
   assertCanonicalImportPilotEvidenceRoot,
   assertCanonicalImportPilotTransientEvidenceRunsClean,
@@ -85,6 +101,12 @@ const registry = {
   'scripts/verify-paper-normalization-import-gate.mjs',
   'scripts/import-pipeline/verify-source-doc-types.mjs',
   'scripts/verify-import-ops.mjs',
+  'scripts/verify-source-intake.mjs',
+  'scripts/verify-source-intake-frontend.mjs',
+  'scripts/verify-source-intake-webhook.mjs',
+  'scripts/verify-nck1-analysis-agent-plugin.mjs',
+  'scripts/verify-amp-orb-ci.mjs',
+  'scripts/verify-amp-orb-deploy.mjs',
   'scripts/verify-import-review-source-pairing.mjs',
   'scripts/verify-import-review-media-derivation.mjs',
   'scripts/verify-docx-source-media-input.mjs',
@@ -101,8 +123,10 @@ const registry = {
   'scripts/verify-c8-print-ready-gate.mjs',
   'scripts/verify-print-form.mjs',
   'scripts/verify-print-renderer.mjs',
+  'scripts/verify-companion-analysis-export.mjs',
   'scripts/verify-figure-render.mjs',
   'scripts/verify-verification-command-runner.mjs',
+  'scripts/verify-verification-scheduler.mjs',
   'scripts/verify-architecture-housekeeping.mjs',
   'scripts/verify-motion-tokens.mjs',
   'scripts/verify-lecture-panel-css.mjs',
@@ -131,6 +155,7 @@ const registry = {
   'scripts/verify-i5-writing-ai-import.mjs',
   'scripts/verify-application-model-answer-prompt.mjs',
   'scripts/verify-continuation-analysis-v1.mjs',
+  'scripts/verify-teaching-analysis-style.mjs',
   'scripts/verify-nck1-new-paper-locks.mjs',
   'scripts/verify-i6-writing-render.mjs',
   'scripts/verify-i7-application-given.mjs',
@@ -215,6 +240,10 @@ const paperDataScripts = [
 const securityScripts = [
   'scripts/verify-ai-server-key-fallback.mjs',
   'scripts/verify-auth-gate.mjs',
+  'scripts/verify-source-intake.mjs',
+  'scripts/verify-source-intake-webhook.mjs',
+  'scripts/verify-amp-orb-ci.mjs',
+  'scripts/verify-amp-orb-deploy.mjs',
   'scripts/verify-owner-gate.mjs',
   'scripts/verify-user-scope.mjs',
   'scripts/verify-ai-daily-limit.mjs',
@@ -284,6 +313,19 @@ function argumentValues(flag) {
   return values
 }
 
+function verificationConcurrency() {
+  const raw = argumentValues('--jobs').at(-1) || process.env.VERIFY_CONCURRENCY
+  if (raw === undefined) {
+    return Math.min(8, Math.max(1, Math.ceil(availableParallelism() / 2)))
+  }
+  if (!/^\d+$/u.test(raw)) throw new Error(`Invalid verify concurrency: ${raw}`)
+  const concurrency = Number(raw)
+  if (!Number.isSafeInteger(concurrency) || concurrency < 1 || concurrency > 64) {
+    throw new Error(`Invalid verify concurrency: ${raw}`)
+  }
+  return concurrency
+}
+
 function changedPlan(files) {
   if (files.length === 0) {
     return { risk: 'no-changes', pack: 'ui', scripts: [] }
@@ -311,8 +353,20 @@ function changedPlan(files) {
     'app/src/shared-ui/tokens.css',
   ]
   const securityPatterns = [
+    '.agents/setup',
+    '.amp/plugins/github-ci-wakeup.js',
+    '.amp/plugins/source-intake-wakeup.js',
     'data/sql/',
+    'deploy/',
+    'scripts/amp-orb-ci-sandbox.mjs',
+    'scripts/amp-orb-ci.mjs',
+    'scripts/amp-orb-deploy.mjs',
+    'scripts/lib/ampOrbCI.mjs',
+    'scripts/lib/ampOrbDeploy.mjs',
+    'scripts/verify-amp-orb-deploy.mjs',
     'server/auth/',
+    'server/import-ops/',
+    'server/source-intake/',
     'server/user-data/',
     'server/ai-daily-limit.mjs',
     'server/vocabulary/vocabularyStore.mjs',
@@ -457,20 +511,30 @@ function verificationPlan() {
 }
 
 let plan
+let concurrency
 try {
   plan = verificationPlan()
+  concurrency = verificationConcurrency()
 } catch (error) {
   console.error(error.message)
   process.exit(1)
 }
 
 if (process.argv.includes('--list-json')) {
-  console.log(JSON.stringify({ ...registry, packs }, null, 2))
+  console.log(JSON.stringify({
+    ...registry,
+    packs,
+    scheduling: {
+      availableParallelism: availableParallelism(),
+      concurrency,
+      resources: ['browser-render', 'port:<number>'],
+    },
+  }, null, 2))
   process.exit(0)
 }
 
 if (process.argv.includes('--plan-json')) {
-  console.log(JSON.stringify(plan, null, 2))
+  console.log(JSON.stringify({ ...plan, concurrency }, null, 2))
   process.exit(0)
 }
 
@@ -478,10 +542,24 @@ if (process.argv.includes('--plan-json')) {
 // fixture is absent, e.g. on a clean CI checkout). Skipped != passed: it is
 // counted and listed separately so a missing-data gap stays visible.
 const SKIP_EXIT_CODE = 2
+const suiteStartedAt = performance.now()
+const abortController = new AbortController()
+setMaxListeners(concurrency + 2, abortController.signal)
+let interruptedSignal = null
+const interrupt = (signal) => {
+  if (interruptedSignal) return
+  interruptedSignal = signal
+  abortController.abort(signal)
+}
+const onSigint = () => interrupt('SIGINT')
+const onSigterm = () => interrupt('SIGTERM')
+process.once('SIGINT', onSigint)
+process.once('SIGTERM', onSigterm)
 
 async function run(command, args, label, options = {}) {
   console.log(`\n==> ${label}`)
   return runVerificationCommand(command, args, {
+    abortSignal: abortController.signal,
     cwd: options.cwd || rootDir,
   })
 }
@@ -497,10 +575,69 @@ for (const step of plan.preflight) {
 
 // Scripts run in collect mode: run every script, never exit early, so one
 // failure cannot hide the status of the scripts after it.
-const results = []
-for (const script of plan.scripts) {
-  const status = await run(process.execPath, [script], script)
-  results.push({ script, status })
+const scheduledScripts = plan.scripts.map((script) => verificationSchedulingPolicy(
+  script,
+  readFileSync(path.join(rootDir, script), 'utf8'),
+))
+const renderScriptCount = scheduledScripts.filter(
+  (script) => script.resourceKeys.includes('browser-render'),
+).length
+const fixedPortScriptCount = scheduledScripts.filter(
+  (script) => script.resourceKeys.some((resource) => resource.startsWith('port:')),
+).length
+const exclusiveScriptCount = scheduledScripts.filter((script) => script.exclusive).length
+console.log(
+  `\nVERIFY SCHEDULER jobs=${concurrency} cores=${availableParallelism()} scripts=${scheduledScripts.length}`
+    + ` render-lane=${renderScriptCount} fixed-port=${fixedPortScriptCount}`
+    + ` exclusive=${exclusiveScriptCount}`,
+)
+
+const logRoot = mkdtempSync(path.join(tmpdir(), 'eqb-verify-ci-'))
+const flushResult = createOrderedResultFlusher((_index, result) => {
+  console.log(`\n==> ${result.script}`)
+  const output = readFileSync(result.logPath)
+  if (output.length > 0) {
+    process.stdout.write(output)
+    if (output.at(-1) !== 10) process.stdout.write('\n')
+  }
+  rmSync(result.logPath, { force: true })
+})
+let results = []
+let scheduleFailure = null
+try {
+  results = await runVerificationSchedule(scheduledScripts, {
+    concurrency,
+    signal: abortController.signal,
+    async run(item, index) {
+      const logPath = path.join(logRoot, `${String(index).padStart(3, '0')}.log`)
+      const logFd = openSync(logPath, 'wx', 0o600)
+      let status
+      try {
+        const writeLog = (chunk) => writeSync(logFd, chunk)
+        status = await runVerificationCommand(process.execPath, [item.script], {
+          abortSignal: abortController.signal,
+          cwd: rootDir,
+          stdout: writeLog,
+          stderr: writeLog,
+        })
+      } finally {
+        closeSync(logFd)
+      }
+      return { script: item.script, status, logPath }
+    },
+    onSettled: flushResult,
+  })
+} catch (error) {
+  scheduleFailure = error
+} finally {
+  rmSync(logRoot, { force: true, recursive: true })
+}
+if (scheduleFailure) {
+  if (interruptedSignal) {
+    process.exit(interruptedSignal === 'SIGINT' ? 130 : 143)
+  }
+  console.error(`\nVerification scheduler failed: ${scheduleFailure.message}`)
+  process.exit(1)
 }
 
 let fullSuiteEvidenceRegressionFailure = null
@@ -533,6 +670,10 @@ const failed = results.filter((r) => r.status !== 0 && r.status !== SKIP_EXIT_CO
 
 console.log('\n===== verify summary =====')
 console.log(`MODE ${plan.mode} / RISK ${plan.risk} / PACK ${plan.pack}`)
+console.log(
+  `JOBS ${concurrency} / CORES ${availableParallelism()}`
+    + ` / WALL ${((performance.now() - suiteStartedAt) / 1_000).toFixed(1)}s`,
+)
 console.log(`PASS ${passed.length} / SKIP ${skipped.length} / FAIL ${failed.length}`)
 if (skipped.length > 0) {
   console.log('SKIPPED (declared limitation — not actually tested):')
@@ -549,4 +690,6 @@ if (fullSuiteEvidenceRegressionFailure) {
   )
 }
 
+process.removeListener('SIGINT', onSigint)
+process.removeListener('SIGTERM', onSigterm)
 process.exit(failed.length > 0 || fullSuiteEvidenceRegressionFailure ? 1 : 0)

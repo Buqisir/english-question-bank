@@ -5,7 +5,7 @@
  *   Always-visible:
  *     - Header: blank no + pos/考点 tag (chip) + optional signature label (chip)
  *     - Answer: optionLabel badge + one-line reason
- *     - Distractor gloss list (label + optionText + meaning; compact, muted)
+ *     - Distractor analysis list (label + optionText + contextual explanation)
  *   Collapsed by default — NAMED folds only, no anonymous「展开细节」drawer
  *   (owner decision 2026-07-08: every fold says what it holds):
  *     - 证据定位 (native <details>): evidence rows
@@ -89,10 +89,10 @@ export function ClozeAnalysisPanel({
             </div>
           </div>
 
-          {/* Distractor glosses (always visible, compact) */}
+          {/* Distractor analysis (always visible, compact) */}
           {analysis.distractorGlosses.length > 0 && (
             <div className="pi-cloze-distractors">
-              <h4 className="pi-cloze-section-title">干扰项释义</h4>
+              <h4 className="pi-cloze-section-title">干扰项辨析</h4>
               <ul className="pi-cloze-distractor-list">
                 {analysis.distractorGlosses.map((gloss) => (
                   <li key={gloss.optionLabel} className="pi-cloze-distractor-item">

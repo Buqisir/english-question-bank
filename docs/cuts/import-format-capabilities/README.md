@@ -25,7 +25,7 @@
 2. **查矩阵**：先分别登记题卷载体、答案形态（详解/纯答案键/未提供）和包装关系，
    再按真实 shape 而非“格式编号”找行。核对 detection、Source Capture、Materialization、
    Canonical、三面和 Review 证据，不把 `manual`/`legacy` 当 producer support。详解版也只
-   提取权威答案值，不保存或显示逐题详解。
+   提取权威答案值，不保存或显示逐题详解；明确边界内的官方写作范文只在Teacher三面显示。
 3. **已有能力则复用**：运行该行列出的 adapter 与 verifier；不得加单卷 parser、CSS 或
    renderer 分支。
 4. **能力不闭合则停住 Candidate**：记录 stable issue code、source document/page/region
@@ -38,7 +38,8 @@
 6. **扩原有 source of truth**：优先扩现有 locator、block、media、shared surface projection
    和 Review issue target。只有现有模型确实无法诚实表达时才增加最小字段。
 7. **按公共 seam 验证**：source replay → Materialization → Canonical → Screen →
-   Student/Teacher Print → PDF → `/ops/` source pairing；未知邻接 shape 必须稳定失败。
+   Student/Teacher Print → PDF → `/ops/` source pairing；图片源由Agent对照闭合，Candidate先经
+   独立视觉前审再交Owner成卷验收；未知邻接 shape 必须稳定失败。
    AI候选还必须经原图/候选并排及overlay/闪烁逐项人工确认，再由三面共用同一bytes。
 8. **有证据才升级矩阵**：同一 change 同步 fixture、code、verifier、ticket 和矩阵状态。
    一张真实卷通过或人工能修，不足以把 `partial` 改成 `supported`。

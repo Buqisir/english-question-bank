@@ -1259,11 +1259,21 @@ export function publishUniversalNck1Import({
   paperAssetsDir,
   forceDbFailure = false,
   failurePoint = null,
+  onPrepared = null,
 }) {
   const projection = buildNck1ReviewProjection(
     reviewRootDir,
     { requireAnalyses: true },
   )
+  if (projection.manifest.schemaVersion === 'universal-nck1-source-manifest-v2') {
+    return canonicalAdmissionFailure({
+      disposition: 'unsupported',
+      diagnostics: [{
+        code: 'LISTENING_AUDIO_PUBLICATION_NOT_SUPPORTED',
+        message: 'Listening audio evidence may enter Review but cannot publish before listening publication support is active',
+      }],
+    })
+  }
   const expectedIdentity = {
     sourceDigest: projection.sourceDigest,
     candidateDigest: projection.candidateDigest,
@@ -1311,6 +1321,7 @@ export function publishUniversalNck1Import({
     publicValidation: universalValidationReport(projection),
     forceDbFailure,
     failurePoint,
+    onPrepared,
     requireCompleteAnalyses: true,
     admitPackage(version) {
       return admitBoundUniversalNck1Package({
@@ -1400,6 +1411,7 @@ function publishPreparedPaperImport({
   admitPackage,
   forceDbFailure = false,
   failurePoint = null,
+  onPrepared = null,
   requireCompleteAnalyses = false,
 }) {
   const paperId = packageData.paperAsset.paper.paperId
@@ -1461,6 +1473,13 @@ function publishPreparedPaperImport({
       }),
     })
     const versionName = `v${recovery.targetVersion}`
+    if (onPrepared) {
+      onPrepared({
+        assetVersion: recovery.targetVersion,
+        versionName,
+        canonicalPublicationDigest: current.publicationDigest,
+      })
+    }
     const versionDir = path.join(paperAssetsDir, paperId, 'versions', versionName)
     const publishReport = JSON.parse(
       readFileSync(path.join(versionDir, 'publish-report.json'), 'utf8'),
@@ -1506,6 +1525,14 @@ function publishPreparedPaperImport({
     qaLinks: buildQaLinks(paperId, version, readingGroups, scGroups, clozeGroups, gfGroups, writingGroups),
     searchHref: '/?q=2024%20九省联考',
     generatedAt: new Date().toISOString(),
+  }
+
+  if (onPrepared) {
+    onPrepared({
+      assetVersion: version,
+      versionName: publishReport.versionName,
+      canonicalPublicationDigest: admission.sealed.manifest.publicationDigest,
+    })
   }
 
   let writtenVersion = null

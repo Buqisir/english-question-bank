@@ -18,3 +18,5 @@ papers/*/canonical-evidence/
 # Backfill scratch (per-group label JSON from the Workflow fan-out) + logs.
 labels-out/
 *.log
+# Private files and lease receipts downloaded from the Owner source-intake queue.
+source-intake-inbox/

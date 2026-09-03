@@ -269,6 +269,13 @@ console.log('\nTest 7: Writing answer box sizing')
   assert('读后续写 box sized 145x57mm (standard §8)', html.includes('width:145mm;height:57mm;'), '')
   const boxCount = (html.match(/class="writing-answer-box"/g) || []).length
   assert('exactly 2 writing-answer-box elements emitted', boxCount === 2, `got ${boxCount}`)
+
+  const officialSample = 'Official paragraph one.\nOfficial paragraph two.'
+  writingItems[0].detail.officialModelAnswer = officialSample
+  const teacherHtml = buildPrintHtml({ title: 'Writing', versionType: 'teacher', printStyle: 'exam', items: writingItems, blocks: writingBlocks, questionNumberStart: 1 })
+  const studentHtml = buildPrintHtml({ title: 'Writing', versionType: 'student', printStyle: 'exam', items: writingItems, blocks: writingBlocks, questionNumberStart: 1 })
+  assert('Teacher Print includes source official writing sample', teacherHtml.includes('【官方范文】') && teacherHtml.includes('Official paragraph one.'), '')
+  assert('Student Print hides source official writing sample', !studentHtml.includes('【官方范文】') && !studentHtml.includes('Official paragraph one.'), '')
 }
 
 // --- Test 7b: writing-box-starters (owner 拍板 2026-07-16) ---

@@ -1,14 +1,14 @@
 # Agent Import Contract (NCK1)
 
-任意本机 coding agent 导一卷 NCK1 的**唯一进场文档**。先读完本文件再动手。
+任意 Amp Project Orb 导一卷 NCK1 的**唯一进场文档**。先读完本文件再动手。
 项目级 `importing-nck1-papers` skill 会在导题、继续某卷、审核返工、状态查询和
-认可后本地发布任务中自动触发；Owner 不需要记命令。Agent 每次先运行只读
+认可后上线准备任务中自动触发；Owner 不需要记命令。Agent 每次先运行只读
 `review.mjs preflight <paperId>`，再从返回的唯一状态恢复。
 
 所有新 NCK1 卷默认走统一入口，不再先判断格式①/②/③：
 
 - 数据契约：`docs/product/nck1-paper-standard.md`（导题过程中不改；owner 拍板修订后以新文本为准）
-- 统一入口：先运行 `node scripts/import-pipeline/universal-nck1.mjs preflight`，一次性确认 magick、ffmpeg、soffice、PDF 工具、unzip 的可执行与动态链接健康；处理中途禁止安装或升级依赖。`init` 也会先执行同一检查。对于一份试题 DOCX + 一份权威答案 DOCX，`materialize <paperId>` 用受测 producer 从不可变源生成并校验 `nck1-source-materialization-v1`；表格写语义网格，图标、条码、照片和图表按源提取配方生成媒体。随后 `verify` 派生 Candidate，`build` 生成 digest-bound Candidate 摘要；Agent 必须生产并验证 4× reading、seven、cloze、grammar、application、continuation 共九份教学分析，才可由 `review.mjs push` 上传绑定全部原始 bytes 和 `analysisDigest` 的不可变审核 revision。Owner 在 `/ops/` 真实 Screen 审核讲评并认可精确摘要后，`review.mjs accept` 生成 Teacher Confirmation 与 Canonical request；再由 `review.mjs publish` 原子发布同一五份 sidecar 到本地并停在 `ready_to_ship`。完整命令见 `scripts/import-pipeline/README.md`。
+- 统一入口：先运行 `node scripts/import-pipeline/universal-nck1.mjs preflight`，一次性确认 magick、ffmpeg、soffice、PDF 工具、unzip 的可执行与动态链接健康；处理中途禁止安装或升级依赖。`init` 也会先执行同一检查。对于一份试题 DOCX + 一份权威答案 DOCX，`materialize <paperId>` 用受测 producer 从不可变源生成并校验 `nck1-source-materialization-v1`；表格写语义网格，图标、条码、照片和图表按源提取配方生成媒体。随后 `verify` 派生 Candidate，`build` 生成 digest-bound Candidate 摘要；Agent 必须生产并验证 4× reading、seven、cloze、grammar、application、continuation 共九份教学分析，才可由 `review.mjs push` 上传绑定全部原始 bytes 和 `analysisDigest` 的不可变审核 revision。Owner 在 `/ops/?view=review` 真实 Screen/Print/PDF 审核并认可精确摘要后，Agent 停下；认可不公开。只有 Owner 后来在当前对话明确说“上线 <paperId>”，Agent 才用独立 shipping credential 调 `review.mjs promote`，由生产服务端从同一不可变 revision 原子发布这一卷。完整命令见 `scripts/import-pipeline/README.md`。
 - 阅读 Word 细线框（框里只有能打的字和矩形表）：写成 Canonical `framed_columns`（nck1 §8）；观感见 `docs/product/exam-paper-format-standards.md` §3c。不要截整图当 Canonical 正文，不要为单卷改 CSS。下一卷步骤见 `docs/cuts/reading-framed-columns/spec.md`「下一卷怎么干」。
 - 旧格式①/②/③脚本只保留已接入存量卷回退；新卷不得向旧脚本添加 `paperId`、CONTENT 登记或 shape association 特例。
 
@@ -74,7 +74,23 @@ complete set仍必须通过正常Materialization、答案覆盖检查和Owner Re
 ## 单 writer
 
 同一 `paperId` 同时只允许一个 writer。发现该目录已有另一会话在写 → 停，不要并行、不要抢写。多卷并行本契约不做产品化。
-应用文与续写的写作分析可以并行做纯读取，最后仍由该卷唯一 writer 汇总；不得以多 writer 绕过 Materialization、revision 或认可合同。
+九份教学分析必须按 staged contract 拆给聚焦任务：阅读 A—D 各自独立，七选五、完形、语法填空、应用文、读后续写各自独立；不要让一个模型上下文包办整卷。该卷唯一 writer 负责汇总，同一工作树内默认逐份写入；并行只能做纯读取，或使用独立工作树和不重叠写面。九份齐全后统一跑确定性 projection，再由一个只验不写的任务检查串题、非精确证据、答案/ID 漂移、模板化复读和不恰当篇幅。不得以多 writer 绕过 Materialization、revision 或认可合同。
+
+正式生成每一份 staged analysis 时，唯一 writer 调项目插件 `.amp/plugins/nck1-analysis-agent.js` 注册的 `nck1_analyze_group`：模型固定为 `openai/gpt-5.6-sol`、reasoning effort 固定为 `medium`、worker tools 为空，每次调用新建一个 child context。一次只传一个 group 的源材料、该组权威答案、对应输出合同和共享讲解规范；禁止把整卷或另一组材料塞入同一次调用。工具只返回带 model / thread 身份的 envelope，不写工作树；writer 取其中 `analysis`，先跑现有题型 validator，再依次写对应文件。语法填空是唯一的前置规范化例外：须先调用 `stampGrammarFillDerivedFields`，由程序根据权威答案补时态、语态、一致敏感性和答案形式，再交给 validator；禁止让模型填写这些字段。失败时不得静默换模型、续聊旧 child thread 或自动升级 High；任何模型或重试策略调整都另行明确修改并验证。
+
+## Orb 算力边界
+
+自动 source-intake worker 使用私有 Project Orb，并继承专用导题 Amp Project 的默认 Orb
+规格；当前 plugin `createThread` 接口只选择 `executor: 'orb'`，不能逐任务传 `orbSize`。
+扫描/部分文本层 PDF、有序图片页、逐页 raster/OCR evidence、媒体提取和多面渲染验证
+使用默认 `a1.xxlarge` 的高算力 lane；原生 DOCX 和可靠文本层 PDF 属普通 lane。Agent
+开工时记录 `os.availableParallelism()`；16 表示预期 16 核可用。少于 16 只作效率告警，
+不得因此放宽内容门禁、转移已绑定 claim 或重复导入。
+
+可并行的只有互不写同一状态、输出路径唯一的逐页读取/转换/复核工作；并发必须有界并
+给 Agent 与系统工具留余量。Materialization、`verify`、`build`、revision、lease、handoff
+和 promotion 继续由该卷唯一 writer 串行提交。CPU 只加速本地文档处理，不提高 AI
+答案权威，也不替代扫描件逐页视觉复核。
 
 ## 文件夹接口（agent ↔ 导题后台）
 
@@ -88,8 +104,8 @@ complete set仍必须通过正常Materialization、答案覆盖检查和Owner Re
 | 卡死 | `signals/blocked.json` | 硬停；见原因码 |
 | 要人裁决（非例行 QA） | `signals/help-needed.json` | 例如非记叙型续写、格式不在白名单 |
 | 网页 QA 已过 | `signals/qa-accepted.json` | 仅由 `review.mjs accept` 按认可摘要写 |
-| 本地已 publish | `signals/locally-published.json` + 同版本 `latest/` | 仅由 `review.mjs publish` 在原子发布成功后写 |
-| 已上线 | `signals/shipped.json` | 本机 ship 收据；见「上线」清单 |
+| 旧本地 publish（兼容） | `signals/locally-published.json` + 同版本 `latest/` | 仅供离线验证/存量恢复；不再是 Review-backed 生产上线前置 |
+| 已上线 | Review API `promotion.state=published` | 服务端绑定 approval/revision/digests/vN 的正式审计收据 |
 
 `signals/` 下是小 JSON 收据，不要把答案表或全文写进去。
 
@@ -174,8 +190,12 @@ complete set仍必须通过正常Materialization、答案覆盖检查和Owner Re
 
 ## 状态
 
-`materializing` → `awaiting_review` ↔ `changes_requested` → `approved` →
-`locally_published` → `ready_to_ship` → `shipped`，或任意步 `failed`。
+线上权威状态：`materializing` → `awaiting_review` ↔ `changes_requested` →
+`approved` →（Owner 另说“上线”）→ `publishing` → `published`，已知拒绝或
+明确中止为 `failed`。`approved` 与 `published` 是两个不同人类决定。
+
+下面的 `locally_published` / `ready_to_ship` / `shipped` 只描述旧本地探针兼容，
+不授权、也不再驱动 Review-backed 生产上线。
 
 `preflight` 合并本地文件探针与 Review API 当前 revision；不看进程 exit code，
 也不把旧的本地认可收据当成当前认可：
@@ -202,7 +222,7 @@ node scripts/import-pipeline/review.mjs preflight <paperId>
 它返回 `state`、本地/Review 探针、`blockers` 和 `next.action`。它不上传 revision、
 不 accept、不 publish、不取得 shipping guard，并固定返回
 `production.pushAllowed: false`；上线授权只能来自 Owner 当前单独口令和后续 ship
-checklist。
+promotion 命令。
 
 ## 硬门禁
 
@@ -214,8 +234,8 @@ checklist。
 3. 生成九份 staged analysis 后运行 `node scripts/import-pipeline/review.mjs verify-analyses <paperId>`。它复用现有 schema、adapter、validator，检查 4 组 reading/15 题、seven/cloze/grammar 的 question/blank closure、45 个权威 objective answer closure 和两份写作分析，并确定性投影 Screen 的 `reading-choice`、`seven-choices`、`cloze`、`grammar-fill`、`writing` 五份 sidecar。缺项、冲突或不完整一律失败关闭。
 4. 设置 `QUESTION_BANK_IMPORT_OPS_ORIGIN` 与 Agent token，运行 `node scripts/import-pipeline/review.mjs push <paperId>`。push 会再次执行同一 analysis gate；不可变 bundle 绑定九份原始 bytes，manifest / bundle 绑定 `analysisDigest`。网页 revision finalize 后不可修改；Agent 停下等待 Owner 在 `/ops/` 真实 Screen 审核讲评。旧 revision 不会因后来补文件而获得 sidecar。
 5. 有问题：Agent 用 `review.mjs status` 或自己的 `import_agent` 网页待办箱读取反馈并回复；修好 Materialization 或 analysis 后重新 `verify` / `build` / `verify-analyses`，再用 `review.mjs push <paperId> --resolves <issueId>[,<issueId>]` 提交新 revision。不得覆盖旧 revision。
-6. Owner 认可后运行 `node scripts/import-pipeline/review.mjs accept <paperId>`。该命令只有在本地 source/Candidate/visible structure/analysis/files/bundle 与网页收据全部精确匹配时，才写 `teacher-confirmation-v1.json`（`confirmed: true`）、Canonical request、web approval 与 `signals/qa-accepted.json`；它不 publish、不部署。
-7. 运行 `node scripts/import-pipeline/review.mjs publish <paperId>`。该命令再次核对当前网页认可、QA 收据、Teacher Confirmation、Canonical request、`analysisDigest` 和 AI 答案复核，然后通过共享原子 publisher 把同一确定性五份 analysis sidecar 连同 DB、`versions/vN`、`latest` 与 Canonical current ref 一起提交、回滚或恢复；不得 approval 后另跑 writing backfill。成功后才写 `signals/locally-published.json`；同一认可和有效收据重跑为 no-op。它不部署，打印 `ready_to_ship` 后必须停。
+6. Owner 在网页认可后，Review API 保存绑定 source/Candidate/visible structure/analysis/files/bundle 的 approval；Agent 停下。无需在 Orb 生成本地 QA/发布收据，且不得因认可自动上线。
+7. 只有 Owner 后来在当前对话明确说 `上线 <paperId>`，才运行 `node scripts/import-pipeline/review.mjs promote <paperId> --owner-said-ship`。命令先用低权限 Agent token 读取最新认可，再用**只在本次上线动作中提供**的独立 ship token 请求生产服务。服务端从不可变 Review bytes 重建 Teacher Confirmation、Canonical request 与五份 sidecar，调用共享 publisher 原子写单卷正式 rows、Canonical current、`versions/vN`、`latest` 和媒体。不得从 Orb 上传整个 SQLite 或 broad assets。
 
 `materialize`、`verify` 与 `build` 都不会创建认可、approve、publish 或 ship。Teacher Confirmation、不可变 Review revision、Owner 网页认可和上线口令边界保持不变。
 
@@ -244,80 +264,85 @@ checklist。
 ## 停点
 
 - **不对答案（人）。** 答案随解析字段做全；托底是 AI Answer Transcription Check。
-- **网页 QA（人）必留。** Owner 在 `/ops/` 看复用现有 `PaperBrowsePage` / `PaperSurface` 的 Screen，包括九份 staged analysis 确定性投影出的完整讲评，以及共享 Canonical seam 生成的 Student Print / Teacher Print / PDF。AI-derived analysis 必须由 Owner 在真实 Screen 审核；出现“解析未发布”就是失败，不是可认可的 graceful success。问题绑定 revision 与语义对象；Owner 网页认可后仍由 Agent `review.mjs accept` 精确拉取，不能手写 `signals/qa-accepted.json`。
-- **上线。** `review.mjs publish` 成功后停。未 `ready_to_ship` 不得 push。导题后台无生产按钮。owner 必须**当前**另说「上线」之后，才按下一节清单执行。
+- **网页 QA（人）必留。** Owner 在 `/ops/?view=review` 看复用现有 `PaperBrowsePage` / `PaperSurface` 的 Screen，包括九份 staged analysis 确定性投影出的完整讲评，以及共享 Canonical seam 生成的 Student Print / Teacher Print / PDF。AI-derived analysis 必须由 Owner 在真实 Screen 审核；出现“解析未发布”就是失败，不是可认可的 graceful success。问题绑定 revision 与语义对象；网页认可写服务端精确 approval，但不发布。
+- **上线。** 网页认可后停。导题后台无生产按钮。Owner 必须**当前**另说「上线 <paperId>」之后，才按下一节执行服务端单卷 promotion。
 
 ## 上线
 
-可执行清单（本身**不**跑 push；使用 Agent 凭证只读核对 Review 服务，不做生产写入）：
+网页认可后仍然停下。只有 Owner 在**当前线程**直接说 `上线 <paperId>` 后，才可运行：
 
 ```bash
-node scripts/import-pipeline/ship-checklist.mjs check <paperId> --owner-said-ship
+node scripts/import-pipeline/review.mjs promote <paperId> --owner-said-ship
 ```
 
-运行时必须继续提供 `QUESTION_BANK_IMPORT_OPS_ORIGIN` 与
-`QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN`。清单会确认本地 `qa-accepted.json`
-仍对应 Review 服务的最新 `approved` revision 与同一 `approvalId` / 摘要；只要
-Agent 又提交了新 revision，旧本地收据立即失效，即使 Candidate 文件尚未变化。
-Agent 网页账号和该 token 都不能取得 shipping guard。
-
-仅当该命令打印「允许」时，agent 才可以跑整库：
-
-```bash
-node scripts/pull-run-push.mjs push <paperId> --owner-said-ship
-```
-
-实际 push 入口会在第一次生产写操作（停服务）之前，再运行同一份本地门禁，并在
-Review DB 事务内使用独立 `QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN` 取得绑定当前
-approval/revision/digest 的 shipping guard。Agent token 与 ship token 必须不同；
-ship token 只在已有当前上线口令的 push / guard 恢复路径使用。取得前
-若出现新 revision 会失败关闭；取得后到远端操作结束前，新 revision、问题创建/
-状态修改和重新认可都会被服务端拒绝。不是单卷增量，不是 `deploy.sh`。导题后台
-只展示口令，不跑这条命令。
+运行时提供 `QUESTION_BANK_IMPORT_OPS_ORIGIN`、低权限
+`QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN`，以及只在本次明确上线动作中提供的独立
+`QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN`。两个 token 必须不同；日常 Project Orb Secret
+只安装 Agent token，不能长期取得 ship token。命令先以 Agent token 读取当前最新
+approval 并摊开 revision 与全部 digest，再以 ship token 请求 promotion。网页 Cookie、
+Owner 网页会话、Agent token 都不能调用写入口。
 
 ### 硬前置
 
-该卷必须是 `ready_to_ship`：`app/public/paper-assets/<id>/latest/` + `signals/ai-answer-check.json` + `signals/qa-accepted.json` + `signals/locally-published.json` 精确闭合，且没有挡住的 `blocked.json`。ledger 只提示不挡。未 `ready_to_ship` → 清单拒绝，**不得** push。
+服务端在第一笔正式内容写入前，以 Review DB `BEGIN IMMEDIATE` 重新确认：最新 revision
+仍是 renderer-current Candidate、已认可、无未决问题、所有不可变文件 bytes/digest
+完整，并与请求的 approval/source/Candidate/visibleStructure/analysis/bundle identity
+逐项一致。随后同一控制事务创建 shipping guard 与 `publishing` 回执。任何新 revision、
+问题、重新认可或摘要漂移都失败关闭。
 
-重试：仅当 `blocked.json` 的 `code` 为 `ship_failed`，上列四件仍在，且 owner **当前**口头说「重试上线」：
+服务端 publisher 在任何 DB/asset 写入前，把目标 `assetVersion`、`versionName` 和
+Canonical publication digest 写回 promotion。正式 question-bank rows、Canonical
+current、五份 analysis、`versions/vN`、`latest` 和该卷媒体由既有 publisher 的
+staging/journal/事务/补偿边界提交；不会上传或替换整库。成功后 Review 事务写
+`published` 回执并释放 guard。R2 是下一次定时备份的独立灾备层，本回执不声称 R2
+已经完成。
+
+重试：只有同一 exact approval 的状态为 `failed` 或 `publishing`，且 Owner 当前另说
+`重试上线 <paperId>`，才运行：
 
 ```bash
-node scripts/import-pipeline/ship-checklist.mjs check <paperId> --owner-said-retry-ship
-node scripts/pull-run-push.mjs push <paperId> --owner-said-retry-ship
+node scripts/import-pipeline/review.mjs promote <paperId> --owner-said-retry-ship
 ```
 
-口令「上线」不能当重试。生产服务可能停在 stopped，先拉起再谈重试。
+口令“上线”不能当“重试上线”。已提交但回执缺失时，服务端核验预先绑定的 vN 与
+Canonical digest，直接补全同一回执，不创建 vN+1；pre-commit 失败则恢复旧 DB/current/
+latest 并复用同一目标。已知 admission 失败记 `failed` 并解锁；未知异常保留
+`publishing`+guard。
 
-正常成功或正常失败都会自动释放 shipping guard。若进程被强杀，guard 会故意留在
-Review DB 中以失败关闭；确认旧 push 进程已不存在、生产服务和数据库状态已人工
-查清，并获得 Owner 当前“解除上线锁”口令后，才可运行：
+若无法自动恢复，确认旧进程不存在并人工检查生产 DB/current/latest 后，只有 Owner
+当前明确说“解除上线锁”才可运行：
 
 ```bash
 node scripts/import-pipeline/review.mjs release-ship-guard <paperId> <guardId> --owner-said-abort-ship
 ```
 
-`guardId` 会在取得锁时打印。不得为了继续导题而盲目解除仍可能被旧进程持有的锁。
-该恢复命令使用 ship token，不接受普通 Agent token 或网页 Cookie。
+该命令用 ship token 将 active promotion 明确记为 `failed/ABORTED` 后解锁；不得为继续
+导题而盲目执行。若正式内容其实已提交，后续 exact retry 会先核验同一 vN，再补
+`published` 回执。
 
 ### 授权
 
-QA 之后 owner 必须另说「上线」（当前口头，不是历史聊天里的旧句）。导题后台可上线时只展示口令，例如 `上线 paper-<id>`；`ship_failed` 时展示 `重试上线 paper-<id>`。没有当前口头授权就不要跑 push。
+QA 之后 Owner 必须另说“上线”（当前口头，不是历史聊天里的旧句）。导题后台只读
+展示 `上线 paper-<id>` 或失败后的 `重试上线 paper-<id>`，永远没有执行按钮。没有
+当前直接授权就不要运行 promotion。
 
 `--owner-said-ship` / `--owner-said-retry-ship` 只表示 agent 已听到**这一次**口头授权。不得在 owner 没说时自行加上。
 
-### 跑前必须摊开（对 owner 复述；清单也会打印）
+### 跑前必须摊开
 
-1. 目标机：生产 eqbank.cc（`EQB_REMOTE`；远端仓库默认 `/opt/eqb/english-question-bank`）。先读 `docs/cuts/launch-deploy/go-live-record.md`。
-2. 整份 `data/question-bank.sqlite` 替换；`app/public/paper-assets/` 加性同步。
-3. 本机其他未上线改动会一并上去。
-4. SQLite 远端会留下 `.bak.<stamp>`；推错人工用 bak 退。
-5. assets 无自动回滚；推错人工覆盖或删远端目录。
-6. 中途失败时生产服务可能停在 stopped。
+1. 目标是生产 `eqbank.cc` 的 Review-backed 单卷 promotion；先读 go-live record。
+2. 精确 `paperId`、approvalId、revisionId 与六个 digest。
+3. 只改这一卷；不传 SQLite，不同步 broad assets，不包含 Orb 其他本地改动。
+4. publisher 会写目标 vN、正式 rows、Canonical current、五份分析、latest 与媒体；旧
+   immutable version 保留供 rollback。
+5. R2 不同步完成；只会由生产现有定时任务在下一次快照覆盖。
 
 ### 收据
 
-- 成功：`node scripts/import-pipeline/ship-checklist.mjs record-shipped <paperId>` → `signals/shipped.json`
-- 失败：`node scripts/import-pipeline/ship-checklist.mjs record-failed <paperId>` → `signals/blocked.json`，`code` = `ship_failed`
+- `promotion.state=publishing`：guard 已持有；目标 vN 可能尚未写或正在恢复。
+- `promotion.state=published`：精确 Review identity、vN、Canonical digest、五份分析 digest
+  与时间已落 Review DB。
+- `promotion.state=failed`：已知拒绝或明确 abort；重试仍需新 Owner 口令。
 
 ## 写作分析（新卷必交）
 
@@ -331,8 +356,8 @@ QA 之后 owner 必须另说「上线」（当前口头，不是历史聊天里�
 生产同域入口 `/ops/`；本机同源壳为 `node import-ops/server.mjs`（默认
 `http://127.0.0.1:8790/ops/`，代理到 `EQB_APP_ORIGIN`）。Owner 能提问题、验证
 修复和认可；`import_agent` 真实服务账号能读取待办、查看同一表面和回复，但不能
-关闭问题、认可或部署。无 LLM 动作、无生产按钮，不跑 pull-run-push。
+关闭问题、认可或上线。页面只读展示 promotion 审计状态；无 LLM 动作、无生产按钮。
 
 ## 禁止
 
-在消费端恢复导入动作或复制审核渲染器；后台直连 LLM API；单卷增量传输；导题时为过闸改 nck1 标准；格式①临时 canonical 映射；清单未允许时跑 `pull-run-push`；未获当前 owner 口头「上线」/「重试上线」动生产；为下一道同类 Word 细线框改 PaperSurface / print-renderer。
+在消费端恢复导入动作或复制审核渲染器；后台直连 LLM API；从 Orb 上传/替换整库或 broad assets；导题时为过闸改 nck1 标准；格式①临时 canonical 映射；Review-backed 纸卷走 `pull-run-push push`；未获当前 Owner 口头「上线」/「重试上线」动生产；把 ship token 装成日常 worker secret；为下一道同类 Word 细线框改 PaperSurface / print-renderer。

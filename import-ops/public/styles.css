@@ -289,6 +289,56 @@ summary:focus-visible {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
+.copy-row,
+.command-copy {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 8px;
+}
+
+.copy-row code,
+.command-copy code {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.copy-button {
+  min-height: 28px;
+  flex: 0 0 auto;
+  padding: 4px 7px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--teal-800);
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.copy-button:hover {
+  border-color: var(--teal-200);
+  background: var(--teal-50);
+}
+
+.copy-button:disabled {
+  cursor: wait;
+  opacity: 0.68;
+}
+
+.command-copy {
+  justify-content: space-between;
+  padding: 8px 9px;
+  border-radius: 6px;
+  background: var(--surface);
+}
+
+.command-copy code {
+  color: var(--ink);
+  font-size: 12px;
+}
+
 .status {
   display: inline-flex;
   width: fit-content;
@@ -311,16 +361,23 @@ summary:focus-visible {
 }
 
 .status--awaiting_review,
-.status--approved {
+.status--approved,
+.status--published {
   color: var(--teal-800);
   background: var(--teal-50);
 }
 
 .status--changes_requested,
 .status--open,
-.status--fixed_pending_review {
+.status--fixed_pending_review,
+.status--publishing {
   color: var(--warning-ink);
   background: var(--warning-bg);
+}
+
+.status--failed {
+  color: var(--danger-ink);
+  background: var(--danger-bg);
 }
 
 .status--closed,

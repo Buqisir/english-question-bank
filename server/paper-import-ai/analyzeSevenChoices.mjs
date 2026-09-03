@@ -1,17 +1,42 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { createAnalyzerProviderShell, readPromptFile, rewriteApiPrompt } from './analyzerProviderShell.mjs'
+import {
+  assertFullTranslationZh,
+  assertSelectedLongSentences,
+  createAnalyzerProviderShell,
+  readTeachingAnalysisPrompt,
+  rewriteApiPrompt,
+} from './analyzerProviderShell.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '../..')
 const promptPath = path.join(rootDir, 'prompts/seven-choices-analysis-v1.md')
+
+const VALID_POSITION_FACETS = new Set([
+  'seven-choices.position.paragraph-start',
+  'seven-choices.position.paragraph-middle',
+  'seven-choices.position.paragraph-end',
+])
+
+const VALID_ROLE_FACETS = new Set([
+  'seven-choices.role.topic',
+  'seven-choices.role.summary',
+  'seven-choices.role.bridge',
+  'seven-choices.role.cohesion',
+])
+
+const VALID_MECHANISM_FACETS = new Set([
+  'seven-choices.cohesion.grammatical.referential-cohesion',
+  'seven-choices.cohesion.grammatical.logical-connector',
+  'seven-choices.cohesion.lexical.topic-field-alignment',
+])
 
 function optionalString(value) {
   return typeof value === 'string' ? value.trim() : ''
 }
 
 function readApiPrompt() {
-  return rewriteApiPrompt(readPromptFile(promptPath))
+  return rewriteApiPrompt(readTeachingAnalysisPrompt(promptPath))
 }
 
 function assertSevenChoicesAnalyzeInput(input) {
@@ -94,7 +119,12 @@ export function buildSevenChoicesAnalysisMessages({ paper, group }) {
   ]
 }
 
-export function validateSevenChoicesShape(analysis, { paper, group }) {
+export function validateSevenChoicesShape(analysis, {
+  paper,
+  group,
+  requireFullTranslation = false,
+  requireSelectedLongSentences = false,
+}) {
   if (!analysis || typeof analysis !== 'object' || Array.isArray(analysis)) throw new Error('AI 未返回 JSON 对象。')
   if (analysis.schemaVersion !== 'seven-choices-analysis-v1') throw new Error('AI JSON schemaVersion 不正确。')
   if (analysis.paperId !== paper.paperId) throw new Error('AI JSON paperId 与当前试卷不一致。')
@@ -105,6 +135,12 @@ export function validateSevenChoicesShape(analysis, { paper, group }) {
   if (!analysis.groups || typeof analysis.groups !== 'object' || !analysis.groups[group.groupId]) {
     throw new Error('AI JSON 缺少当前题组分析。')
   }
+  if (requireFullTranslation) {
+    assertFullTranslationZh(analysis.groups[group.groupId], group, { requireBlankMarkers: true })
+  }
+  assertSelectedLongSentences(analysis.groups[group.groupId], group, {
+    required: requireSelectedLongSentences,
+  })
   if (!analysis.questions || typeof analysis.questions !== 'object' || Array.isArray(analysis.questions)) {
     throw new Error('AI JSON questions 必须是对象。')
   }
@@ -119,12 +155,20 @@ export function validateSevenChoicesShape(analysis, { paper, group }) {
   const passageText = group.paragraphs.map((p) => p.text).join('\n')
   const optionTextByLabel = Object.fromEntries(group.optionBank.map((o) => [o.label, o.text]))
 
-  const assertExactQuote = (questionId, fieldName, signalText, side) => {
+  const assertExactQuote = (
+    questionId,
+    fieldName,
+    signalText,
+    side,
+    correctOptionText,
+  ) => {
     if (!signalText) return
     if (side === 'option') {
-      // signalText must appear somewhere in the option bank.
-      const found = group.optionBank.some((o) => o.text.includes(signalText))
-      if (!found) throw new Error(`${questionId}: ${fieldName} signalText "${signalText}" 未在选项池中定位。`)
+      if (!correctOptionText?.includes(signalText)) {
+        throw new Error(
+          `${questionId}: ${fieldName} signalText "${signalText}" 未在正答选项中精确定位。`,
+        )
+      }
     } else {
       if (!passageText.includes(signalText)) {
         throw new Error(`${questionId}: ${fieldName} signalText "${signalText}" 必须精确匹配原文。`)
@@ -137,9 +181,19 @@ export function validateSevenChoicesShape(analysis, { paper, group }) {
     const item = analysis.questions[questionId]
     if (!item || typeof item !== 'object') throw new Error(`${questionId}: 缺少题目分析。`)
     if (!optionalString(item.blankId)) throw new Error(`${questionId}: 缺少 blankId。`)
-    if (!optionalString(item.positionFacet)) throw new Error(`${questionId}: 缺少 positionFacet。`)
-    if (!optionalString(item.roleFacet)) throw new Error(`${questionId}: 缺少 roleFacet。`)
-    if (!optionalString(item.primaryMechanismFacet)) throw new Error(`${questionId}: 缺少 primaryMechanismFacet。`)
+    if (item.blankId !== sourceQuestion?.blankId) throw new Error(`${questionId}: blankId does not match source question.`)
+    if (!VALID_POSITION_FACETS.has(item.positionFacet)) throw new Error(`${questionId}: positionFacet 值无效。`)
+    if (!VALID_ROLE_FACETS.has(item.roleFacet)) throw new Error(`${questionId}: roleFacet 值无效。`)
+    if (!VALID_MECHANISM_FACETS.has(item.primaryMechanismFacet)) throw new Error(`${questionId}: primaryMechanismFacet 值无效。`)
+    if (item.supportingMechanismFacets !== undefined) {
+      if (
+        !Array.isArray(item.supportingMechanismFacets)
+        || item.supportingMechanismFacets.length > 2
+        || item.supportingMechanismFacets.some((facet) => !VALID_MECHANISM_FACETS.has(facet))
+      ) {
+        throw new Error(`${questionId}: supportingMechanismFacets 值无效。`)
+      }
+    }
     if (!Array.isArray(item.topicClues) || item.topicClues.length === 0) throw new Error(`${questionId}: topicClues 不能为空。`)
     if (!item.contextEvidence || typeof item.contextEvidence !== 'object') throw new Error(`${questionId}: 缺少 contextEvidence。`)
     if (!Array.isArray(item.mechanismSignals) || item.mechanismSignals.length < 2) throw new Error(`${questionId}: mechanismSignals 至少需要 2 个。`)
@@ -151,13 +205,20 @@ export function validateSevenChoicesShape(analysis, { paper, group }) {
     if (sourceQuestion?.answerKey && correctLabel && correctLabel !== sourceQuestion.answerKey) {
       throw new Error(`${questionId}: AI 答案与答案解析版不一致：官方 ${sourceQuestion.answerKey}，AI ${correctLabel}。`)
     }
+    const correctOptionText = optionTextByLabel[sourceQuestion?.answerKey]
 
     // Validate mechanismSignals have exact quotes.
     for (const signal of item.mechanismSignals) {
       const signalText = optionalString(signal?.signalText)
       const side = optionalString(signal?.signalSide)
       if (!signalText) continue
-      assertExactQuote(questionId, 'mechanismSignals', signalText, side)
+      assertExactQuote(
+        questionId,
+        'mechanismSignals',
+        signalText,
+        side,
+        correctOptionText,
+      )
     }
 
     // Validate contextEvidence quotes.

@@ -833,6 +833,12 @@ function projectContinuationWritingConsumerGroup(input, occurrence) {
     })
   }
   const { groupId } = input
+  const sourceInstruction = occurrence.sourceInstruction
+  const matchingSourceInstructionChrome =
+    occurrence.paperChrome?.instructions?.filter((instruction) =>
+      instruction?.instructionId === sourceInstruction?.instructionId) || []
+  const requiresSourceInstruction =
+    input.consumption.authorityRef?.manifestVersion === '49'
   if (
     typeof occurrence.paperChrome?.part?.partId !== 'string'
     || typeof occurrence.paperChrome.part.instructionId !== 'string'
@@ -876,6 +882,30 @@ function projectContinuationWritingConsumerGroup(input, occurrence) {
     || typeof occurrence.answerRegion?.responseSlotId !== 'string'
     || !Array.isArray(occurrence.answerRegion?.starterLines)
     || ![0, 2].includes(occurrence.answerRegion.starterLines.length)
+    || (
+      requiresSourceInstruction
+      && (
+        !sourceInstruction
+        || Object.keys(sourceInstruction).sort().join(',')
+          !== [
+            'authorityObservationRef',
+            'instructionId',
+            'placement',
+            'text',
+          ].join(',')
+        || sourceInstruction.instructionId
+          !== 'writing.continuation.prompt'
+        || sourceInstruction.placement !== 'group_instruction'
+        || typeof sourceInstruction.text !== 'string'
+        || sourceInstruction.text.length === 0
+        || typeof sourceInstruction.authorityObservationRef !== 'string'
+        || sourceInstruction.authorityObservationRef.length === 0
+        || matchingSourceInstructionChrome.length !== 1
+        || matchingSourceInstructionChrome[0].placement
+          !== sourceInstruction.placement
+        || matchingSourceInstructionChrome[0].text !== sourceInstruction.text
+      )
+    )
   ) {
     throw rejected(
       `Canonical Continuation Writing occurrence ${groupId} is incomplete`,
@@ -1087,8 +1117,12 @@ function selectOccurrence(input) {
     familyContractId === 'cloze'
     || familyContractId === 'grammar-fill'
     || (
+      familyContractId === 'continuation-writing'
+      && authorityRef?.manifestVersion === '49'
+    )
+    || (
       familyContractId === 'seven-choices'
-      && ['47', '48'].includes(authorityRef?.manifestVersion)
+      && ['47', '48', '49'].includes(authorityRef?.manifestVersion)
     )
   if (requiresOccurrenceIntegrity) {
     const consumptionDigest = sha256(`${stableStringify(consumption)}\n`)
@@ -1231,7 +1265,7 @@ export function projectCanonicalConsumerGroup(input) {
 
   const seenBlanks = new Set()
   const passageRoles = familyContractId === 'seven-choices'
-    && ['47', '48'].includes(input.consumption?.authorityRef?.manifestVersion)
+    && ['47', '48', '49'].includes(input.consumption?.authorityRef?.manifestVersion)
     ? resolvePassageBlockRoles(
         occurrence.content?.blocks,
         occurrence.passageBlockRoles,

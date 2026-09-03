@@ -909,6 +909,13 @@ function writingVariant(group, content, issues, source, documentsById) {
   return {
     family: 'continuation-writing',
     writingTaskId,
+    sourceInstruction: {
+      instructionId: 'writing.continuation.prompt',
+      placement: 'group_instruction',
+      text: task.prompt,
+      authorityObservationRef:
+        `observation:profile-instruction:${source.paperId}:writing.continuation.prompt`,
+    },
     materialBlockRefs,
     wordCountRuling: {
       kind: 'approximate_target',

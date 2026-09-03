@@ -177,7 +177,7 @@ curl -s https://eqbank.cc/api/health
 
 ## Redeploys
 
-After first provision, use `scripts/deploy.sh` (pull → install → build →
+After first provision, use `scripts/deploy.sh` (fetch/update → install → build →
 restart → health smoke) for every subsequent code update. It's idempotent
 and safe to re-run.
 
@@ -186,7 +186,145 @@ and safe to re-run.
 push 校验 → pull → install → build → restart → health + 公网检查；
 host/key 从 gitignored `.env.deploy` 读，真实 IP 不入库）。
 
-## Backup + import (Slice 3 landed; Slice 4 — not yet landed in this cut)
+### Dedicated Deployment Orb transition
+
+ADR-0023 defines the replacement for the legacy in-place redeploy path: a
+separate private Deployment Orb, an Owner command `部署最新版`, automatic exact
+`main` resolution, exact-SHA hosted `verify` + `e2e` gating during the Amp
+webhook outage, pinned SSH trust, staged immutable releases, atomic activation,
+and automatic rollback. Both checks must be successful GitHub Actions checks
+from the same workflow run; `verify (manual)` and `e2e (manual)` do not qualify.
+
+The repository exposes:
+
+```bash
+node scripts/amp-orb-deploy.mjs plan
+node scripts/amp-orb-deploy.mjs bootstrap-preflight --owner-said-preflight
+node scripts/amp-orb-deploy.mjs baseline --owner-said-baseline-migration
+node scripts/amp-orb-deploy.mjs bootstrap --owner-said-release-bootstrap
+node scripts/amp-orb-deploy.mjs bootstrap-resume --owner-said-release-bootstrap-resume
+node scripts/amp-orb-deploy.mjs preflight --owner-said-preflight
+node scripts/amp-orb-deploy.mjs deploy --owner-said-deploy-latest
+```
+
+`plan` does not connect to production. `bootstrap-preflight` is the one-time
+read-only legacy-host check. `baseline` is the transition-only migration from a
+known legacy state to the exact healthy `main`; it is not an ordinary deploy.
+`bootstrap` creates the release layout and restricted controller boundary only
+after that exact baseline is healthy. It stages only the inert hash-bound payload
+first, then writes a private durable recovery record before invoking the host
+transaction. `bootstrap-resume` is a separately authorized finalization path for
+an interrupted caller: it loads that exact record and cannot repeat the host
+bootstrap transaction. After cutover, `preflight` goes
+only through the root-owned forced-command controller. Daily `deploy` resolves
+current `main` itself and sends only that exact SHA—never an Owner-supplied hash—to
+the host.
+
+The baseline operator keeps its root process at umask `077`, but every package
+install, Chromium smoke, and app build child explicitly uses umask `022`. It
+requires generated `app/dist` directories to be `0755` and files `0644`, and
+rechecks types, modes, and hashes immediately before Caddy starts in both the
+forward and rollback paths. It snapshots all three SQLite databases, proves
+integrity and foreign keys, checks the exact migration invariant, and never
+deletes the preexisting unknown release tree: that whole wrapper is atomically
+quarantined to the same filesystem and retained intact after success, with an
+exact rename-back rollback while rollback remains safe. Before the first Caddy
+start attempt, a failure may restore the exact database snapshots and old code;
+it reports healthy rollback only after the restored strict public health suite
+passes. The first Caddy start attempt is the external-write boundary. At or
+after that boundary, the operator does not overwrite possibly changed databases
+or run old code against the migrated schema: it preserves the consistent target
+code and schema, reports `rolledBack: false`, and fails closed for diagnosis.
+Do not retry a failed baseline command without a fresh state classification and
+authorization.
+
+The one-time cutover uses `deploy/bootstrap-eqb-deployment.sh` to prepare the
+first release, move writable state under `/opt/eqb/shared`, install
+`deploy/eqb-release.service` and `deploy/Caddyfile.release`, and install the
+fixed controller. Candidate builds run as `eqb-build` without the production
+environment or shared data, inside bounded transient systemd cgroups that
+terminate leftover children before root seals the tree. Linked privileged
+ancestors fail closed, and deployment-control files are restored from the
+root-private exact-target Git archive after candidate scripts finish. The
+bootstrap payload is first hash-verified and retained root-private, then runs
+as a manager-owned transient service so loss of SSH does not create an
+ambiguous abandoned transaction. The controller key is installed on the
+actual non-root SSH transport account with a forced transport wrapper; that
+wrapper accepts only the bounded command grammar and enters the root-owned
+controller through `sudo -n`. Ordinary release code cannot change deployment
+rules. This transition consumes the existing, explicitly named management
+account, its one proven bootstrap key, and its already-working `sudo -n`
+boundary; it is not a host-account provisioner and does not create an account or
+silently edit sudoers. The bootstrap validates those prerequisites, and both the
+new route before retirement and the same route after retirement must execute the
+root-owned strict entrypoint successfully. Keep the
+legacy `deploy/eqb.service`, `deploy/Caddyfile`, and `scripts/deploy-remote.sh`
+only for pre-cutover operation and rollback evidence; do not use the legacy
+in-place deploy after a successful cutover. Releases are retained for rollback;
+the controller refuses new staging below 5 GiB free instead of deleting them.
+Prune only reviewed, non-current releases as a separate authorized maintenance
+operation.
+
+Ordinary deployment also compares the current and target Git trees before
+staging. Any change to the fixed controller/systemd/Caddy files or to the
+named startup/recovery and high-authority persistence owners fails before build
+and restart. The initial bootstrap applies the same persistence comparison
+against the legacy production `HEAD`. Do not bypass it: complete a separately
+authorized migration/configuration procedure, establish that exact release as
+the safe production baseline, then repeat the normal command. Ordinary reviewed
+server code remains deployable; later authenticated API writes are not actions
+performed or authorized by the deployment command itself.
+
+The forced transport entrypoint parses the command before its strict root
+entrypoint runs the controller and deployment lock in a transient host systemd
+service with null input and journal output. An Orb/SSH disconnect does not
+cancel an in-flight build, health check, or rollback; candidate output remains
+in a private host log. For an ordinary post-cutover deploy, reconnect and run an
+authorized read-only `preflight` to determine whether the lock is still held and
+which exact release is healthy. For an interrupted one-time bootstrap, preserve
+the private Orb recovery record, classify read-only, and use only the separately
+authorized `bootstrap-resume` finalizer; do not launch a second host bootstrap.
+Host receipts, attempt logs, and unit journals remain available for root-side
+incident diagnostics.
+
+Repository readiness still grants no production authority. Before cutover:
+
+1. create a separate private Deployment Orb project;
+2. run a fresh read-only bootstrap preflight;
+3. obtain direct Owner authorization for the protected baseline migration, run
+   `baseline --owner-said-baseline-migration`, and require its strict success
+   receipt before proceeding;
+4. obtain a new, separate direct Owner authorization for the release-layout
+   bootstrap, then run `bootstrap --owner-said-release-bootstrap`;
+5. require bootstrap to generate the dedicated Ed25519 identity, verify the new
+   forced-controller route, atomically retire the exact old privileged key,
+   prove that the new key still works and the old key is rejected, and rotate
+   only `QUESTION_BANK_DEPLOY_SSH_PRIVATE_KEY` in the current Deployment project
+   via stdin. The target SHA, host unit, generated controller identity, and old
+   bootstrap identity must already exist in the private recovery record. If the
+   caller is interrupted after host work starts, stop without rerunning
+   `bootstrap`; after read-only classification and fresh direct Owner
+   authorization, use `bootstrap-resume --owner-said-release-bootstrap-resume`.
+   Resume revalidates the recorded SHA's hosted checks, proves the new route,
+   classifies the old identity as accepted or exact public-key rejection,
+   performs retirement only when still needed, re-proves both routes, rotates
+   the Secret last, and terminalizes recovery only after rotation succeeds.
+   Terminalization atomically renames the whole recovery directory before
+   deleting either private identity; a non-secret private completion receipt is
+   retained, and a later resume can finish a partially interrupted identity
+   cleanup without repeating host or Secret mutation. Any other old-key result
+   fails closed and retains active recovery state;
+6. after successful Secret rotation, refresh the Deployment Orb environment
+   with `amp orb restart-processes --thread "$AMP_THREAD_ID"`, then obtain
+   authorization for and run the forced-controller `preflight`;
+7. confirm deployment secrets are absent from development/CI projects and
+   record the exact cutover evidence in `go-live-record.md`.
+
+The first real Orb deployment then needs a separate direct Owner authorization.
+Thereafter the Owner's normal daily instruction is only `部署最新版`; no Mac or
+handwritten SHA is involved.
+
+## Backup + content operations
 
 ### Daily backup to R2 (Slice 3)
 
@@ -254,15 +392,28 @@ configured):
 scripts/backup-to-r2.sh --dry-run
 ```
 
-### Import (Slice 4 — pull-run-push.mjs)
+### Content promotion and legacy transport
 
-`scripts/pull-run-push.mjs` is the local-only transport for "import new real
-exam papers": pull the server's `question-bank.sqlite` down, run the local
-import pipeline against it (`scripts/import-pipeline/`), push the updated
-library back up. It is NOT part of the running product — it's an ops tool
-the owner runs by hand, once per import session, around the import
-pipeline. Never manually scp a database onto the running server's live path
-— always go through this script.
+Review-backed paper publication no longer transports a local database. After
+online Review approval, the Agent stops. Only after a separate current Owner
+`上线 <paperId>` command does the Agent call the production server's
+ship-token-only single-paper promotion:
+
+```bash
+node scripts/import-pipeline/review.mjs promote <paperId> --owner-said-ship
+node scripts/import-pipeline/review.mjs promote <paperId> --owner-said-retry-ship
+```
+
+The command reads exact current approval with the low-authority Agent token,
+then sends that identity with the separate shipping credential. The server
+freezes Review mutation, rebuilds from immutable Review bytes, and invokes the
+existing atomic publisher against its own DB/assets. It never stops the service,
+uploads SQLite, or syncs a broad asset tree. Daily R2 remains asynchronous.
+
+`scripts/pull-run-push.mjs` remains a maintenance/legacy transport. Its `pull`
+and `check-manifest` are unchanged; `push <paperId>` refuses when Review reports
+a Candidate paper and points to `review.mjs promote`. Never manually scp a
+database onto the running server's live path.
 
 **Required env:**
 
@@ -276,7 +427,7 @@ fake "remote" repo root on the local filesystem, no ssh involved. This is
 the seam `scripts/verify-launch-deploy.mjs` VA5 uses; never point it at a
 real server path.)
 
-**Two subcommands:**
+**Maintenance/legacy subcommands:**
 
 ```
 node scripts/pull-run-push.mjs pull
@@ -291,10 +442,12 @@ node scripts/pull-run-push.mjs check-manifest <comma,separated,paths>
   db (timestamped) before moving the snapshot into place. Never pulls the
   remote `data/` directory wholesale — only the two explicitly-named
   targets.
-- **`push`** — requires the paper ID plus the current Owner authorization
-  flag. Its locked swap recipe (PA MF-1, do not reorder): manifest assertion →
-  verify local db passes `PRAGMA integrity_check` → re-run the local ship gate
-  and transactionally acquire a digest-bound Review shipping guard → **stop** the
+- **`push`** — legacy non-Review maintenance only. For a Review-backed Candidate
+  it fails before remote mutation and points to single-paper promotion. Where
+  the historical path is explicitly retained, it requires the paper ID plus the
+  current Owner authorization flag. Its locked swap recipe (PA MF-1, do not
+  reorder): manifest assertion → verify local db passes `PRAGMA integrity_check`
+  → re-run the legacy local ship gate → **stop** the
   remote `eqb` service (`sudo systemctl stop eqb`, requires the deploy user
   to have that sudo rule) → back up the remote OLD db to a timestamped path
   → transfer the local db to a remote TEMP path in the same directory as the
@@ -307,12 +460,8 @@ node scripts/pull-run-push.mjs check-manifest <comma,separated,paths>
   opened/closed per request — there is no WAL/-shm/-wal sidecar to manage).
   The active `question-bank.sqlite` path is never written to in place; every
   swap goes through a same-disk temp file + atomic rename.
-  A missing/unavailable Review service, a revision newer than the local QA
-  receipt, or failure to acquire the guard fails closed before service stop,
-  backup, transfer, or swap. While held, the guard rejects review mutations
-  that could invalidate approval; normal success/failure releases it after the
-  remote recipe. A killed process leaves the guard in place intentionally;
-  follow `docs/import/agent-contract.md` recovery rather than clearing it blindly.
+  A Review-backed Candidate is rejected before service stop, backup, transfer,
+  or swap; its shipping guard belongs exclusively to server-side promotion.
 - **`check-manifest`** — runs only the manifest guard (MF-2) over an
   explicit comma-separated path list: exits non-zero if any path's basename
   matches `/user-data/i` (catches `user-data.sqlite`,

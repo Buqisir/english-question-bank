@@ -97,14 +97,58 @@ export function validateContinuationWritingContract({
       variant,
     })
   }
+  const hasSourceInstruction = Object.hasOwn(variant || {}, 'sourceInstruction')
   if (
     !isRecordValue(variant)
-    || !exactKeys(variant, ['family', 'writingTaskId', 'materialBlockRefs', 'wordCountRuling', 'starterProvision', 'choiceOwnership', 'response'])
+    || !exactKeys(variant, [
+      'family',
+      'writingTaskId',
+      ...(hasSourceInstruction ? ['sourceInstruction'] : []),
+      'materialBlockRefs',
+      'wordCountRuling',
+      'starterProvision',
+      'choiceOwnership',
+      'response',
+    ])
     || variant.family !== 'continuation-writing'
     || typeof variant.writingTaskId !== 'string'
     || variant.writingTaskId.length === 0
   ) {
     return [issue('CONTINUATION_VARIANT_INVALID', 'needs_review', '$.variant', 'Continuation Writing variant fields and Writing Task identity are closed')]
+  }
+
+  if (hasSourceInstruction) {
+    const instruction = variant.sourceInstruction
+    const instructionObservations = observationById(
+      sourceCapture,
+      instruction?.authorityObservationRef,
+    )
+    const evidence = instructionObservations[0]?.value
+    if (
+      !isRecordValue(instruction)
+      || !exactKeys(instruction, [
+        'instructionId',
+        'placement',
+        'text',
+        'authorityObservationRef',
+      ])
+      || instruction.instructionId !== 'writing.continuation.prompt'
+      || instruction.placement !== 'group_instruction'
+      || typeof instruction.text !== 'string'
+      || instruction.text.length === 0
+      || instructionObservations.length !== 1
+      || instructionObservations[0].kind !== 'profile_instruction_correction'
+      || evidence?.instruction?.instructionId !== instruction.instructionId
+      || evidence?.instruction?.placement !== instruction.placement
+      || evidence?.transformationRecord?.before !== instruction.text
+    ) {
+      issues.push(issue(
+        'CONTINUATION_SOURCE_INSTRUCTION_UNPROVEN',
+        'incomplete_source',
+        '$.variant.sourceInstruction',
+        'Source-exact continuation instruction text must bind one reviewed Profile instruction observation',
+      ))
+    }
   }
 
   const blocks = blockIds(content)

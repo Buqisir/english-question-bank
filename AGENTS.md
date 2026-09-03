@@ -56,6 +56,49 @@ unknown after inspection, and state the reason.
 process rule only when it names the failure or independent detection layer it
 uniquely supplies; otherwise keep it outside daily packs.
 
+## Dedicated CI Orb
+
+- The development Orb runs the focused behavioral checks and proportionate
+  local pack above. While Amp bug `amp_bug_0uiggF5jWG6i6iaB72BATT` blocks the
+  dedicated CI Orb webhook, the final merge gate is the GitHub-hosted Verify
+  workflow; do not substitute a broad local run for that authority.
+- After the Owner authorizes commit, push, and PR actions, normal GitHub PR
+  events automatically run hosted `verify` and `e2e` on GitHub's current test
+  merge. Both contexts are required and must be `SUCCESS` before merge.
+- `workflow_dispatch` remains available for explicitly authorized recovery
+  diagnostics, but a manual run is not a substitute for the required PR run.
+- The dedicated CI Orb and its `Amp Orb Verify` / `Amp Orb Verify (fast)`
+  statuses are informational during this rollback. Do not manually start or
+  drain it, synthesize or retry webhook events, or copy an uncommitted workspace
+  snapshot into it.
+- Never dismiss a missing or failed required hosted check as unrelated, bypass
+  it, or merge around it. Diagnose and fix the failure or stop. See
+  `docs/adr/0022-amp-orb-ci-merge-authority.md` for the durable contract.
+
+## Dedicated Deployment Orb
+
+- Website deployment belongs only to the separate private Deployment Orb
+  project. Development and CI Orbs must not receive its SSH key.
+- A current Owner instruction `部署最新版` authorizes that one website-code
+  deployment attempt; the agent resolves current `main` itself and runs
+  `node scripts/amp-orb-deploy.mjs deploy --owner-said-deploy-latest`. Never ask
+  the Owner to copy a SHA.
+- The deploy command requires exact-main successful authoritative `verify` and
+  `e2e`, then sends only that SHA through pinned SSH to the root-owned fixed
+  host controller. Never stream candidate deployment code, bypass the forced
+  command, or use the legacy in-place deploy after cutover.
+- Website deployment never authorizes migration, Review/paper promotion,
+  database or R2 mutation, production configuration changes, or controller
+  upgrades. Each needs its own explicit current Owner authorization.
+- The transition-only `baseline --owner-said-baseline-migration`,
+  `bootstrap --owner-said-release-bootstrap`, and first real `deploy` are three
+  separate production actions. Baseline and bootstrap each need their exact,
+  current Owner authorization. Bootstrap must prove the new forced-controller
+  route, retire and reject the old privileged identity, rotate only the current
+  Deployment project's private-key Secret through stdin, and then refresh that
+  Orb's environment before normal use. Follow ADR-0023 and the launch-deploy
+  runbook; do not infer authorization from merged code or available secrets.
+
 ## Owner QA
 
 For visible behavior, prepare and smoke-check the exact service, data/login,

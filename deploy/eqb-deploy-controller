@@ -1,0 +1,57 @@
+#!/bin/sh
+set -eu
+
+unset SSH_AUTH_SOCK
+
+[ "${1-}" = -- ] || exit 64
+shift
+if [ "$#" -eq 1 ] && [ "$1" = preflight ]; then
+  original_command=preflight
+elif [ "$#" -eq 2 ] && [ "$1" = deploy ]; then
+  case "$2" in
+    ''|*[!a-f0-9]*) exit 64 ;;
+  esac
+  [ "${#2}" -eq 40 ] || exit 64
+  original_command="deploy $2"
+else
+  exit 64
+fi
+
+IFS= read -r nonce </proc/sys/kernel/random/uuid
+case "$nonce" in
+  ''|*[!a-f0-9-]*) exit 70 ;;
+esac
+[ "${#nonce}" -eq 36 ] || exit 70
+unit="eqb-deploy-$nonce"
+
+status=0
+/usr/bin/systemd-run \
+  --quiet \
+  --wait \
+  --collect \
+  --unit="$unit" \
+  --property=Type=exec \
+  --property=KillMode=control-group \
+  --property=StandardInput=null \
+  --property=StandardOutput=journal \
+  --property=StandardError=journal \
+  -- \
+  /usr/bin/flock \
+    --exclusive \
+    --nonblock \
+    --conflict-exit-code 75 \
+    /opt/eqb/deployments/deploy.lock \
+    /usr/bin/env -i \
+    SSH_ORIGINAL_COMMAND="$original_command" \
+    PATH=/usr/local/bin:/usr/bin:/bin \
+    /usr/bin/node --no-addons /usr/local/libexec/eqb-deploy-controller-v1.mjs \
+  || status=$?
+
+/usr/bin/journalctl --sync
+/usr/bin/journalctl \
+  --quiet \
+  --no-pager \
+  --output=cat \
+  "_SYSTEMD_UNIT=$unit.service" \
+  PRIORITY=6
+exit "$status"

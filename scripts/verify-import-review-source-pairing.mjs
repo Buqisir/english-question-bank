@@ -82,7 +82,7 @@ function jsonResponseCapture() {
   }
 }
 
-async function invokeRoute(routes, pathname, session) {
+async function invokeRoute(routes, pathname, session, headers = {}) {
   const capture = jsonResponseCapture()
   capture.response.capture = capture
   const context = {
@@ -93,7 +93,7 @@ async function invokeRoute(routes, pathname, session) {
     },
   }
   const handled = await runRoutes(routes, {
-    request: { method: 'GET', headers: {} },
+    request: { method: 'GET', headers },
     response: capture.response,
     url: new URL(`http://localhost${pathname}`),
     context,
@@ -181,12 +181,26 @@ try {
   const projection = {
     sourceVisuals: [pairedVisual, iconVisual, imageVisual, unlocatedVisual],
   }
+  const agentToken = 'source-pairing-agent-token'
   const routes = createImportReviewRoutes({
     getStore: () => ({
-      projectionForRevision: () => ({ revision: { id: revisionId }, projection }),
+      projectionForRevision: () => ({
+        revision: {
+          id: revisionId,
+          manifest: {
+            files: [{
+              path: 'questions.pdf',
+              mediaType: 'application/pdf',
+              byteLength: sourceBytes.byteLength,
+              sha256: sourceDigest,
+            }],
+          },
+        },
+        projection,
+      }),
       revisionDirectory: () => tempRoot,
     }),
-    agentToken: '',
+    agentToken,
     shipToken: '',
     buildPrintHtml: () => '',
   })
@@ -194,6 +208,17 @@ try {
     + `/source-visuals/${encodeURIComponent(visualId)}`
   const unauthorized = await invokeRoute(routes, cropPath, null)
   assert.equal(unauthorized.status, 403, 'source crops require a reviewer session')
+
+  const revisionFilePath = `/api/import-review-preview/revisions/${revisionId}`
+    + `/files?path=${encodeURIComponent('questions.pdf')}`
+  const unauthorizedFile = await invokeRoute(routes, revisionFilePath, null)
+  assert.equal(unauthorizedFile.status, 403, 'raw revision files require Review credentials')
+  const agentFile = await invokeRoute(routes, revisionFilePath, null, {
+    authorization: `Bearer ${agentToken}`,
+  })
+  assert.equal(agentFile.status, 200, 'Import Agent may hydrate raw revision files')
+  assert.equal(agentFile.headers['content-type'], 'application/pdf')
+  assert.deepEqual(agentFile.body, Buffer.from(sourceBytes))
 
   const owner = { role: 'owner', accountKind: 'human', username: 'owner' }
   const crop = await invokeRoute(routes, cropPath, owner)
@@ -329,6 +354,7 @@ try {
   }
   const indexHtml = readFileSync(path.join(root, 'import-ops/public/index.html'))
   const appJs = readFileSync(path.join(root, 'import-ops/public/app.js'))
+  const clipboardJs = readFileSync(path.join(root, 'import-ops/public/clipboard.js'))
   const styles = readFileSync(path.join(root, 'import-ops/public/styles.css'))
   server = createServer(async (request, response) => {
     const url = new URL(request.url || '/', 'http://127.0.0.1')
@@ -338,6 +364,10 @@ try {
     }
     if (url.pathname === '/ops/app.js') {
       send(response, 200, appJs, 'text/javascript; charset=utf-8')
+      return
+    }
+    if (url.pathname === '/ops/clipboard.js') {
+      send(response, 200, clipboardJs, 'text/javascript; charset=utf-8')
       return
     }
     if (url.pathname === '/ops/styles.css') {
@@ -443,12 +473,13 @@ try {
   const playwright = await import('../app/node_modules/playwright/index.js')
   browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
   const page = await browser.newPage({ viewport: { width: 1920, height: 1000 } })
-  await page.goto(`http://127.0.0.1:${address.port}/ops/`)
+  await page.goto(`http://127.0.0.1:${address.port}/ops/?view=review`)
   const screenTable = page.frameLocator('#review-frame')
     .locator(`[data-canonical-block-id="${targetId}"]`)
   await screenTable.click()
   const sourceImage = page.locator('.source-proof img')
   await sourceImage.waitFor()
+  await sourceImage.evaluate((image) => image.decode())
   assert.equal(await sourceImage.evaluate((image) => image.naturalWidth > 0), true)
   await page.frameLocator('#review-frame')
     .locator(`[data-canonical-media-id="${iconTargetId}"]`).click()
@@ -468,6 +499,8 @@ try {
   )
   await page.locator('.media-compare-grid img').first().waitFor()
   assert.equal(await page.locator('.media-compare-grid img').count(), 2)
+  await page.locator('.media-compare-grid img').evaluateAll((images) =>
+    Promise.all(images.map((image) => image.decode())))
   assert.equal(
     await page.locator('.media-compare-grid img').evaluateAll((images) =>
       images.every((image) => image.naturalWidth > 0)),

@@ -6,6 +6,7 @@ import {
   mkdirSync,
   mkdtempSync,
   readFileSync,
+  renameSync,
   rmSync,
   writeFileSync,
 } from 'node:fs'
@@ -68,15 +69,33 @@ function token() {
   return value
 }
 
-async function api(pathname, init = {}, { allowNotFound = false } = {}) {
+function shippingToken() {
+  const value = String(process.env.QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN || '')
+  if (!value) fail('QUESTION_BANK_IMPORT_OPS_SHIP_TOKEN is required for promotion')
+  if (value === token()) fail('Import Agent and shipping tokens must be different')
+  return value
+}
+
+async function api(
+  pathname,
+  init = {},
+  { allowNotFound = false, binary = false, credential = 'agent' } = {},
+) {
+  const credentialToken = credential === 'shipping' ? shippingToken() : token()
   const response = await fetch(`${origin()}${pathname}`, {
     ...init,
     headers: {
-      authorization: `Bearer ${token()}`,
+      authorization: `Bearer ${credentialToken}`,
       ...(init.headers || {}),
     },
   })
   const contentType = response.headers.get('content-type') || ''
+  if (binary && response.ok) {
+    return {
+      bytes: Buffer.from(await response.arrayBuffer()),
+      contentType,
+    }
+  }
   const body = contentType.includes('application/json')
     ? await response.json()
     : await response.text()
@@ -176,6 +195,70 @@ async function pushRevision(paperId) {
     revisionNumber: finalized.revision.revisionNumber,
     state: finalized.revision.state,
     bundleDigest: finalized.revision.bundleDigest,
+  }, null, 2))
+}
+
+async function hydrate(paperId) {
+  const paperDir = paperDirectory(paperId)
+  if (existsSync(paperDir)) fail(`Local paper workspace already exists: ${paperId}`)
+  const status = await api(
+    `/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`,
+  )
+  const revision = status.latest
+  if (
+    revision?.paperId !== paperId
+    || revision.reviewKind !== 'candidate'
+    || revision.state === 'uploading'
+    || !revision.finalizedAt
+    || !revision.manifest
+    || revision.manifest.paperId !== paperId
+  ) fail(`${paperId} has no finalized Candidate revision to hydrate`)
+  if (
+    revision.manifest.bundleDigest !== revision.bundleDigest
+    || reviewBundleDigest(revision.manifest) !== revision.bundleDigest
+    || !exactFileDescriptors(revision.manifest.files, status.files || [])
+  ) fail('Latest Review revision manifest, file inventory, or bundleDigest does not close')
+
+  mkdirSync(papersRoot, { recursive: true })
+  const temporary = mkdtempSync(path.join(papersRoot, '.hydrate-'))
+  try {
+    for (const file of revision.manifest.files) {
+      const downloaded = await api(
+        `/api/import-review-preview/revisions/${encodeURIComponent(revision.id)}`
+          + `/files?path=${encodeURIComponent(file.path)}`,
+        {},
+        { binary: true },
+      )
+      if (
+        downloaded.bytes.byteLength !== file.byteLength
+        || sha256(downloaded.bytes) !== file.sha256
+      ) fail(`Hydrated Review file changed in transit: ${file.path}`)
+      const filePath = resolveReviewFile(temporary, file.path)
+      mkdirSync(path.dirname(filePath), { recursive: true })
+      writeFileSync(filePath, downloaded.bytes)
+    }
+    const projection = buildNck1ReviewProjection(temporary, { requireAnalyses: false })
+    for (const [key, value] of Object.entries({
+      sourceDigest: projection.sourceDigest,
+      candidateDigest: projection.candidateDigest,
+      visibleStructureDigest: projection.visibleStructureDigest,
+      analysisDigest: projection.analysisDigest,
+    })) {
+      if (revision.manifest[key] !== value) {
+        fail(`Hydrated Review ${key} does not match its finalized manifest`)
+      }
+    }
+    renameSync(temporary, paperDir)
+  } catch (error) {
+    rmSync(temporary, { recursive: true, force: true })
+    throw error
+  }
+  console.log(JSON.stringify({
+    paperId,
+    revisionId: revision.id,
+    bundleDigest: revision.bundleDigest,
+    files: revision.manifest.files.length,
+    state: 'hydrated',
   }, null, 2))
 }
 
@@ -545,10 +628,67 @@ async function releaseShipGuard(paperId, guardId) {
   console.log(JSON.stringify({ paperId, guardId, ...result }, null, 2))
 }
 
+async function promote(paperId) {
+  const ship = process.argv.includes('--owner-said-ship')
+  const retry = process.argv.includes('--owner-said-retry-ship')
+  const allowed = new Set([
+    'promote',
+    paperId,
+    '--owner-said-ship',
+    '--owner-said-retry-ship',
+  ])
+  const unknown = process.argv.slice(2).filter((argument) => !allowed.has(argument))
+  if (unknown.length > 0 || ship === retry) {
+    fail(
+      'promote requires exactly one current Owner authorization flag: '
+        + '--owner-said-ship or --owner-said-retry-ship',
+    )
+  }
+  const status = await api(
+    `/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`,
+  )
+  const approval = status.approval
+  if (!approval || approval.paperId !== paperId) {
+    fail('The latest renderer-current Candidate has no exact Owner approval')
+  }
+  const identity = {
+    approvalId: approval.approvalId,
+    revisionId: approval.revisionId,
+    sourceDigest: approval.sourceDigest,
+    candidateDigest: approval.candidateDigest,
+    visibleStructureDigest: approval.visibleStructureDigest,
+    analysisDigest: approval.analysisDigest,
+    bundleDigest: approval.bundleDigest,
+  }
+  console.log(JSON.stringify({
+    action: retry ? 'retry_ship' : 'ship',
+    paperId,
+    ...identity,
+  }, null, 2))
+  const result = await api(
+    `/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}/promotions`,
+    {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        ...identity,
+        intent: retry ? 'retry_ship' : 'ship',
+      }),
+    },
+    { credential: 'shipping' },
+  )
+  console.log(JSON.stringify({
+    status: result.status,
+    promotion: result.promotion,
+    backupBoundary: 'Production R2 backup remains asynchronous and is not part of this receipt.',
+  }, null, 2))
+}
+
 async function main() {
   const [command, paperId, issueId] = process.argv.slice(2)
-  assertNotNck1SourceOnly(paperId, command)
+  if (command !== 'promote') assertNotNck1SourceOnly(paperId, command)
   if (command === 'push') await pushRevision(paperId)
+  else if (command === 'hydrate') await hydrate(paperId)
   else if (command === 'push-ocr') await pushOcrReview(paperId)
   else if (command === 'pull-ocr-confirmation') await pullOcrConfirmation(paperId)
   else if (command === 'preflight') await preflight(paperId)
@@ -557,13 +697,15 @@ async function main() {
   else if (command === 'reply') await reply(paperId, issueId)
   else if (command === 'accept') await accept(paperId)
   else if (command === 'publish') await publish(paperId)
+  else if (command === 'promote') await promote(paperId)
   else if (command === 'release-ship-guard') await releaseShipGuard(paperId, issueId)
   else fail(
-    'Usage: review.mjs push <paperId> [--resolves issue-1,issue-2] | '
+    'Usage: review.mjs push <paperId> [--resolves issue-1,issue-2] | hydrate <paperId> | '
       + 'push-ocr <paperId> | pull-ocr-confirmation <paperId> [--revision rev-id] | '
       + 'preflight <paperId> | verify-analyses <paperId> | status <paperId> | '
       + 'reply <paperId> <issueId> --message <text> | '
       + 'accept <paperId> | publish <paperId> | '
+      + 'promote <paperId> --owner-said-ship|--owner-said-retry-ship | '
       + 'release-ship-guard <paperId> <guardId> --owner-said-abort-ship',
   )
 }

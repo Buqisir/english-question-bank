@@ -5,12 +5,13 @@ import { validateNck1SourceMaterialization } from '../../shared/paper-canonical/
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 export const NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION =
-  'nck1-docx-materialization-producer-v4'
+  'nck1-docx-materialization-producer-v7'
 
 const DOCX = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 const BLANK = /(?:\d{1,3}[.．、]?\p{Zs}*)?_{2,}\d{0,3}_{0,}/gu
 const COMBINED_ANSWER_BOUNDARY = /^(?:【)?(?:英语|参考)?答案(?:(?:及|与)(?:解析|详解|听力(?:原文|材料)))?(?:】)?$/u
 const INLINE_ANSWER_DETAIL = /(?:【)?(?:答案(?:及|与)?)?(?:解析|详解)(?:】)?\s*[:：]?|(?:Explanation|Analysis)\s*[:：]/iu
+const WRITING_SAMPLE_BOUNDARY = /^(?:(?:【)?(?:评分|答案(?:解析|详解)|解析|详解)|附[:：]?\s*各档次|听力(?:原文|材料)|答案及听力材料)/u
 const SLOT_SPECS = [
   ['reading.a', 'reading', 21, 23],
   ['reading.b', 'reading', 24, 27],
@@ -106,7 +107,7 @@ function questionPosition(body, number, from, to) {
   return questionPositions(body, number, from, to)[0] ?? null
 }
 
-function parseOptions(items, labels) {
+function parseOptionsWithLeadingText(items, labels) {
   const paragraphs = items.filter((item) => item.kind === 'paragraph')
   for (let end = 1; end <= paragraphs.length; end += 1) {
     const text = paragraphs.slice(0, end)
@@ -127,9 +128,18 @@ function parseOptions(items, labels) {
         matches[index + 1]?.index ?? text.length,
       )),
     }))
-    if (options.every((option) => normalized(option.text))) return options
+    if (options.every((option) => normalized(option.text))) {
+      return {
+        leadingText: trimEdgeSpaces(text.slice(0, matches[0].index)),
+        options,
+      }
+    }
   }
   return null
+}
+
+function parseOptions(items, labels) {
+  return parseOptionsWithLeadingText(items, labels)?.options || null
 }
 
 function contentWithBlanks(text, blankBySourceNumber, issues, path, source) {
@@ -255,9 +265,10 @@ function contentBlocks(items, context) {
 function objectiveQuestion({ paperId, canonicalNumber, family, questionItem, questionItems, blankItem = questionItem, prompt = null, documentId, issues }) {
   const sourceNumber = Number(/^(\d{1,3})[.．、]/u.exec(normalized(questionItem?.text))?.[1])
   const labels = family === 'listening' ? ['A', 'B', 'C'] : ['A', 'B', 'C', 'D']
-  const options = ['reading', 'cloze', 'listening'].includes(family)
-    ? parseOptions(questionItems, labels)
-    : []
+  const parsedOptions = ['reading', 'cloze', 'listening'].includes(family)
+    ? parseOptionsWithLeadingText(questionItems, labels)
+    : { options: [] }
+  const options = parsedOptions?.options || null
   if (!Number.isInteger(sourceNumber)) {
     addIssue(issues, 'NCK1_DOCX_QUESTION_NUMBER_AMBIGUOUS',
       `questions.${canonicalNumber}`, 'Question number is not closed',
@@ -273,7 +284,7 @@ function objectiveQuestion({ paperId, canonicalNumber, family, questionItem, que
     ? `blank:${paperId}:${canonicalNumber}`
     : null
   const stem = ['reading', 'listening'].includes(family)
-    ? trimEdgeSpaces(String(questionItem?.text || '').replace(/^\s*\d{1,3}[.．、]\s*/u, ''))
+    ? parsedOptions?.leadingText || ''
     : ''
   return {
     questionId,
@@ -450,7 +461,6 @@ function clozeGroup({ paperId, body, start, end, documentId, issues }) {
   for (const [index, question] of questions.entries()) {
     if (matches[index]) {
       question.blankId = `blank:${paperId}:${41 + index}`
-      question.source = sourceLocator(documentId, matches[index].item.sourceIndex)
     }
   }
   const blocks = contentBlocks(passageItems, {
@@ -516,7 +526,7 @@ function skeletonRole(text, index, givens) {
   if (/^Dear\b.*[,，]$/iu.test(text)) return 'salutation'
   if (/^(?:Yours|Sincerely|Best(?: wishes| regards)?)[,，]?$/iu.test(text)) return 'closing'
   if (index > 0 && ['closing'].includes(skeletonRole(givens[index - 1] || '', -1, []))) return 'signature'
-  if (givens.length === 1 && !/[.!?。！？]$/u.test(text)) return 'title'
+  if (givens.length === 1 && !/[.!。！]$/u.test(text)) return 'title'
   return null
 }
 
@@ -660,6 +670,101 @@ function parseOfficialAnswers(answerBody, answerDocumentId, issues) {
     }
   }
   return answers
+}
+
+function writingSamplePosition(answerBody, pattern, from) {
+  return answerBody.flatMap((item, index) =>
+    index >= from
+      && item.kind === 'paragraph'
+      && pattern.test(normalized(item.text))
+      ? [index]
+      : [])
+}
+
+function writingSampleText(answerBody, from, to) {
+  const boundary = answerBody.findIndex((item, index) =>
+    index >= from
+      && index < to
+      && item.kind === 'paragraph'
+      && WRITING_SAMPLE_BOUNDARY.test(normalized(item.text)))
+  const end = boundary >= 0 ? boundary : to
+  return answerBody
+    .slice(from, end)
+    .filter((item) => item.kind === 'paragraph' && normalized(item.text))
+    .map((item) => trimEdgeSpaces(item.text))
+    .join('\n')
+}
+
+function parseOfficialWritingSamples(answerBody, answerDocumentId, issues) {
+  // OCR engines may return one source region containing several visually
+  // distinct paragraphs. Split only for this answer-sample boundary parser;
+  // every derived paragraph retains the exact source locator. DOCX/PDF
+  // paragraph streams are unchanged by this normalization.
+  const sampleBody = answerBody.flatMap((item) =>
+    item.kind === 'paragraph' && String(item.text).includes('\n')
+      ? String(item.text).split('\n').map((text) => ({ ...item, text }))
+      : [item])
+  const writingSections = writingSamplePosition(
+    sampleBody,
+    /^第四部分\s*[:：]?\s*写作/u,
+    0,
+  )
+  if (writingSections.length === 0) {
+    return { application: null, continuation: null }
+  }
+  if (writingSections.length !== 1) {
+    addIssue(
+      issues,
+      'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS',
+      'answers.writingSamples',
+      `Expected one writing-answer section; found ${writingSections.length}`,
+      sourceRef(answerDocumentId),
+    )
+    return { application: null, continuation: null }
+  }
+  const writingStart = writingSections[0]
+  const applicationHeadings = writingSamplePosition(
+    sampleBody,
+    /^第一节(?:\s*[:：])?.*(?:应用文(?:写作)?|参考范文)/u,
+    writingStart + 1,
+  )
+  const continuationHeadings = writingSamplePosition(
+    sampleBody,
+    /^第二节(?:\s*[:：])?.*(?:读后续写|参考范文)/u,
+    writingStart + 1,
+  )
+  if (applicationHeadings.length !== 1 || continuationHeadings.length !== 1
+    || applicationHeadings[0] >= continuationHeadings[0]) {
+    addIssue(
+      issues,
+      'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS',
+      'answers.writingSamples',
+      'Official writing samples require one ordered application heading and one continuation heading',
+      sourceRef(answerDocumentId, sampleBody[writingStart]?.sourceIndex),
+    )
+    return { application: null, continuation: null }
+  }
+  const application = writingSampleText(
+    sampleBody,
+    applicationHeadings[0] + 1,
+    continuationHeadings[0],
+  )
+  const continuation = writingSampleText(
+    sampleBody,
+    continuationHeadings[0] + 1,
+    sampleBody.length,
+  )
+  if (!normalized(application) || !normalized(continuation)) {
+    addIssue(
+      issues,
+      'NCK1_ANSWER_WRITING_SAMPLE_BOUNDARY_AMBIGUOUS',
+      'answers.writingSamples',
+      'Both official writing sample sections must contain source text before scoring or explanation material',
+      sourceRef(answerDocumentId, sampleBody[writingStart]?.sourceIndex),
+    )
+    return { application: null, continuation: null }
+  }
+  return { application, continuation }
 }
 
 function activeAnswers(paperId, answerMap, issues, answerDocumentId) {
@@ -957,7 +1062,7 @@ export function produceNck1MaterializationFromStructures({
   const body = questionStructure.body
   const answerBody = answerStructure.body
   const readingStart = exactPosition(body, /^第二部分\s*阅读/u, 'sections.reading', issues, question?.documentId)
-  const languageStart = exactPosition(body, /^第三部分\s*语言运用/u, 'sections.language', issues, question?.documentId)
+  const languageStart = exactPosition(body, /^第三部分\s*语言(?:知识)?运用/u, 'sections.language', issues, question?.documentId)
   const writingStart = exactPosition(body, /^第四部分\s*写作/u, 'sections.writing', issues, question?.documentId)
   const readingFirst = readingStart === null || languageStart === null ? null : exactPosition(
     body, /^第一节/u, 'sections.reading.first', issues, question?.documentId,
@@ -983,6 +1088,11 @@ export function produceNck1MaterializationFromStructures({
     body, /^第二节/u, 'sections.writing.second', issues, question?.documentId,
     [writingStart + 1, body.length],
   )
+  const officialWritingSamples = parseOfficialWritingSamples(
+    answerBody,
+    answer?.documentId,
+    issues,
+  )
   let groups = []
   if (question && answer && coverage
     && [readingFirst, readingSecond, languageFirst, languageSecond, writingFirst, writingSecond]
@@ -1007,12 +1117,16 @@ export function produceNck1MaterializationFromStructures({
     groups.push(writingGroup({
       paperId, slotId: 'writing.application', family: 'application-writing',
       items: body.slice(writingFirst + 1, writingSecond),
-      documentId: question.documentId, officialModelAnswer: null, issues,
+      documentId: question.documentId,
+      officialModelAnswer: officialWritingSamples.application,
+      issues,
     }))
     groups.push(writingGroup({
       paperId, slotId: 'writing.continuation', family: 'continuation-writing',
       items: body.slice(writingSecond + 1),
-      documentId: question.documentId, officialModelAnswer: null, issues,
+      documentId: question.documentId,
+      officialModelAnswer: officialWritingSamples.continuation,
+      issues,
     }))
   }
   const answerMap = parseOfficialAnswers(answerBody, answer?.documentId, issues)

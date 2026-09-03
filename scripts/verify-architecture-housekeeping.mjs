@@ -59,6 +59,23 @@ assert(
 
 for (const relPath of ['.github/workflows/verify.yml']) {
   const workflow = read(relPath)
+  const triggerBlock = /^on:\n([\s\S]*?)\n\njobs:/mu.exec(workflow)?.[1]?.trim()
+  assert(
+    `${relPath} protects pull requests and main while retaining manual dispatch`,
+    triggerBlock === [
+      'pull_request:',
+      '  push:',
+      '    branches:',
+      '      - main',
+      '  workflow_dispatch:',
+    ].join('\n'),
+    triggerBlock || 'trigger block unavailable',
+  )
+  assert(
+    `${relPath} distinguishes manual diagnostics from required checks`,
+    workflow.includes("name: ${{ github.event_name == 'workflow_dispatch' && 'verify (manual)' || 'verify' }}") &&
+      workflow.includes("name: ${{ github.event_name == 'workflow_dispatch' && 'e2e (manual)' || 'e2e' }}"),
+  )
   assert(`${relPath} installs app dependencies`, workflow.includes('pnpm install --frozen-lockfile'))
   assert(
     `${relPath} installs server dependencies`,
@@ -187,6 +204,11 @@ for (const [changedFile, expectedRisk, expectedPack] of [
   ['server/vocabulary/vocabularyPdfRenderer.mjs', 'shared-renderer-contract', 'paper'],
   ['server/vocabulary/vocabularyStore.mjs', 'auth-persistence-migration', 'security'],
   ['server/vocabulary/vocabularyRoutes.mjs', 'auth-persistence-migration', 'security'],
+  ['.amp/plugins/github-ci-wakeup.js', 'auth-persistence-migration', 'security'],
+  ['deploy/eqb-deploy-controller.mjs', 'auth-persistence-migration', 'security'],
+  ['scripts/amp-orb-ci.mjs', 'auth-persistence-migration', 'security'],
+  ['scripts/amp-orb-deploy.mjs', 'auth-persistence-migration', 'security'],
+  ['scripts/lib/ampOrbDeploy.mjs', 'auth-persistence-migration', 'security'],
   ['server/api.mjs', 'unknown-fallback', 'all'],
   ['data/sql/schema.sql', 'auth-persistence-migration', 'security'],
   ['.github/workflows/verify.yml', 'unknown-fallback', 'all'],

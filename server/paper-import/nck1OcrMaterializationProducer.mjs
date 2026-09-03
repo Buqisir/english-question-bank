@@ -14,7 +14,7 @@ import {
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 export const NCK1_OCR_MATERIALIZATION_PRODUCER_VERSION =
-  'nck1-ocr-materialization-producer-v2'
+  'nck1-ocr-materialization-producer-v5'
 
 const PDF = 'application/pdf'
 const FULL_PAGE = Object.freeze({ x: 0, y: 0, width: 1, height: 1 })
@@ -124,7 +124,7 @@ export function produceNck1OcrMaterialization({
         issues,
         'NCK1_OCR_TEXT_LAYER_REQUIRED',
         `documents.${document.documentId}`,
-        'Raster source requires staged OCR observations and explicit human confirmation',
+        'Raster source requires staged OCR observations and Agent-verified transcription closure against the immutable page',
         document,
       )
     }
@@ -139,7 +139,7 @@ export function produceNck1OcrMaterialization({
       issues,
       'NCK1_OCR_TEXT_LAYER_REQUIRED',
       'ocrConfirmation',
-      'OCR observations are evidence only until a human confirms text, source order, and visual classification',
+      'OCR observations are evidence only until the Agent verifies text and source order; content-bearing visuals remain independently reviewable',
       question || documents[0],
     )
   } else {

@@ -301,8 +301,9 @@ try {
   const detail = store.paperDetail(paperId)
   assert.equal(detail.latest.reviewKind, 'ocr')
   assert.equal(detail.ocrReview.documents.length, 2)
-  assert(detail.ocrReview.reviewFindings.some((item) =>
-    item.code === 'NCK1_OCR_CONFIDENCE_REVIEW_REQUIRED'))
+  assert.equal(detail.ocrReview.reviewFindings.some((item) =>
+    item.code === 'NCK1_OCR_CONFIDENCE_REVIEW_REQUIRED'), false,
+  'confidence and alternatives are diagnostic, not an Owner review gate')
   assert(detail.ocrReview.reviewFindings.some((item) =>
     item.code === 'NCK1_OCR_VISUAL_CLASSIFICATION_REQUIRED'))
 
@@ -360,6 +361,7 @@ try {
   })
   const indexHtml = readFileSync(path.join(root, 'import-ops/public/index.html'))
   const appJs = readFileSync(path.join(root, 'import-ops/public/app.js'))
+  const clipboardJs = readFileSync(path.join(root, 'import-ops/public/clipboard.js'))
   const styles = readFileSync(path.join(root, 'import-ops/public/styles.css'))
   server = createServer(async (request, response) => {
     const url = new URL(request.url || '/', 'http://127.0.0.1')
@@ -369,6 +371,10 @@ try {
     }
     if (url.pathname === '/ops/app.js') {
       send(response, 200, appJs, 'text/javascript; charset=utf-8')
+      return
+    }
+    if (url.pathname === '/ops/clipboard.js') {
+      send(response, 200, clipboardJs, 'text/javascript; charset=utf-8')
       return
     }
     if (url.pathname === '/ops/styles.css') {
@@ -436,7 +442,7 @@ try {
   const playwright = await import('../app/node_modules/playwright/index.js')
   browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
   const page = await browser.newPage({ viewport: { width: 1920, height: 1000 } })
-  await page.goto(`${origin}/ops/`)
+  await page.goto(`${origin}/ops/?view=review`)
   const sourceImage = page.locator('.ocr-page-canvas img')
   await sourceImage.waitFor()
   assert.equal(await sourceImage.evaluate((image) => image.naturalWidth > 0), true)
