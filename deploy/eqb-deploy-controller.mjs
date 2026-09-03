@@ -1,17 +1,21 @@
 #!/usr/bin/env node
 
 import { execFileSync } from 'node:child_process'
-import { randomUUID } from 'node:crypto'
+import { createHash, randomUUID } from 'node:crypto'
 import {
   chmodSync,
   chownSync,
   closeSync,
+  constants as fsConstants,
   existsSync,
+  fchmodSync,
+  fstatSync,
   lstatSync,
   mkdirSync,
   mkdtempSync,
   openSync,
   readFileSync,
+  readdirSync,
   readlinkSync,
   renameSync,
   rmSync,
@@ -35,6 +39,7 @@ const HEALTH_TIMEOUT_MS = 60_000
 const HOST_CONFIGURATION_PATHS = Object.freeze([
   'deploy/Caddyfile.release',
   'deploy/eqb-release.service',
+  'deploy/eqb-deploy-transport',
   'deploy/eqb-deploy-controller',
   'deploy/eqb-deploy-controller.mjs',
 ])
@@ -384,6 +389,81 @@ function assertCandidateStructure(release) {
   }
 }
 
+function generatedDistManifest(dist, verifyModes) {
+  const entries = []
+  function walk(absolute, relative = '.') {
+    const state = lstatSync(absolute)
+    if (state.isSymbolicLink() || (!state.isDirectory() && !state.isFile())) {
+      throw new Error('Prepared release dist contains a special node')
+    }
+    if (state.isFile() && state.nlink !== 1) {
+      throw new Error('Prepared release dist contains a linked file')
+    }
+    const type = state.isDirectory() ? 'directory' : 'file'
+    const expectedMode = type === 'directory' ? 0o755 : 0o644
+    if (verifyModes && (state.mode & 0o7777) !== expectedMode) {
+      throw new Error('Prepared release dist mode is invalid')
+    }
+    entries.push({
+      relative,
+      type,
+      uid: state.uid,
+      gid: state.gid,
+      dev: state.dev,
+      ino: state.ino,
+      nlink: state.nlink,
+      size: state.size,
+      digest: state.isFile()
+        ? createHash('sha256').update(readFileSync(absolute)).digest('hex')
+        : null,
+    })
+    if (state.isDirectory()) {
+      for (const name of readdirSync(absolute).sort()) {
+        walk(path.join(absolute, name), relative === '.' ? name : `${relative}/${name}`)
+      }
+    }
+  }
+  walk(dist)
+  if (!entries.some((entry) => entry.relative === 'index.html' && entry.type === 'file')) {
+    throw new Error('Prepared release is missing the built app')
+  }
+  return entries
+}
+
+function normalizeGeneratedDist(dist) {
+  const before = generatedDistManifest(dist, false)
+  for (const entry of before) {
+    const absolute = entry.relative === '.' ? dist : path.join(dist, entry.relative)
+    const expectedMode = entry.type === 'directory' ? 0o755 : 0o644
+    const flags = fsConstants.O_RDONLY
+      | fsConstants.O_NOFOLLOW
+      | fsConstants.O_NONBLOCK
+      | (entry.type === 'directory' ? fsConstants.O_DIRECTORY : 0)
+    const descriptor = openSync(absolute, flags)
+    try {
+      const current = fstatSync(descriptor)
+      const currentType = current.isDirectory() ? 'directory' : current.isFile() ? 'file' : 'other'
+      if (
+        currentType !== entry.type
+        || current.uid !== entry.uid
+        || current.gid !== entry.gid
+        || current.dev !== entry.dev
+        || current.ino !== entry.ino
+        || current.nlink !== entry.nlink
+        || current.size !== entry.size
+      ) throw new Error('Prepared release dist changed during normalization')
+      fchmodSync(descriptor, expectedMode)
+    } finally {
+      closeSync(descriptor)
+    }
+  }
+  const after = generatedDistManifest(dist, true)
+  if (JSON.stringify(before) !== JSON.stringify(after)) {
+    throw new Error('Prepared release dist content changed during normalization')
+  }
+  return after.map(({ relative, type, size, digest }) => ({ relative, type, size, digest }))
+}
+
 function restoreTrustedDeployTree(dependencies, release, archive) {
   const deployDirectory = path.join(release, 'deploy')
   rmSync(deployDirectory, { recursive: true, force: true })
@@ -399,6 +479,7 @@ function restoreTrustedDeployTree(dependencies, release, archive) {
   for (const relative of [
     'Caddyfile.release',
     'eqb-release.service',
+    'eqb-deploy-transport',
     'eqb-deploy-controller',
     'eqb-deploy-controller.mjs',
   ]) {
@@ -514,8 +595,13 @@ function prepareRelease(config, dependencies, sha) {
     })
     dependencies.chown(staging, config.buildUser, config.buildGroup)
     buildEnvironment(config, dependencies, staging)
+    const builtDist = normalizeGeneratedDist(path.join(staging, 'app', 'dist'))
     restoreTrustedDeployTree(dependencies, staging, archive)
     sealRelease(config, dependencies, staging, sha)
+    const sealedDist = normalizeGeneratedDist(path.join(staging, 'app', 'dist'))
+    if (JSON.stringify(builtDist) !== JSON.stringify(sealedDist)) {
+      throw new Error('Prepared release dist content changed while sealing')
+    }
     renameSync(staging, finalDirectory)
     readReleaseMarker(config, sha)
     return { release: finalDirectory, staged: true }
@@ -571,6 +657,7 @@ async function healthCheck(config, dependencies) {
       ['is-active', '--quiet', config.caddyService],
     ) && curl(['http://127.0.0.1:8787/api/health'])
       && curl(['--resolve', 'eqbank.cc:443:127.0.0.1', 'https://eqbank.cc/api/health'])
+      && curl(['--resolve', 'eqbank.cc:443:127.0.0.1', 'https://eqbank.cc/'])
       && curl(['https://eqbank.cc/api/health'])
       && curl(['https://eqbank.cc/'])
       && curl(['https://eqbank.cc/ops/'])

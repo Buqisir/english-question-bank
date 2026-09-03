@@ -1,0 +1,25 @@
+#!/bin/sh
+set -eu
+
+# This root-owned wrapper runs as the unprivileged SSH transport account. The
+# authorized_keys forced command prevents choosing another executable; this
+# parser prevents SSH_ORIGINAL_COMMAND from becoming shell syntax or sudo argv.
+
+original_command=${SSH_ORIGINAL_COMMAND-}
+unset SSH_AUTH_SOCK
+
+if [ "$original_command" = preflight ]; then
+  exec /usr/bin/sudo -n /usr/local/libexec/eqb-deploy-controller-v1 -- preflight
+fi
+
+case "$original_command" in
+  'deploy '*) sha=${original_command#deploy } ;;
+  *) exit 64 ;;
+esac
+
+case "$sha" in
+  ''|*[!a-f0-9]*) exit 64 ;;
+esac
+[ "${#sha}" -eq 40 ] || exit 64
+
+exec /usr/bin/sudo -n /usr/local/libexec/eqb-deploy-controller-v1 -- deploy "$sha"
