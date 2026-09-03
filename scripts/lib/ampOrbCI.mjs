@@ -26,6 +26,7 @@ export const AMP_ORB_CI_WORKFLOW_VERSION = 'v3'
 export const AMP_ORB_CI_QUEUE_SCHEMA_VERSION = 'amp-orb-ci-queue-v1'
 export const AMP_ORB_CI_STATUS_CONTEXT = 'Amp Orb Verify'
 export const AMP_ORB_CI_FAST_STATUS_CONTEXT = 'Amp Orb Verify (fast)'
+export const AMP_ORB_CI_WAKE_SENTINEL = 'eqbank-amp-orb-ci-wake-v1'
 export const AMP_ORB_CI_SANDBOX_USER = 'eqb-ci'
 export const AMP_ORB_CI_SANDBOX_ROOT = '/var/tmp/eqb-amp-ci'
 
@@ -138,6 +139,27 @@ export function validateAmpOrbCIQueueInput(input) {
 
 export function ampOrbCIRunId(input) {
   return `${AMP_ORB_CI_WORKFLOW_VERSION}-${validateAmpOrbCIInput(input).testedSha}`
+}
+
+export function ampOrbCIDiscoveryDeliveryId(input) {
+  if (input?.event === 'push' && SHA.test(input.sha || '')) {
+    return `amp-orb-ci-discover-v1-main-${input.sha}`
+  }
+  if (
+    input?.event === 'pull_request'
+    && Number.isSafeInteger(input.pullRequestNumber)
+    && input.pullRequestNumber > 0
+    && SHA.test(input.sha || '')
+    && SHA.test(input.baseSha || '')
+  ) {
+    return [
+      'amp-orb-ci-discover-v1-pr',
+      input.pullRequestNumber,
+      input.baseSha,
+      input.sha,
+    ].join('-')
+  }
+  throw new Error('Invalid Amp Orb CI discovery identity')
 }
 
 export function enqueueAmpOrbCIJob(input, { stateDir } = {}) {
@@ -272,8 +294,88 @@ function githubStatusTargetUrl(threadId) {
     : null
 }
 
+function githubAPIHeaders(token) {
+  if (!token) throw new Error('Amp Orb CI GitHub token is missing')
+  return {
+    accept: 'application/vnd.github+json',
+    authorization: `Bearer ${token}`,
+    'x-github-api-version': '2026-03-10',
+  }
+}
+
+async function readGitHubJSON(url, { fetchImpl, headers, resource }) {
+  const response = await fetchImpl(url, { headers })
+  if (response.status !== 200) {
+    throw new Error(`GitHub ${resource} discovery failed (${response.status})`)
+  }
+  return response.json()
+}
+
+export async function discoverAmpOrbCIJobs({ token, fetchImpl = fetch } = {}) {
+  const headers = githubAPIHeaders(token)
+  const apiRoot = `https://api.github.com/repos/${AMP_ORB_CI_REPOSITORY}`
+  const main = await readGitHubJSON(`${apiRoot}/commits/main`, {
+    fetchImpl,
+    headers,
+    resource: 'main',
+  })
+  const mainIdentity = {
+    event: 'push',
+    sha: main?.sha,
+    testedSha: main?.sha,
+    baseSha: main?.parents?.[0]?.sha,
+    pullRequestNumber: null,
+    forced: false,
+  }
+  const mainJob = validateAmpOrbCIInput({
+    ...mainIdentity,
+    deliveryId: ampOrbCIDiscoveryDeliveryId(mainIdentity),
+  })
+
+  const pullRequestJobs = new Map()
+  for (let page = 1; ; page += 1) {
+    const pulls = await readGitHubJSON(
+      `${apiRoot}/pulls?state=open&base=main&per_page=100&page=${page}`,
+      { fetchImpl, headers, resource: 'pull request' },
+    )
+    if (!Array.isArray(pulls)) {
+      throw new Error('GitHub pull request discovery returned an invalid response')
+    }
+    for (const pull of pulls) {
+      if (
+        pull?.base?.repo?.full_name !== AMP_ORB_CI_REPOSITORY
+        || pull?.head?.repo?.full_name !== AMP_ORB_CI_REPOSITORY
+        || pull?.base?.ref !== 'main'
+      ) {
+        continue
+      }
+      const identity = {
+        kind: 'resolve',
+        event: 'pull_request',
+        sha: pull.head.sha,
+        baseSha: pull.base.sha,
+        pullRequestNumber: pull.number,
+      }
+      const job = validateAmpOrbCIQueueInput({
+        ...identity,
+        deliveryId: ampOrbCIDiscoveryDeliveryId(identity),
+      })
+      pullRequestJobs.set(job.deliveryId, job)
+    }
+    if (pulls.length < 100) break
+  }
+
+  return [
+    mainJob,
+    ...[...pullRequestJobs.values()].sort((left, right) => (
+      left.pullRequestNumber - right.pullRequestNumber
+      || left.deliveryId.localeCompare(right.deliveryId)
+    )),
+  ]
+}
+
 export function createGitHubStatusWriter({ token, threadId, fetchImpl = fetch }) {
-  if (!token) throw new Error('Amp Orb CI GitHub status token is missing')
+  const headers = githubAPIHeaders(token)
   return async ({ sha, state, description, context = AMP_ORB_CI_STATUS_CONTEXT }) => {
     if (!STATUS_CONTEXTS.has(context)) throw new Error('Amp Orb CI GitHub status context is invalid')
     const body = {
@@ -287,10 +389,8 @@ export function createGitHubStatusWriter({ token, threadId, fetchImpl = fetch })
       {
         method: 'POST',
         headers: {
-          accept: 'application/vnd.github+json',
-          authorization: `Bearer ${token}`,
+          ...headers,
           'content-type': 'application/json',
-          'x-github-api-version': '2026-03-10',
         },
         body: JSON.stringify(body),
       },

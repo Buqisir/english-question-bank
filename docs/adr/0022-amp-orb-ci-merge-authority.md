@@ -1,7 +1,7 @@
-# ADR-0022: Amp Orb dual-lane CI authority and hosted rollback
+# ADR-0022: Amp Orb dual-lane CI authority, hosted rollback, and Action wake
 
-- Status: Accepted; hosted rollback authorized 2026-09-02
-- Owner authorization: 2026-08-31; rollback authorization 2026-09-02
+- Status: Accepted; hosted rollback authorized 2026-09-02; Action-wake phase 1 authorized 2026-09-03
+- Owner authorization: 2026-08-31; rollback authorization 2026-09-02; Action-wake phase 1 authorization 2026-09-03
 - Supersedes: ADR-0021 rollout and authority sections only
 
 ## Context
@@ -56,7 +56,8 @@ alone owns status writes.
 `Amp Orb Verify (fast)` reports Fast independently for early feedback. `Amp Orb
 Verify` is the aggregate authority: it remains pending until both lanes settle and
 succeeds only when both exit successfully and both exact tested-SHA checkouts stay
-tracked-clean. Fast is informational; branch protection requires Full.
+tracked-clean. Fast is informational; the 2026-08-31 cutover required Full before
+the hosted rollback recorded below.
 
 Fast settlement is recorded atomically in the private receipt before its GitHub
 status write. A status outage is retried from the receipt without rerunning a
@@ -112,9 +113,66 @@ authorized this narrow bootstrap exception:
 
 During the rollback, hosted `verify` and `e2e` are the merge authority. Both Amp Orb
 contexts remain informational and may not substitute for a hosted failure or missing
-status. Restoring Orb authority requires the Amp report to be resolved, a sleeping
-Orb webhook to accept and durably queue a natural request, successful exact-merge
-and post-merge proofs, and a separate Owner-authorized atomic protection cutover.
+status. The original recovery condition required the Amp report to be resolved and a
+sleeping Orb webhook to accept a natural request. The Action-wake decision below
+supersedes that condition without changing the hosted rollback authority.
+
+## Action wake and authoritative discovery
+
+The repository-side webhook handler, durable queue, controller, sandbox, receipts,
+and status writer remain sound, but Amp-managed public ingress is not a reliable wake
+source while `amp_bug_0uiggF5jWG6i6iaB72BATT` remains open. The approved replacement
+separates wake from event identity:
+
+1. A GitHub Action will continue one fixed private CI thread with one byte-exact
+   sentinel. The message contains no PR number, SHA, title, actor, ref, payload, or
+   other event-derived text.
+2. The project plugin accepts only exact sentinel equality in `agent.start`, acquires
+   the existing executor keepalive, launches the trusted `discover` controller, and
+   cancels the agent turn before inference. Whitespace, case variants, suffixes,
+   prefixes, and all other messages remain ordinary agent input.
+3. Under the same blocking `flock` as queue drain, the controller reads current GitHub
+   state. It takes `main` from the repository commit endpoint and records its first
+   parent as the base. It enumerates open PRs whose base is `main`, retaining only PRs
+   whose head and base repositories are both `Buqisir/english-question-bank`.
+4. A discovered PR queues only its GitHub API base/head/number identity. Immediately
+   before execution the trusted controller fetches `refs/pull/<number>/merge` and
+   requires ordered parents `^1 == baseSha` and `^2 == headSha`. A mismatch is stale,
+   not a license to test the PR head or another merge.
+5. Discovery delivery IDs are deterministic over `main` SHA or PR number/base/head.
+   Repeated wakes therefore converge through the existing atomic-create/EEXIST queue
+   boundary, while the existing `(v3, testedSha)` receipt prevents repeated execution.
+
+The Action wake reuses the existing GitHub status credential for read-only repository
+and PR discovery plus its existing commit-status writes. It does not pass that token,
+Amp credentials, or event data into the candidate sandbox. Queue permissions, serial
+drain, exact-ref fetches, stale checks, two isolated `eqb-ci` lanes, clean-tree checks,
+and `Amp Orb Verify (fast)` / `Amp Orb Verify` status behavior are unchanged. The old
+HMAC-authenticated webhook remains as a compatible non-authoritative ingress path.
+Missing HMAC disables only that legacy ingress; the fixed-sentinel path remains
+available. Missing status credentials disable both paths before wake registration.
+
+CI configuration is isolated in the private Amp project `english-question-bank-ci`
+(`30e5a6fb-5775-4b8e-8664-25fda6aa67d5`) and its private 16-vCPU thread. No Deployment
+Orb secret, SSH identity, production capability, database/R2 credential, or deployment
+authority may enter that project. Project isolation limits ordinary development Orbs'
+access to the CI credentials; it does not make candidate code trusted.
+
+Phase 1 adds sentinel interception and discover-on-wake support only. It does not add
+or enable a GitHub Action, refresh a live plugin, move a webhook, or alter merge
+authority. A separately authorized phase 2 may add the fixed-thread wake workflow and
+the repository `AMP_API_KEY` secret. That workflow must use no `pull_request_target`,
+must expose the secret only to same-repository PR and `main` wake jobs, and must never
+construct its message from GitHub event fields.
+
+Both Amp contexts remain informational until 10–20 naturally triggered, paired
+PR/test-merge and post-merge `main` observations agree with hosted results on exact
+SHAs. The set must include at least one real test failure and at least one
+`synchronize` race whose obsolete identity becomes stale. Promotion still requires a
+new explicit Owner authorization. The protection change adds aggregate `Amp Orb
+Verify` before removing hosted `verify` and `e2e`, preserves strict up-to-date and
+no-bypass settings, and leaves Fast informational. No CI decision grants deployment
+authority.
 
 ## Consequences
 

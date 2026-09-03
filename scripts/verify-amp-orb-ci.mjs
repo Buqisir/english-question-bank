@@ -33,10 +33,13 @@ import {
   AMP_ORB_CI_FAST_STATUS_CONTEXT,
   AMP_ORB_CI_LOCK_CONFLICT_EXIT_CODE,
   AMP_ORB_CI_STATUS_CONTEXT,
+  AMP_ORB_CI_WAKE_SENTINEL,
   AMP_ORB_CI_WORKFLOW_VERSION,
+  ampOrbCIDiscoveryDeliveryId,
   ampOrbCILockInvocation,
   ampOrbCIRunId,
   createGitHubStatusWriter,
+  discoverAmpOrbCIJobs,
   drainAmpOrbCIQueue,
   enqueueAmpOrbCIJob,
   ensureCompleteAmpOrbCIGitHistory,
@@ -67,6 +70,16 @@ assert.equal(
   repositoryRootFromModule(new URL('../.amp/plugins/github-ci-wakeup.js', import.meta.url).href),
   expectedRepositoryRoot,
   'plugin resolves the repository two ancestors above .amp/plugins/',
+)
+const controllerSource = readFileSync(path.join(expectedRepositoryRoot, 'scripts/amp-orb-ci.mjs'), 'utf8')
+assert.match(controllerSource, /const queueCommands = new Set\(\['discover', 'drain'\]\)/u)
+assert.match(controllerSource, /wait: queueCommands\.has\(controllerCommand\)/u)
+assert.match(controllerSource, /const jobs = await discoverAmpOrbCIJobs\(\{ token \}\)/u)
+assert.match(controllerSource, /enqueueAmpOrbCIJob\(input, \{ stateDir \}\)/u)
+assert.match(
+  controllerSource,
+  /if \(queueCommands\.has\(controllerCommand\)\) \{\s+const results = await drainAmpOrbCIQueue/u,
+  'discover and legacy drain share one durable queue consumer',
 )
 const shallowGitCalls = []
 ensureCompleteAmpOrbCIGitHistory('/trusted/shallow-repository', {
@@ -375,6 +388,193 @@ assert.equal(parseGitHubCIWebhook(pullRequestBody, {
   eventName: 'pull_request',
 }), null)
 
+const discoveredMainSha = 'd'.repeat(40)
+const discoveredMainBaseSha = 'e'.repeat(40)
+const synchronizedHeadSha = 'f'.repeat(40)
+const discoveredMainDelivery = `amp-orb-ci-discover-v1-main-${discoveredMainSha}`
+const discoveredPullDelivery = [
+  'amp-orb-ci-discover-v1-pr',
+  292,
+  discoveredMainSha,
+  headSha,
+].join('-')
+assert.equal(ampOrbCIDiscoveryDeliveryId({
+  event: 'push',
+  sha: discoveredMainSha,
+}), discoveredMainDelivery)
+assert.equal(ampOrbCIDiscoveryDeliveryId({
+  event: 'pull_request',
+  pullRequestNumber: 292,
+  sha: headSha,
+  baseSha: discoveredMainSha,
+}), discoveredPullDelivery)
+assert(discoveredPullDelivery.length <= 128, 'deterministic PR delivery identity fits the queue contract')
+assert.throws(() => ampOrbCIDiscoveryDeliveryId({
+  event: 'pull_request',
+  pullRequestNumber: 292,
+  sha: 'HEAD',
+  baseSha: discoveredMainSha,
+}), /discovery identity/u)
+
+function syntheticPullRequest({
+  number,
+  head = headSha,
+  base = discoveredMainSha,
+  headRepository = repository,
+  baseRepository = repository,
+  baseRef = 'main',
+}) {
+  return {
+    number,
+    title: 'Untrusted title must not enter the CI identity',
+    body: 'Untrusted body must not enter the CI identity',
+    head: { sha: head, repo: { full_name: headRepository } },
+    base: { sha: base, ref: baseRef, repo: { full_name: baseRepository } },
+  }
+}
+
+const discoveryRequests = []
+const firstDiscoveryPage = [
+  syntheticPullRequest({ number: 292 }),
+  ...Array.from({ length: 99 }, (_, index) => syntheticPullRequest({
+    number: 1_000 + index,
+    headRepository: `attacker/fork-${index}`,
+  })),
+]
+const secondDiscoveryPage = [
+  syntheticPullRequest({ number: 400, head: synchronizedHeadSha }),
+  syntheticPullRequest({ number: 401, baseRef: 'release' }),
+  syntheticPullRequest({ number: 292 }),
+]
+const discoveryFetch = async (url, options) => {
+  discoveryRequests.push({ url, options })
+  let value
+  if (url.endsWith('/commits/main')) {
+    value = {
+      sha: discoveredMainSha,
+      parents: [
+        { sha: discoveredMainBaseSha },
+        { sha: '0'.repeat(40) },
+      ],
+    }
+  } else if (url.endsWith('page=1')) {
+    value = firstDiscoveryPage
+  } else if (url.endsWith('page=2')) {
+    value = secondDiscoveryPage
+  } else {
+    assert.fail(`unexpected discovery URL: ${url}`)
+  }
+  return { status: 200, async json() { return value } }
+}
+const discoveredJobs = await discoverAmpOrbCIJobs({
+  token: 'synthetic-discovery-token',
+  fetchImpl: discoveryFetch,
+})
+const expectedDiscoveredMain = validateAmpOrbCIInput({
+  event: 'push',
+  sha: discoveredMainSha,
+  testedSha: discoveredMainSha,
+  baseSha: discoveredMainBaseSha,
+  deliveryId: discoveredMainDelivery,
+  pullRequestNumber: null,
+  forced: false,
+})
+const expectedDiscoveredPull = validateAmpOrbCIQueueInput({
+  kind: 'resolve',
+  event: 'pull_request',
+  sha: headSha,
+  baseSha: discoveredMainSha,
+  deliveryId: discoveredPullDelivery,
+  pullRequestNumber: 292,
+})
+const expectedSynchronizedPull = validateAmpOrbCIQueueInput({
+  kind: 'resolve',
+  event: 'pull_request',
+  sha: synchronizedHeadSha,
+  baseSha: discoveredMainSha,
+  deliveryId: ampOrbCIDiscoveryDeliveryId({
+    event: 'pull_request',
+    sha: synchronizedHeadSha,
+    baseSha: discoveredMainSha,
+    pullRequestNumber: 400,
+  }),
+  pullRequestNumber: 400,
+})
+assert.deepEqual(discoveredJobs, [
+  expectedDiscoveredMain,
+  expectedDiscoveredPull,
+  expectedSynchronizedPull,
+], 'discovery uses main first-parent identity and same-repository open PRs in stable order')
+assert.deepEqual(discoveryRequests.map(({ url }) => url), [
+  `https://api.github.com/repos/${repository}/commits/main`,
+  `https://api.github.com/repos/${repository}/pulls?state=open&base=main&per_page=100&page=1`,
+  `https://api.github.com/repos/${repository}/pulls?state=open&base=main&per_page=100&page=2`,
+])
+for (const { options } of discoveryRequests) {
+  assert.equal(options.headers.authorization, 'Bearer synthetic-discovery-token')
+  assert.equal(options.headers['x-github-api-version'], '2026-03-10')
+}
+assert.equal(
+  JSON.stringify(discoveredJobs).includes('Untrusted'),
+  false,
+  'discovery retains no PR title or body',
+)
+await assert.rejects(discoverAmpOrbCIJobs({ token: '', fetchImpl: discoveryFetch }), /token is missing/u)
+await assert.rejects(discoverAmpOrbCIJobs({
+  token: 'synthetic-discovery-token',
+  async fetchImpl() { return { status: 503 } },
+}), /main discovery failed \(503\)/u)
+
+const discoveryQueueState = mkdtempSync(path.join(tmpdir(), 'eqb-amp-orb-ci-discovery-'))
+const synchronizeQueueState = mkdtempSync(path.join(tmpdir(), 'eqb-amp-orb-ci-synchronize-'))
+try {
+  assert.deepEqual(
+    discoveredJobs.map((job) => enqueueAmpOrbCIJob(job, { stateDir: discoveryQueueState }).outcome),
+    ['queued', 'queued', 'queued'],
+  )
+  assert.deepEqual(
+    discoveredJobs.map((job) => enqueueAmpOrbCIJob(job, { stateDir: discoveryQueueState }).outcome),
+    ['duplicate', 'duplicate', 'duplicate'],
+    'repeated wake discovery is idempotent at the durable queue boundary',
+  )
+
+  const oldPull = expectedDiscoveredPull
+  const synchronizedPull = validateAmpOrbCIQueueInput({
+    ...oldPull,
+    sha: synchronizedHeadSha,
+    deliveryId: ampOrbCIDiscoveryDeliveryId({
+      ...oldPull,
+      sha: synchronizedHeadSha,
+    }),
+  })
+  enqueueAmpOrbCIJob(oldPull, { stateDir: synchronizeQueueState })
+  enqueueAmpOrbCIJob(synchronizedPull, { stateDir: synchronizeQueueState })
+  const synchronizedRuns = []
+  const synchronizeResults = await drainAmpOrbCIQueue({
+    stateDir: synchronizeQueueState,
+    async resolveJob(input) {
+      if (input.sha === headSha) return null
+      return { ...input, kind: 'run', testedSha }
+    },
+    async runJob(input) {
+      synchronizedRuns.push(input)
+      return { outcome: 'reported', receipt: { state: 'reported' } }
+    },
+  })
+  assert.deepEqual(synchronizeResults, [
+    { deliveryId: oldPull.deliveryId, outcome: 'stale' },
+    { deliveryId: synchronizedPull.deliveryId, outcome: 'reported' },
+  ], 'synchronize creates a new deterministic identity while stale merge parents fail closed')
+  assert.deepEqual(synchronizedRuns, [validateAmpOrbCIInput({
+    ...synchronizedPull,
+    kind: 'run',
+    testedSha,
+  })])
+} finally {
+  rmSync(discoveryQueueState, { force: true, recursive: true })
+  rmSync(synchronizeQueueState, { force: true, recursive: true })
+}
+
 const launchState = mkdtempSync(path.join(tmpdir(), 'eqb-amp-orb-ci-launch-'))
 const launchErrorState = mkdtempSync(path.join(tmpdir(), 'eqb-amp-orb-ci-launch-error-'))
 const launchRecordFailureRoot = mkdtempSync(path.join(tmpdir(), 'eqb-amp-orb-ci-launch-record-'))
@@ -424,6 +624,31 @@ try {
     signal: null,
   })
   assert.equal(statSync(launchRecordPath).mode & 0o777, 0o600)
+
+  const discoveryChild = new EventEmitter()
+  discoveryChild.pid = 4243
+  discoveryChild.unref = () => {}
+  await launchGitHubCIDrain({
+    controllerCommand: 'discover',
+    repositoryRoot: '/trusted/controller',
+    stateDir: launchState,
+    spawnImpl(command, args, options) {
+      launchedProcesses.push({ command, args, options })
+      queueMicrotask(() => discoveryChild.emit('spawn'))
+      return discoveryChild
+    },
+  })
+  assert.deepEqual(
+    launchedProcesses[1].args,
+    ['/trusted/controller/scripts/amp-orb-ci.mjs', 'discover'],
+    'fixed wake launches the trusted discover controller command',
+  )
+  discoveryChild.emit('exit', 0, null)
+  await assert.rejects(launchGitHubCIDrain({
+    controllerCommand: 'shell-input',
+    repositoryRoot: '/trusted/controller',
+    stateDir: launchState,
+  }), /controller command/u)
 
   const syntheticLaunchError = Object.assign(new Error('synthetic spawn failure'), {
     code: 'ENOENT',
@@ -486,10 +711,15 @@ const originalStatusToken = process.env.QUESTION_BANK_AMP_CI_GITHUB_STATUS_TOKEN
 const pluginState = mkdtempSync(path.join(tmpdir(), 'eqb-amp-orb-ci-plugin-'))
 let registeredWebhook = null
 let registeredCommand = null
+let registeredAgentStart = null
 const drainLaunches = []
 let rejectDrainLaunch = false
 const amp = {
   logger: { log() {} },
+  on(eventName, handler) {
+    assert.equal(eventName, 'agent.start')
+    registeredAgentStart = handler
+  },
   async createWebhook(options) {
     registeredWebhook = options
     return { url: 'https://capability.invalid/private-ci-verifier' }
@@ -506,15 +736,40 @@ try {
   delete process.env.QUESTION_BANK_AMP_CI_PLUGIN_ENABLED
   await githubCIWakeupPlugin(amp)
   assert.equal(registeredWebhook, null, 'plugin is inert by default')
+  assert.equal(registeredAgentStart, null, 'disabled plugin registers no wake handler')
 
   process.env.QUESTION_BANK_AMP_CI_PLUGIN_ENABLED = '1'
   delete process.env.QUESTION_BANK_AMP_CI_GITHUB_WEBHOOK_SECRET
   delete process.env.QUESTION_BANK_AMP_CI_GITHUB_STATUS_TOKEN
   await githubCIWakeupPlugin(amp)
-  assert.equal(registeredWebhook, null, 'enabled plugin fails closed without both private settings')
+  assert.equal(registeredWebhook, null, 'enabled plugin registers no webhook without private settings')
+  assert.equal(registeredAgentStart, null, 'missing status token fails closed before wake registration')
+
+  process.env.QUESTION_BANK_AMP_CI_GITHUB_STATUS_TOKEN = 'synthetic-status-token'
+  let noHmacDiscoverLaunches = 0
+  let noHmacCancelledTurns = 0
+  let finishNoHmacDiscover
+  await githubCIWakeupPlugin(amp, {
+    repositoryRoot: '/trusted/controller',
+    stateDir: pluginState,
+    async launchDrain(controllerCommand) {
+      assert.equal(controllerCommand, 'discover')
+      noHmacDiscoverLaunches += 1
+      await new Promise((resolve) => { finishNoHmacDiscover = resolve })
+    },
+  })
+  assert.equal(registeredWebhook, null, 'missing HMAC disables only legacy webhook ingress')
+  assert.equal(registeredCommand, null, 'missing HMAC exposes no webhook capability command')
+  const noHmacWake = registeredAgentStart({ message: AMP_ORB_CI_WAKE_SENTINEL }, {
+    thread: { async cancel() { noHmacCancelledTurns += 1 } },
+  })
+  assert.equal(noHmacDiscoverLaunches, 1, 'fixed sentinel remains available without webhook HMAC')
+  assert.equal(noHmacCancelledTurns, 0, 'wake is not cancelled before discover launch initiation settles')
+  finishNoHmacDiscover()
+  await noHmacWake
+  assert.equal(noHmacCancelledTurns, 1, 'HMAC-independent wake still cancels its LLM turn')
 
   process.env.QUESTION_BANK_AMP_CI_GITHUB_WEBHOOK_SECRET = secret
-  process.env.QUESTION_BANK_AMP_CI_GITHUB_STATUS_TOKEN = 'synthetic-status-token'
   const startupRecoveryQueuePath = enqueueAmpOrbCIJob({
     ...parsedPullRequest,
     deliveryId: '77777777-7777-4777-8777-777777777777',
@@ -522,8 +777,8 @@ try {
   await githubCIWakeupPlugin(amp, {
     repositoryRoot: '/trusted/controller',
     stateDir: pluginState,
-    async launchDrain() {
-      drainLaunches.push('launch')
+    async launchDrain(controllerCommand = 'drain') {
+      drainLaunches.push(controllerCommand)
       if (rejectDrainLaunch) throw new Error('synthetic launch failure')
     },
   })
@@ -534,8 +789,30 @@ try {
     'x-hub-signature-256',
   ])
   assert.equal(registeredCommand.id, 'github-ci-webhook-url')
-  assert.equal(drainLaunches.length, 1, 'plugin startup recovers any durable queue residue')
+  assert.deepEqual(drainLaunches, ['drain'], 'plugin startup recovers any durable queue residue')
   rmSync(startupRecoveryQueuePath)
+
+  let cancelledAgentTurns = 0
+  const agentContext = {
+    thread: {
+      async cancel() { cancelledAgentTurns += 1 },
+    },
+  }
+  for (const message of [
+    ` ${AMP_ORB_CI_WAKE_SENTINEL}`,
+    `${AMP_ORB_CI_WAKE_SENTINEL} `,
+    `${AMP_ORB_CI_WAKE_SENTINEL}\n`,
+    AMP_ORB_CI_WAKE_SENTINEL.toUpperCase(),
+    `prefix-${AMP_ORB_CI_WAKE_SENTINEL}-suffix`,
+    'run CI for pull request 292',
+  ]) {
+    await registeredAgentStart({ message }, agentContext)
+  }
+  assert.deepEqual(drainLaunches, ['drain'], 'non-exact messages cannot launch discovery')
+  assert.equal(cancelledAgentTurns, 0, 'non-exact messages continue to the normal agent turn')
+  await registeredAgentStart({ message: AMP_ORB_CI_WAKE_SENTINEL }, agentContext)
+  assert.deepEqual(drainLaunches, ['drain', 'discover'])
+  assert.equal(cancelledAgentTurns, 1, 'exact wake sentinel cancels the LLM turn after launch')
 
   const context = {
     logger: { log() {} },
@@ -552,7 +829,11 @@ try {
   }
   await registeredWebhook.handler(event, context)
   await registeredWebhook.handler(event, context)
-  assert.equal(drainLaunches.length, 3, 'every accepted delivery ensures a queue drainer exists')
+  assert.deepEqual(
+    drainLaunches,
+    ['drain', 'discover', 'drain', 'drain'],
+    'every accepted legacy webhook delivery ensures a queue drainer exists',
+  )
   const queueDir = path.join(pluginState, 'queue')
   const queuedFiles = readdirSync(queueDir)
   assert.deepEqual(queuedFiles, [`${deliveryId}.json`], 'at-least-once delivery has one durable item')
@@ -659,7 +940,7 @@ try {
   })])
   assert.deepEqual(resolvedDrain, [{ deliveryId: unresolvedDelivery, outcome: 'reported' }])
   assert.equal(existsSync(unresolvedQueuePath), false)
-  assert.equal(drainLaunches.length, 4)
+  assert.equal(drainLaunches.length, 5)
 
   const delayedDelivery = '44444444-4444-4444-8444-444444444444'
   const delayedQueuePath = enqueueAmpOrbCIJob({
@@ -703,12 +984,12 @@ try {
     ...event,
     headers: { ...event.headers, 'x-hub-signature-256': 'sha256=' + '0'.repeat(64) },
   }, context)
-  assert.equal(drainLaunches.length, 4, 'invalid HMAC cannot queue or launch work')
+  assert.equal(drainLaunches.length, 5, 'invalid HMAC cannot queue or launch work')
 
   const aborted = new AbortController()
   aborted.abort()
   await registeredWebhook.handler(event, { ...context, signal: aborted.signal })
-  assert.equal(drainLaunches.length, 5, 'verified delivery is durably queued even after handler abort')
+  assert.equal(drainLaunches.length, 6, 'verified delivery is durably queued even after handler abort')
   assert.deepEqual(readdirSync(queueDir), [`${deliveryId}.json`])
 
   await drainAmpOrbCIQueue({
@@ -722,7 +1003,7 @@ try {
     ...event,
     headers: { ...event.headers, 'x-github-delivery': failedLaunchDelivery },
   }, context), /synthetic launch failure/u)
-  assert.equal(drainLaunches.length, 6)
+  assert.equal(drainLaunches.length, 7)
   assert.deepEqual(
     readdirSync(queueDir),
     [`${failedLaunchDelivery}.json`],
@@ -748,6 +1029,7 @@ try {
   process.env.QUESTION_BANK_AMP_CI_GITHUB_STATUS_TOKEN = 'synthetic-status-token'
   const startupAmp = {
     logger: { log() {} },
+    on(eventName) { assert.equal(eventName, 'agent.start') },
     system: {
       executor: {
         async keepAlive() {
@@ -800,6 +1082,8 @@ try {
 const keepAliveState = mkdtempSync(path.join(tmpdir(), 'eqb-amp-orb-ci-keepalive-'))
 const keepAliveReleases = []
 const launchSettlers = []
+const keepAliveLaunchCommands = []
+let keepAliveAgentStart = null
 try {
   process.env.QUESTION_BANK_AMP_CI_PLUGIN_ENABLED = '1'
   process.env.QUESTION_BANK_AMP_CI_GITHUB_WEBHOOK_SECRET = secret
@@ -810,6 +1094,10 @@ try {
   }, { stateDir: keepAliveState })
   await githubCIWakeupPlugin({
     logger: { log() {} },
+    on(eventName, handler) {
+      assert.equal(eventName, 'agent.start')
+      keepAliveAgentStart = handler
+    },
     system: {
       executor: {
         async keepAlive() {
@@ -827,13 +1115,24 @@ try {
     repositoryRoot: '/trusted/controller',
     stateDir: keepAliveState,
     async launchController(options) {
+      keepAliveLaunchCommands.push(options.controllerCommand)
       launchSettlers.push(options.onSettled)
     },
   })
   assert.deepEqual(keepAliveReleases, [0], 'plugin startup keeps the Orb awake for its controller')
+  assert.deepEqual(keepAliveLaunchCommands, ['drain'])
   launchSettlers[0]()
   launchSettlers[0]()
   assert.deepEqual(keepAliveReleases, [1], 'controller settlement releases one Orb lease once')
+  let keepAliveCancelledTurns = 0
+  await keepAliveAgentStart({ message: AMP_ORB_CI_WAKE_SENTINEL }, {
+    thread: { async cancel() { keepAliveCancelledTurns += 1 } },
+  })
+  assert.deepEqual(keepAliveLaunchCommands, ['drain', 'discover'])
+  assert.deepEqual(keepAliveReleases, [1, 0], 'wake holds a new lease while discovery runs')
+  assert.equal(keepAliveCancelledTurns, 1)
+  launchSettlers[1]()
+  assert.deepEqual(keepAliveReleases, [1, 1], 'discovery settlement releases its lease')
 } finally {
   rmSync(keepAliveState, { force: true, recursive: true })
   if (originalEnabled === undefined) delete process.env.QUESTION_BANK_AMP_CI_PLUGIN_ENABLED
@@ -1439,6 +1738,23 @@ try {
       'drain',
     ],
   })
+  const blockingDiscoverInvocation = ampOrbCILockInvocation({
+    stateDir: lockState,
+    controllerPath: '/trusted/controller/scripts/amp-orb-ci.mjs',
+    controllerArgs: ['discover'],
+    nodePath: '/trusted/node/bin/node',
+    wait: true,
+  })
+  assert.deepEqual(blockingDiscoverInvocation, {
+    command: '/usr/bin/flock',
+    args: [
+      '--no-fork',
+      lockPath,
+      '/trusted/node/bin/node',
+      '/trusted/controller/scripts/amp-orb-ci.mjs',
+      'discover',
+    ],
+  })
   const readyPath = path.join(lockState, 'holder-ready')
   const holder = spawn('/usr/bin/flock', [
     '--no-fork',
@@ -1489,4 +1805,4 @@ try {
   for (const root of tempRoots) rmSync(root, { force: true, recursive: true })
 }
 
-console.log('PASS Amp Orb dual-lane CI webhook, isolation, idempotency, recovery, and status contract')
+console.log('PASS Amp Orb CI wake, discovery, webhook, isolation, idempotency, recovery, and status contract')
