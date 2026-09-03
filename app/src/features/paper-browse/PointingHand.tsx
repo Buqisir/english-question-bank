@@ -6,7 +6,7 @@ type PointingHandProps = {
   /**
    * `right` is the owner-praised 2026-09-04 outline (thumb on the viewer's
    * left — a right hand, palm toward us). Do not rewrite that path.
-   * `left` is the same path mirrored across x = 8, then rotated 10°
+   * `left` is the same path mirrored across x = 8, then rotated 15°
    * clockwise so it leans toward the label it is marking.
    */
   side?: 'left' | 'right'
@@ -50,7 +50,7 @@ export function PointingHand({
       {side === 'right' ? (
         <path d={RIGHT_HAND_OUTLINE} />
       ) : (
-        <g transform="rotate(10 8 10)">
+        <g transform="rotate(15 8 10)">
           <path d={LEFT_HAND_OUTLINE} />
         </g>
       )}
