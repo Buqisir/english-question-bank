@@ -66,15 +66,13 @@ original/A-D comparison pass. Its batch, candidates, and state all live under
 `.scratch/vocabulary-audio-repair-v1/`; neither pass changes formal MP3 assets
 until the owner has selected the replacements.
 
-`.github/workflows/verify.yml` is the hosted PR and `main` merge authority while
-Amp bug `amp_bug_0uiggF5jWG6i6iaB72BATT` blocks durable webhook delivery to the
-dedicated CI Orb. Branch protection requires hosted `verify` and `e2e`; both
-must be green before merge, and the post-merge `main` run must be confirmed
-green. The 16-core Orb's `Amp Orb Verify (fast)` and `Amp Orb Verify` contexts
-remain informational during this rollback (AGENTS.md RM gate).
-The first Action-wake phase adds fixed-sentinel interception and GitHub-state
-discovery only; no wake workflow or `AMP_API_KEY` is enabled until a separately
-authorized second phase.
+`.github/workflows/verify.yml` supplies hosted `verify` and `e2e` for high-risk
+PRs and post-Ship `main`. High-risk PRs require both before merge. The exact
+`main` run remains the ADR-0023 Deployment gate and an independent full-suite
+backstop; Focused CI does not replace it. Manual-dispatch job names remain
+diagnostic only. The dedicated CI Orb's Sentinel/Discovery implementation and
+Amp status contexts remain dormant under ADR-0024. Action-wake phase 2 is
+paused: no wake workflow, plugin/thread reload, or `AMP_API_KEY` is enabled.
 
 ## Stable CI entrypoint
 

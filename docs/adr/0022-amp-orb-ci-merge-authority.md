@@ -1,8 +1,11 @@
 # ADR-0022: Amp Orb dual-lane CI authority, hosted rollback, and Action wake
 
-- Status: Accepted; hosted rollback authorized 2026-09-02; Action-wake phase 1 authorized 2026-09-03
+- Status: Historical implementation retained; merge-authority and active-rollout
+  policy superseded by ADR-0024
 - Owner authorization: 2026-08-31; rollback authorization 2026-09-02; Action-wake phase 1 authorization 2026-09-03
 - Supersedes: ADR-0021 rollout and authority sections only
+- Current authority: ADR-0024; the Sentinel/Discovery design below remains
+  present but dormant
 
 ## Context
 
