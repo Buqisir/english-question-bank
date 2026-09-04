@@ -7,12 +7,16 @@ Historical cuts are evidence, not current instructions.
 ## Start safely
 
 - Follow the owner's current request and the named spec or ticket. Do not add
-  adjacent features or revive historical work.
+  adjacent features or revive historical work. Record unrelated findings as a
+  separate future task instead of fixing or refactoring them in the current one.
 - Verify any owner-supplied worktree, branch, expected HEAD, fixed point, or
   allowed dirty file before writing. Preserve unrelated changes; do not stash,
   clean, reset, rebase, merge, or delete another task's work.
 - Only one task writes a worktree at a time. Explicit parallel work needs
   separate worktrees and non-overlapping write surfaces.
+- Before parallelizing, confirm that the tasks share no files/modules,
+  schema/API/data-shape change, implementation order, or validation dependency.
+  Otherwise serialize them.
 - Never store secrets, account data, private student data, or full copyrighted
   passages in reusable memory.
 
@@ -56,24 +60,79 @@ unknown after inspection, and state the reason.
 process rule only when it names the failure or independent detection layer it
 uniquely supplies; otherwise keep it outside daily packs.
 
-## Dedicated CI Orb
+## Ship to main
 
-- The development Orb runs the focused behavioral checks and proportionate
-  local pack above. While Amp bug `amp_bug_0uiggF5jWG6i6iaB72BATT` blocks the
-  dedicated CI Orb webhook, the final merge gate is the GitHub-hosted Verify
-  workflow; do not substitute a broad local run for that authority.
-- After the Owner authorizes commit, push, and PR actions, normal GitHub PR
-  events automatically run hosted `verify` and `e2e` on GitHub's current test
-  merge. Both contexts are required and must be `SUCCESS` before merge.
-- `workflow_dispatch` remains available for explicitly authorized recovery
-  diagnostics, but a manual run is not a substitute for the required PR run.
-- The dedicated CI Orb and its `Amp Orb Verify` / `Amp Orb Verify (fast)`
-  statuses are informational during this rollback. Do not manually start or
-  drain it, synthesize or retry webhook events, or copy an uncommitted workspace
-  snapshot into it.
-- Never dismiss a missing or failed required hosted check as unrelated, bypass
-  it, or merge around it. Diagnose and fix the failure or stop. See
-  `docs/adr/0022-amp-orb-ci-merge-authority.md` for the durable contract.
+- Until the Owner separately activates Custom Ship and updates the `main`
+  protection settings, keep using the current task-branch PR path for every
+  change. This repository contract does not authorize those shared settings
+  changes.
+- Develop in a local task branch based on the latest `origin/main`; do not make
+  task commits on local `main`. Keep each task within scope and produce one
+  independent commit that can be safely reverted.
+- Classify the complete changed-path set, and each path when investigating the
+  route, with
+  `node scripts/verify-ci.mjs --plan-json --changed-file <path>` (repeat the
+  flag for multiple paths). Treat its `risk` as the primary machine result and
+  apply the explicit high-risk overrides below.
+- `ui-micro`, `ordinary-local-feature`, `known-shape-paper-data`, and
+  `single-paper-import` are eligible for autonomous Ship after their
+  proportionate checks pass. `shared-renderer-contract` may Ship only after the
+  shared-renderer final gate above, including affected real Screen/Print/PDF
+  verification; Focused CI must also run `pnpm -C app verify:paper`.
+- `auth-persistence-migration`, `mixed-high-risk-fallback`,
+  `unknown-fallback`, and `git-diff-fallback` require a PR. So do changes to
+  `.github/workflows/`, `scripts/verify-ci.mjs`, `.agents/setup`,
+  `.agents/ship.md`, these `AGENTS.md` Ship/verification rules, paths in
+  `EQB_PERSISTENCE_AUTHORITY_PATHS` or `EQB_HOST_CONFIGURATION_PATHS`,
+  destructive migrations, authentication/authorization, user-data deletion or
+  bulk mutation, breaking public schema/API changes, changes that cannot be
+  safely reverted as one commit, and any change the agent judges clearly high
+  risk. High-risk PRs require the relevant review, `verify:all`, and E2E; never
+  push them directly to `main`.
+- Autonomous Ship is allowed only when scope stayed fixed, the commit is
+  independently revertible, all first-layer and focused user-flow checks pass,
+  no serious defect is known, the commit has been revalidated on the latest
+  `origin/main`, its risk is eligible, and Focused CI has not reported a current
+  `main` failure.
+- Immediately before Ship, run `git fetch origin`, rebase the task branch onto
+  `origin/main`, require `git status --porcelain` to be empty, then rerun
+  `pnpm -C app verify:changed -- --base-ref origin/main` and the affected
+  behavioral/user-flow checks. A rebase, conflict resolution, or newly advanced
+  `origin/main` invalidates all earlier results. Stop and ask before resolving a
+  conflict that changes behavior.
+- Push only with `git push origin HEAD:main`. If it is not a fast-forward,
+  restart from fetch/rebase and repeat every validation; never force-push
+  `main`.
+- After Ship, report the exact 40-hex `main` SHA and parent, machine risk,
+  changed files, one-paragraph summary, and every command as `PASS` or `SKIP`
+  with the limitation. Hand that exact SHA to Focused CI and keep the
+  development thread available until it replies.
+
+## Focused CI
+
+- Focused CI is a second verification layer. It validates and reports only: it
+  must not edit tracked files, commit, push, revert, open a PR, write GitHub
+  status, access Secrets, or deploy.
+- Verify the handed-off SHA only after confirming it is on `origin/main`, in a
+  fresh clean detached worktree. Compute risk independently and run changed
+  verification with `--base-ref` set to the last verified ancestor, or the
+  handed-off parent when no such ancestor exists; never let checkout shape
+  collapse the diff to `no-changes`.
+- A SHA awaiting Focused CI may not be deployed. Independent development may
+  continue, but a task that depends on that SHA may not Ship before it passes.
+- On Focused CI failure, pause every subsequent Ship, report decisive evidence
+  and the first bad commit when identifiable, and recommend the smallest safe
+  revert. Focused CI only recommends; it never reverts. A revert requires Owner
+  authorization and follows the same Ship process.
+- A Focused CI pass is not deployment authority. The deployment machine gate
+  remains successful, non-manual hosted `verify` and `e2e` from the
+  `github-actions` App on the exact current `main` SHA; `workflow_dispatch`
+  diagnostics cannot satisfy it.
+- The legacy dedicated-CI Sentinel/Discovery and Action-wake paths remain
+  dormant. Do not start or drain them, reload their thread/plugin, synthesize or
+  retry wake/webhook events, or copy an uncommitted workspace snapshot into
+  them. See ADR-0024 for the active coordination contract and ADR-0022 for the
+  retained historical CI design.
 
 ## Dedicated Deployment Orb
 
@@ -83,10 +142,11 @@ uniquely supplies; otherwise keep it outside daily packs.
   deployment attempt; the agent resolves current `main` itself and runs
   `node scripts/amp-orb-deploy.mjs deploy --owner-said-deploy-latest`. Never ask
   the Owner to copy a SHA.
-- The deploy command requires exact-main successful authoritative `verify` and
-  `e2e`, then sends only that SHA through pinned SSH to the root-owned fixed
-  host controller. Never stream candidate deployment code, bypass the forced
-  command, or use the legacy in-place deploy after cutover.
+- The deploy command requires exact-main successful non-manual hosted `verify`
+  and `e2e` from the `github-actions` App, then sends only that SHA through
+  pinned SSH to the root-owned fixed host controller. Never stream candidate
+  deployment code, bypass the forced command, or use the legacy in-place deploy
+  after cutover.
 - Website deployment never authorizes migration, Review/paper promotion,
   database or R2 mutation, production configuration changes, or controller
   upgrades. Each needs its own explicit current Owner authorization.
