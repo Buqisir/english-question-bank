@@ -48,7 +48,7 @@ function hash(value) {
   return crypto.createHash('sha256').update(value).digest('hex')
 }
 
-function realNode(filePath, type, uid, mode, { gid = uid, nlink = null } = {}) {
+function realNode(filePath, type, uid, gid, mode, { nlink = null } = {}) {
   try {
     const metadata = fs.lstatSync(filePath)
     return !metadata.isSymbolicLink()
@@ -222,6 +222,7 @@ export function inspectLegacyBaselineState({
   expectedChildDigest,
   expectedChildFileCount,
   rootUid,
+  rootGid,
   sourceUid,
   sourceGid,
 } = {}) {
@@ -231,7 +232,7 @@ export function inspectLegacyBaselineState({
     || !DIGEST.test(expectedChildDigest || '')
     || !Number.isSafeInteger(expectedChildFileCount)
     || expectedChildFileCount < 1
-    || ![rootUid, sourceUid, sourceGid].every(Number.isSafeInteger)
+    || ![rootUid, rootGid, sourceUid, sourceGid].every(Number.isSafeInteger)
   ) throw new Error('legacy baseline inspector inputs are invalid')
 
   const layoutPaths = ['current', 'releases', 'shared', 'deployments']
@@ -248,14 +249,14 @@ export function inspectLegacyBaselineState({
   if (!pathEntryExists(defaultKey) && !pathEntryExists(rsaKey)) {
     defaultIdentity = 'missing'
   } else if (
-    realNode(sshDirectory, 'directory', sourceUid, 0o700, { gid: sourceGid })
-    && realNode(defaultKey, 'file', sourceUid, 0o600, { gid: sourceGid, nlink: 1 })
+    realNode(sshDirectory, 'directory', sourceUid, sourceGid, 0o700)
+    && realNode(defaultKey, 'file', sourceUid, sourceGid, 0o600, { nlink: 1 })
     && !pathEntryExists(rsaKey)
   ) {
     defaultIdentity = 'ok'
   }
 
-  let evidenceInvalid = !realNode(backupRoot, 'directory', rootUid, 0o700)
+  let evidenceInvalid = !realNode(backupRoot, 'directory', rootUid, rootGid, 0o700)
   const successes = []
   let baselineFailedReceipts = 0
   if (!evidenceInvalid) {
@@ -265,13 +266,13 @@ export function inspectLegacyBaselineState({
       if (
         !entry.isDirectory()
         || entry.isSymbolicLink()
-        || !realNode(directory, 'directory', rootUid, 0o700)
+        || !realNode(directory, 'directory', rootUid, rootGid, 0o700)
       ) {
         evidenceInvalid = true
         continue
       }
       const receiptPath = path.join(directory, 'receipt.json')
-      if (!realNode(receiptPath, 'file', rootUid, 0o600, { nlink: 1 })) {
+      if (!realNode(receiptPath, 'file', rootUid, rootGid, 0o600, { nlink: 1 })) {
         evidenceInvalid = true
         continue
       }
@@ -298,8 +299,8 @@ export function inspectLegacyBaselineState({
       const quarantine = path.join(successes[0], 'quarantine')
       const wrapper = path.join(quarantine, 'releases')
       if (
-        !realNode(quarantine, 'directory', rootUid, 0o700)
-        || !realNode(wrapper, 'directory', rootUid, 0o755)
+        !realNode(quarantine, 'directory', rootUid, rootGid, 0o700)
+        || !realNode(wrapper, 'directory', rootUid, rootGid, 0o755)
         || fs.readdirSync(quarantine).join('\n') !== 'releases'
       ) throw new Error('metadata')
       quarantineChildren = fs.readdirSync(wrapper).length
@@ -365,6 +366,7 @@ function main() {
     expectedChildDigest,
     expectedChildFileCount: requiredInteger(expectedChildFileCount, 'child file count'),
     rootUid: process.getuid(),
+    rootGid: process.getgid(),
     sourceUid: identity('-u'),
     sourceGid: identity('-g'),
   })

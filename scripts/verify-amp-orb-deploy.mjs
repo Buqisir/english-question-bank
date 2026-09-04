@@ -1229,6 +1229,7 @@ for (const [label, output] of [
 
 function legacyBaselineStateFixture({ withSuccess = true, withFailure = false } = {}) {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'eqb-legacy-baseline-state-'))
+  const fixtureRootIdentity = statSync(fixtureRoot)
   const productionRoot = path.join(fixtureRoot, 'opt', 'eqb')
   const repo = path.join(productionRoot, 'english-question-bank')
   const backupRoot = path.join(fixtureRoot, 'backups')
@@ -1289,9 +1290,10 @@ function legacyBaselineStateFixture({ withSuccess = true, withFailure = false } 
     expectedHead: newSha,
     expectedChildDigest,
     expectedChildFileCount,
-    rootUid: process.getuid(),
-    sourceUid: process.getuid(),
-    sourceGid: process.getgid(),
+    rootUid: fixtureRootIdentity.uid,
+    rootGid: fixtureRootIdentity.gid,
+    sourceUid: fixtureRootIdentity.uid,
+    sourceGid: fixtureRootIdentity.gid,
   })
   return {
     fixtureRoot,
@@ -2834,10 +2836,12 @@ function controllerFixture({
     mutateDatabasesOnEnsure,
     trafficOpened: true,
   }
+  const controllerIdentity = statSync(root)
   const config = {
     root,
     source,
-    controllerUid: statSync(root).uid,
+    controllerUid: controllerIdentity.uid,
+    controllerGid: controllerIdentity.gid,
     minimumFreeBytes: 0,
     sourceUser: 'fixture-source',
     runtimeUser: 'fixture-runtime',
@@ -4318,7 +4322,21 @@ assert(
 assert(controllerWrapper.includes('/usr/bin/env -i'), 'installed wrapper clears caller-controlled environment')
 assert(!controllerWrapper.includes('/opt/eqb/current'), 'installed wrapper never executes candidate release code')
 assert(controllerSource.includes("buildUser: 'eqb-build'"), 'candidate lifecycle runs as a separate unprivileged build user')
-assert(controllerSource.includes('controllerUid: 0'), 'production release control remains root-owned')
+assert(
+  controllerSource.includes('controllerUid: 0')
+    && controllerSource.includes('controllerGid: 0'),
+  'production release control remains root:root-owned',
+)
+assert(
+  controllerSource.includes('chownSync(snapshot, config.controllerUid, config.controllerGid)')
+    && controllerSource.includes('chownSync(temporary, config.controllerUid, config.controllerGid)'),
+  'controller-owned snapshots and atomic installs preserve independent UID/GID identity',
+)
+assert(
+  baselineStateSource.includes('rootGid: process.getgid()')
+    && !baselineStateSource.includes('gid = uid'),
+  'legacy baseline ownership receives root UID/GID independently',
+)
 assert(controllerSource.includes('minimumFreeBytes: 5 * 1024 * 1024 * 1024'), 'controller preserves staging headroom on the production disk')
 assert(!controllerSource.includes('eval('), 'fixed controller contains no dynamic shell evaluation')
 assert(
