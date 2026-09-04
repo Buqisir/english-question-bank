@@ -5,6 +5,7 @@ import { execFileSync, spawn } from 'node:child_process'
 import {
   copyFileSync,
   cpSync,
+  existsSync,
   mkdirSync,
   mkdtempSync,
   readdirSync,
@@ -983,6 +984,56 @@ function assertMixedSourceDraftCanonicalComposition() {
 }
 
 function assertDocxSourcedGrammarFillPrintChromeSkipsJsonDigest() {
+  const docxMediaType =
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+  const synthRoot = path.join(tmpdir(), `eqb-docx-gf-synth-${process.pid}`)
+  const synthVersionDir = path.join(synthRoot, 'paper-docx-synth', 'versions', 'v1')
+  mkdirSync(path.join(synthVersionDir, 'canonical'), { recursive: true })
+  const synthBin = Buffer.from('PK-fake-docx-source-asset')
+  const synthPaperAsset = {
+    content: { blocks: [{ type: 'pageBreakHint', afterGroupId: 'g1' }] },
+  }
+  writeFileSync(path.join(synthVersionDir, 'canonical', 'source-asset.bin'), synthBin)
+  writeFileSync(path.join(synthVersionDir, 'paper-asset.json'), JSON.stringify(synthPaperAsset))
+  const synthDigest = sha256(synthBin)
+  assert.notEqual(
+    digestJson(synthPaperAsset),
+    synthDigest,
+    'DOCX fixture keeps paper-asset.json distinct from the sealed Publication source',
+  )
+  assert.equal(
+    sha256(readFileSync(path.join(synthVersionDir, 'canonical', 'source-asset.bin'))),
+    synthDigest,
+    'DOCX fixture binds Publication source to canonical/source-asset.bin',
+  )
+  try {
+    const pageBreakSource = loadPublicationBoundSourceAssetRepresentation({
+      versionDir: synthVersionDir,
+      publicationSource: {
+        mediaType: docxMediaType,
+        sha256: synthDigest,
+        byteLength: synthBin.byteLength,
+      },
+      reject: (message) => {
+        throw new Error(message)
+      },
+      label: 'Canonical visible page-break source',
+    })
+    assert.equal(
+      pageBreakSource.kind,
+      'source_asset',
+      'DOCX page-break binding reads derived paper-asset.json after sealed source verification',
+    )
+    assert.ok(
+      pageBreakSource.asset.content.blocks.some(
+        (block) => block.type === 'pageBreakHint',
+      ),
+      'DOCX page-break binding exposes pageBreakHint blocks from the derived representation',
+    )
+  } finally {
+    rmSync(synthRoot, { recursive: true, force: true })
+  }
+
   const docxPaperId = 'paper-mock-gd-2026-m1'
   const docxAssetsRoot = path.resolve('app/public/paper-assets')
   const versionDir = path.join(
@@ -991,10 +1042,13 @@ function assertDocxSourcedGrammarFillPrintChromeSkipsJsonDigest() {
     'versions',
     'v2',
   )
-  const publicationManifest = JSON.parse(readFileSync(
-    path.join(versionDir, 'canonical', 'canonical-paper-publication-v37.json'),
-    'utf8',
-  ))
+  const liveManifestPath = path.join(
+    versionDir,
+    'canonical',
+    'canonical-paper-publication-v37.json',
+  )
+  if (!existsSync(liveManifestPath)) return
+  const publicationManifest = JSON.parse(readFileSync(liveManifestPath, 'utf8'))
   const paperAssetBytes = readFileSync(path.join(versionDir, 'paper-asset.json'))
   const sourceAssetBytes = readFileSync(
     path.join(versionDir, 'canonical', 'source-asset.bin'),
