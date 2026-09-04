@@ -170,15 +170,16 @@ exact inspector is streamed through the separately authorized root/TAT path; it
 acquires the production lock read-only and emits one fixed, target- and
 payload-bound readiness marker without reading databases or Secrets or writing
 host files. The repository-owned TAT adapter signs direct API v2020-10-28
-requests, dispatches one unsaved root shell command to one exact configured CVM,
-then polls the returned invocation and task IDs for an untruncated output and a
-consistent remote exit code. It accepts credentials only from the standard
-Tencent environment names plus fixed region and instance configuration, never
-uses an ambient profile or configurable endpoint, and never retries an
-ambiguous `RunCommand` response because that API has no idempotency token. The
-dedicated CAM credential is a temporary root break-glass capability and must be
-removed from the Deployment project after this one-time installation; routine
-deployment never uses it. The installer then acquires that same lock before any staging,
+requests, dispatches one unsaved root shell command to one exact configured CVM
+or Lighthouse instance, then polls the returned invocation and task IDs for an
+untruncated output and a consistent remote exit code. It accepts credentials
+only from the standard Tencent environment names plus fixed region and instance
+configuration, never uses an ambient profile or configurable endpoint, and
+never retries an ambiguous `RunCommand` response because that API has no
+idempotency token. The dedicated CAM credential is a temporary root break-glass
+capability and must be removed from the Deployment project after this one-time
+installation; routine deployment never uses it. The installer then acquires
+that same lock before any staging,
 fetches and binds remote `main`, verifies every archive member against that
 commit, and reruns the trusted staged inspector on its inherited lock descriptor
 immediately before backup or installation. The inspector accepts only the

@@ -651,14 +651,23 @@ const tencentTatConfiguration = readTencentTatConfiguration({
   TENCENTCLOUD_SECRET_ID: 'AKID-test-id',
   TENCENTCLOUD_SECRET_KEY: 'test-secret-key',
   TENCENTCLOUD_SESSION_TOKEN: 'test-session-token',
-  TENCENTCLOUD_REGION: 'ap-guangzhou',
-  QUESTION_BANK_TENCENT_TAT_INSTANCE_ID: 'ins-12345678',
+  TENCENTCLOUD_REGION: 'ap-hongkong',
+  QUESTION_BANK_TENCENT_TAT_INSTANCE_ID: 'lhins-12345678',
 })
 assert(
   tencentTatTargetDigest(tencentTatConfiguration)
-    === createHash('sha256').update('ap-guangzhou\0ins-12345678').digest('hex')
-    && !tencentTatTargetDigest(tencentTatConfiguration).includes('ins-12345678'),
-  'Tencent TAT configuration binds one opaque exact region and CVM target',
+    === createHash('sha256').update('ap-hongkong\0lhins-12345678').digest('hex')
+    && !tencentTatTargetDigest(tencentTatConfiguration).includes('lhins-12345678'),
+  'Tencent TAT configuration binds one opaque exact region and Lighthouse target',
+)
+assert(
+  readTencentTatConfiguration({
+    TENCENTCLOUD_SECRET_ID: 'id',
+    TENCENTCLOUD_SECRET_KEY: 'key',
+    TENCENTCLOUD_REGION: 'ap-guangzhou',
+    QUESTION_BANK_TENCENT_TAT_INSTANCE_ID: 'ins-12345678',
+  }).instanceId === 'ins-12345678',
+  'Tencent TAT configuration retains strict CVM target support',
 )
 for (const [label, environment] of [
   ['missing credentials', {}],
@@ -672,12 +681,12 @@ for (const [label, environment] of [
     },
   ],
   [
-    'non-CVM target',
+    'unsupported instance target',
     {
       TENCENTCLOUD_SECRET_ID: 'id',
       TENCENTCLOUD_SECRET_KEY: 'key',
       TENCENTCLOUD_REGION: 'ap-guangzhou',
-      QUESTION_BANK_TENCENT_TAT_INSTANCE_ID: 'lhins-12345678',
+      QUESTION_BANK_TENCENT_TAT_INSTANCE_ID: 'cdb-12345678',
     },
   ],
 ]) {
@@ -4902,7 +4911,7 @@ assert(
     && deploymentRunbook.includes('TENCENTCLOUD_SESSION_TOKEN')
     && deploymentRunbook.includes('TENCENTCLOUD_REGION')
     && deploymentRunbook.includes('QUESTION_BANK_TENCENT_TAT_INSTANCE_ID')
-    && deploymentRunbook.includes('RunCommand` has no idempotency token')
+    && /RunCommand` has no idempotency\s+token/u.test(deploymentRunbook)
     && deploymentRunbook.includes('--owner-said-maintenance-install-readiness'),
   'runbook names the complete pinned TAT target, credential, authorization, and no-retry contract',
 )
