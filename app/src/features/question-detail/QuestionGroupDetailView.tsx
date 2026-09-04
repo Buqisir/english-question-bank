@@ -27,6 +27,7 @@
  */
 import { useEffect, useState, type CSSProperties, type MouseEvent, type ReactNode } from 'react'
 import {
+  ArrowLeft,
   BookOpen,
   Check,
   ChevronDown,
@@ -494,7 +495,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
     return (
       <div className="detail-view">
         <button className="back-button" type="button" onClick={onBack}>
-          ← 返回找题
+          <ArrowLeft size={14} aria-hidden="true" /> 返回找题
         </button>
         {detailStatus === 'loading' && <p className="detail-message">正在读取题组详情...</p>}
         {detailStatus === 'error' && <p className="detail-message error">{detailError}</p>}
@@ -518,7 +519,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
   return (
     <div className="detail-view">
       <button className="back-button" type="button" onClick={onBack}>
-        ← 返回找题
+        <ArrowLeft size={14} aria-hidden="true" /> 返回找题
       </button>
 
       <section className="peek-root" aria-label="题组速览">
