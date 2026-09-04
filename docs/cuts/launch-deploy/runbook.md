@@ -435,9 +435,12 @@ service files. A root-owned, single-link legacy deployment lock may be `0600`
 or `0644`; while holding it,
 the installer normalizes it to `0600`, restores the prior mode on handled
 rollback, and installs a launcher whose `umask 077` keeps future lock creation
-private. It then checks Node/systemd/Caddy syntax and a real local invocation
-through the non-root forced route. It keeps the old files and success receipt in
-one root-private backup directory. A handled failure before file replacement
+private. It then checks Node/systemd/Caddy syntax and, while retaining that
+lock, invokes the active versioned module's read-only preflight directly. It
+does not re-enter the lock-taking forced route from inside the installer; the
+normal Deployment Orb preflight after the success receipt and lock release is
+the full-route proof. It keeps the old files and success receipt in one
+root-private backup directory. A handled failure before file replacement
 removes the newly created host-configuration layout; after replacement it
 attempts every restore/reload/health step and emits an explicit critical result
 if rollback is incomplete. It neither changes the Deployment Secret nor touches

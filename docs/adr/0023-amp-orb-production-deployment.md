@@ -187,7 +187,11 @@ root-owned, single-link legacy `0600` or `0644` lock; the installer normalizes
 it to `0600` while held (restoring its prior mode on rollback), and the new
 stable launcher fixes `umask 077` for future creation. It checks the non-root
 transport account's exact sudo command scope, preserves a root-private backup
-and success receipt, and rolls back on a handled failure. Before replacing
+and success receipt, and rolls back on a handled failure. While retaining the
+global lock, it validates the active versioned module through its read-only
+preflight directly; it never re-enters the lock-taking forced route from inside
+the installer transaction. The separately authorized post-install preflight
+proves that full route after the installer releases the lock. Before replacing
 installed files, it durably publishes the complete versioned layout; a handled
 failure before replacement removes that newly created layout. Rollback attempts
 every restore step and reports an explicit critical result when any restore,

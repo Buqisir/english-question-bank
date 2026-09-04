@@ -4398,8 +4398,181 @@ assert(
     && maintenanceInstallerSource.includes('SSH_ORIGINAL_COMMAND=preflight')
     && maintenanceInstallerSource.includes('EQB_MAINTENANCE_CONTROLLER_INSTALL')
     && maintenanceInstallerSource.includes('strict_health'),
-  'one-time root installer binds exact typed target bytes and proves the full forced route before success',
+  'one-time root installer binds exact typed target bytes and validates the installed controller before success',
 )
+const installerPostActivationSource = maintenanceInstallerSource.slice(
+  maintenanceInstallerSource.indexOf('installed_preflight='),
+  maintenanceInstallerSource.indexOf('\n\nreceipt=', maintenanceInstallerSource.indexOf('installed_preflight=')),
+)
+assert(
+  installerPostActivationSource.includes('/usr/bin/node --no-addons')
+    && installerPostActivationSource.includes('"$ACTIVE/deploy/eqb-deploy-controller.mjs"')
+    && !installerPostActivationSource.includes('$TRANSPORT_WRAPPER')
+    && !installerPostActivationSource.includes('/usr/bin/sudo'),
+  'installer lock owner runs active-module preflight without re-entering the lock-taking forced route',
+)
+
+const installerLockFixtureRoot = mkdtempSync(path.join(tmpdir(), 'eqb-maintenance-installer-lock-'))
+try {
+  const lockPath = path.join(installerLockFixtureRoot, 'deploy.lock')
+  const fakeSystemdRun = path.join(installerLockFixtureRoot, 'systemd-run')
+  const fakeJournalctl = path.join(installerLockFixtureRoot, 'journalctl')
+  const fakeControllerModule = path.join(installerLockFixtureRoot, 'controller.mjs')
+  const fixtureController = path.join(installerLockFixtureRoot, 'eqb-deploy-controller-v1')
+  const fixtureTransport = path.join(installerLockFixtureRoot, 'eqb-deploy-transport-v1')
+  const linkedControllerRoot = path.join(installerLockFixtureRoot, 'current')
+  const preflightPayload = {
+    schemaVersion: 'eqb-deployment-preflight-v2',
+    controllerVersion: 'eqb-deploy-controller-v1',
+    productionSha: oldSha,
+    eqb: 'active',
+    caddy: 'active',
+    layout: 'release',
+  }
+  const preflightOutput = `${JSON.stringify(preflightPayload)}\n`
+
+  symlinkSync(path.join(ROOT, 'deploy'), linkedControllerRoot)
+  const linkedEntrypoint = spawnSync(
+    process.execPath,
+    [path.join(linkedControllerRoot, 'eqb-deploy-controller.mjs')],
+    {
+      encoding: 'utf8',
+      env: { ...process.env, SSH_ORIGINAL_COMMAND: 'not-allowed' },
+    },
+  )
+  assert(
+    linkedEntrypoint.status === 1
+      && linkedEntrypoint.stdout === ''
+      && linkedEntrypoint.stderr.startsWith('EQB deployment controller failed closed: '),
+    'versioned controller enters its fail-closed entrypoint when invoked through the active symlink',
+  )
+
+  writeFileSync(lockPath, '', { mode: 0o600 })
+  writeFileSync(fakeSystemdRun, `#!/bin/sh
+set -eu
+while [ "$#" -gt 0 ] && [ "$1" != -- ]; do shift; done
+[ "\${1-}" = -- ] || exit 64
+shift
+exec "$@"
+`, { mode: 0o700 })
+  writeFileSync(fakeJournalctl, '#!/bin/sh\nexit 0\n', { mode: 0o700 })
+  writeFileSync(
+    fakeControllerModule,
+    `process.stdout.write(${JSON.stringify(preflightOutput)})\n`,
+    { mode: 0o700 },
+  )
+  writeFileSync(fixtureController, controllerWrapper
+    .replaceAll('/usr/bin/systemd-run', fakeSystemdRun)
+    .replaceAll('/usr/bin/journalctl', fakeJournalctl)
+    .replaceAll('/usr/bin/node', process.execPath)
+    .replaceAll('/opt/eqb/deployments/deploy.lock', lockPath)
+    .replaceAll(
+      '/opt/eqb/deployments/host-configuration/current/deploy/eqb-deploy-controller.mjs',
+      fakeControllerModule,
+    )
+    .replaceAll(
+      '/opt/eqb/deployments/host-configuration-update/active.json',
+      path.join(installerLockFixtureRoot, 'inactive-host-update.json'),
+    )
+    .replaceAll(
+      '/opt/eqb/deployments/host-configuration-update/recovery-controller.mjs',
+      path.join(installerLockFixtureRoot, 'unused-recovery-controller.mjs'),
+    ), { mode: 0o700 })
+  writeFileSync(fixtureTransport, transportWrapper.replaceAll(
+    '/usr/bin/sudo -n /usr/local/libexec/eqb-deploy-controller-v1',
+    fixtureController,
+  ), { mode: 0o700 })
+
+  const runWithInstallerLock = (command) => spawnSync('/bin/bash', [
+    '-c',
+    'exec 9< "$1"\n'
+      + '/usr/bin/flock --exclusive --nonblock --conflict-exit-code 75 9 || exit $?\n'
+      + 'shift\n'
+      + 'exec "$@"',
+    'eqb-maintenance-installer-lock',
+    lockPath,
+    ...command,
+  ], { encoding: 'utf8' })
+  const legacyReentry = runWithInstallerLock([
+    '/usr/bin/env', '-i',
+    'SSH_ORIGINAL_COMMAND=preflight',
+    'PATH=/usr/local/bin:/usr/bin:/bin',
+    fixtureTransport,
+  ])
+  const lockOwnerPreflight = runWithInstallerLock([
+    '/usr/bin/env', '-i',
+    'SSH_ORIGINAL_COMMAND=preflight',
+    'PATH=/usr/local/bin:/usr/bin:/bin',
+    process.execPath, '--no-addons', fakeControllerModule,
+  ])
+  assert(
+    legacyReentry.status === 75
+      && lockOwnerPreflight.status === 0
+      && lockOwnerPreflight.stdout === preflightOutput,
+    'legacy installer forced-route re-entry self-locks with 75 while lock-owner preflight completes',
+  )
+  const unlockedForcedPreflight = spawnSync('/usr/bin/env', [
+    '-i',
+    'SSH_ORIGINAL_COMMAND=preflight',
+    'PATH=/usr/local/bin:/usr/bin:/bin',
+    fixtureTransport,
+  ], { encoding: 'utf8' })
+  assert(
+    unlockedForcedPreflight.status === 0 && unlockedForcedPreflight.stdout === preflightOutput,
+    'forced transport and controller route enters preflight after the installer releases the lock',
+  )
+
+  const enteredPath = path.join(installerLockFixtureRoot, 'controller-entered')
+  const releasePath = path.join(installerLockFixtureRoot, 'release-controller')
+  writeFileSync(fakeControllerModule, `
+import { existsSync, writeFileSync } from 'node:fs'
+const state = new Int32Array(new SharedArrayBuffer(4))
+writeFileSync(${JSON.stringify(enteredPath)}, 'entered\\n')
+while (!existsSync(${JSON.stringify(releasePath)})) Atomics.wait(state, 0, 0, 10)
+process.stdout.write(${JSON.stringify(preflightOutput)})
+`)
+  const independentCallers = spawnSync('/bin/bash', [
+    '-c',
+    `set -u
+transport=$1
+entered=$2
+release=$3
+fixture=$4
+/usr/bin/env -i SSH_ORIGINAL_COMMAND=preflight PATH=/usr/local/bin:/usr/bin:/bin \
+  "$transport" >"$fixture/first.stdout" 2>"$fixture/first.stderr" &
+first_pid=$!
+for ((attempt=0; attempt<500; attempt+=1)); do
+  [[ -e $entered ]] && break
+  /bin/sleep 0.01
+done
+if [[ ! -e $entered ]]; then
+  : > "$release"
+  wait "$first_pid"
+  exit 98
+fi
+/usr/bin/timeout --signal=TERM 2s /usr/bin/env -i \
+  SSH_ORIGINAL_COMMAND=preflight PATH=/usr/local/bin:/usr/bin:/bin \
+  "$transport" >"$fixture/second.stdout" 2>"$fixture/second.stderr"
+second_status=$?
+: > "$release"
+wait "$first_pid"
+first_status=$?
+printf '%s %s\\n' "$first_status" "$second_status"
+`,
+    'eqb-independent-controller-callers',
+    fixtureTransport,
+    enteredPath,
+    releasePath,
+    installerLockFixtureRoot,
+  ], { encoding: 'utf8' })
+  assert(
+    independentCallers.status === 0 && independentCallers.stdout.trim() === '0 75',
+    'two independent forced-route callers remain serialized by the one non-blocking global lock',
+  )
+} finally {
+  rmSync(installerLockFixtureRoot, { recursive: true, force: true })
+}
+
 const installerLockIndex = maintenanceInstallerSource.indexOf(
   '/usr/bin/flock --exclusive --nonblock --conflict-exit-code 75 9',
 )
