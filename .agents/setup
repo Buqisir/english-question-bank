@@ -110,7 +110,9 @@ done
 step "activating pnpm 10.28.1" corepack enable
 step "preparing pnpm 10.28.1" corepack prepare pnpm@10.28.1 --activate
 step "installing app dependencies" pnpm -C app install --frozen-lockfile
-step "installing server dependencies" npm ci --prefix server
+# The orb's npm audit endpoint can take five minutes to time out. Dependency
+# integrity still comes from npm ci and the committed lockfile.
+step "installing server dependencies" npm ci --prefix server --no-audit --no-fund
 
 listening_asr_home="$HOME/.local/share/eqbank-listening-asr"
 listening_asr_python="$listening_asr_home/bin/python"
