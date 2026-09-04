@@ -69,18 +69,29 @@ until the owner has selected the replacements.
 `.github/workflows/verify.yml` supplies hosted `verify` and `e2e` for high-risk
 PRs and post-Ship `main`. High-risk PRs require both before merge. The exact
 `main` run remains the ADR-0023 Deployment gate and an independent full-suite
-backstop; Focused CI does not replace it. Manual-dispatch job names remain
-diagnostic only. The dedicated CI Orb's Sentinel/Discovery implementation and
-Amp status contexts remain dormant under ADR-0024. Action-wake phase 2 is
-paused: no wake workflow, plugin/thread reload, or `AMP_API_KEY` is enabled.
+backstop; Focused CI does not replace it. The Hosted reader pins App ID `15368`,
+workflow ID `282244920`, workflow path, push event, attempt 1, exact SHA, and a
+common suite/run. Manual-dispatch and rerun jobs remain diagnostic only. The
+dedicated CI Orb's Sentinel/Discovery and Action-wake paths remain dormant under
+ADR-0024. No wake workflow, manual drain, plugin/thread reload, or `AMP_API_KEY`
+is enabled.
+
+ADR-0025 adds a repo-only GitHub App Check writer and Deployment reader, both
+disabled by default. The automatic controller is the only dedicated-CI machine
+executor; the Focused agent turn reports/diagnoses its receipt and never runs a
+second Full suite or writes GitHub state. The aggregate Check is exactly `Amp
+Orb Verify`; Fast remains a different informational Commit Status. Deployment
+defaults to `hosted-only`; `shadow`, `dual`, `amp+hosted-e2e`, and `amp` require
+separate configuration and Owner-authorized activation. No Ed25519 signer,
+signed output envelope, expiry, policy digest, or cached re-signing exists.
 
 ## Stable CI entrypoint
 
 | Script | Scope | Runs in CI? |
 | --- | --- | --- |
 | `verify-ci.mjs` | Selects changed/Paper/all packs, runs bounded resource-aware parallel jobs with registry-ordered logs, and reports PASS/SKIP/FAIL without hiding later failures | yes |
-| `verify-amp-orb-ci.mjs` | Rejects non-exact wake sentinels, uncancelled wake turns, HMAC-coupled Action wake, non-authoritative or forked GitHub discovery, nondeterministic delivery IDs, GitHub CI webhook/HMAC allowlist drift, payload-to-prompt injection, secret-bearing candidate environments, stale merge parents, non-parallel Fast/Full lanes, duplicate execution, unrecoverable run/status crash windows, non-private receipts, or commit-status scope drift without registering a webhook or calling GitHub | yes |
-| `verify-amp-orb-deploy.mjs` | Proves the separate Deployment Orb contract without production access: automatic exact-main resolution and same-run hosted CI authority; consumed S0 baseline and evidence-bound S1-to-S2 bootstrap; pinned private SSH and forced-controller rotation; reviewed-persistence exact-diff binding, offline three-DB snapshots, idempotency checks, pre-traffic rollback and post-traffic no-replay; versioned controller/systemd/Caddy update with private rollback; strict stable-launcher grammar, standalone read-only root/TAT install inspection, official Tencent signing, one-dispatch exact invocation/task polling with complete output, and the lock-adjacent six-file installer contract; marker-authenticated receipts; ordinary atomic release switch, shared-data isolation, and healthy rollback; all real mutation commands remain closed | yes |
+| `verify-amp-orb-ci.mjs` | Rejects non-exact wake sentinels, uncancelled wake turns, HMAC-coupled Action wake, non-authoritative or forked discovery, nondeterministic delivery IDs, webhook/HMAC allowlist drift, payload-to-prompt injection, secret-bearing candidate environments, stale merge parents, non-parallel Fast/Full lanes, duplicate execution, non-private receipts, false aggregate success, App Check create/PATCH ambiguity, token-refresh reruns, authoritative diagnostic runs, or status/Check recovery drift without registering a webhook or calling GitHub | yes |
+| `verify-amp-orb-deploy.mjs` | Proves the separate Deployment Orb contract without production access: automatic clean exact-main resolution; Hosted App/workflow/run identity; paged latest repo-only App Check selection and fail-closed authority modes; pre-external-action revalidation; consumed S0 baseline and evidence-bound S1-to-S2 bootstrap; pinned private SSH and forced-controller rotation; reviewed-persistence exact-diff binding, offline three-DB snapshots, idempotency checks, pre-traffic rollback and post-traffic no-replay; versioned controller/systemd/Caddy update with private rollback; strict stable-launcher grammar, standalone read-only root/TAT install inspection, official Tencent signing, one-dispatch exact invocation/task polling with complete output, and the lock-adjacent six-file installer contract; marker-authenticated receipts; ordinary atomic release switch, shared-data isolation, and healthy rollback; all real mutation commands remain closed | yes |
 | `verify-verification-command-runner.mjs` | Prevents completed or concurrently interrupted verifiers from leaving their own Vite/Chromium/test descendants alive, and bounds oversized single-line diagnostics while retaining their head, tail, and digest | yes |
 | `verify-verification-scheduler.mjs` | Proves bounded concurrency, render/port resource locks, exclusive barriers, ordered result flushing, collect-all statuses, abort stop-dispatch, and jobs=1 serial fallback | yes |
 | `verify-vocabulary-closed-loop.mjs` | Validates the 1600-entry Wanwei source/content/unique Koboyo visual, formal American and Owner-approved Cori British audio contracts, plus isolated progress, frozen-set, share/revoke, and temporary-scope persistence | yes |

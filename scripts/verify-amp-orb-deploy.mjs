@@ -22,13 +22,18 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 
 import {
+  AMP_ORB_DEPLOY_AMP_CHECK_NAME,
+  AMP_ORB_DEPLOY_CHECK_APP_ID,
   AMP_ORB_DEPLOY_RECEIPT_SCHEMA_VERSION,
+  AMP_ORB_DEPLOY_WORKFLOW_ID,
+  AMP_ORB_DEPLOY_WORKFLOW_PATH,
   EQB_HOST_CONFIGURATION_PATHS,
   EQB_PERSISTENCE_AUTHORITY_PATHS,
   EQB_STABLE_LAUNCHER_PATHS,
   abandonReleaseBootstrapRecovery,
   activatePreparedRelease,
   assertDeploymentCandidateStillCurrent,
+  assertAmpOrbDeploymentCheck,
   assertAuthoritativeDeploymentChecks,
   bootstrapPayloadStageInput,
   bootstrapReleaseLayout,
@@ -42,6 +47,7 @@ import {
   deployReviewedPersistenceLatest,
   deployLatestRelease,
   deploymentChangedPathDigest,
+  deploymentAuthorityFromEnvironment,
   deploymentGitHubApiArgs,
   deploymentLockInvocation,
   deploymentSSHInvocation,
@@ -62,6 +68,7 @@ import {
   parseReleaseBootstrapFailure,
   readAbandonedReleaseBootstrapRecovery,
   readCompletedReleaseBootstrapRecovery,
+  readDeploymentCheckRuns,
   readReleaseBootstrapRecovery,
   removeReleaseBootstrapRecovery,
   requireDeployLatestAuthorization,
@@ -75,6 +82,7 @@ import {
   resumeReleaseLayoutBootstrap,
   resolveLatestDeploymentCandidate,
   updateLatestHostConfiguration,
+  verifyDeploymentAuthority,
 } from './lib/ampOrbDeploy.mjs'
 import {
   buildMaintenanceReadinessTatCommand,
@@ -118,6 +126,7 @@ function checkRun(name, sha, {
   status = 'completed',
   conclusion = 'success',
   app = 'github-actions',
+  appId = AMP_ORB_DEPLOY_CHECK_APP_ID,
   suiteId = 100,
   detailsUrl = `https://github.com/Buqisir/english-question-bank/actions/runs/200/job/${id}`,
 } = {}) {
@@ -128,9 +137,73 @@ function checkRun(name, sha, {
     status,
     conclusion,
     details_url: detailsUrl,
-    app: { slug: app },
+    app: { id: appId, slug: app },
     check_suite: { id: suiteId },
   }
+}
+
+function workflowRun(sha, overrides = {}) {
+  return {
+    id: 200,
+    workflow_id: AMP_ORB_DEPLOY_WORKFLOW_ID,
+    path: AMP_ORB_DEPLOY_WORKFLOW_PATH,
+    event: 'push',
+    status: 'completed',
+    conclusion: 'success',
+    head_sha: sha,
+    head_branch: 'main',
+    run_attempt: 1,
+    check_suite_id: 100,
+    repository: { full_name: 'Buqisir/english-question-bank' },
+    head_repository: { full_name: 'Buqisir/english-question-bank' },
+    ...overrides,
+  }
+}
+
+function appCheck(sha, {
+  id = 10,
+  appId = 4242,
+  status = 'completed',
+  conclusion = 'success',
+  externalId = `v4:${sha}:11111111-1111-4111-8111-111111111111`,
+  headSha = sha,
+} = {}) {
+  return {
+    id,
+    name: AMP_ORB_DEPLOY_AMP_CHECK_NAME,
+    head_sha: headSha,
+    status,
+    conclusion,
+    external_id: externalId,
+    app: { id: appId },
+  }
+}
+
+const hostedOnlyAuthority = deploymentAuthorityFromEnvironment({})
+const shadowAuthority = deploymentAuthorityFromEnvironment({
+  QUESTION_BANK_DEPLOY_CI_AUTHORITY_MODE: 'shadow',
+  QUESTION_BANK_DEPLOY_AMP_CHECK_APP_ID: '4242',
+})
+const dualAuthority = deploymentAuthorityFromEnvironment({
+  QUESTION_BANK_DEPLOY_CI_AUTHORITY_MODE: 'dual',
+  QUESTION_BANK_DEPLOY_AMP_CHECK_APP_ID: '4242',
+})
+const ampHostedE2eAuthority = deploymentAuthorityFromEnvironment({
+  QUESTION_BANK_DEPLOY_CI_AUTHORITY_MODE: 'amp+hosted-e2e',
+  QUESTION_BANK_DEPLOY_AMP_CHECK_APP_ID: '4242',
+})
+const ampAuthority = deploymentAuthorityFromEnvironment({
+  QUESTION_BANK_DEPLOY_CI_AUTHORITY_MODE: 'amp',
+  QUESTION_BANK_DEPLOY_AMP_CHECK_APP_ID: '4242',
+})
+
+function hostedVerification(sha, payload = checks(sha), run = workflowRun(sha)) {
+  return verifyDeploymentAuthority({
+    authority: hostedOnlyAuthority,
+    expectedSha: sha,
+    readHostedChecks: async () => payload,
+    readWorkflowRun: async () => run,
+  })
 }
 
 function checks(sha, { verify = {}, e2e = {} } = {}) {
@@ -246,44 +319,160 @@ assert(
 const candidate = await resolveLatestDeploymentCandidate({
   runGit: fakeGit(),
   readMainSha: async () => newSha,
-  readCommitChecks: async (sha) => checks(sha),
+  readDeploymentVerification: hostedVerification,
 })
 assert(candidate.sha === newSha, 'current clean main resolves automatically')
 assert(
-  candidate.verification.provider === 'github-actions'
-    && candidate.verification.checks.map(({ name }) => name).join(',') === 'verify,e2e',
+  candidate.verification.mode === 'hosted-only'
+    && candidate.verification.hosted.provider === 'github-actions'
+    && candidate.verification.hosted.appId === AMP_ORB_DEPLOY_CHECK_APP_ID
+    && candidate.verification.hosted.checks.map(({ name }) => name).join(',') === 'verify,e2e',
   'exact hosted verify and e2e success is authoritative',
 )
 assert(
   deploymentGitHubApiArgs(
-    `repos/Buqisir/english-question-bank/commits/${newSha}/check-runs?filter=latest&per_page=100`,
-  ).join(' ') === `api --hostname github.com repos/Buqisir/english-question-bank/commits/${newSha}/check-runs?filter=latest&per_page=100`,
+    `repos/Buqisir/english-question-bank/commits/${newSha}/check-runs?filter=all&per_page=100`,
+  ).join(' ') === `api --hostname github.com repos/Buqisir/english-question-bank/commits/${newSha}/check-runs?filter=all&per_page=100`,
   'GitHub API authority is pinned to github.com regardless of GH_HOST',
+)
+assert(
+  deploymentGitHubApiArgs(
+    `repos/Buqisir/english-question-bank/commits/${newSha}/check-runs?check_name=Amp%20Orb%20Verify&filter=all&per_page=100&page=2`,
+  ).join(' ').includes('check_name=Amp%20Orb%20Verify&filter=all&per_page=100&page=2'),
+  'Amp Check reader pins exact name, filter=all, page size, and pagination',
+)
+assert(
+  deploymentGitHubApiArgs(
+    `repos/Buqisir/english-question-bank/commits/${newSha}/check-runs?check_name=Amp%20Orb%20Verify&filter=all&per_page=100&page=100`,
+  ).join(' ').endsWith('page=100'),
+  'Amp Check reader allows every bounded pagination page',
+)
+assert(
+  deploymentGitHubApiArgs(
+    'repos/Buqisir/english-question-bank/actions/runs/200',
+  ).join(' ').endsWith('actions/runs/200'),
+  'hosted workflow identity uses the pinned run endpoint',
+)
+
+const pagedAmpEndpoints = []
+const pagedAmpChecks = await readDeploymentCheckRuns({
+  sha: newSha,
+  checkName: AMP_ORB_DEPLOY_AMP_CHECK_NAME,
+  async readJson(endpoint) {
+    pagedAmpEndpoints.push(endpoint)
+    return endpoint.endsWith('&page=2')
+      ? { check_runs: [appCheck(newSha, { id: 101 })] }
+      : { check_runs: Array.from({ length: 100 }, (_, index) => appCheck(newSha, {
+          id: index + 1,
+          externalId: `v4:${newSha}:old-delivery-${index}`,
+        })) }
+  },
+})
+assert(
+  pagedAmpChecks.check_runs.length === 101
+    && pagedAmpEndpoints.length === 4
+    && pagedAmpEndpoints[0].endsWith(
+      'check_name=Amp%20Orb%20Verify&filter=all&per_page=100',
+    )
+    && pagedAmpEndpoints[1].endsWith(
+      'check_name=Amp%20Orb%20Verify&filter=all&per_page=100&page=2',
+    ),
+  'Amp Check reader requires two stable complete exact-query snapshots',
+)
+
+let shiftingSnapshot = 0
+const shiftedAmpChecks = await readDeploymentCheckRuns({
+  sha: newSha,
+  checkName: AMP_ORB_DEPLOY_AMP_CHECK_NAME,
+  async readJson(endpoint) {
+    if (!endpoint.endsWith('&page=2')) shiftingSnapshot += 1
+    const untrusted = (id) => appCheck(newSha, {
+      id,
+      appId: 9999,
+      externalId: `v4:${newSha}:untrusted-${id}`,
+    })
+    if (endpoint.endsWith('&page=2')) {
+      return { check_runs: [untrusted(2), appCheck(newSha, {
+        id: 1,
+        externalId: `v4:${newSha}:old-success`,
+      })] }
+    }
+    if (shiftingSnapshot === 1) {
+      return { check_runs: Array.from({ length: 100 }, (_, index) => untrusted(101 - index)) }
+    }
+    return { check_runs: [
+      appCheck(newSha, { id: 102, status: 'in_progress', conclusion: null }),
+      ...Array.from({ length: 99 }, (_, index) => untrusted(101 - index)),
+    ] }
+  },
+})
+assert(
+  shiftingSnapshot === 3,
+  'a Check inserted mid-pagination forces a new pair of stable snapshots',
+)
+assert(
+  (() => {
+    try {
+      assertAmpOrbDeploymentCheck(shiftedAmpChecks, newSha, 4242)
+      return false
+    } catch {
+      return true
+    }
+  })(),
+  'snapshot stabilization exposes the new pending Check instead of accepting old success',
+)
+let unstableSnapshot = 0
+assert(
+  await (async () => {
+    try {
+      await readDeploymentCheckRuns({
+        sha: newSha,
+        checkName: AMP_ORB_DEPLOY_AMP_CHECK_NAME,
+        async readJson() {
+          unstableSnapshot += 1
+          return { check_runs: [appCheck(newSha, {
+            status: unstableSnapshot % 2 === 0 ? 'completed' : 'in_progress',
+            conclusion: unstableSnapshot % 2 === 0 ? 'success' : null,
+          })] }
+        },
+      })
+      return false
+    } catch {
+      return true
+    }
+  })(),
+  'continuously changing Check evidence fails closed after bounded snapshot retries',
 )
 
 const fastForwarded = await resolveLatestDeploymentCandidate({
   runGit: fakeGit({ localSha: oldSha }),
   readMainSha: async () => newSha,
-  readCommitChecks: async (sha) => checks(sha),
+  readDeploymentVerification: hostedVerification,
 })
 assert(fastForwarded.sha === newSha, 'stale clean main fast-forwards without an Owner-supplied SHA')
 
-for (const [label, options, readMainSha, readCommitChecks] of [
-  ['non-main checkout', { branch: 'feature' }, async () => newSha, async (sha) => checks(sha)],
-  ['dirty checkout', { dirty: ' M server/api.mjs\n' }, async () => newSha, async (sha) => checks(sha)],
-  ['diverged checkout', { mergeError: true }, async () => newSha, async (sha) => checks(sha)],
-  ['main changed after fetch', {}, async () => '3'.repeat(40), async (sha) => checks(sha)],
+for (const [label, options, readMainSha, readDeploymentVerification] of [
+  ['non-main checkout', { branch: 'feature' }, async () => newSha, hostedVerification],
+  ['dirty checkout', { dirty: ' M server/api.mjs\n' }, async () => newSha, hostedVerification],
+  ['diverged checkout', { mergeError: true }, async () => newSha, hostedVerification],
+  ['main changed after fetch', {}, async () => '3'.repeat(40), hostedVerification],
   [
     'missing required check',
     {},
     async () => newSha,
-    async (sha) => ({ total_count: 1, check_runs: [checkRun('verify', sha, { id: 1 })] }),
+    async (sha) => hostedVerification(
+      sha,
+      { total_count: 1, check_runs: [checkRun('verify', sha, { id: 1 })] },
+    ),
   ],
   [
     'pending required check',
     {},
     async () => newSha,
-    async (sha) => checks(sha, { e2e: { status: 'in_progress', conclusion: null } }),
+    async (sha) => hostedVerification(
+      sha,
+      checks(sha, { e2e: { status: 'in_progress', conclusion: null } }),
+    ),
   ],
 ]) {
   let rejected = false
@@ -291,7 +480,7 @@ for (const [label, options, readMainSha, readCommitChecks] of [
     await resolveLatestDeploymentCandidate({
       runGit: fakeGit(options),
       readMainSha,
-      readCommitChecks,
+      readDeploymentVerification,
     })
   } catch {
     rejected = true
@@ -304,7 +493,7 @@ assert(
     try {
       const wrongSha = checks(newSha)
       wrongSha.check_runs[0].head_sha = oldSha
-      assertAuthoritativeDeploymentChecks(wrongSha, newSha)
+      assertAuthoritativeDeploymentChecks(wrongSha, newSha, { workflowRun: workflowRun(newSha) })
       return false
     } catch {
       return true
@@ -321,7 +510,7 @@ assert(
           checkRun('verify (manual)', newSha, { id: 1 }),
           checkRun('e2e (manual)', newSha, { id: 2 }),
         ],
-      }, newSha)
+      }, newSha, { workflowRun: workflowRun(newSha) })
       return false
     } catch {
       return true
@@ -338,7 +527,7 @@ assert(
         status: 'in_progress',
         conclusion: null,
       }))
-      assertAuthoritativeDeploymentChecks(newerPending, newSha)
+      assertAuthoritativeDeploymentChecks(newerPending, newSha, { workflowRun: workflowRun(newSha) })
       return false
     } catch {
       return true
@@ -351,7 +540,7 @@ assert(
     try {
       const wrongSource = checks(newSha)
       wrongSource.check_runs[0].app = { slug: 'untrusted-check-app' }
-      assertAuthoritativeDeploymentChecks(wrongSource, newSha)
+      assertAuthoritativeDeploymentChecks(wrongSource, newSha, { workflowRun: workflowRun(newSha) })
       return false
     } catch {
       return true
@@ -364,7 +553,7 @@ assert(
     try {
       const wrongTarget = checks(newSha)
       wrongTarget.check_runs[0].details_url = 'https://example.invalid/actions/runs/200/job/1'
-      assertAuthoritativeDeploymentChecks(wrongTarget, newSha)
+      assertAuthoritativeDeploymentChecks(wrongTarget, newSha, { workflowRun: workflowRun(newSha) })
       return false
     } catch {
       return true
@@ -377,7 +566,7 @@ assert(
     try {
       const mixedRuns = checks(newSha)
       mixedRuns.check_runs[1].check_suite = { id: 101 }
-      assertAuthoritativeDeploymentChecks(mixedRuns, newSha)
+      assertAuthoritativeDeploymentChecks(mixedRuns, newSha, { workflowRun: workflowRun(newSha) })
       return false
     } catch {
       return true
@@ -386,18 +575,237 @@ assert(
   'successes from different workflow runs cannot be combined to authorize deployment',
 )
 
+for (const [label, mutateChecks, mutateRun] of [
+  ['wrong hosted numeric App ID', (payload) => { payload.check_runs[0].app.id = 9999 }, null],
+  ['wrong hosted workflow ID', null, (run) => { run.workflow_id = 1 }],
+  ['wrong hosted workflow path', null, (run) => { run.path = '.github/workflows/other.yml' }],
+  ['manual hosted event', null, (run) => { run.event = 'workflow_dispatch' }],
+  ['wrong hosted run SHA', null, (run) => { run.head_sha = oldSha }],
+  ['wrong hosted run suite', null, (run) => { run.check_suite_id = 101 }],
+  ['wrong hosted run attempt', null, (run) => { run.run_attempt = 2 }],
+]) {
+  const payload = checks(newSha)
+  const run = workflowRun(newSha)
+  mutateChecks?.(payload)
+  mutateRun?.(run)
+  assert((() => {
+    try {
+      assertAuthoritativeDeploymentChecks(payload, newSha, { workflowRun: run })
+      return false
+    } catch {
+      return true
+    }
+  })(), `${label} fails closed`)
+}
+
+const latestAppSuccess = assertAmpOrbDeploymentCheck({
+  check_runs: [
+    appCheck(newSha, {
+      id: 10,
+      conclusion: 'failure',
+      externalId: `v4:${newSha}:old-delivery`,
+    }),
+    appCheck(newSha, { id: 11 }),
+  ],
+}, newSha, 4242)
 assert(
-  await assertDeploymentCandidateStillCurrent({
+  latestAppSuccess.checkRunId === 11 && latestAppSuccess.externalIdVersion === 'v4',
+  'the greatest immutable trusted-App Check Run ID is the only Amp candidate',
+)
+
+for (const [label, checkRuns] of [
+  [
+    'new pending blocks old success',
+    [
+      appCheck(newSha, { id: 10, externalId: `v4:${newSha}:old-delivery` }),
+      appCheck(newSha, { id: 11, status: 'in_progress', conclusion: null }),
+    ],
+  ],
+  [
+    'new failure blocks old success',
+    [
+      appCheck(newSha, { id: 10, externalId: `v4:${newSha}:old-delivery` }),
+      appCheck(newSha, { id: 11, conclusion: 'failure' }),
+    ],
+  ],
+  ['wrong Amp App ID', [appCheck(newSha, { appId: 4343 })]],
+  [
+    'wrong Amp head SHA',
+    [
+      appCheck(newSha, { id: 10, externalId: `v4:${newSha}:old-delivery` }),
+      appCheck(newSha, { id: 11, headSha: oldSha }),
+    ],
+  ],
+  [
+    'wrong Amp external tested SHA',
+    [
+      appCheck(newSha, { id: 10, externalId: `v4:${newSha}:old-delivery` }),
+      appCheck(newSha, { id: 11, externalId: `v4:${oldSha}:new-delivery` }),
+    ],
+  ],
+  ...['neutral', 'skipped', 'stale'].map((conclusion) => [
+    `${conclusion} Amp conclusion`,
+    [
+      appCheck(newSha, { id: 10, externalId: `v4:${newSha}:old-delivery` }),
+      appCheck(newSha, { id: 11, conclusion }),
+    ],
+  ]),
+  [
+    'malformed Amp external ID',
+    [
+      appCheck(newSha, { id: 10, externalId: `v4:${newSha}:old-delivery` }),
+      appCheck(newSha, { id: 11, externalId: 'not-v4' }),
+    ],
+  ],
+  [
+    'duplicate Amp external ID',
+    [appCheck(newSha, { id: 10 }), appCheck(newSha, { id: 11 })],
+  ],
+  [
+    'Fast cannot authorize',
+    [{ ...appCheck(newSha), name: 'Amp Orb Verify (fast)' }],
+  ],
+]) {
+  assert((() => {
+    try {
+      assertAmpOrbDeploymentCheck({ check_runs: checkRuns }, newSha, 4242)
+      return false
+    } catch {
+      return true
+    }
+  })(), `${label} fails closed`)
+}
+
+const authorityReads = []
+const validAmpPayload = { check_runs: [appCheck(newSha)] }
+const readHostedChecks = async () => {
+  authorityReads.push('hosted-checks')
+  return checks(newSha)
+}
+const readWorkflowRun = async () => {
+  authorityReads.push('hosted-run')
+  return workflowRun(newSha)
+}
+const readAmpChecks = async () => {
+  authorityReads.push('amp-checks')
+  return validAmpPayload
+}
+const hostedOnly = await verifyDeploymentAuthority({
+  authority: hostedOnlyAuthority,
+  expectedSha: newSha,
+  readHostedChecks,
+  readWorkflowRun,
+  async readAmpChecks() { assert(false, 'hosted-only must not read Amp Checks') },
+})
+assert(hostedOnly.hosted && hostedOnly.amp === null, 'hosted-only remains the default authority')
+const shadow = await verifyDeploymentAuthority({
+  authority: shadowAuthority,
+  expectedSha: newSha,
+  readHostedChecks,
+  readWorkflowRun,
+  async readAmpChecks() { return { check_runs: [] } },
+})
+assert(
+  shadow.hosted && shadow.amp?.state === 'shadow-failure',
+  'shadow neither authorizes nor blocks a valid Hosted decision',
+)
+for (const [label, authority] of [
+  ['shadow cannot authorize without Hosted evidence', shadowAuthority],
+  ['dual cannot authorize without Hosted evidence', dualAuthority],
+]) {
+  assert(
+    await (async () => {
+      try {
+        await verifyDeploymentAuthority({
+          authority,
+          expectedSha: newSha,
+          readHostedChecks: async () => ({ check_runs: [] }),
+          readWorkflowRun,
+          readAmpChecks,
+        })
+        return false
+      } catch {
+        return true
+      }
+    })(),
+    label,
+  )
+}
+const dual = await verifyDeploymentAuthority({
+  authority: dualAuthority,
+  expectedSha: newSha,
+  readHostedChecks,
+  readWorkflowRun,
+  readAmpChecks,
+})
+assert(dual.hosted && dual.amp?.state === 'success', 'dual requires valid Hosted and Amp evidence')
+assert(
+  await (async () => {
+    try {
+      await verifyDeploymentAuthority({
+        authority: dualAuthority,
+        expectedSha: newSha,
+        readHostedChecks,
+        readWorkflowRun,
+        async readAmpChecks() { return { check_runs: [] } },
+      })
+      return false
+    } catch {
+      return true
+    }
+  })(),
+  'dual fails when Amp evidence is absent',
+)
+const ampHostedE2e = await verifyDeploymentAuthority({
+  authority: ampHostedE2eAuthority,
+  expectedSha: newSha,
+  readHostedChecks: async () => ({ check_runs: [checkRun('e2e', newSha, { id: 2 })] }),
+  readWorkflowRun: async () => workflowRun(newSha, { conclusion: 'failure' }),
+  readAmpChecks,
+})
+assert(
+  ampHostedE2e.hosted.checks.map(({ name }) => name).join(',') === 'e2e'
+    && ampHostedE2e.amp?.state === 'success',
+  'amp+hosted-e2e requires Amp plus only the Hosted e2e job, not Hosted verify',
+)
+const ampOnly = await verifyDeploymentAuthority({
+  authority: ampAuthority,
+  expectedSha: newSha,
+  async readHostedChecks() { assert(false, 'amp mode must not read Hosted checks') },
+  async readWorkflowRun() { assert(false, 'amp mode must not read a Hosted run') },
+  readAmpChecks,
+})
+assert(ampOnly.hosted === null && ampOnly.amp?.state === 'success', 'amp mode uses only the App Check')
+assert(
+  (() => {
+    try {
+      deploymentAuthorityFromEnvironment({ QUESTION_BANK_DEPLOY_CI_AUTHORITY_MODE: 'amp' })
+      return false
+    } catch {
+      return true
+    }
+  })(),
+  'an Amp-reading mode requires a pinned numeric App ID',
+)
+
+assert(
+  (await assertDeploymentCandidateStillCurrent({
+    readLocalSha: async () => newSha,
+    readLocalStatus: async () => '',
     readMainSha: async () => newSha,
+    readDeploymentVerification: hostedVerification,
     sha: newSha,
-  }) === newSha,
-  'pinned candidate can be rechecked immediately before activation',
+  })).sha === newSha,
+  'local HEAD, live main, and authority can be rechecked immediately before activation',
 )
 assert(
   await (async () => {
     try {
       await assertDeploymentCandidateStillCurrent({
+        readLocalSha: async () => newSha,
+        readLocalStatus: async () => '',
         readMainSha: async () => '3'.repeat(40),
+        readDeploymentVerification: hostedVerification,
         sha: newSha,
       })
       return false
@@ -444,9 +852,10 @@ const deployed = await deployLatestRelease({
     deploymentOrder.push('resolve')
     return candidate
   },
-  async readMainSha() {
+  async revalidateCandidate(resolved) {
     deploymentOrder.push('recheck')
-    return newSha
+    assert(resolved === candidate, 'deployment revalidates the resolved candidate')
+    return { sha: newSha, verification: candidate.verification }
   },
   async invokeController(sha) {
     deploymentOrder.push(`controller:${sha}`)
@@ -466,7 +875,9 @@ assert(
       await deployLatestRelease({
         argv: ['deploy', '--owner-said-deploy-latest'],
         resolveCandidate: async () => candidate,
-        readMainSha: async () => '3'.repeat(40),
+        revalidateCandidate: async () => {
+          throw new Error('GitHub main changed during deployment')
+        },
         invokeController: async () => {
           staleInvoked = true
           return controllerReceipt()
@@ -487,7 +898,7 @@ assert(
       await deployLatestRelease({
         argv: ['deploy', '--owner-said-deploy-latest'],
         resolveCandidate: async () => candidate,
-        readMainSha: async () => newSha,
+        revalidateCandidate: async () => ({ sha: newSha, verification: candidate.verification }),
         invokeController: async () => controllerReceipt({
           conclusion: 'failure',
           failureCode: 'HEALTH_CHECK_FAILED',
@@ -1009,9 +1420,9 @@ const reviewedLatest = await deployReviewedPersistenceLatest({
     reviewedOrder.push('resolve')
     return candidate
   },
-  readMainSha: async () => {
+  revalidateCandidate: async () => {
     reviewedOrder.push('main')
-    return newSha
+    return { sha: newSha, verification: candidate.verification }
   },
   readProductionSha: async () => {
     reviewedOrder.push('production')
@@ -1064,7 +1475,7 @@ assert(
 const updatedHost = await updateLatestHostConfiguration({
   argv: ['update-host-config', '--owner-said-update-host-config'],
   resolveCandidate: async () => candidate,
-  readMainSha: async () => newSha,
+  revalidateCandidate: async () => ({ sha: newSha, verification: candidate.verification }),
   readProductionSha: async () => oldSha,
   readChangedPaths: async (_previous, _target, paths) => {
     assert(paths === EQB_HOST_CONFIGURATION_PATHS, 'host update compares only its fixed file set')
@@ -1480,9 +1891,9 @@ const migratedBaseline = await migrateLegacyProductionBaseline({
     baselineOrder.push('resolve')
     return candidate
   },
-  async readMainSha() {
+  async revalidateCandidate() {
     baselineOrder.push('main')
-    return newSha
+    return { sha: newSha, verification: candidate.verification }
   },
   async readLegacyPreflight() {
     baselineOrder.push('preflight')
@@ -1505,7 +1916,7 @@ assert(await (async () => {
     await migrateLegacyProductionBaseline({
       argv: ['baseline', '--owner-said-baseline-migration'],
       resolveCandidate: async () => candidate,
-      readMainSha: async () => newSha,
+      revalidateCandidate: async () => ({ sha: newSha, verification: candidate.verification }),
       readLegacyPreflight: async () => ({ ...legacyPreflight, layout: 'release' }),
       invokeOperator: async () => {
         ineligibleBaselineInvoked = true
@@ -1525,7 +1936,7 @@ assert(await (async () => {
     await migrateLegacyProductionBaseline({
       argv: ['baseline', '--owner-said-baseline-migration'],
       resolveCandidate: async () => candidate,
-      readMainSha: async () => newSha,
+      revalidateCandidate: async () => ({ sha: newSha, verification: candidate.verification }),
       readLegacyPreflight: async () => ({
         ...legacyPreflight,
         baselineState: 'established',
@@ -1551,7 +1962,7 @@ assert(await (async () => {
     await migrateLegacyProductionBaseline({
       argv: ['baseline', '--owner-said-baseline-migration'],
       resolveCandidate: async () => candidate,
-      readMainSha: async () => newSha,
+      revalidateCandidate: async () => ({ sha: newSha, verification: candidate.verification }),
       readLegacyPreflight: async () => legacyPreflight,
       invokeOperator: async () => ({ exitCode: 1, output: legacyBaselineReceipt() }),
     })
@@ -1820,9 +2231,9 @@ const bootstrapped = await bootstrapReleaseLayout({
     bootstrapOrder.push('resolve')
     return candidate
   },
-  async readMainSha() {
+  async revalidateCandidate() {
     bootstrapOrder.push('main')
-    return newSha
+    return { sha: newSha, verification: candidate.verification }
   },
   async readLegacyPreflight() {
     bootstrapOrder.push('preflight')
@@ -1878,7 +2289,7 @@ assert(await (async () => {
     await bootstrapReleaseLayout({
       argv: ['bootstrap', '--owner-said-release-bootstrap'],
       resolveCandidate: async () => candidate,
-      readMainSha: async () => newSha,
+      revalidateCandidate: async () => ({ sha: newSha, verification: candidate.verification }),
       readLegacyPreflight: async () => legacyPreflight,
       isAncestor: async () => true,
       readProtectedDiff: async () => [],
@@ -1904,7 +2315,7 @@ assert(await (async () => {
     await bootstrapReleaseLayout({
       argv: ['bootstrap', '--owner-said-release-bootstrap'],
       resolveCandidate: async () => candidate,
-      readMainSha: async () => newSha,
+      revalidateCandidate: async () => ({ sha: newSha, verification: candidate.verification }),
       readLegacyPreflight: async () => migratedPreflight,
       isAncestor: async () => true,
       readProtectedDiff: async () => [],
@@ -1930,7 +2341,7 @@ assert(await (async () => {
     await bootstrapReleaseLayout({
       argv: ['bootstrap', '--owner-said-release-bootstrap'],
       resolveCandidate: async () => candidate,
-      readMainSha: async () => newSha,
+      revalidateCandidate: async () => ({ sha: newSha, verification: candidate.verification }),
       readLegacyPreflight: async () => migratedPreflight,
       isAncestor: async () => true,
       readProtectedDiff: async () => [],
@@ -1966,7 +2377,7 @@ for (const [label, isAncestor, protectedDiff, expectedError] of [
       await bootstrapReleaseLayout({
         argv: ['bootstrap', '--owner-said-release-bootstrap'],
         resolveCandidate: async () => candidate,
-        readMainSha: async () => newSha,
+        revalidateCandidate: async () => ({ sha: newSha, verification: candidate.verification }),
         readLegacyPreflight: async () => migratedPreflight,
         isAncestor: async () => {
           if (isAncestor instanceof Error) throw isAncestor
@@ -1992,7 +2403,7 @@ let sameShaBootstrapInvoked = false
 await bootstrapReleaseLayout({
   argv: ['bootstrap', '--owner-said-release-bootstrap'],
   resolveCandidate: async () => ({ ...candidate, sha: oldSha }),
-  readMainSha: async () => oldSha,
+  revalidateCandidate: async () => ({ sha: oldSha, verification: candidate.verification }),
   readLegacyPreflight: async () => migratedPreflight,
   isAncestor: async (previousSha, targetSha) => previousSha === targetSha,
   readProtectedDiff: async () => [],
@@ -4972,7 +5383,8 @@ assert(
     && maintenanceReadinessEntry.includes("'--format=tar',")
     && maintenanceReadinessEntry.includes("spawnSync('git', ['show', `${sha}:${relativePath}`]")
     && maintenanceReadinessEntry.includes('readTencentTatConfiguration()')
-    && maintenanceReadinessEntry.indexOf('assertDeploymentCandidateStillCurrent(')
+    && maintenanceReadinessEntry.includes('assertCandidateStillAuthoritative(resolved)')
+    && maintenanceReadinessEntry.indexOf('assertCandidateStillAuthoritative(resolved)')
       < maintenanceReadinessEntry.indexOf('executeTencentTatCommand({')
     && maintenanceReadinessEntry.includes('parseMaintenanceInstallReadiness(')
     && maintenanceReadinessEntry.includes('productionMutationAllowed: false'),

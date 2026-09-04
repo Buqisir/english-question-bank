@@ -110,14 +110,17 @@ uniquely supplies; otherwise keep it outside daily packs.
 
 ## Focused CI
 
-- Focused CI is a second verification layer. It validates and reports only: it
-  must not edit tracked files, commit, push, revert, open a PR, write GitHub
-  status, access Secrets, or deploy.
-- Verify the handed-off SHA only after confirming it is on `origin/main`, in a
-  fresh clean detached worktree. Compute risk independently and run changed
-  verification with `--base-ref` set to the last verified ancestor, or the
-  handed-off parent when no such ancestor exists; never let checkout shape
-  collapse the diff to `no-changes`.
+- Focused CI is a reporting and diagnostic layer over automatic dedicated-CI
+  execution. Its agent turn must not edit tracked files, commit, push, revert,
+  open a PR, write GitHub status or Check state, access Secrets, deploy, or run
+  a second Full suite. The automatic `amp-orb-ci` controller is the sole
+  dedicated machine execution policy: it verifies the exact SHA in isolated
+  Fast and Full lanes and records private receipts. The Focused thread reads
+  that evidence, reports PASS/FAIL, and may diagnose a failure without
+  repeating Full.
+- A separately activated trusted webhook controller may write only the
+  ADR-0025 `Amp Orb Verify` Check. This exception never applies to the Focused
+  agent turn, manual/discovery/rerequest diagnostics, or candidate code.
 - A SHA awaiting Focused CI may not be deployed. Independent development may
   continue, but a task that depends on that SHA may not Ship before it passes.
 - On Focused CI failure, pause every subsequent Ship, report decisive evidence
@@ -125,14 +128,17 @@ uniquely supplies; otherwise keep it outside daily packs.
   revert. Focused CI only recommends; it never reverts. A revert requires Owner
   authorization and follows the same Ship process.
 - A Focused CI pass is not deployment authority. The deployment machine gate
-  remains successful, non-manual hosted `verify` and `e2e` from the
-  `github-actions` App on the exact current `main` SHA; `workflow_dispatch`
-  diagnostics cannot satisfy it.
+  remains `hosted-only`: successful, non-manual hosted `verify` and `e2e` from
+  numeric `github-actions` App ID `15368`, workflow ID `282244920`, attempt 1,
+  on the exact current `main` SHA and one suite; `workflow_dispatch` and rerun
+  diagnostics cannot satisfy it. ADR-0025's other modes remain disabled until
+  separately authorized.
 - The legacy dedicated-CI Sentinel/Discovery and Action-wake paths remain
   dormant. Do not start or drain them, reload their thread/plugin, synthesize or
   retry wake/webhook events, or copy an uncommitted workspace snapshot into
-  them. See ADR-0024 for the active coordination contract and ADR-0022 for the
-  retained historical CI design.
+  them. This does not authorize enabling the disabled App writer. See ADR-0024
+  for coordination, ADR-0022 for retained history, and ADR-0025 for the App
+  protocol and staged activation boundary.
 
 ## Dedicated Deployment Orb
 

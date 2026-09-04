@@ -26,6 +26,19 @@ export const AMP_ORB_DEPLOY_REPOSITORY = 'Buqisir/english-question-bank'
 export const AMP_ORB_DEPLOY_GITHUB_HOST = 'github.com'
 export const AMP_ORB_DEPLOY_REQUIRED_CHECKS = Object.freeze(['verify', 'e2e'])
 export const AMP_ORB_DEPLOY_CHECK_APP = 'github-actions'
+export const AMP_ORB_DEPLOY_CHECK_APP_ID = 15368
+export const AMP_ORB_DEPLOY_WORKFLOW_ID = 282244920
+export const AMP_ORB_DEPLOY_WORKFLOW_PATH = '.github/workflows/verify.yml'
+export const AMP_ORB_DEPLOY_AMP_CHECK_NAME = 'Amp Orb Verify'
+export const AMP_ORB_DEPLOY_AMP_EXTERNAL_ID_VERSIONS = Object.freeze(['v4'])
+export const AMP_ORB_DEPLOY_DEFAULT_AUTHORITY_MODE = 'hosted-only'
+export const AMP_ORB_DEPLOY_AUTHORITY_MODES = Object.freeze([
+  'hosted-only',
+  'shadow',
+  'dual',
+  'amp+hosted-e2e',
+  'amp',
+])
 export const AMP_ORB_DEPLOY_RECEIPT_SCHEMA_VERSION = 'amp-orb-deployment-receipt-v1'
 export const EQB_LEGACY_BASELINE_RECEIPT_SCHEMA_VERSION = 'eqb-legacy-baseline-receipt-v1'
 export const EQB_RELEASE_BOOTSTRAP_FAILURE_SCHEMA_VERSION = 'eqb-deployment-bootstrap-failure-v1'
@@ -59,6 +72,7 @@ export const EQB_STABLE_LAUNCHER_PATHS = Object.freeze([
 ])
 
 const SHA = /^[a-f0-9]{40}$/u
+const DELIVERY_ID = /^[A-Za-z0-9][A-Za-z0-9-]{0,127}$/u
 const SSH_TARGET = /^(?:[A-Za-z0-9._-]+@)?(?:\[[A-Fa-f0-9:]+\]|[A-Za-z0-9.-]+)$/u
 const SSH_REMOTE_TOKEN = /^[A-Za-z0-9_@%+=:,./-]+$/u
 const SSH_PUBLIC_KEY_BODY = /^[A-Za-z0-9+/]+={0,3}$/u
@@ -73,6 +87,30 @@ const PRE_MUTATION_BOOTSTRAP_FAILURE_STAGES = new Set([
 function assertSha(sha, label = 'deployment SHA') {
   if (!SHA.test(sha || '')) throw new Error(`Invalid ${label}`)
   return sha
+}
+
+function assertPositiveInteger(value, label) {
+  const number = typeof value === 'string' && /^\d+$/u.test(value) ? Number(value) : value
+  if (!Number.isSafeInteger(number) || number < 1) throw new Error(`Invalid ${label}`)
+  return number
+}
+
+export function deploymentAuthorityFromEnvironment(environment = {}) {
+  const mode = String(
+    environment.QUESTION_BANK_DEPLOY_CI_AUTHORITY_MODE
+      || AMP_ORB_DEPLOY_DEFAULT_AUTHORITY_MODE,
+  )
+  if (!AMP_ORB_DEPLOY_AUTHORITY_MODES.includes(mode)) {
+    throw new Error('Deployment CI authority mode is invalid')
+  }
+  const readsAmpCheck = mode !== 'hosted-only'
+  const ampAppId = readsAmpCheck
+    ? assertPositiveInteger(
+        environment.QUESTION_BANK_DEPLOY_AMP_CHECK_APP_ID,
+        'deployment Amp Check App ID',
+      )
+    : null
+  return Object.freeze({ mode, ampAppId })
 }
 
 export function parseOpenSshEd25519PublicKeyBody(value) {
@@ -767,22 +805,95 @@ export function requireReleaseLayoutBootstrapAbandonAuthorization(argv) {
 export function deploymentGitHubApiArgs(endpoint) {
   const prefix = `repos/${AMP_ORB_DEPLOY_REPOSITORY}/`
   const allowed = endpoint === `${prefix}git/ref/heads/main`
-    || new RegExp(`^${prefix}commits/[a-f0-9]{40}/check-runs\\?filter=latest&per_page=100$`, 'u')
+    || new RegExp(
+      `^${prefix}commits/[a-f0-9]{40}/check-runs\\?filter=all&per_page=100(?:&page=(?:[2-9]|[1-9][0-9]+))?$`,
+      'u',
+    )
+      .test(endpoint || '')
+    || new RegExp(
+      `^${prefix}commits/[a-f0-9]{40}/check-runs\\?check_name=Amp%20Orb%20Verify&filter=all&per_page=100(?:&page=(?:[2-9]|[1-9][0-9]+))?$`,
+      'u',
+    )
+      .test(endpoint || '')
+    || new RegExp(`^${prefix}actions/runs/[1-9][0-9]*$`, 'u')
       .test(endpoint || '')
   if (!allowed) throw new Error('Deployment GitHub API endpoint is invalid')
   return ['api', '--hostname', AMP_ORB_DEPLOY_GITHUB_HOST, endpoint]
 }
 
-export function assertAuthoritativeDeploymentChecks(payload, expectedSha) {
+export async function readDeploymentCheckRuns({
+  sha,
+  checkName = null,
+  readJson,
+} = {}) {
+  const expectedSha = assertSha(sha)
+  if (checkName !== null && checkName !== AMP_ORB_DEPLOY_AMP_CHECK_NAME) {
+    throw new Error('Deployment Check reader name is invalid')
+  }
+  if (typeof readJson !== 'function') {
+    throw new Error('Deployment Check reader dependency is missing')
+  }
+  const readSnapshot = async () => {
+    const checkRuns = []
+    for (let page = 1; page <= 100; page += 1) {
+      const pageQuery = page === 1 ? '' : `&page=${page}`
+      const filter = checkName
+        ? `check_name=${encodeURIComponent(checkName)}&filter=all&per_page=100`
+        : 'filter=all&per_page=100'
+      const payload = await readJson(
+        `repos/${AMP_ORB_DEPLOY_REPOSITORY}/commits/${expectedSha}/check-runs?${filter}${pageQuery}`,
+      )
+      if (!Array.isArray(payload?.check_runs)) {
+        throw new Error('GitHub deployment checks response is invalid')
+      }
+      checkRuns.push(...payload.check_runs)
+      if (payload.check_runs.length < 100) return checkRuns
+    }
+    throw new Error('GitHub deployment checks pagination is excessive')
+  }
+  const fingerprint = (checkRuns) => checkRuns.map((check) => JSON.stringify({
+    id: check?.id ?? null,
+    name: check?.name ?? null,
+    headSha: check?.head_sha ?? null,
+    status: check?.status ?? null,
+    conclusion: check?.conclusion ?? null,
+    externalId: check?.external_id ?? null,
+    appId: check?.app?.id ?? null,
+    appSlug: check?.app?.slug ?? null,
+    checkSuiteId: check?.check_suite?.id ?? null,
+    detailsUrl: check?.details_url ?? null,
+  })).sort().join('\n')
+  let previousFingerprint = null
+  for (let attempt = 1; attempt <= 3; attempt += 1) {
+    const checkRuns = await readSnapshot()
+    const currentFingerprint = fingerprint(checkRuns)
+    if (previousFingerprint === currentFingerprint) {
+      return { total_count: checkRuns.length, check_runs: checkRuns }
+    }
+    previousFingerprint = currentFingerprint
+  }
+  throw new Error('GitHub deployment checks changed during pagination')
+}
+
+function selectHostedDeploymentChecks(payload, expectedSha, requiredChecks) {
   const sha = assertSha(expectedSha)
   if (!Array.isArray(payload?.check_runs)) {
     throw new Error('GitHub deployment checks response is invalid')
   }
-
-  const checks = AMP_ORB_DEPLOY_REQUIRED_CHECKS.map((name) => {
-    const matching = payload.check_runs.filter((candidate) => candidate?.name === name)
+  if (
+    !Array.isArray(requiredChecks)
+    || requiredChecks.length === 0
+    || requiredChecks.some((name) => !AMP_ORB_DEPLOY_REQUIRED_CHECKS.includes(name))
+    || new Set(requiredChecks).size !== requiredChecks.length
+  ) throw new Error('Required hosted deployment check set is invalid')
+  const checks = requiredChecks.map((name) => {
+    const matching = payload.check_runs.filter((candidate) => (
+      candidate?.name === name
+      && candidate?.app?.id === AMP_ORB_DEPLOY_CHECK_APP_ID
+      && candidate?.app?.slug === AMP_ORB_DEPLOY_CHECK_APP
+    ))
     const check = matching.reduce((latest, candidate) => {
-      if (!Number.isSafeInteger(candidate?.id)) {
+      if (!Number.isSafeInteger(candidate?.id) || candidate.id < 1) {
         throw new Error(`Required ${name} check ordering is invalid`)
       }
       return !latest || candidate.id > latest.id ? candidate : latest
@@ -791,42 +902,185 @@ export function assertAuthoritativeDeploymentChecks(payload, expectedSha) {
     if (check.head_sha !== sha) {
       throw new Error(`Required ${name} check SHA is invalid`)
     }
-    if (check.app?.slug !== AMP_ORB_DEPLOY_CHECK_APP) {
-      throw new Error(`Required ${name} check source is invalid`)
-    }
     if (check.status !== 'completed' || check.conclusion !== 'success') {
       throw new Error(`Required ${name} check is ${check.conclusion || check.status || 'unknown'}`)
     }
-    const expectedTarget = `https://${AMP_ORB_DEPLOY_GITHUB_HOST}/${AMP_ORB_DEPLOY_REPOSITORY}/actions/runs/`
-    if (!String(check.details_url || '').startsWith(expectedTarget)) {
+    const details = /^https:\/\/github\.com\/Buqisir\/english-question-bank\/actions\/runs\/([1-9][0-9]*)\/job\/[1-9][0-9]*$/u
+      .exec(String(check.details_url || ''))
+    if (!details) {
       throw new Error(`Required ${name} check target is invalid`)
     }
-    if (!Number.isSafeInteger(check.check_suite?.id)) {
-      throw new Error(`Required ${name} check suite identity is invalid`)
-    }
+    const checkSuiteId = assertPositiveInteger(
+      check.check_suite?.id,
+      `required ${name} check suite identity`,
+    )
+    const workflowRunId = assertPositiveInteger(
+      Number(details[1]),
+      `required ${name} workflow run identity`,
+    )
     return {
       name,
       state: 'success',
       app: AMP_ORB_DEPLOY_CHECK_APP,
       checkRunId: check.id,
-      checkSuiteId: check.check_suite.id,
+      checkSuiteId,
       detailsUrl: check.details_url,
+      workflowRunId,
     }
   })
   if (new Set(checks.map(({ checkSuiteId }) => checkSuiteId)).size !== 1) {
     throw new Error('Required deployment checks are not from one workflow run')
   }
+  if (new Set(checks.map(({ workflowRunId }) => workflowRunId)).size !== 1) {
+    throw new Error('Required deployment checks do not identify one workflow run')
+  }
+  return checks
+}
+
+export function assertAuthoritativeDeploymentChecks(payload, expectedSha, {
+  requiredChecks = AMP_ORB_DEPLOY_REQUIRED_CHECKS,
+  workflowRun,
+} = {}) {
+  const sha = assertSha(expectedSha)
+  const checks = selectHostedDeploymentChecks(payload, sha, requiredChecks)
+  const workflowRunId = checks[0].workflowRunId
+  if (
+    workflowRun?.id !== workflowRunId
+    || workflowRun?.workflow_id !== AMP_ORB_DEPLOY_WORKFLOW_ID
+    || workflowRun?.path !== AMP_ORB_DEPLOY_WORKFLOW_PATH
+    || workflowRun?.event !== 'push'
+    || workflowRun?.status !== 'completed'
+    || workflowRun?.head_sha !== sha
+    || workflowRun?.head_branch !== 'main'
+    || workflowRun?.run_attempt !== 1
+    || workflowRun?.check_suite_id !== checks[0].checkSuiteId
+    || workflowRun?.repository?.full_name !== AMP_ORB_DEPLOY_REPOSITORY
+    || workflowRun?.head_repository?.full_name !== AMP_ORB_DEPLOY_REPOSITORY
+  ) {
+    throw new Error('Required hosted workflow run identity is invalid')
+  }
   return {
     provider: AMP_ORB_DEPLOY_CHECK_APP,
+    appId: AMP_ORB_DEPLOY_CHECK_APP_ID,
+    workflowId: AMP_ORB_DEPLOY_WORKFLOW_ID,
+    workflowPath: AMP_ORB_DEPLOY_WORKFLOW_PATH,
+    workflowRunId,
+    runAttempt: workflowRun.run_attempt,
     checks,
   }
 }
 
-export async function resolveLatestDeploymentCandidate({ runGit, readMainSha, readCommitChecks }) {
+function parseAmpCheckExternalId(value) {
+  const parts = String(value || '').split(':')
+  if (
+    parts.length !== 3
+    || !AMP_ORB_DEPLOY_AMP_EXTERNAL_ID_VERSIONS.includes(parts[0])
+    || !SHA.test(parts[1] || '')
+    || !DELIVERY_ID.test(parts[2] || '')
+  ) throw new Error('Amp Orb deployment Check external identity is invalid')
+  return { version: parts[0], testedSha: parts[1], deliveryId: parts[2] }
+}
+
+export function assertAmpOrbDeploymentCheck(payload, expectedSha, trustedAppId) {
+  const sha = assertSha(expectedSha)
+  const appId = assertPositiveInteger(trustedAppId, 'deployment Amp Check App ID')
+  if (!Array.isArray(payload?.check_runs)) {
+    throw new Error('GitHub Amp Check response is invalid')
+  }
+  const candidates = payload.check_runs.filter((check) => (
+    check?.name === AMP_ORB_DEPLOY_AMP_CHECK_NAME && check?.app?.id === appId
+  ))
+  const ids = candidates.map((check) => assertPositiveInteger(
+    check?.id,
+    'Amp Orb deployment Check Run ID',
+  ))
+  if (new Set(ids).size !== ids.length) {
+    throw new Error('Amp Orb deployment Check Run IDs are ambiguous')
+  }
+  const latest = candidates.reduce(
+    (selected, check) => (!selected || check.id > selected.id ? check : selected),
+    null,
+  )
+  if (!latest) throw new Error('Required Amp Orb deployment Check is missing')
+  const identity = parseAmpCheckExternalId(latest.external_id)
+  if (candidates.filter((check) => check.external_id === latest.external_id).length !== 1) {
+    throw new Error('Amp Orb deployment Check external identity is ambiguous')
+  }
+  if (latest.head_sha !== sha || identity.testedSha !== sha) {
+    throw new Error('Required Amp Orb deployment Check SHA is invalid')
+  }
+  if (latest.status !== 'completed' || latest.conclusion !== 'success') {
+    throw new Error(
+      `Required Amp Orb deployment Check is ${latest.conclusion || latest.status || 'unknown'}`,
+    )
+  }
+  return {
+    provider: AMP_ORB_DEPLOY_AMP_CHECK_NAME,
+    appId,
+    checkRunId: latest.id,
+    externalId: latest.external_id,
+    externalIdVersion: identity.version,
+    deliveryId: identity.deliveryId,
+    state: 'success',
+  }
+}
+
+export async function verifyDeploymentAuthority({
+  authority,
+  expectedSha,
+  readHostedChecks,
+  readWorkflowRun,
+  readAmpChecks,
+} = {}) {
+  const sha = assertSha(expectedSha)
+  if (!authority || !AMP_ORB_DEPLOY_AUTHORITY_MODES.includes(authority.mode)) {
+    throw new Error('Deployment CI authority configuration is invalid')
+  }
+  const hostedRequired = authority.mode !== 'amp'
+  const hostedChecks = authority.mode === 'amp+hosted-e2e'
+    ? Object.freeze(['e2e'])
+    : AMP_ORB_DEPLOY_REQUIRED_CHECKS
+  let hosted = null
+  if (hostedRequired) {
+    if (typeof readHostedChecks !== 'function' || typeof readWorkflowRun !== 'function') {
+      throw new Error('Hosted deployment verification dependencies are missing')
+    }
+    const payload = await readHostedChecks(sha)
+    const selected = selectHostedDeploymentChecks(payload, sha, hostedChecks)
+    const workflowRun = await readWorkflowRun(selected[0].workflowRunId)
+    hosted = assertAuthoritativeDeploymentChecks(payload, sha, {
+      requiredChecks: hostedChecks,
+      workflowRun,
+    })
+  }
+  let amp = null
+  if (authority.mode !== 'hosted-only') {
+    if (typeof readAmpChecks !== 'function') {
+      throw new Error('Amp deployment verification dependency is missing')
+    }
+    try {
+      amp = assertAmpOrbDeploymentCheck(
+        await readAmpChecks(sha),
+        sha,
+        authority.ampAppId,
+      )
+    } catch (error) {
+      if (authority.mode !== 'shadow') throw error
+      amp = { provider: AMP_ORB_DEPLOY_AMP_CHECK_NAME, state: 'shadow-failure', error: error.message }
+    }
+  }
+  return { mode: authority.mode, hosted, amp }
+}
+
+export async function resolveLatestDeploymentCandidate({
+  runGit,
+  readMainSha,
+  readDeploymentVerification,
+}) {
   if (
     typeof runGit !== 'function'
     || typeof readMainSha !== 'function'
-    || typeof readCommitChecks !== 'function'
+    || typeof readDeploymentVerification !== 'function'
   ) {
     throw new Error('Deployment candidate dependencies are missing')
   }
@@ -844,10 +1098,7 @@ export async function resolveLatestDeploymentCandidate({ runGit, readMainSha, re
   if (localSha !== remoteSha) {
     throw new Error('Deployment checkout is not the current GitHub main')
   }
-  const verification = assertAuthoritativeDeploymentChecks(
-    await readCommitChecks(remoteSha),
-    remoteSha,
-  )
+  const verification = await readDeploymentVerification(remoteSha)
   return {
     repository: AMP_ORB_DEPLOY_REPOSITORY,
     sha: remoteSha,
@@ -856,16 +1107,34 @@ export async function resolveLatestDeploymentCandidate({ runGit, readMainSha, re
   }
 }
 
-export async function assertDeploymentCandidateStillCurrent({ readMainSha, sha }) {
-  if (typeof readMainSha !== 'function') {
-    throw new Error('Deployment GitHub main dependency is missing')
+export async function assertDeploymentCandidateStillCurrent({
+  readLocalSha,
+  readLocalStatus,
+  readMainSha,
+  readDeploymentVerification,
+  sha,
+}) {
+  if (
+    typeof readLocalSha !== 'function'
+    || typeof readLocalStatus !== 'function'
+    || typeof readMainSha !== 'function'
+    || typeof readDeploymentVerification !== 'function'
+  ) {
+    throw new Error('Deployment current-candidate dependencies are missing')
   }
   const expectedSha = assertSha(sha)
+  const localSha = assertSha(await readLocalSha(), 'local deployment SHA')
+  if (localSha !== expectedSha || String(await readLocalStatus()).trim()) {
+    throw new Error('Local deployment candidate changed before the external action')
+  }
   const currentSha = assertSha(await readMainSha(), 'GitHub main SHA')
   if (currentSha !== expectedSha) {
     throw new Error('GitHub main changed during deployment; repeat “部署最新版”')
   }
-  return currentSha
+  return {
+    sha: currentSha,
+    verification: await readDeploymentVerification(currentSha),
+  }
 }
 
 export function parseDeploymentControllerOutput(output, expectedSha) {
@@ -1529,21 +1798,21 @@ export function parseBootstrapKeyRetirementReceipt(output) {
 export async function migrateLegacyProductionBaseline({
   argv,
   resolveCandidate,
-  readMainSha,
+  revalidateCandidate,
   readLegacyPreflight,
   invokeOperator,
 } = {}) {
   requireLegacyBaselineAuthorization(argv)
   if (
     typeof resolveCandidate !== 'function'
-    || typeof readMainSha !== 'function'
+    || typeof revalidateCandidate !== 'function'
     || typeof readLegacyPreflight !== 'function'
     || typeof invokeOperator !== 'function'
   ) {
     throw new Error('Legacy baseline dependencies are missing')
   }
   const candidate = await resolveCandidate()
-  await assertDeploymentCandidateStillCurrent({ readMainSha, sha: candidate.sha })
+  await revalidateCandidate(candidate)
   const preflight = await readLegacyPreflight(candidate)
   if (preflight?.baselineState === 'established') {
     throw new Error('BASELINE_ALREADY_ESTABLISHED')
@@ -1559,7 +1828,7 @@ export async function migrateLegacyProductionBaseline({
   ) {
     throw new Error('Legacy production is not eligible for baseline migration')
   }
-  await assertDeploymentCandidateStillCurrent({ readMainSha, sha: candidate.sha })
+  await revalidateCandidate(candidate)
   const operation = await invokeOperator({ candidate, preflight })
   if (
     !operation
@@ -1634,7 +1903,7 @@ export async function completeReleaseLayoutBootstrap({
 export async function bootstrapReleaseLayout({
   argv,
   resolveCandidate,
-  readMainSha,
+  revalidateCandidate,
   readLegacyPreflight,
   invokeBootstrap,
   readControllerPreflight,
@@ -1648,7 +1917,7 @@ export async function bootstrapReleaseLayout({
   requireReleaseLayoutBootstrapAuthorization(argv)
   if (
     typeof resolveCandidate !== 'function'
-    || typeof readMainSha !== 'function'
+    || typeof revalidateCandidate !== 'function'
     || typeof readLegacyPreflight !== 'function'
     || typeof invokeBootstrap !== 'function'
     || typeof readControllerPreflight !== 'function'
@@ -1662,7 +1931,7 @@ export async function bootstrapReleaseLayout({
     throw new Error('Release-layout bootstrap dependencies are missing')
   }
   const candidate = await resolveCandidate()
-  await assertDeploymentCandidateStillCurrent({ readMainSha, sha: candidate.sha })
+  await revalidateCandidate(candidate)
   const legacyPreflight = await readLegacyPreflight(candidate)
   if (
     legacyPreflight?.layout !== 'legacy'
@@ -1701,7 +1970,7 @@ export async function bootstrapReleaseLayout({
     || protectedDiff.some((filePath) => typeof filePath !== 'string' || !filePath)
   ) throw new Error('BASELINE_ANCESTRY_UNKNOWN')
   if (protectedDiff.length !== 0) throw new Error('PERSISTENCE_AUTHORITY_CHANGED')
-  await assertDeploymentCandidateStillCurrent({ readMainSha, sha: candidate.sha })
+  await revalidateCandidate(candidate)
   await invokeBootstrap({ candidate, legacyPreflight })
   const finalized = await completeReleaseLayoutBootstrap({
     candidate,
@@ -1738,19 +2007,19 @@ export async function resumeReleaseLayoutBootstrap({
 export async function deployLatestRelease({
   argv,
   resolveCandidate,
-  readMainSha,
+  revalidateCandidate,
   invokeController,
 } = {}) {
   requireDeployLatestAuthorization(argv)
   if (
     typeof resolveCandidate !== 'function'
-    || typeof readMainSha !== 'function'
+    || typeof revalidateCandidate !== 'function'
     || typeof invokeController !== 'function'
   ) {
     throw new Error('Deployment execution dependencies are missing')
   }
   const candidate = await resolveCandidate()
-  await assertDeploymentCandidateStillCurrent({ readMainSha, sha: candidate.sha })
+  await revalidateCandidate(candidate)
   const receipt = parseDeploymentControllerOutput(
     await invokeController(candidate.sha),
     candidate.sha,
@@ -1765,7 +2034,7 @@ async function runReviewedDeploymentMaintenance({
   argv,
   authorize,
   resolveCandidate,
-  readMainSha,
+  revalidateCandidate,
   readProductionSha,
   readChangedPaths,
   protectedPaths,
@@ -1775,13 +2044,13 @@ async function runReviewedDeploymentMaintenance({
   authorize(argv)
   if (
     typeof resolveCandidate !== 'function'
-    || typeof readMainSha !== 'function'
+    || typeof revalidateCandidate !== 'function'
     || typeof readProductionSha !== 'function'
     || typeof readChangedPaths !== 'function'
     || typeof invokeController !== 'function'
   ) throw new Error('Deployment maintenance dependencies are missing')
   const candidate = await resolveCandidate()
-  await assertDeploymentCandidateStillCurrent({ readMainSha, sha: candidate.sha })
+  await revalidateCandidate(candidate)
   const productionSha = assertSha(await readProductionSha(), 'production SHA')
   const changedPaths = await readChangedPaths(productionSha, candidate.sha, protectedPaths)
   if (
@@ -1792,7 +2061,7 @@ async function runReviewedDeploymentMaintenance({
     )))
   ) throw new Error('The separately reviewed protected diff is empty or invalid')
   const changedPathsDigest = deploymentChangedPathDigest(changedPaths)
-  await assertDeploymentCandidateStillCurrent({ readMainSha, sha: candidate.sha })
+  await revalidateCandidate(candidate)
   const receipt = parseReceipt(
     await invokeController(candidate.sha, changedPathsDigest),
     candidate.sha,

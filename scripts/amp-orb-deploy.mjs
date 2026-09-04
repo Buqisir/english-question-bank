@@ -8,12 +8,12 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import {
+  AMP_ORB_DEPLOY_AMP_CHECK_NAME,
   AMP_ORB_DEPLOY_REPOSITORY,
   EQB_HOST_CONFIGURATION_PATHS,
   EQB_PERSISTENCE_AUTHORITY_PATHS,
   abandonReleaseBootstrapRecovery,
   assertDeploymentCandidateStillCurrent,
-  assertAuthoritativeDeploymentChecks,
   bootstrapPayloadStageInput,
   bootstrapReleaseLayout,
   classifyReleaseBootstrapJournal,
@@ -24,6 +24,7 @@ import {
   deployReviewedPersistenceLatest,
   deployLatestRelease,
   deploymentGitHubApiArgs,
+  deploymentAuthorityFromEnvironment,
   deploymentSSHInvocation,
   deploymentSSHTransportUser,
   isSshPublicKeyAuthenticationDenied,
@@ -39,6 +40,7 @@ import {
   parseOpenSshEd25519PublicKeyBody,
   parseReviewedPersistenceControllerOutput,
   readCompletedReleaseBootstrapRecovery,
+  readDeploymentCheckRuns,
   readReleaseBootstrapRecovery,
   removeReleaseBootstrapRecovery,
   requireMaintenanceInstallReadinessAuthorization,
@@ -48,6 +50,7 @@ import {
   resumeReleaseLayoutBootstrap,
   resolveLatestDeploymentCandidate,
   updateLatestHostConfiguration,
+  verifyDeploymentAuthority,
 } from './lib/ampOrbDeploy.mjs'
 import {
   buildMaintenanceReadinessTatCommand,
@@ -122,27 +125,63 @@ function readLocalProtectedDiff(previousSha, targetSha, protectedPaths) {
   return String(result.stdout || '').trim().split('\n').filter(Boolean)
 }
 
-function readCommitChecks(sha) {
+function readGitHubJson(endpoint) {
   return JSON.parse(execFileSync(
     'gh',
-    deploymentGitHubApiArgs(
-      `repos/${AMP_ORB_DEPLOY_REPOSITORY}/commits/${sha}/check-runs?filter=latest&per_page=100`,
-    ),
+    deploymentGitHubApiArgs(endpoint),
     { cwd: repositoryRoot, encoding: 'utf8' },
   ))
+}
+
+function readCommitChecks(sha, { amp = false } = {}) {
+  return readDeploymentCheckRuns({
+    sha,
+    checkName: amp ? AMP_ORB_DEPLOY_AMP_CHECK_NAME : null,
+    readJson: readGitHubJson,
+  })
 }
 
 function readMainSha() {
-  const ref = JSON.parse(execFileSync(
-    'gh',
-    deploymentGitHubApiArgs(`repos/${AMP_ORB_DEPLOY_REPOSITORY}/git/ref/heads/main`),
-    { cwd: repositoryRoot, encoding: 'utf8' },
-  ))
+  const ref = readGitHubJson(`repos/${AMP_ORB_DEPLOY_REPOSITORY}/git/ref/heads/main`)
   return ref?.object?.sha
 }
 
+function readWorkflowRun(runId) {
+  return readGitHubJson(`repos/${AMP_ORB_DEPLOY_REPOSITORY}/actions/runs/${runId}`)
+}
+
+const deploymentAuthority = deploymentAuthorityFromEnvironment(process.env)
+
+function readDeploymentVerification(sha) {
+  return verifyDeploymentAuthority({
+    authority: deploymentAuthority,
+    expectedSha: sha,
+    readHostedChecks: (expectedSha) => readCommitChecks(expectedSha),
+    readWorkflowRun,
+    readAmpChecks: (expectedSha) => readCommitChecks(expectedSha, { amp: true }),
+  })
+}
+
+function readLocalSha() {
+  return runGit(['rev-parse', 'HEAD']).trim()
+}
+
+function readLocalStatus() {
+  return runGit(['status', '--porcelain'])
+}
+
+function assertCandidateStillAuthoritative(resolved) {
+  return assertDeploymentCandidateStillCurrent({
+    readLocalSha,
+    readLocalStatus,
+    readMainSha,
+    readDeploymentVerification,
+    sha: resolved.sha,
+  })
+}
+
 async function candidate() {
-  return resolveLatestDeploymentCandidate({ runGit, readMainSha, readCommitChecks })
+  return resolveLatestDeploymentCandidate({ runGit, readMainSha, readDeploymentVerification })
 }
 
 const bootstrapPreflightScript = `
@@ -248,6 +287,7 @@ async function preflight() {
     throw new Error('Current Owner authorization for the read-only production preflight is required')
   }
   const resolved = await candidate()
+  await assertCandidateStillAuthoritative(resolved)
   return withDeploymentCredentials((credentials) => {
     console.log(JSON.stringify({
       candidate: resolved,
@@ -304,7 +344,7 @@ async function maintenanceInstallReadiness() {
     payloadDigest,
     transportUser,
   })
-  await assertDeploymentCandidateStillCurrent({ readMainSha, sha: resolved.sha })
+  await assertCandidateStillAuthoritative(resolved)
   const execution = await executeTencentTatCommand({
     command,
     commandName: `eqb-maint-readiness-${resolved.sha.slice(0, 16)}`,
@@ -346,6 +386,7 @@ async function bootstrapPreflight() {
     throw new Error('Current Owner authorization for the read-only production preflight is required')
   }
   const resolved = await candidate()
+  await assertCandidateStillAuthoritative(resolved)
   console.log(JSON.stringify({
     candidate: resolved,
     productionMutationAllowed: false,
@@ -454,7 +495,7 @@ async function baseline() {
   const result = await migrateLegacyProductionBaseline({
     argv: process.argv.slice(2),
     resolveCandidate: candidate,
-    readMainSha,
+    revalidateCandidate: assertCandidateStillAuthoritative,
     readLegacyPreflight,
     invokeOperator: invokeLegacyBaseline,
   })
@@ -882,7 +923,7 @@ async function bootstrap() {
     const result = await bootstrapReleaseLayout({
       argv: process.argv.slice(2),
       resolveCandidate: async () => resolvedCandidate,
-      readMainSha,
+      revalidateCandidate: assertCandidateStillAuthoritative,
       readLegacyPreflight,
       async invokeBootstrap({ candidate: resolved }) {
         const payload = await stageReleaseBootstrapPayload(resolved)
@@ -949,10 +990,7 @@ async function bootstrapResume() {
     ) {
       throw new Error('Completed bootstrap receipt does not belong to this Deployment project and SSH target')
     }
-    const verification = assertAuthoritativeDeploymentChecks(
-      readCommitChecks(completed.targetSha),
-      completed.targetSha,
-    )
+    const verification = await readDeploymentVerification(completed.targetSha)
     clearCompletedReleaseBootstrapRecovery({
       stateRoot: bootstrapRecoveryRoot,
       targetSha: completed.targetSha,
@@ -975,16 +1013,14 @@ async function bootstrapResume() {
   }
   const recovery = readReleaseBootstrapRecovery({ stateRoot: bootstrapRecoveryRoot })
   const identity = identityFromRecovery(recovery, { projectId, transportTarget })
-  const verification = assertAuthoritativeDeploymentChecks(
-    readCommitChecks(recovery.targetSha),
-    recovery.targetSha,
-  )
+  const verification = await readDeploymentVerification(recovery.targetSha)
   const recoveredCandidate = {
     repository: AMP_ORB_DEPLOY_REPOSITORY,
     sha: recovery.targetSha,
     branch: 'main',
     verification,
   }
+  await assertCandidateStillAuthoritative(recoveredCandidate)
   let recoveryCleaned = false
   try {
     const result = await resumeReleaseLayoutBootstrap({
@@ -1155,7 +1191,7 @@ async function deploy() {
   const result = await deployLatestRelease({
     argv: process.argv.slice(2),
     resolveCandidate: candidate,
-    readMainSha,
+    revalidateCandidate: assertCandidateStillAuthoritative,
     async invokeController(sha) {
       return withDeploymentCredentials((credentials) => (
         invokeController(['deploy', sha], credentials)
@@ -1179,7 +1215,7 @@ async function reviewedPersistenceDeploy() {
   const result = await deployReviewedPersistenceLatest({
     argv: process.argv.slice(2),
     resolveCandidate: candidate,
-    readMainSha,
+    revalidateCandidate: assertCandidateStillAuthoritative,
     readProductionSha: readForcedControllerProductionSha,
     readChangedPaths: readLocalProtectedDiff,
     async invokeController(sha, digest) {
@@ -1200,7 +1236,7 @@ async function updateHostConfig() {
   const result = await updateLatestHostConfiguration({
     argv: process.argv.slice(2),
     resolveCandidate: candidate,
-    readMainSha,
+    revalidateCandidate: assertCandidateStillAuthoritative,
     readProductionSha: readForcedControllerProductionSha,
     readChangedPaths: readLocalProtectedDiff,
     async invokeController(sha, digest) {

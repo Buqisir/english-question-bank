@@ -103,7 +103,10 @@ HEAD exactly.
 
 Output and send the same block to the configured long-lived Focused CI thread
 (`T-01a06542-0449-767c-a74e-f047ed0c6e12`), asking it to report `PASS` or
-`FAIL` back to the development thread:
+`FAIL` back to the development thread from the automatic controller's private
+receipt and GitHub evidence. The Focused agent turn must not run a second Full
+suite, manually start/drain/reload the controller, or write GitHub status or
+Check state:
 
 ```text
 FOCUSED-CI HANDOFF
@@ -119,5 +122,7 @@ Do not claim handoff if delivery did not occur, and do not archive the
 development thread before Focused CI replies. A pending SHA must not be
 deployed. Focused CI `FAIL` pauses every later Ship and should recommend a
 revert; it never performs one. Even Focused CI `PASS` does not replace the
-Deployment gate: exact-main, non-manual hosted `verify` and `e2e` from the
-`github-actions` App must still succeed.
+Deployment gate: its default remains exact-main, non-manual hosted `verify` and
+`e2e` from numeric `github-actions` App ID `15368`, workflow ID `282244920`,
+attempt 1, and one Check Suite. ADR-0025's App modes remain disabled until a
+separate Owner-authorized activation.
