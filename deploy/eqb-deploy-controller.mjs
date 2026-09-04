@@ -19,6 +19,7 @@ import {
   readFileSync,
   readdirSync,
   readlinkSync,
+  realpathSync,
   renameSync,
   rmSync,
   statSync,
@@ -1959,7 +1960,7 @@ function assertInstalledController() {
 }
 
 const isEntrypoint = process.argv[1]
-  && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)
+  && realpathSync(process.argv[1]) === realpathSync(fileURLToPath(import.meta.url))
 
 if (isEntrypoint) {
   try {

@@ -400,12 +400,14 @@ restore_file "$staging/deploy/eqb-deploy-transport" "$TRANSPORT_WRAPPER" 0755
 systemctl daemon-reload
 caddy reload --config "$CADDYFILE"
 strict_health
-forced_preflight=$(/usr/bin/sudo -n -u "$TRANSPORT_USER" -- \
-  /usr/bin/env -i \
+# fd 9 remains the sole lock owner through success or rollback. The stable
+# wrapper cannot run inside this transaction because it acquires the same lock.
+installed_preflight=$(/usr/bin/env -i \
   SSH_ORIGINAL_COMMAND=preflight \
   PATH=/usr/local/bin:/usr/bin:/bin \
-  "$TRANSPORT_WRAPPER")
-/usr/bin/node --input-type=module - "$forced_preflight" <<'NODE'
+  /usr/bin/node --no-addons \
+  "$ACTIVE/deploy/eqb-deploy-controller.mjs")
+/usr/bin/node --input-type=module - "$installed_preflight" <<'NODE'
 const preflight = JSON.parse(process.argv[2])
 const keys = ['caddy', 'controllerVersion', 'eqb', 'layout', 'productionSha', 'schemaVersion']
 if (
