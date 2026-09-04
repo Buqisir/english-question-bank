@@ -1,6 +1,7 @@
 import { ArrowDown, ArrowUp, GripVertical, Trash2 } from 'lucide-react'
-import type { KeyboardEvent, ReactNode } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
 import { groupTypeLabel, type DraftPaperItem, type QuestionGroupCard } from '../../domain/questionBank'
+import { PointingHand } from '../paper-browse/PointingHand'
 import type { SimilarPassagesRequestState } from '../similar-passages/SimilarPassagesPanel'
 
 /** similar-workbench-swap (E7, plan.md "抽屉"): the swap drawer's own props,
@@ -157,8 +158,49 @@ function chineseNumeral(n: number): string {
   return String(n)
 }
 
+/** 小手的高度，与整卷页目录同值（PointingHand 默认 16）。 */
+const HAND_SIZE = 16
+
 export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
   const { items, activeGroupId, onItemClick, onDragStart, onDrop, onMoveItem, onDeleteItem, metaText, swapDrawer } = props
+
+  // ui-northstar: 当前题组由小手指出（「我读到这儿」），不再用一块灰底
+  // pill。整卷页目录同一标记，那边行有嵌套分部要量 getBoundingClientRect；
+  // 这里是等高的一列，offsetTop 就够。
+  const panelRef = useRef<HTMLDivElement>(null)
+  const [handTop, setHandTop] = useState<number | null>(null)
+
+  const syncHand = useCallback((): void => {
+    const panel = panelRef.current
+    if (!panel || !activeGroupId) {
+      setHandTop(null)
+      return
+    }
+    const row = panel.querySelector<HTMLElement>(
+      `[data-draft-group-id="${CSS.escape(activeGroupId)}"]`,
+    )
+    if (!row) {
+      setHandTop(null)
+      return
+    }
+    setHandTop(row.offsetTop + (row.offsetHeight - HAND_SIZE) / 2)
+  }, [activeGroupId])
+
+  useLayoutEffect(() => {
+    syncHand()
+  }, [syncHand, items])
+
+  useEffect(() => {
+    const panel = panelRef.current
+    if (!panel) return
+    const observer = new ResizeObserver(syncHand)
+    observer.observe(panel)
+    window.addEventListener('resize', syncHand)
+    return (): void => {
+      observer.disconnect()
+      window.removeEventListener('resize', syncHand)
+    }
+  }, [syncHand])
 
   if (swapDrawer) {
     return (
@@ -192,6 +234,12 @@ export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
   return (
     <nav className="draft-paper-rail" aria-label="卷面目录">
       {metaText && <p className="draft-paper-rail-meta">{metaText}</p>}
+      <div className="draft-paper-rail-panel" ref={panelRef}>
+      {handTop !== null && (
+        <span className="draft-paper-rail-hand" style={{ top: `${handTop}px` }}>
+          <PointingHand size={HAND_SIZE} />
+        </span>
+      )}
       {items.map((item) => {
         const isMissing = item.groupMissing
         const printableRank = printableRankByItemId.get(item.id)
@@ -221,12 +269,14 @@ export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
             tabIndex={0}
             title={rowTitle}
           >
-            <GripVertical aria-hidden="true" className="draft-paper-rail-grip" size={13} />
             {!isMissing && <span className="draft-paper-rail-no">{chineseNumeral(printableRank ?? 0)}</span>}
             <span className="draft-paper-rail-label">{label}</span>
             {!isMissing && (
               <span className="draft-paper-rail-count">{questionCount} 题</span>
             )}
+            {/* ui-northstar: 拖拽把手移到行尾——它 hover 前不可见但仍占位，
+                留在行首会把小手和标题顶开一格。 */}
+            <GripVertical aria-hidden="true" className="draft-paper-rail-grip" size={13} />
             {/* draft-desk-a scope note: the plan retires per-item action buttons from
                 the rail in favor of the paper-hover sticker (裁点1) — but a groupMissing
                 item never renders in the paper (server/draft-paper/draftPaperStore.mjs's
@@ -276,6 +326,7 @@ export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
         )
       })}
       {items.length === 0 && <p className="draft-paper-rail-empty">从搜索结果添加题组。</p>}
+      </div>
     </nav>
   )
 }

@@ -184,8 +184,8 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
           <>
             <header className="vocabulary-practice-heading">
               <div>
-                <p className="vocabulary-practice-eyebrow">{vocabularySet.title}</p>
                 <h1>翻牌消消乐</h1>
+                <p className="vocabulary-practice-set">{vocabularySet.title}</p>
                 <p>翻开英文和对应的中文核心义。点到英文卡时会朗读一次。</p>
               </div>
               <div className="vocabulary-practice-round" aria-label={`第 ${roundIndex + 1} 轮，共 ${rounds.length} 轮，已配对 ${game.matchedPairCount} 对，共 ${game.totalPairCount} 对`}>

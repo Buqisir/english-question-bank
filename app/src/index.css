@@ -3,6 +3,7 @@
 :root {
   --ink: var(--eqb-color-text);
   --ink-strong: var(--eqb-color-text-strong);
+  --ink-soft: var(--eqb-color-text-secondary); /* 淡墨：目录未选中项、剪刀 */
   --muted: var(--eqb-color-text-muted);
   --surface: var(--eqb-color-bg);
   --surface-strong: #e9ece6;
@@ -28,7 +29,10 @@
    * §2 The Warm-Paper Boundary 修订注记）。--paper-ink/border 暖墨色家族
    * 暂保留（rail/讲评栏文字边线在中性底上仍成立），日后想完全中性化再议。 */
   --paper-bg: #f6f6f4; /* 整卷/讲评页页基底，与首页同一中性白；工具页 chrome 不得用（走 --surface 系） */
-  --paper-desk-bg: var(--paper-bg); /* 工作台预览纸桌，复用同一底色；同上不进工具页 */
+  /* 草稿卷预览纸桌 = 奶绿桌面（北极星口诀：桌面是奶绿，纸是纯白）。原先
+   * 复用 --paper-bg 的中性白让纸和桌几乎同色，纸不像放在桌上；整卷页
+   * (.paper-browse-shell) 早已是奶绿，这里对齐它。不进工具页 chrome。 */
+  --paper-desk-bg: var(--eqb-color-bg);
   --paper-ink: #4a4438; /* 暖纸系正文/次级墨色（rail 项、答案行）；工具页正文仍用 --ink */
   --paper-ink-rgb: 74, 68, 56; /* 与 --paper-ink 同值，供 rgba() alpha 叠层复用；不单独当色值使用 */
   --paper-ink-strong: #2c2820; /* 暖纸系强调墨色（标题、选中态）；工具页强调仍用墨绿 --accent */

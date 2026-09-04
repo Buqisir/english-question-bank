@@ -1,3 +1,4 @@
+import { Book } from 'lucide-react'
 import { useState, type FormEvent } from 'react'
 import './LoginPage.css'
 import { login } from './session.ts'
@@ -28,8 +29,12 @@ export function LoginPage() {
   return (
     <div className="login-page">
       <div className="login-card">
-        <p className="eyebrow">English Question Bank</p>
-        <h1>英语题库工作台</h1>
+        <div className="login-identity">
+          <span className="login-brand-mark" aria-hidden="true">
+            <Book size={12} strokeWidth={1.5} />
+          </span>
+          <h1>英语题库工作台</h1>
+        </div>
         <p className="login-subtitle">输入账号，接着备课。</p>
         {error && <p className="login-error">{error}</p>}
         <form onSubmit={handleSubmit}>

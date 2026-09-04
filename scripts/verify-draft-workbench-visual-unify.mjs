@@ -189,7 +189,12 @@ const hexMatches = [...cssSrcNoComments.matchAll(/#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]
 // pins push `.draft-a4-repaginating`'s `#ffffff` from L448→450 and
 // `.draft-undo-toast`'s from L718→720; `.draft-export-menu-trigger`'s at
 // L165 sits above both edits and is unaffected.
-const WHITELISTED_LINES = new Set([165, 450, 720])
+// ui-northstar 草稿卷: export hover + quieter toggles/more-menu (+6 above
+// the first pin) and rail/paper/sticker follow-through between the later
+// pins. Re-pin #ffffff to L171 / L462 / L770.
+// ui-northstar 卷边: .draft-a4-sheet comment rewrite net -1 above the later
+// pins. Re-pin #ffffff to L171 / L461 / L769.
+const WHITELISTED_LINES = new Set([171, 461, 769])
 
 const unexpectedHex = hexMatches.filter(
   (m) => !(m.value.toLowerCase() === '#ffffff' && WHITELISTED_LINES.has(m.line)),

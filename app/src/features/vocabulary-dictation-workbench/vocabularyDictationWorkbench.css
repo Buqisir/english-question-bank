@@ -1,7 +1,10 @@
+/* 过生词听写台跟整站同一张奶绿书桌。墨绿只做顶栏身份，动作用墨。
+   抽查词头保持内容字号。 */
+
 .dictation-workbench {
   min-height: 100vh;
-  background: #f6f6f4;
-  color: #1e1e1c;
+  background: var(--eqb-color-bg);
+  color: var(--eqb-color-text);
 }
 
 .dictation-workbench button,
@@ -37,7 +40,7 @@
   justify-content: space-between;
   gap: 24px;
   margin-bottom: 24px;
-  border-bottom: 1px solid #d8d8d2;
+  border-bottom: 1px solid var(--eqb-color-border);
 }
 
 .dictation-workbench-navigation .dictation-student-picker {
@@ -48,7 +51,7 @@
 .dictation-record-list header p,
 .dictation-review-heading p {
   margin: 4px 0 0;
-  color: #6a6a64;
+  color: var(--eqb-color-text-muted);
   font-size: 14px;
   line-height: 1.5;
 }
@@ -60,7 +63,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #6a6a64;
+  color: var(--eqb-color-text-muted);
   font-size: 12px;
   font-weight: 500;
 }
@@ -70,10 +73,10 @@
 .dictation-combine-settings input,
 .dictation-number-entry input,
 .dictation-suggestion-control input {
-  border: 1px solid #d8d8d2;
+  border: 1px solid var(--eqb-color-border);
   border-radius: 6px;
-  background: #fff;
-  color: #1e1e1c;
+  background: var(--eqb-color-paper);
+  color: var(--eqb-color-text);
   padding: 8px 12px;
   outline: none;
 }
@@ -83,8 +86,10 @@
 .dictation-combine-settings input:focus,
 .dictation-number-entry input:focus,
 .dictation-suggestion-control input:focus {
-  border-color: #2c6e56;
-  box-shadow: 0 0 0 3px rgba(44, 110, 86, 0.2);
+  border-color: var(--action);
+  outline: 2px solid var(--action);
+  outline-offset: 2px;
+  box-shadow: none;
 }
 
 .dictation-workbench-tabs {
@@ -103,7 +108,7 @@
   border: 0;
   border-bottom: 2px solid transparent;
   background: transparent;
-  color: #6a6a64;
+  color: var(--eqb-color-text-muted);
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;
@@ -111,11 +116,11 @@
 
 .dictation-workbench-tabs button:hover,
 .dictation-workbench-tabs button.is-active {
-  color: #1e4a3a;
+  color: var(--eqb-color-text);
 }
 
 .dictation-workbench-tabs button.is-active {
-  border-bottom-color: #2c6e56;
+  border-bottom-color: var(--action);
 }
 
 .dictation-notice {
@@ -125,10 +130,10 @@
   gap: 16px;
   margin-bottom: 16px;
   padding: 12px 16px;
-  border: 1px solid #a5cdbd;
+  border: 1px solid var(--eqb-color-border);
   border-radius: 6px;
-  background: #eaf1ed;
-  color: #1e4a3a;
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text);
   font-size: 14px;
 }
 
@@ -163,7 +168,7 @@
 .dictation-search-field svg {
   position: absolute;
   left: 12px;
-  color: #6a6a64;
+  color: var(--eqb-color-text-muted);
 }
 
 .dictation-search-field input {
@@ -199,9 +204,9 @@
   justify-content: center;
   gap: 6px;
   min-height: 36px;
-  border: 1px solid #d8d8d2;
+  border: 1px solid var(--eqb-color-border);
   border-radius: 6px;
-  background: #fff;
+  background: var(--eqb-color-paper);
   padding: 6px 12px;
   cursor: pointer;
   font-size: 14px;
@@ -224,16 +229,16 @@
 .dictation-review-actions button:hover,
 .dictation-review-row button:hover,
 .dictation-number-entry > button:hover {
-  border-color: #a5cdbd;
-  background: #eaf1ed;
-  color: #1e4a3a;
+  border-color: var(--eqb-color-border-strong);
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text);
 }
 
 .dictation-set-list {
   overflow: hidden;
-  border: 1px solid #d8d8d2;
+  border: 1px solid var(--eqb-color-border);
   border-radius: 8px;
-  background: #fff;
+  background: var(--eqb-color-paper);
   box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
 }
 
@@ -244,7 +249,7 @@
   gap: 12px;
   min-height: 78px;
   padding: 12px 16px;
-  border-bottom: 1px solid #e8e8e4;
+  border-bottom: 1px solid var(--eqb-color-border-subtle);
   cursor: pointer;
 }
 
@@ -253,11 +258,11 @@
 }
 
 .dictation-set-row:hover {
-  background: #f6f6f4;
+  background: var(--eqb-color-desk);
 }
 
 .dictation-set-row.is-selected {
-  background: #eaf1ed;
+  background: var(--eqb-color-desk);
 }
 
 .dictation-set-row input,
@@ -265,7 +270,7 @@
 .dictation-check-setting input {
   width: 16px;
   height: 16px;
-  accent-color: #2c6e56;
+  accent-color: var(--action);
 }
 
 .dictation-selection-order {
@@ -274,13 +279,14 @@
   height: 24px;
   place-items: center;
   border-radius: 50%;
-  color: #1e4a3a;
+  color: var(--eqb-color-text);
   font-size: 12px;
   font-weight: 600;
 }
 
 .dictation-set-row.is-selected .dictation-selection-order {
-  background: #cfe4da;
+  background: var(--action);
+  color: var(--eqb-color-paper);
 }
 
 .dictation-set-main,
@@ -311,7 +317,7 @@
 .dictation-review-row small,
 .dictation-created-links span {
   overflow: hidden;
-  color: #6a6a64;
+  color: var(--eqb-color-text-muted);
   font-size: 12px;
   line-height: 1.5;
   text-overflow: ellipsis;
@@ -329,7 +335,7 @@
   justify-content: center;
   gap: 16px;
   margin-top: 16px;
-  color: #6a6a64;
+  color: var(--eqb-color-text-muted);
   font-size: 12px;
 }
 
@@ -344,9 +350,9 @@
   z-index: 10;
   bottom: 16px;
   margin-top: 24px;
-  border: 1px solid #c6c6c0;
+  border: 1px solid var(--eqb-color-border-strong);
   border-radius: 8px;
-  background: #fff;
+  background: var(--eqb-color-paper);
   box-shadow: var(--eqb-shadow-floating);
   outline: none;
 }
@@ -357,7 +363,7 @@
   justify-content: space-between;
   gap: 16px;
   padding: 12px 16px;
-  border-bottom: 1px solid #e8e8e4;
+  border-bottom: 1px solid var(--eqb-color-border-subtle);
 }
 
 .dictation-selection-summary > div {
@@ -371,7 +377,7 @@
 }
 
 .dictation-selection-summary span {
-  color: #6a6a64;
+  color: var(--eqb-color-text-muted);
   font-size: 14px;
 }
 
@@ -379,7 +385,7 @@
   min-height: 32px;
   border: 0;
   background: transparent;
-  color: #6a6a64;
+  color: var(--eqb-color-text-muted);
   font-size: 12px;
 }
 
@@ -393,24 +399,24 @@
 }
 
 .dictation-selection-settings {
-  border-bottom: 1px solid #e8e8e4;
+  border-bottom: 1px solid var(--eqb-color-border-subtle);
 }
 
 .dictation-selection-settings > summary {
   width: max-content;
   padding: 10px 16px;
-  color: #6a6a64;
+  color: var(--eqb-color-text-muted);
   cursor: pointer;
   font-size: 12px;
   font-weight: 600;
 }
 
 .dictation-selection-settings[open] > summary {
-  color: #1e4a3a;
+  color: var(--eqb-color-text);
 }
 
 .dictation-selection-settings .dictation-combine-settings {
-  border-top: 1px solid #e8e8e4;
+  border-top: 1px solid var(--eqb-color-border-subtle);
 }
 
 .dictation-combine-settings {
@@ -450,8 +456,8 @@
 
 .dictation-combine-settings fieldset button {
   min-height: 36px;
-  border: 1px solid #d8d8d2;
-  background: #fff;
+  border: 1px solid var(--eqb-color-border);
+  background: var(--eqb-color-paper);
   padding: 6px 12px;
   cursor: pointer;
   font-size: 14px;
@@ -467,9 +473,9 @@
 }
 
 .dictation-combine-settings fieldset button.is-selected {
-  border-color: #2c6e56;
-  background: #eaf1ed;
-  color: #1e4a3a;
+  border-color: var(--action);
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text);
 }
 
 .dictation-check-setting {
@@ -487,9 +493,9 @@
 .dictation-selection-actions > button:nth-of-type(1),
 .dictation-suggestion-control button,
 .dictation-suggestion-panel > div:last-child button:first-child {
-  border-color: #2c6e56;
-  background: #2c6e56;
-  color: #fff;
+  border-color: var(--action);
+  background: var(--action);
+  color: var(--eqb-color-paper);
 }
 
 .dictation-selection-actions details {
@@ -514,9 +520,9 @@
   gap: 8px;
   width: 380px;
   padding: 12px;
-  border: 1px solid #d8d8d2;
+  border: 1px solid var(--eqb-color-border);
   border-radius: 8px;
-  background: #fff;
+  background: var(--eqb-color-paper);
   box-shadow: var(--eqb-shadow-floating);
 }
 
@@ -534,9 +540,9 @@
 
 .dictation-selection-actions details button {
   min-height: 34px;
-  border: 1px solid #d8d8d2;
+  border: 1px solid var(--eqb-color-border);
   border-radius: 6px;
-  background: #f6f6f4;
+  background: var(--eqb-color-desk);
   cursor: pointer;
   font-size: 12px;
 }
@@ -550,7 +556,7 @@
 .dictation-download-option + .dictation-download-option:last-of-type {
   margin-top: 4px;
   padding-top: 4px;
-  border-top: 1px solid #e8e8e4;
+  border-top: 1px solid var(--eqb-color-border-subtle);
 }
 
 .dictation-selection-actions details > div > .dictation-download-option {
@@ -565,7 +571,7 @@
 .dictation-download-option > .dictation-save-as-button {
   justify-content: center;
   min-width: 94px;
-  color: #1e4a3a;
+  color: var(--eqb-color-text);
   font-size: 12px;
   white-space: nowrap;
 }
@@ -573,14 +579,14 @@
 .dictation-created-results {
   margin-bottom: 24px;
   position: relative;
-  border: 1px solid #c6c6c0;
+  border: 1px solid var(--eqb-color-border-strong);
   border-radius: 8px;
-  background: #fff;
+  background: var(--eqb-color-paper);
   box-shadow: var(--eqb-shadow-card);
 }
 
 .dictation-created-results:focus-visible {
-  outline: 2px solid #1e4a3a;
+  outline: 2px solid var(--action);
   outline-offset: 3px;
 }
 
@@ -591,7 +597,7 @@
   gap: 16px;
   padding: 12px 16px;
   border-radius: 8px 8px 0 0;
-  background: #f6f6f4;
+  background: var(--eqb-color-desk);
 }
 
 .dictation-created-summary {
@@ -601,7 +607,7 @@
 }
 
 .dictation-created-results > header span {
-  color: #6a6a64;
+  color: var(--eqb-color-text-muted);
   font-size: 12px;
 }
 
@@ -613,9 +619,9 @@
 
 .dictation-created-header-actions button {
   min-height: 32px;
-  border: 1px solid #d8d8d2;
+  border: 1px solid var(--eqb-color-border);
   border-radius: 6px;
-  background: #fff;
+  background: var(--eqb-color-paper);
   padding: 5px 10px;
   cursor: pointer;
   font-size: 12px;
@@ -632,8 +638,8 @@
 .dictation-created-links {
   display: grid;
   gap: 1px;
-  border-top: 1px solid #e8e8e4;
-  background: #e8e8e4;
+  border-top: 1px solid var(--eqb-color-border-subtle);
+  background: var(--eqb-color-border-subtle);
 }
 
 .dictation-created-links > div {
@@ -642,7 +648,7 @@
   align-items: center;
   gap: 14px;
   padding: 14px 16px;
-  background: #fff;
+  background: var(--eqb-color-paper);
 }
 
 .dictation-created-links > div:last-child {
@@ -656,7 +662,7 @@
 }
 
 .dictation-created-links > div > span small {
-  color: #6a6a64;
+  color: var(--eqb-color-text-muted);
   font-size: 12px;
 }
 
@@ -669,7 +675,7 @@
 }
 
 .dictation-created-links a {
-  color: #1e4a3a;
+  color: var(--eqb-color-text);
   text-decoration: none;
 }
 
@@ -683,12 +689,12 @@
   justify-content: center;
   gap: 6px;
   min-height: 36px;
-  border: 1px solid #d8d8d2;
+  border: 1px solid var(--eqb-color-border);
   border-radius: 6px;
   padding: 6px 10px;
-  background: #fff;
+  background: var(--eqb-color-paper);
   cursor: pointer;
-  color: #1e1e1c;
+  color: var(--eqb-color-text);
   font-size: 14px;
   font-weight: 500;
   list-style: none;
@@ -700,9 +706,9 @@
 
 .dictation-download-menu > summary:hover,
 .dictation-download-menu[open] > summary {
-  border-color: #a5cdbd;
-  background: #eaf1ed;
-  color: #1e4a3a;
+  border-color: var(--eqb-color-border-strong);
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text);
 }
 
 .dictation-download-menu > summary svg:last-child {
@@ -724,9 +730,9 @@
   overflow-y: auto;
   gap: 2px;
   padding: 6px;
-  border: 1px solid #d8d8d2;
+  border: 1px solid var(--eqb-color-border);
   border-radius: 8px;
-  background: #fff;
+  background: var(--eqb-color-paper);
   box-shadow: var(--eqb-shadow-floating);
 }
 
@@ -757,9 +763,9 @@
 .dictation-task-queue,
 .dictation-record-list,
 .dictation-review-workspace {
-  border: 1px solid #d8d8d2;
+  border: 1px solid var(--eqb-color-border);
   border-radius: 8px;
-  background: #fff;
+  background: var(--eqb-color-paper);
   box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
 }
 
@@ -771,7 +777,7 @@
   justify-content: space-between;
   gap: 16px;
   padding: 16px;
-  border-bottom: 1px solid #e8e8e4;
+  border-bottom: 1px solid var(--eqb-color-border-subtle);
 }
 
 .dictation-task-queue h2,
@@ -787,7 +793,7 @@
 }
 
 .dictation-task-date-group + .dictation-task-date-group {
-  border-top: 1px solid #d8d8d2;
+  border-top: 1px solid var(--eqb-color-border);
 }
 
 .dictation-task-date-heading {
@@ -796,7 +802,7 @@
   justify-content: space-between;
   gap: 16px;
   padding: 12px 16px;
-  background: #f6f6f4;
+  background: var(--eqb-color-desk);
 }
 
 .dictation-task-date-heading > div {
@@ -812,7 +818,7 @@
 }
 
 .dictation-task-date-heading span {
-  color: #6a6a64;
+  color: var(--eqb-color-text-muted);
   font-size: 12px;
 }
 
@@ -830,7 +836,7 @@
   gap: 12px;
   min-height: 72px;
   padding: 12px 16px;
-  border-bottom: 1px solid #e8e8e4;
+  border-bottom: 1px solid var(--eqb-color-border-subtle);
 }
 
 .dictation-task-list article {
@@ -838,7 +844,7 @@
 }
 
 .dictation-task-list article.is-selected {
-  background: #eaf1ed;
+  background: var(--eqb-color-desk);
 }
 
 .dictation-task-select {
@@ -851,7 +857,7 @@
   width: 16px;
   height: 16px;
   margin: 0;
-  accent-color: #2c6e56;
+  accent-color: var(--action);
 }
 
 .dictation-task-select span {
@@ -886,7 +892,7 @@
 }
 
 .dictation-record-list article.is-void {
-  background: #f6f6f4;
+  background: var(--eqb-color-desk);
   opacity: 0.72;
 }
 
@@ -904,9 +910,9 @@
   gap: 12px;
   margin-top: 16px;
   padding: 12px 16px;
-  border: 1px solid #c6c6c0;
+  border: 1px solid var(--eqb-color-border-strong);
   border-radius: 8px;
-  background: #fff;
+  background: var(--eqb-color-paper);
   box-shadow: var(--eqb-shadow-floating);
 }
 
@@ -939,7 +945,7 @@
 }
 
 .dictation-task-selection-panel > div span {
-  color: #6a6a64;
+  color: var(--eqb-color-text-muted);
   font-size: 12px;
 }
 
@@ -974,16 +980,16 @@
 
 /* Overrides the shared neutral button colors because this is the current accent selection. */
 .dictation-task-selection-panel fieldset button.is-selected {
-  border-color: #2c6e56;
-  background: #eaf1ed;
-  color: #1e4a3a;
+  border-color: var(--action);
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text);
 }
 
 /* Overrides the shared neutral button colors because date export is this toolbar's primary action. */
 .dictation-task-selection-panel button.is-primary {
-  border-color: #2c6e56;
-  background: #2c6e56;
-  color: #fff;
+  border-color: var(--action);
+  background: var(--action);
+  color: var(--eqb-color-paper);
 }
 
 .dictation-task-date-heading button:focus-visible,
@@ -991,7 +997,7 @@
 .dictation-task-list a:focus-visible,
 .dictation-task-select input:focus-visible,
 .dictation-task-selection-panel button:focus-visible {
-  outline: 2px solid #2c6e56;
+  outline: 2px solid var(--action);
   outline-offset: 2px;
 }
 
@@ -1002,19 +1008,20 @@
   align-content: center;
   gap: 8px;
   padding: 32px;
-  color: #6a6a64;
+  color: var(--eqb-color-text-muted);
   text-align: center;
 }
 
 .dictation-empty-state h2 {
   margin: 0;
-  color: #1e1e1c;
-  font-size: 16px;
+  color: var(--eqb-color-text);
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .dictation-empty-state p {
   margin: 0;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .dictation-review-heading {
@@ -1028,7 +1035,7 @@
 }
 
 .dictation-suggestion-control label {
-  color: #6a6a64;
+  color: var(--eqb-color-text-muted);
   font-size: 12px;
 }
 
@@ -1043,8 +1050,8 @@
   align-items: center;
   gap: 16px;
   padding: 16px;
-  border-bottom: 1px solid #a5cdbd;
-  background: #eaf1ed;
+  border-bottom: 1px solid var(--eqb-color-border);
+  background: var(--eqb-color-desk);
 }
 
 .dictation-suggestion-panel > div:first-child {
@@ -1059,7 +1066,7 @@
 
 .dictation-suggestion-panel span,
 .dictation-suggestion-panel small {
-  color: #1e4a3a;
+  color: var(--eqb-color-text);
   font-size: 12px;
 }
 
@@ -1080,7 +1087,7 @@
 
 .dictation-suggestion-panel li span {
   margin-right: 6px;
-  color: #1e1e1c;
+  color: var(--eqb-color-text);
   font-weight: 600;
 }
 
@@ -1099,8 +1106,8 @@
   align-items: center;
   gap: 6px;
   padding: 10px 16px;
-  border-bottom: 1px solid #d8d8d2;
-  background: #fff;
+  border-bottom: 1px solid var(--eqb-color-border);
+  background: var(--eqb-color-paper);
   box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
 }
 
@@ -1126,16 +1133,16 @@
 }
 
 .dictation-review-table-head {
-  border-bottom: 1px solid #d8d8d2;
-  background: #f6f6f4;
-  color: #6a6a64;
+  border-bottom: 1px solid var(--eqb-color-border);
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text-muted);
   font-size: 12px;
   font-weight: 500;
 }
 
 .dictation-review-row {
   min-height: 76px;
-  border-bottom: 1px solid #e8e8e4;
+  border-bottom: 1px solid var(--eqb-color-border-subtle);
 }
 
 .dictation-review-row:last-child {
@@ -1143,7 +1150,7 @@
 }
 
 .dictation-review-row.is-paused {
-  background: #f6f6f4;
+  background: var(--eqb-color-desk);
   opacity: 0.76;
 }
 
@@ -1172,9 +1179,9 @@
 }
 
 .dictation-review-row button.is-active {
-  border-color: #a5cdbd;
-  background: #eaf1ed;
-  color: #1e4a3a;
+  border-color: var(--eqb-color-border-strong);
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text);
 }
 
 .dictation-review-evidence > span {
@@ -1186,8 +1193,8 @@
   display: inline-flex;
   padding: 1px 6px;
   border-radius: 4px;
-  background: #ededea;
-  color: #6a6a64;
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text-muted);
   font-size: 12px;
   font-weight: 600;
 }
@@ -1198,22 +1205,23 @@
   place-items: center;
   align-content: center;
   gap: 16px;
-  background: #f6f6f4;
-  color: #6a6a64;
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text-muted);
   font-size: 16px;
 }
 
 .dictation-workbench-message h1 {
   margin: 0;
-  color: #1e1e1c;
-  font-size: 28px;
+  color: var(--eqb-color-text);
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .dictation-workbench-message button {
-  border: 1px solid #2c6e56;
+  border: 1px solid var(--action);
   border-radius: 6px;
-  background: #2c6e56;
-  color: #fff;
+  background: var(--action);
+  color: var(--eqb-color-paper);
   padding: 8px 16px;
 }
 
@@ -1225,7 +1233,7 @@
 .dictation-review-channel,
 .dictation-history-filter {
   display: inline-flex;
-  border: 1px solid #d8d8d2;
+  border: 1px solid var(--eqb-color-border);
   border-radius: 6px;
   overflow: hidden;
 }
@@ -1234,8 +1242,8 @@
 .dictation-history-filter button {
   min-height: 36px;
   border: 0;
-  border-right: 1px solid #d8d8d2;
-  background: #fff;
+  border-right: 1px solid var(--eqb-color-border);
+  background: var(--eqb-color-paper);
   padding: 6px 12px;
   cursor: pointer;
   font-size: 14px;
@@ -1249,8 +1257,8 @@
 
 .dictation-review-channel button.is-selected,
 .dictation-history-filter button.is-selected {
-  background: #eaf1ed;
-  color: #1e4a3a;
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text);
 }
 
 .dictation-history-filter {
@@ -1265,9 +1273,9 @@
   min-height: 32px;
   box-sizing: border-box;
   padding: 6px 10px;
-  border: 1px solid #d8d8d2;
+  border: 1px solid var(--eqb-color-border);
   border-radius: 6px;
-  background: #fff;
+  background: var(--eqb-color-paper);
   cursor: pointer;
   font-size: 12px;
   font-weight: 500;
@@ -1279,9 +1287,9 @@
 }
 
 .dictation-history-details[open] > summary {
-  border-color: #a5cdbd;
-  background: #eaf1ed;
-  color: #1e4a3a;
+  border-color: var(--eqb-color-border-strong);
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text);
 }
 
 .dictation-history-details > div {
@@ -1292,9 +1300,9 @@
   width: min(360px, calc(100vw - 48px));
   max-height: 320px;
   overflow: auto;
-  border: 1px solid #c6c6c0;
+  border: 1px solid var(--eqb-color-border-strong);
   border-radius: 8px;
-  background: #fff;
+  background: var(--eqb-color-paper);
   padding: 8px 12px;
   box-shadow: var(--eqb-shadow-floating);
 }
@@ -1305,7 +1313,7 @@
   gap: 16px;
   margin: 0;
   padding: 7px 0;
-  border-bottom: 1px solid #e8e8e4;
+  border-bottom: 1px solid var(--eqb-color-border-subtle);
   font-size: 12px;
 }
 
@@ -1316,15 +1324,15 @@
 .dictation-suggestion-control-row {
   justify-content: flex-end;
   padding: 12px 16px;
-  border-bottom: 1px solid #e8e8e4;
+  border-bottom: 1px solid var(--eqb-color-border-subtle);
 }
 
 .meaning-recall-home,
 .meaning-recall-result,
 .meaning-recall-stage {
-  border: 1px solid #d8d8d2;
+  border: 1px solid var(--eqb-color-border);
   border-radius: 8px;
-  background: #fff;
+  background: var(--eqb-color-paper);
   box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
 }
 
@@ -1336,7 +1344,7 @@
   justify-content: space-between;
   gap: 16px;
   padding: 16px;
-  border-bottom: 1px solid #e8e8e4;
+  border-bottom: 1px solid var(--eqb-color-border-subtle);
 }
 
 .meaning-recall-heading h2,
@@ -1349,7 +1357,7 @@
 .meaning-recall-heading p,
 .meaning-recall-result > header p {
   margin: 4px 0 0;
-  color: #6a6a64;
+  color: var(--eqb-color-text-muted);
   font-size: 14px;
 }
 
@@ -1361,11 +1369,11 @@
   justify-content: center;
   gap: 6px;
   min-height: 36px;
-  border: 1px solid #d8d8d2;
+  border: 1px solid var(--eqb-color-border);
   border-radius: 6px;
-  background: #fff;
+  background: var(--eqb-color-paper);
   padding: 6px 12px;
-  color: #1e1e1c;
+  color: var(--eqb-color-text);
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;
@@ -1374,18 +1382,18 @@
 .meaning-recall-home button:hover:not(:disabled),
 .meaning-recall-result button:hover:not(:disabled),
 .meaning-recall-stage button:hover:not(:disabled) {
-  border-color: #a5cdbd;
-  background: #eaf1ed;
-  color: #1e4a3a;
+  border-color: var(--eqb-color-border-strong);
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text);
 }
 
 .meaning-recall-home button.is-primary,
 .meaning-recall-result button.is-primary,
 .meaning-recall-stage button.is-primary,
 .meaning-recall-stage button.is-correct {
-  border-color: #2c6e56;
-  background: #2c6e56;
-  color: #fff;
+  border-color: var(--action);
+  background: var(--action);
+  color: var(--eqb-color-paper);
 }
 
 .meaning-recall-home button:focus-visible,
@@ -1393,8 +1401,9 @@
 .meaning-recall-stage button:focus-visible,
 .meaning-recall-home input:focus-visible,
 .meaning-recall-result input:focus-visible {
-  outline: 0;
-  box-shadow: 0 0 0 3px rgba(44, 110, 86, 0.2);
+  outline: 2px solid var(--action);
+  outline-offset: 2px;
+  box-shadow: none;
 }
 
 .meaning-recall-start-row {
@@ -1417,7 +1426,7 @@
 .meaning-recall-start-row span,
 .meaning-recall-suggestion span,
 .meaning-recall-stage > header span {
-  color: #6a6a64;
+  color: var(--eqb-color-text-muted);
   font-size: 12px;
 }
 
@@ -1426,7 +1435,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #6a6a64;
+  color: var(--eqb-color-text-muted);
   font-size: 12px;
   font-weight: 500;
   white-space: nowrap;
@@ -1435,11 +1444,11 @@
 .meaning-recall-start-row input,
 .meaning-recall-suggestion input {
   width: 64px;
-  border: 1px solid #d8d8d2;
+  border: 1px solid var(--eqb-color-border);
   border-radius: 6px;
-  background: #fff;
+  background: var(--eqb-color-paper);
   padding: 8px;
-  color: #1e1e1c;
+  color: var(--eqb-color-text);
 }
 
 .meaning-recall-start-row fieldset,
@@ -1472,14 +1481,14 @@
 
 .meaning-recall-start-row fieldset button:last-of-type,
 .meaning-recall-result-list fieldset button:last-of-type {
-  border-right: 1px solid #d8d8d2;
+  border-right: 1px solid var(--eqb-color-border);
   border-radius: 0 6px 6px 0;
 }
 
 .meaning-recall-start-row fieldset button.is-selected,
 .meaning-recall-result-list fieldset button.is-selected {
-  background: #eaf1ed;
-  color: #1e4a3a;
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text);
 }
 
 .meaning-recall-result-list fieldset button.is-wrong,
@@ -1495,8 +1504,8 @@
   align-items: center;
   gap: 16px;
   padding: 16px;
-  border-top: 1px solid #e8e8e4;
-  background: #f6f6f4;
+  border-top: 1px solid var(--eqb-color-border-subtle);
+  background: var(--eqb-color-desk);
 }
 
 .meaning-recall-suggestion-result {
@@ -1504,7 +1513,7 @@
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 16px;
   padding: 16px;
-  border-top: 1px solid #e8e8e4;
+  border-top: 1px solid var(--eqb-color-border-subtle);
 }
 
 .meaning-recall-suggestion-result ol {
@@ -1522,7 +1531,7 @@
 
 .meaning-recall-suggestion-result li span {
   display: block;
-  color: #6a6a64;
+  color: var(--eqb-color-text-muted);
   font-size: 12px;
 }
 
@@ -1566,7 +1575,7 @@
 
 .meaning-recall-word > p {
   margin: 0;
-  color: #6a6a64;
+  color: var(--eqb-color-text-muted);
   font-size: 16px;
 }
 
@@ -1577,13 +1586,13 @@
 }
 
 .meaning-recall-reveal > span {
-  color: #6a6a64;
+  color: var(--eqb-color-text-muted);
   font-size: 16px;
 }
 
 .meaning-recall-reveal > strong {
   max-width: 680px;
-  color: #1e4a3a;
+  color: var(--eqb-color-text);
   font-size: 28px;
   font-weight: 600;
 }
@@ -1594,7 +1603,7 @@
   justify-content: center;
   gap: 12px;
   padding: 16px;
-  border-top: 1px solid #e8e8e4;
+  border-top: 1px solid var(--eqb-color-border-subtle);
 }
 
 .meaning-recall-stage kbd {
@@ -1606,8 +1615,8 @@
 }
 
 .meaning-recall-stage button:not(.is-primary):not(.is-correct):not(.is-wrong) kbd {
-  border-color: #c6c6c0;
-  background: #f6f6f4;
+  border-color: var(--eqb-color-border-strong);
+  background: var(--eqb-color-desk);
 }
 
 .meaning-recall-result-summary {
@@ -1618,7 +1627,7 @@
 }
 
 .meaning-recall-result-summary strong {
-  font-size: 28px;
+  font-size: 20px;
   font-weight: 600;
 }
 
@@ -1627,37 +1636,37 @@
 }
 
 .meaning-recall-result-summary span {
-  color: #6a6a64;
+  color: var(--eqb-color-text-muted);
   font-size: 14px;
 }
 
 .meaning-recall-result-actions {
   padding: 8px 16px 20px;
-  border-bottom: 1px solid #e8e8e4;
+  border-bottom: 1px solid var(--eqb-color-border-subtle);
 }
 
 .meaning-recall-export-name {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #6a6a64;
+  color: var(--eqb-color-text-muted);
   font-size: 12px;
   font-weight: 500;
 }
 
 .meaning-recall-export-name input {
   width: 240px;
-  border: 1px solid #d8d8d2;
+  border: 1px solid var(--eqb-color-border);
   border-radius: 6px;
   padding: 8px 12px;
   outline: none;
-  background: #fff;
-  color: #1e1e1c;
+  background: var(--eqb-color-paper);
+  color: var(--eqb-color-text);
   font-size: 14px;
 }
 
 .meaning-recall-export-name input:focus {
-  border-color: #2c6e56;
+  border-color: var(--action);
 }
 
 .meaning-recall-result-actions fieldset {
@@ -1672,7 +1681,7 @@
   float: left;
   align-self: center;
   margin-right: 8px;
-  color: #6a6a64;
+  color: var(--eqb-color-text-muted);
   font-size: 12px;
 }
 
@@ -1687,19 +1696,19 @@
 }
 
 .meaning-recall-result-actions fieldset button:last-of-type {
-  border-right: 1px solid #d8d8d2;
+  border-right: 1px solid var(--eqb-color-border);
   border-radius: 0 6px 6px 0;
 }
 
 .meaning-recall-result-actions fieldset button.is-selected {
-  border-color: #a5cdbd;
-  background: #eaf1ed;
-  color: #1e4a3a;
+  border-color: var(--eqb-color-border-strong);
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text);
 }
 
 .meaning-recall-result-actions > span {
   align-self: center;
-  color: #6a6a64;
+  color: var(--eqb-color-text-muted);
   font-size: 12px;
 }
 
@@ -1709,7 +1718,7 @@
   align-items: center;
   gap: 16px;
   padding: 12px 16px;
-  border-bottom: 1px solid #e8e8e4;
+  border-bottom: 1px solid var(--eqb-color-border-subtle);
 }
 
 .meaning-recall-result-list article:last-child {
@@ -1725,7 +1734,7 @@
 
 .meaning-recall-result-list article span {
   overflow: hidden;
-  color: #6a6a64;
+  color: var(--eqb-color-text-muted);
   font-size: 12px;
   text-overflow: ellipsis;
   white-space: nowrap;

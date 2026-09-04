@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
-import { Archive, ArrowLeft, Book, BookMarked, LogOut, Pencil, Tag } from 'lucide-react'
+import { Archive, ArrowLeft, Book, BookMarked, LogOut, Pencil, Settings } from 'lucide-react'
 
 function userInitials(username: string): string {
   return username.slice(0, 2)
@@ -183,7 +183,7 @@ export function AppTopbar(props: AppTopbarProps): ReactNode {
             onClick={props.onToggleAdmin}
             aria-pressed={props.adminActive}
           >
-            <Tag size={14} />
+            <Settings size={14} />
             {props.adminActive ? '退出管理' : '管理'}
           </button>
         )}

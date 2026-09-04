@@ -1,35 +1,53 @@
+/* 管理台跟首页同一张奶绿书桌：920 内容宽、32 侧垫，不套白卡片。
+   这里只有低频 owner 工具，不做后台看板。 */
+
 .admin-workbench {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  padding: 20px;
-}
-
-.admin-panel {
-  /* ui-p1-shell C3: no longer borrows .library-panel (its home-mode-ai
-     `margin: 0 auto` rule triggers flexbox auto-margin sizing inside the
-     .admin-workbench column, shrinking this panel to ~310px of content
-     width instead of filling the page). Owns its own full-width sizing. */
+  box-sizing: border-box;
+  margin: 0 auto;
+  max-width: 920px;
+  padding: 24px 32px 64px;
   width: 100%;
-  max-width: 1160px;
-  min-width: 0;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 18px 20px;
 }
 
-.admin-panel-note {
-  margin: 0 0 14px;
-  color: var(--muted);
+.admin-workbench-head h1 {
+  color: var(--eqb-color-text);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.admin-workbench-head p {
+  color: var(--eqb-color-text-muted);
   font-size: 13px;
   line-height: 1.5;
+  margin: 8px 0 0;
 }
 
-.admin-action-row {
+.admin-tool {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 14px;
+  gap: 12px 16px;
+  margin-top: 24px;
+}
+
+.admin-backfill-summary {
+  color: var(--eqb-color-text-muted);
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.admin-backfill-fail,
+.admin-backfill-error {
+  color: var(--eqb-color-danger);
+}
+
+.admin-backfill-error {
+  flex-basis: 100%;
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0;
 }

@@ -53,17 +53,12 @@ export function buildA4PreviewHtml(paginatedHtml: string): string {
 
   /* Card treatment only — width/height/padding stay whatever paged.js already
      computed on .pagedjs_page (this class is ADDED alongside it, per
-     paginationDomContract.mjs's frozen contract, never replacing it). A 1px
-     border under box-sizing:border-box shrinks the content box by a
-     sub-pixel amount that cannot move any already-decided page break — it is
-     purely a screen decoration layered after pagination happened server-side. */
+     paginationDomContract.mjs's frozen contract, never replacing it).
+     卷边跟看整卷 .paper-browse-zoom 同一条：1px 浅唇 + 软投影，不描边。 */
   .preview-page {
     background: #fff;
-    border: 1px solid #bfb6a8;
-    box-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.9) inset,
-      0 18px 36px rgba(41, 35, 27, 0.18),
-      0 3px 10px rgba(41, 35, 27, 0.12);
+    border: 0;
+    box-shadow: 0 1px 0 #00000010, 0 12px 32px #00000014;
     box-sizing: border-box;
     margin: 0 auto 24px;
     position: relative;

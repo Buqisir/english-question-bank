@@ -8,6 +8,9 @@
   --eqb-color-border-strong: #c6c6c0;
   --eqb-color-text: #1f1f1d;
   --eqb-color-text-strong: #1f1f1d;
+  /* 淡墨 — 要看清但不是动作：目录未选中项、剪刀。北极星命名表 2026-09-04。
+     整卷页目录先用字面值起草，此处转正为 token 供草稿卷页共用。 */
+  --eqb-color-text-secondary: #4a4c48;
   --eqb-color-text-muted: #6b6e68;
   --eqb-color-text-faint: #9a9d97;
   --eqb-color-action: #1f1f1d;
