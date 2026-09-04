@@ -209,9 +209,12 @@ async function runOwnerFlow(browser) {
     await page.locator('.detail-view').waitFor({ timeout: 10_000 })
     pass('Owner opens 题组详情 from the card')
 
-    // Owner-only gate elements are present for the owner.
-    await page.locator('[aria-label="删除题组"]').waitFor({ timeout: 10_000 })
-    pass('Owner detail view shows the owner-only 删除题组 control')
+    // Owner-only gate: 编辑/删除 live in the detail 「更多操作」 menu.
+    await page.locator('.detail-view .peek-actions-menu').getByRole('button', { name: '更多操作' }).click()
+    await page.getByRole('menuitem', { name: '删除' }).waitFor({ timeout: 10_000 })
+    await page.getByRole('menuitem', { name: '编辑' }).waitFor({ timeout: 10_000 })
+    await page.keyboard.press('Escape')
+    pass('Owner detail view shows the owner-only 编辑/删除 menu')
 
     // C3: add to draft from the detail view. NOTE: selectedDetail (the detail
     // view's own state) is not re-synced with questionGroups after the add, so the
@@ -330,19 +333,21 @@ async function runMemberFlow(browser, ownerDraftPaperId) {
     pass('Member opens 题组详情 from the card')
 
     // C4: owner-only panels must ALL be absent for the member.
+    const ownerAdminMenuCount = await page.locator('.detail-view .peek-actions-menu').count()
     const editButtonCount = await page.getByRole('button', { name: '编辑' }).count()
-    const deleteButtonCount = await page.locator('[aria-label="删除题组"]').count()
+    const deleteButtonCount = await page.getByRole('menuitem', { name: '删除' }).count()
     const answerCompareCount = await page.locator('.answer-compare-summary').count()
     const verifyListCount = await page.locator('.verify-list').count()
     const manageButtonCount = await page.getByRole('button', { name: /^管理$|^退出管理$/ }).count()
     const goneAway = {
+      ownerAdminMenuCount,
       editButtonCount,
       deleteButtonCount,
       answerCompareCount,
       verifyListCount,
       manageButtonCount,
     }
-    if (editButtonCount !== 0 || deleteButtonCount !== 0 || answerCompareCount !== 0 || verifyListCount !== 0 || manageButtonCount !== 0) {
+    if (ownerAdminMenuCount !== 0 || editButtonCount !== 0 || deleteButtonCount !== 0 || answerCompareCount !== 0 || verifyListCount !== 0 || manageButtonCount !== 0) {
       fail('Member view must hide all owner-only gate elements', JSON.stringify(goneAway))
     }
     pass('Member detail view hides 编辑/删除/答案对比统计/verify-list/顶栏管理 (member-detail-gate holds)')
