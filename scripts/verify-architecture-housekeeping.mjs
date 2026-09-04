@@ -207,6 +207,7 @@ for (const [changedFile, expectedRisk, expectedPack] of [
   ['.amp/plugins/github-ci-wakeup.js', 'auth-persistence-migration', 'security'],
   ['deploy/eqb-deploy-controller.mjs', 'auth-persistence-migration', 'security'],
   ['scripts/amp-orb-ci.mjs', 'auth-persistence-migration', 'security'],
+  ['scripts/verify-amp-orb-ci.mjs', 'auth-persistence-migration', 'security'],
   ['scripts/amp-orb-deploy.mjs', 'auth-persistence-migration', 'security'],
   ['scripts/lib/ampOrbDeploy.mjs', 'auth-persistence-migration', 'security'],
   ['scripts/lib/tencentTat.mjs', 'auth-persistence-migration', 'security'],

@@ -66,25 +66,6 @@ function runGit(args, { cwd = RUNNER_ROOT, allowFailure = false } = {}) {
   return result
 }
 
-function ignoredByGitHubWorkflow(filePath) {
-  return filePath.startsWith('docs/') || (/^[^/]+\.md$/u.test(filePath))
-}
-
-function docsOnlyChange(input, checkout) {
-  if (input.forced) return false
-  const range = input.event === 'pull_request'
-    ? `${input.baseSha}...${input.sha}`
-    : `${input.baseSha}..${input.testedSha}`
-  const result = runGit([
-    'diff',
-    '--name-only',
-    '--diff-filter=ACDMRTUXB',
-    range,
-  ], { cwd: checkout })
-  const files = result.stdout.split('\n').filter(Boolean)
-  return files.length > 0 && files.every(ignoredByGitHubWorkflow)
-}
-
 export const AMP_ORB_CI_E2E_COMMANDS = Object.freeze([
   ['node', ['scripts/verify-draft-pagination-renderer.mjs']],
   ['node', ['scripts/verify-draft-pagination-dom-contract.mjs']],
@@ -106,11 +87,19 @@ export function ampOrbCILaneCommands(lane) {
   throw new Error('Invalid sandbox lane')
 }
 
-async function runCommand(command, args, { cwd, signal }) {
+async function runCommand(command, args, { cwd, onOutput = null, signal }) {
   console.log(`\n==> ${command} ${args.join(' ')}`)
   return runVerificationCommand(command, args, {
     abortSignal: signal,
     cwd,
+    stdout(chunk) {
+      process.stdout.write(chunk)
+      onOutput?.(chunk)
+    },
+    stderr(chunk) {
+      process.stderr.write(chunk)
+      onOutput?.(chunk)
+    },
   })
 }
 
@@ -138,13 +127,6 @@ export async function runSandbox(input, { signal }) {
     if (head !== input.testedSha || base.status !== 0 || initialStatus) {
       throw new Error('Exact sandbox checkout/base identity is not clean')
     }
-    if (docsOnlyChange(input, checkout)) {
-      return {
-        kind: 'docs-only',
-        lane: input.lane,
-        wallSeconds: (performance.now() - startedAt) / 1000,
-      }
-    }
 
     const setupCommands = [
       ['pnpm', ['-C', 'app', 'install', '--frozen-lockfile']],
@@ -164,6 +146,7 @@ export async function runSandbox(input, { signal }) {
     }
 
     let verifyExitCode = null
+    let verificationCounts = null
     const e2eFailures = []
     if (input.lane === 'fast') {
       for (const [command, args] of ampOrbCILaneCommands(input.lane)) {
@@ -182,10 +165,22 @@ export async function runSandbox(input, { signal }) {
       delete process.env.AMP_ORB_CI_VITE_PORT
     } else {
       const [[command, args]] = ampOrbCILaneCommands(input.lane)
+      let summaryTail = ''
       verifyExitCode = await runCommand(command, args, {
         cwd: checkout,
+        onOutput(chunk) {
+          summaryTail = `${summaryTail}${chunk}`.slice(-16_384)
+        },
         signal,
       })
+      const matches = [...summaryTail.matchAll(/PASS (\d+) \/ SKIP (\d+) \/ FAIL (\d+)/gu)]
+      if (matches.length === 1) {
+        verificationCounts = {
+          pass: Number(matches[0][1]),
+          skip: Number(matches[0][2]),
+          fail: Number(matches[0][3]),
+        }
+      }
     }
     const finalHead = runGit(['rev-parse', 'HEAD'], { cwd: checkout }).stdout.trim()
     const finalStatus = runGit(['status', '--porcelain', '--untracked-files=no'], { cwd: checkout })
@@ -193,11 +188,12 @@ export async function runSandbox(input, { signal }) {
     const clean = finalHead === input.testedSha && finalStatus === ''
     const laneExitCode = input.lane === 'fast'
       ? (e2eFailures.length === 0 && clean ? 0 : 1)
-      : (verifyExitCode === 0 && clean ? 0 : 1)
+      : (verifyExitCode === 0 && verificationCounts?.fail === 0 && clean ? 0 : 1)
     return {
       kind: 'verified',
       lane: input.lane,
       verifyExitCode,
+      verificationCounts,
       e2eFailureCount: e2eFailures.length,
       clean,
       wallSeconds: (performance.now() - startedAt) / 1000,
@@ -218,7 +214,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     input = parseSandboxInput()
     const result = await runSandbox(input, { signal: abortController.signal })
     console.log(`AMP_ORB_CI_RESULT ${JSON.stringify(result)}`)
-    if (result.kind !== 'docs-only' && result.exitCode !== 0) {
+    if (result.exitCode !== 0) {
       process.exitCode = 1
     }
   } catch (error) {

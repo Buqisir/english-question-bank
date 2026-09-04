@@ -30,14 +30,19 @@ import {
   parseSandboxInput,
 } from './amp-orb-ci-sandbox.mjs'
 import {
+  AMP_ORB_CI_CHECK_NAME,
   AMP_ORB_CI_FAST_STATUS_CONTEXT,
   AMP_ORB_CI_LOCK_CONFLICT_EXIT_CODE,
   AMP_ORB_CI_STATUS_CONTEXT,
   AMP_ORB_CI_WAKE_SENTINEL,
   AMP_ORB_CI_WORKFLOW_VERSION,
   ampOrbCIDiscoveryDeliveryId,
+  ampOrbCICheckExternalId,
+  ampOrbCICheckSummary,
   ampOrbCILockInvocation,
   ampOrbCIRunId,
+  createGitHubAppInstallationTokenProvider,
+  createGitHubCheckWriter,
   createGitHubStatusWriter,
   discoverAmpOrbCIJobs,
   drainAmpOrbCIQueue,
@@ -80,6 +85,21 @@ assert.match(
   controllerSource,
   /if \(queueCommands\.has\(controllerCommand\)\) \{\s+const results = await drainAmpOrbCIQueue/u,
   'discover and legacy drain share one durable queue consumer',
+)
+assert.match(
+  controllerSource,
+  /QUESTION_BANK_AMP_CI_GITHUB_CHECKS_ENABLED === '1'/u,
+  'GitHub App Check publication is disabled unless explicitly enabled',
+)
+assert.doesNotMatch(
+  controllerSource,
+  /QUESTION_BANK_AMP_CI_GITHUB_CHECKS_ENABLED !== '0'/u,
+  'GitHub App Check publication never defaults on',
+)
+assert.match(
+  controllerSource,
+  /process\.argv\[2\] !== 'run' \|\| !process\.argv\.includes\('--forced'\)/u,
+  'direct controller runs are explicit diagnostics and cannot mimic natural Check provenance',
 )
 const shallowGitCalls = []
 ensureCompleteAmpOrbCIGitHistory('/trusted/shallow-repository', {
@@ -1213,13 +1233,10 @@ assert.deepEqual(
   }, { lane: 'full' }),
   { kind: 'verified', lane: 'full', exitCode: 0 },
 )
-assert.deepEqual(
-  validateAmpOrbCISandboxResult(0, {
-    kind: 'docs-only',
-    lane: 'fast',
-  }, { lane: 'fast' }),
-  { kind: 'docs-only', lane: 'fast' },
-)
+assert.throws(() => validateAmpOrbCISandboxResult(0, {
+  kind: 'docs-only',
+  lane: 'fast',
+}, { lane: 'fast' }), /marker is missing or invalid/u)
 assert.deepEqual(
   validateAmpOrbCISandboxResult(1, {
     kind: 'verified',
@@ -1241,7 +1258,7 @@ assert.throws(() => validateAmpOrbCISandboxResult(1, {
 assert.throws(() => validateAmpOrbCISandboxResult(1, {
   kind: 'docs-only',
   lane: 'full',
-}, { lane: 'full' }), /contradicts its process exit/u)
+}, { lane: 'full' }), /marker is missing or invalid/u)
 assert.throws(() => validateAmpOrbCISandboxResult(0, {
   kind: 'verified',
   lane: 'fast',
@@ -1347,6 +1364,7 @@ resolveFullLane({
     kind: 'verified',
     lane: 'full',
     verifyExitCode: 0,
+    verificationCounts: { pass: 165, skip: 4, fail: 0 },
     clean: true,
     wallSeconds: 12,
     exitCode: 0,
@@ -1377,6 +1395,7 @@ const failedLayeredExecution = await executeAmpOrbCILanes(jobInput, {
           kind: 'verified',
           lane,
           verifyExitCode: 0,
+          verificationCounts: { pass: 165, skip: 4, fail: 0 },
           clean: true,
           exitCode: 0,
         },
@@ -1425,6 +1444,185 @@ await assert.rejects(statusWriter({
   description: 'Synthetic invalid status',
 }), /status context is invalid/u)
 
+const jsonResponse = (status, body = {}) => ({
+  status,
+  async json() { return body },
+})
+
+const tokenRequests = []
+let tokenClock = Date.parse('2026-09-04T00:00:00.000Z')
+const installationToken = createGitHubAppInstallationTokenProvider({
+  appId: 4242,
+  installationId: 3131,
+  privateKey: 'in-memory-test-key-sentinel',
+  now: () => tokenClock,
+  signJwt(payload, key) {
+    assert.equal(key, 'in-memory-test-key-sentinel')
+    return `signed-${payload.iss}-${payload.iat}`
+  },
+  async fetchImpl(url, options) {
+    tokenRequests.push({ url, options })
+    return jsonResponse(201, {
+      token: `installation-token-${tokenRequests.length}`,
+      expires_at: new Date(tokenClock + 2 * 60_000).toISOString(),
+    })
+  },
+})
+assert.equal(await installationToken(), 'installation-token-1')
+assert.equal(await installationToken(), 'installation-token-1', 'unexpired installation token is reused')
+tokenClock += 61_000
+assert.equal(await installationToken(), 'installation-token-2', 'expiring installation token is refreshed')
+assert.equal(tokenRequests.length, 2)
+assert.equal(tokenRequests[0].url, 'https://api.github.com/app/installations/3131/access_tokens')
+assert.equal(JSON.stringify(tokenRequests).includes('in-memory-test-key-sentinel'), false)
+
+const externalId = ampOrbCICheckExternalId(jobInput)
+assert.equal(externalId, `${AMP_ORB_CI_WORKFLOW_VERSION}:${testedSha}:${deliveryId}`)
+const checkApiRequests = []
+let checkTokenRefreshes = 0
+const checkWriter = createGitHubCheckWriter({
+  appId: 4242,
+  async getInstallationToken({ forceRefresh = false } = {}) {
+    if (forceRefresh) checkTokenRefreshes += 1
+    return forceRefresh ? 'fresh-installation-token' : 'cached-installation-token'
+  },
+  async fetchImpl(url, options = {}) {
+    checkApiRequests.push({ url, options })
+    if (url.endsWith(`commits/${testedSha}/check-runs?check_name=Amp%20Orb%20Verify&filter=all&per_page=100`)) {
+      return jsonResponse(200, { check_runs: [] })
+    }
+    if (url.endsWith('/check-runs') && options.method === 'POST') {
+      return jsonResponse(201, {
+        id: 707,
+        name: AMP_ORB_CI_CHECK_NAME,
+        head_sha: testedSha,
+        external_id: externalId,
+        app: { id: 4242 },
+      })
+    }
+    if (url.endsWith('/check-runs/707') && options.method === 'PATCH') {
+      const patchAttempts = checkApiRequests.filter(({ url: candidate }) => (
+        candidate.endsWith('/check-runs/707')
+      )).length
+      return jsonResponse(patchAttempts === 1 ? 401 : 200)
+    }
+    assert.fail(`unexpected Check API request ${options.method || 'GET'} ${url}`)
+  },
+})
+assert.equal(await checkWriter.start({ sha: testedSha, externalId }), 707)
+await checkWriter.complete({ checkRunId: 707, conclusion: 'success', summary: 'PASS' })
+assert.equal(checkTokenRefreshes, 1, 'a 401 refreshes the installation token once')
+const createBody = JSON.parse(checkApiRequests.find(({ options }) => options.method === 'POST').options.body)
+assert.deepEqual(createBody, {
+  name: AMP_ORB_CI_CHECK_NAME,
+  head_sha: testedSha,
+  status: 'in_progress',
+  external_id: externalId,
+})
+const patchBodies = checkApiRequests
+  .filter(({ options }) => options.method === 'PATCH')
+  .map(({ options }) => JSON.parse(options.body))
+assert.equal(patchBodies.length, 2)
+assert.deepEqual(patchBodies[0], patchBodies[1], 'token refresh retries one identical Check PATCH')
+assert.equal(patchBodies[0].status, 'completed')
+assert.equal(patchBodies[0].conclusion, 'success')
+
+let uncertainCreateStep = 0
+const uncertainCreateWriter = createGitHubCheckWriter({
+  appId: 4242,
+  async getInstallationToken() { return 'installation-token' },
+  async fetchImpl(url, options = {}) {
+    uncertainCreateStep += 1
+    if (uncertainCreateStep === 1) return jsonResponse(200, { check_runs: [] })
+    if (uncertainCreateStep === 2 && options.method === 'POST') {
+      throw new Error('synthetic unknown create response')
+    }
+    return jsonResponse(200, { check_runs: [{
+      id: 808,
+      name: AMP_ORB_CI_CHECK_NAME,
+      head_sha: testedSha,
+      external_id: externalId,
+      app: { id: 4242 },
+    }] })
+  },
+})
+assert.equal(
+  await uncertainCreateWriter.start({ sha: testedSha, externalId }),
+  808,
+  'an unknown create response adopts the unique exact external_id match',
+)
+
+const ambiguousCreateWriter = createGitHubCheckWriter({
+  appId: 4242,
+  async getInstallationToken() { return 'installation-token' },
+  async fetchImpl() {
+    return jsonResponse(200, { check_runs: [808, 809].map((id) => ({
+      id,
+      name: AMP_ORB_CI_CHECK_NAME,
+      head_sha: testedSha,
+      external_id: externalId,
+      app: { id: 4242 },
+    })) })
+  },
+})
+await assert.rejects(
+  ambiguousCreateWriter.start({ sha: testedSha, externalId }),
+  /external identity is ambiguous/u,
+)
+await assert.rejects(
+  ambiguousCreateWriter.reconcile({ sha: testedSha, externalId }),
+  /external identity is ambiguous/u,
+)
+
+const absentReconciliationMethods = []
+const absentReconciliationWriter = createGitHubCheckWriter({
+  appId: 4242,
+  async getInstallationToken() { return 'installation-token' },
+  async fetchImpl(url, options = {}) {
+    absentReconciliationMethods.push(options.method || 'GET')
+    return jsonResponse(200, { check_runs: [] })
+  },
+})
+await assert.rejects(
+  absentReconciliationWriter.reconcile({ sha: testedSha, externalId }),
+  /creation outcome is unresolved/u,
+)
+assert.deepEqual(
+  absentReconciliationMethods,
+  ['GET'],
+  'reconciliation with no exact match must fail closed without creating a replacement Check',
+)
+
+const reconciliationPages = []
+const pagedReconciliationWriter = createGitHubCheckWriter({
+  appId: 4242,
+  async getInstallationToken() { return 'installation-token' },
+  async fetchImpl(url) {
+    reconciliationPages.push(url)
+    if (!url.endsWith('&page=2')) {
+      return jsonResponse(200, {
+        check_runs: Array.from({ length: 100 }, (_, index) => ({
+          id: index + 1,
+          name: 'Other Check',
+          head_sha: testedSha,
+          external_id: `other-${index}`,
+          app: { id: 4242 },
+        })),
+      })
+    }
+    return jsonResponse(200, { check_runs: [{
+      id: 810,
+      name: AMP_ORB_CI_CHECK_NAME,
+      head_sha: testedSha,
+      external_id: externalId,
+      app: { id: 4242 },
+    }] })
+  },
+})
+assert.equal(await pagedReconciliationWriter.start({ sha: testedSha, externalId }), 810)
+assert.equal(reconciliationPages.length, 2)
+assert.match(reconciliationPages[1], /filter=all&per_page=100&page=2$/u)
+
 function privateFiles(root) {
   const files = []
   const visit = (directory) => {
@@ -1463,6 +1661,11 @@ async function syntheticLayeredExecution({
     kind: 'verified',
     lane: 'full',
     verifyExitCode: fullExitCode,
+    verificationCounts: {
+      pass: fullExitCode === 0 ? 165 : 164,
+      skip: 4,
+      fail: fullExitCode === 0 ? 0 : 1,
+    },
     clean: true,
     wallSeconds: 12,
     exitCode: fullExitCode,
@@ -1558,6 +1761,301 @@ try {
   assert.equal(statSync(successState).mode & 0o777, 0o700)
   assert.equal(statSync(success.logPath).mode & 0o777, 0o600)
   assert.equal(readFileSync(success.logPath, 'utf8'), 'synthetic verify output\n')
+
+  const appCheckState = tempState()
+  const appCheckStatuses = []
+  const appCheckEvents = []
+  let appCheckExecutions = 0
+  const appCheckCompletions = []
+  const appCheckRun = await runAmpOrbCIJob(jobInput, {
+    stateDir: appCheckState,
+    async writeStatus(status) { appCheckStatuses.push(status) },
+    publishCheck: {
+      async start(started) {
+        appCheckEvents.push('check-start')
+        assert.deepEqual(started, { sha: testedSha, externalId })
+        return 909
+      },
+      async complete(completed) {
+        appCheckEvents.push('check-complete')
+        appCheckCompletions.push(completed)
+      },
+    },
+    async execute(options) {
+      appCheckEvents.push('execute')
+      appCheckExecutions += 1
+      return syntheticLayeredExecution(options)
+    },
+  })
+  assert.deepEqual(appCheckEvents, ['check-start', 'execute', 'check-complete'])
+  assert.equal(appCheckRun.receipt.checkRunId, 909)
+  assert.equal(appCheckRun.receipt.checkExternalId, externalId)
+  assert.equal(appCheckExecutions, 1)
+  assert.deepEqual(appCheckStatuses.map(({ context, state }) => [context, state]), [
+    [AMP_ORB_CI_FAST_STATUS_CONTEXT, 'pending'],
+    [AMP_ORB_CI_FAST_STATUS_CONTEXT, 'success'],
+  ], 'App mode keeps Fast informational and emits no same-name aggregate Commit Status')
+  assert.equal(appCheckCompletions[0].checkRunId, 909)
+  assert.equal(appCheckCompletions[0].conclusion, 'success')
+  assert.equal(appCheckCompletions[0].summary, ampOrbCICheckSummary(appCheckRun.receipt))
+  assert.match(appCheckCompletions[0].summary, /PASS 165 \/ SKIP 4 \/ FAIL 0/u)
+  assert.match(appCheckCompletions[0].summary, /Tracked clean: yes/u)
+
+  const unavailableFastStatusCompletions = []
+  let unavailableFastStatusExecutions = 0
+  const unavailableFastStatusRun = await runAmpOrbCIJob(jobInput, {
+    stateDir: tempState(),
+    async writeStatus() { throw new Error('synthetic informational status outage') },
+    publishCheck: {
+      async start() { return 939 },
+      async complete(completed) { unavailableFastStatusCompletions.push(completed) },
+    },
+    async execute(options) {
+      unavailableFastStatusExecutions += 1
+      return syntheticLayeredExecution(options)
+    },
+  })
+  assert.equal(unavailableFastStatusRun.receipt.state, 'reported')
+  assert.equal(unavailableFastStatusExecutions, 1)
+  assert.equal(
+    unavailableFastStatusCompletions[0].conclusion,
+    'success',
+    'informational Fast status failure cannot block the authoritative Check',
+  )
+
+  let expiringTokenRefreshes = 0
+  let expiringTokenPatchAttempts = 0
+  let expiringTokenExecutions = 0
+  const expiringTokenPublisher = createGitHubCheckWriter({
+    appId: 4242,
+    async getInstallationToken({ forceRefresh = false } = {}) {
+      if (forceRefresh) expiringTokenRefreshes += 1
+      return forceRefresh ? 'refreshed-token' : 'initial-token'
+    },
+    async fetchImpl(url, options = {}) {
+      if (url.includes(`/commits/${testedSha}/check-runs?`)) {
+        return jsonResponse(200, { check_runs: [] })
+      }
+      if (url.endsWith('/check-runs') && options.method === 'POST') {
+        return jsonResponse(201, {
+          id: 949,
+          name: AMP_ORB_CI_CHECK_NAME,
+          head_sha: testedSha,
+          external_id: externalId,
+          app: { id: 4242 },
+        })
+      }
+      if (url.endsWith('/check-runs/949') && options.method === 'PATCH') {
+        expiringTokenPatchAttempts += 1
+        return jsonResponse(expiringTokenPatchAttempts === 1 ? 401 : 200)
+      }
+      assert.fail(`unexpected expiring-token request ${options.method || 'GET'} ${url}`)
+    },
+  })
+  await runAmpOrbCIJob(jobInput, {
+    stateDir: tempState(),
+    async writeStatus() {},
+    publishCheck: expiringTokenPublisher,
+    async execute(options) {
+      expiringTokenExecutions += 1
+      return syntheticLayeredExecution(options)
+    },
+  })
+  assert.equal(expiringTokenRefreshes, 1)
+  assert.equal(expiringTokenPatchAttempts, 2)
+  assert.equal(
+    expiringTokenExecutions,
+    1,
+    'installation-token refresh retries the Check PATCH without rerunning either lane',
+  )
+
+  const uncertainCheckState = tempState()
+  let uncertainCheckStarts = 0
+  let uncertainCheckReconciliations = 0
+  let uncertainCheckExecutions = 0
+  const uncertainCheckCompletions = []
+  const uncertainCheckPublisher = {
+    async start() {
+      uncertainCheckStarts += 1
+      throw new Error('synthetic unresolved Check creation')
+    },
+    async reconcile(reconciliation) {
+      uncertainCheckReconciliations += 1
+      assert.deepEqual(reconciliation, { sha: testedSha, externalId })
+      return 929
+    },
+    async complete(completed) { uncertainCheckCompletions.push(completed) },
+  }
+  await assert.rejects(runAmpOrbCIJob(jobInput, {
+    stateDir: uncertainCheckState,
+    async writeStatus() { assert.fail('tests and statuses wait for authoritative Check reconciliation') },
+    publishCheck: uncertainCheckPublisher,
+    async execute() { uncertainCheckExecutions += 1 },
+  }), /unresolved Check creation/u)
+  const unresolvedCheckReceipt = JSON.parse(readFileSync(path.join(
+    uncertainCheckState,
+    'runs',
+    `${ampOrbCIRunId(jobInput)}.json`,
+  ), 'utf8'))
+  assert.equal(unresolvedCheckReceipt.checkRunId, undefined)
+  assert.equal(statSync(path.join(
+    uncertainCheckState,
+    'runs',
+    `${ampOrbCIRunId(jobInput)}.json`,
+  )).mode & 0o777, 0o600)
+  const reconciledCheck = await runAmpOrbCIJob(jobInput, {
+    stateDir: uncertainCheckState,
+    async writeStatus() {},
+    publishCheck: uncertainCheckPublisher,
+    async execute(options) {
+      uncertainCheckExecutions += 1
+      return syntheticLayeredExecution(options)
+    },
+  })
+  assert.equal(reconciledCheck.receipt.checkRunId, 929)
+  assert.equal(uncertainCheckStarts, 1, 'restart must not POST a replacement Check')
+  assert.equal(uncertainCheckReconciliations, 1)
+  assert.equal(uncertainCheckExecutions, 1, 'test lanes run once only after unique reconciliation')
+  assert.equal(uncertainCheckCompletions.length, 1)
+  assert.equal(uncertainCheckCompletions[0].checkRunId, 929)
+
+  for (const [label, diagnosticInput] of [
+    [
+      'discovery',
+      {
+        event: 'push',
+        sha: testedSha,
+        testedSha,
+        baseSha,
+        deliveryId: ampOrbCIDiscoveryDeliveryId({ event: 'push', sha: testedSha }),
+        pullRequestNumber: null,
+        forced: false,
+      },
+    ],
+    ['manual', { ...jobInput, forced: true }],
+  ]) {
+    const diagnosticStatuses = []
+    const diagnostic = await runAmpOrbCIJob(diagnosticInput, {
+      stateDir: tempState(),
+      async writeStatus(status) { diagnosticStatuses.push(status) },
+      publishCheck: {
+        async start() { assert.fail(`${label} execution cannot create the authoritative Check`) },
+        async complete() { assert.fail(`${label} execution cannot complete the authoritative Check`) },
+      },
+      async execute(options) { return syntheticLayeredExecution(options) },
+    })
+    assert.equal(diagnostic.receipt.checkRunId, undefined)
+    assert.deepEqual(diagnosticStatuses.map(({ context, state }) => [context, state]), [
+      [AMP_ORB_CI_FAST_STATUS_CONTEXT, 'pending'],
+      [AMP_ORB_CI_STATUS_CONTEXT, 'pending'],
+      [AMP_ORB_CI_FAST_STATUS_CONTEXT, 'success'],
+      [AMP_ORB_CI_STATUS_CONTEXT, 'success'],
+    ], `${label} remains informational and cannot publish the authoritative Check`)
+  }
+
+  const fastFailureState = tempState()
+  const fastFailureCompletions = []
+  await runAmpOrbCIJob(jobInput, {
+    stateDir: fastFailureState,
+    async writeStatus() {},
+    publishCheck: {
+      async start() { return 910 },
+      async complete(completed) { fastFailureCompletions.push(completed) },
+    },
+    async execute(options) {
+      return syntheticLayeredExecution({ ...options, fastExitCode: 1 })
+    },
+  })
+  assert.equal(
+    fastFailureCompletions[0].conclusion,
+    'failure',
+    'a successful Full lane cannot authorize when Fast failed',
+  )
+  assert.match(fastFailureCompletions[0].summary, /Fast: FAIL/u)
+  assert.match(fastFailureCompletions[0].summary, /PASS 165 \/ SKIP 4 \/ FAIL 0/u)
+
+  const reportedFailureState = tempState()
+  const reportedFailureCompletions = []
+  await runAmpOrbCIJob(jobInput, {
+    stateDir: reportedFailureState,
+    async writeStatus() {},
+    publishCheck: {
+      async start() { return 911 },
+      async complete(completed) { reportedFailureCompletions.push(completed) },
+    },
+    async execute(options) {
+      const execution = await syntheticLayeredExecution(options)
+      execution.result.full.verificationCounts.fail = 1
+      return execution
+    },
+  })
+  assert.equal(
+    reportedFailureCompletions[0].conclusion,
+    'failure',
+    'Full FAIL count cannot authorize even when the lane process reports exit zero',
+  )
+  assert.match(reportedFailureCompletions[0].summary, /PASS 165 \/ SKIP 4 \/ FAIL 1/u)
+
+  const unknownPatchState = tempState()
+  let unknownPatchExecutions = 0
+  let unknownPatchStarts = 0
+  const unknownPatchIds = []
+  let rejectFirstPatch = true
+  const recoveringPublisher = {
+    async start() {
+      unknownPatchStarts += 1
+      return 919
+    },
+    async complete({ checkRunId }) {
+      unknownPatchIds.push(checkRunId)
+      if (rejectFirstPatch) {
+        rejectFirstPatch = false
+        throw new Error('synthetic unknown PATCH response')
+      }
+    },
+  }
+  await assert.rejects(runAmpOrbCIJob(jobInput, {
+    stateDir: unknownPatchState,
+    async writeStatus() {},
+    publishCheck: recoveringPublisher,
+    async execute(options) {
+      unknownPatchExecutions += 1
+      return syntheticLayeredExecution(options)
+    },
+  }), /unknown PATCH response/u)
+  const unknownPatchReceipt = JSON.parse(readFileSync(path.join(
+    unknownPatchState,
+    'runs',
+    `${ampOrbCIRunId(jobInput)}.json`,
+  ), 'utf8'))
+  assert.equal(unknownPatchReceipt.state, 'verified')
+  assert.equal(unknownPatchReceipt.checkRunId, 919)
+  await assert.rejects(runAmpOrbCIJob(jobInput, {
+    stateDir: unknownPatchState,
+    async writeStatus() {
+      assert.fail('an App-bound receipt cannot fall back to a Commit Status')
+    },
+    async execute() { assert.fail('missing App credentials must not rerun either test lane') },
+  }), /receipt-bound Check writer is unavailable/u)
+  assert.equal(
+    JSON.parse(readFileSync(path.join(
+      unknownPatchState,
+      'runs',
+      `${ampOrbCIRunId(jobInput)}.json`,
+    ), 'utf8')).state,
+    'verified',
+    'missing App credentials retain the same recoverable verified receipt',
+  )
+  const recoveredPatch = await runAmpOrbCIJob(jobInput, {
+    stateDir: unknownPatchState,
+    async writeStatus() {},
+    publishCheck: recoveringPublisher,
+    async execute() { assert.fail('Check PATCH recovery must not rerun either test lane') },
+  })
+  assert.equal(recoveredPatch.receipt.state, 'reported')
+  assert.equal(unknownPatchStarts, 1)
+  assert.equal(unknownPatchExecutions, 1)
+  assert.deepEqual(unknownPatchIds, [919, 919], 'crash recovery idempotently PATCHes the same Check ID')
 
   const duplicate = await runAmpOrbCIJob({
     ...jobInput,

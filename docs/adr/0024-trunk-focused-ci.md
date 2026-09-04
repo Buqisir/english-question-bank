@@ -17,9 +17,10 @@ work.
 
 The existing changed-risk verifier already distinguishes narrow local work from
 shared and high-risk seams. A development Orb can use that classification for a
-proportionate first layer, while a credential-isolated Focused CI Orb can check
-the exact shipped SHA as a second layer without becoming a writer or deployment
-authority.
+proportionate first layer. The automatic dedicated-CI controller owns machine
+execution for an exact shipped SHA; the Focused-CI agent turn reports and
+diagnoses that evidence without becoming a second Full runner, a writer, or
+deployment authority.
 
 ## Decision
 
@@ -60,12 +61,16 @@ literal PASS/SKIP evidence.
 
 ### Focused CI
 
-Focused CI is a second verification and reporting layer. It may not edit
-tracked files, commit, push, revert, open PRs, write GitHub statuses, consume
-Secrets, or deploy. It confirms the handed-off SHA is on `origin/main`, uses a
-fresh clean detached worktree, computes risk independently, and compares from
-the last verified ancestor or the handed-off parent so a detached checkout
-cannot produce an empty changed set.
+Focused CI is a reporting and diagnostic layer over automatic dedicated-CI
+execution. The Focused agent turn may not edit tracked files, commit, push,
+revert, open PRs, write GitHub statuses or Checks, consume Secrets, deploy, or
+run a second copy of Full. When enabled, the trusted webhook controller—not the
+agent turn—may create and update only its authorized `Amp Orb Verify` Check as
+defined by ADR-0025. The automatic `amp-orb-ci` controller is the sole policy
+owner for the dedicated machine run: it confirms the exact handed-off SHA,
+executes the credential-free Fast and Full lanes, and records private receipts.
+Focused CI reads those receipts and GitHub evidence to report PASS/FAIL and may
+diagnose a failure without repeating the suite.
 
 While a SHA is awaiting Focused CI it may not be deployed, and work dependent
 on it may not Ship. Independent task development may continue. A failure pauses
@@ -75,17 +80,17 @@ requires Owner authorization and follows the same Ship rules.
 
 ### Hosted and deployment authority
 
-Focused CI PASS is not deployment authority. The ADR-0023 machine gate remains
-unchanged: the exact current `main` SHA must have successful, non-manual hosted
-`verify` and `e2e` checks produced by the `github-actions` App in this
-repository. Manual-dispatch checks cannot qualify. Hosted PR checks remain the
-gate for high-risk PR delivery, and hosted `main` checks remain both an
+Focused CI PASS is not deployment authority. ADR-0025 adds an App-only protocol
+and disabled reader modes, but the ADR-0023 machine gate remains `hosted-only`:
+the exact current `main` SHA must have successful, non-manual hosted `verify`
+and `e2e` checks produced by the pinned `github-actions` App and workflow in
+this repository. Manual-dispatch checks cannot qualify. Hosted PR checks remain
+the gate for high-risk PR delivery, and hosted `main` checks remain both an
 independent full-suite backstop and the current deployment gate.
 
-Replacing that deployment authority with a future trusted Amp state requires a
-separate design, reliability observation on exact SHAs and failure cases, and
-new explicit Owner authorization. It cannot be inferred from Focused CI
-success.
+Changing that authority requires ADR-0025's paired reliability observation and
+a new explicit Owner authorization. It cannot be inferred from Focused CI
+success or from the presence of disabled repository code.
 
 ## Transition and retained assets
 
@@ -96,11 +101,11 @@ Custom Ship and changing branch protection are separate, explicitly authorized
 operations after this repository foundation lands. Until those operations are
 completed, every change continues through the current task-branch PR path.
 
-ADR-0022's Sentinel, Discovery controller, and dedicated-CI implementation stay
-present but dormant. Action-wake phase 2 remains paused: no plugin/thread
-reload, wake workflow, webhook event, status write, or `AMP_API_KEY` is enabled
-by this decision. Retirement may be considered only after at least three months
-without use and a separate Owner authorization.
+ADR-0022's Sentinel/Discovery and Action-wake paths stay present but dormant.
+No plugin/thread reload, wake workflow, synthetic webhook event, manual drain,
+or `AMP_API_KEY` is enabled by this decision. ADR-0025's natural-webhook App
+Check writer is also disabled by default. Retirement may be considered only
+after at least three months without use and a separate Owner authorization.
 
 ADR-0023 and its Deployment trust boundary are unchanged. This decision grants
 no deployment, production mutation, migration, Secret, webhook, or host-control

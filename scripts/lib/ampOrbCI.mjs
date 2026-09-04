@@ -1,4 +1,4 @@
-import { randomUUID } from 'node:crypto'
+import { createSign, randomUUID } from 'node:crypto'
 import { execFileSync } from 'node:child_process'
 import {
   chmodSync,
@@ -22,16 +22,19 @@ import { fileURLToPath } from 'node:url'
 import { runVerificationCommand } from './verificationCommandRunner.mjs'
 
 export const AMP_ORB_CI_REPOSITORY = 'Buqisir/english-question-bank'
-export const AMP_ORB_CI_WORKFLOW_VERSION = 'v3'
+export const AMP_ORB_CI_WORKFLOW_VERSION = 'v4'
 export const AMP_ORB_CI_QUEUE_SCHEMA_VERSION = 'amp-orb-ci-queue-v1'
 export const AMP_ORB_CI_STATUS_CONTEXT = 'Amp Orb Verify'
 export const AMP_ORB_CI_FAST_STATUS_CONTEXT = 'Amp Orb Verify (fast)'
+export const AMP_ORB_CI_CHECK_NAME = 'Amp Orb Verify'
+export const AMP_ORB_CI_CHECK_EXTERNAL_ID_VERSION = 'v4'
 export const AMP_ORB_CI_WAKE_SENTINEL = 'eqbank-amp-orb-ci-wake-v1'
 export const AMP_ORB_CI_SANDBOX_USER = 'eqb-ci'
 export const AMP_ORB_CI_SANDBOX_ROOT = '/var/tmp/eqb-amp-ci'
 
 const SHA = /^[a-f0-9]{40}$/u
 const DELIVERY_ID = /^[A-Za-z0-9][A-Za-z0-9-]{0,127}$/u
+const GITHUB_DELIVERY_ID = /^[a-f0-9]{8}-[a-f0-9]{4}-[1-5][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/iu
 const QUEUE_FILE = /^([A-Za-z0-9][A-Za-z0-9-]{0,127})\.json$/u
 const SANDBOX_BUNDLE = /^\/var\/tmp\/eqb-amp-ci\/inbox\/[a-f0-9-]{36}\/repository\.bundle$/u
 const THREAD_ID = /^T-[a-f0-9-]{36}$/u
@@ -40,6 +43,245 @@ const SANDBOX_LANES = new Set(['fast', 'full'])
 const STATUS_CONTEXTS = new Set([AMP_ORB_CI_FAST_STATUS_CONTEXT, AMP_ORB_CI_STATUS_CONTEXT])
 const RUN_TIMEOUT_MS = 35 * 60 * 1000
 export const AMP_ORB_CI_LOCK_CONFLICT_EXIT_CODE = 75
+
+function base64Url(value) {
+  return Buffer.from(value).toString('base64url')
+}
+
+function positiveInteger(value, label) {
+  const number = typeof value === 'string' && /^\d+$/u.test(value) ? Number(value) : value
+  if (!Number.isSafeInteger(number) || number < 1) throw new Error(`Invalid ${label}`)
+  return number
+}
+
+export function ampOrbCICheckExternalId(input) {
+  const validated = validateAmpOrbCIInput(input)
+  return `${AMP_ORB_CI_CHECK_EXTERNAL_ID_VERSION}:${validated.testedSha}:${validated.deliveryId}`
+}
+
+function signGitHubAppJwt(payload, privateKey) {
+  const header = base64Url(JSON.stringify({ alg: 'RS256', typ: 'JWT' }))
+  const encodedPayload = base64Url(JSON.stringify(payload))
+  const signingInput = `${header}.${encodedPayload}`
+  const signer = createSign('RSA-SHA256')
+  signer.update(signingInput)
+  signer.end()
+  return `${signingInput}.${signer.sign(privateKey).toString('base64url')}`
+}
+
+export function createGitHubAppInstallationTokenProvider({
+  appId,
+  installationId,
+  privateKey,
+  fetchImpl = fetch,
+  now = () => Date.now(),
+  signJwt = signGitHubAppJwt,
+} = {}) {
+  const trustedAppId = positiveInteger(appId, 'Amp Orb CI GitHub App ID')
+  const trustedInstallationId = positiveInteger(
+    installationId,
+    'Amp Orb CI GitHub App installation ID',
+  )
+  if (typeof privateKey !== 'string' || !privateKey.trim()) {
+    throw new Error('Amp Orb CI GitHub App private key is missing')
+  }
+  if (typeof fetchImpl !== 'function' || typeof signJwt !== 'function') {
+    throw new Error('Amp Orb CI GitHub App token dependencies are missing')
+  }
+  let cached = null
+  return async ({ forceRefresh = false } = {}) => {
+    const current = now()
+    if (!forceRefresh && cached && cached.expiresAt - current > 60_000) return cached.token
+    const issuedAt = Math.floor(current / 1_000) - 60
+    const jwt = signJwt({
+      iat: issuedAt,
+      exp: issuedAt + 9 * 60,
+      iss: trustedAppId,
+    }, privateKey)
+    const response = await fetchImpl(
+      `https://api.github.com/app/installations/${trustedInstallationId}/access_tokens`,
+      {
+        method: 'POST',
+        headers: {
+          accept: 'application/vnd.github+json',
+          authorization: `Bearer ${jwt}`,
+          'x-github-api-version': '2026-03-10',
+        },
+      },
+    )
+    if (response.status !== 201) {
+      throw new Error(`GitHub App installation token request failed (${response.status})`)
+    }
+    const body = await response.json()
+    const expiresAt = Date.parse(body?.expires_at)
+    if (typeof body?.token !== 'string' || !body.token || !Number.isFinite(expiresAt)) {
+      throw new Error('GitHub App installation token response is invalid')
+    }
+    cached = { token: body.token, expiresAt }
+    return cached.token
+  }
+}
+
+export function createGitHubCheckWriter({
+  appId,
+  getInstallationToken,
+  fetchImpl = fetch,
+} = {}) {
+  const trustedAppId = positiveInteger(appId, 'Amp Orb CI GitHub App ID')
+  if (typeof getInstallationToken !== 'function' || typeof fetchImpl !== 'function') {
+    throw new Error('Amp Orb CI Check writer dependencies are missing')
+  }
+  const request = async (url, options = {}) => {
+    let token = await getInstallationToken()
+    let response = await fetchImpl(url, {
+      ...options,
+      headers: {
+        accept: 'application/vnd.github+json',
+        authorization: `Bearer ${token}`,
+        'x-github-api-version': '2026-03-10',
+        ...(options.body ? { 'content-type': 'application/json' } : {}),
+      },
+    })
+    if (response.status === 401) {
+      token = await getInstallationToken({ forceRefresh: true })
+      response = await fetchImpl(url, {
+        ...options,
+        headers: {
+          accept: 'application/vnd.github+json',
+          authorization: `Bearer ${token}`,
+          'x-github-api-version': '2026-03-10',
+          ...(options.body ? { 'content-type': 'application/json' } : {}),
+        },
+      })
+    }
+    return response
+  }
+  const matchingCheck = async ({ sha, externalId }) => {
+    const matches = []
+    for (let page = 1; page <= 100; page += 1) {
+      const pageQuery = page === 1 ? '' : `&page=${page}`
+      const response = await request(
+        `https://api.github.com/repos/${AMP_ORB_CI_REPOSITORY}/commits/${sha}/check-runs?check_name=${encodeURIComponent(AMP_ORB_CI_CHECK_NAME)}&filter=all&per_page=100${pageQuery}`,
+      )
+      if (response.status !== 200) {
+        throw new Error(`GitHub Check reconciliation failed (${response.status})`)
+      }
+      const body = await response.json()
+      if (!Array.isArray(body?.check_runs)) {
+        throw new Error('GitHub Check reconciliation response is invalid')
+      }
+      for (const check of body.check_runs) {
+        if (
+          check?.name === AMP_ORB_CI_CHECK_NAME
+          && check?.head_sha === sha
+          && check?.external_id === externalId
+          && check?.app?.id === trustedAppId
+        ) matches.push(check)
+      }
+      if (body.check_runs.length < 100) break
+      if (page === 100) throw new Error('GitHub Check reconciliation pagination is excessive')
+    }
+    if (matches.length > 1) throw new Error('GitHub Check external identity is ambiguous')
+    if (matches.length === 0) return null
+    positiveInteger(matches[0].id, 'Amp Orb CI Check Run ID')
+    return matches[0]
+  }
+  const reconcileCreate = async ({ sha, externalId, cause }) => {
+    const found = await matchingCheck({ sha, externalId })
+    if (found) return found.id
+    throw cause
+  }
+  return Object.freeze({
+    async reconcile({ sha, externalId }) {
+      const found = await matchingCheck({ sha, externalId })
+      if (!found) throw new Error('GitHub Check creation outcome is unresolved')
+      return found.id
+    },
+    async start({ sha, externalId, detailsUrl = null }) {
+      const parts = String(externalId || '').split(':')
+      if (
+        !SHA.test(sha || '')
+        || parts.length !== 3
+        || parts[0] !== AMP_ORB_CI_CHECK_EXTERNAL_ID_VERSION
+        || parts[1] !== sha
+        || !DELIVERY_ID.test(parts[2] || '')
+      ) throw new Error('Amp Orb CI Check external identity is invalid')
+      const existing = await matchingCheck({ sha, externalId })
+      if (existing) return existing.id
+      const body = {
+        name: AMP_ORB_CI_CHECK_NAME,
+        head_sha: sha,
+        status: 'in_progress',
+        external_id: externalId,
+        ...(detailsUrl ? { details_url: detailsUrl } : {}),
+      }
+      let response
+      try {
+        response = await request(
+          `https://api.github.com/repos/${AMP_ORB_CI_REPOSITORY}/check-runs`,
+          { method: 'POST', body: JSON.stringify(body) },
+        )
+      } catch (error) {
+        return reconcileCreate({ sha, externalId, cause: error })
+      }
+      if (response.status !== 201) {
+        return reconcileCreate({
+          sha,
+          externalId,
+          cause: new Error(`GitHub Check creation failed (${response.status})`),
+        })
+      }
+      let created
+      try {
+        created = await response.json()
+      } catch (error) {
+        return reconcileCreate({ sha, externalId, cause: error })
+      }
+      if (
+        created?.name !== AMP_ORB_CI_CHECK_NAME
+        || created?.head_sha !== sha
+        || created?.external_id !== externalId
+        || created?.app?.id !== trustedAppId
+        || !Number.isSafeInteger(created?.id)
+        || created.id < 1
+      ) {
+        return reconcileCreate({
+          sha,
+          externalId,
+          cause: new Error('GitHub Check creation response is invalid'),
+        })
+      }
+      return created.id
+    },
+    async complete({ checkRunId, conclusion, summary }) {
+      const id = positiveInteger(checkRunId, 'Amp Orb CI Check Run ID')
+      if (!['success', 'failure'].includes(conclusion)) {
+        throw new Error('Amp Orb CI Check conclusion is invalid')
+      }
+      if (typeof summary !== 'string' || !summary || summary.length > 65_535) {
+        throw new Error('Amp Orb CI Check summary is invalid')
+      }
+      const response = await request(
+        `https://api.github.com/repos/${AMP_ORB_CI_REPOSITORY}/check-runs/${id}`,
+        {
+          method: 'PATCH',
+          body: JSON.stringify({
+            status: 'completed',
+            conclusion,
+            output: {
+              title: conclusion === 'success' ? 'Amp Orb verification passed' : 'Amp Orb verification failed',
+              summary,
+            },
+          }),
+        },
+      )
+      if (response.status !== 200) {
+        throw new Error(`GitHub Check completion failed (${response.status})`)
+      }
+      return id
+    },
+  })
+}
 
 function ensurePrivateDirectory(directory) {
   mkdirSync(directory, { recursive: true, mode: 0o700 })
@@ -482,7 +724,7 @@ export function reapAmpOrbCIProcesses({ execFileSyncImpl = execFileSync } = {}) 
 }
 
 export function validateAmpOrbCISandboxResult(exitCode, result, { lane } = {}) {
-  if (!result || !['docs-only', 'sandbox-error', 'setup-failed', 'verified'].includes(result.kind)) {
+  if (!result || !['sandbox-error', 'setup-failed', 'verified'].includes(result.kind)) {
     throw new Error('Amp Orb CI sandbox result marker is missing or invalid')
   }
   if (!SANDBOX_LANES.has(lane) || result.lane !== lane) {
@@ -491,8 +733,7 @@ export function validateAmpOrbCISandboxResult(exitCode, result, { lane } = {}) {
   if (['setup-failed', 'verified'].includes(result.kind) && result.exitCode !== exitCode) {
     throw new Error('Amp Orb CI sandbox result contradicts its process exit')
   }
-  const successful = result.kind === 'docs-only'
-    || (result.kind === 'verified' && result.exitCode === 0)
+  const successful = result.kind === 'verified' && result.exitCode === 0
   if ((exitCode === 0) !== successful) {
     throw new Error('Amp Orb CI sandbox result contradicts its process exit')
   }
@@ -759,20 +1000,6 @@ export async function executeAmpOrbCILanes(input, {
     const rejected = outcomes.find((outcome) => outcome.status === 'rejected')
     if (rejected) throw rejected.reason
     const [fast, full] = outcomes.map((outcome) => outcome.value)
-    if (fast.result.kind === 'docs-only' || full.result.kind === 'docs-only') {
-      if (fast.result.kind !== 'docs-only' || full.result.kind !== 'docs-only') {
-        throw new Error('Amp Orb CI lane scope results disagree')
-      }
-      return {
-        exitCode: 0,
-        result: {
-          kind: 'docs-only',
-          fast: fast.result,
-          full: full.result,
-          wallSeconds: Math.max(0, (Date.now() - startedAt) / 1000),
-        },
-      }
-    }
     const clean = fast.result.clean === true && full.result.clean === true
     const exitCode = fast.exitCode === 0 && full.exitCode === 0 && clean ? 0 : 1
     return {
@@ -794,9 +1021,6 @@ export async function executeAmpOrbCILanes(input, {
 }
 
 function statusDescription(receipt) {
-  if (receipt.result?.kind === 'docs-only') {
-    return 'Docs-only change; full verification not required'
-  }
   const wall = Number.isFinite(receipt.result?.wallSeconds)
     ? ` in ${Math.round(receipt.result.wallSeconds)}s`
     : ''
@@ -806,7 +1030,6 @@ function statusDescription(receipt) {
 }
 
 function fastStatusDescription(fast) {
-  if (fast.result?.kind === 'docs-only') return 'Docs-only change; fast E2E not required'
   const wall = Number.isFinite(fast.result?.wallSeconds)
     ? ` in ${Math.round(fast.result.wallSeconds)}s`
     : ''
@@ -821,9 +1044,79 @@ function statusState(conclusion) {
   return 'error'
 }
 
+function validVerificationCounts(counts) {
+  return ['pass', 'skip', 'fail'].every((key) => (
+    Number.isSafeInteger(counts?.[key]) && counts[key] >= 0
+  )) && counts.pass > 0
+}
+
+function authoritativeCheckSucceeded(receipt) {
+  const result = receipt?.result
+  return receipt?.conclusion === 'success'
+    && result?.kind === 'verified'
+    && result.fast?.kind === 'verified'
+    && result.full?.kind === 'verified'
+    && result.fast?.exitCode === 0
+    && result.fast?.e2eFailureCount === 0
+    && result.fast?.clean === true
+    && result.full?.exitCode === 0
+    && result.full?.verifyExitCode === 0
+    && validVerificationCounts(result.full?.verificationCounts)
+    && result.full?.verificationCounts?.fail === 0
+    && result.full?.clean === true
+    && result.clean === true
+    && result.exitCode === 0
+}
+
+function canPublishAuthoritativeCheck({ deliveryId, forced } = {}) {
+  return forced === false && GITHUB_DELIVERY_ID.test(deliveryId || '')
+}
+
+export function ampOrbCICheckSummary(receipt) {
+  const fast = receipt?.result?.fast
+  const full = receipt?.result?.full
+  const duration = (lane) => Number.isFinite(lane?.wallSeconds)
+    ? `${lane.wallSeconds.toFixed(1)}s`
+    : 'unknown duration'
+  const laneState = (lane, succeeded) => `${succeeded ? 'PASS' : 'FAIL'} (${duration(lane)})`
+  const fastSucceeded = fast?.kind === 'verified'
+    && fast.exitCode === 0
+    && fast.e2eFailureCount === 0
+    && fast.clean === true
+  const fullSucceeded = full?.kind === 'verified'
+    && full.exitCode === 0
+    && full.verifyExitCode === 0
+    && validVerificationCounts(full.verificationCounts)
+    && full.verificationCounts?.fail === 0
+    && full.clean === true
+  const counts = full?.verificationCounts
+  const countSummary = validVerificationCounts(counts)
+    ? `PASS ${counts.pass} / SKIP ${counts.skip} / FAIL ${counts.fail}`
+    : 'PASS/SKIP/FAIL counts unavailable'
+  return [
+    `Fast: ${laneState(fast, fastSucceeded)}`,
+    `Full: ${laneState(full, fullSucceeded)}`,
+    countSummary,
+    `Tracked clean: ${receipt?.result?.clean === true ? 'yes' : 'no'}`,
+  ].join('\n')
+}
+
+async function completeAuthoritativeCheck(receipt, publishCheck) {
+  if (!publishCheck) return
+  if (!Number.isSafeInteger(receipt?.checkRunId) || receipt.checkRunId < 1) {
+    throw new Error('Amp Orb CI authoritative Check Run ID is missing')
+  }
+  await publishCheck.complete({
+    checkRunId: receipt.checkRunId,
+    conclusion: authoritativeCheckSucceeded(receipt) ? 'success' : 'failure',
+    summary: ampOrbCICheckSummary(receipt),
+  })
+}
+
 export async function runAmpOrbCIJob(input, {
   stateDir,
   writeStatus,
+  publishCheck = null,
   execute,
   now = () => Date.now(),
 } = {}) {
@@ -834,16 +1127,37 @@ export async function runAmpOrbCIJob(input, {
   const receiptPath = path.join(stateDir, 'runs', `${runId}.json`)
   const logPath = path.join(stateDir, 'logs', `${runId}.log`)
   let receipt = readJson(receiptPath)
+  const resumedReceipt = receipt !== null
   if (receipt && (
     receipt.runId !== runId
     || receipt.sha !== validated.sha
     || receipt.testedSha !== validated.testedSha
     || receipt.workflowVersion !== AMP_ORB_CI_WORKFLOW_VERSION
+    || (receipt.checkExternalId && receipt.checkExternalId !== ampOrbCICheckExternalId({
+      ...validated,
+      deliveryId: receipt.firstDeliveryId,
+    }))
+    || (receipt.checkRunId !== undefined && (
+      !receipt.checkExternalId
+      || !Number.isSafeInteger(receipt.checkRunId)
+      || receipt.checkRunId < 1
+    ))
   )) {
     throw new Error('Amp Orb CI receipt identity mismatch')
   }
   if (receipt && TERMINAL_STATES.has(receipt.state)) {
     return { outcome: 'cached', receipt, logPath }
+  }
+  let checkPublisher = null
+  if (receipt?.checkExternalId) {
+    if (!canPublishAuthoritativeCheck({
+      deliveryId: receipt.firstDeliveryId,
+      forced: receipt.forced,
+    })) throw new Error('Amp Orb CI receipt Check provenance is invalid')
+    if (!publishCheck) throw new Error('Amp Orb CI receipt-bound Check writer is unavailable')
+    checkPublisher = publishCheck
+  } else if (!resumedReceipt && publishCheck && canPublishAuthoritativeCheck(validated)) {
+    checkPublisher = publishCheck
   }
 
   const reportFastStatus = async () => {
@@ -863,6 +1177,14 @@ export async function runAmpOrbCIJob(input, {
       },
     }
     atomicWriteJson(receiptPath, receipt)
+  }
+
+  const reportFastStatusForMode = async () => {
+    try {
+      await reportFastStatus()
+    } catch (error) {
+      if (!checkPublisher) throw error
+    }
   }
 
   const recordFastResult = async (execution, {
@@ -892,20 +1214,23 @@ export async function runAmpOrbCIJob(input, {
     }
   }
 
-  if (receipt?.fast?.state === 'verified') await reportFastStatus()
+  if (receipt?.fast?.state === 'verified') await reportFastStatusForMode()
   if (receipt?.state === 'verified') {
     if (!receipt.fast) {
       await recordFastResult({
         exitCode: null,
         result: { kind: 'controller-error', errorName: 'Error' },
+      }, { suppressStatusError: Boolean(checkPublisher) })
+    }
+    if (checkPublisher) await completeAuthoritativeCheck(receipt, checkPublisher)
+    else {
+      await writeStatus({
+        sha: receipt.sha,
+        state: statusState(receipt.conclusion),
+        context: AMP_ORB_CI_STATUS_CONTEXT,
+        description: statusDescription(receipt),
       })
     }
-    await writeStatus({
-      sha: receipt.sha,
-      state: statusState(receipt.conclusion),
-      context: AMP_ORB_CI_STATUS_CONTEXT,
-      description: statusDescription(receipt),
-    })
     receipt = {
       ...receipt,
       state: 'reported',
@@ -917,8 +1242,13 @@ export async function runAmpOrbCIJob(input, {
 
   const retainedFast = receipt?.state === 'running' ? receipt.fast : null
   const startedAtMs = now()
+  const firstDeliveryId = receipt?.firstDeliveryId || validated.deliveryId
+  const checkExternalId = ampOrbCICheckExternalId({
+    ...validated,
+    deliveryId: firstDeliveryId,
+  })
   receipt = {
-    schemaVersion: 'amp-orb-ci-run-v1',
+    schemaVersion: 'amp-orb-ci-run-v2',
     workflowVersion: AMP_ORB_CI_WORKFLOW_VERSION,
     runId,
     state: 'running',
@@ -929,25 +1259,45 @@ export async function runAmpOrbCIJob(input, {
     event: validated.event,
     pullRequestNumber: validated.pullRequestNumber,
     forced: validated.forced,
-    firstDeliveryId: validated.deliveryId,
+    firstDeliveryId,
+    ...(checkPublisher ? { checkExternalId } : {}),
+    ...(Number.isSafeInteger(receipt?.checkRunId) ? { checkRunId: receipt.checkRunId } : {}),
     startedAt: new Date(startedAtMs).toISOString(),
     ...(retainedFast ? { fast: retainedFast } : {}),
   }
   atomicWriteJson(receiptPath, receipt)
+  if (checkPublisher && !receipt.checkRunId) {
+    const publishStart = resumedReceipt ? checkPublisher.reconcile : checkPublisher.start
+    if (typeof publishStart !== 'function') {
+      throw new Error('Amp Orb CI Check creation recovery dependency is missing')
+    }
+    const checkRunId = await publishStart.call(checkPublisher, {
+      sha: validated.testedSha,
+      externalId: checkExternalId,
+    })
+    receipt = { ...receipt, checkRunId }
+    atomicWriteJson(receiptPath, receipt)
+  }
   if (!retainedFast) {
+    try {
+      await writeStatus({
+        sha: validated.sha,
+        state: 'pending',
+        context: AMP_ORB_CI_FAST_STATUS_CONTEXT,
+        description: 'Fast E2E queued on the dedicated 16-core Amp Orb',
+      })
+    } catch (error) {
+      if (!checkPublisher) throw error
+    }
+  }
+  if (!checkPublisher) {
     await writeStatus({
       sha: validated.sha,
       state: 'pending',
-      context: AMP_ORB_CI_FAST_STATUS_CONTEXT,
-      description: 'Fast E2E queued on the dedicated 16-core Amp Orb',
+      context: AMP_ORB_CI_STATUS_CONTEXT,
+      description: 'Queued on the dedicated 16-core Amp Orb',
     })
   }
-  await writeStatus({
-    sha: validated.sha,
-    state: 'pending',
-    context: AMP_ORB_CI_STATUS_CONTEXT,
-    description: 'Queued on the dedicated 16-core Amp Orb',
-  })
 
   ensurePrivateDirectory(path.dirname(logPath))
   const logDescriptor = openSync(logPath, 'w', 0o600)
@@ -986,7 +1336,7 @@ export async function runAmpOrbCIJob(input, {
     const fastResult = execution.result?.fast
     await recordFastResult(fastResult
       ? {
-          exitCode: fastResult.kind === 'docs-only' ? 0 : fastResult.exitCode,
+          exitCode: fastResult.exitCode,
           result: fastResult,
         }
       : {
@@ -1007,13 +1357,16 @@ export async function runAmpOrbCIJob(input, {
     wallSeconds: Math.max(0, (now() - startedAtMs) / 1000),
   }
   atomicWriteJson(receiptPath, receipt)
-  await reportFastStatus()
-  await writeStatus({
-    sha: receipt.sha,
-    state: statusState(receipt.conclusion),
-    context: AMP_ORB_CI_STATUS_CONTEXT,
-    description: statusDescription(receipt),
-  })
+  await reportFastStatusForMode()
+  if (checkPublisher) await completeAuthoritativeCheck(receipt, checkPublisher)
+  else {
+    await writeStatus({
+      sha: receipt.sha,
+      state: statusState(receipt.conclusion),
+      context: AMP_ORB_CI_STATUS_CONTEXT,
+      description: statusDescription(receipt),
+    })
+  }
   receipt = {
     ...receipt,
     state: 'reported',

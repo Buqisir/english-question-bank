@@ -34,8 +34,10 @@ Before SSH, the trusted controller requires all of the following:
    read from an explicitly pinned `github.com` API rather than trusting a
    locally named remote or ambient `GH_HOST`;
 4. that exact SHA has completed, successful `verify` and `e2e` check runs from
-   the `github-actions` App, both belonging to one workflow run in this
-   repository; the separately named manual-dispatch jobs cannot qualify;
+   numeric `github-actions` App ID `15368`, both belonging to attempt 1 of
+   workflow ID `282244920` at `.github/workflows/verify.yml`, event `push`, in
+   one Check Suite and Workflow Run in this repository; manual dispatches and
+   reruns cannot qualify;
 5. the three deployment Project Secrets are present only in the Deployment
    Orb environment.
 
@@ -331,3 +333,6 @@ remain in ordinary development or CI projects.
 - Restoring Amp Orb merge authority also requires an explicit, tested update to
   this deployment gate; it never silently accepts whichever CI happens to
   report first.
+- ADR-0025 adds disabled `shadow`, `dual`, `amp+hosted-e2e`, and `amp` reader
+  modes for a future repo-only GitHub App Check. `hosted-only` remains the
+  default and active authority until a separately authorized staged migration.

@@ -6,6 +6,8 @@ import { fileURLToPath } from 'node:url'
 import {
   AMP_ORB_CI_LOCK_CONFLICT_EXIT_CODE,
   ampOrbCILockInvocation,
+  createGitHubAppInstallationTokenProvider,
+  createGitHubCheckWriter,
   createGitHubStatusWriter,
   defaultAmpOrbCIStateDir,
   discoverAmpOrbCIJobs,
@@ -28,7 +30,9 @@ function values(flag) {
 }
 
 function parseInput() {
-  if (process.argv[2] !== 'run') throw new Error('Usage: amp-orb-ci.mjs run <fixed CI identity>')
+  if (process.argv[2] !== 'run' || !process.argv.includes('--forced')) {
+    throw new Error('Usage: amp-orb-ci.mjs run --forced <fixed diagnostic CI identity>')
+  }
   const event = values('--event').at(-1)
   const pullRequest = values('--pull-request').at(-1)
   return {
@@ -38,7 +42,7 @@ function parseInput() {
     baseSha: values('--base-sha').at(-1),
     deliveryId: values('--delivery').at(-1),
     pullRequestNumber: pullRequest === undefined ? null : Number(pullRequest),
-    forced: process.argv.includes('--forced'),
+    forced: true,
   }
 }
 
@@ -76,8 +80,20 @@ try {
     token,
     threadId: String(process.env.AMP_THREAD_ID || ''),
   })
+  const checksEnabled = process.env.QUESTION_BANK_AMP_CI_GITHUB_CHECKS_ENABLED === '1'
+  const publishCheck = checksEnabled
+    ? createGitHubCheckWriter({
+        appId: process.env.QUESTION_BANK_AMP_CI_GITHUB_APP_ID,
+        getInstallationToken: createGitHubAppInstallationTokenProvider({
+          appId: process.env.QUESTION_BANK_AMP_CI_GITHUB_APP_ID,
+          installationId: process.env.QUESTION_BANK_AMP_CI_GITHUB_APP_INSTALLATION_ID,
+          privateKey: process.env.QUESTION_BANK_AMP_CI_GITHUB_APP_PRIVATE_KEY,
+        }),
+      })
+    : null
   const runJob = (input) => runAmpOrbCIJob(input, {
     stateDir: defaultAmpOrbCIStateDir(repositoryRoot),
+    publishCheck,
     writeStatus,
     execute: ({ input: exactInput, onFastResult, writeOutput }) => executeAmpOrbCILanes(exactInput, {
       onFastResult,
