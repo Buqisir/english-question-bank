@@ -70,6 +70,7 @@ export const PRODUCTION_CONFIG = Object.freeze({
   root: '/opt/eqb',
   source: '/opt/eqb/english-question-bank',
   controllerUid: 0,
+  controllerGid: 0,
   minimumFreeBytes: 5 * 1024 * 1024 * 1024,
   sourceUser: 'eqb',
   runtimeUser: 'eqb',
@@ -827,7 +828,7 @@ function snapshotDatabases(config, dependencies, directory) {
       throw new Error(`Production database changed during snapshot: ${name}`)
     }
     chmodSync(snapshot, 0o600)
-    chownSync(snapshot, config.controllerUid, config.controllerUid)
+    chownSync(snapshot, config.controllerUid, config.controllerGid)
     const snapshotState = assertRegularPrivateDatabase(snapshot)
     verifySqliteDatabase(dependencies, snapshot)
     const descriptor = openSync(
@@ -1533,7 +1534,7 @@ function atomicInstall(source, destination, mode, config) {
   try {
     copyFileSync(source, temporary, fsConstants.COPYFILE_EXCL)
     chmodSync(temporary, mode)
-    chownSync(temporary, config.controllerUid, config.controllerUid)
+    chownSync(temporary, config.controllerUid, config.controllerGid)
     const descriptor = openSync(temporary, fsConstants.O_RDONLY | fsConstants.O_NOFOLLOW)
     try {
       fsyncSync(descriptor)
