@@ -277,6 +277,7 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
   const hookSource = readFileSync(path.join(srcRoot, 'concierge', 'useConciergeDesk.ts'), 'utf8')
   const paperRowSource = readFileSync(path.join(srcRoot, 'concierge', 'ConciergePaperRow.tsx'), 'utf8')
   const groupCardSource = readFileSync(path.join(srcRoot, 'concierge', 'ConciergeGroupCard.tsx'), 'utf8')
+  const rowMenuSource = readFileSync(path.join(srcRoot, 'concierge', 'ConciergeGroupRowMenu.tsx'), 'utf8')
   const appSource = readFileSync(path.join(srcRoot, 'App.tsx'), 'utf8')
   const aggSource = readFileSync(path.join(srcRoot, 'concierge', 'aggregatePaperResults.ts'), 'utf8')
 
@@ -464,21 +465,34 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
 
   // 9.8 ConciergeGroupCard contract — group-level actions live here.
   assert('Group card has C8 draft labels', /已在草稿卷中/.test(groupCardSource) && /加入草稿卷/.test(groupCardSource) && /暂不可组卷/.test(groupCardSource), '')
+  assert('Group card draft + titles switch add/remove', /加入当前草稿卷/.test(groupCardSource) && /从草稿卷移出/.test(groupCardSource), '')
   assert('Group card aria-pressed follows joined draft state', /aria-pressed=\{draftState === ['"]in_current_draft['"]\}/.test(groupCardSource), '')
   assert('Group card disables only unavailable draft state', /disabled=\{draftState === ['"]disabled['"]\}/.test(groupCardSource), '')
   // similar-entrypoints (E3): 「找类似」→「配相似」换引擎——was a plain
   // <a href> deep-link. similar-passages-entry (E6) retired that deep-link:
-  // 「配相似」→「相似篇章」, now a <button onClick> that toggles the shared
-  // candidate panel open in place (see ConciergeDesk's
-  // expandedSimilarGroupId/onToggleSimilar).
+  // 「配相似」→「相似篇章」, now a menu <button onClick> that toggles the
+  // shared candidate panel (see ConciergeDesk's expandedSimilarGroupId).
   assert('Group card has no 找类似 <button> (retired text-search-fill flow)',
     !/>\s*找类似\s*<\/button>/.test(groupCardSource), '')
-  assert('Group card renders a 相似篇章 toggle button (no deep-link <a>)',
-    />\s*相似篇章\s*<\/button>/.test(groupCardSource), '')
+  assert('Group card renders 相似篇章 as a menu button (no deep-link <a>)',
+    /dataRaEntry:\s*['"]group-card-similar['"]/.test(groupCardSource) &&
+    /label:\s*['"]相似篇章['"]/.test(groupCardSource) &&
+    !/<a[^>]*>\s*相似篇章\s*<\/a>/.test(groupCardSource), '')
   assert('Group card gates 相似篇章 on the four v2-supported groupTypes',
     /SIMILAR_SUPPORTED_GROUP_TYPES/.test(groupCardSource) && /similarEligible/.test(groupCardSource), '')
+  assert('Group card keeps 详情 href and 阅读解析 data-ra-entry',
+    /view=detail&groupId=/.test(groupCardSource) && /dataRaEntry:\s*['"]group-card['"]/.test(groupCardSource), '')
+  assert('Group card uses always-visible + / … trail (hover-reveal cluster gone)',
+    /concierge-group-row-trail/.test(groupCardSource) &&
+    /concierge-action-add/.test(groupCardSource) &&
+    !/concierge-group-row-actions/.test(groupCardSource), '')
   assert('Group card has no 预览 button', !/['"]预览['"]/.test(groupCardSource), '')
   assert('Group card has no per-question add UI', !/加入小题|加入单题|onAddQuestion/.test(groupCardSource), '')
+  assert('Row menu is a role=menu with menuitem children', /role=['"]menu['"]/.test(rowMenuSource) && /role=['"]menuitem['"]/.test(rowMenuSource), '')
+  assert('Row menu trigger has aria-haspopup=menu and aria-expanded', /aria-haspopup=['"]menu['"]/.test(rowMenuSource) && /aria-expanded=\{open\}/.test(rowMenuSource), '')
+  assert('Row menu moves focus with ArrowDown/ArrowUp', /ArrowDown/.test(rowMenuSource) && /ArrowUp/.test(rowMenuSource), '')
+  assert('Row menu closes on Esc, outside click, and scroll', /Escape/.test(rowMenuSource) && /pointerdown/.test(rowMenuSource) && /scroll/.test(rowMenuSource), '')
+  assert('hover-reveal .concierge-group-row-actions CSS is gone', !/\.concierge-group-row-actions/.test(readFileSync(path.join(srcRoot, 'App.css'), 'utf8')), '')
 
   // 9.9 Aggregator contract.
   assert('aggregatePaperResults exported', /export function aggregatePaperResults/.test(aggSource), '')
@@ -692,25 +706,21 @@ console.log('\nTest 12: Quiet first-screen — landing hero gone; STARTER_CHIPS 
   // Chip styling — the filter row reuses .concierge-starter-chip's rule.
   // teal-repaint: neutral resting chip border/text on the new #D8D8D2 /
   // #6A6A64 neutral palette (was #D3CBBD / #6B645C warm neutrals).
-  const chipRule = css.match(/\.concierge-starter-chip\s*\{[^}]*\}/)?.[0] || ''
-  assert('chip background transparent', /background:\s*transparent/.test(chipRule), '')
-  assert('chip border visible #D8D8D2', /border:\s*1px solid #D8D8D2/i.test(chipRule), '')
-  assert('chip text uses #6A6A64', /color:\s*#6A6A64/i.test(chipRule), '')
+  const chipRule = css.match(/\.concierge-browse-chip\s*\{[^}]*\}/)?.[0] || ''
+  assert('browse chip background #FFFFFF', /background:\s*#FFFFFF/.test(chipRule), '')
+  assert('browse chip border #E3E6E0', /border:\s*1px solid #E3E6E0/i.test(chipRule), '')
+  assert('browse chip text uses muted ink #6B6E68', /color:\s*#6B6E68/i.test(chipRule), '')
 
-  // chip 选中态墨绿化（teal-repaint C6: DESIGN.md Single-Hue Rule — retired the
-  // oxblood #B8323C red-pen selected state in favor of the one teal accent）
-  // — regression guard.
-  const chipSelectedRule = css.match(/\.concierge-starter-chip\.is-selected\s*\{[^}]*\}/)?.[0] || ''
-  assert('selected chip border is teal #2C6E56 (single-hue accent, not oxblood)', /border-color:\s*#2C6E56/i.test(chipSelectedRule), chipSelectedRule)
-  assert('selected chip text is teal-800 #1E4A3A', /color:\s*#1E4A3A/i.test(chipSelectedRule), chipSelectedRule)
-  assert('selected chip is NOT ink-filled #1A1A1A / oxblood #B8323C (teal-repaint Single-Hue Rule)', !/#1A1A1A|#B8323C/i.test(chipSelectedRule), chipSelectedRule)
-  assert('selected chip fill is a faint teal wash, not opaque', /background:\s*rgba\(44,\s*110,\s*86,/i.test(chipSelectedRule), chipSelectedRule)
+  const chipSelectedRule = css.match(/\.concierge-browse-chip\[aria-pressed='true'\]\s*\{[^}]*\}/)?.[0] || ''
+  assert('selected chip is ink-filled #1F1F1D (墨做动作)', /background:\s*#1F1F1D/i.test(chipSelectedRule), chipSelectedRule)
+  assert('selected chip text is white', /color:\s*#fff/i.test(chipSelectedRule), chipSelectedRule)
+  assert('selected chip is NOT oxblood #B8323C', !/#B8323C/i.test(chipSelectedRule), chipSelectedRule)
 
   // Intent bar resting + focus.
   const barRule = css.match(/\.concierge-intent-bar\s*\{[^}]*\}/)?.[0] || ''
-  assert('intent-bar rest border #D8D8D2', /border:\s*1px solid #D8D8D2/i.test(barRule), '')
+  assert('intent-bar rest border #D5D9D2', /border:\s*1px solid #D5D9D2/i.test(barRule), '')
   const focusRule = css.match(/\.concierge-intent-bar:focus-within\s*\{[^}]*\}/)?.[0] || ''
-  assert('focus border teal #2C6E56', /border-color:\s*#2C6E56/i.test(focusRule), '')
+  assert('focus border ink #1F1F1D', /border-color:\s*#1F1F1D/i.test(focusRule), '')
 }
 
 // ------------------------------------------------------------------ Test 13
@@ -755,8 +765,13 @@ console.log('\nTest 14: Paper row hover + clickable + 草稿卷 wording in App')
   // --motion-*/--ease-* tokens (docs/cuts/motion-pass/plan.md #2); assert the
   // token form on the same background+box-shadow pair, still no transform.
   assert('paper-row has soft transition (no transform)', /transition:\s*background\s*var\(--motion-fast\)\s*var\(--ease-hover\),\s*box-shadow\s*var\(--motion-fast\)\s*var\(--ease-hover\)/.test(paperRowRule), `got: ${paperRowRule}`)
-  const hoverRule = css.match(/\.concierge-paper-row:hover[\s\S]*?\.concierge-paper-row:focus-visible\s*\{[^}]*\}/)?.[0] || ''
-  assert('paper-row hover uses neutral #EDEDEA', /background:\s*#EDEDEA/i.test(hoverRule), '')
+  const hoverRule = css.match(/\.concierge-paper-row:hover[\s\S]{0,240}background:\s*#E9ECE6/)?.[0] || ''
+  assert('paper-row hover uses surface-2 #E9ECE6', /background:\s*#E9ECE6/i.test(hoverRule), '')
+  assert(
+    'expanded paper header stays surface-2 #E9ECE6',
+    /\.concierge-paper-row\.is-expanded[\s\S]{0,120}\.concierge-paper-row-head[\s\S]{0,200}background:\s*#E9ECE6/.test(css),
+    '',
+  )
 
   // 草稿卷 visible copy in App is intact.
   const mentions = app.match(/组题篮/g) || []

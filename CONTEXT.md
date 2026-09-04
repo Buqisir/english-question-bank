@@ -52,6 +52,10 @@ _Avoid_: incomplete Question Group, hidden Question Group, raw group
 The source-traceable semantic form of one Question Group after deterministic normalization; each question family has its own variant behind one shared normalization contract.
 _Avoid_: raw group, renderer model, analysis payload
 
+**Framed Columns** (`framed_columns`):
+A Canonical reading block for Word hairline two-column boxes whose insides are typeable text and rectangular tables. Screen / Print / PDF draw the same shared look (`exam-paper-format-standards.md` §3c). Import writes the Canonical block (`nck1-paper-standard.md` §8); it does not screenshot the boxes as Canonical body and does not change CSS per paper. Diagrams, photos, and charts stay figures.
+_Avoid_: treating the hairline box as a figure; per-paper PaperSurface CSS; PDF/DOCX text-box auto-detection
+
 **Normalization Report**:
 The durable account of direct source lineage, Transformation Records, diagnostics, and fail-closed outcomes for one paper compilation.
 _Avoid_: validation report when no transformation provenance is recorded; AI analysis
@@ -83,6 +87,10 @@ _Avoid_: 空 alone (ambiguous), gap, gap-fill when the stored object is meant
 **Analysis**:
 The reviewed, teacher-facing explanation of why each correct answer fits — the 讲评 layer. It attaches per Question / Cloze Blank for objective families, or to a Writing Task for writing. It is never the answer authority and is shown only when complete for the whole group. Cloze Analysis explains each Cloze Blank using collocation reasoning, an optional part-of-speech-specific test point, and highlightable evidence from the passage.
 _Avoid_: 解析 / explanation when the stored reviewed object is meant; answer key when only the answer is meant
+
+**Tutor** (小导师):
+The teacher-facing, paper-grounded chat loop on eqbank.cc. It reads the current Question Group, its Analysis when published, and teacher-confirmed 配相似 results through object APIs. It is not HKU DeepTutor, not a document knowledge base, and not a student account. Product authority: `docs/cuts/deeptutor-integration/spec.md`.
+_Avoid_: DeepTutor when the EQB product is meant; chatbot; knowledge base; treating a Tutor turn as Analysis
 
 **Writing Task**:
 The writing-specific information carried by a writing Question Group: the task type (应用文 application / 读后续写 continuation), complete prompt, communicative situation, content requirements, source word-count ruling, and any task-type-specific fixed response text or continuation material. A Writing Task is the attachment point for its Writing Analysis, since a writing group has no Questions to attach analysis to.
@@ -276,6 +284,7 @@ _Avoid_: field on Vocabulary Set, permanent mastery label, manually edited score
 - A **Question** can have zero or more **Options**.
 - A cloze **Question Group** contains many **Cloze Blanks**; each **Cloze Blank** maps one to one to one **Question**.
 - An **Analysis** attaches per **Question** / **Cloze Blank**, or to a **Writing Task**; it is never the answer authority.
+- A **Tutor** turn is grounded in one current **Question Group** and may read that group's **Analysis**; it does not become Analysis.
 - A **Writing Analysis** attaches to a **Writing Task** at group level, with no **Question** reference. Application carries a **Model Answer**, **Review Card**, and optional **Official Model Answer**. New continuation carries **Narrative Continuation Analysis** plus a **Model Answer**.
 - A **Narrative Continuation Analysis** derives only from one complete narrative continuation **Writing Task** and preserves source constraints separately from open author choices.
 - A **Tag** can attach to a **Passage**, **Question Group**, or **Question**.
@@ -316,3 +325,4 @@ _Avoid_: field on Vocabulary Set, permanent mastery label, manually edited score
 - "空" can mean a **Cloze Blank**, a 七选五 blank, or a 语法填空 blank. Use **Cloze Blank** for 完形填空; qualify the others by family.
 - "组" can mean a source-backed **Vocabulary Group** or a temporary review batch. Use Vocabulary Group for the durable curriculum unit and Vocabulary Review Run for the teacher's live traversal.
 - "生词" can mean one unfamiliar Review Decision or an exported entry. Use **Review Decision** while reviewing and **Vocabulary Set** after the selected entries are frozen for export.
+- "DeepTutor" in casual talk may mean HKU's engine or EQB's **Tutor**. In product and code, **Tutor** / 小导师 is the EQB loop; HKU DeepTutor is only a reference implementation.

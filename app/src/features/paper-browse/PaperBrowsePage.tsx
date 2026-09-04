@@ -56,8 +56,8 @@
  * no remove action and no whole-paper "整卷加入" action (aggregate add is
  * out of scope per aggregatePaperResults.ts:8-11).
  */
-import { Fragment, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
-import { ClipboardList, FileDown, RefreshCw } from 'lucide-react'
+import { Fragment, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
+import { ClipboardList, FileDown, Plus, Presentation, RefreshCw } from 'lucide-react'
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 // one-sheet-paper: 卷面字体/边距 token 只读消费——同 PaperSurface.tsx /
 // WritingPaperPage.tsx 的注入手法（CSS custom properties on a shared
@@ -179,6 +179,8 @@ import {
 } from './SimilarQuestionsRailView'
 import { applyPaperSurfaceFocusIntent } from './paperBrowseFocusIntent'
 import './paperBrowsePage.css'
+import { PointingHand } from './PointingHand'
+import { ScissorsMark } from './ScissorsMark'
 
 type GroupModel =
   | {
@@ -481,14 +483,33 @@ const paperBrowseContentStyle: PaperBrowseContentStyle = {
   '--ps-page-margin-top': paperSurfaceTokens.pageMarginTop,
 }
 
-const PIANO_RAIL_WHITE_KEY_HEIGHT = 40
-const PIANO_RAIL_BLACK_BOUNDARIES = new Set([1, 2, 4, 5, 6])
+const LECTURE_PANEL_WIDTH = 440
+const RAIL_WIDTH = 120
+const LECTURE_RAIL_WIDTH = 72
+const GUTTER_WIDTH = 140
+const PAPER_BASE_WIDTH = 794
+const GRID_GAP = 24
+const DOCKED_LECTURE_MIN_WIDTH = 1200
 
-function pianoRailGroupLabel(title: string): string {
+function railGroupLabel(title: string): string {
   const trimmed = title.trim()
   const readingLetter = trimmed.match(/^Reading\s+([A-D])$/i)
   if (readingLetter) return readingLetter[1].toUpperCase()
   return trimmed.replace(/\s*[（(]\s*满分\s*[\d.]+\s*分\s*[）)]\s*$/, '')
+}
+
+const RAIL_LECTURE_SHORT_LABELS: Record<string, string> = {
+  完形填空: '完形',
+  语法填空: '语法',
+  第一节: '一',
+  第二节: '二',
+  七选五: '七',
+}
+
+function railLectureShortLabel(title: string): string {
+  const labeled = railGroupLabel(title)
+  if (/^[A-D]$/.test(labeled)) return labeled
+  return RAIL_LECTURE_SHORT_LABELS[labeled.trim()] ?? labeled
 }
 
 function mountCanonicalReadingEvidenceAnchor(
@@ -708,7 +729,8 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   // lectureSelection 真正落到入口预选的题上（deepLinkQuestionAppliedRef 那
   // 条 effect 落地）才能构造种子，时序天然晚一拍。
   const similarDeepLinkAppliedRef = useRef(false)
-  const lectureHandleRef = useRef<HTMLButtonElement | null>(null)
+  const lectureToggleRef = useRef<HTMLButtonElement | null>(null)
+  const [paperScreenZoom, setPaperScreenZoom] = useState(1)
   // 程序化滚动（rail 点击/深链/证据滚动）沉降期标记——钢琴键高亮仍跟
   // scrollspy，这段窗口避免中间锚点把 activeAnchor 闪乱。
   const isProgrammaticScrollRef = useRef(false)
@@ -722,6 +744,18 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   // scrollerRef 复用现有的卷面容器（同 harness 的 leftScrollerRef）。
   const shellRef = useRef<HTMLDivElement | null>(null)
   const rightPanelRef = useRef<HTMLElement | null>(null)
+  const railNavRef = useRef<HTMLElement | null>(null)
+  const railPanelRef = useRef<HTMLDivElement | null>(null)
+  const [railVerticallyCentered, setRailVerticallyCentered] = useState(true)
+  const [viewportDocked, setViewportDocked] = useState(
+    () => typeof window !== 'undefined'
+      && window.matchMedia(`(min-width: ${DOCKED_LECTURE_MIN_WIDTH}px)`).matches,
+  )
+  const [railClickedAnchor, setRailClickedAnchor] = useState<string | null>(null)
+  const [railActiveHand, setRailActiveHand] = useState<{
+    top: number
+    left: number
+  } | null>(null)
   // similar-rail (E2): toast fade timer — the parent is the single owner of
   // the show/clear clock (see SimilarQuestionsRailView's toastMessage doc).
   const similarToastTimeoutRef = useRef<number | null>(null)
@@ -759,7 +793,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     function onKeyDown(event: KeyboardEvent): void {
       if (event.key !== 'Escape') return
       setLectureOpen(false)
-      lectureHandleRef.current?.focus()
+      lectureToggleRef.current?.focus()
     }
     document.addEventListener('keydown', onKeyDown)
     return (): void => {
@@ -1721,17 +1755,155 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     return parts
   }, [asset, canonicalConsumption, writingSkipIndices])
 
-  // 挑题态钢琴目录：白键按可见的部分头 + 题组逐行计数；黑键沿真实钢琴
-  // 的 2+3 节奏落在相邻白键接缝上；讲评态继续复用同一层琴键结构。
-  const pianoRailBlackKeyTops = useMemo(() => {
-    const whiteKeyCount = railParts.reduce(
-      (count, part) => count + part.groups.length + (part.name ? 1 : 0),
-      0,
-    )
-    return Array.from({ length: Math.max(0, whiteKeyCount - 1) }, (_, index) => index + 1)
-      .filter((boundary) => PIANO_RAIL_BLACK_BOUNDARIES.has(((boundary - 1) % 7) + 1))
-      .map((boundary) => boundary * PIANO_RAIL_WHITE_KEY_HEIGHT - 1)
+  const dockedLecture = lectureOpen && viewportDocked
+
+  const railGroupAnchors = useMemo(() => {
+    const anchors = new Set<string>()
+    for (const part of railParts) {
+      for (const group of part.groups) anchors.add(group.anchor)
+    }
+    return anchors
   }, [railParts])
+
+  const effectiveActiveAnchor = useMemo(() => {
+    const firstGroupAnchor = railParts[0]?.groups[0]?.anchor ?? null
+    if (railClickedAnchor && railGroupAnchors.has(railClickedAnchor)) {
+      return railClickedAnchor
+    }
+    if (activeAnchor && railGroupAnchors.has(activeAnchor)) return activeAnchor
+    return firstGroupAnchor
+  }, [activeAnchor, railClickedAnchor, railGroupAnchors, railParts])
+
+  useEffect(() => {
+    function releaseRailClickLock(): void {
+      if (isProgrammaticScrollRef.current) return
+      setRailClickedAnchor(null)
+    }
+    window.addEventListener('wheel', releaseRailClickLock, { passive: true })
+    window.addEventListener('touchstart', releaseRailClickLock, { passive: true })
+    return (): void => {
+      window.removeEventListener('wheel', releaseRailClickLock)
+      window.removeEventListener('touchstart', releaseRailClickLock)
+    }
+  }, [])
+
+  useEffect(() => {
+    const mq = window.matchMedia(`(min-width: ${DOCKED_LECTURE_MIN_WIDTH}px)`)
+    const syncViewportDocked = (): void => {
+      setViewportDocked(mq.matches)
+    }
+    syncViewportDocked()
+    mq.addEventListener('change', syncViewportDocked)
+    return (): void => {
+      mq.removeEventListener('change', syncViewportDocked)
+    }
+  }, [])
+
+  const updateRailActiveHand = useCallback((): void => {
+    const panel = railPanelRef.current
+    const anchor = effectiveActiveAnchor
+    const handSize = 16
+    const handWidth = (handSize * 16) / 18
+    const handGap = 4
+    if (!panel || !anchor) {
+      setRailActiveHand(null)
+      return
+    }
+    const activeButton = panel.querySelector<HTMLButtonElement>(
+      `[data-paper-browse-rail-anchor="${cssAttr(anchor)}"]`,
+    )
+    const title = activeButton?.querySelector<HTMLElement>(
+      '.paper-browse-rail-group-title',
+    )
+    if (!activeButton || !title) {
+      setRailActiveHand(null)
+      return
+    }
+    const panelRect = panel.getBoundingClientRect()
+    const buttonRect = activeButton.getBoundingClientRect()
+    const titleRect = title.getBoundingClientRect()
+    setRailActiveHand({
+      top: buttonRect.top - panelRect.top + (buttonRect.height - handSize) / 2,
+      left: titleRect.left - panelRect.left - handGap - handWidth,
+    })
+  }, [effectiveActiveAnchor])
+
+  useLayoutEffect(() => {
+    if (loading || !asset) return
+    updateRailActiveHand()
+    const panel = railPanelRef.current
+    const rail = railNavRef.current
+    if (!panel) return
+
+    const observer = new ResizeObserver(updateRailActiveHand)
+    observer.observe(panel)
+    if (rail) observer.observe(rail)
+
+    window.addEventListener('resize', updateRailActiveHand)
+    panel.addEventListener('scroll', updateRailActiveHand, { passive: true })
+    const rafId = requestAnimationFrame(() => {
+      updateRailActiveHand()
+    })
+
+    return (): void => {
+      cancelAnimationFrame(rafId)
+      observer.disconnect()
+      window.removeEventListener('resize', updateRailActiveHand)
+      panel.removeEventListener('scroll', updateRailActiveHand)
+    }
+  }, [effectiveActiveAnchor, asset, dockedLecture, loading, railParts, updateRailActiveHand])
+
+  useLayoutEffect(() => {
+    const rail = railNavRef.current
+    if (!rail) return
+
+    const syncRailVerticalCenter = (): void => {
+      const maxHeight = window.innerHeight - 48
+      setRailVerticallyCentered(rail.scrollHeight <= maxHeight)
+    }
+
+    syncRailVerticalCenter()
+    const observer = new ResizeObserver(syncRailVerticalCenter)
+    observer.observe(rail)
+    window.addEventListener('resize', syncRailVerticalCenter)
+
+    return (): void => {
+      observer.disconnect()
+      window.removeEventListener('resize', syncRailVerticalCenter)
+    }
+  }, [asset, dockedLecture, railParts])
+
+  useLayoutEffect(() => {
+    if (loading || !asset) return
+    const shell = shellRef.current
+    if (!shell) return
+
+    function computeZoom(): void {
+      const node = shellRef.current
+      if (!node) return
+      const isDockedLecture = lectureOpen && node.clientWidth >= DOCKED_LECTURE_MIN_WIDTH
+      const railWidth = isDockedLecture ? LECTURE_RAIL_WIDTH : RAIL_WIDTH
+      const lectureColumn = isDockedLecture ? GRID_GAP + LECTURE_PANEL_WIDTH : 0
+      const contentColumnWidth = node.clientWidth - railWidth - GRID_GAP - lectureColumn
+      const gutterReserve = isDockedLecture ? 0 : GUTTER_WIDTH
+      const available = contentColumnWidth - gutterReserve
+      const raw = Math.max(1, Math.min(1.35, available / PAPER_BASE_WIDTH))
+      const stepped = Math.floor(raw / 0.05) * 0.05
+      setPaperScreenZoom(stepped)
+    }
+
+    computeZoom()
+    const observer = new ResizeObserver(computeZoom)
+    observer.observe(shell)
+    return (): void => {
+      observer.disconnect()
+    }
+  }, [lectureOpen, loading, asset])
+
+  const paperBrowseContentMergedStyle = useMemo((): PaperBrowseContentStyle => ({
+    ...paperBrowseContentStyle,
+    '--paper-screen-zoom': paperScreenZoom,
+  }), [paperScreenZoom])
 
   // 讲评栏只认左边的显式点选，不跟随 scrollspy。
   const panelGroupId = useMemo(() => {
@@ -1843,6 +2015,10 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
   function scrollToAnchor(anchor: string): void {
     const scroller = scrollerRef.current
     if (!scroller) return
+    if (railGroupAnchors.has(anchor)) {
+      setRailClickedAnchor(anchor)
+    }
+    setActiveAnchor(anchor)
     // 每次都从 ref 取活节点：冷加载沉降期 scroller 容器本身也可能被
     // 替换，闭包捕获的旧节点 detached 后 querySelector 永远查空。
     const queryTarget = () =>
@@ -2641,7 +2817,15 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             <div className="paper-browse-group-actions">
               <button
                 type="button"
-                className="add-button"
+                className={`paper-browse-gutter-add${
+                  card.draftPaperButtonState === 'in_current_draft'
+                    ? ' paper-browse-gutter-add--in-draft'
+                    : ''
+                }${
+                  card.draftPaperButtonState === 'disabled'
+                    ? ' paper-browse-gutter-add--disabled'
+                    : ''
+                }`}
                 onClick={() => onAddGroupsToBasket([card])}
                 disabled={card.draftPaperButtonState === 'disabled'}
                 title={
@@ -2650,11 +2834,19 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
                     : undefined
                 }
               >
-                {card.draftPaperButtonState === 'in_current_draft'
-                  ? '已在草稿卷中'
-                  : card.draftPaperButtonState === 'disabled'
-                    ? '暂不可组卷'
-                    : '加入草稿卷'}
+                {card.draftPaperButtonState === 'in_current_draft' ? (
+                  <>
+                    <ScissorsMark size={14} />
+                    已剪入
+                  </>
+                ) : card.draftPaperButtonState === 'disabled' ? (
+                  <>暂不可组卷</>
+                ) : (
+                  <>
+                    <Plus size={16} aria-hidden="true" />
+                    加入
+                  </>
+                )}
               </button>
             </div>
           )}
@@ -3309,67 +3501,131 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     }
   }
 
-  function renderPianoRail(cropped: boolean): ReactNode {
+  function renderQuietRail(compact: boolean): ReactNode {
     return (
       <div
-        className={`paper-browse-piano-viewport${
-          cropped ? ' paper-browse-piano-viewport--cropped' : ''
+        ref={railPanelRef}
+        className={`paper-browse-rail-panel${
+          compact ? ' paper-browse-rail-panel--compact' : ''
         }`}
       >
-        <div className="paper-browse-rail-panel paper-browse-rail-panel--piano">
-          <div className="paper-browse-piano-black-key-layer" aria-hidden="true">
-            {pianoRailBlackKeyTops.map((top) => (
-              <span
-                key={top}
-                className="paper-browse-piano-black-key"
-                style={{ top }}
-              />
-            ))}
-          </div>
-          {railParts.map((part, partIndex) => (
-            <div
-              key={part.anchor}
-              className={`paper-browse-rail-part${
-                partIndex === 0 ? ' paper-browse-rail-part--first' : ''
-              }`}
-            >
-              {part.name && (
+        {railActiveHand && (
+          <span
+            className="paper-browse-rail-hand"
+            style={{
+              top: `${railActiveHand.top}px`,
+              left: `${railActiveHand.left}px`,
+            }}
+          >
+            <PointingHand size={16} />
+          </span>
+        )}
+        {railParts.map((part, partIndex) => (
+          <div
+            key={part.anchor}
+            className={`paper-browse-rail-part${
+              partIndex === 0 ? ' paper-browse-rail-part--first' : ''
+            }`}
+          >
+            {part.name && (
+              <button
+                type="button"
+                className="paper-browse-rail-part-head"
+                aria-label={`${part.name}，前往本部分第一个题组`}
+                onClick={() => scrollToAnchor(part.anchor)}
+              >
+                <span className="paper-browse-rail-part-name">{part.name}</span>
+              </button>
+            )}
+            {part.groups.map((g) => {
+              const isActive = g.anchor === effectiveActiveAnchor
+              const fullTitle = railGroupLabel(g.title)
+              const displayTitle = compact
+                ? railLectureShortLabel(g.title)
+                : fullTitle
+              const card = questionGroupById.get(g.anchor)
+              const inCurrentDraft = card?.draftPaperButtonState === 'in_current_draft'
+              const ariaLabel = displayTitle === g.title
+                ? inCurrentDraft
+                  ? `${fullTitle}，已在草稿卷`
+                  : undefined
+                : inCurrentDraft
+                  ? `${g.title}，已在草稿卷`
+                  : g.title
+              return (
                 <button
+                  key={g.anchor}
                   type="button"
-                  className="paper-browse-rail-part-head"
-                  aria-label={`${part.name}，前往本部分第一个题组`}
-                  onClick={() => scrollToAnchor(part.anchor)}
+                  data-paper-browse-rail-anchor={g.anchor}
+                  className={`paper-browse-rail-group${
+                    isActive ? ' paper-browse-rail-group--active' : ''
+                  }`}
+                  aria-current={isActive ? 'true' : undefined}
+                  aria-label={ariaLabel}
+                  title={displayTitle === g.title ? undefined : g.title}
+                  onClick={() => scrollToAnchor(g.anchor)}
                 >
-                  <span className="paper-browse-rail-part-name">{part.name}</span>
-                </button>
-              )}
-              {part.groups.map((g) => {
-                const isActive = g.anchor === activeAnchor
-                const displayTitle = pianoRailGroupLabel(g.title)
-                const isReadingLetter = /^[A-D]$/.test(displayTitle)
-                return (
-                  <button
-                    key={g.anchor}
-                    type="button"
-                    className={`paper-browse-rail-group${
-                      isReadingLetter ? ' paper-browse-rail-group--letter' : ''
-                    }${
-                      isActive ? ' paper-browse-rail-group--active' : ''
-                    }`}
-                    aria-current={isActive ? 'true' : undefined}
-                    aria-label={displayTitle === g.title ? undefined : g.title}
-                    onClick={() => scrollToAnchor(g.anchor)}
-                  >
+                  <span className="paper-browse-rail-group-label">
                     <span className="paper-browse-rail-group-title">{displayTitle}</span>
-                  </button>
-                )
-              })}
-            </div>
-          ))}
-        </div>
+                    {inCurrentDraft && (
+                      <span
+                        className="paper-browse-rail-scissors"
+                        title="已在草稿卷"
+                        aria-label="已在草稿卷"
+                      >
+                        <ScissorsMark />
+                      </span>
+                    )}
+                  </span>
+                </button>
+              )
+            })}
+          </div>
+        ))}
       </div>
     )
   }
+
+  const topbarActionsSlot = !reviewRevision ? (
+    <>
+      <button
+        type="button"
+        ref={lectureToggleRef}
+        className={`ghost-button paper-browse-lecture-toggle${
+          lectureOpen ? ' paper-browse-lecture-toggle--pressed' : ''
+        }`}
+        onClick={toggleLecturePanel}
+        aria-pressed={lectureOpen}
+        aria-expanded={lectureOpen}
+      >
+        <Presentation size={14} aria-hidden="true" />
+        讲评
+      </button>
+      <button
+        className="ghost-button"
+        type="button"
+        disabled={analysisPdfBusy}
+        onClick={() => void downloadCompanionAnalysis()}
+      >
+        <FileDown size={16} />
+        {analysisPdfBusy ? '生成解析中…' : '下载配套解析'}
+      </button>
+    </>
+  ) : (
+    <button
+      type="button"
+      ref={lectureToggleRef}
+      className={`ghost-button paper-browse-lecture-toggle${
+        lectureOpen ? ' paper-browse-lecture-toggle--pressed' : ''
+      }`}
+      onClick={toggleLecturePanel}
+      aria-pressed={lectureOpen}
+      aria-expanded={lectureOpen}
+    >
+      <Presentation size={14} aria-hidden="true" />
+      讲评
+    </button>
+  )
 
   async function downloadCompanionAnalysis(): Promise<void> {
     if (!asset || reviewRevision || analysisPdfBusy) return
@@ -3421,17 +3677,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         {...shellNav}
         pageTitle={asset.paper.title}
         onBack={onBackToWorkbench}
-        actionsSlot={!reviewRevision ? (
-          <button
-            className="ghost-button"
-            type="button"
-            disabled={analysisPdfBusy}
-            onClick={() => void downloadCompanionAnalysis()}
-          >
-            <FileDown size={16} />
-            {analysisPdfBusy ? '生成解析中…' : '下载配套解析'}
-          </button>
-        ) : undefined}
+        actionsSlot={topbarActionsSlot}
       />
       {analysisPdfError && <p className="paper-browse-export-error" role="alert">{analysisPdfError}</p>}
       <div
@@ -3443,44 +3689,51 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         aria-labelledby="paper-browse-title"
       >
         <h1 id="paper-browse-title" className="visually-hidden">{asset.paper.title}</h1>
-        <nav className="paper-browse-rail" aria-label="目录">
-          {/* 讲评态不是另一套胶囊导航：同一架钢琴只把可见宽度裁窄。 */}
-          {renderPianoRail(lectureOpen)}
+        <nav
+          className={`paper-browse-rail${
+            railVerticallyCentered ? ' paper-browse-rail--centered' : ''
+          }`}
+          ref={railNavRef}
+          aria-label="目录"
+        >
+          {renderQuietRail(dockedLecture)}
         </nav>
-        <div className="paper-browse-content" ref={scrollerRef} style={paperBrowseContentStyle}>
-          {grammarFillGeometryFixture && (
-            <style data-canonical-grammar-fill-geometry-fixture={grammarFillGeometryVariantId}>
-              {grammarFillGeometryFixtureCss}
-            </style>
-          )}
-          {asset.content.blocks.map((block, index) =>
-            writingSkipIndices.has(index) || scissorPlan.skipIndices.has(index)
-              ? null
-              : renderBlock(block, index),
-          )}
-          {/*
-            刀 2 修复轮 ②: 七选五衔接句高亮覆盖层。渲染条件与 hook 的
-            `enabled` 同款门控（panelGroupModel?.kind === 'sevenChoices'）
-            而不只看 marks.length —— 讲评栏切到别的题组时 hook 内部不会
-            主动清空 marks（只在 enabled 时才 setOverlay），若只看
-            marks.length 会露出上一个七选五题组的残影。
-          */}
-          {lectureOpen && panelGroupModel?.kind === 'sevenChoices' && sevenChoiceOverlay.marks.length > 0 && (
-            <div className="paper-browse-seven-blank-overlay" aria-hidden="true">
-              {sevenChoiceOverlay.marks.map((mark) => (
-                <span
-                  key={mark.id}
-                  className={`paper-browse-seven-clue-mark paper-browse-seven-clue-mark--${mark.kind}`}
-                  data-seven-color={mark.colorIndex}
-                  style={{
-                    transform: `translate(${mark.left}px, ${mark.top}px)`,
-                    width: `${mark.width}px`,
-                    height: `${mark.height}px`,
-                  }}
-                />
-              ))}
-            </div>
-          )}
+        <div className="paper-browse-content" ref={scrollerRef} style={paperBrowseContentMergedStyle}>
+          <div className="paper-browse-zoom">
+            {grammarFillGeometryFixture && (
+              <style data-canonical-grammar-fill-geometry-fixture={grammarFillGeometryVariantId}>
+                {grammarFillGeometryFixtureCss}
+              </style>
+            )}
+            {asset.content.blocks.map((block, index) =>
+              writingSkipIndices.has(index) || scissorPlan.skipIndices.has(index)
+                ? null
+                : renderBlock(block, index),
+            )}
+            {/*
+              刀 2 修复轮 ②: 七选五衔接句高亮覆盖层。渲染条件与 hook 的
+              `enabled` 同款门控（panelGroupModel?.kind === 'sevenChoices'）
+              而不只看 marks.length —— 讲评栏切到别的题组时 hook 内部不会
+              主动清空 marks（只在 enabled 时才 setOverlay），若只看
+              marks.length 会露出上一个七选五题组的残影。
+            */}
+            {lectureOpen && panelGroupModel?.kind === 'sevenChoices' && sevenChoiceOverlay.marks.length > 0 && (
+              <div className="paper-browse-seven-blank-overlay" aria-hidden="true">
+                {sevenChoiceOverlay.marks.map((mark) => (
+                  <span
+                    key={mark.id}
+                    className={`paper-browse-seven-clue-mark paper-browse-seven-clue-mark--${mark.kind}`}
+                    data-seven-color={mark.colorIndex}
+                    style={{
+                      transform: `translate(${mark.left}px, ${mark.top}px)`,
+                      width: `${mark.width}px`,
+                      height: `${mark.height}px`,
+                    }}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
         </div>
         {lectureOpen && (
           <aside className="paper-browse-lecture-panel" aria-label="讲评" ref={rightPanelRef}>
@@ -3523,18 +3776,6 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
         路径都不受蒙层影响。
       */}
       {lectureOpen && <div className="paper-browse-lecture-backdrop" aria-hidden="true" />}
-      <button
-        type="button"
-        ref={lectureHandleRef}
-        className={`paper-browse-lecture-handle${
-          lectureOpen ? ' paper-browse-lecture-handle--open' : ''
-        }`}
-        onClick={toggleLecturePanel}
-        aria-pressed={lectureOpen}
-        aria-expanded={lectureOpen}
-      >
-        讲评
-      </button>
       {!reviewRevision && (
         <button
           type="button"

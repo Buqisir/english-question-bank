@@ -20,7 +20,7 @@
      value (tokens.css) — token form instead of a literal so this file's
      palette-hex guard (verify-draft-workbench-visual-unify.mjs) stays
      zero-hardcode. */
-  outline: 2px solid var(--eqb-color-primary);
+  outline: 2px solid var(--action);
   outline-offset: 2px;
 }
 
@@ -146,8 +146,8 @@
    color-mix approximates DESIGN.md teal-50 from the existing brand-teal
    token; --eqb-color-primary-text is teal-800 exactly. */
 .draft-version-toggle button.active {
-  background: color-mix(in srgb, var(--eqb-color-primary) 10%, white);
-  color: var(--eqb-color-primary-text);
+  background: var(--surface-strong);
+  color: var(--ink);
   font-weight: 600;
 }
 
@@ -160,13 +160,15 @@
 
 .draft-export-menu-trigger {
   align-items: center;
-  background: var(--accent);
-  border-radius: 6px;
+  background: var(--action);
+  border-radius: 8px;
   color: #ffffff;
   display: inline-flex;
   gap: 6px;
-  min-height: 36px;
-  padding: 8px 14px;
+  min-height: 32px;
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 600;
   transition: background var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
 }
 
@@ -235,7 +237,7 @@
 
 .draft-more-menu-trigger:hover,
 .draft-more-menu-trigger[aria-expanded='true'] {
-  background: color-mix(in srgb, var(--eqb-color-primary) 10%, white);
+  background: var(--surface-strong);
   color: var(--ink-strong);
 }
 
@@ -344,7 +346,7 @@
 .draft-reorder-suggestion-act {
   background: none;
   border: 0;
-  color: var(--eqb-color-primary-text);
+  color: var(--ink);
   cursor: pointer;
   flex: none;
   font: inherit;
@@ -356,7 +358,7 @@
 }
 
 .draft-reorder-suggestion-act:hover {
-  color: var(--eqb-color-primary);
+  color: var(--ink);
 }
 
 /* draft-desk-a: 备课桌骨架重构（docs/cuts/draft-desk-a/plan.md，原型
@@ -519,8 +521,8 @@
 }
 
 .draft-group-actions button[aria-pressed='true'] {
-  border-color: var(--eqb-color-primary);
-  color: var(--eqb-color-primary);
+  border-color: var(--action);
+  color: var(--ink);
 }
 
 .draft-group-actions button.danger:hover {
@@ -534,10 +536,10 @@
    the primary token (not a hardcoded hex) so it stays green/teal in both
    themes without a new palette entry. */
 .draft-group-actions .draft-group-suggestion {
-  background: color-mix(in srgb, var(--eqb-color-primary) 12%, var(--eqb-color-paper));
-  border: 1px solid color-mix(in srgb, var(--eqb-color-primary) 35%, var(--paper-border));
+  background: var(--surface-strong);
+  border: 1px solid var(--line);
   border-radius: 999px;
-  color: var(--eqb-color-primary-text);
+  color: var(--ink);
   cursor: pointer;
   font-size: 11px;
   height: auto;
@@ -547,7 +549,7 @@
 }
 
 .draft-group-actions .draft-group-suggestion:hover {
-  border-color: var(--eqb-color-primary);
+  border-color: var(--action);
 }
 
 /* a3-imposition (plan.md Must Do 3, 裁点2): the A3-only seam-anchored
@@ -555,10 +557,10 @@
    centered on the paper column (the seam it sits on spans the full face
    width) instead of right-aligned in a per-group action column. */
 .draft-seam-suggestion {
-  background: color-mix(in srgb, var(--eqb-color-primary) 12%, var(--eqb-color-paper));
-  border: 1px solid color-mix(in srgb, var(--eqb-color-primary) 35%, var(--paper-border));
+  background: var(--surface-strong);
+  border: 1px solid var(--line);
   border-radius: 999px;
-  color: var(--eqb-color-primary-text);
+  color: var(--ink);
   cursor: pointer;
   font-size: 11.5px;
   left: 50%;
@@ -570,7 +572,7 @@
 }
 
 .draft-seam-suggestion:hover {
-  border-color: var(--eqb-color-primary);
+  border-color: var(--action);
 }
 
 /* similar-workbench-swap (E7, plan.md "抽屉"): the swap drawer's own wrapper
@@ -872,13 +874,13 @@
 
 .draft-group-actions button:focus-visible,
 .draft-group-actions-menu-trigger:focus-visible {
-  outline: 2px solid var(--eqb-color-primary);
+  outline: 2px solid var(--action);
   outline-offset: 2px;
 }
 
 .draft-group-actions-menu-trigger[aria-expanded='true'] {
-  border-color: var(--eqb-color-primary);
-  color: var(--eqb-color-primary);
+  border-color: var(--action);
+  color: var(--ink);
 }
 
 .draft-group-actions-menu-panel {

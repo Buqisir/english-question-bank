@@ -168,6 +168,11 @@ async function searchAndOpenGroupCard(page, searchText, groupId) {
   return card
 }
 
+async function openGroupDetailFromRow(page, card) {
+  await card.getByRole('button', { name: '更多操作' }).click()
+  await page.getByRole('menuitem', { name: '详情' }).click()
+}
+
 async function runOwnerFlow(browser) {
   const context = await browser.newContext({ viewport: { width: 1440, height: 920 } })
   const page = await context.newPage()
@@ -197,16 +202,19 @@ async function runOwnerFlow(browser) {
     await waitForConciergeDeskReady(page)
     pass('Correct password logs owner in and lands on the 找题面')
 
-    // C3: find -> expand -> detail. trust-cracks C3c: 详情 is a real link
-    // (?view=detail&groupId=…) now, role=link not button — 中键/新标签可用.
+    // C3: find -> expand -> detail. 详情 lives in the row 「更多操作」 menu
+    // as a menuitem (href still carries ?view=detail&groupId=…).
     const ownerCard = await searchAndOpenGroupCard(page, OWNER_GROUP_TITLE, OWNER_GROUP_ID)
-    await ownerCard.getByRole('link', { name: '详情' }).click()
+    await openGroupDetailFromRow(page, ownerCard)
     await page.locator('.detail-view').waitFor({ timeout: 10_000 })
     pass('Owner opens 题组详情 from the card')
 
-    // Owner-only gate elements are present for the owner.
-    await page.locator('[aria-label="删除题组"]').waitFor({ timeout: 10_000 })
-    pass('Owner detail view shows the owner-only 删除题组 control')
+    // Owner-only gate: 编辑/删除 live in the detail 「更多操作」 menu.
+    await page.locator('.detail-view .peek-actions-menu').getByRole('button', { name: '更多操作' }).click()
+    await page.getByRole('menuitem', { name: '删除' }).waitFor({ timeout: 10_000 })
+    await page.getByRole('menuitem', { name: '编辑' }).waitFor({ timeout: 10_000 })
+    await page.keyboard.press('Escape')
+    pass('Owner detail view shows the owner-only 编辑/删除 menu')
 
     // C3: add to draft from the detail view. NOTE: selectedDetail (the detail
     // view's own state) is not re-synced with questionGroups after the add, so the
@@ -320,24 +328,26 @@ async function runMemberFlow(browser, ownerDraftPaperId) {
 
     // C4: member walks find -> detail -> add -> workbench with their own group.
     const memberCard = await searchAndOpenGroupCard(page, MEMBER_GROUP_TITLE, MEMBER_GROUP_ID)
-    await memberCard.getByRole('link', { name: '详情' }).click()
+    await openGroupDetailFromRow(page, memberCard)
     await page.locator('.detail-view').waitFor({ timeout: 10_000 })
     pass('Member opens 题组详情 from the card')
 
     // C4: owner-only panels must ALL be absent for the member.
+    const ownerAdminMenuCount = await page.locator('.detail-view .peek-actions-menu').count()
     const editButtonCount = await page.getByRole('button', { name: '编辑' }).count()
-    const deleteButtonCount = await page.locator('[aria-label="删除题组"]').count()
+    const deleteButtonCount = await page.getByRole('menuitem', { name: '删除' }).count()
     const answerCompareCount = await page.locator('.answer-compare-summary').count()
     const verifyListCount = await page.locator('.verify-list').count()
     const manageButtonCount = await page.getByRole('button', { name: /^管理$|^退出管理$/ }).count()
     const goneAway = {
+      ownerAdminMenuCount,
       editButtonCount,
       deleteButtonCount,
       answerCompareCount,
       verifyListCount,
       manageButtonCount,
     }
-    if (editButtonCount !== 0 || deleteButtonCount !== 0 || answerCompareCount !== 0 || verifyListCount !== 0 || manageButtonCount !== 0) {
+    if (ownerAdminMenuCount !== 0 || editButtonCount !== 0 || deleteButtonCount !== 0 || answerCompareCount !== 0 || verifyListCount !== 0 || manageButtonCount !== 0) {
       fail('Member view must hide all owner-only gate elements', JSON.stringify(goneAway))
     }
     pass('Member detail view hides 编辑/删除/答案对比统计/verify-list/顶栏管理 (member-detail-gate holds)')

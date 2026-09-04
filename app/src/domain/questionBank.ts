@@ -40,6 +40,8 @@ export type QuestionGroupCard = {
   draftPaperButtonState: 'add' | 'in_current_draft' | 'disabled'
   currentDraftPaperId: string | null
   printUnavailableReason: string | null
+  /** Read-only import time from sources.created_at. Additive; absent on paper-asset-only cards. */
+  importedAt?: string
 }
 
 export type TopicLabel = {

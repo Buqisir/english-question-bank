@@ -3,15 +3,13 @@
  * Verification: The Single-Radius-Family Rule (DESIGN.md §5, design-canon-v2).
  *
  * Every border-radius value in app/src CSS must come from the radius ladder
- * {0, 4px, 6px, 8px, 999px} plus 50% (circular controls only). Directional
- * shorthand is legal when every component is in-family; var() indirection is
- * legal (token wins by definition).
+ * {0, 4px, 8px, 12px, 16px, 999px} plus 50% (circular controls only).
+ * Northstar 2026-09-03 authorised 12 / 16 into the family (cards / hero search).
+ * Directional shorthand is legal when every component is in-family; var()
+ * indirection is legal (token wins by definition).
  *
- * The 32 pre-existing off-family literals (5/3/2/12/10/7px, surveyed
- * 2026-07-16) are grandfathered per file × value below and act as a ratchet:
- * counts may only go down. A new off-family radius anywhere — including a
- * grandfathered file exceeding its baseline count — fails. When a baseline
- * entry reaches zero on disk, delete the entry to lock the tightening in.
+ * Remaining off-family literals are grandfathered per file × value below and
+ * act as a ratchet: counts may only go down.
  */
 
 import { readdirSync, readFileSync } from 'node:fs'
@@ -22,13 +20,13 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
 const srcDir = path.join(rootDir, 'app', 'src')
 
-const FAMILY = new Set(['0', '4px', '6px', '8px', '999px', '50%'])
+const FAMILY = new Set(['0', '4px', '6px', '8px', '12px', '16px', '999px', '50%'])
 
 // file (relative to app/src) → { offFamilyValue → grandfathered count }
 const BASELINE = {
   'features/draft-paper/DraftPaperWorkbench.css': { '5px': 1, '7px': 1 },
   'features/my-space/MySpacePage.css': { '10px': 1, '2px': 1 },
-  'features/paper-intelligence/paperIntelligence.css': { '10px': 2, '12px': 3, '2px': 1, '3px': 5 },
+  'features/paper-intelligence/paperIntelligence.css': { '10px': 2, '2px': 1, '3px': 5 },
   'features/paper-intelligence/paperSurfaceLectureHighlights.css': { '3px': 1 },
 }
 // reading-analysis-retire (2026-07-16): the two baseline entries above for

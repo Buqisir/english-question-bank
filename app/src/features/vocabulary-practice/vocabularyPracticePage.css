@@ -42,7 +42,7 @@
 
 .vocabulary-practice-eyebrow {
   margin: 0 0 8px;
-  color: var(--accent);
+  color: var(--ink);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -118,13 +118,13 @@
 }
 
 .vocabulary-practice-modes > span {
-  border-color: color-mix(in srgb, var(--accent) 38%, var(--line));
-  background: color-mix(in srgb, var(--accent) 6%, var(--panel));
+  border-color: var(--line-strong);
+  background: var(--surface-strong);
 }
 
 .vocabulary-practice-modes svg {
   grid-row: 1 / span 2;
-  color: var(--accent);
+  color: var(--ink);
 }
 
 .vocabulary-practice-modes strong {
@@ -166,7 +166,7 @@
 }
 
 .vocabulary-match-card:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--action);
   outline-offset: 3px;
 }
 
@@ -216,12 +216,12 @@
 }
 
 .vocabulary-match-card:hover .vocabulary-match-card-back {
-  border-color: color-mix(in srgb, var(--accent) 45%, var(--line-strong));
-  background: color-mix(in srgb, var(--accent) 5%, var(--surface-strong));
+  border-color: var(--line-strong);
+  background: var(--surface-strong);
 }
 
 .vocabulary-match-card-face {
-  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+  border-color: var(--line-strong);
   background: var(--panel);
   transform: rotateY(180deg);
   transition:
@@ -231,9 +231,9 @@
 }
 
 .vocabulary-match-card.is-confirming-match .vocabulary-match-card-face {
-  border-color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 9%, var(--panel));
-  box-shadow: 0 8px 20px color-mix(in srgb, var(--accent) 14%, transparent);
+  border-color: var(--line-strong);
+  background: var(--surface-strong);
+  box-shadow: none;
   animation: vocabulary-match-confirm var(--motion-entrance) var(--ease-out);
 }
 
@@ -246,7 +246,7 @@
   height: 24px;
   place-items: center;
   border-radius: 50%;
-  background: var(--accent);
+  background: var(--action);
   color: var(--panel);
   animation: vocabulary-match-confirmation-in var(--motion-base) var(--ease-out) both;
 }
@@ -272,7 +272,7 @@
 }
 
 .vocabulary-match-card-face > svg {
-  color: var(--accent);
+  color: var(--ink);
 }
 
 @keyframes vocabulary-match-confirm {
@@ -319,13 +319,13 @@
   gap: 14px;
   margin-top: 20px;
   padding: 16px;
-  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line));
+  border: 1px solid var(--line);
   border-radius: 8px;
-  background: color-mix(in srgb, var(--accent) 5%, var(--panel));
+  background: var(--surface-strong);
 }
 
 .vocabulary-practice-complete > svg {
-  color: var(--accent);
+  color: var(--ink);
 }
 
 .vocabulary-practice-complete h2,
@@ -368,7 +368,7 @@
 }
 
 .vocabulary-practice-status > svg {
-  color: var(--accent);
+  color: var(--ink);
 }
 
 .vocabulary-practice-status p {

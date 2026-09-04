@@ -1,66 +1,66 @@
 /**
- * QuestionGroupDetailView.css — 速览头 + 一张纸露一角（detail-page-redesign,
- * 2026-07-15 owner approved spec + 原型 `?detailVariant=paper-peek` 实点
- * 通过）。QuestionGroupDetailView's shared chrome (.detail-view /
- * .back-button / .detail-message) lives in App.css (untouched, out of this
- * cut's rewrite面); this sheet owns every class this component's JSX renders
- * itself — the rules below are the exact prototype CSS (detailPaperPeek.css,
- * retired along with DetailPaperPeekPrototype.tsx) folded in with its
- * `pdp-` prototype prefix renamed to `peek-` and the DEV-only switcher
- * block dropped (production has no variant toggle).
- *
- * 详情页是工具页（中性 token 体系 + 墨绿签名）；纸卡按「暖纸卡浮中性页」
- * 判例（DESIGN.md §2 my-space 微缩 A4 先例）自带纸面样式浮在中性壳上
- * （暖纸边界：页壳中性，纸卡自暖，不新增色彩决策）。
+ * QuestionGroupDetailView.css — 速览头 + 一张纸露一角（northstar detail,
+ * 2026-09-03). Shared chrome (.detail-view / .back-button / .detail-message)
+ * lives in App.css; this sheet owns every class this component renders.
  */
 
 .peek-root {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  max-width: 900px;
+  max-width: 920px;
   margin: 0 auto;
   box-sizing: border-box;
   min-width: 0;
   width: 100%;
 }
 
-/* ── 速览头（工具侧，中性） ───────────────────────────────── */
+/* ── 速览头 ───────────────────────────────────────────────── */
 
 .peek-hero {
   display: flex;
   flex-direction: column;
-  gap: 10px;
   min-width: 0;
 }
 
 .peek-meta-line {
   display: flex;
-  align-items: baseline;
+  align-items: center;
+  flex-wrap: wrap;
   gap: 6px;
+  margin: 0 0 8px;
   font-size: 12px;
   color: var(--muted);
 }
 
 .peek-meta-dot {
-  color: var(--line-strong);
+  color: var(--muted);
+}
+
+.peek-meta-badge {
+  font-size: 12px;
+  color: var(--ink);
+  background: var(--surface-strong);
+  border-radius: 4px;
+  padding: 1px 6px;
+  line-height: 1.5;
 }
 
 .peek-title {
-  margin: 0;
-  font-size: 22px;
-  font-weight: 650;
-  color: var(--ink-strong);
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  color: var(--ink);
   overflow-wrap: anywhere;
-  text-wrap: balance;
 }
 
 .peek-summary {
-  margin: 0;
+  margin: 0 0 12px;
   max-width: 68ch;
-  font-size: 14.5px;
+  font-size: 13px;
   line-height: 1.6;
-  color: var(--ink);
+  color: var(--muted);
   overflow-wrap: anywhere;
 }
 
@@ -68,30 +68,31 @@
 .peek-topics {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 8px;
+  margin: 0;
 }
 
-.peek-chip {
+.peek-chips + .peek-topics {
+  margin-top: 8px;
+}
+
+.peek-chip,
+.peek-topic {
+  display: inline-flex;
+  align-items: center;
   font-size: 12px;
   color: var(--ink);
-  border: 1px solid var(--line);
+  background: var(--surface-strong);
+  border: 0;
   border-radius: 999px;
   padding: 3px 10px;
-  background: var(--panel);
+  line-height: 1.5;
 }
 
 .peek-chip b {
-  font-weight: 600;
-  color: var(--accent);
+  font-weight: 500;
+  color: var(--muted);
   font-variant-numeric: tabular-nums;
-}
-
-.peek-topic {
-  font-size: 12px;
-  color: var(--eqb-color-primary, #2c6e56);
-  background: var(--eqb-color-primary-soft, #eaf1ed);
-  border-radius: 999px;
-  padding: 3px 10px;
 }
 
 .peek-actions {
@@ -99,61 +100,61 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 8px;
-  margin-top: 4px;
+  margin-top: 16px;
+  margin-bottom: 24px;
 }
 
-.peek-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  padding: 7px 14px;
-  border-radius: 6px;
-  /* quiet-chrome（2026-08-28）：摘描边盒，透明底 + hover 浮中性底，与全站
-     ghost 词汇统一；主操作仍走墨绿签名。 */
-  border: 0;
-  background: transparent;
-  color: var(--ink);
-  cursor: pointer;
-  transition: background var(--motion-fast) var(--ease-hover);
-}
-
-.peek-btn:hover {
-  background: var(--surface-strong);
-}
-
-/* 本条覆盖 .peek-btn 的中性底/边：主操作按钮走墨绿签名（The Green-Pen Rule 的
- * 正当小面积用法——当前主操作） */
-.peek-btn--primary {
-  background: var(--accent);
-  color: #fff;
-}
-
-.peek-btn--primary:hover {
-  background: var(--eqb-color-primary-deep);
-}
-
-/* 编辑/删除 owner-only 次位（管理不放，但收次要位——低频纠错兜底）：
- * 无边框/更淡，视觉权重明显低于看整卷/讲评/相似篇章。 */
-.peek-btn--minor {
-  border-color: transparent;
-  background: transparent;
-  color: var(--muted);
-  padding: 7px 10px;
+.peek-actions-menu {
   margin-left: auto;
 }
 
-.peek-btn--minor:hover {
-  background: var(--surface-strong);
+.peek-btn,
+a.peek-btn,
+a.peek-btn:visited {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
   color: var(--ink);
+  font-size: 13px;
+  text-decoration: none;
+  cursor: pointer;
 }
 
-.peek-btn--minor.peek-btn--danger:hover {
-  color: #b3413a;
+.peek-btn:hover:not(:disabled),
+a.peek-btn:hover {
+  background: var(--surface-strong);
+  text-decoration: none;
 }
 
-.peek-btn--minor + .peek-btn--minor {
-  margin-left: 0;
+.peek-btn:focus-visible,
+a.peek-btn:focus-visible {
+  text-decoration: none;
+}
+
+.peek-btn svg {
+  flex: 0 0 16px;
+}
+
+.peek-btn--primary {
+  margin-right: 8px;
+  padding: 0 12px;
+  background: var(--action);
+  color: #fff;
+}
+
+.peek-btn--primary:hover:not(:disabled) {
+  background: var(--action-hover);
+}
+
+.peek-btn--primary:disabled {
+  background: var(--surface-strong);
+  color: var(--muted);
+  cursor: default;
 }
 
 /* ── 一张纸（露一角） ─────────────────────────────────────── */
@@ -163,63 +164,133 @@
   min-width: 0;
   width: 100%;
   box-sizing: border-box;
-  border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 4px;
   background: #fff;
-  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.06),
+    0 12px 32px rgba(0, 0, 0, 0.08);
   overflow: hidden;
 }
 
 .peek-paper-clip {
-  max-height: 340px;
+  position: relative;
+  max-height: 300px;
   overflow: hidden;
 }
 
-/* 露一角的下缘渐隐：白纸淡出到白纸（卡内自体渐隐，不透出页底色，
- * 读作"纸还没完"） */
+.peek-paper--expanded .peek-paper-clip {
+  max-height: none;
+  overflow: visible;
+}
+
+.peek-paper--expanded {
+  overflow: visible;
+}
+
 .peek-paper:not(.peek-paper--expanded) .peek-paper-clip::after {
   content: '';
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 96px;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff 85%);
+  height: 160px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.85) 45%,
+    #fff 70%,
+    #fff 100%
+  );
   pointer-events: none;
 }
 
-.peek-paper--expanded .peek-paper-clip {
-  max-height: none;
-  padding-bottom: 48px;
+.peek-expand-wrap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 16px;
+  display: flex;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.peek-paper-placeholder {
+  padding: 40px 24px 64px;
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* Detail peek: the outer sheet IS the paper — flatten PaperSurface desk/page. */
+.peek-paper .ps-surface {
+  background: transparent;
+  background-image: none;
+  padding: 0;
+  min-height: 0;
+  align-items: stretch;
+}
+
+.peek-paper .ps-page {
+  box-shadow: none;
+  border: 0;
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  min-height: 0;
+  padding: 32px 48px 40px;
+  box-sizing: border-box;
+}
+
+.peek-expand-sticky {
+  position: sticky;
+  bottom: 24px;
+  height: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 2;
 }
 
 .peek-expand {
-  position: absolute;
-  bottom: 12px;
-  left: 50%;
-  transform: translateX(-50%);
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  font-size: 12.5px;
-  padding: 5px 14px;
+  gap: 6px;
+  font-size: 13px;
+  padding: 6px 14px;
   border-radius: 999px;
-  border: 1px solid var(--line-strong);
-  background: var(--panel);
+  border: 1px solid var(--line);
+  background: #fff;
   color: var(--ink);
   cursor: pointer;
-  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
+  box-shadow: var(--eqb-shadow-floating);
+  pointer-events: auto;
+}
+
+.peek-expand-sticky .peek-expand {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+}
+
+.peek-expand svg {
+  flex: 0 0 16px;
 }
 
 .peek-expand:hover {
   background: var(--surface-strong);
 }
 
-.peek-paper-placeholder {
-  padding: 40px 24px 64px;
-  font-size: 13.5px;
-  color: var(--muted);
-  text-align: center;
+@media (prefers-reduced-motion: reduce) {
+  .peek-btn,
+  .peek-expand {
+    transition: none;
+  }
 }
 
 @media screen and (max-width: 640px) {
@@ -232,14 +303,19 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .peek-actions-menu {
+    grid-column: 1 / -1;
+    margin-left: 0;
+    justify-self: end;
+  }
+
   .peek-btn {
     justify-content: center;
     min-width: 0;
   }
 
-  .peek-btn--minor,
-  .peek-btn--minor + .peek-btn--minor {
-    margin-left: 0;
+  .peek-btn--primary {
+    margin-right: 0;
   }
 
   .peek-paper-clip {
@@ -250,14 +326,14 @@
 
   .peek-paper .ps-surface {
     min-width: 0;
-    padding: 12px;
+    padding: 0;
   }
 
   .peek-paper .ps-page {
     box-sizing: border-box;
     max-width: 100%;
     min-width: 0;
-    padding: 32px 24px;
+    padding: 32px 24px 40px;
     width: 100%;
   }
 

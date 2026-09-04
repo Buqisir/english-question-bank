@@ -105,6 +105,11 @@ export type PaperResult = {
   /** True when key fields were missing → bucketed into "其他来源". */
   isFallback: boolean
   /**
+   * Latest sources.created_at among groups in this paper (additive).
+   * Empty string when no group carries importedAt.
+   */
+  importedAt: string
+  /**
    * Cut 6 — paper-level hit context. Additive: existing consumers that read
    * `representativeReason` / `hitCount` / `groups` keep working unchanged.
    * Cut 6 row UI consumes `hitContext` to choose badge wording, decide
@@ -136,7 +141,7 @@ function normalizeSourceSignature(value: unknown): string {
   // Collapse all whitespace (incl. CJK full-width space) to nothing.
   text = text.replace(/[\s\u3000]+/g, '')
   // Drop common punctuation that shows up only in some copies.
-  text = text.replace(/[，,。．\.()（）【】《》\[\]"'`~!@#$%^&*+=|\\:;<>?/-]+/g, '')
+  text = text.replace(/[，,。．.()（）【】《》[\]"'`~!@#$%^&*+=|\\:;<>?/-]+/g, '')
   return text.toLowerCase()
 }
 
@@ -177,6 +182,7 @@ export function aggregatePaperResults(hits: ConciergeSearchHit[]): PaperResult[]
         representativeReason: cleanReason(reason),
         groups: [],
         isFallback,
+        importedAt: '',
         // Initialise the hit context with the same first-hit reason the
         // representativeReason picks. We populate the rest of the fields
         // (hitGroupIds / primaryGroupId / passageHits) once we know the
@@ -197,6 +203,10 @@ export function aggregatePaperResults(hits: ConciergeSearchHit[]): PaperResult[]
     }
     const cleanedReason = cleanReason(reason)
     bucket.groups.push({ group, reason: cleanedReason })
+    const groupImportedAt = typeof group.importedAt === 'string' ? group.importedAt : ''
+    if (groupImportedAt && groupImportedAt > bucket.importedAt) {
+      bucket.importedAt = groupImportedAt
+    }
     bucket.hitContext.hitGroupIds.push(group.id)
     bucket.hitContext.passageHits.push({
       groupId: group.id,

@@ -3,7 +3,7 @@
    box-shadow (~1.2:1 contrast). Change this one declaration to move every
    :focus-visible ring below in one place. */
 :root {
-  --focus-ring: 2px solid var(--accent, #2C6E56);
+  --focus-ring: 2px solid var(--eqb-color-action, #1F1F1D);
 
   /* Motion tokens（motion-pass 2026-07-12）。五档时长 + 三曲线。 */
   --motion-micro: 80ms;     /* 高频密集微反馈（pi chip 类）；不用于面板/抽屉级过渡（那用 --motion-slow） */
@@ -27,13 +27,53 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 20px;
-  padding: 14px 24px;
-  /* quiet-chrome（2026-08-28）：顶栏不再是「白底 + 上下横线包边」的贴片，
-   * 透明底融入所在页面（工具页 #F6F6F4 / 纸页暖米自动跟随），去掉
-   * border-bottom 缝合线。AppTopbar 全站无 sticky（DraftPaperWorkbench.css
-   * 有锚注释佐证），内容不会从透明顶栏下滚过，透明是安全的。 */
+  gap: 16px;
+  min-height: 48px;
+  padding: 0 32px;
+  /* 北星：顶栏透明融入纸底，无缝合线。全站无 sticky。 */
   background: transparent;
+}
+
+.topbar-identity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.topbar-brand-mark {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--eqb-color-identity, #2C6E56);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  flex: 0 0 14px;
+  overflow: hidden;
+}
+
+.topbar-brand-mark svg {
+  width: 12px;
+  height: 12px;
+}
+
+.topbar-brand-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--eqb-color-text, #1F1F1D);
+  line-height: 1.5;
+}
+
+.topbar-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--eqb-color-identity, #2C6E56);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 /* ui-shell-unify: unified AppTopbar vocabulary. `.topbar-sub` is the
@@ -41,50 +81,50 @@
    brand block). Workspace tools stay in per-page sticky tool cards
    (CR MF-1 disposition), not in the shell bar. */
 .topbar-sub {
-  padding: 10px 24px;
+  padding: 0 24px;
 }
 
 .topbar-brand {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
   min-width: 0;
 }
 
 .topbar-back {
   flex-shrink: 0;
-}
-
-.topbar-brand-compact {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  min-width: 0;
-}
-
-.topbar-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   background: none;
   border: none;
-  padding: 0;
-  font: inherit;
+  padding: 0 8px 0 0;
+  margin: 0;
+  min-height: 28px;
+  border-radius: 8px;
   font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  color: var(--ink-strong);
+  font-weight: 500;
+  color: var(--muted);
   cursor: pointer;
-  white-space: nowrap;
+  transition: color var(--motion-fast) var(--ease-hover);
 }
 
-.topbar-wordmark:hover:not(:disabled) {
-  color: var(--accent);
+.topbar-back:hover:not(:disabled) {
+  color: var(--ink);
 }
 
-.topbar-wordmark:disabled {
-  cursor: default;
+.topbar-sub .topbar-brand-title {
+  font-size: 13px;
+}
+
+.topbar-page-sep {
+  flex-shrink: 0;
+  color: var(--muted);
+  font-size: 13px;
 }
 
 .topbar-page-title {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--muted);
   white-space: nowrap;
   overflow: hidden;
@@ -107,7 +147,7 @@
   cursor: pointer;
   display: inline-flex;
   font: inherit;
-  font-size: 14px;
+  font-size: 13px;
   gap: 6px;
   max-width: 320px;
   overflow: hidden;
@@ -118,12 +158,12 @@
 
 .topbar-page-title-editable:hover,
 .topbar-page-title-editable:focus-visible {
-  color: var(--ink-strong);
+  color: var(--ink);
 }
 
 .topbar-page-title-pencil {
   flex-shrink: 0;
-  opacity: 0.55;
+  opacity: 0;
   transition: opacity var(--motion-fast) var(--ease-hover);
 }
 
@@ -138,7 +178,7 @@
   border-radius: 6px;
   color: var(--ink-strong);
   font: inherit;
-  font-size: 14px;
+  font-size: 13px;
   max-width: 320px;
   min-width: 160px;
   padding: 3px 8px;
@@ -203,8 +243,22 @@
 }
 
 .topbar-actions {
-  gap: 10px;
+  gap: 4px;
   flex-wrap: wrap;
+}
+
+.topbar .ghost-button {
+  height: 28px;
+  min-height: 28px;
+  padding: 0 8px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--eqb-color-text-muted, #6B6E68);
+}
+
+.topbar .ghost-button:hover:not(:disabled) {
+  background: var(--eqb-color-desk, #E9ECE6);
+  color: var(--eqb-color-text, #1F1F1D);
 }
 
 .topbar-user-group {
@@ -255,17 +309,19 @@ button:disabled {
 
 /* quiet-chrome（2026-08-28）：全站按钮从「贴上去的盒子」改为原生工具栏词汇——
  * 次级按钮平时无底无边、直接趴在所在表面上（macOS/Amp 工具栏模式），hover 才
- * 浮出一层中性底（--surface-strong），focus-visible 仍走单一墨绿焦点环；
- * 主按钮保留墨绿签名填充，但去掉彩色 halo 阴影（DESIGN.md §4 阴影词汇只有
- * Resting/Floating/Focus Ring，accent-glow 不在其列），hover 压深一档到
- * teal-800。scale(0.97) 按压反馈是 emil-processing 刀立档的既有动效词汇
+ * 浮出一层中性底（--surface-strong），focus-visible 仍走单一墨焦点环；
+ * 主按钮保留墨填充（--action），hover 压浅一档到 --action-hover；
+ * scale(0.97) 按压反馈是 emil-processing 刀立档的既有动效词汇
  * （配 prefers-reduced-motion 退化），本刀不动。 */
 .primary-button,
 .add-button,
 .save-button,
 .export-button {
   color: #ffffff;
-  background: var(--accent);
+  background: var(--action);
+  min-height: 32px;
+  border-radius: 8px;
+  font-size: 13px;
   font-weight: 600;
   transition: background-color var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
 }
@@ -274,7 +330,16 @@ button:disabled {
 .add-button:hover:not(:disabled),
 .save-button:hover:not(:disabled),
 .export-button:hover:not(:disabled) {
-  background: var(--eqb-color-primary-deep);
+  background: var(--action-hover);
+}
+
+.primary-button:disabled,
+.add-button:disabled,
+.save-button:disabled,
+.export-button:disabled {
+  background: var(--surface-strong);
+  color: var(--muted);
+  opacity: 1;
 }
 
 .primary-button:active:not(:disabled),
@@ -337,7 +402,7 @@ button:disabled {
   /* B路小账: 这里是通用工具 chrome，不是成功态——之前借用了 --mint-soft
      (emerald)，与 --mint-text 配对的真成功态用法混色相。换成 accent 系
      (teal) 软底，单色相法归队。 */
-  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  background: var(--surface-strong);
   color: var(--muted);
   font-size: 13px;
   flex-shrink: 0;
@@ -388,9 +453,9 @@ button:disabled {
 }
 
 .search-field:focus-within {
-  border-color: var(--accent);
-  outline: var(--focus-ring);
-  outline-offset: 2px;
+  border-color: var(--line-strong);
+  box-shadow: 0 0 0 3px rgba(31, 31, 29, 0.12);
+  outline: none;
 }
 
 .search-field input,
@@ -417,9 +482,9 @@ button:disabled {
 .field input:focus,
 .field select:focus,
 .field textarea:focus {
-  border-color: var(--accent);
-  outline: var(--focus-ring);
-  outline-offset: 2px;
+  border-color: var(--line-strong);
+  box-shadow: 0 0 0 3px rgba(31, 31, 29, 0.12);
+  outline: none;
 }
 
 .field input,
@@ -483,8 +548,8 @@ button:disabled {
 }
 
 .version-toggle .active {
-  color: #ffffff;
-  background: var(--accent);
+  color: var(--ink);
+  background: var(--surface-strong);
 }
 
 .group-list {
@@ -507,7 +572,7 @@ button:disabled {
 
 @media (hover: hover) and (pointer: fine) {
   .group-card:hover {
-    border-color: var(--accent);
+    border-color: var(--line-strong);
   }
 }
 
@@ -674,14 +739,21 @@ button:disabled {
 
 .detail-view {
   display: grid;
-  gap: 14px;
+  gap: 0;
 }
 
-.back-button {
+.detail-view > .back-button {
   justify-self: start;
-  min-height: 34px;
-  padding: 0 12px;
+  min-height: 0;
+  margin: 0 0 12px;
+  padding: 0;
+  font-size: 13px;
   color: var(--muted);
+}
+
+.detail-view > .back-button:hover {
+  color: var(--ink);
+  background: transparent;
 }
 
 .detail-message {
@@ -1100,9 +1172,9 @@ button:disabled {
 }
 
 .teacher-difficulty-controls button.active {
-  border-color: var(--accent);
-  background: var(--accent);
-  color: white;
+  border-color: var(--line-strong);
+  background: var(--surface-strong);
+  color: var(--ink);
 }
 
 .teacher-difficulty-controls button.ghost {
@@ -1792,7 +1864,7 @@ button:disabled {
 .checkbox-field input {
   width: 16px;
   height: 16px;
-  accent-color: var(--accent);
+  accent-color: var(--action);
 }
 
 .checkbox-field.compact {
@@ -2009,7 +2081,7 @@ button:disabled {
   width: 16px;
   height: 16px;
   margin-top: 2px;
-  accent-color: var(--accent);
+  accent-color: var(--action);
 }
 
 .draft-batch-panel {
@@ -2674,7 +2746,7 @@ button:disabled {
 }
 
 .calibration-report-watch-item:hover {
-  border-color: var(--accent);
+  border-color: var(--line-strong);
 }
 
 .calibration-report-watch-item strong {
@@ -2856,7 +2928,7 @@ button:disabled {
   min-width: 28px;
   padding: 1px 5px;
   border-radius: 4px;
-  background: var(--accent);
+  background: var(--action);
   color: #fff;
   font-size: 11px;
   font-weight: 800;
@@ -2869,9 +2941,9 @@ button:disabled {
   gap: 8px;
   padding: 12px;
   margin-bottom: 12px;
-  border: 1px solid var(--accent);
+  border: 1px solid var(--line);
   border-radius: 8px;
-  background: rgba(44, 110, 86, 0.04);
+  background: var(--surface-strong);
 }
 
 .block-settings-label {
@@ -2951,12 +3023,12 @@ button:disabled {
    ======================================================================== */
 
 .concierge-desk {
-  background: #FFFFFF;
-  color: #1E1E1C;
-  padding: 48px clamp(24px, 6vw, 96px) 32px;
+  background: transparent;
+  color: #1F1F1D;
+  padding: 0 0 32px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 0;
   min-height: 100%;
 }
 
@@ -2990,82 +3062,16 @@ button:disabled {
 .concierge-stage {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   width: 100%;
 }
 
-.concierge-stage-inner {
-  width: 100%;
-  max-width: 720px;
-  margin: 0 auto;
-  transform: translateY(26vh);
-  /* CR SW-3: max-width stays OUT of the transition list — 720px↔none cannot
-     interpolate (the width snaps on the frame the list surface mounts). */
-  transition: transform var(--motion-entrance) var(--ease-out);
-}
-
+.concierge-stage-inner,
 .concierge-stage-inner--risen {
+  width: 100%;
   max-width: none;
-  transform: translateY(0);
-}
-
-.concierge-wordmark {
-  display: block;
-  margin: 0 auto 26px;
-  padding: 4px 10px;
-  border: none;
-  border-radius: 8px;
-  background: none;
-  color: #1E1E1C;
-  font: inherit;
-  font-size: 21px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color var(--motion-fast) var(--ease-hover);
-}
-
-.concierge-wordmark:hover {
-  background: rgba(30, 30, 28, 0.05);
-}
-
-.concierge-wordmark:focus-visible {
-  outline: var(--focus-ring);
-  outline-offset: 2px;
-}
-
-.concierge-wordmark span {
-  color: var(--accent, #2C6E56);
-}
-
-.concierge-whisper {
-  margin: 18px 0 0;
-  padding: 0 4px;
-  font-size: 13px;
-  color: #6A6A64;
-  text-align: center;
-}
-
-.concierge-whisper-browse {
-  border: none;
-  padding: 0;
-  background: none;
-  color: inherit;
-  font: inherit;
-  cursor: pointer;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  transition: color var(--motion-fast) var(--ease-hover);
-}
-
-.concierge-whisper-browse:hover {
-  color: var(--accent, #2C6E56);
-}
-
-.concierge-whisper-browse:focus-visible {
-  outline: var(--focus-ring);
-  outline-offset: 2px;
+  margin: 0;
+  transform: none;
 }
 
 .concierge-list-surface {
@@ -3073,7 +3079,11 @@ button:disabled {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  margin-top: 44px;
+  margin-top: 32px;
+}
+
+.concierge-desk[data-screen='browse'] .concierge-list-surface {
+  margin-top: 24px;
 }
 
 /* home-editorial round 2 (方向 C) — 命令行一行. Search input flexes; the
@@ -3081,25 +3091,96 @@ button:disabled {
    the old centered hero search box + separate toggle row underneath. */
 .concierge-command-bar {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px 14px;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
   width: 100%;
+}
+
+.concierge-desk[data-screen='home'] .concierge-command-bar {
+  max-width: 720px;
+  margin: 0 auto;
+  gap: 8px;
+}
+
+.concierge-desk[data-screen='browse'] .concierge-command-bar {
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+.concierge-desk[data-screen='home'] .concierge-meta {
+  display: block;
+  margin: 0;
+  font-size: 13px;
+  color: #6B6E68;
+  text-align: center;
+}
+
+.concierge-browse-chips {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  flex: 1 1 240px;
+  gap: 8px;
+}
+
+.concierge-browse-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid #E3E6E0;
+  background: #FFFFFF;
+  color: #6B6E68;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.concierge-browse-chip:hover {
+  background: #E9ECE6;
+  color: #1F1F1D;
+}
+
+.concierge-browse-chip[aria-pressed='true'] {
+  background: #1F1F1D;
+  color: #fff;
+  border-color: transparent;
+}
+
+.concierge-browse-chip[aria-pressed='true']:hover {
+  background: #3A3A37;
 }
 
 /* Intent bar */
 .concierge-intent-bar {
+  position: relative;
   display: flex;
   flex: 1 1 auto;
   min-width: 0;
   gap: 8px;
-  align-items: stretch;
+  align-items: center;
   background: #FFFFFF;
-  border: 1px solid #D8D8D2;
-  border-radius: 8px;
-  padding: 8px 8px 8px 18px;
-  min-height: 56px;
+  border: 1px solid #D5D9D2;
+  border-radius: 16px;
+  padding: 0 10px 0 14px;
+  height: 44px;
+  min-height: 44px;
+  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
   transition: border-color var(--motion-base) var(--ease-hover), box-shadow var(--motion-base) var(--ease-hover);
+}
+
+.concierge-desk[data-screen='browse'] .concierge-intent-bar {
+  flex: 0 0 320px;
+  width: 320px;
+  max-width: 320px;
+  height: 36px;
+  min-height: 36px;
+  border-radius: 12px;
+  box-shadow: none;
+  padding: 0 4px 0 12px;
 }
 
 /* 窄屏：五个命令行元素挤在一行会互相重叠。搜索框独占一行，思考模式/筛选/
@@ -3117,8 +3198,8 @@ button:disabled {
 }
 
 .concierge-intent-bar:focus-within {
-  border-color: #2C6E56;
-  box-shadow: 0 2px 8px rgba(44, 110, 86, 0.2);
+  border-color: #1F1F1D;
+  box-shadow: 0 0 0 2px #1F1F1D;
   outline: none;
 }
 
@@ -3127,35 +3208,47 @@ button:disabled {
   border: none;
   outline: none;
   background: transparent;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 24px;
-  color: #1E1E1C;
+  color: #1F1F1D;
   font-family: inherit;
-  padding: 0;
+  padding: 0 48px 0 0;
+  height: 100%;
+}
+
+.concierge-desk[data-screen='browse'] .concierge-intent-input {
+  font-size: 13px;
+  padding-right: 40px;
 }
 
 .concierge-intent-input::placeholder {
-  color: #6A6A64;
+  color: #6B6E68;
 }
 
 .concierge-intent-submit {
-  min-width: 48px;
-  height: 40px;
+  position: absolute;
+  right: 10px;
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
   align-self: center;
   border: none;
-  border-radius: 8px;
-  padding: 0 14px;
-  background: #2C6E56;
+  border-radius: 50%;
+  padding: 0;
+  background: #1F1F1D;
   color: #FFFFFF;
-  font-size: 18px;
+  font-size: 13px;
   line-height: 1;
   font-family: inherit;
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
   transition: background-color var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
   box-shadow: none;
+}
+
+.concierge-desk[data-screen='browse'] .concierge-intent-submit {
+  right: 4px;
 }
 
 .concierge-intent-submit.is-loading {
@@ -3164,7 +3257,7 @@ button:disabled {
 }
 
 .concierge-intent-submit:hover:not(:disabled) {
-  background: var(--eqb-color-primary-deep);
+  background: #3A3A37;
 }
 
 /* emil-processing: press feedback — 一天按几十次的搜索提交应确认"听到了". */
@@ -3178,9 +3271,9 @@ button:disabled {
 }
 
 .concierge-intent-submit:disabled {
-  background: #EDEDEA;
-  /* B路小账: ink-muted，原 #9A9A93 on #EDEDEA 仅 2.4:1 对比度 */
-  color: #6A6A64;
+  background: #1F1F1D;
+  color: #FFFFFF;
+  opacity: 1;
   cursor: not-allowed;
 }
 
@@ -3232,8 +3325,8 @@ button:disabled {
 }
 
 .concierge-thinking-toggle input[type='checkbox']:checked {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: #1F1F1D;
+  border-color: #1F1F1D;
 }
 
 .concierge-thinking-toggle input[type='checkbox']:checked::before {
@@ -3342,14 +3435,22 @@ button:disabled {
 .concierge-default-feed {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 12px;
+  gap: 0;
+  margin-top: 0;
+}
+
+.concierge-feed-label {
+  margin: 0 0 12px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #6B6E68;
 }
 
 .concierge-feed-intro {
   margin: 0;
   font-size: 13px;
-  color: #6A6A64;
+  color: #6B6E68;
   padding: 0 4px;
 }
 
@@ -3362,53 +3463,66 @@ button:disabled {
 
 /* home-editorial round 2 (方向 C) — 年份分组档案. 组头是真序列 + 真计数
    (结构编码真相: 除年份和「N 套」外不加编号/eyebrow/分割装饰). */
-.concierge-feed-groups {
+.concierge-feed-groups,
+.concierge-date-feed {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 24px;
 }
 
-.concierge-feed-year-group {
+.concierge-feed-year-group,
+.concierge-feed-date-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
-.concierge-feed-year-head {
+.concierge-feed-year-head,
+.concierge-feed-date-head {
   display: flex;
   align-items: baseline;
   gap: 8px;
-  padding: 0 4px;
+  margin: 0;
+  padding: 0;
 }
 
 .concierge-feed-year-label {
-  font-size: 15px;
-  font-weight: 650;
-  color: #1E1E1C;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #1F1F1D;
   font-variant-numeric: tabular-nums;
+  line-height: 1.5;
 }
 
-.concierge-feed-year-count {
+.concierge-feed-year-count,
+.concierge-feed-date-head {
   font-size: 12px;
-  color: #6A6A64;
+  color: #6B6E68;
+}
+
+.concierge-see-all {
+  display: block;
+  margin: 16px 0 0;
 }
 
 .concierge-feed-expand {
-  align-self: flex-start;
-  margin: 2px 4px 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
   padding: 0;
   border: none;
   background: none;
-  color: #2C6E56;
+  color: #6B6E68;
   font-size: 13px;
-  font-weight: 500;
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  font-weight: 400;
+  text-decoration: none;
   cursor: pointer;
 }
 
 .concierge-feed-expand:hover {
-  color: #1E4A3A;
+  color: #1F1F1D;
 }
 
 .concierge-result-list {
@@ -3576,13 +3690,13 @@ button:disabled {
 /* Primary CTA: 加入草稿卷 — teal-filled, matches DraftPaperWorkbench's
    export button so the same action reads the same everywhere. */
 .concierge-action-add {
-  background: #2C6E56;
+  background: var(--action);
   color: #FFFFFF;
   font-weight: 600;
 }
 
 .concierge-action-add:hover:not(:disabled) {
-  background: var(--eqb-color-primary-deep);
+  background: var(--action-hover);
   color: #FFFFFF;
 }
 
@@ -3618,7 +3732,16 @@ button:disabled {
    本块只保留 AI-mode 的布局与非色规则。 */
 
 .app-shell.home-mode-ai {
-  background: #F6F6F4;
+  background: #F3F5F1;
+}
+
+.app-shell.home-mode-ai > .topbar {
+  max-width: 920px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 32px;
+  box-sizing: border-box;
 }
 
 /* Cut ⑥ P3 — `.eyebrow` reads `--muted` (slate #64748b) at :root; C1 has
@@ -3626,22 +3749,22 @@ button:disabled {
    already used, so this override is now redundant but harmless to keep
    explicit for the AI-mode block. */
 .app-shell.home-mode-ai .eyebrow {
-  color: #6A6A64;
+  color: #6B6E68;
 }
 
 .app-shell.home-mode-ai .workbench {
   display: block;
-  background: #F6F6F4;
+  background: #F3F5F1;
   padding: 0;
 }
 
 .app-shell.home-mode-ai .library-panel {
-  background: #F6F6F4;
+  background: #F3F5F1;
   border: none;
   box-shadow: none;
-  max-width: 1160px;
+  max-width: 920px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 32px;
 }
 
 /* Hide the library-header (eyebrow / count / view tabs) on AI desk first screen.
@@ -3652,8 +3775,16 @@ button:disabled {
 
 .app-shell.home-mode-ai .concierge-desk {
   background: transparent;
-  padding: clamp(16px, 3vh, 40px) 0 32px;
+  padding: 0 0 96px;
   min-height: auto;
+}
+
+.app-shell.home-mode-ai .concierge-desk[data-screen='home'] {
+  padding-top: 56px;
+}
+
+.app-shell.home-mode-ai .concierge-desk[data-screen='browse'] {
+  padding-top: 0;
 }
 
 /* Push the headline into the upper third of the viewport. */
@@ -3707,27 +3838,28 @@ button:disabled {
 /* ── Basket: lightweight floating chip + slide-in drawer in AI mode ────── */
 .basket-chip {
   position: fixed;
-  right: 20px;
-  bottom: 20px;
+  right: 24px;
+  bottom: 24px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 14px;
+  height: 28px;
+  padding: 0 12px;
   background: #FFFFFF;
-  border: 1px solid #D8D8D2;
+  border: 1px solid #D5D9D2;
   border-radius: 999px;
-  color: #1E1E1C;
+  color: #1F1F1D;
   font-family: inherit;
   font-size: 13px;
   cursor: pointer;
-  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   z-index: 22;
   transition: background var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
 }
 
 .basket-chip:hover {
-  background: #EDEDEA;
-  border-color: #2C6E56;
+  background: #E9ECE6;
+  border-color: #D5D9D2;
 }
 
 /* emil-processing: shared pressable convention (scale 0.97 on press). */
@@ -3840,14 +3972,14 @@ button:disabled {
 }
 
 .concierge-starter-chip:hover {
-  background: #EDEDEA;
-  border-color: #C6C6C0;
-  color: #1E1E1C;
+  background: #E9ECE6;
+  border-color: #D5D9D2;
+  color: #1F1F1D;
 }
 
 .concierge-starter-chip:focus-visible {
-  border-color: #2C6E56;
-  color: #1E1E1C;
+  border-color: #1F1F1D;
+  color: #1F1F1D;
   outline: var(--focus-ring);
   outline-offset: 2px;
 }
@@ -3923,16 +4055,16 @@ button:disabled {
    the ≤10% accent budget (Green-Pen Rule). teal-800 on teal-50 wash clears
    WCAG AA (9.26:1). */
 .concierge-starter-chip.is-selected {
-  background: rgba(44, 110, 86, 0.10);
-  border-color: #2C6E56;
-  color: #1E4A3A;
+  background: #1F1F1D;
+  border-color: transparent;
+  color: #FFFFFF;
   font-weight: 500;
 }
 
 .concierge-starter-chip.is-selected:hover {
-  background: rgba(44, 110, 86, 0.16);
-  border-color: #2C6E56;
-  color: #1E4A3A;
+  background: #3A3A37;
+  border-color: transparent;
+  color: #FFFFFF;
 }
 
 .concierge-filter-clear {
@@ -4027,8 +4159,8 @@ button:disabled {
 }
 
 .concierge-command-filter-toggle:hover {
-  background: #EDEDEA;
-  border-color: #C6C6C0;
+  background: #E9ECE6;
+  border-color: #D5D9D2;
 }
 
 .concierge-command-filter-toggle:active {
@@ -4036,8 +4168,8 @@ button:disabled {
 }
 
 .concierge-command-filter-toggle[aria-expanded='true'] {
-  border-color: #2C6E56;
-  color: #1E4A3A;
+  border-color: #1F1F1D;
+  color: #1F1F1D;
 }
 
 .concierge-command-filter-toggle:focus-visible {
@@ -4069,9 +4201,9 @@ button:disabled {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  background: rgba(44, 110, 86, 0.10);
-  border: 1px solid #2C6E56;
-  color: #1E4A3A;
+  background: #1F1F1D;
+  border: 1px solid #1F1F1D;
+  color: #FFFFFF;
   font-family: inherit;
   font-size: 12.5px;
   font-weight: 500;
@@ -4082,7 +4214,7 @@ button:disabled {
 }
 
 .concierge-active-filter-chip:hover {
-  background: rgba(44, 110, 86, 0.16);
+  background: #3A3A37;
 }
 
 .concierge-active-filter-chip:focus-visible {
@@ -4174,7 +4306,7 @@ button:disabled {
   overflow: hidden;
   height: 12px;
   border-radius: 6px;
-  background: #F6F6F4;
+  background: #E9ECE6;
 }
 
 .concierge-skeleton-line.short {
@@ -4373,7 +4505,7 @@ button:disabled {
   width: 76px;
   height: 24px;
   border-radius: 999px;
-  background: #F6F6F4;
+  background: #E9ECE6;
 }
 
 .concierge-skeleton-chip:nth-child(2) { width: 96px; }
@@ -4423,22 +4555,37 @@ button:disabled {
   display: flex;
   flex-direction: column;
   gap: 0;
-  border: 1px solid #D8D8D2;
-  border-radius: 8px;
+  border: 0;
+  border-radius: 12px;
   background: #FFFFFF;
-  overflow: visible;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(30, 30, 28, 0.05), 0 1px 2px rgba(30, 30, 28, 0.06);
 }
 
 .concierge-paper-list > li {
-  border-bottom: 1px solid rgba(30, 30, 28, 0.06);
+  border-bottom: 1px solid #E3E6E0;
 }
 
 .concierge-paper-list > li:last-child {
   border-bottom: none;
 }
 
-/* Paper-level row */
+/* Paper-level row. The article is one flex column (header + optional
+   passage list) so the expand tint can live on the header only — passages
+   stay rows of the same outer .concierge-paper-list card. */
 .concierge-paper-row {
+  min-width: 0;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  outline: none;
+  border-radius: 0;
+  transition: background var(--motion-fast) var(--ease-hover), box-shadow var(--motion-fast) var(--ease-hover);
+  cursor: pointer;
+}
+
+.concierge-paper-row-head {
   display: grid;
   /* ui-search-feel 刀⑤ #3 — title column used to be capped narrow
      (minmax(160,220)) while the meta column took the leftover 1fr and sat
@@ -4449,19 +4596,17 @@ button:disabled {
   grid-template-columns: 64px minmax(220px, 1fr) minmax(160px, 320px) auto;
   align-items: center;
   gap: 16px;
-  padding: 16px 14px;
-  background: #FFFFFF;
-  outline: none;
-  border-radius: 6px;
-  transition: background var(--motion-fast) var(--ease-hover), box-shadow var(--motion-fast) var(--ease-hover);
-  cursor: pointer;
+  padding: 10px 14px;
+  min-height: 48px;
+  background: transparent;
+  transition: background var(--motion-fast) var(--ease-hover);
 }
 
-.concierge-paper-row:hover,
-.concierge-paper-row:focus-within,
-.concierge-paper-row:focus-visible {
-  background: #EDEDEA;
-  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.03);
+.concierge-paper-row:hover .concierge-paper-row-head,
+.concierge-paper-row:focus-within .concierge-paper-row-head,
+.concierge-paper-row:focus-visible .concierge-paper-row-head {
+  background: #E9ECE6;
+  box-shadow: none;
 }
 
 .concierge-paper-row:focus-visible {
@@ -4470,26 +4615,65 @@ button:disabled {
   outline-offset: -2px;
 }
 
-.concierge-paper-row.is-expanded {
-  background: #FFFFFF;
+.concierge-paper-row.is-expanded .concierge-paper-row-head,
+.concierge-paper-row.is-expanded:hover .concierge-paper-row-head,
+.concierge-paper-row.is-expanded:focus-within .concierge-paper-row-head,
+.concierge-paper-row.is-expanded:focus-visible .concierge-paper-row-head {
+  background: #E9ECE6;
 }
 
 /* home-editorial round 2 (方向 C) — feed rows drop the leading year column
    (the year group head above them already carries it); the first grid
    track disappears rather than sitting empty. Search rows (variant=search,
    ungrouped) keep the year column exactly as round 1 shipped it. */
-.concierge-paper-row[data-variant='feed'] {
-  grid-template-columns: minmax(220px, 1fr) minmax(160px, 320px) auto;
+.concierge-paper-row[data-variant='feed'] .concierge-paper-row-head {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.concierge-paper-row[data-variant='feed'] .concierge-row-expand,
+.concierge-paper-row[data-variant='feed'] .concierge-paper-body,
+.concierge-paper-row[data-variant='feed'] .concierge-paper-actions .concierge-action {
+  display: none;
+}
+
+.concierge-paper-row[data-variant='feed'] .concierge-paper-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.concierge-paper-year-prefix {
+  flex: 0 0 auto;
+  font-size: 13px;
+  font-weight: 400;
+  color: #6B6E68;
+}
+
+.concierge-row-chevron {
+  color: #9A9D97;
+  display: grid;
+  place-items: center;
+  transform: rotate(-90deg);
+  transition: transform var(--motion-fast) var(--ease-out), color var(--motion-fast) var(--ease-hover);
+}
+
+.concierge-paper-row:hover .concierge-row-chevron,
+.concierge-paper-row.is-expanded .concierge-row-chevron {
+  color: #1F1F1D;
+}
+
+.concierge-paper-row.is-expanded .concierge-row-chevron {
+  transform: rotate(0deg);
 }
 
 /* 窄屏：三列 grid 会把中列挤成 0 宽（文字竖排溢出），改为标题+操作一行、
    命中信息整行铺下方 */
 @media (max-width: 640px) {
-  .concierge-paper-row {
+  .concierge-paper-row-head {
     grid-template-columns: 40px 1fr auto;
     gap: 8px 12px;
   }
-  .concierge-paper-row[data-variant='feed'] {
+  .concierge-paper-row[data-variant='feed'] .concierge-paper-row-head {
     grid-template-columns: 1fr auto;
   }
   .concierge-paper-row .concierge-paper-year {
@@ -4531,15 +4715,15 @@ button:disabled {
 
 .concierge-paper-title-line {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 8px;
   min-width: 0;
 }
 
 .concierge-paper-headline {
-  font-size: 13.5px;
-  font-weight: 600;
-  color: #1E1E1C;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1F1F1D;
   letter-spacing: 0.02em;
   white-space: nowrap;
   overflow: hidden;
@@ -4551,10 +4735,21 @@ button:disabled {
    render in a serif face, ink-muted, wide tracking, no border/fill. */
 .concierge-paper-sourcetype {
   flex: 0 0 auto;
-  font-family: "Songti SC", "SimSun", serif;
-  font-size: 12.5px;
-  color: #6A6A64; /* 真题/模拟 是选题判断信息，非装饰标注 */
-  letter-spacing: 0.2em;
+  font-family: inherit;
+  font-size: 12px;
+  color: #6B6E68;
+  letter-spacing: 0;
+  background: #E9ECE6;
+  border: 0;
+  border-radius: 4px;
+  padding: 1px 6px;
+  line-height: 1.5;
+}
+
+.concierge-paper-row:hover .concierge-paper-sourcetype,
+.concierge-paper-row:focus-within .concierge-paper-sourcetype,
+.concierge-paper-row.is-expanded .concierge-paper-sourcetype {
+  background: #FFFFFF;
 }
 
 /* home-editorial — 主题升位: plain text line under the headline, replacing
@@ -4562,7 +4757,10 @@ button:disabled {
 .concierge-paper-topics-line {
   margin: 0;
   font-size: 13px;
-  color: #6A6A64;
+  color: #6B6E68;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .concierge-paper-body {
@@ -4583,8 +4781,22 @@ button:disabled {
 }
 
 .concierge-paper-hitcount {
-  font-weight: 600;
-  color: #1E1E1C;
+  font-weight: 400;
+  font-size: 13px;
+  color: #6B6E68;
+}
+
+.concierge-paper-row[data-variant='feed'] .concierge-paper-meta {
+  display: none;
+}
+
+.concierge-paper-row[data-variant='feed'] .concierge-paper-hitcount {
+  display: inline;
+}
+
+.concierge-paper-row[data-variant='feed'] .concierge-paper-actions .concierge-paper-hitcount,
+.concierge-paper-row[data-variant='feed'] .concierge-paper-anchor-text + .concierge-paper-hitcount {
+  display: inline;
 }
 
 
@@ -4610,7 +4822,7 @@ button:disabled {
    layout shift — emil hover-显形 prescription. */
 .concierge-row-expand-hint {
   font-size: 12px;
-  color: #2C6E56;
+  color: #6B6E68;
   white-space: nowrap;
   opacity: 0;
   transition: opacity var(--motion-fast) var(--ease-out);
@@ -4632,36 +4844,36 @@ button:disabled {
 }
 
 .concierge-paper-detail {
-  grid-column: 1 / -1;
-  margin-top: 12px;
-  padding: 14px 14px 4px;
-  border-top: 1px solid rgba(30, 30, 28, 0.06);
+  min-width: 0;
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
 }
 
-/* home-editorial — 卷面目录 inside the expanded paper area. Replaces the
-   retired 9-card grid with a 部分-grouped index list (denser, no green-tint
-   hit gradient, no side-stripe accent). */
+/* Passage list is not a nested card — same outer paper-list surface. */
 .concierge-group-index {
   list-style: none;
   margin: 0;
   padding: 0;
-  border: 1px solid #D8D8D2;
-  border-radius: 8px;
-  background: #FFFFFF;
-  overflow: hidden;
+  min-width: 0;
+  max-width: 100%;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
 }
 
-.concierge-group-index-bucket + .concierge-group-index-bucket {
-  border-top: 1px solid #E8E8E4;
-}
-
-/* 组头: 第X部分 语言运用 etc, parsed best-effort from group.section. */
+/* 组头: 第X部分 语言运用 etc — quiet eyebrow, not a bar. */
 .concierge-group-section-head {
-  padding: 8px 12px 6px;
+  padding: 12px 14px 4px 28px;
   font-size: 12px;
-  font-weight: 600;
-  color: #6A6A64;
-  border-bottom: 1px solid #E8E8E4;
+  font-weight: 400;
+  color: #6B6E68;
+  letter-spacing: 0.04em;
+  background: transparent;
+  border: 0;
 }
 
 .concierge-group-index-rows {
@@ -4671,7 +4883,7 @@ button:disabled {
 }
 
 .concierge-group-index-rows > li + li {
-  border-top: 1px solid #E8E8E4;
+  border-top: 1px solid #E3E6E0;
 }
 
 /*
@@ -4683,16 +4895,23 @@ button:disabled {
 .concierge-group-row {
   display: flex;
   flex-direction: column;
+  min-width: 0;
+  max-width: 100%;
 }
 
-/* similar-passages-entry (E6) DP-3 打回修：身体+hover 动作条包进一行
- * .concierge-group-row-line——动作浮层(absolute top/bottom)锚到这一行，
- * 「相似篇章」候选面板才能全宽落在行下方而不是被浮层盖在右列。 */
 .concierge-group-row-line {
   position: relative;
   display: flex;
   align-items: stretch;
-  min-height: 40px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.concierge-group-row-line:hover {
+  background: #E9ECE6;
 }
 
 .concierge-group-row > .similar-passages-panel {
@@ -4702,7 +4921,7 @@ button:disabled {
 .concierge-group-row-body {
   flex: 1 1 auto;
   min-width: 0;
-  padding: 9px 12px;
+  padding: 9px 12px 9px 28px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -4753,10 +4972,13 @@ button:disabled {
 }
 
 .concierge-group-row-topic {
-  flex: 0 0 auto;
-  font-size: 11.5px;
-  color: #6A6A64;
+  flex: 0 1 auto;
+  max-width: 9em;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
+  font-size: 13px;
+  color: #6B6E68;
 }
 
 .concierge-group-row-reason {
@@ -4782,41 +5004,132 @@ button:disabled {
   color: #6A6A64;
 }
 
-/* 操作簇 — hover/focus-within reveal, pure opacity, surface-2 backdrop
-   covers the row-body tail per plan. Touch devices show it always
-   (@media hover:none) as a compact row with the summary hidden. */
-.concierge-group-row-actions {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  display: inline-flex;
+.concierge-group-row-trail {
+  flex: 0 0 auto;
+  display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 0 12px;
-  background: #EDEDEA;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--motion-fast) var(--ease-out);
+  gap: 2px;
+  padding: 0 14px 0 4px;
 }
 
-.concierge-group-row-line:hover .concierge-group-row-actions,
-.concierge-group-row-line:focus-within .concierge-group-row-actions {
-  opacity: 1;
-  pointer-events: auto;
+.concierge-group-row-icon {
+  box-sizing: border-box;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  color: #9A9D97;
+  cursor: pointer;
+  flex: 0 0 28px;
+  font-family: inherit;
 }
 
-@media (hover: none) {
-  .concierge-group-row-actions {
-    position: static;
-    opacity: 1;
-    pointer-events: auto;
-    background: transparent;
-    padding: 6px 12px 6px 0;
-  }
-  .concierge-group-row-summary {
-    display: none;
-  }
+.concierge-group-row-line:hover .concierge-group-row-icon:not([aria-pressed='true']),
+.concierge-group-row-icon:focus-visible:not([aria-pressed='true']) {
+  color: #1F1F1D;
+}
+
+.concierge-group-row-icon:hover:not(:disabled):not([aria-pressed='true']) {
+  background: #E9ECE6;
+  color: #1F1F1D;
+}
+
+.concierge-group-row-icon:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.concierge-group-row-icon.concierge-action-add,
+.concierge-group-row-icon.concierge-action-add:hover:not(:disabled),
+.concierge-group-row-icon.concierge-action-add[aria-pressed='true'],
+.concierge-group-row-icon.concierge-action-add[aria-pressed='true']:hover:not(:disabled) {
+  background: transparent;
+  color: #9A9D97;
+  font-weight: 400;
+}
+
+.concierge-group-row-line:hover .concierge-group-row-icon.concierge-action-add:not([aria-pressed='true']),
+.concierge-group-row-icon.concierge-action-add:hover:not(:disabled):not([aria-pressed='true']),
+.concierge-group-row-icon.concierge-action-add:focus-visible:not([aria-pressed='true']) {
+  background: transparent;
+  color: #1F1F1D;
+}
+
+.concierge-group-row-icon.concierge-action-add:hover:not(:disabled):not([aria-pressed='true']) {
+  background: #E9ECE6;
+}
+
+.concierge-group-row-icon[aria-pressed='true'] {
+  color: #FFFFFF;
+  background: transparent;
+}
+
+.concierge-group-row-icon-mark {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #1F1F1D;
+  color: #FFFFFF;
+  display: grid;
+  place-items: center;
+}
+
+.concierge-group-row-icon[aria-pressed='true']:hover:not(:disabled) .concierge-group-row-icon-mark {
+  background: #3A3A37;
+}
+
+.concierge-group-row-menu {
+  position: fixed;
+  z-index: 40;
+  min-width: 148px;
+  padding: 4px;
+  background: #FFFFFF;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(30, 30, 28, 0.05);
+}
+
+.concierge-group-row-menuitem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 32px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #1F1F1D;
+  font-size: 13px;
+  font-family: inherit;
+  font-weight: 400;
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.concierge-group-row-menuitem:hover,
+.concierge-group-row-menuitem:focus-visible {
+  background: #E9ECE6;
+  outline: none;
+}
+
+.concierge-group-row-menuitem svg {
+  flex: 0 0 16px;
+  color: #1F1F1D;
+}
+
+.concierge-group-row-menuitem--danger:hover,
+.concierge-group-row-menuitem--danger:focus-visible {
+  color: #dc2626;
+}
+
+.concierge-group-row-menuitem--danger:hover svg,
+.concierge-group-row-menuitem--danger:focus-visible svg {
+  color: #dc2626;
 }
 
 /* ─────────────────────────── Recent imports — quiet workbench overrides ───

@@ -1766,12 +1766,36 @@ function selectQuestionGroupCards(db, whereClause = '', params = [], draftContex
       topicLabels: topicLabelsByGroupId.get(row.id) || [],
     }, paperSurfaceAnalysisAvailabilityByGroupId, draftContext, printReady)
   })
+  attachImportedAtFromSources(db, cards)
   if (!whereClause) {
     cards.push(...listPaperAssetAnalysisGroupCards(
       paperSurfaceAnalysisAvailabilityByGroupId,
       draftContext,
       new Set(cards.map((card) => card.id)),
     ))
+  }
+  return cards
+}
+
+/**
+ * Additive read-only importedAt from sources.created_at.
+ * No schema change — a follow-up SELECT keyed by group id.
+ */
+function attachImportedAtFromSources(db, cards) {
+  const ids = cards.map((card) => card.id).filter(Boolean)
+  if (ids.length === 0) return cards
+  const placeholders = ids.map(() => '?').join(', ')
+  const rows = db.prepare(`
+    SELECT qg.id AS id, s.created_at AS created_at
+    FROM question_groups qg
+    JOIN passages p ON p.id = qg.passage_id
+    JOIN sources s ON s.id = p.source_id
+    WHERE qg.id IN (${placeholders})
+  `).all(...ids)
+  const importedAtById = new Map(rows.map((row) => [row.id, row.created_at]))
+  for (const card of cards) {
+    const importedAt = importedAtById.get(card.id)
+    if (importedAt) card.importedAt = importedAt
   }
   return cards
 }

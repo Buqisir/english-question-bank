@@ -23,7 +23,7 @@
   border: none;
   border-radius: 999px;
   background: transparent;
-  color: #6A6A64;
+  color: #6B6E68;
   font-size: 18px;
   line-height: 1;
   cursor: pointer;
@@ -34,12 +34,12 @@
 }
 
 .concierge-intent-clear:hover {
-  background: #EDEDEA;
-  color: #1E1E1C;
+  background: #E9ECE6;
+  color: #1F1F1D;
 }
 
 .concierge-intent-clear:focus-visible {
-  outline: 2px solid #2C6E56;
+  outline: 2px solid #1F1F1D;
   outline-offset: 2px;
 }
 

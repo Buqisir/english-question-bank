@@ -103,7 +103,7 @@ assert(
 // Kept owner-only control: 编辑 (低频纠错运维, D1/C3).
 assert(
   'member-hidden control still present: 编辑 button (openEditEntry entry)',
-  /isOwnerView && \([\s\S]{0,120}onClick=\{\(\) => onEdit\(selectedDetail\)\}/.test(detailView),
+  /isOwnerView && \([\s\S]{0,400}onSelect: \(\) => onEdit\(selectedDetail\)/.test(detailView),
 )
 
 // Retired 现场生产 controls (D2/C1) — must be ABSENT now.
@@ -174,10 +174,10 @@ assert(
   )
 }
 // detail-page-redesign (2026-07-15): 删除 moved from `.detail-button danger`
-// to the new次位 `.peek-btn--minor.peek-btn--danger`, still isOwnerView-gated.
+// to ConciergeGroupRowMenu tone:'danger', still isOwnerView-gated.
 assert(
   '删除 button stays owner-gated (kept, C3)',
-  /isOwnerView && \(\s*\n\s*<button\s*\n\s*className="peek-btn peek-btn--minor peek-btn--danger"/.test(detailView),
+  /isOwnerView && \([\s\S]*?tone: 'danger'[\s\S]*?onSelect: \(\) => onDelete\(selectedDetail\)/.test(detailView),
 )
 assert(
   '已绑定话题标签展示 stays unconditional (member-visible, C2)',
@@ -328,9 +328,10 @@ assert(
 // <a href="?view=detail&groupId=…"> with an onClick preventDefault SPA
 // fast-path (same family as 看解析/配相似 — 中键/新标签 now work). Assert
 // the anchor form + the SPA fast-path still calls onOpenDetail(group).
+// Northstar 2026-09-03: 详情 moved into the ConciergeGroupRowMenu `…` item list.
 assert(
   'ConciergeGroupCard renders a 详情 <a href> wired to onOpenDetail via preventDefault',
-  /href=\{`\?view=detail&groupId=\$\{encodeURIComponent\(group\.id\)\}`\}[\s\S]{0,200}onOpenDetail\(group\)[\s\S]{0,40}详情/.test(
+  /key:\s*'detail'(?=[\s\S]{0,400}label:\s*'详情')(?=[\s\S]{0,400}href:\s*`\?view=detail&groupId=\$\{encodeURIComponent\(group\.id\)\}`)(?=[\s\S]{0,400}preventDefault\(\))(?=[\s\S]{0,400}onOpenDetail\(group\))/.test(
     conciergeGroupCard,
   ),
 )

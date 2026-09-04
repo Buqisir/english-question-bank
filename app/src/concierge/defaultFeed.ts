@@ -39,3 +39,14 @@ export function buildDefaultFeed(groups: QuestionGroupCard[]): PaperResult[] {
     return a.paperName.localeCompare(b.paperName, 'zh-Hans-CN')
   })
 }
+
+/** Home date-stream: most recently imported papers first, capped. */
+export function buildRecentFeed(groups: QuestionGroupCard[], limit = 8): PaperResult[] {
+  return [...buildDefaultFeed(groups)]
+    .sort((a, b) => {
+      const byImport = String(b.importedAt || '').localeCompare(String(a.importedAt || ''))
+      if (byImport !== 0) return byImport
+      return a.paperName.localeCompare(b.paperName, 'zh-Hans-CN')
+    })
+    .slice(0, limit)
+}
