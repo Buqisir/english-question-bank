@@ -32,16 +32,71 @@ export const EQB_RELEASE_BOOTSTRAP_FAILURE_SCHEMA_VERSION = 'eqb-deployment-boot
 export const EQB_BOOTSTRAP_KEY_RETIREMENT_SCHEMA_VERSION = 'eqb-bootstrap-key-retirement-v1'
 export const EQB_RELEASE_BOOTSTRAP_RECOVERY_SCHEMA_VERSION = 'eqb-release-bootstrap-recovery-v1'
 export const EQB_RELEASE_BOOTSTRAP_COMPLETION_SCHEMA_VERSION = 'eqb-release-bootstrap-completion-v1'
+export const EQB_RELEASE_BOOTSTRAP_ABANDONMENT_SCHEMA_VERSION = 'eqb-release-bootstrap-abandonment-v2'
+export const EQB_RELEASE_BOOTSTRAP_CANCELLATION_SCHEMA_VERSION = 'eqb-release-bootstrap-cancellation-v1'
+export const EQB_MAINTENANCE_INSTALL_READINESS_SCHEMA_VERSION = 'eqb-maintenance-install-readiness-v1'
+export const EQB_PERSISTENCE_AUTHORITY_PATHS = Object.freeze([
+  'data/sql',
+  'server/api.mjs',
+  'server/auth/auth.mjs',
+  'server/draft-paper/draftPaperStore.mjs',
+  'server/import-review/importReviewStore.mjs',
+  'server/my-space/mySpace.mjs',
+  'server/paper-import/publisher.mjs',
+  'server/paper-import/storage.mjs',
+  'server/source-intake/sourceIntakeStore.mjs',
+  'server/user-data',
+  'server/vocabulary/vocabularyStore.mjs',
+])
+export const EQB_HOST_CONFIGURATION_PATHS = Object.freeze([
+  'deploy/Caddyfile.release',
+  'deploy/eqb-release.service',
+  'deploy/eqb-deploy-controller.mjs',
+])
+export const EQB_STABLE_LAUNCHER_PATHS = Object.freeze([
+  'deploy/eqb-deploy-transport',
+  'deploy/eqb-deploy-controller',
+])
 
 const SHA = /^[a-f0-9]{40}$/u
 const SSH_TARGET = /^(?:[A-Za-z0-9._-]+@)?(?:\[[A-Fa-f0-9:]+\]|[A-Za-z0-9.-]+)$/u
 const SSH_REMOTE_TOKEN = /^[A-Za-z0-9_@%+=:,./-]+$/u
+const SSH_PUBLIC_KEY_BODY = /^[A-Za-z0-9+/]+={0,3}$/u
 const PROJECT_ID = /^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/u
 const BOOTSTRAP_UNIT = /^eqb-release-bootstrap-[a-f0-9]{32}$/u
+const PRE_MUTATION_BOOTSTRAP_FAILURE_STAGES = new Set([
+  'preflight',
+  'verify-established-baseline',
+  'initial-health',
+])
 
 function assertSha(sha, label = 'deployment SHA') {
   if (!SHA.test(sha || '')) throw new Error(`Invalid ${label}`)
   return sha
+}
+
+export function parseOpenSshEd25519PublicKeyBody(value) {
+  const line = String(value || '').trim()
+  const fields = line.split(/[\t ]+/u)
+  if (
+    !line
+    || line.includes('\n')
+    || line.includes('\r')
+    || fields.length < 2
+    || fields[0] !== 'ssh-ed25519'
+    || !SSH_PUBLIC_KEY_BODY.test(fields[1] || '')
+  ) {
+    throw new Error('Deployment SSH identity is not a valid private key')
+  }
+  return fields[1]
+}
+
+export function isSshPublicKeyAuthenticationDenied({ status, stdout, stderr } = {}) {
+  if (status !== 255 || String(stdout || '') !== '') return false
+  const denied = String(stderr || '').trim().match(
+    /^[^\r\n]+: Permission denied \(([A-Za-z0-9-]+(?:,[A-Za-z0-9-]+)*)\)\.$/u,
+  )
+  return denied?.[1].split(',').includes('publickey') === true
 }
 
 function ensurePrivateDirectory(directory) {
@@ -85,6 +140,19 @@ function writePrivateFileAtomic(filePath, value) {
 
 function sha256(value) {
   return createHash('sha256').update(value).digest('hex')
+}
+
+export function deploymentChangedPathDigest(paths) {
+  if (
+    !Array.isArray(paths)
+    || paths.length === 0
+    || paths.some((filePath) => typeof filePath !== 'string' || !filePath || filePath.includes('\n'))
+  ) throw new Error('Deployment changed-path evidence is invalid')
+  const normalized = [...new Set(paths)].sort()
+  if (normalized.length !== paths.length) {
+    throw new Error('Deployment changed-path evidence contains duplicates')
+  }
+  return sha256(`${normalized.join('\n')}\n`)
 }
 
 function assertPrivateRecoveryNode(nodePath, type, mode) {
@@ -257,12 +325,12 @@ export function createReleaseBootstrapRecovery({
   if (existsSync(directory)) {
     throw new Error(`Private bootstrap recovery already exists for ${targetSha}; resume it instead`)
   }
-  mkdirSync(directory, { mode: 0o700 })
-  chmodSync(directory, 0o700)
+  const preparedDirectory = mkdtempSync(path.join(stateRoot, `.bootstrap-${targetSha}-`))
+  chmodSync(preparedDirectory, 0o700)
   try {
-    writePrivateFile(path.join(directory, 'controller-identity'), controllerPrivateKey)
-    writePrivateFile(path.join(directory, 'bootstrap-identity'), bootstrapPrivateKey)
-    writePrivateFile(path.join(directory, 'recovery.json'), `${JSON.stringify({
+    writePrivateFile(path.join(preparedDirectory, 'controller-identity'), controllerPrivateKey)
+    writePrivateFile(path.join(preparedDirectory, 'bootstrap-identity'), bootstrapPrivateKey)
+    writePrivateFile(path.join(preparedDirectory, 'recovery.json'), `${JSON.stringify({
       schemaVersion: EQB_RELEASE_BOOTSTRAP_RECOVERY_SCHEMA_VERSION,
       targetSha,
       projectId,
@@ -272,10 +340,11 @@ export function createReleaseBootstrapRecovery({
       bootstrapPublicKeyDigest: sha256(bootstrapPublicKeyBody),
       createdAt,
     }, null, 2)}\n`)
-    syncDirectory(directory)
+    syncDirectory(preparedDirectory)
+    renameSync(preparedDirectory, directory)
     syncDirectory(stateRoot)
   } catch (error) {
-    rmSync(directory, { recursive: true, force: true })
+    rmSync(preparedDirectory, { recursive: true, force: true })
     syncDirectory(stateRoot)
     throw error
   }
@@ -385,6 +454,203 @@ export function clearCompletedReleaseBootstrapRecovery({
   return completed
 }
 
+export function abandonReleaseBootstrapRecovery(recovery, {
+  failure,
+  cancellation,
+  previousSha,
+  controllerIdentityRejected,
+  legacyHealthy,
+  now = () => new Date(),
+  removeIdentity = unlinkSync,
+} = {}) {
+  const preMutationFailure = failure?.rollbackHealthy === false
+    && PRE_MUTATION_BOOTSTRAP_FAILURE_STAGES.has(failure?.failedStage)
+  const cancellationValid = cancellation?.schemaVersion
+      === EQB_RELEASE_BOOTSTRAP_CANCELLATION_SCHEMA_VERSION
+    && Object.keys(cancellation).sort().join('\n') === [
+      'cancellationInstalled',
+      'conclusion',
+      'hostAttemptStarted',
+      'schemaVersion',
+      'state',
+      'targetSha',
+      'unit',
+    ].join('\n')
+    && cancellation?.state === 'reported'
+    && cancellation?.conclusion === 'cancelled'
+    && cancellation?.targetSha === recovery?.targetSha
+    && cancellation?.unit === recovery?.unit
+    && cancellation?.cancellationInstalled === true
+    && typeof cancellation?.hostAttemptStarted === 'boolean'
+  const hostFailureValid = failure?.targetSha === recovery?.targetSha
+    && failure?.schemaVersion === EQB_RELEASE_BOOTSTRAP_FAILURE_SCHEMA_VERSION
+    && failure?.state === 'reported'
+    && failure?.conclusion === 'failure'
+    && Object.keys(failure).sort().join('\n') === [
+      'conclusion',
+      'evidenceRetained',
+      'exitCode',
+      'failedStage',
+      'rollbackHealthy',
+      'schemaVersion',
+      'state',
+      'targetSha',
+    ].join('\n')
+    && (failure?.rollbackHealthy === true || preMutationFailure)
+    && failure?.evidenceRetained === true
+    && /^[a-z0-9-]+$/u.test(failure?.failedStage || '')
+    && Number.isInteger(failure?.exitCode)
+    && failure?.exitCode >= 1
+    && failure?.exitCode <= 255
+  const cancellationOnly = failure === undefined
+  if (
+    !recovery
+    || !path.isAbsolute(recovery.directory || '')
+    || path.basename(recovery.directory) !== `bootstrap-${assertSha(recovery.targetSha)}`
+    || !cancellationValid
+    || (!cancellationOnly && !hostFailureValid)
+    || (cancellationOnly && cancellation.hostAttemptStarted)
+    || !SHA.test(previousSha || '')
+    || controllerIdentityRejected !== true
+    || legacyHealthy !== true
+    || typeof removeIdentity !== 'function'
+  ) {
+    throw new Error('Bootstrap recovery abandonment proof is invalid')
+  }
+  const abandonedAt = now().toISOString()
+  if (!isIsoTimestamp(abandonedAt)) {
+    throw new Error('Bootstrap recovery abandonment timestamp is invalid')
+  }
+  assertPrivateRecoveryNode(recovery.directory, 'directory', 0o700)
+  const abandonedDirectory = path.join(
+    path.dirname(recovery.directory),
+    `abandoned-bootstrap-${recovery.targetSha}`,
+  )
+  if (existsSync(abandonedDirectory)) {
+    throw new Error('Bootstrap abandonment receipt already exists')
+  }
+  const abandonmentPath = path.join(recovery.directory, 'abandonment.json')
+  writePrivateFileAtomic(abandonmentPath, `${JSON.stringify({
+    schemaVersion: EQB_RELEASE_BOOTSTRAP_ABANDONMENT_SCHEMA_VERSION,
+    targetSha: recovery.targetSha,
+    previousSha,
+    evidenceKind: cancellationOnly ? 'host-cancellation' : 'host-failure',
+    failedStage: cancellationOnly ? 'dispatch-unknown' : failure.failedStage,
+    hostExitCode: cancellationOnly ? null : failure.exitCode,
+    rollbackHealthy: cancellationOnly ? false : failure.rollbackHealthy,
+    preMutationFailure: cancellationOnly || preMutationFailure,
+    cancellationInstalled: true,
+    hostAttemptStarted: cancellation.hostAttemptStarted,
+    controllerIdentityRejected,
+    legacyHealthy,
+    abandonedAt,
+  }, null, 2)}\n`)
+  renameSync(recovery.directory, abandonedDirectory)
+  syncDirectory(path.dirname(abandonedDirectory))
+  return clearAbandonedReleaseBootstrapRecovery({
+    stateRoot: path.dirname(abandonedDirectory),
+    targetSha: recovery.targetSha,
+    removeIdentity,
+  })
+}
+
+export function clearAbandonedReleaseBootstrapRecovery({
+  stateRoot,
+  targetSha,
+  removeIdentity = unlinkSync,
+} = {}) {
+  if (typeof removeIdentity !== 'function') {
+    throw new Error('Bootstrap abandonment identity cleanup dependency is missing')
+  }
+  const abandoned = readAbandonedReleaseBootstrapRecovery({ stateRoot, targetSha })
+  for (const name of ['controller-identity', 'bootstrap-identity']) {
+    const identityPath = path.join(abandoned.directory, name)
+    if (existsSync(identityPath)) {
+      assertPrivateRecoveryNode(identityPath, 'file', 0o600)
+      removeIdentity(identityPath)
+      syncDirectory(abandoned.directory)
+    }
+  }
+  if (['controller-identity', 'bootstrap-identity']
+    .some((name) => existsSync(path.join(abandoned.directory, name)))) {
+    throw new Error('Bootstrap abandonment identity cleanup is incomplete')
+  }
+  return readAbandonedReleaseBootstrapRecovery({ stateRoot, targetSha })
+}
+
+export function readAbandonedReleaseBootstrapRecovery({
+  stateRoot,
+  targetSha,
+  optional = false,
+} = {}) {
+  assertRecoveryRoot(stateRoot)
+  const expectedTarget = assertSha(targetSha)
+  const directory = path.join(stateRoot, `abandoned-bootstrap-${expectedTarget}`)
+  if (optional && !existsSync(directory)) return null
+  assertPrivateRecoveryNode(directory, 'directory', 0o700)
+  const abandonmentPath = path.join(directory, 'abandonment.json')
+  let receipt
+  try {
+    receipt = JSON.parse(readPrivateRecoveryFile(abandonmentPath))
+  } catch {
+    throw new Error('Bootstrap abandonment receipt is not valid JSON')
+  }
+  const expectedKeys = [
+    'abandonedAt',
+    'cancellationInstalled',
+    'controllerIdentityRejected',
+    'evidenceKind',
+    'failedStage',
+    'hostAttemptStarted',
+    'hostExitCode',
+    'legacyHealthy',
+    'preMutationFailure',
+    'previousSha',
+    'rollbackHealthy',
+    'schemaVersion',
+    'targetSha',
+  ]
+  if (
+    !receipt
+    || typeof receipt !== 'object'
+    || Array.isArray(receipt)
+    || Object.keys(receipt).sort().join('\n') !== expectedKeys.join('\n')
+    || receipt.schemaVersion !== EQB_RELEASE_BOOTSTRAP_ABANDONMENT_SCHEMA_VERSION
+    || receipt.targetSha !== expectedTarget
+    || !SHA.test(receipt.previousSha || '')
+    || !['host-failure', 'host-cancellation'].includes(receipt.evidenceKind)
+    || !/^[a-z0-9-]+$/u.test(receipt.failedStage || '')
+    || (receipt.hostExitCode !== null && (
+      !Number.isInteger(receipt.hostExitCode)
+      || receipt.hostExitCode < 1
+      || receipt.hostExitCode > 255
+    ))
+    || typeof receipt.rollbackHealthy !== 'boolean'
+    || typeof receipt.preMutationFailure !== 'boolean'
+    || receipt.rollbackHealthy === receipt.preMutationFailure
+    || (receipt.evidenceKind === 'host-failure' && (
+      receipt.hostExitCode === null
+      || (receipt.preMutationFailure
+        && !PRE_MUTATION_BOOTSTRAP_FAILURE_STAGES.has(receipt.failedStage))
+    ))
+    || (receipt.evidenceKind === 'host-cancellation' && (
+      receipt.failedStage !== 'dispatch-unknown'
+      || receipt.hostExitCode !== null
+      || receipt.rollbackHealthy
+      || !receipt.preMutationFailure
+    ))
+    || receipt.cancellationInstalled !== true
+    || typeof receipt.hostAttemptStarted !== 'boolean'
+    || (receipt.evidenceKind === 'host-cancellation' && receipt.hostAttemptStarted)
+    || receipt.controllerIdentityRejected !== true
+    || receipt.legacyHealthy !== true
+    || !isIsoTimestamp(receipt.abandonedAt)
+  ) {
+    throw new Error('Bootstrap abandonment receipt values are invalid')
+  }
+  return { ...receipt, directory, abandonmentPath }
+}
+
 export function removeReleaseBootstrapRecovery(recovery) {
   if (
     !recovery
@@ -435,6 +701,33 @@ export function requireDeployLatestAuthorization(argv) {
   }
 }
 
+export function requireReviewedPersistenceDeployAuthorization(argv) {
+  if (!Array.isArray(argv) || !argv.includes('--owner-said-reviewed-persistence-deploy')) {
+    throw new Error('Current Owner authorization for reviewed-persistence deployment is required')
+  }
+  if (argv.includes('--sha')) {
+    throw new Error('Reviewed-persistence target SHA is resolved automatically; do not supply --sha')
+  }
+}
+
+export function requireUpdateHostConfigurationAuthorization(argv) {
+  if (!Array.isArray(argv) || !argv.includes('--owner-said-update-host-config')) {
+    throw new Error('Current Owner authorization for host configuration update is required')
+  }
+  if (argv.includes('--sha')) {
+    throw new Error('Host configuration target SHA is resolved automatically; do not supply --sha')
+  }
+}
+
+export function requireMaintenanceInstallReadinessAuthorization(argv) {
+  if (!Array.isArray(argv) || !argv.includes('--owner-said-maintenance-install-readiness')) {
+    throw new Error('Current Owner authorization for Tencent maintenance-install readiness is required')
+  }
+  if (argv.includes('--sha')) {
+    throw new Error('Maintenance-install readiness target SHA is resolved automatically; do not supply --sha')
+  }
+}
+
 export function requireLegacyBaselineAuthorization(argv) {
   if (!Array.isArray(argv) || !argv.includes('--owner-said-baseline-migration')) {
     throw new Error('Current Owner authorization for the protected baseline migration is required')
@@ -456,6 +749,15 @@ export function requireReleaseLayoutBootstrapAuthorization(argv) {
 export function requireReleaseLayoutBootstrapResumeAuthorization(argv) {
   if (!Array.isArray(argv) || !argv.includes('--owner-said-release-bootstrap-resume')) {
     throw new Error('Current Owner authorization to resume release-layout bootstrap finalization is required')
+  }
+  if (argv.includes('--sha')) {
+    throw new Error('Bootstrap recovery target SHA comes from private durable state; do not supply --sha')
+  }
+}
+
+export function requireReleaseLayoutBootstrapAbandonAuthorization(argv) {
+  if (!Array.isArray(argv) || !argv.includes('--owner-said-release-bootstrap-abandon')) {
+    throw new Error('Current Owner authorization to abandon a failed bootstrap recovery is required')
   }
   if (argv.includes('--sha')) {
     throw new Error('Bootstrap recovery target SHA comes from private durable state; do not supply --sha')
@@ -568,9 +870,15 @@ export async function assertDeploymentCandidateStillCurrent({ readMainSha, sha }
 
 export function parseDeploymentControllerOutput(output, expectedSha) {
   const sha = assertSha(expectedSha)
+  const prefix = 'EQB_DEPLOY_RECEIPT '
+  const markers = String(output || '').split('\n')
+    .filter((line) => line.startsWith(prefix))
+  if (markers.length !== 1) {
+    throw new Error('Deployment controller receipt marker is missing or ambiguous')
+  }
   let receipt
   try {
-    receipt = JSON.parse(String(output || '').trim())
+    receipt = JSON.parse(markers[0].slice(prefix.length))
   } catch {
     throw new Error('Deployment controller response is not valid JSON')
   }
@@ -623,6 +931,174 @@ export function parseDeploymentControllerOutput(output, expectedSha) {
   return receipt
 }
 
+function parseMarkedControllerReceipt(output, prefix, label) {
+  const markers = String(output || '').split('\n').filter((line) => line.startsWith(prefix))
+  if (markers.length !== 1) throw new Error(`${label} receipt marker is missing or ambiguous`)
+  try {
+    return JSON.parse(markers[0].slice(prefix.length))
+  } catch {
+    throw new Error(`${label} response is not valid JSON`)
+  }
+}
+
+function validReceiptPath(value) {
+  return /^\/opt\/eqb\/deployments\/receipts\/[A-Za-z0-9.-]+\.json$/u.test(value || '')
+}
+
+function validDigestMap(value) {
+  return value
+    && typeof value === 'object'
+    && !Array.isArray(value)
+    && Object.keys(value).sort().join('\n')
+      === ['import-ops.sqlite', 'question-bank.sqlite', 'user-data.sqlite'].join('\n')
+    && Object.values(value).every((digest) => /^[a-f0-9]{64}$/u.test(digest || ''))
+}
+
+export function parseReviewedPersistenceControllerOutput(output, expectedSha, expectedDigest) {
+  const sha = assertSha(expectedSha)
+  if (!/^[a-f0-9]{64}$/u.test(expectedDigest || '')) throw new Error('Reviewed diff digest is invalid')
+  const receipt = parseMarkedControllerReceipt(
+    output,
+    'EQB_REVIEWED_PERSISTENCE_RECEIPT ',
+    'Reviewed-persistence controller',
+  )
+  const keys = [
+    'changedPersistencePaths',
+    'changedPersistencePathsDigest',
+    'conclusion',
+    'controllerVersion',
+    'databaseSnapshots',
+    'databasesRestored',
+    'failureCode',
+    'finishedAt',
+    'previousSha',
+    'receiptPath',
+    'recovered',
+    'rollbackHealthy',
+    'rolledBack',
+    'schemaVersion',
+    'staged',
+    'startedAt',
+    'state',
+    'targetSha',
+    'trafficReopened',
+  ]
+  if (
+    !receipt
+    || typeof receipt !== 'object'
+    || Array.isArray(receipt)
+    || Object.keys(receipt).sort().join('\n') !== keys.join('\n')
+    || receipt.schemaVersion !== 'eqb-reviewed-persistence-receipt-v1'
+    || receipt.controllerVersion !== 'eqb-deploy-controller-v1'
+    || receipt.state !== 'reported'
+    || !['success', 'failure'].includes(receipt.conclusion)
+    || receipt.targetSha !== sha
+    || !SHA.test(receipt.previousSha || '')
+    || !Array.isArray(receipt.changedPersistencePaths)
+    || receipt.changedPersistencePathsDigest !== expectedDigest
+    || (receipt.changedPersistencePaths.length > 0
+      && deploymentChangedPathDigest(receipt.changedPersistencePaths) !== expectedDigest)
+    || (receipt.changedPersistencePaths.length === 0 && receipt.conclusion !== 'failure')
+    || (!validDigestMap(receipt.databaseSnapshots)
+      && !(receipt.conclusion === 'failure'
+        && Object.keys(receipt.databaseSnapshots || {}).length === 0))
+    || !['boolean'].includes(typeof receipt.staged)
+    || !['boolean'].includes(typeof receipt.trafficReopened)
+    || !['boolean'].includes(typeof receipt.rolledBack)
+    || !['boolean'].includes(typeof receipt.databasesRestored)
+    || !['boolean'].includes(typeof receipt.recovered)
+    || ![null, true, false].includes(receipt.rollbackHealthy)
+    || (receipt.failureCode !== null && typeof receipt.failureCode !== 'string')
+    || typeof receipt.startedAt !== 'string'
+    || typeof receipt.finishedAt !== 'string'
+    || !validReceiptPath(receipt.receiptPath)
+    || (receipt.conclusion === 'success') !== (receipt.failureCode === null)
+    || (receipt.databasesRestored && receipt.trafficReopened)
+    || (receipt.databasesRestored && !receipt.rolledBack)
+    || (receipt.rolledBack && receipt.trafficReopened)
+    || (receipt.conclusion === 'success' && (
+      !receipt.trafficReopened
+      || receipt.rolledBack
+      || receipt.databasesRestored
+      || receipt.rollbackHealthy !== null
+      || !validDigestMap(receipt.databaseSnapshots)
+    ))
+  ) throw new Error('Reviewed-persistence controller response is invalid')
+  return receipt
+}
+
+export function parseHostConfigurationControllerOutput(output, expectedSha, expectedDigest) {
+  const sha = assertSha(expectedSha)
+  if (!/^[a-f0-9]{64}$/u.test(expectedDigest || '')) throw new Error('Host configuration diff digest is invalid')
+  const receipt = parseMarkedControllerReceipt(
+    output,
+    'EQB_HOST_CONFIGURATION_RECEIPT ',
+    'Host-configuration controller',
+  )
+  const keys = [
+    'changedHostConfigurationPaths',
+    'changedHostConfigurationPathsDigest',
+    'conclusion',
+    'controllerVersion',
+    'failureCode',
+    'finishedAt',
+    'installed',
+    'noOp',
+    'previousHostConfigurationSha',
+    'receiptPath',
+    'recovered',
+    'rollbackHealthy',
+    'rolledBack',
+    'schemaVersion',
+    'staged',
+    'startedAt',
+    'state',
+    'targetSha',
+  ]
+  if (
+    !receipt
+    || typeof receipt !== 'object'
+    || Array.isArray(receipt)
+    || Object.keys(receipt).sort().join('\n') !== keys.join('\n')
+    || receipt.schemaVersion !== 'eqb-host-configuration-receipt-v1'
+    || receipt.controllerVersion !== 'eqb-deploy-controller-v1'
+    || receipt.state !== 'reported'
+    || !['success', 'failure'].includes(receipt.conclusion)
+    || receipt.targetSha !== sha
+    || !SHA.test(receipt.previousHostConfigurationSha || '')
+    || !Array.isArray(receipt.changedHostConfigurationPaths)
+    || receipt.changedHostConfigurationPathsDigest !== expectedDigest
+    || (!receipt.noOp && receipt.changedHostConfigurationPaths.length > 0
+      && deploymentChangedPathDigest(receipt.changedHostConfigurationPaths) !== expectedDigest)
+    || (!receipt.noOp
+      && receipt.changedHostConfigurationPaths.length === 0
+      && receipt.conclusion !== 'failure')
+    || !['boolean'].includes(typeof receipt.staged)
+    || !['boolean'].includes(typeof receipt.installed)
+    || !['boolean'].includes(typeof receipt.noOp)
+    || !['boolean'].includes(typeof receipt.rolledBack)
+    || !['boolean'].includes(typeof receipt.recovered)
+    || ![null, true, false].includes(receipt.rollbackHealthy)
+    || (receipt.failureCode !== null && typeof receipt.failureCode !== 'string')
+    || typeof receipt.startedAt !== 'string'
+    || typeof receipt.finishedAt !== 'string'
+    || !validReceiptPath(receipt.receiptPath)
+    || (receipt.conclusion === 'success') !== (receipt.failureCode === null)
+    || (receipt.noOp && (
+      receipt.conclusion !== 'success'
+      || !receipt.installed
+      || receipt.staged
+      || receipt.changedHostConfigurationPaths.length !== 0
+    ))
+    || (receipt.conclusion === 'success' && (
+      !receipt.installed
+      || receipt.rolledBack
+      || receipt.rollbackHealthy !== null
+    ))
+  ) throw new Error('Host-configuration controller response is invalid')
+  return receipt
+}
+
 export function parseDeploymentControllerPreflight(output) {
   let preflight
   try {
@@ -652,6 +1128,86 @@ export function parseDeploymentControllerPreflight(output) {
     throw new Error('Deployment controller preflight response is invalid')
   }
   return preflight
+}
+
+export function parseMaintenanceInstallReadiness(
+  output,
+  expectedSha,
+  expectedDigest,
+  expectedTransportUser,
+) {
+  const targetSha = assertSha(expectedSha)
+  if (!/^[a-f0-9]{64}$/u.test(expectedDigest || '')) {
+    throw new Error('Maintenance install payload digest is invalid')
+  }
+  if (!/^[a-z_][a-z0-9_-]*$/u.test(expectedTransportUser || '')) {
+    throw new Error('Maintenance install transport user is invalid')
+  }
+  const report = parseMarkedControllerReceipt(
+    output,
+    'EQB_MAINTENANCE_INSTALL_READINESS ',
+    'Maintenance install readiness',
+  )
+  const keys = [
+    'availableBytes',
+    'caddyfileSha256',
+    'controllerModuleSha256',
+    'deploymentLockMode',
+    'failureCode',
+    'layout',
+    'payloadDigest',
+    'productionSha',
+    'rootWrapperSha256',
+    'schemaVersion',
+    'state',
+    'targetSha',
+    'transportUid',
+    'transportUser',
+    'transportWrapperSha256',
+    'unitSha256',
+  ]
+  const digest = /^[a-f0-9]{64}$/u
+  const ready = report?.state === 'ready'
+  if (
+    !report
+    || typeof report !== 'object'
+    || Array.isArray(report)
+    || Object.keys(report).sort().join('\n') !== keys.join('\n')
+    || report.schemaVersion !== EQB_MAINTENANCE_INSTALL_READINESS_SCHEMA_VERSION
+    || !['ready', 'failed'].includes(report.state)
+    || report.targetSha !== targetSha
+    || report.payloadDigest !== expectedDigest
+    || report.transportUser !== expectedTransportUser
+    || (ready && (
+      report.failureCode !== null
+      || !['0600', '0644'].includes(report.deploymentLockMode)
+      || report.layout !== 'release'
+      || !SHA.test(report.productionSha || '')
+      || !Number.isSafeInteger(report.transportUid)
+      || report.transportUid <= 0
+      || !Number.isSafeInteger(report.availableBytes)
+      || report.availableBytes < 5 * 1024 * 1024 * 1024
+      || !digest.test(report.controllerModuleSha256 || '')
+      || !digest.test(report.rootWrapperSha256 || '')
+      || !digest.test(report.transportWrapperSha256 || '')
+      || !digest.test(report.unitSha256 || '')
+      || !digest.test(report.caddyfileSha256 || '')
+    ))
+    || (!ready && (
+      !/^[A-Z0-9_]+$/u.test(report.failureCode || '')
+      || report.deploymentLockMode !== null
+      || report.layout !== null
+      || report.productionSha !== null
+      || report.transportUid !== null
+      || report.availableBytes !== null
+      || report.controllerModuleSha256 !== null
+      || report.rootWrapperSha256 !== null
+      || report.transportWrapperSha256 !== null
+      || report.unitSha256 !== null
+      || report.caddyfileSha256 !== null
+    ))
+  ) throw new Error('Maintenance install readiness response is invalid')
+  return report
 }
 
 export function parseLegacyBaselineReceipt(output, expectedSha) {
@@ -800,6 +1356,43 @@ export function parseReleaseBootstrapFailure(output, expectedSha, expectedExitCo
   return receipt
 }
 
+export function classifyReleaseBootstrapJournal(output, expectedSha) {
+  const sha = assertSha(expectedSha)
+  const text = String(output || '')
+  const failurePrefix = 'EQB_BOOTSTRAP_FAILURE '
+  const failures = text.split('\n').filter((line) => line.startsWith(failurePrefix))
+  const completion = `EQB deployment bootstrap complete: ${sha}`
+  const completions = text.split('\n').filter((line) => line === completion)
+  if (failures.length === 0 && completions.length === 0) return { state: 'unknown' }
+  if (failures.length === 1 && completions.length === 0) {
+    return {
+      state: 'failure',
+      failure: parseReleaseBootstrapFailure(text, sha),
+    }
+  }
+  if (failures.length === 0 && completions.length === 1) return { state: 'success' }
+  throw new Error('Release-layout bootstrap journal evidence is ambiguous')
+}
+
+export function classifyReleaseBootstrapOutcome(output, expectedSha, remoteStatus) {
+  const evidence = classifyReleaseBootstrapJournal(output, expectedSha)
+  if (evidence.state === 'failure') {
+    if (
+      Number.isInteger(remoteStatus)
+      && remoteStatus !== 255
+      && remoteStatus !== evidence.failure.exitCode
+    ) throw new Error('Release-layout bootstrap status does not match its failure marker')
+    return evidence
+  }
+  if (
+    evidence.state === 'success'
+    && Number.isInteger(remoteStatus)
+    && ![0, 255].includes(remoteStatus)
+  ) throw new Error('Release-layout bootstrap status does not match its completion marker')
+  if (evidence.state === 'unknown' && remoteStatus === 75) return { state: 'lock' }
+  return evidence
+}
+
 export function bootstrapPayloadStageInput(sourceValue, digestValue) {
   const source = String(sourceValue || '')
   const digest = String(digestValue || '')
@@ -852,6 +1445,50 @@ ${source}${delimiter}
 fi
 printf 'EQB bootstrap payload staged: %s\n' "$target_sha"
 `
+}
+
+export function parseReleaseBootstrapCancellation(output, expectedSha, expectedUnit) {
+  const sha = assertSha(expectedSha)
+  if (!BOOTSTRAP_UNIT.test(expectedUnit || '')) {
+    throw new Error('Release-layout bootstrap cancellation unit is invalid')
+  }
+  const prefix = 'EQB_BOOTSTRAP_CANCELLATION '
+  const markers = String(output || '').split('\n')
+    .filter((line) => line.startsWith(prefix))
+  if (markers.length !== 1) {
+    throw new Error('Release-layout bootstrap cancellation marker is missing or ambiguous')
+  }
+  let receipt
+  try {
+    receipt = JSON.parse(markers[0].slice(prefix.length))
+  } catch {
+    throw new Error('Release-layout bootstrap cancellation marker is not valid JSON')
+  }
+  const expectedKeys = [
+    'cancellationInstalled',
+    'conclusion',
+    'hostAttemptStarted',
+    'schemaVersion',
+    'state',
+    'targetSha',
+    'unit',
+  ]
+  if (
+    !receipt
+    || typeof receipt !== 'object'
+    || Array.isArray(receipt)
+    || Object.keys(receipt).sort().join('\n') !== expectedKeys.join('\n')
+    || receipt.schemaVersion !== EQB_RELEASE_BOOTSTRAP_CANCELLATION_SCHEMA_VERSION
+    || receipt.state !== 'reported'
+    || receipt.conclusion !== 'cancelled'
+    || receipt.targetSha !== sha
+    || receipt.unit !== expectedUnit
+    || receipt.cancellationInstalled !== true
+    || typeof receipt.hostAttemptStarted !== 'boolean'
+  ) {
+    throw new Error('Release-layout bootstrap cancellation marker is invalid')
+  }
+  return receipt
 }
 
 export function parseBootstrapKeyRetirementReceipt(output) {
@@ -908,12 +1545,17 @@ export async function migrateLegacyProductionBaseline({
   const candidate = await resolveCandidate()
   await assertDeploymentCandidateStillCurrent({ readMainSha, sha: candidate.sha })
   const preflight = await readLegacyPreflight(candidate)
+  if (preflight?.baselineState === 'established') {
+    throw new Error('BASELINE_ALREADY_ESTABLISHED')
+  }
   if (
     preflight?.layout !== 'legacy'
+    || preflight?.baselineState !== 'absent'
     || preflight?.productionSha === candidate.sha
     || preflight?.trackedDirtyPaths !== 0
     || preflight?.eqb !== 'active'
     || preflight?.caddy !== 'active'
+    || preflight?.strictHealth !== 'ok'
   ) {
     throw new Error('Legacy production is not eligible for baseline migration')
   }
@@ -973,6 +1615,7 @@ export async function completeReleaseLayoutBootstrap({
   if (!['active', 'retired'].includes(initialIdentityState)) {
     throw new Error('Privileged bootstrap identity state is unknown')
   }
+  await rotateControllerSecret(candidate)
   const keyRetirement = initialIdentityState === 'active'
     ? await retireBootstrapIdentity(candidate)
     : null
@@ -980,7 +1623,6 @@ export async function completeReleaseLayoutBootstrap({
   if (await classifyBootstrapIdentity(candidate) !== 'retired') {
     throw new Error('Privileged bootstrap identity remains usable or its state is unknown')
   }
-  await rotateControllerSecret(candidate)
   await cleanupRecovery(candidate)
   return {
     controllerPreflight,
@@ -1000,6 +1642,8 @@ export async function bootstrapReleaseLayout({
   classifyBootstrapIdentity,
   rotateControllerSecret,
   cleanupRecovery,
+  isAncestor,
+  readProtectedDiff,
 } = {}) {
   requireReleaseLayoutBootstrapAuthorization(argv)
   if (
@@ -1012,6 +1656,8 @@ export async function bootstrapReleaseLayout({
     || typeof classifyBootstrapIdentity !== 'function'
     || typeof rotateControllerSecret !== 'function'
     || typeof cleanupRecovery !== 'function'
+    || typeof isAncestor !== 'function'
+    || typeof readProtectedDiff !== 'function'
   ) {
     throw new Error('Release-layout bootstrap dependencies are missing')
   }
@@ -1020,13 +1666,41 @@ export async function bootstrapReleaseLayout({
   const legacyPreflight = await readLegacyPreflight(candidate)
   if (
     legacyPreflight?.layout !== 'legacy'
-    || legacyPreflight?.productionSha !== candidate.sha
+    || legacyPreflight?.baselineState !== 'established'
+    || legacyPreflight?.baselineReceipts !== 1
+    || legacyPreflight?.quarantineChildren !== 1
+    || legacyPreflight?.liveReleaseLayout !== 'absent'
+    || legacyPreflight?.defaultIdentity !== 'ok'
+    || legacyPreflight?.controllerSudo !== 'ok'
     || legacyPreflight?.trackedDirtyPaths !== 0
     || legacyPreflight?.eqb !== 'active'
     || legacyPreflight?.caddy !== 'active'
+    || legacyPreflight?.strictHealth !== 'ok'
   ) {
     throw new Error('Production is not an eligible migrated baseline')
   }
+  let ancestor
+  try {
+    ancestor = await isAncestor(legacyPreflight.productionSha, candidate.sha)
+  } catch {
+    throw new Error('BASELINE_ANCESTRY_UNKNOWN')
+  }
+  if (ancestor !== true) throw new Error('BASELINE_ANCESTRY_UNKNOWN')
+  let protectedDiff
+  try {
+    protectedDiff = await readProtectedDiff(
+      legacyPreflight.productionSha,
+      candidate.sha,
+      EQB_PERSISTENCE_AUTHORITY_PATHS,
+    )
+  } catch {
+    throw new Error('BASELINE_ANCESTRY_UNKNOWN')
+  }
+  if (
+    !Array.isArray(protectedDiff)
+    || protectedDiff.some((filePath) => typeof filePath !== 'string' || !filePath)
+  ) throw new Error('BASELINE_ANCESTRY_UNKNOWN')
+  if (protectedDiff.length !== 0) throw new Error('PERSISTENCE_AUTHORITY_CHANGED')
   await assertDeploymentCandidateStillCurrent({ readMainSha, sha: candidate.sha })
   await invokeBootstrap({ candidate, legacyPreflight })
   const finalized = await completeReleaseLayoutBootstrap({
@@ -1087,6 +1761,67 @@ export async function deployLatestRelease({
   return { candidate, receipt }
 }
 
+async function runReviewedDeploymentMaintenance({
+  argv,
+  authorize,
+  resolveCandidate,
+  readMainSha,
+  readProductionSha,
+  readChangedPaths,
+  protectedPaths,
+  invokeController,
+  parseReceipt,
+} = {}) {
+  authorize(argv)
+  if (
+    typeof resolveCandidate !== 'function'
+    || typeof readMainSha !== 'function'
+    || typeof readProductionSha !== 'function'
+    || typeof readChangedPaths !== 'function'
+    || typeof invokeController !== 'function'
+  ) throw new Error('Deployment maintenance dependencies are missing')
+  const candidate = await resolveCandidate()
+  await assertDeploymentCandidateStillCurrent({ readMainSha, sha: candidate.sha })
+  const productionSha = assertSha(await readProductionSha(), 'production SHA')
+  const changedPaths = await readChangedPaths(productionSha, candidate.sha, protectedPaths)
+  if (
+    !Array.isArray(changedPaths)
+    || changedPaths.length === 0
+    || changedPaths.some((filePath) => !protectedPaths.some((protectedPath) => (
+      filePath === protectedPath || filePath.startsWith(`${protectedPath}/`)
+    )))
+  ) throw new Error('The separately reviewed protected diff is empty or invalid')
+  const changedPathsDigest = deploymentChangedPathDigest(changedPaths)
+  await assertDeploymentCandidateStillCurrent({ readMainSha, sha: candidate.sha })
+  const receipt = parseReceipt(
+    await invokeController(candidate.sha, changedPathsDigest),
+    candidate.sha,
+    changedPathsDigest,
+  )
+  if (receipt.conclusion !== 'success') {
+    throw new Error(`Production controller reported ${receipt.failureCode || 'failure'}`)
+  }
+  return { candidate, productionSha, changedPaths, changedPathsDigest, receipt }
+}
+
+export async function deployReviewedPersistenceLatest(options = {}) {
+  return runReviewedDeploymentMaintenance({
+    ...options,
+    authorize: requireReviewedPersistenceDeployAuthorization,
+    protectedPaths: EQB_PERSISTENCE_AUTHORITY_PATHS,
+    parseReceipt: parseReviewedPersistenceControllerOutput,
+  })
+}
+
+export async function updateLatestHostConfiguration(options = {}) {
+  return runReviewedDeploymentMaintenance({
+    ...options,
+    authorize: requireUpdateHostConfigurationAuthorization,
+    protectedPaths: EQB_HOST_CONFIGURATION_PATHS,
+    parseReceipt: parseHostConfigurationControllerOutput,
+  })
+}
+
 export function materializeDeploymentCredentials({
   privateKey,
   knownHosts,
@@ -1143,6 +1878,8 @@ export function deploymentSSHInvocation({
       '-o', `UserKnownHostsFile=${knownHostsPath}`,
       '-o', 'GlobalKnownHostsFile=/dev/null',
       '-o', 'ConnectTimeout=15',
+      '-o', 'ServerAliveInterval=15',
+      '-o', 'ServerAliveCountMax=4',
       host,
       ...remoteArgs,
     ],
@@ -1185,7 +1922,21 @@ export function deploymentLockInvocation({ root, executable, args = [] } = {}) {
 }
 
 export function parseDeploymentPreflightOutput(output) {
-  const expectedKeys = ['productionSha', 'trackedDirtyPaths', 'eqb', 'caddy', 'layout']
+  const expectedKeys = [
+    'baselineFailedReceipts',
+    'baselineReceipts',
+    'baselineState',
+    'caddy',
+    'controllerSudo',
+    'defaultIdentity',
+    'eqb',
+    'layout',
+    'liveReleaseLayout',
+    'productionSha',
+    'quarantineChildren',
+    'strictHealth',
+    'trackedDirtyPaths',
+  ]
   const values = new Map()
   for (const line of String(output || '').trim().split('\n').filter(Boolean)) {
     const separator = line.indexOf('=')
@@ -1201,7 +1952,11 @@ export function parseDeploymentPreflightOutput(output) {
   }
   const productionSha = assertSha(values.get('productionSha'), 'production SHA')
   const dirtyValue = values.get('trackedDirtyPaths')
-  if (!/^\d+$/u.test(dirtyValue)) {
+  const baselineReceipts = values.get('baselineReceipts')
+  const baselineFailedReceipts = values.get('baselineFailedReceipts')
+  const quarantineChildren = values.get('quarantineChildren')
+  const countValues = [dirtyValue, baselineReceipts, baselineFailedReceipts, quarantineChildren]
+  if (!countValues.every((value) => /^\d+$/u.test(value) && Number.isSafeInteger(Number(value)))) {
     throw new Error('Deployment preflight dirty count is invalid')
   }
   const serviceState = /^[a-z-]+$/u
@@ -1211,12 +1966,29 @@ export function parseDeploymentPreflightOutput(output) {
   if (!['legacy', 'release'].includes(values.get('layout'))) {
     throw new Error('Deployment preflight layout is invalid')
   }
+  if (
+    !['absent', 'established', 'invalid'].includes(values.get('baselineState'))
+    || !['absent', 'partial', 'present'].includes(values.get('liveReleaseLayout'))
+    || !['invalid', 'missing', 'ok'].includes(values.get('defaultIdentity'))
+    || !['invalid', 'ok'].includes(values.get('controllerSudo'))
+    || !['invalid', 'ok'].includes(values.get('strictHealth'))
+  ) {
+    throw new Error('Deployment preflight baseline evidence is invalid')
+  }
   return {
     productionSha,
     trackedDirtyPaths: Number(dirtyValue),
     eqb: values.get('eqb'),
     caddy: values.get('caddy'),
     layout: values.get('layout'),
+    baselineState: values.get('baselineState'),
+    baselineReceipts: Number(baselineReceipts),
+    baselineFailedReceipts: Number(baselineFailedReceipts),
+    quarantineChildren: Number(quarantineChildren),
+    liveReleaseLayout: values.get('liveReleaseLayout'),
+    defaultIdentity: values.get('defaultIdentity'),
+    controllerSudo: values.get('controllerSudo'),
+    strictHealth: values.get('strictHealth'),
   }
 }
 

@@ -12,11 +12,14 @@ TARGET_SHA=${1-}
 PUBLIC_KEY_FILE=${2-}
 PUBLIC_KEY_TEMP=
 TRANSPORT_USER=${EQB_DEPLOY_TRANSPORT_USER-}
+BOOTSTRAP_UNIT=${EQB_DEPLOY_BOOTSTRAP_UNIT-}
 BOOTSTRAP_KEY_BODY=${EQB_DEPLOY_BOOTSTRAP_PUBLIC_KEY_BODY-}
+LEGACY_BASELINE_CHILD_DIGEST=${EQB_LEGACY_BASELINE_CHILD_DIGEST-}
+LEGACY_BASELINE_CHILD_FILE_COUNT=4876
 CONTROLLER_DIRECTORY=/usr/local/libexec
 CONTROLLER=$CONTROLLER_DIRECTORY/eqb-deploy-controller-v1
-CONTROLLER_MODULE=$CONTROLLER_DIRECTORY/eqb-deploy-controller-v1.mjs
 TRANSPORT_CONTROLLER=$CONTROLLER_DIRECTORY/eqb-deploy-transport-v1
+HOST_CONFIG_ROOT=$ROOT/deployments/host-configuration
 SSH_DIRECTORY=
 AUTHORIZED_KEYS=
 AUTHORIZED_KEYS2=
@@ -42,11 +45,77 @@ build_home=
 backup=
 bootstrap_log=
 success_receipt=
+baseline_inspector=
 stage=preflight
 declare -a protected_paths=()
 declare -A protected_modes=()
 declare -A database_identities=()
+declare -A database_snapshot_digests=()
 declare -A persistence_identities=()
+
+assert_not_cancelled() {
+  local cancellation=$FAILURE_BACKUP_ROOT/bootstrap-cancellation-$BOOTSTRAP_UNIT.json
+  if [[ ! -e $cancellation && ! -L $cancellation ]]; then return; fi
+  /usr/bin/node --input-type=module - "$cancellation" "$TARGET_SHA" "$BOOTSTRAP_UNIT" <<'NODE'
+import fs from 'node:fs'
+
+const [filePath, targetSha, unit] = process.argv.slice(2)
+const state = fs.lstatSync(filePath)
+if (
+  !state.isFile()
+  || state.isSymbolicLink()
+  || state.uid !== 0
+  || state.gid !== 0
+  || (state.mode & 0o7777) !== 0o600
+  || state.nlink !== 1
+  || state.size < 1
+  || state.size > 4096
+) process.exit(1)
+const receipt = JSON.parse(fs.readFileSync(filePath, 'utf8'))
+const expectedKeys = [
+  'cancellationInstalled',
+  'conclusion',
+  'hostAttemptStarted',
+  'schemaVersion',
+  'state',
+  'targetSha',
+  'unit',
+]
+if (
+  !receipt
+  || typeof receipt !== 'object'
+  || Array.isArray(receipt)
+  || Object.keys(receipt).sort().join('\n') !== expectedKeys.join('\n')
+  || receipt.schemaVersion !== 'eqb-release-bootstrap-cancellation-v1'
+  || receipt.state !== 'reported'
+  || receipt.conclusion !== 'cancelled'
+  || receipt.targetSha !== targetSha
+  || receipt.unit !== unit
+  || receipt.cancellationInstalled !== true
+  || typeof receipt.hostAttemptStarted !== 'boolean'
+) process.exit(1)
+NODE
+  fail 'bootstrap attempt was cancelled before host acceptance'
+}
+
+register_host_acceptance() {
+  local marker=$FAILURE_BACKUP_ROOT/bootstrap-attempt-$BOOTSTRAP_UNIT.json
+  local temporary
+  [[ ! -e $marker && ! -L $marker ]] \
+    || fail 'bootstrap unit already has host acceptance evidence'
+  temporary=$(mktemp "$FAILURE_BACKUP_ROOT/.bootstrap-attempt-XXXXXXXX")
+  if ! printf '{"schemaVersion":"eqb-release-bootstrap-attempt-v1","state":"accepted","targetSha":"%s","unit":"%s"}\n' \
+      "$TARGET_SHA" "$BOOTSTRAP_UNIT" > "$temporary" \
+    || ! chown root:root "$temporary" \
+    || ! chmod 0600 "$temporary" \
+    || [[ $(stat -c '%u:%g:%a:%h' "$temporary") != 0:0:600:1 ]] \
+    || ! /usr/bin/sync -d "$temporary" \
+    || ! mv "$temporary" "$marker" \
+    || ! /usr/bin/sync -d "$FAILURE_BACKUP_ROOT"; then
+    rm -f "$temporary"
+    fail 'cannot retain bootstrap host acceptance evidence'
+  fi
+}
 
 report_failure() {
   local failed_stage=$1 exit_code=$2 rollback_json=$3
@@ -201,6 +270,29 @@ try {
 NODE
 }
 
+snapshot_databases() {
+  local database_name database_path expected_identity snapshot
+  install -d -o root -g root -m 0700 "$backup/databases"
+  for database_name in question-bank.sqlite user-data.sqlite import-ops.sqlite; do
+    database_path=$SOURCE/data/$database_name
+    expected_identity=${database_identities[$database_name]-}
+    [[ -n $expected_identity && -f $database_path && ! -L $database_path \
+      && $(stat -c '%d:%i' "$database_path") == "$expected_identity" ]] \
+      || fail "production database changed before snapshot: $database_name"
+    snapshot=$backup/databases/$database_name
+    /usr/bin/sqlite3 "$database_path" ".backup '$snapshot'"
+    [[ -f $database_path && ! -L $database_path \
+      && $(stat -c '%d:%i' "$database_path") == "$expected_identity" ]] \
+      || fail "production database changed during snapshot: $database_name"
+    chown root:root "$snapshot"
+    chmod 0600 "$snapshot"
+    verify_sqlite_database "$snapshot" \
+      || fail "production database snapshot is invalid: $database_name"
+    database_snapshot_digests["$database_name"]=$(/usr/bin/sha256sum "$snapshot" | /usr/bin/cut -d ' ' -f 1)
+    /usr/bin/sync -d "$snapshot"
+  done
+}
+
 normalize_generated_dist() {
   local dist=$1
   /usr/bin/node --input-type=module - "$dist" <<'NODE'
@@ -285,13 +377,19 @@ trap 'fail "unexpected command failure during $stage"' ERR
 
 [[ $(id -u) == 0 ]] || fail 'run as root'
 [[ $TARGET_SHA =~ ^[a-f0-9]{40}$ ]] || fail 'target SHA is invalid'
+[[ $BOOTSTRAP_UNIT =~ ^eqb-release-bootstrap-[a-f0-9]{32}$ ]] \
+  || fail 'bootstrap unit is invalid'
 [[ $TRANSPORT_USER =~ ^[a-z_][a-z0-9_-]*$ && $TRANSPORT_USER != root ]] \
   || fail 'deployment SSH transport account is invalid'
 [[ $BOOTSTRAP_KEY_BODY =~ ^[A-Za-z0-9+/]+={0,3}$ ]] \
   || fail 'bootstrap public key environment input is invalid'
+[[ $LEGACY_BASELINE_CHILD_DIGEST =~ ^[a-f0-9]{64}$ ]] \
+  || fail 'legacy baseline digest environment input is invalid'
 [[ -d $FAILURE_BACKUP_ROOT && ! -L $FAILURE_BACKUP_ROOT \
   && $(stat -c '%u:%g:%a' "$FAILURE_BACKUP_ROOT") == 0:0:700 ]] \
   || fail 'root-private bootstrap evidence directory is unavailable'
+assert_not_cancelled
+register_host_acceptance
 backup=$(mktemp -d "$FAILURE_BACKUP_ROOT/bootstrap-attempt-${TARGET_SHA:0:12}-XXXXXXXX")
 chown root:root "$backup"
 chmod 0700 "$backup"
@@ -313,9 +411,10 @@ fi
   && ! -e $ROOT/deployments && ! -L $ROOT/deployments ]] \
   || fail 'partial or linked release layout requires manual inspection'
 [[ ! -e $CONTROLLER && ! -L $CONTROLLER \
-  && ! -e $CONTROLLER_MODULE && ! -L $CONTROLLER_MODULE \
   && ! -e $TRANSPORT_CONTROLLER && ! -L $TRANSPORT_CONTROLLER ]] \
   || fail 'deployment controller is already installed'
+[[ ! -e $HOST_CONFIG_ROOT && ! -L $HOST_CONFIG_ROOT ]] \
+  || fail 'deployment host configuration already exists'
 [[ -d /usr/local && ! -L /usr/local \
   && $(stat -c '%u:%g:%a' /usr/local) == 0:0:755 ]] \
   || fail 'controller parent ancestry is unsafe'
@@ -405,6 +504,9 @@ esac
 runuser -u eqb -- git -C "$SOURCE" fetch --quiet --no-tags origin main
 [[ $(runuser -u eqb -- git -C "$SOURCE" rev-parse FETCH_HEAD) == "$TARGET_SHA" ]] \
   || fail 'fetched main does not match the authorized target'
+/usr/bin/git -c safe.directory="$SOURCE" -C "$SOURCE" \
+  merge-base --is-ancestor "$production_sha" "$TARGET_SHA" \
+  || fail 'target ancestry does not continue from the established baseline'
 protected_changes=$(/usr/bin/git -c safe.directory="$SOURCE" -C "$SOURCE" \
   diff --name-only --no-renames "$production_sha" "$TARGET_SHA" -- \
   data/sql \
@@ -421,8 +523,40 @@ protected_changes=$(/usr/bin/git -c safe.directory="$SOURCE" -C "$SOURCE" \
 [[ -z $protected_changes ]] \
   || fail 'target changes persistence authority; complete a separately authorized migration procedure first'
 
+stage=verify-established-baseline
+baseline_inspector=$backup/eqb-legacy-baseline-state.mjs
+/usr/bin/git -c safe.directory="$SOURCE" -C "$SOURCE" \
+  show "$TARGET_SHA:deploy/eqb-legacy-baseline-state.mjs" > "$baseline_inspector"
+chmod 0600 "$baseline_inspector"
+/usr/bin/node --check "$baseline_inspector"
+declare -A baseline_evidence=()
+baseline_output=$(/usr/bin/node "$baseline_inspector" \
+  "$SOURCE" "$FAILURE_BACKUP_ROOT" /home/eqb "$production_sha" \
+  "$LEGACY_BASELINE_CHILD_DIGEST" "$LEGACY_BASELINE_CHILD_FILE_COUNT" eqb "$TRANSPORT_USER") \
+  || fail 'established baseline evidence inspection failed'
+while IFS='=' read -r evidence_key evidence_value; do
+  case "$evidence_key" in
+    baselineState|baselineReceipts|baselineFailedReceipts|quarantineChildren|liveReleaseLayout|defaultIdentity|controllerSudo) ;;
+    *) fail 'established baseline evidence shape is invalid' ;;
+  esac
+  [[ ! -v baseline_evidence[$evidence_key] ]] \
+    || fail 'established baseline evidence contains duplicate fields'
+  baseline_evidence["$evidence_key"]=$evidence_value
+done <<< "$baseline_output"
+[[ ${#baseline_evidence[@]} == 7 ]] \
+  || fail 'established baseline evidence is incomplete'
+[[ ${baseline_evidence[baselineState]-} == established \
+  && ${baseline_evidence[baselineReceipts]-} == 1 \
+  && ${baseline_evidence[quarantineChildren]-} == 1 \
+  && ${baseline_evidence[liveReleaseLayout]-} == absent \
+  && ${baseline_evidence[defaultIdentity]-} == ok ]] \
+  || fail 'legacy production is not an established baseline'
+[[ ${baseline_evidence[controllerSudo]-} == ok ]] \
+  || fail 'deployment SSH transport sudo scope does not allow the forced controller'
+
 for executable in \
   /usr/bin/node /usr/bin/npm /usr/bin/pnpm /usr/bin/git /usr/bin/tar /usr/bin/getent /usr/bin/df \
+  /usr/bin/sqlite3 /usr/bin/sudo /usr/bin/sha256sum /usr/bin/cut /usr/bin/sync \
   /usr/bin/caddy /usr/bin/curl /usr/bin/systemctl /usr/bin/systemd-analyze /usr/bin/systemd-run \
   /usr/bin/journalctl \
   /usr/bin/flock /usr/bin/ssh-keygen /usr/bin/timeout \
@@ -574,7 +708,8 @@ rollback() {
   if (( key_installed == 1 )); then
     rollback_step restore_file "$backup/authorized_keys" "$AUTHORIZED_KEYS"
   fi
-  rollback_step rm -f "$CONTROLLER" "$CONTROLLER_MODULE" "$TRANSPORT_CONTROLLER"
+  rollback_step rm -f "$CONTROLLER" "$TRANSPORT_CONTROLLER"
+  rollback_step rm -rf "$HOST_CONFIG_ROOT"
   if (( controller_directory_created == 1 )); then
     rollback_step remove_empty_directory "$CONTROLLER_DIRECTORY"
   fi
@@ -609,6 +744,10 @@ initial_health_verified=1
 trap cleanup EXIT
 trap 'rollback $?' ERR
 rollback_armed=1
+
+stage=snapshot-databases
+snapshot_databases
+
 stage=secure-root
 root_hardened=1
 chown root:root "$ROOT"
@@ -716,11 +855,13 @@ for control_file in \
   eqb-release.service \
   eqb-deploy-transport \
   eqb-deploy-controller \
-  eqb-deploy-controller.mjs; do
+  eqb-deploy-controller.mjs \
+  eqb-legacy-baseline-state.mjs; do
   [[ -f $staging/deploy/$control_file && ! -L $staging/deploy/$control_file ]] \
     || fail "trusted deployment control file is unsafe: $control_file"
 done
 /usr/bin/node --check "$staging/deploy/eqb-deploy-controller.mjs"
+/usr/bin/node --check "$staging/deploy/eqb-legacy-baseline-state.mjs"
 /bin/sh -n "$staging/deploy/eqb-deploy-controller"
 /bin/sh -n "$staging/deploy/eqb-deploy-transport"
 /usr/bin/systemd-analyze verify "$staging/deploy/eqb-release.service" >/dev/null
@@ -839,8 +980,47 @@ mv "$staging" "$release"
 ln -s "releases/$TARGET_SHA" "$ROOT/current"
 
 stage=install-controller
+install -d -o root -g root -m 0700 "$HOST_CONFIG_ROOT" "$HOST_CONFIG_ROOT/versions"
+host_config=$HOST_CONFIG_ROOT/versions/$TARGET_SHA
+install -d -o root -g root -m 0755 "$host_config/deploy"
 install -o root -g root -m 0644 \
-  "$release/deploy/eqb-deploy-controller.mjs" "$CONTROLLER_MODULE"
+  "$release/deploy/eqb-deploy-controller.mjs" "$host_config/deploy/eqb-deploy-controller.mjs"
+install -o root -g root -m 0644 \
+  "$release/deploy/eqb-release.service" "$host_config/deploy/eqb-release.service"
+install -o root -g root -m 0644 \
+  "$release/deploy/Caddyfile.release" "$host_config/deploy/Caddyfile.release"
+/usr/bin/node --input-type=module - "$host_config" "$TARGET_SHA" "$release" <<'NODE'
+import crypto from 'node:crypto'
+import fs from 'node:fs'
+import path from 'node:path'
+const [root, sha, release] = process.argv.slice(2)
+const names = [
+  'deploy/Caddyfile.release',
+  'deploy/eqb-release.service',
+  'deploy/eqb-deploy-controller.mjs',
+]
+const files = Object.fromEntries(names.map((name) => [
+  name,
+  crypto.createHash('sha256').update(fs.readFileSync(path.join(root, name))).digest('hex'),
+]))
+const stableLaunchers = Object.fromEntries([
+  'deploy/eqb-deploy-transport',
+  'deploy/eqb-deploy-controller',
+].map((name) => [
+  name,
+  crypto.createHash('sha256').update(fs.readFileSync(path.join(release, name))).digest('hex'),
+]))
+fs.writeFileSync(path.join(root, '.eqb-host-configuration.json'), `${JSON.stringify({
+  schemaVersion: 'eqb-host-configuration-v1',
+  sha,
+  files,
+  stableLaunchers,
+  preparedAt: new Date().toISOString(),
+}, null, 2)}\n`, { mode: 0o600, flag: 'wx' })
+NODE
+chown -hR root:root "$host_config"
+chmod -R u+rwX,go+rX,go-w "$host_config"
+ln -s "versions/$TARGET_SHA" "$HOST_CONFIG_ROOT/current"
 install -o root -g root -m 0755 \
   "$release/deploy/eqb-deploy-controller" "$CONTROLLER"
 install -o root -g root -m 0755 \
@@ -877,7 +1057,13 @@ cat > "$success_receipt" <<EOF
   "state": "reported",
   "conclusion": "success",
   "targetSha": "$TARGET_SHA",
+  "previousSha": "$production_sha",
   "controllerVersion": "eqb-deploy-controller-v1",
+  "databaseSnapshots": {
+    "question-bank.sqlite": "${database_snapshot_digests[question-bank.sqlite]}",
+    "user-data.sqlite": "${database_snapshot_digests[user-data.sqlite]}",
+    "import-ops.sqlite": "${database_snapshot_digests[import-ops.sqlite]}"
+  },
   "finishedAt": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 }
 EOF

@@ -4,6 +4,8 @@ import { execFileSync, spawnSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import {
   chmodSync,
+  copyFileSync,
+  cpSync,
   existsSync,
   linkSync,
   mkdirSync,
@@ -21,49 +23,95 @@ import path from 'node:path'
 
 import {
   AMP_ORB_DEPLOY_RECEIPT_SCHEMA_VERSION,
+  EQB_HOST_CONFIGURATION_PATHS,
+  EQB_PERSISTENCE_AUTHORITY_PATHS,
+  EQB_STABLE_LAUNCHER_PATHS,
+  abandonReleaseBootstrapRecovery,
   activatePreparedRelease,
   assertDeploymentCandidateStillCurrent,
   assertAuthoritativeDeploymentChecks,
   bootstrapPayloadStageInput,
   bootstrapReleaseLayout,
+  classifyReleaseBootstrapJournal,
+  classifyReleaseBootstrapOutcome,
+  clearAbandonedReleaseBootstrapRecovery,
   clearCompletedReleaseBootstrapRecovery,
   completeReleaseBootstrapRecovery,
   createReleaseBootstrapRecovery,
   currentReleaseSha,
+  deployReviewedPersistenceLatest,
   deployLatestRelease,
+  deploymentChangedPathDigest,
   deploymentGitHubApiArgs,
   deploymentLockInvocation,
   deploymentSSHInvocation,
   deploymentSSHTransportUser,
+  isSshPublicKeyAuthenticationDenied,
   materializeDeploymentCredentials,
   migrateLegacyProductionBaseline,
   parseBootstrapKeyRetirementReceipt,
   parseDeploymentControllerOutput,
   parseDeploymentControllerPreflight,
   parseDeploymentPreflightOutput,
+  parseHostConfigurationControllerOutput,
   parseLegacyBaselineReceipt,
+  parseMaintenanceInstallReadiness,
+  parseOpenSshEd25519PublicKeyBody,
+  parseReviewedPersistenceControllerOutput,
+  parseReleaseBootstrapCancellation,
   parseReleaseBootstrapFailure,
+  readAbandonedReleaseBootstrapRecovery,
   readCompletedReleaseBootstrapRecovery,
   readReleaseBootstrapRecovery,
   removeReleaseBootstrapRecovery,
   requireDeployLatestAuthorization,
   requireLegacyBaselineAuthorization,
+  requireMaintenanceInstallReadinessAuthorization,
   requireReleaseLayoutBootstrapAuthorization,
+  requireReleaseLayoutBootstrapAbandonAuthorization,
   requireReleaseLayoutBootstrapResumeAuthorization,
+  requireReviewedPersistenceDeployAuthorization,
+  requireUpdateHostConfigurationAuthorization,
   resumeReleaseLayoutBootstrap,
   resolveLatestDeploymentCandidate,
+  updateLatestHostConfiguration,
 } from './lib/ampOrbDeploy.mjs'
 import {
+  buildMaintenanceReadinessTatCommand,
+  createTencentCloudApiRequest,
+  executeTencentTatCommand,
+  readTencentTatConfiguration,
+  tencentTatTargetDigest,
+} from './lib/tencentTat.mjs'
+import {
   EQB_DEPLOY_CONTROLLER_VERSION,
+  HOST_CONFIGURATION_PATHS,
+  PERSISTENCE_AUTHORITY_PATHS,
+  STABLE_LAUNCHER_PATHS,
+  formatControllerOutput,
   parseControllerCommand,
   runController,
 } from '../deploy/eqb-deploy-controller.mjs'
+import {
+  controllerSudoAllowed,
+  inspectLegacyBaselineState,
+  legacyReleaseChildProof,
+} from '../deploy/eqb-legacy-baseline-state.mjs'
 import { createVerifier, readText, repoRootFrom } from './lib/verifyScope.mjs'
 
 const ROOT = repoRootFrom(import.meta.url)
 const { assert, section, summary } = createVerifier('Amp Orb production deployment contract')
 const oldSha = '1'.repeat(40)
 const newSha = '2'.repeat(40)
+
+function fakeTencentResponse(response, { ok = true } = {}) {
+  return {
+    ok,
+    async text() {
+      return JSON.stringify({ Response: response })
+    },
+  }
+}
 
 function checkRun(name, sha, {
   id,
@@ -138,6 +186,36 @@ assert(
   })(),
   'caller-supplied deployment SHA is rejected',
 )
+for (const [authorize, argv, label] of [
+  [
+    requireReviewedPersistenceDeployAuthorization,
+    ['reviewed-persistence', '--owner-said-reviewed-persistence-deploy'],
+    'reviewed-persistence deployment',
+  ],
+  [
+    requireUpdateHostConfigurationAuthorization,
+    ['update-host-config', '--owner-said-update-host-config'],
+    'host configuration update',
+  ],
+  [
+    requireMaintenanceInstallReadinessAuthorization,
+    ['maintenance-install-readiness', '--owner-said-maintenance-install-readiness'],
+    'Tencent maintenance-install readiness',
+  ],
+]) {
+  assert((() => {
+    authorize(argv)
+    return true
+  })(), `${label} requires its distinct Owner authorization`)
+  assert((() => {
+    try {
+      authorize([argv[0], '--sha', newSha])
+      return false
+    } catch {
+      return true
+    }
+  })(), `${label} rejects a caller-selected SHA or missing authorization`)
+}
 assert(
   (() => {
     requireReleaseLayoutBootstrapResumeAuthorization([
@@ -335,7 +413,7 @@ function controllerReceipt({
   conclusion = 'success',
   failureCode = null,
 } = {}) {
-  return JSON.stringify({
+  return `EQB_DEPLOY_RECEIPT ${JSON.stringify({
     schemaVersion: 'eqb-deployment-receipt-v2',
     controllerVersion: 'eqb-deploy-controller-v1',
     state: 'reported',
@@ -350,7 +428,7 @@ function controllerReceipt({
     startedAt: '2026-09-02T00:00:00.000Z',
     finishedAt: '2026-09-02T00:01:00.000Z',
     receiptPath: `/opt/eqb/deployments/receipts/20260902-${targetSha}-fixture.json`,
-  })
+  })}`
 }
 
 const parsedControllerReceipt = parseDeploymentControllerOutput(
@@ -427,6 +505,7 @@ for (const [label, output] of [
   ['unexpected field', controllerReceipt().replace(/\}\s*$/u, ',"extra":true}')],
   ['another SHA', controllerReceipt({ targetSha: oldSha })],
   ['non-JSON', 'deployment succeeded'],
+  ['duplicate marker', `${controllerReceipt()}\n${controllerReceipt()}`],
 ]) {
   assert(
     (() => {
@@ -440,6 +519,11 @@ for (const [label, output] of [
     `${label} controller response fails closed`,
   )
 }
+assert(
+  parseDeploymentControllerOutput(`diagnostic noise\n${controllerReceipt()}\n`, newSha).targetSha
+    === newSha,
+  'controller receipt marker survives unrelated journal output',
+)
 
 const controllerPreflight = parseDeploymentControllerPreflight(JSON.stringify({
   schemaVersion: 'eqb-deployment-preflight-v2',
@@ -450,6 +534,536 @@ const controllerPreflight = parseDeploymentControllerPreflight(JSON.stringify({
   layout: 'release',
 }))
 assert(controllerPreflight.productionSha === oldSha, 'fixed controller preflight is parsed strictly')
+assert(
+  parseDeploymentControllerPreflight(formatControllerOutput(controllerPreflight)).productionSha === oldSha,
+  'controller entrypoint keeps read-only preflight as strict raw JSON',
+)
+assert(
+  parseDeploymentControllerOutput(
+    formatControllerOutput(JSON.parse(controllerReceipt().slice('EQB_DEPLOY_RECEIPT '.length))),
+    newSha,
+  ).targetSha === newSha,
+  'controller entrypoint marks deployment receipts without exposing them to journal noise',
+)
+
+const maintenanceInstallDigest = '9'.repeat(64)
+const maintenanceInstallTransportUser = 'deploy-transport'
+const maintenanceInstallReport = {
+  schemaVersion: 'eqb-maintenance-install-readiness-v1',
+  state: 'ready',
+  failureCode: null,
+  targetSha: newSha,
+  payloadDigest: maintenanceInstallDigest,
+  productionSha: oldSha,
+  layout: 'release',
+  deploymentLockMode: '0644',
+  transportUser: maintenanceInstallTransportUser,
+  transportUid: 1001,
+  availableBytes: 6 * 1024 * 1024 * 1024,
+  controllerModuleSha256: 'a'.repeat(64),
+  rootWrapperSha256: 'b'.repeat(64),
+  transportWrapperSha256: 'c'.repeat(64),
+  unitSha256: 'd'.repeat(64),
+  caddyfileSha256: 'e'.repeat(64),
+}
+const maintenanceInstallOutput = (report = maintenanceInstallReport) =>
+  `EQB_MAINTENANCE_INSTALL_READINESS ${JSON.stringify(report)}`
+assert(
+  parseMaintenanceInstallReadiness(
+    maintenanceInstallOutput(),
+    newSha,
+    maintenanceInstallDigest,
+    maintenanceInstallTransportUser,
+  ).state === 'ready',
+  'maintenance-install readiness binds one exact target, payload, identity, and host evidence shape',
+)
+for (const [label, output, expectedDigest = maintenanceInstallDigest] of [
+  ['unexpected field', maintenanceInstallOutput({ ...maintenanceInstallReport, extra: true })],
+  ['another target', maintenanceInstallOutput({ ...maintenanceInstallReport, targetSha: oldSha })],
+  ['another payload', maintenanceInstallOutput(), '8'.repeat(64)],
+  [
+    'low disk evidence',
+    maintenanceInstallOutput({ ...maintenanceInstallReport, availableBytes: 1024 }),
+  ],
+  [
+    'writable deployment lock',
+    maintenanceInstallOutput({ ...maintenanceInstallReport, deploymentLockMode: '0666' }),
+  ],
+  ['non-JSON', 'EQB_MAINTENANCE_INSTALL_READINESS ready'],
+  [
+    'duplicate marker',
+    `${maintenanceInstallOutput()}\n${maintenanceInstallOutput()}`,
+  ],
+]) {
+  assert(
+    (() => {
+      try {
+        parseMaintenanceInstallReadiness(
+          output,
+          newSha,
+          expectedDigest,
+          maintenanceInstallTransportUser,
+        )
+        return false
+      } catch {
+        return true
+      }
+    })(),
+    `maintenance-install readiness rejects ${label}`,
+  )
+}
+assert(
+  parseMaintenanceInstallReadiness(
+    maintenanceInstallOutput({
+      ...Object.fromEntries(Object.keys(maintenanceInstallReport).map((key) => [key, null])),
+      schemaVersion: 'eqb-maintenance-install-readiness-v1',
+      state: 'failed',
+      failureCode: 'HOST_CONFIGURATION_ALREADY_PRESENT',
+      targetSha: newSha,
+      payloadDigest: maintenanceInstallDigest,
+      transportUser: maintenanceInstallTransportUser,
+    }),
+    newSha,
+    maintenanceInstallDigest,
+    maintenanceInstallTransportUser,
+  ).failureCode === 'HOST_CONFIGURATION_ALREADY_PRESENT',
+  'maintenance-install readiness preserves one strict fail-closed blocker marker',
+)
+
+const officialTencentSignatureVector = createTencentCloudApiRequest({
+  action: 'DescribeInstances',
+  payload: { Action: 'DescribeInstances', Version: '2017-03-12' },
+  secretId: 'test-secret-id',
+  secretKey: 'test-secret-key',
+  region: 'ap-guangzhou',
+  timestamp: 1640995200,
+  host: 'cvm.tencentcloudapi.com',
+  service: 'cvm',
+  version: '2017-03-12',
+})
+assert(
+  officialTencentSignatureVector.headers.Authorization
+    === 'TC3-HMAC-SHA256 Credential=test-secret-id/2022-01-01/cvm/tc3_request, SignedHeaders=content-type;host, Signature=96473b50fe407833672a5d6d067238d88bb44c8abcc39ef83baa3132afbfadd3',
+  'Tencent API signer matches the official SDK deterministic TC3-HMAC-SHA256 vector',
+)
+
+const tencentTatConfiguration = readTencentTatConfiguration({
+  TENCENTCLOUD_SECRET_ID: 'AKID-test-id',
+  TENCENTCLOUD_SECRET_KEY: 'test-secret-key',
+  TENCENTCLOUD_SESSION_TOKEN: 'test-session-token',
+  TENCENTCLOUD_REGION: 'ap-guangzhou',
+  QUESTION_BANK_TENCENT_TAT_INSTANCE_ID: 'ins-12345678',
+})
+assert(
+  tencentTatTargetDigest(tencentTatConfiguration)
+    === createHash('sha256').update('ap-guangzhou\0ins-12345678').digest('hex')
+    && !tencentTatTargetDigest(tencentTatConfiguration).includes('ins-12345678'),
+  'Tencent TAT configuration binds one opaque exact region and CVM target',
+)
+for (const [label, environment] of [
+  ['missing credentials', {}],
+  [
+    'invalid region',
+    {
+      TENCENTCLOUD_SECRET_ID: 'id',
+      TENCENTCLOUD_SECRET_KEY: 'key',
+      TENCENTCLOUD_REGION: 'https://example.com',
+      QUESTION_BANK_TENCENT_TAT_INSTANCE_ID: 'ins-12345678',
+    },
+  ],
+  [
+    'non-CVM target',
+    {
+      TENCENTCLOUD_SECRET_ID: 'id',
+      TENCENTCLOUD_SECRET_KEY: 'key',
+      TENCENTCLOUD_REGION: 'ap-guangzhou',
+      QUESTION_BANK_TENCENT_TAT_INSTANCE_ID: 'lhins-12345678',
+    },
+  ],
+]) {
+  assert(
+    (() => {
+      try {
+        readTencentTatConfiguration(environment)
+        return false
+      } catch {
+        return true
+      }
+    })(),
+    `Tencent TAT configuration rejects ${label}`,
+  )
+}
+
+const maintenanceTatCommand = buildMaintenanceReadinessTatCommand({
+  inspectorSource: '#!/usr/bin/env bash\nprintf \'inspected\\n\'\n',
+  targetSha: newSha,
+  payloadDigest: maintenanceInstallDigest,
+  transportUser: maintenanceInstallTransportUser,
+})
+assert(
+  maintenanceTatCommand.startsWith('#!/usr/bin/env bash\nset -Eeuo pipefail\n')
+    && maintenanceTatCommand.includes(
+      '/usr/bin/env -i PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin \\\n',
+    )
+    && maintenanceTatCommand.includes(
+      `/bin/bash -s -- '${newSha}' '${maintenanceInstallDigest}' '${maintenanceInstallTransportUser}'`,
+    )
+    && maintenanceTatCommand.includes("<<'EQB_INSPECTOR_")
+    && maintenanceTatCommand.includes("printf 'inspected\\n'"),
+  'Tencent TAT command streams the exact inspector to cleared-environment bash stdin',
+)
+
+let tencentNow = 1640995200000
+const tencentCalls = []
+let invocationPollCount = 0
+const tencentSuccess = await executeTencentTatCommand({
+  command: maintenanceTatCommand,
+  commandName: 'eqb-maint-readiness-test',
+  configuration: tencentTatConfiguration,
+  now: () => tencentNow,
+  sleep: async (milliseconds) => { tencentNow += milliseconds },
+  pollIntervalMs: 10,
+  fetchImpl: async (url, options) => {
+    const action = options.headers['X-TC-Action']
+    const payload = JSON.parse(options.body)
+    tencentCalls.push({ url, action, payload, headers: options.headers })
+    if (action === 'RunCommand') {
+      return fakeTencentResponse({
+        CommandId: 'cmd-12345678',
+        InvocationId: 'inv-12345678',
+        RequestId: 'request-run',
+      })
+    }
+    if (action === 'DescribeInvocations') {
+      invocationPollCount += 1
+      if (invocationPollCount === 1) {
+        return fakeTencentResponse({
+          TotalCount: 1,
+          InvocationSet: [{
+            InvocationId: 'inv-12345678',
+            InvocationStatus: 'RUNNING',
+          }],
+          RequestId: 'request-pending',
+        })
+      }
+      return fakeTencentResponse({
+        TotalCount: 1,
+        InvocationSet: [{
+          InvocationId: 'inv-12345678',
+          InvocationStatus: 'SUCCESS',
+          InvocationTaskBasicInfoSet: [{
+            InvocationTaskId: 'invt-12345678',
+            TaskStatus: 'SUCCESS',
+            InstanceId: tencentTatConfiguration.instanceId,
+          }],
+        }],
+        RequestId: 'request-complete',
+      })
+    }
+    return fakeTencentResponse({
+      TotalCount: 1,
+      InvocationTaskSet: [{
+        InvocationId: 'inv-12345678',
+        InvocationTaskId: 'invt-12345678',
+        InstanceId: tencentTatConfiguration.instanceId,
+        TaskStatus: 'SUCCESS',
+        TaskResult: {
+          ExitCode: 0,
+          Output: Buffer.from(maintenanceInstallOutput()).toString('base64'),
+          Dropped: 0,
+        },
+      }],
+      RequestId: 'request-task',
+    })
+  },
+})
+const runCommandCall = tencentCalls.find((call) => call.action === 'RunCommand')
+const invocationCalls = tencentCalls.filter((call) => call.action === 'DescribeInvocations')
+const taskCall = tencentCalls.find((call) => call.action === 'DescribeInvocationTasks')
+assert(
+  tencentSuccess.exitCode === 0
+    && tencentSuccess.taskStatus === 'SUCCESS'
+    && tencentSuccess.output === maintenanceInstallOutput()
+    && tencentCalls.filter((call) => call.action === 'RunCommand').length === 1
+    && invocationCalls.length === 2
+    && runCommandCall.url === 'https://tat.tencentcloudapi.com/'
+    && runCommandCall.payload.InstanceIds.length === 1
+    && runCommandCall.payload.InstanceIds[0] === tencentTatConfiguration.instanceId
+    && runCommandCall.payload.Username === 'root'
+    && runCommandCall.payload.CommandType === 'SHELL'
+    && runCommandCall.payload.SaveCommand === false
+    && runCommandCall.payload.EnableParameter === false
+    && Buffer.from(runCommandCall.payload.Content, 'base64').toString('utf8')
+      === maintenanceTatCommand
+    && runCommandCall.headers['X-TC-Token'] === 'test-session-token'
+    && invocationCalls.every((call) => (
+      call.payload.InvocationIds.length === 1
+      && call.payload.InvocationIds[0] === 'inv-12345678'
+    ))
+    && taskCall.payload.HideOutput === false
+    && taskCall.payload.InvocationTaskIds[0] === 'invt-12345678',
+  'Tencent TAT transport dispatches once, polls one invocation, and returns exact undropped output',
+)
+
+const maintenanceFailureOutput = maintenanceInstallOutput({
+  ...Object.fromEntries(Object.keys(maintenanceInstallReport).map((key) => [key, null])),
+  schemaVersion: 'eqb-maintenance-install-readiness-v1',
+  state: 'failed',
+  failureCode: 'HOST_CONFIGURATION_ALREADY_PRESENT',
+  targetSha: newSha,
+  payloadDigest: maintenanceInstallDigest,
+  transportUser: maintenanceInstallTransportUser,
+})
+const tencentFailedReadiness = await executeTencentTatCommand({
+  command: maintenanceTatCommand,
+  commandName: 'eqb-maint-readiness-failed',
+  configuration: tencentTatConfiguration,
+  fetchImpl: async (_url, options) => {
+    if (options.headers['X-TC-Action'] === 'RunCommand') {
+      return fakeTencentResponse({
+        CommandId: 'cmd-failure1',
+        InvocationId: 'inv-failure1',
+      })
+    }
+    if (options.headers['X-TC-Action'] === 'DescribeInvocations') {
+      return fakeTencentResponse({
+        TotalCount: 1,
+        InvocationSet: [{
+          InvocationId: 'inv-failure1',
+          InvocationStatus: 'FAILED',
+          InvocationTaskBasicInfoSet: [{
+            InvocationTaskId: 'invt-failure1',
+            TaskStatus: 'FAILED',
+            InstanceId: tencentTatConfiguration.instanceId,
+          }],
+        }],
+      })
+    }
+    return fakeTencentResponse({
+      TotalCount: 1,
+      InvocationTaskSet: [{
+        InvocationId: 'inv-failure1',
+        InvocationTaskId: 'invt-failure1',
+        InstanceId: tencentTatConfiguration.instanceId,
+        TaskStatus: 'FAILED',
+        TaskResult: {
+          ExitCode: 1,
+          Output: Buffer.from(maintenanceFailureOutput).toString('base64'),
+          Dropped: 0,
+        },
+      }],
+    })
+  },
+})
+assert(
+  tencentFailedReadiness.exitCode === 1
+    && parseMaintenanceInstallReadiness(
+      tencentFailedReadiness.output,
+      newSha,
+      maintenanceInstallDigest,
+      maintenanceInstallTransportUser,
+    ).failureCode === 'HOST_CONFIGURATION_ALREADY_PRESENT',
+  'Tencent TAT transport preserves a strict failed readiness marker and remote exit code',
+)
+
+let unknownDispatchCalls = 0
+assert(
+  await (async () => {
+    try {
+      await executeTencentTatCommand({
+        command: maintenanceTatCommand,
+        commandName: 'eqb-maint-readiness-unknown',
+        configuration: tencentTatConfiguration,
+        fetchImpl: async () => {
+          unknownDispatchCalls += 1
+          throw new Error('connection reset')
+        },
+      })
+      return false
+    } catch (error) {
+      return error.message.includes('outcome is unknown') && unknownDispatchCalls === 1
+    }
+  })(),
+  'Tencent TAT transport never retries an ambiguous RunCommand dispatch',
+)
+
+let truncatedCall = 0
+assert(
+  await (async () => {
+    try {
+      await executeTencentTatCommand({
+        command: maintenanceTatCommand,
+        commandName: 'eqb-maint-readiness-truncated',
+        configuration: tencentTatConfiguration,
+        fetchImpl: async (_url, options) => {
+          truncatedCall += 1
+          if (options.headers['X-TC-Action'] === 'RunCommand') {
+            return fakeTencentResponse({
+              CommandId: 'cmd-abcdefgh',
+              InvocationId: 'inv-abcdefgh',
+            })
+          }
+          if (options.headers['X-TC-Action'] === 'DescribeInvocations') {
+            return fakeTencentResponse({
+              TotalCount: 1,
+              InvocationSet: [{
+                InvocationId: 'inv-abcdefgh',
+                InvocationStatus: 'SUCCESS',
+                InvocationTaskBasicInfoSet: [{
+                  InvocationTaskId: 'invt-abcdefgh',
+                  TaskStatus: 'SUCCESS',
+                  InstanceId: tencentTatConfiguration.instanceId,
+                }],
+              }],
+            })
+          }
+          return fakeTencentResponse({
+            TotalCount: 1,
+            InvocationTaskSet: [{
+              InvocationId: 'inv-abcdefgh',
+              InvocationTaskId: 'invt-abcdefgh',
+              InstanceId: tencentTatConfiguration.instanceId,
+              TaskStatus: 'SUCCESS',
+              TaskResult: {
+                ExitCode: 0,
+                Output: Buffer.from(maintenanceInstallOutput()).toString('base64'),
+                Dropped: 1,
+              },
+            }],
+          })
+        },
+      })
+      return false
+    } catch (error) {
+      return error.message.includes('invalid or truncated') && truncatedCall === 3
+    }
+  })(),
+  'Tencent TAT transport rejects truncated task output before receipt parsing',
+)
+
+const persistencePaths = ['server/api.mjs']
+const persistenceDigest = deploymentChangedPathDigest(persistencePaths)
+function reviewedPersistenceOutput({ conclusion = 'success', failureCode = null } = {}) {
+  return `EQB_REVIEWED_PERSISTENCE_RECEIPT ${JSON.stringify({
+    schemaVersion: 'eqb-reviewed-persistence-receipt-v1',
+    controllerVersion: 'eqb-deploy-controller-v1',
+    state: 'reported',
+    conclusion,
+    targetSha: newSha,
+    previousSha: oldSha,
+    staged: true,
+    changedPersistencePaths: persistencePaths,
+    changedPersistencePathsDigest: persistenceDigest,
+    databaseSnapshots: {
+      'question-bank.sqlite': 'a'.repeat(64),
+      'user-data.sqlite': 'b'.repeat(64),
+      'import-ops.sqlite': 'c'.repeat(64),
+    },
+    trafficReopened: conclusion === 'success',
+    rolledBack: conclusion === 'failure',
+    databasesRestored: conclusion === 'failure',
+    rollbackHealthy: conclusion === 'failure' ? true : null,
+    recovered: false,
+    failureCode,
+    startedAt: '2026-09-03T00:00:00.000Z',
+    finishedAt: '2026-09-03T00:01:00.000Z',
+    receiptPath: `/opt/eqb/deployments/receipts/reviewed-persistence-${newSha}.json`,
+  })}`
+}
+assert(
+  parseReviewedPersistenceControllerOutput(
+    reviewedPersistenceOutput(),
+    newSha,
+    persistenceDigest,
+  ).trafficReopened,
+  'reviewed-persistence receipt binds the exact path digest and traffic boundary',
+)
+assert(
+  (() => {
+    try {
+      parseReviewedPersistenceControllerOutput(
+        reviewedPersistenceOutput(),
+        newSha,
+        'd'.repeat(64),
+      )
+      return false
+    } catch {
+      return true
+    }
+  })(),
+  'reviewed-persistence receipt for another reviewed diff fails closed',
+)
+const reviewedOrder = []
+const reviewedLatest = await deployReviewedPersistenceLatest({
+  argv: ['reviewed-persistence', '--owner-said-reviewed-persistence-deploy'],
+  resolveCandidate: async () => {
+    reviewedOrder.push('resolve')
+    return candidate
+  },
+  readMainSha: async () => {
+    reviewedOrder.push('main')
+    return newSha
+  },
+  readProductionSha: async () => {
+    reviewedOrder.push('production')
+    return oldSha
+  },
+  readChangedPaths: async (_previous, _target, paths) => {
+    reviewedOrder.push(paths === EQB_PERSISTENCE_AUTHORITY_PATHS ? 'diff' : 'wrong-diff')
+    return persistencePaths
+  },
+  invokeController: async (sha, digest) => {
+    reviewedOrder.push(`controller:${sha}:${digest}`)
+    return reviewedPersistenceOutput()
+  },
+})
+assert(
+  reviewedLatest.changedPathsDigest === persistenceDigest
+    && reviewedOrder.join(',')
+      === `resolve,main,production,diff,main,controller:${newSha}:${persistenceDigest}`,
+  'reviewed-persistence resolves CI main, binds the protected diff, rechecks main, then invokes host',
+)
+
+const hostPaths = ['deploy/eqb-deploy-controller.mjs']
+const hostDigest = deploymentChangedPathDigest(hostPaths)
+function hostConfigurationOutput({ conclusion = 'success', failureCode = null } = {}) {
+  return `EQB_HOST_CONFIGURATION_RECEIPT ${JSON.stringify({
+    schemaVersion: 'eqb-host-configuration-receipt-v1',
+    controllerVersion: 'eqb-deploy-controller-v1',
+    state: 'reported',
+    conclusion,
+    targetSha: newSha,
+    previousHostConfigurationSha: oldSha,
+    changedHostConfigurationPaths: hostPaths,
+    changedHostConfigurationPathsDigest: hostDigest,
+    staged: true,
+    installed: conclusion === 'success',
+    noOp: false,
+    rolledBack: conclusion === 'failure',
+    rollbackHealthy: conclusion === 'failure' ? true : null,
+    recovered: false,
+    failureCode,
+    startedAt: '2026-09-03T00:00:00.000Z',
+    finishedAt: '2026-09-03T00:01:00.000Z',
+    receiptPath: `/opt/eqb/deployments/receipts/host-configuration-${newSha}.json`,
+  })}`
+}
+assert(
+  parseHostConfigurationControllerOutput(hostConfigurationOutput(), newSha, hostDigest).installed,
+  'host-configuration receipt binds one exact version and reviewed path digest',
+)
+const updatedHost = await updateLatestHostConfiguration({
+  argv: ['update-host-config', '--owner-said-update-host-config'],
+  resolveCandidate: async () => candidate,
+  readMainSha: async () => newSha,
+  readProductionSha: async () => oldSha,
+  readChangedPaths: async (_previous, _target, paths) => {
+    assert(paths === EQB_HOST_CONFIGURATION_PATHS, 'host update compares only its fixed file set')
+    return hostPaths
+  },
+  invokeController: async () => hostConfigurationOutput(),
+})
+assert(updatedHost.changedPathsDigest === hostDigest, 'host update reaches the controller with exact diff evidence')
 
 section('One-time baseline migration and release-layout bootstrap')
 
@@ -478,6 +1092,26 @@ for (const [authorize, argv, label] of [
     }
   })(), `${label} rejects an Owner-supplied SHA`)
 }
+assert((() => {
+  requireReleaseLayoutBootstrapAbandonAuthorization([
+    'bootstrap-abandon',
+    '--owner-said-release-bootstrap-abandon',
+  ])
+  return true
+})(), 'failed bootstrap abandonment accepts only its separate Owner authorization')
+assert((() => {
+  try {
+    requireReleaseLayoutBootstrapAbandonAuthorization([
+      'bootstrap-abandon',
+      '--owner-said-release-bootstrap-abandon',
+      '--sha',
+      newSha,
+    ])
+    return false
+  } catch {
+    return true
+  }
+})(), 'bootstrap abandonment target cannot be supplied outside private recovery state')
 
 function legacyBaselineReceipt({
   targetSha = newSha,
@@ -584,12 +1218,249 @@ for (const [label, output] of [
   })(), `${label} baseline response fails closed`)
 }
 
+function legacyBaselineStateFixture({ withSuccess = true, withFailure = false } = {}) {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'eqb-legacy-baseline-state-'))
+  const productionRoot = path.join(fixtureRoot, 'opt', 'eqb')
+  const repo = path.join(productionRoot, 'english-question-bank')
+  const backupRoot = path.join(fixtureRoot, 'backups')
+  const home = path.join(fixtureRoot, 'home', 'eqb')
+  const sshDirectory = path.join(home, '.ssh')
+  const defaultIdentity = path.join(sshDirectory, 'id_ed25519')
+  mkdirSync(repo, { recursive: true })
+  mkdirSync(backupRoot, { recursive: true })
+  mkdirSync(sshDirectory, { recursive: true })
+  chmodSync(backupRoot, 0o700)
+  chmodSync(sshDirectory, 0o700)
+  writeFileSync(defaultIdentity, 'private fixture identity\n')
+  chmodSync(defaultIdentity, 0o600)
+
+  const writeEvidence = (name, receipt, { quarantine = false } = {}) => {
+    const evidence = path.join(backupRoot, name)
+    mkdirSync(evidence, { mode: 0o700 })
+    chmodSync(evidence, 0o700)
+    const receiptPath = path.join(evidence, 'receipt.json')
+    writeFileSync(receiptPath, `${receipt}\n`)
+    chmodSync(receiptPath, 0o600)
+    if (!quarantine) return { evidence, receiptPath }
+    const quarantineDirectory = path.join(evidence, 'quarantine')
+    const wrapper = path.join(quarantineDirectory, 'releases')
+    const child = path.join(wrapper, 'legacy-release')
+    mkdirSync(child, { recursive: true })
+    chmodSync(quarantineDirectory, 0o700)
+    chmodSync(wrapper, 0o755)
+    const publicFile = path.join(child, 'app', 'dist', 'index.html')
+    mkdirSync(path.dirname(publicFile), { recursive: true })
+    writeFileSync(publicFile, 'legacy public fixture\n')
+    return { evidence, receiptPath, quarantineDirectory, wrapper, child, publicFile }
+  }
+
+  const success = withSuccess
+    ? writeEvidence('baseline-success', legacyBaselineReceipt(), { quarantine: true })
+    : null
+  const failure = withFailure
+    ? writeEvidence('baseline-failure', legacyBaselineReceipt({
+        conclusion: 'failure',
+        targetSha: newSha,
+        previousSha: oldSha,
+        productionSha: oldSha,
+        failureCode: 'build-runtime:generated-dist-mode',
+        rollbackHealthy: true,
+        identityInstalled: false,
+        quarantinePreserved: false,
+      }))
+    : null
+  const proof = success ? legacyReleaseChildProof(success.wrapper) : null
+  const inspect = ({
+    expectedChildDigest = proof?.digest || '0'.repeat(64),
+    expectedChildFileCount = proof?.fileCount || 1,
+  } = {}) => inspectLegacyBaselineState({
+    repo,
+    backupRoot,
+    home,
+    expectedHead: newSha,
+    expectedChildDigest,
+    expectedChildFileCount,
+    rootUid: process.getuid(),
+    sourceUid: process.getuid(),
+    sourceGid: process.getgid(),
+  })
+  return {
+    fixtureRoot,
+    productionRoot,
+    repo,
+    backupRoot,
+    home,
+    sshDirectory,
+    defaultIdentity,
+    success,
+    failure,
+    proof,
+    inspect,
+  }
+}
+
+{
+  const fixture = legacyBaselineStateFixture({ withFailure: true })
+  try {
+    const state = fixture.inspect()
+    assert(
+      state.baselineState === 'established'
+        && state.baselineReceipts === 1
+        && state.baselineFailedReceipts === 1
+        && state.quarantineChildren === 1
+        && state.liveReleaseLayout === 'absent'
+        && state.defaultIdentity === 'ok',
+      'executable inspector recognizes one exact consumed baseline and ignores one valid failed attempt',
+    )
+    const currentUser = execFileSync('/usr/bin/id', ['-un'], { encoding: 'utf8' }).trim()
+    const inspected = spawnSync(process.execPath, [
+      path.join(ROOT, 'deploy', 'eqb-legacy-baseline-state.mjs'),
+      fixture.repo,
+      fixture.backupRoot,
+      fixture.home,
+      newSha,
+      fixture.proof.digest,
+      String(fixture.proof.fileCount),
+      currentUser,
+      currentUser,
+    ], { encoding: 'utf8' })
+    assert(
+      inspected.status === 0
+        && inspected.stdout.includes('baselineState=established\n')
+        && inspected.stdout.includes('controllerSudo=invalid\n')
+        && inspected.stdout.trim().split('\n').length === 7,
+      'inspector entrypoint emits the complete strict host-evidence shape',
+    )
+  } finally {
+    rmSync(fixture.fixtureRoot, { recursive: true, force: true })
+  }
+}
+
+{
+  const fixture = legacyBaselineStateFixture({ withSuccess: false, withFailure: true })
+  try {
+    const state = fixture.inspect()
+    assert(
+      state.baselineState === 'absent'
+        && state.baselineReceipts === 0
+        && state.baselineFailedReceipts === 1,
+      'failed-only evidence remains an unconsumed baseline state',
+    )
+  } finally {
+    rmSync(fixture.fixtureRoot, { recursive: true, force: true })
+  }
+}
+
+{
+  const fixture = legacyBaselineStateFixture({ withSuccess: false })
+  try {
+    const state = fixture.inspect()
+    assert(
+      state.baselineState === 'absent'
+        && state.baselineReceipts === 0
+        && state.baselineFailedReceipts === 0,
+      'zero baseline receipts remains an unconsumed baseline state',
+    )
+  } finally {
+    rmSync(fixture.fixtureRoot, { recursive: true, force: true })
+  }
+}
+
+const invalidLegacyBaselineFixtures = [
+  ['two success receipts', (fixture) => {
+    cpSync(fixture.success.evidence, path.join(fixture.backupRoot, 'baseline-success-copy'), {
+      recursive: true,
+    })
+  }],
+  ['success receipt for another SHA', (fixture) => {
+    const receipt = JSON.parse(readFileSync(fixture.success.receiptPath, 'utf8'))
+    receipt.targetSha = oldSha
+    writeFileSync(fixture.success.receiptPath, `${JSON.stringify(receipt)}\n`)
+    chmodSync(fixture.success.receiptPath, 0o600)
+  }],
+  ['success receipt without a prior SHA', (fixture) => {
+    const receipt = JSON.parse(readFileSync(fixture.success.receiptPath, 'utf8'))
+    receipt.previousSha = newSha
+    writeFileSync(fixture.success.receiptPath, `${JSON.stringify(receipt)}\n`)
+    chmodSync(fixture.success.receiptPath, 0o600)
+  }],
+  ['wrong receipt schema', (fixture) => {
+    const receipt = JSON.parse(readFileSync(fixture.success.receiptPath, 'utf8'))
+    receipt.schemaVersion = 'eqb-legacy-baseline-receipt-v2'
+    writeFileSync(fixture.success.receiptPath, `${JSON.stringify(receipt)}\n`)
+    chmodSync(fixture.success.receiptPath, 0o600)
+  }],
+  ['receipt that claims bootstrap ran', (fixture) => {
+    const receipt = JSON.parse(readFileSync(fixture.success.receiptPath, 'utf8'))
+    receipt.bootstrapRun = true
+    writeFileSync(fixture.success.receiptPath, `${JSON.stringify(receipt)}\n`)
+    chmodSync(fixture.success.receiptPath, 0o600)
+  }],
+  ['world-readable success receipt', (fixture) => {
+    chmodSync(fixture.success.receiptPath, 0o644)
+  }],
+  ['zero quarantine children', (fixture) => {
+    rmSync(fixture.success.child, { recursive: true, force: true })
+  }],
+  ['two quarantine children', (fixture) => {
+    mkdirSync(path.join(fixture.success.wrapper, 'second-release'))
+  }],
+  ['wrong quarantine digest', (_fixture, inspectOptions) => {
+    inspectOptions.expectedChildDigest = 'f'.repeat(64)
+  }],
+  ['special quarantine node', (fixture) => {
+    symlinkSync('index.html', path.join(path.dirname(fixture.success.publicFile), 'linked.html'))
+  }],
+  ['missing default identity', (fixture) => {
+    rmSync(fixture.defaultIdentity)
+  }],
+  ['linked default identity', (fixture) => {
+    rmSync(fixture.defaultIdentity)
+    const target = path.join(fixture.home, 'identity-target')
+    writeFileSync(target, 'identity target\n')
+    chmodSync(target, 0o600)
+    symlinkSync(target, fixture.defaultIdentity)
+  }],
+  ['multiply-linked default identity', (fixture) => {
+    linkSync(fixture.defaultIdentity, path.join(fixture.home, 'second-identity-link'))
+  }],
+  ['world-readable default identity', (fixture) => {
+    chmodSync(fixture.defaultIdentity, 0o644)
+  }],
+  ['legacy RSA fallback identity', (fixture) => {
+    const rsa = path.join(fixture.sshDirectory, 'id_rsa')
+    writeFileSync(rsa, 'legacy RSA fixture\n')
+    chmodSync(rsa, 0o600)
+  }],
+  ['existing live release layout', (fixture) => {
+    mkdirSync(path.join(fixture.productionRoot, 'releases'))
+  }],
+]
+for (const [label, mutate] of invalidLegacyBaselineFixtures) {
+  const fixture = legacyBaselineStateFixture()
+  try {
+    const inspectOptions = {}
+    mutate(fixture, inspectOptions)
+    assert(fixture.inspect(inspectOptions).baselineState === 'invalid', `${label} invalidates S1 evidence`)
+  } finally {
+    rmSync(fixture.fixtureRoot, { recursive: true, force: true })
+  }
+}
+
 const legacyPreflight = {
   productionSha: oldSha,
   trackedDirtyPaths: 0,
   eqb: 'active',
   caddy: 'active',
   layout: 'legacy',
+  baselineState: 'absent',
+  baselineReceipts: 0,
+  baselineFailedReceipts: 1,
+  quarantineChildren: 0,
+  liveReleaseLayout: 'partial',
+  defaultIdentity: 'missing',
+  controllerSudo: 'ok',
+  strictHealth: 'ok',
 }
 const baselineOrder = []
 const migratedBaseline = await migrateLegacyProductionBaseline({
@@ -637,6 +1508,33 @@ assert(await (async () => {
 })(), 'ineligible legacy production fails the baseline migration')
 assert(!ineligibleBaselineInvoked, 'ineligible baseline stops before the host operator')
 
+let repeatedBaselineInvoked = false
+assert(await (async () => {
+  try {
+    await migrateLegacyProductionBaseline({
+      argv: ['baseline', '--owner-said-baseline-migration'],
+      resolveCandidate: async () => candidate,
+      readMainSha: async () => newSha,
+      readLegacyPreflight: async () => ({
+        ...legacyPreflight,
+        baselineState: 'established',
+        baselineReceipts: 1,
+        quarantineChildren: 1,
+        liveReleaseLayout: 'absent',
+        defaultIdentity: 'ok',
+      }),
+      invokeOperator: async () => {
+        repeatedBaselineInvoked = true
+        return { exitCode: 0, output: legacyBaselineReceipt() }
+      },
+    })
+    return false
+  } catch (error) {
+    return error.message === 'BASELINE_ALREADY_ESTABLISHED'
+  }
+})(), 'an established baseline is a consumed transition, not a continuation deploy path')
+assert(!repeatedBaselineInvoked, 'established baseline evidence stops before streaming the root operator')
+
 assert(await (async () => {
   try {
     await migrateLegacyProductionBaseline({
@@ -652,7 +1550,14 @@ assert(await (async () => {
   }
 })(), 'baseline process exit and structured receipt conclusion must agree')
 
-const migratedPreflight = { ...legacyPreflight, productionSha: newSha }
+const migratedPreflight = {
+  ...legacyPreflight,
+  baselineState: 'established',
+  baselineReceipts: 1,
+  quarantineChildren: 1,
+  liveReleaseLayout: 'absent',
+  defaultIdentity: 'ok',
+}
 const healthyReleasePreflight = {
   schemaVersion: 'eqb-deployment-preflight-v2',
   controllerVersion: 'eqb-deploy-controller-v1',
@@ -688,6 +1593,41 @@ for (const [label, output] of [
     }
   })(), `${label} bootstrap key-retirement response fails closed`)
 }
+const bootstrapUnit = `eqb-release-bootstrap-${'9'.repeat(32)}`
+const cancellationReceipt = {
+  schemaVersion: 'eqb-release-bootstrap-cancellation-v1',
+  state: 'reported',
+  conclusion: 'cancelled',
+  targetSha: newSha,
+  unit: bootstrapUnit,
+  cancellationInstalled: true,
+  hostAttemptStarted: false,
+}
+const cancellationMarker = `EQB_BOOTSTRAP_CANCELLATION ${JSON.stringify(cancellationReceipt)}`
+assert(
+  parseReleaseBootstrapCancellation(
+    `diagnostic\n${cancellationMarker}\n`,
+    newSha,
+    bootstrapUnit,
+  ).cancellationInstalled,
+  'bootstrap cancellation marker is strictly bound to the target and host unit',
+)
+for (const [label, output, sha, unit] of [
+  ['missing', '', newSha, bootstrapUnit],
+  ['duplicate', `${cancellationMarker}\n${cancellationMarker}`, newSha, bootstrapUnit],
+  ['wrong target', cancellationMarker, oldSha, bootstrapUnit],
+  ['wrong unit', cancellationMarker, newSha, `eqb-release-bootstrap-${'8'.repeat(32)}`],
+  ['unexpected field', cancellationMarker.replace(/\}$/u, ',"extra":true}'), newSha, bootstrapUnit],
+]) {
+  assert((() => {
+    try {
+      parseReleaseBootstrapCancellation(output, sha, unit)
+      return false
+    } catch {
+      return true
+    }
+  })(), `${label} bootstrap cancellation evidence fails closed`)
+}
 const bootstrapFailureReceipt = JSON.stringify({
   schemaVersion: 'eqb-deployment-bootstrap-failure-v1',
   state: 'reported',
@@ -717,6 +1657,66 @@ assert(
   ).exitCode === 1,
   'manager-owned bootstrap journal can authenticate failure after an SSH disconnect',
 )
+assert(
+  classifyReleaseBootstrapJournal(
+    `diagnostic\nEQB deployment bootstrap complete: ${newSha}\n`,
+    newSha,
+  ).state === 'success',
+  'one exact bootstrap completion marker authenticates host success despite journal noise',
+)
+assert(
+  classifyReleaseBootstrapJournal('build still running\n', newSha).state === 'unknown',
+  'zero terminal bootstrap markers remain unknown instead of becoming a retryable failure',
+)
+assert(
+  classifyReleaseBootstrapJournal(bootstrapFailureMarker(bootstrapFailureReceipt), newSha)
+    .failure.rollbackHealthy,
+  'one exact bootstrap failure marker authenticates healthy rollback evidence',
+)
+for (const journal of [
+  `EQB deployment bootstrap complete: ${newSha}\nEQB deployment bootstrap complete: ${newSha}\n`,
+  `${bootstrapFailureMarker(bootstrapFailureReceipt)}\nEQB deployment bootstrap complete: ${newSha}\n`,
+]) {
+  assert((() => {
+    try {
+      classifyReleaseBootstrapJournal(journal, newSha)
+      return false
+    } catch {
+      return true
+    }
+  })(), 'ambiguous bootstrap terminal markers fail closed')
+}
+for (const [label, journal, status, expected] of [
+  ['exit zero with one completion', `EQB deployment bootstrap complete: ${newSha}\n`, 0, 'success'],
+  ['SSH disconnect with one completion', `EQB deployment bootstrap complete: ${newSha}\n`, 255, 'success'],
+  ['exit zero without a terminal marker', '', 0, 'unknown'],
+  ['SSH disconnect without a terminal marker', '', 255, 'unknown'],
+  ['lock exit without a terminal marker', '', 75, 'lock'],
+  ['matching failure exit and marker', bootstrapFailureMarker(bootstrapFailureReceipt), 1, 'failure'],
+]) {
+  assert(
+    classifyReleaseBootstrapOutcome(journal, newSha, status).state === expected,
+    `${label} has an explicit bootstrap outcome`,
+  )
+}
+for (const [label, journal, status] of [
+  ['completion with mismatched process failure', `EQB deployment bootstrap complete: ${newSha}\n`, 1],
+  ['failure marker with mismatched process exit', bootstrapFailureMarker(bootstrapFailureReceipt), 2],
+  [
+    'duplicate completion markers',
+    `EQB deployment bootstrap complete: ${newSha}\nEQB deployment bootstrap complete: ${newSha}\n`,
+    0,
+  ],
+]) {
+  assert((() => {
+    try {
+      classifyReleaseBootstrapOutcome(journal, newSha, status)
+      return false
+    } catch {
+      return true
+    }
+  })(), `${label} is invalid bootstrap outcome evidence`)
+}
 const payloadFixtureRoot = mkdtempSync(path.join(tmpdir(), 'eqb-bootstrap-payload-'))
 try {
   chmodSync(payloadFixtureRoot, 0o700)
@@ -817,6 +1817,20 @@ const bootstrapped = await bootstrapReleaseLayout({
     bootstrapOrder.push('preflight')
     return migratedPreflight
   },
+  async isAncestor(previousSha, targetSha) {
+    bootstrapOrder.push('ancestor')
+    return previousSha === oldSha && targetSha === newSha
+  },
+  async readProtectedDiff(previousSha, targetSha, paths) {
+    bootstrapOrder.push('protected-diff')
+    assert(
+      previousSha === oldSha
+        && targetSha === newSha
+        && paths === EQB_PERSISTENCE_AUTHORITY_PATHS,
+      'bootstrap compares the established baseline with exact candidate over the fixed authority set',
+    )
+    return []
+  },
   async invokeBootstrap() {
     bootstrapOrder.push('bootstrap')
   },
@@ -843,8 +1857,8 @@ const bootstrapped = await bootstrapReleaseLayout({
 assert(bootstrapped.controllerPreflight.layout === 'release', 'new forced controller proves release layout')
 assert(
   bootstrapOrder.join(',')
-    === 'resolve,main,preflight,main,bootstrap,controller,classify-old,retire,controller,classify-old,secret,cleanup',
-  'bootstrap proves the new route, retires and rejects the old key, then rotates the secret last',
+    === 'resolve,main,preflight,ancestor,protected-diff,main,bootstrap,controller,classify-old,secret,retire,controller,classify-old,cleanup',
+  'bootstrap proves S1 ancestry and authority, proves the new route, rotates Secret, then retires the old key',
 )
 
 let ineligibleBootstrapInvoked = false
@@ -855,6 +1869,8 @@ assert(await (async () => {
       resolveCandidate: async () => candidate,
       readMainSha: async () => newSha,
       readLegacyPreflight: async () => legacyPreflight,
+      isAncestor: async () => true,
+      readProtectedDiff: async () => [],
       invokeBootstrap: async () => {
         ineligibleBootstrapInvoked = true
       },
@@ -879,6 +1895,8 @@ assert(await (async () => {
       resolveCandidate: async () => candidate,
       readMainSha: async () => newSha,
       readLegacyPreflight: async () => migratedPreflight,
+      isAncestor: async () => true,
+      readProtectedDiff: async () => [],
       invokeBootstrap: async () => {},
       readControllerPreflight: async () => ({ ...healthyReleasePreflight, caddy: 'inactive' }),
       retireBootstrapIdentity: async () => parseBootstrapKeyRetirementReceipt(keyRetirementReceipt),
@@ -903,6 +1921,8 @@ assert(await (async () => {
       resolveCandidate: async () => candidate,
       readMainSha: async () => newSha,
       readLegacyPreflight: async () => migratedPreflight,
+      isAncestor: async () => true,
+      readProtectedDiff: async () => [],
       invokeBootstrap: async () => {},
       readControllerPreflight: async () => healthyReleasePreflight,
       retireBootstrapIdentity: async () => parseBootstrapKeyRetirementReceipt(keyRetirementReceipt),
@@ -917,7 +1937,62 @@ assert(await (async () => {
     return true
   }
 })(), 'still-usable privileged bootstrap identity fails the bootstrap')
-assert(!unretiredSecretRotated, 'controller key is not rotated while the old identity remains usable')
+assert(unretiredSecretRotated, 'verified controller Secret remains usable before old-key retirement proof')
+
+for (const [label, isAncestor, protectedDiff, expectedError] of [
+  ['non-ancestor baseline', false, [], 'BASELINE_ANCESTRY_UNKNOWN'],
+  ['unreadable ancestry', new Error('missing object'), [], 'BASELINE_ANCESTRY_UNKNOWN'],
+  [
+    'changed persistence authority',
+    true,
+    ['server/source-intake/sourceIntakeStore.mjs'],
+    'PERSISTENCE_AUTHORITY_CHANGED',
+  ],
+]) {
+  let mutated = false
+  assert(await (async () => {
+    try {
+      await bootstrapReleaseLayout({
+        argv: ['bootstrap', '--owner-said-release-bootstrap'],
+        resolveCandidate: async () => candidate,
+        readMainSha: async () => newSha,
+        readLegacyPreflight: async () => migratedPreflight,
+        isAncestor: async () => {
+          if (isAncestor instanceof Error) throw isAncestor
+          return isAncestor
+        },
+        readProtectedDiff: async () => protectedDiff,
+        invokeBootstrap: async () => { mutated = true },
+        readControllerPreflight: async () => healthyReleasePreflight,
+        retireBootstrapIdentity: async () => {},
+        classifyBootstrapIdentity: async () => 'retired',
+        rotateControllerSecret: async () => {},
+        cleanupRecovery: async () => {},
+      })
+      return false
+    } catch (error) {
+      return error.message === expectedError
+    }
+  })(), `${label} fails with its stable S1 transition error`)
+  assert(!mutated, `${label} stops before host bootstrap mutation`)
+}
+
+let sameShaBootstrapInvoked = false
+await bootstrapReleaseLayout({
+  argv: ['bootstrap', '--owner-said-release-bootstrap'],
+  resolveCandidate: async () => ({ ...candidate, sha: oldSha }),
+  readMainSha: async () => oldSha,
+  readLegacyPreflight: async () => migratedPreflight,
+  isAncestor: async (previousSha, targetSha) => previousSha === targetSha,
+  readProtectedDiff: async () => [],
+  invokeBootstrap: async () => { sameShaBootstrapInvoked = true },
+  readControllerPreflight: async () => ({ ...healthyReleasePreflight, productionSha: oldSha }),
+  retireBootstrapIdentity: async () => parseBootstrapKeyRetirementReceipt(keyRetirementReceipt),
+  classifyBootstrapIdentity: async () => 'retired',
+  rotateControllerSecret: async () => {},
+  cleanupRecovery: async () => {},
+})
+assert(sameShaBootstrapInvoked, 'an established baseline may still bootstrap its exact current SHA')
 
 const resumeOrder = []
 const resumeStates = ['active', 'retired']
@@ -954,8 +2029,8 @@ assert(
   'recovery after host success completes the pending old-key retirement',
 )
 assert(
-  resumeOrder.join(',') === 'controller,classify-old,retire,controller,classify-old,secret,cleanup',
-  'resume proves host state, retires and rejects the old key, rotates Secret, then cleans recovery',
+  resumeOrder.join(',') === 'controller,classify-old,secret,retire,controller,classify-old,cleanup',
+  'resume proves host state, rotates Secret, retires and rejects the old key, then cleans recovery',
 )
 assert(!repeatedHostBootstrap, 'bootstrap resume cannot invoke the host bootstrap transaction again')
 
@@ -988,8 +2063,8 @@ assert(
   'resume after retirement does not repeat key mutation',
 )
 assert(
-  postRetirementOrder.join(',') === 'controller,classify-old,controller,classify-old,secret,cleanup',
-  'resume after retirement still proves both routes before idempotent Secret rotation and cleanup',
+  postRetirementOrder.join(',') === 'controller,classify-old,secret,controller,classify-old,cleanup',
+  'resume after retirement rotates idempotently between the two route proofs before cleanup',
 )
 
 const unknownResumeActions = []
@@ -1015,7 +2090,9 @@ section('Private credentials and pinned SSH invocation')
 
 const credentialRoot = mkdtempSync(path.join(tmpdir(), 'eqb-deploy-credentials-'))
 const generatedKey = path.join(credentialRoot, 'generated')
-execFileSync('ssh-keygen', ['-q', '-t', 'ed25519', '-N', '', '-f', generatedKey])
+execFileSync('ssh-keygen', [
+  '-q', '-t', 'ed25519', '-N', '', '-C', 'eqb-bootstrap-comment-fixture', '-f', generatedKey,
+])
 const oneLineKey = readFileSync(generatedKey, 'utf8').replaceAll('\n', '')
 const materialized = materializeDeploymentCredentials({
   privateKey: oneLineKey,
@@ -1039,11 +2116,95 @@ assert(
 
 const generatedControllerKey = path.join(credentialRoot, 'generated-controller')
 execFileSync('ssh-keygen', ['-q', '-t', 'ed25519', '-N', '', '-f', generatedControllerKey])
-const publicKeyBody = (privateKeyPath) => execFileSync(
+const publicKeyBody = (privateKeyPath) => parseOpenSshEd25519PublicKeyBody(execFileSync(
   'ssh-keygen',
   ['-y', '-f', privateKeyPath],
   { encoding: 'utf8' },
-).trim().split(/\s+/u)[1]
+))
+const commentedPublicKey = execFileSync(
+  'ssh-keygen',
+  ['-y', '-f', materialized.keyPath],
+  { encoding: 'utf8' },
+)
+assert(
+  commentedPublicKey.trim().split(/\s+/u).length === 3
+    && publicKeyBody(materialized.keyPath) === commentedPublicKey.trim().split(/\s+/u)[1],
+  'Deployment Ed25519 private keys remain valid when ssh-keygen emits a public-key comment',
+)
+for (const invalidPublicKey of [
+  'ssh-rsa AAAAFixtureOnly comment',
+  'ssh-ed25519 AAAAFixtureOnly\nssh-ed25519 AAAASecondFixture',
+]) {
+  assert((() => {
+    try {
+      parseOpenSshEd25519PublicKeyBody(invalidPublicKey)
+      return false
+    } catch {
+      return true
+    }
+  })(), 'Deployment public-key parsing rejects wrong-key-type and multiline output')
+}
+for (const [label, probe, expected] of [
+  [
+    'the only advertised method',
+    {
+      status: 255,
+      stdout: '',
+      stderr: 'deployer@production.invalid: Permission denied (publickey).\n',
+    },
+    true,
+  ],
+  [
+    'one of several advertised methods',
+    {
+      status: 255,
+      stdout: '',
+      stderr: 'deployer@production.invalid: Permission denied (publickey,password).\n',
+    },
+    true,
+  ],
+  [
+    'not advertised',
+    {
+      status: 255,
+      stdout: '',
+      stderr: 'deployer@production.invalid: Permission denied (password).\n',
+    },
+    false,
+  ],
+  [
+    'accompanied by command output',
+    {
+      status: 255,
+      stdout: 'remote command output\n',
+      stderr: 'deployer@production.invalid: Permission denied (publickey,password).\n',
+    },
+    false,
+  ],
+  [
+    'accompanied by another diagnostic line',
+    {
+      status: 255,
+      stdout: '',
+      stderr: 'diagnostic\ndeployer@production.invalid: Permission denied (publickey,password).\n',
+    },
+    false,
+  ],
+  [
+    'reported with a non-transport exit',
+    {
+      status: 1,
+      stdout: '',
+      stderr: 'deployer@production.invalid: Permission denied (publickey,password).\n',
+    },
+    false,
+  ],
+]) {
+  assert(
+    isSshPublicKeyAuthenticationDenied(probe) === expected,
+    `public-key authentication denial is classified when publickey is ${label}`,
+  )
+}
 const recoveryRoot = path.join(credentialRoot, 'recovery-state')
 const recovery = createReleaseBootstrapRecovery({
   stateRoot: recoveryRoot,
@@ -1067,6 +2228,10 @@ assert(
   [recovery.recoveryPath, recovery.controllerPrivateKeyPath, recovery.bootstrapPrivateKeyPath]
     .every((filePath) => (statSync(filePath).mode & 0o777) === 0o600),
   'bootstrap recovery record and both identities are private files',
+)
+assert(
+  !readdirSync(recoveryRoot).some((name) => name.startsWith('.bootstrap-')),
+  'bootstrap recovery is atomically published without a visible partial record',
 )
 const reloadedRecovery = readReleaseBootstrapRecovery({ stateRoot: recoveryRoot })
 assert(
@@ -1161,6 +2326,211 @@ assert(
   'a fresh executor idempotently finishes an interrupted identity cleanup',
 )
 
+function createAbandonmentRecovery(stateRoot, suffix) {
+  return createReleaseBootstrapRecovery({
+    stateRoot,
+    candidateSha: newSha,
+    projectId: '00000000-0000-0000-0000-000000000001',
+    transportTarget: 'deployer@production.invalid',
+    unit: `eqb-release-bootstrap-${suffix.repeat(32)}`,
+    controllerPrivateKey: readFileSync(generatedControllerKey, 'utf8'),
+    controllerPublicKeyBody: publicKeyBody(generatedControllerKey),
+    bootstrapPrivateKey: readFileSync(generatedKey, 'utf8'),
+    bootstrapPublicKeyBody: publicKeyBody(generatedKey),
+  })
+}
+const healthyBootstrapFailure = {
+  schemaVersion: 'eqb-deployment-bootstrap-failure-v1',
+  state: 'reported',
+  conclusion: 'failure',
+  targetSha: newSha,
+  failedStage: 'install-controller',
+  exitCode: 1,
+  rollbackHealthy: true,
+  evidenceRetained: true,
+}
+const cancellationFor = (recoveryRecord, hostAttemptStarted = true) => ({
+  schemaVersion: 'eqb-release-bootstrap-cancellation-v1',
+  state: 'reported',
+  conclusion: 'cancelled',
+  targetSha: recoveryRecord.targetSha,
+  unit: recoveryRecord.unit,
+  cancellationInstalled: true,
+  hostAttemptStarted,
+})
+
+const abandonedRecoveryRoot = path.join(credentialRoot, 'abandoned-recovery-state')
+const abandonmentRecovery = createAbandonmentRecovery(abandonedRecoveryRoot, 'd')
+const abandoned = abandonReleaseBootstrapRecovery(abandonmentRecovery, {
+  failure: healthyBootstrapFailure,
+  cancellation: cancellationFor(abandonmentRecovery),
+  previousSha: oldSha,
+  controllerIdentityRejected: true,
+  legacyHealthy: true,
+  now: () => new Date('2026-09-03T00:02:00.000Z'),
+})
+assert(
+  !existsSync(abandonmentRecovery.directory)
+    && path.basename(abandoned.directory) === `abandoned-bootstrap-${newSha}`
+    && abandoned.previousSha === oldSha
+    && abandoned.rollbackHealthy
+    && !abandoned.preMutationFailure
+    && abandoned.controllerIdentityRejected
+    && abandoned.legacyHealthy
+    && (statSync(abandoned.abandonmentPath).mode & 0o777) === 0o600
+    && !existsSync(path.join(abandoned.directory, 'controller-identity'))
+    && !existsSync(path.join(abandoned.directory, 'bootstrap-identity')),
+  'proven healthy rollback is terminalized privately before both recovery identities are removed',
+)
+
+const preMutationAbandonmentRoot = path.join(credentialRoot, 'pre-mutation-abandonment-state')
+const preMutationAbandonmentRecovery = createAbandonmentRecovery(preMutationAbandonmentRoot, 'a')
+const preMutationAbandonment = abandonReleaseBootstrapRecovery(preMutationAbandonmentRecovery, {
+  failure: {
+    ...healthyBootstrapFailure,
+    failedStage: 'verify-established-baseline',
+    rollbackHealthy: false,
+  },
+  cancellation: cancellationFor(preMutationAbandonmentRecovery),
+  previousSha: oldSha,
+  controllerIdentityRejected: true,
+  legacyHealthy: true,
+})
+assert(
+  preMutationAbandonment.preMutationFailure
+    && !preMutationAbandonment.rollbackHealthy
+    && preMutationAbandonment.legacyHealthy
+    && !existsSync(path.join(preMutationAbandonment.directory, 'controller-identity'))
+    && !existsSync(path.join(preMutationAbandonment.directory, 'bootstrap-identity')),
+  'a retained terminal failure from the known pre-mutation stages can return to independently proven healthy S1',
+)
+
+const cancelledUnknownRoot = path.join(credentialRoot, 'cancelled-unknown-state')
+const cancelledUnknownRecovery = createAbandonmentRecovery(cancelledUnknownRoot, 'b')
+const cancelledUnknown = abandonReleaseBootstrapRecovery(cancelledUnknownRecovery, {
+  cancellation: cancellationFor(cancelledUnknownRecovery, false),
+  previousSha: oldSha,
+  controllerIdentityRejected: true,
+  legacyHealthy: true,
+})
+assert(
+  cancelledUnknown.evidenceKind === 'host-cancellation'
+    && cancelledUnknown.failedStage === 'dispatch-unknown'
+    && cancelledUnknown.hostExitCode === null
+    && cancelledUnknown.cancellationInstalled
+    && cancelledUnknown.preMutationFailure
+    && !cancelledUnknown.rollbackHealthy
+    && !existsSync(path.join(cancelledUnknown.directory, 'controller-identity'))
+    && !existsSync(path.join(cancelledUnknown.directory, 'bootstrap-identity')),
+  'a lock-serialized host cancellation plus strict S1 proof safely terminalizes unknown dispatch',
+)
+
+const interruptedAbandonmentRoot = path.join(credentialRoot, 'interrupted-abandonment-state')
+const interruptedAbandonmentRecovery = createAbandonmentRecovery(interruptedAbandonmentRoot, 'e')
+let abandonmentRemovals = 0
+assert((() => {
+  try {
+    abandonReleaseBootstrapRecovery(interruptedAbandonmentRecovery, {
+      failure: healthyBootstrapFailure,
+      cancellation: cancellationFor(interruptedAbandonmentRecovery),
+      previousSha: oldSha,
+      controllerIdentityRejected: true,
+      legacyHealthy: true,
+      removeIdentity(filePath) {
+        abandonmentRemovals += 1
+        if (abandonmentRemovals === 2) throw new Error('simulated interruption')
+        rmSync(filePath)
+      },
+    })
+    return false
+  } catch {
+    return true
+  }
+})(), 'interrupted abandonment identity cleanup remains a reported failure')
+const interruptedAbandonment = readAbandonedReleaseBootstrapRecovery({
+  stateRoot: interruptedAbandonmentRoot,
+  targetSha: newSha,
+})
+assert(
+  !existsSync(path.join(interruptedAbandonment.directory, 'controller-identity'))
+    && existsSync(path.join(interruptedAbandonment.directory, 'bootstrap-identity')),
+  'interrupted abandonment retains terminal evidence and the unremoved identity',
+)
+clearAbandonedReleaseBootstrapRecovery({
+  stateRoot: interruptedAbandonmentRoot,
+  targetSha: newSha,
+})
+assert(
+  !existsSync(path.join(interruptedAbandonment.directory, 'bootstrap-identity')),
+  'a fresh executor idempotently completes abandoned recovery identity cleanup',
+)
+
+const refusedAbandonmentRoot = path.join(credentialRoot, 'refused-abandonment-state')
+const refusedAbandonment = createAbandonmentRecovery(refusedAbandonmentRoot, 'f')
+assert((() => {
+  try {
+    abandonReleaseBootstrapRecovery(refusedAbandonment, {
+      failure: healthyBootstrapFailure,
+      previousSha: oldSha,
+      controllerIdentityRejected: true,
+      legacyHealthy: true,
+    })
+    return false
+  } catch {
+    return true
+  }
+})(), 'abandonment without exact host cancellation evidence fails closed')
+assert((() => {
+  try {
+    abandonReleaseBootstrapRecovery(refusedAbandonment, {
+      cancellation: cancellationFor(refusedAbandonment, true),
+      previousSha: oldSha,
+      controllerIdentityRejected: true,
+      legacyHealthy: true,
+    })
+    return false
+  } catch {
+    return true
+  }
+})(), 'unknown dispatch with durable host acceptance cannot be abandoned')
+assert((() => {
+  try {
+    abandonReleaseBootstrapRecovery(refusedAbandonment, {
+      failure: {
+        ...healthyBootstrapFailure,
+        failedStage: 'install-controller',
+        rollbackHealthy: false,
+      },
+      cancellation: cancellationFor(refusedAbandonment),
+      previousSha: oldSha,
+      controllerIdentityRejected: true,
+      legacyHealthy: true,
+    })
+    return false
+  } catch {
+    return true
+  }
+})(), 'post-mutation abandonment without healthy rollback proof fails closed')
+assert(
+  existsSync(refusedAbandonment.directory)
+    && existsSync(refusedAbandonment.controllerPrivateKeyPath)
+    && existsSync(refusedAbandonment.bootstrapPrivateKeyPath)
+    && !existsSync(path.join(refusedAbandonment.directory, 'abandonment.json')),
+  'invalid abandonment proof cannot mutate active recovery evidence or identities',
+)
+assert((() => {
+  try {
+    abandonReleaseBootstrapRecovery(refusedAbandonment, {
+      failure: healthyBootstrapFailure,
+      cancellation: cancellationFor(refusedAbandonment),
+      previousSha: oldSha,
+    })
+    return false
+  } catch {
+    return true
+  }
+})(), 'abandonment cannot manufacture controller-rejection or healthy-legacy proof')
+
 const discardRecovery = createReleaseBootstrapRecovery({
   stateRoot: recoveryRoot,
   candidateSha: oldSha,
@@ -1182,6 +2552,10 @@ const ssh = deploymentSSHInvocation({
 })
 assert(ssh.command === 'ssh', 'deployment uses the system SSH client')
 assert(ssh.args.includes('StrictHostKeyChecking=yes'), 'SSH host-key checking is strict')
+assert(
+  ssh.args.includes('ServerAliveInterval=15') && ssh.args.includes('ServerAliveCountMax=4'),
+  'SSH transport detects a lost peer instead of hanging indefinitely',
+)
 assert(
   ssh.args.includes(`UserKnownHostsFile=${materialized.knownHostsPath}`),
   'SSH trusts only the private pinned known_hosts file',
@@ -1234,15 +2608,49 @@ const preflight = parseDeploymentPreflightOutput([
   'eqb=active',
   'caddy=active',
   'layout=legacy',
+  'baselineState=established',
+  'baselineReceipts=1',
+  'baselineFailedReceipts=2',
+  'quarantineChildren=1',
+  'liveReleaseLayout=absent',
+  'defaultIdentity=ok',
+  'controllerSudo=ok',
+  'strictHealth=ok',
 ].join('\n'))
 assert(preflight.productionSha === oldSha, 'preflight returns one exact production SHA')
 assert(preflight.trackedDirtyPaths === 0, 'preflight dirty count is parsed as a number')
 assert(preflight.eqb === 'active' && preflight.caddy === 'active', 'preflight reports both service states')
 assert(preflight.layout === 'legacy', 'preflight distinguishes legacy and release layouts')
 assert(
+  preflight.baselineState === 'established'
+    && preflight.baselineReceipts === 1
+    && preflight.baselineFailedReceipts === 2
+    && preflight.quarantineChildren === 1
+    && preflight.liveReleaseLayout === 'absent'
+    && preflight.defaultIdentity === 'ok'
+    && preflight.controllerSudo === 'ok'
+    && preflight.strictHealth === 'ok',
+  'preflight carries strict established-baseline and transport evidence',
+)
+const validPreflightOutput = [
+  `productionSha=${oldSha}`,
+  'trackedDirtyPaths=0',
+  'eqb=active',
+  'caddy=active',
+  'layout=legacy',
+  'baselineState=established',
+  'baselineReceipts=1',
+  'baselineFailedReceipts=0',
+  'quarantineChildren=1',
+  'liveReleaseLayout=absent',
+  'defaultIdentity=ok',
+  'controllerSudo=ok',
+  'strictHealth=ok',
+]
+assert(
   (() => {
     try {
-      parseDeploymentPreflightOutput(`productionSha=${oldSha}\ntrackedDirtyPaths=0\neqb=active\ncaddy=active\nlayout=release\nunexpected=value`)
+      parseDeploymentPreflightOutput(`${validPreflightOutput.join('\n')}\nunexpected=value`)
       return false
     } catch {
       return true
@@ -1250,6 +2658,33 @@ assert(
   })(),
   'unexpected remote preflight output fails closed',
 )
+for (const [label, lines] of [
+  ['missing evidence', validPreflightOutput.filter((line) => !line.startsWith('controllerSudo='))],
+  ['duplicate evidence', [...validPreflightOutput, 'controllerSudo=ok']],
+  [
+    'invalid evidence enum',
+    validPreflightOutput.map((line) => line === 'defaultIdentity=ok' ? 'defaultIdentity=unknown' : line),
+  ],
+  [
+    'invalid evidence count',
+    validPreflightOutput.map((line) => line === 'baselineReceipts=1' ? 'baselineReceipts=-1' : line),
+  ],
+  [
+    'unsafe evidence count',
+    validPreflightOutput.map((line) => (
+      line === 'baselineReceipts=1' ? `baselineReceipts=${'9'.repeat(100)}` : line
+    )),
+  ],
+]) {
+  assert((() => {
+    try {
+      parseDeploymentPreflightOutput(lines.join('\n'))
+      return false
+    } catch {
+      return true
+    }
+  })(), `${label} in remote preflight fails closed`)
+}
 materialized.cleanup()
 assert(!existsSync(materialized.directory), 'credential files are removed after use')
 rmSync(credentialRoot, { recursive: true, force: true })
@@ -1324,9 +2759,16 @@ function writeReleaseMarker(root, sha, controllerVersion = EQB_DEPLOY_CONTROLLER
 
 function controllerFixture({
   failCandidateHealth = false,
+  failPostTrafficHealth = false,
+  failLiveDatabaseOnce = false,
+  failSnapshotOnce = false,
+  failHostConfigurationReloadOnce = false,
+  failHostConfigurationReload = false,
+  mutateDatabasesOnEnsure = false,
   advanceAfterBuild = false,
   hostConfigurationChange = false,
   persistenceAuthorityChange = false,
+  stableLauncherChange = false,
   protectedDiffFailure = false,
   unsafeCandidateDirectory = null,
   tamperDeploymentControl = false,
@@ -1349,6 +2791,17 @@ function controllerFixture({
   chmodSync(path.join(root, 'shared'), 0o700)
   writeFileSync(path.join(root, 'shared', '.env'), 'FIXTURE_ONLY=1\n', { mode: 0o600 })
   writeFileSync(path.join(root, 'shared', 'sentinel'), 'unchanged')
+  for (const name of ['question-bank.sqlite', 'user-data.sqlite', 'import-ops.sqlite']) {
+    writeFileSync(path.join(root, 'shared', 'data', name), `${name}:before\n`, { mode: 0o600 })
+  }
+  const systemdUnitPath = path.join(root, 'installed-eqb.service')
+  const caddyConfigPath = path.join(root, 'installed-Caddyfile')
+  const rootWrapperPath = path.join(root, 'installed-controller')
+  const transportWrapperPath = path.join(root, 'installed-transport')
+  writeFileSync(systemdUnitPath, 'old service\n')
+  writeFileSync(caddyConfigPath, 'old caddy\n')
+  writeFileSync(rootWrapperPath, 'stable controller\n')
+  writeFileSync(transportWrapperPath, 'stable transport\n')
   writeReleaseMarker(root, oldSha, 'eqb-deploy-controller-older-compatible')
   symlinkSync(path.join('releases', oldSha), path.join(root, 'current'))
 
@@ -1361,9 +2814,16 @@ function controllerFixture({
     advanced: false,
     hostConfigurationChange,
     persistenceAuthorityChange,
+    stableLauncherChange,
     protectedDiffFailure,
     unsafeCandidateDirectory,
     tamperDeploymentControl,
+    failLiveDatabaseOnce,
+    failSnapshotOnce,
+    failHostConfigurationReloadOnce,
+    failHostConfigurationReload,
+    mutateDatabasesOnEnsure,
+    trafficOpened: true,
   }
   const config = {
     root,
@@ -1377,6 +2837,10 @@ function controllerFixture({
     repositoryUrls: ['fixture://Buqisir/english-question-bank'],
     service: 'eqb',
     caddyService: 'caddy',
+    systemdUnitPath,
+    caddyConfigPath,
+    rootWrapperPath,
+    transportWrapperPath,
   }
   const currentSha = () => path.basename(readlinkSync(path.join(root, 'current')))
   const dependencies = {
@@ -1432,6 +2896,9 @@ function controllerFixture({
       if (command === '/usr/bin/git' && args.includes('diff')) {
         if (state.protectedDiffFailure) throw new Error('fixture missing commit')
         const pathspecs = args.slice(args.indexOf('--') + 1)
+        if (pathspecs.includes('deploy/eqb-deploy-transport')) {
+          return state.stableLauncherChange ? 'deploy/eqb-deploy-transport\n' : ''
+        }
         if (pathspecs.includes('deploy/eqb-release.service')) {
           return state.hostConfigurationChange ? 'deploy/eqb-release.service\n' : ''
         }
@@ -1443,7 +2910,8 @@ function controllerFixture({
       }
       if (command === '/usr/bin/tar') {
         const release = args[args.indexOf('-C') + 1]
-        if (args.at(-1) !== 'deploy') {
+        const hostConfigurationArchive = String(args[1]).includes('/.host-config-archive-')
+        if (args.at(-1) !== 'deploy' && !hostConfigurationArchive) {
           for (const relative of [
             'app/public/paper-assets',
             'server/logs',
@@ -1455,27 +2923,52 @@ function controllerFixture({
           }
         }
         mkdirSync(path.join(release, 'deploy'), { recursive: true })
-        for (const relative of [
+        const deployFiles = [
           'Caddyfile.release',
           'eqb-release.service',
           'eqb-deploy-transport',
           'eqb-deploy-controller',
           'eqb-deploy-controller.mjs',
-        ]) {
-          writeFileSync(path.join(release, 'deploy', relative), `trusted archive ${relative}\n`)
+        ]
+        for (const relative of hostConfigurationArchive
+          ? deployFiles.filter((name) => !['eqb-deploy-transport', 'eqb-deploy-controller'].includes(name))
+          : deployFiles) {
+          const content = hostConfigurationArchive && relative === 'eqb-deploy-controller.mjs'
+            ? 'export const fixtureController = true\n'
+            : `trusted archive ${relative}\n`
+          writeFileSync(path.join(release, 'deploy', relative), content)
         }
         return ''
       }
-      if (command === '/usr/bin/systemctl' && args[0] === 'restart') {
+      if (command === '/usr/bin/systemctl' && ['start', 'restart'].includes(args[0])) {
         state.restarts.push(currentSha())
+        if (args[1] === 'caddy') state.trafficOpened = true
         return ''
       }
+      if (command === '/usr/bin/systemctl' && args[0] === 'stop') {
+        if (args[1] === 'caddy') state.trafficOpened = false
+        return ''
+      }
+      if (command === '/usr/bin/systemctl' && args[0] === 'daemon-reload') return ''
       if (command === '/usr/bin/systemctl' && args[0] === 'is-active') {
         return args.includes('--quiet') ? '' : 'active\n'
+      }
+      if (command === '/usr/bin/node' && args[0] === '--check') return ''
+      if (command === '/usr/bin/systemd-analyze') return ''
+      if (command === '/usr/bin/caddy' && args[0] === 'validate') return ''
+      if (command === '/usr/bin/caddy' && args[0] === 'reload') {
+        if (state.failHostConfigurationReload || state.failHostConfigurationReloadOnce) {
+          state.failHostConfigurationReloadOnce = false
+          throw new Error('fixture Caddy reload failure')
+        }
+        return ''
       }
       if (command === '/usr/bin/curl') {
         if (failCandidateHealth && currentSha() === newSha) {
           throw new Error('fixture candidate unhealthy')
+        }
+        if (failPostTrafficHealth && state.trafficOpened && currentSha() === newSha) {
+          throw new Error('fixture post-traffic health failure')
         }
         return ''
       }
@@ -1486,18 +2979,105 @@ function controllerFixture({
       return statSync(path.join(root, 'shared')).uid
     },
     chown() {},
+    runRuntime() {
+      state.runtimeEnsures = (state.runtimeEnsures || 0) + 1
+      if (state.mutateDatabasesOnEnsure && state.runtimeEnsures === 1) {
+        for (const name of ['question-bank.sqlite', 'user-data.sqlite', 'import-ops.sqlite']) {
+          writeFileSync(path.join(root, 'shared', 'data', name), `${name}:migrated\n`)
+        }
+      }
+    },
+    snapshotDatabase(source, destination) {
+      if (state.failSnapshotOnce) {
+        state.failSnapshotOnce = false
+        throw new Error('fixture snapshot failure')
+      }
+      copyFileSync(source, destination)
+    },
+    verifyDatabase(filePath) {
+      if (
+        state.failLiveDatabaseOnce
+        && filePath.includes('/shared/data/')
+        && currentSha() === newSha
+      ) {
+        state.failLiveDatabaseOnce = false
+        throw new Error('fixture live database integrity failure')
+      }
+      return true
+    },
     seal(directory) {
       chmodSync(directory, 0o755)
     },
   }
-  return { root, config, dependencies, state, currentSha }
+  const fixture = { root, config, dependencies, state, currentSha }
+  installFixtureHostConfiguration(fixture, oldSha)
+  return fixture
+}
+
+function installFixtureHostConfiguration(fixture, sha, { candidate = false } = {}) {
+  const version = path.join(
+    fixture.root,
+    'deployments',
+    'host-configuration',
+    'versions',
+    sha,
+  )
+  mkdirSync(path.join(version, 'deploy'), { recursive: true })
+  const content = {
+    'deploy/Caddyfile.release': candidate ? 'new caddy\n' : 'old caddy\n',
+    'deploy/eqb-release.service': candidate ? 'new service\n' : 'old service\n',
+    'deploy/eqb-deploy-controller.mjs': candidate
+      ? 'export const fixtureController = true\n'
+      : 'export const oldFixtureController = true\n',
+  }
+  for (const [relative, bytes] of Object.entries(content)) {
+    writeFileSync(path.join(version, relative), bytes)
+  }
+  const stableLaunchers = {
+    'deploy/eqb-deploy-controller': createHash('sha256')
+      .update(readFileSync(fixture.config.rootWrapperPath)).digest('hex'),
+    'deploy/eqb-deploy-transport': createHash('sha256')
+      .update(readFileSync(fixture.config.transportWrapperPath)).digest('hex'),
+  }
+  writeFileSync(path.join(version, '.eqb-host-configuration.json'), `${JSON.stringify({
+    schemaVersion: 'eqb-host-configuration-v1',
+    sha,
+    files: Object.fromEntries(Object.entries(content).map(([relative, bytes]) => [
+      relative,
+      createHash('sha256').update(bytes).digest('hex'),
+    ])),
+    stableLaunchers,
+    preparedAt: '2026-09-03T00:00:00.000Z',
+  })}\n`)
+  const current = path.join(fixture.root, 'deployments', 'host-configuration', 'current')
+  rmSync(current, { force: true })
+  symlinkSync(path.join('versions', sha), current)
+  return version
 }
 
 assert(
   parseControllerCommand(`deploy ${newSha}`).sha === newSha,
   'fixed controller accepts only one exact machine-resolved SHA',
 )
-for (const command of ['', 'deploy', `deploy ${newSha} --force`, `deploy ${newSha}; id`, 'bash -s']) {
+const maintenanceDigest = '4'.repeat(64)
+for (const command of ['deploy-reviewed-persistence', 'update-host-config']) {
+  const parsed = parseControllerCommand(`${command} ${newSha} ${maintenanceDigest}`)
+  assert(
+    parsed.command === command && parsed.sha === newSha && parsed.digest === maintenanceDigest,
+    `fixed controller accepts exact ${command} SHA and reviewed-path digest`,
+  )
+}
+for (const command of [
+  '',
+  'deploy',
+  `deploy ${newSha} --force`,
+  `deploy ${newSha}; id`,
+  `deploy-reviewed-persistence ${newSha}`,
+  `deploy-reviewed-persistence ${newSha} ${maintenanceDigest} extra`,
+  `deploy-reviewed-persistence ${newSha} ${maintenanceDigest};id`,
+  `update-host-config ${newSha} short`,
+  'bash -s',
+]) {
   assert(
     (() => {
       try {
@@ -1698,6 +3278,382 @@ for (const [fixtureOptions, expectedCode, label] of [
   rmSync(protectedChange.root, { recursive: true, force: true })
 }
 
+const reviewedDigest = deploymentChangedPathDigest(['server/api.mjs'])
+const reviewedSuccess = controllerFixture({ persistenceAuthorityChange: true })
+const reviewedSuccessResult = await runController({
+  originalCommand: `deploy-reviewed-persistence ${newSha} ${reviewedDigest}`,
+  config: reviewedSuccess.config,
+  dependencies: reviewedSuccess.dependencies,
+})
+assert(
+  reviewedSuccessResult.exitCode === 0
+    && reviewedSuccessResult.output.schemaVersion === 'eqb-reviewed-persistence-receipt-v1'
+    && reviewedSuccessResult.output.trafficReopened
+    && !reviewedSuccessResult.output.rolledBack,
+  'reviewed-persistence deploy snapshots, migrates offline, and reopens traffic only on success',
+)
+assert(
+  reviewedSuccess.state.runtimeEnsures === 2
+    && reviewedSuccess.currentSha() === newSha
+    && Object.keys(reviewedSuccessResult.output.databaseSnapshots).length === 3,
+  'reviewed-persistence deploy runs import-ops owners twice and verifies all three snapshots',
+)
+rmSync(reviewedSuccess.root, { recursive: true, force: true })
+
+const wrongReviewedDigest = controllerFixture({ persistenceAuthorityChange: true })
+const wrongReviewedDigestResult = await runController({
+  originalCommand: `deploy-reviewed-persistence ${newSha} ${'f'.repeat(64)}`,
+  config: wrongReviewedDigest.config,
+  dependencies: wrongReviewedDigest.dependencies,
+})
+assert(
+  wrongReviewedDigestResult.exitCode === 1
+    && wrongReviewedDigestResult.output.failureCode === 'REVIEWED_PERSISTENCE_DIFF_MISMATCH'
+    && wrongReviewedDigest.state.buildCalls.length === 0,
+  'reviewed-persistence host independently rejects a different path digest before build',
+)
+rmSync(wrongReviewedDigest.root, { recursive: true, force: true })
+
+const snapshotFailure = controllerFixture({
+  persistenceAuthorityChange: true,
+  failSnapshotOnce: true,
+})
+const snapshotFailureResult = await runController({
+  originalCommand: `deploy-reviewed-persistence ${newSha} ${reviewedDigest}`,
+  config: snapshotFailure.config,
+  dependencies: snapshotFailure.dependencies,
+})
+assert(
+  snapshotFailureResult.exitCode === 1
+    && !snapshotFailureResult.output.trafficReopened
+    && snapshotFailure.currentSha() === oldSha
+    && snapshotFailure.state.runtimeEnsures === undefined,
+  'snapshot failure restores service on the previous release before candidate persistence runs',
+)
+rmSync(snapshotFailure.root, { recursive: true, force: true })
+
+const preTrafficFailure = controllerFixture({
+  persistenceAuthorityChange: true,
+  failLiveDatabaseOnce: true,
+  mutateDatabasesOnEnsure: true,
+})
+const preTrafficFailureResult = await runController({
+  originalCommand: `deploy-reviewed-persistence ${newSha} ${reviewedDigest}`,
+  config: preTrafficFailure.config,
+  dependencies: preTrafficFailure.dependencies,
+})
+assert(
+  preTrafficFailureResult.exitCode === 1
+    && preTrafficFailureResult.output.databasesRestored
+    && preTrafficFailureResult.output.rolledBack
+    && preTrafficFailureResult.output.rollbackHealthy
+    && !preTrafficFailureResult.output.trafficReopened
+    && preTrafficFailure.currentSha() === oldSha,
+  'pre-traffic migration verification failure restores all snapshots and previous release',
+)
+assert(
+  readFileSync(path.join(preTrafficFailure.root, 'shared/data/question-bank.sqlite'), 'utf8')
+    === 'question-bank.sqlite:before\n',
+  'pre-traffic rollback restores original database bytes',
+)
+rmSync(preTrafficFailure.root, { recursive: true, force: true })
+
+const postTrafficFailure = controllerFixture({
+  persistenceAuthorityChange: true,
+  failPostTrafficHealth: true,
+  mutateDatabasesOnEnsure: true,
+})
+const postTrafficFailureResult = await runController({
+  originalCommand: `deploy-reviewed-persistence ${newSha} ${reviewedDigest}`,
+  config: postTrafficFailure.config,
+  dependencies: postTrafficFailure.dependencies,
+})
+assert(
+  postTrafficFailureResult.exitCode === 1
+    && postTrafficFailureResult.output.trafficReopened
+    && !postTrafficFailureResult.output.databasesRestored
+    && !postTrafficFailureResult.output.rolledBack
+    && postTrafficFailure.currentSha() === newSha,
+  'post-traffic failure never replays snapshots or runs previous code against migrated data',
+)
+assert(
+  readFileSync(path.join(postTrafficFailure.root, 'shared/data/question-bank.sqlite'), 'utf8')
+    === 'question-bank.sqlite:migrated\n',
+  'post-traffic failure preserves migrated live database bytes',
+)
+assert(
+  existsSync(path.join(
+    postTrafficFailure.root,
+    'deployments/reviewed-persistence/active.json',
+  )),
+  'post-traffic failure retains recovery state instead of authorizing snapshot replay',
+)
+rmSync(postTrafficFailure.root, { recursive: true, force: true })
+
+function writeInterruptedReviewedState(fixture, { trafficReopened }) {
+  writeReleaseMarker(fixture.root, newSha)
+  rmSync(path.join(fixture.root, 'current'))
+  symlinkSync(path.join('releases', newSha), path.join(fixture.root, 'current'))
+  const stateRoot = path.join(fixture.root, 'deployments', 'reviewed-persistence')
+  const snapshotRoot = path.join(stateRoot, 'interrupted-snapshots')
+  mkdirSync(snapshotRoot, { recursive: true })
+  const snapshots = {}
+  for (const name of ['question-bank.sqlite', 'user-data.sqlite', 'import-ops.sqlite']) {
+    const live = path.join(fixture.root, 'shared', 'data', name)
+    const snapshot = path.join(snapshotRoot, name)
+    copyFileSync(live, snapshot)
+    const metadata = statSync(live)
+    snapshots[name] = {
+      digest: createHash('sha256').update(readFileSync(snapshot)).digest('hex'),
+      gid: metadata.gid,
+      mode: metadata.mode & 0o7777,
+      path: snapshot,
+      size: metadata.size,
+      uid: metadata.uid,
+    }
+    writeFileSync(live, `${name}:interrupted-migration\n`)
+  }
+  writeFileSync(path.join(stateRoot, 'active.json'), `${JSON.stringify({
+    schemaVersion: 'eqb-reviewed-persistence-state-v1',
+    targetSha: newSha,
+    previousSha: oldSha,
+    changedPaths: ['server/api.mjs'],
+    changedPathsDigest: reviewedDigest,
+    staged: true,
+    snapshots,
+    trafficReopened,
+    startedAt: '2026-09-03T00:00:00.000Z',
+  })}\n`, { mode: 0o600 })
+}
+
+const interruptedBeforeTraffic = controllerFixture({ persistenceAuthorityChange: true })
+writeInterruptedReviewedState(interruptedBeforeTraffic, { trafficReopened: false })
+const recoveredBeforeTraffic = await runController({
+  originalCommand: `deploy-reviewed-persistence ${newSha} ${reviewedDigest}`,
+  config: interruptedBeforeTraffic.config,
+  dependencies: interruptedBeforeTraffic.dependencies,
+})
+assert(
+  recoveredBeforeTraffic.exitCode === 1
+    && recoveredBeforeTraffic.output.recovered
+    && recoveredBeforeTraffic.output.databasesRestored
+    && recoveredBeforeTraffic.output.rollbackHealthy
+    && interruptedBeforeTraffic.currentSha() === oldSha,
+  'interrupted pre-traffic transaction resumes only to safe snapshot rollback',
+)
+rmSync(interruptedBeforeTraffic.root, { recursive: true, force: true })
+
+const interruptedAfterTraffic = controllerFixture({ persistenceAuthorityChange: true })
+writeInterruptedReviewedState(interruptedAfterTraffic, { trafficReopened: true })
+const recoveredAfterTraffic = await runController({
+  originalCommand: `deploy-reviewed-persistence ${newSha} ${reviewedDigest}`,
+  config: interruptedAfterTraffic.config,
+  dependencies: interruptedAfterTraffic.dependencies,
+})
+assert(
+  recoveredAfterTraffic.exitCode === 0
+    && recoveredAfterTraffic.output.recovered
+    && !recoveredAfterTraffic.output.databasesRestored
+    && readFileSync(
+      path.join(interruptedAfterTraffic.root, 'shared/data/question-bank.sqlite'),
+      'utf8',
+    ) === 'question-bank.sqlite:interrupted-migration\n',
+  'interrupted post-traffic transaction terminalizes healthy target without snapshot replay',
+)
+rmSync(interruptedAfterTraffic.root, { recursive: true, force: true })
+
+const hostUpdateSuccess = controllerFixture({ hostConfigurationChange: true })
+installFixtureHostConfiguration(hostUpdateSuccess, oldSha)
+const hostUpdateDigest = deploymentChangedPathDigest(['deploy/eqb-release.service'])
+const hostUpdateSuccessResult = await runController({
+  originalCommand: `update-host-config ${newSha} ${hostUpdateDigest}`,
+  config: hostUpdateSuccess.config,
+  dependencies: hostUpdateSuccess.dependencies,
+})
+assert(
+  hostUpdateSuccessResult.exitCode === 0
+    && hostUpdateSuccessResult.output.schemaVersion === 'eqb-host-configuration-receipt-v1'
+    && hostUpdateSuccessResult.output.installed
+    && !hostUpdateSuccessResult.output.rolledBack
+    && !existsSync(path.join(
+      hostUpdateSuccess.root,
+      'deployments/host-configuration-update/recovery-controller.mjs',
+    )),
+  `versioned host configuration validates, installs atomically, reloads, and reports success: ${JSON.stringify({ result: hostUpdateSuccessResult, state: hostUpdateSuccess.state })}`,
+)
+assert(
+  readlinkSync(path.join(hostUpdateSuccess.root, 'deployments/host-configuration/current'))
+    === path.join('versions', newSha),
+  'host configuration current pointer advances to one exact SHA',
+)
+const hostUpdateNoOp = await runController({
+  originalCommand: `update-host-config ${newSha} ${hostUpdateDigest}`,
+  config: hostUpdateSuccess.config,
+  dependencies: hostUpdateSuccess.dependencies,
+})
+assert(hostUpdateNoOp.exitCode === 0 && hostUpdateNoOp.output.noOp, 'installed host configuration is idempotent')
+rmSync(hostUpdateSuccess.root, { recursive: true, force: true })
+
+const hostUpdateRollback = controllerFixture({
+  hostConfigurationChange: true,
+  failHostConfigurationReloadOnce: true,
+})
+installFixtureHostConfiguration(hostUpdateRollback, oldSha)
+const hostUpdateRollbackResult = await runController({
+  originalCommand: `update-host-config ${newSha} ${hostUpdateDigest}`,
+  config: hostUpdateRollback.config,
+  dependencies: hostUpdateRollback.dependencies,
+})
+assert(
+  hostUpdateRollbackResult.exitCode === 1
+    && hostUpdateRollbackResult.output.rolledBack
+    && hostUpdateRollbackResult.output.rollbackHealthy
+    && readlinkSync(path.join(hostUpdateRollback.root, 'deployments/host-configuration/current'))
+      === path.join('versions', oldSha)
+    && readFileSync(hostUpdateRollback.config.systemdUnitPath, 'utf8') === 'old service\n',
+  'failed host configuration reload restores files and the previous version pointer',
+)
+const hostUpdateAfterHealthyRollback = await runController({
+  originalCommand: `update-host-config ${newSha} ${hostUpdateDigest}`,
+  config: hostUpdateRollback.config,
+  dependencies: hostUpdateRollback.dependencies,
+})
+assert(
+  hostUpdateAfterHealthyRollback.exitCode === 0
+    && hostUpdateAfterHealthyRollback.output.installed
+    && !hostUpdateAfterHealthyRollback.output.staged,
+  'a fresh authorization can reuse a validated version after healthy host-config rollback',
+)
+rmSync(hostUpdateRollback.root, { recursive: true, force: true })
+
+const hostUpdateUnsafeRollback = controllerFixture({
+  hostConfigurationChange: true,
+  failHostConfigurationReload: true,
+})
+installFixtureHostConfiguration(hostUpdateUnsafeRollback, oldSha)
+const hostUpdateUnsafeRollbackResult = await runController({
+  originalCommand: `update-host-config ${newSha} ${hostUpdateDigest}`,
+  config: hostUpdateUnsafeRollback.config,
+  dependencies: hostUpdateUnsafeRollback.dependencies,
+})
+assert(
+  hostUpdateUnsafeRollbackResult.exitCode === 1
+    && !hostUpdateUnsafeRollbackResult.output.rollbackHealthy
+    && existsSync(path.join(
+      hostUpdateUnsafeRollback.root,
+      'deployments/host-configuration-update/active.json',
+    ))
+    && existsSync(path.join(
+      hostUpdateUnsafeRollback.root,
+      'deployments/host-configuration-update/recovery-controller.mjs',
+    )),
+  'unhealthy host-configuration rollback retains exact recovery state',
+)
+rmSync(hostUpdateUnsafeRollback.root, { recursive: true, force: true })
+
+function writeInterruptedHostUpdate(fixture, { complete }) {
+  const target = installFixtureHostConfiguration(fixture, newSha, { candidate: true })
+  copyFileSync(
+    path.join(target, 'deploy/eqb-release.service'),
+    fixture.config.systemdUnitPath,
+  )
+  if (complete) {
+    copyFileSync(
+      path.join(target, 'deploy/Caddyfile.release'),
+      fixture.config.caddyConfigPath,
+    )
+  }
+  const stateRoot = path.join(
+    fixture.root,
+    'deployments',
+    'host-configuration-update',
+  )
+  mkdirSync(stateRoot, { recursive: true })
+  chmodSync(stateRoot, 0o700)
+  copyFileSync(
+    path.join(
+      fixture.root,
+      'deployments/host-configuration/versions',
+      oldSha,
+      'deploy/eqb-deploy-controller.mjs',
+    ),
+    path.join(stateRoot, 'recovery-controller.mjs'),
+  )
+  chmodSync(path.join(stateRoot, 'recovery-controller.mjs'), 0o600)
+  const backup = path.join(stateRoot, `backup-${newSha}-interrupted`)
+  mkdirSync(path.join(backup, 'deploy'), { recursive: true })
+  chmodSync(backup, 0o700)
+  writeFileSync(path.join(backup, 'deploy/eqb-release.service'), 'old service\n', { mode: 0o600 })
+  writeFileSync(path.join(backup, 'deploy/Caddyfile.release'), 'old caddy\n', { mode: 0o600 })
+  writeFileSync(path.join(stateRoot, 'active.json'), `${JSON.stringify({
+    schemaVersion: 'eqb-host-configuration-state-v1',
+    targetSha: newSha,
+    previousSha: oldSha,
+    changedPaths: ['deploy/eqb-release.service'],
+    changedPathsDigest: hostUpdateDigest,
+    staged: true,
+    backupDirectory: backup,
+    startedAt: '2026-09-03T00:00:00.000Z',
+  })}\n`, { mode: 0o600 })
+}
+
+const interruptedHostUpdate = controllerFixture({ hostConfigurationChange: true })
+writeInterruptedHostUpdate(interruptedHostUpdate, { complete: true })
+const recoveredHostUpdate = await runController({
+  originalCommand: `update-host-config ${newSha} ${hostUpdateDigest}`,
+  config: interruptedHostUpdate.config,
+  dependencies: interruptedHostUpdate.dependencies,
+})
+assert(
+  recoveredHostUpdate.exitCode === 0
+    && recoveredHostUpdate.output.recovered
+    && recoveredHostUpdate.output.installed,
+  'interrupted installed host configuration is health-checked and terminalized idempotently',
+)
+rmSync(interruptedHostUpdate.root, { recursive: true, force: true })
+
+const partialHostUpdate = controllerFixture({ hostConfigurationChange: true })
+writeInterruptedHostUpdate(partialHostUpdate, { complete: false })
+const recoveredPartialHostUpdate = await runController({
+  originalCommand: `update-host-config ${newSha} ${hostUpdateDigest}`,
+  config: partialHostUpdate.config,
+  dependencies: partialHostUpdate.dependencies,
+})
+assert(
+  recoveredPartialHostUpdate.exitCode === 1
+    && recoveredPartialHostUpdate.output.recovered
+    && recoveredPartialHostUpdate.output.rolledBack
+    && recoveredPartialHostUpdate.output.rollbackHealthy
+    && readlinkSync(path.join(partialHostUpdate.root, 'deployments/host-configuration/current'))
+      === path.join('versions', oldSha),
+  'interrupted partial host installation bypasses strict active-marker proof only to roll back',
+)
+rmSync(partialHostUpdate.root, { recursive: true, force: true })
+
+const rootInstalledTarget = controllerFixture({
+  hostConfigurationChange: true,
+  stableLauncherChange: true,
+})
+const rootInstalledVersion = installFixtureHostConfiguration(rootInstalledTarget, newSha, { candidate: true })
+copyFileSync(
+  path.join(rootInstalledVersion, 'deploy/eqb-release.service'),
+  rootInstalledTarget.config.systemdUnitPath,
+)
+copyFileSync(
+  path.join(rootInstalledVersion, 'deploy/Caddyfile.release'),
+  rootInstalledTarget.config.caddyConfigPath,
+)
+const rootInstalledDeploy = await runController({
+  originalCommand: `deploy ${newSha}`,
+  config: rootInstalledTarget.config,
+  dependencies: rootInstalledTarget.dependencies,
+})
+assert(
+  rootInstalledDeploy.exitCode === 0 && rootInstalledTarget.currentSha() === newSha,
+  'digest-bound root installation unlocks the exact stable-launcher and host-config target only',
+)
+rmSync(rootInstalledTarget.root, { recursive: true, force: true })
+
 const fixedPreflight = controllerFixture()
 const fixedPreflightResult = await runController({
   originalCommand: 'preflight',
@@ -1707,7 +3663,23 @@ const fixedPreflightResult = await runController({
 assert(
   fixedPreflightResult.output.layout === 'release'
     && fixedPreflightResult.output.productionSha === oldSha,
-  'fixed controller provides bounded read-only preflight',
+  'fixed controller provides bounded read-only preflight with active host configuration proof',
+)
+writeFileSync(fixedPreflight.config.caddyConfigPath, 'tampered caddy\n')
+assert(
+  await (async () => {
+    try {
+      await runController({
+        originalCommand: 'preflight',
+        config: fixedPreflight.config,
+        dependencies: fixedPreflight.dependencies,
+      })
+      return false
+    } catch {
+      return true
+    }
+  })(),
+  'fixed preflight rejects installed host configuration that drifts from its active version marker',
 )
 rmSync(fixedPreflight.root, { recursive: true, force: true })
 
@@ -1754,18 +3726,116 @@ const controllerWrapper = readText(ROOT, 'deploy/eqb-deploy-controller')
 const transportWrapper = readText(ROOT, 'deploy/eqb-deploy-transport')
 const bootstrapSource = readText(ROOT, 'deploy/bootstrap-eqb-deployment.sh')
 const baselineSource = readText(ROOT, 'deploy/eqb-legacy-baseline.mjs')
+const baselineStateSource = readText(ROOT, 'deploy/eqb-legacy-baseline-state.mjs')
 const keyRetirementSource = readText(ROOT, 'deploy/retire-eqb-bootstrap-key.mjs')
+const cancellationSource = readText(ROOT, 'deploy/cancel-eqb-bootstrap-attempt.mjs')
+const maintenanceInstallerSource = readText(ROOT, 'deploy/install-eqb-maintenance-controller.sh')
+const maintenanceInspectorSource = readText(ROOT, 'deploy/inspect-eqb-maintenance-host.sh')
+const deployLibrarySource = readText(ROOT, 'scripts/lib/ampOrbDeploy.mjs')
+const tencentTatSource = readText(ROOT, 'scripts/lib/tencentTat.mjs')
+const exactMaintenanceTatCommand = buildMaintenanceReadinessTatCommand({
+  inspectorSource: maintenanceInspectorSource,
+  targetSha: newSha,
+  payloadDigest: maintenanceInstallDigest,
+  transportUser: maintenanceInstallTransportUser,
+})
+const exactMaintenanceTatSyntax = spawnSync('/bin/bash', ['-n'], {
+  encoding: 'utf8',
+  input: exactMaintenanceTatCommand,
+})
+assert(
+  exactMaintenanceTatSyntax.status === 0
+    && Buffer.from(exactMaintenanceTatCommand).toString('base64').length <= 64 * 1024,
+  'exact merged maintenance inspector remains valid inside the TAT command-content limit',
+)
+const baselineProtectedBlock = baselineSource.slice(
+  baselineSource.indexOf('  const protectedPaths = ['),
+  baselineSource.indexOf('\n  ]', baselineSource.indexOf('  const protectedPaths = [')) + 4,
+)
+const baselineProtectedPaths = [...baselineProtectedBlock.matchAll(/^    '([^']+)',$/gmu)]
+  .map((match) => match[1])
+const bootstrapProtectedBlock = bootstrapSource.slice(
+  bootstrapSource.indexOf('protected_changes=$('),
+  bootstrapSource.indexOf('\n[[ -z $protected_changes ]]'),
+)
+const bootstrapProtectedPaths = [...bootstrapProtectedBlock.matchAll(/^  (\S+)(?: \\|\))$/gmu)]
+  .map((match) => match[1])
+assert(
+  JSON.stringify(PERSISTENCE_AUTHORITY_PATHS) === JSON.stringify(EQB_PERSISTENCE_AUTHORITY_PATHS)
+    && JSON.stringify(baselineProtectedPaths) === JSON.stringify(EQB_PERSISTENCE_AUTHORITY_PATHS)
+    && JSON.stringify(bootstrapProtectedPaths) === JSON.stringify(EQB_PERSISTENCE_AUTHORITY_PATHS),
+  'Orb, baseline, bootstrap, and fixed controller use one exact persistence-authority path set',
+)
+assert(
+  JSON.stringify(HOST_CONFIGURATION_PATHS) === JSON.stringify(EQB_HOST_CONFIGURATION_PATHS)
+    && JSON.stringify(STABLE_LAUNCHER_PATHS) === JSON.stringify(EQB_STABLE_LAUNCHER_PATHS),
+  'Orb and fixed controller use exact host-configuration and stable-launcher path sets',
+)
+const privateWriteSource = controllerSource.slice(
+  controllerSource.indexOf('function privateWrite('),
+  controllerSource.indexOf('\nfunction sha256(', controllerSource.indexOf('function privateWrite(')),
+)
+assert(
+  privateWriteSource.indexOf("openSync(temporary, 'wx', 0o600)")
+      < privateWriteSource.indexOf("writeFileSync(descriptor, value, 'utf8')")
+    && privateWriteSource.indexOf("writeFileSync(descriptor, value, 'utf8')")
+      < privateWriteSource.indexOf('fsyncSync(descriptor)')
+    && privateWriteSource.indexOf('fsyncSync(descriptor)')
+      < privateWriteSource.indexOf('renameSync(temporary, filePath)')
+    && privateWriteSource.indexOf('renameSync(temporary, filePath)')
+      < privateWriteSource.indexOf('syncDirectory(path.dirname(filePath))')
+    && controllerSource.includes(
+      'fsConstants.O_RDONLY | fsConstants.O_DIRECTORY | fsConstants.O_NOFOLLOW',
+    ),
+  'maintenance state publication fsyncs bytes before rename and the parent directory after rename',
+)
+assert(
+  controllerSource.includes('syncDirectory(config.root)')
+    && controllerSource.includes('syncDirectory(directory)\n  return snapshots')
+    && controllerSource.includes('syncDirectory(path.dirname(filePath))\n      verifySqliteDatabase')
+    && controllerSource.includes('syncDirectory(hostConfigurationRoot(config))')
+    && controllerSource.includes('syncDirectory(path.dirname(statePath))'),
+  'release pointers, database snapshots/restores, host pointers, and terminal state removal are durable',
+)
+const installerRollbackSource = maintenanceInstallerSource.slice(
+  maintenanceInstallerSource.indexOf('rollback() {'),
+  maintenanceInstallerSource.indexOf('\n\ncleanup() {'),
+)
+assert(
+  maintenanceInstallerSource.indexOf('host_config_created=1')
+      < maintenanceInstallerSource.indexOf('install -d -o root -g root -m 0700 "$HOST_CONFIG_ROOT"')
+    && installerRollbackSource.includes(
+      'host_config_created == 1 && (activated == 0 || restored == 1)',
+    )
+    && installerRollbackSource.includes('rollback_failed=1')
+    && installerRollbackSource.includes('rollback incomplete; backup=%s')
+    && maintenanceInstallerSource.includes('sync -f "$HOST_CONFIG_ROOT"')
+    && maintenanceInstallerSource.includes('sync -f "$backup"'),
+  'one-time installer removes a handled partial layout and reports incomplete rollback explicitly',
+)
 execFileSync(process.execPath, ['--check', path.join(ROOT, 'deploy', 'eqb-deploy-controller.mjs')])
+execFileSync(process.execPath, ['--check', path.join(ROOT, 'deploy', 'eqb-legacy-baseline-state.mjs')])
 execFileSync(process.execPath, ['--check', path.join(ROOT, 'deploy', 'eqb-legacy-baseline.mjs')])
 execFileSync(process.execPath, ['--check', path.join(ROOT, 'deploy', 'retire-eqb-bootstrap-key.mjs')])
+execFileSync(process.execPath, ['--check', path.join(ROOT, 'deploy', 'cancel-eqb-bootstrap-attempt.mjs')])
 execFileSync('/bin/sh', ['-n', path.join(ROOT, 'deploy', 'eqb-deploy-controller')])
 execFileSync('/bin/sh', ['-n', path.join(ROOT, 'deploy', 'eqb-deploy-transport')])
 execFileSync('/bin/bash', ['-n', path.join(ROOT, 'deploy', 'bootstrap-eqb-deployment.sh')])
+execFileSync('/bin/bash', ['-n', path.join(ROOT, 'deploy', 'install-eqb-maintenance-controller.sh')])
+execFileSync('/bin/bash', ['-n', path.join(ROOT, 'deploy', 'inspect-eqb-maintenance-host.sh')])
+assert(
+  (statSync(path.join(ROOT, 'deploy', 'inspect-eqb-maintenance-host.sh')).mode & 0o111) === 0o111,
+  'standalone maintenance-install inspector is committed as an executable script',
+)
 for (const originalCommand of [
   '',
   'deploy',
   `deploy ${newSha} --force`,
   `deploy ${newSha}; id`,
+  `deploy-reviewed-persistence ${newSha}`,
+  `deploy-reviewed-persistence ${newSha} ${maintenanceDigest} extra`,
+  `deploy-reviewed-persistence ${newSha} ${maintenanceDigest};id`,
+  `update-host-config ${newSha} short`,
   'bash -s',
 ]) {
   const rejected = spawnSync('/bin/sh', [path.join(ROOT, 'deploy', 'eqb-deploy-transport')], {
@@ -1774,7 +3844,16 @@ for (const originalCommand of [
   })
   assert(rejected.status === 64, `transport wrapper rejects command shape ${JSON.stringify(originalCommand)}`)
 }
-for (const args of [[], ['preflight'], ['--'], ['--', 'deploy'], ['--', 'deploy', newSha, '--force']]) {
+for (const args of [
+  [],
+  ['preflight'],
+  ['--'],
+  ['--', 'deploy'],
+  ['--', 'deploy', newSha, '--force'],
+  ['--', 'deploy-reviewed-persistence', newSha],
+  ['--', 'deploy-reviewed-persistence', newSha, maintenanceDigest, 'extra'],
+  ['--', 'update-host-config', newSha, 'short'],
+]) {
   const rejected = spawnSync('/bin/sh', [path.join(ROOT, 'deploy', 'eqb-deploy-controller'), ...args], {
     encoding: 'utf8',
   })
@@ -1809,6 +3888,286 @@ function functionSource(source, name, next) {
   return source.slice(start, end)
 }
 
+const cancellationFixtureRoot = mkdtempSync(path.join(tmpdir(), 'eqb-bootstrap-cancellation-'))
+chmodSync(cancellationFixtureRoot, 0o700)
+try {
+  const cancellationFixture = path.join(cancellationFixtureRoot, 'cancel.mjs')
+  writeFileSync(cancellationFixture, cancellationSource
+    .replace(
+      "const backupRoot = '/var/backups/eqb'",
+      `const backupRoot = ${JSON.stringify(cancellationFixtureRoot)}`,
+    )
+    .replace("if (process.getuid?.() !== 0) fail('run-as-root')", '')
+    .replaceAll('before.uid !== 0', 'before.uid !== process.getuid()')
+    .replaceAll('before.gid !== 0', 'before.gid !== process.getgid()')
+    .replaceAll('backupRootState.uid !== 0', 'backupRootState.uid !== process.getuid()')
+    .replaceAll('backupRootState.gid !== 0', 'backupRootState.gid !== process.getgid()')
+    .replace(
+      'fs.fchownSync(descriptor, 0, 0)',
+      'fs.fchownSync(descriptor, process.getuid(), process.getgid())',
+    ))
+  const cancellationUnit = `eqb-release-bootstrap-${'7'.repeat(32)}`
+  const runCancellation = (unit = cancellationUnit) => spawnSync(
+    process.execPath,
+    [cancellationFixture, newSha, unit],
+    {
+      encoding: 'utf8',
+      env: process.env,
+    },
+  )
+  const firstCancellation = runCancellation()
+  const cancellation = parseReleaseBootstrapCancellation(
+    firstCancellation.stdout,
+    newSha,
+    cancellationUnit,
+  )
+  const cancellationPath = path.join(
+    cancellationFixtureRoot,
+    `bootstrap-cancellation-${cancellationUnit}.json`,
+  )
+  const firstCancellationBytes = readFileSync(cancellationPath, 'utf8')
+  const secondCancellation = runCancellation()
+  assert(
+    firstCancellation.status === 0
+      && secondCancellation.status === 0
+      && cancellation.cancellationInstalled
+      && !cancellation.hostAttemptStarted
+      && parseReleaseBootstrapCancellation(
+        secondCancellation.stdout,
+        newSha,
+        cancellationUnit,
+      ).cancellationInstalled
+      && readFileSync(cancellationPath, 'utf8') === firstCancellationBytes
+      && (statSync(cancellationPath).mode & 0o777) === 0o600,
+    'host cancellation is private, exact, atomic, and idempotent for one target and unit',
+  )
+
+  const acceptedUnit = `eqb-release-bootstrap-${'6'.repeat(32)}`
+  const acceptedPath = path.join(
+    cancellationFixtureRoot,
+    `bootstrap-attempt-${acceptedUnit}.json`,
+  )
+  const acceptanceGate = functionSource(
+    bootstrapSource,
+    'register_host_acceptance',
+    'report_failure() {',
+  )
+    .replace('    || ! chown root:root "$temporary" \\\n', '')
+    .replace('!= 0:0:600:1', `!= ${process.getuid()}:${process.getgid()}:600:1`)
+  const acceptanceGateHarness = path.join(cancellationFixtureRoot, 'accept.sh')
+  writeFileSync(acceptanceGateHarness, `#!/usr/bin/env bash
+set -euo pipefail
+${acceptanceGate}
+fail() { printf 'acceptance-failed\\n'; exit 23; }
+FAILURE_BACKUP_ROOT=$1
+TARGET_SHA=$2
+BOOTSTRAP_UNIT=$3
+register_host_acceptance
+`)
+  const hostAcceptance = spawnSync('/bin/bash', [
+    acceptanceGateHarness,
+    cancellationFixtureRoot,
+    newSha,
+    acceptedUnit,
+  ], { encoding: 'utf8' })
+  assert(
+    hostAcceptance.status === 0
+      && (statSync(acceptedPath).mode & 0o777) === 0o600,
+    'host bootstrap atomically retains unit-bound acceptance before beginning its attempt',
+  )
+  const acceptedCancellation = runCancellation(acceptedUnit)
+  assert(
+    acceptedCancellation.status === 0
+      && parseReleaseBootstrapCancellation(
+        acceptedCancellation.stdout,
+        newSha,
+        acceptedUnit,
+      ).hostAttemptStarted,
+    'host cancellation reports durable bootstrap acceptance instead of treating it as dispatch-unknown',
+  )
+
+  const unsafeUnit = `eqb-release-bootstrap-${'5'.repeat(32)}`
+  writeFileSync(
+    path.join(cancellationFixtureRoot, `bootstrap-attempt-${unsafeUnit}.json`),
+    '{}\n',
+    { mode: 0o644 },
+  )
+  const unsafeCancellation = runCancellation(unsafeUnit)
+  assert(
+    unsafeCancellation.status !== 0
+      && !existsSync(path.join(
+        cancellationFixtureRoot,
+        `bootstrap-cancellation-${unsafeUnit}.json`,
+      )),
+    'unsafe or malformed host acceptance evidence blocks cancellation and recovery cleanup',
+  )
+
+  const cancellationGate = functionSource(
+    bootstrapSource,
+    'assert_not_cancelled',
+    'report_failure() {',
+  )
+    .replace('state.uid !== 0', 'state.uid !== process.getuid()')
+    .replace('state.gid !== 0', 'state.gid !== process.getgid()')
+    .replace('/usr/bin/node', process.execPath)
+  const cancellationGateHarness = path.join(cancellationFixtureRoot, 'gate.sh')
+  writeFileSync(cancellationGateHarness, `#!/usr/bin/env bash
+set -euo pipefail
+${cancellationGate}
+fail() { printf 'cancelled-before-mutation\\n'; exit 23; }
+FAILURE_BACKUP_ROOT=$1
+TARGET_SHA=$2
+BOOTSTRAP_UNIT=$3
+assert_not_cancelled
+printf 'unsafe-runtime-mutation\\n'
+`)
+  const blockedBootstrap = spawnSync('/bin/bash', [
+    cancellationGateHarness,
+    cancellationFixtureRoot,
+    newSha,
+    cancellationUnit,
+  ], { encoding: 'utf8' })
+  assert(
+    blockedBootstrap.status === 23
+      && blockedBootstrap.stdout.trim() === 'cancelled-before-mutation'
+      && !blockedBootstrap.stdout.includes('unsafe-runtime-mutation'),
+    'a queued host bootstrap observes exact cancellation before its first runtime mutation',
+  )
+
+  const lockPath = path.join(cancellationFixtureRoot, 'bootstrap.lock')
+  const lockContention = spawnSync('/bin/bash', [
+    '-c',
+    'exec 9>"$1"; /usr/bin/flock --exclusive 9; '
+      + '/usr/bin/flock --exclusive --nonblock --conflict-exit-code 75 "$1" /bin/true',
+    'eqb-lock-fixture',
+    lockPath,
+  ])
+  assert(
+    lockContention.status === 75,
+    'host cancellation refuses while the bootstrap transaction lock is held',
+  )
+} finally {
+  rmSync(cancellationFixtureRoot, { recursive: true, force: true })
+}
+
+for (const [label, rules, allowed] of [
+  ['global NOPASSWD ALL', '    (ALL : ALL) NOPASSWD: ALL', true],
+  [
+    'unrestricted exact controller',
+    '    (root) NOPASSWD: /usr/local/libexec/eqb-deploy-controller-v1',
+    true,
+  ],
+  [
+    'legacy bounded controller commands',
+    '    (root) NOPASSWD: /usr/local/libexec/eqb-deploy-controller-v1 -- preflight, '
+      + '/usr/local/libexec/eqb-deploy-controller-v1 -- deploy *',
+    false,
+  ],
+  [
+    'legacy separate bounded controller rules',
+    '    (root) NOPASSWD: /usr/local/libexec/eqb-deploy-controller-v1 -- preflight\n'
+      + '    (root) NOPASSWD: /usr/local/libexec/eqb-deploy-controller-v1 -- deploy *',
+    false,
+  ],
+  [
+    'complete bounded controller rules',
+    '    (root) NOPASSWD: /usr/local/libexec/eqb-deploy-controller-v1 -- preflight,\n'
+      + '        /usr/local/libexec/eqb-deploy-controller-v1 -- deploy *,\n'
+      + '        /usr/local/libexec/eqb-deploy-controller-v1 -- deploy-reviewed-persistence *,\n'
+      + '        /usr/local/libexec/eqb-deploy-controller-v1 -- update-host-config *',
+    true,
+  ],
+  [
+    'preflight-only controller',
+    '    (root) NOPASSWD: /usr/local/libexec/eqb-deploy-controller-v1 -- preflight',
+    false,
+  ],
+  [
+    'password-required controller',
+    '    (root) PASSWD: /usr/local/libexec/eqb-deploy-controller-v1',
+    false,
+  ],
+  [
+    'mixed password tag',
+    '    (root) NOPASSWD: /usr/local/libexec/eqb-deploy-controller-v1 -- preflight, '
+      + 'PASSWD: /usr/local/libexec/eqb-deploy-controller-v1 -- deploy *',
+    false,
+  ],
+  [
+    'near-prefix commands',
+    '    (root) NOPASSWD: /usr/local/libexec/eqb-deploy-controller-v1 -- preflight-extra, '
+      + '/usr/local/libexec/eqb-deploy-controller-v1 -- deploy-extra *',
+    false,
+  ],
+]) {
+  assert(controllerSudoAllowed(rules) === allowed, `${label} sudo scope is classified exactly`)
+}
+
+const snapshotFixtureRoot = mkdtempSync(path.join(tmpdir(), 'eqb-bootstrap-snapshots-'))
+try {
+  const snapshotFunctions = [
+    functionSource(bootstrapSource, 'verify_sqlite_database', 'snapshot_databases() {'),
+    functionSource(bootstrapSource, 'snapshot_databases', 'normalize_generated_dist() {'),
+  ].join('\n\n')
+    .replaceAll('/usr/bin/node', JSON.stringify(process.execPath))
+    .replace('install -d -o root -g root -m 0700', '/usr/bin/mkdir -p')
+    .replace('    chown root:root "$snapshot"\n', '')
+  const harness = path.join(snapshotFixtureRoot, 'snapshot-fixture.sh')
+  writeFileSync(harness, `#!/usr/bin/env bash
+set -euo pipefail
+${snapshotFunctions}
+SOURCE=$1/live
+backup=$1/backup
+declare -A database_snapshot_digests=()
+declare -A database_identities=()
+for name in question-bank.sqlite user-data.sqlite import-ops.sqlite; do
+  database_identities["$name"]=$(stat -c '%d:%i' "$SOURCE/data/$name")
+done
+fail() { printf '%s\n' "$1" >&2; return 1; }
+snapshot_databases
+for name in question-bank.sqlite user-data.sqlite import-ops.sqlite; do
+  printf '%s=%s\n' "$name" "${'${database_snapshot_digests[$name]}'}"
+done
+`, { mode: 0o700 })
+  const liveData = path.join(snapshotFixtureRoot, 'live', 'data')
+  mkdirSync(liveData, { recursive: true })
+  for (const name of ['question-bank.sqlite', 'user-data.sqlite', 'import-ops.sqlite']) {
+    execFileSync('/usr/bin/sqlite3', [
+      path.join(liveData, name),
+      'PRAGMA foreign_keys=ON; CREATE TABLE parent(id INTEGER PRIMARY KEY); '
+        + 'CREATE TABLE child(parent_id INTEGER REFERENCES parent(id)); INSERT INTO parent VALUES(1);',
+    ])
+  }
+  const snapshotResult = spawnSync('/bin/bash', [harness, snapshotFixtureRoot], {
+    encoding: 'utf8',
+  })
+  const reportedDigests = new Map(String(snapshotResult.stdout || '').trim().split('\n')
+    .filter(Boolean)
+    .map((line) => line.split('=')))
+  assert(snapshotResult.status === 0, 'bootstrap database snapshot harness completes successfully')
+  for (const name of ['question-bank.sqlite', 'user-data.sqlite', 'import-ops.sqlite']) {
+    const snapshot = path.join(snapshotFixtureRoot, 'backup', 'databases', name)
+    const integrity = execFileSync('/usr/bin/sqlite3', [snapshot, 'PRAGMA integrity_check;'], {
+      encoding: 'utf8',
+    }).trim()
+    const digest = createHash('sha256').update(readFileSync(snapshot)).digest('hex')
+    assert(
+      integrity === 'ok'
+        && (statSync(snapshot).mode & 0o777) === 0o600
+        && reportedDigests.get(name) === digest,
+      `${name} snapshot is valid, private, and bound to its receipt digest`,
+    )
+  }
+  rmSync(path.join(snapshotFixtureRoot, 'backup'), { recursive: true, force: true })
+  rmSync(path.join(liveData, 'user-data.sqlite'))
+  const failedSnapshot = spawnSync('/bin/bash', [harness, snapshotFixtureRoot], {
+    encoding: 'utf8',
+  })
+  assert(failedSnapshot.status !== 0, 'missing live database fails the snapshot stage closed')
+} finally {
+  rmSync(snapshotFixtureRoot, { recursive: true, force: true })
+}
+
 const rollbackFixtureRoot = mkdtempSync(path.join(tmpdir(), 'eqb-bootstrap-rollback-'))
 try {
   const functions = [
@@ -1841,6 +4200,7 @@ CONTROLLER_DIRECTORY=$fixture/usr/local/libexec
 CONTROLLER=$CONTROLLER_DIRECTORY/eqb-deploy-controller-v1
 CONTROLLER_MODULE=$CONTROLLER_DIRECTORY/eqb-deploy-controller-v1.mjs
 TRANSPORT_CONTROLLER=$CONTROLLER_DIRECTORY/eqb-deploy-transport-v1
+HOST_CONFIG_ROOT=$ROOT/deployments/host-configuration
 AUTHORIZED_KEYS=$fixture/root-ssh/authorized_keys
 PUBLIC_KEY_TEMP=
 archive_dir=
@@ -1993,8 +4353,98 @@ assert(
     )
     && transportWrapper.includes(
       'exec /usr/bin/sudo -n /usr/local/libexec/eqb-deploy-controller-v1 -- deploy "$sha"',
-    ),
-  'forced transport wrapper accepts only bounded commands before the root controller boundary',
+    )
+    && transportWrapper.includes("command_name=deploy-reviewed-persistence")
+    && transportWrapper.includes("command_name=update-host-config")
+    && transportWrapper.includes('[ "${#digest}" -eq 64 ] || exit 64')
+    && controllerWrapper.includes('/opt/eqb/deployments/host-configuration/current/deploy/eqb-deploy-controller.mjs')
+    && controllerWrapper.includes('/opt/eqb/deployments/host-configuration-update/recovery-controller.mjs'),
+  'forced transport and stable root wrappers accept only bounded versioned maintenance commands',
+)
+assert(
+  maintenanceInstallerSource.indexOf('tar -tf "$PAYLOAD"')
+      < maintenanceInstallerSource.indexOf('tar -xf "$PAYLOAD"')
+    && maintenanceInstallerSource.includes("fail 'payload archive member set is not exact'")
+    && maintenanceInstallerSource.includes("fail 'payload member is not a regular file'")
+    && maintenanceInstallerSource.includes('show "$TARGET_SHA:$relative"')
+    && maintenanceInstallerSource.includes('sudo -n -l -U "$TRANSPORT_USER"')
+    && maintenanceInstallerSource.includes('SSH_ORIGINAL_COMMAND=preflight')
+    && maintenanceInstallerSource.includes('EQB_MAINTENANCE_CONTROLLER_INSTALL')
+    && maintenanceInstallerSource.includes('strict_health'),
+  'one-time root installer binds exact typed target bytes and proves the full forced route before success',
+)
+const installerLockIndex = maintenanceInstallerSource.indexOf(
+  '/usr/bin/flock --exclusive --nonblock --conflict-exit-code 75 9',
+)
+const installerStagingIndex = maintenanceInstallerSource.indexOf(
+  'staging=$(mktemp -d "$ROOT/deployments/.maintenance-controller-XXXXXXXX")',
+)
+const installerFetchIndex = maintenanceInstallerSource.indexOf(
+  'run_source /usr/bin/git -C "$SOURCE" fetch --quiet --no-tags origin main',
+)
+const installerReadinessIndex = maintenanceInstallerSource.indexOf(
+  '"$staging/deploy/inspect-eqb-maintenance-host.sh"',
+)
+const installerBackupIndex = maintenanceInstallerSource.indexOf(
+  'backup=$(mktemp -d "$BACKUP_ROOT/maintenance-controller-install-',
+)
+const installerLockNormalizationIndex = maintenanceInstallerSource.indexOf(
+  'chmod 0600 "$DEPLOY_LOCK"',
+)
+assert(
+  installerLockIndex !== -1
+    && installerLockIndex < installerStagingIndex
+    && installerStagingIndex < installerFetchIndex
+    && installerFetchIndex < installerReadinessIndex
+    && installerReadinessIndex < installerLockNormalizationIndex
+    && installerLockNormalizationIndex < installerBackupIndex
+    && installerReadinessIndex < installerBackupIndex
+    && maintenanceInstallerSource.includes('EQB_MAINTENANCE_LOCK_FD=9')
+    && maintenanceInstallerSource.match(/deploy\/inspect-eqb-maintenance-host\.sh/gmu)?.length >= 4,
+  'installer holds the production lock across exact-main fetch, six-file proof, adjacent inspection, and mutation',
+)
+assert(
+  maintenanceInstallerSource.includes('( $actual_mode == 600 || $actual_mode == 644 )')
+    && maintenanceInstallerSource.includes('lock_mode_changed=1\n  chmod 0600 "$DEPLOY_LOCK"')
+    && installerRollbackSource.includes('chmod "$deploy_lock_mode" "$DEPLOY_LOCK"'),
+  'installer normalizes a safe legacy deployment lock privately and restores its mode on rollback',
+)
+assert(
+  maintenanceInspectorSource.includes('EQB_MAINTENANCE_INSTALL_READINESS ')
+    && maintenanceInspectorSource.includes('"state":"ready","failureCode":null')
+    && maintenanceInspectorSource.includes('"state":"failed","failureCode":"%s"')
+    && maintenanceInspectorSource.includes('EQB_MAINTENANCE_LOCK_FD')
+    && maintenanceInspectorSource.includes('ls-remote --exit-code origin refs/heads/main')
+    && maintenanceInspectorSource.includes('sudo -n -l -U "$TRANSPORT_USER"')
+    && maintenanceInspectorSource.includes('HOST_CONFIGURATION_PRESENT')
+    && maintenanceInspectorSource.includes('ACTIVE_MAINTENANCE_STATE'),
+  'standalone root inspector emits one schema-bound result and covers the previously unobservable host gates',
+)
+assert(
+  tencentTatSource.includes("const TAT_ENDPOINT = 'tat.tencentcloudapi.com'")
+    && !tencentTatSource.includes('TENCENTCLOUD_ENDPOINT')
+    && tencentTatSource.includes("action: 'RunCommand'")
+    && tencentTatSource.includes('InstanceIds: [configuration.instanceId]')
+    && tencentTatSource.includes('SaveCommand: false')
+    && tencentTatSource.includes('Username: \'root\'')
+    && tencentTatSource.includes("action: 'DescribeInvocations'")
+    && tencentTatSource.includes("action: 'DescribeInvocationTasks'")
+    && tencentTatSource.includes('task?.TaskResult?.Dropped !== 0')
+    && tencentTatSource.includes('do not retry without reconciling Tencent invocation history'),
+  'repository TAT transport is endpoint-pinned, single-target, non-retrying, and output-complete',
+)
+const maintenanceInspectorChecks = maintenanceInspectorSource.slice(
+  maintenanceInspectorSource.indexOf('assert_real_file "$DEPLOY_LOCK"'),
+)
+assert(
+  !/\b(?:sqlite|question-bank\.sqlite|user-data\.sqlite|import-ops\.sqlite)\b/iu
+    .test(maintenanceInspectorSource)
+    && !/(?:PRIVATE_KEY|SECRET|\.env)/u.test(maintenanceInspectorSource)
+    && !/^\s*(?:\/usr\/bin\/)?(?:cp|install|ln|mkdir|mv|rm|sync|touch)\s/mu
+      .test(maintenanceInspectorChecks)
+    && !/\b(?:systemctl\s+(?:start|stop|restart)|caddy\s+reload|git\s+[^\n]*(?:fetch|merge|pull|push|reset|checkout))\b/u
+      .test(maintenanceInspectorChecks),
+  'standalone host inspection cannot read databases or secrets or invoke host mutation actions',
 )
 assert(
   bootstrapSource.includes('umask 077')
@@ -2002,6 +4452,11 @@ assert(
     && bootstrapSource.includes('mktemp /run/eqb-controller-public-key-XXXXXXXX')
     && bootstrapSource.includes('cleanup_public_key'),
   'bootstrap accepts only a private temporary materialization of the generated public key',
+)
+assert(
+  controllerWrapper.includes('set -eu\numask 077')
+    && controllerWrapper.includes('--property=UMask=0077'),
+  'stable root launcher creates any future deployment lock with a private mode',
 )
 assert(
   bootstrapSource.includes('/usr/bin/systemd-run')
@@ -2049,19 +4504,7 @@ assert(
     && bootstrapSource.includes('restore_protected_modes'),
   'bootstrap keeps legacy production data private during candidate preparation and restores modes on failure',
 )
-for (const protectedPath of [
-  'data/sql',
-  'server/api.mjs',
-  'server/auth/auth.mjs',
-  'server/draft-paper/draftPaperStore.mjs',
-  'server/import-review/importReviewStore.mjs',
-  'server/my-space/mySpace.mjs',
-  'server/paper-import/publisher.mjs',
-  'server/paper-import/storage.mjs',
-  'server/source-intake/sourceIntakeStore.mjs',
-  'server/user-data',
-  'server/vocabulary/vocabularyStore.mjs',
-]) {
+for (const protectedPath of EQB_PERSISTENCE_AUTHORITY_PATHS) {
   assert(
     controllerSource.includes(`'${protectedPath}'`) && bootstrapSource.includes(protectedPath),
     `${protectedPath} is protected in both ordinary deployment and initial bootstrap`,
@@ -2110,6 +4553,26 @@ assert(
   'bootstrap verifies all live databases and exact moved identities before release sealing',
 )
 assert(
+  bootstrapSource.includes('stage=snapshot-databases\nsnapshot_databases')
+    && bootstrapSource.indexOf('stage=snapshot-databases')
+      < bootstrapSource.indexOf('stage=secure-root')
+    && bootstrapSource.indexOf('stage=snapshot-databases')
+      < bootstrapSource.indexOf('stage=stop-legacy-service')
+    && bootstrapSource.includes('production database changed before snapshot')
+    && bootstrapSource.includes('production database changed during snapshot')
+    && bootstrapSource.includes('"databaseSnapshots": {')
+    && bootstrapSource.includes('database_snapshot_digests[question-bank.sqlite]'),
+  'bootstrap takes race-checked private SQLite evidence before any maintenance mutation',
+)
+assert(
+  baselineStateSource.includes("receipt.schemaVersion !== LEGACY_BASELINE_RECEIPT_SCHEMA_VERSION")
+    && baselineStateSource.includes("receipt.targetSha === expectedHead")
+    && baselineStateSource.includes('proof.digest === expectedChildDigest')
+    && baselineStateSource.includes("liveReleaseLayout === 'absent'")
+    && baselineStateSource.includes("defaultIdentity === 'ok'"),
+  'established S1 requires exact receipt, quarantine, absent-layout, and identity evidence',
+)
+assert(
   bootstrapSource.includes('assert_authorized_keys_state')
     && bootstrapSource.includes('bootstrapLines.length !== 1')
     && bootstrapSource.includes("bootstrapFields[0] !== 'ssh-ed25519'")
@@ -2117,6 +4580,13 @@ assert(
     && bootstrapSource.includes('controllerLines.length !== 1')
     && bootstrapSource.includes('deployment forced key postcondition failed'),
   'bootstrap proves exact old/new authorized-key state before later key retirement',
+)
+assert(
+  controllerSource.includes("[EQB_DEPLOY_RECEIPT_SCHEMA_VERSION, 'EQB_DEPLOY_RECEIPT ']")
+    && controllerSource.includes("[EQB_REVIEWED_PERSISTENCE_RECEIPT_SCHEMA_VERSION, 'EQB_REVIEWED_PERSISTENCE_RECEIPT ']")
+    && controllerSource.includes("[EQB_HOST_CONFIGURATION_RECEIPT_SCHEMA_VERSION, 'EQB_HOST_CONFIGURATION_RECEIPT ']")
+    && controllerSource.includes('process.stdout.write(formatControllerOutput(result.output))'),
+  'fixed controller emits one schema-selected parseable receipt marker instead of raw journal JSON',
 )
 assert(
   bootstrapSource.indexOf('stage=cleanup') < bootstrapSource.indexOf('stage=success-receipt')
@@ -2230,6 +4700,35 @@ assert(
     && keyRetirementSource.includes("privateWrite(backupPath, original)"),
   'bootstrap identity retirement retains a root-private rollback copy',
 )
+assert(
+  cancellationSource.includes("process.umask(0o077)")
+    && cancellationSource.includes("fs.openSync(temporary, 'wx', 0o600)")
+    && cancellationSource.includes('fs.renameSync(temporary, markerPath)')
+    && cancellationSource.includes('syncDirectory(backupRoot)')
+    && cancellationSource.includes('receipt.targetSha !== targetSha')
+    && cancellationSource.includes('receipt.unit !== unit'),
+  'bootstrap cancellation is root-private, atomic, and bound to one target and unit',
+)
+assert(
+  bootstrapSource.includes('EQB_DEPLOY_BOOTSTRAP_UNIT')
+    && bootstrapSource.indexOf('assert_not_cancelled')
+      < bootstrapSource.indexOf('backup=$(mktemp -d')
+    && bootstrapSource.indexOf('assert_not_cancelled')
+      < bootstrapSource.indexOf('stage=initial-health'),
+  'bootstrap checks the exact cancellation marker under its caller-held lock before mutation',
+)
+const recoveryPublishSource = deployLibrarySource.slice(
+  deployLibrarySource.indexOf('export function createReleaseBootstrapRecovery'),
+  deployLibrarySource.indexOf('export function readReleaseBootstrapRecovery'),
+)
+assert(
+  recoveryPublishSource.includes('mkdtempSync(path.join(stateRoot, `.bootstrap-${targetSha}-`)')
+    && recoveryPublishSource.indexOf('syncDirectory(preparedDirectory)')
+      < recoveryPublishSource.indexOf('renameSync(preparedDirectory, directory)')
+    && recoveryPublishSource.indexOf('renameSync(preparedDirectory, directory)')
+      < recoveryPublishSource.indexOf('syncDirectory(stateRoot)'),
+  'bootstrap recovery is fully fsynced in a hidden directory before atomic publication',
+)
 const service = readText(ROOT, 'deploy/eqb-release.service')
 const caddy = readText(ROOT, 'deploy/Caddyfile.release')
 assert(service.includes('WorkingDirectory=/opt/eqb/current'), 'systemd runs only the atomic current release')
@@ -2248,11 +4747,42 @@ const bootstrapEntry = cli.slice(
   cli.indexOf('async function bootstrap()'),
   cli.indexOf('async function bootstrapResume()'),
 )
+const bootstrapInspectEntry = cli.slice(
+  cli.indexOf('async function bootstrapInspect()'),
+  cli.indexOf('async function bootstrapAbandon()'),
+)
+const maintenanceReadinessEntry = cli.slice(
+  cli.indexOf('function readMaintenancePayloadDigest('),
+  cli.indexOf('async function bootstrapPreflight()'),
+)
+const bootstrapAbandonEntry = cli.slice(
+  cli.indexOf('async function bootstrapAbandon()'),
+  cli.indexOf('async function deploy()'),
+)
+const deploymentRunbook = readText(ROOT, 'docs/cuts/launch-deploy/runbook.md')
+const flatDeploymentRunbook = deploymentRunbook.replaceAll('\n', ' ')
 assert(cli.includes("process.argv[2] === 'plan'"), 'CLI exposes a no-mutation deployment plan')
 assert(cli.includes("process.argv[2] === 'preflight'"), 'CLI exposes an Owner-authorized read-only preflight')
+assert(
+  cli.includes("process.argv[2] === 'maintenance-install-readiness'"),
+  'CLI exposes separately authorized Tencent maintenance-install readiness',
+)
+assert(
+  maintenanceReadinessEntry.includes("'archive',")
+    && maintenanceReadinessEntry.includes("'--format=tar',")
+    && maintenanceReadinessEntry.includes("spawnSync('git', ['show', `${sha}:${relativePath}`]")
+    && maintenanceReadinessEntry.includes('readTencentTatConfiguration()')
+    && maintenanceReadinessEntry.indexOf('assertDeploymentCandidateStillCurrent(')
+      < maintenanceReadinessEntry.indexOf('executeTencentTatCommand({')
+    && maintenanceReadinessEntry.includes('parseMaintenanceInstallReadiness(')
+    && maintenanceReadinessEntry.includes('productionMutationAllowed: false'),
+  'Tencent readiness binds exact-main bytes and rechecks main before its one read-only TAT dispatch',
+)
 assert(cli.includes("process.argv[2] === 'baseline'"), 'CLI exposes the protected legacy baseline command')
 assert(cli.includes("process.argv[2] === 'bootstrap'"), 'CLI exposes the one-time release-layout bootstrap')
+assert(cli.includes("process.argv[2] === 'bootstrap-inspect'"), 'CLI exposes read-only bootstrap recovery inspection')
 assert(cli.includes("process.argv[2] === 'bootstrap-resume'"), 'CLI exposes explicit bootstrap finalization recovery')
+assert(cli.includes("process.argv[2] === 'bootstrap-abandon'"), 'CLI exposes proven failed recovery abandonment')
 assert(cli.includes("process.argv[2] === 'deploy'"), 'CLI exposes the Owner-authorized deploy-latest command')
 assert(cli.includes('productionMutationAllowed: false'), 'plan and preflight declare no production mutation authority')
 assert(cli.includes('productionMutationAllowed: true'), 'successful deployment output declares production mutation')
@@ -2265,8 +4795,11 @@ assert(
   )
     && cli.includes(
       'status --porcelain --untracked-files=no | /usr/bin/wc -l',
-    ),
-  'legacy preflight reads tracked checkout state through the production eqb boundary',
+    )
+    && cli.includes('strict_health=invalid')
+    && cli.includes('strict_health=ok')
+    && cli.includes('strictHealth=%s'),
+  'legacy preflight proves tracked checkout state and strict health through the production boundary',
 )
 assert(
   cli.includes("input: readFileSync(legacyBaselineSource, 'utf8')")
@@ -2279,12 +4812,15 @@ assert(
   bootstrapCli.includes('input: bootstrapPayloadStageInput(bootstrapSource, bootstrapDigest)')
     && bootstrapCli.includes('/var/backups/eqb/bootstrap-payload-')
     && bootstrapCli.includes('/var/lock/eqb-release-bootstrap.lock')
+    && bootstrapCli.includes('EQB_DEPLOY_BOOTSTRAP_UNIT=${identity.unit}')
     && bootstrapCli.includes('/usr/bin/systemd-run')
     && bootstrapCli.includes('--property=StandardInput=null')
     && bootstrapCli.includes('--property=StandardOutput=journal')
     && !bootstrapCli.includes("'--pipe'")
     && bootstrapCli.includes('/usr/bin/journalctl')
-    && bootstrapCli.includes('parseReleaseBootstrapFailure(journalOutput, candidate.sha)'),
+    && bootstrapCli.includes("remoteArgs: ['sudo', '-n', '/usr/bin/journalctl', '--sync']")
+    && bootstrapCli.includes('const journalOutput = await readBootstrapJournal(identity)')
+    && bootstrapCli.includes('classifyReleaseBootstrapOutcome(journalOutput, candidate.sha, remote.status)'),
   'bootstrap hash-stages the tracked script and runs it under a disconnect-safe host service and lock',
 )
 assert(
@@ -2301,7 +4837,7 @@ assert(
     && cli.includes('EQB_DEPLOY_BOOTSTRAP_PUBLIC_KEY_BODY=')
     && cli.includes('classifyPrivilegedBootstrapIdentity')
     && cli.includes("remoteArgs: ['/bin/true']")
-    && cli.includes('Permission denied \\(publickey'),
+    && cli.includes('isSshPublicKeyAuthenticationDenied(remote)'),
   'bootstrap retires the exact old identity and distinguishes auth rejection from transport failure',
 )
 assert(
@@ -2313,11 +4849,62 @@ assert(
   'bootstrap resumes finalization without repeating host bootstrap and retains crash-safe terminal evidence',
 )
 assert(
+  bootstrapInspectEntry.includes('await readBootstrapJournal(identity)')
+    && bootstrapInspectEntry.includes('await classifyControllerIdentity(identity)')
+    && bootstrapInspectEntry.includes('await classifyPrivilegedBootstrapIdentity(identity)'),
+  'bootstrap inspection resolves journal and identity probes before reporting their values',
+)
+assert(
+  cli.includes('classifyControllerIdentity(identity)')
+    && cli.includes("!['failure', 'unknown'].includes(journal.state)")
+    && cli.includes('cancelReleaseBootstrapAttempt(identity)')
+    && cli.includes("input: readFileSync(bootstrapCancellationSource, 'utf8')")
+    && bootstrapAbandonEntry.includes(
+      "await classifyPrivilegedBootstrapIdentity(identity) !== 'active'",
+    )
+    && cli.includes('abandonReleaseBootstrapRecovery(recovery, {'),
+  'abandonment cancels queued dispatch under the host lock before both SSH identity classifications',
+)
+assert(
+  bootstrapAbandonEntry.includes('await readBootstrapJournal(identity)')
+    && bootstrapAbandonEntry.includes('await cancelReleaseBootstrapAttempt(identity)')
+    && bootstrapAbandonEntry.includes('await classifyControllerIdentity(identity)')
+    && bootstrapAbandonEntry.includes('await classifyPrivilegedBootstrapIdentity(identity)')
+    && bootstrapAbandonEntry.indexOf('cancelReleaseBootstrapAttempt(identity)')
+      < bootstrapAbandonEntry.indexOf('classifyControllerIdentity(identity)')
+    && bootstrapAbandonEntry.indexOf('cancelReleaseBootstrapAttempt(identity)')
+      < bootstrapAbandonEntry.indexOf('readLegacyPreflight('),
+  'host cancellation resolves before abandonment state proofs and local cleanup',
+)
+assert(
+  !bootstrapInspectEntry.includes('readCommitChecks')
+    && !bootstrapAbandonEntry.includes('readCommitChecks')
+    && bootstrapAbandonEntry.includes("legacy.strictHealth !== 'ok'"),
+  'recovery inspection and proven healthy S1 cleanup remain usable during a GitHub outage',
+)
+assert(
   cli.includes("'--data-file', '-'")
     && cli.includes('input: readFileSync(identity.privateKeyPath')
     && cli.includes('projectId = String(process.env.AMP_PROJECT_ID')
     && cli.includes('environmentRefreshRequired: true'),
   'verified controller key rotates only the current Deployment project secret through stdin',
+)
+assert(
+  flatDeploymentRunbook.includes('after one successful receipt it is consumed and must not be rerun')
+    && flatDeploymentRunbook.includes('Do not run `amp orb restart-processes` while bootstrap finalization is pending')
+    && deploymentRunbook.indexOf('verify the new\n   forced-controller route, rotate only')
+      < deploymentRunbook.indexOf('atomically retire the exact old privileged key'),
+  'runbook preserves consumed baseline, rotate-before-retire, and no-early-refresh ordering',
+)
+assert(
+  deploymentRunbook.includes('TENCENTCLOUD_SECRET_ID')
+    && deploymentRunbook.includes('TENCENTCLOUD_SECRET_KEY')
+    && deploymentRunbook.includes('TENCENTCLOUD_SESSION_TOKEN')
+    && deploymentRunbook.includes('TENCENTCLOUD_REGION')
+    && deploymentRunbook.includes('QUESTION_BANK_TENCENT_TAT_INSTANCE_ID')
+    && deploymentRunbook.includes('RunCommand` has no idempotency token')
+    && deploymentRunbook.includes('--owner-said-maintenance-install-readiness'),
+  'runbook names the complete pinned TAT target, credential, authorization, and no-retry contract',
 )
 
 const unauthorizedPreflight = spawnSync(
@@ -2334,6 +4921,7 @@ for (const [command, authorization, label] of [
   ['baseline', '--owner-said-baseline-migration', 'baseline migration'],
   ['bootstrap', '--owner-said-release-bootstrap', 'release-layout bootstrap'],
   ['bootstrap-resume', '--owner-said-release-bootstrap-resume', 'release-layout bootstrap recovery'],
+  ['bootstrap-abandon', '--owner-said-release-bootstrap-abandon', 'failed bootstrap abandonment'],
 ]) {
   const unauthorized = spawnSync(
     process.execPath,
@@ -2355,6 +4943,41 @@ for (const [command, authorization, label] of [
     `${label} CLI rejects a caller-supplied SHA before production work`,
   )
 }
+const unauthorizedBootstrapInspect = spawnSync(
+  process.execPath,
+  [path.join(ROOT, 'scripts', 'amp-orb-deploy.mjs'), 'bootstrap-inspect'],
+  { cwd: ROOT, encoding: 'utf8' },
+)
+assert(
+  unauthorizedBootstrapInspect.status === 1
+    && unauthorizedBootstrapInspect.stderr.includes('Current Owner authorization'),
+  'bootstrap inspection without current read-only authorization stops before recovery or SSH work',
+)
+const suppliedInspectSha = spawnSync(
+  process.execPath,
+  [
+    path.join(ROOT, 'scripts', 'amp-orb-deploy.mjs'),
+    'bootstrap-inspect',
+    '--owner-said-preflight',
+    '--sha',
+    newSha,
+  ],
+  { cwd: ROOT, encoding: 'utf8' },
+)
+assert(
+  suppliedInspectSha.status === 1 && suppliedInspectSha.stderr.includes('do not supply --sha'),
+  'bootstrap inspection rejects a caller-supplied target before recovery or SSH work',
+)
+const unauthorizedMaintenanceReadiness = spawnSync(
+  process.execPath,
+  [path.join(ROOT, 'scripts', 'amp-orb-deploy.mjs'), 'maintenance-install-readiness'],
+  { cwd: ROOT, encoding: 'utf8' },
+)
+assert(
+  unauthorizedMaintenanceReadiness.status === 1
+    && unauthorizedMaintenanceReadiness.stderr.includes('Current Owner authorization'),
+  'Tencent maintenance-install readiness without current authorization stops before API dispatch',
+)
 const unauthorizedDeploy = spawnSync(
   process.execPath,
   [path.join(ROOT, 'scripts', 'amp-orb-deploy.mjs'), 'deploy'],
