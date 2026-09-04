@@ -354,7 +354,8 @@ readiness; changing them is a separate Secret/configuration action:
   `tat:DescribeInvocationTasks` for the target host;
 - `TENCENTCLOUD_SESSION_TOKEN`: optional temporary-credential token;
 - `TENCENTCLOUD_REGION`: the exact Tencent region such as `ap-guangzhou`;
-- `QUESTION_BANK_TENCENT_TAT_INSTANCE_ID`: the exact CVM `ins-*` identity.
+- `QUESTION_BANK_TENCENT_TAT_INSTANCE_ID`: the exact CVM `ins-*` or Lighthouse
+  `lhins-*` identity.
 
 The region and instance ID are target configuration, not authority. The client
 never reads a user profile or accepts an endpoint override. It signs direct
@@ -395,13 +396,13 @@ node scripts/amp-orb-deploy.mjs maintenance-install-readiness \
 The command resolves and rechecks exact CI-authoritative `main`, computes the
 canonical six-file `git archive` digest, and reads the inspector from that exact
 commit. It sends one Base64-encoded root `SHELL` command to exactly one configured
-CVM with `SaveCommand=false`; the command uses a cleared environment and streams
-the inspector to `/bin/bash -s` without persisting a working-tree copy. It polls
-the returned exact invocation and task IDs, requires an untruncated (`Dropped=0`)
-Base64 output and a consistent remote exit code, and reports only an opaque
-region/instance digest. `RunCommand` has no idempotency token: the client never
-automatically retries an ambiguous dispatch. Reconcile the invocation in
-Tencent before requesting any fresh readiness authorization.
+CVM or Lighthouse instance with `SaveCommand=false`; the command uses a cleared
+environment and streams the inspector to `/bin/bash -s` without persisting a
+working-tree copy. It polls the returned exact invocation and task IDs, requires
+an untruncated (`Dropped=0`) Base64 output and a consistent remote exit code, and
+reports only an opaque region/instance digest. `RunCommand` has no idempotency
+token: the client never automatically retries an ambiguous dispatch. Reconcile
+the invocation in Tencent before requesting any fresh readiness authorization.
 
 This is a strictly read-only host inspection: it acquires the existing
 production lock, requires the versioned host root to be absent, rejects active
