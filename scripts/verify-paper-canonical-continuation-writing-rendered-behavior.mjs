@@ -162,21 +162,32 @@ async function readPaperScreenZoom(page) {
 }
 
 async function waitForPaperScreenZoomSettle(page, timeoutMs = 3000) {
-  if (await page.evaluate(() => !document.querySelector('.paper-browse-zoom'))) {
-    return
-  }
-  await page.waitForFunction(() => {
+  await page.waitForFunction(async () => {
     const node = document.querySelector('.paper-browse-zoom')
     if (!node) return true
-    const style = getComputedStyle(node)
-    const zoom = Number.parseFloat(style.zoom)
-    const property = Number.parseFloat(
-      style.getPropertyValue('--paper-screen-zoom'),
-    )
-    if (!Number.isFinite(zoom) || zoom <= 0) return true
-    if (!Number.isFinite(property) || property <= 0) return true
-    return Math.abs(zoom - property) <= 0.001
-  }, null, { timeout: timeoutMs })
+    const sample = () => {
+      const style = getComputedStyle(node)
+      const zoom = Number.parseFloat(style.zoom)
+      const property = Number.parseFloat(
+        style.getPropertyValue('--paper-screen-zoom'),
+      )
+      if (!(zoom > 0) || !(property > 0)
+        || Math.abs(zoom - property) > 0.001) return null
+      const rect = node.getBoundingClientRect()
+      return JSON.stringify([
+        zoom, property, window.innerWidth, node.clientWidth,
+        rect.x, rect.y, rect.width, rect.height,
+      ])
+    }
+    const initial = sample()
+    // Equality of zoom and its source variable also holds BEFORE resize is
+    // delivered. Observe layout across frames so ResizeObserver/React can run.
+    for (let frame = 0; frame < 3; frame += 1) {
+      await new Promise(requestAnimationFrame)
+      if (initial === null || sample() !== initial) return false
+    }
+    return true
+  }, null, { polling: 'raf', timeout: timeoutMs })
 }
 
 async function measureContinuationDomSeams(page, label, surface) {
@@ -1691,14 +1702,19 @@ function canonicalWritingChromeEntries(canonical) {
 }
 
 async function assertContinuationStarterIndent(
-  page,
+  _page,
   response,
   canonical,
   label,
 ) {
   if (canonical.answerRegion.starterLines.length === 0) return
-  const screenZoom = await readPaperScreenZoom(page)
   const observed = await response.evaluate((element) => {
+    // Read scale and geometry in one browser task; a resize may update zoom
+    // between separate protocol calls even after a stability check.
+    const zoomNode = element.closest('.paper-browse-zoom')
+    const screenZoom = zoomNode
+      ? Number.parseFloat(getComputedStyle(zoomNode).zoom)
+      : 1
     const box = element.getBoundingClientRect()
     const firstTextX = (node) => {
       const range = document.createRange()
@@ -1722,8 +1738,9 @@ async function assertContinuationStarterIndent(
       textIndentPx: Number.parseFloat(getComputedStyle(node).textIndent),
       fontSizePx: Number.parseFloat(getComputedStyle(node).fontSize),
     }))
-    return { boxX: box.x, starters, chrome }
+    return { boxX: box.x, starters, chrome, screenZoom }
   })
+  const { screenZoom } = observed
   assert.equal(observed.starters.length, 2, `${label} renders two starters`)
   for (const starter of observed.starters) {
     assert.ok(starter.textX !== null)
@@ -3022,6 +3039,44 @@ async function assertBrowserArtifacts() {
         mixedContinuationResponse,
         'authenticated whole-paper Screen',
       )
+      // Replay a ResizeObserver update at the protocol boundary between the
+      // zoom read and geometry read, using the real whole-paper DOM.
+      const zoomNode = page.locator('.paper-browse-zoom')
+      await zoomNode.evaluate((node) => { node.style.zoom = '1.25' })
+      try {
+        await assertContinuationStarterIndent(
+          page,
+          {
+            evaluate: async (measure) => {
+              await zoomNode.evaluate((node) => { node.style.zoom = '1' })
+              return mixedContinuationResponse.evaluate(measure)
+            },
+          },
+          mixedContinuation,
+          'zoom-update measurement regression',
+        )
+        const starter = mixedContinuationResponse.locator(
+          '[data-canonical-starter-id]',
+        ).first()
+        await starter.evaluate((node) => { node.style.textIndent = '3em' })
+        try {
+          await assert.rejects(
+            assertContinuationStarterIndent(
+              page,
+              mixedContinuationResponse,
+              mixedContinuation,
+              'incorrect-indent negative control',
+            ),
+            /incorrect-indent negative control.*source-correct 4em/,
+          )
+        } finally {
+          await starter.evaluate((node) => {
+            node.style.removeProperty('text-indent')
+          })
+        }
+      } finally {
+        await zoomNode.evaluate((node) => { node.style.removeProperty('zoom') })
+      }
       await page.setViewportSize({ width: 520, height: 900 })
       await waitForPaperScreenZoomSettle(page)
       await assertContinuationStarterIndent(
