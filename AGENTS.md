@@ -78,7 +78,7 @@ uniquely supplies; otherwise keep it outside daily packs.
   `single-paper-import` are eligible for autonomous Ship after their
   proportionate checks pass. `shared-renderer-contract` may Ship only after the
   shared-renderer final gate above, including affected real Screen/Print/PDF
-  verification; Focused CI must also run `pnpm -C app verify:paper`.
+  verification.
 - `auth-persistence-migration`, `mixed-high-risk-fallback`,
   `unknown-fallback`, and `git-diff-fallback` require a PR. So do changes to
   `.github/workflows/`, `scripts/verify-ci.mjs`, `.agents/setup`,
