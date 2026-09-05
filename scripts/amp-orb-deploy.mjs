@@ -2,7 +2,7 @@
 
 import { execFileSync, spawnSync } from 'node:child_process'
 import { createHash, randomUUID } from 'node:crypto'
-import { chmodSync, mkdtempSync, readFileSync, rmSync, statSync } from 'node:fs'
+import { chmodSync, mkdirSync, mkdtempSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import { homedir, tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -31,6 +31,7 @@ import {
   materializeDeploymentCredentials,
   migrateLegacyProductionBaseline,
   parseBootstrapKeyRetirementReceipt,
+  parseControlledTransaction,
   parseReleaseBootstrapCancellation,
   parseDeploymentControllerOutput,
   parseDeploymentControllerPreflight,
@@ -49,6 +50,7 @@ import {
   requireReleaseLayoutBootstrapResumeAuthorization,
   resumeReleaseLayoutBootstrap,
   resolveLatestDeploymentCandidate,
+  syncDirectory,
   updateLatestHostConfiguration,
   verifyDeploymentAuthority,
 } from './lib/ampOrbDeploy.mjs'
@@ -59,6 +61,7 @@ import {
   tencentTatTargetDigest,
 } from './lib/tencentTat.mjs'
 import { buildBarrierTatCommand } from './lib/barrierBootstrapTat.mjs'
+import { CONTROLLED_ENTRY_FILES, buildControlledEntryTat, executeControlledEntryTat } from './lib/controlledEntryTat.mjs'
 import { buildPayload, canonical, failureResult, parseFailure, parseReadiness, parseInstallExecution, parseRouteProof } from '../deploy/eqb-barrier-bootstrap.mjs'
 import { priorTatEvidence, parseProbeRequest, parseProbeExecution, failedProbe } from '../deploy/eqb-barrier-bootstrap.mjs'
 
@@ -241,17 +244,45 @@ async function withDeploymentCredentials(callback) {
 }
 
 function invokeController(remoteArgs, credentials) {
+  const markers = {
+    deploy: 'EQB_DEPLOY_RECEIPT ',
+    'deploy-reviewed-persistence': 'EQB_REVIEWED_PERSISTENCE_RECEIPT ',
+    'update-host-config': 'EQB_HOST_CONFIGURATION_RECEIPT ',
+  }
+  const controlled = Object.hasOwn(markers, remoteArgs[0])
+  const expected = controlled ? {
+    command: remoteArgs[0], transactionId: randomUUID(), sha: remoteArgs[1], digest: remoteArgs[2] ?? null,
+  } : remoteArgs[0] === 'status' ? { transactionId: remoteArgs[1] } : null
+  if (controlled) {
+    // Emit the safe correlation identity before dispatch, including when SSH
+    // loses the response. Neither status nor repeating this UUID can execute it.
+    console.error(JSON.stringify({ transactionId: expected.transactionId, targetSha: expected.sha }))
+  }
   const invocation = deploymentSSHInvocation({
     host: String(process.env.QUESTION_BANK_DEPLOY_SSH_HOST || ''),
     keyPath: credentials.keyPath,
     knownHostsPath: credentials.knownHostsPath,
-    remoteArgs,
+    remoteArgs: controlled ? [remoteArgs[0], expected.transactionId, ...remoteArgs.slice(1)] : remoteArgs,
   })
   const result = spawnSync(invocation.command, invocation.args, {
     encoding: 'utf8',
-    stdio: ['ignore', 'pipe', 'inherit'],
+    stdio: ['ignore', 'pipe', 'pipe'],
     timeout: 30 * 60 * 1000,
   })
+  if (expected) {
+    let record
+    try {
+      if (result.error) throw new Error('TRANSPORT_FAILED')
+      record = parseControlledTransaction(result.stdout, expected, result.status)
+    } catch {
+      throw new Error(`Controlled outcome unknown; status ${expected.transactionId}; no retry`)
+    }
+    if (!controlled) return JSON.stringify(record)
+    if (record.state !== 'success') {
+      throw new Error(`Controlled ${record.state}; status ${expected.transactionId}; no retry`)
+    }
+    return `${markers[record.command]}${JSON.stringify(record.receipt)}\n`
+  }
   if (result.error) throw result.error
   if (result.status === 75) throw new Error('Another production deployment is already running')
   if (result.status === 255) {
@@ -1322,10 +1353,10 @@ async function deploy() {
   }, null, 2))
 }
 
-function readForcedControllerProductionSha() {
+function readForcedControllerProductionSha(field = 'productionSha') {
   return withDeploymentCredentials((credentials) => parseDeploymentControllerPreflight(
     invokeController(['preflight'], credentials),
-  ).productionSha)
+  )[field])
 }
 
 async function reviewedPersistenceDeploy() {
@@ -1354,7 +1385,7 @@ async function updateHostConfig() {
     argv: process.argv.slice(2),
     resolveCandidate: candidate,
     revalidateCandidate: assertCandidateStillAuthoritative,
-    readProductionSha: readForcedControllerProductionSha,
+    readProductionSha: () => readForcedControllerProductionSha('hostConfigurationSha'),
     readChangedPaths: readLocalProtectedDiff,
     async invokeController(sha, digest) {
       return withDeploymentCredentials((credentials) => invokeController(
@@ -1370,8 +1401,63 @@ async function updateHostConfig() {
   }, null, 2))
 }
 
+async function installControlledSsh() {
+  const args = process.argv.slice(3)
+  if (args.length !== 5 || args[0] !== '--owner-said-install-controlled-ssh'
+    || args[1] !== '--plan' || args[3] !== '--prior-terminal') {
+    throw new Error('Current Owner authorization and exact plan/terminal files required')
+  }
+  const resolved = await candidate()
+  const planText = readFileSync(args[2], 'utf8')
+  const terminalText = readFileSync(args[4], 'utf8')
+  const prepared = buildControlledEntryTat({ planText, terminalText,
+    files: Object.fromEntries(CONTROLLED_ENTRY_FILES.map(name => [name,
+      execFileSync('git', ['show', `${resolved.sha}:${name}`], { cwd: repositoryRoot }),
+    ])),
+  })
+  if (prepared.plan.targetSha !== resolved.sha) throw new Error('Installation target is not exact main')
+  const directory = path.join(homedir(), `.eqb-controlled-entry-${prepared.plan.transactionId}`)
+  mkdirSync(directory, { mode: 0o700 }) // exclusive local admission, never reuse
+  syncDirectory(path.dirname(directory))
+  const save = (name, bytes) => {
+    writeFileSync(path.join(directory, name), bytes, { mode: 0o600, flag: 'wx', flush: true })
+    syncDirectory(directory)
+  }
+  save('plan.json', planText)
+  save('prior-terminal.json', terminalText)
+  const configuration = readTencentTatConfiguration()
+  const targetDigest = tencentTatTargetDigest(configuration)
+  await assertCandidateStillAuthoritative(resolved)
+  console.log(JSON.stringify({ command: 'install-controlled-ssh', transactionId: prepared.plan.transactionId,
+    sha: resolved.sha, commandDigest: prepared.commandDigest, payloadDigest: prepared.payloadDigest,
+    planDigest: prepared.planDigest, commandBytes: prepared.commandBytes, targetDigest, evidenceDirectory: directory }))
+  const record = await executeControlledEntryTat({ prepared, targetDigest, save,
+    execute: command => executeTencentTatCommand({ command, configuration,
+      commandName: `eqb-entry-${prepared.plan.transactionId}`,
+      description: 'One-time reviewed controlled SSH entry installation',
+      onDispatched: identity => save('dispatch.json', JSON.stringify(identity)),
+    }),
+  })
+  console.log(JSON.stringify(record))
+  if (record.state !== 'success') process.exitCode = 1
+}
+
+async function transactionStatus() {
+  const args = process.argv.slice(3)
+  if (args.length !== 3 || args[0] !== '--owner-said-status' || args[1] !== '--transaction'
+    || !/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/u.test(args[2])) {
+    throw new Error('Status requires current readonly authorization and an exact transaction UUID')
+  }
+  console.log(await withDeploymentCredentials(credentials => invokeController(['status', args[2]], credentials)))
+}
+
 try {
+  if (/^(?:root-barrier-|bootstrap|baseline|maintenance-install-readiness)/u.test(process.argv[2] || '')) {
+    throw new Error('Retired control-plane command; controlled SSH migration requires separate root authorization')
+  }
   if (process.argv[2] === 'plan') await plan()
+  else if (process.argv[2] === 'install-controlled-ssh') await installControlledSsh()
+  else if (process.argv[2] === 'status') await transactionStatus()
   else if (process.argv[2] === 'preflight') await preflight()
   else if (process.argv[2] === 'maintenance-install-readiness') await maintenanceInstallReadiness()
   else if (process.argv[2] === 'root-barrier-readiness') await rootBarrierBootstrap(false)

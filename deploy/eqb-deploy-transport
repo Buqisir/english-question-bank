@@ -12,6 +12,10 @@ case "$original_command" in
   preflight)
     exec /usr/bin/sudo -n /usr/local/libexec/eqb-deploy-controller-v1 -- preflight
     ;;
+  'status '*)
+    command_name=status
+    arguments=${original_command#status }
+    ;;
   'deploy '*)
     command_name=deploy
     arguments=${original_command#deploy }
@@ -27,6 +31,20 @@ case "$original_command" in
   *) exit 64 ;;
 esac
 
+transaction=${arguments%% *}
+case "$transaction" in
+  ????????-????-4???-[89ab]???-????????????) ;;
+  *) exit 64 ;;
+esac
+case "$transaction" in *[!a-f0-9-]*) exit 64 ;; esac
+if [ "$command_name" = status ]; then
+  [ "$arguments" = "$transaction" ] || exit 64
+  # Reuse the existing bounded deploy sudo grant; the fixed root parser maps
+  # this non-SHA sentinel to readonly status, never to deployment/recovery.
+  exec /usr/bin/sudo -n /usr/local/libexec/eqb-deploy-controller-v1 -- deploy "$transaction" status
+fi
+[ "$arguments" != "$transaction" ] || exit 64
+arguments=${arguments#* }
 sha=${arguments%% *}
 case "$sha" in
   ''|*[!a-f0-9]*) exit 64 ;;
@@ -35,7 +53,7 @@ esac
 
 if [ "$command_name" = deploy ]; then
   [ "$arguments" = "$sha" ] || exit 64
-  exec /usr/bin/sudo -n /usr/local/libexec/eqb-deploy-controller-v1 -- deploy "$sha"
+  exec /usr/bin/sudo -n /usr/local/libexec/eqb-deploy-controller-v1 -- deploy "$transaction" "$sha"
 fi
 
 digest=${arguments#* }
@@ -45,4 +63,4 @@ case "$digest" in
 esac
 [ "${#digest}" -eq 64 ] || exit 64
 exec /usr/bin/sudo -n /usr/local/libexec/eqb-deploy-controller-v1 \
-  -- "$command_name" "$sha" "$digest"
+  -- "$command_name" "$transaction" "$sha" "$digest"

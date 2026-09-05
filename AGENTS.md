@@ -149,28 +149,30 @@ uniquely supplies; otherwise keep it outside daily packs.
   `node scripts/amp-orb-deploy.mjs deploy --owner-said-deploy-latest`. Never ask
   the Owner to copy a SHA.
 - The deploy command requires exact-main successful non-manual hosted `verify`
-  and `e2e` from the `github-actions` App, then sends only that SHA through
+  and `e2e` from the `github-actions` App, then sends that SHA and a fresh
+  correlation UUID through
   pinned SSH to the root-owned fixed host controller. Never stream candidate
   deployment code, bypass the forced command, or use the legacy in-place deploy
   after cutover.
 - Website deployment never authorizes migration, Review/paper promotion,
   database or R2 mutation, production configuration changes, or controller
   upgrades. Each needs its own explicit current Owner authorization.
-- The S0-to-S1 `baseline --owner-said-baseline-migration` is consumed after one
-  successful receipt. An established S1 can bootstrap a descendant candidate
-  only when the fixed persistence-authority diff is empty; never rerun baseline
-  merely to advance its SHA.
-- `bootstrap --owner-said-release-bootstrap`, recovery mutation, Orb refresh,
-  forced-controller preflight, and first real `deploy` are separate actions with
-  their own stated current Owner authorization. Bootstrap must prove the new
-  forced-controller route, rotate only the current Deployment project's private-
-  key Secret through stdin, retire and reject the old privileged identity, and
-  re-prove the new route before terminalizing recovery. On interruption inspect
-  first; never retry host bootstrap. Abandonment must cancel the exact host unit
-  under the bootstrap lock before strict S1 reproof and local cleanup. Do not
-  refresh Orb processes until finalization succeeds. Follow ADR-0023 and the
-  launch-deploy runbook; do not infer authorization from merged code or
-  available secrets.
+- The controlled SSH route replaces daily TAT/bootstrap/barrier/rebind and
+  their multi-stage activation. Retired CLI commands fail closed. Preserve the
+  old UNKNOWN and staging evidence; never replay its UUID or claim zero mutation.
+- Initial entry migration is one separately authorized root-console maintenance
+  transaction, not a forced-command self-upgrade. Follow
+  `docs/cuts/controlled-ssh-maintenance/plan.md` for exact reviewed payload/plan
+  bindings, retained terminal evidence, lock, rollback and acceptance. Merging
+  code does not authorize production entry switching or deployment.
+- Ordinary deployment is one command. Actual persistence or privileged host
+  changes still require their explicitly reviewed scope. Installed controller
+  identity is independent of application SHA; equal installed bytes need no rebind.
+- On lost response or unknown state, query the exact UUID with separately
+  authorized readonly `status --owner-said-status --transaction UUID`. Status
+  never resumes work. Persistent maintenance blocks new mutations; do not clear
+  evidence or blindly retry. Recovery beyond automatic healthy rollback requires
+  a new bounded production decision, not a generic recovery command.
 
 ## Owner QA
 
