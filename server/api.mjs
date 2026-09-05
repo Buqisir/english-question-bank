@@ -36,7 +36,7 @@ import { createTopicLabelBackfillRoutes } from './topic-labels/topicLabelBackfil
 import { createVocabularyRoutes } from './vocabulary/vocabularyRoutes.mjs'
 import { renderVocabularySetPdf } from './vocabulary/vocabularyPdfRenderer.mjs'
 import { ensureSharedVocabularyShape, ensureUserVocabularyShape } from './vocabulary/vocabularyStore.mjs'
-import { parseJsonFromString, getDeepSeekMessageText, collectDeepSeekMessageTexts, parseLooseVerifyResult, extractVerifyResultFromPayload, extractReadingParsePayloadFromPayload, extractFirstJson, safeTruncate } from './ai-providers/jsonExtraction.mjs'
+import { safeTruncate } from './ai-providers/jsonExtraction.mjs'
 import { createCompletionRunner } from './ai-providers/completionRunner.mjs'
 import { createDailyLimitCounter, resolveDailyLimit } from './ai-providers/dailyLimitCounter.mjs'
 import { createVerifyImplementation } from './ai-verify/verifyQuestionGroupService.mjs'
@@ -361,12 +361,6 @@ const OBJECTIVE_PRINT_GROUP_TYPES = new Set([
   'seven_choices',
   'grammar_cloze',
 ])
-
-function normalizePaperAssetQuestions(asset) {
-  const questions = asset?.content?.questions
-  if (!questions || typeof questions !== 'object') return new Set()
-  return new Set(Object.keys(questions).map(String))
-}
 
 function findPaperAssetGroup(groupId) {
   if (!existsSync(paperAssetsDir)) return null
@@ -2886,10 +2880,6 @@ function sanitizePaperSetLayout(rawLayoutJson, items) {
     },
     layoutWarnings: warnings,
   }
-}
-
-function timestampPrefix() {
-  return new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19)
 }
 
 const DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY || ''
