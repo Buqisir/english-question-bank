@@ -162,21 +162,38 @@ async function readPaperScreenZoom(page) {
 }
 
 async function waitForPaperScreenZoomSettle(page, timeoutMs = 3000) {
-  if (await page.evaluate(() => !document.querySelector('.paper-browse-zoom'))) {
-    return
+  const state = await page.evaluateHandle(() => ({ previous: null, stableFrames: 0 }))
+  try {
+    // Playwright polls the predicate's immediate truthiness, not its awaited
+    // result. Keep this synchronous and retain state across actual RAF polls.
+    const settled = await page.waitForFunction((state) => {
+      const node = document.querySelector('.paper-browse-zoom')
+      if (!node) return true
+      const style = getComputedStyle(node)
+      const zoom = Number.parseFloat(style.zoom)
+      const property = Number.parseFloat(
+        style.getPropertyValue('--paper-screen-zoom'),
+      )
+      if (!Number.isFinite(zoom) || zoom <= 0
+        || !Number.isFinite(property) || property <= 0
+        || Math.abs(zoom - property) > 0.001) {
+        state.previous = null
+        state.stableFrames = 0
+        return false
+      }
+      const rect = node.getBoundingClientRect()
+      const sample = JSON.stringify([
+        zoom, property, window.innerWidth, node.clientWidth,
+        rect.x, rect.y, rect.width, rect.height,
+      ])
+      state.stableFrames = sample === state.previous ? state.stableFrames + 1 : 0
+      state.previous = sample
+      return state.stableFrames >= 3
+    }, state, { polling: 'raf', timeout: timeoutMs })
+    await settled.dispose()
+  } finally {
+    await state.dispose()
   }
-  await page.waitForFunction(() => {
-    const node = document.querySelector('.paper-browse-zoom')
-    if (!node) return true
-    const style = getComputedStyle(node)
-    const zoom = Number.parseFloat(style.zoom)
-    const property = Number.parseFloat(
-      style.getPropertyValue('--paper-screen-zoom'),
-    )
-    if (!Number.isFinite(zoom) || zoom <= 0) return true
-    if (!Number.isFinite(property) || property <= 0) return true
-    return Math.abs(zoom - property) <= 0.001
-  }, null, { timeout: timeoutMs })
 }
 
 async function measureContinuationDomSeams(page, label, surface) {
@@ -1691,14 +1708,19 @@ function canonicalWritingChromeEntries(canonical) {
 }
 
 async function assertContinuationStarterIndent(
-  page,
+  _page,
   response,
   canonical,
   label,
 ) {
   if (canonical.answerRegion.starterLines.length === 0) return
-  const screenZoom = await readPaperScreenZoom(page)
   const observed = await response.evaluate((element) => {
+    // Read scale and geometry in one browser task; a resize may update zoom
+    // between separate protocol calls even after a stability check.
+    const zoomNode = element.closest('.paper-browse-zoom')
+    const screenZoom = zoomNode
+      ? Number.parseFloat(getComputedStyle(zoomNode).zoom)
+      : 1
     const box = element.getBoundingClientRect()
     const firstTextX = (node) => {
       const range = document.createRange()
@@ -1722,8 +1744,9 @@ async function assertContinuationStarterIndent(
       textIndentPx: Number.parseFloat(getComputedStyle(node).textIndent),
       fontSizePx: Number.parseFloat(getComputedStyle(node).fontSize),
     }))
-    return { boxX: box.x, starters, chrome }
+    return { boxX: box.x, starters, chrome, screenZoom }
   })
+  const { screenZoom } = observed
   assert.equal(observed.starters.length, 2, `${label} renders two starters`)
   for (const starter of observed.starters) {
     assert.ok(starter.textX !== null)
@@ -2893,6 +2916,53 @@ for (const { label, consumption, canonical } of cases) {
   }
 }
 
+async function assertPaperScreenZoomSettleRegression(browser) {
+  const page = await browser.newPage()
+  try {
+    await page.setContent('<div class="paper-browse-zoom" '
+      + 'style="--paper-screen-zoom:1.25;zoom:1;width:100px;height:100px"></div>')
+    await assert.rejects(
+      waitForPaperScreenZoomSettle(page, 300),
+      { name: 'TimeoutError' },
+      'persistent zoom/property mismatch must time out in real Playwright',
+    )
+
+    await page.evaluate(() => {
+      const node = document.querySelector('.paper-browse-zoom')
+      node.style.setProperty('--paper-screen-zoom', '1')
+      const readRect = node.getBoundingClientRect.bind(node)
+      const samples = []
+      window.zoomSettleSamples = samples
+      let frame = 0
+      requestAnimationFrame(function tick() {
+        frame += 1
+        requestAnimationFrame(tick)
+      })
+      // Change real layout on the third measurement (a RAF poll), rather
+      // than racing a Node-to-browser call against an independently queued RAF.
+      node.getBoundingClientRect = () => {
+        if (samples.length === 2) node.style.width = '120px'
+        const rect = readRect()
+        samples.push({ width: rect.width, frame })
+        return rect
+      }
+    })
+    await waitForPaperScreenZoomSettle(page)
+    const samples = await page.evaluate(() => window.zoomSettleSamples)
+    assert.deepEqual(
+      samples.map(({ width }) => width),
+      [100, 100, 120, 120, 120, 120],
+      'a layout change resets the three stable RAF intervals in real Playwright',
+    )
+    assert.ok(
+      samples.every(({ frame }, index) => index === 0 || frame > samples[index - 1].frame),
+      'stable samples come from distinct animation frames, not one browser task',
+    )
+  } finally {
+    await page.close()
+  }
+}
+
 async function assertBrowserArtifacts() {
   const vite = await import('../app/node_modules/vite/dist/node/index.js')
   const viteServer = await vite.createServer({
@@ -2906,6 +2976,7 @@ async function assertBrowserArtifacts() {
   const browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
   const screenChromeLayouts = new Map()
   try {
+    await assertPaperScreenZoomSettleRegression(browser)
     {
       const asset = JSON.parse(readFileSync(
         new URL(
@@ -3022,6 +3093,44 @@ async function assertBrowserArtifacts() {
         mixedContinuationResponse,
         'authenticated whole-paper Screen',
       )
+      // Replay a ResizeObserver update at the protocol boundary between the
+      // zoom read and geometry read, using the real whole-paper DOM.
+      const zoomNode = page.locator('.paper-browse-zoom')
+      await zoomNode.evaluate((node) => { node.style.zoom = '1.25' })
+      try {
+        await assertContinuationStarterIndent(
+          page,
+          {
+            evaluate: async (measure) => {
+              await zoomNode.evaluate((node) => { node.style.zoom = '1' })
+              return mixedContinuationResponse.evaluate(measure)
+            },
+          },
+          mixedContinuation,
+          'zoom-update measurement regression',
+        )
+        const starter = mixedContinuationResponse.locator(
+          '[data-canonical-starter-id]',
+        ).first()
+        await starter.evaluate((node) => { node.style.textIndent = '3em' })
+        try {
+          await assert.rejects(
+            assertContinuationStarterIndent(
+              page,
+              mixedContinuationResponse,
+              mixedContinuation,
+              'incorrect-indent negative control',
+            ),
+            /incorrect-indent negative control.*source-correct 4em/,
+          )
+        } finally {
+          await starter.evaluate((node) => {
+            node.style.removeProperty('text-indent')
+          })
+        }
+      } finally {
+        await zoomNode.evaluate((node) => { node.style.removeProperty('zoom') })
+      }
       await page.setViewportSize({ width: 520, height: 900 })
       await waitForPaperScreenZoomSettle(page)
       await assertContinuationStarterIndent(
@@ -3037,6 +3146,7 @@ async function assertBrowserArtifacts() {
         { requireWrappedStarter: true },
       )
       await page.setViewportSize({ width: 1280, height: 900 })
+      await waitForPaperScreenZoomSettle(page)
       assert.ok(authRequestCount > 0)
       const mixedWritingPages = page.locator('[data-pi-writing-page]')
       assert.equal(await mixedWritingPages.count(), 2)
