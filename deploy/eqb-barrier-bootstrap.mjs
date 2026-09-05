@@ -43,11 +43,11 @@ export function buildPayload(targetSha, read) {
 export function parsePayload(text) {
   const value = decode(text)
   check(keys(value, ['schemaVersion', 'targetSha', 'files'])
-    && value.schemaVersion === 'eqb-barrier-payload-v1' && SHA.test(value.targetSha)
+    && value.schemaVersion === 'eqb-barrier-payload-v1' && typeof value.targetSha === 'string' && SHA.test(value.targetSha)
     && keys(value.files, PAYLOAD_PATHS), 'Invalid bootstrap payload')
   for (const [name, file] of Object.entries(value.files)) {
     check(keys(file, ['mode', 'sha256', 'base64']) && file.mode === modes[name]
-      && DIGEST.test(file.sha256) && typeof file.base64 === 'string', 'Invalid payload file')
+      && typeof file.sha256 === 'string' && DIGEST.test(file.sha256) && typeof file.base64 === 'string', 'Invalid payload file')
     const bytes = Buffer.from(file.base64, 'base64')
     check(bytes.length > 0 && bytes.length < 1024 * 1024
       && bytes.toString('base64') === file.base64 && hash(bytes) === file.sha256, 'Payload hash mismatch')
@@ -153,8 +153,8 @@ export function parseReadiness(text, payloadText) {
   check(keys(value, ['schemaVersion', 'targetSha', 'payloadDigest', 'previousSha', 'productionSha',
     'inspectedAt', 'nodes', 'barrier', 'diagnostics', 'health'])
     && value.schemaVersion === 'eqb-barrier-readiness-v1' && value.targetSha === payload.targetSha
-    && value.payloadDigest === hash(payloadText) && SHA.test(value.previousSha)
-    && SHA.test(value.productionSha) && iso(value.inspectedAt)
+    && value.payloadDigest === hash(payloadText) && typeof value.previousSha === 'string' && SHA.test(value.previousSha)
+    && typeof value.productionSha === 'string' && SHA.test(value.productionSha) && iso(value.inspectedAt)
     && keys(value.barrier, ['state', 'value'])
     && ['absent', 'valid', 'invalid'].includes(value.barrier.state) && value.health === 'passed'
     && keys(value.diagnostics, ['processes', 'units', 'jobs'])
@@ -170,7 +170,7 @@ export function parseReadiness(text, payloadText) {
     check(keys(node, ['uid', 'gid', 'mode', 'dev', 'ino', 'nlink', 'kind', 'sha256', 'target'])
       && ['uid', 'gid', 'mode', 'dev', 'ino', 'nlink'].every((key) => Number.isSafeInteger(node[key]) && node[key] >= 0)
       && ['file', 'directory', 'link', 'other'].includes(node.kind)
-      && (node.kind === 'file' ? DIGEST.test(node.sha256) : node.sha256 === null)
+      && (node.kind === 'file' ? typeof node.sha256 === 'string' && DIGEST.test(node.sha256) : node.sha256 === null)
       && (node.kind === 'link' ? typeof node.target === 'string' : node.target === null), 'Invalid node metadata')
   }
   return value
@@ -189,9 +189,9 @@ export function parseReceipt(text, expected) {
   const value = decode(text)
   check(keys(value, ['schemaVersion', 'transactionId', 'payloadDigest', 'readinessDigest', 'previousSha',
     'targetSha', 'productionSha', 'conclusion', 'phase', 'startedAt', 'finishedAt', 'failure', 'barrierRetained'])
-    && value.schemaVersion === 'eqb-barrier-install-v1' && UUID.test(value.transactionId)
-    && ['payloadDigest', 'readinessDigest'].every((key) => DIGEST.test(value[key]))
-    && ['previousSha', 'targetSha', 'productionSha'].every((key) => SHA.test(value[key]))
+    && value.schemaVersion === 'eqb-barrier-install-v1' && typeof value.transactionId === 'string' && UUID.test(value.transactionId)
+    && ['payloadDigest', 'readinessDigest'].every((key) => typeof value[key] === 'string' && DIGEST.test(value[key]))
+    && ['previousSha', 'targetSha', 'productionSha'].every((key) => typeof value[key] === 'string' && SHA.test(value[key]))
     && ['success', 'known-failure', 'unknown'].includes(value.conclusion)
     && ['prepared', 'wrapper', 'barrier', 'pointer', 'proved', 'rolled-back'].includes(value.phase)
     && iso(value.startedAt) && iso(value.finishedAt) && value.finishedAt >= value.startedAt
@@ -219,7 +219,7 @@ export function installLocked(payloadText, readinessText, transactionId, options
   const config = configuration(options)
   const payload = parsePayload(payloadText)
   const previous = parseReadiness(readinessText, payloadText)
-  check(UUID.test(transactionId), 'Invalid transaction')
+  check(typeof transactionId === 'string' && UUID.test(transactionId), 'Invalid transaction')
   const age = Date.now() - Date.parse(previous.inspectedAt)
   check(age >= 0 && age <= 120_000, 'Readiness stale or clock regressed')
   requireReady(previous, payload)

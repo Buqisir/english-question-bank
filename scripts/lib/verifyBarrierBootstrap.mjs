@@ -16,6 +16,7 @@ export async function verifyBarrierBootstrap(repository) {
   const parsed = parsePayload(payload)
   assert.throws(() => parsePayload(payload.trimEnd()))
   assert.throws(() => parsePayload(canonical({ ...parsed, extra: true })))
+  assert.throws(() => parsePayload(canonical({ ...parsed, targetSha: [target] })))
   const corrupt = structuredClone(parsed)
   corrupt.files['deploy/eqb-release.service'].sha256 = '0'.repeat(64)
   assert.throws(() => parsePayload(canonical(corrupt)))
@@ -70,6 +71,7 @@ export async function verifyBarrierBootstrap(repository) {
       const reportText = canonical(report)
       assert.deepEqual(parseReadiness(reportText, payload), report)
       assert.throws(() => parseReadiness(canonical({ ...report, extra: true }), payload))
+      assert.throws(() => parseReadiness(canonical({ ...report, previousSha: [before] }), payload))
       assert.throws(() => inspectHost(payload, { ...config, gid: gid + 1 }))
       fs.chmodSync(lock, 0o666)
       assert.throws(() => inspectHost(payload, config), /Unsafe file/)
@@ -124,6 +126,7 @@ export async function verifyBarrierBootstrap(repository) {
       assert.equal(receipt.conclusion, outcome)
       assert.deepEqual(parseReceipt(canonical(receipt), { transactionId }), receipt)
       assert.throws(() => parseReceipt(canonical(receipt), { transactionId: randomUUID() }))
+      assert.throws(() => parseReceipt(canonical({ ...receipt, previousSha: [before] }), { transactionId }))
       if (outcome === 'success') {
         for (const forced of ['passed', 'unknown']) {
           const text = canonical({ schemaVersion: 'eqb-barrier-route-proof-v1', install: receipt,

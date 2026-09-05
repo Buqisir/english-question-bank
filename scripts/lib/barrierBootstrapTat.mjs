@@ -12,7 +12,8 @@ export function buildBarrierTatCommand({ operatorSource, payloadText, readinessT
   const install = readinessText !== null
   if (install) {
     parseReadiness(readinessText, payloadText)
-    if (!/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/u.test(transactionId || '')) {
+    if (typeof transactionId !== 'string'
+      || !/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/u.test(transactionId)) {
       throw new Error('Invalid bootstrap transaction')
     }
   } else if (transactionId !== null) throw new Error('Readonly inspector takes no transaction')
