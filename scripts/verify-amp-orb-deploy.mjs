@@ -108,6 +108,7 @@ import {
   legacyReleaseChildProof,
 } from '../deploy/eqb-legacy-baseline-state.mjs'
 import { createVerifier, readText, repoRootFrom } from './lib/verifyScope.mjs'
+import { verifyDeployBarrier } from './lib/verifyDeployBarrier.mjs'
 
 const ROOT = repoRootFrom(import.meta.url)
 const { assert, section, summary } = createVerifier('Amp Orb production deployment contract')
@@ -5813,4 +5814,5 @@ for (const command of ['activate', 'activate-release']) {
   )
 }
 
+await verifyDeployBarrier(ROOT)
 summary()

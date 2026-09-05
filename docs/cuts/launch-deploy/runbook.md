@@ -448,6 +448,110 @@ databases, R2, papers, users, packages, DNS, or a blank-server setup. If it
 fails, stop and inspect the retained root-private backup; never infer retry
 authority from its rollback attempt.
 
+### Minimal root dispatch barrier upgrade (separate root authorization)
+
+This repository change installs **no production files**. It adds a durable
+admission gate to the root wrapper, not an equivalence-rebind operator. The
+wrapper embeds the gate and needs no new module to run ordinary commands. The
+management module is separately installed as root:root `0644` at
+`/usr/local/libexec/eqb-deploy-barrier-v1.mjs`; all its ancestors must be real,
+root-owned directories without group/world write. It is not added to sudo or
+SSH grammar. No CI authority, credential, service, database or R2 change is
+part of this upgrade.
+
+The shortest bootstrap is a separately authorized, exact-payload **root**
+installation through the existing break-glass route, not `update-host-config`
+and not a rerun of the consumed maintenance installer. There is no recursion:
+root can install the wrapper directly under the already-existing lock. Prepare
+and review that exact root invocation after merge/readiness; the steps below
+are its required ordering, not permission to execute an improvised command.
+
+1. Resolve fresh authoritative live main `T` through the existing Hosted-only
+   gate. Independently inspect actual production `P`, host marker `M`, five
+   installed hashes/metadata, both maintenance states, lock and versions. Do not
+   assume the historical `f396…` / `17c8…` observations remain current. Require
+   no active maintenance and no `versions/T` or existing barrier; unexpected
+   entries mean inspect, never overwrite. Recompute target/operator digests
+   from exact Git objects; bind a UUID and a canonical payload map containing
+   the root wrapper, management module and all five host/stable blobs. This
+   payload digest is not the protected changed-path digest.
+2. In one root-owned, manager-lived attempt, acquire the existing `0600`
+   root:root, regular single-link `deploy.lock` nonblocking without replacing
+   it. Repeat identity/main/metadata/health checks while held. Retain a private,
+   fsynced copy of the old wrapper and exact `M` pointer. Require the controller
+   module, unit, Caddy and transport target blobs to equal their installed
+   `M` bytes. Only the root wrapper and management tool may be new. Any other
+   host difference stops this narrow bootstrap.
+3. Install/fsync the verified management module and atomically replace/fsync
+   the root wrapper, **before creating the barrier or changing the marker**.
+   At this intermediate point new requests encounter the new gate and the old
+   marker rejects the changed wrapper hash. Before creating the barrier, prove
+   all invocations using the old wrapper have exited: inspect both wrapper
+   processes and pending/running `eqb-deploy-*` systemd units/jobs. Do not
+   mistake holding `flock` for proof that an old request is not queued. If the
+   bounded drain cannot be proven, retain evidence and stop without publishing
+   the new marker. No service restart, force-kill or long-held lock is allowed.
+4. Still under that same lock, use the reviewed module's `createBarrier` with
+   the exact identity (do not invoke its lock-taking CLI recursively). Prepare
+   and fsync root-owned `versions/T` with the three unchanged host files and a
+   marker binding all five target hashes, including the **new** root-wrapper
+   hash. Preserve `versions/M`. Atomically switch/fsync the host pointer. This
+   explicitly authorized root upgrade is not byte equivalence. Application
+   current stays `P`; unit/Caddy/transport bytes stay untouched.
+5. Prove target pointer/installed hashes and directly call the selected module's
+   readonly preflight plus strict health while locked. Keep the barrier active
+   when releasing the lock. Require the independent forced preflight afterward.
+   Failure/unknown of that proof leaves the barrier and evidence in place;
+   do not roll back or retry automatically. A later explicitly authorized
+   `finalize` rereads the exact identity, target binding and health before
+   atomically moving the barrier to its private terminal receipt.
+
+Known pre-marker failure may restore the saved wrapper under the same lock
+and prove the untouched `M` binding and health. Known post-marker failure may
+restore the `M` pointer and old wrapper under the same lock and prove both;
+that completes a rollback to the pre-upgrade protocol, **not** continued barrier
+protection by the old wrapper. Never release into an ambiguous partial rollback:
+retain the new gated wrapper and active barrier when possible, report the exact
+state and require new root recovery authorization. Process/transport unknown is
+not a handled failure: inspect actual wrapper hash, pointer, barrier, units and
+receipts first. No automatic bootstrap replay. A successful root installation
+at `T` already binds the host marker to `T`; it does not need an additional
+same-`T` equivalence rebind. Application activation remains separately authorized.
+
+After installation, root-only management syntax (each action needs its own
+current authorization; use a cleared environment) is:
+
+```text
+/usr/bin/node --no-addons /usr/local/libexec/eqb-deploy-barrier-v1.mjs inspect
+/usr/bin/node --no-addons /usr/local/libexec/eqb-deploy-barrier-v1.mjs create UUID M T P PAYLOAD_SHA256
+/usr/bin/node --no-addons /usr/local/libexec/eqb-deploy-barrier-v1.mjs finalize UUID M T P PAYLOAD_SHA256
+/usr/bin/node --no-addons /usr/local/libexec/eqb-deploy-barrier-v1.mjs recover UUID M T P PAYLOAD_SHA256
+```
+
+`inspect` writes nothing; invalid/unknown state exits nonzero and remains in
+place. It does not claim Git/CI readiness. `create` exclusively fsyncs
+`deployments/root-dispatch-barrier.json` (root:root `0600`) with schema
+`eqb-root-dispatch-barrier-v1`, identity, `phase=active`, `createdAt` and null
+`finishedAt`. It rejects existing/consumed transactions and existing maintenance.
+`finalize` proves `T`; `recover` proves an **already restored** `M` and performs
+no rollback itself. Both require unchanged `P`, the five installed hashes,
+no other active maintenance, and direct readonly preflight/strict health.
+Successful terminalization writes `phase=finalized|recovered` and `finishedAt`,
+then atomically renames the active file to `root-dispatch-UUID.json`. A crash
+between phase-write and rename leaves a blocking terminal-phase barrier; only
+newly authorized, matching recovery/finalization may finish it after reproof.
+A partial temporary file, duplicate receipt, conflicting phase, missing active
+state or failed proof stops rather than guessing/retrying. The strict parser
+rejects extra/missing/duplicate keys, noncanonical JSON and invalid identities.
+
+The machine guarantee applies to every invocation through the installed root
+wrapper, including old Deployment checkouts. It does not constrain arbitrary
+root shells. Do not change the barrier, its parent, or the lock manually, and
+do not call any other root maintenance operator while it is active. Future
+equivalence rebind must prove all five Git blobs/installed bytes, create this
+barrier before pointer mutation, and retain it through independent route proof.
+It needs its own reviewed operator and exact Owner authorization.
+
 The forced transport entrypoint parses the command before its strict root
 entrypoint runs the controller and deployment lock in a transient host systemd
 service with null input and journal output. An Orb/SSH disconnect does not

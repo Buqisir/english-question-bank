@@ -201,6 +201,45 @@ reload, cleanup, or health proof fails. It does not provision a blank server,
 restore data, rotate Secrets, or grant ordinary releases authority over stable
 launchers.
 
+### Root dispatch barrier prerequisite
+
+The root wrapper now checks one durable
+`/opt/eqb/deployments/root-dispatch-barrier.json` **after acquiring the existing
+deployment lock and before invoking any mutation module**. Only absence allows
+`deploy`, `deploy-reviewed-persistence`, or `update-host-config`. Any entry,
+including a dangling symlink, malformed record or terminal record left by a
+crash, blocks them. Filesystem errors other than definite absence fail closed.
+The gate is embedded in the stable wrapper: installing that wrapper does not
+require a new runtime dependency or a new forced-command grammar. `preflight`
+is allowed; root-only `inspect` is provided by `deploy/eqb-deploy-barrier.mjs`.
+
+That standalone root management module owns only create/inspect/finalize/recover
+of this one file. Each CLI action takes the same nonblocking lock. State binds
+transaction UUID, previous and target host SHAs, unchanged application SHA,
+payload digest, phase and timestamps. Create is exclusive; finalize proves the
+target marker/pointer, all five installed host/stable hashes and strict health;
+recover instead proves the already-restored previous binding. Neither action
+performs a rollback, restart, installation or deployment. Atomic terminalization
+retains a private receipt. Unknown output, corrupt state or a failed proof never
+authorizes replay or manual deletion of the barrier.
+
+This is the prerequisite for a **separately reviewed root-only byte-equivalence
+rebind exception**: an installed host version may eventually be rebound to a
+new authoritative main only after all five old/target Git blobs and installed
+hashes are independently proven equal. The barrier is not that operator and
+does not grant it CI, Git, installation or application authority. Root wrapper
+installation itself changes bytes and is expressly **not** an equivalence
+rebind. Its separate bootstrap must update the associated stable-launcher
+marker and retain the previous version, as described in the launch runbook.
+
+While an operator holds the lock it invokes only the verified selected module's
+readonly preflight directly. The forced route reacquires the lock and must not
+be called there. After release, forced preflight is an independent proof;
+failure/unknown leaves the barrier in place for newly authorized inspection and
+recovery, not unconditional rollback. The barrier mechanically covers existing
+forced mutation commands, not arbitrary root access. Root/TAT maintenance must
+also honor the lock and barrier; malicious root is outside this boundary.
+
 ### Legacy transition states
 
 The one-time transition has explicit states rather than treating production SHA
