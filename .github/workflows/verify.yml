@@ -17,7 +17,9 @@ jobs:
   verify:
     name: ${{ github.event_name == 'schedule' && 'verify (nightly)' || github.event_name == 'workflow_dispatch' && 'verify (manual)' || 'verify' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    # Cold system dependencies took 21m41s in run 33962625903, leaving <3m
+    # for Full under the old 25m cap. Budget for both setup and the full suite.
+    timeout-minutes: 45
 
     steps:
       - name: Check out repository
