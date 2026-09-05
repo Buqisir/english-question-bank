@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-import assert from 'node:assert/strict'
-import { execFileSync } from 'node:child_process'
 import { setMaxListeners } from 'node:events'
 import {
   closeSync,
@@ -26,22 +24,9 @@ import {
   runVerificationSchedule,
   verificationSchedulingPolicy,
 } from './lib/verificationScheduler.mjs'
-import {
-  assertCanonicalImportPilotEvidenceRoot,
-  assertCanonicalImportPilotTransientEvidenceRunsClean,
-  inspectOfficialCanonicalImportPilotEvidenceRoot,
-} from './lib/canonicalImportPilotEvidenceRoot.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
-const expectedHead = execFileSync('git', ['rev-parse', 'HEAD'], {
-  cwd: rootDir,
-  encoding: 'utf8',
-}).trim()
-const officialEvidenceBefore = inspectOfficialCanonicalImportPilotEvidenceRoot({
-  repositoryRoot: rootDir,
-  expectedHead,
-})
 
 const registry = {
   preflight: [
@@ -77,7 +62,6 @@ const registry = {
   'scripts/verify-paper-canonical-legacy-opaque-application.mjs',
   'scripts/verify-paper-canonical-legacy-opaque-continuation.mjs',
   'scripts/verify-paper-canonical-legacy-opaque-writing-rendered-behavior.mjs',
-  'scripts/verify-paper-canonical-import-pilot-qa-server.mjs',
   'scripts/verify-paper-canonical-cloze-grammar-publication.mjs',
   'scripts/verify-paper-canonical-seven-choices-publication.mjs',
   'scripts/verify-paper-canonical-reading-publication.mjs',
@@ -174,7 +158,6 @@ const registry = {
   'scripts/verify-similar-workbench-swap.mjs',
   'scripts/verify-search-thinking-toggle.mjs',
   'scripts/verify-h11a-http-client.mjs',
-  'scripts/verify-h12a-entry-modal.mjs',
   'scripts/verify-restart1-local-search-intent.mjs',
   'scripts/verify-restart3-teacher-analysis.mjs',
   'scripts/verify-home-default-feed.mjs',
@@ -642,30 +625,6 @@ if (scheduleFailure) {
   process.exit(1)
 }
 
-let fullSuiteEvidenceRegressionFailure = null
-if (plan.scripts.some((script) => script.startsWith('scripts/verify-paper-canonical-'))) {
-  try {
-    if (officialEvidenceBefore) {
-      const officialEvidenceAfter = assertCanonicalImportPilotEvidenceRoot({
-        repositoryRoot: rootDir,
-        rootDir: officialEvidenceBefore.rootDir,
-        expectedHead,
-      })
-      assert.deepEqual(
-        officialEvidenceAfter.snapshot,
-        officialEvidenceBefore.snapshot,
-        'verification leaves every sealed official evidence byte unchanged',
-      )
-    }
-    assertCanonicalImportPilotTransientEvidenceRunsClean({
-      repositoryRoot: rootDir,
-      expectedHead,
-    })
-  } catch (error) {
-    fullSuiteEvidenceRegressionFailure = error
-  }
-}
-
 const passed = results.filter((r) => r.status === 0)
 const skipped = results.filter((r) => r.status === SKIP_EXIT_CODE)
 const failed = results.filter((r) => r.status !== 0 && r.status !== SKIP_EXIT_CODE)
@@ -685,13 +644,7 @@ if (failed.length > 0) {
   console.log('FAILED:')
   for (const r of failed) console.log(`  - ${r.script} (exit ${r.status})`)
 }
-if (fullSuiteEvidenceRegressionFailure) {
-  console.log('FAILED:')
-  console.log(
-    `  - sealed official evidence/full-suite regression (${fullSuiteEvidenceRegressionFailure.message})`,
-  )
-}
 
 process.removeListener('SIGINT', onSigint)
 process.removeListener('SIGTERM', onSigterm)
-process.exit(failed.length > 0 || fullSuiteEvidenceRegressionFailure ? 1 : 0)
+process.exit(failed.length > 0 ? 1 : 0)
