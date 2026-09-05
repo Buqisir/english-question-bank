@@ -153,7 +153,7 @@ function writePrivateFile(filePath, value) {
   chmodSync(filePath, 0o600)
 }
 
-function syncDirectory(directory) {
+export function syncDirectory(directory) {
   const descriptor = openSync(directory, constants.O_RDONLY | constants.O_DIRECTORY)
   try {
     fsyncSync(descriptor)

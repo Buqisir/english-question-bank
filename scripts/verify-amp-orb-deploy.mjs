@@ -6047,26 +6047,50 @@ section('One-time TAT delivery uses the reviewed installer without another state
     assert(result ? saved.has('terminal.json') : !saved.has('terminal.json'), `${label}: terminal retained before parse, never fabricated`)
     if (!accepted) assert(saved.has('unknown.json'), `${label}: unknown persisted, no retry`)
   }
+  for (const failedSave of ['binding.json', 'terminal.json']) {
+    let calls = 0; let accepted = false
+    try {
+      await executeControlledEntryTat({ prepared, targetDigest,
+        save: name => { if (name === failedSave) throw Error('fsync failed') },
+        execute: async () => { calls++; return terminal },
+      })
+      accepted = true
+    } catch {}
+    assert(!accepted && calls === (failedSave === 'binding.json' ? 0 : 1),
+      `${failedSave} durability failure stops dispatch/result acceptance`)
+  }
   const root = mkdtempSync(path.join(tmpdir(), 'eqb-entry-tat-'))
   try {
     mkdirSync(path.join(root, 'eqb/deployments'), { recursive: true })
     let launches = 0; let text = ''
+    const synced = []
+    const descriptors = new Map()
     const source = prepared.command.split("<<'EQB_ENTRY'\n")[1].split('\nEQB_ENTRY')[0]
       .replace(/^import .*;$/gmu, '').replaceAll('/opt', root)
     const context = { Buffer, gunzipSync, createHash,
-      fs: { ...fs, lstatSync: name => Object.assign(fs.lstatSync(name), { uid: 0, gid: 0 }) },
+      fs: { ...fs, lstatSync: name => Object.assign(fs.lstatSync(name), { uid: 0, gid: 0 }),
+        openSync: (name, flags) => { const fd = fs.openSync(name, flags); descriptors.set(fd, name); return fd },
+        fsyncSync: fd => { fs.fsyncSync(fd); synced.push(descriptors.get(fd)) },
+      },
       process: { getuid: () => 0, getgid: () => 0, stdout: { write: value => { text += value } }, stderr: { write() {} } },
       spawnSync: (command, args) => {
         launches++
+        assert(synced.length === 10 && synced[0] === path.join(root, 'eqb/deployments')
+          && synced.slice(-6).every(name => name.endsWith('/deploy')),
+        'root staging parent and each exclusive file entry synced before installer launch')
         assert(command === '/bin/bash' && args[0].endsWith('/deploy/install-eqb-controlled-ssh'), 'generated command invokes only fixed installer')
         for (const name of CONTROLLED_ENTRY_FILES) assert(hash(readFileSync(path.join(root, 'eqb/deployments', `controlled-entry-${transactionId}`, name))) === hash(files[name]), `exact staged ${name}`)
         return { status: 0, stdout: output, stderr: 'private-root-stderr' }
       },
     }
     runInNewContext(source, context)
-    assert(launches === 1 && text === output, 'generated delivery preserves exact receipt and hides stderr')
+    assert(launches === 1 && text === output && synced.length === 12,
+      'generated delivery syncs stdout/stderr entries before accepting receipt and hides stderr')
     runInNewContext(source, { ...context })
     assert(launches === 1 && context.process.exitCode === 70, 'existing input directory prevents replay')
+    rmSync(path.join(root, 'eqb/deployments', `controlled-entry-${transactionId}`), { recursive: true })
+    runInNewContext(source, { ...context, fs: { ...context.fs, fsyncSync() { throw Error('fsync failure') } } })
+    assert(launches === 1 && context.process.exitCode === 70, 'directory fsync failure prevents root launch')
   } finally { rmSync(root, { recursive: true, force: true }) }
 }
 

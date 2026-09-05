@@ -47,11 +47,20 @@ for (const name of ['/opt', '/opt/eqb', '/opt/eqb/deployments']) {
   if (!s.isDirectory() || s.isSymbolicLink() || s.uid !== 0 || s.gid !== 0 || (s.mode & 0o022)) throw 0;
 }
 const directory = '${directory}';
+const syncDirectory = name => {
+  const fd = fs.openSync(name, fs.constants.O_RDONLY | fs.constants.O_DIRECTORY);
+  try { fs.fsyncSync(fd); } finally { fs.closeSync(fd); }
+};
 fs.mkdirSync(directory, {mode: 0o700});
-const save = (name, bytes) => fs.writeFileSync(name, bytes, {mode: 0o600, flag: 'wx', flush: true});
+syncDirectory('/opt/eqb/deployments');
+const save = (name, bytes) => {
+  fs.writeFileSync(name, bytes, {mode: 0o600, flag: 'wx', flush: true});
+  syncDirectory(name.slice(0, name.lastIndexOf('/')));
+};
 save(directory + '/plan.json', input.planText);
 save(directory + '/terminal.json', input.terminalText);
 fs.mkdirSync(directory + '/deploy', {mode: 0o700});
+syncDirectory(directory);
 const files = JSON.parse(input.payload);
 if (Object.keys(files).sort().join(',') !== '${[...CONTROLLED_ENTRY_FILES].sort().join(',')}') throw 0;
 for (const [name, entry] of Object.entries(files)) {

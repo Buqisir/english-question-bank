@@ -50,6 +50,7 @@ import {
   requireReleaseLayoutBootstrapResumeAuthorization,
   resumeReleaseLayoutBootstrap,
   resolveLatestDeploymentCandidate,
+  syncDirectory,
   updateLatestHostConfiguration,
   verifyDeploymentAuthority,
 } from './lib/ampOrbDeploy.mjs'
@@ -1417,8 +1418,11 @@ async function installControlledSsh() {
   if (prepared.plan.targetSha !== resolved.sha) throw new Error('Installation target is not exact main')
   const directory = path.join(homedir(), `.eqb-controlled-entry-${prepared.plan.transactionId}`)
   mkdirSync(directory, { mode: 0o700 }) // exclusive local admission, never reuse
-  const save = (name, bytes) => writeFileSync(path.join(directory, name), bytes,
-    { mode: 0o600, flag: 'wx', flush: true })
+  syncDirectory(path.dirname(directory))
+  const save = (name, bytes) => {
+    writeFileSync(path.join(directory, name), bytes, { mode: 0o600, flag: 'wx', flush: true })
+    syncDirectory(directory)
+  }
   save('plan.json', planText)
   save('prior-terminal.json', terminalText)
   const configuration = readTencentTatConfiguration()
