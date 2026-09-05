@@ -263,6 +263,7 @@ export function buildMaintenanceReadinessTatCommand({
 export async function executeTencentTatCommand({
   command,
   commandName,
+  description = 'Read-only EQB maintenance-controller installation readiness',
   configuration,
   fetchImpl = globalThis.fetch,
   now = Date.now,
@@ -277,6 +278,8 @@ export async function executeTencentTatCommand({
     || typeof sleep !== 'function'
     || typeof command !== 'string'
     || command.includes('\0')
+    || typeof description !== 'string' || description.length < 1 || description.length > 200
+    || /[\0\r\n]/u.test(description)
     || !/^[A-Za-z0-9_.-]{1,60}$/u.test(commandName || '')
     || !Number.isSafeInteger(pollIntervalMs)
     || pollIntervalMs < 1
@@ -298,7 +301,7 @@ export async function executeTencentTatCommand({
         Content: content,
         InstanceIds: [configuration.instanceId],
         CommandName: commandName,
-        Description: 'Read-only EQB maintenance-controller installation readiness',
+        Description: description,
         CommandType: 'SHELL',
         WorkingDirectory: '/root',
         Timeout: 300,

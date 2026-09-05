@@ -109,6 +109,7 @@ import {
 } from '../deploy/eqb-legacy-baseline-state.mjs'
 import { createVerifier, readText, repoRootFrom } from './lib/verifyScope.mjs'
 import { verifyDeployBarrier } from './lib/verifyDeployBarrier.mjs'
+import { verifyBarrierBootstrap } from './lib/verifyBarrierBootstrap.mjs'
 
 const ROOT = repoRootFrom(import.meta.url)
 const { assert, section, summary } = createVerifier('Amp Orb production deployment contract')
@@ -1339,6 +1340,7 @@ let invocationPollCount = 0
 const tencentSuccess = await executeTencentTatCommand({
   command: maintenanceTatCommand,
   commandName: 'eqb-maint-readiness-test',
+  description: 'Fixture operation description',
   configuration: tencentTatConfiguration,
   now: () => tencentNow,
   sleep: async (milliseconds) => { tencentNow += milliseconds },
@@ -1410,6 +1412,7 @@ assert(
     && runCommandCall.payload.InstanceIds.length === 1
     && runCommandCall.payload.InstanceIds[0] === tencentTatConfiguration.instanceId
     && runCommandCall.payload.Username === 'root'
+    && runCommandCall.payload.Description === 'Fixture operation description'
     && runCommandCall.payload.CommandType === 'SHELL'
     && runCommandCall.payload.SaveCommand === false
     && runCommandCall.payload.EnableParameter === false
@@ -4279,6 +4282,7 @@ assert(
 rmSync(rootInstalledTarget.root, { recursive: true, force: true })
 
 const fixedPreflight = controllerFixture()
+writeFileSync(path.join(fixedPreflight.root, 'deployments/root-dispatch-barrier.json'), 'invalid barrier')
 const fixedPreflightResult = await runController({
   originalCommand: 'preflight',
   config: fixedPreflight.config,
@@ -4287,7 +4291,7 @@ const fixedPreflightResult = await runController({
 assert(
   fixedPreflightResult.output.layout === 'release'
     && fixedPreflightResult.output.productionSha === oldSha,
-  'fixed controller provides bounded read-only preflight with active host configuration proof',
+  'fixed controller permits readonly preflight even with an invalid barrier and proves active host configuration',
 )
 writeFileSync(fixedPreflight.config.caddyConfigPath, 'tampered caddy\n')
 assert(
@@ -5780,6 +5784,12 @@ assert(
   suppliedInspectSha.status === 1 && suppliedInspectSha.stderr.includes('do not supply --sha'),
   'bootstrap inspection rejects a caller-supplied target before recovery or SSH work',
 )
+for (const command of ['root-barrier-readiness', 'root-barrier-install']) {
+  const denied = spawnSync(process.execPath, [path.join(ROOT, 'scripts/amp-orb-deploy.mjs'), command],
+    { cwd: ROOT, encoding: 'utf8' })
+  assert(denied.status === 1 && denied.stderr.includes('Exact current Owner root-barrier authorization'),
+    `${command} without authorization stops before candidate, credentials or TAT`)
+}
 const unauthorizedMaintenanceReadiness = spawnSync(
   process.execPath,
   [path.join(ROOT, 'scripts', 'amp-orb-deploy.mjs'), 'maintenance-install-readiness'],
@@ -5815,4 +5825,5 @@ for (const command of ['activate', 'activate-release']) {
 }
 
 await verifyDeployBarrier(ROOT)
+await verifyBarrierBootstrap(ROOT)
 summary()

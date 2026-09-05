@@ -272,7 +272,9 @@ function main() {
   })
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
+// Readonly bootstrap inspection may import the exact reviewed source via a
+// data URL without materializing files on the host. Only a file can be a CLI.
+if (import.meta.url.startsWith('file:') && process.argv[1] === fileURLToPath(import.meta.url)) {
   try { main() } catch (error) {
     process.stderr.write(`Root dispatch barrier failed closed: ${error.message}\n`)
     process.exitCode = 70

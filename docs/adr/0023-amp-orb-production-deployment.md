@@ -213,6 +213,27 @@ The gate is embedded in the stable wrapper: installing that wrapper does not
 require a new runtime dependency or a new forced-command grammar. `preflight`
 is allowed; root-only `inspect` is provided by `deploy/eqb-deploy-barrier.mjs`.
 
+The common selected controller also checks that same file in `runController`,
+after the readonly preflight branch and before any mutation dispatch, without
+re-entering flock. This is necessary for delayed legacy wrapper submissions:
+process and systemd job snapshots do not drain in-flight IPC, whereas old and
+new wrappers open the selected module only after acquiring the existing lock.
+Active recovery-controller entries must be absent before first installation;
+the bootstrap never creates that alternate legacy dispatch target.
+
+The exact-payload root bootstrap may therefore update the manager, root wrapper
+and selected controller module, not just the wrapper. Unit, Caddy and transport
+remain byte-frozen. `deploy/eqb-barrier-bootstrap.mjs` defines canonical payload,
+readonly readiness, install and independent route-proof parsers. The existing
+Deployment authority is rechecked before one TAT dispatch; a manager-lived root
+installer rechecks metadata/live main under the existing lock, installs and
+fsyncs the reviewed files/version marker, calls `createBarrier` in-process and
+proves the selected module directly. It retains M and the old wrapper as rollback
+evidence. This is an explicitly authorized root protocol upgrade, not ordinary
+deploy, equivalence rebind, installer replay or a new CI authority. Success keeps
+the barrier active; finalize remains separately authorized. See the launch
+runbook for exact command, digest, known-failure and unknown boundaries.
+
 That standalone root management module owns only create/inspect/finalize/recover
 of this one file. Each CLI action takes the same nonblocking lock. State binds
 transaction UUID, previous and target host SHAs, unchanged application SHA,
