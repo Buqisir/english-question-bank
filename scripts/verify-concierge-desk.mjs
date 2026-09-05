@@ -603,8 +603,6 @@ console.log('\nTest 11: aggregatePaperResults — bucket key + 命中 + fallback
   assert('zhejiang.hitContext.scope === "passage" (V1 only emits passage hits)', zhejiang.hitContext.scope === 'passage', `got: ${zhejiang.hitContext?.scope}`)
   assert('zhejiang.hitContext.hitGroupIds matches groups order', JSON.stringify(zhejiang.hitContext.hitGroupIds) === JSON.stringify(zhejiang.groups.map((g) => g.group.id)), `got: ${JSON.stringify(zhejiang.hitContext.hitGroupIds)}`)
   assert('zhejiang.hitContext.primaryGroupId is the first hit', zhejiang.hitContext.primaryGroupId === zhejiang.groups[0].group.id, `got: ${zhejiang.hitContext.primaryGroupId}`)
-  assert('zhejiang.hitContext.passageHits length matches hits', zhejiang.hitContext.passageHits.length === zhejiang.hitCount, `got: ${zhejiang.hitContext.passageHits.length}`)
-  assert('zhejiang.hitContext.passageHits sanitized reasons', zhejiang.hitContext.passageHits.every((p) => !/DeepSeek/.test(p.reason)), '')
   assert('zhejiang.hitContext.displayReason aligns with representativeReason', zhejiang.hitContext.displayReason === zhejiang.representativeReason, `disp=${zhejiang.hitContext.displayReason} rep=${zhejiang.representativeReason}`)
   assert('beijing single-hit primaryGroupId equals its only group', beijing.hitContext.primaryGroupId === beijing.groups[0].group.id, `got: ${beijing.hitContext.primaryGroupId}`)
   assert('fallback bucket also has a hitContext', !!fallback.hitContext && fallback.hitContext.scope === 'passage', '')

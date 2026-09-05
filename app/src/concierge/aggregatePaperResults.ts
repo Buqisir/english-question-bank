@@ -53,11 +53,6 @@ export type PaperResultGroup = {
  */
 export type PaperHitScope = 'passage' | 'paper' | 'mixed'
 
-export type PaperPassageHit = {
-  groupId: string
-  reason: string
-}
-
 export type PaperHitContext = {
   /** What kind of search hit produced this row. V1 is always 'passage'. */
   scope: PaperHitScope
@@ -70,12 +65,6 @@ export type PaperHitContext = {
    * the type total).
    */
   primaryGroupId: string | null
-  /**
-   * Per-passage hit detail, in original hit order. Mirrors `groups` but
-   * keeps just the (id, reason) pair so the row UI doesn't reach into
-   * the full `QuestionGroupCard` shape just to decide what to render.
-   */
-  passageHits: PaperPassageHit[]
   /**
    * The reason string the row should display in the badge area. V1 keeps
    * this aligned with `representativeReason` for forward-compat — the
@@ -185,13 +174,12 @@ export function aggregatePaperResults(hits: ConciergeSearchHit[]): PaperResult[]
         importedAt: '',
         // Initialise the hit context with the same first-hit reason the
         // representativeReason picks. We populate the rest of the fields
-        // (hitGroupIds / primaryGroupId / passageHits) once we know the
+        // (hitGroupIds / primaryGroupId) once we know the
         // full list of hits in this bucket — see the post-loop pass below.
         hitContext: {
           scope: 'passage',
           hitGroupIds: [],
           primaryGroupId: null,
-          passageHits: [],
           displayReason: cleanReason(reason),
         },
       }
@@ -208,10 +196,6 @@ export function aggregatePaperResults(hits: ConciergeSearchHit[]): PaperResult[]
       bucket.importedAt = groupImportedAt
     }
     bucket.hitContext.hitGroupIds.push(group.id)
-    bucket.hitContext.passageHits.push({
-      groupId: group.id,
-      reason: cleanedReason,
-    })
   }
   // Finalise primaryGroupId now that every bucket has its full hit list.
   // V1 keeps scope === 'passage' for every bucket — the search API is the
