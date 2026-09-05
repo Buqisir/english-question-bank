@@ -949,7 +949,10 @@ export function assertAuthoritativeDeploymentChecks(payload, expectedSha, {
     || workflowRun?.workflow_id !== AMP_ORB_DEPLOY_WORKFLOW_ID
     || workflowRun?.path !== AMP_ORB_DEPLOY_WORKFLOW_PATH
     || workflowRun?.event !== 'push'
-    || workflowRun?.status !== 'completed'
+    // Job completion is authority for e2e-only mode. A slow/cancelled verify
+    // sibling must not make a successful e2e wait for workflow completion.
+    || (requiredChecks.includes('verify') && workflowRun?.status !== 'completed')
+    || (requiredChecks.includes('verify') && workflowRun?.conclusion !== 'success')
     || workflowRun?.head_sha !== sha
     || workflowRun?.head_branch !== 'main'
     || workflowRun?.run_attempt !== 1
@@ -1025,34 +1028,92 @@ export function assertAmpOrbDeploymentCheck(payload, expectedSha, trustedAppId) 
   }
 }
 
+// Deliberately narrower than Ship eligibility: shared renderer and all backend,
+// tooling, executable app logic, governance and unknown paths retain Hosted.
+// Start with presentation CSS and known-shape paper data only; never let
+// Markdown's no-changes classification hide a control-plane change.
+export function isReducedDeploymentRisk(paths, risk) {
+  return Array.isArray(paths) && paths.length > 0
+    && ['ui-micro', 'ordinary-local-feature', 'known-shape-paper-data', 'single-paper-import'].includes(risk)
+    && paths.every((file) => typeof file === 'string'
+      && !file.split('/').some((part) => !part || part === '.' || part === '..')
+      && (/^app\/src\/.*\.css$/u.test(file)
+        || /^(?:app\/public\/paper-assets\/|test-fixtures\/paper-(?:canonical\/publications|import)\/|scripts\/import-pipeline\/papers\/).*\.(?:json|png|jpg|jpeg|webp|svg)$/u.test(file))
+      && !/(?:auth|session|permission|persist|storage|migration|security|credential|control|workflow|deploy|\.github|AGENTS\.md|CLAUDE\.md)/iu.test(file))
+}
+
+export async function resolveDeploymentRisk({ expectedSha, runGit, classifyPaths, readHostedAuthority }) {
+  const sha = assertSha(expectedSha)
+  const commits = []
+  let cursor = sha
+  try {
+    // Bound remote reads and fail closed on shallow history, merges, missing
+    // evidence, or an overly long unvalidated batch. No cached anchor/config.
+    for (let count = 0; count < 50; count += 1) {
+      const lineage = runGit(['rev-list', '--parents', '-n', '1', cursor]).trim().split(/\s+/u)
+      if (lineage.length !== 2 || lineage[0] !== cursor) throw new Error('Unproven single-parent history')
+      const parent = assertSha(lineage[1])
+      const output = runGit(['diff', '--name-only', '--no-renames', '-z', parent, cursor, '--'])
+      if (output && !output.endsWith('\0')) throw new Error('Incomplete changed paths')
+      const paths = output ? output.slice(0, -1).split('\0') : []
+      const risk = await classifyPaths(paths)
+      commits.push({ sha: cursor, risk, paths })
+      if (!isReducedDeploymentRisk(paths, risk)) {
+        return { reduced: false, reason: 'high-or-unknown-risk', commits }
+      }
+      const accumulatedPaths = [...new Set(commits.flatMap((commit) => commit.paths))]
+      const accumulatedRisk = await classifyPaths(accumulatedPaths)
+      if (!isReducedDeploymentRisk(accumulatedPaths, accumulatedRisk)) {
+        return { reduced: false, reason: 'mixed-accumulated-risk', accumulatedRisk, commits }
+      }
+      try {
+        // Only exact ancestor push verify+e2e success can close the interval.
+        // Nightly, PR, dispatch, reruns and App-only greens cannot be anchors.
+        await readHostedAuthority(parent)
+        return { reduced: true, anchorSha: parent, accumulatedRisk, commits }
+      } catch {
+        cursor = parent
+      }
+    }
+    throw new Error('Hosted anchor not found within 50 commits')
+  } catch (error) {
+    return { reduced: false, reason: 'unproven-risk', error: error.message, commits }
+  }
+}
+
 export async function verifyDeploymentAuthority({
   authority,
   expectedSha,
   readHostedChecks,
   readWorkflowRun,
   readAmpChecks,
+  runGit,
+  classifyPaths,
 } = {}) {
   const sha = assertSha(expectedSha)
   if (!authority || !AMP_ORB_DEPLOY_AUTHORITY_MODES.includes(authority.mode)) {
     throw new Error('Deployment CI authority configuration is invalid')
   }
-  const hostedRequired = authority.mode !== 'amp'
-  const hostedChecks = authority.mode === 'amp+hosted-e2e'
-    ? Object.freeze(['e2e'])
-    : AMP_ORB_DEPLOY_REQUIRED_CHECKS
-  let hosted = null
-  if (hostedRequired) {
+  async function readHostedAuthority(targetSha, requiredChecks = AMP_ORB_DEPLOY_REQUIRED_CHECKS) {
     if (typeof readHostedChecks !== 'function' || typeof readWorkflowRun !== 'function') {
       throw new Error('Hosted deployment verification dependencies are missing')
     }
-    const payload = await readHostedChecks(sha)
-    const selected = selectHostedDeploymentChecks(payload, sha, hostedChecks)
+    const payload = await readHostedChecks(targetSha)
+    const selected = selectHostedDeploymentChecks(payload, targetSha, requiredChecks)
     const workflowRun = await readWorkflowRun(selected[0].workflowRunId)
-    hosted = assertAuthoritativeDeploymentChecks(payload, sha, {
-      requiredChecks: hostedChecks,
+    return assertAuthoritativeDeploymentChecks(payload, targetSha, {
+      requiredChecks,
       workflowRun,
     })
   }
+  const risk = ['amp', 'amp+hosted-e2e'].includes(authority.mode)
+    ? await resolveDeploymentRisk({ expectedSha: sha, runGit, classifyPaths, readHostedAuthority })
+    : null
+  const effectiveMode = risk && !risk.reduced ? 'dual' : authority.mode
+  const hosted = effectiveMode === 'amp' ? null : await readHostedAuthority(
+    sha,
+    effectiveMode === 'amp+hosted-e2e' ? ['e2e'] : AMP_ORB_DEPLOY_REQUIRED_CHECKS,
+  )
   let amp = null
   if (authority.mode !== 'hosted-only') {
     if (typeof readAmpChecks !== 'function') {
@@ -1069,7 +1130,7 @@ export async function verifyDeploymentAuthority({
       amp = { provider: AMP_ORB_DEPLOY_AMP_CHECK_NAME, state: 'shadow-failure', error: error.message }
     }
   }
-  return { mode: authority.mode, hosted, amp }
+  return { mode: authority.mode, effectiveMode, risk, hosted, amp }
 }
 
 export async function resolveLatestDeploymentCandidate({

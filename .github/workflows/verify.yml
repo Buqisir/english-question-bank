@@ -9,10 +9,13 @@ on:
     branches:
       - main
   workflow_dispatch:
+  # 02:23 Asia/Shanghai. Independent default-branch backstop, never authority.
+  schedule:
+    - cron: '23 18 * * *'
 
 jobs:
   verify:
-    name: ${{ github.event_name == 'workflow_dispatch' && 'verify (manual)' || 'verify' }}
+    name: ${{ github.event_name == 'schedule' && 'verify (nightly)' || github.event_name == 'workflow_dispatch' && 'verify (manual)' || 'verify' }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
 
@@ -71,7 +74,8 @@ jobs:
         working-directory: app
 
   e2e:
-    name: ${{ github.event_name == 'workflow_dispatch' && 'e2e (manual)' || 'e2e' }}
+    if: github.event_name != 'schedule'
+    name: ${{ github.event_name == 'schedule' && 'e2e (nightly unused)' || github.event_name == 'workflow_dispatch' && 'e2e (manual)' || 'e2e' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
