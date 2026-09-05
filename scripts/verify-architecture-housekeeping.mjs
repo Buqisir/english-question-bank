@@ -68,14 +68,25 @@ for (const relPath of ['.github/workflows/verify.yml']) {
       '    branches:',
       '      - main',
       '  workflow_dispatch:',
+      '  # 02:23 Asia/Shanghai. Independent default-branch backstop, never authority.',
+      '  schedule:',
+      "    - cron: '23 18 * * *'",
     ].join('\n'),
     triggerBlock || 'trigger block unavailable',
   )
   assert(
-    `${relPath} distinguishes manual diagnostics from required checks`,
-    workflow.includes("name: ${{ github.event_name == 'workflow_dispatch' && 'verify (manual)' || 'verify' }}") &&
-      workflow.includes("name: ${{ github.event_name == 'workflow_dispatch' && 'e2e (manual)' || 'e2e' }}"),
+    `${relPath} distinguishes manual and nightly diagnostics from required checks`,
+    workflow.includes("name: ${{ github.event_name == 'schedule' && 'verify (nightly)' || github.event_name == 'workflow_dispatch' && 'verify (manual)' || 'verify' }}") &&
+      workflow.includes("name: ${{ github.event_name == 'schedule' && 'e2e (nightly unused)' || github.event_name == 'workflow_dispatch' && 'e2e (manual)' || 'e2e' }}"),
   )
+  const verifyJob = workflow.split('\n  verify:\n')[1]?.split('\n  e2e:\n')[0] || ''
+  assert(`${relPath} nightly uses the real unconditional Full job on the event SHA`,
+    verifyJob.includes('run: pnpm run verify:all')
+      && verifyJob.includes('uses: actions/checkout@v4')
+      && !/^\s+(?:if|continue-on-error|ref):/mu.test(verifyJob)
+      && !workflow.includes('concurrency:'))
+  assert(`${relPath} only nightly omits separate E2E; PR/push/manual retain it`,
+    workflow.includes("  e2e:\n    if: github.event_name != 'schedule'"))
   assert(`${relPath} installs app dependencies`, workflow.includes('pnpm install --frozen-lockfile'))
   assert(
     `${relPath} installs server dependencies`,
