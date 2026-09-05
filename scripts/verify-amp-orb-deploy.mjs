@@ -110,6 +110,7 @@ import {
 import { createVerifier, readText, repoRootFrom } from './lib/verifyScope.mjs'
 import { verifyDeployBarrier } from './lib/verifyDeployBarrier.mjs'
 import { verifyBarrierBootstrap } from './lib/verifyBarrierBootstrap.mjs'
+import { verifyLiveMainHttpDiagnostic } from './lib/verifyLiveMainHttpDiagnostic.mjs'
 
 const ROOT = repoRootFrom(import.meta.url)
 const { assert, section, summary } = createVerifier('Amp Orb production deployment contract')
@@ -5826,4 +5827,5 @@ for (const command of ['activate', 'activate-release']) {
 
 await verifyDeployBarrier(ROOT)
 await verifyBarrierBootstrap(ROOT)
+await verifyLiveMainHttpDiagnostic()
 summary()

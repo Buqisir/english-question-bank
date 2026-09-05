@@ -669,6 +669,42 @@ its evidence. The probe does not disable other root commands, reserve the new UU
 or add an automatic installer/resume protocol; existing installation still performs
 its own locked checks. Ambiguity or missing trusted evidence stops this path.
 
+#### Separately authorized HTTP diagnostic (not another probe)
+
+`buildLiveMainHttpDiagnosticCommand()` in `scripts/lib/barrierBootstrapTat.mjs`
+only builds deterministic command bytes and their digest. It does not dispatch.
+After explicit new Owner authorization, the trusted Deployment coordinator may
+use the exact reviewed builder with the existing single-shot TAT adapter, then
+apply `parseLiveMainHttpDiagnostic(output, exitCode)` to its result. It requires
+outer exit0 for `stage=live-main-http` and exit70 for `stage=unknown`; missing,
+truncated, invalid or mismatched output remains unknown, never retry authority.
+No existing probe/install command calls this helper automatically.
+
+The root 0:0 command sends one fixed anonymous HTTPS main-ref request, disables
+curl configuration, follows no redirect, performs no retry and reads no credential.
+It uses a 10-second curl limit, 15-second spawn limit and 64-KiB capture limit.
+`--dump-header -` captures headers on stdout followed by fixed numeric write-out;
+the response body goes to `/dev/null`. Do not restore `/dev/fd/3`: Node extra pipe
+descriptors are sockets on Linux and reopening one by path can fail with ENXIO.
+Curl versions can report a write failure or terminate abnormally on that path.
+
+Only status/exit, allowlisted spawn code, stderr byte count, numeric rate-limit
+fields and header-presence booleans leave the parser. Raw headers, bodies, stderr,
+cookies and request IDs are never returned or saved. Duplicate/malformed headers,
+multiple response blocks, TLS/write-out disagreement and capture failures are
+unknown; null/false fields then do not prove absence. HTTP errors such as 403 are
+valid diagnostic observations with curlExit22, not readiness success. Even HTTP200
+does not validate the response body or exact main SHA; the existing `currentMain`
+check is unchanged. The no-config profile also does not reconstruct an earlier
+request affected by default curl configuration.
+
+This diagnostic does not read installation evidence or host state, acquire a
+deployment lock, create a transaction, or authorize installation/cleanup. Report
+its result and stop. A new field observation cannot resolve the old historical
+UNKNOWN, prove rollback/zero mutation, or authorize another attempt.
+
+#### Existing post-install boundary
+
 After installation's locked success the CLI runs forced preflight outside the lock and emits
 strict `eqb-barrier-route-proof-v1` with `forced=passed|unknown`. Failure retains
 the active barrier and never triggers rollback. Finalize, root recovery, cleanup
