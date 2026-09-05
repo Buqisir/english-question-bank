@@ -816,6 +816,56 @@ assert(
   'a newer main fails closed and requires a fresh “部署最新版” command',
 )
 
+for (const mutation of ['none', 'main', 'head', 'dirty', 'invalid-main', 'invalid-head', 'authority-error']) {
+  let localSha = newSha
+  let mainSha = newSha
+  let status = ''
+  const trace = []
+  const verification = { authority: 'in-memory' }
+  let result
+  let error
+  try {
+    result = await assertDeploymentCandidateStillCurrent({
+      async readLocalSha() { trace.push('head'); return localSha },
+      async readLocalStatus() { trace.push('status'); return status },
+      async readMainSha() { trace.push('main'); return mainSha },
+      async readDeploymentVerification(sha) {
+        assert(sha === newSha, `${mutation}: authority reads the original candidate`)
+        trace.push('authority-start')
+        await Promise.resolve()
+        if (mutation === 'main') mainSha = oldSha
+        if (mutation === 'head') localSha = oldSha
+        if (mutation === 'dirty') status = ' M scripts/lib/ampOrbDeploy.mjs\n'
+        if (mutation === 'invalid-main') mainSha = 'invalid'
+        if (mutation === 'invalid-head') localSha = 'invalid'
+        if (mutation === 'authority-error') throw new Error('authority unavailable')
+        trace.push('authority-end')
+        return verification
+      },
+      sha: newSha,
+    })
+    trace.push('handoff')
+  } catch (caught) {
+    error = caught
+  }
+  if (mutation === 'none') {
+    assert(!error && result.sha === newSha && result.verification === verification,
+      'stable candidate preserves the complete authority result')
+    assert(trace.join(',') === 'head,status,main,authority-start,authority-end,head,status,main,handoff',
+      'all closing reads follow the completed authority await and precede handoff')
+  } else {
+    const expectedError = mutation === 'main' ? /GitHub main changed/
+      : ['head', 'dirty'].includes(mutation) ? /Local deployment candidate changed/
+        : mutation === 'authority-error' ? /authority unavailable/ : /SHA/
+    assert(expectedError.test(error?.message || '') && !trace.includes('handoff'),
+      `${mutation} during authority await fails closed before handoff`)
+    if (mutation === 'authority-error') {
+      assert(trace.join(',') === 'head,status,main,authority-start',
+        'authority failure propagates without accepting or retrying the candidate')
+    }
+  }
+}
+
 function controllerReceipt({
   targetSha = newSha,
   conclusion = 'success',

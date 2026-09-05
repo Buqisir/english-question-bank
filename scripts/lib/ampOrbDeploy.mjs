@@ -1131,9 +1131,21 @@ export async function assertDeploymentCandidateStillCurrent({
   if (currentSha !== expectedSha) {
     throw new Error('GitHub main changed during deployment; repeat “部署最新版”')
   }
+  const verification = await readDeploymentVerification(currentSha)
+  // Authority reads may await multiple remote requests. Close that window
+  // before handing off to an external action; the host MAIN_CHANGED guard
+  // still independently protects the later activation boundary.
+  const finalLocalSha = assertSha(await readLocalSha(), 'local deployment SHA')
+  if (finalLocalSha !== expectedSha || String(await readLocalStatus()).trim()) {
+    throw new Error('Local deployment candidate changed before the external action')
+  }
+  const finalMainSha = assertSha(await readMainSha(), 'GitHub main SHA')
+  if (finalMainSha !== expectedSha) {
+    throw new Error('GitHub main changed during deployment; repeat “部署最新版”')
+  }
   return {
-    sha: currentSha,
-    verification: await readDeploymentVerification(currentSha),
+    sha: finalMainSha,
+    verification,
   }
 }
 
