@@ -6,12 +6,13 @@ import { spawn, spawnSync } from 'node:child_process'
 import { randomUUID } from 'node:crypto'
 import {
   FILES, assertDispatch, createBarrier, finishBarrier, hash, parseBarrier,
-  proveBinding, readBarrier, safeAncestors, withDeploymentLock,
+  proveBinding, readBarrier, safeAncestors, safeNode, withDeploymentLock,
 } from '../../deploy/eqb-deploy-barrier.mjs'
 
 export async function verifyDeployBarrier(repository) {
   const root = fs.mkdtempSync(path.join(tmpdir(), 'eqb-barrier-'))
   const uid = process.getuid()
+  const gid = process.getgid()
   const expected = { transactionId: randomUUID(), previousSha: '1'.repeat(40), targetSha: '2'.repeat(40),
     productionSha: '3'.repeat(40), payloadDigest: '4'.repeat(64) }
   const active = path.join(root, 'deployments/root-dispatch-barrier.json')
@@ -19,18 +20,18 @@ export async function verifyDeployBarrier(repository) {
   const mutation = `deploy ${expected.targetSha}`
   const pointer = path.join(root, 'deployments/host-configuration/current')
   const installed = {}
-  const options = { root, uid, installed, proof() {} }
+  const options = { root, uid, gid, installed, proof() {} }
   const assertClockRegression = (action) => {
     const before = fs.readFileSync(active, 'utf8')
     const RealDate = globalThis.Date
-    const earlier = Date.parse(readBarrier(root, uid).createdAt) - 1000
+    const earlier = Date.parse(readBarrier(root, uid, gid).createdAt) - 1000
     globalThis.Date = class extends RealDate {
       constructor(...args) { super(...(args.length ? args : [earlier])) }
     }
     try { assert.throws(() => finishBarrier(action, expected, options), /Invalid barrier/) }
     finally { globalThis.Date = RealDate }
     assert.equal(fs.readFileSync(active, 'utf8'), before)
-    assert.throws(() => assertDispatch(mutation, root, uid))
+    assert.throws(() => assertDispatch(mutation, root, uid, gid))
     assert.equal(fs.existsSync(path.join(root, 'deployments', `root-dispatch-${expected.transactionId}.json`)), false)
   }
   const write = (file, bytes, mode = 0o600) => {
@@ -60,17 +61,37 @@ export async function verifyDeployBarrier(repository) {
       schemaVersion: 'eqb-release-v1', sha: expected.productionSha,
     }))
     fs.symlinkSync(`releases/${expected.productionSha}`, path.join(root, 'current'))
-    assert.equal(readBarrier(root, uid), null)
-    assertDispatch(mutation, root, uid)
-    const value = createBarrier(expected, root, uid)
+    assert.equal(readBarrier(root, uid, gid), null)
+    assertDispatch(mutation, root, uid, gid)
+    const value = createBarrier(expected, root, uid, gid)
     assert.equal(fs.statSync(active).mode & 0o777, 0o600)
     assert.deepEqual(parseBarrier(fs.readFileSync(active, 'utf8')), value)
+    // Exercise distinct owner IDs on every platform without requiring chown or
+    // extra accounts. All other metadata and the actual fixture bytes stay real.
+    const lstat = fs.lstatSync
+    try {
+      for (const [ownerUid, ownerGid] of [[0, 0], [0, 29], [17, 0], [17, 29]]) {
+        fs.lstatSync = (...args) => Object.assign(lstat(...args), { uid: ownerUid, gid: ownerGid })
+        safeNode(active, 'file', ownerUid, ownerGid, 0o600)
+        assert.deepEqual(readBarrier(root, ownerUid, ownerGid), value)
+        proveBinding(value, expected.previousSha, { ...options, uid: ownerUid, gid: ownerGid })
+        assert.throws(() => safeNode(active, 'file', ownerUid + 1, ownerGid, 0o600))
+        assert.throws(() => safeNode(active, 'file', ownerUid, ownerGid + 1, 0o600))
+        if (ownerUid === 0 && ownerGid === 0) {
+          safeNode(active, 'file')
+          assert.deepEqual(readBarrier(root), value)
+        } else {
+          assert.throws(() => safeNode(active, 'file'))
+          assert.throws(() => readBarrier(root))
+        }
+      }
+    } finally { fs.lstatSync = lstat }
     for (const command of [mutation, `deploy-reviewed-persistence ${expected.targetSha} ${expected.payloadDigest}`,
       `update-host-config ${expected.targetSha} ${expected.payloadDigest}`]) {
-      assert.throws(() => assertDispatch(command, root, uid))
+      assert.throws(() => assertDispatch(command, root, uid, gid))
     }
-    assertDispatch('preflight', root, uid)
-    assert.throws(() => createBarrier(expected, root, uid))
+    assertDispatch('preflight', root, uid, gid)
+    assert.throws(() => createBarrier(expected, root, uid, gid))
     for (const changed of [
       { ...value, extra: true }, { ...value, targetSha: [expected.targetSha] },
       { ...value, phase: 'unknown' }, { ...value, finishedAt: value.createdAt },
@@ -79,29 +100,30 @@ export async function verifyDeployBarrier(repository) {
     assert.throws(() => parseBarrier(`${JSON.stringify(value).replace('{', '{"phase":"bad",')}\n`))
     for (const corrupt of ['', '{}\n', 'unknown\n']) {
       fs.writeFileSync(active, corrupt)
-      assert.throws(() => readBarrier(root, uid))
-      assert.throws(() => assertDispatch(mutation, root, uid))
-      assertDispatch('preflight', root, uid)
+      assert.throws(() => readBarrier(root, uid, gid))
+      assert.throws(() => assertDispatch(mutation, root, uid, gid))
+      assertDispatch('preflight', root, uid, gid)
     }
     fs.writeFileSync(active, `${JSON.stringify(value)}\n`)
     fs.chmodSync(active, 0o666)
-    assert.throws(() => assertDispatch(mutation, root, uid))
+    assert.throws(() => assertDispatch(mutation, root, uid, gid))
     fs.chmodSync(active, 0o600)
     fs.linkSync(active, `${active}.linked`)
-    assert.throws(() => readBarrier(root, uid))
+    assert.throws(() => readBarrier(root, uid, gid))
     fs.unlinkSync(`${active}.linked`)
     fs.renameSync(active, `${active}.saved`)
     fs.symlinkSync('nonexistent', active)
-    assert.throws(() => assertDispatch(mutation, root, uid))
-    assertDispatch('preflight', root, uid)
+    assert.throws(() => assertDispatch(mutation, root, uid, gid))
+    assertDispatch('preflight', root, uid, gid)
     fs.unlinkSync(active)
     fs.renameSync(`${active}.saved`, active)
-    assert.throws(() => readBarrier(root, uid + 1))
-    assert.throws(() => safeAncestors(path.join(root, 'deployments/file'), uid)) // /tmp is writable
+    assert.throws(() => readBarrier(root, uid + 1, gid))
+    assert.throws(() => readBarrier(root, uid, gid + 1))
+    assert.throws(() => safeAncestors(path.join(root, 'deployments/file'), uid, gid)) // /tmp is writable
     assert.throws(() => finishBarrier('finalize', expected, options)) // wrong pointer
     assert.throws(() => finishBarrier('recover', { ...expected, payloadDigest: 'f'.repeat(64) }, options))
     assert.throws(() => finishBarrier('recover', expected, { ...options, proof() { throw new Error('unknown') } }))
-    assert.equal(readBarrier(root, uid).phase, 'active')
+    assert.equal(readBarrier(root, uid, gid).phase, 'active')
     const file = installed['deploy/eqb-deploy-controller']
     fs.appendFileSync(file, 'drift')
     assert.throws(() => proveBinding(value, expected.previousSha, options))
@@ -112,19 +134,19 @@ export async function verifyDeployBarrier(repository) {
     assertClockRegression('recover')
     const recovered = finishBarrier('recover', expected, options)
     assert.equal(recovered.phase, 'recovered')
-    assert.equal(readBarrier(root, uid), null)
-    assert.throws(() => createBarrier(expected, root, uid)) // consumed transaction
+    assert.equal(readBarrier(root, uid, gid), null)
+    assert.throws(() => createBarrier(expected, root, uid, gid)) // consumed transaction
     expected.transactionId = randomUUID()
-    createBarrier(expected, root, uid)
+    createBarrier(expected, root, uid, gid)
     fs.unlinkSync(pointer)
     fs.symlinkSync(`versions/${expected.targetSha}`, pointer)
     assertClockRegression('finalize')
     assert.equal(finishBarrier('finalize', expected, options).phase, 'finalized')
     assert.throws(() => finishBarrier('finalize', expected, options)) // never silently retry
     expected.transactionId = randomUUID()
-    const interrupted = createBarrier(expected, root, uid)
+    const interrupted = createBarrier(expected, root, uid, gid)
     fs.writeFileSync(active, `${JSON.stringify({ ...interrupted, phase: 'finalized', finishedAt: new Date().toISOString() })}\n`)
-    assert.throws(() => assertDispatch(mutation, root, uid))
+    assert.throws(() => assertDispatch(mutation, root, uid, gid))
     assert.throws(() => finishBarrier('recover', expected, options))
     assert.equal(finishBarrier('finalize', expected, options).phase, 'finalized')
     if (uid !== 0) {
@@ -155,8 +177,8 @@ export async function verifyDeployBarrier(repository) {
     withDeploymentLock(root, () => {
       assert.equal(invoke(mutation).status, 75)
       assert.equal(invoke('preflight').status, 75)
-      assert.throws(() => withDeploymentLock(root, () => assert.fail('nested lock entered'), uid))
-    }, uid)
+      assert.throws(() => withDeploymentLock(root, () => assert.fail('nested lock entered'), uid, gid))
+    }, uid, gid)
     assert.equal(fs.existsSync(entered), false)
     for (const corrupt of ['', '{}\n']) {
       write(active, corrupt)
@@ -177,7 +199,7 @@ export async function verifyDeployBarrier(repository) {
     // Process exits nonzero after durable creation: lock disappears, barrier does not.
     const source = new URL('../../deploy/eqb-deploy-barrier.mjs', import.meta.url).href
     const crash = spawnSync('/usr/bin/flock', ['-n', lock, process.execPath, '--input-type=module', '-e',
-      `import {createBarrier} from ${JSON.stringify(source)}; createBarrier(${JSON.stringify(expected)},${JSON.stringify(root)},${uid}); process.exit(91);`])
+      `import {createBarrier} from ${JSON.stringify(source)}; createBarrier(${JSON.stringify(expected)},${JSON.stringify(root)},${uid},${gid}); process.exit(91);`])
     assert.equal(crash.status, 91)
     assert.notEqual(invoke(mutation).status, 0)
     assert.equal(fs.existsSync(entered), false)
@@ -189,7 +211,7 @@ export async function verifyDeployBarrier(repository) {
       `require('fs').writeFileSync(${JSON.stringify(ready)},'1'); setTimeout(()=>{},500);`], { stdio: 'ignore' })
     const ended = new Promise((resolve) => child.once('exit', resolve))
     while (!fs.existsSync(ready) && child.exitCode === null) await new Promise((resolve) => setTimeout(resolve, 5))
-    assert.throws(() => withDeploymentLock(root, () => assert.fail('busy management entered'), uid))
+    assert.throws(() => withDeploymentLock(root, () => assert.fail('busy management entered'), uid, gid))
     assert.equal(invoke(mutation).status, 75)
     assert.equal(invoke('preflight').status, 75) // readonly must not re-enter the lock
     await ended

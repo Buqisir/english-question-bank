@@ -46,18 +46,18 @@ export function parseBarrier(text) {
   return value
 }
 
-export function safeNode(file, kind, uid = 0, mode = null) {
+export function safeNode(file, kind, uid = 0, gid = 0, mode = null) {
   const state = fs.lstatSync(file)
-  check(state.uid === uid && state.gid === uid && !state.isSymbolicLink()
+  check(state.uid === uid && state.gid === gid && !state.isSymbolicLink()
     && (kind === 'directory' ? state.isDirectory() : state.isFile() && state.nlink === 1)
     && (state.mode & 0o022) === 0
     && (mode === null || (state.mode & 0o7777) === mode), `Unsafe ${kind}: ${file}`)
   return state
 }
 
-export function safeAncestors(file, uid = 0) {
+export function safeAncestors(file, uid = 0, gid = 0) {
   for (let parent = path.dirname(file); ; parent = path.dirname(parent)) {
-    safeNode(parent, 'directory', uid)
+    safeNode(parent, 'directory', uid, gid)
     if (parent === path.dirname(parent)) break
   }
 }
@@ -74,24 +74,24 @@ export function privateWrite(file, text) {
   syncDirectory(path.dirname(file))
 }
 
-export function readBarrier(root = ROOT, uid = 0) {
+export function readBarrier(root = ROOT, uid = 0, gid = 0) {
   const directory = path.join(root, 'deployments')
-  safeNode(directory, 'directory', uid)
+  safeNode(directory, 'directory', uid, gid)
   const file = path.join(directory, STATE)
   try { fs.lstatSync(file) } catch (error) {
     if (error.code === 'ENOENT') return null
     throw error
   }
-  safeNode(file, 'file', uid, 0o600)
+  safeNode(file, 'file', uid, gid, 0o600)
   return parseBarrier(fs.readFileSync(file, 'utf8'))
 }
 
-export function assertDispatch(command, root = ROOT, uid = 0) {
+export function assertDispatch(command, root = ROOT, uid = 0, gid = 0) {
   // Readonly remains available even when the barrier is corrupt. Inspection
   // reports corruption; preflight proves the existing controller/health route.
   if (command === 'preflight') return
   check(/^(deploy [a-f0-9]{40}|(?:deploy-reviewed-persistence|update-host-config) [a-f0-9]{40} [a-f0-9]{64})$/u.test(command || ''), 'Invalid dispatch')
-  check(readBarrier(root, uid) === null, 'ROOT_DISPATCH_BARRIER_PRESENT')
+  check(readBarrier(root, uid, gid) === null, 'ROOT_DISPATCH_BARRIER_PRESENT')
 }
 
 export function bindBarrier(value, expected) {
@@ -107,18 +107,18 @@ function entryExists(file) {
   }
 }
 
-function noMaintenance(root, uid) {
+function noMaintenance(root, uid, gid) {
   for (const kind of ['host-configuration-update', 'reviewed-persistence']) {
     const directory = path.join(root, 'deployments', kind)
     if (!entryExists(directory)) continue
-    safeNode(directory, 'directory', uid)
+    safeNode(directory, 'directory', uid, gid)
     check(!entryExists(path.join(directory, 'active.json')), 'Existing maintenance state; inspect first')
   }
 }
 
-export function createBarrier(expected, root = ROOT, uid = 0) {
-  check(readBarrier(root, uid) === null, 'Barrier already exists; inspect, do not retry')
-  noMaintenance(root, uid)
+export function createBarrier(expected, root = ROOT, uid = 0, gid = 0) {
+  check(readBarrier(root, uid, gid) === null, 'Barrier already exists; inspect, do not retry')
+  noMaintenance(root, uid, gid)
   const value = { schemaVersion: SCHEMA, ...expected, phase: 'active', createdAt: new Date().toISOString(), finishedAt: null }
   const text = `${JSON.stringify(value)}\n`
   parseBarrier(text)
@@ -127,30 +127,30 @@ export function createBarrier(expected, root = ROOT, uid = 0) {
   return value
 }
 
-function pointer(root, relative, expected, uid) {
+function pointer(root, relative, expected, uid, gid) {
   const file = path.join(root, relative)
   const state = fs.lstatSync(file)
-  check(state.isSymbolicLink() && state.uid === uid && state.gid === uid
+  check(state.isSymbolicLink() && state.uid === uid && state.gid === gid
     && fs.readlinkSync(file) === expected, `Pointer mismatch: ${relative}`)
 }
 
-export function proveBinding(value, sha, { root = ROOT, uid = 0, installed = FILES } = {}) {
+export function proveBinding(value, sha, { root = ROOT, uid = 0, gid = 0, installed = FILES } = {}) {
   const base = path.join(root, 'deployments/host-configuration')
-  safeNode(base, 'directory', uid)
-  safeNode(path.join(base, 'versions'), 'directory', uid)
-  pointer(root, 'current', `releases/${value.productionSha}`, uid)
+  safeNode(base, 'directory', uid, gid)
+  safeNode(path.join(base, 'versions'), 'directory', uid, gid)
+  pointer(root, 'current', `releases/${value.productionSha}`, uid, gid)
   const release = path.join(root, 'releases', value.productionSha)
-  safeNode(path.join(root, 'releases'), 'directory', uid)
-  safeNode(release, 'directory', uid)
-  safeNode(path.join(release, '.eqb-release.json'), 'file', uid)
+  safeNode(path.join(root, 'releases'), 'directory', uid, gid)
+  safeNode(release, 'directory', uid, gid)
+  safeNode(path.join(release, '.eqb-release.json'), 'file', uid, gid)
   const releaseMarker = JSON.parse(fs.readFileSync(path.join(release, '.eqb-release.json'), 'utf8'))
   check(releaseMarker.schemaVersion === 'eqb-release-v1' && releaseMarker.sha === value.productionSha,
     'Production marker mismatch')
-  pointer(root, 'deployments/host-configuration/current', `versions/${sha}`, uid)
+  pointer(root, 'deployments/host-configuration/current', `versions/${sha}`, uid, gid)
   const version = path.join(base, 'versions', sha)
-  safeNode(version, 'directory', uid)
-  safeNode(path.join(version, 'deploy'), 'directory', uid)
-  safeNode(path.join(version, MARKER), 'file', uid)
+  safeNode(version, 'directory', uid, gid)
+  safeNode(path.join(version, 'deploy'), 'directory', uid, gid)
+  safeNode(path.join(version, MARKER), 'file', uid, gid)
   const marker = JSON.parse(fs.readFileSync(path.join(version, MARKER), 'utf8'))
   const hosts = Object.keys(FILES).slice(0, 3)
   const launchers = Object.keys(FILES).slice(3)
@@ -164,7 +164,7 @@ export function proveBinding(value, sha, { root = ROOT, uid = 0, installed = FIL
     const files = hosts.includes(name) ? [path.join(version, name)] : []
     if (installed[name]) files.push(installed[name])
     for (const file of files) {
-      safeNode(file, 'file', uid)
+      safeNode(file, 'file', uid, gid)
       check(hash(fs.readFileSync(file)) === digest, `Installed hash mismatch: ${name}`)
     }
   }
@@ -195,17 +195,17 @@ export function strictProof(module, productionSha) {
   ]) run('/usr/bin/curl', ['--fail', '--silent', '--show-error', '--max-time', '10', '--output', '/dev/null', ...args])
 }
 
-export function finishBarrier(action, expected, { root = ROOT, uid = 0, proof = strictProof, installed = FILES } = {}) {
+export function finishBarrier(action, expected, { root = ROOT, uid = 0, gid = 0, proof = strictProof, installed = FILES } = {}) {
   check(['finalize', 'recover'].includes(action), 'Invalid finish action')
-  const value = readBarrier(root, uid)
+  const value = readBarrier(root, uid, gid)
   check(value, 'No barrier; inspect terminal receipts, do not retry')
   bindBarrier(value, expected)
-  noMaintenance(root, uid)
+  noMaintenance(root, uid, gid)
   const phase = action === 'finalize' ? 'finalized' : 'recovered'
   check(value.phase === 'active' || value.phase === phase, 'Conflicting terminal phase')
   // Recovery acknowledges an independently restored previous version. It does
   // not roll back files, restart services, or replay an interrupted operation.
-  const module = proveBinding(value, action === 'finalize' ? value.targetSha : value.previousSha, { root, uid, installed })
+  const module = proveBinding(value, action === 'finalize' ? value.targetSha : value.previousSha, { root, uid, gid, installed })
   proof(module, value.productionSha)
   const directory = path.join(root, 'deployments')
   const active = path.join(directory, STATE)
@@ -232,9 +232,9 @@ function identity(args) {
   return { transactionId, previousSha, targetSha, productionSha, payloadDigest }
 }
 
-export function withDeploymentLock(root, callback, uid = 0) {
+export function withDeploymentLock(root, callback, uid = 0, gid = 0) {
   const lock = path.join(root, 'deployments/deploy.lock')
-  safeNode(lock, 'file', uid, 0o600)
+  safeNode(lock, 'file', uid, gid, 0o600)
   const fd = fs.openSync(lock, fs.constants.O_RDONLY | fs.constants.O_NOFOLLOW)
   try {
     // flock(2) belongs to this inherited open-file description. The parent
@@ -243,7 +243,7 @@ export function withDeploymentLock(root, callback, uid = 0) {
       env: environment, stdio: ['ignore', 'ignore', 'ignore', fd],
     })
     check(!result.error && result.status === 0, 'Deployment lock busy or unknown')
-    const current = safeNode(lock, 'file', uid, 0o600)
+    const current = safeNode(lock, 'file', uid, gid, 0o600)
     const opened = fs.fstatSync(fd)
     check(current.dev === opened.dev && current.ino === opened.ino, 'Deployment lock replaced')
     return callback()
@@ -253,10 +253,10 @@ export function withDeploymentLock(root, callback, uid = 0) {
 function main() {
   check(process.getuid() === 0 && process.getgid() === 0, 'Root only')
   safeAncestors(INSTALLED)
-  safeNode(INSTALLED, 'file', 0, 0o644)
+  safeNode(INSTALLED, 'file', 0, 0, 0o644)
   check(fileURLToPath(import.meta.url) === INSTALLED, 'Run the fixed installed module')
   safeAncestors(path.join(ROOT, 'deployments/deploy.lock'))
-  safeNode(path.join(ROOT, 'deployments/deploy.lock'), 'file', 0, 0o600)
+  safeNode(path.join(ROOT, 'deployments/deploy.lock'), 'file', 0, 0, 0o600)
   const [action, ...args] = process.argv.slice(2)
   check(['inspect', 'create', 'finalize', 'recover'].includes(action), 'Invalid barrier action')
   withDeploymentLock(ROOT, () => {
