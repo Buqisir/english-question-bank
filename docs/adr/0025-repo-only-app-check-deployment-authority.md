@@ -178,11 +178,10 @@ Activation is a sequence of separately Owner-authorized shared-state changes:
    Owner decision may consider low-risk `amp+hosted-e2e`. Stopping low-risk
    per-push Hosted `verify` needs its own workflow PR/authorization, not merely
    an environment mode change;
-5. only after 10 natural exact-main runs across at least seven days without an
-   unexplained disagreement, one ordinary Owner-authorized deployment, and a
-   usable independent nightly backstop may low-risk main use `amp`. Do not stop
-   per-push Hosted E2E on the same day as Full; Hosted remains the high-risk PR
-   and current-SHA high/unproven-risk strong gate.
+5. only after the cumulative second-stage event-coverage gate below is met may
+   a separate, later Owner decision allow low-risk main to use `amp` and reduce
+   per-push Hosted E2E. Hosted remains the high-risk PR and current-SHA
+   high/unproven-risk strong gate.
 
 The minimum first-stage event-coverage gate is:
 
@@ -199,10 +198,30 @@ The minimum first-stage event-coverage gate is:
 - At least **two** natural candidates pass real Shadow/Dual reader pairing,
   with Fast/Full content and every SKIP examined and no unexplained disagreement.
 
+The cumulative second-stage event-coverage gate is event-count-based, with no
+minimum calendar span or same-day exclusion:
+
+- At least **10** post-enable natural exact-main paired successes, each backed
+  by a real App Check, private receipt and matching Hosted verdict.
+- At least **3** natural arrivals after CI has been idle for **at least two
+  hours**. Without sleep telemetry these are idle-resume proxies, not proven
+  cold wakes.
+- At least **3** real Shadow/Dual reader pairings agree, with Fast/Full content
+  and every SKIP examined.
+- At least **1** successful ordinary Owner-authorized deployment.
+- At least **2** naturally scheduled successful Hosted nightly runs.
+- **No unexplained disagreement** across this evidence.
+
+Qualifying first-stage events may contribute to these cumulative totals; count
+each qualifying event only once. Pre-enable informational statuses do not count.
+Do not use empty commits, redelivery or manual drain to manufacture samples;
+manual diagnostics cannot substitute for natural main or scheduled nightly runs.
+
 These are evidence requirements, not evidence already collected by this code
 PR. App activation, observation, reduction of Hosted coverage and Deployment
-authority changes remain separate approvals. The second-stage E2E-removal
-calendar gate is intentionally not compressed.
+authority changes remain separate approvals. This second-stage revision replaces
+the former seven-day span and same-day exclusion with effective natural-event
+counts; it does not activate any mode or authorize a deployment.
 
 No stage authorizes App creation, Secret or environment changes, plugin reload,
 webhook redelivery, manual drain, branch-protection or workflow changes,
