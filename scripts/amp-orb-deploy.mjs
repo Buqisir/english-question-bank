@@ -411,6 +411,8 @@ async function rootBarrierBootstrap(install) {
   // unknown; there is no reinstall, retry, CI replay or authority fallback.
   const execution = await executeTencentTatCommand({ command: built.command,
     commandName: `eqb-barrier-${install ? 'install' : 'inspect'}-${resolved.sha.slice(0, 12)}`,
+    description: install ? 'Owner-authorized EQB root barrier bootstrap (mutation)'
+      : 'Read-only EQB root barrier installation readiness',
     configuration })
   if (!install) {
     const report = parseReadiness(execution.output, payloadText)

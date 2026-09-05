@@ -1340,6 +1340,7 @@ let invocationPollCount = 0
 const tencentSuccess = await executeTencentTatCommand({
   command: maintenanceTatCommand,
   commandName: 'eqb-maint-readiness-test',
+  description: 'Fixture operation description',
   configuration: tencentTatConfiguration,
   now: () => tencentNow,
   sleep: async (milliseconds) => { tencentNow += milliseconds },
@@ -1411,6 +1412,7 @@ assert(
     && runCommandCall.payload.InstanceIds.length === 1
     && runCommandCall.payload.InstanceIds[0] === tencentTatConfiguration.instanceId
     && runCommandCall.payload.Username === 'root'
+    && runCommandCall.payload.Description === 'Fixture operation description'
     && runCommandCall.payload.CommandType === 'SHELL'
     && runCommandCall.payload.SaveCommand === false
     && runCommandCall.payload.EnableParameter === false
