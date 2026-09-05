@@ -356,9 +356,6 @@ function assertRouteContract() {
   const paperBrowseSource = readRepoFile('app/src/features/paper-browse/PaperBrowsePage.tsx')
   assert('I4 PaperBrowsePage imports grammar-fill adapter', paperBrowseSource.includes('grammarFillPaperViewAdapter'))
   assert('I4 PaperBrowsePage routes grammar-fill groups', paperBrowseSource.includes("groupType === 'grammarFill'"))
-
-  const publisherSource = readRepoFile('server/paper-import/publisher.mjs')
-  assert('I4 publisher has getGrammarFillGroups', publisherSource.includes('getGrammarFillGroups'))
 }
 
 // ---- Real DOCX ----

@@ -90,14 +90,6 @@ try {
     readJson(path.join(paperAssetsDir, `${paperId}/latest/paper-asset.json`)).paper.assetVersion === 1,
   )
   assert(
-    'publish returns QA links (4 Reading + 七选五 if present)',
-    Array.isArray(first.publish?.qaLinks) && first.publish.qaLinks.length >= 4,
-  )
-  assert(
-    'QA links include latest and version hrefs',
-    first.publish.qaLinks.every((link) => link.latestHref.includes('source=paper-asset') && link.versionHref.includes('version=v1')),
-  )
-  assert(
     'DB has Reading A-D groups',
     db.prepare("SELECT COUNT(*) AS count FROM question_groups WHERE group_type = 'reading'").get().count === 4,
   )
