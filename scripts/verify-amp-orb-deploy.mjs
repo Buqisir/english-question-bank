@@ -52,6 +52,7 @@ import {
   deploymentLockInvocation,
   deploymentSSHInvocation,
   deploymentSSHTransportUser,
+  isReducedDeploymentRisk,
   isSshPublicKeyAuthenticationDenied,
   materializeDeploymentCredentials,
   migrateLegacyProductionBaseline,
@@ -80,6 +81,7 @@ import {
   requireReviewedPersistenceDeployAuthorization,
   requireUpdateHostConfigurationAuthorization,
   resumeReleaseLayoutBootstrap,
+  resolveDeploymentRisk,
   resolveLatestDeploymentCandidate,
   updateLatestHostConfiguration,
   verifyDeploymentAuthority,
@@ -580,6 +582,10 @@ for (const [label, mutateChecks, mutateRun] of [
   ['wrong hosted workflow ID', null, (run) => { run.workflow_id = 1 }],
   ['wrong hosted workflow path', null, (run) => { run.path = '.github/workflows/other.yml' }],
   ['manual hosted event', null, (run) => { run.event = 'workflow_dispatch' }],
+  ['nightly hosted event', null, (run) => { run.event = 'schedule' }],
+  ['PR hosted event', null, (run) => { run.event = 'pull_request' }],
+  ['unfinished strong workflow', null, (run) => { run.status = 'in_progress' }],
+  ['cancelled strong workflow', null, (run) => { run.conclusion = 'cancelled' }],
   ['wrong hosted run SHA', null, (run) => { run.head_sha = oldSha }],
   ['wrong hosted run suite', null, (run) => { run.check_suite_id = 101 }],
   ['wrong hosted run attempt', null, (run) => { run.run_attempt = 2 }],
@@ -756,11 +762,19 @@ assert(
   })(),
   'dual fails when Amp evidence is absent',
 )
+const lowRiskGit = (args) => args[0] === 'rev-list'
+  ? `${newSha} ${oldSha}\n` : 'app/src/shared-ui/tokens.css\0'
+const lowRiskClassifier = () => 'ui-micro'
 const ampHostedE2e = await verifyDeploymentAuthority({
   authority: ampHostedE2eAuthority,
   expectedSha: newSha,
-  readHostedChecks: async () => ({ check_runs: [checkRun('e2e', newSha, { id: 2 })] }),
-  readWorkflowRun: async () => workflowRun(newSha, { conclusion: 'failure' }),
+  runGit: lowRiskGit,
+  classifyPaths: lowRiskClassifier,
+  readHostedChecks: async (sha) => sha === oldSha ? checks(oldSha) : {
+    check_runs: [checkRun('e2e', newSha, { id: 2, detailsUrl: 'https://github.com/Buqisir/english-question-bank/actions/runs/201/job/2' })],
+  },
+  readWorkflowRun: async (id) => id === 200 ? workflowRun(oldSha)
+    : workflowRun(newSha, { id: 201, status: 'in_progress', conclusion: null }),
   readAmpChecks,
 })
 assert(
@@ -771,11 +785,146 @@ assert(
 const ampOnly = await verifyDeploymentAuthority({
   authority: ampAuthority,
   expectedSha: newSha,
-  async readHostedChecks() { assert(false, 'amp mode must not read Hosted checks') },
-  async readWorkflowRun() { assert(false, 'amp mode must not read a Hosted run') },
+  runGit: lowRiskGit,
+  classifyPaths: lowRiskClassifier,
+  async readHostedChecks(sha) {
+    assert(sha === oldSha, 'low-risk amp reads Hosted only for the ancestor anchor')
+    return checks(oldSha)
+  },
+  async readWorkflowRun() { return workflowRun(oldSha) },
   readAmpChecks,
 })
-assert(ampOnly.hosted === null && ampOnly.amp?.state === 'success', 'amp mode uses only the App Check')
+assert(ampOnly.hosted === null && ampOnly.amp?.state === 'success'
+  && ampOnly.risk.anchorSha === oldSha, 'proven low-risk amp uses only the current App Check')
+
+for (const path of [
+  ...EQB_PERSISTENCE_AUTHORITY_PATHS, ...EQB_HOST_CONFIGURATION_PATHS,
+  '.github/workflows/verify.yml', '.agents/setup', '.agents/ship.md', 'AGENTS.md',
+  '.amp/plugins/github-ci-wakeup.js', 'scripts/verify-ci.mjs', 'scripts/lib/ampOrbCI.mjs',
+  'docs/adr/0025-repo-only-app-check-deployment-authority.md', 'unknown.txt',
+  'app/src/auth/Login.css', 'app/src/api.ts', 'app/src/localStore.ts',
+  'app/public/paper-assets/x/producer.mjs', 'app/src/../server/auth.css',
+]) {
+  assert(!isReducedDeploymentRisk([path], 'ordinary-local-feature'), `${path} cannot reduce Hosted even with a low classifier result`)
+}
+for (const risk of ['unknown-fallback', 'git-diff-fallback', 'mixed-high-risk-fallback',
+  'shared-renderer-contract', 'auth-persistence-migration', 'no-changes', undefined]) {
+  assert(!isReducedDeploymentRisk(['app/src/shared-ui/tokens.css'], risk), `${risk} retains Hosted`)
+}
+assert(isReducedDeploymentRisk(['app/public/paper-assets/x/paper.json'], 'known-shape-paper-data'),
+  'known-shape paper data can reduce Hosted')
+
+for (const mode of [ampAuthority, ampHostedE2eAuthority]) {
+  const result = await verifyDeploymentAuthority({
+    authority: mode, expectedSha: newSha, readHostedChecks, readWorkflowRun, readAmpChecks,
+  })
+  assert(result.effectiveMode === 'dual' && result.hosted.checks.length === 2,
+    `${mode.mode} without risk evidence requires the current Hosted strong gate`)
+  let blocked = false
+  try {
+    await verifyDeploymentAuthority({
+      authority: mode, expectedSha: newSha, readAmpChecks, readWorkflowRun,
+      runGit: lowRiskGit, classifyPaths: () => 'unknown-fallback',
+      readHostedChecks: async () => checks(newSha, { verify: { conclusion: 'cancelled' } }),
+    })
+  } catch { blocked = true }
+  assert(blocked, `${mode.mode} cannot hide cancelled verify on unknown risk`)
+}
+
+for (const status of ['in_progress', 'completed']) {
+  const result = assertAuthoritativeDeploymentChecks(checks(newSha, {
+    verify: { status: 'completed', conclusion: 'cancelled' },
+  }), newSha, {
+    requiredChecks: ['e2e'], workflowRun: workflowRun(newSha, { status, conclusion: 'cancelled' }),
+  })
+  assert(result.checks.length === 1, `e2e-only accepts completed successful job with ${status} cancelled sibling workflow`)
+}
+for (const mutation of ['pending', 'failed', 'skipped', 'nightly', 'dispatch', 'rerun', 'wrong-sha', 'wrong-app']) {
+  const payload = checks(newSha)
+  const run = workflowRun(newSha, { status: 'in_progress', conclusion: null })
+  if (mutation === 'pending') payload.check_runs[1].status = 'in_progress'
+  if (mutation === 'failed') payload.check_runs[1].conclusion = 'failure'
+  if (mutation === 'skipped') payload.check_runs[1].conclusion = 'skipped'
+  if (mutation === 'nightly') run.event = 'schedule'
+  if (mutation === 'dispatch') run.event = 'workflow_dispatch'
+  if (mutation === 'rerun') run.run_attempt = 2
+  if (mutation === 'wrong-sha') run.head_sha = oldSha
+  if (mutation === 'wrong-app') payload.check_runs[1].app.id = 999
+  let blocked = false
+  try { assertAuthoritativeDeploymentChecks(payload, newSha, { requiredChecks: ['e2e'], workflowRun: run }) }
+  catch { blocked = true }
+  assert(blocked, `e2e-only still blocks ${mutation}`)
+}
+
+// Real Git proves per-commit accumulation, including a high-risk add+revert
+// erased from the endpoint diff, without accessing any remote or credentials.
+const riskRepo = mkdtempSync(path.join(tmpdir(), 'eqb-deploy-risk-'))
+try {
+  const git = (args) => execFileSync('git', args, { cwd: riskRepo, encoding: 'utf8' })
+  git(['init', '-q'])
+  git(['config', 'user.name', 'Risk test'])
+  git(['config', 'user.email', 'risk@example.invalid'])
+  git(['config', 'commit.gpgsign', 'false'])
+  const commit = (file, content) => {
+    mkdirSync(path.dirname(path.join(riskRepo, file)), { recursive: true })
+    writeFileSync(path.join(riskRepo, file), content)
+    git(['add', '.'])
+    git(['commit', '-qm', 'risk fixture'])
+    return git(['rev-parse', 'HEAD']).trim()
+  }
+  const anchor = commit('README.md', 'anchor')
+  const classifyPaths = (paths) => JSON.parse(execFileSync(process.execPath, [
+    'scripts/verify-ci.mjs', '--plan-json', ...paths.flatMap((file) => ['--changed-file', file]),
+  ], { encoding: 'utf8' })).risk
+  const hostedAnchor = async (sha) => {
+    if (sha !== anchor) throw new Error('no strong Hosted evidence')
+    return hostedVerification(sha)
+  }
+  commit('app/src/shared-ui/tokens.css', 'a{}')
+  let tip = commit('app/src/shared-ui/tokens.css', 'b{}')
+  let risk = await resolveDeploymentRisk({ expectedSha: tip, runGit: git, classifyPaths, readHostedAuthority: hostedAnchor })
+  assert(risk.reduced && risk.commits.length === 2 && risk.anchorSha === anchor,
+    'two low-risk commits are both classified back to an exact Hosted anchor')
+  const high = commit('server/auth/auth.mjs', '// high')
+  git(['revert', '--no-edit', high])
+  tip = commit('app/src/shared-ui/tokens.css', 'c{}')
+  assert(!git(['diff', '--name-only', anchor, tip]).includes('auth'), 'endpoint diff hides high-risk add+revert')
+  risk = await resolveDeploymentRisk({ expectedSha: tip, runGit: git, classifyPaths, readHostedAuthority: hostedAnchor })
+  assert(!risk.reduced && risk.commits.length === 2, 'accumulated high-risk revert blocks a later low-risk tip')
+  for (const event of ['schedule', 'workflow_dispatch', 'pull_request']) {
+    risk = await resolveDeploymentRisk({ expectedSha: tip, runGit: git, classifyPaths,
+      readHostedAuthority: (sha) => hostedVerification(sha, checks(sha), workflowRun(sha, { event })),
+    })
+    assert(!risk.reduced, `${event} ancestor cannot clear accumulated high risk`)
+  }
+  risk = await resolveDeploymentRisk({ expectedSha: tip, runGit: git, classifyPaths,
+    readHostedAuthority: (sha) => hostedVerification(sha),
+  })
+  assert(risk.reduced && risk.commits.length === 1, 'fresh strong Hosted parent closes the risky interval')
+  for (const [label, runGit, classifier] of [
+    ['missing history', () => { throw new Error('missing object') }, classifyPaths],
+    ['merge', () => `${tip} ${anchor} ${high}`, classifyPaths],
+    ['root/shallow', () => tip, classifyPaths],
+    ['classifier failure', git, () => { throw new Error('classifier unavailable') }],
+    ['truncated paths', (args) => args[0] === 'diff' ? 'app/src/x.css' : `${tip} ${anchor}`, classifyPaths],
+  ]) {
+    risk = await resolveDeploymentRisk({ expectedSha: tip, runGit, classifyPaths: classifier, readHostedAuthority: hostedAnchor })
+    assert(!risk.reduced && risk.reason === 'unproven-risk', `${label} fails closed`)
+  }
+  let reads = 0
+  risk = await resolveDeploymentRisk({ expectedSha: newSha,
+    runGit: (args) => args[0] === 'rev-list' ? `${oldSha === args.at(-1) ? oldSha : newSha} ${oldSha}` : 'app/src/x.css\0',
+    classifyPaths: lowRiskClassifier,
+    readHostedAuthority: () => { reads += 1; throw new Error('no anchor') },
+  })
+  assert(!risk.reduced && reads === 50, 'missing Hosted anchor is bounded and cannot reduce authority')
+  tip = commit('app/public/paper-assets/x/paper.json', '{}')
+  risk = await resolveDeploymentRisk({ expectedSha: tip, runGit: git, classifyPaths, readHostedAuthority: hostedAnchor })
+  assert(!risk.reduced && risk.reason === 'mixed-accumulated-risk',
+    'individually low paper and CSS commits still classify the complete cumulative path union')
+} finally {
+  rmSync(riskRepo, { recursive: true, force: true })
+}
 assert(
   (() => {
     try {

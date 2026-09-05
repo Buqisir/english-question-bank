@@ -156,6 +156,11 @@ function readDeploymentVerification(sha) {
   return verifyDeploymentAuthority({
     authority: deploymentAuthority,
     expectedSha: sha,
+    runGit,
+    classifyPaths: (paths) => JSON.parse(execFileSync(process.execPath, [
+      'scripts/verify-ci.mjs', '--plan-json',
+      ...paths.flatMap((file) => ['--changed-file', file]),
+    ], { cwd: repositoryRoot, encoding: 'utf8' })).risk,
     readHostedChecks: (expectedSha) => readCommitChecks(expectedSha),
     readWorkflowRun,
     readAmpChecks: (expectedSha) => readCommitChecks(expectedSha, { amp: true }),
