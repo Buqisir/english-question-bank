@@ -564,6 +564,37 @@ recovery authorization. Retain evidence; no automatic cleanup/retry/finalize.
 Known rollback also leaves the manager and any barrier/target staging as evidence,
 so a new UUID cannot silently reopen installation.
 
+Bootstrap failures before a durable install receipt now emit canonical
+`eqb-barrier-failure-v1`, not free-text `Bootstrap unknown...`. This result is
+always `conclusion=unknown`, `retryAllowed=false`; it binds the transaction
+(null only for inspection or an invalid invocation), but does **not** prove
+host state, absence of mutation, rollback or admission isolation. Do not treat
+it as an install receipt. Handled install receipts retain only a strict failure
+record in their `failure` string, never arbitrary exception text. Legacy free-text
+failures, missing output, extra journal lines and exit/receipt disagreement are
+normalized to unknown, not accepted as successful or rolled-back results.
+
+Diagnostics retain only an allowlisted stage, numeric child exit (null when
+unavailable), allowlisted OS error code and stdout/stderr byte counts. They never
+forward stdout/stderr excerpts, argv, paths, exception messages or stack traces.
+Stages distinguish lock acquisition, selected-module preflight, six ordered
+health probes (`health-0` local API, `1` pinned TLS API, `2` public API, `3` root,
+`4` ops, `5` review), units/jobs, live main, staging, manager launch and journal
+sync/read. Exit zero with a preflight/live-main output failure is still unknown.
+The manager remains systemd-lived; the transport captures and strictly parses
+journal output rather than streaming it into the CLI. After dispatch the CLI
+returns canonical structured failure with exit70 even for lost/invalid output;
+uncatchable process death or a missing Node runtime can still produce no remote
+record, so client-side unknown normalization remains required. Private original
+evidence is retained, never replayed or erased by diagnostics.
+
+The observed pattern “dispatch staging exists, remote exit70, no attempt/receipt,
+barrier/manager/target absent, old pointer/wrapper” does not identify the failed
+readonly command retrospectively. The regression injects each possible readonly
+failure before attempt creation and proves its stage is reported without claiming
+success/rollback or retry authority. Existing transactions need separately
+authorized readonly forensics; new code neither reopens nor replays them.
+
 After locked success the CLI runs forced preflight outside the lock and emits
 strict `eqb-barrier-route-proof-v1` with `forced=passed|unknown`. Failure retains
 the active barrier and never triggers rollback. Finalize, root recovery, cleanup

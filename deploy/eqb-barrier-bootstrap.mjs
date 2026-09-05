@@ -2,11 +2,11 @@
 // One root bootstrap, not an application deployment or a general transaction engine.
 import fs from 'node:fs'
 import path from 'node:path'
-import { spawnSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
 import {
   FILES, ROOT, INSTALLED, hash, safeNode, safeAncestors, readBarrier, parseBarrier,
   createBarrier, proveBinding, strictProof, withDeploymentLock, privateWrite, syncDirectory,
+  readonlyCommand,
 } from './eqb-deploy-barrier.mjs'
 
 const SHA = /^[a-f0-9]{40}$/u
@@ -32,6 +32,45 @@ function decode(text) {
   const value = JSON.parse(text)
   check(canonical(value) === text, 'Noncanonical bootstrap bytes')
   return value
+}
+const STAGES = ['transport-load', 'dispatch-stage', 'manager-launch', 'journal-sync', 'journal-read',
+  'remote-output', 'root-entry', 'deploy-lock', 'install-mutation', 'selected-preflight',
+  'list-units', 'list-jobs', 'live-main', ...Array.from({ length: 6 }, (_, i) => `health-${i}`)]
+export function failureResult(transactionId, stage, error = {}) {
+  const d = error.diagnostic || {}
+  return { conclusion: 'unknown', diagnostic: {
+    code: ['ENOENT', 'EACCES', 'ETIMEDOUT', 'ENOBUFS'].includes(d.code) ? d.code : null,
+    exitCode: Number.isInteger(d.exitCode) ? d.exitCode : null,
+    stage: STAGES.includes(d.stage) ? d.stage : stage,
+    stderrBytes: Number.isSafeInteger(d.stderrBytes) && d.stderrBytes >= 0 ? d.stderrBytes : 0,
+    stdoutBytes: Number.isSafeInteger(d.stdoutBytes) && d.stdoutBytes >= 0 ? d.stdoutBytes : 0,
+  }, retryAllowed: false, schemaVersion: 'eqb-barrier-failure-v1',
+  transactionId: typeof transactionId === 'string' && UUID.test(transactionId) ? transactionId : null }
+}
+export function parseFailure(text, transactionId) {
+  const value = decode(text)
+  check(keys(value, ['conclusion', 'diagnostic', 'retryAllowed', 'schemaVersion', 'transactionId'])
+    && value.schemaVersion === 'eqb-barrier-failure-v1' && value.conclusion === 'unknown'
+    && value.retryAllowed === false && value.transactionId === transactionId
+    && (transactionId === null || (typeof transactionId === 'string' && UUID.test(transactionId)))
+    && keys(value.diagnostic, ['code', 'exitCode', 'stage', 'stderrBytes', 'stdoutBytes'])
+    && STAGES.includes(value.diagnostic.stage)
+    && canonical(failureResult(transactionId, value.diagnostic.stage, { diagnostic: value.diagnostic })) === text,
+  'Invalid bootstrap failure')
+  return value
+}
+export function parseInstallExecution(execution, expected) {
+  try {
+    const value = decode(execution.output)
+    if (value.schemaVersion === 'eqb-barrier-failure-v1') return parseFailure(execution.output, expected.transactionId)
+    const receipt = parseReceipt(execution.output, expected)
+    check(execution.exitCode === (receipt.conclusion === 'success' ? 0 : 70), 'Exit/receipt mismatch')
+    return receipt
+  } catch {
+    return failureResult(expected.transactionId, 'remote-output', { diagnostic: {
+      exitCode: execution.exitCode, stdoutBytes: Buffer.byteLength(execution.output || ''),
+    } })
+  }
 }
 export function buildPayload(targetSha, read) {
   return canonical({ schemaVersion: 'eqb-barrier-payload-v1', targetSha,
@@ -68,13 +107,7 @@ function metadata(file) {
     sha256: s.isFile() ? hash(fs.readFileSync(file)) : null,
     target: s.isSymbolicLink() ? fs.readlinkSync(file) : null }
 }
-function command(executable, args) {
-  const result = spawnSync(executable, args, { encoding: 'utf8', timeout: 15_000,
-    env: { PATH: '/usr/local/bin:/usr/bin:/bin:/usr/sbin' }, maxBuffer: 1024 * 1024 })
-  check(!result.error && result.status === 0, 'Readonly command failed or unknown')
-  return result.stdout
-}
-export function diagnostics() {
+export function diagnostics(run = readonlyCommand) {
   // Diagnostic only: neither /proc nor systemd snapshots drain in-flight IPC.
   const processes = []
   for (const pid of fs.readdirSync('/proc').filter((name) => /^\d+$/u.test(name))) {
@@ -85,18 +118,25 @@ export function diagnostics() {
       || arg.startsWith('--unit=eqb-deploy-'))) processes.push(Number(pid))
   }
   return { processes: processes.sort((a, b) => a - b),
-    units: command('/usr/bin/systemctl', ['list-units', '--all', '--no-legend', '--no-pager', 'eqb-deploy-*']),
-    jobs: command('/usr/bin/systemctl', ['list-jobs', '--no-legend', '--no-pager']) }
+    units: run('list-units', '/usr/bin/systemctl', ['list-units', '--all', '--no-legend', '--no-pager', 'eqb-deploy-*'], { timeout: 15_000 }),
+    jobs: run('list-jobs', '/usr/bin/systemctl', ['list-jobs', '--no-legend', '--no-pager'], { timeout: 15_000 }) }
+}
+export function currentMain(targetSha, run = readonlyCommand) {
+  const text = run('live-main', '/usr/bin/curl', ['--fail', '--silent', '--show-error', '--max-time', '10',
+    'https://api.github.com/repos/Buqisir/english-question-bank/git/ref/heads/main'], { timeout: 15_000 })
+  try {
+    const ref = JSON.parse(text)
+    check(ref.ref === 'refs/heads/main' && ref.object?.type === 'commit' && ref.object.sha === targetSha,
+      'Live main changed or unknown')
+  } catch {
+    const error = new Error('Live main output invalid or changed')
+    error.diagnostic = { stage: 'live-main', exitCode: 0, stdoutBytes: Buffer.byteLength(text) }
+    throw error
+  }
 }
 function configuration(options = {}) {
   return { root: ROOT, uid: 0, gid: 0, installed: FILES, manager: INSTALLED,
-    proof: strictProof, diagnostics, ancestors: safeAncestors,
-    currentMain(targetSha) {
-      const ref = JSON.parse(command('/usr/bin/curl', ['--fail', '--silent', '--show-error', '--max-time', '10',
-        'https://api.github.com/repos/Buqisir/english-question-bank/git/ref/heads/main']))
-      check(ref.ref === 'refs/heads/main' && ref.object?.type === 'commit' && ref.object.sha === targetSha,
-        'Live main changed or unknown')
-    }, ...options }
+    proof: strictProof, diagnostics, ancestors: safeAncestors, currentMain, ...options }
 }
 function hostPaths(config, previousSha, targetSha) {
   const base = path.join(config.root, 'deployments')
@@ -200,6 +240,7 @@ export function parseReceipt(text, expected) {
     && (value.conclusion !== 'success' || (value.phase === 'proved' && value.barrierRetained && value.failure === null))
     && (value.conclusion !== 'known-failure' || value.phase === 'rolled-back'), 'Invalid install receipt')
   for (const [key, wanted] of Object.entries(expected)) check(value[key] === wanted, `Receipt binding mismatch: ${key}`)
+  if (value.failure !== null) parseFailure(value.failure, value.transactionId)
   return value
 }
 
@@ -288,7 +329,7 @@ export function installLocked(payloadText, readinessText, transactionId, options
     receipt.phase = 'proved'
     receipt.conclusion = 'success'
   } catch (error) {
-    receipt.failure = error.message
+    receipt.failure = canonical(failureResult(transactionId, 'install-mutation', error))
     // Only handled synchronous failures can attempt rollback while still locked.
     // A killed manager has no receipt: outcome unknown, never replay.
     try {
@@ -334,5 +375,8 @@ function main() {
   process.exitCode = receipt.conclusion === 'success' ? 0 : 70
 }
 if (import.meta.url.startsWith('file:') && process.argv[1] === fileURLToPath(import.meta.url)) {
-  try { main() } catch (error) { process.stderr.write(`Bootstrap unknown; inspect, do not retry: ${error.message}\n`); process.exitCode = 70 }
+  try { main() } catch (error) {
+    process.stdout.write(canonical(failureResult(process.argv[5], 'root-entry', error)))
+    process.exitCode = 70
+  }
 }

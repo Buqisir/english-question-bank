@@ -59,7 +59,7 @@ import {
   tencentTatTargetDigest,
 } from './lib/tencentTat.mjs'
 import { buildBarrierTatCommand } from './lib/barrierBootstrapTat.mjs'
-import { buildPayload, canonical, parseReadiness, parseReceipt, parseRouteProof } from '../deploy/eqb-barrier-bootstrap.mjs'
+import { buildPayload, canonical, failureResult, parseFailure, parseReadiness, parseInstallExecution, parseRouteProof } from '../deploy/eqb-barrier-bootstrap.mjs'
 
 const repositoryRoot = fileURLToPath(new URL('..', import.meta.url))
 const legacyBaselineSource = fileURLToPath(
@@ -409,25 +409,41 @@ async function rootBarrierBootstrap(install) {
   await assertCandidateStillAuthoritative(resolved)
   // Exactly one RunCommand. The shared adapter treats lost acknowledgments as
   // unknown; there is no reinstall, retry, CI replay or authority fallback.
-  const execution = await executeTencentTatCommand({ command: built.command,
-    commandName: `eqb-barrier-${install ? 'install' : 'inspect'}-${resolved.sha.slice(0, 12)}`,
-    description: install ? 'Owner-authorized EQB root barrier bootstrap (mutation)'
-      : 'Read-only EQB root barrier installation readiness',
-    configuration })
+  let execution
+  try {
+    execution = await executeTencentTatCommand({ command: built.command,
+      commandName: `eqb-barrier-${install ? 'install' : 'inspect'}-${resolved.sha.slice(0, 12)}`,
+      description: install ? 'Owner-authorized EQB root barrier bootstrap (mutation)'
+        : 'Read-only EQB root barrier installation readiness',
+      configuration })
+  } catch {
+    console.log(canonical(failureResult(install ? args[8] : null, 'remote-output')).trimEnd())
+    process.exitCode = 70
+    return
+  }
   if (!install) {
-    const report = parseReadiness(execution.output, payloadText)
-    if (execution.exitCode !== 0) throw new Error('Root readiness failed or unknown')
-    console.log(canonical(report).trimEnd())
+    try {
+      const report = parseReadiness(execution.output, payloadText)
+      if (execution.exitCode !== 0) throw new Error('Root readiness failed or unknown')
+      console.log(canonical(report).trimEnd())
+    } catch {
+      let failure
+      try { failure = parseFailure(execution.output, null) }
+      catch { failure = failureResult(null, 'remote-output', { diagnostic: { exitCode: execution.exitCode } }) }
+      console.log(canonical(failure).trimEnd())
+      process.exitCode = 70
+    }
     return
   }
   const report = parseReadiness(readinessText, payloadText)
-  const receipt = parseReceipt(execution.output, { transactionId: args[8],
+  const receipt = parseInstallExecution(execution, { transactionId: args[8],
     payloadDigest: built.payloadDigest, targetSha: resolved.sha,
     previousSha: report.previousSha, productionSha: report.productionSha,
     readinessDigest: createHash('sha256').update(readinessText).digest('hex') })
   if (execution.exitCode !== 0 || receipt.conclusion !== 'success') {
     console.log(canonical(receipt).trimEnd())
-    throw new Error('Bootstrap failed/unknown; retained evidence requires new inspection authorization, never retry')
+    process.exitCode = 70
+    return
   }
   // The manager has released deploy.lock. This forced route is independent,
   // not part of its rollback transaction; failure retains the active barrier.
@@ -440,6 +456,8 @@ async function rootBarrierBootstrap(install) {
       }
     })
     forced = 'passed'
+  } catch {
+    process.exitCode = 70
   } finally {
     const text = canonical({ schemaVersion: 'eqb-barrier-route-proof-v1', install: receipt, forced,
       observedAt: new Date().toISOString() })
