@@ -213,7 +213,10 @@ export function finishBarrier(action, expected, { root = ROOT, uid = 0, proof = 
   check(!entryExists(receipt), 'Terminal receipt exists; inspect ambiguity')
   const temporary = `${active}.${value.transactionId}`
   if (value.phase === 'active') {
-    privateWrite(temporary, `${JSON.stringify({ ...value, phase, finishedAt: new Date().toISOString() })}\n`)
+    const terminal = `${JSON.stringify({ ...value, phase, finishedAt: new Date().toISOString() })}\n`
+    // Validate before touching admission state (including wall-clock regression).
+    parseBarrier(terminal)
+    privateWrite(temporary, terminal)
     fs.renameSync(temporary, active)
     syncDirectory(directory)
   }

@@ -20,6 +20,19 @@ export async function verifyDeployBarrier(repository) {
   const pointer = path.join(root, 'deployments/host-configuration/current')
   const installed = {}
   const options = { root, uid, installed, proof() {} }
+  const assertClockRegression = (action) => {
+    const before = fs.readFileSync(active, 'utf8')
+    const RealDate = globalThis.Date
+    const earlier = Date.parse(readBarrier(root, uid).createdAt) - 1000
+    globalThis.Date = class extends RealDate {
+      constructor(...args) { super(...(args.length ? args : [earlier])) }
+    }
+    try { assert.throws(() => finishBarrier(action, expected, options), /Invalid barrier/) }
+    finally { globalThis.Date = RealDate }
+    assert.equal(fs.readFileSync(active, 'utf8'), before)
+    assert.throws(() => assertDispatch(mutation, root, uid))
+    assert.equal(fs.existsSync(path.join(root, 'deployments', `root-dispatch-${expected.transactionId}.json`)), false)
+  }
   const write = (file, bytes, mode = 0o600) => {
     fs.mkdirSync(path.dirname(file), { recursive: true, mode: 0o700 })
     fs.writeFileSync(file, bytes, { mode })
@@ -96,6 +109,7 @@ export async function verifyDeployBarrier(repository) {
     write(path.join(root, 'deployments/reviewed-persistence/active.json'), '{}')
     assert.throws(() => finishBarrier('recover', expected, options))
     fs.unlinkSync(path.join(root, 'deployments/reviewed-persistence/active.json'))
+    assertClockRegression('recover')
     const recovered = finishBarrier('recover', expected, options)
     assert.equal(recovered.phase, 'recovered')
     assert.equal(readBarrier(root, uid), null)
@@ -104,6 +118,7 @@ export async function verifyDeployBarrier(repository) {
     createBarrier(expected, root, uid)
     fs.unlinkSync(pointer)
     fs.symlinkSync(`versions/${expected.targetSha}`, pointer)
+    assertClockRegression('finalize')
     assert.equal(finishBarrier('finalize', expected, options).phase, 'finalized')
     assert.throws(() => finishBarrier('finalize', expected, options)) // never silently retry
     expected.transactionId = randomUUID()
