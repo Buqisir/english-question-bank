@@ -1937,6 +1937,18 @@ export async function runController({
   if (parsed.command === 'preflight') {
     return { output: preflight(config, runtimeDependencies), exitCode: 0 }
   }
+  // Both legacy and gated wrappers open this selected module after acquiring
+  // deploy.lock. This also fences delayed legacy systemd submissions; process
+  // and job snapshots alone cannot prove that their IPC has drained.
+  const admissionDirectory = path.join(config.root, 'deployments')
+  const admissionState = lstatSync(admissionDirectory)
+  if (!admissionState.isDirectory() || admissionState.isSymbolicLink()
+    || admissionState.uid !== config.controllerUid || admissionState.gid !== config.controllerGid
+    || (admissionState.mode & 0o022)) throw new Error('Unsafe barrier directory')
+  let barrierAbsent = false
+  try { lstatSync(path.join(admissionDirectory, 'root-dispatch-barrier.json')) }
+  catch (error) { if (error.code !== 'ENOENT') throw error; barrierAbsent = true }
+  if (!barrierAbsent) throw new Error('ROOT_DISPATCH_BARRIER_PRESENT')
   const result = parsed.command === 'deploy'
     ? await deploy(config, runtimeDependencies, parsed.sha)
     : parsed.command === 'deploy-reviewed-persistence'

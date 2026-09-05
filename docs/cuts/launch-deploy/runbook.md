@@ -478,22 +478,21 @@ are its required ordering, not permission to execute an improvised command.
 2. In one root-owned, manager-lived attempt, acquire the existing `0600`
    root:root, regular single-link `deploy.lock` nonblocking without replacing
    it. Repeat identity/main/metadata/health checks while held. Retain a private,
-   fsynced copy of the old wrapper and exact `M` pointer. Require the controller
-   module, unit, Caddy and transport target blobs to equal their installed
-   `M` bytes. Only the root wrapper and management tool may be new. Any other
-   host difference stops this narrow bootstrap.
+   fsynced copy of the old wrapper and exact `M` pointer. Unit, Caddy and
+   transport must equal installed `M` bytes. The reviewed payload may update
+   the root wrapper, manager and selected controller module; the module gate
+   is necessary for delayed legacy submissions. Other host differences stop.
 3. Install/fsync the verified management module and atomically replace/fsync
    the root wrapper, **before creating the barrier or changing the marker**.
    At this intermediate point new requests encounter the new gate and the old
-   marker rejects the changed wrapper hash. Before creating the barrier, prove
-   all invocations using the old wrapper have exited: inspect both wrapper
-   processes and pending/running `eqb-deploy-*` systemd units/jobs. Do not
-   mistake holding `flock` for proof that an old request is not queued. If the
-   bounded drain cannot be proven, retain evidence and stop without publishing
-   the new marker. No service restart, force-kill or long-held lock is allowed.
+   marker rejects the changed wrapper hash. Inspect wrapper processes and
+   `eqb-deploy-*` systemd units/jobs as diagnostics only: empty snapshots do not
+   acknowledge in-flight IPC. The selected module checks the barrier before
+   every mutation, so delayed legacy requests opening it after acquiring the
+   lock are also blocked. No restart, force-kill or long-held lock is allowed.
 4. Still under that same lock, use the reviewed module's `createBarrier` with
    the exact identity (do not invoke its lock-taking CLI recursively). Prepare
-   and fsync root-owned `versions/T` with the three unchanged host files and a
+   and fsync root-owned `versions/T` with the new module, frozen unit/Caddy and a
    marker binding all five target hashes, including the **new** root-wrapper
    hash. Preserve `versions/M`. Atomically switch/fsync the host pointer. This
    explicitly authorized root upgrade is not byte equivalence. Application
@@ -517,6 +516,59 @@ not a handled failure: inspect actual wrapper hash, pointer, barrier, units and
 receipts first. No automatic bootstrap replay. A successful root installation
 at `T` already binds the host marker to `T`; it does not need an additional
 same-`T` equivalence rebind. Application activation remains separately authorized.
+
+The tracked implementation is `deploy/eqb-barrier-bootstrap.mjs` and
+`scripts/lib/barrierBootstrapTat.mjs`; never rerun the consumed maintenance
+installer. After merge and exact-main Hosted authority, separately authorized
+commands are:
+
+```text
+node scripts/amp-orb-deploy.mjs root-barrier-readiness --owner-said-root-barrier-readiness
+node scripts/amp-orb-deploy.mjs root-barrier-install --owner-said-root-barrier-install --readiness FILE --payload-digest SHA256 --operator-digest SHA256 --transaction UUID
+```
+
+Save readiness's exact canonical stdout as `FILE` in the private Deployment Orb.
+Inspection streams reviewed source as in-memory imports: no host file writes,
+installation or service mutation. It holds the existing lock for a bounded
+snapshot/direct proof. It reports M/P, five installed hashes/metadata plus the
+optional manager, lock device/inode/owner/mode, pointer/version/marker metadata,
+maintenance and recovery entries, barrier value or invalidity, and process/job
+diagnostics. Unsafe state or unprovable health fails closed; partial stdout is
+not a readiness report. Existing manager, barrier, target version, maintenance
+or recovery-controller entries prevent this first-install path.
+
+`buildPayload(T, readExactGitBlob)` defines `eqb-barrier-payload-v1`: recursively
+sorted JSON keys, UTF-8, one terminal LF, and the exact six fixed paths with mode,
+SHA-256 and canonical base64. SHA-256 binds these serialized bytes; the operator
+digest separately binds its exact Git blob. Recompute both after merge, not from
+worktree files. Neither is the protected changed-path digest. The CLI rebuilds
+from Hosted-authoritative live main and rejects approved digest mismatch before
+dispatch. Compressed TAT transport reconstructs and verifies exact payload bytes.
+
+One TAT submission exclusively stages `barrier-dispatch-UUID`, then starts one
+null-input, manager-lived `eqb-barrier-install-UUID.service`. A lost acknowledgment,
+staging interruption or missing/invalid receipt is UNKNOWN, never replay authority.
+The locked installer rejects reused attempts, readiness older than 120 seconds,
+changed metadata (including lock inode), frozen-file differences and changed live
+main. Hosted CI remains the existing trusted Deployment adapter's authority check
+immediately before dispatch; the anonymous root main lookup has no credentials
+or fallback. The installer is not an independent CI authority.
+
+`eqb-barrier-install-v1` binds UUID, payload/readiness digests, M/T/P, phase,
+timestamps and retained-barrier flag. Private `barrier-install-UUID` keeps payload,
+readiness, old wrapper and receipt. `success` means locked target/health proof
+passed and the barrier remains active. `known-failure` means handled rollback
+proved old M/wrapper/health, not that old callers honor the retained barrier.
+`unknown`, failed rollback proof or clock regression requires new inspection and
+recovery authorization. Retain evidence; no automatic cleanup/retry/finalize.
+Known rollback also leaves the manager and any barrier/target staging as evidence,
+so a new UUID cannot silently reopen installation.
+
+After locked success the CLI runs forced preflight outside the lock and emits
+strict `eqb-barrier-route-proof-v1` with `forced=passed|unknown`. Failure retains
+the active barrier and never triggers rollback. Finalize, root recovery, cleanup
+and application activation each require new authorization. No DB/R2, application,
+service restart/reload, credential or CI-authority mutation is included.
 
 After installation, root-only management syntax (each action needs its own
 current authorization; use a cleared environment) is:

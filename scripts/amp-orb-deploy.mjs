@@ -58,6 +58,8 @@ import {
   readTencentTatConfiguration,
   tencentTatTargetDigest,
 } from './lib/tencentTat.mjs'
+import { buildBarrierTatCommand } from './lib/barrierBootstrapTat.mjs'
+import { buildPayload, canonical, parseReadiness, parseReceipt, parseRouteProof } from '../deploy/eqb-barrier-bootstrap.mjs'
 
 const repositoryRoot = fileURLToPath(new URL('..', import.meta.url))
 const legacyBaselineSource = fileURLToPath(
@@ -383,6 +385,64 @@ async function maintenanceInstallReadiness() {
         readiness.failureCode || 'REMOTE_COMMAND_FAILED'
       }`,
     )
+  }
+}
+
+async function rootBarrierBootstrap(install) {
+  const args = process.argv.slice(3)
+  const authorization = install ? '--owner-said-root-barrier-install' : '--owner-said-root-barrier-readiness'
+  if (args[0] !== authorization || args.length !== (install ? 9 : 1)
+    || (install && (args[1] !== '--readiness' || args[3] !== '--payload-digest'
+      || args[5] !== '--operator-digest' || args[7] !== '--transaction'))) {
+    throw new Error('Exact current Owner root-barrier authorization and arguments required')
+  }
+  const resolved = await candidate()
+  const payloadText = buildPayload(resolved.sha, (name) => readExactCommitFile(resolved.sha, name))
+  const operatorSource = readExactCommitFile(resolved.sha, 'deploy/eqb-barrier-bootstrap.mjs')
+  const readinessText = install ? readFileSync(args[2], 'utf8') : null
+  const built = buildBarrierTatCommand({ operatorSource, payloadText, readinessText,
+    transactionId: install ? args[8] : null })
+  if (install && (built.payloadDigest !== args[4] || built.operatorDigest !== args[6])) {
+    throw new Error('Approved root bootstrap digests differ from live main')
+  }
+  const configuration = readTencentTatConfiguration()
+  await assertCandidateStillAuthoritative(resolved)
+  // Exactly one RunCommand. The shared adapter treats lost acknowledgments as
+  // unknown; there is no reinstall, retry, CI replay or authority fallback.
+  const execution = await executeTencentTatCommand({ command: built.command,
+    commandName: `eqb-barrier-${install ? 'install' : 'inspect'}-${resolved.sha.slice(0, 12)}`,
+    configuration })
+  if (!install) {
+    const report = parseReadiness(execution.output, payloadText)
+    if (execution.exitCode !== 0) throw new Error('Root readiness failed or unknown')
+    console.log(canonical(report).trimEnd())
+    return
+  }
+  const report = parseReadiness(readinessText, payloadText)
+  const receipt = parseReceipt(execution.output, { transactionId: args[8],
+    payloadDigest: built.payloadDigest, targetSha: resolved.sha,
+    previousSha: report.previousSha, productionSha: report.productionSha,
+    readinessDigest: createHash('sha256').update(readinessText).digest('hex') })
+  if (execution.exitCode !== 0 || receipt.conclusion !== 'success') {
+    console.log(canonical(receipt).trimEnd())
+    throw new Error('Bootstrap failed/unknown; retained evidence requires new inspection authorization, never retry')
+  }
+  // The manager has released deploy.lock. This forced route is independent,
+  // not part of its rollback transaction; failure retains the active barrier.
+  let forced = 'unknown'
+  try {
+    await withDeploymentCredentials((credentials) => {
+      const result = parseDeploymentControllerPreflight(invokeController(['preflight'], credentials))
+      if (result.productionSha !== report.productionSha || result.eqb !== 'active' || result.caddy !== 'active') {
+        throw new Error('Post-install forced proof mismatch')
+      }
+    })
+    forced = 'passed'
+  } finally {
+    const text = canonical({ schemaVersion: 'eqb-barrier-route-proof-v1', install: receipt, forced,
+      observedAt: new Date().toISOString() })
+    parseRouteProof(text, { transactionId: args[8], targetSha: resolved.sha, payloadDigest: built.payloadDigest })
+    console.log(text.trimEnd())
   }
 }
 
@@ -1262,6 +1322,8 @@ try {
   if (process.argv[2] === 'plan') await plan()
   else if (process.argv[2] === 'preflight') await preflight()
   else if (process.argv[2] === 'maintenance-install-readiness') await maintenanceInstallReadiness()
+  else if (process.argv[2] === 'root-barrier-readiness') await rootBarrierBootstrap(false)
+  else if (process.argv[2] === 'root-barrier-install') await rootBarrierBootstrap(true)
   else if (process.argv[2] === 'bootstrap-preflight') await bootstrapPreflight()
   else if (process.argv[2] === 'baseline') await baseline()
   else if (process.argv[2] === 'bootstrap') await bootstrap()
@@ -1273,7 +1335,7 @@ try {
   else if (process.argv[2] === 'update-host-config') await updateHostConfig()
   else {
     throw new Error(
-      'Usage: amp-orb-deploy.mjs plan | preflight --owner-said-preflight | maintenance-install-readiness --owner-said-maintenance-install-readiness | bootstrap-preflight --owner-said-preflight | baseline --owner-said-baseline-migration | bootstrap --owner-said-release-bootstrap | bootstrap-inspect --owner-said-preflight | bootstrap-resume --owner-said-release-bootstrap-resume | bootstrap-abandon --owner-said-release-bootstrap-abandon | deploy --owner-said-deploy-latest | reviewed-persistence --owner-said-reviewed-persistence-deploy | update-host-config --owner-said-update-host-config',
+      'Usage: amp-orb-deploy.mjs plan | preflight --owner-said-preflight | maintenance-install-readiness --owner-said-maintenance-install-readiness | root-barrier-readiness --owner-said-root-barrier-readiness | root-barrier-install --owner-said-root-barrier-install --readiness FILE --payload-digest SHA256 --operator-digest SHA256 --transaction UUID | bootstrap-preflight --owner-said-preflight | baseline --owner-said-baseline-migration | bootstrap --owner-said-release-bootstrap | bootstrap-inspect --owner-said-preflight | bootstrap-resume --owner-said-release-bootstrap-resume | bootstrap-abandon --owner-said-release-bootstrap-abandon | deploy --owner-said-deploy-latest | reviewed-persistence --owner-said-reviewed-persistence-deploy | update-host-config --owner-said-update-host-config',
     )
   }
 } catch (error) {
