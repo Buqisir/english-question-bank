@@ -4,8 +4,9 @@ import path from 'node:path'
 import { tmpdir } from 'node:os'
 import { randomUUID } from 'node:crypto'
 import { spawnSync } from 'node:child_process'
-import { FILES, hash, safeNode, readBarrier, withDeploymentLock } from '../../deploy/eqb-deploy-barrier.mjs'
-import { buildPayload, canonical, parsePayload, inspectHost, parseReadiness, installLocked, parseReceipt, parseRouteProof } from '../../deploy/eqb-barrier-bootstrap.mjs'
+import { FILES, hash, safeNode, readBarrier, withDeploymentLock, readonlyCommand, strictProof } from '../../deploy/eqb-deploy-barrier.mjs'
+import { buildPayload, canonical, parsePayload, inspectHost, parseReadiness, installLocked, parseReceipt, parseRouteProof,
+  failureResult, parseFailure, parseInstallExecution, diagnostics, currentMain } from '../../deploy/eqb-barrier-bootstrap.mjs'
 import { buildBarrierTatCommand } from './barrierBootstrapTat.mjs'
 
 export async function verifyBarrierBootstrap(repository) {
@@ -26,6 +27,62 @@ export async function verifyBarrierBootstrap(repository) {
   assert.equal(spawnSync('/bin/bash', ['-n'], { input: readonly.command }).status, 0)
   assert.ok(!readonly.command.includes('/usr/bin/systemd-run'))
   assert.ok(!readonly.command.includes('fs.mkdirSync(root'))
+  const secret = 'FAKE_SECRET_DO_NOT_ECHO'
+  const transaction = randomUUID()
+  const preflight = JSON.stringify({ schemaVersion: 'eqb-deployment-preflight-v2', controllerVersion: 'eqb-deploy-controller-v1',
+    productionSha: production, eqb: 'active', caddy: 'active', layout: 'release' })
+  for (const stage of ['selected-preflight', ...Array.from({ length: 6 }, (_, i) => `health-${i}`),
+    'list-units', 'list-jobs', 'live-main', 'journal-sync', 'journal-read', 'deploy-lock']) {
+    for (const status of [70, null]) {
+      const run = (actual, executable, args, options) => actual !== stage ? preflight
+        : readonlyCommand(actual, executable, args, options, () => ({ status, stdout: secret, stderr: secret,
+          error: status === null ? { code: 'ETIMEDOUT', message: secret } : undefined }))
+      let error
+      try {
+        if (stage === 'live-main') currentMain(target, run)
+        else if (stage.startsWith('list-')) diagnostics(run)
+        else if (stage.startsWith('journal-') || stage === 'deploy-lock') run(stage, 'fake-readonly', [])
+        else strictProof('fake-module', production, run)
+      } catch (caught) { error = caught }
+      assert.ok(error)
+      const result = failureResult(transaction, 'root-entry', error)
+      assert.equal(result.diagnostic.stage, stage)
+      assert.equal(result.diagnostic.exitCode, status)
+      assert.equal(result.diagnostic.code, status === null ? 'ETIMEDOUT' : null)
+      assert.equal(result.diagnostic.stderrBytes, Buffer.byteLength(secret))
+      assert.equal(result.retryAllowed, false)
+      assert.equal(canonical(result).includes(secret), false)
+      assert.deepEqual(parseFailure(canonical(result), transaction), result)
+      assert.equal(parseInstallExecution({ output: canonical(result), exitCode: 70 }, { transactionId: transaction }).conclusion, 'unknown')
+    }
+  }
+  for (const output of [secret, `${preflight}\n${secret}`, 'null']) {
+    for (const operation of [() => strictProof('fake', production, () => output), () => currentMain(target, () => output)]) {
+      assert.throws(operation, (error) => {
+        assert.ok(['selected-preflight', 'live-main'].includes(error.diagnostic.stage))
+        assert.equal(canonical(failureResult(transaction, 'root-entry', error)).includes(secret), false)
+        return true
+      })
+    }
+  }
+  for (const output of ['', `Bootstrap unknown ${secret}`, '{}\n', canonical(failureResult(randomUUID(), 'root-entry'))]) {
+    const result = parseInstallExecution({ output, exitCode: 70 }, { transactionId: transaction })
+    assert.equal(result.diagnostic.stage, 'remote-output')
+    assert.equal(result.diagnostic.exitCode, 70)
+    assert.equal(result.conclusion, 'unknown')
+    assert.equal(canonical(result).includes(secret), false)
+  }
+  const failure = failureResult(transaction, 'root-entry')
+  for (const value of [{ ...failure, retryAllowed: true }, { ...failure, transactionId: [transaction] },
+    { ...failure, diagnostic: { ...failure.diagnostic, code: secret } },
+    { ...failure, diagnostic: { ...failure.diagnostic, stage: secret } }]) {
+    assert.throws(() => parseFailure(canonical(value), transaction))
+  }
+  const rootGuard = spawnSync(process.execPath, [path.join(repository, 'deploy/eqb-barrier-bootstrap.mjs'),
+    'install', '/nonexistent', '/nonexistent', transaction], { encoding: 'utf8' })
+  assert.equal(rootGuard.status, 70)
+  assert.equal(rootGuard.stderr, '')
+  assert.equal(parseFailure(rootGuard.stdout, transaction).conclusion, 'unknown')
 
   for (const outcome of ['success', 'known-failure', 'unknown', 'crash']) {
     const root = fs.mkdtempSync(path.join(tmpdir(), 'eqb-bootstrap-'))
@@ -90,7 +147,81 @@ export async function verifyBarrierBootstrap(repository) {
       const invocation = buildBarrierTatCommand({ operatorSource, payloadText: payload, readinessText: reportText, transactionId })
       assert.equal(spawnSync('/bin/bash', ['-n'], { input: invocation.command }).status, 0)
       assert.ok(invocation.command.includes('--property=StandardInput=null'))
-      assert.ok(invocation.command.includes('--unit=eqb-barrier-install-'))
+      assert.ok(invocation.command.includes("'eqb-barrier-install-' + input.transactionId"))
+      if (outcome === 'success') {
+        const generated = invocation.command.split("<<'EQB_BARRIER_NODE'\n")[1].split('\nEQB_BARRIER_NODE')[0]
+        const wireFailure = failureResult(transactionId, 'live-main', { diagnostic: { exitCode: 22, stdoutBytes: 0, stderrBytes: 20 } })
+        for (const mode of ['root-guard', 'structured', 'polluted', 'journal-sync', 'journal-read', 'launch-error']) {
+          const sandbox = fs.mkdtempSync(path.join(tmpdir(), 'eqb-bootstrap-wire-'))
+          try {
+            fs.mkdirSync(path.join(sandbox, 'deployments'))
+            // Execute the generated transport itself with local fake process/fs
+            // seams. No systemd, curl, journal, TAT or host command can execute.
+            const preamble = `
+              import cp from 'node:child_process';
+              import fakeFs from 'node:fs';
+              import {syncBuiltinESMExports} from 'node:module';
+              process.getuid = () => ${mode === 'root-guard' ? 1000 : 0}; process.getgid = () => 0;
+              const stat = fakeFs.lstatSync;
+              fakeFs.lstatSync = (...args) => {const s = stat(...args); s.uid = 0; s.gid = 0; s.mode &= ~0o022; return s};
+              cp.spawnSync = (exe, args) => {
+                if (exe === '/usr/bin/systemd-run') return ${mode === 'launch-error'
+                  ? `{status:null,error:{code:'EACCES',message:${JSON.stringify(secret)}},stdout:'',stderr:${JSON.stringify(secret)}}`
+                  : "{status:70,stdout:'',stderr:''}"};
+                if (exe !== '/usr/bin/journalctl') throw new Error('Unexpected fake command');
+                const sync = args.includes('--sync');
+                return {status: ${JSON.stringify(mode)} === (sync ? 'journal-sync' : 'journal-read') ? 1 : 0,
+                  stdout: sync ? '' : ${JSON.stringify(mode === 'polluted' ? `Bootstrap unknown ${secret}\n` : canonical(wireFailure))},
+                  stderr:${JSON.stringify(secret)}};
+              };
+              syncBuiltinESMExports();
+            `
+            const child = spawnSync(process.execPath, ['--input-type=module'], { encoding: 'utf8',
+              input: preamble + generated.replaceAll('/opt/eqb', sandbox) })
+            assert.equal(child.status, 70, child.stderr)
+            assert.equal(child.stderr, '')
+            assert.equal(child.stdout.includes(secret), false)
+            const result = parseFailure(child.stdout, transactionId)
+            const expectedStage = { 'root-guard': 'transport-load', structured: 'live-main', polluted: 'remote-output',
+              'journal-sync': 'journal-sync', 'journal-read': 'journal-read', 'launch-error': 'manager-launch' }[mode]
+            assert.equal(result.diagnostic.stage, expectedStage)
+            if (mode !== 'root-guard') {
+              assert.ok(fs.existsSync(path.join(sandbox, 'deployments', `barrier-dispatch-${transactionId}`, 'payload.json')))
+              const again = spawnSync(process.execPath, ['--input-type=module'], { encoding: 'utf8',
+                input: preamble + generated.replaceAll('/opt/eqb', sandbox) })
+              assert.equal(again.status, 70)
+              assert.equal(parseFailure(again.stdout, transactionId).diagnostic.stage, 'dispatch-stage')
+            }
+          } finally { fs.rmSync(sandbox, { recursive: true, force: true }) }
+        }
+        // Reproduce the observed state, not an inferred cause: dispatch staging
+        // exists, exit70, no attempt/receipt/barrier/manager/target, old pointer.
+        const dispatch = path.join(root, 'deployments', `barrier-dispatch-${transactionId}`)
+        fs.mkdirSync(dispatch)
+        const oldPointer = fs.readlinkSync(pointer)
+        const oldWrapper = fs.readFileSync(installed['deploy/eqb-deploy-controller'])
+        for (const stage of ['selected-preflight', 'list-units', 'list-jobs', 'live-main',
+          ...Array.from({ length: 6 }, (_, i) => `health-${i}`)]) {
+          const fail = () => readonlyCommand(stage, 'fake', [], {}, () => ({ status: 70, stdout: secret, stderr: secret }))
+          let error
+          try {
+            withDeploymentLock(root, () => installLocked(payload, reportText, transactionId, {
+              ...config, ...(stage === 'live-main' ? { currentMain: fail }
+                : stage.startsWith('list-') ? { diagnostics: fail } : { proof: fail }),
+            }), uid, gid)
+          } catch (caught) { error = caught }
+          assert.ok(error)
+          const result = parseInstallExecution({ output: canonical(failureResult(transactionId, 'root-entry', error)), exitCode: 70 }, { transactionId })
+          assert.equal(result.diagnostic.stage, stage)
+          assert.equal(result.conclusion, 'unknown')
+          assert.equal(result.retryAllowed, false)
+          for (const entry of [`deployments/barrier-install-${transactionId}`, 'deployments/root-dispatch-barrier.json',
+            'installed/manager.mjs', `deployments/host-configuration/versions/${target}`]) assert.equal(fs.existsSync(path.join(root, entry)), false)
+          assert.equal(fs.readlinkSync(pointer), oldPointer)
+          assert.deepEqual(fs.readFileSync(installed['deploy/eqb-deploy-controller']), oldWrapper)
+        }
+        proofs = 1
+      }
       // This saved legacy argv names current, not a pinned target. It does not
       // contain the wrapper inline gate and is opened ONLY after real flock.
       const request = (originalCommand) => `import {runController} from ${JSON.stringify(`file://${pointer}/deploy/eqb-deploy-controller.mjs`)};
@@ -125,6 +256,9 @@ export async function verifyBarrierBootstrap(repository) {
       }, uid, gid)
       assert.equal(receipt.conclusion, outcome)
       assert.deepEqual(parseReceipt(canonical(receipt), { transactionId }), receipt)
+      assert.equal(parseInstallExecution({ output: canonical(receipt), exitCode: outcome === 'success' ? 0 : 70 }, { transactionId }).conclusion, outcome)
+      assert.equal(parseInstallExecution({ output: `${canonical(receipt)}${secret}`, exitCode: 0 }, { transactionId }).conclusion, 'unknown')
+      if (outcome === 'success') assert.equal(parseInstallExecution({ output: canonical(receipt), exitCode: 70 }, { transactionId }).conclusion, 'unknown')
       assert.throws(() => parseReceipt(canonical(receipt), { transactionId: randomUUID() }))
       assert.throws(() => parseReceipt(canonical({ ...receipt, previousSha: [before] }), { transactionId }))
       if (outcome === 'success') {

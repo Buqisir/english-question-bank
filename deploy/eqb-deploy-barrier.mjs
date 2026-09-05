@@ -172,27 +172,43 @@ export function proveBinding(value, sha, { root = ROOT, uid = 0, gid = 0, instal
 }
 
 const environment = { PATH: '/usr/local/bin:/usr/bin:/bin:/usr/sbin' }
-function run(command, args, options = {}) {
-  const result = spawnSync(command, args, { env: environment, encoding: 'utf8', timeout: 60_000, ...options })
-  check(!result.error && result.status === 0, 'Readonly proof failed; retain barrier')
+export function readonlyCommand(stage, command, args, options = {}, spawn = spawnSync) {
+  const result = spawn(command, args, { env: environment, encoding: 'utf8', timeout: 60_000, maxBuffer: 1024 * 1024, ...options })
+  if (result.error || result.status !== 0) {
+    const error = new Error('Readonly command failed; inspect, do not retry')
+    // Never retain command output, argv, paths or arbitrary Error messages.
+    error.diagnostic = { code: ['ENOENT', 'EACCES', 'ETIMEDOUT', 'ENOBUFS'].includes(result.error?.code) ? result.error.code : null,
+      exitCode: Number.isInteger(result.status) ? result.status : null,
+      stage, stderrBytes: Buffer.byteLength(result.stderr || ''), stdoutBytes: Buffer.byteLength(result.stdout || '') }
+    throw error
+  }
   return result.stdout
 }
 
-export function strictProof(module, productionSha) {
-  const report = JSON.parse(run('/usr/bin/node', ['--no-addons', module], {
+export function strictProof(module, productionSha, run = readonlyCommand) {
+  const text = run('selected-preflight', '/usr/bin/node', ['--no-addons', module], {
     env: { ...environment, SSH_ORIGINAL_COMMAND: 'preflight' },
-  }))
-  check(exactKeys(report, ['schemaVersion', 'controllerVersion', 'productionSha', 'eqb', 'caddy', 'layout'])
-    && report.schemaVersion === 'eqb-deployment-preflight-v2'
-    && report.controllerVersion === 'eqb-deploy-controller-v1'
-    && report.productionSha === productionSha && report.layout === 'release'
-    && report.eqb === 'active' && report.caddy === 'active', 'Readonly preflight mismatch')
-  for (const args of [
+  })
+  let report
+  try {
+    report = JSON.parse(text)
+    check(exactKeys(report, ['schemaVersion', 'controllerVersion', 'productionSha', 'eqb', 'caddy', 'layout'])
+      && report.schemaVersion === 'eqb-deployment-preflight-v2'
+      && report.controllerVersion === 'eqb-deploy-controller-v1'
+      && report.productionSha === productionSha && report.layout === 'release'
+      && report.eqb === 'active' && report.caddy === 'active', 'Readonly preflight mismatch')
+  } catch {
+    const error = new Error('Invalid readonly preflight output')
+    error.diagnostic = { stage: 'selected-preflight', exitCode: 0, code: null,
+      stdoutBytes: Buffer.byteLength(text), stderrBytes: 0 }
+    throw error
+  }
+  for (const [index, args] of [
     ['http://127.0.0.1:8787/api/health'],
     ['--resolve', 'eqbank.cc:443:127.0.0.1', 'https://eqbank.cc/api/health'],
     ['https://eqbank.cc/api/health'], ['https://eqbank.cc/'],
     ['https://eqbank.cc/ops/'], ['https://eqbank.cc/ops/?view=review'],
-  ]) run('/usr/bin/curl', ['--fail', '--silent', '--show-error', '--max-time', '10', '--output', '/dev/null', ...args])
+  ].entries()) run(`health-${index}`, '/usr/bin/curl', ['--fail', '--silent', '--show-error', '--max-time', '10', '--output', '/dev/null', ...args])
 }
 
 export function finishBarrier(action, expected, { root = ROOT, uid = 0, gid = 0, proof = strictProof, installed = FILES } = {}) {
@@ -239,10 +255,9 @@ export function withDeploymentLock(root, callback, uid = 0, gid = 0) {
   try {
     // flock(2) belongs to this inherited open-file description. The parent
     // retains it until finally; no environment flag can bypass acquisition.
-    const result = spawnSync('/usr/bin/flock', ['--exclusive', '--nonblock', '--conflict-exit-code', '75', '3'], {
+    readonlyCommand('deploy-lock', '/usr/bin/flock', ['--exclusive', '--nonblock', '--conflict-exit-code', '75', '3'], {
       env: environment, stdio: ['ignore', 'ignore', 'ignore', fd],
     })
-    check(!result.error && result.status === 0, 'Deployment lock busy or unknown')
     const current = safeNode(lock, 'file', uid, gid, 0o600)
     const opened = fs.fstatSync(fd)
     check(current.dev === opened.dev && current.ino === opened.ino, 'Deployment lock replaced')
