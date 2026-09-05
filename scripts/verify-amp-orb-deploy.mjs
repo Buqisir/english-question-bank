@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { execFileSync, spawnSync } from 'node:child_process'
-import { createHash } from 'node:crypto'
+import { createHash, randomUUID } from 'node:crypto'
 import {
   chmodSync,
   copyFileSync,
@@ -20,6 +20,9 @@ import {
 } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
+import * as fs from 'node:fs'
+import { gunzipSync } from 'node:zlib'
+import { runInNewContext } from 'node:vm'
 
 import {
   AMP_ORB_DEPLOY_AMP_CHECK_NAME,
@@ -57,6 +60,7 @@ import {
   materializeDeploymentCredentials,
   migrateLegacyProductionBaseline,
   parseBootstrapKeyRetirementReceipt,
+  parseControlledTransaction,
   parseDeploymentControllerOutput,
   parseDeploymentControllerPreflight,
   parseDeploymentPreflightOutput,
@@ -99,7 +103,10 @@ import {
   PERSISTENCE_AUTHORITY_PATHS,
   STABLE_LAUNCHER_PATHS,
   formatControllerOutput,
+  installControlledEntry,
+  parseControlledCommand,
   parseControllerCommand,
+  runControlledController,
   runController,
 } from '../deploy/eqb-deploy-controller.mjs'
 import {
@@ -110,6 +117,7 @@ import {
 import { createVerifier, readText, repoRootFrom } from './lib/verifyScope.mjs'
 import { verifyDeployBarrier } from './lib/verifyDeployBarrier.mjs'
 import { verifyBarrierBootstrap } from './lib/verifyBarrierBootstrap.mjs'
+import { CONTROLLED_ENTRY_FILES, buildControlledEntryTat, executeControlledEntryTat } from './lib/controlledEntryTat.mjs'
 
 const ROOT = repoRootFrom(import.meta.url)
 const { assert, section, summary } = createVerifier('Amp Orb production deployment contract')
@@ -1342,6 +1350,10 @@ const tencentSuccess = await executeTencentTatCommand({
   commandName: 'eqb-maint-readiness-test',
   description: 'Fixture operation description',
   configuration: tencentTatConfiguration,
+  onDispatched: identity => assert(tencentCalls.length === 1
+    && identity.commandId === 'cmd-12345678' && identity.invocationId === 'inv-12345678'
+    && identity.targetDigest === tencentTatTargetDigest(tencentTatConfiguration),
+  'authenticated dispatch identity can be privately saved before polling'),
   now: () => tencentNow,
   sleep: async (milliseconds) => { tencentNow += milliseconds },
   pollIntervalMs: 10,
@@ -3905,6 +3917,167 @@ for (const [fixtureOptions, expectedCode, label] of [
   rmSync(protectedChange.root, { recursive: true, force: true })
 }
 
+for (const mismatch of [null, ...HOST_CONFIGURATION_PATHS, ...STABLE_LAUNCHER_PATHS]) {
+  const equivalent = controllerFixture({ hostConfigurationChange: true, stableLauncherChange: true })
+  const markerPath = path.join(equivalent.root, 'deployments/host-configuration/versions', oldSha, '.eqb-host-configuration.json')
+  const markerBefore = readFileSync(markerPath, 'utf8')
+  const runSystem = equivalent.dependencies.runSystem
+  equivalent.dependencies.runSystem = (command, args, options) => {
+    if (command === '/usr/bin/git' && args.includes('show')) {
+      const [sha, relative] = args.at(-1).split(':')
+      if (sha !== newSha) throw new Error('Unexpected compatibility target')
+      const installed = relative === 'deploy/eqb-deploy-controller' ? equivalent.config.rootWrapperPath
+        : relative === 'deploy/eqb-deploy-transport' ? equivalent.config.transportWrapperPath
+          : path.join(equivalent.root, 'deployments/host-configuration/versions', oldSha, relative)
+      const bytes = readFileSync(installed)
+      return relative === mismatch ? Buffer.concat([bytes, Buffer.from('changed')]) : bytes
+    }
+    return runSystem(command, args, options)
+  }
+  const result = await runController({ originalCommand: `deploy ${newSha}`,
+    config: equivalent.config, dependencies: equivalent.dependencies })
+  assert(result.exitCode === (mismatch ? 1 : 0), `controller identity stays independent; five-blob mismatch=${mismatch}`)
+  assert(readFileSync(markerPath, 'utf8') === markerBefore, 'application deploy never rebinds the installed controller marker')
+  if (mismatch) assert(equivalent.state.buildCalls.length === 0, 'incompatible installed bytes block before build')
+  rmSync(equivalent.root, { recursive: true, force: true })
+}
+
+// Minimal offline chain: real controller/files, fake source/systemd/health.
+// No production credentials, SSH connection or TAT call is involved.
+for (const failEntryProof of [false, true]) {
+const controlledFixture = controllerFixture()
+try {
+  const f = controlledFixture
+  const priorId = randomUUID()
+  const dispatch = path.join(f.root, 'deployments', `barrier-dispatch-${priorId}`)
+  const payload = path.join(f.root, 'entry-payload')
+  mkdirSync(dispatch, { mode: 0o700 })
+  mkdirSync(payload, { mode: 0o700 })
+  const priorFiles = {
+    'payload.json': JSON.stringify({ targetSha: 'e'.repeat(40) }),
+    'readiness.json': JSON.stringify({ previousSha: oldSha, productionSha: oldSha }),
+    'eqb-barrier-bootstrap.mjs': 'retained, never executed',
+    'eqb-deploy-barrier.mjs': 'retained manager, never executed',
+  }
+  const digest = bytes => createHash('sha256').update(bytes).digest('hex')
+  for (const [name, bytes] of Object.entries(priorFiles)) writeFileSync(path.join(dispatch, name), bytes, { mode: 0o600 })
+  const terminalFile = path.join(f.root, 'terminal.json')
+  const terminal = JSON.stringify({ commandId: 'cmd-12345678', invocationId: 'inv-12345678',
+    invocationTaskId: 'invt-12345678', invocationStatus: 'FAILED', taskStatus: 'FAILED', exitCode: 70 })
+  writeFileSync(terminalFile, terminal, { mode: 0o600 })
+  const targetBytes = {}
+  for (const name of [...HOST_CONFIGURATION_PATHS, ...STABLE_LAUNCHER_PATHS]) {
+    targetBytes[name] = name === 'deploy/Caddyfile.release' ? Buffer.from('old caddy\n')
+      : name === 'deploy/eqb-release.service' ? Buffer.from('old service\n')
+        : readFileSync(path.join(ROOT, name))
+    writeFileSync(path.join(payload, path.basename(name)), targetBytes[name])
+  }
+  const originalRun = f.dependencies.runSystem
+  f.dependencies.runSystem = (command, args, options) => {
+    if (command === '/usr/bin/git' && args.includes('show')) return targetBytes[args.at(-1).split(':')[1]]
+    if (command === '/usr/bin/systemctl' && args[0] === 'show') {
+      return 'LoadState=not-found\nActiveState=inactive\nSubState=dead\nMainPID=0\nControlPID=0\nJob=0\n'
+    }
+    if (command === '/usr/bin/systemctl' && ['list-units', 'list-jobs'].includes(args[0])) return ''
+    if (command === '/usr/sbin/runuser' && failEntryProof) throw new Error('fake entry proof failure')
+    if (command === '/usr/bin/env' && failEntryProof) return JSON.stringify({ productionSha: oldSha, eqb: 'active', caddy: 'active' })
+    if (command === '/usr/sbin/runuser') return JSON.stringify({ schemaVersion: 'eqb-deployment-preflight-v2',
+      productionSha: oldSha, eqb: 'active', caddy: 'active', layout: 'release',
+      protocol: 'eqb-controlled-ssh-v1', hostConfigurationSha: newSha })
+    return originalRun(command, args, options)
+  }
+  const plan = { schemaVersion: 'eqb-controlled-entry-plan-v1', transactionId: randomUUID(), targetSha: newSha,
+    productionSha: oldSha, hostConfigurationSha: oldSha, transportUser: 'fixture-transport',
+    priorTransactionId: priorId, priorTerminalFile: terminalFile, priorTerminalDigest: digest(terminal),
+    priorFiles: Object.fromEntries(Object.entries(priorFiles).map(([name, bytes]) => [name, digest(bytes)])) }
+  const installed = await installControlledEntry({ plan, planDigest: digest(JSON.stringify(plan)),
+    payloadDirectory: payload, config: f.config, dependencies: f.dependencies })
+  if (failEntryProof) {
+    assert(installed.exitCode === 70 && installed.output.state === 'failure' && installed.output.receipt.rollbackHealthy === true,
+      'failed entry proof restores and health-checks the prior entry without redeployment')
+    assert(f.currentSha() === oldSha && readFileSync(f.config.rootWrapperPath, 'utf8') === 'stable controller\n'
+      && readFileSync(f.config.transportWrapperPath, 'utf8') === 'stable transport\n', 'entry rollback restores original launcher bytes and application pointer')
+    assert(parseControlledTransaction(formatControllerOutput(installed.output), { transactionId: plan.transactionId }, 70).state === 'failure',
+      'client records entry rollback as failure, never success or retry permission')
+    continue
+  }
+  assert(installed.exitCode === 0 && installed.output.state === 'success', 'controlled SSH entry installation completes offline')
+  assert(parseControlledTransaction(formatControllerOutput(installed.output), { transactionId: plan.transactionId }, installed.exitCode).state === 'success',
+    'entry receipt is accepted by the actual trusted client parser')
+  assert(f.currentSha() === oldSha && f.state.restarts.length === 0, 'entry migration never switches/restarts the application')
+  const preflight = await runControlledController({ originalCommand: 'preflight', config: f.config, dependencies: f.dependencies })
+  assert(preflight.output.protocol === 'eqb-controlled-ssh-v1' && preflight.output.hostConfigurationSha === newSha,
+    'controlled preflight separates controller identity from application identity')
+  const id = randomUUID()
+  const request = `deploy ${id} ${newSha}`
+  assert(parseControlledCommand(request).transactionId === id, 'controlled parser binds the deployment UUID')
+  const deployed = await runControlledController({ originalCommand: request, config: f.config, dependencies: f.dependencies })
+  assert(deployed.exitCode === 0 && f.currentSha() === newSha, 'controlled entry invokes the existing isolated release/health engine')
+  const status = await runControlledController({ originalCommand: `status ${id}`, config: f.config, dependencies: f.dependencies })
+  assert(JSON.stringify(status.output) === JSON.stringify(deployed.output), 'readonly status returns the durable exact transaction receipt')
+  const wire = formatControllerOutput(status.output).replaceAll(f.root, '/opt/eqb')
+  assert(parseControlledTransaction(wire, { transactionId: id, command: 'deploy', sha: newSha, digest: null }, 0).state === 'success',
+    'deployment receipt crosses the actual client binding parser')
+  for (const [output, code] of [[`pollution\n${wire}`, 0], [wire, 70]]) {
+    let rejected = false
+    try { parseControlledTransaction(output, { transactionId: id }, code) } catch { rejected = true }
+    assert(rejected, 'pollution or conflicting exit cannot turn into successful deployment')
+  }
+  let replayDenied = false
+  try { await runControlledController({ originalCommand: request, config: f.config, dependencies: f.dependencies }) }
+  catch { replayDenied = true }
+  assert(replayDenied && f.state.restarts.length === 1, 'duplicate UUID never reactivates or automatically recovers')
+  const active = path.join(f.root, 'deployments/controlled-ssh/active.json')
+  const unsafeId = randomUUID()
+  const sourceCallsBeforeUnsafe = f.state.sourceCalls.length
+  let unsafeDenied = false
+  chmodSync(f.root, 0o777)
+  try { await runControlledController({ originalCommand: `deploy ${unsafeId} ${newSha}`, config: f.config, dependencies: f.dependencies }) }
+  catch { unsafeDenied = true }
+  finally { chmodSync(f.root, 0o700) }
+  assert(unsafeDenied && !existsSync(active)
+    && !existsSync(path.join(f.root, 'deployments/controlled-ssh', `${unsafeId}.json`))
+    && f.state.sourceCalls.length === sourceCallsBeforeUnsafe, 'unsafe layout is rejected before admission or source fetch')
+  const nextSha = 'c'.repeat(40)
+  f.state.mainSha = nextSha
+  let fetched = false
+  let drift = false
+  const sourceRun = f.dependencies.runSource
+  f.dependencies.runSource = (command, args, options) => {
+    if (args.includes('fetch')) fetched = true
+    return sourceRun(command, args, options)
+  }
+  const installedRun = f.dependencies.runSystem
+  f.dependencies.runSystem = (command, args, options) => {
+    if (command === '/usr/bin/git' && args.includes('show') && args.at(-1).startsWith(`${nextSha}:`)) {
+      if (!fetched) throw new Error('target object is not fetched')
+      const bytes = targetBytes[args.at(-1).split(':')[1]]
+      return drift ? Buffer.concat([bytes, Buffer.from('drift')]) : bytes
+    }
+    return installedRun(command, args, options)
+  }
+  const next = await runControlledController({ originalCommand: `deploy ${randomUUID()} ${nextSha}`, config: f.config, dependencies: f.dependencies })
+  assert(fetched && next.exitCode === 0 && f.currentSha() === nextSha, 'cold app-only target is fetched before five-blob comparison and deploys in one command')
+  drift = true
+  const buildsBeforeDrift = f.state.buildCalls.length
+  let driftDenied = false
+  try { await runControlledController({ originalCommand: `deploy ${randomUUID()} ${nextSha}`, config: f.config, dependencies: f.dependencies }) }
+  catch { driftDenied = true }
+  assert(driftDenied && f.state.buildCalls.length === buildsBeforeDrift && !existsSync(active), 'fetched control-blob drift still rejects before build/admission')
+  writeFileSync(active, JSON.stringify({ ...status.output, state: 'unknown', failureCode: 'OPERATION_UNKNOWN' }), { mode: 0o600 })
+  const interrupted = await runControlledController({ originalCommand: `status ${id}`, config: f.config, dependencies: f.dependencies })
+  assert(interrupted.exitCode === 70 && interrupted.output.state === 'unknown' && interrupted.output.retryAllowed === false,
+    'interrupted admission remains unknown even with a previously written engine receipt')
+  let blocked = false
+  try { await runControlledController({ originalCommand: `deploy ${randomUUID()} ${newSha}`, config: f.config, dependencies: f.dependencies }) }
+  catch { blocked = true }
+  assert(blocked && f.state.restarts.length === 2, 'persistent maintenance blocks a different UUID without recovery or activation')
+  for (const [name, bytes] of Object.entries(priorFiles)) {
+    assert(readFileSync(path.join(dispatch, name), 'utf8') === bytes, 'old UNKNOWN staging evidence is retained byte-identically')
+  }
+} finally { rmSync(controlledFixture.root, { recursive: true, force: true }) }
+}
+
 const reviewedDigest = deploymentChangedPathDigest(['server/api.mjs'])
 const reviewedSuccess = controllerFixture({ persistenceAuthorityChange: true })
 const reviewedSuccessResult = await runController({
@@ -4994,13 +5167,13 @@ assert(
       'exec /usr/bin/sudo -n /usr/local/libexec/eqb-deploy-controller-v1 -- preflight',
     )
     && transportWrapper.includes(
-      'exec /usr/bin/sudo -n /usr/local/libexec/eqb-deploy-controller-v1 -- deploy "$sha"',
+      'exec /usr/bin/sudo -n /usr/local/libexec/eqb-deploy-controller-v1 -- deploy "$transaction" "$sha"',
     )
     && transportWrapper.includes("command_name=deploy-reviewed-persistence")
     && transportWrapper.includes("command_name=update-host-config")
     && transportWrapper.includes('[ "${#digest}" -eq 64 ] || exit 64')
     && controllerWrapper.includes('/opt/eqb/deployments/host-configuration/current/deploy/eqb-deploy-controller.mjs')
-    && controllerWrapper.includes('/opt/eqb/deployments/host-configuration-update/recovery-controller.mjs'),
+    && !controllerWrapper.includes('/opt/eqb/deployments/host-configuration-update/recovery-controller.mjs'),
   'forced transport and stable root wrappers accept only bounded versioned maintenance commands',
 )
 assert(
@@ -5058,7 +5231,7 @@ try {
   assert(
     linkedEntrypoint.status === 1
       && linkedEntrypoint.stdout === ''
-      && linkedEntrypoint.stderr.startsWith('EQB deployment controller failed closed: '),
+      && linkedEntrypoint.stderr.startsWith('EQB deployment controller failed closed; '),
     'versioned controller enters its fail-closed entrypoint when invoked through the active symlink',
   )
 
@@ -5081,6 +5254,8 @@ exec "$@"
     .replaceAll('/usr/bin/journalctl', fakeJournalctl)
     .replaceAll('/usr/bin/node', process.execPath)
     .replaceAll('/opt/eqb/deployments/deploy.lock', lockPath)
+    .replaceAll('"/opt/eqb/deployments"', JSON.stringify(installerLockFixtureRoot))
+    .replaceAll('/opt/eqb/deployments/root-dispatch-barrier.json', path.join(installerLockFixtureRoot, 'absent-barrier.json'))
     .replaceAll(
       '/opt/eqb/deployments/host-configuration/current/deploy/eqb-deploy-controller.mjs',
       fakeControllerModule,
@@ -5121,10 +5296,11 @@ exec "$@"
     process.execPath, '--no-addons', fakeControllerModule,
   ])
   assert(
-    legacyReentry.status === 75
+    legacyReentry.status === 0
+      && legacyReentry.stdout === preflightOutput
       && lockOwnerPreflight.status === 0
       && lockOwnerPreflight.stdout === preflightOutput,
-    'legacy installer forced-route re-entry self-locks with 75 while lock-owner preflight completes',
+    'controlled readonly forced route and module preflight both work while maintenance owns the lock',
   )
   const unlockedForcedPreflight = spawnSync('/usr/bin/env', [
     '-i',
@@ -5153,7 +5329,7 @@ transport=$1
 entered=$2
 release=$3
 fixture=$4
-/usr/bin/env -i SSH_ORIGINAL_COMMAND=preflight PATH=/usr/local/bin:/usr/bin:/bin \
+/usr/bin/env -i 'SSH_ORIGINAL_COMMAND=deploy ${randomUUID()} ${newSha}' PATH=/usr/local/bin:/usr/bin:/bin \
   "$transport" >"$fixture/first.stdout" 2>"$fixture/first.stderr" &
 first_pid=$!
 for ((attempt=0; attempt<500; attempt+=1)); do
@@ -5166,7 +5342,7 @@ if [[ ! -e $entered ]]; then
   exit 98
 fi
 /usr/bin/timeout --signal=TERM 2s /usr/bin/env -i \
-  SSH_ORIGINAL_COMMAND=preflight PATH=/usr/local/bin:/usr/bin:/bin \
+  'SSH_ORIGINAL_COMMAND=deploy ${randomUUID()} ${newSha}' PATH=/usr/local/bin:/usr/bin:/bin \
   "$transport" >"$fixture/second.stdout" 2>"$fixture/second.stderr"
 second_status=$?
 : > "$release"
@@ -5746,8 +5922,8 @@ for (const [command, authorization, label] of [
   )
   assert(unauthorized.status === 1, `${label} without current Owner authorization is rejected`)
   assert(
-    unauthorized.stderr.includes('Current Owner authorization'),
-    `unauthorized ${label} stops before credentials, SSH, or production work`,
+    unauthorized.stderr.includes('Retired control-plane command'),
+    `retired ${label} stops before credentials, SSH, or production work`,
   )
   const suppliedSha = spawnSync(
     process.execPath,
@@ -5755,7 +5931,7 @@ for (const [command, authorization, label] of [
     { cwd: ROOT, encoding: 'utf8' },
   )
   assert(
-    suppliedSha.status === 1 && suppliedSha.stderr.includes('do not supply --sha'),
+    suppliedSha.status === 1 && suppliedSha.stderr.includes('Retired control-plane command'),
     `${label} CLI rejects a caller-supplied SHA before production work`,
   )
 }
@@ -5766,7 +5942,7 @@ const unauthorizedBootstrapInspect = spawnSync(
 )
 assert(
   unauthorizedBootstrapInspect.status === 1
-    && unauthorizedBootstrapInspect.stderr.includes('Current Owner authorization'),
+    && unauthorizedBootstrapInspect.stderr.includes('Retired control-plane command'),
   'bootstrap inspection without current read-only authorization stops before recovery or SSH work',
 )
 const suppliedInspectSha = spawnSync(
@@ -5781,13 +5957,13 @@ const suppliedInspectSha = spawnSync(
   { cwd: ROOT, encoding: 'utf8' },
 )
 assert(
-  suppliedInspectSha.status === 1 && suppliedInspectSha.stderr.includes('do not supply --sha'),
+  suppliedInspectSha.status === 1 && suppliedInspectSha.stderr.includes('Retired control-plane command'),
   'bootstrap inspection rejects a caller-supplied target before recovery or SSH work',
 )
 for (const command of ['root-barrier-readiness', 'root-barrier-install']) {
   const denied = spawnSync(process.execPath, [path.join(ROOT, 'scripts/amp-orb-deploy.mjs'), command],
     { cwd: ROOT, encoding: 'utf8' })
-  assert(denied.status === 1 && denied.stderr.includes('Exact current Owner root-barrier authorization'),
+  assert(denied.status === 1 && denied.stderr.includes('Retired control-plane command'),
     `${command} without authorization stops before candidate, credentials or TAT`)
 }
 const unauthorizedMaintenanceReadiness = spawnSync(
@@ -5797,7 +5973,7 @@ const unauthorizedMaintenanceReadiness = spawnSync(
 )
 assert(
   unauthorizedMaintenanceReadiness.status === 1
-    && unauthorizedMaintenanceReadiness.stderr.includes('Current Owner authorization'),
+    && unauthorizedMaintenanceReadiness.stderr.includes('Retired control-plane command'),
   'Tencent maintenance-install readiness without current authorization stops before API dispatch',
 )
 const unauthorizedDeploy = spawnSync(
@@ -5822,6 +5998,76 @@ for (const command of ['activate', 'activate-release']) {
       && attempted.stderr.includes('deploy --owner-said-deploy-latest'),
     `${command} is rejected instead of bypassing deploy-latest gates`,
   )
+}
+
+section('One-time TAT delivery uses the reviewed installer without another state machine')
+{
+  const transactionId = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'
+  const terminalText = JSON.stringify({ retained: 'private-old-terminal' })
+  const hash = text => createHash('sha256').update(text).digest('hex')
+  const plan = { transactionId, priorTransactionId: 'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb',
+    targetSha: newSha, productionSha: oldSha, hostConfigurationSha: oldSha,
+    priorTerminalDigest: hash(terminalText),
+    priorTerminalFile: `/opt/eqb/deployments/controlled-entry-${transactionId}/terminal.json` }
+  const files = Object.fromEntries(CONTROLLED_ENTRY_FILES.map(name => [name, readFileSync(path.join(ROOT, name))]))
+  const prepared = buildControlledEntryTat({ files, planText: JSON.stringify(plan), terminalText })
+  assert(prepared.commandBytes <= 49152 && prepared.commandDigest === hash(prepared.command),
+    'complete real six-file command fits TAT and has exact digest')
+  let oversized = false
+  try { buildControlledEntryTat({ files: { ...files, 'deploy/install-eqb-controlled-ssh':
+    Buffer.from(Array.from({ length: 30000 }, () => randomUUID()).join('')) }, planText: JSON.stringify(plan), terminalText }) }
+  catch { oversized = true }
+  assert(oversized, 'oversize command rejected before dispatch')
+  const record = { schemaVersion: 'eqb-controlled-transaction-v1', transactionId,
+    command: 'install-entry', targetSha: newSha, changedPathsDigest: prepared.planDigest,
+    previousSha: oldSha, state: 'success', retryAllowed: false, failureCode: null,
+    receipt: { schemaVersion: 'eqb-controlled-entry-receipt-v1', conclusion: 'success',
+      historical: 'unknown', priorTransactionId: plan.priorTransactionId,
+      priorTerminalDigest: plan.priorTerminalDigest, previousHostConfigurationSha: oldSha, rollbackHealthy: null } }
+  const output = `EQB_CONTROLLED_TRANSACTION ${JSON.stringify(record)}\n`
+  const targetDigest = hash('target')
+  const terminal = { invocationStatus: 'SUCCESS', taskStatus: 'SUCCESS', exitCode: 0, output, targetDigest }
+  for (const [label, result, accepted] of [
+    ['success', terminal, true],
+    ['timeout with success-shaped output', { ...terminal, invocationStatus: 'TIMEOUT', taskStatus: 'TIMEOUT' }, false],
+    ['poll loss', null, false],
+    ['stdout pollution', { ...terminal, output: `secret\n${output}` }, false],
+    ['exit mismatch', { ...terminal, exitCode: 70 }, false],
+    ['prior binding mismatch', { ...terminal, output: output.replace(plan.priorTerminalDigest, 'f'.repeat(64)) }, false],
+  ]) {
+    const saved = new Map(); let calls = 0; let passed = false
+    try {
+      const got = await executeControlledEntryTat({ prepared, targetDigest,
+        save: (name, text) => { if (saved.has(name)) throw Error('duplicate'); saved.set(name, text) },
+        execute: async () => { calls++; if (!result) throw Error('private loss'); return result },
+      })
+      passed = got.state === 'success'
+    } catch (error) { assert(!error.message.includes('secret'), `${label} emits no raw error content`) }
+    assert(passed === accepted && calls === 1, `${label}: one dispatch, bound outcome`)
+    assert(result ? saved.has('terminal.json') : !saved.has('terminal.json'), `${label}: terminal retained before parse, never fabricated`)
+    if (!accepted) assert(saved.has('unknown.json'), `${label}: unknown persisted, no retry`)
+  }
+  const root = mkdtempSync(path.join(tmpdir(), 'eqb-entry-tat-'))
+  try {
+    mkdirSync(path.join(root, 'eqb/deployments'), { recursive: true })
+    let launches = 0; let text = ''
+    const source = prepared.command.split("<<'EQB_ENTRY'\n")[1].split('\nEQB_ENTRY')[0]
+      .replace(/^import .*;$/gmu, '').replaceAll('/opt', root)
+    const context = { Buffer, gunzipSync, createHash,
+      fs: { ...fs, lstatSync: name => Object.assign(fs.lstatSync(name), { uid: 0, gid: 0 }) },
+      process: { getuid: () => 0, getgid: () => 0, stdout: { write: value => { text += value } }, stderr: { write() {} } },
+      spawnSync: (command, args) => {
+        launches++
+        assert(command === '/bin/bash' && args[0].endsWith('/deploy/install-eqb-controlled-ssh'), 'generated command invokes only fixed installer')
+        for (const name of CONTROLLED_ENTRY_FILES) assert(hash(readFileSync(path.join(root, 'eqb/deployments', `controlled-entry-${transactionId}`, name))) === hash(files[name]), `exact staged ${name}`)
+        return { status: 0, stdout: output, stderr: 'private-root-stderr' }
+      },
+    }
+    runInNewContext(source, context)
+    assert(launches === 1 && text === output, 'generated delivery preserves exact receipt and hides stderr')
+    runInNewContext(source, { ...context })
+    assert(launches === 1 && context.process.exitCode === 70, 'existing input directory prevents replay')
+  } finally { rmSync(root, { recursive: true, force: true }) }
 }
 
 await verifyDeployBarrier(ROOT)

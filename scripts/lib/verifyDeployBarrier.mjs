@@ -171,12 +171,19 @@ export async function verifyDeployBarrier(repository) {
       .replaceAll('/opt/eqb/deployments/root-dispatch-barrier.json', active)
       .replaceAll('"/opt/eqb/deployments"', JSON.stringify(path.join(root, 'deployments')))
       .replaceAll('/opt/eqb/deployments/host-configuration/current/deploy/eqb-deploy-controller.mjs', module), 0o700)
-    const invoke = (command) => spawnSync(wrapper, ['--', ...command.split(' ')], { encoding: 'utf8' })
+    const invoke = (command) => {
+      const args = command.split(' ')
+      if (command !== 'preflight') args.splice(1, 0, expected.transactionId)
+      return spawnSync(wrapper, ['--', ...args], { encoding: 'utf8' })
+    }
+    assert.equal(spawnSync(wrapper, ['--', ...mutation.split(' ')]).status, 64)
     assert.equal(invoke(mutation).status, 0)
     fs.unlinkSync(entered)
     withDeploymentLock(root, () => {
       assert.equal(invoke(mutation).status, 75)
-      assert.equal(invoke('preflight').status, 75)
+      assert.equal(invoke('preflight').status, 0)
+      assert.equal(fs.readFileSync(entered, 'utf8'), 'preflight')
+      fs.unlinkSync(entered)
       assert.throws(() => withDeploymentLock(root, () => assert.fail('nested lock entered'), uid, gid))
     }, uid, gid)
     assert.equal(fs.existsSync(entered), false)
@@ -213,7 +220,9 @@ export async function verifyDeployBarrier(repository) {
     while (!fs.existsSync(ready) && child.exitCode === null) await new Promise((resolve) => setTimeout(resolve, 5))
     assert.throws(() => withDeploymentLock(root, () => assert.fail('busy management entered'), uid, gid))
     assert.equal(invoke(mutation).status, 75)
-    assert.equal(invoke('preflight').status, 75) // readonly must not re-enter the lock
+    assert.equal(invoke('preflight').status, 0) // readonly does not acquire the mutation lock
+    assert.equal(fs.readFileSync(entered, 'utf8'), 'preflight')
+    fs.unlinkSync(entered)
     await ended
     assert.notEqual(invoke(mutation).status, 0) // durable even after holder is gone
     assert.equal(finishBarrier('finalize', expected, options).phase, 'finalized')

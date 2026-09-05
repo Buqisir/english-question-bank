@@ -13,8 +13,18 @@ import { buildBarrierTatCommand } from './barrierBootstrapTat.mjs'
 export async function verifyBarrierBootstrap(repository) {
   const uid = process.getuid(), gid = process.getgid()
   const before = '1'.repeat(40), target = '2'.repeat(40), production = '3'.repeat(40)
-  const payload = buildPayload(target, (name) => fs.readFileSync(path.join(repository, name)))
-  assert.equal(buildPayload(target, (name) => fs.readFileSync(path.join(repository, name))), payload)
+  // Retired bootstrap lifecycle fixtures exercise the retained legacy engine,
+  // not delivery of the new SSH installer through the old bounded TAT channel.
+  const readLegacyFixture = name => {
+    const bytes = fs.readFileSync(path.join(repository, name))
+    if (name !== 'deploy/eqb-deploy-controller.mjs') return bytes
+    const source = bytes.toString('utf8')
+    const boundary = source.indexOf('export function parseControlledCommand(')
+    assert.ok(boundary > 0)
+    return Buffer.from(source.slice(0, boundary))
+  }
+  const payload = buildPayload(target, readLegacyFixture)
+  assert.equal(buildPayload(target, readLegacyFixture), payload)
   const parsed = parsePayload(payload)
   assert.throws(() => parsePayload(payload.trimEnd()))
   assert.throws(() => parsePayload(canonical({ ...parsed, extra: true })))
@@ -151,7 +161,7 @@ export async function verifyBarrierBootstrap(repository) {
       assert.ok(invocation.command.includes("'eqb-barrier-install-' + input.transactionId"))
       if (outcome === 'success') {
         const oldId = randomUUID(), newId = randomUUID(), oldTarget = '4'.repeat(40)
-        const oldPayload = buildPayload(oldTarget, name => fs.readFileSync(path.join(repository, name)))
+        const oldPayload = buildPayload(oldTarget, readLegacyFixture)
         const oldReport = canonical({ ...report, targetSha: oldTarget, payloadDigest: hash(oldPayload), inspectedAt: '2026-01-01T00:00:00.000Z' })
         const tatText = canonical({ commandId: 'cmd-12345678', invocationId: 'inv-12345678', invocationTaskId: 'invt-12345678',
           invocationStatus: 'FAILED', taskStatus: 'FAILED', exitCode: 70, output: secret, targetDigest: '5'.repeat(64) })
@@ -307,7 +317,7 @@ export async function verifyBarrierBootstrap(repository) {
         }
         const unauthorized = spawnSync(process.execPath, [path.join(repository, 'scripts/amp-orb-deploy.mjs'), 'root-barrier-probe'], { encoding: 'utf8' })
         assert.equal(unauthorized.status, 1)
-        assert.match(unauthorized.stderr, /Readonly probe input\/authority invalid/)
+        assert.match(unauthorized.stderr, /Retired control-plane command/)
         proofs = 1
         const generated = invocation.command.split("<<'EQB_BARRIER_NODE'\n")[1].split('\nEQB_BARRIER_NODE')[0]
         const wireFailure = failureResult(transactionId, 'live-main', { diagnostic: { exitCode: 22, stdoutBytes: 0, stderrBytes: 20 } })

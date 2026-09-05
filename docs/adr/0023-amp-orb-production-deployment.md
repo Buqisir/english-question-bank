@@ -3,6 +3,25 @@
 - Status: Accepted; S2 release deployment is active in production
 - Scope: website deployment plus separately authorized persistence and host-configuration maintenance
 
+## Controlled SSH supersession (2026-09-05)
+
+The Owner replaced the TAT/bootstrap/barrier/rebind operating chain with the
+controlled SSH entry described in
+[`controlled-ssh-maintenance/plan.md`](../cuts/controlled-ssh-maintenance/plan.md).
+The exact-main Hosted authority, pinned restricted SSH, isolated release build,
+atomic switch, health/rollback and persistence traffic boundary below remain.
+Old provisioning/bootstrap sections are retained historical evidence, not current
+execution instructions. The new CLI refuses those retired commands.
+
+The same root release engine now receives a correlation UUID, writes persistent
+maintenance admission before executing, and retains an exact readonly status.
+There is no second release engine or generic recovery dispatcher. Duplicate IDs
+and interrupted admission never trigger recovery. Installed controller hashes,
+not equality between controller/application SHAs, decide compatibility.
+One separately authorized root-console transaction switches the fixed entry;
+subsequent ordinary deployments require neither TAT nor marker rebind. Production
+cutover still awaits explicit authorization and is not implied by this ADR.
+
 ## Context
 
 The existing `deploy-remote.sh` is a proven operator convenience script, but it

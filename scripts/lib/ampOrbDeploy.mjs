@@ -1441,6 +1441,65 @@ export function parseHostConfigurationControllerOutput(output, expectedSha, expe
   return receipt
 }
 
+export function parseControlledTransaction(output, expected, exitCode) {
+  const prefix = 'EQB_CONTROLLED_TRANSACTION '
+  const line = String(output || '')
+  if (!line.startsWith(prefix) || !line.endsWith('\n')
+    || line.slice(0, -1).includes('\n')) throw new Error('Controlled response is polluted')
+  let record
+  try { record = JSON.parse(line.slice(prefix.length)) }
+  catch { throw new Error('Controlled response is not JSON') }
+  const keys = ['changedPathsDigest', 'command', 'failureCode', 'previousSha', 'receipt',
+    'retryAllowed', 'schemaVersion', 'state', 'targetSha', 'transactionId'].sort()
+  if (!record || Array.isArray(record)
+    || Object.keys(record).sort().join('\n') !== keys.join('\n')
+    || record.schemaVersion !== 'eqb-controlled-transaction-v1'
+    || record.transactionId !== expected.transactionId
+    || typeof record.transactionId !== 'string'
+    || !/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/u.test(record.transactionId)
+    || !['deploy', 'deploy-reviewed-persistence', 'update-host-config', 'install-entry'].includes(record.command)
+    || (expected.command && record.command !== expected.command)
+    || typeof record.targetSha !== 'string' || !SHA.test(record.targetSha)
+    || typeof record.previousSha !== 'string' || !SHA.test(record.previousSha)
+    || (expected.sha && record.targetSha !== expected.sha)
+    || (expected.digest !== undefined && record.changedPathsDigest !== expected.digest)
+    || (record.command === 'deploy' ? record.changedPathsDigest !== null
+      : typeof record.changedPathsDigest !== 'string' || !/^[a-f0-9]{64}$/u.test(record.changedPathsDigest))
+    || record.retryAllowed !== false
+    || !['success', 'failure', 'unknown'].includes(record.state)
+    || ![null, 'OPERATION_FAILED', 'OPERATION_UNKNOWN'].includes(record.failureCode)
+    || (record.state === 'success') !== (record.failureCode === null)
+    || exitCode !== (record.state === 'success' ? 0 : 70)) {
+    throw new Error('Controlled response binding/exit is invalid; no retry')
+  }
+  if (record.command === 'install-entry') {
+    const receipt = record.receipt
+    if (!receipt || Object.keys(receipt).sort().join(',') !== 'conclusion,historical,previousHostConfigurationSha,priorTerminalDigest,priorTransactionId,rollbackHealthy,schemaVersion'
+      || receipt.schemaVersion !== 'eqb-controlled-entry-receipt-v1' || receipt.historical !== 'unknown'
+      || typeof receipt.previousHostConfigurationSha !== 'string' || !SHA.test(receipt.previousHostConfigurationSha)
+      || typeof receipt.priorTerminalDigest !== 'string' || !/^[a-f0-9]{64}$/u.test(receipt.priorTerminalDigest)
+      || typeof receipt.priorTransactionId !== 'string'
+      || !/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/u.test(receipt.priorTransactionId)
+      || receipt.priorTransactionId === record.transactionId
+      || !['success', 'failure'].includes(receipt.conclusion)
+      || ![true, false, null].includes(receipt.rollbackHealthy)) throw new Error('Entry receipt is invalid')
+  } else if (record.receipt !== null) {
+    const parsers = {
+      deploy: [parseDeploymentControllerOutput, 'EQB_DEPLOY_RECEIPT '],
+      'deploy-reviewed-persistence': [parseReviewedPersistenceControllerOutput, 'EQB_REVIEWED_PERSISTENCE_RECEIPT '],
+      'update-host-config': [parseHostConfigurationControllerOutput, 'EQB_HOST_CONFIGURATION_RECEIPT '],
+    }
+    const [parse, marker] = parsers[record.command]
+    parse(`${marker}${JSON.stringify(record.receipt)}\n`, record.targetSha, record.changedPathsDigest)
+  }
+  if (record.state === 'success' && record.receipt?.conclusion !== 'success') {
+    throw new Error('Controlled success lacks a successful engine receipt')
+  }
+  if (record.state === 'failure' && (record.receipt?.conclusion !== 'failure'
+    || record.receipt.rollbackHealthy === false)) throw new Error('Controlled failure is unsafe')
+  return record
+}
+
 export function parseDeploymentControllerPreflight(output) {
   let preflight
   try {
@@ -1459,7 +1518,10 @@ export function parseDeploymentControllerPreflight(output) {
       'layout',
       'productionSha',
       'schemaVersion',
-    ].join('\n')
+      ...(preflight.protocol === 'eqb-controlled-ssh-v1' ? ['protocol', 'hostConfigurationSha'] : []),
+    ].sort().join('\n')
+    || (preflight.protocol !== undefined && (preflight.protocol !== 'eqb-controlled-ssh-v1'
+      || typeof preflight.hostConfigurationSha !== 'string' || !SHA.test(preflight.hostConfigurationSha)))
     || preflight.schemaVersion !== 'eqb-deployment-preflight-v2'
     || preflight.controllerVersion !== 'eqb-deploy-controller-v1'
     || !SHA.test(preflight.productionSha || '')

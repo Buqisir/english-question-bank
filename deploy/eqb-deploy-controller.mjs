@@ -36,9 +36,12 @@ export const EQB_REVIEWED_PERSISTENCE_RECEIPT_SCHEMA_VERSION =
   'eqb-reviewed-persistence-receipt-v1'
 export const EQB_HOST_CONFIGURATION_RECEIPT_SCHEMA_VERSION =
   'eqb-host-configuration-receipt-v1'
+export const CONTROLLED_SSH_PROTOCOL = 'eqb-controlled-ssh-v1'
+export const CONTROLLED_TRANSACTION_SCHEMA = 'eqb-controlled-transaction-v1'
 
 const SHA = /^[a-f0-9]{40}$/u
 const DIGEST = /^[a-f0-9]{64}$/u
+const UUID = /^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/u
 const RELEASE_MARKER = '.eqb-release.json'
 const COMMAND_TIMEOUT_MS = 20 * 60 * 1000
 const HEALTH_ATTEMPTS = 30
@@ -98,6 +101,7 @@ export function formatControllerOutput(output) {
     [EQB_DEPLOY_RECEIPT_SCHEMA_VERSION, 'EQB_DEPLOY_RECEIPT '],
     [EQB_REVIEWED_PERSISTENCE_RECEIPT_SCHEMA_VERSION, 'EQB_REVIEWED_PERSISTENCE_RECEIPT '],
     [EQB_HOST_CONFIGURATION_RECEIPT_SCHEMA_VERSION, 'EQB_HOST_CONFIGURATION_RECEIPT '],
+    [CONTROLLED_TRANSACTION_SCHEMA, 'EQB_CONTROLLED_TRANSACTION '],
   ]).get(output?.schemaVersion) || ''
   return `${marker}${JSON.stringify(output)}\n`
 }
@@ -476,6 +480,24 @@ function readHostConfigurationMarker(config, { optional = false } = {}) {
   }
 }
 
+// An installed controller has its own reviewed Git identity. A later application
+// commit need not rewrite that identity when all five installed blobs match.
+function hostConfigurationMatchesTarget(config, dependencies, targetSha) {
+  const installed = readHostConfigurationMarker(config, { optional: true })
+  if (!installed) return false
+  if (installed.marker.sha === targetSha) return true
+  const hashes = { ...installed.marker.files, ...installed.marker.stableLaunchers }
+  try {
+    return [...HOST_CONFIGURATION_PATHS, ...STABLE_LAUNCHER_PATHS].every(relative => {
+      const bytes = dependencies.runSystem('/usr/bin/git', [
+        '-c', `safe.directory=${config.source}`, '-C', config.source,
+        'show', `${targetSha}:${relative}`,
+      ], { timeout: COMMAND_TIMEOUT_MS, encoding: null })
+      return sha256(bytes) === hashes[relative]
+    })
+  } catch { return false }
+}
+
 function assertOrdinaryReleaseBoundary(config, dependencies, previousSha, targetSha) {
   const stableLauncherChanges = changedProtectedPaths(
     config,
@@ -486,7 +508,7 @@ function assertOrdinaryReleaseBoundary(config, dependencies, previousSha, target
   )
   if (
     stableLauncherChanges.length > 0
-    && readHostConfigurationMarker(config, { optional: true })?.marker.sha !== targetSha
+    && !hostConfigurationMatchesTarget(config, dependencies, targetSha)
   ) {
     throw controllerFailure(
       'STABLE_LAUNCHER_UPDATE_REQUIRES_ROOT',
@@ -502,7 +524,7 @@ function assertOrdinaryReleaseBoundary(config, dependencies, previousSha, target
   )
   if (
     hostConfigurationChanges.length > 0
-    && readHostConfigurationMarker(config, { optional: true })?.marker.sha !== targetSha
+    && !hostConfigurationMatchesTarget(config, dependencies, targetSha)
   ) {
     throw controllerFailure(
       'HOST_CONFIGURATION_UPDATE_REQUIRED',
@@ -1316,7 +1338,7 @@ async function deployReviewedPersistence(
     )
     if (
       stableLauncherChanges.length > 0
-      && readHostConfigurationMarker(config, { optional: true })?.marker.sha !== targetSha
+      && !hostConfigurationMatchesTarget(config, dependencies, targetSha)
     ) {
       throw controllerFailure(
         'STABLE_LAUNCHER_UPDATE_REQUIRES_ROOT',
@@ -1328,7 +1350,7 @@ async function deployReviewedPersistence(
     )
     if (
       hostConfigurationChanges.length > 0
-      && readHostConfigurationMarker(config, { optional: true })?.marker.sha !== targetSha
+      && !hostConfigurationMatchesTarget(config, dependencies, targetSha)
     ) throw controllerFailure('HOST_CONFIGURATION_UPDATE_REQUIRED', 'Target host configuration is not installed')
     changedPaths = changedProtectedPaths(
       config, dependencies, previousSha, targetSha, PERSISTENCE_AUTHORITY_PATHS,
@@ -1511,13 +1533,15 @@ function prepareHostConfiguration(config, dependencies, sha) {
       relative,
       sha256(readFileSync(path.join(staging, relative))),
     ]))
-    const stableLaunchers = readHostConfigurationMarker(config).marker.stableLaunchers
+    const previousMarker = readHostConfigurationMarker(config).marker
+    const stableLaunchers = previousMarker.stableLaunchers
     const marker = path.join(staging, '.eqb-host-configuration.json')
     privateWrite(marker, `${JSON.stringify({
       schemaVersion: 'eqb-host-configuration-v1',
       sha,
       files,
       stableLaunchers,
+      ...(previousMarker.controlledSsh ? { controlledSsh: previousMarker.controlledSsh } : {}),
       preparedAt: new Date().toISOString(),
     }, null, 2)}\n`)
     dependencies.seal(staging)
@@ -1759,12 +1783,11 @@ async function updateHostConfiguration(
   let state = null
   let prepared = null
   try {
-    const productionSha = currentReleaseSha(config)
     if (fetchMain(config, dependencies) !== targetSha) {
       throw new Error('Production source main does not match target SHA')
     }
     const stableLauncherChanges = changedProtectedPaths(
-      config, dependencies, productionSha, targetSha, STABLE_LAUNCHER_PATHS,
+      config, dependencies, previous.marker.sha, targetSha, STABLE_LAUNCHER_PATHS,
     )
     if (stableLauncherChanges.length > 0) {
       throw controllerFailure(
@@ -1773,7 +1796,7 @@ async function updateHostConfiguration(
       )
     }
     changedPaths = changedProtectedPaths(
-      config, dependencies, productionSha, targetSha, HOST_CONFIGURATION_PATHS,
+      config, dependencies, previous.marker.sha, targetSha, HOST_CONFIGURATION_PATHS,
     )
     if (changedPaths.length === 0) {
       throw controllerFailure('HOST_CONFIGURATION_DIFF_REQUIRED', 'No host configuration change requires installation')
@@ -1960,8 +1983,315 @@ export async function runController({
   }
 }
 
+export function parseControlledCommand(originalCommand) {
+  if (originalCommand === 'preflight') return { command: 'preflight' }
+  if (typeof originalCommand !== 'string') throw new Error('COMMAND_INVALID')
+  const parts = originalCommand.split(' ')
+  const [command, transactionId, sha, digest] = parts
+  if (!UUID.test(transactionId || '')) throw new Error('TRANSACTION_INVALID')
+  if (command === 'status' && parts.length === 2) return { command, transactionId }
+  if (!SHA.test(sha || '')) throw new Error('TARGET_INVALID')
+  if (command === 'deploy' && parts.length === 3) {
+    return { command, transactionId, sha, digest: null }
+  }
+  if (['deploy-reviewed-persistence', 'update-host-config'].includes(command)
+    && parts.length === 4 && DIGEST.test(digest || '')) {
+    return { command, transactionId, sha, digest }
+  }
+  throw new Error('COMMAND_INVALID')
+}
+
+function controlledRoot(config) {
+  const directory = path.join(config.root, 'deployments', 'controlled-ssh')
+  const metadata = lstatSync(directory)
+  if (!metadata.isDirectory() || metadata.isSymbolicLink()
+    || metadata.uid !== config.controllerUid || metadata.gid !== config.controllerGid
+    || (metadata.mode & 0o7777) !== 0o700) throw new Error('TRANSACTION_DIRECTORY_UNSAFE')
+  return directory
+}
+
+function legacyMaintenancePresent(config) {
+  return [
+    'root-dispatch-barrier.json',
+    'reviewed-persistence/active.json',
+    'host-configuration-update/active.json',
+    'host-configuration-update/recovery-controller.mjs',
+  ].some(relative => pathEntryExists(path.join(config.root, 'deployments', relative)))
+}
+
+// The fixed launcher owns deploy.lock for this entire call. It opens the selected
+// module only after locking. In particular the entrypoint never accepts the old
+// SHA-only mutation grammar, even when submitted by an old queued launcher.
+export async function runControlledController({
+  originalCommand, config = PRODUCTION_CONFIG, dependencies,
+} = {}) {
+  const parsed = parseControlledCommand(originalCommand)
+  const runtime = dependencies || productionDependencies(config)
+  if (parsed.command === 'preflight') {
+    return { exitCode: 0, output: {
+      ...preflight(config, runtime),
+      protocol: CONTROLLED_SSH_PROTOCOL,
+      hostConfigurationSha: readHostConfigurationMarker(config).marker.sha,
+    } }
+  }
+  const directory = controlledRoot(config)
+  const recordPath = path.join(directory, `${parsed.transactionId}.json`)
+  const activePath = path.join(directory, 'active.json')
+  if (parsed.command === 'status') {
+    const output = readPrivateMaintenanceState(config,
+      pathEntryExists(recordPath) ? recordPath : activePath)
+    if (output.schemaVersion !== CONTROLLED_TRANSACTION_SCHEMA
+      || output.transactionId !== parsed.transactionId) throw new Error('TRANSACTION_INVALID')
+    if (pathEntryExists(activePath)) {
+      const active = readPrivateMaintenanceState(config, activePath)
+      if (active.transactionId === parsed.transactionId) {
+        output.state = 'unknown'
+        output.failureCode = 'OPERATION_UNKNOWN'
+      }
+    }
+    return { output, exitCode: output.state === 'success' ? 0 : 70 }
+  }
+  // Validate the full root layout before admission writes or source activity.
+  assertLayout(config, runtime)
+  // No implicit recovery, even for identical input. Existing engine recovery
+  // entrypoints remain internal and cannot be reached by replaying a request.
+  if (pathEntryExists(recordPath)) throw new Error('TRANSACTION_CONSUMED')
+  if (pathEntryExists(activePath) || legacyMaintenancePresent(config)) {
+    throw new Error('MAINTENANCE_ACTIVE')
+  }
+  const installed = readHostConfigurationMarker(config)
+  if (installed.marker.controlledSsh !== CONTROLLED_SSH_PROTOCOL) {
+    throw new Error('CONTROLLED_ENTRY_NOT_INSTALLED')
+  }
+  // A later app-only target need not exist in the host clone yet. Fetch through
+  // the existing source boundary before comparing its installed-control blobs.
+  if (fetchMain(config, runtime) !== parsed.sha) throw new Error('MAIN_CHANGED')
+  if (parsed.command !== 'update-host-config'
+    && !hostConfigurationMatchesTarget(config, runtime, parsed.sha)) {
+    throw new Error('HOST_CONFIGURATION_MISMATCH')
+  }
+  const output = {
+    schemaVersion: CONTROLLED_TRANSACTION_SCHEMA,
+    transactionId: parsed.transactionId,
+    command: parsed.command,
+    targetSha: parsed.sha,
+    changedPathsDigest: parsed.digest,
+    previousSha: currentReleaseSha(config),
+    state: 'unknown',
+    retryAllowed: false,
+    failureCode: 'OPERATION_UNKNOWN',
+    receipt: null,
+  }
+  // Write admission first: a crash between these writes blocks other IDs too.
+  writeMaintenanceState(activePath, output)
+  writeMaintenanceState(recordPath, output)
+  try {
+    const result = parsed.command === 'deploy'
+      ? await deploy(config, runtime, parsed.sha)
+      : parsed.command === 'deploy-reviewed-persistence'
+        ? await deployReviewedPersistence(config, runtime, parsed.sha, parsed.digest)
+        : await updateHostConfiguration(config, runtime, parsed.sha, parsed.digest)
+    output.receipt = { ...result.receipt, receiptPath: result.receiptPath }
+    if (result.receipt.conclusion === 'success' && !legacyMaintenancePresent(config)) {
+      output.state = 'success'
+    } else if (!legacyMaintenancePresent(config)
+      && result.receipt.rollbackHealthy !== false
+      && currentReleaseSha(config) === output.previousSha
+      && readHostConfigurationMarker(config).marker.sha === installed.marker.sha
+      && await healthCheck(config, runtime)) {
+      output.state = 'failure'
+    }
+    output.failureCode = output.state === 'success' ? null : 'OPERATION_FAILED'
+  } catch {
+    output.failureCode = 'OPERATION_UNKNOWN'
+  }
+  writeMaintenanceState(recordPath, output)
+  if (output.state !== 'unknown') {
+    rmSync(activePath)
+    syncDirectory(directory)
+  }
+  return { output, exitCode: output.state === 'success' ? 0 : 70 }
+}
+
+// Root-console only. The shipped shell entry owns the existing lock throughout;
+// neither this operation nor caller-selected files are exposed by forced SSH.
+export async function installControlledEntry({ plan, planDigest, payloadDirectory,
+  config = PRODUCTION_CONFIG, dependencies } = {}) {
+  const runtime = dependencies || productionDependencies(config)
+  const check = (condition) => { if (!condition) throw new Error('ENTRY_MIGRATION_PRECONDITION') }
+  const trustedAncestors = file => {
+    const relative = path.relative(config.root, path.resolve(file))
+    check(file === path.resolve(file) && relative && !relative.startsWith('..') && !path.isAbsolute(relative))
+    for (let parent = path.dirname(file); ; parent = path.dirname(parent)) {
+      const metadata = lstatSync(parent)
+      check(metadata.isDirectory() && !metadata.isSymbolicLink() && metadata.uid === config.controllerUid
+        && metadata.gid === config.controllerGid && !(metadata.mode & 0o022))
+      if (parent === config.root) break
+    }
+  }
+  const keys = ['schemaVersion', 'transactionId', 'targetSha', 'productionSha', 'hostConfigurationSha',
+    'transportUser', 'priorTransactionId', 'priorTerminalFile', 'priorTerminalDigest', 'priorFiles']
+  check(plan && Object.keys(plan).sort().join('\n') === keys.sort().join('\n')
+    && plan.schemaVersion === 'eqb-controlled-entry-plan-v1'
+    && typeof plan.transactionId === 'string' && UUID.test(plan.transactionId)
+    && typeof plan.priorTransactionId === 'string' && UUID.test(plan.priorTransactionId)
+    && plan.transactionId !== plan.priorTransactionId
+    && ['targetSha', 'productionSha', 'hostConfigurationSha'].every(k => typeof plan[k] === 'string' && SHA.test(plan[k]))
+    && plan.targetSha !== plan.hostConfigurationSha
+    && typeof plan.transportUser === 'string' && /^[a-z_][a-z0-9_-]*$/u.test(plan.transportUser)
+    && plan.transportUser !== 'root' && runtime.uid(plan.transportUser) > 0
+    && typeof planDigest === 'string' && DIGEST.test(planDigest)
+    && typeof plan.priorTerminalFile === 'string' && path.isAbsolute(plan.priorTerminalFile)
+    && typeof plan.priorTerminalDigest === 'string' && DIGEST.test(plan.priorTerminalDigest))
+  const readPrivate = file => {
+    trustedAncestors(file)
+    const metadata = lstatSync(file)
+    check(metadata.isFile() && !metadata.isSymbolicLink() && metadata.nlink === 1
+      && metadata.uid === config.controllerUid && metadata.gid === config.controllerGid
+      && (metadata.mode & 0o7777) === 0o600 && metadata.size <= 2 * 1024 * 1024)
+    return readFileSync(file)
+  }
+  const terminalBytes = readPrivate(plan.priorTerminalFile)
+  check(sha256(terminalBytes) === plan.priorTerminalDigest)
+  const terminal = JSON.parse(terminalBytes)
+  check(terminal.invocationStatus === 'FAILED' && terminal.taskStatus === 'FAILED'
+    && terminal.exitCode === 70 && typeof terminal.commandId === 'string'
+    && /^cmd-[a-z0-9]{8,64}$/u.test(terminal.commandId)
+    && typeof terminal.invocationId === 'string' && /^inv-[a-z0-9]{8,64}$/u.test(terminal.invocationId)
+    && typeof terminal.invocationTaskId === 'string' && /^invt-[a-z0-9]{8,64}$/u.test(terminal.invocationTaskId))
+  const base = path.join(config.root, 'deployments')
+  const directory = path.join(base, 'controlled-ssh')
+  check(!pathEntryExists(directory) && !legacyMaintenancePresent(config))
+  const priorNames = ['payload.json', 'readiness.json', 'eqb-barrier-bootstrap.mjs', 'eqb-deploy-barrier.mjs']
+  check(plan.priorFiles && Object.keys(plan.priorFiles).sort().join('\n') === priorNames.sort().join('\n'))
+  const retained = {}
+  for (const name of priorNames) {
+    check(typeof plan.priorFiles[name] === 'string' && DIGEST.test(plan.priorFiles[name]))
+    retained[name] = readPrivate(path.join(base, `barrier-dispatch-${plan.priorTransactionId}`, name))
+    check(sha256(retained[name]) === plan.priorFiles[name])
+  }
+  const oldPayload = JSON.parse(retained['payload.json'])
+  const oldReadiness = JSON.parse(retained['readiness.json'])
+  check(typeof oldPayload.targetSha === 'string' && SHA.test(oldPayload.targetSha)
+    && oldPayload.targetSha !== plan.targetSha
+    && oldReadiness.previousSha === plan.hostConfigurationSha && oldReadiness.productionSha === plan.productionSha)
+  for (const relative of [`barrier-install-${plan.priorTransactionId}`,
+    `root-dispatch-${plan.priorTransactionId}.json`, `host-configuration/versions/${oldPayload.targetSha}`,
+    `host-configuration/versions/${plan.targetSha}`]) check(!pathEntryExists(path.join(base, relative)))
+  check(!pathEntryExists(path.join(path.dirname(config.rootWrapperPath), 'eqb-deploy-barrier-v1.mjs')))
+  const unitText = String(runtime.runSystem('/usr/bin/systemctl', ['show',
+    `eqb-barrier-install-${plan.priorTransactionId}.service`, '--no-pager',
+    '--property=LoadState,ActiveState,SubState,MainPID,ControlPID,Job']))
+  const lines = unitText.trim().split('\n')
+  const unit = Object.fromEntries(lines.map(line => [line.slice(0, line.indexOf('=')), line.slice(line.indexOf('=') + 1)]))
+  check(lines.length === 6 && Object.keys(unit).sort().join(',') === 'ActiveState,ControlPID,Job,LoadState,MainPID,SubState'
+    && ['loaded', 'not-found'].includes(unit.LoadState) && unit.MainPID === '0' && unit.ControlPID === '0'
+    && ['', '0'].includes(unit.Job)
+    && ((unit.ActiveState === 'inactive' && unit.SubState === 'dead')
+      || (unit.LoadState === 'loaded' && unit.ActiveState === 'failed' && unit.SubState === 'failed')))
+  const jobs = String(runtime.runSystem('/usr/bin/systemctl', ['list-jobs', '--no-legend', '--no-pager']))
+  check(!jobs.split('\n').some(line => /\beqb(?:-|\.)/u.test(line)))
+  const units = String(runtime.runSystem('/usr/bin/systemctl', ['list-units', '--all', '--plain', '--no-legend', '--no-pager', 'eqb-*']))
+  check(!units.trim().split('\n').filter(Boolean).some(line => {
+    const fields = line.trim().split(/\s+/u)
+    return fields.length < 4 || !['inactive', 'failed'].includes(fields[2])
+  }))
+  assertLayout(config, runtime)
+  const previous = readHostConfigurationMarker(config)
+  check(previous.marker.sha === plan.hostConfigurationSha && currentReleaseSha(config) === plan.productionSha
+    && previous.marker.controlledSsh === undefined && await healthCheck(config, runtime))
+  check(fetchMain(config, runtime) === plan.targetSha)
+  const bytes = {}
+  for (const relative of [...HOST_CONFIGURATION_PATHS, ...STABLE_LAUNCHER_PATHS]) {
+    const file = path.join(payloadDirectory, path.basename(relative))
+    trustedAncestors(file)
+    const metadata = lstatSync(file)
+    check(metadata.isFile() && !metadata.isSymbolicLink() && metadata.nlink === 1
+      && metadata.uid === config.controllerUid && metadata.gid === config.controllerGid && !(metadata.mode & 0o022))
+    bytes[relative] = readFileSync(file)
+    const gitBytes = runtime.runSystem('/usr/bin/git', ['-c', `safe.directory=${config.source}`, '-C', config.source,
+      'show', `${plan.targetSha}:${relative}`], { encoding: null })
+    check(sha256(bytes[relative]) === sha256(gitBytes))
+  }
+  // Initial cutover changes only the entry/module. Service/Caddy/app/data and
+  // SSH identity/sudo/authorized_keys remain frozen, not implicitly upgraded.
+  for (const name of ['deploy/Caddyfile.release', 'deploy/eqb-release.service']) {
+    check(sha256(bytes[name]) === previous.marker.files[name])
+  }
+  check(sha256(bytes['deploy/eqb-deploy-controller.mjs']) !== previous.marker.files['deploy/eqb-deploy-controller.mjs'])
+  const proof = (controlled) => {
+    const text = runtime.runSystem('/usr/sbin/runuser', ['-u', plan.transportUser, '--',
+      '/usr/bin/env', '-i', 'SSH_ORIGINAL_COMMAND=preflight', 'PATH=/usr/local/bin:/usr/bin:/bin', config.transportWrapperPath])
+    const report = JSON.parse(text)
+    check(report.schemaVersion === 'eqb-deployment-preflight-v2' && report.productionSha === plan.productionSha
+      && report.eqb === 'active' && report.caddy === 'active' && report.layout === 'release'
+      && (controlled ? report.protocol === CONTROLLED_SSH_PROTOCOL && report.hostConfigurationSha === plan.targetSha
+        : report.protocol === undefined))
+  }
+  ensureDirectory(directory, 0o700)
+  const active = path.join(directory, 'active.json')
+  const record = path.join(directory, `${plan.transactionId}.json`)
+  const output = { schemaVersion: CONTROLLED_TRANSACTION_SCHEMA, transactionId: plan.transactionId,
+    command: 'install-entry', targetSha: plan.targetSha, changedPathsDigest: planDigest,
+    previousSha: plan.productionSha, state: 'unknown', retryAllowed: false, failureCode: 'OPERATION_UNKNOWN',
+    receipt: { schemaVersion: 'eqb-controlled-entry-receipt-v1', conclusion: 'failure', historical: 'unknown',
+      priorTransactionId: plan.priorTransactionId, priorTerminalDigest: plan.priorTerminalDigest,
+      previousHostConfigurationSha: previous.marker.sha, rollbackHealthy: null } }
+  writeMaintenanceState(active, output)
+  writeMaintenanceState(record, output)
+  const backup = path.join(directory, 'backup')
+  const version = path.join(hostConfigurationRoot(config), 'versions', plan.targetSha)
+  let changed = false
+  try {
+    ensureDirectory(backup, 0o700)
+    privateWrite(path.join(backup, 'controller'), readFileSync(config.rootWrapperPath))
+    privateWrite(path.join(backup, 'transport'), readFileSync(config.transportWrapperPath))
+    ensureDirectory(path.join(version, 'deploy'), 0o700)
+    for (const relative of HOST_CONFIGURATION_PATHS) privateWrite(path.join(version, relative), bytes[relative])
+    privateWrite(path.join(version, '.eqb-host-configuration.json'), JSON.stringify({
+      schemaVersion: 'eqb-host-configuration-v1', sha: plan.targetSha,
+      files: Object.fromEntries(HOST_CONFIGURATION_PATHS.map(name => [name, sha256(bytes[name])])),
+      stableLaunchers: Object.fromEntries(STABLE_LAUNCHER_PATHS.map(name => [name, sha256(bytes[name])])),
+      controlledSsh: CONTROLLED_SSH_PROTOCOL, preparedAt: new Date().toISOString(),
+    }))
+    runtime.seal(version)
+    check(fetchMain(config, runtime) === plan.targetSha)
+    changed = true
+    atomicInstall(path.join(payloadDirectory, 'eqb-deploy-controller'), config.rootWrapperPath, 0o755, config)
+    atomicInstall(path.join(payloadDirectory, 'eqb-deploy-transport'), config.transportWrapperPath, 0o755, config)
+    switchHostConfiguration(config, plan.targetSha)
+    check(hostConfigurationMatchesTarget(config, runtime, plan.targetSha) && await healthCheck(config, runtime))
+    proof(true)
+    output.state = 'success'
+    output.failureCode = null
+    output.receipt.conclusion = 'success'
+  } catch {
+    if (changed) {
+      try {
+        atomicInstall(path.join(backup, 'controller'), config.rootWrapperPath, 0o755, config)
+        atomicInstall(path.join(backup, 'transport'), config.transportWrapperPath, 0o755, config)
+        switchHostConfiguration(config, previous.marker.sha)
+        check(currentReleaseSha(config) === plan.productionSha && readHostConfigurationMarker(config).marker.sha === previous.marker.sha
+          && await healthCheck(config, runtime))
+        // The old launcher takes the same lock, so prove its module locally;
+        // outside SSH verification is independent and cannot authorize replay.
+        const restored = JSON.parse(runtime.runSystem('/usr/bin/env', ['-i', 'SSH_ORIGINAL_COMMAND=preflight',
+          'PATH=/usr/local/bin:/usr/bin:/bin', '/usr/bin/node', '--no-addons',
+          path.join(previous.directory, 'deploy/eqb-deploy-controller.mjs')]))
+        check(restored.productionSha === plan.productionSha && restored.eqb === 'active' && restored.caddy === 'active')
+        output.receipt.rollbackHealthy = true
+        output.state = 'failure'
+        output.failureCode = 'OPERATION_FAILED'
+      } catch { output.receipt.rollbackHealthy = false }
+    }
+  }
+  writeMaintenanceState(record, output)
+  if (output.state !== 'unknown') { rmSync(active); syncDirectory(directory) }
+  return { output, exitCode: output.state === 'success' ? 0 : 70 }
+}
+
 function assertInstalledController() {
-  if (typeof process.getuid !== 'function' || process.getuid() !== 0) {
+  if (typeof process.getuid !== 'function' || process.getuid() !== 0 || process.getgid() !== 0) {
     throw new Error('Deployment controller must run as root')
   }
   const installedPath = fileURLToPath(import.meta.url)
@@ -1977,11 +2307,26 @@ const isEntrypoint = process.argv[1]
 if (isEntrypoint) {
   try {
     assertInstalledController()
-    const result = await runController({ originalCommand: process.env.SSH_ORIGINAL_COMMAND })
+    let result
+    if (process.argv[2] === '--install-controlled' && process.argv.length === 5) {
+      const lock = lstatSync(path.join(PRODUCTION_CONFIG.root, 'deployments/deploy.lock'))
+      const held = fstatSync(9)
+      if (!lock.isFile() || lock.isSymbolicLink() || lock.uid !== 0 || lock.gid !== 0
+        || (lock.mode & 0o7777) !== 0o600 || lock.nlink !== 1 || held.dev !== lock.dev || held.ino !== lock.ino) {
+        throw new Error('LOCK_INVALID')
+      }
+      const bytes = readFileSync(process.argv[3])
+      readPrivateMaintenanceState(PRODUCTION_CONFIG, process.argv[3])
+      if (sha256(bytes) !== process.argv[4]) throw new Error('PLAN_DIGEST_INVALID')
+      result = await installControlledEntry({ plan: JSON.parse(bytes), planDigest: process.argv[4],
+        payloadDirectory: path.dirname(fileURLToPath(import.meta.url)) })
+    } else {
+      result = await runControlledController({ originalCommand: process.env.SSH_ORIGINAL_COMMAND })
+    }
     process.stdout.write(formatControllerOutput(result.output))
     process.exitCode = result.exitCode
-  } catch (error) {
-    process.stderr.write(`EQB deployment controller failed closed: ${error.message}\n`)
+  } catch {
+    process.stderr.write('EQB deployment controller failed closed; outcome unknown, do not retry\n')
     process.exitCode = 1
   }
 }
