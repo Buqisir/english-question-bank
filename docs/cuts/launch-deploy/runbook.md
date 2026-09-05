@@ -595,7 +595,81 @@ failure before attempt creation and proves its stage is reported without claimin
 success/rollback or retry authority. Existing transactions need separately
 authorized readonly forensics; new code neither reopens nor replays them.
 
-After locked success the CLI runs forced preflight outside the lock and emits
+#### Current pre-install risk probe (not historical reconstruction)
+
+After an explicit decision to stop exact historical attribution, retain the old
+UNKNOWN and its known staging mutation permanently. Never relabel them rollback
+or zero mutation. `root-barrier-readiness` remains only a fresh host snapshot;
+it does not run the install-only live-main check or bind a previous invocation.
+The separately authorized readonly probe is:
+
+```text
+node scripts/amp-orb-deploy.mjs root-barrier-probe --owner-said-root-barrier-probe --request PRIVATE_REQUEST --prior-tat PRIVATE_TERMINAL_EXPORT
+```
+
+`PRIVATE_TERMINAL_EXPORT` is the trusted Deployment's retained
+`executeTencentTatCommand` result: exactly `commandId`, `invocationId`,
+`invocationTaskId`, `invocationStatus`, `taskStatus`, `exitCode`, `output`,
+`targetDigest`. This narrow path requires both statuses FAILED and exit70.
+Its producer must already have authenticated the API result, checked exact
+invocation/task/instance association and `Dropped=0`. It is **not** a provider
+signature or fresh provider query. Never synthesize missing terminal facts.
+If exporting from previously saved authenticated replies, preserve those replies
+and audit the association to the old transaction; do not substitute another
+invocation's failed export. The request/export are trusted Owner-reviewed inputs,
+not independent cryptographic proof of TAT-to-UUID association.
+
+Build the request with `canonical` from `deploy/eqb-barrier-bootstrap.mjs`:
+
+```text
+schemaVersion: eqb-barrier-probe-request-v1
+transactionId: proposed NEW UUID (caller supplied; not reserved or executed)
+targetSha: exact current main T
+operatorDigest: SHA256 of T:deploy/eqb-barrier-bootstrap.mjs
+prior:
+  transactionId: OLD UUID (must differ)
+  targetSha: old attempted target
+  payloadDigest: SHA256 of the old canonical six-file payload
+  operatorDigest: SHA256 of the old operator Git blob
+  readinessDigest: SHA256 of the retained old readiness bytes
+  tat: priorTatEvidence(exact PRIVATE_TERMINAL_EXPORT bytes)
+```
+
+The CLI binds the export digest/IDs/terminal result, same TAT target and old
+payload/operator Git bytes before one readonly dispatch. The root probe holds the
+existing deploy.lock, validates root-owned private retained dispatch files and
+their hashes without importing old code, requires the old attempt/receipt and
+old target absent and the proposed UUID unused, and checks the exact old unit's
+LoadState/ActiveState/SubState/MainPID/ControlPID/Job. An absent collected unit's
+default Result/ExecMainStatus is deliberately not success evidence. No main or
+control PID or queued unit job is allowed. Together with the trusted terminal TAT
+record and reviewed synchronous old manager, this supports old-execution quiescence;
+it is not a proof against malicious root or arbitrary future dispatch.
+
+The same `preInstallChecks` used by installation then verifies fresh state,
+M/P/installed hashes/health and the real anonymous `currentMain` path. M/P, marker
+and all five installed hashes must also match the retained old readiness. This
+does not imply that today's live-main success explains the old failure. No
+install, new unit, reservation, barrier write, evidence cleanup or journal sync
+occurs. Broad unit/job descriptions are omitted from the returned readiness.
+
+Strict `eqb-barrier-probe-v1` separates `historical=unattributable` from
+`current=passed|failed`, binding request/payload digests, proposed UUID and T;
+the request binds both operator digests, the old evidence and TAT target. Passed
+results include fresh readiness (M/P/hash/health) and the bounded unit proof.
+Failed/unknown results contain only safe stage/exit/code/byte-count diagnostics,
+exit70 and no usable readiness. Invalid output, exit disagreement, clock regression
+or a snapshot older than 120 seconds also fails closed. Both outcomes always say
+`executionAuthorized=false` and `retryAllowed=false`.
+
+PASS is a reviewable risk decision input, **not** new-attempt authority. The Owner
+must explicitly accept residual historical UNKNOWN and authorize one new bound
+attempt; recheck freshness/main/CI/state then. Do not replay the old UUID or erase
+its evidence. The probe does not disable other root commands, reserve the new UUID
+or add an automatic installer/resume protocol; existing installation still performs
+its own locked checks. Ambiguity or missing trusted evidence stops this path.
+
+After installation's locked success the CLI runs forced preflight outside the lock and emits
 strict `eqb-barrier-route-proof-v1` with `forced=passed|unknown`. Failure retains
 the active barrier and never triggers rollback. Finalize, root recovery, cleanup
 and application activation each require new authorization. No DB/R2, application,

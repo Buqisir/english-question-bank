@@ -60,6 +60,7 @@ import {
 } from './lib/tencentTat.mjs'
 import { buildBarrierTatCommand } from './lib/barrierBootstrapTat.mjs'
 import { buildPayload, canonical, failureResult, parseFailure, parseReadiness, parseInstallExecution, parseRouteProof } from '../deploy/eqb-barrier-bootstrap.mjs'
+import { priorTatEvidence, parseProbeRequest, parseProbeExecution, failedProbe } from '../deploy/eqb-barrier-bootstrap.mjs'
 
 const repositoryRoot = fileURLToPath(new URL('..', import.meta.url))
 const legacyBaselineSource = fileURLToPath(
@@ -464,6 +465,37 @@ async function rootBarrierBootstrap(install) {
     parseRouteProof(text, { transactionId: args[8], targetSha: resolved.sha, payloadDigest: built.payloadDigest })
     console.log(text.trimEnd())
   }
+}
+
+async function rootBarrierProbe() {
+  const args = process.argv.slice(3)
+  if (args.length !== 5 || args[0] !== '--owner-said-root-barrier-probe'
+    || args[1] !== '--request' || args[3] !== '--prior-tat') throw new Error('Exact readonly probe authorization required')
+  const resolved = await candidate()
+  const payloadText = buildPayload(resolved.sha, name => readExactCommitFile(resolved.sha, name))
+  const requestText = readFileSync(args[2], 'utf8')
+  const request = parseProbeRequest(requestText, payloadText)
+  const tat = priorTatEvidence(readFileSync(args[4], 'utf8'))
+  const digest = bytes => createHash('sha256').update(bytes).digest('hex')
+  if (canonical(tat) !== canonical(request.prior.tat)
+    || digest(buildPayload(request.prior.targetSha, name => readExactCommitFile(request.prior.targetSha, name))) !== request.prior.payloadDigest
+    || digest(readExactCommitFile(request.prior.targetSha, 'deploy/eqb-barrier-bootstrap.mjs')) !== request.prior.operatorDigest) {
+    throw new Error('Prior export or exact Git source binding differs')
+  }
+  const built = buildBarrierTatCommand({ operatorSource: readExactCommitFile(resolved.sha, 'deploy/eqb-barrier-bootstrap.mjs'),
+    payloadText, probeText: requestText })
+  const configuration = readTencentTatConfiguration()
+  if (tencentTatTargetDigest(configuration) !== tat.targetDigest) throw new Error('Prior TAT target differs')
+  await assertCandidateStillAuthoritative(resolved)
+  let report
+  try {
+    const execution = await executeTencentTatCommand({ command: built.command,
+      commandName: `eqb-barrier-probe-${resolved.sha.slice(0, 12)}`,
+      description: 'Read-only EQB pre-install risk probe; no transaction execution', configuration })
+    report = parseProbeExecution(execution, requestText, payloadText)
+  } catch { report = failedProbe(requestText, payloadText) }
+  console.log(canonical(report).trimEnd())
+  process.exitCode = report.current === 'passed' ? 0 : 70
 }
 
 async function bootstrapPreflight() {
@@ -1344,6 +1376,9 @@ try {
   else if (process.argv[2] === 'maintenance-install-readiness') await maintenanceInstallReadiness()
   else if (process.argv[2] === 'root-barrier-readiness') await rootBarrierBootstrap(false)
   else if (process.argv[2] === 'root-barrier-install') await rootBarrierBootstrap(true)
+  else if (process.argv[2] === 'root-barrier-probe') {
+    try { await rootBarrierProbe() } catch { throw new Error('Readonly probe input/authority invalid; no retry') }
+  }
   else if (process.argv[2] === 'bootstrap-preflight') await bootstrapPreflight()
   else if (process.argv[2] === 'baseline') await baseline()
   else if (process.argv[2] === 'bootstrap') await bootstrap()
@@ -1355,7 +1390,8 @@ try {
   else if (process.argv[2] === 'update-host-config') await updateHostConfig()
   else {
     throw new Error(
-      'Usage: amp-orb-deploy.mjs plan | preflight --owner-said-preflight | maintenance-install-readiness --owner-said-maintenance-install-readiness | root-barrier-readiness --owner-said-root-barrier-readiness | root-barrier-install --owner-said-root-barrier-install --readiness FILE --payload-digest SHA256 --operator-digest SHA256 --transaction UUID | bootstrap-preflight --owner-said-preflight | baseline --owner-said-baseline-migration | bootstrap --owner-said-release-bootstrap | bootstrap-inspect --owner-said-preflight | bootstrap-resume --owner-said-release-bootstrap-resume | bootstrap-abandon --owner-said-release-bootstrap-abandon | deploy --owner-said-deploy-latest | reviewed-persistence --owner-said-reviewed-persistence-deploy | update-host-config --owner-said-update-host-config',
+      'Usage: amp-orb-deploy.mjs plan | preflight --owner-said-preflight | maintenance-install-readiness --owner-said-maintenance-install-readiness | root-barrier-readiness --owner-said-root-barrier-readiness | root-barrier-install --owner-said-root-barrier-install --readiness FILE --payload-digest SHA256 --operator-digest SHA256 --transaction UUID | bootstrap-preflight --owner-said-preflight | baseline --owner-said-baseline-migration | bootstrap --owner-said-release-bootstrap | bootstrap-inspect --owner-said-preflight | bootstrap-resume --owner-said-release-bootstrap-resume | bootstrap-abandon --owner-said-release-bootstrap-abandon | deploy --owner-said-deploy-latest | reviewed-persistence --owner-said-reviewed-persistence-deploy | update-host-config --owner-said-update-host-config'
+      + ' | root-barrier-probe --owner-said-root-barrier-probe --request FILE --prior-tat FILE',
     )
   }
 } catch (error) {
