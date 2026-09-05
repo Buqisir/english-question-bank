@@ -146,9 +146,9 @@ state only—not a signature or independent proof. No Ed25519 attestor or signed
 
 After an approved plugin load, explicitly run `CI Orb: 复制 GitHub CI Webhook URL` and put the
 private capability URL in one GitHub repository webhook that sends only Pull requests and Push
-events, using the same HMAC secret. Never commit or log the URL or either secret. Branch protection
-temporarily requires hosted `verify` and `e2e` while Amp bug
-`amp_bug_0uiggF5jWG6i6iaB72BATT` blocks this webhook's public ingress. Both Orb contexts are
-informational during the rollback; ADR-0022 defines the proof required before they can regain merge
-authority. Deployment remains ADR-0025 `hosted-only` until each later shadow/dual/authority step is
-separately approved; merely landing the disabled writer changes no live trust root.
+events, using the same HMAC secret. Never commit or log the URL or either secret. Hosted `verify`
+and `e2e` remain required; the dedicated CI Orb and both Amp contexts stay dormant under ADR-0024
+(Sentinel/Discovery and Action-wake phase 2 paused). ADR-0022 is retained only as the historical
+Sentinel/Discovery design; ADR-0024 governs the active trunk Ship and Focused CI contract.
+Deployment remains ADR-0025 `hosted-only` until each later shadow/dual/authority step is separately
+approved; merely landing the disabled writer changes no live trust root.
