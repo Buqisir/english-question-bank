@@ -1,5 +1,5 @@
 /* 登录跟整站同一张奶绿书桌。墨绿只做身份点，动作用墨。
-   本页在 App.css 之前挂载，motion / focus token 可能还没定义，用 var 回退。 */
+   本页在 App.css 之前挂载；motion token 走 index.css :root。 */
 
 .login-page {
   display: flex;
@@ -128,7 +128,7 @@
   font-weight: 600;
   height: 32px;
   margin-top: 8px;
-  transition: background var(--motion-fast, 120ms) var(--ease-hover, ease), transform var(--motion-fast, 120ms) var(--ease-out, ease);
+  transition: background var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
   width: 100%;
 }
 

@@ -692,7 +692,7 @@ assert.match(dateExportSource, /downloadVocabularyDictationTaskPdf\(task\.id, 'd
 assert.match(workbenchSource, /全选当天[\s\S]{0,6000}自动带二维码[\s\S]{0,1200}合并导出听写纸/u, '听写列表必须提供日期全选和明确的二维码导出说明')
 assert.match(workbenchSource, /aria-pressed=\{accent === 'american'\}[\s\S]{0,300}aria-pressed=\{accent === 'british'\}/u, '导出口音必须向辅助技术暴露选中状态')
 const workbenchCss = readFileSync(path.join(import.meta.dirname, '../app/src/features/vocabulary-dictation-workbench/vocabularyDictationWorkbench.css'), 'utf8')
-assert.match(workbenchCss, /dictation-task-selection-panel button:focus-visible[\s\S]{0,160}outline: 2px solid #2c6e56/u, '新增任务操作必须有可见的墨绿键盘焦点')
+assert.match(workbenchCss, /dictation-task-selection-panel button:focus-visible[\s\S]{0,160}outline: 2px solid var\(--action\)/u, '新增任务操作必须有可见的墨色键盘焦点')
 assert.match(workbenchCss, /Overrides the shared button radius/u, '分段按钮覆盖共享圆角时必须显式说明 cascade 原因')
 const createReviewTaskSource = workbenchSource.slice(
   workbenchSource.indexOf('async function createTaskFromReviewEntries'),

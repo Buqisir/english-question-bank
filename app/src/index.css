@@ -15,6 +15,16 @@
   --action: var(--eqb-color-action);
   --action-hover: var(--eqb-color-action-hover);
 
+  /* 登录页在 App.css 之前挂载，hover 时长/曲线要在这里就有。数值与 App.css 五档对齐。 */
+  --motion-micro: 80ms;
+  --motion-fast: 120ms;
+  --motion-base: 160ms;
+  --motion-slow: 220ms;
+  --motion-entrance: 260ms;
+  --ease-hover: ease;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+
   --blue-soft: #e9ece6;
   --blue-text: #6a6a64;
   --mint-soft: var(--eqb-color-success-soft);
