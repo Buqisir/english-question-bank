@@ -64,8 +64,28 @@ status=0
     /usr/bin/env -i \
     SSH_ORIGINAL_COMMAND="$original_command" \
     PATH=/usr/local/bin:/usr/bin:/bin \
-    /usr/bin/node --no-addons \
-      "$controller_module" \
+    /usr/bin/node --no-addons --input-type=module -e '
+      import { lstatSync } from "node:fs";
+      import { spawnSync } from "node:child_process";
+      if (process.env.SSH_ORIGINAL_COMMAND !== "preflight") {
+        const directory = lstatSync("/opt/eqb/deployments");
+        if (!directory.isDirectory() || directory.uid !== process.getuid()
+          || directory.gid !== process.getgid() || (directory.mode & 0o022)) {
+          throw new Error("Unsafe barrier directory");
+        }
+        let absent = false;
+        try { lstatSync("/opt/eqb/deployments/root-dispatch-barrier.json"); }
+        catch (error) { if (error.code !== "ENOENT") throw error; absent = true; }
+        if (!absent) {
+          process.stderr.write("ROOT_DISPATCH_BARRIER_PRESENT\n");
+          process.exit(70);
+        }
+      }
+      const result = spawnSync("/usr/bin/node", ["--no-addons", process.argv[1]], {
+        stdio: "inherit", env: process.env,
+      });
+      process.exit(result.status ?? 70);
+    ' "$controller_module" \
   || status=$?
 
 /usr/bin/journalctl --sync
