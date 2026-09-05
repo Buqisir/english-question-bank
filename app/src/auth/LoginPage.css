@@ -1,115 +1,162 @@
+/* 登录跟整站同一张奶绿书桌。墨绿只做身份点，动作用墨。
+   本页在 App.css 之前挂载；motion token 走 index.css :root。 */
+
 .login-page {
   display: flex;
   align-items: flex-start;
   justify-content: center;
   min-height: 100vh;
-  padding-top: 22vh;
-  background: var(--eqb-color-bg-warm);
+  padding: 22vh 24px 48px;
+  background: var(--eqb-color-bg);
 }
 
-/* AuthGate's brief pre-fetchMe() loading placeholder — intentionally minimal,
-   this state is on screen for a single network round trip. */
 .auth-gate-loading {
   min-height: 100vh;
-  background: var(--surface);
+  background: var(--eqb-color-bg);
 }
 
 .login-card {
   width: 100%;
   max-width: 384px;
-  padding: 40px 36px;
-  border: none;
+  padding: 32px;
+  border: 0;
   border-radius: 12px;
-  background: #ffffff;
+  background: var(--eqb-color-paper);
   box-shadow:
-    0 0 0 1px rgba(30, 30, 28, 0.05),
-    0 1px 2px rgba(30, 30, 28, 0.06);
+    0 0 0 1px color-mix(in srgb, var(--eqb-color-text-strong) 5%, transparent),
+    0 1px 2px color-mix(in srgb, var(--eqb-color-text-strong) 6%, transparent);
+}
+
+.login-identity {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  margin: 0 0 8px;
+}
+
+.login-brand-mark {
+  align-items: center;
+  background: var(--eqb-color-identity);
+  border-radius: 50%;
+  color: var(--eqb-color-paper);
+  display: grid;
+  flex: 0 0 14px;
+  height: 14px;
+  place-items: center;
+  width: 14px;
+}
+
+.login-brand-mark svg {
+  height: 12px;
+  width: 12px;
 }
 
 .login-card h1 {
-  margin: 0 0 6px;
+  color: var(--eqb-color-text);
   font-size: 20px;
-  font-weight: 700;
-  color: #1e1e1c;
-}
-
-.login-card .eyebrow {
-  margin: 0 0 20px;
-  color: var(--eqb-color-text-muted);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0;
 }
 
 .login-subtitle {
-  margin: 0 0 20px;
-  color: #6a6a64;
+  color: var(--eqb-color-text-muted);
   font-size: 13px;
+  line-height: 1.5;
+  margin: 0 0 24px;
 }
 
 .login-footer-hint {
-  margin: 16px 0 0;
   color: var(--eqb-color-text-muted);
   font-size: 12px;
+  margin: 16px 0 0;
   text-align: center;
 }
 
 .login-field {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   margin-bottom: 16px;
 }
 
 .login-field label {
+  color: var(--eqb-color-text);
   font-size: 13px;
-  font-weight: 600;
-  color: var(--ink);
+  font-weight: 500;
 }
 
 .login-field input {
-  height: 38px;
-  padding: 0 12px;
-  border: 1px solid #d8d8d2;
+  background: var(--eqb-color-paper);
+  border: 1px solid var(--eqb-color-border);
   border-radius: 8px;
-  background: #ffffff;
-  color: var(--ink);
+  color: var(--eqb-color-text);
   font-size: 14px;
+  height: 36px;
+  padding: 0 12px;
 }
 
 .login-field input:focus {
-  outline: none;
-  border-color: var(--line-strong);
-  box-shadow: 0 0 0 3px rgba(31, 31, 29, 0.12);
+  border-color: var(--eqb-color-action);
+  outline: 2px solid var(--eqb-color-action);
+  outline-offset: 2px;
+}
+
+.login-field input:disabled,
+.login-submit:disabled {
+  cursor: not-allowed;
 }
 
 .login-error {
-  margin: 0 0 16px;
-  padding: 8px 10px;
+  background: var(--eqb-color-danger-soft);
   border-radius: 8px;
-  background: var(--coral-soft);
-  color: var(--coral-text);
+  color: var(--eqb-color-danger);
   font-size: 13px;
+  line-height: 1.5;
+  margin: 0 0 16px;
+  padding: 8px 12px;
 }
 
 .login-submit {
-  width: 100%;
-  margin-top: 4px;
-  height: 32px;
-  border: none;
-  border-radius: 8px;
   background: var(--action);
-  color: #ffffff;
+  border: 0;
+  border-radius: 8px;
+  color: var(--eqb-color-paper);
+  cursor: pointer;
   font-size: 13px;
   font-weight: 600;
-  cursor: pointer;
-  transition: background var(--motion-base) var(--ease-hover);
+  height: 32px;
+  margin-top: 8px;
+  transition: background var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
+  width: 100%;
 }
 
 .login-submit:hover:not(:disabled) {
   background: var(--action-hover);
 }
 
+.login-submit:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.login-submit:focus-visible {
+  outline: 2px solid var(--eqb-color-action);
+  outline-offset: 2px;
+}
+
 .login-submit:disabled {
-  background: var(--surface-strong);
-  color: var(--muted);
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text-muted);
   opacity: 1;
-  cursor: not-allowed;
+}
+
+@media (max-width: 560px) {
+  .login-page {
+    padding: 16vh 16px 32px;
+  }
+
+  .login-card {
+    padding: 24px;
+  }
 }

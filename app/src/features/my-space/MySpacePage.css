@@ -1,51 +1,55 @@
-/* dossier-cabinet: "个人空间" card shelf, grouped by month. Every color is
-   a var(--eqb-*) token (tokens.css) or a color-mix() wash built from one,
-   matching the token-only precedent in shared-ui/papersurface/PaperSurface.css
-   — no hardcoded palette hex in this file (allowlist is empty; see
-   scripts/verify-my-space-shelf.mjs). The one sanctioned exception is the
-   miniature card thumbnail below: it is a warm-paper artifact preview and
-   uses var(--paper-*) tokens (index.css), per DESIGN.md 色温法 — the page
-   chrome around it stays --eqb-* neutral. */
+/* 个人空间跟首页同一张奶绿书桌。颜色只用 var(--eqb-*) / var(--paper-*)
+   或 color-mix()，不许写 palette hex（verify-my-space-shelf）。缩略图是
+   纸的示意，字走 --paper-ink；页壳走工具色。 */
+
+.my-space-page {
+  background: var(--eqb-color-bg);
+  min-height: 100vh;
+}
 
 .my-space-shell {
-  background: var(--eqb-color-desk);
+  box-sizing: border-box;
   color: var(--eqb-color-text);
-  min-height: 100vh;
-  padding: 18px 22px 40px;
+  margin: 0 auto;
+  max-width: 920px;
+  padding: 24px 32px 64px;
+  width: 100%;
 }
 
 .my-space-heading {
   align-items: baseline;
   display: flex;
-  gap: 10px;
+  gap: 8px;
   margin: 0;
 }
 
 .my-space-heading h1 {
-  font-size: var(--eqb-font-size-lg);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
   margin: 0;
 }
 
 .my-space-count {
   color: var(--eqb-color-text-muted);
-  font-size: var(--eqb-font-size-xs);
+  font-size: 12px;
   margin: 0;
 }
 
 .my-space-message {
   color: var(--eqb-color-text-muted);
-  margin: 14px 0 0;
+  font-size: 13px;
+  margin: 16px 0 0;
 }
 
 .my-space-main {
   display: grid;
-  gap: var(--eqb-space-4);
-  margin-top: var(--eqb-space-5);
+  gap: 16px;
+  margin-top: 24px;
 }
 
-/* Filter chips — same pill language as the home page's Concierge chips
-   (App.css .concierge-starter-chip): pill radius, muted at rest, teal wash
-   when selected (Green-Pen Rule: green marks selection only). */
+/* 筛选芯片跟浏览页同一套：未选发丝边，选中墨底白字。 */
 .my-space-folders {
   display: flex;
   flex-wrap: wrap;
@@ -53,37 +57,57 @@
 }
 
 .my-space-chip {
+  align-items: center;
   background: transparent;
-  border: 1px solid var(--eqb-color-border);
+  border: 1px solid var(--eqb-color-border-subtle);
   border-radius: 999px;
   color: var(--eqb-color-text-muted);
   cursor: pointer;
+  display: inline-flex;
   font: inherit;
-  font-size: 12.5px;
-  padding: 5px 12px;
+  font-size: 13px;
+  min-height: 28px;
+  padding: 0 12px;
   transition: background var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
 }
 
 .my-space-chip:hover {
   background: var(--eqb-color-desk);
-  border-color: var(--eqb-color-border-strong);
   color: var(--eqb-color-text);
 }
 
 .my-space-chip.is-selected {
-  background: var(--eqb-color-desk);
-  border-color: var(--eqb-color-border-strong);
-  color: var(--eqb-color-text);
+  background: var(--action);
+  border-color: transparent;
+  color: var(--eqb-color-paper);
   font-weight: 500;
+}
+
+.my-space-chip.is-selected:hover {
+  background: var(--action-hover);
+  border-color: transparent;
+  color: var(--eqb-color-paper);
+}
+
+.my-space-chip:focus-visible,
+.my-space-empty-cta:focus-visible,
+.my-space-card-actions button:focus-visible,
+.my-space-confirm-actions button:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 2px;
 }
 
 .my-space-empty {
   color: var(--eqb-color-text-muted);
+  font-size: 13px;
+  line-height: 1.5;
   margin: 0;
 }
 
 .my-space-error {
   color: var(--eqb-color-danger);
+  font-size: 13px;
+  line-height: 1.5;
   margin: 0;
 }
 
@@ -100,22 +124,21 @@
 .my-space-empty-cta {
   align-items: center;
   background: var(--action);
-  border: 1px solid var(--action);
+  border: 0;
   color: var(--eqb-color-paper);
   cursor: pointer;
   display: inline-flex;
   font: inherit;
+  font-size: 13px;
   font-weight: 600;
   min-height: 32px;
   border-radius: 8px;
-  font-size: 13px;
   padding: 0 16px;
-  transition: background var(--motion-base) var(--ease-hover), border-color var(--motion-base) var(--ease-hover);
+  transition: background var(--motion-fast) var(--ease-hover);
 }
 
 .my-space-empty-cta:hover {
   background: var(--action-hover);
-  border-color: var(--action-hover);
 }
 
 /* Section head — "草稿卷" / "导出保存的 PDF 成品", sits above the month
@@ -124,51 +147,52 @@
   align-items: baseline;
   display: flex;
   gap: 8px;
-  margin: 10px 0 0;
+  margin: 8px 0 0;
 }
 
 .my-space-section-head h2 {
-  font-size: var(--eqb-font-size-sm);
-  font-weight: 650;
+  font-size: 14px;
+  font-weight: 600;
   margin: 0;
 }
 
 .my-space-section-head span {
   color: var(--eqb-color-text-muted);
-  font-size: var(--eqb-font-size-xs);
+  font-size: 12px;
 }
 
 /* Month archive groups — same "real sequence + real count" head language as
-   the home page's year archive groups (App.css .concierge-feed-year-head). */
+   the home page's date groups. */
 .my-space-month-group {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 22px;
+  gap: 12px;
+  margin-top: 24px;
 }
 
 .my-space-month-head {
   align-items: baseline;
   display: flex;
   gap: 8px;
-  padding: 0 2px;
+  padding: 0;
 }
 
 .my-space-month-label {
-  font-size: var(--eqb-font-size-sm);
-  font-weight: 650;
+  color: var(--eqb-color-text-muted);
+  font-size: 12px;
+  font-weight: 500;
   font-variant-numeric: tabular-nums;
 }
 
 .my-space-month-count {
   color: var(--eqb-color-text-muted);
-  font-size: var(--eqb-font-size-xs);
+  font-size: 12px;
 }
 
-/* Card shelf — miniature-A4 cards floated on the neutral page shell. */
+/* Card shelf — miniature-A4 cards floated on the milk-green desk. */
 .my-space-grid {
   display: grid;
-  gap: 18px;
+  gap: 16px;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 }
 
@@ -179,17 +203,16 @@
   min-width: 0;
 }
 
-/* Miniature A4 thumbnail — the one place on this page that floats on the
-   warm-paper token family instead of --eqb-* neutral (DESIGN.md 色温法
-   exception). It is a schematic layout (real title + name/class/score
-   placeholder + neutral filler lines) — artifact metadata carries no
-   question-group structure, so no section-header text is fabricated here. */
+/* Miniature A4 — 卷边跟看整卷同一条：浅唇 + 软投影，不描边。示意字走
+   --paper-ink，纸面本身是白纸。 */
 .my-space-card-thumb {
   aspect-ratio: 210 / 260;
-  background: var(--paper-bg);
-  border: 1px solid var(--paper-border);
-  border-radius: 4px;
-  box-shadow: 0 1px 2px color-mix(in srgb, var(--eqb-color-text-strong) 6%, transparent);
+  background: var(--eqb-color-paper);
+  border: 0;
+  border-radius: 0;
+  box-shadow:
+    0 1px 0 color-mix(in srgb, var(--eqb-color-text-strong) 6%, transparent),
+    0 12px 32px color-mix(in srgb, var(--eqb-color-text-strong) 8%, transparent);
   overflow: hidden;
   position: relative;
   transition: box-shadow var(--motion-slow) var(--ease-hover), transform var(--motion-slow) var(--ease-out);
@@ -197,7 +220,9 @@
 
 @media (hover: hover) and (pointer: fine) {
   .my-space-card-thumb:hover {
-    box-shadow: 0 8px 24px color-mix(in srgb, var(--eqb-color-text-strong) 12%, transparent);
+    box-shadow:
+      0 1px 0 color-mix(in srgb, var(--eqb-color-text-strong) 6%, transparent),
+      0 16px 36px color-mix(in srgb, var(--eqb-color-text-strong) 12%, transparent);
     transform: translateY(-2px);
   }
 }
@@ -244,9 +269,9 @@
 }
 
 .my-space-card-title {
-  color: var(--eqb-color-text-strong);
-  font-size: var(--eqb-font-size-sm);
-  font-weight: 600;
+  color: var(--eqb-color-text);
+  font-size: 14px;
+  font-weight: 500;
   margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -255,27 +280,25 @@
 
 .my-space-card-meta {
   color: var(--eqb-color-text-muted);
-  font-size: var(--eqb-font-size-xs);
+  font-size: 12px;
   margin: 0;
 }
 
-/* draft-student-field (E4): attribution metadata, not emphasis — neutral
-   border-only chip, never the Green-Pen primary wash used for selection
-   state elsewhere on this page. */
+/* 学生名是归属，不是选中。真题徽章同款：软底、12、圆角 4、无描边。 */
 .my-space-student-chip {
   background: var(--eqb-color-desk);
-  border: 1px solid var(--eqb-color-border);
-  border-radius: 999px;
+  border: 0;
+  border-radius: 4px;
   color: var(--eqb-color-text-muted);
-  font-size: 11px;
-  padding: 2px 9px;
+  font-size: 12px;
+  padding: 2px 8px;
   width: fit-content;
 }
 
 .my-space-card-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 8px;
   margin-top: auto;
   padding-top: 4px;
 }
@@ -284,19 +307,18 @@
   align-items: center;
   background: transparent;
   border: 1px solid var(--eqb-color-border);
-  border-radius: 6px;
+  border-radius: 8px;
   color: var(--eqb-color-text);
   cursor: pointer;
   display: inline-flex;
   font: inherit;
-  font-size: 12.5px;
+  font-size: 13px;
   gap: 6px;
   min-height: 32px;
   padding: 6px 10px;
-  transition: background var(--motion-base) var(--ease-hover), border-color var(--motion-base) var(--ease-hover), color var(--motion-base) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
+  transition: background var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
 }
 
-/* emil-processing: press feedback — 全无 :active（findings 表条目）。 */
 .my-space-card-actions button:active:not(:disabled) {
   transform: scale(0.97);
 }
@@ -314,10 +336,8 @@
 
 .my-space-card-actions .my-space-card-ghost:hover:not(:disabled) {
   background: var(--eqb-color-desk);
-  border-color: var(--eqb-color-border-strong);
 }
 
-/* Primary action: 下载 PDF — the one solid-green action on the card. */
 .my-space-card-actions .my-space-card-primary {
   background: var(--action);
   border-color: var(--action);
@@ -332,19 +352,15 @@
 }
 
 .my-space-card-actions .my-space-card-primary:disabled {
-  background: var(--eqb-color-border);
-  border-color: var(--eqb-color-border);
+  background: var(--eqb-color-desk);
+  border-color: var(--eqb-color-desk);
   color: var(--eqb-color-text-muted);
 }
 
-/* Danger action: 删除 — red text ghost at rest, red-soft fill on hover
-   (plan.md: "红字 ghost，hover 红浅底" — text reads red at rest, unlike
-   App.css's .detail-button.danger quiet-until-hover pattern). */
 .my-space-card-actions .my-space-card-danger {
   border-color: var(--eqb-color-border);
   color: var(--eqb-color-danger);
   margin-left: auto;
-  /* 图标紧凑型：三键同排装得下，不再换行孤行（2026-07-17 复评收账） */
   padding: 6px 8px;
 }
 
@@ -358,20 +374,14 @@
   color: var(--eqb-color-text-muted);
 }
 
-/* Delete confirmation modal — self-built equivalent of DraftPaperWorkbench's
-   draft-modal-backdrop/draft-save-space-dialog pair (window.confirm is not
-   used here). */
-/* emil-processing: modal 入退场，与 DraftPaperWorkbench 的
-   draft-modal-backdrop/draft-save-space-dialog 同配方（usePresence 保持
-   挂载播完 exit 再卸载；退出 motion-fast 快于入场 motion-base）。 */
 .my-space-modal-backdrop {
   align-items: center;
-  background: color-mix(in srgb, var(--eqb-color-text-strong) 45%, transparent);
+  background: color-mix(in srgb, var(--eqb-color-text-strong) 28%, transparent);
   bottom: 0;
   display: flex;
   justify-content: center;
   left: 0;
-  padding: 20px;
+  padding: 24px;
   position: fixed;
   right: 0;
   top: 0;
@@ -387,13 +397,13 @@
 
 .my-space-confirm-dialog {
   background: var(--eqb-color-paper);
-  border: 1px solid var(--eqb-color-border);
-  border-radius: 10px;
-  box-shadow: 0 12px 32px color-mix(in srgb, var(--eqb-color-text-strong) 22%, transparent);
+  border: 0;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--eqb-color-text-strong) 12%, transparent);
   display: grid;
   gap: 16px;
   max-width: 360px;
-  padding: 20px;
+  padding: 16px;
   width: 100%;
   opacity: 0;
   transform: scale(0.97);
@@ -407,14 +417,15 @@
 }
 
 .my-space-confirm-dialog h3 {
-  color: var(--eqb-color-text-strong);
-  font-size: var(--eqb-font-size-sm);
+  color: var(--eqb-color-text);
+  font-size: 14px;
+  font-weight: 600;
   margin: 0;
 }
 
 .my-space-confirm-dialog p {
   color: var(--eqb-color-text-muted);
-  font-size: 13.5px;
+  font-size: 13px;
   line-height: 1.5;
   margin: 0;
 }
@@ -427,20 +438,19 @@
 
 .my-space-confirm-actions button {
   background: transparent;
-  border: 1px solid var(--eqb-color-border);
-  border-radius: 6px;
+  border: 0;
+  border-radius: 8px;
   color: var(--eqb-color-text);
   cursor: pointer;
   font: inherit;
-  min-height: 34px;
-  padding: 7px 14px;
-  /* emil-processing: 补全站标准 hover/press transition（findings 表条目）。 */
-  transition: background var(--motion-base) var(--ease-hover), border-color var(--motion-base) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
+  font-size: 13px;
+  min-height: 32px;
+  padding: 0 12px;
+  transition: background var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
 }
 
 .my-space-confirm-actions button:hover {
   background: var(--eqb-color-desk);
-  border-color: var(--eqb-color-border-strong);
 }
 
 .my-space-confirm-actions button:active:not(:disabled) {
@@ -448,20 +458,23 @@
 }
 
 .my-space-confirm-actions .my-space-card-danger {
-  border-color: var(--eqb-color-danger);
+  border: 0;
   color: var(--eqb-color-danger);
 }
 
 .my-space-confirm-actions .my-space-card-danger:hover {
   background: color-mix(in srgb, var(--eqb-color-danger) 8%, transparent);
-  border-color: var(--eqb-color-danger);
 }
 
 @media (max-width: 560px) {
+  .my-space-shell {
+    padding: 16px 20px 48px;
+  }
+
   .my-space-heading {
     align-items: flex-start;
     flex-direction: column;
-    gap: 2px;
+    gap: 4px;
   }
 
   .my-space-grid {

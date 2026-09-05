@@ -1495,6 +1495,34 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       <main className="draft-workbench-layout">
         <h1 className="visually-hidden">{draftPaper.title}</h1>
         <section className="draft-preview-desk" aria-label="A4 预览">
+          {/* ui-northstar: 目录在纸的左边，与整卷页同侧（DOM 顺序即视觉
+              顺序，不用 grid order 绕）。 */}
+          <DraftPaperRail
+            items={draftPaper.items}
+            activeGroupId={activeRailGroupId}
+            onItemClick={scrollToGroupInPaper}
+            onDragStart={(itemId) => setDraggedItemId(itemId)}
+            onDrop={handleDrop}
+            onMoveItem={moveItem}
+            onDeleteItem={deleteItem}
+            metaText={pagesMetaText}
+            swapDrawer={
+              swapSeedItem && swapRequest
+                ? {
+                    seedTitle: swapSeedItem.questionGroup?.passageTitle || swapSeedItem.questionGroup?.title || swapSeedItem.groupId,
+                    recipeSummary: similarPassagesRecipeSummary(swapSeedItem.questionGroup?.groupType || 'reading'),
+                    request: swapRequest,
+                    existingGroupIds: draftGroupIds,
+                    questionGroupById,
+                    onCollapse: handleSwapCollapse,
+                    onRetry: handleSwapRetry,
+                    onReplace: (groupId) => void applySwapReplace(groupId),
+                    onAdd: (groupId) => void applySwapAdd(groupId),
+                  }
+                : null
+            }
+          />
+
           <div className={`draft-paper-col${draftPaper.printForm === 'a3' ? ' is-a3' : ''}`} ref={paperColRef}>
             <div
               className={`draft-a4-sheet${draftPaper.printForm === 'a3' ? ' is-a3' : ''}`}
@@ -1718,32 +1746,6 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                 )
               })}
           </div>
-
-          <DraftPaperRail
-            items={draftPaper.items}
-            activeGroupId={activeRailGroupId}
-            onItemClick={scrollToGroupInPaper}
-            onDragStart={(itemId) => setDraggedItemId(itemId)}
-            onDrop={handleDrop}
-            onMoveItem={moveItem}
-            onDeleteItem={deleteItem}
-            metaText={pagesMetaText}
-            swapDrawer={
-              swapSeedItem && swapRequest
-                ? {
-                    seedTitle: swapSeedItem.questionGroup?.passageTitle || swapSeedItem.questionGroup?.title || swapSeedItem.groupId,
-                    recipeSummary: similarPassagesRecipeSummary(swapSeedItem.questionGroup?.groupType || 'reading'),
-                    request: swapRequest,
-                    existingGroupIds: draftGroupIds,
-                    questionGroupById,
-                    onCollapse: handleSwapCollapse,
-                    onRetry: handleSwapRetry,
-                    onReplace: (groupId) => void applySwapReplace(groupId),
-                    onAdd: (groupId) => void applySwapAdd(groupId),
-                  }
-                : null
-            }
-          />
         </section>
       </main>
 

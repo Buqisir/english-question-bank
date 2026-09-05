@@ -176,7 +176,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
   }
 
   return (
-    <>
+    <div className="my-space-page">
     <AppTopbar {...shellNav} pageTitle="个人空间" onBack={onBackToWorkbench} />
     <div className="my-space-shell">
       <header className="my-space-heading">
@@ -209,7 +209,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
           </div>
         )}
 
-        {loadState === 'loading' && <p className="my-space-empty">正在读取个人空间...</p>}
+        {loadState === 'loading' && <p className="my-space-empty">正在读取个人空间…</p>}
 
         {loadState === 'error' && (
           <div className="my-space-empty-state">
@@ -338,6 +338,6 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
         </div>
       </div>
     )}
-    </>
+    </div>
   )
 }

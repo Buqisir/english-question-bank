@@ -147,8 +147,7 @@
   padding: 4px 0 4px 10px;
   font: inherit;
   font-size: 13px;
-  /* secondary ink — no dedicated token yet */
-  color: #4A4C48;
+  color: var(--ink-soft, #4A4C48);
   cursor: pointer;
   text-align: left;
 }
@@ -171,7 +170,7 @@
   display: inline-flex;
   flex: none;
   margin-left: 6px;
-  color: #4A4C48;
+  color: var(--ink-soft, #4A4C48);
 }
 
 .paper-browse-rail-group:hover {

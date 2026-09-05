@@ -117,23 +117,29 @@
 }
 
 .draft-version-toggle {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 6px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
   display: inline-flex;
-  overflow: hidden;
+  gap: 2px;
 }
 
 .draft-version-toggle button {
   background: transparent;
   border: none;
+  border-radius: 8px;
   color: var(--muted);
   cursor: pointer;
   font: inherit;
-  min-height: 34px;
-  padding: 7px 12px;
+  min-height: 32px;
+  padding: 6px 12px;
   /* emil-processing: 无 transition 时选中段瞬跳，全站其他 hover 都是缓动的 */
   transition: background var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
+}
+
+.draft-version-toggle button:hover:not(.active) {
+  background: var(--surface-strong);
+  color: var(--ink);
 }
 
 /* ui-p1-panels #15: the selected version segment used to reuse the exact
@@ -170,6 +176,10 @@
   font-size: 13px;
   font-weight: 600;
   transition: background var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
+}
+
+.draft-export-menu-trigger:hover:not(:disabled) {
+  background: var(--action-hover);
 }
 
 /* emil-processing: press feedback for the export trigger. */
@@ -222,15 +232,15 @@
 
 .draft-more-menu-trigger {
   align-items: center;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 6px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
   color: var(--muted);
   cursor: pointer;
   display: inline-flex;
   justify-content: center;
-  min-height: 36px;
-  min-width: 36px;
+  min-height: 28px;
+  min-width: 28px;
   padding: 0;
   transition: background var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
 }
@@ -333,7 +343,7 @@
      底色 tint 承担（安静卡本意不变；改动 shipped 视觉，DP-3 owner 有否决权） */
   border: 1px solid color-mix(in srgb, var(--eqb-color-danger) 35%, transparent);
   border-radius: 8px;
-  color: var(--paper-ink);
+  color: var(--ink);
   display: flex;
   font-size: 13.5px;
   gap: 14px;
@@ -366,21 +376,23 @@
  * 满幅暖纸桌本体——纸列 + 右侧目录 rail 都在桌面网格内，删除旧的卡片
  * 边框/圆角/内部滚动（overflow:auto 退役，改由桌面随页面自然滚动承载
  * 翻页，见 DraftPaperWorkbench.tsx 的 iframe 自适应高度实现）。暖纸桌
- * token（--paper-desk-bg）不变，仍是本页唯一暖色边界（色温法：暖只在
- * 桌+纸，rail 借用 paperBrowsePage 的 --paper-ink 系暖墨，工具 chrome
- * 维持中性）。 */
+ * token（--paper-desk-bg）现为奶绿桌面；rail 走淡墨，不再借 --paper-ink。 */
 /* workbench-header-unify Locked Decision 3/4 (owner v2.1/v2.5 实点): the
    18px margin-top was the "小灰" cold-底 sliver between the white topbar and
    the warm desk — retired so the desk runs straight to the topbar (解析页
    同构). padding-top stays 24px, unchanged — same value paper-browse-shell
    uses (paperBrowsePage.css), which is the actual v2.5 acceptance target
    now that the meta-row that used to sit above it has retired too. */
+/* ui-northstar 草稿卷: 目录搬到纸的左边，与整卷页同侧（整卷页是
+   `120px 1fr`，同样的 gap 24px 和 padding）。两页都是「一份卷子 + 一份
+   目录」，此前一页目录在左一页在右，老师换页得重新找目录。宽度比整卷页
+   宽，因为这里每行还带序号和题数（整卷页只有 A/B/C 这种短标签）。 */
 .draft-preview-desk {
   align-items: start;
   background: var(--paper-desk-bg);
   display: grid;
   gap: 24px;
-  grid-template-columns: minmax(0, 1fr) 224px;
+  grid-template-columns: 208px minmax(0, 1fr);
   min-width: 0;
   padding: 24px 24px 96px;
 }
@@ -395,8 +407,8 @@
 
 /* a3-imposition (plan.md Must Do 2, 裁点1 方案C — owner 2026-07-13): A3 態
    breaks the 820px centered-narrow-column language and uses most of the
-   available width within the grid's `minmax(0, 1fr)` first column — rail
-   stays put in the second column (裁点3, unchanged). Ceiling
+   available width within the grid's `minmax(0, 1fr)` paper column — rail
+   stays put in the first column (ui-northstar: 与整卷页同侧). Ceiling
    `min(94vw, 1440px)` keeps this from ballooning on ultra-wide screens;
    A4 (no `.is-a3` class ever applied) is completely untouched (裁点4). */
 .draft-paper-col.is-a3 {
@@ -416,12 +428,11 @@
 .draft-a4-sheet {
   background: transparent;
   border: 0;
-  /* D1: Resting-tier shadow (DESIGN.md §4 Elevation) so the A4 sheet reads
-     as paper resting on the desk instead of blending into the background.
-     暖纸转正 confirms this exact 0 1px 2px rgba(30,30,28,.06) 量级 against
-     the now-warm .draft-preview-desk — no change needed, value already
-     matches plan.md's spec. */
-  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
+  /* D1 pin stays on this wrapper (verify-draft-workbench-visual-unify).
+     The visible 卷边 lives on each iframe `.preview-page`, same recipe as
+     .paper-browse-zoom — a second drawn box around the whole stack would
+     look like a black frame. Alpha 0 keeps the pin without a second edge. */
+  box-shadow: 0 0 0 rgba(30, 30, 28, 0);
   margin: 0 auto;
   max-width: min(100%, 820px);
   /* draft-desk-b step3: offset parent for .draft-a4-repaginating below
@@ -499,11 +510,11 @@
 
 .draft-group-actions button {
   align-items: center;
-  background: var(--eqb-color-paper);
-  border: 1px solid var(--paper-border);
-  border-radius: 7px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
   box-shadow: 0 1px 2px rgba(30, 30, 28, 0.08);
-  color: var(--paper-ink);
+  color: var(--ink-soft);
   display: flex;
   height: 36px;
   justify-content: center;
@@ -513,7 +524,7 @@
 
 .draft-group-actions button:hover {
   border-color: var(--line-strong);
-  color: var(--paper-ink-strong);
+  color: var(--ink);
 }
 
 .draft-group-actions button:active {
@@ -541,7 +552,7 @@
   border-radius: 999px;
   color: var(--ink);
   cursor: pointer;
-  font-size: 11px;
+  font-size: 12px;
   height: auto;
   padding: 4px 9px;
   white-space: nowrap;
@@ -588,23 +599,45 @@
   gap: 10px;
 }
 
-/* 右 rail = 整卷页目录语言（参照 paperBrowsePage.css 的
-   .paper-browse-rail-item 族：暖墨、无边框、hover 洗底、active 加深），
-   sticky top 值沿用本文件既有的 .draft-outline-panel 先例。 */
-/* workbench-header-unify: `.draft-toolbar` retirement removed the sticky
-   tool card that used to occupy the viewport's top ~88px above this rail
-   (Locked Decision 1/2) — AppTopbar itself has never been sticky. Realigned
-   to the exact same sticky offset paper-browse-rail uses (paperBrowsePage.css)
-   now that nothing sticky sits above either rail. */
+/* 左 rail = 整卷页目录语言（paperBrowsePage.css 的 .paper-browse-rail
+   族：淡墨、无边框、无底色块、当前项加深并由小手指出），sticky offset
+   与它同值。 */
 .draft-paper-rail {
   align-self: start;
   display: flex;
   flex-direction: column;
   gap: 4px;
+  max-width: 208px;
   max-height: calc(100vh - 48px);
   overflow-y: auto;
   position: sticky;
   top: 24px;
+}
+
+/* 小手的定位容器：nav 自己会滚动，手必须锚在不滚动的内容层上（整卷页
+   把手放在 .paper-browse-rail-panel 里，同一构造）。padding-left 给手留位，
+   不然选中项左边会把手裁掉。 */
+.draft-paper-rail-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 18px;
+  position: relative;
+}
+
+.draft-paper-rail-hand {
+  align-items: center;
+  color: var(--ink);
+  display: flex;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .draft-paper-rail-hand {
+    transition: top var(--motion-base) var(--ease-out);
+  }
 }
 
 /* workbench-header-unify Locked Decision 5: relocated真值 annotation —
@@ -612,31 +645,35 @@
    tabular-nums), now living at the rail's top instead of a retired
    meta-row above the paper. */
 .draft-paper-rail-meta {
-  color: rgba(var(--paper-ink-rgb), 0.72);
+  color: var(--muted);
   font-size: 12px;
   font-variant-numeric: tabular-nums;
-  margin: 0 0 6px;
+  letter-spacing: 0.02em;
+  margin: 0 0 8px;
+  padding-left: 18px;
 }
 
+/* 目录项：淡墨、无边框、无底色块。此前当前项是一块灰底 pill——那是给
+   目录「配色」，北极星只让动作用墨，当前位置由小手指出。 */
 .draft-paper-rail-item {
   align-items: center;
-  border-radius: 8px;
-  color: var(--paper-ink);
+  color: var(--ink-soft);
   cursor: pointer;
   display: flex;
-  gap: 6px;
-  padding: 6px 10px;
+  font-size: 13px;
+  gap: 8px;
+  padding: 4px 0;
+  position: relative;
   user-select: none;
-  transition: background var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
+  transition: color var(--motion-fast) var(--ease-hover);
 }
 
 .draft-paper-rail-item:hover {
-  background: rgba(var(--paper-ink-rgb), 0.08);
+  color: var(--ink);
 }
 
 .draft-paper-rail-item.active {
-  background: rgba(var(--paper-ink-rgb), 0.12);
-  color: var(--paper-ink-strong);
+  color: var(--ink);
   font-weight: 600;
 }
 
@@ -650,14 +687,24 @@
 }
 
 .draft-paper-rail-grip {
-  color: rgba(var(--paper-ink-rgb), 0.5);
+  color: var(--eqb-color-text-faint);
   cursor: grab;
   flex-shrink: 0;
   opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.draft-paper-rail-item:hover .draft-paper-rail-count {
+  visibility: hidden;
 }
 
 .draft-paper-rail-item:hover .draft-paper-rail-grip {
   opacity: 1;
+  pointer-events: auto;
 }
 
 .draft-paper-rail-no {
@@ -674,9 +721,10 @@
 }
 
 .draft-paper-rail-count {
-  color: rgba(var(--paper-ink-rgb), 0.65);
+  color: var(--eqb-color-text-faint);
   flex-shrink: 0;
-  font-size: 11.5px;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 
@@ -689,14 +737,14 @@
 .draft-paper-rail-acts button {
   background: transparent;
   border: none;
-  border-radius: 5px;
-  color: rgba(var(--paper-ink-rgb), 0.75);
+  border-radius: 4px;
+  color: var(--ink-soft);
   padding: 1px 4px;
 }
 
 .draft-paper-rail-acts button:hover {
-  background: rgba(var(--paper-ink-rgb), 0.12);
-  color: var(--paper-ink-strong);
+  background: var(--surface-strong);
+  color: var(--ink);
 }
 
 .draft-paper-rail-acts button.danger:hover {
@@ -704,8 +752,9 @@
 }
 
 .draft-paper-rail-empty {
-  color: rgba(var(--paper-ink-rgb), 0.65);
-  padding: 6px 10px;
+  color: var(--muted);
+  font-size: 13px;
+  padding: 4px 0;
 }
 
 /* emil-processing: keyframe→transition (findings 表条目3). 入退同轴
@@ -884,8 +933,8 @@
 }
 
 .draft-group-actions-menu-panel {
-  background: var(--eqb-color-paper);
-  border: 1px solid var(--paper-border);
+  background: var(--panel);
+  border: 1px solid var(--line);
   border-radius: 8px;
   box-shadow: 0 8px 24px rgba(30, 30, 28, 0.14);
   display: grid;

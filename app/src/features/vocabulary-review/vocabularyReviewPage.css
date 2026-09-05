@@ -1,8 +1,11 @@
+/* 过生词跟整站同一张奶绿书桌。墨绿只做顶栏身份，动作用墨。
+   词头 / 音节 / 例句走内容字号，不受工具四级字号改写。打印纸面不改。 */
+
 .vocabulary-review-page {
   --vocabulary-headword-size: clamp(48px, 6vw, 76px);
   min-height: 100vh;
-  background: var(--surface);
-  color: var(--ink);
+  background: var(--eqb-color-bg);
+  color: var(--eqb-color-text);
 }
 
 .vocabulary-review-shell {
@@ -21,9 +24,9 @@
 
 .vocabulary-review-heading h1 {
   margin: 0;
-  color: var(--ink-strong);
-  font-size: 28px;
-  font-weight: 650;
+  color: var(--eqb-color-text);
+  font-size: 20px;
+  font-weight: 600;
   line-height: 1.2;
   letter-spacing: -0.02em;
 }
@@ -31,8 +34,8 @@
 .vocabulary-review-heading p {
   max-width: 68ch;
   margin: 8px 0 0;
-  color: var(--muted);
-  font-size: 14px;
+  color: var(--eqb-color-text-muted);
+  font-size: 13px;
   line-height: 1.5;
 }
 
@@ -146,7 +149,7 @@
 
 .vocabulary-student-create p {
   margin: 8px 0 0;
-  color: var(--coral-text);
+  color: var(--eqb-color-danger);
   font-size: 12px;
   line-height: 1.4;
 }
@@ -202,7 +205,7 @@
   padding: 2px 0;
   border: 0;
   background: transparent;
-  color: #1e4a3a;
+  color: var(--eqb-color-text);
   font: inherit;
   font-size: 12px;
   font-weight: 600;
@@ -235,9 +238,9 @@
 
 .vocabulary-progress-explorer-heading h2 {
   margin: 0;
-  color: var(--ink-strong);
-  font-size: 28px;
-  font-weight: 650;
+  color: var(--eqb-color-text);
+  font-size: 20px;
+  font-weight: 600;
   letter-spacing: -0.02em;
 }
 
@@ -293,7 +296,7 @@
 .vocabulary-progress-weeks button.is-selected {
   border-color: var(--line-strong);
   background: var(--surface-strong);
-  color: #1e4a3a;
+  color: var(--eqb-color-text);
 }
 
 .vocabulary-progress-days {
@@ -312,9 +315,9 @@
 .vocabulary-progress-day-heading h3 {
   display: inline;
   margin: 0;
-  color: var(--ink-strong);
-  font-size: 16px;
-  font-weight: 650;
+  color: var(--eqb-color-text);
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .vocabulary-progress-day-heading span,
@@ -382,19 +385,19 @@
 
 .vocabulary-progress-word.is-current {
   border-color: var(--line-strong);
-  background: #f4f8f6;
+  background: var(--eqb-color-desk);
 }
 
 .vocabulary-progress-word.is-selected {
   border-color: var(--line-strong);
   background: var(--surface-strong);
-  color: #1e4a3a;
+  color: var(--eqb-color-text);
 }
 
 .vocabulary-progress-word.is-selected .vocabulary-progress-word-order,
 .vocabulary-progress-word.is-current .vocabulary-progress-word-order {
   border-color: var(--line-strong);
-  color: #1e4a3a;
+  color: var(--eqb-color-text);
 }
 
 .vocabulary-progress-selection {
@@ -406,7 +409,7 @@
   border: 1px solid var(--line-strong);
   border-radius: 8px;
   background: var(--panel);
-  box-shadow: 0 12px 28px rgb(31 45 38 / 10%);
+  box-shadow: var(--eqb-shadow-floating);
 }
 
 .vocabulary-progress-selection > div {
@@ -428,12 +431,12 @@
 }
 
 .vocabulary-progress-selection small {
-  color: var(--coral-text);
+  color: var(--eqb-color-danger);
 }
 
 .vocabulary-progress-status {
   margin: 14px 0 0;
-  color: #1e4a3a;
+  color: var(--eqb-color-text);
   font-weight: 600;
 }
 
@@ -469,9 +472,9 @@
 .vocabulary-rail-heading h2,
 .vocabulary-collection-heading h2 {
   margin: 0;
-  color: var(--ink-strong);
-  font-size: 16px;
-  font-weight: 650;
+  color: var(--eqb-color-text);
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .vocabulary-rail-heading span {
@@ -499,7 +502,7 @@
 
 .vocabulary-group-list li.is-current {
   background: var(--surface-strong);
-  color: #1e4a3a;
+  color: var(--eqb-color-text);
 }
 
 .vocabulary-group-list li.is-complete:not(.is-current) {
@@ -523,7 +526,7 @@
 .is-current .vocabulary-group-marker {
   border-color: var(--line-strong);
   background: var(--action);
-  color: #fff;
+  color: var(--eqb-color-paper);
 }
 
 .vocabulary-group-list li > span:last-child {
@@ -660,8 +663,8 @@
 }
 
 .vocabulary-reveal-prompt strong {
-  color: var(--ink);
-  font-size: 16px;
+  color: var(--eqb-color-text);
+  font-size: 14px;
   font-weight: 600;
 }
 
@@ -685,7 +688,7 @@
   margin: 0;
   padding: 28px;
   background: var(--surface-strong);
-  color: #1e4a3a;
+  color: var(--eqb-color-text);
 }
 
 .vocabulary-visual img {
@@ -697,7 +700,7 @@
 
 .vocabulary-visual figcaption {
   max-width: 22ch;
-  color: #1e4a3a;
+  color: var(--eqb-color-text);
   font-size: 14px;
   line-height: 1.5;
   text-align: center;
@@ -720,7 +723,7 @@
   border-radius: 6px;
   background: var(--panel);
   color: var(--muted);
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .vocabulary-core-meanings {
@@ -809,10 +812,10 @@
 }
 
 .vocabulary-example p strong {
-  color: #1e4a3a;
+  color: var(--eqb-color-text);
   font-weight: 700;
   text-decoration: underline;
-  text-decoration-color: #a5cdbd;
+  text-decoration-color: var(--eqb-color-text-faint);
   text-decoration-thickness: 1.5px;
   text-underline-offset: 3px;
 }
@@ -877,14 +880,14 @@
 }
 
 .vocabulary-control-known {
-  border-color: #a5cdbd;
-  color: #1e4a3a;
+  border-color: var(--eqb-color-border-strong);
+  color: var(--eqb-color-text);
 }
 
 .vocabulary-control-unfamiliar {
-  border-color: #c6c6c0;
-  background: var(--surface-strong);
-  color: var(--ink-strong);
+  border-color: var(--eqb-color-border-strong);
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text);
 }
 
 .vocabulary-control kbd {
@@ -991,15 +994,15 @@
 
 .vocabulary-completion-state h2 {
   margin: 20px 0 8px;
-  color: var(--ink-strong);
-  font-size: 28px;
-  font-weight: 650;
+  color: var(--eqb-color-text);
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .vocabulary-completion-state p {
   margin: 0;
-  color: var(--muted);
-  font-size: 16px;
+  color: var(--eqb-color-text-muted);
+  font-size: 14px;
 }
 
 .vocabulary-completion-actions {
@@ -1217,9 +1220,9 @@
 
 .vocabulary-run-setup h2 {
   margin: 20px 0 8px;
-  color: var(--ink-strong);
-  font-size: 28px;
-  font-weight: 650;
+  color: var(--eqb-color-text);
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .vocabulary-run-setup p {
@@ -1305,7 +1308,7 @@
 
 .vocabulary-review-accent-control button.is-selected {
   background: var(--surface-strong);
-  color: #1e4a3a;
+  color: var(--eqb-color-text);
 }
 
 .vocabulary-review-accent-control button:focus-visible,
@@ -1494,13 +1497,13 @@
 
 .vocabulary-request-error {
   margin: 12px 0 0 !important;
-  color: var(--coral-text) !important;
+  color: var(--eqb-color-danger) !important;
   font-size: 14px !important;
 }
 
 .vocabulary-share-ready {
   margin-top: 16px !important;
-  color: #1e4a3a !important;
+  color: var(--eqb-color-text) !important;
   font-size: 14px !important;
 }
 

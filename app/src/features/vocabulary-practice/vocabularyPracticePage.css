@@ -1,7 +1,9 @@
+/* 过生词练习跟整站同一张奶绿书桌。卡片上的词是内容，标题走工具字号。 */
+
 .vocabulary-practice-page {
   min-height: 100vh;
-  background: var(--surface);
-  color: var(--ink);
+  background: var(--eqb-color-bg);
+  color: var(--eqb-color-text);
 }
 
 .vocabulary-practice-shell {
@@ -40,28 +42,27 @@
   margin: 28px 0 22px;
 }
 
-.vocabulary-practice-eyebrow {
-  margin: 0 0 8px;
-  color: var(--ink);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+.vocabulary-practice-set {
+  margin: 8px 0 0;
+  color: var(--eqb-color-text-muted);
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 .vocabulary-practice-heading h1,
 .vocabulary-practice-status h1 {
   margin: 0;
-  color: var(--ink-strong);
-  font-size: 28px;
-  font-weight: 650;
+  color: var(--eqb-color-text);
+  font-size: 20px;
+  font-weight: 600;
   letter-spacing: -0.02em;
 }
 
 .vocabulary-practice-heading > div:first-child > p:last-child {
-  margin: 8px 0 0;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.6;
+  margin: 4px 0 0;
+  color: var(--eqb-color-text-muted);
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 .vocabulary-practice-round {
@@ -76,8 +77,8 @@
 }
 
 .vocabulary-practice-round strong {
-  color: var(--ink-strong);
-  font-size: 16px;
+  color: var(--eqb-color-text);
+  font-size: 14px;
 }
 
 .vocabulary-practice-round span,
