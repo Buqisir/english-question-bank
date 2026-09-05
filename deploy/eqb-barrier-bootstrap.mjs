@@ -35,6 +35,7 @@ function decode(text) {
 }
 const STAGES = ['transport-load', 'dispatch-stage', 'manager-launch', 'journal-sync', 'journal-read',
   'remote-output', 'root-entry', 'deploy-lock', 'install-mutation', 'selected-preflight',
+  'prior-dispatch', 'prior-unit', 'preinstall-checks',
   'list-units', 'list-jobs', 'live-main', ...Array.from({ length: 6 }, (_, i) => `health-${i}`)]
 export function failureResult(transactionId, stage, error = {}) {
   const d = error.diagnostic || {}
@@ -254,23 +255,208 @@ export function parseRouteProof(text, expected) {
   return value
 }
 
-// Caller owns the existing deploy.lock for this entire function. Production CLI
-// below is the sole mutation entrypoint; injected paths/proofs are fake-host seams.
-export function installLocked(payloadText, readinessText, transactionId, options = {}) {
+// Shared readonly checks. A probe takes a fresh snapshot; installation additionally
+// compares the approved readiness bytes and age. Neither path skips live main.
+export function preInstallChecks(payloadText, readinessText = null, options = {}) {
   const config = configuration(options)
   const payload = parsePayload(payloadText)
-  const previous = parseReadiness(readinessText, payloadText)
-  check(typeof transactionId === 'string' && UUID.test(transactionId), 'Invalid transaction')
-  const age = Date.now() - Date.parse(previous.inspectedAt)
-  check(age >= 0 && age <= 120_000, 'Readiness stale or clock regressed')
-  requireReady(previous, payload)
+  const previous = readinessText === null ? null : parseReadiness(readinessText, payloadText)
+  if (previous) {
+    const age = Date.now() - Date.parse(previous.inspectedAt)
+    check(age >= 0 && age <= 120_000, 'Readiness stale or clock regressed')
+    requireReady(previous, payload)
+  }
   const fresh = inspectHost(payloadText, config)
-  check(canonical(fresh.nodes) === canonical(previous.nodes)
+  if (previous) check(canonical(fresh.nodes) === canonical(previous.nodes)
     && fresh.productionSha === previous.productionSha, 'Host identity changed since readiness')
   requireReady(fresh, payload)
   // CI authority is verified by the trusted Deployment adapter immediately
   // before dispatch; recheck live-main identity here, under the host lock.
   config.currentMain(payload.targetSha)
+  return fresh
+}
+
+// This is a trusted Deployment export, not a provider signature. Bind its exact
+// retained bytes without forwarding output (which may contain sensitive text).
+export function priorTatEvidence(text) {
+  let value
+  try { value = JSON.parse(text) } catch { throw new Error('Invalid prior TAT evidence') }
+  check(keys(value, ['commandId', 'invocationId', 'invocationTaskId', 'invocationStatus', 'taskStatus', 'exitCode', 'output', 'targetDigest'])
+    && typeof value.commandId === 'string' && /^cmd-[a-z0-9]{8,64}$/u.test(value.commandId)
+    && typeof value.invocationId === 'string' && /^inv-[a-z0-9]{8,64}$/u.test(value.invocationId)
+    && typeof value.invocationTaskId === 'string' && /^invt-[a-z0-9]{8,64}$/u.test(value.invocationTaskId)
+    && value.invocationStatus === 'FAILED' && value.taskStatus === 'FAILED' && value.exitCode === 70
+    && typeof value.output === 'string' && typeof value.targetDigest === 'string' && DIGEST.test(value.targetDigest),
+  'Prior TAT must be the retained terminal failed export')
+  const { output, ...summary } = value
+  return { ...summary, evidenceDigest: hash(text) }
+}
+
+export function parseProbeRequest(text, payloadText) {
+  const value = decode(text)
+  const payload = parsePayload(payloadText)
+  check(keys(value, ['schemaVersion', 'transactionId', 'targetSha', 'operatorDigest', 'prior'])
+    && value.schemaVersion === 'eqb-barrier-probe-request-v1'
+    && typeof value.transactionId === 'string' && UUID.test(value.transactionId)
+    && value.targetSha === payload.targetSha
+    && typeof value.operatorDigest === 'string' && DIGEST.test(value.operatorDigest)
+    && keys(value.prior, ['transactionId', 'targetSha', 'payloadDigest', 'operatorDigest', 'readinessDigest', 'tat'])
+    && typeof value.prior.transactionId === 'string' && UUID.test(value.prior.transactionId)
+    && value.transactionId !== value.prior.transactionId
+    && typeof value.prior.targetSha === 'string' && SHA.test(value.prior.targetSha)
+    && ['payloadDigest', 'operatorDigest', 'readinessDigest'].every(k => typeof value.prior[k] === 'string' && DIGEST.test(value.prior[k])),
+  'Invalid pre-install probe request')
+  const t = value.prior.tat
+  check(keys(t, ['commandId', 'invocationId', 'invocationTaskId', 'invocationStatus', 'taskStatus', 'exitCode', 'targetDigest', 'evidenceDigest'])
+    && typeof t.evidenceDigest === 'string' && DIGEST.test(t.evidenceDigest), 'Invalid prior TAT binding')
+  const { evidenceDigest, ...summary } = t
+  priorTatEvidence(canonical({ ...summary, output: '' }))
+  return value
+}
+
+export function parseIdleUnit(text) {
+  const lines = text.trim().split('\n')
+  const pairs = lines.map(line => { const i = line.indexOf('='); return [line.slice(0, i), line.slice(i + 1)] })
+  const unit = Object.fromEntries(pairs)
+  check(lines.length === 6 && keys(unit, ['LoadState', 'ActiveState', 'SubState', 'MainPID', 'ControlPID', 'Job'])
+    && ['loaded', 'not-found'].includes(unit.LoadState)
+    && ((unit.ActiveState === 'inactive' && unit.SubState === 'dead') || (unit.ActiveState === 'failed' && unit.SubState === 'failed'))
+    && (unit.LoadState !== 'not-found' || unit.ActiveState === 'inactive')
+    && unit.MainPID === '0' && unit.ControlPID === '0' && ['', '0'].includes(unit.Job), 'Prior unit active or unprovable')
+  return unit
+}
+
+export function parseProbe(text, requestText, payloadText) {
+  const request = parseProbeRequest(requestText, payloadText)
+  const value = decode(text)
+  check(keys(value, ['schemaVersion', 'requestDigest', 'payloadDigest', 'transactionId', 'targetSha', 'historical',
+    'current', 'executionAuthorized', 'retryAllowed', 'observedAt', 'readiness', 'unit', 'failure'])
+    && value.schemaVersion === 'eqb-barrier-probe-v1' && value.requestDigest === hash(requestText)
+    && value.payloadDigest === hash(payloadText) && value.transactionId === request.transactionId
+    && value.targetSha === request.targetSha && value.historical === 'unattributable'
+    && value.executionAuthorized === false && value.retryAllowed === false && iso(value.observedAt)
+    && ['passed', 'failed'].includes(value.current), 'Invalid pre-install probe')
+  if (value.current === 'passed') {
+    check(value.failure === null && value.unit !== null, 'Probe lacks proof')
+    const readiness = parseReadiness(canonical(value.readiness), payloadText)
+    requireReady(readiness, parsePayload(payloadText))
+    check(readiness.diagnostics.processes.length === 0 && readiness.diagnostics.units === 'omitted'
+      && readiness.diagnostics.jobs === 'omitted', 'Unsafe probe diagnostics')
+    check(value.observedAt >= readiness.inspectedAt, 'Probe clock regressed')
+    check(keys(value.unit, ['LoadState', 'ActiveState', 'SubState', 'MainPID', 'ControlPID', 'Job'])
+      && Object.values(value.unit).every(v => typeof v === 'string'), 'Invalid unit proof')
+    parseIdleUnit(Object.entries(value.unit).map(([k, v]) => `${k}=${v}`).join('\n'))
+  } else {
+    check(value.readiness === null && value.unit === null, 'Failed probe is not readiness')
+    parseFailure(canonical(value.failure), request.transactionId)
+  }
+  return value
+}
+
+export function failedProbe(requestText, payloadText, error = {}, stage = 'remote-output') {
+  const request = parseProbeRequest(requestText, payloadText)
+  return { schemaVersion: 'eqb-barrier-probe-v1', requestDigest: hash(requestText), payloadDigest: hash(payloadText),
+    transactionId: request.transactionId, targetSha: request.targetSha, historical: 'unattributable', current: 'failed',
+    executionAuthorized: false, retryAllowed: false, observedAt: new Date().toISOString(), readiness: null, unit: null,
+    failure: failureResult(request.transactionId, stage, error) }
+}
+
+export function parseProbeExecution(execution, requestText, payloadText) {
+  try {
+    const report = parseProbe(execution.output, requestText, payloadText)
+    check(execution.exitCode === (report.current === 'passed' ? 0 : 70), 'Probe exit mismatch')
+    const now = Date.now()
+    check(Date.parse(report.observedAt) <= now, 'Probe observation is in the future')
+    const age = now - Date.parse(report.readiness?.inspectedAt || report.observedAt)
+    check(age >= 0 && age <= 120_000, 'Probe stale or clock regressed')
+    return report
+  } catch {
+    const request = parseProbeRequest(requestText, payloadText)
+    let error = { diagnostic: { exitCode: execution.exitCode, stdoutBytes: Buffer.byteLength(execution.output || '') } }
+    try { error = { diagnostic: parseFailure(execution.output, request.transactionId).diagnostic } } catch { /* No raw output. */ }
+    return failedProbe(requestText, payloadText, error)
+  }
+}
+
+// Caller holds deploy.lock. Reads only fixed files under the two bound UUIDs;
+// never imports old retained code, creates/reserves an attempt or erases evidence.
+export function preInstallProbe(payloadText, requestText, options = {}) {
+  const config = configuration(options)
+  const request = parseProbeRequest(requestText, payloadText)
+  const result = failedProbe(requestText, payloadText)
+  let stage = 'prior-dispatch'
+  try {
+    const base = path.join(config.root, 'deployments')
+    const dispatch = path.join(base, `barrier-dispatch-${request.prior.transactionId}`)
+    config.ancestors(path.join(dispatch, 'payload.json'), config.uid, config.gid)
+    safeNode(dispatch, 'directory', config.uid, config.gid, 0o700)
+    const read = name => {
+      const file = path.join(dispatch, name)
+      const stat = safeNode(file, 'file', config.uid, config.gid, 0o600)
+      check(stat.size <= 2 * 1024 * 1024, 'Prior evidence too large')
+      const fd = fs.openSync(file, fs.constants.O_RDONLY | fs.constants.O_NOFOLLOW)
+      try {
+        const opened = fs.fstatSync(fd)
+        check(opened.dev === stat.dev && opened.ino === stat.ino && opened.uid === config.uid && opened.gid === config.gid
+          && opened.nlink === 1 && (opened.mode & 0o7777) === 0o600, 'Prior evidence replaced')
+        return fs.readFileSync(fd, 'utf8')
+      } finally { fs.closeSync(fd) }
+    }
+    const oldPayloadText = read('payload.json')
+    const oldPayload = parsePayload(oldPayloadText)
+    check(oldPayload.targetSha === request.prior.targetSha && hash(oldPayloadText) === request.prior.payloadDigest,
+      'Prior payload mismatch')
+    check(hash(read('eqb-barrier-bootstrap.mjs')) === request.prior.operatorDigest
+      && hash(read('eqb-deploy-barrier.mjs')) === oldPayload.files[MANAGER].sha256, 'Prior code mismatch')
+    const oldReadinessText = read('readiness.json')
+    check(hash(oldReadinessText) === request.prior.readinessDigest, 'Prior readiness mismatch')
+    const oldReadiness = parseReadiness(oldReadinessText, oldPayloadText)
+    for (const name of [`barrier-install-${request.prior.transactionId}`, `barrier-install-${request.transactionId}`,
+      `barrier-dispatch-${request.transactionId}`, `root-dispatch-${request.transactionId}.json`,
+      `host-configuration/versions/${request.prior.targetSha}`]) {
+      const file = path.join(base, name)
+      config.ancestors(file, config.uid, config.gid)
+      check(!exists(file), 'Retained attempt/target or reused UUID; stop')
+    }
+    stage = 'prior-unit'
+    const unitName = `eqb-barrier-install-${request.prior.transactionId}.service`
+    const unitText = (options.run || readonlyCommand)(stage, '/usr/bin/systemctl', ['show', unitName,
+      '--no-pager', '--property=LoadState,ActiveState,SubState,MainPID,ControlPID,Job'])
+    let unit
+    try { unit = parseIdleUnit(unitText) } catch {
+      const error = new Error('Prior unit active or unprovable')
+      error.diagnostic = { stage, exitCode: 0, stdoutBytes: Buffer.byteLength(unitText) }
+      throw error
+    }
+    stage = 'preinstall-checks'
+    const readiness = preInstallChecks(payloadText, null, config)
+    check(readiness.previousSha === oldReadiness.previousSha && readiness.productionSha === oldReadiness.productionSha,
+      'Old application/marker binding changed')
+    for (const name of ['marker', ...Object.keys(FILES)]) {
+      check(readiness.nodes[name]?.sha256 === oldReadiness.nodes[name]?.sha256, 'Prior installed hashes changed')
+    }
+    // Broad unit/job descriptions are diagnostic, not authority or safe output.
+    readiness.diagnostics = { processes: [], units: 'omitted', jobs: 'omitted' }
+    result.observedAt = new Date().toISOString()
+    check(result.observedAt >= readiness.inspectedAt, 'Probe clock regressed')
+    result.readiness = readiness
+    result.unit = unit
+    result.current = 'passed'
+    result.failure = null
+  } catch (error) {
+    result.failure = failureResult(request.transactionId, stage, error)
+  }
+  return parseProbe(canonical(result), requestText, payloadText)
+}
+
+// Caller owns the existing deploy.lock for this entire function. Production CLI
+// below is the sole mutation entrypoint; injected paths/proofs are fake-host seams.
+export function installLocked(payloadText, readinessText, transactionId, options = {}) {
+  const config = configuration(options)
+  const payload = parsePayload(payloadText)
+  check(typeof transactionId === 'string' && UUID.test(transactionId), 'Invalid transaction')
+  check(typeof readinessText === 'string', 'Installation requires approved readiness')
+  const previous = preInstallChecks(payloadText, readinessText, config)
   const paths = hostPaths(config, previous.previousSha, payload.targetSha)
   const directory = path.join(config.root, 'deployments', `barrier-install-${transactionId}`)
   check(!exists(directory), 'Attempt exists; inspect, do not retry')

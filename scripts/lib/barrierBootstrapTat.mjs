@@ -1,15 +1,20 @@
 import { gzipSync } from 'node:zlib'
-import { canonical, failureResult, parsePayload, parseReadiness } from '../../deploy/eqb-barrier-bootstrap.mjs'
+import { canonical, failureResult, parsePayload, parseReadiness, parseProbeRequest } from '../../deploy/eqb-barrier-bootstrap.mjs'
 import { hash } from '../../deploy/eqb-deploy-barrier.mjs'
 
 // Returns bytes only. Dispatch/poll is the existing single-shot TAT adapter;
 // neither constructing a command nor computing its digest reads credentials.
-export function buildBarrierTatCommand({ operatorSource, payloadText, readinessText = null, transactionId = null }) {
+export function buildBarrierTatCommand({ operatorSource, payloadText, readinessText = null, transactionId = null, probeText = null }) {
   const payload = parsePayload(payloadText)
   if (typeof operatorSource !== 'string' || !operatorSource.startsWith('#!/usr/bin/env node\n')
     || operatorSource.includes('\0')) throw new Error('Invalid bootstrap operator source')
   const managerSource = Buffer.from(payload.files['deploy/eqb-deploy-barrier.mjs'].base64, 'base64').toString('utf8')
   const install = readinessText !== null
+  const probe = probeText === null ? null : parseProbeRequest(probeText, payloadText)
+  if (probe && (install || transactionId !== null || probe.operatorDigest !== hash(operatorSource))) {
+    throw new Error('Probe cannot install or use a different operator')
+  }
+  const responseId = probe?.transactionId ?? transactionId
   if (install) {
     parseReadiness(readinessText, payloadText)
     if (typeof transactionId !== 'string'
@@ -24,7 +29,7 @@ export function buildBarrierTatCommand({ operatorSource, payloadText, readinessT
     if (Buffer.from(content).toString('base64') !== file.base64) throw new Error('Bootstrap files must be UTF-8 source')
     return [name, { mode: file.mode, sha256: file.sha256, content }]
   })) }
-  const bundle = canonical({ operatorSource, managerSource, transportPayload, readinessText, transactionId })
+  const bundle = canonical({ operatorSource, managerSource, transportPayload, readinessText, transactionId, probeText })
   const encoded = gzipSync(bundle, { level: 9 }).toString('base64')
   const node = `
 import fs from 'node:fs';
@@ -82,12 +87,15 @@ process.exitCode = receipt.conclusion === 'success' ? 0 : 70;
 ` : `
 const manager = await import(managerURL);
 manager.safeAncestors('/opt/eqb/deployments/deploy.lock');
-const report = manager.withDeploymentLock('/opt/eqb', () => operator.inspectHost(input.payloadText));
+const report = manager.withDeploymentLock('/opt/eqb', () => ${probe
+    ? 'operator.preInstallProbe(input.payloadText, input.probeText)'
+    : 'operator.inspectHost(input.payloadText)'});
 process.stdout.write(operator.canonical(report));
+${probe ? "process.exitCode = report.current === 'passed' ? 0 : 70;" : ''}
 `}
 } catch (error) {
-  const fallback = ${JSON.stringify(failureResult(transactionId, 'transport-load'))};
-  process.stdout.write(operator ? operator.canonical(operator.failureResult(${JSON.stringify(transactionId)}, stage, error)) : JSON.stringify(fallback) + '\\n');
+  const fallback = ${JSON.stringify(failureResult(responseId, 'transport-load'))};
+  process.stdout.write(operator ? operator.canonical(operator.failureResult(${JSON.stringify(responseId)}, stage, error)) : JSON.stringify(fallback) + '\\n');
   process.exitCode = 70;
 }
 `
