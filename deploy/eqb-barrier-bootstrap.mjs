@@ -365,7 +365,9 @@ export function parseProbeExecution(execution, requestText, payloadText) {
   try {
     const report = parseProbe(execution.output, requestText, payloadText)
     check(execution.exitCode === (report.current === 'passed' ? 0 : 70), 'Probe exit mismatch')
-    const age = Date.now() - Date.parse(report.readiness?.inspectedAt || report.observedAt)
+    const now = Date.now()
+    check(Date.parse(report.observedAt) <= now, 'Probe observation is in the future')
+    const age = now - Date.parse(report.readiness?.inspectedAt || report.observedAt)
     check(age >= 0 && age <= 120_000, 'Probe stale or clock regressed')
     return report
   } catch {
@@ -410,7 +412,8 @@ export function preInstallProbe(payloadText, requestText, options = {}) {
     check(hash(oldReadinessText) === request.prior.readinessDigest, 'Prior readiness mismatch')
     const oldReadiness = parseReadiness(oldReadinessText, oldPayloadText)
     for (const name of [`barrier-install-${request.prior.transactionId}`, `barrier-install-${request.transactionId}`,
-      `barrier-dispatch-${request.transactionId}`, `host-configuration/versions/${request.prior.targetSha}`]) {
+      `barrier-dispatch-${request.transactionId}`, `root-dispatch-${request.transactionId}.json`,
+      `host-configuration/versions/${request.prior.targetSha}`]) {
       const file = path.join(base, name)
       config.ancestors(file, config.uid, config.gid)
       check(!exists(file), 'Retained attempt/target or reused UUID; stop')

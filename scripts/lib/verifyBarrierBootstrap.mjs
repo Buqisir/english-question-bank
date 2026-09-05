@@ -195,6 +195,12 @@ export async function verifyBarrierBootstrap(repository) {
         const future = structuredClone(risk)
         future.readiness.inspectedAt = future.observedAt = new Date(Date.now() + 60_000).toISOString()
         assert.equal(parseProbeExecution({ output: canonical(future), exitCode: 0 }, requestText, payload).current, 'failed')
+        const futureObservation = structuredClone(risk)
+        futureObservation.observedAt = new Date(Date.now() + 60_000).toISOString()
+        const rejectedObservation = parseProbeExecution({ output: canonical(futureObservation), exitCode: 0 }, requestText, payload)
+        assert.equal(rejectedObservation.current, 'failed')
+        assert.equal(rejectedObservation.readiness, null)
+        assert.equal(rejectedObservation.retryAllowed, false)
         assert.equal(parseProbeExecution({ output: canonical(risk), exitCode: 70 }, requestText, payload).current, 'failed')
         for (const text of ['', secret, canonical(risk) + secret]) {
           assert.equal(parseProbeExecution({ output: text, exitCode: 0 }, requestText, payload).current, 'failed')
@@ -221,12 +227,20 @@ export async function verifyBarrierBootstrap(repository) {
           assert.throws(() => parseProbe(canonical(bad), requestText, payload))
         }
         for (const entry of [`barrier-install-${oldId}`, `barrier-install-${newId}`, `barrier-dispatch-${newId}`,
-          `host-configuration/versions/${oldTarget}`]) {
+          `root-dispatch-${newId}.json`, `host-configuration/versions/${oldTarget}`]) {
           const file = path.join(root, 'deployments', entry)
           fs.symlinkSync('missing', file)
           assert.equal(probe().current, 'failed')
           fs.unlinkSync(file)
         }
+        const consumed = path.join(root, 'deployments', `root-dispatch-${newId}.json`)
+        fs.writeFileSync(consumed, 'invalid terminal receipt', { mode: 0o600 })
+        const rejectedConsumed = probe()
+        assert.equal(rejectedConsumed.current, 'failed')
+        assert.equal(rejectedConsumed.readiness, null)
+        assert.equal(rejectedConsumed.retryAllowed, false)
+        assert.equal(fs.readFileSync(consumed, 'utf8'), 'invalid terminal receipt')
+        fs.unlinkSync(consumed)
         const retained = path.join(oldDispatch, 'payload.json')
         fs.writeFileSync(retained, `${oldPayload} `)
         assert.equal(probe().current, 'failed')
