@@ -8,11 +8,8 @@ import {
   ampOrbCILockInvocation,
   createGitHubAppInstallationTokenProvider,
   createGitHubCheckWriter,
-  createGitHubStatusWriter,
   defaultAmpOrbCIStateDir,
-  discoverAmpOrbCIJobs,
   drainAmpOrbCIQueue,
-  enqueueAmpOrbCIJob,
   executeAmpOrbCILanes,
   repositoryRootFromModule,
   resolveAmpOrbCIPullRequest,
@@ -49,7 +46,7 @@ function parseInput() {
 const repositoryRoot = repositoryRootFromModule(import.meta.url, 1)
 const stateDir = defaultAmpOrbCIStateDir(repositoryRoot)
 const controllerCommand = process.argv[2]
-const queueCommands = new Set(['discover', 'drain'])
+const queueCommands = new Set(['drain'])
 
 if (process.env.AMP_ORB_CI_LOCK_HELD !== '1') {
   const invocation = ampOrbCILockInvocation({
@@ -73,15 +70,9 @@ if (process.env.AMP_ORB_CI_LOCK_HELD !== '1') {
 
 try {
   if (!queueCommands.has(controllerCommand) && controllerCommand !== 'run') {
-    throw new Error('Usage: amp-orb-ci.mjs discover|drain|run')
+    throw new Error('Usage: amp-orb-ci.mjs drain|run')
   }
-  const token = String(process.env.QUESTION_BANK_AMP_CI_GITHUB_STATUS_TOKEN || '')
-  const writeStatus = createGitHubStatusWriter({
-    token,
-    threadId: String(process.env.AMP_THREAD_ID || ''),
-  })
-  const checksEnabled = process.env.QUESTION_BANK_AMP_CI_GITHUB_CHECKS_ENABLED === '1'
-  const publishCheck = checksEnabled
+  const publishCheck = controllerCommand === 'drain'
     ? createGitHubCheckWriter({
         appId: process.env.QUESTION_BANK_AMP_CI_GITHUB_APP_ID,
         getInstallationToken: createGitHubAppInstallationTokenProvider({
@@ -94,19 +85,12 @@ try {
   const runJob = (input) => runAmpOrbCIJob(input, {
     stateDir: defaultAmpOrbCIStateDir(repositoryRoot),
     publishCheck,
-    writeStatus,
     execute: ({ input: exactInput, onFastResult, writeOutput }) => executeAmpOrbCILanes(exactInput, {
       onFastResult,
       repositoryRoot,
       writeOutput,
     }),
   })
-  if (controllerCommand === 'discover') {
-    const jobs = await discoverAmpOrbCIJobs({ token })
-    const queued = jobs.map((input) => enqueueAmpOrbCIJob(input, { stateDir }))
-      .filter(({ outcome }) => outcome === 'queued').length
-    console.log(`Amp Orb CI discovered ${jobs.length} current target(s); ${queued} newly queued.`)
-  }
   if (queueCommands.has(controllerCommand)) {
     const results = await drainAmpOrbCIQueue({
       stateDir,

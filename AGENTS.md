@@ -93,13 +93,12 @@ uniquely supplies; otherwise keep it outside daily packs.
   `node scripts/verify-ci.mjs --plan-json --changed-file <path>` (repeat the
   flag for multiple paths). Treat its `risk` as the primary machine result and
   apply the explicit high-risk overrides below.
-- `ui-micro`, `ordinary-local-feature`, `known-shape-paper-data`, and
-  `single-paper-import` are eligible for autonomous Ship after their
-  proportionate checks pass. `shared-renderer-contract` may Ship only after the
-  shared-renderer final gate above, including affected real Screen/Print/PDF
-  verification; Focused CI must also run `pnpm -C app verify:paper`.
+- All classified changes use the task-branch PR route. A
+  `shared-renderer-contract` still requires the shared-renderer final gate
+  above, including affected real Screen/Print/PDF verification.
 - `auth-persistence-migration`, `mixed-high-risk-fallback`,
-  `unknown-fallback`, and `git-diff-fallback` require a PR. So do changes to
+  `unknown-fallback`, and `git-diff-fallback` require the stronger PR review
+  and final gates. So do changes to
   `.github/workflows/`, `scripts/verify-ci.mjs`, `.agents/setup`,
   `.agents/ship.md`, these `AGENTS.md` Ship/verification rules, paths in
   `EQB_PERSISTENCE_AUTHORITY_PATHS` or `EQB_HOST_CONFIGURATION_PATHS`,
@@ -108,11 +107,6 @@ uniquely supplies; otherwise keep it outside daily packs.
   safely reverted as one commit, and any change the agent judges clearly high
   risk. High-risk PRs require the relevant review, `verify:all`, and E2E; never
   push them directly to `main`.
-- Autonomous Ship is allowed only when scope stayed fixed, the commit is
-  independently revertible, all first-layer and focused user-flow checks pass,
-  no serious defect is known, the commit has been revalidated on the latest
-  `origin/main`, its risk is eligible, and Focused CI has not reported a current
-  `main` failure.
 - Immediately before Ship, run `git fetch origin`, rebase the task branch onto
   `origin/main`, require `git status --porcelain` to be empty, then rerun
   `pnpm -C app verify:changed -- --base-ref origin/main` and the affected
@@ -121,44 +115,35 @@ uniquely supplies; otherwise keep it outside daily packs.
   the Goal while preserving unrelated behavior; apply the authorization boundary
   above if a conflict requires broader scope.
 - Push the task branch and merge its PR only when the Goal includes Ship and
-  the reviewed candidate's required Hosted checks pass. Do not bypass branch
-  protection or force-push `main`; Custom Ship remains inactive.
+  the reviewed candidate has the required pinned `Amp Orb Verify` App Check.
+  Do not bypass branch protection or force-push `main`; Custom Ship remains
+  inactive.
 - After Ship, report the exact 40-hex `main` SHA and parent, machine risk,
   changed files, one-paragraph summary, and every command as `PASS` or `SKIP`
-  with the limitation. Hand that exact SHA to Focused CI and keep the
-  development thread available until it replies.
+  with the limitation. Link the exact GitHub App Check; no Focused/Low report,
+  private-receipt retrieval, human CI handoff or reply is a daily Ship gate.
 
-## Focused CI
+## Dedicated CI authority
 
-- Focused CI is a reporting and diagnostic layer over automatic dedicated-CI
-  execution. Its agent turn must not edit tracked files, commit, push, revert,
-  open a PR, write GitHub status or Check state, access Secrets, deploy, or run
-  a second Full suite. The automatic `amp-orb-ci` controller is the sole
-  dedicated machine execution policy: it verifies the exact SHA in isolated
-  Fast and Full lanes and records private receipts. The Focused thread reads
-  that evidence, reports PASS/FAIL, and may diagnose a failure without
-  repeating Full.
-- A separately activated trusted webhook controller may write only the
-  ADR-0025 `Amp Orb Verify` Check. This exception never applies to the Focused
-  agent turn, manual/discovery/rerequest diagnostics, or candidate code.
-- A SHA awaiting Focused CI may not be deployed. Independent development may
-  continue, but a task that depends on that SHA may not Ship before it passes.
-- On Focused CI failure, pause every subsequent Ship, report decisive evidence
-  and the first bad commit when identifiable, and recommend the smallest safe
-  revert. Focused CI only recommends; it never reverts. A revert requires Owner
-  authorization and follows the same Ship process.
-- A Focused CI pass is not deployment authority. The deployment machine gate
-  remains `hosted-only`: successful, non-manual hosted `verify` and `e2e` from
-  numeric `github-actions` App ID `15368`, workflow ID `282244920`, attempt 1,
-  on the exact current `main` SHA and one suite; `workflow_dispatch` and rerun
-  diagnostics cannot satisfy it. ADR-0025's other modes remain disabled until
-  separately authorized.
-- The legacy dedicated-CI Sentinel/Discovery and Action-wake paths remain
-  dormant. Do not start or drain them, reload their thread/plugin, synthesize or
-  retry wake/webhook events, or copy an uncommitted workspace snapshot into
-  them. This does not authorize enabling the disabled App writer. See ADR-0024
-  for coordination, ADR-0022 for retained history, and ADR-0025 for the App
-  protocol and staged activation boundary.
+- The automatic `amp-orb-ci` controller is the sole dedicated-CI machine
+  executor. A natural HMAC-authenticated webhook runs isolated Fast and Full
+  lanes, stores a private receipt, and writes only ADR-0025's exact `Amp Orb
+  Verify` Check from App ID `4835036`.
+- Normal operation reads GitHub directly: check the current PR test-merge SHA
+  or exact live `main`, numeric App ID, name, status and conclusion. The former
+  High CI thread is only the infrastructure host for the webhook/controller,
+  not a per-Ship agent. Low is invoked only for requested troubleshooting.
+  Neither agent runs, approves, or reports every normal Ship; private receipts
+  are recovery/diagnostic evidence, not an additional authority.
+- The Deployment reader requires that exact App Check through
+  `QUESTION_BANK_DEPLOY_AMP_CHECK_APP_ID`; missing, pending, malformed,
+  wrong-SHA, or ambiguous evidence fails closed. Hosted checks, Commit Statuses,
+  manual diagnostics, and a human report are not authority or fallback.
+- The legacy dedicated-CI Sentinel/Discovery and Action-wake paths are retired.
+  Do not start or drain them, reload their old thread/plugin, synthesize or
+  retry their events, or copy an uncommitted workspace snapshot into them. See
+  ADR-0022 for retained history and ADR-0025 for the active protocol and
+  cutover boundary.
 
 ## Dedicated Deployment Orb
 
@@ -169,11 +154,14 @@ uniquely supplies; otherwise keep it outside daily packs.
   current `main` and run
   `node scripts/amp-orb-deploy.mjs deploy --owner-said-deploy-latest`. Never ask
   the Owner to copy a SHA.
-- The deploy command requires exact-main successful non-manual hosted `verify`
-  and `e2e` from the `github-actions` App, then sends that SHA through pinned
-  restricted SSH to the root-owned fixed host controller. Never stream candidate
-  deployment code, bypass the forced command, or use the legacy in-place deploy
-  after cutover.
+- The deploy command requires the exact-main successful `Amp Orb Verify` Check
+  from App ID `4835036`, selected through
+  `QUESTION_BANK_DEPLOY_AMP_CHECK_APP_ID`, then sends that SHA through pinned
+  restricted SSH to the root-owned fixed host controller. Missing, pending,
+  malformed, wrong-SHA, or ambiguous Check evidence fails closed; legacy
+  authority-mode configuration is rejected. Never stream candidate deployment
+  code, bypass the forced command, or use the legacy in-place deploy after
+  cutover.
 - A code-only Goal excludes migration, Review/paper promotion, DB/R2 mutation
   and controller/host changes. A Goal that explicitly includes reviewed entry
   maintenance and deployment covers both, without an extra activation approval.

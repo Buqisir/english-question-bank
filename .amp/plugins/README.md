@@ -73,8 +73,8 @@ operations that remain disabled until separately authorized by the Owner.
 
 ## GitHub CI Orb
 
-`github-ci-wakeup.js` is an inert-by-default CI wakeup for one dedicated private project
-Orb thread. A verified GitHub delivery is atomically written to that Orb's private mode-0600 disk
+`github-ci-wakeup.js` is the dedicated private-project CI webhook controller.
+A verified natural GitHub delivery is atomically written to that Orb's private mode-0600 disk
 queue before the 30-second webhook handler starts a background queue drainer and returns. Plugin
 startup starts a drainer only when that queue already contains recovery work, so an empty automatic
 plugin load does not require an early Orb keepalive lease. If a recovery lease is temporarily
@@ -107,19 +107,19 @@ network lookup. The background controller resolves the current `refs/pull/<numbe
 it only when its two parents exactly match the signed delivery's base and head, and never substitutes
 the head SHA. It then passes a one-use read-only Git bundle—not a repository credential—
 to the runner. Workflow v4 starts two separate candidate checkouts concurrently: the Fast lane runs
-the six existing GitHub E2E commands on isolated ports, while the Full lane runs `verify:all`. The
-informational `Amp Orb Verify (fast)` status reports as soon as E2E settles. With App publication
-disabled, the aggregate informational `Amp Orb Verify` status waits for both lanes and fails if
-either lane fails or either tracked checkout drifts. With App publication separately enabled, the
-trusted controller instead POSTs one exact-name `Amp Orb Verify` Check as `in_progress` before the
-lanes and PATCHes the receipt-bound same Check ID after both settle. It never writes an aggregate
-same-name Commit Status in that mode. Discovery, manual, rerequest, and forced diagnostics remain
-Commit Status-only and cannot publish the authoritative Check.
+the six existing GitHub E2E commands on isolated ports, while the Full lane runs `verify:all`. Before
+the lanes, the trusted controller POSTs the sole authoritative exact-name `Amp Orb Verify` Check as
+`in_progress` under App ID `4835036` (`eqb-amp-ci-authoritative-checks`) and PATCHes the
+receipt-bound same Check ID after both settle. Its `external_id` is
+`v4:<testedSha>:<naturalDeliveryId>`. Discovery, manual, rerequest, forced diagnostics, Commit
+Statuses, and human reports cannot publish or replace the authoritative Check.
 Candidate code executes as the separate locked `eqb-ci` Unix user under an empty allowlisted
-environment; Amp Project Secrets, the commit-status token, and any future App credential stay in the
-trusted controller process. The automatic controller is the only dedicated-CI machine execution
-policy; a Focused agent turn reports or diagnoses its receipt and does not run another Full suite or
-write GitHub state.
+environment; Amp Project Secrets and the App credential stay in the trusted controller process.
+
+Normal Ship reads the exact-SHA Check directly on GitHub. The original High
+thread only hosts the webhook/controller infrastructure; Low is invoked only
+for requested troubleshooting. No Focused/Low per-Ship report, agent turn, or
+private-receipt lookup is part of the normal gate.
 
 Activation and authority changes are shared-state operations requiring current Owner approval.
 Configure these private Amp Project settings, then load the plugin only in the dedicated owning Orb
@@ -127,18 +127,13 @@ thread:
 
 - `QUESTION_BANK_AMP_CI_PLUGIN_ENABLED=1`
 - `QUESTION_BANK_AMP_CI_GITHUB_WEBHOOK_SECRET=<high-entropy GitHub webhook HMAC secret>`
-- `QUESTION_BANK_AMP_CI_GITHUB_STATUS_TOKEN=<fine-grained token limited to Commit statuses: write>`
-
-ADR-0025's repo-only App writer is independently disabled unless
-`QUESTION_BANK_AMP_CI_GITHUB_CHECKS_ENABLED=1`. A later, separately authorized App activation must
-install one GitHub App on only `english-question-bank` with `Checks: write` and `Metadata: read`, then
-set its numeric App ID, numeric installation ID, and PEM only in this dedicated CI project:
-
-- `QUESTION_BANK_AMP_CI_GITHUB_APP_ID=<numeric App ID>`
+- `QUESTION_BANK_AMP_CI_GITHUB_APP_ID=4835036`
 - `QUESTION_BANK_AMP_CI_GITHUB_APP_INSTALLATION_ID=<numeric installation ID>`
 - `QUESTION_BANK_AMP_CI_GITHUB_APP_PRIVATE_KEY=<private App PEM>`
 
-Do not create the App, provision these settings, enable publication, or reload from repository code.
+There is no status-token or `QUESTION_BANK_AMP_CI_GITHUB_CHECKS_ENABLED`
+fallback. Do not create the App, provision these settings, or reload from
+repository code.
 The Check `external_id` is `v4:<testedSha>:<naturalDeliveryId>`; uncertain creation is reconciled only
 through one unique exact external ID, and crash recovery PATCHes the same private-receipt Check ID
 without rerunning Fast or Full. Check output is human-readable duration, PASS/SKIP/FAIL, and clean
@@ -146,9 +141,6 @@ state only—not a signature or independent proof. No Ed25519 attestor or signed
 
 After an approved plugin load, explicitly run `CI Orb: 复制 GitHub CI Webhook URL` and put the
 private capability URL in one GitHub repository webhook that sends only Pull requests and Push
-events, using the same HMAC secret. Never commit or log the URL or either secret. Branch protection
-temporarily requires hosted `verify` and `e2e` while Amp bug
-`amp_bug_0uiggF5jWG6i6iaB72BATT` blocks this webhook's public ingress. Both Orb contexts are
-informational during the rollback; ADR-0022 defines the proof required before they can regain merge
-authority. Deployment remains ADR-0025 `hosted-only` until each later shadow/dual/authority step is
-separately approved; merely landing the disabled writer changes no live trust root.
+events, using the same HMAC secret. Never commit or log the URL or either secret. The executable
+branch-protection cutover is coordinator-owned at `docs/agents/app-ci-cutover.md`; this README does
+not claim it is complete.
