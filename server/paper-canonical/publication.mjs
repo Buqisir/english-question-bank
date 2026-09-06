@@ -82,6 +82,7 @@ const publicationFileNames = [
   'canonical-paper-publication-v17.json',
   'canonical-paper-publication-v16.json',
   'canonical-paper-publication-v15.json',
+  'canonical-paper-publication-v14.json',
   'canonical-paper-publication-v13.json',
   'canonical-paper-publication-v12.json',
   'canonical-paper-publication-v11.json',
