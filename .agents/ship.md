@@ -61,31 +61,32 @@ Investigate failures; `SKIP` and baseline `FAIL` are not `PASS`. A baseline
 classification requires the same command and failure on clean `origin/main`
 with equivalent fixtures, runtime and dependencies. Preserve those failures
 in the report; never weaken assertions or remove data to make them green.
-Such local fixture failures do not waive the required successful Hosted gates.
+Such local fixture failures do not waive the required successful App Check.
 After verification, require `git status --porcelain` to remain empty and HEAD
 to remain the classified one-commit candidate.
 
 ## 4. Deliver through the PR
 
 Push the task branch without force and open one PR into `main`, reporting risk,
-review and verification evidence. Before an authorized merge, require no
-unresolved current Focused CI failure and successful Hosted `verify` and `e2e`
-on the PR's current test merge. Fetch and verify the candidate/base are still
-the reviewed ones; if `origin/main` advanced, rebase and repeat validation.
+review and verification evidence. Before an authorized merge, require the
+pinned App ID `4835036`'s successful exact-name `Amp Orb Verify` Check for the
+PR's current head with `v5-pr` identity recording head/base/tested SHA and natural
+delivery. Require strict/up-to-date protection without bypass; do not require a
+new Check merely because GitHub rebuilt an equivalent test-merge SHA. Fetch and
+verify the candidate/base are still the
+reviewed ones; if `origin/main` advanced, rebase and repeat validation.
 Merge without bypassing protection, then resolve the actual merged `main` SHA
 and parent. An unmerged PR has no post-Ship SHA to hand off.
 
-## 5. Handoff
+## 5. Machine evidence
 
-Output and send the same block to the configured long-lived Focused CI thread
-(`T-01a06542-0449-767c-a74e-f047ed0c6e12`), asking it to report `PASS` or
-`FAIL` back to the development thread from the automatic controller's private
-receipt and GitHub evidence. The Focused agent turn must not run a second Full
-suite, manually start/drain/reload the controller, or write GitHub status or
-Check state:
+Read the successful `Amp Orb Verify` Check directly on GitHub and include its
+URL, immutable Check ID, App ID `4835036`, and exact tested SHA with the delivery
+report. For PRs query the current head and validate the `v5-pr` binding; for main
+query the exact main SHA and v4 identity. Private
+receipt retrieval is not part of normal Ship:
 
 ```text
-FOCUSED-CI HANDOFF
 sha: <40-hex>
 parent: <40-hex>
 risk: <machine risk, plus any explicit override>
@@ -94,11 +95,11 @@ summary: <one paragraph>
 verified: <each command and PASS/SKIP, with totals and every SKIP reason>
 ```
 
-Do not claim handoff if delivery did not occur, and do not archive the
-development thread before Focused CI replies. A pending SHA must not be
-deployed. Focused CI `FAIL` pauses every later Ship and should recommend a
-revert; it never performs one. Even Focused CI `PASS` does not replace the
-Deployment gate: its default remains exact-main, non-manual hosted `verify` and
-`e2e` from numeric `github-actions` App ID `15368`, workflow ID `282244920`,
-attempt 1, and one Check Suite. ADR-0025's App modes remain disabled until a
-separate Owner-authorized activation.
+Do not send routine Focused/Low handoffs or wait for their reports. The former
+High thread only hosts CI infrastructure; Low is for requested troubleshooting,
+not a per-Ship reporter. The webhook/controller writes the Check without an
+agent turn. No human CI handoff, reply, or wait is a merge or deployment gate. A pending,
+failed, wrong-SHA, malformed, or ambiguous App Check fails closed. Deployment
+reads only the exact `Amp Orb Verify` Check from configured
+`QUESTION_BANK_DEPLOY_AMP_CHECK_APP_ID`; legacy authority-mode configuration is
+rejected.

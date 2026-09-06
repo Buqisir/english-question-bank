@@ -8,10 +8,10 @@
 // getDraftPaperPagination (via getReorderSuggestion, which reuses it) —
 // that launches the shared full Chromium. Plan.md's own verify section says
 // to reuse "verify-a3-imposition e2e 段模式" for the
-// e2e portion — that mode IS the e2e-job-only, Chromium-requiring pattern,
+// e2e portion — that mode IS the Fast-lane-only, Chromium-requiring pattern,
 // so this script follows the SAME registration precedent those scripts set
-// (runs as its own step in the `e2e` job, `.github/workflows/verify.yml`,
-// after the Chromium install) rather than joining verify-ci.mjs.
+// (runs as its own step in the CI sandbox Fast lane, after the Chromium
+// install) rather than joining verify-ci.mjs.
 //
 // Phase A (pure, no Chromium, no dev server — always runs, fast):
 //   ① buildReorderCandidates: determinism, hard cap 6, candidates identical
