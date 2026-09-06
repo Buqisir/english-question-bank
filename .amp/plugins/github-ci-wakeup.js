@@ -4,7 +4,9 @@ import {
   chmodSync,
   existsSync,
   mkdirSync,
+  readFileSync,
   readdirSync,
+  unlinkSync,
   writeFileSync,
 } from 'node:fs'
 import path from 'node:path'
@@ -198,6 +200,18 @@ export default async function githubCIWakeupPlugin(amp, overrides = {}) {
 
   const repositoryRoot = overrides.repositoryRoot || repositoryRootFromModule(import.meta.url)
   const stateDir = overrides.stateDir || defaultAmpOrbCIStateDir(repositoryRoot)
+  // Trusted host-local, one-load maintenance intent; never supplied by a delivery.
+  const registrationOnlyPath = path.join(stateDir, 'registration-only.once')
+  let registrationOnly = false
+  try {
+    const intent = readFileSync(registrationOnlyPath, 'utf8')
+    if (intent !== 'skip-startup-recovery-once\n') {
+      throw new Error('Invalid Amp Orb CI registration-only intent')
+    }
+    registrationOnly = true
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error
+  }
   const launchController = overrides.launchController || launchGitHubCIDrain
   const launchDrain = overrides.launchDrain || (async (controllerCommand = 'drain') => {
     const keepAlive = await amp.system.executor.keepAlive()
@@ -260,6 +274,13 @@ export default async function githubCIWakeupPlugin(amp, overrides = {}) {
       })
     },
   )
+
+  if (registrationOnly) {
+    // Failed registration leaves the intent intact. Failed consumption must not drain.
+    unlinkSync(registrationOnlyPath)
+    amp.logger.log('Amp Orb CI registration-only load completed; startup recovery was skipped once.')
+    return
+  }
 
   const queueDir = path.join(stateDir, 'queue')
   let startupRecoveryRequired = false

@@ -106,14 +106,16 @@ or stale, so every signed PR delivery durably queues only its base/head/PR ident
 network lookup. The background controller resolves the current `refs/pull/<number>/merge`, accepts
 it only when its two parents exactly match the signed delivery's base and head, and never substitutes
 the head SHA. It then passes a one-use read-only Git bundle—not a repository credential—
-to the runner. Workflow v4 starts two separate candidate checkouts concurrently: the Fast lane runs
-the six existing GitHub E2E commands on isolated ports, while the Full lane runs `verify:all`. Before
+to the runner. Main v4 always starts two separate candidate checkouts concurrently: Fast runs
+the six existing GitHub E2Es and Full runs `verify:all`. PR v6 uses ADR-0025's installed trusted
+policy, not the candidate planner, to require Fast or Fast+Full; reduced PR Fast also runs exact-base
+`verify:changed`. Missing/invalid private `pr-policy.json` selects always-full. Before
 the lanes, the trusted controller POSTs the sole authoritative exact-name `Amp Orb Verify` Check as
 `in_progress` under App ID `4835036` (`eqb-amp-ci-authoritative-checks`) and PATCHes the
-receipt-bound same Check ID after both settle. PR Checks attach to stable head, while execution
+receipt-bound same Check ID after required lanes settle. PR Checks attach to stable head, while execution
 remains on the exact merge. Complete-history base ancestry in head and equal merge/head trees
 are required before lanes run; strict/up-to-date main protection with no bypass must stay enabled.
-PR `external_id` is `v5-pr:<number>:<headSha>:<baseSha>:<testedSha>:<naturalDeliveryId>`;
+PR `external_id` is `v6-pr:<number>:<headSha>:<baseSha>:<testedSha>:<testedTree>:<policyDigest>:<naturalDeliveryId>`;
 pushes retain `v4:<testedSha>:<naturalDeliveryId>` on exact main. Discovery, manual, rerequest, forced diagnostics, Commit
 Statuses, and human reports cannot publish or replace the authoritative Check.
 Candidate code executes as the separate locked `eqb-ci` Unix user under an empty allowlisted
@@ -125,6 +127,22 @@ for requested troubleshooting. No Focused/Low per-Ship report, agent turn, or
 private-receipt lookup is part of the normal gate.
 
 Activation and authority changes are shared-state operations requiring current Owner approval.
+For an explicitly approved **single registration-only load**, the owning host may exclusively
+create `.scratch/amp-orb-ci/registration-only.once` (or the corresponding trusted state directory)
+with mode `0600` and exact contents `skip-startup-recovery-once\n` (a trailing LF).
+Create it only under the existing `runner.lock` maintenance exclusion after confirming no active
+or waiting controller; snapshot actual installed bytes and preserve every queue/receipt.
+The plugin validates this local intent before registration, retains it if registration fails,
+and consumes it after successful registration/command setup, returning before startup queue inspection.
+Invalid/unreadable intent or failed consumption aborts rather than draining. Do not blindly retry
+an ambiguous load: inspect the marker and runtime evidence first; marker absence alone is not proof
+of the server binding. The next unmarked load performs normal startup recovery.
+This does **not** pause natural signed webhook deliveries: the unchanged handler still enqueues
+and launches the drainer, which can process historical queue entries. Do not use it as a general
+maintenance pause or move/hide/delete queues. Same-key registration is not proof that an unknown
+previous server binding can be precisely rolled back. Only the explicitly designated CI host loads
+this plugin; development/review threads must not load it or create this intent.
+
 Configure these private Amp Project settings, then load the plugin only in the dedicated owning Orb
 thread:
 
@@ -139,8 +157,11 @@ fallback. Do not create the App, provision these settings, or reload from
 repository code.
 The versioned Check `external_id` above binds its target; uncertain creation is reconciled only
 through one unique exact external ID, and crash recovery PATCHes the same private-receipt Check ID
-without rerunning Fast or Full. PR `v5-pr` run IDs isolate older merge-attached receipts, which
-must not be retargeted. Check output records head/base/tested identities, duration, PASS/SKIP/FAIL,
+without rerunning Fast or Full. PR `v6-pr` run IDs isolate older receipts and bind PR/head/base/tree/policy;
+equivalent merge rebuilds reuse the original immutable Check. Live freshness is required again
+before create, execute, completion, PATCH and recovery; stale results durably become `superseded`,
+never success. Unknown API state defers with evidence retained. Check output records
+head/base/tested identities, policy, required lanes, duration, PASS/SKIP/FAIL,
 and clean state—not a signature or independent proof. No Ed25519 attestor or signed envelope exists.
 
 After an approved plugin load, explicitly run `CI Orb: 复制 GitHub CI Webhook URL` and put the

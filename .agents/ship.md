@@ -70,8 +70,12 @@ to remain the classified one-commit candidate.
 Push the task branch without force and open one PR into `main`, reporting risk,
 review and verification evidence. Before an authorized merge, require the
 pinned App ID `4835036`'s successful exact-name `Amp Orb Verify` Check for the
-PR's current head with `v5-pr` identity recording head/base/tested SHA and natural
-delivery. Require strict/up-to-date protection without bypass; do not require a
+PR's current head with ADR-0025's `v6-pr` identity recording PR number,
+head/base/tested SHA, tested tree, policy digest and natural delivery. Validate
+the required lanes and policy in the Check output; Full `not-required/by-policy`
+is not PASS. During this migration only, the pre-installation always-full v5
+Check is valid for the installation gate, not evidence of reduced-lane acceptance.
+Require strict/up-to-date protection without bypass; do not require a
 new Check merely because GitHub rebuilt an equivalent test-merge SHA. Fetch and
 verify the candidate/base are still the
 reviewed ones; if `origin/main` advanced, rebase and repeat validation.
@@ -82,7 +86,8 @@ and parent. An unmerged PR has no post-Ship SHA to hand off.
 
 Read the successful `Amp Orb Verify` Check directly on GitHub and include its
 URL, immutable Check ID, App ID `4835036`, and exact tested SHA with the delivery
-report. For PRs query the current head and validate the `v5-pr` binding; for main
+report. For PRs query the current head and validate the `v6-pr` binding (including
+recorded tested commit's ordered parents and tree); for main
 query the exact main SHA and v4 identity. Private
 receipt retrieval is not part of normal Ship:
 

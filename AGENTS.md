@@ -126,11 +126,12 @@ uniquely supplies; otherwise keep it outside daily packs.
 ## Dedicated CI authority
 
 - The automatic `amp-orb-ci` controller is the sole dedicated-CI machine
-  executor. A natural HMAC-authenticated webhook runs isolated Fast and Full
-  lanes, stores a private receipt, and writes only ADR-0025's exact `Amp Orb
+  executor. A natural HMAC-authenticated webhook runs isolated required lanes
+  under ADR-0025's installed trusted PR policy (main always Fast+Full), stores
+  a private receipt, and writes only ADR-0025's exact `Amp Orb
   Verify` Check from App ID `4835036`.
 - Normal operation reads GitHub directly: check the current PR head attachment
-  and its `v5-pr` head/base/tested-merge/delivery identity, or exact live `main`
+  and its `v6-pr` PR/head/base/tested-merge/tree/policy/delivery identity, or exact live `main`
   with its v4 identity, numeric App ID, name, status and conclusion. PR head
   authority requires strict/up-to-date protection with no bypass and the
   controller's base-ancestry and tested-tree/head-tree equality gates. The former
