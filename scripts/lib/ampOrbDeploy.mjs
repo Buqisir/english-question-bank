@@ -2153,11 +2153,25 @@ export async function deployLatestRelease({
   ) {
     throw new Error('Deployment execution dependencies are missing')
   }
+  const classificationFlags = argv.filter(value => [
+    '--reviewed-code-only-digest', '--reviewed-migration-digest',
+  ].includes(value))
+  if (classificationFlags.length > 1) throw new Error('Choose one reviewed deployment classification')
+  const classificationFlag = classificationFlags[0]
+  const digest = classificationFlag ? argv[argv.indexOf(classificationFlag) + 1] : undefined
+  if (classificationFlag && !/^[a-f0-9]{64}$/u.test(digest || '')) {
+    throw new Error('Reviewed deployment classification requires an exact protected-path digest')
+  }
+  const classification = classificationFlag
+    ? (classificationFlag === '--reviewed-code-only-digest' ? 'code-only' : 'migrate') : undefined
   const candidate = await resolveCandidate()
   await revalidateCandidate(candidate)
-  const receipt = parseDeploymentControllerOutput(
-    await invokeController(candidate.sha),
+  const parseReceipt = classification === 'migrate'
+    ? parseReviewedPersistenceControllerOutput : parseDeploymentControllerOutput
+  const receipt = parseReceipt(
+    await invokeController(candidate.sha, classification, digest),
     candidate.sha,
+    digest,
   )
   if (receipt.conclusion !== 'success') {
     throw new Error(`Production controller reported ${receipt.failureCode || 'failure'}`)

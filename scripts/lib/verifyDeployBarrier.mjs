@@ -173,10 +173,9 @@ export async function verifyDeployBarrier(repository) {
       .replaceAll('/opt/eqb/deployments/host-configuration/current/deploy/eqb-deploy-controller.mjs', module), 0o700)
     const invoke = (command) => {
       const args = command.split(' ')
-      if (command !== 'preflight') args.splice(1, 0, expected.transactionId)
       return spawnSync(wrapper, ['--', ...args], { encoding: 'utf8' })
     }
-    assert.equal(spawnSync(wrapper, ['--', ...mutation.split(' ')]).status, 64)
+    assert.equal(spawnSync(wrapper, ['--', 'deploy', expected.transactionId, ...mutation.split(' ').slice(1)]).status, 64)
     assert.equal(invoke(mutation).status, 0)
     fs.unlinkSync(entered)
     withDeploymentLock(root, () => {
@@ -189,8 +188,8 @@ export async function verifyDeployBarrier(repository) {
     assert.equal(fs.existsSync(entered), false)
     for (const corrupt of ['', '{}\n']) {
       write(active, corrupt)
-      for (const command of [mutation, `deploy-reviewed-persistence ${expected.targetSha} ${expected.payloadDigest}`,
-        `update-host-config ${expected.targetSha} ${expected.payloadDigest}`]) assert.equal(invoke(command).status, 70)
+      for (const command of [mutation, `deploy ${expected.targetSha} migrate ${expected.payloadDigest}`,
+        `deploy ${expected.targetSha} code-only ${expected.payloadDigest}`]) assert.equal(invoke(command).status, 70)
       assert.equal(fs.existsSync(entered), false)
       assert.equal(invoke('preflight').status, 0)
       fs.unlinkSync(entered)

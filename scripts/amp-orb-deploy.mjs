@@ -244,46 +244,18 @@ async function withDeploymentCredentials(callback) {
 }
 
 function invokeController(remoteArgs, credentials) {
-  const markers = {
-    deploy: 'EQB_DEPLOY_RECEIPT ',
-    'deploy-reviewed-persistence': 'EQB_REVIEWED_PERSISTENCE_RECEIPT ',
-    'update-host-config': 'EQB_HOST_CONFIGURATION_RECEIPT ',
-  }
-  const controlled = Object.hasOwn(markers, remoteArgs[0])
-  const expected = controlled ? {
-    command: remoteArgs[0], transactionId: randomUUID(), sha: remoteArgs[1], digest: remoteArgs[2] ?? null,
-  } : remoteArgs[0] === 'status' ? { transactionId: remoteArgs[1] } : null
-  if (controlled) {
-    // Emit the safe correlation identity before dispatch, including when SSH
-    // loses the response. Neither status nor repeating this UUID can execute it.
-    console.error(JSON.stringify({ transactionId: expected.transactionId, targetSha: expected.sha }))
-  }
   const invocation = deploymentSSHInvocation({
     host: String(process.env.QUESTION_BANK_DEPLOY_SSH_HOST || ''),
     keyPath: credentials.keyPath,
     knownHostsPath: credentials.knownHostsPath,
-    remoteArgs: controlled ? [remoteArgs[0], expected.transactionId, ...remoteArgs.slice(1)] : remoteArgs,
+    remoteArgs,
   })
   const result = spawnSync(invocation.command, invocation.args, {
     encoding: 'utf8',
     stdio: ['ignore', 'pipe', 'pipe'],
     timeout: 30 * 60 * 1000,
   })
-  if (expected) {
-    let record
-    try {
-      if (result.error) throw new Error('TRANSPORT_FAILED')
-      record = parseControlledTransaction(result.stdout, expected, result.status)
-    } catch {
-      throw new Error(`Controlled outcome unknown; status ${expected.transactionId}; no retry`)
-    }
-    if (!controlled) return JSON.stringify(record)
-    if (record.state !== 'success') {
-      throw new Error(`Controlled ${record.state}; status ${expected.transactionId}; no retry`)
-    }
-    return `${markers[record.command]}${JSON.stringify(record.receipt)}\n`
-  }
-  if (result.error) throw result.error
+  if (result.error) throw new Error('SSH outcome unknown; preserve host receipt and do not retry')
   if (result.status === 75) throw new Error('Another production deployment is already running')
   if (result.status === 255) {
     throw new Error(
@@ -293,20 +265,19 @@ function invokeController(remoteArgs, credentials) {
   if (!String(result.stdout || '').trim()) {
     throw new Error(`Deployment controller exited without a receipt (code ${result.status})`)
   }
-  if (result.status !== 0) {
-    const receiptParser = remoteArgs[0] === 'deploy'
-      ? parseDeploymentControllerOutput
-      : remoteArgs[0] === 'deploy-reviewed-persistence'
-        ? parseReviewedPersistenceControllerOutput
-        : remoteArgs[0] === 'update-host-config'
-          ? parseHostConfigurationControllerOutput
-          : null
-    if (receiptParser) {
-      const receipt = receiptParser(result.stdout, remoteArgs[1], remoteArgs[2])
+  if (remoteArgs[0] === 'deploy') {
+    const receiptParser = remoteArgs[2] === 'migrate'
+      ? parseReviewedPersistenceControllerOutput : parseDeploymentControllerOutput
+    const receipt = receiptParser(result.stdout, remoteArgs[1], remoteArgs[3])
+    if (result.status !== (receipt.conclusion === 'success' ? 0 : 1)) {
+      throw new Error('SSH receipt/exit mismatch; outcome unknown, do not retry')
+    }
+    if (receipt.conclusion !== 'success') {
       throw new Error(
         `Production controller reported ${receipt.failureCode || 'failure'}: ${JSON.stringify(receipt)}`,
       )
     }
+  } else if (result.status !== 0) {
     throw new Error(`Deployment controller failed (code ${result.status})`)
   }
   return result.stdout
@@ -1340,9 +1311,9 @@ async function deploy() {
     argv: process.argv.slice(2),
     resolveCandidate: candidate,
     revalidateCandidate: assertCandidateStillAuthoritative,
-    async invokeController(sha) {
+    async invokeController(sha, classification, digest) {
       return withDeploymentCredentials((credentials) => (
-        invokeController(['deploy', sha], credentials)
+        invokeController(['deploy', sha, ...(classification ? [classification, digest] : [])], credentials)
       ))
     },
   })
@@ -1452,7 +1423,7 @@ async function transactionStatus() {
 }
 
 try {
-  if (/^(?:root-barrier-|bootstrap|baseline|maintenance-install-readiness)/u.test(process.argv[2] || '')) {
+  if (/^(?:root-barrier-|bootstrap|baseline|maintenance-install-readiness|install-controlled-ssh|status|reviewed-persistence|update-host-config)/u.test(process.argv[2] || '')) {
     throw new Error('Retired control-plane command; controlled SSH migration requires separate root authorization')
   }
   if (process.argv[2] === 'plan') await plan()

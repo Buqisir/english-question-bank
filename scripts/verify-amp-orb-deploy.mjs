@@ -1077,6 +1077,17 @@ assert(
   'Owner authorization resolves and rechecks exact main before controller invocation',
 )
 
+await deployLatestRelease({
+  argv: ['deploy', '--owner-said-deploy-latest', '--reviewed-code-only-digest', 'a'.repeat(64)],
+  resolveCandidate: async () => candidate,
+  revalidateCandidate: async () => {},
+  async invokeController(sha, classification, digest) {
+    assert(sha === newSha && classification === 'code-only' && digest === 'a'.repeat(64),
+      'CLI carries the explicit reviewed code-only classification to the exact controller target')
+    return controllerReceipt({ targetSha: sha })
+  },
+})
+
 let staleInvoked = false
 assert(
   await (async () => {
@@ -3592,6 +3603,15 @@ function controllerFixture({
       if (command === '/usr/bin/systemctl' && args[0] === 'is-active') {
         return args.includes('--quiet') ? '' : 'active\n'
       }
+      if (command === '/usr/bin/systemd-run' && args.includes('--property=PrivateNetwork=yes')) {
+        assert(currentSha() !== path.basename(args.find(value => value.startsWith('--property=WorkingDirectory='))),
+          'candidate local health runs before selecting its release pointer')
+        assert(args.includes('--property=ProtectSystem=strict')
+          && args.some(value => value.startsWith('--property=ReadWritePaths=') && value.includes('/.candidate-health-')),
+        'candidate startup writes confined to disposable preparation copies')
+        if (state.failCandidatePreparation) throw new Error('fixture isolated candidate unhealthy')
+        return ''
+      }
       if (command === '/usr/bin/node' && args[0] === '--check') return ''
       if (command === '/usr/bin/systemd-analyze') return ''
       if (command === '/usr/bin/caddy' && args[0] === 'validate') return ''
@@ -3627,7 +3647,7 @@ function controllerFixture({
       }
     },
     snapshotDatabase(source, destination) {
-      if (state.failSnapshotOnce) {
+      if (state.failSnapshotOnce && !destination.includes('/.candidate-health-')) {
         state.failSnapshotOnce = false
         throw new Error('fixture snapshot failure')
       }
@@ -3851,8 +3871,8 @@ const fixedRollbackResult = await runController({
 assert(fixedRollbackResult.exitCode === 1, 'failed candidate remains a terminal deployment failure')
 assert(fixedRollback.currentSha() === oldSha, 'fixed controller restores the previous release after failed health')
 assert(
-  fixedRollback.state.restarts.join(',') === `${newSha},${oldSha}`,
-  'failed health restarts candidate once and restored release once',
+  fixedRollback.state.restarts.join(',') === `${newSha},${oldSha},${oldSha}`,
+  'failed health restarts candidate once, previous app once and independently restores Caddy',
 )
 assert(
   fixedRollbackResult.output.rolledBack && fixedRollbackResult.output.rollbackHealthy,
@@ -4079,6 +4099,90 @@ try {
 }
 
 const reviewedDigest = deploymentChangedPathDigest(['server/api.mjs'])
+const rejectedMigrationCandidate = controllerFixture({ persistenceAuthorityChange: true })
+rejectedMigrationCandidate.state.failCandidatePreparation = true
+const rejectedMigration = await runController({
+  originalCommand: `deploy ${newSha} migrate ${reviewedDigest}`,
+  config: rejectedMigrationCandidate.config, dependencies: rejectedMigrationCandidate.dependencies,
+})
+assert(rejectedMigration.exitCode === 1 && rejectedMigrationCandidate.currentSha() === oldSha
+  && rejectedMigrationCandidate.state.runtimeEnsures === undefined
+  && rejectedMigrationCandidate.state.restarts.length === 0
+  && !rejectedMigrationCandidate.state.systemCalls.some(call => call[0] === '/usr/bin/systemctl' && call[1] === 'stop'),
+  'migration classification also rejects unhealthy preparation before stopping traffic or live mutation')
+rmSync(rejectedMigrationCandidate.root, { recursive: true, force: true })
+
+for (const failPreparation of [false, true]) {
+  const fixture = controllerFixture({ persistenceAuthorityChange: true })
+  fixture.state.failCandidatePreparation = failPreparation
+  const result = await runController({
+    originalCommand: `deploy ${newSha} code-only ${reviewedDigest}`,
+    config: fixture.config, dependencies: fixture.dependencies,
+  })
+  assert(result.exitCode === (failPreparation ? 1 : 0)
+    && fixture.currentSha() === (failPreparation ? oldSha : newSha)
+    && fixture.state.runtimeEnsures === undefined
+    && !fixture.state.systemCalls.some(call => call[0] === '/usr/bin/systemctl' && call[1] === 'stop')
+    && (!failPreparation || fixture.state.restarts.length === 0),
+  'reviewed code-only classification uses isolated preparation without stopping live services or running migration')
+  assert(!existsSync(path.join(fixture.root, 'deployments/reviewed-persistence/active.json')),
+    'code-only release creates no persistence admission')
+  rmSync(fixture.root, { recursive: true, force: true })
+}
+const wrongCodeOnly = controllerFixture({ persistenceAuthorityChange: true })
+const wrongCodeOnlyResult = await runController({
+  originalCommand: `deploy ${newSha} code-only ${'f'.repeat(64)}`,
+  config: wrongCodeOnly.config, dependencies: wrongCodeOnly.dependencies,
+})
+assert(wrongCodeOnlyResult.output.failureCode === 'CODE_ONLY_REVIEW_MISMATCH'
+  && wrongCodeOnly.state.buildCalls.length === 0 && wrongCodeOnly.state.restarts.length === 0,
+  'code-only review mismatch fails before build or service changes')
+rmSync(wrongCodeOnly.root, { recursive: true, force: true })
+
+const repeatedStopFailure = controllerFixture({ persistenceAuthorityChange: true })
+const originalStopRunner = repeatedStopFailure.dependencies.runSystem
+repeatedStopFailure.dependencies.runSystem = (command, args, options) => {
+  if (command === '/usr/bin/systemctl' && args[0] === 'stop' && args[1] === 'eqb') {
+    repeatedStopFailure.state.systemCalls.push([command, ...args])
+    throw new Error('fixture systemctl stop timed out')
+  }
+  return originalStopRunner(command, args, options)
+}
+const repeatedStopResult = await runController({
+  originalCommand: `deploy-reviewed-persistence ${newSha} ${reviewedDigest}`,
+  config: repeatedStopFailure.config,
+  dependencies: repeatedStopFailure.dependencies,
+})
+assert(repeatedStopFailure.currentSha() === oldSha
+  && repeatedStopFailure.state.systemCalls.some(call => call[1] === 'start' && call[2] === 'eqb')
+  && repeatedStopFailure.state.systemCalls.some(call => call[1] === 'start' && call[2] === 'caddy')
+  && repeatedStopResult.output.rollbackHealthy === true
+  && repeatedStopResult.output.failureCode === 'STOP_APP_FAILED',
+'incident regression: repeated stop failure cannot skip restoring previous app and Caddy')
+rmSync(repeatedStopFailure.root, { recursive: true, force: true })
+
+const beforeEnsureFailure = controllerFixture({ persistenceAuthorityChange: true })
+const originalSnapshot = beforeEnsureFailure.dependencies.snapshotDatabase
+beforeEnsureFailure.dependencies.snapshotDatabase = (source, destination) => {
+  originalSnapshot(source, destination)
+  if (!destination.includes('/.candidate-health-') && destination.endsWith('/import-ops.sqlite')) {
+    const marker = path.join(beforeEnsureFailure.root, 'releases', newSha, '.eqb-release.json')
+    chmodSync(marker, 0o600)
+    writeFileSync(marker, '{}')
+  }
+}
+const beforeEnsureResult = await runController({
+  originalCommand: `deploy ${newSha} migrate ${reviewedDigest}`,
+  config: beforeEnsureFailure.config, dependencies: beforeEnsureFailure.dependencies,
+})
+assert(beforeEnsureResult.exitCode === 1 && beforeEnsureResult.output.rollbackHealthy === true
+  && Object.keys(beforeEnsureResult.output.databaseSnapshots).length === 3
+  && beforeEnsureResult.output.databasesRestored === false
+  && beforeEnsureFailure.state.runtimeEnsures === undefined
+  && beforeEnsureFailure.state.systemCalls.filter(call => call[0] === '/usr/bin/systemctl' && call[1] === 'stop').length === 2,
+  'complete backup without live persistence does not repeat stops or restore databases before recovering old services')
+rmSync(beforeEnsureFailure.root, { recursive: true, force: true })
+
 const reviewedSuccess = controllerFixture({ persistenceAuthorityChange: true })
 const reviewedSuccessResult = await runController({
   originalCommand: `deploy-reviewed-persistence ${newSha} ${reviewedDigest}`,
@@ -5167,10 +5271,10 @@ assert(
       'exec /usr/bin/sudo -n /usr/local/libexec/eqb-deploy-controller-v1 -- preflight',
     )
     && transportWrapper.includes(
-      'exec /usr/bin/sudo -n /usr/local/libexec/eqb-deploy-controller-v1 -- deploy "$transaction" "$sha"',
+      'exec /usr/bin/sudo -n /usr/local/libexec/eqb-deploy-controller-v1 -- deploy "$sha"',
     )
-    && transportWrapper.includes("command_name=deploy-reviewed-persistence")
-    && transportWrapper.includes("command_name=update-host-config")
+    && transportWrapper.includes('case "$classification" in code-only|migrate)')
+    && !transportWrapper.includes('command_name=deploy-reviewed-persistence')
     && transportWrapper.includes('[ "${#digest}" -eq 64 ] || exit 64')
     && controllerWrapper.includes('/opt/eqb/deployments/host-configuration/current/deploy/eqb-deploy-controller.mjs')
     && !controllerWrapper.includes('/opt/eqb/deployments/host-configuration-update/recovery-controller.mjs'),
@@ -5329,7 +5433,7 @@ transport=$1
 entered=$2
 release=$3
 fixture=$4
-/usr/bin/env -i 'SSH_ORIGINAL_COMMAND=deploy ${randomUUID()} ${newSha}' PATH=/usr/local/bin:/usr/bin:/bin \
+/usr/bin/env -i 'SSH_ORIGINAL_COMMAND=deploy ${newSha}' PATH=/usr/local/bin:/usr/bin:/bin \
   "$transport" >"$fixture/first.stdout" 2>"$fixture/first.stderr" &
 first_pid=$!
 for ((attempt=0; attempt<500; attempt+=1)); do
@@ -5342,7 +5446,7 @@ if [[ ! -e $entered ]]; then
   exit 98
 fi
 /usr/bin/timeout --signal=TERM 2s /usr/bin/env -i \
-  'SSH_ORIGINAL_COMMAND=deploy ${randomUUID()} ${newSha}' PATH=/usr/local/bin:/usr/bin:/bin \
+  'SSH_ORIGINAL_COMMAND=deploy ${newSha}' PATH=/usr/local/bin:/usr/bin:/bin \
   "$transport" >"$fixture/second.stdout" 2>"$fixture/second.stderr"
 second_status=$?
 : > "$release"
@@ -5778,7 +5882,7 @@ assert(cli.includes("process.argv[2] === 'bootstrap-abandon'"), 'CLI exposes pro
 assert(cli.includes("process.argv[2] === 'deploy'"), 'CLI exposes the Owner-authorized deploy-latest command')
 assert(cli.includes('productionMutationAllowed: false'), 'plan and preflight declare no production mutation authority')
 assert(cli.includes('productionMutationAllowed: true'), 'successful deployment output declares production mutation')
-assert(cli.includes("invokeController(['deploy', sha]"), 'SSH sends only the exact SHA to the fixed controller')
+assert(cli.includes("invokeController(['deploy', sha, ...(classification ? [classification, digest] : [])]"), 'SSH sends exact SHA and optional reviewed classification to the fixed controller')
 assert(!cli.includes("remoteArgs: ['bash', '-s']"), 'production activation never streams candidate shell code')
 assert(!cli.includes('StrictHostKeyChecking=no'), 'CLI contains no SSH trust bypass')
 assert(
