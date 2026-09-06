@@ -76,10 +76,17 @@ function resolvePagedjsPolyfillPath() {
   for (const candidate of PAGEDJS_POLYFILL_CANDIDATES) {
     if (existsSync(candidate)) return candidate
   }
-  throw new Error(
+  const error = new Error(
     'pagedjs polyfill not found (dist/paged.polyfill.js in any of the usual node_modules locations). ' +
       'Install with: npm install pagedjs --prefix server',
   )
+  // Typed classifier: route handlers (draftPaperRoutes.mjs sendDraftMutationError)
+  // map RENDERER_MISSING to 503 "renderer unavailable" without substring-matching
+  // "not found", which would also match the per-item data error
+  // "questionGroupId not found: <id>" thrown on the same export path by
+  // resolveDraftExportItems (draftPaperStore.mjs).
+  error.code = 'RENDERER_MISSING'
+  throw error
 }
 
 // Spike used the same ceiling (spike-pagedjs-gate.mjs); real renders finish

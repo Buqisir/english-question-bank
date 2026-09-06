@@ -104,6 +104,7 @@ const registry = {
   'scripts/verify-c8-draft-paper-contracts.mjs',
   'scripts/verify-c8-draft-paper-render-model.mjs',
   'scripts/verify-draft-pagination-cache-trigger.mjs',
+  'scripts/verify-print-pdf-error-classification.mjs',
   'scripts/verify-c8-print-ready-gate.mjs',
   'scripts/verify-print-form.mjs',
   'scripts/verify-print-renderer.mjs',
