@@ -1,240 +1,99 @@
-# ADR-0025: Repo-only GitHub App Check as an optional Deployment authority
+# ADR-0025: GitHub App Check is the sole deployment-CI authority
 
-- Status: Accepted protocol; repository implementation disabled by default
-- Owner authorization: 2026-09-04 repository code and documentation only
-- Preserves: ADR-0023 production boundaries and Hosted-only default authority
-- Clarifies: ADR-0024 Focused-CI reporting and trusted-controller writes
-
-## Context
-
-The dedicated CI Orb runs Fast E2E and Full `verify:all` in separate
-credential-free `eqb-ci` checkouts. Its existing Commit Statuses are useful
-feedback, but they cannot be a Deployment trust root: another repository token
-with status-write permission can reproduce the same context and creator.
-
-GitHub Check Runs identify their creating GitHub App by immutable numeric App
-ID. A dedicated App installed only on `Buqisir/english-question-bank`, with
-`Checks: write` and `Metadata: read`, can therefore provide a provenance
-boundary comparable to the hosted `github-actions` App. Repository code alone
-does not create that App, install it, provision its private key, enable or
-reload CI, or change Deployment authority.
-
-An earlier proposal added a same-Orb Ed25519 signer and a signed envelope in
-`output.summary`. That does not create an independent trust domain: a key
-available to the trusted CI controller fails with the App credential, while a
-root-owned key is not isolated from passwordless root access in the Orb.
-Deployment also cannot independently prove several proposed signed fields.
+- Status: Accepted repository protocol; live branch-protection cutover is not asserted
+- Owner authorization: 2026-09-06 App-only cutover after failure/success acceptance; no production or Secrets changes
+- Supersedes: ADR-0023's Hosted CI authority only; ADR-0023's production and deployment boundaries remain
 
 ## Decision
 
-### CI writer
+The automatic route is GitHub webhook → CI controller → isolated Fast/Full →
+GitHub Check. The original High thread only hosts this infrastructure; Low is
+invoked on demand for troubleshooting. Neither is a routine reporter, approver,
+or per-Ship dependency. Developers read GitHub directly: PR Checks are attached
+to the stable head SHA while their identity records the exact tested merge.
+Private receipts are for recovery
+and diagnosis, not a normal Ship lookup or a second gate.
 
-The trusted automatic `amp-orb-ci` controller is the only dedicated-CI machine
-execution policy. A Focused-CI agent turn may report or diagnose its result but
-does not run a second Full suite and does not write GitHub status or Check
-state.
-
-App publication is enabled only when
-`QUESTION_BANK_AMP_CI_GITHUB_CHECKS_ENABLED=1`. When disabled, workflow v4
-retains the existing informational Commit Status behavior. When separately
-activated, only a non-forced, HMAC-authenticated natural GitHub delivery can
-publish the authoritative Check. Discovery, manual, rerequest, and forced
-diagnostics remain informational.
-
-The one authoritative Check is named exactly `Amp Orb Verify`. Before either
-lane starts, the controller POSTs an `in_progress` run with:
+The sole CI authority for deployment is one natural GitHub webhook delivery to
+the dedicated CI Orb, which runs Fast E2E and Full `verify:all` in isolated,
+credential-free `eqb-ci` checkouts and writes one GitHub Check Run:
 
 ```text
-external_id = v4:<testedSha>:<githubDeliveryId>
+name: Amp Orb Verify
+creating App: 4835036 (eqb-amp-ci-authoritative-checks)
+push external_id: v4:<testedSha>:<naturalDeliveryId>
+PR external_id: v5-pr:<number>:<headSha>:<baseSha>:<testedSha>:<naturalDeliveryId>
 ```
 
-It writes the immutable Check Run ID to the private mode-`0600` run receipt.
-If create has an unknown outcome, the controller lists all exact-name runs and
-continues only when exact external ID, SHA, and pinned App ID identify one
-unique run. It never creates a replacement merely because the response was
-lost.
+PR execution still uses the exact fetched test-merge SHA and verifies its
+ordered parents. Before either lane runs, complete-history ancestry must prove
+base is contained in head, and the tested merge tree must equal the head tree.
+Only the Check attachment uses head: GitHub can regenerate a merge commit with
+identical parents/tree but a different SHA, stranding a merge-attached Check.
+PR run IDs use a separate `v5-pr` namespace; old merge-attached receipts and
+Checks cannot be reused or retargeted. Push identity and deployment remain v4.
 
-After verification, the controller PATCHes that same ID to `completed` with
-`success` or `failure`. Success requires actual successful Fast and Full lane
-results, zero Fast E2E failures, Full `FAIL 0`, and both exact-SHA checkouts
-tracked-clean. An expired installation token may be refreshed and the same API
-operation retried; verified tests are not rerun. A crash after verification
-resumes the idempotent PATCH of the receipt's same Check Run ID.
+This requires strict/up-to-date main protection, the required Check pinned to
+App 4835036, and no bypass. Owner confirmed those settings via GitHub UI on
+2026-09-06 (including no bypass exceptions and empty rulesets); this is Owner UI
+evidence, not API readback. If base advances outside the tested head, strict
+protection blocks merging until an updated head passes. A base already contained
+in the tested head adds no untested tree changes. This is tree compatibility,
+not a claim that the recorded base always equals a later current base.
 
-`output.summary` is human-readable only: Fast and Full duration/verdict, the
-Full PASS/SKIP/FAIL counts, and tracked-clean state. It is not a signature or
-cryptographic proof. `Amp Orb Verify (fast)` remains a distinct informational
-Commit Status which Deployment never reads. In App mode no aggregate
-same-name Commit Status is written.
+Only a non-forced, HMAC-authenticated natural Pull request or Push delivery
+may create that Check. Before either lane begins, the controller creates the
+run as `in_progress`, stores its immutable ID in the private receipt, and after
+both lanes settle PATCHes that same ID to `success` or `failure`. A lost create
+response is reconciled only with one exact external ID, attachment SHA, and pinned
+App ID; a lost completion resumes the same receipt-bound PATCH without rerunning
+tests. Diagnostics, discovery, rerequest, and manual work cannot write the
+authoritative Check. Candidate code receives neither CI App nor deployment
+credentials.
 
-### Deployment reader
+`success` requires successful Fast and Full results, zero Fast E2E failures,
+Full `FAIL 0`, and clean exact-SHA checkouts. Check text and the private receipt
+are operational evidence, not a signature or a second authority. There is no
+Commit Status, Hosted workflow, human report, mode, fallback, nightly, or
+event-count policy that can substitute for this Check.
 
-Deployment supports these explicit modes:
+The plugin remains isolated from ordinary development by
+`QUESTION_BANK_AMP_CI_PLUGIN_ENABLED=1`. Its dedicated CI project alone holds
+the webhook HMAC secret and the App ID, installation ID, and PEM. It has no
+status-token or `QUESTION_BANK_AMP_CI_GITHUB_CHECKS_ENABLED` fallback.
 
-- `hosted-only` (default): hosted `verify` and `e2e`;
-- `shadow`: Hosted authorizes; the App result is observed but cannot allow or
-  block;
-- `dual`: Hosted `verify` and `e2e` plus the App Check;
-- `amp+hosted-e2e`: the App Check plus hosted `e2e`, only for proven low-risk intervals;
-- `amp`: the App Check only, only for proven low-risk intervals.
+## Deployment reader
 
-Both reduced modes require current-SHA Hosted `verify` + `e2e` **and** the App
-Check (effective `dual`) for high or unproven risk. Failure of App evidence
-never falls back to Hosted alone. The configured mode, effective mode, per-commit
-paths/risks, accumulated risk and Hosted anchor SHA are returned for inspection.
+The Deployment Orb requires `QUESTION_BANK_DEPLOY_AMP_CHECK_APP_ID=4835036`
+and reads only the latest exact-name `Amp Orb Verify` Check from that numeric
+App. It fails closed for missing, pending, non-success, wrong-SHA, malformed,
+or ambiguous evidence, and re-reads the selected Check and live `main`
+immediately before production action. A legacy
+`QUESTION_BANK_DEPLOY_CI_AUTHORITY_MODE` setting is rejected rather than
+interpreted. Hosted `verify` and `e2e` are no longer deployment authority.
 
-Risk is not a caller-supplied label or the last commit's classification. The
-reader walks at most 50 single-parent commits backwards from the candidate,
-classifies each parent-to-child diff with the existing `verify-ci --plan-json`
-classifier, and also classifies the union of every touched path. Renames expose
-both paths; add/revert changes cannot disappear through an endpoint net diff.
-The interval closes only at an ancestor with freshly read, exact-SHA, attempt-1
-Hosted **push** `verify` + `e2e` success. No configured/cached baseline, nightly,
-PR, manual, rerun, or App-only success can close it. Missing history, merges,
-classifier errors, no anchor within the bound, unknown/fallback risk, or any
-high-risk commit/union retains current-SHA Hosted strong authority. This entire
-decision is reread at the existing pre-action boundary; Must Fix A's post-await
-HEAD/cleanliness/live-main checks and the host `MAIN_CHANGED` guard remain.
+Daily deployment remains limited to `plan`, authorized `preflight`, and
+authorized `deploy`; the existing code-only versus reviewed-persistence/
+migration classification is unchanged. ADR-0023 retains the production,
+recovery, and host safety boundaries.
 
-Initial eligibility is deliberately narrower than Ship eligibility: only
-presentation CSS under `app/src` or known-shape paper JSON/image data under the
-existing paper asset/fixture/per-paper import directories, with an eligible
-machine risk. Shared renderer risk, executable app logic, all backend, CI,
-deploy, auth/persistence, workflow, tooling, governance and unknown paths retain
-Hosted. Sensitive names and traversal paths are excluded even inside eligible
-directories. Expanding this allowlist requires a separately reviewed high-risk
-PR; generic `ordinary-local-feature` alone does not prove low deployment risk.
+## Cutover boundary
 
-Every mode except `hosted-only` also requires a separately configured numeric
-App ID. Merely landing this ADR leaves the environment unset and authority at
-`hosted-only`. The disabled reader accepts only the explicit
-`QUESTION_BANK_DEPLOY_CI_AUTHORITY_MODE` values above and pins the App through
-`QUESTION_BANK_DEPLOY_AMP_CHECK_APP_ID`; repository code does not set either
-environment value.
-
-The App reader requests all pages using the exact query
-`check_name=Amp Orb Verify&filter=all&per_page=100`. It keeps only exact-name
-runs from the pinned numeric App ID, rejects duplicate immutable IDs, and
-accepts a bounded paginated read only after two consecutive snapshots agree on
-all authority-relevant fields. It then selects the greatest Check Run ID. That
-latest trusted run alone decides:
-pending, failure, neutral, skipped, stale, malformed, wrong-SHA, or ambiguous
-evidence fails closed and never falls back to an older success. A success must
-be `completed/success`, use an accepted external-ID version, and bind
-`external_id.testedSha == head_sha == clean local HEAD == live main`.
-
-Candidate resolution and the boundary immediately before the first TAT, SSH,
-or production action both reread live `main` and the complete selected
-authority. A changed checkout, dirty checkout, advanced `main`, or changed
-latest Check invalidates the action. Existing receipt-bound bootstrap
-inspection and recovery retain ADR-0023's separate safety semantics; they do
-not authorize a new release.
-
-The Hosted reader is strengthened without changing its default role. It pins
-numeric `github-actions` App ID `15368`, workflow ID `282244920`, path
-`.github/workflows/verify.yml`, event `push`, attempt `1`, repository, branch,
-exact SHA, and one common Check Suite and Workflow Run for the required jobs.
-Manual or rerun workflow evidence cannot authorize Deployment.
-
-Strong Hosted authority also requires the workflow to be completed/successful.
-In proven-low-risk `amp+hosted-e2e`, only the required `e2e` job must be
-completed/successful; a still-running or cancelled slow `verify` sibling does
-not require the entire workflow to finish. All pinned identity, exact-SHA,
-event, attempt, suite and latest-job checks still apply. This is reader semantics,
-not authorization to cancel or stop any per-push Hosted job.
-
-### Independent Hosted nightly backstop
-
-`verify.yml` schedules real `verify:all` at 18:23 UTC (02:23 Asia/Shanghai), on
-the default branch's event SHA, using the same dependency/tool installation and
-Full steps as normal verification. Its Check is distinctly `verify (nightly)`;
-the unused separate E2E job is named `e2e (nightly unused)` and skipped, never
-represented as a successful test. There is no cross-event cancellation group.
-Normal push and PR `verify` + `e2e` remain unchanged; `workflow_dispatch` retains
-distinct manual names. Nightly success is independent backstop evidence only,
-not deployment authority or a risk anchor, even on the same SHA; an older green
-nightly cannot authorize a newer SHA. Scheduled Actions may be delayed by GitHub.
-
-## Rejected protocol elements
-
-This protocol does not implement an Ed25519 attestor, signed envelope, 72-hour
-expiry, cached re-signing rule, policy digest, skip-policy digest, or signature-
-bound receipt/delivery metadata. The GitHub App identity and exact Check/SHA
-lifecycle are the trust root; text in Check output is never authority.
-
-## Activation and evidence
-
-Activation is a sequence of separately Owner-authorized shared-state changes:
-
-1. create and install one GitHub App on only `english-question-bank` with
-   `Checks: write` and `Metadata: read`;
-2. provision its numeric App and installation IDs plus PEM only to the dedicated
-   CI project, enable publication, and reload the trusted controller/plugin;
-3. leave Deployment `hosted-only`, then separately enable `shadow` and satisfy
-   the event-coverage gate below (explicitly replacing the former first-stage
-   ten-runs/seven-days calendar gate);
-4. with a new Owner decision, move to `dual`; after the event gate, risk routing
-   and a naturally successful independent nightly are evidenced, a separate
-   Owner decision may consider low-risk `amp+hosted-e2e`. Stopping low-risk
-   per-push Hosted `verify` needs its own workflow PR/authorization, not merely
-   an environment mode change;
-5. only after the cumulative second-stage event-coverage gate below is met may
-   a separate, later Owner decision allow low-risk main to use `amp` and reduce
-   per-push Hosted E2E. Hosted remains the high-risk PR and current-SHA
-   high/unproven-risk strong gate.
-
-The minimum first-stage event-coverage gate is:
-
-- At least **five** post-enable natural exact-main paired successes: real App
-  Check, private receipt and matching Hosted verdict. Pre-enable informational
-  statuses, redelivery and manual drain do not manufacture samples.
-- At least **two** natural arrivals after at least two hours idle. Without
-  sleep telemetry these are **idle-resume proxies**, not proven cold wakes.
-- The negative protocol matrix passes: newer pending/failure, wrong App/SHA/
-  external ID, invalid conclusion, pagination drift, unknown POST outcome,
-  same-ID PATCH recovery, 401 refresh and main advancing during revalidation.
-- Real failed-lane/controller propagation is demonstrated by isolated fault
-  testing or a natural same-repository PR failure. Never deliberately break main.
-- At least **two** natural candidates pass real Shadow/Dual reader pairing,
-  with Fast/Full content and every SKIP examined and no unexplained disagreement.
-
-The cumulative second-stage event-coverage gate is event-count-based, with no
-minimum calendar span or same-day exclusion:
-
-- At least **10** post-enable natural exact-main paired successes, each backed
-  by a real App Check, private receipt and matching Hosted verdict.
-- At least **3** natural arrivals after CI has been idle for **at least two
-  hours**. Without sleep telemetry these are idle-resume proxies, not proven
-  cold wakes.
-- At least **3** real Shadow/Dual reader pairings agree, with Fast/Full content
-  and every SKIP examined.
-- At least **1** successful ordinary Owner-authorized deployment.
-- At least **2** naturally scheduled successful Hosted nightly runs.
-- **No unexplained disagreement** across this evidence.
-
-Qualifying first-stage events may contribute to these cumulative totals; count
-each qualifying event only once. Pre-enable informational statuses do not count.
-Do not use empty commits, redelivery or manual drain to manufacture samples;
-manual diagnostics cannot substitute for natural main or scheduled nightly runs.
-
-These are evidence requirements, not evidence already collected by this code
-PR. App activation, observation, reduction of Hosted coverage and Deployment
-authority changes remain separate approvals. This second-stage revision replaces
-the former seven-day span and same-day exclusion with effective natural-event
-counts; it does not activate any mode or authorize a deployment.
-
-No stage authorizes App creation, Secret or environment changes, plugin reload,
-webhook redelivery, manual drain, branch-protection or workflow changes,
-Deployment configuration, or production access without a current direct Owner
-instruction for that exact action. Rollback restores fresh Hosted-only evidence
-before disabling an App authority; it never falls back automatically after an
-App failure.
+This ADR does not claim that the GitHub branch-protection cutover has occurred.
+The coordinator-owned executable runbook and evidence are
+[`docs/agents/app-ci-cutover.md`](../agents/app-ci-cutover.md). Keep Hosted
+workflow and current requirements until the real failure/success acceptance
+and App-bound policy readback are complete. At initial inspection, REST
+`branches/main/protection` and GraphQL `branchProtectionRules` returned 403
+despite repository admin permission; ordinary main/Check queries succeeded.
+See the runbook for current evidence. This ADR does not grant production,
+credential, or plugin-reload authority.
 
 ## Consequences
 
-- A newer trusted App attempt always supersedes older green evidence.
-- Candidate code receives neither App nor Deployment credentials.
-- Fast feedback stays visible without becoming deploy-authoritative.
-- Hosted-only remains safe and unchanged until an explicit staged migration.
-- The App private key is still a high-value CI-project Secret; App-only avoids
-  a redundant signer but does not pretend that key compromise is harmless.
+- The pinned App Check alone supplies CI authority; no Focused/Low report,
+  private-receipt lookup, human handoff or wait is a deployment gate.
+- The App identity is the provenance boundary; Check output is never treated as
+  cryptographic proof.
+- Old staged-authority, Shadow/Dual, nightly, and count-based rollout policy is
+  superseded rather than retained as an alternate path.
