@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-throw new Error('Intentional required-Full failure for PR 411 natural acceptance; never merge this probe')
 import { setMaxListeners } from 'node:events'
 import {
   closeSync,

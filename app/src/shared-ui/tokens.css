@@ -1,3 +1,5 @@
+/* Intentional Fast/changed parser failure for CI acceptance; never merge. */
+THIS IS AN INTENTIONAL CI PARSER FAILURE;
 :root {
   --eqb-color-bg: #f3f5f1;
   --eqb-color-bg-warm: #f3f5f1;
