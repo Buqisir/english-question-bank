@@ -1,5 +1,7 @@
 # 英语题库工作台
 
+<!-- CI natural-acceptance probe: low-risk docs, revision 1. Not for merge. -->
+
 面向英语教师的语篇中心题库与组卷工作台，已上线 https://eqbank.cc
 （邀请制登录，owner 策展、member 消费）。
 
