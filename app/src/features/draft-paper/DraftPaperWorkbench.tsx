@@ -236,6 +236,26 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const replaceUndoTimerRef = useRef<number | null>(null)
   const replaceUndoToastPresence = usePresence(replaceUndoSnapshot !== null, 120)
 
+  // Bug 4263fb71: both switch surfaces leave the workbench mounted, so a
+  // snapshot captured on the previous draft stays live on the new one and
+  // undoDelete/undoReorderSuggestion/undoSwapReplace fire restore/update
+  // against the wrong draftPaper.id. Clear every transient undo/swap
+  // snapshot (and its dismiss timer) whenever the on-screen draft changes.
+  // Stable (only refs + setState setters) so the [] deps are exact.
+  const resetTransientStateForDraftSwitch = useCallback(() => {
+    if (undoTimerRef.current) window.clearTimeout(undoTimerRef.current)
+    undoTimerRef.current = null
+    if (reorderUndoTimerRef.current) window.clearTimeout(reorderUndoTimerRef.current)
+    reorderUndoTimerRef.current = null
+    if (replaceUndoTimerRef.current) window.clearTimeout(replaceUndoTimerRef.current)
+    replaceUndoTimerRef.current = null
+    setRemovedItem(null)
+    setReorderUndoSnapshot(null)
+    setReplaceUndoSnapshot(null)
+    setSwapSeedItemId(null)
+    setSwapRequest(null)
+  }, [])
+
   const loadRecentDrafts = useCallback(() => {
     fetchDraftPapers().then(setRecentDrafts).catch(() => setRecentDrafts([]))
   }, [])
@@ -244,6 +264,11 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     setLoadStatus('loading')
     setLoadError('')
     setMigrationNotice('')
+    // popstate switch path (parent-prop change re-runs loadDraft): the
+    // [loadDraft] effect cleanup clears the undo TIMERS but not the undo
+    // STATE — clear it before the await so a stale snapshot can't fire
+    // against the new draft even when the fetch fails.
+    resetTransientStateForDraftSwitch()
     try {
       let next: DraftPaper
       if (draftPaperId) {
@@ -275,7 +300,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       setLoadStatus('error')
       setLoadError(describeError('打开草稿卷', error))
     }
-  }, [draftPaperId, loadRecentDrafts])
+  }, [draftPaperId, loadRecentDrafts, resetTransientStateForDraftSwitch])
 
   useEffect(() => {
     void loadDraft()
@@ -1437,6 +1462,10 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                     value={draftPaper.id}
                     onChange={(event) => {
                       const id = event.target.value
+                      // In-component switch path (pushState + setDraftPaper,
+                      // loadDraft never re-runs): clear the previous draft's
+                      // undo snapshots so undo can't fire against the new one.
+                      resetTransientStateForDraftSwitch()
                       const url = new URL(window.location.href)
                       url.searchParams.set('view', 'draft-paper')
                       url.searchParams.set('draftPaperId', id)
