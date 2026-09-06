@@ -5,8 +5,10 @@
 > The first-provision/TAT/bootstrap/barrier procedures below are historical,
 > not permission to execute them. Ordinary website deployment uses the dedicated
 > Deployment Orb's `amp-orb-deploy.mjs deploy --owner-said-deploy-latest` command.
-> Entry switching and database/privileged maintenance require their separately
-> stated production authorization. Never use the legacy in-place redeploy.
+> Follow `AGENTS.md`'s Goal authorization: included reviewed maintenance, deploy,
+> reconciliation, health and agreed recovery share one authorization. Historical
+> per-step approvals below are not current rules. A code-only Goal excludes
+> entry/DB/R2 changes; never use the legacy in-place redeploy.
 
 Ordered, one-time manual steps to bring `eqbank.cc` up on a fresh server.
 Everything after first provision is `scripts/deploy.sh` (redeploy) and, once
