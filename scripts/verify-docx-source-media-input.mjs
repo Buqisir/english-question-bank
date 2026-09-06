@@ -256,6 +256,58 @@ try {
     relativePath: 'docx-media/image1.png',
   }])
 
+  // The image-only VML path yields zero enumerable shapes, so an operator who
+  // hand-authors a sources.docx.shapeAssociations entry against the image-only
+  // <v:shape id="legacy-image-shape"> must NOT have it silently dropped. The
+  // publisher must surface a blocking docx.sourceMediaCaptureFailed issue
+  // instead of returning ok and writing no figures/manifest.json.
+  const vmlAssociationFixture = makeFixtureFiles(imageDocx)
+  const orphanPaperAsset = { sources: { docx: { shapeAssociations: [
+    {
+      sourcePart: 'word/document.xml',
+      sourceShapeId: 'legacy-image-shape',
+      sourcePage: 1,
+      sourcePageOrder: 1,
+      figureId: bodyFigureId,
+      groupId,
+      kind: 'figure',
+      placeholderMarker: bodyMarker,
+      caption: 'Bad association against an image-only VML shape',
+    },
+  ] } } }
+  assert.throws(
+    () => captureDocxSourceMedia({
+      fileName: vmlAssociationFixture.sourceFileName,
+      buffer: imageDocx,
+      paperAsset: orphanPaperAsset,
+    }),
+    /paper-asset\.json declares sources\.docx\.shapeAssociations but the DOCX yielded no enumerable shapes/,
+    'captureDocxSourceMedia must throw when shapeAssociations is non-empty but the DOCX yields zero enumerable shapes',
+  )
+  replaceJson(vmlAssociationFixture.files, 'paper-asset.json', (value) => {
+    value.sources.docx.shapeAssociations = orphanPaperAsset.sources.docx.shapeAssociations
+  })
+  const orphanDb = openPaperImportDb(path.join(tempRoot, 'vml-orphan-shape.sqlite'))
+  const orphanAssetsDir = path.join(tempRoot, 'vml-orphan-shape-assets')
+  const orphanPublished = publishPaperImportPackage({
+    files: vmlAssociationFixture.files,
+    db: orphanDb,
+    paperAssetsDir: orphanAssetsDir,
+  })
+  orphanDb.close()
+  assert.equal(orphanPublished.ok, false, 'publisher must reject a DOCX whose shapeAssociations cannot bind to any enumerable shape')
+  assert.ok(
+    orphanPublished.validation.blockingIssues.some(
+      (issue) => issue.code === 'docx.sourceMediaCaptureFailed',
+    ),
+    'publisher must surface a blocking docx.sourceMediaCaptureFailed issue for the dropped association',
+  )
+  assert.equal(
+    existsSync(path.join(orphanAssetsDir, paperId, 'latest', 'figures', 'manifest.json')),
+    false,
+    'no figures/manifest.json must be written when the shape association cannot bind',
+  )
+
   const realShapeDocx = makeRealShapeDocx(tempRoot)
   const shapeFixture = makeFixtureFiles(realShapeDocx)
   replaceJson(shapeFixture.files, 'paper-asset.json', (value) => {
