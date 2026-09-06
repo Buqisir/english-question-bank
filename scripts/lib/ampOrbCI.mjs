@@ -1,4 +1,4 @@
-import { createSign, randomUUID } from 'node:crypto'
+import { createHash, createSign, randomUUID } from 'node:crypto'
 import { execFileSync } from 'node:child_process'
 import {
   chmodSync,
@@ -20,6 +20,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { runVerificationCommand } from './verificationCommandRunner.mjs'
+import { AMP_ORB_CI_PR_POLICY_VERSION, classifyAmpOrbCIPullRequest, trustedAmpOrbCIPolicy } from './ampOrbCIPolicy.mjs'
 
 export const AMP_ORB_CI_REPOSITORY = 'Buqisir/english-question-bank'
 export const AMP_ORB_CI_WORKFLOW_VERSION = 'v4'
@@ -34,7 +35,7 @@ const DELIVERY_ID = /^[A-Za-z0-9][A-Za-z0-9-]{0,127}$/u
 const GITHUB_DELIVERY_ID = /^[a-f0-9]{8}-[a-f0-9]{4}-[1-5][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/iu
 const QUEUE_FILE = /^([A-Za-z0-9][A-Za-z0-9-]{0,127})\.json$/u
 const SANDBOX_BUNDLE = /^\/var\/tmp\/eqb-amp-ci\/inbox\/[a-f0-9-]{36}\/repository\.bundle$/u
-const TERMINAL_STATES = new Set(['reported'])
+const TERMINAL_STATES = new Set(['reported', 'superseded'])
 const SANDBOX_LANES = new Set(['fast', 'full'])
 const RUN_TIMEOUT_MS = 35 * 60 * 1000
 export const AMP_ORB_CI_LOCK_CONFLICT_EXIT_CODE = 75
@@ -52,7 +53,9 @@ function positiveInteger(value, label) {
 export function ampOrbCICheckExternalId(input) {
   const validated = validateAmpOrbCIInput(input)
   if (validated.event === 'pull_request') {
-    return `v5-pr:${validated.pullRequestNumber}:${validated.sha}:${validated.baseSha}:${validated.testedSha}:${validated.deliveryId}`
+    // GitHub truncates external_id at 255 bytes. The immutable tested commit
+    // already binds its tree; retain the explicit tree in the receipt/run ID.
+    return `v7-pr:${validated.pullRequestNumber}:${validated.sha}:${validated.baseSha}:${validated.testedSha}:${validated.policy.policyDigest}:${validated.deliveryId}`
   }
   return `${AMP_ORB_CI_CHECK_EXTERNAL_ID_VERSION}:${validated.testedSha}:${validated.deliveryId}`
 }
@@ -201,15 +204,16 @@ export function createGitHubCheckWriter({
         && parts[0] === AMP_ORB_CI_CHECK_EXTERNAL_ID_VERSION
         && parts[1] === sha
         && DELIVERY_ID.test(parts[2] || '')
-      const validPR = parts.length === 6
-        && parts[0] === 'v5-pr'
+      const validPR = parts.length === 7
+        && parts[0] === 'v7-pr'
         && /^[1-9][0-9]*$/u.test(parts[1])
         && Number.isSafeInteger(Number(parts[1]))
         && parts[2] === sha
         && SHA.test(parts[3]) && SHA.test(parts[4])
-        && GITHUB_DELIVERY_ID.test(parts[5])
+        && /^[a-f0-9]{64}$/u.test(parts[5]) && GITHUB_DELIVERY_ID.test(parts[6] || '')
       if (
         !SHA.test(sha || '')
+        || Buffer.byteLength(externalId || '') > 255
         || (!validPush && !validPR)
       ) throw new Error('Amp Orb CI Check external identity is invalid')
       const existing = await matchingCheck({ sha, externalId })
@@ -289,6 +293,20 @@ export function createGitHubCheckWriter({
   })
 }
 
+export function createGitHubPullRequestReader({ getInstallationToken, fetchImpl = fetch } = {}) {
+  if (typeof getInstallationToken !== 'function' || typeof fetchImpl !== 'function') {
+    throw new Error('Amp Orb CI pull request reader dependencies are missing')
+  }
+  return async (pullRequestNumber) => {
+    const token = await getInstallationToken()
+    const response = await fetchImpl(`https://api.github.com/repos/${AMP_ORB_CI_REPOSITORY}/pulls/${positiveInteger(pullRequestNumber, 'pull request number')}`, {
+      headers: { accept: 'application/vnd.github+json', authorization: `Bearer ${token}`, 'x-github-api-version': '2026-03-10' },
+    })
+    if (response.status !== 200) throw new Error(`GitHub pull request lookup failed (${response.status})`)
+    return response.json()
+  }
+}
+
 function ensurePrivateDirectory(directory) {
   mkdirSync(directory, { recursive: true, mode: 0o700 })
   chmodSync(directory, 0o700)
@@ -344,8 +362,24 @@ export function validateAmpOrbCIInput(input) {
     throw new Error('Invalid Amp Orb CI delivery identity')
   }
   if (input.event === 'pull_request') {
+    const policy = input.policy || classifyAmpOrbCIPullRequest([], { alwaysFull: true })
+    const testedTree = input.testedTree || input.testedSha
     if (!Number.isSafeInteger(input.pullRequestNumber) || input.pullRequestNumber < 1) {
       throw new Error('Invalid Amp Orb CI pull request identity')
+    }
+    const expectedFilesDigest = createHash('sha256').update([...new Set(policy?.files || [])].sort().join('\0')).digest('hex')
+    const expectedLanes = policy?.override || !['ui-micro', 'non-governance-docs', 'known-shape-paper-data'].includes(policy?.risk)
+      ? ['fast', 'full'] : ['fast']
+    const expectedPolicyDigest = createHash('sha256').update(JSON.stringify({
+      policyVersion: AMP_ORB_CI_PR_POLICY_VERSION, requiredLanes: expectedLanes,
+      risk: policy?.risk, override: policy?.override ?? null, filesDigest: expectedFilesDigest,
+    })).digest('hex')
+    if (!SHA.test(testedTree) || policy?.policyVersion !== AMP_ORB_CI_PR_POLICY_VERSION
+      || !/^[a-f0-9]{64}$/u.test(policy?.filesDigest || '')
+      || !Array.isArray(policy?.files) || !Array.isArray(policy?.requiredLanes)
+      || policy.filesDigest !== expectedFilesDigest || policy.policyDigest !== expectedPolicyDigest
+      || JSON.stringify(policy.requiredLanes) !== JSON.stringify(expectedLanes)) {
+      throw new Error('Invalid Amp Orb CI pull request policy')
     }
   } else if (input.pullRequestNumber !== null && input.pullRequestNumber !== undefined) {
     throw new Error('Push CI input cannot include a pull request identity')
@@ -360,6 +394,10 @@ export function validateAmpOrbCIInput(input) {
     deliveryId: input.deliveryId,
     pullRequestNumber: input.pullRequestNumber ?? null,
     forced: input.forced === true,
+    ...(input.event === 'pull_request' ? {
+      testedTree: input.testedTree || input.testedSha,
+      policy: input.policy || classifyAmpOrbCIPullRequest([], { alwaysFull: true }),
+    } : {}),
   }
 }
 
@@ -387,8 +425,12 @@ export function validateAmpOrbCIQueueInput(input) {
 
 export function ampOrbCIRunId(input) {
   const validated = validateAmpOrbCIInput(input)
-  const version = validated.event === 'pull_request' ? 'v5-pr' : AMP_ORB_CI_WORKFLOW_VERSION
-  return `${version}-${validated.testedSha}`
+  if (validated.event === 'pull_request') {
+    const scoped = [validated.pullRequestNumber, validated.sha, validated.baseSha, validated.testedTree,
+      validated.policy.policyVersion, validated.policy.policyDigest].join(':')
+    return `v7-pr-${createHash('sha256').update(scoped).digest('hex')}`
+  }
+  return `${AMP_ORB_CI_WORKFLOW_VERSION}-${validated.testedSha}`
 }
 
 export function enqueueAmpOrbCIJob(input, { stateDir } = {}) {
@@ -431,6 +473,10 @@ export async function drainAmpOrbCIQueue({ stateDir, resolveJob, runJob } = {}) 
     if (!match) throw new Error('Amp Orb CI queue filename is invalid')
     const queuePath = path.join(queueDir, file)
     const item = readJson(queuePath)
+    if (item?.terminal?.kind === 'superseded') {
+      results.push({ deliveryId: match[1], outcome: 'superseded' })
+      continue
+    }
     const queuedInput = validateAmpOrbCIQueueInput(item?.input)
     if (
       item?.schemaVersion !== AMP_ORB_CI_QUEUE_SCHEMA_VERSION
@@ -466,7 +512,21 @@ export async function drainAmpOrbCIQueue({ stateDir, resolveJob, runJob } = {}) 
         continue
       }
       if (input === null) {
-        rmSync(queuePath)
+        const previousInput = item.resolvedInput || (queuedInput.kind !== 'resolve' ? queuedInput : null)
+        if (previousInput) {
+          let staleResult
+          try {
+            staleResult = await runJob(previousInput)
+          } catch {
+            results.push({ deliveryId: queuedInput.deliveryId, outcome: 'deferred' })
+            continue
+          }
+          if (!['superseded', 'cached'].includes(staleResult?.outcome)
+            || staleResult?.receipt?.state !== 'superseded') {
+            throw new Error('Amp Orb CI stale queue receipt was not durably superseded')
+          }
+        }
+        atomicWriteJson(queuePath, { ...item, terminal: { kind: 'superseded', at: new Date().toISOString() } })
         results.push({
           deliveryId: queuedInput.deliveryId,
           outcome: 'stale',
@@ -475,14 +535,27 @@ export async function drainAmpOrbCIQueue({ stateDir, resolveJob, runJob } = {}) 
       }
       input = validateAmpOrbCIInput(input)
     }
-    const result = await runJob(input)
+    // Keep the resolved identity across crashes. A later stale webhook must
+    // still reconcile/finish the original immutable Check, not abandon it.
+    atomicWriteJson(queuePath, { ...item, resolvedInput: input })
+    let result
+    try {
+      result = await runJob(input)
+    } catch {
+      results.push({ deliveryId: input.deliveryId, outcome: 'deferred' })
+      continue
+    }
     if (
-      !['cached', 'reported'].includes(result?.outcome)
-      || result?.receipt?.state !== 'reported'
+      !['cached', 'reported', 'superseded'].includes(result?.outcome)
+      || !['reported', 'superseded'].includes(result?.receipt?.state)
     ) {
       throw new Error('Amp Orb CI queue job did not reach a terminal receipt')
     }
-    rmSync(queuePath)
+    if (result.receipt.state === 'superseded') {
+      atomicWriteJson(queuePath, { ...item, terminal: { kind: 'superseded', at: new Date().toISOString(), runId: result.receipt.runId } })
+    } else {
+      rmSync(queuePath)
+    }
     results.push({
       deliveryId: input.deliveryId,
       outcome: result.outcome,
@@ -575,6 +648,9 @@ export function sandboxInvocation(input, {
   if (validated.pullRequestNumber) {
     args.push('--pull-request', String(validated.pullRequestNumber))
   }
+  if (lane === 'fast' && validated.event === 'pull_request' && !validated.policy.requiredLanes.includes('full')) {
+    args.push('--verify-changed')
+  }
   if (validated.forced) args.push('--forced')
   return { command: 'sudo', args, environment }
 }
@@ -645,6 +721,8 @@ export function ensureCompleteAmpOrbCIGitHistory(repositoryRoot, {
 
 export async function resolveAmpOrbCIPullRequest(input, {
   repositoryRoot,
+  getPullRequest,
+  trustedPolicyImpl = trustedAmpOrbCIPolicy,
   retryDelaysMs = [0, 500, 1_000, 2_000, 4_000],
   sleep = (delayMs) => new Promise((resolve) => setTimeout(resolve, delayMs)),
   trustedGitImpl = trustedGit,
@@ -660,12 +738,28 @@ export async function resolveAmpOrbCIPullRequest(input, {
   ) {
     throw new Error('Invalid unresolved Amp Orb CI pull request identity')
   }
+  if (typeof getPullRequest !== 'function' || typeof trustedPolicyImpl !== 'function') {
+    throw new Error('Amp Orb CI pull request resolution requires trusted API and policy dependencies')
+  }
+  const readLive = async () => {
+    const live = await getPullRequest(input.pullRequestNumber)
+    if (!live || !['open', 'closed'].includes(live.state) || typeof live.base?.repo?.full_name !== 'string'
+      || typeof live.head?.repo?.full_name !== 'string' || typeof live.base?.ref !== 'string'
+      || !SHA.test(live.head?.sha || '') || !SHA.test(live.base?.sha || '')) {
+      throw new Error('GitHub pull request response is incomplete')
+    }
+    if (live.state !== 'open' || live.base.repo.full_name !== AMP_ORB_CI_REPOSITORY
+      || live.head.repo.full_name !== AMP_ORB_CI_REPOSITORY || live.base.ref !== 'main'
+      || live.head.sha !== input.sha || live.base.sha !== input.baseSha) return null
+    return live
+  }
   const incomingRef = [
     'refs/amp-ci/resolve/pr',
     input.pullRequestNumber,
     input.deliveryId,
   ].join('/')
   try {
+    if (!await readLive()) return null
     let fetchError = null
     for (const delayMs of retryDelaysMs) {
       if (delayMs > 0) await sleep(delayMs)
@@ -683,17 +777,29 @@ export async function resolveAmpOrbCIPullRequest(input, {
       }
     }
     if (fetchError) throw fetchError
+    if (!await readLive()) return null
     const testedSha = trustedGitImpl(repositoryRoot, ['rev-parse', `${incomingRef}^{commit}`])
     if (!SHA.test(testedSha || '')) {
       throw new Error('Resolved Amp Orb CI pull request merge SHA is invalid')
     }
-    const fetchedBase = trustedGitImpl(repositoryRoot, ['rev-parse', `${incomingRef}^1`])
-    const fetchedHead = trustedGitImpl(repositoryRoot, ['rev-parse', `${incomingRef}^2`])
-    if (fetchedBase !== input.baseSha || fetchedHead !== input.sha) return null
+    ensureCompleteAmpOrbCIGitHistory(repositoryRoot, { trustedGitImpl })
+    const parents = trustedGitImpl(repositoryRoot, ['rev-list', '--parents', '-n', '1', incomingRef]).split(' ')
+    if (parents.length !== 3 || parents[0] !== testedSha) throw new Error('Resolved pull request merge must have exactly two ordered parents')
+    const [, fetchedBase, fetchedHead] = parents
+    if (fetchedBase !== input.baseSha || fetchedHead !== input.sha) {
+      // The live API still matches this delivery: the merge ref may be lagging.
+      throw new Error('Live pull request merge ref is not ready for its current parents')
+    }
+    trustedGitImpl(repositoryRoot, ['merge-base', '--is-ancestor', fetchedBase, fetchedHead])
+    const testedTree = trustedGitImpl(repositoryRoot, ['rev-parse', `${incomingRef}^{tree}`])
+    const headTree = trustedGitImpl(repositoryRoot, ['rev-parse', `${fetchedHead}^{tree}`])
+    if (!SHA.test(testedTree || '') || testedTree !== headTree) throw new Error('Resolved Amp Orb CI pull request tree is invalid')
+    const policy = trustedPolicyImpl(repositoryRoot, fetchedBase, fetchedHead)
     return {
       ...input,
       kind: 'run',
       testedSha,
+      testedTree, policy,
     }
   } finally {
     trustedGitImpl(repositoryRoot, ['update-ref', '-d', incomingRef], { allowFailure: true })
@@ -737,14 +843,22 @@ export function prepareAmpOrbCIBundle(input, { repositoryRoot } = {}) {
       `+${remoteRef}:${incomingRef}`,
     ])
     const fetchedSha = trustedGit(repositoryRoot, ['rev-parse', `${incomingRef}^{commit}`])
-    if (fetchedSha !== validated.testedSha) {
+    if (validated.event !== 'pull_request' && fetchedSha !== validated.testedSha) {
       throw new Error(`Webhook tested SHA is stale: fetched ${fetchedSha}, expected ${validated.testedSha}`)
     }
     if (validated.event === 'pull_request') {
-      const fetchedBase = trustedGit(repositoryRoot, ['rev-parse', `${incomingRef}^1`])
-      const fetchedHead = trustedGit(repositoryRoot, ['rev-parse', `${incomingRef}^2`])
-      if (fetchedBase !== validated.baseSha || fetchedHead !== validated.sha) {
+      const originalParents = trustedGit(repositoryRoot, ['rev-list', '--parents', '-n', '1', validated.testedSha]).split(' ')
+      const fetchedParents = trustedGit(repositoryRoot, ['rev-list', '--parents', '-n', '1', incomingRef]).split(' ')
+      if (originalParents.length !== 3 || originalParents[0] !== validated.testedSha
+        || originalParents[1] !== validated.baseSha || originalParents[2] !== validated.sha
+        || fetchedParents.length !== 3 || fetchedParents[1] !== validated.baseSha || fetchedParents[2] !== validated.sha) {
         throw new Error('Webhook pull request merge parents are stale')
+      }
+      const originalTree = trustedGit(repositoryRoot, ['rev-parse', `${validated.testedSha}^{tree}`])
+      const fetchedTree = trustedGit(repositoryRoot, ['rev-parse', `${incomingRef}^{tree}`])
+      // Forced diagnostics have no live policy/tree envelope and cannot publish.
+      if (originalTree !== fetchedTree || (!validated.forced && originalTree !== validated.testedTree)) {
+        throw new Error('Webhook pull request merge tree is stale')
       }
       assertAmpOrbCIHeadTree(validated, { repositoryRoot })
     }
@@ -868,9 +982,10 @@ export async function executeAmpOrbCILanes(input, {
   writeOutput,
   timeoutMs = RUN_TIMEOUT_MS,
 } = {}) {
+  const validated = validateAmpOrbCIInput(input)
   const startedAt = Date.now()
   reapProcesses()
-  const runLane = executeLane || ((lane) => executeAmpOrbCISandbox(input, {
+  const runLane = executeLane || ((lane) => executeAmpOrbCISandbox(validated, {
     lane,
     manageProcesses: false,
     repositoryRoot,
@@ -884,19 +999,21 @@ export async function executeAmpOrbCILanes(input, {
       await onFastResult(execution)
       return execution
     })
-    const outcomes = await Promise.allSettled([fastPromise, runLane('full')])
+    const requireFull = validated.event === 'push' || validated.policy.requiredLanes.includes('full')
+    const outcomes = await Promise.allSettled([fastPromise, ...(requireFull ? [runLane('full')] : [])])
     const rejected = outcomes.find((outcome) => outcome.status === 'rejected')
     if (rejected) throw rejected.reason
-    const [fast, full] = outcomes.map((outcome) => outcome.value)
-    const clean = fast.result.clean === true && full.result.clean === true
-    const exitCode = fast.exitCode === 0 && full.exitCode === 0 && clean ? 0 : 1
+    const [fast, executedFull] = outcomes.map((outcome) => outcome.value)
+    const full = executedFull?.result || { kind: 'not-required', reason: 'by-policy' }
+    const clean = fast.result.clean === true && (!requireFull || full.clean === true)
+    const exitCode = fast.exitCode === 0 && (!requireFull || executedFull.exitCode === 0) && clean ? 0 : 1
     return {
       exitCode,
       result: {
         kind: 'verified',
         fast: fast.result,
-        full: full.result,
-        verifyExitCode: full.result.verifyExitCode,
+        full,
+        verifyExitCode: requireFull ? full.verifyExitCode : null,
         e2eFailureCount: fast.result.e2eFailureCount,
         clean,
         wallSeconds: Math.max(0, (Date.now() - startedAt) / 1000),
@@ -911,23 +1028,37 @@ export async function executeAmpOrbCILanes(input, {
 function validVerificationCounts(counts) {
   return ['pass', 'skip', 'fail'].every((key) => (
     Number.isSafeInteger(counts?.[key]) && counts[key] >= 0
-  )) && counts.pass > 0
+  ))
+}
+
+function fastLaneSucceeded(fast, event, policy) {
+  const changedRequired = event === 'pull_request' && !policy?.requiredLanes.includes('full')
+  return fast?.kind === 'verified' && fast.exitCode === 0
+    && fast.e2eFailureCount === 0 && fast.clean === true
+    && (changedRequired
+      ? fast.commandCount === 7 && fast.verifyExitCode === 0
+        && validVerificationCounts(fast.verificationCounts) && fast.verificationCounts.fail === 0
+      : fast.commandCount === 6 || (event === 'push' && fast.commandCount === undefined))
+}
+
+function fullLaneSucceeded(full) {
+  return full?.kind === 'verified' && full.exitCode === 0
+    && full.verifyExitCode === 0 && full.clean === true
+    && validVerificationCounts(full.verificationCounts)
+    && full.verificationCounts.pass > 0 && full.verificationCounts.fail === 0
 }
 
 function authoritativeCheckSucceeded(receipt) {
   const result = receipt?.result
-  return receipt?.conclusion === 'success'
+  const fullNotRequired = receipt.event === 'pull_request'
+    && !receipt.policy?.requiredLanes.includes('full')
+    && result?.full?.kind === 'not-required'
+    && result.full.reason === 'by-policy'
+  return receipt?.state !== 'superseded'
+    && receipt?.conclusion === 'success'
     && result?.kind === 'verified'
-    && result.fast?.kind === 'verified'
-    && result.full?.kind === 'verified'
-    && result.fast?.exitCode === 0
-    && result.fast?.e2eFailureCount === 0
-    && result.fast?.clean === true
-    && result.full?.exitCode === 0
-    && result.full?.verifyExitCode === 0
-    && validVerificationCounts(result.full?.verificationCounts)
-    && result.full?.verificationCounts?.fail === 0
-    && result.full?.clean === true
+    && fastLaneSucceeded(result.fast, receipt.event, receipt.policy)
+    && (fullNotRequired || fullLaneSucceeded(result.full))
     && result.clean === true
     && result.exitCode === 0
 }
@@ -943,17 +1074,10 @@ export function ampOrbCICheckSummary(receipt) {
     ? `${lane.wallSeconds.toFixed(1)}s`
     : 'unknown duration'
   const laneState = (lane, succeeded) => `${succeeded ? 'PASS' : 'FAIL'} (${duration(lane)})`
-  const fastSucceeded = fast?.kind === 'verified'
-    && fast.exitCode === 0
-    && fast.e2eFailureCount === 0
-    && fast.clean === true
-  const fullSucceeded = full?.kind === 'verified'
-    && full.exitCode === 0
-    && full.verifyExitCode === 0
-    && validVerificationCounts(full.verificationCounts)
-    && full.verificationCounts?.fail === 0
-    && full.clean === true
+  const fastSucceeded = fastLaneSucceeded(fast, receipt.event, receipt.policy)
+  const fullSucceeded = fullLaneSucceeded(full)
   const counts = full?.verificationCounts
+  const fullNotRequired = full?.kind === 'not-required' && full.reason === 'by-policy'
   const countSummary = validVerificationCounts(counts)
     ? `PASS ${counts.pass} / SKIP ${counts.skip} / FAIL ${counts.fail}`
     : 'PASS/SKIP/FAIL counts unavailable'
@@ -962,9 +1086,18 @@ export function ampOrbCICheckSummary(receipt) {
     `Head: ${receipt.sha}`,
     `Base: ${receipt.baseSha}`,
     `Tested: ${receipt.testedSha}`,
+    ...(receipt.policy ? [
+      `Tested tree: ${receipt.testedTree}`,
+      `Policy: ${receipt.policy.policyVersion}; digest: ${receipt.policy.policyDigest}`,
+      `Risk: ${receipt.policy.risk}; override: ${receipt.policy.override ?? 'none'}; required lanes: ${receipt.policy.requiredLanes.join(', ')}`,
+      `Files digest: ${receipt.policy.filesDigest}`,
+      ...(!receipt.policy.requiredLanes.includes('full') ? [`Changed: exit ${fast?.verifyExitCode ?? 'unavailable'}; ${validVerificationCounts(fast?.verificationCounts)
+        ? `PASS ${fast.verificationCounts.pass} / SKIP ${fast.verificationCounts.skip} / FAIL ${fast.verificationCounts.fail}`
+        : 'counts unavailable'}`] : []),
+    ] : []),
     `Fast: ${laneState(fast, fastSucceeded)}`,
-    `Full: ${laneState(full, fullSucceeded)}`,
-    countSummary,
+    `Full: ${fullNotRequired ? 'NOT REQUIRED (by policy)' : laneState(full, fullSucceeded)}`,
+    ...(fullNotRequired ? [] : [countSummary]),
     `Tracked clean: ${receipt?.result?.clean === true ? 'yes' : 'no'}`,
   ].join('\n')
 }
@@ -985,9 +1118,19 @@ export async function runAmpOrbCIJob(input, {
   stateDir,
   publishCheck = null,
   execute,
+  assertFresh,
   now = () => Date.now(),
 } = {}) {
-  const validated = validateAmpOrbCIInput(input)
+  let validated = validateAmpOrbCIInput(input)
+  if (validated.event === 'pull_request' && typeof assertFresh !== 'function') {
+    throw new Error('Authoritative pull request freshness dependency is missing')
+  }
+  const requireFresh = async (stage) => {
+    if (validated.event === 'push') return true
+    const fresh = await assertFresh(validated, stage)
+    if (typeof fresh !== 'boolean') throw new Error('Pull request freshness is unknown')
+    return fresh
+  }
   ensurePrivateDirectory(stateDir)
 
   const runId = ampOrbCIRunId(validated)
@@ -998,13 +1141,15 @@ export async function runAmpOrbCIJob(input, {
   if (receipt && (
     receipt.runId !== runId
     || receipt.sha !== validated.sha
-    || receipt.testedSha !== validated.testedSha
+    || (receipt.testedSha !== validated.testedSha && receipt.testedTree !== validated.testedTree)
     || receipt.baseSha !== validated.baseSha
+    || (receipt.testedTree !== undefined && receipt.testedTree !== validated.testedTree)
     || receipt.event !== validated.event
     || receipt.pullRequestNumber !== validated.pullRequestNumber
+    || (validated.event === 'pull_request' && JSON.stringify(receipt.policy) !== JSON.stringify(validated.policy))
     || receipt.workflowVersion !== AMP_ORB_CI_WORKFLOW_VERSION
     || (receipt.checkExternalId && receipt.checkExternalId !== ampOrbCICheckExternalId({
-      ...validated,
+      ...validated, testedSha: receipt.testedSha,
       deliveryId: receipt.firstDeliveryId,
     }))
     || (receipt.checkRunId !== undefined && (
@@ -1015,8 +1160,9 @@ export async function runAmpOrbCIJob(input, {
   )) {
     throw new Error('Amp Orb CI receipt identity mismatch')
   }
-  if (receipt && TERMINAL_STATES.has(receipt.state)) {
-    return { outcome: 'cached', receipt, logPath }
+  if (receipt) {
+    // Equivalent merge rebuilds reuse the original execution and external ID.
+    validated = { ...validated, testedSha: receipt.testedSha }
   }
   let checkPublisher = null
   if (receipt?.checkExternalId) {
@@ -1029,7 +1175,24 @@ export async function runAmpOrbCIJob(input, {
   } else if (!resumedReceipt && publishCheck && canPublishAuthoritativeCheck(validated)) {
     checkPublisher = publishCheck
   }
+  const markSuperseded = async () => {
+    const result = supersedeReceipt(receiptPath, receipt, now)
+    if (checkPublisher && result.receipt.checkRunId) {
+      await completeAuthoritativeCheck(result.receipt, checkPublisher)
+    }
+    return { ...result, logPath }
+  }
+  if (receipt && TERMINAL_STATES.has(receipt.state)) {
+    if (receipt.state === 'superseded' && checkPublisher && receipt.checkRunId) {
+      await completeAuthoritativeCheck(receipt, checkPublisher)
+    }
+    if (receipt.state === 'reported' && validated.event === 'pull_request'
+      && !await requireFresh('cached')) return markSuperseded()
+    return { outcome: 'cached', receipt, logPath }
+  }
   if (receipt?.state === 'verified') {
+    if (!await requireFresh('verified-recovery')) return markSuperseded()
+    if (!await requireFresh('before-patch')) return markSuperseded()
     if (checkPublisher) await completeAuthoritativeCheck(receipt, checkPublisher)
     receipt = {
       ...receipt,
@@ -1050,13 +1213,14 @@ export async function runAmpOrbCIJob(input, {
     schemaVersion: 'amp-orb-ci-run-v2',
     workflowVersion: AMP_ORB_CI_WORKFLOW_VERSION,
     runId,
-    state: 'running',
+    state: receipt?.state || 'prepared',
     repository: AMP_ORB_CI_REPOSITORY,
     sha: validated.sha,
     testedSha: validated.testedSha,
     baseSha: validated.baseSha,
     event: validated.event,
     pullRequestNumber: validated.pullRequestNumber,
+    ...(validated.event === 'pull_request' ? { testedTree: validated.testedTree, policy: validated.policy } : {}),
     forced: validated.forced,
     firstDeliveryId,
     ...(checkPublisher ? { checkExternalId } : {}),
@@ -1065,7 +1229,13 @@ export async function runAmpOrbCIJob(input, {
   }
   atomicWriteJson(receiptPath, receipt)
   if (checkPublisher && !receipt.checkRunId) {
-    const publishStart = resumedReceipt ? checkPublisher.reconcile : checkPublisher.start
+    const creating = receipt.state === 'creating'
+    if (!creating && !await requireFresh('before-create')) return markSuperseded()
+    if (!creating) {
+      receipt = { ...receipt, state: 'creating' }
+      atomicWriteJson(receiptPath, receipt)
+    }
+    const publishStart = creating ? checkPublisher.reconcile : checkPublisher.start
     if (typeof publishStart !== 'function') {
       throw new Error('Amp Orb CI Check creation recovery dependency is missing')
     }
@@ -1073,9 +1243,13 @@ export async function runAmpOrbCIJob(input, {
       sha: validated.sha,
       externalId: checkExternalId,
     })
-    receipt = { ...receipt, checkRunId }
+    receipt = { ...receipt, state: 'running', checkRunId }
+    atomicWriteJson(receiptPath, receipt)
+  } else if (receipt.state === 'prepared') {
+    receipt = { ...receipt, state: 'running' }
     atomicWriteJson(receiptPath, receipt)
   }
+  if (!await requireFresh('before-execute')) return markSuperseded()
   ensurePrivateDirectory(path.dirname(logPath))
   const logDescriptor = openSync(logPath, 'w', 0o600)
   let execution
@@ -1114,7 +1288,11 @@ export async function runAmpOrbCIJob(input, {
     wallSeconds: Math.max(0, (now() - startedAtMs) / 1000),
   }
   atomicWriteJson(receiptPath, receipt)
-  if (checkPublisher) await completeAuthoritativeCheck(receipt, checkPublisher)
+  if (!await requireFresh('before-complete')) return markSuperseded()
+  if (checkPublisher) {
+    if (!await requireFresh('before-patch')) return markSuperseded()
+    await completeAuthoritativeCheck(receipt, checkPublisher)
+  }
   receipt = {
     ...receipt,
     state: 'reported',
@@ -1122,6 +1300,12 @@ export async function runAmpOrbCIJob(input, {
   }
   atomicWriteJson(receiptPath, receipt)
   return { outcome: 'reported', receipt, logPath }
+}
+
+function supersedeReceipt(receiptPath, receipt, now) {
+  const superseded = { ...receipt, state: 'superseded', conclusion: 'failure', supersededAt: new Date(now()).toISOString() }
+  atomicWriteJson(receiptPath, superseded)
+  return { outcome: 'superseded', receipt: superseded }
 }
 
 export function defaultAmpOrbCIStateDir(repositoryRoot) {
