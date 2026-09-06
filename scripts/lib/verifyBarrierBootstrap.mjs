@@ -13,15 +13,16 @@ import { buildBarrierTatCommand } from './barrierBootstrapTat.mjs'
 export async function verifyBarrierBootstrap(repository) {
   const uid = process.getuid(), gid = process.getgid()
   const before = '1'.repeat(40), target = '2'.repeat(40), production = '3'.repeat(40)
-  // Retired bootstrap lifecycle fixtures exercise the retained legacy engine,
-  // not delivery of the new SSH installer through the old bounded TAT channel.
+  // Retired bootstrap fixtures exercise byte binding and the actual delayed
+  // request admission guard, not delivery of today's complete release engine.
   const readLegacyFixture = name => {
     const bytes = fs.readFileSync(path.join(repository, name))
     if (name !== 'deploy/eqb-deploy-controller.mjs') return bytes
     const source = bytes.toString('utf8')
+    const start = source.indexOf('export function parseControllerCommand(')
     const boundary = source.indexOf('export function parseControlledCommand(')
-    assert.ok(boundary > 0)
-    return Buffer.from(source.slice(0, boundary))
+    assert.ok(start > 0 && boundary > start)
+    return Buffer.from(`import { lstatSync } from 'node:fs'\nimport path from 'node:path'\n${source.slice(start, boundary)}`)
   }
   const payload = buildPayload(target, readLegacyFixture)
   assert.equal(buildPayload(target, readLegacyFixture), payload)

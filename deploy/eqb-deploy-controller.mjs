@@ -498,7 +498,7 @@ function hostConfigurationMatchesTarget(config, dependencies, targetSha) {
   } catch { return false }
 }
 
-function assertOrdinaryReleaseBoundary(config, dependencies, previousSha, targetSha) {
+function assertOrdinaryReleaseBoundary(config, dependencies, previousSha, targetSha, reviewedCodeOnlyDigest = null) {
   const stableLauncherChanges = changedProtectedPaths(
     config,
     dependencies,
@@ -531,13 +531,18 @@ function assertOrdinaryReleaseBoundary(config, dependencies, previousSha, target
       'Target host configuration has not passed the separately authorized update',
     )
   }
-  if (changedProtectedPaths(
+  const persistencePaths = changedProtectedPaths(
     config,
     dependencies,
     previousSha,
     targetSha,
     PERSISTENCE_AUTHORITY_PATHS,
-  ).length > 0) {
+  )
+  if (reviewedCodeOnlyDigest !== null
+    && (persistencePaths.length === 0 || changedPathDigest(persistencePaths) !== reviewedCodeOnlyDigest)) {
+    throw controllerFailure('CODE_ONLY_REVIEW_MISMATCH', 'Protected diff differs from the explicitly reviewed code-only change')
+  }
+  if (persistencePaths.length > 0 && reviewedCodeOnlyDigest === null) {
     throw controllerFailure(
       'SEPARATE_MUTATION_AUTHORIZATION_REQUIRED',
       'Target changes production persistence authority',
@@ -841,7 +846,7 @@ function snapshotDatabases(config, dependencies, directory) {
     if (typeof dependencies.snapshotDatabase === 'function') {
       dependencies.snapshotDatabase(filePath, snapshot)
     } else {
-      dependencies.runSystem('/usr/bin/sqlite3', [filePath, `.backup '${snapshot}'`], {
+      dependencies.runSystem('/usr/bin/sqlite3', ['-readonly', filePath, `.backup '${snapshot}'`], {
         timeout: COMMAND_TIMEOUT_MS,
         stdio: 'ignore',
       })
@@ -1046,6 +1051,84 @@ function restart(config, dependencies) {
   })
 }
 
+// Exercise startup ensures on disposable online copies, never on live databases.
+// A private network makes the health port independent of the serving release;
+// the mount sandbox allows writes only to this preparation directory.
+function checkCandidate(config, dependencies, sha) {
+  const directory = mkdtempSync(path.join(config.root, 'releases', '.candidate-health-'))
+  try {
+    snapshotDatabases(config, dependencies, directory)
+    dependencies.chown(directory, config.runtimeUser, config.runtimeUser)
+    const release = readReleaseMarker(config, sha).directory
+    const script = `
+      import { spawn } from 'node:child_process'
+      import { setTimeout } from 'node:timers/promises'
+      const directory = process.argv[1]
+      const child = spawn('/usr/bin/node', ['server/api.mjs'], {
+        stdio: 'ignore', env: { ...process.env,
+          QUESTION_BANK_DB: directory + '/question-bank.sqlite',
+          USER_DATA_DB: directory + '/user-data.sqlite',
+          QUESTION_BANK_IMPORT_OPS_DB: directory + '/import-ops.sqlite',
+          QUESTION_BANK_IMPORT_OPS_ROOT: directory + '/import-files',
+          QUESTION_BANK_USER_SPACE_ROOT: directory + '/user-files',
+          QUESTION_BANK_PAPER_ASSET_ROOT: directory + '/paper-assets',
+          AI_DAILY_USAGE_SNAPSHOT_PATH: directory + '/ai-usage.json',
+          QUESTION_BANK_API_PORT: '8787',
+        },
+      })
+      let failed = false
+      child.on('error', () => { failed = true })
+      let healthy = false
+      try {
+        for (let attempt = 0; attempt < 30 && child.exitCode === null && !failed; attempt++) {
+          try {
+            const response = await fetch('http://127.0.0.1:8787/api/health', { signal: AbortSignal.timeout(1000) })
+            if (response.ok && (await response.json()).ok === true) { healthy = true; break }
+          } catch {}
+          await setTimeout(1000)
+        }
+      } finally { child.kill('SIGTERM') }
+      process.exit(healthy ? 0 : 1)
+    `
+    dependencies.runSystem('/usr/bin/systemd-run', [
+      '--quiet', '--wait', '--collect', '--pipe',
+      '--property=Type=exec', '--property=RuntimeMaxSec=60s',
+      '--property=KillMode=control-group', '--property=PrivateNetwork=yes',
+      '--property=ProtectSystem=strict', '--property=ProtectHome=yes',
+      '--property=PrivateTmp=yes', '--property=NoNewPrivileges=yes',
+      `--property=ReadWritePaths=${directory}`, `--property=WorkingDirectory=${release}`,
+      `--uid=${config.runtimeUser}`, '--', '/usr/bin/env', '-i',
+      'PATH=/usr/local/bin:/usr/bin:/bin', 'NODE_ENV=production',
+      '/usr/bin/node', '--input-type=module', '-e', script, directory,
+    ], { timeout: 90_000, stdio: 'ignore' })
+  } finally {
+    rmSync(directory, { recursive: true, force: true })
+  }
+}
+
+// Each recovery action is independent: a timed-out stop/start must not skip
+// restoring the other service. Call only when previous DB compatibility holds.
+async function restorePreviousServices(config, dependencies, previousSha) {
+  const failed = []
+  let pointerChanged = false
+  const attempt = (stage, action) => {
+    try { action() } catch { failed.push(stage) }
+  }
+  attempt('POINTER', () => {
+    pointerChanged = currentReleaseSha(config) !== previousSha
+    if (pointerChanged) switchCurrent(config, previousSha)
+  })
+  let previousSelected = false
+  attempt('POINTER_VERIFY', () => { previousSelected = currentReleaseSha(config) === previousSha })
+  if (previousSelected) {
+    attempt('START_APP', () => serviceAction(config, dependencies, pointerChanged ? 'restart' : 'start', config.service))
+    attempt('START_CADDY', () => serviceAction(config, dependencies, 'start', config.caddyService))
+  }
+  const healthy = previousSelected && await healthCheck(config, dependencies)
+  if (!healthy) failed.push('HEALTH')
+  return { previousSelected, healthy, failed }
+}
+
 function writeReceipt(config, receipt) {
   const receipts = path.join(config.root, 'deployments', 'receipts')
   ensureDirectory(receipts, 0o700)
@@ -1082,7 +1165,7 @@ function terminalReceipt({
   }
 }
 
-async function deploy(config, dependencies, targetSha) {
+async function deploy(config, dependencies, targetSha, reviewedCodeOnlyDigest = null) {
   const startedAt = new Date().toISOString()
   let previousSha = null
   let staged = false
@@ -1090,44 +1173,41 @@ async function deploy(config, dependencies, targetSha) {
   let rolledBack = false
   let rollbackHealthy = null
   let failureCode = null
+  let phase = 'PREPARATION'
 
   assertLayout(config, dependencies)
   try {
     previousSha = currentReleaseSha(config)
     const fetchedSha = fetchMain(config, dependencies)
     if (fetchedSha !== targetSha) throw new Error('Production source main does not match target SHA')
-    assertOrdinaryReleaseBoundary(config, dependencies, previousSha, targetSha)
+    assertOrdinaryReleaseBoundary(config, dependencies, previousSha, targetSha, reviewedCodeOnlyDigest)
     staged = prepareRelease(config, dependencies, targetSha).staged
+    if (previousSha !== targetSha) checkCandidate(config, dependencies, targetSha)
     const recheckedSha = fetchMain(config, dependencies)
     if (recheckedSha !== targetSha) throw new Error('GitHub main changed while preparing release')
 
     if (previousSha === targetSha) {
       noOp = true
-      if (!await healthCheck(config, dependencies)) failureCode = 'CURRENT_RELEASE_UNHEALTHY'
+      if (!await healthCheck(config, dependencies)) throw controllerFailure('CURRENT_RELEASE_UNHEALTHY', 'Current release is unhealthy')
     } else {
+      phase = 'SWITCH_CURRENT'
       switchCurrent(config, targetSha)
-      try {
-        restart(config, dependencies)
-        if (!await healthCheck(config, dependencies)) failureCode = 'HEALTH_CHECK_FAILED'
-      } catch {
-        failureCode = 'ACTIVATION_FAILED'
-      }
-      if (failureCode) {
-        try {
-          switchCurrent(config, previousSha)
-          rolledBack = true
-          restart(config, dependencies)
-          rollbackHealthy = await healthCheck(config, dependencies)
-        } catch {
-          rollbackHealthy = false
-        }
-      }
+      phase = 'RESTART_APP'
+      restart(config, dependencies)
+      phase = 'PUBLIC_HEALTH'
+      if (!await healthCheck(config, dependencies)) throw controllerFailure('HEALTH_CHECK_FAILED', 'Candidate is unhealthy')
     }
   } catch (error) {
     failureCode ||= error.controllerFailureCode
       || (error.message === 'GitHub main changed while preparing release'
         ? 'MAIN_CHANGED'
-        : 'PREPARATION_FAILED')
+        : `${phase}_FAILED`)
+    if (previousSha !== null && (phase !== 'PREPARATION' || !await healthCheck(config, dependencies))) {
+      const restored = await restorePreviousServices(config, dependencies, previousSha)
+      rolledBack = restored.previousSelected && phase !== 'PREPARATION'
+      rollbackHealthy = restored.healthy
+      if (restored.failed.length) failureCode += `__ROLLBACK_${restored.failed.join('_')}_FAILED`
+    }
   }
 
   const receipt = terminalReceipt({
@@ -1329,6 +1409,8 @@ async function deployReviewedPersistence(
   let rollbackHealthy = null
   let failureCode = null
   let state = null
+  let persistenceStarted = false
+  let phase = 'PREPARATION'
   try {
     previousSha = currentReleaseSha(config)
     const fetchedSha = fetchMain(config, dependencies)
@@ -1365,6 +1447,7 @@ async function deployReviewedPersistence(
       throw controllerFailure('REVIEWED_PERSISTENCE_DIFF_MISMATCH', 'Protected diff is not the reviewed diff')
     }
     staged = prepareRelease(config, dependencies, targetSha).staged
+    checkCandidate(config, dependencies, targetSha)
     if (fetchMain(config, dependencies) !== targetSha) {
       throw controllerFailure('MAIN_CHANGED', 'GitHub main changed while preparing release')
     }
@@ -1379,21 +1462,30 @@ async function deployReviewedPersistence(
       trafficReopened,
       startedAt,
     }
+    phase = 'SAVE_MAINTENANCE'
     writeMaintenanceState(statePath, state)
-
+    phase = 'STOP_CADDY'
     serviceAction(config, dependencies, 'stop', config.caddyService)
+    phase = 'STOP_APP'
     serviceAction(config, dependencies, 'stop', config.service)
+    phase = 'SNAPSHOT_DATABASES'
     snapshots = snapshotDatabases(config, dependencies, path.join(stateRoot, `snapshots-${randomUUID()}`))
     state = { ...state, snapshots }
+    phase = 'SAVE_SNAPSHOTS'
     writeMaintenanceState(statePath, state)
+    phase = 'SWITCH_CURRENT'
     switchCurrent(config, targetSha)
+    phase = 'ENSURE_DATABASES'
+    persistenceStarted = true
     runImportOpsPersistenceEnsures(config, dependencies, targetSha)
+    phase = 'START_APP'
     serviceAction(config, dependencies, 'start', config.service)
     if (!await localHealthCheck(config, dependencies)) {
       throw controllerFailure('LOCAL_MIGRATION_HEALTH_FAILED', 'Candidate failed local migration health')
     }
     for (const { filePath } of databasePaths(config)) verifySqliteDatabase(dependencies, filePath)
 
+    phase = 'SECOND_START'
     serviceAction(config, dependencies, 'stop', config.service)
     serviceAction(config, dependencies, 'start', config.service)
     if (!await localHealthCheck(config, dependencies)) {
@@ -1403,28 +1495,34 @@ async function deployReviewedPersistence(
 
     trafficReopened = true
     state = { ...state, trafficReopened }
+    phase = 'REOPEN_TRAFFIC'
     writeMaintenanceState(statePath, state)
     serviceAction(config, dependencies, 'start', config.caddyService)
     if (!await healthCheck(config, dependencies)) {
       throw controllerFailure('POST_TRAFFIC_HEALTH_FAILED', 'Candidate failed after traffic reopened')
     }
   } catch (error) {
-    failureCode = error.controllerFailureCode || 'REVIEWED_PERSISTENCE_FAILED'
+    failureCode = error.controllerFailureCode || `${phase}_FAILED`
     if (state && !trafficReopened) {
-      try {
-        serviceAction(config, dependencies, 'stop', config.caddyService)
-        serviceAction(config, dependencies, 'stop', config.service)
-        if (Object.keys(snapshots).length > 0) {
+      let previousDatabasesSafe = !persistenceStarted
+      if (!previousDatabasesSafe) {
+        try {
+          serviceAction(config, dependencies, 'stop', config.caddyService)
+          serviceAction(config, dependencies, 'stop', config.service)
           restoreDatabaseSnapshots(config, dependencies, snapshots)
           databasesRestored = true
+          previousDatabasesSafe = true
+        } catch {
+          failureCode += '__ROLLBACK_DATABASES_FAILED'
         }
-        switchCurrent(config, previousSha)
-        rolledBack = true
-        serviceAction(config, dependencies, 'start', config.service)
-        serviceAction(config, dependencies, 'start', config.caddyService)
-        rollbackHealthy = await healthCheck(config, dependencies)
-      } catch {
-        failureCode = 'PRE_TRAFFIC_ROLLBACK_FAILED'
+      }
+      if (previousDatabasesSafe) {
+        const restored = await restorePreviousServices(config, dependencies, previousSha)
+        rolledBack = restored.previousSelected
+        rollbackHealthy = restored.healthy
+        if (restored.failed.length) failureCode += `__ROLLBACK_${restored.failed.join('_')}_FAILED`
+      } else {
+        // Never start previous code against an incompletely restored schema.
         rollbackHealthy = false
       }
     }
@@ -1936,6 +2034,9 @@ function preflight(config, dependencies) {
 
 export function parseControllerCommand(originalCommand) {
   if (originalCommand === 'preflight') return { command: 'preflight', sha: null }
+  const classified = /^deploy ([a-f0-9]{40}) (code-only|migrate) ([a-f0-9]{64})$/u.exec(originalCommand || '')
+  if (classified) return { command: classified[2] === 'migrate' ? 'deploy-reviewed-persistence' : 'deploy',
+    sha: classified[1], digest: classified[3] }
   const deployMatch = /^deploy ([a-f0-9]{40})$/u.exec(originalCommand || '')
   if (deployMatch) return { command: 'deploy', sha: deployMatch[1], digest: null }
   const maintenanceMatch = /^(deploy-reviewed-persistence|update-host-config) ([a-f0-9]{40}) ([a-f0-9]{64})$/u
@@ -1973,7 +2074,7 @@ export async function runController({
   catch (error) { if (error.code !== 'ENOENT') throw error; barrierAbsent = true }
   if (!barrierAbsent) throw new Error('ROOT_DISPATCH_BARRIER_PRESENT')
   const result = parsed.command === 'deploy'
-    ? await deploy(config, runtimeDependencies, parsed.sha)
+    ? await deploy(config, runtimeDependencies, parsed.sha, parsed.digest)
     : parsed.command === 'deploy-reviewed-persistence'
       ? await deployReviewedPersistence(config, runtimeDependencies, parsed.sha, parsed.digest)
       : await updateHostConfiguration(config, runtimeDependencies, parsed.sha, parsed.digest)
@@ -2321,7 +2422,19 @@ if (isEntrypoint) {
       result = await installControlledEntry({ plan: JSON.parse(bytes), planDigest: process.argv[4],
         payloadDirectory: path.dirname(fileURLToPath(import.meta.url)) })
     } else {
-      result = await runControlledController({ originalCommand: process.env.SSH_ORIGINAL_COMMAND })
+      const originalCommand = process.env.SSH_ORIGINAL_COMMAND
+      if (originalCommand !== 'preflight') {
+        if (!/^deploy [a-f0-9]{40}(?: (?:code-only|migrate) [a-f0-9]{64})?$/u.test(originalCommand || '')) {
+          throw new Error('COMMAND_INVALID')
+        }
+        // Retained incident evidence is not a resumable deployment. Its admission
+        // may only be retired by the separately reviewed incident closeout.
+        if (legacyMaintenancePresent(PRODUCTION_CONFIG)
+          || pathEntryExists(path.join(PRODUCTION_CONFIG.root, 'deployments/controlled-ssh/active.json'))) {
+          throw new Error('UNRESOLVED_MAINTENANCE_PRESENT')
+        }
+      }
+      result = await runController({ originalCommand })
     }
     process.stdout.write(formatControllerOutput(result.output))
     process.exitCode = result.exitCode

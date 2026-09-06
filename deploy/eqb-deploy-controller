@@ -10,38 +10,24 @@ controller_module=/opt/eqb/deployments/host-configuration/current/deploy/eqb-dep
 if [ "$#" -eq 1 ] && [ "$1" = preflight ]; then
   original_command=preflight
 else
-  case "${2-}" in
-    ????????-????-4???-[89ab]???-????????????) ;;
-    *) exit 64 ;;
-  esac
-  case "$2" in *[!a-f0-9-]*) exit 64 ;; esac
-  if [ "$#" -eq 3 ] && [ "$1" = deploy ] && [ "$3" = status ]; then
-    original_command="status $2"
-  elif [ "$#" -eq 3 ] && [ "$1" = deploy ]; then
-  case "$3" in
-    ''|*[!a-f0-9]*) exit 64 ;;
-  esac
-  [ "${#3}" -eq 40 ] || exit 64
-  original_command="deploy $2 $3"
-elif [ "$#" -eq 4 ] \
-  && { [ "$1" = deploy-reviewed-persistence ] || [ "$1" = update-host-config ]; }; then
-  case "$3" in
-    ''|*[!a-f0-9]*) exit 64 ;;
-  esac
-  [ "${#3}" -eq 40 ] || exit 64
-  case "$4" in
-    ''|*[!a-f0-9]*) exit 64 ;;
-  esac
-  [ "${#4}" -eq 64 ] || exit 64
-  original_command="$1 $2 $3 $4"
-else
-  exit 64
-fi
+  [ "${1-}" = deploy ] || exit 64
+  case "${2-}" in ''|*[!a-f0-9]*) exit 64 ;; esac
+  [ "${#2}" -eq 40 ] || exit 64
+  if [ "$#" -eq 2 ]; then
+    original_command="deploy $2"
+  elif [ "$#" -eq 4 ]; then
+    case "$3" in code-only|migrate) ;; *) exit 64 ;; esac
+    case "$4" in ''|*[!a-f0-9]*) exit 64 ;; esac
+    [ "${#4}" -eq 64 ] || exit 64
+    original_command="deploy $2 $3 $4"
+  else
+    exit 64
+  fi
 fi
 
 # Readonly operations must be callable while maintenance owns the lock. They
 # cannot dispatch recovery or mutation and are also used for local route proof.
-if [ "${original_command%% *}" = preflight ] || [ "${original_command%% *}" = status ]; then
+if [ "${original_command%% *}" = preflight ]; then
   exec /usr/bin/env -i SSH_ORIGINAL_COMMAND="$original_command" \
     PATH=/usr/local/bin:/usr/bin:/bin /usr/bin/node --no-addons "$controller_module"
 fi

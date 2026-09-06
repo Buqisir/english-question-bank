@@ -1,5 +1,44 @@
 # Controlled SSH maintenance migration
 
+## Incident repair: single daily deployment command
+
+The Owner superseded the daily transaction-bound protocol below after the
+pre-traffic service-stop incident. Its receipts and UNKNOWN evidence remain
+historical evidence, not resumable work. The repaired daily route is restricted
+SSH → existing exclusive lock → release build/preparation → isolated candidate
+startup/health → atomic application pointer → restart → public health, with one
+result receipt. TAT, bootstrap, barrier, rebind, UUID status/replay, and separate
+maintenance command names are not daily deployment operations.
+
+`deploy --owner-said-deploy-latest` still resolves and rechecks exact current
+main against natural Hosted verify/e2e authority. A protected-path difference
+is a review trigger, not proof of a database mutation. For a reviewed code-only
+delta, add `--reviewed-code-only-digest <protected-path-digest>`; the host
+recomputes that digest against its current release before preparation. No SQL
+text heuristic is used. Candidate startup runs on disposable online SQLite
+copies with a private network and read-only filesystem outside its temporary
+directory; those copies are not an offline cross-database recovery point.
+
+Actual schema/data mutation uses the same deploy command with
+`--reviewed-migration-digest <protected-path-digest>`, retaining the existing
+offline three-database backup/ensure boundary. This is explicit migration scope,
+not a declaration that all changes to an API/store file require migration.
+No live ensure is moved ahead of traffic shutdown. Before any candidate
+persistence, stop/backup failure must attempt old app and Caddy independently;
+a second stop failure must never skip service recovery. Receipt failure codes
+retain the primary phase and any failed rollback stages. After candidate
+persistence, old code is started only with verified restored databases; no
+pre-traffic snapshot is replayed after traffic reopening.
+
+The prior incident's outer and inner active files continue to block production
+until one separately reviewed, authorized incident closeout installs the repaired
+controller/launchers and retires admission while preserving exact evidence.
+This code does not clear them, rewrite the old UNKNOWN result, or authorize a
+production controller self-upgrade. The deployment target is the reviewed latest
+main containing the website changes and this repair, not the older website SHA.
+
+## Historical entry migration
+
 Status: engineering in progress; Owner authorized the bounded migration and
 deployment, conditional on exact reviewed main and required CI gates.
 
