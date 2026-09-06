@@ -30,17 +30,28 @@ retain the primary phase and any failed rollback stages. After candidate
 persistence, old code is started only with verified restored databases; no
 pre-traffic snapshot is replayed after traffic reopening.
 
-The prior incident's outer and inner active files continue to block production
-until one separately reviewed, authorized incident closeout installs the repaired
-controller/launchers and retires admission while preserving exact evidence.
-This code does not clear them, rewrite the old UNKNOWN result, or authorize a
-production controller self-upgrade. The deployment target is the reviewed latest
-main containing the website changes and this repair, not the older website SHA.
+The incident closeout and first repaired SSH deployment completed successfully.
+The initial closeout stopped before installation because its expected digest
+was built from an in-memory status projection rather than the disk record;
+status did not mutate evidence. Correcting that input allowed the reviewed
+closeout to preserve old UNKNOWN evidence, retire admission and prove health.
+Always distinguish disk records, active state and status projections when
+reconciling a lost response; UNKNOWN is never permission to replay a mutation.
+
+Apply `AGENTS.md`'s Goal authorization to the complete stated transaction.
+Included reviewed entry maintenance, deployment, read-only reconciliation,
+health and agreed rollback/recovery do not need separate install/finalize/status
+approvals. CLI `--owner-said-*` flags attest that existing authorization, not a
+new conversation per flag. Ordinary code-only updates use the single deploy
+command above; preflight and retained receipts diagnose loss without reactivating
+retired UUID status, TAT or bootstrap commands. New privileges, Secrets, targets,
+uncovered destructive data/R2 operations or irreversible risks still require
+Owner authorization. Code-only or merge-only Goals never imply those operations.
 
 ## Historical entry migration
 
-Status: engineering in progress; Owner authorized the bounded migration and
-deployment, conditional on exact reviewed main and required CI gates.
+The remainder records the superseded migration design, not current commands or
+additional authorization steps. Do not execute its retired install/status route.
 
 Owner superseded the TAT/bootstrap/barrier diagnostic work. PR339 is closed
 without merge; its commit and the old UNKNOWN/staging evidence remain retained.
@@ -207,7 +218,7 @@ particular, an old selected entry does not understand the new admission file;
 its mere existence is not proof of global isolation. No automatic retry, background
 task, cleanup or extra recovery protocol is introduced.
 
-After success, separately authorized pinned SSH preflight must show the reviewed
+After success, pinned SSH preflight under the same authorized Goal must show the reviewed
 controller SHA and unchanged application SHA; readonly `status` must match the
 installation UUID. External connection loss is not permission to repeat the
 operation or roll back after subsequent work. An ordinary website deployment is

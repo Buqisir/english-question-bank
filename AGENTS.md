@@ -39,6 +39,25 @@ Historical cuts are evidence, not current instructions.
 - Durable product scope and decisions belong in the relevant spec, ticket, or
   ADR. `.scratch/` is same-task scratch only.
 
+## Goal authorization
+
+One explicit Owner Goal authorizes its complete bounded transaction, not one
+tool call. Within the stated repository, host/environment and privileges,
+continue through diagnosis, same-transaction status/evidence reconciliation,
+reviewed entry maintenance, deployment, health checks and the agreed rollback
+or recovery when those outcomes are included in the Goal. Do not ask again at
+install/finalize/status/deploy boundaries. Implementation or merge alone does
+not imply deployment; explicit non-goals still apply.
+
+Ask again only to expand privileges, access/change Secrets beyond the existing
+authorized route, change the target repository/host/environment, perform
+uncovered destructive DB/schema/data or R2 operations, or accept a new
+irreversible risk. An UNKNOWN result requires read-only reconciliation before
+any mutation, not fresh permission to inspect or permission to replay. Preserve
+evidence and locks; recovery must stay within the reviewed plan and proven state.
+Authorization never substitutes for review, CI, exact-target/digest checks or
+the production traffic/data recovery boundary.
+
 ## Verify the changed risk
 
 Run the narrowest public-seam checks that exercise the changed behavior and its
@@ -98,11 +117,12 @@ uniquely supplies; otherwise keep it outside daily packs.
   `origin/main`, require `git status --porcelain` to be empty, then rerun
   `pnpm -C app verify:changed -- --base-ref origin/main` and the affected
   behavioral/user-flow checks. A rebase, conflict resolution, or newly advanced
-  `origin/main` invalidates all earlier results. Stop and ask before resolving a
-  conflict that changes behavior.
-- Push only with `git push origin HEAD:main`. If it is not a fast-forward,
-  restart from fetch/rebase and repeat every validation; never force-push
-  `main`.
+  `origin/main` invalidates all earlier results. Resolve conflicts only within
+  the Goal while preserving unrelated behavior; apply the authorization boundary
+  above if a conflict requires broader scope.
+- Push the task branch and merge its PR only when the Goal includes Ship and
+  the reviewed candidate's required Hosted checks pass. Do not bypass branch
+  protection or force-push `main`; Custom Ship remains inactive.
 - After Ship, report the exact 40-hex `main` SHA and parent, machine risk,
   changed files, one-paragraph summary, and every command as `PASS` or `SKIP`
   with the limitation. Hand that exact SHA to Focused CI and keep the
@@ -145,34 +165,28 @@ uniquely supplies; otherwise keep it outside daily packs.
 - Website deployment belongs only to the separate private Deployment Orb
   project. Development and CI Orbs must not receive its SSH key.
 - A current Owner instruction `部署最新版` authorizes that one website-code
-  deployment attempt; the agent resolves current `main` itself and runs
+  deployment Goal, including diagnosis, health and agreed recovery; resolve
+  current `main` and run
   `node scripts/amp-orb-deploy.mjs deploy --owner-said-deploy-latest`. Never ask
   the Owner to copy a SHA.
 - The deploy command requires exact-main successful non-manual hosted `verify`
-  and `e2e` from the `github-actions` App, then sends that SHA and a fresh
-  correlation UUID through
-  pinned SSH to the root-owned fixed host controller. Never stream candidate
+  and `e2e` from the `github-actions` App, then sends that SHA through pinned
+  restricted SSH to the root-owned fixed host controller. Never stream candidate
   deployment code, bypass the forced command, or use the legacy in-place deploy
   after cutover.
-- Website deployment never authorizes migration, Review/paper promotion,
-  database or R2 mutation, production configuration changes, or controller
-  upgrades. Each needs its own explicit current Owner authorization.
+- A code-only Goal excludes migration, Review/paper promotion, DB/R2 mutation
+  and controller/host changes. A Goal that explicitly includes reviewed entry
+  maintenance and deployment covers both, without an extra activation approval.
 - The controlled SSH route replaces daily TAT/bootstrap/barrier/rebind and
-  their multi-stage activation. Retired CLI commands fail closed. Preserve the
-  old UNKNOWN and staging evidence; never replay its UUID or claim zero mutation.
-- Initial entry migration is one separately authorized root-console maintenance
-  transaction, not a forced-command self-upgrade. Follow
-  `docs/cuts/controlled-ssh-maintenance/plan.md` for exact reviewed payload/plan
-  bindings, retained terminal evidence, lock, rollback and acceptance. Merging
-  code does not authorize production entry switching or deployment.
-- Ordinary deployment is one command. Actual persistence or privileged host
-  changes still require their explicitly reviewed scope. Installed controller
-  identity is independent of application SHA; equal installed bytes need no rebind.
-- On lost response or unknown state, query the exact UUID with separately
-  authorized readonly `status --owner-said-status --transaction UUID`. Status
-  never resumes work. Persistent maintenance blocks new mutations; do not clear
-  evidence or blindly retry. Recovery beyond automatic healthy rollback requires
-  a new bounded production decision, not a generic recovery command.
+  multi-stage activation. Ordinary code-only deployment is one SSH command;
+  retired install/finalize/status commands are not extra steps. Follow the
+  current section of `docs/cuts/controlled-ssh-maintenance/plan.md`.
+- On response loss, reconcile the same operation through supported read-only
+  preflight and retained receipts under the existing Goal. A status projection
+  is not a disk record or proof of no mutation. Never replay an UNKNOWN operation,
+  clear admission/evidence, or restore pre-traffic data after traffic reopened.
+  Recovery outside the reviewed plan requires a new bounded decision only when
+  it crosses the Goal authorization boundaries above.
 
 ## Owner QA
 
