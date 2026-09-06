@@ -19,9 +19,11 @@ are verified. Never merge the deliberate failure probe.
 
 The trusted App is numeric ID **4835036**, slug
 `eqb-amp-ci-authoritative-checks`. Match name, numeric App ID, exact SHA and
-`v4:<testedSha>:<naturalDeliveryId>`; text or Commit Status names are not trust.
-For a PR, query its **current test-merge SHA**, not only its head. Verify the
-merge's ordered parents equal the current base and head. For deployment, only
+`v4:<testedSha>:<naturalDeliveryId>` for main; text or Commit Status names are not trust.
+For a PR, query its **current head SHA**, with
+`v5-pr:<number>:<headSha>:<baseSha>:<testedSha>:<naturalDeliveryId>`. The tested
+merge retains exact ordered base/head parents; the controller additionally
+requires base ancestry in head and equal tested-merge/head trees. For deployment, only
 the exact live `main` SHA qualifies. A newer pending or failed Check is not
 replaced by an older success.
 
@@ -85,6 +87,26 @@ protections were preserved. The earlier UI observation recorded linear history,
 administrator bypass disabled, and force pushes/deletions disallowed. No API
 policy snapshot or saved strict/up-to-date readback is available to this task;
 do not promote the UI account into independent API proof.
+
+Subsequent Owner UI confirmation (2026-09-06, PR409 binding repair): main's
+classic rule has strict/up-to-date enabled, only `Amp Orb Verify` from
+EQB Amp CI Authoritative Checks (App 4835036) required, Do not allow bypass
+enabled with no role/App exceptions, and no rulesets. This supplies the explicit
+protection precondition for stable-head Checks; API protection reads remain 403.
+Strict protection must remain enforced: a newer base not in the head requires
+an updated head and new Check. No protection change is part of this repair.
+
+PR409 exposed an availability defect in merge-attached Checks: successful Check
+[101454460436](https://github.com/Buqisir/english-question-bank/runs/101454460436)
+was attached to a merge SHA later regenerated with identical ordered parents
+and tree. The new merge and head had no Check, so ordinary merge required an
+expected Check. The v5-pr repair attaches new PR Checks only to head, still tests
+the exact merge, and isolates old receipts rather than copying their success.
+Local regressions do not establish GitHub merge acceptance: enable only the
+reviewed candidate in the existing CI host under a bounded authorization, then
+observe a natural failing head blocked and a natural successful head admitted
+through ordinary protected merge. No synthetic Check, replay, bypass, or
+deployment is authorized by this procedure.
 
 Hosted `verify/e2e` continued to run during acceptance; running did not imply
 they were still required. The current human record identifies no remaining

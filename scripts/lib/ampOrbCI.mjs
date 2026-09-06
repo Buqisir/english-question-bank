@@ -51,6 +51,9 @@ function positiveInteger(value, label) {
 
 export function ampOrbCICheckExternalId(input) {
   const validated = validateAmpOrbCIInput(input)
+  if (validated.event === 'pull_request') {
+    return `v5-pr:${validated.pullRequestNumber}:${validated.sha}:${validated.baseSha}:${validated.testedSha}:${validated.deliveryId}`
+  }
   return `${AMP_ORB_CI_CHECK_EXTERNAL_ID_VERSION}:${validated.testedSha}:${validated.deliveryId}`
 }
 
@@ -194,12 +197,20 @@ export function createGitHubCheckWriter({
     },
     async start({ sha, externalId, detailsUrl = null }) {
       const parts = String(externalId || '').split(':')
+      const validPush = parts.length === 3
+        && parts[0] === AMP_ORB_CI_CHECK_EXTERNAL_ID_VERSION
+        && parts[1] === sha
+        && DELIVERY_ID.test(parts[2] || '')
+      const validPR = parts.length === 6
+        && parts[0] === 'v5-pr'
+        && /^[1-9][0-9]*$/u.test(parts[1])
+        && Number.isSafeInteger(Number(parts[1]))
+        && parts[2] === sha
+        && SHA.test(parts[3]) && SHA.test(parts[4])
+        && GITHUB_DELIVERY_ID.test(parts[5])
       if (
         !SHA.test(sha || '')
-        || parts.length !== 3
-        || parts[0] !== AMP_ORB_CI_CHECK_EXTERNAL_ID_VERSION
-        || parts[1] !== sha
-        || !DELIVERY_ID.test(parts[2] || '')
+        || (!validPush && !validPR)
       ) throw new Error('Amp Orb CI Check external identity is invalid')
       const existing = await matchingCheck({ sha, externalId })
       if (existing) return existing.id
@@ -375,7 +386,9 @@ export function validateAmpOrbCIQueueInput(input) {
 }
 
 export function ampOrbCIRunId(input) {
-  return `${AMP_ORB_CI_WORKFLOW_VERSION}-${validateAmpOrbCIInput(input).testedSha}`
+  const validated = validateAmpOrbCIInput(input)
+  const version = validated.event === 'pull_request' ? 'v5-pr' : AMP_ORB_CI_WORKFLOW_VERSION
+  return `${version}-${validated.testedSha}`
 }
 
 export function enqueueAmpOrbCIJob(input, { stateDir } = {}) {
@@ -687,6 +700,19 @@ export async function resolveAmpOrbCIPullRequest(input, {
   }
 }
 
+export function assertAmpOrbCIHeadTree(input, { repositoryRoot, trustedGitImpl = trustedGit } = {}) {
+  const validated = validateAmpOrbCIInput(input)
+  if (validated.event !== 'pull_request') return
+  // Strict branch protection must remain enabled: a newer base outside this
+  // head then blocks merging, rather than reusing a head Check for untested code.
+  trustedGitImpl(repositoryRoot, ['merge-base', '--is-ancestor', validated.baseSha, validated.sha])
+  const headTree = trustedGitImpl(repositoryRoot, ['rev-parse', `${validated.sha}^{tree}`])
+  const mergeTree = trustedGitImpl(repositoryRoot, ['rev-parse', `${validated.testedSha}^{tree}`])
+  if (!SHA.test(headTree || '') || mergeTree !== headTree) {
+    throw new Error('Amp Orb CI tested merge tree differs from PR head')
+  }
+}
+
 export function prepareAmpOrbCIBundle(input, { repositoryRoot } = {}) {
   const validated = validateAmpOrbCIInput(input)
   ensureCompleteAmpOrbCIGitHistory(repositoryRoot)
@@ -720,6 +746,7 @@ export function prepareAmpOrbCIBundle(input, { repositoryRoot } = {}) {
       if (fetchedBase !== validated.baseSha || fetchedHead !== validated.sha) {
         throw new Error('Webhook pull request merge parents are stale')
       }
+      assertAmpOrbCIHeadTree(validated, { repositoryRoot })
     }
     if (trustedGit(repositoryRoot, ['cat-file', '-e', `${validated.baseSha}^{commit}`], {
       allowFailure: true,
@@ -931,6 +958,10 @@ export function ampOrbCICheckSummary(receipt) {
     ? `PASS ${counts.pass} / SKIP ${counts.skip} / FAIL ${counts.fail}`
     : 'PASS/SKIP/FAIL counts unavailable'
   return [
+    `Event: ${receipt.event}; PR: ${receipt.pullRequestNumber ?? 'none'}`,
+    `Head: ${receipt.sha}`,
+    `Base: ${receipt.baseSha}`,
+    `Tested: ${receipt.testedSha}`,
     `Fast: ${laneState(fast, fastSucceeded)}`,
     `Full: ${laneState(full, fullSucceeded)}`,
     countSummary,
@@ -968,6 +999,9 @@ export async function runAmpOrbCIJob(input, {
     receipt.runId !== runId
     || receipt.sha !== validated.sha
     || receipt.testedSha !== validated.testedSha
+    || receipt.baseSha !== validated.baseSha
+    || receipt.event !== validated.event
+    || receipt.pullRequestNumber !== validated.pullRequestNumber
     || receipt.workflowVersion !== AMP_ORB_CI_WORKFLOW_VERSION
     || (receipt.checkExternalId && receipt.checkExternalId !== ampOrbCICheckExternalId({
       ...validated,
@@ -1036,7 +1070,7 @@ export async function runAmpOrbCIJob(input, {
       throw new Error('Amp Orb CI Check creation recovery dependency is missing')
     }
     const checkRunId = await publishStart.call(checkPublisher, {
-      sha: validated.testedSha,
+      sha: validated.sha,
       externalId: checkExternalId,
     })
     receipt = { ...receipt, checkRunId }

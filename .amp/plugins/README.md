@@ -101,7 +101,7 @@ The allowlist accepts same-repository pull requests into `main` on `opened`, `sy
 `reopened`, and `ready_for_review`, plus pushes to `refs/heads/main`. It verifies GitHub's raw-body
 `X-Hub-Signature-256`, ignores PR title/body text, and rejects SHA drift. For PRs, the trusted
 checkout verifies GitHub's exact test-merge SHA and ordered base/head parents, matching the existing
-Actions workflow rather than testing the head in isolation. GitHub PR payload merge SHAs may be null
+test-merge execution semantics rather than testing the head in isolation. GitHub PR payload merge SHAs may be null
 or stale, so every signed PR delivery durably queues only its base/head/PR identity before any
 network lookup. The background controller resolves the current `refs/pull/<number>/merge`, accepts
 it only when its two parents exactly match the signed delivery's base and head, and never substitutes
@@ -110,8 +110,11 @@ to the runner. Workflow v4 starts two separate candidate checkouts concurrently:
 the six existing GitHub E2E commands on isolated ports, while the Full lane runs `verify:all`. Before
 the lanes, the trusted controller POSTs the sole authoritative exact-name `Amp Orb Verify` Check as
 `in_progress` under App ID `4835036` (`eqb-amp-ci-authoritative-checks`) and PATCHes the
-receipt-bound same Check ID after both settle. Its `external_id` is
-`v4:<testedSha>:<naturalDeliveryId>`. Discovery, manual, rerequest, forced diagnostics, Commit
+receipt-bound same Check ID after both settle. PR Checks attach to stable head, while execution
+remains on the exact merge. Complete-history base ancestry in head and equal merge/head trees
+are required before lanes run; strict/up-to-date main protection with no bypass must stay enabled.
+PR `external_id` is `v5-pr:<number>:<headSha>:<baseSha>:<testedSha>:<naturalDeliveryId>`;
+pushes retain `v4:<testedSha>:<naturalDeliveryId>` on exact main. Discovery, manual, rerequest, forced diagnostics, Commit
 Statuses, and human reports cannot publish or replace the authoritative Check.
 Candidate code executes as the separate locked `eqb-ci` Unix user under an empty allowlisted
 environment; Amp Project Secrets and the App credential stay in the trusted controller process.
@@ -134,10 +137,11 @@ thread:
 There is no status-token or `QUESTION_BANK_AMP_CI_GITHUB_CHECKS_ENABLED`
 fallback. Do not create the App, provision these settings, or reload from
 repository code.
-The Check `external_id` is `v4:<testedSha>:<naturalDeliveryId>`; uncertain creation is reconciled only
+The versioned Check `external_id` above binds its target; uncertain creation is reconciled only
 through one unique exact external ID, and crash recovery PATCHes the same private-receipt Check ID
-without rerunning Fast or Full. Check output is human-readable duration, PASS/SKIP/FAIL, and clean
-state only—not a signature or independent proof. No Ed25519 attestor or signed envelope exists.
+without rerunning Fast or Full. PR `v5-pr` run IDs isolate older merge-attached receipts, which
+must not be retargeted. Check output records head/base/tested identities, duration, PASS/SKIP/FAIL,
+and clean state—not a signature or independent proof. No Ed25519 attestor or signed envelope exists.
 
 After an approved plugin load, explicitly run `CI Orb: 复制 GitHub CI Webhook URL` and put the
 private capability URL in one GitHub repository webhook that sends only Pull requests and Push

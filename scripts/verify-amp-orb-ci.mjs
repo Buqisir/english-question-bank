@@ -37,6 +37,7 @@ import {
   ampOrbCICheckSummary,
   ampOrbCILockInvocation,
   ampOrbCIRunId,
+  assertAmpOrbCIHeadTree,
   createGitHubAppInstallationTokenProvider,
   createGitHubCheckWriter,
   drainAmpOrbCIQueue,
@@ -150,6 +151,23 @@ try {
   ensureCompleteAmpOrbCIGitHistory(checkout, { trustedGitImpl: git })
   assert.equal(git(checkout, ['rev-parse', '--is-shallow-repository']), 'false')
   git(checkout, ['cat-file', '-e', `${syntheticBase}^{commit}`])
+  const bindingInput = {
+    event: 'pull_request', sha: syntheticHead, baseSha: syntheticMain,
+    testedSha: syntheticMerge, deliveryId, pullRequestNumber: 292,
+  }
+  assert.throws(() => assertAmpOrbCIHeadTree(bindingInput, { repositoryRoot: checkout }),
+    /merge-base failed/u, 'a behind-base head cannot receive success for a merged tree')
+  assert.throws(() => assertAmpOrbCIHeadTree({ ...bindingInput, baseSha: syntheticBase },
+    { repositoryRoot: checkout }), /tree differs/u, 'ancestry alone does not excuse a different tested tree')
+  const tree = git(checkout, ['rev-parse', `${syntheticHead}^{tree}`])
+  const mergeOne = git(source, ['commit-tree', tree, '-p', syntheticBase, '-p', syntheticHead, '-m', 'merge one'])
+  const mergeTwo = git(source, ['commit-tree', tree, '-p', syntheticBase, '-p', syntheticHead, '-m', 'merge rebuilt'])
+  assert.notEqual(mergeOne, mergeTwo)
+  for (const merge of [mergeOne, mergeTwo]) {
+    assert.doesNotThrow(() => assertAmpOrbCIHeadTree({
+      ...bindingInput, baseSha: syntheticBase, testedSha: merge,
+    }, { repositoryRoot: source }), 'same-tree merge-ref regeneration remains compatible with the head')
+  }
   const unresolvedInput = {
     kind: 'resolve',
     event: 'pull_request',
@@ -856,7 +874,7 @@ const jobInput = validateAmpOrbCIInput({
   deliveryId,
   pullRequestNumber: 292,
 })
-assert.equal(ampOrbCIRunId(jobInput), `${AMP_ORB_CI_WORKFLOW_VERSION}-${testedSha}`)
+assert.equal(ampOrbCIRunId(jobInput), `v5-pr-${testedSha}`)
 assert.throws(() => validateAmpOrbCIInput({ ...jobInput, event: 'issues' }), /event/u)
 assert.throws(() => validateAmpOrbCIInput({ ...jobInput, sha: 'HEAD' }), /commit identity/u)
 assert.throws(() => validateAmpOrbCIInput({
@@ -1123,7 +1141,11 @@ assert.equal(tokenRequests.length, 2)
 assert.equal(tokenRequests[0].url, 'https://api.github.com/app/installations/3131/access_tokens')
 assert.equal(JSON.stringify(tokenRequests).includes('in-memory-test-key-sentinel'), false)
 
-const externalId = ampOrbCICheckExternalId(jobInput)
+const prExternalId = ampOrbCICheckExternalId(jobInput)
+assert.equal(prExternalId, `v5-pr:292:${headSha}:${baseSha}:${testedSha}:${deliveryId}`)
+const externalId = ampOrbCICheckExternalId({
+  ...jobInput, event: 'push', sha: testedSha, pullRequestNumber: null,
+})
 assert.equal(externalId, `${AMP_ORB_CI_WORKFLOW_VERSION}:${testedSha}:${deliveryId}`)
 const checkApiRequests = []
 let checkTokenRefreshes = 0
@@ -1415,7 +1437,7 @@ try {
     publishCheck: {
       async start(started) {
         appCheckEvents.push('check-start')
-        assert.deepEqual(started, { sha: testedSha, externalId })
+        assert.deepEqual(started, { sha: headSha, externalId: prExternalId })
         return 909
       },
       async complete(completed) {
@@ -1425,13 +1447,14 @@ try {
     },
     async execute(options) {
       appCheckEvents.push('execute')
+      assert.equal(options.input.testedSha, testedSha, 'head publication must not change the exact merge execution target')
       appCheckExecutions += 1
       return syntheticLayeredExecution(options)
     },
   })
   assert.deepEqual(appCheckEvents, ['check-start', 'execute', 'check-complete'])
   assert.equal(appCheckRun.receipt.checkRunId, 909)
-  assert.equal(appCheckRun.receipt.checkExternalId, externalId)
+  assert.equal(appCheckRun.receipt.checkExternalId, prExternalId)
   assert.equal(appCheckExecutions, 1)
   assert.deepEqual(appCheckStatuses, [])
   assert.equal(appCheckCompletions[0].checkRunId, 909)
@@ -1439,6 +1462,33 @@ try {
   assert.equal(appCheckCompletions[0].summary, ampOrbCICheckSummary(appCheckRun.receipt))
   assert.match(appCheckCompletions[0].summary, /PASS 165 \/ SKIP 4 \/ FAIL 0/u)
   assert.match(appCheckCompletions[0].summary, /Tracked clean: yes/u)
+  for (const identity of [headSha, baseSha, testedSha]) {
+    assert.ok(appCheckCompletions[0].summary.includes(identity))
+  }
+  for (const changed of [{ baseSha: 'd'.repeat(40) }, { pullRequestNumber: 409 }]) {
+    await assert.rejects(runAmpOrbCIJob({ ...jobInput, ...changed }, {
+      stateDir: appCheckState,
+      async execute() { assert.fail('identity mismatch must not execute or reuse success') },
+    }), /receipt identity mismatch/u)
+  }
+  const legacyState = tempState()
+  mkdirSync(path.join(legacyState, 'runs'), { recursive: true })
+  const legacyPath = path.join(legacyState, 'runs', `v4-${testedSha}.json`)
+  const legacyReceipt = JSON.stringify({
+    ...appCheckRun.receipt, runId: `v4-${testedSha}`, checkExternalId: externalId,
+  })
+  writeFileSync(legacyPath, legacyReceipt, { mode: 0o600 })
+  let freshExecutions = 0
+  await runAmpOrbCIJob(jobInput, {
+    stateDir: legacyState,
+    publishCheck: {
+      async start({ sha }) { assert.equal(sha, headSha); return 950 },
+      async complete({ checkRunId }) { assert.equal(checkRunId, 950) },
+    },
+    async execute(options) { freshExecutions += 1; return syntheticLayeredExecution(options) },
+  })
+  assert.equal(freshExecutions, 1, 'legacy merge success cannot authorize a head without fresh execution')
+  assert.equal(readFileSync(legacyPath, 'utf8'), legacyReceipt, 'old receipt and Check remain untouched')
 
   let expiringTokenRefreshes = 0
   let expiringTokenPatchAttempts = 0
@@ -1450,15 +1500,19 @@ try {
       return forceRefresh ? 'refreshed-token' : 'initial-token'
     },
     async fetchImpl(url, options = {}) {
-      if (url.includes(`/commits/${testedSha}/check-runs?`)) {
+      if (url.includes(`/commits/${headSha}/check-runs?`)) {
         return jsonResponse(200, { check_runs: [] })
       }
       if (url.endsWith('/check-runs') && options.method === 'POST') {
+        assert.deepEqual(JSON.parse(options.body), {
+          name: AMP_ORB_CI_CHECK_NAME, head_sha: headSha,
+          status: 'in_progress', external_id: prExternalId,
+        })
         return jsonResponse(201, {
           id: 949,
           name: AMP_ORB_CI_CHECK_NAME,
-          head_sha: testedSha,
-          external_id: externalId,
+          head_sha: headSha,
+          external_id: prExternalId,
           app: { id: 4242 },
         })
       }
@@ -1498,7 +1552,7 @@ try {
     },
     async reconcile(reconciliation) {
       uncertainCheckReconciliations += 1
-      assert.deepEqual(reconciliation, { sha: testedSha, externalId })
+      assert.deepEqual(reconciliation, { sha: headSha, externalId: prExternalId })
       return 929
     },
     async complete(completed) { uncertainCheckCompletions.push(completed) },
@@ -1564,6 +1618,23 @@ try {
     })
     assert.equal(ineligible.receipt.checkRunId, undefined, `${label} remains non-authoritative`)
   }
+
+  const admissionCompletions = []
+  await runAmpOrbCIJob(jobInput, {
+    stateDir: tempState(),
+    publishCheck: {
+      async start({ sha }) { assert.equal(sha, headSha); return 951 },
+      async complete(result) { admissionCompletions.push(result) },
+    },
+    async execute({ input }) {
+      assertAmpOrbCIHeadTree(input, {
+        repositoryRoot: '/synthetic',
+        trustedGitImpl() { throw new Error('synthetic ancestry failure') },
+      })
+      assert.fail('admission failure must stop before lanes')
+    },
+  })
+  assert.equal(admissionCompletions[0].conclusion, 'failure')
 
   const fastFailureState = tempState()
   const fastFailureCompletions = []

@@ -9,8 +9,9 @@
 The automatic route is GitHub webhook → CI controller → isolated Fast/Full →
 GitHub Check. The original High thread only hosts this infrastructure; Low is
 invoked on demand for troubleshooting. Neither is a routine reporter, approver,
-or per-Ship dependency. Developers read GitHub directly, including the current
-PR test-merge SHA rather than only its head. Private receipts are for recovery
+or per-Ship dependency. Developers read GitHub directly: PR Checks are attached
+to the stable head SHA while their identity records the exact tested merge.
+Private receipts are for recovery
 and diagnosis, not a normal Ship lookup or a second gate.
 
 The sole CI authority for deployment is one natural GitHub webhook delivery to
@@ -20,14 +21,31 @@ credential-free `eqb-ci` checkouts and writes one GitHub Check Run:
 ```text
 name: Amp Orb Verify
 creating App: 4835036 (eqb-amp-ci-authoritative-checks)
-external_id: v4:<testedSha>:<naturalDeliveryId>
+push external_id: v4:<testedSha>:<naturalDeliveryId>
+PR external_id: v5-pr:<number>:<headSha>:<baseSha>:<testedSha>:<naturalDeliveryId>
 ```
+
+PR execution still uses the exact fetched test-merge SHA and verifies its
+ordered parents. Before either lane runs, complete-history ancestry must prove
+base is contained in head, and the tested merge tree must equal the head tree.
+Only the Check attachment uses head: GitHub can regenerate a merge commit with
+identical parents/tree but a different SHA, stranding a merge-attached Check.
+PR run IDs use a separate `v5-pr` namespace; old merge-attached receipts and
+Checks cannot be reused or retargeted. Push identity and deployment remain v4.
+
+This requires strict/up-to-date main protection, the required Check pinned to
+App 4835036, and no bypass. Owner confirmed those settings via GitHub UI on
+2026-09-06 (including no bypass exceptions and empty rulesets); this is Owner UI
+evidence, not API readback. If base advances outside the tested head, strict
+protection blocks merging until an updated head passes. A base already contained
+in the tested head adds no untested tree changes. This is tree compatibility,
+not a claim that the recorded base always equals a later current base.
 
 Only a non-forced, HMAC-authenticated natural Pull request or Push delivery
 may create that Check. Before either lane begins, the controller creates the
 run as `in_progress`, stores its immutable ID in the private receipt, and after
 both lanes settle PATCHes that same ID to `success` or `failure`. A lost create
-response is reconciled only with one exact external ID, tested SHA, and pinned
+response is reconciled only with one exact external ID, attachment SHA, and pinned
 App ID; a lost completion resumes the same receipt-bound PATCH without rerunning
 tests. Diagnostics, discovery, rerequest, and manual work cannot write the
 authoritative Check. Candidate code receives neither CI App nor deployment

@@ -129,8 +129,11 @@ uniquely supplies; otherwise keep it outside daily packs.
   executor. A natural HMAC-authenticated webhook runs isolated Fast and Full
   lanes, stores a private receipt, and writes only ADR-0025's exact `Amp Orb
   Verify` Check from App ID `4835036`.
-- Normal operation reads GitHub directly: check the current PR test-merge SHA
-  or exact live `main`, numeric App ID, name, status and conclusion. The former
+- Normal operation reads GitHub directly: check the current PR head attachment
+  and its `v5-pr` head/base/tested-merge/delivery identity, or exact live `main`
+  with its v4 identity, numeric App ID, name, status and conclusion. PR head
+  authority requires strict/up-to-date protection with no bypass and the
+  controller's base-ancestry and tested-tree/head-tree equality gates. The former
   High CI thread is only the infrastructure host for the webhook/controller,
   not a per-Ship agent. Low is invoked only for requested troubleshooting.
   Neither agent runs, approves, or reports every normal Ship; private receipts
