@@ -22,7 +22,7 @@ credential-free `eqb-ci` checkouts and writes one GitHub Check Run:
 name: Amp Orb Verify
 creating App: 4835036 (eqb-amp-ci-authoritative-checks)
 push external_id: v4:<testedSha>:<naturalDeliveryId>
-PR external_id: v6-pr:<number>:<headSha>:<baseSha>:<testedSha>:<testedTree>:<policyDigest>:<naturalDeliveryId>
+PR external_id: v7-pr:<number>:<headSha>:<baseSha>:<testedSha>:<policyDigest>:<naturalDeliveryId>
 ```
 
 PR execution still uses the exact fetched test-merge SHA and verifies its
@@ -30,11 +30,19 @@ ordered parents. Before either lane runs, complete-history ancestry must prove
 base is contained in head, and the tested merge tree must equal the head tree.
 Only the Check attachment uses head: GitHub can regenerate a merge commit with
 identical parents/tree but a different SHA, stranding a merge-attached Check.
-PR run IDs use a separate `v6-pr` namespace, hashing PR number, head, base,
+PR run IDs use a separate `v7-pr` namespace, hashing PR number, head, base,
 tested tree and versioned policy digest. Equivalent merge rebuilds reuse the
 original receipt's tested SHA, delivery and immutable Check ID; different PRs
-never coalesce. Old v5 PR receipts and Checks cannot authorize reduced lanes or
+never coalesce. Old v5/v6 PR receipts and Checks cannot authorize reduced lanes or
 be retargeted. Push identity and deployment remain v4.
+
+GitHub stores at most 255 bytes of `external_id`; the observed v6 identity was
+truncated, leaving a fail-closed `creating` receipt. v7 omits only the redundant
+explicit tree field: the immutable tested commit binds its tree, which is still
+verified and recorded in the receipt, run ID and Check output. Every accepted PR
+number with a natural delivery UUID fits within 255 bytes. Preserve the truncated
+v6 Check and receipt as unresolved historical evidence; do not guess its identity,
+retarget it, or publish success. The new namespace prevents its recovery as v7.
 
 This requires strict/up-to-date main protection, the required Check pinned to
 App 4835036, and no bypass. Owner confirmed those settings via GitHub UI on
@@ -65,6 +73,13 @@ The plugin remains isolated from ordinary development by
 `QUESTION_BANK_AMP_CI_PLUGIN_ENABLED=1`. Its dedicated CI project alone holds
 the webhook HMAC secret and the App ID, installation ID, and PEM. It has no
 status-token or `QUESTION_BANK_AMP_CI_GITHUB_CHECKS_ENABLED` fallback.
+
+The App installation also requires **Pull requests: Read-only** for this repository's
+live freshness lookup. After accepting an installation permission update, verify
+`GET /pulls/<number>` through the controller's existing App reader before enabling
+PR risk lanes. A 403 must defer, never bypass freshness or silently substitute a
+different credential. If activation cannot proceed, restore the reviewed always-full
+code snapshot; changing only policy mode does not remove the PR lookup dependency.
 
 ## Trusted PR risk lanes and freshness
 

@@ -369,16 +369,16 @@ for (const [label, checkRuns] of [
     ],
   ],
   ['wrong Amp App ID', [appCheck(newSha, { appId: 4343 })]],
-  ...['v5-pr', 'v6-pr'].map((version) => [
+  ...['v5-pr', 'v6-pr', 'v7-pr'].map((version) => [
     `${version} reduced PR evidence cannot authorize main deployment`,
     [appCheck(newSha, { externalId: version === 'v5-pr'
       ? `${version}:292:${newSha}:${oldSha}:${newSha}:11111111-1111-4111-8111-111111111111`
-      : `${version}:292:${newSha}:${oldSha}:${newSha}:${newSha}:${'a'.repeat(64)}:11111111-1111-4111-8111-111111111111` })],
+      : `${version}:292:${newSha}:${oldSha}:${newSha}:${version === 'v6-pr' ? `${newSha}:` : ''}${'a'.repeat(64)}:11111111-1111-4111-8111-111111111111` })],
   ]),
   [
     'latest PR evidence cannot fall back to an older main green',
     [appCheck(newSha, { id: 10 }), appCheck(newSha, { id: 11,
-      externalId: `v6-pr:292:${newSha}:${oldSha}:${newSha}:${newSha}:${'a'.repeat(64)}:11111111-1111-4111-8111-111111111111` })],
+      externalId: `v7-pr:292:${newSha}:${oldSha}:${newSha}:${'a'.repeat(64)}:11111111-1111-4111-8111-111111111111` })],
   ],
   [
     'wrong Amp head SHA',

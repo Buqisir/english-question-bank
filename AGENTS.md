@@ -86,8 +86,9 @@ uniquely supplies; otherwise keep it outside daily packs.
   change. This repository contract does not authorize those shared settings
   changes.
 - Develop in a local task branch based on the latest `origin/main`; do not make
-  task commits on local `main`. Keep each task within scope and produce one
-  independent commit that can be safely reverted.
+  task commits on local `main`. A same-Goal PR may contain multiple commits;
+  do not rewrite published history merely to consolidate them. Squash merge
+  produces one independent main commit that can be safely reverted.
 - Classify the complete changed-path set, and each path when investigating the
   route, with
   `node scripts/verify-ci.mjs --plan-json --changed-file <path>` (repeat the
@@ -131,7 +132,7 @@ uniquely supplies; otherwise keep it outside daily packs.
   a private receipt, and writes only ADR-0025's exact `Amp Orb
   Verify` Check from App ID `4835036`.
 - Normal operation reads GitHub directly: check the current PR head attachment
-  and its `v6-pr` PR/head/base/tested-merge/tree/policy/delivery identity, or exact live `main`
+  and its `v7-pr` PR/head/base/tested-merge/policy/delivery identity (including tested-tree verification), or exact live `main`
   with its v4 identity, numeric App ID, name, status and conclusion. PR head
   authority requires strict/up-to-date protection with no bypass and the
   controller's base-ancestry and tested-tree/head-tree equality gates. The former

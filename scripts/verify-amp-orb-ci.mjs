@@ -1079,7 +1079,7 @@ const jobInput = validateAmpOrbCIInput({
   deliveryId,
   pullRequestNumber: 292,
 })
-assert.match(ampOrbCIRunId(jobInput), /^v6-pr-[a-f0-9]{64}$/u)
+assert.match(ampOrbCIRunId(jobInput), /^v7-pr-[a-f0-9]{64}$/u)
 assert.throws(() => validateAmpOrbCIInput({ ...jobInput, event: 'issues' }), /event/u)
 assert.throws(() => validateAmpOrbCIInput({ ...jobInput, sha: 'HEAD' }), /commit identity/u)
 assert.throws(() => validateAmpOrbCIInput({
@@ -1348,7 +1348,29 @@ assert.equal(tokenRequests[0].url, 'https://api.github.com/app/installations/313
 assert.equal(JSON.stringify(tokenRequests).includes('in-memory-test-key-sentinel'), false)
 
 const prExternalId = ampOrbCICheckExternalId(jobInput)
-assert.match(prExternalId, new RegExp(`^v6-pr:292:${headSha}:${baseSha}:${testedSha}:${testedSha}:[a-f0-9]{64}:${deliveryId}$`, 'u'))
+assert.ok(ampOrbCICheckSummary(jobInput).split('\n').includes(`Tested tree: ${jobInput.testedTree}`),
+  'PR Check output retains the explicit verified tree omitted from external_id')
+assert.match(prExternalId, new RegExp(`^v7-pr:292:${headSha}:${baseSha}:${testedSha}:[a-f0-9]{64}:${deliveryId}$`, 'u'))
+const largestPrExternalId = ampOrbCICheckExternalId({ ...jobInput, pullRequestNumber: Number.MAX_SAFE_INTEGER })
+assert.ok(Buffer.byteLength(largestPrExternalId) <= 255, 'every accepted PR number fits GitHub external_id storage')
+let boundedPosts = 0
+const boundedWriter = createGitHubCheckWriter({
+  appId: 4242,
+  async getInstallationToken() { return 'synthetic' },
+  async fetchImpl(url, options = {}) {
+    if (options.method !== 'POST') return jsonResponse(200, { check_runs: [] })
+    boundedPosts += 1
+    const body = JSON.parse(options.body)
+    return jsonResponse(201, { id: 708, name: AMP_ORB_CI_CHECK_NAME,
+      head_sha: body.head_sha, external_id: body.external_id.slice(0, 255), app: { id: 4242 } })
+  },
+})
+assert.equal(await boundedWriter.start({ sha: headSha, externalId: largestPrExternalId }), 708,
+  'GitHub truncation semantics preserve the entire v7 identity, including natural delivery')
+const overlongV6 = `v6-pr:292:${headSha}:${baseSha}:${testedSha}:${testedSha}:${jobInput.policy.policyDigest}:${deliveryId}`
+assert.ok(overlongV6.length > 255, 'regression reproduces the observed v6 storage overflow')
+await assert.rejects(boundedWriter.start({ sha: headSha, externalId: overlongV6 }), /external identity is invalid/)
+assert.equal(boundedPosts, 1, 'obsolete overlong v6 is rejected before POST, not replayed')
 const externalId = ampOrbCICheckExternalId({
   ...jobInput, event: 'push', sha: testedSha, pullRequestNumber: null,
 })

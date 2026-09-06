@@ -14,13 +14,13 @@ Stop at the PR if the Goal requests review only. Deployment is not implied.
 2. If currently on local `main`, create a short descriptive task branch before
    committing. Commit the current task with the repository's one-line commit
    style. If work is already committed, keep it only when the branch is one
-   task; consolidate commits only when they are demonstrably that same task.
+   task; do not rewrite published history merely to consolidate commits.
 3. Run `git fetch origin`, then `git rebase origin/main`. Resolve only within
    the Goal, preserving unrelated behavior; ask at the Goal boundary, not merely
    because Git reports a conflict.
-4. Require exactly one non-merge commit in `origin/main..HEAD`. Confirm that it
-   can be safely reverted without reverting unrelated behavior. Otherwise do
-   not Ship.
+4. A PR may contain multiple commits belonging to this same Owner Goal. Require
+   all commits to remain in scope and use squash merge so main receives one
+   independently revertible commit without unrelated behavior.
 5. Capture the candidate file list from
    `git diff --name-only origin/main...HEAD` and require
    `git status --porcelain` to be empty.
@@ -63,15 +63,15 @@ with equivalent fixtures, runtime and dependencies. Preserve those failures
 in the report; never weaken assertions or remove data to make them green.
 Such local fixture failures do not waive the required successful App Check.
 After verification, require `git status --porcelain` to remain empty and HEAD
-to remain the classified one-commit candidate.
+to remain the classified same-Goal candidate.
 
 ## 4. Deliver through the PR
 
 Push the task branch without force and open one PR into `main`, reporting risk,
 review and verification evidence. Before an authorized merge, require the
 pinned App ID `4835036`'s successful exact-name `Amp Orb Verify` Check for the
-PR's current head with ADR-0025's `v6-pr` identity recording PR number,
-head/base/tested SHA, tested tree, policy digest and natural delivery. Validate
+PR's current head with ADR-0025's `v7-pr` identity recording PR number,
+head/base/tested SHA, policy digest and natural delivery; verify the tested tree. Validate
 the required lanes and policy in the Check output; Full `not-required/by-policy`
 is not PASS. During this migration only, the pre-installation always-full v5
 Check is valid for the installation gate, not evidence of reduced-lane acceptance.
@@ -79,14 +79,14 @@ Require strict/up-to-date protection without bypass; do not require a
 new Check merely because GitHub rebuilt an equivalent test-merge SHA. Fetch and
 verify the candidate/base are still the
 reviewed ones; if `origin/main` advanced, rebase and repeat validation.
-Merge without bypassing protection, then resolve the actual merged `main` SHA
+Squash merge without bypassing protection, then resolve the actual merged `main` SHA
 and parent. An unmerged PR has no post-Ship SHA to hand off.
 
 ## 5. Machine evidence
 
 Read the successful `Amp Orb Verify` Check directly on GitHub and include its
 URL, immutable Check ID, App ID `4835036`, and exact tested SHA with the delivery
-report. For PRs query the current head and validate the `v6-pr` binding (including
+report. For PRs query the current head and validate the `v7-pr` binding (including
 recorded tested commit's ordered parents and tree); for main
 query the exact main SHA and v4 identity. Private
 receipt retrieval is not part of normal Ship:

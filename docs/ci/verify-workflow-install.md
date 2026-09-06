@@ -5,7 +5,7 @@ controller's isolated required lanes (main always Fast+Full), and publishes `Amp
 from App ID `4835036`. This exact-SHA GitHub Check is the sole CI authority.
 The Hosted workflow and former copy-and-install template are retired.
 
-Normal Ship reads GitHub directly: use the current PR head's v6 binding to
+Normal Ship reads GitHub directly: use the current PR head's v7 binding to
 base/tested merge/tree/policy/delivery, or exact live main's v4 binding.
 PR reduction is authorized only by the installed trusted policy; default and
 rollback are always-full. No Focused/Low report or private-receipt retrieval is required.

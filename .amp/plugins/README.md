@@ -107,7 +107,7 @@ network lookup. The background controller resolves the current `refs/pull/<numbe
 it only when its two parents exactly match the signed delivery's base and head, and never substitutes
 the head SHA. It then passes a one-use read-only Git bundle—not a repository credential—
 to the runner. Main v4 always starts two separate candidate checkouts concurrently: Fast runs
-the six existing GitHub E2Es and Full runs `verify:all`. PR v6 uses ADR-0025's installed trusted
+the six existing GitHub E2Es and Full runs `verify:all`. PR v7 uses ADR-0025's installed trusted
 policy, not the candidate planner, to require Fast or Fast+Full; reduced PR Fast also runs exact-base
 `verify:changed`. Missing/invalid private `pr-policy.json` selects always-full. Before
 the lanes, the trusted controller POSTs the sole authoritative exact-name `Amp Orb Verify` Check as
@@ -115,7 +115,8 @@ the lanes, the trusted controller POSTs the sole authoritative exact-name `Amp O
 receipt-bound same Check ID after required lanes settle. PR Checks attach to stable head, while execution
 remains on the exact merge. Complete-history base ancestry in head and equal merge/head trees
 are required before lanes run; strict/up-to-date main protection with no bypass must stay enabled.
-PR `external_id` is `v6-pr:<number>:<headSha>:<baseSha>:<testedSha>:<testedTree>:<policyDigest>:<naturalDeliveryId>`;
+PR `external_id` is `v7-pr:<number>:<headSha>:<baseSha>:<testedSha>:<policyDigest>:<naturalDeliveryId>`;
+the tested commit binds its verified tree without exceeding GitHub's 255-byte identity limit.
 pushes retain `v4:<testedSha>:<naturalDeliveryId>` on exact main. Discovery, manual, rerequest, forced diagnostics, Commit
 Statuses, and human reports cannot publish or replace the authoritative Check.
 Candidate code executes as the separate locked `eqb-ci` Unix user under an empty allowlisted
@@ -157,7 +158,7 @@ fallback. Do not create the App, provision these settings, or reload from
 repository code.
 The versioned Check `external_id` above binds its target; uncertain creation is reconciled only
 through one unique exact external ID, and crash recovery PATCHes the same private-receipt Check ID
-without rerunning Fast or Full. PR `v6-pr` run IDs isolate older receipts and bind PR/head/base/tree/policy;
+without rerunning Fast or Full. PR `v7-pr` run IDs isolate older receipts and bind PR/head/base/tree/policy;
 equivalent merge rebuilds reuse the original immutable Check. Live freshness is required again
 before create, execute, completion, PATCH and recovery; stale results durably become `superseded`,
 never success. Unknown API state defers with evidence retained. Check output records

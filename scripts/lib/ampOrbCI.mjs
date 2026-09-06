@@ -53,7 +53,9 @@ function positiveInteger(value, label) {
 export function ampOrbCICheckExternalId(input) {
   const validated = validateAmpOrbCIInput(input)
   if (validated.event === 'pull_request') {
-    return `v6-pr:${validated.pullRequestNumber}:${validated.sha}:${validated.baseSha}:${validated.testedSha}:${validated.testedTree}:${validated.policy.policyDigest}:${validated.deliveryId}`
+    // GitHub truncates external_id at 255 bytes. The immutable tested commit
+    // already binds its tree; retain the explicit tree in the receipt/run ID.
+    return `v7-pr:${validated.pullRequestNumber}:${validated.sha}:${validated.baseSha}:${validated.testedSha}:${validated.policy.policyDigest}:${validated.deliveryId}`
   }
   return `${AMP_ORB_CI_CHECK_EXTERNAL_ID_VERSION}:${validated.testedSha}:${validated.deliveryId}`
 }
@@ -202,15 +204,16 @@ export function createGitHubCheckWriter({
         && parts[0] === AMP_ORB_CI_CHECK_EXTERNAL_ID_VERSION
         && parts[1] === sha
         && DELIVERY_ID.test(parts[2] || '')
-      const validPR = parts.length === 8
-        && parts[0] === 'v6-pr'
+      const validPR = parts.length === 7
+        && parts[0] === 'v7-pr'
         && /^[1-9][0-9]*$/u.test(parts[1])
         && Number.isSafeInteger(Number(parts[1]))
         && parts[2] === sha
-        && SHA.test(parts[3]) && SHA.test(parts[4]) && SHA.test(parts[5])
-        && /^[a-f0-9]{64}$/u.test(parts[6]) && GITHUB_DELIVERY_ID.test(parts[7] || '')
+        && SHA.test(parts[3]) && SHA.test(parts[4])
+        && /^[a-f0-9]{64}$/u.test(parts[5]) && GITHUB_DELIVERY_ID.test(parts[6] || '')
       if (
         !SHA.test(sha || '')
+        || Buffer.byteLength(externalId || '') > 255
         || (!validPush && !validPR)
       ) throw new Error('Amp Orb CI Check external identity is invalid')
       const existing = await matchingCheck({ sha, externalId })
@@ -425,7 +428,7 @@ export function ampOrbCIRunId(input) {
   if (validated.event === 'pull_request') {
     const scoped = [validated.pullRequestNumber, validated.sha, validated.baseSha, validated.testedTree,
       validated.policy.policyVersion, validated.policy.policyDigest].join(':')
-    return `v6-pr-${createHash('sha256').update(scoped).digest('hex')}`
+    return `v7-pr-${createHash('sha256').update(scoped).digest('hex')}`
   }
   return `${AMP_ORB_CI_WORKFLOW_VERSION}-${validated.testedSha}`
 }
@@ -1084,6 +1087,7 @@ export function ampOrbCICheckSummary(receipt) {
     `Base: ${receipt.baseSha}`,
     `Tested: ${receipt.testedSha}`,
     ...(receipt.policy ? [
+      `Tested tree: ${receipt.testedTree}`,
       `Policy: ${receipt.policy.policyVersion}; digest: ${receipt.policy.policyDigest}`,
       `Risk: ${receipt.policy.risk}; override: ${receipt.policy.override ?? 'none'}; required lanes: ${receipt.policy.requiredLanes.join(', ')}`,
       `Files digest: ${receipt.policy.filesDigest}`,
