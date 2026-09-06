@@ -58,7 +58,8 @@ export function rasterPdfRegion({ pdfBytes, page, region, density = 300 }) {
     ).split(',').map(Number)
     const geometry = `${Math.round(region.width * pageWidth)}x${Math.round(region.height * pageHeight)}+${Math.round(region.x * pageWidth)}+${Math.round(region.y * pageHeight)}`
     const bytes = new Uint8Array(execFileSync('magick', [
-      pagePath, '-crop', geometry, '+repage', 'png32:-',
+      pagePath, '-crop', geometry, '+repage',
+      '-define', 'png:exclude-chunks=tIME', 'png32:-',
     ], { maxBuffer }))
     const [pixelWidth, pixelHeight] = execFileSync(
       'magick', ['identify', '-format', '%w,%h', '-'], {
