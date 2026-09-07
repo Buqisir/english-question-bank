@@ -39,6 +39,36 @@ verifier.assert(loose && loose.verdict === 'explanation_wrong', 'parseLooseVerif
 const looseCn = parseLooseVerifyResult('结论：答案正确')
 verifier.assert(looseCn && looseCn.verdict === 'correct', 'parseLooseVerifyResult infers correct from Chinese text')
 
+verifier.section('Prose-fallback mixed-token regression (bug: 正确答案 misclassified as correct)')
+const bugCases = [
+  ['答案错误，正确答案应为C', 'answer_wrong', 'ordering collision: 答案错误 + correction phrase 正确答案应为C'],
+  ['答案错误，正确答案为D', 'answer_wrong', 'ordering collision: 答案错误 + correction phrase 正确答案为D'],
+  ['正确答案不是C，该题答案有误', 'answer_wrong', 'negated correction + explicit 答案有误 token in same string'],
+]
+for (const [text, expected, note] of bugCases) {
+  const got = parseLooseVerifyResult(text)
+  verifier.assert(got && got.verdict === expected, `parseLooseVerifyResult(${JSON.stringify(text)}) -> ${expected}: ${note} (got ${got && got.verdict})`)
+}
+verifier.assert(parseLooseVerifyResult('正确答案不是C') === null, 'bare negated correction 正确答案不是C (no wrong token) -> null (outer catch converts to uncertain)')
+verifier.assert(
+  extractVerifyResultFromPayload({ choices: [{ message: { content: '正确答案不是C，该题答案有误' } }] })?.verdict === 'answer_wrong',
+  'envelope path (extractVerifyResultFromPayload, production call shape) classifies negated+answer_wrong prose as answer_wrong',
+)
+verifier.assert(
+  extractVerifyResultFromPayload({ choices: [{ message: { content: '正确答案不是C' } }] }) === null,
+  'envelope path bare-negation -> null (no verdict token; surfaces as uncertain in production)',
+)
+verifier.assert(
+  parseLooseVerifyResult('答案错误，正确答案应为C').reason === '模型返回了非标准 JSON，已按兜底规则解析。' &&
+    parseLooseVerifyResult('答案错误，正确答案应为C').correctAnswer === '',
+  'fixed prose-fallback row still carries parse-fallback reason and empty correctAnswer (visible parse-trouble signal)',
+)
+const stillCorrect = [['答案正确', '答案正确'], ['答案无误', '答案无误'], ['correct', 'bare correct'], ['正确', 'bare 正确']]
+for (const [text, note] of stillCorrect) {
+  verifier.assert(parseLooseVerifyResult(text)?.verdict === 'correct', `parseLooseVerifyResult(${JSON.stringify(text)}) -> correct (no regression on existing correct-vocab tokens): ${note}`)
+}
+verifier.assert(parseLooseVerifyResult('答案错误\n正确答案：C')?.correctAnswer === 'C', 'correctAnswer colon extraction via 正确答案： is unaffected by the verdict-vocab change')
+
 verifier.section('JSON extraction')
 verifier.assert(JSON.stringify(extractFirstJson('prefix {"a":1} suffix')) === '{"a":1}', 'extractFirstJson finds embedded object')
 verifier.assert(JSON.stringify(extractFirstJson('```json\n{"b":2}\n```')) === '{"b":2}', 'extractFirstJson reads code-fenced json')

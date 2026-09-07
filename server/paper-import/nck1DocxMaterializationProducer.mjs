@@ -639,34 +639,36 @@ function parseOfficialAnswers(answerBody, answerDocumentId, issues) {
       }
       ;[...match[3]].forEach((value, index) => add(from + index, value, item))
     }
-    for (const match of item.text.matchAll(
-      /(\d{1,2})\s*[.．、]\s*(.*?)(?=(?:\d{1,2})\s*[.．、]|$)/gu,
-    )) {
-      const number = Number(match[1])
-      const rawValue = trimEdgeSpaces(match[2])
-      if (!normalized(rawValue)) continue
-      if (number <= 55) {
-        const label = /^([A-G])(?=$|[\s.．、,，;；。:：)）【])/u.exec(normalized(rawValue))?.[1]
-        if (label) add(number, label, item)
-        continue
+    for (const chunk of item.text.split('\n')) {
+      for (const match of chunk.matchAll(
+        /(\d{1,2})\s*[.．、]\s*(.*?)(?=(?:\d{1,2})\s*[.．、]|$)/gu,
+      )) {
+        const number = Number(match[1])
+        const rawValue = trimEdgeSpaces(match[2])
+        if (!normalized(rawValue)) continue
+        if (number <= 55) {
+          const label = /^([A-G])(?=$|[\s.．、,，;；。:：)）【])/u.exec(normalized(rawValue))?.[1]
+          if (label) add(number, label, item)
+          continue
+        }
+        const detail = INLINE_ANSWER_DETAIL.exec(rawValue)
+        const value = trimEdgeSpaces(detail ? rawValue.slice(0, detail.index) : rawValue)
+        const wordCount = normalized(value).split(' ').filter(Boolean).length
+        if (
+          !normalized(value)
+          || (!detail && (
+            value.length > 80
+            || wordCount > 4
+            || /[.!?。！？,，;；:：（）()]/u.test(value)
+          ))
+        ) {
+          addIssue(issues, 'NCK1_ANSWER_VALUE_BOUNDARY_AMBIGUOUS', `answers.${number}`,
+            'A text answer cannot be separated safely from adjacent explanation text',
+            sourceRef(answerDocumentId, item.sourceIndex))
+          continue
+        }
+        add(number, value, item)
       }
-      const detail = INLINE_ANSWER_DETAIL.exec(rawValue)
-      const value = trimEdgeSpaces(detail ? rawValue.slice(0, detail.index) : rawValue)
-      const wordCount = normalized(value).split(' ').filter(Boolean).length
-      if (
-        !normalized(value)
-        || (!detail && (
-          value.length > 80
-          || wordCount > 4
-          || /[.!?。！？,，;；:：（）()]/u.test(value)
-        ))
-      ) {
-        addIssue(issues, 'NCK1_ANSWER_VALUE_BOUNDARY_AMBIGUOUS', `answers.${number}`,
-          'A text answer cannot be separated safely from adjacent explanation text',
-          sourceRef(answerDocumentId, item.sourceIndex))
-        continue
-      }
-      add(number, value, item)
     }
   }
   return answers

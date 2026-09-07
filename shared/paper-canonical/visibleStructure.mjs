@@ -14,12 +14,14 @@ import manifestV46 from '../../standards/paper-canonical/manifest-v46.json' with
 import manifestV47 from '../../standards/paper-canonical/manifest-v47.json' with { type: 'json' }
 import manifestV48 from '../../standards/paper-canonical/manifest-v48.json' with { type: 'json' }
 import manifestV49 from '../../standards/paper-canonical/manifest-v49.json' with { type: 'json' }
+import manifestV50 from '../../standards/paper-canonical/manifest-v50.json' with { type: 'json' }
 import nck1V9 from '../../standards/paper-canonical/profiles/nck1-v9.json' with { type: 'json' }
 import nck1V10 from '../../standards/paper-canonical/profiles/nck1-v10.json' with { type: 'json' }
 import nck1V11 from '../../standards/paper-canonical/profiles/nck1-v11.json' with { type: 'json' }
 import nck1V12 from '../../standards/paper-canonical/profiles/nck1-v12.json' with { type: 'json' }
 import nck1V13 from '../../standards/paper-canonical/profiles/nck1-v13.json' with { type: 'json' }
 import nck1V14 from '../../standards/paper-canonical/profiles/nck1-v14.json' with { type: 'json' }
+import nck1V15 from '../../standards/paper-canonical/profiles/nck1-v15.json' with { type: 'json' }
 import nationalLegacyV3 from '../../standards/paper-canonical/profiles/national-legacy-v3.json' with { type: 'json' }
 import zhejiangLegacyV7 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v7.json' with { type: 'json' }
 import zhejiangLegacyV10 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v10.json' with { type: 'json' }
@@ -35,6 +37,7 @@ const registeredProfiles = new Map([
   [`${nck1V12.profileId}@${nck1V12.version}`, nck1V12],
   [`${nck1V13.profileId}@${nck1V13.version}`, nck1V13],
   [`${nck1V14.profileId}@${nck1V14.version}`, nck1V14],
+  [`${nck1V15.profileId}@${nck1V15.version}`, nck1V15],
   [
     `${nationalLegacyV3.profileId}@${nationalLegacyV3.version}`,
     nationalLegacyV3,
@@ -125,6 +128,18 @@ const manifestV49Profiles = new Map([
     profileDigest: digestJson(profile),
   },
 ]))
+const manifestV50Profiles = new Map([
+  nck1V15,
+  nationalLegacyV3,
+  zhejiangLegacyV12,
+].map((profile) => [
+  profile.profileId,
+  {
+    profileId: profile.profileId,
+    profileVersion: profile.version,
+    profileDigest: digestJson(profile),
+  },
+]))
 const registeredManifestProfiles = new Map([
   [
     `${manifestV31.manifestId}@${manifestV31.version}@${digestJson(manifestV31)}`,
@@ -190,6 +205,10 @@ const registeredManifestProfiles = new Map([
     `${manifestV49.manifestId}@${manifestV49.version}@${digestJson(manifestV49)}`,
     manifestV49Profiles,
   ],
+  [
+    `${manifestV50.manifestId}@${manifestV50.version}@${digestJson(manifestV50)}`,
+    manifestV50Profiles,
+  ],
 ])
 
 function reject(message) {
@@ -209,7 +228,9 @@ function profileVisibleStructure(profile, expectedGroups, instructionOverrides) 
   const nodes = []
   for (const part of profile.parts) {
     const visibleSections = part.sections.filter((section) =>
-      section.slots.some((slot) => slot.activation === 'canonical_group'))
+      section.slots.some((slot) =>
+        slot.activation === 'canonical_group'
+        && groupBySlotId.has(slot.slotId)))
     if (visibleSections.length === 0) continue
     const partInstruction = profile.instructions[part.titleInstructionRef]
     nodes.push({
@@ -241,6 +262,9 @@ function profileVisibleStructure(profile, expectedGroups, instructionOverrides) 
       })
       for (const slot of section.slots) {
         if (slot.activation !== 'canonical_group') continue
+        if (slot.presence === 'optional' && !groupBySlotId.has(slot.slotId)) {
+          continue
+        }
         for (const instructionId of slot.instructionRefs) {
           const instruction = profile.instructions[instructionId]
           const overrideKey = `${slot.slotId}\0${instructionId}`
@@ -305,7 +329,7 @@ function sourceInstructionOverrides(consumption) {
   for (const selection of consumption.selections) {
     const occurrences = selection?.projectedOccurrences || []
     const continuationV49 =
-      consumption.authorityRef?.manifestVersion === '49'
+      ['49', '50'].includes(consumption.authorityRef?.manifestVersion)
       && selection?.mode === 'canonical'
       && selection?.familyContractId === 'continuation-writing'
     const digestByGroupId = new Map(
