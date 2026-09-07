@@ -283,7 +283,8 @@ export function VocabularyMeaningRecallPanel({
   const undoPrevious = useCallback(() => {
     const current = recordRef.current
     if (!current || current.status !== 'draft') return
-    const targetIndex = revealWrong ? activeIndex : Math.max(0, activeIndex - 1)
+    const cursorAnswered = current.entries[activeIndex]?.result !== 'untested'
+    const targetIndex = (revealWrong || cursorAnswered) ? activeIndex : Math.max(0, activeIndex - 1)
     const entries = current.entries.map((entry, index) => index === targetIndex ? { ...entry, result: 'untested' as const } : entry)
     const nextRecord = { ...current, entries }
     recordRef.current = nextRecord
@@ -296,6 +297,7 @@ export function VocabularyMeaningRecallPanel({
   useEffect(() => {
     if (!activeRecord || activeRecord.status !== 'draft') return
     const onKeyDown = (event: KeyboardEvent) => {
+      if (busy) return
       const targetElement = event.target as HTMLElement | null
       if (targetElement?.matches('input, textarea, select, button')) return
       if (event.key === 'Enter') {
@@ -312,7 +314,7 @@ export function VocabularyMeaningRecallPanel({
     }
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
-  }, [activeRecord, continueAfterWrong, markCurrent, revealWrong, undoPrevious])
+  }, [activeRecord, busy, continueAfterWrong, markCurrent, revealWrong, undoPrevious])
 
   async function startRecall(entries: VocabularySetEntry[], sourceSetIds: string[]) {
     if (!entries.length || !sourceSetIds.length) return
@@ -482,11 +484,11 @@ export function VocabularyMeaningRecallPanel({
           )}
         </div>
         <footer>
-          <button type="button" onClick={undoPrevious}><RotateCcw size={16} />撤销 <kbd>Delete</kbd></button>
+          <button type="button" onClick={undoPrevious} disabled={busy}><RotateCcw size={16} />撤销 <kbd>Delete</kbd></button>
           {!revealWrong ? <>
-            <button type="button" className="is-wrong" onClick={() => markCurrent('wrong')}><X size={17} />答错 <kbd>Shift</kbd></button>
-            <button type="button" className="is-correct" onClick={() => markCurrent('correct')}><Check size={17} />答对 <kbd>Enter</kbd></button>
-          </> : <button type="button" className="is-primary" onClick={continueAfterWrong}>已讲清，继续 <kbd>Enter</kbd></button>}
+            <button type="button" className="is-wrong" onClick={() => markCurrent('wrong')} disabled={busy}><X size={17} />答错 <kbd>Shift</kbd></button>
+            <button type="button" className="is-correct" onClick={() => markCurrent('correct')} disabled={busy}><Check size={17} />答对 <kbd>Enter</kbd></button>
+          </> : <button type="button" className="is-primary" onClick={continueAfterWrong} disabled={busy}>已讲清，继续 <kbd>Enter</kbd></button>}
         </footer>
       </section>
     )

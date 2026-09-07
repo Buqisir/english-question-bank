@@ -45,12 +45,12 @@ export async function runRoutes(routes, { request, response, url, context }, { b
 
 export function readJsonRouteBody(request, { maxBytes = 1_000_000 } = {}) {
   return new Promise((resolve, reject) => {
-    let body = ''
+    const chunks = []
     let bytes = 0
 
     request.on('data', (chunk) => {
       bytes += chunk.length
-      body += chunk
+      chunks.push(chunk)
       if (bytes > maxBytes) {
         request.destroy()
         reject(new Error('Request body too large'))
@@ -59,6 +59,7 @@ export function readJsonRouteBody(request, { maxBytes = 1_000_000 } = {}) {
 
     request.on('end', () => {
       try {
+        const body = chunks.length ? Buffer.concat(chunks).toString('utf8') : ''
         resolve(body ? JSON.parse(body) : {})
       } catch {
         reject(new Error('Invalid JSON body'))
