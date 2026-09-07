@@ -1,5 +1,25 @@
 # Project plugins
 
+## Ship Check watcher
+
+`ship-check-watcher.js` registers `ship_watch_check({pullRequest, head})` and
+`ship_cancel_check_watch({})`. Invoke only when explicitly waiting for Ship CI.
+The target thread comes from the invocation context, never a tool argument.
+Repository, App `4835036`, and `Amp Orb Verify` are fixed. It performs only GitHub
+GETs using the existing `gh` authentication, every 45 seconds (no overlapping reads),
+for at most 60 minutes. Head/identity drift, PR closure, cancellation and disposal
+stop the wait; it never follows a new head or modifies/reruns CI.
+
+A confirmed latest terminal Check produces one best-effort `appendUserMessage`
+without steering. Ship must recheck live identity and authority after waking.
+Private mode-0600 records under `.scratch/ship-check-watcher/` claim before append;
+an ambiguous append is not retried. There is no outbox, scheduler, automatic restart
+recovery, or exactly-once transport guarantee: crashes can miss notifications.
+An explicit restart may wait again, but an existing terminal claim is not resent.
+Loading this plugin does not register a webhook or start a watcher. Load only this
+plugin, never reload the CI plugin to enable it. Verify with
+`node scripts/verify-ship-check-watcher.mjs`.
+
 ## NCK1 staged-analysis agent
 
 `nck1-analysis-agent.js` registers `nck1_analyze_group` for the paper-import
@@ -73,8 +93,8 @@ operations that remain disabled until separately authorized by the Owner.
 
 ## GitHub CI Orb
 
-`github-ci-wakeup.js` is an inert-by-default CI wakeup for one dedicated private project
-Orb thread. A verified GitHub delivery is atomically written to that Orb's private mode-0600 disk
+`github-ci-wakeup.js` is the dedicated private-project CI webhook controller.
+A verified natural GitHub delivery is atomically written to that Orb's private mode-0600 disk
 queue before the 30-second webhook handler starts a background queue drainer and returns. Plugin
 startup starts a drainer only when that queue already contains recovery work, so an empty automatic
 plugin load does not require an early Orb keepalive lease. If a recovery lease is temporarily
@@ -101,54 +121,72 @@ The allowlist accepts same-repository pull requests into `main` on `opened`, `sy
 `reopened`, and `ready_for_review`, plus pushes to `refs/heads/main`. It verifies GitHub's raw-body
 `X-Hub-Signature-256`, ignores PR title/body text, and rejects SHA drift. For PRs, the trusted
 checkout verifies GitHub's exact test-merge SHA and ordered base/head parents, matching the existing
-Actions workflow rather than testing the head in isolation. GitHub PR payload merge SHAs may be null
+test-merge execution semantics rather than testing the head in isolation. GitHub PR payload merge SHAs may be null
 or stale, so every signed PR delivery durably queues only its base/head/PR identity before any
 network lookup. The background controller resolves the current `refs/pull/<number>/merge`, accepts
 it only when its two parents exactly match the signed delivery's base and head, and never substitutes
 the head SHA. It then passes a one-use read-only Git bundle—not a repository credential—
-to the runner. Workflow v4 starts two separate candidate checkouts concurrently: the Fast lane runs
-the six existing GitHub E2E commands on isolated ports, while the Full lane runs `verify:all`. The
-informational `Amp Orb Verify (fast)` status reports as soon as E2E settles. With App publication
-disabled, the aggregate informational `Amp Orb Verify` status waits for both lanes and fails if
-either lane fails or either tracked checkout drifts. With App publication separately enabled, the
-trusted controller instead POSTs one exact-name `Amp Orb Verify` Check as `in_progress` before the
-lanes and PATCHes the receipt-bound same Check ID after both settle. It never writes an aggregate
-same-name Commit Status in that mode. Discovery, manual, rerequest, and forced diagnostics remain
-Commit Status-only and cannot publish the authoritative Check.
+to the runner. Main v4 always starts two separate candidate checkouts concurrently: Fast runs
+the six existing GitHub E2Es and Full runs `verify:all`. PR v7 uses ADR-0025's installed trusted
+policy, not the candidate planner, to require Fast or Fast+Full; reduced PR Fast also runs exact-base
+`verify:changed`. Missing/invalid private `pr-policy.json` selects always-full. Before
+the lanes, the trusted controller POSTs the sole authoritative exact-name `Amp Orb Verify` Check as
+`in_progress` under App ID `4835036` (`eqb-amp-ci-authoritative-checks`) and PATCHes the
+receipt-bound same Check ID after required lanes settle. PR Checks attach to stable head, while execution
+remains on the exact merge. Complete-history base ancestry in head and equal merge/head trees
+are required before lanes run; strict/up-to-date main protection with no bypass must stay enabled.
+PR `external_id` is `v7-pr:<number>:<headSha>:<baseSha>:<testedSha>:<policyDigest>:<naturalDeliveryId>`;
+the tested commit binds its verified tree without exceeding GitHub's 255-byte identity limit.
+pushes retain `v4:<testedSha>:<naturalDeliveryId>` on exact main. Discovery, manual, rerequest, forced diagnostics, Commit
+Statuses, and human reports cannot publish or replace the authoritative Check.
 Candidate code executes as the separate locked `eqb-ci` Unix user under an empty allowlisted
-environment; Amp Project Secrets, the commit-status token, and any future App credential stay in the
-trusted controller process. The automatic controller is the only dedicated-CI machine execution
-policy; a Focused agent turn reports or diagnoses its receipt and does not run another Full suite or
-write GitHub state.
+environment; Amp Project Secrets and the App credential stay in the trusted controller process.
+
+Normal Ship reads the exact-SHA Check directly on GitHub. The original High
+thread only hosts the webhook/controller infrastructure; Low is invoked only
+for requested troubleshooting. No Focused/Low per-Ship report, agent turn, or
+private-receipt lookup is part of the normal gate.
 
 Activation and authority changes are shared-state operations requiring current Owner approval.
+For an explicitly approved **single registration-only load**, the owning host may exclusively
+create `.scratch/amp-orb-ci/registration-only.once` (or the corresponding trusted state directory)
+with mode `0600` and exact contents `skip-startup-recovery-once\n` (a trailing LF).
+Create it only under the existing `runner.lock` maintenance exclusion after confirming no active
+or waiting controller; snapshot actual installed bytes and preserve every queue/receipt.
+The plugin validates this local intent before registration, retains it if registration fails,
+and consumes it after successful registration/command setup, returning before startup queue inspection.
+Invalid/unreadable intent or failed consumption aborts rather than draining. Do not blindly retry
+an ambiguous load: inspect the marker and runtime evidence first; marker absence alone is not proof
+of the server binding. The next unmarked load performs normal startup recovery.
+This does **not** pause natural signed webhook deliveries: the unchanged handler still enqueues
+and launches the drainer, which can process historical queue entries. Do not use it as a general
+maintenance pause or move/hide/delete queues. Same-key registration is not proof that an unknown
+previous server binding can be precisely rolled back. Only the explicitly designated CI host loads
+this plugin; development/review threads must not load it or create this intent.
+
 Configure these private Amp Project settings, then load the plugin only in the dedicated owning Orb
 thread:
 
 - `QUESTION_BANK_AMP_CI_PLUGIN_ENABLED=1`
 - `QUESTION_BANK_AMP_CI_GITHUB_WEBHOOK_SECRET=<high-entropy GitHub webhook HMAC secret>`
-- `QUESTION_BANK_AMP_CI_GITHUB_STATUS_TOKEN=<fine-grained token limited to Commit statuses: write>`
-
-ADR-0025's repo-only App writer is independently disabled unless
-`QUESTION_BANK_AMP_CI_GITHUB_CHECKS_ENABLED=1`. A later, separately authorized App activation must
-install one GitHub App on only `english-question-bank` with `Checks: write` and `Metadata: read`, then
-set its numeric App ID, numeric installation ID, and PEM only in this dedicated CI project:
-
-- `QUESTION_BANK_AMP_CI_GITHUB_APP_ID=<numeric App ID>`
+- `QUESTION_BANK_AMP_CI_GITHUB_APP_ID=4835036`
 - `QUESTION_BANK_AMP_CI_GITHUB_APP_INSTALLATION_ID=<numeric installation ID>`
 - `QUESTION_BANK_AMP_CI_GITHUB_APP_PRIVATE_KEY=<private App PEM>`
 
-Do not create the App, provision these settings, enable publication, or reload from repository code.
-The Check `external_id` is `v4:<testedSha>:<naturalDeliveryId>`; uncertain creation is reconciled only
+There is no status-token or `QUESTION_BANK_AMP_CI_GITHUB_CHECKS_ENABLED`
+fallback. Do not create the App, provision these settings, or reload from
+repository code.
+The versioned Check `external_id` above binds its target; uncertain creation is reconciled only
 through one unique exact external ID, and crash recovery PATCHes the same private-receipt Check ID
-without rerunning Fast or Full. Check output is human-readable duration, PASS/SKIP/FAIL, and clean
-state only—not a signature or independent proof. No Ed25519 attestor or signed envelope exists.
+without rerunning Fast or Full. PR `v7-pr` run IDs isolate older receipts and bind PR/head/base/tree/policy;
+equivalent merge rebuilds reuse the original immutable Check. Live freshness is required again
+before create, execute, completion, PATCH and recovery; stale results durably become `superseded`,
+never success. Unknown API state defers with evidence retained. Check output records
+head/base/tested identities, policy, required lanes, duration, PASS/SKIP/FAIL,
+and clean state—not a signature or independent proof. No Ed25519 attestor or signed envelope exists.
 
 After an approved plugin load, explicitly run `CI Orb: 复制 GitHub CI Webhook URL` and put the
 private capability URL in one GitHub repository webhook that sends only Pull requests and Push
-events, using the same HMAC secret. Never commit or log the URL or either secret. Branch protection
-temporarily requires hosted `verify` and `e2e` while Amp bug
-`amp_bug_0uiggF5jWG6i6iaB72BATT` blocks this webhook's public ingress. Both Orb contexts are
-informational during the rollback; ADR-0022 defines the proof required before they can regain merge
-authority. Deployment remains ADR-0025 `hosted-only` until each later shadow/dual/authority step is
-separately approved; merely landing the disabled writer changes no live trust root.
+events, using the same HMAC secret. Never commit or log the URL or either secret. The executable
+branch-protection cutover is coordinator-owned at `docs/agents/app-ci-cutover.md`; this README does
+not claim it is complete.
