@@ -38,6 +38,7 @@ for (const required of [
   'scripts/verify-import-review-ocr-confirmation.mjs',
   'scripts/verify-import-review-media-derivation.mjs',
   'scripts/verify-nck1-source-materialization.mjs',
+  'scripts/verify-nck1-pdf-crop-recipe-replay.mjs',
   'scripts/verify-paper-canonical-import-admission.mjs',
   'scripts/verify-paper-canonical-import-recovery.mjs',
   'scripts/verify-universal-nck1-publish.mjs',
@@ -47,6 +48,11 @@ for (const required of [
 ]) {
   assert(materialization.scripts.includes(required), `${required} remains an independent import failure layer`)
 }
+
+const raster = plan('server/paper-canonical/pdfRegionRaster.mjs')
+assert.equal(raster.pack, 'paper')
+assert(raster.scripts.includes('scripts/verify-nck1-pdf-crop-recipe-replay.mjs'),
+  'shared raster changes execute the crop replay regression in the Paper pack')
 
 for (const sharedFile of [
   'scripts/import-pipeline/universal-nck1.mjs',

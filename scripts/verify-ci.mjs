@@ -242,6 +242,7 @@ const uniqueRegistered = (scripts) => [...new Set(scripts)].filter(
 const paperScripts = uniqueRegistered(
   [
     ...registry.scripts.filter((script) => paperScriptPattern.test(script)),
+    'scripts/verify-nck1-pdf-crop-recipe-replay.mjs',
     'scripts/verify-universal-nck1-publish.mjs',
     'scripts/verify-universal-nck1-image-source-bundle.mjs',
     'scripts/verify-universal-nck1-source-only-intake.mjs',
