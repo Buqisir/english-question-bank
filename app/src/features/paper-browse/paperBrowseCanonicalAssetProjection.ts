@@ -18,7 +18,7 @@ function rejected(message: string): Error {
 /**
  * Project the legacy asset's structural chrome onto the ready whole-paper
  * Consumption Plan. The Plan exclusively owns every active Group identity;
- * inactive Listening is source-only and therefore has no rendered Group.
+ * source-proven optional omissions have no rendered Group.
  */
 export function projectAssetBlocksToCanonicalConsumption(
   asset: PaperAssetV1,
@@ -37,14 +37,6 @@ export function projectAssetBlocksToCanonicalConsumption(
     const group = asset.content.groups[block.groupId]
     if (!group) {
       throw rejected(`PaperBrowse asset Group is missing: ${block.groupId}`)
-    }
-    if (group.groupType === 'listening') {
-      if (consumedGroupIds.has(block.groupId)) {
-        throw rejected(
-          `Inactive Listening cannot enter the Consumption Plan: ${block.groupId}`,
-        )
-      }
-      continue
     }
     if (activeAssetGroupIds.has(block.groupId)) {
       const familyLabel =
