@@ -397,7 +397,7 @@ for (const mutation of ['missing-digest', 'changed-question']) {
   const tampered = structuredClone(listeningConsumption)
   const selection = tampered.selections[0]
   if (mutation === 'missing-digest') delete selection.projectedOccurrenceDigests
-  else selection.projectedOccurrences[0].questions[0].canonicalNumber = 99
+  else selection.projectedOccurrences[0].questions[0].stem[0].text = 'Unbound replacement question'
   assert.throws(() => projectCanonicalConsumerGroup({
     consumption: tampered,
     familyContractId: 'listening',
