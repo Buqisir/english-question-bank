@@ -8,6 +8,14 @@ Understand the affected seam, implement in the current task, run focused
 checks, review the diff, and commit when requested. Do not create a spec,
 ticket set, review task, QA artifact, or release task by habit.
 
+An explicit Owner Goal covers the complete stated transaction under
+`AGENTS.md`'s Goal authorization: diagnose, reconcile the same operation,
+implement, review, verify and deliver without mechanical reapproval between
+steps. Included entry maintenance, deployment, health and agreed recovery share
+that authorization; a code/merge-only Goal does not include deployment. Ask
+only at the documented privilege, Secrets, target, uncovered destructive-data
+or new irreversible-risk boundaries. UNKNOWN requires reconciliation, not replay.
+
 ## Multi-session work
 
 Use one tracked spec and small vertical tickets under `docs/cuts/<feature>/`
@@ -30,8 +38,8 @@ recover, or synchronize the map.
 - Actual high-risk shared behavior gets affected public-seam tests, one final
   full suite, and independent Standards/Spec review.
 - Visible behavior gets exact-page real-click verification and Owner QA.
-- Production, deploy, database/configuration, and R2 actions require explicit
-  current owner authorization.
+- Production actions must be within the explicit Goal; neither a green gate nor
+  an implementation approval expands it.
 
 Record durable product decisions in the spec, ticket, or ADR that needs them.
 Use an optional cut note only for a material reusable lesson.

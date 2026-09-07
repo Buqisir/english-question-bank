@@ -1,0 +1,15 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+# Run only from an independently verified, root-owned exact-main payload.
+# This is a one-time root-console operation, never an SSH forced subcommand.
+[[ $(id -u) == 0 && $(id -g) == 0 && $# == 2 ]] || exit 64
+lock=/opt/eqb/deployments/deploy.lock
+[[ -f $lock && ! -L $lock && $(stat -c '%u:%g:%a:%h' "$lock") == 0:0:600:1 ]] || exit 70
+exec 9< "$lock"
+/usr/bin/flock --exclusive --nonblock --conflict-exit-code 75 9 || exit $?
+[[ $(stat -Lc '%d:%i' /proc/self/fd/9) == $(stat -Lc '%d:%i' "$lock") ]] || exit 70
+directory=$(dirname "$(readlink -f "$0")")
+exec /usr/bin/env -i PATH=/usr/local/bin:/usr/bin:/bin \
+  /usr/bin/node --no-addons "$directory/eqb-deploy-controller.mjs" \
+  --install-controlled "$1" "$2"

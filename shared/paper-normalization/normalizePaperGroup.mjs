@@ -278,10 +278,7 @@ function scanGrammarFillParagraph(paragraph, paragraphIndex) {
   for (const marker of dialectSpans) {
     const suffix = paragraph.text.slice(marker.end)
     const hasUnsupportedAdjacentHint =
-      (marker.dialect === 'embedded' &&
-        marker.hint === null &&
-        /^(?:\(| +\()/.test(suffix)) ||
-      (marker.dialect === 'label' && marker.hint === null && /^ +\(/.test(suffix))
+      marker.hint === null && /^\s*\(/.test(suffix)
     const hasUnsupportedTrailingToken = /^[\p{L}\p{N}_]/u.test(suffix)
     if (hasUnsupportedAdjacentHint || hasUnsupportedTrailingToken) {
       issues.push(

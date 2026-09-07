@@ -51,6 +51,7 @@ const publicationFileName =
   `canonical-paper-publication-v${canonicalAuthorityRef.manifestVersion}.json`
 const publicationFileNames = [
   publicationFileName,
+  'canonical-paper-publication-v50.json',
   'canonical-paper-publication-v49.json',
   'canonical-paper-publication-v48.json',
   'canonical-paper-publication-v47.json',
@@ -82,6 +83,7 @@ const publicationFileNames = [
   'canonical-paper-publication-v17.json',
   'canonical-paper-publication-v16.json',
   'canonical-paper-publication-v15.json',
+  'canonical-paper-publication-v14.json',
   'canonical-paper-publication-v13.json',
   'canonical-paper-publication-v12.json',
   'canonical-paper-publication-v11.json',
@@ -1517,7 +1519,7 @@ function canonicalSelections(validated, contract, sourceAsset) {
       ...(
         (
           familyContractId === 'seven-choices'
-          && ['47', '48', '49'].includes(validated.plan.authorityRef.manifestVersion)
+          && ['47', '48', '49', '50'].includes(validated.plan.authorityRef.manifestVersion)
         )
         || (
           familyContractId === 'cloze'
@@ -1529,7 +1531,7 @@ function canonicalSelections(validated, contract, sourceAsset) {
         )
         || (
           familyContractId === 'continuation-writing'
-          && validated.plan.authorityRef.manifestVersion === '49'
+          && ['49', '50'].includes(validated.plan.authorityRef.manifestVersion)
         )
         ? {
             projectedOccurrenceDigests: projectedOccurrences.map(

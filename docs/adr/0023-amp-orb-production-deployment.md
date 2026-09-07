@@ -3,6 +3,35 @@
 - Status: Accepted; S2 release deployment is active in production
 - Scope: website deployment plus separately authorized persistence and host-configuration maintenance
 
+## CI authority supersession (2026-09-06)
+
+ADR-0025 supersedes this ADR's Hosted `verify`/`e2e` deployment-authority
+requirement with the pinned `Amp Orb Verify` GitHub App Check. This note does
+not assert that branch-protection cutover is complete; see
+[`app-ci-cutover.md`](../agents/app-ci-cutover.md). The current daily command
+surface is only `plan`, authorized `preflight`, and authorized `deploy`; its
+code-only versus reviewed-persistence/migration classification is unchanged.
+Legacy TAT, bootstrap, barrier, rebind, install, finalize, and status procedures
+below are retained historical evidence and are retired as daily operations.
+
+## Controlled SSH supersession (2026-09-05)
+
+The Owner replaced the TAT/bootstrap/barrier/rebind operating chain with the
+controlled SSH entry described in
+[`controlled-ssh-maintenance/plan.md`](../cuts/controlled-ssh-maintenance/plan.md).
+The exact-main Hosted authority, pinned restricted SSH, isolated release build,
+atomic switch, health/rollback and persistence traffic boundary below remain.
+Old provisioning/bootstrap sections are retained historical evidence, not current
+execution instructions. The new CLI refuses those retired commands.
+
+The repaired daily route is one restricted SSH deploy command through the
+existing release engine, isolated candidate health, atomic switch and public
+health/rollback. Entry closeout is complete; UUID status/install/finalize and
+TAT/barrier/rebind are historical, not daily steps. Follow `AGENTS.md`'s Goal
+authorization for included maintenance, deployment, diagnosis and agreed
+recovery; merging code alone does not authorize production. The historical
+protocol and per-step approvals below do not override that current route.
+
 ## Context
 
 The existing `deploy-remote.sh` is a proven operator convenience script, but it
@@ -393,6 +422,6 @@ remain in ordinary development or CI projects.
 - Restoring Amp Orb merge authority also requires an explicit, tested update to
   this deployment gate; it never silently accepts whichever CI happens to
   report first.
-- ADR-0025 adds disabled `shadow`, `dual`, `amp+hosted-e2e`, and `amp` reader
-  modes for a future repo-only GitHub App Check. `hosted-only` remains the
-  default and active authority until a separately authorized staged migration.
+- ADR-0025 now supplies the sole pinned `Amp Orb Verify` App Check authority.
+  The former Hosted-only default and staged reader modes are retired; the
+  historical protocol above cannot authorize a different current gate.

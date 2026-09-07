@@ -42,7 +42,15 @@ function closeIssueSource(item, document) {
     && Number.isInteger(item.source.page)
     && item.source.page > 0
     && item.source.region
-  return located ? item : { ...item, source: source(document) }
+  if (located) return item
+  return {
+    ...item,
+    source: {
+      documentId: item.source?.documentId || document?.documentId || 'unresolved-source',
+      page: 1,
+      region: structuredClone(FULL_PAGE),
+    },
+  }
 }
 
 export function nck1OcrProducerSourceDigest(documents, { evidence = null, confirmation = null } = {}) {

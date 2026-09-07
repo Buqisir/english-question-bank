@@ -13,16 +13,7 @@ case "$original_command" in
     exec /usr/bin/sudo -n /usr/local/libexec/eqb-deploy-controller-v1 -- preflight
     ;;
   'deploy '*)
-    command_name=deploy
     arguments=${original_command#deploy }
-    ;;
-  'deploy-reviewed-persistence '*)
-    command_name=deploy-reviewed-persistence
-    arguments=${original_command#deploy-reviewed-persistence }
-    ;;
-  'update-host-config '*)
-    command_name=update-host-config
-    arguments=${original_command#update-host-config }
     ;;
   *) exit 64 ;;
 esac
@@ -33,16 +24,18 @@ case "$sha" in
 esac
 [ "${#sha}" -eq 40 ] || exit 64
 
-if [ "$command_name" = deploy ]; then
-  [ "$arguments" = "$sha" ] || exit 64
+if [ "$arguments" = "$sha" ]; then
   exec /usr/bin/sudo -n /usr/local/libexec/eqb-deploy-controller-v1 -- deploy "$sha"
 fi
 
+arguments=${arguments#* }
+classification=${arguments%% *}
+case "$classification" in code-only|migrate) ;; *) exit 64 ;; esac
 digest=${arguments#* }
-[ "$arguments" = "$sha $digest" ] || exit 64
+[ "$arguments" = "$classification $digest" ] || exit 64
 case "$digest" in
   ''|*[!a-f0-9]*) exit 64 ;;
 esac
 [ "${#digest}" -eq 64 ] || exit 64
 exec /usr/bin/sudo -n /usr/local/libexec/eqb-deploy-controller-v1 \
-  -- "$command_name" "$sha" "$digest"
+  -- deploy "$sha" "$classification" "$digest"

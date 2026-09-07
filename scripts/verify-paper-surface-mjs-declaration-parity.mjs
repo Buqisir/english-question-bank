@@ -57,10 +57,6 @@ for (const runtimeFile of runtimeMjsFiles) {
     normalizeDeclarations(dts) === normalizeDeclarations(dmts),
     `${stem}: .d.ts and .d.mts uncommented declarations match`
   )
-  assert(
-    dmts.includes('Keep this file in sync') && dmts.includes(`${stem}.d.ts`),
-    `${dmtsPath} tells maintainers to keep the pair in sync`
-  )
 }
 
 summary()

@@ -17,7 +17,7 @@ colors:
   warning: "#d97706"
   danger: "#dc2626"
   paper-bg: "#f6f6f4"
-  paper-desk-bg: "var(--paper-bg)"
+  paper-desk-bg: "var(--eqb-color-bg)"
   paper-ink: "#4a4438"
   paper-ink-strong: "#2c2820"
   paper-border: "#e6e2d7"
@@ -135,7 +135,7 @@ components:
 语义色作 chip 底 / 边 / 图标 / 大字（≥3:1）合格；**作小正文文字对浅底仅约 3–4.5:1，是跨文件语义色统一 + AA 达标的既有债**，留待独立刀。
 
 ### Paper（纸页 token 家族 — 仅纸页壳）
-- **Paper Bg 纸页底** (#F6F6F4): 整卷/讲评页页基底、工作台预览纸桌（`--paper-desk-bg` 复用同值）。
+- **Paper Bg 纸页底** (#F6F6F4): 整卷/讲评页页基底。
 - **Paper Ink 暖墨** (#4A4438): 纸页壳次级正文/rail 项/答案行文字。
 - **Paper Ink Strong 暖墨·强** (#2C2820): 纸页壳标题、选中态文字。
 - **Paper Border 暖边** (#E6E2D7): 讲评栏面板边线。
