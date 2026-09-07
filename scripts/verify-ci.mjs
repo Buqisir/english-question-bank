@@ -51,6 +51,7 @@ const registry = {
   'scripts/verify-import-review-ocr-confirmation.mjs',
   'scripts/verify-import-environment-preflight.mjs',
   'scripts/verify-nck1-source-materialization.mjs',
+  'scripts/verify-nck1-pdf-crop-recipe-replay.mjs',
   'scripts/verify-paper-canonical-nck1-materialization-candidate.mjs',
   'scripts/verify-import-paper-routing.mjs',
   'scripts/verify-production-canonical-publication-backfill.mjs',
@@ -241,6 +242,7 @@ const uniqueRegistered = (scripts) => [...new Set(scripts)].filter(
 const paperScripts = uniqueRegistered(
   [
     ...registry.scripts.filter((script) => paperScriptPattern.test(script)),
+    'scripts/verify-nck1-pdf-crop-recipe-replay.mjs',
     'scripts/verify-universal-nck1-publish.mjs',
     'scripts/verify-universal-nck1-image-source-bundle.mjs',
     'scripts/verify-universal-nck1-source-only-intake.mjs',
@@ -264,6 +266,7 @@ const importPaperScripts = uniqueRegistered([
   'scripts/verify-import-review-ocr-confirmation.mjs',
   'scripts/verify-import-environment-preflight.mjs',
   'scripts/verify-nck1-source-materialization.mjs',
+  'scripts/verify-nck1-pdf-crop-recipe-replay.mjs',
   'scripts/verify-paper-canonical-docx-source-adapter.mjs',
   'scripts/verify-paper-canonical-nck1-materialization-candidate.mjs',
   'scripts/verify-paper-canonical-import-admission.mjs',
