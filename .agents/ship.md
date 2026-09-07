@@ -67,6 +67,16 @@ to remain the classified same-Goal candidate.
 
 ## 4. Deliver through the PR
 
+When explicitly waiting for a pending Check, optionally call `ship_watch_check`
+with the fixed PR number and current head in this Ship thread. It polls read-only
+every 45 seconds, stops after 60 minutes or PR/head drift, and sends at most one
+best-effort terminal notice. Cancel with `ship_cancel_check_watch`; no schedule or
+CI-host handoff is needed. A notice is not approval: on wake, freshly read the open
+PR/head and latest exact-App/name Check, then perform all identity/policy gates
+below. Never reuse an older green Check or infer new Ship/deployment authorization.
+Read/append failure leaves CI unchanged; inspect GitHub directly, never rerun CI
+just to obtain a notification. Plugin restart does not automatically resume waits.
+
 Push the task branch without force and open one PR into `main`, reporting risk,
 review and verification evidence. Before an authorized merge, require the
 pinned App ID `4835036`'s successful exact-name `Amp Orb Verify` Check for the

@@ -1,5 +1,25 @@
 # Project plugins
 
+## Ship Check watcher
+
+`ship-check-watcher.js` registers `ship_watch_check({pullRequest, head})` and
+`ship_cancel_check_watch({})`. Invoke only when explicitly waiting for Ship CI.
+The target thread comes from the invocation context, never a tool argument.
+Repository, App `4835036`, and `Amp Orb Verify` are fixed. It performs only GitHub
+GETs using the existing `gh` authentication, every 45 seconds (no overlapping reads),
+for at most 60 minutes. Head/identity drift, PR closure, cancellation and disposal
+stop the wait; it never follows a new head or modifies/reruns CI.
+
+A confirmed latest terminal Check produces one best-effort `appendUserMessage`
+without steering. Ship must recheck live identity and authority after waking.
+Private mode-0600 records under `.scratch/ship-check-watcher/` claim before append;
+an ambiguous append is not retried. There is no outbox, scheduler, automatic restart
+recovery, or exactly-once transport guarantee: crashes can miss notifications.
+An explicit restart may wait again, but an existing terminal claim is not resent.
+Loading this plugin does not register a webhook or start a watcher. Load only this
+plugin, never reload the CI plugin to enable it. Verify with
+`node scripts/verify-ship-check-watcher.mjs`.
+
 ## NCK1 staged-analysis agent
 
 `nck1-analysis-agent.js` registers `nck1_analyze_group` for the paper-import
