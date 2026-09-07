@@ -535,6 +535,10 @@ try {
   assert.equal(await listeningQuestion.count(), 1)
   await listeningQuestion.click()
   await page.getByText('听力核对 · 第 6 题').waitFor()
+  assert.equal(await page.locator('#listening-review-section').evaluate((section) => {
+    const rect = section.getBoundingClientRect()
+    return rect.top >= 0 && rect.bottom <= window.innerHeight
+  }), true, 'Listening selection keeps the evidence in view instead of jumping to issue entry')
   assert.equal(await page.locator('.listening-review-answer strong').textContent(), 'B')
   assert.match(
     await page.locator('.listening-review-transcript').textContent(),
@@ -560,6 +564,10 @@ try {
   )
   const screenTable = page.frameLocator('#review-frame')
     .locator(`[data-canonical-block-id="${targetId}"]`)
+  if (process.env.LISTENING_QA_ARTIFACT_DIR) {
+    mkdirSync(process.env.LISTENING_QA_ARTIFACT_DIR, { recursive: true })
+    await page.screenshot({ path: path.join(process.env.LISTENING_QA_ARTIFACT_DIR, 'review-captured.png') })
+  }
   await screenTable.click()
   const sourceImage = page.locator('.source-proof img')
   await sourceImage.waitFor()
@@ -664,6 +672,9 @@ try {
     0,
     'not_supplied Review has no Listening rail chrome',
   )
+  if (process.env.LISTENING_QA_ARTIFACT_DIR) {
+    await page.screenshot({ path: path.join(process.env.LISTENING_QA_ARTIFACT_DIR, 'review-not-supplied.png') })
+  }
 
   console.log('verify-import-review-source-pairing: PASS')
 } finally {

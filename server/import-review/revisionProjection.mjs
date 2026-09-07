@@ -678,6 +678,7 @@ export function buildNck1ReviewConsumption(candidate, compilation) {
       groupIds,
       projectedOccurrences,
       ...([
+        'listening',
         'seven-choices',
         'cloze',
         'grammar-fill',

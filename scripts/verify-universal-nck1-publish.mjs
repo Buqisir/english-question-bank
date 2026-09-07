@@ -839,7 +839,7 @@ function sevenChoicesSelection(consumption) {
   return selection
 }
 
-async function assertRoleSurfaces({ projection, publishedScreen, publishedPrint }) {
+async function assertRoleSurfaces({ projection, listeningProjection, publishedScreen, publishedPrint }) {
   const titleId = 'block:seven-choices:title'
   const bodyId = 'block:seven-choices'
   const vite = await import('../app/node_modules/vite/dist/node/index.js')
@@ -872,17 +872,18 @@ async function assertRoleSurfaces({ projection, publishedScreen, publishedPrint 
     const screenPage = await browser.newPage({
       viewport: { width: 1280, height: 900 },
     })
+    let screenProjection = projection
     await screenPage.route('**/api/paper-canonical/consumption?*', (route) =>
       route.fulfill({
         status: 200,
         contentType: 'application/json',
-        body: JSON.stringify(projection.consumption),
+        body: JSON.stringify(screenProjection.consumption),
       }))
     await screenPage.route('**/paper-assets/**/paper-asset.json', (route) =>
       route.fulfill({
         status: 200,
         contentType: 'application/json',
-        body: JSON.stringify(projection.paperAsset),
+        body: JSON.stringify(screenProjection.paperAsset),
       }))
     await screenPage.route('**/paper-assets/**/analyses/**', (route) =>
       route.fulfill({ status: 404, body: '' }))
@@ -915,6 +916,28 @@ async function assertRoleSurfaces({ projection, publishedScreen, publishedPrint 
       await screenBody.evaluate((element) => getComputedStyle(element).textAlign),
       'center',
     )
+    assert.equal(await screenPage.locator('.paper-browse-listening').count(), 0)
+    if (process.env.LISTENING_QA_ARTIFACT_DIR) {
+      mkdirSync(process.env.LISTENING_QA_ARTIFACT_DIR, { recursive: true })
+      await screenPage.screenshot({ path: path.join(process.env.LISTENING_QA_ARTIFACT_DIR, 'screen-not-supplied.png') })
+    }
+    screenProjection = listeningProjection
+    screenUrl.searchParams.set('focusGroupId', `group:${projection.paperId}:listening.short-dialogue`)
+    await screenPage.goto(screenUrl.href)
+    await screenPage.locator('.paper-browse-listening-question').first().waitFor()
+    assert.equal(await screenPage.locator('.paper-browse-listening').count(), 2)
+    assert.equal(await screenPage.locator('.paper-browse-listening-question').count(), 20)
+    assert.deepEqual(
+      await screenPage.locator('.paper-browse-listening-stem > strong').allTextContents(),
+      Array.from({ length: 20 }, (_, index) => `${index + 1}.`),
+    )
+    assert.equal(await screenPage.locator('.paper-browse-listening-options > span').count(), 60)
+    assert.equal(await screenPage.locator('audio').count(), 0, 'PR2 does not enable playback')
+    assert.doesNotMatch(await screenPage.locator('body').textContent(), /Long listening transcript|官方答案|内容安全检查通过/)
+    await screenPage.locator('[data-paper-question-id="question:listening:6"]').click()
+    if (process.env.LISTENING_QA_ARTIFACT_DIR) {
+      await screenPage.screenshot({ path: path.join(process.env.LISTENING_QA_ARTIFACT_DIR, 'screen-captured.png') })
+    }
     await screenPage.close()
 
     const answers = new Map(Object.entries(projection.paperAsset.answerKey.answers)
@@ -1337,6 +1360,7 @@ try {
   )).status, 403)
   await assertRoleSurfaces({
     projection: happy.projection,
+    listeningProjection: listeningPublication.projection,
     publishedScreen: result.publish.consumers.screen,
     publishedPrint: result.publish.consumers.print_pdf,
   })

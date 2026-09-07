@@ -1084,7 +1084,11 @@ function applyScreenTarget(target) {
   form.elements.pageNumber.value = ''
   form.querySelector('.field-help').textContent =
     `问题会绑定 R${state.detail.latest.revisionNumber} · Screen，不会漂到别的 revision。`
-  form.elements.message.focus()
+  if (selectedListeningReviewQuestion()) {
+    document.querySelector('#listening-review-section')?.scrollIntoView({ block: 'nearest' })
+  } else {
+    form.elements.message.focus()
+  }
 }
 
 function locateScreenTarget(targetId) {

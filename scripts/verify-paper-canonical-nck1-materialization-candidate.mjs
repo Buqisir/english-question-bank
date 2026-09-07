@@ -387,7 +387,22 @@ const listeningConsumption = {
     familyContractId: 'listening',
     groupIds: listeningOccurrences.map(({ groupId }) => groupId),
     projectedOccurrences: listeningOccurrences,
+    projectedOccurrenceDigests: listeningOccurrences.map((occurrence) => ({
+      groupId: occurrence.groupId,
+      digest: digestJson(occurrence),
+    })),
   }],
+}
+for (const mutation of ['missing-digest', 'changed-question']) {
+  const tampered = structuredClone(listeningConsumption)
+  const selection = tampered.selections[0]
+  if (mutation === 'missing-digest') delete selection.projectedOccurrenceDigests
+  else selection.projectedOccurrences[0].questions[0].canonicalNumber = 99
+  assert.throws(() => projectCanonicalConsumerGroup({
+    consumption: tampered,
+    familyContractId: 'listening',
+    groupId: listeningOccurrences[0].groupId,
+  }), /projected occurrence integrity/, mutation)
 }
 const studentListening = projectCanonicalConsumerGroup({
   consumption: listeningConsumption,

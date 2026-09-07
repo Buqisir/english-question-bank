@@ -1195,11 +1195,12 @@ function selectOccurrence(input) {
   }
   const authorityRef = consumption?.authorityRef
   const requiresOccurrenceIntegrity =
-    familyContractId === 'cloze'
+    familyContractId === 'listening'
+    || familyContractId === 'cloze'
     || familyContractId === 'grammar-fill'
     || (
       familyContractId === 'continuation-writing'
-      && authorityRef?.manifestVersion === '49'
+      && ['49', '50'].includes(authorityRef?.manifestVersion)
     )
     || (
       familyContractId === 'seven-choices'
