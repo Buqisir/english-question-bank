@@ -29,6 +29,7 @@ import {
   validateAuthorityClosure,
 } from '../shared/paper-canonical/authority.mjs'
 import { compileCanonicalPaper } from '../shared/paper-canonical/compiler.mjs'
+import { clozeRhythm } from '../shared/paper-canonical/clozeRhythm.mjs'
 import { digestJson } from '../shared/paper-canonical/stable.mjs'
 import { abcdLayoutReferenceFixture } from '../test-fixtures/paper-canonical/abcdLayoutReferenceFixture.mjs'
 import { makeClozeGrammarCanonicalReferenceFixture } from '../test-fixtures/paper-canonical/clozeGrammarReferenceFixture.mjs'
@@ -210,6 +211,24 @@ assert.equal(
 )
 assert.equal(abcdPlacementSignature(plan), plan.placementSignature)
 
+// The cloze layout gate must track the same geometry the print/PDF renderer
+// paints. Bind the layout's anchor-framework cloze geometry to the
+// cloze-rhythm-v4 renderer mapping so a future drift between the two
+// standards artifacts cannot silently re-open the D admission band.
+const clozeFramework = rendererTypography.optionAnchorFramework.cloze
+const clozeMapping = clozeRhythm.horizontalChoiceGeometry.rendererMapping
+assert.deepEqual(
+  clozeFramework.optionColumnStartsTwip,
+  clozeMapping.columnStartsPt.map((pt) => Math.round(pt * 20)),
+  'the cloze anchor-framework starts track the cloze-rhythm-v4 renderer mapping',
+)
+assert.deepEqual(
+  clozeFramework.optionColumnWidthsTwip,
+  clozeMapping.columnWidthsPt.map((pt) => Math.round(pt * 20)),
+  'the cloze anchor-framework widths track the cloze-rhythm-v4 renderer mapping',
+)
+assert.equal(clozeFramework.labelToTextGapEm, clozeMapping.labelToTextGapEm)
+
 const tamperedOuterOriginPlan = structuredClone(plan)
 tamperedOuterOriginPlan.questionStemAndOuterOptionBlockStartTwip += 20
 assert.notEqual(
@@ -248,8 +267,8 @@ assert.equal(fixedClozeWrapped.status, 'selected')
 assert.equal(fixedClozeWrapped.mode, 'four_columns')
 assert.deepEqual(
   fixedClozeWrapped.placements.map((placement) => placement.startTwip),
-  [0, 2080, 4160, 6240],
-  'Cloze wrapped text preserves one fixed four-track strategy',
+  [346, 2556, 4638, 6731],
+  'Cloze placement reports the rendered cloze-rhythm four-column starts, not the Reading pitch',
 )
 assert.deepEqual(
   layoutFixedFourColumnClozeOptionSet(
@@ -280,6 +299,29 @@ assert.deepEqual(
     reason: 'fixed_four_column_contains_unrenderable_content',
   },
   'Cloze fixed tracks fail closed on an overwide unbreakable token',
+)
+// Regression: an unbreakable D token wider than the renderer's D text cell but
+// narrower than the legacy Reading-derived residual (the (87.08, 125.2] pt
+// admission band) must fail closed. ad29d17b shrank the renderer's D track to
+// 101.65 pt but left the gate on Reading geometry; this canary probes the band
+// edge that went untested.
+assert.deepEqual(
+  layoutFixedFourColumnClozeOptionSet(
+    optionSet('cloze-d-band', ['short', 'short', 'short', 'counterrevolutionary']),
+  ),
+  {
+    status: 'needs_review',
+    reason: 'fixed_four_column_contains_unrenderable_content',
+  },
+  'Cloze D band token wider than the rendered D cell but narrower than the legacy Reading residual fails closed',
+)
+// No regression: a D token below the rendered D text cell still selects.
+assert.equal(
+  layoutFixedFourColumnClozeOptionSet(
+    optionSet('cloze-short-d', ['short', 'short', 'short', 'characteristically']),
+  ).status,
+  'selected',
+  'A short D word below the rendered D cell still selects four columns',
 )
 assert.deepEqual(
   layoutAbcdOptionSet({
