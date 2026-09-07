@@ -24,21 +24,8 @@ import path from 'node:path'
 
 export const AMP_ORB_DEPLOY_REPOSITORY = 'Buqisir/english-question-bank'
 export const AMP_ORB_DEPLOY_GITHUB_HOST = 'github.com'
-export const AMP_ORB_DEPLOY_REQUIRED_CHECKS = Object.freeze(['verify', 'e2e'])
-export const AMP_ORB_DEPLOY_CHECK_APP = 'github-actions'
-export const AMP_ORB_DEPLOY_CHECK_APP_ID = 15368
-export const AMP_ORB_DEPLOY_WORKFLOW_ID = 282244920
-export const AMP_ORB_DEPLOY_WORKFLOW_PATH = '.github/workflows/verify.yml'
 export const AMP_ORB_DEPLOY_AMP_CHECK_NAME = 'Amp Orb Verify'
 export const AMP_ORB_DEPLOY_AMP_EXTERNAL_ID_VERSIONS = Object.freeze(['v4'])
-export const AMP_ORB_DEPLOY_DEFAULT_AUTHORITY_MODE = 'hosted-only'
-export const AMP_ORB_DEPLOY_AUTHORITY_MODES = Object.freeze([
-  'hosted-only',
-  'shadow',
-  'dual',
-  'amp+hosted-e2e',
-  'amp',
-])
 export const AMP_ORB_DEPLOY_RECEIPT_SCHEMA_VERSION = 'amp-orb-deployment-receipt-v1'
 export const EQB_LEGACY_BASELINE_RECEIPT_SCHEMA_VERSION = 'eqb-legacy-baseline-receipt-v1'
 export const EQB_RELEASE_BOOTSTRAP_FAILURE_SCHEMA_VERSION = 'eqb-deployment-bootstrap-failure-v1'
@@ -96,21 +83,15 @@ function assertPositiveInteger(value, label) {
 }
 
 export function deploymentAuthorityFromEnvironment(environment = {}) {
-  const mode = String(
-    environment.QUESTION_BANK_DEPLOY_CI_AUTHORITY_MODE
-      || AMP_ORB_DEPLOY_DEFAULT_AUTHORITY_MODE,
-  )
-  if (!AMP_ORB_DEPLOY_AUTHORITY_MODES.includes(mode)) {
-    throw new Error('Deployment CI authority mode is invalid')
+  if (Object.hasOwn(environment, 'QUESTION_BANK_DEPLOY_CI_AUTHORITY_MODE')) {
+    throw new Error('Legacy deployment CI authority mode setting is not permitted')
   }
-  const readsAmpCheck = mode !== 'hosted-only'
-  const ampAppId = readsAmpCheck
-    ? assertPositiveInteger(
-        environment.QUESTION_BANK_DEPLOY_AMP_CHECK_APP_ID,
-        'deployment Amp Check App ID',
-      )
-    : null
-  return Object.freeze({ mode, ampAppId })
+  return Object.freeze({
+    ampAppId: assertPositiveInteger(
+      environment.QUESTION_BANK_DEPLOY_AMP_CHECK_APP_ID,
+      'deployment Amp Check App ID',
+    ),
+  })
 }
 
 export function parseOpenSshEd25519PublicKeyBody(value) {
@@ -806,16 +787,9 @@ export function deploymentGitHubApiArgs(endpoint) {
   const prefix = `repos/${AMP_ORB_DEPLOY_REPOSITORY}/`
   const allowed = endpoint === `${prefix}git/ref/heads/main`
     || new RegExp(
-      `^${prefix}commits/[a-f0-9]{40}/check-runs\\?filter=all&per_page=100(?:&page=(?:[2-9]|[1-9][0-9]+))?$`,
-      'u',
-    )
-      .test(endpoint || '')
-    || new RegExp(
       `^${prefix}commits/[a-f0-9]{40}/check-runs\\?check_name=Amp%20Orb%20Verify&filter=all&per_page=100(?:&page=(?:[2-9]|[1-9][0-9]+))?$`,
       'u',
     )
-      .test(endpoint || '')
-    || new RegExp(`^${prefix}actions/runs/[1-9][0-9]*$`, 'u')
       .test(endpoint || '')
   if (!allowed) throw new Error('Deployment GitHub API endpoint is invalid')
   return ['api', '--hostname', AMP_ORB_DEPLOY_GITHUB_HOST, endpoint]
@@ -823,11 +797,11 @@ export function deploymentGitHubApiArgs(endpoint) {
 
 export async function readDeploymentCheckRuns({
   sha,
-  checkName = null,
+  checkName = AMP_ORB_DEPLOY_AMP_CHECK_NAME,
   readJson,
 } = {}) {
   const expectedSha = assertSha(sha)
-  if (checkName !== null && checkName !== AMP_ORB_DEPLOY_AMP_CHECK_NAME) {
+  if (checkName !== AMP_ORB_DEPLOY_AMP_CHECK_NAME) {
     throw new Error('Deployment Check reader name is invalid')
   }
   if (typeof readJson !== 'function') {
@@ -837,9 +811,7 @@ export async function readDeploymentCheckRuns({
     const checkRuns = []
     for (let page = 1; page <= 100; page += 1) {
       const pageQuery = page === 1 ? '' : `&page=${page}`
-      const filter = checkName
-        ? `check_name=${encodeURIComponent(checkName)}&filter=all&per_page=100`
-        : 'filter=all&per_page=100'
+      const filter = `check_name=${encodeURIComponent(checkName)}&filter=all&per_page=100`
       const payload = await readJson(
         `repos/${AMP_ORB_DEPLOY_REPOSITORY}/commits/${expectedSha}/check-runs?${filter}${pageQuery}`,
       )
@@ -873,104 +845,6 @@ export async function readDeploymentCheckRuns({
     previousFingerprint = currentFingerprint
   }
   throw new Error('GitHub deployment checks changed during pagination')
-}
-
-function selectHostedDeploymentChecks(payload, expectedSha, requiredChecks) {
-  const sha = assertSha(expectedSha)
-  if (!Array.isArray(payload?.check_runs)) {
-    throw new Error('GitHub deployment checks response is invalid')
-  }
-  if (
-    !Array.isArray(requiredChecks)
-    || requiredChecks.length === 0
-    || requiredChecks.some((name) => !AMP_ORB_DEPLOY_REQUIRED_CHECKS.includes(name))
-    || new Set(requiredChecks).size !== requiredChecks.length
-  ) throw new Error('Required hosted deployment check set is invalid')
-  const checks = requiredChecks.map((name) => {
-    const matching = payload.check_runs.filter((candidate) => (
-      candidate?.name === name
-      && candidate?.app?.id === AMP_ORB_DEPLOY_CHECK_APP_ID
-      && candidate?.app?.slug === AMP_ORB_DEPLOY_CHECK_APP
-    ))
-    const check = matching.reduce((latest, candidate) => {
-      if (!Number.isSafeInteger(candidate?.id) || candidate.id < 1) {
-        throw new Error(`Required ${name} check ordering is invalid`)
-      }
-      return !latest || candidate.id > latest.id ? candidate : latest
-    }, null)
-    if (!check) throw new Error(`Required ${name} check is missing`)
-    if (check.head_sha !== sha) {
-      throw new Error(`Required ${name} check SHA is invalid`)
-    }
-    if (check.status !== 'completed' || check.conclusion !== 'success') {
-      throw new Error(`Required ${name} check is ${check.conclusion || check.status || 'unknown'}`)
-    }
-    const details = /^https:\/\/github\.com\/Buqisir\/english-question-bank\/actions\/runs\/([1-9][0-9]*)\/job\/[1-9][0-9]*$/u
-      .exec(String(check.details_url || ''))
-    if (!details) {
-      throw new Error(`Required ${name} check target is invalid`)
-    }
-    const checkSuiteId = assertPositiveInteger(
-      check.check_suite?.id,
-      `required ${name} check suite identity`,
-    )
-    const workflowRunId = assertPositiveInteger(
-      Number(details[1]),
-      `required ${name} workflow run identity`,
-    )
-    return {
-      name,
-      state: 'success',
-      app: AMP_ORB_DEPLOY_CHECK_APP,
-      checkRunId: check.id,
-      checkSuiteId,
-      detailsUrl: check.details_url,
-      workflowRunId,
-    }
-  })
-  if (new Set(checks.map(({ checkSuiteId }) => checkSuiteId)).size !== 1) {
-    throw new Error('Required deployment checks are not from one workflow run')
-  }
-  if (new Set(checks.map(({ workflowRunId }) => workflowRunId)).size !== 1) {
-    throw new Error('Required deployment checks do not identify one workflow run')
-  }
-  return checks
-}
-
-export function assertAuthoritativeDeploymentChecks(payload, expectedSha, {
-  requiredChecks = AMP_ORB_DEPLOY_REQUIRED_CHECKS,
-  workflowRun,
-} = {}) {
-  const sha = assertSha(expectedSha)
-  const checks = selectHostedDeploymentChecks(payload, sha, requiredChecks)
-  const workflowRunId = checks[0].workflowRunId
-  if (
-    workflowRun?.id !== workflowRunId
-    || workflowRun?.workflow_id !== AMP_ORB_DEPLOY_WORKFLOW_ID
-    || workflowRun?.path !== AMP_ORB_DEPLOY_WORKFLOW_PATH
-    || workflowRun?.event !== 'push'
-    // Job completion is authority for e2e-only mode. A slow/cancelled verify
-    // sibling must not make a successful e2e wait for workflow completion.
-    || (requiredChecks.includes('verify') && workflowRun?.status !== 'completed')
-    || (requiredChecks.includes('verify') && workflowRun?.conclusion !== 'success')
-    || workflowRun?.head_sha !== sha
-    || workflowRun?.head_branch !== 'main'
-    || workflowRun?.run_attempt !== 1
-    || workflowRun?.check_suite_id !== checks[0].checkSuiteId
-    || workflowRun?.repository?.full_name !== AMP_ORB_DEPLOY_REPOSITORY
-    || workflowRun?.head_repository?.full_name !== AMP_ORB_DEPLOY_REPOSITORY
-  ) {
-    throw new Error('Required hosted workflow run identity is invalid')
-  }
-  return {
-    provider: AMP_ORB_DEPLOY_CHECK_APP,
-    appId: AMP_ORB_DEPLOY_CHECK_APP_ID,
-    workflowId: AMP_ORB_DEPLOY_WORKFLOW_ID,
-    workflowPath: AMP_ORB_DEPLOY_WORKFLOW_PATH,
-    workflowRunId,
-    runAttempt: workflowRun.run_attempt,
-    checks,
-  }
 }
 
 function parseAmpCheckExternalId(value) {
@@ -1028,109 +902,16 @@ export function assertAmpOrbDeploymentCheck(payload, expectedSha, trustedAppId) 
   }
 }
 
-// Deliberately narrower than Ship eligibility: shared renderer and all backend,
-// tooling, executable app logic, governance and unknown paths retain Hosted.
-// Start with presentation CSS and known-shape paper data only; never let
-// Markdown's no-changes classification hide a control-plane change.
-export function isReducedDeploymentRisk(paths, risk) {
-  return Array.isArray(paths) && paths.length > 0
-    && ['ui-micro', 'ordinary-local-feature', 'known-shape-paper-data', 'single-paper-import'].includes(risk)
-    && paths.every((file) => typeof file === 'string'
-      && !file.split('/').some((part) => !part || part === '.' || part === '..')
-      && (/^app\/src\/.*\.css$/u.test(file)
-        || /^(?:app\/public\/paper-assets\/|test-fixtures\/paper-(?:canonical\/publications|import)\/|scripts\/import-pipeline\/papers\/).*\.(?:json|png|jpg|jpeg|webp|svg)$/u.test(file))
-      && !/(?:auth|session|permission|persist|storage|migration|security|credential|control|workflow|deploy|\.github|AGENTS\.md|CLAUDE\.md)/iu.test(file))
-}
-
-export async function resolveDeploymentRisk({ expectedSha, runGit, classifyPaths, readHostedAuthority }) {
-  const sha = assertSha(expectedSha)
-  const commits = []
-  let cursor = sha
-  try {
-    // Bound remote reads and fail closed on shallow history, merges, missing
-    // evidence, or an overly long unvalidated batch. No cached anchor/config.
-    for (let count = 0; count < 50; count += 1) {
-      const lineage = runGit(['rev-list', '--parents', '-n', '1', cursor]).trim().split(/\s+/u)
-      if (lineage.length !== 2 || lineage[0] !== cursor) throw new Error('Unproven single-parent history')
-      const parent = assertSha(lineage[1])
-      const output = runGit(['diff', '--name-only', '--no-renames', '-z', parent, cursor, '--'])
-      if (output && !output.endsWith('\0')) throw new Error('Incomplete changed paths')
-      const paths = output ? output.slice(0, -1).split('\0') : []
-      const risk = await classifyPaths(paths)
-      commits.push({ sha: cursor, risk, paths })
-      if (!isReducedDeploymentRisk(paths, risk)) {
-        return { reduced: false, reason: 'high-or-unknown-risk', commits }
-      }
-      const accumulatedPaths = [...new Set(commits.flatMap((commit) => commit.paths))]
-      const accumulatedRisk = await classifyPaths(accumulatedPaths)
-      if (!isReducedDeploymentRisk(accumulatedPaths, accumulatedRisk)) {
-        return { reduced: false, reason: 'mixed-accumulated-risk', accumulatedRisk, commits }
-      }
-      try {
-        // Only exact ancestor push verify+e2e success can close the interval.
-        // Nightly, PR, dispatch, reruns and App-only greens cannot be anchors.
-        await readHostedAuthority(parent)
-        return { reduced: true, anchorSha: parent, accumulatedRisk, commits }
-      } catch {
-        cursor = parent
-      }
-    }
-    throw new Error('Hosted anchor not found within 50 commits')
-  } catch (error) {
-    return { reduced: false, reason: 'unproven-risk', error: error.message, commits }
-  }
-}
-
 export async function verifyDeploymentAuthority({
-  authority,
   expectedSha,
-  readHostedChecks,
-  readWorkflowRun,
   readAmpChecks,
-  runGit,
-  classifyPaths,
+  ampAppId,
 } = {}) {
   const sha = assertSha(expectedSha)
-  if (!authority || !AMP_ORB_DEPLOY_AUTHORITY_MODES.includes(authority.mode)) {
-    throw new Error('Deployment CI authority configuration is invalid')
+  if (typeof readAmpChecks !== 'function') {
+    throw new Error('Amp deployment verification dependency is missing')
   }
-  async function readHostedAuthority(targetSha, requiredChecks = AMP_ORB_DEPLOY_REQUIRED_CHECKS) {
-    if (typeof readHostedChecks !== 'function' || typeof readWorkflowRun !== 'function') {
-      throw new Error('Hosted deployment verification dependencies are missing')
-    }
-    const payload = await readHostedChecks(targetSha)
-    const selected = selectHostedDeploymentChecks(payload, targetSha, requiredChecks)
-    const workflowRun = await readWorkflowRun(selected[0].workflowRunId)
-    return assertAuthoritativeDeploymentChecks(payload, targetSha, {
-      requiredChecks,
-      workflowRun,
-    })
-  }
-  const risk = ['amp', 'amp+hosted-e2e'].includes(authority.mode)
-    ? await resolveDeploymentRisk({ expectedSha: sha, runGit, classifyPaths, readHostedAuthority })
-    : null
-  const effectiveMode = risk && !risk.reduced ? 'dual' : authority.mode
-  const hosted = effectiveMode === 'amp' ? null : await readHostedAuthority(
-    sha,
-    effectiveMode === 'amp+hosted-e2e' ? ['e2e'] : AMP_ORB_DEPLOY_REQUIRED_CHECKS,
-  )
-  let amp = null
-  if (authority.mode !== 'hosted-only') {
-    if (typeof readAmpChecks !== 'function') {
-      throw new Error('Amp deployment verification dependency is missing')
-    }
-    try {
-      amp = assertAmpOrbDeploymentCheck(
-        await readAmpChecks(sha),
-        sha,
-        authority.ampAppId,
-      )
-    } catch (error) {
-      if (authority.mode !== 'shadow') throw error
-      amp = { provider: AMP_ORB_DEPLOY_AMP_CHECK_NAME, state: 'shadow-failure', error: error.message }
-    }
-  }
-  return { mode: authority.mode, effectiveMode, risk, hosted, amp }
+  return assertAmpOrbDeploymentCheck(await readAmpChecks(sha), sha, ampAppId)
 }
 
 export async function resolveLatestDeploymentCandidate({
