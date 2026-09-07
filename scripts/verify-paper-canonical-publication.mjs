@@ -60,6 +60,11 @@ const oldV13FixtureRoot = path.resolve(
 )
 const oldV13FixtureIntegrityDigest =
   'sha256:b5250b626deb3f354fac478873bd3191904972cf43557700bd28550d138c7b9c'
+const oldV14FixtureRoot = path.resolve(
+  'test-fixtures/paper-canonical/publications/old-v14',
+)
+const oldV14FixtureIntegrityDigest =
+  'sha256:1330b04409626a5e032a1e32d69bd47a1f05732832184aa8c6f7a34f0fde03ca'
 
 function fixtureRelativeFiles(rootDir, relativeDir = '') {
   return readdirSync(path.join(rootDir, relativeDir))
@@ -140,6 +145,83 @@ async function assertExactOldV13FilesystemReload() {
         clozeSelection.groupIds[0],
         `the exact byte-pinned old-v13 ${consumerId} Cloze selection remains consumable`,
       )
+    }
+  } finally {
+    db.close()
+    rmSync(rootDir, { recursive: true, force: true })
+  }
+}
+
+async function assertExactOldV14FilesystemReload() {
+  const integrityPath = path.join(oldV14FixtureRoot, 'fixture-integrity.json')
+  const integrityBytes = readFileSync(integrityPath)
+  assert.equal(
+    sha256(integrityBytes),
+    oldV14FixtureIntegrityDigest,
+    'the checked-in old-v14 fixture inventory is byte-pinned',
+  )
+  const integrity = JSON.parse(integrityBytes)
+  assert.equal(integrity.schemaVersion, 'canonical-publication-fixture-v1')
+  assert.deepEqual(
+    fixtureRelativeFiles(oldV14FixtureRoot),
+    [
+      'fixture-integrity.json',
+      ...Object.keys(integrity.files),
+    ].sort(),
+    'the old-v14 fixture contains exactly the pinned filesystem bytes',
+  )
+  for (const [relativePath, expectedDigest] of Object.entries(
+    integrity.files,
+  )) {
+    assert.equal(
+      sha256(readFileSync(path.join(oldV14FixtureRoot, relativePath))),
+      expectedDigest,
+      `old-v14 fixture pins ${relativePath}`,
+    )
+  }
+
+  const rootDir = mkdtempSync(path.join(tmpdir(), 'eqb-old-v14-reload-'))
+  const db = new DatabaseSync(path.join(rootDir, 'publication.sqlite'))
+  try {
+    cpSync(path.join(oldV14FixtureRoot, 'store'), rootDir, {
+      recursive: true,
+    })
+    recordCanonicalPublicationCurrent(db, integrity.publicationRef)
+    const store = createFileSystemCanonicalPublicationStore({ rootDir, db })
+    for (const consumerId of ['screen', 'print_pdf']) {
+      const consumption = await loadPaperForConsumption({
+        paperId: integrity.publicationRef.paperId,
+        consumerContract: consumerContractRefs[consumerId],
+      }, store)
+      assert.equal(
+        consumption.disposition,
+        'ready',
+        `the real filesystem store reloads old-v14 for ${consumerId} (canonical-paper-publication-v14.json fallback)`,
+      )
+      assert.equal(
+        sha256(stableBytes(consumption)),
+        integrity.consumptionDigests[consumerId],
+        `old-v14 reload preserves the exact ${consumerId} Consumption Plan`,
+      )
+      const clozeSelection = consumption.selections.find(
+        (selection) => selection.familyContractId === 'cloze',
+      )
+      assert.ok(
+        clozeSelection,
+        `old-v14 ${consumerId} Consumption Plan retains its Cloze selection`,
+      )
+      // NOTE: the v13 reload additionally projects the cloze selection through
+      // projectCanonicalConsumerGroup, whose occurrence-integrity gate accepts
+      // the v13 Consumption Plan via a hand-curated historical-digest allowlist
+      // (VERIFIED_PRE_V18_CLOZE_CONSUMPTION_DIGESTS, consumerProjection.mjs:22).
+      // A genuine v14 publication produces a distinct (valid) Consumption Plan
+      // digest that is not in that allowlist, so the projection gate is
+      // orthogonal to this bug (the filename-fallback discovery defect) — with
+      // or without the fix the projection outcome for v14 is unchanged, and
+      // without the fix the loader never reaches projection at all. The
+      // loadability assertions above (disposition === 'ready' + byte-pinned
+      // Consumption Plan digest) are the direct regression test for the
+      // canonical-paper-publication-v14.json fallback.
     }
   } finally {
     db.close()
@@ -304,6 +386,7 @@ assert.throws(
 )
 
 await assertExactOldV13FilesystemReload()
+await assertExactOldV14FilesystemReload()
 const sealed = sealCanonicalPublication({ compilation, sourceAssetVersion: 1, sourceAsset: fixture.sourceAsset })
 const reorderedCompilation = structuredClone(compilation)
 const reorderedPublicationGrammarFill =

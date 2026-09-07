@@ -47,6 +47,7 @@ import manifestV46 from '../../standards/paper-canonical/manifest-v46.json' with
 import manifestV47 from '../../standards/paper-canonical/manifest-v47.json' with { type: 'json' }
 import manifestV48 from '../../standards/paper-canonical/manifest-v48.json' with { type: 'json' }
 import manifestV49 from '../../standards/paper-canonical/manifest-v49.json' with { type: 'json' }
+import manifestV50 from '../../standards/paper-canonical/manifest-v50.json' with { type: 'json' }
 import legacyRhythmManifestV13 from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/manifest-v13.json' with { type: 'json' }
 import legacyRhythmTypographyV3 from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/paper-typography-v3.json' with { type: 'json' }
 import legacyRhythmTypographyV3Schema from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/renderer-typography-v3.schema.json' with { type: 'json' }
@@ -83,6 +84,7 @@ import nck1V11 from '../../standards/paper-canonical/profiles/nck1-v11.json' wit
 import nck1V12 from '../../standards/paper-canonical/profiles/nck1-v12.json' with { type: 'json' }
 import nck1V13 from '../../standards/paper-canonical/profiles/nck1-v13.json' with { type: 'json' }
 import nck1V14 from '../../standards/paper-canonical/profiles/nck1-v14.json' with { type: 'json' }
+import nck1V15 from '../../standards/paper-canonical/profiles/nck1-v15.json' with { type: 'json' }
 import zhejiangLegacyV2 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v2.json' with { type: 'json' }
 import zhejiangLegacyV3 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v3.json' with { type: 'json' }
 import zhejiangLegacyV4 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v4.json' with { type: 'json' }
@@ -100,6 +102,7 @@ import nationalLegacyV3 from '../../standards/paper-canonical/profiles/national-
 import reading from '../../standards/paper-canonical/families/reading-v1.json' with { type: 'json' }
 import sevenChoices from '../../standards/paper-canonical/families/seven-choices-v1.json' with { type: 'json' }
 import cloze from '../../standards/paper-canonical/families/cloze-v1.json' with { type: 'json' }
+import listening from '../../standards/paper-canonical/families/listening-v1.json' with { type: 'json' }
 import grammarFill from '../../standards/paper-canonical/families/grammar-fill-v1.json' with { type: 'json' }
 import grammarFillV2 from '../../standards/paper-canonical/families/grammar-fill-v2.json' with { type: 'json' }
 import grammarFillV3 from '../../standards/paper-canonical/families/grammar-fill-v3.json' with { type: 'json' }
@@ -346,12 +349,14 @@ import publicationV46Schema from '../../schemas/paper-canonical/canonical-paper-
 import publicationV47Schema from '../../schemas/paper-canonical/canonical-paper-publication-v47.schema.json' with { type: 'json' }
 import publicationV48Schema from '../../schemas/paper-canonical/canonical-paper-publication-v48.schema.json' with { type: 'json' }
 import publicationV49Schema from '../../schemas/paper-canonical/canonical-paper-publication-v49.schema.json' with { type: 'json' }
+import publicationV50Schema from '../../schemas/paper-canonical/canonical-paper-publication-v50.schema.json' with { type: 'json' }
 import nck1SourceMaterializationSchema from '../../schemas/paper-canonical/nck1-source-materialization-v1.schema.json' with { type: 'json' }
 import nck1SourceMaterializationV2Schema from '../../schemas/paper-canonical/nck1-source-materialization-v2.schema.json' with { type: 'json' }
 import richContentV1Schema from '../../schemas/paper-canonical/rich-content-v1.schema.json' with { type: 'json' }
 import legacyPublicationV9Schema from '../../schemas/paper-canonical/canonical-paper-publication-v9.schema.json' with { type: 'json' }
 import consumerSchema from '../../schemas/paper-canonical/consumer-contract-v1.schema.json' with { type: 'json' }
 import consumerV2Schema from '../../schemas/paper-canonical/consumer-contract-v2.schema.json' with { type: 'json' }
+import reportV50Schema from '../../schemas/paper-canonical/normalization-report-v50.schema.json' with { type: 'json' }
 
 import { digestJson, exactKeys, isRecordValue } from './stable.mjs'
 
@@ -616,7 +621,7 @@ function validateNck1WritingChrome(profile) {
     ? '第二节 （满分 25 分）'
     : '第二节（满分25分）'
   const valid = (
-    ['3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'].includes(profile.version)
+    ['3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15'].includes(profile.version)
     && writingParts.length === 1
     && part.ordinal === 4
     && part.titleInstructionRef === 'part.writing'
@@ -1361,9 +1366,9 @@ export function validateAuthorityClosure({
   schemas,
 }) {
   const issues = []
-  // v46-v49 are Candidate-only forks of v37. Their numeric identities must
+  // v46-v50 are Candidate-only forks of v37. Their numeric identities must
   // not make paper-specific v38-v45 successor rules part of this closure.
-  const semanticManifestVersion = ['46', '47', '48', '49'].includes(candidateManifest?.version)
+  const semanticManifestVersion = ['46', '47', '48', '49', '50'].includes(candidateManifest?.version)
     ? '37'
     : candidateManifest?.version
   const schemaById = new Map(Object.entries(schemas || {}))
@@ -1422,6 +1427,12 @@ export function validateAuthorityClosure({
   for (const [familyId, ownership] of requiredFamilies) {
     const family = familyArtifacts.get(familyId)
     if (!family || family.choiceOwnership !== ownership) issues.push(issue('AUTHORITY_FAMILY_CLOSURE', '$.artifacts', `Missing or invalid ${familyId} family contract`))
+  }
+  if (candidateManifest?.version === '50') {
+    const family = familyArtifacts.get('listening')
+    if (!family || family.choiceOwnership !== 'per_question') {
+      issues.push(issue('AUTHORITY_FAMILY_CLOSURE', '$.artifacts', 'Missing or invalid listening family contract'))
+    }
   }
   const expectedProfiles = new Set(['nck1', 'zhejiang-legacy', 'national-legacy'])
   if (profileArtifacts.length !== expectedProfiles.size || profileArtifacts.some((profile) => !expectedProfiles.has(profile.profileId))) {
@@ -1612,7 +1623,7 @@ export function validateAuthorityClosure({
   }
   if (Number(semanticManifestVersion) >= 29) {
     const continuationFamily = familyArtifacts.get('continuation-writing')
-    const expectedContinuationFamily = candidateManifest?.version === '49'
+    const expectedContinuationFamily = ['49', '50'].includes(candidateManifest?.version)
       ? continuationWritingV5
       : Number(semanticManifestVersion) >= 39
         ? continuationWritingV4
@@ -1937,6 +1948,11 @@ const artifactsV49 = {
   'profile-nck1': nck1V14,
   'profile-zhejiang-legacy': zhejiangLegacyV12,
   'family-continuation-writing': continuationWritingV5,
+}
+const artifactsV50 = {
+  ...artifactsV49,
+  'profile-nck1': nck1V15,
+  'family-listening': listening,
 }
 const schemasV1 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v1': normalizationSchema, 'normalization-report-v1': reportSchema, 'canonical-paper-publication-v1': publicationSchema }
 const schemasV2 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v2': reportV2Schema, 'canonical-paper-publication-v2': publicationV2Schema }
@@ -2491,6 +2507,12 @@ const schemasV49 = {
   'normalization-report-v49': reportV49Schema,
   'canonical-paper-publication-v49': publicationV49Schema,
 }
+const schemasV50 = {
+  ...Object.fromEntries(Object.entries(schemasV49).filter(([schemaId]) =>
+    !['normalization-report-v49', 'canonical-paper-publication-v49'].includes(schemaId))),
+  'normalization-report-v50': reportV50Schema,
+  'canonical-paper-publication-v50': publicationV50Schema,
+}
 const validationV1 = validateAuthorityClosure({ manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 })
 const validationV2 = validateAuthorityClosure({ manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 })
 const validationV3 = validateAuthorityClosure({ manifest: manifestV3, artifacts: artifactsV3, schemas: schemasV3 })
@@ -2545,6 +2567,7 @@ const validationV46 = validateAuthorityClosure({ manifest: manifestV46, artifact
 const validationV47 = validateAuthorityClosure({ manifest: manifestV47, artifacts: artifactsV47, schemas: schemasV47 })
 const validationV48 = validateAuthorityClosure({ manifest: manifestV48, artifacts: artifactsV48, schemas: schemasV48 })
 const validationV49 = validateAuthorityClosure({ manifest: manifestV49, artifacts: artifactsV49, schemas: schemasV49 })
+const validationV50 = validateAuthorityClosure({ manifest: manifestV50, artifacts: artifactsV50, schemas: schemasV50 })
 const validations = [
   validationV1,
   validationV2,
@@ -2596,6 +2619,7 @@ const validations = [
   validationV47,
   validationV48,
   validationV49,
+  validationV50,
 ]
 if (validations.some((validation) => !validation.ok)) {
   throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify(validations.flatMap((validation) => validation.issues))}`)
@@ -2660,6 +2684,7 @@ const authorities = [
   { manifest: manifestV47, artifacts: artifactsV47, schemas: schemasV47 },
   { manifest: manifestV48, artifacts: artifactsV48, schemas: schemasV48 },
   { manifest: manifestV49, artifacts: artifactsV49, schemas: schemasV49 },
+  { manifest: manifestV50, artifacts: artifactsV50, schemas: schemasV50 },
 ].map((authority) => ({
   ...authority,
   authorityRef: authorityRef(authority.manifest),
@@ -2672,9 +2697,9 @@ export const canonicalAuthorityRef = authorities.find((authority) => authority.m
 // advancing publication/current authority beyond the existing v36 closure.
 export const trustedDocxCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '37').authorityRef
 // Universal NCK1 materialization has a dedicated Candidate-only authority.
-// v49 succeeds immutable v48 with source-exact continuation instructions
+// v50 succeeds immutable v49 with active, source-bound Listening review
 // without advancing the v36 publication authority.
-export const nck1MaterializationCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '49').authorityRef
+export const nck1MaterializationCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '50').authorityRef
 // Ticket 31a may replay only the exact pre-v42 legacy Candidate authority
 // recorded by the immutable confirmation lanes. It is not a current import
 // authority and cannot be selected by ordinary callers.

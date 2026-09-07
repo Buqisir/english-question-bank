@@ -3984,6 +3984,7 @@ export function buildCombinedVocabularyPrintPayload(userDb, userId, input = {}) 
     },
     sections: mode === 'dedupe' ? [{ startIndex: 0, title }] : sections,
     shareKind: null,
+    materialLayout: mode,
   }
 }
 

@@ -425,6 +425,7 @@ function App() {
   }, [])
 
   async function handleDeleteQuestionGroup(detail: QuestionGroupDetail) {
+    if (!isOwnerView || !detail.canEdit) return
     if (!window.confirm(`删除「${detail.title}」？题组会从题库和草稿卷里移除，不可恢复。`)) return
     try {
       await deleteQuestionGroupRequest(detail.id)
@@ -438,6 +439,7 @@ function App() {
   }
 
   function openEditEntry(detail: QuestionGroupDetail) {
+    if (!isOwnerView || !detail.canEdit) return
     setEntryInitialDetail(detail)
     setEntryOpen(true)
   }

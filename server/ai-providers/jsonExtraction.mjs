@@ -112,7 +112,7 @@ function inferVerifyVerdictFromText(rawText) {
 
   if ((normalized.includes('bothwrong') || normalized.includes('答案和解析均错') || normalized.includes('答案与解析均错') || normalized.includes('答案和解析都错') || normalized.includes('两项均错')))
     return 'both_wrong'
-  if (normalized.includes('答案正确') || normalized.includes('正确答案') || normalized === 'correct' || normalized.includes('答案无误') || normalized === '正确')
+  if (normalized.includes('答案正确') || normalized === 'correct' || normalized.includes('答案无误') || normalized === '正确')
     return 'correct'
   if (normalized.includes('answerwrong') || normalized.includes('答案错误') || normalized.includes('答案有误') || normalized.includes('答案不对') || normalized.includes('答案不正确'))
     return 'answer_wrong'

@@ -32,10 +32,9 @@ export function verificationSchedulingPolicy(script, source) {
     ...[...source.matchAll(/\.listen\(\s*([1-9]\d{2,4})\b/gu)].map((match) => match[1]),
     ...[...source.matchAll(/(?:const|let|var)\s+[A-Za-z_$][\w$]*[Pp]ort[\w$]*\s*=\s*([1-9]\d{2,4})\b/gu)].map((match) => match[1]),
   ])
-  const sharedOfficialEvidence = /^import\s+\{[^}]*\}\s+from\s+['"][^'"]*canonicalImportPilotEvidenceRoot\.mjs['"]/mu.test(source)
   return {
     script,
-    exclusive: sharedOfficialEvidence,
+    exclusive: false,
     resourceKeys: [
       ...(renderResource ? ['browser-render'] : []),
       ...[...fixedPorts].sort().map((port) => `port:${port}`),
