@@ -144,6 +144,56 @@ function makeInvalidCardStub() {
   return fn
 }
 
+// A second fake detail whose single question produces NO router signal, so it routes to the
+// default [T1,T2,T6] candidate set (the route where a T1-collapsing hallucination used to
+// sail through the invalid-card guardrail). The stem/options/explanation are stripped of every
+// signal matcher (lexical-meaning / mention / paragraph-function / title-main-idea / attitude /
+// inference / abstract-phrase / multi-point), mirroring the bug report's §2 reproduction harness.
+function fakeDefaultRouteDetail() {
+  return {
+    title: 'Default-Route Fixture',
+    groupType: 'reading',
+    passage: { materialText: 'A short passage about autumn leaves changing color.' },
+    readingParseResult: null,
+    questions: [
+      {
+        id: 'q1',
+        questionNo: '21',
+        questionType: '阅读理解',
+        stem: 'It is stated that ___.',
+        answer: 'B',
+        options: [
+          { label: 'A', content: 'a' },
+          { label: 'B', content: 'b' },
+          { label: 'C', content: 'c' },
+          { label: 'D', content: 'd' },
+        ],
+        explanation: 'Plain fact.',
+      },
+    ],
+  }
+}
+
+// Stub that always returns an out-of-scope cardId ("T11") that the buggy unanchored
+// regex /T(?:10|[1-9])/ silently collapsed to "T1" — landing inside the default
+// [T1,T2,T6] candidate route and bypassing the invalid-card guardrail. The strict
+// ^T(?:10|[1-9])$ fix rejects T11 so it falls through to the verbatim raw and is
+// escalated as invalid. This stub records each call so the one-shot retry is observable.
+function makeT11CollapseStub() {
+  const calls = []
+  const fn = async (request) => {
+    calls.push(request)
+    return {
+      rawText: JSON.stringify({ cardId: 'T11', confidence: 0.95, review_needed: false, reason: '召唤偏移到T10之外的越界卡' }),
+      firstMessageText: '',
+      rawStatusText: '',
+      latencyMs: 6,
+    }
+  }
+  fn.calls = calls
+  return fn
+}
+
 // Stub returning a VALID in-candidate cardId with high confidence, no review.
 function makeValidCardStub(cardId) {
   return async () => ({
@@ -188,6 +238,21 @@ function assertExportSurface() {
   // they DO use optionalString/clamp01 — api.mjs always inits the factory at boot before any use.)
   createSynonymDifficultyImplementation(baseDeps())
   assert('normalizeSynonymCardId normalizes T-card', normalizeSynonymCardId(' t6 ') === 'T6')
+  // Strict-anchor regression: a complete T1..T10 token still normalizes cleanly.
+  assert('normalizeSynonymCardId T1 -> T1', normalizeSynonymCardId('T1') === 'T1')
+  assert('normalizeSynonymCardId T10 -> T10', normalizeSynonymCardId('T10') === 'T10')
+  assert('normalizeSynonymCardId T6 (no padding) -> T6', normalizeSynonymCardId('T6') === 'T6')
+  // Strict-anchor fix: out-of-scope ids no longer collapse onto a real T1..T10 substring.
+  // They fall through to the verbatim raw so the invalid-card guardrail can catch them.
+  assert('normalizeSynonymCardId T11 -> T11 (no collapse to T1)', normalizeSynonymCardId('T11') === 'T11')
+  assert('normalizeSynonymCardId T12 -> T12 (no collapse to T1)', normalizeSynonymCardId('T12') === 'T12')
+  assert('normalizeSynonymCardId T21 -> T21 (no collapse to T2)', normalizeSynonymCardId('T21') === 'T21')
+  assert('normalizeSynonymCardId T100 -> T100 (no collapse to T10)', normalizeSynonymCardId('T100') === 'T100')
+  assert('normalizeSynonymCardId T99 -> T99 (no collapse to T9)', normalizeSynonymCardId('T99') === 'T99')
+  assert('normalizeSynonymCardId T1.5 -> T1.5 (no collapse to T1)', normalizeSynonymCardId('T1.5') === 'T1.5')
+  assert('normalizeSynonymCardId T2_T4 -> T2_T4 (no collapse to T2)', normalizeSynonymCardId('T2_T4') === 'T2_T4')
+  assert('normalizeSynonymCardId empty -> empty', normalizeSynonymCardId('') === '')
+  assert('normalizeSynonymCardId null -> empty', normalizeSynonymCardId(null) === '')
   assert('normalizeSynonymConfidence high->0.85', normalizeSynonymConfidence('high') === 0.85)
   assert('normalizeSynonymBoolean review_needed->true', normalizeSynonymBoolean('review_needed') === true)
   assert('uniqueSynonymFlags filters to allowlist', JSON.stringify(uniqueSynonymFlags(['T5_T10', 'NOT_A_FLAG', 'T5_T10'])) === JSON.stringify(['T5_T10']))
@@ -235,9 +300,10 @@ async function assertGateOnInvalidCardReplaced() {
   // White-list enforcement: T99 is NOT in any candidate set -> replaced by route fallback (candidateCards[0]).
   for (const item of result.results) {
     assert(`q${item.questionNo}: cardId is in its own candidateCards (white-list enforced)`, item.candidateCards.includes(item.cardId), `cardId=${item.cardId} candidates=${item.candidateCards.join(',')}`)
-    // normalizeSynonymCardId('T99') -> 'T9' (regex T(?:10|[1-9]) matches the leading T9); 'T9' is
-    // not in either fixture candidate set, so it is still rejected as an invalid card.
-    assert(`q${item.questionNo}: rawCardId records the normalized rejected card (T9)`, item.rawCardId === 'T9', `rawCardId=${item.rawCardId}`)
+    // normalizeSynonymCardId('T99') -> 'T99' (the strict anchor ^T(?:10|[1-9])$ rejects T99 because
+    // the regex requires a complete T1..T10 token; T99 falls through to the verbatim raw). 'T99' is
+    // not in either fixture candidate set, so it is rejected as an invalid card.
+    assert(`q${item.questionNo}: rawCardId records the verbatim rejected card (T99)`, item.rawCardId === 'T99', `rawCardId=${item.rawCardId}`)
     assert(`q${item.questionNo}: invalidCardId flagged true`, item.invalidCardId === true)
     // Stub supplies confidence 0.9 explicitly, so it is kept (the 0.45 invalid-fallback only
     // applies when the payload omits confidence). Assert the supplied value passes through.
@@ -282,6 +348,46 @@ async function assertGateOnValidCard() {
   assert('q22 deepSeekTriggers == [boundary_fuzzy, wide_candidate_set]', JSON.stringify([...q2.deepSeekTriggers].sort()) === JSON.stringify(['boundary_fuzzy', 'wide_candidate_set']), `triggers=${q2.deepSeekTriggers.join(',')}`)
   assert('q22 reviewNeeded false on clean valid high-confidence T2', q2.reviewNeeded === false)
   assert('q22 evidenceSource is question_explanation', q2.evidenceSource === 'question_explanation', `evidenceSource=${q2.evidenceSource}`)
+}
+
+// ============================================================
+// 3b. Regression: out-of-scope T11 must NOT collapse onto the default route.
+//     The buggy /T(?:10|[1-9])/ regex matched "T11" -> "T1" as a substring, and
+//     "T1" is a member of the default [T1,T2,T6] candidate route, so the
+//     invalid-card guardrail (invalidCardId / reviewNeeded / one-shot retry /
+//     invalid_card_replaced & review_needed triggers) was silently bypassed and
+//     the hallucination was persisted as a clean T1 with no review. The strict
+//     ^T(?:10|[1-9])$ anchor rejects T11 -> verbatim raw -> escalated.
+// ============================================================
+async function assertGateOnDefaultRouteT11Rejected() {
+  const stub = makeT11CollapseStub()
+  const { generateSynonymDifficultyByQuestionGroup } = createSynonymDifficultyImplementation(
+    baseDeps({
+      callLocalQwenCompletion: stub,
+      getQuestionGroupDetail: () => fakeDefaultRouteDetail(),
+      QUESTION_BANK_ENABLE_LOCAL_QWEN: true,
+    }),
+  )
+
+  const result = await generateSynonymDifficultyByQuestionGroup('group-default', { requestId: 'h5k-t11' })
+  const q = result.results[0]
+
+  // The default-route fixture stem produces no router signal -> default [T1,T2,T6] route.
+  // This is the exact route where the buggy T11->T1 collapse landed inside the candidate set.
+  assert('default-route q: candidateCards is [T1,T2,T6]', Array.isArray(q.candidateCards) && q.candidateCards.join(',') === 'T1,T2,T6', `candidates=${q.candidateCards && q.candidateCards.join(',')}`)
+  assert('default-route q(T11): rawCardId is the non-collapsed T11', q.rawCardId === 'T11', `rawCardId=${q.rawCardId}`)
+  assert('default-route q(T11): invalidCardId flagged true', q.invalidCardId === true)
+  assert('default-route q(T11): reviewNeeded true', q.reviewNeeded === true)
+  assert('default-route q(T11): cardId fell back to route primary (T1)', q.cardId === 'T1', `cardId=${q.cardId}`)
+  assert('default-route q(T11): invalid_card_replaced trigger present', q.deepSeekTriggers.includes('invalid_card_replaced'), `triggers=${q.deepSeekTriggers.join(',')}`)
+  assert('default-route q(T11): review_needed trigger present', q.deepSeekTriggers.includes('review_needed'), `triggers=${q.deepSeekTriggers.join(',')}`)
+  // The fallback card replaces the invalid card -> INVALID_CARD_REPLACED boundary flag is set,
+  // but uniqueSynonymFlags filters it out of the public boundaryFlags (allowlist = T-pair flags only).
+  assert('default-route q(T11): boundaryFlags filtered (no raw INVALID_CARD_REPLACED marker)', Array.isArray(q.boundaryFlags) && !q.boundaryFlags.includes('INVALID_CARD_REPLACED'), `flags=${q.boundaryFlags && q.boundaryFlags.join(',')}`)
+
+  // Invalid path retries once -> stub called 2x. A single call would mean the guardrail was
+  // bypassed (precisely the bug: T11 collapsed to T1, was "valid", no retry fired).
+  assert('default-route T11: one retry fired (2 stub calls)', stub.calls.length === 2, `calls=${stub.calls.length}`)
 }
 
 // ============================================================
@@ -383,6 +489,7 @@ async function main() {
   await assertGateOff()
   await assertGateOnInvalidCardReplaced()
   await assertGateOnValidCard()
+  await assertGateOnDefaultRouteT11Rejected()
   await assertUsedButUndefinedGuard()
   assertReadingPromptFormatter()
   assertSourceGuards()
