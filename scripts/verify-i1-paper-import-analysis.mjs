@@ -278,6 +278,35 @@ function validAnalysis(input = fixtureInput()) {
   }
 }
 
+function analysisWithTrapSourceQuote(input, {
+  sourceQuote,
+  trapParagraphId,
+  trapEvidence,
+} = {}) {
+  const payload = validAnalysis(input)
+  const question = input.group.questions[0]
+  const wrongOption = payload.questions[question.id].optionAnalysis.find((option) => option.label === 'B')
+  const trap = {
+    primaryType: 'polarityReversal',
+    subtype: 'oppositeAction',
+    sourceQuote,
+    sourceHighlight: sourceQuote ? sourceQuote.slice(0, Math.min(sourceQuote.length, 12)) : '',
+    optionText: question.options.B,
+    optionHighlight: question.options.B,
+    explanation: '黑白颠倒。',
+  }
+  if (trapParagraphId !== undefined) {
+    trap.paragraphId = trapParagraphId
+  }
+  wrongOption.trap = trap
+  if (trapEvidence) {
+    wrongOption.trapEvidence = trapEvidence
+  } else {
+    delete wrongOption.trapEvidence
+  }
+  return payload
+}
+
 function validFourGroupAnalyses(parseResult) {
   return Object.fromEntries(
     parseResult.readingGroups.map((group) => [
@@ -630,6 +659,106 @@ async function assertAnalyzeValidation() {
     }]
     return analyzeReadingImportCandidate(input, { providerCallers: { deepseek: stubProviderReturning(payload) } })
   }, /精确匹配原文/)
+
+  {
+    const paraId = input.group.paragraphs[0].id
+    const paraText = input.group.paragraphs[0].text
+
+    await assertRejects('non-exact trap.sourceQuote fails when trap carries its own paragraphId', () =>
+      analyzeReadingImportCandidate(input, { providerCallers: { deepseek: stubProviderReturning(
+        analysisWithTrapSourceQuote(input, { sourceQuote: 'ZZZ NONEXISTENT TRAP QUOTE ZZZ', trapParagraphId: paraId })
+      )}}), /精确匹配原文/)
+
+    await assertRejects('trap.sourceQuote with nonexistent trap paragraphId fails', () =>
+      analyzeReadingImportCandidate(input, { providerCallers: { deepseek: stubProviderReturning(
+        analysisWithTrapSourceQuote(input, { sourceQuote: paraText, trapParagraphId: 'para-does-not-exist' })
+      )}}), /引用了不存在的 paragraphId/)
+
+    {
+      const ok = await analyzeReadingImportCandidate(input, { providerCallers: { deepseek: stubProviderReturning(
+        analysisWithTrapSourceQuote(input, { sourceQuote: paraText, trapParagraphId: paraId })
+      )}})
+      assert('exact trap.sourceQuote with trap paragraphId passes', ok.analysis.schemaVersion === 'reading-choice-analysis-v1')
+    }
+
+    await assertRejects('non-exact trap.sourceQuote fails via all-paragraph scan without anchor', () =>
+      analyzeReadingImportCandidate(input, { providerCallers: { deepseek: stubProviderReturning(
+        analysisWithTrapSourceQuote(input, { sourceQuote: 'ZZZ NONEXISTENT TRAP QUOTE ZZZ' })
+      )}}), /精确匹配原文/)
+
+    {
+      const ok = await analyzeReadingImportCandidate(input, { providerCallers: { deepseek: stubProviderReturning(
+        analysisWithTrapSourceQuote(input, { sourceQuote: paraText })
+      )}})
+      assert('exact trap.sourceQuote passes via all-paragraph scan without anchor', ok.analysis.schemaVersion === 'reading-choice-analysis-v1')
+    }
+
+    {
+      const multiInput = {
+        paper: { paperId: 'paper-trap-multi' },
+        group: {
+          groupId: 'group-trap-multi-reading-a',
+          title: 'Reading A',
+          order: 0,
+          paragraphs: [
+            { id: 'para-trap-multi-1', text: 'The museum uses sunlight to protect old paper records.' },
+            { id: 'para-trap-multi-2', text: 'The participants followed suit without hesitation.' },
+          ],
+          questions: [{ id: 'q-trap-multi-001', stem: 'What does the passage describe?', options: { A: 'Sunlight', B: 'Rainwater', C: 'Music', D: 'Plastic' }, answerKey: 'A' }],
+        },
+        providerId: 'deepseek-v4-pro',
+      }
+      const ok = await analyzeReadingImportCandidate(multiInput, { providerCallers: { deepseek: stubProviderReturning(
+        analysisWithTrapSourceQuote(multiInput, {
+          sourceQuote: 'The participants followed suit without hesitation.',
+          trapEvidence: [{ paragraphId: 'para-trap-multi-1', quote: 'The museum uses sunlight to protect old paper records.', anchor: 'x' }],
+        })
+      )}})
+      assert('trap.sourceQuote in a different paragraph than trapEvidence is accepted (all-paragraph scan, not restricted to trapEvidence anchor)', ok.analysis.schemaVersion === 'reading-choice-analysis-v1')
+    }
+  }
+
+  {
+    const wsInput = {
+      paper: { paperId: 'paper-trap-ws' },
+      group: {
+        groupId: 'group-trap-ws-reading-a',
+        title: 'Reading A',
+        order: 0,
+        paragraphs: [{ id: 'para-trap-ws-p1', text: '•\u00A0bullet then readable text' }],
+        questions: [{ id: 'q-trap-ws-001', stem: 'What does the passage describe?', options: { A: 'A bullet', B: 'A cloud', C: 'Music', D: 'Plastic' }, answerKey: 'A' }],
+      },
+      providerId: 'deepseek-v4-pro',
+    }
+    const wsParaText = wsInput.group.paragraphs[0].text
+    const wsOk = await analyzeReadingImportCandidate(wsInput, { providerCallers: { deepseek: stubProviderReturning(
+      analysisWithTrapSourceQuote(wsInput, {
+        sourceQuote: '• bullet then readable text',
+        trapEvidence: [{ paragraphId: 'para-trap-ws-p1', quote: wsParaText, anchor: 'x' }],
+      })
+    )}})
+    assert('whitespace-normalized trap.sourceQuote passes via all-paragraph scan', wsOk.analysis.schemaVersion === 'reading-choice-analysis-v1')
+  }
+
+  {
+    const ellInput = {
+      paper: { paperId: 'paper-trap-ell' },
+      group: {
+        groupId: 'group-trap-ell-reading-a',
+        title: 'Reading A',
+        order: 0,
+        paragraphs: [{ id: 'para-trap-ell-p1', text: 'My mother shared this feeling of mine. She looked up at the right time to answer. I remember her reading a magazine.' }],
+        questions: [{ id: 'q-trap-ell-001', stem: 'What does the passage describe?', options: { A: 'A magazine', B: 'A cloud', C: 'Music', D: 'Plastic' }, answerKey: 'A' }],
+      },
+      providerId: 'deepseek-v4-pro',
+    }
+    await assertRejects('substantive ellipsis-joined trap.sourceQuote fails without anchor', () =>
+      analyzeReadingImportCandidate(ellInput, { providerCallers: { deepseek: stubProviderReturning(
+        analysisWithTrapSourceQuote(ellInput, {
+          sourceQuote: 'My mother shared this feeling of mine... I remember her reading a magazine.',
+        })
+      )}}), /精确匹配原文/)
+  }
 }
 
 async function main() {

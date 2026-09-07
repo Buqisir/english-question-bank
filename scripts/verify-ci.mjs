@@ -159,6 +159,7 @@ const registry = {
   'scripts/verify-similar-workbench-swap.mjs',
   'scripts/verify-search-thinking-toggle.mjs',
   'scripts/verify-h11a-http-client.mjs',
+  'scripts/verify-h12a-entry-modal.mjs',
   'scripts/verify-restart1-local-search-intent.mjs',
   'scripts/verify-restart3-teacher-analysis.mjs',
   'scripts/verify-home-default-feed.mjs',

@@ -704,6 +704,10 @@ export function captureDocxSourceMedia({
       sourceParts: shapeParts.map(({ entryName }) => entryName),
       figures,
     }
+  } else if (Array.isArray(associations) && associations.length > 0) {
+    throw new Error(
+      'paper-asset.json declares sources.docx.shapeAssociations but the DOCX yielded no enumerable shapes',
+    )
   }
 
   return {
