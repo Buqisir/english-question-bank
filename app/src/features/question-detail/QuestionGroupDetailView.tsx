@@ -619,7 +619,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                 相似篇章
               </button>
             )}
-            {isOwnerView && (
+            {isOwnerView && selectedDetail.canEdit && (
               <div className="peek-actions-menu">
                 <ConciergeGroupRowMenu
                   items={[

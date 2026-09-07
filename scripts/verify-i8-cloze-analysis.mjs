@@ -349,6 +349,53 @@ async function assertAnalysisValidation() {
   /不一致/)
   assert('answer conflict does not retry (called exactly once)', answerConflictTrials === 1, `called ${answerConflictTrials} times`)
 
+  // --- Shape-validation errors ARE RETRYABLE (regression guard) ---
+  // The I8 retry policy treats only the answer-key conflict as
+  // non-retryable; every validateClozeShape shape defect should retry up to
+  // the configured budget. The option-side signalText-not-in-options wording
+  // (未在该空格选项中定位) was previously missed by the allow-list regex and
+  // silently classified as non-retryable — exhaust the retry budget instead.
+  let optionShapeTrials = 0
+  const optionShapeStub = async () => {
+    optionShapeTrials += 1
+    const bad = validClAnalysis(input)
+    const firstKey = Object.keys(bad.blanks)[0]
+    bad.blanks[firstKey].evidence.push({
+      type: 'collocation-partner',
+      signalText: 'NOT IN OPTIONS',
+      signalSide: 'option',
+      relation: 'test',
+    })
+    return { rawText: JSON.stringify(bad), provider: 'stub', model: 'stub', latencyMs: 1 }
+  }
+  await assertRejects('option-side shape error retries then blocks cloze', () =>
+    analyzeClozeImportCandidate(input, {
+      providerCallers: { deepseek: optionShapeStub },
+      analysisRetries: 4,
+    }),
+  /选项中定位/)
+  assert('option-side shape error is retryable (called 5 times under analysisRetries: 4)', optionShapeTrials === 5, `called ${optionShapeTrials} times`)
+
+  // Model-provided text must not impersonate the authoritative conflict marker.
+  let collisionTrials = 0
+  const recovered = await analyzeClozeImportCandidate(input, {
+    providerCallers: { deepseek: async () => {
+      collisionTrials += 1
+      const payload = validClAnalysis(input)
+      if (collisionTrials === 1) {
+        payload.blanks[Object.keys(payload.blanks)[0]].evidence.push({
+          type: 'collocation-partner',
+          signalText: '答案解析版不一致',
+          signalSide: 'option',
+          relation: 'test',
+        })
+      }
+      return { rawText: JSON.stringify(payload), provider: 'stub', model: 'stub', latencyMs: 1 }
+    } },
+    analysisRetries: 4,
+  })
+  assert('conflict wording in invalid signalText retries and recovers', collisionTrials === 2 && recovered.analysis.schemaVersion === 'cloze-analysis-v1')
+
   // --- option-side signalText must appear in blank's options ---
   await assertRejects('option-side signalText not in options blocks cloze', () => {
     const bad = validClAnalysis(input)

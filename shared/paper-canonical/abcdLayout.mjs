@@ -32,6 +32,17 @@ const RULES = Object.freeze({
   rendererTypographyDigest: digestJson(rendererTypography),
 })
 
+const READING_FOUR_COLUMN_STARTS_TWIP = Object.freeze([
+  0,
+  RULES.fourColumnPitchTwip,
+  RULES.fourColumnPitchTwip * 2,
+  RULES.fourColumnPitchTwip * 3,
+])
+
+const CLOZE_FOUR_COLUMN_STARTS_TWIP = Object.freeze([
+  ...rendererTypography.optionAnchorFramework.cloze.optionColumnStartsTwip,
+])
+
 const RULESET_DIGEST = digestJson(RULES)
 const VERIFIED_FONT_CLOSURES = new WeakSet()
 
@@ -162,14 +173,23 @@ function capacities() {
   }
 }
 
-function placementFor(mode, option, measured, index) {
+function clozeFourColumnCapacities() {
+  const cloze = rendererTypography.optionAnchorFramework.cloze
+  const gapTwip = Math.round(cloze.labelToTextGapEm * RULES.fontSizeHalfPoint * 10)
+  return LABELS.map((label, index) => {
+    const labelCellTwip = advanceTwip(`${label}.`)
+    return cloze.optionColumnWidthsTwip[index] - labelCellTwip - gapTwip - RULES.fitSafetyTwip
+  })
+}
+
+function placementFor(mode, option, measured, index, fourColumnStartsTwip) {
   if (mode === 'four_columns') {
     return {
       optionId: option.optionId,
       label: option.label,
       row: 0,
       column: index,
-      startTwip: index * RULES.fourColumnPitchTwip,
+      startTwip: (fourColumnStartsTwip ?? READING_FOUR_COLUMN_STARTS_TWIP)[index],
       continuationStartTwip: null,
       hardBreaks: measured.hardBreaks,
       advanceTwip: measured.advanceTwip,
@@ -205,9 +225,9 @@ function placementFor(mode, option, measured, index) {
   }
 }
 
-function selectedPlan(mode, optionSet, measured) {
+function selectedPlan(mode, optionSet, measured, fourColumnStartsTwip) {
   const placements = optionSet.options.map((option, index) =>
-    placementFor(mode, option, measured[index], index))
+    placementFor(mode, option, measured[index], index, fourColumnStartsTwip))
   const plan = {
     status: 'selected',
     mode,
@@ -291,7 +311,7 @@ export function layoutFixedFourColumnClozeOptionSet(optionSet) {
       reason: 'fixed_four_column_contains_unrenderable_content',
     }
   }
-  const cap = capacities().four
+  const cap = clozeFourColumnCapacities()
   if (
     measured.some(
       ({ hardBreaks, unbreakableAdvanceTwip }, index) =>
@@ -303,7 +323,7 @@ export function layoutFixedFourColumnClozeOptionSet(optionSet) {
       reason: 'fixed_four_column_contains_unrenderable_content',
     }
   }
-  return selectedPlan('four_columns', optionSet, measured)
+  return selectedPlan('four_columns', optionSet, measured, CLOZE_FOUR_COLUMN_STARTS_TWIP)
 }
 
 function assertAuthoritativePlan(plan) {

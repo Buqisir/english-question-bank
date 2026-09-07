@@ -100,10 +100,10 @@ assert(
   /isOwnerView\s*:\s*boolean/.test(detailView),
 )
 
-// Kept owner-only control: 编辑 (低频纠错运维, D1/C3).
+// Kept owner-only, bank-editable control: 编辑 (低频纠错运维, D1/C3).
 assert(
-  'member-hidden control still present: 编辑 button (openEditEntry entry)',
-  /isOwnerView && \([\s\S]{0,400}onSelect: \(\) => onEdit\(selectedDetail\)/.test(detailView),
+  '编辑 button requires owner and canEdit (openEditEntry entry)',
+  /isOwnerView && selectedDetail\.canEdit && \([\s\S]{0,400}onSelect: \(\) => onEdit\(selectedDetail\)/.test(detailView),
 )
 
 // Retired 现场生产 controls (D2/C1) — must be ABSENT now.
@@ -174,10 +174,10 @@ assert(
   )
 }
 // detail-page-redesign (2026-07-15): 删除 moved from `.detail-button danger`
-// to ConciergeGroupRowMenu tone:'danger', still isOwnerView-gated.
+// to ConciergeGroupRowMenu tone:'danger', gated by both isOwnerView and canEdit.
 assert(
-  '删除 button stays owner-gated (kept, C3)',
-  /isOwnerView && \([\s\S]*?tone: 'danger'[\s\S]*?onSelect: \(\) => onDelete\(selectedDetail\)/.test(detailView),
+  '删除 button requires owner and canEdit (kept, C3)',
+  /isOwnerView && selectedDetail\.canEdit && \([\s\S]*?tone: 'danger'[\s\S]*?onSelect: \(\) => onDelete\(selectedDetail\)/.test(detailView),
 )
 assert(
   '已绑定话题标签展示 stays unconditional (member-visible, C2)',

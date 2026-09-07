@@ -19,6 +19,17 @@ immutable v4 Publication
 卷型题号、分值、题组 cardinality、清洗条件或字体/物理排版数值，也不能被 caller
 当作第二套配置。
 
+Universal NCK1 导题与 Owner Review 另使用 Candidate-only
+[`manifest-v50.json`](../../standards/paper-canonical/manifest-v50.json)：NCK1
+Profile v15 将 source-bound Listening 1–5、6–20 激活为两个可选 Canonical
+Group；源明确 `not_supplied` 时两组均省略且不留下标题或空隙。现有 Review
+Screen 把已捕获听力放在 q1–20,点击题目后由同一右栏显示官方录音稿、答案和
+简明 ASR / 对比 / 内容安全证据；Student projection 必须剥离录音稿、答案和
+审核证据。v50 不推进全局 accepted authority,也不声明 Print/PDF 听力排版、
+公开播放器或音频发布能力；带音频的公开发布仍 fail closed。听力金样版式及
+Screen/Print/PDF 共享输出由后续 successor 闭合,不得从本 Candidate Review
+样式反推。
+
 机器 manifest 分别绑定 Core Invariants、NCK1 / Zhejiang legacy / national
 legacy Profiles、各 family contract、Normalization Rules、Source Adapters、
 Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、digest 不符、

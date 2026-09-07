@@ -167,8 +167,8 @@ async function parseReadingByQuestionGroup(questionGroupId, apiKey, model, parse
   const parseStartedAt = Date.now()
 
   const detail = getQuestionGroupDetail(questionGroupId)
-  if (!detail) {
-    throw new Error('题组未找到。')
+  if (!detail || detail.groupType !== 'reading') {
+    throw new Error('仅支持阅读理解题组。')
   }
 
   const questionsForParse = detail.questions

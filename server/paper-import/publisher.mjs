@@ -1009,7 +1009,7 @@ function validateUniversalNck1Binding({
   ))
   if (listeningSlots.some((slotId) => {
     const binding = canonicalPaper.paperPlan.slotBindings.find(
-      (candidate) => candidate.slotId === slotId && candidate.state === 'inactive',
+      (candidate) => candidate.slotId === slotId,
     )
     const closure = inactiveClosures.get(slotId)
     return binding?.sourceState !== 'not_supplied' && closure?.status !== 'closed'

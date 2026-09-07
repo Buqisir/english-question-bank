@@ -94,7 +94,7 @@ function segmentSentences(text, paragraphId) {
   if (!text) return []
 
   // Common abbreviations that should not trigger a split.
-  const ABBREVS = /(?:Mr|Mrs|Ms|Dr|Prof|Sr|Jr|St|vs|etc|Inc|Ltd|Corp|approx|dept|govt|i\.e|e\.g)\./gi
+  const ABBREVS = /(?:\bMr|\bMrs|\bMs|\bDr|\bProf|\bSr|\bJr|\bSt|\bvs|\betc|\bInc|\bLtd|\bCorp|\bapprox|\bdept|\bgovt|i\.e|e\.g)\./gi
 
   // Replace abbreviation periods with a placeholder to avoid false splits.
   const PLACEHOLDER = '\x00'

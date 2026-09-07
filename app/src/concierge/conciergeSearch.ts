@@ -177,6 +177,7 @@ export function tokenize(query: string): string[] {
   const tokens: string[] = []
   for (const segment of raw) {
     let cjkRun = ''
+    let latinRun = ''
     const flushCjkRun = () => {
       if (!cjkRun) return
       if (!CJK_STOPWORDS.has(cjkRun)) tokens.push(cjkRun)
@@ -185,19 +186,26 @@ export function tokenize(query: string): string[] {
       }
       cjkRun = ''
     }
+    // Non-CJK runs (Latin/digits) glued to CJK in one segment — e.g. "C篇",
+    // "2025年", "阅读C篇" — are accumulated and kept as-is, matching V1
+    // behavior for the standalone ("C 篇") form. A purely-CJK segment yields
+    // nothing here; a purely-non-CJK segment flushes once at the end.
+    const flushLatinRun = () => {
+      if (!latinRun) return
+      tokens.push(latinRun)
+      latinRun = ''
+    }
     for (const ch of segment) {
       if (isCjkChar(ch)) {
+        flushLatinRun()
         cjkRun += ch
       } else {
         flushCjkRun()
+        latinRun += ch
       }
     }
     flushCjkRun()
-    // Non-CJK content in this segment (Latin/digits/mixed) — keep as-is,
-    // matching V1 behavior. A segment that was purely CJK produces nothing
-    // more here since cjkRun already consumed every character.
-    const nonCjkOnly = /^[^一-鿿]+$/.test(segment)
-    if (nonCjkOnly) tokens.push(segment)
+    flushLatinRun()
   }
   // De-dupe: the same bigram or word can recur across a query (e.g. two
   // separate section letters producing the same alias token), and downstream
@@ -231,6 +239,7 @@ function tokenRunIdsOf(query: string): Map<string, number> {
   let nextRunId = 0
   for (const segment of raw) {
     let cjkRun = ''
+    let latinRun = ''
     const flushCjkRun = () => {
       if (!cjkRun) return
       const runId = nextRunId++
@@ -240,16 +249,26 @@ function tokenRunIdsOf(query: string): Map<string, number> {
       }
       cjkRun = ''
     }
+    // Mirror tokenize(): a non-CJK run glued to CJK in the same segment
+    // (the "C" in "C篇", the "2025" in "2025年") gets its own run id,
+    // distinct from any CJK run in that segment, so "C篇D篇" still yields
+    // two distinct runs and the multi-run multiplicity signal survives.
+    const flushLatinRun = () => {
+      if (!latinRun) return
+      runIds.set(latinRun, nextRunId++)
+      latinRun = ''
+    }
     for (const ch of segment) {
       if (isCjkChar(ch)) {
+        flushLatinRun()
         cjkRun += ch
       } else {
         flushCjkRun()
+        latinRun += ch
       }
     }
     flushCjkRun()
-    const nonCjkOnly = /^[^一-鿿]+$/.test(segment)
-    if (nonCjkOnly) runIds.set(segment, nextRunId++)
+    flushLatinRun()
   }
   return runIds
 }
