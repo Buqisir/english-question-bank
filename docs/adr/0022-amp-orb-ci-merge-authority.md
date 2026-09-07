@@ -4,8 +4,10 @@
   policy superseded by ADR-0024
 - Owner authorization: 2026-08-31; rollback authorization 2026-09-02; Action-wake phase 1 authorization 2026-09-03
 - Supersedes: ADR-0021 rollout and authority sections only
-- Current authority: ADR-0024; the Sentinel/Discovery design below remains
-  present but dormant
+- Current authority: ADR-0024 and ADR-0025; the Sentinel/Discovery and Hosted
+  rollback policies below are historical evidence, not daily instructions.
+  The old runtime entrypoints are retired. Normal Ship reads the pinned
+  `Amp Orb Verify` Check directly on GitHub; no Focused/Low report is required.
 
 ## Context
 

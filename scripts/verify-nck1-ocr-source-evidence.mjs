@@ -258,6 +258,55 @@ assert(staleIssue)
 assertLocatedIssue(staleIssue)
 assert.equal(imported(stale).candidate?.interpretation, null)
 
+// Regression: bare answer-side issues that entered OCR materialization with
+// only `{ documentId }` (no page/region) — e.g. a legitimately-missing numbered
+// answer key — must keep the official-answers documentId after `closeIssueSource`
+// fabricates the missing page/region. They must not be re-attributed to the
+// question-source document. See `closeIssueSource` in nck1OcrMaterializationProducer.mjs.
+const answerDocId = fixture.sourceDocuments.find((d) => d.role === 'official_answers').documentId
+const questionDocId = fixture.sourceDocuments.find((d) => d.role === 'question_source').documentId
+const omitted21 = cloneJson(fixture.confirmation)
+const omitted21AnswerDoc = omitted21.documents.find((d) => d.documentId === answerDocId)
+let omitted21RangeEdits = 0
+let omitted21LabelEdits = 0
+for (const page of omitted21AnswerDoc.pages) {
+  for (const item of page.orderedItems) {
+    if (/21-23ABC/u.test(item.text)) {
+      item.text = item.text.replace(/21-23ABC/u, '22-23BC')
+      omitted21RangeEdits += 1
+    }
+    if (/^21\.\s*A\s*【解析】/u.test(item.text)) {
+      item.text = item.text.replace(/^21\.\s*A\s*/u, '')
+      omitted21LabelEdits += 1
+    }
+  }
+}
+assert.equal(omitted21RangeEdits, 1, 'repro must drop the 21-23ABC answer range')
+assert.equal(omitted21LabelEdits, 1, 'repro must drop the standalone 21. A answer label')
+const omitted21Produced = produceNck1OcrMaterialization({
+  paperId,
+  documents: fixture.sourceDocuments,
+  evidence: fixture.evidence,
+  confirmation: omitted21,
+})
+assert.equal(omitted21Produced.disposition, 'needs_agent_review')
+assert.equal(omitted21Produced.materialization.answers.length, 44,
+  'omitting answer 21 yields 44 authoritative answers (22-65)')
+for (const list of [
+  omitted21Produced.materialization.issues,
+  omitted21Produced.review.required,
+]) {
+  const missing21 = list.find((item) =>
+    item.code === 'NCK1_OCR_ANSWER_MISSING' && item.path === 'answers.21')
+  assert(missing21, 'NCK1_OCR_ANSWER_MISSING for answers.21 must be emitted')
+  assertLocatedIssue(missing21)
+  assert.equal(missing21.source.documentId, answerDocId,
+    `NCK1_OCR_ANSWER_MISSING at answers.21 must point at ${answerDocId} (the answer doc),`
+    + ` not ${questionDocId} (the question doc)`)
+}
+assert.equal(imported(omitted21Produced).candidate?.interpretation, null,
+  'an answer-side missing-key issue cannot derive a usable Candidate')
+
 const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-nck1-ocr-cli-'))
 const cliPaperDir = path.join(root, 'scripts/import-pipeline/papers', paperId)
 try {
