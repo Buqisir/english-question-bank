@@ -2,6 +2,10 @@ import { resolveCanonicalAuthority, slotsForProfile, validateJsonSchema } from '
 import { validateApplicationWritingContract } from './applicationWriting.mjs'
 import { validateContinuationWritingContract } from './continuationWriting.mjs'
 import { validateGrammarFillPromptContract } from './grammarFillPromptContract.mjs'
+import {
+  collectListeningTargets,
+  validateListeningContract,
+} from './listening.mjs'
 import { validateReadingContract } from './reading.mjs'
 import { validateSevenChoicesContract } from './sevenChoices.mjs'
 import { cloneJson, digestJson } from './stable.mjs'
@@ -51,6 +55,10 @@ function sourceMapCoverageIssues(group, sourceCapture, family) {
             ...option.content.map((inline) => `content_node:${inline.nodeId}`),
           ])),
         ]
+      : []),
+    ...(group.variant.family === 'listening'
+      ? collectListeningTargets(group.variant).map(({ kind, id }) =>
+          `${kind}:${id}`)
       : []),
     ...(family.variantSchemaId === 'canonical-application-writing-variant-v1'
       ? [
@@ -210,7 +218,7 @@ function assertCanonicalPackage(canonicalPackage) {
         variant: group.variant,
         assertions: sourceCapture.assertions,
         allowPassageBlockRoles:
-          ['47', '48', '49'].includes(closure.authorityRef.manifestVersion),
+          ['47', '48', '49', '50'].includes(closure.authorityRef.manifestVersion),
       })
       if (sevenChoicesIssues.length > 0) throw projectionError('Seven Choices canonical contract is not closed', sevenChoicesIssues)
     }
@@ -224,6 +232,18 @@ function assertCanonicalPackage(canonicalPackage) {
         assertions: sourceCapture.assertions,
       })
       if (readingIssues.length > 0) throw projectionError('Reading canonical contract is not closed', readingIssues)
+    }
+    if (family.familyContractId === 'listening') {
+      const listeningIssues = validateListeningContract({
+        questionIds: group.questionRefs.map(({ questionId }) => questionId),
+        blankIds: group.blankRefs.map(({ blankId }) => blankId),
+        content: group.content,
+        variant: group.variant,
+        assertions: sourceCapture.assertions,
+      })
+      if (listeningIssues.length > 0) {
+        throw projectionError('Listening canonical contract is not closed', listeningIssues)
+      }
     }
     if (family.familyContractId === 'grammar-fill' && family.version >= 2) {
       const grammarFillIssues = validateGrammarFillPromptContract({
@@ -281,7 +301,24 @@ function assertCanonicalPackage(canonicalPackage) {
   const inactiveSlots = slotsForProfile(profile).filter((slot) => slot.activation === 'inactive_source')
   const bound = plan.slotBindings.filter((binding) => binding.state === 'bound')
   const inactive = plan.slotBindings.filter((binding) => binding.state === 'inactive')
-  if (bound.length !== activeSlots.length || new Set(bound.map((binding) => binding.slotId)).size !== bound.length) throw projectionError('Plan bindings do not close every active Profile slot', [])
+  const omitted = plan.slotBindings.filter((binding) => binding.state === 'omitted')
+  const optionalOmissions = plan.completeness?.optionalOmissions
+  const omittedSlotIds = omitted.map((binding) => binding.slotId)
+  if (
+    bound.length + omitted.length !== activeSlots.length
+    || new Set([...bound, ...omitted].map((binding) => binding.slotId)).size
+      !== bound.length + omitted.length
+    || !Array.isArray(optionalOmissions)
+    || optionalOmissions.join(',') !== omittedSlotIds.join(',')
+  ) throw projectionError('Plan bindings do not close every active Profile slot', [])
+  for (const binding of omitted) {
+    const slot = activeSlots.find((candidate) => candidate.slotId === binding.slotId)
+    if (
+      slot?.presence !== 'optional'
+      || binding.sourceState !== 'not_supplied'
+      || Object.keys(binding).sort().join(',') !== 'slotId,sourceState,state'
+    ) throw projectionError(`Plan omission for ${binding.slotId} is not source-proven and optional`, [])
+  }
   if (inactive.length !== inactiveSlots.length || new Set(inactive.map((binding) => binding.slotId)).size !== inactive.length) throw projectionError('Plan bindings do not close every inactive Profile slot', [])
   const sourceSpanIds = new Set(
     sourceCapture.sourceSpans.map((span) => span.sourceSpanId),
@@ -314,6 +351,7 @@ function assertCanonicalPackage(canonicalPackage) {
   const boundGroupIds = new Set()
   for (const slot of activeSlots) {
     const binding = bound.find((candidate) => candidate.slotId === slot.slotId)
+    if (!binding && omitted.some((candidate) => candidate.slotId === slot.slotId)) continue
     const group = binding && groupById.get(binding.groupRef.groupId)
     if (
       !group
@@ -342,7 +380,10 @@ export function projectCanonicalPaper(canonicalPackage) {
   const nodes = []
   for (const part of profile.parts) {
     const visibleSections = part.sections.filter((section) =>
-      section.slots.some((slot) => slot.activation === 'canonical_group'))
+      section.slots.some((slot) =>
+        slot.activation === 'canonical_group'
+        && plan.slotBindings.some((binding) =>
+          binding.slotId === slot.slotId && binding.state === 'bound')))
     if (visibleSections.length === 0) continue
     nodes.push({ kind: 'part', partId: part.partId, instructionId: part.titleInstructionRef })
     nodes.push({
@@ -358,6 +399,7 @@ export function projectCanonicalPaper(canonicalPackage) {
       for (const slot of section.slots) {
         if (slot.activation === 'inactive_source') continue
         const binding = plan.slotBindings.find((candidate) => candidate.slotId === slot.slotId)
+        if (binding?.state === 'omitted') continue
         const group = groupById.get(binding.groupRef.groupId)
         for (const instructionId of slot.instructionRefs) {
           nodes.push({
@@ -367,7 +409,7 @@ export function projectCanonicalPaper(canonicalPackage) {
         }
         const sevenChoices = group.variant.family === 'seven-choices'
           ? {
-              ...(['47', '48', '49'].includes(closure.authorityRef.manifestVersion)
+              ...(['47', '48', '49', '50'].includes(closure.authorityRef.manifestVersion)
                 ? {
                     passageBlockRoles: cloneJson(
                       group.variant.passageBlockRoles,
@@ -398,6 +440,26 @@ export function projectCanonicalPaper(canonicalPackage) {
                 contentNodeIds: contentIdentityLists(group.content).contentNodeIds,
                 questionIds: group.questionRefs.map(({ questionId }) => questionId),
                 optionIds: group.variant.choiceOwnership.sets.flatMap((set) => set.options.map(({ optionId }) => optionId)),
+              },
+            }
+          : {}
+        const listening = group.variant.family === 'listening'
+          ? {
+              questions: group.variant.questions.map((question, index) => ({
+                questionId: question.questionId,
+                number: numberingByGroup.get(group.identity.groupId)?.[index]?.number,
+                stem: cloneJson(question.stem),
+                options: cloneJson(group.variant.choiceOwnership.sets[index].options),
+                correctOptionId: question.correctOptionId,
+              })),
+              transcriptSegments: cloneJson(group.variant.transcriptSegments),
+              anchors: {
+                questionIds: group.questionRefs.map(({ questionId }) => questionId),
+                optionIds: group.variant.choiceOwnership.sets.flatMap((set) =>
+                  set.options.map(({ optionId }) => optionId)),
+                transcriptSegmentIds: group.variant.transcriptSegments.map(
+                  ({ segmentId }) => segmentId,
+                ),
               },
             }
           : {}
@@ -569,6 +631,7 @@ export function projectCanonicalPaper(canonicalPackage) {
           choices: cloneJson(group.variant.choiceOwnership),
           ...cloneJson(sevenChoices),
           ...cloneJson(reading),
+          ...cloneJson(listening),
           ...cloneJson(applicationWriting),
           ...cloneJson(continuationWriting),
         })
