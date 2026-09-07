@@ -31,7 +31,7 @@ function objectValue(value) {
 function normalizeSynonymCardId(value) {
   const raw = optionalString(value).toUpperCase().replace(/\s+/g, '')
   if (!raw) return ''
-  const match = raw.match(/T(?:10|[1-9])/)
+  const match = raw.match(/^T(?:10|[1-9])$/)
   return match ? match[0] : raw
 }
 function clamp01(value) {
@@ -224,6 +224,38 @@ verifier.assert(sdPlain.evidenceSource === 'deepseek_reading_parse', 'evidenceSo
 // null guards
 verifier.assert(normalizeReadingSynonymDifficulty(null) === null, 'null item -> null')
 verifier.assert(normalizeReadingSynonymDifficulty({ cardId: 'TZ' }) === null, 'unknown card -> null')
+
+// Regression: out-of-scope cardIds must NOT collapse onto a real T1..T10 key. The buggy
+// unanchored /T(?:10|[1-9])/ regex matched "T11" -> "T1" as a substring, and "T1" is a key in
+// cardMap, so the canonical persisted path silently persisted the hallucination as a clean
+// T1 classification with no review. The strict ^T(?:10|[1-9])$ anchor rejects T11 -> verbatim
+// raw -> cardMap miss -> normalizeReadingSynonymDifficulty returns null (rejected).
+verifier.assert(normalizeReadingSynonymDifficulty({ cardId: 'T11', confidence: 0.95 }) === null, 'T11 hallucination -> rejected (null), not persisted as T1')
+verifier.assert(normalizeReadingSynonymDifficulty({ cardId: 'T12', confidence: 0.95 }) === null, 'T12 hallucination -> rejected (null), not persisted as T1')
+verifier.assert(normalizeReadingSynonymDifficulty({ cardId: 'T21', confidence: 0.95 }) === null, 'T21 hallucination -> rejected (null), not persisted as T2')
+verifier.assert(normalizeReadingSynonymDifficulty({ cardId: 'T100', confidence: 0.95 }) === null, 'T100 hallucination -> rejected (null), not persisted as T10')
+verifier.assert(normalizeReadingSynonymDifficulty({ cardId: 'T99', confidence: 0.95 }) === null, 'T99 hallucination -> rejected (null), not persisted as T9')
+verifier.assert(normalizeReadingSynonymDifficulty({ cardId: 'T1.5', confidence: 0.95 }) === null, 'T1.5 hallucination -> rejected (null), not persisted as T1')
+verifier.assert(normalizeReadingSynonymDifficulty({ cardId: 'T2_T4', confidence: 0.95 }) === null, 'T2_T4 hallucination -> rejected (null), not persisted as T2')
+
+// Regression: the word_meaning surface override forces T3 only when rawCardId !== 'T1'. The
+// buggy T11 -> "T1" collapse made forcedWordMeaningCard false, so a word_meaning question was
+// persisted as T1 instead of the contractually-forced T3. The fix rejects the collapse: T11
+// stays verbatim, the forcedWordMeaningCard gate ('T11' !== 'T1' = true) re-engages, and the
+// override forces T3 (reviewNeeded=true, T3_T6 boundary flag).
+const sdWordT11 = normalizeReadingSynonymDifficulty(
+  { cardId: 'T11', confidence: 0.95 },
+  { surfaceQuestion: { type: 'word_meaning' }, originalQuestion: { stem: 'What does the underlined word mean?', options: [] } },
+)
+verifier.assert(sdWordT11.cardId === 'T3', 'word_meaning + T11 hallucination -> forced T3 (override re-engages, not defeated by T1 collapse)', `cardId=${sdWordT11 && sdWordT11.cardId}`)
+verifier.assert(sdWordT11.reviewNeeded === true, 'word_meaning + T11 -> forced T3 reviewNeeded')
+verifier.assert(sdWordT11.boundaryFlags.includes('T3_T6'), 'word_meaning + T11 -> forced T3_T6 boundary flag')
+// A legitimate T1 on a word_meaning question exempts the override (rawCardId === 'T1') and is kept.
+const sdWordT1 = normalizeReadingSynonymDifficulty(
+  { cardId: 'T1', confidence: 0.95 },
+  { surfaceQuestion: { type: 'word_meaning' } },
+)
+verifier.assert(sdWordT1.cardId === 'T1', 'word_meaning + legitimate T1 kept (override exempted)')
 
 // ── difficultyProfile: six-dimension scoring + floor + blocker filtering ────────────────────────
 verifier.section('normalizeReadingDifficultyProfile (six-dimension scoring)')
