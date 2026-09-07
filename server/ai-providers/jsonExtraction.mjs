@@ -1,8 +1,9 @@
 // AI-completion JSON / verify-verdict extraction leaf.
 // Extracted verbatim from server/api.mjs (cut H5-C, refactor-roadmap-2026-06).
 // Zero dependencies, no injected state: raw provider text/payload -> parsed JSON +
-// normalized verify verdict. The 3 normalizeVerifyVerdict variants are intentionally
-// divergent and must NOT be unified (different accepted-token vocabularies).
+// normalized verify verdict. The 2 inner normalizeVerifyVerdict closures are
+// intentionally divergent and must NOT be unified (different accepted-token
+// vocabularies).
 
 export function parseJsonFromString(rawText) {
   try {
@@ -101,51 +102,6 @@ function parseJsonObject(text) {
   }
 
   return null
-}
-
-function normalizeVerifyVerdict(value) {
-  if (!value) return ''
-  const normalized = String(value)
-    .toLowerCase()
-    .replace(/[\s]/g, '')
-    .replace(/[:：，。,;；!！?？]/g, '')
-
-  const isCorrect = ['correct', '答案正确', '正确', '正确答案', '答案无误', '无误', '对'].includes(normalized)
-  const isAnswerWrong = [
-    'answer_wrong',
-    'answerwrong',
-    '答案错误',
-    'answererror',
-    '答案有误',
-    '答案不对',
-    '答案不正确',
-  ].includes(normalized)
-  const isExplanationWrong = [
-    'explanation_wrong',
-    'explanationwrong',
-    '解析有误',
-    '解析错误',
-    '解析不当',
-    '解析有问题',
-  ].includes(normalized)
-  const isBothWrong = [
-    'both_wrong',
-    'bothwrong',
-    '答案和解析均错',
-    '答案与解析均错',
-    '答案和解析都错',
-    '两项均错',
-    '答案及解析错误',
-  ].includes(normalized)
-  const isUncertain = ['uncertain', 'unknown', '未知', '不确定', '待定', '待确认'].includes(normalized)
-
-  if (isBothWrong) return 'both_wrong'
-  if (isCorrect) return 'correct'
-  if (isAnswerWrong) return 'answer_wrong'
-  if (isExplanationWrong) return 'explanation_wrong'
-  if (isUncertain) return 'uncertain'
-
-  return ''
 }
 
 function inferVerifyVerdictFromText(rawText) {
