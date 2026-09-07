@@ -57,6 +57,10 @@ Follow every stronger final gate in `AGENTS.md`. A high-risk candidate also
 requires the relevant review, `pnpm -C app verify:all`, and related E2E before
 the PR is ready to merge.
 
+Once the exact-head authoritative Full lane has PASSed, do not rerun or wait
+for a duplicate local Full; only explicitly identified local-only coverage
+remains necessary.
+
 Investigate failures; `SKIP` and baseline `FAIL` are not `PASS`. A baseline
 classification requires the same command and failure on clean `origin/main`
 with equivalent fixtures, runtime and dependencies. Preserve those failures
@@ -76,6 +80,11 @@ PR/head and latest exact-App/name Check, then perform all identity/policy gates
 below. Never reuse an older green Check or infer new Ship/deployment authorization.
 Read/append failure leaves CI unchanged; inspect GitHub directly, never rerun CI
 just to obtain a notification. Plugin restart does not automatically resume waits.
+
+Read routine progress and terminal state only from GitHub Checks and the
+watcher; do not wake the CI host for ordinary progress or SKIP excerpts.
+Request minimal host evidence once only for an unexplained failure or a
+controlled installation/rollback, scoped to that diagnosis or operation.
 
 Push the task branch without force and open one PR into `main`, reporting risk,
 review and verification evidence. Before an authorized merge, require the
