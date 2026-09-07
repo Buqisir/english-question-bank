@@ -1646,10 +1646,24 @@ function paperAssetAnswerPreview(asset, group) {
   return String(answer?.answer || '').trim()
 }
 
-function buildPaperAssetQuestionGroupCard(asset, group, paperSurfaceAnalysis, draftContext) {
+function buildPaperAssetQuestionGroupCard(asset, group, paperSurfaceAnalysis, draftContext, options = {}) {
   const groupId = String(group?.groupId || '')
   const groupType = normalizePaperAssetGroupType(group?.groupType) || 'other'
-  const printReady = getPaperAssetPrintReady(asset, group)
+  // The add-to-draft seam (draftPaperStore.addGroupToDraftPaper) re-validates the
+  // groupId against the bank's question_groups table via selectQuestionGroupCards
+  // with a WHERE clause — a path that does not inject paper-asset-only cards
+  // (injection is gated on the empty-whereClause listing path), so an un-promoted
+  // paper-asset-only groupId is structurally rejected with "questionGroupId not
+  // found". Advertising such a card as addable ("add") would let the UI show an
+  // enabled "+加入草稿卷" button whose click always 400s. Gate the PA card's
+  // draft button on the group being promoted into the bank (has a question_groups
+  // row); un-promoted PA cards render as "disabled" with a reason instead. This
+  // keeps the listing's advertisement honest with the add seam's bank-ownership
+  // gate (convention-alternative Fix B to the bug report; bank-ownership is the
+  // codebase's universal mutation contract for question groups).
+  const printReady = options.promoted
+    ? getPaperAssetPrintReady(asset, group)
+    : { ok: false, reason: '题组尚未入库，暂不可加入草稿卷' }
   const draftPaperButtonState = buildDraftButtonState(printReady, draftContext, groupId)
   const section = paperAssetGroupSection(group)
   const passageTitle = paperAssetPassageTitle(group)
@@ -1703,7 +1717,7 @@ function listPaperAssetAnalysisGroupCards(paperSurfaceAnalysisAvailabilityByGrou
         if (!groupId || existingGroupIds.has(groupId)) continue
         const paperSurfaceAnalysis = paperSurfaceAnalysisAvailabilityByGroupId.get(groupId)
         if (!paperSurfaceAnalysis?.href || !paperSurfaceAnalysis?.label) continue
-        cards.push(buildPaperAssetQuestionGroupCard(asset, group, paperSurfaceAnalysis, draftContext))
+        cards.push(buildPaperAssetQuestionGroupCard(asset, group, paperSurfaceAnalysis, draftContext, { promoted: existingGroupIds.has(groupId) }))
       }
     } catch {
       // Invalid paper assets are ignored here; import validation owns data errors.
@@ -1883,12 +1897,79 @@ function applyPaperAssetToQuestionGroupDetail(baseDetail, asset, group, dbQuesti
   }
 }
 
+// Paper-asset-only question-group detail: a group whose canonical asset lives in
+// app/public/paper-assets/ but has no question_groups DB row. The listing path
+// (selectQuestionGroupCards with no WHERE clause) injects such groups as browse
+// cards; before this branch existed, GET /api/question-groups/:id returned 404
+// for them because the PA-blind `WHERE id = ?` card lookup was empty and
+// `findPaperAssetGroup` was only consulted AFTER the DB-backed baseDetail was
+// built (unreachable when no DB row exists). This mirrors the listing's PA card
+// for the detail's card fields (so draftPaperButtonState/printUnavailableReason
+// stay in sync with the listing — "disabled" for un-promoted PA groups) and
+// reuses applyPaperAssetToQuestionGroupDetail to source passage/questions/
+// groupType/paperId/writingTask from the asset. DB-only fields(instruction/note/
+// sourceDetail/parse-results) default to empty because the group has no bank row.
+function buildPaperAssetOnlyQuestionGroupDetail(asset, group) {
+  const groupId = String(group?.groupId || '')
+  const card = buildPaperAssetQuestionGroupCard(
+    asset,
+    group,
+    getPaperSurfaceAnalysisAvailabilityByGroupId().get(groupId),
+    EMPTY_DRAFT_CONTEXT,
+    { promoted: false },
+  )
+  const baseDetail = {
+    ...card,
+    canEdit: false,
+    instruction: '',
+    note: '',
+    sourceDetail: {
+      id: null,
+      publisher: String(asset?.paper?.source || '').trim(),
+      originalUrl: '',
+      fileRef: '',
+      note: '',
+    },
+    passage: {
+      id: null,
+      title: card.passageTitle,
+      materialText: '',
+      summary: card.summary,
+      theme: '',
+      discourseType: '',
+      wordCount: null,
+      note: '',
+    },
+    questions: [],
+    readingParseResult: null,
+    readingVerifyResult: null,
+    clozeParseResult: null,
+    grammarParseResult: null,
+    sevenChoicesParseResult: null,
+  }
+  return applyPaperAssetToQuestionGroupDetail(baseDetail, asset, group, [])
+}
+
 export function getQuestionGroupDetail(id) {
   const db = openDatabase()
 
   try {
     const card = selectQuestionGroupCards(db, 'WHERE id = ?', [id])[0]
-    if (!card) return null
+    if (!card) {
+      // Paper-asset-only fallback: no question_groups row exists, but a canonical
+      // paper-asset group may live under app/public/paper-assets/. Before this
+      // branch, GET /api/question-groups/:id returned 404 for such ids because the
+      // PA-blind `WHERE id = ?` card lookup was empty and the DB-backed path's
+      // findPaperAssetGroup call below never ran. Resolve and fail the same way
+      // (identityConflict returns null) and otherwise project the PA detail, so a
+      // PA-only id the listing surfaces as a browse card opens with real material
+      // instead of a load-error. This branch does not touch the DB-backed path
+      // below, so the listing's PA cards stay un-addable by design.
+      const paperAssetMatch = findPaperAssetGroup(id)
+      if (paperAssetMatch?.identityConflict) return null
+      if (paperAssetMatch) return buildPaperAssetOnlyQuestionGroupDetail(paperAssetMatch.asset, paperAssetMatch.group)
+      return null
+    }
 
     const detail = db
       .prepare(
@@ -1958,6 +2039,7 @@ export function getQuestionGroupDetail(id) {
 
     const baseDetail = {
       ...card,
+      canEdit: true,
       instruction: detail.instruction,
       note: detail.group_note || '',
       sourceDetail: {
