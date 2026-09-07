@@ -213,6 +213,32 @@ function buildFixtureHtml(pageCount) {
 // ─────────────────────────────────────────────────────────────────────────
 // Phase B: live dev server + real-click interaction re-anchor
 // ─────────────────────────────────────────────────────────────────────────
+export async function cleanupA3Fixture(children, tempRoot) {
+  for (const { child, closed } of [...children].reverse()) {
+    const signalGroup = (signal) => {
+      try {
+        process.kill(-child.pid, signal)
+        return true
+      } catch (error) {
+        if (error.code === 'ESRCH') return false
+        throw error
+      }
+    }
+    signalGroup('SIGTERM')
+    // npm can exit before its Vite grandchild. Reap the whole group, not
+    // merely the leader, and wait for inherited stdio to close before rm.
+    const deadline = Date.now() + 1000
+    while (signalGroup(0) && Date.now() < deadline) {
+      await new Promise((resolve) => setTimeout(resolve, 25))
+    }
+    if (signalGroup(0)) signalGroup('SIGKILL')
+    await closed
+  }
+  if (existsSync(tempRoot)) rmSync(tempRoot, {
+    recursive: true, force: true, maxRetries: 5, retryDelay: 100,
+  })
+}
+
 async function runPhaseB(browser) {
   console.log('\n--- Phase B: live UI, real clicks (plan.md 裁点4 教训 — 不许只靠源码断言) ---')
 
@@ -231,7 +257,7 @@ async function runPhaseB(browser) {
   // this script's event loop alive even after main() has returned.
   function startProcess(command, args, options) {
     const child = spawn(command, args, { ...options, detached: true, stdio: ['ignore', 'pipe', 'pipe'] })
-    children.push(child)
+    children.push({ child, closed: new Promise((resolve) => child.once('close', resolve)) })
     child.stdout.on('data', (chunk) => process.stdout.write(`[${options.name}] ${chunk}`))
     child.stderr.on('data', (chunk) => process.stderr.write(`[${options.name}] ${chunk}`))
     return child
@@ -426,15 +452,7 @@ async function runPhaseB(browser) {
       pass('no browser page errors during the A3 flow')
     }
   } finally {
-    await page.close()
-    for (const child of children.reverse()) {
-      try {
-        process.kill(-child.pid, 'SIGTERM')
-      } catch {
-        child.kill('SIGTERM')
-      }
-    }
-    if (existsSync(tempRoot)) rmSync(tempRoot, { recursive: true, force: true })
+    try { await page.close() } finally { await cleanupA3Fixture(children, tempRoot) }
   }
 }
 
@@ -456,7 +474,7 @@ async function main() {
   if (failed > 0) process.exitCode = 1
 }
 
-main()
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main()
   .catch((error) => {
     console.error(error)
     process.exitCode = 1
