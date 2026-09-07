@@ -57,7 +57,7 @@ for (const sharedFile of [
   'server/paper-import/nck1OcrMaterializationProducer.mjs',
   'server/paper-import/nck1OcrSourceEvidence.mjs',
   'server/paper-import/nck1ImageSourceBundle.mjs',
-  '.github/workflows/verify.yml',
+  '.github/workflows/example.yml',
 ]) {
   assert.equal(plan(sharedFile).pack, 'all', `${sharedFile} fails closed to all`)
 }
