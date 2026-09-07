@@ -85,15 +85,24 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
 
   const monthGroups = useMemo(() => groupArtifactsByMonth(artifacts), [artifacts])
 
+  // my-space-race: a slower fetch for a previously-selected folder can resolve
+  // after a newer folder's fetch and overwrite the grid while the chip highlight
+  // (driven by selectedFolderId) stays on the newer folder. A monotonically
+  // increasing token stamps each load; any response whose token no longer equals
+  // the latest is dropped before it can mutate folders/artifacts/loadState.
+  const loadTokenRef = useRef(0)
   const load = useCallback(async (folderId = selectedFolderId) => {
+    const token = ++loadTokenRef.current
     setLoadState('loading')
     setMessage('')
     try {
       const snapshot = await fetchMySpace(folderId)
+      if (loadTokenRef.current !== token) return
       setFolders(snapshot.folders)
       setArtifacts(snapshot.artifacts)
       setLoadState('loaded')
     } catch (error) {
+      if (loadTokenRef.current !== token) return
       setLoadState('error')
       setMessage(describeError('加载个人空间', error))
     }
@@ -103,9 +112,12 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
     void load()
   }, [load])
 
-  async function selectFolder(folderId: string | null) {
+  // Folder switches are handled entirely by the [load] effect above (which
+  // re-fires whenever selectedFolderId changes), not by an explicit fetch here:
+  // calling load() from both selectFolder AND the effect doubled every switch's
+  // fetches and widened the stale-response race window.
+  function selectFolder(folderId: string | null) {
     setSelectedFolderId(folderId)
-    await load(folderId)
   }
 
   async function downloadArtifact(artifact: MySpaceArtifact, mode: FileSaveMode = 'download') {
