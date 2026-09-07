@@ -19,6 +19,10 @@ import {
 } from './grammarFillPromptContract.mjs'
 import { appendListeningInactiveClosures } from './listeningInactive.mjs'
 import {
+  collectListeningTargets,
+  validateListeningContract,
+} from './listening.mjs'
+import {
   DOCX_MEDIA_TYPE,
   DOCX_PAIR_IDENTITY_MEDIA_TYPE,
   DOCX_PAIR_IDENTITY_SCHEMA_VERSION,
@@ -2759,7 +2763,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     content,
     new Set(sourceGroup.blankIds),
     mediaIds,
-    ['46', '47', '48', '49'].includes(closure.authorityRef.manifestVersion),
+    ['46', '47', '48', '49', '50'].includes(closure.authorityRef.manifestVersion),
   ))
   if (family.familyContractId !== 'reading' && contentHasFramedColumns(content)) {
     diagnostics.push(diagnostic('RICH_BLOCK_UNSUPPORTED', 'unsupported', '$.content', 'framed_columns is only representable in Reading'))
@@ -2767,11 +2771,13 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
   diagnostics.push(...validateReferenceBlankClosure(family.familyContractId, sourceGroup.questionIds, sourceGroup.blankIds, content))
   const variant = cloneJson(sourceGroup.variant || {})
   const variantKeys = family.familyContractId === 'seven-choices'
-    ? ['47', '48', '49'].includes(closure.authorityRef.manifestVersion)
+    ? ['47', '48', '49', '50'].includes(closure.authorityRef.manifestVersion)
       ? ['family', 'passageBlockRoles', 'members', 'choiceOwnership']
       : ['family', 'members', 'choiceOwnership']
     : family.familyContractId === 'reading'
       ? ['family', 'passageBlockRoles', 'questions', 'choiceOwnership']
+      : family.familyContractId === 'listening'
+        ? ['family', 'questions', 'transcriptSegments', 'choiceOwnership']
       : family.familyContractId === 'application-writing'
         ? variant.mode === 'legacy_opaque'
           ? ['family', 'mode', 'writingTaskId', 'sourceTaskType', 'contentBlockRefs', 'wordCountTarget', 'wordCountTargetCertainty', 'wordCountScope', 'choiceOwnership', 'response']
@@ -2823,7 +2829,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
       variant,
       assertions: capture.assertions,
       allowPassageBlockRoles:
-        ['47', '48', '49'].includes(closure.authorityRef.manifestVersion),
+        ['47', '48', '49', '50'].includes(closure.authorityRef.manifestVersion),
     }).map((item) => diagnostic(item.code, item.disposition, item.path, item.message)))
   }
   if (family.familyContractId === 'reading') {
@@ -2832,6 +2838,15 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
       blankIds: sourceGroup.blankIds,
       content,
       media,
+      variant,
+      assertions: capture.assertions,
+    }).map((item) => diagnostic(item.code, item.disposition, item.path, item.message)))
+  }
+  if (family.familyContractId === 'listening') {
+    diagnostics.push(...validateListeningContract({
+      questionIds: sourceGroup.questionIds,
+      blankIds: sourceGroup.blankIds,
+      content,
       variant,
       assertions: capture.assertions,
     }).map((item) => diagnostic(item.code, item.disposition, item.path, item.message)))
@@ -2884,6 +2899,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     ...media.map((item) => ({ target: { kind: 'media', id: item.mediaId } })),
     ...collectRichTargetIds(content).map((entry) => ({ target: entry })),
     ...collectReadingTargetIds(variant).map((entry) => ({ target: entry })),
+    ...collectListeningTargets(variant).map((entry) => ({ target: entry })),
     ...collectGrammarFillTargetIds(variant).map((entry) => ({ target: entry })),
     ...collectApplicationWritingTargetIds(variant).map((entry) => ({ target: entry })),
     ...collectContinuationWritingTargetIds(variant).map((entry) => ({ target: entry })),
@@ -2987,6 +3003,7 @@ function buildPlan(source, capture, closure, groups, acceptedRecords, reviewDeci
   const allowedSlots = new Set(slots.map((slot) => slot.slotId))
   for (const group of groups) if (!allowedSlots.has(group.slotId)) diagnostics.push(diagnostic('GROUP_SLOT_UNEXPECTED', 'unsupported', '$.groups', `Unknown profile slot ${group.slotId}`))
   const bindings = []
+  const optionalOmissions = []
   const numberingAssignments = []
   let previousFlexibleRangeEnd = null
   for (const [slotIndex, slot] of slots.entries()) {
@@ -3043,7 +3060,19 @@ function buildPlan(source, capture, closure, groups, acceptedRecords, reviewDeci
     }
     const group = groupBySlot.get(slot.slotId)
     if (!group) {
-      diagnostics.push(diagnostic('ACTIVE_GROUP_MISSING', 'incomplete_source', `$.groups`, `Required active slot ${slot.slotId} is missing`))
+      if (
+        slot.presence === 'optional'
+        && source.inactiveSlots?.[slot.slotId] === 'not_supplied'
+      ) {
+        bindings.push({
+          slotId: slot.slotId,
+          state: 'omitted',
+          sourceState: 'not_supplied',
+        })
+        optionalOmissions.push(slot.slotId)
+      } else {
+        diagnostics.push(diagnostic('ACTIVE_GROUP_MISSING', 'incomplete_source', `$.groups`, `Required active slot ${slot.slotId} is missing`))
+      }
       continue
     }
     if (
@@ -3120,7 +3149,7 @@ function buildPlan(source, capture, closure, groups, acceptedRecords, reviewDeci
           reviewDecisionIds: reviewDecisions.map((decision) => decision.decisionId),
           reviewDecisionDigest,
         },
-    completeness: { status: 'complete', optionalOmissions: [] },
+    completeness: { status: 'complete', optionalOmissions },
   }
   diagnostics.push(...validateJsonSchema(plan, closure.schemas['canonical-paper-plan-v1'], '$.plan'))
   return { diagnostics, plan }

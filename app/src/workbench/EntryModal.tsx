@@ -10,6 +10,7 @@ import {
   type SourceType,
 } from '../domain/questionBank'
 import { createQuestionGroup, updateQuestionGroup } from '../services/questionGroups'
+import { nextQuestionNumber } from './entryQuestionHelpers'
 
 type EntryForm = {
   sourceType: SourceType
@@ -156,7 +157,7 @@ export function EntryModal({ open, mode, initialDetail, onClose, onSaved }: Entr
   function addEntryQuestion() {
     setEntryForm((form) => {
       const lastQuestion = form.questions[form.questions.length - 1]
-      const nextQuestion = createEntryQuestion(String(form.questions.length + 1))
+      const nextQuestion = createEntryQuestion(nextQuestionNumber(form.questions))
 
       return {
         ...form,

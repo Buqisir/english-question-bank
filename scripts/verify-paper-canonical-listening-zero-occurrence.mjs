@@ -542,7 +542,7 @@ async function verifyActualPaperSurface({
         sourcePhrases,
       )
       assertZeroListeningOccurrence(
-        await page.content(),
+        await page.locator('body').innerHTML(),
         `${label} DOM`,
         sourcePhrases,
       )

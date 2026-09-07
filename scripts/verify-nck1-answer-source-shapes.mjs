@@ -103,6 +103,14 @@ assertReady(
 assertReady(keyOnlyDocxResult, keyOnlyDocx.sourceDocuments, 'DETAIL_TOKEN_MUST_NOT_LEAK')
 assert.deepEqual(answerValues(detailedDocxResult), answerValues(keyOnlyDocxResult))
 
+const multilineDocx = makeSyntheticNck1DocxFixture({ answerShape: 'key_only', multilineAnswers: true })
+const multilineDocxResult = produceNck1DocxMaterialization({
+  paperId: multilineDocx.paperId,
+  documents: multilineDocx.sourceDocuments,
+})
+assertReady(multilineDocxResult, multilineDocx.sourceDocuments, 'DETAIL_TOKEN_MUST_NOT_LEAK')
+assert.deepEqual(answerValues(multilineDocxResult), answerValues(keyOnlyDocxResult))
+
 const combinedDocx = makeSyntheticNck1DocxFixture({ combined: true })
 const combinedDocxResult = produceNck1DocxMaterialization({
   paperId: combinedDocx.paperId,

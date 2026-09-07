@@ -27,6 +27,7 @@ export function parseSandboxInput(argv = process.argv) {
   const baseSha = value('--base-sha')
   const bundlePath = value('--bundle')
   const lane = value('--lane')
+  const verifyChanged = argv.includes('--verify-changed')
   const pullRequestValue = value('--pull-request')
   const pullRequestNumber = pullRequestValue === undefined ? null : Number(pullRequestValue)
   if (!['pull_request', 'push'].includes(event)) throw new Error('Invalid sandbox event')
@@ -40,6 +41,7 @@ export function parseSandboxInput(argv = process.argv) {
   }
   if (event === 'push' && pullRequestNumber !== null) throw new Error('Push sandbox input has a PR')
   if (event === 'push' && testedSha !== sha) throw new Error('Push sandbox commits differ')
+  if (verifyChanged && (event !== 'pull_request' || lane !== 'fast')) throw new Error('Invalid changed verification lane')
   return {
     event,
     sha,
@@ -47,6 +49,7 @@ export function parseSandboxInput(argv = process.argv) {
     baseSha,
     bundlePath,
     lane,
+    verifyChanged,
     pullRequestNumber,
     forced: argv.includes('--forced'),
   }
@@ -149,7 +152,9 @@ export async function runSandbox(input, { signal }) {
     let verificationCounts = null
     const e2eFailures = []
     if (input.lane === 'fast') {
-      for (const [command, args] of ampOrbCILaneCommands(input.lane)) {
+      const commands = [...ampOrbCILaneCommands(input.lane)]
+      if (input.verifyChanged) commands.push(['pnpm', ['-C', 'app', 'verify:changed', '--', '--base-ref', input.baseSha]])
+      for (const [command, args] of commands) {
         const ports = AMP_ORB_CI_FAST_PORTS[args[0]]
         if (ports) {
           process.env.AMP_ORB_CI_API_PORT = ports.api
@@ -158,8 +163,16 @@ export async function runSandbox(input, { signal }) {
           delete process.env.AMP_ORB_CI_API_PORT
           delete process.env.AMP_ORB_CI_VITE_PORT
         }
-        const exitCode = await runCommand(command, args, { cwd: checkout, signal })
-        if (exitCode !== 0) e2eFailures.push({ command, args, exitCode })
+        let summaryTail = ''
+        const exitCode = await runCommand(command, args, { cwd: checkout, signal,
+          onOutput(chunk) { summaryTail = `${summaryTail}${chunk}`.slice(-16_384) } })
+        if (args.includes('verify:changed')) {
+          verifyExitCode = exitCode
+          const matches = [...summaryTail.matchAll(/PASS (\d+) \/ SKIP (\d+) \/ FAIL (\d+)/gu)]
+          if (matches.length === 1) verificationCounts = {
+            pass: Number(matches[0][1]), skip: Number(matches[0][2]), fail: Number(matches[0][3]),
+          }
+        } else if (exitCode !== 0) e2eFailures.push({ command, args, exitCode })
       }
       delete process.env.AMP_ORB_CI_API_PORT
       delete process.env.AMP_ORB_CI_VITE_PORT
@@ -187,7 +200,8 @@ export async function runSandbox(input, { signal }) {
       .stdout.trim()
     const clean = finalHead === input.testedSha && finalStatus === ''
     const laneExitCode = input.lane === 'fast'
-      ? (e2eFailures.length === 0 && clean ? 0 : 1)
+      ? (e2eFailures.length === 0 && clean && (!input.verifyChanged
+        || (verifyExitCode === 0 && verificationCounts && verificationCounts.fail === 0)) ? 0 : 1)
       : (verifyExitCode === 0 && verificationCounts?.fail === 0 && clean ? 0 : 1)
     return {
       kind: 'verified',
@@ -195,6 +209,7 @@ export async function runSandbox(input, { signal }) {
       verifyExitCode,
       verificationCounts,
       e2eFailureCount: e2eFailures.length,
+      commandCount: input.lane === 'fast' ? AMP_ORB_CI_E2E_COMMANDS.length + (input.verifyChanged ? 1 : 0) : 1,
       clean,
       wallSeconds: (performance.now() - startedAt) / 1000,
       exitCode: laneExitCode,

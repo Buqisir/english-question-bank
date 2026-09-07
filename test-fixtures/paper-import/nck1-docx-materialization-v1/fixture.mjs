@@ -236,6 +236,7 @@ function answerBlocks({
   answerHeading = true,
   ambiguousTextAnswer = false,
   missingAnswer = false,
+  multilineAnswers = false,
   listening = false,
   listeningHeading = '听力原文',
   listeningTiming = false,
@@ -246,10 +247,14 @@ function answerBlocks({
       paragraph('1-5ABCAB6-10BCABC11-15ABCAB16-20BCABC'),
     ] : []),
     // Deliberately glue adjacent ranges and answers to exercise the real shape.
-    paragraph('21-23ABC24-27DABC28-31BCDA32-35CDAB'),
+    multilineAnswers
+      ? '<w:p><w:r><w:t>21. A</w:t><w:br/><w:t>22. B</w:t><w:br/><w:t>23. C</w:t><w:br/><w:t>24-27DABC28-31BCDA32-35CDAB</w:t></w:r></w:p>'
+      : paragraph('21-23ABC24-27DABC28-31BCDA32-35CDAB'),
     paragraph('36-40ABCDE'),
     paragraph('41-45ABCDA46-50BCDAB51-55CDABC'),
-    paragraph(
+    multilineAnswers
+      ? '<w:p><w:r><w:t>56. walked</w:t><w:br/><w:t>57. quickly58.on59.the60.path61.and62.shared63.a64.kind</w:t><w:br/><w:t>65. note</w:t></w:r></w:p>'
+      : paragraph(
       missingAnswer
         ? '56.walked\t\t57.quickly58.on\t59.the60.path61.and62.shared63.a64.kind'
         : ambiguousTextAnswer

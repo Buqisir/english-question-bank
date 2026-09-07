@@ -59,6 +59,7 @@ export type DraftPaperWorkbenchProps = {
 }
 
 type RemovedDraftItem = {
+  generation: number
   groupId: string
   orderIndex: number
   pageBreakBefore: boolean
@@ -100,6 +101,11 @@ function moveItemTo(items: DraftPaperItem[], draggedId: string, targetId: string
 export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode {
   const { draftPaperId, focusGroupId, onBackToWorkbench, onDraftChanged, shellNav, questionGroupById } = props
   const [draftPaper, setDraftPaper] = useState<DraftPaper | null>(null)
+  const draftGenerationRef = useRef(0)
+  const [draftGeneration, setDraftGeneration] = useState(0)
+  // Each successful load owns a generation, including A → B → A. A switch
+  // invalidates handlers immediately, before the destination fetch settles.
+  const isCurrentDraft = () => draftGeneration === draftGenerationRef.current
   const [recentDrafts, setRecentDrafts] = useState<DraftPaperSummary[]>([])
   const [titleDraft, setTitleDraft] = useState('')
   const [studentLabelDraft, setStudentLabelDraft] = useState('')
@@ -192,7 +198,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // undoDelete/togglePageBreak below all call clearReorderUndo() first — the
   // snapshot is stale the instant a different edit lands, 施工契约 3 边界).
   const [reorderSuggestion, setReorderSuggestion] = useState<ReorderSuggestion>(null)
-  const [reorderUndoSnapshot, setReorderUndoSnapshot] = useState<DraftPaperItem[] | null>(null)
+  const [reorderUndoSnapshot, setReorderUndoSnapshot] = useState<{ generation: number; items: DraftPaperItem[] } | null>(null)
   const reorderUndoTimerRef = useRef<number | null>(null)
   const reorderRequestIdRef = useRef(0)
   // Same delayed-unmount toast pattern as removedItemToast above — driven by
@@ -236,6 +242,34 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const replaceUndoTimerRef = useRef<number | null>(null)
   const replaceUndoToastPresence = usePresence(replaceUndoSnapshot !== null, 120)
 
+  // Bug 4263fb71: both switch surfaces leave the workbench mounted, so a
+  // snapshot captured on the previous draft stays live on the new one and
+  // undoDelete/undoReorderSuggestion/undoSwapReplace fire restore/update
+  // against the wrong draftPaper.id. Clear every transient undo/swap
+  // snapshot (and its dismiss timer) whenever the on-screen draft changes.
+  // Stable (only refs + setState setters) so the [] deps are exact.
+  const resetTransientStateForDraftSwitch = useCallback(() => {
+    draftGenerationRef.current += 1
+    if (titleSaveTimerRef.current) window.clearTimeout(titleSaveTimerRef.current)
+    setSaveStatus('idle')
+    setSaveError('')
+    if (undoTimerRef.current) window.clearTimeout(undoTimerRef.current)
+    undoTimerRef.current = null
+    if (reorderUndoTimerRef.current) window.clearTimeout(reorderUndoTimerRef.current)
+    reorderUndoTimerRef.current = null
+    if (replaceUndoTimerRef.current) window.clearTimeout(replaceUndoTimerRef.current)
+    replaceUndoTimerRef.current = null
+    setRemovedItem(null)
+    setReorderUndoSnapshot(null)
+    setReplaceUndoSnapshot(null)
+    setSwapSeedItemId(null)
+    setSwapRequest(null)
+    setReorderSuggestion(null)
+    setPageBreakSuggestions([])
+    reorderRequestIdRef.current += 1
+    paginationRequestIdRef.current += 1
+  }, [])
+
   const loadRecentDrafts = useCallback(() => {
     fetchDraftPapers().then(setRecentDrafts).catch(() => setRecentDrafts([]))
   }, [])
@@ -244,6 +278,12 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     setLoadStatus('loading')
     setLoadError('')
     setMigrationNotice('')
+    // popstate switch path (parent-prop change re-runs loadDraft): the
+    // [loadDraft] effect cleanup clears the undo TIMERS but not the undo
+    // STATE — clear it before the await so a stale snapshot can't fire
+    // against the new draft even when the fetch fails.
+    resetTransientStateForDraftSwitch()
+    const generation = draftGenerationRef.current
     try {
       let next: DraftPaper
       if (draftPaperId) {
@@ -265,6 +305,8 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           }
         }
       }
+      if (generation !== draftGenerationRef.current) return
+      setDraftGeneration(generation)
       setDraftPaper(next)
       setTitleDraft(next.title)
       setStudentLabelDraft(next.studentLabel || '')
@@ -272,14 +314,16 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       setLoadStatus('loaded')
       loadRecentDrafts()
     } catch (error) {
+      if (generation !== draftGenerationRef.current) return
       setLoadStatus('error')
       setLoadError(describeError('打开草稿卷', error))
     }
-  }, [draftPaperId, loadRecentDrafts])
+  }, [draftPaperId, loadRecentDrafts, resetTransientStateForDraftSwitch])
 
   useEffect(() => {
     void loadDraft()
     return () => {
+      draftGenerationRef.current += 1
       if (titleSaveTimerRef.current) window.clearTimeout(titleSaveTimerRef.current)
       if (undoTimerRef.current) window.clearTimeout(undoTimerRef.current)
       if (savedToastTimerRef.current) window.clearTimeout(savedToastTimerRef.current)
@@ -292,8 +336,9 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   useEffect(() => {
     if (!draftPaper || loadStatus !== 'loaded') return
     let cancelled = false
+    const generation = draftGenerationRef.current
     void fetchDraftPaper(draftPaper.id, versionType).then((next) => {
-      if (cancelled) return
+      if (cancelled || generation !== draftGenerationRef.current) return
       setDraftPaper((current) => (current && current.id === next.id ? { ...current, printHtml: next.printHtml } : current))
     })
     return () => {
@@ -435,6 +480,8 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // started (e.g. two edits in quick succession, both past the debounce).
   useEffect(() => {
     if (paginationDebounceRef.current) window.clearTimeout(paginationDebounceRef.current)
+    const generation = draftGenerationRef.current
+    if (draftGeneration !== generation) return
     // Named inner function (not a bare top-level setState call) so this reset
     // reads as the same "callback reacting to an external condition" shape
     // eslint-plugin-react-hooks's set-state-in-effect rule already accepts
@@ -452,18 +499,19 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     }
     const draftPaperId = draftPaper.id
     paginationDebounceRef.current = window.setTimeout(() => {
+      if (generation !== draftGenerationRef.current) return
       const requestId = (paginationRequestIdRef.current += 1)
       setPaginationStatus('loading')
       fetchDraftPaperPagination(draftPaperId, versionType)
         .then((result) => {
-          if (paginationRequestIdRef.current !== requestId) return
+          if (paginationRequestIdRef.current !== requestId || generation !== draftGenerationRef.current) return
           setPaginatedHtml(result.paginatedHtml)
           setPaginationStatus('ready')
           setPaginationError('')
           setPageBreakSuggestions(result.pageBreakSuggestions)
         })
         .catch((error) => {
-          if (paginationRequestIdRef.current !== requestId) return
+          if (paginationRequestIdRef.current !== requestId || generation !== draftGenerationRef.current) return
           setPaginationStatus('error')
           setPaginationError(describeError('生成分页预览', error))
         })
@@ -477,7 +525,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     // is deliberately excluded from the render signature, see
     // draftPaperStore.mjs's getDraftPaperPagination doc comment).
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [draftPaper?.id, draftPaper?.title, itemsLayoutKey, versionType, draftPaper?.printForm])
+  }, [draftPaper?.id, draftPaper?.title, itemsLayoutKey, versionType, draftPaper?.printForm, draftGeneration])
 
   // reorder-suggest (plan.md 施工契约 3 "拉取策略"): fires only once the
   // pagination fetch above has resolved with real breakage — never on its
@@ -769,24 +817,29 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   }, [previewHtml, draftPaper?.printForm])
 
   async function persistItems(nextItems: DraftPaperItem[]) {
-    if (!draftPaper) return
+    if (!draftPaper || !isCurrentDraft()) return false
     setSaveStatus('saving')
     setSaveError('')
     try {
       const next = await updateDraftPaper(draftPaper.id, {
         items: nextItems.map((item) => ({ id: item.id, pageBreakBefore: item.pageBreakBefore })),
       })
+      if (!isCurrentDraft()) return false
       setDraftPaper(next)
       setTitleDraft(next.title)
       setSaveStatus('saved')
       onDraftChanged?.()
+      return true
     } catch (error) {
+      if (!isCurrentDraft()) return false
       setSaveStatus('error')
       setSaveError(describeError('保存草稿卷', error))
+      return false
     }
   }
 
   function updateTitle(nextTitle: string) {
+    if (!isCurrentDraft()) return
     setTitleDraft(nextTitle)
     if (!draftPaper) return
     if (titleSaveTimerRef.current) window.clearTimeout(titleSaveTimerRef.current)
@@ -794,10 +847,12 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     titleSaveTimerRef.current = window.setTimeout(async () => {
       try {
         const next = await updateDraftPaper(draftPaper.id, { title: nextTitle })
+        if (!isCurrentDraft()) return
         setDraftPaper(next)
         setSaveStatus('saved')
         onDraftChanged?.()
       } catch (error) {
+        if (!isCurrentDraft()) return
         setSaveStatus('error')
         setSaveError(describeError('保存标题', error))
       }
@@ -808,18 +863,20 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // title field above) — a name is typically typed once and left, so there is
   // no need for the extra network chatter a 450ms debounce would add here.
   async function saveStudentLabel(nextValue: string) {
-    if (!draftPaper) return
+    if (!draftPaper || !isCurrentDraft()) return
     const trimmed = nextValue.trim()
     if ((draftPaper.studentLabel || '') === trimmed) return
     setSaveStatus('saving')
     setSaveError('')
     try {
       const next = await updateDraftPaper(draftPaper.id, { studentLabel: trimmed })
+      if (!isCurrentDraft()) return
       setDraftPaper(next)
       setStudentLabelDraft(next.studentLabel || '')
       setSaveStatus('saved')
       onDraftChanged?.()
     } catch (error) {
+      if (!isCurrentDraft()) return
       setSaveStatus('error')
       setSaveError(describeError('保存学生', error))
     }
@@ -832,17 +889,19 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // pagination-fetch effect above still re-fetches to get fresh, server-derived
   // pageBreakSuggestions for the new form. Reverts on a failed PATCH.
   async function setPrintForm(nextForm: DraftPrintForm) {
-    if (!draftPaper || draftPaper.printForm === nextForm) return
+    if (!draftPaper || !isCurrentDraft() || draftPaper.printForm === nextForm) return
     const previous = draftPaper
     setDraftPaper({ ...draftPaper, printForm: nextForm })
     setSaveStatus('saving')
     setSaveError('')
     try {
       const next = await updateDraftPaper(draftPaper.id, { printForm: nextForm })
+      if (!isCurrentDraft()) return
       setDraftPaper(next)
       setSaveStatus('saved')
       onDraftChanged?.()
     } catch (error) {
+      if (!isCurrentDraft()) return
       setDraftPaper(previous)
       setSaveStatus('error')
       setSaveError(describeError('切换打印形态', error))
@@ -873,7 +932,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   }
 
   function moveItem(itemId: string, direction: -1 | 1) {
-    if (!draftPaper) return
+    if (!draftPaper || !isCurrentDraft()) return
     clearReorderUndo()
     clearReplaceUndo()
     const nextItems = reorderItems(draftPaper.items, itemId, direction)
@@ -883,7 +942,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   }
 
   function handleDrop(targetId: string) {
-    if (!draftPaper || !draggedItemId) return
+    if (!draftPaper || !isCurrentDraft() || !draggedItemId) return
     clearReorderUndo()
     clearReplaceUndo()
     const nextItems = moveItemTo(draftPaper.items, draggedItemId, targetId)
@@ -894,32 +953,36 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   }
 
   async function togglePageBreak(item: DraftPaperItem, nextValue: boolean) {
-    if (!draftPaper) return
+    if (!draftPaper || !isCurrentDraft()) return
     clearReorderUndo()
     clearReplaceUndo()
     setSaveStatus('saving')
     try {
       const next = await patchDraftPaperItem(draftPaper.id, item.id, { pageBreakBefore: nextValue })
+      if (!isCurrentDraft()) return
       setDraftPaper(next)
       setTitleDraft(next.title)
       setSaveStatus('saved')
       onDraftChanged?.()
     } catch (error) {
+      if (!isCurrentDraft()) return
       setSaveStatus('error')
       setSaveError(describeError('更新分页设置', error))
     }
   }
 
   async function deleteItem(item: DraftPaperItem) {
-    if (!draftPaper) return
+    if (!draftPaper || !isCurrentDraft()) return
     clearReorderUndo()
     clearReplaceUndo()
     setSaveStatus('saving')
     try {
       const result = await deleteDraftPaperItem(draftPaper.id, item.id)
+      if (!isCurrentDraft()) return
       setDraftPaper(result.draftPaper)
       setTitleDraft(result.draftPaper.title)
       setRemovedItem({
+        generation: draftGeneration,
         groupId: result.removed.groupId,
         orderIndex: result.removed.orderIndex,
         pageBreakBefore: result.removed.pageBreakBefore,
@@ -929,24 +992,28 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       setSaveStatus('saved')
       onDraftChanged?.()
     } catch (error) {
+      if (!isCurrentDraft()) return
       setSaveStatus('error')
       setSaveError(describeError('删除题组', error))
     }
   }
 
   async function undoDelete() {
-    if (!draftPaper || !removedItem) return
+    if (!draftPaper || !isCurrentDraft() || !removedItem || removedItem.generation !== draftGeneration) return
     clearReorderUndo()
     clearReplaceUndo()
     setSaveStatus('saving')
     try {
-      const next = await restoreDraftPaperItem(draftPaper.id, removedItem)
+      const { groupId, orderIndex, pageBreakBefore } = removedItem
+      const next = await restoreDraftPaperItem(draftPaper.id, { groupId, orderIndex, pageBreakBefore })
+      if (!isCurrentDraft()) return
       setDraftPaper(next)
       setTitleDraft(next.title)
       setRemovedItem(null)
       setSaveStatus('saved')
       onDraftChanged?.()
     } catch (error) {
+      if (!isCurrentDraft()) return
       setSaveStatus('error')
       setSaveError(describeError('撤销删除', error))
     }
@@ -960,7 +1027,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // coming back from that real render is the natural second check (no
   // separate re-verification step needed here).
   async function applyReorderSuggestion() {
-    if (!draftPaper || !reorderSuggestion) return
+    if (!draftPaper || !isCurrentDraft() || !reorderSuggestion) return
     clearReplaceUndo()
     const snapshot = draftPaper.items
     const byId = new Map(draftPaper.items.map((item) => [item.id, item]))
@@ -974,15 +1041,15 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     const coveredIds = new Set(orderedItems.map((item) => item.id))
     const nextItems = [...orderedItems, ...draftPaper.items.filter((item) => !coveredIds.has(item.id))]
     setDraftPaper({ ...draftPaper, items: nextItems })
-    await persistItems(nextItems)
-    setReorderUndoSnapshot(snapshot)
+    if (!await persistItems(nextItems) || !isCurrentDraft()) return
+    setReorderUndoSnapshot({ generation: draftGeneration, items: snapshot })
     if (reorderUndoTimerRef.current) window.clearTimeout(reorderUndoTimerRef.current)
     reorderUndoTimerRef.current = window.setTimeout(() => setReorderUndoSnapshot(null), 8000)
   }
 
   async function undoReorderSuggestion() {
-    if (!draftPaper || !reorderUndoSnapshot) return
-    const snapshot = reorderUndoSnapshot
+    if (!draftPaper || !isCurrentDraft() || !reorderUndoSnapshot || reorderUndoSnapshot.generation !== draftGeneration) return
+    const snapshot = reorderUndoSnapshot.items
     if (reorderUndoTimerRef.current) window.clearTimeout(reorderUndoTimerRef.current)
     reorderUndoTimerRef.current = null
     setReorderUndoSnapshot(null)
@@ -996,13 +1063,15 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // clicking the CURRENT seed's own ⇄ (or the drawer's 返回目录 button,
   // wired to the same handler below) collapses back to the directory.
   function loadSwapCandidates(groupId: string) {
+    if (!isCurrentDraft()) return
     setSwapRequest({ status: 'loading' })
     fetchSimilarPassages(groupId)
-      .then((data) => setSwapRequest({ status: 'ready', data }))
-      .catch((error) => setSwapRequest({ status: 'error', message: describeError('加载相似篇章', error) }))
+      .then((data) => { if (isCurrentDraft()) setSwapRequest({ status: 'ready', data }) })
+      .catch((error) => { if (isCurrentDraft()) setSwapRequest({ status: 'error', message: describeError('加载相似篇章', error) }) })
   }
 
   function handleSwapToggle(item: DraftPaperItem) {
+    if (!isCurrentDraft()) return
     if (swapSeedItemId === item.id) {
       setSwapSeedItemId(null)
       setSwapRequest(null)
@@ -1032,7 +1101,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // addGroupToDraftPaper) — both go through services/draftPapers.ts, never
   // a bespoke bypass fetch (verify anchor: "非旁路 fetch").
   async function applySwapReplace(candidateGroupId: string) {
-    if (!draftPaper || !swapSeedItem) return
+    if (!draftPaper || !isCurrentDraft() || !swapSeedItem) return
     const seedIndex = draftPaper.items.findIndex((entry) => entry.id === swapSeedItem.id)
     if (seedIndex < 0) return
     clearReorderUndo()
@@ -1049,10 +1118,13 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
         insertIndex: seedIndex,
         pageBreakBefore,
       })
+      // Finish both steps against the captured draft even after navigation;
+      // only publishing the response/undo state belongs to the live generation.
       let deleteResult
       try {
         deleteResult = await deleteDraftPaperItem(draftPaper.id, swapSeedItem.id)
       } catch (error) {
+        if (!isCurrentDraft()) return
         // 半截态如实入面：新篇已在种子旁，种子未删——呈现重复而非丢失，
         // 不设撤销快照（状态不是一次完整替换）。
         setDraftPaper(inserted)
@@ -1064,6 +1136,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
         setSwapRequest(null)
         return
       }
+      if (!isCurrentDraft()) return
       setDraftPaper(deleteResult.draftPaper)
       setTitleDraft(deleteResult.draftPaper.title)
       setSaveStatus('saved')
@@ -1076,6 +1149,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           // deleteResult.removed.orderIndex 已被插入推后一位，按它恢复会
           // 错一格——撤销路径先删新篇再复原种子，正确落点是操作前原位。
           removed: {
+            generation: draftGeneration,
             groupId: deleteResult.removed.groupId,
             orderIndex: swapSeedItem.orderIndex,
             pageBreakBefore,
@@ -1092,13 +1166,14 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       setSwapSeedItemId(null)
       setSwapRequest(null)
     } catch (error) {
+      if (!isCurrentDraft()) return
       setSaveStatus('error')
       setSaveError(describeError('替换题组', error))
     }
   }
 
   async function undoSwapReplace() {
-    if (!draftPaper || !replaceUndoSnapshot) return
+    if (!draftPaper || !isCurrentDraft() || !replaceUndoSnapshot || replaceUndoSnapshot.removed.generation !== draftGeneration) return
     const snapshot = replaceUndoSnapshot
     if (replaceUndoTimerRef.current) window.clearTimeout(replaceUndoTimerRef.current)
     replaceUndoTimerRef.current = null
@@ -1107,12 +1182,15 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     setSaveError('')
     try {
       await deleteDraftPaperItem(draftPaper.id, snapshot.addedItemId)
-      const restored = await restoreDraftPaperItem(draftPaper.id, snapshot.removed)
+      const { groupId, orderIndex, pageBreakBefore } = snapshot.removed
+      const restored = await restoreDraftPaperItem(draftPaper.id, { groupId, orderIndex, pageBreakBefore })
+      if (!isCurrentDraft()) return
       setDraftPaper(restored)
       setTitleDraft(restored.title)
       setSaveStatus('saved')
       onDraftChanged?.()
     } catch (error) {
+      if (!isCurrentDraft()) return
       setSaveStatus('error')
       setSaveError(describeError('撤销替换', error))
     }
@@ -1124,7 +1202,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // drawer stays open afterward (unlike 替换 above, the seed item itself is
   // untouched — nothing invalidates the drawer's own anchor).
   async function applySwapAdd(candidateGroupId: string) {
-    if (!draftPaper || !swapSeedItem) return
+    if (!draftPaper || !isCurrentDraft() || !swapSeedItem) return
     const seedIndex = draftPaper.items.findIndex((entry) => entry.id === swapSeedItem.id)
     if (seedIndex < 0) return
     clearReorderUndo()
@@ -1133,6 +1211,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     setSaveError('')
     try {
       const next = await addGroupToDraftPaper(draftPaper.id, candidateGroupId, { insertIndex: seedIndex + 1 })
+      if (!isCurrentDraft()) return
       setDraftPaper(next)
       setTitleDraft(next.title)
       setSaveStatus('saved')
@@ -1141,6 +1220,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       setSwapAddToastMessage('已加入草稿卷')
       swapAddToastTimerRef.current = window.setTimeout(() => setSwapAddToastMessage(null), 2200)
     } catch (error) {
+      if (!isCurrentDraft()) return
       setSaveStatus('error')
       setSaveError(describeError('加入草稿卷', error))
     }
@@ -1437,15 +1517,26 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                     value={draftPaper.id}
                     onChange={(event) => {
                       const id = event.target.value
+                      // In-component switch path (pushState + setDraftPaper,
+                      // loadDraft never re-runs): clear the previous draft's
+                      // undo snapshots so undo can't fire against the new one.
+                      resetTransientStateForDraftSwitch()
+                      const generation = draftGenerationRef.current
                       const url = new URL(window.location.href)
                       url.searchParams.set('view', 'draft-paper')
                       url.searchParams.set('draftPaperId', id)
                       window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}`)
                       setVersionType('student')
                       void fetchDraftPaper(id).then((next) => {
+                        if (generation !== draftGenerationRef.current) return
+                        setDraftGeneration(generation)
                         setDraftPaper(next)
                         setTitleDraft(next.title)
                         setStudentLabelDraft(next.studentLabel || '')
+                      }).catch((error) => {
+                        if (generation !== draftGenerationRef.current) return
+                        setLoadStatus('error')
+                        setLoadError(describeError('打开草稿卷', error))
                       })
                     }}
                   >

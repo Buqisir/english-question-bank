@@ -25,7 +25,8 @@ function assert(name, condition, details = '') {
 console.log('Architecture housekeeping verify')
 
 for (const relPath of [
-  '.github/workflows/verify.yml',
+  'scripts/amp-orb-ci.mjs',
+  'scripts/amp-orb-ci-sandbox.mjs',
   'scripts/verify-ci.mjs',
   'app/package.json',
   'app/src/shared-ui/tokens.css',
@@ -56,49 +57,6 @@ assert(
     serverLock.packages?.['node_modules/playwright-core']?.version === appPackage.devDependencies?.playwright &&
     !serverLock.packages?.['node_modules/@vivliostyle/cli/node_modules/playwright-core'],
 )
-
-for (const relPath of ['.github/workflows/verify.yml']) {
-  const workflow = read(relPath)
-  const triggerBlock = /^on:\n([\s\S]*?)\n\njobs:/mu.exec(workflow)?.[1]?.trim()
-  assert(
-    `${relPath} protects pull requests and main while retaining manual dispatch`,
-    triggerBlock === [
-      'pull_request:',
-      '  push:',
-      '    branches:',
-      '      - main',
-      '  workflow_dispatch:',
-      '  # 02:23 Asia/Shanghai. Independent default-branch backstop, never authority.',
-      '  schedule:',
-      "    - cron: '23 18 * * *'",
-    ].join('\n'),
-    triggerBlock || 'trigger block unavailable',
-  )
-  assert(
-    `${relPath} distinguishes manual and nightly diagnostics from required checks`,
-    workflow.includes("name: ${{ github.event_name == 'schedule' && 'verify (nightly)' || github.event_name == 'workflow_dispatch' && 'verify (manual)' || 'verify' }}") &&
-      workflow.includes("name: ${{ github.event_name == 'schedule' && 'e2e (nightly unused)' || github.event_name == 'workflow_dispatch' && 'e2e (manual)' || 'e2e' }}"),
-  )
-  const verifyJob = workflow.split('\n  verify:\n')[1]?.split('\n  e2e:\n')[0] || ''
-  assert(`${relPath} nightly uses the real unconditional Full job on the event SHA`,
-    verifyJob.includes('run: pnpm run verify:all')
-      && verifyJob.includes('uses: actions/checkout@v4')
-      && !/^\s+(?:if|continue-on-error|ref):/mu.test(verifyJob)
-      && !workflow.includes('concurrency:'))
-  assert(`${relPath} only nightly omits separate E2E; PR/push/manual retain it`,
-    workflow.includes("  e2e:\n    if: github.event_name != 'schedule'"))
-  assert(`${relPath} installs app dependencies`, workflow.includes('pnpm install --frozen-lockfile'))
-  assert(
-    `${relPath} installs server dependencies`,
-    workflow.includes('npm ci') && workflow.includes('server'),
-  )
-  assert(`${relPath} runs verify:all`, workflow.includes('pnpm run verify:all'))
-  assert(
-    `${relPath} installs one full Chromium per job`,
-    (workflow.match(/playwright install --with-deps --no-shell chromium/g) ?? []).length === 2 &&
-      !workflow.includes('playwright-core install'),
-  )
-}
 
 function sourceFiles(relDir) {
   const files = []
@@ -224,7 +182,7 @@ for (const [changedFile, expectedRisk, expectedPack] of [
   ['scripts/lib/tencentTat.mjs', 'auth-persistence-migration', 'security'],
   ['server/api.mjs', 'unknown-fallback', 'all'],
   ['data/sql/schema.sql', 'auth-persistence-migration', 'security'],
-  ['.github/workflows/verify.yml', 'unknown-fallback', 'all'],
+  ['.github/workflows/example.yml', 'unknown-fallback', 'all'],
   ['import-ops/server.mjs', 'ordinary-local-feature', 'feature'],
   ['scripts/import-pipeline/ship-checklist.mjs', 'ordinary-local-feature', 'feature'],
 ]) {

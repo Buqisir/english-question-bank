@@ -4,13 +4,14 @@ import {
   chmodSync,
   existsSync,
   mkdirSync,
+  readFileSync,
   readdirSync,
+  unlinkSync,
   writeFileSync,
 } from 'node:fs'
 import path from 'node:path'
 
 import {
-  AMP_ORB_CI_WAKE_SENTINEL,
   defaultAmpOrbCIStateDir,
   enqueueAmpOrbCIJob,
   repositoryRootFromModule,
@@ -21,9 +22,9 @@ const MAIN_REF = 'refs/heads/main'
 const SHA = /^[a-f0-9]{40}$/u
 const DELIVERY_ID = /^[A-Za-z0-9][A-Za-z0-9-]{0,127}$/u
 const PR_ACTIONS = new Set(['opened', 'ready_for_review', 'reopened', 'synchronize'])
-const CONTROLLER_COMMANDS = new Set(['discover', 'drain'])
+const CONTROLLER_COMMANDS = new Set(['drain'])
 
-export const description = 'Wakes one private CI Orb to discover or durably queue exact GitHub targets.'
+export const description = 'Receives signed GitHub events and durably queues exact CI targets in one private Orb.'
 
 export function validGitHubCISignature(body, signature, secret) {
   if (!secret || !/^sha256=[a-f0-9]{64}$/u.test(signature || '')) return false
@@ -189,16 +190,28 @@ export default async function githubCIWakeupPlugin(amp, overrides = {}) {
   const webhookSecret = String(
     process.env.QUESTION_BANK_AMP_CI_GITHUB_WEBHOOK_SECRET || '',
   )
-  const statusToken = String(
-    process.env.QUESTION_BANK_AMP_CI_GITHUB_STATUS_TOKEN || '',
-  )
-  if (!statusToken) {
-    amp.logger.log('Amp Orb CI is enabled but its private GitHub status setting is missing.')
+  const appId = String(process.env.QUESTION_BANK_AMP_CI_GITHUB_APP_ID || '')
+  const installationId = String(process.env.QUESTION_BANK_AMP_CI_GITHUB_APP_INSTALLATION_ID || '')
+  const privateKey = String(process.env.QUESTION_BANK_AMP_CI_GITHUB_APP_PRIVATE_KEY || '')
+  if (!webhookSecret || !appId || !installationId || !privateKey) {
+    amp.logger.log('Amp Orb CI is enabled but its webhook or GitHub App credentials are missing.')
     return
   }
 
   const repositoryRoot = overrides.repositoryRoot || repositoryRootFromModule(import.meta.url)
   const stateDir = overrides.stateDir || defaultAmpOrbCIStateDir(repositoryRoot)
+  // Trusted host-local, one-load maintenance intent; never supplied by a delivery.
+  const registrationOnlyPath = path.join(stateDir, 'registration-only.once')
+  let registrationOnly = false
+  try {
+    const intent = readFileSync(registrationOnlyPath, 'utf8')
+    if (intent !== 'skip-startup-recovery-once\n') {
+      throw new Error('Invalid Amp Orb CI registration-only intent')
+    }
+    registrationOnly = true
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error
+  }
   const launchController = overrides.launchController || launchGitHubCIDrain
   const launchDrain = overrides.launchDrain || (async (controllerCommand = 'drain') => {
     const keepAlive = await amp.system.executor.keepAlive()
@@ -221,57 +234,52 @@ export default async function githubCIWakeupPlugin(amp, overrides = {}) {
     }
   })
 
-  amp.on('agent.start', async (event, context) => {
-    if (event.message !== AMP_ORB_CI_WAKE_SENTINEL) return
-    try {
-      await launchDrain('discover')
-    } finally {
-      await context.thread.cancel()
-    }
+  const registration = await amp.createWebhook({
+    // Opaque historic identifier retained so the private webhook capability is not rotated.
+    key: 'eqbank-github-ci-shadow-v1',
+    headers: ['x-github-delivery', 'x-github-event', 'x-hub-signature-256'],
+    handler: async (event, context) => {
+      const signature = event.headers['x-hub-signature-256'] || ''
+      if (!validGitHubCISignature(event.body, signature, webhookSecret)) {
+        context.logger.log('Dropped an invalid GitHub CI webhook signature.')
+        return
+      }
+      const payload = parseGitHubCIWebhook(event.body, {
+        deliveryId: event.headers['x-github-delivery'] || '',
+        eventName: event.headers['x-github-event'] || '',
+      })
+      if (!payload) {
+        context.logger.log('Dropped a GitHub event outside the CI allowlist.')
+        return
+      }
+      if (payload.kind === 'ignored') return
+      enqueueAmpOrbCIJob(payload, { stateDir })
+      await launchDrain()
+    },
   })
 
-  if (webhookSecret) {
-    const registration = await amp.createWebhook({
-      key: 'eqbank-github-ci-shadow-v1',
-      headers: ['x-github-delivery', 'x-github-event', 'x-hub-signature-256'],
-      handler: async (event, context) => {
-        const signature = event.headers['x-hub-signature-256'] || ''
-        if (!validGitHubCISignature(event.body, signature, webhookSecret)) {
-          context.logger.log('Dropped an invalid GitHub CI webhook signature.')
-          return
-        }
-        const payload = parseGitHubCIWebhook(event.body, {
-          deliveryId: event.headers['x-github-delivery'] || '',
-          eventName: event.headers['x-github-event'] || '',
-        })
-        if (!payload) {
-          context.logger.log('Dropped a GitHub event outside the CI allowlist.')
-          return
-        }
-        if (payload.kind === 'ignored') return
-        enqueueAmpOrbCIJob(payload, { stateDir })
-        await launchDrain()
-      },
-    })
+  amp.registerCommand(
+    'github-ci-webhook-url',
+    {
+      title: '复制 GitHub CI Webhook URL',
+      category: 'CI Orb',
+      description: '仅在显式调用时显示私有 capability URL，供 GitHub repository webhook 配置。',
+    },
+    async (context) => {
+      await context.ui.input({
+        title: 'GitHub CI Webhook URL',
+        helpText: '这是私有凭据。复制到 GitHub 后关闭，不要写入 Git、日志或聊天。',
+        initialValue: registration.url,
+        submitButtonText: '关闭',
+      })
+    },
+  )
 
-    amp.registerCommand(
-      'github-ci-webhook-url',
-      {
-        title: '复制 GitHub CI Webhook URL',
-        category: 'CI Orb',
-        description: '仅在显式调用时显示私有 capability URL，供 GitHub repository webhook 配置。',
-      },
-      async (context) => {
-        await context.ui.input({
-          title: 'GitHub CI Webhook URL',
-          helpText: '这是私有凭据。复制到 GitHub 后关闭，不要写入 Git、日志或聊天。',
-          initialValue: registration.url,
-          submitButtonText: '关闭',
-        })
-      },
-    )
-  } else {
-    amp.logger.log('Amp Orb CI webhook ingress is disabled; fixed-sentinel wake remains available.')
+  if (registrationOnly) {
+    // Failed registration leaves the intent intact. Failed consumption must not drain.
+    unlinkSync(registrationOnlyPath)
+    amp.logger.log('Amp Orb CI registration-only load completed; startup recovery was skipped once.')
+    return
   }
 
   const queueDir = path.join(stateDir, 'queue')
