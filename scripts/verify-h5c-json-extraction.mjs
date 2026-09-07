@@ -95,7 +95,7 @@ const moduleSource = readText(root, 'server/ai-providers/jsonExtraction.mjs')
 
 const moved = [
   'parseJsonFromString', 'isPlainObject', 'extractBalancedJsonCandidates', 'parseJsonObject',
-  'normalizeVerifyVerdict', 'inferVerifyVerdictFromText', 'getDeepSeekMessageText',
+  'inferVerifyVerdictFromText', 'getDeepSeekMessageText',
   'collectDeepSeekMessageTexts', 'parseLooseVerifyResult', 'extractJsonCandidates',
   'extractVerifyResultFromPayload', 'extractReadingParsePayloadFromPayload',
   'normalizeVerifyResultObject', 'extractFirstJson', 'safeTruncate',
