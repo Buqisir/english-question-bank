@@ -615,6 +615,11 @@ assert.equal(
   'the registered exact rule covers English contractions without broad punctuation normalization',
 )
 assert.equal(
+  canonicalizeVisibleEnglishTypography("couldn't've"),
+  'couldn’t’ve',
+  'the registered exact rule canonicalizes double contractions in a single idempotent pass',
+)
+assert.equal(
   canonicalizeVisibleEnglishTypography('这是（中文）说明。'),
   '这是（中文）说明。',
   'ordinary Chinese prose keeps full-width parentheses byte-for-visible-text',
