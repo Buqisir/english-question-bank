@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { execFileSync, spawnSync } from 'node:child_process'
-import { createHash } from 'node:crypto'
+import { createHash, randomUUID } from 'node:crypto'
 import {
   chmodSync,
   copyFileSync,
@@ -20,13 +20,13 @@ import {
 } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
+import * as fs from 'node:fs'
+import { gunzipSync } from 'node:zlib'
+import { runInNewContext } from 'node:vm'
 
 import {
   AMP_ORB_DEPLOY_AMP_CHECK_NAME,
-  AMP_ORB_DEPLOY_CHECK_APP_ID,
   AMP_ORB_DEPLOY_RECEIPT_SCHEMA_VERSION,
-  AMP_ORB_DEPLOY_WORKFLOW_ID,
-  AMP_ORB_DEPLOY_WORKFLOW_PATH,
   EQB_HOST_CONFIGURATION_PATHS,
   EQB_PERSISTENCE_AUTHORITY_PATHS,
   EQB_STABLE_LAUNCHER_PATHS,
@@ -34,7 +34,6 @@ import {
   activatePreparedRelease,
   assertDeploymentCandidateStillCurrent,
   assertAmpOrbDeploymentCheck,
-  assertAuthoritativeDeploymentChecks,
   bootstrapPayloadStageInput,
   bootstrapReleaseLayout,
   classifyReleaseBootstrapJournal,
@@ -52,11 +51,11 @@ import {
   deploymentLockInvocation,
   deploymentSSHInvocation,
   deploymentSSHTransportUser,
-  isReducedDeploymentRisk,
   isSshPublicKeyAuthenticationDenied,
   materializeDeploymentCredentials,
   migrateLegacyProductionBaseline,
   parseBootstrapKeyRetirementReceipt,
+  parseControlledTransaction,
   parseDeploymentControllerOutput,
   parseDeploymentControllerPreflight,
   parseDeploymentPreflightOutput,
@@ -81,7 +80,6 @@ import {
   requireReviewedPersistenceDeployAuthorization,
   requireUpdateHostConfigurationAuthorization,
   resumeReleaseLayoutBootstrap,
-  resolveDeploymentRisk,
   resolveLatestDeploymentCandidate,
   updateLatestHostConfiguration,
   verifyDeploymentAuthority,
@@ -99,7 +97,10 @@ import {
   PERSISTENCE_AUTHORITY_PATHS,
   STABLE_LAUNCHER_PATHS,
   formatControllerOutput,
+  installControlledEntry,
+  parseControlledCommand,
   parseControllerCommand,
+  runControlledController,
   runController,
 } from '../deploy/eqb-deploy-controller.mjs'
 import {
@@ -110,6 +111,7 @@ import {
 import { createVerifier, readText, repoRootFrom } from './lib/verifyScope.mjs'
 import { verifyDeployBarrier } from './lib/verifyDeployBarrier.mjs'
 import { verifyBarrierBootstrap } from './lib/verifyBarrierBootstrap.mjs'
+import { CONTROLLED_ENTRY_FILES, buildControlledEntryTat, executeControlledEntryTat } from './lib/controlledEntryTat.mjs'
 
 const ROOT = repoRootFrom(import.meta.url)
 const { assert, section, summary } = createVerifier('Amp Orb production deployment contract')
@@ -122,45 +124,6 @@ function fakeTencentResponse(response, { ok = true } = {}) {
     async text() {
       return JSON.stringify({ Response: response })
     },
-  }
-}
-
-function checkRun(name, sha, {
-  id,
-  status = 'completed',
-  conclusion = 'success',
-  app = 'github-actions',
-  appId = AMP_ORB_DEPLOY_CHECK_APP_ID,
-  suiteId = 100,
-  detailsUrl = `https://github.com/Buqisir/english-question-bank/actions/runs/200/job/${id}`,
-} = {}) {
-  return {
-    id,
-    name,
-    head_sha: sha,
-    status,
-    conclusion,
-    details_url: detailsUrl,
-    app: { id: appId, slug: app },
-    check_suite: { id: suiteId },
-  }
-}
-
-function workflowRun(sha, overrides = {}) {
-  return {
-    id: 200,
-    workflow_id: AMP_ORB_DEPLOY_WORKFLOW_ID,
-    path: AMP_ORB_DEPLOY_WORKFLOW_PATH,
-    event: 'push',
-    status: 'completed',
-    conclusion: 'success',
-    head_sha: sha,
-    head_branch: 'main',
-    run_attempt: 1,
-    check_suite_id: 100,
-    repository: { full_name: 'Buqisir/english-question-bank' },
-    head_repository: { full_name: 'Buqisir/english-question-bank' },
-    ...overrides,
   }
 }
 
@@ -183,67 +146,33 @@ function appCheck(sha, {
   }
 }
 
-const hostedOnlyAuthority = deploymentAuthorityFromEnvironment({})
-const shadowAuthority = deploymentAuthorityFromEnvironment({
-  QUESTION_BANK_DEPLOY_CI_AUTHORITY_MODE: 'shadow',
+const appAuthority = deploymentAuthorityFromEnvironment({
   QUESTION_BANK_DEPLOY_AMP_CHECK_APP_ID: '4242',
 })
-const dualAuthority = deploymentAuthorityFromEnvironment({
-  QUESTION_BANK_DEPLOY_CI_AUTHORITY_MODE: 'dual',
-  QUESTION_BANK_DEPLOY_AMP_CHECK_APP_ID: '4242',
+const appVerification = (sha, payload = { check_runs: [appCheck(sha)] }) => verifyDeploymentAuthority({
+  expectedSha: sha,
+  ampAppId: appAuthority.ampAppId,
+  readAmpChecks: async () => payload,
 })
-const ampHostedE2eAuthority = deploymentAuthorityFromEnvironment({
-  QUESTION_BANK_DEPLOY_CI_AUTHORITY_MODE: 'amp+hosted-e2e',
-  QUESTION_BANK_DEPLOY_AMP_CHECK_APP_ID: '4242',
-})
-const ampAuthority = deploymentAuthorityFromEnvironment({
-  QUESTION_BANK_DEPLOY_CI_AUTHORITY_MODE: 'amp',
-  QUESTION_BANK_DEPLOY_AMP_CHECK_APP_ID: '4242',
-})
-
-function hostedVerification(sha, payload = checks(sha), run = workflowRun(sha)) {
-  return verifyDeploymentAuthority({
-    authority: hostedOnlyAuthority,
-    expectedSha: sha,
-    readHostedChecks: async () => payload,
-    readWorkflowRun: async () => run,
-  })
-}
-
-function checks(sha, { verify = {}, e2e = {} } = {}) {
-  return {
-    total_count: 2,
-    check_runs: [
-      { ...checkRun('verify', sha, { id: 1 }), ...verify },
-      { ...checkRun('e2e', sha, { id: 2 }), ...e2e },
-    ],
-  }
-}
-
-function fakeGit({
-  branch = 'main',
-  dirty = '',
-  localSha = newSha,
-  fetchedSha = newSha,
-  mergeError = false,
-} = {}) {
-  let head = localSha
-  return async (args) => {
-    const command = args.join(' ')
-    if (command === 'branch --show-current') return `${branch}\n`
-    if (command === 'status --porcelain') return dirty
-    if (command === 'fetch origin main --quiet') return ''
-    if (command === 'merge --ff-only origin/main') {
-      if (mergeError) throw new Error('Not possible to fast-forward')
-      head = fetchedSha
-      return 'Fast-forward\n'
-    }
-    if (command === 'rev-parse HEAD') return `${head}\n`
-    throw new Error(`Unexpected git invocation: ${command}`)
-  }
-}
 
 section('Owner command and exact authoritative candidate')
+
+const mainEndpoint = 'repos/Buqisir/english-question-bank/git/ref/heads/main'
+assert(
+  JSON.stringify(deploymentGitHubApiArgs(mainEndpoint))
+    === JSON.stringify(['api', '--hostname', 'github.com', mainEndpoint]),
+  'deployment API reads pin the official GitHub host and repository',
+)
+for (const endpoint of [
+  'repos/Buqisir/english-question-bank/actions/runs/1',
+  `repos/Buqisir/english-question-bank/commits/${newSha}/check-runs?filter=all&per_page=100`,
+  'repos/other/repository/git/ref/heads/main',
+  'https://attacker.invalid/main',
+]) {
+  assert((() => {
+    try { deploymentGitHubApiArgs(endpoint); return false } catch { return true }
+  })(), 'legacy Hosted and untrusted GitHub endpoints are rejected')
+}
 
 assert(
   (() => {
@@ -319,50 +248,12 @@ assert(
   })(),
   'bootstrap recovery target cannot be replaced by a caller-supplied SHA',
 )
-
-const candidate = await resolveLatestDeploymentCandidate({
-  runGit: fakeGit(),
-  readMainSha: async () => newSha,
-  readDeploymentVerification: hostedVerification,
-})
-assert(candidate.sha === newSha, 'current clean main resolves automatically')
-assert(
-  candidate.verification.mode === 'hosted-only'
-    && candidate.verification.hosted.provider === 'github-actions'
-    && candidate.verification.hosted.appId === AMP_ORB_DEPLOY_CHECK_APP_ID
-    && candidate.verification.hosted.checks.map(({ name }) => name).join(',') === 'verify,e2e',
-  'exact hosted verify and e2e success is authoritative',
-)
-assert(
-  deploymentGitHubApiArgs(
-    `repos/Buqisir/english-question-bank/commits/${newSha}/check-runs?filter=all&per_page=100`,
-  ).join(' ') === `api --hostname github.com repos/Buqisir/english-question-bank/commits/${newSha}/check-runs?filter=all&per_page=100`,
-  'GitHub API authority is pinned to github.com regardless of GH_HOST',
-)
-assert(
-  deploymentGitHubApiArgs(
-    `repos/Buqisir/english-question-bank/commits/${newSha}/check-runs?check_name=Amp%20Orb%20Verify&filter=all&per_page=100&page=2`,
-  ).join(' ').includes('check_name=Amp%20Orb%20Verify&filter=all&per_page=100&page=2'),
-  'Amp Check reader pins exact name, filter=all, page size, and pagination',
-)
-assert(
-  deploymentGitHubApiArgs(
-    `repos/Buqisir/english-question-bank/commits/${newSha}/check-runs?check_name=Amp%20Orb%20Verify&filter=all&per_page=100&page=100`,
-  ).join(' ').endsWith('page=100'),
-  'Amp Check reader allows every bounded pagination page',
-)
-assert(
-  deploymentGitHubApiArgs(
-    'repos/Buqisir/english-question-bank/actions/runs/200',
-  ).join(' ').endsWith('actions/runs/200'),
-  'hosted workflow identity uses the pinned run endpoint',
-)
-
 const pagedAmpEndpoints = []
 const pagedAmpChecks = await readDeploymentCheckRuns({
   sha: newSha,
   checkName: AMP_ORB_DEPLOY_AMP_CHECK_NAME,
   async readJson(endpoint) {
+    deploymentGitHubApiArgs(endpoint)
     pagedAmpEndpoints.push(endpoint)
     return endpoint.endsWith('&page=2')
       ? { check_runs: [appCheck(newSha, { id: 101 })] }
@@ -447,165 +338,6 @@ assert(
   })(),
   'continuously changing Check evidence fails closed after bounded snapshot retries',
 )
-
-const fastForwarded = await resolveLatestDeploymentCandidate({
-  runGit: fakeGit({ localSha: oldSha }),
-  readMainSha: async () => newSha,
-  readDeploymentVerification: hostedVerification,
-})
-assert(fastForwarded.sha === newSha, 'stale clean main fast-forwards without an Owner-supplied SHA')
-
-for (const [label, options, readMainSha, readDeploymentVerification] of [
-  ['non-main checkout', { branch: 'feature' }, async () => newSha, hostedVerification],
-  ['dirty checkout', { dirty: ' M server/api.mjs\n' }, async () => newSha, hostedVerification],
-  ['diverged checkout', { mergeError: true }, async () => newSha, hostedVerification],
-  ['main changed after fetch', {}, async () => '3'.repeat(40), hostedVerification],
-  [
-    'missing required check',
-    {},
-    async () => newSha,
-    async (sha) => hostedVerification(
-      sha,
-      { total_count: 1, check_runs: [checkRun('verify', sha, { id: 1 })] },
-    ),
-  ],
-  [
-    'pending required check',
-    {},
-    async () => newSha,
-    async (sha) => hostedVerification(
-      sha,
-      checks(sha, { e2e: { status: 'in_progress', conclusion: null } }),
-    ),
-  ],
-]) {
-  let rejected = false
-  try {
-    await resolveLatestDeploymentCandidate({
-      runGit: fakeGit(options),
-      readMainSha,
-      readDeploymentVerification,
-    })
-  } catch {
-    rejected = true
-  }
-  assert(rejected, `${label} fails closed before SSH`)
-}
-
-assert(
-  (() => {
-    try {
-      const wrongSha = checks(newSha)
-      wrongSha.check_runs[0].head_sha = oldSha
-      assertAuthoritativeDeploymentChecks(wrongSha, newSha, { workflowRun: workflowRun(newSha) })
-      return false
-    } catch {
-      return true
-    }
-  })(),
-  'a required check for another SHA cannot authorize deployment',
-)
-assert(
-  (() => {
-    try {
-      assertAuthoritativeDeploymentChecks({
-        total_count: 2,
-        check_runs: [
-          checkRun('verify (manual)', newSha, { id: 1 }),
-          checkRun('e2e (manual)', newSha, { id: 2 }),
-        ],
-      }, newSha, { workflowRun: workflowRun(newSha) })
-      return false
-    } catch {
-      return true
-    }
-  })(),
-  'manual workflow jobs cannot authorize deployment',
-)
-assert(
-  (() => {
-    try {
-      const newerPending = checks(newSha)
-      newerPending.check_runs.push(checkRun('verify', newSha, {
-        id: 3,
-        status: 'in_progress',
-        conclusion: null,
-      }))
-      assertAuthoritativeDeploymentChecks(newerPending, newSha, { workflowRun: workflowRun(newSha) })
-      return false
-    } catch {
-      return true
-    }
-  })(),
-  'an older success cannot override a newer pending required check',
-)
-assert(
-  (() => {
-    try {
-      const wrongSource = checks(newSha)
-      wrongSource.check_runs[0].app = { slug: 'untrusted-check-app' }
-      assertAuthoritativeDeploymentChecks(wrongSource, newSha, { workflowRun: workflowRun(newSha) })
-      return false
-    } catch {
-      return true
-    }
-  })(),
-  'a same-name success from another check source cannot authorize deployment',
-)
-assert(
-  (() => {
-    try {
-      const wrongTarget = checks(newSha)
-      wrongTarget.check_runs[0].details_url = 'https://example.invalid/actions/runs/200/job/1'
-      assertAuthoritativeDeploymentChecks(wrongTarget, newSha, { workflowRun: workflowRun(newSha) })
-      return false
-    } catch {
-      return true
-    }
-  })(),
-  'a GitHub Actions check targeting another repository cannot authorize deployment',
-)
-assert(
-  (() => {
-    try {
-      const mixedRuns = checks(newSha)
-      mixedRuns.check_runs[1].check_suite = { id: 101 }
-      assertAuthoritativeDeploymentChecks(mixedRuns, newSha, { workflowRun: workflowRun(newSha) })
-      return false
-    } catch {
-      return true
-    }
-  })(),
-  'successes from different workflow runs cannot be combined to authorize deployment',
-)
-
-for (const [label, mutateChecks, mutateRun] of [
-  ['wrong hosted numeric App ID', (payload) => { payload.check_runs[0].app.id = 9999 }, null],
-  ['wrong hosted workflow ID', null, (run) => { run.workflow_id = 1 }],
-  ['wrong hosted workflow path', null, (run) => { run.path = '.github/workflows/other.yml' }],
-  ['manual hosted event', null, (run) => { run.event = 'workflow_dispatch' }],
-  ['nightly hosted event', null, (run) => { run.event = 'schedule' }],
-  ['PR hosted event', null, (run) => { run.event = 'pull_request' }],
-  ['unfinished strong workflow', null, (run) => { run.status = 'in_progress' }],
-  ['cancelled strong workflow', null, (run) => { run.conclusion = 'cancelled' }],
-  ['wrong hosted run SHA', null, (run) => { run.head_sha = oldSha }],
-  ['wrong hosted run suite', null, (run) => { run.check_suite_id = 101 }],
-  ['wrong hosted run attempt', null, (run) => { run.run_attempt = 2 }],
-]) {
-  const payload = checks(newSha)
-  const run = workflowRun(newSha)
-  mutateChecks?.(payload)
-  mutateRun?.(run)
-  assert((() => {
-    try {
-      assertAuthoritativeDeploymentChecks(payload, newSha, { workflowRun: run })
-      return false
-    } catch {
-      return true
-    }
-  })(), `${label} fails closed`)
-}
-
 const latestAppSuccess = assertAmpOrbDeploymentCheck({
   check_runs: [
     appCheck(newSha, {
@@ -637,6 +369,17 @@ for (const [label, checkRuns] of [
     ],
   ],
   ['wrong Amp App ID', [appCheck(newSha, { appId: 4343 })]],
+  ...['v5-pr', 'v6-pr', 'v7-pr'].map((version) => [
+    `${version} reduced PR evidence cannot authorize main deployment`,
+    [appCheck(newSha, { externalId: version === 'v5-pr'
+      ? `${version}:292:${newSha}:${oldSha}:${newSha}:11111111-1111-4111-8111-111111111111`
+      : `${version}:292:${newSha}:${oldSha}:${newSha}:${version === 'v6-pr' ? `${newSha}:` : ''}${'a'.repeat(64)}:11111111-1111-4111-8111-111111111111` })],
+  ]),
+  [
+    'latest PR evidence cannot fall back to an older main green',
+    [appCheck(newSha, { id: 10 }), appCheck(newSha, { id: 11,
+      externalId: `v7-pr:292:${newSha}:${oldSha}:${newSha}:${'a'.repeat(64)}:11111111-1111-4111-8111-111111111111` })],
+  ],
   [
     'wrong Amp head SHA',
     [
@@ -683,250 +426,6 @@ for (const [label, checkRuns] of [
     }
   })(), `${label} fails closed`)
 }
-
-const authorityReads = []
-const validAmpPayload = { check_runs: [appCheck(newSha)] }
-const readHostedChecks = async () => {
-  authorityReads.push('hosted-checks')
-  return checks(newSha)
-}
-const readWorkflowRun = async () => {
-  authorityReads.push('hosted-run')
-  return workflowRun(newSha)
-}
-const readAmpChecks = async () => {
-  authorityReads.push('amp-checks')
-  return validAmpPayload
-}
-const hostedOnly = await verifyDeploymentAuthority({
-  authority: hostedOnlyAuthority,
-  expectedSha: newSha,
-  readHostedChecks,
-  readWorkflowRun,
-  async readAmpChecks() { assert(false, 'hosted-only must not read Amp Checks') },
-})
-assert(hostedOnly.hosted && hostedOnly.amp === null, 'hosted-only remains the default authority')
-const shadow = await verifyDeploymentAuthority({
-  authority: shadowAuthority,
-  expectedSha: newSha,
-  readHostedChecks,
-  readWorkflowRun,
-  async readAmpChecks() { return { check_runs: [] } },
-})
-assert(
-  shadow.hosted && shadow.amp?.state === 'shadow-failure',
-  'shadow neither authorizes nor blocks a valid Hosted decision',
-)
-for (const [label, authority] of [
-  ['shadow cannot authorize without Hosted evidence', shadowAuthority],
-  ['dual cannot authorize without Hosted evidence', dualAuthority],
-]) {
-  assert(
-    await (async () => {
-      try {
-        await verifyDeploymentAuthority({
-          authority,
-          expectedSha: newSha,
-          readHostedChecks: async () => ({ check_runs: [] }),
-          readWorkflowRun,
-          readAmpChecks,
-        })
-        return false
-      } catch {
-        return true
-      }
-    })(),
-    label,
-  )
-}
-const dual = await verifyDeploymentAuthority({
-  authority: dualAuthority,
-  expectedSha: newSha,
-  readHostedChecks,
-  readWorkflowRun,
-  readAmpChecks,
-})
-assert(dual.hosted && dual.amp?.state === 'success', 'dual requires valid Hosted and Amp evidence')
-assert(
-  await (async () => {
-    try {
-      await verifyDeploymentAuthority({
-        authority: dualAuthority,
-        expectedSha: newSha,
-        readHostedChecks,
-        readWorkflowRun,
-        async readAmpChecks() { return { check_runs: [] } },
-      })
-      return false
-    } catch {
-      return true
-    }
-  })(),
-  'dual fails when Amp evidence is absent',
-)
-const lowRiskGit = (args) => args[0] === 'rev-list'
-  ? `${newSha} ${oldSha}\n` : 'app/src/shared-ui/tokens.css\0'
-const lowRiskClassifier = () => 'ui-micro'
-const ampHostedE2e = await verifyDeploymentAuthority({
-  authority: ampHostedE2eAuthority,
-  expectedSha: newSha,
-  runGit: lowRiskGit,
-  classifyPaths: lowRiskClassifier,
-  readHostedChecks: async (sha) => sha === oldSha ? checks(oldSha) : {
-    check_runs: [checkRun('e2e', newSha, { id: 2, detailsUrl: 'https://github.com/Buqisir/english-question-bank/actions/runs/201/job/2' })],
-  },
-  readWorkflowRun: async (id) => id === 200 ? workflowRun(oldSha)
-    : workflowRun(newSha, { id: 201, status: 'in_progress', conclusion: null }),
-  readAmpChecks,
-})
-assert(
-  ampHostedE2e.hosted.checks.map(({ name }) => name).join(',') === 'e2e'
-    && ampHostedE2e.amp?.state === 'success',
-  'amp+hosted-e2e requires Amp plus only the Hosted e2e job, not Hosted verify',
-)
-const ampOnly = await verifyDeploymentAuthority({
-  authority: ampAuthority,
-  expectedSha: newSha,
-  runGit: lowRiskGit,
-  classifyPaths: lowRiskClassifier,
-  async readHostedChecks(sha) {
-    assert(sha === oldSha, 'low-risk amp reads Hosted only for the ancestor anchor')
-    return checks(oldSha)
-  },
-  async readWorkflowRun() { return workflowRun(oldSha) },
-  readAmpChecks,
-})
-assert(ampOnly.hosted === null && ampOnly.amp?.state === 'success'
-  && ampOnly.risk.anchorSha === oldSha, 'proven low-risk amp uses only the current App Check')
-
-for (const path of [
-  ...EQB_PERSISTENCE_AUTHORITY_PATHS, ...EQB_HOST_CONFIGURATION_PATHS,
-  '.github/workflows/verify.yml', '.agents/setup', '.agents/ship.md', 'AGENTS.md',
-  '.amp/plugins/github-ci-wakeup.js', 'scripts/verify-ci.mjs', 'scripts/lib/ampOrbCI.mjs',
-  'docs/adr/0025-repo-only-app-check-deployment-authority.md', 'unknown.txt',
-  'app/src/auth/Login.css', 'app/src/api.ts', 'app/src/localStore.ts',
-  'app/public/paper-assets/x/producer.mjs', 'app/src/../server/auth.css',
-]) {
-  assert(!isReducedDeploymentRisk([path], 'ordinary-local-feature'), `${path} cannot reduce Hosted even with a low classifier result`)
-}
-for (const risk of ['unknown-fallback', 'git-diff-fallback', 'mixed-high-risk-fallback',
-  'shared-renderer-contract', 'auth-persistence-migration', 'no-changes', undefined]) {
-  assert(!isReducedDeploymentRisk(['app/src/shared-ui/tokens.css'], risk), `${risk} retains Hosted`)
-}
-assert(isReducedDeploymentRisk(['app/public/paper-assets/x/paper.json'], 'known-shape-paper-data'),
-  'known-shape paper data can reduce Hosted')
-
-for (const mode of [ampAuthority, ampHostedE2eAuthority]) {
-  const result = await verifyDeploymentAuthority({
-    authority: mode, expectedSha: newSha, readHostedChecks, readWorkflowRun, readAmpChecks,
-  })
-  assert(result.effectiveMode === 'dual' && result.hosted.checks.length === 2,
-    `${mode.mode} without risk evidence requires the current Hosted strong gate`)
-  let blocked = false
-  try {
-    await verifyDeploymentAuthority({
-      authority: mode, expectedSha: newSha, readAmpChecks, readWorkflowRun,
-      runGit: lowRiskGit, classifyPaths: () => 'unknown-fallback',
-      readHostedChecks: async () => checks(newSha, { verify: { conclusion: 'cancelled' } }),
-    })
-  } catch { blocked = true }
-  assert(blocked, `${mode.mode} cannot hide cancelled verify on unknown risk`)
-}
-
-for (const status of ['in_progress', 'completed']) {
-  const result = assertAuthoritativeDeploymentChecks(checks(newSha, {
-    verify: { status: 'completed', conclusion: 'cancelled' },
-  }), newSha, {
-    requiredChecks: ['e2e'], workflowRun: workflowRun(newSha, { status, conclusion: 'cancelled' }),
-  })
-  assert(result.checks.length === 1, `e2e-only accepts completed successful job with ${status} cancelled sibling workflow`)
-}
-for (const mutation of ['pending', 'failed', 'skipped', 'nightly', 'dispatch', 'rerun', 'wrong-sha', 'wrong-app']) {
-  const payload = checks(newSha)
-  const run = workflowRun(newSha, { status: 'in_progress', conclusion: null })
-  if (mutation === 'pending') payload.check_runs[1].status = 'in_progress'
-  if (mutation === 'failed') payload.check_runs[1].conclusion = 'failure'
-  if (mutation === 'skipped') payload.check_runs[1].conclusion = 'skipped'
-  if (mutation === 'nightly') run.event = 'schedule'
-  if (mutation === 'dispatch') run.event = 'workflow_dispatch'
-  if (mutation === 'rerun') run.run_attempt = 2
-  if (mutation === 'wrong-sha') run.head_sha = oldSha
-  if (mutation === 'wrong-app') payload.check_runs[1].app.id = 999
-  let blocked = false
-  try { assertAuthoritativeDeploymentChecks(payload, newSha, { requiredChecks: ['e2e'], workflowRun: run }) }
-  catch { blocked = true }
-  assert(blocked, `e2e-only still blocks ${mutation}`)
-}
-
-// Real Git proves per-commit accumulation, including a high-risk add+revert
-// erased from the endpoint diff, without accessing any remote or credentials.
-const riskRepo = mkdtempSync(path.join(tmpdir(), 'eqb-deploy-risk-'))
-try {
-  const git = (args) => execFileSync('git', args, { cwd: riskRepo, encoding: 'utf8' })
-  git(['init', '-q'])
-  git(['config', 'user.name', 'Risk test'])
-  git(['config', 'user.email', 'risk@example.invalid'])
-  git(['config', 'commit.gpgsign', 'false'])
-  const commit = (file, content) => {
-    mkdirSync(path.dirname(path.join(riskRepo, file)), { recursive: true })
-    writeFileSync(path.join(riskRepo, file), content)
-    git(['add', '.'])
-    git(['commit', '-qm', 'risk fixture'])
-    return git(['rev-parse', 'HEAD']).trim()
-  }
-  const anchor = commit('README.md', 'anchor')
-  const classifyPaths = (paths) => JSON.parse(execFileSync(process.execPath, [
-    'scripts/verify-ci.mjs', '--plan-json', ...paths.flatMap((file) => ['--changed-file', file]),
-  ], { encoding: 'utf8' })).risk
-  const hostedAnchor = async (sha) => {
-    if (sha !== anchor) throw new Error('no strong Hosted evidence')
-    return hostedVerification(sha)
-  }
-  commit('app/src/shared-ui/tokens.css', 'a{}')
-  let tip = commit('app/src/shared-ui/tokens.css', 'b{}')
-  let risk = await resolveDeploymentRisk({ expectedSha: tip, runGit: git, classifyPaths, readHostedAuthority: hostedAnchor })
-  assert(risk.reduced && risk.commits.length === 2 && risk.anchorSha === anchor,
-    'two low-risk commits are both classified back to an exact Hosted anchor')
-  const high = commit('server/auth/auth.mjs', '// high')
-  git(['revert', '--no-edit', high])
-  tip = commit('app/src/shared-ui/tokens.css', 'c{}')
-  assert(!git(['diff', '--name-only', anchor, tip]).includes('auth'), 'endpoint diff hides high-risk add+revert')
-  risk = await resolveDeploymentRisk({ expectedSha: tip, runGit: git, classifyPaths, readHostedAuthority: hostedAnchor })
-  assert(!risk.reduced && risk.commits.length === 2, 'accumulated high-risk revert blocks a later low-risk tip')
-  for (const event of ['schedule', 'workflow_dispatch', 'pull_request']) {
-    risk = await resolveDeploymentRisk({ expectedSha: tip, runGit: git, classifyPaths,
-      readHostedAuthority: (sha) => hostedVerification(sha, checks(sha), workflowRun(sha, { event })),
-    })
-    assert(!risk.reduced, `${event} ancestor cannot clear accumulated high risk`)
-  }
-  risk = await resolveDeploymentRisk({ expectedSha: tip, runGit: git, classifyPaths,
-    readHostedAuthority: (sha) => hostedVerification(sha),
-  })
-  assert(risk.reduced && risk.commits.length === 1, 'fresh strong Hosted parent closes the risky interval')
-  for (const [label, runGit, classifier] of [
-    ['missing history', () => { throw new Error('missing object') }, classifyPaths],
-    ['merge', () => `${tip} ${anchor} ${high}`, classifyPaths],
-    ['root/shallow', () => tip, classifyPaths],
-    ['classifier failure', git, () => { throw new Error('classifier unavailable') }],
-    ['truncated paths', (args) => args[0] === 'diff' ? 'app/src/x.css' : `${tip} ${anchor}`, classifyPaths],
-  ]) {
-    risk = await resolveDeploymentRisk({ expectedSha: tip, runGit, classifyPaths: classifier, readHostedAuthority: hostedAnchor })
-    assert(!risk.reduced && risk.reason === 'unproven-risk', `${label} fails closed`)
-  }
-  let reads = 0
-  risk = await resolveDeploymentRisk({ expectedSha: newSha,
-    runGit: (args) => args[0] === 'rev-list' ? `${oldSha === args.at(-1) ? oldSha : newSha} ${oldSha}` : 'app/src/x.css\0',
-    classifyPaths: lowRiskClassifier,
-    readHostedAuthority: () => { reads += 1; throw new Error('no anchor') },
-  })
-  assert(!risk.reduced && reads === 50, 'missing Hosted anchor is bounded and cannot reduce authority')
-  tip = commit('app/public/paper-assets/x/paper.json', '{}')
-  risk = await resolveDeploymentRisk({ expectedSha: tip, runGit: git, classifyPaths, readHostedAuthority: hostedAnchor })
-  assert(!risk.reduced && risk.reason === 'mixed-accumulated-risk',
-    'individually low paper and CSS commits still classify the complete cumulative path union')
-} finally {
-  rmSync(riskRepo, { recursive: true, force: true })
-}
 assert(
   (() => {
     try {
@@ -944,7 +443,7 @@ assert(
     readLocalSha: async () => newSha,
     readLocalStatus: async () => '',
     readMainSha: async () => newSha,
-    readDeploymentVerification: hostedVerification,
+    readDeploymentVerification: appVerification,
     sha: newSha,
   })).sha === newSha,
   'local HEAD, live main, and authority can be rechecked immediately before activation',
@@ -956,7 +455,7 @@ assert(
         readLocalSha: async () => newSha,
         readLocalStatus: async () => '',
         readMainSha: async () => '3'.repeat(40),
-        readDeploymentVerification: hostedVerification,
+        readDeploymentVerification: appVerification,
         sha: newSha,
       })
       return false
@@ -1016,6 +515,51 @@ for (const mutation of ['none', 'main', 'head', 'dirty', 'invalid-main', 'invali
     }
   }
 }
+const appGit = async (args) => {
+  const command = args.join(' ')
+  if (command === 'branch --show-current') return 'main\n'
+  if (command === 'status --porcelain' || command === 'fetch origin main --quiet') return ''
+  if (command === 'merge --ff-only origin/main') return 'Already up to date\n'
+  if (command === 'rev-parse HEAD') return `${newSha}\n`
+  throw new Error(`Unexpected git invocation: ${command}`)
+}
+const appCandidate = await resolveLatestDeploymentCandidate({
+  runGit: appGit,
+  readMainSha: async () => newSha,
+  readDeploymentVerification: appVerification,
+})
+const candidate = appCandidate
+assert(
+  appCandidate.verification.provider === AMP_ORB_DEPLOY_AMP_CHECK_NAME
+    && appCandidate.verification.appId === 4242,
+  'only the configured App Check is deployment authority',
+)
+for (const environment of [
+  {},
+  { QUESTION_BANK_DEPLOY_CI_AUTHORITY_MODE: 'amp' },
+  { QUESTION_BANK_DEPLOY_CI_AUTHORITY_MODE: 'hosted-only', QUESTION_BANK_DEPLOY_AMP_CHECK_APP_ID: '4242' },
+]) {
+  assert((() => {
+    try { deploymentAuthorityFromEnvironment(environment); return false } catch { return true }
+  })(), 'missing App ID and stale legacy authority settings fail closed')
+}
+for (const payload of [
+  { check_runs: [] },
+  { check_runs: [appCheck(newSha, { appId: 4243 })] },
+  { check_runs: [appCheck(newSha, { status: 'in_progress', conclusion: null })] },
+  { check_runs: [appCheck(newSha, { externalId: `v4:${oldSha}:11111111-1111-4111-8111-111111111111` })] },
+]) {
+  assert(await (async () => {
+    try { await appVerification(newSha, payload); return false } catch { return true }
+  })(), 'invalid, pending, untrusted, or wrong-SHA App Check cannot authorize deployment')
+}
+const latestCheck = await appVerification(newSha, {
+  check_runs: [
+    appCheck(newSha, { id: 10, externalId: `v4:${newSha}:old-delivery`, conclusion: 'failure' }),
+    appCheck(newSha, { id: 11 }),
+  ],
+})
+assert(latestCheck.checkRunId === 11, 'newest trusted Check ID controls; no older success fallback exists')
 
 function controllerReceipt({
   targetSha = newSha,
@@ -1068,6 +612,17 @@ assert(
   deploymentOrder.join(',') === `resolve,recheck,controller:${newSha}`,
   'Owner authorization resolves and rechecks exact main before controller invocation',
 )
+
+await deployLatestRelease({
+  argv: ['deploy', '--owner-said-deploy-latest', '--reviewed-code-only-digest', 'a'.repeat(64)],
+  resolveCandidate: async () => candidate,
+  revalidateCandidate: async () => {},
+  async invokeController(sha, classification, digest) {
+    assert(sha === newSha && classification === 'code-only' && digest === 'a'.repeat(64),
+      'CLI carries the explicit reviewed code-only classification to the exact controller target')
+    return controllerReceipt({ targetSha: sha })
+  },
+})
 
 let staleInvoked = false
 assert(
@@ -1342,6 +897,10 @@ const tencentSuccess = await executeTencentTatCommand({
   commandName: 'eqb-maint-readiness-test',
   description: 'Fixture operation description',
   configuration: tencentTatConfiguration,
+  onDispatched: identity => assert(tencentCalls.length === 1
+    && identity.commandId === 'cmd-12345678' && identity.invocationId === 'inv-12345678'
+    && identity.targetDigest === tencentTatTargetDigest(tencentTatConfiguration),
+  'authenticated dispatch identity can be privately saved before polling'),
   now: () => tencentNow,
   sleep: async (milliseconds) => { tencentNow += milliseconds },
   pollIntervalMs: 10,
@@ -1593,6 +1152,16 @@ function reviewedPersistenceOutput({ conclusion = 'success', failureCode = null 
     receiptPath: `/opt/eqb/deployments/receipts/reviewed-persistence-${newSha}.json`,
   })}`
 }
+await deployLatestRelease({
+  argv: ['deploy', '--owner-said-deploy-latest', '--reviewed-migration-digest', persistenceDigest],
+  resolveCandidate: async () => candidate,
+  revalidateCandidate: async () => {},
+  async invokeController(sha, classification, digest) {
+    assert(sha === newSha && classification === 'migrate' && digest === persistenceDigest,
+      'CLI carries reviewed migration classification and digest to the exact controller target')
+    return reviewedPersistenceOutput()
+  },
+})
 assert(
   parseReviewedPersistenceControllerOutput(
     reviewedPersistenceOutput(),
@@ -3580,6 +3149,15 @@ function controllerFixture({
       if (command === '/usr/bin/systemctl' && args[0] === 'is-active') {
         return args.includes('--quiet') ? '' : 'active\n'
       }
+      if (command === '/usr/bin/systemd-run' && args.includes('--property=PrivateNetwork=yes')) {
+        assert(currentSha() !== path.basename(args.find(value => value.startsWith('--property=WorkingDirectory='))),
+          'candidate local health runs before selecting its release pointer')
+        assert(args.includes('--property=ProtectSystem=strict')
+          && args.some(value => value.startsWith('--property=ReadWritePaths=') && value.includes('/.candidate-health-')),
+        'candidate startup writes confined to disposable preparation copies')
+        if (state.failCandidatePreparation) throw new Error('fixture isolated candidate unhealthy')
+        return ''
+      }
       if (command === '/usr/bin/node' && args[0] === '--check') return ''
       if (command === '/usr/bin/systemd-analyze') return ''
       if (command === '/usr/bin/caddy' && args[0] === 'validate') return ''
@@ -3615,7 +3193,7 @@ function controllerFixture({
       }
     },
     snapshotDatabase(source, destination) {
-      if (state.failSnapshotOnce) {
+      if (state.failSnapshotOnce && !destination.includes('/.candidate-health-')) {
         state.failSnapshotOnce = false
         throw new Error('fixture snapshot failure')
       }
@@ -3839,8 +3417,8 @@ const fixedRollbackResult = await runController({
 assert(fixedRollbackResult.exitCode === 1, 'failed candidate remains a terminal deployment failure')
 assert(fixedRollback.currentSha() === oldSha, 'fixed controller restores the previous release after failed health')
 assert(
-  fixedRollback.state.restarts.join(',') === `${newSha},${oldSha}`,
-  'failed health restarts candidate once and restored release once',
+  fixedRollback.state.restarts.join(',') === `${newSha},${oldSha},${oldSha}`,
+  'failed health restarts candidate once, previous app once and independently restores Caddy',
 )
 assert(
   fixedRollbackResult.output.rolledBack && fixedRollbackResult.output.rollbackHealthy,
@@ -3905,7 +3483,252 @@ for (const [fixtureOptions, expectedCode, label] of [
   rmSync(protectedChange.root, { recursive: true, force: true })
 }
 
+for (const mismatch of [null, ...HOST_CONFIGURATION_PATHS, ...STABLE_LAUNCHER_PATHS]) {
+  const equivalent = controllerFixture({ hostConfigurationChange: true, stableLauncherChange: true })
+  const markerPath = path.join(equivalent.root, 'deployments/host-configuration/versions', oldSha, '.eqb-host-configuration.json')
+  const markerBefore = readFileSync(markerPath, 'utf8')
+  const runSystem = equivalent.dependencies.runSystem
+  equivalent.dependencies.runSystem = (command, args, options) => {
+    if (command === '/usr/bin/git' && args.includes('show')) {
+      const [sha, relative] = args.at(-1).split(':')
+      if (sha !== newSha) throw new Error('Unexpected compatibility target')
+      const installed = relative === 'deploy/eqb-deploy-controller' ? equivalent.config.rootWrapperPath
+        : relative === 'deploy/eqb-deploy-transport' ? equivalent.config.transportWrapperPath
+          : path.join(equivalent.root, 'deployments/host-configuration/versions', oldSha, relative)
+      const bytes = readFileSync(installed)
+      return relative === mismatch ? Buffer.concat([bytes, Buffer.from('changed')]) : bytes
+    }
+    return runSystem(command, args, options)
+  }
+  const result = await runController({ originalCommand: `deploy ${newSha}`,
+    config: equivalent.config, dependencies: equivalent.dependencies })
+  assert(result.exitCode === (mismatch ? 1 : 0), `controller identity stays independent; five-blob mismatch=${mismatch}`)
+  assert(readFileSync(markerPath, 'utf8') === markerBefore, 'application deploy never rebinds the installed controller marker')
+  if (mismatch) assert(equivalent.state.buildCalls.length === 0, 'incompatible installed bytes block before build')
+  rmSync(equivalent.root, { recursive: true, force: true })
+}
+
+// Minimal offline chain: real controller/files, fake source/systemd/health.
+// No production credentials, SSH connection or TAT call is involved.
+for (const failEntryProof of [false, true]) {
+const controlledFixture = controllerFixture()
+try {
+  const f = controlledFixture
+  const priorId = randomUUID()
+  const dispatch = path.join(f.root, 'deployments', `barrier-dispatch-${priorId}`)
+  const payload = path.join(f.root, 'entry-payload')
+  mkdirSync(dispatch, { mode: 0o700 })
+  mkdirSync(payload, { mode: 0o700 })
+  const priorFiles = {
+    'payload.json': JSON.stringify({ targetSha: 'e'.repeat(40) }),
+    'readiness.json': JSON.stringify({ previousSha: oldSha, productionSha: oldSha }),
+    'eqb-barrier-bootstrap.mjs': 'retained, never executed',
+    'eqb-deploy-barrier.mjs': 'retained manager, never executed',
+  }
+  const digest = bytes => createHash('sha256').update(bytes).digest('hex')
+  for (const [name, bytes] of Object.entries(priorFiles)) writeFileSync(path.join(dispatch, name), bytes, { mode: 0o600 })
+  const terminalFile = path.join(f.root, 'terminal.json')
+  const terminal = JSON.stringify({ commandId: 'cmd-12345678', invocationId: 'inv-12345678',
+    invocationTaskId: 'invt-12345678', invocationStatus: 'FAILED', taskStatus: 'FAILED', exitCode: 70 })
+  writeFileSync(terminalFile, terminal, { mode: 0o600 })
+  const targetBytes = {}
+  for (const name of [...HOST_CONFIGURATION_PATHS, ...STABLE_LAUNCHER_PATHS]) {
+    targetBytes[name] = name === 'deploy/Caddyfile.release' ? Buffer.from('old caddy\n')
+      : name === 'deploy/eqb-release.service' ? Buffer.from('old service\n')
+        : readFileSync(path.join(ROOT, name))
+    writeFileSync(path.join(payload, path.basename(name)), targetBytes[name])
+  }
+  const originalRun = f.dependencies.runSystem
+  f.dependencies.runSystem = (command, args, options) => {
+    if (command === '/usr/bin/git' && args.includes('show')) return targetBytes[args.at(-1).split(':')[1]]
+    if (command === '/usr/bin/systemctl' && args[0] === 'show') {
+      return 'LoadState=not-found\nActiveState=inactive\nSubState=dead\nMainPID=0\nControlPID=0\nJob=0\n'
+    }
+    if (command === '/usr/bin/systemctl' && ['list-units', 'list-jobs'].includes(args[0])) return ''
+    if (command === '/usr/sbin/runuser' && failEntryProof) throw new Error('fake entry proof failure')
+    if (command === '/usr/bin/env' && failEntryProof) return JSON.stringify({ productionSha: oldSha, eqb: 'active', caddy: 'active' })
+    if (command === '/usr/sbin/runuser') return JSON.stringify({ schemaVersion: 'eqb-deployment-preflight-v2',
+      productionSha: oldSha, eqb: 'active', caddy: 'active', layout: 'release',
+      protocol: 'eqb-controlled-ssh-v1', hostConfigurationSha: newSha })
+    return originalRun(command, args, options)
+  }
+  const plan = { schemaVersion: 'eqb-controlled-entry-plan-v1', transactionId: randomUUID(), targetSha: newSha,
+    productionSha: oldSha, hostConfigurationSha: oldSha, transportUser: 'fixture-transport',
+    priorTransactionId: priorId, priorTerminalFile: terminalFile, priorTerminalDigest: digest(terminal),
+    priorFiles: Object.fromEntries(Object.entries(priorFiles).map(([name, bytes]) => [name, digest(bytes)])) }
+  const installed = await installControlledEntry({ plan, planDigest: digest(JSON.stringify(plan)),
+    payloadDirectory: payload, config: f.config, dependencies: f.dependencies })
+  if (failEntryProof) {
+    assert(installed.exitCode === 70 && installed.output.state === 'failure' && installed.output.receipt.rollbackHealthy === true,
+      'failed entry proof restores and health-checks the prior entry without redeployment')
+    assert(f.currentSha() === oldSha && readFileSync(f.config.rootWrapperPath, 'utf8') === 'stable controller\n'
+      && readFileSync(f.config.transportWrapperPath, 'utf8') === 'stable transport\n', 'entry rollback restores original launcher bytes and application pointer')
+    assert(parseControlledTransaction(formatControllerOutput(installed.output), { transactionId: plan.transactionId }, 70).state === 'failure',
+      'client records entry rollback as failure, never success or retry permission')
+    continue
+  }
+  assert(installed.exitCode === 0 && installed.output.state === 'success', 'controlled SSH entry installation completes offline')
+  assert(parseControlledTransaction(formatControllerOutput(installed.output), { transactionId: plan.transactionId }, installed.exitCode).state === 'success',
+    'entry receipt is accepted by the actual trusted client parser')
+  assert(f.currentSha() === oldSha && f.state.restarts.length === 0, 'entry migration never switches/restarts the application')
+  const preflight = await runControlledController({ originalCommand: 'preflight', config: f.config, dependencies: f.dependencies })
+  assert(preflight.output.protocol === 'eqb-controlled-ssh-v1' && preflight.output.hostConfigurationSha === newSha,
+    'controlled preflight separates controller identity from application identity')
+  const id = randomUUID()
+  const request = `deploy ${id} ${newSha}`
+  assert(parseControlledCommand(request).transactionId === id, 'controlled parser binds the deployment UUID')
+  const deployed = await runControlledController({ originalCommand: request, config: f.config, dependencies: f.dependencies })
+  assert(deployed.exitCode === 0 && f.currentSha() === newSha, 'controlled entry invokes the existing isolated release/health engine')
+  const status = await runControlledController({ originalCommand: `status ${id}`, config: f.config, dependencies: f.dependencies })
+  assert(JSON.stringify(status.output) === JSON.stringify(deployed.output), 'readonly status returns the durable exact transaction receipt')
+  const wire = formatControllerOutput(status.output).replaceAll(f.root, '/opt/eqb')
+  assert(parseControlledTransaction(wire, { transactionId: id, command: 'deploy', sha: newSha, digest: null }, 0).state === 'success',
+    'deployment receipt crosses the actual client binding parser')
+  for (const [output, code] of [[`pollution\n${wire}`, 0], [wire, 70]]) {
+    let rejected = false
+    try { parseControlledTransaction(output, { transactionId: id }, code) } catch { rejected = true }
+    assert(rejected, 'pollution or conflicting exit cannot turn into successful deployment')
+  }
+  let replayDenied = false
+  try { await runControlledController({ originalCommand: request, config: f.config, dependencies: f.dependencies }) }
+  catch { replayDenied = true }
+  assert(replayDenied && f.state.restarts.length === 1, 'duplicate UUID never reactivates or automatically recovers')
+  const active = path.join(f.root, 'deployments/controlled-ssh/active.json')
+  const unsafeId = randomUUID()
+  const sourceCallsBeforeUnsafe = f.state.sourceCalls.length
+  let unsafeDenied = false
+  chmodSync(f.root, 0o777)
+  try { await runControlledController({ originalCommand: `deploy ${unsafeId} ${newSha}`, config: f.config, dependencies: f.dependencies }) }
+  catch { unsafeDenied = true }
+  finally { chmodSync(f.root, 0o700) }
+  assert(unsafeDenied && !existsSync(active)
+    && !existsSync(path.join(f.root, 'deployments/controlled-ssh', `${unsafeId}.json`))
+    && f.state.sourceCalls.length === sourceCallsBeforeUnsafe, 'unsafe layout is rejected before admission or source fetch')
+  const nextSha = 'c'.repeat(40)
+  f.state.mainSha = nextSha
+  let fetched = false
+  let drift = false
+  const sourceRun = f.dependencies.runSource
+  f.dependencies.runSource = (command, args, options) => {
+    if (args.includes('fetch')) fetched = true
+    return sourceRun(command, args, options)
+  }
+  const installedRun = f.dependencies.runSystem
+  f.dependencies.runSystem = (command, args, options) => {
+    if (command === '/usr/bin/git' && args.includes('show') && args.at(-1).startsWith(`${nextSha}:`)) {
+      if (!fetched) throw new Error('target object is not fetched')
+      const bytes = targetBytes[args.at(-1).split(':')[1]]
+      return drift ? Buffer.concat([bytes, Buffer.from('drift')]) : bytes
+    }
+    return installedRun(command, args, options)
+  }
+  const next = await runControlledController({ originalCommand: `deploy ${randomUUID()} ${nextSha}`, config: f.config, dependencies: f.dependencies })
+  assert(fetched && next.exitCode === 0 && f.currentSha() === nextSha, 'cold app-only target is fetched before five-blob comparison and deploys in one command')
+  drift = true
+  const buildsBeforeDrift = f.state.buildCalls.length
+  let driftDenied = false
+  try { await runControlledController({ originalCommand: `deploy ${randomUUID()} ${nextSha}`, config: f.config, dependencies: f.dependencies }) }
+  catch { driftDenied = true }
+  assert(driftDenied && f.state.buildCalls.length === buildsBeforeDrift && !existsSync(active), 'fetched control-blob drift still rejects before build/admission')
+  writeFileSync(active, JSON.stringify({ ...status.output, state: 'unknown', failureCode: 'OPERATION_UNKNOWN' }), { mode: 0o600 })
+  const interrupted = await runControlledController({ originalCommand: `status ${id}`, config: f.config, dependencies: f.dependencies })
+  assert(interrupted.exitCode === 70 && interrupted.output.state === 'unknown' && interrupted.output.retryAllowed === false,
+    'interrupted admission remains unknown even with a previously written engine receipt')
+  let blocked = false
+  try { await runControlledController({ originalCommand: `deploy ${randomUUID()} ${newSha}`, config: f.config, dependencies: f.dependencies }) }
+  catch { blocked = true }
+  assert(blocked && f.state.restarts.length === 2, 'persistent maintenance blocks a different UUID without recovery or activation')
+  for (const [name, bytes] of Object.entries(priorFiles)) {
+    assert(readFileSync(path.join(dispatch, name), 'utf8') === bytes, 'old UNKNOWN staging evidence is retained byte-identically')
+  }
+} finally { rmSync(controlledFixture.root, { recursive: true, force: true }) }
+}
+
 const reviewedDigest = deploymentChangedPathDigest(['server/api.mjs'])
+const rejectedMigrationCandidate = controllerFixture({ persistenceAuthorityChange: true })
+rejectedMigrationCandidate.state.failCandidatePreparation = true
+const rejectedMigration = await runController({
+  originalCommand: `deploy ${newSha} migrate ${reviewedDigest}`,
+  config: rejectedMigrationCandidate.config, dependencies: rejectedMigrationCandidate.dependencies,
+})
+assert(rejectedMigration.exitCode === 1 && rejectedMigrationCandidate.currentSha() === oldSha
+  && rejectedMigrationCandidate.state.runtimeEnsures === undefined
+  && rejectedMigrationCandidate.state.restarts.length === 0
+  && !rejectedMigrationCandidate.state.systemCalls.some(call => call[0] === '/usr/bin/systemctl' && call[1] === 'stop'),
+  'migration classification also rejects unhealthy preparation before stopping traffic or live mutation')
+rmSync(rejectedMigrationCandidate.root, { recursive: true, force: true })
+
+for (const failPreparation of [false, true]) {
+  const fixture = controllerFixture({ persistenceAuthorityChange: true })
+  fixture.state.failCandidatePreparation = failPreparation
+  const result = await runController({
+    originalCommand: `deploy ${newSha} code-only ${reviewedDigest}`,
+    config: fixture.config, dependencies: fixture.dependencies,
+  })
+  assert(result.exitCode === (failPreparation ? 1 : 0)
+    && fixture.currentSha() === (failPreparation ? oldSha : newSha)
+    && fixture.state.runtimeEnsures === undefined
+    && !fixture.state.systemCalls.some(call => call[0] === '/usr/bin/systemctl' && call[1] === 'stop')
+    && (!failPreparation || fixture.state.restarts.length === 0),
+  'reviewed code-only classification uses isolated preparation without stopping live services or running migration')
+  assert(!existsSync(path.join(fixture.root, 'deployments/reviewed-persistence/active.json')),
+    'code-only release creates no persistence admission')
+  rmSync(fixture.root, { recursive: true, force: true })
+}
+const wrongCodeOnly = controllerFixture({ persistenceAuthorityChange: true })
+const wrongCodeOnlyResult = await runController({
+  originalCommand: `deploy ${newSha} code-only ${'f'.repeat(64)}`,
+  config: wrongCodeOnly.config, dependencies: wrongCodeOnly.dependencies,
+})
+assert(wrongCodeOnlyResult.output.failureCode === 'CODE_ONLY_REVIEW_MISMATCH'
+  && wrongCodeOnly.state.buildCalls.length === 0 && wrongCodeOnly.state.restarts.length === 0,
+  'code-only review mismatch fails before build or service changes')
+rmSync(wrongCodeOnly.root, { recursive: true, force: true })
+
+const repeatedStopFailure = controllerFixture({ persistenceAuthorityChange: true })
+const originalStopRunner = repeatedStopFailure.dependencies.runSystem
+repeatedStopFailure.dependencies.runSystem = (command, args, options) => {
+  if (command === '/usr/bin/systemctl' && args[0] === 'stop' && args[1] === 'eqb') {
+    repeatedStopFailure.state.systemCalls.push([command, ...args])
+    throw new Error('fixture systemctl stop timed out')
+  }
+  return originalStopRunner(command, args, options)
+}
+const repeatedStopResult = await runController({
+  originalCommand: `deploy-reviewed-persistence ${newSha} ${reviewedDigest}`,
+  config: repeatedStopFailure.config,
+  dependencies: repeatedStopFailure.dependencies,
+})
+assert(repeatedStopFailure.currentSha() === oldSha
+  && repeatedStopFailure.state.systemCalls.some(call => call[1] === 'start' && call[2] === 'eqb')
+  && repeatedStopFailure.state.systemCalls.some(call => call[1] === 'start' && call[2] === 'caddy')
+  && repeatedStopResult.output.rollbackHealthy === true
+  && repeatedStopResult.output.failureCode === 'STOP_APP_FAILED',
+'incident regression: repeated stop failure cannot skip restoring previous app and Caddy')
+rmSync(repeatedStopFailure.root, { recursive: true, force: true })
+
+const beforeEnsureFailure = controllerFixture({ persistenceAuthorityChange: true })
+const originalSnapshot = beforeEnsureFailure.dependencies.snapshotDatabase
+beforeEnsureFailure.dependencies.snapshotDatabase = (source, destination) => {
+  originalSnapshot(source, destination)
+  if (!destination.includes('/.candidate-health-') && destination.endsWith('/import-ops.sqlite')) {
+    const marker = path.join(beforeEnsureFailure.root, 'releases', newSha, '.eqb-release.json')
+    chmodSync(marker, 0o600)
+    writeFileSync(marker, '{}')
+  }
+}
+const beforeEnsureResult = await runController({
+  originalCommand: `deploy ${newSha} migrate ${reviewedDigest}`,
+  config: beforeEnsureFailure.config, dependencies: beforeEnsureFailure.dependencies,
+})
+assert(beforeEnsureResult.exitCode === 1 && beforeEnsureResult.output.rollbackHealthy === true
+  && Object.keys(beforeEnsureResult.output.databaseSnapshots).length === 3
+  && beforeEnsureResult.output.databasesRestored === false
+  && beforeEnsureFailure.state.runtimeEnsures === undefined
+  && beforeEnsureFailure.state.systemCalls.filter(call => call[0] === '/usr/bin/systemctl' && call[1] === 'stop').length === 2,
+  'complete backup without live persistence does not repeat stops or restore databases before recovering old services')
+rmSync(beforeEnsureFailure.root, { recursive: true, force: true })
+
 const reviewedSuccess = controllerFixture({ persistenceAuthorityChange: true })
 const reviewedSuccessResult = await runController({
   originalCommand: `deploy-reviewed-persistence ${newSha} ${reviewedDigest}`,
@@ -4996,11 +4819,11 @@ assert(
     && transportWrapper.includes(
       'exec /usr/bin/sudo -n /usr/local/libexec/eqb-deploy-controller-v1 -- deploy "$sha"',
     )
-    && transportWrapper.includes("command_name=deploy-reviewed-persistence")
-    && transportWrapper.includes("command_name=update-host-config")
+    && transportWrapper.includes('case "$classification" in code-only|migrate)')
+    && !transportWrapper.includes('command_name=deploy-reviewed-persistence')
     && transportWrapper.includes('[ "${#digest}" -eq 64 ] || exit 64')
     && controllerWrapper.includes('/opt/eqb/deployments/host-configuration/current/deploy/eqb-deploy-controller.mjs')
-    && controllerWrapper.includes('/opt/eqb/deployments/host-configuration-update/recovery-controller.mjs'),
+    && !controllerWrapper.includes('/opt/eqb/deployments/host-configuration-update/recovery-controller.mjs'),
   'forced transport and stable root wrappers accept only bounded versioned maintenance commands',
 )
 assert(
@@ -5058,7 +4881,7 @@ try {
   assert(
     linkedEntrypoint.status === 1
       && linkedEntrypoint.stdout === ''
-      && linkedEntrypoint.stderr.startsWith('EQB deployment controller failed closed: '),
+      && linkedEntrypoint.stderr.startsWith('EQB deployment controller failed closed; '),
     'versioned controller enters its fail-closed entrypoint when invoked through the active symlink',
   )
 
@@ -5081,6 +4904,8 @@ exec "$@"
     .replaceAll('/usr/bin/journalctl', fakeJournalctl)
     .replaceAll('/usr/bin/node', process.execPath)
     .replaceAll('/opt/eqb/deployments/deploy.lock', lockPath)
+    .replaceAll('"/opt/eqb/deployments"', JSON.stringify(installerLockFixtureRoot))
+    .replaceAll('/opt/eqb/deployments/root-dispatch-barrier.json', path.join(installerLockFixtureRoot, 'absent-barrier.json'))
     .replaceAll(
       '/opt/eqb/deployments/host-configuration/current/deploy/eqb-deploy-controller.mjs',
       fakeControllerModule,
@@ -5121,10 +4946,11 @@ exec "$@"
     process.execPath, '--no-addons', fakeControllerModule,
   ])
   assert(
-    legacyReentry.status === 75
+    legacyReentry.status === 0
+      && legacyReentry.stdout === preflightOutput
       && lockOwnerPreflight.status === 0
       && lockOwnerPreflight.stdout === preflightOutput,
-    'legacy installer forced-route re-entry self-locks with 75 while lock-owner preflight completes',
+    'controlled readonly forced route and module preflight both work while maintenance owns the lock',
   )
   const unlockedForcedPreflight = spawnSync('/usr/bin/env', [
     '-i',
@@ -5153,7 +4979,7 @@ transport=$1
 entered=$2
 release=$3
 fixture=$4
-/usr/bin/env -i SSH_ORIGINAL_COMMAND=preflight PATH=/usr/local/bin:/usr/bin:/bin \
+/usr/bin/env -i 'SSH_ORIGINAL_COMMAND=deploy ${newSha}' PATH=/usr/local/bin:/usr/bin:/bin \
   "$transport" >"$fixture/first.stdout" 2>"$fixture/first.stderr" &
 first_pid=$!
 for ((attempt=0; attempt<500; attempt+=1)); do
@@ -5166,7 +4992,7 @@ if [[ ! -e $entered ]]; then
   exit 98
 fi
 /usr/bin/timeout --signal=TERM 2s /usr/bin/env -i \
-  SSH_ORIGINAL_COMMAND=preflight PATH=/usr/local/bin:/usr/bin:/bin \
+  'SSH_ORIGINAL_COMMAND=deploy ${newSha}' PATH=/usr/local/bin:/usr/bin:/bin \
   "$transport" >"$fixture/second.stdout" 2>"$fixture/second.stderr"
 second_status=$?
 : > "$release"
@@ -5553,176 +5379,6 @@ assert(!caddy.includes('/opt/eqb/english-question-bank/app/dist'), 'Caddy no lon
 
 section('Production activation is Owner-authorized and bounded')
 
-const cli = readText(ROOT, 'scripts/amp-orb-deploy.mjs')
-const bootstrapCli = cli.slice(
-  cli.indexOf('function stageReleaseBootstrapPayload'),
-  cli.indexOf('function readNewControllerPreflight'),
-)
-const bootstrapEntry = cli.slice(
-  cli.indexOf('async function bootstrap()'),
-  cli.indexOf('async function bootstrapResume()'),
-)
-const bootstrapInspectEntry = cli.slice(
-  cli.indexOf('async function bootstrapInspect()'),
-  cli.indexOf('async function bootstrapAbandon()'),
-)
-const maintenanceReadinessEntry = cli.slice(
-  cli.indexOf('function readMaintenancePayloadDigest('),
-  cli.indexOf('async function bootstrapPreflight()'),
-)
-const bootstrapAbandonEntry = cli.slice(
-  cli.indexOf('async function bootstrapAbandon()'),
-  cli.indexOf('async function deploy()'),
-)
-const deploymentRunbook = readText(ROOT, 'docs/cuts/launch-deploy/runbook.md')
-const flatDeploymentRunbook = deploymentRunbook.replaceAll('\n', ' ')
-assert(cli.includes("process.argv[2] === 'plan'"), 'CLI exposes a no-mutation deployment plan')
-assert(cli.includes("process.argv[2] === 'preflight'"), 'CLI exposes an Owner-authorized read-only preflight')
-assert(
-  cli.includes("process.argv[2] === 'maintenance-install-readiness'"),
-  'CLI exposes separately authorized Tencent maintenance-install readiness',
-)
-assert(
-  maintenanceReadinessEntry.includes("'archive',")
-    && maintenanceReadinessEntry.includes("'--format=tar',")
-    && maintenanceReadinessEntry.includes("spawnSync('git', ['show', `${sha}:${relativePath}`]")
-    && maintenanceReadinessEntry.includes('readTencentTatConfiguration()')
-    && maintenanceReadinessEntry.includes('assertCandidateStillAuthoritative(resolved)')
-    && maintenanceReadinessEntry.indexOf('assertCandidateStillAuthoritative(resolved)')
-      < maintenanceReadinessEntry.indexOf('executeTencentTatCommand({')
-    && maintenanceReadinessEntry.includes('parseMaintenanceInstallReadiness(')
-    && maintenanceReadinessEntry.includes('productionMutationAllowed: false'),
-  'Tencent readiness binds exact-main bytes and rechecks main before its one read-only TAT dispatch',
-)
-assert(cli.includes("process.argv[2] === 'baseline'"), 'CLI exposes the protected legacy baseline command')
-assert(cli.includes("process.argv[2] === 'bootstrap'"), 'CLI exposes the one-time release-layout bootstrap')
-assert(cli.includes("process.argv[2] === 'bootstrap-inspect'"), 'CLI exposes read-only bootstrap recovery inspection')
-assert(cli.includes("process.argv[2] === 'bootstrap-resume'"), 'CLI exposes explicit bootstrap finalization recovery')
-assert(cli.includes("process.argv[2] === 'bootstrap-abandon'"), 'CLI exposes proven failed recovery abandonment')
-assert(cli.includes("process.argv[2] === 'deploy'"), 'CLI exposes the Owner-authorized deploy-latest command')
-assert(cli.includes('productionMutationAllowed: false'), 'plan and preflight declare no production mutation authority')
-assert(cli.includes('productionMutationAllowed: true'), 'successful deployment output declares production mutation')
-assert(cli.includes("invokeController(['deploy', sha]"), 'SSH sends only the exact SHA to the fixed controller')
-assert(!cli.includes("remoteArgs: ['bash', '-s']"), 'production activation never streams candidate shell code')
-assert(!cli.includes('StrictHostKeyChecking=no'), 'CLI contains no SSH trust bypass')
-assert(
-  cli.includes(
-    'head="$(/usr/bin/sudo -n /usr/sbin/runuser -u eqb -- /usr/bin/git -C "$repo" rev-parse HEAD)"',
-  )
-    && cli.includes(
-      'status --porcelain --untracked-files=no | /usr/bin/wc -l',
-    )
-    && cli.includes('strict_health=invalid')
-    && cli.includes('strict_health=ok')
-    && cli.includes('strictHealth=%s'),
-  'legacy preflight proves tracked checkout state and strict health through the production boundary',
-)
-assert(
-  cli.includes("input: readFileSync(legacyBaselineSource, 'utf8')")
-    && cli.includes('/var/lock/eqb-legacy-baseline.lock')
-    && cli.includes("'/usr/bin/node',")
-    && cli.includes("'--input-type=module',"),
-  'baseline streams the exact tracked operator under a non-blocking host lock',
-)
-assert(
-  bootstrapCli.includes('input: bootstrapPayloadStageInput(bootstrapSource, bootstrapDigest)')
-    && bootstrapCli.includes('/var/backups/eqb/bootstrap-payload-')
-    && bootstrapCli.includes('/var/lock/eqb-release-bootstrap.lock')
-    && bootstrapCli.includes('EQB_DEPLOY_BOOTSTRAP_UNIT=${identity.unit}')
-    && bootstrapCli.includes('/usr/bin/systemd-run')
-    && bootstrapCli.includes('--property=StandardInput=null')
-    && bootstrapCli.includes('--property=StandardOutput=journal')
-    && !bootstrapCli.includes("'--pipe'")
-    && bootstrapCli.includes('/usr/bin/journalctl')
-    && bootstrapCli.includes("remoteArgs: ['sudo', '-n', '/usr/bin/journalctl', '--sync']")
-    && bootstrapCli.includes('const journalOutput = await readBootstrapJournal(identity)')
-    && bootstrapCli.includes('classifyReleaseBootstrapOutcome(journalOutput, candidate.sha, remote.status)'),
-  'bootstrap hash-stages the tracked script and runs it under a disconnect-safe host service and lock',
-)
-assert(
-  bootstrapEntry.indexOf('stageReleaseBootstrapPayload(resolved)')
-    < bootstrapEntry.indexOf('createControllerIdentityRecovery({')
-    && bootstrapEntry.indexOf('createControllerIdentityRecovery({')
-      < bootstrapEntry.indexOf('bootstrapAttempted = true')
-    && bootstrapEntry.indexOf('bootstrapAttempted = true')
-      < bootstrapEntry.indexOf('invokeReleaseBootstrap({'),
-  'inert payload staging precedes durable recovery, which precedes the host bootstrap attempt',
-)
-assert(
-  cli.includes("input: readFileSync(bootstrapKeyRetirementSource, 'utf8')")
-    && cli.includes('EQB_DEPLOY_BOOTSTRAP_PUBLIC_KEY_BODY=')
-    && cli.includes('classifyPrivilegedBootstrapIdentity')
-    && cli.includes("remoteArgs: ['/bin/true']")
-    && cli.includes('isSshPublicKeyAuthenticationDenied(remote)'),
-  'bootstrap retires the exact old identity and distinguishes auth rejection from transport failure',
-)
-assert(
-  cli.includes("'.local', 'state', 'eqb-deployment'")
-    && cli.includes('createControllerIdentityRecovery')
-    && cli.includes('readReleaseBootstrapRecovery')
-    && cli.includes('readCompletedReleaseBootstrapRecovery')
-    && cli.includes('hostBootstrapRepeated: false'),
-  'bootstrap resumes finalization without repeating host bootstrap and retains crash-safe terminal evidence',
-)
-assert(
-  bootstrapInspectEntry.includes('await readBootstrapJournal(identity)')
-    && bootstrapInspectEntry.includes('await classifyControllerIdentity(identity)')
-    && bootstrapInspectEntry.includes('await classifyPrivilegedBootstrapIdentity(identity)'),
-  'bootstrap inspection resolves journal and identity probes before reporting their values',
-)
-assert(
-  cli.includes('classifyControllerIdentity(identity)')
-    && cli.includes("!['failure', 'unknown'].includes(journal.state)")
-    && cli.includes('cancelReleaseBootstrapAttempt(identity)')
-    && cli.includes("input: readFileSync(bootstrapCancellationSource, 'utf8')")
-    && bootstrapAbandonEntry.includes(
-      "await classifyPrivilegedBootstrapIdentity(identity) !== 'active'",
-    )
-    && cli.includes('abandonReleaseBootstrapRecovery(recovery, {'),
-  'abandonment cancels queued dispatch under the host lock before both SSH identity classifications',
-)
-assert(
-  bootstrapAbandonEntry.includes('await readBootstrapJournal(identity)')
-    && bootstrapAbandonEntry.includes('await cancelReleaseBootstrapAttempt(identity)')
-    && bootstrapAbandonEntry.includes('await classifyControllerIdentity(identity)')
-    && bootstrapAbandonEntry.includes('await classifyPrivilegedBootstrapIdentity(identity)')
-    && bootstrapAbandonEntry.indexOf('cancelReleaseBootstrapAttempt(identity)')
-      < bootstrapAbandonEntry.indexOf('classifyControllerIdentity(identity)')
-    && bootstrapAbandonEntry.indexOf('cancelReleaseBootstrapAttempt(identity)')
-      < bootstrapAbandonEntry.indexOf('readLegacyPreflight('),
-  'host cancellation resolves before abandonment state proofs and local cleanup',
-)
-assert(
-  !bootstrapInspectEntry.includes('readCommitChecks')
-    && !bootstrapAbandonEntry.includes('readCommitChecks')
-    && bootstrapAbandonEntry.includes("legacy.strictHealth !== 'ok'"),
-  'recovery inspection and proven healthy S1 cleanup remain usable during a GitHub outage',
-)
-assert(
-  cli.includes("'--data-file', '-'")
-    && cli.includes('input: readFileSync(identity.privateKeyPath')
-    && cli.includes('projectId = String(process.env.AMP_PROJECT_ID')
-    && cli.includes('environmentRefreshRequired: true'),
-  'verified controller key rotates only the current Deployment project secret through stdin',
-)
-assert(
-  flatDeploymentRunbook.includes('after one successful receipt it is consumed and must not be rerun')
-    && flatDeploymentRunbook.includes('Do not run `amp orb restart-processes` while bootstrap finalization is pending')
-    && deploymentRunbook.indexOf('verify the new\n   forced-controller route, rotate only')
-      < deploymentRunbook.indexOf('atomically retire the exact old privileged key'),
-  'runbook preserves consumed baseline, rotate-before-retire, and no-early-refresh ordering',
-)
-assert(
-  deploymentRunbook.includes('TENCENTCLOUD_SECRET_ID')
-    && deploymentRunbook.includes('TENCENTCLOUD_SECRET_KEY')
-    && deploymentRunbook.includes('TENCENTCLOUD_SESSION_TOKEN')
-    && deploymentRunbook.includes('TENCENTCLOUD_REGION')
-    && deploymentRunbook.includes('QUESTION_BANK_TENCENT_TAT_INSTANCE_ID')
-    && /RunCommand` has no idempotency\s+token/u.test(deploymentRunbook)
-    && deploymentRunbook.includes('--owner-said-maintenance-install-readiness'),
-  'runbook names the complete pinned TAT target, credential, authorization, and no-retry contract',
-)
-
 const unauthorizedPreflight = spawnSync(
   process.execPath,
   [path.join(ROOT, 'scripts', 'amp-orb-deploy.mjs'), 'preflight'],
@@ -5746,8 +5402,8 @@ for (const [command, authorization, label] of [
   )
   assert(unauthorized.status === 1, `${label} without current Owner authorization is rejected`)
   assert(
-    unauthorized.stderr.includes('Current Owner authorization'),
-    `unauthorized ${label} stops before credentials, SSH, or production work`,
+    unauthorized.stderr.includes('Retired control-plane command'),
+    `retired ${label} stops before credentials, SSH, or production work`,
   )
   const suppliedSha = spawnSync(
     process.execPath,
@@ -5755,7 +5411,7 @@ for (const [command, authorization, label] of [
     { cwd: ROOT, encoding: 'utf8' },
   )
   assert(
-    suppliedSha.status === 1 && suppliedSha.stderr.includes('do not supply --sha'),
+    suppliedSha.status === 1 && suppliedSha.stderr.includes('Retired control-plane command'),
     `${label} CLI rejects a caller-supplied SHA before production work`,
   )
 }
@@ -5766,7 +5422,7 @@ const unauthorizedBootstrapInspect = spawnSync(
 )
 assert(
   unauthorizedBootstrapInspect.status === 1
-    && unauthorizedBootstrapInspect.stderr.includes('Current Owner authorization'),
+    && unauthorizedBootstrapInspect.stderr.includes('Retired control-plane command'),
   'bootstrap inspection without current read-only authorization stops before recovery or SSH work',
 )
 const suppliedInspectSha = spawnSync(
@@ -5781,13 +5437,13 @@ const suppliedInspectSha = spawnSync(
   { cwd: ROOT, encoding: 'utf8' },
 )
 assert(
-  suppliedInspectSha.status === 1 && suppliedInspectSha.stderr.includes('do not supply --sha'),
+  suppliedInspectSha.status === 1 && suppliedInspectSha.stderr.includes('Retired control-plane command'),
   'bootstrap inspection rejects a caller-supplied target before recovery or SSH work',
 )
 for (const command of ['root-barrier-readiness', 'root-barrier-install']) {
   const denied = spawnSync(process.execPath, [path.join(ROOT, 'scripts/amp-orb-deploy.mjs'), command],
     { cwd: ROOT, encoding: 'utf8' })
-  assert(denied.status === 1 && denied.stderr.includes('Exact current Owner root-barrier authorization'),
+  assert(denied.status === 1 && denied.stderr.includes('Retired control-plane command'),
     `${command} without authorization stops before candidate, credentials or TAT`)
 }
 const unauthorizedMaintenanceReadiness = spawnSync(
@@ -5797,7 +5453,7 @@ const unauthorizedMaintenanceReadiness = spawnSync(
 )
 assert(
   unauthorizedMaintenanceReadiness.status === 1
-    && unauthorizedMaintenanceReadiness.stderr.includes('Current Owner authorization'),
+    && unauthorizedMaintenanceReadiness.stderr.includes('Retired control-plane command'),
   'Tencent maintenance-install readiness without current authorization stops before API dispatch',
 )
 const unauthorizedDeploy = spawnSync(
@@ -5822,6 +5478,109 @@ for (const command of ['activate', 'activate-release']) {
       && attempted.stderr.includes('deploy --owner-said-deploy-latest'),
     `${command} is rejected instead of bypassing deploy-latest gates`,
   )
+}
+const invalidStatus = spawnSync(
+  process.execPath,
+  [path.join(ROOT, 'scripts', 'amp-orb-deploy.mjs'), 'status', '--owner-said-status', '--transaction', 'invalid'],
+  { cwd: ROOT, encoding: 'utf8' },
+)
+assert(
+  invalidStatus.status === 1 && invalidStatus.stderr.includes('Retired control-plane command'),
+  'retired UUID status stops before credentials or SSH',
+)
+
+section('One-time TAT delivery uses the reviewed installer without another state machine')
+{
+  const transactionId = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'
+  const terminalText = JSON.stringify({ retained: 'private-old-terminal' })
+  const hash = text => createHash('sha256').update(text).digest('hex')
+  const plan = { transactionId, priorTransactionId: 'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb',
+    targetSha: newSha, productionSha: oldSha, hostConfigurationSha: oldSha,
+    priorTerminalDigest: hash(terminalText),
+    priorTerminalFile: `/opt/eqb/deployments/controlled-entry-${transactionId}/terminal.json` }
+  const files = Object.fromEntries(CONTROLLED_ENTRY_FILES.map(name => [name, readFileSync(path.join(ROOT, name))]))
+  const prepared = buildControlledEntryTat({ files, planText: JSON.stringify(plan), terminalText })
+  assert(prepared.commandBytes <= 49152 && prepared.commandDigest === hash(prepared.command),
+    'complete real six-file command fits TAT and has exact digest')
+  let oversized = false
+  try { buildControlledEntryTat({ files: { ...files, 'deploy/install-eqb-controlled-ssh':
+    Buffer.from(Array.from({ length: 30000 }, () => randomUUID()).join('')) }, planText: JSON.stringify(plan), terminalText }) }
+  catch { oversized = true }
+  assert(oversized, 'oversize command rejected before dispatch')
+  const record = { schemaVersion: 'eqb-controlled-transaction-v1', transactionId,
+    command: 'install-entry', targetSha: newSha, changedPathsDigest: prepared.planDigest,
+    previousSha: oldSha, state: 'success', retryAllowed: false, failureCode: null,
+    receipt: { schemaVersion: 'eqb-controlled-entry-receipt-v1', conclusion: 'success',
+      historical: 'unknown', priorTransactionId: plan.priorTransactionId,
+      priorTerminalDigest: plan.priorTerminalDigest, previousHostConfigurationSha: oldSha, rollbackHealthy: null } }
+  const output = `EQB_CONTROLLED_TRANSACTION ${JSON.stringify(record)}\n`
+  const targetDigest = hash('target')
+  const terminal = { invocationStatus: 'SUCCESS', taskStatus: 'SUCCESS', exitCode: 0, output, targetDigest }
+  for (const [label, result, accepted] of [
+    ['success', terminal, true],
+    ['timeout with success-shaped output', { ...terminal, invocationStatus: 'TIMEOUT', taskStatus: 'TIMEOUT' }, false],
+    ['poll loss', null, false],
+    ['stdout pollution', { ...terminal, output: `secret\n${output}` }, false],
+    ['exit mismatch', { ...terminal, exitCode: 70 }, false],
+    ['prior binding mismatch', { ...terminal, output: output.replace(plan.priorTerminalDigest, 'f'.repeat(64)) }, false],
+  ]) {
+    const saved = new Map(); let calls = 0; let passed = false
+    try {
+      const got = await executeControlledEntryTat({ prepared, targetDigest,
+        save: (name, text) => { if (saved.has(name)) throw Error('duplicate'); saved.set(name, text) },
+        execute: async () => { calls++; if (!result) throw Error('private loss'); return result },
+      })
+      passed = got.state === 'success'
+    } catch (error) { assert(!error.message.includes('secret'), `${label} emits no raw error content`) }
+    assert(passed === accepted && calls === 1, `${label}: one dispatch, bound outcome`)
+    assert(result ? saved.has('terminal.json') : !saved.has('terminal.json'), `${label}: terminal retained before parse, never fabricated`)
+    if (!accepted) assert(saved.has('unknown.json'), `${label}: unknown persisted, no retry`)
+  }
+  for (const failedSave of ['binding.json', 'terminal.json']) {
+    let calls = 0; let accepted = false
+    try {
+      await executeControlledEntryTat({ prepared, targetDigest,
+        save: name => { if (name === failedSave) throw Error('fsync failed') },
+        execute: async () => { calls++; return terminal },
+      })
+      accepted = true
+    } catch {}
+    assert(!accepted && calls === (failedSave === 'binding.json' ? 0 : 1),
+      `${failedSave} durability failure stops dispatch/result acceptance`)
+  }
+  const root = mkdtempSync(path.join(tmpdir(), 'eqb-entry-tat-'))
+  try {
+    mkdirSync(path.join(root, 'eqb/deployments'), { recursive: true })
+    let launches = 0; let text = ''
+    const synced = []
+    const descriptors = new Map()
+    const source = prepared.command.split("<<'EQB_ENTRY'\n")[1].split('\nEQB_ENTRY')[0]
+      .replace(/^import .*;$/gmu, '').replaceAll('/opt', root)
+    const context = { Buffer, gunzipSync, createHash,
+      fs: { ...fs, lstatSync: name => Object.assign(fs.lstatSync(name), { uid: 0, gid: 0 }),
+        openSync: (name, flags) => { const fd = fs.openSync(name, flags); descriptors.set(fd, name); return fd },
+        fsyncSync: fd => { fs.fsyncSync(fd); synced.push(descriptors.get(fd)) },
+      },
+      process: { getuid: () => 0, getgid: () => 0, stdout: { write: value => { text += value } }, stderr: { write() {} } },
+      spawnSync: (command, args) => {
+        launches++
+        assert(synced.length === 10 && synced[0] === path.join(root, 'eqb/deployments')
+          && synced.slice(-6).every(name => name.endsWith('/deploy')),
+        'root staging parent and each exclusive file entry synced before installer launch')
+        assert(command === '/bin/bash' && args[0].endsWith('/deploy/install-eqb-controlled-ssh'), 'generated command invokes only fixed installer')
+        for (const name of CONTROLLED_ENTRY_FILES) assert(hash(readFileSync(path.join(root, 'eqb/deployments', `controlled-entry-${transactionId}`, name))) === hash(files[name]), `exact staged ${name}`)
+        return { status: 0, stdout: output, stderr: 'private-root-stderr' }
+      },
+    }
+    runInNewContext(source, context)
+    assert(launches === 1 && text === output && synced.length === 12,
+      'generated delivery syncs stdout/stderr entries before accepting receipt and hides stderr')
+    runInNewContext(source, { ...context })
+    assert(launches === 1 && context.process.exitCode === 70, 'existing input directory prevents replay')
+    rmSync(path.join(root, 'eqb/deployments', `controlled-entry-${transactionId}`), { recursive: true })
+    runInNewContext(source, { ...context, fs: { ...context.fs, fsyncSync() { throw Error('fsync failure') } } })
+    assert(launches === 1 && context.process.exitCode === 70, 'directory fsync failure prevents root launch')
+  } finally { rmSync(root, { recursive: true, force: true }) }
 }
 
 await verifyDeployBarrier(ROOT)

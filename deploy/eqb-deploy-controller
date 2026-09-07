@@ -6,27 +6,30 @@ unset SSH_AUTH_SOCK
 
 [ "${1-}" = -- ] || exit 64
 shift
+controller_module=/opt/eqb/deployments/host-configuration/current/deploy/eqb-deploy-controller.mjs
 if [ "$#" -eq 1 ] && [ "$1" = preflight ]; then
   original_command=preflight
-elif [ "$#" -eq 2 ] && [ "$1" = deploy ]; then
-  case "$2" in
-    ''|*[!a-f0-9]*) exit 64 ;;
-  esac
-  [ "${#2}" -eq 40 ] || exit 64
-  original_command="deploy $2"
-elif [ "$#" -eq 3 ] \
-  && { [ "$1" = deploy-reviewed-persistence ] || [ "$1" = update-host-config ]; }; then
-  case "$2" in
-    ''|*[!a-f0-9]*) exit 64 ;;
-  esac
-  [ "${#2}" -eq 40 ] || exit 64
-  case "$3" in
-    ''|*[!a-f0-9]*) exit 64 ;;
-  esac
-  [ "${#3}" -eq 64 ] || exit 64
-  original_command="$1 $2 $3"
 else
-  exit 64
+  [ "${1-}" = deploy ] || exit 64
+  case "${2-}" in ''|*[!a-f0-9]*) exit 64 ;; esac
+  [ "${#2}" -eq 40 ] || exit 64
+  if [ "$#" -eq 2 ]; then
+    original_command="deploy $2"
+  elif [ "$#" -eq 4 ]; then
+    case "$3" in code-only|migrate) ;; *) exit 64 ;; esac
+    case "$4" in ''|*[!a-f0-9]*) exit 64 ;; esac
+    [ "${#4}" -eq 64 ] || exit 64
+    original_command="deploy $2 $3 $4"
+  else
+    exit 64
+  fi
+fi
+
+# Readonly operations must be callable while maintenance owns the lock. They
+# cannot dispatch recovery or mutation and are also used for local route proof.
+if [ "${original_command%% *}" = preflight ]; then
+  exec /usr/bin/env -i SSH_ORIGINAL_COMMAND="$original_command" \
+    PATH=/usr/local/bin:/usr/bin:/bin /usr/bin/node --no-addons "$controller_module"
 fi
 
 IFS= read -r nonce </proc/sys/kernel/random/uuid
@@ -35,13 +38,6 @@ case "$nonce" in
 esac
 [ "${#nonce}" -eq 36 ] || exit 70
 unit="eqb-deploy-$nonce"
-controller_module=/opt/eqb/deployments/host-configuration/current/deploy/eqb-deploy-controller.mjs
-if [ "${1-}" = update-host-config ] \
-  && [ -e /opt/eqb/deployments/host-configuration-update/active.json ]; then
-  recovery_module=/opt/eqb/deployments/host-configuration-update/recovery-controller.mjs
-  [ -f "$recovery_module" ] && [ ! -L "$recovery_module" ] || exit 70
-  controller_module=$recovery_module
-fi
 
 status=0
 /usr/bin/systemd-run \

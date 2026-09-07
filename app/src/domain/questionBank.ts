@@ -84,6 +84,8 @@ export type QuestionDetail = {
 }
 
 export type QuestionGroupDetail = QuestionGroupCard & {
+  /** Bank-backed edit/delete support; independent of print readiness and user role. */
+  canEdit: boolean
   instruction: string
   note: string
   sourceDetail: {

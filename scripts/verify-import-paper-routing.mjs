@@ -26,7 +26,7 @@ const materialization = plan(
 assert.equal(materialization.risk, 'single-paper-import')
 assert.equal(materialization.pack, 'import-paper')
 assert(materialization.scripts.length >= 10, 'import pack keeps independent failure layers')
-assert(materialization.scripts.length <= 23, 'import pack stays narrow as carrier verifiers are added')
+assert(materialization.scripts.length <= 24, 'import pack stays narrow as carrier verifiers are added')
 for (const required of [
   'scripts/verify-nck1-docx-materialization-producer.mjs',
   'scripts/verify-nck1-pdf-materialization-producer.mjs',
@@ -38,6 +38,7 @@ for (const required of [
   'scripts/verify-import-review-ocr-confirmation.mjs',
   'scripts/verify-import-review-media-derivation.mjs',
   'scripts/verify-nck1-source-materialization.mjs',
+  'scripts/verify-nck1-pdf-crop-recipe-replay.mjs',
   'scripts/verify-paper-canonical-import-admission.mjs',
   'scripts/verify-paper-canonical-import-recovery.mjs',
   'scripts/verify-universal-nck1-publish.mjs',
@@ -48,6 +49,11 @@ for (const required of [
   assert(materialization.scripts.includes(required), `${required} remains an independent import failure layer`)
 }
 
+const raster = plan('server/paper-canonical/pdfRegionRaster.mjs')
+assert.equal(raster.pack, 'paper')
+assert(raster.scripts.includes('scripts/verify-nck1-pdf-crop-recipe-replay.mjs'),
+  'shared raster changes execute the crop replay regression in the Paper pack')
+
 for (const sharedFile of [
   'scripts/import-pipeline/universal-nck1.mjs',
   'scripts/import-pipeline/nck1-source-only.mjs',
@@ -57,7 +63,7 @@ for (const sharedFile of [
   'server/paper-import/nck1OcrMaterializationProducer.mjs',
   'server/paper-import/nck1OcrSourceEvidence.mjs',
   'server/paper-import/nck1ImageSourceBundle.mjs',
-  '.github/workflows/verify.yml',
+  '.github/workflows/example.yml',
 ]) {
   assert.equal(plan(sharedFile).pack, 'all', `${sharedFile} fails closed to all`)
 }

@@ -171,19 +171,25 @@ export async function verifyDeployBarrier(repository) {
       .replaceAll('/opt/eqb/deployments/root-dispatch-barrier.json', active)
       .replaceAll('"/opt/eqb/deployments"', JSON.stringify(path.join(root, 'deployments')))
       .replaceAll('/opt/eqb/deployments/host-configuration/current/deploy/eqb-deploy-controller.mjs', module), 0o700)
-    const invoke = (command) => spawnSync(wrapper, ['--', ...command.split(' ')], { encoding: 'utf8' })
+    const invoke = (command) => {
+      const args = command.split(' ')
+      return spawnSync(wrapper, ['--', ...args], { encoding: 'utf8' })
+    }
+    assert.equal(spawnSync(wrapper, ['--', 'deploy', expected.transactionId, ...mutation.split(' ').slice(1)]).status, 64)
     assert.equal(invoke(mutation).status, 0)
     fs.unlinkSync(entered)
     withDeploymentLock(root, () => {
       assert.equal(invoke(mutation).status, 75)
-      assert.equal(invoke('preflight').status, 75)
+      assert.equal(invoke('preflight').status, 0)
+      assert.equal(fs.readFileSync(entered, 'utf8'), 'preflight')
+      fs.unlinkSync(entered)
       assert.throws(() => withDeploymentLock(root, () => assert.fail('nested lock entered'), uid, gid))
     }, uid, gid)
     assert.equal(fs.existsSync(entered), false)
     for (const corrupt of ['', '{}\n']) {
       write(active, corrupt)
-      for (const command of [mutation, `deploy-reviewed-persistence ${expected.targetSha} ${expected.payloadDigest}`,
-        `update-host-config ${expected.targetSha} ${expected.payloadDigest}`]) assert.equal(invoke(command).status, 70)
+      for (const command of [mutation, `deploy ${expected.targetSha} migrate ${expected.payloadDigest}`,
+        `deploy ${expected.targetSha} code-only ${expected.payloadDigest}`]) assert.equal(invoke(command).status, 70)
       assert.equal(fs.existsSync(entered), false)
       assert.equal(invoke('preflight').status, 0)
       fs.unlinkSync(entered)
@@ -213,7 +219,9 @@ export async function verifyDeployBarrier(repository) {
     while (!fs.existsSync(ready) && child.exitCode === null) await new Promise((resolve) => setTimeout(resolve, 5))
     assert.throws(() => withDeploymentLock(root, () => assert.fail('busy management entered'), uid, gid))
     assert.equal(invoke(mutation).status, 75)
-    assert.equal(invoke('preflight').status, 75) // readonly must not re-enter the lock
+    assert.equal(invoke('preflight').status, 0) // readonly does not acquire the mutation lock
+    assert.equal(fs.readFileSync(entered, 'utf8'), 'preflight')
+    fs.unlinkSync(entered)
     await ended
     assert.notEqual(invoke(mutation).status, 0) // durable even after holder is gone
     assert.equal(finishBarrier('finalize', expected, options).phase, 'finalized')

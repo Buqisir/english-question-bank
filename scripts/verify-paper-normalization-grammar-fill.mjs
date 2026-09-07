@@ -299,6 +299,10 @@ for (const malformed of [
   'Before ref__56__, after.',
   'Before __56__kg, after.',
   'Before 56._____ (hold), after.',
+  'Before __56__\t(hold), after.',
+  'Before __56__\n(hold), after.',
+  'Before 56._____\t(hold), after.',
+  'Before 56._____\n(hold), after.',
 ]) {
   assertNeedsReview(makeGrammarInput({ text: malformed }), 'UNSUPPORTED_MARKER')
 }

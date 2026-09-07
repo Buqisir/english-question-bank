@@ -22,5 +22,5 @@ export function canonicalizeVisibleEnglishTypography(value) {
       ),
       '$1$2',
     )
-    .replace(/([A-Za-z])'([A-Za-z])/gu, '$1’$2')
+    .replace(/(?<=[A-Za-z])'(?=[A-Za-z])/gu, '\u2019')
 }

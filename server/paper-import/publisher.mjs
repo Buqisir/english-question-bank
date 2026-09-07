@@ -414,153 +414,6 @@ function upsertPaperAssetToDb(db, packageData, version, options = {}) {
   )
 }
 
-function getSevenChoicesGroups(asset) {
-  const groups = asset?.content?.groups || {}
-  return Object.values(groups)
-    .filter((group) => group?.groupType === 'sevenChoices')
-    .map((group) => ({
-      groupId: group.groupId,
-      title: group.title || '七选五',
-      defaultQuestionId: group.questionIds?.[0] || null,
-    }))
-}
-
-function getClozeGroups(asset) {
-  const groups = asset?.content?.groups || {}
-  return Object.values(groups)
-    .filter((group) => group?.groupType === 'cloze')
-    .map((group) => ({
-      groupId: group.groupId,
-      title: group.title || '完形填空',
-      defaultQuestionId: group.questionIds?.[0] || null,
-    }))
-}
-
-function getGrammarFillGroups(asset) {
-  const groups = asset?.content?.groups || {}
-  return Object.values(groups)
-    .filter((group) => group?.groupType === 'grammarFill')
-    .map((group) => ({
-      groupId: group.groupId,
-      title: group.title || '语法填空',
-      defaultQuestionId: group.questionIds?.[0] || null,
-    }))
-}
-
-function getWritingGroups(asset) {
-  const groups = asset?.content?.groups || {}
-  return Object.values(groups)
-    .filter((group) => group?.groupType === 'writing')
-    .map((group) => ({
-      groupId: group.groupId,
-      title: group.title || '写作',
-      defaultQuestionId: group.questionIds?.[0] || null,
-    }))
-}
-
-function buildQaLinks(paperId, version, readingGroups, scGroups, clozeGroups, grammarFillGroups, writingGroups) {
-  const readingLinks = readingGroups.map((group) => {
-    const latestParams = new URLSearchParams()
-    latestParams.set('view', 'paper-intelligence')
-    latestParams.set('source', 'paper-asset')
-    latestParams.set('paperId', paperId)
-    latestParams.set('surface', 'paper')
-    latestParams.set('groupId', group.groupId)
-    latestParams.set('questionId', group.defaultQuestionId)
-
-    const versionParams = new URLSearchParams(latestParams)
-    versionParams.set('version', `v${version}`)
-
-    return {
-      groupId: group.groupId,
-      title: group.title,
-      latestHref: `?${latestParams.toString()}`,
-      versionHref: `?${versionParams.toString()}`,
-    }
-  })
-
-  const scLinks = (scGroups || []).map((group) => {
-    const latestParams = new URLSearchParams()
-    latestParams.set('view', 'paper-intelligence')
-    latestParams.set('source', 'paper-asset')
-    latestParams.set('paperId', paperId)
-    latestParams.set('surface', 'paper')
-    latestParams.set('groupId', group.groupId)
-    latestParams.set('questionId', group.defaultQuestionId)
-
-    const versionParams = new URLSearchParams(latestParams)
-    versionParams.set('version', `v${version}`)
-
-    return {
-      groupId: group.groupId,
-      title: group.title,
-      latestHref: `?${latestParams.toString()}`,
-      versionHref: `?${versionParams.toString()}`,
-    }
-  })
-
-  const clozeLinks = (clozeGroups || []).map((group) => {
-    const latestParams = new URLSearchParams()
-    latestParams.set('view', 'paper-intelligence')
-    latestParams.set('source', 'paper-asset')
-    latestParams.set('paperId', paperId)
-    latestParams.set('surface', 'paper')
-    latestParams.set('groupId', group.groupId)
-    latestParams.set('questionId', group.defaultQuestionId)
-
-    const versionParams = new URLSearchParams(latestParams)
-    versionParams.set('version', `v${version}`)
-
-    return {
-      groupId: group.groupId,
-      title: group.title,
-      latestHref: `?${latestParams.toString()}`,
-      versionHref: `?${versionParams.toString()}`,
-    }
-  })
-
-  const gfLinks = (grammarFillGroups || []).map((group) => {
-    const latestParams = new URLSearchParams()
-    latestParams.set('view', 'paper-intelligence')
-    latestParams.set('source', 'paper-asset')
-    latestParams.set('paperId', paperId)
-    latestParams.set('surface', 'paper')
-    latestParams.set('groupId', group.groupId)
-    latestParams.set('questionId', group.defaultQuestionId)
-
-    const versionParams = new URLSearchParams(latestParams)
-    versionParams.set('version', `v${version}`)
-
-    return {
-      groupId: group.groupId,
-      title: group.title,
-      latestHref: `?${latestParams.toString()}`,
-      versionHref: `?${versionParams.toString()}`,
-    }
-  })
-
-  const wLinks = (writingGroups || []).map((group) => {
-    const latestParams = new URLSearchParams()
-    latestParams.set('view', 'paper-intelligence')
-    latestParams.set('source', 'paper-asset')
-    latestParams.set('paperId', paperId)
-    latestParams.set('surface', 'paper')
-    latestParams.set('groupId', group.groupId)
-
-    const versionParams = new URLSearchParams(latestParams)
-    versionParams.set('version', `v${version}`)
-
-    return {
-      groupId: group.groupId,
-      title: group.title,
-      latestHref: `?${latestParams.toString()}`,
-      versionHref: `?${versionParams.toString()}`,
-    }
-  })
-
-  return [...readingLinks, ...scLinks, ...clozeLinks, ...gfLinks, ...wLinks]
-}
-
 function canonicalAdmissionFailure(admission) {
   return {
     ok: false,
@@ -1156,7 +1009,7 @@ function validateUniversalNck1Binding({
   ))
   if (listeningSlots.some((slotId) => {
     const binding = canonicalPaper.paperPlan.slotBindings.find(
-      (candidate) => candidate.slotId === slotId && candidate.state === 'inactive',
+      (candidate) => candidate.slotId === slotId,
     )
     const closure = inactiveClosures.get(slotId)
     return binding?.sourceState !== 'not_supplied' && closure?.status !== 'closed'
@@ -1508,21 +1361,11 @@ function publishPreparedPaperImport({
     : admitPackage(version)
   if (admissionResult.failure) return admissionResult.failure
   const admission = admissionResult.admission
-  const readingGroups = getReadingChoiceGroups(packageData.paperAsset).map((group) => ({
-    groupId: group.groupId,
-    title: group.title,
-    defaultQuestionId: group.questionIds?.[0] || null,
-  }))
-  const scGroups = getSevenChoicesGroups(packageData.paperAsset)
-  const clozeGroups = getClozeGroups(packageData.paperAsset)
-  const gfGroups = getGrammarFillGroups(packageData.paperAsset)
-  const writingGroups = getWritingGroups(packageData.paperAsset)
   const publishReport = {
     ok: true,
     paperId,
     assetVersion: version,
     versionName: `v${version}`,
-    qaLinks: buildQaLinks(paperId, version, readingGroups, scGroups, clozeGroups, gfGroups, writingGroups),
     searchHref: '/?q=2024%20九省联考',
     generatedAt: new Date().toISOString(),
   }

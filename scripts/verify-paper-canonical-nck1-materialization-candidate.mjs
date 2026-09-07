@@ -14,6 +14,7 @@ import {
   importCanonicalCandidate,
   rederiveConfirmedCanonicalCandidate,
 } from '../shared/paper-canonical/compiler.mjs'
+import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
 import { validateContinuationWritingContract } from '../shared/paper-canonical/continuationWriting.mjs'
 import { projectCanonicalPaper } from '../shared/paper-canonical/projector.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
@@ -273,7 +274,7 @@ assert.deepEqual(
 )
 assert.equal(canonicalAuthorityRef.manifestVersion, '36')
 assert.equal(trustedDocxCandidateAuthorityRef.manifestVersion, '37')
-assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '49')
+assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '50')
 assert.equal(resolveCanonicalAuthority({
   manifestId: manifestV46.manifestId,
   manifestVersion: manifestV46.version,
@@ -284,12 +285,28 @@ const second = importCanonicalCandidate(input)
 assert(first.candidate)
 assert.deepEqual(first.issues, [])
 assert.equal(first.candidate.candidateDigest, second.candidate.candidateDigest)
-assert.equal(first.candidate.interpretation.groups.length, 9)
+assert.equal(first.candidate.interpretation.groups.length, 11)
 assert.equal(first.candidate.interpretation.assertions.length, 65)
-assert.equal(first.candidate.interpretation.inactiveSourceClosures.length, 2)
-assert.equal(first.candidate.interpretation.groups[0].media.length, 1)
+assert.equal(first.candidate.interpretation.inactiveSourceClosures.length, 0)
+const listeningCandidateGroups = first.candidate.interpretation.groups.filter((group) =>
+  group.family === 'listening')
 assert.deepEqual(
-  first.candidate.interpretation.groups[0].content.blocks
+  listeningCandidateGroups.map((group) => group.slotId),
+  ['listening.short-dialogue', 'listening.long-form'],
+)
+assert.deepEqual(
+  listeningCandidateGroups.flatMap((group) => group.questionIds),
+  Array.from({ length: 20 }, (_, index) => `question:listening:${index + 1}`),
+)
+assert(listeningCandidateGroups.every((group) =>
+  group.variant.transcriptSegments.length === 5
+  && group.variant.transcriptSegments.every((segment) =>
+    group.sourceSpanRefsByTarget[`transcript_segment:${segment.segmentId}`]?.length > 0)))
+assert.equal(first.candidate.interpretation.groups.find((group) =>
+  group.slotId === 'reading.a').media.length, 1)
+assert.deepEqual(
+  first.candidate.interpretation.groups.find((group) =>
+    group.slotId === 'reading.a').content.blocks
     .filter((block) => block.kind === 'paragraph')
     .map((block) => block.nodeId),
   ['block:reading-a', 'block:reading-a:second-paragraph'],
@@ -311,11 +328,11 @@ assert.equal(
   'NCK1 Candidate retains the source-exact continuation instruction',
 )
 
-const publicV49 = compileCanonicalPaper({
+const publicV50 = compileCanonicalPaper({
   authority: nck1MaterializationCandidateAuthorityRef,
   evidence: { documents: [] },
 })
-assert(publicV49.artifacts.normalizationReport.diagnostics.some((item) =>
+assert(publicV50.artifacts.normalizationReport.diagnostics.some((item) =>
   item.code === 'AUTHORITY_RETIRED'))
 
 const confirmed = rederiveConfirmedCanonicalCandidate(
@@ -325,10 +342,11 @@ const confirmed = rederiveConfirmedCanonicalCandidate(
 assert(confirmed.compilation?.artifacts?.canonicalPaper)
 assert.equal(
   confirmed.compilation.artifacts.canonicalPaper.questionGroups.length,
-  9,
+  11,
 )
 assert.deepEqual(
-  confirmed.compilation.artifacts.canonicalPaper.questionGroups[0].content.blocks
+  confirmed.compilation.artifacts.canonicalPaper.questionGroups.find((group) =>
+    group.contractRef.familyContractId === 'reading').content.blocks
     .filter((block) => block.kind === 'paragraph')
     .map((block) => block.nodeId),
   ['block:reading-a', 'block:reading-a:second-paragraph'],
@@ -343,6 +361,59 @@ const confirmedPackage = {
   ).closure,
 }
 const projected = projectCanonicalPaper(confirmedPackage)
+const projectedGroups = projected.nodes.filter((node) => node.kind === 'group')
+assert.deepEqual(
+  projectedGroups.slice(0, 2).map((group) => ({
+    slotId: group.slotId,
+    questionNumbers: group.numbering.map(({ number }) => number),
+  })),
+  [
+    { slotId: 'listening.short-dialogue', questionNumbers: [1, 2, 3, 4, 5] },
+    {
+      slotId: 'listening.long-form',
+      questionNumbers: Array.from({ length: 15 }, (_, index) => index + 6),
+    },
+  ],
+  'Listening Questions must lead the projected paper in canonical order',
+)
+const listeningOccurrences = projectedGroups.filter((group) =>
+  group.familyContractId === 'listening')
+const listeningConsumption = {
+  disposition: 'ready',
+  paperId: confirmedPackage.plan.paperId,
+  authorityRef: confirmedPackage.plan.authorityRef,
+  selections: [{
+    mode: 'canonical',
+    familyContractId: 'listening',
+    groupIds: listeningOccurrences.map(({ groupId }) => groupId),
+    projectedOccurrences: listeningOccurrences,
+    projectedOccurrenceDigests: listeningOccurrences.map((occurrence) => ({
+      groupId: occurrence.groupId,
+      digest: digestJson(occurrence),
+    })),
+  }],
+}
+for (const mutation of ['missing-digest', 'changed-question']) {
+  const tampered = structuredClone(listeningConsumption)
+  const selection = tampered.selections[0]
+  if (mutation === 'missing-digest') delete selection.projectedOccurrenceDigests
+  else selection.projectedOccurrences[0].questions[0].stem[0].text = 'Unbound replacement question'
+  assert.throws(() => projectCanonicalConsumerGroup({
+    consumption: tampered,
+    familyContractId: 'listening',
+    groupId: listeningOccurrences[0].groupId,
+  }), /projected occurrence integrity/, mutation)
+}
+const studentListening = projectCanonicalConsumerGroup({
+  consumption: listeningConsumption,
+  familyContractId: 'listening',
+  groupId: listeningOccurrences[0].groupId,
+})
+assert.equal(studentListening.questions.length, 5)
+assert.equal(Object.hasOwn(studentListening, 'transcriptSegments'), false)
+assert(studentListening.questions.every((question) =>
+  !Object.hasOwn(question, 'correctOptionId')
+  && !Object.hasOwn(question, 'officialAnswer')))
 assert.deepEqual(
   projected.nodes.find((node) =>
     node.kind === 'group' && node.familyContractId === 'seven-choices')
@@ -458,6 +529,47 @@ assert.throws(
       issue.code === 'SEVEN_CHOICES_ROLE_MAP_INVALID'),
   'unbound Seven Choices role references fail closed before projection',
 )
+
+const noListening = importCanonicalCandidate(sourceInput({ listening: false }))
+assert(noListening.candidate)
+assert.deepEqual(noListening.issues, [])
+assert.equal(noListening.candidate.interpretation.groups.length, 9)
+const confirmedNoListening = rederiveConfirmedCanonicalCandidate(
+  noListening.candidate,
+  confirmation(noListening.candidate),
+)
+assert(confirmedNoListening.compilation?.artifacts?.canonicalPaper)
+const noListeningPaper = confirmedNoListening.compilation.artifacts.canonicalPaper
+assert.deepEqual(
+  noListeningPaper.paperPlan.slotBindings.filter(({ state }) => state === 'omitted'),
+  [
+    {
+      slotId: 'listening.short-dialogue',
+      state: 'omitted',
+      sourceState: 'not_supplied',
+    },
+    {
+      slotId: 'listening.long-form',
+      state: 'omitted',
+      sourceState: 'not_supplied',
+    },
+  ],
+)
+assert.deepEqual(
+  noListeningPaper.paperPlan.completeness.optionalOmissions,
+  ['listening.short-dialogue', 'listening.long-form'],
+)
+const noListeningProjection = projectCanonicalPaper({
+  plan: noListeningPaper.paperPlan,
+  groups: noListeningPaper.questionGroups,
+  sourceCapture: confirmedNoListening.compilation.artifacts.sourceCapture,
+  authorityClosure: resolveCanonicalAuthority(
+    nck1MaterializationCandidateAuthorityRef,
+  ).closure,
+})
+assert.equal(noListeningProjection.nodes.some((node) =>
+  node.slotId?.startsWith('listening.')
+  || node.familyContractId === 'listening'), false)
 
 const callerSemantics = importCanonicalCandidate(input, { groups: [] })
 assert.equal(callerSemantics.candidate, null)

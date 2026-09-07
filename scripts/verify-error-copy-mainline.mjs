@@ -113,7 +113,10 @@ console.log('== negative grep: old error-string pattern has zero residue ==')
   // bumping the total from 14 to 18. similar-workbench-swap CR MF-1 修
   // （替换改先加后删安全序）新增内层半截态 catch 的第 19 个调用点
   // （「替换第二步（移除原篇）」）。
-  assert('DraftPaperWorkbench.tsx uses describeError at all 18 call sites', workbenchCount === 18, `found ${workbenchCount}`)
+  // PR390 adds the recent-draft dropdown fetch's failure handler, bringing
+  // the current inventory from 18 to 19: describeError('打开草稿卷', error).
+  // This is a Promise .catch, so the try/catch inventory below is unchanged.
+  assert('DraftPaperWorkbench.tsx uses describeError at all 19 call sites', workbenchCount === 19, `found ${workbenchCount}`)
 }
 
 console.log('== MySpacePage failure-state recovery + de-duplication ==')
