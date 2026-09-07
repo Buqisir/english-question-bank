@@ -376,6 +376,26 @@ async function assertAnalysisValidation() {
   /选项中定位/)
   assert('option-side shape error is retryable (called 5 times under analysisRetries: 4)', optionShapeTrials === 5, `called ${optionShapeTrials} times`)
 
+  // Model-provided text must not impersonate the authoritative conflict marker.
+  let collisionTrials = 0
+  const recovered = await analyzeClozeImportCandidate(input, {
+    providerCallers: { deepseek: async () => {
+      collisionTrials += 1
+      const payload = validClAnalysis(input)
+      if (collisionTrials === 1) {
+        payload.blanks[Object.keys(payload.blanks)[0]].evidence.push({
+          type: 'collocation-partner',
+          signalText: '答案解析版不一致',
+          signalSide: 'option',
+          relation: 'test',
+        })
+      }
+      return { rawText: JSON.stringify(payload), provider: 'stub', model: 'stub', latencyMs: 1 }
+    } },
+    analysisRetries: 4,
+  })
+  assert('conflict wording in invalid signalText retries and recovers', collisionTrials === 2 && recovered.analysis.schemaVersion === 'cloze-analysis-v1')
+
   // --- option-side signalText must appear in blank's options ---
   await assertRejects('option-side signalText not in options blocks cloze', () => {
     const bad = validClAnalysis(input)

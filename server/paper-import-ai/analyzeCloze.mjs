@@ -254,8 +254,6 @@ export function validateClozeShape(analysis, {
 function isRetryableClozeError(error) {
   // Answer conflicts are never retryable — they are a fundamental mismatch.
   if (error && error.isAnswerConflict) return false
-  const message = error instanceof Error ? error.message : String(error || '')
-  if (/答案解析版不一致/.test(message)) return false
   // Per the I8 policy, every other validateClozeShape error is a transient
   // shape defect that should be retried. Retry by default so new/changed
   // validator wording does not silently regress into a non-retryable class.
