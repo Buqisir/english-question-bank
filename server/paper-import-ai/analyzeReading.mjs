@@ -6,6 +6,7 @@ import {
   createAnalyzerProviderShell,
   readTeachingAnalysisPrompt,
 } from './analyzerProviderShell.mjs'
+import { countQuoteMatches } from '../paper-import/validator.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '../..')
@@ -212,6 +213,23 @@ export function validateReadingAnalysisShape(analysis, {
     if (!paragraphText) throw new Error(`${questionId}: ${fieldName} 引用了不存在的 paragraphId：${paragraphId}`)
     if (!paragraphText.includes(quote)) throw new Error(`${questionId}: ${fieldName} quote 必须精确匹配原文。`)
   }
+  const assertTrapSourceQuoteMatch = (questionId, option) => {
+    const sourceQuote = optionalString(option?.trap?.sourceQuote)
+    if (!sourceQuote) return
+    const trapAnchor = optionalString(option?.trap?.paragraphId || option?.trap?.targetParagraphId)
+    if (trapAnchor) {
+      const paragraphText = paragraphsById.get(trapAnchor)
+      if (!paragraphText) throw new Error(`${questionId}: trap.sourceQuote 引用了不存在的 paragraphId：${trapAnchor}`)
+      if (countQuoteMatches(paragraphText, sourceQuote).count === 0) {
+        throw new Error(`${questionId}: trap.sourceQuote quote 必须精确匹配原文。`)
+      }
+      return
+    }
+    const candidateTexts = [...paragraphsById.values()]
+    if (!candidateTexts.some((text) => countQuoteMatches(text, sourceQuote).count > 0)) {
+      throw new Error(`${questionId}: trap.sourceQuote quote 必须精确匹配原文。`)
+    }
+  }
   for (const questionId of expectedQuestionIds) {
     const sourceQuestion = group.questions.find((question) => question.id === questionId)
     const item = analysis.questions[questionId]
@@ -247,10 +265,7 @@ export function validateReadingAnalysisShape(analysis, {
       }
       for (const evidence of option?.evidence || []) assertExactQuote(questionId, 'evidence', evidence)
       for (const evidence of option?.trapEvidence || []) assertExactQuote(questionId, 'trapEvidence', evidence)
-      if (option?.trap?.sourceQuote) assertExactQuote(questionId, 'trap.sourceQuote', {
-        paragraphId: option.trap.paragraphId || option.trap.targetParagraphId,
-        quote: option.trap.sourceQuote,
-      })
+      if (option?.trap?.sourceQuote) assertTrapSourceQuoteMatch(questionId, option)
     }
     for (const relation of item.locationParaphrases) assertExactQuote(questionId, 'locationParaphrases.targetText', relation)
   }

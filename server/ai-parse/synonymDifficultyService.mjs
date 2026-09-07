@@ -74,7 +74,7 @@ export function loadSynonymDifficultyKnowledge() {
 export function normalizeSynonymCardId(value) {
   const raw = optionalString(value).toUpperCase().replace(/\s+/g, '')
   if (!raw) return ''
-  const match = raw.match(/T(?:10|[1-9])/)
+  const match = raw.match(/^T(?:10|[1-9])$/)
   return match ? match[0] : raw
 }
 

@@ -312,6 +312,34 @@ async function assertReadingEnvelope() {
   const sys = stub.calls[0].messages.find((m) => m.role === 'system').content
   assert('reading: system prompt embeds injected reading prompt', sys.includes('READING_PROMPT_BODY'))
   assert('reading: system prompt embeds synonym knowledge', sys.includes('T1 卡片；T2 卡片'))
+
+  // Wrong group type must throw the exact unchanged message — mirrors the 3 sibling owners' guard.
+  // The reading owner previously accepted ANY group type (missing groupType check); it must now reject
+  // every non-reading group type with 仅支持阅读理解题组。, before touching DeepSeek.
+  const wrongTypeFixtures = [
+    ['cloze', clozeDetail()],
+    ['grammar_cloze', grammarDetail()],
+    ['seven_choices', sevenChoicesDetail()],
+  ]
+  for (const [label, detail] of wrongTypeFixtures) {
+    const deepSeek = makeDeepSeekStub()
+    const { parseReadingByQuestionGroup: readingWrongType } = createQuestionGroupParseImplementation(
+      baseDeps({ callDeepSeekWithFallback: deepSeek, getQuestionGroupDetail: () => detail }),
+    )
+    await assertRejects(
+      `reading: wrong group type (${label}) throws 仅支持阅读理解题组`,
+      () => readingWrongType('grp', 'sk-1234567890', 'm', 'r', false),
+      /仅支持阅读理解题组。/,
+    )
+    // The guard must fire BEFORE the DeepSeek call (no tokens burned on a wrong-type group).
+    assert(`reading: wrong group type (${label}) did not call DeepSeek`, deepSeek.calls.length === 0)
+  }
+
+  // A null/missing detail must also throw under the consolidated guard, mirroring the 3 siblings.
+  const { parseReadingByQuestionGroup: readingNotFound } = createQuestionGroupParseImplementation(
+    baseDeps({ getQuestionGroupDetail: () => null }),
+  )
+  await assertRejects('reading: missing detail throws 仅支持阅读理解题组', () => readingNotFound('grp', 'sk-1234567890', 'm', 'r', false), /仅支持阅读理解题组。/)
 }
 
 // ============================================================
