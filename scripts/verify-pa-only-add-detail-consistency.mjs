@@ -18,19 +18,18 @@
 // findPaperAssetGroup before the PA-blind card lookup, so a PA-only id returns a PA
 // detail with real material/questions instead of 404.
 //
-// This verify boots the real server against the real data/question-bank.sqlite
-// (gitignored V0 seed — 9 question_groups rows, none matching any paper-asset
-// groupId) and the real app/public/paper-assets directory, then asserts both
-// sides end-to-end against a fixed PA-only id plus a cardinality sweep.
+// Boots the real server with disposable tracked V0 seed data and exercises the
+// API plus the real React App. Never opens a developer/production database.
 import { spawn } from 'node:child_process'
-import { existsSync, mkdtempSync, rmSync } from 'node:fs'
+import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs'
+import { once } from 'node:events'
+import { DatabaseSync } from 'node:sqlite'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
-const dbPath = process.env.QUESTION_BANK_DB || path.join(rootDir, 'data/question-bank.sqlite')
 const paperAssetsDir = process.env.QUESTION_BANK_PAPER_ASSET_ROOT || path.join(rootDir, 'app/public/paper-assets')
 
 let passed = 0
@@ -47,10 +46,6 @@ function assert(name, condition, details = '') {
 
 console.log('pa-only-add-detail-consistency verify: listing/add/detail alignment for paper-asset-only groups')
 
-if (!existsSync(dbPath)) {
-  console.log(`SKIP: no local database at ${dbPath} (run scripts/init-db.sh first)`)
-  process.exit(2)
-}
 if (!existsSync(paperAssetsDir)) {
   console.log(`SKIP: no paper-assets directory at ${paperAssetsDir}`)
   process.exit(2)
@@ -58,6 +53,11 @@ if (!existsSync(paperAssetsDir)) {
 
 const apiPort = Number(process.env.QUESTION_BANK_API_PORT || '9321')
 const userDataDb = mkdtempSync(path.join(tmpdir(), 'eqb-pa-only-verify-'))
+const dbPath = path.join(userDataDb, 'question-bank.sqlite')
+const seedDb = new DatabaseSync(dbPath)
+seedDb.exec(readFileSync(path.join(rootDir, 'data/sql/schema.sql'), 'utf8'))
+seedDb.exec(readFileSync(path.join(rootDir, 'data/sql/seed-v0.sql'), 'utf8'))
+seedDb.close()
 
 function startServer() {
   return spawn('node', ['server/api.mjs'], {
@@ -112,7 +112,6 @@ try {
   // Sanity: the target PA-only id really has no question_groups row in the dev seed
   // (this is the bug's precondition — if it ever gets promoted, the test id must be
   // changed so the PA-only assertion below stays meaningful).
-  const { DatabaseSync } = await import('node:sqlite')
   const db = new DatabaseSync(dbPath, { readOnly: true })
   const targetRow = db.prepare('SELECT id FROM question_groups WHERE id = ?').get(PA_ONLY_TARGET)
   dbGroupIds = new Set(db.prepare('SELECT id FROM question_groups').all().map((row) => row.id))
@@ -174,6 +173,7 @@ try {
   if (detailRes.status === 200) {
     const detail = detailRes.body?.questionGroup
     assert('PA-only detail has id', !!detail?.id && detail.id === PA_ONLY_TARGET, `got id=${JSON.stringify(detail?.id)}`)
+    assert('PA-only detail explicitly denies edit/delete support', detail?.canEdit === false)
     assert('PA-only detail has non-empty passage.materialText', typeof detail?.passage?.materialText === 'string' && detail.passage.materialText.length > 0, `materialText=${JSON.stringify(detail?.passage?.materialText)?.slice(0, 80)}`)
     assert('PA-only detail has a populated questions array', Array.isArray(detail?.questions) && detail.questions.length > 0, `questions=${JSON.stringify(detail?.questions?.length)}`)
     assert('PA-only detail questions carry options (reading)', Array.isArray(detail?.questions?.[0]?.options) && detail.questions[0].options.length >= 2, `options=${JSON.stringify(detail?.questions?.[0]?.options?.length)}`)
@@ -189,6 +189,58 @@ try {
   for (const dbGroup of dbBackedCards.slice(0, Math.min(4, dbBackedCards.length))) {
     const res = await getJson(`/api/question-groups/${dbGroup.id}`)
     assert(`DB-backed detail ${dbGroup.id} status 200 (no regression)`, res.status === 200, `got ${res.status} ${JSON.stringify(res.body)?.slice(0, 120)}`)
+    assert(`DB-backed detail ${dbGroup.id} supports edit/delete`, res.body?.questionGroup?.canEdit === true)
+  }
+
+  const vite = await import('../app/node_modules/vite/dist/node/index.js')
+  const viteServer = await vite.createServer({ root: path.join(rootDir, 'app'), server: { host: '127.0.0.1', port: 0 } })
+  await viteServer.listen()
+  const { default: { chromium } } = await import('../app/node_modules/playwright/index.js')
+  const browser = await chromium.launch({ headless: true, channel: 'chromium' })
+  try {
+    const page = await browser.newPage()
+    await page.route('**/api/**', async (route) => {
+      const url = new URL(route.request().url())
+      if (url.pathname === '/api/auth/me') {
+        return route.fulfill({ json: { authRequired: false, user: null } })
+      }
+      const response = await route.fetch({ url: `http://127.0.0.1:${apiPort}${url.pathname}${url.search}` })
+      return route.fulfill({ response })
+    })
+    const openDetail = async (id) => {
+      await page.goto(`${viteServer.resolvedUrls.local[0]}?view=detail&groupId=${encodeURIComponent(id)}`)
+      await page.locator('.peek-hero').waitFor()
+    }
+    await openDetail(PA_ONLY_TARGET)
+    assert('React App: PA-only detail hides mutation menu', await page.locator('.peek-actions-menu').count() === 0)
+    assert('React App: PA-only add control remains disabled', await page.getByRole('button', { name: '暂不可组卷', exact: true }).isDisabled())
+    const unprintable = dbBackedCards.find((card) => card.draftPaperButtonState === 'disabled')
+    assert('fixture includes unprintable DB group', !!unprintable)
+    const ordinary = dbBackedCards.find((card) => card.id !== unprintable?.id)
+    assert('fixture includes another ordinary DB group', !!ordinary)
+    for (const card of [ordinary, unprintable].filter(Boolean)) {
+      await openDetail(card.id)
+      await page.locator('.peek-actions-menu button').click()
+      await page.getByRole('menuitem', { name: '编辑', exact: true }).click()
+      await page.getByRole('dialog', { name: '录题' }).waitFor()
+      assert(`React App: DB ${card.id} opens edit dialog (draft=${card.draftPaperButtonState})`, true)
+      await page.getByRole('button', { name: '关闭录题面板' }).click()
+      await page.locator('.peek-actions-menu button').click()
+      const dialogPromise = page.waitForEvent('dialog').then(async (dialog) => {
+        assert(`React App: DB ${card.id} reaches delete confirmation`, dialog.type() === 'confirm')
+        await dialog.dismiss()
+      })
+      await page.getByRole('menuitem', { name: '删除', exact: true }).click()
+      await dialogPromise
+    }
+    await page.route('**/api/auth/me', (route) => route.fulfill({ json: {
+      authRequired: true, user: { id: 'fixture-member', username: 'fixture-member', role: 'member' },
+    } }))
+    await openDetail(ordinary.id)
+    assert('React App: member cannot edit/delete a DB-backed detail', await page.locator('.peek-actions-menu').count() === 0)
+  } finally {
+    await browser.close()
+    await viteServer.close()
   }
 
   // --- add seam: a direct POST with a PA-only id is still rejected (the listing no
@@ -212,7 +264,9 @@ try {
     `body=${addBody.slice(0, 200)}`,
   )
 } finally {
+  const stopped = once(server, 'exit')
   server.kill('SIGTERM')
+  await stopped
   try { rmSync(userDataDb, { recursive: true, force: true }) } catch { /* best effort */ }
 }
 

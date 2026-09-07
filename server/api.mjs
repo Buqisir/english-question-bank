@@ -1920,6 +1920,7 @@ function buildPaperAssetOnlyQuestionGroupDetail(asset, group) {
   )
   const baseDetail = {
     ...card,
+    canEdit: false,
     instruction: '',
     note: '',
     sourceDetail: {
@@ -2038,6 +2039,7 @@ export function getQuestionGroupDetail(id) {
 
     const baseDetail = {
       ...card,
+      canEdit: true,
       instruction: detail.instruction,
       note: detail.group_note || '',
       sourceDetail: {
