@@ -12,10 +12,36 @@ function routeError(error) {
 // this helper carves out the not-found messages into 404 while everything else
 // (validation errors like "groupId is required") still maps to 400.
 const NOT_FOUND_MESSAGES = new Set(['Draft paper not found', 'Draft item not found'])
+
+// Renderer/deploy-broken signal. resolvePagedjsPolyfillPath (paginationRenderer.mjs)
+// and the chromium.launch wrapper (chromiumPool.mjs) set this code on the errors they
+// throw so routes can classify "renderer unavailable" (503) by a typed code instead
+// of substring-matching "not found" — which would also match the per-item data error
+// "questionGroupId not found: <id>" thrown on the same export path by
+// resolveDraftExportItems (draftPaperStore.mjs). ENOENT is kept as a fallback for
+// unwrapped filesystem errors from the renderer toolchain (e.g. a polyfill file
+// that existed at resolve time but vanished before page.addScriptTag read it).
+const RENDERER_MISSING_CODE = 'RENDERER_MISSING'
+
+// Shared classifier for every draft route that can throw on the export/render path
+// (POST /:id/print-pdf, GET /:id/pagination, PATCH /:id, item mutations). Guarantees
+// one throw yields one status across the route family:
+//   404 — draft/item does not exist or is not owned by the caller (NOT_FOUND_MESSAGES)
+//   503 — the paged.js/Chromium renderer is unavailable (RENDERER_MISSING / ENOENT),
+//         enveloped as "精排 PDF 不可用: <message>"
+//   400 — everything else, incl. per-item data errors ("questionGroupId not found:
+//         <id>") and validation errors ("请先添加题组", "groupId is required")
+// The print-pdf route previously had its own inline `message.includes('not found')`
+// 503 carve-out that over-matched "questionGroupId not found" (a data error) and
+// diverged from this helper's 400 on the sibling pagination route for the same throw.
 function sendDraftMutationError(response, context, error) {
   const message = routeError(error)
   if (NOT_FOUND_MESSAGES.has(message)) {
     context.sendJson(response, 404, { error: message })
+    return
+  }
+  if (error?.code === RENDERER_MISSING_CODE || message.includes('ENOENT')) {
+    context.sendJson(response, 503, { error: `精排 PDF 不可用: ${message}` })
     return
   }
   context.sendJson(response, 400, { error: message })
@@ -300,19 +326,14 @@ export function createDraftPaperRoutes() {
         const result = await context.draftPaperStore.exportDraftPaperPdf(userId, decodeURIComponent(match[1]), { versionType })
         context.sendPdf(response, result.body, result.fileName, result.outputPath)
       } catch (error) {
-        const message = routeError(error)
-        // M0-4: check the draft-not-found/not-owned message BEFORE the generic
-        // 'not found' substring match below — otherwise a cross-user draftId would
-        // incorrectly report 503 "精排 PDF 不可用" (vivliostyle CLI missing) instead
-        // of 404, and would leak that the id exists-but-is-inaccessible differently
-        // from a genuinely unknown id.
-        if (NOT_FOUND_MESSAGES.has(message)) {
-          context.sendJson(response, 404, { error: message })
-        } else if (message.includes('vivliostyle') || message.includes('not found') || message.includes('ENOENT')) {
-          context.sendJson(response, 503, { error: `精排 PDF 不可用: ${message}` })
-        } else {
-          context.sendJson(response, 400, { error: message })
-        }
+        // Shared with the sibling pagination route (GET /:id/pagination) and every
+        // item-mutation route: NOT_FOUND_MESSAGES → 404, RENDERER_MISSING/ENOENT →
+        // 503 "精排 PDF 不可用", everything else (incl. the per-item data error
+        // "questionGroupId not found: <id>") → 400. The previous inline classifier
+        // used `message.includes('not found')` for the 503 lane, which over-matched
+        // that data error and diverged from the sibling route's 400 for the same
+        // throw — see sendDraftMutationError's doc comment.
+        sendDraftMutationError(response, context, error)
       }
     }),
 
