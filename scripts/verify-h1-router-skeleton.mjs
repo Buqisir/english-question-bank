@@ -102,6 +102,24 @@ try {
 }
 assert('readJsonRouteBody enforces maxBytes', tooLargeRejected)
 
+const utf8Expected = { name: '生态机器光合作用布置核查' }
+const utf8Bytes = Buffer.from(JSON.stringify(utf8Expected), 'utf8')
+let utf8AllSplitsOk = true
+let utf8MidSeqSplits = 0
+let utf8AnyUfffd = false
+const UFFFD = '\uFFFD'
+for (let i = 1; i < utf8Bytes.length; i += 1) {
+  const splitStream = Readable.from([utf8Bytes.subarray(0, i), utf8Bytes.subarray(i)])
+  const parsed = await routerModule.readJsonRouteBody(splitStream)
+  if (JSON.stringify(parsed) !== JSON.stringify(utf8Expected)) utf8AllSplitsOk = false
+  if (JSON.stringify(parsed).includes(UFFFD)) utf8AnyUfffd = true
+  const lead = utf8Bytes[i]
+  if (lead !== undefined && lead >= 0x80 && lead <= 0xbf) utf8MidSeqSplits += 1
+}
+assert('readJsonRouteBody decodes multi-byte UTF-8 split across chunks', utf8AllSplitsOk)
+assert('readJsonRouteBody covered mid-sequence chunk splits', utf8MidSeqSplits > 0)
+assert('readJsonRouteBody emits no U+FFFD on chunk-split multi-byte UTF-8', !utf8AnyUfffd)
+
 assert('api imports router skeleton', apiSource.includes("from './router/index.mjs'"))
 assert('api defines H1 route registry', /const h1Routes = \[/.test(apiSource))
 assert('api moves only health route into H1 registry', /defineRoute\('GET', \/\^\\\/api\\\/health/.test(apiSource))

@@ -264,7 +264,9 @@ export function buildNck1AnalysisProjection({
     descriptor.key,
     readAnalysis(rootDir, descriptor),
   ]))
-  const answers = Object.values(paperAsset.answerKey?.answers || {})
+  const answers = Object.values(paperAsset.answerKey?.answers || {}).filter(
+    ({ questionNo }) => questionNo >= 21 && questionNo <= 65,
+  )
   if (answers.length !== 45 || answers.some(({ answer }) => !String(answer || '').trim())) {
     fail('Analysis projection requires all 45 authoritative objective answers')
   }
