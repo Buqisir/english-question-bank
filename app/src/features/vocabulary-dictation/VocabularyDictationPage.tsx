@@ -94,6 +94,7 @@ export function VocabularyDictationPage({
   const currentIndexRef = useRef(0)
   const repeatCountRef = useRef(repeatCount)
   const gapSecondsRef = useRef(gapSeconds)
+  const volumeRef = useRef(volume)
   const statusRef = useRef<DictationStatus>('idle')
   const wakeLockRef = useRef<{ release: () => Promise<void> } | null>(null)
   const cueContextRef = useRef<AudioContext | null>(null)
@@ -185,6 +186,7 @@ export function VocabularyDictationPage({
   }, [status])
 
   useEffect(() => {
+    volumeRef.current = volume
     if (audioRef.current) audioRef.current.volume = volume
   }, [volume])
 
@@ -268,7 +270,7 @@ export function VocabularyDictationPage({
     audio.addEventListener('error', onError, { once: true })
     audio.src = getVocabularyAudioPath(entry, effectiveAccent)
     audio.currentTime = 0
-    audio.volume = volume
+    audio.volume = volumeRef.current
     void audio.play().catch(() => {
       if (generationRef.current !== generation || activeAudioResolveRef.current !== finish) return
       shouldContinueRef.current = false
@@ -276,7 +278,7 @@ export function VocabularyDictationPage({
       releaseWakeLock()
       finish(false)
     })
-  }), [effectiveAccent, entries, releaseWakeLock, volume])
+  }), [effectiveAccent, entries, releaseWakeLock])
 
   const runFrom = useCallback(async (startIndex: number, withCountdown: boolean) => {
     cancelPending()
