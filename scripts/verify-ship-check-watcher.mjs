@@ -41,6 +41,11 @@ assert.equal((await readShipCheck(target, async endpoint => endpoint.includes('/
 })).check.id, 101)
 await assert.rejects(readShipCheck(target, async endpoint => endpoint.includes('/pulls/') ? pr : { check_runs: page, total_count: 2001 }), /pagination/)
 await assert.rejects(readShipCheck(target, async endpoint => endpoint.includes('/pulls/') ? pr : { check_runs: [check], total_count: 2 }), /Incomplete/)
+const wrongAppPage = [check, ...Array.from({ length: 99 }, (_, i) => ({ ...check, id: 1000 + i, app: { id: 1 } }))]
+await assert.rejects(readShipCheck(target, async endpoint => endpoint.includes('/pulls/') ? pr : {
+  total_count: 101,
+  check_runs: endpoint.endsWith('page=1') ? wrongAppPage : [wrongAppPage[1]],
+}), /Ambiguous Check pagination identity/, 'duplicate wrong-App run cannot hide an omitted newer authoritative Check')
 
 const dir = mkdtempSync(path.join(os.tmpdir(), 'ship-check-watcher-'))
 try {

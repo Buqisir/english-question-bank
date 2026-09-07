@@ -40,6 +40,7 @@ export async function readShipCheck({ pullRequest, head }, readJson, signal) {
   }
   const readLatest = async () => {
     const checks = []
+    const allIds = new Set()
     let total, seen = 0
     for (let page = 1; page <= 20; page++) {
       const payload = await readJson(`${prefix}/commits/${head}/check-runs?check_name=Amp%20Orb%20Verify&filter=all&per_page=100&page=${page}`, signal)
@@ -48,12 +49,14 @@ export async function readShipCheck({ pullRequest, head }, readJson, signal) {
       total ??= payload.total_count
       seen += payload.check_runs.length
       if (total !== payload.total_count || seen > total) throw new Error('Ambiguous Check pagination')
+      for (const check of payload.check_runs) {
+        if (!Number.isSafeInteger(check?.id) || check.id < 1 || allIds.has(check.id)) throw new Error('Ambiguous Check pagination identity')
+        allIds.add(check.id)
+      }
       checks.push(...payload.check_runs.filter(c => c?.app?.id === APP && c.name === NAME))
       if (payload.check_runs.length < 100) {
         if (seen !== total) throw new Error('Incomplete Check pagination')
-        const ids = checks.map(c => c.id)
-        if (new Set(ids).size !== ids.length || checks.some(c => !Number.isSafeInteger(c.id)
-          || c.id < 1 || c.head_sha !== head)) throw new Error('Ambiguous Check identity')
+        if (checks.some(c => c.head_sha !== head)) throw new Error('Ambiguous Check identity')
         const latest = checks.sort((a, b) => b.id - a.id)[0]
         if (!latest || latest.status !== 'completed' || !TERMINAL.has(latest.conclusion)) return null
         return { id: latest.id, conclusion: latest.conclusion }
