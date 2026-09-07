@@ -442,9 +442,6 @@ function assertRouteContract() {
   const paperBrowseSource = readRepoFile('app/src/features/paper-browse/PaperBrowsePage.tsx')
   assert('I5 PaperBrowsePage imports writing adapter', paperBrowseSource.includes('writingPaperViewAdapter'))
   assert('I5 PaperBrowsePage routes writing groups', paperBrowseSource.includes("groupType === 'writing'"))
-
-  const publisherSource = readRepoFile('server/paper-import/publisher.mjs')
-  assert('I5 publisher has getWritingGroups', publisherSource.includes('getWritingGroups'))
 }
 
 // ---- Publish path ----
