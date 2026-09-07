@@ -37,6 +37,7 @@ const selectedDetail = {
   draftPaperButtonState: 'add',
   currentDraftPaperId: null,
   printUnavailableReason: null,
+  canEdit: false,
   instruction: `${rawMirror} raw instruction`,
   note: `${rawMirror} raw note`,
   sourceDetail: {

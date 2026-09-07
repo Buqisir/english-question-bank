@@ -95,6 +95,11 @@ function formatTime(value) {
       }).format(date)
 }
 
+function formatDuration(value) {
+  const seconds = Math.round(Number(value) || 0)
+  return `${Math.floor(seconds / 60)} 分 ${seconds % 60} 秒`
+}
+
 async function request(pathname, init) {
   const response = await fetch(pathname, init)
   const body = await response.json().catch(() => ({}))
@@ -568,6 +573,46 @@ function sourceVisualSectionHtml() {
   </section>`
 }
 
+function selectedListeningReviewQuestion() {
+  const questionId = state.target?.questionId
+  if (!questionId) return null
+  return (state.detail?.listeningReview?.questions || []).find((question) =>
+    question.questionId === questionId) || null
+}
+
+function listeningReviewSectionHtml() {
+  const review = state.detail?.listeningReview
+  if (!review) return ''
+  const question = selectedListeningReviewQuestion()
+  if (!question) {
+    return `<section class="rail-section listening-review-section" id="listening-review-section">
+      <h2>听力核对</h2>
+      <p class="empty-state">在 Screen 点一道听力题，这里会显示听力原文、官方答案和音频检查结果。</p>
+    </section>`
+  }
+  const audio = review.audio
+  const basisLabel = audio.comparison.basis === 'authoritative_transcript'
+    ? '官方听力原文'
+    : '听力题目'
+  return `<section class="rail-section listening-review-section" id="listening-review-section">
+    <h2>听力核对 · 第 ${escapeHtml(question.questionNo)} 题</h2>
+    <div class="listening-review-answer"><span>官方答案</span><strong>${escapeHtml(question.officialAnswer)}</strong></div>
+    <div class="listening-review-transcript">
+      <h3>听力原文</h3>
+      ${question.transcriptSegments.map((segment) => `<div class="listening-transcript-segment"><p>${escapeHtml(segment.text)}</p><span>覆盖第 ${escapeHtml(segment.questionNumbers.join('、'))} 题</span></div>`).join('')}
+    </div>
+    <div class="listening-audio-evidence">
+      <div class="listening-evidence-statuses">
+        ${status(audio.comparison.verdict === 'pass' ? 'approved' : 'failed', `与${basisLabel}比对通过`)}
+        ${status(audio.contentSafety.verdict === 'pass' ? 'approved' : 'failed', '内容安全检查通过')}
+      </div>
+      <p class="paper-meta">ASR 全文 · ${escapeHtml(audio.engine.name)} ${escapeHtml(audio.engine.model)} · ${escapeHtml(formatDuration(audio.durationSeconds))}</p>
+      <p class="digest" title="${escapeHtml(audio.playbackAudioSha256)}">音频 ${escapeHtml(shortDigest(audio.playbackAudioSha256))}</p>
+      <p class="digest" title="${escapeHtml(audio.asrSha256)}">转写 ${escapeHtml(shortDigest(audio.asrSha256))}</p>
+    </div>
+  </section>`
+}
+
 function selectedMediaDerivation() {
   if (!state.target?.mediaId) return null
   return (state.detail?.mediaDerivations || []).find((derivation) =>
@@ -840,6 +885,7 @@ function promotionHtml() {
 
 function rightRailHtml() {
   return `<aside class="right-rail" aria-label="QA 问题与认可">
+    ${listeningReviewSectionHtml()}
     ${sourceVisualSectionHtml()}
     ${mediaDerivationSectionHtml()}
     ${issueFormHtml()}
@@ -1010,6 +1056,8 @@ function screenTarget(event) {
 function applyScreenTarget(target) {
   state.target = target
   state.issueSurface = 'screen'
+  const listeningSection = document.querySelector('#listening-review-section')
+  if (listeningSection) listeningSection.outerHTML = listeningReviewSectionHtml()
   const sourceSection = document.querySelector('#source-proof-section')
   if (sourceSection) sourceSection.outerHTML = sourceVisualSectionHtml()
   const mediaSection = document.querySelector('#media-review-section')
@@ -1036,7 +1084,11 @@ function applyScreenTarget(target) {
   form.elements.pageNumber.value = ''
   form.querySelector('.field-help').textContent =
     `问题会绑定 R${state.detail.latest.revisionNumber} · Screen，不会漂到别的 revision。`
-  form.elements.message.focus()
+  if (selectedListeningReviewQuestion()) {
+    document.querySelector('#listening-review-section')?.scrollIntoView({ block: 'nearest' })
+  } else {
+    form.elements.message.focus()
+  }
 }
 
 function locateScreenTarget(targetId) {

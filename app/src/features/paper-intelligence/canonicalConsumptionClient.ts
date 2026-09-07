@@ -100,7 +100,7 @@ export async function loadScreenConsumption(
 
 export function canonicalConsumptionForGroup(
   consumption: WholePaperConsumption,
-  familyContractId: 'cloze' | 'grammar-fill' | 'seven-choices' | 'reading' | 'application-writing' | 'continuation-writing',
+  familyContractId: 'cloze' | 'grammar-fill' | 'seven-choices' | 'reading' | 'application-writing' | 'continuation-writing' | 'listening',
   groupId: string,
 ): WholePaperConsumption {
   selectConsumerGroupMode({ consumption, familyContractId, groupId })
@@ -109,7 +109,7 @@ export function canonicalConsumptionForGroup(
 
 export function canonicalModeForGroup(
   consumption: WholePaperConsumption,
-  familyContractId: 'cloze' | 'grammar-fill' | 'seven-choices' | 'reading' | 'application-writing' | 'continuation-writing',
+  familyContractId: 'cloze' | 'grammar-fill' | 'seven-choices' | 'reading' | 'application-writing' | 'continuation-writing' | 'listening',
   groupId: string,
 ): 'canonical' | 'legacy' {
   return selectConsumerGroupMode({

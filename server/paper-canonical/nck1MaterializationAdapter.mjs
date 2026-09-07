@@ -1049,7 +1049,7 @@ function instructionEvidence(materialization, instructionDocument) {
   }
 }
 
-function listeningClosure(source, materialization, documentsById) {
+function appendListeningGroups(source, materialization, documentsById) {
   if (materialization.listening.state === 'not_supplied') {
     source.inactiveSlots['listening.short-dialogue'] = 'not_supplied'
     source.inactiveSlots['listening.long-form'] = 'not_supplied'
@@ -1105,38 +1105,88 @@ function listeningClosure(source, materialization, documentsById) {
     source.observations.push(...observations)
     const sourceSliceRefs = observations.map((observation) =>
       `source-span:${observation.observationId}`)
-    const sourceMapEntries = observations.map((observation) => ({
-      target: {
-        kind: 'inactive_source_observation',
-        id: observation.observationId,
-      },
-      sourceSpanRefs: [`source-span:${observation.observationId}`],
-      transformationRecordIds: [],
+    const groupId = `group:${materialization.paperId}:${spec.slotId}`
+    const questionSpanRefs = Object.fromEntries(relevantQuestions.flatMap((question) => {
+      const questionId = `question:listening:${question.canonicalNumber}`
+      const sourceSpanRefs = [
+        `source-span:observation:listening:question:${question.canonicalNumber}`,
+      ]
+      return [
+        [`question:${questionId}`, sourceSpanRefs],
+        [`content_node:text:${questionId}:stem`, sourceSpanRefs],
+        ...question.options.flatMap((value) => {
+          const optionId = `option:${questionId}:${value.label}`
+          return [
+            [`option:${optionId}`, sourceSpanRefs],
+            [`content_node:text:${groupId}:${optionId}`, sourceSpanRefs],
+          ]
+        }),
+      ]
     }))
-    const closureBase = {
-      scopeId: `inactive-source-closure:${materialization.paperId}:${spec.slotId}`,
+    const transcriptSpanRefs = Object.fromEntries(relevantTranscript.flatMap((segment) => {
+      const spanRefs = [
+        `source-span:observation:listening:transcript:${segment.segmentId}`,
+      ]
+      return [
+        [`transcript_segment:${segment.segmentId}`, spanRefs],
+        [`content_node:text:${groupId}:transcript:${segment.segmentId}`, spanRefs],
+      ]
+    }))
+    source.groups.push({
+      paperId: materialization.paperId,
+      groupId,
       slotId: spec.slotId,
-      contractRef: { id: 'listening-raw-closure', version: 'nck1-v1' },
-      status: 'closed',
-      sourceSliceRefs,
-      questionCount: spec.to - spec.from + 1,
-      optionLabels: ['A', 'B', 'C'],
-      officialAnswerCount: spec.to - spec.from + 1,
-      transcriptSegmentCount: 5,
-      transcriptCoverage: 'exactly_once',
-      timing: {
-        disposition: materialization.listening.timing.length > 0
-          ? 'supplied'
-          : 'not_supplied',
+      profileId: 'nck1',
+      family: 'listening',
+      questionIds: relevantQuestions.map((question) =>
+        `question:listening:${question.canonicalNumber}`),
+      blankIds: [],
+      sourceSpanId: sourceSliceRefs[0],
+      content: { blocks: [] },
+      media: [],
+      variant: {
+        family: 'listening',
+        questions: relevantQuestions.map((question) => {
+          const questionId = `question:listening:${question.canonicalNumber}`
+          return {
+            questionId,
+            stem: [{
+              kind: 'text',
+              nodeId: `text:${questionId}:stem`,
+              text: question.stem,
+            }],
+            correctOptionId:
+              `option:${questionId}:${relevantAnswers.find((answer) =>
+                answer.canonicalNumber === question.canonicalNumber).value}`,
+          }
+        }),
+        transcriptSegments: relevantTranscript.map((segment) => ({
+          segmentId: segment.segmentId,
+          content: [{
+            kind: 'text',
+            nodeId: `text:${groupId}:transcript:${segment.segmentId}`,
+            text: segment.text,
+          }],
+          questionIds: segment.questionNumbers.map((number) =>
+            `question:listening:${number}`),
+        })),
+        choiceOwnership: {
+          ownership: 'per_question',
+          sets: relevantQuestions.map((question) => {
+            const questionId = `question:listening:${question.canonicalNumber}`
+            return {
+              questionId,
+              options: question.options.map((value) =>
+                option(groupId, questionId, value)),
+            }
+          }),
+        },
       },
-      audio: { disposition: 'not_supplied' },
-      sourceMap: { entries: sourceMapEntries },
-      transformationRecordIds: [],
-    }
-    source.inactiveSlots[spec.slotId] = sourceSliceRefs
-    source.inactiveSourceClosures.push({
-      ...closureBase,
-      closureDigest: digestJson(closureBase),
+      sourceSpanRefsByTarget: {
+        [`group:${groupId}`]: sourceSliceRefs,
+        ...questionSpanRefs,
+        ...transcriptSpanRefs,
+      },
     })
   }
 }
@@ -1305,7 +1355,7 @@ function deriveSource(materialization, documentsById, mediaById, instructionDocu
       ]),
     })
   }
-  listeningClosure(source, materialization, documentsById)
+  appendListeningGroups(source, materialization, documentsById)
   return source
 }
 
