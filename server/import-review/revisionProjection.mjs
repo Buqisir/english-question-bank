@@ -101,7 +101,15 @@ export function loadNck1ReviewSource(rootDir) {
     || manifest.paperId !== config.paperId
     || !Array.isArray(manifest.documents)
   ) fail('Universal NCK1 source manifest is incomplete')
-  assertListeningAudioManifest(rootDir, manifest)
+  const validatedListeningAudioEvidence = assertListeningAudioManifest(rootDir, manifest)
+  const listeningAudioEvidence = validatedListeningAudioEvidence
+    ? {
+        descriptors: [...validatedListeningAudioEvidence.descriptors.values()]
+          .map((descriptor) => structuredClone(descriptor)),
+        asr: structuredClone(validatedListeningAudioEvidence.asr),
+        check: structuredClone(validatedListeningAudioEvidence.check),
+      }
+    : null
   const materializationPath = resolveReviewFile(
     rootDir,
     normalizedRelativePath(manifest.materializationPath, 'materializationPath'),
@@ -113,6 +121,12 @@ export function loadNck1ReviewSource(rootDir) {
     materialization = JSON.parse(new TextDecoder().decode(materializationBytes))
   } catch {
     fail('Source Materialization is not valid JSON')
+  }
+  if (materialization.listening?.state === 'captured' && !listeningAudioEvidence) {
+    fail(
+      'Captured listening requires passed audio comparison and content-safety evidence',
+      'LISTENING_AUDIO_REVIEW_REQUIRED',
+    )
   }
   const documentPathById = new Map(manifest.documents.map((document) => [
     document.documentId,
@@ -178,7 +192,7 @@ export function loadNck1ReviewSource(rootDir) {
       }
     }),
   }
-  return { config, manifest, materialization, sourceInput }
+  return { config, manifest, materialization, sourceInput, listeningAudioEvidence }
 }
 
 function projectedSourceRegion(manifest, materialization, {
@@ -664,10 +678,13 @@ export function buildNck1ReviewConsumption(candidate, compilation) {
       groupIds,
       projectedOccurrences,
       ...([
+        'listening',
         'seven-choices',
         'cloze',
         'grammar-fill',
-        ...(canonicalPaper.paperPlan.authorityRef.manifestVersion === '49'
+        ...(['49', '50'].includes(
+          canonicalPaper.paperPlan.authorityRef.manifestVersion,
+        )
           ? ['continuation-writing']
           : []),
       ].includes(familyContractId)
@@ -752,6 +769,47 @@ export function buildNck1CompatibilityPaperAsset({
   const writingTasks = {}
   const answerKey = {}
   const answers = new Map(materialization.answers.map((answer) => [answer.questionId, answer]))
+  const listeningGroups = materialization.listening.state === 'captured'
+    ? [
+        { slotId: 'listening.short-dialogue', from: 1, to: 5 },
+        { slotId: 'listening.long-form', from: 6, to: 20 },
+      ]
+    : []
+  const listeningAnswers = new Map((materialization.listening.answers || []).map((answer) => [
+    answer.canonicalNumber,
+    answer,
+  ]))
+  for (const spec of listeningGroups) {
+    const groupId = `group:${materialization.paperId}:${spec.slotId}`
+    const listeningQuestions = materialization.listening.questions.filter((question) =>
+      question.canonicalNumber >= spec.from && question.canonicalNumber <= spec.to)
+    const questionIds = listeningQuestions.map((question) =>
+      `question:listening:${question.canonicalNumber}`)
+    groups[groupId] = {
+      groupId,
+      groupType: 'listening',
+      title: spec.slotId,
+      questionIds,
+    }
+    for (const question of listeningQuestions) {
+      const questionId = `question:listening:${question.canonicalNumber}`
+      const answer = listeningAnswers.get(question.canonicalNumber)
+      questions[questionId] = {
+        questionId,
+        questionNo: question.canonicalNumber,
+        groupId,
+        stem: question.stem,
+        options: question.options.map(({ label, text }) => ({ label, text })),
+      }
+      if (answer) {
+        answerKey[questionId] = {
+          questionId,
+          questionNo: question.canonicalNumber,
+          answer: answer.value,
+        }
+      }
+    }
+  }
   for (const group of materialization.groups) {
     const questionIds = group.questions.map((question) => question.questionId)
     const blankIds = group.questions.map((question) => question.blankId).filter(Boolean)
@@ -846,7 +904,13 @@ export function buildNck1CompatibilityPaperAsset({
     sources: { primarySourceType },
     layoutTree: { parts: [] },
     content: {
-      blocks: materialization.groups.map((group) => ({ type: 'group', groupId: group.groupId })),
+      blocks: [
+        ...listeningGroups.map(({ slotId }) => ({
+          type: 'group',
+          groupId: `group:${materialization.paperId}:${slotId}`,
+        })),
+        ...materialization.groups.map((group) => ({ type: 'group', groupId: group.groupId })),
+      ],
       groups,
       questions,
       ...(Object.keys(blanks).length > 0 ? { blanks } : {}),
@@ -854,6 +918,39 @@ export function buildNck1CompatibilityPaperAsset({
     },
     answerKey: { answers: answerKey },
     analysis: {},
+  }
+}
+
+function listeningReviewProjection(materialization, listeningAudioEvidence) {
+  if (materialization.listening.state !== 'captured') return null
+  const answers = new Map(materialization.listening.answers.map((answer) => [
+    answer.canonicalNumber,
+    answer.value,
+  ]))
+  return {
+    questions: materialization.listening.questions.map((question) => ({
+      questionId: `question:listening:${question.canonicalNumber}`,
+      questionNo: question.canonicalNumber,
+      officialAnswer: answers.get(question.canonicalNumber),
+      transcriptSegments: materialization.listening.transcript
+        .filter((segment) => segment.questionNumbers.includes(question.canonicalNumber))
+        .map((segment) => ({
+          segmentId: segment.segmentId,
+          text: segment.text,
+          questionNumbers: [...segment.questionNumbers],
+        })),
+    })),
+    audio: {
+      durationSeconds: listeningAudioEvidence.asr.durationSeconds,
+      engine: structuredClone(listeningAudioEvidence.asr.engine),
+      playbackAudioSha256: listeningAudioEvidence.check.playbackAudioSha256,
+      asrSha256: listeningAudioEvidence.check.asrSha256,
+      comparison: structuredClone(listeningAudioEvidence.check.comparison),
+      contentSafety: {
+        verdict: listeningAudioEvidence.check.contentSafety.verdict,
+        reviewedAt: listeningAudioEvidence.check.contentSafety.reviewedAt,
+      },
+    },
   }
 }
 
@@ -993,6 +1090,10 @@ export function buildNck1ReviewProjection(rootDir, { requireAnalyses = false } =
     mediaDerivations,
     paperAsset,
     sourceVisuals,
+    listeningReview: listeningReviewProjection(
+      loaded.materialization,
+      loaded.listeningAudioEvidence,
+    ),
     analysisSidecars: analysisProjection?.sidecars || {},
     analysisDigest: analysisProjection?.digest || null,
   }
