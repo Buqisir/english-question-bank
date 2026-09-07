@@ -76,10 +76,17 @@ function resolvePagedjsPolyfillPath() {
   for (const candidate of PAGEDJS_POLYFILL_CANDIDATES) {
     if (existsSync(candidate)) return candidate
   }
-  throw new Error(
+  const error = new Error(
     'pagedjs polyfill not found (dist/paged.polyfill.js in any of the usual node_modules locations). ' +
       'Install with: npm install pagedjs --prefix server',
   )
+  // Typed classifier: route handlers (draftPaperRoutes.mjs sendDraftMutationError)
+  // map RENDERER_MISSING to 503 "renderer unavailable" without substring-matching
+  // "not found", which would also match the per-item data error
+  // "questionGroupId not found: <id>" thrown on the same export path by
+  // resolveDraftExportItems (draftPaperStore.mjs).
+  error.code = 'RENDERER_MISSING'
+  throw error
 }
 
 // Spike used the same ceiling (spike-pagedjs-gate.mjs); real renders finish
@@ -146,16 +153,29 @@ export async function renderPaginatedPaper(printHtml, { inspect = null } = {}) {
     // DOM. A mismatch means something upstream of this function changed
     // (paged.js version bump, a template change touching the pagination
     // container) in a way this module's assumptions no longer cover — fail
-    // loudly rather than silently return an inconsistent pageCount. `\b`
-    // word-boundary (not just "starts with") so this doesn't depend on
-    // "pagedjs_page" being the FIRST class token — it isn't always (e.g.
-    // `class="pagedjs_page pagedjs_first_page pagedjs_right_page"` today,
-    // but class order is paged.js's internal detail, not a contract this
-    // module should assume) — and excludes `pagedjs_pages`/`pagedjs_pagebox`
-    // (both share "pagedjs_page" as a literal prefix; `\b` requires a
-    // non-word character on both sides, and "s"/"b" are word characters, so
-    // neither false-matches).
-    const domPageCount = (paginatedHtml.match(/class="[^"]*\bpagedjs_page\b[^"]*"/g) || []).length
+    // loudly rather than silently return an inconsistent pageCount. The
+    // `<div ` tag prefix (mirroring paginationDomContract.mjs's identical
+    // invariant check) targets ONLY real `.pagedjs_page` page containers:
+    // paged.js preserves a verbatim copy of the source body inside a hidden
+    // `<template data-ref="pagedjs-content">`, and Chromium's `outerHTML`
+    // serializer does not re-escape `"` inside text content — so a passage
+    // / stem / explanation carrying the literal substring
+    // `class="pagedjs_page"` (which buildPrintHtml's escapeHtml HTML-escapes
+    // but `"` round-trips back to `"` through parsing) re-serializes as
+    // inert text containing `class="pagedjs_page"`. A tag-agnostic regex
+    // over-counts these inert text occurrences (one in the preserved
+    // template copy + one per rendered page that shows that text) and
+    // throws a false "bookkeeping is inconsistent" error on a valid
+    // render; the `<div ` prefix skips them because text-content `<` is
+    // escaped to `<`. `\b` word-boundary (not just "starts with") so
+    // this doesn't depend on "pagedjs_page" being the FIRST class token —
+    // it isn't always (e.g. `class="pagedjs_page pagedjs_first_page
+    // pagedjs_right_page"` today, but class order is paged.js's internal
+    // detail, not a contract this module should assume) — and excludes
+    // `pagedjs_pages`/`pagedjs_pagebox` (both share "pagedjs_page" as a
+    // literal prefix; `\b` requires a non-word character on both sides,
+    // and "s"/"b" are word characters, so neither false-matches).
+    const domPageCount = (paginatedHtml.match(/<div class="[^"]*\bpagedjs_page\b[^"]*"/g) || []).length
     if (domPageCount !== pageCount) {
       throw new Error(
         `renderPaginatedPaper: paged.js reported pageCount=${pageCount} but the serialized DOM has ` +

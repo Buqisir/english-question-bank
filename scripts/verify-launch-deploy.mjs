@@ -35,9 +35,7 @@ const { assert, section, summary } = createVerifier('launch-deploy verify (Slice
 const ABSOLUTE_ORIGIN = 'http://127.0.0.1:8787'
 const MAX_PUBLIC_BOOTSTRAP_BYTES = 450_000
 
-// Assert on CODE, not comments: the httpClient top-comment legitimately
-// narrates the retired API_ORIGIN / 127.0.0.1:8787 history, so strip comments
-// before token checks.
+// Exclude historical comments from token checks.
 function stripComments(src) {
   return src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, '')
 }
@@ -49,17 +47,8 @@ function escapeRegExp(value) {
 // ── Slice 1: production same-origin addressing ──────────────────────────────
 section('Slice 1 — httpClient same-origin relative addressing')
 
-const httpClient = readText(ROOT, 'app/src/services/httpClient.ts')
-const httpClientCode = stripComments(httpClient)
-assert(!httpClientCode.includes('API_ORIGIN'), 'httpClient.ts code no longer defines/uses API_ORIGIN')
-assert(!httpClientCode.includes('127.0.0.1:8787'), 'httpClient.ts code has no absolute 127.0.0.1:8787 origin')
-assert(/export function apiPath\(/.test(httpClient), 'apiPath export preserved')
-assert(/export function apiPathNoIpv6\(/.test(httpClient), 'apiPathNoIpv6 export preserved (import-site stability)')
-// apiPath must hand back the relative path unchanged in the browser (no host prepend).
-assert(
-  /export function apiPath\(path: string\) \{[^}]*return path[^}]*\}/s.test(httpClientCode),
-  'apiPath returns the relative path (no host prepend)',
-)
+// H11 exercises the real helper, including browser and SSR addressing.
+execFileSync(process.execPath, [resolve(ROOT, 'scripts/verify-h11a-http-client.mjs')], { stdio: 'inherit' })
 
 // No service file may reintroduce the absolute origin in code.
 const servicesDir = resolve(ROOT, 'app/src/services')

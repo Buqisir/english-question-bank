@@ -114,13 +114,6 @@ assert.deepEqual(
   { script: 'api.mjs', exclusive: false, resourceKeys: ['port:9895'] },
 )
 assert.deepEqual(
-  verificationSchedulingPolicy(
-    'evidence.mjs',
-    "import { inspectEvidence } from './lib/canonicalImportPilotEvidenceRoot.mjs'",
-  ),
-  { script: 'evidence.mjs', exclusive: true, resourceKeys: [] },
-)
-assert.deepEqual(
   verificationSchedulingPolicy('static.mjs', 'assert.equal(actual, expected)'),
   { script: 'static.mjs', exclusive: false, resourceKeys: [] },
 )

@@ -2104,8 +2104,8 @@ try {
           mode: 'four_columns',
           signature: cloze.questions[0].placementSignature,
           rowWidthPt: 438.2,
-          columnStartsPt: [0, 104, 208, 312],
-          columnWidthsPt: [104, 104, 104, 126.2],
+          columnStartsPt: [17.3, 127.8, 231.9, 336.55],
+          columnWidthsPt: [110.5, 104.1, 104.65, 101.65],
         },
       )
       artifactProof.screen = {

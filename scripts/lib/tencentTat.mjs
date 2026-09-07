@@ -270,10 +270,12 @@ export async function executeTencentTatCommand({
   sleep = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds)),
   pollIntervalMs = 2_000,
   pollTimeoutMs = 6 * 60 * 1000,
+  onDispatched = () => {},
 } = {}) {
   const targetDigest = tencentTatTargetDigest(configuration || {})
   if (
     typeof fetchImpl !== 'function'
+    || typeof onDispatched !== 'function'
     || typeof now !== 'function'
     || typeof sleep !== 'function'
     || typeof command !== 'string'
@@ -325,6 +327,8 @@ export async function executeTencentTatCommand({
       'Tencent TAT RunCommand returned no usable invocation identity; do not retry without reconciling Tencent invocation history',
     )
   }
+  // An optional private durable save point; failure stops polling, never dispatches again.
+  await onDispatched({ commandId, invocationId, targetDigest })
 
   while (now() - startedAt <= pollTimeoutMs) {
     let described

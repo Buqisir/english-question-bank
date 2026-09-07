@@ -43,6 +43,18 @@ function defaultTimestampPrefix() {
   return new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19)
 }
 
+function safeFileTitle(value) {
+  return String(value || '').replace(/[\\/:*?"<>|]/gu, '-').trim()
+}
+
+function assertContainedIn(outputPath, dir) {
+  const resolvedOutput = path.resolve(outputPath)
+  const resolvedDir = path.resolve(dir)
+  if (resolvedOutput !== resolvedDir && !resolvedOutput.startsWith(resolvedDir + path.sep)) {
+    throw new Error('export path escapes exportDir')
+  }
+}
+
 function sendBinary(response, { body, fileName, outputPath, contentType }) {
   response.writeHead(200, {
     'access-control-allow-origin': 'http://127.0.0.1:5173',
@@ -181,7 +193,7 @@ export function createExportImplementation({
       grammarFillChrome,
     })
     const versionLabel = versionType === 'student' ? '学生版' : '教师版'
-    const fileName = `${title}-${versionLabel}-精排.html`
+    const fileName = `${safeFileTitle(title)}-${versionLabel}-精排.html`
 
     return { body: html, fileName, images, normalizationDiagnostics }
   }
@@ -208,8 +220,9 @@ export function createExportImplementation({
         copyFileSync(image.absoluteSourcePath, path.join(tempDir, image.relativeName))
       }
       renderPrintPdf({ html: htmlResult.body, htmlPath, pdfPath, rootDir })
-      const fileName = `${title}-${versionLabel}-精排.pdf`
+      const fileName = `${safeFileTitle(title)}-${versionLabel}-精排.pdf`
       const outputPath = path.join(exportDir, `${timestampPrefix()}-${fileName}`)
+      assertContainedIn(outputPath, exportDir)
       copyFileSync(pdfPath, outputPath)
       return {
         body: readFileSync(outputPath),
