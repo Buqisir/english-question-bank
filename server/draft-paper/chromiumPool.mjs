@@ -72,7 +72,18 @@ async function launchBrowser() {
   // All browser-backed routes use the same pinned full Chromium. The explicit
   // channel prevents Playwright from selecting the separately downloaded
   // headless-shell build.
-  const launched = await chromium.launch({ headless: true, channel: 'chromium' })
+  let launched
+  try {
+    launched = await chromium.launch({ headless: true, channel: 'chromium' })
+  } catch (error) {
+    // Mark launch failures (missing Chromium binary, crashed before ready, etc.)
+    // with the typed renderer-missing code so route handlers (draftPaperRoutes.mjs
+    // sendDraftMutationError) map them to 503 "renderer unavailable" rather than
+    // 400 "client/data error". The original message (and any Playwright-supplied
+    // code) is preserved in the message; only the classifier code is added.
+    if (error && typeof error === 'object') error.code = 'RENDERER_MISSING'
+    throw error
+  }
   launched.on('disconnected', () => {
     if (browser === launched) {
       browser = null

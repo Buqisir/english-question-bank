@@ -66,32 +66,26 @@ original/A-D comparison pass. Its batch, candidates, and state all live under
 `.scratch/vocabulary-audio-repair-v1/`; neither pass changes formal MP3 assets
 until the owner has selected the replacements.
 
-`.github/workflows/verify.yml` supplies hosted `verify` and `e2e` for high-risk
-PRs and post-Ship `main`. High-risk PRs require both before merge. The exact
-`main` run remains the ADR-0023 Deployment gate and an independent full-suite
-backstop; Focused CI does not replace it. The Hosted reader pins App ID `15368`,
-workflow ID `282244920`, workflow path, push event, attempt 1, exact SHA, and a
-common suite/run. Manual-dispatch and rerun jobs remain diagnostic only. The
-dedicated CI Orb's Sentinel/Discovery and Action-wake paths remain dormant under
-ADR-0024. No wake workflow, manual drain, plugin/thread reload, or `AMP_API_KEY`
-is enabled.
-
-ADR-0025 adds a repo-only GitHub App Check writer and Deployment reader, both
-disabled by default. The automatic controller is the only dedicated-CI machine
-executor; the Focused agent turn reports/diagnoses its receipt and never runs a
-second Full suite or writes GitHub state. The aggregate Check is exactly `Amp
-Orb Verify`; Fast remains a different informational Commit Status. Deployment
-defaults to `hosted-only`; `shadow`, `dual`, `amp+hosted-e2e`, and `amp` require
-separate configuration and Owner-authorized activation. No Ed25519 signer,
-signed output envelope, expiry, policy digest, or cached re-signing exists.
+High-risk PRs retain their required review, Full verification, and E2E. The sole
+CI authority is the exact `Amp Orb Verify` Check created by
+GitHub App ID `4835036` from a natural webhook delivery to the dedicated CI
+Orb. Fast and Full run in isolated credential-free checkouts and store a
+machine receipt. Normal Ship reads GitHub directly, without a Focused/Low
+report or receipt lookup. The former High thread only hosts infrastructure;
+Low is for requested troubleshooting. The Deployment
+reader requires `QUESTION_BANK_DEPLOY_AMP_CHECK_APP_ID` and fails closed for
+absent, pending, malformed, wrong-SHA, or ambiguous App evidence; legacy
+authority-mode configuration is rejected. See ADR-0025 and the coordinator-owned
+`docs/agents/app-ci-cutover.md`; this README does not claim the branch-protection
+cutover is complete.
 
 ## Stable CI entrypoint
 
 | Script | Scope | Runs in CI? |
 | --- | --- | --- |
 | `verify-ci.mjs` | Selects changed/Paper/all packs, runs bounded resource-aware parallel jobs with registry-ordered logs, and reports PASS/SKIP/FAIL without hiding later failures | yes |
-| `verify-amp-orb-ci.mjs` | Rejects non-exact wake sentinels, uncancelled wake turns, HMAC-coupled Action wake, non-authoritative or forked discovery, nondeterministic delivery IDs, webhook/HMAC allowlist drift, payload-to-prompt injection, secret-bearing candidate environments, stale merge parents, non-parallel Fast/Full lanes, duplicate execution, non-private receipts, false aggregate success, App Check create/PATCH ambiguity, token-refresh reruns, authoritative diagnostic runs, or status/Check recovery drift without registering a webhook or calling GitHub | yes |
-| `verify-amp-orb-deploy.mjs` | Proves the separate Deployment Orb contract without production access: automatic clean exact-main resolution; Hosted App/workflow/run identity; paged latest repo-only App Check selection and fail-closed authority modes; pre-external-action revalidation; consumed S0 baseline and evidence-bound S1-to-S2 bootstrap; pinned private SSH and forced-controller rotation; reviewed-persistence exact-diff binding, offline three-DB snapshots, idempotency checks, pre-traffic rollback and post-traffic no-replay; versioned controller/systemd/Caddy update with private rollback; strict stable-launcher grammar, standalone read-only root/TAT install inspection, official Tencent signing, one-dispatch exact invocation/task polling with complete output, and the lock-adjacent six-file installer contract; marker-authenticated receipts; ordinary atomic release switch, shared-data isolation, and healthy rollback; all real mutation commands remain closed | yes |
+| `verify-amp-orb-ci.mjs` | Rejects non-natural or HMAC-invalid deliveries, delivery/merge drift, candidate-secret exposure, duplicate execution, receipt/Check create-PATCH ambiguity, failed lane aggregation, or diagnostic authority without registering a webhook or calling GitHub | yes |
+| `verify-amp-orb-deploy.mjs` | Proves the separate Deployment Orb contract without production access: clean exact-main resolution, pinned App Check selection and fail-closed revalidation, code-only versus reviewed-persistence classification, atomic release switch, shared-data isolation, and healthy rollback; all real mutation commands remain closed | yes |
 | `verify-verification-command-runner.mjs` | Prevents completed or concurrently interrupted verifiers from leaving their own Vite/Chromium/test descendants alive, and bounds oversized single-line diagnostics while retaining their head, tail, and digest | yes |
 | `verify-verification-scheduler.mjs` | Proves bounded concurrency, render/port resource locks, exclusive barriers, ordered result flushing, collect-all statuses, abort stop-dispatch, and jobs=1 serial fallback | yes |
 | `verify-vocabulary-closed-loop.mjs` | Validates the 1600-entry Wanwei source/content/unique Koboyo visual, formal American and Owner-approved Cori British audio contracts, plus isolated progress, frozen-set, share/revoke, and temporary-scope persistence | yes |
@@ -113,7 +107,7 @@ signed output envelope, expiry, policy digest, or cached re-signing exists.
 | `verify-vocabulary-migration.mjs` | Replays the legacy vocabulary-entry constraint migration and proves successful row/index/FK preservation plus full rollback and FK restoration on a rejected legacy row | yes |
 | `verify-vocabulary-match-game.mjs` | Verifies the pure 10-word round builder and flip/mismatch/confirmation/match state machine for the frozen-set matching game | yes |
 | `verify-vocabulary-rendered-behavior.mjs` | Uses real Chromium to verify one-audio playback timing/cancellation/retry/end behavior, matching-game interaction, vocabulary cards, dictation/answer/handwriting PDFs, download filenames, and the hidden-answer auto-dictation flow | yes |
-| `verify-architecture-housekeeping.mjs` | Prevents missing entrypoints, undocumented verifier registration, automatic hosted fallback triggers, stale workflow ownership, and six risk-route regressions | yes |
+| `verify-architecture-housekeeping.mjs` | Prevents missing CI entrypoints, undocumented verifier registration, Chromium dependency drift, and changed-risk routing regressions | yes |
 | `verify-motion-tokens.mjs` | motion-pass gate: `app/src/**/*.css` (excluding PaperSurface.css contract file) has no `ease-in`, no `transition: all`, and no bare hand-written transition/animation durations outside `token-exempt`-tagged loading or signature moments | yes |
 | `verify-lecture-panel-css.mjs` | lecture-css-restore gate: 讲评五解析面板 (pi-ps-analysis/cloze/gf/seven/writing) 活 TSX 用到的每个类必须有 CSS 定义或在 hook-only 白名单（含白名单防陈旧 + paperBrowsePage.css @import 加载链断言）——retire 刀样式陪葬事故的可执行形态 | yes |
 | `verify-radius-family.mjs` | design-canon-v2 gate: every `border-radius` in `app/src/**/*.css` is in the DESIGN.md radius ladder {0, 4, 6, 8, 999px, 50%}; 32 historical off-family literals grandfathered per file×value as a shrink-only ratchet | yes |
@@ -135,6 +129,7 @@ signed output envelope, expiry, policy digest, or cached re-signing exists.
 | `verify-h10a-paper-set-routes.mjs` | H10-A paper-set CRUD + paper-workflow route dispatch contract (status codes, create-vs-merge, no-shadow) | yes |
 | `verify-h10b-ai-proxy-routes.mjs` | H10-B PR2 AI-proxy route owners (semantic-search/steward/verify-question-group): defineRoute surface + exact context.fn call args + 200 envelope pass-through + verify-question-group x-verify-request-id contract (result.requestId on success / minted id on 500) + {error,requestId} + serverContext-exposure/no-cycle guards | yes |
 | `verify-h11a-http-client.mjs` | Runtime same-origin addressing across loopback/remote/SSR, header decoding and server-error/fallback behavior; no source-shape or historical alias constraints | yes |
+| `verify-h12a-entry-modal.mjs` | H12-A EntryModal `addEntryQuestion` duplicate-`questionNo` guard: source — `EntryModal.tsx` imports + calls the extracted pure `nextQuestionNumber(form.questions)` helper (no `form.questions.length + 1` residue in code anywhere under app/src; `removeEntryQuestion` still does not renumber so `max+1` is load-bearing); behavioral — the exact repro `["1","2","3"]` → delete middle → `["1","3"]` → next number is `"4"` not the colliding `"3"` (the bug), exhaustive non-collision sweep over every non-last deletion from sequential 2..8 groups, boundary/gap/multi-digit/large/empty/non-integer/whitespace/decimal/already-corrupted cases, structural-type acceptance of the broader `EntryQuestionForm` shape through the public seam, `handleEntrySubmit` `stem`-filter persistence gate pinned | yes |
 | `verify-restart1-local-search-intent.mjs` | Restart cut ① local search: tokenize() CJK bigram production, parseLocalIntent() year/section/groupType/region extraction, weighted ranking (topic label > section/place > generic fields, year DESC tiebreak), hard-filter dimensions, non-regression on plain-English/empty queries | yes |
 | `verify-restart3-teacher-analysis.mjs` | Restart cut ③ teacher-version real analysis (paper-assets join): print-renderer isMetaStub() hides the publisher.mjs metadata stub note (source + behavioral); analysisText.mjs four-family degrader (reading/cloze/grammar-fill/seven-choices) against real tracked paper-zj-2026-jan fixtures, writing excluded; graceful no-throw on missing-analysis paper (paper-2024-jia) and unmatched groupId; findPaperAssetGroup additive paperId field + existing call-site regression; draftPaperStore teacher-only wiring + never-overwrite-existing-explanation + no-DB-write guard | yes |
 | `verify-home-default-feed.mjs` | Cut ⑥ home-default-feed: buildDefaultFeed (year DESC + paperName tiebreak sort, reuses aggregatePaperResults bucketing, empty-corpus no-throw, real_exam + mock_exam both included); ConciergeDesk feed render gate (empty + true-vacuum only, not loading/results/clarification/error), 8-paper cap + "显示全部 N 套卷" expander, empty-corpus import-guidance copy, feed rows reuse ConciergePaperRow wiring unchanged; STARTER_CHIPS retired for the structured filter row (cut ai-mode-filter-chips C7) with submit(intentOverride) path preserved + submit keeps query after firing (P1 same-face fix; triggerSimilar retired by similar-entrypoints E3 — 配相似 is now a plain deep-link, not a hook action); `.eyebrow` re-scoped off slate inside `.home-mode-ai` only, `:root` untouched | yes |
@@ -258,6 +253,7 @@ signed output envelope, expiry, policy digest, or cached re-signing exists.
 | `verify-paper-draft.mjs` | Draft paper model / behavior | yes |
 | `verify-concierge-desk.mjs` | Concierge desk behavior used by draft entry points; similar-passages-entry (E6, was E3): 找类似/triggerSimilar/buildSimilarIntent retired, ConciergeGroupCard's 相似篇章 is a toggle button opening the in-place shared candidate panel, gated on the four v2-supported groupTypes | yes |
 | `verify-c8-draft-paper-contracts.mjs` | C8 draft-paper API/search/workbench contract | yes |
+| `verify-print-pdf-error-classification.mjs` | `POST /api/draft-papers/:id/print-pdf` error classifier + sibling-parity with `GET /:id/pagination`: the per-item data error `questionGroupId not found: <id>` (thrown by `resolveDraftExportItems` when `getQuestionGroupDetail` returns null, e.g. under `identityConflict`) maps to **400** on both routes (was misclassified 503 on print-pdf by a broad `message.includes('not found')` substring match); the renderer-missing lane (`RENDERER_MISSING` / `ENOENT` from `resolvePagedjsPolyfillPath` / `chromium.launch`) stays **503**; `NOT_FOUND_MESSAGES` sentinels stay **404**. Hermetic — imports `createDraftPaperRoutes` and invokes the route handlers directly with a stubbed `context.draftPaperStore`; no HTTP server / no Chromium | yes |
 | `verify-c8-my-space-contracts.mjs` | C8 PR B My Space storage/API/UI contract; cut-specific | no |
 | `verify-my-space-shelf.mjs` | my-space-shelf + dossier-cabinet: MySpacePage rebuilt as a token-only, month-grouped card shelf — zero hardcoded palette hex in MySpacePage.css (empty allowlist; `--paper-*` tokens sanctioned for the miniature-A4 card thumb), no `window.confirm` (custom `role="alertdialog"` confirm modal with upgraded copy: "删除草稿卷 PDF" title + "删除 PDF" confirm action instead), `.my-space-grid` card grid (`repeat(auto-fill, minmax(200px, 1fr))`), primary action class filled with `var(--eqb-color-primary)`, danger action class referencing `var(--eqb-color-danger)`, old triple-heading text gone, folder filter chips gated on `folders.length > 0`, artifacts grouped into month-archive sections | yes |
 | `verify-c8-draft-paper-render-model.mjs` | C8 draft paper render model；print-renderer.mjs 曾冻结 rendering logic（H9/C8），restart-cut-③ 与刀⑤ render-fidelity Chunk B 是已授权的两次例外，diff 级冻结校验已随刀⑤ Chunk B 退役（见脚本内注释） | yes |
