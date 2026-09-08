@@ -10,15 +10,17 @@
  *
  * detail-page-redesign (2026-07-15, spec docs/specs/2026-07-15-detail-page-
  * redesign-design.md 负空间①「解析不放」): the entire per-question analysis
- * surface that section 2 used to assert the layering of — passage,
+ * surface that this script used to assert the layering of — passage,
  * 逐题题干答案, all four groupType AI-analysis blocks — is now structurally
  * gone from the detail page (retired wholesale, not re-laid-out), replaced
- * by 速览头 + a read-only「一张纸」PaperSurface mount. Section 2's
- * assertions FLIP from "AnalysisDisclosure is wired up N ways" to "zero
- * AnalysisDisclosure residue" (plan.md §6 authorized anchor move). Section 1
- * (AnalysisDisclosure.tsx itself — still a live shared component, still used
- * by verify-detail-redesign.mjs's own retirement check) and section 3 (the
- * useState guardrail count, now 4 per detail-page-redesign's rewrite) are
+ * by 速览头 + a read-only「一张纸」PaperSurface mount. The former
+ * "AnalysisDisclosure is wired up N ways" assertions FLIP to "zero
+ * AnalysisDisclosure residue" (plan.md §6 authorized anchor move).
+ * AnalysisDisclosure.tsx itself was deleted as dead code (no production
+ * consumers remained after this retirement, and flow-hover Chunk B's
+ * planned reuse was withdrawn 2026-07-08 in favor of flow-panel's
+ * right-rail panel), so its former shape-check section is removed. The
+ * useState guardrail count (now 4 per detail-page-redesign's rewrite) is
  * re-asserted unchanged in spirit.
  *
  * Source-level checks only (matches the established convention for this
@@ -26,14 +28,11 @@
  * actually mount React components; see scripts/verify-classic-retire-2.mjs
  * and friends for precedent). Covers:
  *
- *   1. AnalysisDisclosure.tsx exists, owns its own useState, defaults
- *      collapsed, and exposes the accessibility pattern (aria-expanded +
- *      aria-pressed on a <button>) per PaperAssetAnalysisPanel.tsx precedent.
- *   2. QuestionGroupDetailView.tsx has zero AnalysisDisclosure import/usage,
+ *   1. QuestionGroupDetailView.tsx has zero AnalysisDisclosure import/usage,
  *      and zero residue of the per-question/group-level analysis surfaces
  *      the old layering wrapped (question-ai-block, question-ai-parse,
  *      the four group-level analysis titles).
- *   3. QuestionGroupDetailView.tsx still has exactly the detail-page-
+ *   2. QuestionGroupDetailView.tsx still has exactly the detail-page-
  *      redesign useState count (4) — the guardrail is not further relaxed
  *      by this cut.
  */
@@ -60,31 +59,7 @@ function read(relPath) {
   return readFileSync(path.join(rootDir, relPath), 'utf8')
 }
 
-// ------------------------------------------------------------------ 1. AnalysisDisclosure.tsx
-
-const disclosure = read('app/src/features/question-detail/AnalysisDisclosure.tsx')
-
-assert('AnalysisDisclosure owns internal useState (self-contained expand/collapse)', /\buseState\s*\(\s*false\s*\)/.test(disclosure))
-assert('AnalysisDisclosure default collapsed (no defaultExpanded=true escape hatch)', !/defaultExpanded/.test(disclosure))
-assert(
-  'AnalysisDisclosure toggle button has aria-expanded reflecting state',
-  /aria-expanded=\{expanded\}/.test(disclosure),
-)
-assert(
-  'AnalysisDisclosure toggle button has aria-pressed reflecting state (PaperAssetAnalysisPanel pattern)',
-  /aria-pressed=\{expanded\}/.test(disclosure),
-)
-assert('AnalysisDisclosure toggle is a real <button type="button">', /<button\s+type="button"/.test(disclosure))
-assert(
-  'AnalysisDisclosure default per-question labels are 展开解析/收起',
-  disclosure.includes("expandText = '展开解析'") && disclosure.includes("collapseText = '收起'"),
-)
-assert(
-  'AnalysisDisclosure body only renders while expanded (collapsed by default hides content)',
-  /\{expanded\s*&&\s*<div className="analysis-disclosure-body">/.test(disclosure),
-)
-
-// ------------------------------------------------------------------ 2. QuestionGroupDetailView.tsx: AnalysisDisclosure retired (detail-page-redesign)
+// ------------------------------------------------------------------ 1. QuestionGroupDetailView.tsx: AnalysisDisclosure retired (detail-page-redesign)
 
 const detailView = read('app/src/features/question-detail/QuestionGroupDetailView.tsx')
 
@@ -114,7 +89,7 @@ for (const [label, pattern] of retiredAnalysisMarkers) {
   assert(`retired analysis surface absent: ${label}`, !pattern.test(detailView))
 }
 
-// ------------------------------------------------------------------ 3. useState guardrail re-asserted here too
+// ------------------------------------------------------------------ 2. useState guardrail re-asserted here too
 
 // The canonical version of this guardrail (scripts/verify-classic-retire-2.mjs)
 // is the source of truth for the exact count + which declarations make it
