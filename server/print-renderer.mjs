@@ -285,6 +285,7 @@ function canonicalGroupMatchesPrintDetail(canonicalGroup, detail) {
 }
 
 function canonicalFamilyForPrintDetail(detail, selectedFamilyContractId) {
+  if (detail.groupType === 'listening') return 'listening'
   if (detail.groupType === 'cloze') return 'cloze'
   if (['grammarFill', 'grammar_cloze'].includes(detail.groupType)) {
     return 'grammar-fill'
@@ -304,6 +305,7 @@ function canonicalFamilyForPrintDetail(detail, selectedFamilyContractId) {
 
 function requiresCanonicalPrintConsumption(detail) {
   return [
+    'listening',
     'cloze',
     'grammarFill',
     'grammar_cloze',
@@ -1524,6 +1526,9 @@ export function buildPrintHtml({
 
   function renderOptions(options, groupType) {
     if (!options || options.length === 0) return ''
+    if (groupType === 'listening') {
+      return `<div class="options-grid options-grid--listening">${options.map((o) => `<span data-canonical-option-id="${escapeHtml(o.optionId)}">${escapeHtml(o.label)}. ${escapeHtml(o.content)}</span>`).join('')}</div>`
+    }
     if (groupType === 'cloze') {
       return `<p class="options-inline">${options.map((o) => `<span>${escapeHtml(o.label)}. ${escapeHtml(o.content)}</span>`).join('')}</p>`
     }
@@ -1766,6 +1771,7 @@ export function buildPrintHtml({
           && canonicalGroup?.groupType !== 'sevenChoices'
           && canonicalGroup?.groupType !== 'cloze'
           && canonicalGroup?.groupType !== 'grammarFill'
+          && canonicalGroup?.groupType !== 'listening'
         ) {
           groupLeadHtml += `<div class="group-header">${chineseNumeral(groupNum)}、${escapeHtml(groupHeaderLabel)}${escapeHtml(groupHeaderScoreSuffix)}</div>`
         }
@@ -1776,6 +1782,7 @@ export function buildPrintHtml({
           && canonicalGroup?.groupType !== 'sevenChoices'
           && canonicalGroup?.groupType !== 'cloze'
           && canonicalGroup?.groupType !== 'grammarFill'
+          && canonicalGroup?.groupType !== 'listening'
         ) {
           groupLeadHtml += `<div class="group-meta"><strong>${escapeHtml(detail.title)}</strong> · ${groupTypeLabels[detail.groupType] || detail.groupType} · 每题 ${score} 分</div>`
         }
@@ -1790,7 +1797,10 @@ export function buildPrintHtml({
         const blankCounter = { next: questionNum }
 
         if (canonicalGroup) {
-          if (canonicalGroup.groupType === 'reading') {
+          if (canonicalGroup.groupType === 'listening') {
+            // The same Canonical Question projection as PaperSurface; no
+            // passage/transcript block belongs in the student question area.
+          } else if (canonicalGroup.groupType === 'reading') {
             groupHtml += renderCanonicalReadingBlocks(canonicalGroup)
           } else if (canonicalGroup.groupType === 'writing') {
             groupHtml += groupLeadHtml
@@ -3105,6 +3115,11 @@ ${grammarFillGeometryFixtureCss}
 .canonical-application-given {
   margin: 0;
 }
+
+${items.some((item) => item.detail.groupType === 'listening') ? `.options-grid--listening {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  overflow-wrap: anywhere;
+}` : ''}
 
 .canonical-application-given[data-canonical-given-role="title"] {
   text-align: center;

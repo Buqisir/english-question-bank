@@ -15,6 +15,7 @@ import manifestV47 from '../../standards/paper-canonical/manifest-v47.json' with
 import manifestV48 from '../../standards/paper-canonical/manifest-v48.json' with { type: 'json' }
 import manifestV49 from '../../standards/paper-canonical/manifest-v49.json' with { type: 'json' }
 import manifestV50 from '../../standards/paper-canonical/manifest-v50.json' with { type: 'json' }
+import manifestV51 from '../../standards/paper-canonical/manifest-v51.json' with { type: 'json' }
 import nck1V9 from '../../standards/paper-canonical/profiles/nck1-v9.json' with { type: 'json' }
 import nck1V10 from '../../standards/paper-canonical/profiles/nck1-v10.json' with { type: 'json' }
 import nck1V11 from '../../standards/paper-canonical/profiles/nck1-v11.json' with { type: 'json' }
@@ -209,6 +210,10 @@ const registeredManifestProfiles = new Map([
     `${manifestV50.manifestId}@${manifestV50.version}@${digestJson(manifestV50)}`,
     manifestV50Profiles,
   ],
+  [
+    `${manifestV51.manifestId}@${manifestV51.version}@${digestJson(manifestV51)}`,
+    manifestV50Profiles,
+  ],
 ])
 
 function reject(message) {
@@ -329,7 +334,7 @@ function sourceInstructionOverrides(consumption) {
   for (const selection of consumption.selections) {
     const occurrences = selection?.projectedOccurrences || []
     const continuationV49 =
-      ['49', '50'].includes(consumption.authorityRef?.manifestVersion)
+      ['49', '50', '51'].includes(consumption.authorityRef?.manifestVersion)
       && selection?.mode === 'canonical'
       && selection?.familyContractId === 'continuation-writing'
     const digestByGroupId = new Map(

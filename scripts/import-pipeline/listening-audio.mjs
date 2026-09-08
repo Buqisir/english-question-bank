@@ -15,6 +15,8 @@ import {
   LISTENING_AUDIO_PATHS,
   assertListeningAudioManifest,
   listeningAudioAttachmentDescriptors,
+  listeningOrderedBigramRecall,
+  minimumListeningOrderedBigramRecall,
 } from '../../server/paper-import/listeningAudioEvidence.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
@@ -78,6 +80,7 @@ function probeAudio(filePath) {
   try {
     execFileSync('ffmpeg', [
       '-v', 'error',
+      '-xerror',
       '-i', filePath,
       '-map', '0:a:0',
       '-f', 'null',
@@ -251,10 +254,6 @@ function overlap(reference, actual) {
   return matches
 }
 
-function bigrams(tokens) {
-  return tokens.slice(1).map((token, index) => `${tokens[index]}\u0000${token}`)
-}
-
 function comparisonFlag(code, message, { severity = 'review', startSeconds = 0, endSeconds = 0 } = {}) {
   return { code, severity, startSeconds, endSeconds, message }
 }
@@ -315,20 +314,16 @@ export function compareListeningAudio({ asr, basis, referenceText }) {
       fail('Authoritative listening transcript is too short for comparison')
     }
     const tokenMatches = overlap(referenceTokens, actualTokens)
-    const referenceBigrams = bigrams(referenceTokens)
-    const bigramMatches = overlap(referenceBigrams, bigrams(actualTokens))
     metrics = {
       referenceTokenCount: referenceTokens.length,
       asrTokenCount: actualTokens.length,
       tokenRecall: round(tokenMatches / referenceTokens.length),
       tokenPrecision: round(tokenMatches / actualTokens.length),
-      orderedBigramRecall: round(
-        referenceBigrams.length > 0 ? bigramMatches / referenceBigrams.length : 0,
-      ),
+      orderedBigramRecall: listeningOrderedBigramRecall(referenceText, asr.transcriptText),
       speechCoverage: round(speechCoverage),
       averageLogProbability: round(averageLogProbability),
     }
-    if (metrics.tokenRecall < 0.7 || metrics.orderedBigramRecall < 0.5) {
+    if (metrics.tokenRecall < 0.7 || metrics.orderedBigramRecall < minimumListeningOrderedBigramRecall) {
       flags.push(comparisonFlag(
         'LISTENING_AUDIO_TRANSCRIPT_MISMATCH',
         'ASR does not sufficiently match the authoritative listening transcript',

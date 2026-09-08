@@ -20,7 +20,8 @@ import { createCanonicalConsumerRuntime } from './paper-canonical/consumerRuntim
 import { loadCanonicalSourceAssetRepresentation } from './paper-canonical/sourceAssetRepresentation.mjs'
 import { createPaperCanonicalConsumerRoutes } from './paper-canonical/consumerRoutes.mjs'
 import { ensurePaperImportDatabaseShape } from './paper-import/publisher.mjs'
-import { cleanupPaperImportTempArtifacts, listPaperAssetVersions, resolvePaperAssetReadPaths } from './paper-import/storage.mjs'
+import { cleanupPaperImportTempArtifacts, resolvePaperAssetReadPaths } from './paper-import/storage.mjs'
+import { sendPaperAssetStatic } from './paper-import/paperAssetStatic.mjs'
 import { createQuestionGroupRoutes } from './question-bank/questionGroupRoutes.mjs'
 import { createPaperSetRoutes } from './paper-sets/routes.mjs'
 import { createAiProxyRoutes } from './ai-proxy/routes.mjs'
@@ -347,6 +348,7 @@ function invalidateTeachingFacetIndex() {
 }
 
 const PRINT_READY_GROUP_TYPES = new Set([
+  'listening',
   'reading',
   'cloze',
   'seven_choices',
@@ -356,6 +358,7 @@ const PRINT_READY_GROUP_TYPES = new Set([
 ])
 
 const OBJECTIVE_PRINT_GROUP_TYPES = new Set([
+  'listening',
   'reading',
   'cloze',
   'seven_choices',
@@ -429,7 +432,7 @@ function getPaperAssetPrintReady(asset, group) {
     if (!question) return { ok: false, reason: `paper-asset 引用了不存在的小题 ${questionId}` }
     const stem = String(question.stem ?? question.blankId ?? question.questionNo ?? '').trim()
     if (!stem) return { ok: false, reason: '存在空题干' }
-    if ((groupType === 'reading' || groupType === 'cloze')) {
+    if (['listening', 'reading', 'cloze'].includes(groupType)) {
       const options = Array.isArray(question.options) ? question.options : []
       if (options.length === 0 || options.some((option) => !String(option?.label || '').trim() || !String(option?.text || '').trim())) {
         return { ok: false, reason: '存在空选项' }
@@ -484,8 +487,10 @@ function computePrintReadyJudgment(group, paperAssetMatch) {
     return { ok: false, reason: '试卷资产身份不一致' }
   }
   if (!PRINT_READY_GROUP_TYPES.has(group.group_type)) {
-    if (group.group_type === 'listening') return { ok: false, reason: '听力题组暂不支持打印' }
     return { ok: false, reason: '题型暂不支持打印' }
+  }
+  if (group.group_type === 'listening' && !paperAssetMatch) {
+    return { ok: false, reason: '听力题组缺少规范试卷资产' }
   }
   if (paperAssetMatch) return getPaperAssetPrintReady(paperAssetMatch.asset, paperAssetMatch.group)
 
@@ -731,46 +736,6 @@ function sendJson(response, status, body) {
     'content-type': 'application/json; charset=utf-8',
   })
   response.end(JSON.stringify(body))
-}
-
-function sendPaperAssetStatic(response, urlPath) {
-  const relativePath = decodeURIComponent(urlPath.replace(/^\/paper-assets\/?/, ''))
-  if (!relativePath || relativePath.includes('..') || path.isAbsolute(relativePath)) {
-    sendJson(response, 400, { error: 'Invalid paper asset path' })
-    return
-  }
-  const paperAssetRoot = path.resolve(paperAssetsDir)
-  let filePath = path.resolve(paperAssetsDir, relativePath)
-  const isInsideRoot = filePath === paperAssetRoot || filePath.startsWith(`${paperAssetRoot}${path.sep}`)
-  if (!isInsideRoot) {
-    sendJson(response, 400, { error: 'Invalid paper asset path' })
-    return
-  }
-  if (!existsSync(filePath)) {
-    const parts = relativePath.split('/')
-    if (parts.length > 2 && parts[1] === 'latest') {
-      const versions = listPaperAssetVersions(paperAssetsDir, parts[0])
-      if (versions.length > 0) {
-        filePath = path.resolve(paperAssetsDir, parts[0], 'versions', `v${versions[versions.length - 1]}`, ...parts.slice(2))
-      }
-    }
-  }
-  if (!filePath.startsWith(`${paperAssetRoot}${path.sep}`) || !existsSync(filePath) || statSync(filePath).isDirectory()) {
-    sendJson(response, 404, { error: 'Paper asset file not found' })
-    return
-  }
-  const ext = path.extname(filePath).toLowerCase()
-  const contentType =
-    ext === '.json'
-      ? 'application/json; charset=utf-8'
-      : ext === '.docx'
-        ? 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-        : 'application/octet-stream'
-  response.writeHead(200, {
-    'access-control-allow-origin': '*',
-    'content-type': contentType,
-  })
-  response.end(readFileSync(filePath))
 }
 
 function openDatabase({ readOnly = true } = {}) {
@@ -4254,8 +4219,8 @@ const server = createServer(async (request, response) => {
       return
     }
 
-    if (request.method === 'GET' && url.pathname.startsWith('/paper-assets/')) {
-      sendPaperAssetStatic(response, url.pathname)
+    if (['GET', 'HEAD'].includes(request.method) && url.pathname.startsWith('/paper-assets/')) {
+      sendPaperAssetStatic(request, response, url.pathname, paperAssetsDir)
       return
     }
 

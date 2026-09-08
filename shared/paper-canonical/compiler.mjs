@@ -2763,7 +2763,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     content,
     new Set(sourceGroup.blankIds),
     mediaIds,
-    ['46', '47', '48', '49', '50'].includes(closure.authorityRef.manifestVersion),
+    ['46', '47', '48', '49', '50', '51'].includes(closure.authorityRef.manifestVersion),
   ))
   if (family.familyContractId !== 'reading' && contentHasFramedColumns(content)) {
     diagnostics.push(diagnostic('RICH_BLOCK_UNSUPPORTED', 'unsupported', '$.content', 'framed_columns is only representable in Reading'))
@@ -2771,7 +2771,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
   diagnostics.push(...validateReferenceBlankClosure(family.familyContractId, sourceGroup.questionIds, sourceGroup.blankIds, content))
   const variant = cloneJson(sourceGroup.variant || {})
   const variantKeys = family.familyContractId === 'seven-choices'
-    ? ['47', '48', '49', '50'].includes(closure.authorityRef.manifestVersion)
+    ? ['47', '48', '49', '50', '51'].includes(closure.authorityRef.manifestVersion)
       ? ['family', 'passageBlockRoles', 'members', 'choiceOwnership']
       : ['family', 'members', 'choiceOwnership']
     : family.familyContractId === 'reading'
@@ -2829,7 +2829,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
       variant,
       assertions: capture.assertions,
       allowPassageBlockRoles:
-        ['47', '48', '49', '50'].includes(closure.authorityRef.manifestVersion),
+        ['47', '48', '49', '50', '51'].includes(closure.authorityRef.manifestVersion),
     }).map((item) => diagnostic(item.code, item.disposition, item.path, item.message)))
   }
   if (family.familyContractId === 'reading') {
@@ -3999,6 +3999,14 @@ function isConfirmedNck1MaterializationRequest(request) {
       mediaId: media.mediaId,
       bytes: byInputKey.get(nck1InputKey('source_media', media.mediaId))?.bytes,
     })),
+  }
+  const audioDocument = byInputKey.get('listening_audio_descriptor')
+  if (audioDocument) {
+    try {
+      sourceInput.listeningAudio = JSON.parse(new TextDecoder().decode(audioDocument.bytes))
+    } catch {
+      return false
+    }
   }
   if (!isNck1MaterializationInput(sourceInput)) return false
   const rerun = nck1MaterializationCandidateFromInput(sourceInput)

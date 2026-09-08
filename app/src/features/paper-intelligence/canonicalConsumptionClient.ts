@@ -8,6 +8,14 @@ export type WholePaperConsumption = {
   sourceAssetVersion: number | null
   sourceAssetDigest?: string
   publicationDigest?: string
+  listeningAudio?: {
+    relativePath: string
+    sha256: string
+    byteLength: number
+    durationSeconds: number
+    mediaType: 'audio/mpeg'
+    url: string
+  }
   authorityRef?: {
     manifestId: string
     manifestVersion: string

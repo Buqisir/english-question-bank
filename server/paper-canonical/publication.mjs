@@ -51,6 +51,7 @@ const publicationFileName =
   `canonical-paper-publication-v${canonicalAuthorityRef.manifestVersion}.json`
 const publicationFileNames = [
   publicationFileName,
+  'canonical-paper-publication-v51.json',
   'canonical-paper-publication-v50.json',
   'canonical-paper-publication-v49.json',
   'canonical-paper-publication-v48.json',
@@ -400,10 +401,29 @@ function validatePublicationLineage({ sourceCapture, plan, groups, normalization
   if (normalizationReport.sourceFingerprint !== expectedSourceFingerprint || stableStringify(normalizationReport.directSourceMap) !== stableStringify(expectedDirectSourceMap) || normalizationReport.semanticDigest !== expectedSemanticDigest) throw publicationError('CANONICAL_PUBLICATION_LINEAGE_INVALID', 'Normalization Report does not close its direct source lineage')
 }
 
+function capturedListeningAudio(sourceCapture, groups, closure) {
+  if (closure.authorityRef.manifestVersion !== '51') return null
+  const active = groups.some((group) => group.contractRef.familyContractId === 'listening')
+  const documents = sourceCapture.documents.filter((document) => document.inputKey === 'listening_audio_descriptor')
+  if (!active && documents.length === 0) return null
+  if (!active || documents.length !== 1) throw publicationError('LISTENING_AUDIO_UNBOUND', 'Listening requires one confirmed playback descriptor')
+  const descriptor = readJsonBytes(decodeBase64(documents[0].encodedBytes, 'listening audio'), 'listening audio')
+  const schema = closure.schemas['canonical-paper-publication-v51'].properties.listeningAudio
+  if (validateJsonSchema(descriptor, schema).length) throw publicationError('LISTENING_AUDIO_UNBOUND', 'Invalid playback descriptor')
+  return descriptor
+}
+
+function assertPlaybackBytes(descriptor, bytes) {
+  if (!(bytes instanceof Uint8Array) || bytes.byteLength !== descriptor.byteLength || sha256(bytes) !== descriptor.sha256) {
+    throw publicationError('LISTENING_AUDIO_BYTES_INVALID', 'Playback audio is missing or differs from the confirmed source')
+  }
+}
+
 export function sealCanonicalPublication({
   compilation,
   sourceAssetVersion,
   sourceAsset,
+  listeningAudioBytes = null,
   registeredConfirmationProof = null,
   trustedDocxConfirmationProof = null,
   docxPairConfirmationProof = null,
@@ -442,6 +462,9 @@ export function sealCanonicalPublication({
   assertPaperId(canonicalPaper?.paperPlan?.paperId)
   validateSourceCaptureIntegrity(sourceCapture)
   const sourceEvidence = sourceEvidenceDescriptors(sourceCapture)
+  const listeningAudio = capturedListeningAudio(sourceCapture, canonicalPaper.questionGroups, closure)
+  if (listeningAudio) assertPlaybackBytes(listeningAudio, listeningAudioBytes)
+  else if (listeningAudioBytes) throw publicationError('LISTENING_AUDIO_UNBOUND', 'Audio requires active Listening')
   const sourceAssetDigest = sha256(sourceAsset)
   const matchingDocuments = sourceCapture.documents.filter((document) => document.sha256 === sourceAssetDigest)
   if (matchingDocuments.length !== 1) throw publicationError('CANONICAL_PUBLICATION_SOURCE_UNBOUND', 'The publication source asset must be exactly one captured immutable document')
@@ -463,6 +486,7 @@ export function sealCanonicalPublication({
     sourceAssetDocumentId: matchingDocuments[0].documentId,
     sourceEvidence: sourceEvidence.map(({ bytes: _bytes, ...descriptor }) => descriptor),
     authority: canonicalPaper.paperPlan.authorityRef,
+    ...(listeningAudio ? { listeningAudio } : {}),
     artifacts: descriptors
       .map(({ bytes: _bytes, ...descriptor }) => descriptor)
       .sort((left, right) => left.role.localeCompare(right.role)),
@@ -472,7 +496,10 @@ export function sealCanonicalPublication({
     manifest,
     sourceAsset: new Uint8Array(sourceAsset),
     artifacts: Object.fromEntries(descriptors.map((descriptor) => [descriptor.relativePath, descriptor.bytes])),
-    sourceEvidence: Object.fromEntries(sourceEvidence.map((descriptor) => [descriptor.relativePath, descriptor.bytes])),
+    sourceEvidence: {
+      ...Object.fromEntries(sourceEvidence.map((descriptor) => [descriptor.relativePath, descriptor.bytes])),
+      ...(listeningAudio ? { [listeningAudio.relativePath]: new Uint8Array(listeningAudioBytes) } : {}),
+    },
   }
 }
 
@@ -499,6 +526,9 @@ export function validateCanonicalPublicationBundle({ manifest, sourceAsset, read
   const planIssues = validateJsonSchema(artifacts.paper_plan, closure.schemas['canonical-paper-plan-v1'], '$.plan')
   const reportIssues = validateJsonSchema(artifacts.normalization_report, closure.schemas[`normalization-report-v${closure.authorityRef.manifestVersion}`], '$.report')
   if (sourceCaptureIssues.length || planIssues.length || reportIssues.length || artifacts.question_groups?.schemaVersion !== 'canonical-question-groups-v1' || !Array.isArray(artifacts.question_groups?.groups)) throw publicationError('CANONICAL_PUBLICATION_ARTIFACT_SCHEMA_INVALID', 'One or more sealed artifacts violate their exact schemas')
+  const listeningAudio = capturedListeningAudio(artifacts.source_capture, artifacts.question_groups.groups, closure)
+  if (digestJson(listeningAudio) !== digestJson(manifest.listeningAudio || null)) throw publicationError('LISTENING_AUDIO_UNBOUND', 'Publication audio differs from the confirmed source')
+  if (listeningAudio) assertPlaybackBytes(listeningAudio, readArtifact(listeningAudio.relativePath))
   if (artifacts.normalization_report.disposition !== 'ready' || artifacts.normalization_report.captureDigest !== artifacts.source_capture.digest || artifacts.paper_plan.completeness.status !== 'complete') throw publicationError('CANONICAL_PUBLICATION_SEMANTIC_CLOSURE_INVALID', 'Publication does not contain a complete ready source closure')
   const legacyAuthority = closure.authorityRef.manifestVersion === '1'
   const sourceAssetDocument = validateSourceAssetBinding(
@@ -1095,6 +1125,7 @@ export function admitCanonicalPaperImport({
   request,
   sourceAssetVersion,
   sourceAsset,
+  listeningAudioBytes = null,
   registeredConfirmation,
 }) {
   let compilation
@@ -1179,6 +1210,7 @@ export function admitCanonicalPaperImport({
       compilation,
       sourceAssetVersion,
       sourceAsset: effectiveSourceAsset,
+      listeningAudioBytes,
       registeredConfirmationProof,
       trustedDocxConfirmationProof,
       docxPairConfirmationProof,
@@ -1518,8 +1550,11 @@ function canonicalSelections(validated, contract, sourceAsset) {
       projectedOccurrences,
       ...(
         (
+          familyContractId === 'listening'
+        )
+        || (
           familyContractId === 'seven-choices'
-          && ['47', '48', '49', '50'].includes(validated.plan.authorityRef.manifestVersion)
+          && ['47', '48', '49', '50', '51'].includes(validated.plan.authorityRef.manifestVersion)
         )
         || (
           familyContractId === 'cloze'
@@ -1531,7 +1566,7 @@ function canonicalSelections(validated, contract, sourceAsset) {
         )
         || (
           familyContractId === 'continuation-writing'
-          && ['49', '50'].includes(validated.plan.authorityRef.manifestVersion)
+          && ['49', '50', '51'].includes(validated.plan.authorityRef.manifestVersion)
         )
         ? {
             projectedOccurrenceDigests: projectedOccurrences.map(
@@ -1718,6 +1753,12 @@ function readyConsumption(
         : {}
     ),
     selections: canonical.selections,
+    ...(manifest.listeningAudio ? {
+      listeningAudio: {
+        ...manifest.listeningAudio,
+        url: `/paper-assets/${encodeURIComponent(request.paperId)}/versions/v${ref.sourceAssetVersion}/${manifest.listeningAudio.relativePath}`,
+      },
+    } : {}),
     ...(
       Number(manifest.authority.manifestVersion) >= 30
         ? { visibleStructure }

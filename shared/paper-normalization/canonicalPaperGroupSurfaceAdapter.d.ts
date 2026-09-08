@@ -189,7 +189,7 @@ export function buildCanonicalClozeSurfaceData(input: {
 
 export function buildCanonicalConsumptionSurfaceData(input: {
   consumption: unknown
-  familyContractId: 'cloze' | 'grammar-fill' | 'seven-choices'
+  familyContractId: 'cloze' | 'grammar-fill' | 'seven-choices' | 'listening'
   groupId: string
 }): {
   readonly status: 'ready'

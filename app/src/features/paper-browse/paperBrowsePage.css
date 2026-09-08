@@ -1628,30 +1628,21 @@
 }
 
 .paper-browse-listening {
-  display: grid;
-  gap: 18px;
-  padding: 6px 0;
+  padding: 0;
 }
 
-.paper-browse-listening-question {
+.paper-browse-listening .ps-question {
   scroll-margin-top: 88px;
 }
 
-.paper-browse-listening-stem {
-  margin: 0 0 8px;
-  line-height: 1.65;
+.paper-browse-audio {
+  margin-bottom: 1em;
 }
 
-.paper-browse-listening-options {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px 24px;
-  padding-left: 24px;
-  line-height: 1.55;
+.paper-browse-audio audio {
+  width: 100%;
 }
 
-@media (max-width: 720px) {
-  .paper-browse-listening-options {
-    grid-template-columns: 1fr;
-  }
+@media print {
+  .paper-browse-audio { display: none; }
 }

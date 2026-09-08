@@ -43,6 +43,31 @@ function fail(message) {
   throw error
 }
 
+export const minimumListeningOrderedBigramRecall = 0.5
+
+// Shared by intake and receipt validation: old unordered-overlap receipts
+// cannot bless reordered recordings. This reuses stored ASR, never the model.
+export function listeningOrderedBigramRecall(referenceText, actualText) {
+  const bigrams = (text) => {
+    const tokens = String(text).toLowerCase().match(/[\p{L}\p{N}]+(?:'[\p{L}\p{N}]+)?/gu) || []
+    return tokens.slice(1).map((token, index) => `${tokens[index]}\u0000${token}`)
+  }
+  const reference = bigrams(referenceText)
+  const actual = bigrams(actualText)
+  const matches = new Uint32Array(actual.length + 1)
+  for (const token of reference) {
+    let diagonal = 0
+    for (let index = 1; index <= actual.length; index += 1) {
+      const previous = matches[index]
+      matches[index] = token === actual[index - 1]
+        ? diagonal + 1
+        : Math.max(matches[index], matches[index - 1])
+      diagonal = previous
+    }
+  }
+  return reference.length ? Number((matches[actual.length] / reference.length).toFixed(4)) : 0
+}
+
 function readArtifact(rootDir, relativePath) {
   const root = path.resolve(rootDir)
   const filePath = path.resolve(root, ...relativePath.split('/'))
@@ -111,18 +136,56 @@ function validateCheck(check, paperId, descriptors, asr) {
     || !reference.text.trim()
     || sha256(Buffer.from(reference.text, 'utf8')) !== reference.textSha256
     || check.contentSafety?.verdict !== 'pass'
+    || check.contentSafety?.reviewedBy !== 'import_agent'
+    || typeof check.contentSafety?.summary !== 'string'
+    || !check.contentSafety.summary.trim()
+    || !Array.isArray(check.contentSafety?.flaggedRanges)
+    || check.contentSafety.flaggedRanges.length !== 0
     || typeof check.contentSafety?.reviewedAt !== 'string'
     || Number.isNaN(Date.parse(check.contentSafety.reviewedAt))
     || check.contentSafety?.reviewedTranscriptSha256 !== check.asrSha256
     || check.contentSafety?.untrustedContentHandledAsData !== true
     || !Array.isArray(check.flaggedRanges)
+    || check.flaggedRanges.length !== 0
     || typeof check.evidenceDigest !== 'string'
   ) fail('Listening audio check has not passed or is not bound to its evidence')
   const { evidenceDigest, ...evidence } = check
   if (digestJson(evidence) !== evidenceDigest) {
     fail('Listening audio evidence digest does not match the check receipt')
   }
+  if (reference.basis === 'authoritative_transcript'
+    && listeningOrderedBigramRecall(reference.text, asr.transcriptText) < minimumListeningOrderedBigramRecall) {
+    fail('Listening ASR word order does not match the authoritative transcript')
+  }
   return check
+}
+
+// Compare only the source words: whitespace and punctuation changes do not
+// invalidate a review, but a different transcript or Question set does.
+export function assertListeningAudioSource(evidence, listening) {
+  if (listening?.state !== 'captured') {
+    if (evidence) fail('Audio cannot be attached to a paper without Listening')
+    return null
+  }
+  if (!evidence) fail('Captured Listening requires reviewed audio')
+  const hasTranscript = listening.transcript?.length > 0
+  const basis = hasTranscript ? 'authoritative_transcript' : 'listening_questions'
+  const text = hasTranscript
+    ? listening.transcript.map((segment) => segment.text).join('\n')
+    : listening.questions.flatMap((question) => [question.stem, ...question.options.map((option) => option.text)]).join('\n')
+  const words = (value) => (String(value).toLowerCase().match(/[\p{L}\p{N}]+(?:'[\p{L}\p{N}]+)?/gu) || []).join(' ')
+  if (evidence.check.comparisonReference.basis !== basis
+    || words(evidence.check.comparisonReference.text) !== words(text)) {
+    fail('Listening source changed: finalize audio checks against the current materialization before Review')
+  }
+  const playback = evidence.descriptors.get('listening_audio_playback')
+  return {
+    relativePath: 'listening/playback.mp3',
+    sha256: playback.sha256,
+    byteLength: playback.byteLength,
+    durationSeconds: evidence.asr.durationSeconds,
+    mediaType: 'audio/mpeg',
+  }
 }
 
 export function assertListeningAudioManifest(rootDir, manifest) {

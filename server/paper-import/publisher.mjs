@@ -1,6 +1,7 @@
 import { createHash, randomUUID } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
+import { LISTENING_AUDIO_PATHS } from './listeningAudioEvidence.mjs'
 import {
   assertPaperImportAnalysisSidecars,
   beginPaperImportPublish,
@@ -437,7 +438,7 @@ function importedFamily(group, paperAsset) {
   if (group.groupType === 'sevenChoices') return 'seven-choices'
   if (group.groupType === 'cloze') return 'cloze'
   if (group.groupType === 'grammarFill') return 'grammar-fill'
-  if (group.groupType === 'listening') return 'inactive-listening'
+  if (group.groupType === 'listening') return 'listening'
   if (group.groupType !== 'writing') return null
   const task = paperAsset.content.writingTasks?.[group.writingTaskId]
   if (task?.taskType === 'application') return 'application-writing'
@@ -961,10 +962,12 @@ function validateUniversalNck1Binding({
   const sourceCapture = admission.compilation.artifacts.sourceCapture
   const importedGroups = Object.values(packageData.paperAsset.content.groups)
   const canonicalGroups = canonicalPaper.questionGroups
-  if (importedGroups.length !== 9 || canonicalGroups.length !== 9) {
+  const hasListening = canonicalGroups.some((group) => group.contractRef.familyContractId === 'listening')
+  const expectedGroupCount = hasListening ? 11 : 9
+  if (importedGroups.length !== expectedGroupCount || canonicalGroups.length !== expectedGroupCount) {
     return {
       code: 'CANONICAL_IMPORT_GROUP_SET_MISMATCH',
-      message: 'Universal NCK1 publication requires exactly nine active Question Groups',
+      message: 'Universal NCK1 publication requires nine non-listening Groups and either both Listening Groups or neither',
     }
   }
   const canonicalById = new Map(canonicalGroups.map((group) => [
@@ -992,13 +995,13 @@ function validateUniversalNck1Binding({
     assertion.answer,
   ]))
   if (
-    answers.length !== 45
+    answers.length !== (hasListening ? 65 : 45)
     || answers.some(([questionId, answer]) =>
       assertions.get(questionId) !== answer.answer)
   ) {
     return {
       code: 'CANONICAL_IMPORT_ANSWER_MISMATCH',
-      message: 'Universal NCK1 publication requires all 45 active authoritative answers',
+      message: 'Universal NCK1 publication requires every active authoritative answer',
     }
   }
   const listeningSlots = ['listening.short-dialogue', 'listening.long-form']
@@ -1012,7 +1015,9 @@ function validateUniversalNck1Binding({
       (candidate) => candidate.slotId === slotId,
     )
     const closure = inactiveClosures.get(slotId)
-    return binding?.sourceState !== 'not_supplied' && closure?.status !== 'closed'
+    return hasListening
+      ? !canonicalGroups.some((group) => group.identity.groupId === binding?.groupRef?.groupId && group.contractRef.familyContractId === 'listening')
+      : binding?.sourceState !== 'not_supplied' && closure?.status !== 'closed'
   })) {
     return {
       code: 'CANONICAL_IMPORT_INACTIVE_BINDING_MISMATCH',
@@ -1037,6 +1042,7 @@ function admitBoundUniversalNck1Package({
   paperId,
   packageData,
   expectedVisibleStructureDigest,
+  listeningAudioBytes,
 }) {
   if (!isNck1MaterializationCanonicalImportRequest(canonicalRequest)) {
     return {
@@ -1053,6 +1059,7 @@ function admitBoundUniversalNck1Package({
     request: canonicalRequest,
     sourceAssetVersion: version,
     sourceAsset: nck1MaterializationPublicationSourceAsset(canonicalRequest),
+    listeningAudioBytes,
   })
   if (!admission.ok) return { failure: canonicalAdmissionFailure(admission) }
   if (admission.sealed.manifest.paperId !== paperId) {
@@ -1118,15 +1125,11 @@ export function publishUniversalNck1Import({
     reviewRootDir,
     { requireAnalyses: true },
   )
-  if (projection.manifest.schemaVersion === 'universal-nck1-source-manifest-v2') {
-    return canonicalAdmissionFailure({
-      disposition: 'unsupported',
-      diagnostics: [{
-        code: 'LISTENING_AUDIO_PUBLICATION_NOT_SUPPORTED',
-        message: 'Listening audio evidence may enter Review but cannot publish before listening publication support is active',
-      }],
-    })
-  }
+  // The immutable descriptor is part of the Candidate/Owner identity. These
+  // exact bytes are sealed before any DB or latest mutation; no ASR replay.
+  const listeningAudioBytes = projection.materialization.listening.state === 'captured'
+    ? new Uint8Array(readFileSync(path.join(reviewRootDir, LISTENING_AUDIO_PATHS.playback)))
+    : null
   const expectedIdentity = {
     sourceDigest: projection.sourceDigest,
     candidateDigest: projection.candidateDigest,
@@ -1183,6 +1186,7 @@ export function publishUniversalNck1Import({
         paperId: projection.paperId,
         packageData,
         expectedVisibleStructureDigest: projection.visibleStructureDigest,
+        listeningAudioBytes,
       })
     },
   })
