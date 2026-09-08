@@ -179,9 +179,13 @@ or any `review_required` / `block` verdict and report the flagged ranges; the
 Owner only needs to inspect those exceptions. ASR may neither create nor change
 official answers, and it never replaces an authoritative listening transcript.
 Do not edit or replace the original, playback, ASR, or check artifacts after
-finalization; changed bytes invalidate the evidence. This cut carries listening
-evidence into Review only. Do not promote a listening-audio revision; publication
-fails closed until listening publication support is implemented.
+finalization; changed bytes invalidate the evidence. Submit the verified listening
+evidence with the immutable Review revision. Listening publication uses the same
+approved-revision promotion flow as other NCK1 papers: stop after Owner Review
+approval, and promote only after a later explicit Owner `上线 <paperId>` command.
+The publisher revalidates the audio evidence and publishes only the normalized
+playback MP3 and minimal playback metadata; original audio, ASR transcripts, and
+review evidence remain private.
 
 ## Use the Orb compute lane deliberately
 
