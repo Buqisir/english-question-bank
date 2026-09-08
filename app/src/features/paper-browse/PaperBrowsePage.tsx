@@ -90,6 +90,7 @@ import {
   type ReviewedReadingChoiceAnalysisV1,
 } from '../paper-intelligence/paperAssetSurfaceAdapter.ts'
 import {
+  buildCanonicalConsumptionSurfaceData,
   buildCanonicalApplicationWritingConsumptionSurfaceData,
   buildCanonicalContinuationWritingConsumptionSurfaceData,
   buildCanonicalReadingConsumptionSurfaceData,
@@ -200,16 +201,7 @@ type GroupModel =
   | {
       kind: 'listening'
       model: {
-        questions: ReadonlyArray<{
-          questionId: string
-          questionNo: number
-          stem: string
-          options: ReadonlyArray<{
-            optionId: string
-            label: string
-            text: string
-          }>
-        }>
+        surfaceData: ReturnType<typeof buildCanonicalConsumptionSurfaceData>['surfaceData']
       }
     }
   | {
@@ -233,11 +225,6 @@ type GroupModel =
     }
   | { kind: 'unsupported'; groupType: string }
   | { kind: 'error'; message: string }
-
-type CanonicalListeningQuestion = Extract<
-  GroupModel,
-  { kind: 'listening' }
->['model']['questions'][number]
 
 // 讲评态按需补拉的 cloze/grammarFill/writing 解析——reading/sevenChoices 的
 // 解析已在挑题态初次加载时无条件拉取。'unavailable'
@@ -968,7 +955,7 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
               groupId: block.groupId,
             })
           if (group?.groupType === 'listening') {
-            const listening = projectCanonicalConsumerGroup({
+            const listening = buildCanonicalConsumptionSurfaceData({
               consumption: canonicalConsumptionForGroup(
                 canonicalConsumption,
                 'listening',
@@ -976,10 +963,10 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
               ),
               familyContractId: 'listening',
               groupId: block.groupId,
-            }) as { questions: ReadonlyArray<CanonicalListeningQuestion> }
+            })
             selectedModels.set(block.groupId, {
               kind: 'listening',
-              model: { questions: listening.questions },
+              model: { surfaceData: listening.surfaceData },
             })
           } else if (group?.groupType === 'cloze') {
             selectedModels.set(block.groupId, {
@@ -2277,25 +2264,15 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     }
     if (entry.kind === 'listening') {
       return (
-        <div className="paper-browse-listening">
-          {entry.model.questions.map((question) => (
-            <div
-              className="paper-browse-listening-question"
-              data-paper-question-id={question.questionId}
-              key={question.questionId}
-            >
-              <p className="paper-browse-listening-stem">
-                <strong>{question.questionNo}.</strong> {question.stem}
-              </p>
-              <div className="paper-browse-listening-options">
-                {question.options.map((option) => (
-                  <span key={option.optionId}>
-                    <strong>{option.label}.</strong> {option.text}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
+        <div className="paper-browse-listening canonical-listening-surface">
+          <PaperSurface
+            {...entry.model.surfaceData}
+            annotations={[]}
+            mode="lecture"
+            lectureFocus={null}
+            readingFocusBySection={{}}
+            onFocusIntent={() => {}}
+          />
         </div>
       )
     }
@@ -3761,6 +3738,13 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
           {renderQuietRail(dockedLecture)}
         </nav>
         <div className="paper-browse-content" ref={scrollerRef} style={paperBrowseContentMergedStyle}>
+          {canonicalConsumption?.listeningAudio && (
+            <div className="paper-browse-audio">
+              <audio controls preload="metadata" aria-label="整卷听力录音" src={canonicalConsumption.listeningAudio.url}>
+                浏览器不支持音频播放。
+              </audio>
+            </div>
+          )}
           <div className="paper-browse-zoom">
             {grammarFillGeometryFixture && (
               <style data-canonical-grammar-fill-geometry-fixture={grammarFillGeometryVariantId}>

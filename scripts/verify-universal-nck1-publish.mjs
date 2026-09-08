@@ -30,6 +30,8 @@ import {
 import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequest.mjs'
 import { materializeNck1CanonicalRequest } from '../server/paper-canonical/nck1MaterializationCanonicalRequest.mjs'
 import { publishUniversalNck1Import } from '../server/paper-import/publisher.mjs'
+import { sendPaperAssetStatic } from '../server/paper-import/paperAssetStatic.mjs'
+import { assertListeningAudioManifest, assertListeningAudioSource, LISTENING_AUDIO_PATHS } from '../server/paper-import/listeningAudioEvidence.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
 import { readJsonRouteBody, runRoutes } from '../server/router/index.mjs'
 import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
@@ -429,11 +431,7 @@ function makeReviewRoot(
     const asrFixturePath = path.join(parentDir, 'listening-asr.json')
     const referencePath = path.join(parentDir, 'listening-reference.json')
     const contentReviewPath = path.join(parentDir, 'listening-review.json')
-    const transcript = [
-      'Welcome to the English listening test for this deterministic publication fixture.',
-      'The speakers discuss a library visit, a train schedule, and a school performance.',
-      'Listen to each conversation carefully and answer the questions according to what you hear.',
-    ].join(' ')
+    const transcript = materialization.listening.transcript.map((segment) => segment.text).join('\n')
     execFileSync('ffmpeg', [
       '-v', 'error',
       '-f', 'lavfi',
@@ -839,14 +837,28 @@ function sevenChoicesSelection(consumption) {
   return selection
 }
 
-async function assertRoleSurfaces({ projection, listeningProjection, publishedScreen, publishedPrint }) {
+async function assertRoleSurfaces({ projection, listeningProjection, listeningPublished, listeningAudioBytes, publishedScreen, publishedPrint }) {
   const titleId = 'block:seven-choices:title'
   const bodyId = 'block:seven-choices'
   const vite = await import('../app/node_modules/vite/dist/node/index.js')
   const playwright = await import('../app/node_modules/playwright/index.js')
+  const audioRoot = mkdtempSync(path.join(tmpdir(), 'listening-browser-'))
+  const audioUrl = listeningPublished.screen.listeningAudio.url
+  const audioPath = path.join(audioRoot, audioUrl.replace('/paper-assets/', ''))
+  mkdirSync(path.dirname(audioPath), { recursive: true })
+  writeFileSync(audioPath, listeningAudioBytes)
   const viteServer = await vite.createServer({
     root: path.join(root, 'app'),
     server: { host: '127.0.0.1', port: 0 },
+    plugins: [{
+      name: 'listening-publication-audio-fixture',
+      configureServer(server) {
+        server.middlewares.use((request, response, next) => {
+          if (request.url === audioUrl) sendPaperAssetStatic(request, response, request.url, audioRoot)
+          else next()
+        })
+      },
+    }],
   })
   await viteServer.listen()
   const appUrl = viteServer.resolvedUrls?.local?.[0]
@@ -924,21 +936,88 @@ async function assertRoleSurfaces({ projection, listeningProjection, publishedSc
     screenProjection = listeningProjection
     screenUrl.searchParams.set('focusGroupId', `group:${projection.paperId}:listening.short-dialogue`)
     await screenPage.goto(screenUrl.href)
-    await screenPage.locator('.paper-browse-listening-question').first().waitFor()
+    await screenPage.locator('.paper-browse-listening .ps-question').first().waitFor()
     assert.equal(await screenPage.locator('.paper-browse-listening').count(), 2)
-    assert.equal(await screenPage.locator('.paper-browse-listening-question').count(), 20)
+    assert.equal(await screenPage.locator('.paper-browse-listening .ps-question').count(), 20)
     assert.deepEqual(
-      await screenPage.locator('.paper-browse-listening-stem > strong').allTextContents(),
+      await screenPage.locator('.paper-browse-listening .ps-question-no').allTextContents(),
       Array.from({ length: 20 }, (_, index) => `${index + 1}.`),
     )
-    assert.equal(await screenPage.locator('.paper-browse-listening-options > span').count(), 60)
-    assert.equal(await screenPage.locator('audio').count(), 0, 'PR2 does not enable playback')
+    assert.equal(await screenPage.locator('.paper-browse-listening .ps-option').count(), 60)
+    assert.equal(await screenPage.locator('audio').count(), 0, 'Review preview does not expose published playback')
     assert.doesNotMatch(await screenPage.locator('body').textContent(), /Long listening transcript|官方答案|内容安全检查通过/)
     await screenPage.locator('[data-paper-question-id="question:listening:6"]').click()
+    screenProjection = { ...listeningProjection, consumption: listeningPublished.screen }
+    await screenPage.goto(screenUrl.href)
+    const audio = screenPage.locator('audio')
+    await audio.waitFor()
+    assert.equal(await audio.count(), 1)
+    assert.equal(await screenPage.locator('.paper-browse-zoom audio').count(), 0, 'Player stays outside A4 paper')
+    assert.equal(await audio.getAttribute('preload'), 'metadata')
+    await screenPage.waitForFunction(() => document.querySelector('audio')?.readyState >= 1)
+    assert.equal(await audio.evaluate((element) => Math.round(element.duration)), 12)
+    await audio.evaluate((element) => element.play())
+    await screenPage.waitForFunction(() => document.querySelector('audio').currentTime > 0)
+    await audio.evaluate((element) => { element.pause(); element.currentTime = 8 })
+    await screenPage.waitForFunction(() => !document.querySelector('audio').seeking)
+    assert.equal(await audio.evaluate((element) => Math.round(element.currentTime)), 8)
+    const columns = await screenPage.locator('.paper-browse-listening .ps-option-list').first()
+      .evaluate((element) => getComputedStyle(element).gridTemplateColumns.split(' ').map(parseFloat))
+    assert.equal(columns.length, 3)
+    assert.ok(Math.max(...columns) - Math.min(...columns) < 1)
+    await audio.scrollIntoViewIfNeeded()
     if (process.env.LISTENING_QA_ARTIFACT_DIR) {
       await screenPage.screenshot({ path: path.join(process.env.LISTENING_QA_ARTIFACT_DIR, 'screen-captured.png') })
     }
     await screenPage.close()
+
+    const detailPage = await browser.newPage({ viewport: { width: 1280, height: 900 } })
+    await detailPage.route('**/api/paper-canonical/consumption?*', (route) => route.fulfill({
+      contentType: 'application/json', body: JSON.stringify(listeningPublished.screen),
+    }))
+    const detailUrl = new URL('canonical-detail-consumption-qa.html', appUrl)
+    detailUrl.searchParams.set('paperId', listeningProjection.paperId)
+    detailUrl.searchParams.set('groupId', `group:${listeningProjection.paperId}:listening.short-dialogue`)
+    detailUrl.searchParams.set('rawGroupType', 'listening')
+    await detailPage.goto(detailUrl.href)
+    await detailPage.locator('.canonical-listening-surface .ps-question').first().waitFor()
+    assert.equal(await detailPage.locator('.canonical-listening-surface .ps-question').count(), 5)
+    assert.equal(await detailPage.locator('audio').count(), 0, 'Only the whole-paper Screen owns playback')
+    const detailColumns = await detailPage.locator('.canonical-listening-surface .ps-option-list').first()
+      .evaluate((element) => getComputedStyle(element).gridTemplateColumns.split(' ').map(parseFloat))
+    assert.equal(detailColumns.length, 3)
+    assert.ok(Math.max(...detailColumns) - Math.min(...detailColumns) < 1)
+    if (process.env.LISTENING_QA_ARTIFACT_DIR) await detailPage.screenshot({ path: path.join(process.env.LISTENING_QA_ARTIFACT_DIR, 'detail-listening.png') })
+    await detailPage.close()
+
+    const listeningAnswers = new Map(Object.entries(listeningProjection.paperAsset.answerKey.answers)
+      .map(([questionId, answer]) => [questionId, answer.answer]))
+    const listeningPayload = canonicalConsumptionPrintPayload(listeningPublished.print_pdf, listeningProjection.paperName, listeningAnswers)
+    for (const versionType of ['student', 'teacher']) {
+      const html = buildPrintHtml({
+        ...listeningPayload,
+        versionType,
+        items: listeningPayload.items.map((item) => ({ detail: listeningPayload.details.get(item.questionGroupId), score: 0, note: '', sectionTitle: '' })),
+        canonicalConsumption: listeningPublished.print_pdf,
+      })
+      assert.doesNotMatch(html, /<audio|Long listening transcript|asr-v1|check-v1/)
+      const page = await browser.newPage({ viewport: { width: 794, height: 1123 } })
+      await page.emulateMedia({ media: 'print' })
+      await page.setContent(html)
+      const questions = page.locator('[data-canonical-question-id^="question:listening:"]')
+      assert.equal(await questions.count(), 20)
+      assert.equal(await page.locator('.options-grid--listening > span').count(), 60)
+      assert.equal(await questions.locator('.answer').count(), versionType === 'teacher' ? 20 : 0)
+      assert.ok(await questions.evaluateAll((elements) => elements.every((element) => getComputedStyle(element).breakInside === 'avoid')))
+      const grid = await page.locator('.options-grid--listening').first().evaluate((element) => getComputedStyle(element).gridTemplateColumns.split(' ').map(parseFloat))
+      assert.equal(grid.length, 3)
+      assert.ok(Math.max(...grid) - Math.min(...grid) < 1)
+      const artifactDir = process.env.LISTENING_QA_ARTIFACT_DIR
+      const pdf = await page.pdf({ format: 'A4', printBackground: true, ...(artifactDir ? { path: path.join(artifactDir, `listening-${versionType}.pdf`) } : {}) })
+      assert.equal(pdf.subarray(0, 4).toString(), '%PDF')
+      if (artifactDir) await page.screenshot({ path: path.join(artifactDir, `print-${versionType}.png`) })
+      await page.close()
+    }
 
     const answers = new Map(Object.entries(projection.paperAsset.answerKey.answers)
       .map(([questionId, answer]) => [questionId, answer.answer]))
@@ -1010,6 +1089,7 @@ async function assertRoleSurfaces({ projection, listeningProjection, publishedSc
   } finally {
     await browser.close()
     await viteServer.close()
+    rmSync(audioRoot, { recursive: true, force: true })
   }
 }
 
@@ -1079,13 +1159,52 @@ try {
     false,
     'Student PaperAsset must not expose the Listening transcript',
   )
-  const blocked = publish(listeningPublication)
-  assert.equal(blocked.ok, false)
-  assert.equal(
-    blocked.canonicalAdmission.diagnostics[0].code,
-    'LISTENING_AUDIO_PUBLICATION_NOT_SUPPORTED',
-    'Review may carry listening evidence while publication remains fail-closed',
-  )
+  for (const relativePath of Object.values(LISTENING_AUDIO_PATHS)) {
+    const filePath = path.join(listeningPublication.reviewRoot, relativePath)
+    const original = readFileSync(filePath)
+    try {
+      writeFileSync(filePath, 'tampered')
+      assert.throws(() => publish(listeningPublication), /Listening/)
+      rmSync(filePath)
+      assert.throws(() => publish(listeningPublication), /Listening/)
+      assert.equal(publishedVersionCount(listeningPublication), 0)
+      assert.equal(existsSync(listeningPublication.paperAssetsDir), false)
+    } finally {
+      writeFileSync(filePath, original)
+    }
+  }
+  const audioEvidence = assertListeningAudioManifest(listeningPublication.reviewRoot, listeningProjection.manifest)
+  const changedListening = structuredClone(listeningProjection.materialization.listening)
+  changedListening.transcript[0].text += ' Different source words.'
+  assert.throws(() => assertListeningAudioSource(audioEvidence, changedListening), /Listening source changed/)
+  assert.throws(() => assertListeningAudioSource(audioEvidence, { state: 'not_supplied' }), /without Listening/)
+  const result = publish(listeningPublication)
+  assert.equal(result.ok, true, JSON.stringify(result))
+  assert.ok(existsSync(path.join(result.publish.versionDir, 'listening/playback.mp3')))
+  assert.ok(result.publish.consumers.screen.listeningAudio.url.includes('/versions/v1/'))
+  const previousAssetRoot = process.env.QUESTION_BANK_PAPER_ASSET_ROOT
+  try {
+    process.env.QUESTION_BANK_PAPER_ASSET_ROOT = listeningPublication.paperAssetsDir
+    const { isGroupPrintReady, getPrintReadyByGroupId } = await import('../server/api.mjs?listening-publication-readiness')
+    const groupIds = result.publish.consumers.screen.selections.find((selection) => selection.familyContractId === 'listening').groupIds
+    for (const groupId of groupIds) assert.equal(isGroupPrintReady(listeningPublication.db, groupId).ok, true, 'Published Listening passes the actual draft-add readiness gate')
+    const batch = getPrintReadyByGroupId(listeningPublication.db, groupIds)
+    for (const groupId of groupIds) assert.equal(batch.get(groupId).ok, true, 'Search cards and draft-add agree')
+  } finally {
+    if (previousAssetRoot === undefined) delete process.env.QUESTION_BANK_PAPER_ASSET_ROOT
+    else process.env.QUESTION_BANK_PAPER_ASSET_ROOT = previousAssetRoot
+  }
+  listeningPublication.published = result.publish.consumers
+  listeningPublication.audioBytes = readFileSync(path.join(result.publish.versionDir, 'listening/playback.mp3'))
+  for (const consumption of Object.values(result.publish.consumers)) {
+    const listening = consumption.selections.find((selection) => selection.familyContractId === 'listening')
+    assert.doesNotMatch(JSON.stringify(listening), /Long listening transcript|correctOptionId|asr-v1|check-v1/)
+    assert.ok(listening.projectedOccurrences.every((occurrence) =>
+      occurrence.transcriptSegments.every((segment) => !Object.hasOwn(segment, 'content'))))
+  }
+  for (const privatePath of ['source/listening-audio.mp3', 'materialization/listening-audio/asr-v1.json', 'materialization/listening-audio/check-v1.json']) {
+    assert.equal(existsSync(path.join(result.publish.versionDir, privatePath)), false)
+  }
 } finally {
   close(listeningPublication)
 }
@@ -1361,6 +1480,8 @@ try {
   await assertRoleSurfaces({
     projection: happy.projection,
     listeningProjection: listeningPublication.projection,
+    listeningPublished: listeningPublication.published,
+    listeningAudioBytes: listeningPublication.audioBytes,
     publishedScreen: result.publish.consumers.screen,
     publishedPrint: result.publish.consumers.print_pdf,
   })
@@ -1433,7 +1554,7 @@ try {
   close(staleRequest)
 }
 
-const preCommit = makeContext('pre-commit')
+const preCommit = makeContext('pre-commit', { listening: true })
 try {
   assert.throws(() => publish(preCommit, { failurePoint: 'db-write' }))
   assert.equal(publishedVersionCount(preCommit), 0)
@@ -1453,7 +1574,7 @@ try {
   close(preCommit)
 }
 
-const postCommit = makeContext('post-commit')
+const postCommit = makeContext('post-commit', { listening: true })
 try {
   assert.throws(() => publish(postCommit, { failurePoint: 'committed-reload' }))
   const journalPath = path.join(

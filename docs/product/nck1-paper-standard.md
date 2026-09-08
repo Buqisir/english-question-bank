@@ -20,9 +20,10 @@
 | 第四部分 写作 | 第一节 | 应用文 | — | — | 15 | `writing` | 1 |
 | | 第二节 | 读后续写 | — | — | 25 | `writing` | 1 |
 
-公开发布当前仍固定为 **9 个题组**(reading×4 + seven_choices +
-cloze + grammar_cloze + writing×2)。导题源含完整听力时,Review Candidate
-另有 2 个 `listening` 题组;源明确未提供听力时仍为 9 个,不得编造(§4)。
+非听力部分固定为 **9 个题组**(reading×4 + seven_choices +
+cloze + grammar_cloze + writing×2)。导题源含完整听力且音频证据通过时,
+正式发布共 11 个题组（另有 2 个 `listening`）;源明确未提供听力时仍为
+9 个,不得编造(§4)。
 
 ## 2. 洗卷规则
 
@@ -72,9 +73,16 @@ cloze + grammar_cloze + writing×2)。导题源含完整听力时,Review Candida
   对比,没有录音稿时至少和听力题核对,再由 Agent 对完整转写做一次内容安全
   检查。该核对是防小概率错音频、假音频或不当内容的一道轻量防线,不替代
   题目和录音稿的 source closure。
-- 本阶段只开放 Candidate 与 Review Screen。公开发布、播放器、Range 请求、
-  找题 / 详情 / 组卷 / 导出以及 Student/Teacher Print/PDF 听力版面仍保持
-  fail closed,待后续共享输出刀完成后再开放。
+- 正式发布使用不可变 authority v51（历史 v50 不改写）。发布前校验已通过的
+  音频证据、当前源绑定和字节 digest，不重复运行 ASR；仅复制规范化 playback.mp3
+  与最小元数据。原音频、ASR 和核对记录仍仅留在私有 Review。
+  读取回执时用已有 ASR 轻量复核词序，不能沿用旧无序重合算法的错误 pass；
+  无需历史卷重发、新增人工听审或重复调用 ASR 模型。
+- 整卷 Screen 的卷外工具区只放一个原生播放器，无自动播放、切片或逐题跳转。
+  音频走现有鉴权和不可变版本路径，支持单段 Range；未登录不得读取。
+- 听力题共用 Canonical 投影与现有 Screen/Print/PDF 渲染入口，A–C 等宽横排，
+  单题不跨页。Student 不显示答案或录音稿；Teacher 仅在现有答案区增加 1–20
+  答案，不打印录音稿、播放器或核对证据。`not_supplied` 不产生任何听力版面。
 
 ## 5. 命名与出处
 

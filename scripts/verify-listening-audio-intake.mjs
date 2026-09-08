@@ -9,7 +9,7 @@ import path from 'node:path'
 import {
   assertListeningAudioManifest,
 } from '../server/paper-import/listeningAudioEvidence.mjs'
-import { sha256 } from '../shared/paper-canonical/stable.mjs'
+import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 import {
   compareListeningAudio,
   finalizeListeningAudio,
@@ -246,6 +246,21 @@ try {
     sha256(Buffer.from(transcript, 'utf8')),
     'the exact comparison text is digest-bound inside the four-file evidence set',
   )
+  const checkPath = path.join(paperDir, 'materialization/listening-audio/check-v1.json')
+  const originalCheckBytes = readFileSync(checkPath)
+  const oldPass = structuredClone(check)
+  oldPass.comparisonReference.text = transcript.split('.').filter(Boolean).reverse().join('. ')
+  oldPass.comparisonReference.textSha256 = sha256(Buffer.from(oldPass.comparisonReference.text))
+  delete oldPass.evidenceDigest
+  oldPass.evidenceDigest = digestJson(oldPass)
+  json(checkPath, oldPass)
+  const oldManifest = structuredClone(manifest)
+  const checkDescriptor = oldManifest.attachments.find((entry) => entry.role === 'listening_audio_check')
+  checkDescriptor.sha256 = sha256(readFileSync(checkPath))
+  checkDescriptor.byteLength = readFileSync(checkPath).byteLength
+  assert.throws(() => assertListeningAudioManifest(paperDir, oldManifest), /word order/, 'A digest-valid old unordered pass cannot admit reversed conversations')
+  writeFileSync(checkPath, originalCheckBytes)
+  assertListeningAudioManifest(paperDir, manifest)
   const playbackPath = path.join(paperDir, 'materialization/listening-audio/playback.mp3')
   const playback = readFileSync(playbackPath)
   writeFileSync(playbackPath, Buffer.concat([playback, Buffer.from('changed')]))
@@ -259,6 +274,24 @@ try {
     basis: 'authoritative_transcript',
     referenceText: transcript,
   }).verdict, 'pass')
+  const conversations = [
+    'The first conversation concerns booking a morning train ticket to London.',
+    'The second conversation discusses buying fresh vegetables at the local market.',
+    'The third conversation describes preparing a school concert for next Friday.',
+  ]
+  const reversed = compareListeningAudio({
+    asr: asr({ transcriptText: [...conversations].reverse().join(' ') }),
+    basis: 'authoritative_transcript',
+    referenceText: conversations.join(' '),
+  })
+  assert.equal(reversed.metrics.tokenRecall, 1)
+  assert.equal(reversed.verdict, 'review_required', 'reversed conversations need review despite identical words')
+  assert.ok(reversed.metrics.orderedBigramRecall < 0.5)
+  assert.equal(compareListeningAudio({
+    asr: asr({ transcriptText: conversations.join(' ').replace('fresh', 'lovely fresh') }),
+    basis: 'authoritative_transcript',
+    referenceText: conversations.join(' '),
+  }).verdict, 'pass', 'minor ASR insertions must not require exact transcript equality')
   assert.equal(compareListeningAudio({
     asr: asr({
       transcriptText: 'A completely unrelated recording about cooking rice and repairing bicycles.',

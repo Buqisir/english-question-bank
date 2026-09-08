@@ -218,7 +218,7 @@ function assertCanonicalPackage(canonicalPackage) {
         variant: group.variant,
         assertions: sourceCapture.assertions,
         allowPassageBlockRoles:
-          ['47', '48', '49', '50'].includes(closure.authorityRef.manifestVersion),
+          ['47', '48', '49', '50', '51'].includes(closure.authorityRef.manifestVersion),
       })
       if (sevenChoicesIssues.length > 0) throw projectionError('Seven Choices canonical contract is not closed', sevenChoicesIssues)
     }
@@ -409,7 +409,7 @@ export function projectCanonicalPaper(canonicalPackage) {
         }
         const sevenChoices = group.variant.family === 'seven-choices'
           ? {
-              ...(['47', '48', '49', '50'].includes(closure.authorityRef.manifestVersion)
+              ...(['47', '48', '49', '50', '51'].includes(closure.authorityRef.manifestVersion)
                 ? {
                     passageBlockRoles: cloneJson(
                       group.variant.passageBlockRoles,
@@ -450,9 +450,16 @@ export function projectCanonicalPaper(canonicalPackage) {
                 number: numberingByGroup.get(group.identity.groupId)?.[index]?.number,
                 stem: cloneJson(question.stem),
                 options: cloneJson(group.variant.choiceOwnership.sets[index].options),
-                correctOptionId: question.correctOptionId,
+                ...(plan.authorityRef.manifestVersion === '51'
+                  ? {}
+                  : { correctOptionId: question.correctOptionId }),
               })),
-              transcriptSegments: cloneJson(group.variant.transcriptSegments),
+              // v51 public consumption needs only coverage identities. Full
+              // transcript/answers stay in source authority and Owner Review.
+              transcriptSegments: group.variant.transcriptSegments.map((segment) =>
+                plan.authorityRef.manifestVersion === '51'
+                  ? { segmentId: segment.segmentId, questionIds: cloneJson(segment.questionIds) }
+                  : cloneJson(segment)),
               anchors: {
                 questionIds: group.questionRefs.map(({ questionId }) => questionId),
                 optionIds: group.variant.choiceOwnership.sets.flatMap((set) =>

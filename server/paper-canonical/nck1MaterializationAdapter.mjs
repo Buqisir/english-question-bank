@@ -52,7 +52,14 @@ function cloneByteEntries(entries, idKey) {
 export function isNck1MaterializationInput(value) {
   return Boolean(
     value
-    && exactKeys(value, ['kind', 'materializationBytes', 'documents', 'media'])
+    && (exactKeys(value, ['kind', 'materializationBytes', 'documents', 'media'])
+      || (exactKeys(value, ['kind', 'materializationBytes', 'documents', 'media', 'listeningAudio'])
+        && exactKeys(value.listeningAudio, ['relativePath', 'sha256', 'byteLength', 'durationSeconds', 'mediaType'])
+        && value.listeningAudio.relativePath === 'listening/playback.mp3'
+        && /^sha256:[a-f0-9]{64}$/.test(value.listeningAudio.sha256)
+        && Number.isInteger(value.listeningAudio.byteLength) && value.listeningAudio.byteLength > 0
+        && Number.isFinite(value.listeningAudio.durationSeconds) && value.listeningAudio.durationSeconds > 0
+        && value.listeningAudio.mediaType === 'audio/mpeg'))
     && value.kind === NCK1_MATERIALIZATION_INPUT_KIND
     && value.materializationBytes instanceof Uint8Array
     && Array.isArray(value.documents)
@@ -81,6 +88,7 @@ export function cloneNck1MaterializationInput(value) {
     materializationBytes: new Uint8Array(value.materializationBytes),
     documents: cloneByteEntries(value.documents, 'documentId'),
     media: cloneByteEntries(value.media, 'mediaId'),
+    ...(value.listeningAudio ? { listeningAudio: structuredClone(value.listeningAudio) } : {}),
   }
 }
 
@@ -131,9 +139,10 @@ function parseMaterialization(bytes) {
   }
 }
 
-function bundleDigest(materializationBytes, documents, media) {
+function bundleDigest(materializationBytes, documents, media, listeningAudio) {
   return digestJson({
     materialization: sha256(materializationBytes),
+    ...(listeningAudio ? { listeningAudio } : {}),
     documents: documents.map((entry) => ({
       documentId: entry.documentId,
       sha256: sha256(entry.bytes),
@@ -1414,6 +1423,12 @@ function compilerDocuments(input, materialization, source, instructionDocument) 
       }))
       return [sourceDocument, ...pages]
     }),
+    ...(input.listeningAudio ? [{
+      inputKey: 'listening_audio_descriptor',
+      roles: ['source_provenance'],
+      bytes: textEncoder.encode(JSON.stringify(input.listeningAudio)),
+      declared: { mediaType: 'application/json', originalName: 'listening-audio.json' },
+    }] : []),
     ...input.media.flatMap((entry) => {
       const media = mediaById.get(entry.mediaId)
       const sourceDocument = {
@@ -1460,6 +1475,7 @@ export function deriveNck1MaterializationBundle(rawInput) {
     input.materializationBytes,
     input.documents,
     input.media,
+    input.listeningAudio,
   )
   const materialization = parseMaterialization(input.materializationBytes)
   if (!materialization) {

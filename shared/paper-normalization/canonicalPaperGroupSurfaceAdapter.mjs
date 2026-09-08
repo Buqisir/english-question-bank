@@ -65,6 +65,9 @@ function sliceSemanticNodes(displaySegments, start, end) {
 }
 
 function buildParagraphModels(canonicalGroup) {
+  // Question-only groups use PaperSurface's global question list, not a
+  // fabricated empty passage section.
+  if (canonicalGroup.groupType === 'listening') return []
   const section = SECTION_BY_GROUP_TYPE[canonicalGroup.groupType]
   if (!section) {
     throw new Error(`Unsupported canonical surface group type ${canonicalGroup.groupType}`)
@@ -280,6 +283,9 @@ export function buildCanonicalConsumptionSurfaceData({
             label: option.label,
             text: option.text,
           })),
+          ...(canonicalGroup.groupType === 'listening' ? {
+            canonicalIdentity: { questionId: question.questionId, optionIds: question.options.map((option) => option.optionId) },
+          } : {}),
           ...(placement
             ? {
                 canonicalPlacement: {

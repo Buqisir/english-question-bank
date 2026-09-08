@@ -217,11 +217,12 @@ async function waitForHttp(url, timeoutMs = 20_000) {
   throw new Error(`Timed out waiting for ${url}`)
 }
 
-async function req(urlPath, { method = 'GET', body, cookie, authorization } = {}) {
+async function req(urlPath, { method = 'GET', body, cookie, authorization, range } = {}) {
   const headers = {}
   if (body !== undefined) headers['content-type'] = 'application/json'
   if (cookie) headers.cookie = cookie
   if (authorization) headers.authorization = authorization
+  if (range) headers.range = range
   const response = await fetch(`http://127.0.0.1:${apiPort}${urlPath}`, {
     method,
     headers,
@@ -458,6 +459,14 @@ async function main() {
       forcedPaperAssets.status === 401 && forcedPaperAssets.json?.error === 'not_authenticated',
       `got status=${forcedPaperAssets.status} body=${JSON.stringify(forcedPaperAssets.json)}`,
     )
+
+    for (const method of ['GET', 'HEAD']) {
+      const audio = await req('/paper-assets/paper-fixture/versions/v1/listening/playback.mp3', {
+        method,
+        range: 'bytes=0-15',
+      })
+      assert(`Listening ${method} Range requires authentication`, audio.status === 401)
+    }
 
     const wrongPassword = await req('/api/auth/login', {
       method: 'POST',

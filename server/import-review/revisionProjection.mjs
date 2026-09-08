@@ -28,7 +28,7 @@ import {
   resolveConfirmedNck1OcrEvidence,
   validateNck1OcrSourceEvidence,
 } from '../paper-import/nck1OcrSourceEvidence.mjs'
-import { assertListeningAudioManifest } from '../paper-import/listeningAudioEvidence.mjs'
+import { assertListeningAudioManifest, assertListeningAudioSource } from '../paper-import/listeningAudioEvidence.mjs'
 
 function fail(message, code = 'IMPORT_REVIEW_CANDIDATE_INVALID') {
   const error = new Error(message)
@@ -128,6 +128,7 @@ export function loadNck1ReviewSource(rootDir) {
       'LISTENING_AUDIO_REVIEW_REQUIRED',
     )
   }
+  const listeningAudio = assertListeningAudioSource(validatedListeningAudioEvidence, materialization.listening)
   const documentPathById = new Map(manifest.documents.map((document) => [
     document.documentId,
     resolveReviewFile(rootDir, normalizedRelativePath(document.path, `document ${document.documentId}`)),
@@ -155,6 +156,7 @@ export function loadNck1ReviewSource(rootDir) {
   const sourceInput = {
     kind: 'nck1-source-materialization',
     materializationBytes,
+    ...(listeningAudio ? { listeningAudio } : {}),
     documents: materialization.documents.map((document) => {
       const sourcePath = documentPathById.get(document.documentId)
       if (!sourcePath || !existsSync(sourcePath)) {
@@ -682,7 +684,7 @@ export function buildNck1ReviewConsumption(candidate, compilation) {
         'seven-choices',
         'cloze',
         'grammar-fill',
-        ...(['49', '50'].includes(
+        ...(['49', '50', '51'].includes(
           canonicalPaper.paperPlan.authorityRef.manifestVersion,
         )
           ? ['continuation-writing']

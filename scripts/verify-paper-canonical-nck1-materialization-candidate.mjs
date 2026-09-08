@@ -274,7 +274,7 @@ assert.deepEqual(
 )
 assert.equal(canonicalAuthorityRef.manifestVersion, '36')
 assert.equal(trustedDocxCandidateAuthorityRef.manifestVersion, '37')
-assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '50')
+assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '51')
 assert.equal(resolveCanonicalAuthority({
   manifestId: manifestV46.manifestId,
   manifestVersion: manifestV46.version,

@@ -163,7 +163,7 @@ type PeekModel =
       }
     }
   | {
-      kind: 'cloze'
+      kind: 'cloze' | 'listening'
       model: {
         surfaceData: ReturnType<typeof buildCanonicalConsumptionSurfaceData>['surfaceData']
       }
@@ -250,7 +250,9 @@ export function QuestionGroupPaperSurface({ entry }: { entry: PeekModel }) {
   )
   return entry.kind === 'writing'
     ? <WritingPaperPage pageModel={entry.model.pageModel}>{surfaceEl}</WritingPaperPage>
-    : surfaceEl
+    : entry.kind === 'listening'
+      ? <div className="canonical-listening-surface">{surfaceEl}</div>
+      : surfaceEl
 }
 
 // chips 数据契约（阅读）：questionType 覆盖率——缺失显示「未标注」不造假
@@ -379,19 +381,19 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
               },
             },
           }
-        } else if (familyContractId === 'cloze') {
-          const canonicalCloze = buildCanonicalConsumptionSurfaceData({
+        } else if (familyContractId === 'cloze' || familyContractId === 'listening') {
+          const canonicalQuestions = buildCanonicalConsumptionSurfaceData({
             consumption: canonicalConsumptionForGroup(
               canonicalConsumption,
-              'cloze',
+              familyContractId,
               detail.id,
             ),
-            familyContractId: 'cloze',
+            familyContractId,
             groupId: detail.id,
           })
           model = {
-            kind: 'cloze',
-            model: { surfaceData: canonicalCloze.surfaceData },
+            kind: familyContractId,
+            model: { surfaceData: canonicalQuestions.surfaceData },
           }
         } else if (familyContractId === 'grammar-fill') {
           const canonicalGrammarFill = buildCanonicalConsumptionSurfaceData({

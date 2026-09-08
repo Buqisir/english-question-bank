@@ -893,6 +893,16 @@ button.ps-paper-blank.ps-paper-blank--clickable {
   width: 100%;
 }
 
+.canonical-listening-surface .ps-question {
+  break-inside: avoid;
+}
+
+.canonical-listening-surface .ps-option-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 2em;
+}
+
 /* ─── Reading mode placeholder (B3) ───────────────────────────── */
 
 .ps-reading-placeholder {

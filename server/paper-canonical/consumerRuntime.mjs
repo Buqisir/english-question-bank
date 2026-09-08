@@ -9,6 +9,7 @@ import {
 } from '../../shared/paper-canonical/consumerProjection.mjs'
 
 const FAMILY_BY_GROUP_TYPE = new Map([
+  ['listening', 'listening'],
   ['cloze', 'cloze'],
   ['grammarFill', 'grammar-fill'],
   ['grammar_cloze', 'grammar-fill'],
