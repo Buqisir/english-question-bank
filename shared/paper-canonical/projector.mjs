@@ -52,7 +52,7 @@ function sourceMapCoverageIssues(group, sourceCapture, family) {
           ...group.variant.questions.flatMap((question) => question.stem.map((inline) => `content_node:${inline.nodeId}`)),
           ...group.variant.choiceOwnership.sets.flatMap((set) => set.options.flatMap((option) => [
             `option:${option.optionId}`,
-            ...option.content.map((inline) => `content_node:${inline.nodeId}`),
+            ...(option.content || []).map((inline) => `content_node:${inline.nodeId}`),
           ])),
         ]
       : []),
@@ -218,7 +218,7 @@ function assertCanonicalPackage(canonicalPackage) {
         variant: group.variant,
         assertions: sourceCapture.assertions,
         allowPassageBlockRoles:
-          ['47', '48', '49', '50', '51'].includes(closure.authorityRef.manifestVersion),
+          ['47', '48', '49', '50', '51', '52'].includes(closure.authorityRef.manifestVersion),
       })
       if (sevenChoicesIssues.length > 0) throw projectionError('Seven Choices canonical contract is not closed', sevenChoicesIssues)
     }
@@ -230,6 +230,7 @@ function assertCanonicalPackage(canonicalPackage) {
         media: group.media,
         variant: group.variant,
         assertions: sourceCapture.assertions,
+        allowFigureOptions: family.optionModes?.includes('figure') === true,
       })
       if (readingIssues.length > 0) throw projectionError('Reading canonical contract is not closed', readingIssues)
     }
@@ -409,7 +410,7 @@ export function projectCanonicalPaper(canonicalPackage) {
         }
         const sevenChoices = group.variant.family === 'seven-choices'
           ? {
-              ...(['47', '48', '49', '50', '51'].includes(closure.authorityRef.manifestVersion)
+              ...(['47', '48', '49', '50', '51', '52'].includes(closure.authorityRef.manifestVersion)
                 ? {
                     passageBlockRoles: cloneJson(
                       group.variant.passageBlockRoles,
@@ -435,6 +436,7 @@ export function projectCanonicalPaper(canonicalPackage) {
                 stem: cloneJson(question.stem),
                 options: cloneJson(group.variant.choiceOwnership.sets[index].options),
                 correctOptionId: question.correctOptionId,
+                ...(question.figureLayout ? { figureLayout: cloneJson(question.figureLayout) } : {}),
               })),
               anchors: {
                 contentNodeIds: contentIdentityLists(group.content).contentNodeIds,
@@ -450,14 +452,14 @@ export function projectCanonicalPaper(canonicalPackage) {
                 number: numberingByGroup.get(group.identity.groupId)?.[index]?.number,
                 stem: cloneJson(question.stem),
                 options: cloneJson(group.variant.choiceOwnership.sets[index].options),
-                ...(plan.authorityRef.manifestVersion === '51'
+                ...(['51', '52'].includes(plan.authorityRef.manifestVersion)
                   ? {}
                   : { correctOptionId: question.correctOptionId }),
               })),
               // v51 public consumption needs only coverage identities. Full
               // transcript/answers stay in source authority and Owner Review.
               transcriptSegments: group.variant.transcriptSegments.map((segment) =>
-                plan.authorityRef.manifestVersion === '51'
+                ['51', '52'].includes(plan.authorityRef.manifestVersion)
                   ? { segmentId: segment.segmentId, questionIds: cloneJson(segment.questionIds) }
                   : cloneJson(segment)),
               anchors: {

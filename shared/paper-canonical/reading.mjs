@@ -7,6 +7,7 @@ import {
 } from './richContent.mjs'
 import { resolvePassageBlockRoles } from './passageBlockRoles.mjs'
 import { exactKeys, isRecordValue } from './stable.mjs'
+import { validateReadingFigureLayout } from './readingFigureLayout.mjs'
 
 function issue(code, disposition, path, message) {
   return { code, disposition, path, message }
@@ -202,7 +203,7 @@ function readingContentBlockIssues(blocks, pathPrefix, mediaById, mediaOccurrenc
   return issues
 }
 
-function readingContentIssues(content, media) {
+function readingContentIssues(content, media, optionSets = []) {
   const issues = []
   const mediaItems = Array.isArray(media) ? media : []
   const mediaById = new Map(mediaItems.map((item) => [item.mediaId, item]))
@@ -217,8 +218,15 @@ function readingContentIssues(content, media) {
     mediaOccurrences,
     { allowFramedColumns: true, allowFigure: true },
   ))
+  for (const set of Array.isArray(optionSets) ? optionSets : []) {
+    for (const option of Array.isArray(set?.options) ? set.options : []) {
+      if (option?.figure && mediaOccurrences.has(option.figure.mediaId)) {
+        mediaOccurrences.set(option.figure.mediaId, mediaOccurrences.get(option.figure.mediaId) + 1)
+      }
+    }
+  }
   if ([...mediaOccurrences.values()].some((count) => count !== 1)) {
-    issues.push(issue('READING_MEDIA_PLACEMENT_INVALID', 'needs_review', '$.media', 'Every Reading media entry must be placed exactly once by a Figure or table media ref'))
+    issues.push(issue('READING_MEDIA_PLACEMENT_INVALID', 'needs_review', '$.media', 'Every Reading media entry must be placed exactly once by a Figure, table media ref, or option'))
   }
   return issues
 }
@@ -260,6 +268,7 @@ export function validateReadingContract({
   media,
   variant,
   assertions,
+  allowFigureOptions = false,
 }) {
   const issues = []
   if (blankIds.length !== 0) {
@@ -273,7 +282,7 @@ export function validateReadingContract({
     return [issue('READING_VARIANT_INVALID', 'needs_review', '$.variant', 'Reading variant fields are closed')]
   }
   const blocks = Array.isArray(content?.blocks) ? content.blocks : []
-  issues.push(...readingContentIssues(content, media))
+  issues.push(...readingContentIssues(content, media, variant.choiceOwnership?.sets))
   const semanticIds = new Set()
   function registerSemanticId(id, path) {
     if (typeof id !== 'string' || semanticIds.has(id)) {
@@ -333,7 +342,9 @@ export function validateReadingContract({
     const set = sets?.[index]
     if (
       !isRecordValue(question)
-      || !exactKeys(question, ['questionId', 'stem', 'correctOptionId'])
+      || !exactKeys(question, ['questionId', 'stem', 'correctOptionId',
+        ...(allowFigureOptions && Object.hasOwn(question, 'figureLayout') ? ['figureLayout'] : []),
+      ])
       || typeof question.correctOptionId !== 'string'
     ) {
       issues.push(issue('READING_QUESTION_INVALID', 'needs_review', `$.variant.questions[${index}]`, 'Reading Questions require a closed stem and correct Option join'))
@@ -355,8 +366,23 @@ export function validateReadingContract({
       issues.push(issue('READING_OPTION_SET_INVALID', 'needs_review', `$.variant.choiceOwnership.sets[${index}]`, 'Reading Options must be one exact ordered A-D set'))
       continue
     }
+    const figureMode = allowFigureOptions && options.every((option) => option?.figure)
+    if (Object.hasOwn(question, 'figureLayout')
+      && !validateReadingFigureLayout(question.figureLayout, questionId, options)) {
+      issues.push(issue('READING_FIGURE_LAYOUT_INVALID', 'needs_review', `$.variant.questions[${index}]`, 'Source-measured layout must preserve its exact digest and A-D geometry'))
+    }
     for (const [optionIndex, option] of options.entries()) {
-      if (!isRecordValue(option) || !exactKeys(option, ['optionId', 'label', 'content']) || typeof option.optionId !== 'string') {
+      if (figureMode) {
+        const image = (media || []).find((item) => item.mediaId === option.figure.mediaId)
+        if (!exactKeys(option, ['optionId', 'label', 'figure'])
+          || typeof option.optionId !== 'string' || !isRecordValue(option.figure)
+          || !exactKeys(option.figure, ['mediaId']) || !image
+          || !['image/png', 'image/jpeg', 'image/webp'].includes(image.mimeType)) {
+          issues.push(issue('READING_FIGURE_OPTION_INVALID', 'needs_review', `$.variant.choiceOwnership.sets[${index}].options[${optionIndex}]`, 'Figure option must reference one same-group immutable raster image'))
+        } else {
+          registerSemanticId(option.optionId, `$.variant.choiceOwnership.sets[${index}].options[${optionIndex}]`)
+        }
+      } else if (!isRecordValue(option) || !exactKeys(option, ['optionId', 'label', 'content']) || typeof option.optionId !== 'string') {
         issues.push(issue('READING_OPTION_INVALID', 'needs_review', `$.variant.choiceOwnership.sets[${index}].options[${optionIndex}]`, 'Reading Option fields are closed'))
       } else {
         registerSemanticId(option.optionId, `$.variant.choiceOwnership.sets[${index}].options[${optionIndex}]`)

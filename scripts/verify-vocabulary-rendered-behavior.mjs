@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 import assert from 'node:assert/strict'
-import { spawn, spawnSync } from 'node:child_process'
+import { spawnSync } from 'node:child_process'
 import { createRequire } from 'node:module'
 import { createServer } from 'node:net'
+import { createServer as createViteServer } from '../app/node_modules/vite/dist/node/index.js'
 import { copyFileSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -30,12 +31,15 @@ async function freePort() {
 
 const vitePort = await freePort()
 const origin = `http://127.0.0.1:${vitePort}`
+const vite = await createViteServer({
+  root: path.join(rootDir, 'app'),
+  server: { host: '127.0.0.1', port: vitePort, strictPort: true },
+})
 const fixtureVisualPath = JSON.parse(readFileSync(path.join(rootDir, 'data/vocabulary/wanwei-visual-manifest-v1.json'), 'utf8')).entries[0].path
 const clippedVisualFixtures = [
   '/vocabulary-assets/wanwei-round-one-v1/visuals/koboyo-v1/wanwei-core-0216-just--hand-counting.svg',
   '/vocabulary-assets/wanwei-round-one-v1/visuals/koboyo-v1/wanwei-core-0217-keep--locker.svg',
 ]
-const children = []
 let passed = 0
 
 function silentWav() {
@@ -59,31 +63,6 @@ function silentWav() {
 function pass(label) {
   passed += 1
   console.log(`PASS ${label}`)
-}
-
-function startVite() {
-  const child = spawn('pnpm', ['exec', 'vite', '--host', '127.0.0.1', '--port', String(vitePort), '--strictPort'], {
-    cwd: path.join(rootDir, 'app'),
-    env: { ...process.env },
-    stdio: ['ignore', 'pipe', 'pipe'],
-  })
-  children.push(child)
-  child.stdout.on('data', (chunk) => process.stdout.write(`[vite] ${chunk}`))
-  child.stderr.on('data', (chunk) => process.stderr.write(`[vite] ${chunk}`))
-}
-
-async function waitForHttp(url, timeoutMs = 25_000) {
-  const startedAt = Date.now()
-  while (Date.now() - startedAt < timeoutMs) {
-    try {
-      const response = await fetch(url)
-      if (response.ok) return
-    } catch {
-      // Vite is still starting.
-    }
-    await new Promise((resolve) => setTimeout(resolve, 200))
-  }
-  throw new Error(`Timed out waiting for ${url}`)
 }
 
 function entry(index) {
@@ -1542,8 +1521,7 @@ async function verifyAmericanOnlyBeforeBritishRelease(page) {
 }
 
 async function main() {
-  startVite()
-  await waitForHttp(origin)
+  await vite.listen()
   const browser = await chromium.launch({ headless: true, channel: 'chromium' })
   try {
     const reviewPage = await browser.newPage({ viewport: { width: 1440, height: 1000 } })
@@ -1700,7 +1678,7 @@ main()
     console.error(`\nVocabulary rendered behavior FAILED\n${error.stack || error.message || error}`)
     process.exitCode = 1
   })
-  .finally(() => {
-    for (const child of children) child.kill('SIGTERM')
+  .finally(async () => {
+    await vite.close()
     rmSync(tempRoot, { recursive: true, force: true })
   })

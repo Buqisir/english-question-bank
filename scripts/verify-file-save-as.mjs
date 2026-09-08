@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 import assert from 'node:assert/strict'
-import { spawn } from 'node:child_process'
 import { createRequire } from 'node:module'
-import { createServer } from 'node:net'
+import { createServer } from '../app/node_modules/vite/dist/node/index.js'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -11,43 +10,15 @@ const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const require = createRequire(import.meta.url)
 const { chromium } = require(require.resolve('playwright', { paths: [path.join(rootDir, 'app')] }))
 
-async function freePort() {
-  const server = createServer()
-  await new Promise((resolve, reject) => {
-    server.once('error', reject)
-    server.listen(0, '127.0.0.1', resolve)
-  })
-  const address = server.address()
-  const port = typeof address === 'object' && address ? address.port : 0
-  await new Promise((resolve, reject) => server.close((error) => error ? reject(error) : resolve()))
-  assert.ok(port > 0)
-  return port
-}
-
-async function waitForHttp(url, timeoutMs = 20_000) {
-  const startedAt = Date.now()
-  while (Date.now() - startedAt < timeoutMs) {
-    try {
-      const response = await fetch(url)
-      if (response.ok) return
-    } catch {
-      // Vite is still starting.
-    }
-    await new Promise((resolve) => setTimeout(resolve, 150))
-  }
-  throw new Error(`Timed out waiting for ${url}`)
-}
-
-const port = await freePort()
-const origin = `http://127.0.0.1:${port}`
-const vite = spawn('pnpm', ['exec', 'vite', '--host', '127.0.0.1', '--port', String(port), '--strictPort'], {
-  cwd: path.join(rootDir, 'app'),
-  stdio: ['ignore', 'pipe', 'pipe'],
+const vite = await createServer({
+  root: path.join(rootDir, 'app'),
+  server: { host: '127.0.0.1', port: 0 },
 })
 
 let browser
 try {
-  await waitForHttp(origin)
+  await vite.listen()
+  const origin = vite.resolvedUrls.local[0]
   browser = await chromium.launch({ headless: true, channel: 'chromium' })
   const page = await browser.newPage()
   await page.goto(origin)
@@ -154,5 +125,5 @@ try {
   console.log(`\nfile-save-as verify passed: ${result.length + sourceContracts.length} checks`)
 } finally {
   await browser?.close()
-  vite.kill('SIGTERM')
+  await vite.close()
 }

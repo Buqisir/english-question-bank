@@ -7,11 +7,14 @@ import {
   validateMediaPresentation,
   validateMediaPublication,
 } from './mediaPresentation.mjs'
+import { validateReadingFigureLayout } from './readingFigureLayout.mjs'
 
 export const NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION =
   'nck1-source-materialization-v1'
 export const NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V2 =
   'nck1-source-materialization-v2'
+export const NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V3 =
+  'nck1-source-materialization-v3'
 
 const slots = Object.freeze([
   ['reading.a', 'reading', 21, 23],
@@ -314,7 +317,7 @@ function validateBlocks(blocks, path, documents, mediaReferences, blankReference
   }
 }
 
-function validateQuestion(question, expectedNumber, family, path, documents, ids, issues) {
+function validateQuestion(question, expectedNumber, family, path, documents, ids, issues, figureReferences = null) {
   if (
     !isRecordValue(question)
     || !exactKeys(question, [
@@ -326,6 +329,7 @@ function validateQuestion(question, expectedNumber, family, path, documents, ids
       'blankId',
       'prompt',
       'source',
+      ...(figureReferences && family === 'reading' && Object.hasOwn(question, 'figureLayout') ? ['figureLayout'] : []),
     ])
     || !nonEmptyString(question.questionId)
     || ids.has(question.questionId)
@@ -339,8 +343,28 @@ function validateQuestion(question, expectedNumber, family, path, documents, ids
   }
   ids.add(question.questionId)
   validateLocator(question.source, `${path}.source`, documents, issues)
+  if (Object.hasOwn(question, 'figureLayout') && !validateReadingFigureLayout(
+    question.figureLayout, question.questionId, question.options,
+    documents.get(question.source?.documentId)?.sha256,
+  )) {
+    issues.push(issue('MATERIALIZATION_FIGURE_LAYOUT_INVALID', `${path}.figureLayout`, 'Source-measured Reading layout must bind its exact question, options, source document and measurement'))
+  }
   if (family === 'reading') {
-    validateOptions(question.options, ['A', 'B', 'C', 'D'], `${path}.options`, issues)
+    if (figureReferences && Array.isArray(question.options) && question.options.some((option) => option?.figure)) {
+      if (question.options.length !== 4 || question.options.some((option, index) =>
+        !isRecordValue(option) || !exactKeys(option, ['label', 'figure'])
+        || option.label !== 'ABCD'[index] || !isRecordValue(option.figure)
+        || !exactKeys(option.figure, ['mediaId']) || !nonEmptyString(option.figure.mediaId))) {
+        issues.push(issue('MATERIALIZATION_FIGURE_OPTIONS_INVALID', `${path}.options`, 'Reading requires four ordered A-D figure options without mixed text'))
+      } else {
+        question.options.forEach((option, index) => figureReferences.push({
+          mediaId: option.figure.mediaId,
+          path: `${path}.options[${index}].figure`,
+        }))
+      }
+    } else {
+      validateOptions(question.options, ['A', 'B', 'C', 'D'], `${path}.options`, issues)
+    }
     if (question.blankId !== null || question.prompt !== null || !nonEmptyString(question.stem)) {
       issues.push(issue('MATERIALIZATION_READING_QUESTION_INVALID', path, 'Reading questions need a stem and A-D choices only'))
     }
@@ -546,7 +570,7 @@ function validateWritingBlocks(blocks, task, family, path, issues) {
   }
 }
 
-function validateGroups(groups, documents, mediaReferences, issues) {
+function validateGroups(groups, documents, mediaReferences, issues, allowFigureOptions = false) {
   if (!Array.isArray(groups) || groups.length !== slots.length) {
     issues.push(issue('MATERIALIZATION_GROUPS_INCOMPLETE', '$.groups', 'NCK1 requires exactly nine active groups'))
     return { questionIds: new Map(), ids: new Set() }
@@ -590,7 +614,7 @@ function validateGroups(groups, documents, mediaReferences, issues) {
     for (let number = from; number <= to; number += 1) {
       const questionIndex = number - from
       const question = group.questions[questionIndex]
-      validateQuestion(question, number, expectedFamily, `${path}.questions[${questionIndex}]`, documents, ids, issues)
+      validateQuestion(question, number, expectedFamily, `${path}.questions[${questionIndex}]`, documents, ids, issues, allowFigureOptions ? mediaReferences : null)
       if (nonEmptyString(question?.questionId)) {
         questionIds.set(question.questionId, { number, family: expectedFamily })
       }
@@ -658,7 +682,7 @@ function validateMedia(media, documents, mediaReferences, schemaVersion, issues)
     issues.push(issue('MATERIALIZATION_MEDIA_INVALID', '$.media', 'Media inventory must be an array'))
     return
   }
-  const mediaKeys = schemaVersion === NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V2
+  const mediaKeys = schemaVersion !== NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION
     ? [
         'mediaId',
         'usage',
@@ -693,14 +717,14 @@ function validateMedia(media, documents, mediaReferences, schemaVersion, issues)
       continue
     }
     if (
-      schemaVersion === NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V2
+      schemaVersion !== NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION
       && !validateMediaPresentation(item.presentation)
     ) {
       issues.push(issue('MATERIALIZATION_MEDIA_PRESENTATION_INVALID', `${path}.presentation`, 'Media layout intent requires one alignment, relative width, and finite spacing tokens'))
       continue
     }
     if (
-      schemaVersion === NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V2
+      schemaVersion !== NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION
       && (
         !validateMediaPublication(item.publication, item.presentation)
         || item.publication.sourceSha256 !== item.sha256
@@ -759,7 +783,7 @@ function validateMedia(media, documents, mediaReferences, schemaVersion, issues)
   }
   for (const item of media) {
     if (item?.usage === 'content' && referenceCounts.get(item.mediaId) !== 1) {
-      issues.push(issue('MATERIALIZATION_MEDIA_PLACEMENT_INVALID', '$.media', `Content media ${item.mediaId} must be used exactly once by a source block`))
+      issues.push(issue('MATERIALIZATION_MEDIA_PLACEMENT_INVALID', '$.media', `Content media ${item.mediaId} must be used exactly once by a source block or Reading option`))
     }
   }
 }
@@ -967,6 +991,7 @@ export function validateNck1SourceMaterialization(value) {
     || ![
       NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION,
       NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V2,
+      NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V3,
     ].includes(value.schemaVersion)
     || !/^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value.paperId || '')
     || value.profileId !== 'nck1'
@@ -1006,9 +1031,21 @@ export function validateNck1SourceMaterialization(value) {
     }
   }
   const mediaReferences = []
-  const { questionIds } = validateGroups(value.groups, documents, mediaReferences, issues)
+  const { questionIds } = validateGroups(value.groups, documents, mediaReferences, issues,
+    value.schemaVersion === NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V3)
   validateAnswers(value.answers, questionIds, documents, issues)
   validateMedia(value.media, documents, mediaReferences, value.schemaVersion, issues)
+  for (const group of Array.isArray(value.groups) ? value.groups : []) {
+    for (const question of Array.isArray(group?.questions) ? group.questions : []) {
+      if (question?.figureLayout && !validateReadingFigureLayout(
+        question.figureLayout, question.questionId, question.options,
+        documents.get(question.source?.documentId)?.sha256,
+        question.source, Array.isArray(value.media) ? value.media : [],
+      )) {
+        issues.push(issue('MATERIALIZATION_FIGURE_SOURCE_BINDING_INVALID', '$.groups', 'Measured options must bind the exact source page, media bytes and PDF crop geometry'))
+      }
+    }
+  }
   const sourceCoverage = validateSourceCoverage(value.sourceCoverage, value.groups, value.media, documents, issues)
   validateListening(value.listening, documents, sourceCoverage, issues)
   return issues

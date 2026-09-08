@@ -46,6 +46,7 @@ const registry = {
   'scripts/verify-nck1-docx-materialization-producer.mjs',
   'scripts/verify-nck1-pdf-materialization-producer.mjs',
   'scripts/verify-nck1-answer-source-shapes.mjs',
+  'scripts/verify-nck1-reading-figure-options.mjs',
   'scripts/verify-nck1-ocr-source-evidence.mjs',
   'scripts/verify-universal-nck1-image-source-bundle.mjs',
   'scripts/verify-universal-nck1-source-only-intake.mjs',

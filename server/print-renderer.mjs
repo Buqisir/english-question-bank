@@ -39,6 +39,7 @@
 
 import path from 'node:path'
 import { paperSurfaceTokens } from '../shared/papersurface/tokens.mjs'
+import { readingFigureOptionStyles, measuredReadingFigureStyles } from '../shared/papersurface/readingFigureOptions.mjs'
 import { paperBlankPattern } from '../shared/papersurface/blankPattern.mjs'
 import {
   grammarFillBlankRulingForRhythm,
@@ -829,6 +830,18 @@ function renderCanonicalQuestionOptions(
   preserveInlineIdentity = false,
   readingTail = null,
 ) {
+  if (question.options.some((option) => option.figure)) {
+    if (question.options.length !== 4 || !question.options.every((option) => option.figure)) {
+      throw new Error('Reading figure options must be a complete A-D set')
+    }
+    const css = (style) => Object.entries(style).map(([key, value]) =>
+      `${key.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`)}:${value}`).join(';')
+    const measured = question.figureLayout && measuredReadingFigureStyles(question.figureLayout)
+    return `<div style="overflow-x:auto;max-width:100%"><div data-canonical-figure-options="" style="${css(measured?.bank || readingFigureOptionStyles.bank)}">${question.options.map((option, index) => {
+      const { mediaId, mediaArtifact } = option.figure
+      return `<div data-canonical-option-id="${escapeHtml(option.optionId)}" style="${css(measured ? { display: 'contents' } : readingFigureOptionStyles.option)}"><span style="${css(measured?.options[index].label || {})}">${escapeHtml(option.label)}.</span><img src="data:${escapeHtml(mediaArtifact.mimeType)};base64,${escapeHtml(mediaArtifact.encodedBytes)}" alt="Option ${escapeHtml(option.label)}" data-canonical-media-id="${escapeHtml(mediaId)}" data-canonical-media-sha256="${escapeHtml(mediaArtifact.sha256)}" style="${css(measured?.options[index].image || readingFigureOptionStyles.image)}"></div>`
+    }).join('')}</div></div>`
+  }
   const placement = translateAbcdPlanToPointPlacement(question.layoutPlan)
   const attrs = ` data-canonical-placement-signature="${escapeHtml(placement.placementSignature)}" data-canonical-placement-mode="${placement.mode}" data-canonical-column-starts-pt="${placement.columnStartsPt.join(',')}" data-canonical-question-stem-start-pt="${placement.questionStemStartPt}" style="width:${placement.rowWidthPt}pt;margin-left:${placement.questionStemStartPt}pt;grid-template-columns:${placement.columnWidthsPt.map((width) => `${width}pt`).join(' ')}"`
   return `<div class="canonical-options canonical-options--${placement.mode}"${attrs}>${question.options.map((option, index) => {
@@ -2043,7 +2056,7 @@ export function buildPrintHtml({
               ? ` data-canonical-question-stem-start-pt="${stemPlacement.questionStemStartPt}" style="grid-template-columns:${stemPlacement.questionStemStartPt}pt minmax(0,1fr)"`
               : ''
             groupHtml += `<div class="question"${canonicalQuestionAttrs}><p class="stem${stemPlacement ? ' stem--canonical' : ''}"${canonicalGroup?.groupType === 'reading' ? ' data-canonical-reading-rhythm-role="question_stem_line"' : ''}${stemAttrs}><span class="qnum">${displayQuestionNo}.</span>${stemPlacement ? `<span class="canonical-stem-text">${renderedStem}</span>` : ` ${renderedStem}`}</p>`
-            groupHtml += canonicalQuestion?.layoutPlan
+            groupHtml += canonicalQuestion && (canonicalQuestion.layoutPlan || canonicalQuestion.options.some((option) => option.figure))
               ? renderCanonicalQuestionOptions(
                   canonicalQuestion,
                   canonicalGroup.groupType === 'reading',
