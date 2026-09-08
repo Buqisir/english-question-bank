@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "reading-option-figure-source-layout-intent-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "questionId",
+    "sourcePage",
+    "coordinateSystem",
+    "measurementEvidence",
+    "rowStartPt",
+    "rowWidthPt",
+    "bankHeightPt",
+    "labelFontSizePt",
+    "labelLineHeightPt",
+    "stemToBankGapPt",
+    "questionTailGapPt",
+    "placements",
+    "intentDigest"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "reading-option-figure-source-layout-intent-v1"
+    },
+    "questionId": {
+      "type": "string"
+    },
+    "sourcePage": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "coordinateSystem": {
+      "const": "question_content_box_pt"
+    },
+    "measurementEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "evidenceSchemaVersion",
+        "evidenceDigest",
+        "sourceDocumentSha256"
+      ],
+      "properties": {
+        "kind": {
+          "const": "digest_bound_external_evidence"
+        },
+        "evidenceSchemaVersion": {
+          "type": "string"
+        },
+        "evidenceDigest": {
+          "type": "string"
+        },
+        "sourceDocumentSha256": {
+          "type": "string"
+        }
+      }
+    },
+    "rowStartPt": {
+      "type": "number",
+      "minimum": 0
+    },
+    "rowWidthPt": {
+      "type": "number",
+      "minimum": 0
+    },
+    "bankHeightPt": {
+      "type": "number",
+      "minimum": 0
+    },
+    "labelFontSizePt": {
+      "type": "number",
+      "minimum": 0
+    },
+    "labelLineHeightPt": {
+      "type": "number",
+      "minimum": 0
+    },
+    "stemToBankGapPt": {
+      "type": "number",
+      "minimum": 0
+    },
+    "questionTailGapPt": {
+      "type": "number",
+      "minimum": 0
+    },
+    "placements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "optionId",
+          "label",
+          "sourceSpanId",
+          "sourcePlacementMatrix",
+          "labelLeftPt",
+          "labelTopPt",
+          "imageLeftPt",
+          "imageTopPt",
+          "imageWidthPt",
+          "imageHeightPt"
+        ],
+        "properties": {
+          "optionId": {
+            "type": "string"
+          },
+          "label": {
+            "enum": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ]
+          },
+          "sourceSpanId": {
+            "type": "string"
+          },
+          "sourcePlacementMatrix": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "labelLeftPt": {
+            "type": "number",
+            "minimum": 0
+          },
+          "labelTopPt": {
+            "type": "number",
+            "minimum": 0
+          },
+          "imageLeftPt": {
+            "type": "number",
+            "minimum": 0
+          },
+          "imageTopPt": {
+            "type": "number",
+            "minimum": 0
+          },
+          "imageWidthPt": {
+            "type": "number",
+            "minimum": 0
+          },
+          "imageHeightPt": {
+            "type": "number",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "intentDigest": {
+      "type": "string"
+    }
+  }
+}

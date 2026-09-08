@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "reading-source-layout-measurement-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "questionId", "sourcePdfSha256", "sourcePage", "pageWidthPt", "pageHeightPt", "coordinateSystem", "labels", "images"],
+  "properties": {
+    "schemaVersion": { "const": "reading-source-layout-measurement-v1" },
+    "questionId": { "type": "string", "minLength": 1 },
+    "sourcePdfSha256": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "sourcePage": { "type": "integer", "minimum": 1 },
+    "pageWidthPt": { "type": "number", "exclusiveMinimum": 0 },
+    "pageHeightPt": { "type": "number", "exclusiveMinimum": 0 },
+    "coordinateSystem": { "const": "question_page_top_left_pt" },
+    "labels": {
+      "type": "array", "minItems": 4, "maxItems": 4,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["label", "leftPt", "topPt", "widthPt", "heightPt"],
+        "properties": {
+          "label": { "enum": ["A", "B", "C", "D"] },
+          "leftPt": { "type": "number", "minimum": 0 },
+          "topPt": { "type": "number", "minimum": 0 },
+          "widthPt": { "type": "number", "exclusiveMinimum": 0 },
+          "heightPt": { "type": "number", "exclusiveMinimum": 0 }
+        }
+      }
+    },
+    "images": {
+      "type": "array", "minItems": 4, "maxItems": 4,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["mediaId", "sha256"],
+        "properties": {
+          "mediaId": { "type": "string", "minLength": 1 },
+          "sha256": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+        }
+      }
+    }
+  }
+}

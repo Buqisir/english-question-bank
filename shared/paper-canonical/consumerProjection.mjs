@@ -9,6 +9,7 @@ import { validateMediaPresentation } from './mediaPresentation.mjs'
 import { resolvePassageBlockRoles } from './passageBlockRoles.mjs'
 import { readingPassageLetterBySlotId } from './readingPassageLetter.mjs'
 import { digestJson, sha256, stableStringify } from './stable.mjs'
+import { validateReadingFigureLayout } from './readingFigureLayout.mjs'
 
 const SUPPORTED_FAMILIES = new Set([
   'cloze',
@@ -44,7 +45,7 @@ function textContent(nodes) {
 
 function projectListeningConsumerGroup(input, occurrence) {
   const { groupId } = input
-  const questionOnly = input.consumption.authorityRef?.manifestVersion === '51'
+  const questionOnly = ['51', '52'].includes(input.consumption.authorityRef?.manifestVersion)
   if (
     !Array.isArray(occurrence.blanks)
     || occurrence.blanks.length !== 0
@@ -403,9 +404,6 @@ function projectReadingConsumerGroup(input, occurrence) {
     allowFramedColumns: true,
     allowFigure: true,
   }))
-  if (seenMediaIds.size !== mediaById.size) {
-    throw rejected(`Canonical Reading occurrence ${groupId} does not place every media item exactly once`)
-  }
 
   const numberByQuestionId = new Map()
   for (const assignment of occurrence.numbering) {
@@ -442,6 +440,36 @@ function projectReadingConsumerGroup(input, occurrence) {
     ) {
       throw rejected(`Canonical Reading occurrence ${groupId} has an invalid A-D Question`)
     }
+    if (question.options.some((option) => option.figure)) {
+      if (!question.options.every((option) => option.figure && !option.content)) {
+        throw rejected(`Canonical Reading occurrence ${groupId} mixes figure and text options`)
+      }
+      if (question.figureLayout && !validateReadingFigureLayout(question.figureLayout, question.questionId, question.options)) {
+        throw rejected(`Canonical Reading occurrence ${groupId} has stale source geometry`)
+      }
+      const options = question.options.map((option) => ({
+        optionId: option.optionId,
+        label: option.label,
+        text: '',
+        figure: {
+          mediaId: option.figure.mediaId,
+          ...resolveReadingMedia(option.figure.mediaId, 'option'),
+        },
+      }))
+      return {
+        questionId: question.questionId,
+        questionNo: numberByQuestionId.get(question.questionId),
+        stem: textContent(question.stem),
+        stemContent: structuredClone(question.stem),
+        options,
+        correctOptionId: question.correctOptionId,
+        layoutPlan: null,
+        ...(question.figureLayout ? { figureLayout: structuredClone(question.figureLayout.intent) } : {}),
+        placementSignature: digestJson(options.map((option) => ({
+          optionId: option.optionId, mediaId: option.figure.mediaId,
+        }))),
+      }
+    }
     const options = question.options.map((option) => ({
       optionId: option.optionId,
       label: option.label,
@@ -467,6 +495,9 @@ function projectReadingConsumerGroup(input, occurrence) {
       placementSignature: abcdPlacementSignature(layoutPlan),
     }
   })
+  if (seenMediaIds.size !== mediaById.size) {
+    throw rejected(`Canonical Reading occurrence ${groupId} does not place every media item exactly once`)
+  }
 
   const collectOccurrenceContentNodeIds = (block) => {
     const identities = [block.nodeId]
@@ -1203,11 +1234,11 @@ function selectOccurrence(input) {
     || familyContractId === 'grammar-fill'
     || (
       familyContractId === 'continuation-writing'
-      && ['49', '50', '51'].includes(authorityRef?.manifestVersion)
+      && ['49', '50', '51', '52'].includes(authorityRef?.manifestVersion)
     )
     || (
       familyContractId === 'seven-choices'
-      && ['47', '48', '49', '50', '51'].includes(authorityRef?.manifestVersion)
+      && ['47', '48', '49', '50', '51', '52'].includes(authorityRef?.manifestVersion)
     )
   if (requiresOccurrenceIntegrity) {
     const consumptionDigest = sha256(`${stableStringify(consumption)}\n`)
@@ -1353,7 +1384,7 @@ export function projectCanonicalConsumerGroup(input) {
 
   const seenBlanks = new Set()
   const passageRoles = familyContractId === 'seven-choices'
-    && ['47', '48', '49', '50', '51'].includes(input.consumption?.authorityRef?.manifestVersion)
+    && ['47', '48', '49', '50', '51', '52'].includes(input.consumption?.authorityRef?.manifestVersion)
     ? resolvePassageBlockRoles(
         occurrence.content?.blocks,
         occurrence.passageBlockRoles,

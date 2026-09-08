@@ -24,6 +24,7 @@ import { useMemo, useCallback, type CSSProperties, type ReactNode } from 'react'
 import './PaperSurface.css'
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import { paperSurfaceAnchorAttrs } from '../../../../shared/papersurface/anchorKeys.mjs'
+import { readingFigureOptionStyles, measuredReadingFigureStyles } from '../../../../shared/papersurface/readingFigureOptions.mjs'
 import {
   applicationWritingNoticeLines,
   writingNoticeGroup,
@@ -1374,6 +1375,7 @@ function PaperSurfaceQuestionItem({
         clozeRhythmEnabled ? 'choice_row' : undefined
       }
       data-canonical-cloze-before-section={clozeFollowingSectionId}
+      style={question.options.some((option) => option.figure) ? { breakInside: 'avoid' } : undefined}
       onClick={() => onQuestionClick(question.id)}
     >
       {!trimmedStem && hasOptions ? (
@@ -1496,6 +1498,7 @@ function PaperSurfaceQuestionItem({
               options={question.options}
               canonicalPlacement={question.canonicalPlacement}
               canonicalOptionIds={question.canonicalIdentity?.optionIds}
+              figureLayout={question.figureLayout}
               readingSuccessorGroupId={readingSuccessorGroupId}
               readingFollowingSectionId={readingFollowingSectionId}
               predecessorQuestionId={question.canonicalIdentity?.questionId}
@@ -1515,6 +1518,7 @@ type PaperSurfaceOptionListProps = {
   options: ReadonlyArray<PaperQuestionOption>
   canonicalPlacement?: PaperQuestion['canonicalPlacement']
   canonicalOptionIds?: ReadonlyArray<string>
+  figureLayout?: PaperQuestion['figureLayout']
   readingSuccessorGroupId?: string
   readingFollowingSectionId?: string
   predecessorQuestionId?: string
@@ -1526,11 +1530,35 @@ function PaperSurfaceOptionList({
   options,
   canonicalPlacement,
   canonicalOptionIds,
+  figureLayout,
   readingSuccessorGroupId,
   readingFollowingSectionId,
   predecessorQuestionId,
   readingRhythmEnabled,
 }: PaperSurfaceOptionListProps): ReactNode {
+  if (options.some((option) => option.figure)) {
+    if (options.length !== 4 || !options.every((option) => option.figure)) {
+      throw new Error('Reading figure options must be a complete A-D set')
+    }
+    const measured = figureLayout && measuredReadingFigureStyles(figureLayout)
+    return (
+      <div style={{ overflowX: 'auto', maxWidth: '100%' }}>
+      <ol data-canonical-figure-options="" style={(measured?.bank || readingFigureOptionStyles.bank) as CSSProperties}>
+        {options.map((option, index) => (
+          <li key={option.label} style={(measured ? { display: 'contents' } : readingFigureOptionStyles.option) as CSSProperties}
+            data-canonical-option-id={canonicalOptionIds?.[index]}
+            {...{ [paperSurfaceAnchorAttrs.optionLabel]: option.label }}>
+            <span style={measured?.options[index].label as CSSProperties}>{option.label}.</span>
+            <img src={option.figure!.src} alt={`Option ${option.label}`}
+              data-canonical-media-id={option.figure!.mediaId}
+              data-canonical-media-sha256={option.figure!.sha256}
+              style={(measured?.options[index].image || readingFigureOptionStyles.image) as CSSProperties} />
+          </li>
+        ))}
+      </ol>
+      </div>
+    )
+  }
   return (
     <ol
       className={`ps-option-list${canonicalPlacement ? ` ps-option-list--canonical ps-option-list--${canonicalPlacement.mode}${canonicalPlacement.questionStemStartPt !== undefined ? ' ps-option-list--stem-aligned' : ''}` : ''}`}

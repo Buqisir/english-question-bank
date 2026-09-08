@@ -19,16 +19,31 @@ immutable v4 Publication
 卷型题号、分值、题组 cardinality、清洗条件或字体/物理排版数值，也不能被 caller
 当作第二套配置。
 
-Universal NCK1 导题与 Owner Review 另使用 Candidate-only
+Universal NCK1 导题与 Owner Review 的历史 Candidate-only authority 是
 [`manifest-v50.json`](../../standards/paper-canonical/manifest-v50.json)：NCK1
 Profile v15 将 source-bound Listening 1–5、6–20 激活为两个可选 Canonical
 Group；源明确 `not_supplied` 时两组均省略且不留下标题或空隙。现有 Review
 Screen 把已捕获听力放在 q1–20,点击题目后由同一右栏显示官方录音稿、答案和
 简明 ASR / 对比 / 内容安全证据；Student projection 必须剥离录音稿、答案和
 审核证据。v50 不推进全局 accepted authority,也不声明 Print/PDF 听力排版、
-公开播放器或音频发布能力；带音频的公开发布仍 fail closed。听力金样版式及
+公开播放器或音频发布能力；v50 带音频的公开发布仍 fail closed。听力金样版式及
 Screen/Print/PDF 共享输出由后续 successor 闭合,不得从本 Candidate Review
 样式反推。
+
+当前 Universal NCK1 successor 为
+[`manifest-v52.json`](../../standards/paper-canonical/manifest-v52.json)，继承
+v51 的听力发布闭包，使用 NCK1 Profile v16、Reading family v2、Screen v40
+和 Print/PDF v41。迁移只增加 materialization v3 的同质 A–D 图片选项及可选
+源测量布局；v1/v2 文字题仍可导入，已有 Publications 保留原 authority/digest，
+不自动重编译、不推进全局 accepted v36，也不恢复旧 Format2 导入运行时。
+图片须保留独立 occurrence、原始字节和可重放裁切；测量布局绑定题目、原卷
+页码、A–D 图片顺序、摘要及裁切坐标，原卷页尺寸和标号边界由 PDF 文本层
+重放（容差 0.5pt）。无可验证文本层时不得声明此测量布局；普通图片选项不受
+此限制。Screen 与 Print/PDF 消费同一份布局，Review 仍需人工确认题意、
+图片质量及答案，不把几何校验当成语义审核。迁移验证入口为
+`scripts/verify-nck1-reading-figure-options.mjs`；设置
+`EQB_SHENZHEN_QUESTION_PDF` 可复跑原卷 Q33 图片的局部样例，外围题目为
+合成数据，不能据此声明整卷已完成导入或发布。
 
 机器 manifest 分别绑定 Core Invariants、NCK1 / Zhejiang legacy / national
 legacy Profiles、各 family contract、Normalization Rules、Source Adapters、

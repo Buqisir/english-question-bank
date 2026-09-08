@@ -9,7 +9,6 @@ import {
 } from '../../shared/paper-canonical/authority.mjs'
 import {
   digestNck1SourceMaterialization,
-  NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V2,
   validateNck1SourceMaterialization,
 } from '../../shared/paper-canonical/nck1SourceMaterialization.mjs'
 import {
@@ -505,6 +504,33 @@ function validateBundle(materialization, input) {
     issues.push(adapterIssue('MATERIALIZATION_SOURCE_DOCUMENT_SET_MISMATCH', 'Supplied source documents must exactly equal the materialization inventory', '$.documents'))
   }
   issues.push(...validateDocxParagraphBoundaries(materialization, documentsById))
+  for (const group of materialization?.groups || []) {
+    for (const question of group.questions || []) {
+      if (!question.figureLayout) continue
+      const temp = mkdtempSync(path.join(tmpdir(), 'eqb-reading-layout-proof-'))
+      try {
+        const measurement = question.figureLayout.measurementEvidenceBody
+        const sourcePath = path.join(temp, 'source.pdf')
+        writeFileSync(sourcePath, documentsById.get(question.source.documentId).bytes)
+        const bbox = execFileSync('pdftotext', ['-f', String(question.source.page), '-l', String(question.source.page), '-bbox', sourcePath, '-'], { encoding: 'utf8' })
+        const page = bbox.match(/<page width="([\d.]+)" height="([\d.]+)">/)
+        // Poppler's bbox output is machine-generated, not source-authored XML.
+        const labels = [...bbox.matchAll(/<word xMin="([\d.]+)" yMin="([\d.]+)" xMax="([\d.]+)" yMax="([\d.]+)">([ABCD])\.<\/word>/g)]
+        const close = (a, b) => Number.isFinite(a) && Number.isFinite(b) && Math.abs(a - b) <= 0.5
+        if (!page || !close(Number(page[1]), measurement.pageWidthPt) || !close(Number(page[2]), measurement.pageHeightPt)
+          || !measurement.labels.every((label) => labels.some((word) => word[5] === label.label
+            && close(Number(word[1]), label.leftPt) && close(Number(word[2]), label.topPt)
+            && close(Number(word[3]) - Number(word[1]), label.widthPt)
+            && close(Number(word[4]) - Number(word[2]), label.heightPt)))) {
+          throw new Error('Source label or page measurement does not replay')
+        }
+      } catch {
+        issues.push(adapterIssue('MATERIALIZATION_FIGURE_MEASUREMENT_UNVERIFIED', 'Measured Reading layout must replay source PDF page dimensions and A-D label boxes within 0.5pt', '$.groups'))
+      } finally {
+        rmSync(temp, { recursive: true, force: true })
+      }
+    }
+  }
   for (const media of materialization?.media || []) {
     const supplied = mediaById.get(media.mediaId)
     if (!supplied || sha256(supplied.bytes) !== media.sha256) {
@@ -695,6 +721,9 @@ function option(groupId, questionId, value, shared = false) {
   const optionId = shared
     ? `option:${value.label}`
     : `option:${questionId}:${value.label}`
+  if (value.figure) {
+    return { optionId, label: value.label, figure: structuredClone(value.figure) }
+  }
   return {
     optionId,
     label: value.label,
@@ -963,6 +992,7 @@ function groupVariant(group, answersByQuestionId, content, issues, source, docum
         }],
         correctOptionId:
           `option:${question.questionId}:${answersByQuestionId.get(question.questionId)}`,
+        ...(question.figureLayout ? { figureLayout: structuredClone(question.figureLayout) } : {}),
       })),
       choiceOwnership: ownership,
     }
@@ -1271,7 +1301,11 @@ function deriveSource(materialization, documentsById, mediaById, instructionDocu
           || paragraphText(block) !== group.writingTask.prompt)
       : group.blocks
     const content = { blocks: canonicalBlocks.map(canonicalBlock) }
-    const groupMedia = referencedMediaIds(group.blocks).map((mediaId) => {
+    const groupMedia = [
+      ...referencedMediaIds(group.blocks),
+      ...group.questions.flatMap((question) => question.options
+        .filter((value) => value.figure).map((value) => value.figure.mediaId)),
+    ].map((mediaId) => {
       const media = mediaInventoryById.get(mediaId)
       const selected = selectedMedia(media, mediaById.get(mediaId))
       return {
@@ -1296,7 +1330,7 @@ function deriveSource(materialization, documentsById, mediaById, instructionDocu
           sha256: inventory.sha256,
           pixelWidth: inventory.pixelWidth,
           pixelHeight: inventory.pixelHeight,
-          ...(materialization.schemaVersion === NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION_V2
+          ...(['nck1-source-materialization-v2', 'nck1-source-materialization-v3'].includes(materialization.schemaVersion)
             ? {
                 presentation: structuredClone(inventory.presentation),
                 publication: structuredClone(inventory.publication),

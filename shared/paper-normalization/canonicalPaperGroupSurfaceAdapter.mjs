@@ -352,7 +352,7 @@ export function buildCanonicalReadingConsumptionSurfaceData({
         paragraphs: textMapParagraphs,
       },
       questions: canonicalGroup.questions.map((question, order) => {
-        const placement = translateAbcdPlanToPointPlacement(
+        const placement = question.layoutPlan && translateAbcdPlanToPointPlacement(
           question.layoutPlan,
         )
         return {
@@ -362,16 +362,22 @@ export function buildCanonicalReadingConsumptionSurfaceData({
           questionNo: String(question.questionNo),
           stem: question.stem,
           canonicalStemContent: question.stemContent,
+          ...(question.figureLayout ? { figureLayout: question.figureLayout } : {}),
           options: question.options.map((option) => ({
             label: option.label,
             text: option.text,
             canonicalContent: option.content,
+            ...(option.figure ? { figure: {
+              mediaId: option.figure.mediaId,
+              sha256: option.figure.mediaArtifact.sha256,
+              src: `data:${option.figure.mediaArtifact.mimeType};base64,${option.figure.mediaArtifact.encodedBytes}`,
+            } } : {}),
           })),
           canonicalIdentity: {
             questionId: question.questionId,
             optionIds: question.options.map((option) => option.optionId),
           },
-          canonicalPlacement: {
+          canonicalPlacement: placement ? {
             mode: placement.mode,
             signature: placement.placementSignature,
             questionStemStartPt: placement.questionStemStartPt,
@@ -386,7 +392,7 @@ export function buildCanonicalReadingConsumptionSurfaceData({
               startPt: item.startPt,
               continuationStartPt: item.continuationStartPt,
             })),
-          },
+          } : undefined,
         }
       }),
       evidence: [],

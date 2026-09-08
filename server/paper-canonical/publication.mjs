@@ -51,6 +51,7 @@ const publicationFileName =
   `canonical-paper-publication-v${canonicalAuthorityRef.manifestVersion}.json`
 const publicationFileNames = [
   publicationFileName,
+  'canonical-paper-publication-v52.json',
   'canonical-paper-publication-v51.json',
   'canonical-paper-publication-v50.json',
   'canonical-paper-publication-v49.json',
@@ -402,13 +403,13 @@ function validatePublicationLineage({ sourceCapture, plan, groups, normalization
 }
 
 function capturedListeningAudio(sourceCapture, groups, closure) {
-  if (closure.authorityRef.manifestVersion !== '51') return null
+  if (!['51', '52'].includes(closure.authorityRef.manifestVersion)) return null
   const active = groups.some((group) => group.contractRef.familyContractId === 'listening')
   const documents = sourceCapture.documents.filter((document) => document.inputKey === 'listening_audio_descriptor')
   if (!active && documents.length === 0) return null
   if (!active || documents.length !== 1) throw publicationError('LISTENING_AUDIO_UNBOUND', 'Listening requires one confirmed playback descriptor')
   const descriptor = readJsonBytes(decodeBase64(documents[0].encodedBytes, 'listening audio'), 'listening audio')
-  const schema = closure.schemas['canonical-paper-publication-v51'].properties.listeningAudio
+  const schema = closure.schemas[`canonical-paper-publication-v${closure.authorityRef.manifestVersion}`].properties.listeningAudio
   if (validateJsonSchema(descriptor, schema).length) throw publicationError('LISTENING_AUDIO_UNBOUND', 'Invalid playback descriptor')
   return descriptor
 }
@@ -1554,7 +1555,7 @@ function canonicalSelections(validated, contract, sourceAsset) {
         )
         || (
           familyContractId === 'seven-choices'
-          && ['47', '48', '49', '50', '51'].includes(validated.plan.authorityRef.manifestVersion)
+          && ['47', '48', '49', '50', '51', '52'].includes(validated.plan.authorityRef.manifestVersion)
         )
         || (
           familyContractId === 'cloze'
@@ -1566,7 +1567,7 @@ function canonicalSelections(validated, contract, sourceAsset) {
         )
         || (
           familyContractId === 'continuation-writing'
-          && ['49', '50', '51'].includes(validated.plan.authorityRef.manifestVersion)
+          && ['49', '50', '51', '52'].includes(validated.plan.authorityRef.manifestVersion)
         )
         ? {
             projectedOccurrenceDigests: projectedOccurrences.map(

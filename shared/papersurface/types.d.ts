@@ -447,6 +447,13 @@ export type PaperQuestionOption = {
   /** Displayable option text. */
   readonly text: string
 
+  /** Resolved, confirmed Reading option image. Text is empty for this mode. */
+  readonly figure?: {
+    readonly mediaId: string
+    readonly sha256: string
+    readonly src: string
+  }
+
   /** Canonical Reading literal nodes. Identity is renderer-visible; answer
    *  authority deliberately is not part of this student surface payload. */
   readonly canonicalContent?: ReadonlyArray<{
@@ -512,6 +519,8 @@ export type PaperQuestion = {
    *  types that have no inline options (e.g. some writing tasks);
    *  PaperSurface treats an empty array as "no options to render". */
   readonly options: ReadonlyArray<PaperQuestionOption>
+
+  readonly figureLayout?: import('./readingFigureOptions.mjs').ReadingFigureLayoutIntent
 
   /** Shared canonical A-D placement selected before any renderer starts. */
   readonly canonicalPlacement?: {
