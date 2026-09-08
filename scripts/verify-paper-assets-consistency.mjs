@@ -33,6 +33,7 @@ import { DatabaseSync } from 'node:sqlite'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
 const { values: args } = parseArgs({ options: { db: { type: 'string' }, 'paper-assets': { type: 'string' } } })
+if (Object.values(args).some((value) => !value.trim())) throw new Error('Audit paths must be non-empty')
 if (args['paper-assets'] && !args.db) throw new Error('--paper-assets requires --db')
 const paperAssetsDir = path.resolve(args['paper-assets'] || path.join(rootDir, 'app', 'public', 'paper-assets'))
 

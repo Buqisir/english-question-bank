@@ -36,6 +36,7 @@ import { createDailyLimitCounter } from '../server/ai-providers/dailyLimitCounte
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
 const { values: args } = parseArgs({ options: { db: { type: 'string' } } })
+if (args.db !== undefined && !args.db.trim()) throw new Error('--db requires a non-empty path')
 
 let passed = 0
 let failed = 0
@@ -80,6 +81,7 @@ const DB_GROUP_TYPE_TO_FACET_TYPE = {
 }
 
 const paperAssetsDir = mkdtempSync(path.join(tmpdir(), 'similar-v2-fixture-'))
+process.once('exit', () => rmSync(paperAssetsDir, { recursive: true, force: true }))
 const assetsByPaperId = new Map()
 
 function ensurePaper(paperId) {
@@ -1055,7 +1057,6 @@ assert('scripts/README.md documents verify-similar-v2.mjs', readmeSource.include
 
 // ─── cleanup ────────────────────────────────────────────────────────────
 db.close()
-rmSync(paperAssetsDir, { recursive: true, force: true })
 
 console.log()
 console.log(`${passed} passed, ${failed} failed`)

@@ -28,6 +28,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
 const DECISIONS_PATH = path.join(rootDir, 'docs/cuts/r1-genre-truth/genre-decisions.json')
 const { values: args } = parseArgs({ options: { db: { type: 'string' } } })
+if (args.db !== undefined && !args.db.trim()) throw new Error('--db requires a non-empty path')
 
 function auditGenres(db, decisions) {
   const rows = db.prepare('SELECT id, discourse_type FROM passages').all()
