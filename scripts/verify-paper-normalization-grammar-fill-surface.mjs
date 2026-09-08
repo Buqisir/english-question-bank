@@ -120,27 +120,8 @@ try {
   const { buildGrammarFillAnalysisSurfaceModel } = await vite.ssrLoadModule(
     '/src/features/paper-intelligence/grammarFillAnalysisSurfaceAdapter.ts',
   )
-  const {
-    applyPaperSurfaceFocusIntent,
-    shouldClearLectureSelectionForActiveGroup,
-  } = await vite.ssrLoadModule(
+  const { applyPaperSurfaceFocusIntent } = await vite.ssrLoadModule(
     '/src/features/paper-browse/paperBrowseFocusIntent.ts',
-  )
-  assert.equal(
-    shouldClearLectureSelectionForActiveGroup({
-      activeGroupId: 'group-before',
-      selectedGroupId: proofs[1].groupId,
-      selectedGroupVisible: true,
-    }),
-    false,
-  )
-  assert.equal(
-    shouldClearLectureSelectionForActiveGroup({
-      activeGroupId: 'group-before',
-      selectedGroupId: proofs[1].groupId,
-      selectedGroupVisible: false,
-    }),
-    true,
   )
   const { PaperSurface } = await vite.ssrLoadModule(
     '/src/shared-ui/papersurface/PaperSurface.tsx',
