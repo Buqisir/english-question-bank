@@ -16,21 +16,25 @@
  *   paper-asset.json), the JSON must parse, and paper.paperId must match
  *   the dir name. Stale .latest-tmp-* / .latest-prev-* swap residue fails.
  *
- * Phase 2 (only when data/question-bank.sqlite exists — local/production):
+ * Phase 2 (isolated regression fixture; explicit --db for a corpus audit):
  *   every published paper_asset_versions row and every sources.file_ref
  *   paper id must have a renderable dir, and every disk dir must be known
- *   to the DB. When the DB is absent (clean CI checkout), phase 2 is
- *   skipped via exit code 2 per the verify-ci.mjs skip convention.
+ *   to the DB. The V0 development seed is not the served corpus inventory.
+ *   --db <path> audits a selected DB read-only against --paper-assets <dir>
+ *   (default: the tracked serve tree). Missing/malformed audit inputs fail.
  */
 
 import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { parseArgs } from 'node:util'
+import { DatabaseSync } from 'node:sqlite'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
-const paperAssetsDir = path.join(rootDir, 'app', 'public', 'paper-assets')
-const dbPath = path.join(rootDir, 'data', 'question-bank.sqlite')
+const { values: args } = parseArgs({ options: { db: { type: 'string' }, 'paper-assets': { type: 'string' } } })
+if (args['paper-assets'] && !args.db) throw new Error('--paper-assets requires --db')
+const paperAssetsDir = path.resolve(args['paper-assets'] || path.join(rootDir, 'app', 'public', 'paper-assets'))
 
 let passed = 0
 let failed = 0
@@ -121,49 +125,57 @@ for (const paperId of diskPaperIds) {
   )
 }
 
-// ─── Phase 2: DB cross-check (skip on clean CI checkout) ────────────────────
+// ─── Phase 2: one strict inventory audit, exercised by fixtures and --db ───
+function auditReferences(db, diskIds, renderable) {
+  const publishedIds = db
+    .prepare(`SELECT DISTINCT paper_id FROM paper_asset_versions WHERE status = 'published'`)
+    .all()
+    .map((r) => r.paper_id)
 
-if (!existsSync(dbPath)) {
-  if (failed > 0) {
-    console.error(`\n${failed} failed / ${passed} passed`)
-    process.exit(1)
+  const fileRefIds = db
+    .prepare(`SELECT DISTINCT file_ref FROM sources WHERE file_ref LIKE 'paper-assets/%'`)
+    .all()
+    .map((r) => r.file_ref.split('/')[1])
+
+  const dbPaperIds = new Set([...publishedIds, ...fileRefIds])
+  return [
+    ...[...dbPaperIds].filter((id) => !renderable(id)).map((id) => `DB→disk ${id}`),
+    ...diskIds.filter((id) => !dbPaperIds.has(id)).map((id) => `disk→DB ${id}`),
+  ]
+}
+
+const fixture = new DatabaseSync(':memory:')
+fixture.exec(readFileSync(path.join(rootDir, 'data/sql/schema.sql'), 'utf8'))
+try {
+  fixture.exec(`
+    INSERT INTO sources (id, source_type, file_ref) VALUES ('source-fixture', 'self_made', 'paper-assets/paper-source/latest');
+    INSERT INTO paper_asset_versions (id, paper_id, asset_version, version_name, version_dir, status)
+      VALUES ('version-fixture', 'paper-published', 1, 'v1', 'paper-published/versions/v1', 'published');
+  `)
+  const diskIds = ['paper-source', 'paper-published']
+  const audit = (ids = diskIds) => auditReferences(fixture, ids, (id) => ids.includes(id))
+  assert('fixture: both source-only and published-only references pass', audit().length === 0)
+  assert('fixture: disk orphan rejected', audit([...diskIds, 'paper-orphan']).join() === 'disk→DB paper-orphan')
+  assert('fixture: missing published asset rejected', audit(['paper-source']).join() === 'DB→disk paper-published')
+  assert('fixture: missing source-only asset rejected', audit(['paper-published']).join() === 'DB→disk paper-source')
+  assert('fixture: known but unrenderable asset rejected',
+    auditReferences(fixture, diskIds, (id) => id !== 'paper-source').join() === 'DB→disk paper-source')
+  fixture.exec("UPDATE paper_asset_versions SET status = 'failed'")
+  assert('fixture: failed publication cannot hide a disk orphan', audit().join() === 'disk→DB paper-published')
+} finally {
+  fixture.close()
+}
+
+if (args.db) {
+  const db = new DatabaseSync(path.resolve(args.db), { readOnly: true })
+  try {
+    const errors = auditReferences(db, diskPaperIds, renderableAssetPath)
+    assert('explicit corpus DB ↔ disk inventory', errors.length === 0, errors.join('\n  '))
+  } finally {
+    db.close()
   }
-  console.log(`\ndisk invariants: ${passed} passed`)
-  console.log('SKIP: data/question-bank.sqlite absent — DB cross-check not run')
-  process.exit(2)
-}
-
-const { DatabaseSync } = await import('node:sqlite')
-const db = new DatabaseSync(dbPath, { readOnly: true })
-
-const publishedIds = db
-  .prepare(`SELECT DISTINCT paper_id FROM paper_asset_versions WHERE status = 'published'`)
-  .all()
-  .map((r) => r.paper_id)
-
-const fileRefIds = db
-  .prepare(`SELECT DISTINCT file_ref FROM sources WHERE file_ref LIKE 'paper-assets/%'`)
-  .all()
-  .map((r) => r.file_ref.split('/')[1])
-
-db.close()
-
-const dbPaperIds = new Set([...publishedIds, ...fileRefIds])
-
-for (const paperId of dbPaperIds) {
-  assert(
-    `DB→disk ${paperId}: assets renderable on disk`,
-    renderableAssetPath(paperId) !== null,
-    'DB references this paper but the web would 404 on it',
-  )
-}
-
-for (const paperId of diskPaperIds) {
-  assert(
-    `disk→DB ${paperId}: known to the DB`,
-    dbPaperIds.has(paperId),
-    'disk orphan — dir exists but no DB row references it',
-  )
+} else {
+  console.log('SCOPE: tracked disk + isolated DB regressions; no deployment/local corpus DB audit requested (use --db).')
 }
 
 console.log()

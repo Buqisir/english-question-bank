@@ -24,6 +24,7 @@ import { mkdtempSync, mkdirSync, writeFileSync, rmSync, existsSync, readFileSync
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { parseArgs } from 'node:util'
 import { createTeachingFacetIndex, analysisConfigs } from '../server/search/teachingFacets.mjs'
 import {
   createSimilarQuestionsStore,
@@ -34,6 +35,7 @@ import { createDailyLimitCounter } from '../server/ai-providers/dailyLimitCounte
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
+const { values: args } = parseArgs({ options: { db: { type: 'string' } } })
 
 let passed = 0
 let failed = 0
@@ -575,6 +577,20 @@ buildGroup({
   entries: { 'q-sq-writing-seed-1': {} },
 })
 
+// Separate topic: all supported provenance values participate without changing
+// existing pool-size assertions. Only real_exam earns the authenticity term.
+for (const sourceType of ['seed', 'real_exam', 'mock_exam', 'self_made', 'other']) {
+  buildGroup({
+    paperId: `source-domain-${sourceType}`,
+    groupId: `group-source-domain-${sourceType}`,
+    dbGroupType: 'cloze',
+    sourceType: sourceType === 'seed' ? 'real_exam' : sourceType,
+    year: 2024,
+    topics: ['topic-source-domain'],
+    entries: { [`q-source-domain-${sourceType}`]: {} },
+  })
+}
+
 flushAssets()
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -663,36 +679,52 @@ for (const dbGroupType of ['grammar_cloze', 'cloze', 'seven_choices']) {
   )
 }
 
-// source_type enum domain — self-contained: assert our own fixture only used
-// the two real-world values, and the recipe's judgement is strictly binary
-// (`=== 'real_exam'`), never a broader "class" (PA SF-2).
+// schema.sql owns the source domain, not a historical sample of two values.
+// Probe the actual CHECK constraint; do not duplicate its allowed-value list.
+const schemaDb = new DatabaseSync(':memory:')
+schemaDb.exec(read('data/sql/schema.sql'))
+function supportsSourceType(sourceType) {
+  try {
+    schemaDb.prepare('INSERT OR REPLACE INTO sources (id, source_type) VALUES (?, ?)').run('probe', sourceType)
+    return true
+  } catch (error) {
+    if (/CHECK constraint failed/.test(error.message)) return false
+    throw error
+  }
+}
 {
   const distinctSourceTypes = db.prepare('SELECT DISTINCT source_type FROM sources').all().map((r) => r.source_type)
   assert(
-    'source_type 枚举域：fixture 内恰为 {real_exam, mock_exam} 二值',
-    distinctSourceTypes.length === 2 &&
-      distinctSourceTypes.includes('real_exam') &&
-      distinctSourceTypes.includes('mock_exam'),
+    'source_type fixture values satisfy the real schema constraint',
+    distinctSourceTypes.every(supportsSourceType),
     JSON.stringify(distinctSourceTypes),
   )
-}
-// Opportunistic corroboration against the real repo DB when present (not
-// required for this script to pass — CI/off-repo envs won't have it).
-{
-  const realDbPath = path.join(rootDir, 'data/question-bank.sqlite')
-  if (existsSync(realDbPath)) {
-    const realDb = new DatabaseSync(realDbPath, { readOnly: true })
-    const rows = realDb.prepare('SELECT DISTINCT source_type FROM sources').all().map((r) => r.source_type)
-    realDb.close()
-    assert(
-      '(bonus, 真库) source_type 枚举域恰为 {real_exam, mock_exam} — 出新值即红',
-      rows.length === 2 && rows.includes('real_exam') && rows.includes('mock_exam'),
-      JSON.stringify(rows),
-    )
-  } else {
-    console.log('SKIP (bonus): 真库 data/question-bank.sqlite 不在盘上，跳过真库枚举域 corroboration')
+  assert('source_type unknown value rejected by schema authority', !supportsSourceType('unknown-fixture-source'))
+  const result = store.findSimilarPassages(db, { groupId: 'group-source-domain-seed', limit: 50 })
+  const real = findResult(result, 'group-source-domain-real_exam')
+  assert('source_type: real_exam receives authenticity boost', Boolean(real) && reasonKinds(real).includes('authentic-source'))
+  for (const sourceType of ['mock_exam', 'self_made', 'other']) {
+    const candidate = findResult(result, `group-source-domain-${sourceType}`)
+    assert(`source_type: ${sourceType} participates without real-exam boost`,
+      Boolean(candidate && real) && !reasonKinds(candidate).includes('authentic-source') && candidate.score < real.score)
   }
 }
+if (args.db) {
+  const realDb = new DatabaseSync(path.resolve(args.db), { readOnly: true })
+  try {
+    const rows = realDb.prepare('SELECT DISTINCT source_type FROM sources').all().map((r) => r.source_type)
+    assert(
+      'explicit DB: all source types satisfy schema.sql',
+      rows.every(supportsSourceType),
+      JSON.stringify(rows),
+    )
+  } finally {
+    realDb.close()
+  }
+} else {
+  console.log('SCOPE: isolated source-domain regressions; use --db for a read-only corpus audit.')
+}
+schemaDb.close()
 
 // writing seed on /api/similar-passages → 400
 {
