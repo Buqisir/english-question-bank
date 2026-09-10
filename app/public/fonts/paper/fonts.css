@@ -1,0 +1,43 @@
+/* Owner-selected paper fonts. Deliberately no local() or OS font aliases. */
+@font-face {
+  font-family: 'EQB Termes';
+  src: url('./termes/texgyretermes-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: 'EQB Termes';
+  src: url('./termes/texgyretermes-bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: 'EQB Termes';
+  src: url('./termes/texgyretermes-italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: block;
+}
+@font-face {
+  font-family: 'EQB Termes';
+  src: url('./termes/texgyretermes-bolditalic.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: block;
+}
+@font-face {
+  font-family: 'EQB Source Han Serif';
+  src: url('./source-han-serif/SourceHanSerifCN-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: 'EQB Source Han Serif';
+  src: url('./source-han-serif/SourceHanSerifCN-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}

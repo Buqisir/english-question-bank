@@ -6,6 +6,7 @@ import {
   mkdirSync,
   mkdtempSync,
   readFileSync,
+  readdirSync,
   renameSync,
   rmSync,
   writeFileSync,
@@ -35,6 +36,17 @@ import {
 import { publishUniversalNck1Import } from '../../server/paper-import/publisher.mjs'
 import { sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { assertNotNck1SourceOnly } from './nck1-source-only.mjs'
+import { buildPrintHtml } from '../../server/print-renderer.mjs'
+import {
+  renderReviewDiagnosticEdition,
+  renderReviewFixedEdition,
+} from '../../server/import-review/reviewPagination.mjs'
+import { closeChromiumPool } from '../../server/draft-paper/chromiumPool.mjs'
+import { fixedPageLayoutPolicy } from '../../server/draft-paper/fixedPagePdfPlanner.mjs'
+import {
+  PAPER_PAGINATION_PLAN_FILE_NAME,
+  validatePaperPaginationPlan,
+} from '../../server/paper-import/paginationPlan.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const papersRoot = path.join(import.meta.dirname, 'papers')
@@ -45,7 +57,7 @@ function fail(message) {
 
 function option(name) {
   const index = process.argv.indexOf(name)
-  return index < 0 ? null : process.argv[index + 1] || null
+  return index < 0 ? null : process.argv[index + 1] ?? null
 }
 
 function paperDirectory(paperId) {
@@ -196,6 +208,201 @@ async function pushRevision(paperId) {
     state: finalized.revision.state,
     bundleDigest: finalized.revision.bundleDigest,
   }, null, 2))
+}
+
+async function paginationQa(paperId) {
+  const paperDir = paperDirectory(paperId)
+  const edition = option('--edition')
+  if (!['friendly8', 'friendly10'].includes(edition)) {
+    fail('pagination-qa requires --edition friendly8|friendly10')
+  }
+  const breakOption = option('--break-slots')
+  const coverOption = option('--cover-gaps')
+  const explicitEdit = breakOption !== null || coverOption !== null
+  if (process.argv.includes('--auto') && explicitEdit) {
+    fail('--auto cannot be combined with --break-slots or --cover-gaps')
+  }
+  const outputDir = path.resolve(option('--output') || path.join(paperDir, 'pagination-qa', edition))
+  mkdirSync(outputDir, { recursive: true })
+  const rasterize = (pdfPath, prefix) => {
+    for (const name of readdirSync(outputDir)) {
+      if (name.startsWith(`${prefix}-`) && name.endsWith('.png')) {
+        rmSync(path.join(outputDir, name))
+      }
+    }
+    execFileSync('pdftoppm', ['-png', '-r', '120', pdfPath, path.join(outputDir, prefix)])
+    return readdirSync(outputDir)
+      .filter((name) => name.startsWith(`${prefix}-`) && name.endsWith('.png'))
+      .sort((left, right) => left.localeCompare(right, undefined, { numeric: true }))
+  }
+  let projection
+  let policy
+  let slotByGroup = new Map()
+  try {
+    projection = buildNck1ReviewProjection(paperDir, { requireAnalyses: true })
+    const sourceHasListening = projection.paginationSlotBindings.some((entry) =>
+      entry.familyContractId === 'listening')
+    const listeningCount = projection.paginationSlotBindings.filter((entry) =>
+      entry.familyContractId === 'listening').length
+    policy = fixedPageLayoutPolicy(edition, listeningCount, sourceHasListening)
+    let candidatePlan = projection.paginationPlan
+    if (explicitEdit) {
+      const currentEdition = projection.paginationPlan?.editions?.[edition]
+      const breakSlotIds = breakOption === null
+        ? currentEdition?.breakSlotIds || []
+        : String(breakOption).split(',').map((value) => value.trim()).filter(Boolean)
+      const coverGapsPt = coverOption === null
+        ? currentEdition?.coverGapsPt ?? (policy.omitCover ? null : edition === 'friendly8' ? [0, 18] : [72, 72])
+        : coverOption === 'none' || policy.omitCover
+          ? null
+          : String(coverOption).split(',').map(Number)
+      candidatePlan = {
+        schemaVersion: 'paper-pagination-plan-v1',
+        paperId: projection.paperId,
+        sourceDigest: projection.sourceDigest,
+        candidateDigest: projection.candidateDigest,
+        editions: {
+          ...(projection.paginationPlan?.editions || {}),
+          [edition]: {
+            ...policy,
+            coverGapsPt,
+            breakSlotIds,
+            allowSplitOptionBank: currentEdition?.allowSplitOptionBank ?? false,
+          },
+        },
+      }
+    }
+    const useAuto = process.argv.includes('--auto') || !candidatePlan?.editions?.[edition]
+    if (!useAuto) {
+      candidatePlan = validatePaperPaginationPlan(candidatePlan, {
+        paperId: projection.paperId,
+        sourceDigest: projection.sourceDigest,
+        candidateDigest: projection.candidateDigest,
+        slotBindings: projection.paginationSlotBindings,
+        sourceHasListening,
+      })
+    }
+    const renderedProjection = useAuto ? { ...projection, paginationPlan: null } : {
+      ...projection,
+      paginationPlan: candidatePlan,
+    }
+    const rendered = await renderReviewFixedEdition(renderedProjection, edition, buildPrintHtml)
+    slotByGroup = new Map(projection.paginationSlotBindings.map(({ groupId, slotId }) => [groupId, slotId]))
+    const selectedEdition = useAuto ? {
+      ...policy,
+      coverGapsPt: rendered.coverGapsPt,
+      breakSlotIds: rendered.plannedBreakGroupIds.map((groupId) => slotByGroup.get(groupId)),
+      allowSplitOptionBank: rendered.allowSplitOptionBank ?? false,
+    } : {
+      ...candidatePlan.editions[edition],
+      allowSplitOptionBank: candidatePlan.editions[edition].allowSplitOptionBank ?? false,
+    }
+    const plan = validatePaperPaginationPlan({
+      schemaVersion: 'paper-pagination-plan-v1',
+      paperId: projection.paperId,
+      sourceDigest: projection.sourceDigest,
+      candidateDigest: projection.candidateDigest,
+      editions: { ...(candidatePlan?.editions || {}), [edition]: selectedEdition },
+    }, {
+      paperId: projection.paperId,
+      sourceDigest: projection.sourceDigest,
+      candidateDigest: projection.candidateDigest,
+      slotBindings: projection.paginationSlotBindings,
+      sourceHasListening,
+    })
+    const pdfPath = path.join(outputDir, `${paperId}-${edition}.pdf`)
+    writeFileSync(pdfPath, rendered.pdfBytes)
+    const screenshots = rasterize(pdfPath, 'page')
+    const report = {
+      schemaVersion: 'paper-pagination-qa-report-v1',
+      status: 'success',
+      paperId,
+      sourceDigest: projection.sourceDigest,
+      candidateDigest: projection.candidateDigest,
+      edition,
+      mode: rendered.mode,
+      pageCount: rendered.pageCount,
+      searchedCandidates: rendered.searchedCandidates,
+      selectedPlan: selectedEdition,
+      groups: rendered.inspection.map(({ id, type, pages, optionBankPages }) => ({
+        groupId: id,
+        slotId: slotByGroup.get(id),
+        type,
+        pages,
+        optionBankPages,
+      })),
+      warnings: {
+        crossFaceGroupIds: rendered.crossingGroupIds,
+        splitGroupIds: rendered.splitGroupIds,
+        splitOptionBankCount: rendered.splitOptionBankCount,
+      },
+      artifacts: { pdf: path.basename(pdfPath), screenshots },
+      pdf: path.basename(pdfPath),
+      screenshots,
+    }
+    writeFileSync(path.join(outputDir, 'report.json'), `${JSON.stringify(report, null, 2)}\n`)
+    if (process.argv.includes('--save-plan')) {
+      const target = path.join(paperDir, PAPER_PAGINATION_PLAN_FILE_NAME)
+      const temporary = `${target}.tmp`
+      writeFileSync(temporary, `${stableStringify(plan)}\n`)
+      renameSync(temporary, target)
+    }
+    console.log(JSON.stringify({ ...report, outputDir }, null, 2))
+  } catch (error) {
+    let diagnostic = null
+    let diagnosticError = null
+    let pdf = null
+    let screenshots = []
+    if (projection && policy) {
+      try {
+        diagnostic = await renderReviewDiagnosticEdition(projection, edition, buildPrintHtml)
+        const pdfPath = path.join(outputDir, `${paperId}-${edition}-diagnostic-natural.pdf`)
+        writeFileSync(pdfPath, diagnostic.pdfBytes)
+        pdf = path.basename(pdfPath)
+        screenshots = rasterize(pdfPath, 'diagnostic-page')
+      } catch (failure) {
+        diagnosticError = { code: failure.code || null, message: failure.message }
+      }
+    }
+    const groups = (diagnostic?.inspection || []).map(({ id, type, pages, optionBankPages }) => ({
+      groupId: id,
+      slotId: slotByGroup.get(id)
+        || projection?.paginationSlotBindings.find((entry) => entry.groupId === id)?.slotId
+        || null,
+      type,
+      pages,
+      optionBankPages,
+    }))
+    const failureReport = {
+      schemaVersion: 'paper-pagination-qa-failure-report-v1',
+      status: 'failure',
+      paperId,
+      sourceDigest: projection?.sourceDigest || null,
+      candidateDigest: projection?.candidateDigest || null,
+      edition,
+      targetPages: policy?.targetPages || (edition === 'friendly8' ? 8 : 10),
+      actualPages: error.actualPages ?? diagnostic?.pageCount ?? null,
+      searchedCandidates: error.searchedCandidates ?? null,
+      error: { code: error.code || null, message: error.message },
+      diagnosticError,
+      diagnosticPolicy: policy ? {
+        ...policy,
+        coverGapsPt: policy.omitCover ? null : edition === 'friendly8' ? [0, 18] : [72, 72],
+        allowSplitOptionBank: false,
+      } : null,
+      slotMapping: projection?.paginationSlotBindings || [],
+      groups,
+      artifacts: { pdf, screenshots },
+      planSaved: false,
+    }
+    const reportPath = path.join(outputDir, 'failure-report.json')
+    writeFileSync(reportPath, `${JSON.stringify(failureReport, null, 2)}\n`)
+    throw Object.assign(new Error(`${error.message} Diagnostic report: ${reportPath}`), {
+      code: error.code,
+    })
+  } finally {
+    await closeChromiumPool()
+  }
 }
 
 async function hydrate(paperId) {
@@ -688,6 +895,7 @@ async function main() {
   const [command, paperId, issueId] = process.argv.slice(2)
   if (command !== 'promote') assertNotNck1SourceOnly(paperId, command)
   if (command === 'push') await pushRevision(paperId)
+  else if (command === 'pagination-qa') await paginationQa(paperId)
   else if (command === 'hydrate') await hydrate(paperId)
   else if (command === 'push-ocr') await pushOcrReview(paperId)
   else if (command === 'pull-ocr-confirmation') await pullOcrConfirmation(paperId)
@@ -700,7 +908,8 @@ async function main() {
   else if (command === 'promote') await promote(paperId)
   else if (command === 'release-ship-guard') await releaseShipGuard(paperId, issueId)
   else fail(
-    'Usage: review.mjs push <paperId> [--resolves issue-1,issue-2] | hydrate <paperId> | '
+    'Usage: review.mjs push <paperId> [--resolves issue-1,issue-2] | '
+      + 'pagination-qa <paperId> --edition friendly8|friendly10 [--auto | --break-slots a,b --cover-gaps 54,54] [--save-plan] [--output dir] | hydrate <paperId> | '
       + 'push-ocr <paperId> | pull-ocr-confirmation <paperId> [--revision rev-id] | '
       + 'preflight <paperId> | verify-analyses <paperId> | status <paperId> | '
       + 'reply <paperId> <issueId> --message <text> | '

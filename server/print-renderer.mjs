@@ -38,6 +38,8 @@
  */
 
 import path from 'node:path'
+import { readFileSync } from 'node:fs'
+import { embeddedPaperFontCss } from './paper-fonts.mjs'
 import { paperSurfaceTokens } from '../shared/papersurface/tokens.mjs'
 import { readingFigureOptionStyles, measuredReadingFigureStyles } from '../shared/papersurface/readingFigureOptions.mjs'
 import { paperBlankPattern } from '../shared/papersurface/blankPattern.mjs'
@@ -67,6 +69,7 @@ import {
 } from '../shared/paper-canonical/grammarFillRhythm.mjs'
 import {
   paperTypographyRuntime,
+  sectionHeadingContract,
   sectionHeadingRuntime,
   sectionHeadingTextRuns,
 } from '../shared/paper-canonical/sectionHeadingContract.mjs'
@@ -90,7 +93,27 @@ import {
 import {
   canonicalSourceConsumptionForGroup,
 } from './paper-canonical/consumerRuntime.mjs'
+import { continuationWritingPresentation } from '../shared/paper-canonical/writingPresentation.mjs'
+import { blankPresentationParagraphs } from '../shared/paper-canonical/blankPresentation.mjs'
+import {
+  listeningOpening,
+  ownsCompletePaperOpening,
+  projectListeningGroupPresentation,
+} from '../shared/paper-canonical/listeningPresentation.mjs'
 import { resolveGroupFigures } from './figures/paperFigures.mjs'
+
+const readingLayoutCss = readFileSync(
+  new URL('../shared/papersurface/readingLayout.css', import.meta.url),
+  'utf8',
+)
+const paperLayoutCss = readFileSync(
+  new URL('../shared/papersurface/paperLayout.css', import.meta.url),
+  'utf8',
+)
+const fontRenderingCss = readFileSync(
+  new URL('../shared/papersurface/fontRendering.css', import.meta.url),
+  'utf8',
+)
 
 function renderSectionHeadingText(text) {
   return sectionHeadingTextRuns(text)
@@ -109,9 +132,10 @@ function partToFirstSectionMarginTopPt({ printPdf = false } = {}) {
   const glyphOverhangPt = printPdf
     ? 0
     : (geometry.visibleGlyphHeightToFontSizeRatio.screen - 1) * fontSizePt
+  // Keep the accepted inter-heading spacing independent of live font offsets.
   const numericBaselineCompensationPt = printPdf
     ? (
-      sectionHeadingRuntime.printPdf.numericRunBaselineShiftEm
+      sectionHeadingContract.typography.numericRunBaselineShiftEm
       - geometry.printPdfNumericRunBaselineCalibrationEm
     ) * fontSizePt
     : 0
@@ -720,6 +744,7 @@ function renderCanonicalOpaqueWriting(
   writingChrome,
   family,
   previousFamilyBoundary = null,
+  consumerContractRef = null,
 ) {
   const application = family === 'application'
   const chrome = renderCanonicalWritingChrome(
@@ -728,11 +753,8 @@ function renderCanonicalOpaqueWriting(
     family,
     previousFamilyBoundary,
   )
-  const sourceBlocks = canonicalGroup.sourceStarterLinesInResponse
-    ? canonicalGroup.sourceBlocks.filter(
-        (block) => !canonicalGroup.sourceStarterBlockRefs.includes(block.nodeId),
-      )
-    : canonicalGroup.sourceBlocks
+  const presentation = application ? null : continuationWritingPresentation(canonicalGroup, consumerContractRef)
+  const sourceBlocks = presentation?.materialBlocks || canonicalGroup.sourceBlocks
   const source = [
     ...sourceBlocks.map((block) =>
       `<p data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-legacy-opaque-source-block="">${renderCanonicalInlineNodes(block.inlines)}</p>`),
@@ -758,17 +780,8 @@ function renderCanonicalOpaqueWriting(
   const responseClass = application
     ? 'canonical-application-response'
     : 'canonical-continuation-response'
-  const starters = application || !canonicalGroup.sourceStarterLinesInResponse
-    ? ''
-    : canonicalGroup.sourceStarterBlockRefs.map((contentRef, index) => {
-        const block = canonicalGroup.sourceBlocks.find(
-          (candidate) => candidate.nodeId === contentRef,
-        )
-        if (!block) {
-          throw new Error(
-            `Canonical Continuation Writing starter ${contentRef} is absent from source blocks`,
-          )
-        }
+  const starters = (presentation?.starterLines || []).map((block, index) => {
+        const contentRef = block.contentRef
         return `<div class="writing-continuation-row"><p class="writing-starter-line" data-canonical-starter-id="${escapeHtml(contentRef)}" data-canonical-block-id="${escapeHtml(contentRef)}" data-canonical-continuation-writing-rhythm-role="starter_${index + 1}">${renderContinuationStarterInlineNodes(block.inlines, index)}</p><span class="writing-continuation-writable-area" data-canonical-continuation-writing-rhythm-role="writable_after_starter_${index + 1}"></span></div>`
       }).join('')
   return `<div class="${familyClass} canonical-legacy-opaque-writing" data-canonical-writing-mode="legacy_opaque" data-canonical-writing-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-writing-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}" data-canonical-word-count-target="${canonicalGroup.wordCountTarget}" data-canonical-word-count-certainty="${escapeHtml(canonicalGroup.wordCountTargetCertainty)}" data-canonical-word-count-scope="${escapeHtml(canonicalGroup.wordCountScope)}">${application ? chrome : `<div class="canonical-continuation-chrome">${chrome}</div>`}<div class="passage canonical-legacy-opaque-source">${source}</div><div class="writing-answer-box ${responseClass} canonical-legacy-opaque-response" data-canonical-legacy-opaque-response="" data-canonical-response-ownership="${escapeHtml(response.ownership)}" data-canonical-answer-region-ref="${escapeHtml(response.answerRegionRef)}" data-canonical-response-slot-id="${escapeHtml(response.responseSlotId)}" style="width:${geometry.widthMm}mm;height:${geometry.heightMm}mm;">${starters}</div></div>`
@@ -808,9 +821,9 @@ function renderCanonicalApplicationWriting(
   return `<div class="canonical-application-writing" data-canonical-application-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-application-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}">${chrome}<div class="passage canonical-application-prompt">${prompt}</div><div class="writing-answer-box canonical-application-response" data-canonical-application-writing-rhythm-role="response_box" data-canonical-answer-region-ref="${escapeHtml(response.answerRegionRef)}" data-canonical-response-slot-id="${escapeHtml(response.responseSlotId)}" style="width:${applicationWritingRhythm.responseGeometry.widthMm}mm;height:${applicationWritingRhythm.responseGeometry.heightMm}mm;"><div class="canonical-application-given-top">${renderGivenParts(response.givenTop, 'top')}</div><div class="canonical-application-given-bottom">${renderGivenParts(response.givenBottom, 'bottom')}</div></div></div>`
 }
 
-function renderCanonicalContinuationWriting(canonicalGroup, writingChrome) {
+function renderCanonicalContinuationWriting(canonicalGroup, writingChrome, consumerContractRef) {
   if (canonicalGroup.writingMode === 'legacy_opaque') {
-    return renderCanonicalOpaqueWriting(canonicalGroup, writingChrome, 'continuation')
+    return renderCanonicalOpaqueWriting(canonicalGroup, writingChrome, 'continuation', null, consumerContractRef)
   }
   const chrome = renderCanonicalWritingChrome(
     writingChrome,
@@ -1109,6 +1122,14 @@ export function buildPrintHtml({
       .filter((block) => block.type === 'question_group')
       .map((block) => block.questionGroupId)
     : items.map((item) => item.detail.id)
+  const canonicalListeningOwnsOpening = ownsCompletePaperOpening(
+    canonicalConsumption,
+    renderedGroupIds,
+  )
+  const listeningChromeEndBlockIndex = Array.isArray(blocks)
+    ? blocks.findLastIndex((block) => block.type === 'question_group'
+      && itemByGroupId.get(block.questionGroupId)?.detail.groupType === 'listening')
+    : -1
   const canonicalReadingSelection = canonicalConsumption?.selections?.find(
     (selection) =>
       selection.familyContractId === 'reading'
@@ -1555,6 +1576,11 @@ export function buildPrintHtml({
     let questionNum = startNum
     let groupNum = 0
     for (const [blockIndex, block] of blocks.entries()) {
+      if (
+        canonicalListeningOwnsOpening
+        && blockIndex <= listeningChromeEndBlockIndex
+        && ['section_header', 'instruction'].includes(block.type)
+      ) continue
       if (block.type === 'section_header' && block.title) {
         if (canonicalWritingChromeBlockIndexes.has(blockIndex)) continue
         // Profile v10 owns every visible heading string. Renderers only add
@@ -1776,6 +1802,9 @@ export function buildPrintHtml({
         let groupHtml = canonicalGroup
           ? `<section class="question-group" data-canonical-group-id="${escapeHtml(canonicalGroup.groupId)}" data-canonical-group-type="${escapeHtml(canonicalGroup.groupType)}" data-canonical-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}"${canonicalGroup.occurrenceSignature ? ` data-canonical-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}"` : ''}${collapsedSevenChoicesBoundaryAttr}${collapsedClozeBoundaryAttr}${collapsedGrammarFillBoundaryAttr}>`
           : '<section class="question-group">'
+        const listeningPresentation = canonicalGroup?.groupType === 'listening'
+          ? projectListeningGroupPresentation(canonicalGroup)
+          : null
 
         let groupLeadHtml = ''
         if (
@@ -1813,6 +1842,7 @@ export function buildPrintHtml({
           if (canonicalGroup.groupType === 'listening') {
             // The same Canonical Question projection as PaperSurface; no
             // passage/transcript block belongs in the student question area.
+            groupHtml += `<header class="canonical-listening-chrome" data-canonical-listening-chrome>${listeningPresentation.partHeading ? `<h2 class="canonical-listening-part">${escapeHtml(listeningPresentation.partHeading)}</h2>` : ''}${listeningPresentation.transferNotice ? `<p class="canonical-listening-transfer-notice">${escapeHtml(listeningPresentation.transferNotice)}</p>` : ''}<h3 class="canonical-listening-section">${escapeHtml(listeningPresentation.sectionHeading)}</h3><p class="canonical-listening-instruction">${escapeHtml(listeningPresentation.instruction)}</p>${listeningPresentation.example ? `<div class="canonical-listening-example" data-canonical-listening-example><p>例：${escapeHtml(listeningPresentation.example.stem)}</p><div class="canonical-listening-example-options">${listeningPresentation.example.options.map((option) => `<span>${option.label}. ${escapeHtml(option.text)}</span>`).join('')}</div><p class="canonical-listening-example-answer">答案是 C。</p></div>` : ''}</header>`
           } else if (canonicalGroup.groupType === 'reading') {
             groupHtml += renderCanonicalReadingBlocks(canonicalGroup)
           } else if (canonicalGroup.groupType === 'writing') {
@@ -1834,6 +1864,7 @@ export function buildPrintHtml({
             groupHtml += renderCanonicalContinuationWriting(
               canonicalGroup,
               canonicalWritingChrome,
+              canonicalSourceConsumptionForGroup(canonicalConsumption, canonicalGroup.groupId).consumerContractRef,
             )
           } else {
             groupHtml += groupLeadHtml
@@ -1843,7 +1874,11 @@ export function buildPrintHtml({
                 question.questionNo,
               ]),
             )
-            groupHtml += `<div class="passage">${canonicalGroup.paragraphs
+            const displayParagraphs = blankPresentationParagraphs(
+              canonicalGroup,
+              canonicalSourceConsumptionForGroup(canonicalConsumption, canonicalGroup.groupId).consumerContractRef,
+            )
+            groupHtml += `<div class="passage">${displayParagraphs
               .map(
                 (paragraph) =>
                   `<p data-canonical-paragraph-id="${escapeHtml(paragraph.paragraphId)}"${canonicalGroup.groupType === 'sevenChoices' ? ` data-canonical-seven-choices-rhythm-role="${canonicalSevenChoicesPassageRole(paragraph)}"` : canonicalGroup.groupType === 'cloze' ? ' data-canonical-cloze-rhythm-role="passage_body_line"' : canonicalGroup.groupType === 'grammarFill' ? ' data-canonical-grammar-fill-rhythm-role="passage_body_line"' : ''}>${renderCanonicalParagraph(
@@ -1947,6 +1982,9 @@ export function buildPrintHtml({
           : undefined
         for (const question of detail.questions) {
           const canonicalQuestion = canonicalQuestionById?.get(question.id)
+          const listeningCue = listeningPresentation?.segmentCues.find((cue) =>
+            cue.beforeQuestionId === canonicalQuestion?.questionId)
+          if (listeningCue) groupHtml += `<p class="canonical-listening-segment-cue" data-canonical-listening-segment-cue>${escapeHtml(listeningCue.text)}</p>`
           const printQuestion = canonicalQuestion
             ? {
                 ...question,
@@ -2209,7 +2247,13 @@ export function buildPrintHtml({
 <head>
 <meta charset="UTF-8">
 <title>${escapeHtml(title || '英语试题')}</title>
+<!-- Font data is browser CSS, not paged-media CSS. Keep it out of Paged.js's
+     CSS-tree parser (24-bit offsets cannot address a full OTF bundle). -->
+<style data-pagedjs-ignore>
+${embeddedPaperFontCss()}
+</style>
 <style>
+${fontRenderingCss}
 /* 刀⑤ render-fidelity Chunk B — standard §1: 左右 24mm / 上 ≈21mm.
    Bottom margin is 24mm (not standard-mandated directly). Chromium's margin
    box places the 9pt footer literal ≈17.5mm from the physical bottom when the
@@ -2232,6 +2276,37 @@ export function buildPrintHtml({
 }
 
 body {
+  /* A4 content height minus the largest supported before/after figure gaps.
+     The shared flex layout reserves the actual caption height before fitting
+     the image; object-fit preserves the source image's aspect ratio. */
+  --paper-figure-max-height: calc(${PRINT_PAGE_CONTENT_HEIGHT_PT}pt - 12pt);
+  --paper-passage-indent: ${sectionHeadingRuntime.printPdf.passageFirstLineIndentEm}em;
+  --paper-seven-baseline: ${sevenChoicesRhythm.targets.printPdf.baselineStepPt}pt;
+  --paper-cloze-baseline: ${clozeRhythm.targets.printPdf.baselineStepPt}pt;
+  --paper-grammar-fill-baseline: ${grammarFillRhythm.rendererMapping.printPdf.baselineStepPt}pt;
+  --paper-bank-label-gap: ${sevenChoicesRhythm.horizontalBankGeometry.rendererMapping.printPdf.labelTextGapEm}em;
+  --paper-cloze-label-gap: ${clozeRhythm.horizontalChoiceGeometry.rendererMapping.labelToTextGapEm}em;
+  --paper-part-indent: ${sectionHeadingRuntime.printPdf.partHeadingIndentEm}em;
+  --paper-part-font: ${paperSurfaceTokens.paperFontStackHeading};
+  --paper-section-indent: ${sectionHeadingRuntime.printPdf.sectionHeadingIndentEm}em;
+  --paper-section-font: ${sectionHeadingRuntime.printPdf.fontStack};
+  --paper-heading-size: ${sectionHeadingRuntime.printPdf.fontSizePt}pt;
+  --paper-heading-line-height: ${sectionHeadingRuntime.printPdf.lineHeightPt}pt;
+  --paper-section-weight: ${paperTypographyRuntime.visibleWeight.sectionHeading};
+  --paper-instruction-indent: ${sectionHeadingRuntime.printPdf.groupInstructionFirstLineIndentEm}em;
+  --paper-instruction-weight: ${paperTypographyRuntime.visibleWeight.instruction};
+  --paper-application-response-width: ${applicationWritingRhythm.responseGeometry.widthMm}mm;
+  --paper-application-response-height: ${applicationWritingRhythm.responseGeometry.heightMm}mm;
+  --paper-application-response-padding: ${applicationWritingRhythm.responseGeometry.paddingMm}mm;
+  --paper-application-response-margin-top: ${applicationWritingRhythm.rendererMapping.printPdf.responseMarginTopPt}pt;
+  --paper-continuation-second-row: ${continuationWritingRhythm.starterGeometry.secondRowStartRatio * 100}%;
+  --paper-continuation-response-width: ${continuationWritingRhythm.responseGeometry.widthMm}mm;
+  --paper-continuation-response-height: ${continuationWritingRhythm.responseGeometry.heightMm}mm;
+  --paper-continuation-response-margin-top: ${continuationWritingRhythm.rendererMapping.printPdf.responseMarginTopPt}pt;
+  --paper-continuation-response-padding: ${continuationWritingRhythm.rendererMapping.printPdf.responsePaddingPt}pt;
+  --paper-continuation-row-inset: ${continuationWritingRhythm.starterGeometry.rowTopInsetEm}em;
+  --paper-continuation-starter-indent: ${continuationWritingRhythm.starterGeometry.firstLineIndentEm}em;
+  --paper-continuation-trailing-inset: ${continuationWritingRhythm.starterGeometry.trailingInsetEm}em;
   font-family: ${paperSurfaceTokens.paperFontStack};
   font-size: 10.5pt;
   /* standard §3: the shared Owner-gold runtime fixes the Print/PDF
@@ -2270,22 +2345,16 @@ body {
    10.5pt, 不放大字号 (12pt 旧值退场). */
 .section-header {
   font-size: ${sectionHeadingRuntime.printPdf.fontSizePt}pt;
-  margin: 1.2em 0 0.6em;
+  margin-block: 1.2em 0.6em;
+  margin-right: 0;
 }
 
 .section-header--part {
-  font-family: ${paperSurfaceTokens.paperFontStackHeading};
-  font-weight: bold;
-  text-indent: ${sectionHeadingRuntime.printPdf.partHeadingIndentEm}em;
   padding-left: 0;
 }
 
 .section-header--section {
-  font-family: ${sectionHeadingRuntime.printPdf.fontStack};
-  font-weight: ${paperTypographyRuntime.visibleWeight.sectionHeading};
-  text-indent: ${sectionHeadingRuntime.printPdf.sectionHeadingIndentEm}em;
   padding-left: 0;
-  white-space: nowrap;
 }
 
 [data-canonical-section-heading-numeric-run] {
@@ -2321,18 +2390,6 @@ body {
 }
 
 .question-group[data-canonical-group-type="reading"] {
-  margin-bottom: 0;
-}
-
-.question-group[data-canonical-group-type="sevenChoices"] {
-  margin-bottom: 0;
-}
-
-.question-group[data-canonical-group-type="cloze"] {
-  margin-bottom: 0;
-}
-
-.question-group[data-canonical-group-type="grammarFill"] {
   margin-bottom: 0;
 }
 
@@ -2430,43 +2487,12 @@ body {
   margin: 0;
 }
 
-.question-group[data-canonical-group-type="sevenChoices"] .passage p {
-  margin: 0;
-  line-height: ${sevenChoicesRhythm.targets.printPdf.baselineStepPt}pt;
-}
-
-.question-group[data-canonical-group-type="sevenChoices"] .passage p[
-  data-canonical-seven-choices-rhythm-role="passage_title"
-],
-.question-group[data-canonical-group-type="sevenChoices"] .passage p[
-  data-canonical-seven-choices-rhythm-role="passage_subtitle"
-] {
-  font-weight: bold;
-  text-indent: 0;
-}
-
-.question-group[data-canonical-group-type="sevenChoices"] .passage p[
-  data-canonical-seven-choices-rhythm-role="passage_title"
-] {
-  text-align: center;
-}
-
 .question-group[data-canonical-group-type="cloze"] .passage {
   margin: 0;
 }
 
-.question-group[data-canonical-group-type="cloze"] .passage p {
-  margin: 0;
-  line-height: ${clozeRhythm.targets.printPdf.baselineStepPt}pt;
-}
-
 .question-group[data-canonical-group-type="grammarFill"] .passage {
   margin: 0;
-}
-
-.question-group[data-canonical-group-type="grammarFill"] .passage p {
-  margin: 0;
-  line-height: ${grammarFillRhythm.targets.printPdf.baselineStepPt}pt;
 }
 
 /* figure-render cut — SW-2: figures never exceed the passage's own
@@ -2543,9 +2569,7 @@ body {
 }
 
 .canonical-option-bank {
-  list-style: none;
   margin: 0.4em 0 0.6em 2em;
-  padding: 0;
 }
 
 .canonical-option-bank-item {
@@ -2572,27 +2596,13 @@ body {
   break-after: avoid;
 }
 
-.canonical-option-bank-item[data-canonical-seven-choices-rhythm-role="bank_option_line"] {
-  display: flex;
-  align-items: baseline;
-  gap: ${sevenChoicesRhythm.horizontalBankGeometry.rendererMapping.printPdf.labelTextGapEm}em;
-  margin: 0;
-  line-height: ${sevenChoicesRhythm.targets.printPdf.baselineStepPt}pt;
-  break-inside: avoid;
-}
+${readingLayoutCss}
+${paperLayoutCss}
 
-.canonical-option-bank-label {
-  flex: 0 0 auto;
-}
-
-.canonical-option-bank-text {
-  min-width: 0;
-}
-
+/* Print calibration and page breaks only; layout is shared with PaperSurface. */
 .canonical-reading-body,
 .canonical-reading-subtitle,
 .canonical-reading-title {
-  margin: 0;
   font-size: ${readingPassageLetterTypography.fontSizePt}pt;
   line-height: ${readingPassageLetterTypography.lineHeightPt}pt;
 }
@@ -2611,72 +2621,21 @@ body {
   text-indent: ${sectionHeadingRuntime.printPdf.passageFirstLineIndentEm}em;
 }
 
-.canonical-reading-subtitle,
-.canonical-reading-title {
-  font-weight: bold;
-}
-
-.canonical-reading-title {
-  text-align: center;
-}
-
-.canonical-reading {
-  container-type: inline-size;
-}
-
 .canonical-reading-table {
-  width: 100%;
-  margin: 0;
-  border-collapse: collapse;
-  table-layout: fixed;
   break-inside: avoid;
 }
 
 .canonical-reading-table td {
   padding: 0 4pt;
   border: 0.5pt solid #000;
-  vertical-align: top;
 }
 
 .canonical-reading-table-media {
-  display: inline-block;
-  max-width: 100%;
-  max-height: 4em;
   width: min(100%, calc(var(--canonical-media-width-ratio) * 100cqw));
-  height: auto;
-  object-fit: contain;
-  vertical-align: middle;
-}
-
-.canonical-reading-table-media[data-canonical-media-alignment="center"],
-.canonical-reading-table-media[data-canonical-media-alignment="right"] {
-  display: block;
-}
-
-.canonical-reading-table-media[data-canonical-media-alignment="center"] {
-  margin-inline: auto;
-}
-
-.canonical-reading-table-media[data-canonical-media-alignment="right"] {
-  margin-left: auto;
-}
-
-.canonical-reading-table td[rowspan]:not([rowspan="1"]) .canonical-reading-table-media {
-  max-height: 22em;
 }
 
 .canonical-reading-figure {
-  margin: 0;
-  text-align: center;
   break-inside: avoid;
-}
-
-.canonical-reading-figure[data-canonical-media-alignment="left"] {
-  text-align: left;
-}
-
-.canonical-reading-figure[data-canonical-media-alignment="right"] {
-  text-align: right;
 }
 
 .canonical-reading-figure[data-canonical-media-spacing-before="compact"] {
@@ -2696,9 +2655,7 @@ body {
 }
 
 .canonical-reading-figure img {
-  max-width: 100%;
   width: min(100%, calc(var(--canonical-media-width-ratio) * 100cqw));
-  height: auto;
 }
 
 .canonical-reading-figure figcaption {
@@ -2708,40 +2665,24 @@ body {
 
 /* 阅读细线框：共享约定，不为单卷改。权威 exam-paper-format-standards.md §3c */
 .canonical-reading-framed-columns {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 6pt;
   margin: 6pt 0;
-  width: 100%;
-  box-sizing: border-box;
   break-inside: avoid;
   page-break-inside: avoid;
 }
 
 .canonical-reading-framed-column {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  box-sizing: border-box;
   padding: 4pt 6pt;
   border: 0.5pt solid #000;
 }
 
 .canonical-reading-framed-column .canonical-reading-table {
-  width: max-content;
-  max-width: 92%;
   margin-top: 7pt;
-  margin-bottom: 0;
-  align-self: center;
-  table-layout: auto;
 }
 
 .canonical-reading-framed-column .canonical-reading-table td {
-  border: 0;
   padding: 3pt 0;
   line-height: 16pt;
-  vertical-align: baseline;
-  white-space: nowrap;
 }
 
 .canonical-reading-framed-column .canonical-reading-table td:first-child {
@@ -2756,9 +2697,6 @@ body {
   margin: 0 0 4pt;
   font-size: ${readingPassageLetterTypography.fontSizePt}pt;
   line-height: ${readingPassageLetterTypography.lineHeightPt}pt;
-  font-weight: bold;
-  text-align: center;
-  text-indent: 0;
 }
 
 
@@ -2781,7 +2719,6 @@ body {
 }
 
 .canonical-options {
-  display: inline-grid;
   width: 438.2pt;
   vertical-align: top;
 }
@@ -2870,13 +2807,7 @@ body {
 }
 
 .question-group[data-canonical-group-type="cloze"] .canonical-options > span {
-  display: grid;
-  grid-template-columns: max-content minmax(0, 1fr);
-  column-gap: ${clozeRhythm.horizontalChoiceGeometry.rendererMapping.labelToTextGapEm}em;
-  align-items: baseline;
   margin-right: 0;
-  white-space: normal;
-  break-inside: avoid;
 }
 
 .question-group[data-canonical-group-type="cloze"] [data-canonical-cloze-rhythm-role="choice_label"],
@@ -2916,20 +2847,6 @@ body {
 
 .options-inline--canonical > .canonical-options {
   margin-right: 0;
-}
-
-.canonical-options--four_columns {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  white-space: nowrap;
-}
-
-.canonical-options--two_by_two {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  white-space: nowrap;
-}
-
-.canonical-options--one_column {
-  grid-template-columns: 1fr;
 }
 
 .canonical-options--one_column > span {
@@ -3045,6 +2962,10 @@ ${grammarFillGeometryFixtureCss}
    与刀前字节一致)。 */
 .writing-answer-box {
   --writing-box-rule: 0.5pt;
+  /* Empty writing space has no text nodes for Paged.js to carry to a next
+     fragment. Move the complete fixed-size box rather than clipping it. */
+  break-inside: avoid;
+  page-break-inside: avoid;
   border: 0;
   background:
     linear-gradient(#000, #000) top / 100% var(--writing-box-rule) no-repeat,
@@ -3057,13 +2978,6 @@ ${grammarFillGeometryFixtureCss}
 
 .canonical-application-response {
   --writing-box-rule: ${applicationWritingRhythm.responseGeometry.printBorderPt}pt;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  padding: ${applicationWritingRhythm.responseGeometry.paddingMm}mm;
-  margin-top: ${applicationWritingRhythm.rendererMapping.printPdf.responseMarginTopPt}pt;
-  break-inside: avoid;
-  page-break-inside: avoid;
 }
 
 [data-canonical-writing-chrome-role] {
@@ -3074,8 +2988,6 @@ ${grammarFillGeometryFixtureCss}
 
 [data-canonical-writing-chrome-role="part_heading"] {
   margin: 0;
-  font-family: ${paperSurfaceTokens.paperFontStackWritingPart};
-  font-weight: 700;
 }
 
 [data-canonical-writing-chrome-role="part_heading"]
@@ -3085,12 +2997,6 @@ ${grammarFillGeometryFixtureCss}
 
 [data-canonical-writing-chrome-role="section_heading"] {
   margin: 0 0 9pt;
-  margin-left: ${sectionHeadingRuntime.printPdf.sectionHeadingIndentEm}em;
-  font-family: ${sectionHeadingRuntime.printPdf.fontStack};
-  font-size: ${sectionHeadingRuntime.printPdf.fontSizePt}pt;
-  line-height: ${sectionHeadingRuntime.printPdf.lineHeightPt}pt;
-  font-weight: ${paperTypographyRuntime.visibleWeight.sectionHeading};
-  white-space: nowrap;
 }
 
 [data-canonical-writing-chrome-role="part_heading"]
@@ -3109,19 +3015,10 @@ ${grammarFillGeometryFixtureCss}
 
 [data-canonical-writing-chrome-role="instruction"] {
   margin: 0 0 9pt;
-  white-space: pre-line;
-  text-indent: ${sectionHeadingRuntime.printPdf.groupInstructionFirstLineIndentEm}em;
-  font-weight: ${paperTypographyRuntime.visibleWeight.instruction};
 }
 
 .canonical-continuation-response {
-  box-sizing: border-box;
-  width: ${continuationWritingRhythm.responseGeometry.widthMm}mm;
-  height: ${continuationWritingRhythm.responseGeometry.heightMm}mm;
   --writing-box-rule: ${continuationWritingRhythm.responseGeometry.printBorderPt}pt;
-  margin-top: ${continuationWritingRhythm.rendererMapping.printPdf.responseMarginTopPt}pt;
-  padding: ${continuationWritingRhythm.rendererMapping.printPdf.responsePaddingPt}pt;
-  position: relative;
 }
 
 .canonical-application-given p,
@@ -3130,28 +3027,13 @@ ${grammarFillGeometryFixtureCss}
 }
 
 ${items.some((item) => item.detail.groupType === 'listening') ? `.options-grid--listening {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   overflow-wrap: anywhere;
 }` : ''}
-
-.canonical-application-given[data-canonical-given-role="title"] {
-  text-align: center;
-}
-
-.canonical-application-given-bottom {
-  margin-top: auto;
-  text-align: right;
-}
 
 .canonical-application-prompt p[data-canonical-application-notice] {
   margin-top: ${applicationWritingRhythm.rendererMapping.printPdf.noticeMarginTopPt}pt;
   text-align: left;
   text-indent: 0;
-}
-
-.canonical-application-notice-line {
-  display: block;
-  width: fit-content;
 }
 
 .canonical-application-notice-line--instruction {
@@ -3198,31 +3080,6 @@ ${isTeacher ? `
 }
 ` : ''}
 
-.writing-starter-line {
-  margin: 0 ${continuationWritingRhythm.starterGeometry.trailingInsetEm}em 0 ${continuationWritingRhythm.starterGeometry.firstLineIndentEm}em;
-  overflow-wrap: anywhere;
-  text-indent: 0;
-}
-
-.canonical-continuation-response {
-  display: grid;
-  grid-template-rows: ${continuationWritingRhythm.starterGeometry.secondRowStartRatio * 100}% minmax(0, 1fr);
-}
-
-.writing-continuation-row {
-  display: flex;
-  min-height: 0;
-  flex-direction: column;
-  padding-top: ${continuationWritingRhythm.starterGeometry.rowTopInsetEm}em;
-  box-sizing: border-box;
-}
-
-.writing-continuation-writable-area {
-  display: block;
-  min-height: 0;
-  flex: 1;
-}
-
 /* Exam density: tighter */
 .exam .passage p { margin-bottom: 0.2em; }
 .exam .question { margin: 0.4em 0; }
@@ -3243,8 +3100,8 @@ ${isTeacher ? `
 }
 </style>
 </head>
-<body class="${densityClass}">
-${canonicalWritingChromeOwnsDocument ? '' : `
+<body class="${densityClass} paper-print">
+${canonicalListeningOwnsOpening ? `<header class="canonical-paper-opening" data-canonical-paper-opening><h1 class="canonical-paper-cover-title" data-canonical-cover-title>${listeningOpening.title}</h1><div class="canonical-paper-cover-notices" data-canonical-cover-notices><strong>注意事项：</strong><ol>${listeningOpening.notices.map((notice) => `<li>${escapeHtml(notice)}</li>`).join('')}</ol></div></header>` : canonicalWritingChromeOwnsDocument ? '' : `
 <div class="paper-header">
   <h1>${escapeHtml(title || '英语试题')}</h1>
   ${versionLabel ? `<p class="version-label">${escapeHtml(versionLabel)}</p>` : ''}

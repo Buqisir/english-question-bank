@@ -1,13 +1,14 @@
-import metrics from '../../standards/paper-canonical/rendering/times-compatible-metrics-v1.json' with { type: 'json' }
+import metrics from '../papersurface/termes-source-han-metrics-v1.json' with { type: 'json' }
 import rendererTypography from '../../standards/paper-canonical/rendering/paper-typography-v10.json' with { type: 'json' }
 
 import { digestJson, sha256 } from './stable.mjs'
 
 const LABELS = Object.freeze(['A', 'B', 'C', 'D'])
+const LISTENING_LABELS = Object.freeze(['A', 'B', 'C'])
 
 const SHAPING_IMPLEMENTATION = Object.freeze({
-  id: 'pinned-times-glyph-and-kern-advance',
-  version: '2',
+  id: 'pinned-termes-source-han-unshaped-advance',
+  version: '1',
   rounding: 'outward_to_integer_twip',
 })
 
@@ -183,7 +184,7 @@ function clozeFourColumnCapacities() {
 }
 
 function placementFor(mode, option, measured, index, fourColumnStartsTwip) {
-  if (mode === 'four_columns') {
+  if (mode === 'four_columns' || mode === 'three_columns') {
     return {
       optionId: option.optionId,
       label: option.label,
@@ -231,8 +232,8 @@ function selectedPlan(mode, optionSet, measured, fourColumnStartsTwip) {
   const plan = {
     status: 'selected',
     mode,
-    rowCount: mode === 'four_columns' ? 1 : mode === 'two_by_two' ? 2 : 4,
-    columnCount: mode === 'four_columns' ? 4 : mode === 'two_by_two' ? 2 : 1,
+    rowCount: ['four_columns', 'three_columns'].includes(mode) ? 1 : mode === 'two_by_two' ? 2 : optionSet.options.length,
+    columnCount: mode === 'four_columns' ? 4 : mode === 'three_columns' ? 3 : mode === 'two_by_two' ? 2 : 1,
     rulesetRef: {
       id: RULES.rulesetId,
       digest: RULESET_DIGEST,
@@ -286,6 +287,30 @@ export function layoutAbcdOptionSet(optionSet) {
       status: 'needs_review',
       reason: 'one_column_contains_unrenderable_unbreakable_content',
     }
+  }
+  return selectedPlan('one_column', optionSet, measured)
+}
+
+/** Listening A-C is either one equal-origin row or one complete vertical set. */
+export function layoutListeningOptionSet(optionSet) {
+  if (
+    optionSet?.owner !== 'question'
+    || !Array.isArray(optionSet.options)
+    || optionSet.options.length !== LISTENING_LABELS.length
+    || optionSet.options.some((option, index) =>
+      option?.label !== LISTENING_LABELS[index] || typeof option.optionId !== 'string')
+  ) return notApplicable()
+  const measured = optionSet.options.map(measureOption)
+  if (measured.some((value) => value === null)) {
+    return { status: 'needs_review', reason: 'one_column_contains_unrenderable_unbreakable_content' }
+  }
+  const pitch = Math.floor(RULES.optionRowWidthTwip / 3)
+  const capacity = pitch - RULES.minimumGutterTwip - RULES.fitSafetyTwip
+  if (measured.every(({ hardBreaks, advanceTwip }) => hardBreaks === 0 && advanceTwip <= capacity)) {
+    return selectedPlan('three_columns', optionSet, measured, [0, pitch, pitch * 2])
+  }
+  if (measured.some(({ unbreakableAdvanceTwip }) => unbreakableAdvanceTwip > capacities().one)) {
+    return { status: 'needs_review', reason: 'one_column_contains_unrenderable_unbreakable_content' }
   }
   return selectedPlan('one_column', optionSet, measured)
 }

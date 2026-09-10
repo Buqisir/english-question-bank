@@ -43,6 +43,10 @@ import { decorateProjectedMediaPresentation } from '../../shared/paper-canonical
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { digestJson, sha256, stableStringify, withoutKey } from '../../shared/paper-canonical/stable.mjs'
 import {
+  enrichSourceBoundListeningPlayback,
+  sourceBoundFirstSectionPlayback,
+} from './listeningPlaybackSourceBinding.mjs'
+import {
   assertCanonicalConsumptionVisibleStructure,
   assertCanonicalVisibleStructure,
 } from '../../shared/paper-canonical/visibleStructure.mjs'
@@ -1515,6 +1519,7 @@ function canonicalSelections(validated, contract, sourceAsset) {
     validated,
     sourceAsset,
   )
+  const firstSectionPlayback = sourceBoundFirstSectionPlayback(sourceAsset)
   const groupIdsByFamily = new Map()
   for (const group of validated.groups) {
     const familyId = group.contractRef.familyContractId
@@ -1538,9 +1543,13 @@ function canonicalSelections(validated, contract, sourceAsset) {
           const sourceOwnedInstructions = applicationInstructions.get(
             occurrence.groupId,
           )
-          return sourceOwnedInstructions
+          const decoratedOccurrence = sourceOwnedInstructions
             ? { ...occurrence, sourceOwnedInstructions }
             : occurrence
+          return enrichSourceBoundListeningPlayback(
+            decoratedOccurrence,
+            firstSectionPlayback,
+          )
         }),
       validated.sourceCapture,
     )

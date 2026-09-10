@@ -29,10 +29,17 @@ import {
 } from '../server/import-review/revisionProjection.mjs'
 import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequest.mjs'
 import { materializeNck1CanonicalRequest } from '../server/paper-canonical/nck1MaterializationCanonicalRequest.mjs'
-import { publishUniversalNck1Import } from '../server/paper-import/publisher.mjs'
+import {
+  publishUniversalNck1Import,
+  rollbackPaperImportPublication,
+} from '../server/paper-import/publisher.mjs'
 import { sendPaperAssetStatic } from '../server/paper-import/paperAssetStatic.mjs'
 import { assertListeningAudioManifest, assertListeningAudioSource, LISTENING_AUDIO_PATHS } from '../server/paper-import/listeningAudioEvidence.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
+import { renderPaginatedPaper } from '../server/draft-paper/paginationRenderer.mjs'
+import { closeChromiumPool } from '../server/draft-paper/chromiumPool.mjs'
+import { assertPaperFonts } from './lib/assert-paper-fonts.mjs'
+import { assertSharedPaperLayout } from './lib/assert-shared-paper-layout.mjs'
 import { readJsonRouteBody, runRoutes } from '../server/router/index.mjs'
 import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
@@ -619,9 +626,18 @@ function reviewManifestFor(reviewRoot, projection) {
   return { ...manifest, bundleDigest: reviewBundleDigest(manifest) }
 }
 
-function makeOnlinePromotionContext(label, fixturePaperId = paperId) {
+function makeOnlinePromotionContext(label, fixturePaperId = paperId, paginationBreaks = null) {
   const tempRoot = mkdtempSync(path.join(tmpdir(), `eqb-single-paper-promotion-${label}-`))
   const fixture = makeReviewRoot(tempRoot, fixturePaperId)
+  if (paginationBreaks) {
+    writeJson(path.join(fixture.reviewRoot, 'pagination-plan.json'), {
+      schemaVersion: 'paper-pagination-plan-v1', paperId: fixturePaperId,
+      sourceDigest: fixture.projection.sourceDigest, candidateDigest: fixture.projection.candidateDigest,
+      editions: { friendly8: { targetPages: 8, includeListening: false, omitCover: false,
+        coverGapsPt: [0, 18], breakSlotIds: paginationBreaks, allowSplitOptionBank: false } },
+    })
+    fixture.projection = buildNck1ReviewProjection(fixture.reviewRoot)
+  }
   const reviewStore = createImportReviewStore({
     dbPath: path.join(tempRoot, 'import-review.sqlite'),
     filesRoot: path.join(tempRoot, 'review-files'),
@@ -937,6 +953,8 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
     screenUrl.searchParams.set('focusGroupId', `group:${projection.paperId}:listening.short-dialogue`)
     await screenPage.goto(screenUrl.href)
     await screenPage.locator('.paper-browse-listening .ps-question').first().waitFor()
+    await assertPaperFonts(screenPage, '.paper-browse-listening')
+    await assertSharedPaperLayout(screenPage, '.paper-browse-listening')
     assert.equal(await screenPage.locator('.paper-browse-listening').count(), 2)
     assert.equal(await screenPage.locator('.paper-browse-listening .ps-question').count(), 20)
     assert.deepEqual(
@@ -983,6 +1001,7 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
     await detailPage.locator('.canonical-listening-surface .ps-question').first().waitFor()
     assert.equal(await detailPage.locator('.canonical-listening-surface .ps-question').count(), 5)
     assert.equal(await detailPage.locator('audio').count(), 0, 'Only the whole-paper Screen owns playback')
+    await assertPaperFonts(detailPage, '.canonical-listening-surface')
     const detailColumns = await detailPage.locator('.canonical-listening-surface .ps-option-list').first()
       .evaluate((element) => getComputedStyle(element).gridTemplateColumns.split(' ').map(parseFloat))
     assert.equal(detailColumns.length, 3)
@@ -1004,16 +1023,40 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
       const page = await browser.newPage({ viewport: { width: 794, height: 1123 } })
       await page.emulateMedia({ media: 'print' })
       await page.setContent(html)
+      await assertPaperFonts(page, '.paper-print')
+      await assertSharedPaperLayout(page, '.paper-print')
       const questions = page.locator('[data-canonical-question-id^="question:listening:"]')
       assert.equal(await questions.count(), 20)
-      assert.equal(await page.locator('.options-grid--listening > span').count(), 60)
+      assert.equal(await page.locator('.question-group[data-canonical-group-type="listening"] .canonical-options > span').count(), 60)
       assert.equal(await questions.locator('.answer').count(), versionType === 'teacher' ? 20 : 0)
       assert.ok(await questions.evaluateAll((elements) => elements.every((element) => getComputedStyle(element).breakInside === 'avoid')))
-      const grid = await page.locator('.options-grid--listening').first().evaluate((element) => getComputedStyle(element).gridTemplateColumns.split(' ').map(parseFloat))
-      assert.equal(grid.length, 3)
-      assert.ok(Math.max(...grid) - Math.min(...grid) < 1)
+      assert.equal(await page.locator('.question-group[data-canonical-group-type="listening"] .canonical-options--two_by_two').count(), 0)
+      const listeningColumns = await page.locator('.question-group[data-canonical-group-type="listening"] .canonical-options').first()
+        .evaluate((element) => getComputedStyle(element).gridTemplateColumns.split(' ').map(parseFloat))
+      assert.equal(listeningColumns.length, 3)
+      assert.ok(Math.max(...listeningColumns) - Math.min(...listeningColumns) < 1)
       const artifactDir = process.env.LISTENING_QA_ARTIFACT_DIR
-      const pdf = await page.pdf({ format: 'A4', printBackground: true, ...(artifactDir ? { path: path.join(artifactDir, `listening-${versionType}.pdf`) } : {}) })
+      if (artifactDir && versionType === 'student') {
+        writeFileSync(path.join(artifactDir, 'full-listening-input.html'), html)
+        const withoutListeningPayload = {
+          ...listeningPayload,
+          blocks: listeningPayload.blocks.slice(1 + listeningPayload.blocks.findLastIndex((block) =>
+            block.type === 'question_group'
+            && listeningPayload.details.get(block.questionGroupId)?.groupType === 'listening')),
+          items: listeningPayload.items
+            .filter((item) => listeningPayload.details.get(item.questionGroupId)?.groupType !== 'listening')
+            .map((item) => ({ detail: listeningPayload.details.get(item.questionGroupId), score: 0, note: '', sectionTitle: '' })),
+        }
+        writeFileSync(path.join(artifactDir, 'full-without-listening-input.html'), buildPrintHtml({
+          ...withoutListeningPayload, versionType, canonicalConsumption: listeningPublished.print_pdf,
+        }))
+      }
+      const { pdfBytes: pdf } = await renderPaginatedPaper(html, { inspect: async paged => {
+        await assertPaperFonts(paged, '.pagedjs_pages')
+        await assertSharedPaperLayout(paged, '.pagedjs_pages')
+        assert.equal(await paged.locator('.pagedjs_pages [data-canonical-question-id^="question:listening:"]').count(), 20)
+      } })
+      if (artifactDir) writeFileSync(path.join(artifactDir, `listening-${versionType}.pdf`), pdf)
       assert.equal(pdf.subarray(0, 4).toString(), '%PDF')
       if (artifactDir) await page.screenshot({ path: path.join(artifactDir, `print-${versionType}.png`) })
       await page.close()
@@ -1088,6 +1131,7 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
     assert.equal(screenGroup.occurrenceSignature, printGroup.occurrenceSignature)
   } finally {
     await browser.close()
+    await closeChromiumPool()
     await viteServer.close()
     rmSync(audioRoot, { recursive: true, force: true })
   }
@@ -1655,6 +1699,15 @@ try {
     })
   })
   await reviewPage.goto(`${started.origin}/ops/?view=review`)
+  const fixedPdfResponse = await fetch(`${started.origin}/api/import-review-preview/revisions/${online.approval.revisionId}/pdf?version=student&pageLayout=friendly8`, {
+    headers: { 'x-synthetic-owner': '1' },
+  })
+  assert.equal(fixedPdfResponse.status, 200, 'Review fixed PDF must render through the real public route')
+  assert.equal(fixedPdfResponse.headers.get('x-eqb-pagination-edition'), 'friendly8')
+  assert.equal(fixedPdfResponse.headers.get('x-eqb-pagination-pages'), '8')
+  const fixedPdfPath = path.join(online.tempRoot, 'review-fixed8.pdf')
+  writeFileSync(fixedPdfPath, Buffer.from(await fixedPdfResponse.arrayBuffer()))
+  assert.match(execFileSync('pdfinfo', [fixedPdfPath], { encoding: 'utf8' }), /Pages:\s+8\b/)
   const promotionRail = reviewPage.getByRole('heading', { name: '上线审计' }).locator('..')
   await promotionRail.getByText('已认可，未上线', { exact: true }).waitFor()
   await promotionRail.getByText(`上线 ${paperId}`, { exact: true }).waitFor()
@@ -1786,6 +1839,41 @@ try {
     inspected.consumers.screen.visibleStructureDigest,
     inspected.consumers.print_pdf.visibleStructureDigest,
   )
+  const latestMetaPath = path.join(
+    online.paperAssetsDir,
+    paperId,
+    'latest',
+    'import-meta.json',
+  )
+  const latestMetaBytes = readFileSync(latestMetaPath)
+  const unboundLatestMeta = JSON.parse(latestMetaBytes)
+  delete unboundLatestMeta.paginationPlanBinding
+  writeFileSync(latestMetaPath, `${JSON.stringify(unboundLatestMeta, null, 2)}\n`)
+  assert.throws(
+    () => promotionService.promote(
+      paperId,
+      promotionRequest(online.approval),
+      'ship-authorizer-token',
+    ),
+    /pagination binding differs from Review projection/,
+    'an idempotent promotion rejects latest after its explicit null pagination commitment is dropped',
+  )
+  const rollbackDb = online.openDatabase({ readOnly: false })
+  try {
+    assert.throws(
+      () => rollbackPaperImportPublication({
+        db: rollbackDb,
+        paperAssetsDir: online.paperAssetsDir,
+        paperId,
+        versionName: 'v1',
+      }),
+      { code: 'PUBLICATION_REF_DISAGREEMENT' },
+      'idempotent rollback rejects latest after its explicit null pagination commitment is dropped',
+    )
+  } finally {
+    rollbackDb.close()
+  }
+  writeFileSync(latestMetaPath, latestMetaBytes)
   const promotedByCli = await runReviewCommand(
     ['promote', paperId, '--owner-said-ship'],
     {
@@ -1845,8 +1933,53 @@ try {
 } finally {
   if (onlineBrowser) await onlineBrowser.close()
   if (onlineServer) await new Promise((resolve) => onlineServer.close(resolve))
+  await closeChromiumPool()
   rmSync(online.tempRoot, { recursive: true, force: true })
 }
+
+const plannedPromotion = makeOnlinePromotionContext('planned', paperId, ['reading.b'])
+try {
+  const service = createSinglePaperPromotionService({ getStore: () => plannedPromotion.reviewStore,
+    openDatabase: plannedPromotion.openDatabase, paperAssetsDir: plannedPromotion.paperAssetsDir })
+  const first = service.promote(paperId, promotionRequest(plannedPromotion.approval), 'synthetic-ship')
+  assert.equal(first.status, 'published')
+  const paperDir = path.join(plannedPromotion.paperAssetsDir, paperId)
+  const versionPlan = path.join(paperDir, 'versions/v1/pagination-plan.json')
+  const originalPlan = readFileSync(versionPlan)
+  assert.deepEqual(JSON.parse(originalPlan), plannedPromotion.projection.paginationPlan)
+  assert.deepEqual(readFileSync(path.join(paperDir, 'latest/pagination-plan.json')), originalPlan)
+  rmSync(versionPlan)
+  assert.throws(() => service.promote(paperId, promotionRequest(plannedPromotion.approval), 'synthetic-ship'), /missing/)
+  writeFileSync(versionPlan, originalPlan)
+
+  const changedPlan = JSON.parse(originalPlan)
+  changedPlan.editions.friendly8.breakSlotIds = ['reading.d']
+  writeJson(path.join(plannedPromotion.reviewRoot, 'pagination-plan.json'), changedPlan)
+  const nextProjection = buildNck1ReviewProjection(plannedPromotion.reviewRoot)
+  assert.equal(nextProjection.candidateDigest, plannedPromotion.projection.candidateDigest)
+  const manifest = reviewManifestFor(plannedPromotion.reviewRoot, nextProjection)
+  assert.notEqual(manifest.bundleDigest, plannedPromotion.approval.bundleDigest)
+  const created = plannedPromotion.reviewStore.createRevision(manifest)
+  for (const file of manifest.files) {
+    const upload = plannedPromotion.reviewStore.fileForUpload(created.revision.id, file.path)
+    mkdirSync(path.dirname(upload.destination), { recursive: true })
+    writeFileSync(upload.destination, readFileSync(resolveReviewFile(plannedPromotion.reviewRoot, file.path)))
+    plannedPromotion.reviewStore.completeFileUpload(created.revision.id, file.path, { sha256: file.sha256, byteLength: file.byteLength })
+  }
+  const revision = plannedPromotion.reviewStore.finalizeRevision(created.revision.id)
+  const approval = plannedPromotion.reviewStore.approveRevision(paperId, revision.id, { bundleDigest: revision.bundleDigest }, 'synthetic-owner')
+  const second = service.promote(paperId, promotionRequest(approval), 'synthetic-ship')
+  assert.equal(second.promotion.assetVersion, 2, 'same Candidate with a newly approved plan must not reuse v1')
+  assert.deepEqual(JSON.parse(readFileSync(path.join(paperDir, 'latest/pagination-plan.json'))), changedPlan)
+  const db = plannedPromotion.openDatabase({ readOnly: false })
+  try {
+    rollbackPaperImportPublication({ db, paperAssetsDir: plannedPromotion.paperAssetsDir, paperId, versionName: 'v1' })
+    assert.deepEqual(readFileSync(path.join(paperDir, 'latest/pagination-plan.json')), originalPlan)
+    writeJson(path.join(paperDir, 'latest/pagination-plan.json'), changedPlan)
+    assert.throws(() => rollbackPaperImportPublication({ db, paperAssetsDir: plannedPromotion.paperAssetsDir,
+      paperId, versionName: 'v1' }), /commitment/)
+  } finally { db.close() }
+} finally { rmSync(plannedPromotion.tempRoot, { recursive: true, force: true }) }
 
 const preCommitPromotion = makeOnlinePromotionContext('precommit')
 try {
@@ -2258,6 +2391,31 @@ try {
   const hydrated = await runReviewCommand(['hydrate', cliPaperId], commandEnv)
   assert.equal(JSON.parse(hydrated.stdout).state, 'hydrated')
   assert.equal(buildNck1ReviewProjection(cliPaperDir).candidateDigest, projection.candidateDigest)
+  const paginationOutput = path.join(cliTempRoot, 'pagination-qa')
+  const paginationArgs = ['pagination-qa', cliPaperId, '--edition', 'friendly8', '--output', paginationOutput]
+  const automatic = JSON.parse((await runReviewCommand([...paginationArgs, '--auto', '--save-plan'], commandEnv)).stdout)
+  assert.equal(automatic.pageCount, 8)
+  assert.equal(automatic.screenshots.length, 8)
+  for (const file of automatic.screenshots) assert(existsSync(path.join(paginationOutput, file)), 'every reported raster path exists')
+  const planPath = path.join(cliPaperDir, 'pagination-plan.json')
+  const savedPlan = readFileSync(planPath)
+  const replayed = JSON.parse((await runReviewCommand(paginationArgs, commandEnv)).stdout)
+  assert.equal(replayed.mode, 'explicit')
+  assert.equal(replayed.searchedCandidates, 1)
+  assert.deepEqual(replayed.groups, automatic.groups, 'saved plan must reproduce the same group pagination')
+  assert.deepEqual(replayed.selectedPlan, automatic.selectedPlan)
+  await assert.rejects(() => runReviewCommand([...paginationArgs, '--break-slots', '', '--save-plan'], commandEnv), /Diagnostic report:/)
+  const failureReport = JSON.parse(readFileSync(path.join(paginationOutput, 'failure-report.json'), 'utf8'))
+  assert.equal(failureReport.status, 'failure')
+  assert.equal(failureReport.planSaved, false)
+  assert.equal(failureReport.targetPages, 8)
+  assert.notEqual(failureReport.actualPages, 8)
+  assert(failureReport.groups.every((group) => group.slotId))
+  assert(existsSync(path.join(paginationOutput, failureReport.artifacts.pdf)))
+  for (const file of failureReport.artifacts.screenshots) assert(existsSync(path.join(paginationOutput, file)))
+  assert.deepEqual(readFileSync(planPath), savedPlan, 'a failed edit must not replace a working plan')
+  rmSync(planPath)
+  assert.equal(buildNck1ReviewProjection(cliPaperDir).candidateDigest, projection.candidateDigest, 'pagination QA leaves source and Candidate unchanged')
   const accepted = await runReviewCommand(['accept', cliPaperId], commandEnv)
   assert.match(accepted.stdout, /^ACCEPTED /)
   writeJson(path.join(cliPaperDir, 'signals/ai-answer-check.json'), {

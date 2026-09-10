@@ -811,6 +811,14 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
     rangeStart: listeningHeading + 1, rangeEnd: readingStart,
     family: 'listening', documentId: questionDocumentId, issues,
   }).map(({ sourceNumber: _sourceNumber, questionId: _questionId, blankId: _blankId, prompt: _prompt, ...question }) => question)
+  const section2Heading = questionBody.findIndex((item, index) =>
+    index > listeningHeading && index < readingStart
+    && item.kind === 'paragraph' && /^第二节/u.test(normalized(item.text)))
+  const section1Once = questionBody.slice(
+    listeningHeading + 1,
+    section2Heading < 0 ? readingStart : section2Heading,
+  ).find((item) =>
+    item.kind === 'paragraph' && /仅读一遍/u.test(normalized(item.text)))
   const answers = []
   for (let number = 1; number <= 20; number += 1) {
     const parsed = answerMap.get(number)
@@ -878,7 +886,14 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
       source: sourceLocator(answerDocumentId, paragraphs[0]?.sourceIndex || marker.number),
     }
   })
-  return { state: 'captured', questions, answers, transcript, timing: [] }
+  return {
+    state: 'captured', questions, answers, transcript,
+    timing: section1Once ? [{
+      kind: 'section1_playback',
+      passes: 1,
+      source: sourceLocator(questionDocumentId, section1Once.sourceIndex),
+    }] : [],
+  }
 }
 
 function documentRecord(document) {

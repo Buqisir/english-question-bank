@@ -1,5 +1,35 @@
 # 试卷格式标准索引(Exam Paper Format Standards)
 
+## 当前运行时字体（Owner 2026-09-08）
+
+Screen、Print HTML 和新生成的 PDF 固定使用 TeX Gyre Termes 2.609 +
+Source Han Serif CN 2.003；不优先使用用户本机 Times / 宋体 / 黑体 / Arial。
+正文、大小标题、题号、选项、分值及页脚共用这两族，粗体使用实字重。
+运行时字体入口为 `shared/papersurface/paperFonts.mjs`（font policy v1），
+文件 SHA-256、许可证和来源见 `app/public/fonts/paper/`。
+
+这是下文历史字体栈的**显式后继规则**，不是修改既有 Publication：字体选择和
+派生选项宽度属于 renderer，不改变 Source、Teacher Confirmation、Canonical
+语义或已保存 PDF。历史 manifest/typography 文件及其 digest 保持原样；字号、
+行距、锚点和可见结构仍由既有闭包校验。仅该已接受的字体迁移豁免语义 manifest
+升版，不扩大为绕过 admission 或几何 authority 的通行证。
+
+Owner 复核金样后否定数字齐底：此字体迁移取消**节标题数字的额外下移**。
+Termes + 思源宋统一使用 `sectionHeadingRuntime` 的 `0em` 下移量，替代旧宋体
+`0.1em` 和未接受的 `0.05em` 齐底尝试；按金样自然随文排列，不强制下沿对齐或垂直居中。
+不得把图片像素换算成 A4 尺寸。Screen、Print HTML、PDF 共用该值；字号、行距、
+标题间距及历史 typography 数值不变。该窄例外不授权其他几何参数的无版本覆盖。
+该规则覆盖各题型标题、题量、分值；阅读/听力题号、完形题号与选项、七选五/完形/
+语法填空编号、写作说明编号和正文数字保持各自自然文本基线，不新增统一升降补偿。
+填空横线与编号的关系仍由原题型规则控制，不能用移动数字来追齐汉字或横线底边。
+
+`termes-source-han-metrics-v1.json` 是从随仓字体 cmap/hmtx 生成的版本化
+运行时度量；派生 A–D plan 继续绑定 typography、metrics 和 shaping digest，
+拒绝旧度量 plan。共享 `fontRendering.css` 禁用 kerning/ligature 和伪字重，
+使 Screen/Print/PDF 与该宽度模型一致。复现入口为
+`python3 scripts/generate-paper-font-metrics.py --check`（fonttools 4.59.2）。
+新字体允许统一后的换行变化，不承诺复刻 Windows/macOS 字体分页。
+
 ## 当前可执行权威
 
 本文件是唯一的人类可读索引，但必须区分两条已接受的 authority：全局 accepted
@@ -30,10 +60,10 @@ Screen 把已捕获听力放在 q1–20,点击题目后由同一右栏显示官�
 Screen/Print/PDF 共享输出由后续 successor 闭合,不得从本 Candidate Review
 样式反推。
 
-当前 Universal NCK1 successor 为
+当前 Universal NCK1 导题与发布 successor 为
 [`manifest-v52.json`](../../standards/paper-canonical/manifest-v52.json)，继承
-v51 的听力发布闭包，使用 NCK1 Profile v16、Reading family v2、Screen v40
-和 Print/PDF v41。迁移只增加 materialization v3 的同质 A–D 图片选项及可选
+v51 的听力发布闭包，使用 NCK1 Profile v16、Reading family v2；其初始消费者为
+Screen v40 和 Print/PDF v41。迁移只增加 materialization v3 的同质 A–D 图片选项及可选
 源测量布局；v1/v2 文字题仍可导入，已有 Publications 保留原 authority/digest，
 不自动重编译、不推进全局 accepted v36，也不恢复旧 Format2 导入运行时。
 图片须保留独立 occurrence、原始字节和可重放裁切；测量布局绑定题目、原卷
@@ -44,6 +74,19 @@ v51 的听力发布闭包，使用 NCK1 Profile v16、Reading family v2、Screen
 `scripts/verify-nck1-reading-figure-options.mjs`；设置
 `EQB_SHENZHEN_QUESTION_PDF` 可复跑原卷 Q33 图片的局部样例，外围题目为
 合成数据，不能据此声明整卷已完成导入或发布。
+
+当前呈现后继为 renderer-only
+[`manifest-v53.json`](../../standards/paper-canonical/manifest-v53.json)，对应
+Screen v41 / Print/PDF v42；不推进上述导题、发布或全局 accepted authority。
+应用文标题居中、称呼在上、落款在下且右对齐，续写段首句和留白共用
+`shared/papersurface/paperLayout.css`。已验证的旧续写恰好有两条源段首引用时，
+两条只在答题框出现一次；缺失、数量异常或未标记角色的旧内容保留原文，
+不靠文字猜测、不删重、不新增导出封锁。历史 consumer refs 保留历史放置。
+长节标题和表格单元允许换行；插图等比适配可打印高度，图注计入占用。
+分页后检查不可拆分框及内部文字的真实边界，超出时报告
+`PAPER_LAYOUT_OVERFLOW`，不得交付被裁掉的 HTML/PDF。
+迁移边界及复现入口见
+[`manifest-v53-migration.md`](../../standards/paper-canonical/manifest-v53-migration.md)。
 
 机器 manifest 分别绑定 Core Invariants、NCK1 / Zhejiang legacy / national
 legacy Profiles、各 family contract、Normalization Rules、Source Adapters、
@@ -62,8 +105,8 @@ Renderer Typography、其 schema 及纯验证入口。未知版本、缺件、di
 `第二部分 阅读（共两节，满分50分）`，且阅读理解、七选五的节标题和说明均
 由同一 Profile/digest 绑定的 Consumption Plan 进入 plain/lecture Screen、
 Student/Teacher Print HTML 与 PDF。六个在用节标题均与部标题共享正文左缘，
-全文采用同一书宋栈；分值数字的局部可见基线校准只由 digest-bound 的当前
-Paper Typography authority 定义；
+全文采用同一书宋栈；分值数字的历史可见基线校准由 digest-bound 的
+Paper Typography authority 定义，当前固定字体取消额外下移的窄覆盖见本文首节；
 `第X节` 后及数字与中文单位之间保留一个半角空格，
 中文全角括号、分号、逗号不变。部标题到首个节标题按本地可见字高归一化为
 1.882；动态页脚为 `英语试题第 ${page} 页（共 ${pages} 页）`，其中页数取
@@ -87,7 +130,8 @@ baseline steps，二者由独立 authority 拥有。Normalization Rules v5 只�
 Continuation rhythm v5 分别声明 Screen
 1px 与 Print/PDF 0.5pt 的细线原语，正文首行统一 2em，续写给定段首仍为
 独立 4em 角色。正文行盒继续固定 18pt，不引入任何 18/19、18–23 或按页自适应。
-Paper Typography v10 是 section heading numeric baseline 和 instruction 常规字重的唯一运行时来源；
+Paper Typography v10 保留历史 section heading numeric baseline，并继续拥有 instruction
+常规字重；当前字体取消数字下移仅由本文首节的共享运行时覆盖。
 Continuation Rhythm v5 另外绑定在 exact-final-HEAD 证据根持久化的六 bundle、两
 relation 观测 ledger。迁移说明见
 [`manifest-v36-migration.md`](../../standards/paper-canonical/manifest-v36-migration.md)。
@@ -333,15 +377,36 @@ px 换算(A4=794px@96dpi):10.5pt ≈ 14px。
 
 ## 3b. 分页纪律(owner 2026-07-08 拍板,刀⑤收官时增补)
 
-密排省纸,但阅读原子不被切开——与真卷行为一致,共三条:
+统一格式不等于逐卷复刻分页。自然 Print/普通 PDF 采用以下基础纪律；
+整卷 8/10 页重排在此基础上应用下述优先级，不改变正文尺寸与答题区域。
 
-1. **篇章段落可以跨页**(真卷即如此,不做题组原子化,不留整页空白);
+1. **篇章段落可以跨页**，题组完整是重排目标，不是对超长题组的硬性禁拆；
 2. **单个小题不可拆**:一道小题(题干+选项)是原子,拆不下就整体挪到
    下一页;
 3. **三样东西永不跨页**:节/部标题不落页尾(后面至少跟内容)、挖空
    横线不断开(§6 已有)、写作答题框整框不拆。
 
 页尾因此略有参差,是不实现纵向撑满(§3)的已知代价,接受。
+
+### 整卷标准重排（Owner 本轮确认）
+
+- 有听力源卷提供 10 页完整版及 8 页去听力特供版；原本无听力提供
+  8 页正常版。Screen 保持自然滚动，普通 Print/PDF 与其缓存不受定页规划影响。
+- 两种 8 页版采用相同的题组完整优先级：A/B/C/D、七选五、完形、
+  读后续写尽量各面完成，语法填空＋应用文通常合页。先比较这一安排，
+  再作必要的局部合页；A 过长不意味着后续全部放弃题组节奏。
+- 8 页正常版保留紧凑卷首（标题上额外留白 0pt、标题下 18pt）；
+  从有听力源卷产生的特供版省略通用卷首，保留题型说明、题号及作答要求。
+  判断依据是源卷当前 Canonical 听力题组，不靠第 21 题或“第二部分”猜测。
+- 10 页完整版以有保护的自然接排为主；同等页数下争取少跨 A3 正反面。
+  卷首仍只允许既定 72/72 → 54/72 → 54/54pt 两处留白候选，不改正文。
+- 所有定页版保护听力说明、材料提示和七选五选项组，优先避免其拆散。
+  允许短小开头接在页尾；不要求所有题组必须另起新页。
+  10 页先搜索保持选项组完整的候选，仍找不到时才允许整组选项跨页，
+  并在下载成功提示中明确告知；单道题、单条选项仍须完整，超出一页则报错。
+- 指定页数是交付条件；少拆题组、少翻面是可退让的偏好。
+  有界搜索找不到时明确报错，不缩字、不减题、不把错误页数宣称为完成。
+  源数据重复须另行核对修正，不能由分页器删掉来凑页数。
 
 ## 3c. 阅读细线框(`framed_columns`,2026-08-24 Owner QA 收口)
 
@@ -369,7 +434,8 @@ Word 左右细线框、框里只有能打的字和矩形对照时,三面由共�
 - **节标题**:书宋常规,**左顶格，与部标题共享正文左缘**，分值内嵌——
   「第一节 （共 15 小题；每小题 2.5 分，满分 37.5 分）」。`第X节` 后、
   数字与中文单位之间各一个半角空格；中文全角括号、分号、逗号保持不变。
-  整行（含数字和小数点）使用同一中文书宋栈和基线。分值不另起行。
+  整行使用本文首节固定字体组合；数字和小数点按金样自然随文排列，不强制下沿对齐
+  或垂直居中。不要求字形等高，也不以墨迹或行盒底边相等作为验收依据。分值不另起行。
 - 层级靠**字重**区分,一律不放大字号。
 - 题组指导语与篇章段落首行从普通 2em 首行原点起笔；篇章换行回到正文左缘。
 - 篇章标题 A/B/C/D:加粗居中,与上下正文各空一行;篇内副标题

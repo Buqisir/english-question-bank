@@ -62,8 +62,13 @@ assert.match(
 )
 assert.match(
   currentHumanAuthority,
-  /Paper Typography v10 是 section heading numeric baseline 和 instruction 常规字重的唯一运行时来源/,
-  'the human-readable authority index delegates the current numeric baseline to Paper Typography v10',
+  /Paper Typography v10 保留历史 section heading numeric baseline，并继续拥有 instruction\s+常规字重/,
+  'the human-readable authority index preserves historical baseline and instruction authority',
+)
+assert.match(
+  currentHumanAuthority,
+  /Termes \+ 思源宋统一使用 `sectionHeadingRuntime` 的 `0em`[\s\S]*不强制下沿对齐或垂直居中[\s\S]*该窄例外不授权其他几何参数的无版本覆盖/,
+  'the pinned-font baseline calibration must be explicit and must not authorize unrelated geometry overrides',
 )
 assert.doesNotMatch(
   currentHumanAuthority,

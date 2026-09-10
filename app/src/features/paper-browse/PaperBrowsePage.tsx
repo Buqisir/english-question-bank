@@ -59,6 +59,7 @@
 import { Fragment, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { ClipboardList, FileDown, Plus, Presentation, RefreshCw } from 'lucide-react'
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
+import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate'
 // one-sheet-paper: 卷面字体/边距 token 只读消费——同 PaperSurface.tsx /
 // WritingPaperPage.tsx 的注入手法（CSS custom properties on a shared
 // ancestor），不是 shared-ui/papersurface/** 或 paper-intelligence/**
@@ -171,6 +172,10 @@ import type {
 import { isNarrativeContinuationWritingAnalysis } from '../../domain/paperAsset.ts'
 import type { QuestionGroupCard } from '../../domain/questionBank'
 import type { LectureFocus, PaperSurfaceFocusIntent } from '../../../../shared/papersurface/types'
+import {
+  listeningOpening,
+  ownsCompletePaperOpening,
+} from '../../../../shared/paper-canonical/listeningPresentation.mjs'
 import { exportCompanionAnalysisPdf as fetchCompanionAnalysisPdf } from '../../services/questionGroups.ts'
 import { prepareFileSaveTarget, saveBlobToTarget } from '../../services/fileDownload.ts'
 import { fetchSimilarPassages, fetchSimilarQuestions } from '../../services/similarQuestions.ts'
@@ -652,6 +657,10 @@ const SIMILAR_RECIPE_SUMMARY: Record<string, string> = {
 const SIMILAR_PASSAGES_MODE_GROUP_TYPES = new Set(['cloze', 'sevenChoices'])
 
 export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
+  return <PaperFontGate><PaperBrowsePageContent {...props} /></PaperFontGate>
+}
+
+function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   const {
     paperId,
     reviewRevision,
@@ -3710,6 +3719,12 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
     )
   }
 
+  const openingGroupIds = asset.content.blocks.flatMap((block) =>
+    block.type === 'group' ? [block.groupId] : [])
+  const showListeningOpening = ownsCompletePaperOpening(
+    canonicalConsumption,
+    openingGroupIds,
+  )
   return (
     <div className="paper-browse-page">
       <AppTopbar
@@ -3746,6 +3761,15 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
             </div>
           )}
           <div className="paper-browse-zoom">
+            {showListeningOpening && (
+              <header className="canonical-paper-opening" data-canonical-paper-opening="">
+                <h1 className="canonical-paper-cover-title" data-canonical-cover-title="">{listeningOpening.title}</h1>
+                <div className="canonical-paper-cover-notices" data-canonical-cover-notices="">
+                  <strong>注意事项：</strong>
+                  <ol>{listeningOpening.notices.map((notice) => <li key={notice}>{notice}</li>)}</ol>
+                </div>
+              </header>
+            )}
             {grammarFillGeometryFixture && (
               <style data-canonical-grammar-fill-geometry-fixture={grammarFillGeometryVariantId}>
                 {grammarFillGeometryFixtureCss}

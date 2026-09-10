@@ -5,6 +5,7 @@ import {
   type ReactNode,
 } from 'react'
 import type { WritingGivenPart, WritingPageModel } from './writingPageModel'
+import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate'
 import { RetainedModelAnswer } from '../paper-browse/RetainedWritingLecture.tsx'
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import { applicationWritingRhythm } from '../../../../shared/paper-canonical/applicationWritingRhythm.mjs'
@@ -174,7 +175,11 @@ function writingGivenIdentity(part: WritingGivenPart): Record<string, string> {
   }
 }
 
-export function WritingPaperPage({
+export function WritingPaperPage(props: Parameters<typeof WritingPaperPageContent>[0]) {
+  return <PaperFontGate><WritingPaperPageContent {...props} /></PaperFontGate>
+}
+
+function WritingPaperPageContent({
   pageModel,
   children,
   retainedModelAnswer,

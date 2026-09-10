@@ -5,17 +5,18 @@ import {
 } from 'node:fs'
 import path from 'node:path'
 
-import {
-  canonicalConsumptionPrintPayload,
-  paperAssetOfficialModelAnswers,
-} from '../../scripts/import-pipeline/canonical-consumption-print-payload.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { defineRoute } from '../router/index.mjs'
 import { withChromiumPage } from '../draft-paper/chromiumPool.mjs'
 import { receiveVerifiedUpload } from '../import-ops/receiveVerifiedUpload.mjs'
 import { rasterPdfRegion } from '../paper-canonical/pdfRegionRaster.mjs'
 import { cropNck1SourceImage } from '../paper-import/nck1ImageSourceBundle.mjs'
-import { printConsumption, resolveReviewFile } from './revisionProjection.mjs'
+import { resolveReviewFile } from './revisionProjection.mjs'
+import {
+  renderReviewFixedEdition,
+  reviewPaginationMetadata,
+  reviewPrintHtml,
+} from './reviewPagination.mjs'
 
 function safeEqual(left, right) {
   const leftBytes = Buffer.from(String(left || ''))
@@ -119,41 +120,6 @@ function candidateProjectionForRevision(store, revisionId) {
     )
   }
   return result
-}
-
-function reviewPrintHtml(projection, versionType, buildPrintHtml) {
-  if (!['student', 'teacher'].includes(versionType)) {
-    const error = new Error('version must be student or teacher')
-    error.code = 'IMPORT_REVIEW_VERSION_INVALID'
-    error.status = 400
-    throw error
-  }
-  const consumption = printConsumption(projection.consumption)
-  const answerByQuestionId = new Map(
-    Object.entries(projection.paperAsset.answerKey?.answers || {})
-      .map(([questionId, answer]) => [questionId, answer.answer]),
-  )
-  const payload = canonicalConsumptionPrintPayload(
-    consumption,
-    projection.paperName,
-    answerByQuestionId,
-    paperAssetOfficialModelAnswers(projection.paperAsset),
-  )
-  const items = payload.items.map((item) => ({
-    detail: payload.details.get(item.questionGroupId),
-    note: '',
-    score: 0,
-    sectionTitle: '',
-  }))
-  return buildPrintHtml({
-    title: payload.title,
-    versionType,
-    printStyle: payload.printStyle,
-    items,
-    blocks: payload.blocks,
-    questionNumberStart: payload.questionNumberStart,
-    canonicalConsumption: consumption,
-  })
 }
 
 export function createImportReviewRoutes({
@@ -754,7 +720,17 @@ export function createImportReviewRoutes({
     context.sendJson(response, 200, sidecar)
   })))
 
-  routes.push(defineRoute('GET', /^\/api\/import-review-preview\/revisions\/([^/]+)\/print$/, route(({
+  routes.push(defineRoute('GET', /^\/api\/import-review-preview\/revisions\/([^/]+)\/pagination$/, route(({
+    response,
+    context,
+    match,
+  }) => {
+    if (!requireReviewer(response, context)) return
+    const { projection } = candidateProjectionForRevision(store, match[1])
+    context.sendJson(response, 200, reviewPaginationMetadata(projection))
+  })))
+
+  routes.push(defineRoute('GET', /^\/api\/import-review-preview\/revisions\/([^/]+)\/print$/, route(async ({
     response,
     url,
     context,
@@ -762,7 +738,16 @@ export function createImportReviewRoutes({
   }) => {
     if (!requireReviewer(response, context)) return
     const { projection } = candidateProjectionForRevision(store, match[1])
-    sendHtml(response, reviewPrintHtml(projection, url.searchParams.get('version'), buildPrintHtml))
+    const pageLayout = url.searchParams.get('pageLayout') || 'natural'
+    if (pageLayout === 'natural') {
+      sendHtml(response, reviewPrintHtml(projection, url.searchParams.get('version'), buildPrintHtml))
+      return
+    }
+    if (!['friendly8', 'friendly10'].includes(pageLayout) || url.searchParams.get('version') !== 'student') {
+      throw reviewError('IMPORT_REVIEW_PAGE_LAYOUT_INVALID', 'Fixed editions require student friendly8 or friendly10', 400)
+    }
+    const rendered = await renderReviewFixedEdition(projection, pageLayout, buildPrintHtml)
+    sendHtml(response, rendered.paginatedHtml)
   })))
 
   routes.push(defineRoute('GET', /^\/api\/import-review-preview\/revisions\/([^/]+)\/pdf$/, route(async ({
@@ -774,6 +759,20 @@ export function createImportReviewRoutes({
     if (!requireReviewer(response, context)) return
     const { projection } = candidateProjectionForRevision(store, match[1])
     const version = url.searchParams.get('version')
+    const pageLayout = url.searchParams.get('pageLayout') || 'natural'
+    if (pageLayout !== 'natural') {
+      if (!['friendly8', 'friendly10'].includes(pageLayout) || version !== 'student') {
+        throw reviewError('IMPORT_REVIEW_PAGE_LAYOUT_INVALID', 'Fixed editions require student friendly8 or friendly10', 400)
+      }
+      const rendered = await renderReviewFixedEdition(projection, pageLayout, buildPrintHtml)
+      sendBinary(response, rendered.pdfBytes, 'application/pdf', `${projection.paperId}-${pageLayout}.pdf`, 'inline', {
+        'x-eqb-pagination-edition': pageLayout,
+        'x-eqb-pagination-mode': rendered.mode,
+        'x-eqb-pagination-pages': String(rendered.pageCount),
+        'x-eqb-pagination-plan-digest': projection.paginationPlanDigest || '',
+      })
+      return
+    }
     const html = reviewPrintHtml(projection, version, buildPrintHtml)
     const pdf = await withChromiumPage(async (page) => {
       await page.setContent(html, { waitUntil: 'load' })

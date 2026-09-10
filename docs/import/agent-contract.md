@@ -234,6 +234,16 @@ promotion 命令。
 3. 生成九份 staged analysis 后运行 `node scripts/import-pipeline/review.mjs verify-analyses <paperId>`。它复用现有 schema、adapter、validator，检查 4 组 reading/15 题、seven/cloze/grammar 的 question/blank closure、45 个权威 objective answer closure 和两份写作分析，并确定性投影 Screen 的 `reading-choice`、`seven-choices`、`cloze`、`grammar-fill`、`writing` 五份 sidecar。缺项、冲突或不完整一律失败关闭。
 4. 设置 `QUESTION_BANK_IMPORT_OPS_ORIGIN` 与 Agent token，运行 `node scripts/import-pipeline/review.mjs push <paperId>`。push 会再次执行同一 analysis gate；不可变 bundle 绑定九份原始 bytes，manifest / bundle 绑定 `analysisDigest`。网页 revision finalize 后不可修改；Agent 停下等待 Owner 在 `/ops/` 真实 Screen 审核讲评。旧 revision 不会因后来补文件而获得 sidecar。
 5. 有问题：Agent 用 `review.mjs status` 或自己的 `import_agent` 网页待办箱读取反馈并回复；修好 Materialization 或 analysis 后重新 `verify` / `build` / `verify-analyses`，再用 `review.mjs push <paperId> --resolves <issueId>[,<issueId>]` 提交新 revision。不得覆盖旧 revision。
+   若问题仅属于 `pdf` 的 `friendly8` 或 `friendly10` edition，不改 Source、Materialization、
+   题目或分析。运行 `review.mjs pagination-qa <paperId> --edition <edition> --auto`
+   获取真实 PDF、逐页 PNG、slot/page 报告与有界建议；只用 `--break-slots` 和允许的
+   `--cover-gaps` 试修，精确页数通过后显式 `--save-plan`。可选
+   `pagination-plan.json` 绑定 source/Candidate 并进入 revision bundle；随后仍须
+   `push --resolves <issueId>` 新建不可变 revision。不得手写 CSS、改版心／字体／行高，
+   不得为找“最优”继续扩大既有 24-render 上限。10 页自动方案若使用 PDF-only 的选项库
+   fallback，会在 plan 中保存 `allowSplitOptionBank: true` 并由显式重放保持一致；8 页禁止。
+   自动规划失败仍非零退出，但必须使用独立 diagnostic PDF/逐页图片和结构化失败报告继续
+   修复，且不得保存 plan；`--auto` 不得与显式 break/cover 编辑参数混用。
 6. Owner 在网页认可后，Review API 保存绑定 source/Candidate/visible structure/analysis/files/bundle 的 approval；Agent 停下。无需在 Orb 生成本地 QA/发布收据，且不得因认可自动上线。
 7. 只有 Owner 后来在当前对话明确说 `上线 <paperId>`，才运行 `node scripts/import-pipeline/review.mjs promote <paperId> --owner-said-ship`。命令先用低权限 Agent token 读取最新认可，再用**只在本次上线动作中提供**的独立 ship token 请求生产服务。服务端从不可变 Review bytes 重建 Teacher Confirmation、Canonical request 与五份 sidecar，调用共享 publisher 原子写单卷正式 rows、Canonical current、`versions/vN`、`latest` 和媒体。不得从 Orb 上传整个 SQLite 或 broad assets。
 

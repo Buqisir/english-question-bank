@@ -12,6 +12,8 @@ import { MEDIA_AI_CONFIRMATION_CHECKS } from '../../shared/paper-canonical/media
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import {
   buildImportReviewProjection,
+  ocrReviewBundleFilePaths,
+  reviewBundleFilePaths,
   resolveReviewFile,
   validateNck1OcrReviewConfirmation,
 } from './revisionProjection.mjs'
@@ -272,6 +274,7 @@ function ensureShape(db) {
       paper_id TEXT NOT NULL REFERENCES import_review_papers(paper_id) ON DELETE CASCADE,
       revision_id TEXT NOT NULL REFERENCES import_review_revisions(id),
       surface TEXT NOT NULL,
+      edition TEXT,
       group_id TEXT,
       question_id TEXT,
       block_id TEXT,
@@ -356,6 +359,9 @@ function ensureShape(db) {
   if (!issueColumns.has('content_node_id')) {
     db.exec('ALTER TABLE import_review_issues ADD COLUMN content_node_id TEXT')
   }
+  if (!issueColumns.has('edition')) {
+    db.exec('ALTER TABLE import_review_issues ADD COLUMN edition TEXT')
+  }
 }
 
 function revisionRow(row) {
@@ -388,6 +394,7 @@ function issueRow(row) {
     paperId: row.paper_id,
     revisionId: row.revision_id,
     surface: row.surface,
+    edition: row.edition,
     groupId: row.group_id,
     questionId: row.question_id,
     blockId: row.block_id,
@@ -754,6 +761,22 @@ export function createImportReviewStore({
       requireAnalyses: status.revision.reviewKind === 'candidate',
     })
     assertProjectionIdentity(projection, status.revision)
+    if (projectRevision === buildImportReviewProjection) {
+      const expectedFiles = (status.revision.reviewKind === 'ocr'
+        ? ocrReviewBundleFilePaths(directory)
+        : reviewBundleFilePaths(directory))
+        .map(({ path: filePath, mediaType, role }) => `${filePath}\0${mediaType}\0${role}`)
+        .sort()
+      const actualFiles = status.revision.manifest.files
+        .map(({ path: filePath, mediaType, role }) => `${filePath}\0${mediaType}\0${role}`)
+        .sort()
+      if (JSON.stringify(expectedFiles) !== JSON.stringify(actualFiles)) {
+        throw storeError(
+          'IMPORT_REVIEW_FILES_INVALID',
+          'Review manifest inventory does not match the exact projection files',
+        )
+      }
+    }
     const timestamp = nowIso()
     const rendererId = currentRendererBuildId()
     withDb(true, (db) => {
@@ -967,6 +990,14 @@ export function createImportReviewStore({
     if (!SURFACES.has(surface)) {
       throw storeError('IMPORT_REVIEW_SURFACE_INVALID', 'Issue surface is invalid', 400)
     }
+    const edition = optionalString(input.edition, 30)
+    if (edition && (surface !== 'pdf' || !['friendly8', 'friendly10'].includes(edition))) {
+      throw storeError(
+        'IMPORT_REVIEW_EDITION_INVALID',
+        'edition is only valid for friendly8/friendly10 PDF issues',
+        400,
+      )
+    }
     const groupId = optionalString(input.groupId, 200)
     const questionId = optionalString(input.questionId, 200)
     const blockId = optionalString(input.blockId, 200)
@@ -1017,15 +1048,16 @@ export function createImportReviewStore({
         }
         db.prepare(`
           INSERT INTO import_review_issues (
-            id, paper_id, revision_id, surface, group_id, question_id, block_id,
+            id, paper_id, revision_id, surface, edition, group_id, question_id, block_id,
             media_id, content_node_id, page_number, rect_json, message, state,
             created_by, created_at, updated_at
-          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'open', ?, ?, ?)
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'open', ?, ?, ?)
         `).run(
           id,
           paperId,
           revisionId,
           surface,
+          edition,
           groupId,
           questionId,
           blockId,

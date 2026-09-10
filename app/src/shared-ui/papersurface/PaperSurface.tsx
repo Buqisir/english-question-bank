@@ -20,8 +20,9 @@
  *   - No evidence paint, no popover, no right panel.
  */
 
-import { useMemo, useCallback, type CSSProperties, type ReactNode } from 'react'
+import { Fragment, useMemo, useCallback, type CSSProperties, type ReactNode } from 'react'
 import './PaperSurface.css'
+import { PaperFontGate } from './PaperFontGate'
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import { paperSurfaceAnchorAttrs } from '../../../../shared/papersurface/anchorKeys.mjs'
 import { readingFigureOptionStyles, measuredReadingFigureStyles } from '../../../../shared/papersurface/readingFigureOptions.mjs'
@@ -194,9 +195,25 @@ type PaperSurfaceComponentProps = Omit<PaperSurfaceProps, 'blankFocusMode'> & {
       readonly text: string
     }>
   }>
+  readonly listeningPresentation?: {
+    readonly partHeading: string | null
+    readonly transferNotice: string | null
+    readonly sectionHeading: string
+    readonly instruction: string
+    readonly example: null | {
+      readonly stem: string
+      readonly options: ReadonlyArray<{ readonly label: string; readonly text: string }>
+      readonly answer: string
+    }
+    readonly segmentCues: ReadonlyArray<{ readonly beforeQuestionId: string; readonly text: string }>
+  }
 }
 
 export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
+  return <PaperFontGate><PaperSurfaceContent {...props} /></PaperFontGate>
+}
+
+function PaperSurfaceContent(props: PaperSurfaceComponentProps): ReactNode {
   const {
     textMap,
     annotations,
@@ -226,6 +243,7 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
     optionBankHeading,
     canonicalApplicationPromptBlocks,
     canonicalContinuationMaterialBlocks,
+    listeningPresentation,
   } = props
 
   if (semanticParagraphs !== undefined) {
@@ -397,6 +415,7 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
             blocks={canonicalContinuationMaterialBlocks}
           />
         )}
+        {listeningPresentation && <CanonicalListeningChrome presentation={listeningPresentation} />}
         {!canonicalReadingBlocks
           && !canonicalApplicationPromptBlocks
           && !canonicalContinuationMaterialBlocks
@@ -448,11 +467,29 @@ export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
             readingSuccessorGroupId={canonicalReadingSuccessorGroupId}
             readingFollowingSectionId={canonicalReadingFollowingSectionId}
             readingRhythmEnabled={canonicalReadingBlocks !== undefined}
+            listeningSegmentCues={listeningPresentation?.segmentCues}
           />
         )}
       </article>
     </div>
   )
+}
+
+function CanonicalListeningChrome({ presentation }: {
+  presentation: NonNullable<PaperSurfaceComponentProps['listeningPresentation']>
+}): ReactNode {
+  return <header className="ps-listening-chrome" data-canonical-listening-chrome="">
+    {presentation.partHeading && <h2 className="ps-listening-part">{presentation.partHeading}</h2>}
+    {presentation.transferNotice && <p className="canonical-listening-transfer-notice">{presentation.transferNotice}</p>}
+    <h3 className="ps-listening-section">{presentation.sectionHeading}</h3>
+    <p className="ps-listening-instruction">{presentation.instruction}</p>
+    {presentation.example && <div className="ps-listening-example" data-canonical-listening-example="">
+      <p>例：{presentation.example.stem}</p>
+      <div className="ps-listening-example-options">{presentation.example.options.map((option) =>
+        <span key={option.label}>{option.label}. {option.text}</span>)}</div>
+      <p className="ps-listening-example-answer">答案是 C。</p>
+    </div>}
+  </header>
 }
 
 function CanonicalContinuationWritingMaterial({
@@ -1251,6 +1288,7 @@ type PaperSurfaceQuestionListProps = {
   readingRhythmEnabled?: boolean
   clozeRhythmEnabled?: boolean
   clozeFollowingSectionId?: string
+  listeningSegmentCues?: ReadonlyArray<{ readonly beforeQuestionId: string; readonly text: string }>
 }
 
 function PaperSurfaceQuestionList({
@@ -1262,6 +1300,7 @@ function PaperSurfaceQuestionList({
   readingRhythmEnabled = false,
   clozeRhythmEnabled = false,
   clozeFollowingSectionId,
+  listeningSegmentCues = [],
 }: PaperSurfaceQuestionListProps): ReactNode {
   const sorted = useMemo(
     () => [...questions].sort((a, b) => a.order - b.order),
@@ -1271,8 +1310,13 @@ function PaperSurfaceQuestionList({
   return (
     <ol className="ps-question-list">
       {sorted.map((q, index) => (
+        <Fragment key={q.id}>
+        {listeningSegmentCues.find((cue) => cue.beforeQuestionId === q.id) && (
+          <li className="ps-listening-segment-cue" data-canonical-listening-segment-cue="">
+            {listeningSegmentCues.find((cue) => cue.beforeQuestionId === q.id)!.text}
+          </li>
+        )}
         <PaperSurfaceQuestionItem
-          key={q.id}
           question={q}
           isActive={lectureFocus?.questionId === q.id}
           onQuestionClick={onQuestionClick}
@@ -1294,6 +1338,7 @@ function PaperSurfaceQuestionList({
               : undefined
           }
         />
+        </Fragment>
       ))}
     </ol>
   )

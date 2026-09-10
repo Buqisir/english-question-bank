@@ -1,6 +1,9 @@
 import { segmentPaperText } from '../papersurface/segmentPaperText.mjs'
 import { grammarFillScreenRulingForCanonicalConsumption } from '../papersurface/blankRuling.mjs'
 import { translateAbcdPlanToPointPlacement } from '../paper-canonical/abcdLayout.mjs'
+import { projectListeningGroupPresentation } from '../paper-canonical/listeningPresentation.mjs'
+import { continuationWritingPresentation } from '../paper-canonical/writingPresentation.mjs'
+import { blankPresentationParagraphs } from '../paper-canonical/blankPresentation.mjs'
 import {
   projectCanonicalConsumerGroup,
   projectCanonicalWritingChrome,
@@ -236,7 +239,10 @@ export function buildCanonicalConsumptionSurfaceData({
     familyContractId,
     groupId,
   })
-  const paragraphModels = buildParagraphModels(canonicalGroup)
+  const paragraphModels = buildParagraphModels({
+    ...canonicalGroup,
+    paragraphs: blankPresentationParagraphs(canonicalGroup, consumption.consumerContractRef),
+  })
   const grammarFillScreenRuling = canonicalGroup.groupType === 'grammarFill'
     ? grammarFillScreenRulingForCanonicalConsumption({
         paperId: canonicalGroup.paperId,
@@ -268,6 +274,9 @@ export function buildCanonicalConsumptionSurfaceData({
       ),
       ...(grammarFillScreenRuling
         ? { grammarFillScreenRuling }
+        : {}),
+      ...(canonicalGroup.groupType === 'listening'
+        ? { listeningPresentation: projectListeningGroupPresentation(canonicalGroup) }
         : {}),
       questions: canonicalGroup.questions.map((question, order) => {
         const placement = question.layoutPlan
@@ -529,32 +538,9 @@ export function buildCanonicalContinuationWritingConsumptionSurfaceData({
     familyContractId: 'continuation-writing',
     groupId,
   })
-  const sourceBlocks = canonicalGroup.writingMode === 'legacy_opaque'
-    ? canonicalGroup.sourceBlocks
-    : canonicalGroup.materialBlocks
-  const starterLines = canonicalGroup.writingMode === 'legacy_opaque'
-    && canonicalGroup.sourceStarterLinesInResponse
-    ? canonicalGroup.sourceStarterBlockRefs.map((contentRef) => {
-        const block = sourceBlocks.find((candidate) => candidate.nodeId === contentRef)
-        if (!block) {
-          throw new Error(
-            `Canonical Continuation Writing starter ${contentRef} is absent from source blocks`,
-          )
-        }
-        return {
-          starterId: contentRef,
-          contentRef,
-          authorityObservationRef: canonicalGroup.occurrenceSignature,
-          text: block.text,
-          inlines: block.inlines,
-        }
-      })
-    : canonicalGroup.answerRegion.starterLines
-  const starterBlockRefs = new Set(
-    (starterLines || []).map((starter) => starter.contentRef || starter.starterId),
-  )
-  const materialBlocks = sourceBlocks.filter(
-    (block) => !starterBlockRefs.has(block.nodeId),
+  const { materialBlocks, starterLines, presentationPolicyRef } = continuationWritingPresentation(
+    canonicalGroup,
+    consumption.consumerContractRef,
   )
   const paragraphs = materialBlocks.map((block) => {
     const segmented = segmentPaperText(block.text, {
@@ -599,6 +585,7 @@ export function buildCanonicalContinuationWritingConsumptionSurfaceData({
       ? { writingMode: canonicalGroup.writingMode }
       : {}),
     materialBlocks,
+    presentationPolicyRef,
     wordCountRuling: canonicalGroup.wordCountRuling,
     ...(canonicalGroup.writingMode === 'legacy_opaque'
       ? {

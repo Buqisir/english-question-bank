@@ -646,23 +646,52 @@ summary:focus-visible {
 .surface-stage {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: 48px minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
   background: var(--surface-2);
 }
 
 .surface-toolbar {
   display: flex;
+  flex-wrap: wrap;
+  min-height: 48px;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 0 12px;
+  padding: 6px 12px;
   border-bottom: 1px solid var(--line);
   background: var(--surface);
+}
+
+.pagination-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.pagination-controls select {
+  min-height: 34px;
+  max-width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  padding: 4px 8px;
+}
+
+.pagination-error {
+  margin: 0 0 8px;
+  color: var(--ink);
 }
 
 .surface-tabs {
   min-width: 0;
   overflow-x: auto;
+}
+
+.surface-stage .surface-tabs {
+  flex-wrap: wrap;
+  overflow-x: visible;
 }
 
 .tab-button,

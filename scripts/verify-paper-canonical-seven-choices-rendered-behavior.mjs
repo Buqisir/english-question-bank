@@ -21,6 +21,8 @@ import {
 import { projectCanonicalPaper } from '../shared/paper-canonical/projector.mjs'
 import { resolveCanonicalAuthority } from '../shared/paper-canonical/authority.mjs'
 import { consumerContractRefs } from '../shared/paper-canonical/consumers.mjs'
+import { blankPresentationParagraphs } from '../shared/paper-canonical/blankPresentation.mjs'
+import { createCanonicalConsumerRuntime } from '../server/paper-canonical/consumerRuntime.mjs'
 import {
   buildCanonicalConsumptionSurfaceData,
 } from '../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
@@ -33,6 +35,51 @@ import {
 import {
   makeSevenChoicesCanonicalReferenceFixture,
 } from '../test-fixtures/paper-canonical/sevenChoicesReferenceFixture.mjs'
+
+// Different lengths and unpaired underscores must not become a global trim.
+for (const [left, right, expectedLeft, expectedRight] of [
+  ['Before ___', '___ after.', 'Before ', ' after.'],
+  ['___', '___, next.', '', ', next.'],
+  ['Before ____', '___ after.', 'Before ____', '___ after.'],
+  ['Before ___', '__ after.', 'Before ___', '__ after.'],
+  ['Before ___ ', '___ after.', 'Before ___ ', '___ after.'],
+  ['Other ___ text ', ' after.', 'Other ___ text ', ' after.'],
+]) {
+  const original = { groupType: 'sevenChoices', paragraphs: [{ paragraphId: 'p', nodes: [
+    { type: 'text', text: left },
+    { type: 'blank', blankId: 'b', questionId: 'q', questionNo: 37 },
+    { type: 'text', text: right },
+  ] }] }
+  const snapshot = structuredClone(original)
+  for (const ref of [consumerContractRefs.screen, consumerContractRefs.print_pdf]) {
+    assert.deepEqual(blankPresentationParagraphs(original, ref)[0].nodes,
+      [{ type: 'text', text: expectedLeft }, original.paragraphs[0].nodes[1], { type: 'text', text: expectedRight }])
+  }
+  assert.deepEqual(original, snapshot, 'presentation never changes canonical nodes')
+  assert.deepEqual(blankPresentationParagraphs(original), original.paragraphs)
+  assert.deepEqual(blankPresentationParagraphs({ ...original, groupType: 'cloze' }, consumerContractRefs.screen), original.paragraphs)
+}
+const oldScreen = JSON.parse(readFileSync('standards/paper-canonical/consumers/screen-v40.json', 'utf8'))
+const oldRef = { id: oldScreen.consumerId, version: oldScreen.version, digest: oldScreen.contractDigest }
+const legacyRoot = 'test-fixtures/paper-canonical/publications/ticket-31-canary-v1/store'
+const legacyDb = new DatabaseSync(path.join(legacyRoot, 'publication.sqlite'), { readOnly: true })
+try {
+  const loaded = createCanonicalConsumerRuntime({ rootDir: legacyRoot, db: legacyDb })
+    .load({ paperId: 'paper-960d0f8d', consumerId: 'screen' })
+  const input = { consumption: loaded, familyContractId: 'seven-choices', groupId: 'group-960d0f8d-seven-choices' }
+  const original = projectCanonicalConsumerGroup(input)
+  const before = JSON.stringify(original)
+  assert.equal(original.paragraphs.filter(p => p.nodes.some(n => n.text?.includes('___'))).length, 5)
+  assert.deepEqual(blankPresentationParagraphs(original, oldRef), original.paragraphs)
+  const screen = buildCanonicalConsumptionSurfaceData(input)
+  assert.equal(JSON.stringify(screen.surfaceData.semanticParagraphs).includes('___'), false)
+  assert.equal(screen.semanticDigest, original.semanticSignature)
+  assert.equal(JSON.stringify(projectCanonicalConsumerGroup(input)), before)
+  assert.equal(blankPresentationParagraphs(original, consumerContractRefs.print_pdf)
+    .flatMap(p => p.nodes).filter(n => n.type === 'blank').length, 5)
+} finally {
+  legacyDb.close()
+}
 
 const fixture = makeSevenChoicesCanonicalReferenceFixture('paper-2026-i')
 const compilation = compileCanonicalPaper(fixture.request)

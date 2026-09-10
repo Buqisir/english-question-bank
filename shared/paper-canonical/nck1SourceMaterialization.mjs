@@ -970,6 +970,15 @@ function validateListening(listening, documents, sourceCoverage, issues) {
   ) {
     issues.push(issue('MATERIALIZATION_LISTENING_TRANSCRIPT_COVERAGE_INVALID', '$.listening.transcript', 'NCK1 transcript requires five short and five long source segments covering Questions 1-20 exactly once'))
   }
+  const playbackMarkers = listening.timing.filter((entry) => entry?.kind === 'section1_playback')
+  if (playbackMarkers.length > 1 || playbackMarkers.some((entry) =>
+    !isRecordValue(entry)
+    || !exactKeys(entry, ['kind', 'passes', 'source'])
+    || entry.passes !== 1)) {
+    issues.push(issue('MATERIALIZATION_LISTENING_PLAYBACK_INVALID', '$.listening.timing', 'Only an explicitly source-bound one-pass first-section marker may override the two-pass display default'))
+  } else if (playbackMarkers[0]) {
+    validateLocator(playbackMarkers[0].source, '$.listening.timing.section1_playback.source', documents, issues)
+  }
 }
 
 export function validateNck1SourceMaterialization(value) {

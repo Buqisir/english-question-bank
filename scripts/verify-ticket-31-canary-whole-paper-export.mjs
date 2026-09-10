@@ -5,6 +5,7 @@ import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import {
   cpSync,
+  mkdirSync,
   mkdtempSync,
   readFileSync,
   rmSync,
@@ -18,7 +19,15 @@ import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consume
 import { createExportImplementation } from '../server/exports/exportImplementation.mjs'
 import { createCanonicalConsumerRuntime } from '../server/paper-canonical/consumerRuntime.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
+import { renderPaginatedPaper } from '../server/draft-paper/paginationRenderer.mjs'
+import { closeChromiumPool } from '../server/draft-paper/chromiumPool.mjs'
+import { assertPaperFonts } from './lib/assert-paper-fonts.mjs'
+import { assertSharedPaperLayout, assertWritingBoxesInsidePages } from './lib/assert-shared-paper-layout.mjs'
 import { canonicalConsumptionPrintPayload } from './import-pipeline/canonical-consumption-print-payload.mjs'
+
+const artifacts = process.argv.includes('--actual-artifacts')
+  ? path.resolve('.amp/in/artifacts/font-migration') : null
+if (artifacts) mkdirSync(artifacts, { recursive: true })
 
 const canaryRoot =
   'test-fixtures/paper-canonical/publications/ticket-31-canary-v1/store'
@@ -167,7 +176,7 @@ function assertLegacySourceBindingAdversaries() {
   }
 }
 
-async function assertDirectChromiumPdfs(exports) {
+async function assertPaginatedPdfs(exports) {
   const outputDir = mkdtempSync(path.join(tmpdir(), 'eqb-ticket-31-pdf-'))
   const playwright = await import('../app/node_modules/playwright/index.js')
   const browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
@@ -177,13 +186,25 @@ async function assertDirectChromiumPdfs(exports) {
       const page = await browser.newPage()
       await page.setContent(entry.html, { waitUntil: 'load' })
       await page.evaluate(() => document.fonts.ready)
+      const printFonts = await assertPaperFonts(page, '.paper-print')
+      const requiredLayout = entry.paperId === paperIds[0]
+        ? ['seven', 'cloze', 'grammar', 'bank', 'options', 'cloze-cell', 'part', 'section', 'application', 'continuation'] : []
+      await assertSharedPaperLayout(page, '.paper-print', requiredLayout)
       const pdfPath = path.join(outputDir, `${entry.paperId}-${entry.versionType}.pdf`)
-      const pdfBytes = await page.pdf({
-        path: pdfPath,
-        format: 'A4',
-        printBackground: true,
-        preferCSSPageSize: true,
+      const result = await renderPaginatedPaper(entry.html, {
+        inspect: async pagedPage => {
+          await assertPaperFonts(pagedPage, '.pagedjs_pages')
+          await assertWritingBoxesInsidePages(pagedPage)
+          await assertSharedPaperLayout(pagedPage, '.pagedjs_pages', requiredLayout)
+          if (artifacts && entry.paperId === paperIds[0]) {
+            await pagedPage.setViewportSize({ width: 900, height: 1200 })
+            await pagedPage.screenshot({ path: path.join(artifacts, `${entry.versionType}-paged.png`) })
+          }
+        },
       })
+      const pdfBytes = result.pdfBytes
+      writeFileSync(pdfPath, pdfBytes)
+      if (artifacts && entry.paperId === paperIds[0]) cpSync(pdfPath, path.join(artifacts, `${entry.versionType}.pdf`))
       assert.equal(pdfBytes.subarray(0, 4).toString(), '%PDF')
       const pdfInfo = execFileSync('pdfinfo', [pdfPath], { encoding: 'utf8' })
       assert.match(pdfInfo, /Page size:\s+594\.96 x 841\.92 pts \(A4\)/)
@@ -194,6 +215,7 @@ async function assertDirectChromiumPdfs(exports) {
         `${entry.paperId} ${entry.versionType} PDF preserves answer visibility`,
       )
       observations.push({
+        printFonts,
         paperId: entry.paperId,
         versionType: entry.versionType,
         sha256: sha256(pdfBytes),
@@ -204,6 +226,7 @@ async function assertDirectChromiumPdfs(exports) {
     }
   } finally {
     await browser.close()
+    await closeChromiumPool()
     rmSync(outputDir, { recursive: true, force: true })
   }
   return observations
@@ -223,7 +246,7 @@ async function assertWholePaperScreen(consumptions) {
   const observations = []
   try {
     for (const consumption of consumptions) {
-      const page = await browser.newPage({ viewport: { width: 1280, height: 900 } })
+      const page = await browser.newPage({ viewport: { width: 1280, height: 900 }, deviceScaleFactor: 2 })
       const pageErrors = []
       page.on('pageerror', (error) => pageErrors.push(error.message))
       await page.route('**/api/paper-canonical/consumption?*', (route) =>
@@ -281,11 +304,35 @@ async function assertWholePaperScreen(consumptions) {
         `${consumption.paperId} Screen has no group-level canonical error`,
       )
       assert.deepEqual(pageErrors, [])
+      const screenFonts = await assertPaperFonts(page, '.paper-browse-zoom')
+      await assertSharedPaperLayout(page, '.paper-browse-zoom', consumption.paperId === paperIds[0]
+        ? ['seven', 'cloze', 'grammar', 'bank', 'options', 'cloze-cell', 'part', 'section', 'application', 'continuation'] : [])
+      if (artifacts && consumption.paperId === paperIds[0]) {
+        await page.screenshot({ path: path.join(artifacts, 'screen.png') })
+      }
       observations.push({
+        screenFonts,
         paperId: consumption.paperId,
         groupCount: expectedGroupIds.length,
         screenshotSha256: sha256(await page.screenshot({ fullPage: true })),
       })
+      await page.setViewportSize({ width: 390, height: 844 })
+      await assertPaperFonts(page, '.paper-browse-zoom')
+      assert.equal(await groupCards.count(), expectedGroupIds.length)
+      const rail = await page.locator('.paper-browse-rail').evaluate(el => {
+        const bounds = el.getBoundingClientRect()
+        const header = document.querySelector('.topbar').getBoundingClientRect()
+        return { transform: getComputedStyle(el).transform, belowHeader: bounds.top >= header.bottom,
+          insideViewport: bounds.left >= 0 && bounds.right <= innerWidth }
+      })
+      assert.deepEqual(rail, { transform: 'none', belowHeader: true, insideViewport: true })
+      if (artifacts && consumption.paperId === paperIds[0]) {
+        await page.screenshot({ path: path.join(artifacts, 'screen-narrow.png') })
+      }
+      await page.route('**/fonts/paper/**', route => route.fulfill({ status: 200, body: 'not a font' }))
+      await page.reload()
+      await page.getByRole('alert').filter({ hasText: '试卷字体加载失败' }).waitFor()
+      assert.equal(await page.locator('.ps-surface').count(), 0)
       await page.close()
     }
   } finally {
@@ -308,7 +355,7 @@ const screenConsumptions = withRuntime(canaryRoot, (runtime) =>
 
 assertLegacySourceBindingAdversaries()
 const screenObservations = await assertWholePaperScreen(screenConsumptions)
-const pdfObservations = await assertDirectChromiumPdfs(exports)
+const pdfObservations = await assertPaginatedPdfs(exports)
 
 console.log('PASS Ticket 31 complete-paper canary public Print/PDF export')
 console.log(JSON.stringify({
@@ -320,7 +367,7 @@ console.log(JSON.stringify({
     htmlSha256: sha256(entry.html),
     answerMarkers: (entry.html.match(/【答案】/g) || []).length,
   })),
-  directChromiumPdf: pdfObservations,
+  paginatedPdf: pdfObservations,
   adversarialSourceBinding: [
     'valid legacy publication passes',
     'tampered structured source rejects',

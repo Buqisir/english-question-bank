@@ -4,6 +4,7 @@
  */
 
 import { buildPrintHtml } from '../server/print-renderer.mjs'
+import { paperFontStack } from '../shared/papersurface/paperFonts.mjs'
 import { existsSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 import { mkdtempSync, writeFileSync, readFileSync, rmSync } from 'node:fs'
@@ -115,13 +116,13 @@ console.log('\nTest 3: CSS contract checks')
   assert('break-before: page (hard page break)', html.includes('break-before: page'), '')
   assert('options-grid class', html.includes('options-grid'), '')
   assert('options-list class exists in CSS', html.includes('.options-list'), '')
-  assert('exam density class on body', html.includes('class="exam"'), '')
+  assert('exam density class on body', html.includes('class="exam paper-print"'), '')
   // 刀⑤ render-fidelity Chunk B — standard §1: footer page number.
   assert('@bottom-center footer page number', html.includes('英语试题第 ') && html.includes(' 页（共 ') && html.includes(' 页）') && html.includes('counter(page)') && html.includes('counter(pages)'), '')
   // 刀⑤ render-fidelity Chunk B — standard §3: line-height fixed 18pt (≈1.714 at 10.5pt).
   assert('line-height 1.714 (18pt fixed baseline, token-sourced)', html.includes('line-height: 1.714'), '')
   // 刀⑤ render-fidelity Chunk B — font stacks sourced from shared/papersurface/tokens.mjs.
-  assert('body font-family sourced from tokens (Times New Roman + STSong)', html.includes('"Times New Roman", Times, "SimSun", "Songti SC", "STSong", serif'), '')
+  assert('body uses the pinned Termes + Source Han pair', html.includes(`font-family: ${paperFontStack}`), '')
 }
 
 // --- Test 3b: heading-fidelity (刀⑤ SW-B 销账) — part/section split, h1 20pt ---
@@ -143,13 +144,14 @@ console.log('\nTest 3b: heading-fidelity — part/section-header split, h1 卷�
   // ② part heading (第X部分…): section-header--part class, no 12pt residue.
   assert('② part title carries section-header--part class', /<h2 class="section-header section-header--part"[^>]*>第一部分 阅读理解/.test(html), '')
   const partRule = html.match(/\.section-header--part \{[^}]*\}/)?.[0] || ''
-  assert('② .section-header--part is bold, heading (Hei) font stack, no left indent', /font-weight:\s*bold/.test(partRule) && /SimHei/.test(partRule) && /padding-left:\s*0/.test(partRule), partRule)
+  const sharedLayout = readFileSync('shared/papersurface/paperLayout.css', 'utf8')
+  assert('② part heading uses shared bold rule and pinned font pair', html.includes(sharedLayout) && sharedLayout.includes('font-weight: 700') && html.includes(`--paper-part-font: ${paperFontStack}`) && /padding-left:\s*0/.test(partRule), partRule)
 
   // ③ section heading (第X节…): section-header--section class, Song stack,
   // owner-gold body-left alignment (the historical 21pt indent is retired).
   assert('③ section title carries section-header--section class', /<h2 class="section-header section-header--section"[^>]*>第一节/.test(html), '')
   const sectionRule = html.match(/\.section-header--section \{[^}]*\}/)?.[0] || ''
-  assert('③ .section-header--section is regular weight, Song(SimSun) font stack, and zero-indent', !/font-weight:\s*bold/.test(sectionRule) && /SimSun/.test(sectionRule) && /padding-left:\s*0/.test(sectionRule) && /text-indent:\s*0/.test(sectionRule), sectionRule)
+  assert('③ section heading uses shared weight and pinned font pair', sharedLayout.includes('font-weight: var(--paper-section-weight,') && html.includes(`--paper-section-font: ${paperFontStack}`) && /padding-left:\s*0/.test(sectionRule), sectionRule)
 
   // ④ shared base rule: both states sit at 10.5pt, no 12pt residue anywhere.
   const baseRule = html.match(/\n\.section-header \{[^}]*\}/)?.[0] || ''
@@ -217,12 +219,12 @@ console.log('\nTest 6: Blank-marker styling (paperBlankPattern, real marker shap
   const blankCssRule = html.match(/\.print-blank \{[^}]*\}/)?.[0] || ''
   assert('.print-blank rule resets text-indent to 0 (title-indent inheritance bug)', /text-indent:\s*0/.test(blankCssRule), blankCssRule.slice(0, 120))
   // standard §3b 分页纪律(owner 2026-07-08):小题不拆、标题不落页尾。
-  // Application Writing Golden Geometry scopes atomic box movement to the
-  // canonical Application selector; Continuation keeps its historical flow.
+  // Fixed-size empty writing space must move intact: Paged.js cannot carry
+  // an empty clipped fragment onto the next page. Real page bounds are tested
+  // by the whole-paper canary, including Continuation at the final page edge.
   assert('§3b: .question is break-inside: avoid (单个小题不可拆)', html.match(/\.question \{[^}]*\}/g)?.some((r) => /break-inside:\s*avoid/.test(r)) === true, '')
   assert('§3b: section-header break-after: avoid (标题不落页尾)', /\.section-header,\s*\.group-meta,\s*\.group-header \{\s*break-after:\s*avoid/.test(html), '')
-  assert('Continuation compatibility: shared writing-answer-box is not atomic', html.match(/\.writing-answer-box \{[^}]*\}/g)?.every((r) => !/break-inside:\s*avoid/.test(r) && !/page-break-inside:\s*avoid/.test(r)) === true, '')
-  assert('Application Writing: canonical response box moves atomically', html.match(/\.canonical-application-response \{[^}]*\}/g)?.some((r) => /break-inside:\s*avoid/.test(r) && /page-break-inside:\s*avoid/.test(r)) === true, '')
+  assert('Writing response boxes move atomically', html.match(/\.writing-answer-box \{[^}]*\}/g)?.some((r) => /break-inside:\s*avoid/.test(r) && /page-break-inside:\s*avoid/.test(r)) === true, '')
   assert('Reading framed_columns: whole block is atomic', html.match(/\.canonical-reading-framed-columns \{[^}]*\}/g)?.some((r) => /break-inside:\s*avoid/.test(r) && /page-break-inside:\s*avoid/.test(r)) === true, '')
 
   // draft-numbering-style cr.md MF-1: the hard consistency assertion must be
@@ -332,7 +334,7 @@ console.log('\nTest 7b: Writing answer box — continuation starters printed')
 console.log('\nTest 4: Handout style')
 {
   const html = buildPrintHtml({ title: 'Test', versionType: 'student', printStyle: 'handout', items, blocks, questionNumberStart: 1 })
-  assert('handout class on body', html.includes('class="handout"'), '')
+  assert('handout class on body', html.includes('class="handout paper-print"'), '')
   assert('group-meta visible in handout CSS', html.includes('.group-meta'), '')
 }
 

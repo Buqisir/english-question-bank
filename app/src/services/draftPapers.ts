@@ -234,9 +234,10 @@ export async function downloadDraftPaperPdf(
   draftPaperId: string,
   versionType: 'student' | 'teacher' = 'student',
   target: FileSaveTarget = directDownloadTarget(),
-): Promise<void> {
+  pageLayout: 'natural' | 'friendly8' | 'friendly10' = 'natural',
+): Promise<{ crossingGroupCount: number; splitOptionBankCount: number }> {
   const response = await fetch(apiPath(`/api/draft-papers/${encodeURIComponent(draftPaperId)}/print-pdf`), {
-    body: JSON.stringify({ versionType }),
+    body: JSON.stringify({ versionType, pageLayout }),
     headers: { 'content-type': 'application/json' },
     method: 'POST',
   })
@@ -247,4 +248,8 @@ export async function downloadDraftPaperPdf(
   const defaultFileName = versionType === 'teacher' ? '英语草稿卷-教师卷.pdf' : '英语草稿卷-学生卷.pdf'
   const fileName = decodeHeaderValue(response.headers.get('x-file-name')) || defaultFileName
   await saveBlobToTarget(blob, fileName, target)
+  return {
+    crossingGroupCount: Number(response.headers.get('x-paper-crossing-group-count') || 0),
+    splitOptionBankCount: Number(response.headers.get('x-paper-split-option-bank-count') || 0),
+  }
 }

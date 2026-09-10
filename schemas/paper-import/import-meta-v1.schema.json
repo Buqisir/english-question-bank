@@ -12,6 +12,23 @@
     "sourceFileSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
     "importedBy": { "type": "string" },
     "importedAt": { "type": "string" },
+    "paginationPlanBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "paperId", "sourceAssetVersion", "sourceDigest", "canonicalSourceDigest", "candidateDigest", "planDigest"],
+      "properties": {
+        "schemaVersion": { "const": "paper-pagination-binding-v1" },
+        "paperId": { "type": "string", "pattern": "^paper-[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "sourceAssetVersion": { "type": "integer", "minimum": 1 },
+        "sourceDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+        "canonicalSourceDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+        "candidateDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+        "planDigest": {
+          "type": ["string", "null"],
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        }
+      }
+    },
     "paper": {
       "type": "object",
       "additionalProperties": false,

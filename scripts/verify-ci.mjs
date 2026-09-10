@@ -40,6 +40,8 @@ const registry = {
   'scripts/verify-paper-canonical-import-admission.mjs',
   'scripts/verify-paper-canonical-registered-confirmation-admission.mjs',
   'scripts/verify-paper-canonical-import-recovery.mjs',
+  'scripts/verify-import-pagination-qa.mjs',
+  'scripts/verify-import-pagination-ui.mjs',
   'scripts/verify-universal-nck1-publish.mjs',
   'scripts/verify-listening-audio-intake.mjs',
   'scripts/verify-listening-audio-serving.mjs',
@@ -224,6 +226,7 @@ const paperDataScripts = [
   'scripts/verify-paper-canonical-import-admission.mjs',
   'scripts/verify-paper-canonical-registered-confirmation-admission.mjs',
   'scripts/verify-paper-canonical-import-recovery.mjs',
+  'scripts/verify-import-pagination-qa.mjs',
   'scripts/verify-paper-canonical-import-pilot-fixes.mjs',
 ]
 const securityScripts = [
@@ -261,6 +264,8 @@ const featureScripts = uniqueRegistered(registry.scripts.filter(
   (script) => !paperScripts.includes(script) && !securityScripts.includes(script),
 ))
 const importPaperScripts = uniqueRegistered([
+  'scripts/verify-import-pagination-qa.mjs',
+  'scripts/verify-import-pagination-ui.mjs',
   'scripts/verify-nck1-docx-materialization-producer.mjs',
   'scripts/verify-nck1-pdf-materialization-producer.mjs',
   'scripts/verify-nck1-answer-source-shapes.mjs',

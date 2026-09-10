@@ -12,7 +12,10 @@ import {
   publishUniversalNck1Import,
   recoverInterruptedPaperImportPublish,
 } from '../paper-import/publisher.mjs'
-import { assertPaperImportAnalysisSidecars } from '../paper-import/storage.mjs'
+import {
+  assertPaperImportAnalysisSidecars,
+  assertPaperImportPaginationPlan,
+} from '../paper-import/storage.mjs'
 import {
   buildNck1CompatibilityPackage,
   buildNck1ReviewProjection,
@@ -115,6 +118,14 @@ function inspectCommittedPromotion({ db, paperAssetsDir, promotion, packageData 
     packageData,
     version: promotion.assetVersion,
   })
+  const versionPlanDigest = assertPaperImportPaginationPlan({ baseDir: versionDir, packageData })
+  const latestPlanDigest = assertPaperImportPaginationPlan({ baseDir: latestDir, packageData })
+  if (versionPlanDigest !== latestPlanDigest) {
+    throw promotionError(
+      'IMPORT_REVIEW_PROMOTION_PAGINATION_IDENTITY_CONFLICT',
+      'Version and latest pagination plans disagree',
+    )
+  }
   if (versionAnalysisDigest !== latestAnalysisDigest) {
     throw promotionError(
       'IMPORT_REVIEW_PROMOTION_ANALYSIS_IDENTITY_CONFLICT',
@@ -190,6 +201,8 @@ export function createSinglePaperPromotionService({
         materialization: projection.materialization,
         sourceAssetVersion: projection.candidate.interpretation.sourceAssetVersion,
         analysisSidecars: projection.analysisSidecars,
+        paginationPlan: projection.paginationPlan,
+        paginationBindingIdentity: projection,
       })
       const db = openDatabase({ readOnly: false })
       try {
@@ -214,6 +227,7 @@ export function createSinglePaperPromotionService({
                   packageData,
                   version: promotion.assetVersion,
                 })
+                assertPaperImportPaginationPlan({ baseDir, packageData })
               }
             },
           })

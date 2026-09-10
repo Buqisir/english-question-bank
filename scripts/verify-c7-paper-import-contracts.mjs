@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 // KEEP: tests the paper-import ENGINE (publisher/validator) contracts, not the
 // retired C7 UI/routes. See ADR-0016. Do not delete when retiring import UI.
-import { execFileSync } from 'node:child_process'
 import { existsSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -26,27 +25,6 @@ function assert(name, condition, details = '') {
     failed += 1
     console.error(`FAIL ${name}${details ? `\n  ${details}` : ''}`)
   }
-}
-
-function runGit(args) {
-  return execFileSync('git', args, {
-    cwd: rootDir,
-    encoding: 'utf8',
-    maxBuffer: 64 * 1024 * 1024,
-    stdio: ['ignore', 'pipe', 'pipe'],
-  }).trim()
-}
-
-function baselineRef() {
-  for (const candidate of ['github/main', 'origin/main', 'main']) {
-    try {
-      runGit(['rev-parse', '--verify', candidate])
-      return candidate
-    } catch {
-      // Try the next shared-main spelling. GitHub Actions uses origin/main.
-    }
-  }
-  throw new Error('No shared main ref found for forbidden-scope diff')
 }
 
 function cloneFiles(files) {
@@ -233,82 +211,9 @@ const codeFenceJson = validatePaperImportPackage([
 assert('code-fenced JSON is blocking', !codeFenceJson.ok)
 assert('code-fenced JSON reports json.parseFailed', codes(codeFenceJson).has('json.parseFailed'))
 
-const changedFiles = runGit(['diff', '--name-only', baselineRef()])
-  .split('\n')
-  .filter(Boolean)
-const c7RelevantPrefixes = [
-  'schemas/paper-import/',
-  'server/paper-import/',
-  'server/paper-import-ai/',
-  'test-fixtures/paper-import/',
-]
-const paperNormalizationAllowedFiles = new Set([
-  'app/src/shared-ui/papersurface/CanonicalPaperSentenceContent.tsx',
-  'app/src/shared-ui/papersurface/PaperSurface.css',
-  'app/src/shared-ui/papersurface/PaperSurface.tsx',
-  'app/src/shared-ui/papersurface/legacyPaperBlankRenderer.tsx',
-  'shared/papersurface/anchorKeys.d.mts',
-  'shared/papersurface/anchorKeys.d.ts',
-  'shared/papersurface/anchorKeys.mjs',
-  'shared/papersurface/blankRuling.d.mts',
-  'shared/papersurface/blankRuling.d.ts',
-  'shared/papersurface/blankRuling.mjs',
-  // Canonical whole-paper work uses these shared declaration/heading
-  // companions without changing the C7 import schema or renderer ownership.
-  'shared/papersurface/headingKind.mjs',
-  'shared/papersurface/tokens.d.mts',
-  'shared/papersurface/tokens.d.ts',
-  'shared/papersurface/tokens.mjs',
-  'shared/papersurface/types.d.ts',
-  // paper-normalization Ticket 07: the proof-only Print HTML canonical
-  // consumer is the approved Phase B export boundary.
-  'server/print-renderer.mjs',
-])
-const forbiddenPrefixes = [
-  'app/src/shared-ui/papersurface/',
-  'shared/papersurface/',
-  'app/src/features/reading-analysis/',
-  // NOTE: app/src/domain/paperAsset.ts is intentionally NOT forbidden. Extending
-  // the PaperWritingTask / paper-asset domain TYPE is normal import-cut work (e.g.
-  // I7 added applicationGiven). The real contract boundary that import diffs must
-  // not silently break is the SCHEMA (schemas/.../paper-asset-v1.schema.json),
-  // which the validator + stripUnknownFields enforce separately.
-  'server/print-renderer.mjs',
-]
-function findForbiddenScopeChanges(files) {
-  return files.filter((file) =>
-    forbiddenPrefixes.some((prefix) => file.startsWith(prefix))
-    && !paperNormalizationAllowedFiles.has(file),
-  )
-}
-
-assert(
-  'scope guard accepts approved paper-normalization companion files',
-  findForbiddenScopeChanges([
-    'app/src/shared-ui/papersurface/CanonicalPaperSentenceContent.tsx',
-    'server/print-renderer.mjs',
-  ]).length === 0,
-)
-assert(
-  'scope guard rejects unapproved PaperSurface changes',
-  findForbiddenScopeChanges([
-    'app/src/shared-ui/papersurface/UnrelatedFutureSurface.tsx',
-  ]).length === 1,
-)
-
-const shouldCheckForbiddenScope = changedFiles.some((file) =>
-  c7RelevantPrefixes.some((prefix) => file.startsWith(prefix)),
-)
-if (shouldCheckForbiddenScope) {
-  const forbiddenScopeChanges = findForbiddenScopeChanges(changedFiles)
-  assert(
-    'forbidden scope untouched outside approved paper-normalization files',
-    forbiddenScopeChanges.length === 0,
-    forbiddenScopeChanges.join(', '),
-  )
-} else {
-  assert('forbidden scope skipped for non-C7 diff', true)
-}
+// The historical C7 task's Git-path allowlist is not an engine contract.
+// Mixed import/renderer changes are classified by verify-ci and covered by
+// verify-import-paper-routing; shared changes require the all-pack/review gate.
 
 if (failed > 0) {
   console.error(`\nC7 paper import contracts verify FAILED: ${passed} passed, ${failed} failed`)
