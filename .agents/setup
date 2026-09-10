@@ -40,6 +40,9 @@ else
   echo "[orb-setup] system tools already installed"
 fi
 
+step "checking the temporary Waymote first-frame compatibility patch" \
+  bash .agents/scripts/install-waymote-first-frame.sh
+
 if ! command -v magick >/dev/null 2>&1; then
   echo "[orb-setup] installing ImageMagick 6 compatibility command"
   sudo tee /usr/local/bin/magick >/dev/null <<'EOF'

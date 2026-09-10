@@ -1,0 +1,121 @@
+--- a/gateway/sdk/waymote.js
++++ b/gateway/sdk/waymote.js
+@@ -1444,6 +1444,14 @@
+     }
+   }
+ 
++  if (!discontinuity && renderedFrames === 0 && decoder.decodeQueueSize > 6) {
++    // A new viewer receives the cached GOP as a burst. Keep the already
++    // queued keyframe alive long enough to paint the first frame, but stop
++    // accepting dependent frames until the next keyframe catches us up.
++    waitingForKeyframe = true;
++    droppedFrames += 1;
++    return;
++  }
+   if (discontinuity || decoder.decodeQueueSize > 6) {
+     droppedFrames += decoder.decodeQueueSize;
+     decoder.reset();
+@@ -1594,10 +1602,12 @@
+     const discontinuity = (view.getUint8(2) & 2) !== 0;
+     if (keyframe || discontinuity) {
+       pendingDecoderMessages.length = 0;
++      pendingDecoderMessages.overflowed = false;
+     }
+     if (!keyframe && !discontinuity && pendingDecoderMessages.length === 0) return;
++    if (pendingDecoderMessages.overflowed) return;
+     if (pendingDecoderMessages.length >= 6) {
+-      pendingDecoderMessages.length = 0;
++      pendingDecoderMessages.overflowed = true;
+       return;
+     }
+     pendingDecoderMessages.push(data);
+@@ -1622,6 +1632,7 @@
+           for (const data of messages) {
+             decodeMessage(data);
+           }
++          if (messages.overflowed) waitingForKeyframe = true;
+           if (pendingDecoderMessages === messages) clearPendingDecoderMessages();
+         }).catch((error) => {
+           if (videoSocket !== socket || sessionDisposed || !sessionConnected ||
+--- a/gateway/sdk/waymote.test.mjs
++++ b/gateway/sdk/waymote.test.mjs
+@@ -561,7 +561,7 @@
+   await session.dispose();
+ });
+ 
+-async function pendingVideoSetup(t) {
++async function pendingVideoSetup(t, { decoderQueueGrows = false } = {}) {
+   const fakeWindow = new FakeTarget();
+   fakeWindow.devicePixelRatio = 1;
+   fakeWindow.VideoDecoder = true;
+@@ -583,6 +583,7 @@
+ 
+   const setups = [];
+   const decodedTimestamps = [];
++  let decoderResets = 0;
+   globalThis.VideoDecoder = class {
+     static isConfigSupported() {
+       return new Promise((resolve, reject) => setups.push({ resolve, reject }));
+@@ -590,9 +591,16 @@
+     state = "unconfigured";
+     decodeQueueSize = 0;
+     configure() { this.state = "configured"; }
+-    reset() { this.state = "unconfigured"; }
++    reset() {
++      decoderResets += 1;
++      this.decodeQueueSize = 0;
++      this.state = "unconfigured";
++    }
+     close() { this.state = "closed"; }
+-    decode(chunk) { decodedTimestamps.push(chunk.timestamp); }
++    decode(chunk) {
++      decodedTimestamps.push(chunk.timestamp);
++      if (decoderQueueGrows) this.decodeQueueSize += 1;
++    }
+   };
+   globalThis.EncodedVideoChunk = class {
+     constructor(init) { Object.assign(this, init); }
+@@ -635,7 +643,15 @@
+     data: JSON.stringify({ type: "video-config", codec: "avc1.42E01E" }),
+   });
+   configure();
+-  return { session, sockets, setups, decodedTimestamps, message, configure };
++  return {
++    session,
++    sockets,
++    setups,
++    decodedTimestamps,
++    decoderResets: () => decoderResets,
++    message,
++    configure,
++  };
+ }
+ 
+ const settleVideoSetup = () => new Promise((resolve) => setImmediate(resolve));
+@@ -657,9 +673,25 @@
+   assert.deepEqual(decodedTimestamps, [10, 11]);
+ });
+ 
++test("cached GOP burst keeps its first keyframe queued before first-frame output", async (t) => {
++  const { sockets, setups, decodedTimestamps, decoderResets, message } =
++    await pendingVideoSetup(t, { decoderQueueGrows: true });
++  const socket = sockets.get("/stream");
++  setups[0].resolve({ supported: true });
++  await settleVideoSetup();
++
++  socket.dispatch("message", { data: message(0, 1) });
++  for (let timestamp = 1; timestamp <= 20; timestamp += 1) {
++    socket.dispatch("message", { data: message(timestamp) });
++  }
++
++  assert.deepEqual(decodedTimestamps, [0, 1, 2, 3, 4, 5, 6]);
++  assert.equal(decoderResets(), 0);
++});
++
+ for (const [name, flags, expected] of [
+   ["exactly six contiguous frames", [1, 0, 0, 0, 0, 0], [0, 1, 2, 3, 4, 5]],
+-  ["overflow before another boundary", [1, 0, 0, 0, 0, 0, 0, 0], []],
++  ["overflow before another boundary", [1, 0, 0, 0, 0, 0, 0, 0], [0, 1, 2, 3, 4, 5]],
+   ["leading deltas", [0, 0], []],
+   ["a replacement keyframe", [1, 0, 1, 0], [2, 3]],
+   ["a discontinuity keyframe", [1, 0, 3, 0], [2, 3]],
