@@ -161,7 +161,11 @@ export default function shipCheckWatcher(amp, overrides = {}) {
           record.timer = interval(() => { void tick(record) }, 45_000)
           void tick(record)
           return `Watching ${REPO} PR ${input.pullRequest} at ${input.head}; deadline ${new Date(record.deadline).toISOString()}. No authorization added.`
-        } catch { stop(record, 'startup-failed'); return 'Watcher unavailable; CI unchanged. Recheck GitHub directly.' }
+        } catch {
+          if (record.state !== 'watching') return 'Wait already stopped'
+          stop(record, 'startup-failed')
+          return 'Watcher unavailable; CI unchanged. Recheck GitHub directly.'
+        }
       })()
       return record.registration
     },
