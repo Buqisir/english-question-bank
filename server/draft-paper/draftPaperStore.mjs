@@ -22,7 +22,16 @@ import {
   loadGroupOfficialModelAnswers,
 } from './analysisText.mjs'
 import { renderPaginatedPaper } from './paginationRenderer.mjs'
-import { fixedPageLayoutPolicy, planFixedPagePdf } from './fixedPagePdfPlanner.mjs'
+import {
+  fixedPageLayoutPolicy,
+  planFixedPagePdf,
+  renderExplicitFixedPagePdf,
+} from './fixedPagePdfPlanner.mjs'
+import {
+  loadBoundPaperPaginationPlan,
+  paginationPlanEdition,
+  paginationSlotBindings,
+} from '../paper-import/paginationPlan.mjs'
 import { ownsCompletePaperOpening } from '../../shared/paper-canonical/listeningPresentation.mjs'
 import { applyPaginationDomContract } from './paginationDomContract.mjs'
 import { proposeReorder } from './reorderSuggestion.mjs'
@@ -1505,7 +1514,25 @@ export function createDraftPaperStore({
           throw new Error('8／10 页版需要按原顺序排列的同源完整试卷；部分题组或混编练习请使用普通 PDF 导出')
         }
         const html = buildDraftPaginationPrintHtml(draftPaper, { versionType: 'student', includeListening, canonicalConsumption })
-        pagination = { ...(await planFixedPagePdf(html, { targetPages, omitCover, render: renderPaginatedPaper })), draftPaper, reused: false }
+        const slotBindings = paginationSlotBindings(canonicalConsumption)
+        const versionDir = path.join(
+          paperAssetsDir,
+          canonicalConsumption.paperId,
+          'versions',
+          `v${canonicalConsumption.sourceAssetVersion}`,
+        )
+        const loadedPlan = loadBoundPaperPaginationPlan(versionDir, {
+          paperId: canonicalConsumption.paperId,
+          sourceAssetVersion: canonicalConsumption.sourceAssetVersion,
+          sourceDigest: canonicalConsumption.sourceAssetDigest,
+          slotBindings,
+          sourceHasListening,
+        })
+        const explicit = paginationPlanEdition(loadedPlan?.plan, pageLayout, slotBindings)
+        const fixed = explicit
+          ? await renderExplicitFixedPagePdf(html, { ...explicit, render: renderPaginatedPaper })
+          : await planFixedPagePdf(html, { targetPages, omitCover, render: renderPaginatedPaper })
+        pagination = { ...fixed, draftPaper, reused: false }
       } finally {
         userDb.close()
         bankDb.close()

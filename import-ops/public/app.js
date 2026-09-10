@@ -11,6 +11,9 @@ const state = {
   detail: null,
   surface: 'screen',
   issueSurface: 'screen',
+  pagination: null,
+  paginationError: null,
+  pdfEdition: 'natural',
   target: null,
   pendingScreenTargetId: null,
   ocrDocumentId: null,
@@ -130,6 +133,8 @@ async function loadDetail(paperId, shouldRender = true) {
   state.target = null
   state.issueSurface = state.surface
   state.error = null
+  state.pagination = null
+  state.paginationError = null
   try {
     state.detail = await request(`${actorApi()}/papers/${encodeURIComponent(paperId)}`)
     if (
@@ -140,6 +145,18 @@ async function loadDetail(paperId, shouldRender = true) {
       state.ocrDocumentId = null
       state.ocrPage = 1
       state.ocrDraft = null
+      if (state.detail.latestRevisionId && state.detail.latest?.state !== 'uploading') {
+        try {
+          state.pagination = await request(`/api/import-review-preview/revisions/${encodeURIComponent(state.detail.latestRevisionId)}/pagination`)
+          if (state.detail.latestRevisionId !== previousRevisionId
+            || (state.pdfEdition !== 'natural' && !state.pagination.editions.some(({ edition }) => edition === state.pdfEdition))) {
+            state.pdfEdition = state.pagination.editions.at(-1)?.edition || 'natural'
+          }
+        } catch (error) {
+          state.paginationError = error.message
+          state.pdfEdition = 'natural'
+        }
+      }
     }
   } catch (error) {
     state.error = error.message
@@ -441,6 +458,11 @@ function leftRailHtml() {
   `
 }
 
+function pdfEditionLabel(edition = state.pdfEdition) {
+  return edition === 'friendly10' ? '10 页含听力学生卷'
+    : edition === 'friendly8' ? '8 页无听力学生卷' : '教师 PDF（自然分页）'
+}
+
 function surfaceUrl() {
   const revisionId = state.detail?.latestRevisionId
   if (!revisionId) return null
@@ -455,7 +477,9 @@ function surfaceUrl() {
     return `/api/import-review-preview/revisions/${encodeURIComponent(revisionId)}/print?version=teacher`
   }
   if (state.surface === 'pdf') {
-    return `/api/import-review-preview/revisions/${encodeURIComponent(revisionId)}/pdf?version=teacher`
+    const query = state.pdfEdition === 'natural' ? 'version=teacher'
+      : `version=student&pageLayout=${encodeURIComponent(state.pdfEdition)}`
+    return `/api/import-review-preview/revisions/${encodeURIComponent(revisionId)}/pdf?${query}`
   }
   return null
 }
@@ -470,9 +494,19 @@ function surfaceStageHtml() {
             <button type="button" class="tab-button" data-surface="${key}" role="tab" aria-selected="${state.surface === key}">${label}</button>
           `).join('')}
         </div>
-        <span class="paper-meta">${state.surface === 'screen' ? '点击卷面内容可带回语义定位' : '由共享 Canonical Print seam 生成'}</span>
+        ${state.surface === 'pdf' ? `
+          <div class="pagination-controls">
+            <label for="pdf-edition">交付版式</label>
+            <select id="pdf-edition">
+              ${(state.pagination?.editions || []).map(({ edition }) => `<option value="${escapeHtml(edition)}" ${state.pdfEdition === edition ? 'selected' : ''}>${escapeHtml(pdfEditionLabel(edition))}</option>`).join('')}
+              <option value="natural" ${state.pdfEdition === 'natural' ? 'selected' : ''}>${pdfEditionLabel('natural')}</option>
+            </select>
+            <span class="paper-meta">${state.pdfEdition === 'natural' ? '非定页交付版' : state.pagination?.editions.find(({ edition }) => edition === state.pdfEdition)?.mode === 'explicit' ? '本卷分页方案' : '自动分页'}</span>
+          </div>
+        ` : `<span class="paper-meta">${state.surface === 'screen' ? '点击卷面内容可带回语义定位' : '由共享 Canonical Print seam 生成'}</span>`}
       </div>
       <div class="frame-shell">
+        ${state.surface === 'pdf' && state.paginationError ? `<p class="pagination-error" role="alert">定页版式未加载：${escapeHtml(state.paginationError)}。请刷新重试，当前教师 PDF 不能代替定页 QA。</p>` : ''}
         ${url ? `
           <div class="frame-loading" id="frame-loading">正在打开 ${escapeHtml(surfaceLabels[state.surface])}…</div>
           <iframe
@@ -707,7 +741,7 @@ function issueFormHtml() {
           <label class="field"><span>页码</span><input name="pageNumber" inputmode="numeric" value="${escapeHtml(sourcePage || '')}" placeholder="Print / PDF 可填" /></label>
         </div>
         <label class="field"><span>要 Agent 改什么</span><textarea name="message" required placeholder="说清发生了什么，以及正确结果应该是什么。"></textarea></label>
-        <p class="field-help">问题会绑定 R${escapeHtml(state.detail.latest.revisionNumber)} · ${escapeHtml(surfaceLabels[state.issueSurface])}，不会漂到别的 revision。</p>
+        <p class="field-help">问题会绑定 R${escapeHtml(state.detail.latest.revisionNumber)} · ${escapeHtml(state.issueSurface === 'pdf' ? pdfEditionLabel() : surfaceLabels[state.issueSurface])}，不会漂到别的 revision。</p>
         <button class="button button--primary" type="submit">记录这个问题</button>
       </form>
     </section>
@@ -770,7 +804,7 @@ function issueHtml(issue) {
     <div class="issue-head">
       <div class="issue-meta">
         ${status(issue.state)}
-        <span class="paper-meta">${escapeHtml(surfaceLabels[issue.surface] || issue.surface)}</span>
+        <span class="paper-meta">${escapeHtml(issue.edition ? pdfEditionLabel(issue.edition) : surfaceLabels[issue.surface] || issue.surface)}</span>
         <span class="timestamp">${escapeHtml(formatTime(issue.createdAt))}</span>
       </div>
       <span class="digest">${escapeHtml(location || issue.id)}</span>
@@ -1240,6 +1274,12 @@ function bind() {
     })
   })
   document.querySelector('#refresh')?.addEventListener('click', () => void loadPapers())
+  document.querySelector('#pdf-edition')?.addEventListener('change', (event) => {
+    state.pdfEdition = event.target.value
+    state.issueSurface = 'pdf'
+    state.target = null
+    render()
+  })
   document.querySelector('#logout')?.addEventListener('click', async () => {
     await request('/api/auth/logout', { method: 'POST' })
     window.location.href = '/'
@@ -1262,6 +1302,7 @@ function bind() {
           body: JSON.stringify({
             revisionId: state.detail.latestRevisionId,
             surface: state.issueSurface,
+            edition: state.issueSurface === 'pdf' && state.pdfEdition !== 'natural' ? state.pdfEdition : null,
             groupId: String(data.get('groupId') || '').trim() || null,
             questionId: String(data.get('questionId') || '').trim() || null,
             blockId: String(data.get('blockId') || '').trim() || null,

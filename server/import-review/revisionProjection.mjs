@@ -29,6 +29,11 @@ import {
   validateNck1OcrSourceEvidence,
 } from '../paper-import/nck1OcrSourceEvidence.mjs'
 import { assertListeningAudioManifest, assertListeningAudioSource } from '../paper-import/listeningAudioEvidence.mjs'
+import {
+  PAPER_PAGINATION_PLAN_FILE_NAME,
+  loadPaperPaginationPlan,
+  paginationSlotBindings,
+} from '../paper-import/paginationPlan.mjs'
 
 function fail(message, code = 'IMPORT_REVIEW_CANDIDATE_INVALID') {
   const error = new Error(message)
@@ -352,6 +357,11 @@ export function reviewBundleFilePaths(rootDir) {
       mediaType: 'application/json',
       role,
     })),
+    ...(existsSync(resolveReviewFile(rootDir, PAPER_PAGINATION_PLAN_FILE_NAME)) ? [{
+      path: PAPER_PAGINATION_PLAN_FILE_NAME,
+      mediaType: 'application/json',
+      role: 'pagination_plan',
+    }] : []),
   ]
 }
 
@@ -987,6 +997,8 @@ export function buildNck1CompatibilityPackage({
   materialization,
   sourceAssetVersion = 1,
   analysisSidecars = {},
+  paginationPlan = null,
+  paginationBindingIdentity = null,
 }) {
   const sourceDocument = materialization.documents.find((document) =>
     ['question_source', 'question_and_answers'].includes(document.role))
@@ -1040,6 +1052,15 @@ export function buildNck1CompatibilityPackage({
       },
     },
     sourceAssetDigest: sourceFileSha256,
+    paginationPlan: paginationPlan ? structuredClone(paginationPlan) : null,
+    paginationPlanBinding: paginationBindingIdentity ? {
+      schemaVersion: 'paper-pagination-binding-v1',
+      paperId: materialization.paperId,
+      sourceDigest: paginationBindingIdentity.sourceDigest,
+      canonicalSourceDigest: null,
+      candidateDigest: paginationBindingIdentity.candidateDigest,
+      planDigest: paginationPlan ? digestJson(paginationPlan) : null,
+    } : null,
   }
 }
 
@@ -1079,6 +1100,14 @@ export function buildNck1ReviewProjection(rootDir, { requireAnalyses = false } =
     loaded.manifest,
     loaded.materialization,
   )
+  const slotBindings = paginationSlotBindings(consumption)
+  const paginationPlan = loadPaperPaginationPlan(rootDir, {
+    paperId: loaded.materialization.paperId,
+    sourceDigest: preview.candidate.source.sha256,
+    candidateDigest: preview.candidate.candidateDigest,
+    slotBindings,
+    sourceHasListening: slotBindings.some((entry) => entry.familyContractId === 'listening'),
+  })
   return {
     ...loaded,
     paperId: loaded.materialization.paperId,
@@ -1098,6 +1127,9 @@ export function buildNck1ReviewProjection(rootDir, { requireAnalyses = false } =
     ),
     analysisSidecars: analysisProjection?.sidecars || {},
     analysisDigest: analysisProjection?.digest || null,
+    paginationPlan: paginationPlan?.plan || null,
+    paginationPlanDigest: paginationPlan?.digest || null,
+    paginationSlotBindings: slotBindings,
   }
 }
 

@@ -176,13 +176,15 @@ try {
   )
   let detail = store.createIssue(first.input.paperId, {
     revisionId: finalizedFirst.id,
-    surface: 'source',
+    surface: 'pdf',
+    edition: 'friendly8',
     groupId: 'group:reading-a',
     pageNumber: 1,
     rect: { x: 0.1, y: 0.2, width: 0.3, height: 0.4 },
     message: '第 1 段漏了一句',
   }, 'owner')
   const issueId = detail.issues[0].id
+  assert.equal(detail.issues[0].edition, 'friendly8')
   assert.deepEqual(detail.issues[0].rect, {
     x: 0.1,
     y: 0.2,

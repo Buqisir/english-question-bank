@@ -143,6 +143,35 @@ node scripts/import-pipeline/review.mjs reply <paperId> <issueId> --message '<�
 node scripts/import-pipeline/review.mjs push <paperId> --resolves <issueId>[,<issueId>]
 ```
 
+定页 PDF 问题只调整同一 Candidate 的分页方案，不重新生成正文或九份分析。先让既有
+24 次上限的规划器渲染真实学生卷，并生成 PDF、逐页 PNG 与 `report.json`：
+
+```bash
+node scripts/import-pipeline/review.mjs pagination-qa <paperId> --edition friendly8 --auto
+node scripts/import-pipeline/review.mjs pagination-qa <paperId> --edition friendly10 --auto
+```
+
+报告列出可复制的 canonical `slotId`、题组页码、跨正反面／题组选项库拆分警告和建议
+break。需要修复时只用参数试一个明确方案；命令会以同一原子校验器实际渲染一次，且
+必须精确达到目标页数。确认后才加 `--save-plan` 原子写入可选
+`pagination-plan.json`，不允许 CSS、路径或任意几何：
+
+```bash
+node scripts/import-pipeline/review.mjs pagination-qa <paperId> --edition friendly10 \
+  --break-slots reading.b,reading.d,language.cloze --cover-gaps 54,54 --save-plan
+node scripts/import-pipeline/review.mjs push <paperId> --resolves <pdfIssueId>
+```
+
+`friendly8` 的 listening source 自动省略通用卷首（`--cover-gaps none`）；无听力 8 页
+保留 compact cover；10 页只接受规划器既有的 72/72、54/72、54/54 三档。Plan 绑定
+source/Candidate 与 bundle bytes；若 10 页自动规划必须放开整组选项库保护，命令会把
+`allowSplitOptionBank: true` 一并保存，显式方案重放同一 PDF-only 策略（8 页禁止该值，
+旧 plan 缺省为 `false`）。自动规划失败仍以非零状态退出，但会留下独立命名的
+`*-diagnostic-natural.pdf`、实际 `diagnostic-page-*.png` 清单与
+`failure-report.json`，供 Agent 按 slot/page 修复；失败绝不保存 plan。`--auto` 不得与
+`--break-slots` 或 `--cover-gaps` 混用。finalized revision 不可原地修改，必须提交新 revision
+并用 `--resolves` 指向原 PDF issue。
+
 Owner 网页认可只写绑定当前 revision 与全部 digest 的 approval，Agent 随即停下。
 `accept`/`publish` 仍保留给离线 verifier 与存量本地恢复，但不再是 Review-backed
 生产上线步骤，也不能从 Orb 整库上传。只有 Owner 后来在当前对话明确说

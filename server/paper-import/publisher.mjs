@@ -4,6 +4,7 @@ import path from 'node:path'
 import { LISTENING_AUDIO_PATHS } from './listeningAudioEvidence.mjs'
 import {
   assertPaperImportAnalysisSidecars,
+  assertPaperImportPaginationPlan,
   beginPaperImportPublish,
   computeNextPaperAssetVersion,
   cleanupPaperImportTempArtifacts,
@@ -44,6 +45,10 @@ import {
   buildNck1CompatibilityPackage,
   buildNck1ReviewProjection,
 } from '../import-review/revisionProjection.mjs'
+import {
+  loadBoundPaperPaginationPlan,
+  paginationSlotBindings,
+} from './paginationPlan.mjs'
 import {
   canonicalizeVisibleEnglishTypography,
 } from '../../shared/paper-canonical/visibleTypography.mjs'
@@ -177,6 +182,20 @@ function getCurrentCanonicalPublication(db, paperId) {
     sourceAssetVersion: Number(row.source_asset_version),
     publicationDigest: row.publication_digest,
   }
+}
+
+function assertRollbackPaginationVersion({ target, consumers, baseDir }) {
+  const consumption = Object.values(consumers)[0]
+  const slotBindings = paginationSlotBindings(consumption)
+  const loaded = loadBoundPaperPaginationPlan(baseDir, {
+    paperId: target.paperId,
+    sourceAssetVersion: target.sourceAssetVersion,
+    sourceDigest: consumption.sourceAssetDigest,
+    slotBindings,
+    sourceHasListening: slotBindings.filter((entry) =>
+      entry.familyContractId === 'listening').length === 2,
+  })
+  return loaded ? `bound:${loaded.digest ?? 'null'}` : 'legacy'
 }
 
 export function recoverInterruptedPaperImportPublish({
@@ -1169,6 +1188,8 @@ export function publishUniversalNck1Import({
     materialization: projection.materialization,
     sourceAssetVersion: projection.candidate.interpretation.sourceAssetVersion,
     analysisSidecars: projection.analysisSidecars,
+    paginationPlan: projection.paginationPlan,
+    paginationBindingIdentity: projection,
   })
   return publishPreparedPaperImport({
     db,
@@ -1279,6 +1300,10 @@ function publishPreparedPaperImport({
   })
   const preflightAdmission = admitPackage(preflightVersion)
   if (preflightAdmission.failure) return preflightAdmission.failure
+  if (packageData.paginationPlanBinding) {
+    packageData.paginationPlanBinding.canonicalSourceDigest =
+      preflightAdmission.admission.sealed.manifest.sourceAssetDigest
+  }
   const recovery = recoverInterruptedPaperImportPublish({
     db,
     paperAssetsDir,
@@ -1295,10 +1320,18 @@ function publishPreparedPaperImport({
             packageData,
             version: targetVersion,
           })
+          assertPaperImportPaginationPlan({
+            baseDir: path.join(paperAssetsDir, paperId, 'versions', `v${targetVersion}`),
+            packageData,
+          })
           assertPaperImportAnalysisSidecars({
             baseDir: path.join(paperAssetsDir, paperId, 'latest'),
             packageData,
             version: targetVersion,
+          })
+          assertPaperImportPaginationPlan({
+            baseDir: path.join(paperAssetsDir, paperId, 'latest'),
+            packageData,
           })
         }
       : null,
@@ -1412,6 +1445,7 @@ function publishPreparedPaperImport({
         packageData,
         version,
       })
+      assertPaperImportPaginationPlan({ baseDir: writtenVersion.versionDir, packageData })
     }
 
     const canonicalRef = {
@@ -1464,6 +1498,7 @@ function publishPreparedPaperImport({
         packageData,
         version,
       })
+      assertPaperImportPaginationPlan({ baseDir: latestSwap.latestDir, packageData })
     }
     if (failurePoint === 'process-exit-after-latest-swap') {
       process.exit(86)
@@ -1581,6 +1616,12 @@ export function rollbackPaperImportPublication({
     db,
   })
   const targetConsumers = loadCanonicalOnlyConsumers({ ref: target, store })
+  const targetVersionDir = path.join(paperAssetsDir, paperId, 'versions', versionName)
+  const targetPlanDigest = assertRollbackPaginationVersion({
+    target,
+    consumers: targetConsumers,
+    baseDir: targetVersionDir,
+  })
   const current = getCurrentCanonicalPublication(db, paperId)
   if (
     current
@@ -1625,6 +1666,16 @@ export function rollbackPaperImportPublication({
       error.code = 'PUBLICATION_REF_DISAGREEMENT'
       throw error
     }
+    const latestPlanDigest = assertRollbackPaginationVersion({
+      target,
+      consumers: targetConsumers,
+      baseDir: latestDir,
+    })
+    if (latestPlanDigest !== targetPlanDigest) {
+      const error = new Error('Canonical version and latest pagination commitments disagree')
+      error.code = 'PUBLICATION_REF_DISAGREEMENT'
+      throw error
+    }
     return {
       status: 'idempotent',
       paperId,
@@ -1648,6 +1699,16 @@ export function rollbackPaperImportPublication({
       forceFailureAt: failurePoint,
       operation: 'rollback',
     })
+    const latestPlanDigest = assertRollbackPaginationVersion({
+      target,
+      consumers: targetConsumers,
+      baseDir: latestSwap.latestDir,
+    })
+    if (latestPlanDigest !== targetPlanDigest) {
+      const error = new Error('Rollback latest pagination commitment differs from its version')
+      error.code = 'PUBLICATION_REF_DISAGREEMENT'
+      throw error
+    }
     if (failurePoint === 'process-exit-after-latest-swap') {
       process.exit(88)
     }

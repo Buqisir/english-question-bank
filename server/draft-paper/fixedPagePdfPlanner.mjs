@@ -36,6 +36,15 @@ export function applyPlannedGroupBreaks(html, groupIds) {
   return planned
 }
 
+function applyFixedCover(html, { targetPages, omitCover, coverGapsPt }) {
+  if (omitCover && targetPages !== 8) throw new Error('Only the eight-page listening-excluded edition may omit its cover')
+  if (omitCover) return html.replace('</head>', '<style data-pdf-omit-cover>.canonical-paper-opening{display:none}</style></head>')
+  if (coverGapsPt && (coverGapsPt[0] !== 72 || coverGapsPt[1] !== 72)) {
+    return html.replace('</head>', `<style data-pdf-cover-adjustment>.canonical-paper-opening{--canonical-cover-page-top-to-title:${coverGapsPt[0]}pt;--canonical-cover-title-to-notices:${coverGapsPt[1]}pt}</style></head>`)
+  }
+  return html
+}
+
 function inspectGroups(page) {
   return page.evaluate(() => {
     const groups = new Map()
@@ -107,7 +116,7 @@ export async function planFixedPagePdf(html, { targetPages, omitCover = false, r
         targetPages, render, renderLimit: 24 - searchedCandidates - (attempts.length - attemptIndex - 1),
       })
       searchedCandidates += result.searchedCandidates
-      const fit = { ...result, coverGapsPt: gaps }
+      const fit = { ...result, coverGapsPt: gaps, allowSplitOptionBank: !keepOptionBank }
       if (!bestFit || fit.layoutPenalty < bestFit.layoutPenalty) bestFit = fit
       if (!fit.layoutPenalty) return { ...fit, searchedCandidates }
     } catch (error) {
@@ -121,6 +130,58 @@ export async function planFixedPagePdf(html, { targetPages, omitCover = false, r
   throw impossible(`在 ${searchedCandidates} 个候选及允许的卷首留白范围内，有界搜索未找到 ${targetPages} 页的排版`, {
     actualPages: lastFailure.actualPages, targetPages, searchedCandidates,
   })
+}
+
+export async function renderExplicitFixedPagePdf(html, {
+  targetPages,
+  omitCover = false,
+  coverGapsPt = null,
+  allowSplitOptionBank = false,
+  plannedBreakGroupIds,
+  render,
+}) {
+  if (typeof allowSplitOptionBank !== 'boolean') throw new Error('allowSplitOptionBank must be boolean')
+  if (allowSplitOptionBank && targetPages !== 10) {
+    throw new Error('Only the ten-page edition may allow a split option bank')
+  }
+  let candidate = applyFixedCover(html, { targetPages, omitCover, coverGapsPt })
+  if (allowSplitOptionBank) {
+    candidate = candidate.replace('</head>', '<style data-pdf-option-bank-fallback></style></head>')
+  }
+  candidate = applyPlannedGroupBreaks(candidate, plannedBreakGroupIds)
+  const result = await render(candidate, { inspect: inspectGroups })
+  if (result.pageCount !== targetPages) {
+    throw impossible(`已审核分页方案实际生成 ${result.pageCount} 页，而不是 ${targetPages} 页`, {
+      actualPages: result.pageCount,
+      targetPages,
+      searchedCandidates: 1,
+    })
+  }
+  const failures = faceBoundaryFailures(result.inspection)
+  return {
+    ...result,
+    plannedBreakGroupIds: [...plannedBreakGroupIds],
+    coverGapsPt,
+    allowSplitOptionBank,
+    crossingGroupIds: failures.map(({ id }) => id),
+    splitGroupIds: result.inspection.filter(({ pages }) => pages.length > 1).map(({ id }) => id),
+    splitOptionBankCount: result.inspection.filter((group) => group.optionBankPages?.length > 1).length,
+    searchedCandidates: 1,
+    explicitPlan: true,
+  }
+}
+
+export async function renderDiagnosticFixedPagePdf(html, {
+  targetPages,
+  omitCover = false,
+  coverGapsPt = null,
+  render,
+}) {
+  const candidate = applyPlannedGroupBreaks(
+    applyFixedCover(html, { targetPages, omitCover, coverGapsPt }),
+    [],
+  )
+  return render(candidate, { inspect: inspectGroups })
 }
 
 async function searchFixedPagePdf(html, { targetPages, render, renderLimit }) {

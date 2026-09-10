@@ -28,11 +28,13 @@ latest product policy. No Ship or production mutation is authorized by this reco
   every outlier. Prioritize low-cost, per-paper agent correction and resubmission.
   Existing Review issues already carry revision, surface, page and semantic
   anchors, and `review.mjs status/reply/push --resolves` closes the feedback loop.
-  **Missing, not implemented:** Review PDF still uses direct Chromium printing,
-  not friendly8/friendly10; no revision-bound per-paper pagination plan is
-  preserved through promotion. Required bridge is exact-edition preview plus
-  a narrowly validated presentation plan and local render/evidence command,
-  reusing Review revisions rather than inventing another approval system.
+  Review now previews friendly8/friendly10 with edition-bound PDF issues.
+  `review.mjs pagination-qa` produces real PDF/page images/reports and can save
+  a narrowly validated source/Candidate-bound plan into the revision bundle.
+  Promotion preserves its external versioned binding; exact-version export
+  and rollback reject missing or replaced plans. Natural Screen/Print stay
+  unchanged. Corrections reuse Review revisions and existing approval.
+  The current Owner-approved delivery is one combined PR, not merge or deploy.
 - Both real nine-group variants render exactly eight pages with every normalized
   group text and the decoded A figure retained. Special eight: A1–2, B2, C3,
   D4, seven5, cloze6, grammar/application7, continuation8. Normal eight retains

@@ -11,6 +11,7 @@ import {
 import path from 'node:path'
 import { createHash, randomUUID } from 'node:crypto'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
+import { loadBoundPaperPaginationPlan } from './paginationPlan.mjs'
 import {
   buildPaperNormalizedGroupsSidecar,
   PAPER_NORMALIZED_GROUPS_FILE_NAME,
@@ -288,6 +289,15 @@ function makeVersionedArtifacts(packageData, version) {
   const writingAnalysis = packageData.writingAnalysis
     ? JSON.parse(JSON.stringify(packageData.writingAnalysis))
     : null
+  const paginationPlan = packageData.paginationPlan
+    ? JSON.parse(JSON.stringify(packageData.paginationPlan))
+    : null
+  if (packageData.paginationPlanBinding) {
+    importMeta.paginationPlanBinding = {
+      ...JSON.parse(JSON.stringify(packageData.paginationPlanBinding)),
+      sourceAssetVersion: version,
+    }
+  }
 
   const normalization = buildPaperNormalizedGroupsSidecar(paperAsset)
   if (normalization.status !== 'ready') {
@@ -316,7 +326,42 @@ function makeVersionedArtifacts(packageData, version) {
     grammarFillAnalysis,
     writingAnalysis,
     normalizedGroupsSidecar,
+    paginationPlan,
   }
+}
+
+export function assertPaperImportPaginationPlan({ baseDir, packageData, version = null }) {
+  const paperAsset = JSON.parse(readFileSync(path.join(baseDir, 'paper-asset.json'), 'utf8'))
+  const sourceAssetVersion = version ?? Number(paperAsset?.paper?.assetVersion)
+  const expectedBinding = packageData.paginationPlanBinding
+  const canonicalSourceDigest = expectedBinding
+    ? expectedBinding.canonicalSourceDigest
+      || `sha256:${sha256(readFileSync(path.join(baseDir, 'canonical', 'source-asset.bin')))}`
+    : null
+  const loaded = loadBoundPaperPaginationPlan(baseDir, {
+    paperId: packageData.paperAsset.paper.paperId,
+    sourceAssetVersion,
+    sourceDigest: canonicalSourceDigest,
+    slotBindings: [],
+    sourceHasListening: false,
+    validatePlanIdentity: false,
+  })
+  if (!expectedBinding) {
+    if (packageData.paginationPlan || loaded) throw new Error('Published pagination plan was not approved')
+    return null
+  }
+  if (!loaded?.binding
+    || digestJson(loaded.binding) !== digestJson({
+      ...expectedBinding,
+      canonicalSourceDigest,
+      sourceAssetVersion,
+    })) {
+    throw new Error('Published pagination binding differs from Review projection')
+  }
+  if (digestJson(loaded.plan) !== digestJson(packageData.paginationPlan)) {
+    throw new Error('Published pagination plan differs from Review projection')
+  }
+  return loaded.digest
 }
 
 export function assertPaperImportAnalysisSidecars({ baseDir, packageData, version }) {
@@ -377,6 +422,9 @@ export function writePaperImportVersion({
     }
     writeJson(path.join(tempDir, 'answer-key.json'), artifacts.answerKey)
     writeJson(path.join(tempDir, 'import-meta.json'), artifacts.importMeta)
+    if (artifacts.paginationPlan) {
+      writeJson(path.join(tempDir, 'pagination-plan.json'), artifacts.paginationPlan)
+    }
     if (artifacts.readingAnalysis) {
       writeJson(path.join(tempDir, 'analyses', readingChoiceAnalysisFileName), artifacts.readingAnalysis)
     }
@@ -526,6 +574,10 @@ export function swapPaperImportLatest({
   mkdirSync(tempLatest, { recursive: true })
   for (const fileName of ['paper-asset.json', 'answer-key.json', 'import-meta.json']) {
     writeFileSync(path.join(tempLatest, fileName), readFileSync(path.join(versionDir, fileName)))
+  }
+  const paginationPlanPath = path.join(versionDir, 'pagination-plan.json')
+  if (existsSync(paginationPlanPath)) {
+    writeFileSync(path.join(tempLatest, 'pagination-plan.json'), readFileSync(paginationPlanPath))
   }
   const readingAnalysisPath = path.join(versionDir, 'analyses', readingChoiceAnalysisFileName)
   if (existsSync(readingAnalysisPath)) {
