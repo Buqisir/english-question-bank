@@ -50,6 +50,7 @@ await assert.rejects(readShipCheck(target, async endpoint => endpoint.includes('
 const dir = mkdtempSync(path.join(os.tmpdir(), 'ship-check-watcher-'))
 try {
   let currentReader = reader([]), time = 0, appended = 0, released = 0, failAppend = false, disposed
+  const messages = []
   const tools = new Map(), timers = new Map(), expiries = new Map()
   const amp = {
     registerTool: tool => tools.set(tool.name, tool), onDispose: callback => { disposed = callback }, logger: { log() {} },
@@ -58,6 +59,7 @@ try {
       assert.equal(threadID, ctx.thread.id)
       return { appendUserMessage: async (...args) => {
         appended++
+        messages.push(args[0].content)
         assert.equal(args.length, 1, 'no steer option')
         assert.match(args[0].content, /Re-read the current open PR\/head/)
         assert.match(args[0].content, /adds no Ship, merge, or deployment authorization/)
@@ -81,6 +83,7 @@ try {
   currentReader = reader([check])
   for (const fn of timers.values()) { fn(); fn() }
   await flush(); assert.equal(appended, 1); assert.equal(timers.size, 0); assert.equal(released, 1)
+  assert.ok(!messages[0].includes('Check failure summary'), 'success message unchanged')
   for (const name of readdirSync(dir)) assert.equal(statSync(path.join(dir, name)).mode & 0o777, 0o600)
   await start(); await flush(); assert.equal(appended, 1, 'claim prevents duplicate notification')
   currentReader = reader([{ ...check, id: 12 }]); failAppend = true
@@ -109,6 +112,37 @@ try {
   currentReader = reader([{ ...check, id: 13 }])
   await start(); rmSync(dir, { recursive: true, force: true }); await flush()
   assert.equal(appended, 2, 'storage failure cannot append')
+  failAppend = false
+  for (const conclusion of ['failure', 'cancelled', 'timed_out', 'action_required']) {
+    const summary = `Fast: FAIL (${conclusion})\nFull: PASS\nPASS 173 / SKIP 2 / FAIL 0`
+    const failed = { ...check, conclusion, output: { summary } }
+    const before = appended
+    currentReader = reader([failed], { ...pr, head: { ...pr.head, sha: 'b'.repeat(40) } })
+    await start(); await flush()
+    assert.equal(appended, before, `${conclusion}: stale head cannot notify or claim`)
+    let checkReads = 0
+    currentReader = async endpoint => endpoint.includes('/pulls/') ? pr : {
+      total_count: 1, check_runs: [{ ...failed, output: { summary: ++checkReads === 1 ? 'old summary' : summary } }],
+    }
+    await start(); await flush()
+    assert.equal(appended, before + 1, `${conclusion}: direct target notification`)
+    const message = messages.at(-1)
+    assert.ok(message.includes('PR: 411'))
+    assert.ok(message.includes(`Frozen head: ${head}`))
+    assert.ok(message.includes(`Check: https://github.com/${repo}/runs/10`))
+    assert.ok(message.includes(`conclusion: ${conclusion}`))
+    assert.ok(message.endsWith(summary), 'use the confirmed Check summary verbatim')
+    assert.equal(timers.size, 0); assert.equal(expiries.size, 0)
+    currentReader = reader([failed])
+    await start(); await flush()
+    assert.equal(appended, before + 1, `${conclusion}: existing claim prevents duplicate`)
+  }
+  currentReader = reader([{ ...check, id: 20, conclusion: 'failure' }])
+  await start(); await flush()
+  assert.ok(!messages.at(-1).includes('Check failure summary'), 'missing summary cannot fabricate diagnostics')
+  currentReader = reader([{ ...check, id: 21, output: { summary: 'success output must not change notice' } }])
+  await start(); await flush()
+  assert.ok(!messages.at(-1).includes('success output must not change notice'))
   disposed()
-  console.log('PASS Ship watcher: identity/latest/pagination/races, 45s cadence, deadline/cancel/dispose, read/storage/unknown-append failures, one-shot current-thread notification')
+  console.log('PASS Ship watcher: identity/latest/pagination/races, 45s cadence, deadline/cancel/dispose, read/storage/unknown-append failures, one-shot current-thread notification; failure/cancelled/timed_out/action_required summary delivery, stale-head and dedupe; success unchanged')
 } finally { rmSync(dir, { recursive: true, force: true }) }
