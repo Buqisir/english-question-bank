@@ -3,7 +3,10 @@
 ## Ship Check watcher
 
 `ship-check-watcher.js` registers `ship_watch_check({pullRequest, head})` and
-`ship_cancel_check_watch({})`. Invoke only when explicitly waiting for Ship CI.
+`ship_cancel_check_watch({})`. The Ship workflow requires a confirmed registration
+before waiting for authoritative CI; pushing a PR does not register a watcher.
+Repeating the same PR/head in the same thread shares the original startup result,
+timer and deadline. A different PR/head requires cancelling the old wait first.
 The target thread comes from the invocation context, never a tool argument.
 Repository, App `4835036`, and `Amp Orb Verify` are fixed. It performs only GitHub
 GETs using the existing `gh` authentication, every 45 seconds (no overlapping reads),
@@ -12,6 +15,8 @@ stop the wait; it never follows a new head or modifies/reruns CI.
 
 A confirmed latest terminal Check produces one best-effort `appendUserMessage`
 without steering. Ship must recheck live identity and authority after waking.
+Failure, cancelled, timed_out and action_required notices include the confirmed
+Check's existing `output.summary` when present. Success notices are unchanged.
 Private mode-0600 records under `.scratch/ship-check-watcher/` claim before append;
 an ambiguous append is not retried. There is no outbox, scheduler, automatic restart
 recovery, or exactly-once transport guarantee: crashes can miss notifications.

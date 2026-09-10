@@ -95,6 +95,7 @@ const registry = {
   'scripts/verify-source-intake-frontend.mjs',
   'scripts/verify-source-intake-webhook.mjs',
   'scripts/verify-nck1-analysis-agent-plugin.mjs',
+  'scripts/verify-ship-check-watcher.mjs',
   'scripts/verify-amp-orb-ci.mjs',
   'scripts/verify-amp-orb-deploy.mjs',
   'scripts/verify-import-review-source-pairing.mjs',
