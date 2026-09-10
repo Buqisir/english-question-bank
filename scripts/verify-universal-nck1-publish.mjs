@@ -33,6 +33,10 @@ import { publishUniversalNck1Import } from '../server/paper-import/publisher.mjs
 import { sendPaperAssetStatic } from '../server/paper-import/paperAssetStatic.mjs'
 import { assertListeningAudioManifest, assertListeningAudioSource, LISTENING_AUDIO_PATHS } from '../server/paper-import/listeningAudioEvidence.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
+import { renderPaginatedPaper } from '../server/draft-paper/paginationRenderer.mjs'
+import { closeChromiumPool } from '../server/draft-paper/chromiumPool.mjs'
+import { assertPaperFonts } from './lib/assert-paper-fonts.mjs'
+import { assertSharedPaperLayout } from './lib/assert-shared-paper-layout.mjs'
 import { readJsonRouteBody, runRoutes } from '../server/router/index.mjs'
 import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
@@ -937,6 +941,8 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
     screenUrl.searchParams.set('focusGroupId', `group:${projection.paperId}:listening.short-dialogue`)
     await screenPage.goto(screenUrl.href)
     await screenPage.locator('.paper-browse-listening .ps-question').first().waitFor()
+    await assertPaperFonts(screenPage, '.paper-browse-listening')
+    await assertSharedPaperLayout(screenPage, '.paper-browse-listening')
     assert.equal(await screenPage.locator('.paper-browse-listening').count(), 2)
     assert.equal(await screenPage.locator('.paper-browse-listening .ps-question').count(), 20)
     assert.deepEqual(
@@ -983,6 +989,7 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
     await detailPage.locator('.canonical-listening-surface .ps-question').first().waitFor()
     assert.equal(await detailPage.locator('.canonical-listening-surface .ps-question').count(), 5)
     assert.equal(await detailPage.locator('audio').count(), 0, 'Only the whole-paper Screen owns playback')
+    await assertPaperFonts(detailPage, '.canonical-listening-surface')
     const detailColumns = await detailPage.locator('.canonical-listening-surface .ps-option-list').first()
       .evaluate((element) => getComputedStyle(element).gridTemplateColumns.split(' ').map(parseFloat))
     assert.equal(detailColumns.length, 3)
@@ -1004,16 +1011,40 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
       const page = await browser.newPage({ viewport: { width: 794, height: 1123 } })
       await page.emulateMedia({ media: 'print' })
       await page.setContent(html)
+      await assertPaperFonts(page, '.paper-print')
+      await assertSharedPaperLayout(page, '.paper-print')
       const questions = page.locator('[data-canonical-question-id^="question:listening:"]')
       assert.equal(await questions.count(), 20)
-      assert.equal(await page.locator('.options-grid--listening > span').count(), 60)
+      assert.equal(await page.locator('.question-group[data-canonical-group-type="listening"] .canonical-options > span').count(), 60)
       assert.equal(await questions.locator('.answer').count(), versionType === 'teacher' ? 20 : 0)
       assert.ok(await questions.evaluateAll((elements) => elements.every((element) => getComputedStyle(element).breakInside === 'avoid')))
-      const grid = await page.locator('.options-grid--listening').first().evaluate((element) => getComputedStyle(element).gridTemplateColumns.split(' ').map(parseFloat))
-      assert.equal(grid.length, 3)
-      assert.ok(Math.max(...grid) - Math.min(...grid) < 1)
+      assert.equal(await page.locator('.question-group[data-canonical-group-type="listening"] .canonical-options--two_by_two').count(), 0)
+      const listeningColumns = await page.locator('.question-group[data-canonical-group-type="listening"] .canonical-options').first()
+        .evaluate((element) => getComputedStyle(element).gridTemplateColumns.split(' ').map(parseFloat))
+      assert.equal(listeningColumns.length, 3)
+      assert.ok(Math.max(...listeningColumns) - Math.min(...listeningColumns) < 1)
       const artifactDir = process.env.LISTENING_QA_ARTIFACT_DIR
-      const pdf = await page.pdf({ format: 'A4', printBackground: true, ...(artifactDir ? { path: path.join(artifactDir, `listening-${versionType}.pdf`) } : {}) })
+      if (artifactDir && versionType === 'student') {
+        writeFileSync(path.join(artifactDir, 'full-listening-input.html'), html)
+        const withoutListeningPayload = {
+          ...listeningPayload,
+          blocks: listeningPayload.blocks.slice(1 + listeningPayload.blocks.findLastIndex((block) =>
+            block.type === 'question_group'
+            && listeningPayload.details.get(block.questionGroupId)?.groupType === 'listening')),
+          items: listeningPayload.items
+            .filter((item) => listeningPayload.details.get(item.questionGroupId)?.groupType !== 'listening')
+            .map((item) => ({ detail: listeningPayload.details.get(item.questionGroupId), score: 0, note: '', sectionTitle: '' })),
+        }
+        writeFileSync(path.join(artifactDir, 'full-without-listening-input.html'), buildPrintHtml({
+          ...withoutListeningPayload, versionType, canonicalConsumption: listeningPublished.print_pdf,
+        }))
+      }
+      const { pdfBytes: pdf } = await renderPaginatedPaper(html, { inspect: async paged => {
+        await assertPaperFonts(paged, '.pagedjs_pages')
+        await assertSharedPaperLayout(paged, '.pagedjs_pages')
+        assert.equal(await paged.locator('.pagedjs_pages [data-canonical-question-id^="question:listening:"]').count(), 20)
+      } })
+      if (artifactDir) writeFileSync(path.join(artifactDir, `listening-${versionType}.pdf`), pdf)
       assert.equal(pdf.subarray(0, 4).toString(), '%PDF')
       if (artifactDir) await page.screenshot({ path: path.join(artifactDir, `print-${versionType}.png`) })
       await page.close()
@@ -1088,6 +1119,7 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
     assert.equal(screenGroup.occurrenceSignature, printGroup.occurrenceSignature)
   } finally {
     await browser.close()
+    await closeChromiumPool()
     await viteServer.close()
     rmSync(audioRoot, { recursive: true, force: true })
   }

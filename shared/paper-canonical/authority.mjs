@@ -50,6 +50,9 @@ import manifestV49 from '../../standards/paper-canonical/manifest-v49.json' with
 import manifestV50 from '../../standards/paper-canonical/manifest-v50.json' with { type: 'json' }
 import manifestV51 from '../../standards/paper-canonical/manifest-v51.json' with { type: 'json' }
 import manifestV52 from '../../standards/paper-canonical/manifest-v52.json' with { type: 'json' }
+import manifestV53 from '../../standards/paper-canonical/manifest-v53.json' with { type: 'json' }
+import paperPresentationV1 from '../../standards/paper-canonical/rendering/paper-presentation-v1.json' with { type: 'json' }
+import paperPresentationV1Schema from '../../schemas/paper-canonical/paper-presentation-v1.schema.json' with { type: 'json' }
 import legacyRhythmManifestV13 from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/manifest-v13.json' with { type: 'json' }
 import legacyRhythmTypographyV3 from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/paper-typography-v3.json' with { type: 'json' }
 import legacyRhythmTypographyV3Schema from '../../standards/paper-canonical/history/manifest-v13-reading-rhythm/renderer-typography-v3.schema.json' with { type: 'json' }
@@ -1378,9 +1381,9 @@ export function validateAuthorityClosure({
   schemas,
 }) {
   const issues = []
-  // Universal v46-v52 derive from v37. Their numeric identities must
+  // Universal v46-v52 and renderer-only v53 derive from v37. Their identities must
   // not make paper-specific v38-v45 successor rules part of this closure.
-  const semanticManifestVersion = ['46', '47', '48', '49', '50', '51', '52'].includes(candidateManifest?.version)
+  const semanticManifestVersion = ['46', '47', '48', '49', '50', '51', '52', '53'].includes(candidateManifest?.version)
     ? '37'
     : candidateManifest?.version
   const schemaById = new Map(Object.entries(schemas || {}))
@@ -1440,7 +1443,7 @@ export function validateAuthorityClosure({
     const family = familyArtifacts.get(familyId)
     if (!family || family.choiceOwnership !== ownership) issues.push(issue('AUTHORITY_FAMILY_CLOSURE', '$.artifacts', `Missing or invalid ${familyId} family contract`))
   }
-  if (['50', '51', '52'].includes(candidateManifest?.version)) {
+  if (['50', '51', '52', '53'].includes(candidateManifest?.version)) {
     const family = familyArtifacts.get('listening')
     if (!family || family.choiceOwnership !== 'per_question') {
       issues.push(issue('AUTHORITY_FAMILY_CLOSURE', '$.artifacts', 'Missing or invalid listening family contract'))
@@ -1635,7 +1638,7 @@ export function validateAuthorityClosure({
   }
   if (Number(semanticManifestVersion) >= 29) {
     const continuationFamily = familyArtifacts.get('continuation-writing')
-    const expectedContinuationFamily = ['49', '50', '51', '52'].includes(candidateManifest?.version)
+    const expectedContinuationFamily = ['49', '50', '51', '52', '53'].includes(candidateManifest?.version)
       ? continuationWritingV5
       : Number(semanticManifestVersion) >= 39
         ? continuationWritingV4
@@ -1973,6 +1976,7 @@ const artifactsV52 = {
   'profile-national-legacy': nationalLegacyV4,
   'family-reading': readingV2,
 }
+const artifactsV53 = { ...artifactsV52, 'renderer-paper-presentation': paperPresentationV1 }
 const schemasV1 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v1': normalizationSchema, 'normalization-report-v1': reportSchema, 'canonical-paper-publication-v1': publicationSchema }
 const schemasV2 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v2': reportV2Schema, 'canonical-paper-publication-v2': publicationV2Schema }
 const schemasV3 = { ...sharedSchemas, 'renderer-typography-v2': typographyV2Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v3': reportV3Schema, 'canonical-paper-publication-v3': publicationV3Schema }
@@ -2546,6 +2550,7 @@ const schemasV52 = {
   'normalization-report-v52': reportV52Schema,
   'canonical-paper-publication-v52': publicationV52Schema,
 }
+const schemasV53 = { ...schemasV52, 'paper-presentation-v1': paperPresentationV1Schema }
 const validationV1 = validateAuthorityClosure({ manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 })
 const validationV2 = validateAuthorityClosure({ manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 })
 const validationV3 = validateAuthorityClosure({ manifest: manifestV3, artifacts: artifactsV3, schemas: schemasV3 })
@@ -2655,6 +2660,7 @@ const validations = [
   validationV50,
   validateAuthorityClosure({ manifest: manifestV51, artifacts: artifactsV50, schemas: schemasV51 }),
   validateAuthorityClosure({ manifest: manifestV52, artifacts: artifactsV52, schemas: schemasV52 }),
+  validateAuthorityClosure({ manifest: manifestV53, artifacts: artifactsV53, schemas: schemasV53 }),
 ]
 if (validations.some((validation) => !validation.ok)) {
   throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify(validations.flatMap((validation) => validation.issues))}`)
@@ -2722,6 +2728,7 @@ const authorities = [
   { manifest: manifestV50, artifacts: artifactsV50, schemas: schemasV50 },
   { manifest: manifestV51, artifacts: artifactsV50, schemas: schemasV51 },
   { manifest: manifestV52, artifacts: artifactsV52, schemas: schemasV52 },
+  { manifest: manifestV53, artifacts: artifactsV53, schemas: schemasV53 },
 ].map((authority) => ({
   ...authority,
   authorityRef: authorityRef(authority.manifest),
@@ -2737,6 +2744,8 @@ export const trustedDocxCandidateAuthorityRef = authorities.find((authority) => 
 // Listening publication and modern writing without changing
 // historical authorities or the default v36 fixture/import lane.
 export const nck1MaterializationCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '52').authorityRef
+// Consumer-only successor; never selected by import/publish producers.
+export const paperPresentationAuthorityRef = authorities.find((authority) => authority.manifest.version === '53').authorityRef
 // Ticket 31a may replay only the exact pre-v42 legacy Candidate authority
 // recorded by the immutable confirmation lanes. It is not a current import
 // authority and cannot be selected by ordinary callers.

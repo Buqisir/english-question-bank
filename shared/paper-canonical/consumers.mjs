@@ -2,16 +2,20 @@ import screen from '../../standards/paper-canonical/consumers/screen-v39.json' w
 import printPdf from '../../standards/paper-canonical/consumers/print-pdf-v40.json' with { type: 'json' }
 import screenV40 from '../../standards/paper-canonical/consumers/screen-v40.json' with { type: 'json' }
 import printPdfV41 from '../../standards/paper-canonical/consumers/print-pdf-v41.json' with { type: 'json' }
+import screenV41 from '../../standards/paper-canonical/consumers/screen-v41.json' with { type: 'json' }
+import printPdfV42 from '../../standards/paper-canonical/consumers/print-pdf-v42.json' with { type: 'json' }
 
-import { nck1MaterializationCandidateAuthorityRef, resolveCanonicalAuthority, validateJsonSchema } from './authority.mjs'
+import { nck1MaterializationCandidateAuthorityRef, paperPresentationAuthorityRef, resolveCanonicalAuthority, validateJsonSchema } from './authority.mjs'
 import { digestJson, withoutKey } from './stable.mjs'
 
-const historicalContracts = [screen, printPdf]
-const contracts = [screenV40, printPdfV41]
+const historicalContracts = [screen, printPdf, screenV40, printPdfV41]
+const contracts = [screenV41, printPdfV42]
 const allContracts = [...historicalContracts, ...contracts]
 
 function validateContract(contract) {
-  const authorityRef = contract.authorityManifestDigest === nck1MaterializationCandidateAuthorityRef.manifestDigest
+  const authorityRef = contract.authorityManifestDigest === paperPresentationAuthorityRef.manifestDigest
+    ? paperPresentationAuthorityRef
+    : contract.authorityManifestDigest === nck1MaterializationCandidateAuthorityRef.manifestDigest
     ? nck1MaterializationCandidateAuthorityRef
     : { manifestId: 'paper-canonical', manifestVersion: '51', manifestDigest: contract.authorityManifestDigest }
   const authority = resolveCanonicalAuthority(authorityRef)
@@ -41,4 +45,14 @@ export function resolveConsumerContract(ref) {
   const contract = allContracts.find((candidate) => candidate.consumerId === ref?.id && candidate.version === ref?.version)
   if (!contract || ref.version !== contract.version || ref.digest !== contract.contractDigest) return { ok: false, issues: [{ code: 'CONSUMER_CONTRACT_UNAVAILABLE', message: 'Consumer Contract id, version, or digest is unknown' }] }
   return { ok: true, contract }
+}
+
+export function resolveConsumerPresentation(ref) {
+  if (!ref) return null // Pre-contract historical projections keep their layout.
+  const resolved = resolveConsumerContract(ref)
+  if (!resolved.ok) throw Object.assign(new Error('Invalid presentation consumer contract'), { code: 'CANONICAL_CONSUMPTION_REJECTED' })
+  if (resolved.contract.authorityManifestDigest !== paperPresentationAuthorityRef.manifestDigest) return null
+  const { closure } = resolveCanonicalAuthority(paperPresentationAuthorityRef)
+  const policy = closure.artifacts['renderer-paper-presentation']
+  return { policy, ref: { id: 'paper-presentation', version: policy.version, digest: digestJson(policy) } }
 }

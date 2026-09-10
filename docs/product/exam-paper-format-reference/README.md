@@ -7,6 +7,12 @@ These images are not random examples. They are the visual target for paper
 authoring, import normalization, PaperSurface display, print/export, and future
 paper-building workflows.
 
+Listening and opening-page measurements are recorded in
+[`listening-measurements.md`](listening-measurements.md), with digest-bound
+raw coordinates in [`listening-measurements.json`](listening-measurements.json).
+These distinguish cropped-image ratios from physical PDF measurements; they
+do not by themselves change runtime typography or certify 8/10-page output.
+
 ## Use
 
 - Preserve source semantics: passage text, question meaning, option content,

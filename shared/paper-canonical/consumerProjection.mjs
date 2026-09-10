@@ -2,6 +2,7 @@ import {
   abcdPlacementSignature,
   layoutAbcdOptionSet,
   layoutFixedFourColumnClozeOptionSet,
+  layoutListeningOptionSet,
 } from './abcdLayout.mjs'
 import { resolveCanonicalAuthority } from './authority.mjs'
 import { grammarFillPromptPrefix } from './grammarFillPromptContract.mjs'
@@ -52,6 +53,8 @@ function projectListeningConsumerGroup(input, occurrence) {
     || !Array.isArray(occurrence.numbering)
     || !Array.isArray(occurrence.questions)
     || !Array.isArray(occurrence.transcriptSegments)
+    || (occurrence.firstSectionPlayback !== undefined
+      && !['once_explicit', 'twice_default'].includes(occurrence.firstSectionPlayback))
     || occurrence.questions.length !== occurrence.numbering.length
     || occurrence.choices?.ownership !== 'per_question'
     || !Array.isArray(occurrence.choices.sets)
@@ -78,17 +81,23 @@ function projectListeningConsumerGroup(input, occurrence) {
     ) {
       throw rejected(`Canonical Listening occurrence ${groupId} has an invalid A-C Question`)
     }
+    const options = question.options.map((option) => ({
+      optionId: option.optionId,
+      label: option.label,
+      text: textContent(option.content),
+      content: structuredClone(option.content),
+    }))
+    const layoutPlan = layoutListeningOptionSet({ owner: 'question', options })
+    if (layoutPlan.status !== 'selected') {
+      throw rejected(`Canonical Listening occurrence ${groupId} has unrenderable A-C choices`)
+    }
     return {
       questionId: question.questionId,
       questionNo: question.number,
       stem: textContent(question.stem),
       stemContent: structuredClone(question.stem),
-      options: question.options.map((option) => ({
-        optionId: option.optionId,
-        label: option.label,
-        text: textContent(option.content),
-        content: structuredClone(option.content),
-      })),
+      options,
+      layoutPlan,
     }
   })
   const coveredQuestionIds = occurrence.transcriptSegments.flatMap((segment) => {
@@ -117,11 +126,19 @@ function projectListeningConsumerGroup(input, occurrence) {
     paperId: input.consumption.paperId,
     groupId,
     familyContractId: 'listening',
-    questions,
+    questions: questions.map(({ layoutPlan: _layoutPlan, ...question }) => question),
   }
   return Object.freeze({
     groupType: 'listening',
+    ...(occurrence.firstSectionPlayback === undefined
+      ? {}
+      : { firstSectionPlayback: occurrence.firstSectionPlayback }),
+    segments: occurrence.transcriptSegments.map(({ segmentId, questionIds }) => ({
+      segmentId,
+      questionIds: structuredClone(questionIds),
+    })),
     ...semantic,
+    questions,
     semanticSignature: digestJson(semantic),
   })
 }

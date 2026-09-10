@@ -319,11 +319,18 @@ export function createDraftPaperRoutes() {
         const versionType = input.versionType === undefined
           ? 'student'
           : requiredEnum(input.versionType, ['student', 'teacher'], 'versionType')
+        const pageLayout = input.pageLayout === undefined
+          ? 'natural'
+          : requiredEnum(input.pageLayout, ['natural', 'friendly8', 'friendly10'], 'pageLayout')
         // draft-desk-b step4 (MF-2/MF-7): exportDraftPaperPdf is now async (it
         // renders through the same Chromium/paged.js pipeline as the pagination
         // route, via getDraftPaperPagination — see draftPaperStore.mjs) where the
         // old Vivliostyle CLI line was synchronous (execFileSync).
-        const result = await context.draftPaperStore.exportDraftPaperPdf(userId, decodeURIComponent(match[1]), { versionType })
+        const result = await context.draftPaperStore.exportDraftPaperPdf(userId, decodeURIComponent(match[1]), { versionType, pageLayout })
+        if (pageLayout !== 'natural') {
+          response.setHeader('x-paper-crossing-group-count', String(result.crossingGroupCount ?? 0))
+          response.setHeader('x-paper-split-option-bank-count', String(result.splitOptionBankCount ?? 0))
+        }
         context.sendPdf(response, result.body, result.fileName, result.outputPath)
       } catch (error) {
         // Shared with the sibling pagination route (GET /:id/pagination) and every

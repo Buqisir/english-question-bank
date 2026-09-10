@@ -1,3 +1,5 @@
+@import '../../../../shared/papersurface/paperLayout.css';
+
 /**
  * PaperBrowsePage — layout CSS (刀B v1 → flow-panel 刀 1: 一页两姿态).
  *
@@ -282,12 +284,9 @@
  * 指导语=书宋正文。三者与正文同一份左右页边距（继承 .paper-browse-content
  * 的 padding，不再单独设左右 margin），退役此前的 UI sans + 米棕配色。 */
 .paper-browse-part-heading {
-  margin: 24px 0 4px;
-  margin-left: var(--ps-part-heading-indent);
-  font-family: var(--ps-font-stack-heading);
-  font-size: var(--ps-font-size);
+  margin-block: 24px 4px;
+  margin-right: 0;
   line-height: var(--ps-line-height);
-  font-weight: 700;
   color: inherit;
 }
 
@@ -296,14 +295,9 @@
 }
 
 .paper-browse-section-heading {
-  margin: 13px 0 0;
-  margin-left: var(--ps-section-heading-indent);
-  font-family: var(--ps-section-heading-font-stack);
-  font-size: var(--ps-section-heading-font-size);
-  line-height: var(--ps-section-heading-line-height);
-  font-weight: var(--ps-section-heading-visible-weight);
+  margin-block: 13px 0;
+  margin-right: 0;
   color: inherit;
-  white-space: nowrap;
 }
 
 .paper-browse-part-heading + .paper-browse-section-heading {
@@ -328,10 +322,7 @@
   font-family: var(--ps-font-stack);
   font-size: var(--ps-font-size);
   line-height: var(--ps-line-height);
-  font-weight: var(--ps-instruction-visible-weight);
   color: inherit;
-  white-space: pre-line;
-  text-indent: var(--ps-group-instruction-indent);
 }
 
 .paper-browse-instruction--merged {
@@ -381,7 +372,8 @@
 }
 
 .paper-browse-part-heading[data-canonical-cloze-chrome] {
-  margin: var(--ps-cloze-baseline-step) 0 0;
+  margin-block: var(--ps-cloze-baseline-step) 0;
+  margin-right: 0;
   line-height: var(--ps-cloze-baseline-step);
 }
 
@@ -1247,6 +1239,9 @@
 
   .paper-browse-rail {
     position: static;
+    top: auto;
+    transform: none;
+    max-width: none;
     flex-direction: row;
     flex-wrap: wrap;
     max-height: none;

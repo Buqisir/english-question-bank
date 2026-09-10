@@ -20,6 +20,8 @@ import {
   assertFramedColumnsFitsPrintPage,
   buildPrintHtml,
 } from '../server/print-renderer.mjs'
+import { renderPaginatedPaper } from '../server/draft-paper/paginationRenderer.mjs'
+import { closeChromiumPool } from '../server/draft-paper/chromiumPool.mjs'
 import {
   createFileSystemCanonicalPublicationStore,
   loadPaperForConsumption,
@@ -253,6 +255,34 @@ const actualArtifactRoot = persistActualArtifacts
   : mkdtempSync(path.join(tmpdir(), 'eqb-framed-columns-artifacts-'))
 mkdirSync(actualArtifactRoot, { recursive: true })
 writeFileSync(path.join(actualArtifactRoot, 'framed-columns-student.html'), studentHtml)
+if (persistActualArtifacts) {
+  writeFileSync(path.join(actualArtifactRoot, 'consumption.json'), JSON.stringify(published.consumption))
+}
+
+// Mutate the existing shared rule, not an extra test stylesheet. Both real
+// consumers must respond; a renderer-local copy/override makes this fail.
+async function assertSharedReadingStyleMutation(page) {
+  const result = await page.evaluate(() => {
+    const selector = ':is(.ps-canonical-reading-column-heading, .canonical-reading-column-heading)'
+    const rules = [...document.styleSheets].flatMap((sheet) => [...sheet.cssRules])
+      .filter((rule) => rule.selectorText === selector)
+    if (rules.length !== 1) throw new Error(`Expected one shared heading rule, got ${rules.length}`)
+    const rule = rules[0]
+    const headings = [...document.querySelectorAll('[data-canonical-column-heading]')]
+    const weights = () => headings.map((heading) => getComputedStyle(heading).fontWeight)
+    const before = weights()
+    const original = rule.style.getPropertyValue('font-weight')
+    try {
+      rule.style.setProperty('font-weight', '500')
+      return { before, changed: weights() }
+    } finally {
+      rule.style.setProperty('font-weight', original)
+    }
+  })
+  assert.ok(result.before.length >= 2)
+  assert.ok(result.before.every((weight) => weight === '700'))
+  assert.ok(result.changed.every((weight) => weight === '500'))
+}
 
 async function assertActualBrowserArtifacts() {
   const vite = await import('../app/node_modules/vite/dist/node/index.js')
@@ -325,6 +355,7 @@ async function assertActualBrowserArtifacts() {
     assert.ok(headingWeight >= 700, JSON.stringify(headingStyle))
     assert.equal(headingStyle.textAlign, 'center')
     assert.equal(Number.parseFloat(headingStyle.textIndent), 0)
+    await assertSharedReadingStyleMutation(page)
     const columnBoxes = await page.locator('[data-canonical-column-id]').evaluateAll(
       (elements) => elements.map((element) => element.getBoundingClientRect().width),
     )
@@ -404,13 +435,20 @@ async function assertActualBrowserArtifacts() {
       Math.abs(printColumns[0] - printColumns[1]) <= 1,
       `print columns must be equal width: ${printColumns.join(', ')}`,
     )
+    await assertSharedReadingStyleMutation(printPage)
     const pdfPath = path.join(actualArtifactRoot, 'framed-columns-student.pdf')
-    const pdfBytes = await printPage.pdf({
-      path: pdfPath,
-      format: 'A4',
-      printBackground: true,
-      preferCSSPageSize: true,
+    const { pdfBytes } = await renderPaginatedPaper(studentHtml, {
+      inspect: async (paginatedPage) => {
+        await assertSharedReadingStyleMutation(paginatedPage)
+        if (persistActualArtifacts) {
+          await paginatedPage.screenshot({
+            path: path.join(actualArtifactRoot, 'print-framed-columns.png'),
+            fullPage: true,
+          })
+        }
+      },
     })
+    writeFileSync(pdfPath, pdfBytes)
     assert.equal(pdfBytes.subarray(0, 4).toString(), '%PDF')
     const pdfText = execFileSync('pdftotext', ['-layout', pdfPath, '-'], {
       encoding: 'utf8',
@@ -422,7 +460,50 @@ async function assertActualBrowserArtifacts() {
     assert.equal(pdfText.includes('Brazil'), true)
     assert.equal(pdfText.includes('ბრაზილია'), true)
     await printPage.close()
+
+    // Stress the real renderer CSS/Paged seam, independently of source import.
+    // A single long paragraph must not pass merely because it counts as one row.
+    const head = studentHtml.slice(0, studentHtml.indexOf('<body'))
+    const documentFor = (content) => `${head}<body class="paper-print">${content}</body></html>`
+    const frame = (content) => `<div class="canonical-reading"><div class="canonical-reading-framed-columns" data-canonical-block-id="overflow-probe"><div class="canonical-reading-framed-column">${content}</div><div class="canonical-reading-framed-column"><p>Short column.</p></div></div></div>`
+    await assert.rejects(renderPaginatedPaper(documentFor(frame(
+      `<p class="canonical-reading-body">${'A detailed sentence describing the experiment and its findings. '.repeat(120)}</p>`,
+    ))), error => error.code === 'PAPER_LAYOUT_OVERFLOW')
+
+    const svg = Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" width="100" height="600"><rect width="100" height="600" fill="silver"/><text x="5" y="590">BOTTOM</text></svg>').toString('base64')
+    for (const content of [
+      `<div class="writing-answer-box canonical-continuation-response"><div class="writing-continuation-row"><p class="writing-starter-line">${'A long given starter. '.repeat(200)}</p></div><div class="writing-continuation-row"><p class="writing-starter-line">Second starter.</p></div></div>`,
+      `<div class="canonical-reading"><figure class="canonical-reading-figure"><img src="data:image/svg+xml;base64,${svg}"><figcaption>${'A caption that cannot fit on one page. '.repeat(500)}</figcaption></figure></div>`,
+    ]) {
+      await assert.rejects(renderPaginatedPaper(documentFor(content)), error => error.code === 'PAPER_LAYOUT_OVERFLOW')
+    }
+    const specimen = documentFor(
+      `<h2 class="section-header section-header--section">第二节 阅读下面关于跨文化数字素养与人工智能辅助学习长期影响的材料，完成下列各题（共20小题）</h2>`
+      + frame(`<table class="canonical-reading-table"><tbody><tr><td>${'W'.repeat(45)}</td><td>123</td></tr></tbody></table>`)
+      + `<div class="canonical-reading"><figure class="canonical-reading-figure" style="--canonical-media-width-ratio:1"><img src="data:image/svg+xml;base64,${svg}"><figcaption>A tall image must preserve its bottom and caption.</figcaption></figure></div>`,
+    )
+    await renderPaginatedPaper(specimen, { inspect: async paged => {
+      const geometry = await paged.evaluate(() => ({
+        columns: [...document.querySelectorAll('.pagedjs_pages .canonical-reading-framed-column')]
+          .map(el => el.scrollWidth <= el.clientWidth + 1),
+        headings: [...document.querySelectorAll('.pagedjs_pages h2')]
+          .map(el => el.scrollWidth <= el.clientWidth + 1),
+        images: [...document.querySelectorAll('.pagedjs_pages img')].map(el => ({
+          height: el.getBoundingClientRect().height,
+          fit: getComputedStyle(el).objectFit,
+          naturalRatio: el.naturalHeight / el.naturalWidth,
+        })),
+      }))
+      assert.ok(geometry.columns.length === 2 && geometry.columns.every(Boolean))
+      assert.ok(geometry.headings.length === 1 && geometry.headings.every(Boolean))
+      assert.equal(geometry.images.length, 1)
+      assert.equal(geometry.images[0].naturalRatio, 6)
+      assert.equal(geometry.images[0].fit, 'contain')
+      assert.ok(geometry.images[0].height > 0 && geometry.images[0].height < 952)
+      if (persistActualArtifacts) await paged.screenshot({ path: path.join(actualArtifactRoot, 'overflow-safe.png'), fullPage: true })
+    } })
   } finally {
+    await closeChromiumPool()
     await browser.close()
     await viteServer.close()
   }

@@ -31,6 +31,7 @@ import {
 } from '../shared/paper-canonical/sectionHeadingContract.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 import { makeReadyCanonicalFixture } from '../test-fixtures/paper-canonical/foundationFixture.mjs'
+import { paperFontStack } from '../shared/papersurface/paperFonts.mjs'
 
 const repositoryRoot = path.resolve(import.meta.dirname, '..')
 const readyFixture = makeReadyCanonicalFixture()
@@ -81,24 +82,24 @@ assert.deepEqual(
   sectionHeadingRuntime,
   {
     screen: {
-      fontStack: '"SimSun", "Songti SC", "STSong", serif',
+      fontStack: paperFontStack,
       partHeadingIndentEm: 0,
       sectionHeadingIndentEm: 0,
       groupInstructionFirstLineIndentEm: 2,
       passageFirstLineIndentEm: 2,
       passageContinuationIndentEm: 0,
-      numericRunBaselineShiftEm: 0.1,
+      numericRunBaselineShiftEm: 0,
       fontSizePx: 14,
       lineHeightPx: 24,
     },
     printPdf: {
-      fontStack: '"SimSun", "Songti SC", "STSong", serif',
+      fontStack: paperFontStack,
       partHeadingIndentEm: 0,
       sectionHeadingIndentEm: 0,
       groupInstructionFirstLineIndentEm: 2,
       passageFirstLineIndentEm: 2,
       passageContinuationIndentEm: 0,
-      numericRunBaselineShiftEm: 0.1,
+      numericRunBaselineShiftEm: 0,
       fontSizePt: 10.5,
       lineHeightPt: 18,
     },
@@ -115,12 +116,14 @@ assert.deepEqual(
     screen: {
       ...sectionHeadingRuntime.screen,
       fontStack: '"Poisoned Song"',
+      numericRunBaselineShiftEm: 0.1,
       sectionHeadingIndentEm: 1,
       fontSizePx: 16,
     },
     printPdf: {
       ...sectionHeadingRuntime.printPdf,
       fontStack: '"Poisoned Song"',
+      numericRunBaselineShiftEm: 0.1,
       sectionHeadingIndentEm: 1,
       fontSizePt: 12,
     },

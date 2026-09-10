@@ -1,4 +1,5 @@
 import rendererTypography from '../../standards/paper-canonical/rendering/paper-typography-v10.json' with { type: 'json' }
+import { paperFontStack } from '../papersurface/paperFonts.mjs'
 import { canonicalAuthorityRef, resolveCanonicalAuthority } from './authority.mjs'
 import { digestJson } from './stable.mjs'
 
@@ -73,8 +74,18 @@ export function sectionHeadingRuntimeFromContract(contract) {
 export const sectionHeadingContract =
   freeze(structuredClone(rendererTypography.sectionHeadingContract))
 
+// Font policy evolves independently of the immutable geometry/content closure.
+// The pinned pair uses natural inline placement, as in the golden references.
+// Do not lower shorter numerals to match Han ink bottoms or center their boxes.
 export const sectionHeadingRuntime =
-  sectionHeadingRuntimeFromContract(sectionHeadingContract)
+  sectionHeadingRuntimeFromContract({
+    ...sectionHeadingContract,
+    typography: {
+      ...sectionHeadingContract.typography,
+      fontStack: paperFontStack,
+      numericRunBaselineShiftEm: 0,
+    },
+  })
 
 function requireVisibleWeight(value, field) {
   if (!Number.isInteger(value) || value < 1 || value > 1000) {

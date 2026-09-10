@@ -447,6 +447,9 @@ export function projectCanonicalPaper(canonicalPackage) {
           : {}
         const listening = group.variant.family === 'listening'
           ? {
+              ...(group.variant.firstSectionPlayback === undefined
+                ? {}
+                : { firstSectionPlayback: group.variant.firstSectionPlayback }),
               questions: group.variant.questions.map((question, index) => ({
                 questionId: question.questionId,
                 number: numberingByGroup.get(group.identity.groupId)?.[index]?.number,

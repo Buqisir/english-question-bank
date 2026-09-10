@@ -5,11 +5,12 @@
  * 刀⑤ render-fidelity Chunk A: typography primitives brought in line with
  * `docs/product/exam-paper-format-standards.md` v2 (owner 2026-07-08 终审).
  *
- * Strategy:
+ * Strategy for this token module:
  *   - Share PRIMITIVE values only (font stacks, colors, line heights,
  *     indents, simple grid descriptors).
- *   - DO NOT share CSS text. Each surface keeps its own CSS file.
- *   - DO NOT share HTML markup, JSX, or any rendering function.
+ *   - Reading layout rules are shared separately in `readingLayout.css`.
+ *     Consumers keep only their physical calibration and surface behavior.
+ *   - This module does not contain HTML markup, JSX, or rendering functions.
  *   - DO NOT import React, app/, or server/. This file is the floor of
  *     the shared layer — pure ESM, primitives only, no side effects.
  *
@@ -38,36 +39,17 @@
  *   - No CSS strings, no HTML strings, no JSX, no rendering helpers.
  */
 
+import { paperFontStack } from './paperFonts.mjs'
+
 export const paperSurfaceTokens = Object.freeze({
-  /**
-   * Mixed CN/EN serif stack. Western glyphs match Times New Roman
-   * first; Chinese glyphs fall back through 宋体 family chain. The
-   * order matters — a paragraph that mixes CN and EN must land on
-   * the right glyphs. Used for body text (passage / stem / options)
-   * where EN and ZH interleave inline.
-   */
-  paperFontStack:
-    '"Times New Roman", Times, "SimSun", "Songti SC", "STSong", serif',
-  /**
-   * English-only stack (standard §2) — for consumers that render a
-   * pure-EN run and need the Times New Roman family without the CN
-   * fallback chain attached.
-   */
-  paperFontStackEn: '"Times New Roman", Times, serif',
-  /**
-   * Chinese body stack (standard §2, 书宋/方正书宋/华文宋体族) — for
-   * consumers that render a pure-ZH run separately from the EN stack.
-   */
-  paperFontStackZh: '"SimSun", "Songti SC", "STSong", serif',
-  /**
-   * Heading stack (standard §2, 部标题「第X部分…」中黑加粗) — bold
-   * black-style sans face for part headings. NOT used for 节标题
-   * (which stays 书宋 per standard §4).
-   */
-  paperFontStackHeading: '"SimHei", "Heiti SC", "STHeiti", sans-serif',
-  /** Ticket 35: writing uses the same score-run treatment as every part. */
-  paperFontStackWritingPart: '"SimHei", "Heiti SC", "STHeiti", sans-serif',
-  paperFontFamilyWritingPartEn: 'Arial',
+  // Every paper role uses the same pinned pair, including heading numbers.
+  // Keep the role tokens so size/weight and surface contracts stay unchanged.
+  paperFontStack,
+  paperFontStackEn: paperFontStack,
+  paperFontStackZh: paperFontStack,
+  paperFontStackHeading: paperFontStack,
+  paperFontStackWritingPart: paperFontStack,
+  paperFontFamilyWritingPartEn: 'EQB Termes',
   paperInk: '#111111',
   paperMuted: '#555555',
   paperRule: '#d9d9d9',

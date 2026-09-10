@@ -1,0 +1,3712 @@
+{
+  "method": {
+    "jpeg": "Grayscale <=100; at least 6 dark pixels per row within x=70..794. Inclusive ink bands, not typographic baselines. Watermark/edge contamination must be visually checked.",
+    "pdf": "PyMuPDF native span origins and font sizes in PDF points; physical page numbers include the separate cover. Never use JPEG dimensions to scale PDF coordinates.",
+    "status": "observations only; not a new rendering contract"
+  },
+  "golden": [
+    {
+      "file": "docs/product/exam-paper-format-reference/images/page-01-cover-listening.jpeg",
+      "sha256": "622e78d2b839eb5d47d141d0817da5f35943d093476607eb576819bd8670b51f",
+      "sizePx": [
+        866,
+        1155
+      ],
+      "inkBandsYInclusive": [
+        [
+          110,
+          143
+        ],
+        [
+          256,
+          270
+        ],
+        [
+          288,
+          303
+        ],
+        [
+          320,
+          336
+        ],
+        [
+          353,
+          368
+        ],
+        [
+          386,
+          401
+        ],
+        [
+          418,
+          433
+        ],
+        [
+          484,
+          499
+        ],
+        [
+          516,
+          532
+        ],
+        [
+          549,
+          564
+        ],
+        [
+          596,
+          611
+        ],
+        [
+          628,
+          644
+        ],
+        [
+          661,
+          677
+        ],
+        [
+          694,
+          709
+        ],
+        [
+          742,
+          754
+        ],
+        [
+          775,
+          787
+        ],
+        [
+          806,
+          811
+        ],
+        [
+          813,
+          814
+        ],
+        [
+          816,
+          817
+        ],
+        [
+          819,
+          820
+        ],
+        [
+          873,
+          885
+        ],
+        [
+          905,
+          917
+        ],
+        [
+          938,
+          950
+        ],
+        [
+          954,
+          954
+        ],
+        [
+          971,
+          983
+        ],
+        [
+          1004,
+          1015
+        ],
+        [
+          1018,
+          1019
+        ],
+        [
+          1036,
+          1048
+        ],
+        [
+          1109,
+          1124
+        ]
+      ],
+      "anchors": {
+        "title": {
+          "probeBoxPx": [
+            350,
+            100,
+            515,
+            150
+          ],
+          "inkBoxInclusivePx": [
+            366,
+            109,
+            500,
+            144
+          ]
+        },
+        "notices_label": {
+          "probeBoxPx": [
+            65,
+            250,
+            180,
+            275
+          ],
+          "inkBoxInclusivePx": [
+            74,
+            255,
+            154,
+            271
+          ]
+        },
+        "q1_A_label": {
+          "probeBoxPx": [
+            90,
+            900,
+            120,
+            925
+          ],
+          "inkBoxInclusivePx": [
+            103,
+            906,
+            117,
+            917
+          ]
+        },
+        "q1_B_label": {
+          "probeBoxPx": [
+            325,
+            900,
+            353,
+            925
+          ],
+          "inkBoxInclusivePx": [
+            336,
+            906,
+            349,
+            917
+          ]
+        },
+        "q1_C_label": {
+          "probeBoxPx": [
+            560,
+            900,
+            590,
+            925
+          ],
+          "inkBoxInclusivePx": [
+            569,
+            906,
+            583,
+            917
+          ]
+        }
+      }
+    },
+    {
+      "file": "docs/product/exam-paper-format-reference/images/page-02-listening.jpeg",
+      "sha256": "275a13046f92c6189595707373796f2a43076c12d0ca48c514f89e4fb76e5122",
+      "sizePx": [
+        866,
+        1155
+      ],
+      "inkBandsYInclusive": [
+        [
+          25,
+          36
+        ],
+        [
+          56,
+          56
+        ],
+        [
+          58,
+          67
+        ],
+        [
+          71,
+          71
+        ],
+        [
+          86,
+          98
+        ],
+        [
+          117,
+          129
+        ],
+        [
+          132,
+          132
+        ],
+        [
+          148,
+          160
+        ],
+        [
+          179,
+          179
+        ],
+        [
+          183,
+          191
+        ],
+        [
+          194,
+          194
+        ],
+        [
+          210,
+          221
+        ],
+        [
+          240,
+          252
+        ],
+        [
+          256,
+          256
+        ],
+        [
+          300,
+          315
+        ],
+        [
+          331,
+          346
+        ],
+        [
+          361,
+          377
+        ],
+        [
+          392,
+          407
+        ],
+        [
+          454,
+          469
+        ],
+        [
+          487,
+          499
+        ],
+        [
+          502,
+          503
+        ],
+        [
+          518,
+          529
+        ],
+        [
+          549,
+          561
+        ],
+        [
+          564,
+          564
+        ],
+        [
+          580,
+          591
+        ],
+        [
+          639,
+          654
+        ],
+        [
+          672,
+          684
+        ],
+        [
+          688,
+          688
+        ],
+        [
+          703,
+          715
+        ],
+        [
+          734,
+          745
+        ],
+        [
+          764,
+          776
+        ],
+        [
+          780,
+          780
+        ],
+        [
+          824,
+          839
+        ],
+        [
+          857,
+          869
+        ],
+        [
+          873,
+          873
+        ],
+        [
+          888,
+          900
+        ],
+        [
+          903,
+          903
+        ],
+        [
+          919,
+          919
+        ],
+        [
+          922,
+          930
+        ],
+        [
+          950,
+          962
+        ],
+        [
+          980,
+          992
+        ],
+        [
+          996,
+          996
+        ],
+        [
+          1011,
+          1023
+        ],
+        [
+          1042,
+          1054
+        ],
+        [
+          1057,
+          1057
+        ],
+        [
+          1073,
+          1085
+        ],
+        [
+          1089,
+          1089
+        ],
+        [
+          1118,
+          1133
+        ]
+      ],
+      "anchors": {
+        "q4_A_label": {
+          "probeBoxPx": [
+            95,
+            52,
+            125,
+            76
+          ],
+          "inkBoxInclusivePx": [
+            105,
+            56,
+            120,
+            67
+          ]
+        },
+        "q4_B_label": {
+          "probeBoxPx": [
+            95,
+            82,
+            125,
+            106
+          ],
+          "inkBoxInclusivePx": [
+            106,
+            86,
+            119,
+            98
+          ]
+        },
+        "q4_C_label": {
+          "probeBoxPx": [
+            95,
+            113,
+            125,
+            137
+          ],
+          "inkBoxInclusivePx": [
+            105,
+            117,
+            119,
+            128
+          ]
+        },
+        "q6_A_label": {
+          "probeBoxPx": [
+            95,
+            512,
+            125,
+            537
+          ],
+          "inkBoxInclusivePx": [
+            106,
+            519,
+            120,
+            529
+          ]
+        },
+        "q6_B_label": {
+          "probeBoxPx": [
+            327,
+            512,
+            353,
+            537
+          ],
+          "inkBoxInclusivePx": [
+            339,
+            518,
+            352,
+            529
+          ]
+        },
+        "q6_C_label": {
+          "probeBoxPx": [
+            565,
+            512,
+            592,
+            537
+          ],
+          "inkBoxInclusivePx": [
+            572,
+            518,
+            586,
+            529
+          ]
+        }
+      }
+    },
+    {
+      "file": "docs/product/exam-paper-format-reference/images/page-03-reading-a-start.jpeg",
+      "sha256": "d602f8e4757be05a84762d387268cbf9b1e0734b62c37e2349de4d9d566ff272",
+      "sizePx": [
+        866,
+        1161
+      ],
+      "inkBandsYInclusive": [
+        [
+          20,
+          35
+        ],
+        [
+          54,
+          65
+        ],
+        [
+          69,
+          69
+        ],
+        [
+          86,
+          97
+        ],
+        [
+          101,
+          101
+        ],
+        [
+          117,
+          129
+        ],
+        [
+          149,
+          161
+        ],
+        [
+          164,
+          165
+        ],
+        [
+          181,
+          193
+        ],
+        [
+          215,
+          224
+        ],
+        [
+          245,
+          256
+        ],
+        [
+          277,
+          288
+        ],
+        [
+          308,
+          319
+        ],
+        [
+          340,
+          351
+        ],
+        [
+          401,
+          416
+        ],
+        [
+          435,
+          447
+        ],
+        [
+          450,
+          450
+        ],
+        [
+          466,
+          478
+        ],
+        [
+          498,
+          510
+        ],
+        [
+          514,
+          514
+        ],
+        [
+          529,
+          542
+        ],
+        [
+          544,
+          545
+        ],
+        [
+          562,
+          573
+        ],
+        [
+          594,
+          605
+        ],
+        [
+          609,
+          609
+        ],
+        [
+          626,
+          637
+        ],
+        [
+          641,
+          641
+        ],
+        [
+          657,
+          669
+        ],
+        [
+          672,
+          672
+        ],
+        [
+          750,
+          766
+        ],
+        [
+          782,
+          797
+        ],
+        [
+          813,
+          829
+        ],
+        [
+          859,
+          859
+        ],
+        [
+          879,
+          891
+        ],
+        [
+          911,
+          923
+        ],
+        [
+          943,
+          955
+        ],
+        [
+          957,
+          958
+        ],
+        [
+          975,
+          975
+        ],
+        [
+          979,
+          986
+        ],
+        [
+          1006,
+          1018
+        ],
+        [
+          1022,
+          1022
+        ],
+        [
+          1038,
+          1050
+        ],
+        [
+          1053,
+          1054
+        ],
+        [
+          1070,
+          1081
+        ],
+        [
+          1085,
+          1085
+        ],
+        [
+          1115,
+          1130
+        ]
+      ],
+      "anchors": {
+        "q17_A_label": {
+          "probeBoxPx": [
+            95,
+            460,
+            125,
+            484
+          ],
+          "inkBoxInclusivePx": [
+            102,
+            467,
+            117,
+            478
+          ]
+        },
+        "q17_B_label": {
+          "probeBoxPx": [
+            327,
+            460,
+            353,
+            484
+          ],
+          "inkBoxInclusivePx": [
+            336,
+            467,
+            349,
+            478
+          ]
+        },
+        "q17_C_label": {
+          "probeBoxPx": [
+            565,
+            460,
+            592,
+            484
+          ],
+          "inkBoxInclusivePx": [
+            569,
+            467,
+            583,
+            478
+          ]
+        }
+      }
+    }
+  ],
+  "pdf": {
+    "file": "scripts/import-pipeline/papers/paper-2026-i/source/paper.pdf",
+    "sha256": "31a87069e6d530afba9123eec0487adf45e52e0b98530af80b62476f169e4d0f",
+    "physicalPageCount": 11,
+    "pages": [
+      {
+        "physicalPage": 2,
+        "sizePt": [
+          595.3,
+          841.9
+        ],
+        "lines": [
+          {
+            "anchor": "英语试题第1页（共10 页）",
+            "spans": [
+              {
+                "anchor": "英语试题第",
+                "originPt": [
+                  230.64,
+                  792.89
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "1",
+                "originPt": [
+                  291.0,
+                  792.89
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "页（共",
+                "originPt": [
+                  296.28,
+                  792.89
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "10",
+                "originPt": [
+                  330.48,
+                  792.89
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": " 页）",
+                "originPt": [
+                  340.955,
+                  792.89
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              }
+            ]
+          },
+          {
+            "anchor": "绝密★启用前",
+            "spans": [
+              {
+                "anchor": "绝密★启用前",
+                "originPt": [
+                  68.04,
+                  71.809
+                ],
+                "fontSizePt": 10.45,
+                "font": "HYZhongHeiKW"
+              }
+            ]
+          },
+          {
+            "anchor": "2026 年普通高等学校招生全国统一考试",
+            "spans": [
+              {
+                "anchor": "2026",
+                "originPt": [
+                  159.6,
+                  104.93
+                ],
+                "fontSizePt": 15.95,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": " 年普通高等学校招生全国统一考试",
+                "originPt": [
+                  191.575,
+                  104.93
+                ],
+                "fontSizePt": 15.95,
+                "font": "FZSSK--GBK1-0"
+              }
+            ]
+          },
+          {
+            "anchor": "英",
+            "spans": [
+              {
+                "anchor": "英",
+                "originPt": [
+                  267.6,
+                  145.13
+                ],
+                "fontSizePt": 20.05,
+                "font": "HYZhongHeiKW"
+              }
+            ]
+          },
+          {
+            "anchor": "语",
+            "spans": [
+              {
+                "anchor": "语",
+                "originPt": [
+                  307.68,
+                  145.13
+                ],
+                "fontSizePt": 20.05,
+                "font": "HYZhongHeiKW"
+              }
+            ]
+          },
+          {
+            "anchor": "第一部分听力（共两节，满分30 分）",
+            "spans": [
+              {
+                "anchor": "第一部分听力",
+                "originPt": [
+                  68.04,
+                  191.93
+                ],
+                "fontSizePt": 10.45,
+                "font": "HYZhongHeiKW"
+              },
+              {
+                "anchor": "（",
+                "originPt": [
+                  138.6,
+                  191.93
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "共两节，满分",
+                "originPt": [
+                  149.04,
+                  191.93
+                ],
+                "fontSizePt": 10.45,
+                "font": "HYZhongHeiKW"
+              },
+              {
+                "anchor": "30",
+                "originPt": [
+                  214.68,
+                  191.93
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": " 分",
+                "originPt": [
+                  225.155,
+                  191.93
+                ],
+                "fontSizePt": 10.45,
+                "font": "HYZhongHeiKW"
+              },
+              {
+                "anchor": "）",
+                "originPt": [
+                  238.32,
+                  191.93
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              }
+            ]
+          },
+          {
+            "anchor": "第一节（共5 小题；每小题1.5 分，满分7.5 分）",
+            "spans": [
+              {
+                "anchor": "第一节（共",
+                "originPt": [
+                  89.04,
+                  212.209
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "5",
+                "originPt": [
+                  147.359,
+                  212.209
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": " 小题；每小题",
+                "originPt": [
+                  152.584,
+                  212.209
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "1.5",
+                "originPt": [
+                  220.92,
+                  212.209
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": " 分，满分",
+                "originPt": [
+                  234.02,
+                  212.209
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "7.5",
+                "originPt": [
+                  281.28,
+                  212.209
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": " 分）",
+                "originPt": [
+                  294.38,
+                  212.209
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              }
+            ]
+          },
+          {
+            "anchor": "听下面5 段录音。每段录音后有一个小题，从题中所给的A、B、C 三个选项中选出最佳选项。",
+            "spans": [
+              {
+                "anchor": "听下面",
+                "originPt": [
+                  89.04,
+                  232.49
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "5",
+                "originPt": [
+                  123.12,
+                  232.49
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": " 段录音。每段录音后有一个小题，从题中所给的",
+                "originPt": [
+                  128.345,
+                  232.49
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "A",
+                "originPt": [
+                  354.12,
+                  232.49
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "、",
+                "originPt": [
+                  361.8,
+                  232.49
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "B",
+                "originPt": [
+                  372.24,
+                  232.49
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "、",
+                "originPt": [
+                  379.2,
+                  232.49
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "C",
+                "originPt": [
+                  389.759,
+                  232.49
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": " 三个选项中选出最佳选项。",
+                "originPt": [
+                  396.7187,
+                  232.49
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              }
+            ]
+          },
+          {
+            "anchor": "听完每段录音后，你都有10 秒钟的时间来回答有关小题和阅读下一小题。每段录音播放两遍。",
+            "spans": [
+              {
+                "anchor": "听完每段录音后，你都有",
+                "originPt": [
+                  68.04,
+                  252.77
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "10",
+                "originPt": [
+                  186.12,
+                  252.77
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": " 秒钟的时间来回答有关小题和阅读下一小题。每段录音播放两遍。",
+                "originPt": [
+                  196.595,
+                  252.77
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              }
+            ]
+          },
+          {
+            "anchor": "1．Who is the man?",
+            "spans": [
+              {
+                "anchor": "1",
+                "originPt": [
+                  68.04,
+                  273.05
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  73.32,
+                  273.05
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "Who is the man?",
+                "originPt": [
+                  83.759,
+                  273.05
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "A．A business client.",
+            "spans": [
+              {
+                "anchor": "A",
+                "originPt": [
+                  89.04,
+                  295.25
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  96.6,
+                  294.89
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "A business client.",
+                "originPt": [
+                  107.04,
+                  295.25
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "B．A job applicant.",
+            "spans": [
+              {
+                "anchor": "B",
+                "originPt": [
+                  239.159,
+                  295.25
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  246.24,
+                  294.89
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "A job applicant.",
+                "originPt": [
+                  256.8,
+                  295.25
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "C．A new staff member.",
+            "spans": [
+              {
+                "anchor": "C",
+                "originPt": [
+                  379.8,
+                  295.25
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  386.759,
+                  294.89
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "A new staff member.",
+                "originPt": [
+                  397.2,
+                  295.25
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "2．Where does the conversation probably take plac",
+            "spans": [
+              {
+                "anchor": "2",
+                "originPt": [
+                  68.04,
+                  316.73
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  73.32,
+                  316.73
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "Where does the conversation prob",
+                "originPt": [
+                  83.759,
+                  316.73
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "A．In an office.",
+            "spans": [
+              {
+                "anchor": "A",
+                "originPt": [
+                  89.04,
+                  338.93
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  96.6,
+                  338.69
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "In an office.",
+                "originPt": [
+                  107.04,
+                  338.93
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "B．In a restaurant.",
+            "spans": [
+              {
+                "anchor": "B",
+                "originPt": [
+                  242.04,
+                  338.93
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  249.12,
+                  338.69
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "In a restaurant.",
+                "originPt": [
+                  259.559,
+                  338.93
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "C．In a grocery store.",
+            "spans": [
+              {
+                "anchor": "C",
+                "originPt": [
+                  379.8,
+                  338.93
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  386.759,
+                  338.69
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "In a grocery store.",
+                "originPt": [
+                  397.2,
+                  338.93
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "3．What are the speakers talking about?",
+            "spans": [
+              {
+                "anchor": "3",
+                "originPt": [
+                  68.04,
+                  360.409
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  73.32,
+                  360.409
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "What are the speakers talking ab",
+                "originPt": [
+                  83.759,
+                  360.409
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "A．A picture.",
+            "spans": [
+              {
+                "anchor": "A",
+                "originPt": [
+                  89.04,
+                  382.609
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  96.6,
+                  382.25
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "A picture.",
+                "originPt": [
+                  107.04,
+                  382.609
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "B．A fisherman.",
+            "spans": [
+              {
+                "anchor": "B",
+                "originPt": [
+                  243.6,
+                  382.609
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  250.559,
+                  382.25
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "A fisherman.",
+                "originPt": [
+                  261.12,
+                  382.609
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "C．A country.",
+            "spans": [
+              {
+                "anchor": "C",
+                "originPt": [
+                  379.8,
+                  382.609
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  386.759,
+                  382.25
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "A country.",
+                "originPt": [
+                  397.2,
+                  382.609
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "4．What does the woman suggest Max do?",
+            "spans": [
+              {
+                "anchor": "4",
+                "originPt": [
+                  68.04,
+                  404.09
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  73.32,
+                  404.09
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "What does the woman suggest Max ",
+                "originPt": [
+                  83.759,
+                  404.09
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "A．Go to bed.",
+            "spans": [
+              {
+                "anchor": "A",
+                "originPt": [
+                  89.04,
+                  426.29
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  96.6,
+                  426.05
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "Go to bed.",
+                "originPt": [
+                  107.04,
+                  426.29
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "B．Drive carefully.",
+            "spans": [
+              {
+                "anchor": "B",
+                "originPt": [
+                  245.64,
+                  426.29
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  252.6,
+                  426.05
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "Drive carefully.",
+                "originPt": [
+                  263.159,
+                  426.29
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "C．Update his blog.",
+            "spans": [
+              {
+                "anchor": "C",
+                "originPt": [
+                  379.8,
+                  426.29
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  386.759,
+                  426.05
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "Update his blog.",
+                "originPt": [
+                  397.2,
+                  426.29
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "5．Why does Sarah make the phone call?",
+            "spans": [
+              {
+                "anchor": "5",
+                "originPt": [
+                  68.04,
+                  447.77
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  73.32,
+                  447.77
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "Why does Sarah make the phone ca",
+                "originPt": [
+                  83.759,
+                  447.77
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "A．To request sick leave.",
+            "spans": [
+              {
+                "anchor": "A",
+                "originPt": [
+                  89.04,
+                  469.969
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  96.6,
+                  469.73
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "To request sick leave.",
+                "originPt": [
+                  107.04,
+                  469.969
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "B．To make a complaint.",
+            "spans": [
+              {
+                "anchor": "B",
+                "originPt": [
+                  245.88,
+                  469.969
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  252.84,
+                  469.73
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "To make a complaint.",
+                "originPt": [
+                  263.4,
+                  469.969
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "C．To postpone a meeting.",
+            "spans": [
+              {
+                "anchor": "C",
+                "originPt": [
+                  379.8,
+                  469.969
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  386.759,
+                  469.73
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "To postpone a meeting.",
+                "originPt": [
+                  397.2,
+                  469.969
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "第二节（共15 小题；每小题1.5 分，满分22.5 分）",
+            "spans": [
+              {
+                "anchor": "第二节（共",
+                "originPt": [
+                  89.04,
+                  511.73
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "15",
+                "originPt": [
+                  147.359,
+                  511.73
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": " 小题；每小题",
+                "originPt": [
+                  157.834,
+                  511.73
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "1.5",
+                "originPt": [
+                  226.2,
+                  511.73
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": " 分，满分",
+                "originPt": [
+                  239.3,
+                  511.73
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "22.5",
+                "originPt": [
+                  286.559,
+                  511.73
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": " 分）",
+                "originPt": [
+                  304.909,
+                  511.73
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              }
+            ]
+          },
+          {
+            "anchor": "听下面5 段录音。每段录音后有几个小题，从题中所给的A、B、C 三个选项中选出最佳选项。",
+            "spans": [
+              {
+                "anchor": "听下面",
+                "originPt": [
+                  89.04,
+                  532.009
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "5",
+                "originPt": [
+                  123.12,
+                  532.009
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": " 段录音。每段录音后有几个小题，从题中所给的",
+                "originPt": [
+                  128.345,
+                  532.009
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "A",
+                "originPt": [
+                  354.12,
+                  532.009
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "、",
+                "originPt": [
+                  361.8,
+                  532.009
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "B",
+                "originPt": [
+                  372.24,
+                  532.009
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "、",
+                "originPt": [
+                  379.2,
+                  532.009
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "C",
+                "originPt": [
+                  389.759,
+                  532.009
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": " 三个选项中选出最佳选项。",
+                "originPt": [
+                  396.7187,
+                  532.009
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              }
+            ]
+          },
+          {
+            "anchor": "听每段录音前，你将有时间阅读各个小题，每小题5 秒钟；听完后，每小题都有5 秒钟的作答时间。",
+            "spans": [
+              {
+                "anchor": "听每段录音前，你将有时间阅读各个小题，每小题",
+                "originPt": [
+                  68.04,
+                  552.29
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "5",
+                "originPt": [
+                  301.68,
+                  552.29
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": " 秒钟；听完后，每小题都有",
+                "originPt": [
+                  306.905,
+                  552.29
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "5",
+                "originPt": [
+                  438.12,
+                  552.29
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": " 秒钟的作答时间。",
+                "originPt": [
+                  443.345,
+                  552.29
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              }
+            ]
+          },
+          {
+            "anchor": "每段录音播放两遍。",
+            "spans": [
+              {
+                "anchor": "每段录音播放两遍。",
+                "originPt": [
+                  68.04,
+                  572.569
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              }
+            ]
+          },
+          {
+            "anchor": "听下面的录音，回答第6 和第7 小题。",
+            "spans": [
+              {
+                "anchor": "听下面的录音，回答第",
+                "originPt": [
+                  68.04,
+                  592.85
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "6",
+                "originPt": [
+                  175.68,
+                  592.85
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": " 和第",
+                "originPt": [
+                  180.905,
+                  592.85
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "7",
+                "originPt": [
+                  207.12,
+                  592.85
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": " 小题。",
+                "originPt": [
+                  212.345,
+                  592.85
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              }
+            ]
+          },
+          {
+            "anchor": "6．What makes Copenhagen different from London in",
+            "spans": [
+              {
+                "anchor": "6",
+                "originPt": [
+                  68.04,
+                  613.13
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  73.32,
+                  613.13
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "What makes Copenhagen different ",
+                "originPt": [
+                  83.759,
+                  613.13
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "A．A less stressful life.",
+            "spans": [
+              {
+                "anchor": "A",
+                "originPt": [
+                  89.04,
+                  635.33
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  96.6,
+                  635.09
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "A less stressful life.",
+                "originPt": [
+                  107.04,
+                  635.33
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "B．Better city planning.",
+            "spans": [
+              {
+                "anchor": "B",
+                "originPt": [
+                  242.4,
+                  635.33
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  249.48,
+                  635.09
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "Better city planning.",
+                "originPt": [
+                  259.92,
+                  635.33
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "C．More tourist sites.",
+            "spans": [
+              {
+                "anchor": "C",
+                "originPt": [
+                  379.8,
+                  635.33
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  386.759,
+                  635.09
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "More tourist sites.",
+                "originPt": [
+                  397.2,
+                  635.33
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "7．Why did Lisa originally come to Copenhagen?",
+            "spans": [
+              {
+                "anchor": "7",
+                "originPt": [
+                  68.04,
+                  656.809
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  73.32,
+                  656.809
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "Why did Lisa originally come to ",
+                "originPt": [
+                  83.759,
+                  656.809
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "A．To work on a project.",
+            "spans": [
+              {
+                "anchor": "A",
+                "originPt": [
+                  89.04,
+                  679.009
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  96.6,
+                  678.65
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "To work on a project.",
+                "originPt": [
+                  107.04,
+                  679.009
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "B．To find a permanent job.",
+            "spans": [
+              {
+                "anchor": "B",
+                "originPt": [
+                  245.04,
+                  679.009
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  252.0,
+                  678.65
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "To find a permanent job.",
+                "originPt": [
+                  262.559,
+                  679.009
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "C．To visit famous museums.",
+            "spans": [
+              {
+                "anchor": "C",
+                "originPt": [
+                  379.8,
+                  679.009
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  386.759,
+                  678.65
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "To visit famous museums.",
+                "originPt": [
+                  397.2,
+                  679.009
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "听下面的录音，回答第8-10 小题。",
+            "spans": [
+              {
+                "anchor": "听下面的录音，回答第",
+                "originPt": [
+                  68.04,
+                  720.769
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "8-10",
+                "originPt": [
+                  175.68,
+                  720.769
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": " 小题。",
+                "originPt": [
+                  194.9011,
+                  720.769
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              }
+            ]
+          },
+          {
+            "anchor": "8．What is the total budget for the dinner?",
+            "spans": [
+              {
+                "anchor": "8",
+                "originPt": [
+                  68.04,
+                  741.05
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  73.32,
+                  741.05
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "What is the total budget for the",
+                "originPt": [
+                  83.759,
+                  741.05
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "A．£200.",
+            "spans": [
+              {
+                "anchor": "A",
+                "originPt": [
+                  89.04,
+                  763.25
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  96.6,
+                  762.89
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "£200.",
+                "originPt": [
+                  107.04,
+                  763.25
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "B．£300.",
+            "spans": [
+              {
+                "anchor": "B",
+                "originPt": [
+                  246.24,
+                  763.25
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  253.2,
+                  762.89
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "£300.",
+                "originPt": [
+                  263.759,
+                  763.25
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "C．£600.",
+            "spans": [
+              {
+                "anchor": "C",
+                "originPt": [
+                  379.8,
+                  763.25
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  386.759,
+                  762.89
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "£600.",
+                "originPt": [
+                  397.2,
+                  763.25
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "physicalPage": 3,
+        "sizePt": [
+          595.3,
+          841.9
+        ],
+        "lines": [
+          {
+            "anchor": "英语试题第2页（共10 页）",
+            "spans": [
+              {
+                "anchor": "英语试题第",
+                "originPt": [
+                  230.64,
+                  792.89
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "2",
+                "originPt": [
+                  291.0,
+                  792.89
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "页（共",
+                "originPt": [
+                  296.28,
+                  792.89
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "10",
+                "originPt": [
+                  330.48,
+                  792.89
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": " 页）",
+                "originPt": [
+                  340.955,
+                  792.89
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              }
+            ]
+          },
+          {
+            "anchor": "9．What occasion is the dinner for?",
+            "spans": [
+              {
+                "anchor": "9",
+                "originPt": [
+                  68.04,
+                  70.25
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  73.32,
+                  70.25
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "What occasion is the dinner for?",
+                "originPt": [
+                  83.759,
+                  70.25
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "A. The retirement of an employee.",
+            "spans": [
+              {
+                "anchor": "A. The retirement of an employee",
+                "originPt": [
+                  89.04,
+                  90.89
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "B. The launch of a new product.",
+            "spans": [
+              {
+                "anchor": "B. The launch of a new product.",
+                "originPt": [
+                  89.04,
+                  111.17
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "C. The opening of a branch office.",
+            "spans": [
+              {
+                "anchor": "C. The opening of a branch offic",
+                "originPt": [
+                  89.04,
+                  131.45
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "10．What will the woman send to the man?",
+            "spans": [
+              {
+                "anchor": "10",
+                "originPt": [
+                  68.04,
+                  151.37
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  78.6,
+                  151.37
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "What will the woman send to the ",
+                "originPt": [
+                  89.04,
+                  151.37
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "A. A detailed menu.",
+            "spans": [
+              {
+                "anchor": "A. A detailed menu.",
+                "originPt": [
+                  89.04,
+                  172.009
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "B. A booking confirmation.",
+            "spans": [
+              {
+                "anchor": "B. A booking confirmation.",
+                "originPt": [
+                  236.88,
+                  172.009
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "C. A price list.",
+            "spans": [
+              {
+                "anchor": "C. A price list.",
+                "originPt": [
+                  416.28,
+                  172.009
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "听下面的录音，回答第11-13 小题。",
+            "spans": [
+              {
+                "anchor": "听下面的录音，回答第",
+                "originPt": [
+                  68.04,
+                  191.93
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "11-13",
+                "originPt": [
+                  175.68,
+                  191.93
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": " 小题。",
+                "originPt": [
+                  200.1511,
+                  191.93
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              }
+            ]
+          },
+          {
+            "anchor": "11．What does Jenny do?",
+            "spans": [
+              {
+                "anchor": "11",
+                "originPt": [
+                  68.04,
+                  212.209
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  78.6,
+                  212.209
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "What does Jenny do?",
+                "originPt": [
+                  89.04,
+                  212.209
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "A. She's an AI engineer.",
+            "spans": [
+              {
+                "anchor": "A. She's an AI engineer.",
+                "originPt": [
+                  89.04,
+                  232.85
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "B. She's a pop singer.",
+            "spans": [
+              {
+                "anchor": "B. She's a pop singer.",
+                "originPt": [
+                  238.44,
+                  232.85
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "C. She's a radio host.",
+            "spans": [
+              {
+                "anchor": "C. She's a radio host.",
+                "originPt": [
+                  407.759,
+                  232.85
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "12．How does the woman feel about what Jenny has ",
+            "spans": [
+              {
+                "anchor": "12",
+                "originPt": [
+                  68.04,
+                  252.77
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  78.6,
+                  252.77
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "How does the woman feel about wh",
+                "originPt": [
+                  89.04,
+                  252.77
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "A. It might cause legal problems.",
+            "spans": [
+              {
+                "anchor": "A. It might cause legal problems",
+                "originPt": [
+                  89.04,
+                  273.409
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "B. It would benefit the community.",
+            "spans": [
+              {
+                "anchor": "B. It would benefit the communit",
+                "originPt": [
+                  89.04,
+                  293.69
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "C. It could be a profitable business.",
+            "spans": [
+              {
+                "anchor": "C. It could be a profitable busi",
+                "originPt": [
+                  89.04,
+                  313.97
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "13．What will the man do next?",
+            "spans": [
+              {
+                "anchor": "13",
+                "originPt": [
+                  68.04,
+                  333.89
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  78.6,
+                  333.89
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "What will the man do next?",
+                "originPt": [
+                  89.04,
+                  333.89
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "A. Play a song.",
+            "spans": [
+              {
+                "anchor": "A. Play a song.",
+                "originPt": [
+                  89.04,
+                  354.53
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "B. Contact a listener.",
+            "spans": [
+              {
+                "anchor": "B. Contact a listener.",
+                "originPt": [
+                  242.159,
+                  354.53
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "C. Share new songs.",
+            "spans": [
+              {
+                "anchor": "C. Share new songs.",
+                "originPt": [
+                  409.2,
+                  354.53
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "听下面的录音，回答第14-16 小题。",
+            "spans": [
+              {
+                "anchor": "听下面的录音，回答第",
+                "originPt": [
+                  68.04,
+                  374.45
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "14-16",
+                "originPt": [
+                  175.68,
+                  374.45
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": " 小题。",
+                "originPt": [
+                  200.1511,
+                  374.45
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              }
+            ]
+          },
+          {
+            "anchor": "14．What does Evans say about ancient Babylonia?",
+            "spans": [
+              {
+                "anchor": "14",
+                "originPt": [
+                  68.04,
+                  394.73
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  78.6,
+                  394.73
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "What does Evans say about ancien",
+                "originPt": [
+                  89.04,
+                  394.73
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "A. It is rich in energy resources.",
+            "spans": [
+              {
+                "anchor": "A. It is rich in energy resource",
+                "originPt": [
+                  89.04,
+                  415.37
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "B. It is the origin of many foods.",
+            "spans": [
+              {
+                "anchor": "B. It is the origin of many food",
+                "originPt": [
+                  89.04,
+                  435.65
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "C. It's famous for ancient medicine.",
+            "spans": [
+              {
+                "anchor": "C. It's famous for ancient medic",
+                "originPt": [
+                  89.04,
+                  455.93
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "15．What were the ancient texts first thought to ",
+            "spans": [
+              {
+                "anchor": "15",
+                "originPt": [
+                  68.04,
+                  475.85
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  78.6,
+                  475.85
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "What were the ancient texts firs",
+                "originPt": [
+                  89.04,
+                  475.85
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "A. Cookery.",
+            "spans": [
+              {
+                "anchor": "A. Cookery.",
+                "originPt": [
+                  89.04,
+                  496.49
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "B. Medicine.",
+            "spans": [
+              {
+                "anchor": "B. Medicine.",
+                "originPt": [
+                  240.359,
+                  496.49
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "C. Education.",
+            "spans": [
+              {
+                "anchor": "C. Education.",
+                "originPt": [
+                  410.4,
+                  496.49
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "16．What did Jean Bottero do?",
+            "spans": [
+              {
+                "anchor": "16",
+                "originPt": [
+                  68.04,
+                  516.409
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  78.6,
+                  516.409
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "What did Jean Bottero do?",
+                "originPt": [
+                  89.04,
+                  516.409
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "A. Translated the texts.",
+            "spans": [
+              {
+                "anchor": "A. Translated the texts.",
+                "originPt": [
+                  89.04,
+                  537.05
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "B. Proved Mary's idea right.",
+            "spans": [
+              {
+                "anchor": "B. Proved Mary's idea right.",
+                "originPt": [
+                  239.159,
+                  537.05
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "C. Found the texts at Yale.",
+            "spans": [
+              {
+                "anchor": "C. Found the texts at Yale.",
+                "originPt": [
+                  410.28,
+                  537.05
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "听下面的录音，回答第17-20 小题。",
+            "spans": [
+              {
+                "anchor": "听下面的录音，回答第",
+                "originPt": [
+                  68.04,
+                  556.969
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "17-20",
+                "originPt": [
+                  175.68,
+                  556.969
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": " 小题。",
+                "originPt": [
+                  200.1511,
+                  556.969
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              }
+            ]
+          },
+          {
+            "anchor": "17．What must the students wear when doing the ex",
+            "spans": [
+              {
+                "anchor": "17",
+                "originPt": [
+                  68.04,
+                  577.25
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  78.6,
+                  577.25
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "What must the students wear when",
+                "originPt": [
+                  89.04,
+                  577.25
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "A. Loose clothes.",
+            "spans": [
+              {
+                "anchor": "A. Loose clothes.",
+                "originPt": [
+                  89.04,
+                  597.89
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "B. Protective glasses.",
+            "spans": [
+              {
+                "anchor": "B. Protective glasses.",
+                "originPt": [
+                  236.04,
+                  597.89
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "C. Waterproof caps.",
+            "spans": [
+              {
+                "anchor": "C. Waterproof caps.",
+                "originPt": [
+                  409.8,
+                  597.89
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "18．What should the students do if they knock ove",
+            "spans": [
+              {
+                "anchor": "18",
+                "originPt": [
+                  68.04,
+                  617.809
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  78.6,
+                  617.809
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "What should the students do if t",
+                "originPt": [
+                  89.04,
+                  617.809
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "A. Report to the teacher.",
+            "spans": [
+              {
+                "anchor": "A. Report to the teacher.",
+                "originPt": [
+                  89.04,
+                  638.45
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "B. Clear up the mess.",
+            "spans": [
+              {
+                "anchor": "B. Clear up the mess.",
+                "originPt": [
+                  234.24,
+                  638.45
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "C. Check the instructions.",
+            "spans": [
+              {
+                "anchor": "C. Check the instructions.",
+                "originPt": [
+                  408.0,
+                  638.45
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "19．Why should the students switch roles?",
+            "spans": [
+              {
+                "anchor": "19",
+                "originPt": [
+                  68.04,
+                  658.37
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  78.6,
+                  658.37
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "Why should the students switch r",
+                "originPt": [
+                  89.04,
+                  658.37
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "A. To practice more equally.",
+            "spans": [
+              {
+                "anchor": "A. To practice more equally.",
+                "originPt": [
+                  89.04,
+                  678.89
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "B. To speed up the experiment.",
+            "spans": [
+              {
+                "anchor": "B. To speed up the experiment.",
+                "originPt": [
+                  89.04,
+                  699.29
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "C. To avoid making mistakes.",
+            "spans": [
+              {
+                "anchor": "C. To avoid making mistakes.",
+                "originPt": [
+                  89.04,
+                  719.569
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "20．What should students do after finishing early",
+            "spans": [
+              {
+                "anchor": "20",
+                "originPt": [
+                  68.04,
+                  739.49
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "．",
+                "originPt": [
+                  78.6,
+                  739.49
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "What should students do after fi",
+                "originPt": [
+                  89.04,
+                  739.49
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "A. Analyze the data.",
+            "spans": [
+              {
+                "anchor": "A. Analyze the data.",
+                "originPt": [
+                  89.04,
+                  760.13
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "B. Clean the workspace.",
+            "spans": [
+              {
+                "anchor": "B. Clean the workspace.",
+                "originPt": [
+                  232.8,
+                  760.13
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          },
+          {
+            "anchor": "C. Start a new experiment.",
+            "spans": [
+              {
+                "anchor": "C. Start a new experiment.",
+                "originPt": [
+                  408.6,
+                  760.13
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "physicalPage": 4,
+        "sizePt": [
+          595.3,
+          841.9
+        ],
+        "lines": [
+          {
+            "anchor": "第二部分阅读（共两节，满分50 分）",
+            "spans": [
+              {
+                "anchor": "第二部分阅读",
+                "originPt": [
+                  68.04,
+                  69.53
+                ],
+                "fontSizePt": 10.45,
+                "font": "HYZhongHeiKW"
+              },
+              {
+                "anchor": "（",
+                "originPt": [
+                  138.6,
+                  69.53
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "共两节，满分",
+                "originPt": [
+                  149.04,
+                  69.53
+                ],
+                "fontSizePt": 10.45,
+                "font": "HYZhongHeiKW"
+              },
+              {
+                "anchor": "50",
+                "originPt": [
+                  214.68,
+                  69.53
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": " 分",
+                "originPt": [
+                  225.155,
+                  69.53
+                ],
+                "fontSizePt": 10.45,
+                "font": "HYZhongHeiKW"
+              },
+              {
+                "anchor": "）",
+                "originPt": [
+                  238.32,
+                  69.53
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              }
+            ]
+          },
+          {
+            "anchor": "第一节（共15 小题；每小题2.5 分，满分37.5 分）",
+            "spans": [
+              {
+                "anchor": "第一节（共",
+                "originPt": [
+                  89.04,
+                  88.25
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "15",
+                "originPt": [
+                  147.359,
+                  88.25
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": " 小题；每小题",
+                "originPt": [
+                  157.834,
+                  88.25
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "2.5",
+                "originPt": [
+                  226.2,
+                  88.25
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": " 分，满分",
+                "originPt": [
+                  239.3,
+                  88.25
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "37.5",
+                "originPt": [
+                  286.559,
+                  88.25
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": " 分）",
+                "originPt": [
+                  304.909,
+                  88.25
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              }
+            ]
+          },
+          {
+            "anchor": "阅读下列短文，从每题所给的A、B、C、D 四个选项中选出最佳选项。",
+            "spans": [
+              {
+                "anchor": "阅读下列短文，从每题所给的",
+                "originPt": [
+                  88.2,
+                  106.85
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "A",
+                "originPt": [
+                  224.4,
+                  106.85
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "、",
+                "originPt": [
+                  231.959,
+                  106.85
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "B",
+                "originPt": [
+                  242.4,
+                  106.85
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "、",
+                "originPt": [
+                  249.48,
+                  106.85
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "C",
+                "originPt": [
+                  259.92,
+                  106.85
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": "、",
+                "originPt": [
+                  267.0,
+                  106.85
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              },
+              {
+                "anchor": "D",
+                "originPt": [
+                  277.44,
+                  106.85
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPSMT"
+              },
+              {
+                "anchor": " 四个选项中选出最佳选项。",
+                "originPt": [
+                  284.9849,
+                  106.85
+                ],
+                "fontSizePt": 10.45,
+                "font": "FZSSK--GBK1-0"
+              }
+            ]
+          },
+          {
+            "anchor": "A",
+            "spans": [
+              {
+                "anchor": "A",
+                "originPt": [
+                  293.88,
+                  125.93
+                ],
+                "fontSizePt": 10.45,
+                "font": "TimesNewRomanPS-BoldMT"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

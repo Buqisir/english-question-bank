@@ -59,10 +59,13 @@ export function validateListeningContract({
       'questions',
       'transcriptSegments',
       'choiceOwnership',
+      ...(variant.firstSectionPlayback === undefined ? [] : ['firstSectionPlayback']),
     ])
     || variant.family !== 'listening'
     || !Array.isArray(variant.questions)
     || !Array.isArray(variant.transcriptSegments)
+    || (variant.firstSectionPlayback !== undefined
+      && !['once_explicit', 'twice_default'].includes(variant.firstSectionPlayback))
   ) {
     return [issue(
       'LISTENING_VARIANT_INVALID',

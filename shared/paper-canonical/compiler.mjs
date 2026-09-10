@@ -2777,7 +2777,8 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     : family.familyContractId === 'reading'
       ? ['family', 'passageBlockRoles', 'questions', 'choiceOwnership']
       : family.familyContractId === 'listening'
-        ? ['family', 'questions', 'transcriptSegments', 'choiceOwnership']
+        ? ['family', 'questions', 'transcriptSegments', 'choiceOwnership',
+            ...(variant.firstSectionPlayback === undefined ? [] : ['firstSectionPlayback'])]
       : family.familyContractId === 'application-writing'
         ? variant.mode === 'legacy_opaque'
           ? ['family', 'mode', 'writingTaskId', 'sourceTaskType', 'contentBlockRefs', 'wordCountTarget', 'wordCountTargetCertainty', 'wordCountScope', 'choiceOwnership', 'response']

@@ -111,6 +111,28 @@ export async function renderPaginatedPaper(printHtml, { inspect = null } = {}) {
   return withChromiumPage(async (page) => {
     await page.setContent(printHtml, { waitUntil: 'load' })
 
+    // Planned exports move a group with its immediately preceding chrome.
+    // Natural preview/Print HTML never contains these markers and is untouched.
+    await page.evaluate(() => {
+      for (const group of document.querySelectorAll('section[data-pdf-planned-break]')) {
+        let anchor = group
+        while (anchor.previousElementSibling?.matches('.section-header, .reading-meta-instruction, .page-break')) {
+          anchor = anchor.previousElementSibling
+        }
+        if (anchor !== group) {
+          group.removeAttribute('data-pdf-planned-break')
+          anchor.setAttribute('data-pdf-planned-break', '')
+        }
+      }
+    })
+
+    // FontFaceSet.ready alone resolves even when a face failed. Explicitly
+    // load every declared face and reject before measuring page boundaries.
+    await page.evaluate(async () => {
+      await Promise.all([...document.fonts].map(face => face.load()))
+      await document.fonts.ready
+    })
+
     // Step 2: PagedConfig BEFORE step 3's polyfill injection — order is load-bearing,
     // see module header + spike-gate-dp1.md finding #3.
     await page.evaluate(() => {
@@ -139,6 +161,46 @@ export async function renderPaginatedPaper(printHtml, { inspect = null } = {}) {
       )
     }
     const pageCount = await page.evaluate(() => window.__pagedPageCount)
+    // A source-level row count is only a lower bound. Validate the actual
+    // paginated boxes before returning either HTML or PDF, including fragments
+    // Paged.js created despite break-inside: avoid for oversized content.
+    const layoutFailure = await page.evaluate((fixedPage) => {
+      const pagesByBlock = new Map()
+      const fixedPageAtoms = fixedPage
+        ? ', .pagedjs_pages .question, .pagedjs_pages .canonical-option-bank-item' : ''
+      for (const element of document.querySelectorAll('.pagedjs_pages .canonical-reading-framed-columns, .pagedjs_pages .canonical-reading-figure, .pagedjs_pages .writing-answer-box, .pagedjs_pages [data-canonical-group-type="listening"] .question' + fixedPageAtoms)) {
+        const page = element.closest('.pagedjs_page')
+        const area = page.querySelector('.pagedjs_area').getBoundingClientRect()
+        const box = element.getBoundingClientRect()
+        const id = element.getAttribute('data-canonical-block-id')
+          || element.getAttribute('data-ref')
+        if (id) {
+          const previous = pagesByBlock.get(id)
+          if (previous && previous !== page) return { id, reason: 'atomic block split across pages' }
+          pagesByBlock.set(id, page)
+        }
+        if (box.top < area.top - 1 || box.bottom > area.bottom + 1
+          || box.left < area.left - 1 || box.right > area.right + 1) {
+          return { id, reason: 'block exceeds printable page area' }
+        }
+        for (const child of [element, ...element.querySelectorAll('td, figcaption, .writing-continuation-row, .writing-starter-line, .canonical-application-given')]) {
+          const rect = child.getBoundingClientRect()
+          if (child.scrollWidth > child.clientWidth + 1
+            || child.scrollHeight > child.clientHeight + 1
+            || rect.top < box.top - 1 || rect.bottom > box.bottom + 1
+            || rect.left < box.left - 1 || rect.right > box.right + 1) {
+            return { id, reason: 'content exceeds its layout box' }
+          }
+        }
+      }
+      return null
+    }, printHtml.includes('data-pdf-planned-break'))
+    if (layoutFailure) {
+      throw Object.assign(new Error(`试卷内容超出排版区域：${layoutFailure.id || 'block'} (${layoutFailure.reason})`), {
+        code: 'PAPER_LAYOUT_OVERFLOW',
+        blockId: layoutFailure.id,
+      })
+    }
     const inspection = typeof inspect === 'function'
       ? await inspect(page)
       : null

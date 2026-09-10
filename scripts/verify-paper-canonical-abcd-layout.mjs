@@ -12,6 +12,8 @@ import {
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 
+import { embeddedPaperFontCss } from '../server/paper-fonts.mjs'
+import { paperFontStack, paperFontFaces } from '../shared/papersurface/paperFonts.mjs'
 import {
   abcdLayoutRules,
   abcdPlacementSignature,
@@ -442,17 +444,18 @@ function rowsFor(translation) {
   return [...rows.values()]
 }
 
-function htmlFor(translation, embeddedFont = '') {
+function htmlFor(translation) {
   const rowHeightPt = 72
   return `<!doctype html><meta charset="utf-8"><style>
     @page { size: A4; margin: 24mm; }
-    ${embeddedFont ? `@font-face { font-family: "EQB Pinned Times"; src: url(data:font/ttf;base64,${embeddedFont}); }` : ''}
-    body { margin: 0; font-family: "EQB Pinned Times", "Times New Roman", "Songti SC"; font-size: 10.5pt; font-kerning: normal; }
+    ${embeddedPaperFontCss()}
+    ${readFileSync(new URL('../shared/papersurface/fontRendering.css', import.meta.url), 'utf8')}
+    body { margin: 0; font-family: ${paperFontStack}; font-size: 10.5pt; }
     .set { position: relative; width: ${translation.rowWidthPt}pt; height: ${rowsFor(translation).length * rowHeightPt}pt; }
     .option { position: absolute; box-sizing: border-box; line-height: 18pt; overflow: visible; }
     .dense { white-space: nowrap; }
     .one { padding-left: 21pt; text-indent: -21pt; white-space: pre-wrap; overflow-wrap: normal; word-break: normal; }
-  </style><div class="set">${translation.placements.map((placement) =>
+  </style><body class="paper-print"><div class="set">${translation.placements.map((placement) =>
     `<span class="option ${translation.mode === 'one_column' ? 'one' : 'dense'}" data-label="${placement.label}" style="left:${placement.startPt}pt;top:${placement.row * rowHeightPt}pt;width:${translation.mode === 'one_column' ? translation.rowWidthPt : translation.rowWidthPt - placement.startPt}pt">${escapeHtml(placement.renderedText)}</span>`).join('')}</div>`
 }
 
@@ -617,33 +620,19 @@ async function readScreenPositions(page) {
 }
 
 function hostFontClosure() {
-  function resolveFont(pattern) {
-    const [file, fontVersion, family] = execFileSync(
-      'fc-match',
-      ['-f', '%{file}\\n%{fontversion}\\n%{family}\\n', pattern],
-      { encoding: 'utf8' },
-    ).trim().split('\n')
-    return {
-      fontFaceId: family.split(',')[0],
-      fontVersion: `fc:${fontVersion}`,
-      file,
-      fontBytes: readFileSync(file),
-    }
+  function bytesFor(family) {
+    const face = paperFontFaces.find(face => face.family === family && face.style === 'normal' && face.weight === '400')
+    return readFileSync(new URL(`../app/public/fonts/paper/${face.path}`, import.meta.url))
   }
-  const primary = resolveFont('Times New Roman')
-  const fallback = resolveFont('Songti SC')
   const candidate = {
     primary: {
-      fontFaceId: primary.fontFaceId,
-      fontVersion: primary.fontVersion,
-      fontBytes: primary.fontBytes,
+      ...expectedAbcdRendererFontClosure.primary,
+      fontBytes: bytesFor(expectedAbcdRendererFontClosure.primary.fontFaceId),
     },
-    fallbacks: [{
-      fontFaceId: fallback.fontFaceId,
-      characters: '．﹣',
-      fontVersion: fallback.fontVersion,
-      fontBytes: fallback.fontBytes,
-    }],
+    fallbacks: expectedAbcdRendererFontClosure.fallbacks.map(fallback => ({
+      ...fallback,
+      fontBytes: bytesFor(fallback.fontFaceId),
+    })),
     fontMetricsDigest: expectedAbcdRendererFontClosure.fontMetricsDigest,
     shapingImplementationDigest:
       expectedAbcdRendererFontClosure.shapingImplementationDigest,
@@ -654,7 +643,7 @@ function hostFontClosure() {
     'ready',
     'actual artifacts require the exact pinned primary and fallback font files',
   )
-  return { closure: resolved.closure, primaryFile: primary.file }
+  return { closure: resolved.closure }
 }
 
 async function verifyActualArtifacts() {
@@ -662,7 +651,6 @@ async function verifyActualArtifacts() {
   const playwright = await import('../app/node_modules/playwright/index.js')
   const browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
   const actualFont = hostFontClosure()
-  const embeddedFont = readFileSync(actualFont.primaryFile).toString('base64')
   try {
     const actualCases = [
       ...gold.map(({ questionId, redactedText }) => ({
@@ -698,7 +686,7 @@ async function verifyActualArtifacts() {
       assert.equal([screen, print].every(({ clipping }) =>
         clipping === 'forbidden'), true)
       const page = await browser.newPage({ viewport: { width: 1000, height: 800 } })
-      await page.setContent(htmlFor(screen, embeddedFont))
+      await page.setContent(htmlFor(screen))
       await page.evaluate(() => document.fonts.ready)
       const screenPositions = await readScreenPositions(page)
       assertPhysicalPlacement(selected.placements, screenPositions, `${questionId} PaperSurface`)
@@ -712,7 +700,7 @@ async function verifyActualArtifacts() {
       const screenshot = await page.screenshot()
       assert.equal(screenshot.subarray(1, 4).toString(), 'PNG')
 
-      await page.setContent(htmlFor(print, embeddedFont))
+      await page.setContent(htmlFor(print))
       await page.evaluate(() => document.fonts.ready)
       const pdfPath = path.join(outputRoot, `${questionId}-print.pdf`)
       writeFileSync(pdfPath, await page.pdf({ format: 'A4', printBackground: true }))
@@ -763,13 +751,13 @@ async function verifyActualArtifacts() {
       })))
 
     const clozePage = await browser.newPage({ viewport: { width: 1000, height: 1200 } })
-    await clozePage.setContent(htmlFor(clozeScreen, embeddedFont))
+    await clozePage.setContent(htmlFor(clozeScreen))
     await clozePage.evaluate(() => document.fonts.ready)
     const clozeScreenWords = await readScreenPositions(clozePage)
     assertPhysicalPlacement(clozePlacements, clozeScreenWords, 'Cloze PaperSurface')
     assertSameColumnSpread(clozePlacements, clozeScreenWords, 'Cloze PaperSurface')
 
-    await clozePage.setContent(htmlFor(clozePrint, embeddedFont))
+    await clozePage.setContent(htmlFor(clozePrint))
     await clozePage.evaluate(() => document.fonts.ready)
     const clozePrintPdf = path.join(outputRoot, 'cloze-print.pdf')
     writeFileSync(clozePrintPdf, await clozePage.pdf({ format: 'A4', printBackground: true }))

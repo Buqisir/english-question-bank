@@ -1,0 +1,130 @@
+/* Canonical reading layout, consumed by PaperSurface and buildPrintHtml.
+ * Keep the existing DOM/anchors: Screen owns interaction, Print owns pagination.
+ * The paired selectors bridge those two DOMs without duplicating layout rules.
+ * Surface-specific typography/physical calibration remains in each consumer;
+ * this extraction deliberately preserves the accepted rendering on both sides.
+ */
+:is(.ps-canonical-reading, .canonical-reading) {
+  container-type: inline-size;
+}
+
+:is(.ps-canonical-reading-paragraph, .ps-canonical-reading-title, .ps-canonical-reading-subtitle,
+    .canonical-reading-body, .canonical-reading-title, .canonical-reading-subtitle) {
+  margin: 0;
+}
+
+:is(.ps-canonical-reading-title, .ps-canonical-reading-subtitle,
+    .canonical-reading-title, .canonical-reading-subtitle) {
+  font-weight: 700;
+}
+
+:is(.ps-canonical-reading-title, .canonical-reading-title) {
+  text-align: center;
+}
+
+:is(.ps-canonical-reading-table, .canonical-reading-table) {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+:is(.ps-canonical-reading-table, .canonical-reading-table) td {
+  vertical-align: top;
+}
+
+:is(.ps-canonical-reading-table-media, .canonical-reading-table-media) {
+  display: inline-block;
+  max-width: 100%;
+  max-height: 4em;
+  height: auto;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+:is(.ps-canonical-reading-table-media, .canonical-reading-table-media):is(
+    [data-canonical-media-alignment="center"], [data-canonical-media-alignment="right"]) {
+  display: block;
+}
+
+:is(.ps-canonical-reading-table-media, .canonical-reading-table-media)[data-canonical-media-alignment="center"] {
+  margin-inline: auto;
+}
+
+:is(.ps-canonical-reading-table-media, .canonical-reading-table-media)[data-canonical-media-alignment="right"] {
+  margin-left: auto;
+}
+
+:is(.ps-canonical-reading-table, .canonical-reading-table) td[rowspan]:not([rowspan="1"])
+  :is(.ps-canonical-reading-table-media, .canonical-reading-table-media) {
+  max-height: 22em;
+}
+
+:is(.ps-canonical-reading-figure, .canonical-reading-figure) {
+  margin: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: var(--paper-figure-max-height, none);
+}
+
+:is(.ps-canonical-reading-figure, .canonical-reading-figure)[data-canonical-media-alignment="left"] {
+  text-align: left;
+  align-items: flex-start;
+}
+
+:is(.ps-canonical-reading-figure, .canonical-reading-figure)[data-canonical-media-alignment="right"] {
+  text-align: right;
+  align-items: flex-end;
+}
+
+:is(.ps-canonical-reading-figure, .canonical-reading-figure) img {
+  max-width: 100%;
+  min-height: 0;
+  flex-shrink: 1;
+  height: auto;
+  object-fit: contain;
+}
+
+:is(.ps-canonical-reading-figure, .canonical-reading-figure) figcaption {
+  flex-shrink: 0;
+  max-width: 100%;
+}
+
+:is(.ps-canonical-reading-framed-columns, .canonical-reading-framed-columns) {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+:is(.ps-canonical-reading-framed-column, .canonical-reading-framed-column) {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+:is(.ps-canonical-reading-framed-column, .canonical-reading-framed-column)
+  :is(.ps-canonical-reading-table, .canonical-reading-table) {
+  width: fit-content;
+  max-width: 92%;
+  margin-bottom: 0;
+  align-self: center;
+  table-layout: auto;
+}
+
+:is(.ps-canonical-reading-framed-column, .canonical-reading-framed-column)
+  :is(.ps-canonical-reading-table, .canonical-reading-table) td {
+  border: 0;
+  vertical-align: baseline;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+:is(.ps-canonical-reading-column-heading, .canonical-reading-column-heading) {
+  font-weight: 700;
+  text-align: center;
+  text-indent: 0;
+}

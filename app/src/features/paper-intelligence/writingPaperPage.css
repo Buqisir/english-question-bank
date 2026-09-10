@@ -1,3 +1,5 @@
+@import '../../../../shared/papersurface/paperLayout.css';
+
 /* Writing section A4 page chrome — I6-writing-render.
    Normalizes toward docs/product/exam-paper-format-reference page-11/12:
    part/section headings, prompt/material, 注意, bordered answer box. Visual
@@ -68,23 +70,15 @@
 /* 部标题 (第X部分…): standard §2/§4 — 中黑加粗, 10.5pt (不放大, same size as
    body). Uses the heading (Hei) stack, not the body serif stack. */
 .pi-writing-part {
-  margin: 0;
-  margin-left: var(--ps-part-heading-indent);
-  font-family: var(--ps-font-stack-writing-part);
-  font-size: var(--ps-font-size);
-  font-weight: 700;
+  margin-block: 0;
+  margin-right: 0;
 }
 
 /* 节标题 (第X节…): standard §4 — 书宋, 10.5pt (不放大). Keeps the body serif
    stack (inherited from .pi-writing-page). */
 .pi-writing-section {
-  margin: 0;
-  margin-left: var(--ps-section-heading-indent);
-  font-family: var(--ps-section-heading-font-stack);
-  font-size: var(--ps-section-heading-font-size);
-  line-height: var(--ps-section-heading-line-height);
-  font-weight: var(--ps-section-heading-visible-weight);
-  white-space: nowrap;
+  margin-block: 0;
+  margin-right: 0;
 }
 
 .pi-writing-part + .pi-writing-section {
@@ -102,9 +96,6 @@
 /* 注意 / prompt text — preserve the source line breaks (注意：\n（1）…\n（2）…). */
 .pi-writing-instruction {
   margin: 0;
-  white-space: pre-line;
-  text-indent: var(--ps-group-instruction-indent);
-  font-weight: var(--ps-instruction-visible-weight);
 }
 
 .pi-writing-page--continuation .pi-writing-instruction {
@@ -131,14 +122,6 @@
   min-height: 7rem;
 }
 
-/* Application closing/signature (givenBottom): pinned to the box bottom,
-   tight, and right-aligned — real letter closing/signature convention
-   (surface-question-policy cut: "下半贴框底右对齐"). */
-.pi-writing-answer-bottom {
-  margin-top: auto;
-  text-align: right;
-}
-
 .pi-writing-answer-given--tight {
   min-height: 0;
 }
@@ -156,75 +139,29 @@
 
 .pi-writing-answer-box--application {
   border-width: var(--application-writing-response-border, 1px);
-  box-sizing: border-box;
-  width: var(--application-writing-response-width, 144mm);
-  height: var(--application-writing-response-height, 65mm);
-  max-width: 100%;
-  align-self: center;
-  padding: var(--application-writing-response-padding, 3mm);
-  margin-top: var(--application-writing-response-margin-top, 12px);
-  break-inside: avoid;
-  page-break-inside: avoid;
 }
 
 .pi-writing-answer-box--continuation {
-  box-sizing: border-box;
-  width: var(--continuation-writing-response-width, 145mm);
-  max-width: 100%;
-  height: var(--continuation-writing-response-height, 57mm);
   min-height: var(--continuation-writing-response-height, 57mm);
-  align-self: center;
   border-width: var(--continuation-writing-response-border, 1px);
-  margin-top: var(--continuation-writing-response-margin-top, 14px);
-  padding:
-    var(--continuation-writing-response-padding-block, 20px)
-    var(--continuation-writing-response-padding-inline, 24px);
-  position: relative;
 }
 
 .pi-writing-answer-box--continuation .pi-writing-answer-top {
   position: absolute;
   inset: 0;
-  display: grid;
-  grid-template-rows:
-    var(--continuation-writing-starter-second-row, 50%)
-    minmax(0, 1fr);
-}
-
-.pi-writing-continuation-row {
-  display: flex;
-  min-height: 0;
-  flex-direction: column;
-  padding-top: var(--continuation-writing-starter-row-inset, 1em);
-  box-sizing: border-box;
 }
 
 .pi-writing-answer-box--continuation .pi-writing-answer-given {
   position: static;
-  margin:
-    0
-    var(--continuation-writing-starter-trailing-inset, 1em)
-    0
-    var(--continuation-writing-starter-indent, 4em);
-  min-height: 0;
-  overflow-wrap: anywhere;
-  text-indent: 0;
 }
 
 .pi-writing-continuation-writable-area {
-  display: block;
-  min-height: 0;
-  flex: 1;
   pointer-events: none;
 }
 
 .pi-writing-answer-box--application .pi-writing-answer-top .pi-writing-answer-given,
 .pi-writing-answer-box--letter .pi-writing-answer-top .pi-writing-answer-given {
   min-height: 0;
-}
-
-.pi-writing-answer-given--title {
-  text-align: center;
 }
 
 .pi-writing-answer-box--application.pi-writing-answer-box--lecture-open,

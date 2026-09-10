@@ -71,7 +71,9 @@ function compactText(value) {
 }
 
 function assertZeroListeningOccurrence(value, label, sourcePhrases) {
-  const text = String(value)
+  // Shared styles describe supported families even when their content is absent.
+  // Keep checking all emitted markup/attributes and source phrases, not CSS.
+  const text = String(value).replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '')
   assert.equal(
     /listening/i.test(text),
     false,

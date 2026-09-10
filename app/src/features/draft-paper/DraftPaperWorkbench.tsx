@@ -1226,7 +1226,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     }
   }
 
-  async function exportPdf(mode: FileSaveMode = 'download') {
+  async function exportPdf(mode: FileSaveMode = 'download', pageLayout: 'natural' | 'friendly8' | 'friendly10' = 'natural') {
     if (!draftPaper || draftPaper.items.length === 0) return
     setExportStatus('idle')
     setExportError('')
@@ -1239,14 +1239,20 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       })
       if (!target) return
       setExportStatus('exporting')
-      await downloadDraftPaperPdf(draftPaper.id, versionType, target)
+      const { crossingGroupCount, splitOptionBankCount } = await downloadDraftPaperPdf(draftPaper.id, versionType, target, pageLayout)
       setExportStatus('exported')
-      setExportSuccessMessage(target.kind === 'download'
+      const savedMessage = target.kind === 'download'
         ? target.fallbackFromSaveAs ? '当前浏览器不支持系统另存为，已改为普通下载。' : 'PDF 已开始下载。'
-        : 'PDF 已保存到所选位置。')
+        : 'PDF 已保存到所选位置。'
+      setExportSuccessMessage(savedMessage + (crossingGroupCount > 0
+        ? ` 已保持指定页数和正文版式，仍有 ${crossingGroupCount} 个题组跨 A3 正反面，请检查分页。` : '')
+        + (splitOptionBankCount > 0 ? ` 为保持指定页数，有 ${splitOptionBankCount} 个选项组跨页，单条选项保持完整，请检查。` : ''))
     } catch (error) {
       setExportStatus('error')
-      setExportError(describeError(mode === 'save-as' ? '另存为 PDF' : '导出 PDF', error))
+      const fixedLayoutMessage = pageLayout !== 'natural' && error instanceof Error
+        && /^(无法生成指定页数的友好 PDF：|8／10 页版需要|10 页友好版需要完整|试卷内容超出排版区域：)/.test(error.message)
+        ? error.message : null
+      setExportError(fixedLayoutMessage || describeError(mode === 'save-as' ? '另存为 PDF' : '导出 PDF', error))
     }
   }
 
@@ -1430,6 +1436,12 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           >
             <FileDown size={15} /> 下载 PDF（{versionType === 'teacher' ? '教师版' : '学生版'}）
           </button>
+          {versionType === 'student' && <button type="button" role="menuitem" disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'} onClick={() => { setExportMenuOpen(false); void exportPdf('download', 'friendly8') }}>
+            <FileDown size={15} /> 8 页友好版（无听力）
+          </button>}
+          {versionType === 'student' && <button type="button" role="menuitem" disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'} onClick={() => { setExportMenuOpen(false); void exportPdf('download', 'friendly10') }}>
+            <FileDown size={15} /> 10 页友好版（含听力）
+          </button>}
           <button
             type="button"
             role="menuitem"

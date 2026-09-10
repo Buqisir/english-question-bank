@@ -8,7 +8,7 @@
  * 组件存活、CSS 失踪，浏览器默认样式顶上，无任何 gate 报警 (类名不进
  * 类型系统)。本 verify 是那次事故的可执行形态：
  *
- *   1. 活 TSX 里五族每个被使用的类，必须在 app/src 某 CSS 有定义，
+ *   1. 活 TSX 里五族每个被使用的类，必须在 app/src 或其 CSS 引用中有定义，
  *      或在 HOOK_ONLY 白名单里 (有意无样式的变体/钩子类，逐条注明)。
  *   2. lectureAnalysisPanels.css 必须仍被 paperBrowsePage.css @import
  *      (加载链是当年断掉的另一半)。
@@ -76,7 +76,15 @@ for (const file of walk(srcDir, '.tsx')) {
 assert('live TSX uses a non-trivial number of family classes (sweep not broken)', usedClasses.size >= 100, `found ${usedClasses.size}`)
 
 // 2. every used class is styled somewhere or explicitly hook-only
-const cssText = walk(srcDir, '.css')
+// Follow actual relative imports, including shared paper rules outside app/src.
+// An unreferenced stylesheet in shared/ must not satisfy the loading contract.
+const cssFiles = new Set(walk(srcDir, '.css'))
+for (const file of cssFiles) {
+  for (const match of readFileSync(file, 'utf8').matchAll(/@import\s+['"]([^'"]+)['"]/g)) {
+    if (match[1].startsWith('.')) cssFiles.add(path.resolve(path.dirname(file), match[1]))
+  }
+}
+const cssText = [...cssFiles]
   .map((f) => readFileSync(f, 'utf8'))
   .join('\n')
 const orphans = [...usedClasses].filter((cls) => !HOOK_ONLY.has(cls) && !cssText.includes(`.${cls}`))

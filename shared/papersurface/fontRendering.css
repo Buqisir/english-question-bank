@@ -1,0 +1,11 @@
+/* Live font policy v1: deterministic option advances, real supplied faces.
+   Scope to paper content, not workbench controls. */
+.ps-surface,
+.paper-browse-zoom,
+.pi-writing-page,
+.paper-print {
+  font-synthesis: none;
+  font-kerning: none;
+  font-variant-ligatures: none;
+  font-feature-settings: "kern" 0, "liga" 0, "clig" 0;
+}
