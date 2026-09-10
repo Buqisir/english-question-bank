@@ -26,8 +26,10 @@ const materialization = plan(
 assert.equal(materialization.risk, 'single-paper-import')
 assert.equal(materialization.pack, 'import-paper')
 assert(materialization.scripts.length >= 10, 'import pack keeps independent failure layers')
-assert(materialization.scripts.length <= 24, 'import pack stays narrow as carrier verifiers are added')
+assert(materialization.scripts.length <= 26, 'import pack stays narrow with two pagination QA failure layers')
 for (const required of [
+  'scripts/verify-import-pagination-qa.mjs',
+  'scripts/verify-import-pagination-ui.mjs',
   'scripts/verify-nck1-docx-materialization-producer.mjs',
   'scripts/verify-nck1-pdf-materialization-producer.mjs',
   'scripts/verify-nck1-answer-source-shapes.mjs',
@@ -72,5 +74,14 @@ assert.equal(plan(
   'scripts/import-pipeline/papers/paper-synthetic/materialization/nck1-source-materialization-v1.json',
   'server/print-renderer.mjs',
 ).pack, 'all', 'mixed single-paper and shared changes fail closed to all')
+
+for (const rendererFile of [
+  'app/src/shared-ui/papersurface/PaperFontGate.tsx',
+  'shared/papersurface/paperLayout.css',
+  'server/print-renderer.mjs',
+]) {
+  assert.equal(plan('server/paper-import/publisher.mjs', rendererFile).pack, 'all',
+    'combined import engine and renderer changes require all, not the historical C7 path allowlist')
+}
 
 console.log('verify-import-paper-routing: PASS')
