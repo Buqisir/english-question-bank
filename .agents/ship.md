@@ -71,10 +71,24 @@ to remain the classified same-Goal candidate.
 
 ## 4. Deliver through the PR
 
-When explicitly waiting for a pending Check, optionally call `ship_watch_check`
-with the fixed PR number and current head in this Ship thread. It polls read-only
-every 45 seconds, stops after 60 minutes or PR/head drift, and sends at most one
-best-effort terminal notice. Cancel with `ship_cancel_check_watch`; no schedule or
+After opening/updating the PR, before waiting for authoritative CI or ending a turn
+with CI pending, call `ship_watch_check` with the fixed PR number and freshly read
+current head in this Ship thread. Require the tool's `Watching` confirmation for
+that exact PR/head; do not assume that pushing or loading the plugin registers a
+target. If the tool is missing, load only `.amp/plugins/ship-check-watcher.js` and
+call it. Same-thread/same-PR/head registration is idempotent, including concurrent
+startup: it shares the original registration result and never extends the deadline.
+For a different PR/head, cancel the old wait before registering the new one.
+After restart, timeout or a stopped wait, explicitly register again before waiting;
+an existing terminal claim is never resent. If registration fails or is unknown,
+report that notification coverage is unavailable and inspect GitHub directly;
+do not claim to be waiting with a registered watcher.
+
+It polls read-only every 45 seconds, stops after 60 minutes or PR/head drift, and
+sends at most one best-effort terminal notice to the invoking Ship thread, for
+success as well as failure. Failure, cancelled, timed_out and action_required
+notices include the Check's existing failure summary when present; no private
+receipt fetch is needed. Cancel with `ship_cancel_check_watch`; no schedule or
 CI-host handoff is needed. A notice is not approval: on wake, freshly read the open
 PR/head and latest exact-App/name Check, then perform all identity/policy gates
 below. Never reuse an older green Check or infer new Ship/deployment authorization.

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { mkdtempSync, rmSync, readdirSync, statSync } from 'node:fs'
+import { mkdtempSync, rmSync, readdirSync, statSync, readFileSync } from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import plugin, { readShipCheck } from '../.amp/plugins/ship-check-watcher.js'
@@ -50,11 +50,14 @@ await assert.rejects(readShipCheck(target, async endpoint => endpoint.includes('
 const dir = mkdtempSync(path.join(os.tmpdir(), 'ship-check-watcher-'))
 try {
   let currentReader = reader([]), time = 0, appended = 0, released = 0, failAppend = false, disposed
+  let leaseCalls = 0, resolveLease
+  let acquireLease = () => new Promise(resolve => { resolveLease = resolve })
+  const lease = () => ({ unsubscribe: () => { released++ } })
   const messages = []
   const tools = new Map(), timers = new Map(), expiries = new Map()
   const amp = {
     registerTool: tool => tools.set(tool.name, tool), onDispose: callback => { disposed = callback }, logger: { log() {} },
-    system: { executor: { keepAlive: async () => ({ unsubscribe: () => { released++ } }) } },
+    system: { executor: { keepAlive: () => { leaseCalls++; return acquireLease() } } },
     threads: { get: threadID => {
       assert.equal(threadID, ctx.thread.id)
       return { appendUserMessage: async (...args) => {
@@ -74,8 +77,25 @@ try {
   const start = input => tools.get('ship_watch_check').execute(input || target, ctx)
   const cancel = () => tools.get('ship_cancel_check_watch').execute({}, ctx)
   await assert.rejects(start({ ...target, threadID: 'other' }), /Invalid/)
-  await start(); await flush()
-  await assert.rejects(start(), /already/)
+  let registered = false
+  const first = start()
+  const concurrent = start().then(result => { registered = true; return result })
+  await flush()
+  assert.equal(registered, false, 'duplicate startup cannot confirm before keepAlive succeeds')
+  assert.equal(leaseCalls, 1, 'concurrent registration shares one startup')
+  resolveLease(lease())
+  const registration = await first
+  assert.equal(await concurrent, registration)
+  acquireLease = async () => lease()
+  await flush()
+  const recordPath = path.join(dir, readdirSync(dir).find(name => !name.includes('.claim.')))
+  const saved = readFileSync(recordPath, 'utf8')
+  time = 1000
+  assert.equal(await start(), registration, 'repeat registration returns the original deadline')
+  assert.equal(readFileSync(recordPath, 'utf8'), saved, 'repeat does not rewrite registration')
+  assert.equal(leaseCalls, 1); assert.equal(timers.size, 1); assert.equal(expiries.size, 1)
+  await assert.rejects(start({ ...target, head: 'b'.repeat(40) }), /different wait/)
+  await assert.rejects(start({ ...target, pullRequest: 412 }), /different wait/)
   assert.equal(appended, 0)
   currentReader = async () => { throw new Error('private error') }
   for (const fn of timers.values()) fn()
@@ -91,7 +111,7 @@ try {
   assert.equal(appended, 2, 'unknown append never retries')
   currentReader = reader([])
   await start(); await flush(); await cancel(); assert.equal(timers.size, 0)
-  await start(); await flush(); time = 3600000
+  await start(); await flush(); time += 3600000
   for (const fn of timers.values()) fn()
   await flush(); assert.equal(timers.size, 0)
   await start(); await flush(); disposed(); assert.equal(timers.size, 0)
@@ -143,6 +163,24 @@ try {
   currentReader = reader([{ ...check, id: 21, output: { summary: 'success output must not change notice' } }])
   await start(); await flush()
   assert.ok(!messages.at(-1).includes('success output must not change notice'))
+  currentReader = reader([])
+  let rejectLease
+  acquireLease = () => new Promise((_resolve, reject) => { rejectLease = reject })
+  const failing = start(), failingDuplicate = start()
+  rejectLease(new Error('lease unavailable'))
+  assert.match(await failing, /Watcher unavailable/)
+  assert.equal(await failingDuplicate, await failing, 'duplicates share startup failure, not a false confirmation')
+  assert.equal(timers.size, 0); assert.equal(expiries.size, 0)
+  acquireLease = () => new Promise(resolve => { resolveLease = resolve })
+  const cancelledStartup = start(), cancelledDuplicate = start()
+  await cancel()
+  resolveLease(lease())
+  assert.equal(await cancelledStartup, 'Wait already stopped')
+  assert.equal(await cancelledDuplicate, 'Wait already stopped')
+  assert.equal(timers.size, 0); assert.equal(expiries.size, 0)
+  acquireLease = async () => lease()
+  await start(); await flush()
+  assert.equal(timers.size, 1, 'failed or cancelled startup can be explicitly retried')
   disposed()
-  console.log('PASS Ship watcher: identity/latest/pagination/races, 45s cadence, deadline/cancel/dispose, read/storage/unknown-append failures, one-shot current-thread notification; failure/cancelled/timed_out/action_required summary delivery, stale-head and dedupe; success unchanged')
+  console.log('PASS Ship watcher: idempotent registration/startup/failure/cancel, identity/latest/pagination/races, 45s cadence, deadline/cancel/dispose, read/storage/unknown-append failures, one-shot current-thread notification; failure/cancelled/timed_out/action_required summary delivery, stale-head and dedupe; success unchanged')
 } finally { rmSync(dir, { recursive: true, force: true }) }

@@ -142,7 +142,11 @@ export default function shipCheckWatcher(amp, overrides = {}) {
         || !Number.isSafeInteger(input.pullRequest) || input.pullRequest < 1 || !SHA.test(input.head || '')) throw new Error('Invalid fixed PR/head')
       const threadID = ctx.thread.id
       if (!/^T-[a-f0-9-]{36}$/u.test(threadID)) throw new Error('Current thread identity unavailable')
-      if (active.has(threadID)) throw new Error('This thread already has a wait; cancel it before starting another')
+      const existing = active.get(threadID)
+      if (existing) {
+        if (existing.pullRequest === input.pullRequest && existing.head === input.head) return existing.registration
+        throw new Error('This thread already has a different wait; cancel it before starting another')
+      }
       const startedAt = now()
       const record = { ...input, threadID, startedAt, deadline: startedAt + 60 * 60_000,
         state: 'watching', abort: new AbortController(), file: path.join(stateDir, `${digest(threadID)}.json`) }
@@ -150,13 +154,16 @@ export default function shipCheckWatcher(amp, overrides = {}) {
       save(record)
       active.set(threadID, record)
       record.expiry = timeout(() => stop(record, 'timeout'), 60 * 60_000)
-      try {
-        record.lease = await amp.system.executor.keepAlive()
-        if (record.state !== 'watching') { record.lease.unsubscribe(); return 'Wait already stopped' }
-        record.timer = interval(() => { void tick(record) }, 45_000)
-        void tick(record)
-        return `Watching ${REPO} PR ${input.pullRequest} at ${input.head}; deadline ${new Date(record.deadline).toISOString()}. No authorization added.`
-      } catch { stop(record, 'startup-failed'); return 'Watcher unavailable; CI unchanged. Recheck GitHub directly.' }
+      record.registration = (async () => {
+        try {
+          record.lease = await amp.system.executor.keepAlive()
+          if (record.state !== 'watching') { record.lease.unsubscribe(); return 'Wait already stopped' }
+          record.timer = interval(() => { void tick(record) }, 45_000)
+          void tick(record)
+          return `Watching ${REPO} PR ${input.pullRequest} at ${input.head}; deadline ${new Date(record.deadline).toISOString()}. No authorization added.`
+        } catch { stop(record, 'startup-failed'); return 'Watcher unavailable; CI unchanged. Recheck GitHub directly.' }
+      })()
+      return record.registration
     },
   })
   amp.registerTool({
