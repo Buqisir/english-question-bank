@@ -1933,6 +1933,7 @@ try {
 } finally {
   if (onlineBrowser) await onlineBrowser.close()
   if (onlineServer) await new Promise((resolve) => onlineServer.close(resolve))
+  await closeChromiumPool()
   rmSync(online.tempRoot, { recursive: true, force: true })
 }
 
