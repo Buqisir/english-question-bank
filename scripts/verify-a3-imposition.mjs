@@ -36,7 +36,7 @@
 // browser-heavy pagination routes.
 import { spawn } from 'node:child_process'
 import { createRequire } from 'node:module'
-import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs'
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { stripTypeScriptTypes } from 'node:module'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -305,7 +305,20 @@ async function runPhaseB(browser) {
 
   const page = await browser.newPage({ viewport: { width: 1440, height: 920 } })
   const pageErrors = []
+  const previewRequests = []
+  const startedAt = Date.now()
   page.on('pageerror', (error) => pageErrors.push(error.message))
+  page.on('request', (request) => {
+    if (request.url().includes('/pagination?')) previewRequests.push({ event: 'request', elapsed: Date.now() - startedAt })
+  })
+  page.on('response', (response) => {
+    if (response.url().includes('/api/draft-papers/')) {
+      previewRequests.push({ url: response.url(), status: response.status(), elapsed: Date.now() - startedAt })
+    }
+  })
+  page.on('requestfailed', (request) => {
+    previewRequests.push({ url: request.url(), failure: request.failure()?.errorText })
+  })
 
   try {
     await page.goto(`http://127.0.0.1:${vitePort}/`, { waitUntil: 'networkidle' })
@@ -343,8 +356,35 @@ async function runPhaseB(browser) {
       return data.draftPaper.id
     })
 
-    await page.goto(`http://127.0.0.1:${vitePort}/?view=draft-paper&draftPaperId=${draftId}`, { waitUntil: 'networkidle' })
+    // React fetches pagination after navigation and a debounce; networkidle
+    // is not pagination readiness. Budget cold server rendering separately
+    // from the unchanged 15s browser visibility/layout checks below.
+    const paginationDeadline = Date.now() + 60_000
+    const [paginationResponse] = await Promise.all([
+      page.waitForResponse((response) =>
+        new URL(response.url()).pathname === `/api/draft-papers/${draftId}/pagination`
+        && response.request().method() === 'GET', { timeout: 60_000 }),
+      page.goto(`http://127.0.0.1:${vitePort}/?view=draft-paper&draftPaperId=${draftId}`, { waitUntil: 'networkidle' }),
+    ])
+    if (!paginationResponse.ok()) throw new Error(`Initial pagination failed: HTTP ${paginationResponse.status()}`)
+    let bodyTimer
+    try {
+      const responseError = await Promise.race([
+        paginationResponse.finished(),
+        new Promise((_, reject) => {
+          bodyTimer = setTimeout(() => reject(new Error('Initial pagination response body timed out')),
+            Math.max(0, paginationDeadline - Date.now()))
+        }),
+      ])
+      if (responseError) throw responseError
+    } finally { clearTimeout(bodyTimer) }
+    previewRequests.push({ event: 'pagination received', elapsed: Date.now() - startedAt })
     await page.locator('.draft-a4-sheet iframe').waitFor({ timeout: 15_000 })
+    await page.waitForFunction(() => {
+      const doc = document.querySelector('.draft-a4-sheet iframe')?.contentDocument
+      return doc?.readyState === 'complete' && doc.fonts.status === 'loaded'
+        && doc.querySelectorAll('.preview-page').length >= 3
+    }, undefined, { timeout: 15_000 })
     await page.waitForFunction(
       (expected) => document.querySelectorAll('.draft-paper-rail-item').length >= expected,
       groupIds.length,
@@ -384,6 +424,15 @@ async function runPhaseB(browser) {
     await firstGroupActions.waitFor({ state: 'attached', timeout: 10_000 })
     const overlayButtonCountBefore = await page.locator('.draft-group-actions').count()
     assert('persistent overlay button clusters render in A3 mode', overlayButtonCountBefore > 0, String(overlayButtonCountBefore))
+
+    if (process.env.A3_QA_ARTIFACT_DIR) {
+      const artifactDir = path.resolve(process.env.A3_QA_ARTIFACT_DIR)
+      mkdirSync(artifactDir, { recursive: true })
+      writeFileSync(path.join(artifactDir, 'ready.json'), JSON.stringify({
+        a4PageCount, a3Structure, previewRequests, elapsed: Date.now() - startedAt,
+      }, null, 2))
+      await page.screenshot({ path: path.join(artifactDir, 'a3-ready.png') })
+    }
 
     const reorderMutation = page.waitForResponse(
       (response) => response.url().includes('/api/draft-papers/') && response.request().method() === 'PATCH',
@@ -451,6 +500,30 @@ async function runPhaseB(browser) {
     } else {
       pass('no browser page errors during the A3 flow')
     }
+  } catch (error) {
+    const state = await page.evaluate(() => ({
+      readyState: document.readyState,
+      text: document.body.innerText,
+      iframeCount: document.querySelectorAll('.draft-a4-sheet iframe').length,
+      frames: [...document.querySelectorAll('.draft-a4-sheet iframe')].map((frame) => ({
+        bounds: frame.getBoundingClientRect().toJSON(),
+        style: frame.getAttribute('style'),
+        readyState: frame.contentDocument?.readyState,
+        fontStatus: frame.contentDocument?.fonts.status,
+        pages: frame.contentDocument?.querySelectorAll('.preview-page').length,
+        resources: frame.contentWindow?.performance.getEntriesByType('resource').map(({ name, duration }) => ({ name: name.slice(0, 200), duration })),
+      })),
+    }))
+    const evidence = { error: String(error), pageErrors, previewRequests, state }
+    console.error(`A3 Phase B failure evidence: ${JSON.stringify(evidence)}`)
+    if (process.env.A3_QA_ARTIFACT_DIR) {
+      const artifactDir = path.resolve(process.env.A3_QA_ARTIFACT_DIR)
+      mkdirSync(artifactDir, { recursive: true })
+      writeFileSync(path.join(artifactDir, 'failure.json'), JSON.stringify(evidence, null, 2))
+      writeFileSync(path.join(artifactDir, 'failure.html'), await page.content())
+      await page.screenshot({ path: path.join(artifactDir, 'failure.png') })
+    }
+    throw error
   } finally {
     try { await page.close() } finally { await cleanupA3Fixture(children, tempRoot) }
   }

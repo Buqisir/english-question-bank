@@ -21,6 +21,35 @@ must be complete, ordered, and same-source before fixed export.
 Earlier pagination/cover reports below are chronological evidence, not the
 latest product policy. No Ship or production mutation is authorized by this record.
 
+### PR #422 A3 Fast failure and repair (2026-09-10)
+
+The authoritative [failed Check](https://github.com/Buqisir/english-question-bank/runs/102743632084)
+passed Full but failed `verify-a3-imposition.mjs` Phase B at the initial 15s
+iframe visibility wait. Local original-code runs reproduced the same timeout.
+The retained `.scratch/pr422-a3-timing/failure.json` records navigation
+`networkidle` at 13983ms, draft responses at 14942/16444ms, pagination request
+at 17161ms and HTTP 200 at 28270ms. There were no page errors; the iframe
+was still loading with zero page nodes at timeout, then rendered nine pages.
+Raw DOM/screenshot/log evidence is retained alongside that report in the task
+worktree, not stored as reusable copyrighted passage content in this spec.
+
+The test started its browser-display budget before React's debounced server
+pagination request. It now awaits the exact draft's successful pagination GET
+and complete response body within one bounded 60s cold-render budget, then
+keeps the 15s visibility check and checks complete document/fonts/multiple pages.
+HTTP errors, broken/stalled response bodies, missing pages and browser errors
+remain failures; no product renderer, font, iframe transport or layout changed.
+A same-HTML Blob transport experiment also failed and was fully removed.
+
+The repaired real A3 flow passes 32 assertions, including nine A4 pages → five
+A3 faces/three sheets, reorder, rail scroll, scrollspy, seam action, narrow
+viewport and A4 return. `A3_QA_ARTIFACT_DIR` optionally records readiness or
+failure DOM/screenshot/state; failure state also reaches the verifier log.
+Direct response-body checks cover completion, transport error and stalled-stream
+deadline. Independent review's unbounded-body-wait finding is fixed by sharing
+the response-header deadline and clearing its timer. CI notification capability
+is outside this repair; PR update/CI verification does not authorize merge.
+
 ### Current reflow verification (2026-09-10)
 
 - Owner clarified the operating model: bounded automatic pagination followed by
