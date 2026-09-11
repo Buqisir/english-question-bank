@@ -694,7 +694,7 @@ export function buildNck1ReviewConsumption(candidate, compilation) {
         'seven-choices',
         'cloze',
         'grammar-fill',
-        ...(['49', '50', '51', '52'].includes(
+        ...(['49', '50', '51', '52', '54'].includes(
           canonicalPaper.paperPlan.authorityRef.manifestVersion,
         )
           ? ['continuation-writing']

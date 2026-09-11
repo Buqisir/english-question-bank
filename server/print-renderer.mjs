@@ -56,6 +56,7 @@ import {
 import {
   applicationWritingNoticeLines,
   continuationStarterDisplayText,
+  writingNoticeGroup,
 } from '../shared/paper-canonical/applicationWritingDisplay.mjs'
 import {
   readingPassageLetterGeometryForLetter,
@@ -787,6 +788,26 @@ function renderCanonicalOpaqueWriting(
   return `<div class="${familyClass} canonical-legacy-opaque-writing" data-canonical-writing-mode="legacy_opaque" data-canonical-writing-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}" data-canonical-writing-occurrence-signature="${escapeHtml(canonicalGroup.occurrenceSignature)}" data-canonical-word-count-target="${canonicalGroup.wordCountTarget}" data-canonical-word-count-certainty="${escapeHtml(canonicalGroup.wordCountTargetCertainty)}" data-canonical-word-count-scope="${escapeHtml(canonicalGroup.wordCountScope)}">${application ? chrome : `<div class="canonical-continuation-chrome">${chrome}</div>`}<div class="passage canonical-legacy-opaque-source">${source}</div><div class="writing-answer-box ${responseClass} canonical-legacy-opaque-response" data-canonical-legacy-opaque-response="" data-canonical-response-ownership="${escapeHtml(response.ownership)}" data-canonical-answer-region-ref="${escapeHtml(response.answerRegionRef)}" data-canonical-response-slot-id="${escapeHtml(response.responseSlotId)}" style="width:${geometry.widthMm}mm;height:${geometry.heightMm}mm;">${starters}</div></div>`
 }
 
+// Both writing families keep source blocks/inline identities while presenting
+// a split or combined notice as the same visual group used by Screen.
+function renderCanonicalWritingBlocks(blocks, family) {
+  const notice = writingNoticeGroup(blocks.map(block => block.inlines.map(inline => inline.text || '').join('')))
+  return blocks.map((block, index) => {
+    if (notice && index > notice.startIndex && index < notice.startIndex + notice.blockCount) return ''
+    const isNotice = notice?.startIndex === index
+    const role = isNotice ? 'notice_line' : family === 'application' ? 'prompt_line' : 'material_paragraph'
+    const content = isNotice ? notice.lines.map((line, lineIndex) => {
+      const sourceBlock = notice.blockCount > 1 ? blocks[index + lineIndex] : block
+      const blockAttr = notice.blockCount > 1 && lineIndex > 0
+        ? ` data-canonical-block-id="${escapeHtml(sourceBlock.nodeId)}"` : ''
+      const inlineAttr = notice.blockCount > 1 || lineIndex === 0
+        ? ` data-canonical-content-node-id="${escapeHtml(sourceBlock.inlines[0].nodeId)}"` : ''
+      return `<span class="canonical-application-notice-line canonical-application-notice-line--${line.kind}"${blockAttr}${inlineAttr} data-canonical-${family}-notice-line="${line.kind}">${escapeHtml(line.text)}</span>`
+    }).join('') : renderCanonicalInlineNodes(block.inlines)
+    return `<p data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-${family}-writing-rhythm-role="${role}"${isNotice ? ` data-canonical-${family}-notice=""` : ''}>${content}</p>`
+  }).join('')
+}
+
 function renderCanonicalApplicationWriting(
   canonicalGroup,
   writingChrome,
@@ -802,15 +823,7 @@ function renderCanonicalApplicationWriting(
   }
   const renderGivenParts = (parts, position) => parts.map((part) =>
     `<p class="canonical-application-given canonical-application-given--${position}" data-canonical-given-part-id="${escapeHtml(part.givenPartId)}" data-canonical-given-role="${escapeHtml(part.role)}" data-canonical-given-placement="${escapeHtml(part.placement)}" data-canonical-application-writing-rhythm-role="${part.role === 'title' ? 'given_title' : position === 'bottom' ? 'given_closing' : 'given_addressee'}">${renderCanonicalInlineNodes(part.inlines)}</p>`).join('')
-  const prompt = canonicalGroup.promptBlocks.map((block) => {
-    const noticeLines = block.inlines.length === 1
-      ? applicationWritingNoticeLines(block.inlines[0].text)
-      : null
-    const content = noticeLines
-      ? `<span data-canonical-content-node-id="${escapeHtml(block.inlines[0].nodeId)}">${noticeLines.map((line) => `<span class="canonical-application-notice-line canonical-application-notice-line--${line.kind}" data-canonical-application-notice-line="${line.kind}">${escapeHtml(line.text)}</span>`).join('')}</span>`
-      : renderCanonicalInlineNodes(block.inlines)
-    return `<p data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-application-writing-rhythm-role="${noticeLines ? 'notice_line' : 'prompt_line'}"${noticeLines ? ' data-canonical-application-notice=""' : ''}>${content}</p>`
-  }).join('')
+  const prompt = renderCanonicalWritingBlocks(canonicalGroup.promptBlocks, 'application')
   const response = canonicalGroup.answerRegion
   const chrome = renderCanonicalWritingChrome(
     writingChrome,
@@ -830,8 +843,7 @@ function renderCanonicalContinuationWriting(canonicalGroup, writingChrome, consu
     'canonical-continuation-instruction',
     'continuation',
   )
-  const material = canonicalGroup.materialBlocks.map((block) =>
-    `<p data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-continuation-writing-rhythm-role="material_paragraph">${renderCanonicalInlineNodes(block.inlines)}</p>`).join('')
+  const material = renderCanonicalWritingBlocks(canonicalGroup.materialBlocks, 'continuation')
   const response = canonicalGroup.answerRegion
   const starters = response.starterLines.map((starter, index) =>
     `<div class="writing-continuation-row"><p class="writing-starter-line" data-canonical-starter-id="${escapeHtml(starter.starterId)}" data-canonical-block-id="${escapeHtml(starter.contentRef)}" data-canonical-continuation-writing-rhythm-role="starter_${index + 1}">${renderContinuationStarterInlineNodes(starter.inlines, index)}</p><span class="writing-continuation-writable-area" data-canonical-continuation-writing-rhythm-role="writable_after_starter_${index + 1}"></span></div>`).join('')

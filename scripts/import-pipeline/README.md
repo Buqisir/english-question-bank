@@ -162,15 +162,41 @@ node scripts/import-pipeline/review.mjs pagination-qa <paperId> --edition friend
 node scripts/import-pipeline/review.mjs push <paperId> --resolves <pdfIssueId>
 ```
 
-`friendly8` 的 listening source 自动省略通用卷首（`--cover-gaps none`）；无听力 8 页
-保留 compact cover；10 页只接受规划器既有的 72/72、54/72、54/54 三档。Plan 绑定
-source/Candidate 与 bundle bytes；若 10 页自动规划必须放开整组选项库保护，命令会把
-`allowSplitOptionBank: true` 一并保存，显式方案重放同一 PDF-only 策略（8 页禁止该值，
-旧 plan 缺省为 `false`）。自动规划失败仍以非零状态退出，但会留下独立命名的
+新自动方案的 8/10 页均保留通用卷首。先比较 72/72、54/72、54/54、18/36、0/18、−25.5/18pt
+六档卷首位置的自然分页，再尝试题组起页；最后一档仅把卷首真实占位上移约9mm，
+标题框顶仍距纸顶约12mm，正文、其余页边距和答题框不变，总预算仍为24次。
+`--cover-gaps -25.5,18` 等可复现同一档；旧已绑定省略卷首方案仍按原样重放，
+若要恢复正式卷首，用 `--auto` 重新 QA 后保存新方案，不手改 digest。Plan 绑定
+source/Candidate 与 bundle bytes；若 8/10 页自动规划必须允许完整选项之间分页，命令会把
+`allowSplitOptionBank: true` 一并保存，显式方案重放同一 PDF-only 策略（旧 plan 缺省为
+`false`；单条选项始终不可拆）。自动规划失败仍以非零状态退出，但会留下独立命名的
 `*-diagnostic-natural.pdf`、实际 `diagnostic-page-*.png` 清单与
 `failure-report.json`，供 Agent 按 slot/page 修复；失败绝不保存 plan。`--auto` 不得与
 `--break-slots` 或 `--cover-gaps` 混用。finalized revision 不可原地修改，必须提交新 revision
 并用 `--resolves` 指向原 PDF issue。
+
+写作框问题先分清数据归属，不能靠分页参数掩盖。`pagination-qa` 在渲染前检查
+应用文给定文字：标题／称呼／开头在框内上方，结束语／签名在下方；同一给定源段落
+不得重复归入题干。不同源段落即使同文也不擅自去重。不强求每题都有标题，
+源卷确无给定语时沿用已有的来源确认。
+若遇到 `legacy_opaque`，先对照题卷答题区，在现有 Source Materialization 的
+`writingTask.givenSkeleton` 写明每个固定段落的 `text` 与 `role`
+（`title|salutation|opening|closing|signature`），保留对应源段落与定位；内容必须
+与「注意」后的源给定段落逐一相等。用既有 `universal-nck1.mjs verify <paperId>` 和
+`universal-nck1.mjs build <paperId>` 重建 Candidate，重新进行该卷 QA，再提交 revision。
+无须新建渲染器或改 PDF DOM；
+不得为历史卷凭空补来源证据、覆盖已发布资产，或把兼容模式当成“空白答题框已确认”。
+
+新卷格式归属的必经检查在 `validateNck1SourceMaterialization`，不是只在可选
+`pagination-qa`：本地 verify/build、Review push、服务端 finalize 和 promotion
+重建都经过同一入口。注意块及框内给定语的源顺序检查沿用该入口；注意／注意事项、
+合并／分段编号的识别与渲染共用 `applicationWritingDisplay.mjs`。
+`MATERIALIZATION_PASSAGE_INSTRUCTION_SUSPECTED` 表示客观题正文中出现了疑似作答说明，
+返回的 path 指向具体 block（其 source 即源定位），message 给出 slot 与 blockId。
+Agent 应对照该处源材料修正分段归属，不得在渲染器删文字，不得删源证据或修改规则过闸；
+无法确定时停下交 Owner 核对。词数只从已确认的注意块取，给定语只按该块后的源顺序绑定。
+PDF 页数／溢出检查仍在实际生成时执行；本轮不新增认可状态或 PDF 审批凭证，
+不得把结构校验成功当成已经检查过最终 PDF。
 
 Owner 网页认可只写绑定当前 revision 与全部 digest 的 approval，Agent 随即停下。
 `accept`/`publish` 仍保留给离线 verifier 与存量本地恢复，但不再是 Review-backed

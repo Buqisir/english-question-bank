@@ -103,15 +103,35 @@
   line-height: var(--paper-listening-step, 18pt);
 }
 
+/* Listening owns its rhythm: override generic question/option spacing without
+ * changing other families or the horizontal A/B/C geometry. */
+:is(.canonical-listening-surface .ps-question-list,
+    .canonical-listening-surface .ps-option-list,
+    .question-group[data-canonical-group-type="listening"] .stem,
+    .question-group[data-canonical-group-type="listening"] .question > .canonical-options) {
+  margin-top: 0;
+  margin-bottom: 0;
+  row-gap: 0;
+}
+:is(.canonical-listening-surface .ps-question-stem,
+    .canonical-listening-surface .ps-option) { line-height: 18pt; }
+
 :is(.ps-listening-chrome, .canonical-listening-chrome) :is(h2, h3, p),
 :is(.ps-listening-example, .canonical-listening-example) p { margin: 0; }
+
+/* Half-line separation before a subsection; this deliberately overrides the
+ * chrome paragraph reset above, not the distance below the part heading. */
+:is(.ps-listening-chrome, .canonical-listening-chrome) .canonical-listening-transfer-notice {
+  margin: 0 0 9pt;
+  line-height: 18pt;
+}
 
 :is(.ps-listening-part, .canonical-listening-part),
 :is(.ps-listening-section, .canonical-listening-section) { font-size: inherit; line-height: 18pt; }
 
 :is(.ps-listening-instruction, .canonical-listening-instruction) { line-height: 18pt; text-indent: 2em; }
 
-:is(.ps-listening-example, .canonical-listening-example) { margin: 18pt 0; line-height: 18pt; }
+:is(.ps-listening-example, .canonical-listening-example) { margin: 9pt 0 18pt; line-height: 18pt; }
 :is(.ps-listening-example-options, .canonical-listening-example-options) {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -120,8 +140,23 @@
 :is(.ps-listening-example-answer, .canonical-listening-example-answer) { text-align: left; }
 :is(.ps-listening-segment-cue, .canonical-listening-segment-cue) {
   list-style: none;
-  margin: 36pt 0 0;
+  margin: 18pt 0 0;
   line-height: 18pt;
+}
+
+/* Total line-to-line gaps: 2 lines at notices/subsection boundaries, 3 at the
+ * listening-to-reading boundary. Screen's flex gap already contributes space;
+ * Print is block flow. Do not add that space twice. */
+.canonical-paper-opening:has(~ [data-canonical-group-type="listening"]) {
+  margin-bottom: calc(18pt - var(--pb-block-gap, 0px));
+}
+.question-group[data-canonical-group-type="listening"] + .question-group[data-canonical-group-type="listening"],
+.paper-browse-group-card[data-canonical-group-type="listening"] ~ .paper-browse-group-card[data-canonical-group-type="listening"] {
+  margin-top: calc(18pt - var(--pb-block-gap, 0px));
+}
+[data-canonical-group-type="listening"] ~ .section-header[data-canonical-reading-rhythm-role="part_title"],
+[data-canonical-group-type="listening"] ~ .paper-browse-part-heading[data-canonical-reading-rhythm-role="part_title"] {
+  margin-top: calc(36pt - var(--pb-block-gap, 0px));
 }
 
 .canonical-paper-opening {
@@ -138,7 +173,6 @@
 .canonical-paper-cover-notices { line-height: 18pt; }
 .canonical-paper-cover-notices ol { margin: 0; padding-left: 2em; }
 .canonical-paper-cover-notices li { margin: 0; }
-.canonical-listening-transfer-notice { margin: 36pt 0 18pt; line-height: 18pt; }
 
 .canonical-paper-opening ~ :is(
   .paper-browse-part-heading,

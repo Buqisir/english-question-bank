@@ -16,6 +16,7 @@ import {
 import {
   projectNck1StagedWritingAnalysis,
 } from '../../server/import-review/nck1AnalysisProjection.mjs'
+import { writingNoticeGroups, writingWordCount } from '../../shared/paper-canonical/applicationWritingDisplay.mjs'
 
 export const WRITING_ANALYSIS_KEYS = ['application', 'continuation']
 
@@ -55,36 +56,51 @@ export function assertApplicationChromeFromGroups(application) {
   if (/[（(]词数/.test(prompt)) {
     throw new Error('application prompt must not glue the word-count suffix')
   }
-  if (!String(application.applicationGiven || '').trim()) {
-    throw new Error('applicationGiven title is required for new NCK1 papers')
-  }
+  // This legacy staging shape cannot prove a response region's contents.
+  // Do not demand/invent a title; Canonical refs below own the given text.
 }
 
-export function applicationBlockText(group, suffix) {
-  const block = (group?.content?.blocks || []).find((candidate) => (
-    String(candidate.nodeId || '').endsWith(suffix)
-  ))
-  return (block?.inlines || []).map((inline) => inline.text).join('')
-}
-
-export function assertNck1ApplicationChrome(group) {
+// Layout QA supplements Candidate validation; source observations and role
+// validity remain the existing Canonical compiler's responsibility.
+export function assertApplicationGivenOwnership(group) {
   if (!group || group.variant?.family !== 'application-writing') {
     throw new Error('application-writing group missing')
   }
-  const prompt = applicationBlockText(group, ':prompt')
-  const notice = applicationBlockText(group, ':notice')
-  const title = applicationBlockText(group, ':given:title')
+  const { variant } = group
+  if (variant.mode === 'legacy_opaque') {
+    throw new Error('application fixed-text ownership needs source review: revise legacy_opaque to structured givenSkeleton before approving layout')
+  }
+  const blocks = new Map((group.content?.blocks || []).map(block => [block.nodeId, block]))
+  const text = id => (blocks.get(id)?.inlines || []).map(inline => inline.text || '').join('')
+  const promptIds = variant.promptBlockRefs || []
+  const skeleton = variant.givenSkeleton
+  if (skeleton?.presence === 'none' && skeleton.answerRegionAbsenceAssertionRef) return
+  if (skeleton?.presence !== 'provided' || !skeleton.parts?.length) {
+    throw new Error('application givenSkeleton needs source-provided parts or evidenced absence')
+  }
+  for (const part of skeleton.parts) {
+    if (!text(part.blockRef).trim() || promptIds.includes(part.blockRef)) {
+      throw new Error('application given text must occur only inside its response box, not again in the prompt')
+    }
+    const top = ['title', 'salutation', 'opening'].includes(part.role)
+    if (part.placement !== (top ? 'answer_region_top' : 'answer_region_bottom')) {
+      throw new Error('application given text has the wrong response-box placement')
+    }
+  }
+}
+
+export function assertNck1ApplicationChrome(group) {
+  assertApplicationGivenOwnership(group)
+  const promptIds = new Set(group.variant.promptBlockRefs)
+  const paragraphs = group.content.blocks.filter(block => promptIds.has(block.nodeId))
+    .map(block => (block.inlines || []).map(inline => inline.text || '').join(''))
+  const prompt = paragraphs.join('\n')
   if (prompt.includes('（词数') || prompt.includes('(词数')) {
     throw new Error('application prompt must not glue the word-count suffix')
   }
-  if (!/^注意：/.test(notice) || !/个左右/.test(notice)) {
+  const notices = writingNoticeGroups(paragraphs)
+  if (notices.length !== 1 || writingWordCount(notices[0].lines.map(line => line.text).join(' ')) === null) {
     throw new Error('application notice block missing NCK1 注意 chrome')
-  }
-  if (group.variant.givenSkeleton?.presence !== 'provided') {
-    throw new Error('application givenSkeleton.presence must be provided')
-  }
-  if (!title.trim()) {
-    throw new Error('application given title is empty')
   }
 }
 

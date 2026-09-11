@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
-import { applyPlannedGroupBreaks, fixedPageLayoutPolicy, planFixedPagePdf } from '../server/draft-paper/fixedPagePdfPlanner.mjs'
+import { applyPlannedGroupBreaks, fixedPageLayoutPolicy, planFixedPagePdf, renderExplicitFixedPagePdf } from '../server/draft-paper/fixedPagePdfPlanner.mjs'
 import { ownsCompletePaperOpening } from '../shared/paper-canonical/listeningPresentation.mjs'
 
 assert.deepEqual(fixedPageLayoutPolicy('friendly8', 0), { targetPages: 8, includeListening: false, omitCover: false })
-assert.deepEqual(fixedPageLayoutPolicy('friendly8', 2), { targetPages: 8, includeListening: false, omitCover: true })
-assert.equal(fixedPageLayoutPolicy('friendly8', 0, true).omitCover, true, 'already unselected listening still belongs to the source')
+assert.deepEqual(fixedPageLayoutPolicy('friendly8', 2), { targetPages: 8, includeListening: false, omitCover: false })
+assert.equal(fixedPageLayoutPolicy('friendly8', 0, true).omitCover, false, 'excluding listening retains the formal opening')
 assert.deepEqual(fixedPageLayoutPolicy('friendly10', 2), { targetPages: 10, includeListening: true, omitCover: false })
 assert.throws(() => fixedPageLayoutPolicy('friendly10', 0), /完整的两个听力题组/)
 
@@ -103,6 +103,28 @@ assert.equal(boundedRenders, 24)
 
 // Ten-page cover adjustment is ordered: normal, title-up, then lower gap.
 const coverSource = '<html><head></head><body><header data-canonical-paper-opening></header></body></html>'
+// Equal split counts must distinguish dispersed content, while accounting for
+// damage to later groups. Neither render count nor declaration order is a score.
+for (const targetPages of [8, 10]) for (const laterCost of [0, 12]) {
+  const measuredSource = coverSource.replace('</body>', '<section data-canonical-group-id="b"></section><section data-canonical-group-id="grammar"></section></body>')
+  const scored = await planFixedPagePdf(measuredSource, {
+    targetPages,
+    render: async candidate => {
+      const tight = candidate.includes('margin-top:-25.5pt')
+      const fragments = (pages, lines) => pages.map((page, index) => ({ page, height: lines[index] * 24, lineHeight: 24 }))
+      const bPages = [2, 3]
+      const gPages = [6, 7]
+      return { pageCount: targetPages, inspection: [
+        { id: 'b', type: 'reading', pages: bPages, fragments: fragments(bPages, tight ? [29, 6] : [20, 15]) },
+        { id: 'grammar', type: 'grammarFill', pages: gPages, fragments: fragments(gPages, tight ? [3 + laterCost, 20] : [3, 20]) },
+      ] }
+    },
+  })
+  assert.deepEqual(scored.coverGapsPt, laterCost === 0 ? [-25.5, 18] : [72, 72],
+    'prefer less scattered content unless the later split costs more than the improvement')
+  assert.ok(scored.searchedCandidates <= 24)
+}
+
 for (const successAt of [0, 1, 2]) {
   const tried = []
   const result = await planFixedPagePdf(coverSource, {
@@ -120,17 +142,91 @@ for (const successAt of [0, 1, 2]) {
   assert.doesNotMatch(coverSource, /data-pdf-cover-adjustment/, 'input for Screen/Print remains untouched')
 }
 
-// Eight-page papers start compact even if the old cover could fit eight pages.
+// Eight-page papers use the same opening policy, compressing only when useful.
 const compact = await planFixedPagePdf(coverSource, {
   targetPages: 8,
   render: async (candidate) => {
-    assert.match(candidate, /page-top-to-title:0pt/)
-    assert.match(candidate, /title-to-notices:18pt/)
-    return { pageCount: 8, inspection: [] }
+    assert.doesNotMatch(candidate, /data-pdf-omit-cover/)
+    return { pageCount: candidate.includes('title-to-notices:18pt') ? 8 : 9, inspection: [] }
   },
 })
 assert.deepEqual(compact.coverGapsPt, [0, 18])
 assert.doesNotMatch(coverSource, /data-pdf-cover-adjustment/)
+
+// Zero padding alone cannot use the first page's top margin. The final profile
+// changes real flow occupancy, and the reviewed plan must replay it exactly.
+for (const targetPages of [8, 10]) {
+  let selectedHtml
+  const lifted = await planFixedPagePdf(coverSource, {
+    targetPages,
+    render: async candidate => {
+      selectedHtml = candidate
+      assert.doesNotMatch(candidate, /transform|page-top-to-title:-/)
+      return { pageCount: candidate.includes('margin-top:-25.5pt') ? targetPages : targetPages + 1, inspection: [] }
+    },
+  })
+  assert.deepEqual(lifted.coverGapsPt, [-25.5, 18])
+  assert.equal(lifted.searchedCandidates, 6)
+  await renderExplicitFixedPagePdf(coverSource, {
+    ...lifted, targetPages,
+    render: async candidate => {
+      assert.equal(candidate, selectedHtml)
+      return { pageCount: targetPages, inspection: [] }
+    },
+  })
+}
+
+// Do not spend the search on a normal-cover break when compact natural flow
+// already fixes D. This fails the previous cover-at-a-time search order.
+let openingFirstRenders = 0
+const openingFirst = await planFixedPagePdf(threeGroups.replace('<body>', '<body><header data-canonical-paper-opening></header>'), {
+  targetPages: 10,
+  render: async (candidate) => {
+    openingFirstRenders += 1
+    assert.doesNotMatch(candidate, /<section[^>]* data-pdf-planned-break/)
+    const compact = candidate.includes('title-to-notices:36pt')
+    return { pageCount: 10, inspection: [
+      { id: 'a', pages: [3] },
+      { id: 'b', pages: compact ? [5] : [4, 5], fragments: [{ page: 4, height: 100, lineHeight: 16 }] },
+      { id: 'c', pages: [7] },
+    ] }
+  },
+})
+assert.deepEqual(openingFirst.coverGapsPt, [18, 36])
+assert.deepEqual(openingFirst.crossingGroupIds, [])
+assert.deepEqual(openingFirst.plannedBreakGroupIds, [])
+assert.equal(openingFirstRenders, 4)
+
+let coveredBudget = 0
+await assert.rejects(() => planFixedPagePdf(manyGroups.replace('<body>', '<body><header data-canonical-paper-opening></header>'), {
+  targetPages: 10,
+  render: async () => {
+    coveredBudget += 1
+    return { pageCount: 12, inspection: Array.from({ length: 30 }, (_, index) => ({ id: `g${index}`, pages: [1] })) }
+  },
+}), (error) => error.code === 'PAPER_FIXED_PAGE_IMPOSSIBLE' && error.searchedCandidates === coveredBudget)
+assert.ok(coveredBudget <= 24, 'all opening and option-bank attempts share one render budget')
+
+// Ablation exposed that declaration-order search can spend the budget on an
+// overlong cover while the compact exact-count baseline still needs one break.
+const rankedCover = await planFixedPagePdf(threeGroups.replace('<body>', '<body><header data-canonical-paper-opening></header>'), {
+  targetPages: 8,
+  render: async (candidate) => {
+    const compact = candidate.includes('title-to-notices:18pt')
+    const broken = /<section[^>]* data-pdf-planned-break/.test(candidate)
+    if (broken) assert.ok(compact, 'spend break-search budget on the closest page-count profile first')
+    return {
+      pageCount: compact ? 8 : 9,
+      inspection: [
+        { id: 'a', pages: [1] },
+        { id: 'b', pages: broken ? [2] : [1, 2] },
+        { id: 'c', pages: [3] },
+      ],
+    }
+  },
+})
+assert.deepEqual(rankedCover.coverGapsPt, [0, 18])
+assert.equal(rankedCover.layoutPenalty, 0)
 
 const special = await planFixedPagePdf(coverSource, {
   targetPages: 8, omitCover: true,
@@ -148,6 +244,19 @@ assert.doesNotMatch(coverSource, /data-pdf-omit-cover/)
 const types = ['reading', 'reading', 'reading', 'reading', 'sevenChoices', 'cloze', 'grammarFill', 'writing', 'continuation']
 const fullSource = `<html><head></head><body>${types.map((type, index) => `<section data-canonical-group-id="g${index}" data-canonical-group-type="${type}"></section>`).join('')}</body></html>`
 const ideal = ['g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g8']
+let improvementRenders = 0
+const improvedWithinBudget = await planFixedPagePdf(fullSource.replace('<body>', '<body><header data-canonical-paper-opening></header>'), {
+  targetPages: 8,
+  render: async candidate => {
+    assert.doesNotMatch(candidate, /data-pdf-option-bank-fallback/)
+    improvementRenders++
+    const pages = improvementRenders >= 19 ? [1, 2, 3, 4, 5, 6, 7, 7, 8] : types.map(() => 1)
+    return { pageCount: 8, inspection: types.map((type, index) => ({ id: `g${index}`, type, pages: [pages[index]] })) }
+  },
+})
+assert.equal(improvedWithinBudget.layoutPenalty, 0, 'an exact-count fit must not reserve budget for an unreachable option-bank fallback')
+assert.equal(improvedWithinBudget.searchedCandidates, 19)
+
 for (const longA of [false, true]) {
   const arranged = await planFixedPagePdf(fullSource, {
     targetPages: 8,
@@ -204,18 +313,21 @@ const skipNoOp = await planFixedPagePdf(threeGroups, {
 })
 assert.deepEqual(skipNoOp.plannedBreakGroupIds, ['c'])
 
-for (const needsFallback of [false, true]) {
+for (const targetPages of [8, 10]) for (const needsFallback of [false, true]) {
   const attempts = []
   const bankResult = await planFixedPagePdf(coverSource, {
-    targetPages: 10,
+    targetPages,
     render: async (candidate) => {
       const relaxed = candidate.includes('data-pdf-option-bank-fallback')
       attempts.push(relaxed)
-      return { pageCount: needsFallback && !relaxed ? 11 : 10,
-        inspection: [{ id: 'seven', pages: [7, 8], optionBankPages: relaxed ? [7, 8] : [8] }] }
+      assert.match(candidate, /canonical-option-bank-item\{break-inside:avoid;page-break-inside:avoid\}/)
+      return { pageCount: needsFallback && !relaxed ? targetPages + 1 : targetPages,
+        inspection: [{ id: 'seven', pages: relaxed ? [7, 8] : [8], optionBankPages: relaxed ? [7, 8] : [8] }] }
     },
   })
-  assert.deepEqual(attempts, needsFallback ? [false, false, false, true] : [false])
+  assert.deepEqual(attempts, needsFallback
+    ? [...Array(6).fill(false), ...Array(6).fill(true)]
+    : [false])
   assert.equal(bankResult.splitOptionBankCount, Number(needsFallback))
 }
 

@@ -272,9 +272,37 @@ assert.deepEqual(
   [],
   'Grammar Fill source prompts may immediately follow the blank marker without a space',
 )
+const misplacedDirectionInput = sourceInput()
+const misplacedDirectionMaterialization = JSON.parse(new TextDecoder().decode(
+  misplacedDirectionInput.materializationBytes,
+))
+misplacedDirectionMaterialization.groups.find((group) => group.slotId === 'cloze').blocks.unshift({
+  kind: 'paragraph',
+  blockId: 'block:misplaced-direction',
+  role: 'body',
+  content: [{ kind: 'text', text: '请阅读下面短文，从每题所给的四个选项中选出最佳选项。' }],
+  source: {
+    kind: 'page_region',
+    documentId: 'paper',
+    page: 1,
+    region: { x: 0, y: 0, width: 1, height: 1 },
+  },
+})
+misplacedDirectionInput.materializationBytes = textEncoder.encode(
+  JSON.stringify(misplacedDirectionMaterialization),
+)
+const misplacedDirectionCandidate = importCanonicalCandidate(misplacedDirectionInput)
+assert(misplacedDirectionCandidate.issues.some((item) =>
+  item.code === 'MATERIALIZATION_PASSAGE_INSTRUCTION_SUSPECTED'))
+const misplacedDirectionConfirmation = rederiveConfirmedCanonicalCandidate(
+  misplacedDirectionCandidate.candidate,
+  confirmation(misplacedDirectionCandidate.candidate),
+)
+assert.equal(Boolean(misplacedDirectionConfirmation.compilation), false,
+  'a suspected passage instruction blocks confirmed compilation')
 assert.equal(canonicalAuthorityRef.manifestVersion, '36')
 assert.equal(trustedDocxCandidateAuthorityRef.manifestVersion, '37')
-assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '52')
+assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '54')
 assert.equal(resolveCanonicalAuthority({
   manifestId: manifestV46.manifestId,
   manifestVersion: manifestV46.version,

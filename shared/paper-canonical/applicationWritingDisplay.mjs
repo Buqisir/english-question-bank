@@ -1,26 +1,38 @@
-const NOTICE_PREFIX_PATTERN = /^(注意[：:])([ \t\r\n]*)(?=[(（]\d+[)）])/
-const NUMBERED_INSTRUCTION_PATTERN = /[(（]\d+[)）]/g
+const NOTICE_PREFIX_PATTERN = /^(注意(?:事项)?[：:])\s*/u
+const NUMBERED_INSTRUCTION_PATTERN = /[（(]\d+[)）]|(?<![\d.])\d+[.．、](?!\d)|[一二三四五六七八九十]+[.．、]/gu
 
 function normalizedSplitNoticeInstruction(value) {
   const text = String(value ?? '').trim()
   const parenthesized = text.match(/^[（(](\d+)[）)](.*)$/)
   if (parenthesized) return `（${parenthesized[1]}）${parenthesized[2]}`
-  const dotted = text.match(/^(\d+)[.．、]\s*(.*)$/)
-  return dotted ? `（${dotted[1]}）${dotted[2]}` : null
+  const dotted = text.match(/^(\d+)[.．、](?!\d)\s*(.*)$/)
+  if (dotted) return `（${dotted[1]}）${dotted[2]}`
+  return /^[一二三四五六七八九十]+[.．、]/u.test(text) ? text : null
+}
+
+export function writingWordCount(text) {
+  const value = String(text ?? '').normalize('NFKC')
+  const chinese = value.match(/词数[^0-9]{0,20}(\d{2,3})/u)
+  if (chinese) return Number(chinese[1])
+  const words = value.match(/(\d{2,3})\s*(?:个?词|words?)\b/iu)
+  return words ? Number(words[1]) : null
 }
 
 /**
  * Translate one source prompt block into visual notice lines without changing
- * or persisting canonical text. Non-numbered notice blocks remain untouched.
+ * or persisting canonical text. Accept the same labels as source validation.
  */
 export function applicationWritingNoticeLines(text) {
-  const value = String(text ?? '')
+  const value = String(text ?? '').trim()
   const prefix = value.match(NOTICE_PREFIX_PATTERN)
   if (!prefix) return null
 
   const instructionText = value.slice(prefix[0].length)
+  if (!instructionText) return [{ kind: 'label', text: prefix[0] }]
   const markers = [...instructionText.matchAll(NUMBERED_INSTRUCTION_PATTERN)]
-  if (markers.length === 0 || markers[0].index !== 0) return null
+  if (markers.length === 0 || markers[0].index !== 0) {
+    return [{ kind: 'label', text: prefix[0] }, { kind: 'instruction', text: instructionText }]
+  }
 
   return [
     { kind: 'label', text: prefix[0] },
@@ -39,15 +51,15 @@ export function applicationWritingNoticeLines(text) {
  * consecutive source-preserved paragraphs. The returned lines are display
  * semantics only; callers retain every Canonical block and content-node ID.
  */
-export function writingNoticeGroup(texts) {
-  for (const [startIndex, rawText] of texts.entries()) {
-    const combinedLines = applicationWritingNoticeLines(rawText)
-    if (combinedLines) {
-      return { startIndex, blockCount: 1, lines: combinedLines }
+export function writingNoticeGroups(texts) {
+  const groups = []
+  for (let startIndex = 0; startIndex < texts.length; startIndex += 1) {
+    const lines = applicationWritingNoticeLines(texts[startIndex])
+    if (!lines) continue
+    if (lines.length > 1) {
+      groups.push({ startIndex, blockCount: 1, lines })
+      continue
     }
-    const label = String(rawText ?? '').trim()
-    if (!/^注意[：:]$/.test(label)) continue
-    const lines = [{ kind: 'label', text: label }]
     let blockCount = 1
     for (const followingText of texts.slice(startIndex + 1)) {
       const instruction = normalizedSplitNoticeInstruction(followingText)
@@ -55,9 +67,14 @@ export function writingNoticeGroup(texts) {
       lines.push({ kind: 'instruction', text: instruction })
       blockCount += 1
     }
-    if (lines.length > 1) return { startIndex, blockCount, lines }
+    groups.push({ startIndex, blockCount, lines })
+    startIndex += blockCount - 1
   }
-  return null
+  return groups
+}
+
+export function writingNoticeGroup(texts) {
+  return writingNoticeGroups(texts)[0] || null
 }
 
 const CONTINUATION_PARAGRAPH_LABELS = [

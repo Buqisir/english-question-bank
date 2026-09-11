@@ -43,6 +43,7 @@ import {
 } from '../../server/import-review/reviewPagination.mjs'
 import { closeChromiumPool } from '../../server/draft-paper/chromiumPool.mjs'
 import { fixedPageLayoutPolicy } from '../../server/draft-paper/fixedPagePdfPlanner.mjs'
+import { assertApplicationGivenOwnership } from './lib-nck1-new-paper-locks.mjs'
 import {
   PAPER_PAGINATION_PLAN_FILE_NAME,
   validatePaperPaginationPlan,
@@ -240,6 +241,8 @@ async function paginationQa(paperId) {
   let slotByGroup = new Map()
   try {
     projection = buildNck1ReviewProjection(paperDir, { requireAnalyses: true })
+    assertApplicationGivenOwnership(projection.compilation.artifacts.canonicalPaper.questionGroups
+      .find(group => group.variant.family === 'application-writing'))
     const sourceHasListening = projection.paginationSlotBindings.some((entry) =>
       entry.familyContractId === 'listening')
     const listeningCount = projection.paginationSlotBindings.filter((entry) =>

@@ -2904,7 +2904,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           {options?.showBottomScissorLine && (
             <div className="paper-browse-scissor-line paper-browse-scissor-line--bottom" aria-hidden="true" />
           )}
-          {options?.mergedInstructionText && (
+          {/* Canonical listening already renders its section instruction in PaperSurface. */}
+          {options?.mergedInstructionText && entry?.kind !== 'listening' && (
             <p
               className="paper-browse-instruction paper-browse-instruction--merged"
               data-canonical-reading-rhythm-role={

@@ -9,8 +9,14 @@ const PLANNED_BREAK_STYLE = `<style data-pdf-planned-break>
 [data-pdf-planned-break]{break-before:page!important;page-break-before:always!important}
 </style>`
 
-export function fixedPageLayoutPolicy(pageLayout, listeningGroupCount, sourceHasListening = listeningGroupCount === 2) {
-  if (pageLayout === 'friendly8') return { targetPages: 8, includeListening: false, omitCover: sourceHasListening }
+// Shared by automatic planning and the import QA plan validator. These are
+// bounded product choices, not physical measurements inferred from cropped goldens.
+// A negative first value moves only the opening into the 21mm top margin:
+// -25.5pt leaves approximately 12mm to the paper edge, without shrinking body text.
+export const FIXED_PAGE_COVER_GAPS_PT = [[72, 72], [54, 72], [54, 54], [18, 36], [0, 18], [-25.5, 18]]
+
+export function fixedPageLayoutPolicy(pageLayout, listeningGroupCount) {
+  if (pageLayout === 'friendly8') return { targetPages: 8, includeListening: false, omitCover: false }
   if (pageLayout === 'friendly10') {
     if (listeningGroupCount !== 2) throw new Error('10 页友好版需要完整的两个听力题组；请选择 8 页无听力版')
     return { targetPages: 10, includeListening: true, omitCover: false }
@@ -40,7 +46,8 @@ function applyFixedCover(html, { targetPages, omitCover, coverGapsPt }) {
   if (omitCover && targetPages !== 8) throw new Error('Only the eight-page listening-excluded edition may omit its cover')
   if (omitCover) return html.replace('</head>', '<style data-pdf-omit-cover>.canonical-paper-opening{display:none}</style></head>')
   if (coverGapsPt && (coverGapsPt[0] !== 72 || coverGapsPt[1] !== 72)) {
-    return html.replace('</head>', `<style data-pdf-cover-adjustment>.canonical-paper-opening{--canonical-cover-page-top-to-title:${coverGapsPt[0]}pt;--canonical-cover-title-to-notices:${coverGapsPt[1]}pt}</style></head>`)
+    const lift = coverGapsPt[0] < 0 ? `margin-top:${coverGapsPt[0]}pt;` : ''
+    return html.replace('</head>', `<style data-pdf-cover-adjustment>.canonical-paper-opening{${lift}--canonical-cover-page-top-to-title:${Math.max(0, coverGapsPt[0])}pt;--canonical-cover-title-to-notices:${coverGapsPt[1]}pt}</style></head>`)
   }
   return html
 }
@@ -88,41 +95,56 @@ function impossible(message, details = {}) {
 // Fixed-page export is deliberately a separate render path. It never reads or
 // writes the natural preview cache. Typography and answer geometry remain the
 // print renderer's fixed values; this planner only tries semantic group starts.
-// Eight-page papers start compact to give Reading A more of page one. Ten-page
-// papers try title-up before reducing the lower gap. These are sample bounds,
-// not measured golden margins. Natural Screen/Print and body geometry are untouched.
+// Compare natural flow at every cover profile before spending the remaining
+// budget on group breaks. Natural Screen/Print and body geometry are untouched.
 export async function planFixedPagePdf(html, { targetPages, omitCover = false, render }) {
   if (omitCover && targetPages !== 8) throw new Error('Only the eight-page listening-excluded edition may omit its cover')
   if (omitCover) html = html.replace('</head>', '<style data-pdf-omit-cover>.canonical-paper-opening{display:none}</style></head>')
   const coverGaps = html.includes('data-canonical-paper-opening')
-    && !omitCover ? (targetPages === 8 ? [[0, 18]] : [[72, 72], [54, 72], [54, 54]]) : [null]
+    && !omitCover ? FIXED_PAGE_COVER_GAPS_PT : [null]
   let searchedCandidates = 0
   let lastFailure
   let bestFit
-  const attempts = [true, ...(targetPages === 10 ? [false] : [])]
-    .flatMap((keepOptionBank) => coverGaps.map((gaps) => ({ gaps, keepOptionBank })))
-  for (const [attemptIndex, { gaps, keepOptionBank }] of attempts.entries()) {
-    // Exact pages outrank whole-bank preference, but never split an individual
-    // question/option to recover space. Do not relax a successful protected plan.
-    if (!keepOptionBank && bestFit) return { ...bestFit, searchedCandidates }
-    let candidate = gaps && (gaps[0] !== 72 || gaps[1] !== 72)
-      ? html.replace('</head>', `<style data-pdf-cover-adjustment>.canonical-paper-opening{--canonical-cover-page-top-to-title:${gaps[0]}pt;--canonical-cover-title-to-notices:${gaps[1]}pt}</style></head>`)
-      : html
-    if (!keepOptionBank) candidate = candidate.replace('</head>', '<style data-pdf-option-bank-fallback></style></head>')
-    try {
-      const result = await searchFixedPagePdf(candidate, {
-        // Let the natural-flow search reach multi-break solutions; reserve at
-        // least one render for each remaining cover/bank profile.
-        targetPages, render, renderLimit: 24 - searchedCandidates - (attempts.length - attemptIndex - 1),
-      })
-      searchedCandidates += result.searchedCandidates
-      const fit = { ...result, coverGapsPt: gaps, allowSplitOptionBank: !keepOptionBank }
-      if (!bestFit || fit.layoutPenalty < bestFit.layoutPenalty) bestFit = fit
-      if (!fit.layoutPenalty) return { ...fit, searchedCandidates }
-    } catch (error) {
-      if (error.code !== 'PAPER_FIXED_PAGE_IMPOSSIBLE' || !Number.isInteger(error.searchedCandidates)) throw error
-      searchedCandidates += error.searchedCandidates
-      lastFailure = error
+  for (const keepOptionBank of [true, false]) {
+    // Whole-bank preservation outranks a prettier boundary; relax only when
+    // no exact-count protected plan exists. Cache just these bounded baselines.
+    if (!keepOptionBank && bestFit) break
+    const baselines = []
+    for (const gaps of coverGaps) {
+      let candidate = applyFixedCover(html, { targetPages, omitCover: false, coverGapsPt: gaps })
+      if (!keepOptionBank) candidate = candidate.replace('</head>', '<style data-pdf-option-bank-fallback></style></head>')
+      const natural = await render(applyPlannedGroupBreaks(candidate, []), { inspect: inspectGroups })
+      searchedCandidates += 1
+      const result = await searchFixedPagePdf(candidate, { targetPages, render, renderLimit: 1, natural })
+        .catch((error) => { if (error.code !== 'PAPER_FIXED_PAGE_IMPOSSIBLE') throw error; lastFailure = error; return null })
+      if (result) {
+        const fit = { ...result, coverGapsPt: gaps, allowSplitOptionBank: !keepOptionBank }
+        if (!bestFit || fit.layoutPenalty < bestFit.layoutPenalty) bestFit = fit
+        if (!fit.layoutPenalty) return { ...fit, searchedCandidates }
+      }
+      baselines.push({ gaps, candidate, natural, penalty: result?.layoutPenalty ?? 0 })
+    }
+    baselines.sort((a, b) => Math.abs(a.natural.pageCount - targetPages) - Math.abs(b.natural.pageCount - targetPages)
+      || a.penalty - b.penalty)
+    for (const [index, { gaps, candidate, natural }] of baselines.entries()) {
+      // Once an exact-count fit exists the fallback cannot run; spend its
+      // unused reservation on improving that fit instead of stopping early.
+      const reserved = keepOptionBank && !bestFit ? coverGaps.length : 0
+      const remainingProfiles = baselines.length - index - 1
+      const renderLimit = 1 + Math.max(0, 24 - searchedCandidates - reserved - remainingProfiles)
+      if (renderLimit === 1) continue
+      try {
+        const result = await searchFixedPagePdf(candidate, { targetPages, render, renderLimit, natural })
+        searchedCandidates += result.searchedCandidates - 1
+        const fit = { ...result, coverGapsPt: gaps, allowSplitOptionBank: !keepOptionBank }
+        if (!bestFit || fit.layoutPenalty < bestFit.layoutPenalty
+          || (fit.layoutPenalty === bestFit.layoutPenalty && fit.plannedBreakGroupIds.length < bestFit.plannedBreakGroupIds.length)) bestFit = fit
+        if (!fit.layoutPenalty) return { ...bestFit, searchedCandidates }
+      } catch (error) {
+        if (error.code !== 'PAPER_FIXED_PAGE_IMPOSSIBLE' || !Number.isInteger(error.searchedCandidates)) throw error
+        searchedCandidates += error.searchedCandidates - 1
+        lastFailure = error
+      }
     }
   }
   if (bestFit) return { ...bestFit, searchedCandidates }
@@ -141,9 +163,6 @@ export async function renderExplicitFixedPagePdf(html, {
   render,
 }) {
   if (typeof allowSplitOptionBank !== 'boolean') throw new Error('allowSplitOptionBank must be boolean')
-  if (allowSplitOptionBank && targetPages !== 10) {
-    throw new Error('Only the ten-page edition may allow a split option bank')
-  }
   let candidate = applyFixedCover(html, { targetPages, omitCover, coverGapsPt })
   if (allowSplitOptionBank) {
     candidate = candidate.replace('</head>', '<style data-pdf-option-bank-fallback></style></head>')
@@ -184,10 +203,9 @@ export async function renderDiagnosticFixedPagePdf(html, {
   return render(candidate, { inspect: inspectGroups })
 }
 
-async function searchFixedPagePdf(html, { targetPages, render, renderLimit }) {
+async function searchFixedPagePdf(html, { targetPages, render, renderLimit, natural }) {
   if (![8, 10].includes(targetPages)) throw new Error('targetPages must be 8 or 10')
   const renderPlan = (breaks) => render(applyPlannedGroupBreaks(html, breaks), { inspect: inspectGroups })
-  const natural = await renderPlan([])
   const candidates = natural.inspection.slice(1).map(({ id }) => id)
   // A real render creates both a complete paginated HTML document and PDF.
   // Keep the search small, and retain neither artifact for unsuccessful
@@ -207,6 +225,18 @@ async function searchFixedPagePdf(html, { targetPages, render, renderLimit }) {
       return index > 0 || !fragment || fragment.height > fragment.lineHeight * 2.5
     })
     const splitIds = result.inspection.filter((group) => substantialPages(group).length > 1).map(({ id }) => id)
+    // Measure content outside the group's main page in line-height units.
+    // A 29+6 split costs less than 20+15, without another render or text parsing.
+    // Listening follows its existing natural-flow/segment protection rules.
+    const scatteredLines = result.inspection.reduce((total, group) => {
+      const pages = substantialPages(group)
+      if (group.type === 'listening' || pages.length < 2) return total
+      const fragments = pages.map(page => group.fragments?.find(entry => entry.page === page))
+      // Retain the former split cost for callers without complete measurements.
+      if (fragments.some(fragment => !fragment)) return total + 10
+      const lines = fragments.map(fragment => fragment.height / fragment.lineHeight)
+      return total + lines.reduce((sum, height) => sum + height, 0) - Math.max(...lines)
+    }, 0)
     let sharedPages = 0
     for (let index = 1; index < result.inspection.length; index += 1) {
       const previous = result.inspection[index - 1]
@@ -214,7 +244,7 @@ async function searchFixedPagePdf(html, { targetPages, render, renderLimit }) {
       if (previous.type === 'grammarFill' && group.type === 'writing') continue
       if (substantialPages(previous).some((page) => substantialPages(group).includes(page))) sharedPages += 1
     }
-    const layoutPenalty = failures.length + (targetPages === 8 ? splitIds.length * 10 + sharedPages : 0)
+    const layoutPenalty = failures.length + scatteredLines + (targetPages === 8 ? sharedPages : 0)
     return {
       pageCount: result.pageCount,
       failureIds: failures.map(({ id }) => id),
@@ -240,11 +270,11 @@ async function searchFixedPagePdf(html, { targetPages, render, renderLimit }) {
   }
 
   // Nine groups / eight pages: grammar and application share by default.
-  // If A overruns, search local break removals without discarding later starts.
+  // Queue this seed too; the common search can remove breaks if A overruns.
   const idealBreaks = targetPages === 8 ? natural.inspection.slice(1).filter((group, index) =>
     !(group.type === 'writing' && natural.inspection[index].type === 'grammarFill'))
     .map(({ id }) => id) : []
-  if (idealBreaks.length) {
+  if (idealBreaks.length && seen.size < maxRenders) {
     const result = await renderPlan(idealBreaks)
     const summary = summarize(result)
     seen.add(idealBreaks.join('\u0000'))
@@ -253,22 +283,6 @@ async function searchFixedPagePdf(html, { targetPages, render, renderLimit }) {
       return { ...bestFit, searchedCandidates: seen.size }
     }
     queue.push({ breaks: idealBreaks, summary })
-    // An overlong A can make the ideal plan nine pages. Try local merges from
-    // that plan before exact-count natural-flow siblings consume the budget.
-    if (targetPages === 8 && result.pageCount > targetPages) {
-      for (const id of idealBreaks) {
-        if (seen.size >= maxRenders) break
-        const breaks = idealBreaks.filter((candidate) => candidate !== id)
-        const key = breaks.join('\u0000')
-        if (seen.has(key)) continue
-        seen.add(key)
-        const merged = await renderPlan(breaks)
-        const mergedSummary = summarize(merged)
-        retain(merged, breaks, mergedSummary)
-        if (bestFit?.layoutPenalty === 0) return { ...bestFit, searchedCandidates: seen.size }
-        queue.push({ breaks, summary: mergedSummary })
-      }
-    }
   }
 
   // Best-first semantic search. A candidate which fixes a cross-face split is

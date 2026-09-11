@@ -2,10 +2,11 @@ import { execFileSync } from 'node:child_process'
 
 import { extractDocxDocumentStructure } from '../paper-canonical/docxSourceAdapter.mjs'
 import { validateNck1SourceMaterialization } from '../../shared/paper-canonical/nck1SourceMaterialization.mjs'
+import { writingNoticeGroup, writingWordCount } from '../../shared/paper-canonical/applicationWritingDisplay.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 export const NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION =
-  'nck1-docx-materialization-producer-v7'
+  'nck1-docx-materialization-producer-v8'
 
 const DOCX = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 const BLANK = /(?:\d{1,3}[.．、]?\p{Zs}*)?_{2,}\d{0,3}_{0,}/gu
@@ -469,12 +470,6 @@ function clozeGroup({ paperId, body, start, end, documentId, issues }) {
   return group(paperId, 'cloze', 'cloze', blocks, questions)
 }
 
-function wordCount(items) {
-  const text = items.map((item) => item.text || '').join(' ')
-  const match = /词数[^0-9]{0,20}(\d{2,3})|(?:about\s+)?(\d{2,3})\s*words?/iu.exec(text)
-  return Number(match?.[1] || match?.[2] || 0)
-}
-
 function isAnswerExplanationHeading(item) {
   return item.kind === 'paragraph'
     && /^(?:【)?(?:答案(?:及|与)?)?(?:解析|详解)(?:】)?/u.test(normalized(item.text))
@@ -533,18 +528,14 @@ function skeletonRole(text, index, givens) {
 function writingGroup({ paperId, slotId, family, items, documentId, officialModelAnswer, issues }) {
   const meaningful = items.filter((item) => item.kind !== 'paragraph' || normalized(item.text))
   const promptItem = meaningful[0]
-  const noticeIndex = meaningful.findIndex((item) =>
-    item.kind === 'paragraph' && /^注意(?:事项)?[:：]/u.test(normalized(item.text)))
+  const notice = writingNoticeGroup(meaningful.map(item => item.kind === 'paragraph' ? normalized(item.text) : ''))
+  const noticeIndex = notice?.startIndex ?? -1
   if (!promptItem || noticeIndex < 1) {
     addIssue(issues, 'NCK1_DOCX_WRITING_BOUNDARY_AMBIGUOUS', `groups.${slotId}`,
       'Writing prompt and 注意 boundary are not closed', sourceRef(documentId))
     return emptyGroup(paperId, slotId, family)
   }
-  let noticeEnd = noticeIndex
-  while (meaningful[noticeEnd + 1]?.kind === 'paragraph'
-    && /^(?:\(\d+\)|\d+[.、．])/u.test(normalized(meaningful[noticeEnd + 1].text))) {
-    noticeEnd += 1
-  }
+  const noticeEnd = noticeIndex + notice.blockCount - 1
   const givens = meaningful.slice(noticeEnd + 1).filter((item) => item.kind === 'paragraph')
   const skeleton = family === 'application-writing'
     ? givens.map((item, index) => ({
@@ -582,7 +573,7 @@ function writingGroup({ paperId, slotId, family, items, documentId, officialMode
       ? givens.map((item) => trimEdgeSpaces(item.text))
       : [],
     givenSkeleton: skeleton.map((item) => ({ text: item.text, role: item.role || 'opening' })),
-    wordCountTarget: wordCount(meaningful.slice(noticeIndex, noticeEnd + 1)),
+    wordCountTarget: writingWordCount(meaningful.slice(noticeIndex, noticeEnd + 1).map(item => item.text).join(' ')),
     officialModelAnswer,
     source: sourceLocator(documentId, promptItem.sourceIndex),
   }

@@ -8,6 +8,7 @@ import {
   validateMediaPublication,
 } from './mediaPresentation.mjs'
 import { validateReadingFigureLayout } from './readingFigureLayout.mjs'
+import { writingNoticeGroups, writingWordCount } from './applicationWritingDisplay.mjs'
 
 export const NCK1_SOURCE_MATERIALIZATION_SCHEMA_VERSION =
   'nck1-source-materialization-v1'
@@ -450,42 +451,6 @@ function writingParagraphs(blocks) {
     }))
 }
 
-function writingWordCount(text) {
-  const chinese = text.match(/词数[^0-9]{0,20}(\d{2,3})/u)
-  if (chinese) return Number(chinese[1])
-  const words = text.match(/(\d{2,3})\s*(?:个?词|words?)\b/iu)
-  return words ? Number(words[1]) : null
-}
-
-function isNumberedWritingNoticeLine(text) {
-  return /^(?:\(\d+\)|\d+[.、．]|[一二三四五六七八九十]+[.、．])/u.test(text)
-}
-
-function writingNoticeCandidates(paragraphs) {
-  const candidates = []
-  for (let index = 0; index < paragraphs.length; index += 1) {
-    const text = paragraphs[index].text
-    if (!/^注意(?:事项)?[:：]/u.test(text)) continue
-    if (writingWordCount(text) !== null) {
-      candidates.push({ start: index, end: index, text })
-      continue
-    }
-    if (!/^注意(?:事项)?[:：]?$/u.test(text)) continue
-    let end = index
-    while (isNumberedWritingNoticeLine(paragraphs[end + 1]?.text || '')) end += 1
-    if (end > index) {
-      const noticeText = paragraphs
-        .slice(index, end + 1)
-        .map((paragraph) => paragraph.text)
-        .join(' ')
-      if (writingWordCount(noticeText) !== null) {
-        candidates.push({ start: index, end, text: noticeText })
-      }
-    }
-  }
-  return candidates
-}
-
 function matchingParagraphIndexes(paragraphs, text) {
   const normalized = normalizedWritingText(text)
   return paragraphs.flatMap((paragraph, index) =>
@@ -503,10 +468,13 @@ function validateWritingBlocks(blocks, task, family, path, issues) {
   ) return
 
   const paragraphs = writingParagraphs(blocks)
-  const notices = writingNoticeCandidates(paragraphs)
-  const attentionParagraphs = paragraphs.filter((paragraph) =>
-    /^注意(?:事项)?[:：]/u.test(paragraph.text))
-  if (notices.length !== 1 || attentionParagraphs.length !== 1) {
+  const notices = writingNoticeGroups(paragraphs.map(paragraph => paragraph.text))
+    .map(notice => ({
+      start: notice.startIndex,
+      end: notice.startIndex + notice.blockCount - 1,
+      text: notice.lines.map(line => line.text).join(' '),
+    }))
+  if (notices.length !== 1 || writingWordCount(notices[0].text) === null) {
     issues.push(issue(
       'MATERIALIZATION_WRITING_NOTICE_INVALID',
       path,
@@ -606,6 +574,19 @@ function validateGroups(groups, documents, mediaReferences, issues, allowFigureO
       validateWritingTask(group.writingTask, expectedFamily, `${path}.writingTask`, documents, issues)
       validateWritingBlocks(group.blocks, group.writingTask, expectedFamily, path, issues)
       continue
+    }
+    // Objective passage blocks do not own section-level answering directions.
+    // Flag even a truncated instruction prefix for source review; never delete it.
+    for (const [blockIndex, block] of (Array.isArray(group.blocks) ? group.blocks : []).entries()) {
+      if (block?.kind !== 'paragraph' || !Array.isArray(block.content)) continue
+      const text = block.content.filter(item => item?.kind === 'text').map(item => item.text).join('')
+        .normalize('NFKC').replace(/\s+/gu, '')
+      if (!/^(?:请)?阅读(?:下[列面]|以下)(?:的)?(?:短文|材料|文本)/u.test(text)) continue
+      issues.push(issue(
+        'MATERIALIZATION_PASSAGE_INSTRUCTION_SUSPECTED',
+        `${path}.blocks[${blockIndex}]`,
+        `${group.slotId}: block ${block.blockId} looks like answering directions inside passage content; review its source locator and ownership before submitting, do not auto-delete source text`,
+      ))
     }
     if (group.writingTask !== null || !Array.isArray(group.questions) || group.questions.length !== to - from + 1) {
       issues.push(issue('MATERIALIZATION_GROUP_QUESTION_COUNT_INVALID', `${path}.questions`, `Slot ${group.slotId} requires questions ${from}-${to}`))

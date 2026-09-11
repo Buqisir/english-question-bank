@@ -326,9 +326,9 @@ const config = existsSync(configPath) ? JSON.parse(readFileSync(configPath, 'utf
 const lockWriting = requiresLockedWritingAnalysis(config, stagingDir)
 
 if (isFormat3Config(config)) {
-  check('H1 application chrome: given title present, prompt does not glue 词数', () => {
+  check('H1 application chrome: prompt does not glue 词数', () => {
     assertApplicationChromeFromGroups(application)
-    return String(application.applicationGiven).trim()
+    return String(application.applicationGiven || '').trim()
   })
 } else {
   skip('H1 application chrome (groups.json)', 'skipped (not format ③)')
@@ -347,7 +347,7 @@ if (lockWriting) {
 }
 
 if (published && isFormat3Config(config)) {
-  check('H3 [post-publish] canonical application chrome: notice + given title, no glued word-count', () => {
+  check('H3 [post-publish] canonical application chrome: notice + source-owned givens, no glued word-count', () => {
     const groupsPathLive = path.join(liveLatestDir, 'canonical', 'canonical-question-groups-v1.json')
     if (!existsSync(groupsPathLive)) fail(`${groupsPathLive} missing`)
     const liveGroups = JSON.parse(readFileSync(groupsPathLive, 'utf8'))

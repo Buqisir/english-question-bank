@@ -954,7 +954,7 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
     await screenPage.goto(screenUrl.href)
     await screenPage.locator('.paper-browse-listening .ps-question').first().waitFor()
     await assertPaperFonts(screenPage, '.paper-browse-listening')
-    await assertSharedPaperLayout(screenPage, '.paper-browse-listening')
+    await assertSharedPaperLayout(screenPage, '.paper-browse-listening', ['listening', 'listening-boundaries'])
     assert.equal(await screenPage.locator('.paper-browse-listening').count(), 2)
     assert.equal(await screenPage.locator('.paper-browse-listening .ps-question').count(), 20)
     assert.deepEqual(
@@ -1024,7 +1024,7 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
       await page.emulateMedia({ media: 'print' })
       await page.setContent(html)
       await assertPaperFonts(page, '.paper-print')
-      await assertSharedPaperLayout(page, '.paper-print')
+      await assertSharedPaperLayout(page, '.paper-print', versionType === 'student' ? ['listening', 'listening-boundaries'] : ['listening'])
       const questions = page.locator('[data-canonical-question-id^="question:listening:"]')
       assert.equal(await questions.count(), 20)
       assert.equal(await page.locator('.question-group[data-canonical-group-type="listening"] .canonical-options > span').count(), 60)

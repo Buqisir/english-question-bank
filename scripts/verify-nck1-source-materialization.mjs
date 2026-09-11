@@ -343,6 +343,31 @@ export function makeFixture({ listening = false, mixedTable = false } = {}) {
 
 const plain = makeFixture()
 assert.deepEqual(validateNck1SourceMaterialization(plain), [])
+for (const text of [
+  '阅读下面短文，从每题所给的A、B、C、D四个选项中选出最佳选项。',
+  '阅读下面短文，从每题所给的A',
+  '请阅读下面短文，从每题所给的四个选项中选出最佳选项。',
+]) {
+  const misplaced = makeFixture()
+  const group = misplaced.groups.find(group => group.slotId === 'cloze')
+  group.blocks.unshift({
+    kind: 'paragraph', blockId: 'block:misplaced-direction', role: 'body',
+    content: [{ kind: 'text', text }], source: locator(),
+  })
+  const found = validateNck1SourceMaterialization(misplaced).find(item =>
+    item.code === 'MATERIALIZATION_PASSAGE_INSTRUCTION_SUSPECTED')
+  assert.equal(found?.path, `$.groups[${misplaced.groups.indexOf(group)}].blocks[0]`)
+  assert.match(found.message, /cloze.*block:misplaced-direction/)
+}
+const proseMention = makeFixture()
+proseMention.groups.find(group => group.slotId === 'reading.a').blocks[0].content = [
+  { kind: 'text', text: 'The teacher explained what “阅读下面短文” means.' },
+]
+assert.deepEqual(validateNck1SourceMaterialization(proseMention), [], 'mentioning a direction is not itself a misplaced direction')
+const extendedNoticeLabel = makeFixture()
+extendedNoticeLabel.groups.find(group => group.slotId === 'writing.application')
+  .blocks[1].content[0].text = '注意事项：'
+assert.deepEqual(validateNck1SourceMaterialization(extendedNoticeLabel), [])
 const reordered = Object.fromEntries(Object.entries(plain).reverse())
 assert.equal(
   digestNck1SourceMaterialization(plain),

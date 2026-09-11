@@ -35,6 +35,14 @@ const produced = produceNck1DocxMaterialization({
 
 assert.equal(produced.disposition, 'ready_for_verification')
 assert.deepEqual(produced.review.required, [])
+const chineseNoticeFixture = makeSyntheticNck1DocxFixture({ chineseNoticeNumbering: true })
+const chineseNoticeProduced = produceNck1DocxMaterialization({
+  paperId: chineseNoticeFixture.paperId, documents: chineseNoticeFixture.sourceDocuments,
+})
+assert.equal(chineseNoticeProduced.disposition, 'ready_for_verification')
+const chineseNoticeTask = chineseNoticeProduced.materialization.groups.find(group => group.slotId === 'writing.application').writingTask
+assert.equal(chineseNoticeTask.wordCountTarget, 80)
+assert.deepEqual(chineseNoticeTask.givenSkeleton, [{ text: 'Should We Join the Reading Club?', role: 'title' }])
 assert.deepEqual(
   produced.materialization.groups.map((group) => group.slotId),
   [
