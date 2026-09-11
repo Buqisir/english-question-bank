@@ -1044,7 +1044,7 @@ function observationForLocator(observationId, kind, locator, value, documentsByI
     span: { start: 0, end: document.bytes.byteLength },
     extraction: {
       adapterId: 'nck1-source-materialization',
-      version: '1',
+      version: '2',
       locator,
     },
   }
@@ -1346,7 +1346,7 @@ function deriveSource(materialization, documentsById, mediaById, instructionDocu
         span: { start: 0, end: mediaBytes.byteLength },
         extraction: {
           adapterId: 'nck1-source-materialization',
-          version: '1',
+          version: '2',
           recipe: inventory.extraction,
         },
       })
@@ -1366,7 +1366,7 @@ function deriveSource(materialization, documentsById, mediaById, instructionDocu
           span: { start: 0, end: renditionBytes.byteLength },
           extraction: {
             adapterId: 'nck1-source-materialization',
-            version: '1',
+            version: '2',
           },
         })
       }
