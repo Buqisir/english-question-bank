@@ -5,7 +5,7 @@ function normalizedSplitNoticeInstruction(value) {
   const text = String(value ?? '').trim()
   const parenthesized = text.match(/^[（(](\d+)[）)](.*)$/)
   if (parenthesized) return `（${parenthesized[1]}）${parenthesized[2]}`
-  const dotted = text.match(/^(\d+)[.．、]\s*(.*)$/)
+  const dotted = text.match(/^(\d+)[.．、](?!\d)\s*(.*)$/)
   if (dotted) return `（${dotted[1]}）${dotted[2]}`
   return /^[一二三四五六七八九十]+[.．、]/u.test(text) ? text : null
 }

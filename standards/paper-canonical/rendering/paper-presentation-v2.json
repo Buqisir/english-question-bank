@@ -1,0 +1,27 @@
+{
+  "applicationGivens": "validated_source_roles_only",
+  "fixedPagePlanning": {
+    "coverGapCandidatesPt": [[72, 72], [54, 72], [54, 54], [18, 36], [0, 18], [-25.5, 18]],
+    "historicalExplicitPlans": "digest_bound_replay_without_pixel_identity_guarantee",
+    "optionBankFallback": "protected_first_then_split_between_complete_options_for_8_or_10_pages",
+    "renderBudget": 24,
+    "splitPenalty": "measured_content_outside_main_page_in_line_height_units"
+  },
+  "history": "preserve_source_semantic_occurrence_and_pagination_plan_signatures",
+  "listeningRhythm": {
+    "exampleBeforePt": 9,
+    "exampleToQuestionsPt": 18,
+    "instructionToFirstSectionPt": 9,
+    "listeningToReadingPt": 36,
+    "noticeAndSectionBoundaryPt": 18,
+    "questionStepPt": 18,
+    "segmentCueBeforePt": 18
+  },
+  "overflow": "measured_atomic_page_bounds",
+  "owner": "renderer_typography",
+  "schemaVersion": "paper-presentation-v2",
+  "sevenChoicesBlankResidue": "paired_three_underscores",
+  "version": "2",
+  "writingNotices": "source_preserved_combined_or_consecutive_numbered_blocks_shared_by_admission_and_renderers",
+  "continuationStarters": "validated_source_refs_in_response"
+}

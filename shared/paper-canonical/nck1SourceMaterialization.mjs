@@ -581,7 +581,7 @@ function validateGroups(groups, documents, mediaReferences, issues, allowFigureO
       if (block?.kind !== 'paragraph' || !Array.isArray(block.content)) continue
       const text = block.content.filter(item => item?.kind === 'text').map(item => item.text).join('')
         .normalize('NFKC').replace(/\s+/gu, '')
-      if (!/^阅读(?:下[列面]|以下)(?:的)?(?:短文|材料|文本)/u.test(text)) continue
+      if (!/^(?:请)?阅读(?:下[列面]|以下)(?:的)?(?:短文|材料|文本)/u.test(text)) continue
       issues.push(issue(
         'MATERIALIZATION_PASSAGE_INSTRUCTION_SUSPECTED',
         `${path}.blocks[${blockIndex}]`,

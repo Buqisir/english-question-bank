@@ -346,6 +346,7 @@ assert.deepEqual(validateNck1SourceMaterialization(plain), [])
 for (const text of [
   '阅读下面短文，从每题所给的A、B、C、D四个选项中选出最佳选项。',
   '阅读下面短文，从每题所给的A',
+  '请阅读下面短文，从每题所给的四个选项中选出最佳选项。',
 ]) {
   const misplaced = makeFixture()
   const group = misplaced.groups.find(group => group.slotId === 'cloze')

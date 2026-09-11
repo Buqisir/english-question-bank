@@ -60,10 +60,11 @@ Screen 把已捕获听力放在 q1–20,点击题目后由同一右栏显示官�
 Screen/Print/PDF 共享输出由后续 successor 闭合,不得从本 Candidate Review
 样式反推。
 
-当前 Universal NCK1 导题与发布 successor 为
-[`manifest-v52.json`](../../standards/paper-canonical/manifest-v52.json)，继承
-v51 的听力发布闭包，使用 NCK1 Profile v16、Reading family v2；其初始消费者为
-Screen v40 和 Print/PDF v41。迁移只增加 materialization v3 的同质 A–D 图片选项及可选
+当前 Universal NCK1 导题、发布与呈现 successor 为
+[`manifest-v54.json`](../../standards/paper-canonical/manifest-v54.json)，继承
+v52 的听力发布闭包、NCK1 Profile v16、Reading family v2，并增加
+Source Adapters v16 / materialization behavior v2 与 Paper Presentation v2；
+其当前消费者为 Screen v42 和 Print/PDF v43。v52 的迁移只增加 materialization v3 的同质 A–D 图片选项及可选
 源测量布局；v1/v2 文字题仍可导入，已有 Publications 保留原 authority/digest，
 不自动重编译、不推进全局 accepted v36，也不恢复旧 Format2 导入运行时。
 图片须保留独立 occurrence、原始字节和可重放裁切；测量布局绑定题目、原卷
@@ -75,9 +76,8 @@ Screen v40 和 Print/PDF v41。迁移只增加 materialization v3 的同质 A–
 `EQB_SHENZHEN_QUESTION_PDF` 可复跑原卷 Q33 图片的局部样例，外围题目为
 合成数据，不能据此声明整卷已完成导入或发布。
 
-当前呈现后继为 renderer-only
-[`manifest-v53.json`](../../standards/paper-canonical/manifest-v53.json)，对应
-Screen v41 / Print/PDF v42；不推进上述导题、发布或全局 accepted authority。
+renderer-only [`manifest-v53.json`](../../standards/paper-canonical/manifest-v53.json)
+及其 Screen v41 / Print/PDF v42 保留为历史呈现后继；v54 不推进全局 accepted authority。
 应用文标题居中、称呼在上、落款在下且右对齐，续写段首句和留白共用
 `shared/papersurface/paperLayout.css`。已验证的旧续写恰好有两条源段首引用时，
 两条只在答题框出现一次；缺失、数量异常或未标记角色的旧内容保留原文，
@@ -86,7 +86,7 @@ Screen v41 / Print/PDF v42；不推进上述导题、发布或全局 accepted au
 分页后检查不可拆分框及内部文字的真实边界，超出时报告
 `PAPER_LAYOUT_OVERFLOW`，不得交付被裁掉的 HTML/PDF。
 迁移边界及复现入口见
-[`manifest-v53-migration.md`](../../standards/paper-canonical/manifest-v53-migration.md)。
+[`manifest-v54-migration.md`](../../standards/paper-canonical/manifest-v54-migration.md)。
 
 机器 manifest 分别绑定 Core Invariants、NCK1 / Zhejiang legacy / national
 legacy Profiles、各 family contract、Normalization Rules、Source Adapters、

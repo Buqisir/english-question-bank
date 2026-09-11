@@ -61,6 +61,8 @@ assert('validation and display share the 注意事项 label and split source bou
 const decimalNotice = applicationWritingNoticeLines('注意：1. Use a 2.5 cm margin; 2. Write about 80 words.')
 assert('decimal measurements never become numbered notice boundaries',
   decimalNotice?.length === 3 && decimalNotice[1].text.includes('2.5 cm'))
+assert('a decimal-leading paragraph stays outside a split notice',
+  writingNoticeGroup(['注意：', '1. Write about 80 words.', '2.5 cm is the title.'])?.blockCount === 2)
 
 const asset = {
   content: {
