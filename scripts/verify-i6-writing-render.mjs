@@ -10,6 +10,7 @@
 
 import { buildWritingPageModel } from '../app/src/features/paper-intelligence/writingPageModel.mjs'
 import {
+  applicationWritingNoticeLines,
   continuationStarterDisplayText,
   writingNoticeGroup,
 } from '../shared/paper-canonical/applicationWritingDisplay.mjs'
@@ -49,6 +50,17 @@ assert('source-preserved notice paragraphs retain one grouped display position',
   && splitNotice.blockCount === 3
   && splitNotice.lines.map((line) => line.kind).join(',') === 'label,instruction,instruction'
   && splitNotice.lines[1].text === '（1）写作词数应为80个左右；')
+
+const extendedNotice = writingNoticeGroup([
+  'Writing prompt.', '注意事项：', '1. 写作词数应为80个左右；',
+  '2. 请按如下格式作答。', 'Given title',
+])
+assert('validation and display share the 注意事项 label and split source boundary',
+  extendedNotice?.startIndex === 1 && extendedNotice.blockCount === 3
+  && extendedNotice.lines[0].text === '注意事项：')
+const decimalNotice = applicationWritingNoticeLines('注意：1. Use a 2.5 cm margin; 2. Write about 80 words.')
+assert('decimal measurements never become numbered notice boundaries',
+  decimalNotice?.length === 3 && decimalNotice[1].text.includes('2.5 cm'))
 
 const asset = {
   content: {

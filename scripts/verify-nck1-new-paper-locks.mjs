@@ -26,7 +26,7 @@ check('format ③ is the new-paper writing/chrome lock', () => {
   assert.equal(isFormat3Config({ format: '1' }), false)
 })
 
-check('groups.json application chrome rejects glued word-count and missing title', () => {
+check('groups.json rejects glued word-count without inventing a required title', () => {
   assertApplicationChromeFromGroups({
     paragraphs: [{ text: '请写一篇演讲稿，内容包括：(1)陈述看法，(2)提出建议。' }],
     applicationGiven: 'Should the Club Open to Beginners?',
@@ -38,12 +38,45 @@ check('groups.json application chrome rejects glued word-count and missing title
     }),
     /glue/,
   )
-  assert.throws(
-    () => assertApplicationChromeFromGroups({
-      paragraphs: [{ text: '请写一篇演讲稿。' }],
-    }),
-    /applicationGiven/,
-  )
+  assertApplicationChromeFromGroups({ paragraphs: [{ text: '请写一封信。' }] })
+})
+
+check('application chrome follows semantic refs for letters, titles and evidenced empty boxes', () => {
+  const texts = ['请给朋友写一封信。', '注意：写作词数应为80个左右。', 'Dear Alex,', 'I am writing to share some news.', 'Yours,', 'Lin']
+  const roles = ['salutation', 'opening', 'closing', 'signature']
+  const letter = {
+    content: { blocks: texts.map((text, index) => ({ nodeId: `b${index}`, inlines: [{ kind: 'text', text }] })) },
+    variant: {
+      family: 'application-writing', promptBlockRefs: ['b0', 'b1'],
+      givenSkeleton: { presence: 'provided', parts: roles.map((role, index) => ({
+        role, blockRef: `b${index + 2}`, placement: index < 2 ? 'answer_region_top' : 'answer_region_bottom',
+      })) },
+    },
+  }
+  assertNck1ApplicationChrome(letter)
+  const title = structuredClone(letter)
+  title.content.blocks = title.content.blocks.slice(0, 3)
+  title.content.blocks[2].inlines[0].text = 'Our School Library'
+  title.variant.givenSkeleton.parts = [{ role: 'title', blockRef: 'b2', placement: 'answer_region_top' }]
+  assertNck1ApplicationChrome(title)
+  const absent = structuredClone(letter)
+  absent.content.blocks = absent.content.blocks.slice(0, 2)
+  absent.variant.givenSkeleton = { presence: 'none', answerRegionAbsenceAssertionRef: 'reviewed-empty-region' }
+  assertNck1ApplicationChrome(absent)
+  delete absent.variant.givenSkeleton.answerRegionAbsenceAssertionRef
+  assert.throws(() => assertNck1ApplicationChrome(absent), /evidenced absence/)
+  const misplaced = structuredClone(letter)
+  misplaced.variant.givenSkeleton.parts[2].placement = 'answer_region_top'
+  assert.throws(() => assertNck1ApplicationChrome(misplaced), /wrong response-box placement/)
+  const duplicate = structuredClone(letter)
+  duplicate.content.blocks.push({ nodeId: 'duplicate', inlines: [{ text: texts[2] }] })
+  duplicate.variant.promptBlockRefs.push('duplicate')
+  assertNck1ApplicationChrome(duplicate) // Equal text at different source refs is not duplicate ownership.
+  duplicate.variant.promptBlockRefs.push('b2')
+  assert.throws(() => assertNck1ApplicationChrome(duplicate), /not again in the prompt/)
+  const opaque = structuredClone(letter)
+  opaque.variant.mode = 'legacy_opaque'
+  assert.throws(() => assertNck1ApplicationChrome(opaque), /needs source review/)
 })
 
 check('projectStagedWritingAnalysis requires a complete application ReviewCard', () => {

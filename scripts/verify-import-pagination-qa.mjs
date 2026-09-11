@@ -47,6 +47,20 @@ const identity = {
   sourceHasListening: false,
 }
 assert.deepEqual(validatePaperPaginationPlan(plan, identity), plan)
+// Automatic eight-page plans retain notices even for a listening source;
+// old externally bound omit-cover plans remain replayable without mutation.
+for (const sourceHasListening of [false, true]) {
+  for (const coverGapsPt of [[72, 72], [54, 72], [54, 54], [18, 36], [0, 18], [-25.5, 18]]) {
+    const retained = { ...plan, editions: { friendly8: { ...plan.editions.friendly8, coverGapsPt } } }
+    assert.deepEqual(validatePaperPaginationPlan(retained, { ...identity, sourceHasListening }), retained)
+  }
+}
+const legacyCover = { ...plan, editions: { friendly8: { ...plan.editions.friendly8, omitCover: true, coverGapsPt: null } } }
+assert.deepEqual(validatePaperPaginationPlan(legacyCover, { ...identity, sourceHasListening: true }), legacyCover)
+assert.throws(() => validatePaperPaginationPlan(legacyCover, identity), /cover policy/)
+for (const coverGapsPt of [[-1, 18], [-25.6, 18], [-25.5, 0], [0, 0], [18, 35], [73, 72]]) {
+  assert.throws(() => validatePaperPaginationPlan({ ...plan, editions: { friendly8: { ...plan.editions.friendly8, coverGapsPt } } }, identity), /cover gap/)
+}
 assert.deepEqual(
   paginationPlanEdition(plan, 'friendly8', publishedBindings).plannedBreakGroupIds,
   ['published-b'],
@@ -112,26 +126,29 @@ const fallback = await planFixedPagePdf(html, {
 assert.equal(fallback.pageCount, 8)
 assert.equal(renders, 1, 'historical no-plan path retains bounded automatic planning')
 
-let automaticHtml
-const bankFallback = await planFixedPagePdf(html, {
-  targetPages: 10,
-  render: async (candidate) => {
-    automaticHtml = candidate
-    return { pageCount: candidate.includes('data-pdf-option-bank-fallback') ? 10 : 11, inspection: [] }
-  },
-})
-assert.equal(bankFallback.allowSplitOptionBank, true)
-await renderExplicitFixedPagePdf(html, {
-  ...bankFallback,
-  targetPages: 10,
-  render: async (candidate) => {
-    assert.equal(candidate, automaticHtml, 'saved automatic bank policy replays identical derived HTML')
-    return { pageCount: 10, inspection: [] }
-  },
-})
-assert.throws(() => validatePaperPaginationPlan({
+for (const targetPages of [8, 10]) {
+  let automaticHtml
+  const bankFallback = await planFixedPagePdf(html, {
+    targetPages,
+    render: async (candidate) => {
+      automaticHtml = candidate
+      return { pageCount: candidate.includes('data-pdf-option-bank-fallback') ? targetPages : targetPages + 1, inspection: [] }
+    },
+  })
+  assert.equal(bankFallback.allowSplitOptionBank, true)
+  await renderExplicitFixedPagePdf(html, {
+    ...bankFallback,
+    targetPages,
+    render: async (candidate) => {
+      assert.equal(candidate, automaticHtml, 'saved automatic bank policy replays identical derived HTML')
+      return { pageCount: targetPages, inspection: [] }
+    },
+  })
+}
+const splitBankPlan = {
   ...plan, editions: { friendly8: { ...plan.editions.friendly8, allowSplitOptionBank: true } },
-}, identity), /Pagination plan is invalid/)
+}
+assert.deepEqual(validatePaperPaginationPlan(splitBankPlan, identity), splitBankPlan)
 for (const listeningCount of [0, 1, 3]) {
   assert.throws(() => validatePaperPaginationPlan({
     ...plan, editions: { friendly10: { targetPages: 10, includeListening: true, omitCover: false,

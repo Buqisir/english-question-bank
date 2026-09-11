@@ -17,6 +17,12 @@ export function writingNoticeGroup(
   texts: ReadonlyArray<string>,
 ): WritingNoticeGroup | null
 
+export function writingNoticeGroups(
+  texts: ReadonlyArray<string>,
+): ReadonlyArray<WritingNoticeGroup>
+
+export function writingWordCount(text: string): number | null
+
 export function continuationStarterDisplayText(
   text: string,
   starterIndex: number,

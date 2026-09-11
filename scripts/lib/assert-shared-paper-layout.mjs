@@ -3,6 +3,81 @@ import assert from 'node:assert/strict'
 // Mutate the loaded shared rule itself, never a new high-specificity override.
 // This catches a consumer that imports the file but shadows its declarations.
 export async function assertSharedPaperLayout(page, rootSelector, required = []) {
+  const listening = await page.locator(`${rootSelector} :is(.canonical-listening-surface .ps-question, .question-group[data-canonical-group-type="listening"] .question)`)
+    .evaluateAll(questions => questions.map(question => {
+      const stem = question.querySelector('.ps-question-stem-button, .stem')
+      const options = question.querySelector('.ps-option-list, .canonical-options')
+      const box = stem.getBoundingClientRect()
+      const scale = box.height / stem.offsetHeight
+      const style = getComputedStyle(options)
+      return { text: stem.textContent, gap: (options.getBoundingClientRect().top - box.bottom) / scale,
+        stemLine: parseFloat(getComputedStyle(stem).lineHeight), optionLine: parseFloat(style.lineHeight),
+        marginBottom: parseFloat(style.marginBottom), rowGap: parseFloat(style.rowGap) || 0 }
+    }))
+  if (required.includes('listening')) assert.ok(listening.length > 0, 'required listening questions are missing')
+  for (const question of listening) {
+    assert.equal(question.stemLine, 24, 'listening stem line step is 18pt')
+    assert.equal(question.optionLine, 24, 'listening option line step is 18pt')
+    assert.ok(Math.abs(question.gap) < 0.5, `${rootSelector}: listening stem/options extra gap ${JSON.stringify(question)}`)
+    assert.equal(question.marginBottom, 0, 'listening options must not add spacing before the next question')
+    assert.equal(question.rowGap, 0, 'vertical listening options follow the normal line step')
+  }
+  // Check original flow, not a fragment whose top margin Paged.js resets.
+  if (rootSelector !== '.pagedjs_pages') {
+    const rhythm = await page.locator(`${rootSelector} :is([data-canonical-listening-segment-cue], [data-canonical-listening-example], .canonical-listening-transfer-notice)`)
+      .evaluateAll(elements => elements.map(element => {
+        const style = getComputedStyle(element)
+        const previous = element.previousElementSibling
+        const box = element.getBoundingClientRect()
+        const previousQuestion = element.hasAttribute('data-canonical-listening-segment-cue')
+          && previous?.matches('.question, .ps-question')
+        return { cue: element.hasAttribute('data-canonical-listening-segment-cue'),
+          example: element.hasAttribute('data-canonical-listening-example'),
+          actualGap: previousQuestion ? (box.top - previous.getBoundingClientRect().bottom) / (box.height / element.offsetHeight) : null,
+          top: parseFloat(style.marginTop), bottom: parseFloat(style.marginBottom) }
+      }))
+    if (required.includes('listening')) {
+      assert.ok(rhythm.some(gap => gap.cue) && rhythm.some(gap => gap.example), 'required listening cue/example geometry is missing')
+    }
+    for (const gap of rhythm) {
+      assert.equal(gap.top, gap.cue ? 24 : gap.example ? 12 : 0, 'listening extra space follows 18/9pt roles')
+      assert.equal(gap.bottom, gap.example ? 24 : gap.cue ? 0 : 12, 'example/transfer trailing separation')
+      if (gap.actualGap !== null) assert.ok(Math.abs(gap.actualGap - 24) < 0.5, 'material boundary has exactly one extra line, including parent layout')
+    }
+    const boundaries = await page.evaluate(rootSelector => {
+      const root = document.querySelector(rootSelector)
+      const scope = root.closest('.paper-browse-zoom') || root
+      const groups = [...scope.querySelectorAll('.question-group[data-canonical-group-type="listening"], .paper-browse-group-card[data-canonical-group-type="listening"]')]
+      const result = []
+      const measure = (before, after, expected, name) => {
+        if (!before || !after || before.querySelector('.answer')) return
+        const box = after.getBoundingClientRect()
+        result.push({ name, expected, gap: (box.top - before.getBoundingClientRect().bottom) / (box.height / after.offsetHeight) })
+      }
+      const tail = group => [...group?.querySelectorAll('.question, .ps-question') || []].at(-1)
+      if (groups.length) {
+        measure(scope.querySelector('.canonical-paper-cover-notices'), groups[0].querySelector('.canonical-listening-part, .ps-listening-part'), 24, 'notices to listening')
+        if (groups.length === 2) measure(tail(groups[0]), groups[1].querySelector('.canonical-listening-section, .ps-listening-section'), 24, 'listening subsections')
+        measure(tail(groups.at(-1)), scope.querySelector('[data-canonical-reading-rhythm-role="part_title"]'), 48, 'listening to reading')
+        for (const group of groups) {
+          for (const question of group.querySelectorAll('.question, .ps-question')) {
+            if (question.nextElementSibling?.matches('.question, .ps-question')) measure(question, question.nextElementSibling, 0, 'consecutive listening questions')
+          }
+        }
+      }
+      return result
+    }, rootSelector)
+    // The full student fixture has two sections, twenty questions and five
+    // long-material cues: 4 short + 10 long consecutive-question boundaries.
+    // Require observations as well as their values so missing markup cannot pass.
+    if (required.includes('listening-boundaries')) {
+      assert.deepEqual(boundaries.filter(boundary => boundary.name !== 'consecutive listening questions').map(boundary => boundary.name),
+        ['notices to listening', 'listening subsections', 'listening to reading'])
+      assert.equal(boundaries.filter(boundary => boundary.name === 'consecutive listening questions').length, 14)
+    }
+    for (const boundary of boundaries) assert.ok(Math.abs(boundary.gap - boundary.expected) < 0.5,
+      `${rootSelector}: listening boundary drift ${JSON.stringify(boundary)}`)
+  }
   const headingNumbers = await page.locator(`${rootSelector} [data-canonical-section-heading-numeric-run]`)
     .evaluateAll(elements => elements.map(element => {
       const style = getComputedStyle(element)

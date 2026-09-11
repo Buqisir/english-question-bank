@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
+import { FIXED_PAGE_COVER_GAPS_PT } from '../draft-paper/fixedPagePdfPlanner.mjs'
 
 export const PAPER_PAGINATION_PLAN_FILE_NAME = 'pagination-plan.json'
 export const FIXED_PAGINATION_EDITIONS = ['friendly8', 'friendly10']
@@ -17,13 +18,6 @@ function exactKeys(value, keys, label) {
     || Object.keys(value).sort().join('\0') !== [...keys].sort().join('\0')) {
     invalid(`${label} has unknown or missing fields`)
   }
-}
-
-function allowedCoverGaps(edition, omitCover) {
-  if (omitCover) return [null]
-  return edition === 'friendly8'
-    ? [[0, 18]]
-    : [[72, 72], [54, 72], [54, 54]]
 }
 
 export function validatePaperPaginationPlan(plan, {
@@ -64,17 +58,16 @@ export function validatePaperPaginationPlan(plan, {
     if (edition === 'friendly10' && listeningSlotCount !== 2) {
       invalid('friendly10 requires exactly two listening slots')
     }
-    if (entry.omitCover !== (edition === 'friendly8' && sourceHasListening)) {
+    // New plans retain the opening. Keep already-bound historical eight-page
+    // listening-excluded plans replayable; never silently rewrite their digest.
+    if (entry.omitCover !== false && !(entry.omitCover === true && edition === 'friendly8' && sourceHasListening)) {
       invalid(`${edition} cover policy is not allowed for this source`)
     }
     if (entry.allowSplitOptionBank !== undefined
       && typeof entry.allowSplitOptionBank !== 'boolean') {
       invalid(`${edition} allowSplitOptionBank must be boolean`)
     }
-    if (entry.allowSplitOptionBank === true && edition !== 'friendly10') {
-      invalid('only friendly10 may allow a split option bank')
-    }
-    if (!allowedCoverGaps(edition, entry.omitCover).some((value) =>
+    if (!(entry.omitCover ? [null] : FIXED_PAGE_COVER_GAPS_PT).some((value) =>
       JSON.stringify(value) === JSON.stringify(entry.coverGapsPt))) {
       invalid(`${edition} cover gap is outside the bounded choices`)
     }

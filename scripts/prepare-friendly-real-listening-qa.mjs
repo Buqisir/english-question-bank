@@ -284,6 +284,7 @@ const baseHtml = baseExporter.exportPrintHtml({
   items: realPayload.items,
   blocks: realPayload.blocks,
 }).body
+writeFileSync(path.join(outputDir, 'full-without-listening-input.html'), baseHtml)
 const playwright = await import('../app/node_modules/playwright/index.js')
 const browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
 let renderedGroupIds

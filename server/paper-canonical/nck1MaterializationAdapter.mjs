@@ -11,6 +11,7 @@ import {
   digestNck1SourceMaterialization,
   validateNck1SourceMaterialization,
 } from '../../shared/paper-canonical/nck1SourceMaterialization.mjs'
+import { writingNoticeGroup, writingWordCount } from '../../shared/paper-canonical/applicationWritingDisplay.mjs'
 import {
   digestJson,
   exactKeys,
@@ -794,18 +795,19 @@ function writingVariant(group, content, issues, source, documentsById) {
     issues.push(adapterIssue('MATERIALIZATION_WRITING_CONTENT_UNRESOLVED', `Writing semantics for ${group.groupId} do not resolve to its source block stream`, '$.groups'))
   }
   const writingTaskId = `writing-task:${group.groupId}`
-  const wordCountBlock = group.blocks.find((block) =>
-    block.kind === 'paragraph'
-    && paragraphText(block).includes(String(task.wordCountTarget)))
+  const paragraphs = group.blocks.filter(block => block.kind === 'paragraph')
+  const notice = writingNoticeGroup(paragraphs.map(paragraphText))
+  const noticeBlocks = notice ? paragraphs.slice(notice.startIndex, notice.startIndex + notice.blockCount) : []
+  const wordCountBlock = noticeBlocks.find(block => writingWordCount(paragraphText(block)) === task.wordCountTarget)
   if (!wordCountBlock) {
     issues.push(adapterIssue('MATERIALIZATION_WRITING_WORD_COUNT_UNRESOLVED', `Writing word-count source for ${group.groupId} must resolve to one paragraph`, '$.groups'))
     return null
   }
   if (group.family === 'application-writing') {
+    const givenBlocks = paragraphs.slice(notice.startIndex + notice.blockCount)
     const givenParts = task.givenSkeleton.map((part, index) => {
-      const matches = group.blocks.filter((block) =>
-        block.kind === 'paragraph' && paragraphText(block) === part.text)
-      if (matches.length !== 1) {
+      const block = givenBlocks[index]
+      if (!block || paragraphText(block) !== part.text) {
         issues.push(adapterIssue('MATERIALIZATION_APPLICATION_GIVEN_UNRESOLVED', `Application fixed text must resolve exactly once in ${group.groupId}`, '$.groups'))
         return null
       }
@@ -825,15 +827,15 @@ function writingVariant(group, content, issues, source, documentsById) {
           givenPartId,
           role: part.role,
           placement,
-          blockRef: matches[0].blockId,
+          blockRef: block.blockId,
         },
-        matches[0].source,
+        block.source,
       )
       return {
         givenPartId,
         role: part.role,
         placement,
-        blockRef: matches[0].blockId,
+        blockRef: block.blockId,
         authorityAssertionRef,
       }
     }).filter(Boolean)
