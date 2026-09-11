@@ -59,8 +59,12 @@ export function rasterPdfRegion({ pdfBytes, page, region, density = 300 }) {
     const geometry = `${Math.round(region.width * pageWidth)}x${Math.round(region.height * pageHeight)}+${Math.round(region.x * pageWidth)}+${Math.round(region.y * pageHeight)}`
     const bytes = new Uint8Array(execFileSync('magick', [
       pagePath, '-crop', geometry, '+repage',
-      // Exclude both binary time and date:* text, retaining color and density.
-      '-define', 'png:exclude-chunks=date,tIME', 'png32:-',
+      // Retain only the anchor chunks plus color-profile and density metadata,
+      // excluding both the binary tIME chunk and date:* tEXt metadata.
+      // png:include-chunk=none drops everything not listed; this is compatible
+      // with both ImageMagick 6 and 7 (exclude-chunks=date does not suppress
+      // tEXt date:* entries in IM6).
+      '-define', 'png:include-chunk=none,tRNS,bKGD,cHRM,gAMA,sRGB,iCCP,pHYs', 'png32:-',
     ], { maxBuffer }))
     const [pixelWidth, pixelHeight] = execFileSync(
       'magick', ['identify', '-format', '%w,%h', '-'], {
