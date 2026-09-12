@@ -7,6 +7,7 @@ import {
   existsSync,
   mkdirSync,
   readFileSync,
+  renameSync,
   rmSync,
   statSync,
   writeFileSync,
@@ -14,6 +15,8 @@ import {
 import path from 'node:path'
 
 import { assertListeningAudioManifest } from '../../server/paper-import/listeningAudioEvidence.mjs'
+import { prepareNck1AnalyzedPackageReview } from '../../server/paper-import/analyzedPackage.mjs'
+import { buildNck1ReviewProjection } from '../../server/import-review/revisionProjection.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 
 const inboxRoot = path.join(import.meta.dirname, 'source-intake-inbox')
@@ -279,9 +282,9 @@ function readDownloadManifest(submissionId) {
   return manifest
 }
 
-function initializationReceiptPath(paperId) {
+function initializationReceiptPath(paperId, paperDirectory = path.join(papersRoot, paperId)) {
   if (!paperIdPattern.test(paperId || '')) fail('A valid paperId is required')
-  return path.join(papersRoot, paperId, 'signals', 'source-intake-initialization.json')
+  return path.join(paperDirectory, 'signals', 'source-intake-initialization.json')
 }
 
 function readLocalJson(filePath, label) {
@@ -297,8 +300,26 @@ function identityKey(value) {
   return [value.role, value.sha256, value.byteLength].join(':')
 }
 
-function assertInitializedWorkspace(downloadManifest, paperId) {
-  const paperDirectory = path.join(papersRoot, paperId)
+function analyzedPackageIdentity(downloadManifest, projection) {
+  const sourceFile = downloadManifest.files.find(({ role }) => role === 'analyzed_package')
+  if (!sourceFile || downloadManifest.files.length !== 1) {
+    fail('Analyzed-package intake must contain exactly one ZIP')
+  }
+  return {
+    archiveSha256: sourceFile.sha256,
+    archiveByteLength: sourceFile.byteLength,
+    sourceDigest: projection.sourceDigest,
+    candidateDigest: projection.candidateDigest,
+    visibleStructureDigest: projection.visibleStructureDigest,
+    analysisDigest: projection.analysisDigest,
+  }
+}
+
+function assertInitializedWorkspace(
+  downloadManifest,
+  paperId,
+  { paperDirectory = path.join(papersRoot, paperId), preparedIdentity = null } = {},
+) {
   const config = readLocalJson(path.join(paperDirectory, 'config.json'), 'Paper config')
   const sourceManifest = readLocalJson(
     path.join(paperDirectory, 'universal-source-manifest.json'),
@@ -306,6 +327,21 @@ function assertInitializedWorkspace(downloadManifest, paperId) {
   )
   if (config.paperId !== paperId || sourceManifest.paperId !== paperId) {
     fail(`Initialized workspace paperId does not match: ${paperId}`)
+  }
+  if (downloadManifest.submission.snapshot.mode === 'analyzed_package') {
+    if (
+      sourceManifest.schemaVersion !== 'nck1-analyzed-package-review-source-v1'
+      || sourceManifest.sourceKind !== 'nck1-analyzed-package'
+      || sourceManifest.paperId !== paperId
+      || !sourceManifest.members?.some(({ memberId }) => memberId === 'package-manifest')
+    ) fail(`Initialized analyzed-package workspace is incomplete: ${paperId}`)
+    const projection = buildNck1ReviewProjection(paperDirectory, { requireAnalyses: true })
+    const actualIdentity = analyzedPackageIdentity(downloadManifest, projection)
+    if (preparedIdentity
+      && JSON.stringify(actualIdentity) !== JSON.stringify(preparedIdentity)) {
+      fail(`Initialized analyzed-package workspace identity changed: ${paperId}`)
+    }
+    return actualIdentity
   }
   const sourceDocuments = (sourceManifest.documents || [])
     .filter((document) => !document.renditionOf)
@@ -346,8 +382,15 @@ function assertInitializedWorkspace(downloadManifest, paperId) {
   }
 }
 
-function recordInitialization(downloadManifest, paperId) {
-  assertInitializedWorkspace(downloadManifest, paperId)
+function recordInitialization(downloadManifest, paperId, {
+  paperDirectory = path.join(papersRoot, paperId),
+  preparedIdentity = null,
+  backupPath = null,
+} = {}) {
+  const actualPreparedIdentity = assertInitializedWorkspace(downloadManifest, paperId, {
+    paperDirectory,
+    preparedIdentity,
+  })
   const threadId = downloadManifest.ampThreadId || null
   const receipt = {
     schemaVersion: threadId
@@ -357,14 +400,18 @@ function recordInitialization(downloadManifest, paperId) {
     submissionDigest: downloadManifest.submission.submissionDigest,
     paperId,
     ...(threadId ? { ampThreadId: threadId } : {}),
+    ...(downloadManifest.submission.snapshot.baseRevisionId
+      ? { baseRevisionId: downloadManifest.submission.snapshot.baseRevisionId }
+      : {}),
+    ...(actualPreparedIdentity ? { preparedIdentity: actualPreparedIdentity } : {}),
+    ...(backupPath ? { previousWorkspaceBackup: backupPath } : {}),
     recordedAt: new Date().toISOString(),
   }
-  writePrivateJson(initializationReceiptPath(paperId), receipt)
+  writePrivateJson(initializationReceiptPath(paperId, paperDirectory), receipt)
   return receipt
 }
 
 function initializationReceipt(downloadManifest, paperId) {
-  assertInitializedWorkspace(downloadManifest, paperId)
   const receipt = readLocalJson(
     initializationReceiptPath(paperId),
     'Source-intake initialization receipt',
@@ -378,8 +425,45 @@ function initializationReceipt(downloadManifest, paperId) {
     || receipt.submissionDigest !== downloadManifest.submission.submissionDigest
     || receipt.paperId !== paperId
     || (threadId && receipt.ampThreadId !== threadId)
+    || receipt.baseRevisionId !== downloadManifest.submission.snapshot.baseRevisionId
   ) fail(`Local initialization receipt does not match: ${paperId}`)
+  const preparedIdentity = assertInitializedWorkspace(downloadManifest, paperId)
+  if (preparedIdentity
+    && JSON.stringify(receipt.preparedIdentity) !== JSON.stringify(preparedIdentity)) {
+    fail(`Local initialization receipt does not bind the prepared package: ${paperId}`)
+  }
   return receipt
+}
+
+async function assertCurrentCorrectionTarget(snapshot) {
+  const status = await api(
+    `/api/import-agent-reviews/papers/${encodeURIComponent(snapshot.targetPaperId)}`,
+  )
+  if (
+    status.paperId !== snapshot.targetPaperId
+    || status.latestRevisionId !== snapshot.baseRevisionId
+    || status.latest?.id !== snapshot.baseRevisionId
+  ) {
+    fail('Review revision changed; start a new corrected-package upload')
+  }
+  if (!['awaiting_review', 'changes_requested', 'approved'].includes(status.latest.state)) {
+    fail('Target revision is not available for correction')
+  }
+  return status
+}
+
+function analyzedPackageOutput(downloadManifest, paperId, identity, { idempotent = false } = {}) {
+  return {
+    submissionId: downloadManifest.submission.id,
+    paperId,
+    state: 'initialized_locally',
+    mode: 'analyzed_package',
+    ...(idempotent ? { idempotent: true } : {}),
+    sourceDigest: identity.sourceDigest,
+    candidateDigest: identity.candidateDigest,
+    analysisDigest: identity.analysisDigest,
+    next: `node scripts/import-pipeline/source-intake.mjs handoff ${downloadManifest.submission.id} --paper-id ${paperId}`,
+  }
 }
 
 function provenance(snapshot) {
@@ -394,9 +478,84 @@ async function initialize(submissionId, paperId) {
   if (!paperIdPattern.test(paperId || '')) fail('init requires --paper-id paper-…')
   const manifest = readDownloadManifest(submissionId)
   await heartbeat(submissionId)
-  const supplement = manifest.submission.snapshot.mode === 'listening_supplement'
+  const mode = manifest.submission.snapshot.mode
+  const supplement = mode === 'listening_supplement'
+  const analyzedPackage = mode === 'analyzed_package'
   if (supplement && paperId !== manifest.submission.snapshot.targetPaperId) {
     fail('Listening supplement --paper-id must equal the immutable targetPaperId')
+  }
+  if (analyzedPackage
+    && manifest.submission.snapshot.targetPaperId
+    && paperId !== manifest.submission.snapshot.targetPaperId) {
+    fail('Analyzed-package correction --paper-id must equal the immutable targetPaperId')
+  }
+  if (analyzedPackage) {
+    if (manifest.files.length !== 1 || manifest.files[0].role !== 'analyzed_package') {
+      fail('Analyzed-package intake must contain exactly one ZIP')
+    }
+    const correction = Boolean(manifest.submission.snapshot.baseRevisionId)
+    const paperDirectory = path.join(papersRoot, paperId)
+    const existingReceiptPath = initializationReceiptPath(paperId)
+    const existingReceipt = existsSync(existingReceiptPath)
+      ? readLocalJson(existingReceiptPath, 'Source-intake initialization receipt')
+      : null
+    const sameSubmissionAlreadyInstalled = existingReceipt
+      && existingReceipt.submissionId === manifest.submission.id
+      && existingReceipt.submissionDigest === manifest.submission.submissionDigest
+    if (sameSubmissionAlreadyInstalled) {
+      if (correction) await assertCurrentCorrectionTarget(manifest.submission.snapshot)
+      const receipt = initializationReceipt(manifest, paperId)
+      console.log(JSON.stringify(analyzedPackageOutput(
+        manifest,
+        paperId,
+        receipt.preparedIdentity,
+        { idempotent: true },
+      ), null, 2))
+      return
+    }
+
+    const stagingDirectory = path.join(submissionDirectory(submissionId), 'prepared-workspace')
+    const backupDirectory = path.join(submissionDirectory(submissionId), 'previous-workspace')
+    rmSync(stagingDirectory, { recursive: true, force: true })
+    let previousMoved = false
+    try {
+      const result = await prepareNck1AnalyzedPackageReview({
+        sourcePath: manifest.files[0].localPath,
+        destinationDir: stagingDirectory,
+        expectedPaperId: paperId,
+      })
+      const preparedIdentity = analyzedPackageIdentity(manifest, result)
+      if (correction) await assertCurrentCorrectionTarget(manifest.submission.snapshot)
+      if (existsSync(paperDirectory)) {
+        if (!correction) fail(`Destination already exists: ${paperDirectory}`)
+        if (existsSync(backupDirectory)) {
+          fail(`Correction backup already exists: ${backupDirectory}`)
+        }
+        renameSync(paperDirectory, backupDirectory)
+        previousMoved = true
+      }
+      recordInitialization(manifest, paperId, {
+        paperDirectory: stagingDirectory,
+        preparedIdentity,
+        ...(previousMoved ? { backupPath: backupDirectory } : {}),
+      })
+      try {
+        renameSync(stagingDirectory, paperDirectory)
+      } catch (error) {
+        if (previousMoved && !existsSync(paperDirectory) && existsSync(backupDirectory)) {
+          renameSync(backupDirectory, paperDirectory)
+          previousMoved = false
+        }
+        throw error
+      }
+      console.log(JSON.stringify(analyzedPackageOutput(manifest, paperId, preparedIdentity), null, 2))
+    } finally {
+      rmSync(stagingDirectory, { recursive: true, force: true })
+      if (previousMoved && !existsSync(paperDirectory) && existsSync(backupDirectory)) {
+        renameSync(backupDirectory, paperDirectory)
+      }
+    }
+    return
   }
   const audioFiles = manifest.files.filter((file) => file.role === 'listening_audio')
   const documentFiles = manifest.files.filter((file) => file.role !== 'listening_audio')

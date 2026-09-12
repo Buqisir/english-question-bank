@@ -29,7 +29,7 @@ Reason carefully internally about:
 - the shortest complete sentence skeleton that shows why this slot needs this form
 - a nearby parallel, paired, referential, or tense structure that can verify the judgment when one exists
 - exact field names and enum values
-- the `role` and `path` for non-finite verb blanks only
+- the syntactic `role` for non-finite verb blanks only
 - the controlled `similarityProfile.route` and any applicable `features`
 
 But output only the JSON object.
@@ -45,7 +45,9 @@ If you are unsure, preserve valid structure and exact signal text first.
 
 ## Teaching Model
 
-Every blank is solved by identifying its **考点 (facet)** and applying the **static solving framework** for that facet.
+Identify each blank's **考点 (facet)** from its actual sentence structure.
+Explain the local evidence and required form naturally; do not impose a personal
+teaching framework or fast/slow solving path.
 
 Two blank families (primary axis):
 
@@ -58,7 +60,7 @@ The hint word's POS = entry into which `given` sub-facet:
 
 | Hint POS | Default facet | Exception |
 | --- | --- | --- |
-| verb (原形) | `given.verb` → then N+1 判谓/非谓（分词 `-ed`/`-ing` 作表/定/状/宾补/主补 → `non-finite` + `role`） | blank needs noun → `conversion.verb-to-noun`；blank needs a **non-participle** adjective (`-able`/`-ous`/`-ful`/`-ive`, `a-`) → `conversion.verb-to-adjective`；blank needs an adverb → `conversion.verb-to-adverb` |
+| verb (原形) | `given.verb` → 根据句子结构判断谓语/非谓语（分词 `-ed`/`-ing` 作表/定/状/宾补/主补 → `non-finite` + `role`） | blank needs noun → `conversion.verb-to-noun`；blank needs a **non-participle** adjective (`-able`/`-ous`/`-ful`/`-ive`, `a-`) → `conversion.verb-to-adjective`；blank needs an adverb → `conversion.verb-to-adverb` |
 | noun | genitive (`'s`) → `given.noun.genitive`；regular plural of the hint → `given.noun.number` | blank needs a different POS or a same-POS derived word (e.g. occupational `-er`/`-or`) → `given.conversion.noun-to-noun` / `noun-to-adjective` / `noun-to-verb` |
 | adjective | comparative/superlative of the hint → `given.adjective.comparison` | blank needs an adverb (`-ly`) → `given.conversion.adjective-to-adverb`；blank needs a noun → `given.conversion.adjective-to-noun` |
 | pronoun | `given.pronoun` | — |
@@ -83,19 +85,20 @@ The hint word's POS = entry into which `given` sub-facet:
 
 ### `given.verb` sub-facet: finite vs. non-finite
 
-Use **N+1 rule**: count predicates in the clause. If the verb slot is a predicate slot → `finite`; if already filled → `non-finite`.
+Check the clause structure and the word's actual syntactic job: a predicate slot
+requires `finite`; a non-predicate verb form requires `non-finite`. Account for
+coordination and subordination rather than relying on a counting shortcut.
 
-- **`grammar-fill.given.verb.finite`** — 谓语动词. Framework: ① find subject (number/person) ② judge voice (active/passive) ③ judge tense (time-marker words lock tense). `tense`/`voice`/`agreementSensitive` are stamped server-side from your `answer`, deterministically — do NOT output them yourself.
-- **`grammar-fill.given.verb.non-finite`** — 非谓语动词. Framework: ① judge position → identify syntactic role (`role` field, 成分七格 below) ② fast-path (subject/object/predicative/object-complement/subject-complement: fixed collocation/pattern locks one table row → judge voice only) or slow-path (attributive/adverbial: test `to-inf` condition first → if met, judge voice; else remove `to-inf` row → judge voice ± aspect). `form` (the legacy to-do/doing/done bucket) and the finer `similarityForm` (to-do/to-be-done/to-have-done/doing/being-done/having-done/done) are stamped server-side from your `answer` — do NOT output them yourself.
+- **`grammar-fill.given.verb.finite`** — 谓语动词. Explain the subject, tense, voice or agreement evidence that actually determines this answer. `tense`/`voice`/`agreementSensitive` are stamped server-side from your `answer`, deterministically — do NOT output them yourself.
+- **`grammar-fill.given.verb.non-finite`** — 非谓语动词. Identify the syntactic `role`, what the verb modifies or completes, and why the context requires this form (pattern, active/passive relation, purpose or time relation as applicable). `form` (the legacy to-do/doing/done bucket) and the finer `similarityForm` (to-do/to-be-done/to-have-done/doing/being-done/having-done/done) are stamped server-side from your `answer` — do NOT output them yourself.
 
-### `role` and `path` (non-finite only)
+### `role` (non-finite only)
 
-For **`grammar-fill.given.verb.non-finite`**, add — **成分七格终稿（2026-07-15 owner 补主补拍板）**:
+For **`grammar-fill.given.verb.non-finite`**, identify the ordinary syntactic role:
 
 - `role` ∈ `subject`（主语）/ `predicative`（表语，系动词后）/ `object`（宾语）/ `attributive`（定语）/ `adverbial`（状语）/ `object-complement`（宾语补足语，如 tell sb to do / wait for sth to do）/ `subject-complement`（**主语补足语 = 宾补的被动**，如 be expected to do、be left doing — NOT a synonym for "表语"; a 系动词 + 表语 blank is `predicative`, never `subject-complement`）
-- `path` ∈ `fast` (fixed collocation/situation directly locks one row) / `slow` (walk the table: test to-inf first, then voice, then aspect)
 
-For every other facet: `"role": null, "path": null`.
+For every other facet: `"role": null`.
 
 ### `no-hint` sub-branch selection rule
 
@@ -116,9 +119,9 @@ For every other facet: `"role": null, "path": null`.
 
 ## Student-Facing Explanation Rule
 
-Facet keys, N+1, fast/slow paths, role enums, and evidence types are internal
+Facet keys, role enums, and evidence types are internal
 classification. Keep them exact in their own fields, but do not use them as the
-opening or substance of `reason`, `evidence[].relation`, or `teachingNote`.
+opening or substance of `reason` or `evidence[].relation`.
 
 Write `reason` by walking the actual sentence:
 
@@ -160,7 +163,7 @@ find oneself doing 是固定搭配。
   },
   "groups": {
     "group-...-grammar-fill": {
-      "overview": "中文：文章主旨 + 文体（1 句，供个别题的语境参照）",
+      "overview": "50–80字软目标的中文内容简介，供教学、列表、搜索及未来相似检索共用",
       "fullTranslationZh": "填入正答后的全文中文翻译，每空保留 [56]...[65] 标记",
       "selectedLongSentences": [
         {
@@ -170,7 +173,7 @@ find oneself doing 是固定搭配。
           "relatedQuestionIds": ["q-...-063", "q-...-064", "q-...-065"],
           "translationZh": "自然中文翻译",
           "analysisZh": "先找主干，再说明并列、修饰等关系",
-          "underlineTexts": ["displayText 中 1—3 个唯一精确片段"]
+          "underlineRanges": [{"start": 0, "end": 1, "quote": "按"}]
         }
       ]
     }
@@ -196,7 +199,6 @@ Every `blanks[questionId]` MUST include:
 - `facetKey` — exactly one of the **22 leaf** keys listed below
 - `answer` — the produced form/word; MUST equal the answer key
 - `role` — required string iff `facetKey === "grammar-fill.given.verb.non-finite"` else `null`
-- `path` — required string iff `facetKey === "grammar-fill.given.verb.non-finite"` else `null`
 - `similarityProfile` — machine-facing matching support, exactly
   `{ "route": "controlled-value", "features": ["controlled-value"] }`; choose
   the route that states **why this answer form is required**, and use only the
@@ -204,7 +206,6 @@ Every `blanks[questionId]` MUST include:
 - `reason` — 中文 1–3 句：还原句子骨架，说明空格职责并推出答案；有相邻
   并列、成对空格或回指关系时，用它作必要验证
 - `evidence` — array with ≥1 item
-- `teachingNote` — 中文一句：只补充一个可迁移的解题动作，不换术语复述 `reason`
 
 Do NOT output `tense`/`voice`/`agreementSensitive` (finite verb), or `form`/
 `similarityForm` (non-finite verb), yourself — the server stamps these
@@ -245,7 +246,7 @@ grammar-fill.no-hint.conjunction.adverbial-clause
 ## Controlled `similarityProfile`
 
 This object is stored for later similar-question matching. It is not
-student-facing prose and must not be mentioned in `reason` or `teachingNote`.
+student-facing prose and must not be mentioned in `reason`.
 Use one `route` allowed by the blank's `facetKey`; `features` is a unique array
 using only the values allowed for that facet. Do not invent labels.
 
@@ -360,23 +361,41 @@ optional refinements and must be `[]` when none applies.
 
 `groups[groupId]` MUST include:
 
-- `overview` — required; Chinese: main topic + text type (1 sentence)
+- `overview` — required; the one canonical introduction shared by teaching,
+  list/search and future similarity consumers. Aim for 50–80 Chinese characters
+  without padding; cover the subject and core event or information.
 - `fullTranslationZh` — required for new NCK1 generation; translate the complete
-  answer-filled passage into natural Chinese in source order. Immediately before
-  the Chinese words governed by each answer, keep the exact ASCII marker
-  (`[56]` ... `[65]`) exactly once, including function-word blanks whose Chinese
-  meaning is absorbed into the sentence. Preserve paragraph breaks and add no
-  grammar explanation or vocabulary notes.
+  answer-filled passage into natural Chinese in source order. Preserve paragraph
+  breaks and add no hand-written blank markers. For function-word blanks whose
+  Chinese meaning is absorbed, annotate the governing phrase or clause rather
+  than inventing a one-character translation. Add no grammar explanation or
+  vocabulary notes.
 - `selectedLongSentences` — required; 1–2 sentences with genuine sentence-level
-  teaching value, preferably one that connects several gaps or carries the
+  teaching value, each with a stable `sentenceId`, preferably one that connects several gaps or carries the
   passage's central meaning. Do not select a sentence merely because it is long.
   `paragraphId` and `sourceText` must locate the stored source exactly and retain
   every `__63__`-style marker. `displayText` must be the deterministic form
   completed with authoritative answers. `relatedQuestionIds` must belong to this
   group. `analysisZh` finds the main trunk first, then explains how coordination,
   clauses, and modifiers attach; do not repeat the per-gap grammar analysis.
-  `underlineTexts` contains 1–3 unique, non-overlapping exact substrings of
-  `displayText`, limited to the decisive sentence structure.
+  `underlineRanges` locates decisive structure using Unicode code-point offsets
+  in `displayText`, start inclusive/end exclusive, with the exact `quote`. Do not
+  trim or normalize before counting. Usually 1–3 short ranges suffice; repeated
+  phrases and overlaps are valid when explicitly located. The example offsets
+  only illustrate the encoding; calculate them for your actual text. Do not also
+  emit historical `underlineTexts`.
+- `teachingContent` — required closed `objective-teaching-content-v1` annex with
+  `sourceTextId`, exact `sourceAssetVersion`, translation paragraphs as exact
+  code-point slices of the single `fullTranslationZh` value linked to source
+  paragraph IDs, authoritative `completedSourceTexts`, and annotations. Every
+  blank needs original-text `answer-evidence`, one completed-text
+  `answer-insertion` bound to its exact `blankId`, and every long sentence needs
+  `sentence-structure`. Range shape is `{textId,paragraphId,start,end,quote}`.
+  Repeated occurrences, many-to-many links and overlaps require explicit offsets;
+  never first-match, trim, normalize, or mutate original exam blanks.
+  Locate the actual replacement for each blank, not another copy of its answer.
+  Text identities must be distinct. A non-key difficult sentence has empty
+  `relatedQuestionIds` and sentence-structure `questionIds`; do not invent links.
 
 (Grammar fill reasoning is local/syntactic, so no `affectiveArc` is needed — unlike cloze.)
 
@@ -432,7 +451,8 @@ Do NOT guess or invent. Write the exact form you determined from your syntactic 
 - Do NOT invent blank IDs, question IDs, or group IDs.
 - Do NOT use parent facet keys (`grammar-fill`, `grammar-fill.given`, `grammar-fill.given.verb`, `grammar-fill.given.conversion`, `grammar-fill.no-hint`, `grammar-fill.no-hint.conjunction`), nor the retired v1 leaves (`grammar-fill.given.noun`, `grammar-fill.given.adjective`, `grammar-fill.given.derivation.*`).
 - Do NOT output `tense`, `voice`, `agreementSensitive`, `form`, or `similarityForm` — the server stamps these.
-- Do NOT include `role` or `path` for any facet other than `grammar-fill.given.verb.non-finite`.
+- Do NOT include a non-null `role` for any facet other than `grammar-fill.given.verb.non-finite`.
+- Do NOT output the retired personal `path` or `framework` fields. `similarityProfile.route` is a separate, retained classification field.
 - Do NOT include a blank marker (`  56  ` or `(wear)` token) in any `signalText`.
 - Do NOT add `distractorGlosses` (grammar fill has no A–D options).
 - Do NOT add `affectiveArc` to the group analysis (grammar fill, unlike cloze, is syntactic).

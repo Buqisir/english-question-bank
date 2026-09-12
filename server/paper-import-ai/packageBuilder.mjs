@@ -844,7 +844,7 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
     importMetaGroups[clozeGroup.groupId] = {
       groupId: clozeGroup.groupId,
       difficulty: '中',
-      summary: '完形填空',
+      summary: clozeAnalysis?.groups?.[clozeGroup.groupId]?.overview || clozeGroup.title,
       tags: ['完形填空'],
       displayTitleOverride: clozeGroup.title,
     }
@@ -853,7 +853,7 @@ export function buildPaperImportAiPackageFiles({ parseResult, analysesByGroupId,
   importMetaGroups[grammarFillGroup.groupId] = {
     groupId: grammarFillGroup.groupId,
     difficulty: '中',
-    summary: '语法填空',
+    summary: grammarFillAnalysis?.groups?.[grammarFillGroup.groupId]?.overview || grammarFillGroup.title,
     tags: ['语法填空'],
     displayTitleOverride: grammarFillGroup.title,
   }

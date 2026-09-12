@@ -4,6 +4,9 @@
   "private": true,
   "type": "module",
   "description": "Server-side runtime for English question bank (print renderer, exports, API)",
+  "devDependencies": {
+    "esbuild": "0.25.12"
+  },
   "dependencies": {
     "@vivliostyle/cli": "^9.0.0",
     "ajv": "^8.20.0",

@@ -43,7 +43,6 @@ function assertSafeRelativePath(relativePath, label, prefix = null) {
 function formatGrammarFillAnalysis(entry) {
   return [
     entry?.reason ? `【${entry.answer}】${entry.reason}` : '',
-    entry?.teachingNote ? `点拨：${entry.teachingNote}` : '',
   ].filter(Boolean).join('\n')
 }
 

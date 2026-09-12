@@ -331,8 +331,36 @@ try {
     '--source', `question_source=${questionPath}`,
     '--source', `official_answers=${answerPath}`,
   ), /INITIALIZED/u)
-  assert.match(run('stage-ocr', paperId, evidencePath), /"state": "written"/u)
   assert.match(run('materialize', paperId), /"disposition": "needs_agent_review"/u)
+  const failedOutputPath = path.join(cliPaperDir, fixture.manifest.materializationPath)
+  const pdfReceiptPath = path.join(cliPaperDir, 'materialization/nck1-pdf-materialization-producer-receipt-v1.json')
+  const pdfReviewPath = path.join(cliPaperDir, 'materialization/nck1-pdf-materialization-review-v1.json')
+  const failedBytes = readFileSync(failedOutputPath)
+  const pdfReceiptBytes = readFileSync(pdfReceiptPath)
+  const pdfReviewBytes = readFileSync(pdfReviewPath)
+  assert.match(run('stage-ocr', paperId, evidencePath), /"state": "written"/u)
+  const assertSwitchRefused = () => {
+    assert.throws(() => run('materialize', paperId), (error) =>
+      /refusing to overwrite/u.test(String(error.stderr)))
+  }
+  writeFileSync(failedOutputPath, Buffer.concat([failedBytes, Buffer.from('\n')]))
+  assertSwitchRefused()
+  assert.deepEqual(readFileSync(failedOutputPath), Buffer.concat([failedBytes, Buffer.from('\n')]))
+  writeFileSync(failedOutputPath, failedBytes)
+  for (const patch of [{ disposition: 'ready_for_verification' }, { sourceDigest: 'sha256:stale' }, { paperId: 'paper-other' }]) {
+    writeFileSync(pdfReceiptPath, JSON.stringify({ ...JSON.parse(pdfReceiptBytes), ...patch }))
+    assertSwitchRefused()
+    assert.deepEqual(readFileSync(failedOutputPath), failedBytes)
+  }
+  writeFileSync(pdfReceiptPath, pdfReceiptBytes)
+  assert.match(run('materialize', paperId), /"disposition": "needs_agent_review"/u)
+  const archive = path.join(cliPaperDir, 'materialization/producer-history',
+    JSON.parse(pdfReceiptBytes).outputDigest.replace('sha256:', ''))
+  for (const [original, bytes] of [[failedOutputPath, failedBytes], [pdfReceiptPath, pdfReceiptBytes], [pdfReviewPath, pdfReviewBytes]]) {
+    assert.deepEqual(readFileSync(path.join(archive, path.basename(original))), bytes)
+  }
+  assert.deepEqual(readFileSync(pdfReceiptPath), pdfReceiptBytes)
+  assert.deepEqual(readFileSync(pdfReviewPath), pdfReviewBytes)
   assert.match(run('confirm-ocr', paperId, confirmationPath), /"confirmedItems":/u)
   assert.match(run('materialize', paperId), /"disposition": "ready_for_verification"/u)
   assert.match(run('verify', paperId), /"groups": 9/u)

@@ -4,8 +4,12 @@ import type {
   SevenChoicesMechanismSignal,
   SevenChoicesOptionView,
 } from './sevenChoicesSurfaceAdapter.ts'
+import { ObjectiveTeachingContent } from './ObjectiveTeachingContent.tsx'
+import type { ObjectiveTeachingView } from './objectiveTeachingContentAdapter.ts'
 
 type Props = {
+  overview: string
+  teachingContent?: ObjectiveTeachingView | null
   options: SevenChoicesOptionView[]
   chains: SevenChoicesChainView[]
   openQuestionIds: string[]
@@ -15,6 +19,8 @@ type Props = {
 }
 
 export function SevenChoicesAnalysisPanel({
+  overview,
+  teachingContent,
   options,
   chains,
   openQuestionIds,
@@ -104,6 +110,13 @@ export function SevenChoicesAnalysisPanel({
           全部隐藏
         </button>
       </div>
+      {overview && (
+        <details className="pi-seven-group-overview" open>
+          <summary className="pi-seven-group-overview-summary">文章简介</summary>
+          <p className="pi-seven-group-overview-text">{overview}</p>
+        </details>
+      )}
+      <ObjectiveTeachingContent content={teachingContent ?? null} />
       <div className="pi-seven-option-jump" aria-label="A-G 选项跳转">
         {options.map((option) => {
           const chain = chainByOptionLabel.get(option.label)
@@ -203,8 +216,8 @@ export function SevenChoicesAnalysisPanel({
                         </DetailBlock>
                       )}
                       {/* 「讲题提示」display retired (owner 2026-07-09: 衔接链
-                          讲解已足够，提示属重复噪音)。teachingNote stays in the
-                          adapter/data contract — display-only removal. */}
+                          讲解已足够，提示属重复噪音)。旧源文件可保留 teachingNote，
+                          新生产和活跃 adapter 不再使用它。 */}
                     </div>
                   )}
                 </div>

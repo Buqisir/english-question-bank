@@ -1,5 +1,6 @@
 import {
   canonicalAuthorityRef,
+  nck1AnalyzedPackageCandidateAuthorityRef55,
   nck1MaterializationCandidateAuthorityRef,
   resolveCanonicalAuthority,
   slotsForProfile,
@@ -53,6 +54,14 @@ import {
   isNck1MaterializationInput,
   nck1MaterializationSourceSummary,
 } from '../../server/paper-canonical/nck1MaterializationAdapter.mjs'
+import {
+  NCK1_ANALYZED_PACKAGE_CANDIDATE_SCHEMA_VERSION,
+  NCK1_ANALYZED_PACKAGE_MEDIA_TYPE,
+  cloneNck1AnalyzedPackageInput,
+  deriveNck1AnalyzedPackageBundle,
+  isNck1AnalyzedPackageInput,
+  nck1AnalyzedPackageSourceSummary,
+} from '../../server/paper-canonical/nck1AnalyzedPackageAdapter.mjs'
 import { validateReadingContract } from './reading.mjs'
 import {
   FRAMED_COLUMNS_CHILD_KINDS,
@@ -73,6 +82,7 @@ import { cloneJson, digestJson, exactKeys, isRecordValue, sha256, stableStringif
 const trustedDocxCandidateCompile = Symbol('trustedDocxCandidateCompile')
 const docxPairCandidateCompile = Symbol('docxPairCandidateCompile')
 const nck1MaterializationCandidateCompile = Symbol('nck1MaterializationCandidateCompile')
+const nck1AnalyzedPackageCandidateCompile = Symbol('nck1AnalyzedPackageCandidateCompile')
 const trustedLegacyCaptureCandidateCompile = Symbol('trustedLegacyCaptureCandidateCompile')
 import { canonicalizeVisibleEnglishTypography } from './visibleTypography.mjs'
 import { replayCanonicalVisibleTypography } from './visibleTypographyReplay.mjs'
@@ -1316,6 +1326,47 @@ function appendNck1ContinuationInstructionEvidence({
   diagnostics,
 }) {
   if (source.profileId !== 'nck1') return
+  const directPackageObservation = source.observations?.find((observation) =>
+    observation?.observationId
+      === `observation:profile-instruction:${source.paperId}:writing.continuation.prompt`
+    && observation?.kind === 'profile_instruction_correction'
+    && observation?.extraction?.adapterId === 'nck1-analyzed-package'
+    && observation?.extraction?.version === '1')
+  if (directPackageObservation) {
+    const packageClosure = resolveCanonicalAuthority(
+      nck1AnalyzedPackageCandidateAuthorityRef55,
+    ).closure
+    const packageAdapter = packageClosure.artifacts.adapter.adapters.find((adapter) =>
+      adapter.adapterId === 'nck1-analyzed-package'
+      && adapter.version === '1'
+      && adapter.mediaType === NCK1_ANALYZED_PACKAGE_MEDIA_TYPE)
+    const profile = packageClosure.profiles.get('nck1')
+    const expected = profile?.instructions?.['writing.continuation.prompt']
+    if (
+      packageAdapter?.capabilities?.includes(
+        'direct_continuation_instruction_agreement',
+      )
+      && packageAdapter.capabilities.includes(
+        'immutable_package_json_pointer_evidence',
+      )
+      && directPackageObservation.value?.text === expected?.text
+      && directPackageObservation.value?.agreement
+        === 'exact_package_member_value'
+      && directPackageObservation.value?.packageEvidence?.schemaVersion
+        === 'package-json-pointer-evidence-v1'
+      && validateJsonSchema(
+        directPackageObservation.value.packageEvidence,
+        packageClosure.schemas['package-json-pointer-evidence-v1'],
+      ).length === 0
+    ) return
+    diagnostics.push(diagnostic(
+      'CONTINUATION_INSTRUCTION_EVIDENCE_INVALID',
+      'incomplete_source',
+      '$.evidence.continuationInstruction',
+      'Package continuation instruction evidence must directly agree with the registered instruction and one immutable JSON pointer',
+    ))
+    return
+  }
   if (instructionEntries.length !== 1) {
     diagnostics.push(diagnostic(
       'CONTINUATION_INSTRUCTION_EVIDENCE_INCOMPLETE',
@@ -2763,7 +2814,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     content,
     new Set(sourceGroup.blankIds),
     mediaIds,
-    ['46', '47', '48', '49', '50', '51', '52', '54'].includes(closure.authorityRef.manifestVersion),
+    ['46', '47', '48', '49', '50', '51', '52', '54', '55'].includes(closure.authorityRef.manifestVersion),
   ))
   if (family.familyContractId !== 'reading' && contentHasFramedColumns(content)) {
     diagnostics.push(diagnostic('RICH_BLOCK_UNSUPPORTED', 'unsupported', '$.content', 'framed_columns is only representable in Reading'))
@@ -2771,7 +2822,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
   diagnostics.push(...validateReferenceBlankClosure(family.familyContractId, sourceGroup.questionIds, sourceGroup.blankIds, content))
   const variant = cloneJson(sourceGroup.variant || {})
   const variantKeys = family.familyContractId === 'seven-choices'
-    ? ['47', '48', '49', '50', '51', '52', '54'].includes(closure.authorityRef.manifestVersion)
+    ? ['47', '48', '49', '50', '51', '52', '54', '55'].includes(closure.authorityRef.manifestVersion)
       ? ['family', 'passageBlockRoles', 'members', 'choiceOwnership']
       : ['family', 'members', 'choiceOwnership']
     : family.familyContractId === 'reading'
@@ -2830,7 +2881,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
       variant,
       assertions: capture.assertions,
       allowPassageBlockRoles:
-        ['47', '48', '49', '50', '51', '52', '54'].includes(closure.authorityRef.manifestVersion),
+        ['47', '48', '49', '50', '51', '52', '54', '55'].includes(closure.authorityRef.manifestVersion),
     }).map((item) => diagnostic(item.code, item.disposition, item.path, item.message)))
   }
   if (family.familyContractId === 'reading') {
@@ -2872,6 +2923,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
       content,
       variant,
       sourceCapture: capture,
+      authorityRef: closure.authorityRef,
     }).map((item) => diagnostic(item.code, item.disposition, item.path, item.message)))
   }
   if (diagnostics.length > 0) return { diagnostics, artifact: null }
@@ -3297,10 +3349,17 @@ export function compileCanonicalPaper(
   const acceptsNck1MaterializationCandidate = request?.[nck1MaterializationCandidateCompile] === true
     && closure.authorityRef.manifestDigest
       === nck1MaterializationCandidateAuthorityRef.manifestDigest
+  const acceptsNck1AnalyzedPackageCandidate = request?.[nck1AnalyzedPackageCandidateCompile] === true
+    && closure.authorityRef.manifestDigest
+      === nck1AnalyzedPackageCandidateAuthorityRef55.manifestDigest
   const acceptsConfirmedNck1MaterializationRequest =
     closure.authorityRef.manifestDigest
       === nck1MaterializationCandidateAuthorityRef.manifestDigest
     && isConfirmedNck1MaterializationRequest(request)
+  const acceptsConfirmedNck1AnalyzedPackageRequest =
+    closure.authorityRef.manifestDigest
+      === nck1AnalyzedPackageCandidateAuthorityRef55.manifestDigest
+    && isConfirmedNck1AnalyzedPackageRequest(request)
   const acceptsTrustedLegacyCaptureCandidate = request?.[trustedLegacyCaptureCandidateCompile] === true
     && Boolean(trustedLegacyCaptureCandidateAuthorityFor(
       closure.authorityRef,
@@ -3311,7 +3370,9 @@ export function compileCanonicalPaper(
     && !acceptsTrustedDocxCandidate
     && !acceptsDocxPairCandidate
     && !acceptsNck1MaterializationCandidate
+    && !acceptsNck1AnalyzedPackageCandidate
     && !acceptsConfirmedNck1MaterializationRequest
+    && !acceptsConfirmedNck1AnalyzedPackageRequest
     && !acceptsTrustedLegacyCaptureCandidate
   ) {
     diagnostics.push(diagnostic('AUTHORITY_RETIRED', 'unsupported', '$.authority', 'Only the current canonical authority may compile new papers'))
@@ -3429,6 +3490,14 @@ function compileNck1MaterializationCandidate(request) {
     ...request,
     authority: nck1MaterializationCandidateAuthorityRef,
     [nck1MaterializationCandidateCompile]: true,
+  })
+}
+
+function compileNck1AnalyzedPackageCandidate(request) {
+  return compileCanonicalPaper({
+    ...request,
+    authority: nck1AnalyzedPackageCandidateAuthorityRef55,
+    [nck1AnalyzedPackageCandidateCompile]: true,
   })
 }
 
@@ -3954,6 +4023,26 @@ function nck1MaterializationCandidateFromInput(sourceInput) {
   }
 }
 
+function nck1AnalyzedPackageCandidateFromInput(sourceInput) {
+  const derivation = deriveNck1AnalyzedPackageBundle(sourceInput)
+  const body = {
+    schemaVersion: NCK1_ANALYZED_PACKAGE_CANDIDATE_SCHEMA_VERSION,
+    authority: nck1AnalyzedPackageCandidateAuthorityRef55,
+    source: nck1AnalyzedPackageSourceSummary(derivation),
+    operatorChoices: {},
+    interpretation: derivation.source,
+    issues: derivation.issues,
+  }
+  return {
+    candidate: {
+      ...body,
+      candidateDigest: digestJson(body),
+      sourceInput: cloneNck1AnalyzedPackageInput(sourceInput),
+    },
+    derivation,
+  }
+}
+
 function nck1InputKey(prefix, id) {
   return `${prefix}_${id.replace(/[^a-z0-9]+/gi, '_')}`
 }
@@ -4024,6 +4113,47 @@ function isConfirmedNck1MaterializationRequest(request) {
         === compilerDocumentFingerprint(requestDocuments[index]))
 }
 
+function isConfirmedNck1AnalyzedPackageRequest(request) {
+  const confirmation = request?.nck1MaterializationConfirmation
+  if (
+    !exactKeys(confirmation, ['schemaVersion', 'candidateDigest', 'sourceDigest', 'confirmed'])
+    || confirmation.schemaVersion !== confirmationSchemaVersion
+    || confirmation.confirmed !== true
+  ) return false
+  const requestDocuments = request.evidence?.documents
+  if (!Array.isArray(requestDocuments)) return false
+  const manifestDocument = requestDocuments.find((document) =>
+    document.inputKey === 'nck1_analyzed_package_manifest'
+    && document.declared?.mediaType === NCK1_ANALYZED_PACKAGE_MEDIA_TYPE)
+  if (!(manifestDocument?.bytes instanceof Uint8Array)) return false
+  let manifest
+  try { manifest = JSON.parse(new TextDecoder().decode(manifestDocument.bytes)) } catch { return false }
+  if (!Array.isArray(manifest?.members)) return false
+  const byInputKey = new Map(requestDocuments.map((document) => [document.inputKey, document]))
+  const sourceInput = {
+    kind: 'nck1-analyzed-package',
+    manifestBytes: new Uint8Array(manifestDocument.bytes),
+    members: manifest.members.map((member) => ({
+      memberId: member.memberId,
+      role: member.role,
+      mediaType: member.mediaType,
+      bytes: byInputKey.get(nck1InputKey('source_document', member.memberId))?.bytes,
+    })),
+  }
+  if (!isNck1AnalyzedPackageInput(sourceInput)) return false
+  const rerun = nck1AnalyzedPackageCandidateFromInput(sourceInput)
+  if (
+    rerun.candidate.issues.length > 0
+    || confirmation.candidateDigest !== rerun.candidate.candidateDigest
+    || confirmation.sourceDigest !== rerun.candidate.source.sha256
+  ) return false
+  const expected = rerun.derivation.request.evidence.documents
+  return expected.length === requestDocuments.length
+    && expected.every((document, index) =>
+      compilerDocumentFingerprint(document)
+        === compilerDocumentFingerprint(requestDocuments[index]))
+}
+
 function isNck1MaterializationCandidateShape(candidate) {
   return exactKeys(candidate, [
     'schemaVersion',
@@ -4040,7 +4170,23 @@ function isNck1MaterializationCandidateShape(candidate) {
     && isNck1MaterializationInput(candidate.sourceInput)
 }
 
+function isNck1AnalyzedPackageCandidateShape(candidate) {
+  return exactKeys(candidate, [
+    'schemaVersion', 'authority', 'source', 'operatorChoices', 'interpretation',
+    'issues', 'candidateDigest', 'sourceInput',
+  ])
+    && candidate.schemaVersion === NCK1_ANALYZED_PACKAGE_CANDIDATE_SCHEMA_VERSION
+    && exactKeys(candidate.operatorChoices, [])
+    && isNck1AnalyzedPackageInput(candidate.sourceInput)
+}
+
 function candidateRoute(candidate, historicalReplayCapability = null) {
+  if (isNck1AnalyzedPackageCandidateShape(candidate)) {
+    return {
+      rerun: () => nck1AnalyzedPackageCandidateFromInput(candidate.sourceInput),
+      compile: (rerun) => compileNck1AnalyzedPackageCandidate(rerun.derivation.request),
+    }
+  }
   if (isNck1MaterializationCandidateShape(candidate)) {
     return {
       rerun: () => nck1MaterializationCandidateFromInput(candidate.sourceInput),
@@ -4103,6 +4249,13 @@ function candidateRoute(candidate, historicalReplayCapability = null) {
  * a profile.
  */
 export function importCanonicalCandidate(sourceBytes, operatorChoices) {
+  if (isNck1AnalyzedPackageInput(sourceBytes)) {
+    if (operatorChoices !== undefined) {
+      return { candidate: null, issues: [trustedDocxIssue('CALLER_SEMANTICS_REJECTED', 'NCK1 analyzed package imports do not accept caller choices or Canonical semantic fields')] }
+    }
+    const result = nck1AnalyzedPackageCandidateFromInput(sourceBytes)
+    return { candidate: result.candidate, issues: result.candidate.issues }
+  }
   if (isNck1MaterializationInput(sourceBytes)) {
     if (operatorChoices !== undefined) {
       return { candidate: null, issues: [trustedDocxIssue('CALLER_SEMANTICS_REJECTED', 'NCK1 Source Materialization imports do not accept caller choices or Canonical semantic fields')] }
@@ -4131,7 +4284,7 @@ export function importCanonicalCandidate(sourceBytes, operatorChoices) {
     }
     return trustedLegacyCaptureCandidateFromBytes(sourceBytes.sourceCaptureBytes)
   }
-  return { candidate: null, issues: [trustedDocxIssue('SOURCE_BYTES_REQUIRED', 'Import Candidate requires immutable DOCX bytes, one exact NCK1 Source Materialization input, or one exact Ticket 26 legacy capture input')] }
+  return { candidate: null, issues: [trustedDocxIssue('SOURCE_BYTES_REQUIRED', 'Import Candidate requires immutable DOCX bytes, one exact NCK1 Source Materialization or analyzed-package input, or one exact Ticket 26 legacy capture input')] }
 }
 
 /**
@@ -4141,13 +4294,16 @@ export function importCanonicalCandidate(sourceBytes, operatorChoices) {
  * suitable for local consumer QA.
  */
 export function compileNck1MaterializationCandidatePreview(candidate) {
-  if (!isNck1MaterializationCandidateShape(candidate)) {
+  const packageCandidate = isNck1AnalyzedPackageCandidateShape(candidate)
+  if (!packageCandidate && !isNck1MaterializationCandidateShape(candidate)) {
     return { unresolvedIssues: [trustedDocxIssue('CANDIDATE_REQUIRED', 'NCK1 Candidate preview requires one trusted Source Materialization Candidate')] }
   }
   if (candidate.candidateDigest !== digestJson(suppliedTrustedCandidateBody(candidate))) {
     return { unresolvedIssues: [trustedDocxIssue('CANDIDATE_BINDING_MISMATCH', 'NCK1 Candidate preview digest does not bind the supplied candidate')] }
   }
-  const rerun = nck1MaterializationCandidateFromInput(candidate.sourceInput)
+  const rerun = packageCandidate
+    ? nck1AnalyzedPackageCandidateFromInput(candidate.sourceInput)
+    : nck1MaterializationCandidateFromInput(candidate.sourceInput)
   if (
     !rerun.candidate
     || rerun.candidate.candidateDigest !== candidate.candidateDigest
@@ -4157,9 +4313,9 @@ export function compileNck1MaterializationCandidatePreview(candidate) {
   if (rerun.candidate.issues.length > 0) {
     return { unresolvedIssues: rerun.candidate.issues }
   }
-  const compilation = compileNck1MaterializationCandidate(
-    rerun.derivation.request,
-  )
+  const compilation = packageCandidate
+    ? compileNck1AnalyzedPackageCandidate(rerun.derivation.request)
+    : compileNck1MaterializationCandidate(rerun.derivation.request)
   if (!compilation.artifacts?.canonicalPaper) {
     const unresolvedIssues = compilation.artifacts?.normalizationReport
       ?.diagnostics
