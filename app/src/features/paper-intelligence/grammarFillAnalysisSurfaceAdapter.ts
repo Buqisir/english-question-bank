@@ -281,6 +281,7 @@ export function buildGrammarFillAnalysisSurfaceModel(input: {
     groupAnalysis,
     group.passage?.paragraphs ?? [],
     textMap,
+    useSelectedSurface ? plainModel.surfaceData.semanticParagraphs : undefined,
   )
   const groupView: GrammarFillGroupView | null = groupAnalysis
     ? {

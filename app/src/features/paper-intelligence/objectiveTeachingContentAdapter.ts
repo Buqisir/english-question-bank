@@ -1,4 +1,6 @@
 import { partitionAnalysisText } from '../../../../shared/analysis/analysisTextRanges.mjs'
+import { formatCanonicalBlankVisibleText } from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
+import type { CanonicalSurfaceParagraph } from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 import type {
   PaperAnnotation,
   PaperEvidence,
@@ -96,18 +98,44 @@ function sourceRangeToTextMapRanges(
   textMap: PaperTextMap,
   startCodePoint: number,
   endCodePoint: number,
+  semanticParagraphs?: ReadonlyArray<CanonicalSurfaceParagraph>,
 ): PaperTextRange[] {
   const paragraphId = source.paragraphId ?? source.id
   if (!paragraphId) return []
   const paragraph = textMap.paragraphs.find((item) => item.id === paragraphId)
   if (!paragraph) return []
-  const start = codePointToUtf16(source.text, startCodePoint)
-  const end = codePointToUtf16(source.text, endCodePoint)
+  let start = codePointToUtf16(source.text, startCodePoint)
+  let end = codePointToUtf16(source.text, endCodePoint)
+  let displayText = source.text
+  // Canonical blank labels are not source bytes: __36__ becomes 36, and
+  // __56__ (hint) becomes 56(hint). Bind transformations to real semantic blanks,
+  // never to an evidence quote or an arbitrary occurrence of the same answer.
+  const blanks = semanticParagraphs?.find((item) => item.id === paragraphId)
+    ?.sentences.flatMap((sentence) => sentence.nodes.filter((node) => node.type === 'blank')) ?? []
+  const replacements = blanks.map((blank) => {
+    const escapedNo = blank.questionNo.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    const pattern = new RegExp(`(?<!_)_{5}${escapedNo}_{5}(?!_)|(?<!_)__${escapedNo}__(?!_)(?: \\([^()\\r\\n]*\\))?|(?<![\\p{L}\\p{N}.])${escapedNo}\\._____(?:\\([^()\\r\\n]*\\))?`, 'gu')
+    const matches = [...source.text.matchAll(pattern)]
+    if (matches.length !== 1) throw new Error(`teachingContent blank ${blank.blankId} does not match source paragraph ${paragraphId}`)
+    const match = matches[0]
+    const sourceHint = /\(([^()\r\n]*)\)$/.exec(match[0])?.[1]
+    if (sourceHint !== undefined && sourceHint !== blank.hint) {
+      throw new Error(`teachingContent blank ${blank.blankId} hint does not match source paragraph ${paragraphId}`)
+    }
+    return { start: match.index, end: match.index + match[0].length, text: formatCanonicalBlankVisibleText(blank.questionNo, blank.hint) }
+  }).sort((a, b) => a.start - b.start)
+  // Work backwards so every source offset remains in the original coordinate space.
+  for (const replacement of replacements.toReversed()) {
+    const delta = replacement.text.length - (replacement.end - replacement.start)
+    start = start >= replacement.end ? start + delta : start > replacement.start ? replacement.start : start
+    end = end >= replacement.end ? end + delta : end > replacement.start ? replacement.start + replacement.text.length : end
+    displayText = displayText.slice(0, replacement.start) + replacement.text + displayText.slice(replacement.end)
+  }
   const result: PaperTextRange[] = []
   let cursor = 0
   for (const sentence of paragraph.sentences) {
-    while (/\s/u.test(source.text[cursor] ?? '')) cursor += 1
-    if (!source.text.startsWith(sentence.text, cursor)) {
+    while (/\s/u.test(displayText[cursor] ?? '')) cursor += 1
+    if (!displayText.startsWith(sentence.text, cursor)) {
       throw new Error(`teachingContent source paragraph ${paragraphId} does not match TextMap`)
     }
     const sentenceStart = cursor
@@ -133,6 +161,7 @@ export function projectObjectiveTeachingSource(
   group: ObjectiveTeachingGroup | null | undefined,
   sourceParagraphs: ReadonlyArray<SourceParagraph>,
   textMap: PaperTextMap,
+  semanticParagraphs?: ReadonlyArray<CanonicalSurfaceParagraph>,
 ): ObjectiveTeachingSourceProjection {
   const teaching = group?.teachingContent
   if (teaching?.schemaVersion !== 'objective-teaching-content-v1') {
@@ -152,7 +181,7 @@ export function projectObjectiveTeachingSource(
       if (sourceRange.textId !== teaching.sourceTextId) return
       const source = sourceById.get(sourceRange.paragraphId)
       if (!source) return
-      sourceRangeToTextMapRanges(source, textMap, sourceRange.start, sourceRange.end)
+      sourceRangeToTextMapRanges(source, textMap, sourceRange.start, sourceRange.end, semanticParagraphs)
         .forEach((range, sentenceRangeIndex) => {
           const owners = relationship.questionIds.length > 0 ? relationship.questionIds : [null]
           owners.forEach((questionId) => {

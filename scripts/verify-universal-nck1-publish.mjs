@@ -1169,6 +1169,8 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
       viewport: { width: 1280, height: 900 },
       deviceScaleFactor: 2,
     })
+    const screenErrors = []
+    screenPage.on('pageerror', (error) => screenErrors.push(error.stack || error.message))
     let screenProjection = projection
     await screenPage.route('**/api/paper-canonical/consumption?*', (route) =>
       route.fulfill({
@@ -1201,7 +1203,11 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
     const screenBody = screenPage.locator(
       `[data-paper-paragraph-id="${bodyId}"]`,
     )
-    await screenTitle.waitFor()
+    try {
+      await screenTitle.waitFor()
+    } catch (error) {
+      throw new Error(`${error.message}\nScreen errors: ${screenErrors.join('\n')}\nScreen text: ${await screenPage.locator('body').innerText()}`, { cause: error })
+    }
     assert.equal(
       await screenTitle.getAttribute('data-canonical-seven-choices-rhythm-role'),
       'passage_title',
@@ -2658,6 +2664,14 @@ try {
   const second = service.promote(paperId, promotionRequest(approval), 'synthetic-ship')
   assert.equal(second.promotion.assetVersion, 2, 'same Candidate with a newly approved plan must not reuse v1')
   assert.deepEqual(JSON.parse(readFileSync(path.join(paperDir, 'latest/pagination-plan.json'))), changedPlan)
+  for (const file of ['reading-choice-analysis-v1.json', 'seven-choices-analysis-v1.json', 'cloze-analysis-v1.json', 'grammar-fill-analysis-v1.json']) {
+    const sidecar = JSON.parse(readFileSync(path.join(paperDir, 'versions/v2/analyses', file)))
+    assert.equal(sidecar.sourceAssetVersion, 2)
+    for (const group of Object.values(sidecar.groups)) {
+      assert.equal(group.teachingContent.sourceAssetVersion, 2,
+        `${file} nested annotation authority must advance with the published version`)
+    }
+  }
   const db = plannedPromotion.openDatabase({ readOnly: false })
   try {
     summaryRow = db.prepare(`

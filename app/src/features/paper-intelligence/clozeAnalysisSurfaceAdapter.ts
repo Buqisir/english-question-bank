@@ -220,6 +220,7 @@ export function buildClozeAnalysisSurfaceModel(input: {
     groupAnalysis,
     group.passage?.paragraphs ?? [],
     canonicalSurface.surfaceData.textMap,
+    canonicalSurface.surfaceData.semanticParagraphs,
   )
   const groupView: ClozeGroupView | null = groupAnalysis
     ? {

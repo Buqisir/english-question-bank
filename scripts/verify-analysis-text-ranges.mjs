@@ -265,6 +265,39 @@ assert.deepEqual(sourceProjection.evidence[0].range, {
 }, 'code-point source offset projects to UTF-16 DOM offset for the intended second occurrence')
 assert.equal(new Set(sourceProjection.annotations.map(({ id }) => id)).size, 4)
 
+for (const [raw, visible, hint] of [
+  ['_____36_____', '36', null],
+  ['__36__', '36', null],
+  ['__36__ (go)', '36(go)', 'go'],
+  ['36._____(go)', '36(go)', 'go'],
+]) {
+  const sourceText = `😀 before ${raw} repeat repeat.`
+  const displayText = `😀 before ${visible} repeat repeat.`
+  const start = Array.from(`😀 before ${raw} repeat `).length
+  const analysis = { teachingContent: {
+    schemaVersion: 'objective-teaching-content-v1', sourceTextId: 'original',
+    annotations: [{ annotationId: 'after-blank', kind: 'answer-evidence', questionIds: ['q36'],
+      sourceRanges: [{ textId: 'original', paragraphId: 'p', start, end: start + 6, quote: 'repeat' }] }],
+  } }
+  const textMap = { paperId: 'paper-blank-map', paragraphs: [{ id: 'p', section: '七选五',
+    sentences: [{ id: 'p-s0', text: displayText, tokens: [] }] }] }
+  const semantic = [{ id: 'p', section: '七选五', groupType: 'sevenChoices', sentences: [{ id: 'p-s0',
+    nodes: [{ type: 'blank', questionNo: '36', questionId: 'q36', blankId: 'b36', hint }] }] }]
+  const projected = projectObjectiveTeachingSource(analysis, [{ id: 'p', text: sourceText }], textMap, semantic)
+  assert.deepEqual(projected.evidence[0].range, { sentenceId: 'p-s0',
+    start: `😀 before ${visible} repeat `.length, end: `😀 before ${visible} repeat repeat`.length },
+  'source offset after a canonical blank and emoji still marks the second occurrence')
+  assert.equal(sourceText.slice(-14), 'repeat repeat.', 'source text remains unmodified')
+  assert.throws(() => projectObjectiveTeachingSource(analysis, [{ id: 'p', text: sourceText }],
+    { ...textMap, paragraphs: [{ ...textMap.paragraphs[0], sentences: [{ id: 'p-s0', text: 'wrong text', tokens: [] }] }] }, semantic),
+  /does not match TextMap/, 'unrelated source drift still fails closed')
+  if (hint) {
+    assert.throws(() => projectObjectiveTeachingSource(analysis,
+      [{ id: 'p', text: sourceText.replace('(go)', '(WRONG)') }], textMap, semantic),
+    /hint does not match source/, 'canonical label replacement must not conceal a changed source hint')
+  }
+}
+
 const vite = await createServer({
   root: new URL('../app', import.meta.url).pathname,
   logLevel: 'error',

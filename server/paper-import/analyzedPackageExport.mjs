@@ -223,8 +223,9 @@ export function convertRepresentableNck1ReviewSourceToAnalyzedPackageFiles(
 }
 
 function writeDirectory(destination, files) {
-  if (existsSync(destination)) fail('destination', 'Destination already exists')
-  mkdirSync(destination, { recursive: true })
+  // Exclusive creation is the ownership latch, including against concurrent exporters.
+  // Keep it outside cleanup: a failed mkdir never grants ownership of the target.
+  mkdirSync(destination)
   try {
     for (const [relativePath, bytes] of files) {
       const filePath = resolveReviewFile(destination, relativePath, 'Export member')
@@ -266,10 +267,9 @@ export async function exportAnalyzedPackageRevision({
       linkSync(archivePath, destination)
       return { revisionId, paperId: expectedPaperId, conversionVersion: 'analyzed-package-export-v1', format: 'zip', files: archive.files }
     }
-    if (existsSync(destination)) fail('destination', 'Destination already exists')
-    // Same-filesystem atomic install.
-    const { renameSync } = await import('node:fs')
-    renameSync(scratch, destination)
+    // Directory output is populated only after validation, under an exclusive
+    // mkdir latch. Unlike rename, it cannot replace a concurrently created directory.
+    writeDirectory(destination, files)
     return { revisionId, paperId: expectedPaperId, conversionVersion: 'analyzed-package-export-v1', format: 'directory', files: [...files.keys()] }
   } finally {
     rmSync(temporary, { recursive: true, force: true })

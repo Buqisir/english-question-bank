@@ -97,13 +97,16 @@ function renderFullTranslation(groupAnalysis, paperAsset) {
       text: paragraph.quote,
       rangeIndices: [],
     }]
+    let previousNumbers = ''
     const html = parts.map((part) => {
-      if (part.rangeIndices.length === 0) return escapeHtml(part.text)
+      if (part.rangeIndices.length === 0) { previousNumbers = ''; return escapeHtml(part.text) }
       const annotations = part.rangeIndices.map((index) => ranges[index].annotation)
       const numbers = [...new Set(annotations.flatMap(({ questionIds }) =>
         array(questionIds).map(questionNo).filter(Boolean)))].sort((a, b) => Number(a) - Number(b))
       const kinds = [...new Set(annotations.map(({ kind }) => kind))]
-      return `<span class="translation-annotation" data-annotation-kinds="${escapeHtml(kinds.join(' '))}" data-question-nos="${escapeHtml(numbers.join(' '))}">${numbers.length ? `<b class="translation-marker">[${numbers.map(escapeHtml).join('、')}]</b>` : ''}<span class="source-underline">${escapeHtml(part.text)}</span></span>`
+      const showMarker = numbers.length && numbers.join(' ') !== previousNumbers
+      previousNumbers = numbers.join(' ')
+      return `<span class="translation-annotation" data-annotation-kinds="${escapeHtml(kinds.join(' '))}" data-question-nos="${escapeHtml(numbers.join(' '))}">${showMarker ? `<b class="translation-marker">[${numbers.map(escapeHtml).join('、')}]</b>` : ''}<span class="source-underline">${escapeHtml(part.text)}</span></span>`
     }).join('')
     return `<p data-translation-paragraph-id="${escapeHtml(paragraph.paragraphId)}">${html}</p>`
   })
@@ -135,14 +138,17 @@ function renderSourceRelationships(groupAnalysis, group, paperAsset) {
     const parts = partitionAnalysisText(source.text, ranges.map(({ start, end, quote }) => ({
       start, end, quote,
     })))
+    let previousNumbers = ''
     const html = parts.map((part) => {
-      if (part.rangeIndices.length === 0) return escapeHtml(part.text)
+      if (part.rangeIndices.length === 0) { previousNumbers = ''; return escapeHtml(part.text) }
       const relationships = part.rangeIndices.map((index) => ranges[index].annotation)
       const annotationIds = [...new Set(relationships.map(({ annotationId }) => annotationId))]
       const kinds = [...new Set(relationships.map(({ kind }) => kind))]
       const numbers = [...new Set(relationships.flatMap(({ questionIds }) =>
-        array(questionIds).map((questionId) => questionData(paperAsset, questionId)?.questionNo).filter(Boolean)))]
-      return `<span class="source-relationship source-underline" data-annotation-ids="${escapeHtml(annotationIds.join(' '))}" data-annotation-kinds="${escapeHtml(kinds.join(' '))}" data-question-nos="${escapeHtml(numbers.join(' '))}">${numbers.length ? `<b class="translation-marker">[${numbers.map(escapeHtml).join('、')}]</b>` : ''}${escapeHtml(part.text)}</span>`
+        array(questionIds).map((questionId) => questionData(paperAsset, questionId)?.questionNo).filter(Boolean)))].sort((a, b) => Number(a) - Number(b))
+      const showMarker = numbers.length && numbers.join(' ') !== previousNumbers
+      previousNumbers = numbers.join(' ')
+      return `<span class="source-relationship source-underline" data-annotation-ids="${escapeHtml(annotationIds.join(' '))}" data-annotation-kinds="${escapeHtml(kinds.join(' '))}" data-question-nos="${escapeHtml(numbers.join(' '))}">${showMarker ? `<b class="translation-marker">[${numbers.map(escapeHtml).join('、')}]</b>` : ''}${escapeHtml(part.text)}</span>`
     }).join('')
     return `<p lang="en" data-source-text-state="${source.state}" data-source-paragraph-id="${escapeHtml(source.paragraphId)}"><span class="inline-label">${source.state === 'original' ? '原题' : '答案补全'}</span>${html}</p>`
   }).filter(Boolean)
@@ -777,16 +783,21 @@ p {
   margin: 0;
 }
 
+h4,
+h5 {
+  break-after: avoid;
+}
+
 [lang="en"] {
   font-family: var(--latin);
 }
 
 .frontmatter {
-  min-height: 250mm;
+  margin-bottom: 8mm;
 }
 
 .house-mark {
-  margin: 0 0 17mm;
+  margin: 0 0 5mm;
   color: var(--green-deep);
   font: 600 9pt/1 var(--sans);
   letter-spacing: 0.08em;
@@ -869,10 +880,6 @@ p {
   column-fill: auto;
   column-gap: 8mm;
   column-rule: 0.35pt solid var(--line);
-}
-
-.frontmatter + .analysis-body {
-  break-before: page;
 }
 
 .paper-part {
@@ -1309,7 +1316,7 @@ dd {
 THESIS: A compact two-column teaching companion, not an answer key squeezed into the exam; it refuses the boxed worksheet and web-card stack.
 OWN-WORLD: White A4, a stable two-column publisher grid, near-black book ink, low-saturation aged pine green, serif reading lanes, sans editorial hierarchy and hairline rules.
 STORY: The teacher finds authoritative answers first, then scans each narrow column in exam order through one natural evidence chain per question and fuller writing guidance where the task needs it.
-FIRST VIEWPORT: House mark, paper title, a short aged-green hairline and the complete objective answer overview; analysis begins on the next sheet.
+FIRST VIEWPORT: House mark, paper title, a short aged-green hairline and the complete objective answer overview; teaching continues below without a forced blank cover remainder.
 FORM: Owner-pinned restrained publisher and modern teacher-handbook hybrid; seed owner-publisher-companion-v0.
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
 --><main>

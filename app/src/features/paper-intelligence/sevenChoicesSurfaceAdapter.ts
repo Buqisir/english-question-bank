@@ -279,6 +279,7 @@ export function buildSevenChoicesSurfaceModel(
     groupAnalysis,
     group.passage?.paragraphs ?? [],
     (canonical?.surfaceData ?? { textMap }).textMap,
+    canonical?.surfaceData.semanticParagraphs,
   )
   const baseSurfaceData = canonical?.surfaceData ?? {
     textMap,
