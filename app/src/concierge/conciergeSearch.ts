@@ -190,8 +190,18 @@ export function tokenize(query: string): string[] {
     // "2025年", "阅读C篇" — are accumulated and kept as-is, matching V1
     // behavior for the standalone ("C 篇") form. A purely-CJK segment yields
     // nothing here; a purely-non-CJK segment flushes once at the end.
+    //
+    // A bare 1–3 digit run (the "3" in "阅读第3篇", the "9" in "9月") is ordinal
+    // noise, not a year or a section letter: it can only substring-match a
+    // `20xx` year digit in the `place` tier and tip a faint section hit (e.g.
+    // "阅读") over the confidence floor — a falsely confident local-direct
+    // match that bypasses the steward. Only intended runs survive: Latin
+    // letters ("C") and 4-digit years ("2025"). Pre-20d74af1 behavior dropped
+    // *all* glued non-CJK runs, so this is the strict subset that commit
+    // intended.
     const flushLatinRun = () => {
       if (!latinRun) return
+      if (/^\d{1,3}$/.test(latinRun)) { latinRun = ''; return }
       tokens.push(latinRun)
       latinRun = ''
     }
@@ -253,8 +263,12 @@ function tokenRunIdsOf(query: string): Map<string, number> {
     // (the "C" in "C篇", the "2025" in "2025年") gets its own run id,
     // distinct from any CJK run in that segment, so "C篇D篇" still yields
     // two distinct runs and the multi-run multiplicity signal survives.
+    // Bare 1–3 digit runs are dropped exactly as in `tokenize()` so the
+    // run-id map stays in lockstep (a never-kept noise digit never gets a
+    // run id, so it can never contribute a matchedRunId either).
     const flushLatinRun = () => {
       if (!latinRun) return
+      if (/^\d{1,3}$/.test(latinRun)) { latinRun = ''; return }
       runIds.set(latinRun, nextRunId++)
       latinRun = ''
     }

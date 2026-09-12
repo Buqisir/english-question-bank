@@ -289,6 +289,97 @@ console.log('\n-- 5. Non-regression: plain English / empty query / no-label grou
 }
 
 // ------------------------------------------------------------------------
+console.log('\n-- 6. Regression: bare digit ordinals glued to CJK must not lock in a confident local match --')
+
+{
+  // Bug (commit 20d74af1, PR #395): tokenize()'s per-character latinRun
+  // accumulator emits a bare 1-digit run like the "3" in "阅读第3篇". That
+  // digit substring-matches a `20xx` year in the `place` tier (e.g. "2023"),
+  // and summed with the "阅读" section-tier hit reaches
+  // HIGH_CONFIDENCE_SCORE_FLOOR (5) — a falsely confident local-direct match
+  // that bypasses the steward and marks the hit non-weak
+  // ("已按本地题库精确信息匹配。"). It fired BEFORE the missing-API-key
+  // check, so a keyless teacher got the same wrong confident card. The fix
+  // drops 1–3 digit runs so only Latin letters and 4-digit years survive,
+  // matching the pre-20d74af1 boundary for glued digit noise.
+
+  // Tokenizer guarantee: bare short digit ordinals glued to CJK are dropped.
+  assert(
+    'tokenize() drops a bare glued ordinal digit (阅读第3篇 has no "3")',
+    !tokenize('阅读第3篇').includes('3'),
+  )
+  assert(
+    'tokenize() drops a bare glued digit in 第3题 阅读理解 too',
+    !tokenize('第3题 阅读理解').includes('3'),
+  )
+  assert(
+    'tokenize() drops a bare glued month digit (9月 has no "9")',
+    !tokenize('9月').includes('9'),
+  )
+
+  // Intended preserved runs (the cases commit 20d74af1 explicitly names) survive.
+  assert('4-digit glued year survives tokenize (2025年 keeps "2025")', tokenize('2025年').includes('2025'))
+  assert('Latin letter glued to CJK survives (C篇 keeps "C")', tokenize('C篇').includes('C'))
+  assert(
+    'mixed letters across one segment survive (阅读C篇D篇 keeps both "C" and "D")',
+    tokenize('阅读C篇D篇').includes('C') && tokenize('阅读C篇D篇').includes('D'),
+  )
+
+  // Real-DB-shape reading pool: section is "阅读理解 A/B/C/D" (no 第), years
+  // 2023–2026 so every last digit 3/4/5/6 AND the leading "2" each appear in
+  // some place-tier year string — the exact substring mechanism the bug rode.
+  const pool = [
+    makeGroup({ id: 'reg6-r-2023', groupType: 'reading', region: '新课标 I', year: 2023, section: '阅读理解 B', title: '2023 阅读 B 生态修复', summary: '讲生态修复' }),
+    makeGroup({ id: 'reg6-r-2024', groupType: 'reading', region: '浙江', year: 2024, section: '阅读理解 B', title: '2024 阅读 B 图书馆', summary: '讲社区共享' }),
+    makeGroup({ id: 'reg6-r-2025', groupType: 'reading', region: '全国 I', year: 2025, section: '阅读理解 B', title: '2025 阅读 B 写作', summary: '讲写作教育' }),
+    makeGroup({ id: 'reg6-gr-2026', groupType: 'grammar_cloze', region: '浙江', year: 2026, section: '语法填空', title: '2026 语法 摩擦', summary: '讲物理摩擦' }),
+  ]
+
+  for (const n of ['2', '3', '4', '5']) {
+    const intent = `阅读第${n}篇`
+    let stewardCalled = false
+    const stub = async () => {
+      stewardCalled = true
+      return { needsClarification: false, assistantMessage: 's', matches: [] }
+    }
+    const out = await runConciergeSearch({ intent, apiKey: 'fake-key', questionGroups: pool, doStewardCall: stub })
+    assert(
+      `"${intent}" reaches the steward, not a false local-direct lock-in`,
+      stewardCalled &&
+        !(out.kind === 'results' && out.source === 'fallback' && out.fallbackReason === 'local-direct-match'),
+      `stewardCalled=${stewardCalled} kind=${out.kind} source=${out.kind === 'results' ? out.source : ''} reason=${out.kind === 'results' ? out.fallbackReason : ''}`,
+    )
+  }
+
+  // The bare form "第3篇" (no 阅读) never locked in (第 matches no section) —
+  // it should still reach the steward after the fix.
+  {
+    let stewardCalled = false
+    const stub = async () => {
+      stewardCalled = true
+      return { needsClarification: false, assistantMessage: 's', matches: [] }
+    }
+    await runConciergeSearch({ intent: '第3篇', apiKey: 'fake-key', questionGroups: pool, doStewardCall: stub })
+    assert('"第3篇" (bare, no 阅读) still reaches the steward', stewardCalled)
+  }
+
+  // No-API-key path: before the fix, the local-direct lock-in fired BEFORE
+  // the missing-key check, so a keyless teacher got a confidently wrong
+  // "已按本地题库精确信息匹配。" card. After the fix it falls through to the
+  // honest missing-key fallback, never claiming a precise local match.
+  {
+    const out = await runConciergeSearch({ intent: '阅读第3篇', apiKey: '', questionGroups: pool })
+    assert(
+      '"阅读第3篇" with no API key falls through to the missing-key fallback, not a precise local-direct match',
+      out.kind === 'results' &&
+        out.source === 'fallback' &&
+        out.fallbackReason === 'missing-api-key',
+      `kind=${out.kind} source=${out.kind === 'results' ? out.source : ''} reason=${out.kind === 'results' ? out.fallbackReason : ''}`,
+    )
+  }
+}
+
+// ------------------------------------------------------------------------
 console.log('\n-- 7. Regression: real-DB section format ("Reading C" in title, no 阅读理解C pattern) --')
 
 {
