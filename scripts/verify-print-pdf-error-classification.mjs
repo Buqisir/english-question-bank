@@ -1,26 +1,35 @@
 #!/usr/bin/env node
-// Verifies the POST /api/draft-papers/:id/print-pdf error classifier (and its
-// parity with the sibling GET /api/draft-papers/:id/pagination route).
+// Verifies the shared sendDraftMutationError classifier (404 / 503 / 400) across
+// the draft-papers route family:
+//   - POST /api/draft-papers/:id/print-pdf   (render path)
+//   - GET  /api/draft-papers/:id/pagination  (render path, sibling parity)
+//   - POST /api/draft-papers/:id/items       (item mutation — the ENOENT-substring
+//                                            regression site)
 //
-// Before the fix, the print-pdf catch block mapped ANY thrown error whose
-// message contained the substring "not found" to 503 "精排 PDF 不可用". The
-// per-item data error `questionGroupId not found: <id>` (thrown by
-// resolveDraftExportItems in draftPaperStore.mjs when getQuestionGroupDetail
-// returns null, e.g. under the identityConflict fail-closed state) contains
-// that substring and so was misclassified as 503, while the sibling pagination
-// route — calling the same getDraftPaperPagination — mapped the identical
-// throw to 400 via sendDraftMutationError.
+// History: commit 359b0bc6 ("Distinguish missing data from unavailable PDF
+// renderer") replaced the print-pdf route's inline `message.includes('not
+// found')` 503 carve-out (which over-matched the per-item data error
+// `questionGroupId not found: <id>`) with the shared sendDraftMutationError
+// helper, classifying renderer-unavailable (503) by a typed
+// `error.code === 'RENDERER_MISSING'`. It retained `message.includes('ENOENT')`
+// as a fallback for unwrapped filesystem errors from the renderer toolchain —
+// but that substring test also matched the per-item data error
+// `questionGroupId not found: <id>` thrown by addGroupToDraftPaper
+// (draftPaperStore.mjs:1106), where `<id>` is the raw user-supplied `groupId`
+// from the POST /:id/items request body. A hand-crafted body with a groupId
+// containing "ENOENT" (e.g. "ENOENT-xyz") was misclassified as 503 "精排 PDF
+// 不可用" instead of 400 — a regression on an endpoint that does no rendering.
 //
-// The fix replaces substring classification with a typed error code
-// (`error.code === 'RENDERER_MISSING'`) for the renderer-unavailable lane,
-// shared by both routes through sendDraftMutationError: 404 for
-// NOT_FOUND_MESSAGES, 503 for RENDERER_MISSING/ENOENT, 400 for everything
-// else (incl. the data error).
+// The follow-up fix replaces the message substring with the typed
+// `error.code === 'ENOENT'` (Node's native filesystem error code), so a plain
+// Error data error (no `code`) always falls through to 400 regardless of its
+// message text, while a genuine filesystem ENOENT (carrying `error.code ===
+// 'ENOENT'`) still maps to 503.
 //
 // This script is hermetic: it imports createDraftPaperRoutes and invokes the
 // route handlers directly with a stubbed context.draftPaperStore that throws
-// the exact error shapes the real export path throws. No HTTP server, no
-// Chromium, no paper-asset store. Run: `node scripts/verify-print-pdf-error-classification.mjs`.
+// the exact error shapes the real export/mutation paths throw. No HTTP server,
+// no Chromium, no paper-asset store. Run: `node scripts/verify-print-pdf-error-classification.mjs`.
 
 import { createDraftPaperRoutes } from '../server/draft-paper/draftPaperRoutes.mjs'
 
@@ -119,6 +128,71 @@ async function runPagination(storeThrows) {
   const match = paginationPath.match(paginationRoute.pattern)
   const url = new URL(`http://localhost${paginationPath}?versionType=student`)
   await paginationRoute.handle({ request: {}, response, url, match, context })
+  return response
+}
+
+// --- POST /:id/items route helpers -------------------------------------------
+// The items route is the one throw site where raw request-body text reaches the
+// error message: addGroupToDraftPaper (draftPaperStore.mjs:1106) throws
+// `questionGroupId not found: ${groupId}` with the request body's `groupId`
+// echoed verbatim (a plain Error with no `code`). The route also has a
+// post-COMMIT getDraftPaper call (draftPaperRoutes.mjs line ~168) that re-renders
+// print HTML and can throw a genuine filesystem ENOENT from inlineFigureImages'
+// readFileSync (draftPaperStore.mjs:72) — a legitimate renderer-toolchain
+// failure the 503 lane is meant to catch on this route. `addGroup` stubs the
+// pre-commit throw site; `getDraftPaper` stubs the post-commit one (only reached
+// when `addGroup` succeeds).
+
+function createDbStub() {
+  return {
+    exec() {},
+    close() {},
+    prepare() {
+      return { get: () => undefined, all: () => [], run: () => {} }
+    },
+  }
+}
+
+function createItemsContext({ addGroup, getDraftPaper = () => ({ id: 'draft-stub' }) }) {
+  return {
+    resolveDataUserId() {
+      return 'user-self'
+    },
+    async readJsonBody() {
+      return { groupId: 'ENOENT-xyz' }
+    },
+    openUserDatabase() {
+      return createDbStub()
+    },
+    openDatabase() {
+      return createDbStub()
+    },
+    sendJson(response, statusCode, body) {
+      response.writeHead(statusCode)
+      response.end(JSON.stringify(body))
+    },
+    draftPaperStore: {
+      addGroupToDraftPaper() {
+        return addGroup()
+      },
+      markCurrentDraftPaper() {},
+      getDraftPaper() {
+        return getDraftPaper()
+      },
+    },
+  }
+}
+
+const itemsPath = '/api/draft-papers/draft-enoent/items'
+const itemsRoute = findRoute(routes, 'POST', itemsPath)
+assert('POST /:id/items route is registered', Boolean(itemsRoute))
+
+async function runItems({ addGroup, getDraftPaper }) {
+  const response = createResponse()
+  const context = createItemsContext({ addGroup, getDraftPaper })
+  const match = itemsPath.match(itemsRoute.pattern)
+  const url = new URL(`http://localhost${itemsPath}`)
+  await itemsRoute.handle({ request: {}, response, url, match, context })
   return response
 }
 
@@ -281,6 +355,97 @@ assert(
   'I. pagination maps RENDERER_MISSING to 503 (shared classifier, both lanes agree)',
   caseI.statusCode === 503,
   `expected 503, got ${caseI.statusCode}`,
+)
+
+// --- Case J: POST /:id/items maps the ENOENT-substring data error to 400 -----
+// The bug: addGroupToDraftPaper (draftPaperStore.mjs:1106) throws a plain Error
+// `questionGroupId not found: ${groupId}` with no `code`, where `groupId` is the
+// raw request-body value "ENOENT-xyz". Before the follow-up fix
+// `message.includes('ENOENT')` matched the substring → 503 "精排 PDF 不可用"
+// (wrong status + misleading banner on an endpoint that does no rendering).
+// After the fix (`error?.code === 'ENOENT'`) a plain Error has no `code`, so it
+// falls through to 400 — restoring the pre-359b0bc6 behavior for item mutations.
+const enoentGroupIdThrow = () => {
+  throw new Error('questionGroupId not found: ENOENT-xyz')
+}
+
+const caseJ = await runItems({ addGroup: enoentGroupIdThrow })
+const caseJBody = decodeBody(caseJ)
+assert(
+  'J. POST /:id/items maps "questionGroupId not found: ENOENT-xyz" data error to 400 (regression fixed)',
+  caseJ.statusCode === 400,
+  `expected 400, got ${caseJ.statusCode} body=${JSON.stringify(caseJBody)}`,
+)
+assert(
+  'J. POST /:id/items 400 body carries the data-error message with no 精排 PDF 不可用 banner',
+  caseJBody?.error === 'questionGroupId not found: ENOENT-xyz',
+  `body=${JSON.stringify(caseJBody)}`,
+)
+
+// --- Case K: a groupId NOT containing ENOENT stays 400 (normal data path) ---
+// Guards against the fix accidentally changing the normal bad-groupId path.
+const plainGroupIdThrow = () => {
+  throw new Error('questionGroupId not found: g-missing')
+}
+
+const caseK = await runItems({ addGroup: plainGroupIdThrow })
+assert(
+  'K. POST /:id/items maps a non-ENOENT bad groupId data error to 400 (no regression)',
+  caseK.statusCode === 400,
+  `expected 400, got ${caseK.statusCode}`,
+)
+
+// --- Case L: a genuine renderer ENOENT from the post-commit re-render -> 503
+// addGroupToDraftPaper succeeds; the post-COMMIT getDraftPaper call re-renders
+// print HTML and throws a real filesystem ENOENT (inlineFigureImages'
+// readFileSync at draftPaperStore.mjs:72, carrying `error.code === 'ENOENT'`).
+// This is a legitimate renderer-toolchain failure the 503 lane is MEANT to
+// catch on this route — confirming the typed-code fix keeps the genuine ENOENT
+// fallback reachable (it did not silently drop the 503 lane for item routes).
+const itemsRendererEnoent = () => {
+  const error = new Error("ENOENT: no such file or directory, open '/srv/figure.png'")
+  error.code = 'ENOENT'
+  throw error
+}
+
+const caseL = await runItems({ addGroup: () => 'draft-item-stub', getDraftPaper: itemsRendererEnoent })
+const caseLBody = decodeBody(caseL)
+assert(
+  'L. POST /:id/items maps a genuine post-commit ENOENT (renderer toolchain) to 503',
+  caseL.statusCode === 503,
+  `expected 503, got ${caseL.statusCode} body=${JSON.stringify(caseLBody)}`,
+)
+assert(
+  'L. POST /:id/items 503 body keeps the 精排 PDF 不可用 envelope',
+  typeof caseLBody?.error === 'string' && caseLBody.error.startsWith('精排 PDF 不可用: '),
+  `body=${JSON.stringify(caseLBody)}`,
+)
+
+// --- Case M: "Draft paper not found" (ownership miss) -> 404 on items route --
+// addGroupToDraftPaper throws `Draft paper not found` at draftPaperStore.mjs:1104
+// when the (id, user_id) ownership check misses — NOT_FOUND_MESSAGES carve-out
+// must still 404 on the items route, not 400/503.
+const itemsDraftNotFoundThrow = () => {
+  throw new Error('Draft paper not found')
+}
+
+const caseM = await runItems({ addGroup: itemsDraftNotFoundThrow })
+assert(
+  'M. POST /:id/items maps "Draft paper not found" (ownership miss) to 404',
+  caseM.statusCode === 404,
+  `expected 404, got ${caseM.statusCode}`,
+)
+
+// --- Case N: happy path returns 201 (stub wiring + success-path guard) -------
+// addGroupToDraftPaper succeeds and the post-commit getDraftPaper returns a
+// draft → 201. Guards against a broken stub that always throws (which would
+// make the error-classification cases vacuously pass) and confirms the fix does
+// not disturb the success path.
+const caseN = await runItems({ addGroup: () => 'draft-item-stub', getDraftPaper: () => ({ id: 'draft-stub' }) })
+assert(
+  'N. POST /:id/items happy path returns 201 (success path unaffected)',
+  caseN.statusCode === 201,
+  `expected 201, got ${caseN.statusCode}`,
 )
 
 if (failed > 0) {
