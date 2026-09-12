@@ -3,13 +3,17 @@
 import assert from 'node:assert/strict'
 import { execFileSync, spawn } from 'node:child_process'
 import { createHash } from 'node:crypto'
-import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { createServer } from 'node:http'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 
 import { readJsonRouteBody, runRoutes } from '../server/router/index.mjs'
+import {
+  createImportReviewStore,
+  reviewBundleDigest,
+} from '../server/import-review/importReviewStore.mjs'
 import { createSourceIntakeNotifier } from '../server/source-intake/sourceIntakeNotifier.mjs'
 import { createSourceIntakeRoutes } from '../server/source-intake/sourceIntakeRoutes.mjs'
 import { createSourceIntakeStore } from '../server/source-intake/sourceIntakeStore.mjs'
@@ -82,7 +86,9 @@ async function request(origin, pathname, {
 }
 
 async function registerAndUpload(origin, intakeId, role, fileName, bytes, ownerRole = 'owner') {
-  const mediaType = fileName.endsWith('.pdf')
+  const mediaType = fileName.endsWith('.zip')
+    ? 'application/zip'
+    : fileName.endsWith('.pdf')
     ? 'application/pdf'
     : fileName.endsWith('.mp3')
       ? 'audio/mpeg'
@@ -207,6 +213,74 @@ function verifyLegacyDatabaseMigration() {
 
 verifyLegacyDatabaseMigration()
 
+function verifyCorrectedReviewUploadBaseRevision() {
+  const root = mkdtempSync(path.join(tmpdir(), 'eqb-corrected-review-base-'))
+  const reviewDbPath = path.join(root, 'review.sqlite')
+  try {
+    const reviewStore = createImportReviewStore({
+      dbPath: reviewDbPath,
+      filesRoot: path.join(root, 'files'),
+      rendererBuildId: 'source-intake-correction-verifier',
+    })
+    const db = new DatabaseSync(reviewDbPath)
+    const timestamp = '2026-09-11T00:00:00.000Z'
+    db.prepare(`
+      INSERT INTO import_review_papers VALUES (?, ?, ?, ?, ?)
+    `).run('paper-corrected-upload', 'Corrected upload fixture', 'rev-base', timestamp, timestamp)
+    db.prepare(`
+      INSERT INTO import_review_revisions (
+        id, paper_id, revision_number, state, source_digest, candidate_digest,
+        visible_structure_digest, bundle_digest, producer_build_id,
+        manifest_json, created_at, finalized_at, updated_at
+      ) VALUES (?, ?, 1, 'changes_requested', ?, ?, ?, ?, ?, '{}', ?, ?, ?)
+    `).run(
+      'rev-base',
+      'paper-corrected-upload',
+      digest(Buffer.from('base-source')),
+      digest(Buffer.from('base-candidate')),
+      digest(Buffer.from('base-visible')),
+      digest(Buffer.from('base-bundle')),
+      'base-build',
+      timestamp,
+      timestamp,
+      timestamp,
+    )
+    db.close()
+    const manifest = {
+      schemaVersion: 'web-import-review-bundle-v1',
+      paperId: 'paper-corrected-upload',
+      paperName: 'Corrected upload fixture',
+      expectedBaseRevisionId: 'rev-base',
+      sourceDigest: digest(Buffer.from('source')),
+      candidateDigest: digest(Buffer.from('candidate')),
+      visibleStructureDigest: digest(Buffer.from('visible')),
+      analysisDigest: digest(Buffer.from('analysis')),
+      producerBuildId: 'correction-build',
+      files: [{
+        path: 'config.json',
+        sha256: digest(Buffer.from('{}\n')),
+        byteLength: 3,
+        mediaType: 'application/json',
+        role: 'config',
+      }],
+      resolvesIssueIds: [],
+    }
+    manifest.bundleDigest = reviewBundleDigest(manifest)
+    assert.equal(reviewStore.createRevision(manifest).created, true)
+    const stale = { ...manifest, expectedBaseRevisionId: 'rev-older' }
+    stale.bundleDigest = reviewBundleDigest(stale)
+    assert.throws(
+      () => reviewStore.createRevision(stale),
+      (error) => error.code === 'IMPORT_REVIEW_BASE_REVISION_STALE',
+    )
+    console.log('PASS corrected Review upload binds and rechecks its expected base revision')
+  } finally {
+    rmSync(root, { recursive: true, force: true })
+  }
+}
+
+verifyCorrectedReviewUploadBaseRevision()
+
 function runSourceIntakeCli(origin, args, { ampThreadId = orbThreadId } = {}) {
   return new Promise((resolve, reject) => {
     const child = spawn(
@@ -234,6 +308,31 @@ function runSourceIntakeCli(origin, args, { ampThreadId = orbThreadId } = {}) {
   })
 }
 
+function makeValidAnalyzedPackageZip(parent, paperId) {
+  const packageRoot = path.join(parent, 'valid-analyzed-package')
+  const archivePath = path.join(parent, 'valid-analyzed-package.zip')
+  execFileSync(process.execPath, [
+    '--input-type=module',
+    '-e',
+    `const { makeReviewRoot, makeExternalAnalyzedPackage } = await import('./scripts/verify-universal-nck1-publish.mjs'); const fixture = makeReviewRoot(process.argv[1], process.argv[2]); makeExternalAnalyzedPackage(fixture.reviewRoot, process.argv[3])`,
+    path.join(parent, 'valid-package-fixture'),
+    paperId,
+    packageRoot,
+  ], {
+    cwd: path.resolve(import.meta.dirname, '..'),
+    env: { ...process.env, EQB_ANALYZED_PACKAGE_FIXTURE_ONLY: '1' },
+    stdio: 'ignore',
+  })
+  execFileSync('python3', [
+    '-B',
+    path.resolve(import.meta.dirname, 'import-pipeline/analyzed-package-archive.py'),
+    '--create-from',
+    packageRoot,
+    archivePath,
+  ])
+  return readFileSync(archivePath)
+}
+
 const store = createSourceIntakeStore({ dbPath, filesRoot, now: () => clock })
 const notifier = createSourceIntakeNotifier()
 const routes = createSourceIntakeRoutes({ getStore: () => store, notifier, agentToken })
@@ -250,6 +349,30 @@ const server = createServer(async (incoming, response) => {
       readJsonBody: readJsonRouteBody,
     },
   })
+  if (!handled
+    && incoming.method === 'GET'
+    && url.pathname.startsWith('/api/import-agent-reviews/papers/')) {
+    if (incoming.headers.authorization !== `Bearer ${agentToken}`) {
+      sendJson(response, 401, { error: 'agent_auth_required' })
+      return
+    }
+    const paperId = decodeURIComponent(url.pathname.split('/').at(-1))
+    const db = new DatabaseSync(dbPath, { readOnly: true })
+    const row = db.prepare(`
+      SELECT p.paper_id, p.latest_revision_id, r.state
+      FROM import_review_papers p
+      LEFT JOIN import_review_revisions r ON r.id = p.latest_revision_id
+      WHERE p.paper_id = ?
+    `).get(paperId)
+    db.close()
+    if (!row) sendJson(response, 404, { code: 'IMPORT_REVIEW_NOT_FOUND', error: 'Paper not found' })
+    else sendJson(response, 200, {
+      paperId: row.paper_id,
+      latestRevisionId: row.latest_revision_id,
+      latest: { id: row.latest_revision_id, paperId: row.paper_id, state: row.state },
+    })
+    return
+  }
   if (!handled) sendJson(response, 404, { error: 'not_found' })
 })
 
@@ -1188,6 +1311,220 @@ try {
     rmSync(audioInbox, { recursive: true, force: true })
     rmSync(audioPaperDirectory, { recursive: true, force: true })
   }
+
+  const packageIntake = store.createIntake({
+    paperName: 'Complete package transport fixture',
+    sources: [{ platform: 'other', sourceName: 'Official fixture sources' }],
+  }, 'owner')
+  const packagePath = path.join(tempRoot, 'complete.zip')
+  execFileSync('python3', ['-c',
+    'import sys, zipfile\nwith zipfile.ZipFile(sys.argv[1], "w") as z: z.writestr("package.json", "{}")',
+    packagePath,
+  ])
+  // Archive validation is not content approval. This fixture only exercises
+  // transport, frozen dispatch mode and preservation on failed replacement.
+  const packageBytes = readFileSync(packagePath)
+  const originalSource = await registerAndUpload(origin, packageIntake.id, 'question_source', 'questions.pdf', pdf)
+  const invalidPackage = await registerAndUpload(origin, packageIntake.id, 'analyzed_package', 'broken.zip', Buffer.from('not a ZIP'))
+  assert.equal(invalidPackage.uploaded.status, 400)
+  assert.equal(store.intakeDetail(packageIntake.id).files[0].id, originalSource.fileId)
+  const goodPackage = await registerAndUpload(origin, packageIntake.id, 'analyzed_package', 'complete.zip', packageBytes)
+  assert.equal(goodPackage.uploaded.status, 200)
+  assert.equal(goodPackage.uploaded.json.intake.state, 'ready_for_agent')
+  assert.deepEqual(goodPackage.uploaded.json.intake.files.map(({ role }) => role), ['analyzed_package'])
+  const repeatedPackage = await registerAndUpload(origin, packageIntake.id, 'analyzed_package', 'complete.zip', packageBytes)
+  assert.equal(repeatedPackage.fileId, goodPackage.fileId)
+  const packageSubmission = store.submitIntake(packageIntake.id, 'owner').submission
+  assert.equal(packageSubmission.snapshot.schemaVersion, 'source-intake-submission-v3')
+  assert.equal(packageSubmission.snapshot.mode, 'analyzed_package')
+  assert.equal(packageSubmission.snapshot.files.length, 1)
+  assert.equal(packageSubmission.snapshot.files[0].sha256, digest(packageBytes))
+  assert.throws(() => store.submitIntake(packageIntake.id, 'owner'), /required before submission/)
+  console.log('PASS analyzed package archive upload, replacement preservation, idempotent file registration and frozen dispatch')
+
+  const reviewFixtureDb = new DatabaseSync(dbPath)
+  reviewFixtureDb.exec(`
+    CREATE TABLE import_review_revisions (id TEXT PRIMARY KEY, state TEXT NOT NULL);
+    CREATE TABLE import_review_shipping_guards (id TEXT PRIMARY KEY, paper_id TEXT NOT NULL);
+    INSERT INTO import_review_revisions VALUES ('rev-correction-base', 'changes_requested');
+  `)
+  reviewFixtureDb.prepare(`
+    INSERT INTO import_review_papers (paper_id, paper_name, latest_revision_id, created_at, updated_at)
+    VALUES (?, ?, ?, ?, ?)
+  `).run('paper-2027-chengdu-opening', 'Correction target fixture', 'rev-correction-base',
+    clock.toISOString(), clock.toISOString())
+  reviewFixtureDb.close()
+  const correction = await request(origin, '/api/source-intakes', {
+    method: 'POST', role: 'owner', body: { packageRevisionOf: handedOff.json.intake.id },
+  })
+  assert.equal(correction.status, 201, JSON.stringify(correction.json))
+  assert.deepEqual(correction.json.intake.packageTarget, {
+    paperId: 'paper-2027-chengdu-opening', revisionId: 'rev-correction-base',
+  })
+  assert.equal(correction.json.intake.mode, 'new_paper', 'correction does not impersonate a listening supplement')
+  const correctionId = correction.json.intake.id
+  const wrongCorrectionRole = await request(origin, `/api/source-intakes/${correctionId}/files`, {
+    method: 'POST', role: 'owner', body: {
+      role: 'question_source', fileName: 'questions.pdf', mediaType: 'application/pdf',
+      sha256: digest(pdf), byteLength: pdf.length,
+    },
+  })
+  assert.equal(wrongCorrectionRole.status, 400)
+  await registerAndUpload(origin, correctionId, 'analyzed_package', 'correction.zip', packageBytes)
+  const staleDb = new DatabaseSync(dbPath)
+  staleDb.exec("INSERT INTO import_review_revisions VALUES ('rev-newer', 'awaiting_review'); UPDATE import_review_papers SET latest_revision_id = 'rev-newer' WHERE paper_id = 'paper-2027-chengdu-opening'")
+  staleDb.close()
+  const staleCorrection = await request(origin, `/api/source-intakes/${correctionId}/submit`, { method: 'POST', role: 'owner' })
+  assert.equal(staleCorrection.status, 409)
+  assert.equal(staleCorrection.json.code, 'ANALYZED_PACKAGE_REVISION_STALE')
+  const validPackageBytes = makeValidAnalyzedPackageZip(
+    tempRoot,
+    'paper-2027-chengdu-opening',
+  )
+  const freshCorrection = store.createIntake({ packageRevisionOf: handedOff.json.intake.id }, 'owner')
+  await registerAndUpload(origin, freshCorrection.id, 'analyzed_package', 'correction.zip', validPackageBytes)
+  const correctionSubmission = store.submitIntake(freshCorrection.id, 'owner').submission
+  assert.equal(correctionSubmission.snapshot.targetPaperId, 'paper-2027-chengdu-opening')
+  assert.equal(correctionSubmission.snapshot.baseRevisionId, 'rev-newer')
+  assert.equal(correctionSubmission.snapshot.mode, 'analyzed_package')
+  assert.equal(store.intakeDetail(handedOff.json.intake.id).currentSubmission.id, resubmitted.json.submission.id,
+    'correction leaves the original source submission untouched')
+  console.log('PASS corrected package targets a frozen Review revision and rejects stale targets before queueing')
+
+  const correctionPaperDirectory = path.resolve(
+    import.meta.dirname,
+    'import-pipeline/papers/paper-2027-chengdu-opening',
+  )
+  const correctionInbox = path.resolve(
+    import.meta.dirname,
+    `import-pipeline/source-intake-inbox/${correctionSubmission.id}`,
+  )
+  const oldWorkspaceBytes = Buffer.from('recoverable previous workspace bytes')
+  mkdirSync(correctionPaperDirectory, { recursive: true })
+  writeFileSync(path.join(correctionPaperDirectory, 'previous.txt'), oldWorkspaceBytes)
+  mkdirSync(path.join(correctionPaperDirectory, 'signals'), { recursive: true })
+  writeFileSync(
+    path.join(correctionPaperDirectory, 'signals/source-intake-initialization.json'),
+    `${JSON.stringify({
+      schemaVersion: 'source-intake-initialization-v2',
+      submissionId: resubmitted.json.submission.id,
+      submissionDigest: resubmitted.json.submission.submissionDigest,
+      paperId: 'paper-2027-chengdu-opening',
+      ampThreadId: orbThreadId,
+    })}\n`,
+  )
+  try {
+    const invalidWorkspaceCorrection = store.createIntake({
+      packageRevisionOf: handedOff.json.intake.id,
+    }, 'owner')
+    await registerAndUpload(
+      origin,
+      invalidWorkspaceCorrection.id,
+      'analyzed_package',
+      'invalid-content.zip',
+      packageBytes,
+    )
+    const invalidWorkspaceSubmission = store.submitIntake(
+      invalidWorkspaceCorrection.id,
+      'owner',
+    ).submission
+    const invalidInbox = path.resolve(
+      import.meta.dirname,
+      `import-pipeline/source-intake-inbox/${invalidWorkspaceSubmission.id}`,
+    )
+    try {
+      await runSourceIntakeCli(origin, ['claim', invalidWorkspaceSubmission.id])
+      await runSourceIntakeCli(origin, ['download', invalidWorkspaceSubmission.id])
+      await assert.rejects(
+        runSourceIntakeCli(origin, [
+          'init', invalidWorkspaceSubmission.id,
+          '--paper-id', 'paper-2027-chengdu-opening',
+        ]),
+        /ANALYZED_PACKAGE_INVALID|Required|schema|package/i,
+      )
+      assert.deepEqual(
+        readFileSync(path.join(correctionPaperDirectory, 'previous.txt')),
+        oldWorkspaceBytes,
+      )
+    } finally {
+      rmSync(invalidInbox, { recursive: true, force: true })
+    }
+
+    await runSourceIntakeCli(origin, ['claim', correctionSubmission.id])
+    await runSourceIntakeCli(origin, ['download', correctionSubmission.id])
+    const initialized = JSON.parse(await runSourceIntakeCli(origin, [
+      'init', correctionSubmission.id, '--paper-id', 'paper-2027-chengdu-opening',
+    ]))
+    assert.equal(initialized.state, 'initialized_locally')
+    assert.equal(initialized.idempotent, undefined)
+    const backupFile = path.join(correctionInbox, 'previous-workspace/previous.txt')
+    assert.deepEqual(readFileSync(backupFile), oldWorkspaceBytes)
+    const receiptPath = path.join(
+      correctionPaperDirectory,
+      'signals/source-intake-initialization.json',
+    )
+    const receipt = JSON.parse(readFileSync(receiptPath, 'utf8'))
+    assert.equal(receipt.baseRevisionId, 'rev-newer')
+    assert.equal(receipt.preparedIdentity.archiveSha256, digest(validPackageBytes))
+    assert.equal(receipt.previousWorkspaceBackup, path.dirname(backupFile))
+    const repeatedInit = JSON.parse(await runSourceIntakeCli(origin, [
+      'init', correctionSubmission.id, '--paper-id', 'paper-2027-chengdu-opening',
+    ]))
+    assert.equal(repeatedInit.idempotent, true)
+    assert.deepEqual(readFileSync(backupFile), oldWorkspaceBytes)
+
+    const analysisPath = path.join(correctionPaperDirectory, 'analysis-reading-a.json')
+    const analysisBytes = readFileSync(analysisPath)
+
+    const staleInitCorrection = store.createIntake({
+      packageRevisionOf: handedOff.json.intake.id,
+    }, 'owner')
+    await registerAndUpload(
+      origin,
+      staleInitCorrection.id,
+      'analyzed_package',
+      'stale.zip',
+      validPackageBytes,
+    )
+    const staleInitSubmission = store.submitIntake(staleInitCorrection.id, 'owner').submission
+    const staleInitInbox = path.resolve(
+      import.meta.dirname,
+      `import-pipeline/source-intake-inbox/${staleInitSubmission.id}`,
+    )
+    await runSourceIntakeCli(origin, ['claim', staleInitSubmission.id])
+    await runSourceIntakeCli(origin, ['download', staleInitSubmission.id])
+    const conflictDb = new DatabaseSync(dbPath)
+    conflictDb.exec("INSERT INTO import_review_revisions VALUES ('rev-after-init', 'awaiting_review'); UPDATE import_review_papers SET latest_revision_id = 'rev-after-init' WHERE paper_id = 'paper-2027-chengdu-opening'")
+    conflictDb.close()
+    await assert.rejects(
+      runSourceIntakeCli(origin, [
+        'init', staleInitSubmission.id, '--paper-id', 'paper-2027-chengdu-opening',
+      ]),
+      /Review revision changed/,
+    )
+    assert.deepEqual(readFileSync(analysisPath), analysisBytes)
+    rmSync(staleInitInbox, { recursive: true, force: true })
+
+    writeFileSync(analysisPath, Buffer.concat([analysisBytes, Buffer.from(' ')]))
+    await assert.rejects(
+      runSourceIntakeCli(origin, [
+        'handoff', correctionSubmission.id, '--paper-id', 'paper-2027-chengdu-opening',
+      ]),
+      /changed|mismatch|identity|sealed digest/i,
+    )
+    writeFileSync(analysisPath, analysisBytes)
+
+    await assert.rejects(
+      runSourceIntakeCli(origin, [
+        'handoff', correctionSubmission.id, '--paper-id', 'paper-2027-chengdu-opening',
+      ]),
+      /ANALYZED_PACKAGE_REVISION_STALE/,
+    )
+  } finally {
+    rmSync(correctionInbox, { recursive: true, force: true })
+    rmSync(correctionPaperDirectory, { recursive: true, force: true })
+  }
+  console.log('PASS valid correction stages, backs up, installs idempotently, binds ZIP/projection identity, and rejects substituted or stale handoff')
 
   const storedQuestion = store.fileForDownload
   assert.equal(typeof storedQuestion, 'function')

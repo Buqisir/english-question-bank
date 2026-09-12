@@ -19,6 +19,10 @@ import { analyzeClozeImportCandidate, buildClozeAnalysisMessages, validateClozeS
 import { buildPaperImportAiPackageFiles } from '../server/paper-import-ai/packageBuilder.mjs'
 import { validatePaperImportPackage, PAPER_IMPORT_SCHEMA_VERSIONS } from '../server/paper-import/validator.mjs'
 import { writePaperImportVersion, swapPaperImportLatest } from '../server/paper-import/storage.mjs'
+import {
+  addObjectiveTeachingFixtureParagraphs,
+  buildObjectiveTeachingFixture,
+} from './lib/objective-teaching-fixture.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const repoRoot = path.resolve(__dirname, '..')
@@ -108,7 +112,7 @@ function assertPromptContract() {
 
 function clFixtureInput() {
   const questionNos = [41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55]
-  return {
+  const input = {
     paper: {
       paperId: 'paper-i8-cloze-fixture',
       sourceFilename: 'i8-cloze.docx',
@@ -140,6 +144,8 @@ function clFixtureInput() {
     },
     providerId: 'deepseek-v4-pro',
   }
+  addObjectiveTeachingFixtureParagraphs(input.group)
+  return input
 }
 
 function validClAnalysis(input = clFixtureInput()) {
@@ -186,9 +192,8 @@ function validClAnalysis(input = clFixtureInput()) {
     },
     groups: {
       [group.groupId]: {
-        overview: '一个男孩专心读书、不应母亲的记叙文。',
-        affectiveArc: '平静专注，情感平稳。',
-        similaritySummary: '男孩专心读书没有回应母亲，事情在误会中继续发展。',
+        overview: '男孩因专心读书没有回应母亲，母亲误以为他没有听见，事情在双方误会中继续发展。',
+        ...buildObjectiveTeachingFixture(group),
       },
     },
     blanks,
@@ -214,11 +219,11 @@ async function assertAnalysisValidation() {
   })
   assert('valid cloze analysis passes', result.analysis.schemaVersion === 'cloze-analysis-v1' && result.requestId === 'i8-verify')
 
-  await assertRejects('multi-line cloze similaritySummary blocks', () => {
+  await assertRejects('missing shared cloze overview blocks', () => {
     const bad = validClAnalysis(input)
-    bad.groups[input.group.groupId].similaritySummary = '先发生一件事。\n后来又发生转变。'
+    delete bad.groups[input.group.groupId].overview
     return analyzeClozeImportCandidate(input, { providerCallers: { deepseek: stubProvider(bad) } })
-  }, /similaritySummary 必须是一句话/)
+  }, /groups\.overview 不能为空/)
 
   await assertRejects('cloze blankId must remain source-authored', () => {
     const bad = validClAnalysis(input)
@@ -257,13 +262,15 @@ async function assertAnalysisValidation() {
     return analyzeClozeImportCandidate(input, { providerCallers: { deepseek: stubProvider(bad) } })
   }, /blanks/)
 
-  // --- Missing required field (teachingNote) ---
-  await assertRejects('missing teachingNote blocks cloze', () => {
-    const bad = validClAnalysis(input)
-    const firstKey = Object.keys(bad.blanks)[0]
-    delete bad.blanks[firstKey].teachingNote
-    return analyzeClozeImportCandidate(input, { providerCallers: { deepseek: stubProvider(bad) } })
-  }, /teachingNote/)
+  // Retired notes are not required; actual reasoning and evidence still are.
+  const withoutNotes = validClAnalysis(input)
+  for (const blank of Object.values(withoutNotes.blanks)) delete blank.teachingNote
+  const admittedWithoutNotes = await analyzeClozeImportCandidate(input, {
+    providerCallers: { deepseek: stubProvider(withoutNotes) },
+  })
+  assert('cloze accepts complete reasoning without teachingNote',
+    Object.values(admittedWithoutNotes.analysis.blanks).every((blank) =>
+      !Object.hasOwn(blank, 'teachingNote') && blank.correctFit.reason && blank.evidence.length > 0))
 
   // --- Missing collocation-partner evidence ---
   await assertRejects('missing collocation-partner blocks cloze', () => {
@@ -713,6 +720,17 @@ async function assertPackageBuilder() {
   const clAnalysis = JSON.parse(clFile.buffer.toString())
   assert('I8 cloze analysis has correct schemaVersion', clAnalysis.schemaVersion === 'cloze-analysis-v1')
   assert('I8 cloze analysis has 15 blanks', Object.keys(clAnalysis.blanks).length === 15)
+  const importMeta = JSON.parse(files.find((file) => file.fileName === 'import-meta.json').buffer)
+  assert(
+    'I8 import metadata reuses cloze overview as the list/search summary',
+    importMeta.groups[parseResult.clozeGroup.groupId].summary
+      === clAnalysis.groups[parseResult.clozeGroup.groupId].overview,
+  )
+  assert(
+    'I8 import metadata reuses grammar overview as the list/search summary',
+    importMeta.groups[parseResult.grammarFillGroup.groupId].summary
+      === grammarFillAnalysis.groups[parseResult.grammarFillGroup.groupId].overview,
+  )
 
   // C7 validator round-trip.
   const validation = validatePaperImportPackage(files)

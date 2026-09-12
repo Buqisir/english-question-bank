@@ -5,7 +5,7 @@
  *
  * application (I18):
  *   - 范文 / Model Answer block: full model answer with line breaks preserved.
- *   - 亮点表达 / 高分句块 list: each highlight as a card with text + note.
+ *   - Historical selected expressions are retired from active display.
  *
  * continuation (I19, historical assets only):
  *   - 范文 / Model Answer block: two paragraphs with line breaks preserved.
@@ -24,15 +24,10 @@ import type { ReactNode } from 'react'
 import type {
   ApplicationWritingAnalysis,
   ContinuationWritingAnalysisLegacy,
-  HighlightExpression,
 } from '../../domain/paperAsset.ts'
 
-type LegacyApplicationWritingAnalysis = ApplicationWritingAnalysis & {
-  highlightExpressions: HighlightExpression[]
-}
-
 export type WritingAnalysisPanelProps = {
-  analysis: LegacyApplicationWritingAnalysis | ContinuationWritingAnalysisLegacy
+  analysis: ApplicationWritingAnalysis | ContinuationWritingAnalysisLegacy
 }
 
 export function WritingAnalysisPanel({ analysis }: WritingAnalysisPanelProps): ReactNode {
@@ -85,7 +80,8 @@ export function WritingAnalysisPanel({ analysis }: WritingAnalysisPanelProps): R
     )
   }
 
-  // application branch — untouched from I18
+  // Application keeps historical data readable but does not revive retired
+  // selected-expression teaching content.
   return (
     <div className="pi-writing-panel">
       {/* 范文 / Model Answer */}
@@ -100,20 +96,6 @@ export function WritingAnalysisPanel({ analysis }: WritingAnalysisPanelProps): R
         </div>
       </div>
 
-      {/* 亮点表达 */}
-      {(analysis.highlightExpressions?.length ?? 0) > 0 && (
-        <div className="pi-writing-section">
-          <h4 className="pi-writing-section-title">亮点表达 / 高分句块</h4>
-          <ul className="pi-writing-highlights">
-            {analysis.highlightExpressions.map((expr, i) => (
-              <li key={i} className="pi-writing-highlight-item">
-                <p className="pi-writing-highlight-text">{expr.text}</p>
-                <p className="pi-writing-highlight-note">{expr.note}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
     </div>
   )
 }

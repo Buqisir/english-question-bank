@@ -297,6 +297,32 @@ export function extractDocxDocumentText(docxBytes) {
   return extractXmlText(xml)
 }
 
+// Word often draws a numbered blank with underlined spaces/runs rather than
+// literal underscores. Keep raw text intact and derive an equivalent blank
+// spelling only when the runs close the entire paragraph exactly.
+function textWithNumberedBlanks(paragraphXml) {
+  const text = extractXmlText(paragraphXml).replace(/\n$/u, '')
+  const runs = [...paragraphXml.matchAll(/<w:r(?:\s[^>]*)?>[\s\S]*?<\/w:r>/gu)]
+    .map(([xml]) => ({
+      text: extractXmlText(xml),
+      underlined: /<w:u\b/u.test(xml)
+        && !/<w:u\b[^>]*w:val=["'](?:none|0|false)["']/u.test(xml),
+    }))
+  if (runs.map((run) => run.text).join('') !== text) return text
+  const groups = []
+  for (const run of runs) {
+    if (groups.at(-1)?.underlined === run.underlined) groups.at(-1).text += run.text
+    else groups.push({ ...run })
+  }
+  return groups.map((run) => {
+    // Bare underlined numerals may be emphasis, not answer lines. Require
+    // actual underlined space padding (on either side, across adjacent runs).
+    const match = run.underlined && /\p{Zs}/u.test(run.text)
+      && /^\p{Zs}*(3[6-9]|[45]\d|6[0-5])\p{Zs}*$/u.exec(run.text)
+    return match ? `__${match[1]}__` : run.text
+  }).join('')
+}
+
 /**
  * Extract stable, source-ordered w:p identities for materialization locator
  * verification. Empty paragraphs retain their source index so selectors and
@@ -311,6 +337,7 @@ export function extractDocxDocumentParagraphs(docxBytes) {
     .map((match, index) => ({
       sourceIndex: index + 1,
       text: extractXmlText(match[0]).replace(/\n$/u, ''),
+      textWithNumberedBlanks: textWithNumberedBlanks(match[0]),
     }))
 }
 
@@ -343,6 +370,7 @@ export function extractDocxDocumentStructure(docxBytes) {
         kind: 'paragraph',
         sourceIndex,
         text: extractXmlText(match[0]).replace(/\n$/u, ''),
+        textWithNumberedBlanks: textWithNumberedBlanks(match[0]),
         containsDrawing: /<(?:w:drawing|w:pict|v:shape)\b/u.test(match[0]),
         embeddedMedia: embeddedParagraphMedia(
           match[0],
@@ -385,6 +413,11 @@ export function extractDocxDocumentStructure(docxBytes) {
             .filter((text) => text.length > 0)
             .join('\n'),
           sourceParagraphIndexes,
+          sourceParagraphs: cellParagraphs.map((xml, index) => ({
+            kind: 'paragraph',
+            sourceIndex: sourceParagraphIndexes[index],
+            text: extractXmlText(xml).replace(/\n$/u, ''),
+          })),
           columnSpan: gridSpan,
           verticalMerge: mergeValue,
           containsDrawing: /<(?:w:drawing|w:pict|v:shape)\b/u.test(cellXml),

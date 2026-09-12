@@ -10,6 +10,10 @@ import { parseReadingCandidatesFromText, parseReadingDocxBuffer } from '../serve
 import { analyzeSevenChoicesImportCandidate, buildSevenChoicesAnalysisMessages } from '../server/paper-import-ai/analyzeSevenChoices.mjs'
 import { buildPaperImportAiPackageFiles } from '../server/paper-import-ai/packageBuilder.mjs'
 import { validatePaperImportPackage } from '../server/paper-import/validator.mjs'
+import {
+  addObjectiveTeachingFixtureParagraphs,
+  buildObjectiveTeachingFixture,
+} from './lib/objective-teaching-fixture.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const repoRoot = path.resolve(__dirname, '..')
@@ -166,7 +170,7 @@ G. Option G text here.
 // ---- Analysis builder ----
 
 function scFixtureInput() {
-  return {
+  const input = {
     paper: {
       paperId: 'paper-i2-analysis-fixture',
       sourceFilename: 'i2-analysis.docx',
@@ -201,6 +205,8 @@ function scFixtureInput() {
     },
     providerId: 'deepseek-v4-pro',
   }
+  addObjectiveTeachingFixtureParagraphs(input.group)
+  return input
 }
 
 function validScAnalysis(input = scFixtureInput()) {
@@ -220,6 +226,7 @@ function validScAnalysis(input = scFixtureInput()) {
       [group.groupId]: {
         overview: '跑步新手常见错误及建议。',
         discourseStructure: { summary: '介绍五个跑步误区。', units: [] },
+        ...buildObjectiveTeachingFixture(group),
       },
     },
     questions: Object.fromEntries(
@@ -280,6 +287,21 @@ async function assertAnalysisValidation() {
     requestId: 'i2-verify',
   })
   assert('valid seven-choices analysis passes', result.analysis.schemaVersion === 'seven-choices-analysis-v1' && result.requestId === 'i2-verify')
+
+  const withoutNotes = validScAnalysis(input)
+  for (const item of Object.values(withoutNotes.questions)) delete item.teachingNote
+  const admittedWithoutNotes = await analyzeSevenChoicesImportCandidate(input, {
+    providerCallers: { deepseek: stubProvider(withoutNotes) },
+  })
+  assert('seven choices accepts complete reasoning without teachingNote',
+    Object.values(admittedWithoutNotes.analysis.questions).every((item) =>
+      !Object.hasOwn(item, 'teachingNote') && item.optionFit.fitSummary && item.mechanismSignals.length >= 2))
+
+  await assertRejects('a legacy teachingNote cannot replace the seven-choices reasoning', () => {
+    const bad = validScAnalysis(input)
+    bad.questions[input.group.questions[0].id].optionFit.fitSummary = '   '
+    return analyzeSevenChoicesImportCandidate(input, { providerCallers: { deepseek: stubProvider(bad) } })
+  }, /optionFit\.fitSummary/)
 
   for (const field of ['positionFacet', 'roleFacet', 'primaryMechanismFacet']) {
     await assertRejects(`uncontrolled ${field} fails for seven-choices`, () => {

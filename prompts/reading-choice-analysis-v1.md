@@ -180,19 +180,32 @@ For each reading group:
 ```json
 "groups": {
   "{groupId}": {
-    "overview": "Brief Chinese overview of the passage topic and structure",
+    "overview": "50–80字软目标的中文内容简介，概括主题及核心事件或信息",
     "fullTranslationZh": "Accurate full Chinese translation of the passage in source order",
     "selectedLongSentences": [
       {
+        "sentenceId": "sentence-{groupId}-1",
         "paragraphId": "para-...",
         "sourceText": "One exact sentence or substring from that paragraph",
         "displayText": "The same text, with authoritative answers inserted if it contains gaps",
         "relatedQuestionIds": ["q-..."],
         "translationZh": "Natural Chinese translation",
         "analysisZh": "Chinese explanation of the main trunk, modifiers, and relations",
-        "underlineTexts": ["1–3 exact, unique substrings of displayText"]
+        "underlineRanges": [{"start": 0, "end": 3, "quote": "The"}]
       }
     ],
+    "teachingContent": {
+      "schemaVersion": "objective-teaching-content-v1",
+      "sourceTextId": "source-{groupId}",
+      "sourceAssetVersion": 1,
+      "translation": {
+        "textId": "translation-{groupId}",
+        "legacyField": "fullTranslationZh",
+        "paragraphs": [{"paragraphId":"zh-{groupId}-p1","sourceParagraphIds":["para-..."],"start":0,"end":8,"quote":"全文译文精确切片"}]
+      },
+      "completedSourceTexts": [],
+      "annotations": []
+    },
     "discourseStructure": {
       "summary": "Chinese summary of discourse flow",
       "paragraphs": [
@@ -210,6 +223,10 @@ For each reading group:
 - `paragraphId` must match existing content paragraph IDs exactly
 - AI must NOT create new paragraphId values
 - AI must NOT change paragraph text
+- `overview` is the one canonical introduction shared by teaching, list/search
+  and future similarity consumers. Aim for 50–80 Chinese characters without
+  padding simple texts. Cover the subject and core event or information; do not
+  duplicate paragraph summaries or `discourseStructure.summary`.
 - `fullTranslationZh` is student-visible. Translate the complete textual passage
   in source order, preserving paragraph breaks and any textual title or caption.
   Do not omit sentences, add explanations, or append vocabulary notes. Translate
@@ -223,9 +240,26 @@ For each reading group:
   and every `relatedQuestionIds` value must belong to this group. Explain the
   sentence as a teacher would: find the main trunk first, then attach clauses,
   non-finite phrases, comparisons, or logical relations. Do not just name grammar.
-- `underlineTexts` contains 1–3 short, non-overlapping substrings that each occur
-  exactly once in `displayText`. Underline only the words that reveal the trunk or
-  a decisive relation; never underline the whole sentence for decoration.
+- Give every selected sentence a stable `sentenceId`. Complete `teachingContent`
+  as the closed group-local annotation annex: translation paragraphs are exact
+  Unicode-code-point slices of the single `fullTranslationZh` value (never a
+  second translation copy), each explicitly linked to existing source paragraph
+  IDs. Add `answer-evidence` annotations for textual question evidence and
+  `sentence-structure` annotations covering every selected sentence. Each range
+  is `{textId,paragraphId,start,end,quote}` and `quote` must equal that exact
+  code-point slice. Repeated text must use the intended occurrence's offsets;
+  many questions and overlapping ranges are valid. Source answer evidence must
+  reference original passage text. Do not derive offsets by first substring.
+  Figure/table evidence keeps its existing object reference; never invent text
+  offsets for it. Non-key difficult sentences use empty `relatedQuestionIds` and
+  empty sentence-structure `questionIds`, rather than inventing a question link.
+- `underlineRanges` locates the words that reveal the trunk or a decisive relation
+  in `displayText`. Use Unicode code-point offsets, start inclusive/end exclusive,
+  and the exact `quote`; do not trim or normalize before counting. Usually 1–3
+  short ranges suffice. Repeated phrases and overlaps are valid when explicitly
+  located. Never underline the whole sentence for decoration. The numbers above
+  illustrate the encoding only; calculate them for your actual text. Do not emit
+  the historical `underlineTexts` field alongside the ranges.
 
 ---
 

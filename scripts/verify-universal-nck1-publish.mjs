@@ -18,12 +18,16 @@ import { DatabaseSync } from 'node:sqlite'
 
 import {
   createImportReviewStore,
+  externalListeningReviewProofIdentity,
   reviewBundleDigest,
 } from '../server/import-review/importReviewStore.mjs'
 import { createImportReviewRoutes } from '../server/import-review/importReviewRoutes.mjs'
 import { createSinglePaperPromotionService } from '../server/import-review/singlePaperPromotion.mjs'
+import { NCK1_STAGED_ANALYSIS_FILES } from '../server/import-review/nck1AnalysisProjection.mjs'
 import {
+  buildNck1AnalyzedPackageReviewSourceManifest,
   buildNck1ReviewProjection,
+  loadNck1ReviewSource,
   reviewBundleFilePaths,
   resolveReviewFile,
 } from '../server/import-review/revisionProjection.mjs'
@@ -35,7 +39,16 @@ import {
 } from '../server/paper-import/publisher.mjs'
 import { sendPaperAssetStatic } from '../server/paper-import/paperAssetStatic.mjs'
 import { assertListeningAudioManifest, assertListeningAudioSource, LISTENING_AUDIO_PATHS } from '../server/paper-import/listeningAudioEvidence.mjs'
+import { prepareNck1AnalyzedPackageReview } from '../server/paper-import/analyzedPackage.mjs'
+import { loadAnalyzedPackageFiles } from '../server/paper-import/analyzedPackage.mjs'
+import {
+  compareAnalyzedPackageSemantics,
+  convertRepresentableNck1ReviewSourceToAnalyzedPackageFiles,
+  exportAnalyzedPackageRevision,
+} from '../server/paper-import/analyzedPackageExport.mjs'
+import { readAnalyzedPackageArchive } from '../server/source-intake/analyzedPackageArchive.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
+import { buildCompanionAnalysisHtml } from '../server/exports/companionAnalysisRenderer.mjs'
 import { renderPaginatedPaper } from '../server/draft-paper/paginationRenderer.mjs'
 import { closeChromiumPool } from '../server/draft-paper/chromiumPool.mjs'
 import { assertPaperFonts } from './lib/assert-paper-fonts.mjs'
@@ -43,12 +56,17 @@ import { assertSharedPaperLayout } from './lib/assert-shared-paper-layout.mjs'
 import { readJsonRouteBody, runRoutes } from '../server/router/index.mjs'
 import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
+import {
+  nck1MaterializationCandidateAuthorityRef,
+  resolveCanonicalAuthority,
+} from '../shared/paper-canonical/authority.mjs'
 import { canonicalConsumptionPrintPayload } from './import-pipeline/canonical-consumption-print-payload.mjs'
 import {
   finalizeListeningAudio,
   stageListeningAudio,
 } from './import-pipeline/listening-audio.mjs'
 import { makeFixture } from './verify-nck1-source-materialization.mjs'
+import { buildObjectiveTeachingFixture } from './lib/objective-teaching-fixture.mjs'
 
 const root = path.resolve(import.meta.dirname, '..')
 const paperId = 'paper-mock-contract-2026-m1'
@@ -73,7 +91,7 @@ function continuationAnalysis() {
   const firstStarter = grounded('Paragraph one must start from its supplied sentence.', 'paragraph1Starter', 'Paragraph one starter.')
   const secondStarter = grounded('Paragraph two must start from its supplied sentence.', 'paragraph2Starter', 'Paragraph two starter.')
   return {
-    schemaVersion: 'continuation-analysis-v1',
+    schemaVersion: 'continuation-analysis-v2',
     storyUnderstanding: {
       centralSituation: grounded('The source establishes the story situation.'),
       sourceEndState: grounded('The source ends with an unresolved situation.'),
@@ -125,88 +143,88 @@ function continuationAnalysis() {
       ],
       closureRequirements: [constraint('close-source', 'The ending must resolve the source problem.')],
     },
-    narrativeDevelopment: {
-      coreTension: grounded('The source problem drives the continuation.'),
-      drivingMotivations: [grounded('The protagonist wants a resolution.')],
-      requiredTurningPoints: [firstStarter, secondStarter],
-      eventChain: [{
-        cause: 'The source problem remains unresolved.',
-        event: 'The protagonist takes a plausible action.',
-        immediateEffect: 'The story moves toward resolution.',
-        evidence: [evidence('material', 'Story material')],
-      }],
-      emotionLogic: [{
-        trigger: 'The unresolved situation demands action.',
-        internalResponse: 'The protagonist decides to respond.',
-        visibleAction: 'The protagonist takes the next step.',
-      }],
-      relationshipMovement: [],
-      interactionMoves: [],
-      cluePayoffs: [{
-        clue: evidence('material', 'Story material'),
-        payoff: 'The source situation receives a coherent resolution.',
-      }],
-      endingState: 'The source problem is resolved without contradiction.',
-    },
-    languageAlignment: {
-      personAndPerspective: 'Preserve the source narrative perspective.',
-      baseTense: 'Use the simple past for main events.',
-      licensedTenseShifts: [],
-      narrativeDistanceAndRegister: 'Keep a clear narrative register.',
-      sourceStyleContinuity: 'Continue the concise source style.',
-      cohesionPlan: [{ relation: 'sequence', use: 'Connect the two supplied paragraph starters.' }],
-      dialoguePolicy: 'Use dialogue only when it advances the action.',
-      descriptionPriorities: ['Concrete actions'],
-      functionLedLanguage: ['Action verbs'],
-      languageRisks: ['Contradicting the supplied starters'],
-    },
-    paragraphBlueprint: {
+    developmentPlan: {
       selectedRoute: 'Develop the source problem into a coherent resolution.',
       routeRationale: [firstStarter, secondStarter],
       paragraphs: [
         {
           paragraphIndex: 1,
-          narrativeFunction: 'Develop the first required move.',
-          eventMoves: ['Continue from the first starter.'],
-          characterActionsAndReactions: ['The protagonist responds plausibly.'],
-          evidenceToReuse: [evidence('paragraph1Starter', 'Paragraph one starter.')],
-          stateChange: 'unresolved situation to progress',
-          bridgeToNext: 'Reach the second supplied starter.',
+          cause: 'The source problem remains unresolved.',
+          action: 'The protagonist continues from the first starter.',
+          result: 'The unresolved situation moves toward progress.',
+          sourceEvidence: [evidence('paragraph1Starter', 'Paragraph one starter.')],
+          cluePayoffs: [],
+          bridge: 'Reach the second supplied starter.',
+          emotionChanges: [],
+          relationshipChanges: [],
+          languageReminder: 'Preserve the concise source perspective and simple past.',
         },
         {
           paragraphIndex: 2,
-          narrativeFunction: 'Resolve the source problem.',
-          eventMoves: ['Continue from the second starter.'],
-          characterActionsAndReactions: ['The protagonist completes the response.'],
-          evidenceToReuse: [evidence('paragraph2Starter', 'Paragraph two starter.')],
-          stateChange: 'progress to resolution',
-          bridgeToNext: 'Close without a new unresolved event.',
+          cause: 'The first paragraph reaches the second starter.',
+          action: 'The protagonist completes the response.',
+          result: 'The source problem is resolved without contradiction.',
+          sourceEvidence: [evidence('paragraph2Starter', 'Paragraph two starter.')],
+          cluePayoffs: [{
+            clue: evidence('material', 'Story material'),
+            payoff: 'The source situation receives a coherent resolution.',
+          }],
+          ending: 'Close without a new unresolved event.',
+          emotionChanges: [],
+          relationshipChanges: [],
         },
       ],
-      finalEffect: 'The ending follows from and resolves the source situation.',
-      validAlternativeRoutes: [],
       qualityRisks: ['Skipping a supplied starter'],
     },
   }
 }
 
-function selectedLongSentence(group) {
-  const sourceText = `${group.slotId} source text`
-  return [{
-    paragraphId: `block:${group.slotId.replaceAll('.', '-').replaceAll(' ', '-')}`,
-    sourceText,
-    displayText: sourceText,
-    relatedQuestionIds: [group.questions[0].questionId],
-    translationZh: '用于验证的长难句译文。',
-    analysisZh: '先找句子主干，再把修饰成分接回主干。',
-    underlineTexts: [`${group.slotId} source`],
-  }]
+function objectiveFixtureGroup(group, answerByQuestionId) {
+  const questionNoByBlankId = new Map(group.questions
+    .filter(({ blankId }) => blankId)
+    .map(({ blankId, canonicalNumber }) => [blankId, canonicalNumber]))
+  const paragraphs = group.blocks
+    .filter(({ kind }) => kind === 'paragraph')
+    .map((block) => {
+      let text = ''
+      for (const [index, item] of block.content.entries()) {
+        if (item.kind === 'text') {
+          text += item.text
+          continue
+        }
+        const marker = `__${questionNoByBlankId.get(item.blankId)}__`
+        if (group.family !== 'grammar-fill') {
+          text += marker
+          continue
+        }
+        const next = block.content[index + 1]
+        const prefix = /[\p{L}\p{N}]$/u.test(text) ? ' ' : ''
+        const suffix = next?.kind === 'text' && /^[\p{L}\p{N}(]/u.test(next.text) ? ' ' : ''
+        text += `${prefix}${marker}${suffix}`
+      }
+      return { id: block.blockId, text }
+    })
+  return {
+    groupId: group.groupId,
+    paragraphs,
+    questions: group.questions.map((question) => ({
+      id: question.questionId,
+      stem: String(question.canonicalNumber),
+      answerKey: answerByQuestionId.get(question.questionId),
+      blankId: question.blankId,
+      prompt: question.prompt,
+      options: Object.fromEntries(question.options.map(({ label, text }) => [label, text])),
+    })),
+    optionBank: group.optionBank,
+  }
 }
 
 function writeStagedAnalyses(reviewRoot, materialization) {
   const bySlot = new Map(materialization.groups.map((group) => [group.slotId, group]))
+  const answerByQuestionId = new Map(materialization.answers.map(({ questionId, value }) => [questionId, value]))
   for (const letter of ['a', 'b', 'c', 'd']) {
     const group = bySlot.get(`reading.${letter}`)
+    const teaching = buildObjectiveTeachingFixture(objectiveFixtureGroup(group, answerByQuestionId))
     writeJson(path.join(reviewRoot, `analysis-reading-${letter}.json`), {
       schemaVersion: 'reading-choice-analysis-v1',
       paperId: materialization.paperId,
@@ -214,9 +232,8 @@ function writeStagedAnalyses(reviewRoot, materialization) {
       targetGroups: [group.groupId],
       groups: {
         [group.groupId]: {
-          summary: `Reading ${letter.toUpperCase()} analysis`,
-          fullTranslationZh: `阅读 ${letter.toUpperCase()} 全文译文。`,
-          selectedLongSentences: selectedLongSentence(group),
+          overview: `Reading ${letter.toUpperCase()} analysis`,
+          ...teaching,
         },
       },
       questions: Object.fromEntries(group.questions.map((question) => [question.questionId, {
@@ -226,9 +243,9 @@ function writeStagedAnalyses(reviewRoot, materialization) {
         optionAnalysis: question.options.map((option) => ({
           label: option.label,
           optionTranslationZh: `选项 ${option.label}`,
-          status: option.label === 'A' ? 'correct' : 'wrong',
+          status: option.label === answerByQuestionId.get(question.questionId) ? 'correct' : 'wrong',
           evidence: [],
-          ...(option.label === 'A'
+          ...(option.label === answerByQuestionId.get(question.questionId)
             ? {}
             : { trap: { explanation: `选项 ${option.label} 与原文关键信息不符。` } }),
         })),
@@ -238,6 +255,7 @@ function writeStagedAnalyses(reviewRoot, materialization) {
   }
 
   const seven = bySlot.get('seven-choices')
+  const sevenTeaching = buildObjectiveTeachingFixture(objectiveFixtureGroup(seven, answerByQuestionId))
   writeJson(path.join(reviewRoot, 'analysis-seven.json'), {
     schemaVersion: 'seven-choices-analysis-v1',
     paperId: materialization.paperId,
@@ -246,10 +264,7 @@ function writeStagedAnalyses(reviewRoot, materialization) {
     groups: {
       [seven.groupId]: {
         overview: 'Seven choices analysis',
-        fullTranslationZh: seven.questions
-          .map((question) => `[${question.canonicalNumber}] 七选五译文。`)
-          .join(''),
-        selectedLongSentences: selectedLongSentence(seven),
+        ...sevenTeaching,
       },
     },
     questions: Object.fromEntries(seven.questions.map((question) => [question.questionId, {
@@ -263,12 +278,12 @@ function writeStagedAnalyses(reviewRoot, materialization) {
         { signalText: 'seven-choices source text', signalSide: 'context-before' },
         { signalText: 'A option', signalSide: 'option' },
       ],
-      optionFit: { correctOptionLabel: 'A', reason: 'Fits the official answer.' },
-      teachingNote: 'Use context and cohesion together.',
+      optionFit: { correctOptionLabel: answerByQuestionId.get(question.questionId), fitSummary: 'The option resumes the preceding reference and introduces the following example.' },
     }])),
   })
 
   const cloze = bySlot.get('cloze')
+  const clozeTeaching = buildObjectiveTeachingFixture(objectiveFixtureGroup(cloze, answerByQuestionId))
   writeJson(path.join(reviewRoot, 'analysis-cloze.json'), {
     schemaVersion: 'cloze-analysis-v1',
     paperId: materialization.paperId,
@@ -277,18 +292,16 @@ function writeStagedAnalyses(reviewRoot, materialization) {
     groups: {
       [cloze.groupId]: {
         overview: 'Cloze analysis',
-        fullTranslationZh: cloze.questions
-          .map((question) => `[${question.canonicalNumber}] 完形译文。`)
-          .join(''),
-        selectedLongSentences: selectedLongSentence(cloze),
+        ...clozeTeaching,
       },
     },
     blanks: Object.fromEntries(cloze.questions.map((question) => [question.questionId, {
       blankId: question.blankId,
       blankNo: question.canonicalNumber,
       pos: 'other',
-      correctFit: { optionLabel: 'A', reason: 'Fits the official answer.' },
-      distractorGlosses: ['B', 'C', 'D'].map((optionLabel) => ({
+      correctFit: { optionLabel: answerByQuestionId.get(question.questionId), reason: 'Fits the official answer.' },
+      distractorGlosses: ['A', 'B', 'C', 'D'].filter((optionLabel) =>
+        optionLabel !== answerByQuestionId.get(question.questionId)).map((optionLabel) => ({
         optionLabel,
         gloss: `Why ${optionLabel} does not fit.`,
       })),
@@ -297,11 +310,11 @@ function writeStagedAnalyses(reviewRoot, materialization) {
         signalText: 'cloze source text',
         signalSide: 'context-before',
       }],
-      teachingNote: 'Check collocation and context.',
     }])),
   })
 
   const grammar = bySlot.get('grammar-fill')
+  const grammarTeaching = buildObjectiveTeachingFixture(objectiveFixtureGroup(grammar, answerByQuestionId))
   let hasFiniteVerbFixture = false
   writeJson(path.join(reviewRoot, 'analysis-grammar.json'), {
     schemaVersion: 'grammar-fill-analysis-v2',
@@ -311,10 +324,7 @@ function writeStagedAnalyses(reviewRoot, materialization) {
     groups: {
       [grammar.groupId]: {
         overview: 'Grammar fill analysis',
-        fullTranslationZh: grammar.questions
-          .map((question) => `[${question.canonicalNumber}] 语法填空译文。`)
-          .join(''),
-        selectedLongSentences: selectedLongSentence(grammar),
+        ...grammarTeaching,
       },
     },
     blanks: Object.fromEntries(grammar.questions.map((question) => {
@@ -332,11 +342,9 @@ function writeStagedAnalyses(reviewRoot, materialization) {
             : 'grammar-fill.given.conversion.verb-to-noun'
           : 'grammar-fill.no-hint.article',
         role: null,
-        path: null,
-        answer: 'ANSWER',
+        answer: answerByQuestionId.get(question.questionId),
         reason: 'The sentence structure determines the form.',
         evidence: [{ type: 'clause-frame', signalText: 'grammar-fill source text' }],
-        teachingNote: 'Identify the blank type before choosing the form.',
       }]
     })),
   })
@@ -345,16 +353,16 @@ function writeStagedAnalyses(reviewRoot, materialization) {
     taskType: 'application',
     modelAnswer: Array.from({ length: 70 }, (_, index) => `word${index + 1}`).join(' '),
     reviewCard: {
+      schemaVersion: 'application-review-card-v2',
       form: 'Email',
       topic: 'Topic',
-      reader: 'Chris',
+      purpose: 'Share practical information',
       person: 'First person',
       tense: 'Simple present',
-      type: 'Informative',
       points: ['Explain the topic', 'Offer details'],
-      readerWho: 'A friend',
-      readerCares: 'Clear information',
-      readerWants: 'Useful details',
+      reader: 'Chris',
+      relationship: 'A friend',
+      readerNeeds: 'Clear and useful details',
       value: 'Practical guidance',
     },
   })
@@ -363,9 +371,36 @@ function writeStagedAnalyses(reviewRoot, materialization) {
     modelAnswer: Array.from({ length: 130 }, (_, index) => `story${index + 1}`).join(' '),
     continuationAnalysis: continuationAnalysis(),
   })
+  if (materialization.listening.state === 'captured') {
+    const answerByNumber = new Map(materialization.listening.answers.map(({ canonicalNumber, value }) => [canonicalNumber, value]))
+    const materials = Object.fromEntries(materialization.listening.transcript.map((segment) => [segment.segmentId, {
+      segmentId: segment.segmentId,
+      questionIds: segment.questionNumbers.map((number) => `question:listening:${number}`),
+      transcript: segment.text,
+      translationZh: '这是与听力原文逐段对应的完整中文翻译。',
+      topic: { theme: '人与社会', themeGroup: '社会服务与人际沟通', subtopic: '社会交往' },
+      summaryZh: '说话者围绕日常事项交换信息并明确后续安排和行动计划',
+    }]))
+    writeJson(path.join(reviewRoot, 'analysis-listening.json'), {
+      schemaVersion: 'listening-analysis-v1',
+      paperId: materialization.paperId,
+      sourceAssetVersion: 1,
+      materials,
+      questions: Object.fromEntries(materialization.listening.transcript.flatMap((segment) =>
+        segment.questionNumbers.map((number) => [`question:listening:${number}`, {
+          questionId: `question:listening:${number}`,
+          segmentId: segment.segmentId,
+          stemTranslationZh: `第 ${number} 题题干翻译`,
+          optionTranslationsZh: { A: '选项甲', B: '选项乙', C: '选项丙' },
+          officialAnswer: answerByNumber.get(number),
+          evidence: { quote: segment.text },
+          reasonZh: '原话直接给出关键信息，题干只是换了一种表达，因此选择官方答案。',
+        }]))),
+    })
+  }
 }
 
-function makeReviewRoot(
+export function makeReviewRoot(
   parentDir,
   fixturePaperId = paperId,
   questionSourceLabel = 'deterministic NCK1 question source',
@@ -402,6 +437,9 @@ function makeReviewRoot(
     provenance: {
       paperName: '2026 Contract Mock',
       source: 'Deterministic verifier source',
+      sourceType: '自编题',
+      region: 'Fixture',
+      year: 2026,
     },
     documents: [
       {
@@ -558,6 +596,215 @@ function makeReviewRoot(
   }
 }
 
+function convertToAnalyzedPackageReviewSource(reviewRoot) {
+  const rawManifest = JSON.parse(readFileSync(
+    path.join(reviewRoot, 'universal-source-manifest.json'),
+    'utf8',
+  ))
+  const content = JSON.parse(readFileSync(
+    path.join(reviewRoot, rawManifest.materializationPath),
+    'utf8',
+  ))
+  delete content.documents
+  delete content.sourceCoverage
+  content.schemaVersion = 'nck1-analyzed-package-content-v1'
+  if (content.listening.state === 'not_supplied') {
+    content.listening.evidence = {
+      kind: 'package_declares_no_listening_content',
+      documentId: 'content',
+    }
+  }
+  const continuation = content.groups.find((group) => group.slotId === 'writing.continuation')
+  const oldPrompt = continuation.writingTask.prompt
+  const registeredPrompt = resolveCanonicalAuthority(
+    nck1MaterializationCandidateAuthorityRef,
+  ).closure.profiles.get('nck1').instructions['writing.continuation.prompt'].text
+  continuation.writingTask.prompt = registeredPrompt
+  continuation.blocks.find((block) =>
+    block.content?.some((item) => item.text === oldPrompt)).content[0].text = registeredPrompt
+  const pointerEscape = (value) => value.replaceAll('~', '~0').replaceAll('/', '~1')
+  function replaceLocators(value, pointer = '') {
+    if (!value || typeof value !== 'object') return
+    if (Array.isArray(value)) {
+      value.forEach((item, index) => replaceLocators(item, `${pointer}/${index}`))
+      return
+    }
+    for (const [key, child] of Object.entries(value)) {
+      if (['page_region', 'docx_part'].includes(child?.kind)) {
+        value[key] = { kind: 'package_json_pointer', documentId: 'content', pointer }
+      } else replaceLocators(child, `${pointer}/${pointerEscape(key)}`)
+    }
+  }
+  replaceLocators(content)
+  const contentBytes = new TextEncoder().encode(JSON.stringify(content))
+  const members = [{
+    memberId: 'content', role: 'content', mediaType: 'application/json',
+    path: 'analyzed-package/content.json', bytes: contentBytes,
+  }, ...NCK1_STAGED_ANALYSIS_FILES.map((descriptor) => ({
+    memberId: descriptor.key,
+    role: 'analysis',
+    mediaType: 'application/json',
+    path: descriptor.path,
+    bytes: new Uint8Array(readFileSync(path.join(reviewRoot, descriptor.path))),
+  }))]
+  if (content.listening.state === 'captured') {
+    const audio = rawManifest.attachments.find(({ role }) => role === 'listening_audio_original')
+    members.push({
+      memberId: 'listening-audio',
+      role: 'audio',
+      mediaType: 'audio/mpeg',
+      path: 'analyzed-package/listening-audio.mp3',
+      bytes: new Uint8Array(readFileSync(path.join(reviewRoot, audio.path))),
+    })
+  }
+  const packageManifestBytes = new TextEncoder().encode(JSON.stringify({
+    schemaVersion: 'nck1-analyzed-package-v1',
+    paperId: content.paperId,
+    profileId: 'nck1',
+    contentMemberId: 'content',
+    members: members.map((member) => ({
+      memberId: member.memberId,
+      role: member.role,
+      mediaType: member.mediaType,
+      sha256: sha256(member.bytes),
+      byteLength: member.bytes.byteLength,
+    })),
+  }))
+  const packageManifestPath = 'analyzed-package/manifest.json'
+  mkdirSync(path.join(reviewRoot, 'analyzed-package'), { recursive: true })
+  writeFileSync(path.join(reviewRoot, packageManifestPath), packageManifestBytes)
+  writeFileSync(path.join(reviewRoot, members[0].path), contentBytes)
+  const audioMember = members.find(({ role }) => role === 'audio')
+  if (audioMember) writeFileSync(path.join(reviewRoot, audioMember.path), audioMember.bytes)
+  writeJson(
+    path.join(reviewRoot, 'universal-source-manifest.json'),
+    buildNck1AnalyzedPackageReviewSourceManifest({
+      paperId: content.paperId,
+      manifestPath: packageManifestPath,
+      manifestBytes: packageManifestBytes,
+      members,
+    }),
+  )
+  rmSync(path.join(reviewRoot, 'source'), { recursive: true, force: true })
+  rmSync(path.join(reviewRoot, 'materialization'), { recursive: true, force: true })
+}
+
+export function makeExternalAnalyzedPackage(reviewRoot, packageRoot) {
+  const rawManifest = JSON.parse(readFileSync(
+    path.join(reviewRoot, 'universal-source-manifest.json'),
+    'utf8',
+  ))
+  const content = JSON.parse(readFileSync(
+    path.join(reviewRoot, rawManifest.materializationPath),
+    'utf8',
+  ))
+  delete content.documents
+  delete content.sourceCoverage
+  content.schemaVersion = 'nck1-analyzed-package-content-v1'
+  if (content.listening.state === 'not_supplied') {
+    content.listening.evidence = {
+      kind: 'package_declares_no_listening_content',
+      documentId: 'content',
+    }
+  }
+  const continuation = content.groups.find((group) => group.slotId === 'writing.continuation')
+  const oldPrompt = continuation.writingTask.prompt
+  const registeredPrompt = resolveCanonicalAuthority(
+    nck1MaterializationCandidateAuthorityRef,
+  ).closure.profiles.get('nck1').instructions['writing.continuation.prompt'].text
+  continuation.writingTask.prompt = registeredPrompt
+  continuation.blocks.find((block) =>
+    block.content?.some((item) => item.text === oldPrompt)).content[0].text = registeredPrompt
+  const pointerEscape = (value) => value.replaceAll('~', '~0').replaceAll('/', '~1')
+  function replaceLocators(value, pointer = '') {
+    if (!value || typeof value !== 'object') return
+    if (Array.isArray(value)) {
+      value.forEach((item, index) => replaceLocators(item, `${pointer}/${index}`))
+      return
+    }
+    for (const [key, child] of Object.entries(value)) {
+      if (['page_region', 'docx_part'].includes(child?.kind)) {
+        value[key] = { kind: 'package_json_pointer', documentId: 'content', pointer }
+      } else replaceLocators(child, `${pointer}/${pointerEscape(key)}`)
+    }
+  }
+  replaceLocators(content)
+  const officialAnswers = {
+    answers: content.answers.map(({ questionId, canonicalNumber, value }) => ({
+      questionId, canonicalNumber, value,
+    })),
+    ...(content.listening.state === 'captured' ? {
+      listeningAnswers: content.listening.answers.map(({ canonicalNumber, value }) => ({
+        canonicalNumber, value,
+      })),
+    } : {}),
+  }
+  content.answers.forEach((answer, index) => {
+    answer.authority = {
+      kind: 'package_json_pointer',
+      documentId: 'official-answers',
+      pointer: `/answers/${index}`,
+    }
+  })
+  if (content.listening.state === 'captured') {
+    content.listening.answers.forEach((answer, index) => {
+      answer.authority = {
+        kind: 'package_json_pointer',
+        documentId: 'official-answers',
+        pointer: `/listeningAnswers/${index}`,
+      }
+    })
+  }
+  const files = [{
+    memberId: 'content', path: 'content.json', role: 'content', mediaType: 'application/json',
+  }, {
+    memberId: 'official-answers', path: 'official-answers.json', role: 'official_answers', mediaType: 'application/json',
+  }, ...NCK1_STAGED_ANALYSIS_FILES.map((descriptor) => ({
+    memberId: `analysis-${descriptor.key}`,
+    path: descriptor.path,
+    role: 'analysis',
+    mediaType: 'application/json',
+    analysisKey: descriptor.key,
+  })), ...(content.listening.state === 'captured' ? [{
+    memberId: 'analysis-listening', path: 'analysis-listening.json', role: 'analysis',
+    mediaType: 'application/json', analysisKey: 'listening-unit',
+  }, {
+    memberId: 'listening-audio', path: 'listening.mp3', role: 'audio', mediaType: 'audio/mpeg',
+  }] : [])]
+  mkdirSync(packageRoot, { recursive: true })
+  writeJson(path.join(packageRoot, 'content.json'), content)
+  writeJson(path.join(packageRoot, 'official-answers.json'), officialAnswers)
+  for (const descriptor of NCK1_STAGED_ANALYSIS_FILES) {
+    writeFileSync(
+      path.join(packageRoot, descriptor.path),
+      readFileSync(path.join(reviewRoot, descriptor.path)),
+    )
+  }
+  if (content.listening.state === 'captured') {
+    writeFileSync(
+      path.join(packageRoot, 'analysis-listening.json'),
+      readFileSync(path.join(reviewRoot, 'analysis-listening.json')),
+    )
+    const audio = rawManifest.attachments.find(({ role }) => role === 'listening_audio_original')
+    writeFileSync(path.join(packageRoot, 'listening.mp3'), readFileSync(path.join(reviewRoot, audio.path)))
+  }
+  writeJson(path.join(packageRoot, 'package.json'), {
+    schemaVersion: 'eqb-analyzed-package-v1',
+    paperId: content.paperId,
+    profileId: 'nck1',
+    paperName: 'Original-free complete analyzed package fixture',
+    metadata: { year: 2026, region: 'Fixture', sourceType: '模拟题' },
+    sources: [{
+      sourceId: 'question-transcription', role: 'question_source', memberId: 'content',
+      description: 'Externally supplied complete question transcription', suppliedBy: 'fixture producer',
+    }, {
+      sourceId: 'official-answer-transcription', role: 'official_answers', memberId: 'official-answers',
+      description: 'Externally supplied official answer transcription', suppliedBy: 'fixture producer',
+    }],
+    files,
+  })
+}
+
 function makeContext(label, options = {}) {
   const tempRoot = mkdtempSync(path.join(tmpdir(), `eqb-universal-publish-${label}-`))
   const fixture = makeReviewRoot(tempRoot, paperId, undefined, options)
@@ -626,9 +873,18 @@ function reviewManifestFor(reviewRoot, projection) {
   return { ...manifest, bundleDigest: reviewBundleDigest(manifest) }
 }
 
-function makeOnlinePromotionContext(label, fixturePaperId = paperId, paginationBreaks = null) {
+function makeOnlinePromotionContext(
+  label,
+  fixturePaperId = paperId,
+  paginationBreaks = null,
+  { listening = false, analyzedPackage = false } = {},
+) {
   const tempRoot = mkdtempSync(path.join(tmpdir(), `eqb-single-paper-promotion-${label}-`))
-  const fixture = makeReviewRoot(tempRoot, fixturePaperId)
+  const fixture = makeReviewRoot(tempRoot, fixturePaperId, undefined, { listening })
+  if (analyzedPackage) {
+    convertToAnalyzedPackageReviewSource(fixture.reviewRoot)
+    fixture.projection = buildNck1ReviewProjection(fixture.reviewRoot, { requireAnalyses: true })
+  }
   if (paginationBreaks) {
     writeJson(path.join(fixture.reviewRoot, 'pagination-plan.json'), {
       schemaVersion: 'paper-pagination-plan-v1', paperId: fixturePaperId,
@@ -659,7 +915,17 @@ function makeOnlinePromotionContext(label, fixturePaperId = paperId, paginationB
   const approval = reviewStore.approveRevision(
     fixturePaperId,
     revision.id,
-    { bundleDigest: revision.bundleDigest },
+    {
+      bundleDigest: revision.bundleDigest,
+      ...(fixture.projection.listeningReview?.audio?.state === 'pending_external_playback_review'
+        ? { externalListeningReview: {
+            audioSha256: fixture.projection.listeningReview.audio.playbackAudioSha256,
+            playbackMatchesSuppliedTranscript: true,
+            allSegmentsQuestionsAnswersBelongTogether: true,
+            actualAudioContentSuitableAndSafe: true,
+          } }
+        : {}),
+    },
     'synthetic-owner',
   )
   const dbPath = path.join(tempRoot, 'question-bank.sqlite')
@@ -769,13 +1035,15 @@ async function startPromotionServer(context, promotionService) {
 }
 
 function analysisDigestAt(baseDir) {
-  return digestJson(Object.fromEntries([
+  const fileNames = [
     'reading-choice-analysis-v1.json',
     'seven-choices-analysis-v1.json',
     'cloze-analysis-v1.json',
     'grammar-fill-analysis-v1.json',
     'writing-analysis-v1.json',
-  ].map((fileName) => [
+    'listening-analysis-v1.json',
+  ].filter((fileName) => existsSync(path.join(baseDir, 'analyses', fileName)))
+  return digestJson(Object.fromEntries(fileNames.map((fileName) => [
     fileName,
     JSON.parse(readFileSync(path.join(baseDir, 'analyses', fileName), 'utf8')),
   ])))
@@ -899,7 +1167,10 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
 
     const screenPage = await browser.newPage({
       viewport: { width: 1280, height: 900 },
+      deviceScaleFactor: 2,
     })
+    const screenErrors = []
+    screenPage.on('pageerror', (error) => screenErrors.push(error.stack || error.message))
     let screenProjection = projection
     await screenPage.route('**/api/paper-canonical/consumption?*', (route) =>
       route.fulfill({
@@ -913,8 +1184,13 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
         contentType: 'application/json',
         body: JSON.stringify(screenProjection.paperAsset),
       }))
-    await screenPage.route('**/paper-assets/**/analyses/**', (route) =>
-      route.fulfill({ status: 404, body: '' }))
+    await screenPage.route('**/paper-assets/**/analyses/**', (route) => {
+      const fileName = new URL(route.request().url()).pathname.split('/').at(-1)
+      const sidecar = screenProjection.analysisSidecars?.[fileName]
+      return sidecar
+        ? route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(sidecar) })
+        : route.fulfill({ status: 404, body: '' })
+    })
     await screenPage.route('**/paper-assets/**/figures/**', (route) =>
       route.fulfill({ status: 404, body: '' }))
     const screenUrl = new URL('canonical-consumption-qa.html', appUrl)
@@ -927,7 +1203,11 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
     const screenBody = screenPage.locator(
       `[data-paper-paragraph-id="${bodyId}"]`,
     )
-    await screenTitle.waitFor()
+    try {
+      await screenTitle.waitFor()
+    } catch (error) {
+      throw new Error(`${error.message}\nScreen errors: ${screenErrors.join('\n')}\nScreen text: ${await screenPage.locator('body').innerText()}`, { cause: error })
+    }
     assert.equal(
       await screenTitle.getAttribute('data-canonical-seven-choices-rhythm-role'),
       'passage_title',
@@ -951,8 +1231,11 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
     }
     screenProjection = listeningProjection
     screenUrl.searchParams.set('focusGroupId', `group:${projection.paperId}:listening.short-dialogue`)
+    screenUrl.searchParams.set('lecture', '1')
     await screenPage.goto(screenUrl.href)
     await screenPage.locator('.paper-browse-listening .ps-question').first().waitFor()
+    await screenPage.locator('[data-paper-question-id="question:listening:1"]').click()
+    await screenPage.locator('.listening-analysis-panel').waitFor()
     await assertPaperFonts(screenPage, '.paper-browse-listening')
     await assertSharedPaperLayout(screenPage, '.paper-browse-listening', ['listening', 'listening-boundaries'])
     assert.equal(await screenPage.locator('.paper-browse-listening').count(), 2)
@@ -962,13 +1245,20 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
       Array.from({ length: 20 }, (_, index) => `${index + 1}.`),
     )
     assert.equal(await screenPage.locator('.paper-browse-listening .ps-option').count(), 60)
+    assert.match(await screenPage.locator('.listening-analysis-panel').textContent(), /听力原文/u)
     assert.equal(await screenPage.locator('audio').count(), 0, 'Review preview does not expose published playback')
-    assert.doesNotMatch(await screenPage.locator('body').textContent(), /Long listening transcript|官方答案|内容安全检查通过/)
+    assert.doesNotMatch(
+      await screenPage.locator('.paper-browse-content').textContent(),
+      /Long listening transcript|官方答案|内容安全检查通过/,
+      'student exam column stays free of listening transcript and analysis',
+    )
     await screenPage.locator('[data-paper-question-id="question:listening:6"]').click()
     screenProjection = { ...listeningProjection, consumption: listeningPublished.screen }
     await screenPage.goto(screenUrl.href)
     const audio = screenPage.locator('audio')
     await audio.waitFor()
+    await screenPage.locator('[data-paper-question-id="question:listening:6"]').click()
+    await screenPage.locator('.listening-analysis-panel').waitFor()
     assert.equal(await audio.count(), 1)
     assert.equal(await screenPage.locator('.paper-browse-zoom audio').count(), 0, 'Player stays outside A4 paper')
     assert.equal(await audio.getAttribute('preload'), 'metadata')
@@ -985,7 +1275,10 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
     assert.ok(Math.max(...columns) - Math.min(...columns) < 1)
     await audio.scrollIntoViewIfNeeded()
     if (process.env.LISTENING_QA_ARTIFACT_DIR) {
-      await screenPage.screenshot({ path: path.join(process.env.LISTENING_QA_ARTIFACT_DIR, 'screen-captured.png') })
+      await screenPage.screenshot({ path: path.join(process.env.LISTENING_QA_ARTIFACT_DIR, 'listening-lecture-desktop.png') })
+      await screenPage.setViewportSize({ width: 390, height: 844 })
+      await screenPage.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))))
+      await screenPage.screenshot({ path: path.join(process.env.LISTENING_QA_ARTIFACT_DIR, 'listening-lecture-narrow.png') })
     }
     await screenPage.close()
 
@@ -1061,6 +1354,32 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
       if (artifactDir) await page.screenshot({ path: path.join(artifactDir, `print-${versionType}.png`) })
       await page.close()
     }
+
+    const companionHtml = buildCompanionAnalysisHtml({
+      paperAsset: listeningProjection.paperAsset,
+      analyses: { listening: listeningProjection.analysisSidecars['listening-analysis-v1.json'] },
+    })
+    const companionPage = await browser.newPage({
+      viewport: { width: 1280, height: 900 },
+      deviceScaleFactor: 2,
+    })
+    await companionPage.setContent(companionHtml, { waitUntil: 'load' })
+    assert.equal(await companionPage.locator('.listening-material').count(), 10)
+    assert.equal(await companionPage.locator('.question--listening').count(), 20)
+    assert.equal(await companionPage.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth), true)
+    const companionPdf = await companionPage.pdf({ format: 'A4', printBackground: true })
+    assert.equal(companionPdf.subarray(0, 4).toString(), '%PDF')
+    if (process.env.LISTENING_QA_ARTIFACT_DIR) {
+      await companionPage.screenshot({ path: path.join(process.env.LISTENING_QA_ARTIFACT_DIR, 'companion-listening-desktop.png'), fullPage: true })
+    }
+    await companionPage.setViewportSize({ width: 390, height: 844 })
+    await companionPage.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))))
+    assert.equal(await companionPage.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth), true)
+    assert.equal(await companionPage.locator('.analysis-body').evaluate((element) => getComputedStyle(element).columnCount), '1')
+    if (process.env.LISTENING_QA_ARTIFACT_DIR) {
+      await companionPage.screenshot({ path: path.join(process.env.LISTENING_QA_ARTIFACT_DIR, 'companion-listening-narrow.png'), fullPage: true })
+    }
+    await companionPage.close()
 
     const answers = new Map(Object.entries(projection.paperAsset.answerKey.answers)
       .map(([questionId, answer]) => [questionId, answer.answer]))
@@ -1164,8 +1483,54 @@ function runReviewCommand(args, env) {
   })
 }
 
+if (process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY !== '1') {
 const listeningPublication = makeContext('listening-publication', { listening: true })
 try {
+  const listeningPackageRoot = path.join(listeningPublication.tempRoot, 'listening-package')
+  const listeningPreparedRoot = path.join(listeningPublication.tempRoot, 'listening-package-review')
+  makeExternalAnalyzedPackage(listeningPublication.reviewRoot, listeningPackageRoot)
+  const preparedListening = await prepareNck1AnalyzedPackageReview({
+    sourcePath: listeningPackageRoot,
+    destinationDir: listeningPreparedRoot,
+    expectedPaperId: paperId,
+  })
+  assert(preparedListening.analysisDigest)
+  assert(buildNck1ReviewProjection(listeningPreparedRoot, {
+    requireAnalyses: true,
+    analysisProfile: 'complete-with-listening-v1',
+  }).analysisSidecars['listening-analysis-v1.json'],
+  'captured Listening requires and replays its package-bound teaching analysis')
+  const listeningExportDb = path.join(listeningPublication.tempRoot, 'listening-export-review.sqlite')
+  const listeningExportFiles = path.join(listeningPublication.tempRoot, 'listening-export-review-files')
+  const listeningExportStore = createImportReviewStore({
+    dbPath: listeningExportDb,
+    filesRoot: listeningExportFiles,
+    rendererBuildId: 'listening-package-export-verifier',
+  })
+  const listeningPreparedProjection = buildNck1ReviewProjection(listeningPreparedRoot, { requireAnalyses: true })
+  const listeningExportManifest = reviewManifestFor(listeningPreparedRoot, listeningPreparedProjection)
+  const listeningExportRevision = listeningExportStore.createRevision(listeningExportManifest).revision
+  for (const file of listeningExportManifest.files) {
+    const upload = listeningExportStore.fileForUpload(listeningExportRevision.id, file.path)
+    mkdirSync(path.dirname(upload.destination), { recursive: true })
+    writeFileSync(upload.destination, readFileSync(resolveReviewFile(listeningPreparedRoot, file.path)))
+    listeningExportStore.completeFileUpload(listeningExportRevision.id, file.path, file)
+  }
+  listeningExportStore.finalizeRevision(listeningExportRevision.id)
+  const listeningExportZip = path.join(listeningPublication.tempRoot, 'listening-normalized.zip')
+  await exportAnalyzedPackageRevision({
+    dbPath: listeningExportDb,
+    filesRoot: listeningExportFiles,
+    revisionId: listeningExportRevision.id,
+    expectedPaperId: paperId,
+    destination: listeningExportZip,
+  })
+  const listeningExportRoot = path.join(listeningPublication.tempRoot, 'listening-normalized')
+  await readAnalyzedPackageArchive(listeningExportZip, { destination: listeningExportRoot })
+  const listeningExportLoaded = loadAnalyzedPackageFiles(listeningExportRoot, { expectedPaperId: paperId })
+  assert.equal(listeningExportLoaded.content.listening.transcript.length, 10)
+  assert.equal(listeningExportLoaded.members.filter(({ role }) => role === 'audio').length, 1,
+    'native semantic round-trip retains ten listening materials and the exact full MP3 resource')
   const listeningProjection = listeningPublication.projection
   assert.deepEqual(
     listeningProjection.paperAsset.content.blocks.slice(0, 2),
@@ -1182,8 +1547,14 @@ try {
     'Screen compatibility asset starts with the two Canonical Listening Groups',
   )
   assert.equal(listeningProjection.listeningReview.questions.length, 20)
+  const listeningQuestionSix = listeningProjection.listeningReview.questions[5]
   assert.deepEqual(
-    listeningProjection.listeningReview.questions[5],
+    {
+      questionId: listeningQuestionSix.questionId,
+      questionNo: listeningQuestionSix.questionNo,
+      officialAnswer: listeningQuestionSix.officialAnswer,
+      transcriptSegments: listeningQuestionSix.transcriptSegments,
+    },
     {
       questionId: 'question:listening:6',
       questionNo: 6,
@@ -1195,6 +1566,8 @@ try {
       }],
     },
   )
+  assert.equal(listeningQuestionSix.analysis.reasonZh, '原话直接给出关键信息，题干只是换了一种表达，因此选择官方答案。')
+  assert.equal(listeningProjection.listeningReview.materials['text:6'].questionIds.length, 3)
   assert.equal(Math.round(listeningProjection.listeningReview.audio.durationSeconds), 12)
   assert.equal(listeningProjection.listeningReview.audio.comparison.verdict, 'pass')
   assert.equal(listeningProjection.listeningReview.audio.contentSafety.verdict, 'pass')
@@ -1272,6 +1645,308 @@ try {
   assert.equal(publishedVersionCount(incomplete), 0)
 } finally {
   close(incomplete)
+}
+
+const nativeReviewRoot = mkdtempSync(path.join(tmpdir(), 'eqb-native-review-replay-'))
+try {
+  const fixture = makeReviewRoot(nativeReviewRoot)
+  const externalPackageRoot = path.join(nativeReviewRoot, 'external-package')
+  const preparedReviewRoot = path.join(nativeReviewRoot, 'prepared-review')
+  makeExternalAnalyzedPackage(fixture.reviewRoot, externalPackageRoot)
+  const prepared = await prepareNck1AnalyzedPackageReview({
+    sourcePath: externalPackageRoot,
+    destinationDir: preparedReviewRoot,
+    expectedPaperId: paperId,
+  })
+  assert(prepared.analysisDigest, 'complete originals-free package prepares all staged analyses')
+  assert(reviewBundleFilePaths(preparedReviewRoot).some(({ path: relativePath }) =>
+    relativePath === 'analyzed-package/members/package-manifest.json'),
+  'the original package.json bytes remain a sealed Candidate identity member')
+  const packageJsonPath = path.join(externalPackageRoot, 'package.json')
+  const packageJsonBytes = readFileSync(packageJsonPath)
+  const contentJsonPath = path.join(externalPackageRoot, 'content.json')
+  const contentJsonBytes = readFileSync(contentJsonPath)
+  const sevenJsonPath = path.join(externalPackageRoot, 'analysis-seven.json')
+  const sevenJsonBytes = readFileSync(sevenJsonPath)
+  async function rejectsPrepared(label, expected) {
+    await assert.rejects(() => prepareNck1AnalyzedPackageReview({
+      sourcePath: externalPackageRoot,
+      destinationDir: path.join(nativeReviewRoot, `rejected-${label}`),
+      expectedPaperId: paperId,
+    }), expected)
+  }
+  const noOfficialSource = JSON.parse(packageJsonBytes)
+  noOfficialSource.sources = noOfficialSource.sources.filter(({ role }) => role !== 'official_answers')
+  writeJson(packageJsonPath, noOfficialSource)
+  await rejectsPrepared('official-source', (error) =>
+    error.code === 'ANALYZED_PACKAGE_INVALID')
+  writeFileSync(packageJsonPath, packageJsonBytes)
+  const selfDeclaredAnswers = JSON.parse(contentJsonBytes)
+  selfDeclaredAnswers.answers[0].authority.documentId = 'content'
+  selfDeclaredAnswers.answers[0].authority.pointer = '/answers/0'
+  writeJson(contentJsonPath, selfDeclaredAnswers)
+  await rejectsPrepared('official-locator', (error) =>
+    error.code === 'ANALYZED_PACKAGE_OFFICIAL_PROVENANCE_REQUIRED')
+  writeFileSync(contentJsonPath, contentJsonBytes)
+  const wrongAnalysis = JSON.parse(sevenJsonBytes)
+  const firstSeven = Object.values(wrongAnalysis.questions)[0]
+  firstSeven.optionFit.correctOptionLabel = firstSeven.optionFit.correctOptionLabel === 'A' ? 'B' : 'A'
+  writeJson(sevenJsonPath, wrongAnalysis)
+  await rejectsPrepared('wrong-analysis-answer', (error) =>
+    /答案.*不一致|conflicts with the authoritative answer/u.test(error.message))
+  writeFileSync(sevenJsonPath, sevenJsonBytes)
+  const missingAnalysisManifest = JSON.parse(packageJsonBytes)
+  missingAnalysisManifest.files = missingAnalysisManifest.files.filter(({ analysisKey }) => analysisKey !== 'reading-a')
+  writeJson(packageJsonPath, missingAnalysisManifest)
+  const readingAPath = path.join(externalPackageRoot, 'analysis-reading-a.json')
+  const readingABytes = readFileSync(readingAPath)
+  rmSync(readingAPath)
+  await rejectsPrepared('missing-analysis', /Missing required analyses/)
+  writeFileSync(readingAPath, readingABytes)
+  writeFileSync(packageJsonPath, packageJsonBytes)
+  writeFileSync(packageJsonPath, `{"schemaVersion":"eqb-analyzed-package-v1",${packageJsonBytes.toString('utf8').trim().slice(1)}`)
+  await rejectsPrepared('duplicate-json', (error) => error.code === 'ANALYZED_PACKAGE_JSON_INVALID')
+  writeFileSync(packageJsonPath, packageJsonBytes)
+  await assert.rejects(() => prepareNck1AnalyzedPackageReview({
+    sourcePath: externalPackageRoot,
+    destinationDir: path.join(nativeReviewRoot, 'wrong-target-review'),
+    expectedPaperId: 'paper-foreign-correction-target',
+  }), (error) => error.code === 'ANALYZED_PACKAGE_PAPER_ID_MISMATCH')
+  writeFileSync(
+    path.join(preparedReviewRoot, 'analysis-reading-a.json'),
+    `${readFileSync(path.join(preparedReviewRoot, 'analysis-reading-a.json'), 'utf8')} `,
+  )
+  assert.throws(() => buildNck1ReviewProjection(preparedReviewRoot, { requireAnalyses: true }),
+    (error) => error.code === 'IMPORT_REVIEW_FILE_DIGEST_MISMATCH',
+    'a staged analysis cannot replace its sealed package member')
+  writeFileSync(path.join(preparedReviewRoot, 'analysis-reading-a.json'), readingABytes)
+  convertToAnalyzedPackageReviewSource(fixture.reviewRoot)
+  const projection = buildNck1ReviewProjection(fixture.reviewRoot, { requireAnalyses: true })
+  assert.equal(projection.paperAsset.sources.primarySourceType, 'analyzed-package')
+  assert.equal(Object.hasOwn(projection.materialization, 'documents'), false)
+  assert.equal(Object.hasOwn(projection.materialization, 'sourceCoverage'), false)
+  assert.equal(projection.analysisSidecars['reading-choice-analysis-v1.json'].paperId, paperId,
+    'native package bytes still pass the existing full staged-analysis projection')
+  const bundlePaths = reviewBundleFilePaths(fixture.reviewRoot)
+  assert(bundlePaths.some(({ path: relativePath }) =>
+    relativePath === 'analyzed-package/manifest.json'))
+  assert(bundlePaths.some(({ path: relativePath }) =>
+    relativePath === 'analyzed-package/content.json'))
+  assert.equal(bundlePaths.some(({ path: relativePath }) =>
+    relativePath === 'source/questions.pdf'), false,
+  'original-free native Review inventory does not require raw source files')
+  assert.equal(bundlePaths.filter(({ path: relativePath }) =>
+    relativePath === 'analysis-reading-a.json').length, 1,
+  'analysis members shared with staged validation are enumerated exactly once')
+
+  const publicationDb = new DatabaseSync(path.join(nativeReviewRoot, 'publication.sqlite'))
+  publicationDb.exec(readFileSync(path.join(root, 'data/sql/schema.sql'), 'utf8'))
+  try {
+    const confirmation = {
+      schemaVersion: 'teacher-confirmation-v1',
+      candidateDigest: projection.candidateDigest,
+      sourceDigest: projection.sourceDigest,
+      confirmed: true,
+    }
+    const canonicalRequest = materializeNck1CanonicalRequest(
+      projection.sourceInput,
+      confirmation,
+    ).request
+    const publication = publishUniversalNck1Import({
+      reviewRootDir: fixture.reviewRoot,
+      approvedIdentity: approvedIdentity(projection),
+      canonicalRequest,
+      db: publicationDb,
+      paperAssetsDir: path.join(nativeReviewRoot, 'paper-assets'),
+    })
+    assert.equal(publication.ok, true,
+      `original-free analyzed package promotes through reconstructed bytes: ${JSON.stringify(publication.canonicalAdmission)}`)
+  } finally {
+    publicationDb.close()
+  }
+
+  const dbPath = path.join(nativeReviewRoot, 'review.sqlite')
+  const filesRoot = path.join(nativeReviewRoot, 'immutable-review')
+  const store = createImportReviewStore({
+    dbPath,
+    filesRoot,
+    rendererBuildId: 'native-review-replay-verifier',
+  })
+  const preparedProjection = buildNck1ReviewProjection(preparedReviewRoot, { requireAnalyses: true })
+  const manifest = reviewManifestFor(preparedReviewRoot, preparedProjection)
+  const created = store.createRevision(manifest)
+  for (const file of manifest.files) {
+    const upload = store.fileForUpload(created.revision.id, file.path)
+    mkdirSync(path.dirname(upload.destination), { recursive: true })
+    writeFileSync(upload.destination, readFileSync(resolveReviewFile(preparedReviewRoot, file.path)))
+    store.completeFileUpload(created.revision.id, file.path, file)
+  }
+  store.finalizeRevision(created.revision.id)
+  const reloadedStore = createImportReviewStore({
+    dbPath,
+    filesRoot,
+    rendererBuildId: 'native-review-replay-verifier',
+  })
+  const replay = reloadedStore.projectionForRevision(created.revision.id).projection
+  assert.deepEqual(replay.sourceInput, preparedProjection.sourceInput,
+    'a process-style Review reload reconstructs the identical analyzed-package input')
+  const exportedZip = path.join(nativeReviewRoot, 'normalized-export.zip')
+  const exported = await exportAnalyzedPackageRevision({
+    dbPath,
+    filesRoot,
+    revisionId: created.revision.id,
+    expectedPaperId: paperId,
+    destination: exportedZip,
+  })
+  assert.equal(exported.format, 'zip')
+  assert(exported.files.some(({ path: relativePath }) => relativePath === 'package.json'),
+    'real archive checker inventories normalized package output')
+  const unpackedExport = path.join(nativeReviewRoot, 'normalized-export')
+  await readAnalyzedPackageArchive(exportedZip, { destination: unpackedExport })
+  const before = loadAnalyzedPackageFiles(externalPackageRoot, { expectedPaperId: paperId })
+  const after = loadAnalyzedPackageFiles(unpackedExport, { expectedPaperId: paperId })
+  assert.deepEqual(compareAnalyzedPackageSemantics(before, after), {
+    equal: true,
+    contentDifference: null,
+    sourceAssetVersionDifferences: [],
+  }, 'native originals-free package preserves exact normalized semantics after export and reimport')
+  assert.equal(after.members.some(({ role }) => role === 'attachment'), false,
+    'original attachments remain optional')
+  const changed = structuredClone(after)
+  const changedReading = changed.members.find(({ analysisKey }) => analysisKey === 'reading-a')
+  const changedValue = JSON.parse(new TextDecoder().decode(changedReading.bytes))
+  changedValue.groups[Object.keys(changedValue.groups)[0]].overview += ' retained-change'
+  changedReading.bytes = new TextEncoder().encode(JSON.stringify(changedValue))
+  assert.equal(compareAnalyzedPackageSemantics(after, changed).equal, false,
+    'semantic comparison detects a changed retained analysis field')
+  const replayManifest = JSON.parse(readFileSync(path.join(
+    reloadedStore.revisionDirectory(created.revision.id),
+    'universal-source-manifest.json',
+  ), 'utf8'))
+  const contentPath = path.join(
+    reloadedStore.revisionDirectory(created.revision.id),
+    replayManifest.members.find(({ role }) => role === 'content').path,
+  )
+  writeFileSync(contentPath, '{"tampered":true}')
+  assert.throws(
+    () => reloadedStore.projectionForRevision(created.revision.id),
+    (error) => error.code === 'IMPORT_REVIEW_FILE_DIGEST_MISMATCH',
+    'immutable Review store rejects native member tampering before replay',
+  )
+  await assert.rejects(() => exportAnalyzedPackageRevision({
+    dbPath,
+    filesRoot,
+    revisionId: created.revision.id,
+    expectedPaperId: paperId,
+    destination: path.join(nativeReviewRoot, 'stale-export.zip'),
+  }), (error) => error.code === 'IMPORT_REVIEW_FILE_DIGEST_MISMATCH',
+  'export refuses a stale/tampered immutable revision')
+} finally {
+  rmSync(nativeReviewRoot, { recursive: true, force: true })
+}
+
+const rawExport = makeOnlinePromotionContext('raw-legacy-export-refusal')
+try {
+  const rawZip = path.join(rawExport.tempRoot, 'raw-normalized.zip')
+  await assert.rejects(() => exportAnalyzedPackageRevision({
+    dbPath: path.join(rawExport.tempRoot, 'import-review.sqlite'),
+    filesRoot: path.join(rawExport.tempRoot, 'review-files'),
+    revisionId: rawExport.revision.id,
+    expectedPaperId: paperId,
+    destination: rawZip,
+  }), (error) => error.code === 'ANALYZED_PACKAGE_CONTINUATION_INSTRUCTION_UNSUPPORTED'
+    && error.path === '$.groups',
+  'raw legacy source wording that needs a content-changing transformation fails with its exact path')
+
+  const rawRevisionRoot = rawExport.reviewStore.revisionDirectory(rawExport.revision.id)
+  const currentRaw = loadNck1ReviewSource(rawRevisionRoot)
+  currentRaw.materialization = structuredClone(currentRaw.materialization)
+  const continuation = currentRaw.materialization.groups.find(({ slotId }) =>
+    slotId === 'writing.continuation')
+  const priorPrompt = continuation.writingTask.prompt
+  const currentPrompt = resolveCanonicalAuthority(
+    nck1MaterializationCandidateAuthorityRef,
+  ).closure.profiles.get('nck1').instructions['writing.continuation.prompt'].text
+  continuation.writingTask.prompt = currentPrompt
+  continuation.blocks.find((block) =>
+    block.content?.some((item) => item.text === priorPrompt)).content[0].text = currentPrompt
+  const currentRawFiles = convertRepresentableNck1ReviewSourceToAnalyzedPackageFiles(
+    rawRevisionRoot,
+    currentRaw,
+  )
+  const currentRawRoot = path.join(rawExport.tempRoot, 'current-standard-raw-package')
+  for (const [relativePath, bytes] of currentRawFiles) {
+    const target = path.join(currentRawRoot, relativePath)
+    mkdirSync(path.dirname(target), { recursive: true })
+    writeFileSync(target, bytes)
+  }
+  const currentRawLoaded = loadAnalyzedPackageFiles(currentRawRoot, { expectedPaperId: paperId })
+  assert.equal(currentRawLoaded.content.groups.find(({ slotId }) =>
+    slotId === 'writing.continuation').writingTask.prompt, currentPrompt,
+  'one representable current-standard raw Review fixture converts without changing current text')
+  assert.match(currentRawLoaded.manifest.sources[0].description, /external transcription/u)
+} finally {
+  rmSync(rawExport.tempRoot, { recursive: true, force: true })
+}
+
+const externalListeningPromotion = makeOnlinePromotionContext(
+  'external-listening',
+  paperId,
+  null,
+  { listening: true, analyzedPackage: true },
+)
+try {
+  assert.equal(
+    externalListeningPromotion.approval.externalListeningReview.reviewMethod,
+    'owner_playback_against_supplied_transcript',
+  )
+  assert.equal(
+    Object.hasOwn(externalListeningPromotion.approval.externalListeningReview, 'engine'),
+    false,
+    'Owner receipt records no invented ASR engine or comparison score',
+  )
+  const restartedStore = createImportReviewStore({
+    dbPath: path.join(externalListeningPromotion.tempRoot, 'import-review.sqlite'),
+    filesRoot: path.join(externalListeningPromotion.tempRoot, 'review-files'),
+    rendererBuildId: 'renderer-single-paper-promotion-verifier',
+  })
+  const persistedReviewProof = restartedStore.mintExternalListeningPublicationProof(
+    paperId,
+    promotionRequest(externalListeningPromotion.approval),
+  )
+  const persistedReviewIdentity = externalListeningReviewProofIdentity(persistedReviewProof)
+  assert.equal(persistedReviewIdentity.approvalId, externalListeningPromotion.approval.approvalId,
+    'only the persisted current Owner approval mints external Listening proof identity')
+  assert.equal(Object.isFrozen(persistedReviewIdentity), true,
+    'external Listening proof identity is read-only')
+  assert.equal(externalListeningReviewProofIdentity(structuredClone(persistedReviewProof)), null,
+    'cloning a store-minted proof cannot preserve authority')
+  const service = createSinglePaperPromotionService({
+    getStore: () => restartedStore,
+    openDatabase: externalListeningPromotion.openDatabase,
+    paperAssetsDir: externalListeningPromotion.paperAssetsDir,
+  })
+  const promoted = service.promote(
+    paperId,
+    promotionRequest(externalListeningPromotion.approval),
+    'synthetic-agent',
+  )
+  assert.equal(promoted.status, 'published',
+    'approved external MP3 publishes through the existing single-paper service')
+  const publishedAudio = readFileSync(path.join(
+    externalListeningPromotion.paperAssetsDir,
+    paperId,
+    'versions/v1/listening/playback.mp3',
+  ))
+  assert.equal(
+    sha256(publishedAudio),
+    externalListeningPromotion.projection.listeningReview.audio.playbackAudioSha256,
+    'immutable publication preserves the exact reviewed MP3',
+  )
+  assert.match(promoted.consumers.screen.listeningAudio.url, /\/versions\/v1\/listening\/playback\.mp3$/,
+    'current publication readback resolves the immutable reviewed audio version')
+} finally {
+  rmSync(externalListeningPromotion.tempRoot, { recursive: true, force: true })
 }
 
 const legacy = makeContext('legacy-revision')
@@ -1943,6 +2618,21 @@ try {
     openDatabase: plannedPromotion.openDatabase, paperAssetsDir: plannedPromotion.paperAssetsDir })
   const first = service.promote(paperId, promotionRequest(plannedPromotion.approval), 'synthetic-ship')
   assert.equal(first.status, 'published')
+  const clozeV1 = JSON.parse(readFileSync(path.join(plannedPromotion.reviewRoot, 'analysis-cloze.json')))
+  const clozeGroupId = Object.keys(clozeV1.groups)[0]
+  const summaryV1 = clozeV1.groups[clozeGroupId].overview
+  const firstDb = plannedPromotion.openDatabase()
+  let summaryRow
+  try {
+    summaryRow = firstDb.prepare(`
+      SELECT p.summary
+      FROM question_groups qg JOIN passages p ON p.id = qg.passage_id
+      WHERE qg.id = ?
+    `).get(clozeGroupId)
+  } finally {
+    firstDb.close()
+  }
+  assert.equal(summaryRow.summary, summaryV1, 'v1 publication exposes the approved cloze introduction in DB list/search storage')
   const paperDir = path.join(plannedPromotion.paperAssetsDir, paperId)
   const versionPlan = path.join(paperDir, 'versions/v1/pagination-plan.json')
   const originalPlan = readFileSync(versionPlan)
@@ -1955,6 +2645,9 @@ try {
   const changedPlan = JSON.parse(originalPlan)
   changedPlan.editions.friendly8.breakSlotIds = ['reading.d']
   writeJson(path.join(plannedPromotion.reviewRoot, 'pagination-plan.json'), changedPlan)
+  const summaryV2 = '第二版完形简介：人物先遭遇困难，随后采取行动并在关键事件中迎来明确转折。'
+  clozeV1.groups[clozeGroupId].overview = summaryV2
+  writeJson(path.join(plannedPromotion.reviewRoot, 'analysis-cloze.json'), clozeV1)
   const nextProjection = buildNck1ReviewProjection(plannedPromotion.reviewRoot)
   assert.equal(nextProjection.candidateDigest, plannedPromotion.projection.candidateDigest)
   const manifest = reviewManifestFor(plannedPromotion.reviewRoot, nextProjection)
@@ -1971,9 +2664,29 @@ try {
   const second = service.promote(paperId, promotionRequest(approval), 'synthetic-ship')
   assert.equal(second.promotion.assetVersion, 2, 'same Candidate with a newly approved plan must not reuse v1')
   assert.deepEqual(JSON.parse(readFileSync(path.join(paperDir, 'latest/pagination-plan.json'))), changedPlan)
+  for (const file of ['reading-choice-analysis-v1.json', 'seven-choices-analysis-v1.json', 'cloze-analysis-v1.json', 'grammar-fill-analysis-v1.json']) {
+    const sidecar = JSON.parse(readFileSync(path.join(paperDir, 'versions/v2/analyses', file)))
+    assert.equal(sidecar.sourceAssetVersion, 2)
+    for (const group of Object.values(sidecar.groups)) {
+      assert.equal(group.teachingContent.sourceAssetVersion, 2,
+        `${file} nested annotation authority must advance with the published version`)
+    }
+  }
   const db = plannedPromotion.openDatabase({ readOnly: false })
   try {
+    summaryRow = db.prepare(`
+      SELECT p.summary
+      FROM question_groups qg JOIN passages p ON p.id = qg.passage_id
+      WHERE qg.id = ?
+    `).get(clozeGroupId)
+    assert.equal(summaryRow.summary, summaryV2, 'v2 publication atomically exposes only its approved introduction')
     rollbackPaperImportPublication({ db, paperAssetsDir: plannedPromotion.paperAssetsDir, paperId, versionName: 'v1' })
+    summaryRow = db.prepare(`
+      SELECT p.summary
+      FROM question_groups qg JOIN passages p ON p.id = qg.passage_id
+      WHERE qg.id = ?
+    `).get(clozeGroupId)
+    assert.equal(summaryRow.summary, summaryV1, 'rollback restores the exact v1 DB introduction instead of stale v2 metadata')
     assert.deepEqual(readFileSync(path.join(paperDir, 'latest/pagination-plan.json')), originalPlan)
     writeJson(path.join(paperDir, 'latest/pagination-plan.json'), changedPlan)
     assert.throws(() => rollbackPaperImportPublication({ db, paperAssetsDir: plannedPromotion.paperAssetsDir,
@@ -2450,3 +3163,4 @@ try {
 }
 
 console.log('verify-universal-nck1-publish: PASS')
+}

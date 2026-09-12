@@ -155,6 +155,35 @@ export type ContinuationParagraphBlueprint = {
   qualityRisks: string[]
 }
 
+export type ContinuationEmotionChange = {
+  trigger: string
+  from: string
+  to: string
+  visibleAction: string
+}
+
+export type ContinuationDevelopmentParagraph = {
+  paragraphIndex: 1 | 2
+  cause: string
+  action: string
+  result: string
+  sourceEvidence: ContinuationEvidenceRef[]
+  cluePayoffs: ContinuationCluePayoff[]
+  bridge?: string
+  ending?: string
+  emotionChanges?: ContinuationEmotionChange[]
+  relationshipChanges?: ContinuationRelationshipMovement[]
+  languageReminder?: string
+}
+
+export type ContinuationDevelopmentPlan = {
+  selectedRoute: string
+  routeRationale: ContinuationGroundedStatement[]
+  paragraphs: [ContinuationDevelopmentParagraph, ContinuationDevelopmentParagraph]
+  alternatives?: string[]
+  qualityRisks?: string[]
+}
+
 export type ContinuationAnalysisV1 = {
   schemaVersion: 'continuation-analysis-v1'
   storyUnderstanding: ContinuationStoryUnderstanding
@@ -164,28 +193,39 @@ export type ContinuationAnalysisV1 = {
   paragraphBlueprint: ContinuationParagraphBlueprint
 }
 
-export function isNarrativeContinuationAnalysis(value: unknown): value is ContinuationAnalysisV1 {
+export type ContinuationAnalysisV2 = {
+  schemaVersion: 'continuation-analysis-v2'
+  storyUnderstanding: ContinuationStoryUnderstanding
+  continuationContract: ContinuationContract
+  developmentPlan: ContinuationDevelopmentPlan
+}
+
+export type ContinuationAnalysis = ContinuationAnalysisV1 | ContinuationAnalysisV2
+
+export function isNarrativeContinuationAnalysis(value: unknown): value is ContinuationAnalysis {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return false
   const analysis = value as Record<string, unknown>
   return (
-    analysis.schemaVersion === 'continuation-analysis-v1'
+    ['continuation-analysis-v1', 'continuation-analysis-v2'].includes(String(analysis.schemaVersion))
     && Boolean(analysis.storyUnderstanding)
     && typeof analysis.storyUnderstanding === 'object'
     && Boolean(analysis.continuationContract)
     && typeof analysis.continuationContract === 'object'
-    && Boolean(analysis.narrativeDevelopment)
-    && typeof analysis.narrativeDevelopment === 'object'
-    && Boolean(analysis.languageAlignment)
-    && typeof analysis.languageAlignment === 'object'
-    && Boolean(analysis.paragraphBlueprint)
-    && typeof analysis.paragraphBlueprint === 'object'
+    && (analysis.schemaVersion === 'continuation-analysis-v2'
+      ? Boolean(analysis.developmentPlan) && typeof analysis.developmentPlan === 'object'
+      : Boolean(analysis.narrativeDevelopment)
+        && typeof analysis.narrativeDevelopment === 'object'
+        && Boolean(analysis.languageAlignment)
+        && typeof analysis.languageAlignment === 'object'
+        && Boolean(analysis.paragraphBlueprint)
+        && typeof analysis.paragraphBlueprint === 'object')
   )
 }
 
 export function isNarrativeContinuationWritingAnalysis(value: unknown): value is {
   taskType: 'continuation'
   modelAnswer: string
-  continuationAnalysis: ContinuationAnalysisV1
+  continuationAnalysis: ContinuationAnalysis
 } {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return false
   const analysis = value as Record<string, unknown>

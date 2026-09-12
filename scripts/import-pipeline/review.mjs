@@ -175,10 +175,20 @@ async function uploadReviewBundle(paperDir, manifest) {
 }
 
 function reviewManifest(paperDir, projection, resolvesIssueIds = [], buildId = producerBuildId()) {
+  const initializationPath = path.join(paperDir, 'signals', 'source-intake-initialization.json')
+  const initialization = existsSync(initializationPath)
+    ? JSON.parse(readFileSync(initializationPath, 'utf8'))
+    : null
+  if (initialization && initialization.paperId !== projection.paperId) {
+    fail('Source-intake initialization receipt paperId does not match the Review workspace')
+  }
   const manifest = {
     schemaVersion: 'web-import-review-bundle-v1',
     paperId: projection.paperId,
     paperName: projection.paperName,
+    ...(initialization?.baseRevisionId
+      ? { expectedBaseRevisionId: initialization.baseRevisionId }
+      : {}),
     sourceDigest: projection.sourceDigest,
     candidateDigest: projection.candidateDigest,
     visibleStructureDigest: projection.visibleStructureDigest,
