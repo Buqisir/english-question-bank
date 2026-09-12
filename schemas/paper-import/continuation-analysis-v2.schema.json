@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "continuation-analysis-v2.schema.json",
+  "title": "Narrative Continuation Analysis V2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "storyUnderstanding", "continuationContract", "developmentPlan"],
+  "properties": {
+    "schemaVersion": { "const": "continuation-analysis-v2" },
+    "storyUnderstanding": { "$ref": "#/$defs/storyUnderstanding" },
+    "continuationContract": { "$ref": "#/$defs/continuationContract" },
+    "developmentPlan": { "$ref": "#/$defs/developmentPlan" }
+  },
+  "$defs": {
+    "text": { "type": "string", "minLength": 1, "pattern": "^[\\s\\S]*\\S[\\s\\S]*$" },
+    "evidenceRef": {
+      "type": "object", "additionalProperties": false, "required": ["source", "excerpt"],
+      "properties": {
+        "source": { "enum": ["instruction", "material", "paragraph1Starter", "paragraph2Starter"] },
+        "excerpt": { "$ref": "#/$defs/text" }
+      }
+    },
+    "evidence": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/evidenceRef" } },
+    "grounded": {
+      "type": "object", "additionalProperties": false, "required": ["statement", "evidence"],
+      "properties": { "statement": { "$ref": "#/$defs/text" }, "evidence": { "$ref": "#/$defs/evidence" } }
+    },
+    "groundedArray": { "type": "array", "items": { "$ref": "#/$defs/grounded" } },
+    "constraint": {
+      "type": "object", "additionalProperties": false, "required": ["id", "statement", "evidence"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$" },
+        "statement": { "$ref": "#/$defs/text" }, "evidence": { "$ref": "#/$defs/evidence" }
+      }
+    },
+    "constraints": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/constraint" } },
+    "stringPair": {
+      "type": "array", "prefixItems": [{ "$ref": "#/$defs/text" }, { "$ref": "#/$defs/text" }],
+      "minItems": 2, "maxItems": 2, "items": false
+    },
+    "storyUnderstanding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["centralSituation", "sourceEndState", "narrativePerspective", "timeAndPlaceFrame", "characters", "relationships", "causalChain", "unresolvedProblem", "usableClues", "meaningDirection", "sourceStyle"],
+      "properties": {
+        "centralSituation": { "$ref": "#/$defs/grounded" }, "sourceEndState": { "$ref": "#/$defs/grounded" },
+        "narrativePerspective": { "$ref": "#/$defs/grounded" }, "timeAndPlaceFrame": { "$ref": "#/$defs/grounded" },
+        "characters": { "type": "array", "minItems": 1, "items": {
+          "type": "object", "additionalProperties": false,
+          "required": ["name", "role", "establishedTraits", "motivations", "currentState"],
+          "properties": { "name": { "$ref": "#/$defs/text" }, "role": { "$ref": "#/$defs/text" }, "establishedTraits": { "$ref": "#/$defs/groundedArray" }, "motivations": { "$ref": "#/$defs/groundedArray" }, "currentState": { "$ref": "#/$defs/grounded" } }
+        } },
+        "relationships": { "type": "array", "items": {
+          "type": "object", "additionalProperties": false, "required": ["participants", "currentRelation"],
+          "properties": { "participants": { "$ref": "#/$defs/stringPair" }, "currentRelation": { "$ref": "#/$defs/grounded" } }
+        } },
+        "causalChain": { "type": "array", "minItems": 1, "items": {
+          "type": "object", "additionalProperties": false, "required": ["cause", "effect"],
+          "properties": { "cause": { "$ref": "#/$defs/grounded" }, "effect": { "$ref": "#/$defs/grounded" } }
+        } },
+        "unresolvedProblem": { "$ref": "#/$defs/grounded" }, "usableClues": { "$ref": "#/$defs/groundedArray" },
+        "meaningDirection": { "type": "object", "additionalProperties": false, "required": ["statement", "confidence", "evidence"],
+          "properties": { "statement": { "$ref": "#/$defs/text" }, "confidence": { "enum": ["explicit", "stronglyInferred", "open"] }, "evidence": { "type": "array", "items": { "$ref": "#/$defs/evidenceRef" } } }
+        },
+        "sourceStyle": { "$ref": "#/$defs/grounded" }
+      }
+    },
+    "paragraphContract": {
+      "type": "object", "additionalProperties": false,
+      "required": ["paragraphIndex", "entryState", "starterFunction", "requiredMoves", "requiredExitState", "supportedOptions"],
+      "properties": { "paragraphIndex": { "enum": [1, 2] }, "entryState": { "$ref": "#/$defs/grounded" }, "starterFunction": { "$ref": "#/$defs/grounded" }, "requiredMoves": { "$ref": "#/$defs/constraints" }, "requiredExitState": { "$ref": "#/$defs/constraints" }, "supportedOptions": { "$ref": "#/$defs/groundedArray" } }
+    },
+    "continuationContract": {
+      "type": "object", "additionalProperties": false,
+      "required": ["hardConstraints", "softAffordances", "openChoices", "forbiddenContradictions", "paragraphs", "closureRequirements"],
+      "properties": {
+        "hardConstraints": { "$ref": "#/$defs/constraints" }, "softAffordances": { "$ref": "#/$defs/groundedArray" },
+        "openChoices": { "type": "array", "items": { "$ref": "#/$defs/text" } }, "forbiddenContradictions": { "$ref": "#/$defs/constraints" },
+        "paragraphs": { "type": "array", "prefixItems": [
+          { "allOf": [{ "$ref": "#/$defs/paragraphContract" }, { "properties": { "paragraphIndex": { "const": 1 } } }] },
+          { "allOf": [{ "$ref": "#/$defs/paragraphContract" }, { "properties": { "paragraphIndex": { "const": 2 } } }] }
+        ], "minItems": 2, "maxItems": 2, "items": false },
+        "closureRequirements": { "$ref": "#/$defs/constraints" }
+      }
+    },
+    "cluePayoff": { "type": "object", "additionalProperties": false, "required": ["clue", "payoff"],
+      "properties": { "clue": { "$ref": "#/$defs/evidenceRef" }, "payoff": { "$ref": "#/$defs/text" } }
+    },
+    "emotionChange": { "type": "object", "additionalProperties": false, "required": ["trigger", "from", "to", "visibleAction"],
+      "properties": { "trigger": { "$ref": "#/$defs/text" }, "from": { "$ref": "#/$defs/text" }, "to": { "$ref": "#/$defs/text" }, "visibleAction": { "$ref": "#/$defs/text" } }
+    },
+    "relationshipChange": { "type": "object", "additionalProperties": false, "required": ["participants", "from", "to", "cause"],
+      "properties": { "participants": { "$ref": "#/$defs/stringPair" }, "from": { "$ref": "#/$defs/text" }, "to": { "$ref": "#/$defs/text" }, "cause": { "$ref": "#/$defs/text" } }
+    },
+    "developmentParagraph": {
+      "type": "object", "additionalProperties": false,
+      "required": ["paragraphIndex", "cause", "action", "result", "sourceEvidence", "cluePayoffs"],
+      "properties": {
+        "paragraphIndex": { "enum": [1, 2] }, "cause": { "$ref": "#/$defs/text" }, "action": { "$ref": "#/$defs/text" }, "result": { "$ref": "#/$defs/text" },
+        "sourceEvidence": { "$ref": "#/$defs/evidence" }, "cluePayoffs": { "type": "array", "items": { "$ref": "#/$defs/cluePayoff" } },
+        "bridge": { "$ref": "#/$defs/text" }, "ending": { "$ref": "#/$defs/text" },
+        "emotionChanges": { "type": "array", "items": { "$ref": "#/$defs/emotionChange" } },
+        "relationshipChanges": { "type": "array", "items": { "$ref": "#/$defs/relationshipChange" } },
+        "languageReminder": { "$ref": "#/$defs/text" }
+      }
+    },
+    "developmentPlan": {
+      "type": "object", "additionalProperties": false, "required": ["selectedRoute", "routeRationale", "paragraphs"],
+      "properties": {
+        "selectedRoute": { "$ref": "#/$defs/text" }, "routeRationale": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/grounded" } },
+        "paragraphs": { "type": "array", "prefixItems": [
+          { "allOf": [{ "$ref": "#/$defs/developmentParagraph" }, { "properties": { "paragraphIndex": { "const": 1 } }, "required": ["bridge"], "not": { "required": ["ending"] } }] },
+          { "allOf": [{ "$ref": "#/$defs/developmentParagraph" }, { "properties": { "paragraphIndex": { "const": 2 } }, "required": ["ending"], "not": { "required": ["bridge"] } }] }
+        ], "minItems": 2, "maxItems": 2, "items": false },
+        "alternatives": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/text" } },
+        "qualityRisks": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/text" } }
+      }
+    }
+  }
+}

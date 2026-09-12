@@ -30,6 +30,10 @@ import {
 import { buildPaperImportAiPackageFiles } from '../server/paper-import-ai/packageBuilder.mjs'
 import { validatePaperImportPackage, PAPER_IMPORT_SCHEMA_VERSIONS } from '../server/paper-import/validator.mjs'
 import { writePaperImportVersion, swapPaperImportLatest } from '../server/paper-import/storage.mjs'
+import {
+  addObjectiveTeachingFixtureParagraphs,
+  buildObjectiveTeachingFixture,
+} from './lib/objective-teaching-fixture.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const repoRoot = path.resolve(__dirname, '..')
@@ -106,8 +110,9 @@ function assertPromptContract() {
   assert('prompt has exact-substring rule', prompt.includes('exact substring'))
   // blank marker exclusion rule
   assert('prompt has blank marker exclusion rule', prompt.includes('blank marker') || prompt.includes('  56  ') || prompt.includes('(wear)'))
-  // role/path for non-finite
-  assert('prompt mentions role and path for non-finite', prompt.includes('role') && prompt.includes('path') && prompt.includes('non-finite'))
+  // Syntactic role and matching route remain; the personal path is retired.
+  assert('prompt retains syntactic role for non-finite', prompt.includes('### `role` (non-finite only)'))
+  assert('prompt retires the personal path/framework', prompt.includes('Do NOT output the retired personal `path` or `framework` fields'))
   // C1 answer key rule
   assert('prompt describes answer authority', prompt.includes('answer') && prompt.includes('answer key'))
   // forbidden parent nodes
@@ -217,7 +222,7 @@ function gfFixtureInput() {
     { no: 64, answerKey: 'enjoyed',    prompt: 'enjoy'   },
     { no: 65, answerKey: 'an',         prompt: null      },
   ]
-  return {
+  const input = {
     paper: {
       paperId: 'paper-i13-gf-fixture',
       sourceFilename: 'i13-gf.docx',
@@ -240,6 +245,8 @@ function gfFixtureInput() {
     },
     providerId: 'deepseek-v4-pro',
   }
+  addObjectiveTeachingFixtureParagraphs(input.group)
+  return input
 }
 
 function validGfAnalysis(input) {
@@ -277,7 +284,10 @@ function validGfAnalysis(input) {
       reviewStatus: 'reviewed',
     },
     groups: {
-      [group.groupId]: { overview: '一篇关于派对的记叙文。' },
+      [group.groupId]: {
+        overview: '一篇关于派对的记叙文。',
+        ...buildObjectiveTeachingFixture(group),
+      },
     },
     blanks,
   }
@@ -405,13 +415,15 @@ async function assertAnalysisValidation() {
     return analyzeGrammarFillImportCandidate(input, { providerCallers: { deepseek: stubProvider(bad) } })
   }, /blanks/)
 
-  // --- Missing teachingNote ---
-  await assertRejects('missing teachingNote blocks', () => {
-    const bad = validGfAnalysis(input)
-    const firstKey = Object.keys(bad.blanks)[0]
-    delete bad.blanks[firstKey].teachingNote
-    return analyzeGrammarFillImportCandidate(input, { providerCallers: { deepseek: stubProvider(bad) } })
-  }, /teachingNote/)
+  // Retired notes do not replace or gate the actual solving process.
+  const withoutNotes = validGfAnalysis(input)
+  for (const blank of Object.values(withoutNotes.blanks)) delete blank.teachingNote
+  const admittedWithoutNotes = await analyzeGrammarFillImportCandidate(input, {
+    providerCallers: { deepseek: stubProvider(withoutNotes) },
+  })
+  assert('grammar accepts complete reasoning without teachingNote',
+    Object.values(admittedWithoutNotes.analysis.blanks).every((blank) =>
+      !Object.hasOwn(blank, 'teachingNote') && blank.reason && blank.evidence.length > 0))
 
   // --- Missing reason ---
   await assertRejects('missing reason blocks', () => {
@@ -583,17 +595,20 @@ async function assertAnalysisValidation() {
     return analyzeGrammarFillImportCandidate(input, { providerCallers: { deepseek: stubProvider(bad) } })
   }, /role/)
 
-  // C2: non-finite blank with valid role and path passes
+  // C2: non-finite needs a syntactic role, not a personal fast/slow path.
   {
     const good = validGfAnalysis(input)
     const givenKey = input.group.questions.find((q) => q.prompt)
     good.blanks[givenKey.id].facetKey = 'grammar-fill.given.verb.non-finite'
     good.blanks[givenKey.id].role = 'adverbial'
-    good.blanks[givenKey.id].path = 'slow'
+    delete good.blanks[givenKey.id].path
     const ok = await analyzeGrammarFillImportCandidate(input, {
       providerCallers: { deepseek: stubProvider(good) },
     })
-    assert('C2: non-finite with valid role+path passes', ok.analysis.schemaVersion === 'grammar-fill-analysis-v2')
+    assert('C2: non-finite without path keeps its role and derived form',
+      ok.analysis.blanks[givenKey.id].role === 'adverbial'
+      && !Object.hasOwn(ok.analysis.blanks[givenKey.id], 'path')
+      && Object.hasOwn(ok.analysis.blanks[givenKey.id], 'similarityForm'))
   }
 
   // ============================================================

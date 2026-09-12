@@ -3,7 +3,7 @@
  * Read-only — these types are never written to any database.
  */
 
-import type { PaperTextMap, PaperQuestion, PaperEvidence } from '../../../../shared/papersurface/types'
+import type { PaperTextMap, PaperQuestion, PaperEvidence, PaperAnnotation } from '../../../../shared/papersurface/types'
 import type { CanonicalSurfaceParagraph } from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 
 export type LoadEvidence = {
@@ -192,4 +192,5 @@ export type PaperSurfaceData = {
   semanticParagraphs?: ReadonlyArray<CanonicalSurfaceParagraph>
   questions: ReadonlyArray<PaperQuestion>
   evidence: ReadonlyArray<PaperEvidence>
+  annotations?: ReadonlyArray<PaperAnnotation>
 }

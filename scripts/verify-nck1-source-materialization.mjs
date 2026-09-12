@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { pathToFileURL } from 'node:url'
 
 import {
   digestNck1SourceMaterialization,
@@ -341,6 +342,7 @@ export function makeFixture({ listening = false, mixedTable = false } = {}) {
   }
 }
 
+if (import.meta.url === pathToFileURL(process.argv[1]).href) {
 const plain = makeFixture()
 assert.deepEqual(validateNck1SourceMaterialization(plain), [])
 for (const text of [
@@ -541,3 +543,4 @@ assert(validateNck1SourceMaterialization(misplacedContinuationStarters).some((it
   item.code === 'MATERIALIZATION_WRITING_GIVENS_PLACEMENT_INVALID'))
 
 console.log('verify-nck1-source-materialization: PASS')
+}

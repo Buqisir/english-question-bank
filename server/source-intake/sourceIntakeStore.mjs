@@ -21,12 +21,13 @@ const DOCUMENT_FILE_ROLES = new Set([
   'official_answers',
   'question_and_answers',
 ])
-const FILE_ROLES = new Set([...DOCUMENT_FILE_ROLES, 'listening_audio'])
+const FILE_ROLES = new Set([...DOCUMENT_FILE_ROLES, 'listening_audio', 'analyzed_package'])
 const PLATFORMS = new Set(['wechat_official', 'xiaohongshu', 'teacher_group', 'other'])
 const MEDIA_TYPES = new Map([
   ['.pdf', 'application/pdf'],
   ['.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
   ['.mp3', 'audio/mpeg'],
+  ['.zip', 'application/zip'],
 ])
 const MAX_FILE_BYTES = 64 * 1024 * 1024
 const MAX_BUNDLE_BYTES = 256 * 1024 * 1024
@@ -112,10 +113,11 @@ export function validateSourceIntakeFileManifest(input) {
     !expectedMediaType
     || input?.mediaType !== expectedMediaType
     || (role === 'listening_audio') !== (extension === '.mp3')
+    || (role === 'analyzed_package') !== (extension === '.zip')
   ) {
     throw intakeError(
       'SOURCE_INTAKE_FILE_TYPE_INVALID',
-      'Question sources accept matching DOCX/PDF files; listening audio accepts MP3',
+      'Question sources accept DOCX/PDF; listening audio accepts MP3; analyzed packages accept ZIP',
       400,
     )
   }
@@ -123,7 +125,8 @@ export function validateSourceIntakeFileManifest(input) {
     throw intakeError('SOURCE_INTAKE_FILE_DIGEST_INVALID', 'File SHA-256 is invalid', 400)
   }
   const byteLength = Number(input.byteLength)
-  if (!Number.isInteger(byteLength) || byteLength < 1 || byteLength > MAX_FILE_BYTES) {
+  const limit = role === 'analyzed_package' ? MAX_BUNDLE_BYTES : MAX_FILE_BYTES
+  if (!Number.isInteger(byteLength) || byteLength < 1 || byteLength > limit) {
     throw intakeError('SOURCE_INTAKE_FILE_SIZE_INVALID', 'File size is invalid', 413)
   }
   return {
@@ -167,7 +170,7 @@ function ensureShape(db) {
       id TEXT PRIMARY KEY,
       intake_id TEXT NOT NULL REFERENCES source_intakes(id) ON DELETE CASCADE,
       role TEXT NOT NULL CHECK (role IN (
-        'question_source', 'official_answers', 'question_and_answers', 'listening_audio'
+        'question_source', 'official_answers', 'question_and_answers', 'listening_audio', 'analyzed_package'
       )),
       file_name TEXT NOT NULL,
       extension TEXT NOT NULL,
@@ -247,10 +250,13 @@ function ensureShape(db) {
   if (!intakeColumns.has('target_paper_id')) {
     db.exec('ALTER TABLE source_intakes ADD COLUMN target_paper_id TEXT')
   }
+  if (!intakeColumns.has('package_target_json')) {
+    db.exec('ALTER TABLE source_intakes ADD COLUMN package_target_json TEXT')
+  }
   const sourceFileTable = db.prepare(`
     SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'source_intake_files'
   `).get()
-  if (!sourceFileTable?.sql?.includes("'listening_audio'")) {
+  if (!sourceFileTable?.sql?.includes("'analyzed_package'")) {
     db.exec('PRAGMA foreign_keys = OFF; PRAGMA legacy_alter_table = ON')
     try {
       db.exec(`
@@ -261,7 +267,7 @@ function ensureShape(db) {
           id TEXT PRIMARY KEY,
           intake_id TEXT NOT NULL REFERENCES source_intakes(id) ON DELETE CASCADE,
           role TEXT NOT NULL CHECK (role IN (
-            'question_source', 'official_answers', 'question_and_answers', 'listening_audio'
+            'question_source', 'official_answers', 'question_and_answers', 'listening_audio', 'analyzed_package'
           )),
           file_name TEXT NOT NULL,
           extension TEXT NOT NULL,
@@ -490,6 +496,24 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
     return paper
   }
 
+  function assertPackageRevisionTarget(db, target) {
+    const paper = db.prepare(`
+      SELECT p.paper_id, p.paper_name, p.latest_revision_id, r.state
+      FROM import_review_papers p JOIN import_review_revisions r ON r.id = p.latest_revision_id
+      WHERE p.paper_id = ?
+    `).get(target.paperId)
+    if (!paper || paper.latest_revision_id !== target.revisionId) {
+      throw intakeError('ANALYZED_PACKAGE_REVISION_STALE', 'Review revision changed; start a new corrected-package upload')
+    }
+    if (!['awaiting_review', 'changes_requested', 'approved'].includes(paper.state)) {
+      throw intakeError('ANALYZED_PACKAGE_REVISION_UNAVAILABLE', 'Target revision is not available for correction')
+    }
+    if (db.prepare('SELECT 1 FROM import_review_shipping_guards WHERE paper_id = ?').get(target.paperId)) {
+      throw intakeError('ANALYZED_PACKAGE_PAPER_SHIPPING', 'Paper is publishing; do not replace its revision')
+    }
+    return paper
+  }
+
   function activeFiles(db, intakeId) {
     return db.prepare(`
       SELECT * FROM source_intake_files
@@ -502,6 +526,9 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
     const uploadedRoles = new Set(
       files.filter((file) => file.uploadedAt).map((file) => file.role),
     )
+    if (uploadedRoles.has('analyzed_package')) {
+      return uploadedRoles.size === 1 && !targetPaperId ? 'ready_for_agent' : 'draft'
+    }
     if (targetPaperId) {
       return uploadedRoles.size === 1 && uploadedRoles.has('listening_audio')
         ? 'ready_for_agent'
@@ -569,6 +596,7 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
       paperName: intake.paper_name,
       mode: intake.target_paper_id ? 'listening_supplement' : 'new_paper',
       targetPaperId: intake.target_paper_id,
+      packageTarget: parseJson(intake.package_target_json),
       state: intake.state,
       sources,
       files,
@@ -596,21 +624,38 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
     const intakeId = `intake-${randomUUID()}`
     const timestamp = nowIso()
     withDb(true, (db) => transaction(db, () => {
-      const targetPaper = assertTargetPaper(db, targetPaperId)
+      let packageTarget = null
+      let previous = null
+      if (input?.packageRevisionOf) {
+        if (targetPaperId) throw intakeError('SOURCE_INTAKE_MODE_FILES_CONFLICT', 'Package correction cannot be a listening supplement', 400)
+        previous = detailWithDb(db, requiredString(input.packageRevisionOf, 'packageRevisionOf', 100))
+        if (previous.state !== 'handed_off' || !previous.handedOffPaperId) {
+          throw intakeError('ANALYZED_PACKAGE_TARGET_UNAVAILABLE', 'Open the existing paper in Review before uploading a corrected package')
+        }
+        const paper = db.prepare('SELECT latest_revision_id FROM import_review_papers WHERE paper_id = ?')
+          .get(previous.handedOffPaperId)
+        packageTarget = { paperId: previous.handedOffPaperId, revisionId: paper?.latest_revision_id }
+      }
+      const targetPaper = packageTarget
+        ? assertPackageRevisionTarget(db, packageTarget)
+        : assertTargetPaper(db, targetPaperId)
       paperName = targetPaper
         ? targetPaper.paper_name
         : requiredString(input?.paperName, 'paperName', 300)
-      sources = targetPaper
+      sources = previous
+        ? normalizeSources(previous.sources)
+        : targetPaper
         ? [{ platform: 'other', sourceName: '听力音频补充', sourceUrl: null }]
         : normalizeSources(input?.sources)
       db.prepare(`
         INSERT INTO source_intakes (
-          id, paper_name, state, target_paper_id, created_by, created_at, updated_at
-        ) VALUES (?, ?, 'draft', ?, ?, ?, ?)
+          id, paper_name, state, target_paper_id, package_target_json, created_by, created_at, updated_at
+        ) VALUES (?, ?, 'draft', ?, ?, ?, ?, ?)
       `).run(
         intakeId,
         paperName,
         targetPaperId,
+        packageTarget ? JSON.stringify(packageTarget) : null,
         requiredString(actor, 'actor', 200),
         timestamp,
         timestamp,
@@ -643,6 +688,9 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
     withDb(true, (db) => transaction(db, () => {
       const intake = assertIntakeExists(db, intakeId)
       assertOwnerMutable(intake)
+      if (intake.package_target_json && targetPaperId) {
+        throw intakeError('SOURCE_INTAKE_MODE_FILES_CONFLICT', 'Package correction cannot become a listening supplement')
+      }
       const targetPaper = assertTargetPaper(db, targetPaperId)
       const paperName = targetPaper
         ? targetPaper.paper_name
@@ -694,12 +742,15 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
       const intake = assertIntakeExists(db, intakeId)
       assertOwnerMutable(intake)
       if (
-        (intake.target_paper_id && manifest.role !== 'listening_audio')
+        (intake.package_target_json && manifest.role !== 'analyzed_package')
+        || (intake.target_paper_id && manifest.role !== 'listening_audio')
         || (!intake.target_paper_id && !FILE_ROLES.has(manifest.role))
       ) {
         throw intakeError(
           'SOURCE_INTAKE_MODE_FILES_CONFLICT',
-          'Listening supplements accept exactly one MP3 and no question documents',
+          intake.package_target_json
+            ? 'Package corrections accept exactly one ZIP'
+            : 'Listening supplements accept exactly one MP3 and no question documents',
           400,
         )
       }
@@ -731,9 +782,11 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
       ))
       if (pending) return { file: pending, created: false }
 
-      const replacedRoles = manifest.role === 'question_and_answers'
-        ? DOCUMENT_FILE_ROLES
-        : new Set([manifest.role, ...(DOCUMENT_FILE_ROLES.has(manifest.role)
+      const replacedRoles = manifest.role === 'analyzed_package'
+        ? FILE_ROLES
+        : manifest.role === 'question_and_answers'
+        ? new Set([...DOCUMENT_FILE_ROLES, 'analyzed_package'])
+        : new Set([manifest.role, 'analyzed_package', ...(DOCUMENT_FILE_ROLES.has(manifest.role)
           ? ['question_and_answers']
           : [])])
       const retainedBytes = activeFiles(db, intakeId)
@@ -813,6 +866,13 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
         throw intakeError('SOURCE_INTAKE_FILE_NOT_FOUND', 'Source file not found', 404)
       }
       if (!file.active) {
+        if (file.role === 'analyzed_package') {
+          db.prepare('UPDATE source_intake_files SET active = 0 WHERE intake_id = ? AND active = 1')
+            .run(intakeId)
+        } else {
+          db.prepare("UPDATE source_intake_files SET active = 0 WHERE intake_id = ? AND active = 1 AND role = 'analyzed_package'")
+            .run(intakeId)
+        }
         if (file.role === 'question_and_answers') {
           db.prepare(`
             UPDATE source_intake_files SET active = 0
@@ -881,12 +941,18 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
       byteLength: file.byteLength,
     }))
     const supplement = Boolean(intake.target_paper_id)
+    const analyzedPackage = files.some((file) => file.role === 'analyzed_package')
+    const packageTarget = parseJson(intake.package_target_json)
     return {
-      schemaVersion: supplement
+      schemaVersion: analyzedPackage
+        ? 'source-intake-submission-v3'
+        : supplement
         ? 'source-intake-submission-v2'
         : 'source-intake-submission-v1',
       intakeId,
       revisionNumber,
+      ...(analyzedPackage ? { mode: 'analyzed_package' } : {}),
+      ...(packageTarget ? { targetPaperId: packageTarget.paperId, baseRevisionId: packageTarget.revisionId } : {}),
       ...(supplement ? {
         mode: 'listening_supplement',
         targetPaperId: intake.target_paper_id,
@@ -905,13 +971,14 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
         'SOURCE_INTAKE_NOT_READY',
         before.targetPaperId
           ? 'A listening supplement requires exactly one uploaded MP3'
-          : 'Question and authoritative answer files are required before submission',
+          : 'Question and official-answer files, or one complete analyzed package, are required before submission',
       )
     }
     before.files.forEach(assertStoredFile)
     const submission = withDb(true, (db) => transaction(db, () => {
       const intake = assertIntakeExists(db, intakeId)
       assertOwnerMutable(intake)
+      if (intake.package_target_json) assertPackageRevisionTarget(db, JSON.parse(intake.package_target_json))
       if (
         draftStateForFiles(activeFiles(db, intakeId), intake.target_paper_id)
           !== 'ready_for_agent'
@@ -1435,21 +1502,26 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
       }
       const targetPaperId = submission.snapshot.targetPaperId || null
       const supplement = submission.snapshot.mode === 'listening_supplement'
-      if (supplement && paperId !== targetPaperId) {
+      const packageCorrection = submission.snapshot.mode === 'analyzed_package' && Boolean(submission.snapshot.baseRevisionId)
+      const existingPaper = supplement || packageCorrection
+      if (existingPaper && paperId !== targetPaperId) {
         throw intakeError(
           'SOURCE_INTAKE_TARGET_PAPER_MISMATCH',
-          'Listening supplement must hand off to its immutable target paperId',
+          'Supplement or correction must hand off to its immutable target paperId',
           400,
         )
       }
-      if (supplement && !importReviewPaper(db, paperId)) {
+      if (packageCorrection) {
+        assertPackageRevisionTarget(db, { paperId, revisionId: submission.snapshot.baseRevisionId })
+      }
+      if (existingPaper && !importReviewPaper(db, paperId)) {
         throw intakeError(
           'SOURCE_INTAKE_TARGET_PAPER_NOT_FOUND',
           'Listening supplement target no longer exists in Import Review',
           404,
         )
       }
-      if (!supplement && importReviewPaper(db, paperId)) {
+      if (!existingPaper && importReviewPaper(db, paperId)) {
         throw intakeError(
           'SOURCE_INTAKE_PAPER_ID_CONFLICT',
           'paperId already exists in Import Review',
@@ -1461,7 +1533,7 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
           UPDATE source_intake_submissions
           SET state = 'handed_off', handed_off_paper_id = ?, updated_at = ?
           WHERE id = ?
-        `).run(supplement ? null : paperId, timestamp, submissionId)
+        `).run(existingPaper ? null : paperId, timestamp, submissionId)
       } catch (error) {
         if (String(error.message).includes('UNIQUE')) {
           throw intakeError('SOURCE_INTAKE_PAPER_ID_CONFLICT', 'paperId is already handed off')
@@ -1475,7 +1547,7 @@ export function createSourceIntakeStore({ dbPath, filesRoot, now = () => new Dat
             UPDATE source_intake_orb_workers
             SET state = 'handed_off', paper_id = ?, updated_at = ?
             WHERE submission_id = ?
-          `).run(supplement ? null : paperId, timestamp, submissionId)
+          `).run(existingPaper ? null : paperId, timestamp, submissionId)
         } catch (error) {
           if (String(error.message).includes('UNIQUE')) {
             throw intakeError('SOURCE_INTAKE_PAPER_ID_CONFLICT', 'paperId is already bound to a worker')

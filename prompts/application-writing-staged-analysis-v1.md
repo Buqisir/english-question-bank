@@ -14,16 +14,16 @@ these top-level keys and no others:
   "taskType": "application",
   "modelAnswer": "The complete English composition, including every required given line in its original order.",
   "reviewCard": {
+    "schemaVersion": "application-review-card-v2",
     "form": "简洁中文，说明交际形式",
     "topic": "简洁中文，概括本题主题",
-    "reader": "简洁中文，说明实际读者",
+    "purpose": "简洁中文，说明本次写作要达成的交际目的",
     "person": "简洁中文，说明主要人称及其作用",
     "tense": "简洁中文，说明主要时态及其作用",
-    "type": "简洁中文，说明语篇类型",
-    "points": ["要点一如何落地", "要点二如何落地"],
-    "readerWho": "简洁中文，说明读者身份与关系",
-    "readerCares": "简洁中文，说明读者真正关心什么",
-    "readerWants": "简洁中文，说明作者希望读者理解、回应或采取什么行动",
+    "points": ["按原题实际要求列出要点一如何落地"],
+    "reader": "简洁中文，说明实际读者",
+    "relationship": "简洁中文，说明作者与读者的关系",
+    "readerNeeds": "简洁中文，说明读者需要理解、回应或采取什么行动",
     "value": "简洁中文，说明这篇文字对读者的实际价值"
   }
 }
@@ -32,10 +32,15 @@ these top-level keys and no others:
 ReviewCard is both student-visible teaching guidance and structured matching
 support. Every ReviewCard string must be specific to this task, no longer than
 80 characters, contain no Markdown or line breaks, and avoid internal AI
-labels. `points` must contain exactly two non-empty items that together cover
-the task's explicit content requirements without inventing a new requirement.
+labels. `points` must contain one non-empty item for each explicit task content
+requirement: preserve the task's actual count (including one or three), cover
+every requirement once, and do not invent or merge requirements to force a
+fixed count. Keep `topic` distinct from `purpose`, `reader` distinct from
+`relationship`, and `purpose` distinct from `value` in the JSON even though the
+teaching card displays the first two pairs together.
 
-Do not add `highlightExpressions`, a score, review verdict, metadata,
+Do not add `highlightExpressions`, `type`, `readerWho`, `readerCares`,
+`readerWants`, a score, review verdict, metadata,
 `officialModelAnswer`, or any other field. The model answer is one defensible
 route, not the unique required wording. Return JSON only, with no Markdown fence
 or commentary outside the object.

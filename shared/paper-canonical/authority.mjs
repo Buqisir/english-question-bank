@@ -52,6 +52,7 @@ import manifestV51 from '../../standards/paper-canonical/manifest-v51.json' with
 import manifestV52 from '../../standards/paper-canonical/manifest-v52.json' with { type: 'json' }
 import manifestV53 from '../../standards/paper-canonical/manifest-v53.json' with { type: 'json' }
 import manifestV54 from '../../standards/paper-canonical/manifest-v54.json' with { type: 'json' }
+import manifestV55 from '../../standards/paper-canonical/manifest-v55.json' with { type: 'json' }
 import paperPresentationV1 from '../../standards/paper-canonical/rendering/paper-presentation-v1.json' with { type: 'json' }
 import paperPresentationV1Schema from '../../schemas/paper-canonical/paper-presentation-v1.schema.json' with { type: 'json' }
 import paperPresentationV2 from '../../standards/paper-canonical/rendering/paper-presentation-v2.json' with { type: 'json' }
@@ -77,6 +78,7 @@ import sourceAdaptersV13 from '../../standards/paper-canonical/adapters/source-a
 import sourceAdaptersV14 from '../../standards/paper-canonical/adapters/source-adapters-v14.json' with { type: 'json' }
 import sourceAdaptersV15 from '../../standards/paper-canonical/adapters/source-adapters-v15.json' with { type: 'json' }
 import sourceAdaptersV16 from '../../standards/paper-canonical/adapters/source-adapters-v16.json' with { type: 'json' }
+import sourceAdaptersV17 from '../../standards/paper-canonical/adapters/source-adapters-v17.json' with { type: 'json' }
 import richContentV1 from '../../standards/paper-canonical/core/rich-content-v1.json' with { type: 'json' }
 import nck1 from '../../standards/paper-canonical/profiles/nck1-v1.json' with { type: 'json' }
 import zhejiangLegacy from '../../standards/paper-canonical/profiles/zhejiang-legacy-v1.json' with { type: 'json' }
@@ -378,8 +380,13 @@ import reportV52Schema from '../../schemas/paper-canonical/normalization-report-
 import publicationV52Schema from '../../schemas/paper-canonical/canonical-paper-publication-v52.schema.json' with { type: 'json' }
 import reportV54Schema from '../../schemas/paper-canonical/normalization-report-v54.schema.json' with { type: 'json' }
 import publicationV54Schema from '../../schemas/paper-canonical/canonical-paper-publication-v54.schema.json' with { type: 'json' }
+import reportV55Schema from '../../schemas/paper-canonical/normalization-report-v55.schema.json' with { type: 'json' }
+import publicationV55Schema from '../../schemas/paper-canonical/canonical-paper-publication-v55.schema.json' with { type: 'json' }
+import nck1AnalyzedPackageSchema from '../../schemas/paper-canonical/nck1-analyzed-package-v1.schema.json' with { type: 'json' }
+import nck1AnalyzedPackageInputSchema from '../../schemas/paper-canonical/nck1-analyzed-package-input-v1.schema.json' with { type: 'json' }
+import packageJsonPointerEvidenceSchema from '../../schemas/paper-canonical/package-json-pointer-evidence-v1.schema.json' with { type: 'json' }
 
-import { digestJson, exactKeys, isRecordValue } from './stable.mjs'
+import { digestJson, exactKeys, isRecordValue, stableStringify } from './stable.mjs'
 
 const requiredOwners = [
   'core',
@@ -1387,9 +1394,9 @@ export function validateAuthorityClosure({
   schemas,
 }) {
   const issues = []
-  // Universal v46-v52, renderer-only v53, and combined v54 derive from v37. Their identities must
+  // Universal v46-v52 and their renderer/package successors derive from v37. Their identities must
   // not make paper-specific v38-v45 successor rules part of this closure.
-  const semanticManifestVersion = ['46', '47', '48', '49', '50', '51', '52', '53', '54'].includes(candidateManifest?.version)
+  const semanticManifestVersion = ['46', '47', '48', '49', '50', '51', '52', '53', '54', '55'].includes(candidateManifest?.version)
     ? '37'
     : candidateManifest?.version
   const schemaById = new Map(Object.entries(schemas || {}))
@@ -1449,7 +1456,7 @@ export function validateAuthorityClosure({
     const family = familyArtifacts.get(familyId)
     if (!family || family.choiceOwnership !== ownership) issues.push(issue('AUTHORITY_FAMILY_CLOSURE', '$.artifacts', `Missing or invalid ${familyId} family contract`))
   }
-  if (['50', '51', '52', '53', '54'].includes(candidateManifest?.version)) {
+  if (['50', '51', '52', '53', '54', '55'].includes(candidateManifest?.version)) {
     const family = familyArtifacts.get('listening')
     if (!family || family.choiceOwnership !== 'per_question') {
       issues.push(issue('AUTHORITY_FAMILY_CLOSURE', '$.artifacts', 'Missing or invalid listening family contract'))
@@ -1644,7 +1651,7 @@ export function validateAuthorityClosure({
   }
   if (Number(semanticManifestVersion) >= 29) {
     const continuationFamily = familyArtifacts.get('continuation-writing')
-    const expectedContinuationFamily = ['49', '50', '51', '52', '53', '54'].includes(candidateManifest?.version)
+    const expectedContinuationFamily = ['49', '50', '51', '52', '53', '54', '55'].includes(candidateManifest?.version)
       ? continuationWritingV5
       : Number(semanticManifestVersion) >= 39
         ? continuationWritingV4
@@ -1703,6 +1710,36 @@ export function validateAuthorityClosure({
         'NCK1_MATERIALIZATION_ADAPTER_INVALID',
         '$.artifacts.adapter',
         'Manifest v54 must bind materialization admission behavior v2 without changing its media type',
+      ))
+    }
+  }
+  if (candidateManifest?.version === '55') {
+    const adapter = Object.values(artifacts || {}).find(
+      (artifact) => artifact?.owner === 'source_adapter',
+    )
+    const rawAdapter = adapter?.adapters?.filter((candidate) =>
+      candidate?.adapterId === 'nck1-source-materialization')
+    const packageAdapter = adapter?.adapters?.filter((candidate) =>
+      candidate?.adapterId === 'nck1-analyzed-package')
+    if (
+      adapter?.version !== '17'
+      || rawAdapter?.length !== 1
+      || rawAdapter[0].version !== '2'
+      || rawAdapter[0].mediaType
+        !== 'application/vnd.eqb.nck1-source-materialization+json'
+      || packageAdapter?.length !== 1
+      || packageAdapter[0].version !== '1'
+      || packageAdapter[0].mediaType
+        !== 'application/vnd.eqb.nck1-analyzed-package+json'
+      || stableStringify(packageAdapter[0].capabilities) !== stableStringify([
+        'immutable_package_json_pointer_evidence',
+        'direct_continuation_instruction_agreement',
+      ])
+    ) {
+      issues.push(issue(
+        'NCK1_ANALYZED_PACKAGE_ADAPTER_INVALID',
+        '$.artifacts.adapter',
+        'Manifest v55 must preserve raw materialization v2 and bind analyzed-package v1 with its exact evidence capabilities',
       ))
     }
   }
@@ -2008,6 +2045,10 @@ const artifactsV54 = {
   ...artifactsV53,
   adapter: sourceAdaptersV16,
   'renderer-paper-presentation': paperPresentationV2,
+}
+const artifactsV55 = {
+  ...artifactsV54,
+  adapter: sourceAdaptersV17,
 }
 const schemasV1 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v1': normalizationSchema, 'normalization-report-v1': reportSchema, 'canonical-paper-publication-v1': publicationSchema }
 const schemasV2 = { ...sharedSchemas, 'renderer-typography-v1': typographyV1Schema, 'normalization-rules-v2': normalizationV2Schema, 'normalization-report-v2': reportV2Schema, 'canonical-paper-publication-v2': publicationV2Schema }
@@ -2590,6 +2631,15 @@ const schemasV54 = {
   'canonical-paper-publication-v54': publicationV54Schema,
   'paper-presentation-v2': paperPresentationV2Schema,
 }
+const schemasV55 = {
+  ...Object.fromEntries(Object.entries(schemasV54).filter(([schemaId]) =>
+    !['normalization-report-v54', 'canonical-paper-publication-v54'].includes(schemaId))),
+  'normalization-report-v55': reportV55Schema,
+  'canonical-paper-publication-v55': publicationV55Schema,
+  'nck1-analyzed-package-v1': nck1AnalyzedPackageSchema,
+  'nck1-analyzed-package-input-v1': nck1AnalyzedPackageInputSchema,
+  'package-json-pointer-evidence-v1': packageJsonPointerEvidenceSchema,
+}
 const validationV1 = validateAuthorityClosure({ manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 })
 const validationV2 = validateAuthorityClosure({ manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 })
 const validationV3 = validateAuthorityClosure({ manifest: manifestV3, artifacts: artifactsV3, schemas: schemasV3 })
@@ -2701,6 +2751,7 @@ const validations = [
   validateAuthorityClosure({ manifest: manifestV52, artifacts: artifactsV52, schemas: schemasV52 }),
   validateAuthorityClosure({ manifest: manifestV53, artifacts: artifactsV53, schemas: schemasV53 }),
   validateAuthorityClosure({ manifest: manifestV54, artifacts: artifactsV54, schemas: schemasV54 }),
+  validateAuthorityClosure({ manifest: manifestV55, artifacts: artifactsV55, schemas: schemasV55 }),
 ]
 if (validations.some((validation) => !validation.ok)) {
   throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify(validations.flatMap((validation) => validation.issues))}`)
@@ -2770,6 +2821,7 @@ const authorities = [
   { manifest: manifestV52, artifacts: artifactsV52, schemas: schemasV52 },
   { manifest: manifestV53, artifacts: artifactsV53, schemas: schemasV53 },
   { manifest: manifestV54, artifacts: artifactsV54, schemas: schemasV54 },
+  { manifest: manifestV55, artifacts: artifactsV55, schemas: schemasV55 },
 ].map((authority) => ({
   ...authority,
   authorityRef: authorityRef(authority.manifest),
@@ -2785,6 +2837,9 @@ export const trustedDocxCandidateAuthorityRef = authorities.find((authority) => 
 // versioned materialization-admission and presentation successor without changing
 // historical authorities or the default v36 fixture/import lane.
 export const nck1MaterializationCandidateAuthorityRef = authorities.find((authority) => authority.manifest.version === '54').authorityRef
+// Analyzed packages are a distinct captured-source protocol. They may not enter
+// the immutable raw-materialization v54 adapter registry or confirmation lane.
+export const nck1AnalyzedPackageCandidateAuthorityRef55 = authorities.find((authority) => authority.manifest.version === '55').authorityRef
 export const paperPresentationAuthorityRef = authorities.find((authority) => authority.manifest.version === '54').authorityRef
 // Ticket 31a may replay only the exact pre-v42 legacy Candidate authority
 // recorded by the immutable confirmation lanes. It is not a current import

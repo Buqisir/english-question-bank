@@ -120,7 +120,23 @@ assert.deepEqual(imported.issues, [])
 assert.equal(imported.candidate?.interpretation.groups.length, 9)
 assert.equal(imported.candidate?.interpretation.assertions.length, 45)
 
+const labelledRows = extractNck1PdfTextStructure(fixture.labelledRows.bytes, {
+  documentId: 'labelled-rows', expectedPageCount: fixture.labelledRows.pageCount,
+})
+assert.deepEqual(labelledRows.paragraphs.map((item) => item.text.replace(/\s+/gu, ' ')), [
+  'A. Alpha B. Bravo C. Charlie',
+  'A. One B. Two C. Three D. Four',
+  '41. A. Red B. Blue C. Green D. Yellow',
+  '1-5 ABCAB 6-10 BCABC 11-15 ABCAB 16-20 BCABC',
+  '56. to learn 57. quickly 58. on 59. the 60. path',
+  '第 1 页 共 1 页',
+])
+labelledRows.paragraphs.forEach((item) => assertPageRegion(item.sourceIndex))
+assert.equal(labelledRows.furniture.length, 1, 'only the verified footer outside the body is excluded')
+assertPageRegion(labelledRows.furniture[0].source)
+
 const failureCases = [
+  ['misorderedOptions', 'NCK1_PDF_READING_ORDER_AMBIGUOUS'],
   ['imageOnly', 'NCK1_PDF_TEXT_LAYER_MISSING'],
   ['incomplete', 'NCK1_PDF_TEXT_COVERAGE_INCOMPLETE'],
   ['multiColumn', 'NCK1_PDF_MULTI_COLUMN_UNSUPPORTED'],

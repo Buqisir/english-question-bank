@@ -9,6 +9,7 @@ import { buildSupportedMarkerSequence } from './paper-normalization-test-helpers
 import { analyzeReadingImportCandidate } from '../server/paper-import-ai/analyzeReading.mjs'
 import { buildPaperImportAiPackageFiles } from '../server/paper-import-ai/packageBuilder.mjs'
 import { validatePaperImportPackage } from '../server/paper-import/validator.mjs'
+import { buildObjectiveTeachingFixture } from './lib/objective-teaching-fixture.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const repoRoot = path.resolve(__dirname, '..')
@@ -254,6 +255,7 @@ function validAnalysis(input = fixtureInput()) {
       [input.group.groupId]: {
         overview: '博物馆保护纸质记录。',
         discourseStructure: { summary: '介绍保护方式。', paragraphs: [] },
+        ...buildObjectiveTeachingFixture(input.group),
       },
     },
     questions: Object.fromEntries(
