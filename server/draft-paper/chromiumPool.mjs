@@ -96,17 +96,36 @@ async function launchBrowser() {
 
 async function getContext() {
   if (browser && browser.isConnected() && context) return context
-  browser = await launchBrowser()
-  // A resident BrowserContext (created once, reused by every render) instead
-  // of calling browser.newPage() per render measurably cuts per-render
-  // overhead on the `channel: 'chromium'` build (~150-195ms -> ~85-95ms per
-  // page, measured locally) — see paginationRenderer.mjs's latency note.
-  // Every render still gets its own fresh Page (created/closed per render by
-  // withChromiumPage below); only the context — and with it, the underlying
-  // browser-process-level setup cost — is shared. Renders never touch
-  // cookies/storage/navigation to a real origin (setContent() on inert
-  // HTML strings only), so a shared context has no cross-render leakage.
-  context = await browser.newContext()
+  // Only launch when no live browser is held. Overwriting a still-connected
+  // `browser` would drop the module's only reference to a running Chromium
+  // process — unreachable by closeChromiumPool(), the exit hook, and the
+  // 'disconnected' handler — an orphan that outlives the render that made it.
+  if (!browser || !browser.isConnected()) {
+    browser = await launchBrowser()
+    context = null
+  }
+  const active = browser
+  try {
+    // A resident BrowserContext (created once, reused by every render) instead
+    // of calling browser.newPage() per render measurably cuts per-render
+    // overhead on the `channel: 'chromium'` build (~150-195ms -> ~85-95ms per
+    // page, measured locally) — see paginationRenderer.mjs's latency note.
+    // Every render still gets its own fresh Page (created/closed per render by
+    // withChromiumPage below); only the context — and with it, the underlying
+    // browser-process-level setup cost — is shared. Renders never touch
+    // cookies/storage/navigation to a real origin (setContent() on inert
+    // HTML strings only), so a shared context has no cross-render leakage.
+    context = await active.newContext()
+  } catch (error) {
+    // A connection-preserving newContext() failure (method-level CDP errors
+    // such as Target.createBrowserContext) never fires 'disconnected' and
+    // leaves `active` alive with no context. Close it here so the process is
+    // never orphaned; the next acquire relaunches cleanly.
+    if (browser === active) browser = null
+    context = null
+    await active.close().catch(() => {})
+    throw error
+  }
   return context
 }
 
