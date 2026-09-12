@@ -87,7 +87,6 @@ const officialAnswers = JSON.parse(readFileSync(
 function grammarFillExplanation(entry) {
   return [
     entry?.reason ? `【${entry.answer}】${entry.reason}` : '',
-    entry?.teachingNote ? `点拨：${entry.teachingNote}` : '',
   ].filter(Boolean).join('\n')
 }
 

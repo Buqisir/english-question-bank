@@ -18,6 +18,7 @@ import manifestV50 from '../../standards/paper-canonical/manifest-v50.json' with
 import manifestV51 from '../../standards/paper-canonical/manifest-v51.json' with { type: 'json' }
 import manifestV52 from '../../standards/paper-canonical/manifest-v52.json' with { type: 'json' }
 import manifestV54 from '../../standards/paper-canonical/manifest-v54.json' with { type: 'json' }
+import manifestV55 from '../../standards/paper-canonical/manifest-v55.json' with { type: 'json' }
 import nck1V16 from '../../standards/paper-canonical/profiles/nck1-v16.json' with { type: 'json' }
 import nationalLegacyV4 from '../../standards/paper-canonical/profiles/national-legacy-v4.json' with { type: 'json' }
 import zhejiangLegacyV13 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v13.json' with { type: 'json' }
@@ -236,6 +237,13 @@ const registeredManifestProfiles = new Map([
       { profileId: profile.profileId, profileVersion: profile.version, profileDigest: digestJson(profile) },
     ])),
   ],
+  [
+    `${manifestV55.manifestId}@${manifestV55.version}@${digestJson(manifestV55)}`,
+    new Map([nck1V16, nationalLegacyV4, zhejiangLegacyV13].map((profile) => [
+      profile.profileId,
+      { profileId: profile.profileId, profileVersion: profile.version, profileDigest: digestJson(profile) },
+    ])),
+  ],
 ])
 
 function reject(message) {
@@ -356,7 +364,7 @@ function sourceInstructionOverrides(consumption) {
   for (const selection of consumption.selections) {
     const occurrences = selection?.projectedOccurrences || []
     const continuationV49 =
-      ['49', '50', '51', '52', '54'].includes(consumption.authorityRef?.manifestVersion)
+      ['49', '50', '51', '52', '54', '55'].includes(consumption.authorityRef?.manifestVersion)
       && selection?.mode === 'canonical'
       && selection?.familyContractId === 'continuation-writing'
     const digestByGroupId = new Map(

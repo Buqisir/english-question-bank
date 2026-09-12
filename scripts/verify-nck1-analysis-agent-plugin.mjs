@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
 
 import nck1AnalysisAgentPlugin, {
   NCK1_ANALYSIS_AGENT_MODEL,
@@ -34,8 +35,8 @@ const writingContractMarkers = {
     '# NCK1 Staged Application Analysis Packaging Contract — V1',
   ],
   continuation: [
-    '# Narrative Continuation Analysis Prompt — V1',
-    '# NCK1 Staged Narrative Continuation Packaging Contract — V1',
+    '# Narrative Continuation Analysis Prompt — V2',
+    '# NCK1 Staged Narrative Continuation Packaging Contract — V2',
   ],
 }
 
@@ -58,12 +59,26 @@ assert.deepEqual(NCK1_ANALYSIS_GROUPS, [
   'grammar',
   'application',
   'continuation',
+  'listening-unit',
 ])
 assert.equal(NCK1_ANALYSIS_AGENT_MODEL, 'openai/gpt-5.6-sol')
 assert.equal(NCK1_ANALYSIS_AGENT_REASONING_EFFORT, 'medium')
 
 const valid = request('reading-a', 'A-ONLY')
-assert.deepEqual(validateNck1AnalysisGroupInput(valid), valid)
+const actualContinuationContract = [
+  'continuation-analysis-v2.md', 'continuation-writing-staged-analysis-v2.md',
+].map((file) => readFileSync(new URL(`../prompts/${file}`, import.meta.url), 'utf8')).join('\n\n')
+assert.doesNotThrow(() => validateNck1AnalysisGroupInput({
+  ...writingRequest('continuation'), outputContract: actualContinuationContract,
+}))
+assert.throws(() => validateNck1AnalysisGroupInput({
+  ...writingRequest('continuation'), outputContract: actualContinuationContract.replaceAll('— V2', '— V1'),
+}), /tracked base and staged/)
+const normalizedValid = validateNck1AnalysisGroupInput(valid)
+assert.deepEqual({ ...normalizedValid, outputContract: valid.outputContract }, valid)
+assert.match(normalizedValid.outputContract, /Exact required groups\[groupId\]\.teachingContent JSON Schema annex/u)
+assert.match(normalizedValid.outputContract, /"const": "objective-teaching-content-v1"/u)
+assert.match(normalizedValid.outputContract, /"answer-insertion"/u)
 const message = buildNck1AnalysisAgentMessage(valid)
 assert.match(message, /^Generate exactly the reading-a staged analysis/u)
 assert.match(message, /SOURCE-A-ONLY/u)
@@ -74,6 +89,15 @@ assert.throws(
   () => validateNck1AnalysisGroupInput({ ...valid, group: 'whole-paper' }),
   /group must be one of/u,
 )
+const listening = request('listening-unit')
+listening.sourceGroup.material = {
+  groupId: 'listening-unit',
+  questions: [{ questionId: 'question:listening:1' }],
+}
+listening.authoritativeAnswers = { 'question:listening:1': 'A' }
+assert.throws(() => validateNck1AnalysisGroupInput(listening), /exact listening-analysis-v1 schema/u)
+listening.outputContract = 'schema { "const": "listening-analysis-v1" }'
+assert.deepEqual(validateNck1AnalysisGroupInput(listening), listening)
 assert.throws(
   () => validateNck1AnalysisGroupInput({
     ...valid,

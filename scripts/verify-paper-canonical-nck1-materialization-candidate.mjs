@@ -21,6 +21,7 @@ import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 import { assertCanonicalConsumptionVisibleStructure } from '../shared/paper-canonical/visibleStructure.mjs'
 import manifestV46 from '../standards/paper-canonical/manifest-v46.json' with { type: 'json' }
 import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequest.mjs'
+import { admitCanonicalPaperImport } from '../server/paper-canonical/publication.mjs'
 import {
   NCK1_MATERIALIZATION_REQUEST_FILE_NAME,
   materializeNck1CanonicalRequest,
@@ -670,6 +671,19 @@ const materialized = materializeNck1CanonicalRequest(
   input,
   confirmation(first.candidate),
 )
+const rawNoListeningInput = sourceInput({ listening: false })
+const rawNoListeningCandidate = importCanonicalCandidate(rawNoListeningInput).candidate
+const rawNoListeningRequest = materializeNck1CanonicalRequest(
+  rawNoListeningInput,
+  confirmation(rawNoListeningCandidate),
+)
+const rawAdmission = admitCanonicalPaperImport({
+  request: rawNoListeningRequest.request,
+  sourceAssetVersion: 1,
+})
+assert.equal(rawAdmission.ok, true,
+  `raw v54 admission and consumers remain unchanged: ${JSON.stringify(rawAdmission.diagnostics)}`)
+assert.equal(rawAdmission.sealed.manifest.authority.manifestVersion, '54')
 assert.throws(
   () => materializeNck1CanonicalRequest(input),
   { code: 'TEACHER_CONFIRMATION_REQUIRED' },

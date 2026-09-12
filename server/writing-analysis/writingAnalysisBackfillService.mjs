@@ -7,7 +7,7 @@
  *   persistWritingAnalysisGroup — write/merge writing-analysis-v1.json envelope
  *
  * persistWritingAnalysisGroup projection branches by taskType:
- *   application supports optional officialModelAnswer/reviewCard/highlights;
+ *   application supports optional officialModelAnswer and legacy/v2 reviewCard;
  *   new continuation keeps {taskType, modelAnswer, officialModelAnswer?, continuationAnalysis};
  *   historical continuation keeps {taskType, modelAnswer, continuationDesign,
  *   highlightExpressions}.
@@ -23,16 +23,31 @@ import { randomUUID } from 'node:crypto'
 import { execFileSync } from 'node:child_process'
 import Ajv from 'ajv/dist/2020.js'
 import { resolvePaperAssetReadPaths } from '../paper-import/storage.mjs'
+import { isCompleteApplicationReviewCard } from '../../shared/writing/applicationReviewCard.mjs'
 
 const WRITING_ANALYSIS_FILENAME = 'writing-analysis-v1.json'
 const WRITING_ANALYSIS_SCHEMA_VERSION = 'writing-analysis-v1'
-const CONTINUATION_ANALYSIS_SCHEMA_PATH = path.join(
+const CONTINUATION_ANALYSIS_V1_SCHEMA_PATH = path.join(
   path.dirname(fileURLToPath(import.meta.url)),
   '../../schemas/paper-import/continuation-analysis-v1.schema.json',
 )
-const continuationAnalysisSchema = JSON.parse(readFileSync(CONTINUATION_ANALYSIS_SCHEMA_PATH, 'utf8'))
-const validateContinuationAnalysisSchema = new Ajv({ allErrors: true, strict: false })
-  .compile(continuationAnalysisSchema)
+const CONTINUATION_ANALYSIS_V2_SCHEMA_PATH = path.join(
+  path.dirname(fileURLToPath(import.meta.url)),
+  '../../schemas/paper-import/continuation-analysis-v2.schema.json',
+)
+const continuationAjv = new Ajv({ allErrors: true, strict: false })
+const validateContinuationAnalysisV1Schema = continuationAjv.compile(JSON.parse(
+  readFileSync(CONTINUATION_ANALYSIS_V1_SCHEMA_PATH, 'utf8'),
+))
+const validateContinuationAnalysisV2Schema = continuationAjv.compile(JSON.parse(
+  readFileSync(CONTINUATION_ANALYSIS_V2_SCHEMA_PATH, 'utf8'),
+))
+
+function continuationAnalysisValidator(value) {
+  return value?.schemaVersion === 'continuation-analysis-v1'
+    ? validateContinuationAnalysisV1Schema
+    : validateContinuationAnalysisV2Schema
+}
 
 function formatContinuationAnalysisSchemaErrors(errors = []) {
   return errors
@@ -290,15 +305,14 @@ if suspect:
  *   - modelAnswer non-empty
  *   - officialModelAnswer optional for either writing family; when present,
  *     a trim-non-empty source string
- *   - highlightExpressions optional for new candidates
- *   - when present, highlightExpressions keeps the existing 3–5 item checks
+ *   - highlightExpressions retired and rejected for new candidates
  *
  * Continuation checks:
- *   New narrative continuation (continuationAnalysis / continuation-analysis-v1):
+ *   Narrative continuation (continuationAnalysis V1 compatibility or V2 production):
  *   - taskType === 'continuation'
  *   - modelAnswer non-empty
  *   - officialModelAnswer optional; when present, a trim-non-empty source string
- *   - continuationAnalysis matches continuation-analysis-v1 schema
+ *   - continuationAnalysis matches its declared V1 or V2 schema
  *   - continuationDesign / highlightExpressions / reviewCard forbidden
  *   Historical continuation:
  *   - continuationDesign.theme non-empty
@@ -341,6 +355,9 @@ export function validateWritingAnalysisCandidate(candidate) {
       if (candidate.highlightExpressions !== undefined) {
         throw new Error('highlightExpressions is only valid on historical continuation writing.')
       }
+      const validateContinuationAnalysisSchema = continuationAnalysisValidator(
+        candidate.continuationAnalysis,
+      )
       if (!validateContinuationAnalysisSchema(candidate.continuationAnalysis)) {
         throw new Error(
           `continuationAnalysis schema invalid: ${formatContinuationAnalysisSchemaErrors(
@@ -380,16 +397,15 @@ export function validateWritingAnalysisCandidate(candidate) {
     if (candidate.reviewCard !== undefined && !isCompleteReviewCard(candidate.reviewCard)) {
       throw new Error('reviewCard is malformed.')
     }
+    if (candidate.highlightExpressions !== undefined) {
+      throw new Error('highlightExpressions is retired for application writing.')
+    }
   }
 
-  // Hard: historical continuation requires highlights; application validates
-  // legacy highlights only when they are present. New continuationAnalysis
-  // papers must not carry highlightExpressions.
+  // Hard: historical continuation requires highlights. New application and
+  // continuationAnalysis candidates must not carry highlightExpressions.
   const highlightExpressions = candidate.highlightExpressions
-  if (
-    (candidate.taskType === 'continuation' && !hasNarrativeContinuationAnalysis(candidate))
-    || (candidate.taskType !== 'continuation' && highlightExpressions !== undefined)
-  ) {
+  if (candidate.taskType === 'continuation' && !hasNarrativeContinuationAnalysis(candidate)) {
     if (!Array.isArray(highlightExpressions)) {
       throw new Error('highlightExpressions must be an array.')
     }
@@ -442,44 +458,8 @@ export function validateWritingAnalysisCandidate(candidate) {
 
 // ─── persistWritingAnalysisGroup ─────────────────────────────────────────────
 
-const REVIEW_CARD_SCALAR_FIELDS = [
-  'form',
-  'topic',
-  'reader',
-  'person',
-  'tense',
-  'type',
-  'readerWho',
-  'readerCares',
-  'readerWants',
-  'value',
-]
-const REVIEW_CARD_FIELDS = new Set([...REVIEW_CARD_SCALAR_FIELDS, 'points'])
-const REVIEW_CARD_FORBIDDEN_TEXT = /[\r\n\u0085\u000B\u000C\u2028\u2029<>*_`~#[\]]/
-const REVIEW_CARD_MARKDOWN_LIST = /^(?:[-+*]|\d+[.)])\s/
-const REVIEW_CARD_MARKDOWN_THEMATIC_BREAK = /^-{3,}$/
-
-function isReviewCardText(value) {
-  return (
-    typeof value === 'string'
-    && value.length > 0
-    && value === value.trim()
-    && !REVIEW_CARD_FORBIDDEN_TEXT.test(value)
-    && !REVIEW_CARD_MARKDOWN_LIST.test(value)
-    && !REVIEW_CARD_MARKDOWN_THEMATIC_BREAK.test(value)
-    && [...value].length <= 80
-  )
-}
-
 export function isCompleteReviewCard(value) {
-  if (!value || typeof value !== 'object' || Array.isArray(value)) return false
-  if (Object.keys(value).some((field) => !REVIEW_CARD_FIELDS.has(field))) return false
-  if (!REVIEW_CARD_SCALAR_FIELDS.every((field) => isReviewCardText(value[field]))) return false
-  return (
-    Array.isArray(value.points)
-    && value.points.length === 2
-    && value.points.every(isReviewCardText)
-  )
+  return isCompleteApplicationReviewCard(value)
 }
 
 /**
@@ -490,8 +470,7 @@ export function isCompleteReviewCard(value) {
  * agent-side fields are discarded.
  *
  * Projection branches by taskType:
- *   - application: {taskType, modelAnswer, officialModelAnswer?, reviewCard?,
- *     highlightExpressions?}
+ *   - application: {taskType, modelAnswer, officialModelAnswer?, reviewCard?}
  *   - new continuation: {taskType, modelAnswer, continuationAnalysis}
  *   - historical continuation: {taskType, modelAnswer, continuationDesign,
  *     highlightExpressions}
@@ -568,18 +547,9 @@ export function persistWritingAnalysisGroup({ paperAssetsDir }, work, analysis) 
       }
     }
   } else {
-    // application: new candidates may omit highlights. When updating an
-    // existing application, omission preserves historical highlight objects
-    // byte-for-byte at the JSON value level, including extension fields/order.
-    const existingWriting = existingGroups[groupId]?.writing
-    const highlightExpressions = analysis.highlightExpressions !== undefined
-      ? analysis.highlightExpressions
-      : (
-          existingWriting?.taskType === 'application'
-          && existingWriting.highlightExpressions !== undefined
-            ? existingWriting.highlightExpressions
-            : undefined
-        )
+    if (analysis.highlightExpressions !== undefined) {
+      throw new Error('highlightExpressions is retired for application writing.')
+    }
     writingEntry = {
       taskType: analysis.taskType,
       modelAnswer: analysis.modelAnswer,
@@ -587,7 +557,6 @@ export function persistWritingAnalysisGroup({ paperAssetsDir }, work, analysis) 
         ? { officialModelAnswer: analysis.officialModelAnswer }
         : {}),
       ...(analysis.reviewCard !== undefined ? { reviewCard: analysis.reviewCard } : {}),
-      ...(highlightExpressions !== undefined ? { highlightExpressions } : {}),
     }
   }
 

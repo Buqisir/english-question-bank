@@ -1,5 +1,5 @@
 import { createHash, randomUUID } from 'node:crypto'
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { LISTENING_AUDIO_PATHS } from './listeningAudioEvidence.mjs'
 import {
@@ -39,6 +39,7 @@ import {
 } from '../paper-canonical/docxPairCanonicalRequest.mjs'
 import {
   isNck1MaterializationCanonicalImportRequest,
+  isNck1AnalyzedPackageCanonicalImportRequest,
   nck1MaterializationPublicationSourceAsset,
 } from '../paper-canonical/nck1MaterializationCanonicalRequest.mjs'
 import {
@@ -114,6 +115,19 @@ function getDefaultScore(group, answers) {
     .map((questionId) => Number(answers?.[questionId]?.score))
     .filter((score) => Number.isFinite(score) && score > 0)
   return scores.length > 0 ? scores[0] : 0
+}
+
+function analysisOverview(packageData, groupId) {
+  for (const analysis of [
+    packageData.readingAnalysis,
+    packageData.scAnalysis,
+    packageData.clozeAnalysis,
+    packageData.grammarFillAnalysis,
+  ]) {
+    const overview = analysis?.groups?.[groupId]?.overview
+    if (typeof overview === 'string' && overview.trim()) return overview.trim()
+  }
+  return ''
 }
 
 function upsertQuestionGroupTags(db, groupId, tags) {
@@ -265,7 +279,7 @@ export function ensurePaperImportDatabaseShape(db) {
 }
 
 function upsertPaperAssetToDb(db, packageData, version, options = {}) {
-  const { paperAsset, answerKey, importMeta, readingAnalysis } = packageData
+  const { paperAsset, answerKey, importMeta } = packageData
   const paper = paperAsset.paper
   const answers = answerKey.answers || {}
   const sourceType = sourceTypeMap[importMeta.paper.sourceType] || 'other'
@@ -284,7 +298,7 @@ function upsertPaperAssetToDb(db, packageData, version, options = {}) {
     const materialText = getGroupMaterialText(group)
     const summary =
       groupMeta.summary ||
-      readingAnalysis?.groups?.[group.groupId]?.overview ||
+      analysisOverview(packageData, group.groupId) ||
       group.title ||
       paper.title
     const groupTitle = groupMeta.displayTitleOverride || group.title
@@ -419,19 +433,41 @@ function upsertPaperAssetToDb(db, packageData, version, options = {}) {
     ])
   }
 
-  db.prepare(
-    `
-    INSERT INTO paper_asset_versions (id, paper_id, asset_version, version_name, version_dir, source_file_sha256, status)
-    VALUES (?, ?, ?, ?, ?, ?, 'published')
-    `,
-  ).run(
-    `pav-${paper.paperId}-v${version}`,
-    paper.paperId,
-    version,
-    `v${version}`,
-    path.join('app/public/paper-assets', paper.paperId, 'versions', `v${version}`),
-    packageData.sourceDocx?.sha256 || packageData.sourceAssetDigest,
-  )
+  if (options.recordAssetVersion !== false) {
+    db.prepare(
+      `
+      INSERT INTO paper_asset_versions (id, paper_id, asset_version, version_name, version_dir, source_file_sha256, status)
+      VALUES (?, ?, ?, ?, ?, ?, 'published')
+      `,
+    ).run(
+      `pav-${paper.paperId}-v${version}`,
+      paper.paperId,
+      version,
+      `v${version}`,
+      path.join('app/public/paper-assets', paper.paperId, 'versions', `v${version}`),
+      packageData.sourceDocx?.sha256 || packageData.sourceAssetDigest,
+    )
+  }
+}
+
+function loadPublishedCompatibilityPackage(versionDir) {
+  const read = (relativePath, required = false) => {
+    const filePath = path.join(versionDir, relativePath)
+    if (!existsSync(filePath)) {
+      if (required) throw new Error(`Rollback compatibility artifact is missing: ${relativePath}`)
+      return null
+    }
+    return JSON.parse(readFileSync(filePath, 'utf8'))
+  }
+  return {
+    paperAsset: read('paper-asset.json', true),
+    answerKey: read('answer-key.json', true),
+    importMeta: read('import-meta.json', true),
+    readingAnalysis: read('analyses/reading-choice-analysis-v1.json'),
+    scAnalysis: read('analyses/seven-choices-analysis-v1.json'),
+    clozeAnalysis: read('analyses/cloze-analysis-v1.json'),
+    grammarFillAnalysis: read('analyses/grammar-fill-analysis-v1.json'),
+  }
 }
 
 function canonicalAdmissionFailure(admission) {
@@ -1062,8 +1098,12 @@ function admitBoundUniversalNck1Package({
   packageData,
   expectedVisibleStructureDigest,
   listeningAudioBytes,
+  externalListeningReviewProof,
 }) {
-  if (!isNck1MaterializationCanonicalImportRequest(canonicalRequest)) {
+  if (
+    !isNck1MaterializationCanonicalImportRequest(canonicalRequest)
+    && !isNck1AnalyzedPackageCanonicalImportRequest(canonicalRequest)
+  ) {
     return {
       failure: canonicalAdmissionFailure({
         disposition: 'unsupported',
@@ -1079,6 +1119,7 @@ function admitBoundUniversalNck1Package({
     sourceAssetVersion: version,
     sourceAsset: nck1MaterializationPublicationSourceAsset(canonicalRequest),
     listeningAudioBytes,
+    externalListeningReviewProof,
   })
   if (!admission.ok) return { failure: canonicalAdmissionFailure(admission) }
   if (admission.sealed.manifest.paperId !== paperId) {
@@ -1139,6 +1180,7 @@ export function publishUniversalNck1Import({
   forceDbFailure = false,
   failurePoint = null,
   onPrepared = null,
+  externalListeningReviewProof = null,
 }) {
   const projection = buildNck1ReviewProjection(
     reviewRootDir,
@@ -1147,7 +1189,8 @@ export function publishUniversalNck1Import({
   // The immutable descriptor is part of the Candidate/Owner identity. These
   // exact bytes are sealed before any DB or latest mutation; no ASR replay.
   const listeningAudioBytes = projection.materialization.listening.state === 'captured'
-    ? new Uint8Array(readFileSync(path.join(reviewRootDir, LISTENING_AUDIO_PATHS.playback)))
+    ? projection.listeningAudioBytes
+      || new Uint8Array(readFileSync(path.join(reviewRootDir, LISTENING_AUDIO_PATHS.playback)))
     : null
   const expectedIdentity = {
     sourceDigest: projection.sourceDigest,
@@ -1186,6 +1229,7 @@ export function publishUniversalNck1Import({
     config: projection.config,
     manifest: projection.manifest,
     materialization: projection.materialization,
+    sourceProvenance: projection.sourceProvenance,
     sourceAssetVersion: projection.candidate.interpretation.sourceAssetVersion,
     analysisSidecars: projection.analysisSidecars,
     paginationPlan: projection.paginationPlan,
@@ -1208,6 +1252,7 @@ export function publishUniversalNck1Import({
         packageData,
         expectedVisibleStructureDigest: projection.visibleStructureDigest,
         listeningAudioBytes,
+        externalListeningReviewProof,
       })
     },
   })
@@ -1689,6 +1734,12 @@ export function rollbackPaperImportPublication({
   let dbCommitted = false
   try {
     db.exec('BEGIN')
+    upsertPaperAssetToDb(
+      db,
+      loadPublishedCompatibilityPackage(targetVersionDir),
+      target.sourceAssetVersion,
+      { recordAssetVersion: false },
+    )
     selectCanonicalPublicationCurrent(db, target)
     latestSwap = swapPaperImportLatest({
       paperAssetsDir,
