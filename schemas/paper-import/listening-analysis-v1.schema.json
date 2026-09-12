@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eqbank.cc/schemas/paper-import/listening-analysis-v1.schema.json",
+  "title": "NCK1 Listening Teaching Analysis V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "paperId", "sourceAssetVersion", "materials", "questions"],
+  "properties": {
+    "schemaVersion": { "const": "listening-analysis-v1" },
+    "paperId": { "type": "string", "minLength": 1 },
+    "sourceAssetVersion": { "type": "integer", "minimum": 1 },
+    "materials": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/material" }
+    },
+    "questions": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/question" }
+    }
+  },
+  "$defs": {
+    "topic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["theme", "themeGroup", "subtopic"],
+      "properties": {
+        "theme": { "type": "string", "minLength": 1 },
+        "themeGroup": { "type": "string", "minLength": 1 },
+        "subtopic": { "type": "string", "minLength": 1 }
+      }
+    },
+    "material": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["segmentId", "questionIds", "transcript", "translationZh", "topic", "summaryZh"],
+      "properties": {
+        "segmentId": { "type": "string", "minLength": 1 },
+        "questionIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "transcript": { "type": "string", "minLength": 1 },
+        "translationZh": { "type": "string", "minLength": 1 },
+        "topic": { "$ref": "#/$defs/topic" },
+        "summaryZh": { "type": "string", "minLength": 1 }
+      }
+    },
+    "distractor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "explanationZh"],
+      "properties": {
+        "label": { "enum": ["A", "B", "C"] },
+        "explanationZh": { "type": "string", "minLength": 1 }
+      }
+    },
+    "question": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["questionId", "segmentId", "stemTranslationZh", "optionTranslationsZh", "officialAnswer", "evidence", "reasonZh"],
+      "properties": {
+        "questionId": { "type": "string", "minLength": 1 },
+        "segmentId": { "type": "string", "minLength": 1 },
+        "stemTranslationZh": { "type": "string", "minLength": 1 },
+        "optionTranslationsZh": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["A", "B", "C"],
+          "properties": {
+            "A": { "type": "string", "minLength": 1 },
+            "B": { "type": "string", "minLength": 1 },
+            "C": { "type": "string", "minLength": 1 }
+          }
+        },
+        "officialAnswer": { "enum": ["A", "B", "C"] },
+        "evidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["quote"],
+          "properties": { "quote": { "type": "string", "minLength": 1 } }
+        },
+        "reasonZh": { "type": "string", "minLength": 1 },
+        "distractors": {
+          "type": "array",
+          "maxItems": 2,
+          "items": { "$ref": "#/$defs/distractor" }
+        }
+      }
+    }
+  }
+}

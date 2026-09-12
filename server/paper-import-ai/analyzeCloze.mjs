@@ -2,6 +2,8 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import {
   assertFullTranslationZh,
+  assertObjectiveTeachingAnnotations,
+  assertSharedPassageIntroduction,
   assertSelectedLongSentences,
   createAnalyzerProviderShell,
   readTeachingAnalysisPrompt,
@@ -127,6 +129,7 @@ export function validateClozeShape(analysis, {
   group,
   requireFullTranslation = false,
   requireSelectedLongSentences = false,
+  requireTeachingContent = false,
 }) {
   if (!analysis || typeof analysis !== 'object' || Array.isArray(analysis)) throw new Error('AI 未返回 JSON 对象。')
   if (analysis.schemaVersion !== 'cloze-analysis-v1') throw new Error('AI JSON schemaVersion 不正确。')
@@ -139,18 +142,19 @@ export function validateClozeShape(analysis, {
     throw new Error('AI JSON blanks 必须是对象。')
   }
   const groupAnalysis = analysis.groups?.[group.groupId]
+  assertSharedPassageIntroduction(groupAnalysis)
   if (requireFullTranslation) {
     assertFullTranslationZh(groupAnalysis, group, { requireBlankMarkers: true })
   }
   assertSelectedLongSentences(groupAnalysis, group, {
     required: requireSelectedLongSentences,
   })
-  if (groupAnalysis?.similaritySummary !== undefined) {
-    const summary = optionalString(groupAnalysis.similaritySummary)
-    if (!summary) throw new Error('AI JSON groups.similaritySummary 不能为空。')
-    if (/[\r\n]/u.test(summary)) throw new Error('AI JSON groups.similaritySummary 必须是一句话。')
+  if (requireTeachingContent) {
+    assertObjectiveTeachingAnnotations(groupAnalysis, group, {
+      sourceAssetVersion: analysis.sourceAssetVersion,
+      requireAnswerInsertions: true,
+    })
   }
-
   const expectedQuestionIds = group.questions.map((q) => q.id).sort()
   const actualQuestionIds = Object.keys(analysis.blanks).sort()
   if (JSON.stringify(actualQuestionIds) !== JSON.stringify(expectedQuestionIds)) {
@@ -191,7 +195,6 @@ export function validateClozeShape(analysis, {
     }
     if (!Array.isArray(item.evidence)) throw new Error(`${questionId}: evidence 必须是数组。`)
     if (item.evidence.length === 0) throw new Error(`${questionId}: evidence 不能为空，至少需要 1 个 collocation-partner。`)
-    if (!optionalString(item.teachingNote)) throw new Error(`${questionId}: 缺少 teachingNote。`)
 
     // signatureFacet: present only when pos !== 'other'; must be valid + POS prefix match
     if (item.signatureFacet !== undefined && item.signatureFacet !== null && item.signatureFacet !== '') {
@@ -279,7 +282,12 @@ function stampClozeMeta(analysis, { providerResult, providerId }) {
 export const analyzeClozeImportCandidate = createAnalyzerProviderShell({
   assertInput: assertClozeAnalyzeInput,
   buildMessages: buildClozeAnalysisMessages,
-  validate: validateClozeShape,
+  validate: (analysis, input) => validateClozeShape(analysis, {
+    ...input,
+    requireFullTranslation: true,
+    requireSelectedLongSentences: true,
+    requireTeachingContent: true,
+  }),
   isRetryable: isRetryableClozeError,
   beforeValidate: stampClozeMeta,
 })

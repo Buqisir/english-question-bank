@@ -25,6 +25,7 @@ const roleLabels = {
   official_answers: '官方答案',
   question_and_answers: '题目与答案',
   listening_audio: '听力音频',
+  analyzed_package: '完整解析包',
 }
 
 function escapeHtml(value) {
@@ -89,6 +90,7 @@ function digest(file) {
 }
 
 function modeForIntake(intake) {
+  if (intake?.files?.some((file) => file.role === 'analyzed_package')) return 'package'
   return intake?.files?.some((file) => file.role === 'question_and_answers')
     ? 'combined'
     : 'separate'
@@ -240,7 +242,7 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
     }
     if (intake.state === 'handed_off') {
       const command = `继续 ${intake.handedOffPaperId}，处理线上审核反馈`
-      return `<span class="ledger-actions"><a class="ledger-action" href="/ops/?view=review">打开审核</a><button class="ledger-action" type="button" data-copy-text="${escapeHtml(command)}" data-copy-name="继续导题口令">复制继续口令</button></span>`
+      return `<span class="ledger-actions"><a class="ledger-action" href="/ops/?view=review">打开审核</a><button class="ledger-action" type="button" data-package-revision="${escapeHtml(intake.id)}">上传修正版包</button><button class="ledger-action" type="button" data-copy-text="${escapeHtml(command)}" data-copy-name="继续导题口令">复制继续口令</button></span>`
     }
     if (intake.state === 'queued' && intake.currentSubmission) {
       const notifying = state.submittingIntakeId === intake.id
@@ -298,14 +300,15 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
   function uploadBox(role, label, { audio = false } = {}) {
     const value = fileValue(role)
     const isNew = value instanceof File
+    const packageFile = role === 'analyzed_package'
     return `<label class="upload-box" data-upload-role="${escapeHtml(role)}">
-      <span class="upload-box-heading"><strong>${escapeHtml(label)}</strong><span>${audio ? 'MP3' : 'DOCX / PDF'}</span></span>
-      <input type="file" accept="${audio ? '.mp3,audio/mpeg' : '.docx,.pdf,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document'}" data-file-role="${escapeHtml(role)}" />
+      <span class="upload-box-heading"><strong>${escapeHtml(label)}</strong><span>${packageFile ? 'ZIP' : audio ? 'MP3' : 'DOCX / PDF'}</span></span>
+      <input type="file" accept="${packageFile ? '.zip,application/zip' : audio ? '.mp3,audio/mpeg' : '.docx,.pdf,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document'}" data-file-role="${escapeHtml(role)}" />
       ${value ? `<span class="upload-file">
         <span class="file-badge">${escapeHtml(fileExtension(value.name || value.fileName))}</span>
         <span class="upload-file-copy"><strong>${escapeHtml(value.name || value.fileName)}</strong><span>${escapeHtml(formatBytes(value.size || value.byteLength))} · ${isNew ? '待上传' : '上传完成'}</span></span>
         <span class="upload-check" aria-label="${isNew ? '已选择' : '上传完成'}"><svg aria-hidden="true" viewBox="0 0 16 16"><path d="m4 8.2 2.5 2.5L12 5.5" /></svg></span>
-      </span>` : `<span class="upload-placeholder">${documentIcon()}<span><strong>选择本地文件</strong><small>单个文件不超过 64 MB</small></span></span>`}
+      </span>` : `<span class="upload-placeholder">${documentIcon()}<span><strong>选择本地文件</strong><small>单个文件不超过 ${packageFile ? '256' : '64'} MB</small></span></span>`}
     </label>`
   }
 
@@ -314,13 +317,16 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
     const draft = state.draft || {}
     const reason = state.editing?.currentSubmission?.needsOwnerMessage
     const supplement = state.intakeMode === 'listening_supplement'
+    const packageTarget = state.editing?.packageTarget
+    const packageMode = !supplement && state.mode === 'package'
     return `<div class="drawer-layer">
       <button class="drawer-scrim" type="button" aria-label="关闭添加题源"></button>
       <aside class="intake-drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
-        <header><div><h2 id="drawer-title">${state.editing ? '编辑题源' : '添加题源'}</h2><p>记录来源并上传手头的原文件。</p></div><button class="drawer-close" type="button" aria-label="关闭">${closeIcon()}</button></header>
+        <header><div><h2 id="drawer-title">${state.editing ? '编辑题源' : '添加题源'}</h2><p>上传原始题源，或整合已完成的解析包。</p></div><button class="drawer-close" type="button" aria-label="关闭">${closeIcon()}</button></header>
         <form id="intake-form">
           <div class="drawer-body">
             ${reason ? `<div class="owner-question" role="status"><strong>Agent 需要确认</strong><span>${escapeHtml(reason)}</span></div>` : ''}
+            ${packageTarget ? `<section class="drawer-section"><h3>修正已有试卷</h3><p class="drawer-help">${escapeHtml(state.editing.paperName)} · 基于 ${escapeHtml(packageTarget.revisionId)}。提交完整修正版包，旧审核记录保留。</p></section>` : ''}
             ${state.editing ? '' : `<section class="drawer-section"><h3>添加方式</h3><div class="file-mode" role="group" aria-label="题源添加方式"><button type="button" data-intake-mode="new_paper" aria-pressed="${!supplement}">新试卷</button><button type="button" data-intake-mode="listening_supplement" aria-pressed="${supplement}">为已有试卷补听力</button></div></section>`}
             ${supplement ? `
               <section class="drawer-section"><h3>目标试卷</h3><label class="drawer-field"><span>Paper ID</span><input name="targetPaperId" required maxlength="160" value="${escapeHtml(draft.targetPaperId || '')}" placeholder="paper-…" /></label><p class="drawer-help">必须填写导题审核中已有试卷的准确 Paper ID。</p></section>
@@ -328,10 +334,12 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
             ` : `
               <section class="drawer-section"><h3>试卷</h3><label class="drawer-field"><span>试卷名称</span><input name="paperName" required maxlength="300" value="${escapeHtml(draft.paperName || '')}" placeholder="例如：2027 届高三开学考英语" /></label></section>
               <section class="drawer-section"><h3>来源</h3><div class="source-field-row"><label class="drawer-field"><span>平台</span><select name="platform"><option value="wechat_official" ${draft.platform === 'wechat_official' ? 'selected' : ''}>公众号</option><option value="xiaohongshu" ${draft.platform === 'xiaohongshu' ? 'selected' : ''}>小红书</option><option value="teacher_group" ${draft.platform === 'teacher_group' ? 'selected' : ''}>教师群</option><option value="other" ${draft.platform === 'other' ? 'selected' : ''}>其他</option></select></label><label class="drawer-field drawer-field--grow"><span>来源名称</span><input name="sourceName" required maxlength="300" value="${escapeHtml(draft.sourceName || '')}" placeholder="账号、群或老师名称" /></label></div><label class="drawer-field"><span>公开链接（选填）</span><input name="sourceUrl" type="url" maxlength="2000" value="${escapeHtml(draft.sourceUrl || '')}" placeholder="https://…" /></label></section>
-              <section class="drawer-section drawer-files"><h3>原文件</h3><div class="file-mode" role="group" aria-label="文件组合方式"><button type="button" data-file-mode="separate" aria-pressed="${state.mode === 'separate'}">题目与答案分开</button><button type="button" data-file-mode="combined" aria-pressed="${state.mode === 'combined'}">题目和答案在同一文件</button></div><div class="upload-stack">${state.mode === 'combined' ? uploadBox('question_and_answers', '题目与答案') : `${uploadBox('question_source', '试题文件')}${uploadBox('official_answers', '官方答案')}`}${uploadBox('listening_audio', '听力音频（选填）', { audio: true })}</div><p class="drawer-help">暂时没有答案也能先保存；听力音频可以稍后再补。</p></section>
+              <section class="drawer-section drawer-files"><h3>交付方式</h3>${packageTarget ? '' : `<div class="file-mode" role="group" aria-label="试卷交付方式"><button type="button" data-file-mode="separate" aria-pressed="${!packageMode}">原始题源</button><button type="button" data-file-mode="package" aria-pressed="${packageMode}">完整解析包</button></div>`}
+                ${packageMode ? `<div class="upload-stack">${uploadBox('analyzed_package', '解析包')}</div><p class="drawer-help">一个 ZIP 包含题目、官方答案、完整解析、资源和原件。只校验和整合，不重新生成解析；不必另传题卷。</p>` : `<div class="file-mode" role="group" aria-label="文件组合方式"><button type="button" data-file-mode="separate" aria-pressed="${state.mode === 'separate'}">题目与答案分开</button><button type="button" data-file-mode="combined" aria-pressed="${state.mode === 'combined'}">题目和答案在同一文件</button></div><div class="upload-stack">${state.mode === 'combined' ? uploadBox('question_and_answers', '题目与答案') : `${uploadBox('question_source', '试题文件')}${uploadBox('official_answers', '官方答案')}`}${uploadBox('listening_audio', '听力音频（选填）', { audio: true })}</div><p class="drawer-help">暂时没有答案也能先保存；听力音频可以稍后再补。提交后由 Agent 导卷并生成解析。</p>`}
+              </section>
             `}
           </div>
-          <footer class="drawer-footer"><p>${supplement ? '提交后，Agent 会把音频补进目标试卷的同一审核记录。' : '提交后将锁定这一版文件，并通知 Amp 创建专用 Orb 线程开始导题。'}</p>${state.error ? `<div class="drawer-error" role="alert">${escapeHtml(state.error)}</div>` : ''}<div><button class="button drawer-draft" type="submit" data-save-mode="draft" ${state.busy ? 'disabled' : ''}>保存草稿</button><button class="button button--primary" type="submit" data-save-mode="submit" ${state.busy ? 'disabled' : ''}>${state.busy ? '正在保存…' : '保存并通知 Amp'}</button></div></footer>
+          <footer class="drawer-footer"><p>${supplement ? '提交后，Agent 会把音频补进目标试卷的同一审核记录。' : packageMode ? '提交后锁定这一版解析包，校验通过后进入人工审核；不会自动上线。' : '提交后将锁定这一版文件，并通知 Amp 创建专用 Orb 线程开始导题。'}</p>${state.error ? `<div class="drawer-error" role="alert">${escapeHtml(state.error)}</div>` : ''}<div><button class="button drawer-draft" type="submit" data-save-mode="draft" ${state.busy ? 'disabled' : ''}>保存草稿</button><button class="button button--primary" type="submit" data-save-mode="submit" ${state.busy ? 'disabled' : ''}>${state.busy ? '正在保存…' : '保存并通知 Amp'}</button></div></footer>
         </form>
       </aside>
     </div>`
@@ -364,7 +372,7 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
     }
     state.returnFocusIntakeId = intake?.id || null
     state.intakeMode = intake?.mode || 'new_paper'
-    state.mode = modeForIntake(intake)
+    state.mode = intake?.packageTarget ? 'package' : modeForIntake(intake)
     state.selectedFiles = new Map()
     state.error = null
     state.drawerOpen = true
@@ -391,7 +399,9 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
 
   async function uploadFile(intakeId, role, file) {
     const sha256 = await digest(file)
-    const mediaType = file.name.toLowerCase().endsWith('.pdf')
+    const mediaType = role === 'analyzed_package'
+      ? 'application/zip'
+      : file.name.toLowerCase().endsWith('.pdf')
       ? 'application/pdf'
       : file.name.toLowerCase().endsWith('.mp3')
         ? 'audio/mpeg'
@@ -523,6 +533,22 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
         state.intakes.find((intake) => intake.id === button.dataset.editIntake),
       ))
     })
+    document.querySelectorAll('[data-package-revision]').forEach((button) => {
+      button.addEventListener('click', async () => {
+        button.disabled = true
+        try {
+          const result = await request('/api/source-intakes', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ packageRevisionOf: button.dataset.packageRevision }),
+          })
+          openDrawer(result.intake)
+        } catch (error) {
+          state.error = error.message
+          render()
+        }
+      })
+    })
     document.querySelectorAll('[data-submit-intake]').forEach((button) => {
       button.addEventListener('click', () => void submitReady(button.dataset.submitIntake))
     })
@@ -546,6 +572,7 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
       button.addEventListener('click', () => {
         state.mode = button.dataset.fileMode
         state.selectedFiles = new Map()
+        state.error = null
         render()
       })
     })
@@ -558,8 +585,15 @@ export function mountSourceIntakes({ root, user, request, accessHtml }) {
           render()
           return
         }
-        if (file.size > 64 * 1024 * 1024) {
-          state.error = `${file.name} 超过 64 MB`
+        const packageFile = input.dataset.fileRole === 'analyzed_package'
+        if (packageFile && !file.name.toLowerCase().endsWith('.zip')) {
+          state.error = '完整解析包只接受 ZIP 文件，请使用配套工具重新打包'
+          render()
+          return
+        }
+        const limitMb = packageFile ? 256 : 64
+        if (file.size > limitMb * 1024 * 1024) {
+          state.error = `${file.name} 超过 ${limitMb} MB`
           render()
           return
         }

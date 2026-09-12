@@ -31,7 +31,7 @@ import {
   NCK1_IMAGE_BUNDLE_MEDIA_TYPE,
   assertNck1ImageBundlePageArtifacts,
 } from '../../server/paper-import/nck1ImageSourceBundle.mjs'
-import { sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 const WRITER_LOCK_NAME = '.universal-nck1-writer.lock'
 
@@ -173,6 +173,45 @@ function selectProducer(paperDir, documents) {
   )) ? OCR_PRODUCER : PDF_PRODUCER
 }
 
+function preserveFailedPdfForOcr(manifest, documents, outputPath) {
+  const directory = path.dirname(outputPath)
+  const receiptPath = path.join(directory, PDF_PRODUCER.receiptName)
+  const reviewPath = path.join(directory, PDF_PRODUCER.reviewName)
+  if (!existsSync(outputPath) || !existsSync(receiptPath) || !existsSync(reviewPath)) return
+  const receipt = JSON.parse(readFileSync(receiptPath, 'utf8'))
+  const review = JSON.parse(readFileSync(reviewPath, 'utf8'))
+  const expectedDigest = digestJson({
+    producerVersion: receipt.producerVersion,
+    documents: documents.map(({ documentId, sha256, byteLength }) => ({ documentId, sha256, byteLength })),
+  })
+  if (receipt.schemaVersion !== PDF_PRODUCER.receiptSchemaVersion
+    || !/^nck1-pdf-materialization-producer-v\d+$/u.test(receipt.producerVersion)
+    || receipt.paperId !== manifest.paperId
+    || receipt.sourceDigest !== expectedDigest
+    || receipt.disposition !== 'needs_agent_review'
+    || receipt.mediaFiles?.length !== 0
+    || sha256(readFileSync(outputPath)) !== receipt.outputDigest
+    || review.sourceDigest !== receipt.sourceDigest
+    || review.producerVersion !== receipt.producerVersion
+    || review.schemaVersion !== 'nck1-pdf-materialization-review-v1'
+    || review.paperId !== manifest.paperId
+    || !Array.isArray(review.required) || review.required.length === 0
+    || digestJson(review.required) !== digestJson(JSON.parse(readFileSync(outputPath, 'utf8')).issues)) return
+  // Preserve all old evidence before retiring only the untouched, failed output.
+  // On interruption the original remains, or OCR can restart from the archive;
+  // old PDF receipts/reviews are never deleted or forged to unlock a retry.
+  const archive = path.join(directory, 'producer-history', receipt.outputDigest.replace('sha256:', ''))
+  mkdirSync(archive, { recursive: true })
+  for (const original of [outputPath, receiptPath, reviewPath]) {
+    const saved = path.join(archive, path.basename(original))
+    const bytes = readFileSync(original)
+    if (existsSync(saved)) {
+      if (!readFileSync(saved).equals(bytes)) throw new Error('Producer history differs; refusing to overwrite recovery evidence')
+    } else atomicBytes(saved, bytes)
+  }
+  rmSync(outputPath)
+}
+
 export function runNck1MaterializationJobUnlocked({ paperDir, manifest }) {
   if (![
     'universal-nck1-source-manifest-v1',
@@ -187,6 +226,9 @@ export function runNck1MaterializationJobUnlocked({ paperDir, manifest }) {
   const outputPath = path.join(paperDir, manifest.materializationPath)
   const receiptPath = path.join(path.dirname(outputPath), producer.receiptName)
   const reviewPath = path.join(path.dirname(outputPath), producer.reviewName)
+  if (producer === OCR_PRODUCER && !existsSync(receiptPath) && !existsSync(reviewPath)) {
+    preserveFailedPdfForOcr(manifest, documents, outputPath)
+  }
   if (existsSync(receiptPath) && existsSync(outputPath)) {
     const receipt = JSON.parse(readFileSync(receiptPath, 'utf8'))
     if (

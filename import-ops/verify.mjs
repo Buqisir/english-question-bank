@@ -27,6 +27,28 @@ const repoRoot = path.resolve(import.meta.dirname, '..')
 
 function fixtureProjection(rootDir) {
   const identity = JSON.parse(readFileSync(path.join(rootDir, 'projection.json'), 'utf8'))
+  if (identity.externalListening) {
+    const audioBytes = new Uint8Array(Buffer.from(identity.externalListening.audioBase64, 'base64'))
+    return {
+      ...identity,
+      sourceProvenance: { kind: 'external_analyzed_package' },
+      materialization: {
+        listening: {
+          state: 'captured',
+          transcript: Array.from({ length: 10 }, (_, index) => ({ segmentId: `segment:${index + 1}` })),
+          questions: Array.from({ length: 20 }, (_, index) => ({ canonicalNumber: index + 1 })),
+          answers: Array.from({ length: 20 }, (_, index) => ({ canonicalNumber: index + 1, value: 'A' })),
+        },
+      },
+      listeningAudioBytes: audioBytes,
+      listeningReview: { audio: {
+        state: 'pending_external_playback_review',
+        playbackAudioSha256: sha256(audioBytes),
+        mediaType: 'audio/mpeg',
+        durationSeconds: 42.5,
+      } },
+    }
+  }
   return {
     ...identity,
     consumption: {
@@ -91,6 +113,39 @@ function manifest({
     resolvesIssueIds,
   }
   return { bytes, input: { ...input, bundleDigest: reviewBundleDigest(input) } }
+}
+
+function externalListeningManifest() {
+  const paperId = 'paper-mock-external-listening'
+  const audioBytes = Buffer.from('measured external mp3 fixture bytes')
+  const identity = {
+    paperId,
+    paperName: '外部听力审核测试卷',
+    sourceDigest: `sha256:${'a'.repeat(64)}`,
+    candidateDigest: `sha256:${'b'.repeat(64)}`,
+    visibleStructureDigest: `sha256:${'c'.repeat(64)}`,
+    analysisDigest: `sha256:${'d'.repeat(64)}`,
+    externalListening: { audioBase64: audioBytes.toString('base64') },
+  }
+  const bytes = Buffer.from(`${JSON.stringify(identity)}\n`)
+  const input = {
+    schemaVersion: 'web-import-review-bundle-v1',
+    paperId,
+    paperName: identity.paperName,
+    sourceDigest: identity.sourceDigest,
+    candidateDigest: identity.candidateDigest,
+    visibleStructureDigest: identity.visibleStructureDigest,
+    analysisDigest: identity.analysisDigest,
+    producerBuildId: 'producer-external-listening',
+    files: [{
+      path: 'projection.json',
+      sha256: sha256(bytes),
+      byteLength: bytes.byteLength,
+      mediaType: 'application/json',
+      role: 'materialization',
+    }],
+  }
+  return { bytes, audioDigest: sha256(audioBytes), input: { ...input, bundleDigest: reviewBundleDigest(input) } }
 }
 
 function upload(store, created, bytes) {
@@ -395,6 +450,69 @@ try {
     true,
     'the same content bundle can become a fresh revision after the renderer changes',
   )
+
+  const external = externalListeningManifest()
+  const externalStore = makeStore(tempRoot)
+  const createdExternal = externalStore.createRevision(external.input)
+  upload(externalStore, createdExternal, external.bytes)
+  const finalizedExternal = externalStore.finalizeRevision(createdExternal.revision.id)
+  assert.throws(() => externalStore.approveRevision(
+    external.input.paperId,
+    finalizedExternal.id,
+    { bundleDigest: finalizedExternal.bundleDigest },
+    'owner',
+  ), (error) => error.code === 'IMPORT_REVIEW_EXTERNAL_LISTENING_CONFIRMATION_REQUIRED',
+  'unchecked external Listening cannot be approved')
+  const listeningConfirmation = {
+    audioSha256: external.audioDigest,
+    playbackMatchesSuppliedTranscript: true,
+    allSegmentsQuestionsAnswersBelongTogether: true,
+    actualAudioContentSuitableAndSafe: true,
+  }
+  assert.throws(() => externalStore.approveRevision(
+    external.input.paperId,
+    finalizedExternal.id,
+    {
+      bundleDigest: finalizedExternal.bundleDigest,
+      externalListeningReview: {
+        ...listeningConfirmation,
+        actualAudioContentSuitableAndSafe: false,
+      },
+    },
+    'owner',
+  ), (error) => error.code === 'IMPORT_REVIEW_EXTERNAL_LISTENING_CONFIRMATION_REQUIRED',
+  'a partially checked external Listening review cannot be approved')
+  assert.throws(() => externalStore.approveRevision(
+    external.input.paperId,
+    finalizedExternal.id,
+    {
+      bundleDigest: finalizedExternal.bundleDigest,
+      externalListeningReview: { ...listeningConfirmation, audioSha256: `sha256:${'f'.repeat(64)}` },
+    },
+    'owner',
+  ), (error) => error.code === 'IMPORT_REVIEW_EXTERNAL_LISTENING_AUDIO_STALE',
+  'cross-audio browser confirmation is rejected')
+  const externalApproval = externalStore.approveRevision(
+    external.input.paperId,
+    finalizedExternal.id,
+    {
+      bundleDigest: finalizedExternal.bundleDigest,
+      externalListeningReview: listeningConfirmation,
+    },
+    'owner',
+  )
+  assert.deepEqual(externalApproval.externalListeningReview.scope, {
+    transcriptSegmentCount: 10,
+    questionCount: 20,
+    answerCount: 20,
+  })
+  assert.equal(Object.hasOwn(externalApproval.externalListeningReview, 'engine'), false)
+  assert.equal(Object.hasOwn(externalApproval.externalListeningReview, 'comparison'), false)
+  const restartedExternalStore = makeStore(tempRoot)
+  assert.doesNotThrow(() => restartedExternalStore.mintExternalListeningPublicationProof(
+    external.input.paperId,
+    externalApproval,
+  ), 'restart readback revalidates stored revision, approval, renderer, and audio before minting')
 } finally {
   rmSync(tempRoot, { recursive: true, force: true })
 }
@@ -414,10 +532,19 @@ const reviewCli = readFileSync(
   path.join(repoRoot, 'scripts/import-pipeline/review.mjs'),
   'utf8',
 )
+const reviewRoutes = readFileSync(
+  path.join(repoRoot, 'server/import-review/importReviewRoutes.mjs'),
+  'utf8',
+)
 assert.match(html, /<body>\s*<!--[\s\S]*THESIS:/, 'direction contract is the first body child')
 assert.match(client, /accountKind === 'import_agent'/, 'real import_agent account gets its own inbox mode')
 assert.match(client, /reviewRevision=/, 'review Screen URL binds the immutable revision')
 assert.match(client, /认可不是部署授权/, 'approval UI states the deployment boundary')
+assert.match(client, /data-external-listening-check="playback"/, 'OPS UI requires explicit playback matching')
+assert.match(client, /data-external-listening-check="cohesion"/, 'OPS UI requires complete Listening cohesion')
+assert.match(client, /data-external-listening-check="safety"/, 'OPS UI requires actual-content safety review')
+assert.match(reviewRoutes, /\/approve[\s\S]{0,500}requireOwner\(response, context\)/,
+  'the approval route rejects import_agent authority before store approval')
 assert.doesNotMatch(client, /pull-run-push|deploy\(/, 'review UI has no deployment action')
 assert.match(screen, /import-review-preview\/revisions/, 'PaperBrowsePage switches only its review data source')
 assert.match(css, /grid-template-columns: 280px minmax\(520px, 1fr\) 360px/, 'wide desktop retains the three-pane workbench')

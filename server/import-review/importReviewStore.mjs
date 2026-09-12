@@ -25,6 +25,11 @@ const MAX_BUNDLE_BYTES = 256 * 1024 * 1024
 const MAX_FILES = 200
 const SURFACES = new Set(['screen', 'student_print', 'teacher_print', 'pdf', 'source'])
 const UNRESOLVED_ISSUE_STATES = new Set(['open', 'fixed_pending_review'])
+const liveExternalListeningReviewProofs = new WeakMap()
+
+export function externalListeningReviewProofIdentity(proof) {
+  return liveExternalListeningReviewProofs.get(proof) || null
+}
 
 function storeError(code, message, status = 409) {
   const error = new Error(message)
@@ -65,6 +70,81 @@ function nowIso() {
   return new Date().toISOString()
 }
 
+function sha256Bytes(bytes) {
+  return `sha256:${createHash('sha256').update(bytes).digest('hex')}`
+}
+
+function mintLiveExternalListeningReviewProof({ approval, revision, projection }) {
+  const review = approval.externalListeningReview
+  const audio = projection.listeningReview.audio
+  const audioBytes = projection.listeningAudioBytes
+  const exactReview = review
+    && Object.keys(review).sort().join(',') === [
+      'actualAudioContentSuitableAndSafe',
+      'allSegmentsQuestionsAnswersBelongTogether',
+      'audio',
+      'playbackMatchesSuppliedTranscript',
+      'reviewMethod',
+      'reviewedAt',
+      'reviewedBy',
+      'schemaVersion',
+      'scope',
+    ].sort().join(',')
+    && review.schemaVersion === 'external-listening-owner-review-v1'
+    && review.reviewMethod === 'owner_playback_against_supplied_transcript'
+    && review.playbackMatchesSuppliedTranscript === true
+    && review.allSegmentsQuestionsAnswersBelongTogether === true
+    && review.actualAudioContentSuitableAndSafe === true
+    && Object.keys(review.scope || {}).sort().join(',')
+      === 'answerCount,questionCount,transcriptSegmentCount'
+    && Object.keys(review.audio || {}).sort().join(',')
+      === 'byteLength,durationSeconds,mediaType,sha256'
+  if (
+    !exactReview
+    || approval.revisionId !== revision.id
+    || approval.paperId !== revision.paperId
+    || approval.sourceDigest !== revision.sourceDigest
+    || approval.candidateDigest !== revision.candidateDigest
+    || approval.visibleStructureDigest !== revision.visibleStructureDigest
+    || approval.analysisDigest !== revision.manifest.analysisDigest
+    || approval.bundleDigest !== revision.bundleDigest
+    || approval.rendererBuildId !== revision.rendererBuildId
+    || review.reviewedAt !== approval.approvedAt
+    || review.reviewedBy !== approval.approvedBy
+    || projection.sourceProvenance?.kind !== 'external_analyzed_package'
+    || audio.state !== 'pending_external_playback_review'
+    || !(audioBytes instanceof Uint8Array)
+    || review.audio.sha256 !== audio.playbackAudioSha256
+    || review.audio.sha256 !== sha256Bytes(audioBytes)
+    || review.audio.byteLength !== audioBytes.byteLength
+    || review.audio.mediaType !== audio.mediaType
+    || review.audio.durationSeconds !== audio.durationSeconds
+    || review.scope.transcriptSegmentCount !== projection.materialization.listening.transcript.length
+    || review.scope.questionCount !== projection.materialization.listening.questions.length
+    || review.scope.answerCount !== projection.materialization.listening.answers.length
+  ) {
+    throw storeError(
+      'IMPORT_REVIEW_EXTERNAL_LISTENING_PROOF_INVALID',
+      'External Listening proof requires the exact persisted Owner review and audio binding',
+    )
+  }
+  const identity = Object.freeze({
+    paperId: revision.paperId,
+    revisionId: revision.id,
+    approvalId: approval.approvalId,
+    sourceDigest: revision.sourceDigest,
+    candidateDigest: revision.candidateDigest,
+    visibleStructureDigest: revision.visibleStructureDigest,
+    analysisDigest: revision.manifest.analysisDigest,
+    bundleDigest: revision.bundleDigest,
+    audioSha256: review.audio.sha256,
+    audioByteLength: review.audio.byteLength,
+  })
+  const proof = Object.freeze({})
+  liveExternalListeningReviewProofs.set(proof, identity)
+  return proof
+}
+
 function parseJson(value, fallback = null) {
   if (typeof value !== 'string' || !value) return fallback
   return JSON.parse(value)
@@ -95,6 +175,9 @@ export function reviewBundleDigest(input) {
     schemaVersion: input.schemaVersion,
     paperId: input.paperId,
     paperName: input.paperName,
+    ...(input.expectedBaseRevisionId
+      ? { expectedBaseRevisionId: input.expectedBaseRevisionId }
+      : {}),
     sourceDigest: input.sourceDigest,
     candidateDigest: input.candidateDigest,
     visibleStructureDigest: input.visibleStructureDigest,
@@ -139,6 +222,15 @@ export function validateReviewBundleManifest(input) {
     schemaVersion: input.schemaVersion,
     paperId,
     paperName: requiredString(input.paperName, 'paperName', 300),
+    ...(input.expectedBaseRevisionId
+      ? {
+          expectedBaseRevisionId: requiredString(
+            input.expectedBaseRevisionId,
+            'expectedBaseRevisionId',
+            100,
+          ),
+        }
+      : {}),
     sourceDigest: requiredString(input.sourceDigest, 'sourceDigest', 160),
     candidateDigest: requiredString(input.candidateDigest, 'candidateDigest', 160),
     visibleStructureDigest: requiredString(
@@ -557,6 +649,17 @@ export function createImportReviewStore({
       db.exec('BEGIN IMMEDIATE')
       try {
         assertPaperNotShipping(db, manifest.paperId)
+        if (manifest.expectedBaseRevisionId) {
+          const current = db.prepare(`
+            SELECT latest_revision_id FROM import_review_papers WHERE paper_id = ?
+          `).get(manifest.paperId)
+          if (current?.latest_revision_id !== manifest.expectedBaseRevisionId) {
+            throw storeError(
+              'IMPORT_REVIEW_BASE_REVISION_STALE',
+              'Review revision changed; rebuild the corrected package upload from the current revision',
+            )
+          }
+        }
         const existing = db.prepare(`
           SELECT * FROM import_review_revisions
           WHERE paper_id = ? AND bundle_digest = ?
@@ -940,6 +1043,7 @@ export function createImportReviewStore({
       files,
       visibleStructure,
       sourceVisuals,
+      sourceProvenance: latestProjection?.sourceProvenance || null,
       mediaDerivations,
       listeningReview: latestProjection?.listeningReview || null,
       mediaConfirmations,
@@ -1342,6 +1446,61 @@ export function createImportReviewStore({
           throw storeError('IMPORT_REVIEW_ISSUES_UNRESOLVED', 'Unresolved issues block approval')
         }
         assertStoredRevisionFiles(revision, db)
+        const projection = projectRevision(revisionDirectory(revision.id), {
+          reviewKind: revision.reviewKind,
+          requireAnalyses: true,
+        })
+        assertProjectionIdentity(projection, revision)
+        const externalAudio = projection?.listeningReview?.audio?.state
+          === 'pending_external_playback_review'
+        let externalListeningReview = null
+        if (externalAudio) {
+          const confirmation = input?.externalListeningReview
+          if (
+            confirmation?.playbackMatchesSuppliedTranscript !== true
+            || confirmation?.allSegmentsQuestionsAnswersBelongTogether !== true
+            || confirmation?.actualAudioContentSuitableAndSafe !== true
+          ) {
+            throw storeError(
+              'IMPORT_REVIEW_EXTERNAL_LISTENING_CONFIRMATION_REQUIRED',
+              'Approve only after confirming playback, complete Listening cohesion, and actual audio safety',
+              400,
+            )
+          }
+          if (confirmation.audioSha256 !== projection.listeningReview.audio.playbackAudioSha256) {
+            throw storeError(
+              'IMPORT_REVIEW_EXTERNAL_LISTENING_AUDIO_STALE',
+              'Browser Listening audio digest is stale',
+            )
+          }
+          const listening = projection.materialization.listening
+          externalListeningReview = {
+            schemaVersion: 'external-listening-owner-review-v1',
+            reviewMethod: 'owner_playback_against_supplied_transcript',
+            playbackMatchesSuppliedTranscript: true,
+            allSegmentsQuestionsAnswersBelongTogether: true,
+            actualAudioContentSuitableAndSafe: true,
+            scope: {
+              transcriptSegmentCount: listening.transcript.length,
+              questionCount: listening.questions.length,
+              answerCount: listening.answers.length,
+            },
+            audio: {
+              sha256: projection.listeningReview.audio.playbackAudioSha256,
+              byteLength: projection.listeningAudioBytes.byteLength,
+              mediaType: projection.listeningReview.audio.mediaType,
+              durationSeconds: projection.listeningReview.audio.durationSeconds,
+            },
+            reviewedAt: approvedAt,
+            reviewedBy: actor,
+          }
+        } else if (input?.externalListeningReview !== undefined) {
+          throw storeError(
+            'IMPORT_REVIEW_EXTERNAL_LISTENING_NOT_APPLICABLE',
+            'External Listening confirmation is not applicable to this revision',
+            400,
+          )
+        }
         const receipt = {
           schemaVersion: 'web-import-review-approval-v1',
           approvalId: `approval-${randomUUID()}`,
@@ -1357,6 +1516,7 @@ export function createImportReviewStore({
           rendererBuildId: revision.rendererBuildId,
           approvedAt,
           approvedBy: actor,
+          ...(externalListeningReview ? { externalListeningReview } : {}),
         }
         db.prepare(`
           UPDATE import_review_revisions
@@ -1371,6 +1531,22 @@ export function createImportReviewStore({
         db.exec('ROLLBACK')
         throw error
       }
+    })
+  }
+
+  function mintExternalListeningPublicationProof(paperId, expected) {
+    return withDb(false, (db) => {
+      const { revision, approval } = assertCurrentApprovedRevision(db, paperId, expected)
+      assertStoredRevisionFiles(revision, db)
+      const projection = projectRevision(revisionDirectory(revision.id), {
+        reviewKind: revision.reviewKind,
+        requireAnalyses: true,
+      })
+      assertProjectionIdentity(projection, revision)
+      if (projection?.listeningReview?.audio?.state !== 'pending_external_playback_review') {
+        return null
+      }
+      return mintLiveExternalListeningReviewProof({ approval, revision, projection })
     })
   }
 
@@ -1864,6 +2040,7 @@ export function createImportReviewStore({
       files: detail.files,
       visibleStructure: detail.visibleStructure,
       sourceVisuals: detail.sourceVisuals,
+      sourceProvenance: detail.sourceProvenance,
       ocrReview: detail.ocrReview,
       promotion: detail.promotion,
       rendererStale: detail.rendererStale,
@@ -2042,6 +2219,7 @@ export function createImportReviewStore({
     listPapers,
     markPromotionFailed,
     markPromotionPublished,
+    mintExternalListeningPublicationProof,
     mediaConfirmation,
     paperDetail,
     projectionForRevision,

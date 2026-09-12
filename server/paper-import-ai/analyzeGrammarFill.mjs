@@ -3,6 +3,8 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import {
   assertFullTranslationZh,
+  assertObjectiveTeachingAnnotations,
+  assertSharedPassageIntroduction,
   assertSelectedLongSentences,
   createAnalyzerProviderShell,
   readTeachingAnalysisPrompt,
@@ -52,8 +54,6 @@ const VALID_ROLE_VALUES = new Set([
   'object-complement',
   'subject-complement',
 ])
-
-const VALID_PATH_VALUES = new Set(['fast', 'slow'])
 
 const VALID_EVIDENCE_TYPES = new Set([
   'subject',
@@ -326,6 +326,7 @@ export function validateGrammarFillShape(analysis, {
   group,
   requireFullTranslation = false,
   requireSelectedLongSentences = false,
+  requireTeachingContent = false,
 }) {
   if (!analysis || typeof analysis !== 'object' || Array.isArray(analysis)) throw new Error('AI 未返回 JSON 对象。')
   if (analysis.schemaVersion !== 'grammar-fill-analysis-v2') throw new Error('AI JSON schemaVersion 不正确。')
@@ -344,16 +345,19 @@ export function validateGrammarFillShape(analysis, {
     throw new Error(`AI JSON blanks questionIds 不匹配：expected ${expectedQuestionIds.join(', ')}, got ${actualQuestionIds.join(', ')}`)
   }
 
-  // overview required
-  if (!optionalString(analysis.groups?.[group.groupId]?.overview)) {
-    throw new Error('AI JSON groups.overview 不能为空。')
-  }
+  assertSharedPassageIntroduction(analysis.groups?.[group.groupId])
   if (requireFullTranslation) {
     assertFullTranslationZh(analysis.groups[group.groupId], group, { requireBlankMarkers: true })
   }
   assertSelectedLongSentences(analysis.groups[group.groupId], group, {
     required: requireSelectedLongSentences,
   })
+  if (requireTeachingContent) {
+    assertObjectiveTeachingAnnotations(analysis.groups[group.groupId], group, {
+      sourceAssetVersion: analysis.sourceAssetVersion,
+      requireAnswerInsertions: true,
+    })
+  }
 
   // Build passage text for exact-substring validation (C3).
   const passageText = group.paragraphs.map((p) => p.text).join('\n')
@@ -404,20 +408,14 @@ export function validateGrammarFillShape(analysis, {
       throw new Error(`${questionId}: facetKey "${facetKey}" 的 blank_type 是 ${expectedBlankType}，与空格 blankType ${item.blankType} 不一致。`)
     }
 
-    // role/path: required iff non-finite
+    // The syntactic role remains required; the personal fast/slow path is retired.
     if (facetKey === NON_FINITE_FACET) {
       if (!optionalString(item.role) || !VALID_ROLE_VALUES.has(item.role)) {
         throw new Error(`${questionId}: grammar-fill.given.verb.non-finite 必须有合法 role 值。`)
       }
-      if (!optionalString(item.path) || !VALID_PATH_VALUES.has(item.path)) {
-        throw new Error(`${questionId}: grammar-fill.given.verb.non-finite 必须有合法 path 值（fast 或 slow）。`)
-      }
     } else {
       if (item.role !== null && item.role !== undefined && item.role !== '') {
         throw new Error(`${questionId}: 只有 non-finite 空格才能设置 role，当前 facetKey 是 ${facetKey}。`)
-      }
-      if (item.path !== null && item.path !== undefined && item.path !== '') {
-        throw new Error(`${questionId}: 只有 non-finite 空格才能设置 path，当前 facetKey 是 ${facetKey}。`)
       }
     }
 
@@ -425,9 +423,6 @@ export function validateGrammarFillShape(analysis, {
 
     // reason
     if (!optionalString(item.reason)) throw new Error(`${questionId}: 缺少 reason。`)
-
-    // teachingNote
-    if (!optionalString(item.teachingNote)) throw new Error(`${questionId}: 缺少 teachingNote。`)
 
     // C1: answer-match against answer key — FROZEN 4-op normalization
     const aiAnswer = optionalString(item.answer)
@@ -631,7 +626,12 @@ function stampGrammarFillMeta(analysis, { providerResult, providerId }) {
 export const analyzeGrammarFillImportCandidate = createAnalyzerProviderShell({
   assertInput: assertGrammarFillAnalyzeInput,
   buildMessages: buildGrammarFillAnalysisMessages,
-  validate: validateGrammarFillShape,
+  validate: (analysis, input) => validateGrammarFillShape(analysis, {
+    ...input,
+    requireFullTranslation: true,
+    requireSelectedLongSentences: true,
+    requireTeachingContent: true,
+  }),
   isRetryable: isRetryableGrammarFillError,
   beforeValidate: stampGrammarFillMeta,
 })

@@ -32,6 +32,9 @@ const slots = Object.freeze([
 const slotById = new Map(slots.map((slot) => [slot[0], slot]))
 const digestPattern = /^sha256:[a-f0-9]{64}$/
 const idPattern = /^[a-z0-9]+(?:[._:-][a-z0-9]+)*$/
+// Only the closed package entrypoint installs this policy. The raw entrypoint
+// always uses its own ordinary Map and cannot opt out of document replay rules.
+const packageSourceSets = new WeakMap()
 
 function issue(code, path, message) {
   return { code, path, message }
@@ -68,6 +71,19 @@ function validateRegion(
 }
 
 function validateLocator(locator, path, documents, issues) {
+  if (packageSourceSets.has(documents)) {
+    const member = documents.get(locator?.documentId)
+    if (!isRecordValue(locator)
+      || !exactKeys(locator, ['kind', 'documentId', 'pointer'])
+      || locator.kind !== 'package_json_pointer'
+      || typeof locator.pointer !== 'string'
+      || !/^(?:\/(?:[^~/]|~[01])*)*$/.test(locator.pointer)
+      || member?.mediaType !== 'application/json'
+      || !['content', 'official_answers'].includes(member.role)) {
+      issues.push(issue('PACKAGE_CONTENT_LOCATOR_INVALID', path, 'Package content must reference a captured content/answer JSON member with a strict JSON pointer'))
+    }
+    return
+  }
   if (!isRecordValue(locator) || !nonEmptyString(locator.documentId)) {
     issues.push(issue('MATERIALIZATION_SOURCE_LOCATOR_INVALID', path, 'Source locator needs a document id'))
     return
@@ -716,6 +732,18 @@ function validateMedia(media, documents, mediaReferences, schemaVersion, issues)
     }
     byId.set(item.mediaId, item)
     const extraction = item.extraction
+    if (packageSourceSets.has(documents)) {
+      const member = documents.get(extraction?.memberId)
+      if (!isRecordValue(extraction)
+        || !exactKeys(extraction, ['kind', 'memberId'])
+        || extraction.kind !== 'package_member'
+        || member?.role !== 'media'
+        || member.sha256 !== item.sha256
+        || member.mediaType !== item.mimeType) {
+        issues.push(issue('PACKAGE_CONTENT_MEDIA_INVALID', `${path}.extraction`, 'Package media must bind one supplied media member, not an original extraction recipe'))
+      }
+      continue
+    }
     if (
       isRecordValue(extraction)
       && exactKeys(extraction, ['kind', 'documentId', 'entryName'])
@@ -861,6 +889,16 @@ function validateListening(listening, documents, sourceCoverage, issues) {
     return
   }
   if (listening.state === 'not_supplied') {
+    if (packageSourceSets.has(documents)) {
+      if (!exactKeys(listening, ['state', 'evidence'])
+        || !isRecordValue(listening.evidence)
+        || !exactKeys(listening.evidence, ['kind', 'documentId'])
+        || listening.evidence.kind !== 'package_declares_no_listening_content'
+        || listening.evidence.documentId !== packageSourceSets.get(documents)) {
+        issues.push(issue('PACKAGE_CONTENT_LISTENING_ABSENCE_INVALID', '$.listening.evidence', 'Package absence is a declaration bound to its content member, not a reviewed original page'))
+      }
+      return
+    }
     if (
       !exactKeys(listening, ['state', 'evidence'])
       || !isRecordValue(listening.evidence)
@@ -1038,6 +1076,38 @@ export function validateNck1SourceMaterialization(value) {
   }
   const sourceCoverage = validateSourceCoverage(value.sourceCoverage, value.groups, value.media, documents, issues)
   validateListening(value.listening, documents, sourceCoverage, issues)
+  return issues
+}
+
+// Reuses the same group/block/notice/answer/media/listening semantics without
+// manufacturing PDF descriptors, page coverage, crops, or extraction locators.
+// Exact JSON-pointer value and byte binding is the source adapter's next gate.
+export function validateNck1AnalyzedPackageContent(value, members, contentMemberId) {
+  const issues = []
+  if (!isRecordValue(value)
+    || !exactKeys(value, ['schemaVersion', 'paperId', 'profileId', 'groups', 'answers', 'media', 'listening', 'issues'])
+    || value.schemaVersion !== 'nck1-analyzed-package-content-v1'
+    || !/^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value.paperId || '')
+    || value.profileId !== 'nck1') {
+    return [issue('PACKAGE_CONTENT_ROOT_INVALID', '$', 'Package content is closed; original document/page-coverage declarations are not its evidence')]
+  }
+  if (!Array.isArray(value.issues) || value.issues.length) {
+    issues.push(issue('MATERIALIZATION_UNRESOLVED_ISSUES', '$.issues', 'Source issues must be resolved before candidate derivation'))
+  }
+  const documents = new Map(members.map((member) => [member.memberId, member]))
+  packageSourceSets.set(documents, contentMemberId)
+  const mediaReferences = []
+  const { questionIds } = validateGroups(value.groups, documents, mediaReferences, issues, true)
+  validateAnswers(value.answers, questionIds, documents, issues)
+  validateMedia(value.media, documents, mediaReferences, value.schemaVersion, issues)
+  for (const group of Array.isArray(value.groups) ? value.groups : []) {
+    for (const question of Array.isArray(group?.questions) ? group.questions : []) {
+      if (question?.figureLayout) {
+        issues.push(issue('PACKAGE_CONTENT_MEASURED_LAYOUT_UNSUPPORTED', '$.groups', 'Package content cannot assert measured original-PDF geometry'))
+      }
+    }
+  }
+  validateListening(value.listening, documents, null, issues)
   return issues
 }
 

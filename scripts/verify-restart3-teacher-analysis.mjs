@@ -168,6 +168,7 @@ if (existsSync(zjAssetPath)) {
       assert(`${groupType} ${qid} produced non-empty analysis text`, typeof text === 'string' && text.length > 0)
       assert(`${groupType} ${qid} text is within 600+ellipsis budget`, (text || '').length <= 601)
       assert(`${groupType} ${qid} text is not raw JSON`, text ? !text.trim().startsWith('{') : false)
+      assert(`${groupType} ${qid} never exports the retired note section`, !text?.includes('点拨：'))
     }
   }
 

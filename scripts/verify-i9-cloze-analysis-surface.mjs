@@ -165,7 +165,7 @@ assert('Step 1: adapter maps blankNo', adapterSrc.includes('blankNo: blankAnalys
 assert('Step 1: adapter maps pos', adapterSrc.includes('pos: blankAnalysis.pos'))
 assert('Step 1: adapter maps correctFit', adapterSrc.includes('correctFit: blankAnalysis.correctFit'))
 assert('Step 1: adapter maps distractorGlosses', adapterSrc.includes('distractorGlosses: blankAnalysis.distractorGlosses'))
-assert('Step 1: adapter maps teachingNote', adapterSrc.includes('teachingNote: blankAnalysis.teachingNote'))
+assert('Step 1: adapter does not revive retired teachingNote', !adapterSrc.includes('teachingNote'))
 
 // ============================================================
 // Step 2 — Panel source checks
@@ -184,7 +184,7 @@ assert('Step 2: panel renders blankNo', panelSrc.includes('analysis.blankNo'))
 assert('Step 2: panel renders signatureLabel', panelSrc.includes('analysis.signatureLabel'))
 assert('Step 2: panel renders correctFit.reason', panelSrc.includes('correctFit.reason'))
 assert('Step 2: panel renders distractor list', panelSrc.includes('distractorGlosses') && panelSrc.includes('optionLabel') && panelSrc.includes('meaning'))
-assert('Step 2: panel renders teachingNote', panelSrc.includes('teachingNote'))
+assert('Step 2: panel does not render retired teachingNote', !panelSrc.includes('{analysis.teachingNote}'))
 assert('Step 2: panel renders group overview', panelSrc.includes('groupView') && panelSrc.includes('overview'))
 assert('Step 2: panel renders group affectiveArc', panelSrc.includes('affectiveArc'))
 // Evidence buttons must carry data-pi-evidence-id and data-pi-question-id.
