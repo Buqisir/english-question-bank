@@ -17,6 +17,36 @@ function escaped(value) {
     .replaceAll('>', '&gt;')
 }
 
+// A text-layer PDF whose only embedded raster is a `/ImageMask true` stencil
+// XObject. `pdfimages -list` reports its type as `stencil` — a fourth raster
+// kind distinct from image/mask/smask — so this fixture exercises the raster
+// gate's stencil branch (Detail #361).
+function stencilImagePdfBytes() {
+  const objects = [
+    '<< /Type /Catalog /Pages 2 0 R >>',
+    '<< /Type /Pages /Kids [3 0 R] /Count 1 >>',
+    '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 5 0 R >> /XObject << /Im1 6 0 R >> /ProcSet [/PDF /Text /ImageB /ImageC /ImageI] >> /Contents 4 0 R >>',
+    null,
+    '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>',
+    null,
+  ]
+  const content = 'BT /F1 12 Tf 50 750 Td (This page carries one stencil image mask.) Tj ET\nq 24 0 0 24 50 700 cm /Im1 Do Q\n'
+  const mask = Buffer.alloc(8, 0xff)
+  objects[3] = `<< /Length ${content.length} >>\nstream\n${content}endstream`
+  objects[5] = `<< /Type /XObject /Subtype /Image /Width 8 /Height 8 /ImageMask true /BitsPerComponent 1 /Length ${mask.length} >>\nstream\n${mask.toString('latin1')}\nendstream`
+  let out = '%PDF-1.4\n'
+  const offsets = []
+  objects.forEach((object, index) => {
+    offsets.push(out.length)
+    out += `${index + 1} 0 obj\n${object}\nendobj\n`
+  })
+  const xref = out.length
+  out += `xref\n0 ${objects.length + 1}\n0000000000 65535 f \n`
+  for (const offset of offsets) out += `${String(offset).padStart(10, '0')} 00000 n \n`
+  out += `trailer\n<< /Size ${objects.length + 1} /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF`
+  return Buffer.from(out, 'latin1')
+}
+
 function paragraph(text, className = '') {
   return `<p${className ? ` class="${className}"` : ''}>${escaped(text)}</p>`
 }
@@ -346,6 +376,10 @@ export async function makeSyntheticNck1PdfFixture({
         embeddedImage: {
           bytes: embeddedImageBytes,
           pageCount: pdfPageCount(embeddedImageBytes),
+        },
+        stencilImage: {
+          bytes: stencilImagePdfBytes(),
+          pageCount: 1,
         },
       },
     }
