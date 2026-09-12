@@ -24,6 +24,7 @@ const state = {
 
 const surfaceLabels = {
   screen: 'Screen',
+  teaching: '教学解析',
   student_print: 'Student Print',
   teacher_print: 'Teacher Print',
   pdf: 'PDF',
@@ -470,6 +471,10 @@ function surfaceUrl() {
     return `/?view=paper-browse&paperId=${encodeURIComponent(state.detail.paperId)}`
       + `&reviewRevision=${encodeURIComponent(revisionId)}`
   }
+  if (state.surface === 'teaching' && state.actor === 'owner') {
+    return `/api/import-reviews/papers/${encodeURIComponent(state.detail.paperId)}`
+      + `/revisions/${encodeURIComponent(revisionId)}/teaching`
+  }
   if (state.surface === 'student_print') {
     return `/api/import-review-preview/revisions/${encodeURIComponent(revisionId)}/print?version=student`
   }
@@ -490,7 +495,7 @@ function surfaceStageHtml() {
     <main class="surface-stage" aria-label="真实审核表面">
       <div class="surface-toolbar">
         <div class="surface-tabs" role="tablist" aria-label="审核表面">
-          ${Object.entries(surfaceLabels).map(([key, label]) => `
+          ${Object.entries(surfaceLabels).filter(([key]) => key !== 'teaching' || state.actor === 'owner').map(([key, label]) => `
             <button type="button" class="tab-button" data-surface="${key}" role="tab" aria-selected="${state.surface === key}">${label}</button>
           `).join('')}
         </div>
@@ -578,6 +583,12 @@ function sourceVisualHtml() {
       <button class="button" type="button" data-locate-screen="${escapeHtml(visual.targetId)}">定位 Screen</button>
       ${wholeSourceHref ? `<a class="button source-file-button" href="${escapeHtml(wholeSourceHref)}" target="_blank" rel="noreferrer">打开整份源文件</a>` : ''}
     </div>`
+  if (visual.state === 'external_package_pointer') {
+    return `<div class="source-proof source-proof--unlocated">
+      <p class="boundary-note">此内容来自外部成品包的结构化 JSON 定位 ${escapeHtml(visual.pointer)}；没有原卷页码或 OCR 区域可展示，须由 Owner 核对外部转录。</p>
+      ${actions}
+    </div>`
+  }
   if (visual.state !== 'paired' || !visual.region) {
     return `<div class="source-proof source-proof--unlocated">
       <p class="boundary-note">源区域未配对。已知它来自第 ${escapeHtml(visual.page)} 页，但不能把整页当作局部证据。</p>
@@ -625,6 +636,27 @@ function listeningReviewSectionHtml() {
     </section>`
   }
   const audio = review.audio
+  if (audio.state === 'pending_external_playback_review') {
+    const revisionId = state.detail.latestRevisionId
+    const playbackHref = `/api/import-review-preview/revisions/${encodeURIComponent(revisionId)}`
+      + `/files?path=${encodeURIComponent(audio.path)}`
+    return `<section class="rail-section listening-review-section" id="listening-review-section">
+      <h2>听力核对 · 第 ${escapeHtml(question.questionNo)} 题</h2>
+      <div class="listening-review-answer"><span>官方答案</span><strong>${escapeHtml(question.officialAnswer)}</strong></div>
+      <div class="listening-review-transcript">
+        <h3>外部提交听力原文</h3>
+        ${question.transcriptSegments.map((segment) => `<div class="listening-transcript-segment"><p>${escapeHtml(segment.text)}</p><span>覆盖第 ${escapeHtml(segment.questionNumbers.join('、'))} 题</span></div>`).join('')}
+      </div>
+      <div class="listening-audio-evidence">
+        <div class="listening-evidence-statuses">
+          ${status('pending', '待 Owner 播放并核对外部音频')}
+        </div>
+        <p class="paper-meta">真实 MP3 · 已测量 ${escapeHtml(formatDuration(audio.durationSeconds))}；未生成或伪造 ASR、比对及内容安全检查。</p>
+        <audio class="listening-review-player" controls preload="metadata" src="${escapeHtml(playbackHref)}">浏览器无法播放此音频。</audio>
+        <p class="digest" title="${escapeHtml(audio.playbackAudioSha256)}">音频 ${escapeHtml(shortDigest(audio.playbackAudioSha256))}</p>
+      </div>
+    </section>`
+  }
   const basisLabel = audio.comparison.basis === 'authoritative_transcript'
     ? '官方听力原文'
     : '听力题目'
@@ -846,11 +878,16 @@ function approvalHtml() {
     </section>`
   const latest = state.detail.latest
   if (latest.approval && latest.state === 'approved' && !state.detail.rendererStale) {
+    const externalListeningReview = latest.approval.externalListeningReview
     return `<section class="rail-section">
       <h2>已认可当前 revision</h2>
       <div class="approval-box">
         ${status('approved')}
         <p class="digest">${escapeHtml(latest.approval.approvalId)}</p>
+        ${externalListeningReview ? `
+          <p class="muted">外部听力真人播放核验已绑定：原文一致、全部段落/题目/答案对应、实际内容适合且安全。</p>
+          <p class="digest" title="${escapeHtml(externalListeningReview.audio.sha256)}">核验音频 ${escapeHtml(shortDigest(externalListeningReview.audio.sha256))}</p>
+        ` : ''}
         <p class="muted">认可绑定 R${escapeHtml(latest.revisionNumber)} 与当前 bundle digest。Agent 可拉取收据继续本地物化。</p>
         <p class="boundary-note">这里没有上线动作。之后仍需另行对 Agent 说“上线 ${escapeHtml(state.detail.paperId)}”。</p>
       </div>
@@ -859,11 +896,39 @@ function approvalHtml() {
   const blocked = state.detail.unresolvedCount > 0
     || state.detail.rendererStale
     || !['awaiting_review', 'changes_requested'].includes(latest.state)
+  const externalAudio = state.detail.listeningReview?.audio?.state
+    === 'pending_external_playback_review'
+    ? state.detail.listeningReview.audio
+    : null
+  const externalPlaybackHref = externalAudio
+    ? `/api/import-review-preview/revisions/${encodeURIComponent(state.detail.latestRevisionId)}`
+      + `/files?path=${encodeURIComponent(externalAudio.path)}`
+    : null
+  const externalListeningChecks = externalAudio ? `
+      <fieldset class="external-listening-approval" ${blocked ? 'disabled' : ''}>
+        <legend>外部听力 MP3 人工核验（必须逐项确认）</legend>
+        <p class="muted">这些确认只记录当前 revision 的真人播放结论，不会生成 ASR、相似度或自动安全分数。</p>
+        <audio class="listening-review-player" controls preload="metadata" src="${escapeHtml(externalPlaybackHref)}">浏览器无法播放此音频。</audio>
+        <label class="approval-check">
+          <input data-external-listening-check="playback" type="checkbox" />
+          <span>我已完整播放当前 MP3，并确认实际声音与所提供的听力原文一致。</span>
+        </label>
+        <label class="approval-check">
+          <input data-external-listening-check="cohesion" type="checkbox" />
+          <span>我已核对全部 ${escapeHtml(externalAudio.transcriptSegmentCount)} 段原文、${escapeHtml(externalAudio.questionCount)} 道题及 ${escapeHtml(externalAudio.answerCount)} 个官方答案，确认它们与这一个音频完整对应并属于同一套听力。</span>
+        </label>
+        <label class="approval-check">
+          <input data-external-listening-check="safety" type="checkbox" />
+          <span>我已根据实际播放内容确认该音频适合教学使用，且不含不安全或不当内容。</span>
+        </label>
+        <p class="digest" title="${escapeHtml(externalAudio.playbackAudioSha256)}">核验音频 ${escapeHtml(shortDigest(externalAudio.playbackAudioSha256))}</p>
+      </fieldset>` : ''
   return `<section class="rail-section">
     <h2>认可 revision</h2>
     <div class="approval-box">
       <p class="muted">当前 R${escapeHtml(latest.revisionNumber)} · ${escapeHtml(state.detail.unresolvedCount)} 个未决问题</p>
       <p class="digest">${escapeHtml(shortDigest(latest.bundleDigest))}</p>
+      ${externalListeningChecks}
       <label class="approval-check">
         <input id="approval-check" type="checkbox" ${blocked ? 'disabled' : ''} />
         <span>我已检查 Screen、Student Print、Teacher Print 与 PDF，认可当前摘要对应的内容。</span>
@@ -1269,7 +1334,7 @@ function bind() {
   document.querySelectorAll('[data-surface]').forEach((button) => {
     button.addEventListener('click', () => {
       state.surface = button.dataset.surface
-      state.issueSurface = state.surface
+      state.issueSurface = state.surface === 'teaching' ? 'teacher_print' : state.surface
       render()
     })
   })
@@ -1385,9 +1450,13 @@ function bind() {
   })
   const approvalCheck = document.querySelector('#approval-check')
   const approvalButton = document.querySelector('#approve-revision')
-  approvalCheck?.addEventListener('change', () => {
+  const externalListeningChecks = [...document.querySelectorAll('[data-external-listening-check]')]
+  const updateApprovalButton = () => {
     approvalButton.disabled = !approvalCheck.checked
-  })
+      || externalListeningChecks.some((check) => !check.checked)
+  }
+  approvalCheck?.addEventListener('change', updateApprovalButton)
+  externalListeningChecks.forEach((check) => check.addEventListener('change', updateApprovalButton))
   approvalButton?.addEventListener('click', async () => {
     approvalButton.disabled = true
     try {
@@ -1397,7 +1466,17 @@ function bind() {
         {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ bundleDigest: state.detail.latest.bundleDigest }),
+          body: JSON.stringify({
+            bundleDigest: state.detail.latest.bundleDigest,
+            ...(externalListeningChecks.length ? {
+              externalListeningReview: {
+                audioSha256: state.detail.listeningReview.audio.playbackAudioSha256,
+                playbackMatchesSuppliedTranscript: true,
+                allSegmentsQuestionsAnswersBelongTogether: true,
+                actualAudioContentSuitableAndSafe: true,
+              },
+            } : {}),
+          }),
         },
       )
       await loadDetail(state.paperId)

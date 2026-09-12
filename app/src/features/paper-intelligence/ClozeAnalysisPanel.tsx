@@ -21,6 +21,7 @@ import type {
   ClozeBlankAnalysisView,
   ClozeGroupView,
 } from './clozeAnalysisSurfaceAdapter.ts'
+import { ObjectiveTeachingContent } from './ObjectiveTeachingContent.tsx'
 
 export type ClozeAnalysisPanelProps = {
   /** The blank currently focused (null = none selected yet). */
@@ -52,6 +53,7 @@ export function ClozeAnalysisPanel({
           )}
         </details>
       )}
+      <ObjectiveTeachingContent content={groupView?.teachingContent ?? null} />
 
       {!hasActiveQuestion && (
         <div className="pi-ps-analysis-empty">
@@ -165,7 +167,7 @@ export function ClozeAnalysisPanel({
           {/* 解题提示 (teachingNote) is deliberately NOT rendered — it
               restates the answer reason in different words every time
               (owner decision 2026-07-08, same call as grammar fill).
-              The field stays in the data/adapter. */}
+              Historical source files may retain it; the active adapter does not. */}
         </div>
       )}
     </div>

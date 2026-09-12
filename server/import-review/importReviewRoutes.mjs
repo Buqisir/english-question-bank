@@ -8,6 +8,7 @@ import path from 'node:path'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { defineRoute } from '../router/index.mjs'
 import { withChromiumPage } from '../draft-paper/chromiumPool.mjs'
+import { buildCompanionAnalysisHtml } from '../exports/companionAnalysisRenderer.mjs'
 import { receiveVerifiedUpload } from '../import-ops/receiveVerifiedUpload.mjs'
 import { rasterPdfRegion } from '../paper-canonical/pdfRegionRaster.mjs'
 import { cropNck1SourceImage } from '../paper-import/nck1ImageSourceBundle.mjs'
@@ -120,6 +121,17 @@ function candidateProjectionForRevision(store, revisionId) {
     )
   }
   return result
+}
+
+function companionAnalyses(sidecars = {}) {
+  return {
+    reading: sidecars['reading-choice-analysis-v1.json'] || null,
+    sevenChoices: sidecars['seven-choices-analysis-v1.json'] || null,
+    cloze: sidecars['cloze-analysis-v1.json'] || null,
+    grammarFill: sidecars['grammar-fill-analysis-v1.json'] || null,
+    writing: sidecars['writing-analysis-v1.json'] || null,
+    listening: sidecars['listening-analysis-v1.json'] || null,
+  }
 }
 
 export function createImportReviewRoutes({
@@ -374,6 +386,24 @@ export function createImportReviewRoutes({
   }) => {
     if (!requireOwner(response, context)) return
     context.sendJson(response, 200, store.paperDetail(decodeURIComponent(match[1])))
+  })))
+
+  routes.push(defineRoute('GET', /^\/api\/import-reviews\/papers\/([^/]+)\/revisions\/([^/]+)\/teaching$/, route(({
+    response,
+    context,
+    match,
+  }) => {
+    if (!requireOwner(response, context)) return
+    const paperId = decodeURIComponent(match[1])
+    const { projection } = candidateProjectionForRevision(store, match[2])
+    if (projection.paperId !== paperId) {
+      context.sendJson(response, 404, { error: 'Review revision not found for paper' })
+      return
+    }
+    sendHtml(response, buildCompanionAnalysisHtml({
+      paperAsset: projection.paperAsset,
+      analyses: companionAnalyses(projection.analysisSidecars),
+    }))
   })))
 
   routes.push(defineRoute('POST', /^\/api\/import-reviews\/papers\/([^/]+)\/issues$/, route(async ({

@@ -10,7 +10,7 @@ describes the outcome; do not make them remember pipeline commands.
 
 ## Generate analysis that teaches
 
-Before producing or revising any of the nine staged analyses, read and follow:
+Before producing or revising any of the ten staged analyses, read and follow:
 
 - `reference/teaching-analysis-style-v1.md` — shared teaching-prose doctrine;
 - `reference/teaching-analysis-benchmark-v1.json` — fixed 25-case regression
@@ -49,10 +49,16 @@ The same seven objective groups also produce 1–2 reviewed
 display text, question links, teacher-style analysis, translation, and sparse
 underline spans. Validate them with `requireSelectedLongSentences: true`; PDF
 rendering and Paper consumption must read the same sidecar rather than fork it.
+Their `groups[groupId].teachingContent` is not a schema-name hint: the pinned
+tool appends the complete tracked
+`schemas/paper-import/objective-teaching-content-v1.schema.json` to every
+objective `outputContract`. Preserve that annex verbatim and validate its exact
+text, paragraph, range, question, blank, and selected-sentence relations.
 
 Do not ask one model context to draft the whole paper. Split generation by the
-nine staged contracts: one focused worker for each Reading passage A–D, and one
-each for seven choices, cloze, grammar fill, application, and continuation.
+ten staged contracts: one focused worker for each Reading passage A–D, and one
+each for seven choices, cloze, grammar fill, application, continuation, and the
+bounded listening unit.
 Each worker reads only its exact source group, authoritative answers, output
 contract, and shared doctrine. The paper's single writer remains the
 coordinator and writes or accepts one non-overlapping staged file at a time in

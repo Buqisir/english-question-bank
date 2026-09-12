@@ -9,12 +9,12 @@ import {
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '../..')
-const promptPath = path.join(rootDir, 'prompts/continuation-analysis-v1.md')
+const promptPath = path.join(rootDir, 'prompts/continuation-analysis-v2.md')
 const stagedAnalysisContractPath = path.join(
   rootDir,
-  'prompts/continuation-writing-staged-analysis-v1.md',
+  'prompts/continuation-writing-staged-analysis-v2.md',
 )
-const schemaPath = path.join(rootDir, 'schemas/paper-import/continuation-analysis-v1.schema.json')
+const schemaPath = path.join(rootDir, 'schemas/paper-import/continuation-analysis-v2.schema.json')
 
 const schema = JSON.parse(readPromptFile(schemaPath))
 const validateSchema = new Ajv({ allErrors: true, strict: false }).compile(schema)
@@ -61,13 +61,13 @@ export function buildNarrativeContinuationAnalysisMessages({ writingTask }) {
   return [
     {
       role: 'system',
-      content: readTeachingAnalysisPrompt(promptPath),
+      content: `${readTeachingAnalysisPrompt(promptPath)}\n\nExact output schema:\n${JSON.stringify(schema)}`,
     },
     {
       role: 'user',
       content: [
         'Analyze the complete continuation Writing Task below.',
-        'If it is eligible narrative continuation, return one continuation-analysis-v1 JSON object.',
+        'If it is eligible narrative continuation, return one continuation-analysis-v2 JSON object.',
         'If it is not eligible, return only the unsupported sentinel specified by the system prompt.',
         'Return JSON text only.',
         '',
@@ -81,6 +81,9 @@ export function buildNarrativeContinuationAnalysisMessages({ writingTask }) {
 export function buildNarrativeContinuationStagedAnalysisContract() {
   return [
     readPromptFile(promptPath).trimEnd(),
+    '',
+    'Exact nested continuationAnalysis schema:',
+    JSON.stringify(schema),
     '',
     readPromptFile(stagedAnalysisContractPath).trim(),
   ].join('\n')
@@ -135,15 +138,16 @@ function validateEvidenceRefs(analysis, writingTask) {
 }
 
 function validateConstraintInvariants(analysis) {
-  const constraintIds = []
-  for (const constraint of analysis.continuationContract.hardConstraints) constraintIds.push(constraint.id)
-  for (const constraint of analysis.continuationContract.forbiddenContradictions) constraintIds.push(constraint.id)
+  const constraints = []
+  for (const constraint of analysis.continuationContract.hardConstraints) constraints.push(constraint)
+  for (const constraint of analysis.continuationContract.forbiddenContradictions) constraints.push(constraint)
   for (const paragraph of analysis.continuationContract.paragraphs) {
-    for (const constraint of paragraph.requiredMoves) constraintIds.push(constraint.id)
-    for (const constraint of paragraph.requiredExitState) constraintIds.push(constraint.id)
+    for (const constraint of paragraph.requiredMoves) constraints.push(constraint)
+    for (const constraint of paragraph.requiredExitState) constraints.push(constraint)
   }
-  for (const constraint of analysis.continuationContract.closureRequirements) constraintIds.push(constraint.id)
+  for (const constraint of analysis.continuationContract.closureRequirements) constraints.push(constraint)
 
+  const constraintIds = constraints.map(({ id }) => id)
   const duplicateIds = constraintIds.filter((id, index) => constraintIds.indexOf(id) !== index)
   if (duplicateIds.length > 0) {
     throw new Error(`continuation constraint ids must be unique: ${[...new Set(duplicateIds)].join(', ')}`)
@@ -157,6 +161,19 @@ function validateConstraintInvariants(analysis) {
     throw new Error(
       'paragraph 1 requiredExitState must include evidence from paragraph2Starter.',
     )
+  }
+
+  const normalizedConstraints = new Set(constraints.map(({ statement }) => statement.trim().toLowerCase()))
+  const optionalRoutes = [
+    ...analysis.continuationContract.openChoices,
+    ...analysis.continuationContract.paragraphs.flatMap((paragraph) =>
+      paragraph.supportedOptions.map(({ statement }) => statement)),
+    ...(analysis.developmentPlan.alternatives || []),
+  ]
+  const promoted = optionalRoutes.find((statement) =>
+    normalizedConstraints.has(statement.trim().toLowerCase()))
+  if (promoted) {
+    throw new Error(`optional routes must not be duplicated as constraints: ${promoted}`)
   }
 }
 

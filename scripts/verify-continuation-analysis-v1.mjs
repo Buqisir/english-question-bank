@@ -20,6 +20,7 @@ import {
   projectStagedWritingAnalysis,
   requiresLockedWritingAnalysis,
 } from './import-pipeline/lib-nck1-new-paper-locks.mjs'
+import { projectContinuationAnalysisDisplay } from '../shared/writing/continuationAnalysis.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
@@ -61,7 +62,7 @@ const grounded = (statement, source, excerpt) => ({
   evidence: [evidence(source, excerpt)],
 })
 
-function validCandidate() {
+function validV1Candidate() {
   const materialSituation = grounded(
     'The twins want to make breakfast for their mother, but their first attempt fails.',
     'material',
@@ -291,6 +292,37 @@ function validCandidate() {
   }
 }
 
+function validCandidate() {
+  const legacy = validV1Candidate()
+  return {
+    schemaVersion: 'continuation-analysis-v2',
+    storyUnderstanding: legacy.storyUnderstanding,
+    continuationContract: legacy.continuationContract,
+    developmentPlan: {
+      selectedRoute: legacy.paragraphBlueprint.selectedRoute,
+      routeRationale: legacy.paragraphBlueprint.routeRationale,
+      paragraphs: legacy.paragraphBlueprint.paragraphs.map((paragraph, index) => ({
+        paragraphIndex: paragraph.paragraphIndex,
+        cause: paragraph.narrativeFunction,
+        action: paragraph.eventMoves.join(' '),
+        result: paragraph.stateChange,
+        sourceEvidence: paragraph.evidenceToReuse,
+        cluePayoffs: index === 1 ? legacy.narrativeDevelopment.cluePayoffs : [],
+        ...(index === 0
+          ? { bridge: paragraph.bridgeToNext }
+          : { ending: paragraph.bridgeToNext }),
+        emotionChanges: [],
+        relationshipChanges: index === 1
+          ? legacy.narrativeDevelopment.relationshipMovement
+          : [],
+        ...(index === 0 ? { languageReminder: 'Keep the plain third-person past-tense voice.' } : {}),
+      })),
+      alternatives: legacy.paragraphBlueprint.validAlternativeRoutes,
+      qualityRisks: legacy.paragraphBlueprint.qualityRisks,
+    },
+  }
+}
+
 const candidate = validCandidate()
 
 check('valid narrative continuation analysis passes the runtime contract', () => {
@@ -301,8 +333,8 @@ check('message builder uses the tracked prompt and complete source task', () => 
   const messages = buildNarrativeContinuationAnalysisMessages({ writingTask })
   assert.equal(messages.length, 2)
   assert.equal(messages[0].role, 'system')
-  assert.match(messages[0].content, /continuation-analysis-v1/)
-  assert.match(messages[0].content, /不生成范文/)
+  assert.match(messages[0].content, /continuation-analysis-v2/)
+  assert.match(messages[0].content, /Do not generate the model composition/)
   assert.equal(messages[1].role, 'user')
   assert.match(messages[1].content, /The porridge boiled over/)
   assert.match(messages[1].content, /their father appeared/)
@@ -333,6 +365,53 @@ rejects('paragraph contracts remain exactly ordered 1 then 2', () => {
   validateNarrativeContinuationAnalysis(swapped, { writingTask })
 }, /continuation analysis schema invalid/i)
 
+rejects('development paragraphs remain exactly ordered 1 then 2', () => {
+  const swapped = structuredClone(candidate)
+  swapped.developmentPlan.paragraphs.reverse()
+  validateNarrativeContinuationAnalysis(swapped, { writingTask })
+}, /continuation analysis schema invalid/i)
+
+rejects('paragraph 1 exit keeps backward evidence from starter 2', () => {
+  const missing = structuredClone(candidate)
+  missing.continuationContract.paragraphs[0].requiredExitState[0].evidence = [
+    evidence('material', 'finish the breakfast before their mother woke up'),
+  ]
+  validateNarrativeContinuationAnalysis(missing, { writingTask })
+}, /requiredExitState must include evidence from paragraph2Starter/i)
+
+rejects('constraint IDs remain globally unique', () => {
+  const duplicate = structuredClone(candidate)
+  duplicate.continuationContract.closureRequirements[0].id =
+    duplicate.continuationContract.hardConstraints[0].id
+  validateNarrativeContinuationAnalysis(duplicate, { writingTask })
+}, /constraint ids must be unique/i)
+
+check('a story without an emotional change is valid', () => {
+  const noEmotion = structuredClone(candidate)
+  for (const paragraph of noEmotion.developmentPlan.paragraphs) {
+    paragraph.emotionChanges = []
+  }
+  assert.doesNotThrow(() => validateNarrativeContinuationAnalysis(noEmotion, { writingTask }))
+})
+
+check('optional routes remain separate from hard constraints', () => {
+  assert.ok(candidate.developmentPlan.alternatives.length > 0)
+  assert.ok(candidate.continuationContract.openChoices.length > 0)
+  assert.equal(
+    candidate.continuationContract.hardConstraints.some(({ statement }) =>
+      candidate.developmentPlan.alternatives.includes(statement)),
+    false,
+  )
+})
+
+rejects('optional routes promoted into hard constraints are rejected', () => {
+  const confused = structuredClone(candidate)
+  confused.developmentPlan.alternatives = [
+    confused.continuationContract.hardConstraints[0].statement,
+  ]
+  validateNarrativeContinuationAnalysis(confused, { writingTask })
+}, /optional routes must not be duplicated as constraints/i)
+
 rejects('unsupported discourse sentinel stops without retrying as narrative', () => {
   validateNarrativeContinuationAnalysis({
     status: 'unsupported',
@@ -343,31 +422,35 @@ rejects('unsupported discourse sentinel stops without retrying as narrative', ()
 
 check('schema and prompt artifacts name the same contract', () => {
   const schema = JSON.parse(readFileSync(
-    path.join(rootDir, 'schemas/paper-import/continuation-analysis-v1.schema.json'),
+    path.join(rootDir, 'schemas/paper-import/continuation-analysis-v2.schema.json'),
     'utf8',
   ))
-  const prompt = readFileSync(path.join(rootDir, 'prompts/continuation-analysis-v1.md'), 'utf8')
+  const prompt = readFileSync(path.join(rootDir, 'prompts/continuation-analysis-v2.md'), 'utf8')
   const stagedPrompt = readFileSync(
-    path.join(rootDir, 'prompts/continuation-writing-staged-analysis-v1.md'),
+    path.join(rootDir, 'prompts/continuation-writing-staged-analysis-v2.md'),
     'utf8',
   ).trim()
-  assert.equal(schema.$id, 'continuation-analysis-v1.schema.json')
-  assert.equal(schema.properties.schemaVersion.const, 'continuation-analysis-v1')
-  assert.match(prompt, /continuation-analysis-v1/)
-  assert.match(prompt, /`softAffordances`, `supportedOptions`.*grounded statement/s)
-  assert.match(prompt, /`openChoices`.*non-empty string only/s)
-  assert.match(prompt, /Every `routeRationale` item is a grounded statement/)
+  assert.equal(schema.$id, 'continuation-analysis-v2.schema.json')
+  assert.equal(schema.properties.schemaVersion.const, 'continuation-analysis-v2')
+  assert.match(prompt, /continuation-analysis-v2/)
+  assert.match(prompt, /supportedOptions.*possibilities, not obligations/s)
+  assert.match(prompt, /openChoices.*creative freedoms/s)
+  assert.match(prompt, /grounded `routeRationale`/)
   assert.doesNotMatch(prompt, /"modelAnswer"\s*:/)
   assert.doesNotMatch(prompt, /"continuationDesign"\s*:/)
-  assert.match(stagedPrompt, /^# NCK1 Staged Narrative Continuation Packaging Contract — V1$/m)
+  assert.match(stagedPrompt, /^# NCK1 Staged Narrative Continuation Packaging Contract — V2$/m)
   assert.match(stagedPrompt, /"taskType": "continuation"/)
   assert.match(stagedPrompt, /"continuationAnalysis"/)
   assert.match(stagedPrompt, /supplied `wordCountTarget`/)
   assert.doesNotMatch(stagedPrompt, /brothers|twins|first-person|150 student-written/i)
   assert.equal(
     buildNarrativeContinuationStagedAnalysisContract(),
-    `${prompt.trimEnd()}\n\n${stagedPrompt}`,
+    `${prompt.trimEnd()}\n\nExact nested continuationAnalysis schema:\n${JSON.stringify(schema)}\n\n${stagedPrompt}`,
   )
+  const system = buildNarrativeContinuationAnalysisMessages({ writingTask })[0].content
+  assert.ok(system.includes(JSON.stringify(schema)))
+  assert.match(system, /because starter 2 says/)
+  assert.match(system, /not labels\s+such as kind, brave or selfish without evidence/)
 })
 
 const providerResult = await analyzeNarrativeContinuationImportCandidate(
@@ -427,6 +510,25 @@ check('writing-analysis envelope accepts continuationAnalysis without legacy fie
   assert.equal(validateWritingAnalysisEnvelope(writingEnvelope(v1Writing)), true)
 })
 
+check('historical V1 display projection retains nonduplicative evidence', () => {
+  const legacy = validV1Candidate()
+  const display = projectContinuationAnalysisDisplay(legacy)
+  assert.equal(display.sourceVersion, 'continuation-analysis-v1')
+  assert.equal(display.developmentPlan.paragraphs[0].cause, undefined)
+  assert.equal(display.developmentPlan.paragraphs[0].paragraphPurpose,
+    legacy.paragraphBlueprint.paragraphs[0].narrativeFunction)
+  assert.deepEqual(display.developmentPlan.paragraphs.map(({ cluePayoffs }) => cluePayoffs), [[], []])
+  assert.deepEqual(display.legacyDetails.cluePayoffs, legacy.narrativeDevelopment.cluePayoffs)
+  assert.equal(
+    display.legacyDetails.interactionMoves[0].evidence[0].excerpt,
+    'their father appeared',
+  )
+  assert.equal(
+    display.developmentPlan.paragraphs[0].sourceEvidence[0].excerpt,
+    'messy stove',
+  )
+})
+
 check('writing-analysis envelope still accepts historical continuationDesign', () => {
   assert.equal(validateWritingAnalysisEnvelope(writingEnvelope(legacyWriting)), true)
 })
@@ -463,7 +565,7 @@ check('runtime persist stores continuationAnalysis and drops legacy fields', () 
       'modelAnswer',
       'taskType',
     ])
-    assert.equal(stored.continuationAnalysis.schemaVersion, 'continuation-analysis-v1')
+    assert.equal(stored.continuationAnalysis.schemaVersion, 'continuation-analysis-v2')
     assert.equal(stored.continuationDesign, undefined)
     assert.equal(stored.highlightExpressions, undefined)
   } finally {
@@ -489,16 +591,16 @@ check('new-paper persist writes both writing groups from staged drafts', () => {
     modelAnswer: 'Dear fellow students,\n\nWe can keep the club open to beginners and still train well.\n\nThe Student Council',
     officialModelAnswer: 'Dear fellow students,\n\nPlease welcome new members.\n\nThe Student Council',
     reviewCard: {
+      schemaVersion: 'application-review-card-v2',
       form: '倡议书',
       topic: '校园社团招新',
-      reader: '全校同学',
+      purpose: '提出兼顾训练质量与参与面的招新建议',
       person: '第一人称复数',
       tense: '一般现在时',
-      type: '倡议类',
       points: ['说明门槛的问题', '提出两条可实行的建议'],
-      readerWho: '同学和社团成员',
-      readerCares: '建议是否具体可行',
-      readerWants: '知道从哪里开始行动',
+      reader: '全校同学',
+      relationship: '学生会代表与潜在社团成员',
+      readerNeeds: '判断建议是否可行并知道如何参与',
       value: '让招新既保质量又保参与面',
     },
   }
@@ -528,7 +630,7 @@ check('new-paper persist writes both writing groups from staged drafts', () => {
     assert.equal(stored.groups['group-lock-continuation'].writing.taskType, 'continuation')
     assert.equal(
       stored.groups['group-lock-continuation'].writing.continuationAnalysis.schemaVersion,
-      'continuation-analysis-v1',
+      'continuation-analysis-v2',
     )
     assert.equal(stored.groups['group-lock-continuation'].writing.continuationDesign, undefined)
   } finally {
@@ -545,6 +647,16 @@ rejects(
     highlightExpressions: legacyWriting.highlightExpressions,
   }),
   /continuationAnalysis/,
+)
+
+rejects(
+  'new-paper continuation draft cannot return historical continuation-analysis-v1',
+  () => projectStagedWritingAnalysis({
+    taskType: 'continuation',
+    modelAnswer: v1Writing.modelAnswer,
+    continuationAnalysis: validV1Candidate(),
+  }),
+  /continuation-analysis-v2/,
 )
 
 console.log(`\nverify-continuation-analysis-v1: ${passed} passed, 0 failed`)

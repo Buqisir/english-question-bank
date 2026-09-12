@@ -12,6 +12,7 @@ import {
   loadCompanionAnalysisSource,
 } from '../server/exports/companionAnalysisRenderer.mjs'
 import { createExportImplementation } from '../server/exports/exportImplementation.mjs'
+import { projectContinuationAnalysisDisplay } from '../shared/writing/continuationAnalysis.mjs'
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const paperAssetsDir = path.join(rootDir, 'app', 'public', 'paper-assets')
@@ -20,6 +21,49 @@ const source = loadCompanionAnalysisSource({
   paperId: 'paper-2025-i',
 })
 const html = buildCompanionAnalysisHtml(source)
+const historicalContinuationSource = loadCompanionAnalysisSource({
+  paperAssetsDir,
+  paperId: 'paper-mock-gd-2026-m1',
+})
+const historicalContinuationHtml = buildCompanionAnalysisHtml(historicalContinuationSource)
+const historicalWriting = Object.values(historicalContinuationSource.analyses.writing.groups)
+  .map(({ writing }) => writing)
+  .find(({ taskType }) => taskType === 'continuation')
+const historicalEvidence = historicalWriting.continuationAnalysis.storyUnderstanding
+  .centralSituation.evidence[0].excerpt
+assert.equal((historicalContinuationHtml.match(/data-continuation-section=/gu) || []).length, 4)
+assert.ok(historicalContinuationHtml.includes(historicalEvidence))
+assert.ok(historicalContinuationHtml.includes('历史分析保留'))
+assert.ok(!historicalContinuationHtml.includes('语言对齐'))
+
+const v2ContinuationSource = structuredClone(historicalContinuationSource)
+const v2Writing = Object.values(v2ContinuationSource.analyses.writing.groups)
+  .map(({ writing }) => writing)
+  .find(({ taskType }) => taskType === 'continuation')
+const projected = projectContinuationAnalysisDisplay(v2Writing.continuationAnalysis)
+v2Writing.continuationAnalysis = {
+  schemaVersion: 'continuation-analysis-v2',
+  storyUnderstanding: projected.storyUnderstanding,
+  continuationContract: projected.continuationContract,
+  developmentPlan: projected.developmentPlan,
+}
+v2Writing.continuationAnalysis.developmentPlan.paragraphs[0].emotionChanges = [{
+  trigger: 'EMOTION_TRIGGER_SENTINEL',
+  from: 'uncertain',
+  to: 'resolved',
+  visibleAction: 'VISIBLE_ACTION_SENTINEL',
+}]
+v2Writing.officialModelAnswer = 'OFFICIAL_MODEL_SENTINEL'
+v2Writing.modelAnswer = 'GENERATED_MODEL_SENTINEL'
+const v2ContinuationHtml = buildCompanionAnalysisHtml(v2ContinuationSource)
+assert.equal((v2ContinuationHtml.match(/data-continuation-section=/gu) || []).length, 4)
+assert.ok(v2ContinuationHtml.includes('EMOTION_TRIGGER_SENTINEL'))
+assert.ok(v2ContinuationHtml.includes('VISIBLE_ACTION_SENTINEL'))
+assert.ok(v2ContinuationHtml.includes('OFFICIAL_MODEL_SENTINEL'))
+assert.ok(v2ContinuationHtml.includes('GENERATED_MODEL_SENTINEL'))
+assert.ok(v2ContinuationHtml.indexOf('官方参考范文') < v2ContinuationHtml.indexOf('生成参考范文'))
+assert.ok(!v2ContinuationHtml.includes('continuationDesign'))
+assert.ok(!v2ContinuationHtml.includes('highlightExpressions'))
 const translatedSource = structuredClone(source)
 for (const group of Object.values(translatedSource.analyses.reading.groups)) {
   group.fullTranslationZh = '这是阅读文章的完整中文译文。'
@@ -72,10 +116,12 @@ assert.ok(!html.includes('词义对照'))
 assert.ok(!html.includes('option-glosses'))
 assert.ok(html.includes('margin-bottom: 0.8mm;\n  break-after: avoid;'))
 assert.ok(html.includes('参考范文'))
-assert.ok(html.includes('精选表达'))
-assert.ok(html.includes('续写路线'))
+assert.ok(!html.includes('精选表达'))
+assert.ok(!html.includes('续写路线'))
+assert.ok(html.includes('生成参考范文'))
 assert.equal((translatedHtml.match(/class="full-translation"/gu) || []).length, 7)
-assert.equal((translatedHtml.match(/class="translation-marker"/gu) || []).length, 30)
+assert.equal((translatedHtml.match(/class="translation-marker"/gu) || []).length, 0)
+assert.ok(translatedHtml.includes('[36]七选五译文。'))
 assert.ok(translatedHtml.includes('全文译文'))
 assert.equal((translatedHtml.match(/class="long-sentences"/gu) || []).length, 1)
 assert.ok(translatedHtml.includes('长难句解析'))

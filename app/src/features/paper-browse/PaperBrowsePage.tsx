@@ -149,8 +149,8 @@ import { SevenChoicesAnalysisPanel } from '../paper-intelligence/SevenChoicesAna
 import { PaperAssetAnalysisPanel } from '../paper-intelligence/PaperAssetAnalysisPanel'
 import { ClozeAnalysisPanel } from '../paper-intelligence/ClozeAnalysisPanel'
 import { GrammarFillAnalysisPanel } from '../paper-intelligence/GrammarFillAnalysisPanel'
-import { WritingAnalysisPanel } from '../paper-intelligence/WritingAnalysisPanel'
 import { ContinuationAnalysisPanel } from './ContinuationAnalysisPanel'
+import { ListeningAnalysisPanel } from './ListeningAnalysisPanel'
 import {
   getRetainedWritingLecture,
   hasCompleteApplicationLecturePayload,
@@ -170,6 +170,7 @@ import type {
   WritingAnalysis,
 } from '../../domain/paperAsset.ts'
 import { isNarrativeContinuationWritingAnalysis } from '../../domain/paperAsset.ts'
+import type { ListeningAnalysisV1 } from '../../domain/listeningAnalysis.ts'
 import type { QuestionGroupCard } from '../../domain/questionBank'
 import type { LectureFocus, PaperSurfaceFocusIntent } from '../../../../shared/papersurface/types'
 import {
@@ -193,6 +194,8 @@ type GroupModel =
       kind: 'reading'
       model: {
         surfaceData: PaperAssetSurfaceModel['surfaceData']
+        overview: string
+        teachingContent: PaperAssetSurfaceModel['teachingContent']
         analysisByQuestionId: PaperAssetSurfaceModel['analysisByQuestionId']
         evidenceKindById: PaperAssetSurfaceModel['evidenceKindById']
         canonicalReadingBlocks: ReadonlyArray<CanonicalReadingSurfaceBlock>
@@ -236,6 +239,7 @@ type GroupModel =
 // = 拉取过但没有（404/解析失败），讲评栏据此显「解析未发布」而不是一直显
 // 「加载中」。
 type LectureAnalysisEntry =
+  | { kind: 'listening'; analysis: ListeningAnalysisV1 }
   | { kind: 'cloze'; model: ClozeAnalysisSurfaceModel }
   | { kind: 'grammarFill'; model: GrammarFillAnalysisSurfaceModel }
   | { kind: 'writing'; analysis: WritingAnalysis }
@@ -1064,6 +1068,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                     ...canonicalReading.surfaceData,
                     evidence: analysisModel?.surfaceData.evidence ?? [],
                   },
+                  overview: analysisModel?.overview ?? '',
+                  teachingContent: analysisModel?.teachingContent ?? null,
                   analysisByQuestionId:
                     analysisModel?.analysisByQuestionId ?? {},
                   evidenceKindById:
@@ -1231,21 +1237,36 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     }
   }, [paperId, reviewRevision])
 
-  // Writing analysis is prefetched so a complete application payload can open
-  // lecture from the answer box before lecture mode is on. Cloze / grammar-fill
-  // stay lecture-gated.
+  // Writing and listening teaching sidecars are prefetched so their source-owned
+  // answer-box/question interactions can open lecture immediately. Transcript
+  // and teaching content remain outside the student Canonical payload.
   useEffect(() => {
     if (!asset || !assetBase) return
     const writingGroupIds = Object.entries(asset.content.groups)
       .filter(([, group]) => group.groupType === 'writing')
       .map(([groupId]) => groupId)
-    if (writingGroupIds.length === 0) return
+    const listeningGroupIds = Object.entries(asset.content.groups)
+      .filter(([, group]) => group.groupType === 'listening')
+      .map(([groupId]) => groupId)
+    if (writingGroupIds.length === 0 && listeningGroupIds.length === 0) return
     let cancelled = false
 
     void (async () => {
       try {
-        const res = await fetch(`${assetBase}/analyses/writing-analysis-v1.json`)
-        const raw = res.ok ? ((await res.json()) as WritingAnalysisFilePayload) : null
+        const [writingResponse, listeningResponse] = await Promise.all([
+          writingGroupIds.length
+            ? fetch(`${assetBase}/analyses/writing-analysis-v1.json`)
+            : Promise.resolve(null),
+          listeningGroupIds.length
+            ? fetch(`${assetBase}/analyses/listening-analysis-v1.json`)
+            : Promise.resolve(null),
+        ])
+        const raw = writingResponse?.ok
+          ? ((await writingResponse.json()) as WritingAnalysisFilePayload)
+          : null
+        const listening = listeningResponse?.ok
+          ? ((await listeningResponse.json()) as ListeningAnalysisV1)
+          : null
         if (cancelled) return
         setLectureAnalysisByGroupId((previous) => {
           const next = { ...previous }
@@ -1256,6 +1277,12 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
               ? { kind: 'writing', analysis: writing }
               : { kind: 'unavailable' }
           }
+          for (const groupId of listeningGroupIds) {
+            if (next[groupId]) continue
+            next[groupId] = listening?.schemaVersion === 'listening-analysis-v1'
+              ? { kind: 'listening', analysis: listening }
+              : { kind: 'unavailable' }
+          }
           return next
         })
       } catch {
@@ -1263,6 +1290,10 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         setLectureAnalysisByGroupId((previous) => {
           const next = { ...previous }
           for (const groupId of writingGroupIds) {
+            if (next[groupId]) continue
+            next[groupId] = { kind: 'unavailable' }
+          }
+          for (const groupId of listeningGroupIds) {
             if (next[groupId]) continue
             next[groupId] = { kind: 'unavailable' }
           }
@@ -2272,15 +2303,22 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       )
     }
     if (entry.kind === 'listening') {
+      const isPanelGroup = lectureOpen && panelGroupId === groupId
       return (
         <div className="paper-browse-listening canonical-listening-surface">
           <PaperSurface
             {...entry.model.surfaceData}
             annotations={[]}
             mode="lecture"
-            lectureFocus={null}
+            lectureFocus={
+              isPanelGroup && lectureSelection?.questionId
+                ? { kind: 'question', questionId: lectureSelection.questionId }
+                : null
+            }
             readingFocusBySection={{}}
-            onFocusIntent={() => {}}
+            onFocusIntent={lectureOpen
+              ? (intent) => handleGroupFocusIntent(groupId, intent)
+              : () => {}}
           />
         </div>
       )
@@ -2320,6 +2358,16 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     }
 
     const isPanelGroup = lectureOpen && panelGroupId === groupId
+    const selectedTeachingEvidenceId = isPanelGroup && lectureSelection?.questionId
+      ? surfaceData.evidence.find((item) =>
+          item.questionId === lectureSelection.questionId && item.id.includes(':source:'))?.id
+      : undefined
+    const surfaceLectureFocus = isPanelGroup && lectureFocusForSelection
+      ? {
+          ...lectureFocusForSelection,
+          activeEvidenceId: selectedTeachingEvidenceId ?? lectureFocusForSelection.activeEvidenceId,
+        }
+      : null
     const sourceTaskType = writingTaskTypeForSurface({
       asset,
       consumption: canonicalConsumption,
@@ -2339,7 +2387,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         textMap={surfaceData.textMap}
         semanticParagraphs={surfaceData.semanticParagraphs}
         canonicalGrammarFillScreenRuling={grammarFillScreenRulingFromSurfaceData(surfaceData)}
-        annotations={[]}
+        annotations={surfaceData.annotations ?? []}
         evidence={surfaceData.evidence}
         questions={surfaceData.questions}
         canonicalReadingBlocks={
@@ -2420,7 +2468,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
             : undefined
         }
         mode="lecture"
-        lectureFocus={isPanelGroup ? lectureFocusForSelection : null}
+        lectureFocus={isPanelGroup ? surfaceLectureFocus : null}
         readingFocusBySection={{}}
         onFocusIntent={lectureOpen ? (intent) => handleGroupFocusIntent(groupId, intent) : () => {}}
         blankFocusMode={blankFocusMode}
@@ -2994,6 +3042,19 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     const entry = groupModels[groupId]
     const lectureEntry = lectureAnalysisByGroupId[groupId]
 
+    if (group.groupType === 'listening') {
+      if (lectureEntry?.kind === 'listening') {
+        return (
+          <ListeningAnalysisPanel
+            analysis={lectureEntry.analysis}
+            groupQuestionIds={group.questionIds}
+            activeQuestionId={activeQuestionId}
+          />
+        )
+      }
+      return <p className="paper-browse-lecture-empty">解析未发布</p>
+    }
+
     if (group.groupType === 'sevenChoices' && entry?.kind === 'sevenChoices') {
       const chains = entry.model.chains
       if (chains.length === 0) {
@@ -3001,6 +3062,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       }
       return (
         <SevenChoicesAnalysisPanel
+          overview={entry.model.overview}
+          teachingContent={entry.model.teachingContent}
           options={entry.model.options}
           chains={chains}
           openQuestionIds={openSevenChoiceQuestionIds}
@@ -3023,6 +3086,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       const analysis = activeQuestionId ? entry.model.analysisByQuestionId[activeQuestionId] ?? null : null
       return (
         <PaperAssetAnalysisPanel
+          overview={entry.model.overview}
+          teachingContent={entry.model.teachingContent}
           analysis={analysis}
           hasActiveQuestion={hasActiveQuestion}
           activeOptionLabel={activeOptionLabel}
@@ -3093,10 +3158,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         if (sourceTaskType === 'application' || lectureEntry.analysis.taskType === 'application') {
           return <p className="paper-browse-lecture-empty">解析未发布</p>
         }
-        if (isNarrativeContinuationWritingAnalysis(lectureEntry.analysis)) {
-          return <ContinuationAnalysisPanel analysis={lectureEntry.analysis} />
-        }
-        return <WritingAnalysisPanel analysis={lectureEntry.analysis} />
+        return <ContinuationAnalysisPanel analysis={lectureEntry.analysis} />
       }
       return (
         <p className="paper-browse-lecture-empty">{lectureAnalysisLoading ? '解析加载中…' : '解析未发布'}</p>

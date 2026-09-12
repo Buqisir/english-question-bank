@@ -17,6 +17,10 @@ import {
   projectNck1StagedWritingAnalysis,
 } from '../../server/import-review/nck1AnalysisProjection.mjs'
 import { writingNoticeGroups, writingWordCount } from '../../shared/paper-canonical/applicationWritingDisplay.mjs'
+import {
+  isApplicationReviewCardV2,
+  isCompleteApplicationReviewCard,
+} from '../../shared/writing/applicationReviewCard.mjs'
 
 export const WRITING_ANALYSIS_KEYS = ['application', 'continuation']
 
@@ -115,9 +119,29 @@ export function assertPublishedWritingAnalysisEnvelope(envelope, {
   if (envelope.paperId !== paperId) {
     throw new Error(`writing-analysis paperId ${envelope.paperId} != ${paperId}`)
   }
-  const application = projectStagedWritingAnalysis(envelope.groups?.[applicationGroupId]?.writing)
-  const continuation = projectStagedWritingAnalysis(envelope.groups?.[continuationGroupId]?.writing)
-  validateWritingAnalysisCandidate(application)
+  const rawApplication = envelope.groups?.[applicationGroupId]?.writing
+  if (isApplicationReviewCardV2(rawApplication?.reviewCard)) {
+    const application = projectStagedWritingAnalysis(rawApplication)
+    validateWritingAnalysisCandidate(application)
+  } else if (
+    rawApplication?.taskType !== 'application'
+    || typeof rawApplication.modelAnswer !== 'string'
+    || !rawApplication.modelAnswer.trim()
+    || !isCompleteApplicationReviewCard(rawApplication.reviewCard)
+  ) {
+    throw new Error('historical published application writing analysis is malformed')
+  } else {
+    // Historical expressions remain in the archived envelope, but must not
+    // bypass the remaining model/source/task-family validation on readback.
+    const { highlightExpressions: _retiredExpressions, ...application } = rawApplication
+    validateWritingAnalysisCandidate(application)
+  }
+  const rawContinuation = envelope.groups?.[continuationGroupId]?.writing
+  // Published V1 sidecars remain readable without being rewritten. Only new
+  // staged production is required to enter through the V2 projector.
+  const continuation = rawContinuation?.continuationAnalysis?.schemaVersion === 'continuation-analysis-v1'
+    ? structuredClone(rawContinuation)
+    : projectStagedWritingAnalysis(rawContinuation)
   validateWritingAnalysisCandidate(continuation)
 }
 

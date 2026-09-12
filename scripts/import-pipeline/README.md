@@ -66,6 +66,28 @@ QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN='<secret>' \
 生成同一套完整21–65答案值；源详解和范文不进入Materialization、Candidate或教师版，
 原source bytes/digest仍保留。只有ABCD而缺56–65答案仍失败关闭。
 
+### 自动拆题与 Agent 备用路径
+
+统一的是 Source Materialization 和后续校验，不是要求所有源版式都由脚本自动理解。
+DOCX 优先读原始段落、表格和编号下划线样式；文本 PDF 优先读文字层和 bbox。
+明确连续的横排选项、答案行按源坐标读取，不当作文章多栏；只有页底且页码/总页数
+均与原 PDF 一致的 `第 N 页 共 M 页` 才作为页码排除，正文同文不删。
+合订题答支持以卷名开头的明确答案标题，但双边界、错序、缺答案仍拒绝。
+
+`needs_agent_review` 是局部源核对入口，不等于需要 Owner 处理普通版式。唯一 writer
+读取 producer review 的 `required`，对照对应不可变源页/段落，只修正工作副本
+`materialization/nck1-source-materialization-v1.json` 中有证据的结构与问题；保留已正确
+题组、权威答案及全部 source locators，再运行 `verify` / `build`。不得只清空 issues
+来过闸，不修改 producer receipt、已 finalize 的 Review revision 或原始文件。
+同版本 `materialize` 的 `agent_modified` 表示保留该工作副本，不会用机器输出覆盖它。
+
+扫描/图片页或文字层顺序不确定时，使用已有 `stage-ocr` → `confirm-ocr` → `materialize`
+路径，由 Agent 确认转写、阅读顺序和正文/装饰分类。初次 PDF 自动材料化失败后，只有
+旧输出未被修改、来源摘要一致、failed review 与 receipt 闭合且无媒体时，切换 OCR 才会
+先将旧输出、review 和 receipt 按原 bytes 留在 `materialization/producer-history/`，然后
+生成 OCR 输出；旧 PDF review/receipt 仍保留。已成功的输出、Agent 改过的输出、来源变化
+或证据不完整一律拒绝替换。听力附件和九份教学解析不属于这次切换的写入范围。
+
 暂时只有题卷、没有权威答案时，不运行`init`或分配可发布`paperId`。使用
 source-only状态先保留DOCX/PDF或显式排序图片页：
 

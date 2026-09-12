@@ -60,8 +60,8 @@ write prettier prose at the cost of wrong fields or non-locatable signals.
 ## Teaching Prose Rule
 
 Position, role, and mechanism facets are internal classification. Keep their
-enum values exact, but do not begin `fitSummary`, `relation`, `reason`, or
-`teachingNote` with labels such as referential cohesion, topic-field alignment,
+enum values exact, but do not begin `fitSummary`, `relation`, or `reason`
+with labels such as referential cohesion, topic-field alignment,
 or lexical repetition. First reconstruct what the passage is doing.
 
 `optionFit.fitSummary` should normally read as:
@@ -96,7 +96,7 @@ and exactly where the connection breaks. Do not fill it for symmetry.
   },
   "groups": {
     "group-...": {
-      "overview": "Chinese overview of the passage topic and 七选五 structure",
+      "overview": "50–80字软目标的中文内容简介，概括主题及核心内容",
       "fullTranslationZh": "Answer-completed full Chinese passage translation with [36]...[40] markers",
       "selectedLongSentences": [
         {
@@ -106,7 +106,7 @@ and exactly where the connection breaks. Do not fill it for symmetry.
           "relatedQuestionIds": ["q-...-036"],
           "translationZh": "Natural Chinese translation",
           "analysisZh": "Chinese explanation of the main trunk, modifiers, and relations",
-          "underlineTexts": ["1–3 exact, unique substrings of displayText"]
+          "underlineRanges": [{"start": 0, "end": 3, "quote": "The"}]
         }
       ],
       "discourseStructure": {
@@ -145,22 +145,46 @@ Include:
 - `discourseStructure.summary`
 - `discourseStructure.units[]`
 
+`overview` is the one canonical introduction shared by teaching, list/search
+and future similarity consumers. Aim for 50–80 Chinese characters without
+padding. Do not discuss individual gaps or cohesion mechanics here; keep those
+in the separate discourse fields.
+
 `fullTranslationZh` is student-visible. Translate the whole passage in source
-order and complete all five gaps with the authoritative answer sentences. Put
-the exact ASCII marker `[36]`, `[37]`, `[38]`, `[39]`, or `[40]` immediately
-before the corresponding translated inserted sentence; each marker must appear
-exactly once. Preserve paragraph breaks. Do not add option letters, analysis,
+order and complete all five gaps with the authoritative answer sentences.
+Preserve paragraph breaks. Do not hand-write `[36]`-style markers: insertion
+identity comes only from `teachingContent` relationships. Do not add option letters, analysis,
 vocabulary notes, or source text that is not present in this group.
 
-`selectedLongSentences` contains 1–2 sentences with real teaching value. Prefer
+`selectedLongSentences` contains 1–2 sentences with real teaching value; each has
+a stable `sentenceId`. Prefer
 a difficult sentence that carries the passage's central meaning or materially
 supports one of the five gaps; do not select it merely for length. `paragraphId`
 and `sourceText` must locate the stored source exactly, retaining any `__36__`
 marker. `displayText` must be the deterministic answer-completed form.
 `relatedQuestionIds` must cite questions in this group. In `analysisZh`, identify
 the main trunk first and then explain how clauses, non-finite phrases, or logical
-relations attach. `underlineTexts` must contain 1–3 unique, non-overlapping exact
-substrings of `displayText`; underline only the decisive structure.
+relations attach. `underlineRanges` locates decisive structure in `displayText`:
+Unicode code-point offsets, start inclusive/end exclusive, with the exact `quote`.
+Do not trim or normalize before counting. Usually 1–3 short ranges suffice;
+repeated phrases and overlaps are valid when explicitly located. The example
+offsets only illustrate the encoding; calculate them for your actual text. Do
+not also emit historical `underlineTexts`.
+
+Add closed `teachingContent` (`schemaVersion: objective-teaching-content-v1`)
+beside these fields. It declares `sourceTextId`, exact `sourceAssetVersion`,
+`translation {textId,legacyField:"fullTranslationZh",paragraphs[]}` whose
+paragraphs are exact code-point slices of that one translation value and link
+existing source paragraph IDs, authoritative `completedSourceTexts[]`, and
+`annotations[]`. Every question needs original-text `answer-evidence` and one
+completed-text `answer-insertion` bound to its exact `blankId`; every selected
+sentence needs `sentence-structure`. Range shape is
+`{textId,paragraphId,start,end,quote}`. Repeated occurrences, many-to-many links,
+and overlaps require explicit offsets; never first-match, trim, normalize,
+mutate original blanks, or interpret hand-written `[36]` as annotation data.
+An insertion range must locate that blank's actual replacement, not another
+occurrence of the same answer. All text identities are distinct. Non-key difficult
+sentences use empty `relatedQuestionIds` and sentence-structure `questionIds`.
 
 Do NOT copy paper-asset fields into `groups[groupId]`. In particular, do not
 include `groupId`, `groupType`, `questionIds`, `blankIds`, `optionBank`, or
@@ -215,8 +239,7 @@ Each `questions[questionId]` item analyzes one blank.
       "optionLabel": "A",
       "reason": "Chinese explanation of the tempting but wrong fit"
     }
-  ],
-  "teachingNote": "Chinese teacher-facing explanation of the solving move"
+  ]
 }
 ```
 
@@ -437,12 +460,6 @@ own facet keys.
 
 Do not spend effort filling distractors if it harms the correct-option signal
 quality. The current surface does not display distractors.
-
-## Teaching Note
-
-`teachingNote` should be one plain Chinese sentence. It should state one
-transferable solving move after the concrete fit is already clear, not repeat
-the whole `fitSummary` with an internal label.
 
 ## Final Literal-Substring Check
 

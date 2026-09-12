@@ -109,7 +109,6 @@ function formatClozeText(entry) {
   if (distractorText.length > 0) {
     parts.push(`干扰项：${distractorText.join('　')}`)
   }
-  if (entry.teachingNote) parts.push(`点拨：${entry.teachingNote}`)
   return parts.join('\n')
 }
 
@@ -121,7 +120,6 @@ function formatGrammarFillText(entry) {
   } else if (entry.reason) {
     parts.push(entry.reason)
   }
-  if (entry.teachingNote) parts.push(`点拨：${entry.teachingNote}`)
   return parts.join('\n')
 }
 
@@ -139,7 +137,6 @@ function formatSevenChoicesText(entry) {
   if (clues.length > 0) {
     parts.push(`话题线索：${clues.join('；')}`)
   }
-  if (entry.teachingNote) parts.push(`点拨：${entry.teachingNote}`)
   return parts.join('\n')
 }
 
