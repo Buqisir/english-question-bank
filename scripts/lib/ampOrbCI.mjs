@@ -39,6 +39,17 @@ const TERMINAL_STATES = new Set(['reported', 'superseded'])
 const SANDBOX_LANES = new Set(['fast', 'full'])
 const RUN_TIMEOUT_MS = 35 * 60 * 1000
 export const AMP_ORB_CI_LOCK_CONFLICT_EXIT_CODE = 75
+const AMP_ORB_CI_BLOCKED_SCHEMA_VERSION = 'amp-orb-ci-blocked-v1'
+const RESOLUTION_RETRY_DELAYS_MS = [60_000, 5 * 60_000, 15 * 60_000, 60 * 60_000]
+
+export class AmpOrbCIResolutionBlockedError extends Error {
+  constructor(code, { actionRequired = false } = {}) {
+    super(code)
+    this.name = 'AmpOrbCIResolutionBlockedError'
+    this.code = code
+    this.actionRequired = actionRequired
+  }
+}
 
 function base64Url(value) {
   return Buffer.from(value).toString('base64url')
@@ -439,6 +450,18 @@ export function enqueueAmpOrbCIJob(input, { stateDir } = {}) {
   const queueDir = path.join(stateDir, 'queue')
   ensurePrivateDirectory(queueDir)
   const queuePath = path.join(queueDir, `${validated.deliveryId}.json`)
+  const acceptedPath = path.join(stateDir, 'accepted-deliveries', `${validated.deliveryId}.json`)
+  const accepted = {
+    schemaVersion: 'amp-orb-ci-accepted-delivery-v1',
+    deliveryId: validated.deliveryId,
+    event: validated.event,
+    sha: validated.sha,
+    baseSha: validated.baseSha,
+    pullRequestNumber: validated.pullRequestNumber ?? null,
+  }
+  if (existsSync(acceptedPath) && JSON.stringify(readJson(acceptedPath)) !== JSON.stringify(accepted)) {
+    throw new Error('Amp Orb CI accepted delivery identity mismatch')
+  }
   const item = {
     schemaVersion: AMP_ORB_CI_QUEUE_SCHEMA_VERSION,
     input: validated,
@@ -453,13 +476,49 @@ export function enqueueAmpOrbCIJob(input, { stateDir } = {}) {
       throw new Error('Amp Orb CI queue delivery identity mismatch')
     }
   }
+  if (!atomicCreateJson(acceptedPath, accepted)) {
+    const existing = readJson(acceptedPath)
+    if (JSON.stringify(existing) !== JSON.stringify(accepted)) {
+      if (created) rmSync(queuePath)
+      throw new Error('Amp Orb CI accepted delivery identity mismatch')
+    }
+  }
   return {
     outcome: created ? 'queued' : 'duplicate',
     queuePath,
   }
 }
 
-export async function drainAmpOrbCIQueue({ stateDir, resolveJob, runJob } = {}) {
+function resolutionBlocker(error, previous, now) {
+  const code = error instanceof AmpOrbCIResolutionBlockedError
+    ? error.code : 'pull-request-resolution-unavailable'
+  const attempts = previous ? previous.attempts + 1 : 1
+  const actionRequired = (error instanceof AmpOrbCIResolutionBlockedError && error.actionRequired)
+    || attempts >= RESOLUTION_RETRY_DELAYS_MS.length
+  return {
+    schemaVersion: AMP_ORB_CI_BLOCKED_SCHEMA_VERSION,
+    code,
+    disposition: actionRequired ? 'action-required' : 'retryable',
+    attempts,
+    firstBlockedAt: previous ? previous.firstBlockedAt : new Date(now).toISOString(),
+    lastBlockedAt: new Date(now).toISOString(),
+    nextAttemptAt: actionRequired ? null : new Date(
+      now + RESOLUTION_RETRY_DELAYS_MS[attempts - 1],
+    ).toISOString(),
+    ...(code === 'pull-request-update-required' ? { action: 'update-pull-request-branch' } : {}),
+  }
+}
+
+function validBlockedState(blocked) {
+  return blocked?.schemaVersion === AMP_ORB_CI_BLOCKED_SCHEMA_VERSION
+    && ['retryable', 'action-required'].includes(blocked.disposition)
+    && typeof blocked.code === 'string'
+    && Number.isSafeInteger(blocked.attempts)
+    && blocked.attempts > 0
+    && (blocked.disposition === 'action-required' || Number.isFinite(Date.parse(blocked.nextAttemptAt)))
+}
+
+export async function drainAmpOrbCIQueue({ stateDir, resolveJob, runJob, now = () => Date.now() } = {}) {
   if (typeof runJob !== 'function') throw new Error('Amp Orb CI queue runner is missing')
   ensurePrivateDirectory(stateDir)
   const queueDir = path.join(stateDir, 'queue')
@@ -467,22 +526,55 @@ export async function drainAmpOrbCIQueue({ stateDir, resolveJob, runJob } = {}) 
   const files = readdirSync(queueDir)
     .filter((file) => file.endsWith('.json'))
     .sort()
-  const results = []
-  for (const file of files) {
+  const queued = files.map((file) => {
     const match = QUEUE_FILE.exec(file)
     if (!match) throw new Error('Amp Orb CI queue filename is invalid')
     const queuePath = path.join(queueDir, file)
     const item = readJson(queuePath)
     if (item?.terminal?.kind === 'superseded') {
-      results.push({ deliveryId: match[1], outcome: 'superseded' })
+      return { file, deliveryId: match[1], queuePath, item, input: null }
+    }
+    const input = validateAmpOrbCIQueueInput(item?.input)
+    if (item?.schemaVersion !== AMP_ORB_CI_QUEUE_SCHEMA_VERSION || input.deliveryId !== match[1]) {
+      throw new Error('Amp Orb CI queue item identity mismatch')
+    }
+    if (item.blocked !== undefined && !validBlockedState(item.blocked)) {
+      throw new Error('Amp Orb CI queue blocker is invalid')
+    }
+    return { file, deliveryId: match[1], queuePath, item, input }
+  }).sort((left, right) =>
+    Number(left.item.blocked?.disposition === 'action-required')
+      - Number(right.item.blocked?.disposition === 'action-required'))
+  const results = []
+  const progressedPullRequests = new Map()
+  const markProgress = (input) => {
+    if (input?.event !== 'pull_request') return
+    const identities = progressedPullRequests.get(input.pullRequestNumber) || new Set()
+    identities.add(`${input.sha}:${input.baseSha}`)
+    progressedPullRequests.set(input.pullRequestNumber, identities)
+  }
+  for (const { file, deliveryId, queuePath, item, input: snapshotInput } of queued) {
+    if (item?.terminal?.kind === 'superseded') {
+      results.push({ deliveryId, outcome: 'superseded' })
       continue
     }
-    const queuedInput = validateAmpOrbCIQueueInput(item?.input)
+    const queuedInput = snapshotInput
+    const replacementProgressed = queuedInput.event === 'pull_request'
+      && item.blocked?.disposition === 'action-required'
+      && [...(progressedPullRequests.get(queuedInput.pullRequestNumber) || [])]
+        .some((identity) => identity !== `${queuedInput.sha}:${queuedInput.baseSha}`)
     if (
-      item?.schemaVersion !== AMP_ORB_CI_QUEUE_SCHEMA_VERSION
-      || queuedInput.deliveryId !== match[1]
+      validBlockedState(item.blocked)
+      && !replacementProgressed
+      && (item.blocked.disposition === 'action-required'
+        || Date.parse(item.blocked.nextAttemptAt) > now())
     ) {
-      throw new Error('Amp Orb CI queue item identity mismatch')
+      results.push({
+        deliveryId: queuedInput.deliveryId,
+        outcome: 'blocked',
+        blocker: item.blocked,
+      })
+      continue
     }
     let input = queuedInput
     if (
@@ -504,10 +596,13 @@ export async function drainAmpOrbCIQueue({ stateDir, resolveJob, runJob } = {}) 
           }
       try {
         input = await resolveJob(unresolvedInput)
-      } catch {
+      } catch (error) {
+        const blocked = resolutionBlocker(error, item.blocked, now())
+        atomicWriteJson(queuePath, { ...item, blocked })
         results.push({
           deliveryId: queuedInput.deliveryId,
-          outcome: 'deferred',
+          outcome: 'blocked',
+          blocker: blocked,
         })
         continue
       }
@@ -517,8 +612,15 @@ export async function drainAmpOrbCIQueue({ stateDir, resolveJob, runJob } = {}) 
           let staleResult
           try {
             staleResult = await runJob(previousInput)
-          } catch {
-            results.push({ deliveryId: queuedInput.deliveryId, outcome: 'deferred' })
+          } catch (error) {
+            const blocked = resolutionBlocker(
+              error instanceof AmpOrbCIResolutionBlockedError
+                ? error : new AmpOrbCIResolutionBlockedError('stale-reconciliation-unavailable'),
+              item.blocked,
+              now(),
+            )
+            atomicWriteJson(queuePath, { ...item, blocked })
+            results.push({ deliveryId: queuedInput.deliveryId, outcome: 'blocked', blocker: blocked })
             continue
           }
           if (!['superseded', 'cached'].includes(staleResult?.outcome)
@@ -531,18 +633,27 @@ export async function drainAmpOrbCIQueue({ stateDir, resolveJob, runJob } = {}) 
           deliveryId: queuedInput.deliveryId,
           outcome: 'stale',
         })
+        markProgress(unresolvedInput)
         continue
       }
       input = validateAmpOrbCIInput(input)
     }
     // Keep the resolved identity across crashes. A later stale webhook must
     // still reconcile/finish the original immutable Check, not abandon it.
-    atomicWriteJson(queuePath, { ...item, resolvedInput: input })
+    const { blocked: _blocked, ...unblockedItem } = item
+    atomicWriteJson(queuePath, { ...unblockedItem, resolvedInput: input })
     let result
     try {
       result = await runJob(input)
-    } catch {
-      results.push({ deliveryId: input.deliveryId, outcome: 'deferred' })
+    } catch (error) {
+      const blocked = resolutionBlocker(
+        error instanceof AmpOrbCIResolutionBlockedError
+          ? error : new AmpOrbCIResolutionBlockedError('ci-job-unavailable'),
+        item.blocked,
+        now(),
+      )
+      atomicWriteJson(queuePath, { ...unblockedItem, resolvedInput: input, blocked })
+      results.push({ deliveryId: input.deliveryId, outcome: 'blocked', blocker: blocked })
       continue
     }
     if (
@@ -556,12 +667,48 @@ export async function drainAmpOrbCIQueue({ stateDir, resolveJob, runJob } = {}) 
     } else {
       rmSync(queuePath)
     }
+    markProgress(input)
     results.push({
       deliveryId: input.deliveryId,
       outcome: result.outcome,
     })
   }
   return results
+}
+
+export function recordAmpOrbCIDrainStatus({
+  stateDir,
+  results = [],
+  state = 'settled',
+  code = null,
+  now = () => Date.now(),
+} = {}) {
+  const validControllerCode = [
+    'controller-initialization-unavailable',
+    'controller-drain-unavailable',
+  ].includes(code)
+  if (!['settled', 'controller-error'].includes(state)
+    || !Array.isArray(results)
+    || (state === 'controller-error') !== validControllerCode) {
+    throw new Error('Invalid Amp Orb CI drain status')
+  }
+  const outcomes = {}
+  const blockers = {}
+  for (const result of results) {
+    outcomes[result.outcome] = (outcomes[result.outcome] || 0) + 1
+    if (result.blocker?.code) blockers[result.blocker.code] = (blockers[result.blocker.code] || 0) + 1
+  }
+  const status = {
+    schemaVersion: 'amp-orb-ci-drain-status-v1',
+    recordedAt: new Date(now()).toISOString(),
+    state,
+    processed: results.length,
+    outcomes,
+    blockers,
+    ...(code ? { code } : {}),
+  }
+  atomicWriteJson(path.join(stateDir, 'drain-status.json'), status)
+  return status
 }
 
 export function ampOrbCILockInvocation({
@@ -692,6 +839,7 @@ export function validateAmpOrbCISandboxResult(exitCode, result, { lane } = {}) {
 
 function trustedGit(repositoryRoot, args, {
   allowFailure = false,
+  allowExitOne = false,
   timeoutMs = 120_000,
 } = {}) {
   try {
@@ -704,7 +852,10 @@ function trustedGit(repositoryRoot, args, {
     }).trim()
   } catch (error) {
     if (allowFailure) return null
-    throw new Error(`Trusted Amp Orb CI git ${args[0]} failed (${error?.status ?? 'unknown'})`)
+    if (allowExitOne && error?.status === 1) return false
+    const failure = new Error(`Trusted Amp Orb CI git ${args[0]} failed (${error?.status ?? 'unknown'})`)
+    failure.status = error?.status
+    throw failure
   }
 }
 
@@ -758,6 +909,7 @@ export async function resolveAmpOrbCIPullRequest(input, {
     input.pullRequestNumber,
     input.deliveryId,
   ].join('/')
+  const liveMainRef = `${incomingRef}-main`
   try {
     if (!await readLive()) return null
     let fetchError = null
@@ -787,8 +939,32 @@ export async function resolveAmpOrbCIPullRequest(input, {
     if (parents.length !== 3 || parents[0] !== testedSha) throw new Error('Resolved pull request merge must have exactly two ordered parents')
     const [, fetchedBase, fetchedHead] = parents
     if (fetchedBase !== input.baseSha || fetchedHead !== input.sha) {
-      // The live API still matches this delivery: the merge ref may be lagging.
-      throw new Error('Live pull request merge ref is not ready for its current parents')
+      // Parent drift is normally transient. Require separate live-main and
+      // ancestry evidence before asking a human to update the branch.
+      let updateRequired = false
+      try {
+        trustedGitImpl(repositoryRoot, [
+          'fetch', '--no-tags', 'origin', `+refs/heads/main:${liveMainRef}`,
+        ], { timeoutMs: 5_000 })
+        const liveMain = trustedGitImpl(repositoryRoot, ['rev-parse', `${liveMainRef}^{commit}`])
+        const priorBaseStillContained = trustedGitImpl(repositoryRoot, [
+          'merge-base', '--is-ancestor', input.baseSha, liveMain,
+        ], { allowExitOne: true }) !== false
+        const liveMainContainedInHead = trustedGitImpl(repositoryRoot, [
+          'merge-base', '--is-ancestor', liveMain, input.sha,
+        ], { allowExitOne: true }) !== false
+        updateRequired = fetchedBase === liveMain
+          && fetchedHead === input.sha
+          && liveMain !== input.baseSha
+          && priorBaseStillContained
+          && !liveMainContainedInHead
+      } catch {
+        // Missing independent evidence must remain transient/unknown.
+      }
+      throw new AmpOrbCIResolutionBlockedError(
+        updateRequired ? 'pull-request-update-required' : 'merge-ref-not-ready',
+        { actionRequired: updateRequired },
+      )
     }
     trustedGitImpl(repositoryRoot, ['merge-base', '--is-ancestor', fetchedBase, fetchedHead])
     const testedTree = trustedGitImpl(repositoryRoot, ['rev-parse', `${incomingRef}^{tree}`])
@@ -803,6 +979,7 @@ export async function resolveAmpOrbCIPullRequest(input, {
     }
   } finally {
     trustedGitImpl(repositoryRoot, ['update-ref', '-d', incomingRef], { allowFailure: true })
+    trustedGitImpl(repositoryRoot, ['update-ref', '-d', liveMainRef], { allowFailure: true })
   }
 }
 

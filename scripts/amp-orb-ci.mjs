@@ -13,6 +13,7 @@ import {
   defaultAmpOrbCIStateDir,
   drainAmpOrbCIQueue,
   executeAmpOrbCILanes,
+  recordAmpOrbCIDrainStatus,
   repositoryRootFromModule,
   resolveAmpOrbCIPullRequest,
   runAmpOrbCIJob,
@@ -49,6 +50,7 @@ const repositoryRoot = repositoryRootFromModule(import.meta.url, 1)
 const stateDir = defaultAmpOrbCIStateDir(repositoryRoot)
 const controllerCommand = process.argv[2]
 const queueCommands = new Set(['drain'])
+let controllerPhase = 'initialization'
 
 if (process.env.AMP_ORB_CI_LOCK_HELD !== '1') {
   const invocation = ampOrbCILockInvocation({
@@ -107,6 +109,7 @@ try {
     }),
   })
   if (queueCommands.has(controllerCommand)) {
+    controllerPhase = 'drain'
     const results = await drainAmpOrbCIQueue({
       stateDir,
       resolveJob: (input) => resolveAmpOrbCIPullRequest(input, {
@@ -115,9 +118,10 @@ try {
       }),
       runJob,
     })
-    const deferred = results.filter(({ outcome }) => outcome === 'deferred').length
-    console.log(`Amp Orb CI processed ${results.length} queued delivery(s); ${deferred} deferred.`)
-    if (deferred > 0) process.exitCode = 1
+    const blocked = results.filter(({ outcome }) => outcome === 'blocked').length
+    recordAmpOrbCIDrainStatus({ stateDir, results })
+    console.log(`Amp Orb CI processed ${results.length} queued delivery(s); ${blocked} blocked.`)
+    if (blocked > 0) process.exitCode = 1
   } else {
     const input = parseInput()
     const result = await runJob(input)
@@ -126,6 +130,19 @@ try {
     if (result.logPath) console.log(`Private log: ${result.logPath}`)
   }
 } catch (error) {
+  if (queueCommands.has(controllerCommand)) {
+    try {
+      recordAmpOrbCIDrainStatus({
+        stateDir,
+        state: 'controller-error',
+        code: controllerPhase === 'initialization'
+          ? 'controller-initialization-unavailable'
+          : 'controller-drain-unavailable',
+      })
+    } catch {
+      // The original controller failure remains authoritative.
+    }
+  }
   console.error(`Amp Orb CI controller failed: ${error.message}`)
   process.exitCode = 1
 }
