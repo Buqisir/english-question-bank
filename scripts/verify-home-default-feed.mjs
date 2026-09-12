@@ -502,5 +502,32 @@ console.log('\nTest 31: home-blank — rotating placeholder examples all carry t
   assert('dataLoading placeholder text "正在连接本地题库…" preserved', /if \(dataLoading\) return ['"]正在连接本地题库…['"]/.test(desk), '')
 }
 
+// ------------------------------------------------------------------ Test 32
+console.log('\nTest 32: Detail #362 — full-route open/back handlers reset the home sub-mode flags')
+{
+  const app = readSrc('app/src/App.tsx')
+  // The MySpace / DraftPaper / PaperBrowse open+return family used to leave
+  // `adminRouteActive`/`browseRouteActive` stale: browse → 个人空间 → 返回找题
+  // re-rendered the browse feed on a plain-home URL. The exhaustive siblings
+  // (openVocabularyReview / openVocabularyDictationWorkbench) already reset
+  // both flags; these six handlers must do the same so the URL stays the
+  // source of truth for the home sub-mode.
+  const handlerBody = (name) =>
+    app.match(new RegExp(`const ${name} = useCallback\\([\\s\\S]*?\\n  \\}, \\[[^\\]]*\\]\\)`))?.[0] || ''
+  for (const name of [
+    'openMySpace',
+    'openDraftPaperWorkbench',
+    'openPaperBrowse',
+    'mySpaceOnBackToWorkbench',
+    'draftPaperOnBackToWorkbench',
+    'paperBrowseOnBackToWorkbench',
+  ]) {
+    const body = handlerBody(name)
+    assert(`${name} is found in App.tsx`, body.length > 0, '')
+    assert(`${name} clears adminRouteActive`, /setAdminRouteActive\(false\)/.test(body), '')
+    assert(`${name} clears browseRouteActive`, /setBrowseRouteActive\(false\)/.test(body), '')
+  }
+}
+
 console.log(`\n=== Results: ${passed} passed, ${failed} failed ===`)
 process.exit(failed > 0 ? 1 : 0)

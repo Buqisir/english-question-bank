@@ -523,6 +523,8 @@ function App() {
       }
       window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
     }
+    setAdminRouteActive(false)
+    setBrowseRouteActive(false)
     setMySpaceRouteActive(false)
     setVocabularyReviewRouteActive(false)
     setVocabularyPracticeRoute({ active: false, setId: null })
@@ -548,6 +550,8 @@ function App() {
         // State flip below is the authoritative UI change.
       }
     }
+    setAdminRouteActive(false)
+    setBrowseRouteActive(false)
     setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
     void refreshQuestionGroups()
   }, [refreshQuestionGroups])
@@ -593,6 +597,8 @@ function App() {
       }
       window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
     }
+    setAdminRouteActive(false)
+    setBrowseRouteActive(false)
     setMySpaceRouteActive(false)
     setVocabularyReviewRouteActive(false)
     setVocabularyPracticeRoute({ active: false, setId: null })
@@ -645,6 +651,8 @@ function App() {
         // State flip below is the authoritative UI change.
       }
     }
+    setAdminRouteActive(false)
+    setBrowseRouteActive(false)
     setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, reviewRevision: null, lecture: false, similar: false })
   }, [])
 
@@ -756,6 +764,8 @@ function App() {
       url.searchParams.delete('groupId')
       window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
     }
+    setAdminRouteActive(false)
+    setBrowseRouteActive(false)
     setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
     setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, reviewRevision: null, lecture: false, similar: false })
     setVocabularyReviewRouteActive(false)
@@ -885,6 +895,8 @@ function App() {
         // State flip below is the authoritative UI change.
       }
     }
+    setAdminRouteActive(false)
+    setBrowseRouteActive(false)
     setMySpaceRouteActive(false)
     void refreshQuestionGroups()
   }, [refreshQuestionGroups])
