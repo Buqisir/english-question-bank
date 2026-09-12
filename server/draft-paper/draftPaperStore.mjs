@@ -64,11 +64,26 @@ const FIGURE_IMAGE_MIME_TYPES = {
   '.webp': 'image/webp',
 }
 
-function inlineFigureImages(html, images) {
+// A manifest-referenced figure file that is absent on disk is a paper-assets
+// DATA error, not a renderer-unavailable condition. An unguarded readFileSync
+// throws a raw Node ENOENT (error.code === 'ENOENT', message starts with
+// 'ENOENT:'), which sendDraftMutationError's `message.includes('ENOENT')` lane
+// (the renderer-toolchain fallback added by 359b0bc6) would absorb into 503
+// "精排 PDF 不可用" — the wrong status and envelope for a data-integrity
+// condition. The existsSync gate below rethrows with a typed FIGURE_ASSET_MISSING
+// code whose message carries the missing path but contains no 'ENOENT' token,
+// so the routes classifier falls through to 400 (the classification the
+// pagination / reorder-suggestion routes returned for this throw before
+// 359b0bc6) while the renderer-toolchain ENOENT fallback keeps catching
+// genuine polyfill/chromium filesystem ENOENTs as 503.
+export function inlineFigureImages(html, images) {
   let result = html
   for (const image of images) {
     const ext = path.extname(image.relativeName).toLowerCase()
     const mime = FIGURE_IMAGE_MIME_TYPES[ext] || 'application/octet-stream'
+    if (!existsSync(image.absoluteSourcePath)) {
+      throw Object.assign(new Error(`Figure asset not found: ${image.absoluteSourcePath}`), { code: 'FIGURE_ASSET_MISSING' })
+    }
     const dataUri = `data:${mime};base64,${readFileSync(image.absoluteSourcePath).toString('base64')}`
     // `images` entries come from figureImageSrc's sequential `fig-${n}${ext}` naming
     // (print-renderer.mjs) — unique per buildDraftPrintHtml call, so a plain
