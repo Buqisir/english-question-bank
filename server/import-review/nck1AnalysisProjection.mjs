@@ -15,11 +15,16 @@ import {
 import {
   validateNarrativeContinuationAnalysis,
 } from '../paper-import-ai/analyzeNarrativeContinuation.mjs'
-import {
-  isCompleteReviewCard,
-  validateWritingAnalysisCandidate,
-} from '../writing-analysis/writingAnalysisBackfillService.mjs'
+import { validateWritingAnalysisCandidate } from '../writing-analysis/writingAnalysisBackfillService.mjs'
+import { isApplicationReviewCardV2 } from '../../shared/writing/applicationReviewCard.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
+import {
+  LEGACY_NCK1_ANALYSIS_PROFILE,
+  LISTENING_ANALYSIS_FILE_NAME,
+  LISTENING_ANALYSIS_PROFILE,
+  LISTENING_STAGED_ANALYSIS_FILE_NAME,
+  validateListeningAnalysis,
+} from '../paper-import-ai/analyzeListening.mjs'
 
 const readingSchema = JSON.parse(readFileSync(path.join(
   import.meta.dirname,
@@ -51,7 +56,14 @@ export const NCK1_ANALYSIS_SIDECAR_FILES = Object.freeze([
   'cloze-analysis-v1.json',
   'grammar-fill-analysis-v1.json',
   'writing-analysis-v1.json',
+  LISTENING_ANALYSIS_FILE_NAME,
 ])
+
+export const NCK1_LISTENING_STAGED_ANALYSIS = Object.freeze({
+  key: 'listening-unit',
+  path: LISTENING_STAGED_ANALYSIS_FILE_NAME,
+  role: 'analysis_listening',
+})
 
 function fail(message, code = 'NCK1_ANALYSIS_INVALID') {
   const error = new Error(message)
@@ -165,6 +177,19 @@ function assertReadingOptionClosure(analysis, group) {
     ) {
       fail(`${question.id} reading analysis options do not close against the paper`)
     }
+    const correct = items.filter(({ status }) => status === 'correct')
+    if (correct.length !== 1 || correct[0].label !== question.answerKey) {
+      fail(`${question.id} reading analysis conflicts with the authoritative answer`)
+    }
+  }
+}
+
+function assertAnswerAgreement(analysis, group, collectionName, answerAt) {
+  for (const question of group.questions) {
+    const supplied = String(answerAt(analysis[collectionName][question.id]) || '').trim()
+    if (supplied !== question.answerKey) {
+      fail(`${question.id} analysis answer conflicts with the authoritative answer`)
+    }
   }
 }
 
@@ -173,8 +198,15 @@ export function projectNck1StagedWritingAnalysis(raw) {
     fail('Staged writing analysis is missing or not an object')
   }
   if (raw.taskType === 'application') {
-    if (!isCompleteReviewCard(raw.reviewCard)) {
-      fail('New-paper application analysis requires a complete ReviewCard')
+    exactKeys(raw, [
+      'taskType', 'modelAnswer', 'reviewCard',
+      ...(raw.officialModelAnswer === undefined ? [] : ['officialModelAnswer']),
+    ], 'application staged analysis')
+    if (!isApplicationReviewCardV2(raw.reviewCard)) {
+      fail('New-paper application analysis requires application-review-card-v2')
+    }
+    if (raw.highlightExpressions !== undefined) {
+      fail('New-paper application analysis must not include retired highlightExpressions')
     }
     return {
       taskType: 'application',
@@ -186,8 +218,15 @@ export function projectNck1StagedWritingAnalysis(raw) {
     }
   }
   if (raw.taskType === 'continuation') {
+    exactKeys(raw, [
+      'taskType', 'modelAnswer', 'continuationAnalysis',
+      ...(raw.officialModelAnswer === undefined ? [] : ['officialModelAnswer']),
+    ], 'continuation staged analysis')
     if (!raw.continuationAnalysis || typeof raw.continuationAnalysis !== 'object') {
       fail('New-paper continuation analysis must use continuationAnalysis')
+    }
+    if (raw.continuationAnalysis.schemaVersion !== 'continuation-analysis-v2') {
+      fail('New-paper continuation analysis must use continuation-analysis-v2')
     }
     if (raw.continuationDesign !== undefined || raw.highlightExpressions !== undefined) {
       fail('New-paper continuation analysis must not mix historical fields')
@@ -217,14 +256,6 @@ function parsedSidecar(files, fileName) {
   return JSON.parse(file.buffer.toString('utf8'))
 }
 
-function withAuthoritativeAnswers(analysis, group, collectionName, writeAnswer) {
-  const projected = structuredClone(analysis)
-  for (const question of group.questions) {
-    writeAnswer(projected[collectionName][question.id], question.answerKey)
-  }
-  return projected
-}
-
 function withOfficialModelAnswer(analysis, materializationGroup) {
   const sourceAnswer = materializationGroup.writingTask?.officialModelAnswer
   const stagedAnswer = analysis.officialModelAnswer
@@ -249,10 +280,16 @@ export function buildNck1AnalysisProjection({
   paperAsset,
   sourceAssetVersion = 1,
   required = true,
+  analysisProfile = LEGACY_NCK1_ANALYSIS_PROFILE,
+  requireTeachingContent = false,
 }) {
+  if (![LEGACY_NCK1_ANALYSIS_PROFILE, LISTENING_ANALYSIS_PROFILE].includes(analysisProfile)) {
+    fail(`Unknown NCK1 analysis profile: ${analysisProfile}`)
+  }
   const presentCount = NCK1_STAGED_ANALYSIS_FILES.filter(({ path: relativePath }) =>
     existsSync(path.join(rootDir, relativePath))).length
-  if (presentCount === 0 && !required) return null
+  const listeningPresent = existsSync(path.join(rootDir, NCK1_LISTENING_STAGED_ANALYSIS.path))
+  if (presentCount === 0 && !required && !listeningPresent) return null
   if (presentCount !== NCK1_STAGED_ANALYSIS_FILES.length) {
     const missing = NCK1_STAGED_ANALYSIS_FILES
       .filter(({ path: relativePath }) => !existsSync(path.join(rootDir, relativePath)))
@@ -264,6 +301,22 @@ export function buildNck1AnalysisProjection({
     descriptor.key,
     readAnalysis(rootDir, descriptor),
   ]))
+  if (analysisProfile === LISTENING_ANALYSIS_PROFILE && !listeningPresent) {
+    fail(
+      `Analysis profile ${LISTENING_ANALYSIS_PROFILE} requires ${NCK1_LISTENING_STAGED_ANALYSIS.path}`,
+      'NCK1_ANALYSIS_INCOMPLETE',
+    )
+  }
+  if (listeningPresent) {
+    raw[NCK1_LISTENING_STAGED_ANALYSIS.key] = readAnalysis(
+      rootDir,
+      NCK1_LISTENING_STAGED_ANALYSIS,
+    )
+    validateListeningAnalysis(raw[NCK1_LISTENING_STAGED_ANALYSIS.key], {
+      materialization,
+      sourceAssetVersion,
+    })
+  }
   const answers = Object.values(paperAsset.answerKey?.answers || {}).filter(
     ({ questionNo }) => questionNo >= 21 && questionNo <= 65,
   )
@@ -302,6 +355,7 @@ export function buildNck1AnalysisProjection({
       group,
       requireFullTranslation: true,
       requireSelectedLongSentences: true,
+      requireTeachingContent,
     })
     assertSourceVersion(analysis, sourceAssetVersion, group.groupId)
     assertReadingOptionClosure(analysis, group)
@@ -314,12 +368,14 @@ export function buildNck1AnalysisProjection({
     group: seven,
     requireFullTranslation: true,
     requireSelectedLongSentences: true,
+    requireTeachingContent,
   })
   validateClozeShape(raw.cloze, {
     paper,
     group: cloze,
     requireFullTranslation: true,
     requireSelectedLongSentences: true,
+    requireTeachingContent,
   })
   stampGrammarFillDerivedFields(raw.grammar)
   validateGrammarFillShape(raw.grammar, {
@@ -327,6 +383,7 @@ export function buildNck1AnalysisProjection({
     group: grammar,
     requireFullTranslation: true,
     requireSelectedLongSentences: true,
+    requireTeachingContent,
   })
   assertSourceVersion(raw.seven, sourceAssetVersion, seven.groupId)
   assertSourceVersion(raw.cloze, sourceAssetVersion, cloze.groupId)
@@ -339,6 +396,11 @@ export function buildNck1AnalysisProjection({
   assertAnswerClosure(raw.cloze, cloze, 'blanks', (item) =>
     item.correctFit?.optionLabel)
   assertAnswerClosure(raw.grammar, grammar, 'blanks', (item) => item.answer)
+  assertAnswerAgreement(raw.seven, seven, 'questions', (item) =>
+    item.optionFit?.correctOptionLabel)
+  assertAnswerAgreement(raw.cloze, cloze, 'blanks', (item) =>
+    item.correctFit?.optionLabel)
+  assertAnswerAgreement(raw.grammar, grammar, 'blanks', (item) => item.answer)
 
   const applicationWriting = withOfficialModelAnswer(
     projectNck1StagedWritingAnalysis(raw.application),
@@ -354,25 +416,6 @@ export function buildNck1AnalysisProjection({
     writingTask: writingTask(paperAsset, continuation.groupId),
   })
 
-  const authoritativeSeven = withAuthoritativeAnswers(
-    raw.seven,
-    seven,
-    'questions',
-    (item, answer) => { item.optionFit.correctOptionLabel = answer },
-  )
-  const authoritativeCloze = withAuthoritativeAnswers(
-    raw.cloze,
-    cloze,
-    'blanks',
-    (item, answer) => { item.correctFit.optionLabel = answer },
-  )
-  const authoritativeGrammar = withAuthoritativeAnswers(
-    raw.grammar,
-    grammar,
-    'blanks',
-    (item, answer) => { item.answer = answer },
-  )
-
   const files = buildPaperImportAiPackageFiles({
     parseResult: { paper, readingGroups },
     analysesByGroupId: Object.fromEntries(readingGroups.map((group, index) => [
@@ -380,11 +423,11 @@ export function buildNck1AnalysisProjection({
       raw[`reading-${String.fromCharCode(97 + index)}`],
     ])),
     sevenChoicesGroup: seven,
-    sevenChoicesAnalysis: authoritativeSeven,
+    sevenChoicesAnalysis: structuredClone(raw.seven),
     clozeGroup: cloze,
-    clozeAnalysis: authoritativeCloze,
+    clozeAnalysis: structuredClone(raw.cloze),
     grammarFillGroup: grammar,
-    grammarFillAnalysis: authoritativeGrammar,
+    grammarFillAnalysis: structuredClone(raw.grammar),
     applicationGroup: application,
     continuationGroup: continuation,
     sourceDocx: null,
@@ -402,6 +445,9 @@ export function buildNck1AnalysisProjection({
         [continuation.groupId]: { writing: continuationWriting },
       },
     },
+    ...(raw[NCK1_LISTENING_STAGED_ANALYSIS.key]
+      ? { [LISTENING_ANALYSIS_FILE_NAME]: structuredClone(raw[NCK1_LISTENING_STAGED_ANALYSIS.key]) }
+      : {}),
   }
   for (const fileName of NCK1_ANALYSIS_SIDECAR_FILES.slice(0, 4)) {
     sidecars[fileName].sourceAssetVersion = sourceAssetVersion

@@ -1,4 +1,5 @@
 import {
+  nck1AnalyzedPackageCandidateAuthorityRef55,
   nck1MaterializationCandidateAuthorityRef,
 } from '../../shared/paper-canonical/authority.mjs'
 import {
@@ -15,6 +16,12 @@ import {
   deriveNck1MaterializationBundle,
   isNck1MaterializationInput,
 } from './nck1MaterializationAdapter.mjs'
+import {
+  deriveNck1AnalyzedPackageBundle,
+  isNck1AnalyzedPackageInput,
+  parseStrictPackageJson,
+} from './nck1AnalyzedPackageAdapter.mjs'
+import { externalListeningReviewProofIdentity } from '../import-review/importReviewStore.mjs'
 
 export const NCK1_MATERIALIZATION_REQUEST_FILE_NAME =
   'canonical-import-request.json'
@@ -66,18 +73,53 @@ export function isNck1MaterializationCanonicalImportRequest(request) {
   )) return false
   const documents = request?.evidence?.documents
   if (!Array.isArray(documents)) return false
-  const materializations = documents.filter(
-    (document) => document.inputKey === 'nck1_source_materialization',
-  )
-  return materializations.length === 1
-    && materializations[0].bytes instanceof Uint8Array
+  const sourceAssets = documents.filter((document) =>
+    document.inputKey === 'nck1_source_materialization')
+  return sourceAssets.length === 1
+    && sourceAssets[0].bytes instanceof Uint8Array
     && request.nck1MaterializationConfirmation?.schemaVersion
       === 'teacher-confirmation-v1'
     && request.nck1MaterializationConfirmation.confirmed === true
 }
 
+function analyzedPackageContentDocument(request) {
+  const documents = request?.evidence?.documents
+  if (!Array.isArray(documents)) return null
+  const manifests = documents.filter((document) =>
+    document.inputKey === 'nck1_analyzed_package_manifest')
+  if (manifests.length !== 1 || !(manifests[0].bytes instanceof Uint8Array)) return null
+  try {
+    const manifest = parseStrictPackageJson(manifests[0].bytes)
+    if (typeof manifest?.contentMemberId !== 'string') return null
+    const inputKey = `source_document_${manifest.contentMemberId.replace(/[^a-z0-9]+/gi, '_')}`
+    const matches = documents.filter((document) => document.inputKey === inputKey)
+    return matches.length === 1 && matches[0].bytes instanceof Uint8Array ? matches[0] : null
+  } catch {
+    return null
+  }
+}
+
+export function isNck1AnalyzedPackageCanonicalImportRequest(request) {
+  if (!sameAuthority(
+    request?.authority,
+    nck1AnalyzedPackageCandidateAuthorityRef55,
+  )) return false
+  return Boolean(analyzedPackageContentDocument(request))
+    && request.nck1MaterializationConfirmation?.schemaVersion
+      === 'teacher-confirmation-v1'
+    && request.nck1MaterializationConfirmation.confirmed === true
+}
+
+function isNck1CanonicalImportRequest(request) {
+  return isNck1MaterializationCanonicalImportRequest(request)
+    || isNck1AnalyzedPackageCanonicalImportRequest(request)
+}
+
 export function nck1MaterializationPublicationSourceAsset(request) {
-  if (!isNck1MaterializationCanonicalImportRequest(request)) return null
+  if (!isNck1CanonicalImportRequest(request)) return null
+  if (isNck1AnalyzedPackageCanonicalImportRequest(request)) {
+    return new Uint8Array(analyzedPackageContentDocument(request).bytes)
+  }
   return new Uint8Array(request.evidence.documents.find(
     (document) => document.inputKey === 'nck1_source_materialization',
   ).bytes)
@@ -100,8 +142,8 @@ function proofSnapshotDigest({ compilation, sourceAsset, identity }) {
   })
 }
 
-export function admitLiveConfirmedNck1MaterializationImport(request) {
-  if (!isNck1MaterializationCanonicalImportRequest(request)) {
+function admitLiveConfirmedNck1Import(request, acceptsRequest) {
+  if (!acceptsRequest(request)) {
     throw requestError(
       'NCK1_MATERIALIZATION_REQUEST_INVALID',
       'NCK1 materialization admission requires immutable source evidence and Teacher Confirmation',
@@ -119,7 +161,7 @@ export function admitLiveConfirmedNck1MaterializationImport(request) {
   const confirmation = request.nck1MaterializationConfirmation
   const identity = Object.freeze({
     paperId: compilation.artifacts.canonicalPaper.paperPlan.paperId,
-    authority: Object.freeze({ ...nck1MaterializationCandidateAuthorityRef }),
+    authority: Object.freeze({ ...request.authority }),
     candidateDigest: confirmation.candidateDigest,
     sourceDigest: confirmation.sourceDigest,
   })
@@ -133,15 +175,30 @@ export function admitLiveConfirmedNck1MaterializationImport(request) {
   return { compilation, sourceAsset, proof, identity }
 }
 
-export function isLiveConfirmedNck1MaterializationAdmission({
+export function admitLiveConfirmedNck1MaterializationImport(request) {
+  return admitLiveConfirmedNck1Import(
+    request,
+    isNck1MaterializationCanonicalImportRequest,
+  )
+}
+
+export function admitLiveConfirmedNck1AnalyzedPackageImport(request) {
+  return admitLiveConfirmedNck1Import(
+    request,
+    isNck1AnalyzedPackageCanonicalImportRequest,
+  )
+}
+
+function isLiveConfirmedNck1Admission({
   proof,
   compilation,
   sourceAsset,
-}) {
+}, authority) {
   const admitted = liveNck1MaterializationProofs.get(proof)
   if (
     !admitted
     || admitted.compilation !== compilation
+    || !sameAuthority(admitted.identity.authority, authority)
     || !(sourceAsset instanceof Uint8Array)
     || admitted.sourceAssetDigest !== sha256(sourceAsset)
   ) return false
@@ -156,13 +213,50 @@ export function isLiveConfirmedNck1MaterializationAdmission({
   }
 }
 
+export function isLiveConfirmedNck1MaterializationAdmission(admission) {
+  return isLiveConfirmedNck1Admission(
+    admission,
+    nck1MaterializationCandidateAuthorityRef,
+  )
+}
+
+export function isLiveConfirmedNck1AnalyzedPackageAdmission(admission) {
+  return isLiveConfirmedNck1Admission(
+    admission,
+    nck1AnalyzedPackageCandidateAuthorityRef55,
+  )
+}
+
+export function isLiveExternalListeningReviewAdmission({
+  proof,
+  nck1AnalyzedPackageConfirmationProof,
+  compilation,
+  listeningAudioBytes,
+}) {
+  const reviewed = externalListeningReviewProofIdentity(proof)
+  const admitted = liveNck1MaterializationProofs.get(nck1AnalyzedPackageConfirmationProof)
+  if (
+    !reviewed
+    || !admitted
+    || admitted.compilation !== compilation
+    || reviewed.paperId !== admitted.identity.paperId
+    || reviewed.sourceDigest !== admitted.identity.sourceDigest
+    || reviewed.candidateDigest !== admitted.identity.candidateDigest
+    || !(listeningAudioBytes instanceof Uint8Array)
+    || reviewed.audioSha256 !== sha256(listeningAudioBytes)
+    || reviewed.audioByteLength !== listeningAudioBytes.byteLength
+  ) return false
+  return true
+}
+
 /**
  * Materialize the trusted adapter's deterministic compiler request without
  * writing or publishing anything. The returned output map can be persisted by
  * an explicit caller and loaded with loadCanonicalImportRequest.
  */
 export function materializeNck1CanonicalRequest(sourceInput, confirmation) {
-  if (!isNck1MaterializationInput(sourceInput)) {
+  const analyzedPackage = isNck1AnalyzedPackageInput(sourceInput)
+  if (!analyzedPackage && !isNck1MaterializationInput(sourceInput)) {
     throw requestError(
       'MATERIALIZATION_INPUT_INVALID',
       'NCK1 request materialization requires one exact immutable source bundle',
@@ -198,10 +292,15 @@ export function materializeNck1CanonicalRequest(sourceInput, confirmation) {
       first?.message || 'Confirmed NCK1 Candidate did not derive one Canonical Paper',
     )
   }
-  const derivation = deriveNck1MaterializationBundle(sourceInput)
+  const derivation = analyzedPackage
+    ? deriveNck1AnalyzedPackageBundle(sourceInput)
+    : deriveNck1MaterializationBundle(sourceInput)
   const outputs = new Map()
+  const authority = analyzedPackage
+    ? nck1AnalyzedPackageCandidateAuthorityRef55
+    : nck1MaterializationCandidateAuthorityRef
   const liveRequest = {
-    authority: nck1MaterializationCandidateAuthorityRef,
+    authority,
     nck1MaterializationConfirmation: confirmation,
     evidence: {
       documents: derivation.request.evidence.documents.map((document) => ({
@@ -218,7 +317,7 @@ export function materializeNck1CanonicalRequest(sourceInput, confirmation) {
     return { ...descriptor, path: fileName }
   })
   const request = {
-    authority: nck1MaterializationCandidateAuthorityRef,
+    authority,
     nck1MaterializationConfirmation: confirmation,
     evidence: { documents },
   }

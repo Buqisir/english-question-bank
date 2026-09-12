@@ -87,7 +87,8 @@ assert.match(prompts.cloze, /why a student might consider it/)
 assert.match(prompts.cloze, /`fullTranslationZh`/)
 assert.match(prompts.cloze, /`selectedLongSentences`/)
 assert.match(prompts.cloze, /放回当前语境为何不成立/)
-assert.match(prompts.cloze, /similaritySummary/)
+assert.doesNotMatch(prompts.cloze, /"similaritySummary"\s*:/)
+assert.match(prompts.cloze, /do not emit a separate `similaritySummary`/)
 assert.match(prompts.cloze, /Embedding vector itself is generated and versioned by\s+the indexer/)
 assert.match(prompts.grammarFill, /restore the shortest useful skeleton around the gap/)
 assert.match(prompts.grammarFill, /`fullTranslationZh`/)
@@ -278,7 +279,13 @@ for (const [index, content] of messages.entries()) {
   const headingCount = content.match(/^# Teaching Analysis Style — V1$/gm)?.length || 0
   assert.equal(headingCount, 1, `runtime prompt ${index + 1} must load the shared doctrine exactly once`)
   assert.match(content, /先讲人话，再给名字/)
+  assert.match(content, /`teachingNote` 和写作 `highlightExpressions` 已退役，不生成、不要求补齐/)
 }
+
+for (const name of ['sevenChoices', 'cloze', 'grammarFill']) {
+  assert.doesNotMatch(prompts[name], /teachingNote/, `${name} must not request the retired field`)
+}
+assert.doesNotMatch(doctrine, /只选 2—3 个/)
 
 assert.equal(benchmark.version, 'teaching-analysis-benchmark-v1')
 assert.equal(benchmark.cases.length, 25)

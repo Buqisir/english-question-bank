@@ -31,6 +31,12 @@ import type {
   PaperSurfaceData,
   PassageStructure,
 } from './paperIntelligenceTypes.ts'
+import {
+  buildObjectiveTeachingView,
+  projectObjectiveTeachingSource,
+  type ObjectiveTeachingGroup,
+  type ObjectiveTeachingView,
+} from './objectiveTeachingContentAdapter.ts'
 
 // ─── Contract types (mirrors cloze-analysis-v1.contract.md) ──────────────────
 
@@ -70,10 +76,9 @@ export type ClozeBlankAnalysis = {
   correctFit: ClozeCorrectFit
   distractorGlosses: ClozeDistractorGloss[]
   evidence: ClozeEvidenceItem[]
-  teachingNote: string
 }
 
-export type ClozeGroupAnalysis = {
+export type ClozeGroupAnalysis = ObjectiveTeachingGroup & {
   overview: string
   affectiveArc: string
 }
@@ -113,7 +118,6 @@ export type ClozeBlankAnalysisView = {
   correctFit: ClozeCorrectFit
   distractorGlosses: ClozeDistractorGloss[]
   evidenceRows: ClozeEvidenceRowView[]
-  teachingNote: string
   /** Option text keyed by label, for option-side <mark> rendering. */
   optionTextByLabel: Record<string, string>
 }
@@ -121,6 +125,7 @@ export type ClozeBlankAnalysisView = {
 export type ClozeGroupView = {
   overview: string
   affectiveArc: string
+  teachingContent: ObjectiveTeachingView | null
 }
 
 export type ClozeAnalysisSurfaceModel = {
@@ -211,14 +216,32 @@ export function buildClozeAnalysisSurfaceModel(input: {
   const analysisByQuestionId = buildAnalysisViews(asset, analysis, questionIds)
 
   const groupAnalysis = analysis.groups[groupId] ?? null
+  const teachingSource = projectObjectiveTeachingSource(
+    groupAnalysis,
+    group.passage?.paragraphs ?? [],
+    canonicalSurface.surfaceData.textMap,
+  )
   const groupView: ClozeGroupView | null = groupAnalysis
-    ? { overview: groupAnalysis.overview, affectiveArc: groupAnalysis.affectiveArc }
+    ? {
+        overview: groupAnalysis.overview,
+        affectiveArc: groupAnalysis.affectiveArc,
+        teachingContent: buildObjectiveTeachingView(groupAnalysis, Object.fromEntries(
+          questionIds.map((questionId) => [
+            questionId,
+            String(asset.content.questions[questionId]?.questionNo ?? ''),
+          ]),
+        )),
+      }
     : null
 
   return {
     report: canonicalSurface.report,
     passageStructures: canonicalSurface.passageStructures,
-    surfaceData: { ...canonicalSurface.surfaceData, evidence },
+    surfaceData: {
+      ...canonicalSurface.surfaceData,
+      evidence: [...evidence, ...teachingSource.evidence],
+      annotations: teachingSource.annotations,
+    },
     analysisByQuestionId,
     groupView,
     defaultQuestionId: canonicalSurface.defaultQuestionId,
@@ -401,7 +424,6 @@ function buildAnalysisViews(
       correctFit: blankAnalysis.correctFit,
       distractorGlosses: blankAnalysis.distractorGlosses,
       evidenceRows,
-      teachingNote: blankAnalysis.teachingNote,
       optionTextByLabel,
     }
   }

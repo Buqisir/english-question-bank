@@ -31,7 +31,11 @@ import {
   isLiveConfirmedDocxPairAdmission,
 } from './docxPairCanonicalRequest.mjs'
 import {
+  admitLiveConfirmedNck1AnalyzedPackageImport,
   admitLiveConfirmedNck1MaterializationImport,
+  isNck1AnalyzedPackageCanonicalImportRequest,
+  isLiveExternalListeningReviewAdmission,
+  isLiveConfirmedNck1AnalyzedPackageAdmission,
   isLiveConfirmedNck1MaterializationAdmission,
   isNck1MaterializationCanonicalImportRequest,
 } from './nck1MaterializationCanonicalRequest.mjs'
@@ -55,6 +59,7 @@ const publicationFileName =
   `canonical-paper-publication-v${canonicalAuthorityRef.manifestVersion}.json`
 const publicationFileNames = [
   publicationFileName,
+  'canonical-paper-publication-v55.json',
   'canonical-paper-publication-v54.json',
   'canonical-paper-publication-v52.json',
   'canonical-paper-publication-v51.json',
@@ -408,7 +413,7 @@ function validatePublicationLineage({ sourceCapture, plan, groups, normalization
 }
 
 function capturedListeningAudio(sourceCapture, groups, closure) {
-  if (!['51', '52', '54'].includes(closure.authorityRef.manifestVersion)) return null
+  if (!['51', '52', '54', '55'].includes(closure.authorityRef.manifestVersion)) return null
   const active = groups.some((group) => group.contractRef.familyContractId === 'listening')
   const documents = sourceCapture.documents.filter((document) => document.inputKey === 'listening_audio_descriptor')
   if (!active && documents.length === 0) return null
@@ -434,6 +439,8 @@ export function sealCanonicalPublication({
   trustedDocxConfirmationProof = null,
   docxPairConfirmationProof = null,
   nck1MaterializationConfirmationProof = null,
+  nck1AnalyzedPackageConfirmationProof = null,
+  externalListeningReviewProof = null,
 }) {
   if (compilation?.disposition !== 'ready') throw publicationError('CANONICAL_PUBLICATION_BLOCKED', 'Only a complete ready compilation may be published')
   if (!(sourceAsset instanceof Uint8Array) || !Number.isInteger(sourceAssetVersion) || sourceAssetVersion < 1) throw publicationError('CANONICAL_PUBLICATION_INPUT_INVALID', 'Publication needs immutable source asset bytes and a positive version')
@@ -463,12 +470,32 @@ export function sealCanonicalPublication({
       compilation,
       sourceAsset,
     })
+    && !isLiveConfirmedNck1AnalyzedPackageAdmission({
+      proof: nck1AnalyzedPackageConfirmationProof,
+      compilation,
+      sourceAsset,
+    })
   ) throw publicationError('CANONICAL_PUBLICATION_AUTHORITY_RETIRED', 'Only the current canonical authority or one exact live Teacher-Confirmed import chain may create a new publication')
   const artifactPaths = artifactPathsFor(closure.authorityRef)
   assertPaperId(canonicalPaper?.paperPlan?.paperId)
   validateSourceCaptureIntegrity(sourceCapture)
   const sourceEvidence = sourceEvidenceDescriptors(sourceCapture)
   const listeningAudio = capturedListeningAudio(sourceCapture, canonicalPaper.questionGroups, closure)
+  if (
+    listeningAudio
+    && closure.authorityRef.manifestVersion === '55'
+    && !isLiveExternalListeningReviewAdmission({
+      proof: externalListeningReviewProof,
+      nck1AnalyzedPackageConfirmationProof,
+      compilation,
+      listeningAudioBytes,
+    })
+  ) {
+    throw publicationError(
+      'ANALYZED_PACKAGE_LISTENING_OWNER_REVIEW_REQUIRED',
+      'External Listening publication requires exact live proof from the server-validated Owner playback review',
+    )
+  }
   if (listeningAudio) assertPlaybackBytes(listeningAudio, listeningAudioBytes)
   else if (listeningAudioBytes) throw publicationError('LISTENING_AUDIO_UNBOUND', 'Audio requires active Listening')
   const sourceAssetDigest = sha256(sourceAsset)
@@ -1133,6 +1160,7 @@ export function admitCanonicalPaperImport({
   sourceAsset,
   listeningAudioBytes = null,
   registeredConfirmation,
+  externalListeningReviewProof = null,
 }) {
   let compilation
   let effectiveSourceAsset = sourceAsset
@@ -1140,6 +1168,7 @@ export function admitCanonicalPaperImport({
   let trustedDocxConfirmationProof = null
   let docxPairConfirmationProof = null
   let nck1MaterializationConfirmationProof = null
+  let nck1AnalyzedPackageConfirmationProof = null
   try {
     if (registeredConfirmation !== undefined) {
       if (request !== undefined || sourceAsset !== undefined) {
@@ -1154,6 +1183,11 @@ export function admitCanonicalPaperImport({
       compilation = registered.compilation
       effectiveSourceAsset = registered.sourceAsset
       registeredConfirmationProof = registered.proof
+    } else if (isNck1AnalyzedPackageCanonicalImportRequest(request)) {
+      const admitted = admitLiveConfirmedNck1AnalyzedPackageImport(request)
+      compilation = admitted.compilation
+      effectiveSourceAsset = admitted.sourceAsset
+      nck1AnalyzedPackageConfirmationProof = admitted.proof
     } else if (isNck1MaterializationCanonicalImportRequest(request)) {
       const admitted = admitLiveConfirmedNck1MaterializationImport(request)
       compilation = admitted.compilation
@@ -1221,6 +1255,8 @@ export function admitCanonicalPaperImport({
       trustedDocxConfirmationProof,
       docxPairConfirmationProof,
       nck1MaterializationConfirmationProof,
+      nck1AnalyzedPackageConfirmationProof,
+      externalListeningReviewProof,
     })
     const ref = {
       paperId: sealed.manifest.paperId,
@@ -1565,7 +1601,7 @@ function canonicalSelections(validated, contract, sourceAsset) {
         )
         || (
           familyContractId === 'seven-choices'
-          && ['47', '48', '49', '50', '51', '52', '54'].includes(validated.plan.authorityRef.manifestVersion)
+          && ['47', '48', '49', '50', '51', '52', '54', '55'].includes(validated.plan.authorityRef.manifestVersion)
         )
         || (
           familyContractId === 'cloze'
@@ -1577,7 +1613,7 @@ function canonicalSelections(validated, contract, sourceAsset) {
         )
         || (
           familyContractId === 'continuation-writing'
-          && ['49', '50', '51', '52', '54'].includes(validated.plan.authorityRef.manifestVersion)
+          && ['49', '50', '51', '52', '54', '55'].includes(validated.plan.authorityRef.manifestVersion)
         )
         ? {
             projectedOccurrenceDigests: projectedOccurrences.map(

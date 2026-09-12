@@ -1,14 +1,16 @@
 import type { ReactNode } from 'react'
 import type {
   ContinuationAnalysisV1,
-  ContinuationCohesionItem,
+  ContinuationDevelopmentPlan,
   ContinuationConstraint,
   ContinuationEvidenceRef,
   ContinuationGroundedStatement,
-  ContinuationParagraphBlueprintItem,
   ContinuationParagraphContract,
+  ContinuationStoryUnderstanding,
+  ContinuationContract,
 } from '../../domain/continuationAnalysis.ts'
-import type { ContinuationWritingAnalysisV1 } from '../../domain/paperAsset.ts'
+import type { ContinuationWritingAnalysis } from '../../domain/paperAsset.ts'
+import { projectContinuationAnalysisDisplay } from '../../../../shared/writing/continuationAnalysis.mjs'
 
 const EVIDENCE_SOURCE_LABEL: Record<ContinuationEvidenceRef['source'], string> = {
   instruction: '题干',
@@ -21,14 +23,6 @@ const CONFIDENCE_LABEL: Record<ContinuationAnalysisV1['storyUnderstanding']['mea
   explicit: '原文已说明',
   stronglyInferred: '强推断',
   open: '开放',
-}
-
-const COHESION_LABEL: Record<ContinuationCohesionItem['relation'], string> = {
-  sequence: '顺序',
-  cause: '因果',
-  contrast: '对照',
-  reference: '指代',
-  echo: '回扣',
 }
 
 function EvidenceList({ evidence }: { evidence: ContinuationEvidenceRef[] }): ReactNode {
@@ -125,25 +119,48 @@ function ParagraphContractCard({
   )
 }
 
-function ParagraphBlueprintCard({
-  paragraph,
-}: {
-  paragraph: ContinuationParagraphBlueprintItem
-}): ReactNode {
+function DevelopmentParagraphCard({ paragraph }: { paragraph: any }): ReactNode {
   return (
     <div className="continuation-analysis-subcard">
-      <h6>第{paragraph.paragraphIndex}段蓝图</h6>
+      <h6>第{paragraph.paragraphIndex}段</h6>
       <dl>
-        <Field label="叙事功能"><p>{paragraph.narrativeFunction}</p></Field>
-        <Field label="事件推进"><StringList items={paragraph.eventMoves} /></Field>
-        <Field label="人物行动与反应">
-          <StringList items={paragraph.characterActionsAndReactions} />
+        <Field label={paragraph.paragraphPurpose !== undefined ? '段落作用' : '起因'}>
+          <p>{paragraph.paragraphPurpose ?? paragraph.cause}</p>
         </Field>
-        <Field label="回用证据">
-          <EvidenceList evidence={paragraph.evidenceToReuse} />
+        <Field label="行动"><p>{paragraph.action}</p></Field>
+        <Field label="结果"><p>{paragraph.result}</p></Field>
+        <Field label="原文依据"><EvidenceList evidence={paragraph.sourceEvidence} /></Field>
+        {paragraph.cluePayoffs?.length > 0 && (
+          <Field label="线索回收">
+            <ul className="continuation-analysis-stack">
+              {paragraph.cluePayoffs.map((item: any, index: number) => (
+                <li key={index}><EvidenceList evidence={[item.clue]} /><p>{item.payoff}</p></li>
+              ))}
+            </ul>
+          </Field>
+        )}
+        {paragraph.emotionChanges?.length > 0 && (
+          <Field label="情绪变化">
+            <ul className="continuation-analysis-stack">
+              {paragraph.emotionChanges.map((item: any, index: number) => (
+                <li key={index}>{item.trigger}：{item.from} → {item.to}；{item.visibleAction}</li>
+              ))}
+            </ul>
+          </Field>
+        )}
+        {paragraph.relationshipChanges?.length > 0 && (
+          <Field label="关系变化">
+            <ul className="continuation-analysis-stack">
+              {paragraph.relationshipChanges.map((item: any, index: number) => (
+                <li key={index}>{item.participants.join(' · ')}：{item.from} → {item.to}；{item.cause}</li>
+              ))}
+            </ul>
+          </Field>
+        )}
+        {paragraph.languageReminder && <Field label="本段语言提醒"><p>{paragraph.languageReminder}</p></Field>}
+        <Field label={paragraph.paragraphIndex === 1 ? '衔接下一段' : '结尾落点'}>
+          <p>{paragraph.bridge ?? paragraph.ending}</p>
         </Field>
-        <Field label="状态变化"><p>{paragraph.stateChange}</p></Field>
-        <Field label="衔接到下一段"><p>{paragraph.bridgeToNext}</p></Field>
       </dl>
     </div>
   )
@@ -152,14 +169,37 @@ function ParagraphBlueprintCard({
 export function ContinuationAnalysisPanel({
   analysis,
 }: {
-  analysis: ContinuationWritingAnalysisV1
+  analysis: ContinuationWritingAnalysis
 }): ReactNode {
-  const { continuationAnalysis, modelAnswer, officialModelAnswer } = analysis
-  const story = continuationAnalysis.storyUnderstanding
-  const contract = continuationAnalysis.continuationContract
-  const development = continuationAnalysis.narrativeDevelopment
-  const language = continuationAnalysis.languageAlignment
-  const blueprint = continuationAnalysis.paragraphBlueprint
+  const { modelAnswer, officialModelAnswer } = analysis
+  const display = 'continuationAnalysis' in analysis
+    ? projectContinuationAnalysisDisplay(analysis.continuationAnalysis)
+    : null
+  if (!display) {
+    return (
+      <div className="retained-writing-card continuation-analysis-card">
+        <section className="retained-writing-card-section" data-continuation-section="modelAnswer">
+          <h5>完整范文</h5>
+          {officialModelAnswer && <h6 className="continuation-analysis-role">官方参考范文</h6>}
+          {officialModelAnswer && (
+            <div className="continuation-analysis-model-answer">
+              {officialModelAnswer.split('\n').filter(Boolean).map((line, index) => <p key={index}>{line}</p>)}
+            </div>
+          )}
+          <h6 className="continuation-analysis-role">生成参考范文</h6>
+          <div className="continuation-analysis-model-answer">
+            {modelAnswer.split('\n').filter(Boolean).map((line, index) => <p key={index}>{line}</p>)}
+          </div>
+        </section>
+      </div>
+    )
+  }
+  const story = display.storyUnderstanding as ContinuationStoryUnderstanding
+  const contract = display.continuationContract as ContinuationContract
+  const development = display.developmentPlan as ContinuationDevelopmentPlan
+  const legacy = display.legacyDetails
+  const alternatives = development.alternatives ?? []
+  const qualityRisks = development.qualityRisks ?? []
 
   return (
     <div className="retained-writing-card continuation-analysis-card">
@@ -280,179 +320,69 @@ export function ContinuationAnalysisPanel({
         </dl>
       </section>
 
-      <section className="retained-writing-card-section" data-continuation-section="narrativeDevelopment">
-        <h5>情节推进</h5>
-        <p className="continuation-analysis-lead">人物动机与因果关系应怎样推动故事</p>
+      <section className="retained-writing-card-section" data-continuation-section="developmentPlan">
+        <h5>两段发展方案</h5>
+        <p className="continuation-analysis-lead">一条有依据的路线，按因果、行动和结果分配到两段</p>
         <dl>
-          <Field label="核心张力"><Grounded {...development.coreTension} /></Field>
-          <Field label="驱动动机">
-            <ul className="continuation-analysis-stack">
-              {development.drivingMotivations.map((item, index) => (
-                <li key={index}><Grounded {...item} /></li>
-              ))}
-            </ul>
-          </Field>
-          <Field label="必要转折">
-            <ul className="continuation-analysis-stack">
-              {development.requiredTurningPoints.map((item, index) => (
-                <li key={index}><Grounded {...item} /></li>
-              ))}
-            </ul>
-          </Field>
-          <Field label="事件链">
-            <ul className="continuation-analysis-stack">
-              {development.eventChain.map((item, index) => (
-                <li key={index} className="continuation-analysis-subcard">
-                  <dl>
-                    <Field label="原因"><p>{item.cause}</p></Field>
-                    <Field label="事件"><p>{item.event}</p></Field>
-                    <Field label="即时结果"><p>{item.immediateEffect}</p></Field>
-                  </dl>
-                  <EvidenceList evidence={item.evidence} />
-                </li>
-              ))}
-            </ul>
-          </Field>
-          <Field label="情绪逻辑">
-            <ul className="continuation-analysis-stack">
-              {development.emotionLogic.map((item, index) => (
-                <li key={index} className="continuation-analysis-subcard">
-                  <dl>
-                    <Field label="触发"><p>{item.trigger}</p></Field>
-                    <Field label="内在反应"><p>{item.internalResponse}</p></Field>
-                    <Field label="可见行动"><p>{item.visibleAction}</p></Field>
-                  </dl>
-                </li>
-              ))}
-            </ul>
-          </Field>
-          {development.relationshipMovement.length > 0 && (
-            <Field label="关系变化">
-              <ul className="continuation-analysis-stack">
-                {development.relationshipMovement.map((item, index) => (
-                  <li key={index}>
-                    <p className="continuation-analysis-pair">
-                      {item.participants[0]} · {item.participants[1]}
-                    </p>
-                    <p>{item.from} → {item.to}</p>
-                    <p>{item.cause}</p>
-                  </li>
-                ))}
-              </ul>
-            </Field>
-          )}
-          {development.interactionMoves.length > 0 && (
-            <Field label="人物交际">
-              <ul className="continuation-analysis-stack">
-                {development.interactionMoves.map((item, index) => (
-                  <li key={index} className="continuation-analysis-subcard">
-                  <p className="continuation-analysis-pair">
-                    {item.speaker} → {item.listener}
-                  </p>
-                  <dl>
-                    <Field label="目的"><p>{item.purpose}</p></Field>
-                    <Field label="关系需要"><p>{item.relationshipNeed}</p></Field>
-                    <Field label="预期效果"><p>{item.expectedEffect}</p></Field>
-                  </dl>
-                  <EvidenceList evidence={item.evidence} />
-                </li>
-                ))}
-              </ul>
-            </Field>
-          )}
-          {development.cluePayoffs.length > 0 && (
-            <Field label="线索回收">
-              <ul className="continuation-analysis-stack">
-                {development.cluePayoffs.map((item, index) => (
-                  <li key={index}>
-                    <EvidenceList evidence={[item.clue]} />
-                    <p>{item.payoff}</p>
-                  </li>
-                ))}
-              </ul>
-            </Field>
-          )}
-          <Field label="结尾状态"><p>{development.endingState}</p></Field>
-        </dl>
-      </section>
-
-      <section className="retained-writing-card-section" data-continuation-section="languageAlignment">
-        <h5>语言对齐</h5>
-        <p className="continuation-analysis-lead">续写语言怎样与原文和叙事功能保持一致</p>
-        <dl>
-          <Field label="人称与视角"><p>{language.personAndPerspective}</p></Field>
-          <Field label="主体时态"><p>{language.baseTense}</p></Field>
-          {language.licensedTenseShifts.length > 0 && (
-            <Field label="允许的时态切换"><StringList items={language.licensedTenseShifts} /></Field>
-          )}
-          <Field label="叙述距离与语域"><p>{language.narrativeDistanceAndRegister}</p></Field>
-          <Field label="原文风格延续"><p>{language.sourceStyleContinuity}</p></Field>
-          <Field label="衔接计划">
-            <ul className="continuation-analysis-stack">
-              {language.cohesionPlan.map((item, index) => (
-                <li key={index}>
-                  <span className="continuation-analysis-evidence-source">
-                    {COHESION_LABEL[item.relation]}
-                  </span>
-                  {item.use}
-                </li>
-              ))}
-            </ul>
-          </Field>
-          <Field label="对话策略"><p>{language.dialoguePolicy}</p></Field>
-          <Field label="描写优先"><StringList items={language.descriptionPriorities} /></Field>
-          <Field label="功能带动的语言"><StringList items={language.functionLedLanguage} /></Field>
-          <Field label="语言风险"><StringList items={language.languageRisks} /></Field>
-        </dl>
-      </section>
-
-      <section className="retained-writing-card-section" data-continuation-section="paragraphBlueprint">
-        <h5>两段蓝图</h5>
-        <p className="continuation-analysis-lead">选定的一条有效路线怎样分配到两个段落</p>
-        <dl>
-          <Field label="选定路线"><p>{blueprint.selectedRoute}</p></Field>
+          <Field label="选定路线"><p>{development.selectedRoute}</p></Field>
           <Field label="路线依据">
             <ul className="continuation-analysis-stack">
-              {blueprint.routeRationale.map((item, index) => (
+              {development.routeRationale.map((item: ContinuationGroundedStatement, index: number) => (
                 <li key={index}><Grounded {...item} /></li>
               ))}
             </ul>
           </Field>
           <Field label="两段分配">
             <div className="continuation-analysis-stack">
-              {blueprint.paragraphs.map((paragraph) => (
-                <ParagraphBlueprintCard key={paragraph.paragraphIndex} paragraph={paragraph} />
+              {development.paragraphs.map((paragraph: any) => (
+                <DevelopmentParagraphCard key={paragraph.paragraphIndex} paragraph={paragraph} />
               ))}
             </div>
           </Field>
-          <Field label="最终效果"><p>{blueprint.finalEffect}</p></Field>
-          {blueprint.validAlternativeRoutes.length > 0 && (
-            <Field label="其他有效路线">
-              <StringList items={blueprint.validAlternativeRoutes} />
+          {alternatives.length > 0 && <Field label="其他可行路线"><StringList items={alternatives} /></Field>}
+          {qualityRisks.length > 0 && <Field label="质量风险"><StringList items={qualityRisks} /></Field>}
+          {legacy && (
+            <Field label="历史分析保留">
+              <div className="continuation-analysis-stack">
+                <Grounded {...legacy.coreTension} />
+                {legacy.drivingMotivations.map((item: ContinuationGroundedStatement, index: number) => <Grounded key={`m-${index}`} {...item} />)}
+                {legacy.requiredTurningPoints.map((item: ContinuationGroundedStatement, index: number) => <Grounded key={`t-${index}`} {...item} />)}
+                {legacy.eventChain.map((item: any, index: number) => <div key={`e-${index}`}><p>{item.cause} → {item.event} → {item.immediateEffect}</p><EvidenceList evidence={item.evidence} /></div>)}
+                {legacy.emotionLogic.map((item: any, index: number) => <p key={`em-${index}`}>{item.trigger}：{item.internalResponse}；{item.visibleAction}</p>)}
+                {legacy.relationshipMovement.map((item: any, index: number) => <p key={`r-${index}`}>{item.participants.join(' · ')}：{item.from} → {item.to}；{item.cause}</p>)}
+                {legacy.interactionMoves.map((item: any, index: number) => <div key={`i-${index}`}><p>{item.speaker} → {item.listener}：{item.purpose}；{item.relationshipNeed}；{item.expectedEffect}</p><EvidenceList evidence={item.evidence} /></div>)}
+                {legacy.cluePayoffs.map((item: any, index: number) => <div key={`clue-${index}`}><EvidenceList evidence={[item.clue]} /><p>{item.payoff}</p></div>)}
+                {legacy.characterActionsByParagraph.map((item: any) => <div key={item.paragraphIndex}><p>第{item.paragraphIndex}段人物行动</p><StringList items={item.items} /></div>)}
+                <p>{legacy.endingState}</p><p>{legacy.finalEffect}</p>
+                <p>{legacy.languageAlignment.personAndPerspective}；{legacy.languageAlignment.baseTense}；{legacy.languageAlignment.narrativeDistanceAndRegister}；{legacy.languageAlignment.sourceStyleContinuity}；{legacy.languageAlignment.dialoguePolicy}</p>
+                <StringList items={[
+                  ...legacy.languageAlignment.licensedTenseShifts,
+                  ...legacy.languageAlignment.cohesionPlan.map((item: any) => `${item.relation}：${item.use}`),
+                  ...legacy.languageAlignment.descriptionPriorities,
+                  ...legacy.languageAlignment.functionLedLanguage,
+                  ...legacy.languageAlignment.languageRisks,
+                ]} />
+              </div>
             </Field>
           )}
-          <Field label="质量风险"><StringList items={blueprint.qualityRisks} /></Field>
         </dl>
       </section>
 
       <section className="retained-writing-card-section" data-continuation-section="modelAnswer">
-        <h5>AI 参考范文</h5>
+        <h5>完整范文</h5>
+        {officialModelAnswer && <h6 className="continuation-analysis-role">官方参考范文</h6>}
+        {officialModelAnswer && (
+          <div className="continuation-analysis-model-answer">
+            {officialModelAnswer.split('\n').filter(Boolean).map((line, index) => <p key={index}>{line}</p>)}
+          </div>
+        )}
+        <h6 className="continuation-analysis-role">生成参考范文</h6>
         <div className="continuation-analysis-model-answer">
-          {modelAnswer.split('\n').map((line, index) => (
+          {modelAnswer.split('\n').filter(Boolean).map((line, index) => (
             <p key={index}>{line}</p>
           ))}
         </div>
       </section>
-      {officialModelAnswer && (
-        <section className="retained-writing-card-section" data-continuation-section="officialModelAnswer">
-          <h5>官方范文</h5>
-          <div className="continuation-analysis-model-answer">
-            {officialModelAnswer.split('\n').map((line, index) => (
-              <p key={index}>{line}</p>
-            ))}
-          </div>
-        </section>
-      )}
     </div>
   )
 }

@@ -17,6 +17,12 @@ import type {
   PassageStructure,
   QuestionAnalysis,
 } from './paperIntelligenceTypes.ts'
+import {
+  buildObjectiveTeachingView,
+  projectObjectiveTeachingSource,
+  type ObjectiveTeachingGroup,
+  type ObjectiveTeachingView,
+} from './objectiveTeachingContentAdapter.ts'
 
 export type SevenChoicesSignalSide = 'context-before' | 'context-after' | 'option'
 
@@ -54,7 +60,6 @@ export type SevenChoicesQuestionAnalysis = {
     fitSummary: string
     matchedClues: SevenChoicesMatchedClue[]
   }
-  teachingNote: string
 }
 
 export type ReviewedSevenChoicesAnalysisV1 = {
@@ -65,7 +70,7 @@ export type ReviewedSevenChoicesAnalysisV1 = {
   meta?: Record<string, unknown>
   groups: Record<
     string,
-    {
+    ObjectiveTeachingGroup & {
       overview?: string
       discourseStructure?: {
         summary?: string
@@ -114,7 +119,6 @@ export type SevenChoicesChainView = {
   contextSignals: SevenChoicesMechanismSignal[]
   optionSignals: SevenChoicesMechanismSignal[]
   allSignals: SevenChoicesMechanismSignal[]
-  teachingNote: string
   leftHighlights: SevenChoicesHighlightRange[]
   blankRange: SevenChoicesBlankRange | null
   unresolvedClues: string[]
@@ -132,6 +136,8 @@ export type SevenChoicesSurfaceModel = {
   passageStructures: Record<string, PassageStructure>
   surfaceData: PaperSurfaceData
   paperSection: string
+  overview: string
+  teachingContent: ObjectiveTeachingView | null
   options: SevenChoicesOptionView[]
   bankIdentity?: {
     bankId: string
@@ -268,15 +274,31 @@ export function buildSevenChoicesSurfaceModel(
     chain: chainsByOptionLabel[option.label] ?? null,
   }))
 
+  const groupAnalysis = enrichmentAnalysis?.groups?.[groupId]
+  const teachingSource = projectObjectiveTeachingSource(
+    groupAnalysis,
+    group.passage?.paragraphs ?? [],
+    (canonical?.surfaceData ?? { textMap }).textMap,
+  )
+  const baseSurfaceData = canonical?.surfaceData ?? {
+    textMap,
+    questions: [],
+    evidence: [],
+  }
   return {
     report: buildShellReport({ asset, group, groupId, chains }),
     passageStructures: { [SEVEN_CHOICES_SECTION]: passageStructure },
-    surfaceData: canonical?.surfaceData ?? {
-      textMap,
-      questions: [],
-      evidence: [],
+    surfaceData: {
+      ...baseSurfaceData,
+      evidence: [...baseSurfaceData.evidence, ...teachingSource.evidence],
+      annotations: teachingSource.annotations,
     },
     paperSection: SEVEN_CHOICES_SECTION,
+    overview: enrichmentAnalysis?.groups?.[groupId]?.overview?.trim() ?? '',
+    teachingContent: buildObjectiveTeachingView(
+      groupAnalysis,
+      Object.fromEntries(questionOrder.map(({ questionId, questionNo }) => [questionId, questionNo])),
+    ),
     options,
     ...(canonical?.optionBank && canonical.occurrenceSignature
       ? {
@@ -425,7 +447,6 @@ function buildChainViews(input: {
       contextSignals,
       optionSignals,
       allSignals: item.mechanismSignals ?? [],
-      teachingNote: item.teachingNote,
       leftHighlights,
       blankRange: findBlankRange(textMap, questionId, questionNo, item.contextEvidence.paragraphId) ?? findBlankRange(textMap, questionId, questionNo),
       unresolvedClues,
@@ -608,7 +629,7 @@ function buildShellReport(input: {
           answerSentence: '',
           answerEvidence: {
             quote: chain.fitSummary,
-            explanationZh: chain.teachingNote,
+            explanationZh: chain.fitSummary,
           },
           distractorAnalysis: [],
           synonymSummary: '',

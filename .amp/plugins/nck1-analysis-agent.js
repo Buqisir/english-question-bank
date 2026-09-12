@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs'
+
 const MODEL = 'openai/gpt-5.6-sol'
 const REASONING_EFFORT = 'medium'
 const RESULT_SCHEMA_VERSION = 'nck1-analysis-agent-result-v1'
@@ -10,10 +12,22 @@ const WRITING_CONTRACT_MARKERS = Object.freeze({
     '# NCK1 Staged Application Analysis Packaging Contract — V1',
   ]),
   continuation: Object.freeze([
-    '# Narrative Continuation Analysis Prompt — V1',
-    '# NCK1 Staged Narrative Continuation Packaging Contract — V1',
+    '# Narrative Continuation Analysis Prompt — V2',
+    '# NCK1 Staged Narrative Continuation Packaging Contract — V2',
   ]),
 })
+const LISTENING_CONTRACT_MARKER = '"const": "listening-analysis-v1"'
+const OBJECTIVE_GROUPS = new Set([
+  'reading-a', 'reading-b', 'reading-c', 'reading-d', 'seven', 'cloze', 'grammar',
+])
+const OBJECTIVE_TEACHING_CONTENT_SCHEMA = JSON.parse(readFileSync(
+  new URL('../../schemas/paper-import/objective-teaching-content-v1.schema.json', import.meta.url),
+  'utf8',
+))
+const OBJECTIVE_TEACHING_CONTENT_ANNEX = [
+  'Exact required groups[groupId].teachingContent JSON Schema annex:',
+  JSON.stringify(OBJECTIVE_TEACHING_CONTENT_SCHEMA, null, 2),
+].join('\n')
 
 export const NCK1_ANALYSIS_AGENT_MODEL = MODEL
 export const NCK1_ANALYSIS_AGENT_REASONING_EFFORT = REASONING_EFFORT
@@ -27,6 +41,7 @@ export const NCK1_ANALYSIS_GROUPS = Object.freeze([
   'grammar',
   'application',
   'continuation',
+  'listening-unit',
 ])
 
 const GROUP_SET = new Set(NCK1_ANALYSIS_GROUPS)
@@ -69,6 +84,7 @@ function groupKeyFromIdentity(value) {
   if (/grammar[-_.:]?fill|grammar_fill|grammar-fill/u.test(normalized)) return 'grammar'
   if (/writing[-_.:]?application|application[-_.:]?writing/u.test(normalized)) return 'application'
   if (/writing[-_.:]?continuation|continuation[-_.:]?writing/u.test(normalized)) return 'continuation'
+  if (/listening[-_.:]?(?:unit|analysis)|(?:^|[-_.:])listening(?:\b|$)/u.test(normalized)) return 'listening-unit'
   if (/(?:^|[-_.:])cloze(?:\b|$)/u.test(normalized)) return 'cloze'
   return null
 }
@@ -115,9 +131,13 @@ function assertSingleGroupMaterial(value, expectedGroup) {
 
 function questionIdsIn(value) {
   const ids = new Set()
+  const isQuestionId = (candidate) => (
+    /^q-[a-z0-9-]+$/iu.test(candidate)
+    || /^question:listening:[1-9]\d*$/u.test(candidate)
+  )
   function visit(node) {
     if (typeof node === 'string') {
-      if (/^q-[a-z0-9-]+$/iu.test(node)) ids.add(node)
+      if (isQuestionId(node)) ids.add(node)
       return
     }
     if (!node || typeof node !== 'object') return
@@ -126,7 +146,7 @@ function questionIdsIn(value) {
       return
     }
     for (const [key, child] of Object.entries(node)) {
-      if (/^q-[a-z0-9-]+$/iu.test(key)) ids.add(key)
+      if (isQuestionId(key)) ids.add(key)
       visit(child)
     }
   }
@@ -167,7 +187,7 @@ export function validateNck1AnalysisGroupInput(input) {
 
   assertSingleGroupMaterial(input.sourceGroup.material, group)
   assertAnswerScope(input.sourceGroup.material, input.authoritativeAnswers, group)
-  const outputContract = requiredText(
+  let outputContract = requiredText(
     input.outputContract,
     'outputContract',
     MAX_CONTRACT_CHARS,
@@ -180,6 +200,12 @@ export function validateNck1AnalysisGroupInput(input) {
     throw new Error(
       `${group} outputContract must include its tracked base and staged packaging contracts.`,
     )
+  }
+  if (group === 'listening-unit' && !outputContract.includes(LISTENING_CONTRACT_MARKER)) {
+    throw new Error('listening-unit outputContract must include the exact listening-analysis-v1 schema.')
+  }
+  if (OBJECTIVE_GROUPS.has(group)) {
+    outputContract = `${outputContract}\n\n${OBJECTIVE_TEACHING_CONTENT_ANNEX}`
   }
   const normalized = {
     group,

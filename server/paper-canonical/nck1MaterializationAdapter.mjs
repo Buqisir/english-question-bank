@@ -1036,17 +1036,34 @@ function groupVariant(group, answersByQuestionId, content, issues, source, docum
 
 function observationForLocator(observationId, kind, locator, value, documentsById) {
   const document = documentsById.get(locator.documentId)
+  const packageEvidence = locator.kind === 'package_json_pointer'
+    ? {
+        schemaVersion: 'package-json-pointer-evidence-v1',
+        memberId: locator.documentId,
+        pointer: locator.pointer,
+        memberSha256: sha256(document.bytes),
+        memberByteLength: document.bytes.byteLength,
+        memberRole: document.role,
+      }
+    : null
   return {
     observationId,
     kind,
     documentInputKey: inputKeyForDocument(locator.documentId),
-    value,
+    value: packageEvidence
+      && kind === 'profile_instruction_correction'
+      && value
+      && typeof value === 'object'
+      ? { ...structuredClone(value), packageEvidence }
+      : value,
     span: { start: 0, end: document.bytes.byteLength },
-    extraction: {
-      adapterId: 'nck1-source-materialization',
-      version: '2',
-      locator,
-    },
+    extraction: packageEvidence
+      ? { adapterId: 'nck1-analyzed-package', version: '1' }
+      : {
+          adapterId: 'nck1-source-materialization',
+          version: '2',
+          locator,
+        },
   }
 }
 
@@ -1236,7 +1253,14 @@ function appendListeningGroups(source, materialization, documentsById) {
   }
 }
 
-function deriveSource(materialization, documentsById, mediaById, instructionDocument, issues) {
+export function deriveNck1SemanticSource(
+  materialization,
+  documentsById,
+  mediaById,
+  instructionDocument,
+  issues,
+  { analyzedPackage = false, authorityRef = nck1MaterializationCandidateAuthorityRef } = {},
+) {
   const answersByQuestionId = new Map(materialization.answers.map((answer) => [
     answer.questionId,
     answer.value,
@@ -1256,6 +1280,34 @@ function deriveSource(materialization, documentsById, mediaById, instructionDocu
     transformations: [],
     inactiveSlots: {},
     inactiveSourceClosures: [],
+  }
+  if (analyzedPackage) {
+    const continuation = materialization.groups.find((group) =>
+      group.slotId === 'writing.continuation')
+    const instruction = resolveCanonicalAuthority(
+      authorityRef,
+    ).closure.profiles.get('nck1').instructions['writing.continuation.prompt']
+    if (continuation?.writingTask?.prompt !== instruction.text) {
+      issues.push(adapterIssue(
+        'ANALYZED_PACKAGE_CONTINUATION_INSTRUCTION_UNSUPPORTED',
+        'Analyzed packages may directly attest the registered continuation instruction; differing source wording needs a separately registered transformation',
+        '$.groups',
+      ))
+    } else {
+      const locator = continuation.writingTask.source
+      source.observations.push(observationForLocator(
+        `observation:profile-instruction:${source.paperId}:writing.continuation.prompt`,
+        'profile_instruction_correction',
+        locator,
+        {
+          paperId: source.paperId,
+          instructionId: instruction.instructionId,
+          text: instruction.text,
+          agreement: 'exact_package_member_value',
+        },
+        documentsById,
+      ))
+    }
   }
   for (const group of materialization.groups) {
     const sourceLocator = group.blocks[0].source
@@ -1330,13 +1382,26 @@ function deriveSource(materialization, documentsById, mediaById, instructionDocu
       source.observations.push({
         observationId: mediaObservationId,
         kind: 'source_media',
-        documentInputKey: inputKeyForMedia(media.mediaId),
+        documentInputKey: inventory.extraction?.kind === 'package_member'
+          ? inputKeyForDocument(inventory.extraction.memberId)
+          : inputKeyForMedia(media.mediaId),
         value: {
           mediaId: media.mediaId,
           sha256: inventory.sha256,
           pixelWidth: inventory.pixelWidth,
           pixelHeight: inventory.pixelHeight,
-          ...(['nck1-source-materialization-v2', 'nck1-source-materialization-v3'].includes(materialization.schemaVersion)
+          ...(inventory.extraction?.kind === 'package_member'
+            ? {
+                packageMemberEvidence: {
+                  schemaVersion: 'package-member-evidence-v1',
+                  memberId: inventory.extraction.memberId,
+                  memberSha256: sha256(mediaBytes),
+                  memberByteLength: mediaBytes.byteLength,
+                  memberRole: 'media',
+                },
+              }
+            : {}),
+          ...(['nck1-source-materialization-v2', 'nck1-source-materialization-v3', 'nck1-analyzed-package-content-v1'].includes(materialization.schemaVersion)
             ? {
                 presentation: structuredClone(inventory.presentation),
                 publication: structuredClone(inventory.publication),
@@ -1344,11 +1409,13 @@ function deriveSource(materialization, documentsById, mediaById, instructionDocu
             : {}),
         },
         span: { start: 0, end: mediaBytes.byteLength },
-        extraction: {
-          adapterId: 'nck1-source-materialization',
-          version: '2',
-          recipe: inventory.extraction,
-        },
+        extraction: inventory.extraction?.kind === 'package_member'
+          ? { adapterId: 'nck1-analyzed-package', version: '1' }
+          : {
+              adapterId: 'nck1-source-materialization',
+              version: '2',
+              recipe: inventory.extraction,
+            },
       })
       if (inventory.publication?.candidate) {
         const renditionBytes = mediaById.get(media.mediaId).renditionBytes
@@ -1540,7 +1607,7 @@ export function deriveNck1MaterializationBundle(rawInput) {
     }
   }
   const derivationIssues = []
-  const source = deriveSource(
+  const source = deriveNck1SemanticSource(
     materialization,
     validation.documentsById,
     validation.mediaById,
