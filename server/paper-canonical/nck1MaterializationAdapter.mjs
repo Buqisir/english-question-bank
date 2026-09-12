@@ -1187,8 +1187,9 @@ function appendListeningGroups(source, materialization, documentsById) {
       media: [],
       variant: {
         family: 'listening',
-        ...(materialization.listening.timing.some((entry) =>
-          entry?.kind === 'section1_playback' && entry.passes === 1)
+        ...(spec.slotId === 'listening.short-dialogue'
+          && materialization.listening.timing.some((entry) =>
+            entry?.kind === 'section1_playback' && entry.passes === 1)
           ? { firstSectionPlayback: 'once_explicit' }
           : {}),
         questions: relevantQuestions.map((question) => {
