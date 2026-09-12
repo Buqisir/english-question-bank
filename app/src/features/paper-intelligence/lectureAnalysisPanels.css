@@ -584,15 +584,19 @@ button.pi-ps-analysis-distractor--selected {
   --seven-mark-signal: rgba(225, 111, 86, 0.34);
   --seven-mark-context: rgba(225, 111, 86, 0.11);
 }
-/* ─── Cloze / GrammarFill group intro (collapsible) ───
+/* ─── Seven choices / Cloze / GrammarFill group intro (collapsible) ───
    The passage-level intro (overview + affective arc) renders as a native
    <details>: open in the empty state, collapsed to this one summary line
    once a blank is focused. */
 .pi-cloze-group-overview,
+.pi-reading-group-overview,
+.pi-seven-group-overview,
 .pi-gf-group-overview {
   margin-bottom: 12px;
 }
 .pi-cloze-group-overview-summary,
+.pi-reading-group-overview-summary,
+.pi-seven-group-overview-summary,
 .pi-gf-group-overview-summary {
   cursor: pointer;
   font-size: 0.8125rem;
@@ -601,10 +605,71 @@ button.pi-ps-analysis-distractor--selected {
 }
 .pi-cloze-group-overview-text,
 .pi-cloze-group-arc,
+.pi-reading-group-overview-text,
+.pi-seven-group-overview-text,
 .pi-gf-group-overview-text {
   font-size: 0.875rem;
   line-height: 1.6;
   margin: 8px 0 0;
+}
+.pi-objective-teaching {
+  margin-bottom: 12px;
+}
+.pi-objective-teaching-section + .pi-objective-teaching-section {
+  margin-top: 8px;
+}
+.pi-objective-teaching-section > summary {
+  cursor: pointer;
+  color: var(--pi-ps-insight-muted-ink, #6a6a64);
+  font-size: 0.8125rem;
+  user-select: none;
+}
+.pi-objective-translation,
+.pi-objective-discourse,
+.pi-objective-long-sentences {
+  margin-top: 8px;
+  color: var(--pi-ps-insight-ink, #1e1e1c);
+  font-family: var(--paper-font-serif);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.pi-objective-translation p,
+.pi-objective-discourse p,
+.pi-objective-long-sentences p {
+  margin: 0 0 8px;
+}
+.pi-objective-discourse p > b {
+  margin-inline-end: 8px;
+  font-family: var(--paper-font-sans);
+  font-size: 0.75rem;
+}
+.pi-objective-translation-range > b {
+  margin-inline-end: 2px;
+  font-family: var(--paper-font-sans);
+  font-size: 0.75rem;
+}
+.pi-objective-translation-range > span,
+.pi-objective-long-sentences u {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.pi-objective-long-sentences article + article {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--pi-ps-insight-hairline, rgba(122, 106, 88, 0.24));
+}
+.pi-objective-long-sentences small {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--pi-ps-insight-muted-ink, #6a6a64);
+  font-family: var(--paper-font-sans);
+}
+.pi-objective-long-sentences p > b {
+  margin-inline-end: 8px;
+  font-family: var(--paper-font-sans);
+  font-size: 0.75rem;
 }
 /* ─── cloze-panel-polish: Cloze / GrammarFill blank-card panel ───
  * Same warm notebook idiom as .pi-seven-panel / .pi-ps-analysis: cream
@@ -672,7 +737,6 @@ button.pi-ps-analysis-distractor--selected {
 .pi-cloze-correct-fit,
 .pi-gf-answer,
 .pi-cloze-distractors,
-.pi-gf-framework,
 .pi-gf-reason {
   margin-bottom: 10px;
 }
@@ -735,53 +799,7 @@ button.pi-ps-analysis-distractor--selected {
 .pi-cloze-distractor-meaning {
   color: #756a5f;
 }
-/* 考点框架 (grammar fill only): steps / table / notes. */
-.pi-gf-framework-steps {
-  margin: 0;
-  padding-left: 18px;
-  display: grid;
-  gap: 4px;
-}
-.pi-gf-framework-step {
-  font-size: 13px;
-  line-height: 1.5;
-  color: #4b4035;
-}
-.pi-gf-framework-table-wrapper {
-  margin-top: 6px;
-}
-.pi-gf-framework-table-caption {
-  margin: 0 0 4px;
-  font-size: 11px;
-  color: var(--pi-ps-insight-muted-ink, #6a6a64);
-}
-.pi-gf-framework-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 12px;
-}
-.pi-gf-framework-table-th,
-.pi-gf-framework-table-td {
-  padding: 4px 6px;
-  border: 1px solid rgba(122, 106, 88, 0.2);
-  text-align: left;
-}
-.pi-gf-framework-table-th {
-  background: rgba(30, 30, 28, 0.06);
-  font-weight: 600;
-}
-.pi-gf-framework-notes {
-  margin: 6px 0 0;
-  padding-left: 18px;
-  display: grid;
-  gap: 2px;
-}
-.pi-gf-framework-note {
-  font-size: 12px;
-  color: #756a5f;
-  line-height: 1.5;
-}
-/* Non-finite role/path badges. */
+/* Non-finite syntactic-role badge. */
 .pi-gf-nonfinite-badges {
   display: flex;
   gap: 6px;
@@ -797,12 +815,8 @@ button.pi-ps-analysis-distractor--selected {
   background: rgba(30, 30, 28, 0.1);
   color: #5f554a;
 }
-.pi-gf-badge--path {
-  background: rgba(122, 106, 88, 0.14);
-  color: #67594b;
-}
 /* 证据定位 named fold — same quiet one-line summary idiom as
-   文章简介/考点框架 (no anonymous「展开细节」drawer, owner 2026-07-08).
+   文章简介 (no anonymous「展开细节」drawer, owner 2026-07-08).
    min-height keeps the tap target at the pi-seven touch standard. */
 .pi-cloze-evidence-summary,
 .pi-gf-evidence-summary {
@@ -924,16 +938,4 @@ button.pi-ps-analysis-distractor--selected {
   .pi-gf-blank-card {
     width: 100%;
   }
-}
-/* 考点框架 collapsed summary — same quiet one-line idiom as the
-   文章简介 summary above; the framework body inherits its existing
-   steps/table/notes styling once expanded. */
-.pi-gf-framework-summary {
-  cursor: pointer;
-  font-size: 0.8125rem;
-  color: var(--pi-ps-insight-muted-ink, #6a6a64);
-  user-select: none;
-}
-.pi-gf-framework[open] .pi-gf-framework-summary {
-  margin-bottom: 6px;
 }

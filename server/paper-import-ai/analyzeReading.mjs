@@ -2,6 +2,8 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import {
   assertFullTranslationZh,
+  assertObjectiveTeachingAnnotations,
+  assertSharedPassageIntroduction,
   assertSelectedLongSentences,
   createAnalyzerProviderShell,
   readTeachingAnalysisPrompt,
@@ -181,6 +183,7 @@ export function validateReadingAnalysisShape(analysis, {
   group,
   requireFullTranslation = false,
   requireSelectedLongSentences = false,
+  requireTeachingContent = false,
 }) {
   if (!analysis || typeof analysis !== 'object' || Array.isArray(analysis)) throw new Error('AI 未返回 JSON 对象。')
   if (analysis.schemaVersion !== 'reading-choice-analysis-v1') throw new Error('AI JSON schemaVersion 不正确。')
@@ -192,10 +195,16 @@ export function validateReadingAnalysisShape(analysis, {
   if (!analysis.groups || typeof analysis.groups !== 'object' || !analysis.groups[group.groupId]) {
     throw new Error('AI JSON 缺少当前题组分析。')
   }
+  assertSharedPassageIntroduction(analysis.groups[group.groupId])
   if (requireFullTranslation) assertFullTranslationZh(analysis.groups[group.groupId], group)
   assertSelectedLongSentences(analysis.groups[group.groupId], group, {
     required: requireSelectedLongSentences,
   })
+  if (requireTeachingContent) {
+    assertObjectiveTeachingAnnotations(analysis.groups[group.groupId], group, {
+      sourceAssetVersion: analysis.sourceAssetVersion,
+    })
+  }
   if (!analysis.questions || typeof analysis.questions !== 'object' || Array.isArray(analysis.questions)) {
     throw new Error('AI JSON questions 必须是对象。')
   }
@@ -280,6 +289,11 @@ function isRetryableReadingError(error) {
 export const analyzeReadingImportCandidate = createAnalyzerProviderShell({
   assertInput: assertReadingAnalyzeInput,
   buildMessages: buildReadingAnalysisMessages,
-  validate: validateReadingAnalysisShape,
+  validate: (analysis, input) => validateReadingAnalysisShape(analysis, {
+    ...input,
+    requireFullTranslation: true,
+    requireSelectedLongSentences: true,
+    requireTeachingContent: true,
+  }),
   isRetryable: isRetryableReadingError,
 })

@@ -2,6 +2,8 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import {
   assertFullTranslationZh,
+  assertObjectiveTeachingAnnotations,
+  assertSharedPassageIntroduction,
   assertSelectedLongSentences,
   createAnalyzerProviderShell,
   readTeachingAnalysisPrompt,
@@ -124,6 +126,7 @@ export function validateSevenChoicesShape(analysis, {
   group,
   requireFullTranslation = false,
   requireSelectedLongSentences = false,
+  requireTeachingContent = false,
 }) {
   if (!analysis || typeof analysis !== 'object' || Array.isArray(analysis)) throw new Error('AI 未返回 JSON 对象。')
   if (analysis.schemaVersion !== 'seven-choices-analysis-v1') throw new Error('AI JSON schemaVersion 不正确。')
@@ -135,12 +138,19 @@ export function validateSevenChoicesShape(analysis, {
   if (!analysis.groups || typeof analysis.groups !== 'object' || !analysis.groups[group.groupId]) {
     throw new Error('AI JSON 缺少当前题组分析。')
   }
+  assertSharedPassageIntroduction(analysis.groups[group.groupId])
   if (requireFullTranslation) {
     assertFullTranslationZh(analysis.groups[group.groupId], group, { requireBlankMarkers: true })
   }
   assertSelectedLongSentences(analysis.groups[group.groupId], group, {
     required: requireSelectedLongSentences,
   })
+  if (requireTeachingContent) {
+    assertObjectiveTeachingAnnotations(analysis.groups[group.groupId], group, {
+      sourceAssetVersion: analysis.sourceAssetVersion,
+      requireAnswerInsertions: true,
+    })
+  }
   if (!analysis.questions || typeof analysis.questions !== 'object' || Array.isArray(analysis.questions)) {
     throw new Error('AI JSON questions 必须是对象。')
   }
@@ -198,7 +208,7 @@ export function validateSevenChoicesShape(analysis, {
     if (!item.contextEvidence || typeof item.contextEvidence !== 'object') throw new Error(`${questionId}: 缺少 contextEvidence。`)
     if (!Array.isArray(item.mechanismSignals) || item.mechanismSignals.length < 2) throw new Error(`${questionId}: mechanismSignals 至少需要 2 个。`)
     if (!item.optionFit || typeof item.optionFit !== 'object') throw new Error(`${questionId}: 缺少 optionFit。`)
-    if (!optionalString(item.teachingNote)) throw new Error(`${questionId}: 缺少 teachingNote。`)
+    if (!optionalString(item.optionFit.fitSummary)) throw new Error(`${questionId}: 缺少 optionFit.fitSummary。`)
 
     // Validate optionLabel matches answer key.
     const correctLabel = optionalString(item.optionFit?.correctOptionLabel)
@@ -244,6 +254,11 @@ function isRetryableSevenChoicesError(error) {
 export const analyzeSevenChoicesImportCandidate = createAnalyzerProviderShell({
   assertInput: assertSevenChoicesAnalyzeInput,
   buildMessages: buildSevenChoicesAnalysisMessages,
-  validate: validateSevenChoicesShape,
+  validate: (analysis, input) => validateSevenChoicesShape(analysis, {
+    ...input,
+    requireFullTranslation: true,
+    requireSelectedLongSentences: true,
+    requireTeachingContent: true,
+  }),
   isRetryable: isRetryableSevenChoicesError,
 })

@@ -223,6 +223,15 @@ function rowGroups(blocks) {
 function mergeInlineBlockFragments(blocks) {
   const merged = []
   for (const row of rowGroups(blocks)) {
+    row.sort((left, right) => left.xMin - right.xMin)
+    // Only labelled exam rows have a proven left-to-right order. Ordinary
+    // side-by-side prose still goes through the multi-column/overlap guards.
+    if (row.length > 1 && row.every((block) => !block.text.includes('\n'))
+      && row.every((block, index) => index === 0 || block.xMin >= row[index - 1].xMax)
+      && isLabelledExamRow(row.map((block) => block.text))) {
+      merged.push({ ...union(row), text: row.map((block) => block.text).join('  '), page: row[0].page })
+      continue
+    }
     let current = null
     for (const block of row.sort((left, right) => left.xMin - right.xMin)) {
       const gap = current ? block.xMin - current.xMax : null
@@ -242,6 +251,28 @@ function mergeInlineBlockFragments(blocks) {
   return merged
     .sort((left, right) => left.yMin - right.yMin || left.xMin - right.xMin)
     .map((block, index) => ({ ...block, blockIndex: index + 1 }))
+}
+
+function isLabelledExamRow(texts) {
+  const text = texts.join('  ').normalize('NFKC').trim()
+  const optionText = text.replace(/^\d{1,2}\.\s*/u, '')
+  const options = [...optionText.matchAll(/(?:^|\s)([A-D])\.\s*([^]*?)(?=\s+[A-D]\.\s*|$)/gu)]
+  if (/^[A-D]\.\s*\S/u.test(optionText)
+    && texts.every((part, index) => /^(?:\d{1,2}\.\s*)?[A-D]\./u.test(part.trim())
+      || (index === 0 && /^\d{1,2}\.$/u.test(part.trim())))
+    && options.length >= 2 && options.length <= 4
+    && options.every((match, index) => match[2].trim()
+      && (index === 0 || match[1].charCodeAt(0) === options[index - 1][1].charCodeAt(0) + 1))) return true
+
+  const ranges = texts.map((part) => /^(\d{1,2})\s*[-–—]\s*(\d{1,2})\s*([A-G]+)$/u.exec(part.trim()))
+  if (ranges.every(Boolean) && ranges.every((match, index) =>
+    Number(match[1]) >= 1 && Number(match[2]) <= 55
+    && Number(match[2]) - Number(match[1]) + 1 === match[3].length
+    && (index === 0 || Number(match[1]) === Number(ranges[index - 1][2]) + 1))) return true
+
+  const answers = texts.map((part) => /^(5[6-9]|6[0-5])\.\s*([\p{L}'’/-]+(?:\s+[\p{L}'’/-]+){0,3})$/u.exec(part.trim()))
+  return answers.every(Boolean) && answers.every((match, index) =>
+    index === 0 || Number(match[1]) === Number(answers[index - 1][1]) + 1)
 }
 
 function parsePgm(bytes) {
@@ -502,9 +533,16 @@ function structureFromPages(pages, documentId, rasterPage) {
     }
   }
   assertReadableLayout(pages, tableBlockIds, documentId)
+  const furniture = []
   for (const page of pages) {
     for (const block of page.blocks) {
       if (tableBlockIds.has(`${page.number}:${block.blockIndex}`)) continue
+      const pageNumber = /^第\s*(\d+)\s*页\s*共\s*(\d+)\s*页$/u.exec(block.text.trim())
+      if (pageNumber && Number(pageNumber[1]) === page.number
+        && Number(pageNumber[2]) === pages.length && block.yMin >= page.height * 0.95) {
+        furniture.push({ text: block.text, source: locator(documentId, page, block) })
+        continue
+      }
       units.push({
         kind: 'paragraph',
         sourceIndex: locator(documentId, page, block),
@@ -522,6 +560,7 @@ function structureFromPages(pages, documentId, rasterPage) {
     paragraphs: units.filter((item) => item.kind === 'paragraph'),
     body: units.map(({ page: _page, xMin: _xMin, yMin: _yMin, ...item }) => item),
     tables,
+    furniture,
     unsupportedParagraphCount: 0,
   }
 }

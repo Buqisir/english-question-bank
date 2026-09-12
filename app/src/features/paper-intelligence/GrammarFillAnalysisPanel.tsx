@@ -7,11 +7,9 @@
  *               + 考点 labelZh (chip)
  *     - 答案: answer badge
  *     - 代入: reason
- *     - Non-finite badges: role (成分中文) + path (快路/慢路) when present
+ *     - Non-finite badge: ordinary syntactic role (成分中文) when present
  *   Collapsed by default — NAMED folds only, no anonymous「展开细节」drawer
  *   (owner decision 2026-07-08: every fold says what it holds):
- *     - 考点框架 (native <details>): generic per-facet framework — identical
- *       for every blank of the facet, so it folds to one line
  *     - 证据定位 (native <details>): evidence rows as clickable buttons with
  *       data-pi-evidence-id, data-pi-evidence-kind="support",
  *       data-pi-question-id (no option-side branch — grammar fill has no options)
@@ -25,7 +23,8 @@ import type {
   GrammarFillBlankAnalysisView,
   GrammarFillGroupView,
 } from './grammarFillAnalysisSurfaceAdapter.ts'
-import { ROLE_LABELS, PATH_LABELS } from './grammarFillAnalysisSurfaceAdapter.ts'
+import { ROLE_LABELS } from './grammarFillAnalysisSurfaceAdapter.ts'
+import { ObjectiveTeachingContent } from './ObjectiveTeachingContent.tsx'
 
 export type GrammarFillAnalysisPanelProps = {
   /** The blank currently focused (null = none selected yet). */
@@ -53,6 +52,7 @@ export function GrammarFillAnalysisPanel({
           <p className="pi-gf-group-overview-text">{groupView.overview}</p>
         </details>
       )}
+      <ObjectiveTeachingContent content={groupView?.teachingContent ?? null} />
 
       {!hasActiveQuestion && (
         <div className="pi-ps-analysis-empty">
@@ -86,87 +86,22 @@ export function GrammarFillAnalysisPanel({
             <span className="pi-gf-answer-badge">{analysis.answer}</span>
           </div>
 
-          {/* 考点框架 — generic per-facet teaching framework, identical for
-              every blank of the same facet, so it must not occupy the card
-              by default (owner decision 2026-07-08: fold, keep reachable for
-              mid-lesson walkthroughs). key resets the native open state when
-              focus moves to another blank. */}
-          <details className="pi-gf-framework" key={analysis.questionId}>
-            <summary className="pi-gf-framework-summary">考点框架</summary>
-            {analysis.framework.steps.length > 0 && (
-              <ol className="pi-gf-framework-steps">
-                {analysis.framework.steps.map((step, i) => (
-                  <li key={i} className="pi-gf-framework-step">
-                    {step}
-                  </li>
-                ))}
-              </ol>
-            )}
-            {analysis.framework.table && (
-              <div className="pi-gf-framework-table-wrapper">
-                {analysis.framework.table.caption && (
-                  <p className="pi-gf-framework-table-caption">
-                    {analysis.framework.table.caption}
-                  </p>
-                )}
-                <table className="pi-gf-framework-table">
-                  <thead>
-                    <tr>
-                      {analysis.framework.table.columns.map((col, ci) => (
-                        <th key={ci} className="pi-gf-framework-table-th">
-                          {col}
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {analysis.framework.table.rows.map((row, ri) => (
-                      <tr key={ri}>
-                        {row.map((cell, ci) => (
-                          <td key={ci} className="pi-gf-framework-table-td">
-                            {cell}
-                          </td>
-                        ))}
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-            {analysis.framework.notes && analysis.framework.notes.length > 0 && (
-              <ul className="pi-gf-framework-notes">
-                {analysis.framework.notes.map((note, i) => (
-                  <li key={i} className="pi-gf-framework-note">
-                    {note}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </details>
-
           {/* 代入 */}
           <div className="pi-gf-reason">
             <h4 className="pi-gf-section-title">代入</h4>
             <p className="pi-gf-reason-text">{analysis.reason}</p>
           </div>
 
-          {/* Non-finite badges: role + path (only for grammar-fill.given.verb.non-finite) */}
-          {(analysis.role || analysis.path) && (
+          {/* Ordinary syntactic role, without a personal solving-path badge. */}
+          {analysis.role && (
             <div className="pi-gf-nonfinite-badges">
-              {analysis.role && (
-                <span className="pi-gf-badge pi-gf-badge--role">
-                  {ROLE_LABELS[analysis.role] ?? analysis.role}
-                </span>
-              )}
-              {analysis.path && (
-                <span className="pi-gf-badge pi-gf-badge--path">
-                  {PATH_LABELS[analysis.path] ?? analysis.path}
-                </span>
-              )}
+              <span className="pi-gf-badge pi-gf-badge--role">
+                {ROLE_LABELS[analysis.role] ?? analysis.role}
+              </span>
             </div>
           )}
 
-          {/* 证据定位 — NAMED fold, same idiom as 文章简介/考点框架 (owner
+          {/* 证据定位 — NAMED fold, same idiom as 文章简介 (owner
               decision 2026-07-08: no anonymous「展开细节」drawer). All rows
               are passage-side (grammar fill has no options); the fold's real
               value is the click-to-highlight interaction. */}
@@ -202,8 +137,8 @@ export function GrammarFillAnalysisPanel({
 
           {/* 解题提示 (teachingNote) is deliberately NOT rendered for
               grammar fill — it restates 代入 in different words every
-              time (owner decision 2026-07-08). The field stays in the
-              data/adapter; only the presentation drops it. */}
+              time (owner decision 2026-07-08). Historical source files may
+              retain it; the active adapter does not. */}
         </div>
       )}
     </div>

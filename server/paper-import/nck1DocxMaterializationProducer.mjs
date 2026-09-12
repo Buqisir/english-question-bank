@@ -6,13 +6,14 @@ import { writingNoticeGroup, writingWordCount } from '../../shared/paper-canonic
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 export const NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION =
-  'nck1-docx-materialization-producer-v8'
+  'nck1-docx-materialization-producer-v9'
 
 const DOCX = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 const BLANK = /(?:\d{1,3}[.．、]?\p{Zs}*)?_{2,}\d{0,3}_{0,}/gu
-const COMBINED_ANSWER_BOUNDARY = /^(?:【)?(?:英语|参考)?答案(?:(?:及|与)(?:解析|详解|听力(?:原文|材料)))?(?:】)?$/u
+const COMBINED_ANSWER_BOUNDARY = /^(?:【)?(?:(?:英语|参考)|[^。！？!?\n]{0,120}英语试(?:题|卷)(?:参考)?)?答案(?:(?:及|与)(?:解析|详解|听力(?:原文|材料)))?(?:】)?[:：]?$/u
 const INLINE_ANSWER_DETAIL = /(?:【)?(?:答案(?:及|与)?)?(?:解析|详解)(?:】)?\s*[:：]?|(?:Explanation|Analysis)\s*[:：]/iu
-const WRITING_SAMPLE_BOUNDARY = /^(?:(?:【)?(?:评分|答案(?:解析|详解)|解析|详解)|附[:：]?\s*各档次|听力(?:原文|材料)|答案及听力材料)/u
+const LISTENING_TRANSCRIPT_HEADING = /^(?:附[:：]?\s*)?(?:【)?(?:(?:英语)?听力(?:部分)?(?:原文|材料|录音稿)|答案及听力材料)(?:[（(]录音稿[）)])?(?:】)?[:：]?$/u
+const WRITING_SAMPLE_BOUNDARY = /^(?:(?:【)?(?:评分|书面表达评分|答案(?:解析|详解)|解析|详解)|附[:：]?\s*各档次|(?:英语)?听力(?:部分)?(?:原文|材料|录音稿)|答案及听力材料|AI\s+editions?\b)/iu
 const SLOT_SPECS = [
   ['reading.a', 'reading', 21, 23],
   ['reading.b', 'reading', 24, 27],
@@ -116,14 +117,14 @@ function parseOptionsWithLeadingText(items, labels) {
       .join('\n')
       .replace(/^\s*\d{1,3}[.．、]\s*/u, '')
     const matches = [...text.matchAll(
-      /(?:^|[\t\n]| {2,})([A-G])(?:[.．、]\s*|\s+)/gu,
+      /(?:^|\s)([A-G])[.．、]\s*|(?:^|[\t\n]| {2,})([A-G])\s+/gu,
     )]
     if (
       matches.length !== labels.length
-      || matches.some((match, index) => match[1] !== labels[index])
+      || matches.some((match, index) => (match[1] || match[2]) !== labels[index])
     ) continue
     const options = matches.map((match, index) => ({
-      label: match[1],
+      label: match[1] || match[2],
       text: trimEdgeSpaces(text.slice(
         match.index + match[0].length,
         matches[index + 1]?.index ?? text.length,
@@ -376,6 +377,7 @@ function blankMatches(items) {
 }
 
 function blankGroup({ paperId, slotId, family, items, from, to, documentId, issues, optionBank = [] }) {
+  items = items.map((item) => ({ ...item, text: item.textWithNumberedBlanks ?? item.text }))
   const matches = blankMatches(items)
   if (
     matches.length !== to - from + 1
@@ -447,6 +449,7 @@ function clozeGroup({ paperId, body, start, end, documentId, issues }) {
     return emptyGroup(paperId, 'cloze', 'cloze')
   }
   const passageItems = body.slice(start + 2, q41)
+    .map((item) => ({ ...item, text: item.textWithNumberedBlanks ?? item.text }))
   const matches = blankMatches(passageItems)
   const questions = readMcqQuestions({
     paperId, body, from: 41, to: 55, rangeStart: q41, rangeEnd: end,
@@ -472,7 +475,7 @@ function clozeGroup({ paperId, body, start, end, documentId, issues }) {
 
 function isAnswerExplanationHeading(item) {
   return item.kind === 'paragraph'
-    && /^(?:【)?(?:答案(?:及|与)?)?(?:解析|详解)(?:】)?/u.test(normalized(item.text))
+    && /^(?:【)?(?:答案(?:及|与)?)?(?:详细解析|解析|详解)(?:】)?/u.test(normalized(item.text))
 }
 
 function slicedStructure(structure, start, end = structure.body.length) {
@@ -518,15 +521,18 @@ export function splitNck1CombinedSourceStructure(structure, documentId, issues) 
 }
 
 function skeletonRole(text, index, givens) {
+  text = normalized(text)
   if (/^Dear\b.*[,，]$/iu.test(text)) return 'salutation'
-  if (/^(?:Yours|Sincerely|Best(?: wishes| regards)?)[,，]?$/iu.test(text)) return 'closing'
+  if (/^Yours(?: sincerely| faithfully| truly)?[,，]\s+[A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,3}$/u.test(text)) return 'closing'
+  if (/^(?:Yours(?: sincerely| faithfully| truly)?|Sincerely|Best(?: wishes| regards)?)[,，]?$/iu.test(text)) return 'closing'
   if (index > 0 && ['closing'].includes(skeletonRole(givens[index - 1] || '', -1, []))) return 'signature'
+  if (index === 1 && /^Dear\b.*[,，]$/iu.test(normalized(givens[0])) && /[.!?。！？]$/u.test(text)) return 'opening'
   if (givens.length === 1 && !/[.!。！]$/u.test(text)) return 'title'
   return null
 }
 
 function writingGroup({ paperId, slotId, family, items, documentId, officialModelAnswer, issues }) {
-  const meaningful = items.filter((item) => item.kind !== 'paragraph' || normalized(item.text))
+  let meaningful = items.filter((item) => item.kind !== 'paragraph' || normalized(item.text))
   const promptItem = meaningful[0]
   const notice = writingNoticeGroup(meaningful.map(item => item.kind === 'paragraph' ? normalized(item.text) : ''))
   const noticeIndex = notice?.startIndex ?? -1
@@ -536,6 +542,17 @@ function writingGroup({ paperId, slotId, family, items, documentId, officialMode
     return emptyGroup(paperId, slotId, family)
   }
   const noticeEnd = noticeIndex + notice.blockCount - 1
+  const tail = meaningful.slice(noticeEnd + 1)
+  const box = tail.length === 1 && tail[0].kind === 'table' ? tail[0] : null
+  const cell = box?.rows.length === 1 && box.rows[0].cells.length === 1 ? box.rows[0].cells[0] : null
+  if (box?.columnCount === 1 && box.nestedTableCount === 0
+    && cell?.columnSpan === 1 && cell.verticalMerge === null
+    && !cell.containsDrawing && !cell.containsNestedTable && cell.sourceParagraphs) {
+    // A one-cell response box after 注意 is not a semantic data table. Retain
+    // each original w:p and its locator, including the two separate starters.
+    meaningful = meaningful.slice(0, noticeEnd + 1)
+      .concat(cell.sourceParagraphs.filter((item) => normalized(item.text)))
+  }
   const givens = meaningful.slice(noticeEnd + 1).filter((item) => item.kind === 'paragraph')
   const skeleton = family === 'application-writing'
     ? givens.map((item, index) => ({
@@ -679,7 +696,8 @@ function writingSampleText(answerBody, from, to) {
     index >= from
       && index < to
       && item.kind === 'paragraph'
-      && WRITING_SAMPLE_BOUNDARY.test(normalized(item.text)))
+      && (WRITING_SAMPLE_BOUNDARY.test(normalized(item.text))
+        || LISTENING_TRANSCRIPT_HEADING.test(normalized(item.text))))
   const end = boundary >= 0 ? boundary : to
   return answerBody
     .slice(from, end)
@@ -718,12 +736,12 @@ function parseOfficialWritingSamples(answerBody, answerDocumentId, issues) {
   const writingStart = writingSections[0]
   const applicationHeadings = writingSamplePosition(
     sampleBody,
-    /^第一节(?:\s*[:：])?.*(?:应用文(?:写作)?|参考范文)/u,
+    /^第一节(?:\s*[:：])?.*(?:应用文(?:写作)?|参考范文|One possible version)/iu,
     writingStart + 1,
   )
   const continuationHeadings = writingSamplePosition(
     sampleBody,
-    /^第二节(?:\s*[:：])?.*(?:读后续写|参考范文)/u,
+    /^第二节(?:\s*[:：])?.*(?:读后续写|参考范文|One possible version)/iu,
     writingStart + 1,
   )
   if (applicationHeadings.length !== 1 || continuationHeadings.length !== 1
@@ -821,7 +839,7 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
   const ranges = []
   for (const item of questionBody.slice(listeningHeading + 1, readingStart)) {
     if (item.kind !== 'paragraph') continue
-    const match = /回答第(\d+)(?:和|、|至|到)第?(\d+)/u.exec(normalized(item.text))
+    const match = /回答第\s*(\d+)\s*(?:和|、|至|到|[-–—])\s*第?\s*(\d+)/u.exec(normalized(item.text))
     if (match) ranges.push(Array.from(
       { length: Number(match[2]) - Number(match[1]) + 1 },
       (_, index) => Number(match[1]) + index,
@@ -834,7 +852,7 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
       sourceRef(questionDocumentId))
   }
   const transcriptHeading = answerBody.findIndex((item) =>
-    item.kind === 'paragraph' && /听力(?:原文|材料)/u.test(normalized(item.text)))
+    item.kind === 'paragraph' && LISTENING_TRANSCRIPT_HEADING.test(normalized(item.text)))
   const analysis = answerBody.findIndex((item, index) =>
     index > transcriptHeading && isAnswerExplanationHeading(item))
   if (transcriptHeading < 0) {
