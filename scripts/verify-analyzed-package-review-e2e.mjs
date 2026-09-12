@@ -29,6 +29,13 @@ let browser
 let vite
 try {
   const raw = makeReviewRoot(temporary, paperId, undefined, { listening: true })
+  const continuationPath = path.join(raw.reviewRoot, 'analysis-continuation.json')
+  const continuation = JSON.parse(fs.readFileSync(continuationPath, 'utf8'))
+  continuation.modelAnswer = [
+    'Paragraph one starter. The protagonist paused to consider the unresolved problem. Instead of inventing a new conflict, the response followed the information already available in the story. A small practical action gave the other character a chance to respond. They discussed what could be done next and agreed on a manageable first step. That decision prepared the situation required by the second paragraph.',
+    'Paragraph two starter. The characters carried out their plan and checked its result together. One remaining difficulty called for a modest adjustment, rather than an unrelated surprise. Their final action resolved the original problem and returned to the earlier clue. The ending stayed within the facts provided by the source. This is synthetic layout-test prose, not an official answer or an approved teaching model.',
+  ].join('\n\n')
+  fs.writeFileSync(continuationPath, JSON.stringify(continuation))
   const packageRoot = path.join(temporary, 'package')
   makeExternalAnalyzedPackage(raw.reviewRoot, packageRoot)
   const reviewRoot = path.join(temporary, 'external-review')
@@ -194,6 +201,8 @@ try {
   }
   assert.equal(await frame.locator('.source-relationships p').first().locator('.translation-marker').count(), 1,
     'overlapping evidence and sentence-structure must not print the same question marker inside a word')
+  assert.equal(await frame.locator('[data-continuation-section="modelAnswer"] div[lang="en"]').last().locator('p').count(), 2,
+    'both synthetic continuation paragraphs survive sealed projection and companion rendering')
   const teaching = await page.context().request.get(origin + teachingPath)
   assert.equal(teaching.status(), 200)
   const htmlPath = path.join(temporary, 'companion.html')

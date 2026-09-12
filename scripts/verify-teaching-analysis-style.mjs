@@ -7,8 +7,10 @@ import { fileURLToPath } from 'node:url'
 import { buildApplicationModelAnswerMessages } from '../server/paper-import-ai/applicationWritingWorkflow.mjs'
 import {
   assertFullTranslationZh,
+  assertObjectiveTeachingAnnotations,
   assertSelectedLongSentences,
 } from '../server/paper-import-ai/analyzerProviderShell.mjs'
+import { buildObjectiveTeachingFixture } from './lib/objective-teaching-fixture.mjs'
 import { buildClozeAnalysisMessages } from '../server/paper-import-ai/analyzeCloze.mjs'
 import { buildGrammarFillAnalysisMessages } from '../server/paper-import-ai/analyzeGrammarFill.mjs'
 import { buildNarrativeContinuationAnalysisMessages } from '../server/paper-import-ai/analyzeNarrativeContinuation.mjs'
@@ -107,9 +109,10 @@ assert.doesNotMatch(prompts.continuation, /similaritySummary|Embedding vector/)
 
 const translationGroup = {
   groupId: 'group-translation-check',
+  paragraphs: [{ id: 'translation-source', text: 'They __36__ and __37__.' }],
   questions: [
-    { id: 'question-36', stem: '36' },
-    { id: 'question-37', stem: '37' },
+    { id: 'question-36', stem: '36', blankId: 'b36', answerKey: 'go' },
+    { id: 'question-37', stem: '37', blankId: 'b37', answerKey: 'rest' },
   ],
 }
 assert.doesNotThrow(() => assertFullTranslationZh(
@@ -121,14 +124,14 @@ assert.doesNotThrow(() => assertFullTranslationZh(
   translationGroup,
   { requireBlankMarkers: true },
 ))
-assert.throws(
-  () => assertFullTranslationZh(
-    { fullTranslationZh: '先读上文。[36]补全此处，再读下文。' },
-    translationGroup,
-    { requireBlankMarkers: true },
-  ),
-  /必须且只能包含一次 \[37\]/,
-)
+const translationAnalysis = buildObjectiveTeachingFixture(translationGroup)
+const annotationOptions = { sourceAssetVersion: 1, requireAnswerInsertions: true }
+assert.doesNotThrow(() => assertObjectiveTeachingAnnotations(translationAnalysis, translationGroup, annotationOptions))
+const missingInsertion = structuredClone(translationAnalysis)
+missingInsertion.teachingContent.annotations = missingInsertion.teachingContent.annotations.filter((item) =>
+  !(item.kind === 'answer-insertion' && item.blankId === 'b37'))
+assert.throws(() => assertObjectiveTeachingAnnotations(missingInsertion, translationGroup, annotationOptions),
+  /question-37 must have exactly one answer-insertion relationship/)
 
 const selectedSentenceGroup = {
   groupId: 'group-selected-sentence',
@@ -168,22 +171,17 @@ assert.throws(
   }, selectedSentenceGroup, { required: true }),
   /按权威答案补全/,
 )
-assert.throws(
-  () => assertFullTranslationZh(
-    { fullTranslationZh: '[36]重复标记。[36]仍然重复。[37]只出现一次。' },
-    translationGroup,
-    { requireBlankMarkers: true },
-  ),
-  /必须且只能包含一次 \[36\]/,
-)
-assert.throws(
-  () => assertFullTranslationZh(
-    { fullTranslationZh: '先出现[37]，后出现[36]。' },
-    translationGroup,
-    { requireBlankMarkers: true },
-  ),
-  /\[37\] 必须按题面空号顺序出现/,
-)
+const duplicateInsertion = structuredClone(translationAnalysis)
+duplicateInsertion.teachingContent.annotations.push({
+  ...structuredClone(duplicateInsertion.teachingContent.annotations.find((item) => item.kind === 'answer-insertion' && item.blankId === 'b36')),
+  annotationId: 'duplicate-insertion',
+})
+assert.throws(() => assertObjectiveTeachingAnnotations(duplicateInsertion, translationGroup, annotationOptions),
+  /question-36 must have exactly one answer-insertion relationship/)
+// Bracketed numbers in legacy prose are not the annotation identity contract.
+assert.doesNotThrow(() => assertFullTranslationZh(
+  { fullTranslationZh: '先出现[37]，后出现[36]，再出现[36]。' }, translationGroup,
+))
 
 const applicationStaged = read('prompts/application-writing-staged-analysis-v1.md')
 const continuationStaged = read('prompts/continuation-writing-staged-analysis-v1.md')
