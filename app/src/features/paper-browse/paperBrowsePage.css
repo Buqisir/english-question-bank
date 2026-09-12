@@ -961,6 +961,17 @@
   overflow-wrap: anywhere;
 }
 
+.retained-writing-card-row-values {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.retained-writing-card-row-values span + span {
+  padding-top: 4px;
+  border-top: 1px solid var(--eqb-color-border-subtle);
+}
+
 .retained-writing-card-section--basics dl {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1021,12 +1032,12 @@
 
 .retained-writing-card-section--reader .retained-writing-card-row {
   display: grid;
-  grid-template-columns: 48px minmax(0, 1fr);
+  grid-template-columns: 80px minmax(0, 1fr);
   align-items: start;
   gap: 8px;
 }
 
-/* Overrides the base retained row label color so the three reader prompts
+/* Overrides the base retained row label color so the reader prompts
  * carry the card's restrained primary-ink emphasis without a filled chip. */
 .retained-writing-card-section--reader .retained-writing-card-row dt {
   border-radius: 999px;
@@ -1034,22 +1045,6 @@
   line-height: 1.4;
   padding: 4px 8px;
   text-align: center;
-}
-
-.retained-writing-card-section--value {
-  background: var(--eqb-color-paper);
-}
-
-.retained-writing-card-value {
-  margin: 0;
-  border-left: 1px solid var(--line-strong);
-  border-radius: 0 4px 4px 0;
-  background: var(--eqb-color-paper);
-  color: var(--eqb-color-text-strong);
-  font-size: 14px;
-  line-height: 1.55;
-  overflow-wrap: anywhere;
-  padding: 8px 12px;
 }
 
 .continuation-analysis-lead {
@@ -1628,6 +1623,98 @@
 
 .paper-browse-listening .ps-question {
   scroll-margin-top: 88px;
+}
+
+.listening-analysis-panel,
+.listening-analysis-material,
+.listening-analysis-text,
+.listening-analysis-question {
+  display: flex;
+  flex-direction: column;
+}
+
+.listening-analysis-panel {
+  gap: 24px;
+}
+
+.listening-analysis-material {
+  gap: 12px;
+}
+
+.listening-analysis-material h5,
+.listening-analysis-material h6,
+.listening-analysis-material p,
+.listening-analysis-material ol,
+.listening-analysis-material blockquote {
+  margin: 0;
+}
+
+.listening-analysis-material h5 {
+  color: var(--paper-ink-strong);
+  font-size: 14px;
+}
+
+.listening-analysis-topic {
+  color: var(--eqb-color-text-muted, #6a6a64);
+  font-size: 12px;
+}
+
+.listening-analysis-summary {
+  color: var(--paper-ink);
+  font-size: var(--pb-lecture-font-body);
+  line-height: 1.6;
+}
+
+.listening-analysis-text {
+  gap: 8px;
+  padding-block: 12px;
+  border-block: 1px solid var(--paper-border);
+}
+
+.listening-analysis-text h6 {
+  color: var(--eqb-color-text-muted, #6a6a64);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.listening-analysis-text p,
+.listening-analysis-question > p,
+.listening-analysis-question > ol,
+.listening-analysis-question > blockquote,
+.listening-analysis-distractors p {
+  color: var(--paper-ink);
+  font: 400 14px/1.7 var(--ps-font-stack);
+}
+
+.listening-analysis-question {
+  gap: 8px;
+  padding-top: 16px;
+}
+
+.listening-analysis-question + .listening-analysis-question {
+  border-top: 1px solid var(--paper-border);
+}
+
+.listening-analysis-question header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.listening-analysis-question ol {
+  padding-left: 20px;
+}
+
+.listening-analysis-question blockquote {
+  padding: 8px 12px;
+  background: var(--paper-bg);
+  color: var(--paper-ink-strong);
+}
+
+.listening-analysis-distractors {
+  padding-top: 8px;
+  border-top: 1px dashed var(--paper-border);
 }
 
 .paper-browse-audio {

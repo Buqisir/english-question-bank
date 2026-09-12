@@ -37,6 +37,12 @@ import type {
   PassageStructure,
   QuestionAnalysis,
 } from './paperIntelligenceTypes.ts'
+import {
+  buildObjectiveTeachingView,
+  projectObjectiveTeachingSource,
+  type ObjectiveTeachingGroup,
+  type ObjectiveTeachingView,
+} from './objectiveTeachingContentAdapter.ts'
 
 export type ReviewedReadingChoiceAnalysisV1 = {
   schemaVersion: 'reading-choice-analysis-v1'
@@ -46,7 +52,7 @@ export type ReviewedReadingChoiceAnalysisV1 = {
   meta?: Record<string, unknown>
   groups: Record<
     string,
-    {
+    ObjectiveTeachingGroup & {
       overview?: string
       discourseStructure?: {
         summary?: string
@@ -111,6 +117,8 @@ export type PaperAssetSurfaceModel = {
   report: PaperIntelligenceReport
   passageStructures: Record<string, PassageStructure>
   surfaceData: PaperSurfaceData
+  overview: string
+  teachingContent: ObjectiveTeachingView | null
   analysisByQuestionId: Record<string, PaperAssetQuestionAnalysisView>
   evidenceKindById: Record<string, 'support' | 'trap'>
   defaultQuestionId: string | null
@@ -224,6 +232,11 @@ export function buildPaperAssetSurfaceModel(
   const questions = buildQuestions(asset, analysis, group, paperSection)
   const textMap = buildTextMap(asset, group, paperSection, figures, assetBase)
   const evidence = buildEvidence(analysis, group, textMap)
+  const teachingSource = projectObjectiveTeachingSource(
+    groupAnalysis,
+    group.passage?.paragraphs ?? [],
+    textMap,
+  )
   const analysisByQuestionId = buildAnalysisViews(asset, analysis, group, evidence)
   const evidenceKindById = Object.fromEntries(
     evidence.map((item) => [item.id, item.kind === 'trap' ? 'trap' : 'support'] as const),
@@ -242,8 +255,16 @@ export function buildPaperAssetSurfaceModel(
     surfaceData: {
       textMap,
       questions,
-      evidence,
+      evidence: [...evidence, ...teachingSource.evidence],
+      annotations: teachingSource.annotations,
     },
+    overview: typeof groupAnalysis?.overview === 'string' ? groupAnalysis.overview.trim() : '',
+    teachingContent: buildObjectiveTeachingView(groupAnalysis, Object.fromEntries(
+      group.questionIds.map((questionId) => [
+        questionId,
+        String(asset.content.questions[questionId]?.questionNo ?? ''),
+      ]),
+    )),
     analysisByQuestionId,
     evidenceKindById,
     defaultQuestionId: group.questionIds[0] ?? null,

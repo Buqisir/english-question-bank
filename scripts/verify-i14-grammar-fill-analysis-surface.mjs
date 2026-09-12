@@ -95,16 +95,11 @@ assert('Step 0: registry has exactly 22 facets', registryKeys.length === 22,
 assert('Step 0: drift guard — registry keys EXACTLY equal server JSON keys',
   JSON.stringify(registryKeys) === JSON.stringify(serverKeys),
   `registry: ${registryKeys.join(',')}\n      server:   ${serverKeys.join(',')}`)
-assert('Step 0: non-finite facet has a framework.table',
-  !!FACET_FRAMEWORKS[NON_FINITE]?.framework?.table)
-assert('Step 0: non-finite table has columns + rows',
-  (FACET_FRAMEWORKS[NON_FINITE]?.framework?.table?.columns?.length ?? 0) > 0 &&
-  (FACET_FRAMEWORKS[NON_FINITE]?.framework?.table?.rows?.length ?? 0) > 0)
-assert('Step 0: every facet has a labelZh + non-empty steps',
+assert('Step 0: registry retains labels without retired teaching frameworks',
   registryKeys.every((k) => {
     const e = FACET_FRAMEWORKS[k]
     return typeof e.labelZh === 'string' && e.labelZh.length > 0 &&
-      Array.isArray(e.framework.steps) && e.framework.steps.length > 0
+      !Object.hasOwn(e, 'framework')
   }))
 
 // ============================================================
@@ -289,14 +284,26 @@ try {
   assert('Step 1: model maps all 10 blanks', Object.keys(model.analysisByQuestionId).length === 10)
   assert('Step 1: model group overview present', model.groupView?.overview === '记叙文，讲一次经历。')
   const v0 = model.analysisByQuestionId[gfQuestionIds[0]]
-  assert('Step 1: blank view resolves labelZh + framework from registry',
-    v0?.labelZh === FACET_FRAMEWORKS['grammar-fill.given.verb.finite'].labelZh &&
-    Array.isArray(v0?.framework?.steps) && v0.framework.steps.length > 0)
+  assert('Step 1: blank view retains the facet label',
+    v0?.labelZh === FACET_FRAMEWORKS['grammar-fill.given.verb.finite'].labelZh)
   const nfView = model.analysisByQuestionId[gfQuestionIds[2]]
-  assert('Step 1: non-finite blank carries role + path', nfView?.role === 'adverbial' && nfView?.path === 'slow')
-  assert('Step 1: non-finite blank framework has a table', !!nfView?.framework?.table)
+  assert('Step 1: non-finite blank retains its syntactic role', nfView?.role === 'adverbial')
+  assert('Step 1: no active blank revives framework, path or teachingNote',
+    Object.values(model.analysisByQuestionId).every((view) =>
+      ['framework', 'path', 'teachingNote'].every((key) => !Object.hasOwn(view, key))))
   const finiteView = model.analysisByQuestionId[gfQuestionIds[0]]
-  assert('Step 1: non-non-finite blank has null role/path', finiteView?.role === null && finiteView?.path === null)
+  assert('Step 1: non-non-finite blank has null role', finiteView?.role === null)
+
+  const withoutRetired = structuredClone(analysisComplete)
+  for (const blank of Object.values(withoutRetired.blanks)) {
+    delete blank.path
+    delete blank.teachingNote
+  }
+  const withoutRetiredModel = buildGrammarFillAnalysisSurfaceModel({
+    asset: paperAsset, analysis: withoutRetired, groupId: GF_GROUP_ID,
+  })
+  assert('Step 1: historical and note/path-free inputs project identically',
+    JSON.stringify(withoutRetiredModel) === JSON.stringify(model))
 
   // MF-1: every evidence range.sentenceId EXISTS in the built textMap.
   const textMapSentenceIds = new Set(
@@ -349,14 +356,11 @@ try {
   assert('Step 2: panel renders hint', panelSrc.includes('analysis.hint'))
   assert('Step 2: panel renders 考点 labelZh', panelSrc.includes('analysis.labelZh'))
   assert('Step 2: panel renders answer', panelSrc.includes('analysis.answer'))
-  assert('Step 2: panel renders framework steps', panelSrc.includes('framework.steps'))
-  assert('Step 2: panel renders framework table', panelSrc.includes('framework.table'))
-  // 2026-07-08 owner 拍板：考点框架折叠（通用讲义不占卡面），解题提示
-  // 不渲染（每次都是代入的换句话说；数据字段保留）。
-  assert('Step 2: framework is folded into a native <details>',
-    /<details className="pi-gf-framework"/.test(panelSrc))
+  assert('Step 2: panel does not render a personal framework',
+    !panelSrc.includes('analysis.framework') && !panelSrc.includes('pi-gf-framework'))
   assert('Step 2: panel renders 代入 reason', panelSrc.includes('analysis.reason'))
-  assert('Step 2: panel renders role/path badges', panelSrc.includes('ROLE_LABELS') && panelSrc.includes('PATH_LABELS'))
+  assert('Step 2: panel retains role without a fast/slow path badge',
+    panelSrc.includes('ROLE_LABELS') && !panelSrc.includes('PATH_LABELS') && !panelSrc.includes('analysis.path'))
   assert('Step 2: panel does NOT render teachingNote (owner cut, data kept)',
     !panelSrc.includes('{analysis.teachingNote}'))
   assert('Step 2: panel renders group overview', panelSrc.includes('groupView') && panelSrc.includes('overview'))

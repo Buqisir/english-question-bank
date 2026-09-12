@@ -81,11 +81,11 @@ function zipStore(files) {
   return new Uint8Array(Buffer.concat([...chunks, central, eocd]))
 }
 
-function docx(blocks, { mediaLayout = false } = {}) {
+function docx(blocks, { mediaLayout = false, transformXml = (xml) => xml } = {}) {
   const documentXml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
     + '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">'
     + `<w:body>${blocks.join('')}<w:sectPr><w:pgSz w:w="12000"/><w:pgMar w:left="1000" w:right="1000"/></w:sectPr></w:body></w:document>`
-  const files = [{ name: 'word/document.xml', bytes: documentXml }]
+  const files = [{ name: 'word/document.xml', bytes: transformXml(documentXml) }]
   if (mediaLayout) {
     files.push({
       name: 'word/_rels/document.xml.rels',
@@ -289,7 +289,7 @@ function answerBlocks({
 }
 
 function answerDocument(options = {}) {
-  return docx(answerBlocks(options))
+  return docx(answerBlocks(options), options)
 }
 
 function combinedDocument(options = {}) {

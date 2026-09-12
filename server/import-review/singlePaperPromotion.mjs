@@ -195,10 +195,15 @@ export function createSinglePaperPromotionService({
         projection.sourceInput,
         confirmation,
       )
+      const externalListeningReviewProof = store.mintExternalListeningPublicationProof(
+        paperId,
+        promotion,
+      )
       const packageData = buildNck1CompatibilityPackage({
         config: projection.config,
         manifest: projection.manifest,
         materialization: projection.materialization,
+        sourceProvenance: projection.sourceProvenance,
         sourceAssetVersion: projection.candidate.interpretation.sourceAssetVersion,
         analysisSidecars: projection.analysisSidecars,
         paginationPlan: projection.paginationPlan,
@@ -257,6 +262,7 @@ export function createSinglePaperPromotionService({
           reviewRootDir,
           approvedIdentity: promotion,
           canonicalRequest: materialized.request,
+          externalListeningReviewProof,
           db,
           paperAssetsDir,
           onPrepared(target) {
