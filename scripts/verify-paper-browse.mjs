@@ -125,10 +125,11 @@
  *         confirms the detail page is genuinely out of this cut's scope,
  *         not just "happens to look unaffected").
  * 26-33. flow-panel 刀 2（点题联动 + 五解析面板搬家统一宽度）:
- *     26. PaperBrowsePage imports the five paper-intelligence解析面板
+ *     26. PaperBrowsePage imports the four objective解析面板 and the
+ *         continuation four-section panel
  *         (SevenChoicesAnalysisPanel / PaperAssetAnalysisPanel /
  *         ClozeAnalysisPanel / GrammarFillAnalysisPanel /
- *         WritingAnalysisPanel), the two analysis adapters
+ *         ContinuationAnalysisPanel), the two analysis adapters
  *         (buildClozeAnalysisSurfaceModel / buildGrammarFillAnalysisSurfaceModel),
  *         and `paperIntelligence.css` (随面板 import 生效, unmodified).
  *     27. `onFocusIntent`/`lectureFocus` on each group's PaperSurface mount
@@ -528,7 +529,7 @@ assert(
 // each ternary is still a static no-op/null, not a real handler/focus.
 assert(
   'PaperSurface lectureFocus falls back to a static null when the group is not the 讲评栏 target',
-  /lectureFocus=\{isPanelGroup\s*\?\s*lectureFocusForSelection\s*:\s*null\}/.test(pageSrc),
+  /lectureFocus=\{isPanelGroup\s*\?\s*(?:lectureFocusForSelection|surfaceLectureFocus)\s*:\s*null\}/.test(pageSrc),
   'lectureFocus does not have a static-null fallback branch — 挑题态/non-target groups may leak focus',
 )
 assert(
@@ -1136,15 +1137,15 @@ assert(
 // ─── 26-32. flow-panel 刀 2: 点题联动 + 五解析面板搬家 ───
 
 assert(
-  'PaperBrowsePage imports the five paper-intelligence解析面板',
+  'PaperBrowsePage imports four objective panels and the continuation four-section panel',
   [
     /import\s*\{\s*SevenChoicesAnalysisPanel\s*\}\s*from\s*['"]\.\.\/paper-intelligence\/SevenChoicesAnalysisPanel['"]/,
     /import\s*\{\s*PaperAssetAnalysisPanel\s*\}\s*from\s*['"]\.\.\/paper-intelligence\/PaperAssetAnalysisPanel['"]/,
     /import\s*\{\s*ClozeAnalysisPanel\s*\}\s*from\s*['"]\.\.\/paper-intelligence\/ClozeAnalysisPanel['"]/,
     /import\s*\{\s*GrammarFillAnalysisPanel\s*\}\s*from\s*['"]\.\.\/paper-intelligence\/GrammarFillAnalysisPanel['"]/,
-    /import\s*\{\s*WritingAnalysisPanel\s*\}\s*from\s*['"]\.\.\/paper-intelligence\/WritingAnalysisPanel['"]/,
+    /import\s*\{\s*ContinuationAnalysisPanel\s*\}\s*from\s*['"]\.\/ContinuationAnalysisPanel['"]/,
   ].every((re) => re.test(pageSrc)),
-  'missing one or more of the five analysis panel imports',
+  'missing an objective or continuation analysis panel import',
 )
 assert(
   'PaperBrowsePage imports the cloze/grammar-fill analysis adapters + paperIntelligence.css',
@@ -2055,7 +2056,7 @@ const expectedPaperBrowseTypeRoles = [
   ['.retained-writing-card-row dt', '12px'],
   ['.retained-writing-card-row dd', '14px'],
   ['.retained-writing-card-points li', '14px'],
-  ['.retained-writing-card-value', '14px'],
+  ['.continuation-analysis-model-answer p', '14px'],
   ['.similar-rcard-title', '14px'],
   ['.similar-chip', '12px'],
 ]

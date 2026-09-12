@@ -9,15 +9,17 @@ import { resolveCanonicalAuthority } from '../../shared/paper-canonical/authorit
 import { consumerContractRefs } from '../../shared/paper-canonical/consumers.mjs'
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { decorateProjectedMediaPresentation } from '../../shared/paper-canonical/mediaPresentation.mjs'
-import { digestJson, stableStringify } from '../../shared/paper-canonical/stable.mjs'
+import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import {
   assertCanonicalConsumptionVisibleStructure,
   assertCanonicalVisibleStructure,
 } from '../../shared/paper-canonical/visibleStructure.mjs'
 import {
   buildNck1AnalysisProjection,
+  NCK1_LISTENING_STAGED_ANALYSIS,
   NCK1_STAGED_ANALYSIS_FILES,
 } from './nck1AnalysisProjection.mjs'
+import { LEGACY_NCK1_ANALYSIS_PROFILE } from '../paper-import-ai/analyzeListening.mjs'
 import {
   NCK1_IMAGE_BUNDLE_MEDIA_TYPE,
   assertNck1ImageBundlePageArtifacts,
@@ -34,6 +36,14 @@ import {
   loadPaperPaginationPlan,
   paginationSlotBindings,
 } from '../paper-import/paginationPlan.mjs'
+import {
+  NCK1_ANALYZED_PACKAGE_INPUT_KIND,
+  NCK1_ANALYZED_PACKAGE_MEDIA_TYPE,
+  deriveNck1AnalyzedPackageBundle,
+} from '../paper-canonical/nck1AnalyzedPackageAdapter.mjs'
+
+export const NCK1_ANALYZED_PACKAGE_REVIEW_MANIFEST_SCHEMA_VERSION =
+  'nck1-analyzed-package-review-source-v1'
 
 function fail(message, code = 'IMPORT_REVIEW_CANDIDATE_INVALID') {
   const error = new Error(message)
@@ -92,12 +102,121 @@ function readJson(filePath, label) {
   }
 }
 
+function readSealedBytes(rootDir, descriptor, label) {
+  const filePath = resolveReviewFile(
+    rootDir,
+    normalizedRelativePath(descriptor.path, `${label} path`),
+  )
+  if (!existsSync(filePath)) fail(`${label} is missing`)
+  const bytes = new Uint8Array(readFileSync(filePath))
+  if (
+    descriptor.sha256 !== sha256(bytes)
+    || descriptor.byteLength !== bytes.byteLength
+  ) fail(`${label} does not match its sealed digest`, 'IMPORT_REVIEW_FILE_DIGEST_MISMATCH')
+  return bytes
+}
+
+export function buildNck1AnalyzedPackageReviewSourceManifest({
+  paperId,
+  manifestPath,
+  manifestBytes,
+  members,
+}) {
+  const manifest = {
+    schemaVersion: NCK1_ANALYZED_PACKAGE_REVIEW_MANIFEST_SCHEMA_VERSION,
+    sourceKind: NCK1_ANALYZED_PACKAGE_INPUT_KIND,
+    paperId,
+    packageManifest: {
+      path: normalizedRelativePath(manifestPath, 'package manifest path'),
+      mediaType: NCK1_ANALYZED_PACKAGE_MEDIA_TYPE,
+      sha256: sha256(manifestBytes),
+      byteLength: manifestBytes.byteLength,
+    },
+    members: members.map((member) => ({
+      memberId: member.memberId,
+      role: member.role,
+      mediaType: member.mediaType,
+      path: normalizedRelativePath(member.path, `member ${member.memberId} path`),
+      sha256: sha256(member.bytes),
+      byteLength: member.bytes.byteLength,
+    })),
+  }
+  if (!paperId || new Set(manifest.members.map(({ memberId }) => memberId)).size !== members.length) {
+    fail('Analyzed package Review source identity is incomplete')
+  }
+  return manifest
+}
+
+function loadNck1AnalyzedPackageReviewSource(rootDir, config, manifest) {
+  const paths = [
+    manifest.packageManifest?.path,
+    ...(Array.isArray(manifest.members) ? manifest.members.map((member) => member.path) : []),
+  ]
+  if (
+    manifest.sourceKind !== NCK1_ANALYZED_PACKAGE_INPUT_KIND
+    || manifest.paperId !== config.paperId
+    || !manifest.packageManifest
+    || manifest.packageManifest.mediaType !== NCK1_ANALYZED_PACKAGE_MEDIA_TYPE
+    || !Array.isArray(manifest.members)
+    || manifest.members.length === 0
+    || new Set(manifest.members.map(({ memberId }) => memberId)).size !== manifest.members.length
+    || new Set(paths).size !== paths.length
+    || paths.includes('universal-source-manifest.json')
+    || paths.includes('config.json')
+  ) fail('Analyzed package Review source manifest is incomplete')
+  const manifestBytes = readSealedBytes(
+    rootDir,
+    manifest.packageManifest,
+    'Analyzed package manifest',
+  )
+  const members = manifest.members.map((member) => ({
+    memberId: member.memberId,
+    role: member.role,
+    mediaType: member.mediaType,
+    bytes: readSealedBytes(rootDir, member, `Analyzed package member ${member.memberId}`),
+  }))
+  const sourceInput = {
+    kind: NCK1_ANALYZED_PACKAGE_INPUT_KIND,
+    manifestBytes,
+    members,
+  }
+  const derived = deriveNck1AnalyzedPackageBundle(sourceInput)
+  if (derived.issues.length > 0 || !derived.materialization) {
+    const issue = derived.issues[0]
+    fail(`${issue?.code || 'ANALYZED_PACKAGE_INVALID'}: ${issue?.message || 'Package derivation failed'}`)
+  }
+  if (derived.manifest.paperId !== config.paperId) {
+    fail('Analyzed package and Review paper identities differ')
+  }
+  const audioMember = manifest.members.find((member) => member.role === 'audio') || null
+  return {
+    config,
+    manifest,
+    materialization: derived.materialization,
+    sourceInput,
+    listeningAudioEvidence: null,
+    listeningAudioBytes: audioMember
+      ? members.find((member) => member.memberId === audioMember.memberId).bytes
+      : null,
+    analyzedPackage: derived,
+    sourceProvenance: {
+      kind: 'external_analyzed_package',
+      reviewState: 'owner_review_required',
+      manifest: structuredClone(manifest.packageManifest),
+      members: manifest.members.map((member) => ({ ...structuredClone(member) })),
+    },
+  }
+}
+
 export function loadNck1ReviewSource(rootDir) {
   const config = readJson(resolveReviewFile(rootDir, 'config.json'), 'config.json')
   const manifest = readJson(
     resolveReviewFile(rootDir, 'universal-source-manifest.json'),
     'universal-source-manifest.json',
   )
+  if (manifest.schemaVersion === NCK1_ANALYZED_PACKAGE_REVIEW_MANIFEST_SCHEMA_VERSION) {
+    return loadNck1AnalyzedPackageReviewSource(rootDir, config, manifest)
+  }
   if (
     ![
       'universal-nck1-source-manifest-v1',
@@ -199,7 +318,27 @@ export function loadNck1ReviewSource(rootDir) {
       }
     }),
   }
-  return { config, manifest, materialization, sourceInput, listeningAudioEvidence }
+  return {
+    config,
+    manifest,
+    materialization,
+    sourceInput,
+    listeningAudioEvidence,
+    listeningAudioBytes: null,
+    analyzedPackage: null,
+    sourceProvenance: {
+      kind: 'captured_original_documents',
+      reviewState: 'source_evidence_verified',
+      documents: manifest.documents.map((document) => ({
+        documentId: document.documentId,
+        role: document.role,
+        mediaType: document.mediaType,
+        path: document.path,
+        sha256: document.sha256,
+        byteLength: document.byteLength,
+      })),
+    },
+  }
 }
 
 function projectedSourceRegion(manifest, materialization, {
@@ -246,7 +385,7 @@ function projectedSourceRegion(manifest, materialization, {
   }
 }
 
-function sourceVisualProjection(manifest, materialization) {
+function rawSourceVisualProjection(manifest, materialization) {
   const coverage = materialization.sourceCoverage
   const declaredVisuals = coverage.visuals.map((visual) => projectedSourceRegion(
     manifest,
@@ -280,7 +419,42 @@ function sourceVisualProjection(manifest, materialization) {
   ]
 }
 
-function primarySourceType(materialization) {
+function analyzedPackageSourceVisualProjection(loaded) {
+  const members = new Map(loaded.manifest.members.map((member) => [member.memberId, member]))
+  return loaded.materialization.groups.flatMap((group) => [
+    ...group.blocks.map((block) => ({ targetId: block.blockId, source: block.source })),
+    ...group.questions.map((question) => ({
+      targetId: question.questionId,
+      source: question.source,
+    })),
+  ]).filter(({ source }) => source?.kind === 'package_json_pointer')
+    .map(({ targetId, source }) => {
+      const member = members.get(source.documentId)
+      if (!member) fail(`Package source member is unavailable: ${source.documentId}`)
+      return {
+        visualId: `visual:${loaded.materialization.paperId}:package-locator:${targetId}`,
+        documentId: source.documentId,
+        path: normalizedRelativePath(member.path, `member ${member.memberId}`),
+        sourceDigest: member.sha256,
+        mediaType: member.mediaType,
+        page: null,
+        region: null,
+        disposition: 'semantic_text',
+        targetId,
+        state: 'external_package_pointer',
+        pointer: source.pointer,
+      }
+    })
+}
+
+function sourceVisualProjection(loaded) {
+  return loaded.analyzedPackage
+    ? analyzedPackageSourceVisualProjection(loaded)
+    : rawSourceVisualProjection(loaded.manifest, loaded.materialization)
+}
+
+function primarySourceType(materialization, analyzedPackage = false) {
+  if (analyzedPackage) return 'analyzed-package'
   const source = materialization.documents.find((document) =>
     ['question_source', 'question_and_answers'].includes(document.role))
   if (source?.mediaType === NCK1_IMAGE_BUNDLE_MEDIA_TYPE) return 'image'
@@ -288,81 +462,118 @@ function primarySourceType(materialization) {
 }
 
 export function reviewBundleFilePaths(rootDir) {
-  const { manifest, materialization } = loadNck1ReviewSource(rootDir)
+  const loaded = loadNck1ReviewSource(rootDir)
+  const { manifest, materialization } = loaded
   const paperAsset = buildNck1CompatibilityPaperAsset({
-    config: readJson(resolveReviewFile(rootDir, 'config.json'), 'config.json'),
+    config: loaded.config,
     materialization,
     sourceAssetVersion: 1,
-    primarySourceType: primarySourceType(materialization),
+    primarySourceType: primarySourceType(materialization, Boolean(loaded.analyzedPackage)),
+    sourceProvenance: loaded.analyzedPackage ? loaded.sourceProvenance : null,
   })
   buildNck1AnalysisProjection({
     rootDir,
     materialization,
     paperAsset,
     required: true,
+    requireTeachingContent: Boolean(loaded.analyzedPackage),
   })
-  return [
+  const sourceFiles = loaded.analyzedPackage
+    ? [
+        {
+          path: normalizedRelativePath(manifest.packageManifest.path, 'package manifest path'),
+          mediaType: manifest.packageManifest.mediaType,
+          role: 'analyzed_package_manifest',
+        },
+        ...manifest.members.map((member) => ({
+          path: normalizedRelativePath(member.path, `member ${member.memberId}`),
+          mediaType: member.mediaType,
+          role: `analyzed_package_${member.role}`,
+        })),
+      ]
+    : [
+        {
+          path: normalizedRelativePath(manifest.materializationPath, 'materializationPath'),
+          mediaType: 'application/json',
+          role: 'materialization',
+        },
+        ...manifest.documents.map((document) => ({
+          path: normalizedRelativePath(document.path, `document ${document.documentId}`),
+          mediaType: document.mediaType,
+          role: document.role,
+        })),
+        ...manifest.documents.flatMap((document) =>
+          (document.pages || []).map((page) => ({
+            path: normalizedRelativePath(
+              page.path,
+              `document ${document.documentId} page ${page.page}`,
+            ),
+            mediaType: page.mediaType,
+            role: `${document.role}_page`,
+          }))),
+        ...(manifest.attachments || []).map((attachment) => ({
+          path: normalizedRelativePath(
+            attachment.path,
+            `attachment ${attachment.attachmentId}`,
+          ),
+          mediaType: attachment.mediaType,
+          role: attachment.role,
+        })),
+        ...materialization.media.flatMap((media) => [{
+          path: path.posix.join(
+            normalizedRelativePath(manifest.mediaDirectory, 'mediaDirectory'),
+            reviewMediaFileName(media),
+          ),
+          mediaType: media.mimeType,
+          role: 'content_media',
+        }, ...(media.publication?.candidate
+          ? [{
+              path: path.posix.join(
+                normalizedRelativePath(manifest.mediaDirectory, 'mediaDirectory'),
+                reviewMediaCandidateFileName(media),
+              ),
+              mediaType: media.publication.candidate.mimeType,
+              role: 'content_media_candidate',
+            }]
+          : [])]),
+      ]
+  const files = [
     { path: 'config.json', mediaType: 'application/json', role: 'config' },
     {
       path: 'universal-source-manifest.json',
       mediaType: 'application/json',
       role: 'source_manifest',
     },
-    {
-      path: normalizedRelativePath(manifest.materializationPath, 'materializationPath'),
-      mediaType: 'application/json',
-      role: 'materialization',
-    },
-    ...manifest.documents.map((document) => ({
-      path: normalizedRelativePath(document.path, `document ${document.documentId}`),
-      mediaType: document.mediaType,
-      role: document.role,
-    })),
-    ...manifest.documents.flatMap((document) =>
-      (document.pages || []).map((page) => ({
-        path: normalizedRelativePath(
-          page.path,
-          `document ${document.documentId} page ${page.page}`,
-        ),
-        mediaType: page.mediaType,
-        role: `${document.role}_page`,
-      }))),
-    ...(manifest.attachments || []).map((attachment) => ({
-      path: normalizedRelativePath(
-        attachment.path,
-        `attachment ${attachment.attachmentId}`,
-      ),
-      mediaType: attachment.mediaType,
-      role: attachment.role,
-    })),
-    ...materialization.media.flatMap((media) => [{
-      path: path.posix.join(
-        normalizedRelativePath(manifest.mediaDirectory, 'mediaDirectory'),
-        reviewMediaFileName(media),
-      ),
-      mediaType: media.mimeType,
-      role: 'content_media',
-    }, ...(media.publication?.candidate
-      ? [{
-          path: path.posix.join(
-            normalizedRelativePath(manifest.mediaDirectory, 'mediaDirectory'),
-            reviewMediaCandidateFileName(media),
-          ),
-          mediaType: media.publication.candidate.mimeType,
-          role: 'content_media_candidate',
-        }]
-      : [])]),
+    ...sourceFiles,
     ...NCK1_STAGED_ANALYSIS_FILES.map(({ path: relativePath, role }) => ({
       path: relativePath,
       mediaType: 'application/json',
       role,
     })),
+    ...(existsSync(resolveReviewFile(rootDir, NCK1_LISTENING_STAGED_ANALYSIS.path))
+      ? [{
+          path: NCK1_LISTENING_STAGED_ANALYSIS.path,
+          mediaType: 'application/json',
+          role: NCK1_LISTENING_STAGED_ANALYSIS.role,
+        }]
+      : []),
     ...(existsSync(resolveReviewFile(rootDir, PAPER_PAGINATION_PLAN_FILE_NAME)) ? [{
       path: PAPER_PAGINATION_PLAN_FILE_NAME,
       mediaType: 'application/json',
       role: 'pagination_plan',
     }] : []),
   ]
+  const byPath = new Map()
+  for (const file of files) {
+    const existing = byPath.get(file.path)
+    if (existing && existing.mediaType !== file.mediaType) {
+      fail(`Review file has conflicting media types: ${file.path}`)
+    }
+    // Staged-analysis roles are the stable Review transport roles when an
+    // analyzed-package member directly references the same immutable file.
+    byPath.set(file.path, file.role.startsWith('analysis_') ? file : existing || file)
+  }
+  return [...byPath.values()]
 }
 
 export function loadNck1OcrReviewSource(rootDir) {
@@ -694,7 +905,7 @@ export function buildNck1ReviewConsumption(candidate, compilation) {
         'seven-choices',
         'cloze',
         'grammar-fill',
-        ...(['49', '50', '51', '52', '54'].includes(
+        ...(['49', '50', '51', '52', '54', '55'].includes(
           canonicalPaper.paperPlan.authorityRef.manifestVersion,
         )
           ? ['continuation-writing']
@@ -766,6 +977,7 @@ export function buildNck1CompatibilityPaperAsset({
   materialization,
   sourceAssetVersion,
   primarySourceType = 'pdf',
+  sourceProvenance = null,
 }) {
   const groupTypes = {
     reading: 'reading',
@@ -913,7 +1125,10 @@ export function buildNck1CompatibilityPaperAsset({
       assetVersion: sourceAssetVersion,
       status: 'draft',
     },
-    sources: { primarySourceType },
+    sources: {
+      primarySourceType,
+      ...(sourceProvenance ? { provenance: structuredClone(sourceProvenance) } : {}),
+    },
     layoutTree: { parts: [] },
     content: {
       blocks: [
@@ -933,7 +1148,13 @@ export function buildNck1CompatibilityPaperAsset({
   }
 }
 
-function listeningReviewProjection(materialization, listeningAudioEvidence) {
+function listeningReviewProjection(
+  materialization,
+  listeningAudioEvidence,
+  listeningAnalysis = null,
+  analyzedPackage = null,
+  sourceProvenance = null,
+) {
   if (materialization.listening.state !== 'captured') return null
   const answers = new Map(materialization.listening.answers.map((answer) => [
     answer.canonicalNumber,
@@ -951,18 +1172,32 @@ function listeningReviewProjection(materialization, listeningAudioEvidence) {
           text: segment.text,
           questionNumbers: [...segment.questionNumbers],
         })),
+      analysis: listeningAnalysis?.questions?.[`question:listening:${question.canonicalNumber}`] || null,
     })),
-    audio: {
-      durationSeconds: listeningAudioEvidence.asr.durationSeconds,
-      engine: structuredClone(listeningAudioEvidence.asr.engine),
-      playbackAudioSha256: listeningAudioEvidence.check.playbackAudioSha256,
-      asrSha256: listeningAudioEvidence.check.asrSha256,
-      comparison: structuredClone(listeningAudioEvidence.check.comparison),
-      contentSafety: {
-        verdict: listeningAudioEvidence.check.contentSafety.verdict,
-        reviewedAt: listeningAudioEvidence.check.contentSafety.reviewedAt,
-      },
-    },
+    audio: analyzedPackage
+      ? {
+          state: 'pending_external_playback_review',
+          durationSeconds: analyzedPackage.listeningAudio.durationSeconds,
+          playbackAudioSha256: analyzedPackage.listeningAudio.sha256,
+          mediaType: analyzedPackage.listeningAudio.mediaType,
+          path: sourceProvenance.members.find((member) => member.role === 'audio')?.path,
+          reviewRequired: true,
+          transcriptSegmentCount: materialization.listening.transcript.length,
+          questionCount: materialization.listening.questions.length,
+          answerCount: materialization.listening.answers.length,
+        }
+      : {
+          durationSeconds: listeningAudioEvidence.asr.durationSeconds,
+          engine: structuredClone(listeningAudioEvidence.asr.engine),
+          playbackAudioSha256: listeningAudioEvidence.check.playbackAudioSha256,
+          asrSha256: listeningAudioEvidence.check.asrSha256,
+          comparison: structuredClone(listeningAudioEvidence.check.comparison),
+          contentSafety: {
+            verdict: listeningAudioEvidence.check.contentSafety.verdict,
+            reviewedAt: listeningAudioEvidence.check.contentSafety.reviewedAt,
+          },
+        },
+    materials: listeningAnalysis?.materials || {},
   }
 }
 
@@ -995,21 +1230,27 @@ export function buildNck1CompatibilityPackage({
   config,
   manifest,
   materialization,
+  sourceProvenance = null,
   sourceAssetVersion = 1,
   analysisSidecars = {},
   paginationPlan = null,
   paginationBindingIdentity = null,
 }) {
-  const sourceDocument = materialization.documents.find((document) =>
-    ['question_source', 'question_and_answers'].includes(document.role))
-  const manifestDocument = manifest.documents.find((document) =>
-    document.documentId === sourceDocument?.documentId)
+  const externalPackage = sourceProvenance?.kind === 'external_analyzed_package'
+  const sourceDocument = externalPackage
+    ? manifest.members.find((member) => member.role === 'content')
+    : materialization.documents.find((document) =>
+      ['question_source', 'question_and_answers'].includes(document.role))
+  const manifestDocument = externalPackage
+    ? sourceDocument
+    : manifest.documents.find((document) =>
+      document.documentId === sourceDocument?.documentId)
   if (!sourceDocument || !manifestDocument) {
-    fail('Universal NCK1 compatibility metadata requires one question source')
+    fail('NCK1 compatibility metadata requires one authoritative content source')
   }
   const sourceFileSha256 = String(sourceDocument.sha256 || '').replace(/^sha256:/, '')
   if (!/^[a-f0-9]{64}$/.test(sourceFileSha256)) {
-    fail('Universal NCK1 question source digest is invalid')
+    fail('NCK1 authoritative content source digest is invalid')
   }
   const sourceType = configuredSourceType(config, materialization.paperId)
   const year = configuredYear(config, materialization.paperId)
@@ -1020,7 +1261,8 @@ export function buildNck1CompatibilityPackage({
     config,
     materialization,
     sourceAssetVersion,
-    primarySourceType: primarySourceType(materialization),
+    primarySourceType: primarySourceType(materialization, externalPackage),
+    sourceProvenance: externalPackage ? sourceProvenance : null,
   })
   const answerKey = {
     schemaVersion: 'answer-key-v1',
@@ -1028,6 +1270,30 @@ export function buildNck1CompatibilityPackage({
     sourceAssetVersion,
     answers: structuredClone(paperAsset.answerKey.answers),
   }
+  const analysisByFamily = {
+    reading: analysisSidecars['reading-choice-analysis-v1.json'],
+    'seven-choices': analysisSidecars['seven-choices-analysis-v1.json'],
+    cloze: analysisSidecars['cloze-analysis-v1.json'],
+    'grammar-fill': analysisSidecars['grammar-fill-analysis-v1.json'],
+  }
+  const familyLabel = {
+    reading: '阅读理解',
+    'seven-choices': '七选五',
+    cloze: '完形填空',
+    'grammar-fill': '语法填空',
+  }
+  const importMetaGroups = Object.fromEntries(materialization.groups
+    .filter(({ family }) => analysisByFamily[family])
+    .map((group) => [group.groupId, {
+      groupId: group.groupId,
+      difficulty: '中',
+      summary: analysisByFamily[group.family]?.groups?.[group.groupId]?.overview
+        || paperAsset.content.groups[group.groupId]?.title
+        || familyLabel[group.family],
+      tags: [familyLabel[group.family]],
+      displayTitleOverride: paperAsset.content.groups[group.groupId]?.title
+        || familyLabel[group.family],
+    }]))
   return {
     paperAsset,
     answerKey,
@@ -1036,11 +1302,13 @@ export function buildNck1CompatibilityPackage({
     clozeAnalysis: analysisSidecars['cloze-analysis-v1.json'] || null,
     grammarFillAnalysis: analysisSidecars['grammar-fill-analysis-v1.json'] || null,
     writingAnalysis: analysisSidecars['writing-analysis-v1.json'] || null,
+    listeningAnalysis: analysisSidecars['listening-analysis-v1.json'] || null,
     importMeta: {
       schemaVersion: 'import-meta-v1',
       paperId: materialization.paperId,
       sourceFileName: path.basename(manifestDocument.path),
       sourceFileSha256,
+      ...(externalPackage ? { sourceProvenance: structuredClone(sourceProvenance) } : {}),
       paper: {
         year,
         region: config.provenance?.region || config.provenance.source,
@@ -1050,6 +1318,7 @@ export function buildNck1CompatibilityPackage({
         sourceType,
         defaultTags,
       },
+      groups: importMetaGroups,
     },
     sourceAssetDigest: sourceFileSha256,
     paginationPlan: paginationPlan ? structuredClone(paginationPlan) : null,
@@ -1064,7 +1333,10 @@ export function buildNck1CompatibilityPackage({
   }
 }
 
-export function buildNck1ReviewProjection(rootDir, { requireAnalyses = false } = {}) {
+export function buildNck1ReviewProjection(rootDir, {
+  requireAnalyses = false,
+  analysisProfile = LEGACY_NCK1_ANALYSIS_PROFILE,
+} = {}) {
   const loaded = loadNck1ReviewSource(rootDir)
   const imported = importCanonicalCandidate(loaded.sourceInput)
   if (!imported.candidate || imported.issues.length > 0) {
@@ -1087,7 +1359,11 @@ export function buildNck1ReviewProjection(rootDir, { requireAnalyses = false } =
     config: loaded.config,
     materialization: loaded.materialization,
     sourceAssetVersion: preview.candidate.interpretation.sourceAssetVersion,
-    primarySourceType: primarySourceType(loaded.materialization),
+    primarySourceType: primarySourceType(
+      loaded.materialization,
+      Boolean(loaded.analyzedPackage),
+    ),
+    sourceProvenance: loaded.analyzedPackage ? loaded.sourceProvenance : null,
   })
   const analysisProjection = buildNck1AnalysisProjection({
     rootDir,
@@ -1095,11 +1371,10 @@ export function buildNck1ReviewProjection(rootDir, { requireAnalyses = false } =
     paperAsset,
     sourceAssetVersion: preview.candidate.interpretation.sourceAssetVersion,
     required: requireAnalyses,
+    analysisProfile,
+    requireTeachingContent: Boolean(loaded.analyzedPackage),
   })
-  const sourceVisuals = sourceVisualProjection(
-    loaded.manifest,
-    loaded.materialization,
-  )
+  const sourceVisuals = sourceVisualProjection(loaded)
   const slotBindings = paginationSlotBindings(consumption)
   const paginationPlan = loadPaperPaginationPlan(rootDir, {
     paperId: loaded.materialization.paperId,
@@ -1121,9 +1396,13 @@ export function buildNck1ReviewProjection(rootDir, { requireAnalyses = false } =
     mediaDerivations,
     paperAsset,
     sourceVisuals,
+    sourceProvenance: loaded.sourceProvenance,
     listeningReview: listeningReviewProjection(
       loaded.materialization,
       loaded.listeningAudioEvidence,
+      analysisProjection?.sidecars?.['listening-analysis-v1.json'],
+      loaded.analyzedPackage,
+      loaded.sourceProvenance,
     ),
     analysisSidecars: analysisProjection?.sidecars || {},
     analysisDigest: analysisProjection?.digest || null,

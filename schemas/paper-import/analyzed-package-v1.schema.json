@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "eqb-analyzed-package-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "paperId", "profileId", "paperName", "metadata", "sources", "files"],
+  "properties": {
+    "schemaVersion": { "const": "eqb-analyzed-package-v1" },
+    "paperId": { "$ref": "#/$defs/paperId" },
+    "profileId": { "const": "nck1" },
+    "paperName": { "type": "string", "minLength": 1, "maxLength": 300 },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["year", "region", "sourceType"],
+      "properties": {
+        "year": { "type": "integer", "minimum": 2000, "maximum": 2100 },
+        "region": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "sourceType": { "type": "string", "minLength": 1, "maxLength": 100 }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["sourceId", "role", "memberId", "description", "suppliedBy"],
+        "properties": {
+          "sourceId": { "$ref": "#/$defs/id" },
+          "role": { "enum": ["question_source", "official_answers"] },
+          "memberId": { "$ref": "#/$defs/id" },
+          "description": { "type": "string", "minLength": 1, "maxLength": 1000 },
+          "suppliedBy": { "type": "string", "minLength": 1, "maxLength": 300 }
+        }
+      }
+    },
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1023,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["memberId", "path", "role", "mediaType"],
+        "properties": {
+          "memberId": { "$ref": "#/$defs/id" },
+          "path": { "$ref": "#/$defs/path" },
+          "role": { "enum": ["content", "official_answers", "analysis", "media", "audio", "attachment"] },
+          "mediaType": {
+            "enum": [
+              "application/json", "application/pdf",
+              "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+              "image/png", "image/jpeg", "image/webp", "audio/mpeg"
+            ]
+          },
+          "analysisKey": {
+            "enum": ["reading-a", "reading-b", "reading-c", "reading-d", "seven", "cloze", "grammar", "application", "continuation", "listening-unit"]
+          }
+        },
+        "allOf": [
+          {
+            "if": { "properties": { "role": { "const": "analysis" } }, "required": ["role"] },
+            "then": { "required": ["analysisKey"] },
+            "else": { "not": { "required": ["analysisKey"] } }
+          }
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:[._:-][a-z0-9]+)*$", "maxLength": 160 },
+    "paperId": { "type": "string", "pattern": "^paper-[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "path": { "type": "string", "minLength": 1, "maxLength": 240, "pattern": "^(?!/)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*\\\\)[^\\u0000-\\u001f:]+$" }
+  }
+}

@@ -29,39 +29,10 @@
                 "pattern": "^[\\s\\S]*\\S[\\s\\S]*$"
               },
               "reviewCard": {
-                "type": "object",
-                "additionalProperties": false,
-                "required": [
-                  "form",
-                  "topic",
-                  "reader",
-                  "person",
-                  "tense",
-                  "type",
-                  "points",
-                  "readerWho",
-                  "readerCares",
-                  "readerWants",
-                  "value"
-                ],
-                "properties": {
-                  "form": { "$ref": "#/$defs/reviewCardText" },
-                  "topic": { "$ref": "#/$defs/reviewCardText" },
-                  "reader": { "$ref": "#/$defs/reviewCardText" },
-                  "person": { "$ref": "#/$defs/reviewCardText" },
-                  "tense": { "$ref": "#/$defs/reviewCardText" },
-                  "type": { "$ref": "#/$defs/reviewCardText" },
-                  "points": {
-                    "type": "array",
-                    "minItems": 2,
-                    "maxItems": 2,
-                    "items": { "$ref": "#/$defs/reviewCardText" }
-                  },
-                  "readerWho": { "$ref": "#/$defs/reviewCardText" },
-                  "readerCares": { "$ref": "#/$defs/reviewCardText" },
-                  "readerWants": { "$ref": "#/$defs/reviewCardText" },
-                  "value": { "$ref": "#/$defs/reviewCardText" }
-                }
+                "oneOf": [
+                  { "$ref": "#/$defs/applicationReviewCardV2" },
+                  { "$ref": "#/$defs/legacyApplicationReviewCard" }
+                ]
               },
               "highlightExpressions": {
                 "type": "array",
@@ -94,29 +65,50 @@
               "continuationAnalysis": {
                 "type": "object",
                 "additionalProperties": true,
-                "required": [
-                  "schemaVersion",
-                  "storyUnderstanding",
-                  "continuationContract",
-                  "narrativeDevelopment",
-                  "languageAlignment",
-                  "paragraphBlueprint"
-                ],
+                "required": ["schemaVersion", "storyUnderstanding", "continuationContract"],
                 "properties": {
-                  "schemaVersion": { "const": "continuation-analysis-v1" }
-                }
+                  "schemaVersion": { "enum": ["continuation-analysis-v1", "continuation-analysis-v2"] }
+                },
+                "oneOf": [
+                  {
+                    "properties": { "schemaVersion": { "const": "continuation-analysis-v1" } },
+                    "required": ["narrativeDevelopment", "languageAlignment", "paragraphBlueprint"]
+                  },
+                  {
+                    "properties": { "schemaVersion": { "const": "continuation-analysis-v2" } },
+                    "required": ["developmentPlan"]
+                  }
+                ]
               }
             },
             "oneOf": [
               {
                 "properties": { "taskType": { "const": "application" } },
                 "required": ["taskType"],
-                "not": {
-                  "anyOf": [
-                    { "required": ["continuationDesign"] },
-                    { "required": ["continuationAnalysis"] }
-                  ]
-                }
+                "allOf": [
+                  {
+                    "not": {
+                      "anyOf": [
+                        { "required": ["continuationDesign"] },
+                        { "required": ["continuationAnalysis"] }
+                      ]
+                    }
+                  },
+                  {
+                    "if": {
+                      "properties": {
+                        "reviewCard": {
+                          "properties": {
+                            "schemaVersion": { "const": "application-review-card-v2" }
+                          },
+                          "required": ["schemaVersion"]
+                        }
+                      },
+                      "required": ["reviewCard"]
+                    },
+                    "then": { "not": { "required": ["highlightExpressions"] } }
+                  }
+                ]
               },
               {
                 "properties": { "taskType": { "const": "continuation" } },
@@ -146,6 +138,75 @@
     }
   },
   "$defs": {
+    "applicationReviewCardV2": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "form",
+        "topic",
+        "purpose",
+        "person",
+        "tense",
+        "points",
+        "reader",
+        "relationship",
+        "readerNeeds",
+        "value"
+      ],
+      "properties": {
+        "schemaVersion": { "const": "application-review-card-v2" },
+        "form": { "$ref": "#/$defs/reviewCardText" },
+        "topic": { "$ref": "#/$defs/reviewCardText" },
+        "purpose": { "$ref": "#/$defs/reviewCardText" },
+        "person": { "$ref": "#/$defs/reviewCardText" },
+        "tense": { "$ref": "#/$defs/reviewCardText" },
+        "points": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/reviewCardText" }
+        },
+        "reader": { "$ref": "#/$defs/reviewCardText" },
+        "relationship": { "$ref": "#/$defs/reviewCardText" },
+        "readerNeeds": { "$ref": "#/$defs/reviewCardText" },
+        "value": { "$ref": "#/$defs/reviewCardText" }
+      }
+    },
+    "legacyApplicationReviewCard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "form",
+        "topic",
+        "reader",
+        "person",
+        "tense",
+        "type",
+        "points",
+        "readerWho",
+        "readerCares",
+        "readerWants",
+        "value"
+      ],
+      "properties": {
+        "form": { "$ref": "#/$defs/reviewCardText" },
+        "topic": { "$ref": "#/$defs/reviewCardText" },
+        "reader": { "$ref": "#/$defs/reviewCardText" },
+        "person": { "$ref": "#/$defs/reviewCardText" },
+        "tense": { "$ref": "#/$defs/reviewCardText" },
+        "type": { "$ref": "#/$defs/reviewCardText" },
+        "points": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": { "$ref": "#/$defs/reviewCardText" }
+        },
+        "readerWho": { "$ref": "#/$defs/reviewCardText" },
+        "readerCares": { "$ref": "#/$defs/reviewCardText" },
+        "readerWants": { "$ref": "#/$defs/reviewCardText" },
+        "value": { "$ref": "#/$defs/reviewCardText" }
+      }
+    },
     "reviewCardText": {
       "type": "string",
       "minLength": 1,

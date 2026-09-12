@@ -5,6 +5,8 @@ import { fileURLToPath } from 'node:url'
 import { callDeepSeekJson } from '../ai-providers/deepseek.mjs'
 import { callGptRelayJson } from '../ai-providers/gptRelay.mjs'
 import { extractFirstJsonObject } from './extractJson.mjs'
+import { assertAnalysisTextRanges } from '../../shared/analysis/analysisTextRanges.mjs'
+import { assertObjectiveTeachingContent } from '../../shared/analysis/objectiveTeachingContent.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const teachingAnalysisStylePath = path.resolve(
@@ -60,32 +62,29 @@ export function rewriteApiPrompt(raw) {
 
 export function assertFullTranslationZh(groupAnalysis, group, { requireBlankMarkers = false } = {}) {
   const translation = typeof groupAnalysis?.fullTranslationZh === 'string'
-    ? groupAnalysis.fullTranslationZh.trim()
+    ? groupAnalysis.fullTranslationZh
     : ''
-  if (!translation) {
+  if (!translation.trim()) {
     throw new Error('AI JSON groups.fullTranslationZh 不能为空。')
   }
-  if (!requireBlankMarkers) return
-  let previousMarkerIndex = -1
-  for (const question of group.questions || []) {
-    const blankNo = Number(question?.stem)
-    if (!Number.isInteger(blankNo)) {
-      throw new Error(`${question?.id || 'unknown'}: 无法确定全文译文中的空号。`)
-    }
-    const marker = `[${blankNo}]`
-    const occurrences = translation.split(marker).length - 1
-    if (occurrences !== 1) {
-      throw new Error(`AI JSON groups.fullTranslationZh 必须且只能包含一次 ${marker}。`)
-    }
-    const markerIndex = translation.indexOf(marker)
-    if (markerIndex <= previousMarkerIndex) {
-      throw new Error(`AI JSON groups.fullTranslationZh 中的 ${marker} 必须按题面空号顺序出现。`)
-    }
-    previousMarkerIndex = markerIndex
-  }
+  // Historical readback may still contain hand-written [36] markers. New
+  // production binds insertion identity through teachingContent annotations;
+  // never infer marker meaning from arbitrary translation prose.
+  void group
+  void requireBlankMarkers
 }
 
-function selectedSentenceAnswer(question, group) {
+export function assertSharedPassageIntroduction(groupAnalysis) {
+  const introduction = typeof groupAnalysis?.overview === 'string'
+    ? groupAnalysis.overview.trim()
+    : ''
+  if (!introduction) {
+    throw new Error('AI JSON groups.overview 不能为空。')
+  }
+  return introduction
+}
+
+export function selectedSentenceAnswer(question, group) {
   const answer = String(question?.answerKey || '').trim()
   if (!answer) return ''
   if (Array.isArray(question?.options)) {
@@ -98,11 +97,13 @@ function selectedSentenceAnswer(question, group) {
   return String(bankOption?.text || answer)
 }
 
-function answerCompletedSentence(sourceText, group) {
+export function answerCompletedSentence(sourceText, group, { onInsertion } = {}) {
   const questionsByNumber = new Map((group.questions || []).map((question) => [
     Number(question.stem),
     question,
   ]))
+  let previousEnd = 0
+  let completedLength = 0
   return sourceText.replace(/__\s*(\d{1,3})\s*__(\s*\(([^)]*)\))?/gu, (
     marker,
     rawNumber,
@@ -121,9 +122,14 @@ function answerCompletedSentence(sourceText, group) {
     const suffix = consumedHint ? '' : String(possibleHint || '')
     const previousCharacter = sourceText[offset - 1] || ''
     const nextCharacter = sourceText[offset + marker.length] || ''
-    if (/[\p{L}\p{N}]$/u.test(previousCharacter) && /^[\p{L}\p{N}]/u.test(answer)) answer = ` ${answer}`
-    if (/[\p{L}\p{N}]$/u.test(answer) && /^[\p{L}\p{N}]/u.test(nextCharacter)) answer = `${answer} `
-    return `${answer}${suffix}`
+    const prefix = /[\p{L}\p{N}]$/u.test(previousCharacter) && /^[\p{L}\p{N}]/u.test(answer) ? ' ' : ''
+    const postfix = /[\p{L}\p{N}]$/u.test(answer) && /^[\p{L}\p{N}]/u.test(nextCharacter) ? ' ' : ''
+    const start = completedLength + Array.from(sourceText.slice(previousEnd, offset)).length + prefix.length
+    onInsertion?.({ questionId: question.id, blankId: question.blankId, start,
+      end: start + Array.from(answer).length, quote: answer })
+    completedLength = start + Array.from(answer + postfix + suffix).length
+    previousEnd = offset + marker.length
+    return `${prefix}${answer}${postfix}${suffix}`
   })
 }
 
@@ -145,12 +151,16 @@ export function assertSelectedLongSentences(groupAnalysis, group, { required = f
       throw new Error(`AI JSON ${label} 必须是对象。`)
     }
     const paragraphId = String(sentence.paragraphId || '').trim()
+    const sentenceId = String(sentence.sentenceId || '').trim()
     const sourceText = String(sentence.sourceText || '').trim()
     const displayText = String(sentence.displayText || '').trim()
     const translationZh = String(sentence.translationZh || '').trim()
     const analysisZh = String(sentence.analysisZh || '').trim()
     const paragraphText = paragraphsById.get(paragraphId)
     if (!paragraphText) throw new Error(`AI JSON ${label}.paragraphId 不属于当前题组。`)
+    if (groupAnalysis.teachingContent && !sentenceId) {
+      throw new Error(`AI JSON ${label}.sentenceId 不能为空。`)
+    }
     if (!sourceText || !paragraphText.includes(sourceText)) {
       throw new Error(`AI JSON ${label}.sourceText 必须精确匹配所在原文段落。`)
     }
@@ -164,11 +174,19 @@ export function assertSelectedLongSentences(groupAnalysis, group, { required = f
     const relatedQuestionIds = sentence.relatedQuestionIds
     if (
       !Array.isArray(relatedQuestionIds)
-      || relatedQuestionIds.length < 1
       || new Set(relatedQuestionIds).size !== relatedQuestionIds.length
       || relatedQuestionIds.some((questionId) => !questionIds.has(questionId))
     ) {
       throw new Error(`AI JSON ${label}.relatedQuestionIds 必须引用当前题组内的不重复题目。`)
+    }
+
+    if (sentence.underlineRanges !== undefined) {
+      if (sentence.underlineTexts !== undefined) {
+        throw new Error(`AI JSON ${label}: underlineRanges 与旧 underlineTexts 不能混用。`)
+      }
+      // Range offsets bind the supplied display text, not a trimmed copy.
+      assertAnalysisTextRanges(sentence.displayText, sentence.underlineRanges, `${label}.underlineRanges`)
+      continue
     }
 
     const underlineTexts = sentence.underlineTexts
@@ -194,6 +212,23 @@ export function assertSelectedLongSentences(groupAnalysis, group, { required = f
       }
     }
   }
+}
+
+export function assertObjectiveTeachingAnnotations(groupAnalysis, group, {
+  sourceAssetVersion,
+  requireAnswerInsertions = false,
+} = {}) {
+  return assertObjectiveTeachingContent(groupAnalysis, group, {
+    sourceAssetVersion,
+    requireAnswerInsertions,
+    completeParagraph: (text) => answerCompletedSentence(text, group),
+    answerForQuestion: (question) => selectedSentenceAnswer(question, group),
+    insertionRangesForParagraph: (text) => {
+      const ranges = []
+      answerCompletedSentence(text, group, { onInsertion: (range) => ranges.push(range) })
+      return ranges
+    },
+  })
 }
 
 function normalizeProviderId(providerId) {

@@ -174,7 +174,7 @@ try {
   const origin = `http://127.0.0.1:${address.port}`
   const playwright = await import('../app/node_modules/playwright/index.js')
   browser = await playwright.default.chromium.launch({ headless: true, channel: 'chromium' })
-  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } })
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 }, deviceScaleFactor: 2 })
   await page.clock.install()
   await page.addInitScript(() => {
     Object.defineProperty(navigator, 'clipboard', {
@@ -214,6 +214,31 @@ try {
     '.mp3,audio/mpeg',
     'new-paper intake offers one optional MP3 input',
   )
+  await drawer.getByLabel('试卷名称').fill('解析包导入示例')
+  await drawer.getByRole('button', { name: '完整解析包', exact: true }).click()
+  assert.equal(await drawer.locator('input[type="file"]').count(), 1, 'package does not ask for a second original upload')
+  assert.equal(await drawer.locator('input[data-file-role="analyzed_package"]').getAttribute('accept'), '.zip,application/zip')
+  assert.equal(await drawer.getByLabel('试卷名称').inputValue(), '解析包导入示例', 'switch preserves metadata')
+  const packageScreenshots = process.env.SOURCE_INTAKE_QA_SCREENSHOT_DIR
+  if (packageScreenshots) {
+    mkdirSync(packageScreenshots, { recursive: true })
+    await page.screenshot({ path: path.join(packageScreenshots, 'analyzed-package-desktop.png'), fullPage: true })
+    await page.setViewportSize({ width: 390, height: 844 })
+    await drawer.locator('.drawer-body').evaluate((element) => { element.scrollTop = element.scrollHeight })
+    const uploadBounds = await drawer.locator('[data-upload-role="analyzed_package"]').boundingBox()
+    const footerBounds = await drawer.locator('.drawer-footer').boundingBox()
+    assert(uploadBounds && footerBounds && uploadBounds.y + uploadBounds.height <= footerBounds.y,
+      'mobile drawer scroll exposes the entire ZIP picker above the footer')
+    await page.screenshot({ path: path.join(packageScreenshots, 'analyzed-package-mobile.png'), fullPage: true })
+    await page.setViewportSize({ width: 1440, height: 1000 })
+  }
+  await drawer.locator('input[data-file-role="analyzed_package"]').setInputFiles({
+    name: 'wrong.pdf', mimeType: 'application/pdf', buffer: Buffer.from('%PDF'),
+  })
+  assert.match(await drawer.getByRole('alert').innerText(), /只接受 ZIP/)
+  await drawer.getByRole('button', { name: '原始题源', exact: true }).click()
+  assert.equal(await drawer.getByRole('alert').count(), 0, 'raw mode does not retain ZIP validation errors')
+  assert.equal(await drawer.locator('input[type="file"]').count(), 3, 'switch restores raw question, answer and audio inputs')
   await drawer.getByRole('button', { name: '为已有试卷补听力' }).click()
   assert.equal(await drawer.getByLabel('Paper ID').count(), 1)
   assert.equal(await drawer.getByLabel('试卷名称').count(), 0)

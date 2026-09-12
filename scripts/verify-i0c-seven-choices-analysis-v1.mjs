@@ -307,8 +307,6 @@ function validateAnalysis(analysisPath) {
     walkKeys(distractors, (key) => {
       assert(!/facet/i.test(key), `${questionId}: distractors do not contain facet fields`)
     })
-
-    assert(optionalString(item.teachingNote), `${questionId}: teachingNote exists`)
   }
 }
 

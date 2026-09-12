@@ -23,13 +23,16 @@ const sevenChoicesAnalysisFileName = 'seven-choices-analysis-v1.json'
 const clozeAnalysisFileName = 'cloze-analysis-v1.json'
 const grammarFillAnalysisFileName = 'grammar-fill-analysis-v1.json'
 const writingAnalysisFileName = 'writing-analysis-v1.json'
+const listeningAnalysisFileName = 'listening-analysis-v1.json'
 const analysisArtifacts = Object.freeze([
   ['readingAnalysis', readingChoiceAnalysisFileName],
   ['scAnalysis', sevenChoicesAnalysisFileName],
   ['clozeAnalysis', clozeAnalysisFileName],
   ['grammarFillAnalysis', grammarFillAnalysisFileName],
   ['writingAnalysis', writingAnalysisFileName],
+  ['listeningAnalysis', listeningAnalysisFileName],
 ])
+const requiredAnalysisArtifactCount = 5
 const latestSwapJournalFileName = '.latest-swap.json'
 
 export function resolvePaperAssetReadPaths(paperAssetsDir, paperId, version = null) {
@@ -285,10 +288,21 @@ function makeVersionedArtifacts(packageData, version) {
     ? JSON.parse(JSON.stringify(packageData.grammarFillAnalysis))
     : null
   if (grammarFillAnalysis) grammarFillAnalysis.sourceAssetVersion = version
+  for (const analysis of [readingAnalysis, scAnalysis, clozeAnalysis, grammarFillAnalysis]) {
+    for (const group of Object.values(analysis?.groups || {})) {
+      if (group.teachingContent?.schemaVersion === 'objective-teaching-content-v1') {
+        group.teachingContent.sourceAssetVersion = version
+      }
+    }
+  }
 
   const writingAnalysis = packageData.writingAnalysis
     ? JSON.parse(JSON.stringify(packageData.writingAnalysis))
     : null
+  const listeningAnalysis = packageData.listeningAnalysis
+    ? JSON.parse(JSON.stringify(packageData.listeningAnalysis))
+    : null
+  if (listeningAnalysis) listeningAnalysis.sourceAssetVersion = version
   const paginationPlan = packageData.paginationPlan
     ? JSON.parse(JSON.stringify(packageData.paginationPlan))
     : null
@@ -325,6 +339,7 @@ function makeVersionedArtifacts(packageData, version) {
     clozeAnalysis,
     grammarFillAnalysis,
     writingAnalysis,
+    listeningAnalysis,
     normalizedGroupsSidecar,
     paginationPlan,
   }
@@ -367,7 +382,7 @@ export function assertPaperImportPaginationPlan({ baseDir, packageData, version 
 export function assertPaperImportAnalysisSidecars({ baseDir, packageData, version }) {
   const expected = makeVersionedArtifacts(packageData, version)
   const expectedFiles = analysisArtifacts.filter(([key]) => expected[key])
-  if (expectedFiles.length !== analysisArtifacts.length) {
+  if (expectedFiles.filter(([key]) => key !== 'listeningAnalysis').length !== requiredAnalysisArtifactCount) {
     throw new Error('Complete NCK1 analysis publication requires all five sidecars')
   }
   const actual = {}
@@ -439,6 +454,9 @@ export function writePaperImportVersion({
     }
     if (artifacts.writingAnalysis) {
       writeJson(path.join(tempDir, 'analyses', writingAnalysisFileName), artifacts.writingAnalysis)
+    }
+    if (artifacts.listeningAnalysis) {
+      writeJson(path.join(tempDir, 'analyses', listeningAnalysisFileName), artifacts.listeningAnalysis)
     }
     if (forceFailureAt === 'sidecar-write') {
       throw new Error('Forced sidecar-write failure')
@@ -617,6 +635,14 @@ export function swapPaperImportLatest({
     writeFileSync(
       path.join(tempLatest, 'analyses', writingAnalysisFileName),
       readFileSync(writingAnalysisPath),
+    )
+  }
+  const listeningAnalysisPath = path.join(versionDir, 'analyses', listeningAnalysisFileName)
+  if (existsSync(listeningAnalysisPath)) {
+    mkdirSync(path.join(tempLatest, 'analyses'), { recursive: true })
+    writeFileSync(
+      path.join(tempLatest, 'analyses', listeningAnalysisFileName),
+      readFileSync(listeningAnalysisPath),
     )
   }
   writeFileSync(

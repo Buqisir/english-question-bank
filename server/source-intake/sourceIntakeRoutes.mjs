@@ -3,6 +3,7 @@ import { createReadStream, readFileSync } from 'node:fs'
 
 import { defineRoute } from '../router/index.mjs'
 import { receiveVerifiedUpload } from '../import-ops/receiveVerifiedUpload.mjs'
+import { readAnalyzedPackageArchive } from './analyzedPackageArchive.mjs'
 
 function safeEqual(left, right) {
   const leftBytes = Buffer.from(String(left || ''))
@@ -73,6 +74,9 @@ function mp3AudioStart(bytes) {
 }
 
 export function validateSourceIntakeUploadMagic(filePath, expected) {
+  if (expected.extension === '.zip') {
+    return readAnalyzedPackageArchive(filePath)
+  }
   const bytes = readFileSync(filePath)
   let valid = false
   if (expected.extension === '.pdf') {

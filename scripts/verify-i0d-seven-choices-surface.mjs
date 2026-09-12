@@ -73,7 +73,6 @@ for (const questionId of group.questionIds) {
   assert(locatedLeftClueCount > 0, `${questionId}: at least one left-side clue can be highlighted`)
   assert(Array.isArray(item.optionFit?.matchedClues) && item.optionFit.matchedClues.length > 0, `${questionId}: matchedClues available for detail panel`)
   assert(typeof item.optionFit?.fitSummary === 'string' && item.optionFit.fitSummary.trim().length > 0, `${questionId}: fitSummary available for open card`)
-  assert(typeof item.teachingNote === 'string' && item.teachingNote.trim().length > 0, `${questionId}: teachingNote available for details`)
 }
 
 assert(correctLabels.size === 5, 'five distinct correct options map to five blank chains')

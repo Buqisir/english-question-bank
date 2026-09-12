@@ -5,9 +5,10 @@
  * Import unit = whole paper. PaperSurface target = full English exam standard layout.
  */
 
-import type { ContinuationAnalysisV1 } from './continuationAnalysis.ts'
+import type { ContinuationAnalysis } from './continuationAnalysis.ts'
+import type { ApplicationReviewCard } from '../../../shared/writing/applicationReviewCard.mjs'
 
-export type { ContinuationAnalysisV1 } from './continuationAnalysis.ts'
+export type { ContinuationAnalysis, ContinuationAnalysisV1, ContinuationAnalysisV2 } from './continuationAnalysis.ts'
 export {
   isNarrativeContinuationAnalysis,
   isNarrativeContinuationWritingAnalysis,
@@ -39,8 +40,14 @@ export type PaperAssetPaper = {
 // ─── Sources ────────────────────────────────────────────────────────────────────
 
 export type PaperAssetSources = {
-  primarySourceType: 'docx' | 'pdf' | 'image'
+  primarySourceType: 'docx' | 'pdf' | 'image' | 'analyzed-package'
   docx?: PaperSourceDocx
+  provenance?: {
+    kind: 'external_analyzed_package'
+    reviewState: 'owner_review_required'
+    manifest: Record<string, unknown>
+    members: Array<Record<string, unknown>>
+  }
 }
 
 export type PaperSourceDocx = {
@@ -262,19 +269,7 @@ export type ApplicationWritingAnalysis = {
   highlightExpressions?: HighlightExpression[]
 }
 
-export type ReviewCard = {
-  form: string
-  topic: string
-  reader: string
-  person: string
-  tense: string
-  type: string
-  points: [string, string]
-  readerWho: string
-  readerCares: string
-  readerWants: string
-  value: string
-}
+export type ReviewCard = ApplicationReviewCard
 
 export type ContinuationWritingAnalysis =
   | ContinuationWritingAnalysisV1
@@ -284,7 +279,7 @@ export type ContinuationWritingAnalysisV1 = {
   taskType: 'continuation'
   modelAnswer: string
   officialModelAnswer?: string
-  continuationAnalysis: ContinuationAnalysisV1
+  continuationAnalysis: ContinuationAnalysis
 }
 
 export type ContinuationWritingAnalysisLegacy = {

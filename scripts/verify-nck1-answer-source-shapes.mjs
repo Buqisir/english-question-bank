@@ -69,7 +69,8 @@ function assertReady(produced, documents, forbiddenText, writingSamples = null) 
 
   const imported = importCanonicalCandidate(sourceInput(produced, documents))
   assert.deepEqual(imported.issues, [])
-  assert.equal(imported.candidate?.interpretation.assertions.length, 45)
+  assert.equal(imported.candidate?.interpretation.assertions.length,
+    produced.materialization.listening.state === 'captured' ? 65 : 45)
   const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
   assert(preview.compilation, JSON.stringify(preview.unresolvedIssues, null, 2))
   assert.equal(JSON.stringify(preview.compilation).includes(forbiddenText), false)
@@ -156,17 +157,101 @@ assertRejected(
   'NCK1_ANSWER_VALUE_BOUNDARY_AMBIGUOUS',
 )
 
-const listeningMaterialsDocx = makeSyntheticNck1DocxFixture({
-  listening: true,
-  listeningHeading: '答案及听力材料',
+for (const listeningHeading of ['答案及听力材料', '听力原文（录音稿）', '附：听力原文']) {
+  const fixture = makeSyntheticNck1DocxFixture({ listening: true, listeningHeading })
+  const result = produceNck1DocxMaterialization({
+    paperId: fixture.paperId, documents: fixture.sourceDocuments,
+  })
+  assertReady(result, fixture.sourceDocuments, 'DETAIL_TOKEN_MUST_NOT_LEAK', expectedWritingSamples)
+  assert.equal(result.materialization.listening.state, 'captured')
+  assert.equal(result.materialization.listening.transcript.length, 10)
+}
+
+const proseListeningHeading = makeSyntheticNck1DocxFixture({
+  listening: true, listeningHeading: '下面是听力原文的解释。',
 })
-const listeningMaterialsResult = produceNck1DocxMaterialization({
-  paperId: listeningMaterialsDocx.paperId,
-  documents: listeningMaterialsDocx.sourceDocuments,
+assertRejected(produceNck1DocxMaterialization({
+  paperId: proseListeningHeading.paperId, documents: proseListeningHeading.sourceDocuments,
+}), proseListeningHeading.sourceDocuments, 'NCK1_DOCX_LISTENING_TRANSCRIPT_AMBIGUOUS')
+
+// Different school/year titles must share a parser, not a paper registry.
+for (const title of ['示例市2028年英语试题答案', '某校秋季英语试卷参考答案：']) {
+  const fixture = makeSyntheticNck1DocxFixture({
+    combined: true,
+    listening: true,
+    listeningHeading: '英语听力录音稿',
+    transformXml: (xml) => xml
+      .replace('参考答案及解析', title)
+      .replaceAll('  B.', ' B.').replaceAll('  C.', ' C.').replaceAll('  D.', ' D.')
+      .replace('第一节：应用文（满分15分）', '第一节 One possible version:')
+      .replace('第二节：读后续写（满分25分）', '第二节 One possible version:'),
+  })
+  const result = produceNck1DocxMaterialization({ paperId: fixture.paperId, documents: fixture.sourceDocuments })
+  assertReady(result, fixture.sourceDocuments, 'DETAIL_TOKEN_MUST_NOT_LEAK', expectedWritingSamples)
+  assert.equal(result.materialization.listening.transcript.length, 10)
+  assert.deepEqual(answerValues(result), answerValues(detailedDocxResult))
+}
+
+const underlinedFixture = makeSyntheticNck1DocxFixture({
+  transformXml: (xml) => xml.replace(/(\d{2})\._____/gu,
+    '</w:t></w:r><w:r><w:rPr><w:u w:val="single"/></w:rPr><w:t xml:space="preserve">  $1  </w:t></w:r><w:r><w:t xml:space="preserve">'),
 })
-assert.equal(listeningMaterialsResult.disposition, 'ready_for_verification')
-assert.equal(listeningMaterialsResult.materialization.listening.state, 'captured')
-assert.equal(listeningMaterialsResult.materialization.listening.transcript.length, 10)
+const underlinedResult = produceNck1DocxMaterialization({
+  paperId: underlinedFixture.paperId, documents: underlinedFixture.sourceDocuments,
+})
+assertReady(underlinedResult, underlinedFixture.sourceDocuments, 'DETAIL_TOKEN_MUST_NOT_LEAK', expectedWritingSamples)
+const driftedUnderline = structuredClone(underlinedResult)
+const blankBlock = driftedUnderline.materialization.groups.find((group) => group.slotId === 'seven-choices').blocks[0]
+blankBlock.content.find((item) => item.kind === 'text').text += ' invented text'
+assert(importCanonicalCandidate(sourceInput(driftedUnderline, underlinedFixture.sourceDocuments)).issues
+  .some((issue) => issue.code === 'MATERIALIZATION_DOCX_PARAGRAPH_BOUNDARY_INVALID'))
+const plainNumbers = makeSyntheticNck1DocxFixture({
+  transformXml: (xml) => xml.replace(/(\d{2})\._____/gu, '  $1  '),
+})
+assertRejected(produceNck1DocxMaterialization({
+  paperId: plainNumbers.paperId, documents: plainNumbers.sourceDocuments,
+}), plainNumbers.sourceDocuments, 'NCK1_DOCX_BLANK_SEQUENCE_INCOMPLETE')
+
+const bareUnderlinedNumbers = makeSyntheticNck1DocxFixture({
+  transformXml: (xml) => xml.replace(/(\d{2})\._____/gu,
+    '</w:t></w:r><w:r><w:rPr><w:u w:val="single"/></w:rPr><w:t>$1</w:t></w:r><w:r><w:t xml:space="preserve">'),
+})
+const bareUnderlinedResult = produceNck1DocxMaterialization({
+  paperId: bareUnderlinedNumbers.paperId, documents: bareUnderlinedNumbers.sourceDocuments,
+})
+assertRejected(bareUnderlinedResult, bareUnderlinedNumbers.sourceDocuments,
+  'NCK1_DOCX_BLANK_SEQUENCE_INCOMPLETE')
+const inventedBlanks = structuredClone(underlinedResult)
+inventedBlanks.materialization.documents = bareUnderlinedResult.materialization.documents
+assert(importCanonicalCandidate(sourceInput(inventedBlanks, bareUnderlinedNumbers.sourceDocuments)).issues
+  .some((issue) => issue.code === 'MATERIALIZATION_DOCX_PARAGRAPH_BOUNDARY_INVALID'))
+
+const letterFixture = makeSyntheticNck1DocxFixture({
+  // Keep the current shared notice parser while recognizing letter givens.
+  chineseNoticeNumbering: true,
+  transformXml: (xml) => xml.replace(
+    '<w:p><w:r><w:t xml:space="preserve">Should We Join the Reading Club?</w:t></w:r></w:p>',
+    ['\tDear Alex,', '\tWelcome to our club.', '\tYours sincerely,', '\tSam']
+      .map((text) => `<w:p><w:r><w:t xml:space="preserve">${text}</w:t></w:r></w:p>`).join(''),
+  ),
+})
+const letterResult = produceNck1DocxMaterialization({ paperId: letterFixture.paperId, documents: letterFixture.sourceDocuments })
+assert.equal(letterResult.disposition, 'ready_for_verification')
+assert.deepEqual(letterResult.materialization.groups.find((group) => group.slotId === 'writing.application')
+  .writingTask.givenSkeleton.map((item) => item.role), ['salutation', 'opening', 'closing', 'signature'])
+assert.deepEqual(importCanonicalCandidate(sourceInput(letterResult, letterFixture.sourceDocuments)).issues, [])
+
+const boxFixture = makeSyntheticNck1DocxFixture({
+  transformXml: (xml) => xml.replace(
+    /(<w:p><w:r><w:t xml:space="preserve">Mia carried the notebook to the school office\.<\/w:t><\/w:r><\/w:p>)(<w:p><w:r><w:t xml:space="preserve">The next morning, a student came to thank her\.<\/w:t><\/w:r><\/w:p>)/u,
+    '<w:tbl><w:tblGrid><w:gridCol w:w="6000"/></w:tblGrid><w:tr><w:tc>$1$2</w:tc></w:tr></w:tbl>',
+  ),
+})
+const boxResult = produceNck1DocxMaterialization({ paperId: boxFixture.paperId, documents: boxFixture.sourceDocuments })
+assertReady(boxResult, boxFixture.sourceDocuments, 'DETAIL_TOKEN_MUST_NOT_LEAK', expectedWritingSamples)
+assert.deepEqual(boxResult.materialization.groups.at(-1).writingTask.starters,
+  detailedDocxResult.materialization.groups.at(-1).writingTask.starters)
+assert.equal(boxResult.materialization.groups.at(-1).blocks.some((block) => block.kind === 'table'), false)
 
 const pdfFixture = await makeSyntheticNck1PdfFixture({
   includeAnswerShapes: true,
