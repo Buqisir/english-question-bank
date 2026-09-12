@@ -256,6 +256,20 @@ export async function makeSyntheticNck1PdfFixture({
       paragraph('This text page also contains one synthetic raster image.')
         + `<img src="${tinyPngDataUrl}" alt="" width="32" height="24">`,
     ))
+    const examRow = (texts) => `<div class="exam-row">${texts.map((text) => `<span>${escaped(text)}</span>`).join('')}</div>`
+    const rowStyle = '.exam-row { display: flex; justify-content: space-between; margin-bottom: 20px; }'
+    const labelledRowsBytes = await renderPdf(browser, documentHtml([
+      examRow(['A. Alpha', 'B. Bravo', 'C. Charlie']),
+      examRow(['A. One', 'B. Two', 'C. Three', 'D. Four']),
+      examRow(['41.', 'A. Red', 'B. Blue', 'C. Green', 'D. Yellow']),
+      examRow(['1-5 ABCAB', '6-10 BCABC', '11-15 ABCAB', '16-20 BCABC']),
+      examRow(['56. to learn', '57. quickly', '58. on', '59. the', '60. path']),
+      paragraph('第 1 页 共 1 页'),
+      paragraph('第 1 页 共 1 页', 'page-number'),
+    ].join(''), rowStyle + '@page { margin: 0; } body { margin: 12px; } .page-number { position: absolute; top: 288mm; margin: 0; line-height: 1; }'))
+    const misorderedOptionsBytes = await renderPdf(browser, documentHtml(
+      examRow(['A. Alpha', 'C. Charlie', 'B. Bravo']), rowStyle,
+    ))
     const documents = [
       record('question-source-1', 'question_source', questionBytes, 'question-source-1.pdf'),
       record('official-answers-2', 'official_answers', answerBytes, 'official-answers-2.pdf'),
@@ -264,6 +278,7 @@ export async function makeSyntheticNck1PdfFixture({
       paperId: 'paper-synthetic-pdf-text',
       questionBytes,
       answerBytes,
+      labelledRows: { bytes: labelledRowsBytes, pageCount: pdfPageCount(labelledRowsBytes) },
       sourceDocuments: [
         { ...documents[0], bytes: questionBytes },
         { ...documents[1], bytes: answerBytes },
@@ -307,6 +322,7 @@ export async function makeSyntheticNck1PdfFixture({
         canonicalRequestPath: 'canonical-evidence/canonical-import-request.json',
       },
       negative: {
+        misorderedOptions: { bytes: misorderedOptionsBytes, pageCount: pdfPageCount(misorderedOptionsBytes) },
         imageOnly: {
           bytes: imageOnlyBytes,
           pageCount: pdfPageCount(imageOnlyBytes),
