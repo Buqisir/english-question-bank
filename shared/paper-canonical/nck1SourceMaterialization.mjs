@@ -431,7 +431,7 @@ function validateWritingTask(task, family, path, documents, issues) {
   validateLocator(task.source, `${path}.source`, documents, issues)
 }
 
-function normalizedWritingText(value) {
+export function normalizedWritingText(value) {
   return value
     .normalize('NFKC')
     .replace(/[\u00a0\u2000-\u200b\u202f\u205f\u3000]/gu, ' ')

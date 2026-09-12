@@ -56,6 +56,7 @@ const registry = {
   'scripts/verify-import-review-ocr-confirmation.mjs',
   'scripts/verify-import-environment-preflight.mjs',
   'scripts/verify-nck1-source-materialization.mjs',
+  'scripts/verify-nck1-writing-notice-numbering.mjs',
   'scripts/verify-nck1-pdf-crop-recipe-replay.mjs',
   'scripts/verify-paper-canonical-nck1-materialization-candidate.mjs',
   'scripts/verify-import-paper-routing.mjs',
