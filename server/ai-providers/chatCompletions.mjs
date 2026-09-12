@@ -1,17 +1,19 @@
 export function firstTextFromChatCompletion(payload) {
   const message = payload?.choices?.[0]?.message
-  const content = typeof message?.content === 'string' ? message.content : ''
+  const rawContent = message?.content
+  const content = typeof rawContent === 'string'
+    ? rawContent
+    : Array.isArray(rawContent)
+      ? rawContent
+          .map((part) => (typeof part === 'string' ? part : part?.text || ''))
+          .join('')
+          .trim()
+      : ''
   const reasoning = typeof message?.reasoning_content === 'string' ? message.reasoning_content : ''
   // Reasoning models (e.g. deepseek-v4-pro) may return the JSON in reasoning_content
   // and leave content empty. Prefer content, fall back to reasoning_content.
   const best = content || reasoning
   if (best) return best
-  if (Array.isArray(message?.content)) {
-    return message.content
-      .map((part) => (typeof part === 'string' ? part : part?.text || ''))
-      .join('')
-      .trim()
-  }
   return ''
 }
 
