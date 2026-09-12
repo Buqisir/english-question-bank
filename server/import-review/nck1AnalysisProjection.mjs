@@ -198,15 +198,15 @@ export function projectNck1StagedWritingAnalysis(raw) {
     fail('Staged writing analysis is missing or not an object')
   }
   if (raw.taskType === 'application') {
+    if (raw.highlightExpressions !== undefined) {
+      fail('New-paper application analysis must not include retired highlightExpressions')
+    }
     exactKeys(raw, [
       'taskType', 'modelAnswer', 'reviewCard',
       ...(raw.officialModelAnswer === undefined ? [] : ['officialModelAnswer']),
     ], 'application staged analysis')
     if (!isApplicationReviewCardV2(raw.reviewCard)) {
       fail('New-paper application analysis requires application-review-card-v2')
-    }
-    if (raw.highlightExpressions !== undefined) {
-      fail('New-paper application analysis must not include retired highlightExpressions')
     }
     return {
       taskType: 'application',
