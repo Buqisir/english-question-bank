@@ -20,27 +20,35 @@ const NOT_FOUND_MESSAGES = new Set(['Draft paper not found', 'Draft item not fou
 // "questionGroupId not found: <id>" thrown on the same export path by
 // resolveDraftExportItems (draftPaperStore.mjs). ENOENT is kept as a fallback for
 // unwrapped filesystem errors from the renderer toolchain (e.g. a polyfill file
-// that existed at resolve time but vanished before page.addScriptTag read it).
+// that existed at resolve time but vanished before page.addScriptTag read it),
+// matched by `error.code === 'ENOENT'` (Node's native fs error code) and NEVER by
+// substring — a substring test would also match that data error when the echoed
+// user-supplied `groupId` happens to contain the literal "ENOENT".
 const RENDERER_MISSING_CODE = 'RENDERER_MISSING'
 
 // Shared classifier for every draft route that can throw on the export/render path
 // (POST /:id/print-pdf, GET /:id/pagination, PATCH /:id, item mutations). Guarantees
 // one throw yields one status across the route family:
 //   404 — draft/item does not exist or is not owned by the caller (NOT_FOUND_MESSAGES)
-//   503 — the paged.js/Chromium renderer is unavailable (RENDERER_MISSING / ENOENT),
-//         enveloped as "精排 PDF 不可用: <message>"
+//   503 — the paged.js/Chromium renderer is unavailable (error.code RENDERER_MISSING or
+//         ENOENT), enveloped as "精排 PDF 不可用: <message>"
 //   400 — everything else, incl. per-item data errors ("questionGroupId not found:
 //         <id>") and validation errors ("请先添加题组", "groupId is required")
-// The print-pdf route previously had its own inline `message.includes('not found')`
-// 503 carve-out that over-matched "questionGroupId not found" (a data error) and
-// diverged from this helper's 400 on the sibling pagination route for the same throw.
+// Both 503 classifiers key off `error.code` (a typed property), never a message
+// substring — `questionGroupId not found: <id>` is a plain Error with no `code`
+// (thrown by addGroupToDraftPaper with a user-supplied `groupId` echoed verbatim),
+// so it falls through to 400 even when `<id>` happens to contain the substring
+// "ENOENT". The print-pdf route previously had its own inline
+// `message.includes('not found')` 503 carve-out that over-matched "questionGroupId
+// not found" (a data error) and diverged from this helper's 400 on the sibling
+// pagination route for the same throw.
 function sendDraftMutationError(response, context, error) {
   const message = routeError(error)
   if (NOT_FOUND_MESSAGES.has(message)) {
     context.sendJson(response, 404, { error: message })
     return
   }
-  if (error?.code === RENDERER_MISSING_CODE || message.includes('ENOENT')) {
+  if (error?.code === RENDERER_MISSING_CODE || error?.code === 'ENOENT') {
     context.sendJson(response, 503, { error: `精排 PDF 不可用: ${message}` })
     return
   }
