@@ -35,7 +35,7 @@ import type {
   PaperTextRange,
 } from '../../../../shared/papersurface/types'
 import type { PaperAssetV1 } from '../../domain/paperAsset.ts'
-import { FACET_FRAMEWORKS, type FrameworkBody } from './grammarFillFacetRegistry.ts'
+import { FACET_FRAMEWORKS } from './grammarFillFacetRegistry.ts'
 import {
   buildGrammarFillPaperView,
   type GrammarFillPaperViewModel,
@@ -46,6 +46,12 @@ import type {
   PaperSurfaceData,
   PassageStructure,
 } from './paperIntelligenceTypes.ts'
+import {
+  buildObjectiveTeachingView,
+  projectObjectiveTeachingSource,
+  type ObjectiveTeachingGroup,
+  type ObjectiveTeachingView,
+} from './objectiveTeachingContentAdapter.ts'
 
 // ─── Contract types (mirrors grammar-fill-analysis-v1.contract.md) ───────────
 
@@ -83,8 +89,6 @@ export type GrammarFillRole =
   | 'object-complement'
   | 'subject-complement'
 
-export type GrammarFillPath = 'fast' | 'slow'
-
 export type GrammarFillBlankAnalysis = {
   blankId: string
   blankNo: number
@@ -93,10 +97,8 @@ export type GrammarFillBlankAnalysis = {
   facetKey: string
   answer: string
   role: GrammarFillRole | null
-  path: GrammarFillPath | null
   reason: string
   evidence: GrammarFillEvidenceItem[]
-  teachingNote: string
   // D1 (grammar-facets-v2): present on finite-verb blanks (tense/voice/
   // agreementSensitive) or non-finite blanks (form) — not yet surfaced in
   // this panel's UI (MF-3 boundary: registry data table only), declared
@@ -107,7 +109,7 @@ export type GrammarFillBlankAnalysis = {
   form?: string | null
 }
 
-export type GrammarFillGroupAnalysis = {
+export type GrammarFillGroupAnalysis = ObjectiveTeachingGroup & {
   overview: string
 }
 
@@ -142,17 +144,15 @@ export type GrammarFillBlankAnalysisView = {
   hint: string | null
   facetKey: string
   labelZh: string
-  framework: FrameworkBody
   answer: string
   role: GrammarFillRole | null
-  path: GrammarFillPath | null
   reason: string
   evidenceRows: GrammarFillEvidenceRowView[]
-  teachingNote: string
 }
 
 export type GrammarFillGroupView = {
   overview: string
+  teachingContent: ObjectiveTeachingView | null
 }
 
 export type GrammarFillAnalysisSurfaceModel = {
@@ -177,13 +177,8 @@ const ROLE_LABELS: Record<GrammarFillRole, string> = {
   'subject-complement': '主补',
 }
 
-const PATH_LABELS: Record<GrammarFillPath, string> = {
-  fast: '快路',
-  slow: '慢路',
-}
-
 // Exported for use in panel rendering.
-export { ROLE_LABELS, PATH_LABELS }
+export { ROLE_LABELS }
 
 // cloze-panel-polish: 2-4 字教学用语，供折叠区证据类型 chip 显示。
 // 映射不到的 type 原样兜底显示（见 buildAnalysisViews 的 ?? 回退）。
@@ -282,16 +277,39 @@ export function buildGrammarFillAnalysisSurfaceModel(input: {
   const analysisByQuestionId = buildAnalysisViews(asset, analysis, questionIds)
 
   const groupAnalysis = analysis.groups[groupId] ?? null
+  const teachingSource = projectObjectiveTeachingSource(
+    groupAnalysis,
+    group.passage?.paragraphs ?? [],
+    textMap,
+    useSelectedSurface ? plainModel.surfaceData.semanticParagraphs : undefined,
+  )
   const groupView: GrammarFillGroupView | null = groupAnalysis
-    ? { overview: groupAnalysis.overview }
+    ? {
+        overview: groupAnalysis.overview,
+        teachingContent: buildObjectiveTeachingView(groupAnalysis, Object.fromEntries(
+          questionIds.map((questionId) => [
+            questionId,
+            String(asset.content.questions[questionId]?.questionNo ?? ''),
+          ]),
+        )),
+      }
     : null
 
   return {
     report: buildShellReport(asset, group, groupId),
     passageStructures: { [GRAMMAR_FILL_SECTION]: passageStructure },
     surfaceData: useSelectedSurface
-      ? { ...plainModel.surfaceData, evidence }
-      : { textMap, questions, evidence },
+      ? {
+          ...plainModel.surfaceData,
+          evidence: [...evidence, ...teachingSource.evidence],
+          annotations: teachingSource.annotations,
+        }
+      : {
+          textMap,
+          questions,
+          evidence: [...evidence, ...teachingSource.evidence],
+          annotations: teachingSource.annotations,
+        },
     analysisByQuestionId,
     groupView,
     defaultQuestionId: questionIds[0] ?? null,
@@ -431,13 +449,10 @@ function buildAnalysisViews(
       hint: blankAnalysis.hint,
       facetKey: blankAnalysis.facetKey,
       labelZh: facetEntry.labelZh,
-      framework: facetEntry.framework,
       answer: blankAnalysis.answer,
       role: blankAnalysis.role ?? null,
-      path: blankAnalysis.path ?? null,
       reason: blankAnalysis.reason,
       evidenceRows,
-      teachingNote: blankAnalysis.teachingNote,
     }
   }
 

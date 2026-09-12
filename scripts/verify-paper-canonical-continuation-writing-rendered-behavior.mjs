@@ -3948,8 +3948,10 @@ async function assertBrowserArtifacts() {
         )
         await response.click()
         if (analysisVariant.label === 'valid') {
-          await page.getByText('FORGED ANALYSIS THEME', { exact: true })
+          await page.getByText('FORGED ANALYSIS MODEL ANSWER', { exact: true })
             .waitFor()
+          assert.equal(await page.getByText('FORGED ANALYSIS THEME', { exact: true }).count(), 0)
+          assert.equal(await page.getByText('FORGED ANALYSIS EXPRESSION', { exact: true }).count(), 0)
         } else {
           await page.locator('.paper-browse-lecture-empty')
             .filter({ hasText: '解析未发布' })

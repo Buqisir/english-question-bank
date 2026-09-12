@@ -84,6 +84,7 @@ export function validateContinuationWritingContract({
   content,
   variant,
   sourceCapture,
+  authorityRef,
 }) {
   const issues = []
   if (questionIds.length !== 0 || blankIds.length !== 0) {
@@ -124,6 +125,18 @@ export function validateContinuationWritingContract({
       instruction?.authorityObservationRef,
     )
     const evidence = instructionObservations[0]?.value
+    const packageAuthority = authorityRef?.manifestVersion === '55'
+    const directPackageAgreement = (
+      packageAuthority
+      && instructionObservations[0]?.extraction?.adapterId
+        === 'nck1-analyzed-package'
+      && instructionObservations[0]?.extraction?.version === '1'
+      && evidence?.agreement === 'exact_package_member_value'
+      && evidence?.text === instruction?.text
+      && evidence?.instructionId === instruction?.instructionId
+      && evidence?.packageEvidence?.schemaVersion
+        === 'package-json-pointer-evidence-v1'
+    )
     if (
       !isRecordValue(instruction)
       || !exactKeys(instruction, [
@@ -138,9 +151,11 @@ export function validateContinuationWritingContract({
       || instruction.text.length === 0
       || instructionObservations.length !== 1
       || instructionObservations[0].kind !== 'profile_instruction_correction'
-      || evidence?.instruction?.instructionId !== instruction.instructionId
-      || evidence?.instruction?.placement !== instruction.placement
-      || evidence?.transformationRecord?.before !== instruction.text
+      || (!directPackageAgreement && (
+        evidence?.instruction?.instructionId !== instruction.instructionId
+        || evidence?.instruction?.placement !== instruction.placement
+        || evidence?.transformationRecord?.before !== instruction.text
+      ))
     ) {
       issues.push(issue(
         'CONTINUATION_SOURCE_INSTRUCTION_UNPROVEN',

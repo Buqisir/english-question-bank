@@ -86,7 +86,7 @@ check('projectStagedWritingAnalysis requires a complete application ReviewCard',
       modelAnswer: 'Hello',
       reviewCard: { form: '倡议书' },
     }),
-    /ReviewCard/,
+    /application-review-card-v2/,
   )
 })
 
@@ -108,7 +108,7 @@ if (existsSync(liveGroupsPath)) {
   })
 }
 if (existsSync(liveWritingPath)) {
-  check('published format ③ mock writing-analysis uses V3 + V1', () => {
+  check('published format ③ historical V1 continuation remains readable', () => {
     assertPublishedWritingAnalysisEnvelope(JSON.parse(readFileSync(liveWritingPath, 'utf8')), {
       paperId: 'paper-mock-gd-2026-m1',
       applicationGroupId: 'group-mock-gd-2026-m1-writing-application',

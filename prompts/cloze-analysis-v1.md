@@ -82,7 +82,7 @@ kept for schema compatibility; its content is no longer a bare dictionary gloss.
 
 Internal labels such as Collocation Fit, POS Signature, semantic field, action
 sequence, and affective consistency are for classification. Do not lead
-`reason`, `meaning`, `relation`, or `teachingNote` with those labels. First say
+`reason`, `meaning`, or `relation` with those labels. First say
 what the people, actions, comparison, or sentence actually show. A term may be
 added only after the concrete explanation, when it gives a reusable name.
 
@@ -103,10 +103,8 @@ added only after the concrete explanation, when it gives a reusable name.
   },
   "groups": {
     "group-...cloze": {
-      "overview": "中文：文章主旨 + 文体（记叙文 / 夹叙夹议）",
+      "overview": "50–80字软目标的中文内容简介；记叙文须包含有意义的事件发展或转折",
       "fullTranslationZh": "填入正答后的全文中文翻译，每空保留 [41]...[55] 标记",
-      "affectiveArc": "中文：用人物处境与关键变化概括情感主线或故事走向",
-      "similaritySummary": "中文一句：谁在什么处境中做了什么，事情怎样发展或发生转变",
       "selectedLongSentences": [
         {
           "paragraphId": "para-...",
@@ -115,7 +113,7 @@ added only after the concrete explanation, when it gives a reusable name.
           "relatedQuestionIds": ["q-...-044", "q-...-045"],
           "translationZh": "自然中文翻译",
           "analysisZh": "先找主干，再说明修饰和逻辑关系",
-          "underlineTexts": ["displayText 中 1—3 个唯一精确片段"]
+          "underlineRanges": [{"start": 0, "end": 1, "quote": "按"}]
         }
       ]
     }
@@ -143,8 +141,7 @@ added only after the concrete explanation, when it gives a reusable name.
           "targetText": "pulled down",
           "relation": "中文：the house 是被拆除的对象，因此这里表达 pull the house down。"
         }
-      ],
-      "teachingNote": "中文一句：可迁移的解题动作。"
+      ]
     }
   }
 }
@@ -168,7 +165,6 @@ Every `blanks[questionId]` MUST include:
   `optionLabel`, `optionText`, `meaning`; `meaning` must combine contextual
   meaning, temptation, and concrete mismatch rather than stop at translation
 - `evidence` — array with ≥1 item; MUST include ≥1 `collocation-partner` item
-- `teachingNote` — one Chinese sentence
 
 `signatureFacet` is OPTIONAL. Include it only when a POS Signature genuinely applies. When present, it MUST be one of the five leaf keys listed in the table above, and its POS prefix MUST match `pos`.
 
@@ -176,29 +172,47 @@ Every `blanks[questionId]` MUST include:
 
 `groups[groupId]` MUST include:
 
-- `overview` — required; Chinese: main topic + text type
+- `overview` — required; the one canonical introduction shared by teaching,
+  list/search and future similarity consumers. Aim for 50–80 Chinese characters
+  without padding. For a narrative, include meaningful event progression or a
+  turn rather than a static label; do not emit a separate `similaritySummary`.
 - `fullTranslationZh` — required for new NCK1 generation; translate the complete
-  answer-filled passage into natural Chinese in source order. Immediately before
-  each translated correct word or phrase, keep its exact ASCII blank marker
-  (`[41]` ... `[55]`, or the source paper's actual blank numbers), exactly once.
-  Preserve paragraph breaks; do not add analysis or vocabulary notes.
-- `affectiveArc` — required; 1–2 sentences; Chinese: emotional arc or story direction
-- `similaritySummary` — required for new generation; exactly one compact Chinese
-  sentence that says both what happens and how the situation develops or turns.
-  This is the stable text later embedded for whole-passage similarity. Do not
-  write a label such as “温暖的成长故事”, list the fifteen answers, or imitate
-  the model answer. The Embedding vector itself is generated and versioned by
-  the indexer, never by this analysis response.
-- `selectedLongSentences` — required; 1–2 sentences with real teaching value.
+  answer-filled passage into natural Chinese in source order. Preserve paragraph
+  breaks; do not hand-write blank-number markers. Precise insertion annotations
+  supply identity; do not add analysis or vocabulary notes.
+- `affectiveArc` — conditionally applicable; include 1–2 Chinese sentences only
+  when the passage truly contains a distinct emotional change. Omit it for
+  expository or event-based passages with no genuine affective arc. Do not
+  manufacture emotion to fill the field.
+- The Embedding vector itself is generated and versioned by the indexer, never
+  by this analysis response.
+- `selectedLongSentences` — required; 1–2 sentences with real teaching value,
+  each with a stable `sentenceId`.
   Prefer a difficult sentence that carries the story's key meaning or connects
   several blanks; do not select it merely for length. `paragraphId` and
   `sourceText` must locate the stored source exactly and retain its `__44__`-style
   markers. `displayText` must be the deterministic form completed with the
   authoritative option texts. `relatedQuestionIds` must belong to this group.
   `analysisZh` first restores the main trunk, then attaches modifiers and logical
-  relations instead of listing grammar labels. `underlineTexts` contains 1–3
-  unique, non-overlapping exact substrings of `displayText`; underline only the
-  decisive structure.
+  relations instead of listing grammar labels. `underlineRanges` locates the
+  decisive structure using Unicode code-point offsets in `displayText`, start
+  inclusive/end exclusive, with the exact `quote`. Do not trim or normalize
+  before counting. Usually 1–3 short ranges suffice; repeated phrases and overlaps
+  are valid when explicitly located. The example offsets only illustrate the
+  encoding; calculate them for your actual text. Do not also emit historical
+  `underlineTexts`.
+- `teachingContent` — required closed `objective-teaching-content-v1` annex with
+  `sourceTextId`, exact `sourceAssetVersion`, translation paragraphs that are
+  code-point slices of the one `fullTranslationZh` value and link existing source
+  paragraph IDs, authoritative `completedSourceTexts`, and annotations. Every
+  blank needs original-text `answer-evidence` plus one completed-text
+  `answer-insertion` bound to its exact `blankId`; every long sentence needs
+  `sentence-structure`. Ranges are `{textId,paragraphId,start,end,quote}` and may
+  overlap or share questions. Select repeated occurrences by explicit offsets;
+  never first-match, trim, normalize, or overwrite original exam blanks.
+  Locate the actual replacement for each blank, not another copy of its answer.
+  Text identities must be distinct. A non-key difficult sentence has empty
+  `relatedQuestionIds` and sentence-structure `questionIds`; do not invent links.
 
 ## Evidence Rules
 
