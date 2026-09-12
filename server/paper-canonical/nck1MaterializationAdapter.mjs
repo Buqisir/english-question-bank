@@ -308,7 +308,8 @@ export function paragraphMatchesOneDocxParagraph(block, sourceParagraphs) {
   const blockFidelity = strictParagraphFidelityText(block)
   return blockFidelity?.text.length > 0 && sourceParagraphs.some((paragraph) =>
     sourceParagraphFidelityText(
-      paragraph.text ?? paragraph,
+      (blockFidelity.blankCount > 0 ? paragraph.textWithNumberedBlanks : null)
+        ?? paragraph.text ?? paragraph,
       blockFidelity.blankCount,
     ) === blockFidelity.text)
 }
