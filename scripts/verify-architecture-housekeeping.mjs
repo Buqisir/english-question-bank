@@ -25,6 +25,7 @@ function assert(name, condition, details = '') {
 console.log('Architecture housekeeping verify')
 
 for (const relPath of [
+  'scripts/amp-orb-ci-delivery-recovery.mjs',
   'scripts/amp-orb-ci.mjs',
   'scripts/amp-orb-ci-sandbox.mjs',
   'scripts/verify-ci.mjs',
@@ -175,8 +176,11 @@ for (const [changedFile, expectedRisk, expectedPack] of [
   ['server/vocabulary/vocabularyRoutes.mjs', 'auth-persistence-migration', 'security'],
   ['.amp/plugins/github-ci-wakeup.js', 'auth-persistence-migration', 'security'],
   ['deploy/eqb-deploy-controller.mjs', 'auth-persistence-migration', 'security'],
+  ['scripts/amp-orb-ci-delivery-recovery.mjs', 'auth-persistence-migration', 'security'],
   ['scripts/amp-orb-ci.mjs', 'auth-persistence-migration', 'security'],
+  ['scripts/lib/ampOrbCIDeliveryRecovery.mjs', 'auth-persistence-migration', 'security'],
   ['scripts/verify-amp-orb-ci.mjs', 'auth-persistence-migration', 'security'],
+  ['scripts/verify-amp-orb-ci-delivery-recovery.mjs', 'auth-persistence-migration', 'security'],
   ['scripts/amp-orb-deploy.mjs', 'auth-persistence-migration', 'security'],
   ['scripts/lib/ampOrbDeploy.mjs', 'auth-persistence-migration', 'security'],
   ['scripts/lib/tencentTat.mjs', 'auth-persistence-migration', 'security'],

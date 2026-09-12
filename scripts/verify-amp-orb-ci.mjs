@@ -937,6 +937,7 @@ try {
   const followingRunInputs = []
   const delayedDrain = await drainAmpOrbCIQueue({
     stateDir: pluginState,
+    now: () => 0,
     async resolveJob(input) {
       if (input.deliveryId === delayedDelivery) throw new Error('synthetic merge ref unavailable')
       return { ...input, kind: 'run', testedSha }
@@ -947,7 +948,19 @@ try {
     },
   })
   assert.deepEqual(delayedDrain, [
-    { deliveryId: delayedDelivery, outcome: 'deferred' },
+    {
+      deliveryId: delayedDelivery,
+      outcome: 'blocked',
+      blocker: {
+        schemaVersion: 'amp-orb-ci-blocked-v1',
+        code: 'pull-request-resolution-unavailable',
+        disposition: 'retryable',
+        attempts: 1,
+        firstBlockedAt: '1970-01-01T00:00:00.000Z',
+        lastBlockedAt: '1970-01-01T00:00:00.000Z',
+        nextAttemptAt: '1970-01-01T00:01:00.000Z',
+      },
+    },
     { deliveryId: followingDelivery, outcome: 'reported' },
   ])
   assert.deepEqual(followingRunInputs, [validateAmpOrbCIInput({
@@ -959,7 +972,7 @@ try {
     true,
     'temporary merge-ref lookup failure stays durable for recovery',
   )
-  assert.equal(existsSync(followingQueuePath), false, 'one deferred PR cannot block later CI work')
+  assert.equal(existsSync(followingQueuePath), false, 'one blocked PR cannot block later CI work')
   rmSync(delayedQueuePath)
 
   await registeredWebhook.handler({
@@ -1598,7 +1611,20 @@ try {
   assert.deepEqual(await drainAmpOrbCIQueue({
     stateDir: queueState,
     async runJob() { throw new Error('synthetic drain interruption') },
-  }), [{ deliveryId, outcome: 'deferred' }])
+    now: () => 0,
+  }), [{
+    deliveryId,
+    outcome: 'blocked',
+    blocker: {
+      schemaVersion: 'amp-orb-ci-blocked-v1',
+      code: 'ci-job-unavailable',
+      disposition: 'retryable',
+      attempts: 1,
+      firstBlockedAt: '1970-01-01T00:00:00.000Z',
+      lastBlockedAt: '1970-01-01T00:00:00.000Z',
+      nextAttemptAt: '1970-01-01T00:01:00.000Z',
+    },
+  }])
   assert.equal(existsSync(queued.queuePath), true, 'failed drain retains its durable queue item')
   const recoveredQueue = await drainAmpOrbCIQueue({
     stateDir: queueState,
@@ -2248,11 +2274,12 @@ try {
     async execute() { return lowExecution },
   })
   const firstDrain = await drainAmpOrbCIQueue({ stateDir: deferredQueueState,
-    async resolveJob() { return lowInput }, runJob: queueRunner })
-  assert.equal(firstDrain[0].outcome, 'deferred')
+    async resolveJob() { return lowInput }, runJob: queueRunner, now: () => 0 })
+  assert.equal(firstDrain[0].outcome, 'blocked')
+  assert.equal(firstDrain[0].blocker.code, 'ci-job-unavailable')
   live = false
   await drainAmpOrbCIQueue({ stateDir: deferredQueueState,
-    async resolveJob() { return null }, runJob: queueRunner })
+    async resolveJob() { return null }, runJob: queueRunner, now: () => 60_001 })
   assert.deepEqual(queuePatches.map(({ checkRunId, conclusion }) => [checkRunId, conclusion]), [[2200, 'failure']],
     'stale unresolved queue retains resolved identity to finish its pre-crash Check')
 

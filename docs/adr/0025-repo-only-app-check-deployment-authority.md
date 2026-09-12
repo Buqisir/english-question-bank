@@ -118,6 +118,50 @@ POST; UNKNOWN creation reconciles, never blindly repeats POST. Queue records
 retain resolved identities so stale recovery can finish the original Check.
 The residual GET/PATCH race still requires strict protection without bypass.
 
+## Delivery loss recovery and durable blockers
+
+An HTTP response from the Amp webhook ingress is not a local queue receipt.
+Ingress HTTP 429 happens before the handler and GitHub does not automatically
+redeliver failed webhook deliveries. The trusted host may therefore run the
+separate `amp-orb-ci-delivery-recovery.mjs recover` reconciler, subject to a
+separate activation decision. It reads at most three pages from the repository's
+fixed webhook delivery history, considers only the controller's allowlisted
+events and identities from the last three days, and checks the durable local
+delivery marker before requesting any redelivery. It never directly creates a
+queue item, starts CI, updates a branch, or writes a Check.
+
+The reconciler has its own nonblocking lock and private per-delivery ledger. It
+writes intent before POST and treats HTTP 202 or transport loss as unknown until
+a distinct later GitHub attempt for the same GUID is observed after that exact
+intent. Missing or historical attempts cannot authorize another request.
+Redelivery is limited to two requests per GUID and two per invocation; definitive
+API failures add global backoff, and exhausted or ambiguous cases become
+`manual-required`. A late local enqueue remains possible between the final check
+and POST, so queue/run delivery-GUID idempotence remains the final duplicate-run
+barrier. Response bodies, headers, credentials, and webhook capability URLs are
+not persisted.
+
+This repository supplies no timer, scheduler, plugin wake path, credential, or
+permission change for the reconciler. Activation must use an Owner-approved
+trusted route with repository Webhooks read/write capability for the one fixed
+repository and hook. It may reuse an approved credential route that satisfies
+that boundary; this ADR does not require a new Secret or assume the existing CI
+App has webhook permission. The retired Sentinel, Discovery, and Action-wake
+paths remain retired. Reducing broad webhook traffic is a separate configuration
+decision and cannot replace recovery.
+
+Accepted handler deliveries write an identity-bound marker independently of the
+queue item's later removal. Queue resolution/runtime failures write controlled
+blocker codes, attempts, timestamps, retry disposition, and a private aggregate
+drain status instead of exposing raw errors or only returning exit 1. Transient
+failures back off and remain nonterminal. A merge-parent mismatch is
+`pull-request-update-required` only when a separately fetched live `main` and
+ancestry checks prove the signed base is behind while the merge ref still binds
+the signed head; otherwise it remains transient/unknown. The controller never
+updates the branch. A newer natural identity for the same PR may supersede the
+old blocker, while all existing head/base/tree/parent and Check safeguards stay
+unchanged.
+
 ### Bounded enable / rollback (not an assertion of live acceptance)
 
 This migration is high risk: use always-full validation, affected E2Es,

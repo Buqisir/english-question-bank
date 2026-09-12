@@ -119,6 +119,14 @@ at-least-once delivery cannot execute an already reported run again. Orb pause c
 kernel lock look stale, and process death releases it without an old owner being able to remove a
 successor's lock. A temporarily unresolved merge ref keeps its queue item for the next plugin load
 or delivery without blocking later queued work.
+Every accepted delivery also leaves a private identity-bound acceptance marker,
+so later delivery-history reconciliation does not mistake a completed and
+removed queue item for ingress loss. Resolution and runtime interruptions write
+durable controlled blocker codes with bounded retry timing and a private
+`drain-status.json`; raw upstream errors are not persisted. A merge-ref parent
+mismatch requests a branch update only after separately fetched live-main and
+ancestry evidence proves the signed base is behind. The controller itself never
+updates a PR branch.
 Before creating the isolated checkout bundle, the trusted controller completes a shallow Orb clone
 once; otherwise a merge commit can omit its second-parent objects and must fail before verification.
 
@@ -181,6 +189,32 @@ thread:
 There is no status-token or `QUESTION_BANK_AMP_CI_GITHUB_CHECKS_ENABLED`
 fallback. Do not create the App, provision these settings, or reload from
 repository code.
+
+### Optional webhook delivery recovery (not activated by this repository)
+
+`scripts/amp-orb-ci-delivery-recovery.mjs recover` is an independent trusted-host
+reconciler for GitHub deliveries rejected before the Amp handler, including
+ingress HTTP 429. It polls only the fixed repository/hook's recent delivery
+history, validates event, action, repository, head, and base identity before
+POST, and checks the local acceptance marker immediately before requesting a
+redelivery. Its separate lock and private ledger cap work at two requests per
+delivery GUID and two per invocation. HTTP 202 and transport loss remain unknown
+until a distinct later attempt for that GUID proves what happened; ambiguous,
+unowned, expired, or exhausted cases require manual review. It cannot enqueue,
+run CI, update branches, or write Checks.
+
+No scheduler, plugin registration, startup hook, or permission provisioning is
+included. Activating a periodic or manual invocation is a separate Owner-approved
+host operation. The invocation must supply the fixed numeric hook ID and a
+short-lived or otherwise approved token with repository Webhooks read/write
+permission through its private environment; it need not be a new credential,
+and the existing CI App is not assumed to have that permission. Never log the
+token, delivery response body/headers, or webhook capability URL. Do not route
+this through the retired Sentinel, Discovery, or Action-wake mechanisms. Verify
+the state machine locally with
+`node scripts/verify-amp-orb-ci-delivery-recovery.mjs`; that verifier uses fake
+APIs and does not redeliver a real event.
+
 The versioned Check `external_id` above binds its target; uncertain creation is reconciled only
 through one unique exact external ID, and crash recovery PATCHes the same private-receipt Check ID
 without rerunning Fast or Full. PR `v7-pr` run IDs isolate older receipts and bind PR/head/base/tree/policy;
