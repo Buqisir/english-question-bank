@@ -122,6 +122,58 @@ function makeEmbeddedImageDocx(tempRoot) {
   return readFileSync(docxPath)
 }
 
+function makeFurnitureOnlyShapeDocx(tempRoot) {
+  const packageDir = path.join(tempRoot, 'furniture-only-package')
+  mkdirSync(path.join(packageDir, '_rels'), { recursive: true })
+  mkdirSync(path.join(packageDir, 'word', '_rels'), { recursive: true })
+  writeFileSync(
+    path.join(packageDir, '[Content_Types].xml'),
+    `<?xml version="1.0" encoding="UTF-8"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+ <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
+ <Default Extension="xml" ContentType="application/xml"/>
+ <Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
+ <Override PartName="/word/header1.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.header+xml"/>
+</Types>`,
+  )
+  writeFileSync(
+    path.join(packageDir, '_rels', '.rels'),
+    `<?xml version="1.0" encoding="UTF-8"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+ <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>
+</Relationships>`,
+  )
+  writeFileSync(
+    path.join(packageDir, 'word', '_rels', 'document.xml.rels'),
+    `<?xml version="1.0" encoding="UTF-8"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+ <Relationship Id="rIdHeader1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/header" Target="header1.xml"/>
+</Relationships>`,
+  )
+  writeFileSync(
+    path.join(packageDir, 'word', 'document.xml'),
+    `<?xml version="1.0" encoding="UTF-8"?>
+<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+ xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+ <w:body>
+  <w:p><w:r><w:t>Furniture-only body</w:t></w:r></w:p>
+  <w:sectPr><w:headerReference w:type="default" r:id="rIdHeader1"/></w:sectPr>
+ </w:body>
+</w:document>`,
+  )
+  writeFileSync(
+    path.join(packageDir, 'word', 'header1.xml'),
+    `<?xml version="1.0" encoding="UTF-8"?>
+<w:hdr xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+ xmlns:v="urn:schemas-microsoft-com:vml">
+ <w:p><w:r><w:pict><v:rect id="header-furniture-rect" style="width:40pt;height:20pt"/></w:pict></w:r></w:p>
+</w:hdr>`,
+  )
+  const docxPath = path.join(tempRoot, 'furniture-only-source.docx')
+  execFileSync('zip', ['-X', '-q', '-r', docxPath, '.'], { cwd: packageDir })
+  return readFileSync(docxPath)
+}
+
 function makeRealShapeDocx(tempRoot) {
   const sofficePath = findSoffice()
   assert.ok(sofficePath, 'LibreOffice is required for the real DOCX shape input proof')
@@ -306,6 +358,117 @@ try {
     existsSync(path.join(orphanAssetsDir, paperId, 'latest', 'figures', 'manifest.json')),
     false,
     'no figures/manifest.json must be written when the shape association cannot bind',
+  )
+
+  // Regression: a non-array truthy sources.docx.shapeAssociations (e.g. a bare
+  // object used instead of [{ ... }]) must be rejected explicitly by
+  // captureDocxSourceMedia in every "no bindable body shape" scenario, instead
+  // of being silently dropped and later crashing canonical admission with an
+  // opaque "associations.filter is not a function" TypeError. The throw added
+  // by 441e9a7f gated on Array.isArray and let bare objects slip through.
+
+  // Scenario A: zero enumerable shapes + bare-object shapeAssociations.
+  const bareObjectAssociation = {
+    sourcePart: 'word/document.xml',
+    sourceShapeId: 'legacy-image-shape',
+    sourcePage: 1,
+    sourcePageOrder: 1,
+    figureId: bodyFigureId,
+    groupId,
+    kind: 'figure',
+    placeholderMarker: bodyMarker,
+    caption: 'Mistyped bare-object association not wrapped in an array',
+  }
+  assert.throws(
+    () => captureDocxSourceMedia({
+      fileName: vmlAssociationFixture.sourceFileName,
+      buffer: imageDocx,
+      paperAsset: { sources: { docx: { shapeAssociations: bareObjectAssociation } } },
+    }),
+    /paper-asset\.json sources\.docx\.shapeAssociations must be an array/,
+    'captureDocxSourceMedia must reject a non-array truthy shapeAssociations when the DOCX yields zero enumerable shapes',
+  )
+  const bareObjectFixture = makeFixtureFiles(imageDocx)
+  replaceJson(bareObjectFixture.files, 'paper-asset.json', (value) => {
+    value.sources.docx.shapeAssociations = bareObjectAssociation
+  })
+  const bareObjectDb = openPaperImportDb(path.join(tempRoot, 'vml-bare-object.sqlite'))
+  const bareObjectAssetsDir = path.join(tempRoot, 'vml-bare-object-assets')
+  const bareObjectPublished = publishPaperImportPackage({
+    files: bareObjectFixture.files,
+    db: bareObjectDb,
+    paperAssetsDir: bareObjectAssetsDir,
+  })
+  bareObjectDb.close()
+  assert.equal(bareObjectPublished.ok, false, 'publisher must reject a non-array shapeAssociations instead of silently dropping it')
+  assert.ok(
+    bareObjectPublished.validation.blockingIssues.some(
+      (issue) => issue.code === 'docx.sourceMediaCaptureFailed',
+    ),
+    'publisher must surface a blocking docx.sourceMediaCaptureFailed issue for a non-array shapeAssociations',
+  )
+  assert.equal(
+    existsSync(path.join(bareObjectAssetsDir, paperId, 'latest', 'figures', 'manifest.json')),
+    false,
+    'no figures/manifest.json must be written when shapeAssociations is a non-array value',
+  )
+
+  // Preserved behavior: an empty array still means "no associations declared"
+  // and must NOT throw when there are zero enumerable shapes.
+  const emptyArrayResult = captureDocxSourceMedia({
+    fileName: vmlAssociationFixture.sourceFileName,
+    buffer: imageDocx,
+    paperAsset: { sources: { docx: { shapeAssociations: [] } } },
+  })
+  assert.equal(emptyArrayResult.shapeCapture, null)
+  assert.deepEqual(
+    emptyArrayResult.embeddedImages.map((image) => image.fileName),
+    ['image1.png'],
+  )
+
+  // Scenario B: furniture-only shapes (a real shape in word/header1.xml, none
+  // in word/document.xml). The furniture-only skip path must not treat a
+  // non-array truthy shapeAssociations as "no associations declared".
+  const furnitureDocx = makeFurnitureOnlyShapeDocx(tempRoot)
+  const furnitureFixture = makeFixtureFiles(furnitureDocx)
+  const furnitureNoAssocResult = captureDocxSourceMedia({
+    fileName: furnitureFixture.sourceFileName,
+    buffer: furnitureDocx,
+    paperAsset: { sources: { docx: {} } },
+  })
+  assert.equal(furnitureNoAssocResult.shapeCapture, null)
+  assert.deepEqual(furnitureNoAssocResult.embeddedImages, [])
+  assert.throws(
+    () => captureDocxSourceMedia({
+      fileName: furnitureFixture.sourceFileName,
+      buffer: furnitureDocx,
+      paperAsset: { sources: { docx: { shapeAssociations: bareObjectAssociation } } },
+    }),
+    /Every DOCX shape requires one explicit source\/body association/,
+    'captureDocxSourceMedia must reject a non-array truthy shapeAssociations when the DOCX yields only furniture shapes',
+  )
+  replaceJson(furnitureFixture.files, 'paper-asset.json', (value) => {
+    value.sources.docx.shapeAssociations = bareObjectAssociation
+  })
+  const furnitureDb = openPaperImportDb(path.join(tempRoot, 'furniture-bare-object.sqlite'))
+  const furnitureAssetsDir = path.join(tempRoot, 'furniture-bare-object-assets')
+  const furniturePublished = publishPaperImportPackage({
+    files: furnitureFixture.files,
+    db: furnitureDb,
+    paperAssetsDir: furnitureAssetsDir,
+  })
+  furnitureDb.close()
+  assert.equal(furniturePublished.ok, false, 'publisher must reject a non-array shapeAssociations for a furniture-only DOCX')
+  assert.ok(
+    furniturePublished.validation.blockingIssues.some(
+      (issue) => issue.code === 'docx.sourceMediaCaptureFailed',
+    ),
+    'publisher must surface a blocking docx.sourceMediaCaptureFailed issue for a furniture-only DOCX with non-array shapeAssociations',
+  )
+  assert.equal(
+    existsSync(path.join(furnitureAssetsDir, paperId, 'latest', 'figures', 'manifest.json')),
+    false,
+    'no figures/manifest.json must be written for a furniture-only DOCX with non-array shapeAssociations',
   )
 
   const realShapeDocx = makeRealShapeDocx(tempRoot)

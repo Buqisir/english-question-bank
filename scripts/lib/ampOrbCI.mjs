@@ -19,6 +19,10 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
+import {
+  ampOrbCIPullRequestEligibility,
+  assertAmpOrbCIPullRequestEligibility,
+} from './ampOrbCICoordination.mjs'
 import { runVerificationCommand } from './verificationCommandRunner.mjs'
 import { AMP_ORB_CI_PR_POLICY_VERSION, classifyAmpOrbCIPullRequest, trustedAmpOrbCIPolicy } from './ampOrbCIPolicy.mjs'
 
@@ -459,8 +463,14 @@ export function enqueueAmpOrbCIJob(input, { stateDir } = {}) {
   }
 }
 
-export async function drainAmpOrbCIQueue({ stateDir, resolveJob, runJob } = {}) {
+export async function drainAmpOrbCIQueue({
+  stateDir,
+  resolveJob,
+  runJob,
+  onDisposition = () => {},
+} = {}) {
   if (typeof runJob !== 'function') throw new Error('Amp Orb CI queue runner is missing')
+  if (typeof onDisposition !== 'function') throw new Error('Amp Orb CI queue disposition observer is invalid')
   ensurePrivateDirectory(stateDir)
   const queueDir = path.join(stateDir, 'queue')
   ensurePrivateDirectory(queueDir)
@@ -474,6 +484,13 @@ export async function drainAmpOrbCIQueue({ stateDir, resolveJob, runJob } = {}) 
     const queuePath = path.join(queueDir, file)
     const item = readJson(queuePath)
     if (item?.terminal?.kind === 'superseded') {
+      let terminalInput = null
+      try {
+        terminalInput = validateAmpOrbCIQueueInput(item.input)
+      } catch {
+        // Existing terminal evidence remains readable without reopening validation.
+      }
+      if (terminalInput) onDisposition({ input: terminalInput, outcome: 'superseded' })
       results.push({ deliveryId: match[1], outcome: 'superseded' })
       continue
     }
@@ -483,6 +500,16 @@ export async function drainAmpOrbCIQueue({ stateDir, resolveJob, runJob } = {}) 
       || queuedInput.deliveryId !== match[1]
     ) {
       throw new Error('Amp Orb CI queue item identity mismatch')
+    }
+    const eligibility = ampOrbCIPullRequestEligibility(queuedInput, { stateDir })
+    if (!eligibility.eligible) {
+      onDisposition({ input: queuedInput, outcome: 'waiting' })
+      results.push({
+        deliveryId: queuedInput.deliveryId,
+        outcome: 'waiting',
+        reason: eligibility.reason,
+      })
+      continue
     }
     let input = queuedInput
     if (
@@ -505,6 +532,7 @@ export async function drainAmpOrbCIQueue({ stateDir, resolveJob, runJob } = {}) 
       try {
         input = await resolveJob(unresolvedInput)
       } catch {
+        onDisposition({ input: queuedInput, outcome: 'deferred' })
         results.push({
           deliveryId: queuedInput.deliveryId,
           outcome: 'deferred',
@@ -518,6 +546,7 @@ export async function drainAmpOrbCIQueue({ stateDir, resolveJob, runJob } = {}) 
           try {
             staleResult = await runJob(previousInput)
           } catch {
+            onDisposition({ input: queuedInput, outcome: 'deferred' })
             results.push({ deliveryId: queuedInput.deliveryId, outcome: 'deferred' })
             continue
           }
@@ -527,6 +556,7 @@ export async function drainAmpOrbCIQueue({ stateDir, resolveJob, runJob } = {}) 
           }
         }
         atomicWriteJson(queuePath, { ...item, terminal: { kind: 'superseded', at: new Date().toISOString() } })
+        onDisposition({ input: queuedInput, outcome: 'stale' })
         results.push({
           deliveryId: queuedInput.deliveryId,
           outcome: 'stale',
@@ -542,6 +572,7 @@ export async function drainAmpOrbCIQueue({ stateDir, resolveJob, runJob } = {}) 
     try {
       result = await runJob(input)
     } catch {
+      onDisposition({ input: queuedInput, outcome: 'deferred' })
       results.push({ deliveryId: input.deliveryId, outcome: 'deferred' })
       continue
     }
@@ -556,12 +587,45 @@ export async function drainAmpOrbCIQueue({ stateDir, resolveJob, runJob } = {}) 
     } else {
       rmSync(queuePath)
     }
+    onDisposition({ input: queuedInput, outcome: result.outcome })
     results.push({
       deliveryId: input.deliveryId,
       outcome: result.outcome,
     })
   }
   return results
+}
+
+export function planAmpOrbCIQueue({ stateDir } = {}) {
+  const queueDir = path.join(stateDir, 'queue')
+  if (!existsSync(queueDir)) return []
+  return readdirSync(queueDir)
+    .filter((file) => file.endsWith('.json'))
+    .sort()
+    .map((file) => {
+      const match = QUEUE_FILE.exec(file)
+      if (!match) throw new Error('Amp Orb CI queue filename is invalid')
+      const item = readJson(path.join(queueDir, file))
+      const input = validateAmpOrbCIQueueInput(item?.input)
+      if (item?.schemaVersion !== AMP_ORB_CI_QUEUE_SCHEMA_VERSION || input.deliveryId !== match[1]) {
+        throw new Error('Amp Orb CI queue item identity mismatch')
+      }
+      if (item?.terminal?.kind === 'superseded') {
+        return { deliveryId: input.deliveryId, event: input.event, outcome: 'superseded' }
+      }
+      const eligibility = ampOrbCIPullRequestEligibility(input, { stateDir })
+      return {
+        deliveryId: input.deliveryId,
+        event: input.event,
+        ...(input.event === 'pull_request' ? {
+          pullRequestNumber: input.pullRequestNumber,
+          sha: input.sha,
+          baseSha: input.baseSha,
+        } : {}),
+        outcome: eligibility.eligible ? 'eligible' : 'waiting',
+        ...(!eligibility.eligible ? { reason: eligibility.reason } : {}),
+      }
+    })
 }
 
 export function ampOrbCILockInvocation({
@@ -1122,6 +1186,10 @@ export async function runAmpOrbCIJob(input, {
   now = () => Date.now(),
 } = {}) {
   let validated = validateAmpOrbCIInput(input)
+  if (validated.event === 'pull_request' && publishCheck
+    && canPublishAuthoritativeCheck(validated)) {
+    assertAmpOrbCIPullRequestEligibility(validated, { stateDir })
+  }
   if (validated.event === 'pull_request' && typeof assertFresh !== 'function') {
     throw new Error('Authoritative pull request freshness dependency is missing')
   }
