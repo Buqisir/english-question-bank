@@ -10,6 +10,7 @@ import {
 import {
   digestNck1SourceMaterialization,
   validateNck1SourceMaterialization,
+  normalizedWritingText,
 } from '../../shared/paper-canonical/nck1SourceMaterialization.mjs'
 import { writingNoticeGroup, writingWordCount } from '../../shared/paper-canonical/applicationWritingDisplay.mjs'
 import {
@@ -797,7 +798,7 @@ function writingVariant(group, content, issues, source, documentsById) {
   }
   const writingTaskId = `writing-task:${group.groupId}`
   const paragraphs = group.blocks.filter(block => block.kind === 'paragraph')
-  const notice = writingNoticeGroup(paragraphs.map(paragraphText))
+  const notice = writingNoticeGroup(paragraphs.map(block => normalizedWritingText(paragraphText(block))))
   const noticeBlocks = notice ? paragraphs.slice(notice.startIndex, notice.startIndex + notice.blockCount) : []
   const wordCountBlock = noticeBlocks.find(block => writingWordCount(paragraphText(block)) === task.wordCountTarget)
   if (!wordCountBlock) {

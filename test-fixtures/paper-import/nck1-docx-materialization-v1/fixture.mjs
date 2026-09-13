@@ -151,6 +151,8 @@ function questionBlocks({
   anchoredMedia = false,
   orphanMedia = false,
   chineseNoticeNumbering = false,
+  fullWidthNoticeNumbering = false,
+  circledNoticeNumbering = false,
 } = {}) {
   const sevenParagraphs = Array.from({ length: 5 }, (_, index) =>
     paragraph(`A short guide has ${36 + index}._____ for learners.`))
@@ -213,8 +215,8 @@ function questionBlocks({
     paragraph('1. Share the meeting time;'),
     paragraph('2. Invite new members.'),
     paragraph('注意：'),
-    paragraph(`${chineseNoticeNumbering ? '一、' : '1.'} 写作词数应为80个左右；`),
-    paragraph(`${chineseNoticeNumbering ? '二、' : '2.'} 请按如下格式在答题卡的相应位置作答。`),
+    paragraph(`${chineseNoticeNumbering ? '一、' : fullWidthNoticeNumbering ? '１、' : circledNoticeNumbering ? '①、' : '1.'} 写作词数应为80个左右；`),
+    paragraph(`${chineseNoticeNumbering ? '二、' : fullWidthNoticeNumbering ? '２、' : circledNoticeNumbering ? '②、' : '2.'} 请按如下格式在答题卡的相应位置作答。`),
     paragraph('Should We Join the Reading Club?'),
     paragraph('第二节(满分25分)'),
     paragraph('阅读下面材料，根据其内容和所给段落开头语续写两段。'),
