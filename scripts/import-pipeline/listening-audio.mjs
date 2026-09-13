@@ -16,7 +16,9 @@ import {
   assertListeningAudioManifest,
   listeningAudioAttachmentDescriptors,
   listeningOrderedBigramRecall,
+  listeningSegmentOrderRecall,
   minimumListeningOrderedBigramRecall,
+  minimumListeningSegmentOrderRecall,
 } from '../../server/paper-import/listeningAudioEvidence.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
@@ -258,7 +260,7 @@ function comparisonFlag(code, message, { severity = 'review', startSeconds = 0, 
   return { code, severity, startSeconds, endSeconds, message }
 }
 
-export function compareListeningAudio({ asr, basis, referenceText }) {
+export function compareListeningAudio({ asr, basis, referenceText, referenceSegmentTexts = null }) {
   if (!['authoritative_transcript', 'listening_questions'].includes(basis)) {
     fail('Listening comparison basis is invalid')
   }
@@ -330,6 +332,19 @@ export function compareListeningAudio({ asr, basis, referenceText }) {
         { startSeconds: 0, endSeconds: asr.durationSeconds },
       ))
     }
+    // Segment-aware order check: compare the canonical sequence of transcript
+    // segments against the ASR so a cyclic rotation of whole conversations is
+    // flagged even when tokenRecall = 1.0 and orderedBigramRecall stays high.
+    if (Array.isArray(referenceSegmentTexts) && referenceSegmentTexts.length > 0) {
+      metrics.segmentOrderRecall = listeningSegmentOrderRecall(referenceSegmentTexts, asr.transcriptText)
+      if (metrics.segmentOrderRecall < minimumListeningSegmentOrderRecall) {
+        flags.push(comparisonFlag(
+          'LISTENING_AUDIO_SEGMENT_ORDER_MISMATCH',
+          'ASR plays the listening conversations in a different order from the authoritative transcript',
+          { startSeconds: 0, endSeconds: asr.durationSeconds },
+        ))
+      }
+    }
     if (metrics.tokenPrecision < 0.35) {
       flags.push(comparisonFlag(
         'LISTENING_AUDIO_EXTRA_CONTENT_SUSPECTED',
@@ -377,6 +392,7 @@ function materializationReference(paperDir, manifest) {
       basis: 'authoritative_transcript',
       source: 'materialization',
       text: listening.transcript.map((segment) => segment.text).join('\n'),
+      segmentTexts: listening.transcript.map((segment) => segment.text),
     }
   }
   if (listening?.questions?.length > 0) {
@@ -387,6 +403,7 @@ function materializationReference(paperDir, manifest) {
         question.stem,
         ...(question.options || []).map((option) => option.text),
       ]).join('\n'),
+      segmentTexts: null,
     }
   }
   fail('No authoritative listening transcript or listening questions are available for comparison')
@@ -401,6 +418,7 @@ function referenceFor(paperDir, manifest, referencePath) {
       basis: 'authoritative_transcript',
       source: 'explicit_file',
       text: bytes.toString('utf8'),
+      segmentTexts: null,
     }
   }
   const reference = readJson(absolute, 'Listening comparison reference')
@@ -410,7 +428,7 @@ function referenceFor(paperDir, manifest, referencePath) {
     || !['authoritative_transcript', 'listening_questions'].includes(reference.basis)
     || typeof reference.text !== 'string'
   ) fail('Listening comparison reference is incomplete')
-  return { basis: reference.basis, source: 'explicit_file', text: reference.text }
+  return { basis: reference.basis, source: 'explicit_file', text: reference.text, segmentTexts: null }
 }
 
 function contentSafetyReview(reviewPath, paperId, asrSha256, durationSeconds) {
@@ -471,6 +489,7 @@ export function finalizeListeningAudio({
     asr,
     basis: reference.basis,
     referenceText: reference.text,
+    referenceSegmentTexts: reference.segmentTexts,
   })
   const contentSafety = contentSafetyReview(
     reviewPath,
@@ -505,6 +524,9 @@ export function finalizeListeningAudio({
       basis: reference.basis,
       textSha256: sha256(Buffer.from(reference.text, 'utf8')),
       text: reference.text,
+      ...(Array.isArray(reference.segmentTexts) && reference.segmentTexts.length > 0
+        ? { segmentTexts: reference.segmentTexts }
+        : {}),
     },
     comparison,
     contentSafety,
