@@ -673,9 +673,11 @@ export function captureDocxSourceMedia({
     .filter(({ xml }) => documentHasShapes(xml))
   const shapes = shapeParts.flatMap(({ entryName, xml }) => extractShapeDescriptors(entryName, xml))
   const associations = paperAsset?.sources?.docx?.shapeAssociations
+  const associationsDeclared = !!associations
+    && (!Array.isArray(associations) || associations.length > 0)
   const furnitureOnly = shapes.length > 0
     && shapes.every((shape) => shape.sourcePart !== 'word/document.xml')
-    && (!Array.isArray(associations) || associations.length === 0)
+    && !associationsDeclared
 
   let shapeCapture = null
   if (shapes.length > 0 && !furnitureOnly) {
@@ -704,7 +706,12 @@ export function captureDocxSourceMedia({
       sourceParts: shapeParts.map(({ entryName }) => entryName),
       figures,
     }
-  } else if (Array.isArray(associations) && associations.length > 0) {
+  } else if (associationsDeclared) {
+    if (!Array.isArray(associations)) {
+      throw new Error(
+        'paper-asset.json sources.docx.shapeAssociations must be an array',
+      )
+    }
     throw new Error(
       'paper-asset.json declares sources.docx.shapeAssociations but the DOCX yielded no enumerable shapes',
     )
