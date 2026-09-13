@@ -68,6 +68,51 @@ export function listeningOrderedBigramRecall(referenceText, actualText) {
   return reference.length ? Number((matches[actual.length] / reference.length).toFixed(4)) : 0
 }
 
+// A cyclic rotation of whole transcript segments preserves the word multiset and
+// almost all intra-segment bigrams, so the flat ordered-bigram recall above stays
+// near 1.0 and the 0.5 floor admits the rotation. This segment-aware check compares
+// the *sequence* of authoritative transcript segments against the ASR token stream:
+// each canonical segment is aligned, in order, with a longest-common-subsequence
+// match over a monotonically advancing ASR cursor. A whole-segment rotation leaves
+// the misplaced segment's region behind the cursor, so its recall collapses; the
+// per-segment LCS absorbs intra-segment ASR noise (insertions, dropped words, small
+// reorderings, punctuation/whitespace drift), keeping benign recordings near 1.0.
+export const minimumListeningSegmentOrderRecall = 0.5
+export function listeningSegmentOrderRecall(referenceSegmentTexts, asrText) {
+  const tokens = (text) => String(text).toLowerCase().match(/[\p{L}\p{N}]+(?:'[\p{L}\p{N}]+)?/gu) || []
+  const asrTokens = tokens(asrText)
+  let cursor = 0
+  let totalReference = 0
+  let matchedInOrder = 0
+  for (const segmentText of referenceSegmentTexts) {
+    const segmentTokens = tokens(segmentText)
+    if (segmentTokens.length === 0) continue
+    totalReference += segmentTokens.length
+    if (cursor >= asrTokens.length) continue
+    const referenceLength = segmentTokens.length
+    const actualLength = asrTokens.length - cursor
+    let previousRow = new Uint32Array(actualLength + 1)
+    let currentRow = new Uint32Array(actualLength + 1)
+    for (let referenceIndex = 1; referenceIndex <= referenceLength; referenceIndex += 1) {
+      const token = segmentTokens[referenceIndex - 1]
+      const swap = previousRow; previousRow = currentRow; currentRow = swap
+      for (let actualIndex = 1; actualIndex <= actualLength; actualIndex += 1) {
+        currentRow[actualIndex] = token === asrTokens[cursor + actualIndex - 1]
+          ? previousRow[actualIndex - 1] + 1
+          : Math.max(previousRow[actualIndex], currentRow[actualIndex - 1])
+      }
+    }
+    const segmentMatches = currentRow[actualLength]
+    matchedInOrder += segmentMatches
+    let earliestEnd = actualLength
+    for (let actualIndex = 0; actualIndex <= actualLength; actualIndex += 1) {
+      if (currentRow[actualIndex] === segmentMatches) { earliestEnd = actualIndex; break }
+    }
+    cursor += earliestEnd
+  }
+  return totalReference ? Number((matchedInOrder / totalReference).toFixed(4)) : 0
+}
+
 function readArtifact(rootDir, relativePath) {
   const root = path.resolve(rootDir)
   const filePath = path.resolve(root, ...relativePath.split('/'))
@@ -157,6 +202,11 @@ function validateCheck(check, paperId, descriptors, asr) {
     && listeningOrderedBigramRecall(reference.text, asr.transcriptText) < minimumListeningOrderedBigramRecall) {
     fail('Listening ASR word order does not match the authoritative transcript')
   }
+  if (reference.basis === 'authoritative_transcript'
+    && Array.isArray(reference.segmentTexts) && reference.segmentTexts.length > 0
+    && listeningSegmentOrderRecall(reference.segmentTexts, asr.transcriptText) < minimumListeningSegmentOrderRecall) {
+    fail('Listening ASR segment order does not match the authoritative transcript')
+  }
   return check
 }
 
@@ -177,6 +227,17 @@ export function assertListeningAudioSource(evidence, listening) {
   if (evidence.check.comparisonReference.basis !== basis
     || words(evidence.check.comparisonReference.text) !== words(text)) {
     fail('Listening source changed: finalize audio checks against the current materialization before Review')
+  }
+  // Anchor the stored ASR to the canonical transcript segment order from the live
+  // materialization: an old unordered-overlap receipt (or a tampered comparison text)
+  // cannot bless a recording whose playback order rotates whole conversations,
+  // even when its flat ordered-bigram recall stays high. The live transcript is the
+  // tamper-proof canonical reference; the stored ASR transcript text is its subject.
+  if (hasTranscript && typeof evidence.asr?.transcriptText === 'string' && evidence.asr.transcriptText.trim()) {
+    const segmentTexts = listening.transcript.map((segment) => segment.text)
+    if (listeningSegmentOrderRecall(segmentTexts, evidence.asr.transcriptText) < minimumListeningSegmentOrderRecall) {
+      fail('Listening ASR segment order does not match the authoritative transcript')
+    }
   }
   const playback = evidence.descriptors.get('listening_audio_playback')
   return {
