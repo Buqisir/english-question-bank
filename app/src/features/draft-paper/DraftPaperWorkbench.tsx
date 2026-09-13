@@ -1537,18 +1537,18 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                       const url = new URL(window.location.href)
                       url.searchParams.set('view', 'draft-paper')
                       url.searchParams.set('draftPaperId', id)
-                      window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}`)
                       setVersionType('student')
                       void fetchDraftPaper(id).then((next) => {
                         if (generation !== draftGenerationRef.current) return
                         setDraftGeneration(generation)
+                        window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}`)
                         setDraftPaper(next)
                         setTitleDraft(next.title)
                         setStudentLabelDraft(next.studentLabel || '')
                       }).catch((error) => {
                         if (generation !== draftGenerationRef.current) return
-                        setLoadStatus('error')
-                        setLoadError(describeError('打开草稿卷', error))
+                        setSaveStatus('error')
+                        setSaveError(describeError('切换草稿卷', error))
                       })
                     }}
                   >
