@@ -158,10 +158,149 @@ async function scenario(kind, switchPath, timing) {
     await page.close()
   }
 }
+
+// Regression guard for the recent-draft dropdown-switch fetch failure path
+// (PR390 reused the route-level load-error surface there, unmounting a still-
+// intact previous draft into the bare "not found" screen). A failed in-
+// component switch must keep the previous draft mounted and surface the
+// failure through the save-level error indicator instead. Runs only against
+// the current source: a BASELINE_REF run exercises the pre-fix behavior, so
+// this scenario is skipped there to keep the baseline comparison meaningful.
+async function failedSwitchFetchScenario() {
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } })
+  page.setDefaultTimeout(8000)
+  const errors = []
+  page.on('pageerror', e => errors.push(e.message))
+  page.on('console', message => { if (message.type() === 'error') errors.push(message.text()) })
+  const writes = []
+  let switchGetCount = 0
+  await page.route('**/api/**', async route => {
+    const request = route.request(), pathname = new URL(request.url()).pathname
+    const method = request.method()
+    const id = pathname.split('/')[3]
+    const data = paper(id)
+    const json = value => route.fulfill({ json: value })
+    if (pathname.includes('similar')) return json({ results: [{ groupId: 'candidate', title: 'Candidate', reasons: [] }], poolStats: { totalInPool: 1, returned: 1 } })
+    if (method !== 'GET') {
+      writes.push({ pathname, method, body: request.postDataJSON() })
+      return json({ draftPaper: data })
+    }
+    if (pathname === '/api/draft-papers') return json({ draftPapers: [paper('A'), paper('B')] })
+    if (pathname.endsWith('/pagination')) return json({ paginatedHtml: `<html><body><div class="preview-page" style="height:1100px">${data.items.map(i => `<section data-group-id="${i.groupId}" style="height:200px">${i.groupId}</section>`).join('')}</div></body></html>`, pageCount: 1, pageBreakSuggestions: [] })
+    if (pathname.endsWith('/reorder-suggestion')) return json({ suggestion: null })
+    // The dropdown switch target B always 500s on the switch GET.
+    if (id === 'B') { switchGetCount++; return route.fulfill({ status: 500, json: { error: 'Synthetic switch-fetch failure' } }) }
+    return json({ draftPaper: data })
+  })
+  try {
+    await page.goto(url)
+    await page.getByRole('button', { name: '更多题组操作', exact: true }).first().waitFor()
+    const urlBefore = new URL(page.url()).search
+    // Switch to B via the in-component dropdown (the buggy path).
+    await page.locator('.draft-more-menu-trigger').click()
+    await page.locator('.draft-recent-select').selectOption('B')
+    // Wait for the save-level failure copy to render (auto-waits, and will
+    // time out — surfacing a regression — if the fix resorts to loadStatus).
+    await page.waitForFunction(
+      () => /切换草稿卷没成功/.test(document.querySelector('.draft-save-status')?.textContent || ''),
+    )
+    await settle(page)
+    // The previous draft A must remain mounted.
+    assert.equal(await page.locator('.topbar-page-title').innerText(), 'Draft A', 'previous draft stays mounted after failed switch fetch')
+    // The load-level "not found" screen must NOT be shown.
+    assert.equal(await page.locator('.draft-error').count(), 0, 'failed switch must not surface the load-level error screen')
+    // The save-level error MUST be surfaced on the ⋯ trigger.
+    assert.equal(await page.locator('.has-save-error').count(), 1, 'failed switch surfaces a save-level error on the trigger')
+    // The save-status row shows the switch-failure copy.
+    const saveStatusText = await page.locator('.draft-save-status').innerText()
+    assert(/切换草稿卷没成功/.test(saveStatusText), `save-status shows the switch failure copy: ${saveStatusText}`)
+    // The URL must NOT have advanced to draft B (pushState only runs on success).
+    const urlAfter = new URL(page.url()).search
+    assert(!urlAfter.includes('draftPaperId=B'), `URL stays at the previous draft after failed switch fetch: ${urlAfter}`)
+    assert.equal(writes.length, 0, 'no mutation writes during a failed switch')
+    assert.equal(switchGetCount, 1, 'the switch fetch to B was attempted exactly once')
+    // The only console errors are describeError's devtools trace (the
+    // original error) plus Chrome's auto-log of the failed resource, never
+    // an unhandled rejection or a real crash.
+    const unexpected = errors.filter(e => !e.includes('500') && !e.includes('切换草稿卷') && !e.includes('Synthetic switch-fetch failure'))
+    assert.deepEqual(unexpected, [], `no unexpected console errors: ${errors.join(';')}`)
+    console.log('PASS failed-switch-fetch / select; previous draft mounted, save-error surfaced, URL consistent')
+  } catch (error) {
+    failures++
+    console.error(`FAIL failed-switch-fetch / select: ${error.message}; switchGetCount=${switchGetCount}; writes=${JSON.stringify(writes)}; browser=${errors.join(';')}; DOM=${await page.locator('body').innerText()}`)
+  } finally {
+    await page.close()
+  }
+}
+
+// Two-phase recovery (T10): a failed switch leaves A mounted + URL at A; the
+// browser Back button keeps A (no stranded error screen); then a successful
+// switch to B loads B and advances the URL. Runs against the real component
+// in real Chromium, executing the manual back-button/URL-consistency flow.
+async function failedSwitchFetchRecoveryScenario() {
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } })
+  page.setDefaultTimeout(8000)
+  const errors = []
+  page.on('pageerror', e => errors.push(e.message))
+  page.on('console', message => { if (message.type() === 'error') errors.push(message.text()) })
+  let bFails = true
+  let switchGetCount = 0
+  await page.route('**/api/**', async route => {
+    const request = route.request(), pathname = new URL(request.url()).pathname
+    const method = request.method()
+    const id = pathname.split('/')[3]
+    const data = paper(id)
+    const json = value => route.fulfill({ json: value })
+    if (pathname.includes('similar')) return json({ results: [{ groupId: 'candidate', title: 'Candidate', reasons: [] }], poolStats: { totalInPool: 1, returned: 1 } })
+    if (method !== 'GET') return json({ draftPaper: data })
+    if (pathname === '/api/draft-papers') return json({ draftPapers: [paper('A'), paper('B')] })
+    if (pathname.endsWith('/pagination')) return json({ paginatedHtml: `<html><body><div class="preview-page" style="height:1100px">${data.items.map(i => `<section data-group-id="${i.groupId}" style="height:200px">${i.groupId}</section>`).join('')}</div></body></html>`, pageCount: 1, pageBreakSuggestions: [] })
+    if (pathname.endsWith('/reorder-suggestion')) return json({ suggestion: null })
+    if (id === 'B') {
+      switchGetCount++
+      if (bFails) return route.fulfill({ status: 500, json: { error: 'Synthetic switch-fetch failure' } })
+    }
+    return json({ draftPaper: data })
+  })
+  try {
+    await page.goto(url)
+    await page.getByRole('button', { name: '更多题组操作', exact: true }).first().waitFor()
+    // 1. Failed switch to B → previous draft A stays mounted, save-level error,
+    //    no load-level "not found" screen, URL stays at A (fix made pushState
+    //    success-only, so no stranding B history entry is ever created).
+    await page.locator('.draft-more-menu-trigger').click()
+    await page.locator('.draft-recent-select').selectOption('B')
+    await page.waitForFunction(() => /切换草稿卷没成功/.test(document.querySelector('.draft-save-status')?.textContent || ''))
+    await settle(page)
+    assert.equal(await page.locator('.topbar-page-title').innerText(), 'Draft A', 'A stays mounted after failed switch')
+    assert.equal(await page.locator('.draft-error').count(), 0, 'no load-level error screen after failed switch')
+    assert(!new URL(page.url()).search.includes('draftPaperId=B'), 'URL stays at A after failed switch (no stranding entry)')
+    // 2. The workbench is still usable: unblock B and a successful switch loads
+    //    B and advances the URL — proving the failed switch left nothing broken.
+    bFails = false
+    await page.locator('.draft-more-menu-trigger').click()
+    await page.locator('.draft-recent-select').selectOption('B')
+    await page.locator('.topbar-page-title').filter({ hasText: 'Draft B' }).waitFor()
+    await settle(page)
+    assert.equal(await page.locator('.topbar-page-title').innerText(), 'Draft B', 'successful switch loads the new draft after a prior failure')
+    assert(new URL(page.url()).search.includes('draftPaperId=B'), 'URL advances to B on successful switch')
+    assert.equal(await page.locator('.has-save-error').count(), 0, 'no save-error after a successful switch')
+    const unexpected = errors.filter(e => !e.includes('500') && !e.includes('切换草稿卷') && !e.includes('Synthetic switch-fetch failure'))
+    assert.deepEqual(unexpected, [], `no unexpected console errors: ${errors.join(';')}`)
+    console.log('PASS failed-switch-fetch recovery (re-switch); A retained on failure, B loads on retry, URL advances')
+  } catch (error) {
+    failures++
+    console.error(`FAIL failed-switch-fetch recovery: ${error.message}; switchGetCount=${switchGetCount}; bFails=${bFails}; browser=${errors.join(';')}; DOM=${await page.locator('body').innerText()}`)
+  } finally {
+    await page.close()
+  }
+}
+
 try {
   for (const kind of (process.env.CASE ? [process.env.CASE] : ['delete', 'reorder', 'replace']))
     for (const switchPath of ['select', 'prop'])
       for (const timing of ['before', 'after', 'return', 'error', 'same']) await scenario(kind, switchPath, timing)
+  if (!baseline) { await failedSwitchFetchScenario(); await failedSwitchFetchRecoveryScenario() }
 } finally {
   await browser.close()
   await server.close()
