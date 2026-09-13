@@ -2990,6 +2990,11 @@ ${grammarFillGeometryFixtureCss}
 
 .canonical-application-response {
   --writing-box-rule: ${applicationWritingRhythm.responseGeometry.printBorderPt}pt;
+  /* Must come after the .writing-answer-box 'margin: 1em auto 0' shorthand so
+     this 9pt longhand wins the cascade at equal specificity (0,1,0); the early
+     paperLayout.css longhand loses to the later shorthand. Do not dedupe
+     against the paperLayout.css rule — source order is load-bearing here. */
+  margin-top: var(--paper-application-response-margin-top);
 }
 
 [data-canonical-writing-chrome-role] {
