@@ -118,6 +118,93 @@ POST; UNKNOWN creation reconciles, never blindly repeats POST. Queue records
 retain resolved identities so stale recovery can finish the original Check.
 The residual GET/PATCH race still requires strict protection without bypass.
 
+### Serialized PR eligibility phase 1 (code protocol; not host activation)
+
+The controller has an opt-in serialized PR eligibility gate for an explicitly
+Owner-scoped merge batch. Installing the code alone does not activate it. With
+no exact `.scratch/amp-orb-ci/coordination/activated` marker, the controller
+does not parse staged coordination files and preserves legacy PR and main
+behavior. Host activation is a separate privileged operation and is not
+authorized by this ADR text or by merging the implementation.
+
+Once explicitly activated, the private immutable Owner scope fixes this
+repository and the allowed PR numbers. A generation-CAS selection fixes one
+exact PR number, head SHA and base SHA from that scope. The queue checks this
+identity before PR resolution, Check creation, receipt mutation or lane
+execution. Other real PR deliveries remain byte-for-byte in the existing queue
+as `waiting`; they are not failures, drops, synthetic events or receipts. Push
+deliveries retain the existing lexical queue traversal and Fast+Full behavior.
+This phase does not supersede old main deliveries, select only the latest main,
+or otherwise change main receipt and coverage semantics. That would be a
+separate Owner product decision.
+
+The trusted local control surface is intentionally small:
+
+```text
+amp-orb-ci.mjs coord-status
+amp-orb-ci.mjs coord-activate --pull-request <number> [--pull-request <number> ...]
+amp-orb-ci.mjs coord-select --expected-generation <n> --pull-request <number> --head <sha> --base <sha>
+amp-orb-ci.mjs coord-pause --expected-generation <n>
+amp-orb-ci.mjs coord-resume
+```
+
+`coord-status` is a fixed-path reader that projects coordination plus the real
+queue; it is not merge authorization. Activate, select, pause, resume and the
+ordinary drain all serialize on the existing `runner.lock`. Selection first
+durably commits `wakePendingGeneration`, then the same lock holder drains the
+existing queue in-process. It never launches a second writer or fabricates a
+GitHub event. This closes the queue-before-selection lost-wake race. If the
+process dies after selection, `coord-resume` always performs one normal drain,
+even if a previous attempt cleared the wake marker. A selected deferred or
+unreached queue item retains the marker; terminal selected work clears it. If
+the inspected snapshot contains no matching delivery, the marker clears while
+the selection stays active for a later natural delivery.
+
+An explicit generation-CAS `coord-pause` is the fail-closed active containment
+operation. Because it acquires the same lock, it runs only after any current
+drain has settled; it may cancel a still-pending selection while retaining that
+delivery byte-for-byte in the queue as waiting. It never removes the activation
+marker or restores legacy eligibility.
+
+The gate is defense in depth at both queue admission-to-execution and the
+natural authoritative PR job entry. Forced `run --forced` diagnostics remain
+writerless and therefore cannot create or satisfy the required App Check. The
+existing queue and receipt schemas are unchanged. The read-only Ship watcher
+may supply facts to the single human coordinator, but it is neither the
+selection authority nor a wake path.
+
+Before each selection, that coordinator must independently establish that the
+current exact `main` has its successful App-4835036 Check, the PR is within the
+Owner-approved batch, and the selected live PR/head/base identity is current.
+Historical-main success is not a substitute. After the selected exact Check
+succeeds, ordinary strict branch protection governs merge; after merge, the
+new exact main Check must succeed before another selection. GitHub mutations
+with unknown outcomes require fact reconciliation rather than blind retry.
+Conflicts or PR failures require the explicit Owner policy for skip-versus-stop;
+a main failure stops the batch.
+
+Activation compatibility and crash behavior are fail-closed only after opt-in:
+
+| Durable observation | PR behavior | Main behavior | Recovery boundary |
+| --- | --- | --- | --- |
+| marker absent, including staged/corrupt state files | legacy | unchanged | safe pre-activation code rollback |
+| valid marker + paused state | waiting | unchanged | select with exact generation or keep paused |
+| valid marker + selected exact identity | only exact match eligible | unchanged | drain/resume, or generation-CAS pause retaining the real queue item |
+| marker unreadable/invalid, or active scope/state missing/corrupt | waiting with durable state reason | unchanged | repair from reviewed private snapshot under `runner.lock`; never infer selection |
+| crash before activation marker rename | legacy | unchanged | retry activation only after reading fixed state paths |
+| crash after marker rename | active paused | unchanged | inspect status; do not assume activation failed |
+| crash after selection state commit | selected with pending generation | unchanged | `coord-resume` under the same lock |
+| selected resolve/run deferred or drain throws | selected wake remains pending | unchanged items still follow existing semantics | diagnose then `coord-resume`, or explicitly pause; no polling or synthetic delivery |
+| selected queue snapshot has no exact match | selection remains, wake acknowledged | unchanged | await a natural delivery; resume remains available |
+
+Because an older controller does not understand the active marker, an active
+rollback must not merely restore old binaries while PR queue entries remain.
+The future host activation runbook must first quiesce under `runner.lock`, retain
+all queue/receipt evidence, reach an explicitly reviewed paused/no-running
+boundary, and define marker removal plus installed-byte restoration as one
+bounded operation. Phase 1 deliberately provides no daemon, schedule, GitHub
+mutation, automatic merge, scope expansion, or host activation procedure.
+
 ### Bounded enable / rollback (not an assertion of live acceptance)
 
 This migration is high risk: use always-full validation, affected E2Es,
