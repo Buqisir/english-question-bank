@@ -3788,6 +3788,19 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     canonicalConsumption,
     openingGroupIds,
   )
+  // Canonical listening already owns its part/section headings inside the
+  // listening group card via CanonicalListeningChrome (PaperSurface.tsx).
+  // Mirror the print-path guard (print-renderer.mjs): when the listening
+  // chrome owns the opening, skip standalone partHeading/sectionHeading
+  // blocks at or before the last listening group block so they are not
+  // rendered twice. The instruction half is already handled by the
+  // c0eb77a4 mergedInstructionText guard + scissorPlan merge, so only the
+  // heading cases need this skip. -1 means no listening group exists, so
+  // 9-group papers (the published corpus) are unaffected.
+  const listeningChromeEndBlockIndex = asset.content.blocks.findLastIndex(
+    (block) => block.type === 'group'
+      && asset.content.groups[block.groupId]?.groupType === 'listening',
+  )
   return (
     <div className="paper-browse-page">
       <AppTopbar
@@ -3839,9 +3852,15 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
               </style>
             )}
             {asset.content.blocks.map((block, index) =>
-              writingSkipIndices.has(index) || scissorPlan.skipIndices.has(index)
-                ? null
-                : renderBlock(block, index),
+              writingSkipIndices.has(index)
+              || scissorPlan.skipIndices.has(index)
+              || (showListeningOpening
+                && listeningChromeEndBlockIndex >= 0
+                && index <= listeningChromeEndBlockIndex
+                && (block.type === 'partHeading'
+                  || block.type === 'sectionHeading'))
+              ? null
+              : renderBlock(block, index),
             )}
             {/*
               刀 2 修复轮 ②: 七选五衔接句高亮覆盖层。渲染条件与 hook 的
