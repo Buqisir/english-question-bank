@@ -32,6 +32,7 @@ import {
 import {
   makeApplicationWritingReferenceFixture,
 } from '../test-fixtures/paper-canonical/applicationWritingReferenceFixture.mjs'
+import { applicationWritingRhythm } from '../shared/paper-canonical/applicationWritingRhythm.mjs'
 
 const persistActualArtifacts =
   process.env.EQB_PERSIST_ACTUAL_ARTIFACTS === '1'
@@ -1480,6 +1481,12 @@ async function assertActualPaperSurfaceArtifacts() {
       assert.ok(responseBox)
       assert.ok(Math.abs(responseBox.width - (144 / 25.4 * 96)) <= 1)
       assert.ok(Math.abs(responseBox.height - (65 / 25.4 * 96)) <= 1)
+      const expectedMarginTopPx =
+        applicationWritingRhythm.rendererMapping.printPdf.responseMarginTopPt * 96 / 72
+      const actualMarginTopPx = await response.evaluate(
+        (element) => Number.parseFloat(getComputedStyle(element).marginTop),
+      )
+      assert.equal(actualMarginTopPx, expectedMarginTopPx)
       assert.equal(html.includes('（教师版 含答案解析）'), versionType === 'teacher')
       const geometryKey = `${responseBox.width.toFixed(2)}:${responseBox.height.toFixed(2)}`
       const priorGeometry = printGeometry.get(label)
