@@ -8,6 +8,9 @@ import path from 'node:path'
 
 import {
   assertListeningAudioManifest,
+  assertListeningAudioSource,
+  listeningSegmentOrderRecall,
+  minimumListeningSegmentOrderRecall,
 } from '../server/paper-import/listeningAudioEvidence.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 import {
@@ -26,12 +29,13 @@ const invalidAsrFixture = path.join(tempRoot, 'invalid-asr-fixture.json')
 const referencePath = path.join(tempRoot, 'reference.json')
 const reviewPath = path.join(tempRoot, 'review.json')
 const manifestPath = path.join(paperDir, 'universal-source-manifest.json')
-const transcript = [
+const transcriptSegments = [
   'Good morning everyone and welcome to the English listening test.',
   'The woman plans to meet her friend at the central library after lunch.',
   'They discuss the weather, the train schedule, and a school music performance.',
   'Listen carefully and answer each question according to the conversation you hear.',
-].join(' ')
+]
+const transcript = transcriptSegments.join(' ')
 
 function json(filePath, value) {
   writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`)
@@ -261,6 +265,40 @@ try {
   assert.throws(() => assertListeningAudioManifest(paperDir, oldManifest), /word order/, 'A digest-valid old unordered pass cannot admit reversed conversations')
   writeFileSync(checkPath, originalCheckBytes)
   assertListeningAudioManifest(paperDir, manifest)
+
+  // Receipt validation (validateCheck) re-runs the segment-aware order check using
+  // the segmentTexts sealed into the check receipt, so a digest-valid receipt that
+  // claims an authoritative segment order disagreeing with its stored ASR is rejected
+  // even when its flat ordered-bigram recall is perfect.
+  const segmentPass = structuredClone(check)
+  segmentPass.comparisonReference.segmentTexts = [...transcriptSegments]
+  delete segmentPass.evidenceDigest
+  segmentPass.evidenceDigest = digestJson(segmentPass)
+  json(checkPath, segmentPass)
+  const segmentPassManifest = structuredClone(manifest)
+  let segmentDescriptor = segmentPassManifest.attachments.find((entry) => entry.role === 'listening_audio_check')
+  segmentDescriptor.sha256 = sha256(readFileSync(checkPath))
+  segmentDescriptor.byteLength = readFileSync(checkPath).byteLength
+  assertListeningAudioManifest(paperDir, segmentPassManifest)
+  writeFileSync(checkPath, originalCheckBytes)
+
+  const segmentFail = structuredClone(check)
+  segmentFail.comparisonReference.segmentTexts = [...transcriptSegments].reverse()
+  delete segmentFail.evidenceDigest
+  segmentFail.evidenceDigest = digestJson(segmentFail)
+  json(checkPath, segmentFail)
+  const segmentFailManifest = structuredClone(manifest)
+  segmentDescriptor = segmentFailManifest.attachments.find((entry) => entry.role === 'listening_audio_check')
+  segmentDescriptor.sha256 = sha256(readFileSync(checkPath))
+  segmentDescriptor.byteLength = readFileSync(checkPath).byteLength
+  assert.throws(
+    () => assertListeningAudioManifest(paperDir, segmentFailManifest),
+    /segment order/,
+    'A digest-valid receipt whose sealed segment order disagrees with its ASR is rejected',
+  )
+  writeFileSync(checkPath, originalCheckBytes)
+  assertListeningAudioManifest(paperDir, manifest)
+
   const playbackPath = path.join(paperDir, 'materialization/listening-audio/playback.mp3')
   const playback = readFileSync(playbackPath)
   writeFileSync(playbackPath, Buffer.concat([playback, Buffer.from('changed')]))
@@ -292,6 +330,64 @@ try {
     basis: 'authoritative_transcript',
     referenceText: conversations.join(' '),
   }).verdict, 'pass', 'minor ASR insertions must not require exact transcript equality')
+
+  // Regression: a one-step cyclic rotation of whole transcript segments keeps
+  // tokenRecall = 1.0 and a high flat orderedBigramRecall (0.6563 here, above the
+  // 0.5 floor), so the flat check alone blessed it. The segment-aware order check
+  // compares the canonical sequence of transcript segments against the ASR and
+  // must reject the rotation regardless of bigram recall.
+  const rotatedConversations = compareListeningAudio({
+    asr: asr({ transcriptText: [conversations[1], conversations[2], conversations[0]].join(' ') }),
+    basis: 'authoritative_transcript',
+    referenceText: conversations.join(' '),
+    referenceSegmentTexts: conversations,
+  })
+  assert.equal(rotatedConversations.metrics.tokenRecall, 1, 'a rotation preserves the word multiset')
+  assert.ok(rotatedConversations.metrics.orderedBigramRecall >= 0.5, 'the flat bigram floor alone admits this rotation')
+  assert.ok(
+    rotatedConversations.metrics.segmentOrderRecall < minimumListeningSegmentOrderRecall,
+    `cyclic rotation segmentOrderRecall ${rotatedConversations.metrics.segmentOrderRecall} must fall below the floor`,
+  )
+  assert.equal(
+    rotatedConversations.verdict,
+    'review_required',
+    'a cyclic rotation of whole conversations must require review despite identical words and high flat bigram recall',
+  )
+  assert.equal(compareListeningAudio({
+    asr: asr({ transcriptText: conversations.join(' ') }),
+    basis: 'authoritative_transcript',
+    referenceText: conversations.join(' '),
+    referenceSegmentTexts: conversations,
+  }).verdict, 'pass', 'the canonical segment order against matching ASR must pass')
+  assert.equal(compareListeningAudio({
+    asr: asr({ transcriptText: conversations.join(' ').replace('fresh', 'lovely fresh') }),
+    basis: 'authoritative_transcript',
+    referenceText: conversations.join(' '),
+    referenceSegmentTexts: conversations,
+  }).verdict, 'pass', 'intra-segment ASR insertions must not trip the segment-aware order check')
+
+  // Regression on the real NCK1 shape (10 transcript segments): a one-step cyclic
+  // rotation scores orderedBigramRecall = 0.9533 (far above 0.5) yet segmentOrderRecall
+  // collapses, so the segment-aware gate rejects it.
+  const tenSegments = Array.from({ length: 10 }, (_, index) => {
+    const words = ['the', 'and', 'a', 'of', 'to', 'in', 'is', 'that', 'it', 'for']
+    const fill = `conversation ${index + 1} about ${words[index]} topics discussed here in detail`
+    return `${fill} ${fill} marker${index + 1}`.repeat(index + 1).trim()
+  })
+  const rotate = (array, k) => array.slice(k).concat(array.slice(0, k))
+  const rotatedTen = compareListeningAudio({
+    asr: asr({ transcriptText: rotate(tenSegments, 1).join(' '), durationSeconds: 90 }),
+    basis: 'authoritative_transcript',
+    referenceText: tenSegments.join(' '),
+    referenceSegmentTexts: tenSegments,
+  })
+  assert.ok(rotatedTen.metrics.orderedBigramRecall >= 0.5, 'the real-shape rotation stays above the flat bigram floor')
+  assert.ok(
+    rotatedTen.metrics.segmentOrderRecall < minimumListeningSegmentOrderRecall,
+    `10-segment rotation segmentOrderRecall ${rotatedTen.metrics.segmentOrderRecall} must fall below the floor`,
+  )
+  assert.equal(rotatedTen.verdict, 'review_required', 'a real NCK1-shape rotation must not be blessed')
+
   assert.equal(compareListeningAudio({
     asr: asr({
       transcriptText: 'A completely unrelated recording about cooking rice and repairing bicycles.',
@@ -325,6 +421,38 @@ try {
       'What do they discuss about the train schedule and music performance?',
     ].join(' '),
   }).verdict, 'pass')
+
+  // Publication anchor (assertListeningAudioSource): the canonical transcript
+  // segment order from the live materialization is bound against the stored ASR, so
+  // an old unordered-overlap receipt (or any stored ASR rotated relative to the
+  // canonical questions) cannot bless a reordered recording. This is the
+  // tamper-proof anchor because the segment order comes from the live
+  // materialization, not the check receipt.
+  const playbackDescriptor = { sha256: `sha256:${'c'.repeat(64)}`, byteLength: 1 }
+  const capturedListening = (transcript) => ({
+    state: 'captured',
+    transcript: transcript.map((text) => ({ text })),
+    questions: [],
+    answers: [],
+    timing: [],
+  })
+  const canonicalEvidence = (asrTranscriptText) => ({
+    descriptors: new Map([['listening_audio_playback', playbackDescriptor]]),
+    asr: { transcriptText: asrTranscriptText, durationSeconds: 12 },
+    check: { comparisonReference: { basis: 'authoritative_transcript', text: transcriptSegments.join('\n') } },
+  })
+  assertListeningAudioSource(
+    canonicalEvidence(transcriptSegments.join(' ')),
+    capturedListening(transcriptSegments),
+  )
+  assert.throws(
+    () => assertListeningAudioSource(
+      canonicalEvidence([...transcriptSegments].reverse().join(' ')),
+      capturedListening(transcriptSegments),
+    ),
+    /segment order/,
+    'A stored ASR rotated against the canonical materialization segments must not be blessed at publication',
+  )
 
   console.log('PASS listening MP3 decode, normalization, ASR comparison, safety receipt, and digest binding')
 } finally {
