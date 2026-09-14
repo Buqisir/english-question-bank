@@ -133,7 +133,8 @@ uniquely supplies; otherwise keep it outside daily packs.
 ## GitHub Actions CI authority
 
 - `.github/workflows/verify.yml` runs on natural `pull_request` and `push` to
-  `main`. Stable jobs `verify` (complete registry) and `e2e` (six browser seams)
+  `main`. Stable jobs `verify` (base-classified pack, Full for shared/high/unknown
+  risks and main) and `e2e` (all six browser seams)
   must both succeed. No path filter, skipped job, local report, manual run or
   Amp Check substitutes for either job. See ADR-0026 and the cutover runbook.
 - Read GitHub Actions run and job evidence directly. Bind the repository,
@@ -141,14 +142,16 @@ uniquely supplies; otherwise keep it outside daily packs.
   run attempt, GitHub Actions App identity and both successful job conclusions.
   PRs test GitHub's merge ref; preserve strict/up-to-date branch protection,
   require the head to contain current main, and reject stale results.
-- CI runs independently of Amp threads. No Amp watcher registration, private
-  queue, agent acknowledgment or CI-host handoff is a Ship prerequisite.
-  For explicit monitoring use read-only GitHub checks; diagnose failures
-  before an authorized rerun and retain the earlier failed attempt.
+- CI runs independently of Amp threads. The native Actions watcher provides
+  best-effort terminal notification to the originating Ship thread; register it
+  as described in `.agents/ship.md`. Its failure cannot affect CI or protection,
+  and no private queue, notification or agent acknowledgment supplies authority.
+  An existing Ship Goal covers fresh verification and ordinary protected merge
+  after a green notice; diagnose failures before rerunning and retain attempts.
 - Deployment accepts only the exact-main natural Actions run and its two
   successful jobs through the deployment reader. Pending, failed, missing,
   wrong-SHA, wrong-workflow or ambiguous evidence fails closed.
-- The old Amp CI webhook/controller, serialized eligibility, watcher,
+- The old Amp CI webhook/controller, serialized eligibility, Amp-only watcher,
   Sentinel/Discovery and Action-wake are not the new authority. Do not start,
   drain, replay or initialize them. Retire the live registration/services only
   after Actions has taken over protection and exact-main validation passes;

@@ -1,6 +1,8 @@
 name: Verify
+run-name: >-
+  ${{ github.event_name == 'pull_request' && format('Verify PR #{0} head {1}', github.event.pull_request.number, github.event.pull_request.head.sha) || format('Verify main {0}', github.sha) }}
 
-# Additive migration: these jobs do not remove the existing required App Check.
+# Stable required jobs: risk changes their work, never whether they run.
 on:
   pull_request:
   push:
@@ -26,6 +28,35 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24.21.0
+      - name: Select verification from the trusted PR base
+        id: plan
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          plan="$RUNNER_TEMP/eqb-verification-plan.json"
+          if [ "$GITHUB_EVENT_NAME" = pull_request ]; then
+            [[ "$BASE_SHA" =~ ^[a-f0-9]{40}$ && "$HEAD_SHA" =~ ^[a-f0-9]{40}$ && "$GITHUB_SHA" =~ ^[a-f0-9]{40}$ ]]
+            test -z "$(git status --porcelain)"
+            test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+            test "$(git show -s --format=%P "$GITHUB_SHA")" = "$BASE_SHA $HEAD_SHA"
+            git merge-base --is-ancestor "$BASE_SHA" "$HEAD_SHA"
+            test "$(git rev-parse "$GITHUB_SHA^{tree}")" = "$(git rev-parse "$HEAD_SHA^{tree}")"
+          fi
+          if [ "$GITHUB_EVENT_NAME" = pull_request ] && git cat-file -e "$BASE_SHA:scripts/ci-pr-plan.mjs"; then
+            trusted="$RUNNER_TEMP/eqb-ci-policy"
+            git worktree add --detach "$trusted" "$BASE_SHA"
+            node "$trusted/scripts/ci-pr-plan.mjs" "$GITHUB_WORKSPACE" "$BASE_SHA" "$HEAD_SHA" "$GITHUB_SHA" > "$plan"
+            git worktree remove "$trusted"
+          else
+            # Main and the first rollout PR always run Full. Never bootstrap trust from candidate policy.
+            node scripts/verify-ci.mjs --plan-json --pack all > "$plan"
+          fi
+          pack=$(jq -er '.pack' "$plan")
+          case "$pack" in all|ui|feature|paper-data|import-paper) ;; *) echo "Invalid trusted pack"; exit 1 ;; esac
+          echo "pack=$pack" >> "$GITHUB_OUTPUT"
+          cat "$plan"
+          { echo '## Verification plan'; echo '```json'; cat "$plan"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
       - name: Enable pinned pnpm
         run: |
           corepack enable
@@ -50,8 +81,10 @@ jobs:
           magick -version
       - name: Install Chromium
         run: pnpm -C app exec playwright install --with-deps --no-shell chromium
-      - name: Run complete verification registry
-        run: pnpm -C app verify:all -- --jobs 2
+      - name: Run selected verification pack
+        env:
+          VERIFY_PACK: ${{ steps.plan.outputs.pack }}
+        run: pnpm -C app verify:all -- --pack "$VERIFY_PACK" --jobs 2
       - name: Require tracked checkout to remain clean
         run: git diff --exit-code && git diff --cached --exit-code
 
