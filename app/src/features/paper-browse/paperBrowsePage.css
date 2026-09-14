@@ -52,14 +52,34 @@
   background: var(--eqb-color-bg, #F3F5F1);
 }
 
-.paper-browse-shell:not(.paper-browse-shell--lecture-open) {
-  padding-top: 32px;
+@media screen and (min-width: 1200px) {
+  .paper-browse-shell {
+    grid-template-columns: 72px minmax(0, 1fr) 440px;
+  }
+
+  .paper-browse-content {
+    transform: translateX(0);
+  }
+
+  /* Keep the lecture-sized sheet centered until its right-hand notes open.
+     Half the unequal outer columns (440 - 72) is the centering offset. */
+  .paper-browse-shell:not(.paper-browse-shell--lecture-open) .paper-browse-content {
+    transform: translateX(184px);
+  }
+
+  .paper-browse-shell:not(.paper-browse-shell--lecture-open) .paper-browse-rail {
+    width: 120px;
+  }
 }
 
-@media (min-width: 1200px) {
-  .paper-browse-shell--lecture-open {
-    grid-template-columns: 72px 1fr 440px;
+@media screen and (min-width: 1200px) and (prefers-reduced-motion: no-preference) {
+  .paper-browse-content {
+    transition: transform var(--motion-slow) var(--ease-out);
   }
+}
+
+.paper-browse-content[data-moving] ~ .pi-line-overlay {
+  visibility: hidden;
 }
 
 .paper-browse-rail {

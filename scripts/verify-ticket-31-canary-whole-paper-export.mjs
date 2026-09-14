@@ -18,6 +18,7 @@ import { DatabaseSync } from 'node:sqlite'
 import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
 import { createExportImplementation } from '../server/exports/exportImplementation.mjs'
 import { createCanonicalConsumerRuntime } from '../server/paper-canonical/consumerRuntime.mjs'
+import { listCanonicalPaperCatalog } from '../server/search/canonicalPaperCatalog.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
 import { renderPaginatedPaper } from '../server/draft-paper/paginationRenderer.mjs'
 import { closeChromiumPool } from '../server/draft-paper/chromiumPool.mjs'
@@ -87,6 +88,53 @@ function expectRejected(action, label) {
   assert.throws(action, (error) => error?.code === 'CANONICAL_CONSUMPTION_REJECTED', label)
 }
 
+function catalogIds(rootDir) {
+  const db = new DatabaseSync(path.join(rootDir, 'publication.sqlite'), { readOnly: true })
+  try {
+    return listCanonicalPaperCatalog({ db, rootDir }).map(paper => paper.paperId).sort()
+  } finally {
+    db.close()
+  }
+}
+
+function prepareBrowsableStore(sourceRoot, targetRoot) {
+  cpSync(sourceRoot, targetRoot, { recursive: true, force: true })
+  const db = new DatabaseSync(path.join(targetRoot, 'publication.sqlite'), { readOnly: true })
+  try {
+    for (const row of db.prepare('SELECT paper_id, version_name FROM canonical_paper_publications WHERE is_current = 1').all()) {
+      const versionDir = path.join(targetRoot, row.paper_id, 'versions', row.version_name)
+      const latestDir = path.join(targetRoot, row.paper_id, 'latest')
+      mkdirSync(latestDir, { recursive: true })
+      cpSync(path.join(sourceRoot, row.paper_id, 'versions', row.version_name, 'paper-asset.json'), path.join(versionDir, 'canonical/source-asset.bin'))
+      // Same layout as production backfill: sealed source separate from the
+      // existing browser JSON. Never rewrite the immutable publication fixture.
+      const mirror = path.join('app/public/paper-assets', row.paper_id, 'latest/paper-asset.json')
+      cpSync(mirror, path.join(versionDir, 'paper-asset.json'))
+      cpSync(mirror, path.join(latestDir, 'paper-asset.json'))
+    }
+  } finally {
+    db.close()
+  }
+}
+
+// Exercise every committed publication, not merely the four visual canaries.
+for (const rootDir of [canaryRoot, 'test-fixtures/paper-canonical/publications/ticket-32-remaining-v1/store']) {
+  const db = new DatabaseSync(path.join(rootDir, 'publication.sqlite'), { readOnly: true })
+  const browseRoot = mkdtempSync(path.join(tmpdir(), 'eqb-catalog-corpus-'))
+  try {
+    prepareBrowsableStore(rootDir, browseRoot)
+    const expected = db.prepare('SELECT paper_id FROM canonical_paper_publications WHERE is_current = 1').all().map(row => row.paper_id).sort()
+    const started = performance.now()
+    assert.deepEqual(catalogIds(browseRoot), expected, 'every confirmed paper with the served JSON mirror is discoverable without analysis-sidecar eligibility')
+    const elapsed = performance.now() - started
+    assert.ok(elapsed < 1500, `catalog must not revalidate the entire corpus (${elapsed.toFixed(0)}ms)`)
+    console.log(`PASS publication catalog: ${expected.length} papers, ${elapsed.toFixed(0)}ms, ${rootDir}`)
+  } finally {
+    db.close()
+    rmSync(browseRoot, { recursive: true, force: true })
+  }
+}
+
 function structuredSourceArtifact(rootDir, paperId) {
   const versionDir = path.join(rootDir, paperId, 'versions', 'v1')
   const capture = JSON.parse(readFileSync(
@@ -125,11 +173,17 @@ function immutableAssetProjectionBytes(rootDir, paperId) {
 function assertLegacySourceBindingAdversaries() {
   const corruptRoot = mkdtempSync(path.join(tmpdir(), 'eqb-ticket-31-binding-'))
   try {
-    cpSync(canaryRoot, corruptRoot, { recursive: true })
+    prepareBrowsableStore(canaryRoot, corruptRoot)
+    const served = path.join(corruptRoot, 'paper-960d0f8d/latest/paper-asset.json')
+    writeFileSync(served, '{}')
+    withRuntime(corruptRoot, runtime => assert.equal(runtime.load({ paperId: 'paper-960d0f8d', consumerId: 'screen' }).disposition, 'ready'))
+    assert.equal(catalogIds(corruptRoot).includes('paper-960d0f8d'), false, 'a published paper with an unreadable served projection is not advertised')
+    prepareBrowsableStore(canaryRoot, corruptRoot)
     const target = structuredSourceArtifact(corruptRoot, 'paper-960d0f8d')
     const original = readFileSync(target)
     writeFileSync(target, Buffer.concat([original, Buffer.from(' ')]))
     withRuntime(corruptRoot, (runtime) => {
+      expectRejected(() => runtime.load({ paperId: 'paper-960d0f8d', consumerId: 'screen' }), 'tampered source rejected on open, without revalidating every paper on list')
       expectRejected(
         () => exportWholePaper({
           rootDir: corruptRoot,
@@ -141,12 +195,13 @@ function assertLegacySourceBindingAdversaries() {
       )
     })
 
-    cpSync(canaryRoot, corruptRoot, { recursive: true, force: true })
+    prepareBrowsableStore(canaryRoot, corruptRoot)
     writeFileSync(
       structuredSourceArtifact(corruptRoot, 'paper-960d0f8d'),
       readFileSync(structuredSourceArtifact(corruptRoot, 'paper-2025-ii')),
     )
     withRuntime(corruptRoot, (runtime) => {
+      expectRejected(() => runtime.load({ paperId: 'paper-960d0f8d', consumerId: 'screen' }), 'swapped source rejected on open')
       expectRejected(
         () => exportWholePaper({
           rootDir: corruptRoot,
@@ -158,9 +213,10 @@ function assertLegacySourceBindingAdversaries() {
       )
     })
 
-    cpSync(canaryRoot, corruptRoot, { recursive: true, force: true })
+    prepareBrowsableStore(canaryRoot, corruptRoot)
     rmSync(structuredSourceArtifact(corruptRoot, 'paper-960d0f8d'))
     withRuntime(corruptRoot, (runtime) => {
+      expectRejected(() => runtime.load({ paperId: 'paper-960d0f8d', consumerId: 'screen' }), 'missing source rejected on open')
       expectRejected(
         () => exportWholePaper({
           rootDir: corruptRoot,

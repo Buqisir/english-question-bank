@@ -194,7 +194,8 @@ const hexMatches = [...cssSrcNoComments.matchAll(/#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]
 // pins. Re-pin #ffffff to L171 / L462 / L770.
 // ui-northstar 卷边: .draft-a4-sheet comment rewrite net -1 above the later
 // pins. Re-pin #ffffff to L171 / L461 / L769.
-const WHITELISTED_LINES = new Set([171, 461, 769])
+// Shared desk palette/status refinement; the same three white text literals remain.
+const WHITELISTED_LINES = new Set([188, 478, 780])
 
 const unexpectedHex = hexMatches.filter(
   (m) => !(m.value.toLowerCase() === '#ffffff' && WHITELISTED_LINES.has(m.line)),
@@ -358,6 +359,12 @@ assert(
   'workbench drives AppTopbar via pageTitleEditable + actionsSlot (LD2)',
   /pageTitleEditable/.test(tsxSrc) && /actionsSlot=/.test(tsxSrc),
   'AppTopbar wiring props missing from DraftPaperWorkbench.tsx',
+)
+
+assert(
+  'save status is beside the document title, including a visible failure state',
+  /pageStatus=\{[\s\S]*?draft-save-status[\s\S]*?role="status"[\s\S]*?保存失败/.test(tsxSrc),
+  'save status must not be hidden exclusively inside More',
 )
 
 /* ─── Summary ─────────────────────────────────────────────────────── */

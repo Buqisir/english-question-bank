@@ -137,7 +137,7 @@ assert('frontend can save draft paper artifact', service.includes('saveDraftPape
 assert('frontend can download artifact', service.includes('downloadMySpaceArtifact'))
 
 const workbench = read('app/src/features/draft-paper/DraftPaperWorkbench.tsx')
-assert('Draft workbench exposes save to My Space', workbench.includes('保存到个人空间'))
+assert('Draft workbench identifies the saved My Space artifact as PDF', workbench.includes('保存 PDF 到个人空间'))
 assert('Draft workbench has compact save dialog', workbench.includes('draft-save-space-dialog'))
 assert('Draft workbench creates folder from dialog', workbench.includes('createFolderInDialog'))
 assert('Draft workbench does not print source metadata in A4', !workbench.includes('显示来源'))

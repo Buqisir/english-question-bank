@@ -16,7 +16,7 @@
  */
 
 import { useEffect, useId, useMemo, useState, type FormEvent, type ReactNode } from 'react'
-import { ArrowRight, X } from 'lucide-react'
+import { ArrowRight, SlidersHorizontal, X } from 'lucide-react'
 import type { QuestionGroupCard } from '../domain/questionBank.ts'
 import { aggregatePaperResults, type PaperResult } from './aggregatePaperResults.ts'
 import { ConciergePaperRow } from './ConciergePaperRow.tsx'
@@ -93,7 +93,7 @@ const ROTATING_PLACEHOLDERS = [
 ] as const
 
 /** Default feed shows this many papers before the "显示全部" expander. */
-const DEFAULT_FEED_PAGE_SIZE = 8
+const DEFAULT_FEED_PAGE_SIZE = 4
 
 /** UI 门面刀 F2 — muted dimension labels in front of each chip row. */
 const FILTER_DIM_LABEL: Record<'groupType' | 'year' | 'region' | 'sourceType' | 'topicGroup', string> = {
@@ -152,44 +152,6 @@ type FeedYearGroup = {
   year: number | null
   label: string
   papers: PaperResult[]
-}
-
-const WEEKDAY_LABELS = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'] as const
-
-function formatFeedDateLabel(iso: string): string {
-  const day = String(iso || '').slice(0, 10)
-  if (!day) return '未标日期'
-  const now = new Date()
-  const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`
-  if (day === today) return '今天'
-  const yesterdayDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1)
-  const yesterday = `${yesterdayDate.getFullYear()}-${String(yesterdayDate.getMonth() + 1).padStart(2, '0')}-${String(yesterdayDate.getDate()).padStart(2, '0')}`
-  if (day === yesterday) return '昨天'
-  const parsed = new Date(`${day}T12:00:00`)
-  if (Number.isNaN(parsed.getTime())) return day
-  return `${parsed.getMonth() + 1}月${parsed.getDate()}日 · ${WEEKDAY_LABELS[parsed.getDay()]}`
-}
-
-type FeedDateGroup = {
-  key: string
-  label: string
-  papers: PaperResult[]
-}
-
-function groupFeedByDate(papers: PaperResult[]): FeedDateGroup[] {
-  const groups: FeedDateGroup[] = []
-  const byDate = new Map<string, FeedDateGroup>()
-  for (const paper of papers) {
-    const key = String(paper.importedAt || '').slice(0, 10) || 'unknown'
-    let group = byDate.get(key)
-    if (!group) {
-      group = { key, label: formatFeedDateLabel(paper.importedAt), papers: [] }
-      byDate.set(key, group)
-      groups.push(group)
-    }
-    group.papers.push(paper)
-  }
-  return groups
 }
 
 function groupFeedByYear(papers: PaperResult[]): FeedYearGroup[] {
@@ -489,22 +451,13 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
     [showFeed, filteredQuestionGroups],
   )
   const feedPaperCount = defaultFeed.length
-  // home-editorial round 2 — feed rows group by year (组头「2026」+「N 套」);
-  // defaultFeed is already year-DESC + null-last sorted (buildDefaultFeed),
-  // so grouping only needs to bucket consecutive same-year runs.
-  //
-  // CR round-2 M1: group over the FULL feed and paginate by WHOLE year
-  // groups — never slice papers mid-year. Slicing first made the collapsed
-  // view show "2024 · 2 套" while the library holds 4 (组头计数失真，违反
-  // 「N 套」真实计数章程). Collapsed view takes whole year groups until the
-  // cumulative paper count reaches DEFAULT_FEED_PAGE_SIZE, so every header
-  // it shows carries that year's true total.
+  // Browse retains the full year-grouped catalog and truthful year totals.
+  // Only the home additions list below is capped.
   const feedByYear = useMemo(() => groupFeedByYear(defaultFeed), [defaultFeed])
   const homeRecentFeed = useMemo(
     () => (showFeed && !isBrowseScreen ? buildRecentFeed(questionGroups, DEFAULT_FEED_PAGE_SIZE) : []),
     [showFeed, isBrowseScreen, questionGroups],
   )
-  const homeFeedByDate = useMemo(() => groupFeedByDate(homeRecentFeed), [homeRecentFeed])
   const browseYears = useMemo(
     () => buildFacetedFilterOptions(questionGroups, {}).year.map((option) => Number(option.value)),
     [questionGroups],
@@ -512,15 +465,9 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
   const browseRecentYears = browseYears.slice(0, 4)
   const browseOlderCutoff = browseRecentYears[browseRecentYears.length - 1]
 
-  // Command-line inventory count — always the FULL, unfiltered corpus (not
-  // narrowed by search/chip filters), so "34 套卷 · 278 篇章" reads as a
-  // constant fact about the library, not a moving search-result count.
+  // Browse-all and search recovery refer to the full, unfiltered catalog.
   const catalogFeed = useMemo(() => buildDefaultFeed(questionGroups), [questionGroups])
   const catalogPaperCount = catalogFeed.length
-  const catalogGroupCount = useMemo(
-    () => catalogFeed.reduce((sum, paper) => sum + paper.groups.length, 0),
-    [catalogFeed],
-  )
 
   // C2: search-result rows narrow the same way, but by construction from
   // `state.hits` rather than by editing the already-aggregated
@@ -613,6 +560,18 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                 {state.kind === 'loading' || dataLoading ? '取题中…' : <ArrowRight size={14} aria-hidden="true" />}
               </button>
             </form>
+            {isHomeScreen && onEnterBrowse && (
+              <button
+                type="button"
+                className="concierge-browse-entry"
+                onClick={handleEnterBrowse}
+                disabled={dataLoading}
+              >
+                <SlidersHorizontal size={16} aria-hidden="true" />
+                浏览题库与筛选
+                <ArrowRight size={14} aria-hidden="true" />
+              </button>
+            )}
             {isBrowseScreen && !dataLoading && state.kind === 'empty' && (
               <div className="concierge-browse-chips" role="group" aria-label="筛选">
                 <button
@@ -664,13 +623,6 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                   </button>
                 )}
               </div>
-            )}
-            {isHomeScreen && (
-              <p className="concierge-meta">
-                {dataLoading
-                  ? '正在连接本地题库，稍候即可搜索。'
-                  : `${catalogPaperCount} 套卷 · ${catalogGroupCount} 篇章 · 一句话描述你要的题`}
-              </p>
             )}
           </div>
           {state.kind !== 'empty' && onThinkingModeChange && (
@@ -930,7 +882,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
       </div>
 
       {showFeed && (
-        <div className="concierge-default-feed" aria-label={isBrowseScreen ? '题库浏览' : '最近入库'}>
+        <div className="concierge-default-feed" role="region" aria-label={isBrowseScreen ? '题库浏览' : '最近上新'}>
           {questionGroups.length === 0 ? (
             <p className="concierge-feed-empty-corpus">
               题库还没有题目。先导入一套卷，题库会在这里展开浏览。
@@ -976,42 +928,41 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
             </div>
           ) : (
             <>
-              <h1 className="concierge-feed-label">最近入库</h1>
-              <div className="concierge-date-feed">
-                {homeFeedByDate.map((dateGroup) => (
-                  <section key={dateGroup.key} className="concierge-feed-date-group">
-                    <div className="concierge-feed-date-head">{dateGroup.label}</div>
-                    <ul className="concierge-paper-list">
-                      {dateGroup.papers.map((paper) => (
-                        <li key={paper.key}>
-                          <ConciergePaperRow
-                            paper={paper}
-                            variant="feed"
-                            yearPrefix
-                            expanded={expandedPaperKey === paper.key}
-                            basketIds={basketIds}
-                            onTogglePaper={togglePaper}
-                            onAdd={onAdd}
-                            onOpenDetail={onOpenDetail}
-                            onOpenPaperBrowse={onOpenPaperBrowse}
-                            questionGroupById={questionGroupById}
-                            expandedSimilarGroupId={expandedSimilarGroupId}
-                            similarPassagesRequest={similarPassagesRequest}
-                            onToggleSimilar={handleToggleSimilar}
-                            onRetrySimilar={() => expandedSimilarGroupId && void loadSimilarPassages(expandedSimilarGroupId)}
-                          />
-                        </li>
-                      ))}
-                    </ul>
-                  </section>
-                ))}
-              </div>
-              <p className="concierge-see-all">
+              <div className="concierge-feed-heading">
+                <h1 className="concierge-feed-label">最近上新</h1>
                 <button type="button" className="concierge-feed-expand" onClick={handleEnterBrowse}>
                   查看全部 {catalogPaperCount} 套卷
                   <ArrowRight size={14} aria-hidden="true" />
                 </button>
-              </p>
+              </div>
+              {homeRecentFeed.length === 0 ? (
+                <p className="concierge-feed-empty-corpus">
+                  暂无已就绪的新卷，已有材料仍可在题库中浏览。
+                </p>
+              ) : (
+                <ul className="concierge-paper-list">
+                  {homeRecentFeed.map((paper) => (
+                    <li key={paper.key}>
+                      <ConciergePaperRow
+                        paper={paper}
+                        variant="feed"
+                        recentAddition
+                        expanded={expandedPaperKey === paper.key}
+                        basketIds={basketIds}
+                        onTogglePaper={togglePaper}
+                        onAdd={onAdd}
+                        onOpenDetail={onOpenDetail}
+                        onOpenPaperBrowse={onOpenPaperBrowse}
+                        questionGroupById={questionGroupById}
+                        expandedSimilarGroupId={expandedSimilarGroupId}
+                        similarPassagesRequest={similarPassagesRequest}
+                        onToggleSimilar={handleToggleSimilar}
+                        onRetrySimilar={() => expandedSimilarGroupId && void loadSimilarPassages(expandedSimilarGroupId)}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              )}
             </>
           )}
         </div>

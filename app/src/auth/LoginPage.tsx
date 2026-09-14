@@ -1,4 +1,3 @@
-import { Book } from 'lucide-react'
 import { useState, type FormEvent } from 'react'
 import './LoginPage.css'
 import { login } from './session.ts'
@@ -27,16 +26,11 @@ export function LoginPage() {
   }
 
   return (
-    <div className="login-page">
-      <div className="login-card">
-        <div className="login-identity">
-          <span className="login-brand-mark" aria-hidden="true">
-            <Book size={12} strokeWidth={1.5} />
-          </span>
-          <h1>英语题库工作台</h1>
-        </div>
+    <main className="login-page">
+      <section className="login-card" aria-labelledby="login-title">
+        <h1 id="login-title">英语题库工作台</h1>
         <p className="login-subtitle">输入账号，接着备课。</p>
-        {error && <p className="login-error">{error}</p>}
+        {error && <p className="login-error" role="alert">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="login-field">
             <label htmlFor="login-username">用户名</label>
@@ -66,8 +60,8 @@ export function LoginPage() {
             {submitting ? '登录中…' : '登录'}
           </button>
         </form>
-        <p className="login-footer-hint">账号由馆主邀请开通。</p>
-      </div>
-    </div>
+        <p className="login-footer-hint">账号需邀请开通。</p>
+      </section>
+    </main>
   )
 }

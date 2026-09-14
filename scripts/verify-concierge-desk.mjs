@@ -464,6 +464,11 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
   assert('Paper row does NOT call fetchQuestionGroupDetail', !/fetchQuestionGroupDetail/.test(paperRowSource), '')
 
   // 9.8 ConciergeGroupCard contract — group-level actions live here.
+  assert('Group directory no longer renders per-group question counts',
+    !groupCardSource.includes('group.questionCount') && !groupCardSource.includes('concierge-group-row-count'), '')
+  assert('Reading labels use stored passage identity rather than result position',
+    groupCardSource.includes('[group.section, group.passageTitle, group.title]')
+      && groupCardSource.includes('`${match[1].toUpperCase()}篇`'), '')
   assert('Group card has C8 draft labels', /已在草稿卷中/.test(groupCardSource) && /加入草稿卷/.test(groupCardSource) && /暂不可组卷/.test(groupCardSource), '')
   assert('Group card draft + titles switch add/remove', /加入当前草稿卷/.test(groupCardSource) && /从草稿卷移出/.test(groupCardSource), '')
   assert('Group card aria-pressed follows joined draft state', /aria-pressed=\{draftState === ['"]in_current_draft['"]\}/.test(groupCardSource), '')
@@ -716,9 +721,11 @@ console.log('\nTest 12: Quiet first-screen — landing hero gone; STARTER_CHIPS 
 
   // Intent bar resting + focus.
   const barRule = css.match(/\.concierge-intent-bar\s*\{[^}]*\}/)?.[0] || ''
-  assert('intent-bar rest border #D5D9D2', /border:\s*1px solid #D5D9D2/i.test(barRule), '')
+  assert('intent-bar rest border uses desk palette', /border:\s*1px solid var\(--desk-border\)/.test(barRule), '')
   const focusRule = css.match(/\.concierge-intent-bar:focus-within\s*\{[^}]*\}/)?.[0] || ''
-  assert('focus border ink #1F1F1D', /border-color:\s*#1F1F1D/i.test(focusRule), '')
+  assert('focus border uses muted desk ink', /border-color:\s*var\(--desk-muted\)/.test(focusRule), '')
+  const keyboardFocusRule = css.match(/\.concierge-intent-bar:has\(:focus-visible\)\s*\{[^}]*\}/)?.[0] || ''
+  assert('keyboard focus retains an explicit outline', /outline:\s*2px solid var\(--desk-muted\)/.test(keyboardFocusRule), '')
 }
 
 // ------------------------------------------------------------------ Test 13
@@ -763,11 +770,11 @@ console.log('\nTest 14: Paper row hover + clickable + 草稿卷 wording in App')
   // --motion-*/--ease-* tokens (docs/cuts/motion-pass/plan.md #2); assert the
   // token form on the same background+box-shadow pair, still no transform.
   assert('paper-row has soft transition (no transform)', /transition:\s*background\s*var\(--motion-fast\)\s*var\(--ease-hover\),\s*box-shadow\s*var\(--motion-fast\)\s*var\(--ease-hover\)/.test(paperRowRule), `got: ${paperRowRule}`)
-  const hoverRule = css.match(/\.concierge-paper-row:hover[\s\S]{0,240}background:\s*#E9ECE6/)?.[0] || ''
-  assert('paper-row hover uses surface-2 #E9ECE6', /background:\s*#E9ECE6/i.test(hoverRule), '')
+  const hoverRule = css.match(/\.concierge-paper-row:hover[\s\S]{0,240}background:\s*var\(--desk-hover\)/)?.[0] || ''
+  assert('paper-row hover uses desk hover surface', /background:\s*var\(--desk-hover\)/.test(hoverRule), '')
   assert(
-    'expanded paper header stays surface-2 #E9ECE6',
-    /\.concierge-paper-row\.is-expanded[\s\S]{0,120}\.concierge-paper-row-head[\s\S]{0,200}background:\s*#E9ECE6/.test(css),
+    'expanded paper header stays on desk hover surface',
+    /\.concierge-paper-row\.is-expanded[\s\S]{0,120}\.concierge-paper-row-head[\s\S]{0,200}background:\s*var\(--desk-hover\)/.test(css),
     '',
   )
 

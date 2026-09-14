@@ -129,7 +129,7 @@ export type DraftPaperRailProps = {
   onDrop: (targetId: string) => void
   onMoveItem: (itemId: string, direction: -1 | 1) => void
   onDeleteItem: (item: DraftPaperItem) => void
-  /* workbench-header-unify Locked Decision 5: the "共 N 页 · 双面 M 张 · A4"
+  /* workbench-header-unify Locked Decision 5: the "共 N 页 · 双面 M 张"
      真值 text retired from `.draft-paper-meta-row` (which retired along with
      it) and relocates here as a quiet annotation at the rail's top —
      DraftPaperWorkbench.tsx still owns the pageCount/printForm math, this
@@ -140,22 +140,6 @@ export type DraftPaperRailProps = {
      "目录 ⇄ 抽屉两态原地切换", never both at once. `<nav>` itself (width/
      sticky positioning) is unchanged either way. */
   swapDrawer?: DraftPaperSwapDrawerProps | null
-}
-
-const CHINESE_DIGITS = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九']
-
-// draft-desk-a: mirrors server/print-renderer.mjs's chineseNumeral() (H9 Draft
-// cut) closely enough for rail display purposes — no shared client helper
-// exists to import (confirmed: neither app/src nor a shared module exports
-// one), and this rail-only numbering is presentational, not a print/export
-// source of truth, so a small duplicate is the same accepted pattern this
-// file family already uses for groupTypeLabel.
-function chineseNumeral(n: number): string {
-  if (!Number.isInteger(n) || n < 1) return String(n)
-  if (n <= 10) return n === 10 ? '十' : CHINESE_DIGITS[n]
-  if (n < 20) return `十${CHINESE_DIGITS[n - 10]}`
-  if (n === 20) return '二十'
-  return String(n)
 }
 
 /** 小手的高度，与整卷页目录同值（PointingHand 默认 16）。 */
@@ -210,19 +194,6 @@ export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
     )
   }
 
-  // Precompute the printable (Chinese-numeral) rank per item ahead of the
-  // render loop below, instead of mutating a counter from inside the .map()
-  // callback — react-hooks/immutability (eslint-plugin-react-hooks, aimed at
-  // React Compiler compatibility) flags reassigning a render-scoped variable
-  // from within a JSX-producing callback.
-  const printableRankByItemId = new Map<string, number>()
-  let printableCounter = 0
-  for (const item of items) {
-    if (item.groupMissing) continue
-    printableCounter += 1
-    printableRankByItemId.set(item.id, printableCounter)
-  }
-
   function handleKeyDown(event: KeyboardEvent<HTMLDivElement>, groupId: string, isMissing: boolean) {
     if (isMissing) return
     if (event.key === 'Enter' || event.key === ' ') {
@@ -242,14 +213,11 @@ export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
       )}
       {items.map((item) => {
         const isMissing = item.groupMissing
-        const printableRank = printableRankByItemId.get(item.id)
         const label = isMissing
           ? '题组已从题库中移除'
-          : item.questionGroup?.passageTitle || item.questionGroup?.title || item.groupId
-        // C6 (trust-cracks) — rail 行尾计数改为 "N 题"（去题型词）：题型已经在
-        // 同一行的 groupTypeLabel 里显示过一次，行尾再复读一遍对阅读四项
-        // (A/B/C/D 都读 "阅读") 尤其重复。`title` 补回 label · 题型 · N 题的
-        // 全文，鼠标悬停/长按仍能看到被截断的完整信息。
+          : (item.questionGroup?.passageTitle || item.questionGroup?.title || item.groupId)
+            .replace(/^Reading\s+([A-D])$/i, (_, letter: string) => `${letter.toUpperCase()}篇`)
+        // Keep custom titles and ordering; secondary type/count information lives in the tooltip.
         const groupTypeText = groupTypeLabel[item.questionGroup?.groupType || 'other']
         const questionCount = item.questionGroup?.questionCount || 0
         const rowTitle = isMissing ? undefined : `${label} · ${groupTypeText} · ${questionCount} 题`
@@ -269,11 +237,7 @@ export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
             tabIndex={0}
             title={rowTitle}
           >
-            {!isMissing && <span className="draft-paper-rail-no">{chineseNumeral(printableRank ?? 0)}</span>}
             <span className="draft-paper-rail-label">{label}</span>
-            {!isMissing && (
-              <span className="draft-paper-rail-count">{questionCount} 题</span>
-            )}
             {/* ui-northstar: 拖拽把手移到行尾——它 hover 前不可见但仍占位，
                 留在行首会把小手和标题顶开一格。 */}
             <GripVertical aria-hidden="true" className="draft-paper-rail-grip" size={13} />

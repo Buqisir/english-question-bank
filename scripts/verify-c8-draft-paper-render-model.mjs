@@ -301,12 +301,10 @@ assert('rail extraction lives in its own component', workbench.includes("from '.
 // metadata) — move/page-break/delete now live on the paper-hover sticker in
 // Workbench.tsx itself, not on a per-row outline control.
 assert('rail component is a pure list (no per-row source metadata)', !rail.includes('compactSource'))
-// C6 (trust-cracks) — rail 行尾计数改为 "N 题"（去题型词，避免题型与同行
-// groupTypeLabel 逐字复读；四个阅读项此前都读 "Reading…" 四行）。行上补一个
-// title 提示全文（label · 题型 · N 题）。
+// Quiet rail: keep secondary counts in the full tooltip, not on every row.
 assert(
-  'rail row-end count is bare "N 题" (groupType word dropped from the trailing count span)',
-  rail.includes('<span className="draft-paper-rail-count">{questionCount} 题</span>'),
+  'rail does not repeat ordinals or question counts on each visible row',
+  !rail.includes('className="draft-paper-rail-count"') && !rail.includes('className="draft-paper-rail-no"'),
 )
 assert(
   'rail row does NOT repeat groupTypeLabel inside the trailing count span (old complaint: 题型 X 阅读 X 4 行复读)',

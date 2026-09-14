@@ -1473,7 +1473,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
               void openSpaceDialog()
             }}
           >
-            <Archive size={15} /> 保存到个人空间
+            <Archive size={15} /> 保存 PDF 到个人空间
           </button>
         </div>
       )}
@@ -1481,8 +1481,8 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   )
 
   const pagesMetaText = draftPaper.printForm === 'a3'
-    ? `共 ${pageCount} 版 · 对折 ${Math.ceil(pageCount / 4)} 张 · A3`
-    : `共 ${pageCount} 页 · 双面 ${Math.ceil(pageCount / 2)} 张 · A4`
+    ? `共 ${pageCount} 版 · 对折 ${Math.ceil(pageCount / 4)} 张`
+    : `共 ${pageCount} 页 · 双面 ${Math.ceil(pageCount / 2)} 张`
 
   return (
     <>
@@ -1491,12 +1491,15 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       pageTitle={titleDraft || draftPaper.title}
       pageTitleEditable
       onPageTitleChange={updateTitle}
+      pageStatus={
+        <span className={`draft-save-status ${saveStatus}`} role="status" title={saveStatus === 'error' ? saveError : undefined}>
+          {saveStatus === 'saving' ? '保存中' : saveStatus === 'error' ? '保存失败' : '已保存'}
+        </span>
+      }
       onBack={onBackToWorkbench}
       actionsSlot={
         <>
-          {/* workbench-header-unify Locked Decision 2: 学生（可选）/ 最近草稿卷
-              / 自动保存状态 三项降级收进这枚安静「⋯」菜单——字段行为原样
-              (学生 blur 保存、最近切换走现有 pushState 逻辑、保存状态实时显示)。 */}
+          {/* Low-frequency document fields remain in More; save status stays by the title. */}
           <div className="draft-more-menu" ref={moreMenuRef}>
             <button
               type="button"
@@ -1506,7 +1509,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
               aria-haspopup="true"
               aria-expanded={moreMenuOpen}
               aria-label={saveStatus === 'error' ? `草稿卷更多信息（保存出错：${saveError}）` : '草稿卷更多信息'}
-              title={saveStatus === 'error' ? `保存出错：${saveError}` : '学生 / 最近草稿卷 / 保存状态'}
+              title={saveStatus === 'error' ? `保存出错：${saveError}` : '学生 / 最近草稿卷'}
               onClick={() => setMoreMenuOpen((open) => !open)}
             >
               <MoreHorizontal size={16} />
@@ -1557,9 +1560,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                     ))}
                   </select>
                 </label>
-                <span className={`draft-save-status ${saveStatus}`}>
-                  {saveStatus === 'saving' ? '保存中' : saveStatus === 'saved' ? '已保存' : saveStatus === 'error' ? saveError : '自动保存'}
-                </span>
+                {saveStatus === 'error' && <p className="draft-error">{saveError}</p>}
                 {/* Locked Decision 5 窄屏退化补充: ≤980px 时 A4/A3 与版本切换
                     一并被「⋯」吸收——duplicated mounts of the same controls,
                     shown only at that breakpoint (see CSS). */}
@@ -1712,7 +1713,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                 ? pageBreakSuggestions.find((entry) => entry.groupId === item.groupId)
                 : undefined
               return (
-                <div key={item.id} className="draft-group-actions" style={{ top: `${anchorTop}px` }}>
+                <div key={item.id} className="draft-group-actions" role="group" aria-label="题组工具" style={{ top: `${anchorTop}px` }}>
                   {suggestion && (
                     <button
                       type="button"
@@ -1913,7 +1914,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       {spaceDialogPresence.mounted && (
         <div className="draft-modal-backdrop" role="presentation" data-visible={spaceDialogPresence.visible}>
           <form
-            aria-label="保存到个人空间"
+            aria-label="保存 PDF 到个人空间"
             className="draft-save-space-dialog"
             data-visible={spaceDialogPresence.visible}
             onSubmit={(event) => {
@@ -1922,7 +1923,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
             }}
           >
             <div className="draft-dialog-head">
-              <strong>保存到个人空间</strong>
+              <strong>保存 PDF 到个人空间</strong>
               <button type="button" onClick={() => setSpaceDialogOpen(false)}>关闭</button>
             </div>
             <label>

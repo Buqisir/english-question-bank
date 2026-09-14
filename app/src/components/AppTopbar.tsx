@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
-import { Archive, ArrowLeft, Book, BookMarked, LogOut, Pencil, Settings } from 'lucide-react'
+import { Archive, ArrowLeft, BookMarked, LogOut, Pencil, Settings } from 'lucide-react'
 
 function userInitials(username: string): string {
   return username.slice(0, 2)
@@ -46,6 +46,8 @@ export type AppTopbarProps = AppTopbarNav & {
      is the existing save path (e.g. draft workbench's `updateTitle`). */
   pageTitleEditable?: boolean
   onPageTitleChange?: (nextTitle: string) => void
+  /** Optional document status, kept beside its title rather than in a menu. */
+  pageStatus?: ReactNode
   /* workbench-header-unify Locked Decision 2/5: page-owned action controls
      (e.g. draft workbench's ⋯ menu / 学生版·教师版 / A4·A3 / 导出), rendered
      verbatim in the actions row before the global actions with a divider.
@@ -96,17 +98,11 @@ export function AppTopbar(props: AppTopbarProps): ReactNode {
         {variant === 'home' ? (
           !props.hideBrand && (
             <div className="topbar-identity">
-              <span className="topbar-brand-mark" aria-hidden="true">
-                <Book size={12} strokeWidth={1.5} />
-              </span>
               <span className="topbar-brand-title">英语题库工作台</span>
             </div>
           )
         ) : (
           <div className="topbar-identity">
-            <span className="topbar-brand-mark" aria-hidden="true">
-              <Book size={12} strokeWidth={1.5} />
-            </span>
             <span className="topbar-brand-title">英语题库工作台</span>
             {props.pageTitleEditable ? (
               editingTitle ? (
@@ -154,6 +150,7 @@ export function AppTopbar(props: AppTopbarProps): ReactNode {
                 </>
               )
             )}
+            {props.pageStatus}
           </div>
         )}
       </div>

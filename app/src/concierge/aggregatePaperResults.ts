@@ -135,6 +135,7 @@ function normalizeSourceSignature(value: unknown): string {
 }
 
 function buildKey(group: QuestionGroupCard): { key: string; isFallback: boolean } {
+  if (group.canonicalPaperId) return { key: `canonical:${group.canonicalPaperId}`, isFallback: false }
   const paperName = trim(group.paperName)
   const region = trim(group.region)
   const yearOk = Number.isFinite(group.year) && group.year > 0
