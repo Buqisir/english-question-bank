@@ -189,16 +189,21 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
 
   return (
     <div className="my-space-page">
-    <AppTopbar {...shellNav} pageTitle="个人空间" onBack={onBackToWorkbench} />
+    <AppTopbar {...shellNav} onBack={onBackToWorkbench} />
     <div className="my-space-shell">
       <header className="my-space-heading">
         <h1>个人空间</h1>
-        <p className="my-space-count">共 {artifacts.length} 份</p>
       </header>
 
       {message && loadState !== 'error' && <p className="my-space-message" role="status">{message}</p>}
 
       <main className="my-space-main">
+        <div className="my-space-section-head">
+          <h2>已保存的导出文件</h2>
+          {loadState === 'loaded' && artifacts.length > 0 && (
+            <span>{artifacts.length} 份</span>
+          )}
+        </div>
         {folders.length > 0 && (
           <div className="my-space-folders" role="group" aria-label="按文件夹筛选">
             <button
@@ -234,20 +239,16 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
 
         {loadState === 'loaded' && artifacts.length === 0 && (
           <div className="my-space-empty-state">
-            <FileText size={28} aria-hidden="true" />
-            <p className="my-space-empty">还没有保存的草稿卷 PDF。组一份卷子，导出后可以保存在这里。</p>
-            <button type="button" className="my-space-empty-cta" onClick={() => onOpenDraft('')}>
-              去组一份卷子
+            <FileText size={24} strokeWidth={1.5} aria-hidden="true" />
+            <p className="my-space-empty">试卷导出为 PDF 后，可以保存在这里。</p>
+            <button type="button" className="my-space-empty-cta" onClick={onBackToWorkbench}>
+              去找题
             </button>
           </div>
         )}
 
         {loadState === 'loaded' && artifacts.length > 0 && (
           <>
-            <div className="my-space-section-head">
-              <h2>草稿卷</h2>
-              <span>导出保存的 PDF 成品</span>
-            </div>
             {monthGroups.map((group) => (
               <section className="my-space-month-group" key={group.key} aria-label={group.label}>
                 <div className="my-space-month-head">

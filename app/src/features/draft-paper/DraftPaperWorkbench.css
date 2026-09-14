@@ -1,3 +1,19 @@
+.draft-workbench-shell,
+.topbar:has(+ .draft-workbench-shell) {
+  --paper-desk-bg: var(--desk-page);
+  --panel: var(--desk-surface);
+  --surface-strong: var(--desk-hover);
+  --ink: var(--desk-ink);
+  --ink-soft: var(--desk-muted);
+  --muted: var(--desk-muted);
+  --line: var(--desk-line);
+  --line-strong: var(--desk-border);
+}
+
+.topbar:has(+ .draft-workbench-shell) {
+  background: var(--desk-page);
+}
+
 .draft-workbench-shell {
   min-height: 100vh;
   /* header-unify DP-3 打回收账（owner 面板选取器实指 2026-07-14）：
@@ -99,7 +115,9 @@
 
 .draft-save-status {
   color: var(--muted);
-  font-size: 13px;
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 400;
   white-space: nowrap;
 }
 
@@ -108,7 +126,7 @@
 }
 
 .draft-save-status.saved {
-  color: var(--eqb-color-success);
+  color: var(--muted);
 }
 
 .draft-save-status.error,
@@ -118,21 +136,28 @@
 
 .draft-version-toggle {
   background: transparent;
-  border: none;
-  border-radius: 8px;
+  border: 0;
   display: inline-flex;
   gap: 2px;
+  padding: 0;
+}
+
+.draft-topbar-wide-toggle + .draft-topbar-wide-toggle {
+  border-left: 1px solid var(--line);
+  padding-left: 10px;
 }
 
 .draft-version-toggle button {
   background: transparent;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   color: var(--muted);
   cursor: pointer;
   font: inherit;
+  font-size: 13px;
+  font-weight: 400;
   min-height: 32px;
-  padding: 6px 12px;
+  padding: 0 8px;
   /* emil-processing: 无 transition 时选中段瞬跳，全站其他 hover 都是缓动的 */
   transition: background var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
 }
@@ -142,19 +167,11 @@
   color: var(--ink);
 }
 
-/* ui-p1-panels #15: the selected version segment used to reuse the exact
-   same solid-teal/white treatment as the "导出" primary action button,
-   putting a selection state at the same visual weight as "the one thing
-   to click here" (audit L92). Chip 选中态词汇 (teal-50 底 + teal-800 字)
-   reads as "currently chosen", not "primary action". Token form (not a
-   literal #EAF1ED/#1E4A3A) so this file's palette-hex guard
-   (verify-draft-workbench-visual-unify.mjs) stays zero-hardcode —
-   color-mix approximates DESIGN.md teal-50 from the existing brand-teal
-   token; --eqb-color-primary-text is teal-800 exactly. */
+/* Selection stays legible without competing with the primary export action. */
 .draft-version-toggle button.active {
   background: var(--surface-strong);
   color: var(--ink);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 /* D5: custom floating export menu replacing native <details>/<summary> —
@@ -421,8 +438,8 @@
    and the页数真值 text moved to .draft-paper-rail-meta at the rail's top
    (see the rail block further down this file). */
 .draft-form-toggle button {
-  min-height: 26px;
-  padding: 4px 10px;
+  min-height: 32px;
+  padding: 0 8px;
 }
 
 .draft-a4-sheet {
@@ -494,36 +511,42 @@
   justify-content: center;
 }
 
-/* 裁点1「调整动作贴纸」：悬停纸上题组块，父层 overlay 在纸的右白边内
-   浮出 上移/下移/前置分页/移除。锚点由 DraftPaperWorkbench.tsx 用
-   iframe/元素 getBoundingClientRect 换算到 .draft-paper-col 坐标系，
-   只随命中题组变化，不随桌面滚动重算（两者的视口位移量相同，相对差
-   不变）。 */
+/* One persistent tool strip per group. Its paper-relative anchor stays stable
+   while scrolling; wide A4 places the strip on the desk outside the paper. */
 .draft-group-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  position: absolute;
-  right: 10px;
-  z-index: 5;
-}
-
-.draft-group-actions button {
   align-items: center;
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 8px;
-  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.08);
-  color: var(--ink-soft);
   display: flex;
-  height: 36px;
-  justify-content: center;
-  transition: border-color var(--motion-base) var(--ease-hover), color var(--motion-base) var(--ease-hover), transform var(--motion-base) var(--ease-out);
-  width: 36px;
+  flex-direction: column;
+  padding: 2px;
+  position: absolute;
+  right: 10px;
+  transition: border-color var(--motion-fast) var(--ease-hover);
+  z-index: 5;
 }
 
-.draft-group-actions button:hover {
+.draft-group-actions:hover,
+.draft-group-actions:focus-within {
   border-color: var(--line-strong);
+}
+
+.draft-group-actions button {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  color: var(--ink-soft);
+  display: flex;
+  min-height: 32px;
+  justify-content: center;
+  transition: background var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover), transform var(--motion-base) var(--ease-out);
+  width: 32px;
+}
+
+.draft-group-actions button:hover:not(:disabled) {
+  background: var(--surface-strong);
   color: var(--ink);
 }
 
@@ -532,29 +555,28 @@
 }
 
 .draft-group-actions button[aria-pressed='true'] {
-  border-color: var(--action);
+  background: var(--surface-strong);
   color: var(--ink);
 }
 
 .draft-group-actions button.danger:hover {
-  border-color: color-mix(in srgb, var(--eqb-color-danger) 35%, var(--paper-border));
   color: var(--eqb-color-danger);
 }
 
-/* print-form (plan.md Must Do 5, PO-1 收账): quiet annotation pill, sits above
-   the icon-button cluster in the same absolutely-positioned column — width
-   grows to fit its own text since the column has no explicit width. Reuses
-   the primary token (not a hardcoded hex) so it stays green/teal in both
-   themes without a new palette entry. */
+/* The optional page-break hint sits above the strip, without shifting the
+   tools away from their group's anchor when the hint appears. */
 .draft-group-actions .draft-group-suggestion {
   background: var(--surface-strong);
   border: 1px solid var(--line);
   border-radius: 999px;
+  bottom: calc(100% + 6px);
   color: var(--ink);
   cursor: pointer;
   font-size: 12px;
   height: auto;
   padding: 4px 9px;
+  position: absolute;
+  right: 0;
   white-space: nowrap;
   width: auto;
 }
@@ -672,9 +694,14 @@
   color: var(--ink);
 }
 
+.draft-paper-rail-item:focus-visible {
+  outline: 2px solid var(--action);
+  outline-offset: -2px;
+}
+
 .draft-paper-rail-item.active {
   color: var(--ink);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .draft-paper-rail-item.is-missing {
@@ -698,33 +725,17 @@
   transform: translateY(-50%);
 }
 
-.draft-paper-rail-item:hover .draft-paper-rail-count {
-  visibility: hidden;
-}
-
-.draft-paper-rail-item:hover .draft-paper-rail-grip {
+.draft-paper-rail-item:hover .draft-paper-rail-grip,
+.draft-paper-rail-item:focus-within .draft-paper-rail-grip {
   opacity: 1;
   pointer-events: auto;
-}
-
-.draft-paper-rail-no {
-  flex-shrink: 0;
-  font-variant-numeric: tabular-nums;
-  min-width: 1.4em;
 }
 
 .draft-paper-rail-label {
   flex: 1;
   overflow: hidden;
+  padding-right: 18px;
   text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.draft-paper-rail-count {
-  color: var(--eqb-color-text-faint);
-  flex-shrink: 0;
-  font-size: 12px;
-  font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 
@@ -909,7 +920,11 @@
 @media (max-width: 900px) {
   .draft-preview-desk {
     grid-template-columns: 1fr;
-    padding: 12px 10px 18px;
+    padding: 12px 48px 18px 10px;
+  }
+
+  .draft-group-actions {
+    right: -38px;
   }
 
   .draft-paper-rail {
@@ -928,7 +943,7 @@
 }
 
 .draft-group-actions-menu-trigger[aria-expanded='true'] {
-  border-color: var(--action);
+  background: var(--surface-strong);
   color: var(--ink);
 }
 
@@ -953,4 +968,35 @@
   justify-content: flex-start;
   padding: 0 10px;
   width: 100%;
+}
+
+@media (max-width: 560px) {
+  /* On a small editing screen, the document title takes precedence over branding. */
+  .topbar:has(+ .draft-workbench-shell) .topbar-brand-title,
+  .topbar:has(+ .draft-workbench-shell) .topbar-page-sep {
+    display: none;
+  }
+
+  .draft-more-menu-panel,
+  .draft-export-menu-panel {
+    left: 0;
+    right: auto;
+    transform-origin: top left;
+  }
+}
+
+@media (min-width: 1200px) {
+  /* Center the A4 sheet in the viewport, not just the space after the outline. */
+  .draft-preview-desk:has(> .draft-paper-col:not(.is-a3)) {
+    grid-template-columns: minmax(0, 1fr) 820px minmax(0, 1fr);
+  }
+
+  .draft-preview-desk:has(> .draft-paper-col:not(.is-a3)) > .draft-paper-rail {
+    justify-self: end;
+    width: 100%;
+  }
+
+  .draft-paper-col:not(.is-a3) .draft-group-actions {
+    right: -38px;
+  }
 }

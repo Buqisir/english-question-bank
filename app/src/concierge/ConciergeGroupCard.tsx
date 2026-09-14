@@ -14,7 +14,7 @@
 
 import { type MouseEvent, type ReactNode } from 'react'
 import { BookOpen, Check, FileText, Files, Plus } from 'lucide-react'
-import { type QuestionGroupCard } from '../domain/questionBank.ts'
+import { groupTypeLabel, type QuestionGroupCard } from '../domain/questionBank.ts'
 import { ConciergeGroupRowMenu, type ConciergeGroupRowMenuItem } from './ConciergeGroupRowMenu.tsx'
 import { buildPaperBrowseLectureHref } from './paperSurfaceHref.ts'
 import {
@@ -40,6 +40,20 @@ function isDisplayTag(tag: string | undefined): tag is string {
 }
 
 function compactPassageTitle(group: QuestionGroupCard): string {
+  if (group.groupType === 'reading') {
+    // Use the stored passage position, never the row's search-result order.
+    for (const label of [group.section, group.passageTitle, group.title]) {
+      const match = (label || '').match(/(?:Reading\s*|阅读(?:理解)?\s*)([A-G])(?:篇)?(?:$|[\s/：:])/i)
+        || (label || '').trim().match(/^([A-G])篇$/i)
+      if (match) return `${match[1].toUpperCase()}篇`
+    }
+  } else if (group.groupType !== 'other') {
+    // Asset cards may use the common writing type for both writing sections.
+    const writingSection = group.groupType === 'writing'
+      ? group.section.match(/(应用文写作|读后续写)$/)?.[1]
+      : null
+    return writingSection || groupTypeLabel[group.groupType]
+  }
   const passageTitle = (group.passageTitle || '').trim()
   if (passageTitle && isDisplayTag(passageTitle)) return passageTitle
   const title = (group.title || '').trim()
@@ -50,8 +64,8 @@ function compactPassageTitle(group: QuestionGroupCard): string {
 function compactSummary(group: QuestionGroupCard): string {
   const summary = (group.summary || '').trim()
   // 无真摘要的题组（完形/语法常见）summary 就是题组名本身——同词复读
-  // 不渲，目录行只留名称+题数。
-  if (summary === compactPassageTitle(group)) return ''
+  // 不渲，目录行只留名称。
+  if (summary === compactPassageTitle(group) || summary === (group.passageTitle || '').trim()) return ''
   return summary
 }
 
@@ -209,7 +223,6 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
             <strong className="concierge-group-row-title" title={passageTitle}>
               {passageTitle}
             </strong>
-            <span className="concierge-group-row-count">{group.questionCount} 题</span>
             {summary && (
               <span className="concierge-group-row-summary" title={summary}>
                 {summary}

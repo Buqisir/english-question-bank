@@ -764,6 +764,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   // scrollerRef 复用现有的卷面容器（同 harness 的 leftScrollerRef）。
   const shellRef = useRef<HTMLDivElement | null>(null)
   const rightPanelRef = useRef<HTMLElement | null>(null)
+  const [paperPositionVersion, setPaperPositionVersion] = useState(0)
   const railNavRef = useRef<HTMLElement | null>(null)
   const railPanelRef = useRef<HTMLDivElement | null>(null)
   const [railVerticallyCentered, setRailVerticallyCentered] = useState(true)
@@ -1710,16 +1711,20 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   // 完形/语法填空是"原位型"，空即位置，只给证据高亮不做滚动（见 plan
   // 「卷面显影原则」）；七选五"混血"用衔接句高亮（下方另一处修复），同样
   // 不做阅读式动线。
+  const lastScrolledSelectionRef = useRef<typeof lectureSelection>(null)
   useEffect(() => {
     if (!lectureOpen) return
     if (!lectureSelection?.evidenceId) return
     if (groupModels[lectureSelection.groupId]?.kind !== 'reading') return
+    // Reopening notes is not a new selection: keep the teacher's reading position.
+    if (lastScrolledSelectionRef.current === lectureSelection) return
     const scroller = scrollerRef.current
     if (!scroller) return
     const target = scroller.querySelector<HTMLElement>(
       `[data-paper-evidence-id="${cssAttr(lectureSelection.evidenceId)}"]`,
     )
     if (!target) return
+    lastScrolledSelectionRef.current = lectureSelection
     suppressScrollspyClear()
     target.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'auto' })
   }, [lectureOpen, lectureSelection, groupModels])
@@ -1946,11 +1951,12 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     function computeZoom(): void {
       const node = shellRef.current
       if (!node) return
-      const isDockedLecture = lectureOpen && node.clientWidth >= DOCKED_LECTURE_MIN_WIDTH
-      const railWidth = isDockedLecture ? LECTURE_RAIL_WIDTH : RAIL_WIDTH
-      const lectureColumn = isDockedLecture ? GRID_GAP + LECTURE_PANEL_WIDTH : 0
+      // Reserve the docked layout even while closed: toggling only moves the paper.
+      const canDockLecture = node.clientWidth >= DOCKED_LECTURE_MIN_WIDTH
+      const railWidth = canDockLecture ? LECTURE_RAIL_WIDTH : RAIL_WIDTH
+      const lectureColumn = canDockLecture ? GRID_GAP + LECTURE_PANEL_WIDTH : 0
       const contentColumnWidth = node.clientWidth - railWidth - GRID_GAP - lectureColumn
-      const gutterReserve = isDockedLecture ? 0 : GUTTER_WIDTH
+      const gutterReserve = canDockLecture ? 0 : GUTTER_WIDTH
       const available = contentColumnWidth - gutterReserve
       const raw = Math.max(1, Math.min(1.35, available / PAPER_BASE_WIDTH))
       const stepped = Math.floor(raw / 0.05) * 0.05
@@ -1963,12 +1969,31 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     return (): void => {
       observer.disconnect()
     }
-  }, [lectureOpen, loading, asset])
+  }, [loading, asset])
 
   const paperBrowseContentMergedStyle = useMemo((): PaperBrowseContentStyle => ({
     ...paperBrowseContentStyle,
     '--paper-screen-zoom': paperScreenZoom,
   }), [paperScreenZoom])
+
+  // CSS translation does not trigger ResizeObserver. Remount the evidence
+  // connector at rest so it measures the final, rather than starting, position.
+  useEffect(() => {
+    const content = scrollerRef.current
+    if (!content) return
+    const syncMotion = (event: TransitionEvent) => {
+      if (event.target === content && event.propertyName === 'transform') {
+        // Keep the transition start off React's whole-paper render path.
+        content.toggleAttribute('data-moving', event.type === 'transitionrun')
+        if (event.type !== 'transitionrun') setPaperPositionVersion((version) => version + 1)
+      }
+    }
+    const events = ['transitionrun', 'transitionend', 'transitioncancel'] as const
+    for (const event of events) content.addEventListener(event, syncMotion)
+    return () => {
+      for (const event of events) content.removeEventListener(event, syncMotion)
+    }
+  }, [loading, asset])
 
   // 讲评栏只认左边的显式点选，不跟随 scrollspy。
   const panelGroupId = useMemo(() => {
@@ -3909,6 +3934,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           && readingEvidenceAnchorReadyId === readingEvidenceLineContext.evidenceId
           && (
           <PaperIntelligenceEvidenceLine
+            key={paperPositionVersion}
             containerRef={shellRef}
             leftScrollerRef={scrollerRef}
             rightPanelRef={rightPanelRef}

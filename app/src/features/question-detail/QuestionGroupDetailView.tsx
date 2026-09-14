@@ -41,7 +41,7 @@ import {
 import type { QuestionGroupCard, QuestionGroupDetail, ReadingParseQuestionGroupResult, TopicLabel } from '../../domain/questionBank'
 import { sourceTypeLabel } from '../../domain/questionBank'
 import { compactGroupMeta } from './detailHelpers'
-import { buildPaperBrowseLectureHref, parsePaperIdFromHref } from '../../concierge/paperSurfaceHref'
+import { buildPaperBrowseLectureHref } from '../../concierge/paperSurfaceHref'
 import { ConciergeGroupRowMenu } from '../../concierge/ConciergeGroupRowMenu'
 import { fetchSimilarPassages } from '../../services/similarQuestions.ts'
 import {
@@ -307,7 +307,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
   } = props
 
   // ── 一张纸：async 挂载（confirmed Canonical Consumption only） ───────
-  const paperId = parsePaperIdFromHref(selectedDetail?.paperSurfaceHref)
+  const paperId = selectedDetail?.canonicalPaperId
   const [load, setLoad] = useState<LoadState>({ status: 'loading' })
   const [expanded, setExpanded] = useState(false)
 
@@ -320,7 +320,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
     if (!selectedDetail) return
     const detail = selectedDetail
     if (!paperId) {
-      setLoad({ status: 'error', message: '该题组暂无卷面资产——去整卷预览或等待生产线补齐。' })
+      setLoad({ status: 'error', message: '完整卷面尚未就绪，请返回题库选择其他试卷。' })
       return
     }
     const resolvedPaperId = paperId
@@ -584,7 +584,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                   ? '暂不可组卷'
                   : '加入草稿卷'}
             </button>
-            {selectedDetail.paperSurfaceHref && (
+            {selectedDetail.canonicalPaperId && (
               <button className="peek-btn" type="button" onClick={() => onOpenPaperBrowse(selectedDetail)}>
                 <Eye size={16} strokeWidth={1.5} />
                 看整卷

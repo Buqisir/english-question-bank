@@ -31,6 +31,7 @@ import { createMySpaceRoutes } from './my-space/mySpaceRoutes.mjs'
 import { countUsers, ensureAuthDatabaseShape, readSession, readSessionTokenFromRequest, renewSession, resolveDataUserId, sessionNeedsRenewal } from './auth/auth.mjs'
 import { createAuthRoutes } from './auth/authRoutes.mjs'
 import { createPaperSurfaceAnalysisAvailability } from './search/paperSurfaceAvailability.mjs'
+import { listCanonicalPaperCatalog } from './search/canonicalPaperCatalog.mjs'
 import { createTeachingFacetIndex, createTeachingFacetRoutes } from './search/teachingFacets.mjs'
 import { createSimilarQuestionsStore, createSimilarQuestionsRoutes } from './search/similarQuestions.mjs'
 import { createListeningMaterialProjectionRoutes } from './search/listeningMaterialProjection.mjs'
@@ -263,7 +264,8 @@ function findPaperAssetGroup(groupId) {
         identityConflict = { identityConflict: true }
         continue
       }
-      if (!validMatch) validMatch = { asset, group, paperId: entry.name }
+      if (validMatch) return { identityConflict: true }
+      validMatch = { asset, group, paperId: entry.name }
     } catch {
       // Ignore invalid paper-asset files; import validation owns that error.
     }
@@ -434,7 +436,10 @@ function buildPaperAssetGroupIndex() {
         continue
       }
       for (const [groupId, group] of Object.entries(groups)) {
-        if (group && !index.has(groupId)) index.set(groupId, { asset, group, paperId: entry.name })
+        if (!group) continue
+        index.set(groupId, index.has(groupId)
+          ? { identityConflict: true }
+          : { asset, group, paperId: entry.name })
       }
     } catch {
       // Ignore invalid paper-asset files; import validation owns that error.
@@ -1027,7 +1032,7 @@ function getTopicLabelsForQuestionGroups(db, questionGroupIds) {
   rows.forEach((row) => {
     const labels = labelsByGroupId.get(row.question_group_id) || []
     const seenLabels = seenLabelsByGroupId.get(row.question_group_id) || new Set()
-    const normalizedLabels = normalizeTopicLabelItem({
+    const normalizedLabels = normalizeTopicLabelPayload([{
       label: row.label,
       theme: row.theme,
       themeGroup: row.theme_group,
@@ -1035,7 +1040,7 @@ function getTopicLabelsForQuestionGroups(db, questionGroupIds) {
       source: row.source,
       reason: row.reason,
       confidence: row.confidence,
-    })
+    }])
     normalizedLabels.forEach((label, index) => {
       if (seenLabels.has(label.label)) return
       seenLabels.add(label.label)
@@ -1319,30 +1324,21 @@ function paperAssetRegion(asset) {
   return '未标地区'
 }
 
-function paperAssetGroupSection(group) {
+function paperAssetGroupSection(asset, group) {
+  // Preserve the same hierarchy used by paper-import/publisher.mjs.
+  for (const part of asset.layoutTree?.parts || []) {
+    for (const section of part.sections || []) {
+      if ((section.groups || []).some((entry) => entry.groupId === group.groupId)) {
+        return `${part.title} / ${section.title}`
+      }
+    }
+  }
   const groupType = normalizePaperAssetGroupType(group?.groupType)
   const title = String(group?.title || '').trim()
   const readingMatch = title.match(/Reading\s*([A-G])/i)
   if (groupType === 'reading' && readingMatch) return `阅读理解 ${readingMatch[1].toUpperCase()}`
   if (groupType === 'seven_choices') return '七选五'
   return title || groupTypeLabels[groupType] || '题组'
-}
-
-function paperAssetPassageTitle(group) {
-  const paragraphs = Array.isArray(group?.passage?.paragraphs) ? group.passage.paragraphs : []
-  const first = String(paragraphs[0]?.text || '').trim()
-  const title = String(group?.title || '').trim()
-  return first || title || '篇章题组'
-}
-
-function paperAssetSummary(group) {
-  const paragraphs = Array.isArray(group?.passage?.paragraphs) ? group.passage.paragraphs : []
-  return paragraphs
-    .slice(0, 2)
-    .map((paragraph) => String(paragraph?.text || '').trim())
-    .filter(Boolean)
-    .join(' ')
-    .slice(0, 180)
 }
 
 function paperAssetFirstQuestionHit(asset, group) {
@@ -1360,6 +1356,15 @@ function paperAssetAnswerPreview(asset, group) {
 function buildPaperAssetQuestionGroupCard(asset, group, paperSurfaceAnalysis, draftContext, options = {}) {
   const groupId = String(group?.groupId || '')
   const groupType = normalizePaperAssetGroupType(group?.groupType) || 'other'
+  let importMeta = null
+  try {
+    const { baseDir } = resolvePaperAssetReadPaths(paperAssetsDir, asset.paper.paperId)
+    const candidate = readJsonFile(path.join(baseDir, 'import-meta.json'))
+    if (candidate.paperId === asset.paper.paperId) importMeta = candidate
+  } catch {
+    // Missing editorial metadata stays empty; source text is not a summary.
+  }
+  const groupMeta = importMeta?.groups?.[groupId]
   // The add-to-draft seam (draftPaperStore.addGroupToDraftPaper) re-validates the
   // groupId against the bank's question_groups table via selectQuestionGroupCards
   // with a WHERE clause — a path that does not inject paper-asset-only cards
@@ -1376,8 +1381,8 @@ function buildPaperAssetQuestionGroupCard(asset, group, paperSurfaceAnalysis, dr
     ? getPaperAssetPrintReady(asset, group)
     : { ok: false, reason: '题组尚未入库，暂不可加入草稿卷' }
   const draftPaperButtonState = buildDraftButtonState(printReady, draftContext, groupId)
-  const section = paperAssetGroupSection(group)
-  const passageTitle = paperAssetPassageTitle(group)
+  const section = paperAssetGroupSection(asset, group)
+  const passageTitle = String(groupMeta?.displayTitleOverride || group.title || '篇章题组').trim()
   const paperTitle = String(asset?.paper?.title || 'paper-asset 试卷').trim()
   const source = String(asset?.paper?.source || '').trim()
   const questionIds = Array.isArray(group?.questionIds) ? group.questionIds.map(String) : []
@@ -1392,11 +1397,11 @@ function buildPaperAssetQuestionGroupCard(asset, group, paperSurfaceAnalysis, dr
     paperName: paperTitle,
     section,
     passageTitle,
-    summary: paperAssetSummary(group),
+    summary: String(groupMeta?.summary || '').trim(),
     groupType,
     questionCount: questionIds.length,
     difficulty: 'medium',
-    tags: [paperAssetRegion(asset), groupTypeLabels[groupType]].filter(Boolean),
+    tags: [],
     topicLabels: [],
     hit: paperAssetFirstQuestionHit(asset, group),
     answerPreview: paperAssetAnswerPreview(asset, group),
@@ -1502,6 +1507,33 @@ function selectQuestionGroupCards(db, whereClause = '', params = [], draftContex
   return cards
 }
 
+function attachCanonicalPaperAvailability(db, cards, draftContext = EMPTY_DRAFT_CONTEXT, includeAssetOnly = false, paperId = null) {
+  const byId = new Map(cards.map((card) => [card.id, card]))
+  const available = new Map()
+  for (const paper of listCanonicalPaperCatalog({ db, rootDir: paperAssetsDir, paperId })) {
+    for (const id of paper.groupIds) {
+      if (includeAssetOnly && !byId.has(id)) {
+        const card = buildPaperAssetQuestionGroupCard(
+          paper.asset, paper.asset.content.groups[id],
+          getPaperSurfaceAnalysisAvailabilityByGroupId().get(id), draftContext,
+        )
+        cards.push(card)
+        byId.set(id, card)
+      }
+      available.set(id, paper)
+    }
+  }
+  return cards.map((card) => {
+    const paper = available.get(card.id)
+    return {
+      ...card,
+      canonicalPaperId: paper?.paperId || null,
+      canonicalPublishedAt: paper?.publishedAt || null,
+      paperUnavailableReason: paper ? null : '完整卷面尚未就绪',
+    }
+  })
+}
+
 /**
  * Additive read-only importedAt from sources.created_at.
  * No schema change — a follow-up SELECT keyed by group id.
@@ -1529,7 +1561,8 @@ function listQuestionGroups(userId) {
   const db = openDatabase()
 
   try {
-    return selectQuestionGroupCards(db, '', [], getDraftSearchContext(userId))
+    const draftContext = getDraftSearchContext(userId)
+    return attachCanonicalPaperAvailability(db, selectQuestionGroupCards(db, '', [], draftContext), draftContext, true)
   } finally {
     db.close()
   }
@@ -1678,7 +1711,9 @@ export function getQuestionGroupDetail(id) {
       // below, so the listing's PA cards stay un-addable by design.
       const paperAssetMatch = findPaperAssetGroup(id)
       if (paperAssetMatch?.identityConflict) return null
-      if (paperAssetMatch) return buildPaperAssetOnlyQuestionGroupDetail(paperAssetMatch.asset, paperAssetMatch.group)
+      if (paperAssetMatch) return attachCanonicalPaperAvailability(db, [
+        buildPaperAssetOnlyQuestionGroupDetail(paperAssetMatch.asset, paperAssetMatch.group),
+      ], EMPTY_DRAFT_CONTEXT, false, paperAssetMatch.paperId)[0]
       return null
     }
 
@@ -1780,9 +1815,11 @@ export function getQuestionGroupDetail(id) {
     const paperAssetMatch = findPaperAssetGroup(id)
     if (paperAssetMatch?.identityConflict) return null
     if (paperAssetMatch) {
-      return applyPaperAssetToQuestionGroupDetail(baseDetail, paperAssetMatch.asset, paperAssetMatch.group, questions)
+      return attachCanonicalPaperAvailability(db, [
+        applyPaperAssetToQuestionGroupDetail(baseDetail, paperAssetMatch.asset, paperAssetMatch.group, questions),
+      ], EMPTY_DRAFT_CONTEXT, false, paperAssetMatch.paperId)[0]
     }
-    return baseDetail
+    return { ...baseDetail, canonicalPaperId: null, canonicalPublishedAt: null, paperUnavailableReason: '完整卷面尚未就绪' }
   } finally {
     db.close()
   }

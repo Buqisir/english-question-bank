@@ -359,14 +359,13 @@ assert(
   'ConciergeDesk accepts onOpenDetail prop',
   /onOpenDetail\?\s*:\s*\(group: QuestionGroupCard\) => void/.test(conciergeDesk),
 )
-// similar-passages-entry (E6) threads 5 more props (questionGroupById,
-// expandedSimilarGroupId, similarPassagesRequest, onToggleSimilar,
-// onRetrySimilar) through each render point — widened from 600 to 900 to
-// keep clearing both call sites (measured ~775/816 chars post-cut).
-const conciergePaperRowRenderPoints = [...conciergeDesk.matchAll(/<ConciergePaperRow[\s\S]{0,900}?\/>/g)]
+// Check every render point, regardless of how search, browse and recent feeds
+// are arranged. A new row must not silently lose the detail navigation prop.
+const conciergePaperRowRenderPoints = [...conciergeDesk.matchAll(/<ConciergePaperRow\b[\s\S]*?\/>/g)]
 assert(
-  'ConciergeDesk renders exactly 2 ConciergePaperRow instances (search results + feed)',
-  conciergePaperRowRenderPoints.length === 2,
+  'ConciergeDesk has paper rows and captures every render point for wiring checks',
+  conciergePaperRowRenderPoints.length > 0
+    && conciergePaperRowRenderPoints.length === (conciergeDesk.match(/<ConciergePaperRow\b/g) ?? []).length,
   `found ${conciergePaperRowRenderPoints.length}`,
 )
 const allRenderPointsPassOnOpenDetail = conciergePaperRowRenderPoints.every((match) =>

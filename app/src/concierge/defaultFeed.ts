@@ -40,9 +40,24 @@ export function buildDefaultFeed(groups: QuestionGroupCard[]): PaperResult[] {
   })
 }
 
-/** Home date-stream: most recently imported papers first, capped. */
-export function buildRecentFeed(groups: QuestionGroupCard[], limit = 8): PaperResult[] {
-  return [...buildDefaultFeed(groups)]
+/** Read the source's calendar date without converting it across time zones. */
+export function collectionDate(value: string): { iso: string; label: string } | null {
+  const iso = String(value || '').slice(0, 10)
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(iso)) return null
+  const date = new Date(`${iso}T12:00:00Z`)
+  if (!Number.isFinite(date.getTime()) || date.toISOString().slice(0, 10) !== iso) return null
+  const year = date.getUTCFullYear()
+  const yearLabel = year === new Date().getFullYear() ? '' : `${year}年`
+  return { iso, label: `${yearLabel}${date.getUTCMonth() + 1}月${date.getUTCDate()}日收录` }
+}
+
+/** Home additions come only from whole-paper Screen-ready publications. */
+export function buildRecentFeed(groups: QuestionGroupCard[], limit = 4): PaperResult[] {
+  return buildDefaultFeed(groups.filter((group) => group.canonicalPaperId).map((group) => ({
+    ...group,
+    importedAt: group.canonicalPublishedAt || '',
+  })))
+    .filter((paper) => collectionDate(paper.importedAt) !== null)
     .sort((a, b) => {
       const byImport = String(b.importedAt || '').localeCompare(String(a.importedAt || ''))
       if (byImport !== 0) return byImport

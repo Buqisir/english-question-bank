@@ -42,9 +42,9 @@
 import { useEffect, useRef, type MouseEvent, type ReactNode } from 'react'
 import { ChevronDown, ChevronRight, ChevronUp } from 'lucide-react'
 import { type QuestionGroupCard } from '../domain/questionBank.ts'
+import { collectionDate } from './defaultFeed.ts'
 import type { PaperHitContext, PaperResult, PaperResultGroup } from './aggregatePaperResults.ts'
 import { ConciergeGroupCard } from './ConciergeGroupCard.tsx'
-import { parsePaperIdFromHref } from './paperSurfaceHref.ts'
 import type { SimilarPassagesRequestState } from '../features/similar-passages/SimilarPassagesPanel'
 
 const SOURCE_TYPE_LABEL: Record<string, string> = {
@@ -102,7 +102,7 @@ function buildHeadline(paper: PaperResult): string {
   if (paper.isFallback) return '其他来源'
   const name = stripLeadingYearToken(paper.paperName, paper.year).trim()
   const region = (paper.region || '').trim()
-  if (!region) return name
+  if (!region || region === '未标地区' || region === '未标') return name
   if (!name) return region
   const core = name.endsWith('卷') ? name.slice(0, -1) : name
   const overlaps = core.length > 0 && (name.includes(region) || region.includes(core))
@@ -151,21 +151,9 @@ function badgeSuffix(scope: PaperHitContext['scope']): string {
   return ' 个篇章'
 }
 
-/**
- * paper-row-browse-entry — the row-level "看整卷" button only appears when at
- * least one group in this bucket actually has a paper-browse asset to jump
- * to. We take the first group with `hasPaperSurfaceAnalysis` and a
- * `paperSurfaceHref` that parses to a paperId (same eligibility check as
- * ConciergeGroupCard's own per-group link, ConciergeGroupCard.tsx:91) —
- * no eligible group means no button, never a disabled one.
- */
+/** Only whole-paper Screen admission advertises a whole-paper entry. */
 function findRowPaperId(paper: PaperResult): string | null {
-  for (const { group } of paper.groups) {
-    if (!group.hasPaperSurfaceAnalysis || !group.paperSurfaceHref) continue
-    const paperId = parsePaperIdFromHref(group.paperSurfaceHref)
-    if (paperId) return paperId
-  }
-  return null
+  return paper.groups[0]?.group.canonicalPaperId || null
 }
 
 /**
@@ -234,8 +222,8 @@ export type ConciergePaperRowProps = {
    * they're grouped under a year head instead).
    */
   hideYear?: boolean
-  /** Home date-stream: muted year before the title. */
-  yearPrefix?: boolean
+  /** Home-only two-line catalog entry; browse/search retain their compact rows. */
+  recentAddition?: boolean
 
   /** similar-passages-entry (E6): full corpus lookup, single expanded-groupId
    * slot, and its request state — threaded straight through to each row's
@@ -259,7 +247,7 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
     onOpenPaperBrowse,
     variant = 'search',
     hideYear = false,
-    yearPrefix = false,
+    recentAddition = false,
     questionGroupById,
     expandedSimilarGroupId,
     similarPassagesRequest,
@@ -270,6 +258,8 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
 
   const headline = buildHeadline(paper)
   const sourceTypeLabel = buildSourceTypeLabel(paper)
+  const collected = recentAddition ? collectionDate(paper.importedAt) : null
+  const recentTitle = paper.year ? `${paper.year} ${headline}` : headline
   const topicChips = buildTopicChips(paper)
   const groupBuckets = bucketGroupsBySection(paper.groups)
 
@@ -312,6 +302,7 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
     <article
       className={`concierge-paper-row${expanded ? ' is-expanded' : ''}`}
       data-variant={variant}
+      data-recent={recentAddition || undefined}
       // CR should-watch 收口：年份列 aria-hidden 后，行级 label 补回年份，
       // 屏幕阅读器才能区分同名不同年卷。
       aria-label={paper.year ? `${paper.year} 年 ${headline}` : headline}
@@ -337,15 +328,26 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
           {expanded ? <ChevronDown size={14} aria-hidden="true" /> : <ChevronRight size={14} aria-hidden="true" />}
         </button>
         <div className="concierge-paper-anchor-text">
-          <div className="concierge-paper-title-line">
-            {yearPrefix && paper.year ? (
-              <span className="concierge-paper-year-prefix">{paper.year}</span>
-            ) : null}
-            <strong className="concierge-paper-headline" title={headline}>{headline}</strong>
-            {sourceTypeLabel === '真题' && (
-              <span className="concierge-paper-sourcetype">{sourceTypeLabel}</span>
-            )}
-          </div>
+          {recentAddition ? (
+            <>
+              <button
+                type="button"
+                className="concierge-recent-title"
+                onClick={() => onTogglePaper(paper.key)}
+                aria-expanded={expanded}
+                aria-controls={`concierge-paper-detail-${paper.key}`}
+              >
+                {recentTitle}
+              </button>
+            </>
+          ) : (
+            <div className="concierge-paper-title-line">
+              <strong className="concierge-paper-headline" title={headline}>{headline}</strong>
+              {sourceTypeLabel === '真题' && (
+                <span className="concierge-paper-sourcetype">{sourceTypeLabel}</span>
+              )}
+            </div>
+          )}
           {topicChips.length > 0 && (
             <p className="concierge-paper-topics-line" aria-label="题组主题">
               {topicChips.join(' · ')}
@@ -380,9 +382,12 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
       </div>
 
       <div className="concierge-paper-actions" aria-label="来源卷操作">
-        {variant === 'feed' && (
+        {recentAddition && collected ? (
+          <time className="concierge-recent-date" dateTime={collected.iso}>{collected.label}</time>
+        ) : variant === 'feed' ? (
           <span className="concierge-paper-hitcount">{paper.hitCount} 篇章</span>
-        )}
+        ) : null}
+        {!rowPaperId && <span className="concierge-paper-hitcount">完整卷面尚未就绪</span>}
         {rowPaperId && (
           <button
             type="button"

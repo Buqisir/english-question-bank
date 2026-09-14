@@ -26,7 +26,7 @@
 
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
-import { buildDefaultFeed } from '../app/src/concierge/defaultFeed.ts'
+import { buildDefaultFeed, buildRecentFeed, collectionDate } from '../app/src/concierge/defaultFeed.ts'
 
 const here = path.dirname(new URL(import.meta.url).pathname)
 const root = path.resolve(here, '..')
@@ -69,6 +69,37 @@ function makeGroup(overrides) {
     defaultScore: 2.5,
     ...overrides,
   }
+}
+
+console.log('\nHome additions: date eligibility, ordering, cap and catalog preservation')
+{
+  const dated = Array.from({ length: 6 }, (_, i) => makeGroup({
+    id: `dated-${i}`, paperName: `测试卷${i}`, canonicalPaperId: `paper-${i}`,
+    canonicalPublishedAt: `2026-08-${20 + i} 12:00:00`, importedAt: '2099-01-01',
+  }))
+  const unavailable = [
+    makeGroup({ id: 'undated', paperName: '无日期卷', importedAt: '' }),
+    makeGroup({ id: 'invalid', paperName: '错误日期卷', importedAt: '2026-02-30' }),
+    makeGroup({ id: 'fallback', paperName: '', importedAt: '2099-01-01' }),
+  ]
+  const corpus = [...unavailable, ...dated]
+  const recent = buildRecentFeed(corpus)
+  assert('default cap is four eligible papers in newest-first order', recent.map(paper => paper.paperName).join(',') === '测试卷5,测试卷4,测试卷3,测试卷2')
+  assert('eligibility is applied before limiting and no fallback paper leaks', buildRecentFeed(corpus, 10).length === 6 && recent.every(paper => !paper.isFallback))
+  assert('full catalog keeps undated, invalid-date and fallback materials', buildDefaultFeed(corpus).length === 9)
+  assert('undated-only corpus has no new additions', buildRecentFeed(unavailable).length === 0)
+  assert('empty corpus remains empty', buildRecentFeed([]).length === 0)
+  assert('analysis and printable legacy data alone never advertise a complete new paper', buildRecentFeed([
+    makeGroup({ importedAt: '2099-01-01', hasPaperSurfaceAnalysis: true, paperSurfaceHref: '?paperId=partial', canAddToDraftPaper: true }),
+  ]).length === 0)
+  assert('canonical identity keeps unknown-region and same-name distinct papers out of fallback/merged buckets', buildDefaultFeed([
+    makeGroup({ id: 'a', canonicalPaperId: 'paper-a', region: '未标地区' }),
+    makeGroup({ id: 'b', canonicalPaperId: 'paper-b', region: '未标地区' }),
+  ]).every(paper => !paper.isFallback) && buildDefaultFeed([
+    makeGroup({ id: 'a', canonicalPaperId: 'paper-a' }), makeGroup({ id: 'b', canonicalPaperId: 'paper-b' }),
+  ]).length === 2)
+  assert('valid leap day accepted; impossible day and malformed date rejected', collectionDate('2024-02-29')?.iso === '2024-02-29' && collectionDate('2026-02-29') === null && collectionDate('bad-date') === null)
+  assert('collection label says 收录 and keeps source calendar day', collectionDate('2024-02-29T23:00:00-08:00')?.label === '2024年2月29日收录')
 }
 
 // ------------------------------------------------------------------ Test 1
@@ -149,10 +180,10 @@ console.log('\nTest 5: ConciergeDesk renders the feed only on the browse surface
 }
 
 // ------------------------------------------------------------------ Test 6
-console.log('\nTest 6: 8-paper default cap + "显示全部 N 套卷" expander')
+console.log('\nTest 6: 4-paper home additions cap + full catalog entry')
 {
   const desk = readSrc('app/src/concierge/ConciergeDesk.tsx')
-  assert('DEFAULT_FEED_PAGE_SIZE constant is 8', /const DEFAULT_FEED_PAGE_SIZE\s*=\s*8/.test(desk), '')
+  assert('home additions cap is 4', /const DEFAULT_FEED_PAGE_SIZE\s*=\s*4/.test(desk), '')
   // CR round-2 M1 rewrite: the collapsed feed no longer slices raw papers —
   // it takes whole year groups until the cumulative count reaches the page
   // size (see Test 24), so the old slice assertion is retired.
@@ -162,12 +193,12 @@ console.log('\nTest 6: 8-paper default cap + "显示全部 N 套卷" expander')
 }
 
 // ------------------------------------------------------------------ Test 7
-console.log('\nTest 7: feed intro line — AI-toned, states paper/group counts')
+console.log('\nTest 7: home search has no redundant inventory/prompt line')
 {
   const desk = readSrc('app/src/concierge/ConciergeDesk.tsx')
   assert(
-    'intro line includes paper count, group count, and the browse-or-describe framing',
-    /catalogPaperCount\} 套卷 · \$\{catalogGroupCount\} 篇章 · 一句话描述你要的题/.test(desk),
+    'redundant inventory line and its count-only derivation are removed',
+    !/concierge-meta|catalogGroupCount|一句话描述你要的题/.test(desk),
     '',
   )
 }
@@ -350,8 +381,9 @@ console.log('\nTest 24: home-editorial round 2 — year-grouped feed archive (�
     '',
   )
   assert('sliced visibleFeed grouping is retired', !/groupFeedByYear\(visibleFeed\)/.test(desk), '')
-  assert('home date-stream helper is defined', /function groupFeedByDate/.test(desk), '')
-  assert('home date labels use 月/日 · 周 format', /月\$\{parsed\.getDate\(\)\}日 · /.test(desk), '')
+  assert('home additions use a flat paper list, not date-group headings', /homeRecentFeed\.map\(\(paper\)/.test(desk) && !/groupFeedByDate/.test(desk), '')
+  const row = readSrc('app/src/concierge/ConciergePaperRow.tsx')
+  assert('home additions use real collection dates and a keyboard-operable title', /<time className="concierge-recent-date" dateTime=\{collected\.iso\}/.test(row) && /className="concierge-recent-title"[\s\S]{0,150}aria-expanded=\{expanded\}/.test(row), '')
   assert('feed renders concierge-feed-year-head with the group label', /concierge-feed-year-label[\s\S]{0,40}\{yearGroup\.label\}/.test(desk), '')
   assert('feed renders the "N 套" true count next to the year head', /concierge-feed-year-count[\s\S]{0,60}\{yearGroup\.papers\.length\}\s*套/.test(desk), '')
 }
@@ -365,7 +397,7 @@ console.log('\nTest 25: home-editorial round 2 — 命令行一行 (search + thi
   assert('browse year chips render the four most recent years', /browseRecentYears\.map\(\(year\)/.test(desk) && /browseYears\.slice\(0, 4\)/.test(desk), '')
   assert('browse older years collapse to a 更早 chip', /更早/.test(desk) && /selectBrowseOlder/.test(desk), '')
   assert('browse rows do not render a hover + add control', !/showHoverAdd|concierge-row-add/.test(desk), '')
-  assert('command-line inventory count renders 套卷 · … 篇章', /套卷 · \$\{catalogGroupCount\} 篇章/.test(desk), '')
+  assert('full catalog count remains available for browse and recovery', /const catalogPaperCount = catalogFeed.length/.test(desk), '')
 }
 
 // ------------------------------------------------------------------ Test 22
@@ -440,8 +472,11 @@ console.log('\nTest 27: home-blank — feed gate moves from bare state.kind===\'
 console.log('\nTest 28: home-blank — pure-blank stage markup: no feed/chip DOM at all when !showListSurface (list surface is a whole conditionally-mounted block, not a CSS hide)')
 {
   const desk = readSrc('app/src/concierge/ConciergeDesk.tsx')
-  assert('home meta line states catalog paper/passage counts', /concierge-meta[\s\S]{0,200}catalogPaperCount/.test(desk), '')
-  assert('home feed label is 最近入库', /最近入库/.test(desk), '')
+  assert('search keeps its accessible name without the inventory caption', /自然语言搜索/.test(desk), '')
+  assert('home recent additions has a named region', /role="region" aria-label=\{isBrowseScreen \? '题库浏览' : '最近上新'\}/.test(desk), '')
+  assert('home feed heading names 最近上新 without redundant sorting copy', /<h1 className="concierge-feed-label">最近上新<\/h1>/.test(desk) && !/按入库时间排列/.test(desk), '')
+  assert('home has a dedicated full-catalog browse/filter entry before browse chips', /isHomeScreen && onEnterBrowse[\s\S]{0,200}className="concierge-browse-entry"[\s\S]{0,180}onClick=\{handleEnterBrowse\}[\s\S]{0,220}浏览题库与筛选/.test(desk), '')
+  assert('browse-all action sits with the home heading and keeps the existing handler', /concierge-feed-heading[\s\S]{0,500}onClick=\{handleEnterBrowse\}[\s\S]{0,100}catalogPaperCount/.test(desk), '')
   assert('list surface mounts for home feed or search', /\{\(showListSurface \|\| showFeed\) && \(\s*<div className="concierge-list-surface">/.test(desk), '')
   assert('browse chips live in concierge-browse-chips', /concierge-browse-chips/.test(desk), '')
 }

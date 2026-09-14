@@ -248,7 +248,7 @@ const apiSource = read('server/api.mjs')
 assert('findPaperAssetGroup still exists', /function findPaperAssetGroup\(groupId\)/.test(apiSource))
 assert(
   'findPaperAssetGroup keeps the valid { asset, group, paperId } shape and propagates identity conflicts first',
-  /if \(!validMatch\) validMatch = \{ asset, group, paperId: entry\.name \}/.test(apiSource)
+  /if \(validMatch\) return \{ identityConflict: true \}\s*validMatch = \{ asset, group, paperId: entry\.name \}/.test(apiSource)
     && /if \(asset\?\.paper\?\.paperId !== entry\.name\) \{\s*identityConflict = \{ identityConflict: true \}\s*continue\s*\}/.test(apiSource)
     && /return identityConflict \|\| validMatch/.test(apiSource),
 )
@@ -257,8 +257,8 @@ assert(
   /getPaperAssetPrintReady\(paperAssetMatch\.asset, paperAssetMatch\.group\)/.test(apiSource),
 )
 assert(
-  'question-group detail fails closed for identity conflicts before projecting valid asset/group matches',
-  /const paperAssetMatch = findPaperAssetGroup\(id\)\s*if \(paperAssetMatch\?\.identityConflict\) return null\s*if \(paperAssetMatch\) \{\s*return applyPaperAssetToQuestionGroupDetail\(baseDetail, paperAssetMatch\.asset, paperAssetMatch\.group, questions\)/.test(apiSource),
+  'question-group detail fails closed before projecting valid asset/group matches and adding scoped paper availability',
+  /const paperAssetMatch = findPaperAssetGroup\(id\)\s*if \(paperAssetMatch\?\.identityConflict\) return null\s*if \(paperAssetMatch\) \{\s*return attachCanonicalPaperAvailability\(db, \[\s*applyPaperAssetToQuestionGroupDetail\(baseDetail, paperAssetMatch\.asset, paperAssetMatch\.group, questions\),\s*\], EMPTY_DRAFT_CONTEXT, false, paperAssetMatch\.paperId\)\[0\]/.test(apiSource),
 )
 assert(
   'paperAssetsDir now injected into draftPaperStore factory call',

@@ -33,6 +33,10 @@ export type QuestionGroupCard = {
   hit: string
   answerPreview: string
   defaultScore: number
+  /** Current published paper with a browsable projection; open/export revalidate its content. */
+  canonicalPaperId?: string | null
+  canonicalPublishedAt?: string | null
+  paperUnavailableReason?: string | null
   hasPaperSurfaceAnalysis?: boolean
   paperSurfaceHref?: string | null
   paperSurfaceLabel?: string | null

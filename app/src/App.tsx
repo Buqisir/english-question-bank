@@ -600,18 +600,12 @@ function App() {
     setPaperBrowseRoute({ active: true, paperId, focusGroupId: focusGroupId || null, questionId, reviewRevision: null, lecture, similar })
   }, [])
 
-  // Detail-page "看整卷" entry point: derives paperId (and the group to
-  // focus) from the group's paperSurfaceHref
-  // (`?view=paper-intelligence&...&paperId=<id>&groupId=<gid>`) instead of
-  // a new server field — the href already carries what we need. 挑题态, no
-  // lecture — unchanged by 刀 3.
+  // Whole-paper navigation follows Screen admission, not analysis availability.
   const openPaperBrowseFromDetail = useCallback(
     (detail: QuestionGroupDetail) => {
-      const paperId = parsePaperIdFromHref(detail.paperSurfaceHref)
+      const paperId = detail.canonicalPaperId
       if (!paperId) return
-      const [, query = ''] = (detail.paperSurfaceHref || '').split('?')
-      const groupId = new URLSearchParams(query).get('groupId') || detail.id
-      openPaperBrowse(paperId, groupId)
+      openPaperBrowse(paperId, detail.id)
     },
     [openPaperBrowse],
   )

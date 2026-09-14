@@ -413,7 +413,7 @@ assert(
   'openMySpace does not deactivate paperBrowseRoute',
 )
 
-// ─── 6. Detail-page entry resolves paperId from paperSurfaceHref ───
+// ─── 6. Detail-page entry follows whole-paper Screen admission ───
 
 const openFromDetailBody =
   appSrc.match(
@@ -421,17 +421,14 @@ const openFromDetailBody =
   )?.[1] || ''
 assert('openPaperBrowseFromDetail body extracted', openFromDetailBody.length > 0)
 assert(
-  'openPaperBrowseFromDetail reads detail.paperSurfaceHref',
-  /detail\.paperSurfaceHref/.test(openFromDetailBody),
-  'does not reference detail.paperSurfaceHref',
+  'openPaperBrowseFromDetail reads canonicalPaperId independently of analysis',
+  /detail\.canonicalPaperId/.test(openFromDetailBody) && !/paperSurfaceHref/.test(openFromDetailBody),
+  'must use Screen admission, not an analysis URL',
 )
-// paper-row-browse-entry 起，href→paperId 解析收敛进共享的
-// parsePaperIdFromHref（concierge/paperSurfaceHref.ts），详情页入口与
-// 首页卷行入口共用。断言改钉两段：入口调用共享解析 + 共享解析真的取 paperId。
 assert(
-  'openPaperBrowseFromDetail parses paperId via the shared helper',
-  /parsePaperIdFromHref\s*\(\s*detail\.paperSurfaceHref\s*\)/.test(openFromDetailBody),
-  'does not call parsePaperIdFromHref on the href',
+  'openPaperBrowseFromDetail preserves the selected group focus',
+  /openPaperBrowse\(paperId, detail\.id\)/.test(openFromDetailBody),
+  'must focus the selected canonical group',
 )
 const hrefHelperSrc = read('app/src/concierge/paperSurfaceHref.ts')
 assert(
@@ -463,9 +460,9 @@ assert(
   'expected exactly one 看整卷 button element',
 )
 assert(
-  '看整卷 button is gated on selectedDetail.paperSurfaceHref',
-  /\{selectedDetail\.paperSurfaceHref\s*&&\s*\(\s*<button[\s\S]*?看整卷/.test(detailViewSrc),
-  '看整卷 button is not gated on paperSurfaceHref',
+  '看整卷 button is gated on selectedDetail.canonicalPaperId',
+  /\{selectedDetail\.canonicalPaperId\s*&&\s*\(\s*<button[\s\S]*?看整卷/.test(detailViewSrc),
+  '看整卷 button is not gated on Screen admission',
 )
 assert(
   '看整卷 button calls onOpenPaperBrowse(selectedDetail)',
@@ -1992,6 +1989,22 @@ assert(
     /\.paper-browse-zoom\s*\{[^}]*zoom:\s*var\(--paper-screen-zoom/.test(pageCssSrc) &&
     /@media print\s*\{[^}]*\.paper-browse-zoom\s*\{[^}]*zoom:\s*1/.test(pageCssSrc),
   'missing shell ResizeObserver zoom, CSS zoom wrapper, or print guard',
+)
+assert(
+  'lecture toggle keeps the screen zoom and desktop content column independent of open state',
+  !pageSrc.slice(pageSrc.indexOf('function computeZoom()'), pageSrc.indexOf('    computeZoom()')).includes('lectureOpen') &&
+    /@media screen and \(min-width: 1200px\)\s*\{\s*\.paper-browse-shell\s*\{\s*grid-template-columns: 72px minmax\(0, 1fr\) 440px/.test(pageCssSrc) &&
+    /transition: transform var\(--motion-slow\) var\(--ease-out\)/.test(pageCssSrc),
+  'lecture still resizes the paper instead of translating the fixed-width column',
+)
+assert(
+  'lecture reopening preserves selection scroll and redraws evidence only after the paper settles',
+  pageSrc.includes('lastScrolledSelectionRef.current === lectureSelection') &&
+    pageSrc.includes("content.toggleAttribute('data-moving'") &&
+    pageSrc.includes('key={paperPositionVersion}') &&
+    pageSrc.includes("['transitionrun', 'transitionend', 'transitioncancel']") &&
+    pageSrc.includes('content.removeEventListener(event, syncMotion)'),
+  'reopening can scroll to old evidence or leave a connector at its pre-slide coordinates',
 )
 assert(
   '74. Reading A-D 显示为 A-D；TOC 项左对齐，不再居中字母项',

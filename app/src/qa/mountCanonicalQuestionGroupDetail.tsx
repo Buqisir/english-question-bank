@@ -31,6 +31,7 @@ const selectedDetail = {
   answerPreview: `${rawMirror} raw answer`,
   defaultScore: 1,
   hasPaperSurfaceAnalysis: false,
+  canonicalPaperId: paperId,
   paperSurfaceHref: `?view=paper-browse&paperId=${encodeURIComponent(paperId)}&groupId=${encodeURIComponent(groupId)}`,
   paperSurfaceLabel: null,
   canAddToDraftPaper: true,
