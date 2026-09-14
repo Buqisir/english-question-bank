@@ -4,7 +4,7 @@ import { execFileSync, spawnSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
 
 import {
-  AMP_ORB_DEPLOY_AMP_CHECK_NAME,
+  AMP_ORB_DEPLOY_GITHUB_API_MAX_BUFFER_BYTES,
   AMP_ORB_DEPLOY_REPOSITORY,
   assertDeploymentCandidateStillCurrent,
   deployLatestRelease,
@@ -15,7 +15,7 @@ import {
   parseDeploymentControllerOutput,
   parseReviewedPersistenceControllerOutput,
   parseDeploymentControllerPreflight,
-  readDeploymentCheckRuns,
+  readDeploymentWorkflowEvidence,
   resolveLatestDeploymentCandidate,
   verifyDeploymentAuthority,
 } from './lib/ampOrbDeploy.mjs'
@@ -30,6 +30,7 @@ function readGitHubJson(endpoint) {
   return JSON.parse(execFileSync('gh', deploymentGitHubApiArgs(endpoint), {
     cwd: repositoryRoot,
     encoding: 'utf8',
+    maxBuffer: AMP_ORB_DEPLOY_GITHUB_API_MAX_BUFFER_BYTES,
   }))
 }
 
@@ -41,10 +42,9 @@ function readDeploymentVerification(sha) {
   const authority = deploymentAuthorityFromEnvironment(process.env)
   return verifyDeploymentAuthority({
     expectedSha: sha,
-    ampAppId: authority.ampAppId,
-    readAmpChecks: (expectedSha) => readDeploymentCheckRuns({
+    githubActionsAppId: authority.githubActionsAppId,
+    readWorkflowEvidence: (expectedSha) => readDeploymentWorkflowEvidence({
       sha: expectedSha,
-      checkName: AMP_ORB_DEPLOY_AMP_CHECK_NAME,
       readJson: readGitHubJson,
     }),
   })

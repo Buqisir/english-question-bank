@@ -1,143 +1,64 @@
-# Ship one task to `main`
+# Ship one task to main
 
-Commit and Ship only the current task. Follow root `AGENTS.md` and preserve
-unrelated work. Use the current task-branch PR route; this prompt does not
-activate Custom Ship or change branch protection. An Owner Goal to ship/merge
-covers branch push, PR, verification and merge without repeated approval.
-Stop at the PR if the Goal requests review only. Deployment is not implied.
+Follow `AGENTS.md`. An Owner Ship Goal covers the bounded task's commits, normal
+branch push, PR, verification and protected squash merge. It does not authorize
+deployment, force push, bypass or changing branch protection. During the Actions
+cutover follow `docs/agents/github-actions-cutover.md`; source changes alone do
+not activate new protection.
 
-## 1. Establish the candidate
+## Prepare the exact candidate
 
-1. Inspect the worktree, current branch, diff, and commits. Require every change
-   to belong to the one bounded task in this thread. Do not stash, discard, or
-   absorb unrelated work.
-2. If currently on local `main`, create a short descriptive task branch before
-   committing. Commit the current task with the repository's one-line commit
-   style. If work is already committed, keep it only when the branch is one
-   task; do not rewrite published history merely to consolidate commits.
-3. Run `git fetch origin`, then `git rebase origin/main`. Resolve only within
-   the Goal, preserving unrelated behavior; ask at the Goal boundary, not merely
-   because Git reports a conflict.
-4. A PR may contain multiple commits belonging to this same Owner Goal. Require
-   all commits to remain in scope and use squash merge so main receives one
-   independently revertible commit without unrelated behavior.
-5. Capture the candidate file list from
-   `git diff --name-only origin/main...HEAD` and require
-   `git status --porcelain` to be empty.
+1. Preserve unrelated work. Use a task branch, never commit directly on main.
+2. Fetch origin and synchronize with latest `origin/main`. Do not rewrite a
+   published branch merely to consolidate commits. Resolve only in-scope conflicts.
+3. Classify all changed paths with `node scripts/verify-ci.mjs --plan-json
+   --changed-file <path>` (repeat the flag). Apply high-risk overrides from AGENTS.
+4. Require a clean worktree and record the exact candidate head/base. Rebase,
+   conflict resolution or a new base invalidates prior affected verification.
+5. Run the affected checks and required independent review. Full and six E2E
+   results from this exact candidate's natural Actions run may satisfy the
+   corresponding final gate; do not run another Full just to duplicate it.
+   Keep genuinely local-only or visual verification separate. SKIP is not PASS.
 
-Any rebase, conflict resolution, amendment, or advance of `origin/main`
-invalidates all earlier classification and verification evidence.
+## Push, inspect Actions, merge
 
-## 2. Classify before choosing the route
+Push normally and open/update the task PR. `.github/workflows/verify.yml` runs
+from natural `pull_request` events. Use GitHub Actions/Checks directly; do not
+register an Amp watcher, wake a CI thread, or request private receipts.
 
-Run the existing classifier against the complete file set by passing every path
-as its own argument:
+Before merge, verify:
 
-```bash
-node scripts/verify-ci.mjs --plan-json \
-  --changed-file <path-1> --changed-file <path-2>
-```
+- The PR remains open/non-draft, targets this repository's main, and its current
+  head is the reviewed commit and contains the latest main.
+- The natural `pull_request` run belongs to this repository and the fixed
+  `.github/workflows/verify.yml` workflow, not another workflow with matching names.
+- The run is for the current PR/head, uses GitHub's test merge, and the tested
+  merge has the expected base/head parents and tree. Re-read base/head before merge.
+- The latest attempt and its `verify` and `e2e` jobs are completed/success, and
+  their check-runs belong to the GitHub Actions App. Missing, skipped, cancelled,
+  pending or failed jobs do not pass. An older success cannot override a newer
+  pending/failed attempt. A manual/local diagnostic is not natural CI authority.
+- Strict/up-to-date protection requires both checks, with bypass/force/deletion
+  restrictions preserved. Do not infer protection settings from an API 403.
 
-When a route is unclear, also classify each path. Record the machine `risk`
-and apply the stronger review/verification overrides in `AGENTS.md`, including
-governance files even when Markdown reports `no-changes`.
+Squash merge through ordinary protection with the expected head. If the response
+is unknown, read the PR/merge/main facts before any retry. Do not use admin bypass.
 
-## 3. Revalidate the exact rebased commit
+For explicitly requested monitoring, poll GitHub read-only at a sensible cadence.
+CI itself does not need a live agent. A notification is not merge authorization.
+Diagnose failures before any authorized GitHub rerun; retain failed attempts.
 
-Run on the post-rebase commit:
+## Verify main and report
 
-```bash
-pnpm -C app verify:changed -- --base-ref origin/main
-```
+Resolve the resulting main SHA and parent. Wait for that exact commit's natural
+`push` run of the same workflow: latest attempt, both jobs completed/success.
+For a serial batch, do not update the next PR until this gate succeeds.
 
-Also run the task's focused behavioral or user-flow check. UI work requires a
-real click through the exact affected page and state. Shared-renderer work
-requires `pnpm -C app verify:paper` plus affected real Screen/Print/PDF checks.
-Follow every stronger final gate in `AGENTS.md`. A high-risk candidate also
-requires the relevant review, `pnpm -C app verify:all`, and related E2E before
-the PR is ready to merge.
+Report linked PR/commit/run/check IDs, exact head/base/main/parent, machine risk,
+changed paths, review evidence, checks with PASS/SKIP/FAIL and limitations, and
+protection readback (or its explicit limitation). Do not imply an unmerged PR
+has a main SHA, or that successful CI deployed the website.
 
-Once the exact-head authoritative Full lane has PASSed, do not rerun or wait
-for a duplicate local Full; only explicitly identified local-only coverage
-remains necessary.
-
-Investigate failures; `SKIP` and baseline `FAIL` are not `PASS`. A baseline
-classification requires the same command and failure on clean `origin/main`
-with equivalent fixtures, runtime and dependencies. Preserve those failures
-in the report; never weaken assertions or remove data to make them green.
-Such local fixture failures do not waive the required successful App Check.
-After verification, require `git status --porcelain` to remain empty and HEAD
-to remain the classified same-Goal candidate.
-
-## 4. Deliver through the PR
-
-After opening/updating the PR, before waiting for authoritative CI or ending a turn
-with CI pending, call `ship_watch_check` with the fixed PR number and freshly read
-current head in this Ship thread. Require the tool's `Watching` confirmation for
-that exact PR/head; do not assume that pushing or loading the plugin registers a
-target. If the tool is missing, load only `.amp/plugins/ship-check-watcher.js` and
-call it. Same-thread/same-PR/head registration is idempotent, including concurrent
-startup: it shares the original registration result and never extends the deadline.
-For a different PR/head, cancel the old wait before registering the new one.
-After restart, timeout or a stopped wait, explicitly register again before waiting;
-an existing terminal claim is never resent. If registration fails or is unknown,
-report that notification coverage is unavailable and inspect GitHub directly;
-do not claim to be waiting with a registered watcher.
-
-It polls read-only every 45 seconds, stops after 60 minutes or PR/head drift, and
-sends at most one best-effort terminal notice to the invoking Ship thread, for
-success as well as failure. Failure, cancelled, timed_out and action_required
-notices include the Check's existing failure summary when present; no private
-receipt fetch is needed. Cancel with `ship_cancel_check_watch`; no schedule or
-CI-host handoff is needed. A notice is not approval: on wake, freshly read the open
-PR/head and latest exact-App/name Check, then perform all identity/policy gates
-below. Never reuse an older green Check or infer new Ship/deployment authorization.
-Read/append failure leaves CI unchanged; inspect GitHub directly, never rerun CI
-just to obtain a notification. Plugin restart does not automatically resume waits.
-
-Read routine progress and terminal state only from GitHub Checks and the
-watcher; do not wake the CI host for ordinary progress or SKIP excerpts.
-Request minimal host evidence once only for an unexplained failure or a
-controlled installation/rollback, scoped to that diagnosis or operation.
-
-Push the task branch without force and open one PR into `main`, reporting risk,
-review and verification evidence. Before an authorized merge, require the
-pinned App ID `4835036`'s successful exact-name `Amp Orb Verify` Check for the
-PR's current head with ADR-0025's `v7-pr` identity recording PR number,
-head/base/tested SHA, policy digest and natural delivery; verify the tested tree. Validate
-the required lanes and policy in the Check output; Full `not-required/by-policy`
-is not PASS. During this migration only, the pre-installation always-full v5
-Check is valid for the installation gate, not evidence of reduced-lane acceptance.
-Require strict/up-to-date protection without bypass; do not require a
-new Check merely because GitHub rebuilt an equivalent test-merge SHA. Fetch and
-verify the candidate/base are still the
-reviewed ones; if `origin/main` advanced, rebase and repeat validation.
-Squash merge without bypassing protection, then resolve the actual merged `main` SHA
-and parent. An unmerged PR has no post-Ship SHA to hand off.
-
-## 5. Machine evidence
-
-Read the successful `Amp Orb Verify` Check directly on GitHub and include its
-URL, immutable Check ID, App ID `4835036`, and exact tested SHA with the delivery
-report. For PRs query the current head and validate the `v7-pr` binding (including
-recorded tested commit's ordered parents and tree); for main
-query the exact main SHA and v4 identity. Private
-receipt retrieval is not part of normal Ship:
-
-```text
-sha: <40-hex>
-parent: <40-hex>
-risk: <machine risk, plus any explicit override>
-files: <complete changed-file list>
-summary: <one paragraph>
-verified: <each command and PASS/SKIP, with totals and every SKIP reason>
-```
-
-Do not send routine Focused/Low handoffs or wait for their reports. The former
-High thread only hosts CI infrastructure; Low is for requested troubleshooting,
-not a per-Ship reporter. The webhook/controller writes the Check without an
-agent turn. No human CI handoff, reply, or wait is a merge or deployment gate. A pending,
-failed, wrong-SHA, malformed, or ambiguous App Check fails closed. Deployment
-reads only the exact `Amp Orb Verify` Check from configured
-`QUESTION_BANK_DEPLOY_AMP_CHECK_APP_ID`; legacy authority-mode configuration is
-rejected.
+The Deployment Orb uses the exact-main GitHub Actions reader and rechecks main
+before dispatch. Never substitute an Amp Check, commit status, human report or
+older run for the required native workflow evidence.

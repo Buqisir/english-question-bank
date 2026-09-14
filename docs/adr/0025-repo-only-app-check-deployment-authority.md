@@ -4,6 +4,10 @@
 - Owner authorization: 2026-09-06 App-only cutover after failure/success acceptance; no production or Secrets changes
 - Supersedes: ADR-0023's Hosted CI authority only; ADR-0023's production and deployment boundaries remain
 
+CI authority and deployment evidence selection are superseded by ADR-0026 upon
+its recorded live cutover. This document retains the prior protocol and evidence;
+it is not the native Actions Ship procedure.
+
 ## Decision
 
 The automatic route is GitHub webhook → CI controller → isolated Fast/Full →

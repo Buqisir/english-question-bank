@@ -24,6 +24,13 @@ import path from 'node:path'
 
 export const AMP_ORB_DEPLOY_REPOSITORY = 'Buqisir/english-question-bank'
 export const AMP_ORB_DEPLOY_GITHUB_HOST = 'github.com'
+export const AMP_ORB_DEPLOY_GITHUB_ACTIONS_APP_ID = 15368
+export const AMP_ORB_DEPLOY_GITHUB_API_MAX_BUFFER_BYTES = 8 * 1024 * 1024
+export const AMP_ORB_DEPLOY_WORKFLOW_PATH = '.github/workflows/verify.yml'
+export const AMP_ORB_DEPLOY_WORKFLOW_NAME = 'Verify'
+export const AMP_ORB_DEPLOY_REQUIRED_JOBS = Object.freeze(['e2e', 'verify'])
+// Retained only for backward-compatible verifier coverage. Deployment wiring
+// below uses GitHub Actions workflow evidence, never this legacy Check seam.
 export const AMP_ORB_DEPLOY_AMP_CHECK_NAME = 'Amp Orb Verify'
 export const AMP_ORB_DEPLOY_AMP_EXTERNAL_ID_VERSIONS = Object.freeze(['v4'])
 export const AMP_ORB_DEPLOY_RECEIPT_SCHEMA_VERSION = 'amp-orb-deployment-receipt-v1'
@@ -86,11 +93,11 @@ export function deploymentAuthorityFromEnvironment(environment = {}) {
   if (Object.hasOwn(environment, 'QUESTION_BANK_DEPLOY_CI_AUTHORITY_MODE')) {
     throw new Error('Legacy deployment CI authority mode setting is not permitted')
   }
+  if (Object.hasOwn(environment, 'QUESTION_BANK_DEPLOY_AMP_CHECK_APP_ID')) {
+    throw new Error('Legacy deployment Amp Check App ID setting is not permitted')
+  }
   return Object.freeze({
-    ampAppId: assertPositiveInteger(
-      environment.QUESTION_BANK_DEPLOY_AMP_CHECK_APP_ID,
-      'deployment Amp Check App ID',
-    ),
+    githubActionsAppId: AMP_ORB_DEPLOY_GITHUB_ACTIONS_APP_ID,
   })
 }
 
@@ -785,16 +792,225 @@ export function requireReleaseLayoutBootstrapAbandonAuthorization(argv) {
 
 export function deploymentGitHubApiArgs(endpoint) {
   const prefix = `repos/${AMP_ORB_DEPLOY_REPOSITORY}/`
+  const encodedWorkflowPath = encodeURIComponent(AMP_ORB_DEPLOY_WORKFLOW_PATH)
+  const encodedWorkflowPathPattern = encodedWorkflowPath.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&')
   const allowed = endpoint === `${prefix}git/ref/heads/main`
     || new RegExp(
-      `^${prefix}commits/[a-f0-9]{40}/check-runs\\?check_name=Amp%20Orb%20Verify&filter=all&per_page=100(?:&page=(?:[2-9]|[1-9][0-9]+))?$`,
+      `^${prefix}actions/workflows/${encodedWorkflowPathPattern}/runs\\?branch=main&event=push&head_sha=[a-f0-9]{40}&exclude_pull_requests=true&per_page=100(?:&page=(?:[2-9]|[1-9][0-9]+))?$`,
       'u',
-    )
-      .test(endpoint || '')
+    ).test(endpoint || '')
+    || new RegExp(
+      `^${prefix}actions/runs/[1-9][0-9]*/attempts/[1-9][0-9]*$`,
+      'u',
+    ).test(endpoint || '')
+    || new RegExp(
+      `^${prefix}actions/runs/[1-9][0-9]*/attempts/[1-9][0-9]*/jobs\\?per_page=100(?:&page=(?:[2-9]|[1-9][0-9]+))?$`,
+      'u',
+    ).test(endpoint || '')
+    || new RegExp(
+      `^${prefix}check-suites/[1-9][0-9]*$`,
+      'u',
+    ).test(endpoint || '')
   if (!allowed) throw new Error('Deployment GitHub API endpoint is invalid')
   return ['api', '--hostname', AMP_ORB_DEPLOY_GITHUB_HOST, endpoint]
 }
 
+function deploymentWorkflowRunsEndpoint(sha, page = 1) {
+  const expectedSha = assertSha(sha)
+  const pageQuery = page === 1 ? '' : `&page=${page}`
+  return `repos/${AMP_ORB_DEPLOY_REPOSITORY}/actions/workflows/${encodeURIComponent(AMP_ORB_DEPLOY_WORKFLOW_PATH)}/runs?branch=main&event=push&head_sha=${expectedSha}&exclude_pull_requests=true&per_page=100${pageQuery}`
+}
+
+function isDeploymentWorkflowRun(run, sha) {
+  return run?.path === AMP_ORB_DEPLOY_WORKFLOW_PATH
+    && run?.name === AMP_ORB_DEPLOY_WORKFLOW_NAME
+    && run?.event === 'push'
+    && run?.head_branch === 'main'
+    && run?.head_sha === sha
+    && run?.repository?.full_name === AMP_ORB_DEPLOY_REPOSITORY
+    && run?.head_repository?.full_name === AMP_ORB_DEPLOY_REPOSITORY
+}
+
+function latestDeploymentWorkflowRun(workflowRuns, sha) {
+  if (!Array.isArray(workflowRuns)) {
+    throw new Error('GitHub deployment workflow runs response is invalid')
+  }
+  const candidates = workflowRuns.filter((run) => isDeploymentWorkflowRun(run, sha))
+  const ids = candidates.map((run) => assertPositiveInteger(
+    run?.id,
+    'deployment workflow run ID',
+  ))
+  if (new Set(ids).size !== ids.length) {
+    throw new Error('Deployment workflow run IDs are ambiguous')
+  }
+  return candidates.reduce(
+    (selected, run) => (!selected || run.id > selected.id ? run : selected),
+    null,
+  )
+}
+
+async function readPaginatedGitHubCollection({ readJson, endpoint, key, label }) {
+  const values = []
+  for (let page = 1; page <= 100; page += 1) {
+    const payload = await readJson(endpoint(page))
+    if (!Array.isArray(payload?.[key])) {
+      throw new Error(`GitHub deployment ${label} response is invalid`)
+    }
+    values.push(...payload[key])
+    if (payload[key].length < 100) return values
+  }
+  throw new Error(`GitHub deployment ${label} pagination is excessive`)
+}
+
+export async function readDeploymentWorkflowEvidence({
+  sha,
+  readJson,
+} = {}) {
+  const expectedSha = assertSha(sha)
+  if (typeof readJson !== 'function') {
+    throw new Error('Deployment workflow reader dependency is missing')
+  }
+  const readSnapshot = async () => {
+    const workflowRuns = await readPaginatedGitHubCollection({
+      readJson,
+      endpoint: (page) => deploymentWorkflowRunsEndpoint(expectedSha, page),
+      key: 'workflow_runs',
+      label: 'workflow runs',
+    })
+    const run = latestDeploymentWorkflowRun(workflowRuns, expectedSha)
+    if (!run) {
+      return { workflow_runs: workflowRuns, run_attempt: null, check_suite: null, jobs: [] }
+    }
+    const runId = assertPositiveInteger(run.id, 'deployment workflow run ID')
+    const attempt = assertPositiveInteger(run.run_attempt, 'deployment workflow run attempt')
+    const checkSuiteId = assertPositiveInteger(
+      run.check_suite_id,
+      'deployment workflow check suite ID',
+    )
+    const runAttempt = await readJson(
+      `repos/${AMP_ORB_DEPLOY_REPOSITORY}/actions/runs/${runId}/attempts/${attempt}`,
+    )
+    const checkSuite = await readJson(
+      `repos/${AMP_ORB_DEPLOY_REPOSITORY}/check-suites/${checkSuiteId}`,
+    )
+    const jobs = await readPaginatedGitHubCollection({
+      readJson,
+      endpoint: (page) => {
+        const pageQuery = page === 1 ? '' : `&page=${page}`
+        return `repos/${AMP_ORB_DEPLOY_REPOSITORY}/actions/runs/${runId}/attempts/${attempt}/jobs?per_page=100${pageQuery}`
+      },
+      key: 'jobs',
+      label: 'workflow jobs',
+    })
+    return { workflow_runs: workflowRuns, run_attempt: runAttempt, check_suite: checkSuite, jobs }
+  }
+  const fingerprint = (evidence) => JSON.stringify(evidence)
+  let previousFingerprint = null
+  for (let attempt = 1; attempt <= 3; attempt += 1) {
+    const evidence = await readSnapshot()
+    const currentFingerprint = fingerprint(evidence)
+    if (previousFingerprint === currentFingerprint) {
+      return evidence
+    }
+    previousFingerprint = currentFingerprint
+  }
+  throw new Error('GitHub deployment workflow evidence changed during pagination')
+}
+
+export function assertGitHubActionsDeploymentRun(evidence, expectedSha, trustedAppId) {
+  const sha = assertSha(expectedSha)
+  const appId = assertPositiveInteger(trustedAppId, 'deployment GitHub Actions App ID')
+  if (
+    !Array.isArray(evidence?.workflow_runs)
+    || !Array.isArray(evidence?.jobs)
+  ) {
+    throw new Error('GitHub Actions deployment evidence is invalid')
+  }
+  const run = latestDeploymentWorkflowRun(evidence.workflow_runs, sha)
+  if (!run) throw new Error('Required GitHub Actions deployment workflow run is missing')
+  const runId = assertPositiveInteger(run.id, 'deployment workflow run ID')
+  const attempt = assertPositiveInteger(run.run_attempt, 'deployment workflow run attempt')
+  const checkSuiteId = assertPositiveInteger(
+    run.check_suite_id,
+    'deployment workflow check suite ID',
+  )
+  if (run.status !== 'completed' || run.conclusion !== 'success') {
+    throw new Error(
+      `Required GitHub Actions deployment workflow is ${run.conclusion || run.status || 'unknown'}`,
+    )
+  }
+  const runAttempt = evidence.run_attempt
+  if (
+    !isDeploymentWorkflowRun(runAttempt, sha)
+    || runAttempt.id !== runId
+    || runAttempt.run_attempt !== attempt
+    || runAttempt.check_suite_id !== checkSuiteId
+    || runAttempt.status !== 'completed'
+    || runAttempt.conclusion !== 'success'
+  ) {
+    throw new Error('Current GitHub Actions deployment workflow attempt is invalid')
+  }
+  const checkSuite = evidence.check_suite
+  if (
+    checkSuite?.id !== checkSuiteId
+    || checkSuite?.app?.id !== appId
+    || checkSuite?.head_branch !== 'main'
+    || checkSuite?.head_sha !== sha
+    || checkSuite?.status !== 'completed'
+    || checkSuite?.conclusion !== 'success'
+  ) {
+    throw new Error('GitHub Actions deployment check suite is invalid')
+  }
+  const jobIds = evidence.jobs.map((job) => assertPositiveInteger(
+    job?.id,
+    'deployment workflow job ID',
+  ))
+  const jobNames = evidence.jobs.map((job) => job?.name).sort()
+  if (
+    new Set(jobIds).size !== jobIds.length
+    || jobNames.join('\n') !== AMP_ORB_DEPLOY_REQUIRED_JOBS.join('\n')
+    || evidence.jobs.some((job) => (
+      job?.run_id !== runId
+      || job?.run_attempt !== attempt
+      || job?.head_sha !== sha
+      || job?.status !== 'completed'
+      || job?.conclusion !== 'success'
+    ))
+  ) {
+    throw new Error('Required GitHub Actions deployment jobs are incomplete or unsuccessful')
+  }
+  return {
+    provider: AMP_ORB_DEPLOY_WORKFLOW_NAME,
+    workflowPath: AMP_ORB_DEPLOY_WORKFLOW_PATH,
+    appId,
+    runId,
+    attempt,
+    checkSuiteId,
+    jobs: evidence.jobs.map(({ id, name }) => ({ id, name })).sort((left, right) =>
+      left.name.localeCompare(right.name)),
+    state: 'success',
+  }
+}
+
+export async function verifyDeploymentAuthority({
+  expectedSha,
+  readWorkflowEvidence,
+  githubActionsAppId = AMP_ORB_DEPLOY_GITHUB_ACTIONS_APP_ID,
+} = {}) {
+  const sha = assertSha(expectedSha)
+  if (typeof readWorkflowEvidence !== 'function') {
+    throw new Error('GitHub Actions deployment verification dependency is missing')
+  }
+  return assertGitHubActionsDeploymentRun(
+    await readWorkflowEvidence(sha),
+    sha,
+    githubActionsAppId,
+  )
+}
+
+// Compatibility-only readers retained while the deployment verifier still
+// exercises rejection of the retired App Check receipt shape. The deployment
+// CLI does not call either export.
 export async function readDeploymentCheckRuns({
   sha,
   checkName = AMP_ORB_DEPLOY_AMP_CHECK_NAME,
@@ -900,18 +1116,6 @@ export function assertAmpOrbDeploymentCheck(payload, expectedSha, trustedAppId) 
     deliveryId: identity.deliveryId,
     state: 'success',
   }
-}
-
-export async function verifyDeploymentAuthority({
-  expectedSha,
-  readAmpChecks,
-  ampAppId,
-} = {}) {
-  const sha = assertSha(expectedSha)
-  if (typeof readAmpChecks !== 'function') {
-    throw new Error('Amp deployment verification dependency is missing')
-  }
-  return assertAmpOrbDeploymentCheck(await readAmpChecks(sha), sha, ampAppId)
 }
 
 export async function resolveLatestDeploymentCandidate({

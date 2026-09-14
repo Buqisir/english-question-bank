@@ -1,0 +1,93 @@
+name: Verify
+
+# Additive migration: these jobs do not remove the existing required App Check.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  verify:
+    name: verify
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.21.0
+      - name: Enable pinned pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.28.1 --activate
+      - name: Install app dependencies
+        run: pnpm -C app install --frozen-lockfile
+      - name: Install server dependencies
+        run: npm --prefix server ci
+      - name: Install verification system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip
+          printf '%s\n' \
+            '#!/bin/sh' \
+            'if [ "${1:-}" = identify ]; then shift; exec /usr/bin/identify "$@"; fi' \
+            'exec /usr/bin/convert "$@"' | sudo tee /usr/local/bin/magick >/dev/null
+          sudo chmod 755 /usr/local/bin/magick
+          policy=$(find /etc/ImageMagick-* -name policy.xml -print -quit)
+          if [ -n "$policy" ]; then
+            sudo sed -i 's/rights="none" pattern="PDF"/rights="read|write" pattern="PDF"/' "$policy"
+          fi
+          magick -version
+      - name: Install Chromium
+        run: pnpm -C app exec playwright install --with-deps --no-shell chromium
+      - name: Run complete verification registry
+        run: pnpm -C app verify:all -- --jobs 2
+      - name: Require tracked checkout to remain clean
+        run: git diff --exit-code && git diff --cached --exit-code
+
+  e2e:
+    name: e2e
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.21.0
+      - name: Enable pinned pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.28.1 --activate
+      - name: Install app dependencies
+        run: pnpm -C app install --frozen-lockfile
+      - name: Install server dependencies
+        run: npm --prefix server ci
+      - name: Install Chromium
+        run: pnpm -C app exec playwright install --with-deps --no-shell chromium
+      - name: Verify draft pagination renderer
+        run: node scripts/verify-draft-pagination-renderer.mjs
+      - name: Verify draft pagination DOM contract
+        run: node scripts/verify-draft-pagination-dom-contract.mjs
+      - name: Verify A3 imposition
+        run: node scripts/verify-a3-imposition.mjs
+      - name: Verify reorder suggestions
+        run: node scripts/verify-reorder-suggest.mjs
+      - name: Verify grammar-fill browser geometry
+        run: node scripts/verify-paper-normalization-grammar-fill-browser.mjs
+      - name: Verify golden path
+        run: node scripts/smoke-golden-path.mjs
+      - name: Require tracked checkout to remain clean
+        run: git diff --exit-code && git diff --cached --exit-code

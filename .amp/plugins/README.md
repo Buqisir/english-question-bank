@@ -1,10 +1,17 @@
 # Project plugins
 
-## Ship Check watcher
+CI/Ship authority is migrating to native GitHub Actions under ADR-0026 and
+`docs/agents/github-actions-cutover.md`. The Amp CI/watcher sections below
+describe the retained legacy implementation, not instructions to activate it.
+Do not load/reload the CI plugin, resume its queue or register an Amp watcher
+for the new Ship path. Live retirement follows the cutover runbook; deleting a
+source file does not prove the remote registration has been disabled.
+
+## Legacy Ship Check watcher
 
 `ship-check-watcher.js` registers `ship_watch_check({pullRequest, head})` and
-`ship_cancel_check_watch({})`. The Ship workflow requires a confirmed registration
-before waiting for authoritative CI; pushing a PR does not register a watcher.
+`ship_cancel_check_watch({})`. The former Ship workflow required registration;
+native Actions Ship does not use it. Pushing a PR does not register this watcher.
 Repeating the same PR/head in the same thread shares the original startup result,
 timer and deadline. A different PR/head requires cancelling the old wait first.
 The target thread comes from the invocation context, never a tool argument.
