@@ -1,29 +1,40 @@
 # Project plugins
 
-CI/Ship authority is migrating to native GitHub Actions under ADR-0026 and
-`docs/agents/github-actions-cutover.md`. The Amp CI/watcher sections below
-describe the retained legacy implementation, not instructions to activate it.
-Do not load/reload the CI plugin, resume its queue or register an Amp watcher
-for the new Ship path. Live retirement follows the cutover runbook; deleting a
-source file does not prove the remote registration has been disabled.
+CI/Ship authority is native GitHub Actions under ADR-0026 and
+`docs/agents/github-actions-cutover.md`. The Ship watcher below only reports
+native Actions results; it does not execute CI or supply merge authority.
+The GitHub CI Orb section retains legacy implementation history: do not
+load/reload that CI plugin or resume its queue. Deleting a source file does
+not prove a remote registration has been disabled.
 
-## Legacy Ship Check watcher
+## Native Actions Ship watcher
 
-`ship-check-watcher.js` registers `ship_watch_check({pullRequest, head})` and
-`ship_cancel_check_watch({})`. The former Ship workflow required registration;
-native Actions Ship does not use it. Pushing a PR does not register this watcher.
-Repeating the same PR/head in the same thread shares the original startup result,
-timer and deadline. A different PR/head requires cancelling the old wait first.
+`ship-check-watcher.js` registers `ship_watch_check({pullRequest, head})`,
+`ship_watch_main({head})` and `ship_cancel_check_watch({})`. Ship registers its
+PR wait explicitly, then its exact-main wait after merge. Pushing alone does
+not register a watcher. Each thread has one active PR or main wait. Repeating
+the same target shares the original startup result, timer and deadline; a
+different target requires cancelling the old wait first.
 The target thread comes from the invocation context, never a tool argument.
-Repository, App `4835036`, and `Amp Orb Verify` are fixed. It performs only GitHub
+Repository, App `15368`, and `Verify` at `.github/workflows/verify.yml` are fixed.
+It validates natural PR or main push events, latest run/attempt, exact head,
+suite and both `verify`/`e2e` jobs, with two stable terminal reads. It performs only GitHub
 GETs using the existing `gh` authentication, every 45 seconds (no overlapping reads),
-for at most 60 minutes. Head/identity drift, PR closure, cancellation and disposal
-stop the wait; it never follows a new head or modifies/reruns CI.
+for at most 60 minutes. Head drift, PR closure, cancellation and disposal stop
+the wait; it never follows a new head or modifies/reruns CI.
 
-A confirmed latest terminal Check produces one best-effort `appendUserMessage`
+GitHub can return empty `pull_requests` associations even for natural PR runs.
+The workflow therefore generates `Verify PR #<number> head <SHA>` from event
+fields, not the editable PR title. The watcher uses that routing metadata and
+the PR head branch when associations are empty; contradictory associations
+are rejected. This metadata routes hints only, not merge authority. Legacy
+runs with neither association nor explicit routing identity remain unknown.
+
+A confirmed latest terminal run produces one best-effort `appendUserMessage`
 without steering. Ship must recheck live identity and authority after waking.
-Failure, cancelled, timed_out and action_required notices include the confirmed
-Check's existing `output.summary` when present. Success notices are unchanged.
+Unsuccessful notices include failed job/step summaries and the run-attempt link,
+marked as untrusted GitHub data. Deadline expiry also produces a best-effort
+notice, not a CI failure or authorization to rerun.
 Private mode-0600 records under `.scratch/ship-check-watcher/` claim before append;
 an ambiguous append is not retried. There is no outbox, scheduler, automatic restart
 recovery, or exactly-once transport guarantee: crashes can miss notifications.

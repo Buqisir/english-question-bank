@@ -95,9 +95,11 @@ until the owner has selected the replacements.
 High-risk PRs retain their required review, Full verification, and E2E. The sole
 target CI authority is the native GitHub Actions `verify` and `e2e` pair from
 `.github/workflows/verify.yml`, bound to the current natural PR/main run and its
-latest successful attempt. Full and six browser E2E seams run on separate hosted
-runners. Normal Ship reads GitHub directly, without an Amp watcher, CI-host
-handoff or private receipt lookup. Deployment validates the exact-main natural
+latest successful attempt. Base-classified PR packs (Full for shared/high/unknown)
+and six browser E2E seams run on separate hosted runners; main always runs Full.
+Normal Ship registers a read-only native Actions notification to its own thread,
+then rechecks GitHub directly, without a CI-host handoff or private receipt lookup.
+Deployment validates the exact-main natural
 workflow and both jobs, failing closed for missing, pending, failed, wrong-SHA,
 wrong-workflow or ambiguous evidence. See ADR-0026 and
 `docs/agents/github-actions-cutover.md`; this README does not claim the live
@@ -109,6 +111,7 @@ verifiers test historical libraries and do not require a live Orb controller.
 | Script | Scope | Runs in CI? |
 | --- | --- | --- |
 | `verify-ci.mjs` | Selects changed/Paper/all packs, runs bounded resource-aware parallel jobs with registry-ordered logs, and reports PASS/SKIP/FAIL without hiding later failures | yes |
+| `verify-ci-pr-plan.mjs` | Rejects unsafe PR reduction for protected/shared/persistence paths, malformed identities, candidate-controlled policy, renamed/deleted files, and classifier failure; proves exact test-merge and existing-pack selection | yes |
 | `verify-ship-check-watcher.mjs` | Rejects duplicate or false-positive registration, stale-head or wrong-target notification, missing failure summaries, duplicate claims, and cancelled-startup overwrites without calling GitHub or messaging a real thread | yes |
 | `verify-amp-orb-ci.mjs` | Rejects non-natural or HMAC-invalid deliveries, delivery/merge drift, candidate-secret exposure, duplicate execution, receipt/Check create-PATCH ambiguity, failed lane aggregation, or diagnostic authority without registering a webhook or calling GitHub | yes |
 | `verify-amp-orb-ci-coordination.mjs` | Proves opt-in serialized PR eligibility, exact Owner-scoped selection, durable selection wake/resume, fail-closed active state, unchanged main processing, writerless forced diagnostics, and backward-compatible installation against fake private state only | yes |

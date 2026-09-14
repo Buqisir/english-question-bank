@@ -2,7 +2,27 @@
 
 ## Current status
 
-Migration candidate, not activated. Initial read-only baseline on 2026-09-14:
+Native authority is active after [PR #460](https://github.com/Buqisir/english-question-bank/pull/460).
+Owner re-opened and confirmed classic main protection on 2026-09-14 at
+14:57:01 CST: only `verify`/`e2e` from GitHub Actions are required; strict,
+linear history and no bypass remain; force push/deletion are disabled. REST
+readback remains 403; this is explicit Owner evidence, not API evidence.
+
+The [natural PR run](https://github.com/Buqisir/english-question-bank/actions/runs/34808775227)
+and [natural main run](https://github.com/Buqisir/english-question-bank/actions/runs/34815848519)
+passed both jobs. Main `c8cdaea7703aca48ab49fdf74f1dd9d793b2f554` has parent
+`4784ce86b8a47dae626a37141c36271837c3ea92`; Full reported 177 PASS / 2 SKIP /
+0 FAIL. The SKIPs are the absent off-repo teaching fixture and local DB perf.
+The Deployment Orb installed that exact clean main checkout and passed `plan`
+with App 15368/run 34815848519/attempt 1 and both jobs; focused tests passed
+684/0 on Node 24.20.0 (hosted CI used 24.21.0). No SSH or deployment occurred.
+GitHub hook 672661674 was disabled and read back `active:false` at
+07:36:34Z. Old Orb/platform registration termination and inaccessible private
+queue/receipts remain unverified; do not claim their deletion or replay them.
+
+### Initial baseline (historical)
+
+Initial read-only baseline on 2026-09-14:
 main `4784ce86b8a47dae626a37141c36271837c3ea92`; no workflows on main or in the
 Actions workflow listing. Main protection REST returned 403; rulesets listing
 was empty. Historical Owner evidence says the classic main rule requires only

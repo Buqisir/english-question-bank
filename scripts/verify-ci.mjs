@@ -98,6 +98,7 @@ const registry = {
   'scripts/verify-source-intake-webhook.mjs',
   'scripts/verify-nck1-analysis-agent-plugin.mjs',
   'scripts/verify-ship-check-watcher.mjs',
+  'scripts/verify-ci-pr-plan.mjs',
   'scripts/verify-amp-orb-ci.mjs',
   'scripts/verify-amp-orb-ci-coordination.mjs',
   'scripts/verify-amp-orb-deploy.mjs',
@@ -348,7 +349,7 @@ function changedPlan(files) {
     'server/vocabulary/vocabularyPdfRenderer.mjs',
     'server/draft-paper/',
     'app/src/shared-ui/papersurface/',
-    'app/src/features/draft-paper/DraftPaperWorkbench.css',
+    'app/src/features/draft-paper/',
     'app/src/features/paper-browse/',
     'app/src/features/paper-intelligence/',
     'standards/paper-canonical/',
@@ -376,6 +377,8 @@ function changedPlan(files) {
     'server/import-ops/',
     'server/source-intake/',
     'server/user-data/',
+    'server/my-space/',
+    'server/import-review/',
     'server/ai-daily-limit.mjs',
     'server/vocabulary/vocabularyStore.mjs',
     'server/vocabulary/vocabularyRoutes.mjs',
@@ -403,6 +406,7 @@ function changedPlan(files) {
       'server/paper-import/nck1OcrMaterializationProducer.mjs',
       'server/paper-import/nck1OcrSourceEvidence.mjs',
       'server/paper-import/nck1ImageSourceBundle.mjs',
+      'server/paper-import/storage.mjs',
     ].includes(file)) return ['unknown']
     if (file.startsWith('scripts/import-pipeline/')) {
       return [/\/verify-/.test(file) ? 'paper' : 'feature']
