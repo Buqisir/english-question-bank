@@ -26,7 +26,7 @@ const materialization = plan(
 assert.equal(materialization.risk, 'single-paper-import')
 assert.equal(materialization.pack, 'import-paper')
 assert(materialization.scripts.length >= 10, 'import pack keeps independent failure layers')
-assert(materialization.scripts.length <= 26, 'import pack stays narrow with two pagination QA failure layers')
+assert(materialization.scripts.length <= 27, 'import pack stays narrow with two pagination QA failure layers')
 for (const required of [
   'scripts/verify-import-pagination-qa.mjs',
   'scripts/verify-import-pagination-ui.mjs',
@@ -43,6 +43,7 @@ for (const required of [
   'scripts/verify-nck1-pdf-crop-recipe-replay.mjs',
   'scripts/verify-paper-canonical-import-admission.mjs',
   'scripts/verify-paper-canonical-import-recovery.mjs',
+  'scripts/verify-paper-canonical-listening-first-section-playback-slot-gating.mjs',
   'scripts/verify-universal-nck1-publish.mjs',
   'scripts/verify-paper-canonical-detail-screen-consumption.mjs',
   'scripts/verify-print-renderer.mjs',
