@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 import assert from 'node:assert/strict'
-import { cpSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { cpSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
+import { listCanonicalPaperCatalog } from '../server/search/canonicalPaperCatalog.mjs'
 
 const root = path.resolve(import.meta.dirname, '..')
 const temp = mkdtempSync(path.join(tmpdir(), 'eqb-directory-metadata-'))
@@ -22,7 +23,7 @@ try {
   cpSync(path.join(root, 'data/question-bank.sqlite'), env.QUESTION_BANK_DB)
   cpSync(path.join(root, 'app/public/paper-assets', paperId), path.join(assetRoot, paperId), { recursive: true })
   Object.assign(process.env, env)
-  const { getQuestionGroupDetail } = await import('../server/api.mjs')
+  const { getQuestionGroupDetail, getPrintReadyByGroupId, isGroupPrintReady } = await import('../server/api.mjs')
   const meta = JSON.parse(readFileSync(metaPath, 'utf8'))
   const detail = getQuestionGroupDetail(groupId)
   assert.ok(detail)
@@ -76,6 +77,73 @@ try {
     { id: 'stored-topic-2', label: '人与社会-历史、社会与文化-传统节日', source: 'teacher', reason: '保留老师确认的主题', confidence: 0.8 },
   ])
   console.log('PASS stored topic read: legacy alias expands without losing identity, teacher attribution or confidence')
+
+  // These deliberately minimal publications exercise cheap discovery only;
+  // they do not claim to be deeply validated Canonical Paper publications.
+  const catalogRoot = path.join(temp, 'catalog')
+  const catalogDb = new DatabaseSync(':memory:')
+  try {
+    catalogDb.exec(`CREATE TABLE canonical_paper_publications (
+      paper_id TEXT, version_name TEXT, source_asset_version INTEGER,
+      publication_digest TEXT, created_at TEXT, is_current INTEGER
+    )`)
+    for (const [id, ids] of [
+      ['paper-one', ['shared-group', 'one-only']],
+      ['paper-two', ['shared-group', 'two-only']],
+      ['paper-safe', ['safe-group']],
+    ]) {
+      const ref = { paperId: id, versionName: 'v1', sourceAssetVersion: 1, publicationDigest: `digest-${id}` }
+      const base = path.join(catalogRoot, id)
+      mkdirSync(path.join(base, 'latest'), { recursive: true })
+      mkdirSync(path.join(base, 'versions/v1/canonical'), { recursive: true })
+      writeFileSync(path.join(base, 'latest/canonical-paper-publication-ref-v1.json'), JSON.stringify(ref))
+      writeFileSync(path.join(base, 'versions/v1/canonical/canonical-paper-plan-v1.json'), JSON.stringify({
+        paperId: id, slotBindings: ids.map(groupId => ({ state: 'bound', groupRef: { groupId } })),
+      }))
+      writeFileSync(path.join(base, 'latest/paper-asset.json'), JSON.stringify({
+        paper: { paperId: id }, content: {
+          groups: Object.fromEntries(ids.map(groupId => [groupId, { groupId, title: `from-${id}` }])),
+          blocks: ids.map(groupId => ({ type: 'group', groupId })),
+        },
+      }))
+      catalogDb.prepare('INSERT INTO canonical_paper_publications VALUES (?, ?, ?, ?, ?, 1)')
+        .run(id, 'v1', 1, ref.publicationDigest, '2026-09-01')
+    }
+    for (const order of ['OFF', 'ON']) {
+      catalogDb.exec(`PRAGMA reverse_unordered_selects = ${order}`)
+      assert.deepEqual(listCanonicalPaperCatalog({ db: catalogDb, rootDir: catalogRoot }).map(paper => paper.paperId),
+        ['paper-safe'], 'exclude every colliding owner, including its noncolliding groups, regardless of DB order')
+    }
+    catalogDb.prepare('DELETE FROM canonical_paper_publications WHERE paper_id = ?').run('paper-two')
+    assert.deepEqual(listCanonicalPaperCatalog({ db: catalogDb, rootDir: catalogRoot }).map(paper => paper.paperId).sort(),
+      ['paper-one', 'paper-safe'], 'a uniquely owned paper becomes discoverable again without stale conflict state')
+  } finally {
+    catalogDb.close()
+  }
+  console.log('PASS publication ownership: both conflicting papers excluded, unrelated paper retained, either SQL order and conflict removal')
+
+  const duplicate = JSON.parse(readFileSync(path.join(latest, 'paper-asset.json'), 'utf8'))
+  // Also bind an existing DB group so both single and batch print-readiness
+  // paths see the collision, rather than merely rejecting a missing DB row.
+  duplicate.content.groups[storedGroupId] = { ...duplicate.content.groups[groupId], groupId: storedGroupId }
+  writeFileSync(path.join(latest, 'paper-asset.json'), JSON.stringify(duplicate))
+  duplicate.paper.paperId = 'paper-conflicting-owner'
+  const duplicateDir = path.join(assetRoot, duplicate.paper.paperId)
+  mkdirSync(path.join(duplicateDir, 'latest'), { recursive: true })
+  writeFileSync(path.join(duplicateDir, 'latest/paper-asset.json'), JSON.stringify(duplicate))
+  assert.equal(getQuestionGroupDetail(groupId), null, 'scoped detail must reject a second valid owner before canonical paper enrichment')
+  const parityDb = new DatabaseSync(env.QUESTION_BANK_DB, { readOnly: true })
+  try {
+    const rejected = { ok: false, reason: '试卷资产身份不一致' }
+    assert.deepEqual(isGroupPrintReady(parityDb, storedGroupId), rejected, 'single-group read rejects duplicate ownership')
+    assert.deepEqual(getPrintReadyByGroupId(parityDb, [storedGroupId]).get(storedGroupId), rejected,
+      'batch cards must not grant eligibility that single-group/detail reads reject')
+  } finally {
+    parityDb.close()
+  }
+  rmSync(duplicateDir, { recursive: true })
+  assert.equal(getQuestionGroupDetail(groupId).id, groupId, 'detail recovers after the conflicting owner is removed')
+  console.log('PASS detail/print ownership: duplicate valid owner fails closed in detail and single/batch eligibility; unique owner remains readable')
 } finally {
   for (const [key, value] of Object.entries(previous)) {
     if (value === undefined) delete process.env[key]

@@ -5,6 +5,7 @@ import { resolvePaperAssetReadPaths } from '../paper-import/storage.mjs'
 // Publication validates the complete paper before committing this index.
 // Discovery reads that index and its small plan, not a new full-corpus Screen
 // validation. Opening a paper and exporting still use canonicalConsumerRuntime.
+// Scoped detail calls first reject cross-paper ownership with findPaperAssetGroup.
 export function listCanonicalPaperCatalog({ db, rootDir, paperId = null }) {
   if (!db.prepare("SELECT name FROM sqlite_master WHERE name = 'canonical_paper_publications'").get()) return []
   const refs = db.prepare(`SELECT paper_id, version_name, source_asset_version, publication_digest, created_at
@@ -28,5 +29,10 @@ export function listCanonicalPaperCatalog({ db, rootDir, paperId = null }) {
       // are reported by the authoritative consumption endpoint on open/export.
     }
   }
-  return papers
+  const owners = new Map()
+  for (const paper of papers) {
+    for (const id of paper.groupIds) owners.set(id, (owners.get(id) || 0) + 1)
+  }
+  // Never pick an arbitrary owner or advertise the remaining part of its paper.
+  return papers.filter(paper => paper.groupIds.every(id => owners.get(id) === 1))
 }

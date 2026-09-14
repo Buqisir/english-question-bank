@@ -264,7 +264,8 @@ function findPaperAssetGroup(groupId) {
         identityConflict = { identityConflict: true }
         continue
       }
-      if (!validMatch) validMatch = { asset, group, paperId: entry.name }
+      if (validMatch) return { identityConflict: true }
+      validMatch = { asset, group, paperId: entry.name }
     } catch {
       // Ignore invalid paper-asset files; import validation owns that error.
     }
@@ -435,7 +436,10 @@ function buildPaperAssetGroupIndex() {
         continue
       }
       for (const [groupId, group] of Object.entries(groups)) {
-        if (group && !index.has(groupId)) index.set(groupId, { asset, group, paperId: entry.name })
+        if (!group) continue
+        index.set(groupId, index.has(groupId)
+          ? { identityConflict: true }
+          : { asset, group, paperId: entry.name })
       }
     } catch {
       // Ignore invalid paper-asset files; import validation owns that error.
