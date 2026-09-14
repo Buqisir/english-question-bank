@@ -28,7 +28,8 @@ const positiveInteger = value => Number.isSafeInteger(value) && value > 0
 const safeLabel = value => String(value || 'unknown').replace(/[\r\n\t]+/gu, ' ').slice(0, 160)
 
 function runIdentity(run, head, event) {
-  return run?.path === WORKFLOW_PATH && run?.name === WORKFLOW_NAME
+  return run?.path === WORKFLOW_PATH
+    && run?.name === (event === 'pull_request' ? run.display_title : WORKFLOW_NAME)
     && run?.event === event && run?.head_sha === head
     && (event !== 'push' || run?.head_branch === 'main')
     && run?.repository?.full_name === REPO && run?.head_repository?.full_name === REPO

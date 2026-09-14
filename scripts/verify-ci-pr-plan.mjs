@@ -115,4 +115,6 @@ try {
 assert(workflow.includes('"$BASE_SHA:scripts/ci-pr-plan.mjs"'))
 assert(workflow.includes('node "$trusted/scripts/ci-pr-plan.mjs"'))
 assert(workflow.includes('node scripts/verify-ci.mjs --plan-json --pack all'))
+assert(workflow.includes("github.event.pull_request.head.sha) || 'Verify' }}"),
+  'main run.name must remain Verify for the deployment authority reader')
 console.log('verify-ci-pr-plan: PASS (risk packs, escalation, immutable identities, candidate policy isolation)')

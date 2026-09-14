@@ -29,14 +29,14 @@ function run({
   status = 'completed',
   conclusion = 'success',
   sha = head,
-  name = 'Verify',
   path = workflowPath,
   event = 'pull_request',
   branch = 'feature',
   repository = repo,
   headRepository = repo,
   pullRequests = [],
-  displayTitle = event === 'pull_request' ? `Verify PR #411 head ${sha}` : `Verify main ${sha}`,
+  displayTitle = event === 'pull_request' ? `Verify PR #411 head ${sha}` : 'Verify',
+  name = displayTitle,
 } = {}) {
   return {
     id,

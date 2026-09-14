@@ -1,6 +1,6 @@
 name: Verify
 run-name: >-
-  ${{ github.event_name == 'pull_request' && format('Verify PR #{0} head {1}', github.event.pull_request.number, github.event.pull_request.head.sha) || format('Verify main {0}', github.sha) }}
+  ${{ github.event_name == 'pull_request' && format('Verify PR #{0} head {1}', github.event.pull_request.number, github.event.pull_request.head.sha) || 'Verify' }}
 
 # Stable required jobs: risk changes their work, never whether they run.
 on:
