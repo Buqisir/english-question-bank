@@ -93,17 +93,16 @@ original/A-D comparison pass. Its batch, candidates, and state all live under
 until the owner has selected the replacements.
 
 High-risk PRs retain their required review, Full verification, and E2E. The sole
-CI authority is the exact `Amp Orb Verify` Check created by
-GitHub App ID `4835036` from a natural webhook delivery to the dedicated CI
-Orb. Fast and Full run in isolated credential-free checkouts and store a
-machine receipt. Normal Ship reads GitHub directly, without a Focused/Low
-report or receipt lookup. The former High thread only hosts infrastructure;
-Low is for requested troubleshooting. The Deployment
-reader requires `QUESTION_BANK_DEPLOY_AMP_CHECK_APP_ID` and fails closed for
-absent, pending, malformed, wrong-SHA, or ambiguous App evidence; legacy
-authority-mode configuration is rejected. See ADR-0025 and the coordinator-owned
-`docs/agents/app-ci-cutover.md`; this README does not claim the branch-protection
-cutover is complete.
+target CI authority is the native GitHub Actions `verify` and `e2e` pair from
+`.github/workflows/verify.yml`, bound to the current natural PR/main run and its
+latest successful attempt. Full and six browser E2E seams run on separate hosted
+runners. Normal Ship reads GitHub directly, without an Amp watcher, CI-host
+handoff or private receipt lookup. Deployment validates the exact-main natural
+workflow and both jobs, failing closed for missing, pending, failed, wrong-SHA,
+wrong-workflow or ambiguous evidence. See ADR-0026 and
+`docs/agents/github-actions-cutover.md`; this README does not claim the live
+branch-protection or Deployment Orb cutover is complete. Retained Amp-specific
+verifiers test historical libraries and do not require a live Orb controller.
 
 ## Stable CI entrypoint
 

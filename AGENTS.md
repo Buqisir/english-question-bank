@@ -109,46 +109,51 @@ uniquely supplies; otherwise keep it outside daily packs.
   risk. High-risk PRs require the relevant review, `verify:all`, and E2E; never
   push them directly to `main`.
 - Immediately before Ship, run `git fetch origin`, rebase the task branch onto
-  `origin/main`, require `git status --porcelain` to be empty, then rerun
-  `pnpm -C app verify:changed -- --base-ref origin/main` and the affected
-  behavioral/user-flow checks. A rebase, conflict resolution, or newly advanced
+  `origin/main`, require `git status --porcelain` to be empty, and verify the
+  affected behavior on that candidate. Its natural Actions Full/E2E run may
+  satisfy the corresponding final checks; do not duplicate that Full locally.
+  Local-only and visual checks still apply. A rebase, conflict resolution, or newly advanced
   `origin/main` invalidates all earlier results. Resolve conflicts only within
   the Goal while preserving unrelated behavior; apply the authorization boundary
   above if a conflict requires broader scope.
-- Push the task branch and merge its PR only when the Goal includes Ship and
-  the reviewed candidate has the required pinned `Amp Orb Verify` App Check.
+- Push the task branch and open its PR only when the Goal includes Ship. Merge
+  only after the reviewed candidate has successful GitHub Actions `verify` and `e2e`
+  checks from `.github/workflows/verify.yml` for its current natural PR run.
+  During cutover retain the existing required check until the replacement
+  checks are green and the Owner atomically saves the new required-check set;
+  follow `docs/agents/github-actions-cutover.md` rather than assuming a code
+  merge changed protection.
   Do not bypass branch protection or force-push `main`; Custom Ship remains
   inactive.
 - After Ship, report the exact 40-hex `main` SHA and parent, machine risk,
   changed files, one-paragraph summary, and every command as `PASS` or `SKIP`
-  with the limitation. Link the exact GitHub App Check; no Focused/Low report,
+  with the limitation. Link the exact Actions run and both job checks; no Focused/Low report,
   private-receipt retrieval, human CI handoff or reply is a daily Ship gate.
 
-## Dedicated CI authority
+## GitHub Actions CI authority
 
-- The automatic `amp-orb-ci` controller is the sole dedicated-CI machine
-  executor. A natural HMAC-authenticated webhook runs isolated required lanes
-  under ADR-0025's installed trusted PR policy (main always Fast+Full), stores
-  a private receipt, and writes only ADR-0025's exact `Amp Orb
-  Verify` Check from App ID `4835036`.
-- Normal operation reads GitHub directly: check the current PR head attachment
-  and its `v7-pr` PR/head/base/tested-merge/policy/delivery identity (including tested-tree verification), or exact live `main`
-  with its v4 identity, numeric App ID, name, status and conclusion. PR head
-  authority requires strict/up-to-date protection with no bypass and the
-  controller's base-ancestry and tested-tree/head-tree equality gates. The former
-  High CI thread is only the infrastructure host for the webhook/controller,
-  not a per-Ship agent. Low is invoked only for requested troubleshooting.
-  Neither agent runs, approves, or reports every normal Ship; private receipts
-  are recovery/diagnostic evidence, not an additional authority.
-- The Deployment reader requires that exact App Check through
-  `QUESTION_BANK_DEPLOY_AMP_CHECK_APP_ID`; missing, pending, malformed,
-  wrong-SHA, or ambiguous evidence fails closed. Hosted checks, Commit Statuses,
-  manual diagnostics, and a human report are not authority or fallback.
-- The legacy dedicated-CI Sentinel/Discovery and Action-wake paths are retired.
-  Do not start or drain them, reload their old thread/plugin, synthesize or
-  retry their events, or copy an uncommitted workspace snapshot into them. See
-  ADR-0022 for retained history and ADR-0025 for the active protocol and
-  cutover boundary.
+- `.github/workflows/verify.yml` runs on natural `pull_request` and `push` to
+  `main`. Stable jobs `verify` (complete registry) and `e2e` (six browser seams)
+  must both succeed. No path filter, skipped job, local report, manual run or
+  Amp Check substitutes for either job. See ADR-0026 and the cutover runbook.
+- Read GitHub Actions run and job evidence directly. Bind the repository,
+  workflow path, event, current PR head/base (or exact live main SHA), latest
+  run attempt, GitHub Actions App identity and both successful job conclusions.
+  PRs test GitHub's merge ref; preserve strict/up-to-date branch protection,
+  require the head to contain current main, and reject stale results.
+- CI runs independently of Amp threads. No Amp watcher registration, private
+  queue, agent acknowledgment or CI-host handoff is a Ship prerequisite.
+  For explicit monitoring use read-only GitHub checks; diagnose failures
+  before an authorized rerun and retain the earlier failed attempt.
+- Deployment accepts only the exact-main natural Actions run and its two
+  successful jobs through the deployment reader. Pending, failed, missing,
+  wrong-SHA, wrong-workflow or ambiguous evidence fails closed.
+- The old Amp CI webhook/controller, serialized eligibility, watcher,
+  Sentinel/Discovery and Action-wake are not the new authority. Do not start,
+  drain, replay or initialize them. Retire the live registration/services only
+  after Actions has taken over protection and exact-main validation passes;
+  preserve old receipts and queue evidence. Source removal is not proof that a
+  remote webhook or lost Orb has stopped.
 
 ## Dedicated Deployment Orb
 
@@ -159,14 +164,13 @@ uniquely supplies; otherwise keep it outside daily packs.
   current `main` and run
   `node scripts/amp-orb-deploy.mjs deploy --owner-said-deploy-latest`. Never ask
   the Owner to copy a SHA.
-- The deploy command requires the exact-main successful `Amp Orb Verify` Check
-  from App ID `4835036`, selected through
-  `QUESTION_BANK_DEPLOY_AMP_CHECK_APP_ID`, then sends that SHA through pinned
-  restricted SSH to the root-owned fixed host controller. Missing, pending,
-  malformed, wrong-SHA, or ambiguous Check evidence fails closed; legacy
-  authority-mode configuration is rejected. Never stream candidate deployment
-  code, bypass the forced command, or use the legacy in-place deploy after
-  cutover.
+- The deploy command requires the exact-main successful natural GitHub Actions
+  `Verify` workflow with both `verify` and `e2e` jobs, then sends that SHA
+  through pinned restricted SSH to the root-owned fixed host controller.
+  Missing, pending, malformed, wrong-SHA or ambiguous evidence fails closed.
+  Installing the new reader is a separate controlled cutover step; merging its
+  source does not prove the Deployment Orb is updated. Never stream candidate
+  deployment code, bypass the forced command, or use legacy in-place deploy.
 - A code-only Goal excludes migration, Review/paper promotion, DB/R2 mutation
   and controller/host changes. A Goal that explicitly includes reviewed entry
   maintenance and deployment covers both, without an extra activation approval.

@@ -60,7 +60,7 @@ export function rasterPdfRegion({ pdfBytes, page, region, density = 300 }) {
     const bytes = new Uint8Array(execFileSync('magick', [
       pagePath, '-crop', geometry, '+repage',
       // Exclude both binary time and date:* text, retaining color and density.
-      '-define', 'png:exclude-chunks=date,tIME', 'png32:-',
+      '-define', 'png:exclude-chunks=tEXt,zTXt,iTXt,tIME', 'png32:-',
     ], { maxBuffer }))
     const [pixelWidth, pixelHeight] = execFileSync(
       'magick', ['identify', '-format', '%w,%h', '-'], {

@@ -1,5 +1,9 @@
 # App-only CI cutover
 
+Historical Amp-authority cutover evidence. For the reverse migration and current
+Ship instructions use [GitHub Actions cutover](github-actions-cutover.md) and
+ADR-0026. The procedures below do not authorize restarting the old CI system.
+
 ## Normal operation
 
 GitHub webhook → trusted CI controller → isolated Fast/Full lanes → GitHub

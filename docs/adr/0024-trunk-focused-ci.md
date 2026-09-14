@@ -5,6 +5,9 @@
 - Supersedes: ADR-0022 merge-authority and active-rollout policy only
 - Preserves: ADR-0022's historical evidence and ADR-0023 production boundaries
 
+ADR-0026 replaces the Amp-specific CI authority and watcher procedure upon its
+recorded cutover. The protected task-branch PR delivery model remains in force.
+
 ## Decision
 
 Every change uses the current task-branch PR route into `main`. Each task is a

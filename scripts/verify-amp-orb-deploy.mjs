@@ -26,7 +26,13 @@ import { runInNewContext } from 'node:vm'
 
 import {
   AMP_ORB_DEPLOY_AMP_CHECK_NAME,
+  AMP_ORB_DEPLOY_GITHUB_ACTIONS_APP_ID,
+  AMP_ORB_DEPLOY_GITHUB_API_MAX_BUFFER_BYTES,
   AMP_ORB_DEPLOY_RECEIPT_SCHEMA_VERSION,
+  AMP_ORB_DEPLOY_REPOSITORY,
+  AMP_ORB_DEPLOY_REQUIRED_JOBS,
+  AMP_ORB_DEPLOY_WORKFLOW_NAME,
+  AMP_ORB_DEPLOY_WORKFLOW_PATH,
   EQB_HOST_CONFIGURATION_PATHS,
   EQB_PERSISTENCE_AUTHORITY_PATHS,
   EQB_STABLE_LAUNCHER_PATHS,
@@ -34,6 +40,7 @@ import {
   activatePreparedRelease,
   assertDeploymentCandidateStillCurrent,
   assertAmpOrbDeploymentCheck,
+  assertGitHubActionsDeploymentRun,
   bootstrapPayloadStageInput,
   bootstrapReleaseLayout,
   classifyReleaseBootstrapJournal,
@@ -69,6 +76,7 @@ import {
   readAbandonedReleaseBootstrapRecovery,
   readCompletedReleaseBootstrapRecovery,
   readDeploymentCheckRuns,
+  readDeploymentWorkflowEvidence,
   readReleaseBootstrapRecovery,
   removeReleaseBootstrapRecovery,
   requireDeployLatestAuthorization,
@@ -146,13 +154,84 @@ function appCheck(sha, {
   }
 }
 
-const appAuthority = deploymentAuthorityFromEnvironment({
-  QUESTION_BANK_DEPLOY_AMP_CHECK_APP_ID: '4242',
-})
-const appVerification = (sha, payload = { check_runs: [appCheck(sha)] }) => verifyDeploymentAuthority({
+const appVerification = async (sha, payload = { check_runs: [appCheck(sha)] }) =>
+  assertAmpOrbDeploymentCheck(payload, sha, 4242)
+
+function actionsRun(sha, {
+  id = 40,
+  runAttempt = 1,
+  checkSuiteId = 50,
+  status = 'completed',
+  conclusion = 'success',
+  name = AMP_ORB_DEPLOY_WORKFLOW_NAME,
+  workflowPath = AMP_ORB_DEPLOY_WORKFLOW_PATH,
+  event = 'push',
+  branch = 'main',
+  headSha = sha,
+  repository = AMP_ORB_DEPLOY_REPOSITORY,
+  headRepository = AMP_ORB_DEPLOY_REPOSITORY,
+} = {}) {
+  return {
+    id,
+    run_attempt: runAttempt,
+    check_suite_id: checkSuiteId,
+    status,
+    conclusion,
+    name,
+    path: workflowPath,
+    event,
+    head_branch: branch,
+    head_sha: headSha,
+    repository: { full_name: repository },
+    head_repository: { full_name: headRepository },
+  }
+}
+
+function actionsJob(sha, name, {
+  id = name === 'verify' ? 60 : 61,
+  runId = 40,
+  runAttempt = 1,
+  status = 'completed',
+  conclusion = 'success',
+  headSha = sha,
+} = {}) {
+  return {
+    id,
+    run_id: runId,
+    run_attempt: runAttempt,
+    head_sha: headSha,
+    name,
+    status,
+    conclusion,
+  }
+}
+
+function actionsEvidence(sha, {
+  runs = [actionsRun(sha)],
+  runAttempt = runs[0],
+  checkSuite = {
+    id: runAttempt?.check_suite_id,
+    app: { id: AMP_ORB_DEPLOY_GITHUB_ACTIONS_APP_ID },
+    head_branch: 'main',
+    head_sha: sha,
+    status: 'completed',
+    conclusion: 'success',
+  },
+  jobs = AMP_ORB_DEPLOY_REQUIRED_JOBS.map((name) => actionsJob(sha, name, {
+    runId: runAttempt?.id,
+    runAttempt: runAttempt?.run_attempt,
+  })),
+} = {}) {
+  return { workflow_runs: runs, run_attempt: runAttempt, check_suite: checkSuite, jobs }
+}
+
+const actionsVerification = (
+  sha,
+  evidence = actionsEvidence(sha),
+) => verifyDeploymentAuthority({
   expectedSha: sha,
-  ampAppId: appAuthority.ampAppId,
-  readAmpChecks: async () => payload,
+  githubActionsAppId: AMP_ORB_DEPLOY_GITHUB_ACTIONS_APP_ID,
+  readWorkflowEvidence: async () => evidence,
 })
 
 section('Owner command and exact authoritative candidate')
@@ -163,9 +242,28 @@ assert(
     === JSON.stringify(['api', '--hostname', 'github.com', mainEndpoint]),
   'deployment API reads pin the official GitHub host and repository',
 )
+assert(
+  AMP_ORB_DEPLOY_GITHUB_ACTIONS_APP_ID === 15368,
+  'deployment pins the numeric GitHub Actions App ID from the official GitHub Apps API',
+)
+for (const endpoint of [
+  `repos/${AMP_ORB_DEPLOY_REPOSITORY}/actions/workflows/${encodeURIComponent(AMP_ORB_DEPLOY_WORKFLOW_PATH)}/runs?branch=main&event=push&head_sha=${newSha}&exclude_pull_requests=true&per_page=100`,
+  `repos/${AMP_ORB_DEPLOY_REPOSITORY}/actions/runs/40/attempts/1`,
+  `repos/${AMP_ORB_DEPLOY_REPOSITORY}/actions/runs/40/attempts/1/jobs?per_page=100`,
+  `repos/${AMP_ORB_DEPLOY_REPOSITORY}/check-suites/50`,
+]) {
+  assert(
+    JSON.stringify(deploymentGitHubApiArgs(endpoint))
+      === JSON.stringify(['api', '--hostname', 'github.com', endpoint]),
+    'deployment API accepts only fixed native Actions authority endpoints',
+  )
+}
 for (const endpoint of [
   'repos/Buqisir/english-question-bank/actions/runs/1',
   `repos/Buqisir/english-question-bank/commits/${newSha}/check-runs?filter=all&per_page=100`,
+  `repos/${AMP_ORB_DEPLOY_REPOSITORY}/actions/workflows/other.yml/runs?branch=main&event=push&head_sha=${newSha}&exclude_pull_requests=true&per_page=100`,
+  `repos/${AMP_ORB_DEPLOY_REPOSITORY}/actions/workflows/${encodeURIComponent(AMP_ORB_DEPLOY_WORKFLOW_PATH)}/runs?branch=main&event=workflow_dispatch&head_sha=${newSha}&exclude_pull_requests=true&per_page=100`,
+  `repos/${AMP_ORB_DEPLOY_REPOSITORY}/actions/runs/40/jobs?per_page=100`,
   'repos/other/repository/git/ref/heads/main',
   'https://attacker.invalid/main',
 ]) {
@@ -173,6 +271,250 @@ for (const endpoint of [
     try { deploymentGitHubApiArgs(endpoint); return false } catch { return true }
   })(), 'legacy Hosted and untrusted GitHub endpoints are rejected')
 }
+const deploymentCliSource = readText(ROOT, 'scripts/amp-orb-deploy.mjs')
+assert(
+  deploymentCliSource.includes('readDeploymentWorkflowEvidence')
+    && deploymentCliSource.includes('githubActionsAppId: authority.githubActionsAppId')
+    && deploymentCliSource.includes('maxBuffer: AMP_ORB_DEPLOY_GITHUB_API_MAX_BUFFER_BYTES')
+    && !deploymentCliSource.includes('readDeploymentCheckRuns')
+    && !deploymentCliSource.includes('AMP_ORB_DEPLOY_AMP_CHECK_NAME'),
+  'deployment CLI reads only native Actions workflow authority',
+)
+
+const largeApiFixtureRoot = mkdtempSync(path.join(tmpdir(), 'eqb-deploy-actions-api-'))
+try {
+  const fakeBin = path.join(largeApiFixtureRoot, 'bin')
+  mkdirSync(fakeBin, { mode: 0o700 })
+  const fakeGit = path.join(fakeBin, 'git')
+  writeFileSync(fakeGit, `#!/bin/sh
+case "$*" in
+  "branch --show-current") printf 'main\\n' ;;
+  "status --porcelain"|"fetch origin main --quiet") ;;
+  "merge --ff-only origin/main") printf 'Already up to date\\n' ;;
+  "rev-parse HEAD") printf '${newSha}\\n' ;;
+  *) exit 64 ;;
+esac
+`, { mode: 0o700 })
+  const fakeGh = path.join(fakeBin, 'gh')
+  writeFileSync(fakeGh, `#!/usr/bin/env node
+const sha = '${newSha}'
+const repository = '${AMP_ORB_DEPLOY_REPOSITORY}'
+const endpoint = process.argv.at(-1)
+const run = {
+  id: 40,
+  run_attempt: 1,
+  check_suite_id: 50,
+  status: 'completed',
+  conclusion: 'success',
+  name: '${AMP_ORB_DEPLOY_WORKFLOW_NAME}',
+  path: '${AMP_ORB_DEPLOY_WORKFLOW_PATH}',
+  event: 'push',
+  head_branch: 'main',
+  head_sha: sha,
+  repository: { full_name: repository },
+  head_repository: { full_name: repository },
+}
+let payload
+if (endpoint.endsWith('/git/ref/heads/main')) payload = { object: { sha } }
+else if (endpoint.includes('/actions/workflows/')) {
+  payload = { workflow_runs: [{ ...run, transport_padding: 'x'.repeat(1_250_000) }] }
+} else if (endpoint.endsWith('/attempts/1')) payload = run
+else if (endpoint.endsWith('/check-suites/50')) {
+  payload = {
+    id: 50,
+    app: { id: ${AMP_ORB_DEPLOY_GITHUB_ACTIONS_APP_ID} },
+    head_branch: 'main',
+    head_sha: sha,
+    status: 'completed',
+    conclusion: 'success',
+  }
+} else if (endpoint.includes('/attempts/1/jobs?')) {
+  payload = { jobs: [
+    { id: 60, run_id: 40, run_attempt: 1, head_sha: sha, name: 'verify', status: 'completed', conclusion: 'success' },
+    { id: 61, run_id: 40, run_attempt: 1, head_sha: sha, name: 'e2e', status: 'completed', conclusion: 'success' },
+  ] }
+} else process.exit(64)
+process.stdout.write(JSON.stringify(payload))
+`, { mode: 0o700 })
+  const largeApiPlan = spawnSync(
+    process.execPath,
+    [path.join(ROOT, 'scripts', 'amp-orb-deploy.mjs'), 'plan'],
+    {
+      encoding: 'utf8',
+      env: {
+        HOME: largeApiFixtureRoot,
+        LANG: 'C',
+        PATH: `${fakeBin}:${process.env.PATH}`,
+      },
+    },
+  )
+  let parsedLargeApiPlan
+  try { parsedLargeApiPlan = JSON.parse(largeApiPlan.stdout) } catch {}
+  assert(
+    AMP_ORB_DEPLOY_GITHUB_API_MAX_BUFFER_BYTES > 1_250_000
+      && largeApiPlan.status === 0
+      && parsedLargeApiPlan?.sha === newSha
+      && parsedLargeApiPlan?.verification?.appId === AMP_ORB_DEPLOY_GITHUB_ACTIONS_APP_ID,
+    'plan reads native Actions evidence larger than the Node default child-process buffer without SSH',
+  )
+} finally {
+  rmSync(largeApiFixtureRoot, { recursive: true, force: true })
+}
+
+const actionsEndpoints = []
+const readActionsEvidence = await readDeploymentWorkflowEvidence({
+  sha: newSha,
+  async readJson(endpoint) {
+    deploymentGitHubApiArgs(endpoint)
+    actionsEndpoints.push(endpoint)
+    if (endpoint.includes('/actions/workflows/')) {
+      return { workflow_runs: [actionsRun(newSha)] }
+    }
+    if (endpoint.endsWith('/attempts/1')) return actionsRun(newSha)
+    if (endpoint.endsWith('/check-suites/50')) return actionsEvidence(newSha).check_suite
+    if (endpoint.includes('/attempts/1/jobs?')) {
+      return { jobs: actionsEvidence(newSha).jobs }
+    }
+    throw new Error(`Unexpected native Actions endpoint: ${endpoint}`)
+  },
+})
+assert(
+  actionsEndpoints.length === 8
+    && readActionsEvidence.jobs.length === 2
+    && readActionsEvidence.run_attempt.run_attempt === 1,
+  'native Actions reader requires two stable snapshots of run, attempt, suite, and jobs',
+)
+const actionsAuthority = assertGitHubActionsDeploymentRun(
+  readActionsEvidence,
+  newSha,
+  AMP_ORB_DEPLOY_GITHUB_ACTIONS_APP_ID,
+)
+assert(
+  actionsAuthority.provider === AMP_ORB_DEPLOY_WORKFLOW_NAME
+    && actionsAuthority.workflowPath === AMP_ORB_DEPLOY_WORKFLOW_PATH
+    && actionsAuthority.runId === 40
+    && actionsAuthority.attempt === 1
+    && actionsAuthority.jobs.map(({ name }) => name).join(',') === 'e2e,verify',
+  'only the exact natural main workflow and both successful jobs authorize deployment',
+)
+
+const validActionsEvidence = actionsEvidence(newSha)
+for (const [label, evidence] of [
+  ['missing run', { workflow_runs: [], run_attempt: null, check_suite: null, jobs: [] }],
+  ['wrong SHA', actionsEvidence(newSha, { runs: [actionsRun(newSha, { headSha: oldSha })] })],
+  ['wrong workflow', actionsEvidence(newSha, { runs: [actionsRun(newSha, { workflowPath: '.github/workflows/other.yml' })] })],
+  ['wrong workflow name', actionsEvidence(newSha, { runs: [actionsRun(newSha, { name: 'Other' })] })],
+  ['manual event', actionsEvidence(newSha, { runs: [actionsRun(newSha, { event: 'workflow_dispatch' })] })],
+  ['wrong branch', actionsEvidence(newSha, { runs: [actionsRun(newSha, { branch: 'release' })] })],
+  ['fork head repository', actionsEvidence(newSha, { runs: [actionsRun(newSha, { headRepository: 'other/repository' })] })],
+  ['pending run', actionsEvidence(newSha, { runs: [actionsRun(newSha, { status: 'in_progress', conclusion: null })] })],
+  ['cancelled run', actionsEvidence(newSha, { runs: [actionsRun(newSha, { conclusion: 'cancelled' })] })],
+  ['skipped run', actionsEvidence(newSha, { runs: [actionsRun(newSha, { conclusion: 'skipped' })] })],
+  ['new failure over old success', actionsEvidence(newSha, { runs: [
+    actionsRun(newSha, { id: 39 }),
+    actionsRun(newSha, { id: 40, conclusion: 'failure' }),
+  ] })],
+  ['failed rerun attempt over old successful attempt', actionsEvidence(newSha, {
+    runs: [actionsRun(newSha, { runAttempt: 2, conclusion: 'failure' })],
+    runAttempt: actionsRun(newSha, { runAttempt: 1 }),
+  })],
+  ['duplicate run IDs', actionsEvidence(newSha, { runs: [
+    actionsRun(newSha),
+    actionsRun(newSha),
+  ] })],
+  ['wrong current attempt', actionsEvidence(newSha, {
+    runAttempt: actionsRun(newSha, { runAttempt: 2 }),
+  })],
+  ['failed current attempt detail', actionsEvidence(newSha, {
+    runAttempt: actionsRun(newSha, { conclusion: 'failure' }),
+  })],
+  ['wrong Actions App', actionsEvidence(newSha, { checkSuite: {
+    ...validActionsEvidence.check_suite,
+    app: { id: 4835036 },
+  } })],
+  ['wrong suite SHA', actionsEvidence(newSha, { checkSuite: {
+    ...validActionsEvidence.check_suite,
+    head_sha: oldSha,
+  } })],
+  ['pending suite', actionsEvidence(newSha, { checkSuite: {
+    ...validActionsEvidence.check_suite,
+    status: 'in_progress',
+    conclusion: null,
+  } })],
+  ['missing e2e', actionsEvidence(newSha, { jobs: [actionsJob(newSha, 'verify')] })],
+  ['failed e2e', actionsEvidence(newSha, { jobs: [
+    actionsJob(newSha, 'verify'),
+    actionsJob(newSha, 'e2e', { conclusion: 'failure' }),
+  ] })],
+  ['cancelled e2e', actionsEvidence(newSha, { jobs: [
+    actionsJob(newSha, 'verify'),
+    actionsJob(newSha, 'e2e', { conclusion: 'cancelled' }),
+  ] })],
+  ['skipped verify', actionsEvidence(newSha, { jobs: [
+    actionsJob(newSha, 'verify', { conclusion: 'skipped' }),
+    actionsJob(newSha, 'e2e'),
+  ] })],
+  ['duplicate verify', actionsEvidence(newSha, { jobs: [
+    actionsJob(newSha, 'verify'),
+    actionsJob(newSha, 'verify', { id: 62 }),
+  ] })],
+  ['unexpected job', actionsEvidence(newSha, { jobs: [
+    actionsJob(newSha, 'verify'),
+    actionsJob(newSha, 'e2e'),
+    actionsJob(newSha, 'other', { id: 62 }),
+  ] })],
+  ['job from old attempt', actionsEvidence(newSha, { jobs: [
+    actionsJob(newSha, 'verify'),
+    actionsJob(newSha, 'e2e', { runAttempt: 2 }),
+  ] })],
+]) {
+  assert((() => {
+    try {
+      assertGitHubActionsDeploymentRun(
+        evidence,
+        newSha,
+        AMP_ORB_DEPLOY_GITHUB_ACTIONS_APP_ID,
+      )
+      return false
+    } catch {
+      return true
+    }
+  })(), `${label} native Actions evidence fails closed`)
+}
+
+let changingActionsSnapshot = 0
+assert(
+  await (async () => {
+    try {
+      await readDeploymentWorkflowEvidence({
+        sha: newSha,
+        async readJson(endpoint) {
+          if (endpoint.includes('/actions/workflows/')) {
+            changingActionsSnapshot += 1
+            return { workflow_runs: [actionsRun(newSha, {
+              runAttempt: changingActionsSnapshot,
+              checkSuiteId: 49 + changingActionsSnapshot,
+            })] }
+          }
+          const attempt = Number(/\/attempts\/(\d+)/u.exec(endpoint)?.[1])
+          if (endpoint.includes('/jobs?')) {
+            return { jobs: AMP_ORB_DEPLOY_REQUIRED_JOBS.map((name) =>
+              actionsJob(newSha, name, { runAttempt: attempt })) }
+          }
+          if (Number.isInteger(attempt)) {
+            return actionsRun(newSha, { runAttempt: attempt, checkSuiteId: 49 + attempt })
+          }
+          const suiteId = Number(/\/check-suites\/(\d+)/u.exec(endpoint)?.[1])
+          return { ...validActionsEvidence.check_suite, id: suiteId }
+        },
+      })
+      return false
+    } catch {
+      return true
+    }
+  })(),
+  'a rerun attempt inserted during evidence reads fails closed after bounded snapshots',
+)
 
 assert(
   (() => {
@@ -253,7 +595,6 @@ const pagedAmpChecks = await readDeploymentCheckRuns({
   sha: newSha,
   checkName: AMP_ORB_DEPLOY_AMP_CHECK_NAME,
   async readJson(endpoint) {
-    deploymentGitHubApiArgs(endpoint)
     pagedAmpEndpoints.push(endpoint)
     return endpoint.endsWith('&page=2')
       ? { check_runs: [appCheck(newSha, { id: 101 })] }
@@ -443,7 +784,7 @@ assert(
     readLocalSha: async () => newSha,
     readLocalStatus: async () => '',
     readMainSha: async () => newSha,
-    readDeploymentVerification: appVerification,
+    readDeploymentVerification: actionsVerification,
     sha: newSha,
   })).sha === newSha,
   'local HEAD, live main, and authority can be rechecked immediately before activation',
@@ -455,7 +796,7 @@ assert(
         readLocalSha: async () => newSha,
         readLocalStatus: async () => '',
         readMainSha: async () => '3'.repeat(40),
-        readDeploymentVerification: appVerification,
+        readDeploymentVerification: actionsVerification,
         sha: newSha,
       })
       return false
@@ -523,25 +864,29 @@ const appGit = async (args) => {
   if (command === 'rev-parse HEAD') return `${newSha}\n`
   throw new Error(`Unexpected git invocation: ${command}`)
 }
-const appCandidate = await resolveLatestDeploymentCandidate({
+const actionsCandidate = await resolveLatestDeploymentCandidate({
   runGit: appGit,
   readMainSha: async () => newSha,
-  readDeploymentVerification: appVerification,
+  readDeploymentVerification: actionsVerification,
 })
-const candidate = appCandidate
+const candidate = actionsCandidate
 assert(
-  appCandidate.verification.provider === AMP_ORB_DEPLOY_AMP_CHECK_NAME
-    && appCandidate.verification.appId === 4242,
-  'only the configured App Check is deployment authority',
+  actionsCandidate.verification.provider === AMP_ORB_DEPLOY_WORKFLOW_NAME
+    && actionsCandidate.verification.appId === AMP_ORB_DEPLOY_GITHUB_ACTIONS_APP_ID,
+  'only the pinned native Actions workflow is deployment authority',
+)
+assert(
+  deploymentAuthorityFromEnvironment({}).githubActionsAppId
+    === AMP_ORB_DEPLOY_GITHUB_ACTIONS_APP_ID,
+  'native Actions authority needs no configurable App ID',
 )
 for (const environment of [
-  {},
   { QUESTION_BANK_DEPLOY_CI_AUTHORITY_MODE: 'amp' },
-  { QUESTION_BANK_DEPLOY_CI_AUTHORITY_MODE: 'hosted-only', QUESTION_BANK_DEPLOY_AMP_CHECK_APP_ID: '4242' },
+  { QUESTION_BANK_DEPLOY_AMP_CHECK_APP_ID: '4835036' },
 ]) {
   assert((() => {
     try { deploymentAuthorityFromEnvironment(environment); return false } catch { return true }
-  })(), 'missing App ID and stale legacy authority settings fail closed')
+  })(), 'stale legacy authority settings fail closed')
 }
 for (const payload of [
   { check_runs: [] },
