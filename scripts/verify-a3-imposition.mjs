@@ -304,6 +304,19 @@ async function runPhaseB(browser) {
   await waitForHttp(`http://127.0.0.1:${vitePort}/`)
 
   const page = await browser.newPage({ viewport: { width: 1440, height: 920 } })
+  // Exercise a slow ResizeObserver delivery at the narrow breakpoint. The old
+  // fixed 200ms sleep measures the previous scale and reports 270px overflow.
+  await page.addInitScript(() => {
+    const NativeResizeObserver = window.ResizeObserver
+    window.ResizeObserver = class extends NativeResizeObserver {
+      constructor(callback) {
+        super((entries, observer) => {
+          if (window.innerWidth === 900) setTimeout(() => callback(entries, observer), 600)
+          else callback(entries, observer)
+        })
+      }
+    }
+  })
   const pageErrors = []
   const previewRequests = []
   const startedAt = Date.now()
@@ -364,7 +377,7 @@ async function runPhaseB(browser) {
       page.waitForResponse((response) =>
         new URL(response.url()).pathname === `/api/draft-papers/${draftId}/pagination`
         && response.request().method() === 'GET', { timeout: 60_000 }),
-      page.goto(`http://127.0.0.1:${vitePort}/?view=draft-paper&draftPaperId=${draftId}`, { waitUntil: 'networkidle' }),
+      page.goto(`http://127.0.0.1:${vitePort}/?view=draft-paper&draftPaperId=${draftId}`, { waitUntil: 'domcontentloaded' }),
     ])
     if (!paginationResponse.ok()) throw new Error(`Initial pagination failed: HTTP ${paginationResponse.status()}`)
     let bodyTimer
@@ -481,7 +494,15 @@ async function runPhaseB(browser) {
 
     // ── Narrow viewport: a3 stays within the page, no horizontal overflow ──
     await page.setViewportSize({ width: 900, height: 900 })
-    await page.waitForTimeout(200)
+    // Wait for the actual fit-to-container transform, not a machine-speed
+    // dependent delay. A permanently stale scale still fails within 5s; the
+    // outer-page overflow assertion below remains independent and unchanged.
+    await page.waitForFunction(() => {
+      const sheet = document.querySelector('.draft-a4-sheet.is-a3')
+      const frame = sheet?.querySelector('iframe')
+      return sheet?.clientWidth > 0 && frame
+        && Math.abs(frame.getBoundingClientRect().width - sheet.clientWidth) <= 1
+    }, undefined, { timeout: 5000 })
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)
     assert('A3 mode does not force outer-page horizontal overflow on a 900px viewport', overflow <= 4, String(overflow))
     await page.setViewportSize({ width: 1440, height: 920 })
