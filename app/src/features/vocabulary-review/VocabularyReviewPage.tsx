@@ -2,18 +2,19 @@ import {
   ArrowLeft,
   BookMarked,
   Check,
-  ClipboardCheck,
+  BoardCheck,
   Copy,
   Download,
   Eye,
   Grid2X2,
   RotateCcw,
   Save,
-  Volume2,
-} from 'lucide-react'
+  Volume,
+} from '../../icons'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
+import { FluidHoverList } from '../../components/FluidHoverList'
 import {
   countVocabularyDecisions,
   createVocabularyReviewState,
@@ -1343,7 +1344,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
         {pdfDownloadBusy ? '正在生成…' : '下载'}
       </button>
       {downloadMenuOpen && (
-        <div id="vocabulary-download-options" role="group" aria-label="选择下载内容">
+        <FluidHoverList as="div" id="vocabulary-download-options" role="group" aria-label="选择下载内容" axis="y" itemSelector=".vocabulary-download-option">
           {VOCABULARY_DOWNLOAD_OPTIONS.map((option) => (
             <div className="vocabulary-download-option" key={option.kind}>
               <button type="button" onClick={() => void downloadVocabularySheet(option.kind)}>
@@ -1372,7 +1373,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
               <Save size={14} aria-hidden="true" />另存为…
             </button>
           </div>
-        </div>
+        </FluidHoverList>
       )}
     </div>
   ) : null
@@ -1443,7 +1444,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
             <div className="vocabulary-heading-actions">
               {!printRequest && (
                 <button className="ghost-button" type="button" onClick={() => props.onOpenVocabularyDictationWorkbench()}>
-                  <ClipboardCheck size={16} />单词复习
+                  <BoardCheck size={16} />单词复习
                 </button>
               )}
               {programs.length > 1 && (
@@ -1531,7 +1532,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
 
         {programLoadState === 'error' ? (
           <section className="vocabulary-run-setup" aria-labelledby="vocabulary-program-error-title">
-            <BookMarked size={34} strokeWidth={1.5} aria-hidden="true" />
+            <BookMarked size={34} aria-hidden="true" />
             <h2 id="vocabulary-program-error-title">完整词库没有加载成功</h2>
             <p>这次不会退回 30 词校准样本继续判断，避免把正式进度记错。重新加载完整词库后再开始。</p>
             <button className="primary-button" type="button" onClick={() => window.location.reload()}>重新加载完整词库</button>
@@ -1539,7 +1540,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
           </section>
         ) : studentsState === 'error' ? (
           <section className="vocabulary-run-setup" aria-labelledby="vocabulary-student-error-title">
-            <BookMarked size={34} strokeWidth={1.5} aria-hidden="true" />
+            <BookMarked size={34} aria-hidden="true" />
             <h2 id="vocabulary-student-error-title">学生档案没有加载成功</h2>
             <p>不会把不同学生的进度混在一起。重新加载档案后再继续过词。</p>
             <button className="primary-button" type="button" onClick={() => window.location.reload()}>重新加载学生档案</button>
@@ -1577,7 +1578,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
           </div>
         ) : runState === 'setup' && vocabularySet ? (
           <section className="vocabulary-run-setup vocabulary-set-reopen" aria-labelledby="vocabulary-set-reopen-title">
-            <BookMarked size={34} strokeWidth={1.5} aria-hidden="true" />
+            <BookMarked size={34} aria-hidden="true" />
             <h2 id="vocabulary-set-reopen-title">{vocabularySet.title}</h2>
             <p>这是一份内容固定的生词组，共 {vocabularySet.entryCount} 词。可以下载、重新分享或撤销原二维码链接。</p>
             {vocabularySetTitleControl}
@@ -1602,7 +1603,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                 <Grid2X2 size={16} />趣味练习
               </button>
               <button className="ghost-button" type="button" onClick={() => props.onOpenVocabularyDictationWorkbench(vocabularySet.id)}>
-                <ClipboardCheck size={16} />看词说义
+                <BoardCheck size={16} />看词说义
               </button>
               <button className="ghost-button" type="button" onClick={closeVocabularySet}>返回</button>
             </div>
@@ -1612,7 +1613,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
           </section>
         ) : runState === 'setup' || runState === 'error' ? (
           <section className="vocabulary-run-setup" aria-labelledby="vocabulary-run-title">
-            <BookMarked size={34} strokeWidth={1.5} aria-hidden="true" />
+            <BookMarked size={34} aria-hidden="true" />
             <h2 id="vocabulary-run-title">这轮准备收多少个生词？</h2>
             <p>
               {runId
@@ -1688,7 +1689,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
             {recentSets.length > 0 && (
               <div className="vocabulary-recent-sets">
                 <div><h3>最近生词组</h3><span>内容固定，可随时下载</span></div>
-                <ol>
+                <FluidHoverList as="ul" className="vocabulary-recent-set-list" axis="y" itemSelector="button">
                   {recentSets.slice(0, 6).map((set) => (
                     <li key={set.id}>
                       <button type="button" onClick={() => openVocabularySet(set)}>
@@ -1700,7 +1701,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                       </button>
                     </li>
                   ))}
-                </ol>
+                </FluidHoverList>
               </div>
             )}
           </section>
@@ -1758,7 +1759,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                   <h2>{currentEntry.headword}</h2>
                   <span>{currentEntry.partOfSpeech}</span>
                   <button className="vocabulary-word-replay" type="button" onClick={playCurrentEntry} aria-label={`重播 ${currentEntry.headword} 的${reviewAccent === 'american' ? '美音' : '英音'}`}>
-                    <Volume2 size={16} aria-hidden="true" />
+                    <Volume size={16} aria-hidden="true" />
                     <span>重播</span>
                     <kbd>空格</kbd>
                   </button>
@@ -1774,7 +1775,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                         onClick={playCurrentEntry}
                         title={`播放${reviewAccent === 'american' ? '美音' : '英音'}`}
                       >
-                        <Volume2 size={17} />
+                        <Volume size={17} />
                         {currentEntry.phonetics?.[reviewAccent] ?? currentEntry.phonetic}
                       </button>
                       <div className="vocabulary-core-meanings">
@@ -1855,7 +1856,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
               </>
             ) : (
               <div className="vocabulary-completion-state">
-                <BookMarked size={38} strokeWidth={1.5} />
+                <BookMarked size={38} />
                 <h2>{completion === 'target-reached' ? `已收满${reviewState.targetUnfamiliarCount}个生词` : '当前词汇已过完'}</h2>
                 <p>
                   本轮共判断 {reviewState.decisionOrder.length} 词：认识 {knownCount} 词，收下 {unfamiliarEntries.length} 词。

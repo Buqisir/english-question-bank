@@ -20,7 +20,8 @@ type PointingHandProps = {
  * y=18 底边不封口，手腕像从纸外伸进来。
  *
  * viewBox 0 0 16 18。size 是渲染高度，宽度 = size × 16/18。
- * 线宽 1.05，round cap / join。
+ * 线宽 1.3（2026-09-15 同重法：与目录粗体字母等重；1.05 偏瘦，1.5 指缝糊），
+ * round cap / join。路径本身未动。
  *
  * RIGHT_HAND_OUTLINE 是 owner 保留的目录版。以后画砸了就切回 side="right"。
  */
@@ -43,7 +44,7 @@ export function PointingHand({
       viewBox="0 0 16 18"
       fill="none"
       stroke="currentColor"
-      strokeWidth={1.05}
+      strokeWidth={1.3}
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"

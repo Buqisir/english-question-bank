@@ -15,6 +15,7 @@
  * 现行宪法，不开祖父豁免（逐处行内注明原值）。
  */
 /* ─── Right analysis panel ─── */
+/* 「色留量减」：语义色只落在线与字形，不铺整张选项卡或标签药丸。 */
 .pi-ps-analysis-empty {
   display: flex;
   align-items: center;
@@ -31,35 +32,40 @@
   display: flex;
   align-items: baseline;
   gap: 0.5rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 12px;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid #eee;
 }
 .pi-ps-analysis-qno {
   font-weight: 700;
   font-size: 1rem;
+  color: var(--paper-ink-strong);
 }
 .pi-ps-analysis-type {
-  color: #666;
-  font-size: 0.75rem;
+  color: var(--paper-ink-muted);
+  font-size: 12px;
 }
 .pi-ps-analysis-answer {
   margin-left: auto;
   font-weight: 600;
-  color: var(--eqb-color-success, #059669);
+  color: var(--eqb-color-success);
 }
 .pi-ps-analysis-stem {
-  margin-bottom: 0.75rem;
+  margin-bottom: 12px;
+}
+.pi-ps-analysis-stem p:first-child {
+  margin: 0 0 4px;
+  color: var(--ink);
 }
 .pi-ps-analysis-stem-zh {
-  color: #666;
+  color: var(--paper-ink-muted);
   font-size: 0.8125rem;
-  margin-top: 0.25rem;
+  margin: 0;
 }
 .pi-ps-analysis-options {
   list-style: none;
   padding: 0;
-  margin: 0 0 1rem;
+  margin: 0 0 16px;
 }
 .pi-ps-analysis-option {
   display: flex;
@@ -69,12 +75,14 @@
   margin-bottom: 0.125rem;
 }
 .pi-ps-analysis-option--correct {
-  background: var(--eqb-color-success-soft, rgba(16, 185, 129, 0.08));
+  background: var(--eqb-color-success-soft);
   font-weight: 500;
 }
 .pi-ps-analysis-option-label {
   font-weight: 600;
   flex-shrink: 0;
+  min-width: 24px;
+  color: var(--paper-ink-strong);
 }
 .pi-ps-analysis-option-body {
   display: flex;
@@ -83,32 +91,37 @@
   gap: 0.125rem;
 }
 .pi-ps-analysis-option-zh {
-  color: var(--eqb-color-text-muted, #6a6a64);
+  color: var(--paper-ink-muted);
   font-size: 0.8125rem;
 }
 .pi-ps-analysis-option-trap {
-  color: var(--eqb-color-warning, #d97706);
+  color: var(--eqb-color-warning);
   font-size: 0.75rem;
 }
 .pi-ps-analysis-options--accordion {
+  --fh-radius: 6px;
   display: flex;
   flex-direction: column;
   gap: 0.375rem;
 }
 .pi-ps-analysis-option-section {
   overflow: hidden;
-  border: 1px solid rgba(30, 30, 28, 0.14);
+  border: 1px solid rgba(44, 40, 32, 0.14);
   border-radius: 6px;
-  background: rgba(255, 255, 255, 0.62);
+  background: transparent;
   transition: background-color var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover);
 }
 .pi-ps-analysis-option-section--active {
-  border-color: rgba(126, 104, 78, 0.34);
-  background: rgba(248, 241, 230, 0.78);
+  border-color: rgba(44, 40, 32, 0.32);
+  background: transparent;
 }
 .pi-ps-analysis-option-section--correct.pi-ps-analysis-option-section--active {
-  border-color: rgba(5, 150, 105, 0.3);
-  background: var(--eqb-color-success-soft, rgba(16, 185, 129, 0.08));
+  border-color: rgba(var(--eqb-color-success-rgb), 0.55);
+  background: transparent;
+}
+.pi-ps-analysis-option-section--correct .pi-ps-analysis-option-content {
+  font-weight: 600;
+  color: var(--paper-ink-strong);
 }
 button.pi-ps-analysis-option-row {
   display: flex;
@@ -121,6 +134,7 @@ button.pi-ps-analysis-option-row {
   cursor: pointer;
   font: inherit;
   padding: 0.5rem 0.625rem;
+  position: relative;
   text-align: left;
 }
 button.pi-ps-analysis-option-row:focus-visible {
@@ -129,42 +143,48 @@ button.pi-ps-analysis-option-row:focus-visible {
 }
 .pi-ps-analysis-option-badge {
   flex-shrink: 0;
-  border-radius: 999px;
+  align-self: baseline;
+  border-radius: 0;
   font-size: 0.6875rem;
   font-weight: 600;
-  line-height: 1;
-  padding: 0.25rem 0.375rem;
+  line-height: 22px;
+  padding: 0;
   white-space: nowrap;
 }
 .pi-ps-analysis-option-badge--correct {
-  color: var(--eqb-color-success, #059669);
+  display: inline-flex;
+  align-items: center;
+  color: var(--eqb-color-success);
 }
 .pi-ps-analysis-option-badge--trap {
-  background: var(--eqb-color-warning-soft, rgba(245, 158, 11, 0.08));
-  color: var(--eqb-color-warning, #d97706);
+  background: transparent;
+  color: var(--eqb-color-warning);
+  font-size: 12px;
+  font-weight: 500;
 }
 .pi-ps-analysis-option-detail {
-  border-top: 1px solid rgba(30, 30, 28, 0.12);
-  padding: 0.625rem 0.75rem 0.75rem 1.75rem;
+  border-top: 1px solid rgba(44, 40, 32, 0.14);
+  padding: 10px 12px 12px 42px;
 }
 .pi-ps-analysis-option-detail h4 {
-  color: #555;
-  font-size: 0.8125rem;
+  color: var(--paper-ink-muted);
+  font-size: 12px;
   font-weight: 600;
-  margin: 0 0 0.375rem;
+  letter-spacing: 0.02em;
+  margin: 0 0 6px;
 }
 .pi-ps-analysis-trap-meta {
   display: flex;
   flex-wrap: wrap;
   gap: 0.375rem;
-  margin-bottom: 0.375rem;
+  margin-bottom: 4px;
 }
 .pi-ps-analysis-trap-meta span {
   border-radius: 999px;
-  background: rgba(126, 104, 78, 0.10);
-  color: #6b5a45;
+  background: transparent;
+  color: var(--paper-ink-muted);
   font-size: 0.75rem;
-  padding: 0.1875rem 0.375rem;
+  padding: 0;
 }
 .pi-ps-analysis-no-line {
   color: #6f6a62;
@@ -181,26 +201,32 @@ button.pi-ps-analysis-option-row:focus-visible {
 .pi-ps-analysis-evidence h4,
 .pi-ps-analysis-distractors h4,
 .pi-ps-analysis-synonym h4,
-.pi-ps-analysis-evidence-group h4,
-.pi-ps-analysis-question-focus h4 {
+.pi-ps-analysis-evidence-group h4 {
   font-size: 0.8125rem;
   font-weight: 600;
   color: #555;
   margin: 0 0 0.375rem;
 }
+.pi-ps-analysis-question-focus h4 {
+  color: var(--paper-ink-muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin: 0 0 6px;
+}
 .pi-ps-analysis-evidence blockquote,
 .pi-ps-analysis-distractor-quote {
-  margin: 0.25rem 0 0.5rem 0;
+  margin: 0;
   padding: 0.375rem 0.75rem;
   border-left: 3px solid #ddd;
-  color: #555;
+  color: var(--ink);
   font-size: 0.8125rem;
   font-style: italic;
 }
 .pi-ps-analysis-explanation {
-  color: #666;
+  color: var(--ink);
   font-size: 0.8125rem;
-  margin-top: 0.25rem;
+  margin: 0 0 8px;
 }
 .pi-ps-analysis-paraphrases {
   margin: 0;
@@ -211,10 +237,17 @@ button.pi-ps-analysis-option-row:focus-visible {
 .pi-ps-analysis-paraphrases li {
   margin-bottom: 0.5rem;
 }
-.pi-ps-analysis-paraphrases p,
-.pi-ps-analysis-question-focus p {
+.pi-ps-analysis-paraphrases p {
   margin: 0.125rem 0 0;
   color: #666;
+  font-size: 0.8125rem;
+}
+.pi-ps-analysis-question-focus {
+  margin-top: 16px;
+}
+.pi-ps-analysis-question-focus p {
+  margin: 0;
+  color: var(--ink);
   font-size: 0.8125rem;
 }
 .pi-ps-analysis-distractors ul {
@@ -253,7 +286,7 @@ button.pi-ps-analysis-distractor {
 }
 button.pi-ps-analysis-evidence:focus-visible,
 button.pi-ps-analysis-distractor:focus-visible {
-  outline: 2px solid var(--eqb-color-success, #059669);
+  outline: 2px solid var(--eqb-color-success);
   outline-offset: 2px;
 }
 /*
@@ -273,27 +306,20 @@ button.pi-ps-analysis-distractor:focus-visible {
 .pi-ps-analysis-evidence--selected blockquote {
   /* ui-panel-reunify: audit-flagged emerald excursion — collapsed
      onto the shared success token instead of a bespoke mint value. */
-  border-left-color: rgba(5, 150, 105, 0.65);
-  background: rgba(5, 150, 105, 0.08);
+  border-left-color: rgba(var(--eqb-color-success-rgb), 0.7);
+  background: rgba(var(--eqb-color-success-rgb), 0.10);
 }
 /*
- * Specificity note (Issue #21-C3.6 browser-QA fix):
- * The base reset rule `button.pi-ps-analysis-distractor { background:
- * transparent }` above has specificity (0,1,1), which beats a bare
- * `.pi-ps-analysis-distractor--selected` (0,1,0) at cascade time, so
- * the amber tint never paints in the browser. We bump this rule to
- * `button.pi-ps-analysis-distractor--selected` (also (0,1,1)) so it
- * matches and, being declared later, wins the cascade. Do NOT
- * downgrade this back to `.pi-ps-analysis-distractor--selected`
- * without also weakening the base button reset, or the C3.6 selected
- * trap row visually regresses to a transparent background.
+ * Specificity note: retain button-level specificity so this selected-state
+ * rule explicitly wins over the base reset. The row no longer tints; only
+ * its quoted evidence receives the amber line and wash.
  */
 button.pi-ps-analysis-distractor--selected {
-  background: rgba(245, 158, 11, 0.10);
+  background: transparent;
 }
 .pi-ps-analysis-distractor--selected .pi-ps-analysis-distractor-quote {
-  border-left-color: rgba(245, 158, 11, 0.85);
-  background: rgba(245, 158, 11, 0.08);
+  border-left-color: rgba(var(--eqb-color-warning-rgb), 0.7);
+  background: rgba(var(--eqb-color-warning-rgb), 0.10);
 }
 /* ─── I0-D Seven Choices option-pool panel ─── */
 .pi-seven-panel {
@@ -602,6 +628,12 @@ button.pi-ps-analysis-distractor--selected {
   font-size: 0.8125rem;
   color: var(--pi-ps-insight-muted-ink, #6a6a64);
   user-select: none;
+}
+.pi-reading-group-overview {
+  margin: 4px 0 12px;
+}
+.pi-reading-group-overview-summary {
+  color: var(--paper-ink-muted);
 }
 .pi-cloze-group-overview-text,
 .pi-cloze-group-arc,

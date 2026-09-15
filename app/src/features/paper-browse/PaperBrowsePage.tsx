@@ -57,7 +57,7 @@
  * out of scope per aggregatePaperResults.ts:8-11).
  */
 import { Fragment, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
-import { ClipboardList, FileDown, Plus, Presentation, RefreshCw } from 'lucide-react'
+import { BoardList, PaperDownload, Plus, Presentation, RefreshCw, Scissors } from '../../icons'
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate'
 // one-sheet-paper: 卷面字体/边距 token 只读消费——同 PaperSurface.tsx /
@@ -84,6 +84,7 @@ import {
   resolveGrammarFillPublicGeometryFixture,
 } from '../../../../shared/paper-canonical/grammarFillPublicGeometryFixtures.mjs'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
+import { FluidHoverList } from '../../components/FluidHoverList'
 import { WritingPaperPage } from '../paper-intelligence/WritingPaperPage'
 import {
   buildPaperAssetSurfaceModel,
@@ -187,7 +188,6 @@ import {
 import { applyPaperSurfaceFocusIntent } from './paperBrowseFocusIntent'
 import './paperBrowsePage.css'
 import { PointingHand } from './PointingHand'
-import { ScissorsMark } from './ScissorsMark'
 
 type GroupModel =
   | {
@@ -514,17 +514,31 @@ function railGroupLabel(title: string): string {
   return trimmed.replace(/\s*[（(]\s*满分\s*[\d.]+\s*分\s*[）)]\s*$/, '')
 }
 
+// Compact (lecture-open) rail is 72px wide and hides part heads, so each
+// label must stand alone: 「七」「一」「二」 read as nothing without 「写作」
+// above them. 七选五 stays whole (fits at 13px); writing groups are named
+// by railWritingLabel in both widths.
 const RAIL_LECTURE_SHORT_LABELS: Record<string, string> = {
   完形填空: '完形',
   语法填空: '语法',
-  第一节: '一',
-  第二节: '二',
-  七选五: '七',
 }
 
-function railLectureShortLabel(title: string): string {
+// Same test as ConciergeHomeSections.passageIcon: the bank stores both
+// writing tasks as groupType 'writing' and tells them apart by section.
+function railWritingLabel(card: Pick<QuestionGroupCard, 'groupType' | 'section'>): string | null {
+  if (card.groupType === 'continuation') return '续写'
+  if (card.groupType !== 'writing') return null
+  return /读后续写|续写/.test(card.section) ? '续写' : '应用文'
+}
+
+function railLectureShortLabel(
+  title: string,
+  card?: Pick<QuestionGroupCard, 'groupType' | 'section'>,
+): string {
   const labeled = railGroupLabel(title)
   if (/^[A-D]$/.test(labeled)) return labeled
+  const writingLabel = card ? railWritingLabel(card) : null
+  if (writingLabel) return writingLabel
   return RAIL_LECTURE_SHORT_LABELS[labeled.trim()] ?? labeled
 }
 
@@ -1583,7 +1597,13 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     // 不变量「静息线集合 == 选中线集合」——节末题组（下一块不是可剪题组
     // 单元）的选中罩下缘在静息时必须有对应淡线，否则选中线凭空出现。
     const bottomLineGroupIndices = new Set<number>()
-    if (!asset) return { scissorGroupIndices, mergedGroupByInstructionIndex, skipIndices, bottomLineGroupIndices }
+    // 卷末（owner 2026-09-15）：最后一个剪走单元之后再没有卷面内容，纸的
+    // 下边就是它的底界——不画静息底线，选中罩也不画下缘（见 CSS
+    // `--paper-end`），不变量两边同时少一条，仍然相等。
+    const paperEndGroupIndices = new Set<number>()
+    if (!asset) {
+      return { scissorGroupIndices, mergedGroupByInstructionIndex, skipIndices, bottomLineGroupIndices, paperEndGroupIndices }
+    }
     const blocks = asset.content.blocks
 
     const sectionGroupCounts = new Map<string, number>()
@@ -1645,13 +1665,20 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         if (range) afterIdx = range.endIdx + 1
       }
       const next = blocks[afterIdx]
+      const isPaperEnd = !blocks
+        .slice(afterIdx)
+        .some((b) => b.type === 'group' || b.type === 'sectionHeading' || b.type === 'instruction')
+      if (isPaperEnd) {
+        paperEndGroupIndices.add(i)
+        continue
+      }
       const nextHasRestingTopLine =
         next != null &&
         (next.type === 'instruction' ||
           (next.type === 'group' && asset.content.groups[next.groupId]?.groupType !== 'writing'))
       if (!nextHasRestingTopLine) bottomLineGroupIndices.add(i)
     }
-    return { scissorGroupIndices, mergedGroupByInstructionIndex, skipIndices, bottomLineGroupIndices }
+    return { scissorGroupIndices, mergedGroupByInstructionIndex, skipIndices, bottomLineGroupIndices, paperEndGroupIndices }
   }, [asset])
 
   // rail scrollspy — highlight the topmost anchor currently visible in the
@@ -2858,7 +2885,12 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   function renderGroupCard(
     groupId: string,
     index: number,
-    options?: { mergedInstructionText?: string; showScissorLine?: boolean; showBottomScissorLine?: boolean },
+    options?: {
+      mergedInstructionText?: string
+      showScissorLine?: boolean
+      showBottomScissorLine?: boolean
+      paperEnd?: boolean
+    },
   ): ReactNode {
     const group = asset?.content.groups[groupId]
     const entry = groupModels[groupId]
@@ -2888,10 +2920,13 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         : null
     // 写作卡的选中罩上缘另行定位（--pb-writing-cut-top，见上方量高 effect
     // 与 paperBrowsePage.css），用 modifier class 圈出来。
-    const cardClassName =
-      entry?.kind === 'writing'
-        ? 'paper-browse-group-card paper-browse-group-card--writing'
-        : 'paper-browse-group-card'
+    const cardClassName = [
+      'paper-browse-group-card',
+      entry?.kind === 'writing' ? 'paper-browse-group-card--writing' : '',
+      options?.paperEnd ? 'paper-browse-group-card--paper-end' : '',
+    ]
+      .filter(Boolean)
+      .join(' ')
     const readingSuccessorGroupId =
       nextReadingGroupIdByPredecessorGroupId.get(groupId)
 
@@ -2957,7 +2992,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
               >
                 {card.draftPaperButtonState === 'in_current_draft' ? (
                   <>
-                    <ScissorsMark size={14} />
+                    <Scissors size={16} variant="fill" />
                     已剪入
                   </>
                 ) : card.draftPaperButtonState === 'disabled' ? (
@@ -3289,7 +3324,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                 })
               }}
             >
-              <RefreshCw aria-hidden="true" size={15} strokeWidth={2} />
+              <RefreshCw aria-hidden="true" size={15} />
               {SIMILAR_PASSAGES_MODE_GROUP_TYPES.has(group.groupType) ? '相似篇章' : '配相似'}
             </button>
             <span className="similar-cta-why">——从库里配同配方的相似题</span>
@@ -3536,6 +3571,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
             // 并组卡渲染在 instruction 的 index 上，节末集合按 group 块
             // 自己的 index（本卡的下一块）记账。
             showBottomScissorLine: scissorPlan.bottomLineGroupIndices.has(index + 1),
+            paperEnd: scissorPlan.paperEndGroupIndices.has(index + 1),
           })
         }
         return (
@@ -3623,6 +3659,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         return renderGroupCard(block.groupId, index, {
           showScissorLine: scissorPlan.scissorGroupIndices.has(index),
           showBottomScissorLine: scissorPlan.bottomLineGroupIndices.has(index),
+          paperEnd: scissorPlan.paperEndGroupIndices.has(index),
         })
       case 'pageBreakHint':
         return <div key={`pagebreak-${index}`} className="paper-browse-pagebreak" aria-hidden="true" />
@@ -3673,49 +3710,60 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                 <span className="paper-browse-rail-part-name">{part.name}</span>
               </button>
             )}
-            {part.groups.map((g) => {
-              const isActive = g.anchor === effectiveActiveAnchor
-              const fullTitle = railGroupLabel(g.title)
-              const displayTitle = compact
-                ? railLectureShortLabel(g.title)
-                : fullTitle
-              const card = questionGroupById.get(g.anchor)
-              const inCurrentDraft = card?.draftPaperButtonState === 'in_current_draft'
-              const ariaLabel = displayTitle === g.title
-                ? inCurrentDraft
-                  ? `${fullTitle}，已在草稿卷`
-                  : undefined
-                : inCurrentDraft
-                  ? `${g.title}，已在草稿卷`
-                  : g.title
-              return (
-                <button
-                  key={g.anchor}
-                  type="button"
-                  data-paper-browse-rail-anchor={g.anchor}
-                  className={`paper-browse-rail-group${
-                    isActive ? ' paper-browse-rail-group--active' : ''
-                  }`}
-                  aria-current={isActive ? 'true' : undefined}
-                  aria-label={ariaLabel}
-                  title={displayTitle === g.title ? undefined : g.title}
-                  onClick={() => scrollToAnchor(g.anchor)}
-                >
-                  <span className="paper-browse-rail-group-label">
-                    <span className="paper-browse-rail-group-title">{displayTitle}</span>
-                    {inCurrentDraft && (
-                      <span
-                        className="paper-browse-rail-scissors"
-                        title="已在草稿卷"
-                        aria-label="已在草稿卷"
-                      >
-                        <ScissorsMark />
-                      </span>
-                    )}
-                  </span>
-                </button>
-              )
-            })}
+            <FluidHoverList
+              as="div"
+              axis="y"
+              itemSelector=".paper-browse-rail-group"
+              className="paper-browse-rail-group-list"
+              gapClick={false}
+            >
+              {part.groups.map((g) => {
+                const isActive = g.anchor === effectiveActiveAnchor
+                const card = questionGroupById.get(g.anchor)
+                // Writing groups read 「应用文 / 续写」 in both rail widths
+                // (owner 2026-09-15: one name, not 「第一节 / 第二节」 wide
+                // and 「应用文 / 续写」 narrow).
+                const fullTitle = (card && railWritingLabel(card)) ?? railGroupLabel(g.title)
+                const displayTitle = compact
+                  ? railLectureShortLabel(g.title, card)
+                  : fullTitle
+                const inCurrentDraft = card?.draftPaperButtonState === 'in_current_draft'
+                const ariaLabel = displayTitle === g.title
+                  ? inCurrentDraft
+                    ? `${fullTitle}，已在草稿卷`
+                    : undefined
+                  : inCurrentDraft
+                    ? `${g.title}，已在草稿卷`
+                    : g.title
+                return (
+                  <button
+                    key={g.anchor}
+                    type="button"
+                    data-paper-browse-rail-anchor={g.anchor}
+                    className={`paper-browse-rail-group${
+                      isActive ? ' paper-browse-rail-group--active' : ''
+                    }`}
+                    aria-current={isActive ? 'true' : undefined}
+                    aria-label={ariaLabel}
+                    title={displayTitle === g.title ? undefined : g.title}
+                    onClick={() => scrollToAnchor(g.anchor)}
+                  >
+                    <span className="paper-browse-rail-group-label">
+                      <span className="paper-browse-rail-group-title">{displayTitle}</span>
+                      {inCurrentDraft && (
+                        <span
+                          className="paper-browse-rail-scissors"
+                          title="已在草稿卷"
+                          aria-label="已在草稿卷"
+                        >
+                          <Scissors size={14} />
+                        </span>
+                      )}
+                    </span>
+                  </button>
+                )
+              })}
+            </FluidHoverList>
           </div>
         ))}
       </div>
@@ -3743,7 +3791,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         disabled={analysisPdfBusy}
         onClick={() => void downloadCompanionAnalysis()}
       >
-        <FileDown size={16} />
+        <PaperDownload size={16} />
         {analysisPdfBusy ? '生成解析中…' : '下载配套解析'}
       </button>
     </>
@@ -3962,7 +4010,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           aria-label={`打开草稿卷，已选 ${currentDraftGroupCount} 个题组`}
           disabled={!currentDraftPaperId || currentDraftGroupCount === 0}
         >
-          <ClipboardList size={15} />
+          <BoardList size={15} />
           <span>草稿卷 · {currentDraftGroupCount} 题组</span>
         </button>
       )}

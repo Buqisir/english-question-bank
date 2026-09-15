@@ -30,6 +30,7 @@
  *     DB 未同步），复选框禁用 + title 提示，仍然渲染（池子诚实，不隐藏）。
  */
 import type { ReactNode } from 'react'
+import { FluidHoverList } from '../../components/FluidHoverList'
 import type {
   QuestionGroupCard,
   SimilarPassagesResponse,
@@ -154,7 +155,12 @@ export function SimilarQuestionsRailView(props: SimilarQuestionsRailViewProps): 
             {results.length === 0 ? (
               <p className="paper-browse-lecture-empty">{notice || '库里暂时没有匹配的相似题。'}</p>
             ) : (
-              <div className="similar-rcard-list">
+              <FluidHoverList
+                as="div"
+                axis="y"
+                itemSelector=".similar-rcard"
+                className="similar-rcard-list"
+              >
                 {results.map((result) => {
                   const card = questionGroupById.get(result.groupId)
                   const isThin = !card
@@ -179,7 +185,7 @@ export function SimilarQuestionsRailView(props: SimilarQuestionsRailViewProps): 
                     </label>
                   )
                 })}
-              </div>
+              </FluidHoverList>
             )}
             <p className="similar-pool-note">
               库内同类还剩 {Math.max(poolStats.totalInPool - poolStats.returned, 0)} 组

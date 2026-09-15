@@ -110,12 +110,12 @@
 .pi-ps-harness-shell .pi-line-path[data-pi-evidence-kind='support'],
 .paper-browse-shell .pi-line-path--support,
 .paper-browse-shell .pi-line-path[data-pi-evidence-kind='support'] {
-  stroke: rgba(16, 185, 129, 0.65);
+  stroke: rgba(var(--eqb-color-success-rgb), 0.55);
 }
 
 .pi-ps-harness-shell .pi-line-path--trap,
 .pi-ps-harness-shell .pi-line-path[data-pi-evidence-kind='trap'],
 .paper-browse-shell .pi-line-path--trap,
 .paper-browse-shell .pi-line-path[data-pi-evidence-kind='trap'] {
-  stroke: rgba(245, 158, 11, 0.85);
+  stroke: rgba(var(--eqb-color-warning-rgb), 0.6);
 }

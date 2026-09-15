@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, BookMarked, Check, Grid2X2, RotateCcw, Volume2 } from 'lucide-react'
+import { ArrowLeft, ArrowRight, BookMarked, Check, Grid2X2, RotateCcw, Volume } from '../../icons'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import type { VocabularySetDto } from '../../services/vocabulary'
@@ -166,14 +166,14 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
 
         {loadState === 'loading' && (
           <section className="vocabulary-practice-status" aria-live="polite">
-            <BookMarked size={34} strokeWidth={1.5} aria-hidden="true" />
+            <BookMarked size={34} aria-hidden="true" />
             <h1>正在准备卡片…</h1>
           </section>
         )}
 
         {loadState === 'error' && (
           <section className="vocabulary-practice-status" role="alert">
-            <BookMarked size={34} strokeWidth={1.5} aria-hidden="true" />
+            <BookMarked size={34} aria-hidden="true" />
             <h1>这组卡片没有加载成功</h1>
             <p>{loadError}</p>
             <button className="ghost-button" type="button" onClick={onBackToSet}>返回生词组</button>
@@ -191,7 +191,7 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
               <div className="vocabulary-practice-round" aria-label={`第 ${roundIndex + 1} 轮，共 ${rounds.length} 轮，已配对 ${game.matchedPairCount} 对，共 ${game.totalPairCount} 对`}>
                 <strong>第 {roundIndex + 1} / {rounds.length} 轮</strong>
                 <span>已配对 {game.matchedPairCount} / {game.totalPairCount}</span>
-                <small><Volume2 size={14} aria-hidden="true" />沿用{accent === 'american' ? '美音' : '英音'}</small>
+                <small><Volume size={14} aria-hidden="true" />沿用{accent === 'american' ? '美音' : '英音'}</small>
               </div>
             </header>
 
@@ -226,18 +226,18 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
                     >
                       <span className="vocabulary-match-card-inner">
                         <span className="vocabulary-match-card-back" aria-hidden="true">
-                          <BookMarked size={26} strokeWidth={1.5} />
+                          <BookMarked size={26} />
                           <span>翻开</span>
                         </span>
                         <span className="vocabulary-match-card-face" aria-hidden="true">
                           {confirmingMatch && (
                             <span className="vocabulary-match-confirmation">
-                              <Check size={14} strokeWidth={2.2} />
+                              <Check size={14} />
                             </span>
                           )}
                           <small>{card.kind === 'word' ? '英文' : '中文意思'}</small>
                           <strong>{card.label}</strong>
-                          {card.kind === 'word' && <Volume2 size={15} aria-hidden="true" />}
+                          {card.kind === 'word' && <Volume size={15} aria-hidden="true" />}
                         </span>
                       </span>
                     </button>
@@ -250,7 +250,7 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
 
               {roundComplete && (
                 <div className="vocabulary-practice-complete">
-                  <Check size={28} strokeWidth={1.7} aria-hidden="true" />
+                  <Check size={28} aria-hidden="true" />
                   <div>
                     <h2>{allComplete ? '全部完成' : '本轮完成'}</h2>
                     <p>{allComplete ? `这组 ${vocabularySet.entryCount} 个生词已经全部配对。` : '下一轮会继续使用生词组中的后续单词。'}</p>

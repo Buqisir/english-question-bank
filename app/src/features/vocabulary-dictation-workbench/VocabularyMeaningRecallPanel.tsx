@@ -1,11 +1,11 @@
 import {
-  BookOpenCheck,
+  Card,
   Check,
   ChevronDown,
   Download,
   Eye,
   EyeOff,
-  FileCheck2,
+  PaperCheck,
   Play,
   Printer,
   QrCode,
@@ -13,10 +13,11 @@ import {
   Save,
   Shuffle,
   Sparkles,
-  Volume2,
+  Volume,
   X,
-} from 'lucide-react'
+} from '../../icons'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { FluidHoverList } from '../../components/FluidHoverList'
 import type { VocabularySetEntry } from '../../domain/vocabulary'
 import {
   createVocabularyDictationTask,
@@ -479,7 +480,7 @@ export function VocabularyMeaningRecallPanel({
             <div className="meaning-recall-reveal">
               <span>{currentEntry.phonetics?.[accent] ?? currentEntry.phonetic}</span>
               <strong>{currentEntry.teachingSense}</strong>
-              <button type="button" onClick={() => playAudio(currentEntry)}><Volume2 size={17} />播放{accent === 'american' ? '美音' : '英音'}</button>
+              <button type="button" onClick={() => playAudio(currentEntry)}><Volume size={17} />播放{accent === 'american' ? '美音' : '英音'}</button>
             </div>
           )}
         </div>
@@ -529,11 +530,11 @@ export function VocabularyMeaningRecallPanel({
           </fieldset>
           <details className="dictation-download-menu meaning-recall-download-menu">
             <summary><Download size={16} />下载本轮错词<ChevronDown size={14} aria-hidden="true" /></summary>
-            <div>
+            <FluidHoverList as="div" className="dictation-download-items" axis="y" itemSelector=".dictation-download-option">
               {([
-                ['cards', '单词卡', <BookOpenCheck size={14} key="cards" />],
+                ['cards', '单词卡', <Card size={14} key="cards" />],
                 ['dictation', '听写纸', <Download size={14} key="dictation" />],
-                ['answer', '教师答案', <FileCheck2 size={14} key="answer" />],
+                ['answer', '教师答案', <PaperCheck size={14} key="answer" />],
                 ['handwriting', '衡水体练字纸', <Printer size={14} key="handwriting" />],
               ] as const).map(([kind, label, icon]) => (
                 <div className="dictation-download-option" key={kind}>
@@ -550,7 +551,7 @@ export function VocabularyMeaningRecallPanel({
                 <button type="button" disabled={!forgotten.length || busy} onClick={() => void downloadRecordMaterial(activeRecord, 'bundle', 'download')}><Download size={14} />下载全套（4份）</button>
                 <button type="button" className="dictation-save-as-button" aria-label="全套错词资料另存为" disabled={!forgotten.length || busy} onClick={() => void downloadRecordMaterial(activeRecord, 'bundle', 'save-as')}><Save size={13} />另存为…</button>
               </div>
-            </div>
+            </FluidHoverList>
           </details>
           <button type="button" className="is-primary" onClick={() => void generateTask(forgotten)} disabled={!forgotten.length || !dictationTitle.trim() || busy}><QrCode size={16} />生成错词听写</button>
           <span>下载不会创建听写任务；需要扫码练习时再生成听写。</span>

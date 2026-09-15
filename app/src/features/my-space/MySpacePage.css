@@ -57,6 +57,7 @@
 
 /* 筛选芯片跟浏览页同一套：未选发丝边，选中墨底白字。 */
 .my-space-folders {
+  --fh-radius: 999px;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -74,11 +75,11 @@
   font-size: 13px;
   min-height: 28px;
   padding: 0 12px;
+  position: relative;
   transition: background var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
 }
 
-.my-space-chip:hover {
-  background: var(--eqb-color-desk);
+.my-space-chip[data-fluid-hover-active] {
   color: var(--eqb-color-text);
 }
 
@@ -87,12 +88,6 @@
   border-color: transparent;
   color: var(--eqb-color-paper);
   font-weight: 500;
-}
-
-.my-space-chip.is-selected:hover {
-  background: var(--action-hover);
-  border-color: transparent;
-  color: var(--eqb-color-paper);
 }
 
 .my-space-chip:focus-visible,

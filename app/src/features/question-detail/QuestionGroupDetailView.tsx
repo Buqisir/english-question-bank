@@ -33,11 +33,11 @@ import {
   ChevronDown,
   ChevronUp,
   Eye,
-  Files,
+  Papers,
   Pencil,
   Plus,
-  Trash2,
-} from 'lucide-react'
+  Trash,
+} from '../../icons'
 import type { QuestionGroupCard, QuestionGroupDetail, ReadingParseQuestionGroupResult, TopicLabel } from '../../domain/questionBank'
 import { sourceTypeLabel } from '../../domain/questionBank'
 import { compactGroupMeta } from './detailHelpers'
@@ -574,9 +574,9 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
               }
             >
               {selectedDetail.draftPaperButtonState === 'in_current_draft' ? (
-                <Check size={16} strokeWidth={1.5} />
+                <Check size={16} />
               ) : (
-                <Plus size={16} strokeWidth={1.5} />
+                <Plus size={16} />
               )}
               {selectedDetail.draftPaperButtonState === 'in_current_draft'
                 ? '已在草稿卷'
@@ -586,7 +586,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
             </button>
             {selectedDetail.canonicalPaperId && (
               <button className="peek-btn" type="button" onClick={() => onOpenPaperBrowse(selectedDetail)}>
-                <Eye size={16} strokeWidth={1.5} />
+                <Eye size={16} />
                 看整卷
               </button>
             )}
@@ -605,7 +605,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                   onOpenPaperBrowseLecture(selectedDetail)
                 }}
               >
-                <BookOpen size={16} strokeWidth={1.5} />
+                <BookOpen size={16} />
                 {selectedDetail.paperSurfaceLabel}
               </a>
             )}
@@ -617,7 +617,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                 data-ra-group-id={selectedDetail.id}
                 onClick={handleToggleSimilarPassages}
               >
-                <Files size={16} strokeWidth={1.5} />
+                <Papers size={16} />
                 相似篇章
               </button>
             )}
@@ -628,13 +628,13 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                     {
                       key: 'edit',
                       label: '编辑',
-                      icon: <Pencil size={14} strokeWidth={1.5} aria-hidden="true" />,
+                      icon: <Pencil size={14} aria-hidden="true" />,
                       onSelect: () => onEdit(selectedDetail),
                     },
                     {
                       key: 'delete',
                       label: '删除',
-                      icon: <Trash2 size={14} strokeWidth={1.5} aria-hidden="true" />,
+                      icon: <Trash size={14} aria-hidden="true" />,
                       tone: 'danger',
                       onSelect: () => onDelete(selectedDetail),
                     },
@@ -663,7 +663,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
           {load.status === 'ready' && !expanded && (
             <div className="peek-expand-wrap">
               <button className="peek-expand" type="button" onClick={() => toggleExpanded(true)}>
-                <ChevronDown size={16} strokeWidth={1.5} />
+                <ChevronDown size={16} />
                 展开卷面
               </button>
             </div>
@@ -671,7 +671,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
           {load.status === 'ready' && expanded && (
             <div className="peek-expand-sticky">
               <button className="peek-expand peek-expand--collapse" type="button" onClick={() => toggleExpanded(false)}>
-                <ChevronUp size={16} strokeWidth={1.5} />
+                <ChevronUp size={16} />
                 收起卷面
               </button>
             </div>

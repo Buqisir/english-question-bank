@@ -16,12 +16,19 @@
  */
 
 import { useEffect, useId, useMemo, useState, type FormEvent, type ReactNode } from 'react'
-import { ArrowRight, SlidersHorizontal, X } from 'lucide-react'
+import { ArrowRight, Sliders, X } from '../icons'
 import type { QuestionGroupCard } from '../domain/questionBank.ts'
 import { aggregatePaperResults, type PaperResult } from './aggregatePaperResults.ts'
 import { ConciergePaperRow } from './ConciergePaperRow.tsx'
 import { pickClarificationLine, pickResultsNoticeLine } from './clarificationCopy.ts'
 import { buildDefaultFeed, buildRecentFeed } from './defaultFeed.ts'
+import { HomeContinueSection, HomeDailyPassage } from './ConciergeHomeSections.tsx'
+import { FluidHoverList } from '../components/FluidHoverList.tsx'
+
+/** Fluid hover: an expanded paper row's open body still belongs to its head,
+ *  so the highlight stays on that head instead of jumping to the next paper. */
+const paperRowHitArea = (head: HTMLElement): HTMLElement => head.closest<HTMLElement>('.concierge-paper-row') ?? head
+import type { RecentlyOpenedEntry } from './recentlyOpened.ts'
 import {
   applyConciergeFilters,
   buildFacetedFilterOptions,
@@ -77,6 +84,16 @@ export type ConciergeDeskProps = {
   onEnterBrowse?: () => void
   /** home-blank — wordmark click (logo=home semantics): clears the browse param. */
   onExitBrowse?: () => void
+
+  /**
+   * 首页是归来 — the teacher's own trail for the home「接着做」section.
+   * `recentlyOpened` is the localStorage list App.tsx records in openDetail;
+   * the draft fields are the same values the draft pill already derives.
+   */
+  recentlyOpened?: RecentlyOpenedEntry[]
+  currentDraftPaperId?: string | null
+  currentDraftGroupCount?: number
+  onOpenDraftPaper?: (draftPaperId: string) => void
 }
 
 /**
@@ -182,6 +199,10 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
     onThinkingModeChange,
     browseActive,
     onEnterBrowse,
+    recentlyOpened = [],
+    currentDraftPaperId = null,
+    currentDraftGroupCount = 0,
+    onOpenDraftPaper,
   } = props
   const { intent, state, paperResults, expandedPaperKey } = retrieval
   const { setIntent, submit, togglePaper } = actions
@@ -567,13 +588,12 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                 onClick={handleEnterBrowse}
                 disabled={dataLoading}
               >
-                <SlidersHorizontal size={16} aria-hidden="true" />
-                浏览题库与筛选
-                <ArrowRight size={14} aria-hidden="true" />
+                <Sliders size={16} aria-hidden="true" />
+                浏览题库与筛选 · {catalogPaperCount} 套卷
               </button>
             )}
             {isBrowseScreen && !dataLoading && state.kind === 'empty' && (
-              <div className="concierge-browse-chips" role="group" aria-label="筛选">
+              <FluidHoverList as="div" axis="xy" className="concierge-browse-chips" itemSelector=".concierge-browse-chip" gapClick={false} role="group" aria-label="筛选">
                 <button
                   type="button"
                   className="concierge-browse-chip"
@@ -622,7 +642,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                     更早
                   </button>
                 )}
-              </div>
+              </FluidHoverList>
             )}
           </div>
           {state.kind !== 'empty' && onThinkingModeChange && (
@@ -715,7 +735,13 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
           {visibleFilterDims.map((dimension) => (
             <div key={dimension} className="concierge-filter-dim-row">
               <span className="concierge-filter-dim-label">{FILTER_DIM_LABEL[dimension]}</span>
-              <ul className="concierge-starter-chips" aria-label={dimension}>
+              <FluidHoverList
+                className="concierge-starter-chips"
+                axis="xy"
+                itemSelector=".concierge-starter-chip"
+                gapClick={false}
+                aria-label={dimension}
+              >
                 {filterOptions[dimension].map((option) => {
                   const selected = String(filters[dimension] ?? '') === option.value
                   const isZero = option.count === 0
@@ -737,7 +763,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                     </li>
                   )
                 })}
-              </ul>
+              </FluidHoverList>
             </div>
           ))}
           {(canToggleFilters || hasActiveFilters) && (
@@ -849,7 +875,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
           )}
 
         {state.kind === 'results' && filteredPaperResults.length > 0 && (
-          <ul className="concierge-paper-list">
+          <FluidHoverList className="concierge-paper-list" itemSelector=".concierge-paper-row-head" hitArea={paperRowHitArea}>
             {filteredPaperResults.map((paper, index) => {
               // C7 (trust-cracks) — search-result year column: only the first
               // of a run of consecutive same-year rows shows the year digits;
@@ -877,12 +903,12 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                 </li>
               )
             })}
-          </ul>
+          </FluidHoverList>
         )}
       </div>
 
       {showFeed && (
-        <div className="concierge-default-feed" role="region" aria-label={isBrowseScreen ? '题库浏览' : '最近上新'}>
+        <div className="concierge-default-feed" role="region" aria-label={isBrowseScreen ? '题库浏览' : '备课桌'}>
           {questionGroups.length === 0 ? (
             <p className="concierge-feed-empty-corpus">
               题库还没有题目。先导入一套卷，题库会在这里展开浏览。
@@ -902,7 +928,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                     <span className="concierge-feed-year-label">{yearGroup.label}</span>
                     <span className="concierge-feed-year-count">{yearGroup.papers.length} 套</span>
                   </div>
-                  <ul className="concierge-paper-list">
+                  <FluidHoverList className="concierge-paper-list" itemSelector=".concierge-paper-row-head" hitArea={paperRowHitArea}>
                     {yearGroup.papers.map((paper) => (
                       <li key={paper.key}>
                         <ConciergePaperRow
@@ -922,48 +948,53 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                         />
                       </li>
                     ))}
-                  </ul>
+                  </FluidHoverList>
                 </div>
               ))}
             </div>
           ) : (
-            <>
-              <div className="concierge-feed-heading">
-                <h1 className="concierge-feed-label">最近上新</h1>
-                <button type="button" className="concierge-feed-expand" onClick={handleEnterBrowse}>
-                  查看全部 {catalogPaperCount} 套卷
-                  <ArrowRight size={14} aria-hidden="true" />
-                </button>
-              </div>
-              {homeRecentFeed.length === 0 ? (
-                <p className="concierge-feed-empty-corpus">
-                  暂无已就绪的新卷，已有材料仍可在题库中浏览。
-                </p>
-              ) : (
-                <ul className="concierge-paper-list">
-                  {homeRecentFeed.map((paper) => (
-                    <li key={paper.key}>
-                      <ConciergePaperRow
-                        paper={paper}
-                        variant="feed"
-                        recentAddition
-                        expanded={expandedPaperKey === paper.key}
-                        basketIds={basketIds}
-                        onTogglePaper={togglePaper}
-                        onAdd={onAdd}
-                        onOpenDetail={onOpenDetail}
-                        onOpenPaperBrowse={onOpenPaperBrowse}
-                        questionGroupById={questionGroupById}
-                        expandedSimilarGroupId={expandedSimilarGroupId}
-                        similarPassagesRequest={similarPassagesRequest}
-                        onToggleSimilar={handleToggleSimilar}
-                        onRetrySimilar={() => expandedSimilarGroupId && void loadSimilarPassages(expandedSimilarGroupId)}
-                      />
-                    </li>
-                  ))}
-                </ul>
+            <div className="home-sections">
+              {onOpenDetail && onOpenDraftPaper && (
+                <HomeContinueSection
+                  questionGroupById={questionGroupById}
+                  recentlyOpened={recentlyOpened}
+                  draftPaperId={currentDraftPaperId}
+                  draftGroupCount={currentDraftGroupCount}
+                  onOpenDetail={onOpenDetail}
+                  onOpenDraftPaper={onOpenDraftPaper}
+                />
               )}
-            </>
+              {homeRecentFeed.length > 0 && (
+                <section className="home-section" aria-label="最近上新">
+                  <h2 className="concierge-feed-label home-section-label">最近上新</h2>
+                  <FluidHoverList className="concierge-paper-list" itemSelector=".concierge-paper-row-head" hitArea={paperRowHitArea}>
+                    {homeRecentFeed.map((paper) => (
+                      <li key={paper.key}>
+                        <ConciergePaperRow
+                          paper={paper}
+                          variant="feed"
+                          recentAddition
+                          expanded={expandedPaperKey === paper.key}
+                          basketIds={basketIds}
+                          onTogglePaper={togglePaper}
+                          onAdd={onAdd}
+                          onOpenDetail={onOpenDetail}
+                          onOpenPaperBrowse={onOpenPaperBrowse}
+                          questionGroupById={questionGroupById}
+                          expandedSimilarGroupId={expandedSimilarGroupId}
+                          similarPassagesRequest={similarPassagesRequest}
+                          onToggleSimilar={handleToggleSimilar}
+                          onRetrySimilar={() => expandedSimilarGroupId && void loadSimilarPassages(expandedSimilarGroupId)}
+                        />
+                      </li>
+                    ))}
+                  </FluidHoverList>
+                </section>
+              )}
+              {onOpenDetail && (
+                <HomeDailyPassage questionGroups={questionGroups} onOpenDetail={onOpenDetail} />
+              )}
+            </div>
           )}
         </div>
       )}

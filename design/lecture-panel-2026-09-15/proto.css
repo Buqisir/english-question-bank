@@ -1,0 +1,296 @@
+/* 讲评面板原型 · 2026-09-15
+ *
+ * 「现状」= 真实样式表不加覆盖。方案 A / B 只在这里以 body.proto-a /
+ * body.proto-b 覆盖，落地时按选中方案回写到
+ *   app/src/features/paper-intelligence/lectureAnalysisPanels.css   （面板）
+ *   app/src/features/paper-browse/paperBrowsePage.css                （角标、插座、连线色）
+ *   app/src/shared-ui/papersurface/PaperSurface.css                  （卷面证据划线——共享渲染器，高风险门）
+ *   app/src/features/paper-intelligence/paperIntelligence.css        （连线基色）
+ */
+
+/* ─── 原型外壳（与方案无关） ─── */
+.proto-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 24px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.proto-bar-title { color: var(--ink); font-weight: 500; }
+.proto-bar-hint { margin-left: auto; }
+.proto-switch { display: inline-flex; gap: 2px; padding: 2px; border-radius: 8px; background: var(--surface-strong, #E9ECE6); }
+.proto-switch button {
+  border: 0; background: transparent; font: inherit; font-size: 13px; color: var(--ink-soft);
+  padding: 5px 12px; border-radius: 6px; cursor: pointer;
+}
+.proto-switch button[aria-checked="true"] {
+  background: var(--eqb-color-paper, #fff); color: var(--ink);
+  box-shadow: 0 0 0 1px rgba(30,30,28,0.05), 0 1px 2px rgba(30,30,28,0.06);
+}
+.proto-shell {
+  display: grid;
+  grid-template-columns: 1fr 440px;
+  gap: 24px;
+  align-items: start;
+  max-width: 1240px;
+  margin: 8px auto 48px;
+  padding: 0 24px;
+  position: relative;
+}
+.proto-zoom { width: 100%; }
+.proto-page {
+  padding: 40px 56px;
+  font-family: var(--ps-font-stack);
+  font-size: var(--ps-font-size);
+  line-height: var(--ps-line-height);
+}
+.proto-page .ps-question-list { margin-top: 20px; }
+/* 原型专用：真实 PaperSurface 里未激活的 anchor 是零宽空标记，正文另行流出；
+ * 原型直接把切片包进 mark，所以要让未激活的 mark 也照常显示文字。 */
+.proto-page .ps-evidence-anchor { display: inline; width: auto; height: auto; overflow: visible; background: transparent; color: inherit; }
+
+.proto-shell .paper-browse-lecture-panel { position: static; height: auto; }
+.proto-line[data-empty="true"] { display: none; }
+.pi-ps-analysis-option-section:not(.pi-ps-analysis-option-section--active) .pi-ps-analysis-option-detail { display: none; }
+
+/* ─── 方案 A · 全墨 ───
+ * 一个题一个信号：对的那行只靛勾 + 加粗，展开态只靛发丝边加深。
+ * 证据句「选中」= 底色从 desk 55% 到 100%，不加边、不换色。
+ * 连线、插座、角标、卷面划线全部走墨。 */
+
+/* 面板 · 头 */
+.proto-a .pi-ps-analysis-answer,
+.proto-b .pi-ps-analysis-answer { color: var(--ink); }
+
+/* 面板 · 选项行 */
+.proto-a .pi-ps-analysis-option-section--active,
+.proto-b .pi-ps-analysis-option-section--active,
+.proto-a .pi-ps-analysis-option-section--correct.pi-ps-analysis-option-section--active,
+.proto-b .pi-ps-analysis-option-section--correct.pi-ps-analysis-option-section--active {
+  border-color: rgba(30, 30, 28, 0.28);
+  background: transparent;
+}
+.proto-a .pi-ps-analysis-option-section--correct .pi-ps-analysis-option-content,
+.proto-b .pi-ps-analysis-option-section--correct .pi-ps-analysis-option-content { font-weight: 600; }
+.proto-a .pi-ps-analysis-option-badge--correct { color: var(--ink); }
+.proto-a .pi-ps-analysis-option-badge--trap,
+.proto-b .pi-ps-analysis-option-badge--trap {
+  background: transparent;
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 12px;
+  padding: 0.125rem 0;
+}
+.proto-a button.pi-ps-analysis-option-row:focus-visible,
+.proto-b button.pi-ps-analysis-option-row:focus-visible { outline-color: var(--ink); }
+
+/* 面板 · 展开区标题：干扰解析的细分胶囊去底 */
+.proto-a .pi-ps-analysis-trap-meta span,
+.proto-b .pi-ps-analysis-trap-meta span { background: transparent; color: var(--muted); padding: 0; }
+
+/* 面板 · 证据句（支持 / 干扰同一套） */
+.proto-a .paper-browse-lecture-panel .pi-ps-analysis-evidence--selected blockquote,
+.proto-b .paper-browse-lecture-panel .pi-ps-analysis-evidence--selected blockquote,
+.proto-a .paper-browse-lecture-panel .pi-ps-analysis-distractor--selected .pi-ps-analysis-distractor-quote,
+.proto-b .paper-browse-lecture-panel .pi-ps-analysis-distractor--selected .pi-ps-analysis-distractor-quote {
+  background: var(--eqb-color-desk, #E9ECE6);
+  color: var(--ink);
+}
+.proto-a .paper-browse-lecture-panel [data-pi-evidence-kind='support'][aria-pressed='true']::before,
+.proto-a .paper-browse-lecture-panel [data-pi-evidence-kind='trap'][aria-pressed='true']::before,
+.proto-b .paper-browse-lecture-panel [data-pi-evidence-kind='support'][aria-pressed='true']::before,
+.proto-b .paper-browse-lecture-panel [data-pi-evidence-kind='trap'][aria-pressed='true']::before {
+  background: var(--ink);
+}
+.proto-a button.pi-ps-analysis-evidence:focus-visible,
+.proto-b button.pi-ps-analysis-evidence:focus-visible,
+.proto-a button.pi-ps-analysis-distractor:focus-visible,
+.proto-b button.pi-ps-analysis-distractor:focus-visible { outline-color: var(--ink); }
+
+/* 连线：铅笔虚线，一种颜色；干扰用点线区分「形」不区分「色」 */
+.proto-a .pi-line-path,
+.proto-b .pi-line-path,
+.proto-a .paper-browse-shell .pi-line-path[data-pi-evidence-kind='support'],
+.proto-b .paper-browse-shell .pi-line-path[data-pi-evidence-kind='support'] {
+  stroke: rgba(31, 31, 29, 0.42);
+  stroke-dasharray: 5 5;
+}
+.proto-a .paper-browse-shell .pi-line-path[data-pi-evidence-kind='trap'],
+.proto-b .paper-browse-shell .pi-line-path[data-pi-evidence-kind='trap'] {
+  stroke: rgba(31, 31, 29, 0.42);
+  stroke-dasharray: 1.5 4;
+}
+
+/* 卷面 · 当前题角标与题号 */
+.proto-a .paper-browse-content .ps-question--active::before,
+.proto-a .paper-browse-content .ps-question--active::after,
+.proto-b .paper-browse-content .ps-question--active::before,
+.proto-b .paper-browse-content .ps-question--active::after { border-color: var(--ink); }
+.proto-a .paper-browse-content .ps-question--active .ps-question-no,
+.proto-b .paper-browse-content .ps-question--active .ps-question-no { color: var(--ink); font-weight: 700; }
+
+/* 卷面 · 证据划线：荧光笔 → 铅笔。支持=实线，干扰=点线；淡淡一层墨底让整句成块。 */
+.proto-a .ps-evidence-anchor--active[data-paper-evidence-kind="support"],
+.proto-b .ps-evidence-anchor--active[data-paper-evidence-kind="support"] {
+  background: rgba(31, 31, 29, 0.06);
+  border-bottom: 1.5px solid rgba(31, 31, 29, 0.55);
+}
+.proto-a .ps-evidence-anchor--active[data-paper-evidence-kind="trap"],
+.proto-b .ps-evidence-anchor--active[data-paper-evidence-kind="trap"] {
+  background: rgba(31, 31, 29, 0.06);
+  border-bottom: 1.5px dotted rgba(31, 31, 29, 0.6);
+}
+
+/* ─── 方案 B · 一处绿 ───
+ * 与 A 完全相同，只有正确项的勾走 success 绿——整栏唯一一处色。 */
+.proto-b .pi-ps-analysis-option-badge--correct { color: var(--eqb-color-success, #059669); }
+
+/* ─── 方案 C · 色留量减 ───
+ * Owner 反馈：全墨太沉，正确 / 干扰分不开。保留「绿=对、琥珀=干扰」的语义色，
+ * 但把颤色的面积砍掉：色只落在勾、答案字、划线、连线这些「线和字」上，
+ * 不再整卡填色、不再做橙色药丸。绿本身微调：#059669（冷翠）→ #2F8A5C（偏暖，
+ * 和暖纸底同一族），soft 底 8% → 6%。 */
+.proto-c {
+  /* v2：Owner 说淡了——绿、琥珀各提一档亮度与饱和，底色 6% → 8% */
+  /* v3：再亮「细微一点点」——绿 #22995E→#1FA062，琥珀 #E08A17→#E8901A；底色 8% → 10% */
+  --c-ok: #1FA062;
+  --c-ok-rgb: 31, 160, 98;
+  --c-warn: #E8901A;
+  --c-warn-rgb: 232, 144, 26;
+}
+
+/* 面板 · 头：答案字保留绿 */
+.proto-c .pi-ps-analysis-answer { color: var(--c-ok); }
+
+/* 面板 · 选项行：展开态只加深发丝边，不填色；正确项发丝边走绿 */
+.proto-c .pi-ps-analysis-option-section--active {
+  border-color: rgba(30, 30, 28, 0.28);
+  background: transparent;
+}
+.proto-c .pi-ps-analysis-option-section--correct.pi-ps-analysis-option-section--active {
+  border-color: rgba(var(--c-ok-rgb), 0.55);
+  background: transparent;
+}
+.proto-c .pi-ps-analysis-option-section--correct .pi-ps-analysis-option-content { font-weight: 600; }
+.proto-c .pi-ps-analysis-option-badge--correct { color: var(--c-ok); }
+/* 干扰标签：去药丸底，琥珀字直接落在行上 */
+.proto-c .pi-ps-analysis-option-badge--trap {
+  background: transparent;
+  color: var(--c-warn);
+  font-weight: 500;
+  font-size: 12px;
+  padding: 0.125rem 0;
+}
+.proto-c button.pi-ps-analysis-option-row:focus-visible { outline-color: rgba(30, 30, 28, 0.45); }
+
+/* 面板 · 干扰解析细分：去胶囊底，灰字 */
+.proto-c .pi-ps-analysis-trap-meta span { background: transparent; color: var(--muted); padding: 0; }
+
+/* 面板 · 证据句：支持句左边绿线 + 6% 绿底；干扰句左边琥珀线 + 6% 琥珀底；按钮本体不再整块填色 */
+.proto-c .paper-browse-lecture-panel .pi-ps-analysis-evidence--selected blockquote {
+  border-left-color: rgba(var(--c-ok-rgb), 0.7);
+  background: rgba(var(--c-ok-rgb), 0.10);
+}
+.proto-c .paper-browse-lecture-panel button.pi-ps-analysis-distractor--selected { background: transparent; }
+.proto-c .paper-browse-lecture-panel .pi-ps-analysis-distractor--selected .pi-ps-analysis-distractor-quote {
+  border-left-color: rgba(var(--c-warn-rgb), 0.7);
+  background: rgba(var(--c-warn-rgb), 0.10);
+}
+.proto-c .paper-browse-lecture-panel [data-pi-evidence-kind='support'][aria-pressed='true']::before { background: var(--c-ok); }
+.proto-c .paper-browse-lecture-panel [data-pi-evidence-kind='trap'][aria-pressed='true']::before { background: var(--c-warn); }
+
+/* 连线：颤色保留，透明度降到 55%，线形照旧（支持虚线、干扰点线） */
+.proto-c .paper-browse-shell .pi-line-path[data-pi-evidence-kind='support'],
+.proto-c .pi-line-path[data-pi-evidence-kind='support'] { stroke: rgba(var(--c-ok-rgb), 0.55); stroke-dasharray: 5 5; }
+.proto-c .paper-browse-shell .pi-line-path[data-pi-evidence-kind='trap'],
+.proto-c .pi-line-path[data-pi-evidence-kind='trap'] { stroke: rgba(var(--c-warn-rgb), 0.6); stroke-dasharray: 1.5 4; }
+
+/* 卷面 · 当前题角标与题号：不改（沿用身份色 = 「当前位置」，与目录选中同一语义） */
+
+/* 卷面 · 证据划线：色保留、量减半。荧光 18% 底 → 8%；2px 线 → 1.5px */
+.proto-c .ps-evidence-anchor--active[data-paper-evidence-kind="support"] {
+  background: rgba(var(--c-ok-rgb), 0.10);
+  border-bottom: 1.5px solid rgba(var(--c-ok-rgb), 0.7);
+}
+.proto-c .ps-evidence-anchor--active[data-paper-evidence-kind="trap"] {
+  background: rgba(var(--c-warn-rgb), 0.10);
+  border-bottom: 1.5px dotted rgba(var(--c-warn-rgb), 0.8);
+}
+
+/* ─── 方案 C · 排布 v2 ───
+ * 审出的毛病（量过的）：
+ *   1 灰有六种（#2c2820 / #4a4438 / #555 / #666 / #6b6e68 / #6a6a64）→ 收成三档：强墨、正文墨、暖灰。
+ *   2 字号有六档（16/15/14/13/12/11）→ 收成四档：16 / 14 / 13 / 12。
+ *   3 纵向节奏乱（p 默认 14px 外边距、13px 奇数边距、6/8/12/14/16 混用）→ 4 / 8 / 12 / 16。
+ *   4 干扰标签顶对齐，比选项文字高 3px → 跟基线。
+ *   5 展开区左缘 842 vs 选项正文 848，差 6px → 对齐正文列。
+ *   6 小节标题（答案依据 / 定位关系 / 干扰解析 / 考点）与正文同字号同灰 → 12px 暖灰小标，正文让开。 */
+.proto-c .paper-browse-lecture-panel {
+  --lp-strong: #2c2820;
+  --lp-body: var(--ink);
+  --lp-muted: #6f6a60;
+  --lp-hair: rgba(44, 40, 32, 0.14);
+}
+/* 1 · 灰收档 */
+.proto-c .paper-browse-lecture-title { color: var(--lp-strong); }
+.proto-c .paper-browse-lecture-range,
+.proto-c .paper-browse-answer-row,
+.proto-c .pi-reading-group-overview-summary,
+.proto-c .pi-ps-analysis-type,
+.proto-c .pi-ps-analysis-stem-zh,
+.proto-c .pi-ps-analysis-option-zh,
+.proto-c .pi-ps-analysis-trap-meta span,
+.proto-c .similar-cta-why { color: var(--lp-muted); }
+/* 解析正文（干扰解析说明、考点）是老师真正要读的内容，用正文墨，不再和译文同灰 */
+.proto-c .pi-ps-analysis-explanation,
+.proto-c .pi-ps-analysis-question-focus p { color: var(--lp-body); }
+.proto-c .pi-ps-analysis-qno,
+.proto-c .pi-ps-analysis-option-label,
+.proto-c .pi-ps-analysis-option-section--correct .pi-ps-analysis-option-content { color: var(--lp-strong); }
+.proto-c .pi-ps-analysis-option-content,
+.proto-c .pi-reading-group-overview-text,
+.proto-c .pi-ps-analysis-stem p:first-child { color: var(--lp-body); }
+.proto-c .pi-ps-analysis-option-detail h4,
+.proto-c .pi-ps-analysis-question-focus h4 {
+  color: var(--lp-muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin: 0 0 6px;
+}
+.proto-c .pi-ps-analysis-distractor-quote,
+.proto-c .pi-ps-analysis-evidence blockquote { color: var(--lp-body); }
+
+/* 2 · 字号收档 */
+.proto-c .paper-browse-answer-row { font-size: 14px; font-variant-numeric: tabular-nums; }
+.proto-c .pi-ps-analysis-type { font-size: 12px; }
+.proto-c .pi-ps-analysis-option-badge--trap { font-size: 12px; }
+
+/* 3 · 纵向节奏 */
+.proto-c .paper-browse-lecture-body { gap: 8px; }
+.proto-c .pi-reading-group-overview { margin: 4px 0 12px; }
+.proto-c .pi-ps-analysis-header { margin-bottom: 12px; }
+.proto-c .pi-ps-analysis-stem { margin-bottom: 12px; }
+.proto-c .pi-ps-analysis-stem p:first-child { margin: 0 0 4px; }
+.proto-c .pi-ps-analysis-stem-zh { margin: 0; }
+.proto-c .pi-ps-analysis-options { margin-bottom: 16px; }
+.proto-c .pi-ps-analysis-explanation { margin: 0 0 8px; }
+.proto-c .pi-ps-analysis-trap-meta { margin-bottom: 4px; }
+.proto-c .pi-ps-analysis-distractor-quote,
+.proto-c .pi-ps-analysis-evidence blockquote { margin: 0; }
+.proto-c .pi-ps-analysis-question-focus { margin-top: 16px; }
+.proto-c .pi-ps-analysis-question-focus p { margin: 0; }
+.proto-c .similar-cta { margin-top: 16px; padding-top: 16px; }
+
+/* 4 · 干扰标签跟基线 */
+.proto-c .pi-ps-analysis-option-badge--trap { align-self: baseline; line-height: 22px; padding: 0; }
+.proto-c .pi-ps-analysis-option-badge--correct { align-self: baseline; padding: 0; line-height: 22px; display: inline-flex; align-items: center; }
+
+/* 5 · 展开区左缘对齐选项正文列（10 卡内距 + A. 标签 24 + 8 间距 = 42px） */
+.proto-c .pi-ps-analysis-option-detail { padding: 10px 12px 12px 42px; border-top-color: var(--lp-hair); }
+.proto-c .pi-ps-analysis-option-label { min-width: 24px; }
+
+/* 卡边统一暖发丝 */
+.proto-c .pi-ps-analysis-option-section { border-color: var(--lp-hair); }
+.proto-c .pi-ps-analysis-option-section--active { border-color: rgba(44, 40, 32, 0.32); }

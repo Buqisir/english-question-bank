@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
-import { Archive, ArrowLeft, BookMarked, LogOut, Pencil, Settings } from 'lucide-react'
+import { Archive, ArrowLeft, BookMarked, LogOut, Pencil, Settings } from '../icons'
+import { FluidHoverList } from './FluidHoverList.tsx'
 
 function userInitials(username: string): string {
   return username.slice(0, 2)
@@ -92,7 +93,7 @@ export function AppTopbar(props: AppTopbarProps): ReactNode {
       <div className="topbar-brand">
         {props.onBack && variant === 'sub' && (
           <button className="topbar-back" type="button" onClick={props.onBack}>
-            <ArrowLeft size={14} /> 返回找题
+            <ArrowLeft size={16} /> 返回找题
           </button>
         )}
         {variant === 'home' ? (
@@ -154,7 +155,7 @@ export function AppTopbar(props: AppTopbarProps): ReactNode {
           </div>
         )}
       </div>
-      <div className="topbar-actions">
+      <FluidHoverList as="div" axis="x" className="topbar-actions" itemSelector=".ghost-button" gapClick={false}>
         {props.actionsSlot && (
           <>
             <span className="topbar-actions-page">{props.actionsSlot}</span>
@@ -163,13 +164,13 @@ export function AppTopbar(props: AppTopbarProps): ReactNode {
         )}
         {props.onOpenVocabularyReview && (
           <button className="ghost-button" type="button" onClick={props.onOpenVocabularyReview}>
-            <BookMarked size={14} />
+            <BookMarked size={16} />
             过生词
           </button>
         )}
         {props.onOpenMySpace && (
           <button className="ghost-button" type="button" onClick={props.onOpenMySpace}>
-            <Archive size={14} />
+            <Archive size={16} />
             个人空间
           </button>
         )}
@@ -180,7 +181,7 @@ export function AppTopbar(props: AppTopbarProps): ReactNode {
             onClick={props.onToggleAdmin}
             aria-pressed={props.adminActive}
           >
-            <Settings size={14} />
+            <Settings size={16} variant={props.adminActive ? 'fill' : 'line'} />
             {props.adminActive ? '退出管理' : '管理'}
           </button>
         )}
@@ -191,12 +192,12 @@ export function AppTopbar(props: AppTopbarProps): ReactNode {
             </span>
             <span className="topbar-username">{props.user.username}</span>
             <button className="ghost-button" type="button" onClick={props.onLogout}>
-              <LogOut size={14} />
+              <LogOut size={16} />
               退出
             </button>
           </span>
         )}
-      </div>
+      </FluidHoverList>
     </header>
   )
 }

@@ -29,7 +29,7 @@
  * title tooltip, still shown (pool honesty, not hidden).
  */
 import { useEffect, useRef, useState, type ReactNode } from 'react'
-import { ChevronUp } from 'lucide-react'
+import { ChevronUp } from '../../icons'
 import type { QuestionGroupCard, SimilarPassagesResponse } from '../../domain/questionBank'
 
 export type SimilarPassagesRequestState =

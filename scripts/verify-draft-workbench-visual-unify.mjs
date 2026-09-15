@@ -194,8 +194,12 @@ const hexMatches = [...cssSrcNoComments.matchAll(/#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]
 // pins. Re-pin #ffffff to L171 / L462 / L770.
 // ui-northstar 卷边: .draft-a4-sheet comment rewrite net -1 above the later
 // pins. Re-pin #ffffff to L171 / L461 / L769.
-// Shared desk palette/status refinement; the same three white text literals remain.
-const WHITELISTED_LINES = new Set([188, 478, 780])
+// Fluid-hover list declarations shift the latter two existing white text
+// literals; `.draft-version-toggle button { position: relative }` (+1 above
+// the first pin) then moves all three. Re-pin #ffffff to L189 / L482 / L785.
+// Segmented-toggle selected state (paper-white + Card hairline shadow, comment
+// +5 above the first pin). Re-pin #ffffff to L194 / L487 / L790.
+const WHITELISTED_LINES = new Set([194, 487, 790])
 
 const unexpectedHex = hexMatches.filter(
   (m) => !(m.value.toLowerCase() === '#ffffff' && WHITELISTED_LINES.has(m.line)),

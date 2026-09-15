@@ -1,4 +1,4 @@
-import { Tag } from 'lucide-react'
+import { Tag } from '../../icons'
 import type { BackfillTopicLabelsResult } from '../../services/questionGroups'
 import './adminWorkbench.css'
 

@@ -1,4 +1,4 @@
-import { Check, ChevronUp } from 'lucide-react'
+import { Check, ChevronUp } from '../../icons'
 import type { RefObject } from 'react'
 import type { VocabularyEntry, VocabularyProgram, VocabularyStage } from '../../domain/vocabulary'
 
@@ -162,7 +162,7 @@ export function VocabularyProgressExplorer({
                       onClick={() => onEntrySelect(entry.id)}
                     >
                       <span className="vocabulary-progress-word-order">
-                        {isProcessed ? <Check size={12} strokeWidth={2} aria-hidden="true" /> : order}
+                        {isProcessed ? <Check size={12} aria-hidden="true" /> : order}
                       </span>
                       <strong>{entry.headword}</strong>
                       {(isSelected || isCurrent) && (

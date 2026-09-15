@@ -14,7 +14,8 @@ import {
   type ReactNode,
 } from 'react'
 import { createPortal } from 'react-dom'
-import { MoreHorizontal } from 'lucide-react'
+import { Ellipsis } from '../icons'
+import { FluidHoverList } from '../components/FluidHoverList.tsx'
 
 export type ConciergeGroupRowMenuItem = {
   key: string
@@ -150,14 +151,16 @@ export function ConciergeGroupRowMenu(props: {
         aria-controls={open ? menuId : undefined}
         onClick={toggle}
       >
-        <MoreHorizontal size={16} strokeWidth={1.5} aria-hidden="true" />
+        <Ellipsis size={16} aria-hidden="true" />
       </button>
       {open &&
         createPortal(
-          <div
+          <FluidHoverList
+            as="div"
             ref={menuRef}
             id={menuId}
             className="concierge-group-row-menu"
+            itemSelector=".concierge-group-row-menuitem"
             role="menu"
             style={{ top: coords.top, right: coords.right }}
             onClick={(event) => event.stopPropagation()}
@@ -199,7 +202,7 @@ export function ConciergeGroupRowMenu(props: {
                 </button>
               ),
             )}
-          </div>,
+          </FluidHoverList>,
           document.body,
         )}
     </>

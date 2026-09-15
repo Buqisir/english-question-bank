@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown } from '../../icons'
 
 export type AnalysisDisclosureProps = {
   /**
