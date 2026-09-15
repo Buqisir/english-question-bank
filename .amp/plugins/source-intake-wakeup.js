@@ -119,7 +119,12 @@ export default async function sourceIntakeWakeupPlugin(amp) {
     return
   }
 
-  const agent = amp.getBuiltinAgent('medium')
+  const agent = amp.createAgent({
+    extends: 'medium',
+    model: 'xai/grok-4.6',
+    reasoningEffort: 'xhigh',
+    instructions: 'Use nck1_analyze_group for staged analyses. Do not switch to Auto, Medium, GPT, or another model on failure; report the blocker instead.',
+  })
   const registration = await amp.createWebhook({
     key: 'eqbank-source-intake-queued-v1',
     headers: ['x-eqbank-signature'],

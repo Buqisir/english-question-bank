@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs'
 
-const MODEL = 'openai/gpt-5.6-sol'
-const REASONING_EFFORT = 'medium'
+const MODEL = 'xai/grok-4.6'
+const REASONING_EFFORT = 'xhigh'
 const RESULT_SCHEMA_VERSION = 'nck1-analysis-agent-result-v1'
 const MAX_REQUEST_BYTES = 220_000
 const MAX_CONTRACT_CHARS = 80_000
@@ -53,7 +53,7 @@ const INPUT_KEYS = [
   'teachingDoctrine',
 ]
 
-export const description = 'Generates one bounded NCK1 staged analysis with a pinned GPT-5.6 Sol agent.'
+export const description = 'Generates one bounded NCK1 staged analysis with a pinned Grok 4.6 XHigh agent.'
 
 function isObject(value) {
   return Boolean(value) && typeof value === 'object' && !Array.isArray(value)
@@ -287,7 +287,7 @@ export default async function nck1AnalysisAgentPlugin(amp) {
       active: '正在生成单个题组解析',
       complete: '已生成单个题组解析',
     },
-    description: 'Generate exactly one NCK1 staged-analysis JSON object in a fresh pinned GPT-5.6 Sol medium context. Supply only the target source group, authoritative answers, its output contract, and the shared teaching doctrine. The tool never writes files, is safe to invoke concurrently for disjoint groups, and leaves validation and serial persistence to the paper coordinator.',
+    description: 'Generate exactly one NCK1 staged-analysis JSON object in a fresh pinned Grok 4.6 XHigh context. Supply only the target source group, authoritative answers, its output contract, and the shared teaching doctrine. The tool never writes files, is safe to invoke concurrently for disjoint groups, and leaves validation and serial persistence to the paper coordinator.',
     inputSchema: {
       type: 'object',
       additionalProperties: false,

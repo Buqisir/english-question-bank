@@ -145,8 +145,13 @@ try {
         return resumedThread
       },
     },
-    getBuiltinAgent(mode) {
-      assert.equal(mode, 'medium')
+    createAgent(config) {
+      assert.deepEqual(config, {
+        extends: 'medium',
+        model: 'xai/grok-4.6',
+        reasoningEffort: 'xhigh',
+        instructions: 'Use nck1_analyze_group for staged analyses. Do not switch to Auto, Medium, GPT, or another model on failure; report the blocker instead.',
+      })
       return {
         async createThread(options) {
           createCount += 1

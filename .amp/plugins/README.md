@@ -49,8 +49,8 @@ plugin, never reload the CI plugin to enable it. Verify with
 coordinator. It deliberately fixes one worker configuration instead of reusing
 one conversation:
 
-- model: `openai/gpt-5.6-sol`;
-- reasoning effort: `medium`;
+- model: `xai/grok-4.6`;
+- reasoning effort: `xhigh`;
 - tools: none;
 - context: one new child thread per invocation;
 - input: one source group, that group's authoritative answers, its tracked
@@ -76,6 +76,12 @@ after changing this boundary.
 `source-intake-wakeup.js` is the optional wakeup layer for the Owner source-intake queue.
 SQLite remains authoritative: a missed, duplicated, or delayed webhook cannot create a second
 active claim or a second bound worker.
+
+New coordinators explicitly use `xai/grok-4.6` with `xhigh` reasoning, inheriting
+Medium's orchestration prompt and tools, not its automatic model selection.
+Neither plugin implements a fallback model. Provider routing and subscription
+billing remain Amp-controlled and need a real-run usage check. Existing bound
+threads resume unchanged; this configuration applies to newly created workers.
 
 The plugin is inert by default. Activating it is a separate shared-state operation and requires
 current Owner approval. Enable it only in the dedicated owning Orb thread, not in every local Amp
