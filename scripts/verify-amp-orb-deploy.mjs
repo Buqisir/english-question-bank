@@ -4030,6 +4030,51 @@ assert(wrongCodeOnlyResult.output.failureCode === 'CODE_ONLY_REVIEW_MISMATCH'
   'code-only review mismatch fails before build or service changes')
 rmSync(wrongCodeOnly.root, { recursive: true, force: true })
 
+const defaultSystemdStopWindow = controllerFixture({ persistenceAuthorityChange: true })
+const originalSystemdStopRunner = defaultSystemdStopWindow.dependencies.runSystem
+let observedEqbStopTimeout = null
+defaultSystemdStopWindow.dependencies.runSystem = (command, args, options) => {
+  if (command === '/usr/bin/systemctl' && args[0] === 'stop' && args[1] === 'eqb') {
+    observedEqbStopTimeout = options.timeout
+    if (options.timeout <= 90_000) {
+      defaultSystemdStopWindow.state.systemCalls.push([command, ...args])
+      throw new Error('fixture systemctl stop outlived the controller timeout')
+    }
+  }
+  return originalSystemdStopRunner(command, args, options)
+}
+const defaultSystemdStopResult = await runController({
+  originalCommand: `deploy-reviewed-persistence ${newSha} ${reviewedDigest}`,
+  config: defaultSystemdStopWindow.config,
+  dependencies: defaultSystemdStopWindow.dependencies,
+})
+assert(observedEqbStopTimeout > 90_000
+  && defaultSystemdStopResult.exitCode === 0
+  && defaultSystemdStopResult.output.failureCode === null,
+  'controller service actions outlive the default systemd stop window')
+rmSync(defaultSystemdStopWindow.root, { recursive: true, force: true })
+
+const ordinaryRestartWindow = controllerFixture()
+const originalOrdinaryRestartRunner = ordinaryRestartWindow.dependencies.runSystem
+let observedEqbRestartTimeout = null
+ordinaryRestartWindow.dependencies.runSystem = (command, args, options) => {
+  if (command === '/usr/bin/systemctl' && args[0] === 'restart' && args[1] === 'eqb') {
+    observedEqbRestartTimeout = options.timeout
+    if (options.timeout <= 90_000) throw new Error('fixture restart outlived the controller timeout')
+  }
+  return originalOrdinaryRestartRunner(command, args, options)
+}
+const ordinaryRestartResult = await runController({
+  originalCommand: `deploy ${newSha}`,
+  config: ordinaryRestartWindow.config,
+  dependencies: ordinaryRestartWindow.dependencies,
+})
+assert(observedEqbRestartTimeout > 90_000
+  && ordinaryRestartResult.exitCode === 0
+  && ordinaryRestartResult.output.failureCode === null,
+  'ordinary restart shares the systemd operation window')
+rmSync(ordinaryRestartWindow.root, { recursive: true, force: true })
+
 const repeatedStopFailure = controllerFixture({ persistenceAuthorityChange: true })
 const originalStopRunner = repeatedStopFailure.dependencies.runSystem
 repeatedStopFailure.dependencies.runSystem = (command, args, options) => {
@@ -4051,6 +4096,35 @@ assert(repeatedStopFailure.currentSha() === oldSha
   && repeatedStopResult.output.failureCode === 'STOP_APP_FAILED',
 'incident regression: repeated stop failure cannot skip restoring previous app and Caddy')
 rmSync(repeatedStopFailure.root, { recursive: true, force: true })
+
+const failedStopAndStart = controllerFixture({ persistenceAuthorityChange: true })
+const originalFailedStopAndStartRunner = failedStopAndStart.dependencies.runSystem
+const failedServiceTimeouts = []
+failedStopAndStart.dependencies.runSystem = (command, args, options) => {
+  if (command === '/usr/bin/systemctl' && ['stop', 'start'].includes(args[0])) {
+    failedServiceTimeouts.push({ action: args[0], service: args[1], timeout: options.timeout })
+    if (args[1] === 'eqb') throw new Error(`fixture systemctl ${args[0]} failed`)
+  }
+  if (command === '/usr/bin/curl') throw new Error('fixture rollback health failed')
+  return originalFailedStopAndStartRunner(command, args, options)
+}
+const failedStopAndStartResult = await runController({
+  originalCommand: `deploy-reviewed-persistence ${newSha} ${reviewedDigest}`,
+  config: failedStopAndStart.config,
+  dependencies: failedStopAndStart.dependencies,
+})
+assert(failedStopAndStartResult.output.failureCode
+    === 'STOP_APP_FAILED__ROLLBACK_START_APP_HEALTH_FAILED'
+  && failedStopAndStartResult.output.rollbackHealthy === false
+  && Object.keys(failedStopAndStartResult.output.databaseSnapshots).length === 0
+  && failedStopAndStart.state.runtimeEnsures === undefined
+  && failedStopAndStart.currentSha() === oldSha
+  && failedServiceTimeouts.filter(({ service }) => service === 'eqb').length === 2
+  && failedServiceTimeouts.filter(({ service }) => service === 'eqb')
+    .every(({ timeout }) => timeout > 90_000)
+  && existsSync(path.join(failedStopAndStart.root, 'deployments/reviewed-persistence/active.json')),
+  'failed stop and rollback start retain pre-mutation recovery state without overlapping short deadlines')
+rmSync(failedStopAndStart.root, { recursive: true, force: true })
 
 const beforeEnsureFailure = controllerFixture({ persistenceAuthorityChange: true })
 const originalSnapshot = beforeEnsureFailure.dependencies.snapshotDatabase
