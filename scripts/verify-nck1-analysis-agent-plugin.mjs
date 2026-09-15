@@ -61,8 +61,8 @@ assert.deepEqual(NCK1_ANALYSIS_GROUPS, [
   'continuation',
   'listening-unit',
 ])
-assert.equal(NCK1_ANALYSIS_AGENT_MODEL, 'openai/gpt-5.6-sol')
-assert.equal(NCK1_ANALYSIS_AGENT_REASONING_EFFORT, 'medium')
+assert.equal(NCK1_ANALYSIS_AGENT_MODEL, 'xai/grok-4.6')
+assert.equal(NCK1_ANALYSIS_AGENT_REASONING_EFFORT, 'xhigh')
 
 const valid = request('reading-a', 'A-ONLY')
 const actualContinuationContract = [
@@ -177,6 +177,7 @@ const responses = [
   },
   { threadID: 'T-22222222-2222-4222-8222-222222222222', text: '{"marker":"C-ONLY"}' },
   { threadID: 'T-33333333-3333-4333-8333-333333333333', text: '```json\n{"marker":"bad"}\n```' },
+  new Error('Grok subscription unavailable'),
 ]
 
 await nck1AnalysisAgentPlugin({
@@ -185,7 +186,9 @@ await nck1AnalysisAgentPlugin({
     return {
       async run(prompt, options) {
         runs.push({ prompt, options })
-        return responses[runs.length - 1]
+        const response = responses[runs.length - 1]
+        if (response instanceof Error) throw response
+        return response
       },
     }
   },
@@ -196,8 +199,8 @@ await nck1AnalysisAgentPlugin({
 
 assert.deepEqual(agentConfig, {
   name: 'NCK1 staged analysis generator',
-  model: 'openai/gpt-5.6-sol',
-  reasoningEffort: 'medium',
+  model: 'xai/grok-4.6',
+  reasoningEffort: 'xhigh',
   tools: [],
   features: [],
   instructions: agentConfig.instructions,
@@ -224,14 +227,14 @@ const second = JSON.parse(await tool.execute(secondRequest, context))
 assert.deepEqual(first, {
   schemaVersion: 'nck1-analysis-agent-result-v1',
   group: 'reading-a',
-  model: 'openai/gpt-5.6-sol',
-  reasoningEffort: 'medium',
+  model: 'xai/grok-4.6',
+  reasoningEffort: 'xhigh',
   threadID: 'T-11111111-1111-4111-8111-111111111111',
   analysis: {
     marker: 'A-ONLY',
     meta: {
       generatedBy: 'external-ai',
-      model: 'openai/gpt-5.6-sol',
+      model: 'xai/grok-4.6',
       promptVersion: 'reading-choice-analysis-v1',
       reviewStatus: 'reviewed',
     },
@@ -262,8 +265,11 @@ await assert.rejects(
 )
 assert.equal(runs.length, 3)
 
+await assert.rejects(tool.execute(valid, context), /Grok subscription unavailable/u)
+assert.equal(runs.length, 4, 'A provider failure must propagate without retry or fallback')
+
 const writingWithoutMeta = { taskType: 'application', modelAnswer: 'Example.' }
 assert.equal(stampNck1AnalysisAgentMeta(writingWithoutMeta), writingWithoutMeta)
 assert.deepEqual(writingWithoutMeta, { taskType: 'application', modelAnswer: 'Example.' })
 
-console.log('PASS NCK1 one-shot analysis agent pins GPT-5.6 Sol medium and isolates one JSON group per run')
+console.log('PASS NCK1 one-shot analysis agent pins Grok 4.6 XHigh and isolates one JSON group per run')

@@ -69,7 +69,7 @@ answer/ID drift, repeated stock prose, and density that does not match the
 question's difficulty.
 
 Use the project-local `nck1_analyze_group` tool for each of those nine generation
-calls. It pins `openai/gpt-5.6-sol` at medium reasoning, disables worker tools,
+calls. It pins `xai/grok-4.6` at xhigh reasoning, disables worker tools,
 and creates a fresh child context for every call. Pass exactly one `group`, one
 matching `sourceGroup`, that group's `authoritativeAnswers`, the relevant
 tracked `outputContract`, and the shared `teachingDoctrine`; never put the full
@@ -80,7 +80,7 @@ staged file. For Grammar Fill, first run the exported
 `stampGrammarFillDerivedFields` normalizer so the source-owned tense, voice,
 agreement, and answer-form fields exist before validation; do not ask the model
 to supply them. Do not silently switch models, reuse a child thread, or add an
-automatic High retry when generation fails.
+automatic model fallback when generation fails. Report the blocker instead.
 
 Dispatch independent `nck1_analyze_group` calls with a maximum concurrency of
 four. Calls may run concurrently because they read disjoint source groups and
