@@ -124,6 +124,14 @@ try {
 
   console.log(`\nfile-save-as verify passed: ${result.length + sourceContracts.length} checks`)
 } finally {
-  await browser?.close()
-  await vite.close()
+  // In-process Vite/Chromium teardown occasionally never resolves (CI run
+  // 35021013253 hung here for 90 min after every check passed). Bound it and
+  // exit explicitly; a failed check has already thrown out of the try body,
+  // so this only ever turns a finished pass into a clean exit 0.
+  const teardown = (async () => {
+    await browser?.close()
+    await vite.close()
+  })()
+  await Promise.race([teardown, new Promise((resolve) => setTimeout(resolve, 10_000))])
 }
+process.exit(0)
