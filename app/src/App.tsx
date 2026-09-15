@@ -13,7 +13,12 @@ import {
 import { usePaperDraft } from './paperAssembly/usePaperDraft'
 import type { PaperDraftEditReason } from './paperAssembly/paperDraftModel'
 import { ConciergeDesk } from './concierge/ConciergeDesk'
-import { readRecentlyOpened, recordRecentlyOpened, type RecentlyOpenedEntry } from './concierge/recentlyOpened.ts'
+import {
+  RECENTLY_OPENED_OPEN_SCOPE,
+  readRecentlyOpened,
+  recordRecentlyOpened,
+  type RecentlyOpenedEntry,
+} from './concierge/recentlyOpened.ts'
 import { parsePaperIdFromHref } from './concierge/paperSurfaceHref'
 import { useConciergeDesk } from './concierge/useConciergeDesk'
 import { usePaperExports } from './paperAssembly/usePaperExports'
@@ -201,7 +206,10 @@ function App() {
   const [backfillError, setBackfillError] = useState('')
   const [aiThinkingMode, setAiThinkingMode] = useState(() => localStorage.getItem('ai-thinking-mode') === 'on')
   // 首页是归来 — the teacher's own trail of opened passages (localStorage only).
-  const [recentlyOpened, setRecentlyOpened] = useState<RecentlyOpenedEntry[]>(() => readRecentlyOpened())
+  // Scoped by user id so a shared browser never shows another teacher's trail;
+  // `currentUser` is fixed for App's lifetime (AuthGate remounts on logout).
+  const recentlyOpenedScope = currentUser?.id ?? RECENTLY_OPENED_OPEN_SCOPE
+  const [recentlyOpened, setRecentlyOpened] = useState<RecentlyOpenedEntry[]>(() => readRecentlyOpened(recentlyOpenedScope))
   const conciergeDesk = useConciergeDesk({
     questionGroups,
     apiKey: aiApiKey,
@@ -370,7 +378,7 @@ function App() {
       }
     }
     aiRunIdRef.current += 1
-    setRecentlyOpened(recordRecentlyOpened(id))
+    setRecentlyOpened(recordRecentlyOpened(recentlyOpenedScope, id))
     setViewMode('detail')
     setDetailStatus('loading')
     setDetailError('')

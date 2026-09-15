@@ -7,8 +7,18 @@
 
 export type RecentlyOpenedEntry = { id: string; at: string }
 
-export const RECENTLY_OPENED_STORAGE_KEY = 'eqb-recent-groups'
+/**
+ * Storage key prefix; the full key is namespaced by the signed-in user's id so
+ * two teachers sharing one browser never see each other's trail. Bootstrap-open
+ * mode (no accounts yet) uses the fixed scope `open`.
+ */
+export const RECENTLY_OPENED_STORAGE_KEY_PREFIX = 'eqb-recent-groups'
+export const RECENTLY_OPENED_OPEN_SCOPE = 'open'
 const RECENTLY_OPENED_CAP = 12
+
+export function recentlyOpenedStorageKey(userScope: string): string {
+  return `${RECENTLY_OPENED_STORAGE_KEY_PREFIX}:${userScope}`
+}
 
 function storage(): Storage | null {
   try {
@@ -18,11 +28,11 @@ function storage(): Storage | null {
   }
 }
 
-export function readRecentlyOpened(): RecentlyOpenedEntry[] {
+export function readRecentlyOpened(userScope: string): RecentlyOpenedEntry[] {
   const store = storage()
   if (!store) return []
   try {
-    const parsed: unknown = JSON.parse(store.getItem(RECENTLY_OPENED_STORAGE_KEY) ?? '[]')
+    const parsed: unknown = JSON.parse(store.getItem(recentlyOpenedStorageKey(userScope)) ?? '[]')
     if (!Array.isArray(parsed)) return []
     return parsed.filter(
       (entry): entry is RecentlyOpenedEntry =>
@@ -36,15 +46,15 @@ export function readRecentlyOpened(): RecentlyOpenedEntry[] {
 }
 
 /** Move `id` to the front with a fresh timestamp and return the new list. */
-export function recordRecentlyOpened(id: string, now = new Date()): RecentlyOpenedEntry[] {
+export function recordRecentlyOpened(userScope: string, id: string, now = new Date()): RecentlyOpenedEntry[] {
   const next = [
     { id, at: now.toISOString() },
-    ...readRecentlyOpened().filter((entry) => entry.id !== id),
+    ...readRecentlyOpened(userScope).filter((entry) => entry.id !== id),
   ].slice(0, RECENTLY_OPENED_CAP)
   const store = storage()
   if (store) {
     try {
-      store.setItem(RECENTLY_OPENED_STORAGE_KEY, JSON.stringify(next))
+      store.setItem(recentlyOpenedStorageKey(userScope), JSON.stringify(next))
     } catch {
       // Quota / private-mode failures only lose the trail, never the view.
     }

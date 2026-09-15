@@ -894,6 +894,7 @@
 .paper-browse-lecture-panel .pi-ps-analysis-evidence blockquote,
 .paper-browse-lecture-panel .pi-ps-analysis-distractor-quote {
   padding: var(--eqb-space-2) var(--eqb-space-3);
+  border-left: 0;
   border-radius: 4px;
   background: color-mix(in srgb, var(--eqb-color-desk) 55%, transparent);
 }

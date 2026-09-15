@@ -2102,13 +2102,12 @@ assert(
   'the bounded active-question corners, rail reset, or question-number emphasis is missing',
 )
 assert(
-  '84. lecture evidence keeps semantic quote bars/washes and aligns a selected socket with the dashed connector endpoint',
-  /\.pi-ps-analysis-evidence--selected blockquote\s*\{[^}]*border-left-color:\s*rgba\(var\(--eqb-color-success-rgb\),\s*0\.7\)/s.test(lectureAnalysisCssSrc) &&
-    /\.pi-ps-analysis-distractor--selected \.pi-ps-analysis-distractor-quote\s*\{[^}]*border-left-color:\s*rgba\(var\(--eqb-color-warning-rgb\),\s*0\.7\)/s.test(lectureAnalysisCssSrc) &&
+  '84. lecture evidence removes quote side bars, keeps semantic washes, and aligns a selected socket with the dashed connector endpoint',
+  /\.paper-browse-lecture-panel \.pi-ps-analysis-evidence blockquote,\s*\n\.paper-browse-lecture-panel \.pi-ps-analysis-distractor-quote\s*\{[^}]*border-left:\s*0[^}]*border-radius:\s*4px/s.test(pageCssSrc) &&
     /\.paper-browse-lecture-panel \.pi-ps-analysis-evidence--selected::before,\s*\n\.paper-browse-lecture-panel \.pi-ps-analysis-distractor--selected::before\s*\{[^}]*top:\s*50%[^}]*left:\s*0[^}]*width:\s*8px[^}]*height:\s*8px[^}]*border:\s*2px solid var\(--eqb-color-paper\)[^}]*transform:\s*translate\(-50%, -50%\)/s.test(pageCssSrc) &&
     /\.paper-browse-lecture-panel \[data-pi-evidence-kind='support'\]\[aria-pressed='true'\]::before\s*\{[^}]*background:\s*var\(--eqb-color-success\)/s.test(pageCssSrc) &&
     /\.paper-browse-lecture-panel \[data-pi-evidence-kind='trap'\]\[aria-pressed='true'\]::before\s*\{[^}]*background:\s*var\(--eqb-color-warning\)/s.test(pageCssSrc),
-  'the semantic quote bars, selected connector socket, or semantic socket colors are missing',
+  'the quote-bar removal, selected connector socket, or semantic socket colors are missing',
 )
 assert(
   '85. the similar CTA uses the shared EQB icon system instead of an Emoji glyph',
