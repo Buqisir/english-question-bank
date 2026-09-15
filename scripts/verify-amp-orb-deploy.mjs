@@ -3529,8 +3529,9 @@ function controllerFixture({
       return statSync(path.join(root, 'shared')).uid
     },
     chown() {},
-    runRuntime() {
+    runRuntime(command, args, options) {
       state.runtimeEnsures = (state.runtimeEnsures || 0) + 1
+      state.runtimeEnsureInvocation = { command, args, options }
       if (state.mutateDatabasesOnEnsure && state.runtimeEnsures === 1) {
         for (const name of ['question-bank.sqlite', 'user-data.sqlite', 'import-ops.sqlite']) {
           writeFileSync(path.join(root, 'shared', 'data', name), `${name}:migrated\n`)
@@ -4167,6 +4168,76 @@ assert(
     && Object.keys(reviewedSuccessResult.output.databaseSnapshots).length === 3,
   'reviewed-persistence deploy runs import-ops owners twice and verifies all three snapshots',
 )
+const ensureInvocation = reviewedSuccess.state.runtimeEnsureInvocation
+const ensureRelease = path.join(reviewedSuccess.root, 'releases', newSha)
+const ensureMarker = path.join(reviewedSuccess.root, 'ensure-calls')
+for (const directory of ['server/import-review', 'server/source-intake']) {
+  mkdirSync(path.join(ensureRelease, directory), { recursive: true })
+}
+for (const relative of [
+  'server/import-review/importReviewStore.mjs',
+  'server/source-intake/sourceIntakeStore.mjs',
+]) {
+  writeFileSync(
+    path.join(ensureRelease, relative),
+    `import { appendFileSync } from 'node:fs'
+export function ${relative.includes('importReview') ? 'createImportReviewStore' : 'createSourceIntakeStore'}() { appendFileSync(process.env.ENSURE_MARKER, 'called\\n') }
+`,
+  )
+}
+const ensureEnvironment = {
+  ...process.env,
+  ENSURE_MARKER: ensureMarker,
+  QUESTION_BANK_DB: path.join(reviewedSuccess.root, 'shared/data/question-bank.sqlite'),
+  USER_DATA_DB: path.join(reviewedSuccess.root, 'shared/data/user-data.sqlite'),
+  QUESTION_BANK_IMPORT_OPS_DB: path.join(reviewedSuccess.root, 'shared/data/import-ops.sqlite'),
+}
+const runCapturedEnsure = (env) => spawnSync(process.execPath, ensureInvocation.args, {
+  cwd: ensureInvocation.options.cwd,
+  encoding: 'utf8',
+  env,
+})
+const aliasedEnsure = runCapturedEnsure(ensureEnvironment)
+assert(
+  ensureInvocation.command === '/usr/bin/node'
+    && ensureInvocation.options.cwd === ensureRelease
+    && aliasedEnsure.status === 0
+    && readFileSync(ensureMarker, 'utf8') === 'called\ncalled\n',
+  'offline ensure executes from the selected release and accepts shared-data aliases',
+)
+writeFileSync(ensureMarker, '')
+const defaultEnvironment = { ...ensureEnvironment }
+delete defaultEnvironment.QUESTION_BANK_DB
+delete defaultEnvironment.USER_DATA_DB
+delete defaultEnvironment.QUESTION_BANK_IMPORT_OPS_DB
+const defaultEnsure = runCapturedEnsure(defaultEnvironment)
+assert(
+  defaultEnsure.status === 0 && readFileSync(ensureMarker, 'utf8') === 'called\ncalled\n',
+  'offline ensure accepts the release database defaults',
+)
+for (const variable of [
+  'QUESTION_BANK_DB',
+  'USER_DATA_DB',
+  'QUESTION_BANK_IMPORT_OPS_DB',
+]) {
+  writeFileSync(ensureMarker, '')
+  const outside = path.join(reviewedSuccess.root, `${variable}.sqlite`)
+  writeFileSync(outside, '')
+  const rejectedEnsure = runCapturedEnsure({ ...ensureEnvironment, [variable]: outside })
+  assert(
+    rejectedEnsure.status !== 0 && readFileSync(ensureMarker, 'utf8') === '',
+    `offline ensure rejects ${variable} outside shared data before opening a store`,
+  )
+}
+writeFileSync(ensureMarker, '')
+const missingEnsure = runCapturedEnsure({
+  ...ensureEnvironment,
+  QUESTION_BANK_IMPORT_OPS_DB: path.join(reviewedSuccess.root, 'missing.sqlite'),
+})
+assert(
+  missingEnsure.status !== 0 && readFileSync(ensureMarker, 'utf8') === '',
+  'offline ensure rejects a missing database override before opening a store',
+)
 rmSync(reviewedSuccess.root, { recursive: true, force: true })
 
 const wrongReviewedDigest = controllerFixture({ persistenceAuthorityChange: true })
@@ -4603,6 +4674,12 @@ const maintenanceInstallerSource = readText(ROOT, 'deploy/install-eqb-maintenanc
 const maintenanceInspectorSource = readText(ROOT, 'deploy/inspect-eqb-maintenance-host.sh')
 const deployLibrarySource = readText(ROOT, 'scripts/lib/ampOrbDeploy.mjs')
 const tencentTatSource = readText(ROOT, 'scripts/lib/tencentTat.mjs')
+assert(
+  controllerSource.includes(
+    'realpathSync(value || fallback) !== realpathSync(fallback)',
+  ) && controllerSource.includes('cwd: options.cwd,'),
+  'offline persistence ensure resolves shared database identity from the selected release',
+)
 const exactMaintenanceTatCommand = buildMaintenanceReadinessTatCommand({
   inspectorSource: maintenanceInspectorSource,
   targetSha: newSha,

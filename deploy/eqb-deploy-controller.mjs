@@ -242,6 +242,7 @@ function switchCurrent(config, sha) {
 
 function defaultRun(command, args, options = {}) {
   return execFileSync(command, args, {
+    cwd: options.cwd,
     encoding: options.encoding ?? 'utf8',
     stdio: options.stdio,
     timeout: options.timeout,
@@ -919,6 +920,7 @@ function restoreDatabaseSnapshots(config, dependencies, snapshots) {
 function runImportOpsPersistenceEnsures(config, dependencies, sha) {
   const release = readReleaseMarker(config, sha).directory
   const script = `
+    import { realpathSync } from 'node:fs'
     import path from 'node:path'
     import { createImportReviewStore } from './server/import-review/importReviewStore.mjs'
     import { createSourceIntakeStore } from './server/source-intake/sourceIntakeStore.mjs'
@@ -930,7 +932,7 @@ function runImportOpsPersistenceEnsures(config, dependencies, sha) {
       [process.env.USER_DATA_DB, path.join(root, 'data/user-data.sqlite')],
       [process.env.QUESTION_BANK_IMPORT_OPS_DB, dbPath],
     ]
-    if (configured.some(([value, fallback]) => path.resolve(value || fallback) !== fallback)) {
+    if (configured.some(([value, fallback]) => realpathSync(value || fallback) !== realpathSync(fallback))) {
       throw new Error('Production database override is outside the reviewed shared-data contract')
     }
     createImportReviewStore({ dbPath, filesRoot, rendererBuildId: 'deployment-maintenance' })
