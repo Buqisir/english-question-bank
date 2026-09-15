@@ -21,6 +21,7 @@ import {
 } from './lib/verificationCommandRunner.mjs'
 import {
   createOrderedResultFlusher,
+  createVerificationProgress,
   runVerificationSchedule,
   verificationSchedulingPolicy,
 } from './lib/verificationScheduler.mjs'
@@ -620,16 +621,25 @@ const flushResult = createOrderedResultFlusher((_index, result) => {
 })
 let results = []
 let scheduleFailure = null
+const progress = createVerificationProgress({ emit: (line) => console.log(line) })
+const heartbeat = setInterval(() => progress.snapshot(), 30_000)
+heartbeat.unref()
+const reportInterrupt = () => progress.snapshot('interrupted')
+abortController.signal.addEventListener('abort', reportInterrupt, { once: true })
 try {
   results = await runVerificationSchedule(scheduledScripts, {
     concurrency,
     signal: abortController.signal,
+    onStart: progress.start,
     async run(item, index) {
       const logPath = path.join(logRoot, `${String(index).padStart(3, '0')}.log`)
       const logFd = openSync(logPath, 'wx', 0o600)
       let status
       try {
-        const writeLog = (chunk) => writeSync(logFd, chunk)
+        const writeLog = (chunk) => {
+          progress.output(index, chunk)
+          writeSync(logFd, chunk)
+        }
         status = await runVerificationCommand(process.execPath, [item.script], {
           abortSignal: abortController.signal,
           cwd: rootDir,
@@ -641,11 +651,17 @@ try {
       }
       return { script: item.script, status, logPath }
     },
-    onSettled: flushResult,
+    onSettled(index, result) {
+      progress.settled(index, result.status)
+      return flushResult(index, result)
+    },
   })
 } catch (error) {
   scheduleFailure = error
+  progress.snapshot('scheduler-error')
 } finally {
+  clearInterval(heartbeat)
+  abortController.signal.removeEventListener('abort', reportInterrupt)
   rmSync(logRoot, { force: true, recursive: true })
 }
 if (scheduleFailure) {

@@ -1,3 +1,32 @@
+// Observability only: never changes admission, cancellation, or result status.
+export function createVerificationProgress({ emit, now = () => performance.now() }) {
+  const active = new Map()
+  // Child tails are data, including legacy/current Actions command syntax.
+  const report = (event, details) => emit(`VERIFY PROGRESS ${JSON.stringify({ event, ...details })
+    .replaceAll('::', '\\u003a\\u003a').replaceAll('##[', '\\u0023\\u0023[')}`)
+  return {
+    start(item, index) {
+      active.set(index, { script: item.script, resources: item.resourceKeys, exclusive: item.exclusive,
+        startedAt: now(), tail: '' })
+      report('start', { index, script: item.script })
+    },
+    output(index, chunk) {
+      const task = active.get(index)
+      if (task) task.tail = (task.tail + chunk).slice(-2048)
+    },
+    settled(index, status) {
+      const task = active.get(index)
+      report('settled', { index, script: task.script, status, elapsedMs: Math.round(now() - task.startedAt) })
+      active.delete(index)
+    },
+    snapshot(event = 'heartbeat') {
+      report(event, { active: [...active].map(([index, { startedAt, ...task }]) => ({
+        index, ...task, elapsedMs: Math.round(now() - startedAt),
+      })) })
+    },
+  }
+}
+
 function abortError(signal) {
   const error = new Error(`Verification schedule aborted${signal?.reason ? `: ${signal.reason}` : ''}`)
   error.name = 'AbortError'
