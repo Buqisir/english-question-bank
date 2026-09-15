@@ -179,15 +179,44 @@ export function useFluidHover<C extends HTMLElement>(options: FluidHoverOptions)
     if (insideRef.current && activeRef.current !== null) paint(activeRef.current, shownRef.current)
   }, [measure, paint])
 
+  /**
+   * A hidden highlight keeps its last box while it fades out in place, but a
+   * transparent box still counts as scrollable overflow — after a viewport
+   * shrink it can poke past the now-narrower container and widen the page.
+   * So once the fade has ended (or the container resizes while the pointer is
+   * away) the box collapses to nothing, without a transition.
+   */
+  const collapse = useCallback(() => {
+    const container = containerRef.current
+    if (!container || shownRef.current) return
+    container.setAttribute(FRESH_ATTR, '')
+    container.style.setProperty('--fh-x', '0px')
+    container.style.setProperty('--fh-y', '0px')
+    container.style.setProperty('--fh-w', '0px')
+    container.style.setProperty('--fh-h', '0px')
+    void getComputedStyle(container, '::before').transform
+    container.removeAttribute(FRESH_ATTR)
+  }, [])
+
   useEffect(() => {
     const container = containerRef.current
-    if (!container || typeof ResizeObserver === 'undefined') return
-    const observer = new ResizeObserver(() => {
-      if (insideRef.current) remeasure()
-    })
-    observer.observe(container)
-    return () => observer.disconnect()
-  }, [remeasure])
+    if (!container) return
+    const onTransitionEnd = (event: TransitionEvent) => {
+      if (event.target === container && event.pseudoElement === '::before' && event.propertyName === 'opacity') collapse()
+    }
+    container.addEventListener('transitionend', onTransitionEnd)
+    const observer = typeof ResizeObserver === 'undefined'
+      ? null
+      : new ResizeObserver(() => {
+        if (insideRef.current) remeasure()
+        else collapse()
+      })
+    observer?.observe(container)
+    return () => {
+      container.removeEventListener('transitionend', onTransitionEnd)
+      observer?.disconnect()
+    }
+  }, [remeasure, collapse])
 
   useEffect(() => () => {
     const active = activeRef.current
