@@ -46,7 +46,7 @@ jobs:
           if [ "$GITHUB_EVENT_NAME" = pull_request ] && git cat-file -e "$BASE_SHA:scripts/ci-pr-plan.mjs"; then
             trusted="$RUNNER_TEMP/eqb-ci-policy"
             git worktree add --detach "$trusted" "$BASE_SHA"
-            node "$trusted/scripts/ci-pr-plan.mjs" "$GITHUB_WORKSPACE" "$BASE_SHA" "$HEAD_SHA" "$GITHUB_SHA" > "$plan"
+            node "$trusted/scripts/ci-pr-plan.mjs" "$GITHUB_WORKSPACE" "$BASE_SHA" "$HEAD_SHA" "$GITHUB_SHA" "$GITHUB_EVENT_PATH" > "$plan"
             git worktree remove "$trusted"
           else
             # Main and the first rollout PR always run Full. Never bootstrap trust from candidate policy.
@@ -55,8 +55,12 @@ jobs:
           pack=$(jq -er '.pack' "$plan")
           case "$pack" in all|ui|feature|paper-data|import-paper) ;; *) echo "Invalid trusted pack"; exit 1 ;; esac
           echo "pack=$pack" >> "$GITHUB_OUTPUT"
-          cat "$plan"
           { echo '## Verification plan'; echo '```json'; cat "$plan"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          if [ "$GITHUB_EVENT_NAME" = pull_request ]; then
+            { echo '## Risk Agent selection'; echo '```json';
+              jq '{actualPack: .pack, classifierPack: .classifierPack, decision: .reason, advice: (.agentAdvice // {status: "unavailable-on-base"})}' "$plan"
+              echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          fi
       - name: Enable pinned pnpm
         run: |
           corepack enable

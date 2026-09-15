@@ -42,6 +42,44 @@ receives a best-effort terminal hint and rechecks before an already-authorized
 ordinary merge. Read/append failure cannot fail CI or trigger another execution.
 Transport remains best-effort across process loss; it is not a durable CI queue.
 
+### Agent selects within the trusted Full boundaries
+
+The existing Ship Agent writes one `eqb-risk-plan` JSON block in the PR body
+with exact `head`, `base`, existing `pack` and a bounded single-line `reason`.
+The base planner reads only the natural event file and first applies the existing
+classifier's hard boundaries. A classified Full cannot be reduced by advice.
+Otherwise valid advice selects one existing pack; missing, invalid, duplicate,
+stale or unreadable advice selects Full. Scripts come from the base registry,
+not from PR body text. No LLM runs in Actions. All six E2Es remain mandatory;
+main always runs Full. No labels, queues, services, Secrets or new writer exist.
+The Agent cannot override paper/security, auth/isolation/persistence/schema,
+shared rendering/pagination, CI/dependencies/setup/deploy, protected or unknown
+changes. Client auth/domain contracts also belong to the security boundary.
+An old base without the parser retains its earlier policy during rollout;
+this high-risk implementation PR still requires Full.
+See `.agents/ship.md` for the exact format and job-summary location.
+
+This is direct selection, not shadow. The trust decision is explicit: existing
+PR writers/reviewers may choose coverage outside the hard boundaries. Binding
+head/base prevents stale advice, not mistaken semantic judgment. Body edits do
+not rewrite a natural event snapshot. Selected test failure remains failure;
+do not switch packs to hide it. Summaries are untrusted data and stay out of
+runner stdout to prevent Actions command interpretation.
+
+Seed analysis below is retrospective, not evidence that those event snapshots
+contained advice. No body was backfilled and no CI was triggered for analysis.
+
+| Sample | Exact reviewed head / base | Current route and Agent recommendation | Evidence and reasoning |
+| --- | --- | --- | --- |
+| [#462](https://github.com/Buqisir/english-question-bank/pull/462) | `b8acb4cc50aa8c9656c8c1e2c143c28e32036263` / `39b45af651541b9dbde46558267767136c5458ce` | actual `all`; recommend `all` | [Natural run 34843405616](https://github.com/Buqisir/english-question-bank/actions/runs/34843405616) recorded `protected-path`, 178 PASS / 2 SKIP / 0 FAIL. This was not isolated CSS: product/design rules, draft/Paper views, directory metadata and `server/api.mjs` changed. Shared behavior and policy keep Full. Verify 30m14s + E2E 6m10s = 36m24s job time, not billed dollars. |
+| [#465](https://github.com/Buqisir/english-question-bank/pull/465) | `427351f6d6f7e50c6184f1ad0bd116755914857d` / `fbd08b8782d73af7a633739197be2f5031ef37ad` | protected-path requires `all`; recommend `all` | Model/effort and no-fallback changes include both staged-analysis and webhook-created coordinator plugins plus their tests. Although semantically narrow, plugin/coordination and agent rules remain protected. [Natural run 34929688844](https://github.com/Buqisir/english-question-bank/actions/runs/34929688844) was still running at analysis; no final result or savings inferred. |
+
+Observe five subsequent real PRs without extra test executions. Compare exact
+identities, actual/advised packs, reasons, failures and existing job durations.
+These two high-risk seeds do not demonstrate reduced-path savings or prove the
+Agent cannot omit coverage. Expanding the hard boundaries or weakening checks
+still requires a separate reviewed Owner decision.
+
 ## Why
 
 The dedicated Orb lost its private execution state after executor replacement.
