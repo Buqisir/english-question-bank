@@ -496,8 +496,12 @@ console.log('\n-- 9. Regression: dimension words are not rendered as topic conte
 // ------------------------------------------------------------------------
 console.log('\n-- 10. Display layer shows topic-label leaf, not the full path --')
 
+// 2026-09-15: the leaf-label helper moved to passageText.ts (shared by the
+// group card and the home rows); the card still consumes buildTopicText.
+const passageTextSource = read('app/src/concierge/passageText.ts')
 const groupCardSource = read('app/src/concierge/ConciergeGroupCard.tsx')
-assert('ConciergeGroupCard derives a topic leaf label (not the raw full path)', groupCardSource.includes('topicLeafLabel'))
+assert('passageText derives a topic leaf label (not the raw full path)', passageTextSource.includes('topicLeafLabel'))
+assert('ConciergeGroupCard consumes buildTopicText', groupCardSource.includes('buildTopicText(group)'))
 const paperRowSource = read('app/src/concierge/ConciergePaperRow.tsx')
 assert('ConciergePaperRow builds topic chips from matched groups', paperRowSource.includes('buildTopicChips'))
 

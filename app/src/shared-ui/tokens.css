@@ -24,10 +24,12 @@
   --eqb-color-primary-deep: #1e4a3a;
   --eqb-color-danger: #dc2626;
   --eqb-color-danger-soft: rgba(239, 68, 68, 0.08);
-  --eqb-color-warning: #d97706;
-  --eqb-color-warning-soft: rgba(245, 158, 11, 0.08);
-  --eqb-color-success: #059669;
-  --eqb-color-success-soft: rgba(16, 185, 129, 0.08);
+  --eqb-color-warning: #E8901A;
+  --eqb-color-warning-soft: rgba(232, 144, 26, 0.10);
+  --eqb-color-warning-rgb: 232, 144, 26; /* 供 rgba() alpha 叠层复用；不单独当色值使用 */
+  --eqb-color-success: #1FA062;
+  --eqb-color-success-soft: rgba(31, 160, 98, 0.10);
+  --eqb-color-success-rgb: 31, 160, 98; /* 供 rgba() alpha 叠层复用；不单独当色值使用 */
   --eqb-shadow-floating: 0 8px 24px rgba(0, 0, 0, 0.12);
 
   --eqb-font-size-xs: 12px;

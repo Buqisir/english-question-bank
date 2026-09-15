@@ -1,4 +1,4 @@
-import { Check, X } from 'lucide-react'
+import { Check, X } from '../../icons'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { VocabularyHandwritingMode } from '../../services/vocabulary'
 

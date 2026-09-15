@@ -93,6 +93,7 @@
 }
 
 .dictation-workbench-tabs {
+  --fh-radius: 0;
   display: flex;
   min-width: 0;
   flex: 1;
@@ -100,6 +101,7 @@
 }
 
 .dictation-workbench-tabs button {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -114,7 +116,7 @@
   font-weight: 500;
 }
 
-.dictation-workbench-tabs button:hover,
+.dictation-workbench-tabs button[data-fluid-hover-active],
 .dictation-workbench-tabs button.is-active {
   color: var(--eqb-color-text);
 }
@@ -243,6 +245,7 @@
 }
 
 .dictation-set-row {
+  position: relative;
   display: grid;
   grid-template-columns: 22px 28px minmax(0, 1fr) auto;
   align-items: center;
@@ -255,10 +258,6 @@
 
 .dictation-set-row:last-child {
   border-bottom: 0;
-}
-
-.dictation-set-row:hover {
-  background: var(--eqb-color-desk);
 }
 
 .dictation-set-row.is-selected {
@@ -719,6 +718,10 @@
   transform: rotate(180deg);
 }
 
+.dictation-download-items {
+  --fh-radius: 6px;
+}
+
 .dictation-download-menu > div {
   position: absolute;
   z-index: 20;
@@ -734,6 +737,21 @@
   border-radius: 8px;
   background: var(--eqb-color-paper);
   box-shadow: var(--eqb-shadow-floating);
+}
+
+.dictation-download-option,
+.dictation-download-action {
+  position: relative;
+}
+
+.dictation-download-items .dictation-download-option button,
+.dictation-download-items > .dictation-download-action {
+  background: transparent;
+}
+
+.dictation-download-menu > .dictation-download-items button:hover {
+  border-color: transparent;
+  background: transparent;
 }
 
 .dictation-created-results .dictation-download-menu > div,

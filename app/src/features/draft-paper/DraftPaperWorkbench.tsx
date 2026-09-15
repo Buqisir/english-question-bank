@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import { Archive, ArrowDown, ArrowLeftRight, ArrowUp, FileDown, FolderPlus, MoreHorizontal, Printer, RotateCcw, Save, SeparatorHorizontal, Trash2 } from 'lucide-react'
+import { Archive, ArrowDown, ArrowLeftRight, ArrowUp, Ellipsis, FolderPlus, PageBreak, PaperCheck, PaperStudent, Printer, RotateCcw, Save, Trash } from '../../icons'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
+import { FluidHoverList } from '../../components/FluidHoverList'
 import type { DraftPaper, DraftPaperItem, DraftPaperSummary, DraftPrintForm, GroupType, MySpaceFolder, QuestionGroupCard } from '../../domain/questionBank'
 import {
   addGroupToDraftPaper,
@@ -1371,7 +1372,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // both places, just two visibility-toggled mounts of the identical control,
   // so there is exactly one source of truth for versionType/printForm state.
   const versionToggleControl = (
-    <div className="draft-version-toggle" role="group" aria-label="导出版本">
+    <FluidHoverList as="div" axis="x" className="draft-version-toggle" itemSelector="button" role="group" aria-label="导出版本">
       <button
         type="button"
         className={versionType === 'student' ? 'active' : ''}
@@ -1388,11 +1389,11 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       >
         教师版
       </button>
-    </div>
+    </FluidHoverList>
   )
 
   const formToggleControl = (
-    <div className="draft-version-toggle draft-form-toggle" role="group" aria-label="打印形态">
+    <FluidHoverList as="div" axis="x" className="draft-version-toggle draft-form-toggle" itemSelector="button" role="group" aria-label="打印形态">
       <button
         type="button"
         className={draftPaper.printForm === 'a4' ? 'active' : ''}
@@ -1409,7 +1410,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       >
         A3 对折
       </button>
-    </div>
+    </FluidHoverList>
   )
 
   const exportMenuControl = (
@@ -1424,7 +1425,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
         导出
       </button>
       {exportMenuPresence.mounted && (
-        <div className="draft-export-menu-panel" role="menu" data-visible={exportMenuPresence.visible}>
+        <FluidHoverList as="div" axis="y" className="draft-export-menu-panel" itemSelector="button" role="menu" data-visible={exportMenuPresence.visible}>
           <button
             type="button"
             role="menuitem"
@@ -1434,13 +1435,13 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
               void exportPdf()
             }}
           >
-            <FileDown size={15} /> 下载 PDF（{versionType === 'teacher' ? '教师版' : '学生版'}）
+            {versionType === 'teacher' ? <PaperCheck size={15} /> : <PaperStudent size={15} />} 下载 PDF（{versionType === 'teacher' ? '教师版' : '学生版'}）
           </button>
           {versionType === 'student' && <button type="button" role="menuitem" disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'} onClick={() => { setExportMenuOpen(false); void exportPdf('download', 'friendly8') }}>
-            <FileDown size={15} /> 8 页友好版（无听力）
+            <PaperStudent size={15} /> 8 页友好版（无听力）
           </button>}
           {versionType === 'student' && <button type="button" role="menuitem" disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'} onClick={() => { setExportMenuOpen(false); void exportPdf('download', 'friendly10') }}>
-            <FileDown size={15} /> 10 页友好版（含听力）
+            <PaperStudent size={15} /> 10 页友好版（含听力）
           </button>}
           <button
             type="button"
@@ -1475,7 +1476,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           >
             <Archive size={15} /> 保存 PDF 到个人空间
           </button>
-        </div>
+        </FluidHoverList>
       )}
     </div>
   )
@@ -1512,7 +1513,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
               title={saveStatus === 'error' ? `保存出错：${saveError}` : '学生 / 最近草稿卷'}
               onClick={() => setMoreMenuOpen((open) => !open)}
             >
-              <MoreHorizontal size={16} />
+              <Ellipsis size={16} />
             </button>
             {moreMenuPresence.mounted && (
               <div className="draft-more-menu-panel" role="menu" data-visible={moreMenuPresence.visible}>
@@ -1763,7 +1764,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                       aria-controls={`draft-group-actions-${item.id}`}
                       onClick={() => setOpenGroupActionsItemId((openId) => openId === item.id ? null : item.id)}
                     >
-                      <MoreHorizontal size={16} aria-hidden="true" />
+                      <Ellipsis size={16} aria-hidden="true" />
                     </button>
                     {openGroupActionsItemId === item.id && (
                       <div
@@ -1803,7 +1804,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                               void togglePageBreak(item, !item.pageBreakBefore)
                             }}
                           >
-                            <SeparatorHorizontal size={14} aria-hidden="true" />
+                            <PageBreak size={14} aria-hidden="true" />
                             {item.pageBreakBefore ? '取消分页' : '前置分页'}
                           </button>
                         )}
@@ -1815,7 +1816,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                             void deleteItem(item)
                           }}
                         >
-                          <Trash2 size={14} aria-hidden="true" />
+                          <Trash size={14} aria-hidden="true" />
                           移除
                         </button>
                       </div>

@@ -1,5 +1,6 @@
-import { ArrowDown, ArrowUp, GripVertical, Trash2 } from 'lucide-react'
+import { ArrowDown, ArrowUp, Grip, Trash } from '../../icons'
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
+import { FluidHoverList } from '../../components/FluidHoverList'
 import { groupTypeLabel, type DraftPaperItem, type QuestionGroupCard } from '../../domain/questionBank'
 import { PointingHand } from '../paper-browse/PointingHand'
 import type { SimilarPassagesRequestState } from '../similar-passages/SimilarPassagesPanel'
@@ -205,7 +206,13 @@ export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
   return (
     <nav className="draft-paper-rail" aria-label="卷面目录">
       {metaText && <p className="draft-paper-rail-meta">{metaText}</p>}
-      <div className="draft-paper-rail-panel" ref={panelRef}>
+      <FluidHoverList
+        as="div"
+        axis="y"
+        className="draft-paper-rail-panel"
+        itemSelector=".draft-paper-rail-item"
+        ref={panelRef}
+      >
       {handTop !== null && (
         <span className="draft-paper-rail-hand" style={{ top: `${handTop}px` }}>
           <PointingHand size={HAND_SIZE} />
@@ -240,7 +247,7 @@ export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
             <span className="draft-paper-rail-label">{label}</span>
             {/* ui-northstar: 拖拽把手移到行尾——它 hover 前不可见但仍占位，
                 留在行首会把小手和标题顶开一格。 */}
-            <GripVertical aria-hidden="true" className="draft-paper-rail-grip" size={13} />
+            <Grip aria-hidden="true" className="draft-paper-rail-grip" size={13} />
             {/* draft-desk-a scope note: the plan retires per-item action buttons from
                 the rail in favor of the paper-hover sticker (裁点1) — but a groupMissing
                 item never renders in the paper (server/draft-paper/draftPaperStore.mjs's
@@ -282,7 +289,7 @@ export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
                   title="移除"
                   type="button"
                 >
-                  <Trash2 size={12} />
+                  <Trash size={12} />
                 </button>
               </span>
             )}
@@ -290,7 +297,7 @@ export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
         )
       })}
       {items.length === 0 && <p className="draft-paper-rail-empty">从搜索结果添加题组。</p>}
-      </div>
+      </FluidHoverList>
     </nav>
   )
 }

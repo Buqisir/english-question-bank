@@ -462,10 +462,11 @@ button.ps-paper-blank.ps-paper-blank--clickable {
  * styling lives entirely in CSS and PaperSurface stays dumb — no PI
  * types leak in, no `data-pi-*` is emitted.
  *
- * Visual contract:
- *   - support: subtle mint background + solid mint underline. Reads
- *     as "answer evidence" — the historical default before C3.6.
- *   - trap:    subtle amber background + dotted amber underline.
+ * Visual contract（「色留量减」；下列字面量镜像 tokens.css 的
+ * `--eqb-color-success` / `--eqb-color-warning`，本共享层不消费 UI token）：
+ *   - support: 10% green wash + 1.5px solid green underline. Reads
+ *     as "answer evidence".
+ *   - trap:    10% amber wash + 1.5px dotted amber underline.
  *     Reads as "attention / misleading source". Amber is chosen
  *     deliberately over red: the source text on the page is
  *     confusable, not wrong, so we avoid the "you got it wrong" red
@@ -493,13 +494,13 @@ button.ps-paper-blank.ps-paper-blank--clickable {
 }
 
 .ps-evidence-anchor--active[data-paper-evidence-kind="support"] {
-  background: rgba(16, 185, 129, 0.18);
-  border-bottom: 2px solid rgba(16, 185, 129, 0.6);
+  background: rgba(31, 160, 98, 0.10);
+  border-bottom: 1.5px solid rgba(31, 160, 98, 0.7);
 }
 
 .ps-evidence-anchor--active[data-paper-evidence-kind="trap"] {
-  background: rgba(245, 158, 11, 0.18);
-  border-bottom: 2px dotted rgba(245, 158, 11, 0.75);
+  background: rgba(232, 144, 26, 0.10);
+  border-bottom: 1.5px dotted rgba(232, 144, 26, 0.8);
 }
 
 /* ─── Annotation anchors (neutral, invisible in B3) ────────────── */

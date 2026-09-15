@@ -7,6 +7,7 @@
     "api": "node ../server/api.mjs",
     "dev": "sh ../scripts/dev.sh",
     "dev:vite": "vite",
+    "icons:generate": "node ../scripts/generate-eqb-icons.mjs",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>讲评面板原型 · 2026-09-15</title>
+<link rel="stylesheet" href="/app/public/fonts/paper/fonts.css" />
+<link rel="stylesheet" href="/app/src/index.css" />
+<link rel="stylesheet" href="/app/src/App.css" />
+<link rel="stylesheet" href="/app/src/shared-ui/papersurface/PaperSurface.css" />
+<link rel="stylesheet" href="/app/src/features/paper-intelligence/paperIntelligence.css" />
+<link rel="stylesheet" href="/app/src/features/paper-browse/paperBrowsePage.css" />
+<link rel="stylesheet" href="./proto.css" />
+</head>
+<body class="proto-c">
+<div class="proto-bar">
+  <span class="proto-bar-title">讲评面板 · Reading B · 24</span>
+  <div class="proto-switch" role="radiogroup" aria-label="方案">
+    <button type="button" data-mode="now">现状</button>
+    <button type="button" data-mode="a">方案 A · 全墨</button>
+    <button type="button" data-mode="c" aria-checked="true">方案 C · 色留量减</button>
+  </div>
+  <span class="proto-bar-hint">点选项行 A / B 切换展开；点证据句切换连线。</span>
+</div>
+<div class="paper-browse-shell paper-browse-shell--lecture-open proto-shell">
+  <div class="paper-browse-content proto-content" style="--ps-font-stack: "EQB Termes", "EQB Source Han Serif", serif; --ps-font-stack-zh: "EQB Termes", "EQB Source Han Serif", serif; --ps-font-stack-heading: "EQB Termes", "EQB Source Han Serif", serif; --ps-font-size: 14px; --ps-line-height: 1.714; --ps-section-heading-font-stack: "EQB Termes", "EQB Source Han Serif", serif; --ps-section-heading-font-size: 14px; --ps-section-heading-line-height: 24px; ">
+    <div class="paper-browse-zoom proto-zoom">
+      <section class="paper-browse-group-card proto-card">
+      <div class="ps-surface proto-surface" style="--ps-font-stack: &quot;EQB Termes&quot;, &quot;EQB Source Han Serif&quot;, serif; --ps-ink: #111111; --ps-muted: #555555; --ps-rule: #d9d9d9; --ps-font-size: 14px; --ps-line-height: 1.714; --ps-seven-baseline-step: 24px; --ps-cloze-baseline-step: 24px; --ps-grammar-fill-baseline-step: 24px; --ps-grammar-fill-prompt-gap: 0.5em; --ps-reading-visible-weight: 400; --ps-cloze-visible-weight: 400; --ps-cloze-label-to-text-gap: 0.411765em; --ps-passage-indent: 2em; --ps-options-grid-columns: 1fr 1fr; --ps-options-grid-gap-x: 2em; --ps-paper-blank-width: 4.6em; --ps-page-margin-x: 91px; --ps-page-margin-top: 79px;">
+      <article class="ps-page proto-page">
+        <div class="ps-canonical-reading">
+          <p class="ps-canonical-reading-paragraph">Later, after spotting bear tracks, we were told to make loud noises, which soon became a game once the tension faded.</p>
+          <p class="ps-canonical-reading-paragraph" data-canonical-block-id="para-mock-sz-2026-m1-reading-b-3" data-canonical-block-kind="paragraph" data-canonical-reading-role="body" data-canonical-reading-rhythm-role="passage_body_line"><span data-canonical-content-node-id="text:para-mock-sz-2026-m1-reading-b-3:2">On one hike, I found myself hanging onto a wire on a bridge made of two partly rotten (腐烂的) logs, suspended high above rushing rapids. I would never have attempted it without our guide ahead, mouthing encouraging words. <mark class="ps-evidence-anchor ps-evidence-anchor--active" data-paper-evidence-id="q-mock-sz-2026-m1-024-support-1" data-paper-browse-evidence-line-anchor="q-mock-sz-2026-m1-024-support-1" data-paper-evidence-kind="support">Fixing my eyes on her boots, <mark class="ps-evidence-anchor" data-paper-evidence-id="q-mock-sz-2026-m1-024-trap-b" data-paper-evidence-kind="trap">I inched along the shaky logs</mark></mark>. Somehow, I made it across, flooded with a rush of intense excitement and huge relief.</span></p>
+          <p class="ps-canonical-reading-paragraph">Until suddenly, time stood still.</p>
+        </div>
+        <ol class="ps-question-list">
+          <li class="ps-question ps-question--active" data-paper-question-id="q-mock-sz-2026-m1-024" data-canonical-question-id="q-mock-sz-2026-m1-024" data-canonical-reading-rhythm-role="question_block"><button type="button" class="ps-question-stem-button" aria-pressed="true" aria-label="Focus question 24" style="display: grid; grid-template-columns: 17.3pt minmax(0px, 1fr); column-gap: 0px;"><span class="ps-question-no">24.</span><span class="ps-question-stem" data-canonical-reading-rhythm-role="question_stem_line"><span data-canonical-content-node-id="text:q-mock-sz-2026-m1-024:stem">How did the author cross the bridge?</span></span></button><ol class="ps-option-list ps-option-list--canonical ps-option-list--two_by_two ps-option-list--stem-aligned" data-canonical-placement-signature="sha256:adb2de7d80654c8d2b9a44c4753d6bb476cb58c4aea7d330a446599c544481ee" data-canonical-column-starts-pt="0,208" data-canonical-question-stem-start-pt="17.3" style="width: 438.2pt; margin-left: 17.3pt; grid-template-columns: 208pt 230.2pt; gap: 0px;"><li class="ps-option" data-paper-option-label="A" data-canonical-option-id="option:q-mock-sz-2026-m1-024:A" data-canonical-reading-rhythm-role="option_line" data-canonical-start-pt="0"><span class="ps-option-label">A.</span><span class="ps-option-text"><span data-canonical-content-node-id="text:group-mock-sz-2026-m1-reading-b:q-mock-sz-2026-m1-024:option:A">By taking mindful steps.</span></span></li><li class="ps-option" data-paper-option-label="B" data-canonical-option-id="option:q-mock-sz-2026-m1-024:B" data-canonical-reading-rhythm-role="option_line" data-canonical-start-pt="208"><span class="ps-option-label">B.</span><span class="ps-option-text"><span data-canonical-content-node-id="text:group-mock-sz-2026-m1-reading-b:q-mock-sz-2026-m1-024:option:B">By rushing across it bravely.</span></span></li><li class="ps-option" data-paper-option-label="C" data-canonical-option-id="option:q-mock-sz-2026-m1-024:C" data-canonical-reading-rhythm-role="option_line" data-canonical-start-pt="0"><span class="ps-option-label">C.</span><span class="ps-option-text"><span data-canonical-content-node-id="text:group-mock-sz-2026-m1-reading-b:q-mock-sz-2026-m1-024:option:C">By using her sense of direction.</span></span></li><li class="ps-option" data-paper-option-label="D" data-canonical-option-id="option:q-mock-sz-2026-m1-024:D" data-canonical-reading-rhythm-role="option_line" data-canonical-reading-predecessor-question-id="q-mock-sz-2026-m1-024" data-canonical-reading-predecessor-option-id="option:q-mock-sz-2026-m1-024:D" data-canonical-start-pt="208"><span class="ps-option-label">D.</span><span class="ps-option-text"><span data-canonical-content-node-id="text:group-mock-sz-2026-m1-reading-b:q-mock-sz-2026-m1-024:option:D">By having the guide drag her over.</span></span></li></ol></li>
+        </ol>
+      </article>
+      </div>
+      </section>
+    </div>
+  </div>
+  <svg class="pi-line-overlay proto-line" aria-hidden="true"><path class="pi-line-path" d="" /></svg>
+  <aside class="paper-browse-lecture-panel" aria-label="讲评"><div class="paper-browse-lecture-body"><h4 class="paper-browse-lecture-title">Reading B<span class="paper-browse-lecture-range"> · 24-27</span></h4><p class="paper-browse-answer-row">24. A　25. C　26. B　27. A</p><div class="paper-browse-lecture-analysis"><div class="pi-ps-analysis" data-pi-question-id="q-mock-sz-2026-m1-024"><details class="pi-reading-group-overview"><summary class="pi-reading-group-overview-summary">文章简介</summary><p class="pi-reading-group-overview-text">记叙文。七十多岁的作者与友人荒野徒步，先后克服恐高、遇熊与怕老，向导的赞赏让她感到仍被看见。</p></details><div class="pi-ps-analysis-header"><span class="pi-ps-analysis-qno">24</span><span class="pi-ps-analysis-type">细节理解</span><span class="pi-ps-analysis-answer">答案 A</span></div><div class="pi-ps-analysis-stem"><p>How did the author cross the bridge?</p><p class="pi-ps-analysis-stem-zh">作者是怎样过桥的？</p></div><ul class="fluid-hover-list pi-ps-analysis-options pi-ps-analysis-options--accordion" data-fluid-hover-axis="y"><li class="pi-ps-analysis-option-section pi-ps-analysis-option-section--correct pi-ps-analysis-option-section--active" data-pi-option-label="A"><button type="button" class="pi-ps-analysis-option-row" aria-expanded="true" aria-pressed="true"><span class="pi-ps-analysis-option-label">A.</span><span class="pi-ps-analysis-option-body"><span class="pi-ps-analysis-option-content">By taking mindful steps.</span><span class="pi-ps-analysis-option-zh">靠留心的一步步挪动。</span></span><span class="pi-ps-analysis-option-badge pi-ps-analysis-option-badge--correct"><svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" xmlns="http://www.w3.org/2000/svg"><path d="m4 12.75 4.75 4.75L20 6.5"></path></svg></span></button><div class="pi-ps-analysis-option-detail"><h4>答案依据</h4><button type="button" class="pi-ps-analysis-evidence pi-ps-analysis-evidence--selected" data-pi-evidence-id="q-mock-sz-2026-m1-024-support-1" data-pi-evidence-kind="support" data-pi-question-id="q-mock-sz-2026-m1-024" aria-pressed="true"><blockquote>Fixing my eyes on her boots, I inched along the shaky logs</blockquote></button><div class="pi-ps-analysis-synonym"><h4>定位关系 / 同义替换</h4><ul class="pi-ps-analysis-paraphrases"><li><span>taking mindful steps</span><span aria-hidden="true"> → </span><strong>Fixing my eyes on her boots, I inched along the shaky logs</strong><p>mindful steps 对应盯靴、inch along 的小心挪步。</p></li></ul></div></div></li><li class="pi-ps-analysis-option-section pi-ps-analysis-option-section--wrong" data-pi-option-label="B"><button type="button" class="pi-ps-analysis-option-row" aria-expanded="false" aria-pressed="false"><span class="pi-ps-analysis-option-label">B.</span><span class="pi-ps-analysis-option-body"><span class="pi-ps-analysis-option-content">By rushing across it bravely.</span><span class="pi-ps-analysis-option-zh">勇敢地冲过去。</span></span><span class="pi-ps-analysis-option-badge pi-ps-analysis-option-badge--trap">黑白颠倒</span></button><div class="pi-ps-analysis-option-detail"><h4>干扰解析</h4><div class="pi-ps-analysis-trap-meta"><span>细分：动作相反</span></div><p class="pi-ps-analysis-explanation">原文是一点点挪，不是冲过去。</p><button type="button" class="pi-ps-analysis-distractor" data-pi-evidence-id="q-mock-sz-2026-m1-024-trap-b-1" data-pi-evidence-kind="trap" data-pi-question-id="q-mock-sz-2026-m1-024" aria-pressed="false"><blockquote class="pi-ps-analysis-distractor-quote">I inched along the shaky logs</blockquote></button></div></li><li class="pi-ps-analysis-option-section pi-ps-analysis-option-section--wrong" data-pi-option-label="C"><button type="button" class="pi-ps-analysis-option-row" aria-expanded="false" aria-pressed="false"><span class="pi-ps-analysis-option-label">C.</span><span class="pi-ps-analysis-option-body"><span class="pi-ps-analysis-option-content">By using her sense of direction.</span><span class="pi-ps-analysis-option-zh">靠方向感。</span></span><span class="pi-ps-analysis-option-badge pi-ps-analysis-option-badge--trap">无中生有</span></button></li><li class="pi-ps-analysis-option-section pi-ps-analysis-option-section--wrong" data-pi-option-label="D"><button type="button" class="pi-ps-analysis-option-row" aria-expanded="false" aria-pressed="false"><span class="pi-ps-analysis-option-label">D.</span><span class="pi-ps-analysis-option-body"><span class="pi-ps-analysis-option-content">By having the guide drag her over.</span><span class="pi-ps-analysis-option-zh">被向导拖过去。</span></span><span class="pi-ps-analysis-option-badge pi-ps-analysis-option-badge--trap">对象错配</span></button></li></ul><div class="pi-ps-analysis-question-focus"><h4>考点</h4><p>考查作者如何过桥，需定位盯靴慢挪的动作。</p></div></div></div><div class="similar-cta"><button type="button" class="similar-btn similar-btn--primary"><svg aria-hidden="true" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" xmlns="http://www.w3.org/2000/svg"><path d="M4.48 9.26A8 8 0 0 1 18.93 8.00"></path><path d="M14.25 8.82L18.93 8.00L19.75 3.32"></path><path d="M19.52 14.74A8 8 0 0 1 5.07 16.00"></path><path d="M9.75 15.18L5.07 16.00L4.25 20.68"></path></svg>配相似</button><span class="similar-cta-why">——从库里配同配方的相似题</span></div></div></aside>
+</div>
+<script>
+(() => {
+  const body = document.body
+  for (const b of document.querySelectorAll('.proto-switch button')) {
+    b.addEventListener('click', () => {
+      body.className = 'proto-' + b.dataset.mode
+      for (const o of document.querySelectorAll('.proto-switch button')) o.setAttribute('aria-checked', String(o === b))
+    })
+  }
+  const sections = [...document.querySelectorAll('.pi-ps-analysis-option-section')]
+  const evidences = [...document.querySelectorAll('[data-pi-evidence-id]')]
+  const marks = [...document.querySelectorAll('.ps-evidence-anchor')]
+  const path = document.querySelector('.proto-line path')
+  const overlay = document.querySelector('.proto-line')
+
+  function selectEvidence(btn) {
+    for (const e of evidences) {
+      const on = e === btn
+      e.setAttribute('aria-pressed', String(on))
+      e.classList.toggle('pi-ps-analysis-evidence--selected', on && e.dataset.piEvidenceKind === 'support')
+      e.classList.toggle('pi-ps-analysis-distractor--selected', on && e.dataset.piEvidenceKind === 'trap')
+    }
+    const kind = btn.dataset.piEvidenceKind
+    path.setAttribute('data-pi-evidence-kind', kind)
+    for (const m of marks) {
+      const on = m.dataset.paperEvidenceKind === kind
+      m.classList.toggle('ps-evidence-anchor--active', on)
+    }
+    requestAnimationFrame(drawLine)
+  }
+
+  function drawLine() {
+    const btn = evidences.find((e) => e.getAttribute('aria-pressed') === 'true')
+    const mark = marks.find((m) => m.classList.contains('ps-evidence-anchor--active'))
+    if (!btn || !mark) { overlay.dataset.empty = 'true'; return }
+    overlay.dataset.empty = 'false'
+    const o = overlay.getBoundingClientRect()
+    const b = btn.getBoundingClientRect()
+    const rects = mark.getClientRects()
+    const m = rects[rects.length - 1]
+    const x1 = m.right - o.left, y1 = m.top - o.top + m.height / 2
+    const x2 = b.left - o.left, y2 = b.top - o.top + b.height / 2
+    const c = (x2 - x1) * 0.5
+    path.setAttribute('d', 'M' + x1 + ' ' + y1 + ' C' + (x1 + c) + ' ' + y1 + ' ' + (x2 - c) + ' ' + y2 + ' ' + x2 + ' ' + y2)
+  }
+
+  for (const s of sections) {
+    s.querySelector('.pi-ps-analysis-option-row').addEventListener('click', () => {
+      const wasActive = s.classList.contains('pi-ps-analysis-option-section--active')
+      for (const x of sections) {
+        const on = x === s && !wasActive
+        x.classList.toggle('pi-ps-analysis-option-section--active', on)
+        x.querySelector('.pi-ps-analysis-option-row').setAttribute('aria-expanded', String(on))
+        x.querySelector('.pi-ps-analysis-option-row').setAttribute('aria-pressed', String(on))
+      }
+      const first = s.querySelector('[data-pi-evidence-id]')
+      if (!wasActive && first) selectEvidence(first)
+      else requestAnimationFrame(drawLine)
+    })
+  }
+  for (const e of evidences) e.addEventListener('click', () => selectEvidence(e))
+  window.addEventListener('resize', drawLine)
+  document.fonts.ready.then(drawLine)
+  drawLine()
+})()
+</script>
+</body>
+</html>

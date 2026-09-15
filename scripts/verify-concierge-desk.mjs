@@ -277,6 +277,8 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
   const hookSource = readFileSync(path.join(srcRoot, 'concierge', 'useConciergeDesk.ts'), 'utf8')
   const paperRowSource = readFileSync(path.join(srcRoot, 'concierge', 'ConciergePaperRow.tsx'), 'utf8')
   const groupCardSource = readFileSync(path.join(srcRoot, 'concierge', 'ConciergeGroupCard.tsx'), 'utf8')
+  // 2026-09-15: compactPassageTitle & friends moved to passageText.ts (shared with home rows).
+  const passageTextSource = readFileSync(path.join(srcRoot, 'concierge', 'passageText.ts'), 'utf8')
   const rowMenuSource = readFileSync(path.join(srcRoot, 'concierge', 'ConciergeGroupRowMenu.tsx'), 'utf8')
   const appSource = readFileSync(path.join(srcRoot, 'App.tsx'), 'utf8')
   const aggSource = readFileSync(path.join(srcRoot, 'concierge', 'aggregatePaperResults.ts'), 'utf8')
@@ -467,8 +469,8 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
   assert('Group directory no longer renders per-group question counts',
     !groupCardSource.includes('group.questionCount') && !groupCardSource.includes('concierge-group-row-count'), '')
   assert('Reading labels use stored passage identity rather than result position',
-    groupCardSource.includes('[group.section, group.passageTitle, group.title]')
-      && groupCardSource.includes('`${match[1].toUpperCase()}篇`'), '')
+    passageTextSource.includes('[group.section, group.passageTitle, group.title]')
+      && passageTextSource.includes('`${match[1].toUpperCase()}篇`'), '')
   assert('Group card has C8 draft labels', /已在草稿卷中/.test(groupCardSource) && /加入草稿卷/.test(groupCardSource) && /暂不可组卷/.test(groupCardSource), '')
   assert('Group card draft + titles switch add/remove', /加入当前草稿卷/.test(groupCardSource) && /从草稿卷移出/.test(groupCardSource), '')
   assert('Group card aria-pressed follows joined draft state', /aria-pressed=\{draftState === ['"]in_current_draft['"]\}/.test(groupCardSource), '')
@@ -770,8 +772,12 @@ console.log('\nTest 14: Paper row hover + clickable + 草稿卷 wording in App')
   // --motion-*/--ease-* tokens (docs/cuts/motion-pass/plan.md #2); assert the
   // token form on the same background+box-shadow pair, still no transform.
   assert('paper-row has soft transition (no transform)', /transition:\s*background\s*var\(--motion-fast\)\s*var\(--ease-hover\),\s*box-shadow\s*var\(--motion-fast\)\s*var\(--ease-hover\)/.test(paperRowRule), `got: ${paperRowRule}`)
-  const hoverRule = css.match(/\.concierge-paper-row:hover[\s\S]{0,240}background:\s*var\(--desk-hover\)/)?.[0] || ''
-  assert('paper-row hover uses desk hover surface', /background:\s*var\(--desk-hover\)/.test(hoverRule), '')
+  // Fluid hover (2026-09-15): the row's hover surface is the shared
+  // .fluid-hover-list::before highlight (desk-hover), not a per-row :hover;
+  // keyboard focus keeps the per-row surface.
+  assert('fluid hover highlight uses desk hover surface', /\.fluid-hover-list::before \{[\s\S]{0,400}background:\s*var\(--desk-hover/.test(css), '')
+  assert('paper-row focus keeps desk hover surface', /\.concierge-paper-row:focus-within \.concierge-paper-row-head,\s*\.concierge-paper-row:focus-visible \.concierge-paper-row-head \{\s*background:\s*var\(--desk-hover\)/.test(css), '')
+  assert('paper-row no longer paints its own :hover surface', !/\.concierge-paper-row:hover \.concierge-paper-row-head/.test(css), '')
   assert(
     'expanded paper header stays on desk hover surface',
     /\.concierge-paper-row\.is-expanded[\s\S]{0,120}\.concierge-paper-row-head[\s\S]{0,200}background:\s*var\(--desk-hover\)/.test(css),
@@ -967,10 +973,10 @@ console.log('\nTest 23: C4 筛选进 URL — Desk reads f.* on mount, writes bac
 }
 
 // ------------------------------------------------------------------ Test 21
-// C5 卷名结巴 fix — stripLeadingYearToken / buildHeadline changes live in
-// ConciergePaperRow.tsx (JSX), which this hermetic node script cannot import
-// directly (no .tsx type-stripping loader here — see the other source-scan
-// tests in this file for the same constraint). We inline-reproduce the two
+// C5 卷名结巴 fix — stripLeadingYearToken / paperHeadline now live in
+// concierge/paperHeadline.ts (moved out of ConciergePaperRow.tsx on
+// 2026-09-15 so the home rows can share them); this hermetic node script
+// still does not type-strip .ts imports. We inline-reproduce the two
 // pure functions byte-for-byte from the component source and run them here,
 // so a future edit to either function must be applied in both places or this
 // test drifts and fails loudly — same contract as Test 20's copy-in-verify
@@ -979,7 +985,7 @@ console.log('\nTest 21: C5 卷名结巴 fix — stripLeadingYearToken month form
 {
   const here = path.dirname(new URL(import.meta.url).pathname)
   const paperRowSource = readFileSync(
-    path.resolve(here, '..', 'app', 'src', 'concierge', 'ConciergePaperRow.tsx'),
+    path.resolve(here, '..', 'app', 'src', 'concierge', 'paperHeadline.ts'),
     'utf8',
   )
 

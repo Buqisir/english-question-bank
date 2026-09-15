@@ -45,6 +45,7 @@
   --paper-desk-bg: var(--eqb-color-bg);
   --paper-ink: #4a4438; /* 暖纸系正文/次级墨色（rail 项、答案行）；工具页正文仍用 --ink */
   --paper-ink-rgb: 74, 68, 56; /* 与 --paper-ink 同值，供 rgba() alpha 叠层复用；不单独当色值使用 */
+  --paper-ink-muted: #6f6a60; /* 暖纸系弱墨：讲评栏译文、题型、答案行、小节标；工具页弱墨仍用 --muted */
   --paper-ink-strong: #2c2820; /* 暖纸系强调墨色（标题、选中态）；工具页强调仍用墨绿 --accent */
   --paper-ink-strong-rgb: 44, 40, 32; /* 与 --paper-ink-strong 同值；不单独当色值使用 */
   --paper-border: #e6e2d7; /* 暖纸系边线（讲评栏面板边）；工具页边线仍用 --line */

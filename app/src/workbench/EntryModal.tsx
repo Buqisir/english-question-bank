@@ -1,4 +1,4 @@
-import { Plus, Trash2, X } from 'lucide-react'
+import { Plus, Trash, X } from '../icons'
 import type { FormEvent } from 'react'
 import { useState } from 'react'
 import {
@@ -411,7 +411,7 @@ export function EntryModal({ open, mode, initialDetail, onClose, onSaved }: Entr
                     onClick={() => removeEntryQuestion(index)}
                     aria-label={`删除小题 ${index + 1}`}
                   >
-                    <Trash2 size={15} />
+                    <Trash size={15} />
                   </button>
                 </div>
 

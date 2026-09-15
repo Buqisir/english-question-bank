@@ -5,9 +5,10 @@ import {
   Pause,
   Play,
   RotateCcw,
-  Volume2,
-} from 'lucide-react'
+  Volume,
+} from '../../icons'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { FluidHoverList } from '../../components/FluidHoverList'
 import type { PublicVocabularyEntry, PublicVocabularySet } from '../../domain/vocabulary'
 import { getPublicVocabularySet, VocabularyApiError } from '../../services/vocabulary'
 import {
@@ -49,7 +50,7 @@ function LoadState({ kind, onRetry }: { kind: 'loading' | 'missing' | 'revoked' 
   return (
     <main className="vocabulary-listen-message" aria-live="polite">
       <div>
-        <ListMusic size={30} strokeWidth={1.5} aria-hidden="true" />
+        <ListMusic size={30} aria-hidden="true" />
         <h1>{content.title}</h1>
         <p>{content.detail}</p>
         {(kind === 'error' || kind === 'loading') && kind !== 'loading' && (
@@ -397,7 +398,7 @@ export function VocabularyListenPage({ shareId }: { shareId: string }) {
               ))}
             </fieldset>
             <label>
-              <Volume2 size={17} aria-hidden="true" />
+              <Volume size={17} aria-hidden="true" />
               <span className="visually-hidden">音量</span>
               <input type="range" min="0" max="1" step="0.05" value={volume} onChange={(event) => setVolume(Number(event.target.value))} aria-label="播放音量" />
             </label>
@@ -409,18 +410,18 @@ export function VocabularyListenPage({ shareId }: { shareId: string }) {
             <h2 id="vocabulary-list-title">完整词表</h2>
             <span>点一个词即可切换</span>
           </div>
-          <ol>
+          <FluidHoverList as="ul" axis="y" itemSelector="button">
             {entries.map((entry, index) => (
               <li key={entry.id}>
                 <button type="button" className={index === currentIndex ? 'is-current' : undefined} onClick={() => selectWord(index)} aria-current={index === currentIndex ? 'true' : undefined}>
                   <span>{index + 1}</span>
                   <strong>{entry.headword}</strong>
                   <small>{entry.teachingSense}</small>
-                  {index === currentIndex && <Volume2 size={16} aria-label="当前单词" />}
+                  {index === currentIndex && <Volume size={16} aria-label="当前单词" />}
                 </button>
               </li>
             ))}
-          </ol>
+          </FluidHoverList>
         </section>
       </main>
 

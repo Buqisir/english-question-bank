@@ -135,6 +135,7 @@
 }
 
 .draft-version-toggle {
+  --fh-radius: 6px;
   background: transparent;
   border: 0;
   display: inline-flex;
@@ -148,6 +149,7 @@
 }
 
 .draft-version-toggle button {
+  position: relative;
   background: transparent;
   border: none;
   border-radius: 6px;
@@ -162,14 +164,18 @@
   transition: background var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
 }
 
-.draft-version-toggle button:hover:not(.active) {
-  background: var(--surface-strong);
+.draft-version-toggle button[data-fluid-hover-active]:not(.active) {
   color: var(--ink);
 }
 
-/* Selection stays legible without competing with the primary export action. */
+/* Selection stays legible without competing with the primary export action.
+   Paper-white + Card-tier hairline shadow (DESIGN.md Shadow Vocabulary): the
+   chosen segment sits *on* the desk, while fluid hover tints the desk *under*
+   a segment — opposite directions, so hovering a neighbour never reads as a
+   second selection. */
 .draft-version-toggle button.active {
-  background: var(--surface-strong);
+  background: var(--eqb-color-paper);
+  box-shadow: 0 0 0 1px rgba(30, 30, 28, 0.05), 0 1px 2px rgba(30, 30, 28, 0.06);
   color: var(--ink);
   font-weight: 500;
 }
@@ -209,6 +215,7 @@
    覆盖成 motion-fast）。Origin sits at the trigger's right edge (panel is
    right-anchored via `right: 0`). */
 .draft-export-menu-panel {
+  --fh-radius: 6px;
   opacity: 0;
   transform: translateY(-2px) scale(0.98);
   transition: opacity var(--motion-micro) var(--ease-out), transform var(--motion-micro) var(--ease-out);
@@ -236,6 +243,8 @@
 }
 
 .draft-export-menu-panel button {
+  background: transparent;
+  position: relative;
   min-width: 132px;
   width: 100%;
 }
@@ -640,6 +649,7 @@
    把手放在 .paper-browse-rail-panel 里，同一构造）。padding-left 给手留位，
    不然选中项左边会把手裁掉。 */
 .draft-paper-rail-panel {
+  --fh-radius: 0;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -690,7 +700,7 @@
   transition: color var(--motion-fast) var(--ease-hover);
 }
 
-.draft-paper-rail-item:hover {
+.draft-paper-rail-item[data-fluid-hover-active] {
   color: var(--ink);
 }
 
@@ -725,7 +735,7 @@
   transform: translateY(-50%);
 }
 
-.draft-paper-rail-item:hover .draft-paper-rail-grip,
+.draft-paper-rail-item[data-fluid-hover-active] .draft-paper-rail-grip,
 .draft-paper-rail-item:focus-within .draft-paper-rail-grip {
   opacity: 1;
   pointer-events: auto;

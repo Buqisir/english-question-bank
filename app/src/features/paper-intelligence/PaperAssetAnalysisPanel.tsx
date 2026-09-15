@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
-import { Check } from 'lucide-react'
+import { Check } from '../../icons'
+import { FluidHoverList } from '../../components/FluidHoverList'
 import type { PaperAssetQuestionAnalysisView } from './paperAssetSurfaceAdapter.ts'
 import { ObjectiveTeachingContent } from './ObjectiveTeachingContent.tsx'
 import type { ObjectiveTeachingView } from './objectiveTeachingContentAdapter.ts'
@@ -75,7 +76,12 @@ export function PaperAssetAnalysisPanel({
         <p>{analysis.stem}</p>
         <p className="pi-ps-analysis-stem-zh">{analysis.stemTranslationZh}</p>
       </div>
-      <ul className="pi-ps-analysis-options pi-ps-analysis-options--accordion">
+      <FluidHoverList
+        as="ul"
+        axis="y"
+        itemSelector=".pi-ps-analysis-option-row"
+        className="pi-ps-analysis-options pi-ps-analysis-options--accordion"
+      >
         {analysis.options.map((option) => {
           const isActive = option.label === activeLabel
           const isCorrect = option.status === 'correct'
@@ -118,7 +124,7 @@ export function PaperAssetAnalysisPanel({
                 </span>
                 {isCorrect ? (
                   <span className="pi-ps-analysis-option-badge pi-ps-analysis-option-badge--correct">
-                    <Check aria-hidden="true" size={16} strokeWidth={2.25} />
+                    <Check aria-hidden="true" size={16} />
                   </span>
                 ) : !hideTypeBadgeAndMeta && option.trapLabel ? (
                   <span className="pi-ps-analysis-option-badge pi-ps-analysis-option-badge--trap">
@@ -208,7 +214,7 @@ export function PaperAssetAnalysisPanel({
             </li>
           )
         })}
-      </ul>
+      </FluidHoverList>
       {analysis.questionFocus && (
         <div className="pi-ps-analysis-question-focus">
           <h4>考点</h4>

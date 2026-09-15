@@ -7,8 +7,8 @@ import {
   Pause,
   Play,
   RotateCcw,
-  Volume2,
-} from 'lucide-react'
+  Volume,
+} from '../../icons'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { PublicVocabularyDictationSet } from '../../domain/vocabulary'
 import { getPublicVocabularyDictationSet, VocabularyApiError } from '../../services/vocabulary'
@@ -55,7 +55,7 @@ function LoadState({ kind, onRetry }: { kind: 'loading' | 'missing' | 'revoked' 
   return (
     <main className="vocabulary-dictation-message" aria-live="polite">
       <div>
-        <ListMusic size={30} strokeWidth={1.5} aria-hidden="true" />
+        <ListMusic size={30} aria-hidden="true" />
         <h1>{content.title}</h1>
         <p>{content.detail}</p>
         {kind === 'error' && <button type="button" onClick={onRetry}><RotateCcw size={16} />重新加载</button>}
@@ -410,7 +410,7 @@ export function VocabularyDictationPage({
       <main className="vocabulary-dictation-shell">
         {resumePrompt ? (
           <section className="vocabulary-dictation-resume" aria-labelledby="dictation-resume-title">
-            <RotateCcw size={30} strokeWidth={1.5} aria-hidden="true" />
+            <RotateCcw size={30} aria-hidden="true" />
             <h1 id="dictation-resume-title">继续上次听写？</h1>
             <p>{set.title} · 已到第 {currentIndex + 1} / {entries.length} 题</p>
             <div>
@@ -524,7 +524,7 @@ export function VocabularyDictationPage({
                   </label>
                 </fieldset>
                 <label className="vocabulary-dictation-volume">
-                  <Volume2 size={17} aria-hidden="true" />
+                  <Volume size={17} aria-hidden="true" />
                   <span className="visually-hidden">音量</span>
                   <input type="range" min="0" max="1" step="0.05" value={volume} onChange={(event) => setVolume(Number(event.target.value))} aria-label="播放音量" />
                 </label>
@@ -533,7 +533,7 @@ export function VocabularyDictationPage({
 
             {status === 'ended' && (
               <section className="vocabulary-dictation-complete" aria-labelledby="dictation-complete-title">
-                <Check size={28} strokeWidth={1.7} aria-hidden="true" />
+                <Check size={28} aria-hidden="true" />
                 <div>
                   <h2 id="dictation-complete-title">本组听写完成</h2>
                   <p>可以从头再听一遍，或者核对本组答案。</p>

@@ -1457,16 +1457,16 @@ assert(
 // pageCssSrc no longer duplicates it.
 assert(
   'shared paperSurfaceLectureHighlights.css carries the support/trap stroke palette for BOTH .paper-browse-shell and .pi-ps-harness-shell scopes (grouped selectors, single source)',
-  /\.paper-browse-shell \.pi-line-path--support[\s\S]{0,200}stroke:\s*rgba\(16,\s*185,\s*129,\s*0\.65\)/.test(
+  /\.paper-browse-shell \.pi-line-path--support[\s\S]{0,200}stroke:\s*rgba\(var\(--eqb-color-success-rgb\),\s*0\.55\)/.test(
     lectureHighlightsCssSrc,
   ) &&
-    /\.pi-ps-harness-shell \.pi-line-path--support[\s\S]{0,200}stroke:\s*rgba\(16,\s*185,\s*129,\s*0\.65\)/.test(
+    /\.pi-ps-harness-shell \.pi-line-path--support[\s\S]{0,200}stroke:\s*rgba\(var\(--eqb-color-success-rgb\),\s*0\.55\)/.test(
       lectureHighlightsCssSrc,
     ) &&
-    /\.paper-browse-shell \.pi-line-path--trap[\s\S]{0,200}stroke:\s*rgba\(245,\s*158,\s*11,\s*0\.85\)/.test(
+    /\.paper-browse-shell \.pi-line-path--trap[\s\S]{0,200}stroke:\s*rgba\(var\(--eqb-color-warning-rgb\),\s*0\.6\)/.test(
       lectureHighlightsCssSrc,
     ) &&
-    /\.pi-ps-harness-shell \.pi-line-path--trap[\s\S]{0,200}stroke:\s*rgba\(245,\s*158,\s*11,\s*0\.85\)/.test(
+    /\.pi-ps-harness-shell \.pi-line-path--trap[\s\S]{0,200}stroke:\s*rgba\(var\(--eqb-color-warning-rgb\),\s*0\.6\)/.test(
       lectureHighlightsCssSrc,
     ),
   'missing one or more of the support/trap palette rules in the shared stylesheet',
@@ -2080,7 +2080,7 @@ assert(
     return new RegExp(`${escapedSelector}\\s*\\{[^}]*font-size:\\s*${fontSize}`).test(pageCssSrc)
   }) &&
     /--pb-lecture-font-base:\s*14px/.test(pageCssSrc) &&
-    /--pb-lecture-font-body:\s*15px/.test(pageCssSrc),
+    /--pb-lecture-font-body:\s*14px/.test(pageCssSrc),
   'one or more paper-browse type roles drifted from the approved 12/14/16 mapping',
 )
 
@@ -2102,19 +2102,20 @@ assert(
   'the bounded active-question corners, rail reset, or question-number emphasis is missing',
 )
 assert(
-  '84. lecture evidence removes quote side bars, keeps semantic washes, and aligns a selected socket with the dashed connector endpoint',
-  /\.paper-browse-lecture-panel \.pi-ps-analysis-evidence blockquote,\s*\n\.paper-browse-lecture-panel \.pi-ps-analysis-distractor-quote\s*\{[^}]*border-left:\s*0[^}]*border-radius:\s*4px/s.test(pageCssSrc) &&
+  '84. lecture evidence keeps semantic quote bars/washes and aligns a selected socket with the dashed connector endpoint',
+  /\.pi-ps-analysis-evidence--selected blockquote\s*\{[^}]*border-left-color:\s*rgba\(var\(--eqb-color-success-rgb\),\s*0\.7\)/s.test(lectureAnalysisCssSrc) &&
+    /\.pi-ps-analysis-distractor--selected \.pi-ps-analysis-distractor-quote\s*\{[^}]*border-left-color:\s*rgba\(var\(--eqb-color-warning-rgb\),\s*0\.7\)/s.test(lectureAnalysisCssSrc) &&
     /\.paper-browse-lecture-panel \.pi-ps-analysis-evidence--selected::before,\s*\n\.paper-browse-lecture-panel \.pi-ps-analysis-distractor--selected::before\s*\{[^}]*top:\s*50%[^}]*left:\s*0[^}]*width:\s*8px[^}]*height:\s*8px[^}]*border:\s*2px solid var\(--eqb-color-paper\)[^}]*transform:\s*translate\(-50%, -50%\)/s.test(pageCssSrc) &&
     /\.paper-browse-lecture-panel \[data-pi-evidence-kind='support'\]\[aria-pressed='true'\]::before\s*\{[^}]*background:\s*var\(--eqb-color-success\)/s.test(pageCssSrc) &&
     /\.paper-browse-lecture-panel \[data-pi-evidence-kind='trap'\]\[aria-pressed='true'\]::before\s*\{[^}]*background:\s*var\(--eqb-color-warning\)/s.test(pageCssSrc),
-  'the quote-bar removal, selected connector socket, or semantic socket colors are missing',
+  'the semantic quote bars, selected connector socket, or semantic socket colors are missing',
 )
 assert(
-  '85. the similar CTA uses the shared Lucide icon system instead of an Emoji glyph',
-  /import\s*\{[^}]*RefreshCw[^}]*\}\s*from\s*['"]lucide-react['"]/.test(pageSrc) &&
-    /<RefreshCw\s+aria-hidden="true"\s+size=\{15\}\s+strokeWidth=\{2\}\s*\/>/.test(pageSrc) &&
+  '85. the similar CTA uses the shared EQB icon system instead of an Emoji glyph',
+  /import\s*\{[^}]*RefreshCw[^}]*\}\s*from\s*['"]\.\.\/\.\.\/icons['"]/.test(pageSrc) &&
+    /<RefreshCw\s+aria-hidden="true"\s+size=\{15\}\s*\/>/.test(pageSrc) &&
     !pageSrc.includes('🔁'),
-  'the similar CTA is missing its Lucide RefreshCw icon or still contains the retired Emoji glyph',
+  'the similar CTA is missing its EQB RefreshCw icon or still contains the retired Emoji glyph',
 )
 
 if (failed > 0) {

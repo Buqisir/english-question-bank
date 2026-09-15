@@ -187,8 +187,10 @@ console.log('\nTest 6: 4-paper home additions cap + full catalog entry')
   // CR round-2 M1 rewrite: the collapsed feed no longer slices raw papers —
   // it takes whole year groups until the cumulative count reaches the page
   // size (see Test 24), so the old slice assertion is retired.
-  assert('home see-all renders 查看全部 {catalogPaperCount} 套卷', /查看全部\s*\{catalogPaperCount\}\s*套卷/.test(desk), '')
-  assert('see-all enters browse', /className="concierge-feed-expand"[\s\S]{0,80}onClick=\{handleEnterBrowse\}/.test(desk), '')
+  // 首页是归来 (2026-09-15): the catalog count folds into the single browse
+  // entry under the search; no second 「查看全部」 action beside the heading.
+  assert('browse entry carries the catalog count', /浏览题库与筛选\s*·\s*\{catalogPaperCount\}\s*套卷/.test(desk), '')
+  assert('no duplicate see-all action on home', !/查看全部\s*\{catalogPaperCount\}/.test(desk), '')
   assert('home recent feed is capped at DEFAULT_FEED_PAGE_SIZE via buildRecentFeed', /buildRecentFeed\(questionGroups,\s*DEFAULT_FEED_PAGE_SIZE\)/.test(desk), '')
 }
 
@@ -473,10 +475,12 @@ console.log('\nTest 28: home-blank — pure-blank stage markup: no feed/chip DOM
 {
   const desk = readSrc('app/src/concierge/ConciergeDesk.tsx')
   assert('search keeps its accessible name without the inventory caption', /自然语言搜索/.test(desk), '')
-  assert('home recent additions has a named region', /role="region" aria-label=\{isBrowseScreen \? '题库浏览' : '最近上新'\}/.test(desk), '')
-  assert('home feed heading names 最近上新 without redundant sorting copy', /<h1 className="concierge-feed-label">最近上新<\/h1>/.test(desk) && !/按入库时间排列/.test(desk), '')
+  // 首页是归来 (2026-09-15): the home region is the whole 备课桌; 最近上新 is one
+  // of its sections and mounts only when a ready paper exists.
+  assert('home desk has a named region', /role="region" aria-label=\{isBrowseScreen \? '题库浏览' : '备课桌'\}/.test(desk), '')
+  assert('最近上新 section is gated and labelled without redundant sorting copy', /homeRecentFeed\.length > 0 && \(\s*<section className="home-section" aria-label="最近上新">\s*<h2 className="concierge-feed-label home-section-label">最近上新<\/h2>/.test(desk) && !/按入库时间排列/.test(desk), '')
   assert('home has a dedicated full-catalog browse/filter entry before browse chips', /isHomeScreen && onEnterBrowse[\s\S]{0,200}className="concierge-browse-entry"[\s\S]{0,180}onClick=\{handleEnterBrowse\}[\s\S]{0,220}浏览题库与筛选/.test(desk), '')
-  assert('browse-all action sits with the home heading and keeps the existing handler', /concierge-feed-heading[\s\S]{0,500}onClick=\{handleEnterBrowse\}[\s\S]{0,100}catalogPaperCount/.test(desk), '')
+  assert('home sections: 接着做 / 最近上新 / 今天翻到 render from ConciergeHomeSections', /<HomeContinueSection[\s\S]{0,2400}<HomeDailyPassage/.test(desk), '')
   assert('list surface mounts for home feed or search', /\{\(showListSurface \|\| showFeed\) && \(\s*<div className="concierge-list-surface">/.test(desk), '')
   assert('browse chips live in concierge-browse-chips', /concierge-browse-chips/.test(desk), '')
 }

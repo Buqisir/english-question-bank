@@ -153,13 +153,14 @@
 }
 
 .paper-browse-rail-part-name {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.06em;
   color: var(--muted, #6B6E68);
 }
 
 .paper-browse-rail-group {
+  position: relative;
   display: flex;
   align-items: center;
   width: 100%;
@@ -195,8 +196,12 @@
   color: var(--ink-soft, #4A4C48);
 }
 
-.paper-browse-rail-group:hover {
+.paper-browse-rail-group[data-fluid-hover-active] {
   color: var(--ink, #1F1F1D);
+}
+
+.paper-browse-rail-group-list.fluid-hover-list {
+  --fh-radius: 0;
 }
 
 .paper-browse-rail-group--active {
@@ -254,7 +259,8 @@
   color: var(--ps-ink, #111);
   font-family: var(--ps-font-stack);
   padding: var(--ps-page-margin-top, 79px) var(--ps-page-margin-x, 91px);
-  box-shadow: 0 1px 0 #00000010, 0 12px 32px #00000014;
+  /* DESIGN.md Shadow Vocabulary · Sheet 纸面 */
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06), 0 12px 32px rgba(0, 0, 0, 0.08);
   position: relative;
 }
 
@@ -579,14 +585,23 @@
   bottom: calc(var(--pb-block-gap) / -2);
   left: calc(var(--ps-page-margin-x, 91px) * -1);
   right: calc(var(--ps-page-margin-x, 91px) * -1);
-  border-top: 1px dashed rgba(44, 110, 86, 0.55);
-  border-bottom: 1px dashed rgba(44, 110, 86, 0.55);
+  /* Hover cut line: the resting line (ink 0.18) darkens, it does not turn
+   * teal — teal is identity-only (DESIGN.md Identity-Only Teal Rule). */
+  border-top: 1px dashed rgba(var(--paper-ink-rgb), 0.55);
+  border-bottom: 1px dashed rgba(var(--paper-ink-rgb), 0.55);
   opacity: 0;
   pointer-events: none;
 }
 
 .paper-browse-group-card:focus-within::after {
   opacity: 1;
+}
+
+/* 卷末（owner 2026-09-15）：纸的下边就是最后一个剪走单元的底界。静息底线
+ * 由 scissorPlan 不再发放（paperEndGroupIndices），这里把选中罩下缘也
+ * 收掉——两边各少一条，「静息线集合 == 选中线集合」仍成立。 */
+.paper-browse-group-card--paper-end::after {
+  border-bottom: none;
 }
 
 /* Gutter 「加入」钮：绝对定位在卷面右侧 gutter，随 zoom 缩放。 */
@@ -756,7 +771,7 @@
 
 .paper-browse-lecture-panel {
   --pb-lecture-font-base: 14px;
-  --pb-lecture-font-body: 15px;
+  --pb-lecture-font-body: 14px;
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -790,7 +805,7 @@
 .paper-browse-lecture-body {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .paper-browse-lecture-title {
@@ -802,14 +817,15 @@
 
 .paper-browse-lecture-range {
   font-weight: 400;
-  color: var(--eqb-color-text-muted, #6a6a64);
+  color: var(--paper-ink-muted);
 }
 
 .paper-browse-answer-row {
   margin: 0;
   font-size: var(--pb-lecture-font-body);
   line-height: 1.6;
-  color: var(--paper-ink);
+  color: var(--paper-ink-muted);
+  font-variant-numeric: tabular-nums;
 }
 
 /* ─── 讲评栏身体 — 解析面板容器（刀 2）───
@@ -878,7 +894,6 @@
 .paper-browse-lecture-panel .pi-ps-analysis-evidence blockquote,
 .paper-browse-lecture-panel .pi-ps-analysis-distractor-quote {
   padding: var(--eqb-space-2) var(--eqb-space-3);
-  border-left: 0;
   border-radius: 4px;
   background: color-mix(in srgb, var(--eqb-color-desk) 55%, transparent);
 }
@@ -1375,13 +1390,13 @@
   align-items: center;
   gap: 10px;
   border-top: 1px dashed #d8d8d2;
-  margin-top: 14px;
-  padding-top: 14px;
+  margin-top: 16px;
+  padding-top: 16px;
 }
 
 .similar-cta-why {
   font-size: 12px;
-  color: #6a6a64;
+  color: var(--paper-ink-muted);
   /* 不再 flex:1 把按钮推到右缘——按钮紧跟文案靠左（owner 拍板
    * 2026-07-10）：远离右下角草稿卷 chip 的火线，文案末尾的破折号
    * 正好把动作接住。 */
@@ -1470,12 +1485,15 @@
 }
 
 .similar-rcard-list {
+  --fh-radius: 8px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
 .similar-rcard {
+  position: relative;
+  background: transparent;
   border: 1px solid #e8e8e4;
   border-radius: 8px;
   padding: 10px 12px;
@@ -1486,7 +1504,7 @@
   transition: border-color var(--motion-fast) var(--ease-hover), background-color var(--motion-fast) var(--ease-hover);
 }
 
-.similar-rcard:hover {
+.similar-rcard[data-fluid-hover-active] {
   border-color: #a5cdbd;
 }
 

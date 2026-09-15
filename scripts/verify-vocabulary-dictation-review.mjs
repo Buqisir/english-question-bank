@@ -662,9 +662,10 @@ assert.match(workbenchSource, /已选 \{selectedReviewWords\.length\} 词[\s\S]{
 assert.doesNotMatch(workbenchSource, /订正纸|带二维码听写纸|二维码任务/u, '工作台不得保留旧术语或重复入口')
 assert.doesNotMatch(workbenchSource, /selectedGroupReviewWords|createVocabularySetErrorTasks/u, '词组页不得继续提供累计待复习词资料导出')
 const tabNavigationSource = workbenchSource.slice(
-  workbenchSource.indexOf('<nav className="dictation-workbench-tabs"'),
+  workbenchSource.indexOf('<FluidHoverList as="nav" className="dictation-workbench-tabs"'),
   workbenchSource.indexOf('{(message || error)'),
 )
+assert.match(tabNavigationSource, /axis="x" itemSelector="button"/u, '工作区导航标签必须使用横向流体悬停层')
 assert.match(tabNavigationSource, /词组[\s\S]{0,500}认词[\s\S]{0,500}听写[\s\S]{0,500}待复习[\s\S]{0,500}记录/u, '工作区导航必须明确待复习职责')
 assert.match(workbenchSource, /const reviewWords = meaningStates\.filter/u, '待复习池必须只由认词状态构成')
 assert.match(workbenchSource, /全部 \{reviewWords[\s\S]{0,900}常错 \{reviewWords/u, '待复习页只保留全部和常错筛选')

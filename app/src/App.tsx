@@ -1,7 +1,7 @@
 import {
   BookOpen,
-  ClipboardList,
-} from 'lucide-react'
+  BoardList,
+} from './icons'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
 import { questionGroups as sampleQuestionGroups } from './data/sampleQuestionGroups'
@@ -13,6 +13,7 @@ import {
 import { usePaperDraft } from './paperAssembly/usePaperDraft'
 import type { PaperDraftEditReason } from './paperAssembly/paperDraftModel'
 import { ConciergeDesk } from './concierge/ConciergeDesk'
+import { readRecentlyOpened, recordRecentlyOpened, type RecentlyOpenedEntry } from './concierge/recentlyOpened.ts'
 import { parsePaperIdFromHref } from './concierge/paperSurfaceHref'
 import { useConciergeDesk } from './concierge/useConciergeDesk'
 import { usePaperExports } from './paperAssembly/usePaperExports'
@@ -199,6 +200,8 @@ function App() {
   const [backfillResult, setBackfillResult] = useState<BackfillTopicLabelsResult | null>(null)
   const [backfillError, setBackfillError] = useState('')
   const [aiThinkingMode, setAiThinkingMode] = useState(() => localStorage.getItem('ai-thinking-mode') === 'on')
+  // 首页是归来 — the teacher's own trail of opened passages (localStorage only).
+  const [recentlyOpened, setRecentlyOpened] = useState<RecentlyOpenedEntry[]>(() => readRecentlyOpened())
   const conciergeDesk = useConciergeDesk({
     questionGroups,
     apiKey: aiApiKey,
@@ -367,6 +370,7 @@ function App() {
       }
     }
     aiRunIdRef.current += 1
+    setRecentlyOpened(recordRecentlyOpened(id))
     setViewMode('detail')
     setDetailStatus('loading')
     setDetailError('')
@@ -478,14 +482,10 @@ function App() {
     }
   }
 
-  const currentDraftPaperId = useMemo(
-    () => questionGroups.find((group) => group.currentDraftPaperId)?.currentDraftPaperId || null,
-    [questionGroups],
-  )
-  const currentDraftGroupCount = useMemo(
-    () => questionGroups.filter((group) => group.draftPaperButtonState === 'in_current_draft').length,
-    [questionGroups],
-  )
+  // Derived on render; React Compiler memoizes this (manual useMemo here
+  // trips react-hooks/preserve-manual-memoization).
+  const currentDraftPaperId = questionGroups.find((group) => group.currentDraftPaperId)?.currentDraftPaperId || null
+  const currentDraftGroupCount = questionGroups.filter((group) => group.draftPaperButtonState === 'in_current_draft').length
   // Detail fetch (GET /api/question-groups/:id) omits draftContext, so
   // selectedDetail.draftPaperButtonState lags the list cards that
   // addGroupsToBasket patches via questionGroups. Mirror ConciergeGroupCard:
@@ -1061,6 +1061,10 @@ function App() {
                 browseActive={browseRouteActive}
                 onEnterBrowse={enterBrowse}
                 onExitBrowse={exitBrowse}
+                recentlyOpened={recentlyOpened}
+                currentDraftPaperId={currentDraftPaperId}
+                currentDraftGroupCount={currentDraftGroupCount}
+                onOpenDraftPaper={(draftPaperId) => openDraftPaperWorkbench(draftPaperId)}
               />
           ) : viewMode === 'detail' ? (
             <QuestionGroupDetailView
@@ -1089,7 +1093,7 @@ function App() {
         aria-label={`打开草稿卷，已选 ${currentDraftGroupCount} 个题组`}
         disabled={!currentDraftPaperId || currentDraftGroupCount === 0}
       >
-        <ClipboardList size={15} />
+        <BoardList size={15} />
         <span>
           草稿卷 · {currentDraftGroupCount} 题组
         </span>

@@ -322,7 +322,8 @@
   font-size: 12px;
 }
 
-.vocabulary-listen-list ol {
+.vocabulary-listen-list ul {
+  --fh-radius: 4px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0 24px;
@@ -336,6 +337,7 @@
 }
 
 .vocabulary-listen-list li button {
+  position: relative;
   display: grid;
   grid-template-columns: 32px minmax(90px, 0.55fr) minmax(0, 1fr) auto;
   align-items: center;
@@ -466,7 +468,6 @@
 @media (hover: hover) and (pointer: fine) {
   .vocabulary-listen-control-row button:hover:not(:disabled),
   .vocabulary-listen-settings button:hover,
-  .vocabulary-listen-list li button:hover,
   .vocabulary-listen-message button:hover {
     border-color: var(--line-strong);
     background: var(--surface-strong);
@@ -553,7 +554,7 @@
     padding: 18px 14px;
   }
 
-  .vocabulary-listen-list ol {
+  .vocabulary-listen-list ul {
     grid-template-columns: 1fr;
   }
 

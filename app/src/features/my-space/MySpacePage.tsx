@@ -1,5 +1,6 @@
-import { Download, FileText, Save, Trash2 } from 'lucide-react'
+import { Download, Paper, Save, Trash } from '../../icons'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
+import { FluidHoverList } from '../../components/FluidHoverList'
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import type { MySpaceArtifact, MySpaceFolder } from '../../domain/questionBank'
 import { deleteMySpaceArtifact, downloadMySpaceArtifact, fetchMySpace } from '../../services/mySpace'
@@ -205,7 +206,14 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
           )}
         </div>
         {folders.length > 0 && (
-          <div className="my-space-folders" role="group" aria-label="按文件夹筛选">
+          <FluidHoverList
+            as="div"
+            axis="xy"
+            itemSelector=".my-space-chip"
+            className="my-space-folders"
+            role="group"
+            aria-label="按文件夹筛选"
+          >
             <button
               type="button"
               className={`my-space-chip${!selectedFolderId ? ' is-selected' : ''}`}
@@ -223,7 +231,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
                 {folder.name}
               </button>
             ))}
-          </div>
+          </FluidHoverList>
         )}
 
         {loadState === 'loading' && <p className="my-space-empty">正在读取个人空间…</p>}
@@ -239,7 +247,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
 
         {loadState === 'loaded' && artifacts.length === 0 && (
           <div className="my-space-empty-state">
-            <FileText size={24} strokeWidth={1.5} aria-hidden="true" />
+            <Paper size={24} aria-hidden="true" />
             <p className="my-space-empty">试卷导出为 PDF 后，可以保存在这里。</p>
             <button type="button" className="my-space-empty-cta" onClick={onBackToWorkbench}>
               去找题
@@ -313,7 +321,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
                             disabled={busyId === artifact.id}
                             onClick={() => requestDeleteArtifact(artifact)}
                           >
-                            <Trash2 size={14} />
+                            <Trash size={14} />
                           </button>
                         </div>
                       </article>

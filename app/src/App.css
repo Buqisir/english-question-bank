@@ -22,6 +22,66 @@
   color: var(--ink);
 }
 
+/* Fluid hover (2026-09-15) — one highlight per list glides to the item
+   nearest the cursor; see components/useFluidHover.ts. The highlight is the
+   container's ::before, positioned by --fh-* vars the hook writes; items
+   stack above it with position: relative and paint no opaque background of
+   their own. The ::before is the container's first positioned child with
+   z-index auto, so positioned items paint over it in tree order — no
+   stacking context on the container, which would trap popovers (export
+   menus in the topbar) beneath later page content. [data-fluid-hover-fresh]
+   is set for the first paint after the pointer enters, so the highlight
+   appears in place instead of travelling. */
+.fluid-hover-list {
+  position: relative;
+  --fh-x: 0px;
+  --fh-y: 0px;
+  --fh-w: 0px;
+  --fh-h: 0px;
+  --fh-o: 0;
+  --fh-radius: 0px;
+}
+
+.fluid-hover-list::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--fh-w);
+  height: var(--fh-h);
+  border-radius: var(--fh-radius);
+  background: var(--desk-hover, #E5EAE1);
+  opacity: var(--fh-o);
+  transform: translate(var(--fh-x), var(--fh-y));
+  will-change: transform;
+  pointer-events: none;
+  transition:
+    transform var(--motion-fast) var(--ease-out),
+    width var(--motion-fast) var(--ease-out),
+    height var(--motion-fast) var(--ease-out),
+    opacity var(--motion-fast) var(--ease-hover);
+}
+
+.fluid-hover-list[data-fluid-hover-fresh]::before {
+  transition: opacity var(--motion-fast) var(--ease-hover);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fluid-hover-list::before {
+    transition: opacity var(--motion-fast) var(--ease-hover);
+  }
+}
+
+/* Touch screens: taps would leave the highlight stranded (no mouseleave), so
+   the glide is pointer-only; tap feedback stays with :active on the items.
+   `pointer: coarse` is part of the test so headless browsers (hover: none,
+   pointer: none) still render the highlight for verification. */
+@media (hover: none) and (pointer: coarse) {
+  .fluid-hover-list::before {
+    display: none;
+  }
+}
+
 .topbar {
   display: flex;
   align-items: center;
@@ -98,6 +158,10 @@
 
 .topbar-sub .topbar-brand-title {
   font-size: 13px;
+  /* 子页的主角是卷子：站名退成弱墨 500，卷名（.topbar-page-title）升成墨色。
+     Owner 2026-09-15：「英语题库工作台 · 卷名」原本站名粗黑、卷名灰，主次倒了。 */
+  font-weight: 500;
+  color: var(--muted);
 }
 
 .topbar-page-sep {
@@ -108,7 +172,8 @@
 
 .topbar-page-title {
   font-size: 13px;
-  color: var(--muted);
+  font-weight: 500;
+  color: var(--ink);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -126,11 +191,12 @@
   align-items: center;
   background: none;
   border: none;
-  color: var(--muted);
+  color: var(--ink);
   cursor: pointer;
   display: inline-flex;
   font: inherit;
   font-size: 13px;
+  font-weight: 500;
   gap: 6px;
   max-width: 320px;
   overflow: hidden;
@@ -239,9 +305,21 @@
   color: var(--eqb-color-text-muted, #6B6E68);
 }
 
-.topbar .ghost-button:hover:not(:disabled) {
-  background: var(--eqb-color-desk, #E9ECE6);
+.topbar .ghost-button {
+  position: relative;
+}
+
+.topbar .ghost-button[data-fluid-hover-active]:not(:disabled),
+.topbar .ghost-button:focus-visible:not(:disabled) {
   color: var(--eqb-color-text, #1F1F1D);
+}
+
+.topbar-actions.fluid-hover-list {
+  --fh-radius: 8px;
+}
+
+.topbar-actions.fluid-hover-list::before {
+  background: var(--eqb-color-desk, #E9ECE6);
 }
 
 .topbar-user-group {
@@ -2002,13 +2080,13 @@ button:disabled {
   display: grid;
   gap: 10px;
   padding: 12px;
-  border: 1px solid rgba(245, 158, 11, 0.25);
+  border: 1px solid rgba(var(--eqb-color-warning-rgb), 0.25);
   border-radius: 8px;
   background: var(--surface-strong);
 }
 
 .draft-quality-panel.ready {
-  border-color: rgba(16, 185, 129, 0.25);
+  border-color: rgba(var(--eqb-color-success-rgb), 0.25);
 }
 
 .draft-quality-panel strong {
@@ -2073,7 +2151,7 @@ button:disabled {
   gap: 8px;
   align-items: center;
   padding: 12px;
-  border: 1px solid rgba(16, 185, 129, 0.25);
+  border: 1px solid rgba(var(--eqb-color-success-rgb), 0.25);
   border-radius: 8px;
   background: var(--surface-strong);
 }
@@ -3103,7 +3181,7 @@ button:disabled {
   align-items: center;
   align-self: flex-start;
   gap: 8px;
-  min-height: 36px;
+  min-height: 32px;
   padding: 4px 8px;
   margin-left: -8px;
   border: 0;
@@ -3111,7 +3189,8 @@ button:disabled {
   background: transparent;
   color: var(--desk-muted);
   font: inherit;
-  font-size: 14px;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
   cursor: pointer;
   transition: background-color var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
 }
@@ -3167,8 +3246,20 @@ button:disabled {
   cursor: pointer;
 }
 
-.concierge-browse-chip:hover {
+.concierge-browse-chip {
+  position: relative;
+}
+
+.concierge-browse-chips.fluid-hover-list {
+  --fh-radius: 999px;
+}
+
+.concierge-browse-chips.fluid-hover-list::before {
   background: #E9ECE6;
+}
+
+.concierge-browse-chip[data-fluid-hover-active] {
+  background: transparent;
   color: #1F1F1D;
 }
 
@@ -3508,10 +3599,175 @@ button:disabled {
 
 .concierge-feed-label {
   margin: 0;
-  font-size: 17px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 500;
   line-height: 1.5;
   color: var(--desk-ink);
+}
+
+/* 首页是归来 (2026-09-15) — the home desk is a column of quiet sections:
+   接着做 (the teacher's own trail) → 最近上新 → 今天翻到. Section labels are
+   structure, not content, so they stay on the 13px compact step in weak ink;
+   the rows carry the weight. Between sections 32px (挖空法: 块内紧、块间空). */
+.home-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.home-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.home-section-label {
+  margin: 0;
+  padding: 0 2px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  color: var(--desk-muted);
+}
+
+.home-row-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  background: var(--desk-surface);
+  overflow: hidden;
+  box-shadow: 0 0 0 1px var(--desk-border);
+}
+
+.home-row-list > li + li {
+  border-top: 1px solid var(--desk-line);
+}
+
+.home-row {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 16px;
+  border: 0;
+  background: transparent;
+  color: var(--desk-ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--motion-fast) var(--ease-hover);
+}
+
+.home-row {
+  position: relative;
+}
+
+.home-row:focus-visible {
+  background: var(--desk-hover);
+}
+
+.home-row:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: -2px;
+}
+
+.home-row-icon {
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  color: var(--desk-muted);
+  transition: color var(--motion-fast) var(--ease-hover);
+}
+
+.home-row[data-fluid-hover-active] .home-row-icon,
+.home-row:focus-visible .home-row-icon {
+  color: var(--desk-ink);
+}
+
+.home-row-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.home-row-title-line {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+
+.home-row-title {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.home-row-meta {
+  flex: 0 0 auto;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: var(--desk-muted);
+  white-space: nowrap;
+}
+
+.home-row-detail {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--desk-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.home-row-aside {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--desk-muted);
+}
+
+.home-row-time {
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.home-row-action {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--desk-ink);
+  white-space: nowrap;
+}
+
+.home-row-chevron {
+  display: grid;
+  place-items: center;
+  color: #9A9D97;
+  transition: color var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
+}
+
+.home-row[data-fluid-hover-active] .home-row-chevron,
+.home-row:focus-visible .home-row-chevron {
+  color: var(--desk-ink);
+  transform: translateX(2px);
+}
+
+@media (max-width: 640px) {
+  .home-row-time {
+    display: none;
+  }
 }
 
 .concierge-feed-heading .concierge-feed-expand {
@@ -3696,8 +3952,8 @@ button:disabled {
   flex-shrink: 0;
 }
 
-.concierge-difficulty-low { background: #059669; }
-.concierge-difficulty-medium { background: #d97706; }
+.concierge-difficulty-low { background: var(--eqb-color-success); }
+.concierge-difficulty-medium { background: var(--eqb-color-warning); }
 .concierge-difficulty-high { background: #dc2626; }
 
 .concierge-meta-tag {
@@ -3810,9 +4066,13 @@ button:disabled {
   color: var(--desk-muted);
 }
 
-.app-shell:has(.concierge-desk) .topbar .ghost-button:hover:not(:disabled) {
-  background: var(--desk-hover);
+.app-shell:has(.concierge-desk) .topbar .ghost-button[data-fluid-hover-active]:not(:disabled),
+.app-shell:has(.concierge-desk) .topbar .ghost-button:focus-visible:not(:disabled) {
   color: var(--desk-ink);
+}
+
+.app-shell:has(.concierge-desk) .topbar-actions.fluid-hover-list::before {
+  background: var(--desk-hover);
 }
 
 .app-shell:has(.concierge-desk) .topbar .ghost-button svg {
@@ -4095,8 +4355,15 @@ button:disabled {
   transition: background var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
 }
 
-.concierge-starter-chip:hover {
-  background: #E9ECE6;
+.concierge-starter-chips.fluid-hover-list {
+  --fh-radius: 999px;
+}
+
+.concierge-starter-chip {
+  position: relative;
+}
+
+.concierge-starter-chip[data-fluid-hover-active] {
   border-color: #D5D9D2;
   color: #1F1F1D;
 }
@@ -4702,7 +4969,7 @@ button:disabled {
   max-width: 100%;
   display: flex;
   flex-direction: column;
-  background: var(--desk-surface);
+  background: transparent;
   outline: none;
   border-radius: 0;
   transition: background var(--motion-fast) var(--ease-hover), box-shadow var(--motion-fast) var(--ease-hover);
@@ -4726,7 +4993,10 @@ button:disabled {
   transition: background var(--motion-fast) var(--ease-hover);
 }
 
-.concierge-paper-row:hover .concierge-paper-row-head,
+.concierge-paper-row-head {
+  position: relative;
+}
+
 .concierge-paper-row:focus-within .concierge-paper-row-head,
 .concierge-paper-row:focus-visible .concierge-paper-row-head {
   background: var(--desk-hover);
@@ -4767,9 +5037,22 @@ button:disabled {
   justify-content: flex-end;
 }
 
+/* 首页是归来 (2026-09-15) — home additions sit on the same 48px row as
+   browse rows (DESIGN Rows: 14/500 title, 13px weak year prefix on home). */
 .concierge-paper-row[data-recent] .concierge-paper-row-head {
-  padding: 20px;
-  align-items: start;
+  padding: 12px 16px;
+  align-items: center;
+}
+
+/* Same 16px icon + 12px gap as .home-row so titles across the three home
+   cards share one x. */
+.concierge-paper-row[data-recent] .concierge-paper-anchor {
+  align-items: center;
+  gap: 12px;
+}
+
+.concierge-paper-row-head[data-fluid-hover-active] .home-row-icon {
+  color: var(--desk-ink);
 }
 
 .concierge-recent-title {
@@ -4778,12 +5061,20 @@ button:disabled {
   background: none;
   color: var(--desk-ink);
   font: inherit;
-  font-size: 16px;
-  font-weight: 550;
-  line-height: 1.6;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
   text-align: left;
   overflow-wrap: anywhere;
   cursor: pointer;
+}
+
+.concierge-recent-year {
+  margin-right: 8px;
+  font-size: 13px;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  color: var(--desk-muted);
 }
 
 .concierge-recent-title:focus-visible {
@@ -4794,7 +5085,7 @@ button:disabled {
 
 .concierge-recent-date {
   font-size: 12px;
-  line-height: 2;
+  line-height: 1.5;
   font-variant-numeric: tabular-nums;
   color: var(--desk-muted);
   white-space: nowrap;
@@ -4821,7 +5112,8 @@ button:disabled {
   transition: transform var(--motion-fast) var(--ease-out), color var(--motion-fast) var(--ease-hover);
 }
 
-.concierge-paper-row:hover .concierge-row-chevron,
+.concierge-paper-row-head[data-fluid-hover-active] .concierge-row-chevron,
+.concierge-paper-row:focus-within .concierge-row-chevron,
 .concierge-paper-row.is-expanded .concierge-row-chevron {
   color: #1F1F1D;
 }
@@ -4910,7 +5202,7 @@ button:disabled {
   line-height: 1.5;
 }
 
-.concierge-paper-row:hover .concierge-paper-sourcetype,
+.concierge-paper-row-head[data-fluid-hover-active] .concierge-paper-sourcetype,
 .concierge-paper-row:focus-within .concierge-paper-sourcetype,
 .concierge-paper-row.is-expanded .concierge-paper-sourcetype {
   background: #FFFFFF;
@@ -4996,7 +5288,7 @@ button:disabled {
   gap: 2px;
 }
 
-.concierge-paper-row:hover .concierge-row-expand-hint,
+.concierge-paper-row-head[data-fluid-hover-active] .concierge-row-expand-hint,
 .concierge-paper-row:focus-within .concierge-row-expand-hint {
   opacity: 1;
 }
@@ -5074,9 +5366,8 @@ button:disabled {
   cursor: pointer;
 }
 
-.concierge-group-row-line:hover {
-  background: #E9ECE6;
-}
+/* Hover surface comes from the enclosing `.concierge-group-index` fluid list
+   (one glide across buckets and section heads); the line paints none. */
 
 .concierge-group-row > .similar-passages-panel {
   margin: 0 12px 12px;
@@ -5184,7 +5475,7 @@ button:disabled {
   font-family: inherit;
 }
 
-.concierge-group-row-line:hover .concierge-group-row-icon:not([aria-pressed='true']),
+.concierge-group-row-line[data-fluid-hover-active] .concierge-group-row-icon:not([aria-pressed='true']),
 .concierge-group-row-icon:focus-visible:not([aria-pressed='true']) {
   color: #1F1F1D;
 }
@@ -5208,7 +5499,7 @@ button:disabled {
   font-weight: 400;
 }
 
-.concierge-group-row-line:hover .concierge-group-row-icon.concierge-action-add:not([aria-pressed='true']),
+.concierge-group-row-line[data-fluid-hover-active] .concierge-group-row-icon.concierge-action-add:not([aria-pressed='true']),
 .concierge-group-row-icon.concierge-action-add:hover:not(:disabled):not([aria-pressed='true']),
 .concierge-group-row-icon.concierge-action-add:focus-visible:not([aria-pressed='true']) {
   background: transparent;
@@ -5267,7 +5558,14 @@ button:disabled {
   box-sizing: border-box;
 }
 
-.concierge-group-row-menuitem:hover,
+.concierge-group-row-menu.fluid-hover-list {
+  --fh-radius: 8px;
+}
+
+.concierge-group-row-menuitem {
+  position: relative;
+}
+
 .concierge-group-row-menuitem:focus-visible {
   background: #E9ECE6;
   outline: none;
@@ -5278,12 +5576,12 @@ button:disabled {
   color: #1F1F1D;
 }
 
-.concierge-group-row-menuitem--danger:hover,
+.concierge-group-row-menuitem--danger[data-fluid-hover-active],
 .concierge-group-row-menuitem--danger:focus-visible {
   color: #dc2626;
 }
 
-.concierge-group-row-menuitem--danger:hover svg,
+.concierge-group-row-menuitem--danger[data-fluid-hover-active] svg,
 .concierge-group-row-menuitem--danger:focus-visible svg {
   color: #dc2626;
 }

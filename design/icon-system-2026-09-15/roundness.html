@@ -1,0 +1,52 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>圆角 × 描边 对比</title>
+<style>
+  :root { --desk-page:#F3F6F0; --desk-surface:#FAFCF8; --border-subtle:#E3E8DF; --ink:#191D18; --muted:#60665C; }
+  body { margin:0; background:var(--desk-page); color:var(--ink); font:14px/1.5 Inter,"PingFang SC","Noto Sans CJK SC",system-ui,sans-serif; }
+  main { max-width:1120px; margin:0 auto; padding:36px 32px 80px; }
+  h1 { font-size:20px; margin:0 0 6px; } p { color:var(--muted); margin:0 0 20px; max-width:760px; }
+  .grid { display:grid; grid-template-columns: 90px repeat(3,1fr); gap:10px; align-items:stretch; }
+  .hd { font-size:12px; color:var(--muted); align-self:end; padding-bottom:6px; }
+  .rowhd { font-size:12px; color:var(--muted); display:flex; align-items:center; }
+  .card { background:var(--desk-surface); border:1px solid var(--border-subtle); border-radius:12px; padding:14px 16px; display:flex; flex-direction:column; gap:14px; }
+  .line { display:flex; align-items:center; gap:14px; }
+  .list { display:flex; align-items:center; gap:12px; background:var(--desk-page); border-radius:14px; padding:10px 14px; }
+  .list b { display:block; font-size:15px; } .list span { font-size:12.5px; color:var(--muted); }
+  svg { display:inline-block; vertical-align:middle; flex-shrink:0; }
+  svg * { fill:none; stroke:currentColor; stroke-linecap:round; stroke-linejoin:round; }
+  svg .dot { fill:currentColor; stroke:none; }
+</style>
+<main>
+  <h1>圆角 × 描边：Grok 那张图落到我们的字形上</h1>
+  <p>列：外圆角 2（Remix）/ 3 / 4（Grok 量出来的值）。行：描边 2.25 / 2.75。每格里：16px 行内、24px、以及一条「标题 + 说明」的列表行（Grok 截图的用法，图标 28px）。看哪一格是「够圆润但没变成气球」。</p>
+  <div class="grid" id="g"></div>
+</main>
+<script>
+const R = [2, 3, 4]; const W = [2.25, 2.75];
+// 四个字形，圆角参数化：r 外圆角，i 内圆角（= r/2）
+const glyphs = (r) => {
+  const i = r / 2;
+  return {
+    sheet: `<path d="M${4+r} 2.5H13.5L20 9V${21.5-r}A${r} ${r} 0 0 1 ${20-r} 21.5H${4+r}A${r} ${r} 0 0 1 4 ${21.5-r}V${2.5+r}A${r} ${r} 0 0 1 ${4+r} 2.5Z"/><path d="M13.5 2.5V${9-i}A${i} ${i} 0 0 0 ${13.5+i} 9H20"/><path d="M8 14h8M8 18h5"/>`,
+    phone: `<rect x="5.5" y="2.5" width="13" height="19" rx="${r}"/><path d="M12 7v5"/><circle class="dot" cx="12" cy="16" r="1.5"/>`,
+    trash: `<path d="M4.5 7.5h15"/><path d="M6.25 7.5 7 19a${i+0.5} ${i+0.5} 0 0 0 ${i+0.5} ${i+0.5}h${9-2*i}A${i+0.5} ${i+0.5} 0 0 0 17 19l.75-11.5"/><path d="M9.25 7.5V5.25a${i} ${i} 0 0 1 ${i}-${i}h${5.5-2*i}a${i} ${i} 0 0 1 ${i} ${i}V7.5"/>`,
+    archive: `<rect x="2.75" y="4" width="18.5" height="5.5" rx="${Math.min(r,2.75)}"/><path d="M5 9.5v9a${i+0.5} ${i+0.5} 0 0 0 ${i+0.5} ${i+0.5}h${14-2*i-1}a${i+0.5} ${i+0.5} 0 0 0 ${i+0.5}-${i+0.5}v-9"/><circle class="dot" cx="12" cy="14.75" r="1.75"/>`,
+  };
+};
+const svg = (inner, size, w) => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" style="stroke-width:${w}">${inner}</svg>`;
+let html = `<div></div>` + R.map(r => `<div class="hd">外圆角 ${r} · 内圆角 ${r/2}</div>`).join('');
+for (const w of W) {
+  html += `<div class="rowhd">描边 ${w}<br>(16px→${(w*16/24).toFixed(2)}px)</div>`;
+  for (const r of R) {
+    const g = glyphs(r);
+    html += `<div class="card">
+      <div class="line">${Object.values(g).map(x => svg(x, 16, w)).join('')}<span style="font-size:13px">16 · 过生词 个人空间 管理</span></div>
+      <div class="line">${Object.values(g).map(x => svg(x, 24, w)).join('')}</div>
+      <div class="list">${svg(g.phone, 28, w)}<div><b>摇晃以报告</b><span>摇晃手机报告问题。</span></div></div>
+      <div class="list">${svg(g.sheet, 28, w)}<div><b>2024 新课标 I 卷</b><span>7 篇章 · 教师版含答案</span></div></div>
+    </div>`;
+  }
+}
+document.getElementById('g').innerHTML = html;
+</script>
