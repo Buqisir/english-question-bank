@@ -26,7 +26,8 @@ const HOOK_ONLY = new Set([
   'pi-cloze-tag--pos',
   'pi-gf-tag--type',
   'pi-ps-analysis-empty--unpublished',
-  'pi-ps-analysis-option-content',
+  // 'pi-ps-analysis-option-content' 于 2026-09-15 讲评「色留量减」获得样式
+  // (正确项正文加粗)，已从白名单移除。
   'pi-ps-analysis-option-section--wrong',
   // 写作面板从未有过 CSS (写作解析资产未生产、面板未露面)——R3 写作双
   // facet 刀落地写作解析时应一并做样式并从此白名单移除。
