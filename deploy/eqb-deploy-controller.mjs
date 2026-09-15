@@ -44,6 +44,7 @@ const DIGEST = /^[a-f0-9]{64}$/u
 const UUID = /^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/u
 const RELEASE_MARKER = '.eqb-release.json'
 const COMMAND_TIMEOUT_MS = 20 * 60 * 1000
+const SYSTEMD_OPERATION_TIMEOUT_MS = 2 * 60 * 1000
 const HEALTH_ATTEMPTS = 30
 const HEALTH_INTERVAL_MS = 1000
 const HEALTH_TIMEOUT_MS = 60_000
@@ -957,7 +958,7 @@ function runImportOpsPersistenceEnsures(config, dependencies, sha) {
 
 function serviceAction(config, dependencies, action, service) {
   dependencies.runSystem('/usr/bin/systemctl', [action, service], {
-    timeout: 30_000,
+    timeout: SYSTEMD_OPERATION_TIMEOUT_MS,
     stdio: 'ignore',
   })
 }
@@ -1045,10 +1046,7 @@ async function healthCheck(config, dependencies) {
 }
 
 function restart(config, dependencies) {
-  dependencies.runSystem('/usr/bin/systemctl', ['restart', config.service], {
-    timeout: 30_000,
-    stdio: 'ignore',
-  })
+  serviceAction(config, dependencies, 'restart', config.service)
 }
 
 // Exercise startup ensures on disposable online copies, never on live databases.
