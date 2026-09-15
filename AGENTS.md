@@ -133,10 +133,13 @@ uniquely supplies; otherwise keep it outside daily packs.
 ## GitHub Actions CI authority
 
 - `.github/workflows/verify.yml` runs on natural `pull_request` and `push` to
-  `main`. Stable jobs `verify` (base-classified pack, Full for shared/high/unknown
-  risks and main) and `e2e` (all six browser seams)
+  `main`. Stable jobs `verify` (Agent-selected existing pack within trusted-base
+  boundaries; Full for paper/security/shared/high/unknown risks, invalid or
+  missing exact-head/base advice, and main) and `e2e` (all six browser seams)
   must both succeed. No path filter, skipped job, local report, manual run or
   Amp Check substitutes for either job. See ADR-0026 and the cutover runbook.
+  Ship records `head/base/pack/reason` in the PR body per `.agents/ship.md`;
+  Actions uses its natural event snapshot, never a live mutable comment.
 - Read GitHub Actions run and job evidence directly. Bind the repository,
   workflow path, event, current PR head/base (or exact live main SHA), latest
   run attempt, GitHub Actions App identity and both successful job conclusions.

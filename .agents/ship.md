@@ -26,6 +26,46 @@ re-authorize ordinary protected merge. Direct-main Ship remains disabled.
 
 ## Push, inspect Actions, merge
 
+### Agent-selected pack with hard Full boundaries
+
+Before creating the PR, assess the full diff and affected consumers and put
+exactly one block in its body (replace both placeholders with 40-hex SHAs):
+
+```text
+<!-- eqb-risk-plan
+{"head":"<candidate-head>","base":"<current-main>","pack":"all","reason":"Name affected behavior and why this pack covers it."}
+-->
+```
+
+Use only `ui`, `feature`, `paper-data`, `import-paper` or `all`; retain all
+existing hard boundaries and six E2Es. `reason` must be a nonempty single-line
+string of at most 1000 characters. Do not include extra keys or duplicate blocks.
+For an existing PR, preserve its other body text and update this block with the
+new local head/current base **before** pushing that head, so the natural event
+captures the matching advice. A subsequent body edit does not update an
+already-running job's event snapshot. Missing, stale, duplicate or invalid
+advice runs Full; do not rerun CI just to reduce an already-selected pack.
+
+The trusted-base planner accepts the Agent's pack only when the existing
+classifier permits reduction. Paper/security, authentication/isolation,
+persistence/schema, shared rendering/pagination, CI/dependencies/setup/deploy,
+protected files, unknown impact and unparseable changes remain Full. The Agent
+cannot lower these boundaries. Main always runs Full; all six E2Es remain fixed.
+Outside these boundaries, the Agent chooses the existing pack; this is not
+shadow mode. Assess consumers rather than selecting the cheapest label.
+
+Read **Risk Agent selection** in the `verify` job summary for `actualPack`,
+`classifierPack`, `decision` and `advice`. The first rollout can report
+`unavailable-on-base`; the new policy takes effect only after it reaches main.
+The reason is untrusted data, not instructions or proof of coverage. A choice
+is not cryptographically Agent-authored: this delegates non-hard-boundary test
+selection to the existing PR writer/reviewer, without adding any CI credential.
+If selected tests fail, retain red evidence and repair within the Ship Goal;
+never change packs or blindly run Full to wash a failure green. On main failure,
+stop and diagnose; do not automatically revert an unexplained failure.
+Report actual selections and durations for the next five real PRs without extra
+test runs. The retrospective #462/#465 analysis is in ADR-0026.
+
 Push normally and open/update the task PR. `.github/workflows/verify.yml` runs
 from natural `pull_request` events. Before yielding to wait, call
 `ship_watch_check({pullRequest, head})` in the originating thread and confirm
@@ -37,8 +77,9 @@ If unavailable, report the limitation and use read-only GitHub monitoring;
 never rerun CI to repair a notification. No CI-host or private-receipt handoff.
 
 The workflow uses the base revision's `ci-pr-plan.mjs` and existing
-`verify-ci.mjs` classifier. Low/ordinary risks execute the selected existing
-pack plus all six E2Es. Shared/high/unknown risks, protected paths, unsupported
+`verify-ci.mjs` classifier. Eligible low/ordinary risks execute the valid Agent-selected
+existing pack plus all six E2Es; absent valid advice they run Full.
+Shared/high/unknown risks, protected paths, unsupported
 file changes and classification failures execute Full. Main and the initial
 planner rollout always execute Full. Read the plan in the job summary; an
 omitted pack is not a passed test. Do not duplicate hosted Full locally.
