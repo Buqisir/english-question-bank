@@ -5,6 +5,7 @@ import { readFileSync } from 'node:fs'
 
 import {
   createOrderedResultFlusher,
+  createVerificationProgress,
   runVerificationSchedule,
   verificationSchedulingPolicy,
 } from './lib/verificationScheduler.mjs'
@@ -68,6 +69,63 @@ await Promise.all([
   flush(1, 'second'),
 ])
 assert.deepEqual(flushed, [[0, 'first'], [1, 'second'], [2, 'third']])
+
+// Controlled stall: a renderer holds its resource, a later independent task
+// settles, and ordered logs cannot yet flush. Progress must still identify both.
+const diagnosticLines = []
+let clock = 100
+const progress = createVerificationProgress({ emit: (line) => diagnosticLines.push(line), now: () => clock })
+let release
+const held = new Promise((resolve) => { release = resolve })
+let observedLaterSettlement
+const laterSettled = new Promise((resolve) => { observedLaterSettlement = resolve })
+const orderedDiagnostics = []
+const diagnosticFlush = createOrderedResultFlusher((index) => orderedDiagnostics.push(index))
+const diagnosticRun = runVerificationSchedule([
+  { script: 'held-render', resourceKeys: ['browser-render'] },
+  { script: 'queued-render', resourceKeys: ['browser-render'] },
+  { script: 'independent', resourceKeys: [] },
+], {
+  concurrency: 2,
+  onStart: progress.start,
+  async run(item, index) {
+    if (index === 0) {
+      progress.output(index, 'discarded-prefix' + 'x'.repeat(3000))
+      progress.output(index, '\n::error::tail\n##[set-output name=x]y')
+      await held
+    }
+    return { status: index === 2 ? 2 : 0 }
+  },
+  async onSettled(index, result) {
+    progress.settled(index, result.status)
+    await diagnosticFlush(index, result)
+    if (index === 2) observedLaterSettlement()
+  },
+})
+try {
+  await laterSettled
+  clock = 30100
+  progress.snapshot()
+  const snapshot = JSON.parse(diagnosticLines.at(-1).slice('VERIFY PROGRESS '.length))
+  assert.deepEqual(orderedDiagnostics, [], 'ordered output remains blocked by the controlled stall')
+  assert.deepEqual(snapshot.active.map((task) => task.script), ['held-render'], 'queued renderer is not misreported as running')
+  assert.deepEqual(snapshot.active[0].resources, ['browser-render'])
+  assert.equal(snapshot.active[0].elapsedMs, 30000)
+  assert.equal(snapshot.active[0].tail.length, 2048)
+  assert(snapshot.active[0].tail.endsWith('##[set-output name=x]y'))
+  assert(!diagnosticLines.at(-1).includes('::'))
+  assert(!diagnosticLines.at(-1).includes('##['))
+  assert.equal(diagnosticLines.at(-1).split('\n').length, 1, 'tail stays one inert JSON line')
+  assert(diagnosticLines.some((line) => line.includes('"event":"settled"') && line.includes('"status":2')))
+  progress.snapshot('interrupted')
+  assert(diagnosticLines.at(-1).includes('"event":"interrupted"'))
+} finally {
+  release()
+}
+assert.deepEqual((await diagnosticRun).map((result) => result.status), [0, 0, 2], 'diagnostics preserve results')
+assert.deepEqual(orderedDiagnostics, [0, 1, 2])
+progress.snapshot()
+assert.deepEqual(JSON.parse(diagnosticLines.at(-1).slice('VERIFY PROGRESS '.length)).active, [])
 
 const controller = new AbortController()
 const abortStarts = []
