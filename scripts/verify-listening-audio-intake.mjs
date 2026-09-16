@@ -155,6 +155,26 @@ try {
   )
   assert.ok(existsSync(path.join(badAsrPaperDir, 'materialization/listening-audio/failure.json')))
 
+  // Version-independent regression for a decoder that logs an error but exits 0.
+  const decoderBin = path.join(tempRoot, 'decoder-bin')
+  const decoderErrorDir = path.join(tempRoot, 'decoder-error')
+  execFileSync('mkdir', ['-p', decoderBin, decoderErrorDir])
+  writeFileSync(path.join(decoderBin, 'ffmpeg'), '#!/bin/sh\nprintf "synthetic decoder failure\\n" >&2\nexit 0\n')
+  execFileSync('chmod', ['+x', path.join(decoderBin, 'ffmpeg')])
+  json(path.join(decoderErrorDir, 'universal-source-manifest.json'), sourceManifest(paperId))
+  const originalPath = process.env.PATH
+  try {
+    process.env.PATH = `${decoderBin}:${originalPath}`
+    assert.throws(() => stageListeningAudio({ paperDir: decoderErrorDir, paperId,
+      sourcePath: sourceAudio, asrFixturePath: asrFixture }),
+    (error) => error.code === 'LISTENING_AUDIO_DECODE_FAILED' && /synthetic decoder failure/.test(error.message))
+  } finally {
+    process.env.PATH = originalPath
+  }
+  assert.match(JSON.parse(readFileSync(path.join(decoderErrorDir, 'materialization/listening-audio/failure.json'))).message,
+    /synthetic decoder failure/)
+  assert.ok(!existsSync(path.join(decoderErrorDir, 'materialization/listening-audio/asr-v1.json')))
+
   const staged = stageListeningAudio({
     paperDir,
     paperId,
@@ -500,7 +520,13 @@ try {
   const longAudio = path.join(tempRoot, 'long.mp3')
   execFileSync('ffmpeg', ['-v', 'error', '-f', 'lavfi', '-i', 'sine=frequency=500:duration=240', '-codec:a', 'libmp3lame', longAudio])
   const corruptTail = readFileSync(longAudio)
-  corruptTail.fill(0, Math.floor(corruptTail.length * 0.9), Math.floor(corruptTail.length * 0.95))
+  const packets = JSON.parse(execFileSync('ffprobe', ['-v', 'error', '-show_packets',
+    '-show_entries', 'packet=pos,size,pts_time', '-of', 'json', longAudio], { encoding: 'utf8' })).packets
+  const latePacket = packets.find((packet) => Number(packet.pts_time) >= 210)
+  assert.ok(latePacket, 'synthetic file contains an audio frame beyond the ASR sample')
+  // Preserve the frame header but invalidate side information (big_values).
+  // Zero-filled gaps may simply be skipped by newer FFmpeg demuxers.
+  corruptTail.fill(0xff, Number(latePacket.pos) + 4, Number(latePacket.pos) + Number(latePacket.size))
   const corruptPath = path.join(tempRoot, 'corrupt-tail.mp3')
   writeFileSync(corruptPath, corruptTail)
   // The container and opening remain readable; only full-file decode catches it.

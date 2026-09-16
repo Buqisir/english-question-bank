@@ -1,4 +1,4 @@
-import { execFileSync } from 'node:child_process'
+import { execFileSync, spawnSync } from 'node:child_process'
 import {
   copyFileSync,
   existsSync,
@@ -83,17 +83,19 @@ function probeAudio(filePath) {
     || !Number.isFinite(durationSeconds)
     || durationSeconds <= 0
   ) fail('Listening audio must contain exactly one decodable MP3 audio stream')
-  try {
-    execFileSync('ffmpeg', [
-      '-v', 'error',
-      '-xerror',
-      '-i', filePath,
-      '-map', '0:a:0',
-      '-f', 'null',
-      '-',
-    ], { stdio: 'pipe' })
-  } catch {
-    fail('FFmpeg full-file decode failed', 'LISTENING_AUDIO_DECODE_FAILED')
+  const decoded = spawnSync('ffmpeg', [
+    '-v', 'error',
+    '-xerror',
+    '-i', filePath,
+    '-map', '0:a:0',
+    '-f', 'null',
+    '-',
+  ], { encoding: 'utf8' })
+  // FFmpeg 6 can return zero after its decoder thread logs an error. At
+  // loglevel error, stderr is failure evidence too, not a successful decode.
+  const detail = String(decoded.stderr || decoded.error?.message || '').trim()
+  if (decoded.error || decoded.status !== 0 || detail) {
+    fail(`FFmpeg full-file decode failed${detail ? `: ${detail.slice(0, 500)}` : ''}`, 'LISTENING_AUDIO_DECODE_FAILED')
   }
   return { durationSeconds: round(durationSeconds, 3) }
 }
