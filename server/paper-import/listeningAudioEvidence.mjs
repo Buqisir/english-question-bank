@@ -86,7 +86,9 @@ export function compareFirstListeningDialogue(asr, dialogue) {
     actual = text.slice(start.index + start[0].length, end.index)
     const opening = text.slice(0, start.index)
     const lastExample = [...opening.matchAll(/\b(?:example|sample|practice)\b/gi)].at(-1)
-    const formalStart = /\b(?:now\s+)?(?:the\s+)?test\s+(?:begins|starts)\b/i
+    // A standalone positive announcement immediately before the formal marker;
+    // "before the test begins" is an instruction, not an end-of-example boundary.
+    const formalStart = /(?:^|[.!?])\s*(?:now\s+)?(?:the\s+)?test\s+(?:begins|starts)[.!?]\s*$/i
     if (/\b(?:example|sample|practice)\b/i.test(actual)
       || (lastExample && !formalStart.test(opening.slice(lastExample.index)))) {
       flag('LISTENING_AUDIO_EXAMPLE_NOT_DIALOGUE', 'An example cannot stand in for formal question 1')

@@ -480,9 +480,11 @@ try {
   })
   const dialogue = firstListeningDialogue(quickListening)
   const match = (text) => compareFirstListeningDialogue(quickAsr(text), dialogue)
+  const misleadingExample = `Listen to this example before the test begins. Question one. ${firstText} Question two. This was only the example. Now the test begins. Text one. An unrelated formal dialogue. Text two.`
   assert.equal(match(quickText).verdict, 'partial_pass', 'different later content must never imply whole-file pass')
   assert.equal(match(quickText).summary, '首段快速匹配、后续内容未核对')
   for (const text of [
+    misleadingExample,
     `Example: ${firstText} Text one. A different topic. Text two.`,
     `Instructions: ${firstText}`,
     `Example question one. ${firstText} Question two.`,
@@ -550,6 +552,27 @@ assert len(calls) == 1
   const failedCheck = JSON.parse(readFileSync(path.join(quickDir, 'materialization/listening-audio/check-v1.json')))
   assert.ok(failedCheck.flaggedRanges.some((flag) => flag.code === 'LISTENING_AUDIO_EXTENDED_CHECK_REQUIRED'))
   assert.equal(JSON.parse(readFileSync(path.join(quickDir, 'universal-source-manifest.json'))).schemaVersion, 'universal-nck1-source-manifest-v1')
+  const exampleAsr = JSON.parse(goodAsrBytes)
+  exampleAsr.transcriptText = misleadingExample
+  exampleAsr.segments[0].text = misleadingExample
+  json(quickAsrPath, exampleAsr)
+  json(reviewPath, { ...quickReview, reviewedTranscriptSha256: sha256(readFileSync(quickAsrPath)) })
+  assert.throws(() => finalizeListeningAudio({ paperDir: quickDir, paperId, reviewPath }), /needs review/)
+  const exampleCheckPath = path.join(quickDir, 'materialization/listening-audio/check-v1.json')
+  const exampleCheck = JSON.parse(readFileSync(exampleCheckPath))
+  assert.ok(exampleCheck.flaggedRanges.some((flag) => flag.code === 'LISTENING_AUDIO_EXAMPLE_NOT_DIALOGUE'))
+  const unfinalized = JSON.parse(readFileSync(path.join(quickDir, 'universal-source-manifest.json')))
+  assert.equal(unfinalized.schemaVersion, 'universal-nck1-source-manifest-v1')
+  exampleCheck.comparison.verdict = 'partial_pass'
+  exampleCheck.comparison.flaggedRanges = []
+  exampleCheck.flaggedRanges = []
+  delete exampleCheck.evidenceDigest
+  exampleCheck.evidenceDigest = digestJson(exampleCheck)
+  json(exampleCheckPath, exampleCheck)
+  assert.throws(() => assertListeningAudioManifest(quickDir, {
+    ...unfinalized, schemaVersion: 'universal-nck1-source-manifest-v2',
+    attachments: listeningAudioAttachmentDescriptors(quickDir),
+  }), /recomputed comparison/)
   writeFileSync(quickAsrPath, goodAsrBytes)
   json(reviewPath, quickReview)
   const quickResult = finalizeListeningAudio({ paperDir: quickDir, paperId, reviewPath })
