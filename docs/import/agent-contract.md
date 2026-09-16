@@ -46,6 +46,17 @@ node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
 原文件bytes/digest仍作为Source Capture证据保留。只有ABCD而缺56–65文本答案仍不完整；
 答案值与解释边界不清时必须停。听力原文继续按独立listening contract处理。
 
+听力 MP3 默认仍做整文件解码与时长检查、保存完整 normalized playback；ASR 仅转写
+开头至多 180 秒。新 v2 证据必须绑定材料化源中 `questionNumbers: [1]` 的正式对话
+原文、segmentId 与 source locator，排除说明和例题，并识别正式第一、二段标记以确认
+第一段完整。开头提到例题时，例题之后须有明确 “the test begins/starts” 再进入正式
+标记；歧义、采样截断、不匹配或识别不清均保留诊断证据并停，报告需要扩展检查，不
+自动重试全量 ASR 或换模型。仅局部通过记 `partial_pass` 和
+“首段快速匹配、后续内容未核对”；内容安全 review 必须携带 ASR 的精确 `scope`
+（`remainder: "unchecked"`），不得声称后半段已核验。没有 question 1 权威原文则停，
+不能拿例题、说明、题目选项或任意 `--reference` 替代。旧 v1 整段证据继续原校验，
+不迁移已有纸卷、lease 或工作区。具体操作见 importing-nck1-papers 的听力检查段落。
+
 只有题卷时，先安全保留来源；图片页改用重复的
 `--source-page question_source:<页码>=/abs/page.png`：
 

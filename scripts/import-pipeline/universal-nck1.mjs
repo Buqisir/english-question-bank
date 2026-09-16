@@ -887,7 +887,11 @@ function finalizeAudio(paperId) {
     reviewPath,
     referencePath: value('--reference'),
   })
-  console.log(JSON.stringify({ ok: true, state: 'listening_audio_verified', ...result }, null, 2))
+  console.log(JSON.stringify({
+    ok: true,
+    state: result.scope ? 'listening_audio_first_dialogue_matched' : 'listening_audio_verified',
+    ...result,
+  }, null, 2))
 }
 
 function build(paperId) {

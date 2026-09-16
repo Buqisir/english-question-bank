@@ -604,8 +604,8 @@ async function initialize(submissionId, paperId) {
       paperId,
       state: 'awaiting_agent_content_review',
       next: supplement
-        ? `Read the complete ASR transcript, then run source-intake.mjs finalize-listening ${submissionId} --paper-id ${paperId} --review <content-review.json>`
-        : `Run universal-nck1.mjs materialize ${paperId} so the source transcript/questions are available; read the complete ASR transcript; then run source-intake.mjs finalize-listening ${submissionId} --paper-id ${paperId} --review <content-review.json>`,
+        ? `Review the opening ASR sample and its scope (later content unchecked), then run source-intake.mjs finalize-listening ${submissionId} --paper-id ${paperId} --review <content-review.json>`
+        : `Run universal-nck1.mjs materialize ${paperId} for the authoritative question 1 dialogue; review the opening ASR sample and its scope (later content unchecked); then run source-intake.mjs finalize-listening ${submissionId} --paper-id ${paperId} --review <content-review.json>`,
     }, null, 2))
     return
   }
