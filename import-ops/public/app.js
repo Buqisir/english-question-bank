@@ -660,6 +660,7 @@ function listeningReviewSectionHtml() {
   const basisLabel = audio.comparison.basis === 'authoritative_transcript'
     ? '官方听力原文'
     : '听力题目'
+  const quick = audio.scope?.kind === 'first_dialogue'
   return `<section class="rail-section listening-review-section" id="listening-review-section">
     <h2>听力核对 · 第 ${escapeHtml(question.questionNo)} 题</h2>
     <div class="listening-review-answer"><span>官方答案</span><strong>${escapeHtml(question.officialAnswer)}</strong></div>
@@ -669,10 +670,10 @@ function listeningReviewSectionHtml() {
     </div>
     <div class="listening-audio-evidence">
       <div class="listening-evidence-statuses">
-        ${status(audio.comparison.verdict === 'pass' ? 'approved' : 'failed', `与${basisLabel}比对通过`)}
-        ${status(audio.contentSafety.verdict === 'pass' ? 'approved' : 'failed', '内容安全检查通过')}
+        ${status(audio.comparison.verdict === (quick ? 'partial_pass' : 'pass') ? 'approved' : 'failed', quick ? '首段快速匹配、后续内容未核对' : `与${basisLabel}比对通过`)}
+        ${status(audio.contentSafety.verdict === 'pass' ? 'approved' : 'failed', quick ? '仅开头采样内容安全检查通过' : '内容安全检查通过')}
       </div>
-      <p class="paper-meta">ASR 全文 · ${escapeHtml(audio.engine.name)} ${escapeHtml(audio.engine.model)} · ${escapeHtml(formatDuration(audio.durationSeconds))}</p>
+      <p class="paper-meta">${quick ? `ASR 开头 ${escapeHtml(formatDuration(audio.scope.endSeconds))}` : 'ASR 全文'} · ${escapeHtml(audio.engine.name)} ${escapeHtml(audio.engine.model)} · 全文件 ${escapeHtml(formatDuration(audio.durationSeconds))}</p>
       <p class="digest" title="${escapeHtml(audio.playbackAudioSha256)}">音频 ${escapeHtml(shortDigest(audio.playbackAudioSha256))}</p>
       <p class="digest" title="${escapeHtml(audio.asrSha256)}">转写 ${escapeHtml(shortDigest(audio.asrSha256))}</p>
     </div>

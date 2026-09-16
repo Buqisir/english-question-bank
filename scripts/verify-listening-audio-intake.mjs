@@ -11,6 +11,9 @@ import {
   assertListeningAudioSource,
   listeningSegmentOrderRecall,
   minimumListeningSegmentOrderRecall,
+  compareFirstListeningDialogue,
+  firstListeningDialogue,
+  listeningAudioAttachmentDescriptors,
 } from '../server/paper-import/listeningAudioEvidence.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 import {
@@ -147,9 +150,10 @@ try {
   )
   assert.equal(
     existsSync(path.join(badAsrPaperDir, 'source/listening-audio.mp3')),
-    false,
-    'invalid ASR removes staged audio instead of leaving partial evidence',
+    true,
+    'invalid ASR preserves original audio for diagnosis without automatic retry',
   )
+  assert.ok(existsSync(path.join(badAsrPaperDir, 'materialization/listening-audio/failure.json')))
 
   const staged = stageListeningAudio({
     paperDir,
@@ -161,6 +165,12 @@ try {
   assert.match(staged.playbackAudioSha256, /^sha256:[a-f0-9]{64}$/)
   assert.notEqual(staged.originalAudioSha256, staged.playbackAudioSha256)
   const asrPath = path.join(paperDir, 'materialization/listening-audio/asr-v1.json')
+  // Reconstruct historical v1 bytes to exercise unchanged whole-file admission.
+  const legacyAsr = JSON.parse(readFileSync(asrPath, 'utf8'))
+  assert.equal(legacyAsr.schemaVersion, 'listening-audio-asr-v2')
+  legacyAsr.schemaVersion = 'listening-audio-asr-v1'
+  delete legacyAsr.scope
+  json(asrPath, legacyAsr)
   const asrDigest = sha256(readFileSync(asrPath))
   json(referencePath, {
     schemaVersion: 'listening-audio-reference-v1',
@@ -454,7 +464,137 @@ try {
     'A stored ASR rotated against the canonical materialization segments must not be blessed at publication',
   )
 
-  console.log('PASS listening MP3 decode, normalization, ASR comparison, safety receipt, and digest binding')
+  const quickDir = path.join(tempRoot, 'quick')
+  execFileSync('mkdir', ['-p', quickDir])
+  json(path.join(quickDir, 'universal-source-manifest.json'), sourceManifest(paperId))
+  const firstText = 'Where will you meet your sister tomorrow morning? I will meet her beside the central library before lunch.'
+  const quickListening = { state: 'captured', transcript: [
+    { segmentId: 'q1', questionNumbers: [1], text: firstText, source: { documentId: 'answers', paragraph: 4 } },
+    { segmentId: 'q2', questionNumbers: [2], text: 'The second dialogue concerns a concert.', source: { documentId: 'answers', paragraph: 5 } },
+  ] }
+  const quickText = `Instructions and a practice example about trains. Now the test begins. Text one. ${firstText} Text two. Completely different later content.`
+  const quickAsr = (text = quickText) => asr({
+    schemaVersion: 'listening-audio-asr-v2', durationSeconds: 240,
+    scope: { kind: 'first_dialogue', startSeconds: 0, endSeconds: 180, remainder: 'unchecked' },
+    transcriptText: text, segments: [{ ...asr().segments[0], text, endSeconds: 60 }],
+  })
+  const dialogue = firstListeningDialogue(quickListening)
+  const match = (text) => compareFirstListeningDialogue(quickAsr(text), dialogue)
+  assert.equal(match(quickText).verdict, 'partial_pass', 'different later content must never imply whole-file pass')
+  assert.equal(match(quickText).summary, '首段快速匹配、后续内容未核对')
+  for (const text of [
+    `Example: ${firstText} Text one. A different topic. Text two.`,
+    `Instructions: ${firstText}`,
+    `Example question one. ${firstText} Question two.`,
+    `Text one. ${firstText.slice(0, -20)}`,
+    `Text one. ${firstText.slice(0, -20)} Text two.`,
+    `Text one. Completely unrelated content. Text two.`,
+  ]) assert.notEqual(match(text).verdict, 'partial_pass', text)
+  const unclear = quickAsr()
+  unclear.segments[0].avgLogProbability = -1.5
+  assert.equal(compareFirstListeningDialogue(unclear, dialogue).verdict, 'review_required')
+  assert.throws(() => firstListeningDialogue({ ...quickListening, transcript: [{ ...dialogue, questionNumbers: [0] }] }), /question 1/)
+
+  const longAudio = path.join(tempRoot, 'long.mp3')
+  execFileSync('ffmpeg', ['-v', 'error', '-f', 'lavfi', '-i', 'sine=frequency=500:duration=240', '-codec:a', 'libmp3lame', longAudio])
+  const corruptTail = readFileSync(longAudio)
+  corruptTail.fill(0, Math.floor(corruptTail.length * 0.9), Math.floor(corruptTail.length * 0.95))
+  const corruptPath = path.join(tempRoot, 'corrupt-tail.mp3')
+  writeFileSync(corruptPath, corruptTail)
+  // The container and opening remain readable; only full-file decode catches it.
+  execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', corruptPath])
+  const corruptDir = path.join(tempRoot, 'corrupt')
+  execFileSync('mkdir', ['-p', corruptDir])
+  json(path.join(corruptDir, 'universal-source-manifest.json'), sourceManifest(paperId))
+  assert.throws(() => stageListeningAudio({ paperDir: corruptDir, paperId, sourcePath: corruptPath, asrFixturePath: asrFixture }),
+    (error) => error.code === 'LISTENING_AUDIO_DECODE_FAILED')
+  assert.ok(!existsSync(path.join(corruptDir, 'materialization/listening-audio/asr-v1.json')))
+  // Execute the real Python crop path with a model stub: no model download or
+  // paid call, and fail if the model ever receives the full 240-second file.
+  const pythonResult = execFileSync('python3', ['-c', `
+import sys, types, runpy, wave, importlib.metadata
+calls = []
+class Model:
+    def __init__(self, *args, **kwargs): pass
+    def transcribe(self, audio, **kwargs):
+        with wave.open(audio) as sample:
+            assert sample.getnframes() / sample.getframerate() == 180
+        calls.append(audio)
+        return [], types.SimpleNamespace(language='en', language_probability=1)
+sys.modules['faster_whisper'] = types.SimpleNamespace(WhisperModel=Model)
+importlib.metadata.version = lambda name: 'fixture'
+sys.argv = [sys.argv[1], sys.argv[2]]
+runpy.run_path(sys.argv[0], run_name='__main__')
+assert len(calls) == 1
+`, path.join(import.meta.dirname, 'import-pipeline/transcribe-listening.py'), longAudio], { encoding: 'utf8' })
+  assert.equal(JSON.parse(pythonResult).engine.version, 'fixture')
+  json(asrFixture, quickAsr())
+  const quickStage = stageListeningAudio({ paperDir: quickDir, paperId, sourcePath: longAudio, asrFixturePath: asrFixture })
+  assert.ok(quickStage.durationSeconds >= 240, 'duration remains full playback duration')
+  assert.equal(quickStage.scope.endSeconds, 180)
+  json(path.join(quickDir, 'materialization/nck1-source-materialization-v1.json'), { listening: quickListening })
+  const quickReview = { schemaVersion: 'listening-audio-content-review-v1', paperId,
+    reviewedBy: 'import_agent', reviewedAt: '2026-09-01T00:00:00.000Z',
+    reviewedTranscriptSha256: quickStage.asrSha256, untrustedContentHandledAsData: true,
+    verdict: 'pass', scope: quickStage.scope, summary: 'Opening only; later audio unchecked.', flaggedRanges: [] }
+  json(reviewPath, quickReview)
+  assert.throws(() => finalizeListeningAudio({ paperDir: quickDir, paperId, reviewPath, referencePath }), /materialized question 1/)
+  const quickAsrPath = path.join(quickDir, 'materialization/listening-audio/asr-v1.json')
+  const goodAsrBytes = readFileSync(quickAsrPath)
+  const truncated = JSON.parse(goodAsrBytes)
+  truncated.segments[0].text = `Text one. ${firstText.slice(0, -20)}`
+  truncated.transcriptText = truncated.segments[0].text
+  json(quickAsrPath, truncated)
+  json(reviewPath, { ...quickReview, reviewedTranscriptSha256: sha256(readFileSync(quickAsrPath)) })
+  assert.throws(() => finalizeListeningAudio({ paperDir: quickDir, paperId, reviewPath }), /needs review/)
+  const failedCheck = JSON.parse(readFileSync(path.join(quickDir, 'materialization/listening-audio/check-v1.json')))
+  assert.ok(failedCheck.flaggedRanges.some((flag) => flag.code === 'LISTENING_AUDIO_EXTENDED_CHECK_REQUIRED'))
+  assert.equal(JSON.parse(readFileSync(path.join(quickDir, 'universal-source-manifest.json'))).schemaVersion, 'universal-nck1-source-manifest-v1')
+  writeFileSync(quickAsrPath, goodAsrBytes)
+  json(reviewPath, quickReview)
+  const quickResult = finalizeListeningAudio({ paperDir: quickDir, paperId, reviewPath })
+  assert.equal(quickResult.comparisonVerdict, 'partial_pass')
+  const quickManifest = JSON.parse(readFileSync(path.join(quickDir, 'universal-source-manifest.json')))
+  const quickEvidence = assertListeningAudioManifest(quickDir, quickManifest)
+  assert.equal(assertListeningAudioSource(quickEvidence, quickListening).durationSeconds, quickStage.durationSeconds)
+  for (const field of ['text', 'segmentId', 'source', 'questionNumbers']) {
+    const changed = structuredClone(quickListening)
+    changed.transcript[0][field] = field === 'source' ? { documentId: 'other' }
+      : field === 'questionNumbers' ? [2] : 'changed'
+    assert.throws(() => assertListeningAudioSource(quickEvidence, changed), /source binding|question 1/)
+  }
+  const quickCheckPath = path.join(quickDir, 'materialization/listening-audio/check-v1.json')
+  const quickCheck = JSON.parse(readFileSync(quickCheckPath))
+  for (const mutate of [
+    (receipt) => { delete receipt.scope },
+    (receipt) => { receipt.scope.remainder = 'checked' },
+    (receipt) => { receipt.comparison.verdict = 'pass' },
+    (receipt) => { receipt.contentSafety.scope.endSeconds = 240 },
+    (receipt) => { receipt.comparison.metrics.orderedBigramRecall = 0.99 },
+    (receipt) => { receipt.schemaVersion = 'listening-audio-check-v1' },
+  ]) {
+    const changed = structuredClone(quickCheck)
+    mutate(changed)
+    delete changed.evidenceDigest
+    changed.evidenceDigest = digestJson(changed)
+    json(quickCheckPath, changed)
+    const changedManifest = { ...quickManifest, attachments: listeningAudioAttachmentDescriptors(quickDir) }
+    assert.throws(() => assertListeningAudioManifest(quickDir, changedManifest), /scope|comparison|not bound/)
+  }
+  json(quickCheckPath, { ...quickCheck, evidenceDigest: `sha256:${'0'.repeat(64)}` })
+  assert.throws(() => assertListeningAudioManifest(quickDir, {
+    ...quickManifest, attachments: listeningAudioAttachmentDescriptors(quickDir),
+  }), /digest/)
+  json(quickCheckPath, quickCheck)
+  const changedAsr = JSON.parse(goodAsrBytes)
+  assert.throws(() => compareListeningAudio({ asr: changedAsr,
+    basis: 'authoritative_transcript', referenceText: firstText }), /Partial ASR/)
+  changedAsr.scope.endSeconds = 240
+  json(quickAsrPath, changedAsr)
+  assert.throws(() => assertListeningAudioManifest(quickDir, {
+    ...quickManifest, attachments: listeningAudioAttachmentDescriptors(quickDir),
+  }), /scope/)
+  console.log('PASS full MP3 decode/duration, bounded first-dialogue scope, mismatch/example/truncation/confidence rejection, tamper binding, and legacy whole-file compatibility')
 } finally {
   rmSync(tempRoot, { recursive: true, force: true })
 }

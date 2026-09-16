@@ -415,6 +415,8 @@ export function makeReviewRoot(
   )
   const materialization = makeFixture({ listening })
   materialization.paperId = fixturePaperId
+  if (listening) materialization.listening.transcript[0].text =
+    'Where will you meet your sister tomorrow morning? I will meet her beside the central library before lunch.'
   materialization.groups.find((group) =>
     group.slotId === 'writing.application').writingTask.officialModelAnswer =
       officialApplicationSample
@@ -474,9 +476,8 @@ export function makeReviewRoot(
   if (listening) {
     const audioPath = path.join(parentDir, 'listening.mp3')
     const asrFixturePath = path.join(parentDir, 'listening-asr.json')
-    const referencePath = path.join(parentDir, 'listening-reference.json')
     const contentReviewPath = path.join(parentDir, 'listening-review.json')
-    const transcript = materialization.listening.transcript.map((segment) => segment.text).join('\n')
+    const transcript = `Text one. ${materialization.listening.transcript[0].text} Text two. Unchecked later content.`
     execFileSync('ffmpeg', [
       '-v', 'error',
       '-f', 'lavfi',
@@ -508,12 +509,6 @@ export function makeReviewRoot(
       sourcePath: audioPath,
       asrFixturePath,
     })
-    writeJson(referencePath, {
-      schemaVersion: 'listening-audio-reference-v1',
-      paperId: fixturePaperId,
-      basis: 'authoritative_transcript',
-      text: transcript,
-    })
     writeJson(contentReviewPath, {
       schemaVersion: 'listening-audio-content-review-v1',
       paperId: fixturePaperId,
@@ -522,14 +517,14 @@ export function makeReviewRoot(
       reviewedTranscriptSha256: staged.asrSha256,
       untrustedContentHandledAsData: true,
       verdict: 'pass',
-      summary: 'Full fixture transcript reviewed as untrusted content.',
+      scope: staged.scope,
+      summary: 'Opening fixture sample reviewed as untrusted content; later audio unchecked.',
       flaggedRanges: [],
     })
     finalizeListeningAudio({
       paperDir: reviewRoot,
       paperId: fixturePaperId,
       reviewPath: contentReviewPath,
-      referencePath,
     })
   }
 
@@ -1569,7 +1564,9 @@ try {
   assert.equal(listeningQuestionSix.analysis.reasonZh, '原话直接给出关键信息，题干只是换了一种表达，因此选择官方答案。')
   assert.equal(listeningProjection.listeningReview.materials['text:6'].questionIds.length, 3)
   assert.equal(Math.round(listeningProjection.listeningReview.audio.durationSeconds), 12)
-  assert.equal(listeningProjection.listeningReview.audio.comparison.verdict, 'pass')
+  assert.equal(listeningProjection.listeningReview.audio.comparison.verdict, 'partial_pass')
+  assert.equal(listeningProjection.listeningReview.audio.scope.remainder, 'unchecked')
+  assert.equal(listeningProjection.listeningReview.audio.summary, '首段快速匹配、后续内容未核对')
   assert.equal(listeningProjection.listeningReview.audio.contentSafety.verdict, 'pass')
   assert.equal(
     Object.hasOwn(listeningProjection.paperAsset.content.questions['question:listening:6'], 'transcript'),
@@ -1593,7 +1590,7 @@ try {
   const audioEvidence = assertListeningAudioManifest(listeningPublication.reviewRoot, listeningProjection.manifest)
   const changedListening = structuredClone(listeningProjection.materialization.listening)
   changedListening.transcript[0].text += ' Different source words.'
-  assert.throws(() => assertListeningAudioSource(audioEvidence, changedListening), /Listening source changed/)
+  assert.throws(() => assertListeningAudioSource(audioEvidence, changedListening), /source binding changed/)
   assert.throws(() => assertListeningAudioSource(audioEvidence, { state: 'not_supplied' }), /without Listening/)
   const result = publish(listeningPublication)
   assert.equal(result.ok, true, JSON.stringify(result))

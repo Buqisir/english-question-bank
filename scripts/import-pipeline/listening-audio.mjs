@@ -19,6 +19,10 @@ import {
   listeningSegmentOrderRecall,
   minimumListeningOrderedBigramRecall,
   minimumListeningSegmentOrderRecall,
+  firstListeningDialogue,
+  compareFirstListeningDialogue,
+  listeningOpeningLimitSeconds,
+  listeningQuickSummary,
 } from '../../server/paper-import/listeningAudioEvidence.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
@@ -129,10 +133,12 @@ function normalizedAsr(raw, paperId, playbackAudioSha256, durationSeconds) {
     noSpeechProbability: round(segment.noSpeechProbability),
   }))
   const asr = {
-    schemaVersion: 'listening-audio-asr-v1',
+    schemaVersion: 'listening-audio-asr-v2',
     paperId,
     playbackAudioSha256,
     durationSeconds,
+    scope: { kind: 'first_dialogue', startSeconds: 0,
+      endSeconds: Math.min(listeningOpeningLimitSeconds, durationSeconds), remainder: 'unchecked' },
     language: String(raw?.language || 'en'),
     languageProbability: round(raw?.languageProbability ?? 0),
     engine: {
@@ -156,7 +162,7 @@ function normalizedAsr(raw, paperId, playbackAudioSha256, durationSeconds) {
         || !Number.isFinite(segment.endSeconds)
         || segment.startSeconds < previousEnd
         || segment.endSeconds <= segment.startSeconds
-        || segment.endSeconds > durationSeconds + 0.5
+        || segment.endSeconds > asr.scope.endSeconds + 0.5
         || !segment.text
         || !Number.isFinite(segment.avgLogProbability)
         || !Number.isFinite(segment.noSpeechProbability)
@@ -184,11 +190,13 @@ function transcribe(playbackPath, fixturePath = null) {
       playbackPath,
       '--model',
       model,
+      '--max-seconds',
+      String(listeningOpeningLimitSeconds),
     ], { encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 }))
   } catch (error) {
     const detail = String(error?.stderr || '').trim().slice(0, 500)
     fail(
-      `Whole-file ASR failed${detail ? `: ${detail}` : ''}`,
+      `Opening ASR failed${detail ? `: ${detail}` : ''}`,
       'LISTENING_AUDIO_ASR_FAILED',
     )
   }
@@ -217,8 +225,10 @@ export function stageListeningAudio({ paperDir, paperId, sourcePath, asrFixtureP
     normalizePlayback(originalPath, playbackPath)
     const playback = readFileSync(playbackPath)
     const { durationSeconds } = probeAudio(playbackPath)
+    const raw = transcribe(playbackPath, asrFixturePath)
+    atomicJson(artifactPath(paperDir, 'materialization/listening-audio/asr-raw.json'), raw)
     const asr = normalizedAsr(
-      transcribe(playbackPath, asrFixturePath),
+      raw,
       paperId,
       sha256(playback),
       durationSeconds,
@@ -231,9 +241,13 @@ export function stageListeningAudio({ paperDir, paperId, sourcePath, asrFixtureP
       asrSha256: sha256(readFileSync(asrPath)),
       durationSeconds,
       segments: asr.segments.length,
+      scope: asr.scope,
     }
   } catch (error) {
-    for (const filePath of [originalPath, playbackPath, asrPath]) rmSync(filePath, { force: true })
+    atomicJson(artifactPath(paperDir, 'materialization/listening-audio/failure.json'), {
+      paperId, code: error.code || 'LISTENING_AUDIO_FAILED', message: error.message,
+      retryPolicy: 'stop; preserve evidence; no automatic ASR retry or model fallback',
+    })
     throw error
   }
 }
@@ -261,6 +275,9 @@ function comparisonFlag(code, message, { severity = 'review', startSeconds = 0, 
 }
 
 export function compareListeningAudio({ asr, basis, referenceText, referenceSegmentTexts = null }) {
+  if (asr.schemaVersion === 'listening-audio-asr-v2' || Object.hasOwn(asr, 'scope')) {
+    fail('Partial ASR requires first-dialogue comparison, not a whole-file pass')
+  }
   if (!['authoritative_transcript', 'listening_questions'].includes(basis)) {
     fail('Listening comparison basis is invalid')
   }
@@ -381,12 +398,16 @@ export function compareListeningAudio({ asr, basis, referenceText, referenceSegm
   return { basis, verdict, metrics, flaggedRanges: flags }
 }
 
-function materializationReference(paperDir, manifest) {
+function materializationReference(paperDir, manifest, quick = false) {
   const materialization = readJson(
     artifactPath(paperDir, manifest.materializationPath),
     'NCK1 Source Materialization',
   )
   const listening = materialization.listening
+  if (quick) {
+    const dialogue = firstListeningDialogue(listening)
+    return { basis: 'authoritative_transcript', source: 'materialization', text: dialogue.text, dialogue }
+  }
   if (listening?.state === 'captured' && listening.transcript?.length > 0) {
     return {
       basis: 'authoritative_transcript',
@@ -431,7 +452,7 @@ function referenceFor(paperDir, manifest, referencePath) {
   return { basis: reference.basis, source: 'explicit_file', text: reference.text, segmentTexts: null }
 }
 
-function contentSafetyReview(reviewPath, paperId, asrSha256, durationSeconds) {
+function contentSafetyReview(reviewPath, paperId, asrSha256, durationSeconds, scope = null) {
   const review = readJson(path.resolve(reviewPath), 'Listening content-safety review')
   if (
     review?.schemaVersion !== 'listening-audio-content-review-v1'
@@ -447,6 +468,9 @@ function contentSafetyReview(reviewPath, paperId, asrSha256, durationSeconds) {
     || !Array.isArray(review.flaggedRanges)
     || (review.verdict === 'pass' && review.flaggedRanges.length > 0)
   ) fail('Listening content-safety review is incomplete or not bound to the ASR transcript')
+  if (scope && (!review.scope || digestJson(review.scope) !== digestJson(scope))) {
+    fail('Listening content-safety review must explicitly bind the opening scope; remainder unchecked')
+  }
   for (const range of review.flaggedRanges) {
     if (
       !Number.isFinite(range?.startSeconds)
@@ -459,6 +483,7 @@ function contentSafetyReview(reviewPath, paperId, asrSha256, durationSeconds) {
     ) fail('Listening content-safety review has an invalid flagged range')
   }
   return {
+    ...(scope ? { scope } : {}),
     reviewedBy: review.reviewedBy,
     reviewedAt: review.reviewedAt,
     reviewedTranscriptSha256: review.reviewedTranscriptSha256,
@@ -484,8 +509,10 @@ export function finalizeListeningAudio({
   const asrPath = artifactPath(paperDir, LISTENING_AUDIO_PATHS.asr)
   const asr = readJson(asrPath, 'Listening ASR evidence')
   const asrDigest = sha256(readFileSync(asrPath))
-  const reference = referenceFor(paperDir, manifest, referencePath)
-  const comparison = compareListeningAudio({
+  const quick = asr.schemaVersion === 'listening-audio-asr-v2'
+  if (quick && referencePath) fail('Quick check requires materialized question 1; explicit reference files cannot replace it')
+  const reference = quick ? materializationReference(paperDir, manifest, true) : referenceFor(paperDir, manifest, referencePath)
+  const comparison = quick ? compareFirstListeningDialogue(asr, reference.dialogue) : compareListeningAudio({
     asr,
     basis: reference.basis,
     referenceText: reference.text,
@@ -495,7 +522,8 @@ export function finalizeListeningAudio({
     reviewPath,
     paperId,
     asrDigest,
-    asr.durationSeconds,
+    quick ? asr.scope.endSeconds : asr.durationSeconds,
+    quick ? asr.scope : null,
   )
   const flaggedRanges = [
     ...comparison.flaggedRanges,
@@ -508,7 +536,8 @@ export function finalizeListeningAudio({
     })),
   ]
   const evidence = {
-    schemaVersion: 'listening-audio-check-v1',
+    schemaVersion: quick ? 'listening-audio-check-v2' : 'listening-audio-check-v1',
+    ...(quick ? { scope: asr.scope, summary: listeningQuickSummary } : {}),
     paperId,
     originalAudioSha256: sha256(readFileSync(
       artifactPath(paperDir, LISTENING_AUDIO_PATHS.original),
@@ -524,6 +553,7 @@ export function finalizeListeningAudio({
       basis: reference.basis,
       textSha256: sha256(Buffer.from(reference.text, 'utf8')),
       text: reference.text,
+      ...(quick ? { dialogue: reference.dialogue } : {}),
       ...(Array.isArray(reference.segmentTexts) && reference.segmentTexts.length > 0
         ? { segmentTexts: reference.segmentTexts }
         : {}),
@@ -534,7 +564,7 @@ export function finalizeListeningAudio({
   }
   const check = { ...evidence, evidenceDigest: digestJson(evidence) }
   atomicJson(artifactPath(paperDir, LISTENING_AUDIO_PATHS.check), check)
-  if (comparison.verdict !== 'pass' || contentSafety.verdict !== 'pass') {
+  if (comparison.verdict !== (quick ? 'partial_pass' : 'pass') || contentSafety.verdict !== 'pass') {
     fail(
       'Listening audio needs review; the check receipt records the exact reasons and time ranges',
       'LISTENING_AUDIO_REVIEW_REQUIRED',
@@ -545,13 +575,14 @@ export function finalizeListeningAudio({
     schemaVersion: 'universal-nck1-source-manifest-v2',
     attachments: listeningAudioAttachmentDescriptors(paperDir),
   }
-  atomicJson(manifestPath, nextManifest)
   assertListeningAudioManifest(paperDir, nextManifest)
+  atomicJson(manifestPath, nextManifest)
   return {
     paperId,
     evidenceDigest: check.evidenceDigest,
     comparisonBasis: comparison.basis,
     comparisonVerdict: comparison.verdict,
+    ...(quick ? { scope: asr.scope, summary: listeningQuickSummary } : {}),
     contentSafetyVerdict: contentSafety.verdict,
     attachments: nextManifest.attachments.length,
   }

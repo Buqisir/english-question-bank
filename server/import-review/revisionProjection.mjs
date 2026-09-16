@@ -1192,9 +1192,16 @@ function listeningReviewProjection(
           playbackAudioSha256: listeningAudioEvidence.check.playbackAudioSha256,
           asrSha256: listeningAudioEvidence.check.asrSha256,
           comparison: structuredClone(listeningAudioEvidence.check.comparison),
+          ...(listeningAudioEvidence.check.scope ? {
+            scope: structuredClone(listeningAudioEvidence.check.scope),
+            summary: listeningAudioEvidence.check.summary,
+          } : {}),
           contentSafety: {
             verdict: listeningAudioEvidence.check.contentSafety.verdict,
             reviewedAt: listeningAudioEvidence.check.contentSafety.reviewedAt,
+            ...(listeningAudioEvidence.check.contentSafety.scope ? {
+              scope: structuredClone(listeningAudioEvidence.check.contentSafety.scope),
+            } : {}),
           },
         },
     materials: listeningAnalysis?.materials || {},

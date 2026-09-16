@@ -45,6 +45,75 @@ function fail(message) {
 
 export const minimumListeningOrderedBigramRecall = 0.5
 
+export const listeningOpeningLimitSeconds = 180
+export const listeningQuickSummary = '首段快速匹配、后续内容未核对'
+
+export function firstListeningDialogue(listening) {
+  const matches = listening?.transcript?.filter((item) => item.questionNumbers?.includes(1)) || []
+  const segment = matches[0]
+  if (listening?.state !== 'captured' || matches.length !== 1
+    || segment.questionNumbers.length !== 1 || !segment.segmentId || !segment.source
+    || typeof segment.text !== 'string' || !segment.text.trim()) {
+    fail('Quick listening check requires the authoritative source dialogue bound to question 1')
+  }
+  return { segmentId: segment.segmentId, questionNumbers: [1], text: segment.text, source: segment.source }
+}
+
+export function validateListeningQuickScope(asr) {
+  const expected = { kind: 'first_dialogue', startSeconds: 0,
+    endSeconds: Math.min(listeningOpeningLimitSeconds, asr.durationSeconds), remainder: 'unchecked' }
+  if (asr.schemaVersion !== 'listening-audio-asr-v2'
+    || !asr.scope || digestJson(asr.scope) !== digestJson(expected)) fail('Invalid quick listening scope')
+  return expected
+}
+
+// Require explicit formal boundaries, not a substring found in instructions or
+// an example. Missing/ambiguous announcements need a deliberate extended review.
+export function compareFirstListeningDialogue(asr, dialogue) {
+  const scope = validateListeningQuickScope(asr)
+  const text = asr.segments.map((segment) => segment.text).join(' ')
+  const markers = [...text.matchAll(/\b(?:text|conversation|dialogue|question)\s*(one|two|1|2)\b/gi)]
+  const start = markers[0]
+  const end = markers[1]
+  const flags = []
+  const flag = (code, message) => flags.push({ code, message, severity: 'review',
+    startSeconds: 0, endSeconds: scope.endSeconds })
+  let actual = ''
+  if (!start || !end || !['one', '1'].includes(start[1].toLowerCase())
+    || !['two', '2'].includes(end[1].toLowerCase())) {
+    flag('LISTENING_AUDIO_EXTENDED_CHECK_REQUIRED', 'Cannot establish complete formal question 1 boundaries; extend the check explicitly')
+  } else {
+    actual = text.slice(start.index + start[0].length, end.index)
+    const opening = text.slice(0, start.index)
+    const lastExample = [...opening.matchAll(/\b(?:example|sample|practice)\b/gi)].at(-1)
+    const formalStart = /\b(?:now\s+)?(?:the\s+)?test\s+(?:begins|starts)\b/i
+    if (/\b(?:example|sample|practice)\b/i.test(actual)
+      || (lastExample && !formalStart.test(opening.slice(lastExample.index)))) {
+      flag('LISTENING_AUDIO_EXAMPLE_NOT_DIALOGUE', 'An example cannot stand in for formal question 1')
+    }
+  }
+  const spoken = (value) => String(value).replace(/(?:^|\n)\s*(?:M|W|Man|Woman)\s*:/gi, ' ')
+  const reference = spoken(dialogue.text)
+  const recall = listeningOrderedBigramRecall(reference, spoken(actual))
+  // Both ends must match: a nearly complete but truncated dialogue is not enough.
+  const words = (value) => value.toLowerCase().match(/[\p{L}\p{N}]+(?:'[\p{L}\p{N}]+)?/gu) || []
+  const tokens = words(reference)
+  const actualWords = words(spoken(actual)).join(' ')
+  if (tokens.length < 8 || recall < 0.9
+    || !actualWords.startsWith(tokens.slice(0, 4).join(' '))
+    || !actualWords.endsWith(tokens.slice(-4).join(' '))
+    || listeningOrderedBigramRecall(spoken(actual), reference) < 0.8) {
+    flag('LISTENING_AUDIO_TRANSCRIPT_MISMATCH', 'Formal question 1 does not match its complete authoritative dialogue')
+  }
+  if (asr.segments.some((segment) => !Number.isFinite(segment.avgLogProbability)
+    || segment.avgLogProbability < -1.25 || !Number.isFinite(segment.noSpeechProbability)
+    || segment.noSpeechProbability > 0.6)) {
+    flag('LISTENING_AUDIO_ASR_CONFIDENCE_LOW', 'Opening transcription is unclear; stop without model fallback')
+  }
+  return { basis: 'authoritative_transcript', verdict: flags.length ? 'review_required' : 'partial_pass',
+    scope, summary: listeningQuickSummary, metrics: { orderedBigramRecall: recall }, flaggedRanges: flags }
+}
+
 // Shared by intake and receipt validation: old unordered-overlap receipts
 // cannot bless reordered recordings. This reuses stored ASR, never the model.
 export function listeningOrderedBigramRecall(referenceText, actualText) {
@@ -133,7 +202,7 @@ function readJsonArtifact(rootDir, relativePath) {
 
 function validateAsr(asr, paperId, playbackDigest) {
   if (
-    asr?.schemaVersion !== 'listening-audio-asr-v1'
+    !['listening-audio-asr-v1', 'listening-audio-asr-v2'].includes(asr?.schemaVersion)
     || asr.paperId !== paperId
     || asr.playbackAudioSha256 !== playbackDigest
     || !Number.isFinite(asr.durationSeconds)
@@ -146,6 +215,12 @@ function validateAsr(asr, paperId, playbackDigest) {
     || typeof asr.engine?.model !== 'string'
     || typeof asr.engine?.version !== 'string'
   ) fail('Listening ASR evidence is incomplete or not bound to playback audio')
+  const quick = asr.schemaVersion === 'listening-audio-asr-v2'
+  if (!quick && Object.hasOwn(asr, 'scope')) fail('Legacy ASR cannot carry a partial scope')
+  const endSeconds = quick ? validateListeningQuickScope(asr).endSeconds : asr.durationSeconds
+  if (quick && asr.transcriptText !== asr.segments.map((segment) => segment.text).join(' ').trim()) {
+    fail('Quick ASR text differs from timestamped segments')
+  }
   let previousEnd = 0
   for (const segment of asr.segments) {
     if (
@@ -153,7 +228,7 @@ function validateAsr(asr, paperId, playbackDigest) {
       || !Number.isFinite(segment?.endSeconds)
       || segment.startSeconds < previousEnd
       || segment.endSeconds <= segment.startSeconds
-      || segment.endSeconds > asr.durationSeconds + 0.5
+      || segment.endSeconds > endSeconds + 0.5
       || typeof segment.text !== 'string'
       || !segment.text.trim()
       || !Number.isFinite(segment.avgLogProbability)
@@ -166,14 +241,15 @@ function validateAsr(asr, paperId, playbackDigest) {
 
 function validateCheck(check, paperId, descriptors, asr) {
   const reference = check?.comparisonReference
+  const quick = asr.schemaVersion === 'listening-audio-asr-v2'
   if (
-    check?.schemaVersion !== 'listening-audio-check-v1'
+    check?.schemaVersion !== (quick ? 'listening-audio-check-v2' : 'listening-audio-check-v1')
     || check.paperId !== paperId
     || check.originalAudioSha256 !== descriptors.get('listening_audio_original')?.sha256
     || check.playbackAudioSha256 !== descriptors.get('listening_audio_playback')?.sha256
     || check.asrSha256 !== descriptors.get('listening_audio_asr')?.sha256
     || check.durationSeconds !== asr.durationSeconds
-    || check.comparison?.verdict !== 'pass'
+    || check.comparison?.verdict !== (quick ? 'partial_pass' : 'pass')
     || !['authoritative_transcript', 'listening_questions'].includes(check.comparison?.basis)
     || !['materialization', 'explicit_file'].includes(reference?.source)
     || reference?.basis !== check.comparison?.basis
@@ -198,6 +274,19 @@ function validateCheck(check, paperId, descriptors, asr) {
   if (digestJson(evidence) !== evidenceDigest) {
     fail('Listening audio evidence digest does not match the check receipt')
   }
+  if (quick) {
+    if (reference.source !== 'materialization' || reference.basis !== 'authoritative_transcript'
+      || reference.dialogue?.text !== reference.text
+      || !check.scope || !check.contentSafety.scope
+      || digestJson(check.scope) !== digestJson(validateListeningQuickScope(asr))
+      || digestJson(check.contentSafety.scope) !== digestJson(check.scope)
+      || check.summary !== listeningQuickSummary
+      || digestJson(check.comparison) !== digestJson(compareFirstListeningDialogue(asr, reference.dialogue))) {
+      fail('Quick listening check scope or recomputed comparison does not match')
+    }
+    return check
+  }
+  if (Object.hasOwn(check, 'scope')) fail('Legacy check cannot carry a partial scope')
   if (reference.basis === 'authoritative_transcript'
     && listeningOrderedBigramRecall(reference.text, asr.transcriptText) < minimumListeningOrderedBigramRecall) {
     fail('Listening ASR word order does not match the authoritative transcript')
@@ -218,6 +307,16 @@ export function assertListeningAudioSource(evidence, listening) {
     return null
   }
   if (!evidence) fail('Captured Listening requires reviewed audio')
+  if (evidence.asr?.schemaVersion === 'listening-audio-asr-v2') {
+    const dialogue = firstListeningDialogue(listening)
+    if (digestJson(dialogue) !== digestJson(evidence.check.comparisonReference.dialogue)
+      || compareFirstListeningDialogue(evidence.asr, dialogue).verdict !== 'partial_pass') {
+      fail('Quick listening source binding changed or first dialogue did not match')
+    }
+    const playback = evidence.descriptors.get('listening_audio_playback')
+    return { relativePath: 'listening/playback.mp3', sha256: playback.sha256,
+      byteLength: playback.byteLength, durationSeconds: evidence.asr.durationSeconds, mediaType: 'audio/mpeg' }
+  }
   const hasTranscript = listening.transcript?.length > 0
   const basis = hasTranscript ? 'authoritative_transcript' : 'listening_questions'
   const text = hasTranscript

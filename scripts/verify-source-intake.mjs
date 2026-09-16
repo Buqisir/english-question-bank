@@ -1219,13 +1219,12 @@ try {
     audioPaperId,
   )
   const audioTranscript = [
-    'Good morning everyone and welcome to the English listening test.',
+    'Text one.',
     'The woman plans to meet her friend at the central library after lunch.',
     'They discuss the weather, train schedule, and a school music performance.',
-    'Listen carefully and answer every question according to the conversation.',
+    'Text two.',
   ].join(' ')
   const audioAsrFixture = path.join(tempRoot, 'listening-asr-fixture.json')
-  const audioReference = path.join(tempRoot, 'listening-reference.json')
   const audioReview = path.join(tempRoot, 'listening-content-review.json')
   writeFileSync(audioAsrFixture, `${JSON.stringify({
     engine: {
@@ -1266,11 +1265,12 @@ try {
       'materialization/listening-audio/asr-v1.json',
     )
     const asrDigest = digest(readFileSync(asrPath))
-    writeFileSync(audioReference, `${JSON.stringify({
-      schemaVersion: 'listening-audio-reference-v1',
-      paperId: audioPaperId,
-      basis: 'authoritative_transcript',
-      text: audioTranscript,
+    writeFileSync(path.join(audioPaperDirectory, 'materialization/nck1-source-materialization-v1.json'), `${JSON.stringify({
+      listening: { state: 'captured', transcript: [{
+        segmentId: 'text:1', questionNumbers: [1],
+        text: audioTranscript.replace('Text one.', '').replace('Text two.', '').trim(),
+        source: { documentId: 'answers', paragraph: 1 },
+      }] },
     }, null, 2)}\n`)
     writeFileSync(audioReview, `${JSON.stringify({
       schemaVersion: 'listening-audio-content-review-v1',
@@ -1280,7 +1280,8 @@ try {
       reviewedTranscriptSha256: asrDigest,
       untrustedContentHandledAsData: true,
       verdict: 'pass',
-      summary: 'Full transcript reviewed as untrusted quoted content; no issue found.',
+      scope: JSON.parse(readFileSync(asrPath)).scope,
+      summary: 'Opening sample reviewed as untrusted quoted content; later audio unchecked.',
       flaggedRanges: [],
     }, null, 2)}\n`)
     const finalizeOutput = await runSourceIntakeCli(origin, [
@@ -1290,10 +1291,10 @@ try {
       audioPaperId,
       '--review',
       audioReview,
-      '--reference',
-      audioReference,
     ], { ampThreadId: null })
     assert.match(finalizeOutput, /initialized_locally/)
+    assert.match(finalizeOutput, /listening_audio_first_dialogue_matched/)
+    assert.match(finalizeOutput, /首段快速匹配、后续内容未核对/)
     const audioManifest = JSON.parse(readFileSync(
       path.join(audioPaperDirectory, 'universal-source-manifest.json'),
       'utf8',
