@@ -29,9 +29,10 @@ order, while still collecting all PASS/SKIP/FAIL results. Use `--jobs 1` or
 the bounded default.
 
 Actions partitions the selected pack across its two existing, independent
-runner workspaces with `--lane verify` and `--lane e2e`. The latter owns four
+runner workspaces with `--lane verify` and `--lane e2e`. The latter owns six
 whole render-heavy scripts (NCK1 publish, image-source bundle, legacy opaque
-writing surfaces and application-writing surfaces) in addition to its six
+writing, seven-choices and application-writing surfaces, and figure rendering)
+in addition to its six
 unchanged E2E steps. The lanes are disjoint and together execute exactly the
 selected pack. Both use the same immutable-event, trusted-base selection;
 both must succeed. A failed E2E does not suppress the transferred pack lane.
@@ -43,10 +44,13 @@ No local command uses a lane by default: `verify:all` still runs the entire regi
 Inspect either partition with `--plan-json --pack all --lane verify` (or `e2e`).
 
 This reuses existing runners rather than raising same-workspace browser
-concurrency. The 2026-09-17 local 170-script run measured 655.8s in the four
-transferred scripts and 884.9s in the remaining render lane. These are workload
-estimates, not an Actions speedup claim; include dependency installation,
-builds and all six E2Es when comparing subsequent natural workflow runs.
+concurrency. The initial four-script split's natural PR #472 run
+[35241038654](https://github.com/Buqisir/english-question-bank/actions/runs/35241038654)
+measured 21m08s for `verify` and 15m40s for `e2e`. Moving the whole seven-choices
+(87.688s) and figure-render (78.816s) checks balances that observed gap. Fixed
+duration arithmetic projects roughly 18m22s/18m27s, not a measured speedup;
+subsequent natural runs must include installation, builds and all six E2Es.
+Full still covers 170 scripts, partitioned 164/6 without omissions or duplicates.
 OCR fixture generation alone measured 16.6s locally, so removing that setup
 would not eliminate the full OCR verifier's cost. No OCR validation or real
 surface assertions are removed in this change. Historical checks and weak

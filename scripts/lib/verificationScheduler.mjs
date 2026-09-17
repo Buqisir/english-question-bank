@@ -60,7 +60,9 @@ const e2eLaneScripts = new Set([
   'scripts/verify-universal-nck1-publish.mjs',
   'scripts/verify-universal-nck1-image-source-bundle.mjs',
   'scripts/verify-paper-canonical-legacy-opaque-writing-rendered-behavior.mjs',
+  'scripts/verify-paper-canonical-seven-choices-rendered-behavior.mjs',
   'scripts/verify-paper-canonical-application-writing-rendered-behavior.mjs',
+  'scripts/verify-figure-render.mjs',
 ])
 
 export function verificationLaneScripts(scripts, lane = 'all') {
