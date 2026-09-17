@@ -1,6 +1,7 @@
 import { Plus, Trash, X } from '../icons'
 import type { FormEvent } from 'react'
 import { useState } from 'react'
+import { useModalDialog } from '../components/useModalDialog'
 import {
   type CreateQuestionGroupInput,
   type Difficulty,
@@ -133,6 +134,7 @@ export type EntryModalProps = {
 }
 
 export function EntryModal({ open, mode, initialDetail, onClose, onSaved }: EntryModalProps) {
+  const dialogRef = useModalDialog(open)
   const [entryMode, setEntryMode] = useState<'create' | 'edit'>(mode)
   const [editingGroupId, setEditingGroupId] = useState<string | null>(initialDetail ? initialDetail.id : null)
   const [entryForm, setEntryForm] = useState<EntryForm>(() =>
@@ -240,8 +242,16 @@ export function EntryModal({ open, mode, initialDetail, onClose, onSaved }: Entr
   if (!open) return null
 
   return (
-    <div className="entry-backdrop" role="presentation">
-      <section className="entry-panel" aria-label="录题" role="dialog" aria-modal="true">
+    <dialog
+      ref={dialogRef}
+      className="entry-backdrop"
+      aria-label={entryMode === 'edit' ? '编辑题组' : '录入题组'}
+      onCancel={(event) => {
+        event.preventDefault()
+        onClose()
+      }}
+    >
+      <section className="entry-panel">
         <div className="entry-header">
           <div>
             <p className="eyebrow">Manual Entry</p>
@@ -493,6 +503,6 @@ export function EntryModal({ open, mode, initialDetail, onClose, onSaved }: Entr
           </div>
         </form>
       </section>
-    </div>
+    </dialog>
   )
 }

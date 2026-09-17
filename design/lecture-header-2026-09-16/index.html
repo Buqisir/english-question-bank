@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>讲评页 · 前后对比原型</title>
+  <link rel="preload" href="/app/public/fonts/paper/termes/texgyretermes-regular.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="/app/public/fonts/paper/termes/texgyretermes-bold.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="/app/public/fonts/paper/source-han-serif/SourceHanSerifCN-Regular.otf" as="font" type="font/otf" crossorigin>
+  <link rel="stylesheet" href="/app/public/fonts/paper/fonts.css">
+  <link rel="stylesheet" href="/app/src/index.css">
+  <link rel="stylesheet" href="/app/src/App.css">
+  <link rel="stylesheet" href="/app/src/shared-ui/papersurface/PaperSurface.css">
+  <link rel="stylesheet" href="/app/src/features/paper-intelligence/paperIntelligence.css">
+  <link rel="stylesheet" href="/app/src/features/paper-browse/paperBrowsePage.css">
+  <link rel="stylesheet" href="./prototype.css">
+  <script type="module" src="./prototype.js"></script>
+</head>
+<body class="lecture-prototype">
+  <!-- Owner-approved direction, isolated from app/: preserve paper, icons and
+       evidence colours. Compare real DOM snapshots with three local changes:
+       exam name, answer navigation, and complete phrase-pair typography.
+       Only Reading A is interactive; no API writes, exports or persistence. -->
+  <header class="review-toolbar">
+    <h1>讲评页 <span>前后对比原型</span></h1>
+    <div class="review-modes" role="group" aria-label="预览方式">
+      <button type="button" data-mode="compare" aria-pressed="true">并排对比</button>
+      <button type="button" data-mode="before" aria-pressed="false">改前页面</button>
+      <button type="button" data-mode="after" aria-pressed="false">改后页面</button>
+    </div>
+    <label class="review-question">对比题目
+      <select id="question-select" aria-label="对比题目">
+        <option value="21">第 21 题</option>
+        <option value="22">第 22 题</option>
+        <option value="23">第 23 题</option>
+      </select>
+    </label>
+  </header>
+  <p class="review-note">广东一模 · 阅读 A。两边使用同一份内容、同一列宽；可切题、点选项、展开简介。其他页面操作不在本原型内。</p>
+  <main id="prototype" aria-label="讲评页设计对比" aria-busy="true">
+    <p class="review-loading" role="status">正在载入真实页面样本…</p>
+  </main>
+  <p id="review-status" class="visually-hidden" role="status" aria-live="polite"></p>
+</body>
+</html>

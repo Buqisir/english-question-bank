@@ -199,7 +199,10 @@ const hexMatches = [...cssSrcNoComments.matchAll(/#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]
 // the first pin) then moves all three. Re-pin #ffffff to L189 / L482 / L785.
 // Segmented-toggle selected state (paper-white + Card hairline shadow, comment
 // +5 above the first pin). Re-pin #ffffff to L194 / L487 / L790.
-const WHITELISTED_LINES = new Set([194, 487, 790])
+// draft-desk UI-only refresh: menu chrome above the latter two declarations
+// moved their existing white-on-ink foregrounds; no whitelist role changed.
+// Tool-strip collision offset adds one line before the toast foreground.
+const WHITELISTED_LINES = new Set([194, 505, 864])
 
 const unexpectedHex = hexMatches.filter(
   (m) => !(m.value.toLowerCase() === '#ffffff' && WHITELISTED_LINES.has(m.line)),

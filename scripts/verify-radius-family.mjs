@@ -25,7 +25,6 @@ const FAMILY = new Set(['0', '4px', '6px', '8px', '12px', '16px', '999px', '50%'
 // file (relative to app/src) → { offFamilyValue → grandfathered count }
 const BASELINE = {
   // ui-northstar 草稿卷: 5px rail-acts / 7px group-action stickers → 4 / 8.
-  'features/my-space/MySpacePage.css': { '2px': 1 },
   'features/paper-intelligence/paperIntelligence.css': { '10px': 2, '2px': 1, '3px': 5 },
   'features/paper-intelligence/paperSurfaceLectureHighlights.css': { '3px': 1 },
 }

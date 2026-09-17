@@ -2,7 +2,6 @@ import { ArrowDown, ArrowUp, Grip, Trash } from '../../icons'
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
 import { FluidHoverList } from '../../components/FluidHoverList'
 import { groupTypeLabel, type DraftPaperItem, type QuestionGroupCard } from '../../domain/questionBank'
-import { PointingHand } from '../paper-browse/PointingHand'
 import type { SimilarPassagesRequestState } from '../similar-passages/SimilarPassagesPanel'
 
 /** similar-workbench-swap (E7, plan.md "抽屉"): the swap drawer's own props,
@@ -143,53 +142,88 @@ export type DraftPaperRailProps = {
   swapDrawer?: DraftPaperSwapDrawerProps | null
 }
 
-/** 小手的高度，与整卷页目录同值（PointingHand 默认 16）。 */
-const HAND_SIZE = 16
+type ActivePlate = {
+  top: number
+  left: number
+  width: number
+  height: number
+  motion: 'none' | 'adjacent' | 'relocate'
+  revision: number
+}
 
 export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
   const { items, activeGroupId, onItemClick, onDragStart, onDrop, onMoveItem, onDeleteItem, metaText, swapDrawer } = props
 
-  // ui-northstar: 当前题组由小手指出（「我读到这儿」），不再用一块灰底
-  // pill。整卷页目录同一标记，那边行有嵌套分部要量 getBoundingClientRect；
-  // 这里是等高的一列，offsetTop 就够。
   const panelRef = useRef<HTMLDivElement>(null)
-  const [handTop, setHandTop] = useState<number | null>(null)
+  const swapPanelRef = useRef<HTMLElement>(null)
+  const swapping = Boolean(swapDrawer)
+  const previousActiveGroupIdRef = useRef<string | null>(null)
+  const previousPanelRef = useRef<HTMLDivElement | null>(null)
+  const [activePlate, setActivePlate] = useState<ActivePlate | null>(null)
 
-  const syncHand = useCallback((): void => {
+  const syncActivePlate = useCallback((animate = false): void => {
     const panel = panelRef.current
     if (!panel || !activeGroupId) {
-      setHandTop(null)
+      setActivePlate(null)
+      previousPanelRef.current = panel
       return
     }
     const row = panel.querySelector<HTMLElement>(
       `[data-draft-group-id="${CSS.escape(activeGroupId)}"]`,
     )
     if (!row) {
-      setHandTop(null)
+      setActivePlate(null)
       return
     }
-    setHandTop(row.offsetTop + (row.offsetHeight - HAND_SIZE) / 2)
-  }, [activeGroupId])
+
+    const previousGroupId = previousActiveGroupIdRef.current
+    const previousIndex = previousGroupId
+      ? items.findIndex((item) => item.groupId === previousGroupId)
+      : -1
+    const nextIndex = items.findIndex((item) => item.groupId === activeGroupId)
+    const canAnimate = animate && previousPanelRef.current === panel && previousGroupId !== activeGroupId
+    const motion = canAnimate && previousIndex >= 0 && nextIndex >= 0
+      ? Math.abs(previousIndex - nextIndex) === 1 ? 'adjacent' : 'relocate'
+      : 'none'
+
+    previousPanelRef.current = panel
+    previousActiveGroupIdRef.current = activeGroupId
+    setActivePlate((previous) => ({
+      top: row.offsetTop,
+      left: row.offsetLeft,
+      width: row.offsetWidth,
+      height: row.offsetHeight,
+      motion,
+      revision: motion === 'relocate' ? (previous?.revision ?? 0) + 1 : previous?.revision ?? 0,
+    }))
+  }, [activeGroupId, items])
 
   useLayoutEffect(() => {
-    syncHand()
-  }, [syncHand, items])
+    syncActivePlate(true)
+  }, [activeGroupId, swapDrawer, syncActivePlate])
 
   useEffect(() => {
     const panel = panelRef.current
     if (!panel) return
-    const observer = new ResizeObserver(syncHand)
+    const syncGeometry = (): void => syncActivePlate(false)
+    const observer = new ResizeObserver(syncGeometry)
     observer.observe(panel)
-    window.addEventListener('resize', syncHand)
+    window.addEventListener('resize', syncGeometry)
     return (): void => {
       observer.disconnect()
-      window.removeEventListener('resize', syncHand)
+      window.removeEventListener('resize', syncGeometry)
     }
-  }, [syncHand])
+  }, [swapDrawer, syncActivePlate])
+
+  useEffect(() => {
+    if (swapping && window.matchMedia('(max-width: 900px)').matches) {
+      swapPanelRef.current?.scrollIntoView({ block: 'start', behavior: 'instant' })
+    }
+  }, [swapping])
 
   if (swapDrawer) {
     return (
-      <nav className="draft-paper-rail" aria-label="相似篇章候选">
+      <nav ref={swapPanelRef} className="draft-paper-rail draft-paper-rail--swap" aria-label="相似篇章候选">
         <DraftPaperSwapDrawer {...swapDrawer} />
       </nav>
     )
@@ -213,10 +247,17 @@ export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
         itemSelector=".draft-paper-rail-item"
         ref={panelRef}
       >
-      {handTop !== null && (
-        <span className="draft-paper-rail-hand" style={{ top: `${handTop}px` }}>
-          <PointingHand size={HAND_SIZE} />
-        </span>
+      {activePlate && (
+        <span
+          key={`active-plate-${activePlate.revision}`}
+          aria-hidden="true"
+          className={`draft-paper-rail-current draft-paper-rail-current--${activePlate.motion}`}
+          style={{
+            height: `${activePlate.height}px`,
+            transform: `translate(${activePlate.left}px, ${activePlate.top}px)`,
+            width: `${activePlate.width}px`,
+          }}
+        />
       )}
       {items.map((item) => {
         const isMissing = item.groupMissing

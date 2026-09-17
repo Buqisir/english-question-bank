@@ -36,8 +36,8 @@ export function AdminWorkbench({
           {backfillStatus === 'loading' ? '打标中…' : '给题库打主题标签'}
         </button>
 
-        {backfillResult !== null && (
-          <p className="admin-backfill-summary">
+        <p className="admin-backfill-summary" role="status" aria-atomic="true">
+          {backfillStatus === 'loading' ? <span className="visually-hidden">正在打标…</span> : backfillResult !== null && <>
             已标 {backfillResult.labeled}
             <span aria-hidden="true"> · </span>
             跳过 {backfillResult.skipped}
@@ -45,12 +45,12 @@ export function AdminWorkbench({
             <span className={failedCount > 0 ? 'admin-backfill-fail' : undefined}>
               失败 {failedCount}
             </span>
-          </p>
-        )}
+          </>}
+        </p>
 
-        {backfillError ? (
-          <p className="admin-backfill-error">{backfillError} 可再试一次。</p>
-        ) : null}
+        <p className="admin-backfill-error" role="alert" aria-atomic="true">
+          {backfillError ? `${backfillError} 可再试一次。` : null}
+        </p>
       </section>
     </main>
   )
