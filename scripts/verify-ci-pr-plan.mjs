@@ -151,7 +151,7 @@ try {
       GITHUB_OUTPUT: path.join(runnerTemp, 'lane-output'), GITHUB_STEP_SUMMARY: path.join(runnerTemp, 'lane-summary'),
     },
   })
-  for (const [pack, count] of [['all', 4], ['ui', 0], ['feature', 0], ['paper-data', 0], ['import-paper', 2]]) {
+  for (const [pack, count] of [['all', 6], ['ui', 0], ['feature', 0], ['paper-data', 0], ['import-paper', 3]]) {
     runLanePlan(pack)
     assert(readFileSync(path.join(runnerTemp, 'lane-output'), 'utf8').endsWith(`count=${count}\n`),
       `${pack}: extra setup/execution follows actual selected scripts, not a second routing map`)

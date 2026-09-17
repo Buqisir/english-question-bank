@@ -24,7 +24,9 @@ const transferredScripts = [
   'scripts/verify-universal-nck1-publish.mjs',
   'scripts/verify-universal-nck1-image-source-bundle.mjs',
   'scripts/verify-paper-canonical-legacy-opaque-writing-rendered-behavior.mjs',
+  'scripts/verify-paper-canonical-seven-choices-rendered-behavior.mjs',
   'scripts/verify-paper-canonical-application-writing-rendered-behavior.mjs',
+  'scripts/verify-figure-render.mjs',
 ]
 assert.deepEqual(planFor('--pack', 'all', '--lane', 'e2e').scripts, transferredScripts)
 assert.deepEqual(planFor().scripts, registry.scripts, 'local Full remains unpartitioned')

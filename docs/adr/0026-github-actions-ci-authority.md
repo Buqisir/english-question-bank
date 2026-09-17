@@ -17,7 +17,7 @@ PRs still need current-main ancestry and strict/up-to-date protection.
 The selected pack is partitioned into disjoint `verify` and `e2e` lanes on
 separate runner workspaces. Both resolve the same immutable event through the
 same trusted-base planner; lane selection only assigns work, never changes
-risk or pack selection. Four whole render-heavy scripts run on the previously
+risk or pack selection. Six whole render-heavy scripts run on the previously
 shorter `e2e` runner, retaining their internal stateful order. Local Full remains
 unpartitioned. Both required jobs must succeed, and either lane's test failure
 fails its job. There are no additional job names, matrix skips, shared render
