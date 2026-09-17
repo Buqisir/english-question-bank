@@ -1,16 +1,57 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict'
+import { execFileSync, spawnSync } from 'node:child_process'
 import { readFileSync } from 'node:fs'
 
 import {
   createOrderedResultFlusher,
   createVerificationProgress,
   runVerificationSchedule,
+  verificationLaneScripts,
   verificationSchedulingPolicy,
 } from './lib/verificationScheduler.mjs'
 
 const sleep = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds))
+
+const planFor = (...args) => JSON.parse(execFileSync(process.execPath, [
+  'scripts/verify-ci.mjs', '--plan-json', ...args,
+], { cwd: new URL('..', import.meta.url), encoding: 'utf8' }))
+const registry = JSON.parse(execFileSync(process.execPath, [
+  'scripts/verify-ci.mjs', '--list-json',
+], { cwd: new URL('..', import.meta.url), encoding: 'utf8' }))
+const transferredScripts = [
+  'scripts/verify-universal-nck1-publish.mjs',
+  'scripts/verify-universal-nck1-image-source-bundle.mjs',
+  'scripts/verify-paper-canonical-legacy-opaque-writing-rendered-behavior.mjs',
+  'scripts/verify-paper-canonical-application-writing-rendered-behavior.mjs',
+]
+assert.deepEqual(planFor('--pack', 'all', '--lane', 'e2e').scripts, transferredScripts)
+assert.deepEqual(planFor().scripts, registry.scripts, 'local Full remains unpartitioned')
+for (const [pack, scripts] of Object.entries(registry.packs)) {
+  const verify = planFor('--pack', pack, '--lane', 'verify')
+  const e2e = planFor('--pack', pack, '--lane', 'e2e')
+  const full = planFor('--pack', pack)
+  assert.deepEqual(full.scripts, scripts)
+  assert.deepEqual(verify.scripts, scripts.filter(script => !transferredScripts.includes(script)))
+  assert.deepEqual(e2e.scripts, scripts.filter(script => transferredScripts.includes(script)))
+  assert.equal(new Set([...verify.scripts, ...e2e.scripts]).size, scripts.length,
+    `${pack}: no script omitted or duplicated across runners`)
+  assert.deepEqual(verify.preflight, full.preflight, 'verify lane retains preflight')
+  assert.deepEqual(e2e.preflight, full.preflight, 'e2e lane retains preflight, even with no selected scripts')
+}
+for (const args of [
+  ['--lane'], ['--lane', 'typo'], ['--lane', 'verify', '--lane', 'e2e'],
+  ['--lane', 'verify', '--lane'],
+]) {
+  assert.equal(spawnSync(process.execPath, ['scripts/verify-ci.mjs', '--plan-json', ...args], {
+    cwd: new URL('..', import.meta.url),
+  }).status, 1, 'invalid lane cannot silently omit tests')
+}
+assert.deepEqual(verificationLaneScripts(['scripts/future-check.mjs'], 'verify'), ['scripts/future-check.mjs'],
+  'new checks default to verify, not to neither lane')
+assert.deepEqual(verificationLaneScripts([], 'e2e'), [])
+assert.throws(() => verificationLaneScripts([], 'typo'), /Unknown verification lane/)
 
 const items = [
   { name: 'a', delay: 35, status: 0, resourceKeys: [], exclusive: false },

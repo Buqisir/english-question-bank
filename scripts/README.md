@@ -11,6 +11,14 @@ Three local entrypoints share `scripts/verify-ci.mjs`:
 - `pnpm -C app verify:paper` exercises shared Canonical Paper/Print seams;
 - `pnpm -C app verify:all` is the release/fallback suite used by CI.
 
+Owner decision (2026-09-17): the personal “过生词” feature is frozen. Its 13
+dedicated vocabulary verifiers are manual-only, excluded from Full and all
+daily packs. Their files and functionality remain; run a specific check with
+`node scripts/verify-vocabulary-rendered-behavior.mjs` (or another vocabulary
+script below) when needed. Shared build/typecheck, auth/user isolation and the
+six independent Actions E2Es remain required. This trades automatic detection
+of vocabulary-only regressions for lower daily CI cost.
+
 Verifier scripts use bounded parallel execution. The default is half the
 available CPU count, capped at 8 jobs (8 jobs on the 16-core Orb). Browser,
 Chromium, Vivliostyle, and LibreOffice checks share one render lane; each fixed
@@ -19,6 +27,31 @@ Each job spools output privately and the runner prints those logs in registry
 order, while still collecting all PASS/SKIP/FAIL results. Use `--jobs 1` or
 `VERIFY_CONCURRENCY=1` for exact serial fallback; use `--jobs N` to override
 the bounded default.
+
+Actions partitions the selected pack across its two existing, independent
+runner workspaces with `--lane verify` and `--lane e2e`. The latter owns four
+whole render-heavy scripts (NCK1 publish, image-source bundle, legacy opaque
+writing surfaces and application-writing surfaces) in addition to its six
+unchanged E2E steps. The lanes are disjoint and together execute exactly the
+selected pack. Both use the same immutable-event, trusted-base selection;
+both must succeed. A failed E2E does not suppress the transferred pack lane.
+Each nonempty lane retains build/typecheck and its own resource locks. For a
+reduced pack with no transferred scripts, `e2e` runs only its original six
+seams: it skips the extra system packages and empty-lane build. The actual
+lane plan supplies this decision, not a duplicate pack-to-resource map.
+No local command uses a lane by default: `verify:all` still runs the entire registry.
+Inspect either partition with `--plan-json --pack all --lane verify` (or `e2e`).
+
+This reuses existing runners rather than raising same-workspace browser
+concurrency. The 2026-09-17 local 170-script run measured 655.8s in the four
+transferred scripts and 884.9s in the remaining render lane. These are workload
+estimates, not an Actions speedup claim; include dependency installation,
+builds and all six E2Es when comparing subsequent natural workflow runs.
+OCR fixture generation alone measured 16.6s locally, so removing that setup
+would not eliminate the full OCR verifier's cost. No OCR validation or real
+surface assertions are removed in this change. Historical checks and weak
+assertions remain separate work; cheap checks are not deleted for their use
+of regex.
 
 Every registered row below is its one-line named failure: the distinct fault
 the verifier catches or the independent layer it supplies. A verifier without
@@ -117,26 +150,26 @@ verifiers test historical libraries and do not require a live Orb controller.
 | `verify-amp-orb-ci-coordination.mjs` | Proves opt-in serialized PR eligibility, exact Owner-scoped selection, durable selection wake/resume, fail-closed active state, unchanged main processing, writerless forced diagnostics, and backward-compatible installation against fake private state only | yes |
 | `verify-amp-orb-deploy.mjs` | Proves the separate Deployment Orb contract without production access: clean exact-main resolution, pinned App Check selection and fail-closed revalidation, code-only versus reviewed-persistence classification, atomic release switch, shared-data isolation, and healthy rollback; all real mutation commands remain closed | yes |
 | `verify-verification-command-runner.mjs` | Prevents completed or concurrently interrupted verifiers from leaving their own Vite/Chromium/test descendants alive, and bounds oversized single-line diagnostics while retaining their head, tail, and digest | yes |
-| `verify-verification-scheduler.mjs` | Proves bounded concurrency, render/port resource locks, exclusive barriers, ordered result flushing, collect-all statuses, abort stop-dispatch, and jobs=1 serial fallback | yes |
-| `verify-vocabulary-closed-loop.mjs` | Validates the 1600-entry Wanwei source/content/unique Koboyo visual, formal American and Owner-approved Cori British audio contracts, plus isolated progress, frozen-set, share/revoke, and temporary-scope persistence | yes |
-| `verify-vocabulary-dictation-review.mjs` | Verifies frozen multi-set dictation tasks, global share isolation, teacher-confirmed result editing/voiding, pending/stubborn/improved derivation, manual flags, suggestions, library search/statistics, and user/student isolation | yes |
-| `verify-vocabulary-meaning-recall.mjs` | Verifies frozen multi-set meaning-recall records, same-day evidence collapse, cross-day repeated/recovered derivation, dictation-correct contribution without fabricated meaning errors, task linkage, suggestions, and user/student isolation | yes |
-| `verify-gaokao-vocabulary-source.mjs` | Rejects any 高考课标 3000 source ledger whose exact entry count, frequency order, stage/day/week/group partition, or source receipt contract has drifted | yes |
-| `verify-gaokao-vocabulary-golden-content.mjs` | Rejects an incomplete or unreviewed 90-entry golden content slice, duplicate examples, or learning content that leaves its independently reviewed source contract | yes |
-| `verify-gaokao-vocabulary-golden-visuals.mjs` | Rejects missing, reused, hash-drifted, or inaccessible Koboyo SVGs and visuals without Chinese alternative text in the 90-entry golden slice | yes |
-| `verify-gaokao-vocabulary-golden-audio.mjs` | Rejects missing, hash-drifted, wrong-codec, or incomplete American/British MP3 pairs for any entry in the 90-entry golden slice | yes |
-| `verify-gaokao-vocabulary-full-audio.mjs` | Rejects any full-course Google Neural2 audio set whose 3000 American C or 3000 British D entries drift from source order, approved spoken text, selected voice, hashes, MP3 format, duration, level, or silence bounds | yes |
-| `verify-gaokao-vocabulary-full-audio-qa.mjs` | Rejects a full 3000-word Owner QA page with missing dual-audio assets, duplicate entries, broken per-accent verdicts, or missing resume/search/export and keyboard contracts | yes |
-| `verify-gaokao-vocabulary-golden-import.mjs` | Rejects a golden import that weakens the 3000-entry authority gate, accepts source-meaning drift, publishes by default, or damages coexistence with an existing vocabulary course | yes |
+| `verify-verification-scheduler.mjs` | Proves exact disjoint lane coverage for every pack, invalid-lane rejection, bounded concurrency, render/port resource locks, exclusive barriers, ordered result flushing, collect-all statuses, abort stop-dispatch, and jobs=1 serial fallback | yes |
+| `verify-vocabulary-closed-loop.mjs` | Validates the 1600-entry Wanwei source/content/unique Koboyo visual, formal American and Owner-approved Cori British audio contracts, plus isolated progress, frozen-set, share/revoke, and temporary-scope persistence | no (manual) |
+| `verify-vocabulary-dictation-review.mjs` | Verifies frozen multi-set dictation tasks, global share isolation, teacher-confirmed result editing/voiding, pending/stubborn/improved derivation, manual flags, suggestions, library search/statistics, and user/student isolation | no (manual) |
+| `verify-vocabulary-meaning-recall.mjs` | Verifies frozen multi-set meaning-recall records, same-day evidence collapse, cross-day repeated/recovered derivation, dictation-correct contribution without fabricated meaning errors, task linkage, suggestions, and user/student isolation | no (manual) |
+| `verify-gaokao-vocabulary-source.mjs` | Rejects any 高考课标 3000 source ledger whose exact entry count, frequency order, stage/day/week/group partition, or source receipt contract has drifted | no (manual) |
+| `verify-gaokao-vocabulary-golden-content.mjs` | Rejects an incomplete or unreviewed 90-entry golden content slice, duplicate examples, or learning content that leaves its independently reviewed source contract | no (manual) |
+| `verify-gaokao-vocabulary-golden-visuals.mjs` | Rejects missing, reused, hash-drifted, or inaccessible Koboyo SVGs and visuals without Chinese alternative text in the 90-entry golden slice | no (manual) |
+| `verify-gaokao-vocabulary-golden-audio.mjs` | Rejects missing, hash-drifted, wrong-codec, or incomplete American/British MP3 pairs for any entry in the 90-entry golden slice | no (manual) |
+| `verify-gaokao-vocabulary-full-audio.mjs` | Rejects any full-course Google Neural2 audio set whose 3000 American C or 3000 British D entries drift from source order, approved spoken text, selected voice, hashes, MP3 format, duration, level, or silence bounds | no (manual) |
+| `verify-gaokao-vocabulary-full-audio-qa.mjs` | Rejects a full 3000-word Owner QA page with missing dual-audio assets, duplicate entries, broken per-accent verdicts, or missing resume/search/export and keyboard contracts | no (manual) |
+| `verify-gaokao-vocabulary-golden-import.mjs` | Rejects a golden import that weakens the 3000-entry authority gate, accepts source-meaning drift, publishes by default, or damages coexistence with an existing vocabulary course | no (manual) |
 | `vocabulary/build-wanwei-american-phonetics.mjs` | Rebuilds the pinned 1600-entry learner-facing General American IPA overlay without rewriting source-book evidence | no |
 | `vocabulary/build-wanwei-audio-golden-set.mjs` | Builds the fixed 56-word isolated-pronunciation gate from reviewed Wanwei content | no |
 | `vocabulary/generate-qwen-audio.py` | Generates resumable local Qwen3-TTS Base MP3 assets from the approved synthetic British teacher reference, with model/reference hash checks and a manifest receipt | no |
 | `vocabulary/build-audio-repair-batch.mjs` | Freezes the 70 first-pass Owner-QA failures into an ordered repair batch without changing formal MP3 assets | no |
 | `vocabulary/generate-qwen-audio-repair.py` | Generates four cue-protected Qwen repair candidates per failed word under `.scratch/`; formal MP3 assets remain unchanged | no |
 | `vocabulary/serve-audio-repair-qa.mjs` | Serves the isolated 70-word original/A-D comparison QA and saves second-pass progress separately from first-pass QA | no |
-| `verify-vocabulary-migration.mjs` | Replays the legacy vocabulary-entry constraint migration and proves successful row/index/FK preservation plus full rollback and FK restoration on a rejected legacy row | yes |
-| `verify-vocabulary-match-game.mjs` | Verifies the pure 10-word round builder and flip/mismatch/confirmation/match state machine for the frozen-set matching game | yes |
-| `verify-vocabulary-rendered-behavior.mjs` | Uses real Chromium to verify one-audio playback timing/cancellation/retry/end behavior, matching-game interaction, vocabulary cards, dictation/answer/handwriting PDFs, download filenames, and the hidden-answer auto-dictation flow | yes |
+| `verify-vocabulary-migration.mjs` | Replays the legacy vocabulary-entry constraint migration and proves successful row/index/FK preservation plus full rollback and FK restoration on a rejected legacy row | no (manual) |
+| `verify-vocabulary-match-game.mjs` | Verifies the pure 10-word round builder and flip/mismatch/confirmation/match state machine for the frozen-set matching game | no (manual) |
+| `verify-vocabulary-rendered-behavior.mjs` | Uses real Chromium to verify one-audio playback timing/cancellation/retry/end behavior, matching-game interaction, vocabulary cards, dictation/answer/handwriting PDFs, download filenames, and the hidden-answer auto-dictation flow | no (manual) |
 | `verify-architecture-housekeeping.mjs` | Prevents missing CI entrypoints, undocumented verifier registration, Chromium dependency drift, and changed-risk routing regressions | yes |
 | `verify-motion-tokens.mjs` | motion-pass gate: `app/src/**/*.css` (excluding PaperSurface.css contract file) has no `ease-in`, no `transition: all`, and no bare hand-written transition/animation durations outside `token-exempt`-tagged loading or signature moments | yes |
 | `verify-lecture-panel-css.mjs` | lecture-css-restore gate: 讲评五解析面板 (pi-ps-analysis/cloze/gf/seven/writing) 活 TSX 用到的每个类必须有 CSS 定义或在 hook-only 白名单（含白名单防陈旧 + paperBrowsePage.css @import 加载链断言）——retire 刀样式陪葬事故的可执行形态 | yes |

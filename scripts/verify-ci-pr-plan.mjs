@@ -102,8 +102,34 @@ assert.equal(execFileSync('jq', ['-er', '.pack'], { input: JSON.stringify(unicod
 const repository = mkdtempSync(path.join(tmpdir(), 'eqb-ci-plan-'))
 const runnerTemp = mkdtempSync(path.join(tmpdir(), 'eqb-ci-bootstrap-'))
 const workflow = readFileSync(new URL('../.github/workflows/verify.yml', import.meta.url), 'utf8')
-const selectionShell = workflow.match(/        run: \|\n(          plan=[\s\S]*?)\n      - name: Enable pinned pnpm/u)?.[1]
-assert(selectionShell, 'exercise the actual workflow selection step')
+const selectionShells = [...workflow.matchAll(/        run: \|\n(          plan=[\s\S]*?)\n      - name: Enable pinned pnpm/gu)]
+  .map(match => match[1])
+assert.equal(selectionShells.length, 2, 'both isolated runners resolve the trusted natural-event pack')
+assert.equal(selectionShells[0], selectionShells[1], 'neither runner may select a different pack or weaker identity check')
+const selectionShell = selectionShells[0]
+assert.deepEqual([...workflow.slice(workflow.indexOf('\njobs:')).matchAll(/^  ([a-z][a-z0-9-]*):$/gm)].map(match => match[1]),
+  ['verify', 'e2e'], 'preserve the exact two-job Ship/deployment authority topology')
+const [verifyJob, e2eJob] = workflow.slice(workflow.indexOf('\n  verify:')).split('\n  e2e:')
+assert(verifyJob.includes('--pack "$VERIFY_PACK" --lane verify --jobs 2'))
+assert(e2eJob.includes('--pack "$VERIFY_PACK" --lane e2e --jobs 2'))
+assert(!/continue-on-error:|needs:|^    if:/m.test(workflow), 'both jobs run independently and failures remain failures')
+assert(e2eJob.includes("if: ${{ !cancelled() && steps.chromium.outcome == 'success' && steps.lane.outcome == 'success' && steps.lane.outputs.count != '0' }}"),
+  'a failed original E2E must not prevent collecting the transferred lane')
+assert.deepEqual([...e2eJob.matchAll(/run: node scripts\/([^\s]+\.mjs)/g)].map(match => match[1]), [
+  'verify-draft-pagination-renderer.mjs',
+  'verify-draft-pagination-dom-contract.mjs',
+  'verify-a3-imposition.mjs',
+  'verify-reorder-suggest.mjs',
+  'verify-paper-normalization-grammar-fill-browser.mjs',
+  'smoke-golden-path.mjs',
+], 'all six existing E2E seams remain intact and in order')
+const systemInstall = job => job.match(/sudo apt-get install --yes [^\n]+/)?.[0]
+assert(systemInstall(verifyJob))
+assert.equal(systemInstall(e2eJob), systemInstall(verifyJob), 'both render lanes receive the same system dependencies')
+assert(e2eJob.includes("- name: Install verification system dependencies\n        if: ${{ steps.lane.outputs.count != '0' }}"),
+  'empty render partitions do not add system installation to reduced-pack E2Es')
+const laneShell = e2eJob.match(/        run: \|\n(          lane=[\s\S]*?)\n      - name: Install verification system dependencies/u)?.[1]
+assert(laneShell, 'exercise the actual render lane planning shell')
 const bootstrap = (base, head, tested) => execFileSync('bash', ['-e', '-o', 'pipefail', '-c', selectionShell], {
   cwd: repository, stdio: 'pipe', env: {
     ...process.env, BASE_SHA: base, HEAD_SHA: head, GITHUB_SHA: tested,
@@ -119,6 +145,18 @@ const write = (file, contents) => {
 }
 const commit = label => { git('add', '.'); git('commit', '-qm', label); return git('rev-parse', 'HEAD') }
 try {
+  const runLanePlan = pack => execFileSync('bash', ['-e', '-o', 'pipefail', '-c', laneShell], {
+    cwd: new URL('..', import.meta.url), stdio: 'pipe', env: {
+      ...process.env, VERIFY_PACK: pack, RUNNER_TEMP: runnerTemp,
+      GITHUB_OUTPUT: path.join(runnerTemp, 'lane-output'), GITHUB_STEP_SUMMARY: path.join(runnerTemp, 'lane-summary'),
+    },
+  })
+  for (const [pack, count] of [['all', 4], ['ui', 0], ['feature', 0], ['paper-data', 0], ['import-paper', 2]]) {
+    runLanePlan(pack)
+    assert(readFileSync(path.join(runnerTemp, 'lane-output'), 'utf8').endsWith(`count=${count}\n`),
+      `${pack}: extra setup/execution follows actual selected scripts, not a second routing map`)
+  }
+  assert.throws(() => runLanePlan('invalid-pack'), 'lane planning errors fail the job instead of skipping coverage')
   git('init', '-q', '-b', 'main')
   git('config', 'user.name', 'CI fixture')
   git('config', 'user.email', 'ci-fixture@example.invalid')

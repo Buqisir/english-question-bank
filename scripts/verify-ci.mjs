@@ -23,6 +23,7 @@ import {
   createOrderedResultFlusher,
   createVerificationProgress,
   runVerificationSchedule,
+  verificationLaneScripts,
   verificationSchedulingPolicy,
 } from './lib/verificationScheduler.mjs'
 
@@ -202,19 +203,8 @@ const registry = {
   'scripts/verify-generated-docx-output-deleted.mjs',
   'scripts/verify-file-save-as.mjs',
   'scripts/verify-detail-redesign.mjs',
-  'scripts/verify-vocabulary-closed-loop.mjs',
-  'scripts/verify-vocabulary-dictation-review.mjs',
-  'scripts/verify-vocabulary-meaning-recall.mjs',
-  'scripts/verify-gaokao-vocabulary-source.mjs',
-  'scripts/verify-gaokao-vocabulary-golden-content.mjs',
-  'scripts/verify-gaokao-vocabulary-golden-visuals.mjs',
-  'scripts/verify-gaokao-vocabulary-golden-audio.mjs',
-  'scripts/verify-gaokao-vocabulary-full-audio.mjs',
-  'scripts/verify-gaokao-vocabulary-full-audio-qa.mjs',
-  'scripts/verify-gaokao-vocabulary-golden-import.mjs',
-  'scripts/verify-vocabulary-migration.mjs',
-  'scripts/verify-vocabulary-match-game.mjs',
-  'scripts/verify-vocabulary-rendered-behavior.mjs',
+  // Owner-only vocabulary is frozen: its dedicated verifiers are manual-only.
+  // Keep shared build/auth/isolation checks and the independent E2E job intact.
   'scripts/verify-paper-canonical-detail-screen-consumption.mjs',
   'scripts/verify-reading-analysis-retire.mjs',
   'scripts/verify-r2-trap-audit.mjs',
@@ -540,6 +530,13 @@ let plan
 let concurrency
 try {
   plan = verificationPlan()
+  const lanes = argumentValues('--lane')
+  const laneFlagCount = process.argv.filter((arg) => arg === '--lane').length
+  if (laneFlagCount > 1 || laneFlagCount !== lanes.length) {
+    throw new Error('Expected exactly one --lane value')
+  }
+  const lane = lanes[0] ?? 'all'
+  plan = { ...plan, lane, scripts: verificationLaneScripts(plan.scripts, lane) }
   concurrency = verificationConcurrency()
 } catch (error) {
   console.error(error.message)
@@ -686,7 +683,7 @@ const skipped = results.filter((r) => r.status === SKIP_EXIT_CODE)
 const failed = results.filter((r) => r.status !== 0 && r.status !== SKIP_EXIT_CODE)
 
 console.log('\n===== verify summary =====')
-console.log(`MODE ${plan.mode} / RISK ${plan.risk} / PACK ${plan.pack}`)
+console.log(`MODE ${plan.mode} / RISK ${plan.risk} / PACK ${plan.pack} / LANE ${plan.lane}`)
 console.log(
   `JOBS ${concurrency} / CORES ${availableParallelism()}`
     + ` / WALL ${((performance.now() - suiteStartedAt) / 1_000).toFixed(1)}s`,

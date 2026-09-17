@@ -53,6 +53,24 @@ export function createOrderedResultFlusher(flush) {
   }
 }
 
+// Balance the two existing Actions runners without sharing ports, Vite caches,
+// import ledgers or renderer output directories. Whole scripts retain their
+// internal ordering; local verification still executes the complete pack.
+const e2eLaneScripts = new Set([
+  'scripts/verify-universal-nck1-publish.mjs',
+  'scripts/verify-universal-nck1-image-source-bundle.mjs',
+  'scripts/verify-paper-canonical-legacy-opaque-writing-rendered-behavior.mjs',
+  'scripts/verify-paper-canonical-application-writing-rendered-behavior.mjs',
+])
+
+export function verificationLaneScripts(scripts, lane = 'all') {
+  if (!['all', 'verify', 'e2e'].includes(lane)) {
+    throw new Error(`Unknown verification lane: ${lane}`)
+  }
+  return scripts.filter((script) => lane === 'all'
+    || e2eLaneScripts.has(script) === (lane === 'e2e'))
+}
+
 export function verificationSchedulingPolicy(script, source) {
   const declaredResources = new Set(
     [...source.matchAll(/^\/\/\s*verify-resource:\s*([a-z0-9][a-z0-9:-]*)\s*$/gmu)]
