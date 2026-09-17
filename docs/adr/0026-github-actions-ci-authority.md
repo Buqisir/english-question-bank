@@ -7,12 +7,21 @@
 ## Decision
 
 Use `.github/workflows/verify.yml` on natural PR and main push events. GitHub
-Actions owns execution, logs, attempts and the `verify`/`e2e` checks. `verify`
-runs the base-classified pack on PRs and the complete registry on main; `e2e`
-runs the six existing browser seams. There is no Amp CI webhook, queue or
-serialized selection prerequisite. A read-only watcher can notify the Ship
+Actions owns execution, logs, attempts and the `verify`/`e2e` checks. Together
+the two jobs run the base-classified pack on PRs and the complete registry on
+main; `e2e` also runs the six existing browser seams. There is no Amp CI webhook,
+queue or serialized selection prerequisite. A read-only watcher can notify the Ship
 thread, but neither a notification nor its absence changes the Checks.
 PRs still need current-main ancestry and strict/up-to-date protection.
+
+The selected pack is partitioned into disjoint `verify` and `e2e` lanes on
+separate runner workspaces. Both resolve the same immutable event through the
+same trusted-base planner; lane selection only assigns work, never changes
+risk or pack selection. Four whole render-heavy scripts run on the previously
+shorter `e2e` runner, retaining their internal stateful order. Local Full remains
+unpartitioned. Both required jobs must succeed, and either lane's test failure
+fails its job. There are no additional job names, matrix skips, shared render
+directories or changes to branch protection/deployment evidence readers.
 
 The Deployment reader validates the fixed repository/workflow, native App,
 natural main push, exact current main SHA, latest attempt and both successful
