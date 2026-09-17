@@ -1,0 +1,40 @@
+{
+  "folders": [
+    { "id": "review-evening", "name": "晚辅导", "artifactCount": 2 },
+    { "id": "review-practice", "name": "专项练习", "artifactCount": 2 }
+  ],
+  "artifacts": [
+    {
+      "id": "review-1", "folderId": "review-evening",
+      "title": "高三一模阅读 · 周三晚辅导", "fileName": "高三一模阅读.pdf",
+      "fileUrl": "", "artifactType": "student-paper",
+      "sourceDraftPaperId": "review-only", "sourceDraftTitle": "高三一模阅读",
+      "sourceDraftStudentLabel": "", "sourceDraftExists": true,
+      "pageCount": 4, "generatedAt": "2026-09-16T08:00:00Z"
+    },
+    {
+      "id": "review-2", "folderId": "review-practice",
+      "title": "阅读与完形专项练习", "fileName": "阅读与完形专项练习.pdf",
+      "fileUrl": "", "artifactType": "student-paper",
+      "sourceDraftPaperId": "review-only", "sourceDraftTitle": "阅读与完形专项练习",
+      "sourceDraftStudentLabel": "", "sourceDraftExists": true,
+      "pageCount": 8, "generatedAt": "2026-09-14T08:00:00Z"
+    },
+    {
+      "id": "review-3", "folderId": "review-practice",
+      "title": "语法填空巩固练习", "fileName": "语法填空巩固练习.pdf",
+      "fileUrl": "", "artifactType": "student-paper",
+      "sourceDraftPaperId": "review-only", "sourceDraftTitle": "语法填空巩固练习",
+      "sourceDraftStudentLabel": "", "sourceDraftExists": false,
+      "pageCount": 2, "generatedAt": "2026-09-12T08:00:00Z"
+    },
+    {
+      "id": "review-4", "folderId": "review-evening",
+      "title": "月末阅读回顾", "fileName": "月末阅读回顾.pdf",
+      "fileUrl": "", "artifactType": "student-paper",
+      "sourceDraftPaperId": "review-only", "sourceDraftTitle": "月末阅读回顾",
+      "sourceDraftStudentLabel": "", "sourceDraftExists": true,
+      "pageCount": 6, "generatedAt": "2026-08-28T08:00:00Z"
+    }
+  ]
+}

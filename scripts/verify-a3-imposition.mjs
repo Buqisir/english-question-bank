@@ -505,7 +505,47 @@ async function runPhaseB(browser) {
     }, undefined, { timeout: 5000 })
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)
     assert('A3 mode does not force outer-page horizontal overflow on a 900px viewport', overflow <= 4, String(overflow))
+
+    // Groups on opposite pages may start at nearly identical heights. Allow
+    // resize/anchor measurement to settle, then test actual hit areas.
+    const toolsDoNotOverlap = await page.waitForFunction(() => {
+      const tools = [...document.querySelectorAll('.draft-group-actions')]
+      const rects = tools.map((tool) => tool.getBoundingClientRect())
+      return tools.length >= 2 && rects.every((a, i) => rects.slice(i + 1).every((b) =>
+        a.bottom <= b.top || b.bottom <= a.top || a.right <= b.left || b.right <= a.left))
+    }, undefined, { timeout: 5000 }).then(() => true, () => false)
+    assert('A3 tool strips never cover one another at the narrow breakpoint', toolsDoNotOverlap,
+      toolsDoNotOverlap ? '' : JSON.stringify(await page.locator('.draft-group-actions').evaluateAll((tools) => tools.map((el) => ({
+        id: el.dataset.draftToolsGroupId, top: el.style.top, shift: getComputedStyle(el).translate, rect: el.getBoundingClientRect().toJSON(),
+      })))))
+    const swapButton = page.getByRole('button', { name: '换一篇相似篇章', exact: true }).first()
+    await page.route('**/api/similar-passages', (route) => route.fulfill({ status: 503, json: { error: 'QA: unavailable' } }))
+    await swapButton.click()
+    const drawer = page.locator('.draft-paper-rail--swap')
+    await drawer.waitFor({ state: 'visible' })
+    await drawer.locator('.similar-rail-error').waitFor({ state: 'visible' })
+    assert('narrow 换篇 opens its error/retry state in the viewport', await drawer.getByRole('button', { name: '重试' }).evaluate((el) => {
+      const rect = el.getBoundingClientRect()
+      return rect.top >= 0 && rect.bottom <= window.innerHeight
+    }))
+    await drawer.getByRole('button', { name: '返回目录' }).click()
+    await page.unroute('**/api/similar-passages')
     await page.setViewportSize({ width: 1440, height: 920 })
+
+    // Save modal uses real native modality; it must not strand keyboard users
+    // on the now-unmounted export menu item or allow focus behind the dialog.
+    await page.getByRole('button', { name: '导出', exact: true }).click()
+    await page.getByRole('menuitem', { name: '保存 PDF 到个人空间', exact: true }).click()
+    const saveDialog = page.getByRole('dialog', { name: '保存 PDF 到个人空间', exact: true })
+    await saveDialog.waitFor({ state: 'visible' })
+    assert('save dialog opens with native modality and focus inside', await saveDialog.evaluate((el) =>
+      el.matches(':modal') && el.contains(document.activeElement)))
+    await saveDialog.getByRole('button', { name: '保存', exact: true }).focus()
+    await page.keyboard.press('Tab')
+    assert('Tab cannot reach the workbench behind the save modal', await saveDialog.evaluate((el) => el.contains(document.activeElement)))
+    await page.keyboard.press('Escape')
+    await saveDialog.waitFor({ state: 'detached' })
+    assert('Escape closes the save dialog and restores the export trigger', await page.getByRole('button', { name: '导出', exact: true }).evaluate((el) => el === document.activeElement))
 
     // ── Toggle back to A4: imposition wrapper disappears ──
     await page.getByRole('button', { name: 'A4 散页' }).click()

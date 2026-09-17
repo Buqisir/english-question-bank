@@ -250,6 +250,7 @@
  *         the CSS-only path in items 49-50).
  */
 import { existsSync, readFileSync } from 'node:fs'
+import { stripTypeScriptTypes } from 'node:module'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { compileCanonicalPaper } from '../shared/paper-canonical/compiler.mjs'
@@ -297,6 +298,12 @@ const similarServiceSrc = read('app/src/services/similarQuestions.ts')
 const designSrc = read('DESIGN.md')
 const asset = JSON.parse(
   read('app/public/paper-assets/paper-2026-i/latest/paper-asset.json'),
+)
+const lecturePrototypeAsset = JSON.parse(
+  read('app/public/paper-assets/paper-mock-gd-2026-m1/latest/paper-asset.json'),
+)
+const lecturePrototypeAnalysis = JSON.parse(
+  read('app/public/paper-assets/paper-mock-gd-2026-m1/latest/analyses/reading-choice-analysis-v1.json'),
 )
 
 // ─── 1-2. App.tsx: paperBrowseRoute state + openPaperBrowse ───
@@ -1973,14 +1980,16 @@ assert(
 // ─── 72-76. quiet TOC rail (northstar redesign) ───
 
 assert(
-  '72. 挑题态与讲评态复用同一 quiet TOC；dock 讲评态以 compact 修饰档隐藏部分头并缩栏',
+  '72. 挑题态与讲评态复用同一 88px directory surface；真实部分头在两态均保留',
   pageSrc.includes('function renderQuietRail(compact: boolean)') &&
     pageSrc.includes("compact ? ' paper-browse-rail-panel--compact' : ''") &&
     pageSrc.includes('renderQuietRail(dockedLecture)') &&
     !pageSrc.includes('renderPianoRail') &&
     !pageSrc.includes('paper-browse-piano-') &&
-    /@media \(min-width: 1200px\)[\s\S]{0,240}\.paper-browse-shell--lecture-open \.paper-browse-rail-part-head\s*\{[^}]*display:\s*none/.test(pageCssSrc),
-  'the quiet TOC rail is missing, or piano rail remnants remain',
+    /\.paper-browse-rail\s*\{[^}]*width:\s*88px[^}]*margin-left:\s*-8px/.test(pageCssSrc) &&
+    /\.paper-browse-rail-panel\s*\{[^}]*gap:\s*16px[^}]*padding:\s*12px 6px[^}]*border-radius:\s*12px[^}]*var\(--desk-surface, #FAFCF8\)/.test(pageCssSrc) &&
+    !/\.paper-browse-shell--lecture-open \.paper-browse-rail-part-head\s*\{[^}]*display:\s*none/.test(pageCssSrc),
+  'the shared 88px directory surface, visible data-driven section heads, or existing rail reuse is missing',
 )
 assert(
   '73. screen zoom uses ResizeObserver on shell with stepped clamp(1, available/794, 1.35)',
@@ -2007,23 +2016,39 @@ assert(
   'reopening can scroll to old evidence or leave a connector at its pre-slide coordinates',
 )
 assert(
-  '74. Reading A-D 显示为 A-D；TOC 项左对齐，不再居中字母项',
-  /\^Reading\\s\+\(\[A-D\]\)\$\/i/.test(pageSrc) &&
+  '74. Reading A-D 显示为 A篇-D篇；TOC 项左对齐且保留真实写作短名',
+  /\^\[A-D\]\$/.test(pageSrc) &&
+    pageSrc.includes('`${labeled}篇`') &&
+    pageSrc.includes("return /读后续写|续写/.test(card.section) ? '续写' : '应用文'") &&
     !/paper-browse-rail-group--letter/.test(pageSrc) &&
     !/\.paper-browse-rail-group--letter\s*\{[^}]*justify-content:\s*center/.test(pageCssSrc),
-  'missing Reading label normalization or letter centering remains',
+  'missing A篇-D篇/writing label normalization or letter centering remains',
 )
 assert(
-  '75. quiet TOC 只显示部分名与无分数节名；分数和题号章从 DOM 退役；活跃标记为 travelling pointing hand',
+  '75. directory 只显示部分名与无分数节名；current 是独立白 plate，hover 仍由不同色的 FluidHoverList 承担',
   !pageSrc.includes('paper-browse-rail-part-score') &&
     !pageSrc.includes('paper-browse-rail-group-chip') &&
     /trimmed\.replace\(\/\\s\*\[（\(\][\s\S]*满分[\s\S]*\$\/, ''\)/.test(pageSrc) &&
-    pageSrc.includes('paper-browse-rail-hand') &&
-    pageSrc.includes('PointingHand') &&
-    /\.paper-browse-rail-hand\s*\{[^}]*position:\s*absolute/.test(pageCssSrc) &&
-    /@media\s*\(prefers-reduced-motion:\s*no-preference\)\s*\{[^}]*\.paper-browse-rail-hand[^}]*transition:[^}]*var\(--motion-base\)/.test(pageCssSrc) &&
+    !pageSrc.includes('PointingHand') &&
+    pageSrc.includes('paper-browse-rail-current') &&
+    /\.paper-browse-rail-current\s*\{[^}]*background:\s*#fff[^}]*box-shadow:\s*0 1px 3px rgb\(25 29 24 \/ 9%\)/.test(pageCssSrc) &&
+    /\.paper-browse-rail-group-list\.fluid-hover-list\s*\{[^}]*--fh-radius:\s*8px/.test(pageCssSrc) &&
+    /\.paper-browse-rail-group-list:has\(\.paper-browse-rail-group--active\[data-fluid-hover-active\]\)::before\s*\{[^}]*opacity:\s*0/.test(pageCssSrc) &&
+    pageSrc.includes('itemSelector=".paper-browse-rail-group"') &&
+    pageSrc.includes('gapClick={false}') &&
     !/\.paper-browse-rail-group--active::before/.test(pageCssSrc),
-  'score/range chrome remains in the rail, or the travelling active marker is missing',
+  'score/range/hand chrome remains, or selected plate and continuous hover are not independent',
+)
+assert(
+  'selected plate glides only within a column; far/cross-column jumps relocate and reflows snap',
+  pageSrc.includes("Math.abs(previousIndex - nextIndex) === 1 && sameColumn ? 'adjacent' : 'relocate'") &&
+    pageSrc.includes('Math.abs(previousButton.getBoundingClientRect().left - buttonRect.left) < 1') &&
+    pageSrc.includes('const syncGeometry = (): void => updateRailActivePlate(false)') &&
+    pageSrc.includes('new ResizeObserver(syncGeometry)') &&
+    /\.paper-browse-rail-current--adjacent\s*\{[^}]*var\(--motion-base\)[^}]*var\(--ease-out\)/.test(pageCssSrc) &&
+    /\.paper-browse-rail-current--relocate\s*\{[^}]*animation:[^}]*var\(--motion-fast\)[^}]*var\(--ease-out\)/.test(pageCssSrc) &&
+    /@media \(prefers-reduced-motion: no-preference\)[\s\S]{0,500}paper-browse-rail-current--relocate/.test(pageCssSrc),
+  'selected plate can sweep on far/cross-column jumps, animate stale resize geometry, or ignore reduced motion',
 )
 assert(
   '76. 高频钢琴目录点键直接定位，不播放原生或自绘 smooth 滚动',
@@ -2116,6 +2141,73 @@ assert(
     !pageSrc.includes('🔁'),
   'the similar CTA is missing its EQB RefreshCw icon or still contains the retired Emoji glyph',
 )
+
+// Owner-approved reading lecture header: execute the real display-title
+// function with adversarial metadata and render the real reading panel.
+// Extracting this local pure function avoids exporting a UI helper just for QA.
+const titleFunction = pageSrc.match(/function paperBrowseDisplayTitle\([\s\S]*?\n\}/)?.[0]
+const displayTitle = new Function(`${stripTypeScriptTypes(titleFunction)}; return paperBrowseDisplayTitle`)()
+const titleAsset = {
+  paper: { title: 'Original revision title' },
+  content: { blocks: [{ type: 'group', groupId: 'first' }, { type: 'group', groupId: 'second' }] },
+}
+const titleCards = new Map([
+  ['unrelated', { canonicalPaperId: 'current', paperName: 'Wrong group' }],
+  ['first', { canonicalPaperId: 'other', paperName: 'Wrong paper' }],
+  ['second', { canonicalPaperId: 'current', paperName: '  Correct exam  ' }],
+])
+assert('display title rejects unrelated groups and wrong-paper cards',
+  displayTitle(titleAsset, 'current', titleCards) === 'Correct exam')
+titleCards.set('second', { canonicalPaperId: 'current', paperName: '  ' })
+assert('blank or absent metadata falls back to the original title',
+  displayTitle(titleAsset, 'current', titleCards) === 'Original revision title'
+    && displayTitle(titleAsset, 'current', new Map()) === 'Original revision title')
+
+const { createServer } = await import('../app/node_modules/vite/dist/node/index.js')
+const panelRenderer = await createServer({
+  root: path.join(rootDir, 'app'),
+  server: { middlewareMode: true, hmr: false, watch: null },
+})
+try {
+  const { createElement } = await import('../app/node_modules/react/index.js')
+  const { renderToStaticMarkup } = await import('../app/node_modules/react-dom/server.node.js')
+  const { PaperAssetAnalysisPanel } = await panelRenderer.ssrLoadModule(
+    '/src/features/paper-intelligence/PaperAssetAnalysisPanel.tsx',
+  )
+  const model = buildPaperAssetSurfaceModel({
+    asset: lecturePrototypeAsset,
+    analysis: lecturePrototypeAnalysis,
+    groupId: 'group-mock-gd-2026-m1-reading-a',
+  })
+  const analysis = model.analysisByQuestionId['q-mock-gd-2026-m1-021']
+  const props = {
+    analysis,
+    hasActiveQuestion: true,
+    activeOptionLabel: 'B',
+    activeEvidenceId: analysis.supportEvidenceId,
+    onSelectOption() {},
+    onSelectEvidence() {},
+  }
+  const markup = renderToStaticMarkup(createElement(PaperAssetAnalysisPanel, props))
+  // Encode fixture text independently of the panel; truncating to keywords or
+  // swapping source/target must fail, including punctuation and full notes.
+  const encoded = (text) => renderToStaticMarkup(createElement('span', null, text)).slice(6, -7)
+  assert('reading panel preserves complete phrase pairs and notes in source/target order',
+    analysis.locationParaphrases.length > 0 && analysis.locationParaphrases.every((pair) =>
+      markup.includes(`class="pi-ps-analysis-pair-source">${encoded(pair.sourceText)}</span>`)
+      && markup.includes(`<span>${encoded(pair.targetText)}</span></span>`)
+      && (!pair.note || markup.includes(`<p>${encoded(pair.note)}</p>`))))
+  assert('reading panel renders skill and stem without duplicate question/answer chrome',
+    markup.includes(encoded(analysis.skillLabel)) && markup.includes(encoded(analysis.stem))
+      && !markup.includes('pi-ps-analysis-qno') && !markup.includes('pi-ps-analysis-answer'))
+  assert('no-selection and unpublished analysis keep distinct honest empty states',
+    renderToStaticMarkup(createElement(PaperAssetAnalysisPanel, { ...props, hasActiveQuestion: false }))
+      .includes('点击左侧题目查看解析')
+      && renderToStaticMarkup(createElement(PaperAssetAnalysisPanel, { ...props, analysis: null }))
+        .includes('解析未发布'))
+} finally {
+  await panelRenderer.close()
+}
 
 if (failed > 0) {
   console.error(`\npaper-browse verify FAILED: ${passed} passed, ${failed} failed`)

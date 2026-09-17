@@ -85,6 +85,7 @@ import {
 } from '../../../../shared/paper-canonical/grammarFillPublicGeometryFixtures.mjs'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { FluidHoverList } from '../../components/FluidHoverList'
+import { ChevronDown } from '../../icons'
 import { WritingPaperPage } from '../paper-intelligence/WritingPaperPage'
 import {
   buildPaperAssetSurfaceModel,
@@ -187,7 +188,6 @@ import {
 } from './SimilarQuestionsRailView'
 import { applyPaperSurfaceFocusIntent } from './paperBrowseFocusIntent'
 import './paperBrowsePage.css'
-import { PointingHand } from './PointingHand'
 
 type GroupModel =
   | {
@@ -514,10 +514,26 @@ function railGroupLabel(title: string): string {
   return trimmed.replace(/\s*[（(]\s*满分\s*[\d.]+\s*分\s*[）)]\s*$/, '')
 }
 
-// Compact (lecture-open) rail is 72px wide and hides part heads, so each
-// label must stand alone: 「七」「一」「二」 read as nothing without 「写作」
-// above them. 七选五 stays whole (fits at 13px); writing groups are named
-// by railWritingLabel in both widths.
+function readingLectureLabel(title: string): string {
+  const label = railGroupLabel(title)
+  return /^[A-D]$/.test(label) ? `阅读 ${label}` : title
+}
+
+function paperBrowseDisplayTitle(
+  asset: PaperAssetV1,
+  paperId: string,
+  questionGroupById: Map<string, QuestionGroupCard>,
+): string {
+  for (const block of asset.content.blocks) {
+    if (block.type !== 'group') continue
+    const card = questionGroupById.get(block.groupId)
+    if (card?.canonicalPaperId === paperId && card.paperName.trim()) {
+      return card.paperName.trim()
+    }
+  }
+  return asset.paper.title
+}
+
 const RAIL_LECTURE_SHORT_LABELS: Record<string, string> = {
   完形填空: '完形',
   语法填空: '语法',
@@ -536,7 +552,7 @@ function railLectureShortLabel(
   card?: Pick<QuestionGroupCard, 'groupType' | 'section'>,
 ): string {
   const labeled = railGroupLabel(title)
-  if (/^[A-D]$/.test(labeled)) return labeled
+  if (/^[A-D]$/.test(labeled)) return `${labeled}篇`
   const writingLabel = card ? railWritingLabel(card) : null
   if (writingLabel) return writingLabel
   return RAIL_LECTURE_SHORT_LABELS[labeled.trim()] ?? labeled
@@ -736,6 +752,9 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   const [lectureAnalysisLoading, setLectureAnalysisLoading] = useState(false)
   // 讲评态下的显式点选；null = 右边不显示解析，等待左边点击。
   const [lectureSelection, setLectureSelection] = useState<LectureSelection | null>(null)
+  const [openReadingOverviewGroupIds, setOpenReadingOverviewGroupIds] = useState<Set<string>>(
+    () => new Set(),
+  )
   const [readingEvidenceAnchorReadyId, setReadingEvidenceAnchorReadyId] =
     useState<string | null>(null)
   const [openSevenChoiceQuestionIds, setOpenSevenChoiceQuestionIds] = useState<string[]>([])
@@ -787,9 +806,14 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       && window.matchMedia(`(min-width: ${DOCKED_LECTURE_MIN_WIDTH}px)`).matches,
   )
   const [railClickedAnchor, setRailClickedAnchor] = useState<string | null>(null)
-  const [railActiveHand, setRailActiveHand] = useState<{
+  const previousRailPlateAnchorRef = useRef<string | null>(null)
+  const [railActivePlate, setRailActivePlate] = useState<{
     top: number
     left: number
+    width: number
+    height: number
+    motion: 'none' | 'adjacent' | 'relocate'
+    revision: number
   } | null>(null)
   // similar-rail (E2): toast fade timer — the parent is the single owner of
   // the show/clear clock (see SimilarQuestionsRailView's toastMessage doc).
@@ -901,6 +925,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     setLectureAnalysisFetched(false)
     setLectureAnalysisLoading(false)
     setLectureSelection(null)
+    setOpenReadingOverviewGroupIds(new Set())
     setOpenSevenChoiceQuestionIds([])
 
     async function load(): Promise<void> {
@@ -1870,6 +1895,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     if (activeAnchor && railGroupAnchors.has(activeAnchor)) return activeAnchor
     return firstGroupAnchor
   }, [activeAnchor, railClickedAnchor, railGroupAnchors, railParts])
+  const effectiveRailAnchorRef = useRef(effectiveActiveAnchor)
+  effectiveRailAnchorRef.current = effectiveActiveAnchor
 
   useEffect(() => {
     function releaseRailClickLock(): void {
@@ -1896,59 +1923,75 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     }
   }, [])
 
-  const updateRailActiveHand = useCallback((): void => {
+  const updateRailActivePlate = useCallback((animate = false): void => {
     const panel = railPanelRef.current
-    const anchor = effectiveActiveAnchor
-    const handSize = 16
-    const handWidth = (handSize * 16) / 18
-    const handGap = 4
+    const anchor = effectiveRailAnchorRef.current
     if (!panel || !anchor) {
-      setRailActiveHand(null)
+      setRailActivePlate(null)
       return
     }
     const activeButton = panel.querySelector<HTMLButtonElement>(
       `[data-paper-browse-rail-anchor="${cssAttr(anchor)}"]`,
     )
-    const title = activeButton?.querySelector<HTMLElement>(
-      '.paper-browse-rail-group-title',
-    )
-    if (!activeButton || !title) {
-      setRailActiveHand(null)
+    if (!activeButton) {
+      setRailActivePlate(null)
       return
     }
     const panelRect = panel.getBoundingClientRect()
     const buttonRect = activeButton.getBoundingClientRect()
-    const titleRect = title.getBoundingClientRect()
-    setRailActiveHand({
-      top: buttonRect.top - panelRect.top + (buttonRect.height - handSize) / 2,
-      left: titleRect.left - panelRect.left - handGap - handWidth,
-    })
-  }, [effectiveActiveAnchor])
+    const anchors = railParts.flatMap((part) => part.groups.map((group) => group.anchor))
+    const previousIndex = previousRailPlateAnchorRef.current
+      ? anchors.indexOf(previousRailPlateAnchorRef.current)
+      : -1
+    const nextIndex = anchors.indexOf(anchor)
+    const previousButton = previousIndex >= 0
+      ? panel.querySelector<HTMLButtonElement>(
+          `[data-paper-browse-rail-anchor="${cssAttr(anchors[previousIndex])}"]`,
+        )
+      : null
+    // Wrapped sections are separate columns: consecutive groups there are
+    // not visual neighbours, so do not sweep the plate diagonally across them.
+    const sameColumn = previousButton !== null
+      && Math.abs(previousButton.getBoundingClientRect().left - buttonRect.left) < 1
+    const motion = animate && previousIndex >= 0 && nextIndex >= 0
+      ? Math.abs(previousIndex - nextIndex) === 1 && sameColumn ? 'adjacent' : 'relocate'
+      : 'none'
+    previousRailPlateAnchorRef.current = anchor
+    setRailActivePlate((previous) => ({
+      top: buttonRect.top - panelRect.top + panel.scrollTop,
+      left: buttonRect.left - panelRect.left + panel.scrollLeft,
+      width: buttonRect.width,
+      height: buttonRect.height,
+      motion,
+      revision: motion === 'relocate' ? (previous?.revision ?? 0) + 1 : previous?.revision ?? 0,
+    }))
+  }, [railParts])
 
   useLayoutEffect(() => {
     if (loading || !asset) return
-    updateRailActiveHand()
+    updateRailActivePlate(true)
+  }, [effectiveActiveAnchor, asset, loading, updateRailActivePlate])
+
+  useLayoutEffect(() => {
+    if (loading || !asset) return
     const panel = railPanelRef.current
     const rail = railNavRef.current
     if (!panel) return
 
-    const observer = new ResizeObserver(updateRailActiveHand)
+    const syncGeometry = (): void => updateRailActivePlate(false)
+    const observer = new ResizeObserver(syncGeometry)
     observer.observe(panel)
     if (rail) observer.observe(rail)
 
-    window.addEventListener('resize', updateRailActiveHand)
-    panel.addEventListener('scroll', updateRailActiveHand, { passive: true })
-    const rafId = requestAnimationFrame(() => {
-      updateRailActiveHand()
-    })
+    window.addEventListener('resize', syncGeometry)
+    panel.addEventListener('scroll', syncGeometry, { passive: true })
 
     return (): void => {
-      cancelAnimationFrame(rafId)
       observer.disconnect()
-      window.removeEventListener('resize', updateRailActiveHand)
-      panel.removeEventListener('scroll', updateRailActiveHand)
+      window.removeEventListener('resize', syncGeometry)
+      panel.removeEventListener('scroll', syncGeometry)
     }
-  }, [effectiveActiveAnchor, asset, dockedLecture, loading, railParts, updateRailActiveHand])
+  }, [asset, dockedLecture, loading, railParts, updateRailActivePlate])
 
   useLayoutEffect(() => {
     const rail = railNavRef.current
@@ -3146,7 +3189,6 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       const analysis = activeQuestionId ? entry.model.analysisByQuestionId[activeQuestionId] ?? null : null
       return (
         <PaperAssetAnalysisPanel
-          overview={entry.model.overview}
           teachingContent={entry.model.teachingContent}
           analysis={analysis}
           hasActiveQuestion={hasActiveQuestion}
@@ -3261,7 +3303,23 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     }
     const range = buildGroupRangeLabel(asset, group)
     const answerRow = buildAnswerRowText(asset, group)
+    const readingEntry = group.groupType === 'reading' && groupModels[groupId]?.kind === 'reading'
+      ? groupModels[groupId]
+      : null
+    const readingOverview = readingEntry?.model.overview ?? ''
+    const readingOverviewOpen = openReadingOverviewGroupIds.has(groupId)
+    const readingQuestions = group.groupType === 'reading'
+      ? group.questionIds
+          .map((questionId) => ({
+            questionId,
+            question: asset.content.questions[questionId],
+            answer: asset.answerKey.answers[questionId]?.answer ?? null,
+          }))
+          .filter((item) => item.question)
+          .sort((a, b) => a.question.questionNo - b.question.questionNo)
+      : []
     let lectureTitle: string | null = group.title
+    if (group.groupType === 'reading') lectureTitle = readingLectureLabel(group.title)
     if (group.groupType === 'writing' && canonicalConsumption) {
       lectureTitle = canonicalWritingNavigationChrome({
         consumption: canonicalConsumption,
@@ -3281,13 +3339,79 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     const activeOptionLabel = hasActiveQuestion ? lectureSelection?.optionLabel ?? null : null
     return (
       <div className="paper-browse-lecture-body">
-        {lectureTitle && (
-          <h4 className="paper-browse-lecture-title">
-            {lectureTitle}
-            {range && <span className="paper-browse-lecture-range"> · {range}</span>}
-          </h4>
+        {group.groupType === 'reading' ? (
+          <>
+            <div className="paper-browse-reading-header">
+              {lectureTitle && <h4 className="paper-browse-lecture-title">{lectureTitle}</h4>}
+              {readingOverview && (
+                <button
+                  type="button"
+                  className="paper-browse-reading-overview-toggle"
+                  aria-expanded={readingOverviewOpen}
+                  aria-controls={`paper-browse-reading-overview-${groupId}`}
+                  onClick={() => {
+                    setOpenReadingOverviewGroupIds((previous) => {
+                      const next = new Set(previous)
+                      if (next.has(groupId)) next.delete(groupId)
+                      else next.add(groupId)
+                      return next
+                    })
+                  }}
+                >
+                  文章简介
+                  <ChevronDown size={16} aria-hidden="true" />
+                </button>
+              )}
+              {readingOverview && (
+                <p
+                  id={`paper-browse-reading-overview-${groupId}`}
+                  className="paper-browse-reading-overview"
+                  hidden={!readingOverviewOpen}
+                >
+                  {readingOverview}
+                </p>
+              )}
+            </div>
+            {readingQuestions.length > 0 && (
+              <FluidHoverList
+                as="nav"
+                axis="xy"
+                itemSelector="button"
+                gapClick={false}
+                className="paper-browse-reading-question-nav"
+                aria-label={`${lectureTitle ?? group.title}题目与答案`}
+              >
+                {readingQuestions.map(({ questionId, question, answer }) => {
+                  const selected = activeQuestionId === questionId
+                  return (
+                    <button
+                      key={questionId}
+                      type="button"
+                      aria-pressed={selected}
+                      aria-label={answer
+                        ? `第 ${question.questionNo} 题，答案 ${answer}`
+                        : `第 ${question.questionNo} 题，答案未入库`}
+                      onClick={() => selectLectureQuestion(groupId, questionId)}
+                    >
+                      <span>{question.questionNo}</span>
+                      {answer && <span className="paper-browse-reading-question-answer">{answer}</span>}
+                    </button>
+                  )
+                })}
+              </FluidHoverList>
+            )}
+          </>
+        ) : (
+          <>
+            {lectureTitle && (
+              <h4 className="paper-browse-lecture-title">
+                {lectureTitle}
+                {range && <span className="paper-browse-lecture-range"> · {range}</span>}
+              </h4>
+            )}
+            {answerRow && <p className="paper-browse-answer-row">{answerRow}</p>}
+          </>
         )}
-        {answerRow && <p className="paper-browse-answer-row">{answerRow}</p>}
         <div className="paper-browse-lecture-analysis">
           {renderLectureAnalysisPanel({
             groupId,
@@ -3682,16 +3806,17 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           compact ? ' paper-browse-rail-panel--compact' : ''
         }`}
       >
-        {railActiveHand && (
+        {railActivePlate && (
           <span
-            className="paper-browse-rail-hand"
+            key={railActivePlate.revision}
+            className={`paper-browse-rail-current paper-browse-rail-current--${railActivePlate.motion}`}
+            aria-hidden="true"
             style={{
-              top: `${railActiveHand.top}px`,
-              left: `${railActiveHand.left}px`,
+              width: `${railActivePlate.width}px`,
+              height: `${railActivePlate.height}px`,
+              transform: `translate(${railActivePlate.left}px, ${railActivePlate.top}px)`,
             }}
-          >
-            <PointingHand size={16} />
-          </span>
+          />
         )}
         {railParts.map((part, partIndex) => (
           <div
@@ -3724,9 +3849,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                 // (owner 2026-09-15: one name, not 「第一节 / 第二节」 wide
                 // and 「应用文 / 续写」 narrow).
                 const fullTitle = (card && railWritingLabel(card)) ?? railGroupLabel(g.title)
-                const displayTitle = compact
-                  ? railLectureShortLabel(g.title, card)
-                  : fullTitle
+                const displayTitle = railLectureShortLabel(fullTitle, card)
                 const inCurrentDraft = card?.draftPaperButtonState === 'in_current_draft'
                 const ariaLabel = displayTitle === g.title
                   ? inCurrentDraft
@@ -3861,6 +3984,9 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     canonicalConsumption,
     openingGroupIds,
   )
+  const displayTitle = reviewRevision
+    ? asset.paper.title
+    : paperBrowseDisplayTitle(asset, paperId, questionGroupById)
   // Canonical listening already owns its part/section headings inside the
   // listening group card via CanonicalListeningChrome (PaperSurface.tsx).
   // Mirror the print-path guard (print-renderer.mjs): when the listening
@@ -3878,7 +4004,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     <div className="paper-browse-page">
       <AppTopbar
         {...shellNav}
-        pageTitle={asset.paper.title}
+        pageTitle={displayTitle}
         onBack={onBackToWorkbench}
         actionsSlot={topbarActionsSlot}
       />
@@ -3891,7 +4017,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         role="main"
         aria-labelledby="paper-browse-title"
       >
-        <h1 id="paper-browse-title" className="visually-hidden">{asset.paper.title}</h1>
+        <h1 id="paper-browse-title" className="visually-hidden">{displayTitle}</h1>
         <nav
           className={`paper-browse-rail${
             railVerticallyCentered ? ' paper-browse-rail--centered' : ''

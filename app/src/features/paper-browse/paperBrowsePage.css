@@ -68,7 +68,7 @@
   }
 
   .paper-browse-shell:not(.paper-browse-shell--lecture-open) .paper-browse-rail {
-    width: 120px;
+    width: 88px;
   }
 }
 
@@ -89,7 +89,9 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
-  max-width: 120px;
+  width: 88px;
+  max-width: 88px;
+  margin-left: -8px;
   max-height: calc(100vh - 48px);
   overflow-y: auto;
 }
@@ -105,40 +107,57 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  width: 100%;
-  max-width: 120px;
+  gap: 16px;
+  width: 88px;
+  max-width: 88px;
   box-sizing: border-box;
-  /* room for 小手 (PointingHand) to sit left of the active label without clipping */
-  padding-left: 12px;
+  padding: 12px 6px;
+  border-radius: 12px;
+  background: var(--desk-surface, #FAFCF8);
 }
 
 @media (min-width: 1200px) {
   .paper-browse-shell--lecture-open .paper-browse-rail,
   .paper-browse-shell--lecture-open .paper-browse-rail-panel {
-    max-width: 72px;
+    width: 88px;
+    max-width: 88px;
   }
 }
 
-.paper-browse-rail-hand {
+.paper-browse-rail-current {
   position: absolute;
-  display: flex;
-  align-items: center;
-  color: var(--ink, #1F1F1D);
+  top: 0;
+  left: 0;
+  z-index: 0;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgb(25 29 24 / 9%);
   pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .paper-browse-rail-hand {
-    transition:
-      top var(--motion-base) var(--ease-out),
-      left var(--motion-base) var(--ease-out);
+  .paper-browse-rail-current--adjacent {
+    transition: transform var(--motion-base) var(--ease-out);
+  }
+
+  .paper-browse-rail-current--relocate {
+    animation: paper-browse-rail-relocate var(--motion-fast) var(--ease-out);
   }
 }
 
+@keyframes paper-browse-rail-relocate {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.paper-browse-rail-part {
+  position: relative;
+  z-index: 1;
+}
+
 .paper-browse-rail-part + .paper-browse-rail-part {
-  margin-top: 4px;
-  padding-top: 4px;
+  margin-top: 0;
+  padding-top: 0;
 }
 
 .paper-browse-rail-part-head {
@@ -146,16 +165,17 @@
   width: 100%;
   background: none;
   border: none;
-  padding: 2px 0 4px;
+  padding: 0 0 6px 12px;
   cursor: pointer;
   text-align: left;
   font: inherit;
 }
 
 .paper-browse-rail-part-name {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.06em;
+  line-height: 18px;
+  letter-spacing: 0;
   color: var(--muted, #6B6E68);
 }
 
@@ -166,8 +186,9 @@
   width: 100%;
   background: transparent;
   border: none;
-  border-radius: 0;
-  padding: 4px 0 4px 10px;
+  border-radius: 8px;
+  height: 32px;
+  padding: 0 6px 0 12px;
   font: inherit;
   font-size: 13px;
   color: var(--ink-soft, #4A4C48);
@@ -192,7 +213,7 @@
 .paper-browse-rail-scissors {
   display: inline-flex;
   flex: none;
-  margin-left: 6px;
+  margin-left: 5px;
   color: var(--ink-soft, #4A4C48);
 }
 
@@ -201,18 +222,18 @@
 }
 
 .paper-browse-rail-group-list.fluid-hover-list {
-  --fh-radius: 0;
+  --fh-radius: 8px;
+}
+
+/* The shared hover keeps tracking continuously, but the current row owns the
+   white plate: hovering it must not cover that persistent location state. */
+.paper-browse-rail-group-list:has(.paper-browse-rail-group--active[data-fluid-hover-active])::before {
+  opacity: 0;
 }
 
 .paper-browse-rail-group--active {
   color: var(--ink, #1F1F1D);
   font-weight: 600;
-}
-
-@media (min-width: 1200px) {
-  .paper-browse-shell--lecture-open .paper-browse-rail-part-head {
-    display: none;
-  }
 }
 
 .paper-browse-rail-panel--compact .paper-browse-rail-group-title {
@@ -815,6 +836,86 @@
   color: var(--paper-ink-strong);
 }
 
+.paper-browse-reading-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+
+.paper-browse-reading-overview-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 0 4px 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--paper-ink-muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+}
+
+.paper-browse-reading-overview-toggle:hover {
+  color: var(--ink);
+}
+
+.paper-browse-reading-overview-toggle svg {
+  transition: transform var(--motion-fast) var(--ease-hover);
+}
+
+.paper-browse-reading-overview-toggle[aria-expanded='true'] svg {
+  transform: rotate(180deg);
+}
+
+.paper-browse-reading-overview {
+  flex-basis: 100%;
+  margin: 0;
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.paper-browse-reading-question-nav {
+  --fh-radius: 8px;
+  display: flex;
+  align-self: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 4px 0;
+}
+
+.paper-browse-reading-question-nav button {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--paper-ink-muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* This selected paper surface intentionally overrides FluidHoverList's
+ * transient hover surface: selection stays visible while hover still glides. */
+.paper-browse-reading-question-nav button[aria-pressed='true'] {
+  background: var(--eqb-color-paper);
+  box-shadow: 0 0 0 1px rgba(30, 30, 28, 0.05), 0 1px 2px rgba(30, 30, 28, 0.06);
+  color: var(--paper-ink-strong);
+  font-weight: 600;
+}
+
+.paper-browse-reading-question-nav button[aria-pressed='true'] .paper-browse-reading-question-answer {
+  color: var(--eqb-color-success);
+}
+
 .paper-browse-lecture-range {
   font-weight: 400;
   color: var(--paper-ink-muted);
@@ -1273,6 +1374,8 @@
     top: auto;
     transform: none;
     max-width: none;
+    width: auto;
+    margin-left: 0;
     flex-direction: row;
     flex-wrap: wrap;
     max-height: none;
@@ -1287,6 +1390,7 @@
     gap: 8px;
     width: 100%;
     max-width: none;
+    padding: 12px 6px;
   }
 
   .paper-browse-rail-part {
@@ -1605,6 +1709,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .paper-browse-reading-overview-toggle svg {
+    transition: none;
+  }
+
   .similar-rcard {
     transition: none;
   }

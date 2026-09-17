@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paper 目录 · 无手版原型</title>
+  <link rel="stylesheet" href="/app/public/fonts/paper/fonts.css">
+  <link rel="stylesheet" href="/app/src/index.css">
+  <link rel="stylesheet" href="/app/src/App.css">
+  <link rel="stylesheet" href="/app/src/shared-ui/papersurface/PaperSurface.css">
+  <link rel="stylesheet" href="/app/src/features/paper-intelligence/paperIntelligence.css">
+  <link rel="stylesheet" href="/app/src/features/paper-browse/paperBrowsePage.css">
+  <link rel="stylesheet" href="./prototype.css">
+  <script type="module" src="./prototype.js"></script>
+</head>
+<body class="rail-prototype" data-mode="no-hand">
+  <header class="prototype-toolbar">
+    <h1>目录对比 <span>交互原型</span></h1>
+    <p id="scope-note"><span class="scope-wide">只演示目录；卷面真实，讲评固定在阅读 A。</span><span class="scope-narrow">桌面目录原型；窄屏可横向滑动查看纸面。</span></p>
+    <div class="prototype-modes" role="group" aria-label="对比目录设计">
+      <button type="button" data-mode="before" aria-pressed="false">原目录</button>
+      <button type="button" data-mode="after" aria-pressed="false">带手</button>
+      <button type="button" data-mode="no-hand" aria-pressed="true">无手</button>
+    </div>
+  </header>
+  <main id="prototype" aria-busy="true" aria-describedby="scope-note">
+    <p class="prototype-loading" role="status">正在载入卷面…</p>
+  </main>
+  <p class="visually-hidden" id="prototype-status" role="status" aria-live="polite"></p>
+</body>
+</html>

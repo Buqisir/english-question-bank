@@ -1,12 +1,11 @@
 import type { ReactNode } from 'react'
-import { Check } from '../../icons'
+import { ArrowRight, Check } from '../../icons'
 import { FluidHoverList } from '../../components/FluidHoverList'
 import type { PaperAssetQuestionAnalysisView } from './paperAssetSurfaceAdapter.ts'
 import { ObjectiveTeachingContent } from './ObjectiveTeachingContent.tsx'
 import type { ObjectiveTeachingView } from './objectiveTeachingContentAdapter.ts'
 
 export type PaperAssetAnalysisPanelProps = {
-  overview: string
   teachingContent?: ObjectiveTeachingView | null
   analysis: PaperAssetQuestionAnalysisView | null
   hasActiveQuestion: boolean
@@ -25,7 +24,6 @@ export type PaperAssetAnalysisPanelProps = {
  * answer-key explanation or falling back to legacy sidecars.
  */
 export function PaperAssetAnalysisPanel({
-  overview,
   teachingContent,
   analysis,
   hasActiveQuestion,
@@ -37,7 +35,6 @@ export function PaperAssetAnalysisPanel({
   if (!hasActiveQuestion) {
     return (
       <div className="pi-ps-analysis-empty">
-        {overview && <p className="pi-reading-group-overview-text">{overview}</p>}
         <ObjectiveTeachingContent content={teachingContent ?? null} />
         <p>点击左侧题目查看解析</p>
       </div>
@@ -47,7 +44,6 @@ export function PaperAssetAnalysisPanel({
   if (!analysis) {
     return (
       <div className="pi-ps-analysis-empty pi-ps-analysis-empty--unpublished">
-        {overview && <p className="pi-reading-group-overview-text">{overview}</p>}
         <ObjectiveTeachingContent content={teachingContent ?? null} />
         <p>解析未发布</p>
       </div>
@@ -60,17 +56,9 @@ export function PaperAssetAnalysisPanel({
 
   return (
     <div className="pi-ps-analysis" data-pi-question-id={analysis.questionId}>
-      {overview && (
-        <details className="pi-reading-group-overview">
-          <summary className="pi-reading-group-overview-summary">文章简介</summary>
-          <p className="pi-reading-group-overview-text">{overview}</p>
-        </details>
-      )}
       <ObjectiveTeachingContent content={teachingContent ?? null} />
       <div className="pi-ps-analysis-header">
-        <span className="pi-ps-analysis-qno">{analysis.questionNo}</span>
         <span className="pi-ps-analysis-type">{analysis.skillLabel}</span>
-        <span className="pi-ps-analysis-answer">答案 {analysis.answer}</span>
       </div>
       <div className="pi-ps-analysis-stem">
         <p>{analysis.stem}</p>
@@ -162,9 +150,11 @@ export function PaperAssetAnalysisPanel({
                           <ul className="pi-ps-analysis-paraphrases">
                             {analysis.locationParaphrases.map((item, index) => (
                               <li key={`${item.sourceText}-${index}`}>
-                                <span>{item.sourceText}</span>
-                                <span aria-hidden="true"> → </span>
-                                <strong>{item.targetText}</strong>
+                                <span className="pi-ps-analysis-pair-source">{item.sourceText}</span>
+                                <span className="pi-ps-analysis-pair-target">
+                                  <ArrowRight size={16} aria-hidden="true" />
+                                  <span>{item.targetText}</span>
+                                </span>
                                 {item.note && <p>{item.note}</p>}
                               </li>
                             ))}

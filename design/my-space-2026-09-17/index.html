@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>个人空间 · UI 前后对比</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/app/src/index.css">
+  <link rel="stylesheet" href="/app/src/App.css">
+  <link rel="stylesheet" href="./before.css">
+  <link rel="stylesheet" href="./prototype.css">
+  <script type="module" src="./prototype.js"></script>
+</head>
+<body class="my-space-page" data-mode="after">
+  <div id="root" aria-busy="true"></div>
+  <aside class="prototype-controls" aria-label="原型对比工具">
+    <strong>个人空间 · UI 对比</strong>
+    <div class="prototype-switch" role="group" aria-label="对比设计">
+      <button type="button" data-mode="before" aria-pressed="false">原版</button>
+      <button type="button" data-mode="after" aria-pressed="true">调整后</button>
+    </div>
+    <label>查看状态
+      <select id="prototype-state">
+        <option value="files">有文件</option>
+        <option value="empty">空状态</option>
+      </select>
+    </label>
+    <small>演示数据 · 纸张为示意<br>下载、跳转和删除均不执行</small>
+  </aside>
+  <p id="prototype-notice" role="status" hidden></p>
+</body>
+</html>

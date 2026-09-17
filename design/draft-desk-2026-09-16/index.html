@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>草稿卷 · UI 前后对比</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/app/src/index.css">
+  <link rel="stylesheet" href="/app/src/App.css">
+  <link rel="stylesheet" href="/app/src/features/draft-paper/DraftPaperWorkbench.css">
+  <link rel="stylesheet" href="./prototype.css?v=ui-only-2">
+  <script type="module" src="./prototype.js?v=ui-only-2"></script>
+</head>
+<body data-mode="after">
+  <!-- Established EQB Daydream world. A local display-only study: the original
+       four-page pagination, paper geometry, content and fonts remain unchanged.
+       Directory and paper-edge tools share one quiet surface language. Menus
+       demonstrate hierarchy; no API writes, pagination, downloads or exports. -->
+  <main id="prototype" aria-busy="true"><p class="prototype-loading">正在载入草稿卷原型…</p></main>
+  <aside class="prototype-controls" aria-label="原型对比">
+    <span>草稿卷 · UI 前后对比</span>
+    <div role="group" aria-label="对比设计">
+      <button type="button" data-mode="before" aria-pressed="false">原版</button>
+      <button type="button" data-mode="after" aria-pressed="true">调整后</button>
+    </div>
+    <small id="prototype-note" role="status">纯 UI 对比 · 不修改草稿</small>
+  </aside>
+</body>
+</html>

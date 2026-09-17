@@ -25,6 +25,8 @@
   --eqb-color-danger: #dc2626;
   --eqb-color-danger-soft: rgba(239, 68, 68, 0.08);
   --eqb-color-warning: #E8901A;
+  /* Small warning text: AA on paper and desk-hover; keep the bright mark color. */
+  --eqb-color-warning-text: #965a08;
   --eqb-color-warning-soft: rgba(232, 144, 26, 0.10);
   --eqb-color-warning-rgb: 232, 144, 26; /* 供 rgba() alpha 叠层复用；不单独当色值使用 */
   --eqb-color-success: #1FA062;

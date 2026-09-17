@@ -32,9 +32,9 @@
   display: flex;
   align-items: baseline;
   gap: 0.5rem;
-  margin-bottom: 12px;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid #eee;
+  margin: 8px 0;
+  padding: 0;
+  border: 0;
 }
 .pi-ps-analysis-qno {
   font-weight: 700;
@@ -95,7 +95,7 @@
   font-size: 0.8125rem;
 }
 .pi-ps-analysis-option-trap {
-  color: var(--eqb-color-warning);
+  color: var(--eqb-color-warning-text);
   font-size: 0.75rem;
 }
 .pi-ps-analysis-options--accordion {
@@ -158,7 +158,7 @@ button.pi-ps-analysis-option-row:focus-visible {
 }
 .pi-ps-analysis-option-badge--trap {
   background: transparent;
-  color: var(--eqb-color-warning);
+  color: var(--eqb-color-warning-text);
   font-size: 12px;
   font-weight: 500;
 }
@@ -230,17 +230,40 @@ button.pi-ps-analysis-option-row:focus-visible {
 }
 .pi-ps-analysis-paraphrases {
   margin: 0;
-  padding-left: 1rem;
+  padding: 0;
+  list-style: none;
   color: #555;
   font-size: 0.8125rem;
 }
 .pi-ps-analysis-paraphrases li {
-  margin-bottom: 0.5rem;
+  margin: 0 0 16px;
+}
+.pi-ps-analysis-paraphrases li:last-child {
+  margin-bottom: 0;
+}
+.pi-ps-analysis-pair-source {
+  display: block;
+  color: var(--ink);
+  font-weight: 500;
+}
+.pi-ps-analysis-pair-target {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  align-items: start;
+  gap: 8px;
+  margin-top: 4px;
+  color: var(--ink);
+  font-weight: 400;
+}
+.pi-ps-analysis-pair-target svg {
+  margin-top: 4px;
+  color: var(--paper-ink-muted);
 }
 .pi-ps-analysis-paraphrases p {
-  margin: 0.125rem 0 0;
-  color: #666;
+  margin: 8px 0 0;
+  color: var(--paper-ink-muted);
   font-size: 0.8125rem;
+  line-height: 1.6;
 }
 .pi-ps-analysis-question-focus {
   margin-top: 16px;

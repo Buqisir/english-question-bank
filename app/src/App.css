@@ -1740,10 +1740,35 @@ button:disabled {
   border: 1px solid var(--line);
 }
 
+/* Native modal focus/inert behavior, retaining the existing full-screen
+   backdrops and their individual surface/entrance styles. */
+.entry-backdrop,
+.draft-modal-backdrop {
+  box-sizing: border-box;
+  border: 0;
+  color: inherit;
+  height: 100%;
+  margin: 0;
+  max-height: none;
+  max-width: none;
+  width: 100%;
+}
+
+.entry-backdrop::backdrop,
+.draft-modal-backdrop::backdrop {
+  background: transparent;
+}
+
+.entry-backdrop:not([open]),
+.draft-modal-backdrop:not([open]) {
+  display: none;
+}
+
 .entry-backdrop {
   position: fixed;
   inset: 0;
   z-index: 30;
+  padding: 0;
   display: flex;
   justify-content: flex-end;
   background: rgba(30, 30, 28, 0.3);
@@ -5533,6 +5558,10 @@ button:disabled {
   position: fixed;
   z-index: 40;
   min-width: 148px;
+  max-width: calc(100vw - 16px);
+  max-height: calc(100dvh - 16px);
+  overflow-y: auto;
+  box-sizing: border-box;
   padding: 4px;
   background: #FFFFFF;
   border-radius: 8px;

@@ -1,0 +1,167 @@
+/* Isolated review surface. No production CSS, renderer, or data changes. */
+.rail-prototype {
+  margin: 0;
+  --prototype-toolbar-height: 48px;
+  --rail-surface: #fafcf8;
+  --rail-hover: #e5eae1;
+  --rail-ink: #191d18;
+  --rail-muted: #60665c;
+  --rail-width: 104px;
+  --rail-offset: -16px;
+  --rail-label-inset: 28px;
+}
+
+.rail-prototype[data-mode="no-hand"] {
+  --rail-width: 88px;
+  --rail-offset: -8px;
+  --rail-label-inset: 12px;
+}
+
+.prototype-toolbar {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  height: var(--prototype-toolbar-height);
+  padding: 0 24px;
+  box-sizing: border-box;
+  background: #fafcf8;
+  border-bottom: 1px solid #e3e8df;
+}
+
+.prototype-toolbar h1 { margin: 0; font-size: 14px; font-weight: 600; white-space: nowrap; }
+.prototype-toolbar h1 span { margin-left: 8px; font-size: 12px; font-weight: 400; color: var(--rail-muted); }
+.prototype-toolbar p { margin: 0; font-size: 12px; color: var(--rail-muted); }
+.scope-narrow { display: none; }
+.prototype-modes { display: flex; gap: 4px; margin-left: auto; }
+.prototype-modes button {
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  padding: 6px 12px;
+  color: var(--rail-muted);
+  font: inherit;
+  font-size: 13px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.prototype-modes button[aria-pressed="true"] { background: #e5eae1; color: var(--rail-ink); }
+.prototype-modes button:hover { color: var(--rail-ink); }
+.rail-prototype button:focus-visible { outline: 2px solid #2c6e56; outline-offset: 2px; }
+.prototype-loading { padding: 24px; }
+#prototype { padding-top: var(--prototype-toolbar-height); }
+
+/* The actual full-paper DOM and its sheet geometry are preserved. */
+.rail-prototype .paper-browse-lecture-panel {
+  top: calc(var(--prototype-toolbar-height) + 24px);
+  height: calc(100vh - var(--prototype-toolbar-height) - 48px);
+  align-self: start;
+}
+.rail-prototype .paper-browse-rail {
+  top: calc(50vh + var(--prototype-toolbar-height) / 2);
+  max-height: calc(100vh - var(--prototype-toolbar-height) - 32px);
+  overflow: visible;
+}
+.rail-prototype [data-prototype-inert] { cursor: default; }
+.rail-prototype .paper-browse-group-actions { visibility: hidden; }
+.rail-prototype .ps-question-stem-button:hover { background: transparent; }
+.rail-prototype .paper-browse-rail-part-head { cursor: default; }
+
+/* One current-position layer owns the white plate (and the hand only in the
+   comparison variant). Hover is separate; neither shifts the labels. */
+.rail-current {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  color: var(--rail-ink);
+}
+.rail-current svg { flex: none; }
+.rail-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: var(--rail-hover);
+}
+.rail-prototype .paper-browse-rail-group { z-index: 2; }
+.rail-prototype .paper-browse-rail-group-list::before { display: none; }
+.rail-prototype .paper-browse-rail-group-label { gap: 0; }
+
+/* Both variants fit inside the existing 120px paper offset. Removing the hand
+   also removes its reserved slot, leaving 12px label padding and a 16px paper
+   gap. Sheet dimensions and position remain identical in all three modes. */
+.rail-prototype:not([data-mode="before"]) .paper-browse-rail {
+  width: var(--rail-width);
+  max-width: var(--rail-width);
+  margin-left: var(--rail-offset);
+}
+.rail-prototype:not([data-mode="before"]) .paper-browse-rail-panel {
+  width: var(--rail-width);
+  max-width: var(--rail-width);
+  gap: 16px;
+  padding: 12px 6px;
+  border-radius: 12px;
+  background: var(--rail-surface);
+}
+.rail-prototype:not([data-mode="before"]) .paper-browse-rail-part + .paper-browse-rail-part {
+  margin: 0;
+  padding: 0;
+}
+.rail-prototype:not([data-mode="before"]) .paper-browse-rail-part-head { display: block; padding: 0 0 6px var(--rail-label-inset); }
+.rail-prototype:not([data-mode="before"]) .paper-browse-rail-part-name {
+  color: var(--rail-muted);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 18px;
+}
+.rail-prototype:not([data-mode="before"]) .paper-browse-rail-group {
+  height: 32px;
+  padding: 0 6px 0 var(--rail-label-inset);
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 20px;
+  color: #4a4c48;
+}
+.rail-prototype:not([data-mode="before"]) .paper-browse-rail-group--active { color: var(--rail-ink); font-weight: 600; }
+.rail-prototype:not([data-mode="before"]) .rail-current {
+  padding-left: 8px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgb(25 29 24 / 9%);
+}
+.rail-prototype:not([data-mode="before"]) .rail-hover { border-radius: 8px; }
+.rail-prototype:not([data-mode="before"]) .paper-browse-rail-scissors { margin-left: 5px; }
+
+/* This is a desktop rail study, not a proposed mobile redesign. Below 1200px
+   the frozen lecture sample is omitted; narrow screens can pan the full-size
+   paper without squeezing it into a phone-width strip. */
+@media (max-width: 1199px) {
+  .rail-prototype .paper-browse-lecture-panel { display: none; }
+  .rail-prototype .paper-browse-shell { grid-template-columns: 72px minmax(0, 1fr); }
+  .rail-prototype .paper-browse-content { transform: none; }
+}
+@media (max-width: 700px) {
+  .rail-prototype { --prototype-toolbar-height: 80px; }
+  .prototype-toolbar { padding: 8px 16px; flex-wrap: wrap; align-content: center; gap: 4px 12px; }
+  .prototype-toolbar h1 { font-size: 13px; }
+  .prototype-toolbar p { order: 3; width: 100%; font-size: 11px; }
+  .prototype-toolbar h1 span { font-size: 11px; }
+  .scope-wide { display: none; }
+  .scope-narrow { display: inline; }
+  .rail-prototype .paper-browse-shell { display: grid; grid-template-columns: 72px minmax(0, 1fr); padding: 24px 24px 64px; gap: 24px; }
+  .rail-prototype .paper-browse-rail { position: sticky; transform: translateY(-50%); flex-direction: column; }
+  .rail-prototype .paper-browse-rail-panel { flex-direction: column; }
+  .rail-prototype .paper-browse-rail-part { flex: none; }
+  .rail-prototype .paper-browse-content { overflow-x: auto; }
+  .rail-prototype .paper-browse-zoom { width: 650px; max-width: none; }
+  [data-mode="before"] .paper-browse-rail-part-head { display: none; }
+}

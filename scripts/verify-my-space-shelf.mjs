@@ -1,26 +1,8 @@
 #!/usr/bin/env node
 /**
- * my-space-shelf verify: MySpacePage rebuilt as a token-only card shelf
- * (docs/cuts/my-space-shelf/plan.md), replacing the admin-file-manager
- * two-column layout (folder tree + file rows + triple heading + hardcoded
- * palette). Updated in docs/cuts/dossier-cabinet/plan.md for the month-
- * archive-group + miniature-A4-card + upgraded delete-dialog-copy form.
- *
- * Asserts:
- *   1. MySpacePage.css carries zero hardcoded palette hex (allowlist is
- *      empty — every color is var(--eqb-*)/var(--paper-*) or color-mix()
- *      built from one).
- *   2. MySpacePage.tsx contains no window.confirm; the delete flow uses a
- *      custom confirm dialog instead, with dossier-cabinet's upgraded copy
- *      ("删除草稿卷 PDF" title, "删除 PDF" confirm action).
- *   3. Card grid class exists with the auto-fill/minmax track from the
- *      plan (minmax(200px, 1fr), per dossier-cabinet's miniature-A4 cards).
- *   4. Primary action class (solid var(--eqb-color-primary)) and danger
- *      action class (var(--eqb-color-danger)) both exist.
- *   5. The old triple-heading ("N 个 PDF") text is gone.
- *   6. Folder filter chips are conditional on folders.length > 0 (renders
- *      nothing for 0/1 folders, per plan.md Locked Decision 2).
- *   7. Artifacts are grouped into month-archive sections (dossier-cabinet).
+ * Personal Space display and behavior backstop. Visual assertions follow the
+ * approved directory rail + grouped file-list composition; safety assertions
+ * preserve the existing data, download, and irreversible-delete contracts.
  */
 
 import { readFileSync } from 'node:fs'
@@ -29,7 +11,6 @@ import { fileURLToPath } from 'node:url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
-
 let passed = 0
 let failed = 0
 
@@ -47,79 +28,44 @@ function assert(name, condition, details = '') {
   }
 }
 
-console.log('my-space-shelf verify: card shelf token/behavior contract')
+console.log('my-space-shelf verify: directory/list/menu display and behavior contract')
 
-const CSS_PATH = 'app/src/features/my-space/MySpacePage.css'
-const TSX_PATH = 'app/src/features/my-space/MySpacePage.tsx'
+const css = read('app/src/features/my-space/MySpacePage.css')
+const tsx = read('app/src/features/my-space/MySpacePage.tsx')
+const unexpectedHex = css.match(/#[0-9a-fA-F]{3,8}\b/g) || []
 
-const css = read(CSS_PATH)
-const tsx = read(TSX_PATH)
-
-// 1. Palette-hex-zero audit. Allowlist is intentionally empty — every color
-// in this file is a var(--eqb-*) token or a color-mix() wash of one.
-const HEX_ALLOWLIST = []
-const hexMatches = css.match(/#[0-9a-fA-F]{3,8}\b/g) || []
-const unexpectedHex = hexMatches.filter((hex) => !HEX_ALLOWLIST.includes(hex.toLowerCase()))
-assert(
-  'MySpacePage.css has zero hardcoded palette hex (allowlist empty)',
-  unexpectedHex.length === 0,
-  unexpectedHex.join(', '),
-)
-
-// 2. No window.confirm — delete uses a custom modal with dossier-cabinet's
-// upgraded copy (title + "删除 PDF" confirm action, cancel-then-confirm order).
+assert('MySpacePage.css has zero hardcoded palette hex', unexpectedHex.length === 0, unexpectedHex.join(', '))
 assert('MySpacePage.tsx does not use window.confirm', !tsx.includes('window.confirm'))
 assert(
-  'MySpacePage.tsx renders a custom confirm dialog (role="alertdialog")',
-  tsx.includes('role="alertdialog"') && tsx.includes('my-space-confirm-dialog'),
+  'named permanent delete uses a custom alert dialog and preserves original-draft wording',
+  tsx.includes('role="alertdialog"') && tsx.includes('删除草稿卷 PDF') && tsx.includes('此操作不可恢复。原草稿不受影响。'),
 )
-assert(
-  'confirm dialog has the upgraded title + cancel + confirm action copy',
-  /删除草稿卷 PDF/.test(tsx) && /取消/.test(tsx) && /删除 PDF/.test(tsx),
-)
+assert('delete dialog retains cancel and explicit PDF deletion actions', tsx.includes('取消') && tsx.includes('删除 PDF'))
+assert('missing original draft still explains that its PDF remains downloadable', tsx.includes('原草稿卷已删除，PDF 仍可下载'))
 
-// 3. Card grid.
-assert('MySpacePage.tsx renders a card grid container', tsx.includes('my-space-grid'))
-const gridRuleMatch = css.match(/\.my-space-grid\s*\{[^}]*\}/)
-assert('MySpacePage.css defines .my-space-grid', Boolean(gridRuleMatch))
-assert(
-  '.my-space-grid uses the auto-fill/minmax(200px, 1fr) track',
-  Boolean(gridRuleMatch) && /repeat\(auto-fill,\s*minmax\(200px,\s*1fr\)\)/.test(gridRuleMatch[0]),
-)
-assert('MySpacePage.tsx renders card elements with the card class', tsx.includes('my-space-card'))
+assert('approved workspace renders a bounded folder rail and flexible main list', tsx.includes('my-space-workspace') && tsx.includes('my-space-rail') && tsx.includes('my-space-file-list'))
+assert('file rows replace the obsolete card grid and fake thumbnails', tsx.includes('my-space-file-row') && !tsx.includes('my-space-grid') && !tsx.includes('my-space-card-thumb'))
+assert('folder rail includes real all-files and folder counts', tsx.includes('全部文件') && tsx.includes('folder.artifactCount'))
+assert('no global total is fabricated beside the all-files rail entry', !/全部文件<\/span>[\s\S]{0,120}artifacts\.length/.test(tsx))
+assert('artifacts remain grouped into newest-first month sections', tsx.includes('my-space-month-group') && tsx.includes('b.localeCompare(a)'))
+assert('row metadata preserves folder, page count, date, and student label', tsx.includes('folderNames.get') && tsx.includes('artifact.pageCount || 1') && tsx.includes('dateLabel') && tsx.includes('artifact.sourceDraftStudentLabel'))
 
-// 7. Month-archive grouping (dossier-cabinet).
-assert(
-  'MySpacePage.tsx groups artifacts into month-archive sections',
-  tsx.includes('my-space-month-group') && tsx.includes('my-space-month-head'),
-)
+assert('download and original draft remain visible row actions', tsx.includes('<Download size={16}') && tsx.includes('打开原草稿'))
+assert('save-as remains connected to the existing download path', tsx.includes("downloadArtifact(artifact, 'save-as')"))
+assert('ellipsis menu exposes exactly save-as and delete as menu item buttons', (tsx.match(/<button[^>]*[\s\S]{0,160}?role="menuitem"/g) || []).length === 2 && tsx.includes('另存为…') && tsx.includes('删除文件'))
+assert('row and menu FluidHoverList instances disable gap clicks', (tsx.match(/gapClick=\{false\}/g) || []).length >= 3)
+assert('menu is portalled and supports initial focus, Escape, and arrow keys', tsx.includes('createPortal(') && tsx.includes("event.key === 'Escape'") && tsx.includes("event.key === 'ArrowDown'") && tsx.includes("[role=\"menuitem\"]')?.focus("))
+assert('menu placement guards viewport edges and bottom rows', tsx.includes('window.innerHeight') && tsx.includes('window.innerWidth'))
+assert('folder switches dismiss an open file menu', /selectFolder[\s\S]{0,120}activeFileMenuCloser/.test(tsx))
 
-// 4. Primary + danger action classes.
-const primaryRuleMatch = css.match(/\.my-space-card-primary\s*\{[^}]*\}/)
-assert('MySpacePage.css defines .my-space-card-primary', Boolean(primaryRuleMatch))
-assert(
-  '.my-space-card-primary fills solid with the action token',
-  Boolean(primaryRuleMatch) && /background:\s*var\(--action\)/.test(primaryRuleMatch[0]),
-)
-assert('MySpacePage.tsx applies the primary action class to 下载 PDF', /my-space-card-primary["'][\s\S]{0,300}下载 PDF/.test(tsx))
+assert('load token stale-response guard remains intact', tsx.includes('loadTokenRef.current !== token'))
+assert('folder filtering still calls fetchMySpace with the selected folder', tsx.includes('fetchMySpace(folderId)'))
+assert('download picker is prepared before the artifact becomes busy', tsx.indexOf('prepareFileSaveTarget') < tsx.indexOf('setBusyId(artifact.id)'))
+assert('delete still reloads the current folder after the API succeeds', tsx.includes('await deleteMySpaceArtifact(artifact.id)') && tsx.includes('await load(selectedFolderId)'))
 
-const dangerRuleMatch = css.match(/\.my-space-card-danger(?::hover[^{]*)?\s*\{[^}]*\}/g) || []
-assert('MySpacePage.css defines .my-space-card-danger rules', dangerRuleMatch.length > 0)
-assert(
-  '.my-space-card-danger references the danger token',
-  dangerRuleMatch.some((rule) => rule.includes('var(--eqb-color-danger)')),
-)
-
-// 5. Triple-heading text is gone.
-assert('MySpacePage.tsx no longer renders the "N 个 PDF" heading', !tsx.includes('个 PDF'))
-assert('MySpacePage.tsx no longer renders the "全部文件" sidebar label', !tsx.includes('全部文件'))
-
-// 6. Folder chips conditional on folders.length > 0.
-assert(
-  'folder filter chips are gated on folders.length > 0',
-  /folders\.length\s*>\s*0\s*&&/.test(tsx),
-)
-assert('folder chip elements carry the chip class', tsx.includes('my-space-chip'))
+const forbiddenFutureControls = ['未分类', '新建文件夹', '预览 PDF', '重命名', '移动到', '复制为新草稿', '下一页', '搜索文件名']
+const renderedFutureControls = forbiddenFutureControls.filter((label) => tsx.includes(`>${label}<`) || tsx.includes(`>${label}…<`))
+assert('future-only controls are not rendered as placeholders', renderedFutureControls.length === 0, renderedFutureControls.join(', '))
 
 if (failed > 0) {
   console.error(`\nmy-space-shelf verify FAILED: ${passed} passed, ${failed} failed`)

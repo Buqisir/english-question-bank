@@ -7,6 +7,7 @@
 import {
   useEffect,
   useId,
+  useLayoutEffect,
   useRef,
   useState,
   type KeyboardEvent,
@@ -46,7 +47,6 @@ export function ConciergeGroupRowMenu(props: {
 }): ReactNode {
   const { items, ariaLabel = '更多操作' } = props
   const [open, setOpen] = useState(false)
-  const [coords, setCoords] = useState({ top: 0, right: 0 })
   const triggerRef = useRef<HTMLButtonElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
   const menuId = useId()
@@ -72,18 +72,20 @@ export function ConciergeGroupRowMenu(props: {
         closeAndRestore()
       }
     }
-    const onScroll = () => {
+    const onScroll = (event: Event) => {
+      if (event.target instanceof Node && menuRef.current?.contains(event.target)) return
       setOpen(false)
     }
 
     document.addEventListener('pointerdown', onPointerDown)
     document.addEventListener('keydown', onKeyDown)
     window.addEventListener('scroll', onScroll, true)
-    requestAnimationFrame(() => {
-      menuRef.current?.querySelector<HTMLElement>('[role="menuitem"]')?.focus()
+    const focusFrame = requestAnimationFrame(() => {
+      menuRef.current?.querySelector<HTMLElement>('[role="menuitem"]')?.focus({ preventScroll: true })
     })
 
     return () => {
+      cancelAnimationFrame(focusFrame)
       releaseMenu(closeAndRestore)
       document.removeEventListener('pointerdown', onPointerDown)
       document.removeEventListener('keydown', onKeyDown)
@@ -91,11 +93,28 @@ export function ConciergeGroupRowMenu(props: {
     }
   }, [open])
 
-  const placeMenu = () => {
-    const rect = triggerRef.current?.getBoundingClientRect()
-    if (!rect) return
-    setCoords({ top: rect.bottom + 4, right: window.innerWidth - rect.right })
-  }
+  useLayoutEffect(() => {
+    const menu = menuRef.current
+    const trigger = triggerRef.current
+    if (!open || !menu || !trigger) return
+    const placeMenu = () => {
+      const rect = trigger.getBoundingClientRect()
+      const { width, height } = menu.getBoundingClientRect()
+      const gutter = 8
+      const below = rect.bottom + 4
+      const top = below + height <= window.innerHeight - gutter ? below : rect.top - height - 4
+      menu.style.top = `${Math.max(gutter, Math.min(top, window.innerHeight - height - gutter))}px`
+      menu.style.left = `${Math.max(gutter, Math.min(rect.right - width, window.innerWidth - width - gutter))}px`
+    }
+    placeMenu()
+    const observer = new ResizeObserver(placeMenu)
+    observer.observe(menu)
+    window.addEventListener('resize', placeMenu)
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('resize', placeMenu)
+    }
+  }, [open])
 
   const toggle = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation()
@@ -103,7 +122,6 @@ export function ConciergeGroupRowMenu(props: {
       close(false)
       return
     }
-    placeMenu()
     setOpen(true)
   }
 
@@ -162,7 +180,6 @@ export function ConciergeGroupRowMenu(props: {
             className="concierge-group-row-menu"
             itemSelector=".concierge-group-row-menuitem"
             role="menu"
-            style={{ top: coords.top, right: coords.right }}
             onClick={(event) => event.stopPropagation()}
             onKeyDown={onMenuKeyDown}
           >

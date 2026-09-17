@@ -1,0 +1,191 @@
+/* Prototype-only framing. The two sides share production styles; only
+   .proposal selectors below describe the proposed product changes. */
+.lecture-prototype {
+  margin: 0;
+  --prototype-selected-shadow: 0 0 0 1px rgba(30, 30, 28, 0.05), 0 1px 2px rgba(30, 30, 28, 0.06);
+}
+.review-toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  padding: 16px 24px 8px;
+}
+.review-toolbar h1 {
+  margin: 0 auto 0 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+.review-toolbar h1 span { margin-left: 8px; font-weight: 400; color: var(--muted); }
+.review-modes { display: flex; gap: 4px; }
+.review-modes button, .review-question select {
+  font: inherit;
+  font-size: 13px;
+  color: var(--ink);
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.review-modes button[aria-pressed="true"] {
+  background: var(--eqb-color-paper);
+  box-shadow: var(--prototype-selected-shadow);
+}
+.review-modes button:hover:not([aria-pressed="true"]) { background: var(--surface-strong); }
+.review-question { display: flex; align-items: center; gap: 4px; font-size: 13px; color: var(--muted); }
+.review-question select { background: var(--eqb-color-paper); }
+.review-note { margin: 8px 24px 24px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.review-loading { margin: 24px; }
+.review-compare {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 440px));
+  justify-content: center;
+  align-items: start;
+  gap: 32px;
+  padding: 0 24px 48px;
+}
+.review-column { min-width: 0; }
+.review-column > h2 { font-size: 14px; margin: 0 0 16px; font-weight: 600; }
+.review-title-crop {
+  display: flex;
+  min-height: 40px;
+  align-items: flex-start;
+}
+.review-title-crop .topbar-identity { flex-wrap: wrap; gap: 4px 8px; }
+.review-title-crop .topbar-brand-title { font-size: 13px; font-weight: 500; color: var(--muted); }
+/* Override the real page's sticky/drawer geometry only in comparison crops. */
+.review-compare .paper-browse-lecture-panel {
+  position: static;
+  width: 100%;
+  height: auto;
+  padding-bottom: 24px;
+  box-shadow: none;
+  border-radius: 8px;
+  overflow: visible;
+}
+.review-preview .paper-browse-rail { align-self: start; }
+.review-preview .paper-browse-rail--centered { top: 120px; transform: none; }
+.review-preview .paper-browse-content { transform: none; }
+.review-preview [data-prototype-inert] { cursor: default; }
+.review-preview .paper-browse-group-actions { display: none; }
+.review-preview .pi-line-overlay { overflow: hidden; }
+.review-preview .paper-browse-lecture-panel { align-self: start; }
+.review-preview .paper-browse-zoom { zoom: 1; }
+/* Snapshot hover keeps the same shared highlight; no second selected fill. */
+.lecture-prototype .fluid-hover-list::before { z-index: 0; }
+.lecture-prototype .fluid-hover-list > * { position: relative; }
+.lecture-prototype .fluid-hover-list[data-proto-fresh]::before { transition: none; }
+.lecture-prototype button:focus-visible,
+.lecture-prototype summary:focus-visible,
+.lecture-prototype select:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+/* Proposed header: group identity and introduction share one row; a separate
+   answer strip owns selection. Current question number/answer aren't repeated. */
+.proposal .prototype-group-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+.proposal .prototype-group-header h4 { margin: 0; }
+.proposal .prototype-overview-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 0 4px 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--paper-ink-muted);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+.proposal .prototype-overview-toggle:hover { color: var(--ink); }
+.proposal .prototype-overview-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+.proposal .prototype-overview-text {
+  flex-basis: 100%;
+  margin: 0;
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.proposal .prototype-question-nav {
+  --fh-radius: 8px;
+  display: flex;
+  align-self: flex-start;
+  gap: 8px;
+  padding: 4px 0;
+}
+.proposal .prototype-question-nav button {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--paper-ink-muted);
+  font: inherit;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+.proposal .prototype-question-nav button[aria-pressed="true"] {
+  color: var(--paper-ink-strong);
+  background: var(--eqb-color-paper);
+  box-shadow: var(--prototype-selected-shadow);
+  font-weight: 600;
+}
+.proposal .prototype-question-nav button[aria-pressed="true"] .prototype-answer { color: var(--eqb-color-success); }
+/* Overrides the former three-field header: the skill is a quiet stem label,
+   not another title row with its own rule and repeated current-question data. */
+.proposal .pi-ps-analysis-header { padding: 0; margin: 8px 0 8px; border: 0; }
+.proposal .pi-ps-analysis-qno, .proposal .pi-ps-analysis-answer { display: none; }
+
+/* Complete expressions stay intact. Remove the bullet and paragraph-wide
+   boldness; distinguish the correspondence from its explanatory note. */
+.proposal .pi-ps-analysis-paraphrases { padding: 0; list-style: none; }
+.proposal .pi-ps-analysis-paraphrases li { margin: 0 0 16px; }
+.proposal .pi-ps-analysis-paraphrases li:last-child { margin-bottom: 0; }
+.proposal .prototype-pair-source { display: block; color: var(--ink); font-weight: 500; }
+.proposal .prototype-pair-target {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  margin-top: 4px;
+  color: var(--ink);
+  font-weight: 400;
+}
+.proposal .prototype-pair-target svg { margin-top: 4px; color: var(--paper-ink-muted); }
+.proposal .pi-ps-analysis-paraphrases p { margin: 8px 0 0; color: var(--paper-ink-muted); line-height: 1.6; }
+
+@media (max-width: 959px) {
+  .review-compare { grid-template-columns: minmax(0, 440px); }
+  .review-toolbar { gap: 12px; }
+  .review-toolbar h1 { width: 100%; }
+  .review-note { margin-bottom: 16px; }
+}
+@media (max-width: 1199px) {
+  /* The prototype's full-page view stacks the reading excerpt and panel;
+     it doesn't pretend to reproduce the production mobile drawer. */
+  .review-preview .paper-browse-shell { grid-template-columns: minmax(0, 1fr); padding: 16px; }
+  .review-preview .paper-browse-rail { display: none; }
+  .review-preview .paper-browse-content { overflow-x: auto; }
+  .review-preview .paper-browse-zoom { width: 794px; }
+  .review-preview .paper-browse-lecture-panel {
+    position: static;
+    width: min(100%, 440px);
+    height: auto;
+    justify-self: center;
+    border-radius: 8px;
+    box-shadow: none;
+  }
+  .review-preview .pi-line-overlay { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lecture-prototype .fluid-hover-list::before { transition: none; }
+}

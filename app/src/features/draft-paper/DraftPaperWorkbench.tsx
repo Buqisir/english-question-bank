@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { Archive, ArrowDown, ArrowLeftRight, ArrowUp, Ellipsis, FolderPlus, PageBreak, PaperCheck, PaperStudent, Printer, RotateCcw, Save, Trash } from '../../icons'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { FluidHoverList } from '../../components/FluidHoverList'
+import { useModalDialog } from '../../components/useModalDialog'
 import type { DraftPaper, DraftPaperItem, DraftPaperSummary, DraftPrintForm, GroupType, MySpaceFolder, QuestionGroupCard } from '../../domain/questionBank'
 import {
   addGroupToDraftPaper,
@@ -120,6 +121,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const [spaceDialogOpen, setSpaceDialogOpen] = useState(false)
   // motion-press-exit #2: 弹层退出 ~120ms（var(--motion-fast)）播完再卸载。
   const spaceDialogPresence = usePresence(spaceDialogOpen, 120)
+  const spaceDialogRef = useModalDialog(spaceDialogPresence.mounted)
   const [spaceFolders, setSpaceFolders] = useState<MySpaceFolder[]>([])
   const [spaceFolderId, setSpaceFolderId] = useState('')
   const [spaceFileName, setSpaceFileName] = useState('')
@@ -704,6 +706,29 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     updateAnchors()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [previewReady, nonMissingItems, previewScale])
+
+  // A3 puts distinct groups at almost the same vertical position. Keep each
+  // strip near its source, but reserve its actual rendered height in the gutter.
+  useLayoutEffect(() => {
+    const tools = Array.from(paperColRef.current?.querySelectorAll<HTMLElement>('[data-draft-tools-group-id]') ?? [])
+    const placeTools = () => {
+      const measured = tools.map((element) => ({
+        element,
+        top: groupAnchors[element.dataset.draftToolsGroupId!] ?? 0,
+        height: element.offsetHeight,
+      })).sort((a, b) => a.top - b.top)
+      let bottom = -Infinity
+      for (const { element, top, height } of measured) {
+        const placedTop = Math.max(top, bottom + 8)
+        element.style.setProperty('--draft-tool-shift', `${placedTop - top}px`)
+        bottom = placedTop + height
+      }
+    }
+    placeTools()
+    const observer = new ResizeObserver(placeTools)
+    tools.forEach((element) => observer.observe(element))
+    return () => observer.disconnect()
+  }, [groupAnchors])
 
   // a3-imposition (plan.md Must Do 3, 裁点2): recomputed on the same
   // triggers as groupAnchors above, plus pageBreakSuggestions itself (a
@@ -1435,14 +1460,16 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
               void exportPdf()
             }}
           >
-            {versionType === 'teacher' ? <PaperCheck size={15} /> : <PaperStudent size={15} />} 下载 PDF（{versionType === 'teacher' ? '教师版' : '学生版'}）
+            {versionType === 'teacher' ? <PaperCheck size={16} /> : <PaperStudent size={16} />} 下载 PDF（{versionType === 'teacher' ? '教师版' : '学生版'}）
           </button>
+          {versionType === 'student' && <span className="draft-export-menu-divider" role="separator" />}
           {versionType === 'student' && <button type="button" role="menuitem" disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'} onClick={() => { setExportMenuOpen(false); void exportPdf('download', 'friendly8') }}>
-            <PaperStudent size={15} /> 8 页友好版（无听力）
+            <PaperStudent size={16} /> 8 页友好版（无听力）
           </button>}
           {versionType === 'student' && <button type="button" role="menuitem" disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'} onClick={() => { setExportMenuOpen(false); void exportPdf('download', 'friendly10') }}>
-            <PaperStudent size={15} /> 10 页友好版（含听力）
+            <PaperStudent size={16} /> 10 页友好版（含听力）
           </button>}
+          {versionType === 'student' && <span className="draft-export-menu-divider" role="separator" />}
           <button
             type="button"
             role="menuitem"
@@ -1452,7 +1479,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
               void exportPdf('save-as')
             }}
           >
-            <Save size={15} /> 另存为 PDF…
+            <Save size={16} /> 另存为 PDF…
           </button>
           <button
             type="button"
@@ -1463,7 +1490,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
               browserPrint()
             }}
           >
-            <Printer size={15} /> 浏览器打印
+            <Printer size={16} /> 浏览器打印
           </button>
           <button
             type="button"
@@ -1471,10 +1498,12 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
             disabled={draftPaper.items.length === 0 || spaceStatus === 'saving'}
             onClick={() => {
               setExportMenuOpen(false)
+              // The menu item unmounts; restore focus to the persistent trigger.
+              exportMenuRef.current?.querySelector<HTMLButtonElement>('.draft-export-menu-trigger')?.focus()
               void openSpaceDialog()
             }}
           >
-            <Archive size={15} /> 保存 PDF 到个人空间
+            <Archive size={16} /> 保存 PDF 到个人空间
           </button>
         </FluidHoverList>
       )}
@@ -1507,8 +1536,8 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
               // CR SW-1: save errors must stay visible with the menu closed —
               // the trigger wears a danger dot while saveStatus is 'error'.
               className={`draft-more-menu-trigger${saveStatus === 'error' ? ' has-save-error' : ''}`}
-              aria-haspopup="true"
               aria-expanded={moreMenuOpen}
+              aria-controls="draft-more-information"
               aria-label={saveStatus === 'error' ? `草稿卷更多信息（保存出错：${saveError}）` : '草稿卷更多信息'}
               title={saveStatus === 'error' ? `保存出错：${saveError}` : '学生 / 最近草稿卷'}
               onClick={() => setMoreMenuOpen((open) => !open)}
@@ -1516,7 +1545,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
               <Ellipsis size={16} />
             </button>
             {moreMenuPresence.mounted && (
-              <div className="draft-more-menu-panel" role="menu" data-visible={moreMenuPresence.visible}>
+              <div id="draft-more-information" className="draft-more-menu-panel" role="group" aria-label="草稿卷更多信息" data-visible={moreMenuPresence.visible} inert={!moreMenuOpen}>
                 <label className="draft-student-field">
                   <span>学生（可选）</span>
                   <input
@@ -1714,7 +1743,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                 ? pageBreakSuggestions.find((entry) => entry.groupId === item.groupId)
                 : undefined
               return (
-                <div key={item.id} className="draft-group-actions" role="group" aria-label="题组工具" style={{ top: `${anchorTop}px` }}>
+                <div key={item.id} className="draft-group-actions" data-draft-tools-group-id={item.groupId} role="group" aria-label="题组工具" style={{ top: `${anchorTop}px` }}>
                   {suggestion && (
                     <button
                       type="button"
@@ -1738,7 +1767,8 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                       aria-pressed={swapSeedItemId === item.id}
                       onClick={() => handleSwapToggle(item)}
                     >
-                      <ArrowLeftRight size={14} />
+                      <ArrowLeftRight size={16} />
+                      <span className="draft-group-actions-label">换篇</span>
                     </button>
                   )}
                   <div
@@ -1781,7 +1811,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                             moveItem(item.id, -1)
                           }}
                         >
-                          <ArrowUp size={14} aria-hidden="true" />
+                          <ArrowUp size={16} aria-hidden="true" />
                           上移
                         </button>
                         <button
@@ -1792,7 +1822,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                             moveItem(item.id, 1)
                           }}
                         >
-                          <ArrowDown size={14} aria-hidden="true" />
+                          <ArrowDown size={16} aria-hidden="true" />
                           下移
                         </button>
                         {canPageBreakBefore && (
@@ -1804,7 +1834,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                               void togglePageBreak(item, !item.pageBreakBefore)
                             }}
                           >
-                            <PageBreak size={14} aria-hidden="true" />
+                            <PageBreak size={16} aria-hidden="true" />
                             {item.pageBreakBefore ? '取消分页' : '前置分页'}
                           </button>
                         )}
@@ -1816,7 +1846,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                             void deleteItem(item)
                           }}
                         >
-                          <Trash size={14} aria-hidden="true" />
+                          <Trash size={16} aria-hidden="true" />
                           移除
                         </button>
                       </div>
@@ -1913,7 +1943,16 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
         </div>
       )}
       {spaceDialogPresence.mounted && (
-        <div className="draft-modal-backdrop" role="presentation" data-visible={spaceDialogPresence.visible}>
+        <dialog
+          ref={spaceDialogRef}
+          className="draft-modal-backdrop"
+          aria-label="保存 PDF 到个人空间"
+          data-visible={spaceDialogPresence.visible}
+          onCancel={(event) => {
+            event.preventDefault()
+            setSpaceDialogOpen(false)
+          }}
+        >
           <form
             aria-label="保存 PDF 到个人空间"
             className="draft-save-space-dialog"
@@ -1944,6 +1983,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
               <input
                 value={spaceNewFolderName}
                 onChange={(event) => setSpaceNewFolderName(event.target.value)}
+                aria-label="新建文件夹"
                 placeholder="新建文件夹"
               />
               <button type="button" onClick={createFolderInDialog} disabled={!spaceNewFolderName.trim() || spaceStatus === 'saving'}>
@@ -1963,7 +2003,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
               </button>
             </div>
           </form>
-        </div>
+        </dialog>
       )}
     </div>
     </>

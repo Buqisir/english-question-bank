@@ -1,7 +1,18 @@
-import { Download, Paper, Save, Trash } from '../../icons'
+import { Archive, Download, Ellipsis, Paper, Save, Trash } from '../../icons'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { FluidHoverList } from '../../components/FluidHoverList'
-import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+  type KeyboardEvent,
+  type MouseEvent,
+  type ReactNode,
+} from 'react'
+import { createPortal } from 'react-dom'
 import type { MySpaceArtifact, MySpaceFolder } from '../../domain/questionBank'
 import { deleteMySpaceArtifact, downloadMySpaceArtifact, fetchMySpace } from '../../services/mySpace'
 import { prepareFileSaveTarget, type FileSaveMode } from '../../services/fileDownload.ts'
@@ -45,9 +56,7 @@ function monthGroupLabel(key: string): string {
   return `${year} 年 ${Number(month)} 月`
 }
 
-// dossier-cabinet: group artifacts by generatedAt month, newest month first;
-// artifacts without a usable date fall into a trailing "其他" group. Purely
-// client-side — does not change the fetchMySpace API shape.
+// Group saved artifacts locally; the fetch contract and server ordering stay unchanged.
 function groupArtifactsByMonth(items: MySpaceArtifact[]): MonthGroup[] {
   const buckets = new Map<string, MySpaceArtifact[]>()
   for (const artifact of items) {
@@ -68,6 +77,154 @@ function groupArtifactsByMonth(items: MySpaceArtifact[]): MonthGroup[] {
   }))
 }
 
+let activeFileMenuCloser: ((restoreFocus?: boolean) => void) | null = null
+
+function ArtifactMenu({
+  artifact,
+  disabled,
+  onSaveAs,
+  onDelete,
+}: {
+  artifact: MySpaceArtifact
+  disabled: boolean
+  onSaveAs: () => void
+  onDelete: (trigger: HTMLButtonElement) => void
+}) {
+  const [open, setOpen] = useState(false)
+  const [position, setPosition] = useState({ top: 0, left: 0 })
+  const triggerRef = useRef<HTMLButtonElement>(null)
+  const menuRef = useRef<HTMLDivElement>(null)
+  const menuId = useId()
+
+  const close = useCallback((restoreFocus = true) => {
+    setOpen(false)
+    if (restoreFocus) requestAnimationFrame(() => triggerRef.current?.focus())
+  }, [])
+
+  useEffect(() => {
+    if (!open) return
+    if (activeFileMenuCloser && activeFileMenuCloser !== close) activeFileMenuCloser(false)
+    activeFileMenuCloser = close
+
+    const onPointerDown = (event: PointerEvent) => {
+      const target = event.target as Node
+      if (triggerRef.current?.contains(target) || menuRef.current?.contains(target)) return
+      close(false)
+    }
+    const onKeyDown = (event: globalThis.KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault()
+        close(true)
+      }
+    }
+    const onViewportChange = () => close(false)
+    document.addEventListener('pointerdown', onPointerDown)
+    document.addEventListener('keydown', onKeyDown)
+    window.addEventListener('resize', onViewportChange)
+    window.addEventListener('scroll', onViewportChange, true)
+    const focusFrame = requestAnimationFrame(() => menuRef.current?.querySelector<HTMLElement>('[role="menuitem"]')?.focus({ preventScroll: true }))
+
+    return () => {
+      cancelAnimationFrame(focusFrame)
+      if (activeFileMenuCloser === close) activeFileMenuCloser = null
+      document.removeEventListener('pointerdown', onPointerDown)
+      document.removeEventListener('keydown', onKeyDown)
+      window.removeEventListener('resize', onViewportChange)
+      window.removeEventListener('scroll', onViewportChange, true)
+    }
+  }, [close, open])
+
+  function placeMenu() {
+    const rect = triggerRef.current?.getBoundingClientRect()
+    if (!rect) return
+    const width = 168
+    const height = 92
+    const gutter = 8
+    const top = rect.bottom + 6 + height > window.innerHeight
+      ? Math.max(gutter, rect.top - height - 6)
+      : rect.bottom + 6
+    const left = Math.min(window.innerWidth - width - gutter, Math.max(gutter, rect.right - width))
+    setPosition({ top, left })
+  }
+
+  function toggle(event: MouseEvent<HTMLButtonElement>) {
+    event.stopPropagation()
+    if (open) {
+      close(false)
+      return
+    }
+    placeMenu()
+    setOpen(true)
+  }
+
+  function onMenuKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+    const items = menuRef.current ? [...menuRef.current.querySelectorAll<HTMLElement>('[role="menuitem"]')] : []
+    if (!items.length) return
+    const index = items.indexOf(document.activeElement as HTMLElement)
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault()
+      const step = event.key === 'ArrowDown' ? 1 : -1
+      items[(index + step + items.length) % items.length].focus()
+    } else if (event.key === 'Home' || event.key === 'End') {
+      event.preventDefault()
+      items[event.key === 'Home' ? 0 : items.length - 1].focus()
+    } else if (event.key === 'Tab') {
+      event.preventDefault()
+      close(true)
+    }
+  }
+
+  return (
+    <>
+      <button
+        ref={triggerRef}
+        type="button"
+        className="my-space-row-menu-trigger"
+        aria-label={`更多操作：${artifact.title || artifact.fileName}`}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        aria-controls={open ? menuId : undefined}
+        disabled={disabled}
+        onClick={toggle}
+      >
+        <Ellipsis size={16} aria-hidden="true" />
+      </button>
+      {open && createPortal(
+        <FluidHoverList
+          as="div"
+          ref={menuRef}
+          id={menuId}
+          className="my-space-row-menu"
+          itemSelector=".my-space-row-menu-item"
+          role="menu"
+          gapClick={false}
+          style={position}
+          onKeyDown={onMenuKeyDown}
+          onClick={(event) => event.stopPropagation()}
+        >
+          <button type="button" className="my-space-row-menu-item" role="menuitem" onClick={() => { close(true); onSaveAs() }}>
+            <Save size={16} aria-hidden="true" />另存为…
+          </button>
+          <button
+            type="button"
+            className="my-space-row-menu-item my-space-row-menu-item-danger"
+            role="menuitem"
+            onClick={() => {
+              const trigger = triggerRef.current
+              close(false)
+              if (trigger) onDelete(trigger)
+            }}
+          >
+            <Trash size={16} aria-hidden="true" />删除文件
+          </button>
+        </FluidHoverList>,
+        // Keep the page's theme tokens while escaping the clipped file list.
+        triggerRef.current?.closest('.my-space-page') ?? document.body,
+      )}
+    </>
+  )
+}
+
 export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpacePageProps): ReactNode {
   const [folders, setFolders] = useState<MySpaceFolder[]>([])
   const [artifacts, setArtifacts] = useState<MySpaceArtifact[]>([])
@@ -76,21 +233,16 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
   const [message, setMessage] = useState('')
   const [busyId, setBusyId] = useState<string | null>(null)
   const [confirmTarget, setConfirmTarget] = useState<MySpaceArtifact | null>(null)
-  // motion-press-exit #2: 弹层退出 ~120ms（var(--motion-fast)）播完再卸载。
   const confirmPresence = useToastPresence(confirmTarget, 120)
 
   const selectedFolder = useMemo(
     () => folders.find((folder) => folder.id === selectedFolderId) || null,
     [folders, selectedFolderId],
   )
-
+  const folderNames = useMemo(() => new Map(folders.map((folder) => [folder.id, folder.name])), [folders])
   const monthGroups = useMemo(() => groupArtifactsByMonth(artifacts), [artifacts])
 
-  // my-space-race: a slower fetch for a previously-selected folder can resolve
-  // after a newer folder's fetch and overwrite the grid while the chip highlight
-  // (driven by selectedFolderId) stays on the newer folder. A monotonically
-  // increasing token stamps each load; any response whose token no longer equals
-  // the latest is dropped before it can mutate folders/artifacts/loadState.
+  // A monotonically increasing token prevents a stale folder response replacing a newer one.
   const loadTokenRef = useRef(0)
   const load = useCallback(async (folderId = selectedFolderId) => {
     const token = ++loadTokenRef.current
@@ -109,15 +261,10 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
     }
   }, [selectedFolderId])
 
-  useEffect(() => {
-    void load()
-  }, [load])
+  useEffect(() => { void load() }, [load])
 
-  // Folder switches are handled entirely by the [load] effect above (which
-  // re-fires whenever selectedFolderId changes), not by an explicit fetch here:
-  // calling load() from both selectFolder AND the effect doubled every switch's
-  // fetches and widened the stale-response race window.
   function selectFolder(folderId: string | null) {
+    activeFileMenuCloser?.(false)
     setSelectedFolderId(folderId)
   }
 
@@ -147,29 +294,44 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
     onOpenDraft(artifact.sourceDraftPaperId)
   }
 
-  function requestDeleteArtifact(artifact: MySpaceArtifact) {
+  const cancelButtonRef = useRef<HTMLButtonElement | null>(null)
+  const restoreFocusRef = useRef<HTMLElement | null>(null)
+
+  function requestDeleteArtifact(artifact: MySpaceArtifact, trigger: HTMLElement) {
+    restoreFocusRef.current = trigger
     setConfirmTarget(artifact)
   }
 
-  // CR should-fix: the dialog must own the keyboard. Focus moves to 取消 on
-  // open (so Esc works without a Tab first), Esc listens at document level
-  // (the trigger button keeps focus otherwise and keydown never reaches the
-  // backdrop), and focus returns to the trigger on close.
-  const cancelButtonRef = useRef<HTMLButtonElement | null>(null)
-  const restoreFocusRef = useRef<HTMLElement | null>(null)
   useEffect(() => {
-    if (!confirmTarget) return
-    restoreFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null
+    // Presence mounts the dialog one render after the delete target changes.
+    if (!confirmPresence.rendered) return
     cancelButtonRef.current?.focus()
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setConfirmTarget(null)
+    const restoreTarget = restoreFocusRef.current
+    const onKeyDown = (event: globalThis.KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault()
+        setConfirmTarget(null)
+      } else if (event.key === 'Tab') {
+        const dialog = cancelButtonRef.current?.closest('[role="alertdialog"]')
+        const buttons = dialog ? [...dialog.querySelectorAll<HTMLButtonElement>('button:not(:disabled)')] : []
+        const first = buttons[0]
+        const last = buttons.at(-1)
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault()
+          last?.focus()
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault()
+          first?.focus()
+        }
+      }
     }
     document.addEventListener('keydown', onKeyDown)
     return () => {
       document.removeEventListener('keydown', onKeyDown)
-      restoreFocusRef.current?.focus()
+      restoreTarget?.focus()
+      restoreFocusRef.current = null
     }
-  }, [confirmTarget])
+  }, [confirmPresence.rendered])
 
   async function confirmDeleteArtifact() {
     const artifact = confirmTarget
@@ -190,175 +352,128 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
 
   return (
     <div className="my-space-page">
-    <AppTopbar {...shellNav} onBack={onBackToWorkbench} />
-    <div className="my-space-shell">
-      <header className="my-space-heading">
-        <h1>个人空间</h1>
-      </header>
+      <AppTopbar {...shellNav} onBack={onBackToWorkbench} />
+      <div className="my-space-shell">
+        <header className="my-space-heading">
+          <h1>个人空间</h1>
+          <p>已保存的 PDF</p>
+        </header>
 
-      {message && loadState !== 'error' && <p className="my-space-message" role="status">{message}</p>}
+        {message && loadState !== 'error' && <p className="my-space-message" role="status">{message}</p>}
 
-      <main className="my-space-main">
-        <div className="my-space-section-head">
-          <h2>已保存的导出文件</h2>
-          {loadState === 'loaded' && artifacts.length > 0 && (
-            <span>{artifacts.length} 份</span>
+        <div className={`my-space-workspace${folders.length ? '' : ' my-space-workspace--no-folders'}`}>
+          {folders.length > 0 && (
+            <aside className="my-space-rail" aria-label="文件夹导航">
+              {/* Future folder-management UI belongs here once its workflows are ready. */}
+              <FluidHoverList as="div" axis="xy" itemSelector=".my-space-folder-button" className="my-space-folders" gapClick={false}>
+                <button type="button" className={`my-space-folder-button${!selectedFolderId ? ' is-selected' : ''}`} aria-pressed={!selectedFolderId} onClick={() => selectFolder(null)}>
+                  <Paper size={18} aria-hidden="true" /><span>全部文件</span>
+                </button>
+                <p className="my-space-rail-label">文件夹</p>
+                {folders.map((folder) => (
+                  <button
+                    key={folder.id}
+                    type="button"
+                    className={`my-space-folder-button${selectedFolderId === folder.id ? ' is-selected' : ''}`}
+                    aria-pressed={selectedFolderId === folder.id}
+                    onClick={() => selectFolder(folder.id)}
+                  >
+                    <Archive size={18} aria-hidden="true" />
+                    <span title={folder.name}>{folder.name}</span>
+                    <span className="my-space-folder-count">{folder.artifactCount}</span>
+                  </button>
+                ))}
+              </FluidHoverList>
+            </aside>
           )}
-        </div>
-        {folders.length > 0 && (
-          <FluidHoverList
-            as="div"
-            axis="xy"
-            itemSelector=".my-space-chip"
-            className="my-space-folders"
-            role="group"
-            aria-label="按文件夹筛选"
-          >
-            <button
-              type="button"
-              className={`my-space-chip${!selectedFolderId ? ' is-selected' : ''}`}
-              onClick={() => void selectFolder(null)}
-            >
-              全部
-            </button>
-            {folders.map((folder) => (
-              <button
-                key={folder.id}
-                type="button"
-                className={`my-space-chip${selectedFolderId === folder.id ? ' is-selected' : ''}`}
-                onClick={() => void selectFolder(folder.id)}
-              >
-                {folder.name}
-              </button>
-            ))}
-          </FluidHoverList>
-        )}
 
-        {loadState === 'loading' && <p className="my-space-empty">正在读取个人空间…</p>}
+          <main className="my-space-main">
+            <div className="my-space-section-head">
+              <div>
+                <h2>{selectedFolder?.name || '全部文件'}</h2>
+                {loadState === 'loaded' && <span>{artifacts.length} 份已保存文件</span>}
+              </div>
+              {/* Search and other future capabilities belong here only after they are real. */}
+            </div>
 
-        {loadState === 'error' && (
-          <div className="my-space-empty-state">
-            <p className="my-space-error">{message || '个人空间读取失败。'}</p>
-            <button type="button" className="my-space-empty-cta" onClick={() => void load()}>
-              重新加载
-            </button>
-          </div>
-        )}
-
-        {loadState === 'loaded' && artifacts.length === 0 && (
-          <div className="my-space-empty-state">
-            <Paper size={24} aria-hidden="true" />
-            <p className="my-space-empty">试卷导出为 PDF 后，可以保存在这里。</p>
-            <button type="button" className="my-space-empty-cta" onClick={onBackToWorkbench}>
-              去找题
-            </button>
-          </div>
-        )}
-
-        {loadState === 'loaded' && artifacts.length > 0 && (
-          <>
-            {monthGroups.map((group) => (
+            {loadState === 'loading' && <p className="my-space-empty">正在读取个人空间…</p>}
+            {loadState === 'error' && (
+              <div className="my-space-empty-state">
+                <p className="my-space-error">{message || '个人空间读取失败。'}</p>
+                <button type="button" className="my-space-empty-cta" onClick={() => void load()}>重新加载</button>
+              </div>
+            )}
+            {loadState === 'loaded' && artifacts.length === 0 && (
+              <div className="my-space-empty-state">
+                <Paper size={24} aria-hidden="true" />
+                <p className="my-space-empty">试卷导出为 PDF 后，可以保存在这里。</p>
+                <button type="button" className="my-space-empty-cta" onClick={onBackToWorkbench}>去找题</button>
+              </div>
+            )}
+            {loadState === 'loaded' && artifacts.length > 0 && monthGroups.map((group) => (
               <section className="my-space-month-group" key={group.key} aria-label={group.label}>
                 <div className="my-space-month-head">
                   <span className="my-space-month-label">{group.label}</span>
                   <span className="my-space-month-count">{group.artifacts.length} 份</span>
                 </div>
-                <div className="my-space-grid" aria-label={selectedFolder ? selectedFolder.name : '全部保存文件'}>
+                <FluidHoverList
+                  as="div"
+                  axis="y"
+                  className="my-space-file-list"
+                  itemSelector=".my-space-file-row"
+                  gapClick={false}
+                  aria-label={selectedFolder ? selectedFolder.name : '全部保存文件'}
+                >
                   {group.artifacts.map((artifact) => {
                     const title = artifact.title || artifact.fileName
                     const dateLabel = formatMonthDay(artifact.generatedAt)
+                    const folderName = artifact.folderId ? folderNames.get(artifact.folderId) : null
                     return (
-                      <article className="my-space-card" key={artifact.id}>
-                        <div className="my-space-card-thumb" aria-hidden="true">
-                          <div className="my-space-card-thumb-mini">
-                            <h3 className="my-space-card-thumb-title">{title}</h3>
-                            <p className="my-space-card-thumb-sub">姓名：＿＿＿＿　班级：＿＿＿＿　成绩：＿＿＿＿</p>
-                            <div className="my-space-card-thumb-line" />
-                            <div className="my-space-card-thumb-line" />
-                            <div className="my-space-card-thumb-line my-space-card-thumb-line-short" />
-                            <div className="my-space-card-thumb-line" />
-                            <div className="my-space-card-thumb-line" />
-                            <div className="my-space-card-thumb-line my-space-card-thumb-line-short" />
-                            <div className="my-space-card-thumb-line" />
-                            <div className="my-space-card-thumb-line my-space-card-thumb-line-short" />
-                          </div>
+                      <article className="my-space-file-row" key={artifact.id}>
+                        <Paper className="my-space-file-icon" size={22} aria-hidden="true" />
+                        <div className="my-space-file-copy">
+                          <h3 title={title}>{title}</h3>
+                          <p>
+                            {folderName && <span>{folderName}</span>}
+                            <span>{artifact.pageCount || 1} 页</span>
+                            {dateLabel && <span>{dateLabel}</span>}
+                            {artifact.sourceDraftStudentLabel && <span className="my-space-student-label">学生：{artifact.sourceDraftStudentLabel}</span>}
+                          </p>
                         </div>
-                        <p className="my-space-card-title" title={title}>
-                          {title}
-                        </p>
-                        <p className="my-space-card-meta">
-                          {dateLabel ? `${dateLabel} · ` : ''}
-                          {artifact.pageCount || 1} 页
-                        </p>
-                        {artifact.sourceDraftStudentLabel && (
-                          <span className="my-space-student-chip">{artifact.sourceDraftStudentLabel}</span>
-                        )}
-                        <div className="my-space-card-actions">
-                          <button
-                            type="button"
-                            className="my-space-card-primary"
+                        <div className="my-space-row-actions">
+                          <button type="button" disabled={busyId === artifact.id} onClick={() => void downloadArtifact(artifact)}>
+                            <Download size={16} aria-hidden="true" /><span>下载</span>
+                          </button>
+                          <button type="button" onClick={() => openSourceDraft(artifact)}>打开原草稿</button>
+                          <ArtifactMenu
+                            artifact={artifact}
                             disabled={busyId === artifact.id}
-                            onClick={() => void downloadArtifact(artifact)}
-                          >
-                            <Download size={14} /> 下载 PDF
-                          </button>
-                          <button
-                            type="button"
-                            className="my-space-card-ghost"
-                            disabled={busyId === artifact.id}
-                            onClick={() => void downloadArtifact(artifact, 'save-as')}
-                          >
-                            <Save size={14} /> 另存为…
-                          </button>
-                          <button type="button" className="my-space-card-ghost" onClick={() => openSourceDraft(artifact)}>
-                            打开原草稿
-                          </button>
-                          <button
-                            type="button"
-                            className="my-space-card-danger"
-                            aria-label="删除"
-                            title="删除"
-                            disabled={busyId === artifact.id}
-                            onClick={() => requestDeleteArtifact(artifact)}
-                          >
-                            <Trash size={14} />
-                          </button>
+                            onSaveAs={() => void downloadArtifact(artifact, 'save-as')}
+                            onDelete={(trigger) => requestDeleteArtifact(artifact, trigger)}
+                          />
                         </div>
                       </article>
                     )
                   })}
-                </div>
+                </FluidHoverList>
               </section>
             ))}
-          </>
-        )}
-      </main>
-    </div>
-
-    {confirmPresence.rendered && (
-      <div className="my-space-modal-backdrop" role="presentation" data-visible={confirmPresence.visible}>
-        <div
-          className="my-space-confirm-dialog"
-          role="alertdialog"
-          aria-modal="true"
-          aria-labelledby="my-space-confirm-dialog-title"
-          data-visible={confirmPresence.visible}
-        >
-          <h3 id="my-space-confirm-dialog-title">删除草稿卷 PDF</h3>
-          <p>
-            删除「{confirmPresence.rendered.title || confirmPresence.rendered.fileName}」？PDF 文件会一并删除，此操作不可恢复。原草稿不受影响。
-          </p>
-          <div className="my-space-confirm-actions">
-            <button type="button" ref={cancelButtonRef} onClick={() => setConfirmTarget(null)}>
-              取消
-            </button>
-            <button type="button" className="my-space-card-danger" onClick={() => void confirmDeleteArtifact()}>
-              删除 PDF
-            </button>
-          </div>
+          </main>
         </div>
       </div>
-    )}
+
+      {confirmPresence.rendered && (
+        <div className="my-space-modal-backdrop" role="presentation" data-visible={confirmPresence.visible}>
+          <div className="my-space-confirm-dialog" role="alertdialog" aria-modal="true" aria-labelledby="my-space-confirm-dialog-title" data-visible={confirmPresence.visible}>
+            <h3 id="my-space-confirm-dialog-title">删除草稿卷 PDF</h3>
+            <p>删除「{confirmPresence.rendered.title || confirmPresence.rendered.fileName}」？PDF 文件会一并删除，此操作不可恢复。原草稿不受影响。</p>
+            <div className="my-space-confirm-actions">
+              <button type="button" ref={cancelButtonRef} onClick={() => setConfirmTarget(null)}>取消</button>
+              <button type="button" className="my-space-delete-confirm" onClick={() => void confirmDeleteArtifact()}>删除 PDF</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
