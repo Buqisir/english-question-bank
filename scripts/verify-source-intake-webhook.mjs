@@ -42,17 +42,26 @@ assert.equal(parseSourceIntakeWakeup(Buffer.from(JSON.stringify({
 const prompt = sourceIntakeAgentPrompt(payload)
 assert.match(prompt, new RegExp(payload.submissionId))
 assert.match(prompt, new RegExp(payload.submissionDigest))
-assert.match(prompt, /atomically claim/)
+assert.match(prompt, /source-intake\.mjs status/)
+assert.match(prompt, /explicit continue/)
+assert.match(prompt, /single JSON result/)
+assert.match(prompt, /Do not send needs-owner or handoff/)
 assert.match(prompt, /AMP_THREAD_ID/)
 assert.match(prompt, /listening_supplement/)
 assert.match(prompt, /exact targetPaperId/)
 assert.match(prompt, /never invent a new paperId/)
 assert.match(prompt, /Do not edit the Owner draft/)
+assert.match(prompt, /public-paper-v1/)
+assert.match(prompt, /do not dispatch the nine teaching analyses/)
+assert.match(prompt, /normal Medium thread with features: \[\]/)
+assert.match(prompt, /Never transfer claim receipts or submission workspaces/)
+assert.match(prompt, /replacement coordinator thread/)
 
 const originalEnabled = process.env.QUESTION_BANK_SOURCE_INTAKE_PLUGIN_ENABLED
 const originalOrigin = process.env.QUESTION_BANK_IMPORT_OPS_ORIGIN
 const originalAgentToken = process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN
 const originalSecret = process.env.QUESTION_BANK_SOURCE_INTAKE_WEBHOOK_SECRET
+const originalProjectId = process.env.AMP_PROJECT_ID
 const originalFetch = globalThis.fetch
 let registeredWebhook = null
 let registeredCommand = null
@@ -76,6 +85,15 @@ try {
   process.env.QUESTION_BANK_IMPORT_OPS_ORIGIN = 'https://ops.invalid'
   process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN = 'agent-token-verifier'
   process.env.QUESTION_BANK_SOURCE_INTAKE_WEBHOOK_SECRET = secret
+  process.env.AMP_PROJECT_ID = 'wrong-project-id'
+  globalThis.fetch = async () => assert.fail('wrong project must not make a network request')
+  await sourceIntakeWakeupPlugin({
+    logger: { log(message) { assert.match(message, /english-question-bank-import/) } },
+    createAgent() { assert.fail('wrong project must not create an agent') },
+    async createWebhook() { assert.fail('wrong project must not register a webhook') },
+  })
+  assert.equal(apiCalls.length, 0, 'wrong project must not call the worker API')
+  process.env.AMP_PROJECT_ID = '72c5d9ea-c2e7-42e8-b51e-0b22b9b23732'
   globalThis.fetch = async (url, options) => {
     const requestBody = JSON.parse(options.body)
     apiCalls.push({ url, options, body: requestBody })
@@ -148,9 +166,7 @@ try {
     createAgent(config) {
       assert.deepEqual(config, {
         extends: 'medium',
-        model: 'xai/grok-4.6',
-        reasoningEffort: 'xhigh',
-        instructions: 'Use nck1_analyze_group for staged analyses. Do not switch to Auto, Medium, GPT, or another model on failure; report the blocker instead.',
+        instructions: 'Follow docs/import/agent-contract.md. New raw sources use public-paper-v1 with paragraph summaries and compact public search metadata, never the nine teaching analyses. Preserve legacy and analyzed-package profiles. Keep this coordinator and its lease in place; stop on any validator failure.',
       })
       return {
         async createThread(options) {
@@ -256,7 +272,9 @@ try {
   else process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN = originalAgentToken
   if (originalSecret === undefined) delete process.env.QUESTION_BANK_SOURCE_INTAKE_WEBHOOK_SECRET
   else process.env.QUESTION_BANK_SOURCE_INTAKE_WEBHOOK_SECRET = originalSecret
+  if (originalProjectId === undefined) delete process.env.AMP_PROJECT_ID
+  else process.env.AMP_PROJECT_ID = originalProjectId
   globalThis.fetch = originalFetch
 }
 
-console.log('PASS source-intake webhook Orb reserve, bind, resume, and crash-window contract')
+console.log('PASS source-intake webhook medium inheritance, project guard, reserve, bind, resume, and crash-window contract')

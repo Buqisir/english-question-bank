@@ -27,8 +27,47 @@ node scripts/import-pipeline/source-intake.mjs init <submissionId> --paper-id <p
 node scripts/import-pipeline/source-intake.mjs handoff <submissionId> --paper-id <paperId>
 ```
 
+新接卷/恢复优先使用两个有界入口：
+
+```bash
+node scripts/import-pipeline/source-intake.mjs status <submissionId> --paper-id <paperId>
+node scripts/import-pipeline/source-intake.mjs continue <submissionId> --paper-id <paperId>
+```
+
+`status` 只读远端队列/当前 lease，并重验本地摘要收据，不 heartbeat、不下载、不写文件。
+`continue` 用 submission 和 paper 两级排他锁串行 claim → download → init → raw-source
+materialize/preflight，stdout 始终只有一份机器可读 JSON；子进程诊断进入 stderr。每个远端或
+昂贵步骤开始前写 mode-0600 原子进度记录；若没有完成收据，恢复返回 `*_outcome_unknown`
+而不自动重放。它不 handoff、不 needs-owner、不派解析、不完成听力/OCR 人工审核。
+`analyzed_package` 在确定性 init 后即 `source_ready`，不进入 OCR/materialize/model fallback。
+初始化与材料化期间每 30 秒串行续租，单次请求最多等待 15 秒；失败会终止步骤进程组，
+记录 unknown 并停止。中断遗留锁须先确认原进程已结束再人工处理，禁止删除活跃锁。
+听力 init 后尚无 finalized receipt 时只返回人工待办，不以进度记录代替音频证据；
+协调线程须核对源绑定，按待办运行材料化与内容 review，再显式 finalize。
+
+新 raw-source 初始化会明确写入 `public-paper-v1`。材料化与源审查完成后不派发九份教学
+分析，而是运行：
+
+```bash
+node scripts/import-pipeline/review.mjs prepare-summaries <paperId> --output /abs/summary-request.json
+node scripts/import-pipeline/review.mjs verify-summaries <paperId>
+node scripts/import-pipeline/review.mjs prepare-search-metadata <paperId> --output /abs/metadata-request.json
+node scripts/import-pipeline/review.mjs finalize-search-metadata <paperId> --input /abs/authored-metadata.json
+node scripts/import-pipeline/review.mjs verify-search-metadata <paperId>
+```
+
+prepare 命令不依赖尚不存在的 summary sidecar，也不递归调用完整 Review projection；请求
+包含精确 IDs/digests、schema、prompt、每个目标的完整 group/source-answer context。
+需要模型时只把此请求交给普通 Medium（`features: []`），不自动调用、不生成教学 prose。
+摘要输出保存为 paper 根目录 `paragraph-summaries-v1.json` 后验证。metadata prepare 同样可在
+sidecar 不存在时运行；只把该显式请求交给普通 Medium（`features: []`），再由 finalize
+确定性补全/写入 `public-search-metadata-v1.json`，最后 verify。`verify-analyses` 对该 profile
+显式失败并指向 `verify-summaries`。历史 absent-profile、listening supplement hydration 与
+external analyzed_package 原合同不变，不得为恢复方便改 profile 或 approval identity。
+
 `claim` 写入 mode 0600 的 gitignored lease receipt；`download` 再核对响应 digest、
-字节长度与 snapshot SHA-256。长任务用 `heartbeat <submissionId>` 延长有限 lease。
+字节长度、snapshot SHA-256 及 manifest/snapshot 完整文件集合。长任务用
+`heartbeat <submissionId>` 延长有限 lease。
 文件不完整或语义不清时改用
 `needs-owner <submissionId> --code <reason> --message '<需要 Owner 判断的事实>'`，
 不得生成答案或绕过来源缺口。`init` 只显式调用既有 universal NCK1 初始化；
@@ -53,7 +92,8 @@ node scripts/import-pipeline/universal-nck1.mjs init <paperId> \
 node scripts/import-pipeline/universal-nck1.mjs materialize <paperId>
 node scripts/import-pipeline/universal-nck1.mjs verify <paperId>
 node scripts/import-pipeline/universal-nck1.mjs build <paperId>
-node scripts/import-pipeline/review.mjs verify-analyses <paperId>
+node scripts/import-pipeline/review.mjs verify-summaries <paperId>
+node scripts/import-pipeline/review.mjs verify-search-metadata <paperId>
 QUESTION_BANK_IMPORT_OPS_ORIGIN=https://eqbank.cc \
 QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN='<secret>' \
   node scripts/import-pipeline/review.mjs push <paperId>
@@ -65,6 +105,71 @@ QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN='<secret>' \
 `NCK1_COMBINED_SOURCE_BOUNDARY_AMBIGUOUS`。纯答案键与带逐题详解/写作范文的答案源都只
 生成同一套完整21–65答案值；源详解和范文不进入Materialization、Candidate或教师版，
 原source bytes/digest仍保留。只有ABCD而缺56–65答案仍失败关闭。
+
+### 阅读解析的精确位置准备
+
+以下本节仅适用于历史 absent-profile / external `analyzed_package` 的既有分析合同；
+`public-paper-v1` 不进入该路径。Owner 选择 B：专用 `english-question-bank-import` 项目内 Low + fast 直接生成，
+不调用顾问；协调者保留原卷/lease，逐组取回并正式校验。项目规格保持 Medium。
+完整派工、文件传递与失败停止规则见 `docs/import/agent-contract.md` 的 B 路径。
+
+`.agents/setup` 的 `npm ci --prefix server` 安装锁文件中的 Ajv，不需要 Python
+jsonschema。生成前必须实际检查 Node 24 / Ajv；完整 setup 失败造成缺失时，先在
+环境准备阶段运行 `bash .agents/setup --analysis-only`，不安装 Desktop/OCR/ASR，
+不初始化数据库。它不是完整导题或渲染环境的通过证明。
+所有题型的单组输出使用同一条命令（只读，失败返回非零，不修复坐标）：
+
+```bash
+node scripts/import-pipeline/validate-analysis.mjs request.json analysis-reading-b.json
+```
+
+替换输出文件名即可；`request.json` 是生成时保留的单组请求，`group` 与
+`sourceGroup.groupKey` 必须一致。协调者准备请求，不让 worker 根据结果重造源材料：
+
+| group | sourceGroup.material | authoritativeAnswers |
+| --- | --- | --- |
+| `reading-a`–`reading-d`、`seven`、`cloze`、`grammar` | `{paper, group}`：paper 包含 paperId/sourceAssetVersion；group 使用现有分析器输入（groupId、paragraphs、questions，及该题型的 optionBank/blankId/prompt 等） | 以 questionId 为键、值为 `{questionId, answer}` 的完整本组答案表 |
+| `application`、`continuation` | `{paper, group, writingTask}`：writingTask 使用 PaperAsset Writing Task 形状，保留 groupId/taskType/instruction、wordCountTarget、materialText/continuationStarters/applicationGiven 等来源字段 | `{officialModelAnswer: 原文字符串或null}`；必须与 writingTask 中的来源范文一致，无官方范文明确为 null |
+| `listening-unit` | 直接使用 `buildListeningAnalysisAgentRequest` 生成的 material（paperId/sourceAssetVersion/materials），不得传全卷 | 同一 builder 生成的 `{questionId: officialAnswer}` |
+
+复用既有 schema、教学内容与题型语义校验，以及全卷路径的题号/答案/版本闭合检查。
+语法填空在内存副本上派生确定字段后校验，不改原文件。应用文还调用既有题目格式/字数
+校验，续写检查原文和段首证据；听力检查材料、题号、官方答案和精确引文，软提醒原样输出。
+退出码：0 通过，1 数据或校验失败，2 命令参数错误。
+单组通过不替代 `review.mjs verify-analyses <paperId>`、听力音频审核或教师内容审核。
+
+未接纳的阅读 AI 输出可先显式计算精确位置，再通过原 validator：
+
+```bash
+node scripts/import-pipeline/derive-reading-ranges.mjs \
+  request.json raw-analysis-reading-b.json derived-analysis-reading-b.json
+```
+
+阅读修复只接受 `group: reading-a` 至 `reading-d`。只能使用已核对源材料的请求，
+不得为适配模型结果改写源文或答案。保留 raw 文件，输出必须是一个不存在的新文件。
+这不是 Review 上传、认可或发布命令，也不修改原卷 workspace 或在线状态。
+
+程序只改 `start/end`：译文段落相对整篇 `fullTranslationZh`，标注相对指定段落，
+下划线相对 `displayText`，全部按 Unicode code point 计数。有效的重复片段位置保留；
+其他位置必须由唯一精确引文定位，找不到、引用了错误段落或重复不明均拒绝。
+不补写文字、不修改关联、不选取第一个重复匹配。只有原 JSON Schema、阅读语义、
+答案和 teachingContent 校验全部通过才写出文件。人工仍须检查教学内容；程序通过
+不是 Owner Review 认可。此步骤只支持阅读，不扩展到填空或写作。
+
+完形/语法填空的本地小验收另有显式准备入口（未切换默认生成流程）：
+
+```bash
+node scripts/import-pipeline/prepare-objective-analysis.mjs request.json draft.json prepared.json
+```
+
+准备稿附加合同见 `prompts/objective-analysis-preparation-v1.md`：模型保留答案、
+解释、译文、精确引文和语义关联，可省略数字坐标、completedSourceTexts.text 和
+精选句 displayText；下划线可提供唯一精确的 underlineTexts。程序复用权威答案
+补全函数生成文本，按 blankId/questionId 识别真实插入位置，按指定段落精确定位。
+它不会修复误译、换段寻找引文、改写引文或解释，也不会猜中英对应关系。
+重复且未明确定位的引文、错误关联和原 validator 拒绝的内容一律失败。
+只有原单组正式校验通过后才以排他创建写出新文件，不覆盖原稿或已有结果；
+完整 Review/发布合同不变。测试：`node scripts/verify-objective-preparation.mjs`。
 
 ### 自动拆题与 Agent 备用路径
 
@@ -119,8 +224,9 @@ macOS 检查 magick/ffmpeg 动态链接；失败就开工前停，中途不得�
 `init` 也先执行同一检查，再复制并摘要绑定本地源，DOCX 同时生成确定性 PDF
 rendition；源文件、Materialization 与 canonical evidence 均 gitignored。已知
 NCK1 结构的试题 DOCX + 权威答案 DOCX 用 `materialize` 生成逐段 locator、九题组
-骨架、答案与结构化复核清单。Agent 必须生产 4× reading、seven、cloze、grammar、
-application、continuation 共九份教学分析；不确定的
+骨架、答案与结构化复核清单。`public-paper-v1` 必须生产并验证逐正文段落摘要；仅历史
+absent-profile / external `analyzed_package` 必须生产 4× reading、seven、cloze、grammar、
+application、continuation 共九份教学分析。不确定的
 section/题号/blank/答案/表格或视觉语义进入 `review.required` 并失败关闭，AI 禁止
 解题补答案。producer receipt 绑定版本和 source digest；未变源直接 resume，检测到
 Agent 已编辑输出时绝不覆盖。同一 paperId 仍单 writer；两份写作分析可并行纯读后
@@ -144,9 +250,10 @@ rendition，再按 `pdf_crop` 路径裁。当前工具只支持确定性媒体�
 低清图的AI辅助候选政策已登记在能力矩阵Ticket 04，但在原图永久保留、source/candidate
 digest绑定、禁止去水印及`/ops/`并排+overlay/闪烁人工确认gate实现前，不得用于导入。
 `verify` 只派生 Candidate，`build` 只生成
-Candidate 摘要和 `confirmed: false` 的 Teacher Confirmation 模板。`review.mjs
-verify-analyses` 在 push 前校验九份输入及其确定性五份 Screen sidecar projection；
-`push` 把不可变源、Candidate 与九份原始 analysis bytes 作为新 revision 上传到
+Candidate 摘要和 `confirmed: false` 的 Teacher Confirmation 模板。公共卷在 push 前由
+`review.mjs verify-summaries` 校验摘要覆盖与绑定；旧分析合同由 `verify-analyses`
+校验九份输入及其确定性五份 Screen sidecar projection。`push` 把不可变源、Candidate
+与当前 profile 的摘要或原始 analysis bytes 作为新 revision 上传到
 `/ops/`。Owner 在真实
 Screen/Print/PDF 上审核；Agent 用自己的 `import_agent` 网页待办箱或下列命令
 读取、回复和提交修订：
@@ -159,13 +266,14 @@ digest、Screen、Student/Teacher Print、PDF、publication/recovery 的独立�
 
 ```bash
 node scripts/import-pipeline/review.mjs preflight <paperId>
-node scripts/import-pipeline/review.mjs verify-analyses <paperId>
+node scripts/import-pipeline/review.mjs verify-summaries <paperId> # public-paper-v1
+# 仅旧分析合同：node scripts/import-pipeline/review.mjs verify-analyses <paperId>
 node scripts/import-pipeline/review.mjs status <paperId>
 node scripts/import-pipeline/review.mjs reply <paperId> <issueId> --message '<回复>'
 node scripts/import-pipeline/review.mjs push <paperId> --resolves <issueId>[,<issueId>]
 ```
 
-定页 PDF 问题只调整同一 Candidate 的分页方案，不重新生成正文或九份分析。先让既有
+定页 PDF 问题只调整同一 Candidate 的分页方案，不重新生成正文或当前 profile 的摘要／分析。先让既有
 24 次上限的规划器渲染真实学生卷，并生成 PDF、逐页 PNG 与 `report.json`：
 
 ```bash

@@ -61,6 +61,7 @@ import {
   finalizeListeningAudio,
   stageListeningAudio,
 } from './listening-audio.mjs'
+import { buildNck1ReviewProjection } from '../../server/import-review/revisionProjection.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const papersRoot = path.join(import.meta.dirname, 'papers')
@@ -410,6 +411,7 @@ function initializeCompleteSourceSet({
   writeFileSync(configPath, `${JSON.stringify({
     paperId,
     format: 'universal-nck1',
+    importProfile: 'public-paper-v1',
     provenance: { paperName, source: provenance },
     universalSourceManifestPath: 'universal-source-manifest.json',
     canonicalRequestPath: manifest.canonicalRequestPath,
@@ -817,6 +819,8 @@ function verify(paperId) {
     const issue = imported.issues[0]
     fail(`${issue?.code || 'MATERIALIZATION_INVALID'}: ${issue?.message || 'Candidate derivation failed'}`)
   }
+  const { paperDir } = paperContext(paperId)
+  const config = JSON.parse(readFileSync(path.join(paperDir, 'config.json'), 'utf8'))
   console.log(JSON.stringify({
     ok: true,
     paperId,
@@ -829,6 +833,7 @@ function verify(paperId) {
     listening: imported.candidate.interpretation.inactiveSourceClosures.length === 2
       ? 'captured'
       : 'not_supplied',
+    ...(config.importProfile ? { importProfile: config.importProfile } : {}),
   }, null, 2))
 }
 

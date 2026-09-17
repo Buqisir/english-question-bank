@@ -4,6 +4,8 @@ import path from 'node:path'
 import { LISTENING_AUDIO_PATHS } from './listeningAudioEvidence.mjs'
 import {
   assertPaperImportAnalysisSidecars,
+  assertPaperImportParagraphSummaries,
+  assertPaperImportPublicSearchMetadata,
   assertPaperImportPaginationPlan,
   beginPaperImportPublish,
   computeNextPaperAssetVersion,
@@ -46,6 +48,7 @@ import {
   buildNck1CompatibilityPackage,
   buildNck1ReviewProjection,
 } from '../import-review/revisionProjection.mjs'
+import { TOPIC_LABEL_TAXONOMY } from '../../shared/topics/topicTaxonomy.mjs'
 import {
   loadBoundPaperPaginationPlan,
   paginationSlotBindings,
@@ -151,6 +154,23 @@ function upsertQuestionGroupTags(db, groupId, tags) {
       VALUES (?, ?, 'question_group', ?)
       `,
     ).run(`tl-${randomUUID()}`, tagId, groupId)
+  }
+}
+
+const topicTaxonomyByLabel = new Map(TOPIC_LABEL_TAXONOMY.map((entry) => [entry.label, entry]))
+
+function replacePublishedTopicLabels(db, groupId, labels) {
+  db.prepare('DELETE FROM question_group_topic_labels WHERE question_group_id = ?').run(groupId)
+  const insert = db.prepare(`
+    INSERT INTO question_group_topic_labels (
+      id, question_group_id, label, theme, theme_group, subtopic,
+      source, reason, confidence, created_at, updated_at
+    ) VALUES (?, ?, ?, ?, ?, ?, 'public-search-metadata-v1', '', 1, datetime('now'), datetime('now'))
+  `)
+  for (const label of labels) {
+    const topic = topicTaxonomyByLabel.get(label)
+    if (!topic) throw new Error(`Public search metadata contains unknown topic label: ${label}`)
+    insert.run(`qgtl-${randomUUID()}`, groupId, topic.label, topic.theme, topic.themeGroup, topic.subtopic)
   }
 }
 
@@ -284,6 +304,12 @@ function upsertPaperAssetToDb(db, packageData, version, options = {}) {
   const answers = answerKey.answers || {}
   const sourceType = sourceTypeMap[importMeta.paper.sourceType] || 'other'
   const defaultTags = Array.isArray(importMeta.paper.defaultTags) ? importMeta.paper.defaultTags : []
+  const publicSearchMetadata = packageData.publicSearchMetadataBytes
+    ? JSON.parse(Buffer.from(packageData.publicSearchMetadataBytes).toString('utf8'))
+    : null
+  const publicMetadataByGroup = new Map(
+    (publicSearchMetadata?.groups || []).map((group) => [group.groupId, group]),
+  )
 
   ensurePaperImportDatabaseShape(db)
 
@@ -303,6 +329,7 @@ function upsertPaperAssetToDb(db, packageData, version, options = {}) {
       paper.title
     const groupTitle = groupMeta.displayTitleOverride || group.title
     const defaultScore = getDefaultScore(group, answers)
+    const publicMetadata = publicMetadataByGroup.get(group.groupId) || null
 
     db.prepare(
       `
@@ -339,6 +366,10 @@ function upsertPaperAssetToDb(db, packageData, version, options = {}) {
         material_text = excluded.material_text,
         summary = excluded.summary,
         theme = excluded.theme,
+        discourse_type = CASE
+          WHEN excluded.discourse_type IS NULL THEN passages.discourse_type
+          ELSE excluded.discourse_type
+        END,
         word_count = excluded.word_count,
         difficulty = excluded.difficulty,
         note = excluded.note,
@@ -351,15 +382,8 @@ function upsertPaperAssetToDb(db, packageData, version, options = {}) {
       materialText,
       summary,
       '',
-      // r1-genre-truth: discourse_type is real five-class genre truth (记叙/说明/
-      // 议论/应用/新闻), not the group's question-type name. New passages get NULL
-      // here (never group.groupType — that was the bug: it collided with the
-      // group_type column and got overwritten as fake genre data); the ON CONFLICT
-      // branch above no longer touches discourse_type at all, so re-publishing an
-      // existing passage never stomps its real genre classification. New passages
-      // need a genre-truth backfill pass (see docs/import/agent-runbook.md).
-      null,
-      materialText.split(/\s+/).filter(Boolean).length,
+      publicMetadata?.genre || null,
+      publicMetadata?.counts?.wordCount ?? materialText.split(/\s+/).filter(Boolean).length,
       difficulty,
       `paperId=${paper.paperId}; groupId=${group.groupId}; assetVersion=${version}`,
     )
@@ -431,6 +455,7 @@ function upsertPaperAssetToDb(db, packageData, version, options = {}) {
       ...defaultTags,
       ...(Array.isArray(groupMeta.tags) ? groupMeta.tags : []),
     ])
+    if (publicMetadata) replacePublishedTopicLabels(db, group.groupId, publicMetadata.topicLabels)
   }
 
   if (options.recordAssetVersion !== false) {
@@ -467,6 +492,12 @@ function loadPublishedCompatibilityPackage(versionDir) {
     scAnalysis: read('analyses/seven-choices-analysis-v1.json'),
     clozeAnalysis: read('analyses/cloze-analysis-v1.json'),
     grammarFillAnalysis: read('analyses/grammar-fill-analysis-v1.json'),
+    paragraphSummariesBytes: existsSync(path.join(versionDir, 'paragraph-summaries-v1.json'))
+      ? readFileSync(path.join(versionDir, 'paragraph-summaries-v1.json'))
+      : null,
+    publicSearchMetadataBytes: existsSync(path.join(versionDir, 'public-search-metadata-v1.json'))
+      ? readFileSync(path.join(versionDir, 'public-search-metadata-v1.json'))
+      : null,
   }
 }
 
@@ -1196,7 +1227,13 @@ export function publishUniversalNck1Import({
     sourceDigest: projection.sourceDigest,
     candidateDigest: projection.candidateDigest,
     visibleStructureDigest: projection.visibleStructureDigest,
-    analysisDigest: projection.analysisDigest,
+    ...(projection.importProfile
+      ? {
+          importProfile: projection.importProfile,
+          paragraphSummariesDigest: projection.paragraphSummariesDigest,
+          publicSearchMetadataDigest: projection.publicSearchMetadataDigest,
+        }
+      : { analysisDigest: projection.analysisDigest }),
   }
   if (
     !approvedIdentity
@@ -1232,6 +1269,8 @@ export function publishUniversalNck1Import({
     sourceProvenance: projection.sourceProvenance,
     sourceAssetVersion: projection.candidate.interpretation.sourceAssetVersion,
     analysisSidecars: projection.analysisSidecars,
+    paragraphSummariesBytes: projection.paragraphSummariesBytes,
+    publicSearchMetadataBytes: projection.publicSearchMetadataBytes,
     paginationPlan: projection.paginationPlan,
     paginationBindingIdentity: projection,
   })
@@ -1243,7 +1282,8 @@ export function publishUniversalNck1Import({
     forceDbFailure,
     failurePoint,
     onPrepared,
-    requireCompleteAnalyses: true,
+    requireCompleteAnalyses: !projection.importProfile,
+    requireParagraphSummaries: Boolean(projection.importProfile),
     admitPackage(version) {
       return admitBoundUniversalNck1Package({
         canonicalRequest,
@@ -1336,6 +1376,7 @@ function publishPreparedPaperImport({
   failurePoint = null,
   onPrepared = null,
   requireCompleteAnalyses = false,
+  requireParagraphSummaries = false,
 }) {
   const paperId = packageData.paperAsset.paper.paperId
   const preflightVersion = computeNextPublishVersion({
@@ -1353,9 +1394,9 @@ function publishPreparedPaperImport({
     db,
     paperAssetsDir,
     paperId,
-    validateCommittedAssets: requireCompleteAnalyses
+    validateCommittedAssets: requireCompleteAnalyses || requireParagraphSummaries
       ? (targetVersion) => {
-          assertPaperImportAnalysisSidecars({
+          if (requireCompleteAnalyses) assertPaperImportAnalysisSidecars({
             baseDir: path.join(
               paperAssetsDir,
               paperId,
@@ -1365,14 +1406,30 @@ function publishPreparedPaperImport({
             packageData,
             version: targetVersion,
           })
+          if (requireParagraphSummaries) assertPaperImportParagraphSummaries({
+            baseDir: path.join(paperAssetsDir, paperId, 'versions', `v${targetVersion}`),
+            packageData,
+          })
+          if (requireParagraphSummaries) assertPaperImportPublicSearchMetadata({
+            baseDir: path.join(paperAssetsDir, paperId, 'versions', `v${targetVersion}`),
+            packageData,
+          })
           assertPaperImportPaginationPlan({
             baseDir: path.join(paperAssetsDir, paperId, 'versions', `v${targetVersion}`),
             packageData,
           })
-          assertPaperImportAnalysisSidecars({
+          if (requireCompleteAnalyses) assertPaperImportAnalysisSidecars({
             baseDir: path.join(paperAssetsDir, paperId, 'latest'),
             packageData,
             version: targetVersion,
+          })
+          if (requireParagraphSummaries) assertPaperImportParagraphSummaries({
+            baseDir: path.join(paperAssetsDir, paperId, 'latest'),
+            packageData,
+          })
+          if (requireParagraphSummaries) assertPaperImportPublicSearchMetadata({
+            baseDir: path.join(paperAssetsDir, paperId, 'latest'),
+            packageData,
           })
           assertPaperImportPaginationPlan({
             baseDir: path.join(paperAssetsDir, paperId, 'latest'),
@@ -1492,6 +1549,11 @@ function publishPreparedPaperImport({
       })
       assertPaperImportPaginationPlan({ baseDir: writtenVersion.versionDir, packageData })
     }
+    if (requireParagraphSummaries) {
+      assertPaperImportParagraphSummaries({ baseDir: writtenVersion.versionDir, packageData })
+      assertPaperImportPublicSearchMetadata({ baseDir: writtenVersion.versionDir, packageData })
+      assertPaperImportPaginationPlan({ baseDir: writtenVersion.versionDir, packageData })
+    }
 
     const canonicalRef = {
       paperId,
@@ -1543,6 +1605,11 @@ function publishPreparedPaperImport({
         packageData,
         version,
       })
+      assertPaperImportPaginationPlan({ baseDir: latestSwap.latestDir, packageData })
+    }
+    if (requireParagraphSummaries) {
+      assertPaperImportParagraphSummaries({ baseDir: latestSwap.latestDir, packageData })
+      assertPaperImportPublicSearchMetadata({ baseDir: latestSwap.latestDir, packageData })
       assertPaperImportPaginationPlan({ baseDir: latestSwap.latestDir, packageData })
     }
     if (failurePoint === 'process-exit-after-latest-swap') {

@@ -35,6 +35,7 @@ import {
 
 const root = path.resolve(import.meta.dirname, '..')
 const cliPath = path.join(root, 'scripts/import-pipeline/universal-nck1.mjs')
+const reviewPath = path.join(root, 'scripts/import-pipeline/review.mjs')
 const surfaceVerifierPath = path.join(
   root,
   'scripts/verify-universal-nck1-candidate-surfaces.mjs',
@@ -60,6 +61,88 @@ function imported(produced, documents = fixture.sourceDocuments) {
     })),
     media: [],
   })
+}
+
+function authoredPublicSearchMetadata(request) {
+  return {
+    groups: request.sourceGroups.map((group) => {
+      let metadata
+      if (group.family === 'reading') {
+        metadata = {
+          slot: group.slotId.split('.')[1].toUpperCase(),
+          questions: group.questions.map(({ questionId }) => ({
+            questionId,
+            similarityProfile: {
+              family: 'detail',
+              subtype: 'general-detail',
+              detailScope: 'single',
+              technique: null,
+            },
+          })),
+        }
+      }
+      if (group.family === 'seven-choices') {
+        metadata = {
+          questions: group.questions.map(({ questionId }) => ({
+            questionId,
+            positionFacet: 'seven-choices.position.paragraph-middle',
+            roleFacet: 'seven-choices.role.cohesion',
+            primaryMechanismFacet: 'seven-choices.cohesion.grammatical.logical-connector',
+          })),
+        }
+      }
+      if (group.family === 'cloze') {
+        metadata = {
+          questions: group.questions.map(({ questionId }) => ({
+            questionId,
+            pos: 'verb',
+            signatureFacet: 'cloze.signature.verb.action-sequence',
+          })),
+        }
+      }
+      if (group.family === 'grammar-fill') {
+        const paragraphIds = request.deterministic
+          .find(({ groupId }) => groupId === group.groupId).paragraphIds
+        metadata = {
+          questions: group.questions.map(({ questionId, prompt }) => ({
+            questionId,
+            facetKey: prompt
+              ? 'grammar-fill.given.conversion.noun-to-noun'
+              : 'grammar-fill.no-hint.article',
+            role: null,
+            similarityProfile: {
+              route: prompt ? 'derived-noun' : 'the-anaphoric',
+              features: [],
+            },
+            contextParagraphIds: paragraphIds,
+          })),
+        }
+      }
+      if (group.family === 'application-writing') {
+        metadata = {
+          writingTaskId: `writing-task:${group.groupId}`,
+          form: 'email',
+          function: 'communicate',
+        }
+      }
+      if (group.family === 'continuation-writing') {
+        metadata = {
+          writingTaskId: `writing-task:${group.groupId}`,
+          situation: 'A situation develops.',
+          conflict: 'A problem is resolved.',
+          relationships: [],
+        }
+      }
+      assert(metadata, `unsupported public search metadata family: ${group.family}`)
+      return {
+        groupId: group.groupId,
+        family: group.family,
+        topicLabels: ['人与社会-社会服务与人际沟通-合作'],
+        genre: '记叙',
+        metadata,
+      }
+    }),
+  }
 }
 
 const firstPages = fixture.pageSets[0]
@@ -246,6 +329,77 @@ try {
   assert.match(run('verify', paperId), /"groups": 9/u)
   assert.match(run('verify', paperId), /"assertions": 45/u)
   assert.match(run('build', paperId), /BUILT CANDIDATE/u)
+  const summaryRequestPath = path.join(tempRoot, 'paragraph-summaries-request.json')
+  execFileSync(process.execPath, [
+    reviewPath,
+    'prepare-summaries', paperId,
+    '--output', summaryRequestPath,
+  ], {
+    cwd: root,
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'pipe'],
+  })
+  const summaryRequest = JSON.parse(readFileSync(summaryRequestPath, 'utf8'))
+  writeFileSync(
+    path.join(cliPaperDir, summaryRequest.outputFile),
+    `${JSON.stringify({
+      schemaVersion: 'paragraph-summaries-v1',
+      paperId: summaryRequest.paperId,
+      sourceDigest: summaryRequest.sourceDigest,
+      candidateDigest: summaryRequest.candidateDigest,
+      groups: summaryRequest.groups.map(({ groupId, targets }) => ({
+        groupId,
+        paragraphs: targets.map(({ paragraphId }) => ({
+          paragraphId,
+          summary: `Synthetic fixture summary for ${paragraphId}.`,
+        })),
+      })),
+    }, null, 2)}\n`,
+  )
+  assert.match(
+    execFileSync(process.execPath, [reviewPath, 'verify-summaries', paperId], {
+      cwd: root,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    }),
+    /"status": "summaries_verified"/u,
+  )
+  const searchMetadataRequestPath = path.join(tempRoot, 'public-search-metadata-request.json')
+  execFileSync(process.execPath, [
+    reviewPath,
+    'prepare-search-metadata', paperId,
+    '--output', searchMetadataRequestPath,
+  ], {
+    cwd: root,
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'pipe'],
+  })
+  const searchMetadataRequest = JSON.parse(readFileSync(searchMetadataRequestPath, 'utf8'))
+  const authoredSearchMetadataPath = path.join(tempRoot, 'authored-public-search-metadata.json')
+  writeFileSync(
+    authoredSearchMetadataPath,
+    `${JSON.stringify(authoredPublicSearchMetadata(searchMetadataRequest), null, 2)}\n`,
+  )
+  assert.match(
+    execFileSync(process.execPath, [
+      reviewPath,
+      'finalize-search-metadata', paperId,
+      '--input', authoredSearchMetadataPath,
+    ], {
+      cwd: root,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    }),
+    /"status": "search_metadata_finalized"/u,
+  )
+  assert.match(
+    execFileSync(process.execPath, [reviewPath, 'verify-search-metadata', paperId], {
+      cwd: root,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    }),
+    /"status": "search_metadata_verified"/u,
+  )
   assert.match(
     execFileSync(process.execPath, [surfaceVerifierPath, paperId], {
       cwd: root,

@@ -26,8 +26,11 @@ const materialization = plan(
 assert.equal(materialization.risk, 'single-paper-import')
 assert.equal(materialization.pack, 'import-paper')
 assert(materialization.scripts.length >= 10, 'import pack keeps independent failure layers')
-assert(materialization.scripts.length <= 27, 'import pack stays narrow with two pagination QA failure layers')
+assert(materialization.scripts.length <= 30, 'import pack adds summary, search metadata and public Review consumer failure layers')
 for (const required of [
+  'scripts/verify-paragraph-summaries-v1.mjs',
+  'scripts/verify-public-search-metadata-v1.mjs',
+  'scripts/verify-public-paper-review-consumer.mjs',
   'scripts/verify-import-pagination-qa.mjs',
   'scripts/verify-import-pagination-ui.mjs',
   'scripts/verify-nck1-docx-materialization-producer.mjs',

@@ -56,6 +56,11 @@ states, relationships, causal chain, unresolved problem, usable clues, meaning
 direction with calibrated confidence, and source style. Do not force a closed
 theme where the source leaves meaning open.
 
+`sourceEndState` stops at the end of `material`: an action introduced by a
+paragraph starter belongs to that paragraph's entry state, not the source's past.
+State the obstacles actually shown. Several failed attempts do not prove that
+all possible methods have failed; retain the source's scope and uncertainty.
+
 Infer traits from actions, speech, circumstances or others' responses, not labels
 such as kind, brave or selfish without evidence. Keep causal links that actually
 affect continuation. The unfinished problem may be an ordinary goal rather than
@@ -76,9 +81,24 @@ the first paragraph must reach that state without prematurely narrating the
 second paragraph's main work. State only necessary exit/closure constraints,
 not the chosen route's optional props, dialogue or method of seeking help.
 
+Write the contract before choosing the route. In each required statement,
+retain only the event or state entailed by its cited source; leave unspecified
+people, methods and timing unspecified. A later event's date does not establish
+that an earlier promise specified that date. Use the shortest sufficient set of
+requirements, not a detailed plot outline. Keep every schema-required field;
+leave optional arrays empty or omitted where the schema allows.
+
+Test necessity against a compatible alternative. If another route can satisfy
+the same source and starters without this detail, move the detail to
+`developmentPlan`, not another required statement. Do not expand a contract
+after choosing a route merely to make that route look compulsory.
+
 ### `developmentPlan`
 
 Choose one defensible route while preserving other legitimate possibilities.
+Teach that route directly as “本范文选择……”, not “续写必须……”. Explain only
+the cause, action and result needed to connect the starters and close the source
+problem. Do not enumerate alternative plots merely to demonstrate breadth.
 Return:
 
 - `selectedRoute` and one or more grounded `routeRationale` items;

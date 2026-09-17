@@ -217,8 +217,8 @@ export function validateApplicationModelAnswer({ modelAnswer, writingTask, group
   const studentWordCount = wordCount(answer) - given.reduce((total, text) => total + wordCount(text), 0)
   if (studentWordCount <= 0) throw new Error('application model answer has no student-written content')
   const target = writingTask.wordCountTarget
-  if (target === 80 && (studentWordCount < 80 || studentWordCount > 105)) {
-    throw new Error(`application model answer word count ${studentWordCount} is outside the accepted range [80, 105]`)
+  if (target === 80 && (studentWordCount < 80 || studentWordCount > 120)) {
+    throw new Error(`application model answer word count ${studentWordCount} is outside the accepted range [80, 120]`)
   }
   if (Number.isFinite(target) && target !== 80) {
     const lower = Math.ceil(target * 0.8)
@@ -229,7 +229,7 @@ export function validateApplicationModelAnswer({ modelAnswer, writingTask, group
   }
   return {
     studentWordCount,
-    wordCountStatus: target === 80 ? (studentWordCount >= 85 && studentWordCount <= 100 ? 'recommended' : 'accepted') : 'accepted',
+    wordCountStatus: target === 80 ? (studentWordCount >= 100 && studentWordCount <= 120 ? 'recommended' : 'accepted') : 'accepted',
   }
 }
 

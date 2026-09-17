@@ -247,7 +247,14 @@ For each reading group:
   IDs. Add `answer-evidence` annotations for textual question evidence and
   `sentence-structure` annotations covering every selected sentence. Each range
   is `{textId,paragraphId,start,end,quote}` and `quote` must equal that exact
-  code-point slice. Repeated text must use the intended occurrence's offsets;
+  code-point slice. There are two coordinate systems: translation paragraph
+  `start/end` are relative to the entire `fullTranslationZh`; annotation
+  `translationRanges.start/end` are relative to that paragraph's `quote`,
+  starting again at zero. Never copy a full-translation offset into an annotation.
+  For example, in `甲。\n乙来了。`, the second paragraph starts at 3 in the full
+  translation, but `来了` is `[1,3)` within that paragraph, not `[4,6)`.
+  Source annotation offsets are likewise local to the referenced source paragraph;
+  underline offsets are local to `displayText`. Repeated text must use the intended occurrence's offsets;
   many questions and overlapping ranges are valid. Source answer evidence must
   reference original passage text. Do not derive offsets by first substring.
   Figure/table evidence keeps its existing object reference; never invent text

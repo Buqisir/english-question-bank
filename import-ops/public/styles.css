@@ -195,6 +195,62 @@ summary:focus-visible {
   font-weight: 600;
 }
 
+.summary-binding,
+.paragraph-summary-id {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+}
+
+.summary-binding {
+  margin-top: 8px;
+}
+
+.paragraph-summary-list {
+  display: grid;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.paragraph-summary-item {
+  min-width: 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--line-subtle);
+}
+
+.paragraph-summary-id {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.paragraph-summary-id code,
+.paragraph-source,
+.paragraph-summary {
+  overflow-wrap: anywhere;
+}
+
+.paragraph-source,
+.paragraph-summary {
+  margin: 8px 0;
+}
+
+.paragraph-source {
+  color: var(--ink);
+  font-family: "Times New Roman", Times, SimSun, "Songti SC", STSong, serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.paragraph-summary {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.paragraph-summary strong {
+  margin-right: 8px;
+  color: var(--ink);
+}
+
 .workspace {
   display: grid;
   min-width: 0;

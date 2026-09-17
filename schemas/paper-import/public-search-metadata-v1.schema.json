@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "public-search-metadata-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "paperId", "sourceDigest", "candidateDigest", "groups"],
+  "properties": {
+    "schemaVersion": { "const": "public-search-metadata-v1" },
+    "paperId": { "type": "string", "minLength": 1 },
+    "sourceDigest": { "$ref": "#/$defs/digest" },
+    "candidateDigest": { "$ref": "#/$defs/digest" },
+    "groups": { "type": "array", "items": { "$ref": "#/$defs/group" } }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "nonBlank": { "type": "string", "minLength": 1, "pattern": "\\S" },
+    "questionId": { "type": "string", "minLength": 1 },
+    "questionList": { "type": "array" },
+    "counts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["paragraphCount", "questionCount", "taskCount", "wordCount", "wordCountAlgorithm", "wordCountParagraphIds"],
+      "properties": {
+        "paragraphCount": { "type": "integer", "minimum": 0 }, "questionCount": { "type": "integer", "minimum": 0 },
+        "taskCount": { "type": "integer", "minimum": 0, "maximum": 1 }, "wordCount": { "type": "integer", "minimum": 0 },
+        "wordCountAlgorithm": { "const": "latin-words-v1" },
+        "wordCountParagraphIds": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "similarity": {
+      "type": "object", "additionalProperties": false, "required": ["route", "features"],
+      "properties": { "route": { "$ref": "#/$defs/nonBlank" }, "features": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/nonBlank" } } }
+    },
+    "groupBase": {
+      "type": "object", "additionalProperties": false,
+      "required": ["groupId", "family", "paragraphIds", "questionIds", "counts", "topicLabels", "genre", "metadata"],
+      "properties": {
+        "groupId": { "$ref": "#/$defs/nonBlank" },
+        "family": { "enum": ["reading", "seven-choices", "cloze", "grammar-fill", "application-writing", "continuation-writing"] },
+        "paragraphIds": { "type": "array", "items": { "$ref": "#/$defs/nonBlank" } },
+        "questionIds": { "type": "array", "items": { "$ref": "#/$defs/questionId" } },
+        "counts": { "$ref": "#/$defs/counts" },
+        "topicLabels": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/nonBlank" } },
+        "genre": { "enum": ["记叙", "说明", "议论", "应用", "新闻"] },
+        "metadata": { "type": "object" }
+      }
+    },
+    "group": {
+      "allOf": [
+        { "$ref": "#/$defs/groupBase" },
+        { "oneOf": [
+          { "type": "object", "properties": { "family": { "const": "reading" }, "metadata": { "$ref": "#/$defs/readingMetadata" } } },
+          { "type": "object", "properties": { "family": { "const": "seven-choices" }, "metadata": { "$ref": "#/$defs/sevenMetadata" } } },
+          { "type": "object", "properties": { "family": { "const": "cloze" }, "metadata": { "$ref": "#/$defs/clozeMetadata" } } },
+          { "type": "object", "properties": { "family": { "const": "grammar-fill" }, "metadata": { "$ref": "#/$defs/grammarMetadata" } } },
+          { "type": "object", "properties": { "family": { "const": "application-writing" }, "metadata": { "$ref": "#/$defs/applicationMetadata" } } },
+          { "type": "object", "properties": { "family": { "const": "continuation-writing" }, "metadata": { "$ref": "#/$defs/continuationMetadata" } } }
+        ] }
+      ]
+    },
+    "readingMetadata": { "type": "object", "additionalProperties": false, "required": ["slot", "questions"], "properties": { "slot": { "enum": ["A", "B", "C", "D"] }, "questions": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["questionId", "similarityProfile"], "properties": { "questionId": { "$ref": "#/$defs/questionId" }, "similarityProfile": { "type": "object", "additionalProperties": false, "required": ["family", "subtype", "detailScope", "technique"], "properties": { "family": { "enum": ["detail", "main-idea", "inference", "word-meaning", "reference", "writing-method"] }, "subtype": { "$ref": "#/$defs/nonBlank" }, "detailScope": { "type": ["string", "null"] }, "technique": { "type": ["string", "null"] } } } } } } } },
+    "sevenMetadata": { "type": "object", "additionalProperties": false, "required": ["questions"], "properties": { "questions": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["questionId", "blankId", "positionFacet", "roleFacet", "primaryMechanismFacet"], "properties": { "questionId": { "$ref": "#/$defs/questionId" }, "blankId": { "$ref": "#/$defs/nonBlank" }, "positionFacet": { "$ref": "#/$defs/nonBlank" }, "roleFacet": { "$ref": "#/$defs/nonBlank" }, "primaryMechanismFacet": { "$ref": "#/$defs/nonBlank" } } } } } },
+    "clozeMetadata": { "type": "object", "additionalProperties": false, "required": ["questions"], "properties": { "questions": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["questionId", "blankId", "pos", "signatureFacet"], "properties": { "questionId": { "$ref": "#/$defs/questionId" }, "blankId": { "$ref": "#/$defs/nonBlank" }, "pos": { "enum": ["verb", "noun", "adjective", "adverb", "phrase", "other"] }, "signatureFacet": { "type": ["string", "null"] } } } } } },
+    "grammarMetadata": { "type": "object", "additionalProperties": false, "required": ["questions"], "properties": { "questions": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["questionId", "blankId", "blankType", "hint", "facetKey", "role", "similarityProfile", "contextParagraphIds", "derived"], "properties": { "questionId": { "$ref": "#/$defs/questionId" }, "blankId": { "$ref": "#/$defs/nonBlank" }, "blankType": { "enum": ["given", "no-hint"] }, "hint": { "type": ["string", "null"] }, "facetKey": { "$ref": "#/$defs/nonBlank" }, "role": { "type": ["string", "null"] }, "similarityProfile": { "$ref": "#/$defs/similarity" }, "contextParagraphIds": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/nonBlank" } }, "derived": { "type": "object", "additionalProperties": false, "properties": { "tense": { "type": "string" }, "voice": { "type": "string" }, "agreementSensitive": { "type": "boolean" }, "form": { "type": "string" }, "similarityForm": { "type": "string" } } } } } } } },
+    "applicationMetadata": { "type": "object", "additionalProperties": false, "required": ["writingTaskId", "form", "function"], "properties": { "writingTaskId": { "$ref": "#/$defs/nonBlank" }, "form": { "type": "string", "minLength": 1, "maxLength": 80, "pattern": "\\S" }, "function": { "type": "string", "minLength": 1, "maxLength": 80, "pattern": "\\S" } } },
+    "continuationMetadata": { "type": "object", "additionalProperties": false, "required": ["writingTaskId", "situation", "conflict", "relationships"], "properties": { "writingTaskId": { "$ref": "#/$defs/nonBlank" }, "situation": { "$ref": "#/$defs/nonBlank" }, "conflict": { "$ref": "#/$defs/nonBlank" }, "relationships": { "type": "array", "items": { "$ref": "#/$defs/nonBlank" } } } }
+  }
+}

@@ -1,6 +1,8 @@
 # English Question Bank Workbench
 
-This context defines the domain language for the English question bank workbench (live at eqbank.cc; content production happens in the backend agent, the website only consumes — ADR-0015/0016). The product helps a teacher store passage-centered English tasks, search them, assemble paper sets, and export student or teacher versions.
+This context defines the domain language for the English question bank workbench (live at eqbank.cc). Public content production stays in the backend; the Owner-approved personal-analysis exception permits website editing and user-initiated AI assistance, without restoring website import (ADR-0016). The product helps a teacher search passage-centered English tasks, prepare personal explanations, assemble paper sets, and export student or teacher versions.
+
+The current product decision is [public papers and personal analysis](docs/product/public-papers-personal-analysis.md). Personal storage/API support and decoupled import admission are not yet implemented. Existing reviewed sidecar schemas are not implicitly reclassified or migrated by these definitions.
 
 ## Language
 
@@ -85,8 +87,16 @@ One numbered gap (q41–q55) in a 完形填空 Passage. A Cloze Blank is both a 
 _Avoid_: 空 alone (ambiguous), gap, gap-fill when the stored object is meant
 
 **Analysis**:
-The reviewed, teacher-facing explanation of why each correct answer fits — the 讲评 layer. It attaches per Question / Cloze Blank for objective families, or to a Writing Task for writing. It is never the answer authority and is shown only when complete for the whole group. Cloze Analysis explains each Cloze Blank using collocation reasoning, an optional part-of-speech-specific test point, and highlightable evidence from the passage.
+The teacher-facing explanation of why an answer fits — the 讲评 layer, never the answer authority. The target product distinguishes Personal Analysis from Platform Reference Analysis. Existing Analysis sidecars still use the reviewed, whole-group-complete contract until explicitly migrated; do not store private drafts there or infer real human review from a schema field. Objective explanations attach to Questions / Cloze Blanks; writing explanations attach to a Writing Task.
 _Avoid_: 解析 / explanation when the stored reviewed object is meant; answer key when only the answer is meant
+
+**Personal Analysis** (个人解析):
+User-owned explanations for an existing public paper, written manually, generated through a user-initiated AI API call with built-in prompts, or copied from platform reference content. Editable and private to that user; saving requires no platform content review and changes neither the public paper, public search index nor another user's work. It binds to the source paper version. Storage and API contracts remain to be designed.
+_Avoid_: official analysis; public correction; treating save as human editorial approval
+
+**Platform Reference Analysis** (官方参考答案／解析):
+Platform-provided, substantively human-reviewed reference explanations for selected high-quality mock papers and Gaokao papers. Read-only to users, optional to adopt. Adoption creates personal content; subsequent edits never alter the official version. It is not the source answer key or necessarily an examination authority's explanation. Existing sidecars must not be relabelled as this product without review evidence.
+_Avoid_: model-generated = reviewed; exam authority answer key; compulsory adoption
 
 **Tutor** (小导师):
 The teacher-facing, paper-grounded chat loop on eqbank.cc. It reads the current Question Group, its Analysis when published, and teacher-confirmed 配相似 results through object APIs. It is not HKU DeepTutor, not a document knowledge base, and not a student account. Product authority: `docs/cuts/deeptutor-integration/spec.md`.
@@ -101,7 +111,7 @@ The fixed response text explicitly provided by the source for an application Wri
 _Avoid_: application format when the source provides no fixed text; inferred greeting; model-answer scaffold
 
 **Writing Analysis**:
-The reviewed, display-facing 讲评 for a Writing Task — the writing counterpart of the per-Question Analysis, attached at the writing group / Writing Task level (no Question reference, per ADR-0007). It is display content (read on the paper surface), not a search dimension. The on-disk envelope remains `writing-analysis-v1` (no v2 file). An **application** Writing Analysis carries a **Model Answer**, a **Review Card**, and an optional **Official Model Answer** when the source supplies one; new application work does not require **Highlight Expressions** (historical arrays are kept). New **continuation** work uses **Narrative Continuation Analysis** plus a **Model Answer**; persisted `main` assets may still carry legacy **Continuation Design**. New NCK1 papers persist this envelope during `--publish`; historical papers remain backfillable. Scoring guidance, common-pitfall notes, and grouped vocabulary banks are out of scope.
+The writing counterpart of Analysis, attached at the writing group / Writing Task level (no Question reference, per ADR-0007). Personal/official ownership follows the definitions above. The current reviewed sidecar contract below remains an implementation fact pending migration, not a requirement to generate a platform essay for every paper. It is display content, not itself a search dimension. The on-disk envelope remains `writing-analysis-v1` (no v2 file). An **application** Writing Analysis carries a **Model Answer**, a **Review Card**, and an optional **Official Model Answer** when the source supplies one; new application work does not require **Highlight Expressions** (historical arrays are kept). New **continuation** work uses **Narrative Continuation Analysis** plus a **Model Answer**; persisted `main` assets may still carry legacy **Continuation Design**. Current NCK1 publication still requires this envelope until the import contract is explicitly migrated; historical papers remain backfillable. Scoring guidance, common-pitfall notes, and grouped vocabulary banks are out of scope.
 _Avoid_: 写作解析 / writing explanation when the stored reviewed object is meant; do not call it a Tag or a derived search dimension; do not call the expanded application fields "writing-analysis-v2"
 
 **Model Answer** (范文 / AI 参考范文):

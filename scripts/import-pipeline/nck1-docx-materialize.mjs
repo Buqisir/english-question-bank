@@ -173,6 +173,59 @@ function selectProducer(paperDir, documents) {
   )) ? OCR_PRODUCER : PDF_PRODUCER
 }
 
+// Read-only counterpart of the cache branch below. Status callers must use the
+// same producer selection and evidence contract without invoking a producer.
+export function inspectNck1Materialization({ paperDir, manifest }) {
+  if (![
+    'universal-nck1-source-manifest-v1',
+    'universal-nck1-source-manifest-v2',
+  ].includes(manifest?.schemaVersion)) throw new Error('NCK1 materialization requires a universal Source Manifest')
+  const documents = loadDocuments(paperDir, manifest)
+  const producer = selectProducer(paperDir, documents)
+  const producerInputs = producer.loadInputs?.(paperDir) || {}
+  const sourceDigest = producer.sourceDigest(documents, producerInputs)
+  const outputPath = path.join(paperDir, manifest.materializationPath)
+  const directory = path.dirname(outputPath)
+  const receiptPath = path.join(directory, producer.receiptName)
+  const reviewPath = path.join(directory, producer.reviewName)
+  const existing = [outputPath, receiptPath, reviewPath].map(existsSync)
+  if (!existing.some(Boolean)) return null
+  if (!existing.every(Boolean)) {
+    throw new Error('Partial materialization evidence exists; inspect it before running a producer')
+  }
+  const receipt = JSON.parse(readFileSync(receiptPath, 'utf8'))
+  const review = JSON.parse(readFileSync(reviewPath, 'utf8'))
+  if (receipt.schemaVersion !== producer.receiptSchemaVersion
+    || receipt.producerVersion !== producer.version
+    || receipt.paperId !== manifest.paperId
+    || receipt.sourceDigest !== sourceDigest
+    || review.schemaVersion !== producer.reviewName.replace('.json', '')
+    || review.paperId !== manifest.paperId
+    || review.sourceDigest !== sourceDigest
+    || review.producerVersion !== producer.version
+    || !Array.isArray(review.required)) {
+    throw new Error('Materialization producer evidence is not bound to the current source and producer')
+  }
+  assertReceiptMediaFiles(paperDir, receipt)
+  const materialization = JSON.parse(readFileSync(outputPath, 'utf8'))
+  if (!Array.isArray(materialization.issues)
+    || digestJson(review.required) !== digestJson(materialization.issues)) {
+    throw new Error('Materialization review does not bind the current issues')
+  }
+  const outputMediaDigests = (materialization.media || []).map((item) => item.sha256).sort()
+  const receiptMediaDigests = (receipt.mediaFiles || []).map((file) => file.sha256).sort()
+  if (digestJson(outputMediaDigests) !== digestJson(receiptMediaDigests)) {
+    throw new Error('Materialization receipt media does not close the output inventory')
+  }
+  const outputDigest = sha256(readFileSync(outputPath))
+  return {
+    disposition: receipt.disposition,
+    outputDigest: receipt.outputDigest,
+    outputState: outputDigest === receipt.outputDigest ? 'producer_output_unchanged' : 'agent_modified',
+    sourceDigest,
+  }
+}
+
 function preserveFailedPdfForOcr(manifest, documents, outputPath) {
   const directory = path.dirname(outputPath)
   const receiptPath = path.join(directory, PDF_PRODUCER.receiptName)

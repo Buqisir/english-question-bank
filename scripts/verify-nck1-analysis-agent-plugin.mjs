@@ -167,49 +167,37 @@ assert.throws(
   /bounded group-analysis limit/u,
 )
 
-let agentConfig = null
 let tool = null
 const runs = []
 const responses = [
-  {
-    threadID: 'T-11111111-1111-4111-8111-111111111111',
-    text: '{"marker":"A-ONLY","meta":{"generatedBy":"external-ai","model":"invented-model","promptVersion":"reading-choice-analysis-v1","reviewStatus":"reviewed","reviewedBy":"invented-reviewer","reviewedAt":"2099-01-01"}}',
-  },
-  { threadID: 'T-22222222-2222-4222-8222-222222222222', text: '{"marker":"C-ONLY"}' },
-  { threadID: 'T-33333333-3333-4333-8333-333333333333', text: '```json\n{"marker":"bad"}\n```' },
+  '{"marker":"A-ONLY","meta":{"generatedBy":"external-ai","model":"invented-model","promptVersion":"reading-choice-analysis-v1","reviewStatus":"reviewed","reviewedBy":"invented-reviewer","reviewedAt":"2099-01-01"}}',
+  '{"marker":"C-ONLY"}',
+  '```json\n{"marker":"bad"}\n```',
   new Error('Grok subscription unavailable'),
+  '{"marker":"truncated',
+  "I'll inspect existing reading-choice analysis files. ".repeat(4000),
+  '[]',
 ]
 
 await nck1AnalysisAgentPlugin({
-  createAgent(config) {
-    agentConfig = config
-    return {
-      async run(prompt, options) {
-        runs.push({ prompt, options })
-        const response = responses[runs.length - 1]
-        if (response instanceof Error) throw response
-        return response
-      },
-    }
+  createAgent() {
+    assert.fail('Analysis must not create an autonomous agent')
+  },
+  ai: {
+    async generate(options) {
+      runs.push(options)
+      const response = responses[runs.length - 1]
+      if (response instanceof Error) throw response
+      return response
+    },
   },
   registerTool(definition) {
     tool = definition
   },
 })
 
-assert.deepEqual(agentConfig, {
-  name: 'NCK1 staged analysis generator',
-  model: 'xai/grok-4.6',
-  reasoningEffort: 'xhigh',
-  tools: [],
-  features: [],
-  instructions: agentConfig.instructions,
-})
-assert.match(agentConfig.instructions, /one and only one/u)
-assert.match(agentConfig.instructions, /Never solve again or alter an authoritative answer/u)
-assert.match(agentConfig.instructions, /Do not invent a runtime model name/u)
 assert.equal(tool.name, 'nck1_analyze_group')
-assert.match(tool.description, /safe to invoke concurrently for disjoint groups/u)
+assert.match(tool.description, /No child agent/u)
 assert.deepEqual(tool.inputSchema.properties.group.enum, NCK1_ANALYSIS_GROUPS)
 assert.deepEqual(tool.inputSchema.required, [
   'authoritativeAnswers',
@@ -229,7 +217,7 @@ assert.deepEqual(first, {
   group: 'reading-a',
   model: 'xai/grok-4.6',
   reasoningEffort: 'xhigh',
-  threadID: 'T-11111111-1111-4111-8111-111111111111',
+  threadID: context.thread.id,
   analysis: {
     marker: 'A-ONLY',
     meta: {
@@ -241,19 +229,20 @@ assert.deepEqual(first, {
   },
 })
 assert.equal(second.group, 'reading-c')
-assert.equal(second.threadID, 'T-22222222-2222-4222-8222-222222222222')
+assert.equal(second.threadID, context.thread.id)
 assert.deepEqual(second.analysis, { marker: 'C-ONLY' })
 assert.equal(runs.length, 2)
-assert.deepEqual(runs.map(({ options }) => options), [
-  {
-    parentThreadID: context.thread.id,
-    timeoutMs: 600_000,
-  },
-  {
-    parentThreadID: context.thread.id,
-    timeoutMs: 600_000,
-  },
-])
+for (const { prompt, system, ...options } of runs) {
+  assert.deepEqual(options, {
+    model: 'xai/grok-4.6',
+    reasoningEffort: 'xhigh',
+    maxTokens: 16_384,
+    threadID: context.thread.id,
+  })
+  assert.match(system, /one and only one/u)
+  assert.match(system, /Never solve again or alter an authoritative answer/u)
+  assert.match(system, /Do not invent a runtime model name/u)
+}
 assert.match(runs[0].prompt, /A-ONLY/u)
 assert.doesNotMatch(runs[0].prompt, /C-ONLY/u)
 assert.match(runs[1].prompt, /C-ONLY/u)
@@ -268,8 +257,15 @@ assert.equal(runs.length, 3)
 await assert.rejects(tool.execute(valid, context), /Grok subscription unavailable/u)
 assert.equal(runs.length, 4, 'A provider failure must propagate without retry or fallback')
 
+for (let index = 4; index < responses.length; index++) {
+  await assert.rejects(tool.execute(valid, context), /JSON-only output|one JSON object/u)
+  assert.equal(runs.length, index + 1, 'Invalid or truncated output must not trigger a retry')
+}
+await assert.rejects(tool.execute({ ...valid, extra: true }, context), /unexpected or missing fields/u)
+assert.equal(runs.length, responses.length, 'Input rejection must happen before inference')
+
 const writingWithoutMeta = { taskType: 'application', modelAnswer: 'Example.' }
 assert.equal(stampNck1AnalysisAgentMeta(writingWithoutMeta), writingWithoutMeta)
 assert.deepEqual(writingWithoutMeta, { taskType: 'application', modelAnswer: 'Example.' })
 
-console.log('PASS NCK1 one-shot analysis agent pins Grok 4.6 XHigh and isolates one JSON group per run')
+console.log('PASS NCK1 bounded completion pins Grok 4.6 XHigh, isolates groups, rejects invalid output without children or retries')

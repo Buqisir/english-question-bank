@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// verify-resource: source-only-import-ledger
 
 import assert from 'node:assert/strict'
 import { spawnSync } from 'node:child_process'

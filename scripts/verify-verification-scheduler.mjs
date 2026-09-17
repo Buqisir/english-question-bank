@@ -154,6 +154,33 @@ assert.deepEqual(
   ),
   { script: 'transitive-render.mjs', exclusive: false, resourceKeys: ['browser-render'] },
 )
+assert.deepEqual(
+  verificationSchedulingPolicy(
+    'source-only.mjs',
+    '// verify-resource: source-only-import-ledger\nassertCapture()',
+  ),
+  { script: 'source-only.mjs', exclusive: false, resourceKeys: ['source-only-import-ledger'] },
+)
+assert.throws(
+  () => verificationSchedulingPolicy('typo.mjs', '// verify-resource: source-only-import-ledgr'),
+  /Unknown verify-resource/,
+  'a misspelled resource must not silently create an independent lock lane',
+)
+let activeLedger = 0
+let maxActiveLedger = 0
+await runVerificationSchedule([
+  { script: 'ledger-reader', resourceKeys: ['source-only-import-ledger'] },
+  { script: 'ledger-mutator', resourceKeys: ['source-only-import-ledger'] },
+], {
+  concurrency: 2,
+  async run() {
+    activeLedger += 1
+    maxActiveLedger = Math.max(maxActiveLedger, activeLedger)
+    await sleep(2)
+    activeLedger -= 1
+  },
+})
+assert.equal(maxActiveLedger, 1, 'declared shared resources cannot overlap')
 const imageBundleVerifier = 'scripts/verify-universal-nck1-image-source-bundle.mjs'
 assert.deepEqual(
   verificationSchedulingPolicy(

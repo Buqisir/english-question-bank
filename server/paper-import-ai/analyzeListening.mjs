@@ -138,10 +138,17 @@ export function validateListeningAnalysis(analysis, {
   segmentIds = null,
   sourceAssetVersion = 1,
 } = {}) {
+  return validateListeningAnalysisInput(analysis, {
+    ...buildListeningAnalysisInput(materialization, { segmentIds }),
+    sourceAssetVersion,
+  })
+}
+
+// The bounded input is also the exact source sent to an isolated worker.
+export function validateListeningAnalysisInput(analysis, input) {
   if (!validateSchema(analysis)) fail(`Listening analysis schema invalid: ${formatSchemaErrors(validateSchema.errors)}`)
-  if (analysis.paperId !== materialization?.paperId) fail('Listening analysis paperId does not match the source')
-  if (analysis.sourceAssetVersion !== sourceAssetVersion) fail('Listening analysis sourceAssetVersion does not match the Review Candidate')
-  const input = buildListeningAnalysisInput(materialization, { segmentIds })
+  if (analysis.paperId !== input.paperId) fail('Listening analysis paperId does not match the source')
+  if (analysis.sourceAssetVersion !== input.sourceAssetVersion) fail('Listening analysis sourceAssetVersion does not match the Review Candidate')
   const expectedMaterials = new Map(input.materials.map((material) => [material.segmentId, material]))
   const expectedQuestions = new Map(input.materials.flatMap((material) =>
     material.questions.map((question) => [question.questionId, { ...question, segmentId: material.segmentId }])))

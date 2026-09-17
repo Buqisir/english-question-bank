@@ -1,5 +1,10 @@
 # ADR-0015: 网站界面只做消费；难度维度下线到 UI 层
 
+> 2026-09-17 部分更新：[公共题库与个人解析](../product/public-papers-personal-analysis.md)
+> 明确允许用户在已有试卷上调用AI、编辑和保存个人解析；这是网站只消费的有限例外，
+> 不恢复公共导题、公共解析改写、标签生产或管理权限。下文保留历史决策及实现背景；
+> 个人能力尚未实现，难度数据层与ADR-0016网站零导题不受此次产品调整影响。
+
 - Status: Accepted（2026-07-05，PM grill + owner 黄学伟拍板）
 - 上游：产品原则「生产在后台 Agent、网站只做消费」（owner 2026-07-05）；
   ADR-0013（owner/member 两档 gate）；ADR-0008（primary vs derived）；

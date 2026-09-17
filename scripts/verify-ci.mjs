@@ -151,6 +151,9 @@ const registry = {
   'scripts/verify-i4-grammar-fill-ai-import.mjs',
   'scripts/verify-i5-writing-ai-import.mjs',
   'scripts/verify-application-model-answer-prompt.mjs',
+  'scripts/verify-paragraph-summaries-v1.mjs',
+  'scripts/verify-public-search-metadata-v1.mjs',
+  'scripts/verify-public-paper-review-consumer.mjs',
   'scripts/verify-continuation-analysis-v1.mjs',
   'scripts/verify-teaching-analysis-style.mjs',
   'scripts/verify-nck1-new-paper-locks.mjs',
@@ -265,6 +268,9 @@ const paperScripts = uniqueRegistered(
     'scripts/verify-import-review-ocr-confirmation.mjs',
     'scripts/verify-import-review-source-pairing.mjs',
     'scripts/verify-import-review-media-derivation.mjs',
+    'scripts/verify-paragraph-summaries-v1.mjs',
+    'scripts/verify-public-search-metadata-v1.mjs',
+    'scripts/verify-public-paper-review-consumer.mjs',
   ],
 )
 const featureScripts = uniqueRegistered(registry.scripts.filter(
@@ -294,6 +300,9 @@ const importPaperScripts = uniqueRegistered([
   'scripts/verify-universal-nck1-publish.mjs',
   'scripts/verify-import-review-source-pairing.mjs',
   'scripts/verify-import-review-media-derivation.mjs',
+  'scripts/verify-paragraph-summaries-v1.mjs',
+  'scripts/verify-public-search-metadata-v1.mjs',
+  'scripts/verify-public-paper-review-consumer.mjs',
   'scripts/verify-paper-canonical-detail-screen-consumption.mjs',
   'scripts/verify-print-renderer.mjs',
   'scripts/verify-figure-render.mjs',
@@ -544,7 +553,7 @@ if (process.argv.includes('--list-json')) {
     scheduling: {
       availableParallelism: availableParallelism(),
       concurrency,
-      resources: ['browser-render', 'port:<number>'],
+      resources: ['browser-render', 'port:<number>', 'source-only-import-ledger'],
     },
   }, null, 2))
   process.exit(0)

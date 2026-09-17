@@ -495,7 +495,8 @@ function surfaceStageHtml() {
     <main class="surface-stage" aria-label="真实审核表面">
       <div class="surface-toolbar">
         <div class="surface-tabs" role="tablist" aria-label="审核表面">
-          ${Object.entries(surfaceLabels).filter(([key]) => key !== 'teaching' || state.actor === 'owner').map(([key, label]) => `
+          ${Object.entries(surfaceLabels).filter(([key]) =>
+            key !== 'teaching' || (state.actor === 'owner' && state.detail.importProfile !== 'public-paper-v1')).map(([key, label]) => `
             <button type="button" class="tab-button" data-surface="${key}" role="tab" aria-selected="${state.surface === key}">${label}</button>
           `).join('')}
         </div>
@@ -905,6 +906,7 @@ function approvalHtml() {
     ? `/api/import-review-preview/revisions/${encodeURIComponent(state.detail.latestRevisionId)}`
       + `/files?path=${encodeURIComponent(externalAudio.path)}`
     : null
+  const publicPaper = state.detail.importProfile === 'public-paper-v1'
   const externalListeningChecks = externalAudio ? `
       <fieldset class="external-listening-approval" ${blocked ? 'disabled' : ''}>
         <legend>外部听力 MP3 人工核验（必须逐项确认）</legend>
@@ -932,7 +934,9 @@ function approvalHtml() {
       ${externalListeningChecks}
       <label class="approval-check">
         <input id="approval-check" type="checkbox" ${blocked ? 'disabled' : ''} />
-        <span>我已检查 Screen、Student Print、Teacher Print 与 PDF，认可当前摘要对应的内容。</span>
+        <span>${publicPaper
+          ? '我只检查并认可 Screen、Student Print、Teacher Print 与 PDF 的最终版式；未人工审核原题语义、来源答案、答案映射或逐段摘要。'
+          : '我已检查 Screen、Student Print、Teacher Print 与 PDF，认可当前摘要对应的内容。'}</span>
       </label>
       <button class="button button--primary" id="approve-revision" type="button" disabled>认可这个 revision</button>
       ${blocked ? `<p class="field-help">${state.detail.rendererStale ? '渲染器已更新，请 Agent 先重新提交 Candidate。' : '先处理所有待处理和待验证问题。'}</p>` : ''}
@@ -983,8 +987,32 @@ function promotionHtml() {
   </section>`
 }
 
+function paragraphSummariesHtml() {
+  if (state.detail?.importProfile !== 'public-paper-v1') return ''
+  const groups = state.detail.paragraphSummaries?.groups || []
+  return `<section class="rail-section paragraph-summaries-section">
+    <h2>逐段摘要</h2>
+    <p class="boundary-note">AI 派生的中文摘要，仅供参考。可展开查看，但不属于本次人工认可范围。</p>
+    <div class="summary-binding" aria-label="摘要版本绑定">
+      <span class="digest" title="${escapeHtml(state.detail.paragraphSummaryBinding?.sourceDigest)}">来源 ${escapeHtml(shortDigest(state.detail.paragraphSummaryBinding?.sourceDigest))}</span>
+      <span class="digest" title="${escapeHtml(state.detail.paragraphSummaryBinding?.candidateDigest)}">候选 ${escapeHtml(shortDigest(state.detail.paragraphSummaryBinding?.candidateDigest))}</span>
+    </div>
+    <details>
+      <summary>查看逐段摘要</summary>
+      <div class="paragraph-summary-list">${groups.flatMap((group) =>
+      group.paragraphs.map((paragraph) => `<article class="paragraph-summary-item">
+        <div class="paragraph-summary-id"><span>${escapeHtml(group.groupId)}</span><code>${escapeHtml(paragraph.paragraphId)}</code></div>
+        <p class="paragraph-source" lang="en">${escapeHtml(paragraph.sourceText)}</p>
+        <p class="paragraph-summary"><strong>摘要</strong>${escapeHtml(paragraph.summary)}</p>
+        <button class="button" type="button" data-locate-summary="${escapeHtml(paragraph.paragraphId)}">在 Screen 定位原段</button>
+      </article>`)).join('')}</div>
+    </details>
+  </section>`
+}
+
 function rightRailHtml() {
   return `<aside class="right-rail" aria-label="QA 问题与认可">
+    ${paragraphSummariesHtml()}
     ${listeningReviewSectionHtml()}
     ${sourceVisualSectionHtml()}
     ${mediaDerivationSectionHtml()}
@@ -1339,6 +1367,9 @@ function bind() {
       render()
     })
   })
+  document.querySelectorAll('[data-locate-summary]').forEach((button) => {
+    button.addEventListener('click', () => locateScreenTarget(button.dataset.locateSummary))
+  })
   document.querySelector('#refresh')?.addEventListener('click', () => void loadPapers())
   document.querySelector('#pdf-edition')?.addEventListener('change', (event) => {
     state.pdfEdition = event.target.value
@@ -1469,6 +1500,9 @@ function bind() {
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify({
             bundleDigest: state.detail.latest.bundleDigest,
+            ...(state.detail.importProfile === 'public-paper-v1'
+              ? { approvalScope: 'layout_only' }
+              : {}),
             ...(externalListeningChecks.length ? {
               externalListeningReview: {
                 audioSha256: state.detail.listeningReview.audio.playbackAudioSha256,

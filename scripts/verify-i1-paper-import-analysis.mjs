@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
 import { createHash } from 'node:crypto'
-import { readFileSync } from 'node:fs'
+import { mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
+import { spawnSync } from 'node:child_process'
+import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -10,6 +12,8 @@ import { analyzeReadingImportCandidate } from '../server/paper-import-ai/analyze
 import { buildPaperImportAiPackageFiles } from '../server/paper-import-ai/packageBuilder.mjs'
 import { validatePaperImportPackage } from '../server/paper-import/validator.mjs'
 import { buildObjectiveTeachingFixture } from './lib/objective-teaching-fixture.mjs'
+import './verify-reading-derived-ranges.mjs'
+import './verify-single-group-analysis.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const repoRoot = path.resolve(__dirname, '..')
@@ -763,10 +767,52 @@ async function assertAnalyzeValidation() {
   }
 }
 
+function assertReadingCheckCommand() {
+  const dir = mkdtempSync(path.join(tmpdir(), 'eqb-reading-check-'))
+  try {
+    const input = fixtureInput()
+    input.paper.sourceAssetVersion = 1
+    const analysis = validAnalysis(input)
+    const requestPath = path.join(dir, 'request.json')
+    const analysisPath = path.join(dir, 'analysis.json')
+    const request = {
+      group: 'reading-a', sourceGroup: { groupKey: 'reading-a', material: input },
+      authoritativeAnswers: Object.fromEntries(input.group.questions.map((q) =>
+        [q.id, { questionId: q.id, answer: q.answerKey }])),
+    }
+    writeFileSync(requestPath, JSON.stringify(request))
+    const run = () => spawnSync(process.execPath, [
+      path.join(repoRoot, 'scripts/import-pipeline/derive-reading-ranges.mjs'),
+      requestPath, analysisPath, '--check',
+    ], { cwd: dir, encoding: 'utf8' })
+    writeFileSync(analysisPath, JSON.stringify(analysis))
+    const good = run()
+    assert('reading --check accepts valid synthetic output', good.status === 0, good.stderr)
+    const annotation = analysis.groups[input.group.groupId].teachingContent.annotations[0]
+    annotation.translationRanges[0].start = 9999
+    writeFileSync(analysisPath, JSON.stringify(analysis))
+    const before = readFileSync(analysisPath, 'utf8')
+    const bad = run()
+    assert('reading --check rejects invalid ranges instead of silently deriving',
+      bad.status !== 0 && /invalid Unicode code-point range/.test(bad.stderr), bad.stderr)
+    assert('reading --check preserves raw bytes and creates no output',
+      readFileSync(analysisPath, 'utf8') === before && readdirSync(dir).length === 2)
+    writeFileSync(analysisPath, JSON.stringify(validAnalysis(input)))
+    request.authoritativeAnswers[input.group.questions[0].id].answer = 'D'
+    writeFileSync(requestPath, JSON.stringify(request))
+    const wrongAnswer = run()
+    assert('reading --check rejects request answer authority mismatch',
+      wrongAnswer.status !== 0 && /source and authority disagree/.test(wrongAnswer.stderr))
+  } finally {
+    rmSync(dir, { recursive: true, force: true })
+  }
+}
+
 async function main() {
   assertStaticContracts()
   await assertPublishPackageBuilder()
   await assertAnalyzeValidation()
+  assertReadingCheckCommand()
   console.log(`I1 paper-import-ai analysis verify PASSED: ${passed} checks`)
 }
 

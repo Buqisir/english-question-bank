@@ -134,6 +134,72 @@ function companionAnalyses(sidecars = {}) {
   }
 }
 
+function paragraphText(block) {
+  if (!block || typeof block !== 'object') return ''
+  if (block.kind === 'paragraph') {
+    return (block.content || [])
+      .filter((item) => item?.kind === 'text')
+      .map((item) => item.text || '')
+      .join('')
+  }
+  if (block.kind === 'framed_columns') {
+    return (block.columns || [])
+      .flatMap((column) => column.blocks || [])
+      .map(paragraphText)
+      .filter(Boolean)
+      .join('\n')
+  }
+  return ''
+}
+
+export function publicPaperReviewDetail(store, paperId) {
+  const detail = store.paperDetail(paperId)
+  if (
+    !detail.latestRevisionId
+    || detail.latest?.state === 'uploading'
+    || detail.latest?.reviewKind === 'ocr'
+  ) return detail
+  const { projection } = candidateProjectionForRevision(store, detail.latestRevisionId)
+  if (projection.importProfile !== 'public-paper-v1') return detail
+
+  const sourceParagraphs = new Map()
+  for (const group of projection.materialization?.groups || []) {
+    const visit = (blocks = []) => {
+      for (const block of blocks) {
+        if (block?.kind === 'framed_columns') {
+          for (const column of block.columns || []) visit(column.blocks)
+        } else if (block?.kind === 'paragraph') {
+          sourceParagraphs.set(`${group.groupId}\0${block.blockId}`, paragraphText(block))
+        }
+      }
+    }
+    visit(group.blocks)
+  }
+
+  return {
+    ...detail,
+    importProfile: projection.importProfile,
+    paragraphSummariesDigest: projection.paragraphSummariesDigest,
+    publicSearchMetadata: projection.publicSearchMetadata,
+    publicSearchMetadataBytes: projection.publicSearchMetadataBytes,
+    publicSearchMetadataDigest: projection.publicSearchMetadataDigest,
+    paragraphSummaryBinding: {
+      sourceDigest: projection.sourceDigest,
+      candidateDigest: projection.candidateDigest,
+    },
+    paragraphSummaries: {
+      ...projection.paragraphSummaries,
+      groups: (projection.paragraphSummaries?.groups || []).map((group) => ({
+        ...group,
+        paragraphs: group.paragraphs.map((paragraph) => ({
+          ...paragraph,
+          sourceText: sourceParagraphs.get(`${group.groupId}\0${paragraph.paragraphId}`) || '',
+        })),
+      })),
+    },
+  }
+}
+
 export function createImportReviewRoutes({
   getStore,
   agentToken,
@@ -385,7 +451,8 @@ export function createImportReviewRoutes({
     match,
   }) => {
     if (!requireOwner(response, context)) return
-    context.sendJson(response, 200, store.paperDetail(decodeURIComponent(match[1])))
+    const paperId = decodeURIComponent(match[1])
+    context.sendJson(response, 200, publicPaperReviewDetail(store, paperId))
   })))
 
   routes.push(defineRoute('GET', /^\/api\/import-reviews\/papers\/([^/]+)\/revisions\/([^/]+)\/teaching$/, route(({
